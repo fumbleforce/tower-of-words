@@ -61,6 +61,7 @@ Everything Jørgen has asked for, and how we work. Every agent reads this before
 - Expression sets must keep everything except the face identical (outfit colour, blazer details, hair, accessories). Generate expressions by repainting only the face region of one approved base sprite (inpainting), not by re-rolling whole images.
 - Complex action (the shootout, swimming, the volleyball spike) fails with plain prompting even after fixes. It needs composition control (a pose or layout sketch as an input, or regional prompting) before more attempts; don't burn time re-rolling.
 - Round 6 retries verdict: copy room only copyroom-rdbt-12 works; shootout nonsense everywhere; swim only One Obsession makes sense; volleyball One Obsession s11 most believable; romance all fine, RDBT slightly best.
+- Save every ComfyUI workflow we use as a loadable file in tools/workflows/ and ~/ai/workflows/ (API JSON), so Jørgen can open it. Generated PNGs embed their workflow; keep the originals.
 - Cutouts: local rembg ISNet anime. Check for see-through holes in hair and glasses.
 - Never open images or pages on Jørgen's screen (no xdg-open). Give links only.
 
