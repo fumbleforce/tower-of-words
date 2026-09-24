@@ -1,5 +1,5 @@
 {
- "total": 7.8486,
+ "total": 8.3286,
  "calls": [
   {
    "t": "2026-09-24T10:37:04.077Z",
@@ -1428,6 +1428,118 @@
    "est": 0.03,
    "out": "art/company/m5/flux-dorm.png",
    "prompt": "Anime still, 2020s TV anime. Mio, a 24-year-old office worker with messy black hair in a loose ponytail and round glasse"
+  },
+  {
+   "t": "2026-09-24T13:46:05.792Z",
+   "model": "black-forest-labs/flux-2-pro",
+   "est": 0.03,
+   "out": "art/company/final/guard-7.webp",
+   "prompt": "Anime character portrait, 2020s TV anime still, clean cel shading. A 55-year-old gate guard: grey crew cut, navy securit"
+  },
+  {
+   "t": "2026-09-24T13:46:06.110Z",
+   "model": "black-forest-labs/flux-2-pro",
+   "est": 0.03,
+   "out": "art/company/final/daigo-21.webp",
+   "prompt": "Anime character portrait, 2020s TV anime still, clean cel shading. Daigo, a 29-year-old man, a stocky factory worker: sh"
+  },
+  {
+   "t": "2026-09-24T13:46:06.382Z",
+   "model": "black-forest-labs/flux-2-pro",
+   "est": 0.03,
+   "out": "art/company/final/rei-21.webp",
+   "prompt": "Anime character portrait, 2020s TV anime still, clean cel shading. Rei, a 26-year-old woman, an ambitious top saleswoman"
+  },
+  {
+   "t": "2026-09-24T13:46:06.396Z",
+   "model": "black-forest-labs/flux-2-pro",
+   "est": 0.03,
+   "out": "art/company/final/aoi-7.webp",
+   "prompt": "Anime character portrait, 2020s TV anime still, clean cel shading. Aoi, a 22-year-old woman, a graduate intern: shoulder"
+  },
+  {
+   "t": "2026-09-24T13:46:06.500Z",
+   "model": "black-forest-labs/flux-2-pro",
+   "est": 0.03,
+   "out": "art/company/final/mio-7.webp",
+   "prompt": "Anime character portrait, 2020s TV anime still, clean cel shading. Mio, a 25-year-old woman, a low-effort gamer coworker"
+  },
+  {
+   "t": "2026-09-24T13:46:06.660Z",
+   "model": "black-forest-labs/flux-2-pro",
+   "est": 0.03,
+   "out": "art/company/final/tomi-7.webp",
+   "prompt": "Anime character portrait, 2020s TV anime still, clean cel shading. Tomi, a 58-year-old woman, a loud Osaka canteen aunti"
+  },
+  {
+   "t": "2026-09-24T13:46:06.848Z",
+   "model": "black-forest-labs/flux-2-pro",
+   "est": 0.03,
+   "out": "art/company/final/rei-7.webp",
+   "prompt": "Anime character portrait, 2020s TV anime still, clean cel shading. Rei, a 26-year-old woman, an ambitious top saleswoman"
+  },
+  {
+   "t": "2026-09-24T13:46:07.035Z",
+   "model": "black-forest-labs/flux-2-pro",
+   "est": 0.03,
+   "out": "art/company/final/tomi-21.webp",
+   "prompt": "Anime character portrait, 2020s TV anime still, clean cel shading. Tomi, a 58-year-old woman, a loud Osaka canteen aunti"
+  },
+  {
+   "t": "2026-09-24T13:46:07.095Z",
+   "model": "black-forest-labs/flux-2-pro",
+   "est": 0.03,
+   "out": "art/company/final/daigo-7.webp",
+   "prompt": "Anime character portrait, 2020s TV anime still, clean cel shading. Daigo, a 29-year-old man, a stocky factory worker: sh"
+  },
+  {
+   "t": "2026-09-24T13:46:07.120Z",
+   "model": "black-forest-labs/flux-2-pro",
+   "est": 0.03,
+   "out": "art/company/final/guard-21.webp",
+   "prompt": "Anime character portrait, 2020s TV anime still, clean cel shading. A 55-year-old gate guard: grey crew cut, navy securit"
+  },
+  {
+   "t": "2026-09-24T13:46:07.172Z",
+   "model": "black-forest-labs/flux-2-pro",
+   "est": 0.03,
+   "out": "art/company/final/sayaka-21.webp",
+   "prompt": "Anime character portrait, 2020s TV anime still, clean cel shading. Sayaka, a 32-year-old woman, a cool team leader: shor"
+  },
+  {
+   "t": "2026-09-24T13:46:07.242Z",
+   "model": "black-forest-labs/flux-2-pro",
+   "est": 0.03,
+   "out": "art/company/final/hana-21.webp",
+   "prompt": "Anime character portrait, 2020s TV anime still, clean cel shading. Hana, a 27-year-old woman, a sharp investigative repo"
+  },
+  {
+   "t": "2026-09-24T13:46:07.393Z",
+   "model": "black-forest-labs/flux-2-pro",
+   "est": 0.03,
+   "out": "art/company/final/mio-21.webp",
+   "prompt": "Anime character portrait, 2020s TV anime still, clean cel shading. Mio, a 25-year-old woman, a low-effort gamer coworker"
+  },
+  {
+   "t": "2026-09-24T13:46:07.762Z",
+   "model": "black-forest-labs/flux-2-pro",
+   "est": 0.03,
+   "out": "art/company/final/aoi-21.webp",
+   "prompt": "Anime character portrait, 2020s TV anime still, clean cel shading. Aoi, a 22-year-old woman, a graduate intern: shoulder"
+  },
+  {
+   "t": "2026-09-24T13:46:08.583Z",
+   "model": "black-forest-labs/flux-2-pro",
+   "est": 0.03,
+   "out": "art/company/final/hana-7.webp",
+   "prompt": "Anime character portrait, 2020s TV anime still, clean cel shading. Hana, a 27-year-old woman, a sharp investigative repo"
+  },
+  {
+   "t": "2026-09-24T13:46:08.769Z",
+   "model": "black-forest-labs/flux-2-pro",
+   "est": 0.03,
+   "out": "art/company/final/sayaka-7.webp",
+   "prompt": "Anime character portrait, 2020s TV anime still, clean cel shading. Sayaka, a 32-year-old woman, a cool team leader: shor"
   }
  ]
 }
