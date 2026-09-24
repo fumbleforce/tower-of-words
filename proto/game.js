@@ -122,7 +122,7 @@ function parse(tokens) {
   let i = 2;
   for (; i < n - 1; i++) {
     const t = tokens[i];
-    if (t.kind === 'adv') { if (roles.adv) return { err: 'Only one adverb per spell.' }; roles.adv = t; continue; }
+    if (t.kind === 'adv') { if (roles.adv) return { err: 'Use one adverb at most.' }; roles.adv = t; continue; }
     if (t.kind === 'actor' || t.kind === 'tool') {
       const p = tokens[i + 1];
       if (!p || p.kind !== 'part') return { err: `「${t.w}」 needs a particle after it: を, に or で.` };
@@ -131,7 +131,7 @@ function parse(tokens) {
       if (roles[role]) return { err: `Two 「${p.w}」 in one sentence.` };
       roles[role] = t; i++; continue;
     }
-    if (t.kind === 'verb') return { err: 'The verb goes at the very end.' };
+    if (t.kind === 'verb') return { err: 'The verb goes last.' };
     if (t.kind === 'part') return { err: `「${t.w}」 has to come right after a word.` };
   }
   const last = tokens[n - 1];
@@ -198,7 +198,7 @@ function battle() {
   const inkEl = h('div', { class: 'ink' });
   const castBtn = h('button', { class: 'act cast', onclick: cast }, 'Cast');
   const endBtn = h('button', { class: 'act', onclick: endTurn }, 'End turn');
-  const typer = h('input', { type: 'text', placeholder: 'Type a spell: rin wa ken de go-remu wo kiru ⏎', autocomplete: 'off', spellcheck: 'false' });
+  const typer = h('input', { type: 'text', placeholder: 'Type in romaji, e.g. rin wa ken de go-remu wo kiru', autocomplete: 'off', spellcheck: 'false' });
   const panel = h('div', { class: 'panel' }, spellEl, preview, h('div', { class: 'rows' }, actorRow, handRow),
     h('div', { class: 'typer' }, typer), h('div', { class: 'actions' }, inkEl, endBtn, castBtn));
   $app.replaceChildren(h('div', { class: 'battle' }, stage, panel));
@@ -249,7 +249,7 @@ function battle() {
     });
     line.append('。');
     intentBox.replaceChildren(
-      h('div', { class: 'who' }, 'Enemy intent', h('span', { class: 'spacer' }), B.cancelled ? h('span', { style: 'color:var(--spirit)' }, 'CANCELLED') : null,
+      h('div', { class: 'who' }, 'Golem\'s next move', h('span', { class: 'spacer' }), B.cancelled ? h('span', { style: 'color:var(--spirit)' }, 'CANCELLED') : null,
         h('button', { class: 'say', onclick: () => voice(intentText(it), 'g') }, '▶')),
       line);
     intentBox.style.opacity = B.cancelled ? .45 : 1;
@@ -288,12 +288,12 @@ function battle() {
     castBtn.disabled = !p || p.err || c > B.ink || B.busy;
     endBtn.disabled = B.busy;
     preview.replaceChildren();
-    if (!p) preview.append(h('span', { class: 'tr' }, DESKTOP ? 'Tap tiles, press 1–5, or type below. Tap a verb twice for its ない form.' : 'Tap a verb in your spell again for its ない form.'));
+    if (!p) preview.append(h('span', { class: 'tr' }, DESKTOP ? 'Click tiles, press 1 to 5, or type the sentence below. Click a verb in your sentence to make it negative.' : 'Tap a verb in your sentence to make it negative (ない).'));
     else if (p.err) preview.append(h('span', { class: p.partial ? 'tr' : 'err' }, p.err));
     else {
       const fx = effects(p, true);
       fx.forEach(f => preview.append(h('span', { class: 'fx' }, f.label)));
-      preview.append(h('span', { class: 'spacer' }), h('button', { class: 'tr', onclick: e => { e.target.textContent = english(p); } }, 'meaning?'));
+      preview.append(h('span', { class: 'spacer' }), h('button', { class: 'tr', onclick: e => { e.target.textContent = english(p); } }, 'English'));
       if (c > B.ink) preview.append(h('span', { class: 'err' }, ' not enough ink'));
     }
   }
@@ -316,10 +316,10 @@ function battle() {
     if (p.neg) {
       const it = B.intent;
       const match = p.subj === 'golem' && it.verb === p.verb && (!objId || objId === it.target || (it.verb === '投げる'));
-      out.push(match ? { label: 'Cancel intent', cancel: true } : { label: 'No effect', none: true, why: p.subj === 'golem' ? 'The golem wasn\'t going to do that.' : 'Saying someone won\'t act changes nothing.' });
+      out.push(match ? { label: 'Cancel intent', cancel: true } : { label: 'No effect', none: true, why: p.subj === 'golem' ? 'The golem wasn\'t going to do that.' : 'Only the golem\'s moves can be stopped.' });
       return out;
     }
-    if (B.hp[p.subj] <= 0) return [{ label: `${NAME[p.subj]} is down`, none: true, why: 'Rin is down and cannot act.' }];
+    if (B.hp[p.subj] <= 0) return [{ label: `${NAME[p.subj]} is down`, none: true, why: 'Rin is down.' }];
     switch (p.V.act) {
       case 'attack': {
         const dmg = Math.round((p.V.base + toolPow + (p.subj === 'rin' ? 1 : 0)) * mult);
@@ -369,13 +369,13 @@ function battle() {
       restore();
       if (actorEl && !p.neg) { actorEl.classList.add(p.subj === 'rin' ? 'lunge-r' : 'lunge-l'); await sleep(220); actorEl.classList.remove('lunge-r', 'lunge-l'); }
       for (const f of fx) {
-        if (f.cancel) { B.cancelled = true; B.stats.cancels++; float('golem', 'CANCELLED', 'info'); sfx('bell', .5); banner('Your words bind the golem. It won\'t act.'); }
+        if (f.cancel) { B.cancelled = true; B.stats.cancels++; float('golem', 'CANCELLED', 'info'); sfx('bell', .5); banner('The golem won\'t attack this turn.'); }
         if (f.dmg) { if (f.to === 'golem') { const s = h('div', { class: 'slash' }); stage.append(s); setTimeout(() => s.remove(), 400); sfx(p.verb === '切る' ? 'slash' : 'stone', .7); } else sfx('hurt', .6); damage(f.to, f.dmg); }
         if (f.burn) { if (f.to === 'golem') B.burn += f.burn; float(f.to, '火', 'info'); }
         if (f.shield) { B.shield[f.to] += f.shield; float(f.to, `◈${f.shield}`, 'info'); sfx('shield', .6); }
         if (f.heal) { B.hp[f.to] = Math.min(B.max[f.to], B.hp[f.to] + f.heal); float(f.to, `+${f.heal}`, 'heal'); sfx('heal', .5); }
-        if (f.to && f.to !== 'golem' && f.dmg) banner(`Careful: you told ${NAME[p.subj] === 'you' ? 'yourself' : NAME[p.subj]} to ${p.V.en} ${NAME[f.to] === 'you' ? 'you' : NAME[f.to]}.`);
-        if (f.to === 'golem' && (f.heal || f.shield)) banner('Kotodama: you said it, so it happened. The golem is stronger.');
+        if (f.to && f.to !== 'golem' && f.dmg) banner(`You told ${NAME[p.subj] === 'you' ? 'yourself' : NAME[p.subj]} to ${p.V.en} ${f.to === p.subj ? (p.subj === 'me' ? 'yourself' : 'herself') : NAME[f.to] === 'you' ? 'you' : NAME[f.to]}.`);
+        if (f.to === 'golem' && (f.heal || f.shield)) banner('You said it, so it happened. The golem got stronger.');
       }
     }
     B.hand.forEach(c => { if (c.used) c.gone = true; });
@@ -390,7 +390,7 @@ function battle() {
     B.busy = true; B.spell.forEach(s => { if (s.fromHand) B.hand[s.handIdx].used = false; }); B.spell = []; drawPanel();
     if (B.burn > 0) { damage('golem', B.burn); B.burn = Math.max(0, B.burn - 1); drawHp(); await sleep(500); if (check()) return; }
     const it = B.intent;
-    if (B.cancelled) { banner('The golem stands still, bound by your words.'); await sleep(900); }
+    if (B.cancelled) { banner('The golem doesn\'t move.'); await sleep(900); }
     else {
       golem.classList.add('lunge-l'); await sleep(250); golem.classList.remove('lunge-l');
       if (it.heal) { B.hp.golem = Math.min(B.max.golem, B.hp.golem + it.heal); float('golem', `+${it.heal}`, 'heal'); sfx('heal', .5); }
@@ -433,17 +433,17 @@ function battle() {
     await sleep(1500); voice('言葉が、戻ってきた。');
     const s = B.stats;
     stage.parentElement.append(h('div', { class: 'end' },
-      h('h1', {}, '言霊'), h('div', { class: 'quote' }, '「言葉が、戻ってきた。」'), h('div', { style: 'color:var(--dim);margin-bottom:16px' }, '"The words… they\'ve come back." The shrine is painted in again.'),
+      h('h1', {}, '言霊'), h('div', { class: 'quote' }, '「言葉が、戻ってきた。」'), h('div', { style: 'color:var(--dim);margin-bottom:16px' }, '"The words have come back."'),
       h('div', { class: 'stat' }, h('span', {}, 'Spells cast'), h('b', {}, s.casts)),
-      h('div', { class: 'stat' }, h('span', {}, 'Intents read without peeking'), h('b', {}, s.peeks ? `${s.peeks} words peeked` : 'all of them')),
+      h('div', { class: 'stat' }, h('span', {}, 'Words you looked up'), h('b', {}, s.peeks)),
       h('div', { class: 'stat' }, h('span', {}, 'Attacks cancelled with ない'), h('b', {}, s.cancels)),
       h('div', { class: 'stat' }, h('span', {}, 'Different words used'), h('b', {}, s.words.size)),
       h('button', { class: 'act cast', onclick: battle }, 'Fight again'), h('button', { class: 'act', onclick: menu }, 'Back')));
   }
   function lose() {
     B.busy = true; music(null);
-    stage.parentElement.append(h('div', { class: 'end' }, h('h1', {}, '沈黙'), h('div', { class: 'quote' }, 'Silence takes you.'),
-      h('p', { style: 'color:var(--dim)' }, 'Read the intent first, then answer it: protect whoever is targeted with 守る, or bind the golem with 「ゴーレムは〜ない」.'),
+    stage.parentElement.append(h('div', { class: 'end' }, h('h1', {}, '沈黙'), h('div', { class: 'quote' }, 'You lost.'),
+      h('p', { style: 'color:var(--dim)' }, 'Read what the golem is about to do. Protect its target with 守る, or stop it with a negative sentence like 「ゴーレムはたたかない」.'),
       h('button', { class: 'act cast', onclick: battle }, 'Try again'), h('button', { class: 'act', onclick: menu }, 'Back')));
   }
 
@@ -511,14 +511,14 @@ const KANJI = [
     k: '木', file: '06728', key: 'tree', img: 'tree',
     on: [['もく', 'moku'], ['ぼく', 'boku']], kun: [['き', 'ki']],
     mean: 'A trunk, branches reaching left and right, roots spreading below: a <em>tree</em>.',
-    read: '<em>Moku</em> the woodcarver turns every <em>tree</em> into something. 木 reads <em>もく</em> in compound words, and on its own the tree itself is <em>き</em>.',
+    read: '<em>Moku</em> the woodcarver works with <em>trees</em> all day. 木 reads <em>もく</em> in compound words. A tree on its own is <em>き</em>.',
     ex: [['大きい木ですね。', 'What a big tree.']],
     accept: { mean: ['tree', 'wood', 'trees'], read: ['もく', 'ぼく', 'き'] },
   },
   {
     k: '休', file: '04f11', key: 'rest', img: 'rest',
     on: [['きゅう', 'kyuu']], kun: [['やすむ', 'yasumu']],
-    mean: 'A <em>person</em> (亻, the squeezed form of 人) leaning against a <em>tree</em> (木). They\'re taking a <em>rest</em>.',
+    mean: 'A <em>person</em> (亻, the squeezed form of 人) leaning against a <em>tree</em> (木). They\'re having a <em>rest</em>.',
     read: '<em>Kyū</em> the archer rests against a tree, until an arrow thunks into the bark above her. 休 reads <em>きゅう</em>, and "to rest" is <em>休む</em> (やすむ).',
     ex: [['少し休みましょう。', 'Let\'s rest a little.'], ['木の下で休む。', 'Rest under a tree.']],
     accept: { mean: ['rest', 'break', 'holiday', 'day off'], read: ['きゅう', 'やすむ', 'やす'] },
@@ -616,11 +616,11 @@ function study() {
       const rev = drawn.reduce((acc, p, i) => acc + Math.hypot(p[0] - T[T.length - 1 - i][0], p[1] - T[T.length - 1 - i][1]), 0) / drawn.length;
       if (d < 15 || fails >= 2) {
         inked[cur].setAttribute('opacity', 1); sfx('stroke', .5); cur++; fails = 0; placeDot();
-        if (cur >= ds.length) { msg.textContent = 'Beautiful.'; sfx('bell', .4); voice(K.on[0][0]); btn.disabled = false; }
+        if (cur >= ds.length) { msg.textContent = 'Good.'; sfx('bell', .4); voice(K.on[0][0]); btn.disabled = false; }
         else msg.textContent = `Stroke ${cur + 1} of ${ds.length}.`;
       } else {
         fails++; sfx('miss', .4);
-        msg.textContent = rev < d ? 'Right shape, but the other direction. Start at the red dot.' : 'Not quite. Follow the highlighted stroke from the red dot.';
+        msg.textContent = rev < d ? 'Wrong direction. Start from the red dot.' : 'Try again. Follow the dark stroke from the red dot.';
         const g = guides[cur]; const L = g.getTotalLength();
         const demo = mk(g.getAttribute('d'), '#c8503f', 3); demo.style.strokeDasharray = L;
         demo.animate([{ strokeDashoffset: L }, { strokeDashoffset: 0 }], { duration: 500, fill: 'forwards' }).onfinish = () => setTimeout(() => demo.remove(), 300);
@@ -629,8 +629,8 @@ function study() {
   }
   function combinePage() {
     const c = h('div', { class: 'combine' }, h('span', { class: 'a' }, '人'), h('span', { class: 'plus' }, '+'), h('span', { class: 'b' }, '木'), h('span', { class: 'res' }, '休'));
-    body.replaceChildren(h('div', { class: 'keyword', style: 'margin-top:24px' }, 'Put them together'), c,
-      h('div', { class: 'mnemonic', html: 'A <em>person</em> next to a <em>tree</em>. What are they doing? Kanji are built from pieces you already know, and this is the next one.' }));
+    body.replaceChildren(h('div', { class: 'keyword', style: 'margin-top:24px' }, '人 + 木'), c,
+      h('div', { class: 'mnemonic', html: 'A <em>person</em> next to a <em>tree</em>. Most kanji are built from smaller pieces like these, so each one you learn makes the next ones easier.' }));
     setTimeout(() => { c.classList.add('go'); sfx('bell', .5); }, 700);
     footNext('Learn 休');
   }
@@ -655,7 +655,7 @@ function study() {
       let input;
       if (DESKTOP) {
         const inp = h('input', { type: 'text', autocomplete: 'off', spellcheck: 'false', placeholder: type === 'mean' ? 'meaning in English' : 'reading (romaji or kana)' });
-        const hint = h('div', { class: 'hint' }, type === 'read' ? 'Type romaji: it turns into kana. Enter to answer.' : 'Enter to answer.');
+        const hint = h('div', { class: 'hint' }, type === 'read' ? 'Type in romaji and press Enter.' : 'Press Enter to answer.');
         if (type === 'read') inp.addEventListener('input', () => { const pos = inp.value; if (/[a-z]$/i.test(pos) === false || /[aiueo]$/i.test(pos)) inp.value = toKana(pos); });
         inp.addEventListener('keydown', e => {
           if (e.key !== 'Enter' || !inp.value.trim()) return;
@@ -684,7 +684,7 @@ function study() {
     sfx('win', .6);
     body.replaceChildren(h('div', { class: 'keyword', style: 'margin-top:30px' }, 'Learned'),
       h('div', { class: 'combine', style: 'height:140px;font-size:70px' }, '人 木 休'),
-      h('div', { class: 'mnemonic', html: `You recalled <em>${right} of ${total}</em> on the first try.<br><br>New <em>sigils</em>: in battle, 木 and 休む now show as kanji with no reading, and they hit harder (木 +2 when thrown, 休む +3 healing). Knowing kanji is literally power.` }));
+      h('div', { class: 'mnemonic', html: `You got <em>${right} of ${total}</em> right the first time.<br><br>In battle, 木 and 休む now show up without their kana readings, and they're stronger: a thrown 木 does 2 more damage, and 休む heals 3 more.` }));
     foot.replaceChildren(h('button', { class: 'act cast', onclick: battle }, 'Try them in battle'), h('button', { class: 'act', onclick: menu }, 'Menu'));
   }
   show();
@@ -707,10 +707,9 @@ function menu() {
   $app.replaceChildren(h('div', { class: 'menu' },
     h('div', { class: 'bg', style: 'background-image:url(img/rin-hf.webp)' }),
     h('div', { class: 'title' }, '言霊', h('small', {}, 'KOTODAMA · PROTOTYPE')),
-    h('p', {}, 'Words you know become real. Two small slices to judge the direction: a spell battle and a kanji lesson.'),
-    h('button', { class: 'menu-btn', onclick: study }, h('b', {}, '写'), h('span', {}, 'Scriptorium', h('small', {}, 'Learn 人 · 木 · 休 with mnemonics and stroke tracing (~5 min)'))),
-    h('button', { class: 'menu-btn', onclick: battle }, h('b', {}, '戦'), h('span', {}, 'Battle: the Stone Golem', h('small', {}, 'Read its intent in Japanese. Answer with sentences.'))),
+    h('button', { class: 'menu-btn', onclick: study }, h('b', {}, '写'), h('span', {}, 'Kanji lesson', h('small', {}, '人, 木 and 休. About five minutes.'))),
+    h('button', { class: 'menu-btn', onclick: battle }, h('b', {}, '戦'), h('span', {}, 'Battle: the stone golem', h('small', {}, 'You fight by writing Japanese sentences.'))),
     seg('Battle art:', 'art', [['anime', 'Anime'], ['pixel', 'Pixel']]),
-    P.sigils.length ? h('div', { class: 'seg' }, `Sigils: ${P.sigils.join(' ')}`) : null));
+    P.sigils.length ? h('div', { class: 'seg' }, `Kanji learned: ${P.sigils.join(' ')}`) : null));
 }
 menu();
