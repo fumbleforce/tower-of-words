@@ -5,7 +5,7 @@ Read GUIDE.md first. Pick up from here next session.
 ## Waiting on Jørgen
 - **Cast round 2 picks:** proto2/decide2 (Yuzuki distinct from Emi, Goro in RDBT, new Jun, Ishibashi options, Saki not like Rei, Kiyoko outfits that aren't black, Nanami options, basement office with chairs and ramen cups).
 - **Mio's voice:** all 35 lines regenerated from the original clip with only a male-drift guard. Listen on proto2/voice-mio; 「新しいゲーム…」 is borderline (35% under 160 Hz).
-- **Video:** review proto2/video once the setup agent publishes; pick a model before any more clips.
+- **Video:** set up (Wan 2.2 TI2V 5B, and Causal Forcing for fast drafts); 4 test clips on proto2/video. The monorail works well; Emi winks instead of blinking and breathing (no loop yet). Workflows are in ~/ai/workflows/video-*.json. Review and decide before any more clips.
 - **Local music:** YuE2 versus Lyria verdict (proto2/music). The game currently alternates between both.
 
 ## Art (after the cast is settled; decide before producing)
