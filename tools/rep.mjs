@@ -26,6 +26,8 @@ const PRICE = {
   'google/lyria-2': () => 0.12,
   'meta/musicgen': () => 0.1,
   '851-labs/background-remover': () => 0.002,
+  'minimax/speech-2.6-hd': i => Math.max(0.002, (i.text || '').length * 0.0001),
+  'minimax/speech-2.6-turbo': i => Math.max(0.001, (i.text || '').length * 0.00006),
 };
 
 function env() {

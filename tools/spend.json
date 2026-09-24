@@ -1,5 +1,5 @@
 {
- "total": 1.224,
+ "total": 1.2705,
  "calls": [
   {
    "t": "2026-09-24T10:37:04.077Z",
@@ -189,6 +189,111 @@
    "est": 0.045,
    "out": "art/proto/bg-shrine-wide-erased.webp",
    "prompt": "Turn this image into an unfinished anime layout sketch: remove all colour and almost all detail, leaving only faint, spa"
+  },
+  {
+   "t": "2026-09-24T12:14:29.605Z",
+   "model": "minimax/speech-2.6-hd",
+   "est": 0.0031000000000000003,
+   "out": "proto2/audition/Japanese_InnocentBoy.mp3",
+   "prompt": ""
+  },
+  {
+   "t": "2026-09-24T12:14:29.633Z",
+   "model": "minimax/speech-2.6-hd",
+   "est": 0.0031000000000000003,
+   "out": "proto2/audition/Japanese_LoyalKnight.mp3",
+   "prompt": ""
+  },
+  {
+   "t": "2026-09-24T12:14:29.652Z",
+   "model": "minimax/speech-2.6-hd",
+   "est": 0.0031000000000000003,
+   "out": "proto2/audition/Japanese_GentleButler.mp3",
+   "prompt": ""
+  },
+  {
+   "t": "2026-09-24T12:14:29.685Z",
+   "model": "minimax/speech-2.6-hd",
+   "est": 0.0031000000000000003,
+   "out": "proto2/audition/Japanese_DependableWoman.mp3",
+   "prompt": ""
+  },
+  {
+   "t": "2026-09-24T12:14:29.703Z",
+   "model": "minimax/speech-2.6-hd",
+   "est": 0.0031000000000000003,
+   "out": "proto2/audition/Japanese_GracefulMaiden.mp3",
+   "prompt": ""
+  },
+  {
+   "t": "2026-09-24T12:14:29.711Z",
+   "model": "minimax/speech-2.6-hd",
+   "est": 0.0031000000000000003,
+   "out": "proto2/audition/Japanese_GenerousIzakayaOwner.mp3",
+   "prompt": ""
+  },
+  {
+   "t": "2026-09-24T12:14:29.720Z",
+   "model": "minimax/speech-2.6-hd",
+   "est": 0.0031000000000000003,
+   "out": "proto2/audition/Japanese_SportyStudent.mp3",
+   "prompt": ""
+  },
+  {
+   "t": "2026-09-24T12:14:29.724Z",
+   "model": "minimax/speech-2.6-hd",
+   "est": 0.0031000000000000003,
+   "out": "proto2/audition/Japanese_ColdQueen.mp3",
+   "prompt": ""
+  },
+  {
+   "t": "2026-09-24T12:14:29.734Z",
+   "model": "minimax/speech-2.6-hd",
+   "est": 0.0031000000000000003,
+   "out": "proto2/audition/Japanese_IntellectualSenior.mp3",
+   "prompt": ""
+  },
+  {
+   "t": "2026-09-24T12:14:29.782Z",
+   "model": "minimax/speech-2.6-hd",
+   "est": 0.0031000000000000003,
+   "out": "proto2/audition/Japanese_DecisivePrincess.mp3",
+   "prompt": ""
+  },
+  {
+   "t": "2026-09-24T12:14:29.801Z",
+   "model": "minimax/speech-2.6-hd",
+   "est": 0.0031000000000000003,
+   "out": "proto2/audition/Japanese_KindLady.mp3",
+   "prompt": ""
+  },
+  {
+   "t": "2026-09-24T12:14:29.805Z",
+   "model": "minimax/speech-2.6-hd",
+   "est": 0.0031000000000000003,
+   "out": "proto2/audition/Japanese_OptimisticYouth.mp3",
+   "prompt": ""
+  },
+  {
+   "t": "2026-09-24T12:14:29.807Z",
+   "model": "minimax/speech-2.6-hd",
+   "est": 0.0031000000000000003,
+   "out": "proto2/audition/Japanese_DominantMan.mp3",
+   "prompt": ""
+  },
+  {
+   "t": "2026-09-24T12:14:29.905Z",
+   "model": "minimax/speech-2.6-hd",
+   "est": 0.0031000000000000003,
+   "out": "proto2/audition/Japanese_SeriousCommander.mp3",
+   "prompt": ""
+  },
+  {
+   "t": "2026-09-24T12:14:29.971Z",
+   "model": "minimax/speech-2.6-hd",
+   "est": 0.0031000000000000003,
+   "out": "proto2/audition/Japanese_CalmLady.mp3",
+   "prompt": ""
   }
  ]
 }
