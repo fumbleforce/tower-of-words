@@ -1,5 +1,5 @@
 {
- "total": 7.6186,
+ "total": 7.8486,
  "calls": [
   {
    "t": "2026-09-24T10:37:04.077Z",
@@ -1386,6 +1386,48 @@
    "est": 0.015,
    "out": "art/company/m4/anill-rei.png",
    "prompt": "1girl, solo, grey hair, long hair, high ponytail, hoop earrings, white suit, holding tablet, smile, upper body, looking "
+  },
+  {
+   "t": "2026-09-24T13:41:29.382Z",
+   "model": "xai/grok-imagine-image",
+   "est": 0.07,
+   "out": "art/company/m5/grok-pool.png",
+   "prompt": "Anime still, 2020s TV anime. Rei, a 23-year-old saleswoman with long silver hair in a high ponytail and gold hoop earrin"
+  },
+  {
+   "t": "2026-09-24T13:41:29.420Z",
+   "model": "xai/grok-imagine-image",
+   "est": 0.07,
+   "out": "art/company/m5/grok-dorm.png",
+   "prompt": "Anime still, 2020s TV anime. Mio, a 24-year-old office worker with messy black hair in a loose ponytail and round glasse"
+  },
+  {
+   "t": "2026-09-24T13:41:30.626Z",
+   "model": "aisha-ai-official/anillustrious-v4",
+   "est": 0.015,
+   "out": "art/company/m5/anill-dorm.png",
+   "prompt": "1girl, solo, adult, black hair, messy hair, low ponytail, round eyewear, oversized t-shirt, shorts, lying on bed, on sto"
+  },
+  {
+   "t": "2026-09-24T13:41:37.908Z",
+   "model": "aisha-ai-official/anillustrious-v4",
+   "est": 0.015,
+   "out": "art/company/m5/anill-pool.png",
+   "prompt": "1girl, solo, adult, mature female, grey hair, long hair, high ponytail, hoop earrings, white one-piece swimsuit, sheer w"
+  },
+  {
+   "t": "2026-09-24T13:41:37.914Z",
+   "model": "black-forest-labs/flux-2-pro",
+   "est": 0.03,
+   "out": "art/company/m5/flux-pool.png",
+   "prompt": "Anime still, 2020s TV anime. Rei, a 23-year-old saleswoman with long silver hair in a high ponytail and gold hoop earrin"
+  },
+  {
+   "t": "2026-09-24T13:41:47.933Z",
+   "model": "black-forest-labs/flux-2-pro",
+   "est": 0.03,
+   "out": "art/company/m5/flux-dorm.png",
+   "prompt": "Anime still, 2020s TV anime. Mio, a 24-year-old office worker with messy black hair in a loose ponytail and round glasse"
   }
  ]
 }
