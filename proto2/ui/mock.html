@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>UI mockup</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=M+PLUS+1:wght@400;500;700;800;900&family=Dela+Gothic+One&family=IBM+Plex+Mono:wght@400;600&display=swap">
+<style>
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; background: #0d0f12; overflow: hidden; }
+button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
+.scene { position: fixed; inset: 0; background: url(img/bg-office.webp) center / cover; }
+.scene::after { content: ""; position: absolute; inset: 0; pointer-events: none; }
+.chara { position: absolute; bottom: 0; height: 92%; }
+.chara img { height: 100%; display: block; }
+.chara.emi { left: 50%; transform: translateX(-40%); }
+.chara.mio { left: 4%; height: 78%; filter: brightness(.55) saturate(.7); }
+ruby rt { font-size: .42em; letter-spacing: .02em; }
+.jp { font-family: "M PLUS 1", sans-serif; }
+
+/* ============ A: company terminal ============ */
+.A .scene::after { background: linear-gradient(180deg, rgba(20,33,61,.35), transparent 30%, transparent 55%, rgba(10,16,30,.85)); }
+.A .topbar { position: absolute; top: 0; left: 0; right: 0; height: 44px; display: flex; align-items: center; gap: 18px; padding: 0 18px; background: rgba(20,33,61,.82); backdrop-filter: blur(6px); color: #dfe6f2; font: 500 13px "IBM Plex Mono", monospace; border-bottom: 2px solid #f2c230; z-index: 5; }
+.A .logo { display: flex; align-items: center; gap: 8px; font: 800 15px "M PLUS 1", sans-serif; letter-spacing: .08em; color: #fff; }
+.A .logo i { width: 18px; height: 18px; background: #f2c230; clip-path: polygon(0 100%, 50% 0, 100% 100%, 70% 100%, 50% 55%, 30% 100%); }
+.A .topbar .sp { flex: 1; }
+.A .topbar b { color: #f2c230; font-weight: 600; }
+.A .box { position: absolute; left: 50%; bottom: 28px; transform: translateX(-50%); width: min(1100px, 94vw); background: rgba(14,22,40,.9); border: 1px solid #3a4a6b; border-left: 6px solid #f2c230; color: #eef2f8; padding: 18px 26px 20px; z-index: 5; }
+.A .who { font: 600 12px "IBM Plex Mono", monospace; color: #f2c230; letter-spacing: .06em; margin-bottom: 6px; display: flex; gap: 14px; }
+.A .who span { color: #8ea0c2; }
+.A .line { font: 700 28px/1.9 "M PLUS 1", sans-serif; }
+.A .line rt { color: #f2c230; font-family: "IBM Plex Mono", monospace; font-weight: 400; }
+.A .en { font: 14px "IBM Plex Mono", monospace; color: #8ea0c2; margin-top: 2px; }
+.A .choices { position: absolute; right: max(3vw, 24px); bottom: 230px; display: grid; gap: 8px; z-index: 5; width: min(420px, 90vw); }
+.A .choices .label { font: 600 11px "IBM Plex Mono", monospace; color: #8ea0c2; letter-spacing: .08em; }
+.A .choice { display: flex; gap: 12px; align-items: center; text-align: left; padding: 10px 14px; background: rgba(223,230,242,.94); color: #14213d; font: 700 20px "M PLUS 1", sans-serif; border-left: 4px solid #14213d; }
+.A .choice:hover, .A .choice:focus-visible { background: #f2c230; outline: none; }
+.A .choice kbd { font: 600 12px "IBM Plex Mono", monospace; background: #14213d; color: #f2c230; padding: 2px 6px; }
+
+/* ============ B: stylish JRPG ============ */
+.B .scene::after { background: linear-gradient(180deg, transparent 50%, rgba(8,8,10,.7)); }
+.B .topbar { position: absolute; top: 18px; left: 22px; z-index: 5; display: flex; gap: 10px; align-items: stretch; }
+.B .day { background: #fff; color: #111; padding: 6px 16px 8px; transform: skewX(-12deg); font: 900 30px "M PLUS 1", sans-serif; line-height: 1; }
+.B .day small { display: block; font: 700 11px "M PLUS 1", sans-serif; letter-spacing: .1em; }
+.B .loc { background: #111; color: #fff; padding: 10px 18px; transform: skewX(-12deg); font: 700 15px "M PLUS 1", sans-serif; align-self: center; }
+.B .box { position: absolute; left: 4vw; right: 4vw; bottom: 26px; z-index: 5; }
+.B .tag { display: inline-block; background: #d7263d; color: #fff; padding: 6px 26px 8px 18px; transform: skewX(-14deg); font: 400 28px "Dela Gothic One", sans-serif; margin-left: 20px; position: relative; top: 14px; box-shadow: 6px 6px 0 #111; }
+.B .panel { background: #111; color: #fff; padding: 26px 34px 22px; clip-path: polygon(0 10%, 100% 0, 99% 100%, 1% 94%); }
+.B .line { font: 800 30px/1.9 "M PLUS 1", sans-serif; }
+.B .line rt { color: #ffcdd3; font-weight: 700; }
+.B .en { font: 500 15px "M PLUS 1", sans-serif; color: #9a9aa2; }
+.B .choices { position: absolute; right: 5vw; top: 22%; z-index: 5; display: grid; gap: 12px; width: min(460px, 88vw); }
+.B .choice { position: relative; text-align: left; padding: 12px 20px 12px 56px; background: #fff; color: #111; font: 800 21px "M PLUS 1", sans-serif; transform: skewX(-10deg); box-shadow: 6px 6px 0 #111; }
+.B .choice:nth-child(2) { margin-left: 22px; } .B .choice:nth-child(3) { margin-left: 44px; }
+.B .choice kbd { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); font: 400 20px "Dela Gothic One", sans-serif; color: #d7263d; }
+.B .choice:hover, .B .choice:focus-visible { background: #d7263d; color: #fff; outline: none; }
+.B .choice:hover kbd { color: #fff; }
+
+/* ============ C: anime subtitles ============ */
+.C .scene::after { background: linear-gradient(180deg, transparent 62%, rgba(0,0,0,.35)); }
+.C .topbar { position: absolute; top: 16px; right: 20px; z-index: 5; text-align: right; color: #fff; font: 700 14px "M PLUS 1", sans-serif; text-shadow: 0 1px 4px rgba(0,0,0,.7); }
+.C .topbar b { display: block; font: 900 26px "M PLUS 1", sans-serif; }
+.C .box { position: absolute; left: 0; right: 0; bottom: 6vh; text-align: center; z-index: 5; padding: 0 5vw; }
+.C .who { font: 800 17px "M PLUS 1", sans-serif; color: #ff9aa8; -webkit-text-stroke: 4px #000; paint-order: stroke fill; margin-bottom: 2px; }
+.C .line { font: 900 36px/1.85 "M PLUS 1", sans-serif; color: #fff; -webkit-text-stroke: 7px #000; paint-order: stroke fill; }
+.C .line rt { color: #fff7a8; -webkit-text-stroke: 4px #000; font-weight: 700; }
+.C .en { display: inline-block; margin-top: 6px; font: 600 16px "M PLUS 1", sans-serif; color: #fff; background: rgba(0,0,0,.55); padding: 3px 12px; }
+.C .choices { position: absolute; left: 50%; transform: translateX(-50%); bottom: calc(6vh + 150px); z-index: 5; display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; width: 94vw; }
+.C .choice { padding: 10px 20px; border-radius: 999px; background: rgba(0,0,0,.62); color: #fff; font: 800 21px "M PLUS 1", sans-serif; border: 2px solid rgba(255,255,255,.85); backdrop-filter: blur(4px); }
+.C .choice kbd { font: 700 13px "M PLUS 1", sans-serif; color: #fff7a8; margin-right: 8px; }
+.C .choice:hover, .C .choice:focus-visible { background: #fff; color: #111; outline: none; }
+
+/* phone */
+@media (max-aspect-ratio: 1/1) {
+  .chara.emi { height: 70%; transform: translateX(-52%); bottom: 22%; }
+  .chara.mio { display: none; }
+  .A .box, .B .box, .C .box { bottom: 16px; }
+  .A .line, .B .line { font-size: 22px; } .C .line { font-size: 26px; -webkit-text-stroke-width: 6px; }
+  .A .choices, .B .choices { right: auto; left: 50%; top: 36%; bottom: auto; transform: translateX(-50%); }
+  .B .choice:nth-child(n) { margin-left: 0; }
+  .C .choices { top: 36%; bottom: auto; flex-direction: column; align-items: center; }
+  .A .topbar { font-size: 11px; gap: 10px; } .A .topbar .hide-phone { display: none; }
+  .B .panel { padding: 22px 22px 18px; }
+  .en { display: none !important; }
+  .A .choices, .B .choices, .C .choices { top: 30%; }
+  .A .choice, .B .choice, .C .choice { font-size: 17px; padding-top: 8px; padding-bottom: 8px; }
+}
+</style>
+</head>
+<body>
+<div class="scene"><div class="chara mio"><img src="img/mio.webp" alt=""></div><div class="chara emi"><img src="img/emi.webp" alt=""></div></div>
+<div id="ui"></div>
+<script>
+const v = (new URLSearchParams(location.search).get('v') || 'a').toUpperCase();
+document.body.className = v;
+// Word rendering rule: known kanji plain, learning kanji with romaji above, advanced words in kana only.
+const LINE = `来た来た。君が<ruby>新人<rt>shinjin</rt></ruby>くん？ 私はエミ。ここのリーダー……いちおうね。`;
+const EN = '"There you are. You\'re the new hire? I\'m Emi. The leader here... technically."';
+const CH = ['よろしくお願いします。', 'うん、よろしく。', '……いちおう？'];
+const ui = document.getElementById('ui');
+const choices = cls => `<div class="choices">${cls || ''}${CH.map((c, i) => `<button class="choice"><kbd>${i + 1}</kbd>${c}</button>`).join('')}</div>`;
+if (v === 'A') ui.innerHTML = `
+  <div class="topbar"><div class="logo"><i></i>AMAKAWA</div><span>社内ネット</span><span class="sp"></span><span class="hide-phone">企画室7 地下2階</span><span>DAY 1 <b>月 09:12</b></span><span class="hide-phone">新入社員</span></div>
+  ${choices('<div class="label">返事を選ぶ</div>')}
+  <div class="box"><div class="who">真壁エミ <span>企画室7 リーダー</span></div><div class="line jp">${LINE}</div><div class="en">${EN}</div></div>`;
+if (v === 'B') ui.innerHTML = `
+  <div class="topbar"><div class="day"><small>DAY</small>01</div><div class="loc">企画室7 · 月曜 朝</div></div>
+  ${choices()}
+  <div class="box"><div class="tag">エミ</div><div class="panel"><div class="line jp">${LINE}</div><div class="en">${EN}</div></div></div>`;
+if (v === 'C') ui.innerHTML = `
+  <div class="topbar">企画室7<b>月 09:12</b></div>
+  ${choices()}
+  <div class="box"><div class="who">エミ</div><div class="line jp">${LINE}</div><div class="en">${EN}</div></div>`;
+</script>
+</body>
+</html>
