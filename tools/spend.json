@@ -1,5 +1,5 @@
 {
- "total": 9.6786,
+ "total": 9.9786,
  "calls": [
   {
    "t": "2026-09-24T10:37:04.077Z",
@@ -1834,6 +1834,76 @@
    "est": 0.03,
    "out": "art/company/mappa/haruto-3.webp",
    "prompt": "Anime character portrait, modern MAPPA anime still, sharp lines, cinematic lighting. Haruto, 30, a soft-spoken R&D chemi"
+  },
+  {
+   "t": "2026-09-24T14:10:48.305Z",
+   "model": "black-forest-labs/flux-2-pro",
+   "est": 0.03,
+   "out": "art/company/mappa/kiyoko-17.webp",
+   "prompt": "Anime character portrait, modern MAPPA anime still, sharp lines, cinematic lighting. Kiyoko Madarame, 56, leader of one "
+  },
+  {
+   "t": "2026-09-24T14:10:48.350Z",
+   "model": "black-forest-labs/flux-2-pro",
+   "est": 0.03,
+   "out": "art/company/mappa/ren-3.webp",
+   "prompt": "Anime character portrait, modern MAPPA anime still, sharp lines, cinematic lighting. Dr. Ren Kagami, 35, the manic geniu"
+  },
+  {
+   "t": "2026-09-24T14:10:48.475Z",
+   "model": "black-forest-labs/flux-2-pro",
+   "est": 0.03,
+   "out": "art/company/mappa/nanami2-17.webp",
+   "prompt": "Anime character portrait, modern MAPPA anime still, sharp lines, cinematic lighting. Nanami, 29, a stoic company securit"
+  },
+  {
+   "t": "2026-09-24T14:10:48.711Z",
+   "model": "black-forest-labs/flux-2-pro",
+   "est": 0.03,
+   "out": "art/company/mappa/luna-3.webp",
+   "prompt": "Anime character portrait, modern MAPPA anime still, sharp lines, cinematic lighting. Luna, 27, the night-shift reception"
+  },
+  {
+   "t": "2026-09-24T14:10:49.254Z",
+   "model": "black-forest-labs/flux-2-pro",
+   "est": 0.03,
+   "out": "art/company/mappa/nanami2-3.webp",
+   "prompt": "Anime character portrait, modern MAPPA anime still, sharp lines, cinematic lighting. Nanami, 29, a stoic company securit"
+  },
+  {
+   "t": "2026-09-24T14:10:49.358Z",
+   "model": "black-forest-labs/flux-2-pro",
+   "est": 0.03,
+   "out": "art/company/mappa/ren-17.webp",
+   "prompt": "Anime character portrait, modern MAPPA anime still, sharp lines, cinematic lighting. Dr. Ren Kagami, 35, the manic geniu"
+  },
+  {
+   "t": "2026-09-24T14:10:49.717Z",
+   "model": "black-forest-labs/flux-2-pro",
+   "est": 0.03,
+   "out": "art/company/mappa/luna-17.webp",
+   "prompt": "Anime character portrait, modern MAPPA anime still, sharp lines, cinematic lighting. Luna, 27, the night-shift reception"
+  },
+  {
+   "t": "2026-09-24T14:10:55.220Z",
+   "model": "black-forest-labs/flux-2-pro",
+   "est": 0.03,
+   "out": "art/company/mappa/kiyoko-3.webp",
+   "prompt": "Anime character portrait, modern MAPPA anime still, sharp lines, cinematic lighting. Kiyoko Madarame, 56, leader of one "
+  },
+  {
+   "t": "2026-09-24T14:10:56.880Z",
+   "model": "black-forest-labs/flux-2-pro",
+   "est": 0.03,
+   "out": "art/company/mappa/oguri-17.webp",
+   "prompt": "Anime character portrait, modern MAPPA anime still, sharp lines, cinematic lighting. Oguri, 33, an ex-boxer who runs the"
+  },
+  {
+   "t": "2026-09-24T14:13:17.057Z",
+   "model": "black-forest-labs/flux-2-pro",
+   "est": 0.03,
+   "out": "art/company/mappa/oguri-3.webp",
+   "prompt": "Anime character portrait, modern MAPPA anime still, sharp lines, cinematic lighting. Oguri, 33, an ex-boxer who runs the"
   }
  ]
 }
