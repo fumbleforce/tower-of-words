@@ -3,7 +3,7 @@
 Read GUIDE.md first. Pick up from here next session.
 
 ## Waiting on Jørgen
-- **Cast round 2 picks:** proto2/decide2 (Yuzuki distinct from Emi, Goro in RDBT, new Jun, Ishibashi options, Saki not like Rei, Kiyoko outfits that aren't black, Nanami options, basement office with chairs and ramen cups).
+- **Cast round 2 picks:** proto2/decide2 (partial: Yuzuki, Goro, Jun, Ishibashi and Saki-a are rendered; Saki-b, the Kiyoko outfits, Nanami and the office revision are still to render: rerun tools/decide2.py, which only renders what is missing) (Yuzuki distinct from Emi, Goro in RDBT, new Jun, Ishibashi options, Saki not like Rei, Kiyoko outfits that aren't black, Nanami options, basement office with chairs and ramen cups).
 - **Mio's voice:** all 35 lines regenerated from the original clip with only a male-drift guard. Listen on proto2/voice-mio; 「新しいゲーム…」 is borderline (35% under 160 Hz).
 - **Video:** set up (Wan 2.2 TI2V 5B, and Causal Forcing for fast drafts); 4 test clips on proto2/video. The monorail works well; Emi winks instead of blinking and breathing (no loop yet). Workflows are in ~/ai/workflows/video-*.json. Review and decide before any more clips.
 - **Local music:** YuE2 versus Lyria verdict (proto2/music). The game currently alternates between both.
