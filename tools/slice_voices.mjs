@@ -34,10 +34,11 @@ const VOICES = {
   aoi: { kind: 'design', desc: 'A bright, energetic young Japanese woman around twenty-two, quick and cheerful, a little clumsy, clearly female.', refText: 'あ、おはよう！　今日もがんばろうね！' },
   yuzuki: mm('Japanese_GracefulMaiden'),
   secretary: mm('Japanese_DependableWoman'),
+  player: { kind: 'design', desc: 'A calm, neutral Japanese-speaking young man around thirty, clear and friendly, even and unhurried, a slight foreign softness.', refText: 'はじめまして。今日からここで働きます。', lufs: -23 },
 };
 
-function normalize(src, dst) {
-  execFileSync('ffmpeg', ['-v', 'error', '-y', '-i', src, '-af', 'loudnorm=I=-18:TP=-2:LRA=11', '-ar', '44100', '-ac', '1', '-b:a', '96k', dst]);
+function normalize(src, dst, lufs = -18) {
+  execFileSync('ffmpeg', ['-v', 'error', '-y', '-i', src, '-af', `loudnorm=I=${lufs}:TP=-2:LRA=11`, '-ar', '44100', '-ac', '1', '-b:a', '96k', dst]);
 }
 async function designRef(ch, v) {
   const p = path.join(RAW, `${ch}-ref`);
@@ -63,6 +64,9 @@ for (const m of menus) for (const it of m.items) {
 for (const t of payLines) lines.push(['kaori', t]);
 const walk = o => { if (Array.isArray(o)) o.forEach(walk); else if (o && typeof o === 'object') { if (o.say) lines.push([o.say, plain(o.jp)]); Object.values(o).forEach(walk); } };
 walk(SCENES);
+// Player lines: the Japanese of every choice option the player can pick (not actions in brackets, not English-shown choices).
+const walkP = o => { if (Array.isArray(o)) o.forEach(walkP); else if (o && typeof o === 'object') { if (o.choose && o.choose.show !== 'en') for (const op of o.choose.options) { const t = plain(op.jp); if (!t.startsWith('（')) lines.push(['player', t]); } Object.values(o).forEach(walkP); } };
+walkP(SCENES);
 
 const manifest = {};
 let active = 0; const waiters = [];
@@ -81,7 +85,7 @@ const jobs = lines.map(([ch, text]) => limit(async () => {
       const ref = v.kind === 'clone' ? v.ref : await designRef(ch, v);
       f = await run('qwen/qwen3-tts', { mode: 'voice_clone', text, language: 'Japanese', reference_audio: ref, reference_text: v.refText }, raw + '.wav');
     }
-    normalize(Array.isArray(f) ? f[0] : f, dst);
+    normalize(Array.isArray(f) ? f[0] : f, dst, v.lufs || -18);
     console.log('ok', ch, text.slice(0, 20));
   } catch (e) { delete manifest[key]; console.log('FAIL', ch, text.slice(0, 20), e.message.slice(0, 160)); }
 }));

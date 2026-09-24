@@ -10,8 +10,8 @@ export const SCENES = {
     { pin: {
       prompt: 'Rei\'s message. When and where?',
       fields: [
-        { id: 'time', label: '{何時|なんじ}？', options: ['{十時|じゅうじ}', '{十二時|じゅうにじ}', '{二時|にじ}'], answer: 1 },
-        { id: 'place', label: 'どこ？', options: ['{一階|いっかい}のカフェ', '{屋上|おくじょう}', '{三階|さんがい}の{営業部|えいぎょうぶ}'], answer: 0 },
+        { id: 'time', label: '{何時|なんじ}？', labelEn: 'When?', en: ["ten o'clock", "noon", "two o'clock"], options: ['{十時|じゅうじ}', '{十二時|じゅうにじ}', '{二時|にじ}'], answer: 1 },
+        { id: 'place', label: 'どこ？', labelEn: 'Where?', en: ["the café, ground floor", "the rooftop", "Sales, 3rd floor"], options: ['{一階|いっかい}のカフェ', '{屋上|おくじょう}', '{三階|さんがい}の{営業部|えいぎょうぶ}'], answer: 0 },
       ],
     } },
     { goto: 'day3_office' },
