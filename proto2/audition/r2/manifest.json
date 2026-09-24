@@ -1,0 +1,121 @@
+{
+ "mio": {
+  "line": "え、もう終わったの？…ちょっと待って、どうやったの？",
+  "cands": [
+   {
+    "label": "MiniMax Decisive Princess",
+    "file": "mio-1.mp3"
+   },
+   {
+    "label": "Designed: dry, low-key",
+    "file": "mio-2.mp3"
+   },
+   {
+    "label": "Designed: husky, teasing",
+    "file": "mio-3.mp3"
+   }
+  ]
+ },
+ "sayaka": {
+  "line": "いいよいいよ、今日は適当でいいから。お昼、一緒に行く？",
+  "cands": [
+   {
+    "label": "MiniMax Calm Lady (quieter)",
+    "file": "sayaka-1.mp3"
+   },
+   {
+    "label": "MiniMax Dependable Woman",
+    "file": "sayaka-2.mp3"
+   },
+   {
+    "label": "Designed: relaxed, warm",
+    "file": "sayaka-3.mp3"
+   }
+  ]
+ },
+ "hana": {
+  "line": "ねえねえ、ちょっとだけ話を聞かせて！社内報の記事なんだけど。",
+  "cands": [
+   {
+    "label": "MiniMax Graceful Maiden",
+    "file": "hana-1.mp3"
+   },
+   {
+    "label": "Designed: bright reporter",
+    "file": "hana-2.mp3"
+   },
+   {
+    "label": "Designed: warm, lively",
+    "file": "hana-3.mp3"
+   }
+  ]
+ },
+ "rei": {
+  "line": "へえ、新人なのにずいぶん速いのね。負けないから。",
+  "cands": [
+   {
+    "label": "MiniMax Cold Queen (44.1 kHz)",
+    "file": "rei-1.mp3"
+   },
+   {
+    "label": "Designed: crisp, confident",
+    "file": "rei-2.mp3"
+   },
+   {
+    "label": "Designed: cool, controlled",
+    "file": "rei-3.mp3"
+   }
+  ]
+ },
+ "daigo": {
+  "line": "おう、新人！今日は俺がおごるから、飲もうぜ！",
+  "cands": [
+   {
+    "label": "MiniMax Generous Izakaya Owner",
+    "file": "daigo-1.mp3"
+   },
+   {
+    "label": "MiniMax Optimistic Youth",
+    "file": "daigo-2.mp3"
+   },
+   {
+    "label": "Designed: big, friendly",
+    "file": "daigo-3.mp3"
+   }
+  ]
+ },
+ "tomi": {
+  "line": "はい、いらっしゃい！今日のカレー、おいしいよ。大盛りにする？",
+  "cands": [
+   {
+    "label": "MiniMax Dependable Woman",
+    "file": "tomi-1.mp3"
+   },
+   {
+    "label": "Designed: warm, motherly",
+    "file": "tomi-2.mp3"
+   },
+   {
+    "label": "Designed: brisk, kind",
+    "file": "tomi-3.mp3"
+   }
+  ]
+ },
+ "guard": {
+  "line": "止まって。IDカード、見せて。…はい、次の人。",
+  "cands": [
+   {
+    "label": "MiniMax Dominant Man",
+    "file": "guard-1.mp3"
+   },
+   {
+    "label": "Designed: stern guard",
+    "file": "guard-2.mp3"
+   },
+   {
+    "label": "Designed: gruff, flat",
+    "file": "guard-3.mp3"
+   }
+  ]
+ }
+}
