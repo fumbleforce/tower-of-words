@@ -21,7 +21,7 @@ SDXL_N = 'lowres, bad anatomy, bad hands, missing fingers, extra digits, cropped
 ANIMA_Q = 'masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, safe, anime screenshot'
 ANIMA_N = 'worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, child, loli'
 
-SETS = [('anima-nova', None, None, None)] + [(f'sdxl-{n}', f'{n}.safetensors', None, None) for n in
+SETS = [('anima-nova', None, None, None), ('anima-nova-rl', None, 'anima-rl-v0.1.safetensors', None)] + [(f'sdxl-{n}', f'{n}.safetensors', None, None) for n in
         ['waiIllustriousSDXL_v170', 'waiMature', 'hassaku', 'novaAnime', 'oneObsession', 'prefect']] + [
     ('wai-mappa', 'waiIllustriousSDXL_v170.safetensors', 'mappa_style.safetensors', ''),
     ('wai-jjk', 'waiIllustriousSDXL_v170.safetensors', 'jjk_style.safetensors', 'jjk_style_v3'),
@@ -38,7 +38,7 @@ for name, ckpt, lora, trigger in SETS:
             continue
         t = time.time()
         if ckpt is None:
-            wf = comfy.anima(f'{ANIMA_Q}, {tags}, {COMMON}', ANIMA_N, w=896, h=1152, steps=30, cfg=5, seed=1)
+            wf = comfy.anima(f'{ANIMA_Q}, {tags}, {COMMON}', ANIMA_N, w=896, h=1152, steps=30, cfg=5, seed=1, loras=[(lora, 1.2)] if lora else ())
         else:
             pre = f'{trigger}, ' if trigger else ''
             wf = comfy.sdxl(f'{pre}{tags}, {COMMON}, {SDXL_Q}', SDXL_N, ckpt, lora=lora, lora_weight=0.8, seed=1)

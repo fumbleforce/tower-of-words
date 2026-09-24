@@ -9,17 +9,18 @@ h1 { margin: 0 0 4px; font-size: 26px; } .intro { color: #4b5260; margin: 0 0 18
 .set h2 { margin: 0; font-size: 18px; } .set p { margin: 2px 0 8px; color: #4b5260; font-size: 14px; }
 .imgs { display: grid; grid-template-columns: repeat(9, 1fr); gap: 5px; }
 .imgs img { width: 100%; border-radius: 5px; display: block; }
-.tango { display: grid; grid-template-columns: 320px 1fr; gap: 16px; align-items: start; }
+.tango { display: grid; grid-template-columns: 560px 1fr; gap: 16px; align-items: start; }
 .tango img { width: 100%; border-radius: 6px; }
 @media (max-width: 900px) { .imgs { grid-template-columns: repeat(3, 1fr); } .tango { grid-template-columns: 1fr; } }
 </style></head><body><main>
 <h1>Local models on your RTX 3080</h1>
 <p class="intro">Everything here was generated on your own machine through ComfyUI: no cost, no content filter. Every row is the same nine characters with the same tags and the same seed: Rei, Emi, Mio, Aoi, Kaori, Goro, the guard, Jun and Yuzuki.</p>
-<section class="set tango"><img src="tango.webp" alt="Tango prompt"><div><h2>Your Civitai prompt, run locally</h2><p>Your tango prompt with its seed and settings, through Nova Anime AM v5 (the Anima model it came from). 75 seconds including loading the model. Not pixel-identical to Civitai, because their site handles seeds slightly differently, but it is the same model and quality.</p></div></section>
+<section class="set tango"><div style="display:grid;grid-template-columns:1fr 1fr;gap:6px"><img src="tango.webp" alt="Tango prompt"><img src="tango-rl.webp" alt="Tango prompt with Anima RL"></div><div><h2>Your Civitai prompt, run locally</h2><p>Your tango prompt with its seed and settings, through Nova Anime AM v5 (the Anima model it came from). 75 seconds including loading the model. Not pixel-identical to Civitai, because their site handles seeds slightly differently, but it is the same model and quality. Right: the same prompt and seed with the Anima RL add-on.</p></div></section>
 <div id="sets"></div>
 <script>
 const S = [
   ['anima-nova', 'Nova Anime AM v5 (Anima family)', 'The model from your example. The most polished and characterful; about 35 seconds per image.'],
+  ['anima-nova-rl', 'Nova Anime AM v5 + Anima RL add-on (weight 1.2)', 'The add-on you found: slightly softer lighting, calmer colours, a bit more detail. Same style and characters.'],
   ['sdxl-waiIllustriousSDXL_v170', 'WAI-Illustrious v17 (SDXL)', 'The most popular anime model. Clean and consistent; about 12 seconds per image.'],
   ['sdxl-waiMature', 'WAI-Mature', 'WAI tuned toward adult faces and figures.'],
   ['sdxl-hassaku', 'Hassaku XL', 'Detailed, slightly softer faces.'],

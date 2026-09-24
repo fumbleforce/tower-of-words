@@ -16,8 +16,9 @@ def _get(path):
 
 
 def anima(prompt, negative, model='novaAnimeAM_v5.safetensors', w=1024, h=1344, steps=30, cfg=5.0,
-          sampler='euler_ancestral', scheduler='normal', seed=None):
-    return {
+          sampler='euler_ancestral', scheduler='normal', seed=None, loras=()):
+    """loras: list of (filename, weight) applied to the diffusion model."""
+    wf = {
         '1': {'class_type': 'UNETLoader', 'inputs': {'unet_name': model, 'weight_dtype': 'default'}},
         '2': {'class_type': 'CLIPLoader', 'inputs': {'clip_name': 'qwen_3_06b_base.safetensors', 'type': 'stable_diffusion'}},
         '3': {'class_type': 'VAELoader', 'inputs': {'vae_name': 'qwen_image_vae.safetensors'}},
@@ -30,6 +31,13 @@ def anima(prompt, negative, model='novaAnimeAM_v5.safetensors', w=1024, h=1344, 
         '8': {'class_type': 'VAEDecode', 'inputs': {'samples': ['7', 0], 'vae': ['3', 0]}},
         '9': {'class_type': 'SaveImage', 'inputs': {'images': ['8', 0], 'filename_prefix': 'kotodama'}},
     }
+    model = ['1', 0]
+    for i, (name, weight) in enumerate(loras):
+        nid = f'L{i}'
+        wf[nid] = {'class_type': 'LoraLoaderModelOnly', 'inputs': {'model': model, 'lora_name': name, 'strength_model': weight}}
+        model = [nid, 0]
+    wf['7']['inputs']['model'] = model
+    return wf
 
 
 def sdxl(prompt, negative, ckpt, lora=None, lora_weight=0.8, w=832, h=1216, steps=28, cfg=5.5,
