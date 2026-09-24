@@ -33,7 +33,7 @@ function freshState() {
     day: 1, scene: null, time: 8 * 60 + 40, task: '', flags: {}, rel: {}, suspicion: 0, breath: BREATH_PER_DAY,
     messages: [], order: null, spells: [], rewards: [], grammar: { right: 0, total: 0 }, dayLog: {},
     settings: {
-      listenFirst: true, discreet: TOUCH, freeTyping: !TOUCH,
+      karaoke: true, discreet: TOUCH, freeTyping: !TOUCH,
       llmEndpoint: 'http://127.0.0.1:8190/v1', llmKey: '', llmModel: '',
     },
   };
@@ -152,16 +152,15 @@ function romaji(kana) {
   return out;
 }
 const isKata = s => /^[ァ-ヺー]+$/.test(s);
+const hasKanji = s => /[\u3400-\u9fff々〆]/.test(s);
 function wordHTML(key, surface, reading, opts) {
   reading = reading || GLOSSARY[key]?.r || surface;
   const g = GLOSSARY[key] || { lv: 1 };
   const st = opts.forceKana ? Math.min(word(key).stage, 1) || 1 : word(key).stage;
   const attrs = `class="w${g.lv >= 3 ? ' adv' : ''}${st >= 3 ? ' known' : ''}" data-key="${key}" data-read="${reading}" data-surf="${surface}"`;
-  if (surface === reading) {
-    if (isKata(surface) && st === 0) return `<span ${attrs}><ruby>${surface}<rt>${romaji(reading)}</rt></ruby></span>`;
-    return `<span ${attrs}>${surface}</span>`;
-  }
-  if (g.lv >= 3 && st < 3) return st === 0 ? `<span ${attrs}><ruby>${reading}<rt>${romaji(reading)}</rt></ruby></span>` : `<span ${attrs}>${reading}</span>`;
+  // Never put a reading above text that is already kana.
+  if (surface === reading || !hasKanji(surface)) return `<span ${attrs}>${surface}</span>`;
+  if (g.lv >= 3 && st < 3) return `<span ${attrs}>${reading}</span>`;
   if (st >= 2) return `<span ${attrs}>${surface}</span>`;
   return `<span ${attrs}><ruby>${surface}<rt>${st === 0 ? romaji(reading) : reading}</rt></ruby></span>`;
 }
@@ -274,7 +273,7 @@ function openPhone() {
   } else {
     const st = S.settings;
     body.innerHTML = `
-      <label>Listen first (text blurs until the voice ends) <input type="checkbox" id="setLF" ${st.listenFirst ? 'checked' : ''}></label>
+      <label>Follow-along text (words light up as they're spoken) <input type="checkbox" id="setLF" ${st.karaoke !== false ? 'checked' : ''}></label>
       <label>Discreet mode (hide reward pictures) <input type="checkbox" id="setDS" ${st.discreet ? 'checked' : ''}></label>
       <label>Free typing in conversations <input type="checkbox" id="setFT" ${st.freeTyping ? 'checked' : ''}></label>
       <div class="ph-block"><b>Conversation AI</b><div class="small">An OpenAI-compatible endpoint: the local llama.cpp server (default) or OpenRouter. The key stays in this browser.</div>
@@ -284,7 +283,7 @@ function openPhone() {
       <div class="ph-block"><b>Jump to a day</b> <span class="small">(for testing; keeps flags)</span><div id="setDays" class="ph-days"></div></div>
       <button id="setRS" class="ph-close" style="background:#3a1a14">Restart the week (keeps your words)</button>`;
     setTimeout(() => {
-      $('#setLF').onchange = e => { st.listenFirst = e.target.checked; save(); };
+      $('#setLF').onchange = e => { st.karaoke = e.target.checked; save(); };
       $('#setDS').onchange = e => { st.discreet = e.target.checked; save(); };
       $('#setFT').onchange = e => { st.freeTyping = e.target.checked; save(); };
       $('#setEP').onchange = e => { st.llmEndpoint = e.target.value.trim(); save(); };
@@ -323,7 +322,9 @@ function setBg(name) {
 }
 const onStage = {};
 const FALLBACK_EXPR = ['neutral', 'smile', 'bored', 'cold', 'grin', 'smirk', 'serious', 'panic', 'surprised', 'suspicious', 'confused', 'tired'];
+const EXPR_ALIAS = { emi: { smirk: 'teasing', bored: 'neutral', serious: 'neutral', tired: 'worried', panic: 'worried', cold: 'neutral', grin: 'laughing' } };
 function loadSprite(img, id, expr, done) {
+  expr = EXPR_ALIAS[id]?.[expr] || expr;
   const tries = [expr, ...FALLBACK_EXPR.filter(e => e !== expr)];
   let i = 0;
   const next = () => {
@@ -351,8 +352,29 @@ function defaultSpot() { const used = Object.values(onStage).map(el => ['left', 
 
 /* ---------------- input helpers ---------------- */
 let keyHandler = null, englishHandler = null;
+let backlogEl = null;
+function openBacklog() {
+  if (backlogEl || !backlog.length) return;
+  backlogEl = h('div', 'backlog');
+  const list = h('div', 'bl-list');
+  for (const b of backlog) {
+    const row = h('div', 'bl-row');
+    row.append(h('div', 'bl-who', b.who || ''), h('div', b.jp ? 'bl-jp' : 'bl-narr', b.jp ? renderJP(b.jp) : b.en));
+    if (b.voice) { const r = h('button', 'bl-play', '♪'); r.onclick = e => { e.stopPropagation(); playVoice(b.voice[0], b.voice[1], .85); }; row.append(r); }
+    list.append(row);
+  }
+  backlogEl.append(h('div', 'bl-head', 'Backlog · scroll down or Esc to return'), list);
+  ui.append(backlogEl);
+  list.scrollTop = list.scrollHeight;
+  backlogEl.addEventListener('click', e => e.stopPropagation());
+  list.addEventListener('wheel', e => { if (e.deltaY > 0 && list.scrollTop + list.clientHeight >= list.scrollHeight - 2) closeBacklog(); });
+}
+function closeBacklog() { backlogEl?.remove(); backlogEl = null; }
+stage.addEventListener('wheel', e => { if (e.deltaY < 0 && !backlogEl && !e.target.closest('#phone')) openBacklog(); }, { passive: true });
 addEventListener('keydown', e => {
   if (e.target.tagName === 'INPUT') return;
+  if (e.key === 'PageUp') { e.preventDefault(); openBacklog(); return; }
+  if (backlogEl) { if (e.key === 'Escape' || e.key === 'PageDown') closeBacklog(); return; }
   if (e.key === 'p' || e.key === 'P') { phone.hidden ? openPhone() : closePhone(); return; }
   if (e.key === 'Escape') { closePhone(); return; }
   if (e.key === 'r' || e.key === 'R') { replay(); return; }
@@ -392,59 +414,69 @@ function englishButton(container, markups, reveal) {
 /* ---------------- lines ---------------- */
 // Control hints show for the first few lines only.
 function hint(text) { S.hints = (S.hints || 0) + 1; return S.hints <= 6 ? text : ''; }
-let pendingListen = null;
+// Karaoke: characters light up in proportion to the audio's progress. Punctuation counts as a short pause.
+function karaoke(line, audio) {
+  const spans = [];
+  const walk = node => {
+    for (const n of [...node.childNodes]) {
+      if (n.nodeType === 3) {
+        const frag = document.createDocumentFragment();
+        for (const ch of n.textContent) { const sp = document.createElement('span'); sp.className = 'k'; sp.textContent = ch; frag.append(sp); spans.push(sp); }
+        n.replaceWith(frag);
+      } else if (n.nodeName !== 'RT') walk(n);
+    }
+  };
+  walk(line);
+  const weight = ch => ('、。，．…？！?!　'.includes(ch.textContent) ? 2.2 : 1);
+  const cum = []; let tot = 0; for (const sp of spans) { tot += weight(sp); cum.push(tot); }
+  line.classList.add('karaoke');
+  let raf;
+  const tick = () => {
+    if (!audio.duration) { raf = requestAnimationFrame(tick); return; }
+    // Voices have a little silence at both ends; map the middle 90% of the clip onto the text.
+    const p = Math.min(1, Math.max(0, (audio.currentTime / audio.duration - .04) / .9)) * tot;
+    spans.forEach((sp, i) => sp.classList.toggle('on', cum[i] - weight(sp) < p));
+    if (!audio.ended && !audio.paused) raf = requestAnimationFrame(tick); else if (audio.ended) finish();
+  };
+  const finish = () => { cancelAnimationFrame(raf); line.classList.add('done'); };
+  audio.addEventListener('play', () => { line.classList.remove('done'); raf = requestAnimationFrame(tick); });
+  audio.addEventListener('ended', finish);
+  raf = requestAnimationFrame(tick);
+  return finish;
+}
+// Backlog: every spoken line, message and player line, for scrolling back.
+const backlog = [];
+function logLine(who, jp, en, voice) { backlog.push({ who, jp, en, voice }); if (backlog.length > 300) backlog.shift(); }
 async function say(st) {
   const who = st.say, c = CAST[who] || { name: who, color: '#fff' };
-  if (who !== 'announcer') { if (!onStage[who]) showChar(who, st.expr, defaultSpot()); else setExpr(who, st.expr); }
-  focusSpeaker(who === 'announcer' ? null : who);
+  if (who !== 'announcer' && who !== 'player') { if (!onStage[who]) showChar(who, st.expr, defaultSpot()); else setExpr(who, st.expr); }
+  focusSpeaker(who === 'announcer' || who === 'player' ? null : who);
   markSeen(st.jp);
+  logLine(c.name, st.jp, st.en, [who, plain(st.jp)]);
   const box = h('div', 'subs');
   box.append(h('div', 'who', `<span style="color:${c.color}">${c.name}</span>`));
   const a = playVoice(who, plain(st.jp));
-  if (st.listen) {
-    // A listening check: no text until you act on what you heard.
-    box.append(h('div', 'line listen-only', '♪ ………'));
-    box.append(h('div', 'hint', hint('listen · R: replay · click / space: continue')));
-    ui.innerHTML = ''; ui.append(box);
-    pendingListen = st;
-    await waitAdvance();
-    return;
-  }
   const line = h('div', 'line', renderJP(st.jp));
   box.append(line);
-  const en = h('div', 'en', st.en); en.hidden = true; box.append(en);
+  const en = h('div', 'en', st.en || ''); en.hidden = true; box.append(en);
   const tools = h('div', 'hint', hint('click / space: continue · R: replay · tap a word: meaning '));
   box.append(tools);
   ui.innerHTML = ''; ui.append(box);
-  englishButton(tools, [st.jp], () => { en.hidden = false; });
-  let blurred = false;
-  if (a && S.settings.listenFirst) {
-    line.classList.add('listen'); blurred = true;
-    a.addEventListener('ended', () => { line.classList.remove('listen'); blurred = false; });
-  }
-  await waitAdvance(() => { if (blurred) { line.classList.remove('listen'); blurred = false; return false; } return true; });
+  if (st.en) englishButton(tools, [st.jp], () => { en.hidden = false; });
+  let finish = null;
+  if (a && S.settings.karaoke !== false) finish = karaoke(line, a);
+  if (st.auto) { if (a) await new Promise(r => { a.addEventListener('ended', r); setTimeout(r, 6000); }); else await sleep(900); return; }
+  // First press while a line is still being spoken shows it all; the next press continues.
+  await waitAdvance(() => { if (finish && !line.classList.contains('done') && a && !a.ended) { finish(); return false; } return true; });
   voiceEl?.pause();
 }
-async function recapListen() {
-  if (!pendingListen) return;
-  const st = pendingListen; pendingListen = null;
-  const c = CAST[st.say] || { name: st.say, color: '#fff' };
-  const box = h('div', 'subs');
-  box.append(h('div', 'who', `<span style="color:${c.color}">${c.name}</span> <span class="small-tag">what you heard</span>`));
-  box.append(h('div', 'line', renderJP(st.jp)));
-  const en = h('div', 'en', st.en); en.hidden = true; box.append(en);
-  const tools = h('div', 'hint', 'click / space: continue '); box.append(tools);
-  ui.innerHTML = ''; ui.append(box);
-  englishButton(tools, [st.jp], () => { en.hidden = false; });
-  await waitAdvance();
-}
 async function narrate(text) {
-  focusSpeaker(null);
+  focusSpeaker(null); logLine('', '', text, null);
   const box = h('div', 'subs'); box.append(h('div', 'narr', text)); ui.innerHTML = ''; ui.append(box);
   await waitAdvance();
 }
 async function notify(m) {
-  focusSpeaker(null); markSeen(m.jp);
+  focusSpeaker(null); markSeen(m.jp); logLine(CAST[m.from]?.name || m.from, m.jp, m.en, null);
   const box = h('div', 'subs');
   box.append(h('div', 'who', `<span style="color:#ff9a8a">${CAST[m.from]?.name || m.from}</span>　<span class="small-tag">chat</span>`));
   box.append(h('div', 'line', renderJP(m.jp)));
@@ -516,13 +548,13 @@ async function choose(c) {
       wrap.append(b); btns.push(b); return b;
     });
     const tools = h('div', 'choice-tools'); wrap.append(tools);
-    if (pendingListen) { const rp = h('button', 'replay', '♪ replay <kbd>R</kbd>'); rp.onclick = e => { e.stopPropagation(); replay(); }; tools.append(rp); }
+    if (lastVoice) { const rp = h('button', 'replay', '♪ <kbd>R</kbd>'); rp.onclick = e => { e.stopPropagation(); replay(); }; tools.append(rp); }
     if (c.show !== 'en') englishButton(tools, options.map(o => o.jp), () => btns.forEach(b => { const e = b.querySelector('.en'); if (e) e.hidden = false; }));
     const chosen = await pending;
-    if (c.show !== 'en') { markSeen(chosen.jp); if (!chosen.jp.startsWith('（')) { const a = playVoice('player', plain(chosen.jp)); if (a) await new Promise(r => { a.onended = r; setTimeout(r, 4000); }); } }
+    if (c.show !== 'en' && !chosen.jp.startsWith('（')) await say({ say: 'player', jp: chosen.jp, en: chosen.en, auto: true });
+    else if (c.show !== 'en') markSeen(chosen.jp);
     if (options.some(o => o.correct)) { S.grammar.total++; if (chosen.correct) S.grammar.right++; }
     if (chosen.fx) for (const [k, v] of Object.entries(chosen.fx)) S.rel[k] = (S.rel[k] || 0) + v;
-    await recapListen();
     const r = await exec(chosen.then || []);
     if (r) return r;
     if (!chosen.retry) return;
@@ -870,6 +902,9 @@ async function summary() {
   startDay(S.day + 1); save();
   return new Goto(DAYS[S.day]);
 }
+
+/* ---------------- test hooks ---------------- */
+window.__amakawa = { renderJP, word, GLOSSARY, SCENES, L: () => L };
 
 /* ---------------- title & main loop ---------------- */
 async function title() {
