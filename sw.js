@@ -1,5 +1,5 @@
 // Offline-first: serve from cache, refresh the cache in the background when online.
-const VERSION = 'tower-v2';
+const VERSION = 'tower-v3';
 const FILES = ['./', 'index.html', 'style.css', 'app.js', 'manifest.json', 'icons/icon.svg', 'icons/icon-192.png', 'icons/icon-512.png',
   ...Array.from({ length: 12 }, (_, i) => `data/floor${String(i + 1).padStart(2, '0')}.js`)];
 

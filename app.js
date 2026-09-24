@@ -903,20 +903,19 @@ function onboard() {
   const steps = [
     () => [h('div', { class: 'result-big jp', style: 'margin-top:12vh' }, '塔'), h('h1', { class: 'center' }, 'Tower of Words'),
       h('p', { class: 'story center' }, 'You put on the headset. The world fades to white. A cold voice speaks: 「ようこそ、ハンター。」'),
-      h('p', { class: 'story center' }, 'The <em>logout button</em> is gone. The only way out is up: twelve floors, each guarded by a boss that only understands Japanese.')],
+      h('p', { class: 'story center', html: 'The <em>logout button</em> is gone. The only way out is up: twelve floors, each guarded by a boss that only understands Japanese.' })],
     () => [h('h2', { style: 'margin-top:10vh' }, 'What should the Tower call you?'), name],
     () => [h('h2', { style: 'margin-top:8vh' }, 'How this works'),
       h('div', { class: 'panel stack' },
-        h('p', {}, '⚔ <b>Quest</b> (~12 min): for train days. Reviews, new skills, a field battle.'),
-        h('p', {}, '🛡 <b>Patrol</b> (~5 min): for home days. Only what you\'re about to forget, plus a few new things.'),
-        h('p', {}, '👑 <b>Floor boss</b>: a dialogue scene. Beat it to climb.'),
+        h('p', { html: '⚔ <b>Quest</b> (~12 min): for train days. Reviews, new skills, a field battle.' }),
+        h('p', { html: '🛡 <b>Patrol</b> (~5 min): for home days. Only what you\'re about to forget, plus a few new things.' }),
+        h('p', { html: '👑 <b>Floor boss</b>: a dialogue scene. Beat it to climb.' }),
         h('p', {}, '📴 Works offline. No streaks: skipped days cost nothing.'),
         h('p', { class: 'dim small' }, 'Tip: add this page to your home screen so it opens like an app and keeps your save safe.'))],
   ];
   let i = 0;
   function show() {
     const kids = steps[i]();
-    kids.forEach(k => { if (k.tagName === 'P' && /<em>|<b>/.test(k.textContent)) k.innerHTML = k.textContent; });
     mount(h('div', { class: 'stack' }, ...kids, h('button', { class: 'btn primary', style: 'margin-top:20px', onclick: () => {
       if (i === 1) { S.name = name.value.trim() || 'Hunter'; }
       if (++i < steps.length) show(); else { S.onboarded = true; save(); go('home'); }
