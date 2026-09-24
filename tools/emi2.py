@@ -28,6 +28,8 @@ EXPR = {
     'surprised': 'surprised, eyebrows raised, mouth slightly open',
     'teasing': 'teasing playful smirk, one eyebrow raised, arms crossed',
     'neutral': 'calm neutral expression, relaxed mouth',
+    'embarrassed': 'embarrassed, blushing, awkward smile, looking slightly away',
+    'worried': 'worried, eyebrows drawn together, lips pressed, concerned',
 }
 MODELS = {'rdbt': 'rdbtAnima.safetensors', 'nova': 'novaAnimeAM_v5.safetensors'}
 
@@ -44,6 +46,8 @@ def go(path, prompt, seed, model):
 
 
 mode = sys.argv[1] if len(sys.argv) > 1 else 'full'
+if mode == 'final':
+    pass
 ONLY = sys.argv[2:]
 for tag, model in MODELS.items():
     if ONLY and tag not in ONLY:
@@ -56,3 +60,16 @@ for tag, model in MODELS.items():
     if mode in ('full', 'expr'):
         for e, ed in EXPR.items():
             go(os.path.join(d, f'work-{e}.png'), f'{Q}, 1girl, solo, {BASE}, {WORK}, {ed}, {FRAME}', 41, model)
+
+
+def final():
+    """Final Emi: round-3 prompt, RDBT seed 41. Writes art/slice/ch/emi-<expr>.png."""
+    ch = os.path.join(os.path.dirname(__file__), '..', 'art', 'slice', 'ch')
+    model = MODELS['rdbt']
+    for e, ed in EXPR.items():
+        go(os.path.join(ch, f'emi-{e}.png'), f'{Q}, 1girl, solo, {BASE}, {WORK}, {ed}, {FRAME}', 41, model)
+    for e in ('smile', 'neutral'):
+        go(os.path.join(ch, f'emi-dress-{e}.png'), f'{Q}, 1girl, solo, {BASE}, {DRESS}, {EXPR[e]}, {FRAME}', 41, model)
+
+if mode == 'final':
+    final()
