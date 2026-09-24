@@ -2,3 +2,5 @@
 node_modules/
 dist/
 art/**/*.wav
+art/company/local2/
+art/company/local/
