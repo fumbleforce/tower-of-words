@@ -30,7 +30,9 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .ch.left { left: 8%; } .ch.center { left: 50%; transform: translateX(-50%); } .ch.right { left: auto; right: 6%; }
 .ch.dim img { filter: var(--tint) brightness(.62) saturate(.8); }
 .ch.enter { opacity: 0; }
-@media (max-aspect-ratio: 1/1) { .ch { height: 76%; bottom: 14%; } .ch.left { left: -10%; } .ch.right { right: -12%; } }
+@media (max-aspect-ratio: 1/1) { .ch { height: 76%; bottom: 14%; } .ch.left { left: -10%; } .ch.right { right: -12%; }
+  /* The sprite ends above the subtitles here, so fade its cut-off waist instead of showing a hard edge. */
+  .ch img { -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 7%, #000 80%, transparent 99%); mask-image: linear-gradient(180deg, transparent 0, #000 7%, #000 80%, transparent 99%); } }
 
 /* HUD: task (top left) and phone button with the Japanese clock (top right) */
 #hud { position: absolute; inset: 0; pointer-events: none; z-index: 5; }
