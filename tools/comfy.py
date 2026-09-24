@@ -61,6 +61,54 @@ def sdxl(prompt, negative, ckpt, lora=None, lora_weight=0.8, w=832, h=1216, step
     return wf
 
 
+LUMINA_SYSTEM = 'You are an assistant designed to generate anime images based on textual prompts. <Prompt Start> '
+
+
+def lumina(prompt, negative, ckpt='netayumeLumina.safetensors', w=1024, h=1344, steps=30, cfg=4.5, shift=4.0, seed=None):
+    """Lumina Image 2.0 family (NetaYume Lumina): all-in-one checkpoint, system-prompt prefix, AuraFlow sampling shift."""
+    return {
+        '1': {'class_type': 'CheckpointLoaderSimple', 'inputs': {'ckpt_name': ckpt}},
+        '2': {'class_type': 'ModelSamplingAuraFlow', 'inputs': {'model': ['1', 0], 'shift': shift}},
+        '4': {'class_type': 'CLIPTextEncode', 'inputs': {'text': LUMINA_SYSTEM + prompt, 'clip': ['1', 1]}},
+        '5': {'class_type': 'CLIPTextEncode', 'inputs': {'text': negative, 'clip': ['1', 1]}},
+        '6': {'class_type': 'EmptySD3LatentImage', 'inputs': {'width': w, 'height': h, 'batch_size': 1}},
+        '7': {'class_type': 'KSampler', 'inputs': {'model': ['2', 0], 'positive': ['4', 0], 'negative': ['5', 0], 'latent_image': ['6', 0],
+                                                   'seed': seed if seed is not None else random.randint(0, 2**32), 'steps': steps, 'cfg': cfg,
+                                                   'sampler_name': 'res_multistep', 'scheduler': 'simple', 'denoise': 1.0}},
+        '8': {'class_type': 'VAEDecode', 'inputs': {'samples': ['7', 0], 'vae': ['1', 2]}},
+        '9': {'class_type': 'SaveImage', 'inputs': {'images': ['8', 0], 'filename_prefix': 'kotodama'}},
+    }
+
+
+def upload(path):
+    """Upload a local image to ComfyUI's input folder; returns the name to use in LoadImage."""
+    import uuid
+    boundary = uuid.uuid4().hex
+    name = os.path.basename(path)
+    with open(path, 'rb') as f:
+        data = f.read()
+    body = (f'--{boundary}\r\nContent-Disposition: form-data; name="image"; filename="{name}"\r\n'
+            f'Content-Type: image/png\r\n\r\n').encode() + data + f'\r\n--{boundary}\r\nContent-Disposition: form-data; name="overwrite"\r\n\r\ntrue\r\n--{boundary}--\r\n'.encode()
+    req = urllib.request.Request(HOST + '/upload/image', data=body, headers={'Content-Type': f'multipart/form-data; boundary={boundary}'})
+    return json.loads(urllib.request.urlopen(req).read())['name']
+
+
+def sdxl_refine(image_name, prompt, negative, ckpt, denoise=0.4, steps=28, cfg=5.5, seed=None):
+    """Image-to-image: repaint an existing image (e.g. an Anima composition) in an SDXL model's style."""
+    return {
+        '1': {'class_type': 'CheckpointLoaderSimple', 'inputs': {'ckpt_name': ckpt}},
+        '2': {'class_type': 'LoadImage', 'inputs': {'image': image_name}},
+        '3': {'class_type': 'VAEEncode', 'inputs': {'pixels': ['2', 0], 'vae': ['1', 2]}},
+        '4': {'class_type': 'CLIPTextEncode', 'inputs': {'text': prompt, 'clip': ['1', 1]}},
+        '5': {'class_type': 'CLIPTextEncode', 'inputs': {'text': negative, 'clip': ['1', 1]}},
+        '7': {'class_type': 'KSampler', 'inputs': {'model': ['1', 0], 'positive': ['4', 0], 'negative': ['5', 0], 'latent_image': ['3', 0],
+                                                   'seed': seed if seed is not None else random.randint(0, 2**32), 'steps': steps, 'cfg': cfg,
+                                                   'sampler_name': 'euler_ancestral', 'scheduler': 'normal', 'denoise': denoise}},
+        '8': {'class_type': 'VAEDecode', 'inputs': {'samples': ['7', 0], 'vae': ['1', 2]}},
+        '9': {'class_type': 'SaveImage', 'inputs': {'images': ['8', 0], 'filename_prefix': 'kotodama-refine'}},
+    }
+
+
 def run(workflow, out_path, timeout=900):
     """Queue a workflow, wait for it, save the first output image to out_path."""
     pid = _post('/prompt', {'prompt': workflow})['prompt_id']
