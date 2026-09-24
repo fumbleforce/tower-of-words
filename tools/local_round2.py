@@ -37,7 +37,7 @@ SDXL_N = 'lowres, bad anatomy, bad hands, missing fingers, extra digits, extra a
 ANIMA_Q = 'masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic'
 ANIMA_N = 'worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, bad anatomy, bad hands, missing fingers, extra fingers, child, loli'
 MODELS = [('anima', None), ('novaXL', 'novaAnime.safetensors'), ('oneObsession', 'oneObsession.safetensors'),
-          ('hassaku', 'hassaku.safetensors'), ('waiMature', 'waiMature.safetensors')]
+          ('waiMature', 'waiMature.safetensors')]
 
 for name, ckpt in MODELS:
     for scene, (tags, text, w, h, rating) in SCENES.items():
