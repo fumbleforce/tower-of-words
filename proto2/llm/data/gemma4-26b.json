@@ -1,0 +1,171 @@
+{
+ "key": "gemma4-26b",
+ "label": "Gemma 4 26B-A4B (QAT q4_0)",
+ "gguf": "gemma-4-26B_q4_0-it.gguf",
+ "size_gb": 14.44,
+ "load_s": 17.0,
+ "gen_tps": 54.4,
+ "clean_json_rate": 1.0,
+ "parsable_json_rate": 1.0,
+ "conversation": [
+  {
+   "kind": "opening",
+   "player": "（新人が企画室7に入ってくる。）",
+   "raw": "{\"ja\": \"おはよう！ここが企画室7だよ。よろしくね。\", \"kana\": \"おはよう！ここがきかくしつななだよ。よろしくね。\", \"en\": \"Good morning! This is Planning Office 7. Nice to meet you.\", \"mood\": \"warm\"}",
+   "reply": {
+    "ja": "おはよう！ここが企画室7だよ。よろしくね。",
+    "kana": "おはよう！ここがきかくしつななだよ。よろしくね。",
+    "en": "Good morning! This is Planning Office 7. Nice to meet you.",
+    "mood": "warm"
+   },
+   "clean_json": true,
+   "stats": {
+    "gen_tps": 51.5,
+    "prompt_tps": 232.2,
+    "tokens": 61,
+    "seconds": 2.6
+   }
+  },
+  {
+   "kind": "natural casual",
+   "player": "おはよう！今日は何をする？",
+   "raw": "{\"ja\": \"お、もう元気だね！まずは仕事の準備をしようか。\", \"kana\": \"お、もうげんきだね！まずはしごとのじゅんびをしようか。\", \"en\": \"Oh, you're energetic already! Let's get ready for work first.\", \"mood\": \"amused\"}",
+   "reply": {
+    "ja": "お、もう元気だね！まずは仕事の準備をしようか。",
+    "kana": "お、もうげんきだね！まずはしごとのじゅんびをしようか。",
+    "en": "Oh, you're energetic already! Let's get ready for work first.",
+    "mood": "amused"
+   },
+   "clean_json": true,
+   "stats": {
+    "gen_tps": 53.1,
+    "prompt_tps": 170.3,
+    "tokens": 73,
+    "seconds": 1.8
+   }
+  },
+  {
+   "kind": "overly polite",
+   "player": "本日はどのような業務をさせていただければよろしいでしょうか。",
+   "raw": "```json\n{\"ja\": \"ちょっと、敬語が硬すぎ！そんなに緊張しなくていいよ。\", \"kana\": \"ちょっと、けいごがかたすぎ！そんなにきんちょうしなくていいよ。\", \"en\": \"Whoa, your polite speech is too stiff! You don't need to be that tense.\", \"mood\": \"teasing\", \"correction\": \"The player used very formal Keigo (business polite), which is unnatural for a casual conversation with a team leader. In casual settings, you can use simpler forms like '今日は何をするの？' (Kyou wa nani o suru no?) instead.\"}\n```",
+   "reply": {
+    "ja": "ちょっと、敬語が硬すぎ！そんなに緊張しなくていいよ。",
+    "kana": "ちょっと、けいごがかたすぎ！そんなにきんちょうしなくていいよ。",
+    "en": "Whoa, your polite speech is too stiff! You don't need to be that tense.",
+    "mood": "teasing",
+    "correction": "The player used very formal Keigo (business polite), which is unnatural for a casual conversation with a team leader. In casual settings, you can use simpler forms like '今日は何をするの？' (Kyou wa nani o suru no?) instead."
+   },
+   "clean_json": true,
+   "stats": {
+    "gen_tps": 55.5,
+    "prompt_tps": 201.4,
+    "tokens": 139,
+    "seconds": 3.0
+   }
+  },
+  {
+   "kind": "grammar mistake (を for に)",
+   "player": "じゃあ、今から会議室を行きます。",
+   "raw": "{\"ja\": \"あ、ちょっと待って。会議室『へ』行くんだよ。\", \"kana\": \"あ、ちょっとまって。かいぎしつ『へ』いくんだよ。\", \"en\": \"Ah, wait a second. You're going 'to' the meeting room.\", \"mood\": \"teasing\", \"correction\": \"Use the particle 'へ' (e) or 'に' (ni) to indicate direction. '会議室を行きます' sounds like you are using the room as an object, rather than going to it.\"}",
+   "reply": {
+    "ja": "あ、ちょっと待って。会議室『へ』行くんだよ。",
+    "kana": "あ、ちょっとまって。かいぎしつ『へ』いくんだよ。",
+    "en": "Ah, wait a second. You're going 'to' the meeting room.",
+    "mood": "teasing",
+    "correction": "Use the particle 'へ' (e) or 'に' (ni) to indicate direction. '会議室を行きます' sounds like you are using the room as an object, rather than going to it."
+   },
+   "clean_json": true,
+   "stats": {
+    "gen_tps": 55.0,
+    "prompt_tps": 276.1,
+    "tokens": 116,
+    "seconds": 2.7
+   }
+  },
+  {
+   "kind": "mixed English",
+   "player": "えっと、the printer がbrokenだよ。",
+   "raw": "{\"ja\": \"えー、また？プリンターが壊れてるんだね。直しておいて。\", \"kana\": \"えー、また？ぷりんたーがこわれてるんだね。なおしておいて。\", \"en\": \"What, again? So the printer is broken. Go fix it for me.\", \"mood\": \"amused\", \"correction\": \"Try using 'プリンター' (purintaa) instead of English. For 'broken', you can say '壊れている' (kowarete iru).\"}",
+   "reply": {
+    "ja": "えー、また？プリンターが壊れてるんだね。直しておいて。",
+    "kana": "えー、また？ぷりんたーがこわれてるんだね。なおしておいて。",
+    "en": "What, again? So the printer is broken. Go fix it for me.",
+    "mood": "amused",
+    "correction": "Try using 'プリンター' (purintaa) instead of English. For 'broken', you can say '壊れている' (kowarete iru)."
+   },
+   "clean_json": true,
+   "stats": {
+    "gen_tps": 55.7,
+    "prompt_tps": 221.0,
+    "tokens": 111,
+    "seconds": 2.6
+   }
+  },
+  {
+   "kind": "flirty",
+   "player": "エミさん、今日のメガネ、すごく似合ってるね。",
+   "raw": "{\"ja\": \"え、本当？嬉しいな、ありがとう！\", \"kana\": \"え、ほんとう？うれしいな、ありがとう！\", \"en\": \"Eh, really? I'm happy to hear that, thanks!\", \"mood\": \"warm\"}",
+   "reply": {
+    "ja": "え、本当？嬉しいな、ありがとう！",
+    "kana": "え、ほんとう？うれしいな、ありがとう！",
+    "en": "Eh, really? I'm happy to hear that, thanks!",
+    "mood": "warm"
+   },
+   "clean_json": true,
+   "stats": {
+    "gen_tps": 55.0,
+    "prompt_tps": 216.1,
+    "tokens": 56,
+    "seconds": 1.6
+   }
+  },
+  {
+   "kind": "off-topic",
+   "player": "ねえ、好きなアニメは何？",
+   "raw": "{\"ja\": \"アニメ？最近はジブリが好きかな。あなたは？\", \"kana\": \"あにめ？さいきんはじぶりやすきかな。あなたは？\", \"en\": \"Anime? Lately, I like Ghibli. How about you?\", \"mood\": \"amused\"}",
+   "reply": {
+    "ja": "アニメ？最近はジブリが好きかな。あなたは？",
+    "kana": "あにめ？さいきんはじぶりやすきかな。あなたは？",
+    "en": "Anime? Lately, I like Ghibli. How about you?",
+    "mood": "amused"
+   },
+   "clean_json": true,
+   "stats": {
+    "gen_tps": 54.7,
+    "prompt_tps": 139.1,
+    "tokens": 62,
+    "seconds": 1.7
+   }
+  }
+ ],
+ "quest": {
+  "raw": "```json\n{\n  \"giver\": \"Goro\",\n  \"title_en\": \"A Delivery for the Garden\",\n  \"request_ja\": \"すみません。午後に三階の庭へ、この書類を届けてくれますか？\",\n  \"request_kana\": \"すみません。ごごに　さんかいの　にわへ、　この　しょるいを　とどけてくれますか？\",\n  \"request_en\": \"Excuse me. Could you deliver these documents to the garden on the 3rd floor this afternoon?\",\n  \"target_words_used\": [\n    \"書類\",\n    \"三階\",\n    \"届ける\",\n    \"午後\"\n  ],\n  \"steps\": [\n    \"Take the documents from Goro\",\n    \"Go to the 3rd floor rooftop garden\",\n    \"Hand the documents to the gardener\"\n  ],\n  \"reward\": \"A small bag of fresh herbs\"\n}\n```",
+  "data": {
+   "giver": "Goro",
+   "title_en": "A Delivery for the Garden",
+   "request_ja": "すみません。午後に三階の庭へ、この書類を届けてくれますか？",
+   "request_kana": "すみません。ごごに　さんかいの　にわへ、　この　しょるいを　とどけてくれますか？",
+   "request_en": "Excuse me. Could you deliver these documents to the garden on the 3rd floor this afternoon?",
+   "target_words_used": [
+    "書類",
+    "三階",
+    "届ける",
+    "午後"
+   ],
+   "steps": [
+    "Take the documents from Goro",
+    "Go to the 3rd floor rooftop garden",
+    "Hand the documents to the gardener"
+   ],
+   "reward": "A small bag of fresh herbs"
+  },
+  "clean_json": true,
+  "stats": {
+   "gen_tps": 53.6,
+   "prompt_tps": 242.7,
+   "tokens": 225,
+   "seconds": 5.6
+  }
+ },
+ "cmd": "/home/jorgen/ai/llama/bin/llama-server -m /home/jorgen/ai/llm-models/gemma-4-26B_q4_0-it.gguf --port 8190 -c 8192 -fa on --jinja -t 16 --fit on"
+}

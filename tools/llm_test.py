@@ -13,11 +13,11 @@ MAIN = f'{HOME}/ai/llama/bin'
 PRISM = f'{HOME}/ai/llama-prism/llama-prism-b10735-842b188'
 # key: (label, bin dir, gguf, extra args)
 MODELS = {
-    'gemma4-12b': ('Gemma 4 12B (QAT q4_0)', MAIN, 'gemma-4-12b-it-qat-q4_0.gguf', ['-ngl', '99']),
-    'gemma4-26b': ('Gemma 4 26B-A4B (QAT q4_0)', MAIN, 'gemma-4-26B_q4_0-it.gguf', ['-ngl', '99', '--n-cpu-moe', '99']),
-    'orion': ('Orion 26B-A4B v1.1 (TheDrummer, Q4_K_M)', MAIN, 'TheDrummer_Orion-26B-A4B-v1.1-Q4_K_M.gguf', ['-ngl', '99', '--n-cpu-moe', '99']),
-    'swallow': ('Qwen3-Swallow 30B-A3B RL v0.2 (Q4_K_M)', MAIN, 'Qwen3-Swallow-30B-A3B-RL-v0.2-Q4_K_M.gguf', ['-ngl', '99', '--n-cpu-moe', '99']),
-    'bonsai': ('Ternary Bonsai 2 27B (PQ2_0)', PRISM, 'Ternary-Bonsai-2-27B-PQ2_0.gguf', ['-ngl', '99']),
+    'gemma4-12b': ('Gemma 4 12B (QAT q4_0)', MAIN, 'gemma-4-12b-it-qat-q4_0.gguf', ['--fit', 'on']),
+    'gemma4-26b': ('Gemma 4 26B-A4B (QAT q4_0)', MAIN, 'gemma-4-26B_q4_0-it.gguf', ['--fit', 'on']),
+    'orion': ('Orion 26B-A4B v1.1 (TheDrummer, Q4_K_M)', MAIN, 'TheDrummer_Orion-26B-A4B-v1.1-Q4_K_M.gguf', ['--fit', 'on']),
+    'swallow': ('Qwen3-Swallow 30B-A3B RL v0.2 (Q4_K_M)', MAIN, 'Qwen3-Swallow-30B-A3B-RL-v0.2-Q4_K_M.gguf', ['--fit', 'on', '--reasoning-format', 'deepseek']),
+    'bonsai': ('Ternary Bonsai 2 27B (PQ2_0)', PRISM, 'Ternary-Bonsai-2-27B-PQ2_0.gguf', ['--fit', 'on']),
 }
 
 SYSTEM = """You are Emi (真壁エミ), 32, the laid-back but sharp team leader of Planning Office 7, a small misfit team in the basement of the Amakawa conglomerate. You are talking with the new foreign hire on his first morning. You are relaxed, amused, a little teasing, warm underneath, and you speak casual Japanese (タメ口), never keigo.
@@ -75,20 +75,33 @@ def parse_json(text):
     return None, False
 
 
-def chat(messages, max_tokens=400):
+MAX_TOKENS = 400
+
+
+def chat(messages, max_tokens=None):
+    max_tokens = max_tokens or MAX_TOKENS
     t = time.time()
     r = post('/v1/chat/completions', {'messages': messages, 'temperature': 0.8, 'top_p': 0.95, 'max_tokens': max_tokens,
                                       'chat_template_kwargs': {'enable_thinking': False}})
-    text = r['choices'][0]['message'].get('content') or ''
+    msg = r['choices'][0]['message']
+    text = msg.get('content') or ''
     tm = r.get('timings', {})
     return text, {'gen_tps': round(tm.get('predicted_per_second', 0), 1), 'prompt_tps': round(tm.get('prompt_per_second', 0), 1),
-                  'tokens': tm.get('predicted_n'), 'seconds': round(time.time() - t, 1)}
+                  'tokens': tm.get('predicted_n'), 'seconds': round(time.time() - t, 1),
+                  'reasoning_chars': len(msg.get('reasoning_content') or '')}
+
+
+THINKERS = {'swallow'}  # reasoning models that ignore enable_thinking=false: give them room and measure it
 
 
 def run_model(key):
+    global MAX_TOKENS
+    MAX_TOKENS = 3000 if key in THINKERS else 400
     label, bindir, gguf, extra = MODELS[key]
     path = os.path.join(M, gguf)
     env = dict(os.environ, LD_LIBRARY_PATH=bindir)
+    if os.environ.get('LLM_CPU'):  # smoke test without touching the GPU
+        extra = ['-ngl', '0']
     cmd = [f'{bindir}/llama-server', '-m', path, '--port', str(PORT), '-c', '8192', '-fa', 'on', '--jinja', '-t', '16'] + extra
     log = open(os.path.join(OUT, f'{key}.server.log'), 'w')
     t0 = time.time()
@@ -103,7 +116,8 @@ def run_model(key):
         load_s = round(time.time() - t0, 1)
         msgs = [{'role': 'system', 'content': SYSTEM}]
         convo, stats, clean, ok = [], [], 0, 0
-        for kind, player in [('opening', OPENING)] + TURNS:
+        turns = TURNS[:1] if os.environ.get('LLM_SMOKE') else TURNS
+        for kind, player in [('opening', OPENING)] + turns:
             msgs.append({'role': 'user', 'content': player})
             text, st = chat(msgs)
             data, is_clean = parse_json(text)
@@ -112,10 +126,11 @@ def run_model(key):
             stats.append(st)
             convo.append({'kind': kind, 'player': player, 'raw': text, 'reply': data, 'clean_json': is_clean, 'stats': st})
             msgs.append({'role': 'assistant', 'content': json.dumps(data, ensure_ascii=False) if data else text})
-        qtext, qst = chat([{'role': 'system', 'content': QUEST_SYSTEM}, {'role': 'user', 'content': QUEST_USER}], max_tokens=700)
+        qtext, qst = chat([{'role': 'system', 'content': QUEST_SYSTEM}, {'role': 'user', 'content': QUEST_USER}], max_tokens=MAX_TOKENS + 300)
         qdata, qclean = parse_json(qtext)
         n = len(convo) + 1
-        res = {'key': key, 'label': label, 'gguf': gguf, 'size_gb': round(os.path.getsize(path) / 1e9, 2), 'load_s': load_s,
+        res = {'avg_seconds_per_reply': round(sum(s['seconds'] for s in stats) / len(stats), 1), 'thinks': key in THINKERS,
+               'key': key, 'label': label, 'gguf': gguf, 'size_gb': round(os.path.getsize(path) / 1e9, 2), 'load_s': load_s,
                'gen_tps': round(sum(s['gen_tps'] for s in stats) / len(stats), 1),
                'clean_json_rate': round((clean + qclean) / n, 2), 'parsable_json_rate': round((ok + (qdata is not None)) / n, 2),
                'conversation': convo, 'quest': {'raw': qtext, 'data': qdata, 'clean_json': qclean, 'stats': qst}, 'cmd': ' '.join(cmd)}

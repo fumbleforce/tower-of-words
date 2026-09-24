@@ -1,0 +1,184 @@
+{
+ "avg_seconds_per_reply": 5.6,
+ "thinks": false,
+ "key": "bonsai",
+ "label": "Ternary Bonsai 2 27B (PQ2_0)",
+ "gguf": "Ternary-Bonsai-2-27B-PQ2_0.gguf",
+ "size_gb": 7.21,
+ "load_s": 3.1,
+ "gen_tps": 15.6,
+ "clean_json_rate": 1.0,
+ "parsable_json_rate": 1.0,
+ "conversation": [
+  {
+   "kind": "opening",
+   "player": "（新人が企画室7に入ってくる。）",
+   "raw": "{\"ja\": \"おー、新しい人ね。あ、あ、ここでいい？\", \"kana\": \"おお、あたいにんね。あ、あ、こここでいい？\", \"en\": \"Oh, the new guy. Ah, ah, is here okay?\", \"mood\": \"amused\", \"correction\": null}",
+   "reply": {
+    "ja": "おー、新しい人ね。あ、あ、ここでいい？",
+    "kana": "おお、あたいにんね。あ、あ、こここでいい？",
+    "en": "Oh, the new guy. Ah, ah, is here okay?",
+    "mood": "amused",
+    "correction": null
+   },
+   "clean_json": true,
+   "stats": {
+    "gen_tps": 15.5,
+    "prompt_tps": 368.4,
+    "tokens": 73,
+    "seconds": 5.6,
+    "reasoning_chars": 0
+   }
+  },
+  {
+   "kind": "natural casual",
+   "player": "おはよう！今日は何をする？",
+   "raw": "{\"ja\": \"はは、いきなり質問じゃん。まず、コーヒー飲みなさい。\", \"kana\": \"はは、いきなりしつもんじゃん。まず、コーヒーのみなさい。\", \"en\": \"Haha, a question right away? First, drink some coffee.\", \"mood\": \"amused\", \"correction\": null}",
+   "reply": {
+    "ja": "はは、いきなり質問じゃん。まず、コーヒー飲みなさい。",
+    "kana": "はは、いきなりしつもんじゃん。まず、コーヒーのみなさい。",
+    "en": "Haha, a question right away? First, drink some coffee.",
+    "mood": "amused",
+    "correction": null
+   },
+   "clean_json": true,
+   "stats": {
+    "gen_tps": 15.5,
+    "prompt_tps": 155.6,
+    "tokens": 75,
+    "seconds": 5.4,
+    "reasoning_chars": 0
+   }
+  },
+  {
+   "kind": "overly polite",
+   "player": "本日はどのような業務をさせていただければよろしいでしょうか。",
+   "raw": "{\"ja\": \"うーん、ちょっとだけ、少しだけ。\", \"kana\": \"うん、ちょっとだけ、すこしだけ。\", \"en\": \"Hmm, just a little.\", \"mood\": \"teasing\", \"correction\": \"Use casual speech (plain form) with junior coworkers. For example: '本日、どんな仕事をする？' (Boujin, donna hatai o suru?) instead of formal keigo.\"}",
+   "reply": {
+    "ja": "うーん、ちょっとだけ、少しだけ。",
+    "kana": "うん、ちょっとだけ、すこしだけ。",
+    "en": "Hmm, just a little.",
+    "mood": "teasing",
+    "correction": "Use casual speech (plain form) with junior coworkers. For example: '本日、どんな仕事をする？' (Boujin, donna hatai o suru?) instead of formal keigo."
+   },
+   "clean_json": true,
+   "stats": {
+    "gen_tps": 15.3,
+    "prompt_tps": 152.9,
+    "tokens": 97,
+    "seconds": 7.0,
+    "reasoning_chars": 0
+   }
+  },
+  {
+   "kind": "grammar mistake (を for に)",
+   "player": "じゃあ、今から会議室を行きます。",
+   "raw": "{\"ja\": \"ええ、それで。それじゃ、行こう。\", \"kana\": \"え、そうだよ。それじゃ、いこう。\", \"en\": \"Yeah, that's it. Then, let's go.\", \"mood\": \"warm\", \"correction\": null}",
+   "reply": {
+    "ja": "ええ、それで。それじゃ、行こう。",
+    "kana": "え、そうだよ。それじゃ、いこう。",
+    "en": "Yeah, that's it. Then, let's go.",
+    "mood": "warm",
+    "correction": null
+   },
+   "clean_json": true,
+   "stats": {
+    "gen_tps": 15.3,
+    "prompt_tps": 39.4,
+    "tokens": 62,
+    "seconds": 4.6,
+    "reasoning_chars": 0
+   }
+  },
+  {
+   "kind": "mixed English",
+   "player": "えっと、the printer がbrokenだよ。",
+   "raw": "{\"ja\": \"え？また壊れたって。まあ、そんなもん、俺が直す。\", \"kana\": \"え？またはくれたって。まあ、そんなもん、おれがなおす。\", \"en\": \"What? Broken again? Well, I'll fix it.\", \"mood\": \"amused\", \"correction\": \"Keep it in Japanese: 'えっと、プリンターが壊れたよ。' (Etto, purintā ga kowareta yo.)\"}",
+   "reply": {
+    "ja": "え？また壊れたって。まあ、そんなもん、俺が直す。",
+    "kana": "え？またはくれたって。まあ、そんなもん、おれがなおす。",
+    "en": "What? Broken again? Well, I'll fix it.",
+    "mood": "amused",
+    "correction": "Keep it in Japanese: 'えっと、プリンターが壊れたよ。' (Etto, purintā ga kowareta yo.)"
+   },
+   "clean_json": true,
+   "stats": {
+    "gen_tps": 15.5,
+    "prompt_tps": 34.7,
+    "tokens": 108,
+    "seconds": 7.6,
+    "reasoning_chars": 0
+   }
+  },
+  {
+   "kind": "flirty",
+   "player": "エミさん、今日のメガネ、すごく似合ってるね。",
+   "raw": "{\"ja\": \"ふふ、ありがとうね。でも、それだけじゃないよ。\", \"kana\": \"ふふ、ありごうね。でも、それだけじゃないよ。\", \"en\": \"Hehe, thanks. But it's not just that.\", \"mood\": \"amused\", \"correction\": null}",
+   "reply": {
+    "ja": "ふふ、ありがとうね。でも、それだけじゃないよ。",
+    "kana": "ふふ、ありごうね。でも、それだけじゃないよ。",
+    "en": "Hehe, thanks. But it's not just that.",
+    "mood": "amused",
+    "correction": null
+   },
+   "clean_json": true,
+   "stats": {
+    "gen_tps": 16.0,
+    "prompt_tps": 190.5,
+    "tokens": 70,
+    "seconds": 5.0,
+    "reasoning_chars": 0
+   }
+  },
+  {
+   "kind": "off-topic",
+   "player": "ねえ、好きなアニメは何？",
+   "raw": "{\"ja\": \"ふふ、どうして？\", \"kana\": \"ふふ、どうして？\", \"en\": \"Hehe, why do you ask?\", \"mood\": \"amused\", \"correction\": null}",
+   "reply": {
+    "ja": "ふふ、どうして？",
+    "kana": "ふふ、どうして？",
+    "en": "Hehe, why do you ask?",
+    "mood": "amused",
+    "correction": null
+   },
+   "clean_json": true,
+   "stats": {
+    "gen_tps": 15.9,
+    "prompt_tps": 143.0,
+    "tokens": 49,
+    "seconds": 3.7,
+    "reasoning_chars": 0
+   }
+  }
+ ],
+ "quest": {
+  "raw": "{\n  \"giver\": \"Goro\",\n  \"title_en\": \"The Afternoon Papers\",\n  \"request_ja\": \"午後に三階へ行って、書類を届けてもらえますか。\",\n  \"request_kana\": \"ごちゅうかにさんかいへいって、しょるいをたててもらえますか。\",\n  \"request_en\": \"Could you go to the third floor in the afternoon and deliver the documents?\",\n  \"target_words_used\": [\n    \"書類\",\n    \"三階\",\n    \"届ける\",\n    \"午後\"\n  ],\n  \"steps\": [\n    \"Go to the third floor.\",\n    \"Bring the documents to the manager.\"\n  ],\n  \"reward\": \"Goro thanks you kindly.\"\n}",
+  "data": {
+   "giver": "Goro",
+   "title_en": "The Afternoon Papers",
+   "request_ja": "午後に三階へ行って、書類を届けてもらえますか。",
+   "request_kana": "ごちゅうかにさんかいへいって、しょるいをたててもらえますか。",
+   "request_en": "Could you go to the third floor in the afternoon and deliver the documents?",
+   "target_words_used": [
+    "書類",
+    "三階",
+    "届ける",
+    "午後"
+   ],
+   "steps": [
+    "Go to the third floor.",
+    "Bring the documents to the manager."
+   ],
+   "reward": "Goro thanks you kindly."
+  },
+  "clean_json": true,
+  "stats": {
+   "gen_tps": 16.0,
+   "prompt_tps": 326.4,
+   "tokens": 174,
+   "seconds": 11.6,
+   "reasoning_chars": 0
+  }
+ },
+ "cmd": "/home/jorgen/ai/llama-prism/llama-prism-b10735-842b188/llama-server -m /home/jorgen/ai/llm-models/Ternary-Bonsai-2-27B-PQ2_0.gguf --port 8190 -c 8192 -fa on --jinja -t 16 --fit on"
+}

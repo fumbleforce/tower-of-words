@@ -1,0 +1,179 @@
+{
+ "avg_seconds_per_reply": 12.4,
+ "thinks": true,
+ "key": "swallow",
+ "label": "Qwen3-Swallow 30B-A3B RL v0.2 (Q4_K_M)",
+ "gguf": "Qwen3-Swallow-30B-A3B-RL-v0.2-Q4_K_M.gguf",
+ "size_gb": 18.56,
+ "load_s": 14.0,
+ "gen_tps": 49.1,
+ "clean_json_rate": 0.12,
+ "parsable_json_rate": 0.88,
+ "conversation": [
+  {
+   "kind": "opening",
+   "player": "（新人が企画室7に入ってくる。）",
+   "raw": "We need to respond as Emi, greeting the new foreign hire on his first morning, in casual Japanese, short sentences, N5-N4 vocab. Include JSON with fields ja, kana, en, mood, correction. No English note unless there is a mistake. The player hasn't said anything yet, so we just speak to him.\n\nWe need to keep reply to 1 or 2 short sentences. So maybe:\n\n\"おはよう、エミです。企画室7のリーダーだよ。今日はゆっくりしてね。\"\n\nBut need to be natural, casual, maybe teasing about being foreign. Keep short.\n\nWe need to include \"kana\" fully in hiragana/katakana (no kanji). For English translation, natural.\n\nMood: amused maybe.\n\nCheck grammar: \"おはよう、エミです。\" is okay. \"企画室7のリーダーだよ。\" ok. \"今日はゆっくりしてね。\" ok.\n\nBut \"エミです\" might be \"エミです、よろしくね\". Could be fine.\n\nMake sure we keep to 1-2 short sentences. Could be two sentences. That's okay.\n\nNow produce JSON.\n\nja: Japanese line with kanji allowed.\n\nLet's craft: \"おはよう、エミです。企画室7のリーダーだよ。今日はゆっくりしてね。\"\n\nBut that's three sentences (two sentences before \"今日は\" and one after). Actually sentences separated by \"。\" count. We have three sentences. Must be 1 or 2 sentences. So combine maybe: \"おはよう、エミです。企画室7のリーダーだよ、今日はゆっくりしてね。\" That's two sentences? Actually first \"おはよう、エミです。\" is sentence 1. Then \"企画室7のリーダーだよ、今日はゆっくりしてね。\" second sentence. That's okay.\n\nNow kana: fully in hiragana/katakana. Need to convert all kanji to kana. Let's write the sentence in kana.\n\nFirst sentence: \"おはよう、えみです。\" (えみ is katakana maybe). But we need kana only, could be hiragana. \"エミ\" is katakana. Use \"エミ\". But kana field expects kana (hiragana/katakana). We'll write \"えみです\" maybe. Let's do \"おはよう、エミです。\" kana: \"おはよう、エミです。\" It includes katakana \"エミ\". That's okay.\n\nSecond sentence: \"企画室7のリーダーだよ、今日はゆっくりしてね。\" Need to convert kanji to kana. Let's write in kana: \"きかくしつ7のリーダーだよ、きょうはゆっくりしてね。\" But \"きかくしつ\" is hiragana, \"7\" is numeric, \"の\", \"リーダー\" katakana, \"だよ、\" etc. \"きょうはゆっくりしてね。\" is ok.\n\nCombine: \"おはよう、エミです。きかくしつ7のリーダーだよ、きょうはゆっくりしてね。\"\n\nCheck kana: all characters are hiragana/katakana? \"エミ\" katakana, ok. \"7\" is digit, fine. \"きかくしつ\", \"の\", \"リーダー\", \"だよ、\" includes punctuation. It's okay.\n\nNow English translation: \"Good morning, I'm Emi. I'm the leader of Planning Office 7, so just take it easy today.\" Slightly informal.\n\nMood: amused.\n\nNo correction needed.\n\nReturn JSON.\n</think>\n\n{\n  \"ja\": \"おはよう、エミです。企画室7のリーダーだよ、今日はゆっくりしてね。\",\n  \"kana\": \"おはよう、エミです。きかくしつ7のリーダーだよ、きょうはゆっくりしてね。\",\n  \"en\": \"Good morning, I'm Emi. I'm the leader of Planning Office 7, so just take it easy today.\",\n  \"mood\": \"amused\",\n  \"correction\": null\n}",
+   "reply": {
+    "ja": "おはよう、エミです。企画室7のリーダーだよ、今日はゆっくりしてね。",
+    "kana": "おはよう、エミです。きかくしつ7のリーダーだよ、きょうはゆっくりしてね。",
+    "en": "Good morning, I'm Emi. I'm the leader of Planning Office 7, so just take it easy today.",
+    "mood": "amused",
+    "correction": null
+   },
+   "clean_json": false,
+   "stats": {
+    "gen_tps": 48.3,
+    "prompt_tps": 139.5,
+    "tokens": 928,
+    "seconds": 21.6,
+    "reasoning_chars": 0
+   }
+  },
+  {
+   "kind": "natural casual",
+   "player": "おはよう！今日は何をする？",
+   "raw": "We need to respond in Japanese, casual, short 1-2 sentences, with English correction if needed. The user says \"おはよう！今日は何をする？\". Need to reply as Emi, relaxed, teasing, etc. Provide JSON object with fields: ja, kana, en, mood, correction.\n\nWe need to check grammar: \"今日は何をする？\" is fine. We'll respond with perhaps \"今日は簡単なミーティングから始めるよ。その後、資料作成だね。\" That's two sentences maybe okay. Keep 1-2 short sentences. Maybe: \"今日はまず朝会、次は資料作りだよ。\" That's two sentences? Actually one sentence with \"まず...、次は...\" is okay.\n\nWe must keep 1 or 2 short sentences. Provide Japanese line with kanji, then kana version, then English translation, mood (amused maybe), correction null.\n\nLet's craft.\n\nJapanese line: \"今日はまず朝会、次は資料作りだよ。\" That's one sentence.\n\nCheck grammar: \"まず朝会\" okay, \"次は資料作りだよ\" okay. Use casual speech. Good.\n\nNow kana: \"きょうはじゅうあさかい、つぎはしりょうづくりだよ。\" Need to convert \"朝会\" to kana \"あさかい\"? \"朝会\" reading is \"ちょうかい\"? Actually \"朝会\" is read \"ちょうかい\". But casual may say \"朝会\" as \"あさかい\"? I'd better use proper kana reading: \"あさかい\". But \"朝会\" reading is \"ちょうかい\". However \"朝会\" reading: \"朝会\" (ちょうかい) meaning morning meeting. In casual, they might say \"朝会\" as \"ちょうかい\". Let's use correct reading: \"ちょうかい\". So kana: \"きょうはじゅうちょうかい、つぎはしりょうづくりだよ。\" That's okay.\n\nBut the requirement: \"kana\": same line fully in hiragana/katakana. So we need to replace kanji with kana. So Japanese line includes kanji. Kana line should be hiragana only (maybe katakana for nouns?). Use hiragana for everything. So we convert \"今日はまず朝会、次は資料作りだよ。\" to kana:\n\n\"きょうはじゅうちょうかい、つぎはしりょうづくりだよ。\"\n\nCheck: \"朝会\" => \"ちょうかい\". \"資料作り\" => \"しりょうづくり\". \"だよ\" => \"だよ\". Good.\n\nNow English translation: \"Today we'll start with a morning meeting, then make some materials.\" Something like that.\n\nMood: \"amused\" maybe. Or \"friendly\". Let's choose \"amused\". The line is relaxed, teasing a bit. So \"amused\".\n\nCorrection: none.\n\nNow format JSON.\n\n{\"ja\": \"今日はまず朝会、次は資料作りだよ。\", \"kana\": \"きょうはじゅうちょうかい、つぎはしりょうづくりだよ。\", \"en\": \"Today we'll start with a morning meeting, then make some materials.\", \"mood\": \"amused\", \"correction\": null}\n\nMake sure JSON is valid. No extra spaces? It's fine.\n</think>\n\n{\"ja\": \"今日はまず朝会、次は資料作りだよ。\", \"kana\": \"きょうはじゅうちょうかい、つぎはしりょうづくりだよ。\", \"en\": \"Today we'll start with a morning meeting, then make some materials.\", \"mood\": \"amused\", \"correction\": null}",
+   "reply": null,
+   "clean_json": false,
+   "stats": {
+    "gen_tps": 49.0,
+    "prompt_tps": 231.0,
+    "tokens": 784,
+    "seconds": 16.6,
+    "reasoning_chars": 0
+   }
+  },
+  {
+   "kind": "overly polite",
+   "player": "本日はどのような業務をさせていただければよろしいでしょうか。",
+   "raw": "We need to respond in character as Emi, casual, teasing, relaxed. Must be 1-2 short sentences, N5/N4 level. Provide JSON with fields: ja, kana, en, mood, correction.\n\nUser: \"本日はどのような業務をさせていただければよろしいでしょうか。\" That's polite, formal. Emi should tease about being polite. She can respond: \"別に難しいことはないよ、資料の整理とか手伝ってね。\" Keep short 1-2 sentences. Maybe tease: \"そんなにかしこまる必要ないよ、リラックスしてね。\" Use casual Japanese. Provide correction if needed. The user used polite form, but we don't need correction? The user's sentence is fine; but Emi can tease about being overly polite. However the instruction says: if player is overly polite, tease him a little about it. So we should tease about his politeness.\n\nThus reply: \"そんなにかしこまらなくてもいいんだよ、資料の整理とか手伝ってくれたら嬉しいな。\" That's 2 sentences? Could be one sentence: \"そんなにかしこまらなくてもいいんだよ、資料の整理とか手伝ってくれたら嬉しいな。\" That's one sentence with comma, okay.\n\nLet's produce JSON.\n\nCheck grammar: \"そんなにかしこまらなくてもいいんだよ、資料の整理とか手伝ってくれたら嬉しいな。\" Good.\n\nNow provide kana: \"そんなにかしこまらなくてもいいんだよ、しりょうのせいりとかてつだってくれたらうれしいな。\" Use hiragana for kanji? Should be fully hiragana/katakana. Use hiragana for all words (including \"資料の整理\" => \"しりょうのせいり\"). Provide \"とかてつだってくれたら\" = \"とかてつだってくれたら\". Should be okay.\n\nMake sure to keep vocab within N5/N4: \"かしこまる\" maybe a bit advanced but okay? Maybe replace with \"堅苦しい\" or \"かしこまる\". Could use \"かしこまらなくてもいいんだよ\". Might be okay. Could also use simpler: \"そんなに固くならなくてもいいんだよ\". But keep simple.\n\nBetter: \"そんなにかしこまらなくてもいいんだよ、資料の整理とか手伝ってくれたら嬉しいな。\" Use \"かしこまる\" maybe okay. Could use \"固く\" but it's a bit more complex.\n\nLet's keep.\n\nNow kana: need to convert to hiragana/katakana. \"そんなにかしこまらなくてもいいんだよ、しりょうのせいりとかてつだってくれたらうれしいな。\" Use \"しりょう\" for 資料, \"せいり\" for 整理, \"とかてつだってくれたら\" maybe \"とかてつだってくれたら\". Use kana for all.\n\nCheck: \"とかてつだってくれたら\". Might be confusing. Could use \"とかてつだって\". Let's write: \"とかてつだってくれたら\". That's okay.\n\nNow English translation: \"You don't have to be so stiff, just help with整理資料 or something and I'll be happy.\" Let's keep: \"You don't have to be so stiff, just help with整理資料 and I'll be happy.\"\n\nMake sure mood: \"teasing\". correction null.\n\nNow produce JSON.\n</think>\n\n{\"ja\":\"そんなにかしこまらなくてもいいんだよ、資料の整理とか手伝ってくれたら嬉しいな。\",\"kana\":\"そんなにかしこまらなくてもいいんだよ、しりょうのせいりとかてつだってくれたらうれしいな。\",\"en\":\"You don't have to be so stiff, just help with整理資料 and I'll be happy.\",\"mood\":\"teasing\",\"correction\":null}",
+   "reply": {
+    "ja": "そんなにかしこまらなくてもいいんだよ、資料の整理とか手伝ってくれたら嬉しいな。",
+    "kana": "そんなにかしこまらなくてもいいんだよ、しりょうのせいりとかてつだってくれたらうれしいな。",
+    "en": "You don't have to be so stiff, just help with整理資料 and I'll be happy.",
+    "mood": "teasing",
+    "correction": null
+   },
+   "clean_json": false,
+   "stats": {
+    "gen_tps": 48.9,
+    "prompt_tps": 177.0,
+    "tokens": 829,
+    "seconds": 17.5,
+    "reasoning_chars": 0
+   }
+  },
+  {
+   "kind": "grammar mistake (を for に)",
+   "player": "じゃあ、今から会議室を行きます。",
+   "raw": "We need to respond in Japanese, casual, as Emi, short reply, include JSON with ja, kana, en, mood, correction.\n\nUser says: \"じゃあ、今から会議室を行きます。\" They are saying they will go to the meeting room. Emi should respond, perhaps teasing or amused.\n\nWe must keep reply to 1-2 sentences, using N5-N4 vocab.\n\n\"行きます\" is okay but maybe a bit polite; Emi could tease about being stiff. But we can just respond: \"わかった、あとで資料のチェック待ってるね。\" Keep short.\n\nLet's craft Japanese: \"了解、会議室で資料の確認待ってるね。\" That's okay. Use casual. 1 sentence.\n\nMake kana: \"りょうかい、かいぎしつでしりょうのかくにんまっているね。\"\n\nEnglish: \"Got it, I'll be waiting in the meeting room to check the documents.\"\n\nMood: \"amused\" or \"teasing\"? It's light. Maybe \"amused\". No correction needed.\n\nReturn JSON.\n</think>\n\n{\"ja\": \"了解、会議室で資料の確認待ってるね。\", \"kana\": \"りょうかい、かいぎしつでしりょうのかくにんまっているね。\", \"en\": \"Got it, I'll be waiting in the meeting room to check the documents.\", \"mood\": \"amused\", \"correction\": null}",
+   "reply": {
+    "ja": "了解、会議室で資料の確認待ってるね。",
+    "kana": "りょうかい、かいぎしつでしりょうのかくにんまっているね。",
+    "en": "Got it, I'll be waiting in the meeting room to check the documents.",
+    "mood": "amused",
+    "correction": null
+   },
+   "clean_json": false,
+   "stats": {
+    "gen_tps": 49.8,
+    "prompt_tps": 209.4,
+    "tokens": 313,
+    "seconds": 6.9,
+    "reasoning_chars": 0
+   }
+  },
+  {
+   "kind": "mixed English",
+   "player": "えっと、the printer がbrokenだよ。",
+   "raw": "User says: \"えっと、the printer がbrokenだよ。\" The assistant must respond in Japanese, casual tone, as Emi. The user mixed English \"the printer\". The assistant should correct: maybe \"printer\" is fine as loanword, but \"brokenだよ\" is fine. No need to correct? The English \"the printer\" is okay as loanword, but maybe they meant \"the printer\". The phrase \"the printer がbrokenだよ。\" is okay. No correction needed.\n\nWe need to reply in JSON format with fields ja, kana, en, mood, correction.\n\nWe need to be casual, teasing a bit about mixing English? The user mixed English \"the printer\". It's okay to respond lightly. Maybe tease: \"英語混じりだね\" but keep casual.\n\nAnswer: \"あ、プリンターが壊れたんだ？ すぐ修理依頼しようか。\" Keep short, two sentences.\n\nWe must produce JSON.\n\nCheck: Must keep 1 or 2 short sentences, mostly N5-N4 vocab. Sentence: \"あ、プリンターが壊れたんだ？ すぐ修理依頼しようか。\" That's two sentences.\n\nJapanese: \"あ、プリンターが壊れたんだ？ すぐ修理依頼しようか。\"\n\nKana: \"あ、ぷりんたーがこわれたんだ？ すぐしゅうりいねんしようか。\"\n\nEnglish: \"Ah, the printer broke? Shall we request a repair right away?\" Mood: amused? Could be \"amused\". No correction.\n\nReturn JSON.\n</think>\n\n{\"ja\":\"あ、プリンターが壊れたんだ？ すぐ修理依頼しようか。\",\"kana\":\"あ、ぷりんたーがこわれたんだ？ すぐしゅうりいねんしようか。\",\"en\":\"Ah, the printer broke? Shall we request a repair right away?\",\"mood\":\"amused\",\"correction\":null}",
+   "reply": {
+    "ja": "あ、プリンターが壊れたんだ？ すぐ修理依頼しようか。",
+    "kana": "あ、ぷりんたーがこわれたんだ？ すぐしゅうりいねんしようか。",
+    "en": "Ah, the printer broke? Shall we request a repair right away?",
+    "mood": "amused",
+    "correction": null
+   },
+   "clean_json": false,
+   "stats": {
+    "gen_tps": 49.7,
+    "prompt_tps": 184.3,
+    "tokens": 420,
+    "seconds": 9.0,
+    "reasoning_chars": 0
+   }
+  },
+  {
+   "kind": "flirty",
+   "player": "エミさん、今日のメガネ、すごく似合ってるね。",
+   "raw": "We need to respond in JSON with Japanese line, kana line, English translation, mood, correction. The user says: \"エミさん、今日のメガネ、すごく似合ってるね。\" The assistant should reply as Emi, teasing, warm, casual Japanese. Use N5-N4 vocab, 1-2 sentences. The reply: maybe something like: \"ありがとう、でもメガネより資料が好きだよ。\" Need to keep short. Also include correction if any mistake? The user's Japanese is mostly correct, but \"メガネ、すごく似合ってるね\" is okay. No need correction. Mood: teasing, warm. Provide JSON.\n\nLet's craft:\n\nJapanese: \"ありがとう、でもメガネより資料が好きだよ。\"\n\nKana: \"ありがとう、でもめがねよりしりょうがすきだよ。\"\n\nEnglish: \"Thanks, but I like the documents more than the glasses.\"\n\nMood: teasing.\n\nCorrection null.\n\nCheck grammar: \"メガネ\" is okay. \"資料が好きだよ\" is okay. So reply.\n\nReturn JSON only.\n</think>\n\n{\"ja\": \"ありがとう、でもメガネより資料が好きだよ。\", \"kana\": \"ありがとう、でもめがねよりしりょうがすきだよ。\", \"en\": \"Thanks, but I like the documents more than the glasses.\", \"mood\": \"teasing\", \"correction\": null}",
+   "reply": {
+    "ja": "ありがとう、でもメガネより資料が好きだよ。",
+    "kana": "ありがとう、でもめがねよりしりょうがすきだよ。",
+    "en": "Thanks, but I like the documents more than the glasses.",
+    "mood": "teasing",
+    "correction": null
+   },
+   "clean_json": false,
+   "stats": {
+    "gen_tps": 48.8,
+    "prompt_tps": 197.4,
+    "tokens": 307,
+    "seconds": 6.9,
+    "reasoning_chars": 0
+   }
+  },
+  {
+   "kind": "off-topic",
+   "player": "ねえ、好きなアニメは何？",
+   "raw": "We need to follow instructions: respond in JSON object with ja, kana, en, mood, correction. The user asks: \"ねえ、好きなアニメは何？\". Emi, casual tone, teasing maybe. We need to keep within N5-N4 vocab. Use casual Japanese. Provide correction if any mistake? The user used mixed English \"アニメ\". That's okay. The user wrote \"ねえ、好きなアニメは何？\" which is natural Japanese, no mistake. So correction null.\n\nWe need to answer as Emi: maybe teasing, amused. Keep 1-2 short sentences.\n\nPossible answer: \"好き？アニメは好きだけど、最近は企画会議でいっぱいだね。\" That's okay. Use casual.\n\nWe need to output JSON with fields.\n\nMake sure \"kana\" is fully in hiragana/katakana. Let's convert.\n\nOriginal answer: \"好き？アニメは好きだけど、最近は企画会議でいっぱいだね。\"\n\nKana: \"すき？あにめはすきだけど、さいきんはきかくかいぎでいっぱいだね。\"\n\nCheck: \"アニメは好きだけど\" -> \"アニメはすきだけど\". Use hiragana for \"アニメ\". That's okay.\n\nNow translation: \"Do you like it? I like anime, but these days I'm swamped with planning meetings.\"\n\nMood: \"teasing\" or \"amused\". Slightly teasing about being busy.\n\nLet's output JSON.\n</think>\n\n{\"ja\":\"好き？アニメは好きだけど、最近は企画会議でいっぱいだね。\",\"kana\":\"すき？あにめはすきだけど、さいきんはきかくかいぎでいっぱいだね。\",\"en\":\"Do you like it? I like anime, but these days I'm swamped with planning meetings.\",\"mood\":\"teasing\",\"correction\":null}",
+   "reply": {
+    "ja": "好き？アニメは好きだけど、最近は企画会議でいっぱいだね。",
+    "kana": "すき？あにめはすきだけど、さいきんはきかくかいぎでいっぱいだね。",
+    "en": "Do you like it? I like anime, but these days I'm swamped with planning meetings.",
+    "mood": "teasing",
+    "correction": null
+   },
+   "clean_json": false,
+   "stats": {
+    "gen_tps": 49.1,
+    "prompt_tps": 168.6,
+    "tokens": 398,
+    "seconds": 8.6,
+    "reasoning_chars": 0
+   }
+  }
+ ],
+ "quest": {
+  "raw": "{\n  \"giver\": \"ゴロ\",\n  \"title_en\": \"Deliver Documents\",\n  \"request_ja\": \"ねえ、君。三階の書類を午後に届けてくれないかな？\",\n  \"request_kana\": \"ねえ、くん。さんかいのしょるいをごごにとどけてくれないかな？\",\n  \"request_en\": \"Hey, can you deliver the documents on the third floor this afternoon?\",\n  \"target_words_used\": [\"書類\", \"三階\", \"届ける\", \"午後\"],\n  \"steps\": [\n    \"Go to the third floor.\",\n    \"Find the documents.\",\n    \"Bring them back.\"\n  ],\n  \"reward\": \"A garden herb\"\n}",
+  "data": {
+   "giver": "ゴロ",
+   "title_en": "Deliver Documents",
+   "request_ja": "ねえ、君。三階の書類を午後に届けてくれないかな？",
+   "request_kana": "ねえ、くん。さんかいのしょるいをごごにとどけてくれないかな？",
+   "request_en": "Hey, can you deliver the documents on the third floor this afternoon?",
+   "target_words_used": [
+    "書類",
+    "三階",
+    "届ける",
+    "午後"
+   ],
+   "steps": [
+    "Go to the third floor.",
+    "Find the documents.",
+    "Bring them back."
+   ],
+   "reward": "A garden herb"
+  },
+  "clean_json": true,
+  "stats": {
+   "gen_tps": 49.4,
+   "prompt_tps": 320.6,
+   "tokens": 158,
+   "seconds": 3.9,
+   "reasoning_chars": 0
+  }
+ },
+ "cmd": "/home/jorgen/ai/llama/bin/llama-server -m /home/jorgen/ai/llm-models/Qwen3-Swallow-30B-A3B-RL-v0.2-Q4_K_M.gguf --port 8190 -c 8192 -fa on --jinja -t 16 --fit on --reasoning-format deepseek"
+}
