@@ -1,0 +1,180 @@
+{
+ "total": 1.134,
+ "calls": [
+  {
+   "t": "2026-09-24T10:37:04.077Z",
+   "model": "black-forest-labs/flux-2-pro",
+   "est": 0.03,
+   "out": "art/concept/blank-gate.webp",
+   "prompt": "Grounded painterly illustration, ink linework inspired by Edo ukiyo-e woodblock prints fused with modern digital paintin"
+  },
+  {
+   "t": "2026-09-24T10:37:04.685Z",
+   "model": "black-forest-labs/flux-2-pro",
+   "est": 0.03,
+   "out": "art/concept/kanji-rest.webp",
+   "prompt": "Grounded painterly illustration, ink linework inspired by Edo ukiyo-e woodblock prints fused with modern digital paintin"
+  },
+  {
+   "t": "2026-09-24T10:37:05.008Z",
+   "model": "retro-diffusion/rd-plus",
+   "est": 0.05,
+   "out": "art/concept/golem.png",
+   "prompt": "a hulking stone golem enemy made of stacked carved stone blocks, some blocks replaced by blank white paper squares with "
+  },
+  {
+   "t": "2026-09-24T10:37:05.329Z",
+   "model": "black-forest-labs/flux-2-pro",
+   "est": 0.03,
+   "out": "art/concept/rin.webp",
+   "prompt": "Grounded painterly illustration, ink linework inspired by Edo ukiyo-e woodblock prints fused with modern digital paintin"
+  },
+  {
+   "t": "2026-09-24T10:52:27.011Z",
+   "model": "retro-diffusion/rd-plus",
+   "est": 0.05,
+   "out": "art/proto/px-rin.png",
+   "prompt": "young japanese swordswoman, short black hair with red cord, indigo layered jacket, dark bodysuit, short sword, ready sta"
+  },
+  {
+   "t": "2026-09-24T10:52:27.191Z",
+   "model": "retro-diffusion/rd-plus",
+   "est": 0.05,
+   "out": "art/proto/px-bg-shrine.png",
+   "prompt": "ruined mountain shrine courtyard at dawn, cracked stone paving, stone lanterns, weathered torii gate, pine trees, mist, "
+  },
+  {
+   "t": "2026-09-24T10:52:27.214Z",
+   "model": "retro-diffusion/rd-plus",
+   "est": 0.05,
+   "out": "art/proto/px-golem.png",
+   "prompt": "hulking stone golem of mossy grey carved stone blocks, glowing pale eyes, heavy fists, facing left, fantasy RPG battle e"
+  },
+  {
+   "t": "2026-09-24T10:52:27.348Z",
+   "model": "black-forest-labs/flux-2-pro",
+   "est": 0.03,
+   "out": "art/proto/jin.webp",
+   "prompt": "High-fidelity mature anime illustration, film-quality key visual in the vein of Ufotable and Kyoto Animation (Violet Eve"
+  },
+  {
+   "t": "2026-09-24T10:52:27.378Z",
+   "model": "black-forest-labs/flux-2-pro",
+   "est": 0.03,
+   "out": "art/proto/bg-shrine.webp",
+   "prompt": "High-fidelity mature anime illustration, film-quality key visual in the vein of Ufotable and Kyoto Animation (Violet Eve"
+  },
+  {
+   "t": "2026-09-24T10:52:27.470Z",
+   "model": "black-forest-labs/flux-2-pro",
+   "est": 0.03,
+   "out": "art/proto/moku.webp",
+   "prompt": "High-fidelity mature anime illustration, film-quality key visual in the vein of Ufotable and Kyoto Animation (Violet Eve"
+  },
+  {
+   "t": "2026-09-24T10:52:27.829Z",
+   "model": "black-forest-labs/flux-2-pro",
+   "est": 0.045,
+   "out": "art/proto/rin-hf.webp",
+   "prompt": "High-fidelity mature anime illustration, film-quality key visual in the vein of Ufotable and Kyoto Animation (Violet Eve"
+  },
+  {
+   "t": "2026-09-24T10:52:33.249Z",
+   "model": "black-forest-labs/flux-2-pro",
+   "est": 0.03,
+   "out": "art/proto/golem-raw.webp",
+   "prompt": "High-fidelity mature anime illustration, film-quality key visual in the vein of Ufotable and Kyoto Animation (Violet Eve"
+  },
+  {
+   "t": "2026-09-24T10:52:33.802Z",
+   "model": "black-forest-labs/flux-2-pro",
+   "est": 0.03,
+   "out": "art/proto/kyu.webp",
+   "prompt": "High-fidelity mature anime illustration, film-quality key visual in the vein of Ufotable and Kyoto Animation (Violet Eve"
+  },
+  {
+   "t": "2026-09-24T10:52:34.972Z",
+   "model": "black-forest-labs/flux-2-pro",
+   "est": 0.045,
+   "out": "art/proto/rin-raw.webp",
+   "prompt": "High-fidelity mature anime illustration, film-quality key visual in the vein of Ufotable and Kyoto Animation (Violet Eve"
+  },
+  {
+   "t": "2026-09-24T10:52:47.145Z",
+   "model": "black-forest-labs/flux-2-pro",
+   "est": 0.045,
+   "out": "art/proto/bg-shrine-erased.webp",
+   "prompt": "Turn this image into an unfinished anime layout sketch: remove all colour and almost all detail, leaving only faint, spa"
+  },
+  {
+   "t": "2026-09-24T10:52:47.878Z",
+   "model": "black-forest-labs/flux-2-pro",
+   "est": 0.045,
+   "out": "art/proto/k-rest-meaning.webp",
+   "prompt": "Match the art style of the style reference image exactly: ink linework inspired by Edo ukiyo-e woodblock prints, flat mu"
+  },
+  {
+   "t": "2026-09-24T10:52:48.272Z",
+   "model": "black-forest-labs/flux-2-pro",
+   "est": 0.045,
+   "out": "art/proto/k-tree-meaning.webp",
+   "prompt": "Match the art style of the style reference image exactly: ink linework inspired by Edo ukiyo-e woodblock prints, flat mu"
+  },
+  {
+   "t": "2026-09-24T10:52:48.662Z",
+   "model": "black-forest-labs/flux-2-pro",
+   "est": 0.045,
+   "out": "art/proto/k-person-meaning.webp",
+   "prompt": "Match the art style of the style reference image exactly: ink linework inspired by Edo ukiyo-e woodblock prints, flat mu"
+  },
+  {
+   "t": "2026-09-24T10:52:49.724Z",
+   "model": "black-forest-labs/flux-2-pro",
+   "est": 0.06,
+   "out": "art/proto/k-tree-reading.webp",
+   "prompt": "Match the art style of the style reference image exactly: ink linework inspired by Edo ukiyo-e woodblock prints, flat mu"
+  },
+  {
+   "t": "2026-09-24T10:52:50.142Z",
+   "model": "black-forest-labs/flux-2-pro",
+   "est": 0.06,
+   "out": "art/proto/k-rest-reading.webp",
+   "prompt": "Match the art style of the style reference image exactly: ink linework inspired by Edo ukiyo-e woodblock prints, flat mu"
+  },
+  {
+   "t": "2026-09-24T10:52:50.309Z",
+   "model": "black-forest-labs/flux-2-pro",
+   "est": 0.06,
+   "out": "art/proto/k-person-reading.webp",
+   "prompt": "Match the art style of the style reference image exactly: ink linework inspired by Edo ukiyo-e woodblock prints, flat mu"
+  },
+  {
+   "t": "2026-09-24T10:53:02.081Z",
+   "model": "851-labs/background-remover",
+   "est": 0.002,
+   "out": "art/proto/rin-battle.png",
+   "prompt": ""
+  },
+  {
+   "t": "2026-09-24T10:53:02.221Z",
+   "model": "851-labs/background-remover",
+   "est": 0.002,
+   "out": "art/proto/golem.png",
+   "prompt": ""
+  },
+  {
+   "t": "2026-09-24T10:54:46.021Z",
+   "model": "google/lyria-2",
+   "est": 0.12,
+   "out": "art/proto/music-battle.wav",
+   "prompt": "Tense cinematic battle music loop, Japanese taiko drums and driving shamisen with a low shakuhachi melody over a dark mo"
+  },
+  {
+   "t": "2026-09-24T10:54:47.003Z",
+   "model": "google/lyria-2",
+   "est": 0.12,
+   "out": "art/proto/music-study.wav",
+   "prompt": "Calm contemplative ambient music for a quiet scriptorium study room, soft koto plucks and warm felt piano, gentle rain a"
+  }
+ ]
+}
