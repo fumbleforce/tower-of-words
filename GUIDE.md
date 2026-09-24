@@ -37,6 +37,12 @@ Everything Jørgen has asked for, and how we work. Every agent reads this before
 - Every character has a distinct voice (word choice, sentence length, register); run the dialogue skill's voice checks.
 - Story beats are reviewed by a story editor, not only by the builder.
 
+## Originality (cliche-transcendence skill in ~/.agents/skills)
+- Don't repeat ideas or reach for stock "quirky" tropes. Rejected as lame or repeated: the knitting tough guy, the crazy female engineer with a metal arm (done twice). Before proposing a character, list the default clichés for that role and deliberately go orthogonal (knowledge, goal, role).
+- Draw inspiration from real sources: real jobs inside Japanese conglomerates, real office life, observed people, and specific cultural detail rather than anime archetypes.
+- Characters have their own concerns that collide with the player's story; they don't exist to serve it.
+- Cast verdicts: Kiyoko s101 approved (the only design with real age lines; outfit a bit plain, so make it more interesting). "Luna" is very attractive, but the name is disliked and must change; her s102 look (white vampire) is rejected; her suit colour and blazer details drift between expressions. Oguri and Dr. Ren are removed.
+
 ## Writing (all UI text, docs and replies)
 - Plain, human writing: use the humanizer skill (~/.agents/skills/humanizer). No slogans, no em dashes, no "not X but Y", no filler taglines.
 
@@ -52,6 +58,9 @@ Everything Jørgen has asked for, and how we work. Every agent reads this before
 - Prompt structure: one block per character; state where the camera is and which way everyone faces; give a hand to every held object; keep emotions inside each character's block (they leak); use weights of 1.3–2.0 for things Anima tends to drop; don't name landmarks.
 - Main character: a Nordic man, fair pale skin, light blond eyebrows, slim average build, no blush. Rei: silver ponytail, steel-grey eyes. Emi: the approved round-3 RDBT seed 41 design (auburn bob, clear tortoiseshell glasses, curvy, blazer and pencil skirt), inspired by Jørgen's wife but designed only from written traits and never from photos, and not in her real clothes.
 - Backgrounds must make physical sense (the train floated on the ocean; the "basement" looked like a sunny home office). Check every image for logic before it ships.
+- Expression sets must keep everything except the face identical (outfit colour, blazer details, hair, accessories). Generate expressions by repainting only the face region of one approved base sprite (inpainting), not by re-rolling whole images.
+- Complex action (the shootout, swimming, the volleyball spike) fails with plain prompting even after fixes. It needs composition control (a pose or layout sketch as an input, or regional prompting) before more attempts; don't burn time re-rolling.
+- Round 6 retries verdict: copy room only copyroom-rdbt-12 works; shootout nonsense everywhere; swim only One Obsession makes sense; volleyball One Obsession s11 most believable; romance all fine, RDBT slightly best.
 - Cutouts: local rembg ISNet anime. Check for see-through holes in hair and glasses.
 - Never open images or pages on Jørgen's screen (no xdg-open). Give links only.
 
