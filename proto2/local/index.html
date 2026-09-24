@@ -9,6 +9,9 @@ h1 { margin: 0 0 4px; font-size: 26px; } .intro { color: #4b5260; margin: 0 0 18
 .set h2 { margin: 0; font-size: 18px; } .set p { margin: 2px 0 8px; color: #4b5260; font-size: 14px; }
 .imgs { display: grid; grid-template-columns: repeat(9, 1fr); gap: 5px; }
 .imgs img { width: 100%; border-radius: 5px; display: block; }
+.imgs figure { margin: 0; position: relative; }
+.imgs figcaption { position: absolute; left: 4px; top: 4px; background: rgba(21,23,28,.8); color: #fff; font: 600 12px "Outfit", sans-serif; padding: 1px 6px; border-radius: 4px; }
+.set h2 .code { font-size: 13px; color: #0f8b99; margin-left: 6px; }
 .tango { display: grid; grid-template-columns: 560px 1fr; gap: 16px; align-items: start; }
 .tango img { width: 100%; border-radius: 6px; }
 @media (max-width: 900px) { .imgs { grid-template-columns: repeat(3, 1fr); } .tango { grid-template-columns: 1fr; } }
@@ -32,9 +35,10 @@ const S = [
 ];
 const C = ['rei', 'emi', 'mio', 'aoi', 'kaori', 'goro', 'ishibashi', 'jun', 'yuzuki'];
 const box = document.getElementById('sets');
-for (const [k, name, note] of S) {
+S.forEach(([k, name, note], row) => {
+  const code = String.fromCharCode(65 + row);
   const el = document.createElement('section'); el.className = 'set';
-  el.innerHTML = `<h2>${name}</h2><p>${note}</p><div class="imgs">${C.map(c => `<img src="${k}-${c}.webp" alt="${c}" loading="lazy">`).join('')}</div>`;
+  el.innerHTML = `<h2>${code}. ${name}</h2><p>${note}</p><div class="imgs">${C.map((c, i) => `<figure><img src="${k}-${c}.webp" alt="${c}" loading="lazy"><figcaption>${code}${i + 1}</figcaption></figure>`).join('')}</div>`;
   box.append(el);
-}
+});
 </script></main></body></html>
