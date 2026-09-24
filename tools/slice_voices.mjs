@@ -4,7 +4,12 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { execFileSync } from 'node:child_process';
 import { run, spent } from './rep.mjs';
-import { SCENES } from '../game/data/script.js';
+import { SCENES as DAY1, SPELLS } from '../game/data/script.js';
+import { SCENES as D2 } from '../content/day2.js';
+import { SCENES as D3 } from '../content/day3.js';
+import { SCENES as D4 } from '../content/day4.js';
+import { SCENES as D5 } from '../content/day5.js';
+const SCENES = { ...DAY1, ...D2, ...D3, ...D4, ...D5, __spells: SPELLS };
 
 const ROOT = path.join(path.dirname(new URL(import.meta.url).pathname), '..');
 const OUT = path.join(ROOT, 'game/audio/voice');
@@ -26,6 +31,9 @@ const VOICES = {
   ishibashi: clone(path.join(R2, 'guard-3.mp3'), '止まって。IDカード、見せて。…はい、次の人。'),
   goro: { kind: 'design', desc: 'A gentle Japanese man in his sixties, warm and slightly raspy, kind grandfatherly tone, relaxed pace.', refText: 'おや、いい天気だね。今日もトマトがよく育っているよ。' },
   jun: { kind: 'design', desc: 'A calm Japanese man around forty, low soft voice, dry and understated, a quiet bartender.', refText: 'いらっしゃい。今日はゆっくりしていって。' },
+  aoi: { kind: 'design', desc: 'A bright, energetic young Japanese woman around twenty-two, quick and cheerful, a little clumsy, clearly female.', refText: 'あ、おはよう！　今日もがんばろうね！' },
+  yuzuki: mm('Japanese_GracefulMaiden'),
+  secretary: mm('Japanese_DependableWoman'),
 };
 
 function normalize(src, dst) {
@@ -40,11 +48,26 @@ async function designRef(ch, v) {
 }
 
 const lines = [];
+// Engine-generated lines: prices and change (kanji numbers must match game/main.js kanjiNum()).
+const DIG = ['', '一', '二', '三', '四', '五', '六', '七', '八', '九'];
+function kanjiNum(n) { let out = ''; for (const [v, u] of [[1000, '千'], [100, '百'], [10, '十']]) { const d = Math.floor(n / v); if (d) out += (d > 1 ? DIG[d] : '') + u; n %= v; } return out + (n ? DIG[n] : ''); }
+const payLines = new Set(['足りないよ。', 'ちょうどね。ありがとう。']);
+const walk2 = o => { if (Array.isArray(o)) o.forEach(walk2); else if (o && typeof o === 'object') { Object.values(o).forEach(walk2); } };
+const menus = []; const findMenus = (steps) => { for (let i = 0; i < steps.length; i++) { const st = steps[i]; if (st && st.menu && !st.menu.noPay) { const pay = steps.slice(i + 1).find(x => x && x.pay); menus.push({ items: st.menu.items, wallet: pay?.pay.wallet || [] }); } } };
+for (const sc of Object.values(SCENES)) if (Array.isArray(sc)) findMenus(sc);
+for (const m of menus) for (const it of m.items) {
+  payLines.add(`${kanjiNum(it.price)}円ね。`);
+  const w = m.wallet, n = w.length;
+  for (let mask = 1; mask < (1 << n); mask++) { let sum = 0; for (let b = 0; b < n; b++) if (mask & (1 << b)) sum += w[b]; if (sum > it.price) payLines.add(`はい、${kanjiNum(sum - it.price)}円のおつり。`); }
+}
+for (const t of payLines) lines.push(['kaori', t]);
 const walk = o => { if (Array.isArray(o)) o.forEach(walk); else if (o && typeof o === 'object') { if (o.say) lines.push([o.say, plain(o.jp)]); Object.values(o).forEach(walk); } };
 walk(SCENES);
 
 const manifest = {};
-const jobs = lines.map(async ([ch, text]) => {
+let active = 0; const waiters = [];
+const limit = async fn => { while (active >= 8) await new Promise(r => waiters.push(r)); active++; try { return await fn(); } finally { active--; waiters.shift()?.(); } };
+const jobs = lines.map(([ch, text]) => limit(async () => {
   const key = fnv(`${ch}|${text}`);
   const dst = path.join(OUT, `${key}.mp3`);
   manifest[key] = 1;
@@ -61,7 +84,7 @@ const jobs = lines.map(async ([ch, text]) => {
     normalize(Array.isArray(f) ? f[0] : f, dst);
     console.log('ok', ch, text.slice(0, 20));
   } catch (e) { delete manifest[key]; console.log('FAIL', ch, text.slice(0, 20), e.message.slice(0, 160)); }
-});
+}));
 // Design references first (sequential), then everything in parallel.
 for (const [ch, v] of Object.entries(VOICES)) if (v.kind === 'design') await designRef(ch, v);
 await Promise.all(jobs);
