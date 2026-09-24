@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Local models</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600&display=swap">
+<style>
+body { margin: 0; background: #f5f6f8; color: #15171c; font: 16px/1.5 "Outfit", sans-serif; }
+main { max-width: 1500px; margin: 0 auto; padding: 28px 20px 60px; }
+h1 { margin: 0 0 4px; font-size: 26px; } .intro { color: #4b5260; margin: 0 0 18px; max-width: 860px; }
+.set { background: #fff; border: 1px solid #dadee4; border-radius: 8px; padding: 12px; margin-bottom: 12px; }
+.set h2 { margin: 0; font-size: 18px; } .set p { margin: 2px 0 8px; color: #4b5260; font-size: 14px; }
+.imgs { display: grid; grid-template-columns: repeat(9, 1fr); gap: 5px; }
+.imgs img { width: 100%; border-radius: 5px; display: block; }
+.tango { display: grid; grid-template-columns: 320px 1fr; gap: 16px; align-items: start; }
+.tango img { width: 100%; border-radius: 6px; }
+@media (max-width: 900px) { .imgs { grid-template-columns: repeat(3, 1fr); } .tango { grid-template-columns: 1fr; } }
+</style></head><body><main>
+<h1>Local models on your RTX 3080</h1>
+<p class="intro">Everything here was generated on your own machine through ComfyUI: no cost, no content filter. Every row is the same nine characters with the same tags and the same seed: Rei, Emi, Mio, Aoi, Kaori, Goro, the guard, Jun and Yuzuki.</p>
+<section class="set tango"><img src="tango.webp" alt="Tango prompt"><div><h2>Your Civitai prompt, run locally</h2><p>Your tango prompt with its seed and settings, through Nova Anime AM v5 (the Anima model it came from). 75 seconds including loading the model. Not pixel-identical to Civitai, because their site handles seeds slightly differently, but it is the same model and quality.</p></div></section>
+<div id="sets"></div>
+<script>
+const S = [
+  ['anima-nova', 'Nova Anime AM v5 (Anima family)', 'The model from your example. The most polished and characterful; about 35 seconds per image.'],
+  ['sdxl-waiIllustriousSDXL_v170', 'WAI-Illustrious v17 (SDXL)', 'The most popular anime model. Clean and consistent; about 12 seconds per image.'],
+  ['sdxl-waiMature', 'WAI-Mature', 'WAI tuned toward adult faces and figures.'],
+  ['sdxl-hassaku', 'Hassaku XL', 'Detailed, slightly softer faces.'],
+  ['sdxl-novaAnime', 'Nova Anime XL (SDXL version)', 'Brighter, stronger outlines, more expressive.'],
+  ['sdxl-oneObsession', 'One Obsession', 'The most downloaded this month. Glossy and bold.'],
+  ['sdxl-prefect', 'Prefect Illustrious', 'Sharp and high-contrast.'],
+  ['wai-mappa', 'WAI + MAPPA style add-on', 'Pushes toward MAPPA line work.'],
+  ['wai-jjk', 'WAI + Jujutsu Kaisen style add-on (MAPPA)', 'The most like an actual MAPPA TV show: flatter colour, different faces, harder shadows.'],
+  ['wai-screencap', 'WAI + Anime Screencap style add-on', 'Makes it look like a frame from a TV episode.'],
+];
+const C = ['rei', 'emi', 'mio', 'aoi', 'kaori', 'goro', 'ishibashi', 'jun', 'yuzuki'];
+const box = document.getElementById('sets');
+for (const [k, name, note] of S) {
+  const el = document.createElement('section'); el.className = 'set';
+  el.innerHTML = `<h2>${name}</h2><p>${note}</p><div class="imgs">${C.map(c => `<img src="${k}-${c}.webp" alt="${c}" loading="lazy">`).join('')}</div>`;
+  box.append(el);
+}
+</script></main></body></html>
