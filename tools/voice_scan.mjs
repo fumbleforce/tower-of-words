@@ -17,6 +17,7 @@ const OUT = path.join(ROOT, 'game/audio/voice');
 if (del) { let n = 0; for (const [k, [ch]] of lines) if (ch === del && fs.existsSync(`${OUT}/${k}.mp3`)) { fs.unlinkSync(`${OUT}/${k}.mp3`); n++; } console.log('deleted', n, del); process.exit(0); }
 const files = [...lines.keys()].filter(k => fs.existsSync(`${OUT}/${k}.mp3`)).map(k => `${OUT}/${k}.mp3`);
 const out = execFileSync(path.join(process.env.HOME, 'ai/sd/venv/bin/python'), [path.join(ROOT, 'tools/f0.py'), ...files], { maxBuffer: 1 << 26 }).toString().trim().split('\n').map(l => JSON.parse(l));
-const bad = out.filter(r => r.median != null && (r.median < 185 || r.low160 > 0.25));
+const { pitchOk } = { pitchOk: (r, ch) => r.median == null || (ch === 'mio' ? r.median >= 190 && r.median <= 255 && (r.voiced < 40 || (r.range_st ?? 0) <= 14) : r.median >= 185 && (r.low160 ?? 0) <= 0.25) };
+const bad = out.filter(r => !pitchOk(r, lines.get(path.basename(r.file, '.mp3'))[0]));
 for (const r of bad) { const k = path.basename(r.file, '.mp3'); console.log('FAIL', lines.get(k)[0], r.median, r.low160, lines.get(k)[1]); fs.unlinkSync(r.file); }
 console.log('scanned', out.length, 'failed', bad.length);
