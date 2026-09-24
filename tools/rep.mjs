@@ -78,7 +78,9 @@ export async function run(model, input, outFile, { force = false } = {}) {
   }
   let pred = await res.json();
   if (!res.ok) throw new Error(`${model}: ${res.status} ${JSON.stringify(pred).slice(0, 300)}`);
+  const deadline = Date.now() + 5 * 60e3; // a prediction stuck in 'starting' would otherwise hang the caller forever
   while (['starting', 'processing'].includes(pred.status)) {
+    if (Date.now() > deadline) { await fetch(pred.urls.cancel, { method: 'POST', headers }).catch(() => {}); throw new Error(`${model}: timed out after 5 min (${pred.status})`); }
     await new Promise(r => setTimeout(r, 2500));
     pred = await (await fetch(pred.urls.get, { headers })).json();
   }
