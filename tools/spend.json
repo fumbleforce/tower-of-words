@@ -1,5 +1,5 @@
 {
- "total": 5.8536,
+ "total": 7.6186,
  "calls": [
   {
    "t": "2026-09-24T10:37:04.077Z",
@@ -1134,6 +1134,258 @@
    "est": 0.08,
    "out": "art/company/m2/hunyuan-tv-daigo.png",
    "prompt": "Anime character portrait, 2020s TV anime still, clean cel shading. Daigo, 28, a factory-floor worker of average build: b"
+  },
+  {
+   "t": "2026-09-24T13:13:24.023Z",
+   "model": "black-forest-labs/flux-2-pro",
+   "est": 0.03,
+   "out": "art/company/m3/flux-tv-daigo.png",
+   "prompt": "Anime character portrait, 2020s TV anime still, clean cel shading. Daigo, 28, a stocky factory worker: shaved head, shor"
+  },
+  {
+   "t": "2026-09-24T13:13:24.123Z",
+   "model": "black-forest-labs/flux-2-pro",
+   "est": 0.03,
+   "out": "art/company/m3/flux-josei-hana.png",
+   "prompt": "Anime character portrait, Josei anime style, soft muted colors, like Nana or Honey and Clover. Hana, 25, a company newsp"
+  },
+  {
+   "t": "2026-09-24T13:13:24.538Z",
+   "model": "black-forest-labs/flux-2-pro",
+   "est": 0.03,
+   "out": "art/company/m3/flux-mappa-aoi.png",
+   "prompt": "Anime character portrait, Modern MAPPA anime still, sharp lines, cinematic lighting. Aoi, 20, an intern from the company"
+  },
+  {
+   "t": "2026-09-24T13:13:24.780Z",
+   "model": "black-forest-labs/flux-2-pro",
+   "est": 0.03,
+   "out": "art/company/m3/flux-tv-mio.png",
+   "prompt": "Anime character portrait, 2020s TV anime still, clean cel shading. Mio, 24, a low-effort gamer coworker: long unkempt bl"
+  },
+  {
+   "t": "2026-09-24T13:13:24.897Z",
+   "model": "black-forest-labs/flux-2-pro",
+   "est": 0.03,
+   "out": "art/company/m3/flux-mappa-rei.png",
+   "prompt": "Anime character portrait, Modern MAPPA anime still, sharp lines, cinematic lighting. Rei, 23, an ambitious saleswoman: l"
+  },
+  {
+   "t": "2026-09-24T13:13:25.898Z",
+   "model": "black-forest-labs/flux-2-pro",
+   "est": 0.03,
+   "out": "art/company/m3/flux-josei-sayaka.png",
+   "prompt": "Anime character portrait, Josei anime style, soft muted colors, like Nana or Honey and Clover. Sayaka, 32, a cool team l"
+  },
+  {
+   "t": "2026-09-24T13:13:30.038Z",
+   "model": "black-forest-labs/flux-2-flex",
+   "est": 0.06,
+   "out": "art/company/m3/fluxflex-tv-mio.png",
+   "prompt": "Anime character portrait, 2020s TV anime still, clean cel shading. Mio, 24, a low-effort gamer coworker: long unkempt bl"
+  },
+  {
+   "t": "2026-09-24T13:13:30.888Z",
+   "model": "black-forest-labs/flux-2-flex",
+   "est": 0.06,
+   "out": "art/company/m3/fluxflex-mappa-rei.png",
+   "prompt": "Anime character portrait, Modern MAPPA anime still, sharp lines, cinematic lighting. Rei, 23, an ambitious saleswoman: l"
+  },
+  {
+   "t": "2026-09-24T13:13:31.146Z",
+   "model": "black-forest-labs/flux-2-flex",
+   "est": 0.06,
+   "out": "art/company/m3/fluxflex-josei-hana.png",
+   "prompt": "Anime character portrait, Josei anime style, soft muted colors, like Nana or Honey and Clover. Hana, 25, a company newsp"
+  },
+  {
+   "t": "2026-09-24T13:13:31.185Z",
+   "model": "black-forest-labs/flux-2-flex",
+   "est": 0.06,
+   "out": "art/company/m3/fluxflex-mappa-aoi.png",
+   "prompt": "Anime character portrait, Modern MAPPA anime still, sharp lines, cinematic lighting. Aoi, 20, an intern from the company"
+  },
+  {
+   "t": "2026-09-24T13:13:31.399Z",
+   "model": "black-forest-labs/flux-2-flex",
+   "est": 0.06,
+   "out": "art/company/m3/fluxflex-josei-sayaka.png",
+   "prompt": "Anime character portrait, Josei anime style, soft muted colors, like Nana or Honey and Clover. Sayaka, 32, a cool team l"
+  },
+  {
+   "t": "2026-09-24T13:13:33.579Z",
+   "model": "black-forest-labs/flux-2-flex",
+   "est": 0.06,
+   "out": "art/company/m3/fluxflex-tv-daigo.png",
+   "prompt": "Anime character portrait, 2020s TV anime still, clean cel shading. Daigo, 28, a stocky factory worker: shaved head, shor"
+  },
+  {
+   "t": "2026-09-24T13:13:35.635Z",
+   "model": "black-forest-labs/flux-2-max",
+   "est": 0.08,
+   "out": "art/company/m3/fluxmax-josei-sayaka.png",
+   "prompt": "Anime character portrait, Josei anime style, soft muted colors, like Nana or Honey and Clover. Sayaka, 32, a cool team l"
+  },
+  {
+   "t": "2026-09-24T13:13:40.495Z",
+   "model": "leonardoai/lucid-origin",
+   "est": 0.04,
+   "out": "art/company/m3/lucid-josei-hana.png",
+   "prompt": "Anime character portrait, Josei anime style, soft muted colors, like Nana or Honey and Clover. Hana, 25, a company newsp"
+  },
+  {
+   "t": "2026-09-24T13:13:40.604Z",
+   "model": "leonardoai/lucid-origin",
+   "est": 0.04,
+   "out": "art/company/m3/lucid-mappa-aoi.png",
+   "prompt": "Anime character portrait, Modern MAPPA anime still, sharp lines, cinematic lighting. Aoi, 20, an intern from the company"
+  },
+  {
+   "t": "2026-09-24T13:13:43.197Z",
+   "model": "leonardoai/lucid-origin",
+   "est": 0.04,
+   "out": "art/company/m3/lucid-mappa-rei.png",
+   "prompt": "Anime character portrait, Modern MAPPA anime still, sharp lines, cinematic lighting. Rei, 23, an ambitious saleswoman: l"
+  },
+  {
+   "t": "2026-09-24T13:13:47.191Z",
+   "model": "black-forest-labs/flux-2-max",
+   "est": 0.08,
+   "out": "art/company/m3/fluxmax-tv-mio.png",
+   "prompt": "Anime character portrait, 2020s TV anime still, clean cel shading. Mio, 24, a low-effort gamer coworker: long unkempt bl"
+  },
+  {
+   "t": "2026-09-24T13:13:49.145Z",
+   "model": "black-forest-labs/flux-2-max",
+   "est": 0.08,
+   "out": "art/company/m3/fluxmax-mappa-rei.png",
+   "prompt": "Anime character portrait, Modern MAPPA anime still, sharp lines, cinematic lighting. Rei, 23, an ambitious saleswoman: l"
+  },
+  {
+   "t": "2026-09-24T13:13:51.282Z",
+   "model": "black-forest-labs/flux-2-max",
+   "est": 0.08,
+   "out": "art/company/m3/fluxmax-tv-daigo.png",
+   "prompt": "Anime character portrait, 2020s TV anime still, clean cel shading. Daigo, 28, a stocky factory worker: shaved head, shor"
+  },
+  {
+   "t": "2026-09-24T13:13:51.984Z",
+   "model": "black-forest-labs/flux-2-max",
+   "est": 0.08,
+   "out": "art/company/m3/fluxmax-josei-hana.png",
+   "prompt": "Anime character portrait, Josei anime style, soft muted colors, like Nana or Honey and Clover. Hana, 25, a company newsp"
+  },
+  {
+   "t": "2026-09-24T13:13:52.002Z",
+   "model": "leonardoai/lucid-origin",
+   "est": 0.04,
+   "out": "art/company/m3/lucid-tv-daigo.png",
+   "prompt": "Anime character portrait, 2020s TV anime still, clean cel shading. Daigo, 28, a stocky factory worker: shaved head, shor"
+  },
+  {
+   "t": "2026-09-24T13:13:52.229Z",
+   "model": "leonardoai/lucid-origin",
+   "est": 0.04,
+   "out": "art/company/m3/lucid-tv-mio.png",
+   "prompt": "Anime character portrait, 2020s TV anime still, clean cel shading. Mio, 24, a low-effort gamer coworker: long unkempt bl"
+  },
+  {
+   "t": "2026-09-24T13:13:52.243Z",
+   "model": "leonardoai/lucid-origin",
+   "est": 0.04,
+   "out": "art/company/m3/lucid-josei-sayaka.png",
+   "prompt": "Anime character portrait, Josei anime style, soft muted colors, like Nana or Honey and Clover. Sayaka, 32, a cool team l"
+  },
+  {
+   "t": "2026-09-24T13:13:55.580Z",
+   "model": "black-forest-labs/flux-2-max",
+   "est": 0.08,
+   "out": "art/company/m3/fluxmax-mappa-aoi.png",
+   "prompt": "Anime character portrait, Modern MAPPA anime still, sharp lines, cinematic lighting. Aoi, 20, an intern from the company"
+  },
+  {
+   "t": "2026-09-24T13:24:04.614Z",
+   "model": "prunaai/hidream-l1-fast",
+   "est": 0.02,
+   "out": "art/company/m3/hidream-josei-hana.png",
+   "prompt": "Anime character portrait, Josei anime style, soft muted colors, like Nana or Honey and Clover. Hana, 25, a company newsp"
+  },
+  {
+   "t": "2026-09-24T13:24:06.930Z",
+   "model": "prunaai/hidream-l1-fast",
+   "est": 0.02,
+   "out": "art/company/m3/hidream-tv-daigo.png",
+   "prompt": "Anime character portrait, 2020s TV anime still, clean cel shading. Daigo, 28, a stocky factory worker: shaved head, shor"
+  },
+  {
+   "t": "2026-09-24T13:25:09.322Z",
+   "model": "xai/grok-imagine-image",
+   "est": 0.07,
+   "out": "art/company/m4/grok-mio.png",
+   "prompt": "Anime character portrait, 2020s TV anime still, clean cel shading. Mio, 24, a low-effort gamer coworker: long unkempt bl"
+  },
+  {
+   "t": "2026-09-24T13:25:09.674Z",
+   "model": "xai/grok-imagine-image",
+   "est": 0.07,
+   "out": "art/company/m4/grok-rei.png",
+   "prompt": "Anime character portrait, 2020s TV anime still, clean cel shading. Rei, 23, an ambitious saleswoman: long silver hair in"
+  },
+  {
+   "t": "2026-09-24T13:25:10.295Z",
+   "model": "xai/grok-imagine-image",
+   "est": 0.07,
+   "out": "art/company/m4/grok-scene.png",
+   "prompt": "Anime still, 2020s TV anime. Hana, 25, a company reporter with two low braids, round glasses and a yellow raincoat, snea"
+  },
+  {
+   "t": "2026-09-24T13:25:13.736Z",
+   "model": "black-forest-labs/flux-2-pro",
+   "est": 0.03,
+   "out": "art/company/m4/flux-scene.png",
+   "prompt": "Anime still, 2020s TV anime. Hana, 25, a company reporter with two low braids, round glasses and a yellow raincoat, snea"
+  },
+  {
+   "t": "2026-09-24T13:25:18.985Z",
+   "model": "aisha-ai-official/anillustrious-v4",
+   "est": 0.015,
+   "out": "art/company/m4/anill-mio.png",
+   "prompt": "1girl, solo, black hair, long hair, messy hair, low ponytail, sleepy, round eyewear, grey sweatshirt, oversized clothes,"
+  },
+  {
+   "t": "2026-09-24T13:25:25.976Z",
+   "model": "aisha-ai-official/anillustrious-v4",
+   "est": 0.015,
+   "out": "art/company/m4/anill-scene.png",
+   "prompt": "1girl, solo, brown hair, twin braids, round eyewear, yellow raincoat, server room, dark, blue lighting, monitors, cables"
+  },
+  {
+   "t": "2026-09-24T13:25:35.488Z",
+   "model": "openai/gpt-image-2",
+   "est": 0.06,
+   "out": "art/company/m4/gpt-mio.png",
+   "prompt": "Anime character portrait, 2020s TV anime still, clean cel shading. Mio, 24, a low-effort gamer coworker: long unkempt bl"
+  },
+  {
+   "t": "2026-09-24T13:25:37.628Z",
+   "model": "openai/gpt-image-2",
+   "est": 0.06,
+   "out": "art/company/m4/gpt-rei.png",
+   "prompt": "Anime character portrait, 2020s TV anime still, clean cel shading. Rei, 23, an ambitious saleswoman: long silver hair in"
+  },
+  {
+   "t": "2026-09-24T13:25:37.714Z",
+   "model": "openai/gpt-image-2",
+   "est": 0.06,
+   "out": "art/company/m4/gpt-scene.png",
+   "prompt": "Anime still, 2020s TV anime. Hana, 25, a company reporter with two low braids, round glasses and a yellow raincoat, snea"
+  },
+  {
+   "t": "2026-09-24T13:25:44.257Z",
+   "model": "aisha-ai-official/anillustrious-v4",
+   "est": 0.015,
+   "out": "art/company/m4/anill-rei.png",
+   "prompt": "1girl, solo, grey hair, long hair, high ponytail, hoop earrings, white suit, holding tablet, smile, upper body, looking "
   }
  ]
 }

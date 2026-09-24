@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Image models, rounds 3 and 4</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600&display=swap">
+<style>
+body { margin: 0; background: #f5f6f8; color: #15171c; font: 16px/1.5 "Outfit", sans-serif; }
+main { max-width: 1400px; margin: 0 auto; padding: 28px 20px 60px; }
+h1 { margin: 0 0 4px; font-size: 26px; } h2.part { margin: 32px 0 6px; font-size: 21px; } .intro { color: #4b5260; margin: 0 0 16px; max-width: 820px; }
+.model { background: #fff; border: 1px solid #dadee4; border-radius: 8px; padding: 14px; margin-bottom: 14px; }
+.model h3 { margin: 0; font-size: 18px; } .model p { margin: 2px 0 10px; color: #4b5260; font-size: 15px; }
+.imgs { display: grid; grid-template-columns: repeat(6, 1fr); gap: 6px; }
+.imgs.four { grid-template-columns: repeat(4, 1fr); }
+.imgs figure { margin: 0; } .imgs img { width: 100%; border-radius: 6px; display: block; }
+.imgs figcaption { font-size: 12px; color: #4b5260; }
+@media (max-width: 900px) { .imgs, .imgs.four { grid-template-columns: repeat(2, 1fr); } }
+</style></head><body><main>
+<h1>Image models, rounds 3 and 4</h1>
+<h2 class="part">Round 3: the FLUX family and Lucid Origin, three TV-anime styles</h2>
+<p class="intro">New looks for Mio, Daigo, Sayaka and Hana, a new character (Aoi, an intern), and Rei kept as before for comparison. Styles in pairs: 2020s TV anime, josei (Nana, Honey and Clover), and modern MAPPA. HiDream timed out on most images and is left out.</p>
+<div id="r3"></div>
+<h2 class="part">Round 4: the models you prompted me to find, against FLUX</h2>
+<p class="intro">Mio and Rei as TV-anime portraits, plus a scene in the direction of your example: Hana sneaking through a dark server room, blue monitor light, low angle from behind.</p>
+<div id="r4"></div>
+<script>
+const R3 = [
+  ['flux', 'FLUX 2 Pro', 'The winner so far. About $0.03.'],
+  ['fluxmax', 'FLUX 2 Max', 'Same look with more detail and stronger expressions. About $0.08.'],
+  ['fluxflex', 'FLUX 2 Flex', 'Very close to Pro, slightly flatter. About $0.06.'],
+  ['lucid', 'Lucid Origin (Leonardo)', 'Cleaner, softer and brighter, closer to a light-novel illustration, on a white background. About $0.04.'],
+];
+const C3 = [['tv-mio', 'TV: Mio'], ['tv-daigo', 'TV: Daigo'], ['josei-sayaka', 'Josei: Sayaka'], ['josei-hana', 'Josei: Hana'], ['mappa-rei', 'MAPPA: Rei'], ['mappa-aoi', 'MAPPA: Aoi']];
+const R4 = [
+  ['gpt', 'gpt-image-2 (OpenAI)', 'Clean, well-behaved TV anime; the scene is moody but the face is plain. About $0.06 at medium quality.'],
+  ['grok', 'Grok Imagine (xAI)', 'Crisp and consistent; the scene has the best sense of place. About $0.07.'],
+  ['anill', 'AnIllustrious v4 (Illustrious family)', 'Closest to the look of your example: glossy anime illustration, dramatic angles. It takes tag lists rather than sentences, and drifts toward fan service on its own. About $0.02.'],
+  ['flux', 'FLUX 2 Pro', 'The same scene prompt, for comparison.'],
+];
+function row(el, k, name, note, cols, cls) {
+  const s = document.createElement('section'); s.className = 'model';
+  s.innerHTML = `<h3>${name}</h3><p>${note}</p><div class="imgs ${cls || ''}">` + cols.map(([f, c]) => `<figure><img src="${k}-${f}.webp" alt="${c}" loading="lazy" onerror="this.parentElement.remove()"><figcaption>${c}</figcaption></figure>`).join('') + '</div>';
+  el.append(s);
+}
+R3.forEach(([k, n, t]) => row(document.getElementById('r3'), k, n, t, C3));
+R4.forEach(([k, n, t]) => row(document.getElementById('r4'), k, n, t, k === 'flux' ? [['scene', 'Scene']] : [['mio', 'Mio'], ['rei', 'Rei'], ['scene', 'Scene']], 'four'));
+</script></main></body></html>
