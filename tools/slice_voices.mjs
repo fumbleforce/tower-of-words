@@ -82,6 +82,8 @@ const walkP = o => { if (Array.isArray(o)) o.forEach(walkP); else if (o && typeo
 walkP(SCENES);
 
 const manifest = {};
+// Rewritten after every clip, so an interrupted run still leaves a manifest that lists every file on disk.
+const writeManifest = () => fs.writeFileSync(path.join(OUT, 'index.js'), `export const VOICE = ${JSON.stringify(Object.fromEntries(Object.keys(manifest).filter(k => fs.existsSync(path.join(OUT, `${k}.mp3`))).map(k => [k, 1])))};\n`);
 let active = 0; const waiters = [];
 const limit = async fn => { while (active >= 8) await new Promise(r => waiters.push(r)); active++; try { return await fn(); } finally { active--; waiters.shift()?.(); } };
 const jobs = lines.map(([ch, text]) => limit(async () => {
@@ -108,10 +110,11 @@ const jobs = lines.map(([ch, text]) => limit(async () => {
     }
     normalize(f, dst, v.lufs || -18);
     console.log('ok', ch, text.slice(0, 20));
+    writeManifest();
   } catch (e) { delete manifest[key]; console.log('FAIL', ch, text.slice(0, 20), e.message.slice(0, 160)); }
 }));
 // Design references first (sequential), then everything in parallel.
 for (const [ch, v] of Object.entries(VOICES)) if (v.kind === 'design') await designRef(ch, v);
 await Promise.all(jobs);
-fs.writeFileSync(path.join(OUT, 'index.js'), `export const VOICE = ${JSON.stringify(manifest)};\n`);
+writeManifest();
 console.log('lines', lines.length, 'voiced', Object.keys(manifest).length, 'spent', spent());

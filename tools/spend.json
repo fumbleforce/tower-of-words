@@ -1,5 +1,5 @@
 {
- "total": 13.842,
+ "total": 13.852,
  "calls": [
   {
    "t": "2026-09-24T10:37:04.077Z",
@@ -5039,6 +5039,13 @@
    "model": "minimax/speech-2.6-hd",
    "est": 0.0038,
    "out": "art/voice-raw/24b80249.mp3",
+   "prompt": ""
+  },
+  {
+   "t": "2026-09-24T21:24:31.108Z",
+   "model": "qwen/qwen3-tts",
+   "est": 0.01,
+   "out": "art/voice-raw/c4302680.wav",
    "prompt": ""
   }
  ]

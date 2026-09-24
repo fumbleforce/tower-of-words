@@ -128,3 +128,81 @@ def run(workflow, out_path, timeout=900):
                     return out_path
         time.sleep(1.5)
     raise TimeoutError(pid)
+
+
+WAN_NEG = ('色调艳丽，过曝，静态，细节模糊不清，字幕，风格，作品，画作，画面，静止，整体发灰，最差质量，低质量，JPEG压缩残留，丑陋的，残缺的，多余的手指，'
+           '画得不好的手部，画得不好的脸部，畸形的，毁容的，形态畸形的肢体，手指融合，静止不动的画面，杂乱的背景，三条腿，背景人很多，倒着走, '
+           'realistic, 3d, photorealistic, style change, morphing')
+
+
+def _video_out(wf, images_ref, fps, prefix):
+    """Save as a video (for the ComfyUI UI) and as frames (for our own ffmpeg assembly)."""
+    wf['90'] = {'class_type': 'CreateVideo', 'inputs': {'images': images_ref, 'fps': fps}}
+    wf['91'] = {'class_type': 'SaveVideo', 'inputs': {'video': ['90', 0], 'filename_prefix': f'video/{prefix}', 'format': 'auto', 'codec': 'auto'}}
+    wf['92'] = {'class_type': 'SaveImage', 'inputs': {'images': images_ref, 'filename_prefix': f'frames/{prefix}'}}
+    return wf
+
+
+def wan22_i2v(image_name, prompt, negative=WAN_NEG, w=704, h=1280, length=73, steps=20, cfg=5.0, shift=8.0, fps=24, seed=None, prefix='wan22'):
+    """Wan 2.2 TI2V 5B image-to-video (native ComfyUI). length = frames (4n+1); 24 fps."""
+    wf = {
+        '1': {'class_type': 'UNETLoader', 'inputs': {'unet_name': 'wan2.2_ti2v_5B_fp16.safetensors', 'weight_dtype': 'default'}},
+        '2': {'class_type': 'CLIPLoader', 'inputs': {'clip_name': 'umt5_xxl_fp8_e4m3fn_scaled.safetensors', 'type': 'wan'}},
+        '3': {'class_type': 'VAELoader', 'inputs': {'vae_name': 'wan2.2_vae.safetensors'}},
+        '4': {'class_type': 'CLIPTextEncode', 'inputs': {'text': prompt, 'clip': ['2', 0]}},
+        '5': {'class_type': 'CLIPTextEncode', 'inputs': {'text': negative, 'clip': ['2', 0]}},
+        '6': {'class_type': 'LoadImage', 'inputs': {'image': image_name}},
+        '7': {'class_type': 'Wan22ImageToVideoLatent', 'inputs': {'vae': ['3', 0], 'width': w, 'height': h, 'length': length, 'batch_size': 1, 'start_image': ['6', 0]}},
+        '8': {'class_type': 'ModelSamplingSD3', 'inputs': {'model': ['1', 0], 'shift': shift}},
+        '9': {'class_type': 'KSampler', 'inputs': {'model': ['8', 0], 'positive': ['4', 0], 'negative': ['5', 0], 'latent_image': ['7', 0],
+                                                   'seed': seed if seed is not None else random.randint(0, 2**32), 'steps': steps, 'cfg': cfg,
+                                                   'sampler_name': 'uni_pc', 'scheduler': 'simple', 'denoise': 1.0}},
+        '10': {'class_type': 'VAEDecode', 'inputs': {'samples': ['9', 0], 'vae': ['3', 0]}},
+    }
+    return _video_out(wf, ['10', 0], fps, prefix)
+
+
+def causal_forcing_i2v(image_name, prompt, negative=WAN_NEG, w=480, h=832, length=49, steps=4, fps=16, seed=None, prefix='causal'):
+    """Causal Forcing (Wan 2.1-based autoregressive, 4 steps, CFG 1) image-to-video. 16 fps."""
+    wf = {
+        '1': {'class_type': 'UNETLoader', 'inputs': {'unet_name': 'causal_forcing-framewise.safetensors', 'weight_dtype': 'default'}},
+        '2': {'class_type': 'CLIPLoader', 'inputs': {'clip_name': 'umt5_xxl_fp8_e4m3fn_scaled.safetensors', 'type': 'wan'}},
+        '3': {'class_type': 'VAELoader', 'inputs': {'vae_name': 'wan_2.1_vae.safetensors'}},
+        '4': {'class_type': 'CLIPTextEncode', 'inputs': {'text': prompt, 'clip': ['2', 0]}},
+        '5': {'class_type': 'CLIPTextEncode', 'inputs': {'text': negative, 'clip': ['2', 0]}},
+        '6': {'class_type': 'LoadImage', 'inputs': {'image': image_name}},
+        '7': {'class_type': 'ARVideoI2V', 'inputs': {'model': ['1', 0], 'vae': ['3', 0], 'start_image': ['6', 0], 'width': w, 'height': h, 'length': length, 'batch_size': 1}},
+        '8': {'class_type': 'RandomNoise', 'inputs': {'noise_seed': seed if seed is not None else random.randint(0, 2**32)}},
+        '9': {'class_type': 'CFGGuider', 'inputs': {'model': ['7', 0], 'positive': ['4', 0], 'negative': ['5', 0], 'cfg': 1.0}},
+        '11': {'class_type': 'SamplerARVideo', 'inputs': {'num_frame_per_block': 1}},
+        '12': {'class_type': 'BasicScheduler', 'inputs': {'model': ['7', 0], 'scheduler': 'simple', 'steps': steps, 'denoise': 1.0}},
+        '13': {'class_type': 'SamplerCustomAdvanced', 'inputs': {'noise': ['8', 0], 'guider': ['9', 0], 'sampler': ['11', 0], 'sigmas': ['12', 0], 'latent_image': ['7', 1]}},
+        '10': {'class_type': 'VAEDecode', 'inputs': {'samples': ['13', 0], 'vae': ['3', 0]}},
+    }
+    return _video_out(wf, ['10', 0], fps, prefix)
+
+
+def run_video(workflow, out_mp4, fps, timeout=3600):
+    """Queue a video workflow; assemble the saved frames into out_mp4 with ffmpeg. Returns seconds taken."""
+    import subprocess, tempfile
+    t0 = time.time()
+    pid = _post('/prompt', {'prompt': workflow})['prompt_id']
+    while time.time() - t0 < timeout:
+        hist = json.loads(_get(f'/history/{pid}'))
+        if pid in hist:
+            st = hist[pid].get('status', {})
+            if st.get('status_str') == 'error':
+                raise RuntimeError(json.dumps(st.get('messages', []))[:1200])
+            imgs = [i for node in hist[pid]['outputs'].values() for i in node.get('images', []) if i.get('subfolder', '').startswith('frames')]
+            if not imgs:
+                raise RuntimeError('no frames in outputs: ' + json.dumps(hist[pid]['outputs'])[:600])
+            d = tempfile.mkdtemp()
+            for k, im in enumerate(sorted(imgs, key=lambda x: x['filename'])):
+                q = urllib.parse.urlencode({'filename': im['filename'], 'subfolder': im['subfolder'], 'type': im['type']})
+                open(os.path.join(d, f'{k:05d}.png'), 'wb').write(_get('/view?' + q))
+            os.makedirs(os.path.dirname(out_mp4) or '.', exist_ok=True)
+            subprocess.run(['ffmpeg', '-v', 'error', '-y', '-framerate', str(fps), '-i', os.path.join(d, '%05d.png'),
+                            '-c:v', 'libx264', '-pix_fmt', 'yuv420p', '-crf', '20', out_mp4], check=True)
+            return round(time.time() - t0)
+        time.sleep(3)
+    raise TimeoutError(pid)
