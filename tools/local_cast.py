@@ -22,7 +22,7 @@ ANIMA_Q = 'masterpiece, best quality, score_9, score_8, score_7, year 2025, newe
 ANIMA_N = 'worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, child, loli'
 
 SETS = [('anima-nova', None, None, None), ('anima-nova-rl', None, 'anima-rl-v0.1.safetensors', None)] + [(f'sdxl-{n}', f'{n}.safetensors', None, None) for n in
-        ['waiIllustriousSDXL_v170', 'waiMature', 'hassaku', 'novaAnime', 'oneObsession', 'prefect']] + [
+        ['waiIllustriousSDXL_v170', 'waiMature', 'hassaku', 'novaAnime', 'oneObsession']] + [
     ('wai-jjk', 'waiIllustriousSDXL_v170.safetensors', 'jjk_style.safetensors', 'jjk_style_v3'),
     ('wai-screencap', 'waiIllustriousSDXL_v170.safetensors', 'anime_screencap.safetensors', 'anime screencap, anime coloring'),
 ]
