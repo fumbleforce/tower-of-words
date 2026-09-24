@@ -390,8 +390,8 @@ function runBattle({ title: btitle, enemy, queue, hearts = 5, onEnd, graded = tr
     if (s.en) kids.push(h('div', { class: 'en' }, s.en));
     if (s.hint) kids.push(h('div', { class: 'hint' }, s.hint));
     if (s.text) kids.push(h('div', { class: 'story' }, s.text));
-    if (s.listen) kids.push(h('button', { class: 'speak big', onclick: () => speak(q.say, true) }, '🔊'));
-    else if (q.say) kids.push(h('div', {}, h('button', { class: 'speak', onclick: () => speak(q.say, true) }, '🔊')));
+    if (s.listen) kids.push(h('button', { class: 'speak big', onclick: () => speak(q.say, true) }, '音'));
+    else if (q.say) kids.push(h('div', {}, h('button', { class: 'speak', onclick: () => speak(q.say, true) }, '音')));
     return h('div', { class: 'panel qcard' }, ...kids);
   }
 
@@ -421,7 +421,7 @@ function runBattle({ title: btitle, enemy, queue, hearts = 5, onEnd, graded = tr
     const slots = h('div', { class: 'slots' });
     const pool = h('div', { class: 'pool' });
     const fb = h('div');
-    const checkBtn = h('button', { class: 'btn primary', style: 'margin-top:12px', disabled: true, onclick: check }, 'Cast ✦');
+    const checkBtn = h('button', { class: 'btn primary', style: 'margin-top:12px', disabled: true, onclick: check }, 'Cast');
     function draw() {
       slots.replaceChildren(...placed.map((p, idx) => h('button', { class: 'tile', onclick: () => { placed.splice(idx, 1); draw(); } }, p.t)));
       pool.replaceChildren(...tiles.map(p => h('button', { class: 'tile' + (placed.includes(p) ? ' used' : ''), onclick: () => { if (!placed.includes(p)) { placed.push(p); draw(); } } }, p.t)));
@@ -455,8 +455,9 @@ function runBattle({ title: btitle, enemy, queue, hearts = 5, onEnd, graded = tr
     fb.replaceChildren(h('div', { class: 'feedback ' + (ok ? 'ok' : 'bad') },
       h('b', {}, ok ? pick(['Hit!', 'Critical!', 'Clean strike!', 'Nice!', '見事！']) : pick(['Ouch.', 'Missed.', 'Blocked!'])),
       ...info),
-      h('button', { class: 'btn primary', style: 'margin-top:10px', onclick: next }, hp <= 0 ? 'Fall back…' : 'Continue ▸'));
+      ok ? null : h('button', { class: 'btn primary', style: 'margin-top:10px', onclick: next }, hp <= 0 ? 'Fall back' : 'Continue'));
     save();
+    if (ok) { const at = i; setTimeout(() => { if (i === at) next(); }, said ? 1300 : 900); }
     fb.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
   }
 
@@ -493,11 +494,11 @@ function learnCard(id) {
       ...d.examples.slice(0, 3).map(exampleEl));
   }
   return h('div', { class: 'panel qcard learn' }, h('div', { class: 'kind' }, 'New ' + ({ kana: 'kana', vocab: 'word', kanji: 'kanji', gram: 'skill' })[it.type]), ...kids,
-    it.type !== 'gram' ? h('div', {}, h('button', { class: 'speak', onclick: () => speak(sayText(it), true) }, '🔊')) : null);
+    it.type !== 'gram' ? h('div', {}, h('button', { class: 'speak', onclick: () => speak(sayText(it), true) }, '音')) : null);
 }
 function exampleEl(e) {
   return h('div', { class: 'ex' },
-    h('div', { class: 'row' }, h('div', { class: 'ja spacer' }, e.ja), h('button', { class: 'speak', onclick: () => speak(e.kana, true) }, '🔊')),
+    h('div', { class: 'row' }, h('div', { class: 'ja spacer' }, e.ja), h('button', { class: 'speak', onclick: () => speak(e.kana, true) }, '音')),
     h('div', { class: 'kana' }, e.kana), h('div', { class: 'en' }, e.en));
 }
 
@@ -512,7 +513,7 @@ function runLearn(ids, onDone) {
       h('div', { class: 'battle-top' }, h('div', { class: 'spacer small dim' }, `Training · ${i + 1}/${ids.length}`)),
       learnCard(id),
       h('div', { class: 'stack', style: 'margin-top:12px' },
-        h('button', { class: 'btn primary', onclick: () => { introduce(id); learned.push(id); i++; save(); show(); } }, 'Got it — add to my skills ▸'),
+        h('button', { class: 'btn primary', onclick: () => { introduce(id); learned.push(id); i++; save(); show(); } }, 'Got it'),
         h('button', { class: 'btn ghost', onclick: () => { markKnown(id); addXp(5); i++; save(); toast('Marked as known · +5 XP'); show(); } }, 'I already know this')),
     );
     if (it.type !== 'gram') setTimeout(() => speak(sayText(it)), 200);
@@ -595,22 +596,23 @@ function startBoss() {
   // Phase 1: dialogue
   const shown = [];
   const wrap = h('div');
-  const nextBtn = h('button', { class: 'btn primary', style: 'margin-top:12px' }, 'Next ▸');
+  const nextBtn = h('button', { class: 'btn primary', style: 'margin-top:12px' }, 'Next');
   let li = 0;
   function addLine() {
     const l = b.lines[li++];
     const en = h('div', { class: 'en hidden', onclick: () => en.classList.remove('hidden') }, l.en);
     const el = h('div', { class: 'line' },
-      h('div', { class: 'row' }, h('div', { class: 'sp spacer' }, l.sp), h('button', { class: 'speak', onclick: () => speak(l.kana || l.ja, true) }, '🔊')),
-      h('div', { class: 'ja' }, l.ja), S.settings.furi ? h('div', { class: 'kana' }, l.kana) : null, en);
+      h('div', { class: 'row' }, h('div', { class: 'sp spacer' }, l.sp), h('button', { class: 'speak', onclick: () => speak(l.kana || l.ja, true) }, '音')),
+      h('div', { class: 'ja' }), S.settings.furi ? h('div', { class: 'kana' }, l.kana) : null, en);
     wrap.append(el); shown.push(el);
+    typeOut(el.querySelector('.ja'), l.ja);
     speak(l.kana || l.ja);
     el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-    if (li >= b.lines.length) { nextBtn.textContent = 'Fight! ⚔'; }
+    if (li >= b.lines.length) { nextBtn.textContent = 'Fight'; }
   }
   nextBtn.onclick = () => { if (li < b.lines.length) addLine(); else fight(); };
   mount(
-    h('h3', {}, 'Floor boss'), h('h1', { class: 'jp' }, `${b.name} · ${b.jp}`),
+    h('h3', {}, 'Floor boss'), h('h1', {}, `${b.name} · ${b.jp}`),
     h('p', { class: 'dim' }, b.scene),
     h('p', { class: 'small dim' }, 'Read each line. Try to understand it before tapping to reveal the English: the boss will quiz you on it.'),
     wrap, nextBtn);
@@ -652,17 +654,20 @@ function startBoss() {
     });
   }
 }
+// JRPG-style text box: characters appear one by one; tapping the box finishes it.
+function typeOut(el, text) {
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) { el.textContent = text; return; }
+  let n = 0; el.classList.add('typing');
+  const done = () => { clearInterval(t); el.textContent = text; el.classList.remove('typing'); };
+  const t = setInterval(() => { el.textContent = text.slice(0, ++n); if (n >= text.length) done(); }, 45);
+  el.closest('.line').addEventListener('click', done, { once: true });
+}
 function finale() {
   return h('div', { class: 'panel glow' }, h('h2', {}, 'The Logout Gate is open.'),
     h('p', {}, 'The real final boss is outside the game: watch Sword Art Online, episode 1, with Japanese subtitles. Then come back and mark the side quest.'));
 }
 
-function interlude(head, text, cont) {
-  setNav(false);
-  mount(h('div', { class: 'stack', style: 'padding-top:14vh' },
-    h('h3', { class: 'center' }, head), h('p', { class: 'center story' }, text),
-    h('button', { class: 'btn primary', onclick: cont }, 'Engage ⚔')));
-}
+function interlude(head, text, cont) { cont(); }
 
 function showResult(head, tot, lv0) {
   const n = tot.right + tot.wrong;
@@ -674,8 +679,8 @@ function showResult(head, tot, lv0) {
     h('div', { class: 'stats' },
       h('div', { class: 'stat' }, h('b', {}, n ? Math.round(100 * tot.right / n) + '%' : '—'), h('span', {}, 'accuracy')),
       h('div', { class: 'stat' }, h('b', {}, n), h('span', {}, 'answers'))),
-    bossReady(S.floor) && !S.cleared.includes(S.floor) ? h('div', { class: 'panel gold' }, h('b', {}, '👑 The floor boss has noticed you.'), h('p', { class: 'dim small' }, 'You can challenge it from the Tower screen.')) : null,
-    h('p', { class: 'center dim small' }, 'Done for today. Go read your book. 📖'),
+    bossReady(S.floor) && !S.cleared.includes(S.floor) ? h('div', { class: 'panel gold' }, h('b', {}, 'The floor boss has noticed you.'), h('p', { class: 'dim small' }, 'You can challenge it from the Tower screen.')) : null,
+    h('p', { class: 'center dim small' }, 'Done for today. Go read your book.'),
     h('button', { class: 'btn primary', onclick: () => go('home') }, 'Return to the Tower')));
 }
 
@@ -715,11 +720,11 @@ function renderHome() {
     h('div', { class: 'stack', style: 'margin-top:12px' },
       trainedToday ? h('p', { class: 'center small', style: 'color:var(--green)' }, '✓ Trained today. Anything more is a bonus.') : null,
       h('button', { class: 'btn primary', onclick: startQuest },
-        h('span', { class: 'ico' }, '⚔'), h('span', { class: 'txt' }, 'Quest', h('small', {}, `Train day · ~12 min · ${due ? due + ' reviews + ' : ''}new skills`))),
+        h('span', { class: 'ico' }, '戦'), h('span', { class: 'txt' }, 'Quest', h('small', {}, `Train day · ~12 min · ${due ? due + ' reviews + ' : ''}new skills`))),
       h('button', { class: 'btn', onclick: startPatrol, disabled: !Object.keys(S.items).length },
-        h('span', { class: 'ico' }, '🛡'), h('span', { class: 'txt' }, 'Patrol', h('small', {}, `Home day · ~5 min · ${due} due`))),
+        h('span', { class: 'ico' }, '巡'), h('span', { class: 'txt' }, 'Patrol', h('small', {}, `Home day · ~5 min · ${due} due`))),
       !cleared ? h('button', { class: 'btn gold', disabled: !ready, onclick: startBoss },
-        h('span', { class: 'ico' }, '👑'), h('span', { class: 'txt' }, `Floor boss: ${f.boss.name}`,
+        h('span', { class: 'ico' }, '王'), h('span', { class: 'txt' }, `Floor boss: ${f.boss.name}`,
           h('small', {}, ready ? 'It\'s waiting for you.' : `Unlocks when all ${p.total} are learned and 80% recalled once (${p.recalled}/${p.total})`)))
         : allCleared ? finale() : null),
     h('div', { class: 'panel stack', style: 'margin-top:12px' },
@@ -730,7 +735,7 @@ function renderHome() {
     h('div', { class: 'panel stack', style: 'margin-top:12px' },
       h('h3', {}, 'Speaking practice (optional, weekly)'),
       h('p', { class: 'small dim' }, 'Paste this into Claude for a 10-minute conversation at your current level.'),
-      h('button', { class: 'btn small', onclick: () => copy(f.talk) }, '📋 Copy conversation prompt')),
+      h('button', { class: 'btn small', onclick: () => copy(f.talk) }, 'Copy conversation prompt')),
     h('h3', { style: 'margin-top:18px' }, 'The Tower'),
     floorMap(),
   );
@@ -742,7 +747,7 @@ function floorMap() {
     const p = floorProgress(f.id);
     return h('div', { class: `floor-row ${done ? 'done' : ''} ${cur ? 'cur' : ''} ${locked ? 'locked' : ''}` },
       h('div', { class: 'n' }, done ? '✓' : f.id),
-      h('div', { class: 't' }, h('div', {}, f.name.replace(/^Floor \d+\s*[—-]\s*/, '')), h('div', { class: 'small dim' }, locked ? '🔒 ' + (f.weeks || '') : `${p.known}/${p.total} known`)));
+      h('div', { class: 't' }, h('div', {}, f.name.replace(/^Floor \d+\s*[—-]\s*/, '')), h('div', { class: 'small dim' }, locked ? '封 ' + (f.weeks || '') : `${p.known}/${p.total} known`)));
   }));
 }
 
@@ -809,7 +814,7 @@ function renderStats() {
       h('p', { class: 'small dim' }, 'No streaks here. Skipped days cost nothing, and your reviews just wait for you.')),
     h('div', { class: 'panel stack', style: 'margin-top:12px' },
       h('h3', {}, 'Real-world milestones'),
-      ...FLOORS.map(f => h('div', { class: 'row small' }, h('span', {}, S.side[f.id] ? '✅' : '⬜'), h('span', { class: 'spacer' }, `F${f.id}: ${f.side}`)))),
+      ...FLOORS.map(f => h('div', { class: 'row small' }, h('span', {}, S.side[f.id] ? '■' : '□'), h('span', { class: 'spacer' }, `F${f.id}: ${f.side}`)))),
   );
 }
 
@@ -842,10 +847,10 @@ function renderCodex() {
     body = [h('div', { class: 'panel story' }, f.intro),
       cleared ? h('div', { class: 'panel', style: 'margin-top:10px' }, h('h3', {}, `${f.boss.name} · ${f.boss.jp}`), h('p', { class: 'dim small' }, f.boss.scene),
         ...f.boss.lines.map(l => h('div', { class: 'line' },
-          h('div', { class: 'row' }, h('div', { class: 'sp spacer' }, l.sp), h('button', { class: 'speak', onclick: () => speak(l.kana || l.ja, true) }, '🔊')),
+          h('div', { class: 'row' }, h('div', { class: 'sp spacer' }, l.sp), h('button', { class: 'speak', onclick: () => speak(l.kana || l.ja, true) }, '音')),
           h('div', { class: 'ja' }, l.ja), h('div', { class: 'kana' }, l.kana), h('div', { class: 'en' }, l.en))),
         h('div', { class: 'panel story', style: 'margin-top:10px' }, f.outro))
-        : h('p', { class: 'dim', style: 'margin-top:10px' }, '🔒 The boss scene is added here after you defeat it.')];
+        : h('p', { class: 'dim', style: 'margin-top:10px' }, 'The boss scene is added here after you defeat it.')];
   }
   mount(
     h('h1', {}, 'Codex'),
@@ -874,19 +879,19 @@ function renderSettings() {
         h('select', { style: 'max-width:140px', onchange: e => set('newPer', +e.target.value) },
           ...[4, 5, 7, 9, 12].map(v => h('option', { value: v, selected: S.settings.newPer === v }, v)))),
       h('p', { class: 'small dim' }, voiceMsg),
-      h('button', { class: 'btn small', onclick: () => speak('こんにちは、ハンター。', true) }, '🔊 Test voice')),
+      h('button', { class: 'btn small', onclick: () => speak('こんにちは、ハンター。', true) }, '音 Test voice')),
     h('div', { class: 'panel stack', style: 'margin-top:12px' },
       h('h3', {}, 'Sync phone ↔ desktop'),
       h('p', { class: 'small dim' }, 'Progress syncs through a private GitHub gist when you have internet. Offline play is merged in later, so nothing is lost.'),
       h('p', { class: 'small dim' }, h('a', { href: 'https://github.com/settings/personal-access-tokens/new', target: '_blank', style: 'color:var(--cyan)' }, 'Create a fine-grained token'), ' with only Account permissions → Gists: Read and write. Paste the same token on each device.'),
       h('input', { type: 'text', placeholder: 'github_pat_…', value: S.sync.token, autocomplete: 'off', onchange: e => { S.sync.token = e.target.value.trim(); S.sync.gist = ''; save(); sync(true).then(() => renderSettings()); } }),
       h('div', { class: 'row' },
-        h('span', { class: 'small dim spacer' }, !S.sync.token ? 'Not connected' : S.sync.err ? '⚠ ' + S.sync.err : S.sync.at ? 'Last sync ' + new Date(S.sync.at).toLocaleString() : 'Connecting…'),
-        S.sync.token ? h('button', { class: 'btn small', onclick: () => sync(true).then(() => renderSettings()) }, '⟳ Sync now') : null)),
+        h('span', { class: 'small dim spacer' }, !S.sync.token ? 'Not connected' : S.sync.err ? '! ' + S.sync.err : S.sync.at ? 'Last sync ' + new Date(S.sync.at).toLocaleString() : 'Connecting…'),
+        S.sync.token ? h('button', { class: 'btn small', onclick: () => sync(true).then(() => renderSettings()) }, 'Sync now') : null)),
     h('div', { class: 'panel stack', style: 'margin-top:12px' },
       h('h3', {}, 'Backup'),
       h('p', { class: 'small dim' }, 'Progress is saved on this phone only. Copy a backup code now and then (e.g. into a note).'),
-      h('button', { class: 'btn small', onclick: () => copy(btoa(unescape(encodeURIComponent(JSON.stringify(S))))) }, '📋 Copy backup code'),
+      h('button', { class: 'btn small', onclick: () => copy(btoa(unescape(encodeURIComponent(JSON.stringify(S))))) }, 'Copy backup code'),
       ta,
       h('button', { class: 'btn small', onclick: () => {
         try { const s = JSON.parse(decodeURIComponent(escape(atob(ta.value.trim())))); if (!s.items) throw 0; S = mergeState(Object.assign(fresh(), { sync: S.sync, settings: S.settings }), s); save(); toast('Restored!'); go('home'); } catch (e) { toast('That code didn\'t work.'); }
@@ -907,10 +912,10 @@ function onboard() {
     () => [h('h2', { style: 'margin-top:10vh' }, 'What should the Tower call you?'), name],
     () => [h('h2', { style: 'margin-top:8vh' }, 'How this works'),
       h('div', { class: 'panel stack' },
-        h('p', { html: '⚔ <b>Quest</b> (~12 min): for train days. Reviews, new skills, a field battle.' }),
-        h('p', { html: '🛡 <b>Patrol</b> (~5 min): for home days. Only what you\'re about to forget, plus a few new things.' }),
-        h('p', { html: '👑 <b>Floor boss</b>: a dialogue scene. Beat it to climb.' }),
-        h('p', {}, '📴 Works offline. No streaks: skipped days cost nothing.'),
+        h('p', { html: '<b>戦 Quest</b> (~12 min): for train days. Reviews, new skills, a field battle.' }),
+        h('p', { html: '<b>巡 Patrol</b> (~5 min): for home days. Only what you\'re about to forget, plus a few new things.' }),
+        h('p', { html: '<b>王 Floor boss</b>: a dialogue scene. Beat it to climb.' }),
+        h('p', {}, 'Works offline. No streaks: skipped days cost nothing.'),
         h('p', { class: 'dim small' }, 'Tip: add this page to your home screen so it opens like an app and keeps your save safe.'))],
   ];
   let i = 0;
@@ -919,7 +924,7 @@ function onboard() {
     mount(h('div', { class: 'stack' }, ...kids, h('button', { class: 'btn primary', style: 'margin-top:20px', onclick: () => {
       if (i === 1) { S.name = name.value.trim() || 'Hunter'; }
       if (++i < steps.length) show(); else { S.onboarded = true; save(); go('home'); }
-    } }, i < steps.length - 1 ? 'Continue ▸' : 'Enter Floor 1 ⚔')));
+    } }, i < steps.length - 1 ? 'Continue' : 'Enter Floor 1')));
   }
   show();
 }
