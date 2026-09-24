@@ -6,7 +6,7 @@ export const SCENES = {
   day5_morning: [
     { bg: 'dorm' }, { clock: '08:00' }, { music: 'calm' },
     { narrate: 'Friday. Your phone has been buzzing since seven.' },
-    { msg: { from: 'yuzuki', jp: '{十時|じゅうじ}、{三階|さんがい}の{広報室|こうほうしつ}ね。カメラもあるから、{髪|かみ}、ちゃんとして。', en: 'Ten o\'clock, PR office on the third floor. There\'s a camera too, so do your hair properly.' } },
+    { msg: { from: 'yuzuki', jp: '{十時|じゅうじ}、{二階|にかい}の{広報室|こうほうしつ}ね。カメラもあるから、{髪|かみ}、ちゃんとして。', en: 'Ten o\'clock, PR office on the second floor. There\'s a camera too, so do your hair properly.' } },
     { msg: { from: 'aoi', jp: 'あたしも{写真|しゃしん}、{呼|よ|呼ぶ}ばれた……{一緒|いっしょ}に{行|い|行く}ってもいい？', en: 'I got called in for the photo too... Can I go with you?' } },
     { choose: { prompt: 'Reply to Aoi', kind: 'reply', options: [
       { jp: 'いいよ。{九時半|くじはん}に{一階|いっかい}で。', en: 'Sure. Ground floor at 9:30.', fx: { aoi: 1 } },
@@ -21,7 +21,7 @@ export const SCENES = {
     { say: 'yuzuki', expr: 'smile', jp: '{来|き|来る}てくれた！　じゃあ、はじめよう。{社内報|しゃないほう}の「{新人|しんじん}インタビュー」。', en: '"You came! Let\'s start, then. The in-house paper\'s \'new staff interview\'."' },
     { say: 'yuzuki', expr: 'smile', jp: '{天川|あまかわ}で、{何|なに}がしたいの？', en: '"What do you want to do at Amakawa?"' },
     { choose: { prompt: 'Your answer', kind: 'reply', options: [
-      { jp: 'みんなと、いい{仕事|しごと}がしたい。', en: '"I want to do good work with everyone."', fx: { yuzuki: 1 } },
+      { jp: 'みんなと、いい{仕事|しごと}がしたい。', en: '"I want to do good work with everyone."', fx: { yuzuki: 1 }, then: [{ say: 'yuzuki', expr: 'smile', jp: 'いいね。まじめな{新人|しんじん}くん。', en: '"Nice. A serious new hire."' }] },
       { jp: '{企画室|きかくしつ}7を{守|まも|守る}りたい。', en: '"I want to protect Planning 7."', then: [
         { say: 'yuzuki', expr: 'serious', jp: '{守|まも|守る}りたい？　……{何|なに}から？', en: '"Protect it? ...From what?"' },
         { set: { saidProtect: true } },
@@ -32,11 +32,11 @@ export const SCENES = {
       ] },
     ] } },
     { choose: { prompt: 'Turn it around. Ask Yuzuki the same thing.', kind: 'reply', options: [
-      { jp: '{柚月|ゆづき}さんは？　{何|なに}がしたいの？', en: '"What about you, Yuzuki? What do you want to do?"', correct: true, fx: { yuzuki: 1 }, then: [
+      { jp: 'ユヅキさんは？　{何|なに}がしたいの？', en: '"What about you, Yuzuki? What do you want to do?"', correct: true, fx: { yuzuki: 1 }, then: [
         { say: 'yuzuki', expr: 'serious', jp: '{私|わたし}？　……ほんとうのことが{書|か|書く}きたい。{社内報|しゃないほう}じゃなくて。', en: '"Me? ...I want to write things that are true. Not the company paper."' },
         { set: { knowsYuzukiDream: true } },
       ] },
-      { jp: '{柚月|ゆづき}さんは、{何|なに}がしたいですか。', en: '"And what would you like to do, Ms Yuzuki?" (polite)', then: [
+      { jp: 'ユヅキさんは、{何|なに}がしたいですか。', en: '"And what would you like to do, Ms Yuzuki?" (polite)', then: [
         { say: 'yuzuki', expr: 'smile', jp: 'なんで{急|きゅう}にていねい？　{私|わたし}はいいの、{今日|きょう}はあなたの{番|ばん}。', en: '"Why so polite all of a sudden? Never mind me, today\'s your turn." Among coworkers your age, plain ～たいの？ is the natural way to ask.' },
       ] },
     ] } },
@@ -102,7 +102,7 @@ export const SCENES = {
     ], else: [
       { say: 'emi', expr: 'smile', jp: '{昨日|きのう}は、ほんとうに{助|たす|助かる}かった。', en: '"Yesterday, you really saved us."' },
     ] },
-    { if: 'saidProtect', then: [{ say: 'emi', expr: 'surprised', jp: '……{柚月|ゆづき}さんに「{守|まも|守る}りたい」って{言|い|言う}ったの？　……そう。', en: '"...You told Yuzuki you want to \'protect\' us? ...I see."' }] },
+    { if: 'saidProtect', then: [{ say: 'emi', expr: 'surprised', jp: '……ユヅキさんに「{守|まも|守る}りたい」って{言|い|言う}ったの？　……そう。', en: '"...You told Yuzuki you want to \'protect\' us? ...I see."' }] },
     { say: 'emi', expr: 'smile', jp: '{試用期間|しようきかん}は、まだ{長|なが|長い}い。でも、{悪|わる|悪い}くないよ。', en: '"Probation has a long way to go. But you\'re not doing badly."' },
     { hideAll: true },
     { goto: 'day5_evening' },
@@ -140,7 +140,7 @@ export const SCENES = {
     { say: 'mio', expr: 'smirk', jp: '{来|き|来る}たね。{土曜日|どようび}まで{寝|ね|寝る}かせないって、{言|い|言う}ったでしょ。', en: '"You came. I told you I wouldn\'t let you sleep till Saturday."' },
     { say: 'mio', expr: 'bored', jp: '{十二時|じゅうにじ}{過|す|過ぎる}ぎたら、{土曜日|どようび}。{計算|けいさん}、あってる。', en: '"After midnight it\'s Saturday. The maths checks out."' },
     { choose: { prompt: 'She hands you a controller.', kind: 'reply', options: [
-      { jp: 'どのゲームがしたいの？', en: '"Which game do you want to play?"', correct: true, fx: { mio: 1 }, then: [{ say: 'mio', expr: 'smirk', jp: '{負|ま|負ける}けたほうが、{明日|あした}の{朝|あさ}ごはん。', en: '"Loser buys tomorrow\'s breakfast."' }] },
+      { jp: 'どのゲームがしたいの？', en: '"Which game do you want to play?"', correct: true, fx: { mio: 1 }, then: [{ say: 'mio', expr: 'smirk', jp: 'これ。{負|ま|負ける}けたほうが、{明日|あした}の{朝|あさ}ごはんね。', en: '"This one. Loser buys tomorrow\'s breakfast."' }] },
       { jp: '{勝|か|勝つ}ちたい。', en: '"I want to win."', then: [{ say: 'mio', expr: 'smirk', jp: '{無理|むり}。', en: '"Not happening."' }] },
     ] } },
     { clock: '01:40' },

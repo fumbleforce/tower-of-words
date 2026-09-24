@@ -92,7 +92,7 @@ export const SCENES = {
     { bg: 'meeting' }, { time: 12 },
     { ifTime: { after: '10:00', then: [{ narrate: 'The meeting has already started. Every head turns when the door opens.' }, { set: { lateMeeting: true } }] } },
     { show: 'emi', expr: 'smile', at: 'left' }, { show: 'rei', expr: 'cold', at: 'right' },
-    { if: 'lateMeeting', then: [{ say: 'emi', expr: 'smirk', jp: 'おそい。……コピー、ありがとう。', en: '"You\'re late. ...Thanks for the copies."' }] },
+    { if: 'lateMeeting', then: [{ say: 'emi', expr: 'smirk', jp: 'おそい。……まあ、すわって。', en: '"You\'re late. ...Well, sit down."' }] },
     { if: 'pin_thing_wrong', then: [{ narrate: 'You put your stack on the table. It\'s the wrong thing. Emi quietly slides her own copy across to share.' }, { fx: { emi: -1 } }] },
     { say: 'emi', expr: 'smile', jp: 'では、{企画室|きかくしつ}7から。「{天川|あまかわ}シティの{夏祭|なつまつ|夏祭り}り」の{企画|きかく}です。', en: '"Right, Planning 7 first. Our plan for the Amakawa City summer festival."' },
     { say: 'rei', expr: 'cold', jp: '{企画室|きかくしつ}7の{企画|きかく}は、いつもおもしろい。でも、お{金|かね}にならない。', en: '"Planning 7\'s ideas are always fun. They just never make money."' },
@@ -126,7 +126,7 @@ export const SCENES = {
   day2_canteen: [
     { bg: 'canteen' }, { music: 'lively' },
     { show: 'kaori', expr: 'smile', at: 'center' },
-    { say: 'kaori', expr: 'smile', jp: 'また{来|き|来る}たね。{今日|きょう}の{日替|ひが|日替わり}わりは、ハンバーグだよ。', en: '"You came back. Today\'s daily special is hamburg steak."' },
+    { say: 'kaori', expr: 'smile', jp: 'いらっしゃい。{今日|きょう}の{日替|ひが|日替わり}わりは、ハンバーグだよ。', en: '"Welcome. Today\'s daily special is hamburg steak."' },
     { menu: { items: [
       { jp: '{日替|ひが|日替わり}わり（ハンバーグ）', en: 'Daily special (hamburg steak)', price: 650 },
       { jp: 'カレー', en: 'Curry', price: 500 },
@@ -154,7 +154,7 @@ export const SCENES = {
   day2_rooftop: [
     { bg: 'rooftop' }, { music: 'calm' },
     { show: 'goro', expr: 'smile', at: 'center' },
-    { say: 'goro', expr: 'smile', jp: 'おや、また{来|き|来る}たね。{今日|きょう}はトマトが{元気|げんき}がない。', en: '"Oh, you came again. The tomatoes are feeling low today."' },
+    { say: 'goro', expr: 'smile', jp: 'おや、いらっしゃい。{今日|きょう}はトマトが{元気|げんき}がない。', en: '"Oh, hello there. The tomatoes are feeling low today."' },
     { narrate: 'Goro kneels by a drooping plant and speaks to it quietly.' },
     { say: 'goro', expr: 'smile', jp: '{大丈夫|だいじょうぶ}だよ。{大丈夫|だいじょうぶ}。', en: '"It\'s all right. It\'s all right."' },
     { narrate: 'You feel the words settle in your chest like a new key. 大丈夫だよ: a plain statement, said with intent, calms whoever hears it.' },
