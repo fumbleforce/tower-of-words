@@ -8,11 +8,11 @@ export const SCENES = {
     { msg: { from: 'emi', jp: 'おはよう。{十時|じゅうじ}から{二階|にかい}の{会議室|かいぎしつ}で{会議|かいぎ}。{資料|しりょう}を{十枚|じゅうまい}、コピーしてきて。', en: 'Morning. Meeting at ten in the second-floor meeting room. Make ten copies of the handout.' } },
     { msg: { from: 'mio', jp: '{地下一階|ちかいっかい}のコピー{機|き}、また{壊|こわ|壊れる}れてるって。がんばれ。', en: 'They say the copier on basement level 1 is broken again. Good luck.' } },
     { pin: {
-      prompt: 'Emi didn\'t make a task list. What did she ask for? Pin what you understood.',
+      prompt: 'What did Emi ask for?',
       fields: [
-        { id: 'time', label: '{何時|なんじ}？', options: ['{九時|くじ}', '{十時|じゅうじ}', '{十一時|じゅういちじ}'], answer: 1 },
-        { id: 'place', label: 'どこ？', options: ['{二階|にかい}の{会議室|かいぎしつ}', '{三階|さんがい}の{営業部|えいぎょうぶ}', '{地下二階|ちかにかい}'], answer: 0 },
-        { id: 'thing', label: '{何|なに}を？', options: ['{資料|しりょう}を{十枚|じゅうまい}', 'コーヒーを{十杯|じゅっぱい}', '{名刺|めいし}を{十枚|じゅうまい}'], answer: 0 },
+        { id: 'time', label: '{何時|なんじ}？', labelEn: 'When?', en: ["nine o'clock", "ten o'clock", "eleven o'clock"], options: ['{九時|くじ}', '{十時|じゅうじ}', '{十一時|じゅういちじ}'], answer: 1 },
+        { id: 'place', label: 'どこ？', labelEn: 'Where?', en: ["the meeting room, 2nd floor", "Sales, 3rd floor", "basement level 2"], options: ['{二階|にかい}の{会議室|かいぎしつ}', '{三階|さんがい}の{営業部|えいぎょうぶ}', '{地下二階|ちかにかい}'], answer: 0 },
+        { id: 'thing', label: '{何|なに}を？', labelEn: 'What?', en: ["ten copies of the handout", "ten cups of coffee", "ten business cards"], options: ['{資料|しりょう}を{十枚|じゅうまい}', 'コーヒーを{十杯|じゅっぱい}', '{名刺|めいし}を{十枚|じゅうまい}'], answer: 0 },
       ],
       // Wrong pins set flags (pin_time_wrong etc.) that later scenes react to.
     } },

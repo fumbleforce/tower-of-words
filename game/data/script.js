@@ -44,18 +44,11 @@ export const SCENES = {
     { bg: 'monorail' }, { clock: '08:40' }, { music: 'calm' },
     { narrate: 'Your first day at Amakawa. The monorail glides across Tokyo Bay toward the company\'s island city.' },
     { say: 'announcer', listen: true, jp: 'まもなく、{天川|あまかわ}シティ{中央|ちゅうおう}{駅|えき}です。お{出口|でぐち}は{右側|みぎがわ}です。', en: '"Arriving shortly at Amakawa City Central Station. The exit is on the right."' },
-    { choose: { prompt: 'The train slows down. Which doors do you wait at? (R replays the announcement)', kind: 'action', options: [
+    { choose: { prompt: 'The train slows down. Which doors?', kind: 'action', show: 'en', options: [
       { jp: '{右|みぎ}のドア', en: 'The right-hand doors', correct: true, then: [{ narrate: 'The right-hand doors slide open onto the platform.' }] },
       { jp: '{左|ひだり}のドア', en: 'The left-hand doors', then: [{ narrate: 'The left doors stay shut. You squeeze across the crowded carriage as the right-hand doors open.' }, { time: 2 }] },
     ] } },
     { msg: { from: 'emi', jp: 'おはよう！{九時|くじ}に{地下|ちか}{二階|にかい}の{企画室|きかくしつ}7に{来|き|来る}てね。', en: 'Morning! Come to Planning Office 7, basement level 2, at nine.' } },
-    { pin: {
-      prompt: 'Emi\'s message. What did she ask? Pin what you understood; this becomes your task.',
-      fields: [
-        { id: 'm_time', label: '{何時|なんじ}？', options: ['{八時|はちじ}', '{九時|くじ}', '{十時|じゅうじ}'], answer: 1 },
-        { id: 'm_place', label: 'どこ？', options: ['{地下|ちか}{二階|にかい}', '{二階|にかい}', '{地下|ちか}{一階|いっかい}'], answer: 0 },
-      ],
-    } },
     { goto: 'gate' },
   ],
 
@@ -110,16 +103,7 @@ export const SCENES = {
     { say: 'emi', expr: 'smile', jp: '{さっそく}だけど、お{願|ねが|願う}いがあるの。', en: '"Straight to it: I need a favour."' },
     { say: 'emi', expr: 'smile', jp: '{三階|さんがい}の{営業部|えいぎょうぶ}に{行|い|行く}って、{黒田|くろだ}さんから{書類|しょるい}をもらってきて。', en: '"Go to Sales on the third floor and get the documents from Kuroda."' },
     { say: 'emi', expr: 'smirk', jp: '{十一時|じゅういちじ}までにね。', en: '"Before eleven."' },
-    { pin: {
-      prompt: 'Emi didn\'t write it down. Pin what she said, from memory.',
-      fields: [
-        { id: 'e_floor', label: 'どこ？', options: ['{二階|にかい}', '{三階|さんがい}', '{五階|ごかい}'], answer: 1 },
-        { id: 'e_who', label: '{誰|だれ}？', options: ['{黒田|くろだ}さん', '{石橋|いしばし}さん', 'ミオ'], answer: 0 },
-        { id: 'e_time', label: '{何時|なんじ}まで？', options: ['{十時|じゅうじ}', '{十一時|じゅういちじ}', '{十二時|じゅうにじ}'], answer: 1 },
-      ],
-    } },
     { say: 'mio', expr: 'smirk', jp: '{黒田|くろだ}レイ？　……がんばって。あの{人|ひと}、{こわい}よ。', en: '"Rei Kuroda? ...Good luck. She\'s scary."' },
-    { narrate: 'You feel the words humming in your chest. Nobody here knows what you can do.' },
     { hideAll: true },
     { goto: 'elevator2' },
   ],
