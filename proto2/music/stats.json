@@ -1,0 +1,27 @@
+{
+ "calm": {
+  "gen_s": 372,
+  "style": "Instrumental, no vocals. Calm morning city pop, 84 BPM, soft electric piano, clean guitar, gentle drums, warm synth pads, hopeful and bright, smooth loop.",
+  "lyrics": "[Intro]\n\n[Instrumental]\n\n[Outro]"
+ },
+ "office": {
+  "gen_s": 364,
+  "style": "Instrumental, no vocals. Lazy lo-fi hip hop, 75 BPM, dusty drums, mellow Rhodes piano, soft bass, vinyl crackle, relaxed afternoon mood, smooth loop.",
+  "lyrics": "[Intro]\n\n[Instrumental]\n\n[Outro]"
+ },
+ "lively": {
+  "gen_s": 262,
+  "style": "Instrumental, no vocals. Upbeat cheerful Japanese pop instrumental, 120 BPM, bouncy bass, brass stabs, acoustic guitar, handclaps, busy lunchtime energy, smooth loop.",
+  "lyrics": "[Intro]\n\n[Instrumental]\n\n[Outro]"
+ },
+ "night": {
+  "gen_s": 426,
+  "style": "Instrumental, no vocals. Late-night jazz bar, 70 BPM, brushed drums, upright bass, smoky piano, soft tenor saxophone, rain outside, intimate, smooth loop.",
+  "lyrics": "[Intro]\n\n[Instrumental]\n\n[Outro]"
+ },
+ "opening": {
+  "gen_s": 536,
+  "style": "Japanese, bright female vocal, anime opening theme, J-pop rock, 150 BPM, driving electric guitars, punchy drums, melodic bass, sparkling synths, energetic, catchy chorus, clear diction.",
+  "lyrics": "[Verse]\n朝のモノレール 窓の外\n知らない街が 光ってる\nポケットに IDカード\n今日からここで 働くよ\n\n[Chorus]\nはじめまして 新しい街\n言葉が僕の 魔法になる\n小さな「手伝って」で\n世界が少し 動き出す\n\n[Verse]\n地下の部屋に ゲームの音\nリーダーは笑って「いいね」って\nエレベーターの ボタン押して\n夢の階段 のぼってく\n\n[Chorus]\nはじめまして 新しい街\n言葉が僕の 魔法になる\n小さな「待って」 小さな「ありがとう」\n明日もきっと 大丈夫"
+ }
+}
