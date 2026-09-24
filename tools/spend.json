@@ -1,5 +1,5 @@
 {
- "total": 8.3286,
+ "total": 8.8386,
  "calls": [
   {
    "t": "2026-09-24T10:37:04.077Z",
@@ -1540,6 +1540,118 @@
    "est": 0.03,
    "out": "art/company/final/sayaka-7.webp",
    "prompt": "Anime character portrait, 2020s TV anime still, clean cel shading. Sayaka, a 32-year-old woman, a cool team leader: shor"
+  },
+  {
+   "t": "2026-09-24T13:47:53.946Z",
+   "model": "black-forest-labs/flux-2-pro",
+   "est": 0.03,
+   "out": "art/company/mappa/sayaka-3.webp",
+   "prompt": "Anime character portrait, modern MAPPA anime still, sharp lines, cinematic lighting. Sayaka, 32, the team leader who nev"
+  },
+  {
+   "t": "2026-09-24T13:47:54.452Z",
+   "model": "black-forest-labs/flux-2-pro",
+   "est": 0.03,
+   "out": "art/company/mappa/tomi-17.webp",
+   "prompt": "Anime character portrait, modern MAPPA anime still, sharp lines, cinematic lighting. Tomi, 58, the loud Osaka canteen au"
+  },
+  {
+   "t": "2026-09-24T13:47:54.466Z",
+   "model": "black-forest-labs/flux-2-pro",
+   "est": 0.03,
+   "out": "art/company/mappa/aoi-3.webp",
+   "prompt": "Anime character portrait, modern MAPPA anime still, sharp lines, cinematic lighting. Aoi, 22, a chaotic graduate intern."
+  },
+  {
+   "t": "2026-09-24T13:47:54.598Z",
+   "model": "black-forest-labs/flux-2-pro",
+   "est": 0.03,
+   "out": "art/company/mappa/aoi-17.webp",
+   "prompt": "Anime character portrait, modern MAPPA anime still, sharp lines, cinematic lighting. Aoi, 22, a chaotic graduate intern."
+  },
+  {
+   "t": "2026-09-24T13:47:54.674Z",
+   "model": "black-forest-labs/flux-2-pro",
+   "est": 0.03,
+   "out": "art/company/mappa/mio-3.webp",
+   "prompt": "Anime character portrait, modern MAPPA anime still, sharp lines, cinematic lighting. Mio, 25, a shut-in gamer who someho"
+  },
+  {
+   "t": "2026-09-24T13:47:54.809Z",
+   "model": "black-forest-labs/flux-2-pro",
+   "est": 0.03,
+   "out": "art/company/mappa/sayaka-17.webp",
+   "prompt": "Anime character portrait, modern MAPPA anime still, sharp lines, cinematic lighting. Sayaka, 32, the team leader who nev"
+  },
+  {
+   "t": "2026-09-24T13:47:54.933Z",
+   "model": "black-forest-labs/flux-2-pro",
+   "est": 0.03,
+   "out": "art/company/mappa/tomi-3.webp",
+   "prompt": "Anime character portrait, modern MAPPA anime still, sharp lines, cinematic lighting. Tomi, 58, the loud Osaka canteen au"
+  },
+  {
+   "t": "2026-09-24T13:47:55.067Z",
+   "model": "black-forest-labs/flux-2-pro",
+   "est": 0.03,
+   "out": "art/company/mappa/daigo-17.webp",
+   "prompt": "Anime character portrait, modern MAPPA anime still, sharp lines, cinematic lighting. Daigo, 29, an easygoing factory wor"
+  },
+  {
+   "t": "2026-09-24T13:47:55.130Z",
+   "model": "black-forest-labs/flux-2-pro",
+   "est": 0.03,
+   "out": "art/company/mappa/guard-3.webp",
+   "prompt": "Anime character portrait, modern MAPPA anime still, sharp lines, cinematic lighting. The gate guard, 55. Grey crew cut u"
+  },
+  {
+   "t": "2026-09-24T13:47:55.485Z",
+   "model": "black-forest-labs/flux-2-pro",
+   "est": 0.03,
+   "out": "art/company/mappa/guard-17.webp",
+   "prompt": "Anime character portrait, modern MAPPA anime still, sharp lines, cinematic lighting. The gate guard, 55. Grey crew cut u"
+  },
+  {
+   "t": "2026-09-24T13:47:55.688Z",
+   "model": "black-forest-labs/flux-2-pro",
+   "est": 0.03,
+   "out": "art/company/mappa/daigo-3.webp",
+   "prompt": "Anime character portrait, modern MAPPA anime still, sharp lines, cinematic lighting. Daigo, 29, an easygoing factory wor"
+  },
+  {
+   "t": "2026-09-24T13:47:56.068Z",
+   "model": "black-forest-labs/flux-2-pro",
+   "est": 0.03,
+   "out": "art/company/mappa/hana-17.webp",
+   "prompt": "Anime character portrait, modern MAPPA anime still, sharp lines, cinematic lighting. Hana, 27, a nosy investigative repo"
+  },
+  {
+   "t": "2026-09-24T13:47:56.542Z",
+   "model": "black-forest-labs/flux-2-pro",
+   "est": 0.03,
+   "out": "art/company/mappa/mio-17.webp",
+   "prompt": "Anime character portrait, modern MAPPA anime still, sharp lines, cinematic lighting. Mio, 25, a shut-in gamer who someho"
+  },
+  {
+   "t": "2026-09-24T13:47:58.061Z",
+   "model": "black-forest-labs/flux-2-pro",
+   "est": 0.045,
+   "out": "art/company/mappa/rei-17.webp",
+   "prompt": "Anime character portrait, modern MAPPA anime still, sharp lines, cinematic lighting. The same woman as in image 1, redra"
+  },
+  {
+   "t": "2026-09-24T13:47:59.500Z",
+   "model": "black-forest-labs/flux-2-pro",
+   "est": 0.045,
+   "out": "art/company/mappa/rei-3.webp",
+   "prompt": "Anime character portrait, modern MAPPA anime still, sharp lines, cinematic lighting. The same woman as in image 1, redra"
+  },
+  {
+   "t": "2026-09-24T13:48:05.571Z",
+   "model": "black-forest-labs/flux-2-pro",
+   "est": 0.03,
+   "out": "art/company/mappa/hana-3.webp",
+   "prompt": "Anime character portrait, modern MAPPA anime still, sharp lines, cinematic lighting. Hana, 27, a nosy investigative repo"
   }
  ]
 }
