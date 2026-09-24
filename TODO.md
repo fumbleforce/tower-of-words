@@ -5,7 +5,11 @@ Read GUIDE.md first. Pick up from here next session.
 ## Waiting on Jørgen
 - **Cast round 2 picks:** proto2/decide2 (partial: Yuzuki, Goro, Jun, Ishibashi and Saki-a are rendered; Saki-b, the Kiyoko outfits, Nanami and the office revision are still to render: rerun tools/decide2.py, which only renders what is missing) (Yuzuki distinct from Emi, Goro in RDBT, new Jun, Ishibashi options, Saki not like Rei, Kiyoko outfits that aren't black, Nanami options, basement office with chairs and ramen cups).
 - **Mio's voice:** all 35 lines regenerated from the original clip with only a male-drift guard. Listen on proto2/voice-mio; 「新しいゲーム…」 is borderline (35% under 160 Hz).
-- **Video:** set up (Wan 2.2 TI2V 5B, and Causal Forcing for fast drafts); 4 test clips on proto2/video. The monorail works well; Emi winks instead of blinking and breathing (no loop yet). Workflows are in ~/ai/workflows/video-*.json. Review and decide before any more clips.
+- **Video:** Jørgen's verdict: very bad. The train looks like a worm with rippling skin, and the women barely move. Partly the model (Wan 2.2 5B is small), partly the prompts. Options for next time, decide before rendering more:
+  1. A bigger local model: Wan 2.2 14B image-to-video, GGUF-quantized, offloading to the 60 GB of RAM (slow but much better), plus anime motion add-ons.
+  2. Cloud for a few key cutscenes only: Kling, Seedance or Veo on Replicate, $0.25–1.20 per clip.
+  3. For living portraits, skip video: animate the sprites as layered puppets (Live2D-style: blinking, breathing and hair sway in the game engine). Cheap, consistent and loopable; probably the right tool for VN characters.
+  4. Better motion prompts: describe the motion explicitly per second, use camera terms, and a motion-strength or frame-count choice.
 - **Local music:** YuE2 versus Lyria verdict (proto2/music). The game currently alternates between both.
 
 ## Art (after the cast is settled; decide before producing)

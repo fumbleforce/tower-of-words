@@ -67,6 +67,9 @@ Everything Jørgen has asked for, and how we work. Every agent reads this before
 - Cutouts: local rembg ISNet anime. Check for see-through holes in hair and glasses.
 - Never open images or pages on Jørgen's screen (no xdg-open). Give links only.
 
+## Video
+- First local test (Wan 2.2 5B, Causal Forcing) was rejected as very bad: body-horror textures on the train, and almost no character motion. Living portraits are likely better done as in-engine puppet animation than as video.
+
 ## Voices and audio
 - Replicate voices are best (MiniMax Speech 2.6 HD plus Qwen3-TTS clones). Local Qwen3-TTS is a fallback. IndexTTS is unusable.
 - Mio: the original casting clip (proto2/audition/r2/mio-3.mp3), a relaxed late-20s NEET. Don't over-tune (style instructions made her younger and wobblier). Only guard against male drift.
