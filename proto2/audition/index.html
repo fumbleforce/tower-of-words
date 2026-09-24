@@ -17,17 +17,18 @@
   .voice.playing { border-color: var(--accent); }
   .voice b { width: 28px; height: 28px; border-radius: 6px; background: var(--accent); color: #fff; display: grid; place-items: center; font-size: 12px; flex: none; }
   .cast { display: grid; gap: 10px; }
-  .role { display: grid; grid-template-columns: 1fr 240px; gap: 12px; align-items: center; background: #fff; border: 1px solid var(--line); border-radius: 8px; padding: 10px 14px; }
+  .role { display: grid; grid-template-columns: 72px 1fr 240px; gap: 12px; align-items: center; background: #fff; border: 1px solid var(--line); border-radius: 8px; padding: 10px 14px; }
   .role small { display: block; color: var(--ink-2); }
   select { height: 38px; border-radius: 8px; border: 1px solid var(--line); font: inherit; padding: 0 8px; background: #fff; }
   button.copy { margin-top: 20px; height: 44px; padding: 0 20px; border-radius: 8px; border: 0; background: var(--accent); color: #fff; font: 600 16px "Outfit", sans-serif; cursor: pointer; }
-  @media (max-width: 560px) { .role { grid-template-columns: 1fr; } }
+  .role img { width: 72px; height: 90px; object-fit: cover; object-position: top; border-radius: 6px; }
+  @media (max-width: 560px) { .role { grid-template-columns: 72px 1fr; } .role select { grid-column: 1 / -1; } }
 </style>
 </head>
 <body>
 <main>
-  <h1>Voice casting</h1>
-  <p>Every voice reads the same line. Click one to hear it, then pick a voice for each character below and copy your picks back to me.</p>
+  <h1>Cast and voices</h1>
+  <p>Every voice reads the same line. Click one to hear it. Below, pick a voice for each character, then copy your picks back to me along with any notes on how the characters look.</p>
   <div class="line">ねえ、新人さん。今日からここで働くんでしょ？案内してあげるよ。</div>
   <div class="voices" id="voices"></div>
   <h2>Cast</h2>
@@ -38,13 +39,13 @@
 <script>
 const VOICES = ['DecisivePrincess', 'ColdQueen', 'DependableWoman', 'KindLady', 'CalmLady', 'GracefulMaiden', 'SportyStudent', 'IntellectualSenior', 'OptimisticYouth', 'InnocentBoy', 'LoyalKnight', 'DominantMan', 'SeriousCommander', 'GentleButler', 'GenerousIzakayaOwner'];
 const ROLES = [
-  ['Mio 澪', 'Sarcastic coworker, your age', 'DecisivePrincess'],
-  ['Sayaka Makabe 真壁さやか', 'Laid-back team lead, early thirties', 'CalmLady'],
-  ['Hana 花', 'Reporter for the in-house paper, curious about you', 'SportyStudent'],
-  ['Rei Kuroda 黒田レイ', 'Ambitious rival in Sales', 'ColdQueen'],
-  ['Daigo 大吾', 'Production floor, big and friendly', 'GenerousIzakayaOwner'],
-  ['Tomi-san', 'Runs the cantina, fifties', 'KindLady'],
-  ['Gate guard', 'Bored security guard', 'SeriousCommander'],
+  ['Mio 澪', 'Sarcastic coworker, your age', 'DecisivePrincess', 'mio'],
+  ['Sayaka Makabe 真壁さやか', 'Laid-back team lead, early thirties', 'CalmLady', 'sayaka'],
+  ['Hana 花', 'Reporter for the in-house paper, curious about you', 'SportyStudent', 'hana'],
+  ['Rei Kuroda 黒田レイ', 'Ambitious rival in Sales', 'ColdQueen', 'rei'],
+  ['Daigo 大吾', 'Production floor, big and friendly', 'GenerousIzakayaOwner', 'daigo'],
+  ['Tomi-san', 'Runs the cantina, fifties', 'KindLady', 'tomi'],
+  ['Gate guard', 'Bored security guard', 'SeriousCommander', ''],
 ];
 let audio = null;
 const vbox = document.getElementById('voices');
@@ -61,12 +62,12 @@ for (const v of VOICES) {
   vbox.append(b);
 }
 const cast = document.getElementById('cast');
-for (const [name, desc, def] of ROLES) {
+for (const [name, desc, def, img] of ROLES) {
   const row = document.createElement('div'); row.className = 'role';
   const sel = document.createElement('select');
   VOICES.forEach(v => { const o = document.createElement('option'); o.value = v; o.textContent = v.replace(/([a-z])([A-Z])/g, '$1 $2'); o.selected = v === def; sel.append(o); });
   sel.onchange = () => { if (audio) audio.pause(); audio = new Audio(`Japanese_${sel.value}.mp3`); audio.play(); };
-  row.innerHTML = `<div><b>${name}</b><small>${desc}</small></div>`; row.append(sel); row.dataset.name = name;
+  row.innerHTML = (img ? `<img src="../img/${img}.webp" alt="">` : '<span></span>') + `<div><b>${name}</b><small>${desc}</small></div>`; row.append(sel); row.dataset.name = name;
   cast.append(row);
 }
 document.getElementById('copy').onclick = () => {

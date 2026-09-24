@@ -1,5 +1,5 @@
 {
- "total": 1.2705,
+ "total": 1.5405,
  "calls": [
   {
    "t": "2026-09-24T10:37:04.077Z",
@@ -294,6 +294,48 @@
    "est": 0.0031000000000000003,
    "out": "proto2/audition/Japanese_CalmLady.mp3",
    "prompt": ""
+  },
+  {
+   "t": "2026-09-24T12:17:21.355Z",
+   "model": "black-forest-labs/flux-2-pro",
+   "est": 0.045,
+   "out": "art/company/mio.webp",
+   "prompt": "High-fidelity mature anime illustration, film-quality character art in the vein of Kyoto Animation and Ufotable. Match t"
+  },
+  {
+   "t": "2026-09-24T12:17:22.839Z",
+   "model": "black-forest-labs/flux-2-pro",
+   "est": 0.045,
+   "out": "art/company/rei.webp",
+   "prompt": "High-fidelity mature anime illustration, film-quality character art in the vein of Kyoto Animation and Ufotable. Match t"
+  },
+  {
+   "t": "2026-09-24T12:17:24.320Z",
+   "model": "black-forest-labs/flux-2-pro",
+   "est": 0.045,
+   "out": "art/company/hana.webp",
+   "prompt": "High-fidelity mature anime illustration, film-quality character art in the vein of Kyoto Animation and Ufotable. Match t"
+  },
+  {
+   "t": "2026-09-24T12:17:25.088Z",
+   "model": "black-forest-labs/flux-2-pro",
+   "est": 0.045,
+   "out": "art/company/daigo.webp",
+   "prompt": "High-fidelity mature anime illustration, film-quality character art in the vein of Kyoto Animation and Ufotable. Match t"
+  },
+  {
+   "t": "2026-09-24T12:17:25.541Z",
+   "model": "black-forest-labs/flux-2-pro",
+   "est": 0.045,
+   "out": "art/company/sayaka.webp",
+   "prompt": "High-fidelity mature anime illustration, film-quality character art in the vein of Kyoto Animation and Ufotable. Match t"
+  },
+  {
+   "t": "2026-09-24T12:17:27.766Z",
+   "model": "black-forest-labs/flux-2-pro",
+   "est": 0.045,
+   "out": "art/company/tomi.webp",
+   "prompt": "High-fidelity mature anime illustration, film-quality character art in the vein of Kyoto Animation and Ufotable. Match t"
   }
  ]
 }
