@@ -27,6 +27,7 @@ const PRICE = {
   'meta/musicgen': () => 0.1,
   '851-labs/background-remover': () => 0.002,
   'minimax/speech-2.6-hd': i => Math.max(0.002, (i.text || '').length * 0.0001),
+  'qwen/qwen3-tts': () => 0.01,
   'minimax/speech-2.6-turbo': i => Math.max(0.001, (i.text || '').length * 0.00006),
 };
 

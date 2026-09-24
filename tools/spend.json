@@ -1,5 +1,5 @@
 {
- "total": 1.5405,
+ "total": 1.9986,
  "calls": [
   {
    "t": "2026-09-24T10:37:04.077Z",
@@ -335,6 +335,202 @@
    "model": "black-forest-labs/flux-2-pro",
    "est": 0.045,
    "out": "art/company/tomi.webp",
+   "prompt": "High-fidelity mature anime illustration, film-quality character art in the vein of Kyoto Animation and Ufotable. Match t"
+  },
+  {
+   "t": "2026-09-24T12:28:20.590Z",
+   "model": "minimax/speech-2.6-hd",
+   "est": 0.003,
+   "out": "proto2/audition/r2/hana-1.mp3",
+   "prompt": ""
+  },
+  {
+   "t": "2026-09-24T12:28:20.592Z",
+   "model": "minimax/speech-2.6-hd",
+   "est": 0.0027,
+   "out": "proto2/audition/r2/sayaka-1.mp3",
+   "prompt": ""
+  },
+  {
+   "t": "2026-09-24T12:28:20.673Z",
+   "model": "minimax/speech-2.6-hd",
+   "est": 0.0027,
+   "out": "proto2/audition/r2/sayaka-2.mp3",
+   "prompt": ""
+  },
+  {
+   "t": "2026-09-24T12:28:20.687Z",
+   "model": "minimax/speech-2.6-hd",
+   "est": 0.003,
+   "out": "proto2/audition/r2/tomi-1.mp3",
+   "prompt": ""
+  },
+  {
+   "t": "2026-09-24T12:28:20.695Z",
+   "model": "minimax/speech-2.6-hd",
+   "est": 0.0022,
+   "out": "proto2/audition/r2/daigo-2.mp3",
+   "prompt": ""
+  },
+  {
+   "t": "2026-09-24T12:28:20.706Z",
+   "model": "minimax/speech-2.6-hd",
+   "est": 0.0024000000000000002,
+   "out": "proto2/audition/r2/rei-1.mp3",
+   "prompt": ""
+  },
+  {
+   "t": "2026-09-24T12:28:20.716Z",
+   "model": "minimax/speech-2.6-hd",
+   "est": 0.0022,
+   "out": "proto2/audition/r2/daigo-1.mp3",
+   "prompt": ""
+  },
+  {
+   "t": "2026-09-24T12:28:20.753Z",
+   "model": "minimax/speech-2.6-hd",
+   "est": 0.0023,
+   "out": "proto2/audition/r2/guard-1.mp3",
+   "prompt": ""
+  },
+  {
+   "t": "2026-09-24T12:28:20.958Z",
+   "model": "minimax/speech-2.6-hd",
+   "est": 0.0026000000000000003,
+   "out": "proto2/audition/r2/mio-1.mp3",
+   "prompt": ""
+  },
+  {
+   "t": "2026-09-24T12:28:22.899Z",
+   "model": "qwen/qwen3-tts",
+   "est": 0.01,
+   "out": "proto2/audition/r2/daigo-3.mp3",
+   "prompt": ""
+  },
+  {
+   "t": "2026-09-24T12:28:24.598Z",
+   "model": "qwen/qwen3-tts",
+   "est": 0.01,
+   "out": "proto2/audition/r2/guard-2.mp3",
+   "prompt": ""
+  },
+  {
+   "t": "2026-09-24T12:28:27.431Z",
+   "model": "qwen/qwen3-tts",
+   "est": 0.01,
+   "out": "proto2/audition/r2/mio-3.mp3",
+   "prompt": ""
+  },
+  {
+   "t": "2026-09-24T12:28:27.762Z",
+   "model": "qwen/qwen3-tts",
+   "est": 0.01,
+   "out": "proto2/audition/r2/sayaka-3.mp3",
+   "prompt": ""
+  },
+  {
+   "t": "2026-09-24T12:28:29.950Z",
+   "model": "qwen/qwen3-tts",
+   "est": 0.01,
+   "out": "proto2/audition/r2/guard-3.mp3",
+   "prompt": ""
+  },
+  {
+   "t": "2026-09-24T12:28:32.454Z",
+   "model": "qwen/qwen3-tts",
+   "est": 0.01,
+   "out": "proto2/audition/r2/hana-2.mp3",
+   "prompt": ""
+  },
+  {
+   "t": "2026-09-24T12:28:34.990Z",
+   "model": "qwen/qwen3-tts",
+   "est": 0.01,
+   "out": "proto2/audition/r2/rei-2.mp3",
+   "prompt": ""
+  },
+  {
+   "t": "2026-09-24T12:28:37.287Z",
+   "model": "qwen/qwen3-tts",
+   "est": 0.01,
+   "out": "proto2/audition/r2/mio-2.mp3",
+   "prompt": ""
+  },
+  {
+   "t": "2026-09-24T12:28:40.038Z",
+   "model": "qwen/qwen3-tts",
+   "est": 0.01,
+   "out": "proto2/audition/r2/tomi-3.mp3",
+   "prompt": ""
+  },
+  {
+   "t": "2026-09-24T12:28:41.697Z",
+   "model": "qwen/qwen3-tts",
+   "est": 0.01,
+   "out": "proto2/audition/r2/tomi-2.mp3",
+   "prompt": ""
+  },
+  {
+   "t": "2026-09-24T12:28:42.677Z",
+   "model": "qwen/qwen3-tts",
+   "est": 0.01,
+   "out": "proto2/audition/r2/hana-3.mp3",
+   "prompt": ""
+  },
+  {
+   "t": "2026-09-24T12:28:45.700Z",
+   "model": "qwen/qwen3-tts",
+   "est": 0.01,
+   "out": "proto2/audition/r2/rei-3.mp3",
+   "prompt": ""
+  },
+  {
+   "t": "2026-09-24T12:29:44.138Z",
+   "model": "black-forest-labs/flux-2-pro",
+   "est": 0.045,
+   "out": "art/company/v2/guard.webp",
+   "prompt": "High-fidelity mature anime illustration, film-quality character art in the vein of Kyoto Animation and Ufotable. Match t"
+  },
+  {
+   "t": "2026-09-24T12:29:44.360Z",
+   "model": "black-forest-labs/flux-2-pro",
+   "est": 0.045,
+   "out": "art/company/v2/sayaka.webp",
+   "prompt": "High-fidelity mature anime illustration, film-quality character art in the vein of Kyoto Animation and Ufotable. Match t"
+  },
+  {
+   "t": "2026-09-24T12:29:45.853Z",
+   "model": "black-forest-labs/flux-2-pro",
+   "est": 0.045,
+   "out": "art/company/v2/rei.webp",
+   "prompt": "High-fidelity mature anime illustration, film-quality character art in the vein of Kyoto Animation and Ufotable. Match t"
+  },
+  {
+   "t": "2026-09-24T12:29:46.311Z",
+   "model": "black-forest-labs/flux-2-pro",
+   "est": 0.045,
+   "out": "art/company/v2/tomi.webp",
+   "prompt": "High-fidelity mature anime illustration, film-quality character art in the vein of Kyoto Animation and Ufotable. Match t"
+  },
+  {
+   "t": "2026-09-24T12:29:46.315Z",
+   "model": "black-forest-labs/flux-2-pro",
+   "est": 0.045,
+   "out": "art/company/v2/mio.webp",
+   "prompt": "High-fidelity mature anime illustration, film-quality character art in the vein of Kyoto Animation and Ufotable. Match t"
+  },
+  {
+   "t": "2026-09-24T12:29:46.858Z",
+   "model": "black-forest-labs/flux-2-pro",
+   "est": 0.045,
+   "out": "art/company/v2/hana.webp",
+   "prompt": "High-fidelity mature anime illustration, film-quality character art in the vein of Kyoto Animation and Ufotable. Match t"
+  },
+  {
+   "t": "2026-09-24T12:30:07.606Z",
+   "model": "black-forest-labs/flux-2-pro",
+   "est": 0.045,
+   "out": "art/company/v2/daigo.webp",
    "prompt": "High-fidelity mature anime illustration, film-quality character art in the vein of Kyoto Animation and Ufotable. Match t"
   }
  ]
