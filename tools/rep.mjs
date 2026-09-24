@@ -8,7 +8,7 @@ import { fileURLToPath } from 'node:url';
 
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), '..');
 const LEDGER = path.join(ROOT, 'tools', 'spend.json');
-const BUDGET = 100; // USD, agreed with Jørgen
+const BUDGET = 100; // USD, overall cap agreed with Jørgen (prototype cap is tracked by hand: $10)
 
 // Rough per-call USD estimates (Replicate doesn't return cost per prediction).
 const PRICE = {
@@ -17,6 +17,11 @@ const PRICE = {
   'black-forest-labs/flux-kontext-pro': () => 0.04,
   'google/nano-banana': () => 0.039,
   'google/nano-banana-pro': () => 0.15,
+  'bytedance/seedream-4.5': () => 0.04,
+  'qwen/qwen-image': () => 0.025,
+  'ideogram-ai/ideogram-v3-turbo': () => 0.03,
+  'aisha-ai-official/animagine-xl-4.0': () => 0.02,
+  'black-forest-labs/flux-2-max': () => 0.08,
   'retro-diffusion/rd-plus': i => 0.05 * (i.num_images || 1),
   'retro-diffusion/rd-tile': i => 0.05 * (i.num_images || 1),
   'retro-diffusion/rd-animation': () => 0.1,
