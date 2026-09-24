@@ -1,5 +1,5 @@
 {
- "total": 2.2836,
+ "total": 3.3936,
  "calls": [
   {
    "t": "2026-09-24T10:37:04.077Z",
@@ -588,6 +588,160 @@
    "est": 0.03,
    "out": "art/company/styles/rei-graphic.webp",
    "prompt": "Bold stylised graphic illustration: thick confident outlines, flat colours in a limited palette, halftone dot shading, s"
+  },
+  {
+   "t": "2026-09-24T12:48:05.123Z",
+   "model": "black-forest-labs/flux-2-pro",
+   "est": 0.045,
+   "out": "art/company/v3/mio-11.webp",
+   "prompt": "Mio, a 24-year-old office worker who lives like a shut-in gamer, the same young woman as in image 1: messy chin-length d"
+  },
+  {
+   "t": "2026-09-24T12:48:05.943Z",
+   "model": "black-forest-labs/flux-2-pro",
+   "est": 0.045,
+   "out": "art/company/v3/mio-42.webp",
+   "prompt": "Mio, a 24-year-old office worker who lives like a shut-in gamer, the same young woman as in image 1: messy chin-length d"
+  },
+  {
+   "t": "2026-09-24T12:48:06.150Z",
+   "model": "black-forest-labs/flux-2-pro",
+   "est": 0.045,
+   "out": "art/company/v3/daigo-11.webp",
+   "prompt": "Daigo, a 28-year-old production floor worker with an ordinary, slightly soft build: bleached blond buzzcut, friendly rou"
+  },
+  {
+   "t": "2026-09-24T12:48:06.209Z",
+   "model": "black-forest-labs/flux-2-pro",
+   "est": 0.045,
+   "out": "art/company/v3/daigo-42.webp",
+   "prompt": "Daigo, a 28-year-old production floor worker with an ordinary, slightly soft build: bleached blond buzzcut, friendly rou"
+  },
+  {
+   "t": "2026-09-24T12:48:07.468Z",
+   "model": "black-forest-labs/flux-2-pro",
+   "est": 0.06,
+   "out": "art/company/v3/sayaka-42.webp",
+   "prompt": "Sayaka, a 32-year-old team leader, relaxed and quietly brilliant: wavy dark-brown hair held up in a simple claw clip, re"
+  },
+  {
+   "t": "2026-09-24T12:48:07.739Z",
+   "model": "black-forest-labs/flux-2-pro",
+   "est": 0.06,
+   "out": "art/company/v3/guard-42.webp",
+   "prompt": "The gate guard, a stern Japanese man in his fifties: grey crew cut under a navy security cap, heavy-lidded tired eyes, d"
+  },
+  {
+   "t": "2026-09-24T12:48:09.564Z",
+   "model": "black-forest-labs/flux-2-pro",
+   "est": 0.06,
+   "out": "art/company/v3/hana-11.webp",
+   "prompt": "Hana, a 25-year-old in-house newspaper reporter, eager and curious: short permed chestnut hair with a few colourful hair"
+  },
+  {
+   "t": "2026-09-24T12:48:09.901Z",
+   "model": "black-forest-labs/flux-2-pro",
+   "est": 0.06,
+   "out": "art/company/v3/guard-11.webp",
+   "prompt": "The gate guard, a stern Japanese man in his fifties: grey crew cut under a navy security cap, heavy-lidded tired eyes, d"
+  },
+  {
+   "t": "2026-09-24T12:48:10.682Z",
+   "model": "black-forest-labs/flux-2-pro",
+   "est": 0.06,
+   "out": "art/company/v3/tomi-42.webp",
+   "prompt": "Tomi, a 58-year-old Osaka-born woman who runs the company canteen, loud and warm: curly grey-streaked permed hair under "
+  },
+  {
+   "t": "2026-09-24T12:48:12.345Z",
+   "model": "black-forest-labs/flux-2-pro",
+   "est": 0.06,
+   "out": "art/company/v3/tomi-11.webp",
+   "prompt": "Tomi, a 58-year-old Osaka-born woman who runs the company canteen, loud and warm: curly grey-streaked permed hair under "
+  },
+  {
+   "t": "2026-09-24T12:48:12.999Z",
+   "model": "black-forest-labs/flux-2-pro",
+   "est": 0.06,
+   "out": "art/company/v3/sayaka-11.webp",
+   "prompt": "Sayaka, a 32-year-old team leader, relaxed and quietly brilliant: wavy dark-brown hair held up in a simple claw clip, re"
+  },
+  {
+   "t": "2026-09-24T12:48:13.571Z",
+   "model": "black-forest-labs/flux-2-pro",
+   "est": 0.06,
+   "out": "art/company/v3/hana-42.webp",
+   "prompt": "Hana, a 25-year-old in-house newspaper reporter, eager and curious: short permed chestnut hair with a few colourful hair"
+  },
+  {
+   "t": "2026-09-24T12:48:36.382Z",
+   "model": "black-forest-labs/flux-2-pro",
+   "est": 0.045,
+   "out": "art/company/v3/rei-42.webp",
+   "prompt": "Rei, a 23-year-old top salesperson, sharp and ambitious: long silver-grey hair in a sleek high ponytail, thin gold hoop "
+  },
+  {
+   "t": "2026-09-24T12:48:36.753Z",
+   "model": "black-forest-labs/flux-2-pro",
+   "est": 0.045,
+   "out": "art/company/v3/rei-11.webp",
+   "prompt": "Rei, a 23-year-old top salesperson, sharp and ambitious: long silver-grey hair in a sleek high ponytail, thin gold hoop "
+  },
+  {
+   "t": "2026-09-24T12:49:06.136Z",
+   "model": "black-forest-labs/flux-2-pro",
+   "est": 0.045,
+   "out": "art/company/v3/guard-11.webp",
+   "prompt": "The gate guard, a stern Japanese man in his fifties: grey crew cut under a navy security cap, heavy-lidded tired eyes, d"
+  },
+  {
+   "t": "2026-09-24T12:49:06.279Z",
+   "model": "black-forest-labs/flux-2-pro",
+   "est": 0.045,
+   "out": "art/company/v3/tomi-42.webp",
+   "prompt": "Tomi, a 58-year-old Osaka-born woman who runs the company canteen, loud and warm: curly grey-streaked permed hair under "
+  },
+  {
+   "t": "2026-09-24T12:49:06.311Z",
+   "model": "black-forest-labs/flux-2-pro",
+   "est": 0.045,
+   "out": "art/company/v3/hana-42.webp",
+   "prompt": "Hana, a 25-year-old in-house newspaper reporter, eager and curious: short permed chestnut hair with a few colourful hair"
+  },
+  {
+   "t": "2026-09-24T12:49:06.460Z",
+   "model": "black-forest-labs/flux-2-pro",
+   "est": 0.045,
+   "out": "art/company/v3/hana-11.webp",
+   "prompt": "Hana, a 25-year-old in-house newspaper reporter, eager and curious: short permed chestnut hair with a few colourful hair"
+  },
+  {
+   "t": "2026-09-24T12:49:08.772Z",
+   "model": "black-forest-labs/flux-2-pro",
+   "est": 0.045,
+   "out": "art/company/v3/sayaka-11.webp",
+   "prompt": "Sayaka, a 32-year-old team leader, relaxed and quietly brilliant: wavy dark-brown hair held up in a simple claw clip, re"
+  },
+  {
+   "t": "2026-09-24T12:49:09.487Z",
+   "model": "black-forest-labs/flux-2-pro",
+   "est": 0.045,
+   "out": "art/company/v3/sayaka-42.webp",
+   "prompt": "Sayaka, a 32-year-old team leader, relaxed and quietly brilliant: wavy dark-brown hair held up in a simple claw clip, re"
+  },
+  {
+   "t": "2026-09-24T12:49:09.823Z",
+   "model": "black-forest-labs/flux-2-pro",
+   "est": 0.045,
+   "out": "art/company/v3/guard-42.webp",
+   "prompt": "The gate guard, a stern Japanese man in his fifties: grey crew cut under a navy security cap, heavy-lidded tired eyes, d"
+  },
+  {
+   "t": "2026-09-24T12:49:10.601Z",
+   "model": "black-forest-labs/flux-2-pro",
+   "est": 0.045,
+   "out": "art/company/v3/tomi-11.webp",
+   "prompt": "Tomi, a 58-year-old Osaka-born woman who runs the company canteen, loud and warm: curly grey-streaked permed hair under "
   }
  ]
 }
