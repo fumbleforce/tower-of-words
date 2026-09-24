@@ -1,5 +1,5 @@
 {
- "total": 4.5736,
+ "total": 5.8536,
  "calls": [
   {
    "t": "2026-09-24T10:37:04.077Z",
@@ -910,6 +910,230 @@
    "est": 0.02,
    "out": "art/company/models/animagine-tv-mio.png",
    "prompt": "1girl, solo, black hair, teal inner hair color, short hair, messy hair, tired eyes, half-closed eyes, dark circles, blac"
+  },
+  {
+   "t": "2026-09-24T13:03:08.201Z",
+   "model": "bytedance/seedream-4.5",
+   "est": 0.04,
+   "out": "art/company/m2/seedream-tv-mio.png",
+   "prompt": "Anime character portrait, 2020s TV anime still, clean cel shading. Mio, 24, a sardonic office worker who games all night"
+  },
+  {
+   "t": "2026-09-24T13:03:08.300Z",
+   "model": "bytedance/seedream-4.5",
+   "est": 0.04,
+   "out": "art/company/m2/seedream-seinen-guard.png",
+   "prompt": "Anime character portrait, Mature seinen anime, like Psycho-Pass. A gate guard in his fifties: grey crew cut, navy securi"
+  },
+  {
+   "t": "2026-09-24T13:03:08.441Z",
+   "model": "bytedance/seedream-4.5",
+   "est": 0.04,
+   "out": "art/company/m2/seedream-vn-rei.png",
+   "prompt": "Anime character portrait, Visual novel character sprite art. Rei, 23, an ambitious saleswoman: long silver hair in a hig"
+  },
+  {
+   "t": "2026-09-24T13:03:09.383Z",
+   "model": "black-forest-labs/flux-2-pro",
+   "est": 0.03,
+   "out": "art/company/m2/flux-vn-rei.png",
+   "prompt": "Anime character portrait, Visual novel character sprite art. Rei, 23, an ambitious saleswoman: long silver hair in a hig"
+  },
+  {
+   "t": "2026-09-24T13:03:09.389Z",
+   "model": "black-forest-labs/flux-2-pro",
+   "est": 0.03,
+   "out": "art/company/m2/flux-vn-hana.png",
+   "prompt": "Anime character portrait, Visual novel character sprite art. Hana, 25, a company newspaper reporter: short permed chestn"
+  },
+  {
+   "t": "2026-09-24T13:03:09.730Z",
+   "model": "black-forest-labs/flux-2-pro",
+   "est": 0.03,
+   "out": "art/company/m2/flux-tv-mio.png",
+   "prompt": "Anime character portrait, 2020s TV anime still, clean cel shading. Mio, 24, a sardonic office worker who games all night"
+  },
+  {
+   "t": "2026-09-24T13:03:10.136Z",
+   "model": "black-forest-labs/flux-2-pro",
+   "est": 0.03,
+   "out": "art/company/m2/flux-cel90s-tomi.png",
+   "prompt": "Anime character portrait, 1990s anime cel, like Cowboy Bebop. Tomi, 58, a loud Osaka canteen auntie: permed grey hair, p"
+  },
+  {
+   "t": "2026-09-24T13:03:10.235Z",
+   "model": "bytedance/seedream-4.5",
+   "est": 0.04,
+   "out": "art/company/m2/seedream-cel90s-tomi.png",
+   "prompt": "Anime character portrait, 1990s anime cel, like Cowboy Bebop. Tomi, 58, a loud Osaka canteen auntie: permed grey hair, p"
+  },
+  {
+   "t": "2026-09-24T13:03:10.331Z",
+   "model": "black-forest-labs/flux-2-pro",
+   "est": 0.03,
+   "out": "art/company/m2/flux-tv-daigo.png",
+   "prompt": "Anime character portrait, 2020s TV anime still, clean cel shading. Daigo, 28, a factory-floor worker of average build: b"
+  },
+  {
+   "t": "2026-09-24T13:03:10.538Z",
+   "model": "bytedance/seedream-4.5",
+   "est": 0.04,
+   "out": "art/company/m2/seedream-seinen-reiB.png",
+   "prompt": "Anime character portrait, Mature seinen anime, like Psycho-Pass. Rei, 23, an ambitious saleswoman: sharp black bob with "
+  },
+  {
+   "t": "2026-09-24T13:03:11.122Z",
+   "model": "bytedance/seedream-4.5",
+   "est": 0.04,
+   "out": "art/company/m2/seedream-vn-hana.png",
+   "prompt": "Anime character portrait, Visual novel character sprite art. Hana, 25, a company newspaper reporter: short permed chestn"
+  },
+  {
+   "t": "2026-09-24T13:03:11.407Z",
+   "model": "black-forest-labs/flux-2-pro",
+   "est": 0.03,
+   "out": "art/company/m2/flux-cel90s-sayaka.png",
+   "prompt": "Anime character portrait, 1990s anime cel, like Cowboy Bebop. Sayaka, 32, a relaxed team leader: wavy brown hair in a cl"
+  },
+  {
+   "t": "2026-09-24T13:03:11.723Z",
+   "model": "bytedance/seedream-4.5",
+   "est": 0.04,
+   "out": "art/company/m2/seedream-tv-daigo.png",
+   "prompt": "Anime character portrait, 2020s TV anime still, clean cel shading. Daigo, 28, a factory-floor worker of average build: b"
+  },
+  {
+   "t": "2026-09-24T13:03:11.856Z",
+   "model": "black-forest-labs/flux-2-pro",
+   "est": 0.03,
+   "out": "art/company/m2/flux-seinen-guard.png",
+   "prompt": "Anime character portrait, Mature seinen anime, like Psycho-Pass. A gate guard in his fifties: grey crew cut, navy securi"
+  },
+  {
+   "t": "2026-09-24T13:03:12.676Z",
+   "model": "bytedance/seedream-4.5",
+   "est": 0.04,
+   "out": "art/company/m2/seedream-cel90s-sayaka.png",
+   "prompt": "Anime character portrait, 1990s anime cel, like Cowboy Bebop. Sayaka, 32, a relaxed team leader: wavy brown hair in a cl"
+  },
+  {
+   "t": "2026-09-24T13:03:13.240Z",
+   "model": "black-forest-labs/flux-2-pro",
+   "est": 0.03,
+   "out": "art/company/m2/flux-seinen-reiB.png",
+   "prompt": "Anime character portrait, Mature seinen anime, like Psycho-Pass. Rei, 23, an ambitious saleswoman: sharp black bob with "
+  },
+  {
+   "t": "2026-09-24T13:03:17.979Z",
+   "model": "tencent/hunyuan-image-3",
+   "est": 0.08,
+   "out": "art/company/m2/hunyuan-vn-rei.png",
+   "prompt": "Anime character portrait, Visual novel character sprite art. Rei, 23, an ambitious saleswoman: long silver hair in a hig"
+  },
+  {
+   "t": "2026-09-24T13:03:18.242Z",
+   "model": "tencent/hunyuan-image-3",
+   "est": 0.08,
+   "out": "art/company/m2/hunyuan-seinen-guard.png",
+   "prompt": "Anime character portrait, Mature seinen anime, like Psycho-Pass. A gate guard in his fifties: grey crew cut, navy securi"
+  },
+  {
+   "t": "2026-09-24T13:03:19.130Z",
+   "model": "minimax/image-01",
+   "est": 0.01,
+   "out": "art/company/m2/minimax-tv-mio.png",
+   "prompt": "Anime character portrait, 2020s TV anime still, clean cel shading. Mio, 24, a sardonic office worker who games all night"
+  },
+  {
+   "t": "2026-09-24T13:03:21.682Z",
+   "model": "minimax/image-01",
+   "est": 0.01,
+   "out": "art/company/m2/minimax-cel90s-sayaka.png",
+   "prompt": "Anime character portrait, 1990s anime cel, like Cowboy Bebop. Sayaka, 32, a relaxed team leader: wavy brown hair in a cl"
+  },
+  {
+   "t": "2026-09-24T13:03:23.398Z",
+   "model": "minimax/image-01",
+   "est": 0.01,
+   "out": "art/company/m2/minimax-seinen-guard.png",
+   "prompt": "Anime character portrait, Mature seinen anime, like Psycho-Pass. A gate guard in his fifties: grey crew cut, navy securi"
+  },
+  {
+   "t": "2026-09-24T13:03:23.599Z",
+   "model": "minimax/image-01",
+   "est": 0.01,
+   "out": "art/company/m2/minimax-vn-hana.png",
+   "prompt": "Anime character portrait, Visual novel character sprite art. Hana, 25, a company newspaper reporter: short permed chestn"
+  },
+  {
+   "t": "2026-09-24T13:03:24.223Z",
+   "model": "minimax/image-01",
+   "est": 0.01,
+   "out": "art/company/m2/minimax-vn-rei.png",
+   "prompt": "Anime character portrait, Visual novel character sprite art. Rei, 23, an ambitious saleswoman: long silver hair in a hig"
+  },
+  {
+   "t": "2026-09-24T13:03:24.691Z",
+   "model": "minimax/image-01",
+   "est": 0.01,
+   "out": "art/company/m2/minimax-cel90s-tomi.png",
+   "prompt": "Anime character portrait, 1990s anime cel, like Cowboy Bebop. Tomi, 58, a loud Osaka canteen auntie: permed grey hair, p"
+  },
+  {
+   "t": "2026-09-24T13:03:24.979Z",
+   "model": "minimax/image-01",
+   "est": 0.01,
+   "out": "art/company/m2/minimax-seinen-reiB.png",
+   "prompt": "Anime character portrait, Mature seinen anime, like Psycho-Pass. Rei, 23, an ambitious saleswoman: sharp black bob with "
+  },
+  {
+   "t": "2026-09-24T13:03:25.973Z",
+   "model": "minimax/image-01",
+   "est": 0.01,
+   "out": "art/company/m2/minimax-tv-daigo.png",
+   "prompt": "Anime character portrait, 2020s TV anime still, clean cel shading. Daigo, 28, a factory-floor worker of average build: b"
+  },
+  {
+   "t": "2026-09-24T13:03:36.781Z",
+   "model": "tencent/hunyuan-image-3",
+   "est": 0.08,
+   "out": "art/company/m2/hunyuan-cel90s-sayaka.png",
+   "prompt": "Anime character portrait, 1990s anime cel, like Cowboy Bebop. Sayaka, 32, a relaxed team leader: wavy brown hair in a cl"
+  },
+  {
+   "t": "2026-09-24T13:03:37.050Z",
+   "model": "tencent/hunyuan-image-3",
+   "est": 0.08,
+   "out": "art/company/m2/hunyuan-tv-mio.png",
+   "prompt": "Anime character portrait, 2020s TV anime still, clean cel shading. Mio, 24, a sardonic office worker who games all night"
+  },
+  {
+   "t": "2026-09-24T13:03:55.786Z",
+   "model": "tencent/hunyuan-image-3",
+   "est": 0.08,
+   "out": "art/company/m2/hunyuan-cel90s-tomi.png",
+   "prompt": "Anime character portrait, 1990s anime cel, like Cowboy Bebop. Tomi, 58, a loud Osaka canteen auntie: permed grey hair, p"
+  },
+  {
+   "t": "2026-09-24T13:03:56.206Z",
+   "model": "tencent/hunyuan-image-3",
+   "est": 0.08,
+   "out": "art/company/m2/hunyuan-seinen-reiB.png",
+   "prompt": "Anime character portrait, Mature seinen anime, like Psycho-Pass. Rei, 23, an ambitious saleswoman: sharp black bob with "
+  },
+  {
+   "t": "2026-09-24T13:04:15.529Z",
+   "model": "tencent/hunyuan-image-3",
+   "est": 0.08,
+   "out": "art/company/m2/hunyuan-vn-hana.png",
+   "prompt": "Anime character portrait, Visual novel character sprite art. Hana, 25, a company newspaper reporter: short permed chestn"
+  },
+  {
+   "t": "2026-09-24T13:04:15.695Z",
+   "model": "tencent/hunyuan-image-3",
+   "est": 0.08,
+   "out": "art/company/m2/hunyuan-tv-daigo.png",
+   "prompt": "Anime character portrait, 2020s TV anime still, clean cel shading. Daigo, 28, a factory-floor worker of average build: b"
   }
  ]
 }
