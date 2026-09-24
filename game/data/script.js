@@ -108,7 +108,18 @@ export const SCENES = {
     ] } },
     { say: 'emi', expr: 'smile', jp: '{試用期間|しようきかん}は{三か月|さんかげつ}。……まあ、がんばって。', en: '"Your probation is three months. ...Well, do your best."' },
     { narrate: 'Emi shows you your desk, the coffee machine that only works if you hit it, and a login that doesn\'t work at all. An hour and a half disappears.' },
+    { clock: '10:30' },
+    { hideAll: true },
+    { narrate: 'Emi takes a phone call in the corridor. Mio has her headphones on. You try the coffee machine. Dead.' },
+    { choose: { prompt: 'The coffee machine is dead.', kind: 'action', options: [
+      { jp: 'たたく', en: 'Hit it, like Emi said', retry: true, then: [{ narrate: 'You hit it. Nothing. Not even a hum.' }] },
+      { jp: '（{小|ちい|小さい}さい{声|こえ}で）「{動|うご|動く}いて」', en: 'Quietly ask it: "Work."', then: [
+        { narrate: 'The machine shudders, hums, and pours a perfect cup.' },
+        { narrate: 'It has been like this since you were small. When you ask for something in Japanese and truly mean it, the world listens. The old word for it is 言霊, kotodama. Nobody at Amakawa knows. Better keep it that way.' },
+      ] },
+    ] } },
     { clock: '10:35' },
+    { show: 'mio', expr: 'bored', at: 'right' }, { show: 'emi', expr: 'smile', at: 'left' },
     { say: 'emi', expr: 'smile', jp: '{さっそく}だけど、お{願|ねが|願う}いがあるの。', en: '"Straight to it: I need a favour."' },
     { say: 'emi', expr: 'smile', jp: '{三階|さんがい}の{営業部|えいぎょうぶ}に{行|い|行く}って、{黒田|くろだ}さんから{書類|しょるい}をもらってきて。', en: '"Go to Sales on the third floor and get the documents from Kuroda."' },
     { say: 'emi', expr: 'smirk', jp: '{十一時|じゅういちじ}までにね。', en: '"Before eleven."' },
@@ -128,7 +139,7 @@ export const SCENES = {
     { show: 'rei', expr: 'cold', at: 'center' },
     { ifTime: { after: '11:00', then: [
       { say: 'rei', expr: 'cold', jp: 'もう{遅|おそ|遅い}いよ。{会議|かいぎ}、{始|はじ|始まる}まった。', en: '"Too late. The meeting\'s already started."' },
-      { narrate: 'She turns away. Whatever magic you have, it can\'t fix the clock.' },
+      { narrate: 'She turns away. Your words can do a lot of things. Turning back the clock isn\'t one of them.' },
       { set: { lateDocs: true, gotDocs: false } },
       { hideAll: true }, { goto: 'office2' },
     ] } },
@@ -153,6 +164,7 @@ export const SCENES = {
   ],
 
   office2: [
+    { bg: 'elevator' }, { narrate: 'You ride the elevator back down to basement level 2.' },
     { bg: 'office' }, { time: 8 },
     { show: 'mio', expr: 'bored', at: 'right' }, { show: 'emi', expr: 'smile', at: 'left' },
     { if: 'gotDocs', then: [
@@ -189,7 +201,7 @@ export const SCENES = {
     { say: 'mio', expr: 'smirk', jp: 'こっち、こっち。', en: '"Over here, over here."' },
     { say: 'mio', expr: 'bored', jp: '{新人|しんじん}くん、ゲームする？', en: '"New guy, do you play games?"' },
     { choose: { prompt: 'Your reply', kind: 'reply', options: [
-      { jp: 'する！', en: '"I do!"', fx: { mio: 2 }, then: [{ say: 'mio', expr: 'smirk', jp: '……じゃあ、{今夜|こんや}、{一緒|いっしょ}にやる？', en: '"...Then want to play together tonight?"' }, { set: { mioDate: true } }] },
+      { jp: 'する！', en: '"I do!"', fx: { mio: 2 }, then: [{ say: 'mio', expr: 'smirk', jp: '……へえ。じゃあ、{今度|こんど}、{対戦|たいせん}しよ。', en: '"...Huh. Then let\'s play against each other sometime."' }, { set: { mioDate: true } }] },
       { jp: 'あんまりしない。', en: '"Not much."', then: [{ say: 'mio', expr: 'bored', jp: 'ふーん。', en: '"Hmm."' }] },
     ] } },
     { hideAll: true },
@@ -209,14 +221,15 @@ export const SCENES = {
   ],
 
   bar: [
-    { bg: 'bar' }, { clock: '19:30' }, { music: 'night' },
+    { if: '!gotDocs', then: [{ narrate: 'In the afternoon you go back up to Sales. Rei hands over the folder without looking up from her screen.' }] },
+    { clock: '19:10' },
     { if: 'casualGuard', then: [
-      { bg: 'gate' }, { show: 'ishibashi', expr: 'suspicious', at: 'center' },
+      { bg: 'gate' }, { narrate: 'On your way out, the gate.' }, { show: 'ishibashi', expr: 'suspicious', at: 'center' },
       { say: 'ishibashi', expr: 'suspicious', jp: 'また{君|きみ}か。カード。', en: '"You again. Card." He remembers how you spoke to him this morning.' },
       { narrate: 'You show your card. He takes his time reading it.' }, { time: 5 },
-      { hide: 'ishibashi' }, { bg: 'bar' },
+      { hide: 'ishibashi' },
     ] },
-    { if: '!gotDocs', then: [{ narrate: 'In the afternoon you go back up to Sales. Rei hands over the folder without looking up from her screen.' }] },
+    { bg: 'bar' }, { clock: '19:30' }, { music: 'night' },
     { narrate: 'Evening. A small bar tucked behind the dorm blocks.' },
     { show: 'jun', expr: 'neutral', at: 'center' },
     { say: 'jun', expr: 'neutral', jp: 'いらっしゃい。{初日|しょにち}？　{顔|かお}に{書|か|書く}いてあるよ。', en: '"Welcome. First day? It\'s written all over your face."' },

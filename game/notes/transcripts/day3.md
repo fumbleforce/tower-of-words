@@ -53,7 +53,7 @@ IF yuzukiSawDoor:
 [scene: cafe]
 IF time after 12:00:
 IF lateRei:
-  Rei: 二分遅刻。……まあ、すわって。  /  "Two minutes late. ...Well, sit down."
+  Rei: 遅刻ね。……まあ、すわって。  /  "You're late. ...Well, sit down."
 ELSE:
   Rei: 時間どおりね。すわって。  /  "Right on time. Sit."
 Rei: 何か飲む？　私が払う。  /  "Want something to drink? My treat."
@@ -91,6 +91,7 @@ IF helpedAoi:
   Aoi: これ、昨日のお礼！　缶コーヒー。好き？  /  "This is for yesterday! A can of coffee. Do you like it?"
   CHOICE: Your reply
     1) You: 大好き。ありがとう。  /  "Love it. Thanks."
+      Aoi: よかった！  /  "Yay!"
     2) You: コーヒーはちょっと苦手。  /  "I'm not great with coffee."
       Aoi: えー！　じゃあ明日、ジュースにする！  /  "Noo! Then tomorrow I'll bring juice!"
 ELSE:
@@ -102,7 +103,7 @@ ELSE:
 CHOICE: Evening. Where do you go?
   1) You: 屋上  /  Rooftop
     [scene: rooftop]
-    Goro: トマト、元気になったよ。君が来るの、待ってた。  /  "The tomatoes perked up. I was waiting for you to come."
+    Goro: おや。トマト、元気になったよ。  /  "Oh. The tomatoes perked up."
   2) You: 寮  /  The dorm (rest)
     [scene: dorm]
     (An early night. You reread today's messages before you fall asleep.)

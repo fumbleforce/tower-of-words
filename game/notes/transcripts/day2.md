@@ -59,7 +59,7 @@ CHOICE: Aoi still needs a hundred pages before ten. You need ten.
 IF time after 10:00:
   (The meeting has already started. Every head turns when the door opens.)
 IF lateMeeting:
-  Emi: おそい。……コピー、ありがとう。  /  "You're late. ...Thanks for the copies."
+  Emi: おそい。……まあ、すわって。  /  "You're late. ...Well, sit down."
 IF pin_thing_wrong:
   (You put your stack on the table. It's the wrong thing. Emi quietly slides her own copy across to share.)
 Emi: では、企画室7から。「天川シティの夏祭り」の企画です。  /  "Right, Planning 7 first. Our plan for the Amakawa City summer festival."
@@ -87,7 +87,7 @@ CHOICE: Lunch. Where do you go?
 
 ## day2_canteen
 [scene: canteen]
-Kaori: また来たね。今日の日替わりは、ハンバーグだよ。  /  "You came back. Today's daily special is hamburg steak."
+Kaori: いらっしゃい。今日の日替わりは、ハンバーグだよ。  /  "Welcome. Today's daily special is hamburg steak."
 [menu: 日替わり（ハンバーグ） 650, カレー 500, うどん 450]
 [pay from wallet 1000/500/100/100/100]
 IF helpedAoi:
@@ -107,7 +107,7 @@ CHOICE: Your reply
 
 ## day2_rooftop
 [scene: rooftop]
-Goro: おや、また来たね。今日はトマトが元気がない。  /  "Oh, you came again. The tomatoes are feeling low today."
+Goro: おや、いらっしゃい。今日はトマトが元気がない。  /  "Oh, hello there. The tomatoes are feeling low today."
 (Goro kneels by a drooping plant and speaks to it quietly.)
 Goro: 大丈夫だよ。大丈夫。  /  "It's all right. It's all right."
 (You feel the words settle in your chest like a new key. 大丈夫だよ: a plain statement, said with intent, calms whoever hears it.)

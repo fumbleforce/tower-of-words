@@ -4,7 +4,7 @@
 [scene: dorm]
 [clock 08:00]
 (Friday. Your phone has been buzzing since seven.)
-[message from Yuzuki] 十時、三階の広報室ね。カメラもあるから、髪、ちゃんとして。  /  Ten o'clock, PR office on the third floor. There's a camera too, so do your hair properly.
+[message from Yuzuki] 十時、二階の広報室ね。カメラもあるから、髪、ちゃんとして。  /  Ten o'clock, PR office on the second floor. There's a camera too, so do your hair properly.
 [message from Aoi] あたしも写真、呼ばれた……一緒に行ってもいい？  /  I got called in for the photo too... Can I go with you?
 CHOICE: Reply to Aoi
   1) You: いいよ。九時半に一階で。  /  Sure. Ground floor at 9:30.
@@ -18,15 +18,16 @@ Yuzuki: 来てくれた！　じゃあ、はじめよう。社内報の「新人
 Yuzuki: 天川で、何がしたいの？  /  "What do you want to do at Amakawa?"
 CHOICE: Your answer
   1) You: みんなと、いい仕事がしたい。  /  "I want to do good work with everyone."
+    Yuzuki: いいね。まじめな新人くん。  /  "Nice. A serious new hire."
   2) You: 企画室7を守りたい。  /  "I want to protect Planning 7."
     Yuzuki: 守りたい？　……何から？  /  "Protect it? ...From what?"
   3) You: 早く帰りたい。  /  "I want to go home early."
     Aoi: わかる！  /  "Same!"
     Yuzuki: ……それは書かないね。  /  "...I won't print that one."
 CHOICE: Turn it around. Ask Yuzuki the same thing.
-  1) You: 柚月さんは？　何がしたいの？  /  "What about you, Yuzuki? What do you want to do?"
+  1) You: ユヅキさんは？　何がしたいの？  /  "What about you, Yuzuki? What do you want to do?"
     Yuzuki: 私？　……ほんとうのことが書きたい。社内報じゃなくて。  /  "Me? ...I want to write things that are true. Not the company paper."
-  2) You: 柚月さんは、何がしたいですか。  /  "And what would you like to do, Ms Yuzuki?" (polite)
+  2) You: ユヅキさんは、何がしたいですか。  /  "And what would you like to do, Ms Yuzuki?" (polite)
     Yuzuki: なんで急にていねい？　私はいいの、今日はあなたの番。  /  "Why so polite all of a sudden? Never mind me, today's your turn." Among coworkers your age, plain ～たいの？ is the natural way to ask.
 IF yuzukiSawDoor:
   Yuzuki: ねえ。水曜日のエレベーター。ドアが、ひとりでに止まったよね。  /  "Hey. Wednesday, the elevator. The door stopped on its own, didn't it?"
@@ -75,7 +76,7 @@ IF missedDeadline:
 ELSE:
   Emi: 昨日は、ほんとうに助かった。  /  "Yesterday, you really saved us."
 IF saidProtect:
-  Emi: ……柚月さんに「守りたい」って言ったの？　……そう。  /  "...You told Yuzuki you want to 'protect' us? ...I see."
+  Emi: ……ユヅキさんに「守りたい」って言ったの？　……そう。  /  "...You told Yuzuki you want to 'protect' us? ...I see."
 Emi: 試用期間は、まだ長い。でも、悪くないよ。  /  "Probation has a long way to go. But you're not doing badly."
 → day5_evening
 
@@ -111,7 +112,7 @@ Mio: 来たね。土曜日まで寝かせないって、言ったでしょ。  /
 Mio: 十二時過ぎたら、土曜日。計算、あってる。  /  "After midnight it's Saturday. The maths checks out."
 CHOICE: She hands you a controller.
   1) You: どのゲームがしたいの？  /  "Which game do you want to play?"
-    Mio: 負けたほうが、明日の朝ごはん。  /  "Loser buys tomorrow's breakfast."
+    Mio: これ。負けたほうが、明日の朝ごはんね。  /  "This one. Loser buys tomorrow's breakfast."
   2) You: 勝ちたい。  /  "I want to win."
     Mio: 無理。  /  "Not happening."
 [clock 01:40]
