@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Final cast</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600&display=swap">
+<style>
+body { margin: 0; background: #f5f6f8; color: #15171c; font: 16px/1.5 "Outfit", sans-serif; }
+main { max-width: 1100px; margin: 0 auto; padding: 28px 20px 60px; }
+h1 { margin: 0 0 4px; font-size: 26px; } .intro { color: #4b5260; margin: 0 0 20px; }
+.row { display: grid; grid-template-columns: 180px 1fr 1fr; gap: 12px; align-items: start; background: #fff; border: 1px solid #dadee4; border-radius: 8px; padding: 12px; margin-bottom: 12px; }
+.row h2 { font-size: 18px; margin: 0; } .row small { color: #4b5260; }
+.opt { border: 2px solid transparent; border-radius: 8px; cursor: pointer; padding: 0; background: none; }
+.opt img { width: 100%; display: block; border-radius: 6px; }
+.opt.on { border-color: #0f8b99; }
+textarea { width: 100%; min-height: 70px; border-radius: 8px; border: 1px solid #dadee4; padding: 8px 10px; font: 15px "Outfit", sans-serif; box-sizing: border-box; }
+button.copy { margin-top: 10px; height: 46px; padding: 0 22px; border-radius: 8px; border: 0; background: #0f8b99; color: #fff; font: 600 16px "Outfit", sans-serif; cursor: pointer; }
+@media (max-width: 640px) { .row { grid-template-columns: 1fr 1fr; } .row > div:first-child { grid-column: 1 / -1; } }
+</style></head><body><main>
+<h1>Final cast candidates</h1>
+<p class="intro">FLUX 2 Pro, 2020s TV anime style, one short prompt per character, everyone drawn as a clear adult. Two versions per character: click the one you prefer, add notes, and copy.</p>
+<div id="rows"></div>
+<textarea id="notes" placeholder="Notes (optional)"></textarea>
+<button class="copy" id="copy">Copy my picks</button> <span id="done"></span>
+<script>
+const C = [['mio','Mio','Coworker, gamer, romance option'],['sayaka','Sayaka','Team lead, romance option'],['hana','Hana','Reporter, romance option'],['rei','Rei','Sales rival, romance option'],['aoi','Aoi','Graduate intern, romance option'],['daigo','Daigo','Production floor, friend'],['tomi','Tomi-san','Canteen'],['guard','Gate guard','Security']];
+const picks = {};
+const box = document.getElementById('rows');
+for (const [k, name, desc] of C) {
+  const row = document.createElement('div'); row.className = 'row';
+  row.innerHTML = `<div><h2>${name}</h2><small>${desc}</small></div>`;
+  for (const [i, seed] of [[1, 7], [2, 21]]) {
+    const b = document.createElement('button'); b.className = 'opt'; b.innerHTML = `<img src="${k}-${seed}.webp" alt="${name} version ${i}">`;
+    b.onclick = () => { picks[name] = `version ${i}`; row.querySelectorAll('.opt').forEach(x => x.classList.remove('on')); b.classList.add('on'); };
+    row.append(b);
+  }
+  box.append(row);
+}
+document.getElementById('copy').onclick = () => {
+  const t = C.map(([, n]) => `${n}: ${picks[n] || '(none)'}`).join('\n') + (document.getElementById('notes').value ? `\nNotes: ${document.getElementById('notes').value}` : '');
+  navigator.clipboard.writeText(t).then(() => { document.getElementById('done').textContent = 'Copied. Paste it into the chat.'; }, () => { document.getElementById('done').textContent = t; });
+};
+</script></main></body></html>
