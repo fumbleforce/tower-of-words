@@ -76,7 +76,7 @@ export const SCENES = {
     { bg: 'cafe' }, { music: 'lively' },
     { ifTime: { after: '12:00', then: [{ set: { lateRei: true } }] } },
     { show: 'rei', expr: 'cold', at: 'center' },
-    { if: 'lateRei', then: [{ say: 'rei', expr: 'cold', jp: '{二分|にふん}{遅刻|ちこく}。……まあ、すわって。', en: '"Two minutes late. ...Well, sit down."' }], else: [{ say: 'rei', expr: 'cold', jp: '{時間|じかん}どおりね。すわって。', en: '"Right on time. Sit."' }] },
+    { if: 'lateRei', then: [{ say: 'rei', expr: 'cold', jp: '{遅刻|ちこく}ね。……まあ、すわって。', en: '"You\'re late. ...Well, sit down."' }], else: [{ say: 'rei', expr: 'cold', jp: '{時間|じかん}どおりね。すわって。', en: '"Right on time. Sit."' }] },
     { say: 'rei', expr: 'cold', jp: '{何|なに}か{飲|の|飲む}む？　{私|わたし}が{払|はら|払う}う。', en: '"Want something to drink? My treat."' },
     { menu: { title: 'MENU', items: [
       { jp: 'コーヒー', en: 'Coffee', price: 300 },
@@ -116,7 +116,7 @@ export const SCENES = {
       { show: 'aoi', expr: 'grin', at: 'center' },
       { say: 'aoi', expr: 'grin', jp: 'これ、{昨日|きのう}のお{礼|れい}！　{缶|かん}コーヒー。{好|す|好き}き？', en: '"This is for yesterday! A can of coffee. Do you like it?"' },
       { choose: { prompt: 'Your reply', kind: 'reply', options: [
-        { jp: '{大好|だいす|大好き}き。ありがとう。', en: '"Love it. Thanks."', fx: { aoi: 1 }, then: [] },
+        { jp: '{大好|だいす|大好き}き。ありがとう。', en: '"Love it. Thanks."', fx: { aoi: 1 }, then: [{ say: 'aoi', expr: 'grin', jp: 'よかった！', en: '"Yay!"' }] },
         { jp: 'コーヒーはちょっと{苦手|にがて}。', en: '"I\'m not great with coffee."', then: [{ say: 'aoi', expr: 'panic', jp: 'えー！　じゃあ{明日|あした}、ジュースにする！', en: '"Noo! Then tomorrow I\'ll bring juice!"' }] },
       ] } },
       { hide: 'aoi' },
@@ -131,7 +131,7 @@ export const SCENES = {
     { choose: { prompt: 'Evening. Where do you go?', kind: 'sign', options: [
       { jp: '{屋上|おくじょう}', en: 'Rooftop', then: [
         { bg: 'rooftop' }, { music: 'calm' }, { show: 'goro', expr: 'smile', at: 'center' },
-        { say: 'goro', expr: 'smile', jp: 'トマト、{元気|げんき}になったよ。{君|きみ}が{来|く|来る}るの、{待|ま|待つ}ってた。', en: '"The tomatoes perked up. I was waiting for you to come."' },
+        { say: 'goro', expr: 'smile', jp: 'おや。トマト、{元気|げんき}になったよ。', en: '"Oh. The tomatoes perked up."' },
         { fx: { goro: 1 } },
       ] },
       { jp: '{寮|りょう}', en: 'The dorm (rest)', then: [

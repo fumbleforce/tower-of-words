@@ -2,6 +2,7 @@
 // English (the `en` fields) is hidden during play unless the player asks for it, which counts as a look-up.
 export const CAST = {
   announcer: { name: 'アナウンス', en: 'Announcement', color: '#9fd3ff' },
+  player: { name: 'あなた', en: 'You', color: '#cfe0ff' },
   ishibashi: { name: '石橋', en: 'Ishibashi', color: '#a9c4ff' },
   mio: { name: 'ミオ', en: 'Mio', color: '#7fe0b8' },
   emi: { name: 'エミ', en: 'Emi', color: '#ff9a8a' },
@@ -43,7 +44,7 @@ export const SCENES = {
   monorail: [
     { bg: 'monorail' }, { clock: '08:40' }, { music: 'calm' },
     { narrate: 'Your first day at Amakawa. The monorail glides across Tokyo Bay toward the company\'s island city.' },
-    { say: 'announcer', listen: true, jp: 'まもなく、{天川|あまかわ}シティ{中央|ちゅうおう}{駅|えき}です。お{出口|でぐち}は{右側|みぎがわ}です。', en: '"Arriving shortly at Amakawa City Central Station. The exit is on the right."' },
+    { say: 'announcer', jp: 'まもなく、{天川|あまかわ}シティ{中央|ちゅうおう}{駅|えき}です。お{出口|でぐち}は{右側|みぎがわ}です。', en: '"Arriving shortly at Amakawa City Central Station. The exit is on the right."' },
     { choose: { prompt: 'The train slows down. Which doors?', kind: 'action', show: 'en', options: [
       { jp: '{右|みぎ}のドア', en: 'The right-hand doors', correct: true, then: [{ narrate: 'The right-hand doors slide open onto the platform.' }] },
       { jp: '{左|ひだり}のドア', en: 'The left-hand doors', then: [{ narrate: 'The left doors stay shut. You squeeze across the crowded carriage as the right-hand doors open.' }, { time: 2 }] },
@@ -84,14 +85,22 @@ export const SCENES = {
     { show: 'mio', expr: 'bored', at: 'right' },
     { say: 'mio', expr: 'bored', jp: '……{誰|だれ}？', en: '"...Who are you?"' },
     { choose: { prompt: 'Your reply', kind: 'reply', options: [
-      { jp: '{新人|しんじん}だよ。よろしく。', en: '"The new guy. Nice to meet you." (casual)', correct: true, fx: { mio: 1 }, then: [{ say: 'mio', expr: 'bored', jp: 'ふーん。', en: '"Hmm."' }] },
-      { jp: '{今日|きょう}からここで{働|はたら|働く}きます。よろしくお{願|ねが|願う}いします。', en: '"I start working here today. Nice to meet you." (polite)', then: [{ say: 'mio', expr: 'smirk', jp: '{かたい}ね。', en: '"So stiff." Between coworkers your age, casual speech is normal.' }] },
-      { jp: 'そっちこそ{誰|だれ}？', en: '"Who are you, then?"', fx: { mio: 1 }, then: [{ say: 'mio', expr: 'smirk', jp: '……ふふ。', en: '"...Heh."' }] },
+      { jp: '{新人|しんじん}だよ。よろしく。', en: '"The new guy. Nice to meet you." (casual)', correct: true, fx: { mio: 1 }, then: [
+        { say: 'mio', expr: 'bored', jp: 'ふーん。……ミオ。{今|いま}ゲーム{中|ちゅう}だから、{話|はな|話す}しかけないで。', en: '"Hmm. ...Mio. I\'m in the middle of a game, so don\'t talk to me."' },
+      ] },
+      { jp: '{今日|きょう}からここで{働|はたら|働く}きます。よろしくお{願|ねが|願う}いします。', en: '"I start working here today. Nice to meet you." (polite)', then: [
+        { say: 'mio', expr: 'smirk', jp: '{かたい}ね。……ミオ。{今|いま}ゲーム{中|ちゅう}。', en: '"So stiff. ...I\'m Mio. In the middle of a game." Between coworkers your age, casual speech is normal.' },
+      ] },
+      { jp: 'そっちこそ{誰|だれ}？', en: '"Who are you, then?"', fx: { mio: 1 }, then: [
+        { say: 'mio', expr: 'smirk', jp: '……ふふ。ミオ。{今|いま}ゲーム{中|ちゅう}。{話|はな|話す}しかけないで。', en: '"...Heh. Mio. I\'m in a game. Don\'t talk to me."' },
+      ] },
     ] } },
-    { say: 'mio', expr: 'bored', jp: 'ミオ。ゲーム{中|ちゅう}だから、{話|はな|話す}しかけないで。', en: '"Mio. I\'m in the middle of a game, so don\'t talk to me."' },
-    { ifLate: '09:00', then: [{ show: 'emi', expr: 'smirk', at: 'left' }, { say: 'emi', expr: 'smirk', jp: '{遅刻|ちこく}だよ。まあ、いいけど。', en: '"You\'re late. Whatever."' }] },
     { show: 'emi', expr: 'smile', at: 'left' },
-    { say: 'emi', expr: 'smile', jp: '{来|き|来る}た{来|き|来る}た。{君|きみ}が{新人|しんじん}くん？　{私|わたし}はエミ。ここのリーダー……{いちおう}ね。', en: '"There you are. You\'re the new guy? I\'m Emi. The leader here... technically."' },
+    { ifTime: { after: '09:00', then: [
+      { say: 'emi', expr: 'smirk', jp: '{遅刻|ちこく}だよ、{新人|しんじん}くん。まあ、いいけど。{私|わたし}はエミ。ここのリーダー……{いちおう}ね。', en: '"You\'re late, new guy. Whatever. I\'m Emi. The leader here... technically."' },
+    ], else: [
+      { say: 'emi', expr: 'smile', jp: '{来|き|来る}た{来|き|来る}た。{君|きみ}が{新人|しんじん}くん？　{私|わたし}はエミ。ここのリーダー……{いちおう}ね。', en: '"There you are. You\'re the new guy? I\'m Emi. The leader here... technically."' },
+    ] } },
     { choose: { prompt: 'Your reply', kind: 'reply', options: [
       { jp: 'よろしくお{願|ねが|願う}いします。', en: '"Nice to meet you." (polite)', then: [{ say: 'emi', expr: 'smile', jp: 'まじめだね。', en: '"So serious."' }] },
       { jp: 'うん、よろしく。', en: '"Yeah, nice to meet you." (casual)', correct: true, fx: { emi: 1 }, then: [{ say: 'emi', expr: 'smile', jp: 'うん、それでいいよ。', en: '"Yeah, that\'s fine." Emi prefers casual.' }] },
@@ -207,6 +216,7 @@ export const SCENES = {
       { narrate: 'You show your card. He takes his time reading it.' }, { time: 5 },
       { hide: 'ishibashi' }, { bg: 'bar' },
     ] },
+    { if: '!gotDocs', then: [{ narrate: 'In the afternoon you go back up to Sales. Rei hands over the folder without looking up from her screen.' }] },
     { narrate: 'Evening. A small bar tucked behind the dorm blocks.' },
     { show: 'jun', expr: 'neutral', at: 'center' },
     { say: 'jun', expr: 'neutral', jp: 'いらっしゃい。{初日|しょにち}？　{顔|かお}に{書|か|書く}いてあるよ。', en: '"Welcome. First day? It\'s written all over your face."' },

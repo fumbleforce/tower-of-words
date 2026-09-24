@@ -10,7 +10,7 @@ export const SCENES = {
     { say: 'aoi', expr: 'panic', jp: 'ごめんなさい！　コンペの{企画書|きかくしょ}、{消|け|消す}しちゃった……！', en: '"I\'m so sorry! I deleted the proposal for the pitch...!"' },
     { say: 'mio', expr: 'suspicious', jp: '……ファイル、ぜんぶ？', en: '"...The whole file?"' },
     { say: 'aoi', expr: 'panic', jp: 'ぜんぶ。{真壁|まかべ}さんのパソコンで、ボタンを{押|お|押す}したら……。', en: '"All of it. I pressed a button on Makabe\'s computer and..."' },
-    { narrate: 'Emi is out until five. The pitch draft is due to Sales at five, sharp.' },
+    { narrate: 'Emi is out all afternoon. The pitch draft is due to Sales at five, sharp.' },
     { task: '{五時|ごじ}まで・{企画書|きかくしょ}' },
     { say: 'mio', expr: 'bored', jp: 'バックアップは、{地下一階|ちかいっかい}の{倉庫|そうこ}にある。でも、かぎがない。', en: '"There\'s a backup in the storage room on basement level 1. But we don\'t have the key."' },
     { say: 'mio', expr: 'bored', jp: 'かぎは、{五階|ごかい}の{役員室|やくいんしつ}。……{私|わたし}は{行|い|行く}かない。こわいから。', en: '"The key\'s on the fifth floor, in the executive offices. ...I\'m not going. It\'s scary."' },
@@ -121,7 +121,7 @@ export const SCENES = {
       { say: 'emi', expr: 'smile', jp: '{大丈夫|だいじょうぶ}。{私|わたし}が{黒田|くろだ}さんと{話|はな|話す}す。', en: '"It\'s fine. I\'ll talk to Kuroda."' },
       { fx: { emi: -1 } },
     ], else: [
-      { narrate: 'The file is back, and it goes out at 4:48. Aoi sits on the floor and cries a little from relief.' },
+      { narrate: 'The file is back, and it goes out at 4:48. Aoi sits on the floor and cries a little from relief. Emi walks in at five, and Mio tells her everything.' },
       { show: 'emi', expr: 'smile', at: 'center' },
       { say: 'emi', expr: 'smile', jp: 'ミオから{聞|き|聞く}いた。……{助|たす|助かる}かった。ありがとう。', en: '"Mio told me. ...You saved us. Thank you."' },
       { fx: { emi: 2, aoi: 1 } },
