@@ -27,7 +27,7 @@ const VOICES = {
   emi: mm('Japanese_CalmLady', { volume: 0.55 }),
   rei: mm('Japanese_ColdQueen'),
   kaori: mm('Japanese_DependableWoman'),
-  mio: clone(path.join(R2, 'mio-3.mp3'), 'え、もう終わったの？…ちょっと待って、どうやったの？'),
+  mio: clone(path.join(ROOT, 'tools/voice-refs/mio.wav'), fs.readFileSync(path.join(ROOT, 'tools/voice-refs/mio.txt'), 'utf8').trim()),
   ishibashi: clone(path.join(ROOT, 'tools/voice-refs/ishibashi-ref12.wav'), '止まって。IDカード、見せて。…はい、次の人。ここは毎朝、何百人も通るんだ。顔はだいたい覚えてる。知らない顔は、止める。それが俺の仕事だ。'),
   goro: clone(path.join(ROOT, 'tools/voice-refs/goro-ref12.wav'), 'おや、いい天気だね。今日もトマトがよく育っているよ。このトマトはね、毎朝水をやって、話しかけてるんだ。大丈夫だよ、って。そうすると、よく育つんだよ。'),
   jun: clone(path.join(ROOT, 'tools/voice-refs/jun-ref12.wav'), 'いらっしゃい。今日はゆっくりしていって。この店は、静かなのがいいところだ。話したいなら聞くし、話したくないなら、何も聞かない。何を飲む？'),
@@ -36,6 +36,15 @@ const VOICES = {
   secretary: mm('Japanese_DependableWoman'),
   player: { kind: 'design', desc: 'A calm, neutral Japanese-speaking young man around thirty, clear and friendly, even and unhurried, a slight foreign softness.', refText: 'はじめまして。今日からここで働きます。', lufs: -23 },
 };
+
+// Pitch guard for female voices: regenerate lines that drift into a male register.
+const FEMALE = new Set(['mio', 'emi', 'rei', 'aoi', 'yuzuki', 'kaori', 'secretary', 'announcer']);
+const PY = path.join(process.env.HOME, 'ai/sd/venv/bin/python');
+export function pitch(file) {
+  try { return JSON.parse(execFileSync(PY, [path.join(ROOT, 'tools/f0.py'), file]).toString().trim().split('\n').pop()); } catch { return {}; }
+}
+export const pitchOk = r => r.median == null || (r.median >= 185 && (r.low160 ?? 0) <= 0.25);
+const FLAGS = path.join(ROOT, 'tools/voice-flags.txt');
 
 function normalize(src, dst, lufs = -18) {
   execFileSync('ffmpeg', ['-v', 'error', '-y', '-i', src, '-af', `loudnorm=I=${lufs}:TP=-2:LRA=11`, '-ar', '44100', '-ac', '1', '-b:a', '96k', dst]);
@@ -80,12 +89,20 @@ const jobs = lines.map(([ch, text]) => limit(async () => {
   const raw = path.join(RAW, key);
   let f;
   try {
-    if (v.kind === 'minimax') f = await run('minimax/speech-2.6-hd', { text, voice_id: v.voice, language_boost: 'Japanese', sample_rate: 44100, ...v.extra }, raw + '.mp3');
-    else {
-      const ref = v.kind === 'clone' ? v.ref : await designRef(ch, v);
-      f = await run('qwen/qwen3-tts', { mode: 'voice_clone', text, language: 'Japanese', reference_audio: ref, reference_text: v.refText }, raw + '.wav');
+    for (let attempt = 0; attempt < 4; attempt++) {
+      if (v.kind === 'minimax') f = await run('minimax/speech-2.6-hd', { text, voice_id: v.voice, language_boost: 'Japanese', sample_rate: 44100, ...v.extra, ...(attempt ? { speed: 1 - attempt * 0.02 } : {}) }, raw + (attempt ? `-r${attempt}` : '') + '.mp3', { force: attempt > 0 });
+      else {
+        const ref = v.kind === 'clone' ? v.ref : await designRef(ch, v);
+        f = await run('qwen/qwen3-tts', { mode: 'voice_clone', text, language: 'Japanese', reference_audio: ref, reference_text: v.refText, ...(attempt && FEMALE.has(ch) ? { style_instruction: 'speak as a young woman with a clearly feminine voice, same timbre as the reference' } : {}) }, raw + (attempt ? `-r${attempt}` : '') + '.wav', { force: attempt > 0 });
+      }
+      f = Array.isArray(f) ? f[0] : f;
+      if (!FEMALE.has(ch)) break;
+      const r = pitch(f);
+      if (pitchOk(r)) break;
+      console.log('pitch retry', ch, text.slice(0, 16), JSON.stringify(r));
+      if (attempt === 3) fs.appendFileSync(FLAGS, `${key}\t${ch}\t${r.median}\t${r.low160}\t${text}\n`);
     }
-    normalize(Array.isArray(f) ? f[0] : f, dst, v.lufs || -18);
+    normalize(f, dst, v.lufs || -18);
     console.log('ok', ch, text.slice(0, 20));
   } catch (e) { delete manifest[key]; console.log('FAIL', ch, text.slice(0, 20), e.message.slice(0, 160)); }
 }));
