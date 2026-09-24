@@ -4,7 +4,7 @@ Read GUIDE.md first. Pick up from here next session.
 
 ## Waiting on Jørgen
 - **Cast round 2 picks:** proto2/decide2 (Yuzuki distinct from Emi, Goro in RDBT, new Jun, Ishibashi options, Saki not like Rei, Kiyoko outfits that aren't black, Nanami options, basement office with chairs and ramen cups).
-- **Mio's voice:** regenerated from the original clip with only a male-drift guard. Listen on proto2/voice-mio and confirm.
+- **Mio's voice:** all 35 lines regenerated from the original clip with only a male-drift guard. Listen on proto2/voice-mio; 「新しいゲーム…」 is borderline (35% under 160 Hz).
 - **Video:** review proto2/video once the setup agent publishes; pick a model before any more clips.
 - **Local music:** YuE2 versus Lyria verdict (proto2/music). The game currently alternates between both.
 
@@ -19,7 +19,7 @@ Read GUIDE.md first. Pick up from here next session.
 
 ## Game (builder owns game/)
 - Player voice lines for the two new coffee-machine choices (たたく, 「動いて」); commit the builder's two uncommitted voice files.
-- Check that karaoke follow-along, the backlog (scroll up), no blur, the reply-box restyle and the no-kana-over-kana test all landed (from Jørgen's second playtest). Screenshot the reply box for Jørgen.
+- Done (playtest round 2): karaoke follow-along, backlog, no blur, reply-box pill, no kana over kana (tested on 310 lines), player lines shown as あなた. Next: Jørgen replays and gives round-3 feedback.
 - Map Emi's new expression keys (the old "smirk" became "teasing").
 - Local LLM: a one-click or automatic start of Orion (llama-server on port 8190) for the bar conversation; free ComfyUI's VRAM first.
 - Phone and train mode: offline play (a service worker), spell practice as spaced repetition, a statistics screen with measurable progress.
@@ -31,4 +31,4 @@ Read GUIDE.md first. Pick up from here next session.
 
 ## Tooling and knowledge
 - Workflows are saved in tools/workflows and ~/ai/workflows. Save every new one there.
-- Replicate spend is about $13.85 of the $20 cap; images, music and cutouts are now local, and only voices remain on Replicate.
+- Replicate spend is about $14.22 of the $20 cap; images, music and cutouts are now local, and only voices remain on Replicate.
