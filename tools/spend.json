@@ -1,5 +1,5 @@
 {
- "total": 9.9786,
+ "total": 10.1966,
  "calls": [
   {
    "t": "2026-09-24T10:37:04.077Z",
@@ -1904,6 +1904,83 @@
    "est": 0.03,
    "out": "art/company/mappa/oguri-3.webp",
    "prompt": "Anime character portrait, modern MAPPA anime still, sharp lines, cinematic lighting. Oguri, 33, an ex-boxer who runs the"
+  },
+  {
+   "t": "2026-09-24T14:14:52.599Z",
+   "model": "black-forest-labs/flux-2-pro",
+   "est": 0.03,
+   "out": "art/company/bg/arrival.webp",
+   "prompt": "Anime background art, modern MAPPA anime film still, detailed, cinematic lighting, no people. A driverless monorail glid"
+  },
+  {
+   "t": "2026-09-24T14:14:55.451Z",
+   "model": "black-forest-labs/flux-2-pro",
+   "est": 0.03,
+   "out": "art/company/bg/canteen.webp",
+   "prompt": "Anime background art, modern MAPPA anime film still, detailed, cinematic lighting, no people. A huge busy-looking staff "
+  },
+  {
+   "t": "2026-09-24T14:14:55.676Z",
+   "model": "black-forest-labs/flux-2-pro",
+   "est": 0.03,
+   "out": "art/company/bg/rooftop.webp",
+   "prompt": "Anime background art, modern MAPPA anime film still, detailed, cinematic lighting, no people. A rooftop vegetable garden"
+  },
+  {
+   "t": "2026-09-24T14:14:56.357Z",
+   "model": "black-forest-labs/flux-2-pro",
+   "est": 0.03,
+   "out": "art/company/bg/bar.webp",
+   "prompt": "Anime background art, modern MAPPA anime film still, detailed, cinematic lighting, no people. A small, quiet bar inside "
+  },
+  {
+   "t": "2026-09-24T14:14:56.666Z",
+   "model": "black-forest-labs/flux-2-pro",
+   "est": 0.03,
+   "out": "art/company/bg/dorm.webp",
+   "prompt": "Anime background art, modern MAPPA anime film still, detailed, cinematic lighting, no people. The lobby of a company emp"
+  },
+  {
+   "t": "2026-09-24T14:15:05.965Z",
+   "model": "black-forest-labs/flux-2-pro",
+   "est": 0.03,
+   "out": "art/company/bg/gate.webp",
+   "prompt": "Anime background art, modern MAPPA anime film still, detailed, cinematic lighting, no people. The main security gate of "
+  },
+  {
+   "t": "2026-09-24T14:15:10.112Z",
+   "model": "black-forest-labs/flux-2-pro",
+   "est": 0.03,
+   "out": "art/company/bg/office.webp",
+   "prompt": "Anime background art, modern MAPPA anime film still, detailed, cinematic lighting, no people. A cluttered basement offic"
+  },
+  {
+   "t": "2026-09-24T14:15:46.601Z",
+   "model": "851-labs/background-remover",
+   "est": 0.002,
+   "out": "art/company/cutouts/rei.png",
+   "prompt": ""
+  },
+  {
+   "t": "2026-09-24T14:15:46.623Z",
+   "model": "851-labs/background-remover",
+   "est": 0.002,
+   "out": "art/company/cutouts/emi.png",
+   "prompt": ""
+  },
+  {
+   "t": "2026-09-24T14:15:48.090Z",
+   "model": "851-labs/background-remover",
+   "est": 0.002,
+   "out": "art/company/cutouts/mio.png",
+   "prompt": ""
+  },
+  {
+   "t": "2026-09-24T14:15:48.276Z",
+   "model": "851-labs/background-remover",
+   "est": 0.002,
+   "out": "art/company/cutouts/aoi.png",
+   "prompt": ""
   }
  ]
 }
