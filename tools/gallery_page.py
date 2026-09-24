@@ -7,10 +7,10 @@ os.makedirs(OUT, exist_ok=True)
 TITLES = {'R': 'Round 6 retries', 'O': 'Basement office background (Planning Office 7)', 'M': 'Main character options', 'A': 'A. New characters', 'B': 'B. Cast expression sets (RDBT)', 'C': 'C. Environments', 'D': 'D. Story scenes (RDBT and JANIMA)'}
 NOTES = {
     'O': 'Four seeds on RDBT. Seed 504 now replaces game/img/bg/office.webp; the old sunny version is kept as office-old.webp.',
-    'M': 'Ten directions for the player character, two seeds each on RDBT, waist-up on plain grey.',
+    'M': 'Ten directions for the player character, two seeds each on RDBT, waist-up on plain grey. Note: several came out with tanned skin despite "fair pale skin" in the prompt.',
     'R': 'The five weak scenes from round 6, rewritten: the camera position and facing are stated, emotions sit inside each character block, and anime style anchors are added. Originals from round 6 are shown first in each scene, then the retries (2 seeds each on RDBT, One Obsession and JANIMA). Captions describe what is actually in each image.',
-    'A': 'Two seeds per character (s101, s102), then four expressions on the picked seed. Model: RDBT Anima.',
-    'B': 'Five expressions per existing cast member, one seed per character so the face stays the same. Replaces the older mixed-model sprites once approved.',
+    'A': 'Two seeds per character (s101, s102), then four expressions on the picked seed. Model: RDBT Anima. Oguri and Ren are rejected; expression sets are on hold until style, model and cast are settled.',
+    'B': 'Cancelled partway (outfits drift between expressions; to be redone by face-only inpainting once the cast is settled). Shown as rendered.',
     'C': 'No people. Time-of-day variants (day, evening, night) for the office, canteen and rooftop.',
     'D': 'Each scene rendered with RDBT and JANIMA, same prompt and seed, side by side.',
 }
