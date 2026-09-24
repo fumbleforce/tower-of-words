@@ -30,6 +30,13 @@ Everything Jørgen has asked for, and how we work. Every agent reads this before
 - Every branch must flow: after each choice, the next lines must make sense, with the right speaker and the right voice. Check every path.
 - Natural casual Japanese at N5–N4, in character. Nothing illogical or repeated.
 
+## Story craft (story-writing skills: story-sense, story-analysis, dialogue, scene-sequencing, key-moments, character-arc, novel-revision, story-coach, in ~/.agents/skills)
+- Set up before you pay off: no character may refer to anything the player hasn't seen yet (a line about the player's "magic" before any magic was shown broke this).
+- Continuity: a scene stays in one location until an explicit transition (the player was teleported from Rei's office to the basement between two sentences). Backgrounds, who's present, and the time of day must match the dialogue.
+- Scenes must want something: each has a goal, an obstacle and a turn. Characters drive scenes; they don't just deliver information.
+- Every character has a distinct voice (word choice, sentence length, register); run the dialogue skill's voice checks.
+- Story beats are reviewed by a story editor, not only by the builder.
+
 ## Writing (all UI text, docs and replies)
 - Plain, human writing: use the humanizer skill (~/.agents/skills/humanizer). No slogans, no em dashes, no "not X but Y", no filler taglines.
 
