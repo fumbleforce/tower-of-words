@@ -146,3 +146,14 @@ ruby rt { font: 700 .42em var(--mono); letter-spacing: .02em; color: var(--gold)
 .ph-body .small { font-size: 12px; color: #9aa0ab; }
 .ph-body .wordrow { display: flex; justify-content: space-between; padding: .35em 0; border-bottom: 1px solid #22252c; font-size: 15px; }
 .ph-close { margin: .8em auto 1.2em; width: 44%; padding: .5em; border-radius: 999px; background: #22252c; font-weight: 700; }
+
+/* Per-location light on sprites so they sit in the scene */
+.ch img { transition: filter .6s; }
+#stage[data-bg=gate] .ch img, #stage[data-bg=elevator] .ch img { filter: saturate(.92) brightness(1.03) hue-rotate(-4deg); }
+#stage[data-bg=office] .ch img { filter: sepia(.12) saturate(1.05) brightness(.97); }
+#stage[data-bg=sales] .ch img { filter: brightness(1.06) saturate(.95); }
+#stage[data-bg=canteen] .ch img { filter: sepia(.14) brightness(1.02); }
+#stage[data-bg=rooftop] .ch img { filter: sepia(.22) saturate(1.1) brightness(1.02); }
+#stage[data-bg=bar] .ch img { filter: sepia(.35) saturate(1.1) brightness(.86) hue-rotate(-6deg); }
+.flash::after { content: ""; position: absolute; inset: 0; background: radial-gradient(circle, rgba(111,231,255,.55), transparent 70%); animation: fade .9s forwards; pointer-events: none; z-index: 20; }
+@keyframes fade { to { opacity: 0; } }
