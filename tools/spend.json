@@ -1,5 +1,5 @@
 {
- "total": 10.6113,
+ "total": 11.0913,
  "calls": [
   {
    "t": "2026-09-24T10:37:04.077Z",
@@ -2415,6 +2415,34 @@
    "est": 0.01,
    "out": "art/voice-raw/0a110e20.wav",
    "prompt": ""
+  },
+  {
+   "t": "2026-09-24T17:34:19.228Z",
+   "model": "google/lyria-2",
+   "est": 0.12,
+   "out": "art/music/night.wav",
+   "prompt": "Quiet late-night jazz bar loop, brushed drums, upright bass and mellow piano, rain outside, intimate and calm, anime, in"
+  },
+  {
+   "t": "2026-09-24T17:34:20.718Z",
+   "model": "google/lyria-2",
+   "est": 0.12,
+   "out": "art/music/lively.wav",
+   "prompt": "Bright upbeat lunchtime music loop, light acoustic guitar, marimba and hand claps, busy cheerful canteen, anime slice of"
+  },
+  {
+   "t": "2026-09-24T17:34:20.872Z",
+   "model": "google/lyria-2",
+   "est": 0.12,
+   "out": "art/music/office.wav",
+   "prompt": "Relaxed lo-fi office music loop, soft electric piano and brushed drums, a little quirky and warm, a cluttered basement o"
+  },
+  {
+   "t": "2026-09-24T17:34:29.513Z",
+   "model": "google/lyria-2",
+   "est": 0.12,
+   "out": "art/music/calm.wav",
+   "prompt": "Gentle hopeful morning music loop, soft piano and strings with a light synth pad, a monorail crossing the sea at sunrise"
   }
  ]
 }
