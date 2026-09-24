@@ -54,9 +54,16 @@ function fresh() {
   return {
     v: 1, name: '', created: Date.now(), xp: 0, floor: 1, cleared: [], items: {}, log: [], listen: [], side: {},
     settings: { furi: true, audio: true, rate: 0.85, newPer: 7 },
+    xpBy: {}, sync: { token: '', gist: '', at: 0 },
   };
 }
 let S = load();
+// Each device only ever increments its own XP counter, so merging devices is a per-device max (no double counting).
+const DEVICE = (() => { try { let d = localStorage.getItem('tower.device'); if (!d) { d = Math.random().toString(36).slice(2, 10); localStorage.setItem('tower.device', d); } return d; } catch (e) { return 'local'; } })();
+if (!Object.keys(S.xpBy).length && S.xp) S.xpBy[DEVICE] = S.xp;
+recomputeXp();
+function recomputeXp() { S.xp = Object.values(S.xpBy).reduce((a, b) => a + b, 0); }
+function addXp(n) { S.xpBy[DEVICE] = (S.xpBy[DEVICE] || 0) + n; recomputeXp(); }
 function load() {
   try {
     const raw = localStorage.getItem(SAVE_KEY);
@@ -64,7 +71,69 @@ function load() {
   } catch (e) { /* fall through */ }
   return fresh();
 }
-function save() { try { localStorage.setItem(SAVE_KEY, JSON.stringify(S)); } catch (e) { toast('Could not save progress!'); } }
+function save() { S.mod = Date.now(); try { localStorage.setItem(SAVE_KEY, JSON.stringify(S)); } catch (e) { toast('Could not save progress!'); } }
+
+/* ---------------- cross-device sync (private GitHub gist) ---------------- */
+const GIST_FILE = 'tower-of-words-save.json';
+function mergeState(a, b) {
+  // a = local, b = remote. Result keeps local settings, sync config and device.
+  const out = Object.assign({}, a);
+  out.items = Object.assign({}, a.items);
+  for (const [id, r] of Object.entries(b.items || {})) {
+    const l = out.items[id];
+    if (!l || (r.last || 0) > (l.last || 0) || ((r.last || 0) === (l.last || 0) && r.s > l.s)) out.items[id] = r;
+  }
+  out.xpBy = Object.assign({}, a.xpBy);
+  for (const [d, x] of Object.entries(b.xpBy || {})) out.xpBy[d] = Math.max(out.xpBy[d] || 0, x);
+  const seen = new Set(); out.log = [...(a.log || []), ...(b.log || [])].filter(l => { const k = l.t + l.kind; if (seen.has(k)) return false; seen.add(k); return true; }).sort((x, y) => x.t - y.t).slice(-500);
+  out.cleared = [...new Set([...(a.cleared || []), ...(b.cleared || [])])].sort((x, y) => x - y);
+  out.floor = Math.max(a.floor || 1, b.floor || 1);
+  out.side = Object.assign({}, a.side);
+  for (const [k, v] of Object.entries(b.side || {})) out.side[k] = Math.max(out.side[k] || 0, v || 0);
+  out.listen = (a.listen || []).length >= (b.listen || []).length ? a.listen : b.listen;
+  if (!out.name && b.name) out.name = b.name;
+  out.onboarded = a.onboarded || b.onboarded;
+  out.xp = Object.values(out.xpBy).reduce((x, y) => x + y, 0);
+  return out;
+}
+async function gh(path, opts = {}) {
+  const res = await fetch('https://api.github.com' + path, Object.assign({}, opts, {
+    headers: { Authorization: 'Bearer ' + S.sync.token, Accept: 'application/vnd.github+json', 'Content-Type': 'application/json' },
+  }));
+  if (!res.ok) throw new Error('GitHub ' + res.status);
+  return res.json();
+}
+let syncing = false;
+async function sync(manual) {
+  if (!S.sync.token || syncing || !navigator.onLine) { if (manual && !navigator.onLine) toast('Offline: will sync later.'); return; }
+  syncing = true;
+  try {
+    if (!S.sync.gist) {
+      const list = await gh('/gists?per_page=100');
+      const found = list.find(g => g.files && g.files[GIST_FILE]);
+      S.sync.gist = found ? found.id : '';
+    }
+    const strip = st => { const c = Object.assign({}, st); delete c.sync; delete c.settings; return c; };
+    if (S.sync.gist) {
+      const g = await gh('/gists/' + S.sync.gist);
+      const f = g.files[GIST_FILE];
+      const text = f.truncated ? await (await fetch(f.raw_url)).text() : f.content;
+      const merged = mergeState(S, JSON.parse(text));
+      merged.sync = S.sync; merged.settings = S.settings;
+      S = merged;
+      await gh('/gists/' + S.sync.gist, { method: 'PATCH', body: JSON.stringify({ files: { [GIST_FILE]: { content: JSON.stringify(strip(S)) } } }) });
+    } else {
+      const g = await gh('/gists', { method: 'POST', body: JSON.stringify({ description: 'Tower of Words save (auto-synced)', public: false, files: { [GIST_FILE]: { content: JSON.stringify(strip(S)) } } }) });
+      S.sync.gist = g.id;
+    }
+    S.sync.at = Date.now(); S.sync.err = ''; save();
+    if (manual) toast('Synced ✓');
+    return true;
+  } catch (e) {
+    S.sync.err = e.message; save();
+    if (manual) toast('Sync failed: ' + e.message);
+  } finally { syncing = false; }
+}
 
 const st = id => S.items[id];
 const stage = id => (S.items[id] ? S.items[id].s : -1);
@@ -393,7 +462,7 @@ function runBattle({ title: btitle, enemy, queue, hearts = 5, onEnd, graded = tr
 
   function finish(retreated) {
     S.listen.push(...listenLog); S.listen = S.listen.slice(-100);
-    S.xp += xp; save();
+    addXp(xp); save();
     onEnd({ right, wrong, xp, won: !retreated && hp > 0, retreated, total });
   }
   if (!q0.length) return onEnd({ right: 0, wrong: 0, xp: 0, won: true, total: 0, empty: true });
@@ -444,7 +513,7 @@ function runLearn(ids, onDone) {
       learnCard(id),
       h('div', { class: 'stack', style: 'margin-top:12px' },
         h('button', { class: 'btn primary', onclick: () => { introduce(id); learned.push(id); i++; save(); show(); } }, 'Got it — add to my skills ▸'),
-        h('button', { class: 'btn ghost', onclick: () => { markKnown(id); S.xp += 5; i++; save(); toast('Marked as known · +5 XP'); show(); } }, 'I already know this')),
+        h('button', { class: 'btn ghost', onclick: () => { markKnown(id); addXp(5); i++; save(); toast('Marked as known · +5 XP'); show(); } }, 'I already know this')),
     );
     if (it.type !== 'gram') setTimeout(() => speak(sayText(it)), 200);
   }
@@ -455,6 +524,7 @@ function runLearn(ids, onDone) {
 function logSession(kind, res, t0) {
   S.log.push({ t: Date.now(), kind, xp: res.xp, right: res.right, total: res.right + res.wrong, ms: Date.now() - t0 });
   S.log = S.log.slice(-500); save();
+  sync();
 }
 function weakest(fid, n, exclude = []) {
   return (FLOOR_ITEMS[fid] || []).filter(id => introduced(id) && !exclude.includes(id))
@@ -490,7 +560,7 @@ function startQuest() {
       runBattle({ title: 'Field battle', enemy: pick(['Kobold 小鬼', 'Dire Wolf 狼', 'Sentinel Drone 警備ドローン', 'Rogue Knight 騎士', 'Stone Golem ゴーレム', 'Siege Automaton 機械兵']), queue, onEnd: r => { acc(r); end(); } }));
   };
   const end = () => {
-    tot.xp += 30; S.xp += 30;
+    tot.xp += 30; addXp(30);
     logSession('quest', tot, t0);
     showResult('Quest complete', tot, lv0);
   };
@@ -508,7 +578,7 @@ function startPatrol() {
       const fresh = light ? newIds(3) : [];
       const end = (r2) => {
         const tot = { right: r.right + (r2?.right || 0), wrong: r.wrong + (r2?.wrong || 0), xp: r.xp + (r2?.xp || 0) + 15 };
-        S.xp += 15; logSession('patrol', tot, t0); showResult('Patrol complete', tot, lv0);
+        addXp(15); logSession('patrol', tot, t0); showResult('Patrol complete', tot, lv0);
       };
       if (!fresh.length) return end();
       interlude('Bonus · 3 new techniques', 'Quiet night. Time to learn a little more.', () => runLearn(fresh, learned => learned.length
@@ -559,7 +629,7 @@ function startBoss() {
       onEnd: r => {
         logSession('boss', r, t0);
         if (r.won) {
-          if (!S.cleared.includes(f.id)) { S.cleared.push(f.id); S.xp += 200; r.xp += 200; }
+          if (!S.cleared.includes(f.id)) { S.cleared.push(f.id); addXp(200); r.xp += 200; }
           if (FLOOR_BY_ID[f.id + 1]) S.floor = Math.max(S.floor, f.id + 1);
           save();
           mount(h('div', { class: 'stack' },
@@ -656,7 +726,7 @@ function renderHome() {
       h('h3', {}, 'Side quest (real world)'),
       h('p', {}, f.side),
       h('label', { class: 'toggle' }, h('span', {}, S.side[f.id] ? 'Completed ✓' : 'Mark as done'),
-        h('input', { type: 'checkbox', checked: !!S.side[f.id], onchange: e => { S.side[f.id] = e.target.checked ? Date.now() : 0; if (e.target.checked) { S.xp += 50; toast('+50 XP · side quest'); } save(); renderHome(); } }))),
+        h('input', { type: 'checkbox', checked: !!S.side[f.id], onchange: e => { S.side[f.id] = e.target.checked ? Date.now() : 0; if (e.target.checked) { addXp(50); toast('+50 XP · side quest'); } save(); renderHome(); } }))),
     h('div', { class: 'panel stack', style: 'margin-top:12px' },
       h('h3', {}, 'Speaking practice (optional, weekly)'),
       h('p', { class: 'small dim' }, 'Paste this into Claude for a 10-minute conversation at your current level.'),
@@ -806,12 +876,20 @@ function renderSettings() {
       h('p', { class: 'small dim' }, voiceMsg),
       h('button', { class: 'btn small', onclick: () => speak('こんにちは、ハンター。', true) }, '🔊 Test voice')),
     h('div', { class: 'panel stack', style: 'margin-top:12px' },
+      h('h3', {}, 'Sync phone ↔ desktop'),
+      h('p', { class: 'small dim' }, 'Progress syncs through a private GitHub gist when you have internet. Offline play is merged in later, so nothing is lost.'),
+      h('p', { class: 'small dim' }, h('a', { href: 'https://github.com/settings/personal-access-tokens/new', target: '_blank', style: 'color:var(--cyan)' }, 'Create a fine-grained token'), ' with only Account permissions → Gists: Read and write. Paste the same token on each device.'),
+      h('input', { type: 'text', placeholder: 'github_pat_…', value: S.sync.token, autocomplete: 'off', onchange: e => { S.sync.token = e.target.value.trim(); S.sync.gist = ''; save(); sync(true).then(() => renderSettings()); } }),
+      h('div', { class: 'row' },
+        h('span', { class: 'small dim spacer' }, !S.sync.token ? 'Not connected' : S.sync.err ? '⚠ ' + S.sync.err : S.sync.at ? 'Last sync ' + new Date(S.sync.at).toLocaleString() : 'Connecting…'),
+        S.sync.token ? h('button', { class: 'btn small', onclick: () => sync(true).then(() => renderSettings()) }, '⟳ Sync now') : null)),
+    h('div', { class: 'panel stack', style: 'margin-top:12px' },
       h('h3', {}, 'Backup'),
       h('p', { class: 'small dim' }, 'Progress is saved on this phone only. Copy a backup code now and then (e.g. into a note).'),
       h('button', { class: 'btn small', onclick: () => copy(btoa(unescape(encodeURIComponent(JSON.stringify(S))))) }, '📋 Copy backup code'),
       ta,
       h('button', { class: 'btn small', onclick: () => {
-        try { const s = JSON.parse(decodeURIComponent(escape(atob(ta.value.trim())))); if (!s.items) throw 0; S = Object.assign(fresh(), s); save(); toast('Restored!'); go('home'); } catch (e) { toast('That code didn\'t work.'); }
+        try { const s = JSON.parse(decodeURIComponent(escape(atob(ta.value.trim())))); if (!s.items) throw 0; S = mergeState(Object.assign(fresh(), { sync: S.sync, settings: S.settings }), s); save(); toast('Restored!'); go('home'); } catch (e) { toast('That code didn\'t work.'); }
       } }, 'Restore from code')),
     h('div', { class: 'panel stack', style: 'margin-top:12px' },
       h('h3', {}, 'Danger zone'),
@@ -854,3 +932,7 @@ if ('serviceWorker' in navigator && location.protocol !== 'file:') navigator.ser
 if (!FLOORS.length) mount(h('p', {}, 'No floors loaded.'));
 else if (!S.onboarded) onboard();
 else go('home');
+// Pull the other device's progress when opening; push when leaving.
+if (S.sync.token) sync().then(ok => { if (ok && currentTab === 'home' && !$('#nav').hidden) renderHome(); });
+document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'hidden') sync(); });
+window.addEventListener('online', () => sync());
