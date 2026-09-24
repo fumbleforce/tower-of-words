@@ -4,8 +4,10 @@ ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..')
 SRC = os.path.join(ROOT, 'art', 'production')
 OUT = os.path.join(ROOT, 'proto2', 'gallery')
 os.makedirs(OUT, exist_ok=True)
-TITLES = {'R': 'Round 6 retries', 'A': 'A. New characters', 'B': 'B. Cast expression sets (RDBT)', 'C': 'C. Environments', 'D': 'D. Story scenes (RDBT and JANIMA)'}
+TITLES = {'R': 'Round 6 retries', 'O': 'Basement office background (Planning Office 7)', 'M': 'Main character options', 'A': 'A. New characters', 'B': 'B. Cast expression sets (RDBT)', 'C': 'C. Environments', 'D': 'D. Story scenes (RDBT and JANIMA)'}
 NOTES = {
+    'O': 'Four seeds on RDBT. Seed 504 now replaces game/img/bg/office.webp; the old sunny version is kept as office-old.webp.',
+    'M': 'Ten directions for the player character, two seeds each on RDBT, waist-up on plain grey.',
     'R': 'The five weak scenes from round 6, rewritten: the camera position and facing are stated, emotions sit inside each character block, and anime style anchors are added. Originals from round 6 are shown first in each scene, then the retries (2 seeds each on RDBT, One Obsession and JANIMA). Captions describe what is actually in each image.',
     'A': 'Two seeds per character (s101, s102), then four expressions on the picked seed. Model: RDBT Anima.',
     'B': 'Five expressions per existing cast member, one seed per character so the face stays the same. Replaces the older mixed-model sprites once approved.',
@@ -44,7 +46,7 @@ if any(e['batch'] == 'R' for e in m):
             figs += fig(webp, e['name'], ph)
         body += f'<h3>{scene}</h3><div class="imgs">{figs}</div>'
     sections += f'<section><h2>{TITLES["R"]}</h2><p class="note">{NOTES["R"]}</p>{body}</section>'
-for b in ['A', 'B', 'C', 'D']:
+for b in ['O', 'M', 'A', 'B', 'C', 'D']:
     items = sorted([e for e in m if e['batch'] == b], key=lambda e: e['name'])
     if not items:
         continue
