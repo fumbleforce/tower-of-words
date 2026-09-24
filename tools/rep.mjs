@@ -55,8 +55,9 @@ export const spent = () => ledger().total;
 
 function toDataUri(p) {
   if (typeof p !== 'string' || /^(https?:|data:)/.test(p) || !fs.existsSync(p)) return p;
-  const ext = path.extname(p).slice(1).replace('jpg', 'jpeg');
-  return `data:image/${ext};base64,${fs.readFileSync(p).toString('base64')}`;
+  const ext = path.extname(p).slice(1).toLowerCase();
+  const mime = { mp3: 'audio/mpeg', wav: 'audio/wav', flac: 'audio/flac', ogg: 'audio/ogg', jpg: 'image/jpeg' }[ext] || `image/${ext}`;
+  return `data:${mime};base64,${fs.readFileSync(p).toString('base64')}`;
 }
 
 export async function run(model, input, outFile, { force = false } = {}) {
@@ -65,7 +66,7 @@ export async function run(model, input, outFile, { force = false } = {}) {
   const L = ledger();
   if (L.total + est > BUDGET) throw new Error(`Budget cap: $${L.total.toFixed(2)} spent, this call ~$${est} would exceed $${BUDGET}`);
   const body = { ...input };
-  for (const k of ['input_image', 'image', 'start_image', 'extra_input_image', 'input_palette']) if (body[k]) body[k] = toDataUri(body[k]);
+  for (const k of ['input_image', 'image', 'start_image', 'extra_input_image', 'input_palette', 'reference_audio']) if (body[k]) body[k] = toDataUri(body[k]);
   if (body.input_images) body.input_images = body.input_images.map(toDataUri);
 
   const headers = { Authorization: `Bearer ${env()}`, 'Content-Type': 'application/json', Prefer: 'wait=60' };
