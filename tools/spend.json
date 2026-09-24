@@ -1,5 +1,5 @@
 {
- "total": 9.3786,
+ "total": 9.6786,
  "calls": [
   {
    "t": "2026-09-24T10:37:04.077Z",
@@ -1764,6 +1764,76 @@
    "est": 0.03,
    "out": "art/company/mappa/kaito-17.webp",
    "prompt": "Anime character portrait, modern MAPPA anime still, sharp lines, cinematic lighting. Kaito, 24, a hyperactive street dan"
+  },
+  {
+   "t": "2026-09-24T14:03:47.970Z",
+   "model": "black-forest-labs/flux-2-pro",
+   "est": 0.03,
+   "out": "art/company/mappa/shin-3.webp",
+   "prompt": "Anime character portrait, modern MAPPA anime still, sharp lines, cinematic lighting. Shin, 38, a tired single dad who ma"
+  },
+  {
+   "t": "2026-09-24T14:03:48.285Z",
+   "model": "black-forest-labs/flux-2-pro",
+   "est": 0.03,
+   "out": "art/company/mappa/jun-17.webp",
+   "prompt": "Anime character portrait, modern MAPPA anime still, sharp lines, cinematic lighting. Jun, 40, the quiet bartender at the"
+  },
+  {
+   "t": "2026-09-24T14:03:48.448Z",
+   "model": "black-forest-labs/flux-2-pro",
+   "est": 0.03,
+   "out": "art/company/mappa/jun-3.webp",
+   "prompt": "Anime character portrait, modern MAPPA anime still, sharp lines, cinematic lighting. Jun, 40, the quiet bartender at the"
+  },
+  {
+   "t": "2026-09-24T14:03:48.467Z",
+   "model": "black-forest-labs/flux-2-pro",
+   "est": 0.03,
+   "out": "art/company/mappa/shin-17.webp",
+   "prompt": "Anime character portrait, modern MAPPA anime still, sharp lines, cinematic lighting. Shin, 38, a tired single dad who ma"
+  },
+  {
+   "t": "2026-09-24T14:03:49.430Z",
+   "model": "black-forest-labs/flux-2-pro",
+   "est": 0.03,
+   "out": "art/company/mappa/nanami-17.webp",
+   "prompt": "Anime character portrait, modern MAPPA anime still, sharp lines, cinematic lighting. Nanami, 29, a stoic company securit"
+  },
+  {
+   "t": "2026-09-24T14:03:50.102Z",
+   "model": "black-forest-labs/flux-2-pro",
+   "est": 0.03,
+   "out": "art/company/mappa/yuzuki-3.webp",
+   "prompt": "Anime character portrait, modern MAPPA anime still, sharp lines, cinematic lighting. Yuzuki, 31, the company's glamorous"
+  },
+  {
+   "t": "2026-09-24T14:03:50.785Z",
+   "model": "black-forest-labs/flux-2-pro",
+   "est": 0.03,
+   "out": "art/company/mappa/nanami-3.webp",
+   "prompt": "Anime character portrait, modern MAPPA anime still, sharp lines, cinematic lighting. Nanami, 29, a stoic company securit"
+  },
+  {
+   "t": "2026-09-24T14:03:54.329Z",
+   "model": "black-forest-labs/flux-2-pro",
+   "est": 0.03,
+   "out": "art/company/mappa/yuzuki-17.webp",
+   "prompt": "Anime character portrait, modern MAPPA anime still, sharp lines, cinematic lighting. Yuzuki, 31, the company's glamorous"
+  },
+  {
+   "t": "2026-09-24T14:03:55.546Z",
+   "model": "black-forest-labs/flux-2-pro",
+   "est": 0.03,
+   "out": "art/company/mappa/haruto-17.webp",
+   "prompt": "Anime character portrait, modern MAPPA anime still, sharp lines, cinematic lighting. Haruto, 30, a soft-spoken R&D chemi"
+  },
+  {
+   "t": "2026-09-24T14:04:00.642Z",
+   "model": "black-forest-labs/flux-2-pro",
+   "est": 0.03,
+   "out": "art/company/mappa/haruto-3.webp",
+   "prompt": "Anime character portrait, modern MAPPA anime still, sharp lines, cinematic lighting. Haruto, 30, a soft-spoken R&D chemi"
   }
  ]
 }
