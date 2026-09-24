@@ -1,5 +1,5 @@
 {
- "total": 8.9286,
+ "total": 9.3786,
  "calls": [
   {
    "t": "2026-09-24T10:37:04.077Z",
@@ -1666,6 +1666,104 @@
    "est": 0.045,
    "out": "art/company/mappa/sayaka-v2-3.webp",
    "prompt": "Anime character portrait, modern MAPPA anime still, sharp lines, cinematic lighting. The same woman as in image 1, keepi"
+  },
+  {
+   "t": "2026-09-24T13:58:34.176Z",
+   "model": "black-forest-labs/flux-2-pro",
+   "est": 0.03,
+   "out": "art/company/mappa/kaito-3.webp",
+   "prompt": "Anime character portrait, modern MAPPA anime still, sharp lines, cinematic lighting. Kaito, 24, a hyperactive street dan"
+  },
+  {
+   "t": "2026-09-24T13:58:34.283Z",
+   "model": "black-forest-labs/flux-2-pro",
+   "est": 0.03,
+   "out": "art/company/mappa/hana2-17.webp",
+   "prompt": "Anime character portrait, modern MAPPA anime still, sharp lines, cinematic lighting. Hana, 27, a nosy investigative repo"
+  },
+  {
+   "t": "2026-09-24T13:58:34.358Z",
+   "model": "black-forest-labs/flux-2-pro",
+   "est": 0.03,
+   "out": "art/company/mappa/hana2-3.webp",
+   "prompt": "Anime character portrait, modern MAPPA anime still, sharp lines, cinematic lighting. Hana, 27, a nosy investigative repo"
+  },
+  {
+   "t": "2026-09-24T13:58:34.403Z",
+   "model": "black-forest-labs/flux-2-pro",
+   "est": 0.03,
+   "out": "art/company/mappa/kaori-3.webp",
+   "prompt": "Anime character portrait, modern MAPPA anime still, sharp lines, cinematic lighting. Kaori, 44, the calm head chef of th"
+  },
+  {
+   "t": "2026-09-24T13:58:34.647Z",
+   "model": "black-forest-labs/flux-2-pro",
+   "est": 0.03,
+   "out": "art/company/mappa/takumi-17.webp",
+   "prompt": "Anime character portrait, modern MAPPA anime still, sharp lines, cinematic lighting. Takumi, 27, the chairman's grandson"
+  },
+  {
+   "t": "2026-09-24T13:58:34.805Z",
+   "model": "black-forest-labs/flux-2-pro",
+   "est": 0.03,
+   "out": "art/company/mappa/guard2-17.webp",
+   "prompt": "Anime character portrait, modern MAPPA anime still, sharp lines, cinematic lighting. The gate guard, a wiry man in his s"
+  },
+  {
+   "t": "2026-09-24T13:58:34.843Z",
+   "model": "black-forest-labs/flux-2-pro",
+   "est": 0.03,
+   "out": "art/company/mappa/goro-17.webp",
+   "prompt": "Anime character portrait, modern MAPPA anime still, sharp lines, cinematic lighting. Goro, 61, a gentle semi-retired eng"
+  },
+  {
+   "t": "2026-09-24T13:58:35.083Z",
+   "model": "black-forest-labs/flux-2-pro",
+   "est": 0.03,
+   "out": "art/company/mappa/goro-3.webp",
+   "prompt": "Anime character portrait, modern MAPPA anime still, sharp lines, cinematic lighting. Goro, 61, a gentle semi-retired eng"
+  },
+  {
+   "t": "2026-09-24T13:58:35.102Z",
+   "model": "black-forest-labs/flux-2-pro",
+   "est": 0.03,
+   "out": "art/company/mappa/kaori-17.webp",
+   "prompt": "Anime character portrait, modern MAPPA anime still, sharp lines, cinematic lighting. Kaori, 44, the calm head chef of th"
+  },
+  {
+   "t": "2026-09-24T13:58:37.099Z",
+   "model": "black-forest-labs/flux-2-pro",
+   "est": 0.03,
+   "out": "art/company/mappa/takumi-3.webp",
+   "prompt": "Anime character portrait, modern MAPPA anime still, sharp lines, cinematic lighting. Takumi, 27, the chairman's grandson"
+  },
+  {
+   "t": "2026-09-24T13:58:37.360Z",
+   "model": "black-forest-labs/flux-2-pro",
+   "est": 0.045,
+   "out": "art/company/mappa/rei2-3.webp",
+   "prompt": "Anime character portrait, modern MAPPA anime still, sharp lines, cinematic lighting. The same woman as in image 1, redra"
+  },
+  {
+   "t": "2026-09-24T13:58:37.848Z",
+   "model": "black-forest-labs/flux-2-pro",
+   "est": 0.045,
+   "out": "art/company/mappa/rei2-17.webp",
+   "prompt": "Anime character portrait, modern MAPPA anime still, sharp lines, cinematic lighting. The same woman as in image 1, redra"
+  },
+  {
+   "t": "2026-09-24T13:58:39.281Z",
+   "model": "black-forest-labs/flux-2-pro",
+   "est": 0.03,
+   "out": "art/company/mappa/guard2-3.webp",
+   "prompt": "Anime character portrait, modern MAPPA anime still, sharp lines, cinematic lighting. The gate guard, a wiry man in his s"
+  },
+  {
+   "t": "2026-09-24T13:58:40.740Z",
+   "model": "black-forest-labs/flux-2-pro",
+   "est": 0.03,
+   "out": "art/company/mappa/kaito-17.webp",
+   "prompt": "Anime character portrait, modern MAPPA anime still, sharp lines, cinematic lighting. Kaito, 24, a hyperactive street dan"
   }
  ]
 }
