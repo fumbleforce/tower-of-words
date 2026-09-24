@@ -49,9 +49,10 @@ CHOICE: Your reply
     Mio: かたいね。……ミオ。今ゲーム中。  /  "So stiff. ...I'm Mio. In the middle of a game." Between coworkers your age, casual speech is normal.
   3) You: そっちこそ誰？  /  "Who are you, then?"
     Mio: ……ふふ。ミオ。今ゲーム中。話しかけないで。  /  "...Heh. Mio. I'm in a game. Don't talk to me."
-IF late after 09:00:
-  Emi: 遅刻だよ。まあ、いいけど。  /  "You're late. Whatever."
-Emi: 来た来た。君が新人くん？　私はエミ。ここのリーダー……いちおうね。  /  "There you are. You're the new guy? I'm Emi. The leader here... technically."
+IF time after 09:00:
+  Emi: 遅刻だよ、新人くん。まあ、いいけど。私はエミ。ここのリーダー……いちおうね。  /  "You're late, new guy. Whatever. I'm Emi. The leader here... technically."
+ELSE:
+  Emi: 来た来た。君が新人くん？　私はエミ。ここのリーダー……いちおうね。  /  "There you are. You're the new guy? I'm Emi. The leader here... technically."
 CHOICE: Your reply
   1) You: よろしくお願いします。  /  "Nice to meet you." (polite)
     Emi: まじめだね。  /  "So serious."
@@ -61,6 +62,14 @@ CHOICE: Your reply
     Emi: そう、いちおう。  /  "Yep. Technically."
 Emi: 試用期間は三か月。……まあ、がんばって。  /  "Your probation is three months. ...Well, do your best."
 (Emi shows you your desk, the coffee machine that only works if you hit it, and a login that doesn't work at all. An hour and a half disappears.)
+[clock 10:30]
+(Emi takes a phone call in the corridor. Mio has her headphones on. You try the coffee machine. Dead.)
+CHOICE: The coffee machine is dead.
+  1) You: たたく  /  Hit it, like Emi said
+    (You hit it. Nothing. Not even a hum.)
+  2) You: （小さい声で）「動いて」  /  Quietly ask it: "Work."
+    (The machine shudders, hums, and pours a perfect cup.)
+    (It has been like this since you were small. When you ask for something in Japanese and truly mean it, the world listens. The old word for it is 言霊, kotodama. Nobody at Amakawa knows. Better keep it that way.)
 [clock 10:35]
 Emi: さっそくだけど、お願いがあるの。  /  "Straight to it: I need a favour."
 Emi: 三階の営業部に行って、黒田さんから書類をもらってきて。  /  "Go to Sales on the third floor and get the documents from Kuroda."
@@ -77,7 +86,7 @@ Mio: 黒田レイ？　……がんばって。あの人、こわいよ。  /  "
 [scene: sales]
 IF time after 11:00:
   Rei: もう遅いよ。会議、始まった。  /  "Too late. The meeting's already started."
-  (She turns away. Whatever magic you have, it can't fix the clock.)
+  (She turns away. Your words can do a lot of things. Turning back the clock isn't one of them.)
   → office2
 Rei: 企画室7の新人？　……ああ、書類ね。  /  "The new guy from Planning 7? ...Ah, the documents."
 Rei: 悪いけど、今忙しいの。午後に来て。  /  "Sorry, but I'm busy right now. Come back this afternoon."
@@ -115,6 +124,8 @@ CHOICE: Emi needs them before eleven.
 → office2
 
 ## office2
+[scene: elevator]
+(You ride the elevator back down to basement level 2.)
 [scene: office]
 IF gotDocs:
   Emi: え、もう？　はやっ！  /  "What, already? That was fast!"
@@ -145,7 +156,7 @@ Mio: こっち、こっち。  /  "Over here, over here."
 Mio: 新人くん、ゲームする？  /  "New guy, do you play games?"
 CHOICE: Your reply
   1) You: する！  /  "I do!"
-    Mio: ……じゃあ、今夜、一緒にやる？  /  "...Then want to play together tonight?"
+    Mio: ……へえ。じゃあ、今度、対戦しよ。  /  "...Huh. Then let's play against each other sometime."
   2) You: あんまりしない。  /  "Not much."
     Mio: ふーん。  /  "Hmm."
 → bar
@@ -161,13 +172,16 @@ CHOICE: Your reply
 → bar
 
 ## bar
-[scene: bar]
-[clock 19:30]
+IF !gotDocs:
+  (In the afternoon you go back up to Sales. Rei hands over the folder without looking up from her screen.)
+[clock 19:10]
 IF casualGuard:
   [scene: gate]
+  (On your way out, the gate.)
   Ishibashi: また君か。カード。  /  "You again. Card." He remembers how you spoke to him this morning.
   (You show your card. He takes his time reading it.)
-  [scene: bar]
+[scene: bar]
+[clock 19:30]
 (Evening. A small bar tucked behind the dorm blocks.)
 Jun: いらっしゃい。初日？　顔に書いてあるよ。  /  "Welcome. First day? It's written all over your face."
 Jun: 今日、一番大変だったのは何？  /  "What was the hardest part of today?"

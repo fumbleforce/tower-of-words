@@ -6,7 +6,7 @@
 Aoi: ごめんなさい！　コンペの企画書、消しちゃった……！  /  "I'm so sorry! I deleted the proposal for the pitch...!"
 Mio: ……ファイル、ぜんぶ？  /  "...The whole file?"
 Aoi: ぜんぶ。真壁さんのパソコンで、ボタンを押したら……。  /  "All of it. I pressed a button on Makabe's computer and..."
-(Emi is out until five. The pitch draft is due to Sales at five, sharp.)
+(Emi is out all afternoon. The pitch draft is due to Sales at five, sharp.)
 [task: 五時まで・企画書]
 Mio: バックアップは、地下一階の倉庫にある。でも、かぎがない。  /  "There's a backup in the storage room on basement level 1. But we don't have the key."
 Mio: かぎは、五階の役員室。……私は行かない。こわいから。  /  "The key's on the fifth floor, in the executive offices. ...I'm not going. It's scary."
@@ -83,7 +83,7 @@ IF missedDeadline:
   Emi: ……間に合わなかった？　そっか。  /  "...We didn't make it? I see."
   Emi: 大丈夫。私が黒田さんと話す。  /  "It's fine. I'll talk to Kuroda."
 ELSE:
-  (The file is back, and it goes out at 4:48. Aoi sits on the floor and cries a little from relief.)
+  (The file is back, and it goes out at 4:48. Aoi sits on the floor and cries a little from relief. Emi walks in at five, and Mio tells her everything.)
   Emi: ミオから聞いた。……助かった。ありがとう。  /  "Mio told me. ...You saved us. Thank you."
 → day4_night
 
