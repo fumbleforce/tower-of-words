@@ -1,5 +1,5 @@
 {
- "total": 3.3936,
+ "total": 4.5736,
  "calls": [
   {
    "t": "2026-09-24T10:37:04.077Z",
@@ -742,6 +742,174 @@
    "est": 0.045,
    "out": "art/company/v3/tomi-11.webp",
    "prompt": "Tomi, a 58-year-old Osaka-born woman who runs the company canteen, loud and warm: curly grey-streaked permed hair under "
+  },
+  {
+   "t": "2026-09-24T12:54:21.438Z",
+   "model": "qwen/qwen-image",
+   "est": 0.025,
+   "out": "art/company/models/qwen-seinen-mio.png",
+   "prompt": "Mio, a 24-year-old Japanese office worker who lives like a shut-in gamer: messy chin-length black hair with teal dyed un"
+  },
+  {
+   "t": "2026-09-24T12:54:23.324Z",
+   "model": "ideogram-ai/ideogram-v3-turbo",
+   "est": 0.03,
+   "out": "art/company/models/ideogram-tv-rei.png",
+   "prompt": "Rei, a 23-year-old Japanese top salesperson, sharp and ambitious: long silver-grey hair in a sleek high ponytail, thin g"
+  },
+  {
+   "t": "2026-09-24T12:54:23.528Z",
+   "model": "ideogram-ai/ideogram-v3-turbo",
+   "est": 0.03,
+   "out": "art/company/models/ideogram-seinen-mio.png",
+   "prompt": "Mio, a 24-year-old Japanese office worker who lives like a shut-in gamer: messy chin-length black hair with teal dyed un"
+  },
+  {
+   "t": "2026-09-24T12:54:23.668Z",
+   "model": "ideogram-ai/ideogram-v3-turbo",
+   "est": 0.03,
+   "out": "art/company/models/ideogram-tv-mio.png",
+   "prompt": "Mio, a 24-year-old Japanese office worker who lives like a shut-in gamer: messy chin-length black hair with teal dyed un"
+  },
+  {
+   "t": "2026-09-24T12:54:24.073Z",
+   "model": "ideogram-ai/ideogram-v3-turbo",
+   "est": 0.03,
+   "out": "art/company/models/ideogram-seinen-rei.png",
+   "prompt": "Rei, a 23-year-old Japanese top salesperson, sharp and ambitious: long silver-grey hair in a sleek high ponytail, thin g"
+  },
+  {
+   "t": "2026-09-24T12:54:26.032Z",
+   "model": "qwen/qwen-image",
+   "est": 0.025,
+   "out": "art/company/models/qwen-tv-mio.png",
+   "prompt": "Mio, a 24-year-old Japanese office worker who lives like a shut-in gamer: messy chin-length black hair with teal dyed un"
+  },
+  {
+   "t": "2026-09-24T12:54:27.400Z",
+   "model": "bytedance/seedream-4.5",
+   "est": 0.04,
+   "out": "art/company/models/seedream-seinen-rei.png",
+   "prompt": "Rei, a 23-year-old Japanese top salesperson, sharp and ambitious: long silver-grey hair in a sleek high ponytail, thin g"
+  },
+  {
+   "t": "2026-09-24T12:54:28.143Z",
+   "model": "bytedance/seedream-4.5",
+   "est": 0.04,
+   "out": "art/company/models/seedream-seinen-mio.png",
+   "prompt": "Mio, a 24-year-old Japanese office worker who lives like a shut-in gamer: messy chin-length black hair with teal dyed un"
+  },
+  {
+   "t": "2026-09-24T12:54:29.825Z",
+   "model": "bytedance/seedream-4.5",
+   "est": 0.04,
+   "out": "art/company/models/seedream-tv-mio.png",
+   "prompt": "Mio, a 24-year-old Japanese office worker who lives like a shut-in gamer: messy chin-length black hair with teal dyed un"
+  },
+  {
+   "t": "2026-09-24T12:54:30.128Z",
+   "model": "qwen/qwen-image",
+   "est": 0.025,
+   "out": "art/company/models/qwen-tv-rei.png",
+   "prompt": "Rei, a 23-year-old Japanese top salesperson, sharp and ambitious: long silver-grey hair in a sleek high ponytail, thin g"
+  },
+  {
+   "t": "2026-09-24T12:54:31.874Z",
+   "model": "black-forest-labs/flux-2-pro",
+   "est": 0.03,
+   "out": "art/company/models/flux-seinen-rei.png",
+   "prompt": "Rei, a 23-year-old Japanese top salesperson, sharp and ambitious: long silver-grey hair in a sleek high ponytail, thin g"
+  },
+  {
+   "t": "2026-09-24T12:54:33.249Z",
+   "model": "black-forest-labs/flux-2-pro",
+   "est": 0.03,
+   "out": "art/company/models/flux-seinen-mio.png",
+   "prompt": "Mio, a 24-year-old Japanese office worker who lives like a shut-in gamer: messy chin-length black hair with teal dyed un"
+  },
+  {
+   "t": "2026-09-24T12:54:34.357Z",
+   "model": "qwen/qwen-image",
+   "est": 0.025,
+   "out": "art/company/models/qwen-seinen-rei.png",
+   "prompt": "Rei, a 23-year-old Japanese top salesperson, sharp and ambitious: long silver-grey hair in a sleek high ponytail, thin g"
+  },
+  {
+   "t": "2026-09-24T12:54:34.460Z",
+   "model": "google/nano-banana-pro",
+   "est": 0.15,
+   "out": "art/company/models/nanobanana-seinen-mio.png",
+   "prompt": "Mio, a 24-year-old Japanese office worker who lives like a shut-in gamer: messy chin-length black hair with teal dyed un"
+  },
+  {
+   "t": "2026-09-24T12:54:34.935Z",
+   "model": "black-forest-labs/flux-2-pro",
+   "est": 0.03,
+   "out": "art/company/models/flux-tv-rei.png",
+   "prompt": "Rei, a 23-year-old Japanese top salesperson, sharp and ambitious: long silver-grey hair in a sleek high ponytail, thin g"
+  },
+  {
+   "t": "2026-09-24T12:54:37.447Z",
+   "model": "google/nano-banana-pro",
+   "est": 0.15,
+   "out": "art/company/models/nanobanana-seinen-rei.png",
+   "prompt": "Rei, a 23-year-old Japanese top salesperson, sharp and ambitious: long silver-grey hair in a sleek high ponytail, thin g"
+  },
+  {
+   "t": "2026-09-24T12:54:37.518Z",
+   "model": "google/nano-banana-pro",
+   "est": 0.15,
+   "out": "art/company/models/nanobanana-tv-mio.png",
+   "prompt": "Mio, a 24-year-old Japanese office worker who lives like a shut-in gamer: messy chin-length black hair with teal dyed un"
+  },
+  {
+   "t": "2026-09-24T12:54:38.078Z",
+   "model": "google/nano-banana-pro",
+   "est": 0.15,
+   "out": "art/company/models/nanobanana-tv-rei.png",
+   "prompt": "Rei, a 23-year-old Japanese top salesperson, sharp and ambitious: long silver-grey hair in a sleek high ponytail, thin g"
+  },
+  {
+   "t": "2026-09-24T12:54:38.191Z",
+   "model": "black-forest-labs/flux-2-pro",
+   "est": 0.03,
+   "out": "art/company/models/flux-tv-mio.png",
+   "prompt": "Mio, a 24-year-old Japanese office worker who lives like a shut-in gamer: messy chin-length black hair with teal dyed un"
+  },
+  {
+   "t": "2026-09-24T12:54:41.256Z",
+   "model": "bytedance/seedream-4.5",
+   "est": 0.04,
+   "out": "art/company/models/seedream-tv-rei.png",
+   "prompt": "Rei, a 23-year-old Japanese top salesperson, sharp and ambitious: long silver-grey hair in a sleek high ponytail, thin g"
+  },
+  {
+   "t": "2026-09-24T12:54:43.166Z",
+   "model": "aisha-ai-official/animagine-xl-4.0",
+   "est": 0.02,
+   "out": "art/company/models/animagine-tv-rei.png",
+   "prompt": "1girl, solo, grey hair, long hair, high ponytail, hoop earrings, white suit, black shirt, lapel pin, holding tablet, con"
+  },
+  {
+   "t": "2026-09-24T12:54:50.283Z",
+   "model": "aisha-ai-official/animagine-xl-4.0",
+   "est": 0.02,
+   "out": "art/company/models/animagine-seinen-mio.png",
+   "prompt": "1girl, solo, black hair, teal inner hair color, short hair, messy hair, tired eyes, half-closed eyes, dark circles, blac"
+  },
+  {
+   "t": "2026-09-24T12:54:58.396Z",
+   "model": "aisha-ai-official/animagine-xl-4.0",
+   "est": 0.02,
+   "out": "art/company/models/animagine-seinen-rei.png",
+   "prompt": "1girl, solo, grey hair, long hair, high ponytail, hoop earrings, white suit, black shirt, lapel pin, holding tablet, con"
+  },
+  {
+   "t": "2026-09-24T12:55:11.850Z",
+   "model": "aisha-ai-official/animagine-xl-4.0",
+   "est": 0.02,
+   "out": "art/company/models/animagine-tv-mio.png",
+   "prompt": "1girl, solo, black hair, teal inner hair color, short hair, messy hair, tired eyes, half-closed eyes, dark circles, blac"
   }
  ]
 }
