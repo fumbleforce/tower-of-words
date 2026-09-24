@@ -508,25 +508,34 @@ const KANJI = [
     k: '人', file: '04eba', key: 'person', img: 'person',
     on: [['じん', 'jin'], ['にん', 'nin']], kun: [['ひと', 'hito']],
     mean: 'Two legs striding down a road, seen from behind: a <em>person</em> walking away.',
-    read: 'In a crowd, the one <em>person</em> you notice is <em>Jin</em>. So 人 reads <em>じん</em>, as in 日本人 (にほんじん), "a Japanese person". On its own, a person is <em>ひと</em>.',
+    read: 'In a crowd, the one <em>person</em> you notice is <em>Jin</em>. That\'s the sound of 人: <em>じん</em>. It has other readings too. See if you can work them out below.',
     ex: [['あの人は日本人です。', 'That person is Japanese.'], ['にほんじん', 'a Japanese person']],
     accept: { mean: ['person', 'people', 'human'], read: ['じん', 'にん', 'ひと'] },
+    opts: ['じん', 'にん', 'ひと'],
+    drill: [['日本人', 'じん', 'にほんじん', 'a Japanese person'], ['三人', 'にん', 'さんにん', 'three people'], ['あの人', 'ひと', 'あのひと', 'that person'], ['人', 'ひと', 'ひと', 'a person']],
+    sum: '人 is read じん or にん inside longer words, and ひと on its own.',
   },
   {
     k: '木', file: '06728', key: 'tree', img: 'tree',
     on: [['もく', 'moku'], ['ぼく', 'boku']], kun: [['き', 'ki']],
     mean: 'A trunk, branches reaching left and right, roots spreading below: a <em>tree</em>.',
-    read: '<em>Moku</em> the woodcarver works with <em>trees</em> all day. 木 reads <em>もく</em> in compound words. A tree on its own is <em>き</em>.',
+    read: '<em>Moku</em> the woodcarver works with <em>trees</em> all day. That\'s the sound of 木 inside longer words: <em>もく</em>.',
     ex: [['大きい木ですね。', 'What a big tree.']],
     accept: { mean: ['tree', 'wood', 'trees'], read: ['もく', 'ぼく', 'き'] },
+    opts: ['き', 'もく'],
+    drill: [['木曜日', 'もく', 'もくようび', 'Thursday ("tree day")'], ['木', 'き', 'き', 'a tree'], ['大きい木', 'き', 'おおきいき', 'a big tree']],
+    sum: '木 is き on its own and もく inside words like 木曜日.',
   },
   {
     k: '休', file: '04f11', key: 'rest', img: 'rest',
     on: [['きゅう', 'kyuu']], kun: [['やすむ', 'yasumu']],
     mean: 'A <em>person</em> (亻, the squeezed form of 人) leaning against a <em>tree</em> (木). They\'re having a <em>rest</em>.',
-    read: '<em>Kyū</em> the archer rests against a tree, until an arrow thunks into the bark above her. 休 reads <em>きゅう</em>, and "to rest" is <em>休む</em> (やすむ).',
+    read: '<em>Kyū</em> the archer rests against a tree, until an arrow thunks into the bark above her. That\'s the sound of 休 inside longer words: <em>きゅう</em>.',
     ex: [['少し休みましょう。', 'Let\'s rest a little.'], ['木の下で休む。', 'Rest under a tree.']],
     accept: { mean: ['rest', 'break', 'holiday', 'day off'], read: ['きゅう', 'やすむ', 'やす'] },
+    opts: ['やす', 'きゅう'],
+    drill: [['休日', 'きゅう', 'きゅうじつ', 'a day off'], ['休む', 'やす', 'やすむ', 'to rest'], ['休み', 'やす', 'やすみ', 'a break, a holiday']],
+    sum: '休 is やす in the verb 休む, and きゅう inside words like 休日.',
   },
 ];
 
@@ -544,16 +553,28 @@ function study() {
   const body = h('div', { class: 'page' });
   const foot = h('div', { class: 'study-foot' });
   $app.replaceChildren(h('div', { class: 'study' },
-    h('div', { class: 'study-top' }, h('button', { class: 'icon-btn', onclick: menu, 'aria-label': 'Back' }, '←'), h('div', { class: 'progress' }, bar)), body, foot));
+    h('div', { class: 'study-top' }, h('button', { class: 'icon-btn', onclick: menu, 'aria-label': 'Exit lesson', title: 'Exit lesson' }, '✕'), h('div', { class: 'progress' }, bar)), body, foot));
   function show() {
     bar.style.width = `${100 * idx / (pages.length - 1)}%`;
     body.style.animation = 'none'; void body.offsetWidth; body.style.animation = '';
     body.scrollTop = 0;
     pages[idx]();
   }
-  const next = () => { sfx('page', .5); idx++; show(); };
-  const footNext = (label = 'Next', enabled = true) => { const b = h('button', { class: 'btn primary', onclick: next, disabled: !enabled }, label); foot.replaceChildren(b); return b; };
-  onkeydown = e => { if (e.key === 'Enter' && foot.querySelector('.primary:not([disabled])') && document.activeElement?.tagName !== 'INPUT') foot.querySelector('.primary').click(); };
+  let pageKeys = null; // per-page keyboard handler; returns true when it used the key
+  const next = () => { sfx('page', .5); idx++; pageKeys = null; show(); };
+  const prev = () => { if (idx === 0) return; sfx('page', .4); idx--; pageKeys = null; show(); };
+  function footNext(label = 'Next', enabled = true) {
+    const back = h('button', { class: 'btn', onclick: prev, disabled: idx === 0 }, 'Back');
+    const b = h('button', { class: 'btn primary', onclick: next, disabled: !enabled }, label);
+    foot.replaceChildren(back, h('span', { style: 'flex:1' }), b); return b;
+  }
+  onkeydown = e => {
+    if (document.activeElement?.tagName === 'INPUT') return;
+    if (pageKeys && pageKeys(e)) { e.preventDefault(); return; }
+    const primary = foot.querySelector('.primary:not([disabled])');
+    if ((e.key === 'Enter' || e.key === 'ArrowRight') && primary) { e.preventDefault(); primary.click(); }
+    if (e.key === 'ArrowLeft' || e.key === 'Backspace') { e.preventDefault(); prev(); }
+  };
 
   function meetPage(K) {
     body.replaceChildren(h('div', { class: 'lesson split' },
@@ -562,16 +583,54 @@ function study() {
         h('div', { class: 'mnemonic', html: K.mean }))));
     footNext();
   }
+  // Reading drill: the same kanji in different words; pick how it's read in each one.
   function soundPage(K) {
-    const rd = (label, list) => list.map(([k]) => h('div', { class: 'reading' }, h('div', {}, h('small', {}, label), h('b', {}, k)), h('button', { class: 'say', onclick: () => voice(k), 'aria-label': 'Play' }, '▶')));
+    let di = 0, misses = 0;
+    const word = h('div', { class: 'drill-word' });
+    const gloss = h('div', { class: 'drill-en' });
+    const opts = h('div', { class: 'drill-opts' });
+    const count = h('div', { class: 'drill-count' });
+    const btn = footNext('Next', false);
     body.replaceChildren(h('div', { class: 'lesson split' },
       h('div', { class: 'pic' }, h('img', { src: `img/k-${K.img}-reading.webp`, alt: '' })),
-      h('div', {}, h('div', { class: 'head' }, h('div', { class: 'big-kanji' }, K.k), h('div', { class: 'keyword' }, K.on[0][0], h('small', {}, 'Reading'))),
+      h('div', {},
         h('div', { class: 'mnemonic', html: K.read }),
-        h('div', { class: 'readings' }, ...rd('Chinese reading (on)', K.on), ...rd('Japanese reading (kun)', K.kun)),
-        ...K.ex.map(([jp, en]) => h('div', { class: 'example' }, h('button', { class: 'say', onclick: () => voice(jp), 'aria-label': 'Play' }, '▶'), h('div', {}, h('div', { class: 'ja' }, jp), h('div', { class: 'en' }, en)))))));
+        h('div', { class: 'drill' }, h('div', { class: 'drill-q' }, `How is ${K.k} read here?`, count), word, gloss, opts,
+          h('div', { class: 'drill-keys' }, DESKTOP ? `Keys: 1 to ${K.opts.length} to answer, Space to hear it again.` : 'Tap the word to hear it again.')))));
+    word.onclick = () => voice(K.drill[Math.min(di, K.drill.length - 1)][2]);
+    function render(answered) {
+      const [w, r, full, en] = K.drill[di];
+      count.textContent = `${di + 1} of ${K.drill.length}`;
+      word.replaceChildren(...[...w].map(c => c === K.k ? h('span', { class: 'hl' }, answered ? ruby(c, r) : c) : c));
+      gloss.textContent = answered ? `${full} · ${en}` : '';
+      opts.replaceChildren(...K.opts.map((o, k) => h('button', { class: 'opt', 'data-o': o, disabled: answered, onclick: () => answer(o) }, DESKTOP ? h('span', { class: 'k' }, k + 1) : null, o)));
+    }
+    function answer(o) {
+      const [, r, full] = K.drill[di];
+      const ok = o === r;
+      opts.querySelectorAll('.opt').forEach(b => { b.disabled = true; if (b.dataset.o === r) b.classList.add('ok'); else if (b.dataset.o === o) b.classList.add('bad'); });
+      if (!ok) misses++;
+      sfx(ok ? 'stroke' : 'miss', .45);
+      render(true);
+      opts.querySelectorAll('.opt').forEach(b => { if (b.dataset.o === r) b.classList.add('ok'); else if (b.dataset.o === o) b.classList.add('bad'); });
+      setTimeout(() => voice(full), 250);
+      setTimeout(() => {
+        if (++di < K.drill.length) render(false);
+        else {
+          word.replaceChildren(K.k); gloss.textContent = K.sum; opts.replaceChildren();
+          count.textContent = misses ? `${K.drill.length - misses} of ${K.drill.length} right` : 'All right';
+          btn.disabled = false;
+        }
+      }, ok ? 1300 : 2200);
+    }
+    pageKeys = e => {
+      const n = +e.key;
+      if (n >= 1 && n <= K.opts.length && di < K.drill.length && !opts.querySelector('[disabled]')) { answer(K.opts[n - 1]); return true; }
+      if (e.key === ' ') { word.click(); return true; }
+      return false;
+    };
+    render(false);
     setTimeout(() => voice(K.on[0][0]), 300);
-    footNext();
   }
   async function writePage(K) {
     const msg = h('div', { class: 'trace-msg' }, 'Watch the stroke order…');
@@ -682,7 +741,7 @@ function study() {
         } }, o)));
       }
       body.replaceChildren(h('div', { class: 'quiz' }, h('div', { class: 'quiz-k' }, K.k), h('div', { class: 'quiz-q' }, q), input, feedback));
-      foot.replaceChildren();
+      footNext('Next', false).remove();
     };
     ask();
   }

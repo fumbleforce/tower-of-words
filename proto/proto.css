@@ -176,6 +176,17 @@ ruby rt { font-size: .5em; font-weight: 500; opacity: .7; }
 .end .btns .btn { flex: 1; }
 
 /* ---------- kanji lesson ---------- */
+.drill { margin-top: 18px; padding: 16px; border-radius: var(--r); background: #fff; border: 1px solid var(--line); }
+.drill-q { display: flex; justify-content: space-between; color: var(--ink-2); font-size: 14px; }
+.drill-count { color: var(--ink-3); }
+.drill-word { font: 700 48px/1.6 var(--jp); text-align: center; cursor: pointer; margin-top: 6px; }
+.drill-word .hl { color: var(--accent); }
+.drill-word rt { font-size: .38em; color: var(--accent); opacity: 1; }
+.drill-en { text-align: center; color: var(--ink-2); min-height: 24px; margin-bottom: 12px; }
+.drill-opts { display: grid; grid-template-columns: repeat(auto-fit, minmax(90px, 1fr)); gap: 8px; }
+.drill-opts .opt { position: relative; }
+.opt .k { position: absolute; left: 8px; top: 6px; font: 600 11px var(--ui); color: var(--ink-3); }
+.drill-keys { margin-top: 10px; font-size: 13px; color: var(--ink-3); text-align: center; }
 .study { position: absolute; inset: 0; background: var(--sheet); display: grid; grid-template-rows: auto 1fr auto; }
 .study-top { display: grid; grid-template-columns: 40px 1fr; gap: 12px; align-items: center; padding: calc(12px + env(safe-area-inset-top)) 16px 8px; }
 .study-top .icon-btn { background: #fff; color: var(--ink); border: 1px solid var(--line); }
@@ -231,4 +242,8 @@ ruby rt { font-size: .5em; font-weight: 500; opacity: .7; }
   .lesson.split { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 40px; align-items: start; }
   .big-kanji { font-size: 140px; }
   .trace-wrap { width: 380px; }
+  .mnemonic { font-size: 19px; }
+  .drill-word { font-size: 64px; }
+  .drill-q, .drill-keys { font-size: 15px; }
+  .opt { height: 64px; font-size: 22px; }
 }
