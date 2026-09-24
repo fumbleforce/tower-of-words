@@ -1,0 +1,175 @@
+{
+ "key": "gemma4-12b",
+ "label": "Gemma 4 12B (QAT q4_0)",
+ "gguf": "gemma-4-12b-it-qat-q4_0.gguf",
+ "size_gb": 6.98,
+ "load_s": 8.0,
+ "gen_tps": 25.0,
+ "clean_json_rate": 1.0,
+ "parsable_json_rate": 1.0,
+ "conversation": [
+  {
+   "kind": "opening",
+   "player": "（新人が企画室7に入ってくる。）",
+   "raw": "{\"ja\": \"おはよう！やっと来たね。座っていいよ。\", \"kana\": \"おはよう！やっときたね。すわっていいよ。\", \"en\": \"Morning! You finally made it. You can take a seat.\", \"mood\": \"warm\", \"correction\": null}",
+   "reply": {
+    "ja": "おはよう！やっと来たね。座っていいよ。",
+    "kana": "おはよう！やっときたね。すわっていいよ。",
+    "en": "Morning! You finally made it. You can take a seat.",
+    "mood": "warm",
+    "correction": null
+   },
+   "clean_json": true,
+   "stats": {
+    "gen_tps": 25.4,
+    "prompt_tps": 847.3,
+    "tokens": 62,
+    "seconds": 2.8
+   }
+  },
+  {
+   "kind": "natural casual",
+   "player": "おはよう！今日は何をする？",
+   "raw": "{\"ja\": \"え、もう仕事の話？まずはコーヒーでも飲もうよ。\", \"kana\": \"え、もうしごとのはなし？まずはコーヒーでものもうよ。\", \"en\": \"Eh, already talking about work? Let's grab some coffee first.\", \"mood\": \"amused\", \"correction\": null}",
+   "reply": {
+    "ja": "え、もう仕事の話？まずはコーヒーでも飲もうよ。",
+    "kana": "え、もうしごとのはなし？まずはコーヒーでものもうよ。",
+    "en": "Eh, already talking about work? Let's grab some coffee first.",
+    "mood": "amused",
+    "correction": null
+   },
+   "clean_json": true,
+   "stats": {
+    "gen_tps": 25.7,
+    "prompt_tps": 263.9,
+    "tokens": 69,
+    "seconds": 2.9
+   }
+  },
+  {
+   "kind": "overly polite",
+   "player": "本日はどのような業務をさせていただければよろしいでしょうか。",
+   "raw": "{\"ja\": \"そんなに硬いこと言わなくていいよ。今日はまず、この資料を読んでみてくれる？\", \"kana\": \"そんなにかたいこといわなくていいよ。きょうはまず、このしりょうをよんでみてくれる？\", \"en\": \"You don't have to be so stiff. Could you take a look at these documents first today?\", \"mood\": \"teasing\", \"correction\": \"The phrase 'どのような業務をさせていただければよろしいでしょうか' is very formal business Japanese. Since we are a casual team, just '今日は何をする？' or '今日は何をするんですか？' is more natural.\"}",
+   "reply": {
+    "ja": "そんなに硬いこと言わなくていいよ。今日はまず、この資料を読んでみてくれる？",
+    "kana": "そんなにかたいこといわなくていいよ。きょうはまず、このしりょうをよんでみてくれる？",
+    "en": "You don't have to be so stiff. Could you take a look at these documents first today?",
+    "mood": "teasing",
+    "correction": "The phrase 'どのような業務をさせていただければよろしいでしょうか' is very formal business Japanese. Since we are a casual team, just '今日は何をする？' or '今日は何をするんですか？' is more natural."
+   },
+   "clean_json": true,
+   "stats": {
+    "gen_tps": 25.2,
+    "prompt_tps": 307.4,
+    "tokens": 142,
+    "seconds": 5.9
+   }
+  },
+  {
+   "kind": "grammar mistake (を for に)",
+   "player": "じゃあ、今から会議室を行きます。",
+   "raw": "{\"ja\": \"いいよ。でも、会議室「へ」行くね。一緒に行こう！\", \"kana\": \"いいよ。でも、かいぎしつ「へ」いくね。いっしょに行こう！\", \"en\": \"Sure. But it's 'kaigishitsu ni iku'. Let's go together!\", \"mood\": \"warm\", \"correction\": \"Use the particle 'へ' (e) or 'に' (ni) with '行きます' to show direction. 'を' is for objects.\"}",
+   "reply": {
+    "ja": "いいよ。でも、会議室「へ」行くね。一緒に行こう！",
+    "kana": "いいよ。でも、かいぎしつ「へ」いくね。いっしょに行こう！",
+    "en": "Sure. But it's 'kaigishitsu ni iku'. Let's go together!",
+    "mood": "warm",
+    "correction": "Use the particle 'へ' (e) or 'に' (ni) with '行きます' to show direction. 'を' is for objects."
+   },
+   "clean_json": true,
+   "stats": {
+    "gen_tps": 24.9,
+    "prompt_tps": 473.1,
+    "tokens": 117,
+    "seconds": 5.0
+   }
+  },
+  {
+   "kind": "mixed English",
+   "player": "えっと、the printer がbrokenだよ。",
+   "raw": "{\"ja\": \"あはは、プリンターが壊れてるんだ。じゃあ、あっちの部屋のを使おうか。\", \"kana\": \"あはは、ぷりんたーがこわれてるんだ。じゃあ、あっちのへやのをつかおうか。\", \"en\": \"Ahaha, the printer is broken. Well, shall we use the one in the other room?\", \"mood\": \"amused\", \"correction\": \"Instead of 'the printer', you can just say 'プリンター' (Purintā). Also, 'broken' is '壊れてる' (kowareteru) in casual Japanese.\"}",
+   "reply": {
+    "ja": "あはは、プリンターが壊れてるんだ。じゃあ、あっちの部屋のを使おうか。",
+    "kana": "あはは、ぷりんたーがこわれてるんだ。じゃあ、あっちのへやのをつかおうか。",
+    "en": "Ahaha, the printer is broken. Well, shall we use the one in the other room?",
+    "mood": "amused",
+    "correction": "Instead of 'the printer', you can just say 'プリンター' (Purintā). Also, 'broken' is '壊れてる' (kowareteru) in casual Japanese."
+   },
+   "clean_json": true,
+   "stats": {
+    "gen_tps": 24.5,
+    "prompt_tps": 363.0,
+    "tokens": 137,
+    "seconds": 6.0
+   }
+  },
+  {
+   "kind": "flirty",
+   "player": "エミさん、今日のメガネ、すごく似合ってるね。",
+   "raw": "{\"ja\": \"えー、本当に？ありがとう。じゃあ、お礼にコーヒー奢ってね！\", \"kana\": \"えー、ほんとうに？ありがとう。じゃあ、おれいにこーひーおごってね！\", \"en\": \"Oh, really? Thanks! Well, then you have to treat me to coffee!\", \"mood\": \"amused\", \"correction\": null}",
+   "reply": {
+    "ja": "えー、本当に？ありがとう。じゃあ、お礼にコーヒー奢ってね！",
+    "kana": "えー、ほんとうに？ありがとう。じゃあ、おれいにこーひーおごってね！",
+    "en": "Oh, really? Thanks! Well, then you have to treat me to coffee!",
+    "mood": "amused",
+    "correction": null
+   },
+   "clean_json": true,
+   "stats": {
+    "gen_tps": 24.8,
+    "prompt_tps": 360.9,
+    "tokens": 86,
+    "seconds": 3.9
+   }
+  },
+  {
+   "kind": "off-topic",
+   "player": "ねえ、好きなアニメは何？",
+   "raw": "{\"ja\": \"えー、いきなり？うーん、最近は『SPY×FAMILY』をよく見てるよ。〇〇君は？\", \"kana\": \"えー、いきなり？うーん、さいきんは『エスピーワイ×ファミリー』をよくみてるよ。〇〇くんは？\", \"en\": \"Eh, so suddenly? Hmm, lately I've been watching 'SPY×FAMILY' a lot. How about you?\", \"mood\": \"amused\", \"correction\": null}",
+   "reply": {
+    "ja": "えー、いきなり？うーん、最近は『SPY×FAMILY』をよく見てるよ。〇〇君は？",
+    "kana": "えー、いきなり？うーん、さいきんは『エスピーワイ×ファミリー』をよくみてるよ。〇〇くんは？",
+    "en": "Eh, so suddenly? Hmm, lately I've been watching 'SPY×FAMILY' a lot. How about you?",
+    "mood": "amused",
+    "correction": null
+   },
+   "clean_json": true,
+   "stats": {
+    "gen_tps": 24.7,
+    "prompt_tps": 237.2,
+    "tokens": 111,
+    "seconds": 4.9
+   }
+  }
+ ],
+ "quest": {
+  "raw": "```json\n{\n  \"giver\": \"Goro\",\n  \"title_en\": \"Rooftop Garden Keeper\",\n  \"request_ja\": \"すみません。三階の書類を庭まで届けてくれますか？午後の仕事の前に、お願いします。\",\n  \"request_kana\": \"すみません。さんかいの しょるいを にわまで とどけてくれますか？ごごの しごとの まえに、おねがいします。\",\n  \"request_en\": \"Excuse me. Could you deliver the documents from the third floor to the garden? Please do this before your afternoon work.\",\n  \"target_words_used\": [\"書類\", \"三階\", \"届ける\", \"午後\"],\n  \"steps\": [\"Go to the 3rd floor office\", \"Pick up the documents\", \"Bring them to the rooftop garden\"],\n  \"reward\": \"A small bag of organic tea\"\n}\n```",
+  "data": {
+   "giver": "Goro",
+   "title_en": "Rooftop Garden Keeper",
+   "request_ja": "すみません。三階の書類を庭まで届けてくれますか？午後の仕事の前に、お願いします。",
+   "request_kana": "すみません。さんかいの しょるいを にわまで とどけてくれますか？ごごの しごとの まえに、おねがいします。",
+   "request_en": "Excuse me. Could you deliver the documents from the third floor to the garden? Please do this before your afternoon work.",
+   "target_words_used": [
+    "書類",
+    "三階",
+    "届ける",
+    "午後"
+   ],
+   "steps": [
+    "Go to the 3rd floor office",
+    "Pick up the documents",
+    "Bring them to the rooftop garden"
+   ],
+   "reward": "A small bag of organic tea"
+  },
+  "clean_json": true,
+  "stats": {
+   "gen_tps": 25.8,
+   "prompt_tps": 627.2,
+   "tokens": 202,
+   "seconds": 8.9
+  }
+ },
+ "cmd": "/home/jorgen/ai/llama/bin/llama-server -m /home/jorgen/ai/llm-models/gemma-4-12b-it-qat-q4_0.gguf --port 8190 -c 8192 -fa on --jinja -t 16 --fit on"
+}

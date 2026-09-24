@@ -4,3 +4,7 @@ dist/
 art/**/*.wav
 art/company/local2/
 art/company/local/
+art/music/
+art/voice-raw/
+art/slice/
+proto2/llm/data/*.server.log
