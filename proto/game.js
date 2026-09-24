@@ -179,6 +179,8 @@ function battle() {
   const src = art === 'pixel'
     ? { bg: 'img/px-bg-shrine.png', erased: 'img/px-bg-shrine-erased.png', rin: 'img/px-rin.png', golem: 'img/px-golem.png' }
     : { bg: 'img/bg-shrine.webp', erased: 'img/bg-shrine-erased.webp', rin: 'img/rin-battle.webp', golem: 'img/golem.webp' };
+  // Landscape screens get the wide painting.
+  if (art !== 'pixel' && innerWidth > innerHeight) Object.assign(src, { bg: 'img/bg-shrine-wide.webp', erased: 'img/bg-shrine-wide-erased.webp' });
 
   const bgImg = h('img', { class: 'bg', src: src.bg, alt: '' });
   const veil = h('canvas', { class: 'bg' });
@@ -190,17 +192,22 @@ function battle() {
   const stage = h('div', { class: 'stage' + (art === 'pixel' ? ' pixel' : '') }, bgImg, veil, golem, rin,
     h('div', { class: 'hud-top' }, h('button', { class: 'icon-btn', onclick: menu, 'aria-label': 'Back' }, '←'), golemHp,
       h('button', { class: 'icon-btn', onclick: () => { P.music = !P.music; persist(); music(P.music ? 'battle' : null); }, 'aria-label': 'Music' }, '♪')),
-    intentBox, h('div', { class: 'ally-hp' }, meHp, rinHp));
+    intentBox, h('div', { class: 'party' }, meHp, rinHp));
   const spellEl = h('div', { class: 'spell' });
   const preview = h('div', { class: 'preview' });
   const actorRow = h('div', { class: 'row' });
   const handRow = h('div', { class: 'row' });
   const inkEl = h('div', { class: 'ink' });
-  const castBtn = h('button', { class: 'act cast', onclick: cast }, 'Cast');
-  const endBtn = h('button', { class: 'act', onclick: endTurn }, 'End turn');
-  const typer = h('input', { type: 'text', placeholder: 'Type in romaji, e.g. rin wa ken de go-remu wo kiru', autocomplete: 'off', spellcheck: 'false' });
-  const panel = h('div', { class: 'panel' }, spellEl, preview, h('div', { class: 'rows' }, actorRow, handRow),
-    h('div', { class: 'typer' }, typer), h('div', { class: 'actions' }, inkEl, endBtn, castBtn));
+  const castBtn = h('button', { class: 'btn primary', onclick: cast }, 'Cast');
+  const endBtn = h('button', { class: 'btn', onclick: endTurn }, 'End turn');
+  const typer = h('input', { id: 'typer', type: 'text', placeholder: 'rin wa ken de go-remu wo kiru', autocomplete: 'off', spellcheck: 'false' });
+  const historyList = h('div');
+  const panel = h('div', { class: 'panel' },
+    h('div', { class: 'typer' }, h('label', { for: 'typer' }, 'Type a sentence in romaji or kana and press Enter. An empty Enter ends your turn.'), typer),
+    spellEl, preview, h('div', { class: 'rows' }, actorRow, handRow),
+    h('div', { class: 'actions' }, inkEl, endBtn, castBtn),
+    h('div', { class: 'history' }, h('h2', {}, 'Your sentences'), historyList));
+  function logSentence(ja, en, bad) { historyList.prepend(h('div', { class: 'entry' + (bad ? ' bad' : '') }, h('div', { class: 'ja' }, ja), h('div', { class: 'en' }, en))); }
   $app.replaceChildren(h('div', { class: 'battle' }, stage, panel));
 
   // Unpainted veil: the erased sketch sits over the painting; valid spells ink the world back in.
@@ -233,7 +240,7 @@ function battle() {
   /* ----- rendering ----- */
   function drawHp() {
     for (const [el, id, label] of [[golemHp, 'golem', 'Stone Golem 石の番人'], [meHp, 'me', 'You'], [rinHp, 'rin', 'Rin']]) {
-      el.replaceChildren(h('div', { class: 'lbl' }, h('span', {}, label, B.shield[id] ? h('span', { class: 'shield' }, `◈${B.shield[id]}`) : null, id === 'golem' && B.burn ? h('span', { class: 'shield', style: 'color:#ff9c5a' }, ` 火${B.burn}`) : null),
+      el.replaceChildren(h('div', { class: 'lbl' }, h('span', {}, label, B.shield[id] ? h('span', { class: 'tag' }, `◈${B.shield[id]}`) : null, id === 'golem' && B.burn ? h('span', { class: 'tag' }, `火${B.burn}`) : null),
         h('b', {}, `${Math.max(0, B.hp[id])}`)), h('div', { class: 'bar' }, h('i', { style: `width:${100 * Math.max(0, B.hp[id]) / B.max[id]}%` })));
     }
     rin.classList.toggle('down', B.hp.rin <= 0);
@@ -248,11 +255,8 @@ function battle() {
       line.append(el);
     });
     line.append('。');
-    intentBox.replaceChildren(
-      h('div', { class: 'who' }, 'Golem\'s next move', h('span', { class: 'spacer' }), B.cancelled ? h('span', { style: 'color:var(--spirit)' }, 'CANCELLED') : null,
-        h('button', { class: 'say', onclick: () => voice(intentText(it), 'g') }, '▶')),
-      line);
-    intentBox.style.opacity = B.cancelled ? .45 : 1;
+    intentBox.replaceChildren(line, h('button', { class: 'say', onclick: () => voice(intentText(it), 'g'), 'aria-label': 'Play' }, '▶'));
+    intentBox.classList.toggle('cancelled', B.cancelled);
   }
   function gloss(el, w, g, r) {
     document.querySelectorAll('.gloss').forEach(x => x.remove());
@@ -284,7 +288,7 @@ function battle() {
     const p = parse(tokens());
     const c = cost(p);
     inkEl.replaceChildren('Ink', ...Array.from({ length: 5 }, (_, k) => h('i', { class: k < B.ink ? '' : 'spent' })));
-    castBtn.textContent = B.spell.length ? `Cast · ${Math.max(0, c)}` : 'Cast';
+    castBtn.textContent = B.spell.length ? `Cast (${Math.max(0, c)})` : 'Cast';
     castBtn.disabled = !p || p.err || c > B.ink || B.busy;
     endBtn.disabled = B.busy;
     preview.replaceChildren();
@@ -351,7 +355,7 @@ function battle() {
     float(to, blocked ? `${real} (◈${blocked})` : `${real}`, to === 'golem' ? 'dmg' : 'hurt');
     const el = to === 'golem' ? golem : to === 'rin' ? rin : null;
     if (el) { el.classList.remove('hit'); void el.offsetWidth; el.classList.add('hit'); }
-    if (to === 'me') { stage.classList.remove('flash-red', 'shake'); void stage.offsetWidth; stage.classList.add('flash-red', 'shake'); }
+    if (to === 'me') { stage.classList.remove('flash', 'shake'); void stage.offsetWidth; stage.classList.add('flash', 'shake'); }
   }
 
   async function cast() {
@@ -361,6 +365,7 @@ function battle() {
     B.busy = true; B.ink -= Math.max(0, c);
     const fx = effects(p);
     B.stats.casts++;
+    logSentence(B.spell.map(t => t.neg ? LEX[t.w].neg : t.w).join('') + '。', english(p) + (fx[0].none ? ` ${fx[0].why}` : ''), fx[0].none);
     B.spell.forEach(s => LEX[s.w] && B.stats.words.add(s.w));
     const actorEl = p.subj === 'rin' ? rin : p.subj === 'golem' ? golem : null;
     sfx('cast', .5);
@@ -369,7 +374,7 @@ function battle() {
       restore();
       if (actorEl && !p.neg) { actorEl.classList.add(p.subj === 'rin' ? 'lunge-r' : 'lunge-l'); await sleep(220); actorEl.classList.remove('lunge-r', 'lunge-l'); }
       for (const f of fx) {
-        if (f.cancel) { B.cancelled = true; B.stats.cancels++; float('golem', 'CANCELLED', 'info'); sfx('bell', .5); banner('The golem won\'t attack this turn.'); }
+        if (f.cancel) { B.cancelled = true; B.stats.cancels++; float('golem', 'Stopped', 'info'); sfx('bell', .5); banner('The golem won\'t attack this turn.'); }
         if (f.dmg) { if (f.to === 'golem') { const s = h('div', { class: 'slash' }); stage.append(s); setTimeout(() => s.remove(), 400); sfx(p.verb === '切る' ? 'slash' : 'stone', .7); } else sfx('hurt', .6); damage(f.to, f.dmg); }
         if (f.burn) { if (f.to === 'golem') B.burn += f.burn; float(f.to, '火', 'info'); }
         if (f.shield) { B.shield[f.to] += f.shield; float(f.to, `◈${f.shield}`, 'info'); sfx('shield', .6); }
@@ -432,19 +437,19 @@ function battle() {
     golem.style.transition = 'opacity 1.4s, filter 1.4s'; golem.style.opacity = 0; golem.style.filter = 'brightness(3) blur(6px)';
     await sleep(1500); voice('言葉が、戻ってきた。');
     const s = B.stats;
-    stage.parentElement.append(h('div', { class: 'end' },
-      h('h1', {}, '言霊'), h('div', { class: 'quote' }, '「言葉が、戻ってきた。」'), h('div', { style: 'color:var(--dim);margin-bottom:16px' }, '"The words have come back."'),
-      h('div', { class: 'stat' }, h('span', {}, 'Spells cast'), h('b', {}, s.casts)),
+    stage.parentElement.append(h('div', { class: 'end' }, h('div', { class: 'card' },
+      h('h2', {}, 'Victory'), h('div', { class: 'quote' }, 'リン「言葉が、戻ってきた。」'), h('div', { class: 'sub' }, '"The words have come back."'),
+      h('div', { class: 'stat' }, h('span', {}, 'Sentences cast'), h('b', {}, s.casts)),
       h('div', { class: 'stat' }, h('span', {}, 'Words you looked up'), h('b', {}, s.peeks)),
-      h('div', { class: 'stat' }, h('span', {}, 'Attacks cancelled with ない'), h('b', {}, s.cancels)),
+      h('div', { class: 'stat' }, h('span', {}, 'Attacks stopped with ない'), h('b', {}, s.cancels)),
       h('div', { class: 'stat' }, h('span', {}, 'Different words used'), h('b', {}, s.words.size)),
-      h('button', { class: 'act cast', onclick: battle }, 'Fight again'), h('button', { class: 'act', onclick: menu }, 'Back')));
+      h('div', { class: 'btns' }, h('button', { class: 'btn', onclick: menu }, 'Menu'), h('button', { class: 'btn primary', onclick: battle }, 'Fight again')))));
   }
   function lose() {
     B.busy = true; music(null);
-    stage.parentElement.append(h('div', { class: 'end' }, h('h1', {}, '沈黙'), h('div', { class: 'quote' }, 'You lost.'),
-      h('p', { style: 'color:var(--dim)' }, 'Read what the golem is about to do. Protect its target with 守る, or stop it with a negative sentence like 「ゴーレムはたたかない」.'),
-      h('button', { class: 'act cast', onclick: battle }, 'Try again'), h('button', { class: 'act', onclick: menu }, 'Back')));
+    stage.parentElement.append(h('div', { class: 'end' }, h('div', { class: 'card' }, h('h2', {}, 'You lost'),
+      h('p', { class: 'sub' }, 'Read what the golem is about to do. Protect its target with 守る, or stop it with a negative sentence like 「ゴーレムはたたかない」.'),
+      h('div', { class: 'btns' }, h('button', { class: 'btn', onclick: menu }, 'Menu'), h('button', { class: 'btn primary', onclick: battle }, 'Try again')))));
   }
 
   // Desktop: type the spell in romaji or kana, or use number keys for hand tiles.
@@ -535,41 +540,43 @@ function study() {
   }
   pages.push(() => quizPage());
   let idx = 0;
-  const dots = h('div', { class: 'dots' });
+  const bar = h('i');
   const body = h('div', { class: 'page' });
   const foot = h('div', { class: 'study-foot' });
   $app.replaceChildren(h('div', { class: 'study' },
-    h('div', { class: 'study-top' }, h('button', { class: 'icon-btn', onclick: menu }, '←'), dots, h('span', {}, '写字院')), body, foot));
+    h('div', { class: 'study-top' }, h('button', { class: 'icon-btn', onclick: menu, 'aria-label': 'Back' }, '←'), h('div', { class: 'progress' }, bar)), body, foot));
   function show() {
-    dots.replaceChildren(...pages.map((_, k) => h('i', { class: k <= idx ? 'on' : '' })));
+    bar.style.width = `${100 * idx / (pages.length - 1)}%`;
     body.style.animation = 'none'; void body.offsetWidth; body.style.animation = '';
     body.scrollTop = 0;
     pages[idx]();
   }
   const next = () => { sfx('page', .5); idx++; show(); };
-  const footNext = (label = 'Next', enabled = true) => { const b = h('button', { class: 'act cast', onclick: next, disabled: !enabled }, label); foot.replaceChildren(b); return b; };
-  onkeydown = e => { if (e.key === 'Enter' && foot.querySelector('.cast:not([disabled])') && document.activeElement?.tagName !== 'INPUT') foot.querySelector('.cast').click(); };
+  const footNext = (label = 'Next', enabled = true) => { const b = h('button', { class: 'btn primary', onclick: next, disabled: !enabled }, label); foot.replaceChildren(b); return b; };
+  onkeydown = e => { if (e.key === 'Enter' && foot.querySelector('.primary:not([disabled])') && document.activeElement?.tagName !== 'INPUT') foot.querySelector('.primary').click(); };
 
   function meetPage(K) {
-    body.replaceChildren(h('div', { class: 'big-kanji' }, K.k), h('div', { class: 'keyword' }, K.key),
-      h('img', { class: 'scroll-img', src: `img/k-${K.img}-meaning.webp`, alt: '' }),
-      h('div', { class: 'mnemonic', html: K.mean }));
+    body.replaceChildren(h('div', { class: 'lesson split' },
+      h('div', { class: 'pic' }, h('img', { src: `img/k-${K.img}-meaning.webp`, alt: '' })),
+      h('div', {}, h('div', { class: 'head' }, h('div', { class: 'big-kanji' }, K.k), h('div', { class: 'keyword' }, K.key[0].toUpperCase() + K.key.slice(1), h('small', {}, 'Meaning'))),
+        h('div', { class: 'mnemonic', html: K.mean }))));
     footNext();
   }
   function soundPage(K) {
-    const rd = (label, list) => list.map(([k, r]) => h('div', { class: 'reading' }, h('div', {}, h('small', {}, label), h('br'), h('b', {}, k)), h('button', { class: 'say', onclick: () => voice(k) }, '▶')));
-    body.replaceChildren(h('div', { class: 'big-kanji', style: 'font-size:72px' }, K.k),
-      h('img', { class: 'scroll-img', src: `img/k-${K.img}-reading.webp`, alt: '' }),
-      h('div', { class: 'mnemonic', html: K.read }),
-      h('div', { class: 'readings' }, ...rd('ON\'YOMI', K.on), ...rd('KUN\'YOMI', K.kun)),
-      ...K.ex.map(([jp, en]) => h('div', { class: 'example' }, h('button', { class: 'say', onclick: () => voice(jp) }, '▶'), h('div', {}, h('div', { class: 'jp' }, jp), h('div', { class: 'en' }, en)))));
+    const rd = (label, list) => list.map(([k]) => h('div', { class: 'reading' }, h('div', {}, h('small', {}, label), h('b', {}, k)), h('button', { class: 'say', onclick: () => voice(k), 'aria-label': 'Play' }, '▶')));
+    body.replaceChildren(h('div', { class: 'lesson split' },
+      h('div', { class: 'pic' }, h('img', { src: `img/k-${K.img}-reading.webp`, alt: '' })),
+      h('div', {}, h('div', { class: 'head' }, h('div', { class: 'big-kanji' }, K.k), h('div', { class: 'keyword' }, K.on[0][0], h('small', {}, 'Reading'))),
+        h('div', { class: 'mnemonic', html: K.read }),
+        h('div', { class: 'readings' }, ...rd('Chinese reading (on)', K.on), ...rd('Japanese reading (kun)', K.kun)),
+        ...K.ex.map(([jp, en]) => h('div', { class: 'example' }, h('button', { class: 'say', onclick: () => voice(jp), 'aria-label': 'Play' }, '▶'), h('div', {}, h('div', { class: 'ja' }, jp), h('div', { class: 'en' }, en)))))));
     setTimeout(() => voice(K.on[0][0]), 300);
     footNext();
   }
   async function writePage(K) {
     const msg = h('div', { class: 'trace-msg' }, 'Watch the stroke order…');
     const wrap = h('div', { class: 'trace-wrap' });
-    body.replaceChildren(h('div', { class: 'keyword', style: 'margin-top:10px' }, `Write ${K.k}`), wrap, msg);
+    body.replaceChildren(h('div', { class: 'lesson', style: 'text-align:center' }, h('div', { class: 'keyword', style: 'margin:6px 0' }, `Write ${K.k}`), wrap, msg));
     const btn = footNext('Next', false);
     const svgTxt = await (await fetch(`kanji/${K.file}.svg`)).text();
     const doc = new DOMParser().parseFromString(svgTxt, 'image/svg+xml');
@@ -577,9 +584,9 @@ function study() {
     const NS = 'http://www.w3.org/2000/svg';
     const svg = document.createElementNS(NS, 'svg'); svg.setAttribute('viewBox', '0 0 109 109');
     const mk = (d, stroke, w, extra = {}) => { const p = document.createElementNS(NS, 'path'); p.setAttribute('d', d); p.setAttribute('fill', 'none'); p.setAttribute('stroke', stroke); p.setAttribute('stroke-width', w); p.setAttribute('stroke-linecap', 'round'); p.setAttribute('stroke-linejoin', 'round'); for (const [k, v] of Object.entries(extra)) p.setAttribute(k, v); svg.append(p); return p; };
-    const guides = ds.map(d => mk(d, '#d9ccb4', 4));
-    const inked = ds.map(d => mk(d, '#1f1b16', 5, { opacity: 0 }));
-    const dot = document.createElementNS(NS, 'circle'); dot.setAttribute('r', 3.2); dot.setAttribute('fill', '#c8503f'); svg.append(dot);
+    const guides = ds.map(d => mk(d, '#dfe3e8', 4));
+    const inked = ds.map(d => mk(d, '#15171c', 5, { opacity: 0 }));
+    const dot = document.createElementNS(NS, 'circle'); dot.setAttribute('r', 3.2); dot.setAttribute('fill', '#0f8b99'); svg.append(dot);
     const canvas = h('canvas');
     wrap.append(svg, canvas);
     // Demo: animate each stroke in order.
@@ -594,9 +601,9 @@ function study() {
     let cur = 0, fails = 0;
     const sample = (p, n = 24) => { const L = p.getTotalLength(); return Array.from({ length: n }, (_, i) => { const q = p.getPointAtLength(L * i / (n - 1)); return [q.x, q.y]; }); };
     const targets = guides.map(p => sample(p));
-    const placeDot = () => { if (cur < targets.length) { dot.setAttribute('cx', targets[cur][0][0]); dot.setAttribute('cy', targets[cur][0][1]); guides.forEach((g, k) => g.setAttribute('stroke', k === cur ? '#b9a98a' : '#e6dcc8')); } else dot.remove(); };
+    const placeDot = () => { if (cur < targets.length) { dot.setAttribute('cx', targets[cur][0][0]); dot.setAttribute('cy', targets[cur][0][1]); guides.forEach((g, k) => g.setAttribute('stroke', k === cur ? '#aeb5bf' : '#e6e9ed')); } else dot.remove(); };
     placeDot();
-    msg.textContent = `Trace stroke 1 of ${ds.length}. Start at the red dot.`;
+    msg.textContent = `Trace stroke 1 of ${ds.length}. Start at the blue dot.`;
     const ctx = canvas.getContext('2d');
     const fit = () => { const r = wrap.getBoundingClientRect(); canvas.width = r.width * devicePixelRatio; canvas.height = r.height * devicePixelRatio; };
     fit();
@@ -605,7 +612,7 @@ function study() {
     canvas.onpointerdown = e => { if (cur >= ds.length) return; canvas.setPointerCapture(e.pointerId); pts = [toV(e)]; };
     canvas.onpointermove = e => {
       if (!pts) return; pts.push(toV(e));
-      const s = canvas.width / 109; ctx.lineWidth = 5 * s; ctx.lineCap = 'round'; ctx.strokeStyle = 'rgba(31,27,22,.75)';
+      const s = canvas.width / 109; ctx.lineWidth = 5 * s; ctx.lineCap = 'round'; ctx.strokeStyle = 'rgba(21,23,28,.8)';
       ctx.beginPath(); const a = pts[pts.length - 2], b = pts[pts.length - 1]; ctx.moveTo(a[0] * s, a[1] * s); ctx.lineTo(b[0] * s, b[1] * s); ctx.stroke();
     };
     canvas.onpointerup = () => {
@@ -620,17 +627,17 @@ function study() {
         else msg.textContent = `Stroke ${cur + 1} of ${ds.length}.`;
       } else {
         fails++; sfx('miss', .4);
-        msg.textContent = rev < d ? 'Wrong direction. Start from the red dot.' : 'Try again. Follow the dark stroke from the red dot.';
+        msg.textContent = rev < d ? 'Wrong direction. Start from the blue dot.' : 'Try again. Follow the darker stroke from the blue dot.';
         const g = guides[cur]; const L = g.getTotalLength();
-        const demo = mk(g.getAttribute('d'), '#c8503f', 3); demo.style.strokeDasharray = L;
+        const demo = mk(g.getAttribute('d'), '#0f8b99', 3); demo.style.strokeDasharray = L;
         demo.animate([{ strokeDashoffset: L }, { strokeDashoffset: 0 }], { duration: 500, fill: 'forwards' }).onfinish = () => setTimeout(() => demo.remove(), 300);
       }
     };
   }
   function combinePage() {
     const c = h('div', { class: 'combine' }, h('span', { class: 'a' }, '人'), h('span', { class: 'plus' }, '+'), h('span', { class: 'b' }, '木'), h('span', { class: 'res' }, '休'));
-    body.replaceChildren(h('div', { class: 'keyword', style: 'margin-top:24px' }, '人 + 木'), c,
-      h('div', { class: 'mnemonic', html: 'A <em>person</em> next to a <em>tree</em>. Most kanji are built from smaller pieces like these, so each one you learn makes the next ones easier.' }));
+    body.replaceChildren(h('div', { class: 'lesson', style: 'max-width:560px;text-align:center' }, c,
+      h('div', { class: 'mnemonic', html: 'A <em>person</em> next to a <em>tree</em>. Most kanji are built from smaller pieces like these, so each one you learn makes the next ones easier.' })));
     setTimeout(() => { c.classList.add('go'); sfx('bell', .5); }, 700);
     footNext('Learn 休');
   }
@@ -649,7 +656,7 @@ function study() {
           feedback.replaceChildren(h('div', { class: 'miss' }, h('img', { src: `img/k-${K.img}-${type === 'mean' ? 'meaning' : 'reading'}.webp`, alt: '' }),
             h('div', { class: 'mnemonic', html: type === 'mean' ? K.mean : K.read })));
           qs.push(qs[qi]); qi++;
-          foot.replaceChildren(h('button', { class: 'act cast', onclick: () => { foot.replaceChildren(); ask(); } }, 'Got it'));
+          foot.replaceChildren(h('button', { class: 'btn primary', onclick: () => { foot.replaceChildren(); ask(); } }, 'Got it'));
         }
       };
       let input;
@@ -662,7 +669,7 @@ function study() {
           const v = type === 'read' ? hira(toKana(inp.value.trim())) : inp.value.trim().toLowerCase();
           inp.disabled = true; verdict(K.accept[type].includes(v));
         });
-        input = h('div', { class: 'quiz-type' }, inp, hint);
+        input = h('div', {}, inp, hint);
         setTimeout(() => inp.focus(), 50);
       } else {
         const correct = type === 'mean' ? K.key : K.on[0][0];
@@ -674,7 +681,7 @@ function study() {
           verdict(ok);
         } }, o)));
       }
-      body.replaceChildren(h('div', { class: 'quiz-k' }, K.k), h('div', { class: 'quiz-q' }, q), input, feedback);
+      body.replaceChildren(h('div', { class: 'quiz' }, h('div', { class: 'quiz-k' }, K.k), h('div', { class: 'quiz-q' }, q), input, feedback));
       foot.replaceChildren();
     };
     ask();
@@ -682,10 +689,10 @@ function study() {
   function done(right, total) {
     P.sigils = [...new Set([...P.sigils, '人', '木', '休'])]; persist();
     sfx('win', .6);
-    body.replaceChildren(h('div', { class: 'keyword', style: 'margin-top:30px' }, 'Learned'),
-      h('div', { class: 'combine', style: 'height:140px;font-size:70px' }, '人 木 休'),
-      h('div', { class: 'mnemonic', html: `You got <em>${right} of ${total}</em> right the first time.<br><br>In battle, 木 and 休む now show up without their kana readings, and they're stronger: a thrown 木 does 2 more damage, and 休む heals 3 more.` }));
-    foot.replaceChildren(h('button', { class: 'act cast', onclick: battle }, 'Try them in battle'), h('button', { class: 'act', onclick: menu }, 'Menu'));
+    body.replaceChildren(h('div', { class: 'quiz' },
+      h('div', { class: 'combine', style: 'height:160px;font-size:80px' }, '人 木 休'),
+      h('div', { class: 'mnemonic', html: `You got <em>${right} of ${total}</em> right the first time.<br><br>In battle, 木 and 休む now show up without their kana readings, and they're stronger: a thrown 木 does 2 more damage, and 休む heals 3 more.` })));
+    foot.replaceChildren(h('button', { class: 'btn', onclick: menu }, 'Menu'), h('button', { class: 'btn primary', onclick: battle }, 'Try them in battle'));
   }
   show();
 }
@@ -703,13 +710,16 @@ function resample(pts, n) {
 function menu() {
   document.onkeydown = null; onkeydown = null;
   music(null);
-  const seg = (label, key, opts) => h('div', { class: 'seg' }, label, ...opts.map(([v, l]) => h('button', { class: P[key] === v ? 'on' : '', onclick: () => { P[key] = v; persist(); menu(); } }, l)));
+  const seg = (key, opts) => h('div', { class: 'seg' }, ...opts.map(([v, l]) => h('button', { class: P[key] === v ? 'on' : '', onclick: () => { P[key] = v; persist(); menu(); } }, l)));
+  const item = (glyph, title, sub, onclick) => h('button', { class: 'menu-item', onclick }, h('b', {}, glyph), h('span', {}, h('strong', {}, title), h('small', {}, sub)));
   $app.replaceChildren(h('div', { class: 'menu' },
-    h('div', { class: 'bg', style: 'background-image:url(img/rin-hf.webp)' }),
-    h('div', { class: 'title' }, '言霊', h('small', {}, 'KOTODAMA · PROTOTYPE')),
-    h('button', { class: 'menu-btn', onclick: study }, h('b', {}, '写'), h('span', {}, 'Kanji lesson', h('small', {}, '人, 木 and 休. About five minutes.'))),
-    h('button', { class: 'menu-btn', onclick: battle }, h('b', {}, '戦'), h('span', {}, 'Battle: the stone golem', h('small', {}, 'You fight by writing Japanese sentences.'))),
-    seg('Battle art:', 'art', [['anime', 'Anime'], ['pixel', 'Pixel']]),
-    P.sigils.length ? h('div', { class: 'seg' }, `Kanji learned: ${P.sigils.join(' ')}`) : null));
+    h('div', { class: 'art', role: 'img', 'aria-label': 'Rin' }),
+    h('div', { class: 'side' },
+      h('h1', {}, '言霊', h('span', {}, 'Kotodama prototype')),
+      h('div', { class: 'menu-list' },
+        item('写', 'Kanji lesson', '人, 木 and 休. About five minutes.', study),
+        item('戦', 'Battle: the stone golem', 'You fight by writing Japanese sentences.', battle)),
+      h('div', { class: 'opt-row' }, 'Battle art', seg('art', [['anime', 'Anime'], ['pixel', 'Pixel']])),
+      P.sigils.length ? h('div', { class: 'opt-row' }, `Kanji learned: ${P.sigils.join(' ')}`) : null)));
 }
 menu();
