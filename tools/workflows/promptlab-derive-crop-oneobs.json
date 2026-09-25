@@ -1,0 +1,124 @@
+{
+ "1": {
+  "class_type": "UNETLoader",
+  "inputs": {
+   "unet_name": "oneObsessionAnima.safetensors",
+   "weight_dtype": "default"
+  }
+ },
+ "2": {
+  "class_type": "CLIPLoader",
+  "inputs": {
+   "clip_name": "qwen_3_06b_base.safetensors",
+   "type": "stable_diffusion"
+  }
+ },
+ "3": {
+  "class_type": "VAELoader",
+  "inputs": {
+   "vae_name": "qwen_image_vae.safetensors"
+  }
+ },
+ "4": {
+  "class_type": "CLIPTextEncode",
+  "inputs": {
+   "text": "anime screenshot, anime coloring, 2d, cel shading, clean lineart, detailed anime background art, no humans, scenery, a white monorail train on a curving elevated monorail beam on pillars high above a calm bay, heading to an island city of office towers, low morning sun glittering on the sea, blue sky with white clouds.",
+   "clip": [
+    "2",
+    0
+   ]
+  }
+ },
+ "5": {
+  "class_type": "CLIPTextEncode",
+  "inputs": {
+   "text": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, people, person, 1girl, 1boy, crowd, character",
+   "clip": [
+    "2",
+    0
+   ]
+  }
+ },
+ "7": {
+  "class_type": "KSampler",
+  "inputs": {
+   "model": [
+    "1",
+    0
+   ],
+   "positive": [
+    "4",
+    0
+   ],
+   "negative": [
+    "5",
+    0
+   ],
+   "latent_image": [
+    "GE",
+    0
+   ],
+   "seed": 933,
+   "steps": 30,
+   "cfg": 5.0,
+   "sampler_name": "euler_ancestral",
+   "scheduler": "normal",
+   "denoise": 0.5
+  }
+ },
+ "8": {
+  "class_type": "VAEDecode",
+  "inputs": {
+   "samples": [
+    "7",
+    0
+   ],
+   "vae": [
+    "3",
+    0
+   ]
+  }
+ },
+ "9": {
+  "class_type": "SaveImage",
+  "inputs": {
+   "images": [
+    "8",
+    0
+   ],
+   "filename_prefix": "promptlab/base"
+  }
+ },
+ "G": {
+  "class_type": "LoadImage",
+  "inputs": {
+   "image": "m906-crop-mid.png"
+  }
+ },
+ "GS": {
+  "class_type": "ImageScale",
+  "inputs": {
+   "image": [
+    "G",
+    0
+   ],
+   "upscale_method": "lanczos",
+   "width": 1216,
+   "height": 832,
+   "crop": "center"
+  }
+ },
+ "GE": {
+  "class_type": "VAEEncode",
+  "inputs": {
+   "pixels": [
+    "GS",
+    0
+   ],
+   "vae": [
+    "3",
+    0
+   ]
+  }
+ }
+}

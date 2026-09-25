@@ -508,6 +508,31 @@ def progress_ours():
             for k, (src, pr) in PROG_OURS.items() for d in (0.35, 0.5) for s in (931, 932, 933)]
 
 
+# round 2 of the test shots: one change each, aimed at the reviewer's main failure, layout said in image-frame terms
+SHOTS2 = {
+    # front-window aisle view is unreliable (rails, oncoming trains); use the straight-on side window, which models handle
+    'a-arrival-side': (LEAD + 'interior view inside a monorail train, window showing a station platform with a long roof right outside, '
+                       'office towers of a city behind the platform. 2 seats visible, window is fully visible, straight on angle. '
+                       'Bright morning light, dominant sky blue and white, sparse teal seat accents. No people.'),
+    # two windows and a sky view: say what fills the window, in frame terms
+    'c-dorm-wall': SHOTS['c-dorm'].replace('One window, and just outside it the bare grey concrete wall of the next building a couple of metres away, lit by a dim outdoor lamp.',
+                                          'One window on the far wall; a bare grey concrete wall fills the whole window, lit by a dim outdoor lamp.'),
+    # the tower top kept showing: say where it meets the frame edge
+    'd-tower-crop': SHOTS['d-tower'].replace('so tall it rises past the top of the picture.', 'seen from low down looking up, its top cut off by the top edge of the image.'),
+}
+
+
+def shots2():
+    return [job('shots2', f'{k}-{m}-{s}', model=m, seed=s, prompt=pr) for k, pr in SHOTS2.items() for m in ('oneobs', 'rdbt') for s in (511, 512, 513, 514)]
+
+
+def sketch_confirm():
+    """The line sketch was the best One Obsession ablation on 4 seeds; 8 more seeds to check it."""
+    img = os.path.join(GUIDES, 'bay-lines.png')
+    return [job('ablate-oneobs', f'guide-lineart-0.8-0.6-{s}', model='oneobs', seed=s, control=[('lineart', img, 0.8, 0.6)]) for s in range(505, 513)] + \
+           [job('ablate-oneobs', f'baseline8-{s}', model='oneobs', seed=s) for s in range(505, 513)]
+
+
 def argbatch(name):
     """'ablate:rdbt' -> ablate_for('rdbt') etc."""
     fn, _, arg = name.partition(':')
@@ -517,7 +542,7 @@ def argbatch(name):
     return {'ablate': ablate_for, 'hires': hires_for, 'shots': shots_for, 'derive': derive_for}[fn](arg)
 
 
-BATCHES = {'baseline': baseline, 'stylematch': stylematch, 'sales': sales, 'stylematch2': stylematch2, 'sales2': sales2, 'sales3': sales3, 'sales4': sales4, 'sales5': sales5, 'masters': masters, 'progress_ours': progress_ours, 'sales6': sales6, 'stylematch3': stylematch3}
+BATCHES = {'baseline': baseline, 'stylematch': stylematch, 'sales': sales, 'stylematch2': stylematch2, 'sales2': sales2, 'sales3': sales3, 'sales4': sales4, 'sales5': sales5, 'masters': masters, 'sketch_confirm': sketch_confirm, 'shots2': shots2, 'progress_ours': progress_ours, 'sales6': sales6, 'stylematch3': stylematch3}
 
 if __name__ == '__main__':
     for b in sys.argv[1:]:

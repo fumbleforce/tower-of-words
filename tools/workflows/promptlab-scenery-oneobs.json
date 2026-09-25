@@ -1,0 +1,100 @@
+{
+ "1": {
+  "class_type": "UNETLoader",
+  "inputs": {
+   "unet_name": "oneObsessionAnima.safetensors",
+   "weight_dtype": "default"
+  }
+ },
+ "2": {
+  "class_type": "CLIPLoader",
+  "inputs": {
+   "clip_name": "qwen_3_06b_base.safetensors",
+   "type": "stable_diffusion"
+  }
+ },
+ "3": {
+  "class_type": "VAELoader",
+  "inputs": {
+   "vae_name": "qwen_image_vae.safetensors"
+  }
+ },
+ "4": {
+  "class_type": "CLIPTextEncode",
+  "inputs": {
+   "text": "anime screenshot, anime coloring, 2d, cel shading, clean lineart, (detailed anime background art, hand-painted anime background, painted clouds, no humans, scenery, showing a monorail train riding high above a Bay on a curving elevated monorail. The monorail is crossing toward a large man-made island city with office towers and other buildings. the office towers are catching the low morning sun, the calm sea below with sunlight glittering on the water, early morning sun low on the horizon. dominant clear sky blue and sea blue, broad white cloud and glass, sparse warm sunrise orange accents, bright hopeful light. No other city in the background, only island and monorail going towards it.",
+   "clip": [
+    "2",
+    0
+   ]
+  }
+ },
+ "5": {
+  "class_type": "CLIPTextEncode",
+  "inputs": {
+   "text": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, people, person, 1girl, 1boy, crowd, character",
+   "clip": [
+    "2",
+    0
+   ]
+  }
+ },
+ "6": {
+  "class_type": "EmptyLatentImage",
+  "inputs": {
+   "width": 1216,
+   "height": 832,
+   "batch_size": 1
+  }
+ },
+ "7": {
+  "class_type": "KSampler",
+  "inputs": {
+   "model": [
+    "1",
+    0
+   ],
+   "positive": [
+    "4",
+    0
+   ],
+   "negative": [
+    "5",
+    0
+   ],
+   "latent_image": [
+    "6",
+    0
+   ],
+   "seed": 906,
+   "steps": 30,
+   "cfg": 5.0,
+   "sampler_name": "euler_ancestral",
+   "scheduler": "normal",
+   "denoise": 1.0
+  }
+ },
+ "8": {
+  "class_type": "VAEDecode",
+  "inputs": {
+   "samples": [
+    "7",
+    0
+   ],
+   "vae": [
+    "3",
+    0
+   ]
+  }
+ },
+ "9": {
+  "class_type": "SaveImage",
+  "inputs": {
+   "images": [
+    "8",
+    0
+   ],
+   "filename_prefix": "promptlab/base"
+  }
+ }
+}
