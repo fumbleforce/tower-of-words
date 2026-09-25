@@ -2,6 +2,12 @@
 
 Everything Jørgen has asked for, and how we work. Every agent reads this before starting, and it gets updated whenever new feedback comes in. When this file and older docs disagree, this file wins.
 
+## Current focus (2026-09-25)
+- Keep the slice narrow: about 3 characters and 4 locations, and make day 1 excellent before building anything wider. No full sprite sets or expression batches for the rest of the cast yet; character decisions aren't fully settled.
+- Redraw the day-1 location backgrounds. The current ones have nonsense in them (a bed with pillows at both ends, and other logic errors). Use RDBT and check every image for physical sense before it ships.
+- The bartender's cutout is poor and ugly. Redo cutouts for the slice characters and inspect the edges closely.
+- Composition research (pose/layout sketches, regional prompting) can run on the side.
+
 ## Who it is for
 - Jørgen: early intermediate Japanese (took courses in 2015; hiragana mostly fine, katakana weak, spotty grammar). Goals: follow anime dialogue, and hold conversations in Japan.
 - Plays 10–15 minutes at a time. On the train (3 days a week, patchy internet) on the phone, and at home on the desktop.

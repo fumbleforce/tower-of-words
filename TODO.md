@@ -12,6 +12,11 @@ Read GUIDE.md first. Pick up from here next session.
   4. Better motion prompts: describe the motion explicitly per second, use camera terms, and a motion-strength or frame-count choice.
 - **Local music:** YuE2 versus Lyria verdict (proto2/music). The game currently alternates between both.
 
+## Focus: a narrow day-1 slice (Jørgen, 2026-09-25)
+- About 3 characters and 4 locations; get day 1 to an excellent state before scaling up. Don't build sprite sets for the whole cast yet.
+- Redraw the day-1 locations (the current ones have logic errors, e.g. a bed with pillows at both ends). Redo the bartender's cutout (ugly edges).
+- Composition research on the side.
+
 ## Art (after the cast is settled; decide before producing)
 - Final cast in RDBT, one approved base sprite per character, then expressions by face-only inpainting (consistent outfits). Approved so far: main character (IT guy, M-02-it-guy-601), Emi (r3 seed 41), Rei, Mio, Aoi, Kaori (RDBT batch B), Kuro (A-luna-s101), Kiyoko (s101 face, new clothes).
 - Swap the new sprites into the game (the game still uses older mixed-model sprites for most characters).
