@@ -13,6 +13,7 @@ Read GUIDE.md first. Pick up from here next session.
 - Redraw the day-1 locations (the current ones have logic errors, e.g. a bed with pillows at both ends). Redo the bartender's cutout (ugly edges).
 - Day-1 flow: monorail → gate → office → copy room (first secret magic, the first task: copies for Emi) → office → Sales (Rei, second spell). Design and build the copy-room magic mechanic. See GUIDE "Current focus".
 - One free-typing local-AI moment on day 1, with a one-click start of llama-server. Phone/train mode after day 1.
+- Open question for Jørgen: the move-in on day 1. Does he arrive with a suitcase and drop it at the dorm, or were his things sent ahead? Maybe a short "here's your room" moment at the end of the day.
 - Composition research on the side.
 
 ## Art (after the cast is settled; decide before producing)

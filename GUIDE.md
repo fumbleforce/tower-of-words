@@ -69,6 +69,7 @@ Everything Jørgen has asked for, and how we work. Every agent reads this before
 - Review pages: large responsive grids (images at least about 480–520 px, not 2 per row), a lightbox with arrow keys, and the full prompt visible under each scene title.
 
 ## Art
+- Every image and video prompt starts with the shot-staging skill (~/.agents/skills/shot-staging/SKILL.md): write the staging note (camera, framing, what is in front of the lens, what is behind it, motion, eyelines, light), prompt from it, then check the render against it.
 - Model: Anima-family checkpoints in local ComfyUI. RDBT Anima is the main model (best for simple and medium scenes, most attractive). One Obsession: logic in hard scenes. JANIMA: style and groups. Prompt guide: art/PROMPTS.md.
 - Always include the anime style anchors ("anime screenshot, anime coloring, 2d, cel shading") and a "3d, realistic, photorealistic, chubby" negative.
 - Prompt structure: one block per character; state where the camera is and which way everyone faces; give a hand to every held object; keep emotions inside each character's block (they leak); use weights of 1.3–2.0 for things Anima tends to drop; don't name landmarks.
