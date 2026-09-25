@@ -72,7 +72,7 @@ Everything Jørgen has asked for, and how we work. Every agent reads this before
 
 ## Voices and audio
 - Replicate voices are best (MiniMax Speech 2.6 HD plus Qwen3-TTS clones). Local Qwen3-TTS is a fallback. IndexTTS is unusable.
-- Mio: the original casting clip (proto2/audition/r2/mio-3.mp3), a relaxed late-20s NEET. Don't over-tune (style instructions made her younger and wobblier). Only guard against male drift.
+- Mio: voice A from proto2/voice-mio (low, slightly husky, about 228 Hz; chosen 2026-09-25). Every line is a Qwen3-TTS clone of that clip (tools/voice-refs/mio-a.wav). The original casting clip (mio-3) is retired: its lines sometimes drifted male. Don't over-tune with style instructions; only guard against male drift (redo lines with a median under 190 Hz or more than 10% under 160 Hz).
 - Per-character loudness is normalised; the player voice is quieter.
 - Music: Lyria and YuE2 loops alternate with crossfades so the loop isn't noticeable.
 
