@@ -11,6 +11,7 @@ Read GUIDE.md first. Pick up from here next session.
 ## Focus: a narrow day-1 slice (Jørgen, 2026-09-25)
 - Chosen: Emi, Mio, Rei; monorail, gate, basement office, Sales. Ishibashi voice/text only at the gate; canteen, rooftop and bar move to day 2. Get day 1 to an excellent state before scaling up. Don't build sprite sets for the whole cast yet.
 - Redraw the day-1 locations (the current ones have logic errors, e.g. a bed with pillows at both ends). Redo the bartender's cutout (ugly edges).
+- Locations round 1 is ready for Jørgen to pick on proto2/locations1: monorail interior (4), gate (3), copy room (4), Sales (3). All RDBT at 1216×832 with no people, and each has a staging note (tools/locations1.py STAGING). Nothing is in the game yet; after he picks, convert the chosen ones to game/img/bg (1920 wide webp). The basement office is in decide2. Note: the monorail options have empty carriages (an arrival, not a commute), but the day-1 script still says "squeeze across the crowded carriage" on the left-door choice.
 - Day-1 flow: monorail → gate → office → copy room (first secret magic, the first task: copies for Emi) → office → Sales (Rei, second spell). Design and build the copy-room magic mechanic. See GUIDE "Current focus".
 - One free-typing local-AI moment on day 1, with a one-click start of llama-server. Phone/train mode after day 1.
 - Open question for Jørgen: the move-in on day 1. Does he arrive with a suitcase and drop it at the dorm, or were his things sent ahead? Maybe a short "here's your room" moment at the end of the day.
