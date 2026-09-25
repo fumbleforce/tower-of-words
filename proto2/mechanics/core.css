@@ -91,7 +91,7 @@ ruby rt { font: 600 .4em/1 var(--jp); color: var(--ruby); letter-spacing: 0; }
 .tag { display: inline-block; font: 600 11px var(--mono); padding: 2px 8px; border-radius: 999px; border: 1px solid var(--line2); color: var(--dim); }
 
 /* toast */
-.toast { position: fixed; left: 50%; top: 70px; transform: translateX(-50%); z-index: 60; padding: 8px 16px; border-radius: 999px; background: var(--panel2); border: 1px solid var(--line2); font-weight: 700; font-size: 14px; transition: opacity .4s, transform .4s; }
+.toast { position: fixed; left: 50%; top: auto; bottom: 24px; transform: translateX(-50%); z-index: 60; padding: 8px 16px; border-radius: 999px; background: var(--panel2); border: 1px solid var(--line2); font-weight: 700; font-size: 14px; transition: opacity .4s, transform .4s; }
 .toast.up { border-color: var(--ok); }
 .toast.down { border-color: var(--accent); }
 .toast.out { opacity: 0; transform: translate(-50%, -8px); }

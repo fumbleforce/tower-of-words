@@ -50,7 +50,7 @@ const EX = [
     p: ['いいんですか？　いただきます。', 'どうぞ、どうぞ。', 'warm'], c: ['{食べる|たべる}！', 'はは、{元気|げんき}だね。', 'amused'], x: ['はい、{五時|ごじ}です。', '……{時間|じかん}？', 'confused'],
     why: 'He is much older, so polite is safer. He is easygoing, so casual only gets a laugh.' },
   { t: 3, who: 'Receptionist', ctx: 'At a client\'s company. You are visiting.', icon: 'buildings', exp: 'p', line: 'どちら{様|さま}ですか？',
-    p: ['{天川|あまかわ}から{来ました|きました|来る|polite past}。', 'どうぞ、こちらへ。', 'warm'], c: ['{天川|あまかわ}から{来た|きた|来る|past}。', '……{少々|しょうしょう}お{待ち|まち}ください。', 'cool'], x: ['{元気|げんき}です。', '……お{名前|なまえ}を。', 'confused'],
+    p: ['{天川|あまかわ}から{参りました|まいりました|参る|polite past}。', 'どうぞ、こちらへ。', 'warm'], c: ['{天川|あまかわ}から{来た|きた|来る|past}。', '……{少々|しょうしょう}お{待ち|まち}ください。', 'cool'], x: ['{元気|げんき}です。', '……お{名前|なまえ}を。', 'confused'],
     why: 'Visiting another company: polite. どちら様 is a very polite "who are you?".' },
   { t: 3, who: 'Coworker', ctx: 'Your age. You both stayed late.', icon: 'user', exp: 'c', line: 'まだ{帰らない|かえらない|帰る|negative}の？',
     c: ['うん、もうちょっと。', 'そっか。{無理|むり}しないでね。', 'warm'], p: ['はい、もう{少し|すこし}です。', '……{部長|ぶちょう}みたいな{言い方|いいかた}。', 'amused'], x: ['うん、もう{帰った|かえった|帰る|past}。', '……ここにいるよね？', 'confused'],
@@ -59,7 +59,7 @@ const EX = [
 const MOOD = { warm: ['warmer', 'ok'], ok: ['fine', 'ok'], amused: ['amused', 'meh'], cool: ['cooler', 'bad'], cold: ['cold', 'bad'], confused: ['confused', 'bad'] };
 
 const { stage } = shell({ proto: PROTO, title: 'Casual or polite', side: `
-  <p>Answer the way this person expects. Tap a word in a reply to see its meaning without choosing it.</p>` });
+  <p>Answer the way this person expects. Tap a reply to say it. The ? on a reply lets you tap its words for meanings first.</p>` });
 
 async function run(level) {
   showLevel(level);
@@ -75,7 +75,7 @@ async function run(level) {
   for (let i = 0; i < RUN; i++) {
     prog.children[i].className = 'now';
     const lv = ad.level;
-    const maxT = lv <= 1 ? 2 : lv <= 3 ? 2 : 3;
+    const maxT = lv <= 1 ? 1 : lv <= 3 ? 2 : 3;
     let pool = EX.filter(e => e.t <= maxT && !used.has(e));
     if (!pool.length) pool = EX.filter(e => !used.has(e));
     // Alternate so the right register isn't always the same.
@@ -87,11 +87,12 @@ async function run(level) {
     area.innerHTML = `
       <div class="who"><i class="ph-fill ph-${E.icon}"></i><div><b>${E.who}</b><span>${E.ctx}</span></div><span class="mood" id="mood"></span></div>
       <div class="said-line"><div class="line small" lang="ja">${renderJP(E.line, { level: lv })}</div></div>
-      <div class="replies">${opts.map(k => `<div class="reply" role="button" tabindex="0" data-k="${k}"><i class="ph ph-chat-circle"></i><span class="rj" lang="ja">${renderJP(E[k][0], { level: lv })}</span></div>`).join('')}</div>
+      <div class="replies">${opts.map(k => `<div class="reply no-lookup" role="button" tabindex="0" data-k="${k}"><i class="ph ph-chat-circle"></i><span class="rj" lang="ja">${renderJP(E[k][0], { level: lv })}</span><button class="rq" aria-label="Look up words in this reply" title="Look up words"><i class="ph ph-question"></i></button></div>`).join('')}</div>
       <div class="after" id="after"></div>`;
     ses.begin(labelJP(E.line, lv));
     sayLine($('.said-line .line', area), { text: plain(E.line), follow: true });
-    const k = await new Promise(r => area.querySelectorAll('.reply').forEach(b => { b.onclick = () => r(b.dataset.k); b.onkeydown = e => { if (e.key === 'Enter' || e.key === ' ') r(b.dataset.k); }; }));
+    area.querySelectorAll('.rq').forEach(q => q.onclick = e => { e.stopPropagation(); const rp = q.closest('.reply'); rp.classList.toggle('no-lookup'); rp.classList.toggle('lookup-on'); });
+    const k = await new Promise(r => area.querySelectorAll('.reply').forEach(b => { b.onclick = e => { if (b.classList.contains('lookup-on') && e.target.closest('.w')) return; r(b.dataset.k); }; b.onkeydown = e => { if (e.key === 'Enter' || e.key === ' ') r(b.dataset.k); }; }));
     stopAudio();
     const [rjp, react, mood] = E[k];
     const regOk = k !== 'x' && (E.exp === 'e' || E.exp === k);

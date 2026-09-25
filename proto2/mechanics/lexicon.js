@@ -45,15 +45,15 @@ export const LEX = {
   '礼': { r: 'れい', en: 'thanks (お礼 = a thank-you)' }, '乾杯': { r: 'かんぱい', en: 'cheers! (a toast)' }, '言い方': { r: 'いいかた', en: 'way of saying it' }, '早退': { r: 'そうたい', en: 'leaving work early' },
   'はさみ': { en: 'scissors' },
   // adjectives and adverbs
-  '大きい': { r: 'おおきい', en: 'big' }, '新しい': { r: 'あたらしい', en: 'new' }, '寒い': { r: 'さむい', en: 'cold (weather, room)' }, '忙しい': { r: 'いそがしい', en: 'busy' },
+  '大きい': { r: 'おおきい', en: 'big' }, '新しい': { r: 'あたらしい', en: 'new' }, '寒い': { r: 'さむい', en: 'cold (weather, room)' }, '強い': { r: 'つよい', en: 'strong' }, '早め': { r: 'はやめ', en: 'a bit early (早めに = early)' }, '前': { r: 'まえ', en: 'before, in front' }, '電気': { r: 'でんき', en: 'electricity, the lights' }, '消す': { r: 'けす', en: 'to turn off' }, '忙しい': { r: 'いそがしい', en: 'busy' },
   '悪い': { r: 'わるい', en: 'bad (悪いね = sorry)' }, '怖い': { r: 'こわい', en: 'scary' }, '痛い': { r: 'いたい', en: 'painful, hurts' }, '早い': { r: 'はやい', en: 'early, fast' },
   '本当': { r: 'ほんとう', en: 'true, real' }, '静か': { r: 'しずか', en: 'quiet' }, '一緒': { r: 'いっしょ', en: 'together' }, '元気': { r: 'げんき', en: 'lively, well' }, '無理': { r: 'むり', en: 'impossible, too much' },
   '大丈夫': { r: 'だいじょうぶ', en: 'fine, OK (also: no thanks)' }, '丁寧': { r: 'ていねい', en: 'polite, careful' }, '少し': { r: 'すこし', en: 'a little' }, '少々': { r: 'しょうしょう', en: 'a moment (polite)' },
-  '好き': { r: 'すき', en: 'like, fond of' }, '休み': { r: 'やすみ', en: 'day off, break' }, '急': { r: 'きゅう', en: 'sudden (急に = suddenly)' }, '次': { r: 'つぎ', en: 'next' }, '何': { r: 'なに', en: 'what (なに, or なん before some sounds)' }, '中': { r: 'ちゅう', en: 'in the middle of (電話中 = on the phone)' },
+  '好き': { r: 'すき', en: 'like, fond of' }, '休み': { r: 'やすみ', en: 'day off, break' }, '急': { r: 'きゅう', en: 'sudden (急に = suddenly)' }, '次': { r: 'つぎ', en: 'next' }, '何': { r: 'なに', en: 'what (なに, or なん before some sounds)' }, '中': { r: 'ちゅう', en: 'in the middle of (doing)' },
   '赤': { r: 'あか', en: 'red' }, '青': { r: 'あお', en: 'blue' }, '白': { r: 'しろ', en: 'white' }, '黒': { r: 'くろ', en: 'black' }, '黄色': { r: 'きいろ', en: 'yellow' }, '緑': { r: 'みどり', en: 'green' },
   'ちょっと': { en: 'a little, a moment' }, 'もう': { en: 'already, (any) more' }, 'ここ': { en: 'here' },
   // verbs
-  '来る': { r: 'くる', en: 'to come' }, '行く': { r: 'いく', en: 'to go' }, '帰る': { r: 'かえる', en: 'to go home' }, '待つ': { r: 'まつ', en: 'to wait' }, '見る': { r: 'みる', en: 'to look, to see' },
+  '来る': { r: 'くる', en: 'to come' }, '参る': { r: 'まいる', en: 'to come, to go (humble)' }, '行く': { r: 'いく', en: 'to go' }, '帰る': { r: 'かえる', en: 'to go home' }, '待つ': { r: 'まつ', en: 'to wait' }, '見る': { r: 'みる', en: 'to look, to see' },
   '見せる': { r: 'みせる', en: 'to show' }, '飲む': { r: 'のむ', en: 'to drink' }, '食べる': { r: 'たべる', en: 'to eat' }, '読む': { r: 'よむ', en: 'to read' }, '歩く': { r: 'あるく', en: 'to walk' },
   '言う': { r: 'いう', en: 'to say' }, '聞く': { r: 'きく', en: 'to ask, to hear' }, '会う': { r: 'あう', en: 'to meet' }, '使う': { r: 'つかう', en: 'to use' }, '座る': { r: 'すわる', en: 'to sit' },
   '休む': { r: 'やすむ', en: 'to rest, to take time off' }, '持つ': { r: 'もつ', en: 'to hold, to have' }, '忘れる': { r: 'わすれる', en: 'to forget, to leave behind' }, '遅れる': { r: 'おくれる', en: 'to be late' },

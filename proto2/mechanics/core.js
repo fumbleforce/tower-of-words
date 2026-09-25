@@ -185,8 +185,10 @@ export function showGloss(el) {
   const key = el.dataset.key, surf = el.dataset.surf, read = el.dataset.read, note = el.dataset.note;
   const L = LEX[key] || {}, I = WORD_INFO[key] || {};
   const kata = isKata(surf);
-  const head = hasKanji(surf) ? `<b lang="ja">${surf}</b><span class="g-r" lang="ja">${read}</span>` : `<b lang="ja">${surf}</b>`;
-  glossEl = h('div', 'gloss', `${head}<span class="g-ro">${romaji(read)}</span><span class="g-en">${L.en || I.g || (kata ? 'loanword' : '')}</span>${I.n ? `<span class="g-n">JLPT N${I.n}</span>` : ''}${note ? `<span class="g-note">${note}</span>` : ''}${key !== surf && !kata ? `<span class="g-note" lang="ja">${key}</span>` : ''}`);
+  // Show the word the way it was displayed: a word shown in kana keeps its kanji out of the gloss.
+  const shownKana = el.dataset.kst === '0';
+  const head = hasKanji(surf) && !shownKana ? `<b lang="ja">${surf}</b><span class="g-r" lang="ja">${read}</span>` : `<b lang="ja">${shownKana ? read : surf}</b>`;
+  glossEl = h('div', 'gloss', `${head}<span class="g-ro">${romaji(read)}</span><span class="g-en">${L.en || I.g || (kata ? 'loanword' : '')}</span>${I.n ? `<span class="g-n">JLPT N${I.n}</span>` : ''}${note ? `<span class="g-note">${note}</span>` : ''}${key !== surf && !kata && !shownKana ? `<span class="g-note" lang="ja">${key}</span>` : ''}`);
   document.body.append(glossEl);
   const r = el.getBoundingClientRect();
   const gw = glossEl.offsetWidth, gh = glossEl.offsetHeight;
@@ -198,7 +200,7 @@ export function showGloss(el) {
 export function enableLookups(root, onLookup) {
   root.addEventListener('click', e => {
     const w = e.target.closest('.w');
-    if (!w || !root.contains(w) || root.classList.contains('no-lookup')) return;
+    if (!w || !root.contains(w) || root.classList.contains('no-lookup') || w.closest('.no-lookup')) return;
     e.preventDefault(); e.stopPropagation();
     showGloss(w); wordLookup(w.dataset.key);
     if (w.dataset.kst === '2') kanjiMiss([...w.dataset.surf].filter(isKanji));
@@ -364,7 +366,7 @@ export function levelSheet(cur, onPick, { first = false } = {}) {
   const sheet = h('div', 'sheet-bg');
   sheet.innerHTML = `<div class="sheet" role="dialog" aria-label="Level">
     <h2>${first ? 'Where are you starting?' : 'Level'}</h2>
-    <div class="presets">${PRESETS.map((p, i) => `<button class="preset" data-i="${i}"><b>${p.label}</b><span>${p.full}. Starts at level ${p.level}: ${LEVELS[p.level].sub}.</span></button>`).join('')}</div>
+    <div class="presets">${PRESETS.map((p, i) => `<button class="preset" data-i="${i}"><b>${p.label}</b><span>Level ${p.level}: ${LEVELS[p.level].sub}.</span></button>`).join('')}</div>
     <label class="slide"><span>Or set it: <b id="slV"></b></span><input type="range" min="0" max="5" step="1" value="${cur ?? 2}" id="slR"></label>
     <div class="sheet-row"><a class="linkish" href="../reader/index.html#check">Take the 1-minute level check</a><button class="btn" id="slGo">Use this level</button></div>
   </div>`;
@@ -434,7 +436,7 @@ export class Session {
         <div><span class="lab">Accuracy</span><b>${Math.round(s.accuracy * 100)}%</b><small>${s.detail.filter(x => x.ok).length} of ${s.items}</small></div>
         <div><span class="lab">Median per item</span><b>${sec(s.medianMs)}</b><small>mean ${sec(s.meanMs)}</small></div>
         <div><span class="lab">Look-ups</span><b>${s.lookups}</b><small>${(s.lookups / Math.max(1, s.items)).toFixed(1)} per item</small></div>
-        <div><span class="lab">Total time</span><b>${Math.floor(s.totalMs / 60000)}:${String(Math.round(s.totalMs / 1000) % 60).padStart(2, '0')}</b><small>level ${s.level0} to ${s.level1}</small></div>
+        <div><span class="lab">Total time</span><b>${Math.floor(Math.round(s.totalMs / 1000) / 60)}:${String(Math.round(s.totalMs / 1000) % 60).padStart(2, '0')}</b><small>level ${s.level0} to ${s.level1}</small></div>
         ${extraRows.map(([l, v, sm]) => `<div><span class="lab">${l}</span><b>${v}</b><small>${sm || ''}</small></div>`).join('')}
       </div>
       <div class="rate"><span>How was that?</span>
