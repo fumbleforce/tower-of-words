@@ -15,6 +15,8 @@ Read GUIDE.md first. Pick up from here next session.
 ## Focus: a narrow day-1 slice (Jørgen, 2026-09-25)
 - Chosen: Emi, Mio, Rei; monorail, gate, basement office, Sales. Ishibashi voice/text only at the gate; canteen, rooftop and bar move to day 2. Get day 1 to an excellent state before scaling up. Don't build sprite sets for the whole cast yet.
 - Redraw the day-1 locations (the current ones have logic errors, e.g. a bed with pillows at both ends). Redo the bartender's cutout (ugly edges).
+- Day-1 flow: monorail → gate → office → copy room (first secret magic, the first task: copies for Emi) → office → Sales (Rei, second spell). Design and build the copy-room magic mechanic. See GUIDE "Current focus".
+- One free-typing local-AI moment on day 1, with a one-click start of llama-server. Phone/train mode after day 1.
 - Composition research on the side.
 
 ## Art (after the cast is settled; decide before producing)
