@@ -75,13 +75,15 @@ canvas{width:min(100vw,calc(100vh*16/9));height:min(100vh,calc(100vw*9/16));disp
   }
   const audio = new Audio('../../game/audio/music/' + (cj.audio || 'opening.mp3'));
   audio.preload = 'auto';
+  window.__audio = audio; // for headless checks
   const actx = new (window.AudioContext || window.webkitAudioContext)();
   const gain = actx.createGain(); actx.createMediaElementSource(audio).connect(gain); gain.connect(actx.destination);
   const rev = document.getElementById('rev'), info = document.getElementById('info'), scrub = document.getElementById('scrub'), bar = document.querySelector('#bar i');
   scrub.max = DUR; scrub.min = T0;
   let paused = false, scrubbing = false;
   function tick() {
-    const t = audio.currentTime;
+    if (audio.currentTime < T0 - 0.05 && audio.readyState >= 1) audio.currentTime = T0;
+    const t = Math.max(audio.currentTime, T0);
     gain.gain.value = cj.pilot ? Math.min(1, (t - T0) / 0.12) * (1 - inv(DUR - 0.3, DUR, t)) : 1;
     if (t >= DUR && !audio.paused) { audio.pause(); document.getElementById('pp').textContent = 'replay'; }
 
@@ -96,7 +98,9 @@ canvas{width:min(100vw,calc(100vh*16/9));height:min(100vh,calc(100vw*9/16));disp
     requestAnimationFrame(tick);
   }
   const start = document.getElementById('start');
-  start.onclick = () => { actx.resume(); audio.currentTime = T0; audio.play(); start.remove(); tick(); setTimeout(() => document.getElementById('hint').style.opacity = 0, 4000); };
+  const seekStart = () => { if (audio.currentTime < T0 - 0.05) audio.currentTime = T0; };
+  audio.addEventListener('loadedmetadata', seekStart);
+  start.onclick = () => { actx.resume(); seekStart(); audio.play(); start.remove(); tick(); setTimeout(() => document.getElementById('hint').style.opacity = 0, 4000); };
   const toggle = () => { if (audio.paused) { if (audio.currentTime >= DUR - 0.01) audio.currentTime = T0; audio.play(); paused = false; } else { audio.pause(); paused = true; } document.getElementById('pp').textContent = audio.paused ? 'play' : 'pause'; };
   const seekShot = d => { const c = cutAt(audio.currentTime); const i = CUTS.indexOf(c) + d; if (CUTS[i]) audio.currentTime = CUTS[i].start + 0.001; };
   const fs = () => document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen();
