@@ -100,24 +100,21 @@ function playVoice(who, text, rate = 1) {
 }
 function replay() { if (lastVoice) playVoice(lastVoice[0], lastVoice[1], .85); }
 function sfx(name, vol = .5) { const a = new Audio(`audio/sfx/${name}.mp3`); a.volume = vol; a.play().catch(() => {}); }
-// Music alternates between two recordings of each mood (Lyria and YuE2), crossfading 3 s before each track ends.
+// Music: one Lyria loop per mood, crossfading into itself 3 s before the end.
 const MUSIC_VOL = .2;
 function fade(a, to, ms, done) {
   const from = a.volume, t0 = performance.now();
   const tick = () => { const k = Math.min(1, (performance.now() - t0) / ms); a.volume = from + (to - from) * k; if (k < 1) requestAnimationFrame(tick); else done?.(); };
   requestAnimationFrame(tick);
 }
-let musicTurn = 0;
 function playTrack(name) {
-  const src = musicTurn++ % 2 ? `audio/music/yue2-${name}.mp3` : `audio/music/${name}.mp3`;
-  const a = new Audio(src); a.volume = 0;
+  const a = new Audio(`audio/music/${name}.mp3`); a.volume = 0;
   a.play().then(() => fade(a, MUSIC_VOL, 2500)).catch(() => {});
   let handed = false;
   a.addEventListener('timeupdate', () => {
     if (handed || musicName !== name || !a.duration || a.currentTime < a.duration - 3) return;
     handed = true; fade(a, 0, 3000, () => a.pause()); musicEl = playTrack(name);
   });
-  a.addEventListener('error', () => { if (!handed && musicName === name) { handed = true; musicEl = playTrack(name); } });
   return a;
 }
 function music(name) {
