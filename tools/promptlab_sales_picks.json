@@ -1,0 +1,4 @@
+{
+ "sales-rdbt-s9-nophones-colorguide0.8-8408": {"note": "Round 4. Reviewer: pass. Islands properly face to face, monitor backs visible across the desks, chairs tucked in, blinds, whiteboards, muted grey. One odd single chair at the window end of the far island.", "how": "RDBT Anima, seed 8408, 1216x832, Euler A 30 steps, CFG 5. Img2img from the Sales blockout's flat colour guide at strength 0.8, plus the blockout lineart (Anima LLLite, strength 0.8 until 80% of the steps). Your short prompt with the phones taken out and 'Grey carpet floor.' added."},
+ "sales-rdbt-s9-nophones-colorguide0.8-8412": {"note": "Round 4. Reviewer: pass. The front island is face to face, far-side chairs behind their own monitors. The rows along the windows are plainer one-way rows. Slight purple tint in the floor shadows.", "how": "RDBT Anima, seed 8412, same recipe as 8408."}
+}

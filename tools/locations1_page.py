@@ -66,6 +66,15 @@ for sid, title, cur, desc in SECTIONS:
                       'cam': st.get('camera', ''), 'stage': [('Height', st.get('height', '')), ('In front of the lens', st.get('front', '')),
                                                              ('Behind the camera', st.get('behind', '')), ('Must hold', st.get('sense', ''))],
                       'prompt': pk.get('prompt') or e.get('prompt', ''), 'neg': e.get('negative', ''), 'meta': pk['how']})
+    # Round 4 (tools/promptlab.py, batch 'sales'): passes from the blind reviewer, listed in tools/promptlab_sales_picks.json
+    PL = os.path.join(ROOT, 'art', 'production', 'promptlab')
+    plp = os.path.join(ROOT, 'tools', 'promptlab_sales_picks.json')
+    if sid == 'sales' and os.path.exists(plp):
+        plres = json.load(open(os.path.join(PL, 'results.json')))
+        for name, pk in json.load(open(plp)).items():
+            webp(os.path.join(PL, 'sales', name + '.png'), os.path.join(OUTD, name + '.webp'))
+            e = plres['sales/' + name]
+            items.append({'f': name + '.webp', 't': name, 'note': pk['note'], 'prompt': e['prompt'], 'neg': e['neg'], 'meta': pk['how']})
     out.append({'id': sid, 'title': title, 'desc': desc, 'items': items})
 
 cards = []
