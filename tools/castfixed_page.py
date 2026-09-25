@@ -12,6 +12,10 @@ NAMES = {'emi': 'Emi', 'mc-it-guy': 'Main character', 'rei': 'Rei', 'mio': 'Mio'
          'kiyoko-camel': 'Kiyoko (camel coat, your pick)', 'yuzuki-e': 'Yuzuki (e-201, your pick)', 'nanami-g': 'Nanami (g-204, ID-card desk)',
          'nanami-f': 'Nanami (f-201, night CCTV)', 'tsubasa': 'Tsubasa', 'kanae': 'Kanae', 'sumi': 'Sumi', 'goro': 'Goro', 'jun': 'Jun',
          'ishibashi': 'Ishibashi', 'saki': 'Saki'}
+TF_INTRO = ('Her first face came out in a different style from the rest of the cast: a long profile that juts forward, and heavy contour shading. '
+            'Only the face was repainted (brow to chin, in front of the ear), with RDBT at 0.85 denoise; hair, ear, outfit, hands and framing are the same pixels as before. '
+            'The prompt is the style line plus a few plain sentences. Each option is also shown next to Emi, Mio and Sumi, cropped at the same scale. '
+            'Nothing goes into the game until you pick one.')
 NOTES = json.load(open(os.path.join(FIXED, 'notes.json'))) if os.path.exists(os.path.join(FIXED, 'notes.json')) else {}
 
 rows = []
@@ -26,6 +30,31 @@ for key in ORDER:
     subprocess.run(['magick', after, '-resize', '630x', '-quality', '88', os.path.join(OUTD, f'{key}-after.webp')], check=True)
     before_probs = check(os.path.join(ROOT, src))
     rows.append((key, NAMES.get(key, key), before_probs, NOTES.get(key, '')))
+
+# Tsubasa face redo (tools/tsubasa_face.py): before and the face options, each also shown next to three cast faces at the same scale.
+TF = os.path.join(ROOT, 'art', 'production', 'TF')
+TF_PICKS = json.load(open(os.path.join(TF, 'picks.json'))) if os.path.exists(os.path.join(TF, 'picks.json')) else []
+TF_REFS = [('Emi', 'art/slice/emi2/r3/rdbt/work-41.png'), ('Mio', 'art/production/B/mio-bored.png'), ('Sumi', 'art/production/D2/new-sumi-201.png')]
+FACEBOX = '480x480+200+60'
+tf_html = ''
+if TF_PICKS:
+    def strip(src, out):
+        subprocess.run(['magick', 'montage', src] + [os.path.join(ROOT, r) for _, r in TF_REFS] +
+                       ['-crop', FACEBOX, '-tile', '4x1', '-geometry', '360x360+3+3', '-quality', '86', os.path.join(OUTD, out)], check=True)
+    items = [('before', 'Before (approved reframe)', os.path.join(TF, '..', 'RF', 'tsubasa.png'), os.path.join(ROOT, CAST['tsubasa'][0]))]
+    items += [(p['name'], p['label'], os.path.join(TF, p['name'] + '-rf.png'), os.path.join(TF, p['name'] + '.png')) for p in TF_PICKS]
+    figs, strips = '', ''
+    for name, label, rf, flat in items:
+        subprocess.run(['magick', rf, '-resize', '630x', '-quality', '88', os.path.join(OUTD, f'tsubasa-face-{name}.webp')], check=True)
+        strip(flat, f'tsubasa-face-{name}-cmp.webp')
+        probs = check(rf)
+        note = next((p.get('note', '') for p in TF_PICKS if p['name'] == name), '')
+        figs += (f'<figure><img src="tsubasa-face-{name}.webp" alt="Tsubasa {html.escape(label)}" loading="lazy"><figcaption><b>{html.escape(label)}</b>'
+                 f'{" " + html.escape(note) if note else ""} Frame check: {html.escape("; ".join(probs) or "clear")}.</figcaption></figure>')
+        strips += (f'<figure class="cmp"><img src="tsubasa-face-{name}-cmp.webp" alt="{html.escape(label)} next to Emi, Mio and Sumi" loading="lazy">'
+                   f'<figcaption>{html.escape(label)}, then Emi, Mio, Sumi at the same scale</figcaption></figure>')
+    tf_html = ('<section class="tf"><h2>Tsubasa face redo</h2><p class="intro">' + html.escape(TF_INTRO) + '</p>'
+               '<div class="opts">' + figs + '</div><h3>Face next to the cast</h3><div class="cmps">' + strips + '</div></section>')
 
 cards = ''.join(
     f'<section><h2>{html.escape(n)}</h2><div class="pair">'
@@ -42,12 +71,14 @@ h1{margin:0 0 6px;font-size:26px}.intro{color:var(--mute);max-width:900px}
 section{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:12px}h2{margin:0 0 8px;font-size:18px}
 .pair{display:grid;grid-template-columns:1fr 1fr;gap:10px;align-items:end}figure{margin:0}
 figure img{width:100%;display:block;border-radius:5px;cursor:zoom-in;outline:1px solid #c4cad0}figcaption{font-size:13px;color:var(--mute);margin-top:4px}
+.tf{margin:0 0 20px}.opts{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,260px),1fr));gap:10px;align-items:start}h3{font-size:16px;margin:16px 0 8px}
+.cmps{display:grid;gap:10px}.cmp img{max-width:1100px}
 #lb{position:fixed;inset:0;background:rgba(8,10,12,.95);display:none;place-items:center;z-index:9}#lb.on{display:grid}#lb img{max-width:98vw;max-height:92vh}
 </style></head><body><main>
 <h1>Cast, reframed</h1>
 <p class="intro">In most approved and picked portraits the hair touched or ran off the top edge, and some arms ran off the sides. The renders were made that way: the prompt asked for a waist-up portrait on an 896×1152 canvas and the model fills it to the edges. Kiyoko's new outfits were repainted around the s101 head, so they kept its tight crop. Nothing on the review pages cropped them.</p>
 <p class="intro">Fix: each image sits on a larger canvas of the same shape (144 px more on top and 56 px each side; Rei and Kuro, with tall hair, 256 and 100). RDBT paints only where something was cut (hair above the old top edge, elbows at the sides), and the rest of the new border is the image's own background continued. The original pixels are then pasted back, so faces and outfits are unchanged; only a 40 px band along the old edge can differ. The outline on each image marks its frame. These are for your review only; nothing is swapped into the game. Click to enlarge.</p>
-<div class="grid">''' + cards + '''</div></main><div id="lb"><img alt=""></div>
+''' + tf_html + '''<div class="grid">''' + cards + '''</div></main><div id="lb"><img alt=""></div>
 <script>const lb=document.getElementById('lb'),li=lb.querySelector('img');document.querySelectorAll('figure img').forEach(i=>i.onclick=()=>{li.src=i.src;lb.classList.add('on')});lb.onclick=()=>lb.classList.remove('on');addEventListener('keydown',e=>{if(e.key==='Escape')lb.classList.remove('on')});</script>
 </body></html>''')
 print(len(rows), 'characters')
