@@ -16,6 +16,11 @@ TF_INTRO = ('Her first face came out in a different style from the rest of the c
             'Only the face was repainted (brow to chin, in front of the ear), with RDBT at 0.85 denoise; hair, ear, outfit, hands and framing are the same pixels as before. '
             'The prompt is the style line plus a few plain sentences. Each option is also shown next to Emi, Mio and Sumi, cropped at the same scale. '
             'Nothing goes into the game until you pick one.')
+LFL_INTRO = ('The options below compared her profile with faces that look at the viewer, which is not a fair test. Here the angle is the same in each row. '
+             'Row 1: Tsubasa as approved, with Emi, Mio and Sumi repainted to look down to the side. Row 2: Tsubasa repainted to turn toward the viewer, '
+             'next to the approved Emi, Mio and Sumi. Only the head area was repainted (RDBT, 0.85, or 0.88 for Emi); no face-style words in the prompts, '
+             'so Tsubasa keeps her original face style. Known flaws: the turned Tsubasas have a soft seam where the repaint meets the jacket collar, and '
+             'two of them gained hair clips (blue in 23, red in 24); Emi\'s hair came out a shade darker. Every crop is the same size (540×560 of the 896×1152 image). Nothing goes into the game.')
 NOTES = json.load(open(os.path.join(FIXED, 'notes.json'))) if os.path.exists(os.path.join(FIXED, 'notes.json')) else {}
 
 rows = []
@@ -56,6 +61,32 @@ if TF_PICKS:
     tf_html = ('<section class="tf"><h2>Tsubasa face redo</h2><p class="intro">' + html.escape(TF_INTRO) + '</p>'
                '<div class="opts">' + figs + '</div><h3>Face next to the cast</h3><div class="cmps">' + strips + '</div></section>')
 
+# Like-for-like (tools/likeforlike.py): row 1 everyone in profile, row 2 everyone turned toward the viewer, same crop size for all.
+LFL = os.path.join(ROOT, 'art', 'production', 'LFL')
+LFL_PICKS = json.load(open(os.path.join(LFL, 'picks.json'))) if os.path.exists(os.path.join(LFL, 'picks.json')) else None
+HEADBOX = {'tsubasa': 230, 'emi': 130, 'mio': 220, 'sumi': 160}  # left edge of a 540x560 box; top 0 (Mio 40)
+ORIG = {'tsubasa': CAST['tsubasa'][0], 'emi': TF_REFS[0][1], 'mio': TF_REFS[1][1], 'sumi': TF_REFS[2][1]}
+lfl_html = ''
+if LFL_PICKS:
+    def head(key, src, out):
+        x, y = HEADBOX[key], 40 if key == 'mio' else 0
+        subprocess.run(['magick', src, '-crop', f'540x560+{x}+{y}', '+repage', '-resize', '360x', '-quality', '86', os.path.join(OUTD, out)], check=True)
+        return out
+    def fig(img, cap):
+        return f'<figure><img src="{img}" alt="{html.escape(cap)}" loading="lazy"><figcaption>{html.escape(cap)}</figcaption></figure>'
+    row1 = fig(head('tsubasa', os.path.join(ROOT, ORIG['tsubasa']), 'lfl-tsubasa-orig.webp'), 'Tsubasa, original')
+    for k in ('emi', 'mio', 'sumi'):
+        n = LFL_PICKS['profile'][k]
+        row1 += fig(head(k, os.path.join(LFL, n + '.png'), f'lfl-{k}-profile.webp'), f'{k.capitalize()} in profile ({n})')
+    row2 = ''
+    for i, n in enumerate(LFL_PICKS['facing']):
+        row2 += fig(head('tsubasa', os.path.join(LFL, n + '.png'), f'lfl-tsubasa-facing-{i}.webp'), f'Tsubasa turned to the viewer ({n})')
+    for k in ('emi', 'mio', 'sumi'):
+        row2 += fig(head(k, os.path.join(ROOT, ORIG[k]), f'lfl-{k}-orig.webp'), f'{k.capitalize()}, original')
+    lfl_html = ('<section class="tf"><h2>Like-for-like</h2><p class="intro">' + html.escape(LFL_INTRO) + '</p>'
+                '<h3>All in profile, looking down</h3><div class="opts lfl">' + row1 + '</div>'
+                '<h3>All turned toward the viewer</h3><div class="opts lfl">' + row2 + '</div></section>')
+
 cards = ''.join(
     f'<section><h2>{html.escape(n)}</h2><div class="pair">'
     f'<figure><img src="{k}-before.webp" alt="{html.escape(n)} before" loading="lazy"><figcaption>Before: {html.escape("; ".join(p) or "no edge contact")}</figcaption></figure>'
@@ -72,13 +103,13 @@ section{background:var(--card);border:1px solid var(--line);border-radius:8px;pa
 .pair{display:grid;grid-template-columns:1fr 1fr;gap:10px;align-items:end}figure{margin:0}
 figure img{width:100%;display:block;border-radius:5px;cursor:zoom-in;outline:1px solid #c4cad0}figcaption{font-size:13px;color:var(--mute);margin-top:4px}
 .tf{margin:0 0 20px}.opts{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,260px),1fr));gap:10px;align-items:start}h3{font-size:16px;margin:16px 0 8px}
-.cmps{display:grid;gap:10px}.cmp img{max-width:1100px}
+.lfl{grid-template-columns:repeat(auto-fill,minmax(min(100%,200px),1fr))}.cmps{display:grid;gap:10px}.cmp img{max-width:1100px}
 #lb{position:fixed;inset:0;background:rgba(8,10,12,.95);display:none;place-items:center;z-index:9}#lb.on{display:grid}#lb img{max-width:98vw;max-height:92vh}
 </style></head><body><main>
 <h1>Cast, reframed</h1>
 <p class="intro">In most approved and picked portraits the hair touched or ran off the top edge, and some arms ran off the sides. The renders were made that way: the prompt asked for a waist-up portrait on an 896×1152 canvas and the model fills it to the edges. Kiyoko's new outfits were repainted around the s101 head, so they kept its tight crop. Nothing on the review pages cropped them.</p>
 <p class="intro">Fix: each image sits on a larger canvas of the same shape (144 px more on top and 56 px each side; Rei and Kuro, with tall hair, 256 and 100). RDBT paints only where something was cut (hair above the old top edge, elbows at the sides), and the rest of the new border is the image's own background continued. The original pixels are then pasted back, so faces and outfits are unchanged; only a 40 px band along the old edge can differ. The outline on each image marks its frame. These are for your review only; nothing is swapped into the game. Click to enlarge.</p>
-''' + tf_html + '''<div class="grid">''' + cards + '''</div></main><div id="lb"><img alt=""></div>
+''' + lfl_html + tf_html + '''<div class="grid">''' + cards + '''</div></main><div id="lb"><img alt=""></div>
 <script>const lb=document.getElementById('lb'),li=lb.querySelector('img');document.querySelectorAll('figure img').forEach(i=>i.onclick=()=>{li.src=i.src;lb.classList.add('on')});lb.onclick=()=>lb.classList.remove('on');addEventListener('keydown',e=>{if(e.key==='Escape')lb.classList.remove('on')});</script>
 </body></html>''')
 print(len(rows), 'characters')
