@@ -33,6 +33,10 @@ Everything Jørgen has asked for, and how we work. Every agent reads this before
 - Every word, including words inside options, can be tapped for its meaning without triggering the option.
 - Selecting an option reads it aloud (player voice, at a lower volume). Replays play slightly slower.
 - Scroll up or PageUp goes back through the dialogue (VN backlog).
+- Pace (2026-09-25): no screen should take minutes to parse. Keep lines short, and never stack several unknown words, a new grammar point and unknown kanji in one sentence. The learning must not slow play to a crawl.
+- Three separate progression tracks: vocabulary, grammar and letters (kana and individual kanji). Track each per player. Kanji the player can't read yet are shown as kana automatically, so a known word can still appear in kana while its kanji is unknown.
+- Adaptive for any player: assume other people will play this starting from different levels (a placement check or fast calibration at the start, then adjust from play). Nothing should be hard-coded to Jørgen's level.
+- Core mechanics must be varied and replayable, not one repeated quiz shape.
 - Don't overwhelm early: introduce one mechanic at a time. No meta "this becomes your task" narration; show, don't announce.
 
 ## Dialogue quality
