@@ -12,7 +12,7 @@ Read GUIDE.md first. Pick up from here next session.
 ## Focus: a narrow day-1 slice (Jørgen, 2026-09-25)
 - Chosen: Emi, Mio, Rei; monorail, gate, basement office, Sales. Ishibashi voice/text only at the gate; canteen, rooftop and bar move to day 2. Get day 1 to an excellent state before scaling up. Don't build sprite sets for the whole cast yet.
 - Redraw the day-1 locations (the current ones have logic errors, e.g. a bed with pillows at both ends). Redo the bartender's cutout (ugly edges).
-- Locations (proto2/locations1): Jørgen picked gate-lobby-2103 and copyroom-copier-4203. Round 2 redo is waiting on him: monorail interior (3: the carriage is on the beam about 15 m up, low horizon, no track outside) and Sales (3: the plain house prompt, muted to match the copy room). After he picks, convert the chosen images to game/img/bg (1920-wide webp). Prompts and staging notes are in tools/locations1.py. The day-1 script still says "squeeze across the crowded carriage", but the carriage is empty.
+- Locations (proto2/locations1): Jørgen picked gate-lobby-2103 and copyroom-copier-4203. Round 3 is waiting on him: the monorail final approach (2 options, straight-on right-hand window, composites: city close with the second guideway alongside, and the platform) and Sales (3 options, island layout from the Blender blockout as line control). No exterior option passed (the model draws 5-8 cars instead of three); try img2img from his bay master with an inpainted-out tail, or accept a longer train. After he picks, convert the chosen images to game/img/bg (1920-wide webp). Staging notes and prompts: tools/blockout/shots.py and composite.py. The day-1 script still says "squeeze across the crowded carriage", but the carriage is empty.
 - Day-1 flow: monorail → gate → office → copy room (first secret magic, the first task: copies for Emi) → office → Sales (Rei, second spell). Design and build the copy-room magic mechanic. See GUIDE "Current focus".
 - One free-typing local-AI moment on day 1, with a one-click start of llama-server. Phone/train mode after day 1.
 - Decided: phone onboarding on the monorail (welcome, map, dorm room, ID card, level check); things sent ahead; day 1 ends in his dorm room. Dorm-room background options are on proto2/locations2; still needs script changes to day1-draft.md (also fix the "crowded carriage" line: the arrival train is empty).
@@ -24,7 +24,7 @@ Read GUIDE.md first. Pick up from here next session.
 - Swap the new sprites into the game (the game still uses older mixed-model sprites for most characters).
 - Main character sprite set, once his design is final (the current tests came out too tan; enforce fair skin).
 - Environments batch and story-scene CGs for days 1–5, only after the model and cast are locked.
-- Action scenes (shootout, swim, volleyball) need composition control (a pose or layout sketch as input, or regional prompting). Research and set up before retrying.
+- Action scenes (shootout, swim, volleyball) need composition control. Set up (2026-09-25): Anima LLLite lineart/depth/pose/inpainting patches and Blender blockouts (GUIDE.md, Art, "Composition control"; tools/blockout). Next: a pose or blockout per action scene; the pose patch is documented as weak, so start with lineart from a blockout.
 - Fix Mio's game-night reward image (brand-like logo on the can, "MO" text on the shirt). Fix the faint pale fringe on Yuzuki's hair cutout.
 
 ## Game (builder owns game/)
