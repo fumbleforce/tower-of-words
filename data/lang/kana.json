@@ -1,0 +1,1016 @@
+{
+"about": "Kana for the letters track. h hiragana, k katakana, r romaji (Hepburn), row consonant row, group basic/dakuten/youon/extended (katakana-only loanword sounds). lookalikes: sets that learners mix up (Jørgen: ソ/ン/シ/ツ, ぬ/め/ね). Rules: っ doubles the next consonant, ー repeats the vowel (カード = kaado), ん before a vowel or y = n'. data/lang/romaji.js implements this.",
+"kana": [
+{
+"h": "あ",
+"k": "ア",
+"r": "a",
+"row": "a",
+"group": "basic"
+},
+{
+"h": "い",
+"k": "イ",
+"r": "i",
+"row": "a",
+"group": "basic"
+},
+{
+"h": "う",
+"k": "ウ",
+"r": "u",
+"row": "a",
+"group": "basic"
+},
+{
+"h": "え",
+"k": "エ",
+"r": "e",
+"row": "a",
+"group": "basic"
+},
+{
+"h": "お",
+"k": "オ",
+"r": "o",
+"row": "a",
+"group": "basic"
+},
+{
+"h": "か",
+"k": "カ",
+"r": "ka",
+"row": "k",
+"group": "basic"
+},
+{
+"h": "き",
+"k": "キ",
+"r": "ki",
+"row": "k",
+"group": "basic"
+},
+{
+"h": "く",
+"k": "ク",
+"r": "ku",
+"row": "k",
+"group": "basic"
+},
+{
+"h": "け",
+"k": "ケ",
+"r": "ke",
+"row": "k",
+"group": "basic"
+},
+{
+"h": "こ",
+"k": "コ",
+"r": "ko",
+"row": "k",
+"group": "basic"
+},
+{
+"h": "さ",
+"k": "サ",
+"r": "sa",
+"row": "s",
+"group": "basic"
+},
+{
+"h": "し",
+"k": "シ",
+"r": "shi",
+"row": "s",
+"group": "basic"
+},
+{
+"h": "す",
+"k": "ス",
+"r": "su",
+"row": "s",
+"group": "basic"
+},
+{
+"h": "せ",
+"k": "セ",
+"r": "se",
+"row": "s",
+"group": "basic"
+},
+{
+"h": "そ",
+"k": "ソ",
+"r": "so",
+"row": "s",
+"group": "basic"
+},
+{
+"h": "た",
+"k": "タ",
+"r": "ta",
+"row": "t",
+"group": "basic"
+},
+{
+"h": "ち",
+"k": "チ",
+"r": "chi",
+"row": "t",
+"group": "basic"
+},
+{
+"h": "つ",
+"k": "ツ",
+"r": "tsu",
+"row": "t",
+"group": "basic"
+},
+{
+"h": "て",
+"k": "テ",
+"r": "te",
+"row": "t",
+"group": "basic"
+},
+{
+"h": "と",
+"k": "ト",
+"r": "to",
+"row": "t",
+"group": "basic"
+},
+{
+"h": "な",
+"k": "ナ",
+"r": "na",
+"row": "n",
+"group": "basic"
+},
+{
+"h": "に",
+"k": "ニ",
+"r": "ni",
+"row": "n",
+"group": "basic"
+},
+{
+"h": "ぬ",
+"k": "ヌ",
+"r": "nu",
+"row": "n",
+"group": "basic"
+},
+{
+"h": "ね",
+"k": "ネ",
+"r": "ne",
+"row": "n",
+"group": "basic"
+},
+{
+"h": "の",
+"k": "ノ",
+"r": "no",
+"row": "n",
+"group": "basic"
+},
+{
+"h": "は",
+"k": "ハ",
+"r": "ha",
+"row": "h",
+"group": "basic"
+},
+{
+"h": "ひ",
+"k": "ヒ",
+"r": "hi",
+"row": "h",
+"group": "basic"
+},
+{
+"h": "ふ",
+"k": "フ",
+"r": "fu",
+"row": "h",
+"group": "basic"
+},
+{
+"h": "へ",
+"k": "ヘ",
+"r": "he",
+"row": "h",
+"group": "basic"
+},
+{
+"h": "ほ",
+"k": "ホ",
+"r": "ho",
+"row": "h",
+"group": "basic"
+},
+{
+"h": "ま",
+"k": "マ",
+"r": "ma",
+"row": "m",
+"group": "basic"
+},
+{
+"h": "み",
+"k": "ミ",
+"r": "mi",
+"row": "m",
+"group": "basic"
+},
+{
+"h": "む",
+"k": "ム",
+"r": "mu",
+"row": "m",
+"group": "basic"
+},
+{
+"h": "め",
+"k": "メ",
+"r": "me",
+"row": "m",
+"group": "basic"
+},
+{
+"h": "も",
+"k": "モ",
+"r": "mo",
+"row": "m",
+"group": "basic"
+},
+{
+"h": "や",
+"k": "ヤ",
+"r": "ya",
+"row": "y",
+"group": "basic"
+},
+{
+"h": "ゆ",
+"k": "ユ",
+"r": "yu",
+"row": "y",
+"group": "basic"
+},
+{
+"h": "よ",
+"k": "ヨ",
+"r": "yo",
+"row": "y",
+"group": "basic"
+},
+{
+"h": "ら",
+"k": "ラ",
+"r": "ra",
+"row": "r",
+"group": "basic"
+},
+{
+"h": "り",
+"k": "リ",
+"r": "ri",
+"row": "r",
+"group": "basic"
+},
+{
+"h": "る",
+"k": "ル",
+"r": "ru",
+"row": "r",
+"group": "basic"
+},
+{
+"h": "れ",
+"k": "レ",
+"r": "re",
+"row": "r",
+"group": "basic"
+},
+{
+"h": "ろ",
+"k": "ロ",
+"r": "ro",
+"row": "r",
+"group": "basic"
+},
+{
+"h": "わ",
+"k": "ワ",
+"r": "wa",
+"row": "w",
+"group": "basic"
+},
+{
+"h": "を",
+"k": "ヲ",
+"r": "o",
+"row": "w",
+"group": "basic"
+},
+{
+"h": "ん",
+"k": "ン",
+"r": "n",
+"row": "n",
+"group": "basic"
+},
+{
+"h": "が",
+"k": "ガ",
+"r": "ga",
+"row": "g",
+"group": "dakuten"
+},
+{
+"h": "ぎ",
+"k": "ギ",
+"r": "gi",
+"row": "g",
+"group": "dakuten"
+},
+{
+"h": "ぐ",
+"k": "グ",
+"r": "gu",
+"row": "g",
+"group": "dakuten"
+},
+{
+"h": "げ",
+"k": "ゲ",
+"r": "ge",
+"row": "g",
+"group": "dakuten"
+},
+{
+"h": "ご",
+"k": "ゴ",
+"r": "go",
+"row": "g",
+"group": "dakuten"
+},
+{
+"h": "ざ",
+"k": "ザ",
+"r": "za",
+"row": "z",
+"group": "dakuten"
+},
+{
+"h": "じ",
+"k": "ジ",
+"r": "ji",
+"row": "z",
+"group": "dakuten"
+},
+{
+"h": "ず",
+"k": "ズ",
+"r": "zu",
+"row": "z",
+"group": "dakuten"
+},
+{
+"h": "ぜ",
+"k": "ゼ",
+"r": "ze",
+"row": "z",
+"group": "dakuten"
+},
+{
+"h": "ぞ",
+"k": "ゾ",
+"r": "zo",
+"row": "z",
+"group": "dakuten"
+},
+{
+"h": "だ",
+"k": "ダ",
+"r": "da",
+"row": "d",
+"group": "dakuten"
+},
+{
+"h": "ぢ",
+"k": "ヂ",
+"r": "ji",
+"row": "d",
+"group": "dakuten"
+},
+{
+"h": "づ",
+"k": "ヅ",
+"r": "zu",
+"row": "d",
+"group": "dakuten"
+},
+{
+"h": "で",
+"k": "デ",
+"r": "de",
+"row": "d",
+"group": "dakuten"
+},
+{
+"h": "ど",
+"k": "ド",
+"r": "do",
+"row": "d",
+"group": "dakuten"
+},
+{
+"h": "ば",
+"k": "バ",
+"r": "ba",
+"row": "b",
+"group": "dakuten"
+},
+{
+"h": "び",
+"k": "ビ",
+"r": "bi",
+"row": "b",
+"group": "dakuten"
+},
+{
+"h": "ぶ",
+"k": "ブ",
+"r": "bu",
+"row": "b",
+"group": "dakuten"
+},
+{
+"h": "べ",
+"k": "ベ",
+"r": "be",
+"row": "b",
+"group": "dakuten"
+},
+{
+"h": "ぼ",
+"k": "ボ",
+"r": "bo",
+"row": "b",
+"group": "dakuten"
+},
+{
+"h": "ぱ",
+"k": "パ",
+"r": "pa",
+"row": "p",
+"group": "dakuten"
+},
+{
+"h": "ぴ",
+"k": "ピ",
+"r": "pi",
+"row": "p",
+"group": "dakuten"
+},
+{
+"h": "ぷ",
+"k": "プ",
+"r": "pu",
+"row": "p",
+"group": "dakuten"
+},
+{
+"h": "ぺ",
+"k": "ペ",
+"r": "pe",
+"row": "p",
+"group": "dakuten"
+},
+{
+"h": "ぽ",
+"k": "ポ",
+"r": "po",
+"row": "p",
+"group": "dakuten"
+},
+{
+"h": "きゃ",
+"k": "キャ",
+"r": "kya",
+"row": "k",
+"group": "youon"
+},
+{
+"h": "きゅ",
+"k": "キュ",
+"r": "kyu",
+"row": "k",
+"group": "youon"
+},
+{
+"h": "きょ",
+"k": "キョ",
+"r": "kyo",
+"row": "k",
+"group": "youon"
+},
+{
+"h": "しゃ",
+"k": "シャ",
+"r": "sha",
+"row": "s",
+"group": "youon"
+},
+{
+"h": "しゅ",
+"k": "シュ",
+"r": "shu",
+"row": "s",
+"group": "youon"
+},
+{
+"h": "しょ",
+"k": "ショ",
+"r": "sho",
+"row": "s",
+"group": "youon"
+},
+{
+"h": "ちゃ",
+"k": "チャ",
+"r": "cha",
+"row": "c",
+"group": "youon"
+},
+{
+"h": "ちゅ",
+"k": "チュ",
+"r": "chu",
+"row": "c",
+"group": "youon"
+},
+{
+"h": "ちょ",
+"k": "チョ",
+"r": "cho",
+"row": "c",
+"group": "youon"
+},
+{
+"h": "にゃ",
+"k": "ニャ",
+"r": "nya",
+"row": "n",
+"group": "youon"
+},
+{
+"h": "にゅ",
+"k": "ニュ",
+"r": "nyu",
+"row": "n",
+"group": "youon"
+},
+{
+"h": "にょ",
+"k": "ニョ",
+"r": "nyo",
+"row": "n",
+"group": "youon"
+},
+{
+"h": "ひゃ",
+"k": "ヒャ",
+"r": "hya",
+"row": "h",
+"group": "youon"
+},
+{
+"h": "ひゅ",
+"k": "ヒュ",
+"r": "hyu",
+"row": "h",
+"group": "youon"
+},
+{
+"h": "ひょ",
+"k": "ヒョ",
+"r": "hyo",
+"row": "h",
+"group": "youon"
+},
+{
+"h": "みゃ",
+"k": "ミャ",
+"r": "mya",
+"row": "m",
+"group": "youon"
+},
+{
+"h": "みゅ",
+"k": "ミュ",
+"r": "myu",
+"row": "m",
+"group": "youon"
+},
+{
+"h": "みょ",
+"k": "ミョ",
+"r": "myo",
+"row": "m",
+"group": "youon"
+},
+{
+"h": "りゃ",
+"k": "リャ",
+"r": "rya",
+"row": "r",
+"group": "youon"
+},
+{
+"h": "りゅ",
+"k": "リュ",
+"r": "ryu",
+"row": "r",
+"group": "youon"
+},
+{
+"h": "りょ",
+"k": "リョ",
+"r": "ryo",
+"row": "r",
+"group": "youon"
+},
+{
+"h": "ぎゃ",
+"k": "ギャ",
+"r": "gya",
+"row": "g",
+"group": "youon"
+},
+{
+"h": "ぎゅ",
+"k": "ギュ",
+"r": "gyu",
+"row": "g",
+"group": "youon"
+},
+{
+"h": "ぎょ",
+"k": "ギョ",
+"r": "gyo",
+"row": "g",
+"group": "youon"
+},
+{
+"h": "じゃ",
+"k": "ジャ",
+"r": "ja",
+"row": "j",
+"group": "youon"
+},
+{
+"h": "じゅ",
+"k": "ジュ",
+"r": "ju",
+"row": "j",
+"group": "youon"
+},
+{
+"h": "じょ",
+"k": "ジョ",
+"r": "jo",
+"row": "j",
+"group": "youon"
+},
+{
+"h": "びゃ",
+"k": "ビャ",
+"r": "bya",
+"row": "b",
+"group": "youon"
+},
+{
+"h": "びゅ",
+"k": "ビュ",
+"r": "byu",
+"row": "b",
+"group": "youon"
+},
+{
+"h": "びょ",
+"k": "ビョ",
+"r": "byo",
+"row": "b",
+"group": "youon"
+},
+{
+"h": "ぴゃ",
+"k": "ピャ",
+"r": "pya",
+"row": "p",
+"group": "youon"
+},
+{
+"h": "ぴゅ",
+"k": "ピュ",
+"r": "pyu",
+"row": "p",
+"group": "youon"
+},
+{
+"h": "ぴょ",
+"k": "ピョ",
+"r": "pyo",
+"row": "p",
+"group": "youon"
+},
+{
+"h": "ぢゃ",
+"k": "ヂャ",
+"r": "ja",
+"row": "j",
+"group": "youon"
+},
+{
+"h": "ぢゅ",
+"k": "ヂュ",
+"r": "ju",
+"row": "j",
+"group": "youon"
+},
+{
+"h": "ぢょ",
+"k": "ヂョ",
+"r": "jo",
+"row": "j",
+"group": "youon"
+},
+{
+"h": null,
+"k": "ティ",
+"r": "ti",
+"row": "t",
+"group": "extended"
+},
+{
+"h": null,
+"k": "ディ",
+"r": "di",
+"row": "d",
+"group": "extended"
+},
+{
+"h": null,
+"k": "トゥ",
+"r": "tu",
+"row": "t",
+"group": "extended"
+},
+{
+"h": null,
+"k": "ドゥ",
+"r": "du",
+"row": "d",
+"group": "extended"
+},
+{
+"h": null,
+"k": "ファ",
+"r": "fa",
+"row": "f",
+"group": "extended"
+},
+{
+"h": null,
+"k": "フィ",
+"r": "fi",
+"row": "f",
+"group": "extended"
+},
+{
+"h": null,
+"k": "フェ",
+"r": "fe",
+"row": "f",
+"group": "extended"
+},
+{
+"h": null,
+"k": "フォ",
+"r": "fo",
+"row": "f",
+"group": "extended"
+},
+{
+"h": null,
+"k": "ウィ",
+"r": "wi",
+"row": "w",
+"group": "extended"
+},
+{
+"h": null,
+"k": "ウェ",
+"r": "we",
+"row": "w",
+"group": "extended"
+},
+{
+"h": null,
+"k": "ウォ",
+"r": "wo",
+"row": "w",
+"group": "extended"
+},
+{
+"h": null,
+"k": "ヴァ",
+"r": "va",
+"row": "v",
+"group": "extended"
+},
+{
+"h": null,
+"k": "ヴィ",
+"r": "vi",
+"row": "v",
+"group": "extended"
+},
+{
+"h": null,
+"k": "ヴ",
+"r": "vu",
+"row": "v",
+"group": "extended"
+},
+{
+"h": null,
+"k": "ヴェ",
+"r": "ve",
+"row": "v",
+"group": "extended"
+},
+{
+"h": null,
+"k": "ヴォ",
+"r": "vo",
+"row": "v",
+"group": "extended"
+},
+{
+"h": null,
+"k": "シェ",
+"r": "she",
+"row": "s",
+"group": "extended"
+},
+{
+"h": null,
+"k": "ジェ",
+"r": "je",
+"row": "j",
+"group": "extended"
+},
+{
+"h": null,
+"k": "チェ",
+"r": "che",
+"row": "c",
+"group": "extended"
+},
+{
+"h": null,
+"k": "ツァ",
+"r": "tsa",
+"row": "t",
+"group": "extended"
+},
+{
+"h": null,
+"k": "イェ",
+"r": "ye",
+"row": "y",
+"group": "extended"
+},
+{
+"h": null,
+"k": "デュ",
+"r": "dyu",
+"row": "d",
+"group": "extended"
+},
+{
+"h": null,
+"k": "テュ",
+"r": "tyu",
+"row": "t",
+"group": "extended"
+}
+],
+"lookalikes": {
+"katakana": [
+[
+"シ",
+"ツ"
+],
+[
+"ソ",
+"ン"
+],
+[
+"シ",
+"ツ",
+"ソ",
+"ン"
+],
+[
+"ク",
+"ケ",
+"タ"
+],
+[
+"コ",
+"ユ",
+"ロ"
+],
+[
+"ウ",
+"ワ",
+"フ"
+],
+[
+"ヌ",
+"メ",
+"ス"
+],
+[
+"チ",
+"テ"
+],
+[
+"マ",
+"ム"
+],
+[
+"ル",
+"レ"
+],
+[
+"ノ",
+"メ"
+],
+[
+"ラ",
+"ヲ"
+]
+],
+"hiragana": [
+[
+"ぬ",
+"め"
+],
+[
+"ね",
+"れ",
+"わ"
+],
+[
+"さ",
+"ち"
+],
+[
+"は",
+"ほ"
+],
+[
+"る",
+"ろ"
+],
+[
+"き",
+"さ"
+],
+[
+"い",
+"り"
+],
+[
+"あ",
+"お"
+],
+[
+"ま",
+"も"
+],
+[
+"く",
+"へ"
+]
+]
+}
+}

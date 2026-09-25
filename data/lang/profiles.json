@@ -1,0 +1,30 @@
+{
+  "about": "Reference player profiles for the pacing checker (tools/lang/pacing.py) and as starting presets for the level check. words: a word is known if its JLPT level >= jlpt (5 = N5 only) and, when freq is set, its frequency rank <= freq; or if its rank <= freq_any; plus known, minus unknown (surface or dictionary form). kanji: band 0-3 as in game/notes/day1-design.md (0 all hidden; 1 N5 learning; 2 N5 readable, N4 learning; 3 N5+N4 readable, rest learning), then readable/learning/hidden lists override per kanji; readable_jlpt makes every kanji at that level or easier readable. grammar: known ids from grammar.json, or all points with level >= known_level.",
+  "profiles": {
+    "beginner": {
+      "name": "Absolute beginner (はじめて)",
+      "hiragana": "weak",
+      "katakana": "weak",
+      "words": {"jlpt": null, "known": []},
+      "kanji": {"band": 0},
+      "grammar": {"known": []}
+    },
+    "jorgen": {
+      "name": "Early intermediate: mid-N5 with gaps (Jørgen, placement quiz 2026-09-24)",
+      "hiragana": "ok",
+      "katakana": "weak",
+      "words": {"jlpt": 5, "freq": 3000, "known": ["はい", "うん", "ありがとう", "おはよう", "すごい", "ちょっと", "よろしく", "よろしくお願いします", "お願い"], "unknown": []},
+      "kanji": {"band": 1, "readable": "日月人山水大小上下中食行見電車死", "learning": "先生学会社時間"},
+      "grammar": {"known": ["da", "wa", "no-mod", "question", "ne", "yo", "te-request", "te-su", "te-gu", "te-bu-mu-nu", "te-u-tsu-ru", "te-ku", "te-ichidan", "te-and", "dict-form", "o", "ni", "he", "ga", "de", "mo", "to-and", "counters", "desu", "masu", "ka", "tai", "suki", "kara-made", "nai", "janai", "te-kudasai", "mashou"],
+                  "note": "Quiz: particles で/に/が, 〜たい, 〜てください OK. Missed でした, ことがある, 〜やすい, 〜ている+から, 〜ても, relative clauses. Casual past, ないで, けど and explanatory の are treated as not yet solid."}
+    },
+    "n3": {
+      "name": "N3 learner",
+      "hiragana": "ok",
+      "katakana": "ok",
+      "words": {"jlpt": 3, "freq_any": 3000, "known": []},
+      "kanji": {"band": 3, "readable_jlpt": 3},
+      "grammar": {"known_level": 3}
+    }
+  }
+}

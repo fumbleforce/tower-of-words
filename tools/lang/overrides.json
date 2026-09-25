@@ -1,0 +1,113 @@
+{
+  "about": "Fixes for the tokeniser. names: proper nouns (reading, English); readings: surface -> reading wherever the surface appears as one token; ids: surface -> JMdict id when the automatic match is wrong; merge: strings that must stay one token (set phrases), either a string or {s, b base form, r reading, id}; glosses: JMdict id -> shorter or context-right English for words.json. Add to this file, then rerun tools/lang/build.sh. lines: a whole line's tokens and grammar, for cases the tokeniser can't get (並べ alone reads as 並べる; in the spell it is the command form of 並ぶ).",
+  "names": {
+    "天川": {
+      "r": "あまかわ",
+      "en": "Amakawa (the company)"
+    },
+    "黒田": {
+      "r": "くろだ",
+      "en": "Kuroda (Rei's family name)"
+    },
+    "石橋": {
+      "r": "いしばし",
+      "en": "Ishibashi (the gate guard)"
+    },
+    "ミオ": {
+      "en": "Mio"
+    },
+    "エミ": {
+      "en": "Emi"
+    },
+    "レイ": {
+      "en": "Rei"
+    },
+    "カオリ": {
+      "en": "Kaori"
+    },
+    "ゴロー": {
+      "en": "Goro"
+    },
+    "ジュン": {
+      "en": "Jun"
+    },
+    "アオイ": {
+      "en": "Aoi"
+    },
+    "ユヅキ": {
+      "en": "Yuzuki"
+    },
+    "シティ": {
+      "en": "City (in Amakawa City)"
+    }
+  },
+  "readings": {
+    "明日": "あした",
+    "今日": "きょう",
+    "一人": "ひとり",
+    "二人": "ふたり",
+    "私": "わたし",
+    "今": "いま",
+    "棟": "とう",
+    "日本語": "にほんご",
+    "日本": "にほん"
+  },
+  "ids": {
+    "おつ": 2827267,
+    "紙づまり": 2359390
+  },
+  "merge": [
+    "気にするな",
+    "気にしないで",
+    "よろしくお願いします",
+    "紙づまり",
+    "おつかれ",
+    "まもなく",
+    "いらっしゃい",
+    {
+      "s": "つかれた",
+      "b": "つかれる",
+      "id": 1483740
+    },
+    {
+      "s": "はやっ",
+      "r": "はやっ",
+      "b": "早い",
+      "id": 1404975
+    },
+    "ようこそ",
+    {
+      "s": "IDカード",
+      "r": "アイディーカード",
+      "id": 1958570
+    },
+    {
+      "s": "なおした",
+      "r": "なおした",
+      "b": "なおす",
+      "id": 1599390
+    }
+  ],
+  "glosses": {
+    "1000920": "welcome (shop greeting); come",
+    "2827267": "good work; see you (said when leaving work)",
+    "1161170": "technically; more or less",
+    "2019810": "never mind; don't worry about it"
+  },
+  "lines": {
+    "並べ": {
+      "t": [
+        {
+          "s": "並べ",
+          "r": "ならべ",
+          "b": "並ぶ",
+          "id": 1508380,
+          "p": "v"
+        }
+      ],
+      "g": [
+        "imperative"
+      ]
+    }
+  }
+}
