@@ -97,6 +97,7 @@ Everything Jørgen has asked for, and how we work. Every agent reads this before
 - QA means reading as a player, not only automated runs: dump every branch as a transcript and read it; look at every screenshot.
 - Report facts, never self-grade ("nailed it"). Describe what's actually in an image or build, and admit gaps.
 - Budget: Replicate cap $20 total (ledger in tools/spend.json). Prefer local models.
+- Repo hygiene (2026-09-25): the repo holds only the game and the review pages currently being shown to Jørgen. Once a round is decided, move its page and media out of the repo to ~/repo/japanese-archive (not deleted). Approved reference images live in art/approved/, voice clone clips in tools/voice-refs/, never inside a review page folder.
 - Keep this guide updated whenever Jørgen gives feedback.
 
 ## Live links
