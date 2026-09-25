@@ -1,76 +1,203 @@
 # Day 1 draft
 
-Revised 2026-09-25. Same format as `transcripts/day1.md`. Design and rules are in `day1-design.md`.
+Revised 2026-09-25 (train opening added the same day). Same format as `transcripts/day1.md`. Design and rules are in `day1-design.md`.
 Notation: `[voice -1]` spends a voice mark, `[noise +1]` adds hidden noise, `[time +N]` moves the clock N minutes, `[set flag]` sets a flag, `[sus mio +1]` adds suspicion with one person. `SPELL` blocks list what each form does. "→ retry" means the ring comes back (each try costs a mark), "→ works" means the scene moves on. Lines marked (kept) are unchanged from the old day 1, so their voice files still match.
 
-## monorail
-[scene: monorail, placeholder image] [clock 08:40]
-(The Amakawa monorail runs out across Tokyo Bay to the company's island. At this hour the carriage is empty.)
-(Your boxes went ahead last week. You have a backpack, and a company phone that buzzed the moment you sat down.)
-
-### phone: new-hire app (full screen on the phone, a phone-sized panel on desktop)
-[app] ようこそ、天川へ。  /  Welcome to Amakawa.
-  small print: Amakawa new-hire app. Name for your ID card (as on your passport): [text field, optional]
-[app] ここが天川シティです。  /  This is Amakawa City.
-  map: 駅 (station, the island's edge), 本社 (the tower), 寮 (dorms, next to the station). Every label can be tapped.
-[app] あなたの部屋  /  Your room
-[app] 寮・二階　203  /  Dorm, second floor, room 203
-[app] 荷物は、もう部屋にあります。  /  Your luggage is already in your room.
-[app] 企画室7  /  (the ID card: the player's name, Planning Office 7, today's date)
-[app] ゲートで見せてください。  /  Please show it at the gate.
-[app] チェック（２分）  /  A Japanese check (2 minutes). "It sets how much reading help you get."
-  1) チェックする  /  Take the check
-  2) はじめて  /  New to Japanese (skip)
-  3) すこし  /  Some study: kana fine, a few kanji (skip)
-  4) N3ぐらい  /  Comfortable at N3 (skip)
-  (the three presets are the reference players in data/lang/profiles.json)
-  (If a saved profile exists: "Your level is saved." 1) そのまま (keep it) 2) もう一度 (check again))
-  CHECK 1 hiragana, pick the romaji: えき (eki) · みぎ (migi) · でぐち (deguchi) · しゃいん (shain). Stops after two misses.
-  CHECK 2 katakana, pick the romaji: カード (kaado) · コピー (kopii) · ゲーム (geemu) · エレベーター (erebeetaa). Stops after two misses.
-  CHECK 3 kanji: tap the words you can read: 人 · 右 · 出口 · 今日 · 会社 · 地下 · 三階 · 会議 · 部屋 · 言葉 · 営業 · 企画. Then pick the reading for up to three of the tapped ones.
-  CHECK 4 grammar, what does the speaker want: 来てね (come) · 止まって (stop) · 話しかけないで (don't talk to me) · 行こう (let's go).
-  RESULT (English, one screen): what the check found and what the game will do (romaji or kana readings, which kanji show as kana, katakana romaji on tap).
-[the phone closes]
-
-Announcement: まもなく、天川シティ中央駅です。お出口は右側です。  /  "Arriving shortly at Amakawa City Central Station. The exit is on the right." (kept)
-CHOICE (English shown): The train slows down. Which doors?
-  1) 右のドア  /  The right-hand doors
-    (The right-hand doors slide open onto the platform.)
-  2) 左のドア  /  The left-hand doors
-    (The left-hand doors stay shut. The right-hand ones open behind you, and you cross the empty carriage.)  [time +1]
-[message from Emi] おはよう！九時に地下二階に来てね。  /  Morning! Come to basement level 2 at nine.
+## train (the opening; spec: train-opening-script.md, approved 2026-09-25)
+New Game starts here: no name entry, level check or onboarding app. Placeholder art for the carriage, the island reveal, the doors and the platform (TODO.md lists the shots). Rei is labelled "Woman" until she says her name. Tap help: a kanji word once for the reading above, again for the meaning below; kana words go straight to the meaning. Cues: "Tap a word for help." on ありがとう, "Tap again for the meaning." after the first tap on 初日 (cue-prompted taps don't count as evidence). "Supported" lines replace later ones once the player has needed help on three different lines.
+[scene: carriage, placeholder art]
+[clock 08:40]
+[set reiNamed = false]
+[prop on screen: seat]
+[sound: keys]
+[sound: clack]
+(A monorail carriage. The woman beside the empty seat is typing. Her coffee cup tips toward her laptop.)
+Woman (voice only): あ。  /  "Ah."
+CHOICE: The cup is tipping.
+  1) [Catch the cup]
+    [prop on screen: seat-caught]
+    (You steady the cup. She catches her folder with her free hand.)
+  2) [Warn her]
+    You: あ、コーヒー。  /  "Ah, coffee!"
+    [prop on screen: seat-saved]
+    (She catches the cup and shuts the laptop with her other hand.)
+[prop closes]
+[show rei cold]
+(She checks the lid, then looks at you properly.)
+Woman [cold]: ありがとう。  /  "Thanks."  [tap cue: "Tap a word for help."]
+(She puts the laptop away, stacks the folder on her lap and pats the seat she just cleared.)
+Woman [cold]: どうぞ。  /  "Go ahead."
+CHOICE: 
+  1) [Sit]
+    (You sit and put your backpack between your feet. Sea and sky slide past the window.)
+[prop on screen: badge]
+[clock 08:43]
+(You take your new company badge out of its sleeve. The protective film is still on it.)
+(She glances at the badge, then at you.)
+Woman [cold]: 初日？  /  "First day?"  [tap cue: "Tap again for the meaning." after the first tap]
+CHOICE: 
+  1) You: うん。  /  "Yeah."
+  2) [Nod]
+    (You nod.)
+(She gives a small nod back.)
+[prop closes]
+CHOICE: Ask her something, or let it be.
+  1) You: そっちは？  /  "And you?"
+    (She presses down a worn corner of her own badge sleeve with her thumb.)
+    Woman [cold]: 三年目。  /  "Third year."
+  2) [Say nothing]
+[everyone leaves the frame]
+[scene: reveal, placeholder art]
+(Outside, the line runs across the water to an island of towers.)
+Woman (voice only): 全部、会社。  /  "All of it's the company."
+[scene: carriage, placeholder art]
+[show rei cold]
+CHOICE: The island is getting close.
+  1) You: 全部？  /  "All of it?"
+    Woman [cold]: うん。  /  "Yeah."
+  2) You: すごいね。  /  "That's impressive."  (supported: 大きいね。 / "It's big.", only if 大きい is known)
+    IF the player needed help on 3+ lines (supported version):
+      Woman [cold]: うん。  /  "Yeah."
+    ELSE:
+      Woman [cold]: 最初はね。  /  "At first."
+  3) [Keep looking]
+    [everyone leaves the frame]
+    [scene: reveal, placeholder art]
+    (She leaves you to it. The towers get closer.)
+    [scene: carriage, placeholder art]
+    [show rei cold]
+[prop on screen: dorm]
+(You put the badge back in your backpack. Another card is in there with it.)
+(She notices the card.)
+Woman [cold]: 寮？  /  "The dorm?"
+CHOICE: 
+  1) You: うん。  /  "Yeah."
+  2) [Nod]
+[prop closes]
+[your phone: housing]
+(You open the housing app on your phone to show her. It has a delivery photo of your boxes at door 203.)
+Woman [cold]: 今日から？  /  "Starting today?"
+You: うん。  /  "Yeah."
+[phone closes]
+(She shifts along the bench to give you a little more room.)
+[clock 08:46]
+[sound: buzz]
+[your phone: voicemail (tap Play)]
+Emi (voice message): おはよう！  /  "Morning!"
+Emi (voice message): もうすぐ？  /  "Nearly here?"
+CHOICE: 
+  1) You (voice reply): もうすぐ。  /  "Nearly there."
+    [your phone: recording]
+    Emi (voice message): わかった。  /  "Got it."
+  2) You (voice reply): ちょっと、緊張してる。  /  "I'm a little nervous."
+    [your phone: recording]
+    Emi (voice message): 大丈夫。  /  "You'll be fine."
+IF the player needed help on 3+ lines (supported version):
+  Emi (voice message): 待ってるね。  /  "I'll be waiting."
+ELSE:
+  Emi (voice message): 会社で待ってるね。  /  "I'll be waiting at the office."
+[phone closes]
+(She recognised the voice. She looks from your phone to your badge.)
+Woman [cold]: 上司、エミ？  /  "Emi's your boss?"
+CHOICE: 
+  1) You: うん。  /  "Yeah."
+  2) [Nod]
+(She looks as if she might say something, then takes a sip of coffee instead.)
+[prop on screen: folder]
+(She opens her folder again: a short table of figures.)
+CHOICE: Talk, or let her work?
+  1) You: エミ、どんな人？  /  "What's Emi like?"
+    [set askedAboutEmi]
+    Woman [cold]: 優しいよ。  /  "She's nice."
+    IF the player needed help on 3+ lines (supported version):
+      (She puts one sheet back into the folder.)
+      Woman [cold]: 仕事、多いよ。  /  "There's a lot of work."
+    ELSE:
+      (She puts one sheet back into the folder.)
+      Woman [cold]: 頼みごと、多いけど。  /  "Asks a lot of favours, though."
+  2) [Let her work]
+    (A few quiet seconds. She crosses out one line, checks another, and closes the folder.)
+[prop closes]
+[sound: buzz]
+[prop on screen: caller]
+(Her phone lights up. She sees the name and silences it.)
+[set sawReiSilenceEmi]
+[prop closes]
+IF askedAboutEmi:
+  (She catches you looking.)
+  Woman [cold]: あとで。  /  "Later."
+ELSE:
+  (She puts the phone away.)
+[clock 08:49]
+[sound: chime]
+(The train slows into a station and stops.)
+Announcement: 天川シティ、天川シティです。  /  "Amakawa City. Amakawa City."
+[sound: door]
+[everyone leaves the frame]
+[scene: doors, placeholder art]
+(The doors open. People further along the carriage stand up. You pick up your backpack.)
+[show rei cold]
+[prop on screen: reibadge]
+(She tucks the folder under her arm. Her badge turns face out as she stands.)
+[set reiNamed]
+(She points at herself with the hand holding the cup.)
+Rei [cold]: レイ。営業。  /  "Rei. Sales."
+CHOICE: 
+  1) You: よろしく。  /  "Nice to meet you."
+  2) [Smile and nod]
+[prop closes]
+(She nods back.)
+Rei [cold]: エミによろしく。  /  "Say hi to Emi."
+(At the open door she steps aside to let you out first.)
+Rei [cold]: どうぞ。  /  "Go ahead."
+CHOICE: 
+  1) [Step onto the platform]
+[everyone leaves the frame]
+[scene: platform, placeholder art]
+(You step out first. Rei follows, heads for the stairs, and looks back once to check you're coming. Then she's gone into the crowd.)
+[sound: buzz]
+[your phone: photo from Emi: 入口は、ここ。  /  "Here's the entrance."  → Keep this photo]
+[phone closes]
+[autosave]
 → gate
 
 ## gate
-[scene: gate] [clock 08:48]
-(Amakawa Tower. A row of glass gates, and nobody at the security desk.)
-(You hold your phone to the reader. The gate beeps and stays shut. It doesn't know your new ID yet.)
-Ishibashi (voice from a speaker, no sprite): ちょっと、止まって。  /  "Hold it. Stop." (kept)
+[scene: gate]
+[clock 08:52]
+(Down the station steps and across a square, into a tall glass lobby.)
+[Emi's photo shown; tap the matching entrance: Find the entrance from Emi's photo. Tap it.]
+(The same gates as in Emi's photo. Nobody else around.)
+(You hold your new badge to a reader. It beeps. The gate doesn't open.)
 (A man's voice, from a speaker above the gates. Somewhere, a camera is pointed at you.)
-Ishibashi: 見ない顔だな。  /  "Don't know your face."
-Ishibashi: IDカード、カメラに見せて。  /  "Show your ID card to the camera." 
+Ishibashi (voice only): ちょっと、止まって。  /  "Hold it. Stop."
+Ishibashi (voice only): 見ない顔だな。  /  "Don't know your face."
+Ishibashi (voice only): IDカード、カメラに見せて。  /  "Show your ID card to the camera."
 CHOICE: What do you do?
-  1) IDをカメラに見せる  /  Show your ID to the camera
-  2) 笑う  /  Smile at the camera
-    Ishibashi: ……いや、ID。  /  "...No. ID."  → back to the choice
-  3) （何もしない）  /  Do nothing
-    Ishibashi: ……ID。  /  "...ID."  → back to the choice
-(You hold the ID on your phone up to the camera.)
-Ishibashi: ……新人か。  /  "...A new hire."
-Ishibashi: 企画室7？　地下の連中か。  /  "Planning Office 7? That basement lot."
-Ishibashi: ……カメラで、見てる。  /  "...I'm watching. On camera." 
+  1) You: IDをカメラに見せる  /  Show your ID to the camera
+  2) You: 笑う  /  Smile at the camera  [back to the choice]
+    Ishibashi (voice only): ……いや、ID。  /  "...No. ID."
+  3) You: （何もしない）  /  Do nothing  [back to the choice]
+    Ishibashi (voice only): ……ID。  /  "...ID."
+(You hold your badge up to the camera.)
+Ishibashi (voice only): ……新人か。  /  "...A new hire."
+Ishibashi (voice only): 企画室7？　地下の連中か。  /  "Planning Office 7? That basement lot."
+Ishibashi (voice only): ……カメラで、見てる。  /  "...I'm watching. On camera."
 CHOICE: Your reply
-  1) はい、よろしくお願いします。  /  "Yes. Nice to meet you." (polite)  [ishibashi +1]
-    Ishibashi: ……ん。  /  "...Mm." (kept)
-  2) うん、よろしく。  /  "Yeah, nice to meet you." (casual)  [ishibashi -1] [set casualGuard] [sus ishibashi +1]
-    Ishibashi: ……なれなれしいな。  /  "...Bit familiar, aren't you." (kept)
-  3) ……いつも？  /  "...Always?"
-    Ishibashi: ……いつも。  /  "...Always." 
-(The gate turns green.)
+  1) You: はい、よろしくお願いします。  /  "Yes. Nice to meet you." (polite)
+    Ishibashi (voice only): ……ん。  /  "...Mm."
+  2) You: うん、よろしく。  /  "Yeah, nice to meet you." (casual)
+    Ishibashi (voice only): ……なれなれしいな。  /  "...Bit familiar, aren't you." Casual speech with an older stranger on duty comes across as cheeky.
+    [set casualGuard]
+    [suspicion ishibashi +1]
+  3) You: ……いつも？  /  "...Always?"
+    Ishibashi (voice only): ……いつも。  /  "...Always."
+(The light turns green and the gate lets you through.)
+[task: 企画室7]
 → elevator_b2
 
 ## elevator_b2
-[floor panel over the lift backdrop] target: 地下二階 企画室7
+(Past the gates, a lift. Your team is somewhere in this building.)
+[floor panel over the lift backdrop] target: 地下二階 企画室7  (panel hint: "Your badge says 企画室7. Press the round button next to your floor.")
 Wrong floors (each costs a couple of minutes, nothing else):
   (day-1 labels, one new word each at most: 屋上 · 五階 役員室 · 三階 営業部 · 二階 会議室 · 一階 ロビー · 地下一階 コピー室 · 地下二階 企画室7)
   屋上: (Wind, and rows of tomato plants. Wrong floor.)
@@ -84,7 +211,7 @@ Wrong floors (each costs a couple of minutes, nothing else):
 ## office
 [scene: office] [music: office]
 (Basement level two. Pipes along the ceiling, cup noodles on the desks, no windows.)
-Mio (bored): ……誰？  /  "...Who are you?" (kept)
+Mio (bored, labelled "Woman with headphones" until she says her name): ……誰？  /  "...Who are you?" (kept)
 CHOICE: Your reply
   1) 新人だよ。よろしく。  /  "The new guy. Nice to meet you." (casual)  [mio +1]
     Mio: ふーん。……ミオ。  /  "Hmm. ...Mio." 
@@ -123,7 +250,7 @@ Mio: ……また、つながらない。  /  "...Lost the connection again."
 → elevator_b1
 
 ## elevator_b1
-[floor panel] target: 地下一階 コピー室
+[floor panel] target: 地下一階 コピー室  (hint: "Emi said: コピー室は、地下一階。")
   地下二階: (The office again. The copy room is somewhere else.)
   others: as above
 → copyroom
@@ -245,7 +372,7 @@ ELSE: (You staple the sets by hand. The stapler, at least, has never been broken
 → elevator_back
 
 ## elevator_back
-[floor panel] target: 地下二階 企画室7  (地下一階: "You're already here.")
+[floor panel] target: 地下二階 企画室7  (地下一階: "You're already here."; hint: "Back to your office: 企画室7.")
 → office2
 
 ## office2
@@ -284,18 +411,20 @@ Emi: 会議の前に、ね。  /  "Before the meeting, OK?"
 Mio: 黒田レイ？　……がんばって。  /  "Rei Kuroda? ...Good luck."
 Mio: あの人、こわいよ。  /  "She's scary." 
 Emi (teasing): こわくないよ。……ちょっとしか。  /  "She's not scary. ...Only a little."
+(Kuroda Rei. The woman from the train.)
 → elevator_3f
 
 ## elevator_3f
-[floor panel] target: 三階 営業部  (wrong floors as above; 地下二階: "The office again.")
+[floor panel] target: 三階 営業部  (hint: "Emi said: 三階の営業部。"; wrong floors as above; 地下二階: "The office again.")
 → sales
 
 ## sales
 [scene: sales, placeholder image]
 (Third floor, Sales. Phones ringing, fast keyboards, and nobody looks up.)
-(At the window desk, a woman with a silver ponytail is typing. The nameplate says 黒田.)
-(You tell her you're from Planning 7, and that Emi sent you.)
-Rei (cold): 企画室7の新人？　……ああ、数字ね。  /  "The new guy from Planning 7? ...Ah, the numbers."
+(At the window desk, Rei from the train is typing. The nameplate says 黒田.)
+(You tell her Emi sent you.)
+Rei (cold): あ、電車の。  /  "Oh. The one from the train." (she met him on the monorail)
+Rei (cold): ……エミの数字ね。  /  "...Emi's numbers, right."
 Rei (cold): 今、忙しい。午後に来て。  /  "I'm busy. Come back this afternoon." 
 (The man at the next desk is watching you over his monitor.)
 CHOICE: Rei won't look up.  (comes back after 1, 2, 5 and after any spell that didn't get the folder; options 1, 2 and 5 go away once used)
@@ -406,7 +535,7 @@ IF copies100:
 Emi (smile): 今日は、もう帰っていいよ。  /  "You can go home for today."
 Emi: 寮、わかる？  /  "Do you know where the dorm is?"
 CHOICE: Your reply
-  1) うん、アプリで見た。  /  "Yeah, I saw it in the app."
+  1) うん、203。  /  "Yeah. Room 203."
     Emi (teasing): えらい。じゃあ、おつかれ。  /  "Look at you. OK, good work today."
   2) ……たぶん。  /  "...Probably."
     Emi (smile): 駅のとなり。……電話、してね。  /  "Next to the station. ...Call me, OK?"
@@ -415,13 +544,13 @@ IF casualGuard:
   (On your way out, the gates.)
   Ishibashi (speaker): また君か。  /  "You again."
   Ishibashi: ……ID。  /  "...ID." 
-  (You hold your phone up to the camera. He takes his time.)  [time +5]
+  (You hold your badge up to the camera. He takes his time.)  [time +5]
 → dorm
 
 ## dorm
 [scene: dorm] [music: night] [clock 18:30]
-(Dorm A, room 203. Second floor. Your phone opens the door on the second try.)
-(Your boxes are stacked by the window. The window looks straight at a concrete wall, about two metres away.)
+(Dorm A, room 203. Second floor. Your card opens the door on the second try.)
+(Your boxes are stacked inside, the one with the drawn mug on top. The window looks straight at a concrete wall, about two metres away.)
 (Somewhere on this island there are sea views.)
 [message from Emi] おつかれ！部屋、どう？  /  Good work today! How's the room?
 [free typing: a chat with Emi, 2 turns, romaji turns into kana as you type. Goal shown: "Reply to Emi. The room, your day, anything." Emi (local AI) knows: the room faces a wall, how the copies went, how the numbers were got (magic, asking, none), whether Mio saw anything, how her meeting went. She never confirms magic; 言霊 or 魔法 get 「はいはい。」 Replies are one or two short casual sentences at N5 to N4. If the AI isn't running: a button to start it on this PC (desktop), or the scripted version below.]

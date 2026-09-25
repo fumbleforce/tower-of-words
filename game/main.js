@@ -11,10 +11,11 @@ import * as D3 from '../content/day3.js';
 import * as D4 from '../content/day4.js';
 import * as D5 from '../content/day5.js';
 import { VOICE } from './audio/voice/index.js';
+import { PLACEHOLDER, insertHTML, housingHTML } from './art.js';
 
 for (const [k, v] of Object.entries(GLOSSARY_ADDITIONS)) if (!GLOSSARY[k]) GLOSSARY[k] = v;
 const SCENES = { ...DAY1, ...D2.SCENES, ...D3.SCENES, ...D4.SCENES, ...D5.SCENES };
-const DAYS = { 1: 'monorail', 2: 'day2_morning', 3: 'day3_morning', 4: 'day4_morning', 5: 'day5_morning' };
+const DAYS = { 1: 'train', 2: 'day2_morning', 3: 'day3_morning', 4: 'day4_morning', 5: 'day5_morning' };
 const DAY_NAMES = { 1: '{月曜日|げつようび}', 2: '{火曜日|かようび}', 3: '{水曜日|すいようび}', 4: '{木曜日|もくようび}', 5: '{金曜日|きんようび}' };
 const DAY_NTH = { 1: '{一日目|いちにちめ}', 2: '{二日目|ふつかめ}', 3: '{三日目|みっかめ}', 4: '{四日目|よっかめ}', 5: '{五日目|いつかめ}' };
 const dayName = d => (DAY_NAMES[d] ? renderJP(DAY_NAMES[d]) : '');
@@ -73,18 +74,24 @@ function today() {
   L.today.kseen ||= {}; L.today.kmiss ||= {};
   return L.today;
 }
-function lookup(key, surface) {
+// A meaning look-up is a vocabulary miss; a reading request is a miss for the kanji in the word (see record()).
+function lookup(key) {
   const t = today(); t.looked[key] = 1; word(key).looked++; sceneStats.taps++;
-  // A look-up is also a miss for every kanji in the word as shown.
-  for (const c of kanjiIn(surface || key)) { t.kmiss[c] = 1; const k = kanjiRec(c); if (k.st >= 2) k.st = 1; }
+}
+function readingMiss(surface) {
+  const t = today();
+  // Soft adaptation: a kanji whose reading was asked for twice shows its reading by default from then on.
+  for (const c of kanjiIn(surface)) { t.kmiss[c] = 1; const k = kanjiRec(c); k.rd = (k.rd || 0) + 1; if (k.rd >= 2 && k.st >= 2) k.st = 1; }
 }
 
 /* ---------------- letters: per-kanji reading state and the player's profile ----------------
    Kanji state: 0 = not yet (the word shows in kana), 1 = learning (kanji with the reading above), 2 = readable.
    The starting state comes from the kanji band set by the level check; play moves single kanji from there. */
 const kanjiIn = s => [...(s || '')].filter(c => /[\u3400-\u9fff]/.test(c));
-const profile = () => (L.profile ||= { band: 1, hiraWeak: false, kataWeak: true, checked: false });
+// Reverse learning (2026-09-25): text is natural Japanese by default; readings appear when the player asks for them.
+const profile = () => (L.profile ||= { mode: 'reverse', band: 3 });
 function bandState(c) {
+  if (profile().mode === 'reverse') return 2;
   const lv = kanjiLevel(c), b = profile().band;
   if (b <= 0) return 0;
   if (b === 1) return lv === 1 ? 1 : 0;
@@ -225,34 +232,30 @@ function romaji(kana) {
   return out;
 }
 const isKata = s => /^[ァ-ヺー]+$/.test(s);
-const hasKanji = s => /[\u3400-\u9fff々〆]/.test(s);
+const hasKanji = s => /[㐀-鿿々〆]/.test(s);
+const esc = s => String(s).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
+// A tappable word. Kanji words always carry their ruby; the reading stays hidden (class rd shows it) until the
+// player asks for it, the word was asked about before, or one of its kanji is still being learned.
+function wordSpan(key, surface, reading, fu, opts, extra = '') {
+  const gl = opts.gl?.[surface] ?? opts.gl?.[key];
+  const attrs = (cls) => `class="w${isKata(surface) ? ' kata' : ''}${word(key).stage >= 3 ? ' known' : ''}${cls}" data-key="${esc(key)}" data-read="${esc(reading)}" data-surf="${esc(surface)}"${gl ? ` data-gl="${esc(gl)}"` : ''}${extra}`;
+  if (!hasKanji(surface) || surface === reading) return `<span ${attrs('')}>${surface}</span>`;
+  const states = kanjiIn(surface).map(c => kanjiState(c, key));
+  // A kanji the player can't read at all yet: the whole word in kana.
+  if (opts.forceKana || states.some(x => x === 0)) return `<span ${attrs('')} data-kana="1">${reading}</span>`;
+  const show = states.some(x => x < 2) || (word(key).rd || 0) > 0;
+  const ruby = fu ? fu.map(([part, r]) => (r && hasKanji(part) ? `<ruby>${part}<rt>${r}</rt></ruby>` : part)).join('') : `<ruby>${surface}<rt>${reading}</rt></ruby>`;
+  return `<span ${attrs(show ? ' rd' : '')}>${ruby}</span>`;
+}
 function wordHTML(key, surface, reading, opts) {
   reading = reading || GLOSSARY[key]?.r || surface;
-  const g = GLOSSARY[key] || { lv: 1 };
-  const st = word(key).stage;
-  const attrs = `class="w${g.lv >= 3 ? ' adv' : ''}${st >= 3 ? ' known' : ''}${isKata(surface) ? ' kata' : ''}" data-key="${key}" data-read="${reading}" data-surf="${surface}"`;
-  // Never put a reading above text that is already kana.
-  if (surface === reading || !hasKanji(surface)) return `<span ${attrs}>${surface}</span>`;
-  const states = kanjiIn(surface).map(c => kanjiState(c, key));
-  if (opts.forceKana) return `<span ${attrs}>${reading}</span>`;
-  if (states.every(x => x >= 2)) return `<span ${attrs}>${surface}</span>`;
-  // Any kanji the player can't read yet: the whole word in kana.
-  if (states.some(x => x === 0)) return `<span ${attrs}>${reading}</span>`;
-  return `<span ${attrs}><ruby>${surface}<rt>${profile().hiraWeak ? romaji(reading) : reading}</rt></ruby></span>`;
+  return wordSpan(key, surface, reading, null, opts);
 }
-// One token from lines.json, shown for this player: kanji, kanji with readings over the unread kanji only (furigana
-// split), or the whole word in kana when any of its kanji is still hidden.
+// One token from lines.json, shown for this player.
 function tokenHTML(t, opts) {
   if (!CONTENT(t)) return t.s;
-  const key = t.b || t.s, reading = t.r || t.s;
-  const attrs = `class="w${isKata(t.s) ? ' kata' : ''}${word(key).stage >= 3 ? ' known' : ''}" data-key="${key}" data-id="${t.id || ''}" data-read="${reading}" data-surf="${t.s}"${t.en ? ` data-en="${t.en.replace(/"/g, '&quot;')}"` : ''}`;
-  if (!hasKanji(t.s)) return `<span ${attrs}>${t.s}</span>`;
-  const states = kanjiIn(t.s).map(c => kanjiState(c, key));
-  if (opts.forceKana || states.some(x => x === 0)) return `<span ${attrs}>${reading}</span>`;
-  if (states.every(x => x >= 2)) return `<span ${attrs}>${t.s}</span>`;
-  const rt = r => (profile().hiraWeak ? romaji(r) : r);
-  if (t.fu) return `<span ${attrs}>${t.fu.map(([part, r]) => (r && hasKanji(part) && kanjiIn(part).some(c => kanjiState(c, key) < 2) ? `<ruby>${part}<rt>${rt(r)}</rt></ruby>` : part)).join('')}</span>`;
-  return `<span ${attrs}><ruby>${t.s}<rt>${rt(reading)}</rt></ruby></span>`;
+  const key = t.b || t.s;
+  return wordSpan(key, t.s, t.r || t.s, t.fu, opts, `${t.id ? ` data-id="${t.id}"` : ''}${t.en ? ` data-en="${esc(t.en)}"` : ''}`);
 }
 function renderJP(markup, opts = {}) {
   const toks = tokensOf(markup);
@@ -293,46 +296,90 @@ function yen(n) {
   return `{${surface}|${reading}}`;
 }
 
-/* ---------------- look-ups ---------------- */
-let glossEl = null;
-function showGloss(el, key, surface, reading) {
-  glossEl?.remove();
-  const id = el.dataset.id, jm = id && LANG.words?.[id];
-  const g = GLOSSARY[key] || (jm ? { en: jm.g } : el.dataset.en ? { en: el.dataset.en } : {}), w = word(key);
-  const dict = key !== surface ? `<div class="r">from ${key}</div>` : '';
-  const stageTxt = ['new', 'learning', 'recalling', 'known'][w.stage];
-  glossEl = h('div', 'gloss', `<b>${surface}</b><div class="r">${reading} · ${toRomaji(reading)}</div>${dict}${g.en || (isKata(key) ? 'loanword' : '')}<div class="r" style="margin-top:.3em">${stageTxt}</div>`);
-  const box = el.closest('#phone') || stage;
-  box.append(glossEl);
-  const r = el.getBoundingClientRect(), s = box.getBoundingClientRect();
-  glossEl.style.left = Math.min(s.width - glossEl.offsetWidth - 8, Math.max(8, r.left - s.left)) + 'px';
-  glossEl.style.top = Math.max(8, r.top - s.top - glossEl.offsetHeight - 10) + 'px';
-  setTimeout(() => { glossEl?.remove(); glossEl = null; }, 3500);
-}
-// Tapping a word: katakana first gets romaji above it (a letter miss, not a look-up); any other tap shows the meaning (a look-up).
-function tapWord(w) {
-  if (w.classList.contains('kata') && !w.dataset.ro) {
-    w.dataset.ro = 1;
-    w.innerHTML = `<ruby>${w.dataset.surf}<rt>${toRomaji(w.dataset.surf)}</rt></ruby>`;
-    for (const c of w.dataset.surf) if (c !== 'ー') L.kata[c] = (L.kata[c] || 0) + 1;
-    save(); return;
+/* ---------------- tapping words: reading, then meaning ----------------
+   Tap a kanji word once: the kana reading appears above it. Tap again: the English for this context appears below,
+   with the romaji. Kana words go straight to the meaning. Another tap closes the meaning (the reading stays).
+   Every voluntary request is stored per word and per kanji (L.words[k].rd / .mn, L.kanji[c].rd) and in L.taps, so
+   later scenes can bring those words back. Taps the tutorial cue asked for are logged with tut: true and count for nothing. */
+const help = () => (S.help ||= { lines: {}, meaning: 0 });
+// The "supported" versions of later lines are used once the player has needed help on three different lines.
+const support = () => Object.keys(help().lines).length >= 3;
+let cue = null; // { el: word element, text, then: second-stage text } while a tutorial cue is up
+function record(kind, w, tut) {
+  const key = w.dataset.key, surf = w.dataset.surf, line = w.closest('[data-line]')?.dataset.line || '';
+  (L.taps ||= []).push({ k: key, s: surf, kind, line, day: S.day, scene: S.scene, t: Date.now(), ...(tut ? { tut: 1 } : {}) });
+  if (L.taps.length > 3000) L.taps.shift();
+  if (!tut) {
+    const wd = word(key);
+    if (kind === 'read') { wd.rd = (wd.rd || 0) + 1; readingMiss(surf); }
+    else { wd.mn = (wd.mn || 0) + 1; lookup(key); }
+    if (line) help().lines[line] = 1;
   }
-  lookup(w.dataset.key, w.dataset.surf); save();
-  showGloss(w, w.dataset.key, w.dataset.surf, w.dataset.read);
+  save();
 }
-stage.addEventListener('pointerdown', e => {
-  // Spell runes pick on the first click; their meaning is printed under them.
-  const w = e.target.closest('.nolook') ? null : e.target.closest('.w');
-  glossEl?.remove(); glossEl = null;
-  if (!w) return;
-  e.stopPropagation();
+function meaningOf(w) {
+  const key = w.dataset.key, id = w.dataset.id, jm = id && LANG.words?.[id];
+  return w.dataset.gl || GLOSSARY[key]?.en || jm?.g || w.dataset.en || (isKata(key) ? 'loanword' : '');
+}
+function showMeaning(w) {
+  w.querySelector('.mean')?.remove();
+  const rd = w.dataset.read || w.dataset.surf;
+  const m = h('span', 'mean', `${esc(meaningOf(w))}<small>${esc(toRomaji(rd))}${w.dataset.key !== w.dataset.surf ? ` · ${esc(w.dataset.key)}` : ''}</small>`);
+  w.append(m);
+  w.closest('.line, .opt-text, .ctx-line, .hs-text, .ins-word')?.classList.add('has-mean');
+  // Keep the explanation inside the screen.
+  const box = stage.getBoundingClientRect(), r = m.getBoundingClientRect();
+  let dx = 0;
+  if (r.left < box.left + 6) dx = box.left + 6 - r.left; else if (r.right > box.right - 6) dx = box.right - 6 - r.right;
+  if (dx) m.style.marginLeft = `${dx}px`;
+}
+function tapWord(w) {
+  const tut = cue && cue.el === w;
+  const hasReading = !!w.querySelector('rt') && !w.dataset.kana;
+  if (hasReading && !w.classList.contains('rd')) {
+    w.classList.add('rd'); record('read', w, tut);
+    if (tut && cue.then) setCue(w, cue.then, null); else if (tut) clearCue();
+    else if (w.dataset.cue2 && !S.flags.cue2done) { S.flags.cue2done = true; setCue(w, 'Tap again for the meaning.', null); }
+    return;
+  }
+  if (!w.classList.contains('mn')) {
+    w.classList.add('mn'); showMeaning(w); record('mean', w, tut);
+    if (cue) clearCue();
+    return;
+  }
+  w.classList.remove('mn'); w.querySelector('.mean')?.remove();
+}
+// The cue sits in the flow right under the line it points at, so it never covers the stage direction above.
+function setCue(w, text, then) {
+  clearCue();
+  const el = h('div', 'cue', text);
+  const line = w.closest('.line, .opt-text, .hs-text') || w;
+  line.after(el);
+  w.classList.add('cued');
+  cue = { el: w, box: el, then };
+}
+function clearCue() { if (!cue) return; cue.box.remove(); cue.el.classList.remove('cued'); cue = null; }
+// Word taps are caught before anything else sees the click, so a tap on a word never advances or chooses.
+document.addEventListener('click', e => {
+  const w = e.target.closest('.w');
+  if (!w || e.target.closest('.nolook')) return;
+  e.stopPropagation(); e.preventDefault();
   tapWord(w);
 }, true);
-stage.addEventListener('contextmenu', e => {
-  const w = e.target.closest('.w'); if (!w) return;
-  e.preventDefault(); lookup(w.dataset.key, w.dataset.surf); save(); showGloss(w, w.dataset.key, w.dataset.surf, w.dataset.read);
-});
-phone.addEventListener('pointerdown', e => { const w = e.target.closest('.w'); if (!w) return; e.stopPropagation(); tapWord(w); });
+// Whole-line meaning: an escape hatch. It counts as a look-up of every word in the line.
+function meaningButton(container, markups, reveal, label = 'Meaning') {
+  const b = h('button', 'tool-btn', label);
+  let shown = false;
+  const doIt = () => {
+    if (shown) { reveal(false); b.textContent = label; shown = false; return; }
+    markups.forEach(m => { lookupAll(m); help().lines[plain(m)] = 1; }); help().meaning++; save(); reveal(true); b.textContent = 'Hide English'; shown = true;
+  };
+  b.onclick = e => { e.stopPropagation(); doIt(); };
+  englishHandler = doIt;
+  container.append(b);
+  return b;
+}
+const englishButton = meaningButton;
 
 /* ---------------- time ---------------- */
 function jpTime(min) {
@@ -346,14 +393,20 @@ const parseClock = t => { const [a, b] = t.split(':').map(Number); return a * 60
 const breathMarks = () => `${'◆'.repeat(Math.max(0, S.breath))}${'◇'.repeat(Math.max(0, breathMax() - S.breath))}`;
 function drawHud(ping) {
   hud.innerHTML = '';
-  if (S.task) hud.append(h('div', 'task', `<small>TASK</small>${renderJP(S.task)}`));
+  if (S.task) {
+    const t = h('div', 'task', `<small>GOAL</small>${renderJP(S.task)}`);
+    // Emi's photo rides along with the goal it belongs to.
+    if (S.flags.keptPhoto && /photo/.test(S.task)) { const b = h('button', 'hud-photo', `<img src="img/bg/gate.webp" alt="Emi's photo">`); b.setAttribute('aria-label', 'Open Emi\'s photo'); b.onclick = e => { e.stopPropagation(); showPhoto(); }; t.append(b); }
+    hud.append(t);
+  }
   const hasPhone = S.messages.length > 0, hasMagic = S.flags.knowsMagic || S.day > 1;
-  const b = h('button', 'phone-btn' + (ping ? ' ping' : '') + (hasPhone ? '' : ' nophone'), `${hasPhone ? '<span class="dot"></span>' : ''}${digital(S.time)}${hasMagic ? `<span class="breath" title="kotodama left today">${breathMarks()}</span>` : ''}`);
+  const b = h('button', 'phone-btn' + (ping ? ' ping' : '') + (hasPhone ? '' : ' nophone'), `${hasPhone ? `<span class="pl">Phone${S.unread ? ' · new' : ''}</span>` : ''}${digital(S.time)}${hasMagic ? `<span class="breath" title="kotodama left today">${breathMarks()}</span>` : ''}`);
   if (hasPhone) b.onclick = openPhone;
   hud.append(b);
 }
 let phoneTab = 'msg';
 function openPhone() {
+  S.unread = false; drawHud();
   if (phone.classList.contains('app')) return;
   sfx('tap', .3);
   const tabs = [['msg', 'メッセージ'], ['words', 'たんご'], ['set', 'せってい']];
@@ -362,7 +415,22 @@ function openPhone() {
   const body = h('div', 'ph-body');
   if (phoneTab === 'msg') {
     if (!S.messages.length) body.append(h('p', 'small', 'No messages yet.'));
-    for (const m of [...S.messages].reverse()) body.append(h('div', 'msg', `<div class="from">${CAST[m.from]?.name || m.from} · ${dayName(m.day)}</div><div class="jp">${renderJP(m.jp)}</div>`));
+    for (const m of [...S.messages].reverse()) {
+      const from = `<div class="from">${CAST[m.from]?.en || m.from} · ${dayName(m.day)}</div>`;
+      if (m.kind === 'voice') {
+        const el = h('div', 'msg', `${from}<div class="small">Voice message</div>`);
+        for (const l of m.lines || []) {
+          const row = h('div', 'msg-line', `<div class="jp" data-line="${esc(plain(l.jp))}">${l.me ? '<span class="me">You:</span> ' : ''}${renderJP(l.jp)}</div><div class="en" hidden>${esc(l.en || '')}</div>`);
+          const b = h('button', 'tool-btn', 'Meaning'); b.onclick = () => { row.querySelector('.en').hidden = false; b.remove(); lookupAll(l.jp); save(); };
+          const p2 = h('button', 'tool-btn', '▶'); p2.onclick = () => playVoice(l.me ? 'player' : m.from, plain(l.jp), .85);
+          row.append(p2, b); el.append(row);
+        }
+        body.append(el); continue;
+      }
+      const el = h('div', 'msg', `${from}${m.img ? `<img class="msg-img" src="img/bg/${m.img}.webp" alt="Photo from ${CAST[m.from]?.en || m.from}">` : ''}<div class="jp" data-line="${esc(plain(m.jp))}">${renderJP(m.jp, { gl: m.gl })}</div><div class="en" hidden>${esc(m.en || '')}</div>`);
+      if (m.en) { const b = h('button', 'tool-btn', 'Meaning'); b.onclick = () => { el.querySelector('.en').hidden = false; b.remove(); lookupAll(m.jp); save(); }; el.append(b); }
+      body.append(el);
+    }
   } else if (phoneTab === 'book') {
     body.append(h('p', 'small', `Kotodama left today: ${breathMarks()}. Casting in front of people risks being noticed; a botched cast more so.`));
     const book = [{ form: '渡して', en: 'make someone hand something over' }, ...S.spells];
@@ -418,12 +486,14 @@ function closePhone() { phone.hidden = true; }
 
 /* ---------------- stage ---------------- */
 let bgFlip = false;
-// Backdrops drawn in CSS (the lift is a floor panel, not a drawn location).
-const CSS_BG = ['lift'];
+// Backdrops drawn in code: the lift (a floor panel over steel), the title, and the train opening's placeholders
+// (no approved art yet for the carriage, the exterior reveal, the doors or the platform; see TODO.md).
+const CSS_BG = ['lift', 'title', ...Object.keys(PLACEHOLDER)];
 function setBg(name) {
   const a = $('#bg'), b = $('#bg2');
   const [front, back] = bgFlip ? [a, b] : [b, a];
   front.dataset.css = CSS_BG.includes(name) ? name : '';
+  front.innerHTML = PLACEHOLDER[name] || '';
   if (CSS_BG.includes(name)) { front.style.backgroundImage = ''; front.classList.remove('missing'); front.style.opacity = 1; back.style.opacity = 0; bgFlip = !bgFlip; stage.dataset.bg = name; return; }
   const img = new Image();
   img.onload = () => { front.style.backgroundImage = `url(${img.src})`; front.classList.remove('missing'); };
@@ -447,6 +517,9 @@ function loadSprite(img, id, expr, done) {
   };
   next();
 }
+// On a phone only one character is drawn at a time (the one in front: the speaker, or whoever arrived last),
+// centred. Two sprites side by side overlap at 390 px, so the others wait off screen (playtest 3).
+function setFront(id) { if (!onStage[id]) return; for (const [k, el] of Object.entries(onStage)) el.classList.toggle('front', k === id); }
 function showChar(id, expr = 'neutral', at = 'center') {
   let el = onStage[id];
   if (!el) {
@@ -454,13 +527,17 @@ function showChar(id, expr = 'neutral', at = 'center') {
     chars.append(el); onStage[id] = el;
     loadSprite(img, id, expr, ok => { if (!ok) el.style.display = 'none'; requestAnimationFrame(() => el.classList.remove('enter')); });
   } else {
-    if (at) el.className = `ch ${at}`;
+    if (at) el.className = `ch ${at}${el.classList.contains('front') ? ' front' : ''}`;
     setExpr(id, expr);
   }
+  setFront(id);
 }
 function setExpr(id, expr) { const el = onStage[id]; if (!el || !expr) return; loadSprite(el.querySelector('img'), id, expr, () => {}); }
-function hideChar(id) { const el = onStage[id]; if (!el) return; el.classList.add('enter'); setTimeout(() => el.remove(), 350); delete onStage[id]; }
-function focusSpeaker(id) { for (const [k, el] of Object.entries(onStage)) el.classList.toggle('dim', !!id && k !== id); }
+function hideChar(id) {
+  const el = onStage[id]; if (!el) return; el.classList.add('enter'); setTimeout(() => el.remove(), 350); delete onStage[id];
+  if (el.classList.contains('front')) { const rest = Object.keys(onStage); if (rest.length) setFront(rest[rest.length - 1]); }
+}
+function focusSpeaker(id) { for (const [k, el] of Object.entries(onStage)) el.classList.toggle('dim', !!id && k !== id); if (id) setFront(id); }
 function defaultSpot() { const used = Object.values(onStage).map(el => ['left', 'center', 'right'].find(c => el.classList.contains(c))); return ['center', 'left', 'right'].find(p => !used.includes(p)) || 'center'; }
 
 /* ---------------- input helpers ---------------- */
@@ -476,7 +553,9 @@ function openBacklog() {
     if (b.voice) { const r = h('button', 'bl-play', '♪'); r.onclick = e => { e.stopPropagation(); playVoice(b.voice[0], b.voice[1], .85); }; row.append(r); }
     list.append(row);
   }
-  backlogEl.append(h('div', 'bl-head', 'Backlog · scroll down or Esc to return'), list);
+  const close = h('button', 'tool-btn bl-close', 'Close'); close.onclick = e => { e.stopPropagation(); closeBacklog(); };
+  const head = h('div', 'bl-head', `<span>Earlier lines${TOUCH ? '' : ' · Esc or scroll down to return'}</span>`); head.append(close);
+  backlogEl.append(head, list);
   ui.append(backlogEl);
   list.scrollTop = list.scrollHeight;
   backlogEl.addEventListener('click', e => e.stopPropagation());
@@ -499,35 +578,45 @@ function waitAdvance(onFirst) {
   return new Promise(res => {
     let first = !!onFirst;
     const go = () => { if (first) { first = false; if (onFirst() === false) return; } cleanup(); res(); };
-    const click = e => { if (e.target.closest('.phone-btn, .w, #phone, .en-btn, .replay, button')) return; go(); };
+    const click = e => { if (e.target.closest('.phone-btn, .w, #phone, button, a, .hud-photo')) return; go(); };
     const cleanup = () => { stage.removeEventListener('click', click); keyHandler = null; englishHandler = null; };
     stage.addEventListener('click', click);
     keyHandler = e => { if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); go(); } };
   });
 }
+// `render` returns the element that commits the option (for a spoken reply that is its Say button, never the text).
 function pick(options, render) {
   return new Promise(res => {
-    // Tapping a word inside an option only looks it up and arms the option; tapping the armed option (or its free area) picks it.
     const els = options.map((o, i) => { const el = render(o, i); el.addEventListener('click', e => {
       if (el.disabled) return;
-      if (e.target.closest('.w') && !e.target.closest('.nolook') && !el.classList.contains('armed')) { els.forEach(x => x.classList.remove('armed')); el.classList.add('armed'); return; }
-      sfx('tap', .35); keyHandler = null; englishHandler = null; res(o);
+      e.stopPropagation(); sfx('tap', .35); keyHandler = null; englishHandler = null; res(o);
     }); return el; });
     keyHandler = e => { const n = +e.key; if (n >= 1 && n <= options.length && !els[n - 1].disabled) { e.preventDefault(); els[n - 1].click(); } };
   });
 }
-// English reveal: one control per screen; using it counts as looking up every word shown.
-function englishButton(container, markups, reveal) {
-  const b = h('button', 'en-btn', 'EN <kbd>T</kbd>');
-  const doIt = () => { markups.forEach(lookupAll); save(); reveal(); b.remove(); englishHandler = null; };
-  b.onclick = e => { e.stopPropagation(); doIt(); };
-  englishHandler = doIt;
-  container.append(b);
-}
 
 /* ---------------- lines ---------------- */
-// Control hints show for the first few lines only.
-function hint(text) { S.hints = (S.hints || 0) + 1; return S.hints <= 6 ? text : ''; }
+// Speaker names are shown in English. On the train Rei is "Woman" until she says her name.
+// Ishibashi never gives his name on day 1: he is the guard's voice from a speaker.
+const whoName = who => (who === 'rei' && S.flags.reiNamed === false ? 'Woman' : who === 'ishibashi' && S.day === 1 ? 'Guard (speaker)' : CAST[who]?.en || who);
+// On a phone the sprite steps back while a prop or the phone is up; a small face next to the name keeps the speaker clear.
+const faceOf = who => (onStage[who] ? `<img class="face" src="${onStage[who].querySelector('img').getAttribute('src')}" alt="">` : '');
+// The line just spoken stays on screen above the choice that answers it.
+let ctx = null;
+function advanceMark() {
+  S.adv = (S.adv || 0) + 1;
+  return h('div', 'adv', TOUCH ? 'Tap to continue ▾' : 'Click or Space to continue ▾');
+}
+function lineTools(box, st, markups, reveal, voiced) {
+  const tools = h('div', 'tools');
+  if (st.en) meaningButton(tools, markups, reveal);
+  if (voiced) { const r = h('button', 'tool-btn', 'Replay'); r.onclick = e => { e.stopPropagation(); replay(); }; tools.append(r); }
+  if (backlog.length > 3) { const l = h('button', 'tool-btn', 'Log'); l.onclick = e => { e.stopPropagation(); openBacklog(); }; tools.append(l); }
+  box.append(tools);
+  return tools;
+}
+// The supported version of a line, used once the player has needed help on several lines.
+const useAlt = o => !!o.alt && support() && (!o.alt.needKnown || (word(o.alt.needKnown).stage || 0) >= 2);
 // Karaoke: characters light up in proportion to the audio's progress. Punctuation counts as a short pause.
 function karaoke(line, audio) {
   const spans = [];
@@ -537,7 +626,7 @@ function karaoke(line, audio) {
         const frag = document.createDocumentFragment();
         for (const ch of n.textContent) { const sp = document.createElement('span'); sp.className = 'k'; sp.textContent = ch; frag.append(sp); spans.push(sp); }
         n.replaceWith(frag);
-      } else if (n.nodeName !== 'RT') walk(n);
+      } else if (n.nodeName !== 'RT' && !n.classList?.contains('mean')) walk(n);
     }
   };
   walk(line);
@@ -561,66 +650,95 @@ function karaoke(line, audio) {
 // Backlog: every spoken line, message and player line, for scrolling back.
 const backlog = [];
 function logLine(who, jp, en, voice) { backlog.push({ who, jp, en, voice }); if (backlog.length > 300) backlog.shift(); }
+function lineBlock(st, name, color) {
+  const frag = h('div', 'said');
+  if (st.cap) frag.append(h('div', 'cap', st.cap));
+  frag.append(h('div', 'who', `${faceOf(st.say)}<span style="color:${color}">${name}</span>`));
+  const line = h('div', 'line', renderJP(st.jp, { gl: st.gl })); line.dataset.line = plain(st.jp);
+  frag.append(line);
+  const en = h('div', 'en', st.en || ''); en.hidden = true; frag.append(en);
+  return { frag, line, en };
+}
 async function say(st) {
+  if (useAlt(st)) st = { ...st, ...st.alt };
   const who = st.say, c = CAST[who] || { name: who, color: '#fff' };
   // `off`: a voice with no sprite (a speaker, a phone, the other side of a door).
   const visible = who !== 'announcer' && who !== 'player' && !st.off;
   if (visible) { if (!onStage[who]) showChar(who, st.expr, defaultSpot()); else setExpr(who, st.expr); }
   focusSpeaker(visible ? who : null);
   markSeen(st.jp);
-  logLine(c.name, st.jp, st.en, [who, plain(st.jp)]);
+  const name = (st.as || whoName(who)) + (st.via ? ` · ${st.via}` : '');
+  logLine(name, st.jp, st.en, [who, plain(st.jp)]);
+  if (st.via === 'voice message') keepVoiceLine(who, st);
   const box = h('div', 'subs');
-  box.append(h('div', 'who', `<span style="color:${c.color}">${c.name}</span>`));
+  const { frag, line, en } = lineBlock(st, name, c.color);
+  box.append(frag);
   const a = playVoice(who, plain(st.jp));
-  const line = h('div', 'line', renderJP(st.jp));
-  box.append(line);
-  const en = h('div', 'en', st.en || ''); en.hidden = true; box.append(en);
-  const tools = h('div', 'hint', hint('click / space: continue · R: replay · tap a word: meaning '));
-  box.append(tools);
   ui.innerHTML = ''; ui.append(box);
-  if (st.en) englishButton(tools, [st.jp], () => { en.hidden = false; });
+  if (st.auto) {
+    if (a) await new Promise(r => { a.addEventListener('ended', r); a.addEventListener('error', r); setTimeout(r, 6000); }); else await sleep(1100);
+    return;
+  }
+  lineTools(box, st, [st.jp], v => { en.hidden = !v; }, !!a);
+  if (st.cue === 'tap') { const w = line.querySelector('.w'); if (w) setCue(w, 'Tap a word for help.', null); }
+  if (st.cue === 'tap2') line.querySelectorAll('.w').forEach(w => { if (w.querySelector('rt')) w.dataset.cue2 = 1; });
   let finish = null;
   if (a && S.settings.karaoke !== false) finish = karaoke(line, a);
-  if (st.auto) { if (a) await new Promise(r => { a.addEventListener('ended', r); setTimeout(r, 6000); }); else await sleep(900); return; }
+  // A question answered by the next choice stays on screen with it.
+  if (st.noWait) { ctx = { st, name, color: c.color }; return; }
+  box.append(advanceMark());
   // First press while a line is still being spoken shows it all; the next press continues.
   await waitAdvance(() => { if (finish && !line.classList.contains('done') && a && !a.ended) { finish(); return false; } return true; });
+  clearCue();
   voiceEl?.pause();
 }
 async function narrate(text) {
   focusSpeaker(null); logLine('', '', text, null);
-  const box = h('div', 'subs'); box.append(h('div', 'narr', text)); ui.innerHTML = ''; ui.append(box);
+  const box = h('div', 'subs'); box.append(h('div', 'narr', text), advanceMark()); ui.innerHTML = ''; ui.append(box);
   await waitAdvance();
 }
 async function notify(m) {
-  focusSpeaker(null); markSeen(m.jp); logLine(CAST[m.from]?.name || m.from, m.jp, m.en, null);
+  focusSpeaker(null); markSeen(m.jp); logLine(CAST[m.from]?.en || m.from, m.jp, m.en, null);
   const box = h('div', 'subs');
-  box.append(h('div', 'who', `<span style="color:#ff9a8a">${CAST[m.from]?.name || m.from}</span>　<span class="small-tag">chat</span>`));
-  box.append(h('div', 'line', renderJP(m.jp)));
+  box.append(h('div', 'who', `<span style="color:#ff9a8a">${CAST[m.from]?.en || m.from}</span>　<span class="small-tag">message</span>`));
+  const line = h('div', 'line', renderJP(m.jp)); line.dataset.line = plain(m.jp);
+  box.append(line);
   const en = h('div', 'en', m.en); en.hidden = true; box.append(en);
-  const tools = h('div', 'hint', hint('saved in your phone (P) · ')); box.append(tools);
+  lineTools(box, m, [m.jp], v => { en.hidden = !v; }, false);
+  box.append(advanceMark());
   ui.innerHTML = ''; ui.append(box);
-  englishButton(tools, [m.jp], () => { en.hidden = false; });
   await waitAdvance();
 }
 
 /* ---------------- steps ---------------- */
 class Goto { constructor(scene) { this.scene = scene; } }
 async function exec(steps) {
-  for (const st of steps || []) { const r = await step(st); if (r instanceof Goto) return r; }
+  const list = steps || [];
+  for (let i = 0; i < list.length; i++) {
+    let st = list[i];
+    // A spoken line followed directly by a choice doesn't wait: the choice shows it above the options.
+    if (st.say && !st.auto && list[i + 1]?.choose && list[i + 1].choose.kind !== 'lcd') st = { ...st, noWait: true };
+    const r = await step(st); if (r instanceof Goto) return r;
+  }
 }
 const flagOk = f => (f.startsWith('!') ? !S.flags[f.slice(1)] : !!S.flags[f]);
 async function step(st) {
   if (st.bg) setBg(st.bg);
   if ('music' in st) music(st.music);
+  if ('amb' in st) ambience(st.amb);
+  if (st.tone) tone(st.tone);
+  if (st.wait) await sleep(st.wait);
   if (st.clock) { S.time = Math.max(S.time, parseClock(st.clock)); drawHud(); }
   if (st.time) { S.time += st.time; drawHud(); }
+  if ('insert' in st) insert(st.insert);
   if (st.narrate) await narrate(st.narrate);
   if (st.say) await say(st);
   if (st.show) showChar(st.show, st.expr, st.at);
   if (st.hide) hideChar(st.hide);
   if (st.hideAll) Object.keys(onStage).forEach(hideChar);
-  if (st.msg) { S.messages.push({ ...st.msg, day: S.day }); sfx('bell', .35); drawHud(true); await notify(st.msg); }
-  if (st.task) { S.task = st.task; drawHud(); }
+  if ('hand' in st) await handStep(st.hand);
+  if (st.msg) { S.messages.push({ ...st.msg, day: S.day }); S.unread = true; sfx('bell', .35); drawHud(true); await notify(st.msg); }
+  if ('task' in st) { S.task = st.task; drawHud(!!st.task); }
   if (st.set) Object.assign(S.flags, st.set);
   if (st.fx) for (const [k, v] of Object.entries(st.fx)) S.rel[k] = (S.rel[k] || 0) + v;
   if (st.suspicion) S.suspicion += st.suspicion;
@@ -629,7 +747,7 @@ async function step(st) {
   if (st.unset) for (const k of st.unset) delete S.flags[k];
   if (st.stamp) (S.stamps ||= {})[st.stamp] = S.time;
   if (st.sign) await sign(st.sign);
-  if (st.onboarding) await onboarding();
+  if (st.findEntrance) await findEntrance(st.findEntrance);
   let r;
   if (st.ifNoise != null) r = await exec(S.noise >= st.ifNoise ? st.then : st.else);
   if (!r && st.ifCasts != null) r = await exec(S.casts <= st.ifCasts ? st.then : st.else);
@@ -638,6 +756,7 @@ async function step(st) {
   if (!r && st.ifTime) r = await exec(S.time > parseClock(st.ifTime.after) ? st.ifTime.then : st.ifTime.else);
   if (!r && st.if) r = await exec(flagOk(st.if) ? st.then : st.else);
   if (!r && st.ifRel) { const v = S.rel[st.ifRel.who] || 0; const ok = 'atLeast' in st.ifRel ? v >= st.ifRel.atLeast : v < st.ifRel.below; r = await exec(ok ? st.ifRel.then : st.ifRel.else); }
+  if (!r && st.ifSupport) r = await exec(support() ? st.ifSupport.then : st.ifSupport.else);
   if (r) return r;
   if (st.choose) { r = await choose(st.choose); if (r) return r; }
   if (st.pin) await pin(st.pin);
@@ -652,61 +771,312 @@ async function step(st) {
   if (st.findLabel) await findLabel(st.findLabel);
   if (st.glossNote) await glossNote(st.glossNote);
   if (st.reward) await reward(st.reward);
+  if (st.autosave) await autosave();
   if (st.summary) return summary();
   if (st.goto) return new Goto(st.goto);
   save();
 }
 
+// Choices. Spoken replies are a text area (tap its words for help; tapping it never chooses) with a separate
+// Say button at the side. Physical actions are plain English buttons. `where: 'phone'` puts the replies on the
+// handset with Send buttons and a "Help me reply" control.
 async function choose(c) {
   const used = new Set();
+  const context = ctx; ctx = null;
   for (;;) {
     // Options are re-checked every time the choice comes back, so flags set by one option can open or close others.
-    const options = c.options.filter(o => !used.has(o) && (!o.if || flagOk(o.if)));
+    const options = c.options.filter(o => !used.has(o) && (!o.if || flagOk(o.if))).map(o => (useAlt(o) ? { ...o, ...o.alt, orig: o } : o));
     ui.innerHTML = '';
-    const wrap = h('div', `choices${c.kind === 'sign' ? ' signs' : ''}${c.kind === 'lcd' ? ' lcd' : ''}`);
+    if (c.kind === 'lcd' || c.kind === 'sign') { const r = await chooseOld(c, options, used); if (r === 'again') continue; return r; }
+    const phoneReply = c.where === 'phone';
+    const wrap = h('div', `choices2${phoneReply ? ' phone-reply' : ''}`);
+    const reveals = [], markups = [];
+    if (context) {
+      const cc = context.st;
+      const { frag, line, en } = lineBlock(cc, context.name, context.color);
+      frag.classList.add('ctx');
+      wrap.append(frag); reveals.push(en); markups.push(cc.jp);
+      if (cc.cue === 'tap2') line.querySelectorAll('.w').forEach(w => { if (w.querySelector('rt')) w.dataset.cue2 = 1; });
+    }
     if (c.prompt) wrap.append(h('div', 'prompt', c.prompt.includes('{') ? renderJP(c.prompt) : c.prompt));
+    const list = h('div', 'opts');
+    const host = phoneReply ? handReplies() : wrap;
+    host.append(list);
     ui.append(wrap);
-    const btns = [];
     const pending = pick(options, (o, i) => {
       const noBreath = o.magic && S.breath <= 0;
-      const label = c.kind === 'lcd' ? `<span class="digits">${o.jp}</span>` : c.show === 'en' ? `<span class="en-only">${o.en}</span>` : `${renderJP(o.jp)}<span class="en" hidden>${o.en}</span>`;
-      const b = h('button', `choice${o.magic ? ' magic' : ''}${c.kind === 'sign' ? ' sign' : ''}`, `<kbd>${i + 1}</kbd>${label}${noBreath ? '<span class="en">no kotodama left today</span>' : ''}`);
-      if (noBreath) { b.disabled = true; b.classList.add('spent'); }
-      wrap.append(b); btns.push(b); return b;
+      if (o.act || c.show === 'en' || c.meta) {
+        const b = h('button', `opt act${o.magic ? ' magic' : ''}`, `<span class="act-label">${esc(o.act || o.en)}</span>${o.says ? `<span class="says">You say: ${esc(plain(o.says))}</span>` : ''}`);
+        if (noBreath) { b.disabled = true; b.classList.add('spent'); }
+        list.append(b); return b;
+      }
+      const row = h('div', `opt spk${o.magic ? ' magic' : ''}${plain(o.jp).length > 11 ? ' long' : ''}`);
+      const txt = h('div', 'opt-text'); txt.dataset.line = plain(o.jp);
+      // Physical actions get a plain English label; the Japanese under it is there to tap.
+      txt.innerHTML = `${c.kind === 'action' && o.en ? `<span class="opt-act-en">${esc(o.en)}</span>` : ''}<span class="opt-jp">${renderJP(o.jp, { gl: o.gl })}</span>`;
+      const en = h('div', 'opt-en', `${c.kind === 'action' ? '' : o.en || ''}${noBreath ? ' · no kotodama left today' : ''}`); en.hidden = !noBreath; txt.append(en);
+      reveals.push(en); markups.push(o.jp);
+      // Day 1's older action choices keep Japanese labels; they are done, not said aloud.
+      const action = o.jp.startsWith('（') || c.kind === 'action';
+      const b = h('button', 'say-btn', phoneReply ? 'Send' : action ? 'Do it' : 'Say it');
+      b.setAttribute('aria-label', `${phoneReply ? 'Send' : action ? 'Do' : 'Say'}: ${plain(o.jp)}`);
+      if (noBreath) { b.disabled = true; row.classList.add('spent'); }
+      row.append(txt, b); list.append(row); return b;
     });
-    const tools = h('div', 'choice-tools'); wrap.append(tools);
-    if (lastVoice) { const rp = h('button', 'replay', '♪ <kbd>R</kbd>'); rp.onclick = e => { e.stopPropagation(); replay(); }; tools.append(rp); }
-    if (c.show !== 'en' && c.kind !== 'lcd') englishButton(tools, options.map(o => o.jp), () => btns.forEach(b => { const e = b.querySelector('.en'); if (e) e.hidden = false; }));
+    // The first spoken choice says once how replies work.
+    if (!S.flags.replyCue && options.some(o => o.jp && !o.act) && c.show !== 'en' && !c.meta) {
+      S.flags.replyCue = true;
+      list.before(h('div', 'cue cue-flow', phoneReply ? 'Tap words for help. Send picks the reply.' : 'Tap words for help. Say it picks the reply.'));
+    }
+    const tools = h('div', 'tools');
+    const anyText = markups.length > (context ? 1 : 0) || context;
+    if (anyText && c.show !== 'en' && !c.meta) {
+      if (phoneReply) {
+        if (context) meaningButton(tools, [context.st.jp], v => { reveals[0].hidden = !v; });
+        const hb = h('div', 'hs-tools'); host.prepend(hb);
+        meaningButton(hb, markups.slice(context ? 1 : 0), v => reveals.slice(context ? 1 : 0).forEach(e => { e.hidden = !v; }), 'Help me reply (English)');
+        englishHandler = null;
+      } else meaningButton(tools, markups, v => reveals.forEach(e => { e.hidden = !v; }));
+    }
+    if (lastVoice && (context || !phoneReply)) { const rp = h('button', 'tool-btn', 'Replay'); rp.onclick = e => { e.stopPropagation(); replay(); }; tools.append(rp); }
+    if (backlog.length > 3) { const l = h('button', 'tool-btn', 'Log'); l.onclick = e => { e.stopPropagation(); openBacklog(); }; tools.append(l); }
+    wrap.append(tools);
     const chosen = await pending;
-    if (c.kind === 'lcd') { sfx('tap', .3); }
-    else if (c.chat) { markSeen(chosen.jp); logLine('あなた', chosen.jp, chosen.en, null); await chatOut(chosen.jp); }
-    else if (c.show !== 'en' && !c.meta && !chosen.jp.startsWith('（')) await say({ say: 'player', jp: chosen.jp, en: chosen.en, auto: true });
-    else if (c.show !== 'en') markSeen(chosen.jp);
+    clearCue();
+    const orig = chosen.orig || chosen;
+    if (phoneReply && chosen.jp) await handSent(chosen);
+    else if (c.chat && chosen.jp) { markSeen(chosen.jp); logLine('You', chosen.jp, chosen.en, null); await chatOut(chosen.jp); }
+    else if (chosen.jp && !chosen.act && c.show !== 'en' && !c.meta && c.kind !== 'action' && !chosen.jp.startsWith('（')) await say({ say: 'player', jp: chosen.jp, en: chosen.en, gl: chosen.gl, auto: true });
+    else if (chosen.jp && c.show !== 'en') markSeen(chosen.jp);
+    else if (chosen.act) logLine('', '', `(${chosen.act})`, null);
     if (options.some(o => o.correct)) { S.grammar.total++; if (chosen.correct) S.grammar.right++; }
     if (chosen.fx) for (const [k, v] of Object.entries(chosen.fx)) S.rel[k] = (S.rel[k] || 0) + v;
     const r = await exec(chosen.then || []);
     if (r) return r;
     if (!chosen.retry || (c.until && flagOk(c.until))) return;
-    if (!chosen.again) used.add(chosen);
+    if (!chosen.again) used.add(orig);
   }
+}
+// The keypad and the sign choices keep their own look: one button each, no words to tap.
+async function chooseOld(c, options, used) {
+  const wrap = h('div', `choices${c.kind === 'sign' ? ' signs' : ''}${c.kind === 'lcd' ? ' lcd' : ''}`);
+  if (c.prompt) wrap.append(h('div', 'prompt', c.prompt.includes('{') ? renderJP(c.prompt) : c.prompt));
+  ui.append(wrap);
+  const chosen = await pick(options, (o, i) => {
+    const label = c.kind === 'lcd' ? `<span class="digits">${o.jp}</span>` : `${renderJP(o.jp)}`;
+    const b = h('button', `choice${c.kind === 'sign' ? ' sign' : ''}`, `<kbd>${i + 1}</kbd>${label}`);
+    b.querySelectorAll('.w').forEach(w => w.classList.add('nolook'));
+    wrap.append(b); return b;
+  });
+  sfx('tap', .3);
+  if (c.kind !== 'lcd') markSeen(chosen.jp);
+  if (chosen.fx) for (const [k, v] of Object.entries(chosen.fx)) S.rel[k] = (S.rel[k] || 0) + v;
+  const r = await exec(chosen.then || []);
+  if (r) return r;
+  if (!chosen.retry || (c.until && flagOk(c.until))) return;
+  if (!chosen.again) used.add(chosen);
+  return 'again';
 }
 // The player's own chat message, shown briefly as sent.
 async function chatOut(jp) {
   ui.innerHTML = '';
   const box = h('div', 'subs chat-out');
-  box.append(h('div', 'who', '<span style="color:#cfe0ff">あなた</span>　<span class="small-tag">chat</span>'), h('div', 'line', renderJP(jp)));
+  box.append(h('div', 'who', '<span style="color:#cfe0ff">You</span>　<span class="small-tag">message</span>'), h('div', 'line', renderJP(jp)));
   ui.append(box); sfx('tap', .25);
   await sleep(1100);
 }
+
+/* ---------------- the train opening: props, the player's phone, sounds ---------------- */
+// Drawn props sit in #over, between the characters and the subtitles. On a phone the sprite steps back while one is up.
+const over = h('div'); over.id = 'over'; stage.insertBefore(over, hud);
+const setOverlay = () => stage.classList.toggle('ov', !!over.querySelector('.insert, .handset, .photo-card'));
+function insert(name) {
+  over.querySelector('.insert')?.remove();
+  if (name) over.append(h('div', `insert ins-${name}`, insertHTML(name, (m, gl) => `<span class="ins-word" data-line="${esc(plain(m))}">${renderJP(m, { gl })}</span>`)));
+  setOverlay();
+}
+// The player's phone as a prop: a chat thread with Emi, the housing card, her photo.
+let hand = null;
+function handShell(title) {
+  if (!hand) {
+    hand = h('div', 'handset', `<div class="hs-bar"><span class="hs-time"></span><span>AMAKAWA</span></div><div class="hs-head"></div><div class="hs-body"></div><div class="hs-foot"></div>`);
+    over.append(hand);
+  }
+  hand.querySelector('.hs-time').textContent = digital(S.time);
+  hand.querySelector('.hs-head').innerHTML = title;
+  setOverlay();
+  return hand;
+}
+const emiHead = () => `<img class="hs-av" src="img/ch/emi-smile.webp" alt=""><div><b>${renderJP('エミ', { gl: { エミ: 'Emi (a name)' } })}</b><small>Emi · your new team lead</small></div>`;
+const hsBody = () => hand.querySelector('.hs-body'), hsFoot = () => hand.querySelector('.hs-foot');
+function handReplies() { const f = hsFoot(); f.innerHTML = ''; return f; }
+function bubble(cls, html) { const b = h('div', `bub ${cls}`, html); hsBody().append(b); hsBody().scrollTop = 1e6; return b; }
+function keepVoiceLine(who, st) {
+  let m = S.messages[S.messages.length - 1];
+  if (!m || m.kind !== 'voice' || m.from !== who || m.closed) { m = { from: who, kind: 'voice', day: S.day, lines: [] }; S.messages.push(m); S.unread = true; drawHud(true); }
+  m.lines.push({ jp: st.jp, en: st.en });
+  const bub = hand && [...hand.querySelectorAll('.bub.in.voice')].pop();
+  if (bub) { let t = bub.querySelector('.vtext'); if (!t) { t = h('div', 'vtext'); bub.append(t); } t.insertAdjacentHTML('beforeend', `<div class="hs-text" data-line="${esc(plain(st.jp))}">${renderJP(st.jp, { gl: st.gl })}</div>`); hsBody().scrollTop = 1e6; }
+}
+async function handStep(m) {
+  if (!m) { if (hand) { hand.remove(); hand = null; phoneCue(); } const lastV = S.messages[S.messages.length - 1]; if (lastV?.kind === 'voice') lastV.closed = true; setOverlay(); return; }
+  if (m.mode === 'housing') {
+    handShell(`<div><b>Housing</b><small>Amakawa staff app</small></div>`);
+    hsBody().innerHTML = housingHTML(mk => `<span class="ins-word" data-line="${esc(plain(mk))}">${renderJP(mk, { gl: { 寮: 'dorm, company housing' } })}</span>`);
+    hsFoot().innerHTML = '';
+    return;
+  }
+  if (m.mode === 'voicemail') {
+    handShell(emiHead()); hsBody().innerHTML = ''; hsFoot().innerHTML = '';
+    const b = bubble('in voice', `<button class="play-btn" aria-label="Play the voice message">▶</button><span class="wave"></span><span class="dur">0:04</span>`);
+    ui.innerHTML = '';
+    const box = h('div', 'subs'); box.append(h('div', 'narr', 'Your phone buzzes. A voice message from Emi.')); ui.append(box);
+    const play = b.querySelector('.play-btn');
+    play.classList.add('pulse');
+    const cueEl = h('div', 'cue cue-hand', 'Tap Play'); hand.append(cueEl);
+    await new Promise(res => { play.onclick = e => { e.stopPropagation(); res(); }; keyHandler = e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); res(); } }; });
+    keyHandler = null; cueEl.remove();
+    play.classList.remove('pulse'); b.classList.add('playing'); play.textContent = '❚❚'; sfx('tap', .3);
+    return;
+  }
+  if (m.mode === 'recording') {
+    const b = bubble('in typing', `<span class="dots"><i></i><i></i><i></i></span><small>Emi is recording…</small>`);
+    await sleep(1300);
+    hsBody().querySelectorAll('.bub.playing .play-btn').forEach(x => { x.textContent = '▶'; x.closest('.bub').classList.remove('playing'); });
+    b.className = 'bub in voice playing'; b.innerHTML = `<button class="play-btn" tabindex="-1">❚❚</button><span class="wave"></span><span class="dur">0:02</span>`;
+    return;
+  }
+  if (m.mode === 'photo') {
+    handShell(emiHead()); hsBody().innerHTML = ''; hsFoot().innerHTML = '';
+    const msg = { from: m.from, kind: 'photo', img: 'gate', jp: m.jp, en: m.en, gl: m.gl, day: S.day };
+    S.messages.push(msg); S.unread = true; drawHud(true); markSeen(m.jp); logLine('Emi', m.jp, m.en, null);
+    const b = bubble('in photo', `<img src="img/bg/gate.webp" alt="Emi's photo: glass security gates in a lobby"><div class="hs-text" data-line="${esc(plain(m.jp))}">${renderJP(m.jp, { gl: m.gl })}</div><div class="hs-en" hidden>${esc(m.en)}</div>`);
+    const tb = h('div', 'hs-tools'); b.append(tb);
+    meaningButton(tb, [m.jp], v => { b.querySelector('.hs-en').hidden = !v; });
+    ui.innerHTML = '';
+    const box = h('div', 'subs'); box.append(h('div', 'narr', 'Your phone buzzes again. Emi sent a photo.')); ui.append(box);
+    const keep = h('button', 'keep-btn', 'Keep this photo'); hsFoot().append(keep);
+    await new Promise(res => { keep.onclick = e => { e.stopPropagation(); res(); }; });
+    englishHandler = null;
+    sfx('place', .4); S.flags.keptPhoto = true; msg.kept = true;
+    if (m.task) { S.task = m.task; drawHud(true); }
+    keep.replaceWith(h('div', 'kept', 'Saved. It\'s next to your goal at the top of the screen.'));
+    await sleep(1600);
+  }
+}
+// First message: say once where messages are kept.
+function phoneCue() {
+  if (S.flags.phoneCue || !S.messages.length) return; S.flags.phoneCue = true;
+  const c = h('div', 'cue cue-phone', 'Messages are saved in your phone, top right'); hud.append(c); setTimeout(() => c.remove(), 5000);
+}
+async function handSent(o) {
+  markSeen(o.jp); logLine('You', o.jp, o.en, ['player', plain(o.jp)]);
+  handReplies();
+  hsBody().querySelectorAll('.bub.playing').forEach(x => { x.classList.remove('playing'); const pb = x.querySelector('.play-btn'); if (pb) pb.textContent = '▶'; });
+  bubble('out voice', `<span class="play-btn mini">▶</span><span class="wave"></span><span class="hs-text">${renderJP(o.jp)}</span>`).querySelectorAll('.w').forEach(w => w.classList.add('nolook'));
+  (S.messages[S.messages.length - 1]?.lines || []).push({ jp: o.jp, en: o.en, me: true });
+  ui.innerHTML = '';
+  const box = h('div', 'subs');
+  box.append(h('div', 'who', '<span style="color:#cfe0ff">You · recording</span>'), h('div', 'line', renderJP(o.jp)));
+  ui.append(box);
+  const a = playVoice('player', plain(o.jp));
+  if (a) await new Promise(r => { a.addEventListener('ended', r); a.addEventListener('error', r); setTimeout(r, 6000); }); else await sleep(1100);
+}
+// Emi's photo, reopened from the goal at the top of the screen.
+function showPhoto() {
+  if (over.querySelector('.photo-view')) return;
+  const m = [...S.messages].reverse().find(x => x.kind === 'photo');
+  if (!m) return;
+  const v = h('div', 'photo-view', `<div class="pv-card"><img src="img/bg/${m.img}.webp" alt="Emi's photo: glass security gates in a lobby"><div class="hs-text" data-line="${esc(plain(m.jp))}">${renderJP(m.jp, { gl: m.gl })}</div><div class="hs-en" hidden>${esc(m.en)}</div><div class="pv-tools"></div></div>`);
+  const tb = v.querySelector('.pv-tools');
+  const mb = h('button', 'tool-btn', 'Meaning'); mb.onclick = e => { e.stopPropagation(); v.querySelector('.hs-en').hidden = false; mb.remove(); };
+  const cl = h('button', 'tool-btn', 'Close'); cl.onclick = e => { e.stopPropagation(); v.remove(); };
+  tb.append(mb, cl);
+  v.addEventListener('click', e => e.stopPropagation());
+  over.append(v);
+}
+// The gate: find the entrance from Emi's photo by tapping it in the scene.
+const GATE_DOOR = { w: 1920, h: 1314, x0: 300, x1: 1705, y0: 690, y1: 1050 };
+async function findEntrance(fe) {
+  ui.innerHTML = '';
+  const card = h('div', 'photo-card', `<img src="img/bg/gate.webp" alt="Emi's photo of the entrance"><span>Emi's photo</span>`);
+  over.append(card); setOverlay();
+  const box = h('div', 'subs'); box.append(h('div', 'narr', fe.prompt)); ui.append(box);
+  const spot = h('button', 'hotspot'); spot.setAttribute('aria-label', 'The open gate in the middle');
+  over.append(spot);
+  const place = () => {
+    const W = stage.clientWidth, H = stage.clientHeight, k = Math.max(W / GATE_DOOR.w, H / GATE_DOOR.h);
+    const ox = (W - GATE_DOOR.w * k) / 2, oy = (H - GATE_DOOR.h * k) / 2;
+    Object.assign(spot.style, { left: `${ox + GATE_DOOR.x0 * k}px`, top: `${oy + GATE_DOOR.y0 * k}px`, width: `${(GATE_DOOR.x1 - GATE_DOOR.x0) * k}px`, height: `${(GATE_DOOR.y1 - GATE_DOOR.y0) * k}px` });
+  };
+  place(); addEventListener('resize', place);
+  let misses = 0;
+  const miss = e => { if (e.target === spot || e.target.closest('button')) return; if (++misses === 2) { box.append(h('div', 'cap', 'Look for the row of glass gates in the photo.')); spot.classList.add('strong'); } };
+  stage.addEventListener('click', miss);
+  await new Promise(res => { spot.onclick = e => { e.stopPropagation(); res(); }; keyHandler = e => { if (e.key === 'Enter') res(); }; });
+  keyHandler = null;
+  stage.removeEventListener('click', miss); removeEventListener('resize', place);
+  sfx('tap', .35); spot.remove(); card.remove(); setOverlay();
+  S.task = ''; drawHud();
+  const t = h('div', 'toast', 'Goal done: you found the entrance'); stage.append(t); setTimeout(() => t.remove(), 2200);
+}
+async function autosave() {
+  save();
+  const t = h('div', 'toast', 'Saved'); stage.append(t);
+  await sleep(1500); t.remove();
+}
+// Sounds made in code: the carriage hum and joints, the arrival chime, the doors, the phone buzzing.
+let AC = null, ambNodes = null;
+const ac = () => { try { AC ||= new (window.AudioContext || window.webkitAudioContext)(); if (AC.state === 'suspended') AC.resume(); } catch { AC = null; } return AC; };
+function noiseBuffer(ctxA, secs = 2) {
+  const b = ctxA.createBuffer(1, ctxA.sampleRate * secs, ctxA.sampleRate), d = b.getChannelData(0);
+  let last = 0; for (let i = 0; i < d.length; i++) { last = (last + .02 * (Math.random() * 2 - 1)) / 1.02; d[i] = last * 3.5; }
+  return b;
+}
+function ambience(mode) {
+  const a = ac(); if (!a) return;
+  if (!mode) { if (ambNodes) { const n = ambNodes; ambNodes = null; n.gain.gain.setTargetAtTime(0, a.currentTime, .6); clearInterval(n.clack); setTimeout(() => n.src.stop(), 3000); } return; }
+  if (!ambNodes) {
+    const src = a.createBufferSource(); src.buffer = noiseBuffer(a, 4); src.loop = true;
+    const lp = a.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.value = 320;
+    const gain = a.createGain(); gain.gain.value = 0;
+    src.connect(lp).connect(gain).connect(a.destination); src.start();
+    gain.gain.setTargetAtTime(.22, a.currentTime, 1.2);
+    ambNodes = { src, lp, gain, clack: setInterval(() => tone('clack'), 3600) };
+  }
+  if (mode === 'pitch') { ambNodes.lp.frequency.setTargetAtTime(420, a.currentTime, 1.5); ambNodes.src.playbackRate.setTargetAtTime(1.15, a.currentTime, 1.5); }
+  if (mode === 'slow') { clearInterval(ambNodes.clack); ambNodes.lp.frequency.setTargetAtTime(200, a.currentTime, 2); ambNodes.src.playbackRate.setTargetAtTime(.7, a.currentTime, 2); ambNodes.gain.gain.setTargetAtTime(.12, a.currentTime, 2); }
+}
+function tone(name) {
+  const a = ac(); if (!a) return;
+  const t = a.currentTime;
+  const burst = (at, dur, freq, vol, type = 'bandpass') => {
+    const s = a.createBufferSource(); s.buffer = noiseBuffer(a, dur + .05);
+    const f = a.createBiquadFilter(); f.type = type; f.frequency.value = freq; f.Q.value = 1.2;
+    const g = a.createGain(); g.gain.setValueAtTime(vol, at); g.gain.exponentialRampToValueAtTime(.0001, at + dur);
+    s.connect(f).connect(g).connect(a.destination); s.start(at); s.stop(at + dur + .05);
+  };
+  const beep = (at, freq, dur, vol, type = 'sine') => {
+    const o = a.createOscillator(); o.type = type; o.frequency.value = freq;
+    const g = a.createGain(); g.gain.setValueAtTime(0, at); g.gain.linearRampToValueAtTime(vol, at + .02); g.gain.exponentialRampToValueAtTime(.0001, at + dur);
+    o.connect(g).connect(a.destination); o.start(at); o.stop(at + dur + .05);
+  };
+  if (name === 'clack') { burst(t, .08, 180, .5, 'lowpass'); burst(t + .16, .08, 170, .4, 'lowpass'); }
+  if (name === 'keys') for (let i = 0; i < 7; i++) burst(t + i * .13 + Math.random() * .05, .03, 3200, .12);
+  if (name === 'chime') { beep(t, 659, .9, .12); beep(t + .45, 523, 1.2, .12); }
+  if (name === 'buzz') for (let i = 0; i < 2; i++) beep(t + i * .45, 140, .3, .18, 'square');
+  if (name === 'door') { burst(t, .9, 900, .25); burst(t + .1, .6, 400, .2); }
+}
+
 // A paper sign or screen text: read it, tap words, continue.
 async function sign(sg) {
   markSeen(sg.jp); logLine('', sg.jp, sg.en, null);
   const box = h('div', 'subs');
   box.append(h('div', `paper${sg.kind ? ' ' + sg.kind : ''}`, renderJP(sg.jp)));
   const en = h('div', 'en', sg.en); en.hidden = true; box.append(en);
-  const tools = h('div', 'hint', ''); box.append(tools);
+  const tools = h('div', 'tools'); box.append(tools, advanceMark());
   ui.innerHTML = ''; ui.append(box);
-  englishButton(tools, [sg.jp], () => { en.hidden = false; });
+  englishButton(tools, [sg.jp], v => { en.hidden = !v; });
   await waitAdvance();
 }
 
@@ -716,7 +1086,7 @@ async function pin(p) {
   const wrap = h('div', 'pinbox');
   wrap.append(h('div', 'prompt', p.prompt));
   const fromMemory = p.fields.some(f => f.id.startsWith('e_'));
-  if (!fromMemory) for (const m of S.messages.filter(m => m.day === S.day).slice(-2)) wrap.append(h('div', 'pin-msg', `<span class="from">${CAST[m.from]?.name || m.from}</span>${renderJP(m.jp)}`));
+  if (!fromMemory) for (const m of S.messages.filter(m => m.day === S.day).slice(-2)) wrap.append(h('div', 'pin-msg', `<span class="from">${CAST[m.from]?.en || m.from}</span>${renderJP(m.jp)}`));
   ui.append(wrap);
   const picked = [];
   for (const f of p.fields) {
@@ -735,9 +1105,10 @@ async function pin(p) {
 async function elevator(e) {
   for (;;) {
     ui.innerHTML = '';
-    const panel = h('div', 'panel', '<h3>AMAKAWA TOWER</h3>');
+    const panel = h('div', 'panel', `<h3>AMAKAWA TOWER</h3>${e.hint ? `<p class="panel-hint" data-line="${esc(plain(e.hint))}">${renderJP(e.hint)} Press the round button next to your floor.</p>` : ''}`);
     ui.append(panel);
-    const f = await pick(e.floors || FLOORS, (fl, i) => { const b = h('button', 'floor', `<span class="btn"></span><span>${renderJP(fl.jp)}</span><kbd>${i + 1}</kbd>`); panel.append(b); return b; });
+    // The round button goes; the label is words to tap for help.
+    const f = await pick(e.floors || FLOORS, (fl, i) => { const row = h('div', 'floor', `<span class="fl-label" data-line="${esc(plain(fl.jp))}">${renderJP(fl.jp)}</span>`); const b = h('button', 'btn'); b.setAttribute('aria-label', `Floor: ${fl.en}`); row.prepend(b); panel.append(row); return b; });
     markSeen(f.jp);
     sfx('bell', .3); S.time += 1; drawHud();
     ui.innerHTML = '';
@@ -877,147 +1248,9 @@ async function learnSpell(ls) {
   sfx('cast', .5);
   const ov = h('div', 'spell'); const ring = h('div', 'ring');
   const reading = (GLOSSARY[ls.key]?.r || '') + ls.form.slice(ls.key.length);
-  ring.append(h('div', 'goal', renderJP('{新|あたら|新しい}しい{言霊|ことだま}')), h('div', 'cast-still', renderJP(`{${ls.form}|${reading || ls.form}|${ls.key}}`)), h('div', 'hint', ls.en), h('div', 'hint', 'click / space: continue'));
+  ring.append(h('div', 'goal', renderJP('{新|あたら|新しい}しい{言霊|ことだま}')), h('div', 'cast-still', renderJP(`{${ls.form}|${reading || ls.form}|${ls.key}}`)), h('div', 'hint', ls.en), advanceMark());
   ov.append(ring); ui.innerHTML = ''; ui.append(ov);
   await waitAdvance();
-}
-
-/* ---------------- the new-hire app: onboarding and the level check ---------------- */
-// Runs on the company phone during the monorail ride: welcome, island map, the dorm room, the ID card, then a
-// two-minute Japanese check that sets the reading help (kanji band, romaji or kana readings, katakana help).
-const CHECK = {
-  hira: [['えき', 'eki', ['eki', 'aki', 'eku', 'iki']], ['みぎ', 'migi', ['migi', 'mishi', 'niki', 'mige']], ['でぐち', 'deguchi', ['deguchi', 'teguchi', 'degushi', 'doguchi']], ['しゃいん', 'shain', ['shain', 'shiyain', 'sain', 'chain']]],
-  kata: [['カード', 'kaado', ['kaado', 'kaato', 'waado', 'kaade']], ['コピー', 'kopii', ['kopii', 'kobii', 'yopii', 'kopie']], ['ゲーム', 'geemu', ['geemu', 'keemu', 'geeru', 'gaamu']], ['エレベーター', 'erebeetaa', ['erebeetaa', 'erepeetaa', 'orebeetaa', 'erebeeshaa']]],
-  // [word, reading, distractor readings, level: 1 = N5, 2 = N4, 3 = harder]
-  kanji: [['人', 'ひと', ['いる', 'はち', 'まる'], 1], ['右', 'みぎ', ['いし', 'ひだり', 'かみ'], 1], ['出口', 'でぐち', ['いりぐち', 'でくち', 'しゅつぐち'], 1], ['今日', 'きょう', ['いまひ', 'こんにち', 'あした'], 1],
-    ['会社', 'かいしゃ', ['かいじゃ', 'あいしゃ', 'しゃかい'], 2], ['地下', 'ちか', ['ちした', 'じか', 'ちげ'], 2], ['三階', 'さんがい', ['さんかい', 'みかい', 'さんばい'], 2], ['会議', 'かいぎ', ['かいごう', 'あいぎ', 'かいき'], 2],
-    ['部屋', 'へや', ['ぶや', 'ぶおく', 'へいや'], 2], ['言葉', 'ことば', ['ことは', 'げんよう', 'いいば'], 2], ['営業', 'えいぎょう', ['えいごう', 'けいぎょう', 'えいげい'], 3], ['企画', 'きかく', ['きが', 'きかい', 'しかく'], 3]],
-  gram: [['<ruby>来<rt>き</rt></ruby>てね。', 'Come (please).', ["Don't come.", 'He came.']], ['<ruby>止<rt>と</rt></ruby>まって。', 'Stop.', ['It stopped.', "Don't stop."]],
-    ['<ruby>話<rt>はな</rt></ruby>しかけないで。', "Don't talk to me.", ['Talk to me.', 'I talked to you.']], ['<ruby>行<rt>い</rt></ruby>こう。', "Let's go.", ['Go!', 'I went.']]],
-};
-// Skip-the-check presets come from data/lang/profiles.json (the same reference players the pacing checker uses).
-const PRESETS = { new: 'beginner', some: 'jorgen', n3: 'n3' };
-const PRESET_FALLBACK = { beginner: { band: 0, hiraWeak: true, kataWeak: true }, jorgen: { band: 1, hiraWeak: false, kataWeak: true }, n3: { band: 3, hiraWeak: false, kataWeak: false } };
-function applyPreset(name) {
-  const P = profile(), pr = LANG.profiles?.[name];
-  L.kanji = {};
-  if (!pr) { Object.assign(P, PRESET_FALLBACK[name], { checked: true }); return; }
-  Object.assign(P, { band: pr.kanji?.band ?? 1, hiraWeak: pr.hiragana === 'weak', kataWeak: pr.katakana === 'weak', checked: true, preset: name });
-  for (const c of pr.kanji?.readable || '') kanjiRec(c).st = 2;
-  for (const c of pr.kanji?.learning || '') kanjiRec(c).st = 1;
-  // Words the profile knows start at "recalling": no reading help needed, still tracked.
-  const wk = pr.words || {};
-  for (const line of Object.values(LANG.lines || {})) for (const t of line.t) {
-    const jm = t.id && LANG.words?.[t.id]; if (!jm || !CONTENT(t)) continue;
-    const known = (wk.known || []).includes(t.b || t.s) || (wk.jlpt && jm.n >= wk.jlpt && (!wk.freq || (jm.f || 1e9) <= wk.freq)) || (wk.freq_any && (jm.f || 1e9) <= wk.freq_any);
-    if (known && !(wk.unknown || []).includes(t.b || t.s)) { const w = word(t.b || t.s); w.stage = Math.max(w.stage, 2); }
-  }
-}
-function appScreen(body, { next = 'つぎへ', step = '' } = {}) {
-  phone.className = 'app'; phone.innerHTML = '';
-  phone.append(h('div', 'ph-top', `<div class="brand">AMAKAWA</div><div class="app-name">${renderJP('{新人|しんじん}アプリ')}<small>${step}</small></div>`));
-  const b = h('div', 'ph-body app-body'); if (typeof body === 'string') b.innerHTML = body; else b.append(body);
-  phone.append(b);
-  phone.hidden = false;
-  if (!next) return Promise.resolve(b);
-  const btn = h('button', 'ph-next', `${renderJP(next)}<kbd>↵</kbd>`); phone.append(btn);
-  return new Promise(res => { const go = () => { keyHandler = null; sfx('tap', .3); res(b); }; btn.onclick = go; keyHandler = e => { if (e.key === 'Enter' && e.target.tagName !== 'INPUT') { e.preventDefault(); go(); } }; });
-}
-// One multiple-choice question inside the app; returns the picked option.
-function appPick(html, options, labelOf, step) {
-  const b = h('div', 'check');
-  b.innerHTML = html;
-  const list = h('div', 'check-opts'); b.append(list);
-  appScreen(b, { next: null, step });
-  return pick(options, (o, i) => { const x = h('button', 'check-opt', `<kbd>${i + 1}</kbd>${labelOf(o)}`); list.append(x); return x; });
-}
-async function levelCheck() {
-  const P = profile();
-  // 1-2: kana. Stops after two misses.
-  const kana = async (items, step) => { let right = 0, miss = 0; for (const [w, ro, opts] of items) { if (miss >= 2) break;
-    const got = await appPick(`<p class="q-en">How do you read this?</p><div class="q-big">${w}</div>`, shuffle(opts), o => o, step);
-    if (got === ro) right++; else miss++; } return right; };
-  const hira = await kana(CHECK.hira, 'ひらがな');
-  const kata = await kana(CHECK.kata, 'カタカナ');
-  // 3: kanji. Tap what you can read, then prove up to three.
-  const picked = new Set();
-  const grid = h('div', 'check');
-  grid.innerHTML = '<p class="q-en">Tap every word you can read. Leave the rest.</p>';
-  const tiles = h('div', 'kgrid'); grid.append(tiles);
-  CHECK.kanji.forEach(([w], i) => { const t = h('button', 'ktile', w); t.onclick = () => { t.classList.toggle('on'); t.classList.contains('on') ? picked.add(i) : picked.delete(i); }; tiles.append(t); });
-  await appScreen(grid, { next: 'OK', step: 'かんじ' });
-  const ok = new Set(picked);
-  for (const i of shuffle([...picked]).slice(0, 3)) {
-    const [w, r, d] = CHECK.kanji[i];
-    const got = await appPick(`<p class="q-en">Which reading?</p><div class="q-big">${w}</div>`, shuffle([r, ...d]), o => o, 'かんじ');
-    if (got !== r) ok.delete(i);
-  }
-  // 4: grammar, what does the speaker want?
-  let gram = 0;
-  for (const [line, right, wrong] of CHECK.gram) {
-    const got = await appPick(`<p class="q-en">What does the speaker want?</p><div class="q-big q-line">${line}</div>`, shuffle([right, ...wrong]), o => o, 'ぶんぽう');
-    if (got === right) gram++;
-  }
-  const lv = n => [...ok].filter(i => CHECK.kanji[i][3] === n).length;
-  const n5 = lv(1), n4 = lv(2), hard = lv(3);
-  Object.assign(P, { hiraWeak: hira < 3, kataWeak: kata < 3, gram, checked: true,
-    band: hira < 3 ? 0 : n5 < 2 ? 0 : n4 < 3 ? 1 : (hard >= 1 && n4 >= 5 ? 3 : 2) });
-  // Single kanji: the ones proven readable are readable; easy ones the player left untapped go back to learning.
-  CHECK.kanji.forEach(([w], i) => { for (const c of kanjiIn(w)) { const k = kanjiRec(c); k.st = ok.has(i) ? 2 : Math.min(bandState(c), 1); } });
-  return { hira, kata, n5, n4, hard, gram };
-}
-async function onboarding() {
-  closePhone(); ui.innerHTML = '';
-  await sleep(400); sfx('bell', .3);
-  const w = await appScreen(`<div class="app-hero">${renderJP('ようこそ、{天川|あまかわ}へ。')}</div>
-    <p class="small">The Amakawa new-hire app. It came with the phone.</p>
-    <label class="app-field">Name for your ID card (as on your passport)<input type="text" id="appName" maxlength="24" placeholder="optional" value="${S.name || ''}"></label>`, { step: '1/5' });
-  S.name = (w.querySelector('#appName')?.value || '').trim();
-  markSeen('ようこそ、{天川|あまかわ}へ。');
-  await appScreen(`<div class="app-cap">${renderJP('ここが{天川|あまかわ}シティです。')}</div>
-    <div class="map"><svg viewBox="0 0 300 220" aria-hidden="true"><rect width="300" height="220" fill="#1b3b52"/>
-      <path d="M70 40 Q150 10 245 45 Q285 100 250 170 Q170 210 90 185 Q45 130 70 40Z" fill="#2b3036" stroke="#4a525c" stroke-width="2"/>
-      <path d="M0 118 L78 118" stroke="#c9d1db" stroke-width="3" stroke-dasharray="6 4"/>
-      <rect x="140" y="70" width="30" height="62" rx="2" fill="#e8452c"/><rect x="78" y="108" width="22" height="18" rx="2" fill="#c9d1db"/>
-      <rect x="92" y="138" width="26" height="16" rx="2" fill="#8fb4d8"/></svg>
-      <button class="pin p-eki">${renderJP('{駅|えき}')}</button><button class="pin p-hq">${renderJP('{本社|ほんしゃ}')}</button><button class="pin p-dorm">${renderJP('{寮|りょう}')}</button></div>
-    <p class="small">Tap a word to see what it means.</p>`, { step: '2/5' });
-  markSeen('ここが{天川|あまかわ}シティです。');
-  await appScreen(`<div class="app-cap">${renderJP('あなたの{部屋|へや}')}</div>
-    <div class="room-card"><div class="room-no">203</div><div>${renderJP('{寮|りょう}・{二階|にかい}')}</div></div>
-    <div class="app-cap">${renderJP('{荷物|にもつ}は、もう{部屋|へや}にあります。')}</div>`, { step: '3/5' });
-  markSeen('あなたの{部屋|へや}'); markSeen('{寮|りょう}・{二階|にかい}'); markSeen('{荷物|にもつ}は、もう{部屋|へや}にあります。');
-  const d = new Date();
-  await appScreen(`<div class="idcard"><div class="id-top">AMAKAWA<span>ID</span></div><div class="id-row"><div class="id-photo"></div><div class="id-info">
-      <div class="id-name">${(S.name || 'NEW HIRE').replace(/[<>&"]/g, '')}</div><div>${renderJP('{企画室|きかくしつ}7')}</div>
-      <div class="id-date">${d.getFullYear()}.${d.getMonth() + 1}.${d.getDate()}</div></div></div></div>
-    <div class="app-cap">${renderJP('ゲートで{見|み|見せる}せてください。')}</div>`, { step: '4/5' });
-  markSeen('{企画室|きかくしつ}7'); markSeen('ゲートで{見|み|見せる}せてください。');
-  // The check.
-  const P = profile();
-  const intro = h('div', 'check');
-  intro.innerHTML = `<div class="app-cap">${renderJP('チェック（２分）')}</div><p class="q-en">${P.checked ? 'A Japanese check. Your level is saved from before.' : 'A Japanese check, about two minutes. It sets how much reading help you get, and keeps adjusting as you play. Or skip it and pick a level.'}</p>`;
-  const list = h('div', 'check-opts'); intro.append(list);
-  appScreen(intro, { next: null, step: '5/5' });
-  const opts = P.checked
-    ? [{ v: 'keep', jp: 'そのまま', en: 'Keep it' }, { v: 'check', jp: 'もう{一度|いちど}', en: 'Check again' }]
-    : [{ v: 'check', jp: 'チェックする', en: 'Take the check (2 min)' }, { v: 'new', jp: 'はじめて', en: 'New to Japanese' }, { v: 'some', jp: 'すこし', en: 'Some study: kana fine, a few kanji' }, { v: 'n3', jp: 'N3ぐらい', en: 'Comfortable at N3' }];
-  const c = await pick(opts, (o, i) => { const x = h('button', 'check-opt', `<kbd>${i + 1}</kbd>${renderJP(o.jp)}<span class="en">${o.en}</span>`); list.append(x); return x; });
-  let res = null;
-  if (c.v === 'check') res = await levelCheck();
-  else if (PRESETS[c.v]) applyPreset(PRESETS[c.v]);
-  save();
-  if (res || PRESETS[c.v]) {
-    const lines = [
-      P.hiraWeak ? 'Readings above kanji will be in romaji for now.' : 'Readings above kanji will be in kana.',
-      P.kataWeak ? 'Katakana: tap a katakana word once to see it in romaji.' : 'Katakana looks fine. Tapping one still shows romaji.',
-      ['Kanji show as kana for now. They come in one at a time, with the reading above.', 'Easy kanji show with the reading above; the rest as kana.', 'Easy kanji show plain, the next ones with the reading above.', 'Most kanji show plain; harder ones with the reading above.'][P.band],
-      'Tap any word for its meaning. It keeps adjusting as you play.',
-    ];
-    await appScreen(`<div class="app-cap">OK</div>${res ? `<p class="q-en">Hiragana ${res.hira}/4 · katakana ${res.kata}/4 · kanji words ${res.n5 + res.n4 + res.hard}/12 · grammar ${res.gram}/4</p>` : ''}<ul class="res">${lines.map(l => `<li>${l}</li>`).join('')}</ul>`, { next: 'とじる', step: '' });
-  }
-  phone.hidden = true; phone.className = '';
-  drawHud();
 }
 
 /* ---------------- typed input ---------------- */
@@ -1059,7 +1292,7 @@ async function freeReply(fr) {
 async function reviewMessages(rm) {
   for (const m of S.messages.slice(-rm.count)) {
     const box = h('div', 'subs');
-    box.append(h('div', 'who', `<span style="color:#ff9a8a">${CAST[m.from]?.name || m.from}</span>`), h('div', 'line', renderJP(m.jp, { forceKana: true })), h('div', 'hint', 'click / space: continue'));
+    box.append(h('div', 'who', `<span style="color:#ff9a8a">${CAST[m.from]?.en || m.from}</span>`), h('div', 'line', renderJP(m.jp, { forceKana: true })), advanceMark());
     ui.innerHTML = ''; ui.append(box); markSeen(m.jp);
     await waitAdvance();
   }
@@ -1080,7 +1313,7 @@ async function glossNote(g) {
   const key = g.key, e = GLOSSARY[key] || {};
   markSeen(`{${key}|${e.r || key}}`);
   const box = h('div', 'subs');
-  box.append(h('div', 'gloss-card', `<b>${key}</b><div class="r">${e.r || ''} · ${romaji(e.r || key)}</div>${e.en || ''}`), h('div', 'hint', 'click / space: continue'));
+  box.append(h('div', 'gloss-card', `<b>${key}</b><div class="r">${e.r || ''} · ${romaji(e.r || key)}</div>${e.en || ''}`), advanceMark());
   ui.innerHTML = ''; ui.append(box);
   await waitAdvance();
 }
@@ -1130,11 +1363,11 @@ async function ensureLLM() {
   if (TOUCH) return false;
   for (;;) {
     ui.innerHTML = '';
-    const wrap = h('div', 'choices');
-    wrap.append(h('div', 'prompt', 'This moment is free typing with the local AI, and it isn\'t running.'));
+    const wrap = h('div', 'choices2'), list = h('div', 'opts');
+    wrap.append(h('div', 'prompt', 'This moment is free typing with the local AI, and it isn\'t running.'), list);
     ui.append(wrap);
     const opts = [{ v: 'start', label: 'Start it on this PC', en: 'Runs Orion with llama-server on port 8190. Loading takes about a minute.' }, { v: 'script', label: 'Use the scripted version', en: 'Pick from four replies instead.' }];
-    const c = await pick(opts, (o, i) => { const b = h('button', 'choice', `<kbd>${i + 1}</kbd><span class="en-only">${o.label}</span><span class="en">${o.en}</span>`); wrap.append(b); return b; });
+    const c = await pick(opts, o => { const b = h('button', 'opt act', `<span class="act-label">${o.label}</span><span class="says">${o.en}</span>`); list.append(b); return b; });
     if (c.v === 'script') return false;
     launchLocalLLM();
     ui.innerHTML = '';
@@ -1150,10 +1383,11 @@ async function ensureLLM() {
     keyHandler = null;
     if (cancel) return false;
     ui.innerHTML = '';
-    const w2 = h('div', 'choices');
+    const w2 = h('div', 'choices2'), l2 = h('div', 'opts');
     w2.append(h('div', 'prompt', 'It didn\'t come up. If nothing happened after the click, run tools/llm/install-launcher.sh once (see tools/llm/README.md), or start tools/llm/amakawa-llm.sh by hand.'));
     ui.append(w2);
-    const again = await pick([{ v: 1, l: 'Try again' }, { v: 0, l: 'Use the scripted version' }], (o, i) => { const b = h('button', 'choice', `<kbd>${i + 1}</kbd><span class="en-only">${o.l}</span>`); w2.append(b); return b; });
+    w2.append(l2);
+    const again = await pick([{ v: 1, l: 'Try again' }, { v: 0, l: 'Use the scripted version' }], o => { const b = h('button', 'opt act', `<span class="act-label">${o.l}</span>`); l2.append(b); return b; });
     if (!again.v) return false;
   }
 }
@@ -1161,6 +1395,7 @@ function dayFacts() {
   const f = S.flags, facts = [];
   if (S.day === 1) {
     facts.push('today was his first day at Amakawa; he arrived by monorail and moved into the company dorm');
+    facts.push('on the monorail he sat next to Rei Kuroda from Sales before he knew who she was; she recognised Emi\'s voice message and silenced a call from Emi');
     facts.push('his dorm room is Dorm A, room 203, on the second floor; its window faces a concrete wall about two metres away; his boxes are not unpacked');
     facts.push(f.casualGuard ? 'he was too casual with Ishibashi, the gate guard, who stopped him again on the way out' : 'the gate guard Ishibashi stopped him at the gate this morning');
     const count = f.copies100 ? 'a hundred sets (far too many; ninety are left over)' : f.copies20 ? 'twenty sets' : f.copies11 ? 'eleven sets' : 'ten sets, as asked';
@@ -1196,7 +1431,7 @@ async function freeTalk(t) {
     const said = await new Promise(res => input.addEventListener('keydown', e => { if (e.key === 'Enter' && input.value.trim()) res(toKana(input.value.trim())); }));
     logLine('あなた', said, '', null);
     msgs.push({ role: 'user', content: said });
-    ui.innerHTML = ''; ui.append(h('div', 'subs', `<div class="narr">${t.chat ? `${c.name}…` : '…'}</div>`));
+    ui.innerHTML = ''; ui.append(h('div', 'subs', `<div class="narr">${t.chat ? `${c.en}…` : '…'}</div>`));
     let reply;
     try { reply = await llm(msgs); } catch (e) { await narrate(`(The local AI didn't answer: ${e.message}. Using the script instead.)`); return exec(t.fallback); }
     msgs.push({ role: 'assistant', content: JSON.stringify(reply) });
@@ -1206,16 +1441,16 @@ async function freeTalk(t) {
     const ja = String(reply.ja || '');
     const marked = /\{[^}|]+\|[^}]+\}/.test(ja) && !hasKanji(ja.replace(/\{[^}]*\}/g, ''));
     const line = marked ? ja : String(reply.kana || ja);
-    markSeen(line); logLine(c.name, line, reply.en || '', null);
+    markSeen(line); logLine(c.en, line, reply.en || '', null);
     if (t.chat) sfx('bell', .3);
     const box = h('div', 'subs');
-    box.append(h('div', 'who', `<span style="color:${c.color}">${c.name}</span>${t.chat ? '　<span class="small-tag">chat</span>' : ''}`));
+    box.append(h('div', 'who', `<span style="color:${c.color}">${c.en}</span>${t.chat ? '　<span class="small-tag">message</span>' : ''}`));
     box.append(h('div', 'line', renderJP(line)));
     const en = h('div', 'en', reply.en || ''); en.hidden = true; box.append(en);
     if (reply.correction) box.append(h('div', 'en note', `✎ ${reply.correction}`));
-    const tools = h('div', 'hint', 'click / space: continue '); box.append(tools);
+    const tools = h('div', 'tools'); box.append(tools, advanceMark());
     ui.innerHTML = ''; ui.append(box);
-    englishButton(tools, [line], () => { en.hidden = false; });
+    englishButton(tools, [line], v => { en.hidden = !v; });
     await waitAdvance();
   }
   S.flags.llmTalked = true;
@@ -1269,12 +1504,12 @@ async function summary() {
 }
 
 /* ---------------- test hooks ---------------- */
-window.__amakawa = { renderJP, word, GLOSSARY, SCENES, L: () => L };
+window.__amakawa = { renderJP, word, GLOSSARY, SCENES, L: () => L, S: () => S, support };
 
 /* ---------------- title & main loop ---------------- */
 const EDRDG = 'This game uses the JMdict and KANJIDIC2 dictionary files, the property of the Electronic Dictionary Research and Development Group, used in conformance with the Group\'s licence (<a href="https://www.edrdg.org/edrdg/licence.html" target="_blank" rel="noopener">edrdg.org/edrdg/licence.html</a>).';
 async function title() {
-  setBg('monorail'); drawHud();
+  setBg('title'); drawHud();
   const saved = load(SAVE);
   ui.innerHTML = '';
   const t = h('div', 'summary title', `<div class="card" style="text-align:center"><h1 style="font-size:clamp(48px,9cqw,120px)"><small>AMAKAWA · THE FIRST WEEK</small>天川</h1>
@@ -1286,7 +1521,12 @@ async function title() {
   if (saved?.scene) opts.unshift({ jp: 'つづきから', en: 'Continue', v: 'cont' });
   const wrap = t.querySelector('.choices');
   const c = await pick(opts, (o, i) => { const b = h('button', 'choice', `<kbd>${i + 1}</kbd>${o.jp}<span class="en">${o.en}</span>`); wrap.append(b); return b; });
-  if (c.v === 'new') { const st = S.settings; S = freshState(); S.settings = st; startDay(1); }
+  if (c.v === 'new') {
+    const st = S.settings; S = freshState(); S.settings = st; startDay(1);
+    // Reverse learning: natural text from the start; the old level-check bands no longer apply.
+    if (profile().mode !== 'reverse') { L.profile = { mode: 'reverse', band: 3 }; for (const k of Object.values(L.kanji)) if (!k.rd) k.st = 2; }
+    save();
+  }
   return S.scene || DAYS[S.day];
 }
 (async () => {
