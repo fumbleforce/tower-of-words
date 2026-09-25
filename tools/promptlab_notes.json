@@ -1,0 +1,78 @@
+{
+ "summary": "<p><b>Honest answer:</b> our local models don't reach the reference. The best local scenery (One Obsession with a quick line sketch) gets 3 to 4 out of 5 for closeness to the reference and 4 out of 5 for finish, from a reviewer who was told to be strict. About one render in three is also free of logic errors. Everything below is judged the same way.</p><ul><li><b>Which model for what.</b> For open scenery (sea, sky, cities, a train over a bay) use One Obsession: it paints soft anime backgrounds, while RDBT turns scenery into flat poster or vector art (look 2/5 at every setting we tried). For rooms, RDBT still matches the approved locations best. The other five Anima variants and NetaYume Lumina passed nothing in the baseline. One Obsession's main failures are long or endless trains, cars melting into the beam, and two-rail railway track.</li><li><b>Prompts.</b> A short prompt of plain sentences about what is visible works best. Quality tags in front, weights, reordering and extra fix sentences didn't help and usually hurt. Story context (who he is, where he is going) didn't help either.</li><li><b>Settings.</b> Euler A, 30 steps, CFG 5, 1216×832 is fine. On RDBT, er_sde/simple and 45 steps each passed 3 of 4 against 2 of 4 for the baseline, but that is only four seeds. Low CFG, high CFG, 20 steps and dpmpp_2m_sde all made things worse.</li><li><b>A quick sketch helps.</b> For One Obsession, a crude 2D line sketch of the layout, drawn in code in a minute (horizon, a curving beam on pillars, a skyline) and fed to Anima LLLite lineart at 0.8 until 60% of the steps, gave the best result in the study. Confirmed on 8 more seeds: 5 of 12 passed with the sketch, against 2 of 18 for the same prompt without it, and closeness to the reference went from about 2 to 3.</li><li><b>What prompts can't do.</b> Some layouts never came from words in 60+ tries: the front-window view down the aisle, desk islands, a window filled by a wall, a tower cut off by the top edge. Those need composition control. Sales finally passed with the Blender blockout's colour guide (img2img 0.8) plus its lineart, and no phones in the prompt.</li><li><b>Deriving from our own master.</b> This works for small reframes: crop toward the subject and repaint at 0.35 to 0.5. It can't change the camera angle. Asking img2img for a front-window or aisle view gave the master again, a car dashboard or a railway.</li></ul>",
+ "baseline": "His prompt, word for word, 4 seeds per model at 1216×832, with a 1.5× hires pass (RealESRGAN anime then 20 steps at 0.35). Only RDBT passed any (2 of 4), and those are flat poster art. One Obsession looks the best by far but failed all four on logic: an endless train, two tracks merging, two-rail railway track. Hires adds detail but never fixes the layout, so it's a finishing step, not a fix. Times are ComfyUI's own execution time on the 3080 for base plus hires. A base image alone is about 25 s.",
+ "ablations_note": "One change at a time from the baseline, 4 seeds each (the same seeds). With 4 seeds, a difference of one pass is noise. Look for patterns across rows, not single numbers. RDBT: 45 steps and er_sde each helped a little, but its look stays at 2 to 3. One Obsession: nothing in the prompt, negative, CFG, sampler or size helped much. The line sketch was the only change that clearly moved both pass rate and closeness to the reference. dpmpp_2m_sde/karras breaks both models (look 1).",
+ "ablations": {
+  "prompt-long": "staging-style prompt: quality tags, camera jargon, weights, long lists (what agents had been writing)",
+  "prompt-short": "an even shorter prompt, three plain sentences",
+  "prompt-order": "his sentences first, the style words at the end",
+  "prompt-noparen": "his prompt with the unclosed bracket removed (the bracket silently weights everything after it by 1.1)",
+  "prompt-weights": "weights of 1.3 to 1.5 on the track and the island",
+  "prompt-quality": "the house quality tags (masterpiece, score_9 ...) in front of his prompt",
+  "prompt-plus1": "one extra sentence: 'The track stands on tall concrete pillars in the water and runs all the way to the island.'",
+  "prompt-visible": "only what is visible: direction of travel and 'going towards it' taken out",
+  "prompt-story": "story context added: a young engineer moving to the company island today",
+  "neg-min": "negative: only '3d, realistic, photorealistic, text, watermark'",
+  "neg-short": "short negative: quality words, text, 3d, people",
+  "neg-logic": "long negative with logic words (floating train, broken track, boat ...)",
+  "cfg-3": "CFG 3",
+  "cfg-4": "CFG 4",
+  "cfg-6": "CFG 6",
+  "cfg-7": "CFG 7",
+  "steps-20": "20 steps",
+  "steps-45": "45 steps",
+  "sampler-er_sde-simple": "sampler er_sde, scheduler simple",
+  "sampler-dpmpp_2m_sde-karras": "sampler dpmpp_2m_sde, scheduler karras",
+  "sampler-euler-normal": "sampler euler (no ancestral noise)",
+  "sampler-euler-simple": "sampler euler, scheduler simple",
+  "sampler-dpmpp_2m-sgm_uniform": "sampler dpmpp_2m, scheduler sgm_uniform",
+  "res-1344x768": "16:9 at 1344×768",
+  "res-1024x1024": "square 1024×1024",
+  "res-1536x1024": "larger native 1536×1024",
+  "guide-depth-0.8-0.6": "quick 2D depth sketch of the layout (tools/promptlab_sketch.py), LLLite depth 0.8 until 60%",
+  "guide-depth-1-0.8": "the same sketch at LLLite depth 1.0 until 80%",
+  "guide-lineart-0.8-0.6": "line version of the sketch, LLLite lineart 0.8 until 60%",
+  "baseline8": "no change (8 extra seeds of the plain prompt, as the control for the sketch check)"
+ },
+ "masters": "Monorail masters made from scratch, with his images used only as the quality bar. Exterior: his prompt, 6 seeds each on One Obsession and RDBT; only 906 and 903 (One Obsession) are near the quality bar. Interior: his interior prompt without the man, plus 'The sea far below is calm and flat, no waves.' 7 of 8 One Obsession seeds passed. Progress shots: the master cropped toward the island, scaled up and repainted at 0.35 to 0.5; the best mid and near shots are here.",
+ "derive": "Img2img from our own masters (exterior ext-ref-oneobs-906, interior int-oneobs-901) at strength 0.55, 0.7, 0.8 and 0.9, with a short prompt about the new framing only. 3 of 64 passed. Below 0.7 you get the master back. Above 0.8 the camera may change, but the model loses the world: car dashboards, railways with sleepers, the man drawn outside the window. Front-window and aisle views never came out. Layout said in image-frame terms ('the back of a man's head in the lower right corner') kept the man inside the carriage at 0.7 or more, but the window stayed full width. Said in character terms ('over his left shoulder'), the man ended up in the window glass, outside the train, in all 8.",
+ "shots_note": "The recipe (a short prompt of plain sentences about what is visible, One Obsession for scenery, RDBT for rooms) on four day-1 shots, 5 seeds per model. Then one round with one change per shot, aimed at the reviewer's main failure. Nothing passed. That is the finding: these four layouts can't be done with words alone. The approach shot is the aisle-to-front-window angle Jørgen already flagged as unreliable. Sales passed only with the blockout (see the locations page, Sales round 4).",
+ "shots": {
+  "a-approach": [
+   "(a) Monorail interior, final approach",
+   "front car, station ahead through the front window, platform on the right"
+  ],
+  "a-approach+story": [
+   "(a) with story context added",
+   "the same, plus 'The new employee is arriving on the island for his first day ...'"
+  ],
+  "a-arrival-side": [
+   "(a) fix round: straight-on side window at the platform",
+   "side window from the seats, a station platform with a long roof right outside"
+  ],
+  "b-sales": [
+   "(b) Sales floor, island layout",
+   "grey desks face to face in islands, chief's desk at the end, muted colours"
+  ],
+  "c-dorm": [
+   "(c) Worst-room dorm at night",
+   "2nd floor, one window, a concrete wall a couple of metres away"
+  ],
+  "c-dorm-wall": [
+   "(c) fix round: 'a bare grey concrete wall fills the whole window'",
+   "the same room, with the window content given in frame terms"
+  ],
+  "d-tower": [
+   "(d) Company tower from the station plaza",
+   "one giant glass tower rising past the top of the picture"
+  ],
+  "d-tower+story": [
+   "(d) with story context added",
+   "the same, plus 'He has just stepped off the monorail on his first morning ...'"
+  ],
+  "d-tower-crop": [
+   "(d) fix round: 'its top cut off by the top edge of the image'",
+   "low camera looking up, tower top cropped by the frame"
+  ]
+ }
+}

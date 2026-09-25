@@ -41,3 +41,10 @@ The layout comes from a control image; the prompt stays short. The patches are i
 - `blockout-lllite-depth-lines-rdbt.json`: depth (white = near) and lineart chained, strength 1.0 each, active for the first 80% of the steps. Used for the monorail aisle tests.
 - `lllite-inpaint-remove-rdbt.json`: masked img2img with the LLLite inpainting patch (it gets the picture and the mask). Removes or replaces one region without a seam; used to take the man out of the interior master. Mask: white = repaint.
 - `composite-window-blend-rdbt.json`: the last step of the window composite: a masked img2img at denoise 0.4 over a pasted window view, so glass and light match the room (tools/blockout/composite.py does the whole chain).
+
+## Prompt lab recipes (proto2/promptlab, art/PROMPTS.md "Local playbook")
+- `promptlab-scenery-oneobs.json`: One Obsession, outdoor scenery from a short plain prompt (the exterior monorail master ext-ref-oneobs-906). 1216×832, Euler A 30 steps, CFG 5.
+- `promptlab-interior-window-oneobs.json`: One Obsession, straight-on side window of the monorail (int-oneobs-901).
+- `promptlab-derive-crop-oneobs.json`: a closer shot from our own master: load the cropped, scaled-up part of the master (tools/promptlab_guides/m906-crop-mid.png) and repaint at strength 0.5.
+- `promptlab-sales-colorguide-lines-rdbt.json`: RDBT Sales: img2img from the blockout's flat colour guide at 0.8, plus the blockout lineart (Anima LLLite 0.8 until 80% of steps). Load the colour guide and line image from tools/blockout/shots/.
+- `promptlab-scenery-sketch-oneobs.json`: One Obsession exterior with a quick line sketch of the layout (tools/promptlab_guides/bay-lines.png, made by tools/promptlab_sketch.py) through Anima LLLite lineart 0.8 until 60%. The best local recipe for scenery with a layout that matters.
