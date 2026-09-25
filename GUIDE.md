@@ -31,6 +31,7 @@ Everything Jørgen has asked for, and how we work. Every agent reads this before
 - A local LLM (Orion 26B-A4B via llama.cpp, port 8190) plays characters in free conversations on desktop.
 
 ## Learning rules
+- Reverse language learning (Jørgen's idea, 2026-09-25): assume the player knows everything. Text shows as natural Japanese. Tap a word once: the kana reading appears above it. Tap again: the English appears below. The player's level is learned from what they tap during play (no test), and unknown words and kanji are reintroduced gradually later. Soft adaptation: if a player taps readings for nearly everything, start showing readings by default for those kanji. This replaces the up-front level check and simplifies the opening: it only has to teach the tap.
 - Word display: above your level = kana only; learning = kanji with a reading above; known = kanji alone. Readings go romaji, then kana, then none. Never show a reading above text that is already kana.
 - UI chrome must not use unlearned kanji. Use digits (8:42) and kana labels until the words are learned.
 - Listen first: sound and text belong together (karaoke-style follow-along), not a separate listen step and read step. No blur effects.
