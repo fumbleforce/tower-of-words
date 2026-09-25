@@ -82,6 +82,7 @@ Everything Jørgen has asked for, and how we work. Every agent reads this before
 - Complex action (the shootout, swimming, the volleyball spike) fails with plain prompting even after fixes. It needs composition control (a pose or layout sketch as an input, or regional prompting) before more attempts; don't burn time re-rolling.
 - Round 6 retries verdict: copy room only copyroom-rdbt-12 works; shootout nonsense everywhere; swim only One Obsession makes sense; volleyball One Obsession s11 most believable; romance all fine, RDBT slightly best.
 - Save every ComfyUI workflow we use as a loadable file in tools/workflows/ and ~/ai/workflows/ (API JSON), so Jørgen can open it. Generated PNGs embed their workflow; keep the originals.
+- Portrait framing (2026-09-25): the head, hair and raised hands must sit inside the frame with some room above. Most approved portraits had hair touching or cut by the top edge because "waist-up portrait" on 896×1152 makes the model fill the canvas, and img2img repaints (Kiyoko's outfits) keep the source crop. The portrait prompt now asks for space above the head, and tools/framecheck.py (rembg figure mask) warns after every portrait render in production.py and decide2.py. To fix an existing image, tools/reframe.py outpaints headroom with RDBT and pastes the original back, so face and outfit stay pixel-identical.
 - Cutouts: local rembg ISNet anime. Check for see-through holes in hair and glasses.
 - Never open images or pages on Jørgen's screen (no xdg-open). Give links only.
 
@@ -117,4 +118,4 @@ Everything Jørgen has asked for, and how we work. Every agent reads this before
 
 ## Live links
 - Game: https://fumbleforce.github.io/tower-of-words/game/
-- Review pages: https://fumbleforce.github.io/tower-of-words/proto2/ (gallery, local6, emi2, voice-mio, tts, music, rmbg, llm, video2)
+- Review pages: https://fumbleforce.github.io/tower-of-words/proto2/ (gallery, local6, emi2, voice-mio, tts, music, rmbg, llm, video2, locations1, locations2, cast-fixed)

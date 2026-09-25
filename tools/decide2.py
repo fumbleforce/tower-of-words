@@ -3,6 +3,7 @@ Kiyoko outfits and the office revision use Anima img2img with a latent noise mas
 import sys, os, json, time
 sys.path.insert(0, os.path.dirname(__file__))
 import comfy
+import framecheck
 from production import run, portrait, Q, N, NO_PEOPLE_N, RDBT, OUT, load_manifest, MANIFEST
 from office_bg import P as OFFICE_P, N as OFFICE_N
 from PIL import Image, ImageDraw, ImageFilter
@@ -74,6 +75,8 @@ def img2img(batch, name, src, prompt, negative, seed, denoise, mask=None):
         os.makedirs(os.path.join(os.path.dirname(__file__), 'workflows'), exist_ok=True)
         json.dump(wf, open(os.path.join(os.path.dirname(__file__), 'workflows', 'anima-img2img-masked.json' if mask else 'anima-img2img.json'), 'w'), indent=1)
         print('ok', batch, name, round(time.time() - t), 's', flush=True)
+        if Image.open(path).height > Image.open(path).width:
+            framecheck.warn(path)  # head/hair/arms touching the frame edge
     except Exception as e:
         print('FAIL', batch, name, str(e)[:300], flush=True)
 

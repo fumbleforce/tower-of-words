@@ -1,0 +1,140 @@
+{
+ "1": {
+  "class_type": "UNETLoader",
+  "inputs": {
+   "unet_name": "rdbtAnima.safetensors",
+   "weight_dtype": "default"
+  }
+ },
+ "2": {
+  "class_type": "CLIPLoader",
+  "inputs": {
+   "clip_name": "qwen_3_06b_base.safetensors",
+   "type": "stable_diffusion"
+  }
+ },
+ "3": {
+  "class_type": "VAELoader",
+  "inputs": {
+   "vae_name": "qwen_image_vae.safetensors"
+  }
+ },
+ "4": {
+  "class_type": "CLIPTextEncode",
+  "inputs": {
+   "text": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, Goro, a 61-year-old gentle retired engineer who keeps the rooftop garden: thick round glasses with clear lenses, short white hair, white stubble, beige cardigan over a checked shirt, gardening gloves, holding a small potted tomato plant with both hands, warm crinkly-eyed smile, waist-up portrait facing the viewer at a slight angle, plain light grey background, soft even studio light, the top of the head inside the frame with empty plain background above it, elbows inside the frame",
+   "clip": [
+    "2",
+    0
+   ]
+  }
+ },
+ "5": {
+  "class_type": "CLIPTextEncode",
+  "inputs": {
+   "text": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, cropped head, head out of frame, cut off, frame, border, picture frame, second person, ahoge, antenna hair, hair sticking up, hat, headwear, cap, hair bun, topknot, updo, hair ornament, ahoge",
+   "clip": [
+    "2",
+    0
+   ]
+  }
+ },
+ "10": {
+  "class_type": "LoadImage",
+  "inputs": {
+   "image": "goro-pad.png"
+  }
+ },
+ "11": {
+  "class_type": "VAEEncode",
+  "inputs": {
+   "pixels": [
+    "10",
+    0
+   ],
+   "vae": [
+    "3",
+    0
+   ]
+  }
+ },
+ "12": {
+  "class_type": "LoadImageMask",
+  "inputs": {
+   "image": "goro-mask.png",
+   "channel": "red"
+  }
+ },
+ "14": {
+  "class_type": "DifferentialDiffusion",
+  "inputs": {
+   "model": [
+    "1",
+    0
+   ]
+  }
+ },
+ "13": {
+  "class_type": "SetLatentNoiseMask",
+  "inputs": {
+   "samples": [
+    "11",
+    0
+   ],
+   "mask": [
+    "12",
+    0
+   ]
+  }
+ },
+ "7": {
+  "class_type": "KSampler",
+  "inputs": {
+   "model": [
+    "14",
+    0
+   ],
+   "positive": [
+    "4",
+    0
+   ],
+   "negative": [
+    "5",
+    0
+   ],
+   "latent_image": [
+    "13",
+    0
+   ],
+   "seed": 301,
+   "steps": 30,
+   "cfg": 5,
+   "sampler_name": "euler_ancestral",
+   "scheduler": "normal",
+   "denoise": 0.7
+  }
+ },
+ "8": {
+  "class_type": "VAEDecode",
+  "inputs": {
+   "samples": [
+    "7",
+    0
+   ],
+   "vae": [
+    "3",
+    0
+   ]
+  }
+ },
+ "9": {
+  "class_type": "SaveImage",
+  "inputs": {
+   "images": [
+    "8",
+    0
+   ],
+   "filename_prefix": "reframe"
+  }
+ }
+}
