@@ -13,7 +13,7 @@ Read GUIDE.md first. Pick up from here next session.
 - **Local music:** YuE2 versus Lyria verdict (proto2/music). The game currently alternates between both.
 
 ## Focus: a narrow day-1 slice (Jørgen, 2026-09-25)
-- About 3 characters and 4 locations; get day 1 to an excellent state before scaling up. Don't build sprite sets for the whole cast yet.
+- Chosen: Emi, Mio, Rei; monorail, gate, basement office, Sales. Ishibashi voice/text only at the gate; canteen, rooftop and bar move to day 2. Get day 1 to an excellent state before scaling up. Don't build sprite sets for the whole cast yet.
 - Redraw the day-1 locations (the current ones have logic errors, e.g. a bed with pillows at both ends). Redo the bartender's cutout (ugly edges).
 - Composition research on the side.
 
