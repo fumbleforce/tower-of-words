@@ -1,13 +1,11 @@
 // Asset list and hand-measured positions in the art (uv 0..1 unless noted as screen px).
-const ASSETS = [
-  'sky', 'bay', 'bay-d', 'oncoming', 'forward', 'forward-d', 'luggage', 'cabin', 'pano', 'pano-d', 'mcwin', 'mcwin-d', 'skyline', 'skyline-d', 'station', 'station-d',
-  'gate', 'gate-d', 'towerup', 'copy', 'copy-d', 'basement', 'basement-d', 'miogame', 'miogame-d',
-  'button', 'button-d', 'doors', 'doors-d', 'stairs', 'stairs-d',
-  's-mc', 's-mcopen', 's-emi', 's-emi-blink', 's-mio-blink', 's-rei-blink', 's-emilaugh', 's-mio', 's-rei', 's-aoi', 's-kaori', 's-kuro',
-];
+// Only approved art is listed here. Pilot: the exterior master (art/approved/monorail-bay-ref2.png, upscaled 2x).
+const ASSETS = ['bay', 'bay-d'];
 Object.assign(P, {
+  // pilot bay master, image uv: the sun's glitter path and the open water in the lower right
+  bayGlitter: [[0.15, 0.3, 0.1, 0.28], [0.64, 0.66, 0.34, 0.28]],
   // sky: uv in the image (it is tilted); others: screen uv at the shot's framing
-  sun: { sky: [0.5, 0.855], bay: [0.44, 0.52], forward: [0.58, 0.27], skyline: [0.57, 0.32], station: [0.62, 0.35] },
+  sun: { sky: [0.5, 0.855], bay: [0.197, 0.247], forward: [0.58, 0.27], skyline: [0.57, 0.32], station: [0.62, 0.35] },
   water: { bay: [0, 640, 1920, 440], skyline: [0, 700, 1920, 380] },
   glint: { cabin: [[150, 300], [400, 330], [1500, 330], [1760, 300]], pano: [[0.5, 0.5], [0.56, 0.47], [0.62, 0.49], [0.68, 0.52]],
     skyline: [[1190, 330], [1310, 420], [1540, 460], [1000, 470]] },
