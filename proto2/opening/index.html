@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Amakawa Opening</title>
+<style>
+:root{--bg:#000;--fg:#f2f5f7;--dim:#9aa6b2;--acc:#23c4b4}
+html,body{margin:0;height:100%;background:var(--bg);color:var(--fg);font:15px/1.4 system-ui,sans-serif;overflow:hidden}
+#stage{position:fixed;inset:0;display:grid;place-items:center}
+canvas{width:min(100vw,calc(100vh*16/9));height:min(100vh,calc(100vw*9/16));display:block;background:#000}
+#start{position:fixed;inset:0;display:grid;place-items:center;background:#05070b;cursor:pointer;z-index:5}
+#start .box{text-align:center}
+#start h1{margin:0;font-size:clamp(40px,9vw,96px);letter-spacing:.05em;font-weight:800}
+#start p{margin:10px 0 0;color:var(--dim);letter-spacing:.2em;font-size:13px}
+#start .play{margin:28px auto 0;width:84px;height:84px;border-radius:50%;border:2px solid var(--acc);display:grid;place-items:center}
+#start .play:after{content:"";border-left:26px solid var(--acc);border-top:16px solid transparent;border-bottom:16px solid transparent;margin-left:8px}
+#bar{position:fixed;left:0;right:0;height:3px;bottom:0;background:rgba(255,255,255,.08);z-index:3}#bar i{display:block;height:100%;width:0;background:var(--acc)}
+#rev{position:fixed;left:0;right:0;bottom:0;padding:10px 14px 14px;background:linear-gradient(transparent,rgba(0,0,0,.85));display:none;z-index:4;font:13px/1.4 ui-monospace,monospace}
+#rev.on{display:block}
+#rev .row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+#rev input[type=range]{flex:1;min-width:200px;accent-color:var(--acc)}
+#rev button{background:#1a222c;color:var(--fg);border:1px solid #334;border-radius:6px;padding:6px 10px;font:inherit;cursor:pointer}
+#rev .info{color:var(--dim);margin-top:6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#rev b{color:var(--fg)}
+#hint{position:fixed;top:10px;right:12px;color:rgba(255,255,255,.35);font-size:12px;z-index:3;transition:opacity .6s}
+#load{margin-top:16px;color:var(--dim);font-size:12px;letter-spacing:.1em}
+</style>
+</head>
+<body>
+<div id="stage"><canvas id="c" width="1920" height="1080"></canvas></div>
+<div id="start"><div class="box"><h1>天川</h1><p>AMAKAWA · OPENING</p><div class="play"></div><div id="load">loading</div></div></div>
+<div id="bar"><i></i></div>
+<div id="hint">R review · F fullscreen · space pause</div>
+<div id="rev"><div class="row"><button id="pp">pause</button><button id="prev">◀ shot</button><button id="next">shot ▶</button>
+<input id="scrub" type="range" min="0" max="100" step="0.01" value="0"><button id="fs">full screen</button></div>
+<div class="info" id="info"></div></div>
+<script src="engine.js"></script>
+<script src="op.js"></script>
+<script src="data.js"></script>
+<script>
+(async () => {
+  const q = new URLSearchParams(location.search);
+  const capture = q.has('capture');
+  const lite = q.has('lite') || (!q.has('full') && Math.min(screen.width, screen.height) * (devicePixelRatio || 1) < 900);
+  const canvas = document.getElementById('c');
+  if (lite) { canvas.width = 1920; canvas.height = 1080; }
+  glInit(canvas);
+  const cj = await (await fetch('cuts.json')).json();
+  CUTS = cj.cuts; BEATS = cj.beats; DOWNS = cj.downbeats; DUR = cj.duration;
+  const fonts = [['ZenBlack', 'fonts/zen-black.woff2'], ['ZenBold', 'fonts/zen-bold.woff2'], ['BarlowSemi', 'fonts/barlow-semi.woff2'], ['BarlowX', 'fonts/barlow-x.woff2']];
+  await Promise.all(fonts.map(async ([n, f]) => { const ff = new FontFace(n, `url(${f})`); await ff.load(); document.fonts.add(ff); }));
+  const loadEl = document.getElementById('load');
+  await loadAssets(ASSETS, lite ? 'img/lite' : 'img', p => loadEl.textContent = `loading ${Math.round(p * 100)}%`);
+  if (Object.keys(TEX).length < ASSETS.length / 2 && !capture) {
+    // the art is not approved yet, so it is not published; the player waits for the picks
+    document.querySelector('#start .play').remove();
+    loadEl.innerHTML = 'The opening waits for the art picks: <a style="color:var(--acc)" href="shots.html">shots.html</a>';
+    document.getElementById('start').onclick = null;
+    return;
+  }
+  // the main character sprite is also needed as an image for the ID card photo
+  TEX_IMG['s-mc'] = await new Promise(r => { const i = new Image(); i.onload = () => r(i); i.src = (lite ? 'img/lite' : 'img') + '/s-mcopen.webp'; });
+  buildCard();
+  loadEl.textContent = 'click to play';
+  const render = t => frame(clamp(t, 0, DUR - 1e-3), drawShot);
+  if (capture) {
+    window.renderAt = t => { render(t); return true; };
+    window.OP_READY = true;
+    document.getElementById('start').remove(); document.getElementById('hint').remove(); document.getElementById('bar').remove();
+    return;
+  }
+  const audio = new Audio('../../game/audio/music/' + (cj.audio || 'opening.mp3'));
+  audio.preload = 'auto';
+  const actx = new (window.AudioContext || window.webkitAudioContext)();
+  const gain = actx.createGain(); actx.createMediaElementSource(audio).connect(gain); gain.connect(actx.destination);
+  const rev = document.getElementById('rev'), info = document.getElementById('info'), scrub = document.getElementById('scrub'), bar = document.querySelector('#bar i');
+  scrub.max = DUR;
+  let paused = false, scrubbing = false;
+  function tick() {
+    const t = audio.currentTime;
+    if (t >= DUR && !audio.paused) audio.pause();
+
+
+    render(t);
+    bar.style.width = (t / DUR * 100) + '%';
+    if (rev.classList.contains('on')) {
+      const c = cutAt(t);
+      if (!scrubbing) scrub.value = t;
+      info.innerHTML = `<b>#${c.n}/${CUTS.length} ${c.id}</b>  ${t.toFixed(2)} s  (${c.start.toFixed(2)}–${c.end.toFixed(2)})  ${c.section}  ${c.lyric}  · ${c.desc}`;
+    }
+    requestAnimationFrame(tick);
+  }
+  const start = document.getElementById('start');
+  start.onclick = () => { actx.resume(); audio.play(); start.remove(); tick(); setTimeout(() => document.getElementById('hint').style.opacity = 0, 4000); };
+  const toggle = () => { if (audio.paused) { audio.play(); paused = false; } else { audio.pause(); paused = true; } document.getElementById('pp').textContent = audio.paused ? 'play' : 'pause'; };
+  const seekShot = d => { const c = cutAt(audio.currentTime); const i = CUTS.indexOf(c) + d; if (CUTS[i]) audio.currentTime = CUTS[i].start + 0.001; };
+  const fs = () => document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen();
+  document.getElementById('pp').onclick = toggle;
+  document.getElementById('prev').onclick = () => seekShot(-1);
+  document.getElementById('next').onclick = () => seekShot(1);
+  document.getElementById('fs').onclick = fs;
+  scrub.oninput = () => { scrubbing = true; audio.currentTime = +scrub.value; };
+  scrub.onchange = () => { scrubbing = false; };
+  audio.onended = () => { document.getElementById('pp').textContent = 'play'; };
+  addEventListener('keydown', e => {
+    if (e.key === 'r' || e.key === 'R' || e.key === 'd') rev.classList.toggle('on');
+    else if (e.key === 'f' || e.key === 'F') fs();
+    else if (e.key === ' ') { e.preventDefault(); toggle(); }
+    else if (e.key === 'ArrowRight') seekShot(1);
+    else if (e.key === 'ArrowLeft') seekShot(-1);
+  });
+  canvas.addEventListener('dblclick', fs);
+  let tap = 0; canvas.addEventListener('touchend', () => { const n = Date.now(); if (n - tap < 350) rev.classList.toggle('on'); tap = n; });
+})().catch(e => { document.getElementById('load').textContent = 'error: ' + e.message; console.error(e); });
+</script>
+</body>
+</html>
