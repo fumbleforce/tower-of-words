@@ -1,0 +1,100 @@
+{
+ "1": {
+  "class_type": "UNETLoader",
+  "inputs": {
+   "unet_name": "rdbtAnima.safetensors",
+   "weight_dtype": "default"
+  }
+ },
+ "2": {
+  "class_type": "CLIPLoader",
+  "inputs": {
+   "clip_name": "qwen_3_06b_base.safetensors",
+   "type": "stable_diffusion"
+  }
+ },
+ "3": {
+  "class_type": "VAELoader",
+  "inputs": {
+   "vae_name": "qwen_image_vae.safetensors"
+  }
+ },
+ "4": {
+  "class_type": "CLIPTextEncode",
+  "inputs": {
+   "text": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, (detailed anime background art, hand-painted anime background, painted clouds:1.3), safe, no humans, scenery, (side view square-on to an elevated concrete monorail beam, seen from far away:1.4), camera over the sea, wide shot, (the beam runs horizontally across the whole frame on tall concrete pillars standing in the calm sea:1.3), (one short white three-car monorail train with a teal stripe in the middle of the beam, the whole train visible with empty beam to its left and right:1.6), (the train travels to the right, rounded nose on the right:1.3), (on the right a large man-made island city with dozens of glass office towers filling the right third of the horizon:1.3), the low rising sun above the island city, sunlight glittering on the water, early morning sun low on the horizon, dominant clear sky blue and sea blue, broad white cloud and glass, sparse warm sunrise orange accents, bright hopeful light",
+   "clip": [
+    "2",
+    0
+   ]
+  }
+ },
+ "5": {
+  "class_type": "CLIPTextEncode",
+  "inputs": {
+   "text": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, fused fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, cgi, chubby, nude, nsfw, child, loli, people, person, 1girl, 1boy, crowd, character, silhouette, readable text, letters, logo, brand name, signage text, duplicate objects, floating objects, impossible architecture, distorted perspective, warped lines, helicopter, aircraft, airplane, train on water, floating train, rails on water, train in the sea, bridge without pillars, boat, ship, pier, second train, long train, train cut off by the frame, train on water, small islet, tokyo skytree, tokyo tower, broadcast tower, lattice tower, spire, antenna tower, landmark",
+   "clip": [
+    "2",
+    0
+   ]
+  }
+ },
+ "6": {
+  "class_type": "EmptyLatentImage",
+  "inputs": {
+   "width": 1216,
+   "height": 832,
+   "batch_size": 1
+  }
+ },
+ "7": {
+  "class_type": "KSampler",
+  "inputs": {
+   "model": [
+    "1",
+    0
+   ],
+   "positive": [
+    "4",
+    0
+   ],
+   "negative": [
+    "5",
+    0
+   ],
+   "latent_image": [
+    "6",
+    0
+   ],
+   "seed": 207,
+   "steps": 30,
+   "cfg": 5,
+   "sampler_name": "euler_ancestral",
+   "scheduler": "normal",
+   "denoise": 1.0
+  }
+ },
+ "8": {
+  "class_type": "VAEDecode",
+  "inputs": {
+   "samples": [
+    "7",
+    0
+   ],
+   "vae": [
+    "3",
+    0
+   ]
+  }
+ },
+ "9": {
+  "class_type": "SaveImage",
+  "inputs": {
+   "images": [
+    "8",
+    0
+   ],
+   "filename_prefix": "opening"
+  }
+ }
+}
