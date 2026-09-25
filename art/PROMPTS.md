@@ -63,6 +63,14 @@ Only from our own approved master; Jørgen's images are a quality bar and never 
 - **Both:** garbled letters on signs and headboards; phones drawn as blobs or with the handset hanging on the cord (leave small props out of the prompt); chairs behind the backs of monitors; an extra window or lamp in rooms; the top of a tall building always inside the frame.
 - **Checking:** the train must be a separate object with a clear outline, a visible last car, and a gap or shadow where it sits on the beam.
 
+## Reference prompt 2 (Jørgen via ChatGPT, GPT image, medium effort, 2026-09-25): the exterior shot
+
+Result: art/approved/monorail-bay-ref2.png (reference only; render our own). This is the model for cloud scene prompts: the camera stated plainly, everything placed in frame terms (lower left, right horizon), counts, colours, and one short "No ..." line. No direction, cab or story wording.
+
+```
+anime screenshot, anime coloring, 2d, cel shading, clean lineart, detailed anime background art, hand-painted anime background, no humans, scenery, wide view from high above a calm bay. A white elevated concrete monorail beam on round pillars curves from the lower left across the water to an office island on the right horizon. A short white monorail train of four cars sits on top of the beam in the lower left. The sea is calm with sunlight glitter. Early morning, low sun just above the horizon left of the city, soft clouds. Dominant sky blue and sea blue, broad white, sparse warm sunrise orange accents. No second track, no boats, no mountains behind the city.
+```
+
 ## Derived shots: img2img from an approved master (Jørgen, 2026-09-25)
 
 Result: art/approved/monorail-side-ref.webp, made by img2img from monorail-bay-ref.webp (Jørgen's own images: references only, never our sources; see the Local playbook). Once our own master image is approved, make new angles of the same world from it with img2img and a short prompt that describes only the new framing. The train design, palette and light carry over, so shots match each other and the model doesn't reinvent the world each time.
