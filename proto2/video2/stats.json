@@ -1,0 +1,167 @@
+{
+ "rei-5b-plain": {
+  "option": "5b-plain",
+  "source": "rei",
+  "size": "672x864",
+  "frames": 57,
+  "fps": 24,
+  "seconds_of_video": 2.4,
+  "generation_s": 109,
+  "peak_vram_mb_total_gpu": 9821,
+  "prompt": "anime screenshot, anime coloring, 2d, cel shading, clean lineart. a woman with a silver ponytail in a grey suit smiles at the camera, she blinks slowly, breathes gently, her ponytail sways slightly, subtle idle animation, static camera"
+ },
+ "mio-5b-plain": {
+  "option": "5b-plain",
+  "source": "mio",
+  "size": "672x864",
+  "frames": 57,
+  "fps": 24,
+  "seconds_of_video": 2.4,
+  "generation_s": 109,
+  "peak_vram_mb_total_gpu": 9528,
+  "prompt": "anime screenshot, anime coloring, 2d, cel shading, clean lineart. a woman with black and green hair, glasses and headphones around her neck looks bored, she blinks slowly, breathes gently, subtle idle animation, static camera"
+ },
+ "monorail-5b-plain": {
+  "option": "5b-plain",
+  "source": "monorail",
+  "size": "1280x704",
+  "frames": 57,
+  "fps": 24,
+  "seconds_of_video": 2.4,
+  "generation_s": 188,
+  "peak_vram_mb_total_gpu": 9843,
+  "prompt": "anime screenshot, anime coloring, 2d, cel shading, clean lineart. a white monorail train glides smoothly along the elevated viaduct across the bay, gentle ripples on the water, clouds drift slowly, the camera slowly follows the train"
+ },
+ "rei-5b-timed": {
+  "option": "5b-timed",
+  "source": "rei",
+  "size": "672x864",
+  "frames": 121,
+  "fps": 24,
+  "seconds_of_video": 5.0,
+  "generation_s": 361,
+  "peak_vram_mb_total_gpu": 9841,
+  "prompt": "anime screenshot, anime coloring, 2d, cel shading, clean lineart. Medium close-up, locked-off static camera, plain grey studio background. A woman with a long silver ponytail, grey eyes, gold hoop earrings, a light grey blazer over a black turtleneck. Second 0 to 1: she looks at the viewer with a small smile and blinks once. Second 1 to 2: she tilts her head to the side and her long ponytail swings behind her shoulder. Second 2 to 3: she takes a breath, her shoulders rise and fall, and she laughs softly with her eyes half closed. Second 3 to 4: she turns her head slightly away, then looks back at the viewer. Second 4 to 5: she blinks and settles into a calm confident smile, loose strands of hair moving. Her face, hair colour and clothes stay the same the whole time."
+ },
+ "mio-5b-timed": {
+  "option": "5b-timed",
+  "source": "mio",
+  "size": "672x864",
+  "frames": 121,
+  "fps": 24,
+  "seconds_of_video": 5.0,
+  "generation_s": 364,
+  "peak_vram_mb_total_gpu": 9479,
+  "prompt": "anime screenshot, anime coloring, 2d, cel shading, clean lineart. Medium close-up, locked-off static camera, plain grey studio background. A young woman with black hair with green streaks tied in a messy bun, thin glasses, big green headphones resting around her neck, a dark green oversized hoodie and a lanyard. Second 0 to 1: she looks at the viewer with a bored, sleepy face and blinks slowly. Second 1 to 2: she yawns with her mouth wide open and her eyes squeezed shut. Second 2 to 3: she glances to the side, then rolls her eyes and sighs, her shoulders drop. Second 3 to 4: she tilts her head, loose strands of hair fall across her cheek. Second 4 to 5: she looks back at the viewer with a small sly smile. Her face, glasses, hair colour and clothes stay the same the whole time."
+ },
+ "monorail-5b-timed": {
+  "option": "5b-timed",
+  "source": "monorail",
+  "size": "1280x704",
+  "frames": 121,
+  "fps": 24,
+  "seconds_of_video": 5.0,
+  "generation_s": 668,
+  "peak_vram_mb_total_gpu": 9826,
+  "prompt": "anime screenshot, anime coloring, 2d, cel shading, clean lineart. Wide shot, the camera pans slowly to the left to follow the train. A rigid white monorail train made of solid metal cars drives toward the lower left corner of the frame along the straight concrete viaduct over a calm sea, coming closer to the camera. The train body is rigid and keeps its shape; the cars do not bend, stretch or ripple; the windows and doors stay fixed on the cars. Second 0 to 2: the front of the train moves forward toward the lower left at a steady speed. Second 2 to 4: the train keeps moving and the front car starts to leave the frame at the lower left, more cars follow along the track. Second 4 to 5: the rear cars pass by. The city skyline, mountains and sun stay fixed in the background, small waves sparkle on the water, clouds drift slowly to the right, a few seagulls fly."
+ },
+ "rei-14b-lx": {
+  "option": "14b-lx",
+  "source": "rei",
+  "size": "624x800",
+  "frames": 81,
+  "fps": 16,
+  "seconds_of_video": 5.1,
+  "generation_s": 205,
+  "peak_vram_mb_total_gpu": 9816,
+  "prompt": "anime screenshot, anime coloring, 2d, cel shading, clean lineart. Medium close-up, locked-off static camera, plain grey studio background. A woman with a long silver ponytail, grey eyes, gold hoop earrings, a light grey blazer over a black turtleneck. Second 0 to 1: she looks at the viewer with a small smile and blinks once. Second 1 to 2: she tilts her head to the side and her long ponytail swings behind her shoulder. Second 2 to 3: she takes a breath, her shoulders rise and fall, and she laughs softly with her eyes half closed. Second 3 to 4: she turns her head slightly away, then looks back at the viewer. Second 4 to 5: she blinks and settles into a calm confident smile, loose strands of hair moving. Her face, hair colour and clothes stay the same the whole time."
+ },
+ "mio-14b-lx": {
+  "option": "14b-lx",
+  "source": "mio",
+  "size": "624x800",
+  "frames": 81,
+  "fps": 16,
+  "seconds_of_video": 5.1,
+  "generation_s": 201,
+  "peak_vram_mb_total_gpu": 9807,
+  "prompt": "anime screenshot, anime coloring, 2d, cel shading, clean lineart. Medium close-up, locked-off static camera, plain grey studio background. A young woman with black hair with green streaks tied in a messy bun, thin glasses, big green headphones resting around her neck, a dark green oversized hoodie and a lanyard. Second 0 to 1: she looks at the viewer with a bored, sleepy face and blinks slowly. Second 1 to 2: she yawns with her mouth wide open and her eyes squeezed shut. Second 2 to 3: she glances to the side, then rolls her eyes and sighs, her shoulders drop. Second 3 to 4: she tilts her head, loose strands of hair fall across her cheek. Second 4 to 5: she looks back at the viewer with a small sly smile. Her face, glasses, hair colour and clothes stay the same the whole time."
+ },
+ "monorail-14b-lx": {
+  "option": "14b-lx",
+  "source": "monorail",
+  "size": "960x528",
+  "frames": 81,
+  "fps": 16,
+  "seconds_of_video": 5.1,
+  "generation_s": 211,
+  "peak_vram_mb_total_gpu": 9815,
+  "prompt": "anime screenshot, anime coloring, 2d, cel shading, clean lineart. Wide shot, the camera pans slowly to the left to follow the train. A rigid white monorail train made of solid metal cars drives toward the lower left corner of the frame along the straight concrete viaduct over a calm sea, coming closer to the camera. The train body is rigid and keeps its shape; the cars do not bend, stretch or ripple; the windows and doors stay fixed on the cars. Second 0 to 2: the front of the train moves forward toward the lower left at a steady speed. Second 2 to 4: the train keeps moving and the front car starts to leave the frame at the lower left, more cars follow along the track. Second 4 to 5: the rear cars pass by. The city skyline, mountains and sun stay fixed in the background, small waves sparkle on the water, clouds drift slowly to the right, a few seagulls fly."
+ },
+ "rei-14b-anime": {
+  "option": "14b-anime",
+  "source": "rei",
+  "size": "624x800",
+  "frames": 81,
+  "fps": 16,
+  "seconds_of_video": 5.1,
+  "generation_s": 207,
+  "peak_vram_mb_total_gpu": 9560,
+  "prompt": "An1meStyl3, AnimeStyle. live 2d, dynamic wallpaper style, the character sways slightly, rises and falls with breathing, blinks regularly, hair flutters in the wind, the character position remains unchanged. anime screenshot, anime coloring, 2d, cel shading, clean lineart. Medium close-up, locked-off static camera, plain grey studio background. A woman with a long silver ponytail, grey eyes, gold hoop earrings, a light grey blazer over a black turtleneck. Second 0 to 1: she looks at the viewer with a small smile and blinks once. Second 1 to 2: she tilts her head to the side and her long ponytail swings behind her shoulder. Second 2 to 3: she takes a breath, her shoulders rise and fall, and she laughs softly with her eyes half closed. Second 3 to 4: she turns her head slightly away, then looks back at the viewer. Second 4 to 5: she blinks and settles into a calm confident smile, loose strands of hair moving. Her face, hair colour and clothes stay the same the whole time."
+ },
+ "mio-14b-anime": {
+  "option": "14b-anime",
+  "source": "mio",
+  "size": "624x800",
+  "frames": 81,
+  "fps": 16,
+  "seconds_of_video": 5.1,
+  "generation_s": 204,
+  "peak_vram_mb_total_gpu": 9791,
+  "prompt": "An1meStyl3, AnimeStyle. live 2d, dynamic wallpaper style, the character sways slightly, rises and falls with breathing, blinks regularly, hair flutters in the wind, the character position remains unchanged. anime screenshot, anime coloring, 2d, cel shading, clean lineart. Medium close-up, locked-off static camera, plain grey studio background. A young woman with black hair with green streaks tied in a messy bun, thin glasses, big green headphones resting around her neck, a dark green oversized hoodie and a lanyard. Second 0 to 1: she looks at the viewer with a bored, sleepy face and blinks slowly. Second 1 to 2: she yawns with her mouth wide open and her eyes squeezed shut. Second 2 to 3: she glances to the side, then rolls her eyes and sighs, her shoulders drop. Second 3 to 4: she tilts her head, loose strands of hair fall across her cheek. Second 4 to 5: she looks back at the viewer with a small sly smile. Her face, glasses, hair colour and clothes stay the same the whole time."
+ },
+ "monorail-14b-anime": {
+  "option": "14b-anime",
+  "source": "monorail",
+  "size": "960x528",
+  "frames": 81,
+  "fps": 16,
+  "seconds_of_video": 5.1,
+  "generation_s": 209,
+  "peak_vram_mb_total_gpu": 9827,
+  "prompt": "An1meStyl3, AnimeStyle. anime screenshot, anime coloring, 2d, cel shading, clean lineart. Wide shot, the camera pans slowly to the left to follow the train. A rigid white monorail train made of solid metal cars drives toward the lower left corner of the frame along the straight concrete viaduct over a calm sea, coming closer to the camera. The train body is rigid and keeps its shape; the cars do not bend, stretch or ripple; the windows and doors stay fixed on the cars. Second 0 to 2: the front of the train moves forward toward the lower left at a steady speed. Second 2 to 4: the train keeps moving and the front car starts to leave the frame at the lower left, more cars follow along the track. Second 4 to 5: the rear cars pass by. The city skyline, mountains and sun stay fixed in the background, small waves sparkle on the water, clouds drift slowly to the right, a few seagulls fly."
+ },
+ "rei-dasiwa": {
+  "option": "dasiwa",
+  "source": "rei",
+  "size": "624x800",
+  "frames": 81,
+  "fps": 16,
+  "seconds_of_video": 5.1,
+  "generation_s": 201,
+  "peak_vram_mb_total_gpu": 9583,
+  "prompt": "anime screenshot, anime coloring, 2d, cel shading, clean lineart. Medium close-up, locked-off static camera, plain grey studio background. A woman with a long silver ponytail, grey eyes, gold hoop earrings, a light grey blazer over a black turtleneck. Second 0 to 1: she looks at the viewer with a small smile and blinks once. Second 1 to 2: she tilts her head to the side and her long ponytail swings behind her shoulder. Second 2 to 3: she takes a breath, her shoulders rise and fall, and she laughs softly with her eyes half closed. Second 3 to 4: she turns her head slightly away, then looks back at the viewer. Second 4 to 5: she blinks and settles into a calm confident smile, loose strands of hair moving. Her face, hair colour and clothes stay the same the whole time."
+ },
+ "mio-dasiwa": {
+  "option": "dasiwa",
+  "source": "mio",
+  "size": "624x800",
+  "frames": 81,
+  "fps": 16,
+  "seconds_of_video": 5.1,
+  "generation_s": 199,
+  "peak_vram_mb_total_gpu": 9813,
+  "prompt": "anime screenshot, anime coloring, 2d, cel shading, clean lineart. Medium close-up, locked-off static camera, plain grey studio background. A young woman with black hair with green streaks tied in a messy bun, thin glasses, big green headphones resting around her neck, a dark green oversized hoodie and a lanyard. Second 0 to 1: she looks at the viewer with a bored, sleepy face and blinks slowly. Second 1 to 2: she yawns with her mouth wide open and her eyes squeezed shut. Second 2 to 3: she glances to the side, then rolls her eyes and sighs, her shoulders drop. Second 3 to 4: she tilts her head, loose strands of hair fall across her cheek. Second 4 to 5: she looks back at the viewer with a small sly smile. Her face, glasses, hair colour and clothes stay the same the whole time."
+ },
+ "monorail-dasiwa": {
+  "option": "dasiwa",
+  "source": "monorail",
+  "size": "960x528",
+  "frames": 81,
+  "fps": 16,
+  "seconds_of_video": 5.1,
+  "generation_s": 204,
+  "peak_vram_mb_total_gpu": 9821,
+  "prompt": "anime screenshot, anime coloring, 2d, cel shading, clean lineart. Wide shot, the camera pans slowly to the left to follow the train. A rigid white monorail train made of solid metal cars drives toward the lower left corner of the frame along the straight concrete viaduct over a calm sea, coming closer to the camera. The train body is rigid and keeps its shape; the cars do not bend, stretch or ripple; the windows and doors stay fixed on the cars. Second 0 to 2: the front of the train moves forward toward the lower left at a steady speed. Second 2 to 4: the train keeps moving and the front car starts to leave the frame at the lower left, more cars follow along the track. Second 4 to 5: the rear cars pass by. The city skyline, mountains and sun stay fixed in the background, small waves sparkle on the water, clouds drift slowly to the right, a few seagulls fly."
+ }
+}

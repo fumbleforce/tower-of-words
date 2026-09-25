@@ -81,7 +81,10 @@ Everything Jørgen has asked for, and how we work. Every agent reads this before
 - Never open images or pages on Jørgen's screen (no xdg-open). Give links only.
 
 ## Video
-- First local test (Wan 2.2 5B, Causal Forcing) was rejected as very bad: body-horror textures on the train, and almost no character motion. Living portraits are likely better done as in-engine puppet animation than as video.
+- First local test (Wan 2.2 5B, Causal Forcing) was rejected as very bad: body-horror textures on the train, and almost no character motion.
+- Round 2 (proto2/video2, 2026-09-25; waiting for Jørgen's verdict): same three sources (Rei, Mio, monorail) through five setups. By frame checks, Wan 2.2 I2V 14B fp8 with the lightx2v 4-step LoRA is best overall (4 steps, CFG 1, shift 5, euler/simple, high-noise expert for steps 0-2 then low-noise, 81 frames at 16 fps, about 624×800 or 960×528). About 3.5 min per 5 s clip on the 3080; the 14 GB experts stream from RAM (ComfyUI has no GGUF loader installed, so fp8 instead of GGUF). DaSiWa Lightspeed v11 (Civitai, speed-up baked in) is equally good and did the only real camera pan. The Civitai anime-style and "live 2d wallpaper" LoRAs added nothing visible.
+- Prompts matter as much as the model: shot and camera first, then "Second 0 to 1: ... Second 1 to 2: ...", then what must stay fixed ("rigid body, cars do not bend"). Make the motion match the picture (round 1 sent the train toward the city while it faced the viewer). The 5B model with a timed prompt moves a lot but takes 6 to 11 min.
+- Living portraits: the puppet demo on proto2/video2 (WebGL warp of the approved sprite, inpainted blink frames, drawn mouth frames synced to the voice line's loudness) is consistent and phone-light. Inpainted mouths came out as big glossy lips that clash with the tiny line mouths of RDBT sprites, so draw mouth frames instead. Tools: tools/puppet_frames.py, proto2/video2/puppet.js.
 
 ## Voices and audio
 - Replicate voices are best (MiniMax Speech 2.6 HD plus Qwen3-TTS clones). Local Qwen3-TTS is a fallback. IndexTTS is unusable.
@@ -105,4 +108,4 @@ Everything Jørgen has asked for, and how we work. Every agent reads this before
 
 ## Live links
 - Game: https://fumbleforce.github.io/tower-of-words/game/
-- Review pages: https://fumbleforce.github.io/tower-of-words/proto2/ (gallery, local6, emi2, voice-mio, tts, music, rmbg, llm)
+- Review pages: https://fumbleforce.github.io/tower-of-words/proto2/ (gallery, local6, emi2, voice-mio, tts, music, rmbg, llm, video2)

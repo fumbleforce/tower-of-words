@@ -17,6 +17,16 @@ Open ComfyUI at http://127.0.0.1:8188 (start it with `~/ai/start-comfy.sh`). Loa
 To use: in the **Load Image** node, pick or upload your start image (it shows INPUT_IMAGE.png until you do). Then edit the first text box: describe only the MOTION and the camera, not the whole picture again. Width and height should match your image's shape (multiples of 32); length is frames (4n+1). Output: the video goes to ~/ai/ComfyUI/output/video/.
 
 Tips: keep "static camera" for sprites; subtle motion works better than big actions; the model can add a wink or an expression change you didn't ask for, so reroll the seed.
+- `location-bg-rdbt.json`: RDBT location background with no people, 1216×832 (the game's background shape). Prompts for the monorail, gate, copy room and Sales are in tools/locations1.py.
+
+## Video round 2 (proto2/video2)
+- `video2-<source>-14b-lx.json`: Wan 2.2 I2V 14B fp8 (high and low noise experts) with the lightx2v 4-step LoRA. 4 steps, CFG 1, shift 5, 81 frames at 16 fps (5 s). About 3.5 min on the 3080; the 14 GB models stream from RAM. The best all-round choice in round 2.
+- `video2-<source>-dasiwa.json`: DaSiWa Wan 2.2 I2V 14B Lightspeed v11 (Civitai), speed-up baked in, no LoRA. Same settings and time. Best camera moves.
+- `video2-<source>-14b-anime.json`: the 14B setup plus the Civitai "Anime Style" LoRA (trigger "An1meStyl3, AnimeStyle") and, for portraits, the "live 2d dynamic wallpaper" LoRA on the low-noise expert.
+- `video2-<source>-5b-timed.json`: Wan 2.2 5B with a second-by-second motion prompt, 30 steps, CFG 6, 121 frames at 24 fps. 6 min for portraits, 11 min for 1280×704.
+- `puppet-face-inpaint.json`: RDBT face-only inpainting (latent noise mask) used for Mio's blink frames.
+
+Prompt pattern that made the difference: describe the shot and camera first, then "Second 0 to 1: ... Second 1 to 2: ...", and say what must stay fixed (face, clothes; for vehicles: "rigid body, the cars do not bend"). Check that the motion direction matches the picture (the round-1 monorail prompt sent the train toward the city while it faces the viewer).
 
 ## Music
 - `yue2-instrumental-lora-api.json`: YuE2 3B (bf16) with the instrumental add-on on the CLIP slot and the v9 sound add-on on MODEL. The style box takes tags; the lyrics box takes only `[instrumental]` or section tags, one per line. Output goes to ~/ai/ComfyUI/output/music2/.
