@@ -1,0 +1,100 @@
+{
+ "1": {
+  "class_type": "UNETLoader",
+  "inputs": {
+   "unet_name": "rdbtAnima.safetensors",
+   "weight_dtype": "default"
+  }
+ },
+ "2": {
+  "class_type": "CLIPLoader",
+  "inputs": {
+   "clip_name": "qwen_3_06b_base.safetensors",
+   "type": "stable_diffusion"
+  }
+ },
+ "3": {
+  "class_type": "VAELoader",
+  "inputs": {
+   "vae_name": "qwen_image_vae.safetensors"
+  }
+ },
+ "4": {
+  "class_type": "CLIPTextEncode",
+  "inputs": {
+   "text": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, no humans, scenery, background art for a visual novel, inside the front car of a driverless Japanese monorail, camera standing in the aisle looking forward along the car toward a large panoramic front window, no driver cab, a few forward-facing seats by the front window, long bench seats along both side walls with windows above, grab poles, hanging hand straps, through the front window: (the straight concrete monorail beam continuing ahead of the train on tall pillars across the sea:1.5), the beam leads to a large man-made island with glass office towers of one company city in the distance, calm Tokyo Bay, bright morning light, dominant pale sky blue and sea blue, broad white and light grey interior, sparse teal seat and orange accents",
+   "clip": [
+    "2",
+    0
+   ]
+  }
+ },
+ "5": {
+  "class_type": "CLIPTextEncode",
+  "inputs": {
+   "text": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, people, person, 1girl, 1boy, crowd, character, people, silhouette, passenger, readable text, letters, logo, brand name, signage text, duplicate objects, floating objects, impossible architecture, distorted perspective, warped lines, train on water, floating train, rails on water, bridge without pillars, bed, sofa, living room",
+   "clip": [
+    "2",
+    0
+   ]
+  }
+ },
+ "6": {
+  "class_type": "EmptyLatentImage",
+  "inputs": {
+   "width": 1216,
+   "height": 832,
+   "batch_size": 1
+  }
+ },
+ "7": {
+  "class_type": "KSampler",
+  "inputs": {
+   "model": [
+    "1",
+    0
+   ],
+   "positive": [
+    "4",
+    0
+   ],
+   "negative": [
+    "5",
+    0
+   ],
+   "latent_image": [
+    "6",
+    0
+   ],
+   "seed": 1201,
+   "steps": 30,
+   "cfg": 5,
+   "sampler_name": "euler_ancestral",
+   "scheduler": "normal",
+   "denoise": 1.0
+  }
+ },
+ "8": {
+  "class_type": "VAEDecode",
+  "inputs": {
+   "samples": [
+    "7",
+    0
+   ],
+   "vae": [
+    "3",
+    0
+   ]
+  }
+ },
+ "9": {
+  "class_type": "SaveImage",
+  "inputs": {
+   "images": [
+    "8",
+    0
+   ],
+   "filename_prefix": "location-bg"
+  }
+ }
+}
