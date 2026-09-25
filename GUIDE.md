@@ -127,6 +127,7 @@ Everything Jørgen has asked for, and how we work. Every agent reads this before
 - One GPU job at a time. Check nvidia-smi before GPU work; free ComfyUI's VRAM before running LLM or TTS jobs.
 - Jørgen approves every asset (2026-09-25): no image, sprite, background or shot is used in the game, the opening or any build until he has picked it on a review page. Agents render candidates, check them, put them on a page, and stop. Only approved assets move on.
 - Decide before producing: settle the style, model and cast with small comparison sets first. No bulk production (expression sets, environments, scene batches) until he has approved the model, style and character designs. "Keep the GPU busy" means useful exploration toward a decision, not mass production.
+- Test learning mechanics on their own, outside the story (2026-09-25): small standalone prototypes in proto2/mechanics, each 2-5 minutes, replayable, with on-screen stats, so the mechanic can be judged before it's woven into scenes.
 - Build small slices and let Jørgen judge before scaling up. He benchmarks anything new (models, voices, cutouts) himself before it's adopted.
 - QA means reading as a player, not only automated runs: dump every branch as a transcript and read it; look at every screenshot.
 - Report facts, never self-grade ("nailed it"). Describe what's actually in an image or build, and admit gaps.
