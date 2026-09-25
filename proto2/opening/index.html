@@ -47,7 +47,7 @@ canvas{width:min(100vw,calc(100vh*16/9));height:min(100vh,calc(100vw*9/16));disp
   if (lite) { canvas.width = 1920; canvas.height = 1080; }
   glInit(canvas);
   const cj = await (await fetch('cuts.json')).json();
-  CUTS = cj.cuts; if (cj.pilot) CUTS[0].id = q.get('v') === 'c' ? 'bayC' : 'bayA'; BEATS = cj.beats; DOWNS = cj.downbeats; DUR = cj.duration;
+  CUTS = cj.cuts; if (cj.pilot) CUTS[0].id = 'bayC'; BEATS = cj.beats; DOWNS = cj.downbeats; DUR = cj.duration;
   const fonts = [['ZenBlack', 'fonts/zen-black.woff2'], ['ZenBold', 'fonts/zen-bold.woff2'], ['BarlowSemi', 'fonts/barlow-semi.woff2'], ['BarlowX', 'fonts/barlow-x.woff2']];
   await Promise.all(fonts.map(async ([n, f]) => { const ff = new FontFace(n, `url(${f})`); await ff.load(); document.fonts.add(ff); }));
   const loadEl = document.getElementById('load');
