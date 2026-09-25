@@ -72,6 +72,7 @@ Everything Jørgen has asked for, and how we work. Every agent reads this before
 - Game UI: anime-subtitle presentation plus an in-world company phone. The light "review page" style (off-white, teal) is for internal review pages only; it "screams e-learning" in the game.
 - Avoid default AI aesthetics: brown, gold, serif, glows, eyebrow labels. Use the design-taste-frontend and game-ui-design skills.
 - Desktop and phone get separate layouts. Check both with screenshots. Every part of the interface must match the same design language (the "you reply" box has failed this twice).
+- Every option on a review page has its unique ID as the card heading (e.g. sales-8301), so Jørgen can name his pick.
 - Review pages: large responsive grids (images at least about 480–520 px, not 2 per row), a lightbox with arrow keys, and the full prompt visible under each scene title.
 
 ## Art

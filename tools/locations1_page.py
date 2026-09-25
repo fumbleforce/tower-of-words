@@ -77,13 +77,13 @@ for s in out:
         body = f'<p class="beat">Intent: {html.escape(it["beat"])}</p>' if it.get('beat') else ''
         body += f'<p class="meta">Camera: {html.escape(it["cam"])}</p>' if it.get('cam') else ''
         body += ''.join(f'<p class="meta">{k}: {html.escape(v)}</p>' for k, v in it.get('stage', []) if v)
-        body += f'<p class="meta">File: {html.escape(it["sub"])}</p>' if it.get('sub') else ''
+        body += f'<p class="meta">{html.escape(it["t"])}</p>' if it.get('sub') else ''
         body += f'<p class="note">{html.escape(it["note"])}</p>' if it['note'] else ''
         if it['prompt']:
             body += (f'<p class="meta">{html.escape(it["meta"])}</p><details open><summary>Prompt</summary><p class="prompt">{html.escape(it["prompt"])}</p></details>'
                      f'<details><summary>Negative</summary><p class="prompt">{html.escape(it["neg"])}</p></details>')
         figs.append(f'<figure class="{cls}"><img src="{it["f"]}" data-i="{idx}" loading="lazy" alt="{html.escape(it["t"])}">'
-                    f'<figcaption><h3>{html.escape(it["t"])}</h3>{body}</figcaption></figure>')
+                    f'<figcaption><h3>{html.escape(it.get("sub") or it["t"])}</h3>{body}</figcaption></figure>')
         idx += 1
     cards.append(f'<section><h2>{s["title"]}</h2><p class="desc">{s["desc"]}</p><div class="grid">{"".join(figs)}</div></section>')
 
