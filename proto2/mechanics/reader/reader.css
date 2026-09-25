@@ -1,0 +1,11 @@
+.bubble { align-self: flex-start; max-width: 100%; padding: 14px 22px 10px; background: var(--panel); border: 1px solid var(--line); border-radius: 4px var(--r-panel) var(--r-panel) var(--r-panel); }
+.reader .opts { margin-top: 26px; }
+.grid2 { grid-template-columns: 1fr 1fr; }
+.check .line { margin: 10px 0 4px; }
+.skipq { margin-top: 10px; }
+.kgrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 14px; }
+@media (min-width: 700px) { .kgrid { grid-template-columns: repeat(4, 1fr); } }
+.ktile { min-height: 72px; border-radius: var(--r-tile); background: var(--panel); border: 1px solid var(--line); font: 800 26px var(--jp); }
+.ktile.on { background: var(--text); color: #0d0f13; border-color: var(--text); }
+.intro h2, .check h2 { margin: 0 0 8px; }
+.intro p { color: var(--dim); max-width: 46ch; }
