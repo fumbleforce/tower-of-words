@@ -27,7 +27,8 @@ const VOICES = {
   emi: mm('Japanese_CalmLady', { volume: 0.55 }),
   rei: mm('Japanese_ColdQueen'),
   kaori: mm('Japanese_DependableWoman'),
-  mio: clone(path.join(R2, 'mio-3.mp3'), 'え、もう終わったの？…ちょっと待って、どうやったの？'),
+  // Mio = candidate A (proto2/voice-mio/mio-a.mp3), chosen 2026-09-25: the voice-design clip, cloned for every line.
+  mio: clone(path.join(ROOT, 'tools/voice-refs/mio-a.wav'), 'ミオ。……べつに、ゲームしてるだけ。話しかけてもいいけど、つまんないよ。あ、そのお菓子、ちょっとちょうだい。'),
   ishibashi: clone(path.join(ROOT, 'tools/voice-refs/ishibashi-ref12.wav'), '止まって。IDカード、見せて。…はい、次の人。ここは毎朝、何百人も通るんだ。顔はだいたい覚えてる。知らない顔は、止める。それが俺の仕事だ。'),
   goro: clone(path.join(ROOT, 'tools/voice-refs/goro-ref12.wav'), 'おや、いい天気だね。今日もトマトがよく育っているよ。このトマトはね、毎朝水をやって、話しかけてるんだ。大丈夫だよ、って。そうすると、よく育つんだよ。'),
   jun: clone(path.join(ROOT, 'tools/voice-refs/jun-ref12.wav'), 'いらっしゃい。今日はゆっくりしていって。この店は、静かなのがいいところだ。話したいなら聞くし、話したくないなら、何も聞かない。何を飲む？'),
@@ -45,9 +46,13 @@ export function pitch(file) {
 }
 export const pitchOk = (r, ch) => r.median == null || (ch === 'mio'
   // Mio: only catch clear drift into a male register.
-  ? r.median >= 180
+  ? r.median >= 190 && (r.low160 ?? 0) <= 0.10
   : r.median >= 185 && (r.low160 ?? 0) <= 0.25);
 const RETRY_STYLE = {};
+// How far a take is from passing the guard (0 = passes); used to keep the best of several failed takes.
+const miss = r => r.median == null ? 0 : Math.max(0, 190 - r.median) / 190 + Math.max(0, (r.low160 ?? 0) - 0.10);
+// ONLY=mio node tools/slice_voices.mjs voices just that character.
+const ONLY = process.env.ONLY ? new Set(process.env.ONLY.split(',')) : null;
 const FLAGS = path.join(ROOT, 'tools/voice-flags.txt');
 
 function normalize(src, dst, lufs = -18) {
@@ -82,18 +87,20 @@ const walkP = o => { if (Array.isArray(o)) o.forEach(walkP); else if (o && typeo
 walkP(SCENES);
 
 const manifest = {};
+// A filtered run (ONLY=...) still lists every line already on disk.
+for (const [ch, text] of lines) manifest[fnv(`${ch}|${text}`)] = 1;
 // Rewritten after every clip, so an interrupted run still leaves a manifest that lists every file on disk.
 const writeManifest = () => fs.writeFileSync(path.join(OUT, 'index.js'), `export const VOICE = ${JSON.stringify(Object.fromEntries(Object.keys(manifest).filter(k => fs.existsSync(path.join(OUT, `${k}.mp3`))).map(k => [k, 1])))};\n`);
 let active = 0; const waiters = [];
 const limit = async fn => { while (active >= 8) await new Promise(r => waiters.push(r)); active++; try { return await fn(); } finally { active--; waiters.shift()?.(); } };
-const jobs = lines.map(([ch, text]) => limit(async () => {
+const jobs = lines.filter(([ch]) => !ONLY || ONLY.has(ch)).map(([ch, text]) => limit(async () => {
   const key = fnv(`${ch}|${text}`);
   const dst = path.join(OUT, `${key}.mp3`);
   manifest[key] = 1;
   if (fs.existsSync(dst)) return;
   const v = VOICES[ch];
   const raw = path.join(RAW, key);
-  let f;
+  let f, best = null;
   try {
     for (let attempt = 0; attempt < 4; attempt++) {
       if (v.kind === 'minimax') f = await run('minimax/speech-2.6-hd', { text, voice_id: v.voice, language_boost: 'Japanese', sample_rate: 44100, ...v.extra, ...(attempt ? { speed: 1 - attempt * 0.02 } : {}) }, raw + (attempt ? `-r${attempt}` : '') + '.mp3', { force: attempt > 0 });
@@ -104,9 +111,10 @@ const jobs = lines.map(([ch, text]) => limit(async () => {
       f = Array.isArray(f) ? f[0] : f;
       if (!FEMALE.has(ch)) break;
       const r = pitch(f);
+      if (!best || miss(r) < miss(best.r)) best = { f, r };
       if (pitchOk(r, ch)) break;
       console.log('pitch retry', ch, text.slice(0, 16), JSON.stringify(r));
-      if (attempt === 3) fs.appendFileSync(FLAGS, `${key}\t${ch}\t${r.median}\t${r.low160}\t${text}\n`);
+      if (attempt === 3) { f = best.f; fs.appendFileSync(FLAGS, `${key}\t${ch}\t${best.r.median}\t${best.r.low160}\t${text}\n`); }
     }
     normalize(f, dst, v.lufs || -18);
     console.log('ok', ch, text.slice(0, 20));

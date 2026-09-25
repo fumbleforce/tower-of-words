@@ -4,7 +4,7 @@ Read GUIDE.md first. Pick up from here next session.
 
 ## Waiting on Jørgen
 - **Cast round 2:** approved Goro a-202, Jun a-202, Ishibashi b-201, Saki a-201. To do: Yuzuki c-202 with different hair and a smaller chest; Kiyoko outfits (not black) on her s101 face; Nanami options; the basement office from option 2 (more space, chairs, ramen cups). The rest renders with tools/decide2.py.
-- **Mio's voice:** all 35 lines regenerated from the original clip with only a male-drift guard. Listen on proto2/voice-mio; 「新しいゲーム…」 is borderline (35% under 160 Hz).
+- **Mio's voice:** candidate A (low, slightly husky) chosen; all 35 lines regenerated with it and in the game. Listen on proto2/voice-mio. Lowest line: 「……動かないで。……あと五分。」 (median 191 Hz, a sleepy whisper). 「そ。」 is too short to measure.
 - **Video:** Jørgen's verdict: very bad. The train looks like a worm with rippling skin, and the women barely move. Partly the model (Wan 2.2 5B is small), partly the prompts. Options for next time, decide before rendering more:
   1. A bigger local model: Wan 2.2 14B image-to-video, GGUF-quantized, offloading to the 60 GB of RAM (slow but much better), plus anime motion add-ons.
   2. Cloud for a few key cutscenes only: Kling, Seedance or Veo on Replicate, $0.25–1.20 per clip.
