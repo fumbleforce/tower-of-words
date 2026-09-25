@@ -280,31 +280,32 @@ def shots_for(m, **kw):
     return [job(f'shots-{m}', f'{k}-{s}', model=m, seed=s, prompt=pr, **kw) for k, pr in SHOTS.items() for s in SHOT_SEEDS]
 
 
-# ---- derived shots: img2img from Jørgen's approved masters with a short prompt about the new framing only ----
+# ---- derived shots: img2img from OUR approved-candidate masters with a short prompt about the new framing only ----
+# Jørgen's images in art/approved/*-ref.webp are references for quality and prompting ONLY. Never use them as img2img sources.
 MASTER_BAY = os.path.join(ROOT, 'art', 'approved', 'monorail-bay-ref.webp')
 MASTER_SIDE = os.path.join(ROOT, 'art', 'approved', 'monorail-side-ref.webp')
 MASTER_INT = os.path.join(ROOT, 'art', 'approved', 'monorail-interior-ref.webp')
+OUR_EXT = os.path.join(OUT, 'masters', 'ext-ref-oneobs-906.png')
+OUR_INT = os.path.join(OUT, 'masters', 'int-oneobs-901.png')
 DERIVE = {  # name -> (master, framing sentence)
-    'interior': (MASTER_BAY, 'showing the view from inside the front car of the monorail, looking forward through the large front window, '
+    'interior': (OUR_EXT, 'showing the view from inside the front car of the monorail, looking forward through the large front window, '
                  'the elevated track curving ahead over the sea into a station on the island city.'),
-    'closer': (MASTER_BAY, 'showing a closer view of the island city ahead, office towers catching the low morning sun, '
+    'closer': (OUR_EXT, 'showing a closer view of the island city ahead, office towers catching the low morning sun, '
                'the elevated monorail track running over the sea into the city.'),
-    'station': (MASTER_BAY, 'showing the monorail train arriving at an elevated station with a long roof on the island shore, '
+    'station': (OUR_EXT, 'showing the monorail train arriving at an elevated station with a long roof on the island shore, '
                 'office towers behind the station, the sea in front.'),
-    'cabin': (MASTER_SIDE, 'showing the inside of the empty carriage, looking out of the side windows at the sea and sky far below, '
-              'rows of seats, morning sunlight coming in.'),
     # from the interior master (straight-on side window): the same window later in the ride, and the aisle view that usually fails
-    'window-city': (MASTER_INT, 'interior view inside the monorail train, window showing the office towers of the island city close by across the water. '
+    'window-city': (OUR_INT, 'interior view inside the monorail train, window showing the office towers of the island city close by across the water. '
                     '2 seats visible, window is fully visible, straight on angle. No people.'),
-    'aisle': (MASTER_INT, 'interior view inside the empty monorail train, looking down the aisle toward the front window, '
+    'aisle': (OUR_INT, 'interior view inside the empty monorail train, looking down the aisle toward the front window, '
               'the elevated track ahead curving over the sea into a station on the island city. No people.'),
     # layout words: character-relative vs image-frame terms, and the one plain "keep out" line
-    'ots-relative': (MASTER_INT, 'interior view inside the monorail train, over the shoulder view of the man looking out the window, '
+    'ots-relative': (OUR_INT, 'interior view inside the monorail train, over the shoulder view of a man looking out the window, '
                      'seen over his left shoulder.'),
-    'ots-frame': (MASTER_INT, 'interior view inside the monorail train, the window fills the left half of the image, '
-                  'the back of his head and shoulder in the lower right corner.'),
-    'ots-frame-keep': (MASTER_INT, 'interior view inside the monorail train, the window fills the left half of the image, '
-                       'the back of his head and shoulder in the lower right corner. Only sea and sky in the window.'),
+    'ots-frame': (OUR_INT, 'interior view inside the monorail train, the window fills the left half of the image, '
+                  'the back of a man\'s head and shoulder in the lower right corner.'),
+    'ots-frame-keep': (OUR_INT, 'interior view inside the monorail train, the window fills the left half of the image, '
+                       'the back of a man\'s head and shoulder in the lower right corner. Only sea and sky in the window.'),
 }
 
 
@@ -319,7 +320,8 @@ def derive_for(m, denoises=(0.55, 0.7, 0.8, 0.9), seeds=(601, 602), variant='pla
     return J
 
 
-# ---- style match: Jørgen's cloud-made monorail references repainted in RDBT's house style (img2img, low denoise) ----
+# ---- style match (RETIRED 2026-09-25): repainting Jørgen's references was rejected ("very minor alterations to my images which I
+# told you not to use"). Kept only so the recorded results stay reproducible; do not run for new work. ----
 SIDE_EMPTY = os.path.join(ROOT, 'proto2', 'monorail', 'monorail-side-empty.webp')
 BG = STYLE + ', detailed anime background art, no humans, scenery, '
 STYLEMATCH = {  # name -> (source, w, h, prompt describing only what is visible)
@@ -418,8 +420,18 @@ def sales4():
     ctl = [('lineart', SALES_LINES, 0.8, 0.8)]
     J = [job('sales', f'sales-rdbt-s6-lines0.8end0.8-{s}', model='rdbt', seed=s, prompt=SALES_H, control=ctl) for s in range(8401, 8405)]
     J += [job('sales', f'sales-rdbt-s7-colorguide0.8-lines0.8end0.8-{s}', model='rdbt', seed=s, prompt=SALES_H, control=ctl,
-              init=SALES_COLOR, denoise=0.8) for s in range(8401, 8405)]
+              init=SALES_COLOR, denoise=0.8) for s in range(8401, 8411)]
     return J
+
+
+SALES_P = SALES_H.replace('a desk phone with a handset.', 'a beige desk phone with a corded handset resting on the cradle.')
+
+
+def sales5():
+    """s7 gave the island layout; phones stayed handset-less blobs. One change: the phone words."""
+    ctl = [('lineart', SALES_LINES, 0.8, 0.8)]
+    return [job('sales', f'sales-rdbt-s8-phonewords-colorguide0.8-{s}', model='rdbt', seed=s, prompt=SALES_P, control=ctl,
+                init=SALES_COLOR, denoise=0.8) for s in range(8401, 8407)]
 
 
 def sales2():
@@ -451,6 +463,51 @@ def stylematch3():
     return J
 
 
+# ---- our own monorail masters, from scratch (Jørgen: his images are references for quality and prompting only, never img2img sources) ----
+MASTER_EXT = {
+    'ref': REF,
+    'visible': PROMPTS['visible'],
+}
+MASTER_INT_PROMPT = (STYLE + ', detailed anime background art, hand-painted anime background, no humans, scenery, interior view inside the monorail train, '
+                     'window showing sea and sky. 2 seats visible, window is fully visible, straight on angle. The sea far below is calm and flat, no waves. '
+                     'Early morning sun low over the sea, dominant sky blue and sea blue, sparse warm sunrise orange accents.')
+
+
+def masters():
+    J = []
+    for m in ('rdbt', 'oneobs'):
+        for k, pr in MASTER_EXT.items():
+            J += [job('masters', f'ext-{k}-{m}-{s}', model=m, seed=s, prompt=pr) for s in range(901, 907)]
+        J += [job('masters', f'int-{m}-{s}', model=m, seed=s, prompt=MASTER_INT_PROMPT) for s in range(901, 909)]
+    return J
+
+
+SALES_NP = SALES.replace(', each desk with a computer monitor and a desk phone.', ', each desk with a computer monitor.').replace('Soft daylight,', 'Grey carpet floor. Soft daylight,')
+
+
+def sales6():
+    """Coordinator decision: no phones in the prompt; keep the colour guide + lineart recipe (s7) that gives islands."""
+    ctl = [('lineart', SALES_LINES, 0.8, 0.8)]
+    return [job('sales', f'sales-rdbt-s9-nophones-colorguide0.8-{s}', model='rdbt', seed=s, prompt=SALES_NP, control=ctl,
+                init=SALES_COLOR, denoise=0.8) for s in range(8401, 8417)]
+
+
+# progress shots derived only from OUR master (ext-ref-oneobs-906): crop toward the island and repaint at low strength,
+# so the train, beam and island keep their shape
+OUR_MASTER = os.path.join(OUT, 'masters', 'ext-ref-oneobs-906.png')
+PROG_OURS = {
+    'mid': (os.path.join(GUIDES, 'm906-crop-mid.png'), BG + 'a white monorail train on a curving elevated monorail beam on pillars high above a calm bay, '
+            'heading to an island city of office towers, low morning sun glittering on the sea, blue sky with white clouds.'),
+    'near': (os.path.join(GUIDES, 'm906-crop-near.png'), BG + 'a white monorail train on an elevated monorail beam on pillars, close to an island city of office towers, '
+             'calm sea, low morning sun, blue sky with white clouds.'),
+}
+
+
+def progress_ours():
+    return [job('masters', f'progress-{k}-oneobs-{d:g}-{s}', model='oneobs', seed=s, prompt=pr, init=src, denoise=d)
+            for k, (src, pr) in PROG_OURS.items() for d in (0.35, 0.5) for s in (931, 932, 933)]
+
+
 def argbatch(name):
     """'ablate:rdbt' -> ablate_for('rdbt') etc."""
     fn, _, arg = name.partition(':')
@@ -460,7 +517,7 @@ def argbatch(name):
     return {'ablate': ablate_for, 'hires': hires_for, 'shots': shots_for, 'derive': derive_for}[fn](arg)
 
 
-BATCHES = {'baseline': baseline, 'stylematch': stylematch, 'sales': sales, 'stylematch2': stylematch2, 'sales2': sales2, 'sales3': sales3, 'sales4': sales4, 'stylematch3': stylematch3}
+BATCHES = {'baseline': baseline, 'stylematch': stylematch, 'sales': sales, 'stylematch2': stylematch2, 'sales2': sales2, 'sales3': sales3, 'sales4': sales4, 'sales5': sales5, 'masters': masters, 'progress_ours': progress_ours, 'sales6': sales6, 'stylematch3': stylematch3}
 
 if __name__ == '__main__':
     for b in sys.argv[1:]:
