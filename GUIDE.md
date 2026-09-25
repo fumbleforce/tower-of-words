@@ -37,6 +37,7 @@ Everything Jørgen has asked for, and how we work. Every agent reads this before
 - Listen first: sound and text belong together (karaoke-style follow-along), not a separate listen step and read step. No blur effects.
 - Comprehension checks must use a different mode from the input (heard Japanese → answer in English or by acting). Never let the player match kanji shapes.
 - A word counts as known only after unaided success on separate days. English is hidden by default; revealing it counts as a lookup.
+- Reply options: the option text and the button that selects it are separate (2026-09-25). Tapping the text only gives word help; a distinct select button, spaced away from the text, commits. Nothing gets chosen by accident.
 - Every word, including words inside options, can be tapped for its meaning without triggering the option.
 - Selecting an option reads it aloud (player voice, at a lower volume). Replays play slightly slower.
 - Scroll up or PageUp goes back through the dialogue (VN backlog).
