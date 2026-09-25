@@ -60,8 +60,11 @@ canvas{width:min(100vw,calc(100vh*16/9));height:min(100vh,calc(100vw*9/16));disp
     return;
   }
   // the main character sprite is also needed as an image for the ID card photo
-  TEX_IMG['s-mc'] = await new Promise(r => { const i = new Image(); i.onload = () => r(i); i.src = (lite ? 'img/lite' : 'img') + '/s-mcopen.webp'; });
-  buildCard();
+  if (ASSETS.includes('s-mcopen')) {
+    TEX_IMG['s-mc'] = await new Promise(r => { const i = new Image(); i.onload = () => r(i); i.onerror = () => r(null); i.src = (lite ? 'img/lite' : 'img') + '/s-mcopen.webp'; });
+    buildCard();
+  }
+  const T0 = cj.pilot ? CUTS[0].start : 0;   // pilot: play only this shot's place in the song
   loadEl.textContent = 'click to play';
   const render = t => frame(clamp(t, 0, DUR - 1e-3), drawShot);
   if (capture) {
@@ -75,11 +78,12 @@ canvas{width:min(100vw,calc(100vh*16/9));height:min(100vh,calc(100vw*9/16));disp
   const actx = new (window.AudioContext || window.webkitAudioContext)();
   const gain = actx.createGain(); actx.createMediaElementSource(audio).connect(gain); gain.connect(actx.destination);
   const rev = document.getElementById('rev'), info = document.getElementById('info'), scrub = document.getElementById('scrub'), bar = document.querySelector('#bar i');
-  scrub.max = DUR;
+  scrub.max = DUR; scrub.min = T0;
   let paused = false, scrubbing = false;
   function tick() {
     const t = audio.currentTime;
-    if (t >= DUR && !audio.paused) audio.pause();
+    gain.gain.value = cj.pilot ? Math.min(1, (t - T0) / 0.12) * (1 - inv(DUR - 0.3, DUR, t)) : 1;
+    if (t >= DUR && !audio.paused) { audio.pause(); document.getElementById('pp').textContent = 'replay'; }
 
 
     render(t);
@@ -92,8 +96,8 @@ canvas{width:min(100vw,calc(100vh*16/9));height:min(100vh,calc(100vw*9/16));disp
     requestAnimationFrame(tick);
   }
   const start = document.getElementById('start');
-  start.onclick = () => { actx.resume(); audio.play(); start.remove(); tick(); setTimeout(() => document.getElementById('hint').style.opacity = 0, 4000); };
-  const toggle = () => { if (audio.paused) { audio.play(); paused = false; } else { audio.pause(); paused = true; } document.getElementById('pp').textContent = audio.paused ? 'play' : 'pause'; };
+  start.onclick = () => { actx.resume(); audio.currentTime = T0; audio.play(); start.remove(); tick(); setTimeout(() => document.getElementById('hint').style.opacity = 0, 4000); };
+  const toggle = () => { if (audio.paused) { if (audio.currentTime >= DUR - 0.01) audio.currentTime = T0; audio.play(); paused = false; } else { audio.pause(); paused = true; } document.getElementById('pp').textContent = audio.paused ? 'play' : 'pause'; };
   const seekShot = d => { const c = cutAt(audio.currentTime); const i = CUTS.indexOf(c) + d; if (CUTS[i]) audio.currentTime = CUTS[i].start + 0.001; };
   const fs = () => document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen();
   document.getElementById('pp').onclick = toggle;

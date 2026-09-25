@@ -33,7 +33,7 @@ async function grab(p, t, q = 0.93) {
     const t1 = +(rest[2] || dur);
     const ff = spawn('ffmpeg', ['-y', '-v', 'error', '-f', 'image2pipe', '-framerate', String(fps), '-c:v', 'mjpeg', '-i', '-',
       '-ss', String(t0), '-t', String(t1 - t0), '-i', path.join(ROOT, 'game/audio/music/opening-tv.mp3'),
-      '-af', `afade=t=out:st=${Math.max(0, t1 - t0 - 0.6)}:d=0.6`,
+      '-af', `afade=t=in:d=0.12,afade=t=out:st=${Math.max(0, t1 - t0 - 0.3)}:d=0.3`,
       '-c:v', 'libx264', '-preset', 'slow', '-crf', '19', '-pix_fmt', 'yuv420p', '-c:a', 'aac', '-b:a', '192k', '-shortest', '-movflags', '+faststart', out],
       { stdio: ['pipe', 'inherit', 'inherit'] });
     const n = Math.round((t1 - t0) * fps);

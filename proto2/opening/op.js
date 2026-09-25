@@ -231,10 +231,21 @@ S.sky = (lt, u, t, fx, c) => {
   if (t >= 0.42) flashIn(fx, t - 0.42, 0.3);
 };
 S.bay = (lt, u, t, fx, c) => {
-  const o = { cx: lerp(0.44, 0.52, E.outQ(u)), cy: 0.5, zoom: 1.1 * punch(lt, 8, 0.03), par: [0.02 * u - 0.01, 0.004], focus: 0.4 };
+  // Pilot, shot 2: the approved exterior master. A slow truck right and push toward the city with depth parallax,
+  // so the near beam and train slide against the far sea and skyline. Glints on the water change on 2s.
+  const k = E.ioS(u);
+  const o = { cx: lerp(0.485, 0.5, k), cy: lerp(0.52, 0.5, k), zoom: lerp(1.03, 1.1, k), par: [lerp(-0.006, 0.008, k), lerp(0.002, -0.002, k)], focus: 0.12 };
+  flashIn(fx, lt, 0.1);
   bg('bay', o);
-  const x = c2d(); waterSparkle(x, t, P.water.bay, 50, 3, 22); draw2d();
-  fx.leak = 0.12; fx.flare = P.sun.bay; fx.flareAmt = 0.4;
+  const x = c2d();
+  for (const [u0, v0, du, dv] of P.bayGlitter) {
+    const [x0, y0] = toScreen(u0, v0), [x1, y1] = toScreen(u0 + du, v0 + dv);
+    waterSparkle(x, t, [x0, y0, x1 - x0, y1 - y0], 26, u0 * 10, 16);
+  }
+  draw2d();
+  const [sx, sy] = toScreen(P.sun.bay[0], P.sun.bay[1]);
+  fx.flare = [sx / W, sy / H]; fx.flareAmt = 0.12;
+  fx.leak = 0.08; fx.bloom = 0.3; fx.thr = 0.8; fx.vig = 0.22;
 };
 S.oncoming = (lt, u, t, fx, c) => {
   const o = { zoom: lerp(1.12, 1.3, u), rot: lerp(-0.05, 0.04, E.ioC(u)), cx: 0.5, cy: 0.5, shake: shake(t, 6), depth: null };

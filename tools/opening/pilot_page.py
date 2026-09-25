@@ -99,7 +99,11 @@ input.c{{width:min(100%,600px);padding:7px 10px;border:1px solid var(--line);bor
 </style></head><body><main>
 <h1>Opening pilot: one shot, start to finish</h1>
 <p class="intro">We test the new process on one shot before anything else: staging note, a short prompt that names only what is visible, a few cloud candidates, my check against the staging list, then your pick. After you pick, I animate just this shot (depth parallax, a few seconds, at its place in the song, 3.6 s) and show it, so you can judge the whole pipeline on one shot. Pilot spend: about $1.10 of Replicate (ledger in tools/spend.json). Click an image to see it full size.</p>
-<section id="exterior"><h2>Shot 2: the monorail over the bay, heading into the city</h2>
+<section id="anim"><h2>Pilot animation: your master, animated (3.2 s at 3.6 s in the song)</h2>
+<p class="intro">Your approved master (monorail-bay-ref2), upscaled 2x locally, with a depth map from Depth Anything V2. The camera pushes slowly toward the city while the depth parallax slides the near beam and train against the far sea and skyline; glints on the water change on 2s; a white flash on the cut. It plays two bars here so the motion can be judged; in the full edit the shot is one bar. Live version (plays this part of the song): <a href="index.html">index.html</a> (press R for the review bar).</p>
+<video src="pilot-bay.mp4" controls playsinline style="width:min(100%,1280px);display:block;border-radius:6px"></video>
+<p class="intro">My frame check: no tearing at the depth edges (train, pillars, beam), pillars stay straight, the train doesn't warp, motion is even from frame to frame. Weak: the parallax is gentle, so it reads more as a camera push than as depth; the train itself does not move along the beam.</p></section>
+<section id="exterior"><h2>Earlier pilot candidates (superseded by your master): shot 2: the monorail over the bay, heading into the city</h2>
 <table class="note">{note}</table>
 <p><b>Prompt for pilot-a</b> (GPT Image 2, with our line sketch tools/promptlab_guides/bay-lines.png attached as the layout):</p><div class="prompt">{e(SKETCH_LINE)} {e(PROMPT_A)}</div>
 <p><b>Then one edit</b> of that image (GPT Image 2):</p><div class="prompt">{e(EDIT_A)}</div>
