@@ -10,6 +10,7 @@ Open ComfyUI at http://127.0.0.1:8188 (start it with `~/ai/start-comfy.sh`). Loa
 - `anima-img2img.json`: RDBT image-to-image. Load your picture in **Load Image**, write the full prompt, and set **denoise** on the sampler: about 0.5 keeps the layout (used for the basement office), 0.88 keeps pose and clothes but lets the hair change (used for Yuzuki).
 - `anima-img2img-masked.json`: the same, but only the white part of a mask image is repainted (used to keep Kiyoko's face and redraw her clothes at denoise 0.9). Load the mask in the second **Load Image** node (white = repaint, black = keep).
 - `example-*.png`: drag in to get the exact settings that made them. Every PNG ComfyUI saves carries its workflow.
+- `anima-outpaint.json`: RDBT outpaint for portraits cut by the frame edge (tools/reframe.py). Load a padded image and a mask (white = paint), Differential Diffusion on the model, masked latent, denoise 0.7. The padded image already has a rough crown drawn where hair was cut, so the model refines a shape instead of inventing one.
 
 ## Video (image-to-video)
 - `video-wan22-portrait.json`: Wan 2.2 TI2V 5B, 704×896, 57 frames at 24 fps (~2.4 s). About 2 min on the 3080.

@@ -5,6 +5,7 @@ Output: art/production/<batch>/<name>.png (gitignored) and art/production/manife
 import sys, os, json, time
 sys.path.insert(0, os.path.dirname(__file__))
 import comfy
+import framecheck
 
 ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..')
 OUT = os.path.join(ROOT, 'art', 'production')
@@ -17,7 +18,8 @@ N = ('worst quality, low quality, early, old, score_1, score_2, score_3, artist 
      'missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, '
      '3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli')
 NO_PEOPLE_N = N + ', people, person, 1girl, 1boy, crowd, character'
-FRAME = 'waist-up portrait facing the viewer at a slight angle, plain light grey background, soft even studio light'
+FRAME = ('waist-up portrait facing the viewer at a slight angle, (the whole head inside the frame with empty space above the hair:1.2), '
+         'plain light grey background, soft even studio light')
 MC = ('a 29-year-old Nordic man, messy sandy-blond hair, light blond eyebrows, fair pale skin, blue eyes, slim average build, no blush, '
       'white shirt with rolled sleeves, company lanyard')
 
@@ -139,6 +141,8 @@ def run(batch, name, prompt, negative, w, h, seed, model):
                   'seed': seed, 'w': w, 'h': h, 'file': f'{batch}/{name}.png', 't': round(time.time() - t)})
         json.dump(m, open(MANIFEST, 'w'), ensure_ascii=False, indent=1)
         print('ok', batch, name, round(time.time() - t), 's', flush=True)
+        if h > w:  # portrait: warn when the head or arms touch the frame edge (tools/framecheck.py)
+            framecheck.warn(path)
     except Exception as e:
         print('FAIL', batch, name, str(e)[:200], flush=True)
 
