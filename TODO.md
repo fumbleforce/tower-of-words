@@ -16,6 +16,7 @@ Read GUIDE.md first. Pick up from here next session.
 - Day-1 flow: monorail → gate → office → copy room (first secret magic, the first task: copies for Emi) → office → Sales (Rei, second spell). Design and build the copy-room magic mechanic. See GUIDE "Current focus".
 - One free-typing local-AI moment on day 1, with a one-click start of llama-server. Phone/train mode after day 1.
 - Decided: phone onboarding on the monorail (welcome, map, dorm room, ID card, level check); things sent ahead; day 1 ends in his dorm room. Dorm-room background options are on proto2/locations2; still needs script changes to day1-draft.md (also fix the "crowded carriage" line: the arrival train is empty).
+- Next when the GPU frees up: base sprites for Emi, Mio and Rei (approved designs, proper headroom) plus ~5 face-only expressions each, on a review page for Jørgen; then blink/breath/mouth puppets like the Mio demo.
 - Composition research on the side.
 - Opening: picks recorded on proto2/opening/shots.html (sky-tall-12, oncoming2-216 with its repeating clouds to fix, mc-window2-266); bay, cabin, other window shots, city view, phone app and title card rejected (see the page). Paused until the Blender blockout + ControlNet recipe passes review. Song edit: game/audio/music/opening-tv.mp3 (89.6 s).
 
