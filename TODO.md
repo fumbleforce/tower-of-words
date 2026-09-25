@@ -14,7 +14,7 @@ Read GUIDE.md first. Pick up from here next session.
 - Locations round 1 is ready for Jørgen to pick on proto2/locations1: monorail interior (4), gate (3), copy room (4), Sales (3). All RDBT at 1216×832 with no people, and each has a staging note (tools/locations1.py STAGING). Nothing is in the game yet; after he picks, convert the chosen ones to game/img/bg (1920 wide webp). The basement office is in decide2. Note: the monorail options have empty carriages (an arrival, not a commute), but the day-1 script still says "squeeze across the crowded carriage" on the left-door choice.
 - Day-1 flow: monorail → gate → office → copy room (first secret magic, the first task: copies for Emi) → office → Sales (Rei, second spell). Design and build the copy-room magic mechanic. See GUIDE "Current focus".
 - One free-typing local-AI moment on day 1, with a one-click start of llama-server. Phone/train mode after day 1.
-- Open question for Jørgen: the move-in on day 1. Does he arrive with a suitcase and drop it at the dorm, or were his things sent ahead? Maybe a short "here's your room" moment at the end of the day.
+- Decided: phone onboarding on the monorail (welcome, map, dorm room, ID card, level check); things sent ahead; day 1 ends in his dorm room. Needs a dorm-room background and script changes to day1-draft.md (also fix the "crowded carriage" line: the arrival train is empty).
 - Composition research on the side.
 
 ## Art (after the cast is settled; decide before producing)
