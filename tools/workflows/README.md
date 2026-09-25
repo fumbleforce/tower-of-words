@@ -17,3 +17,7 @@ Open ComfyUI at http://127.0.0.1:8188 (start it with `~/ai/start-comfy.sh`). Loa
 To use: in the **Load Image** node, pick or upload your start image (it shows INPUT_IMAGE.png until you do). Then edit the first text box: describe only the MOTION and the camera, not the whole picture again. Width and height should match your image's shape (multiples of 32); length is frames (4n+1). Output: the video goes to ~/ai/ComfyUI/output/video/.
 
 Tips: keep "static camera" for sprites; subtle motion works better than big actions; the model can add a wink or an expression change you didn't ask for, so reroll the seed.
+
+## Music
+- `yue2-instrumental-lora-api.json`: YuE2 3B (bf16) with the instrumental add-on on the CLIP slot and the v9 sound add-on on MODEL. The style box takes tags; the lyrics box takes only `[instrumental]` or section tags, one per line. Output goes to ~/ai/ComfyUI/output/music2/.
+- `stable-audio-3-bgm-api.json`: Stable Audio 3 Medium, 90 s instrumental, 8 steps. Write the prompt as one sentence ending in "BPM: 75. Length: 90 seconds".

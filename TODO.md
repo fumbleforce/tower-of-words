@@ -10,7 +10,7 @@ Read GUIDE.md first. Pick up from here next session.
   2. Cloud for a few key cutscenes only: Kling, Seedance or Veo on Replicate, $0.25–1.20 per clip.
   3. For living portraits, skip video: animate the sprites as layered puppets (Live2D-style: blinking, breathing and hair sway in the game engine). Cheap, consistent and loopable; probably the right tool for VN characters.
   4. Better motion prompts: describe the motion explicitly per second, use camera terms, and a motion-strength or frame-count choice.
-- **Local music:** YuE2 versus Lyria verdict (proto2/music). The game currently alternates between both.
+- **Local music:** round 2 on proto2/music: vocal-free loops for the office and the bar (YuE2 with the instrumental add-on in three variants, Stable Audio 3, and a Demucs voice-removed version), plus the opening theme softened two ways by mastering and one new take with softer tags, and the lyrics with readings and English. Waiting for Jørgen to pick; then redo calm and lively the same way and swap them into the game.
 
 ## Focus: a narrow day-1 slice (Jørgen, 2026-09-25)
 - Chosen: Emi, Mio, Rei; monorail, gate, basement office, Sales. Ishibashi voice/text only at the gate; canteen, rooftop and bar move to day 2. Get day 1 to an excellent state before scaling up. Don't build sprite sets for the whole cast yet.
