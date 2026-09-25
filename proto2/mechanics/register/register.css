@@ -1,0 +1,25 @@
+.reg { display: flex; flex-direction: column; }
+.who { display: flex; align-items: center; gap: 14px; padding: 12px 14px; border-radius: var(--r-panel); background: var(--panel); border: 1px solid var(--line); transition: border-color .3s, background .3s; }
+.who > i { font-size: 40px; color: var(--dim); transition: color .3s, transform .3s; }
+.who b { display: block; font-size: 17px; }
+.who span { color: var(--dim); font-size: 14px; }
+.who .mood { margin-left: auto; font: 600 12px var(--mono); padding: 3px 10px; border-radius: 999px; }
+.who .mood:empty { display: none; }
+.mood.ok { color: var(--ok); border: 1px solid var(--ok); }
+.mood.meh { color: var(--text); border: 1px solid var(--line2); }
+.mood.bad { color: var(--accent); border: 1px solid var(--accent); }
+.who.m-ok { border-color: rgba(108, 197, 154, .6); } .who.m-ok > i { color: var(--ok); transform: rotate(-6deg) scale(1.08); }
+.who.m-bad { border-color: rgba(232, 69, 44, .6); } .who.m-bad > i { color: var(--accent); transform: translateX(6px); }
+.said-line { margin: 14px 0 6px; padding: 6px 4px; }
+.replies { display: grid; gap: 10px; margin-top: 8px; }
+.reply { display: flex; align-items: center; gap: 12px; min-height: 60px; padding: 8px 18px 8px 14px; border-radius: var(--r-tile); background: var(--panel); border: 1px solid var(--line2); cursor: pointer; font: 700 clamp(19px, 4.6vw, 24px)/1.9 var(--jp); transition: opacity .25s, border-color .15s, transform .08s; }
+.reply > i { font-size: 22px; color: var(--dim); flex: none; }
+.reply:hover, .reply:focus-visible { border-color: var(--text); outline: none; }
+.reply:active { transform: scale(.99); }
+.reply .w { text-decoration: underline dotted rgba(255, 255, 255, .28); text-underline-offset: .28em; }
+.reply.picked { border-color: var(--text); background: var(--panel2); cursor: default; }
+.reply.faded { opacity: .3; cursor: default; }
+.after { min-height: 120px; margin-top: 16px; }
+.react-line { padding: 10px 16px 4px; border-left: 3px solid var(--line2); }
+.after-row { display: flex; justify-content: space-between; align-items: center; margin-top: 12px; gap: 12px; }
+.why { margin: 0; color: var(--dim); font-size: 15px; max-width: 44ch; }

@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0d0f13">
+<title>Mechanics prototypes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=M+PLUS+1:wght@400;500;600;700;800;900&family=IBM+Plex+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/fill/style.css">
+<link rel="stylesheet" href="core.css">
+<style>
+  .idx { max-width: 880px; margin: 0 auto; padding: 36px 16px 60px; }
+  .idx h1 { margin: 0 0 6px; font-size: clamp(26px, 5vw, 36px); letter-spacing: -.01em; }
+  .idx > p { color: var(--dim); max-width: 60ch; margin: 0 0 26px; }
+  .protos { display: grid; gap: 12px; grid-template-columns: 1fr; }
+  @media (min-width: 760px) { .protos { grid-template-columns: 1fr 1fr; } .protos a:first-child, .protos a:last-child { grid-column: span 2; } }
+  .p { display: grid; grid-template-columns: 56px 1fr; gap: 4px 16px; padding: 18px; border-radius: var(--r-panel); background: var(--panel); border: 1px solid var(--line); text-decoration: none; transition: border-color .15s, transform .1s; }
+  .p:hover { border-color: var(--text); }
+  .p:active { transform: scale(.995); }
+  .p > i { grid-row: span 3; font-size: 40px; color: var(--text); align-self: start; }
+  .p b { font-size: 18px; }
+  .p .d { color: var(--dim); font-size: 15px; }
+  .p .last { font: 500 12px var(--mono); color: var(--dim); margin-top: 6px; }
+  .p .last em { font-style: normal; color: var(--text); }
+  .foot { margin-top: 28px; display: flex; gap: 18px; flex-wrap: wrap; align-items: center; color: var(--dim); font-size: 14px; }
+  .lvlnow { font: 600 13px var(--mono); }
+</style>
+</head>
+<body>
+<main class="idx">
+  <h1>Mechanics prototypes</h1>
+  <p>Each one tests a single learning mechanic with no story around it. A run takes two to five minutes, the content is shuffled every time, and the end screen shows your times, look-ups and accuracy. Tap a rating there so we know what worked.</p>
+  <div class="protos" id="protos"></div>
+  <div class="foot"><span class="lvlnow" id="lvlnow"></span><a class="linkish" href="reader/index.html#check">Take the level check</a><a class="linkish" href="keys/index.html">Progress and word keys</a></div>
+  <p class="attr" style="text-align:left;padding:0;margin-top:34px">Word data from JMdict and KANJIDIC2, the property of the <a href="https://www.edrdg.org/edrdg/licence.html">Electronic Dictionary Research and Development Group</a>, used under the Group's licence.</p>
+</main>
+<script type="module">
+import { S, LEVELS, dayNo } from './core.js';
+const P = [
+  ['forge', 'Spell forge', 'sparkle', 'Build a verb form from its ending and watch the object take it literally. Tests whether choosing forms teaches conjugation, and whether it is fun.'],
+  ['reader', 'Adaptive reader', 'chat-teardrop-text', 'Short casual lines shown for your level: unknown kanji as kana, learning kanji with a reading, known kanji plain. Tests reading pace and whether the adaptation feels right.'],
+  ['listen', 'Listen and act', 'ear', 'Hear a line, then do what it says: press a floor, pick a time, tap a person. Tests listening without slowing down.'],
+  ['register', 'Casual or polite', 'chats-circle', 'Answer people of different ages and roles. Their reaction is the feedback. Tests whether register sticks without rules.'],
+  ['shop', 'Katakana shelf', 'shopping-cart', 'The list is pictures, the shelf is katakana. Tests fast katakana reading, the weakest script.'],
+  ['keys', 'Word keys', 'key', 'Words you get right on three separate days become keys, and key verbs unlock spells in the forge. Simulate days here. Tests whether spaced success feels like progress.'],
+];
+const RATE = { fun: 'fun', easy: 'too easy', hard: 'too hard', confusing: 'confusing', slow: 'too slow' };
+document.getElementById('protos').innerHTML = P.map(([id, name, icon, d]) => {
+  const runs = S.sessions.filter(s => s.proto === id), l = runs[runs.length - 1];
+  const last = l ? `${runs.length} run${runs.length > 1 ? 's' : ''}. Last: ${Math.round(l.accuracy * 100)}% right, ${(l.medianMs / 1000).toFixed(1)} s per item, ${l.lookups} look-ups${l.rating?.length ? `, <em>${l.rating.map(r => RATE[r]).join(', ')}</em>` : ''}` : 'Not played yet';
+  return `<a class="p" href="${id}/index.html"><i class="ph-fill ph-${icon}"></i><b>${name}</b><span class="d">${d}</span><span class="last">${last}</span></a>`;
+}).join('');
+const l = S.prof.level;
+document.getElementById('lvlnow').textContent = l == null ? 'Level not set yet' : `Level ${l}: ${LEVELS[l].name}. Day ${dayNo()}.`;
+</script>
+</body>
+</html>
