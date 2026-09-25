@@ -1,231 +1,168 @@
-# Day 1 design: the copy room, adaptive learning, variety
+# Day 1 design
 
-Status: proposal for Jørgen to adjust. No code or data has changed. The full script for every branch is in `day1-draft.md`.
+Revised 2026-09-25 to match every day-1 decision in GUIDE.md "Current focus". The full script for every branch is in `day1-draft.md`. The first version of this file (coffee machine, trade route, 10:30 deadline, 20-minute session) is superseded.
 
-Flow: monorail → gate → basement office (B2) → copy room (B1) → office → Sales (3F) → office, afternoon skip, evening with Emi. Cast on screen: Emi, Mio, Rei. Ishibashi is voice and text at the gate. Canteen, rooftop and bar are gone from day 1.
+Flow: monorail (phone onboarding and level check) → gate → basement office (B2) → copy room (B1) → office → Sales (3F) → office → afternoon (summary) → evening in the office → dorm room.
+People on screen: Emi, Mio, Rei. Ishibashi is a voice from the speaker above the security gates, with no sprite. Canteen, rooftop and bar are day 2. Locations drawn: monorail, gate, office, copy room, Sales, dorm (six). The elevator is a floor panel over a plain steel backdrop, not a drawn location.
+
+## What changed from the first design
+- No coffee machine. The copy room is the very first magic the player sees and uses.
+- No trade with Rei. Sales has four ways through: ask, leave it for the afternoon, cast now with a witness, or wait until the witness leaves and cast.
+- No deadlines and no clock fail states. The clock moves (waiting, wrong floors, doing things by hand) and characters react to how fast you were, but nothing is lost because a timer ran out. The runaway copier with an 8-second timer is gone. Emi wants Rei's numbers "before the meeting", said softly, with no countdown.
+- 5 casts for the whole day, shared between the copy room and Rei.
+- The magic's origin stays a mystery. The narration says it has worked ever since he started learning Japanese, and that he never found out why. Nothing more.
+- Imperatives (出せ, 急げ) exist only as tiles in the spell ring and as their loud results. The player's own replies never use them.
+- Romaji over katakana appears only when the player taps the word.
+- Onboarding moved onto the monorail as the company phone's new-hire app: welcome, island map, his dorm room, the ID card, then a two-minute level check.
+- The day ends in his dorm room (second floor, window facing a concrete wall), with the free-typing moment as a chat with Emi and a scripted fallback.
 
 ## 1. The magic mechanic
 
 ### The rule
-A spell is one ordinary Japanese verb in one form, said with intent. Objects and people do exactly what the words say, even when you meant something else. The verb picks what happens, and the form picks how.
+A spell is one ordinary Japanese verb in one form, said with intent. Things do exactly what the words say. The verb picks what happens and the form picks how. The player never reads this rule; it shows up through results.
 
-The player never reads this rule. It shows up through results: the first time 動け makes the copier roar, the player learns what the imperative does.
+| Form | Example | Result |
+|---|---|---|
+| te-form request | 出して | Works at normal strength. |
+| Imperative | 出せ | Works too hard: loud and overdone. On a person it lands as an order, and she notices. |
+| Dictionary form | 出す | Nothing. The thing "agrees" and doesn't act. |
+| Past | 出した | The thing repeats the last thing it did. |
+| Wrong verb | 見せて on Rei | A literal result: she shows you the folder instead of handing it over. |
+| Nonsense ending | 出いて | Nothing. |
 
-### Building a spell
-It uses the existing spell ring in `main.js` (pick a verb, then pick the ending from tiles, or type the whole word in romaji):
+Every cast costs one of the day's 5 voice marks, misfires included.
 
-1. The ring shows the goal in plain words ("Get the copier running"), who can see you (見ている人), and your voice marks.
-2. Pick a verb. On day 1 each step offers one or two verbs.
-3. Pick the ending from tiles, or type it. The tiles always include the right form, the other forms that do something, and a couple of distractors.
-4. New on day 1: an optional slot before the verb. The copy step has a count slot (十部 / 二十部 / 百部 / nothing). Later slots can hold objects, adverbs or times.
+### Building a spell (UI)
+The existing spell ring: the goal in plain English, who can see you (見ている人), the voice marks. Pick a verb (the copy room offers one per step; Rei's step offers two), then pick the ending from tiles, or type the whole word in romaji on desktop. The tiles are the forms that do something plus distractors. One verb, one form, one word per step. No count slot: the count is set by hand on the copier's keypad, from memory of Emi's 十部.
 
-### What each form does
-| Form | Example | What happens | Why it fits |
-|---|---|---|---|
-| te-form request | 動いて | Works, at normal strength. | It's how you ask for something. |
-| Imperative | 動け | Works too hard: loud, fast, overdone. On a person it feels like an order and they notice. | The imperative really is blunt and rough. |
-| Dictionary form | 動く | Nothing. The thing "agrees" and doesn't act. | A statement doesn't ask anything. |
-| Past | 動いた | The thing repeats the last thing it did. | "It moved": it goes back to what it did before. |
-| Wrong verb | 止めて on the copier | A literal misfire: the paper stops, the rollers keep screaming. | Transitive and intransitive pairs become funny instead of abstract. |
+### The copy room, step by step
+One word per step, each step teaching one te-form sound rule, each attached to something on screen:
 
-The day-1 steps also teach the te-form sound rules one at a time, each attached to a thing on screen:
-- Required: 動く → 動いて (く→いて), 出す → 出して (す→して), コピーする → コピーして (する→して).
-- Optional or conditional: 急ぐ → 急いで (ぐ→いで), 止まる → 止まって (る→って, heard from Ishibashi at the gate), 並ぶ → 並んで (ぶ→んで).
+| Step | Problem | By hand | Spell | Sound rule |
+|---|---|---|---|---|
+| 1. Jam | A torn page deep in the rollers; the copier is dead | Fails (button, panel, hitting). This is where he decides to use it. | 出す → 出して | す → して |
+| 2. Count | The keypad asks for 部数 | 10 / 11 / 20 / 100: a listening check of Emi's 十部 (11 comes from 十一時) | none | |
+| 3. Copy | One page every ten seconds | Wait (the clock moves, nothing else) | 急ぐ → 急いで | ぐ → いで |
+| 4. Sort | The old copier doesn't collate | About ten minutes by hand | 並ぶ → 並んで (the pages literally queue along the desk) | ぶ → んで |
+| 5. Footsteps | Mio in the corridor | Keep still, or open the door first | none | |
+| 6. Staple | none | The stapler works. It's the only thing in the room that does. | none | |
 
-No player has to learn all six on day 1. A careful player needs only the first three.
+Step 1 is the only forced cast. Its hint grows after each misfire ("Ask it, the way you'd ask a person.", then "The way Emi asked you.", whose request was 「これ、コピーして。」, then the て tile is marked), and "Stop" is offered only after two casts, so almost every player sees the first spell work. If the player stops or runs out of voice there, he picks the page out with a ruler over twenty minutes and the copier wakes anyway, so nobody gets stuck. Steps 3 and 4 are real choices: hands cost time, magic costs voice and can make noise. A clean run uses 1 to 3 casts and leaves 2 to 4 for Rei.
 
-### Resources on day 1
-- **Voice (声): 5 marks** instead of the current 3. Every cast costs one, including a misfire. The perfect copy-room run uses 2 or 3, which leaves enough for Rei. A messy run can leave you with nothing at Sales. This is the day's main strategic link.
-- **Time.** Every manual alternative costs minutes on the clock. Emi wants the numbers by 10:30 and Rei leaves for the meeting at 10:45.
-- **Noise (hidden).** Loud outcomes (imperatives, paper floods, a runaway copier) add noise. The player never sees a meter. They hear the machine roar, and later they hear footsteps.
-- **Witnesses.** Anyone who sees a cast. Shown in the ring as 見ている人.
-- **Suspicion per person** instead of one global number: Mio, Rei and Ishibashi each remember specific things. Later confrontations read from the person who noticed.
+Outcomes worth noting:
+- 出せ: the page, then the whole paper tray, hits the door. Works, loud.
+- 出した: it prints the last thing it ever printed, the こわれています sign taped to it (so that's where it came from), and jams again.
+- Typed on desktop, real Japanese that isn't a tile gets a literal result too: 出て (the page steps halfway out), 並べて (the toner boxes arrange themselves).
+- 急げ: done in ten seconds, smell of hot toner, half the pages crooked. Works, loud; Emi notices later.
+- 急いだ: it repeats its last act and prints the last page again, once, slowly.
+- Waiting on 100 copies: after ten sets he hits stop. Nobody loses an hour to a mis-tap.
+- 並べ: the pages snap into line so hard the stapler falls off the desk. Works, loud.
+- 並んだ: the pages repeat their last move and slide onto the floor.
+- 100 copies with 急いで: four hundred pages in a minute. Loud.
 
-### Failure is a scene
-Nothing in the copy room gives a red X. Each wrong form produces a result you can see, and most of them cost time, voice or noise:
-- 動いた: the copier prints its own "broken" sign thirty times.
-- 出せ: it spits the jammed page, then the whole paper tray, at the door.
-- No count: it copies forever and floods the floor, which triggers a timed 止まって.
-- 急いで: done in thirty seconds, every page slightly crooked. Emi notices.
-- On Rei, 渡せ gets you the folder slapped onto the desk and 「……今、私に命令した？」. 待って freezes her mid-reach, which she remembers.
+### Noise and the footsteps
+Loud results add hidden noise. There's no meter; the player hears the machine. The footsteps always come, after sorting. They belong to Mio, who left the office before you to find phone signal for her game event (set up in the office: 「……また、つながらない。」 and her slippers).
+- Keep still, quiet run: the steps stop at the door, a sigh, 「……ここも、つながらない。」, and she walks off. Every player gets this near miss.
+- Keep still, loud run: she opens the door, sees the "broken" copier humming, asks 「それ、こわれてなかった？」. Mio saw (her suspicion +1). It pays off after Emi leaves, in her own terms: 「今度、私のゲーム機もなおして。」
+- Open the door first: you meet her in the corridor, she never sees the room. If it was loud she says so, and mentions it again in the office.
 
-### Footsteps and witnesses
-In the copy room, footsteps always come down the corridor after the copying. They belong to Mio, who is walking the basement looking for phone signal because her game event ends at noon. She has no interest in you.
-- Quiet run (noise 0-1): the steps stop at the door, she mutters that there's no signal here either, and walks off. Every player gets the near miss and learns that sound carries.
-- Loud run (noise 2+), staying still: she opens the door, sees a "broken" copier running and paper on the floor, and asks. Mio's suspicion goes up and pays off later in the day.
-- Opening the door first: you meet her in the corridor, so she never sees the room. If it was loud she still says it was noisy.
+### Sales: the second spell
+A person, and a witness (the salesman at the next desk). Rei stalls on purpose (she tells you she knows it's too late after the meeting: 「知ってる。」). The choice comes back after every attempt:
+1. Ask again: 「聞こえなかった？　午後。」
+2. 「会議のあとじゃ、おそいよ。」 → 「知ってる。」 (her own agenda, in two words)
+3. Leave it for the afternoon: no numbers for Emi's meeting. Emi manages. Rei hands them over at two.
+4. Cast now, one witness.
+5. Wait until the salesman leaves (about twenty minutes, nothing lost). Rei notices you're still standing there: 「……まだいるの？」 Then cast with no witness.
 
-At Sales the witness is the salesman at the next desk. You can cast with him watching, wait fifteen minutes for him to leave (time cost), or skip magic.
+Spell: verbs 渡す (hand over) and 見せる (show, heard at the gate and on the phone's ID screen).
+- 渡して: she hands it over, stares at her empty hand, 「……なんで渡したんだろう。」「……午後って、言ったのに。」 (she keeps her own goal and her irritation).
+- 渡せ: the folder slaps onto the desk. 「……今、私に命令した？」 Got it, but she felt the order.
+- 見せて: she opens the folder and holds it up for you, then snaps it shut. 「……見た？」 Rows of numbers, too fast to keep.
+- 見せろ: she shoves it at your face and pulls it back. 「……今、私に命令した？」
+- 渡す / 見せる (dictionary form): she agrees and doesn't act: 「うん、渡すよ。午後に。」
+- 渡した / 見せた (past): she repeats what she was doing, typing.
+- Nonsense endings: 「……何か言った？」, then 「……何？」
+Every witnessed cast that moves her gets a line from the man at the next desk (he looks over, or stops typing). Repeated asks and repeated orders don't repeat lines: used options go away, a second order gets 「……また？」.
+Any cast that visibly moves her while the salesman is watching is a witnessed cast (a flag for a later day). Rei's suspicion goes up with every cast she feels, and after any of them she messages you that night: 「今日の、あれ。何？」
 
-### Three ways through each problem
-Each obstacle has a manual route, a magic route and sometimes a social route. That's the "words or magic" decision from the critique:
-- Copy room: hands (jam, sorting) cost time; magic costs voice and risks noise.
-- Sales: ask (fails, but 「会議のあとじゃ、おそいよ。」 gets Rei's revealing 「知ってる。」), trade (give her a copy of Emi's handout before the meeting), magic, or come back in the afternoon.
-- The trade exists because of the copy room. Spare copies make it free; with exactly ten, you give away one of Emi's.
+### Resources and consequences on day 1
+- Voice: 5 marks, shown next to the clock once the magic is revealed. Out of voice, magic options are greyed out ("no kotodama left today").
+- Noise (hidden): decides the footsteps scene.
+- Suspicion per person: Mio (saw or heard), Rei (felt it, felt an order), Ishibashi (casual at the gate). Day 1 only records it; later days read it.
+- Time: the clock moves. Characters react (「……もう？」 if you're back within twelve minutes of entering the copy room, 「遅刻だよ」 if you reach the office after nine), and nothing fails. The longest possible morning still gets Emi to her 11:00 meeting.
 
-### How it scales
-New forms arrive as schools, unlocked by promotion or story:
-| School | Form | Effect | First use idea |
-|---|---|---|---|
-| Asking | 〜て | Normal effect | Day 1 |
-| Force | Imperative | Overdone, loud, offends people | Day 1 (as a misfire) |
-| Preventing | 〜ないで | Stops something before it happens | A falling folder, 落ちないで |
-| Together | 〜よう | Pulls a group along | A stalled meeting, 始めよう |
-| Traps | 〜たら | Delayed trigger | 会議が始まったら、止まって |
-| Keeping | 〜ている / 〜ておいて | Keeps a state going | A door that stays open |
-| Pairs | 開く/開ける, 止まる/止める | The object vs the actor | Recurring misfires |
-| Ability | Potential (〜られる) | Lets someone do what they couldn't | Aoi reading a manual |
-| Rank | Keigo requests | The only thing that works on superiors | Week 3+ |
-
-The copy room itself comes back with different faults (toner, double-sided, B4 paper, someone else's job stuck in memory), so the same place tests new forms.
-
-### Why it's replayable
-- Every form has a distinct outcome, so trying the wrong one is content.
-- Routes multiply: coffee yes/no, noise and Mio, count, and five ways through Rei. They feed Emi's evening verdict and the night message.
-- There's optional mastery: a clean copy run (at most 3 casts, no noise, exactly ten, back before 9:35) gets Emi's special line. A hidden stamp can track it.
-- Later visits randomise the faults.
-
-### Alternatives to choose from
-**B. Sentence slots.** The spell is a short sentence built from tiles: object + particle + verb form (紙を出して, 十部コピーして, ゆっくり動いて). Particles and adverbs change the outcome (紙が出て vs 紙を出して). This teaches more grammar but is slower, and the UI is heavier on a phone. It would fit weeks 3+ better than day 1.
-
-**C. Say it out loud.** On desktop the player speaks the word into the mic (browser ja-JP recognition or local Whisper). A clear pronunciation works; a mumble fizzles or lands on a near-homophone. This directly trains speaking, which matters for his conversation goal. The risks: recognition errors feel unfair, and it can't be used on the train. The tiles stay as the fallback, and speaking could give a small bonus (no voice cost).
-
-**D. A hand of words.** On the phone (train mode) the player prepares 3-5 words for tomorrow; only prepared words can be cast. Words level up with use. This ties spaced repetition to the story and adds deck-building strategy. It's too many systems for day 1; it fits once phone mode exists.
-
-My recommendation: A for day 1. Add C as an optional desktop mode for the Rei cast. Bring in D with phone mode.
+### How it scales (later days)
+Schools of forms unlock later: 〜ないで (preventing), 〜よう (together), 〜たら (traps), 〜ておいて (keeping), transitive pairs as misfires, potential, keigo requests for superiors. The copy room returns with new faults, so the same place tests new forms. See the old table in git history if needed; nothing of it is on day 1.
 
 ## 2. Adaptive learning
 
 ### Three tracks
-| Track | Unit | What's tracked |
+| Track | Unit | Tracked |
 |---|---|---|
-| Vocabulary | A word or set phrase (よろしくお願いします counts as one) | Meaning: exposures, look-ups, unaided days, action-proven successes |
-| Grammar | A pattern (te-request, imperative, 〜ないで, counters with 部…) | Heard, understood (proven by action), produced (spells, replies, typing) |
-| Letters | Each hiragana, each katakana, each kanji | Reading: seen with ruby, read without ruby and acted on correctly, tapped |
+| Vocabulary | a word or set phrase | exposures, look-ups, unaided days (existing word stages 0-3) |
+| Grammar | a pattern (te-request, imperative, past, 〜ないで, volitional) | understood (level check, choices), produced (spells) |
+| Letters | each kanji; katakana characters | kanji: state 0 hidden (kana), 1 learning (reading above), 2 readable; katakana: taps per character |
 
-### Measured from play, not quizzes
-- **A tap on a word** is a look-up for that word (as now) and a miss for its kanji.
-- **Revealing a line's English** is a look-up for every word in it (as now).
-- **Acting correctly on a line** is a success for the words it depends on. Examples: pressing 地下一階 on the panel (vocab and the kanji 地, 下, 一, 階), picking 十部 in the spell after hearing Emi say it (the counter and the number), coming back after 午後 (午後).
-- **Spell forms** count as grammar production. Picking from tiles is assisted production; typing it is full production.
-- **Reply choices** that hinge on a form or register count as grammar recognition.
-- **Free typing** is judged by the LLM's `used_target` plus whether the reply parses.
-- **Signs and screens with no ruby** (the copier's 紙づまり, the floor panel, door plates) are the kanji reading tests. You read them by acting on them.
-- **Romaji typed for a spell** proves kana reading for that word.
+### How text is shown (per player, per kanji)
+For each word with kanji the engine checks each kanji's state:
+1. All readable → kanji alone. The word is still tappable for meaning.
+2. The unreadable ones are all "learning" → kanji with the reading above: romaji if the player's hiragana is weak, kana otherwise.
+3. Any kanji the player can't read yet → the whole word in kana.
+Readings are never shown above kana. Katakana words show nothing extra; the first tap puts romaji above the word (counts against those katakana), a second tap opens the meaning (a look-up).
 
-A word's meaning becomes known only after unaided success on separate days (the current rule). A kanji becomes readable after unaided reads on at least 2 separate days. The two are independent.
+Kanji state comes from the player's kanji band plus per-kanji history. Band 0: every kanji starts hidden. Band 1: N5 kanji start as learning. Band 2: N5 readable, N4 learning. Band 3: N5 and N4 readable, the rest learning. A learning kanji seen without a tap on two separate days becomes readable. Tapping a word marks its kanji as missed (readable drops to learning). Once a word's meaning reaches stage 2, its hidden N5/N4 kanji move to learning.
 
-### How text is rendered per player
-For each word the engine decides per character:
-1. **All of its kanji readable** → kanji. If the word's meaning is new, it's still tappable, but no ruby is shown.
-2. **Some kanji not readable, word is lv 1-2 or today's target** → kanji with ruby. Ruby is kana, or romaji only while the player's hiragana track is weak.
-3. **Otherwise** → kana only. This replaces the current rule where lv 3 means kana: level becomes a property of the player, not only of the word.
-4. **Katakana words** are tracked per character. For players whose katakana is weak, a tap shows the romaji. GUIDE says never to put a reading above kana; see open question 6.
-5. **English** stays hidden. It's revealed per line or per word, and that counts as a look-up.
+### Level check (on the monorail, about two minutes, skippable)
+In-world: the new-hire app's 日本語チェック. Or pick a preset (はじめて / すこし / N4ぐらい).
+1. Hiragana: four words, pick the romaji. Stops after two misses.
+2. Katakana: four loanwords, pick the romaji. Stops after two misses.
+3. Kanji: twelve words from 人 to 企画. Tap the ones you can read, then confirm up to three by picking the reading.
+4. Grammar: four short lines (来てね, 止まって, 話しかけないで, 行こう). Pick what the speaker wants, in English.
+Results set: hiragana weak (romaji readings), katakana weak (noted, still tap-only), kanji band, and each confirmed kanji as readable. The profile lives with the word data, so restarting the week keeps it, and the app offers to keep it on a new game.
 
-Current code already does the per-word version of rules 1-3 (`wordHTML`: stage 0 romaji ruby, stage 1 kana ruby, stage 2+ plain, lv 3 kana-only). What changes is that the kanji decision reads the per-character table.
+Drift: every scene the engine counts new words shown and taps. Under 5% taps across two scenes moves the kanji band up one; over 30% moves it down.
 
-### Quick-start calibration (about 2 minutes, skippable)
-It's in-world: the "new hire check" on the company phone during the monorail ride, before the announcement.
-1. **Kana**: hear a word, pick its spelling from four (hiragana, then katakana). Stop after two misses.
-2. **Kanji**: 12 common words in rising difficulty (人, 日本, 会社, 地下, 会議, 営業). Tap the ones you can read, then pick the reading for three of them to confirm.
-3. **Grammar by ear**: four voiced lines (来てね, 止まって, 話しかけないで, 行こう). Pick what the speaker wants from pictures or short English.
+### Pacing rules (authoring)
+- Spoken line: 16 characters or fewer where possible, hard cap 24 (punctuation not counted).
+- At most one item new to a typical player per line; choice screens at most two across all options.
+- Essential facts are never only in one hard line: the floor is on the panel, Emi's message and the ID card; the count is in the backlog (scroll up) and replayable.
+- `tools/transcripts.mjs` flags spoken lines over 24 characters.
 
-Presets for a faster start: "new to Japanese", "some study", "comfortable at N4". Afterwards the level keeps adjusting. If a player taps under 5% of new words across two scenes, move them up a band. If they tap over 30%, move them down (more kana, more ruby, simpler variants). A long press on any word offers "I know this", which skips it straight to known once confirmed by a later unaided use.
-
-### Pacing rules
-- Spoken line: aim for 16 characters or fewer, with a hard cap of 24 (punctuation not counted). Longer thoughts split into two lines.
-- Per line: at most one item new to this player (a word, a kanji or a form). Names and phrases already met don't count.
-- Per choice screen: at most two new items across all options. Options stay at 14 characters or fewer.
-- Per scene: at most 5 new words, 1 new grammar pattern and 2 new kanji shown with ruby.
-- If a line breaks the budget for this player, surplus unknown kanji render as kana, and the least essential unknown word gets a tiny inline gloss (counted as exposure, not a look-up). Key lines can carry an authored `easy:` variant.
-- Stall guard: after about 20 seconds on one line with no input, a small "?" pulses next to the line. Tapping it shows the English (counted as a look-up). Nothing is revealed automatically.
-- Essential information (floor, time, count) is never only in one hard line. It is repeated, replayable (R) or on the phone.
-- Session: day 1 runs about 20 minutes. There's a natural stopping point when Emi gives the second task (save there).
-- Authoring lint: a small tool runs the script against three reference profiles (kana-only beginner, Jørgen, N4) and flags every line over budget. That makes "other players at other levels" testable.
-
-### Exists vs new
-| Area | In `main.js` now | New for day 1 |
-|---|---|---|
-| Word stages | 0-3 per word, calendar-day spacing, look-ups drop a stage | Unchanged; add action-proven successes |
-| Kanji | Per word via glossary `lv` | Per-character table and rendering from it |
-| Kana/katakana | Katakana words auto-tracked as words | Per-character kana tracking; tap-romaji for katakana |
-| Grammar | One `grammar.right/total` counter | Pattern table with heard / understood / produced |
-| English | Hidden; reveal = look-up | Stall guard |
-| Calibration | `START_KNOWN` list | Phone check + presets + band drift |
-| Spells | Verb pick, ending tiles, romaji typing, `outcomes` per form, witnesses, breath 3 | Voice 5, slots (count), timed cast, noise, per-person suspicion, "works but" outcomes that continue the scene |
-| Free talk | `freeTalk` with LLM, fallback, `dayFacts`, corrections | Emi persona for the evening, new facts, magic guard, level check |
-| Pacing | None | Budgets, inline gloss, lint tool |
-
-### The LLM moment
-In the evening Emi asks 「で、初日、どうだった？」. There are two typed turns (romaji → kana, as now).
-- Persona: Emi, 32, lead of Planning 7, warm and teasing, casual. She calls him 新人くん. She is tired from the meeting.
-- Facts passed in: how the copies went (fast, crooked, count), how the numbers were obtained (magic, trade, none), whether Mio saw anything, and the meeting result.
-- Guards: she never confirms magic. If the player says 言霊 or 魔法, she treats it as a joke (「はいはい。」). At most 2 short sentences. Only N5-N4 words; any word outside the player's level is shown as kana with a tap gloss.
-- Fallback when the server isn't running: a normal four-option choice with scripted replies (in the draft).
-
-## 3. Variety
-
-Interaction types used on day 1:
-1. **Listen and act**: announcement → which door.
-2. **Read a message**: Emi's chat.
-3. **Act on a person**: ID card at the gate.
-4. **Register reply**: polite or casual with Ishibashi, Mio, Emi.
-5. **Navigate by reading**: floor panel (three times, different floors).
-6. **Secret action**: the coffee machine, optional and unexplained.
-7. **Listen and remember**: Emi's count, used later in a spell.
-8. **Build a spell**: verb + form (copier wake, jam, copy, sort).
-9. **Hands or magic**: jam, speed, sorting.
-10. **Timed reflex**: stop the runaway copier (only if you gave no count).
-11. **Stealth**: footsteps, stay still or open the door.
-12. **Negotiate**: Rei, ask / reveal / trade / leave.
-13. **Spell on a person with a witness**: Rei.
-14. **Keep the secret**: Mio's 「どうやったの？」.
-15. **Free typing**: Emi in the evening.
-16. **Read the night hook**: a message from Rei, Emi or nobody.
-
-Rotation on the main path (no two neighbours the same):
-listen-act → message → act → register → navigate → register → register → secret action → listen-remember → navigate → hands-or-spell → build spell → hands or magic → build spell (count) → hands or magic (speed) → [timed] → stealth → hands or magic (sort) → register → navigate → negotiate → spell on person → keep the secret → rest (afternoon) → consequence → free typing → message.
-
-There are two register replies in a row in the office (Mio, then Emi). They are different people with different right answers, and a narration beat sits between them. If that still feels repetitive, cut the Emi reply to a single line.
+## 3. Variety on day 1
+listen and act (announcement → doors) · read an app (map, room, ID) · level check · register reply (Ishibashi, Mio, Emi) · navigate by reading (floor panel, three rides) · first spell (forced, the reveal) · keypad from memory (部数) · hands or magic (copy, sort) · stealth (footsteps) · negotiate (Rei) · spell on a person with a witness · keep the secret (Mio's 「どうやったの？」) · rest (afternoon summary) · consequence (Emi's verdict) · free typing (chat with Emi, from the dorm) · night hook (Rei's message, if she felt it).
 
 ## 4. Beat sheet
 
-| Scene | Who | Goal | Obstacle | Turn | New (light) |
-|---|---|---|---|---|---|
-| Monorail 8:40 | Announcer, Emi (message) | Get off at the right stop | Announcement in Japanese | Emi's message sets 9:00, B2 | 出口, 右側; hears 〜てね |
-| Gate 8:48 | Ishibashi (text) | Get in | Guard doesn't know you | He marks you: 「変なことしたら、すぐわかるからな。」 | 止まって (plant), 見せる, 新人 |
-| Office 9:00 | Mio, Emi | Make a first impression | Mio doesn't want to talk; the coffee machine is dead | Emi begs the machine 「動いて。」; alone, you can try it and it works. Emi hands you the copy job (the broken copier). | 動く, 十部, コピー, 会議 |
-| Copy room 9:20 | Alone; Mio's footsteps | Ten copies, fast | Broken copier, jam, slowness, noise | The reveal of kotodama; the machine takes words literally; the near miss or Mio at the door. Yes, but: done, and someone heard. | 紙, 出す, こわれる, 急ぐ, 電波 |
-| Office 9:35 | Emi, Mio | Hand in copies | None; your speed is the problem | 「……もう？」 Being fast earns a harder job: Rei's numbers by 10:30. | 営業部, 数字, 十時半 |
-| Sales ~9:45 | Rei, a salesman (witness) | Get the numbers | Rei stalls on purpose until after the meeting | Five routes; every success costs something (suspicion, a trade, voice). 「君、おもしろいね。」 or 「今、私に命令した？」 | 午後, 渡す, 知ってる, 資料 |
-| Office ~10:20 | Emi, Mio | Get Emi to the meeting | Mio's question 「どうやったの？」 | Secret kept or bent; Mio's own verdict (「だれにも言わない。……今は。」 or the three-months line) | 運, ひみつ |
-| Afternoon | (summary) | | | Skip to 17:40; late numbers arrive at 14:00 if you gave up | |
-| Evening 18:10 | Emi | Hear how the meeting went | Consequences of your routes | Emi's verdict; LLM talk 「で、初日、どうだった？」; hook message | 初日 |
+| Scene | Who | Goal | Obstacle | Turn |
+|---|---|---|---|---|
+| Monorail 8:40 | the phone app, announcer, Emi (chat) | Arrive and get off at the right place | Everything is in Japanese | The app sets his level; the announcement is the first listening test; Emi's message gives 9:00, B2 |
+| Gate 8:48 | Ishibashi (speaker) | Get in | The gate won't take his new ID; the guard doesn't know his face | Let in, but marked: 「変なことしたら、すぐわかるからな。」 He watches through cameras. |
+| Office ~8:55 | Mio, Emi | First impression | Mio won't talk; the login doesn't work | Emi hands him the job she's been dodging: copies on the broken copier. Mio leaves to chase signal. |
+| Copy room ~9:15 | alone; Mio's footsteps | Ten copies | A dead copier; slowness; sorting; someone coming | The first kotodama. Yes, but: done fast, and someone was right outside. |
+| Office ~9:30 | Emi, Mio | Hand in copies | Being fast is the problem | 「……もう？」 Fast earns a harder job: Rei's numbers. |
+| Sales ~9:40 | Rei, a salesman (witness) | Get the numbers | Rei stalls on purpose | Cast on a person, maybe watched; or leave it. Rei notices either way. |
+| Office ~10:10 | Emi, Mio | Send Emi to her meeting | Mio's 「どうやったの？」 | Secret kept or bent; Mio's own verdict. |
+| Afternoon | summary | | | IT sends a password that doesn't work. Mio leaves at 17:30 exactly. |
+| Evening 17:50 | Emi | Hear how the meeting went | Consequences | Emi's verdict; she sends him home. |
+| Dorm 18:30 | alone; Emi by chat | See the new room | It faces a wall | Emi's 「部屋、どう？」 (free typing); Rei's message if she felt the spell; save. |
 
-Grammar across the day: the te-form request is the spine (heard in 来てね, 止まって, 動いて; produced in the copy room; used on a person at Sales). The imperative, dictionary form and past appear only as spell outcomes. 〜ないで is heard once (Mio's 話しかけないで) and not taught yet.
-
-Continuity notes: every location change goes through the elevator or an explicit narration line. Mio leaves the office once (the corridor walk) and is back when you return. Emi is out from about 10:50 to 18:10 (meeting, then afternoon meetings). Rei's message only comes if she felt a spell.
+Continuity: every location change goes through the elevator panel or an explicit narration line. Mio leaves the office before you go to the copy room and is back at her desk when you return. Emi leaves for her 11:00 meeting when you come back from Sales and is out until 17:50. The dorm is next to the station; the map on the phone shows it.
 
 ## Story checks run and what they changed
-
-- **story-sense**: the old day 1 was at state 4.5 (plot without pacing). Scenes worked but nothing fed anything. Change: the copy room now feeds Sales (voice spent, spare copies for a trade), and both feed Emi's evening verdict and the night message.
-- **scene-sequencing**: gave every scene a goal, obstacle and outcome. The copy room and Sales both end on "yes, but" (fast leads to more work; the folder costs suspicion or a trade). Added sequel beats: Mio's quiet line after Emi leaves, and the afternoon skip.
-- **key-moments**: the primary genre is Wonder (the coffee glimpse, then the copy-room capability test), with Thriller for the footsteps near miss and Relationship for Mio's and Rei's reactions. Change: the coffee beat stays unexplained so the reveal lands in the copy room, where the player gets to use it.
-- **character-arc**: no full arcs on day 1, but each person pursues something of their own. Emi hands the new guy the two jobs she's been dodging (the broken copier, Rei), and in the evening admits Rei scares her a bit too. Mio chases phone signal for a game event, and her suspicion is a side effect of that walk. Rei stalls on purpose to win the meeting and says so in two words.
-- **cliche-transcendence**: listed the defaults for a first-magic tutorial: a mentor explains the rules, glowing runes, magic school, a spirit guide, the accidental explosion in front of a crush, an old book. I avoided all of them. Nobody explains anything: the rules come from literal misfires, and the only "witness" is looking for Wi-Fi. For Rei: the default is the ice queen who melts. Instead she is winning a budget fight, and the trade route lets her win it.
-- **dialogue**: cover-the-tags check on the office and Sales exchanges; the double-duty test on every key line. Changes: Mio corrects Emi (「ちょっとじゃない。こわれてる。」) instead of Emi explaining the copier; Rei's 「知ってる。」 carries the whole stall as subtext; I cut Emi's lines explaining why the numbers matter down to one 「スライドに入れたいから。」
-- **story-analysis (read as a player, every branch)**: see the review list at the end of the draft for what I found and fixed.
-- **humanizer**: run on all English narration and this document (no dashes, no "not X but Y", no one-line closers where I could avoid them).
+- story-sense: the day had been systems without links. Now the copy room feeds Sales (voice spent), and both feed Mio's reaction, Emi's verdict, the chat and the night message.
+- scene-sequencing: every scene has a goal, obstacle and outcome. Copy room and Sales end on "yes, but". Sequel beats: Mio's quiet line after Emi leaves, the afternoon summary, the dorm.
+- key-moments: primary genre Wonder (the capability test in the copy room), with Thriller for the footsteps near miss and Relationship for Mio and Rei noticing. The first magic is private, as GUIDE asks.
+- character-arc: no arcs on day 1, but everyone wants something of their own. Emi offloads the two jobs she dreads (the copier, Rei) and admits Rei scares her a little. Mio chases signal for a game event. Rei stalls to win her meeting. Ishibashi watches cameras.
+- cliche-transcendence: defaults for a first-magic tutorial are a mentor who explains, glowing runes, an old book, a spirit guide, an accident in front of a crush. None used. Rules come from literal misfires; the only witness is looking for phone signal. Default for Rei is the ice queen who melts; she is winning a budget fight and says so in two words.
+- dialogue: cover-the-tags check on the office and Sales. Emi: warm, teasing, short sentences with ね/よ, admits things sideways (「こわくないよ。……ちょっとしか。」). Mio: fragments, ……, no ！, corrects people. Rei: questions as weapons, the shortest lines in the day, never explains herself.
+- humanizer: run on this file and the English narration.
 
 ## Open questions for Jørgen
+1. Staple is by hand (a breather beat). Keep it that way, or make it a fourth spell step?
+2. The count check offers 10 / 11 / 20 / 100. 11 is the trap from 十一時. OK?
+3. On a slow run (back more than twelve minutes after entering the copy room) Emi says 「おかえり。……え、できたの？」 instead of 「……もう？」. Fine, or should everyone get 「……もう？」?
+5. The first spell lands about 8 to 12 minutes in (app, check, gate, office). The game saves at every scene, so a sitting can stop at the office. Trim more?
+4. The ID card shows the name the player types on the welcome screen (Latin letters). Keep, or leave the name off?
 
-1. **Coffee machine.** I kept it as an optional, unexplained glimpse before the copy room. It costs one voice mark, gets Emi's 「機械に好かれるタイプ？」 and shortens the copy-room reveal. Or cut it, so the copy room is the very first magic?
-2. **Voice 5 on day 1** (was 3), shared between the copy room and Rei. OK?
-3. **The trade route with Rei** (you show her Emi's handout before the meeting). It's morally grey and it hurts Emi's meeting. Keep it?
-4. **Times**: Emi's numbers by 10:30, Rei leaves 10:45, meeting at 11:00. The old "documents by 11" becomes "numbers for the slides by 10:30".
-5. **Day 2 overlaps**: day 2 opens with a copier scene (Aoi) and a meeting with Rei. Both need rewriting. The copier could come back with a new fault and Aoi as the witness.
-6. **Katakana help**: allow romaji ruby over katakana for players who can't read it yet? That conflicts with the "no reading above kana" rule. Tap-to-romaji is the safe version.
-7. **Where the magic comes from**: the draft keeps "since you were small" and invents nothing more. Do you want a background (a Japanese grandmother, a childhood in Japan) or keep it unexplained?
-8. **Imperatives**: the player's own replies never use 動け-type forms; they exist only as loud spell outcomes. Fine?
-9. **Length**: about 20 minutes. Keep it one day with a save point at the second task, or trim the jam or sort step?
+## Review round (strict story editor, 2026-09-25)
+A separate reviewer read the draft as a player through every branch. Fixed from its report: the first spell could be skipped or burn all five marks (hint ladder, stop only after two casts, Emi now says 「コピーして」); 100 copies plus waiting could run past the 11:00 meeting (stop after ten sets); the 「……もう？」 threshold now counts from entering the copy room; Mio said 下 for a room upstairs; the stapler line contradicted a working copier; a handwritten sign couldn't be printed by 出した (now a printout); repeated lines in the Sales loop; Rei knew who he was unasked (he introduces himself) and the stall had no set-up (Emi: 「会議の前に、ほしいの。」); the witness now shows on every cast; typed 出て and 並べて get literal results; dictionary and past forms behave the same on Rei as on the copier; the origin line implied he spoke Japanese as a child; 「君、おもしろいね。」 replaced; 「見せて」 is now actually said at the gate; the dorm door opens with the phone; 動かなかったのに; Emi's repeated まあ and がんばって; Mio's stock 「だれにも言わない。……今は。」 replaced with her own agenda.
