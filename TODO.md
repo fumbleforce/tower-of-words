@@ -17,7 +17,7 @@ Read GUIDE.md first. Pick up from here next session.
 - One free-typing local-AI moment on day 1, with a one-click start of llama-server. Phone/train mode after day 1.
 - Decided: phone onboarding on the monorail (welcome, map, dorm room, ID card, level check); things sent ahead; day 1 ends in his dorm room. Dorm-room background options are on proto2/locations2; still needs script changes to day1-draft.md (also fix the "crowded carriage" line: the arrival train is empty).
 - Composition research on the side.
-- Opening: pick the art for the 21 s test segment on proto2/opening/shots.html (six shots, one to three candidates each with its staging note; the phone app and title card are drawn in code). Nothing is animated until then. The exterior train shots still fail staging with plain prompts and may need the Blender blockout. Song edit for the opening: game/audio/music/opening-tv.mp3 (89.6 s).
+- Opening: picks recorded on proto2/opening/shots.html (sky-tall-12, oncoming2-216 with its repeating clouds to fix, mc-window2-266); bay, cabin, other window shots, city view, phone app and title card rejected (see the page). Paused until the Blender blockout + ControlNet recipe passes review. Song edit: game/audio/music/opening-tv.mp3 (89.6 s).
 
 ## Art (after the cast is settled; decide before producing)
 - Final cast in RDBT, one approved base sprite per character, then expressions by face-only inpainting (consistent outfits). Approved so far: main character (IT guy, M-02-it-guy-601), Emi (r3 seed 41), Rei, Mio, Aoi, Kaori (RDBT batch B), Kuro (A-luna-s101), Kiyoko (s101 face, new clothes).

@@ -21,6 +21,18 @@ def prompt_of(png):
     return [n['inputs']['text'] for n in wf.values() if n.get('class_type') == 'CLIPTextEncode'][0]
 
 
+VERDICT = {
+    'picked': ['sky-tall-12', 'oncoming2-216', 'mc-window2-266'],
+    'notes': [
+        ('Picked', 'sky-tall-12 (sky), oncoming2-216 (train overhead; the clouds repeat in a straight line and need a fix), mc-window2-266 (him at the window).'),
+        ('Bay', 'Rejected: the train just passes the island instead of heading into it; tilted clouds.'),
+        ('Cabin', 'Rejected: a hover-train above the ocean.'),
+        ('Other window shots', 'Rejected: from a side window you can\'t see the track; it is ahead of the train.'),
+        ('City view', 'Rejected: the rail line ends in the middle of the ocean; the train looks bolted onto the rails.'),
+        ('Phone app', 'Rejected: odd circle in the middle of the screen.'),
+        ('Title card', 'Rejected: real openings don\'t label "opening theme"; use the logo and staff-style credits.'),
+        ('Next', 'Paused: no more opening art until the Blender blockout + ControlNet recipe has passed review.'),
+    ]}
 sections = []
 for sid, title, note, cands in SLOTS:
     tiles = []
@@ -31,7 +43,8 @@ for sid, title, note, cands in SLOTS:
         dst = os.path.join(CAND, c + '.webp')
         subprocess.run(['magick', src, '-resize', '1216x', '-quality', '88', dst], check=True)
         p = html.escape(prompt_of(src))
-        tiles.append(f'<figure class="opt"><label><input type="radio" name="{sid}" value="{c}"> <b>{c}</b></label>'
+        pk = c in VERDICT['picked'] if 'VERDICT' in globals() else False
+        tiles.append(f'<figure class="opt"><label><input type="radio" name="{sid}" value="{c}"{" checked" if pk else ""}> <b>{c}</b>{" (picked)" if pk else ""}</label>'
                      f'<img src="cand/{c}.webp" alt="{c}" loading="lazy"><p class="chk">{html.escape(check)}</p><details><summary>Prompt</summary><p>{p}</p></details></figure>')
     rows = ''.join(f'<tr><th>{html.escape(k)}</th><td>{html.escape(v)}</td></tr>' for k, v in note)
     sections.append(f'<section id="{sid}"><h2>{html.escape(title)}</h2><table class="note">{rows}</table>'
@@ -44,6 +57,9 @@ drawn = [('drawn-phone', 'The company phone\'s new-hire app (10.0 s): 天川 log
 tiles = ''.join(f'<figure class="opt"><label><input type="radio" name="{n}" value="ok"> <b>{n}</b> ok</label> <label><input type="radio" name="{n}" value="redo"> redo</label>'
                 f'<img src="cand/{n}.webp" alt="{n}" loading="lazy"><p class="chk">{html.escape(t)}</p><input class="c" type="text" name="{n}-note" placeholder="note (optional)"></figure>' for n, t in drawn)
 sections.append(f'<section id="drawn"><h2>Drawn in code (not generated)</h2><div class="grid">{tiles}</div></section>')
+
+vrows = ''.join(f'<tr><th>{html.escape(k)}</th><td>{html.escape(v)}</td></tr>' for k, v in VERDICT['notes'])
+verdict_html = f'<section id="verdict-box" style="border-color:#0f8b99"><h2>Verdict (Jørgen, 2026-09-25)</h2><table class="note">{vrows}</table></section>'
 
 cutrows = []
 for i, (what, (bar, beat), lyric) in enumerate(CUTS):
@@ -71,6 +87,7 @@ table.cuts{{border-collapse:collapse;font-size:14px}}table.cuts td{{padding:3px 
 </style></head><body><main>
 <h1>Opening: shot picks for the test segment</h1>
 <p class="intro">The first 21 seconds of the opening (intro and the first two lines of verse 1, on the new 89 s TV edit of the song). Six shots need art; each has one to three candidates, drawn with RDBT Anima and checked against the staging note above it. Pick one per shot, or "redo", then copy your picks at the bottom. Nothing is animated until you've picked. The final approach into the station is left out: it waits for the Blender blockout. Click an image to see it full size (arrow keys step, Esc closes).</p>
+{verdict_html}
 <section><h2>Cut list for the segment</h2><table class="cuts">{"".join(cutrows)}</table>
 <p class="intro">Shots marked "drawn" are made in code (the company phone's welcome screen and the song title card), not generated art. The song edit: game/audio/music/opening-tv.mp3.</p></section>
 {"".join(sections)}
