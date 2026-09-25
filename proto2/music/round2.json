@@ -1,0 +1,124 @@
+{
+ "loops": {
+  "r2-office-yue-c.mp3": {
+   "src": "/home/jorgen/ai/music-raw/inst-office-c.flac",
+   "start_s": 16.96,
+   "end_s": 68.16,
+   "loop_s": 51.2,
+   "bpm": 37,
+   "seam_dist": 0.452
+  },
+  "r2-office-sa3.mp3": {
+   "src": "/home/jorgen/ai/music-raw/sa3-office.flac",
+   "start_s": 16.24,
+   "end_s": 66.75,
+   "loop_s": 50.5,
+   "bpm": 172,
+   "seam_dist": 2.198
+  },
+  "r2-night-yue-a.mp3": {
+   "src": "/home/jorgen/ai/music-raw/inst-night-a.flac",
+   "start_s": 14.64,
+   "end_s": 61.92,
+   "loop_s": 47.3,
+   "bpm": 133,
+   "seam_dist": 1.136
+  },
+  "r2-night-yue-b.mp3": {
+   "src": "/home/jorgen/ai/music-raw/inst-night-b.flac",
+   "start_s": 34.34,
+   "end_s": 79.93,
+   "loop_s": 45.6,
+   "bpm": 148,
+   "seam_dist": 0.491
+  },
+  "r2-night-yue-c.mp3": {
+   "src": "/home/jorgen/ai/music-raw/inst-night-c.flac",
+   "start_s": 15.41,
+   "end_s": 74.5,
+   "loop_s": 59.1,
+   "bpm": 129,
+   "seam_dist": 0.725
+  },
+  "r2-night-sa3.mp3": {
+   "src": "/home/jorgen/ai/music-raw/sa3-night.flac",
+   "start_s": 4.3,
+   "end_s": 59.16,
+   "loop_s": 54.9,
+   "bpm": 70,
+   "seam_dist": 0.829
+  },
+  "r2-office-yue-a.mp3": {
+   "loop_s": 50.9
+  },
+  "r2-office-yue-b.mp3": {
+   "loop_s": 52.2
+  },
+  "r2-office-demucs.mp3": {
+   "loop_s": 51.1
+  },
+  "r2-night-demucs.mp3": {
+   "loop_s": 54.0
+  }
+ },
+ "vocals": {
+  "lyria-office": {
+   "vocal_db": -34.5,
+   "vocal_windows_pct": 0.0
+  },
+  "lyria-night": {
+   "vocal_db": -31.6,
+   "vocal_windows_pct": 0.0
+  },
+  "yue2-office": {
+   "vocal_db": -8.7,
+   "vocal_windows_pct": 51.2
+  },
+  "yue2-night": {
+   "vocal_db": -7.6,
+   "vocal_windows_pct": 64.4
+  },
+  "r2-office-yue-a": {
+   "vocal_db": -77.0,
+   "vocal_windows_pct": 0.0
+  },
+  "r2-office-yue-b": {
+   "vocal_db": -75.0,
+   "vocal_windows_pct": 0.0
+  },
+  "r2-office-yue-c": {
+   "vocal_db": -65.1,
+   "vocal_windows_pct": 0.0
+  },
+  "r2-office-sa3": {
+   "vocal_db": -55.8,
+   "vocal_windows_pct": 0.0
+  },
+  "r2-office-demucs": {
+   "vocal_db": -60.6,
+   "vocal_windows_pct": 0.0
+  },
+  "r2-night-yue-a": {
+   "vocal_db": -68.7,
+   "vocal_windows_pct": 0.0
+  },
+  "r2-night-yue-b": {
+   "vocal_db": -51.1,
+   "vocal_windows_pct": 0.0
+  },
+  "r2-night-yue-c": {
+   "vocal_db": -67.8,
+   "vocal_windows_pct": 0.0
+  },
+  "r2-night-sa3": {
+   "vocal_db": -72.0,
+   "vocal_windows_pct": 0.0
+  },
+  "r2-night-demucs": {
+   "vocal_db": -52.0,
+   "vocal_windows_pct": 0.0
+  }
+ },
+ "loops_note": "The new takes use a community add-on for YuE2 trained only on instrumental music (Mothersuperior, Hugging Face), with calmer tags (\"background music, low energy, sparse, minimal\"). Stable Audio 3 is a different local model made for instrumentals. Each file is a 45 to 60 s loop: the end fades into the start, and these players repeat, so you can hear the seam. The Demucs rows are checked with the same tool that removed the voice, so their number flatters them.",
+ "opening_regen_note": "same lyrics; soft female vocal, clean guitars, warm piano, mellow, gentle high end"
+}
