@@ -1,6 +1,6 @@
 // Asset list and hand-measured positions in the art (uv 0..1 unless noted as screen px).
 // Only approved art is listed here. Pilot: the exterior master (art/approved/monorail-bay-ref3.png, upscaled 2x).
-const ASSETS = ['bay-d', 'bay-clean', 'bay-sky', 'bay-train', 'c-clean', 'c-clean-d', 'c-train'];
+const ASSETS = ['c-clean', 'c-clean-d', 'c-train'];
 Object.assign(P, {
   // pilot bay master, image uv: the sun's glitter path and the open water in the lower right
   bayGlitter: [[0.2, 0.31, 0.07, 0.2], [0.62, 0.7, 0.36, 0.26]],

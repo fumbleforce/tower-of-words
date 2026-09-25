@@ -55,3 +55,5 @@ Pilot outcome (2026-09-25): Jørgen chose his own ChatGPT render (art/approved/m
 2. Simple staging: a train side-on in silhouette crossing the frame on a flat bridge, with a huge painted sky filling most of the frame. No hard perspective; the train cel just slides across, which is the easiest shot to animate well.
 3. Characters at different depths: a big dark cel-shaded profile close in the foreground, a small figure in the light behind.
 4. Film finish: grain, bloom, lens glints, floating dust, a warm grade.
+
+Method (Jørgen, 2026-09-25, after the A/B/C pilot; he picked C): simple, flat, readable compositions (side-on or frontal, few depth planes), strong light and a big painted sky, animated as layered cels in the engine, with the film finish above. The shot list in tools/opening/shotlist.py follows this. Masters come from GPT Image 2 with the approved C attached as the style reference (and his approved sprite for shots with him), in the Reference prompt 2 style. Batch 1 (intro and verse 1, seven masters, $0.48) is on proto2/opening/shots.html.
