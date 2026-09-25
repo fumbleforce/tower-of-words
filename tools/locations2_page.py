@@ -3,7 +3,7 @@ Shows the images listed in art/production/L2/picks.json ({"name": "note"}); reje
 ({"name": "reason"}) are listed as text at the end of each section."""
 import os, json, subprocess, html, re, sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from locations2 import STAGING
+from locations2 import STAGING, OFFICE_FIX, OFFICE_FIX_P, WALL_VIEW_P, DORM_OPTIONS, DORM_VIEW_STAGING
 ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..')
 L2 = os.path.join(ROOT, 'art', 'production', 'L2')
 OUTD = os.path.join(ROOT, 'proto2', 'locations2')
@@ -44,6 +44,32 @@ for sid, title, cur, desc in SECTIONS:
     rej = [(n, r) for n, r in rejects.items() if n.startswith(sid)]
     out.append({'id': sid, 'title': title, 'desc': desc, 'items': items, 'rej': rej})
 
+# Round 2 (Jørgen's verdict): fixes to the picked office and a new view for the dorm.
+R2 = [
+    ('office-fix', 'Office pick 5202: window beside the door removed',
+     'You picked office-reverse-5202. The window next to the exit would look into a basement corridor, so that patch of wall was redone and nothing else changed '
+     '(checked pixel by pixel: only the area around the old window differs). Method: wall cloned from just above it, then a light masked repaint (RDBT, denoise 0.55) with the prompt shown. The three prompts asked for water stains, a notice board and a poster; all three came out as one or two sheets of paper by the intercom plus a few stains, so they differ only a little.',
+     [('office-reverse-5202', 'Your pick, before (grey)', None, True)] +
+     [(f'office-reverse-5202-fix-{k}', f'fix {k}', OFFICE_FIX_P.format(what=w), False) for k, w in OFFICE_FIX.items()]),
+    ('dorm-worst', 'Dorm: the worst room on the island',
+     'The interiors of window-6201 and 6202 kept; the window now looks at the concrete wall of the next block about 2 m away, with a drainpipe and one small lamp, '
+     'seen straight on from the 2nd floor, with at most a sliver of night sky. The orange patch on the left wall (it read as sunset) is painted out. '
+     'Method: the view is rendered on its own (prompt below) and fitted into the glass behind the original frame; the left-wall patch is toned back to the wall colour in code (two masked repaints redrew it); a faint trace is left. Inside, the ceiling light and desk lamp are still on.',
+     [(n, f'{n}: room {room.split("-")[-1]}, view {seed}', WALL_VIEW_P, False) for n, (room, seed, _) in DORM_OPTIONS.items()]),
+]
+r2cards = []
+for sid, title, desc, items in R2:
+    figs = []
+    for name, t, prompt, cur in items:
+        webp(os.path.join(L2, name + '.png'), os.path.join(OUTD, name + '.webp'))
+        body = ''
+        if sid == 'dorm-worst':
+            body += f'<p class="beat">Intent: {html.escape(DORM_VIEW_STAGING["beat"])}</p><p class="meta">Height: {html.escape(DORM_VIEW_STAGING["height"])}</p>'
+        if prompt:
+            body += f'<details open><summary>Prompt</summary><p class="prompt">{html.escape(prompt)}</p></details>'
+        figs.append(f'<figure class="{"cur" if cur else ""}"><img src="{name}.webp" loading="lazy" alt="{html.escape(t)}"><figcaption><h3>{html.escape(t)}</h3>{body}</figcaption></figure>')
+    r2cards.append(f'<section><h2>{title}</h2><p class="desc">{desc}</p><div class="grid">{"".join(figs)}</div></section>')
+
 cards = []
 for s in out:
     figs = []
@@ -81,6 +107,8 @@ details{font-size:13px;color:var(--mute)}summary{cursor:pointer}.prompt{margin:4
 </style></head><body><main>
 <h1>Day-1 locations, round 2</h1>
 <p class="intro">The basement office, redrawn from scratch with more floor space, and the new dorm room where day 1 ends. RDBT Anima at the game's shape, no people. Each image has the intent and the camera position it was staged for, so you can judge it against that. Click an image to enlarge; arrow keys step through, Esc closes.</p>
+<h2 style="margin:22px 0 0">Round 2: fixes after your picks</h2>
+''' + ''.join(r2cards) + '''<h2 style="margin:28px 0 0">Round 1 (for reference)</h2>
 ''' + ''.join(cards) + '''</main><div id="lb"><div><img alt=""><p></p></div></div>
 <script>
 const imgs=[...document.querySelectorAll('figure img')],lb=document.getElementById('lb'),li=lb.querySelector('img'),lp=lb.querySelector('p');let cur=-1;

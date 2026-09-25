@@ -207,22 +207,194 @@ if __name__ == '__main__':
             run('L2', f'{k}-{seed}', p, neg, 1216, 832, seed, RDBT)
 
 
-def fix(src, out, boxes, prompt, negative, seed=7, denoise=0.9):
+def fix(src, out, boxes, prompt, negative, seed=7, denoise=0.9, blur=10, keep=(), prefill=False):
     """Repaint rectangles (x0, y0, x1, y1) of an L2 render with the masked img2img workflow
     (tools/workflows/anima-img2img-masked.json), to paint out a logic error such as light from a window that doesn't exist."""
     from PIL import Image, ImageDraw, ImageFilter
     d = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'art', 'production', 'L2')
     im = Image.open(os.path.join(d, src + '.png'))
+    srcp = os.path.join(d, src + '.png')
+    if prefill:
+        # Paint the boxes over first by carrying the wall just above each box down through it (vertical stains continue),
+        # so the model repaints plain wall instead of redrawing the old shape it can still see in the latent.
+        import numpy as np
+        a = np.asarray(im.convert('RGB')).astype(float)
+        for x0, y0, x1, y1 in boxes:
+            a[y0:y1, x0:x1] = a[y0 - 8:y0 - 2, x0:x1].mean(0)[None]
+        srcp = os.path.join(d, out + '-prefill.png')
+        Image.fromarray(a.clip(0, 255).astype('uint8')).save(srcp)
     m = Image.new('L', im.size, 0)
     for b in boxes:
         ImageDraw.Draw(m).rectangle(b, fill=255)
-    m = m.filter(ImageFilter.GaussianBlur(10)).convert('RGB')
+    m = m.filter(ImageFilter.GaussianBlur(blur)).convert('RGB')
     mp = os.path.join(d, out + '-mask.png'); m.save(mp)
     wf = json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'workflows', 'anima-img2img-masked.json')))
     wf['4']['inputs']['text'], wf['5']['inputs']['text'] = prompt, negative
-    wf['10']['inputs']['image'], wf['12']['inputs']['image'] = comfy.upload(os.path.join(d, src + '.png')), comfy.upload(mp)
+    wf['10']['inputs']['image'], wf['12']['inputs']['image'] = comfy.upload(srcp), comfy.upload(mp)
     wf['7']['inputs'].update(seed=seed, denoise=denoise)
     wf['9']['inputs']['filename_prefix'] = 'locations2-fix'
     wait_turn()
     comfy.run(wf, os.path.join(d, out + '.png'))
+    # Everything outside the mask stays pixel-identical to the source (the VAE round trip shifts it slightly otherwise).
+    res = Image.open(srcp if prefill else os.path.join(d, src + '.png')).convert('RGB')
+    res.paste(Image.open(os.path.join(d, out + '.png')).convert('RGB'), (0, 0), Image.open(mp).convert('L'))
+    res.save(os.path.join(d, out + '.png'))
+    if keep:  # paste original strips back (window mullions) so the frame stays exactly as it was
+        res = Image.open(os.path.join(d, out + '.png')).convert('RGB')
+        for b in keep:
+            res.paste(im.convert('RGB').crop(b), b[:2])
+        res.save(os.path.join(d, out + '.png'))
     print('ok fix', out, flush=True)
+
+
+# ---------------- Round 2 fixes (Jørgen, 2026-09-25) ----------------
+# Office pick: office-reverse-5202. Flaw: a window beside the exit door would look into a basement corridor.
+OFFICE_FIX_BOX = (714, 322, 824, 401)  # the window-like frame to the right of the door (x0, y0, x1, y1)
+# Prompt style (GUIDE, art/PROMPTS.md reference): style line, a few plain sentences, one idea each, one "must not appear" line.
+STYLE_LINE = ('anime screenshot, anime coloring, 2d, cel shading, clean lineart, detailed anime background art, '
+              'hand-painted anime background, no humans, scenery. ')
+OFFICE_FIX = {  # one change each: what replaces the window on the wall
+    'a': 'Water stains run down the bare wall.',
+    'b': 'A small cork notice board with a few curling faded papers hangs on the wall.',
+    'c': 'An old faded poster with one corner peeling hangs on the wall.',
+}
+OFFICE_FIX_P = (STYLE_LINE + 'A stained concrete wall painted faded green-grey. {what} '
+                'Cool flat fluorescent light. No window and no screen on the wall.')
+OFFICE_FIX_N = NEG + ', window, glass, screen, monitor'
+
+# Dorm: keep the interiors of dorm-window-6201/6202, repaint only the glass. Staging for the new view:
+DORM_VIEW_STAGING = dict(
+    beat='He has been given the worst room on the island: the company city is all towers, and his window looks at a wall.',
+    script='Day 1, about 19:00: he opens the door of his dorm room for the first time.',
+    place='an old company dorm block squeezed between taller buildings; his room is on the 2nd floor; the window faces the side wall of the next block across a gap of about 2 m',
+    height='the window sill is about 4.5 m above the alley; the neighbouring wall rises far above the window, so no sky shows except perhaps a thin dark sliver at the top; the wall is seen straight on, not from above',
+    camera='unchanged: inside the room at standing eye level, facing the window wall',
+    front='through the glass: stained grey concrete wall filling the window, a vertical drainpipe, air-conditioner outdoor units on brackets, one small frosted window of a neighbour lit dim yellow',
+    behind='the kitchenette and the door; no city, no towers, no street',
+    light='night; dim yellow from the neighbour\'s window and a caged corridor lamp on the wall outside; the ceiling light and desk lamp inside unchanged',
+    sense='the wall is close, so it is large and flat with no perspective to a street; nothing at a distance; no sunset colours')
+DORM_VIEW_P = (STYLE_LINE + 'A view through a window at night. '
+               'The grimy concrete wall of the next building is only two metres away and fills the whole view. '
+               'A drainpipe runs down the wall, and two air conditioner units sit on brackets. '
+               'A small frosted window in that wall glows dim yellow. '
+               'Gloomy dark grey-blue, sparse dim yellow light. No sky, no city and no street.')
+DORM_VIEW_N = NEG + ', city, skyline, skyscraper, street, sky, sunset'
+DORM_VIEW = {  # name: (source, glass box, mullion strips to keep, seed)
+    'dorm-window-6201-wall-a': ('dorm-window-6201', (396, 196, 867, 487), [(624, 190, 636, 490)], 21),
+    'dorm-window-6202-wall-a': ('dorm-window-6202', (382, 204, 912, 493), [(478, 196, 494, 496), (776, 196, 794, 496)], 21),
+    'dorm-window-6202-wall-b': ('dorm-window-6202', (382, 204, 912, 493), [(478, 196, 494, 496), (776, 196, 794, 496)], 22),
+}
+
+# Masked repaint of the small glass area gave only black glass (the model can't draw a wall in a strip that size).
+# So the view is rendered on its own at full size, then fitted into the glass behind the original window frame.
+# Round-1 views 41, 43, 44 looked down an alley (ground and perspective); one change: the wall fills the picture.
+WALL_VIEW_P = (STYLE_LINE + 'A grimy concrete wall at night, seen straight on from close up. The wall fills the whole picture. '
+               'A drainpipe runs down the wall. '
+               'Dim yellow light from a small lamp on the wall. '
+               'Dark grey-blue, sparse dim yellow light. No sky, no buildings in the distance and no street.')
+WALL_VIEW_N = NEG + ', sky, city, skyline, street, road'
+
+
+def wall_view(seed):
+    """Render the view out of the dorm window (art/production/L2/wallview-<seed>.png)."""
+    if not os.path.exists(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'art', 'production', 'L2', f'wallview-{seed}.png')):
+        wait_turn()
+        run('L2', f'wallview-{seed}', WALL_VIEW_P, WALL_VIEW_N, 1216, 704, seed, RDBT)
+
+
+def fit_view(room, view_seed, out, box, keep, anchor=0.5):
+    """Put a rendered wall view into the window glass of a dorm render. The original frame and mullions stay;
+    the view is darkened a little and gets a faint cool reflection so it reads as seen through glass."""
+    from PIL import Image, ImageEnhance
+    d = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'art', 'production', 'L2')
+    im = Image.open(os.path.join(d, room + '.png')).convert('RGB')
+    v = Image.open(os.path.join(d, f'wallview-{view_seed}.png')).convert('RGB')
+    x0, y0, x1, y1 = box
+    w, h = x1 - x0, y1 - y0
+    s = max(w / v.width, h / v.height)
+    v = v.resize((round(v.width * s), round(v.height * s)), Image.LANCZOS)
+    oy = int((v.height - h) * anchor)  # anchor 1 = keep the bottom of the view (less sky)
+    v = v.crop(((v.width - w) // 2, oy, (v.width - w) // 2 + w, oy + h))
+    v = ImageEnhance.Brightness(v).enhance(0.85)
+    v = Image.blend(v, Image.new('RGB', v.size, (40, 50, 80)), 0.08)
+    im.paste(v, (x0, y0))
+    orig = Image.open(os.path.join(d, room + '.png')).convert('RGB')
+    for b in keep:
+        im.paste(orig.crop(b), b[:2])
+    im.save(os.path.join(d, out + '.png'))
+    print('ok view', out, flush=True)
+
+
+def clone_wall(src, out, box, patch, feather=6):
+    """Cover box with a patch of real wall from the same image (resized to fit), feathered at the edges. No model.
+    Used for office-reverse-5202: the masked repaints of the window beside the door came out as a blurred square."""
+    from PIL import Image, ImageDraw, ImageFilter
+    d = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'art', 'production', 'L2')
+    im = Image.open(os.path.join(d, src + '.png')).convert('RGB')
+    x0, y0, x1, y1 = box
+    p = im.crop(patch).resize((x1 - x0 + 2 * feather, y1 - y0 + 2 * feather), Image.LANCZOS)
+    # Match the wall's light: per row, shift the patch toward the wall just left and right of the box. Samples that
+    # aren't wall (the intercom, a cardboard box) are dropped and filled from the neighbouring rows.
+    import numpy as np
+    A = np.asarray(im).astype(float)
+    P = np.asarray(p).astype(float)
+    ys = slice(y0 - feather, y1 + feather)
+    left = np.median(A[ys, x0 - feather - 5:x0 - feather - 1], 1)
+    right = np.median(A[ys, x1 + feather + 1:x1 + feather + 5], 1)
+    wall = np.median(np.concatenate([left, right]), 0)
+    def clean(v):
+        ok = np.abs(v - wall).sum(1) < 45
+        idx = np.arange(len(v))
+        return np.stack([np.interp(idx, idx[ok], v[ok, c]) for c in range(3)], -1) if ok.sum() > 2 else np.repeat(wall[None], len(v), 0)
+    left, right = clean(left), clean(right)
+    k = 21
+    sm = lambda v: np.stack([np.convolve(np.pad(v[:, c], k // 2, mode='edge'), np.ones(k) / k, mode='valid') for c in range(3)], -1)
+    dl, dr = sm(left - P[:, :3].mean(1)), sm(right - P[:, -3:].mean(1))
+    t = np.linspace(0, 1, P.shape[1])[None, :, None]
+    P = P + dl[:, None] * (1 - t) + dr[:, None] * t
+    p = Image.fromarray(P.clip(0, 255).astype('uint8'))
+    a = Image.new('L', p.size, 0)
+    ImageDraw.Draw(a).rectangle((feather, feather, p.width - feather, p.height - feather), fill=255)
+    a = a.filter(ImageFilter.GaussianBlur(feather / 2))
+    im.paste(p, (x0 - feather, y0 - feather), a)
+    im.save(os.path.join(d, out + '.png'))
+    print('ok clone', out, flush=True)
+
+
+# Dorm options = room + wall view (+ the orange evening-looking beam on the left wall painted out: one change, second pass).
+DORM_OPTIONS = {  # name: (room, view seed, anchor)
+    'dorm-worst-a': ('dorm-window-6201', 53, 0.5),
+    'dorm-worst-b': ('dorm-window-6202', 42, 1.0),
+    'dorm-worst-c': ('dorm-window-6202', 54, 0.5),
+}
+BEAM_BOX = {'dorm-window-6201': (0, 290, 200, 470), 'dorm-window-6202': (0, 305, 180, 522)}
+
+
+def unbeam(src, out, box):
+    """Paint out the warm light patch on the left wall without the model (two masked repaints redrew it and clipped the
+    headboard): inside the box, pixels warmer than the bluish wall (red above blue) take the wall colour of their row."""
+    import numpy as np
+    from PIL import Image, ImageFilter
+    d = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'art', 'production', 'L2')
+    A = np.asarray(Image.open(os.path.join(d, src + '.png')).convert('RGB')).astype(float)
+    x0, y0, x1, y1 = box
+    R = A[y0:y1, x0:x1]
+    warm = (R[..., 0] - R[..., 2]) > 3
+    # Wall colour as a straight-line fit down the rows, from the non-warm wall pixels in the box.
+    ys, xs = np.nonzero(~warm)
+    coef = [np.polyfit(ys, R[ys, xs, c], 1) for c in range(3)]
+    rows = np.arange(R.shape[0])
+    wall = np.stack([np.polyval(coef[c], rows) for c in range(3)], -1)[:, None, :].repeat(R.shape[1], 1)
+    m = Image.fromarray((warm * 255).astype('uint8')).filter(ImageFilter.MaxFilter(13)).filter(ImageFilter.GaussianBlur(3))
+    m = np.asarray(m).astype(float)[..., None] / 255
+    A[y0:y1, x0:x1] = R * (1 - m) + wall * m
+    Image.fromarray(A.clip(0, 255).astype('uint8')).save(os.path.join(d, out + '.png'))
+    print('ok unbeam', out, flush=True)
+
+
+def dorm_options():
+    boxes = {k: (v[1], v[2]) for k, v in DORM_VIEW.items()}
+    for name, (room, seed, anchor) in DORM_OPTIONS.items():
+        box, keep = next(b for k, b in boxes.items() if k.startswith(room))
+        fit_view(room, seed, name + '-view', box, keep, anchor)
+        unbeam(name + '-view', name, BEAM_BOX[room])
