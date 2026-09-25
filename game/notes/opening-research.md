@@ -36,3 +36,14 @@ What the opening at proto2/opening borrows from real TV openings, and how each t
 - Art: RDBT Anima in ComfyUI, base render then hires fix (RealESRGAN x4 anime upscale, then a 0.35 denoise pass); approved sprites refined at 2× with a 0.28 denoise so the designs don't change; cut-outs with BiRefNet HR matting.
 
 Sources: Sakuga Blog on who makes openings (blog.sakugabooru.com, 2025) and its Anime Craft Weekly opening round-ups; Remotion agent skills for Claude Code (remotion.dev, January 2026).
+
+## Opening pipeline (one shot, repeatable; piloted on shot 2, 2026-09-25)
+1. **Stage** the shot with the shot-staging skill: every field, written into the page next to the images (tools/opening/pilot_page.py, tools/opening/shotlist.py).
+2. **Layout sketch** in code where geometry matters (tools/promptlab_sketch.py: horizon, beam, pillars, where the train and city stand). It is ours, so it can go to any model as a layout input. Jørgen's images are references only and never go in.
+3. **Prompt** from the "in front of the lens" line only, with the Local playbook template. Name the parts that set direction ("the driver's cab with its big curved windshield and headlights is at the right end ... the left end is a plain flat back with small red tail lights"). "Front car at the right end" or "seen from behind" did not work.
+4. **Cloud master** on Replicate (tools/rep.mjs, ledger tools/spend.json): a few candidates. If one flaw is left, fix it with one edit call that names only that flaw and says everything else stays unchanged.
+5. **Check** every image against the staging note (direction, both ends of the train, pillars under the beam, continuity to the island, no extras) and write the verdict under the image.
+6. **Review page**, then stop for Jørgen's pick.
+7. **After the pick (local, free):** upscale (RealESRGAN x4 anime), depth map (Depth Anything V2), animate in the player (camera move plus depth parallax, glints and light on 2s), render with tools/opening/capture.js, and show it at its place in the song.
+
+Pilot result: 12 images from four models, about $1.10. Only GPT Image 2 put the driver's cab toward the city (with the sketch), and it needed one edit to add windows. Nano Banana Pro looks closest to the reference but kept the cab at the wrong end five times, including when asked to edit it.
