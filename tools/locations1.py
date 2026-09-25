@@ -88,6 +88,56 @@ JOBS = {
         'a manager desk across the far end of each block, a big wall screen at the far wall with bar charts and a red target line, a whiteboard with a bar chart, '
         'a glass-walled meeting room on the left, tall windows on the right with other office towers outside, grey carpet tiles, flat LED ceiling panels, '
         f'{SALES_PAL}', SALES_NEG, (3301, 3302, 3303, 3304, 3305, 3306)),
+    # Round 2 monorail: the carriage rides on the beam ~15 m above the bay, so the side windows look DOWN on the water,
+    # the horizon sits low in the window, and no beam or pillars are visible sideways. Beam/pillars are not named at all.
+    'monorail-high': (
+        BASE + 'inside an empty Japanese monorail carriage, camera standing in the aisle at eye level looking down the length of the car, '
+        'long teal bench seats along both walls under wide windows, hand straps hanging from ceiling rails, grab poles, a pair of sliding doors on the right wall, '
+        'the train is high above the sea: (through the windows mostly open sky, the horizon low in the windows, the calm sea far below:1.3), '
+        'through the right-hand windows a distant island city of glass office towers, small on the horizon, '
+        f'{MONO_PAL}', MONO_NEG + ', bridge, pillars, columns, viaduct, elevated track outside, rails, waves at window level, water at the window sill, beach',
+        (1501, 1502, 1503, 1504, 1505, 1506)),
+    # One change from monorail-high: the window-view phrase names the horizon's place in the frame.
+    'monorail-high2': (
+        BASE + 'inside an empty Japanese monorail carriage, camera standing in the aisle at eye level looking down the length of the car, '
+        'long teal bench seats along both walls under wide windows, hand straps hanging from ceiling rails, grab poles, a pair of sliding doors on the right wall, '
+        'the train is high above the sea: (through the windows the horizon line sits in the lower third of each window, sky fills most of the window, the calm sea far below:1.3), '
+        'through the right-hand windows a distant island city of glass office towers, small on the horizon, '
+        f'{MONO_PAL}', MONO_NEG + ', bridge, pillars, columns, viaduct, elevated track outside, rails, waves at window level, water at the window sill, beach',
+        (1601, 1602, 1603, 1604)),
+    # One change from monorail-high2: a scale cue (a tiny boat and wake far below) so the height reads.
+    'monorail-high3': (
+        BASE + 'inside an empty Japanese monorail carriage, camera standing in the aisle at eye level looking down the length of the car, '
+        'long teal bench seats along both walls under wide windows, hand straps hanging from ceiling rails, grab poles, a pair of sliding doors on the right wall, '
+        'the train is high above the sea: (through the windows the horizon line sits in the lower third of each window, sky fills most of the window, the calm sea far below:1.3), '
+        'a tiny boat far below trailing a thin white wake, '
+        'through the right-hand windows a distant island city of glass office towers, small on the horizon, '
+        f'{MONO_PAL}', MONO_NEG + ', bridge, pillars, columns, viaduct, elevated track outside, rails, waves at window level, water at the window sill, beach',
+        (1701, 1702, 1703, 1704)),
+    # One change from monorail-high2: the camera sits low on the end seat, so the horizon (at eye level) falls lower in the windows.
+    'monorail-high4': (
+        BASE + 'inside an empty Japanese monorail carriage, (camera low, seated on the end seat, looking down the length of the car:1.2), '
+        'long teal bench seats along both walls under wide windows, hand straps hanging from ceiling rails, grab poles, a pair of sliding doors on the right wall, '
+        'the train is high above the sea: (through the windows the horizon line sits in the lower third of each window, sky fills most of the window, the calm sea far below:1.3), '
+        'through the right-hand windows a distant island city of glass office towers, small on the horizon, '
+        f'{MONO_PAL}', MONO_NEG + ', bridge, pillars, columns, viaduct, elevated track outside, rails, waves at window level, water at the window sill, beach, boat',
+        (1801, 1802, 1803, 1804)),
+    # Round 2 Sales: plain house prompt (as the office and copy room), back from the garish ANIME_BG version.
+    # Step A = the semi-realistic sales-floor prompt with one change: "busy" -> "empty" (keeps people out). Step B adds the island-desk sentence.
+    'sales-plain': (
+        BASE + 'an empty modern open-plan sales department on the third floor of a Japanese corporate tower, camera at standing eye level in the main aisle looking along the floor, '
+        'long rows of white desks pushed together in facing pairs (island desk layout), every desk with two monitors, a desk phone with a headset, papers, folders and a coffee cup, '
+        'black mesh office chairs pushed back as if people just stood up, a manager desk at the head of each row facing the others, '
+        'a big wall-mounted screen with bar charts and a red target line (no readable text), a glass-walled meeting room on the left, '
+        'tall windows along the far wall showing other office towers, clean light grey carpet, ceiling with rows of flat LED panels, '
+        f'{SALES_PAL}', NEG + ', skylight, glass roof, bed, sofa, living room, classroom, home office, cluttered junk, dirty', (3401, 3402, 3403)),
+    'sales-plain-b': (
+        BASE + 'an empty open-plan sales department in a Japanese company office, camera at standing eye level at the end of the main aisle, '
+        'long blocks of desks pushed together face to face, chairs on both long sides, '
+        'every desk with two monitors, a desk phone with a headset, stacked folders, papers and coffee cups, black mesh chairs pushed back at odd angles, '
+        'a whiteboard with a bar chart and a red target line at the far wall, a glass-walled meeting room on the left, tall windows on the right with other office towers outside, '
+        'grey carpet tiles, flat LED ceiling panels, '
+        f'{SALES_PAL}', NEG + ', skylight, glass roof, bed, sofa, living room, classroom, home office', (3501, 3502, 3503)),
     # Copy room: small, windowless, secluded, one door with a small window; bulky old copier as centrepiece.
     'copyroom-door': (
         BASE + 'a small windowless office copy room, camera at eye level in the back corner of the room looking toward the only door, '
@@ -105,6 +155,7 @@ JOBS = {
 }
 
 
+STAGING_ALIAS = {'monorail-high2': 'monorail-high', 'monorail-high3': 'monorail-high', 'monorail-high4': 'monorail-high'}
 # Staging notes (shot-staging skill). Beat is shown under each image on proto2/locations1.
 STAGING = {
     'monorail-side': dict(
@@ -127,6 +178,23 @@ STAGING = {
         behind='the mainland and the train behind: not in the prompt',
         motion='the train runs toward the island along the curve seen ahead', light='low morning sun from the left',
         sense='beam on pillars from the sea bed, pillars joined to the beam; the carriage wall present on both sides of the window'),
+    'monorail-high': dict(
+        beat='He arrives to live on the island: an empty carriage high over the bay, the island city ahead on the exit (right) side.',
+        camera='inside the car, standing in the aisle at eye level (about 1.6 m above the car floor), facing forward down the car',
+        height='the beam top is about 15 m above the sea, so the eye is about 16 m up; side windows show mostly sky, the horizon low in each window, the water far below and seen from above; the island (several km away) is small on the horizon',
+        front='benches and straps in the foreground; windows on both walls; doors on the right wall; sky, low horizon and distant water through the windows; the island city small in the right-hand windows',
+        behind='the rest of the train, the mainland; the beam under the car (not visible from a side window): none of it in the prompt',
+        motion='the train runs forward, toward the island ahead-right', light='morning sun, soft patches on the floor',
+        sense='no beam, pillars or bridge outside the side windows; no water at the sill; no people; no readable text'),
+    'sales-plain': dict(
+        beat="Rei's floor: rows of desks and screens that make the basement look shabby. People come in as sprites.",
+        camera='standing eye level in the main aisle, facing along the floor to the chart screen', height='third floor; other towers outside at similar and greater height',
+        front='desk rows either side, monitors, phones, folders; the chart on the far wall; windows', behind='the lifts and entrance', motion='none',
+        light='daylight plus LED panels', sense='chairs on the monitor side with legroom; no people; no readable text; colours as muted as the office and copy room'),
+    'sales-plain-b': dict(
+        beat="Rei's floor: rows of desks and screens that make the basement look shabby. People come in as sprites.",
+        camera='standing eye level at the end of the main aisle, facing the whiteboard', height='third floor', front='desk blocks either side, the whiteboard, windows right',
+        behind='the lifts and entrance', motion='none', light='daylight plus LED panels', sense='as sales-plain'),
     'gate-lobby': dict(
         beat='Ishibashi stops him at the gate: a row of ID card gates with a guard post beside them.',
         camera='indoors, eye level, a few metres in front of the gate row, facing the gates',
