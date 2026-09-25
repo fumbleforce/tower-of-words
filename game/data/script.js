@@ -2,7 +2,8 @@
 // Markup in jp lines: {kanji|kana|dictionary key} or {kana word}. Bare katakana runs are tracked as words automatically.
 // English (the `en` fields) is hidden during play unless the player asks for it, which counts as a look-up.
 // Step fields beyond the basics: `off` (a voice with no sprite), `noise`, `sus` (suspicion per person), `stamp` and
-// `ifWithin` (minutes since a stamp), `ifNoise`, `ifCasts`, `unset`, `sign`, `onboarding`. See game/main.js step().
+// `ifWithin` (minutes since a stamp), `ifNoise`, `ifCasts`, `unset`, `sign`. The train opening adds `gl`, `cap`, `cue`, `alt`,
+// `via`, `insert`, `hand`, `amb`, `tone`, `wait`, `ifSupport`, `findEntrance`, `autosave` and `act` options. See game/main.js step().
 export const CAST = {
   announcer: { name: 'アナウンス', en: 'Announcement', color: '#9fd3ff' },
   player: { name: 'あなた', en: 'You', color: '#cfe0ff' },
@@ -57,27 +58,154 @@ const SORT_BY_HAND = [
 const SALES_WITNESS = { if: '!witnessGone', then: [{ set: { salesWitness: true } }] };
 
 export const SCENES = {
-  monorail: [
-    { bg: 'monorail' }, { clock: '08:40' }, { music: 'calm' },
-    { narrate: 'The Amakawa monorail runs out across Tokyo Bay to the company\'s island. At this hour the carriage is empty.' },
-    { narrate: 'Your boxes went ahead last week. You have a backpack, and a company phone that buzzed the moment you sat down.' },
-    { onboarding: true },
-    { say: 'announcer', jp: 'まもなく、{天川|あまかわ}シティ{中央|ちゅうおう}{駅|えき}です。お{出口|でぐち}は{右側|みぎがわ}です。', en: '"Arriving shortly at Amakawa City Central Station. The exit is on the right."' },
-    { choose: { prompt: 'The train slows down. Which doors?', kind: 'action', show: 'en', options: [
-      { jp: '{右|みぎ}のドア', en: 'The right-hand doors', correct: true, then: [{ narrate: 'The right-hand doors slide open onto the platform.' }] },
-      { jp: '{左|ひだり}のドア', en: 'The left-hand doors', then: [{ narrate: 'The left-hand doors stay shut. The right-hand ones open behind you, and you cross the empty carriage.' }, { time: 1 }] },
+  // The train opening (game/notes/train-opening-script.md, approved 2026-09-25). New Game starts here.
+  // Rei is labelled "Woman" until she says her name (flag reiNamed). `gl` = contextual English for a tapped word,
+  // `cap` = a one-line stage direction above the subtitle, `alt` = the supported version of a line (used when the
+  // player has needed help on several lines), `cue` = the tap tutorial. Art here is placeholder (see TODO.md).
+  train: [
+    { bg: 'carriage' }, { clock: '08:40' }, { amb: 'train' }, { music: null }, { set: { reiNamed: false } },
+    // 1. The cup
+    { insert: 'seat' }, { tone: 'keys' }, { wait: 1400 }, { tone: 'clack' },
+    { say: 'rei', off: true, jp: 'あ。', en: '"Ah."', gl: { あ: 'ah! (a small surprised sound)' }, cap: 'A monorail carriage. The woman beside the empty seat is typing. Her coffee cup tips toward her laptop.' },
+    { choose: { prompt: 'The cup is tipping.', options: [
+      { act: 'Catch the cup', then: [{ insert: 'seat-caught' }, { narrate: 'You steady the cup. She catches her folder with her free hand.' }] },
+      { act: 'Warn her', en: '"Ah, coffee!"', then: [
+        { say: 'player', jp: 'あ、コーヒー。', en: '"Ah, coffee!"', auto: true },
+        { insert: 'seat-saved' }, { narrate: 'She catches the cup and shuts the laptop with her other hand.' },
+      ] },
     ] } },
-    { msg: { from: 'emi', jp: 'おはよう！{九時|くじ}に{地下|ちか}{二階|にかい}に{来|き|来る}てね。', en: 'Morning! Come to basement level 2 at nine.' } },
-    { task: '{地下|ちか}{二階|にかい}・{企画室|きかくしつ}7' },
+    { insert: null }, { show: 'rei', expr: 'cold', at: 'center' },
+    { say: 'rei', expr: 'cold', jp: 'ありがとう。', en: '"Thanks."', gl: { ありがとう: 'thanks, thank you' }, cap: 'She checks the lid, then looks at you properly.', cue: 'tap' },
+    // 2. A seat
+    { say: 'rei', expr: 'cold', jp: 'どうぞ。', en: '"Go ahead."', gl: { どうぞ: 'go ahead; here, she\'s offering you the seat' }, cap: 'She puts the laptop away, stacks the folder on her lap and pats the seat she just cleared.' },
+    { choose: { options: [
+      { act: 'Sit', then: [{ narrate: 'You sit and put your backpack between your feet. Sea and sky slide past the window.' }] },
+    ] } },
+    // 3. New badge
+    { insert: 'badge' }, { clock: '08:43' },
+    { narrate: 'You take your new company badge out of its sleeve. The protective film is still on it.' },
+    { say: 'rei', expr: 'cold', jp: '{初日|しょにち}？', en: '"First day?"', gl: { 初日: 'first day' }, cap: 'She glances at the badge, then at you.', cue: 'tap2' },
+    { choose: { options: [
+      { jp: 'うん。', en: '"Yeah."', gl: { うん: 'yeah (casual yes)' } },
+      { act: 'Nod', then: [{ narrate: 'You nod.' }] },
+    ] } },
+    { narrate: 'She gives a small nod back.' }, { insert: null },
+    { choose: { prompt: 'Ask her something, or let it be.', options: [
+      { jp: 'そっちは？', en: '"And you?"', gl: { そっち: 'you, your side (casual)' }, then: [
+        { say: 'rei', expr: 'cold', jp: '{三年目|さんねんめ}。', en: '"Third year."', gl: { 三年目: 'third year (her third year at the company)', 三: 'three', 年: 'year', 目: '-th (third, fourth...)' }, cap: 'She presses down a worn corner of her own badge sleeve with her thumb.' },
+      ] },
+      { act: 'Say nothing' },
+    ] } },
+    // 4. The company gets bigger
+    { hideAll: true }, { bg: 'reveal' }, { amb: 'pitch' }, { wait: 1800 },
+    { say: 'rei', off: true, jp: '{全部|ぜんぶ}、{会社|かいしゃ}。', en: '"All of it\'s the company."', gl: { 全部: 'all of it, everything', 会社: 'the company' }, cap: 'Outside, the line runs across the water to an island of towers.' },
+    { bg: 'carriage' }, { show: 'rei', expr: 'cold', at: 'center' },
+    { choose: { prompt: 'The island is getting close.', options: [
+      { jp: '{全部|ぜんぶ}？', en: '"All of it?"', gl: { 全部: 'all of it, everything' }, then: [
+        { say: 'rei', expr: 'cold', jp: 'うん。', en: '"Yeah."', gl: { うん: 'yeah' } },
+      ] },
+      { jp: 'すごいね。', en: '"That\'s impressive."', gl: { すごい: 'amazing, impressive' },
+        alt: { needKnown: '大きい', jp: '{大|おお}きいね。', en: '"It\'s big."', gl: { 大きい: 'big' } }, then: [
+        { ifSupport: { then: [{ say: 'rei', expr: 'cold', jp: 'うん。', en: '"Yeah."', gl: { うん: 'yeah' } }],
+          else: [{ say: 'rei', expr: 'cold', jp: '{最初|さいしょ}はね。', en: '"At first."', gl: { 最初: 'at first, the beginning' } }] } },
+      ] },
+      { act: 'Keep looking', then: [
+        { hideAll: true }, { bg: 'reveal' }, { narrate: 'She leaves you to it. The towers get closer.' },
+        { bg: 'carriage' }, { show: 'rei', expr: 'cold', at: 'center' },
+      ] },
+    ] } },
+    { insert: 'dorm' },
+    { narrate: 'You put the badge back in your backpack. Another card is in there with it.' },
+    { say: 'rei', expr: 'cold', jp: '{寮|りょう}？', en: '"The dorm?"', gl: { 寮: 'dorm, company housing' }, cap: 'She notices the card.' },
+    { choose: { options: [
+      { jp: 'うん。', en: '"Yeah."', gl: { うん: 'yeah (casual yes)' } },
+      { act: 'Nod' },
+    ] } },
+    { insert: null }, { hand: { mode: 'housing' } },
+    { narrate: 'You open the housing app on your phone to show her. It has a delivery photo of your boxes at door 203.' },
+    { say: 'rei', expr: 'cold', jp: '{今日|きょう}から？', en: '"Starting today?"', gl: { 今日: 'today' } },
+    { say: 'player', jp: 'うん。', en: '"Yeah."', auto: true },
+    { hand: null },
+    { narrate: 'She shifts along the bench to give you a little more room.' },
+    // 5. Emi
+    { clock: '08:46' }, { tone: 'buzz' }, { hand: { mode: 'voicemail', from: 'emi' } },
+    { say: 'emi', off: true, via: 'voice message', jp: 'おはよう！', en: '"Morning!"', gl: { おはよう: 'good morning' } },
+    { say: 'emi', off: true, via: 'voice message', jp: 'もうすぐ？', en: '"Nearly here?"', gl: { もうすぐ: 'soon; here, "nearly here?"' } },
+    { choose: { where: 'phone', options: [
+      { jp: 'もうすぐ。', en: '"Nearly there."', gl: { もうすぐ: 'soon; here, "nearly there"' }, then: [
+        { hand: { mode: 'recording', from: 'emi' } },
+        { say: 'emi', off: true, via: 'voice message', jp: 'わかった。', en: '"Got it."', gl: { わかる: 'to understand; わかった = got it' } },
+      ] },
+      { jp: 'ちょっと、{緊張|きんちょう}してる。', en: '"I\'m a little nervous."', gl: { ちょっと: 'a little', 緊張: 'nerves, tension', する: 'to do (緊張する = to be nervous)' }, then: [
+        { hand: { mode: 'recording', from: 'emi' } },
+        { say: 'emi', off: true, via: 'voice message', jp: '{大丈夫|だいじょうぶ}。', en: '"You\'ll be fine."', gl: { 大丈夫: 'fine, OK; here, "you\'ll be fine"' } },
+      ] },
+    ] } },
+    { ifSupport: {
+      then: [{ say: 'emi', off: true, via: 'voice message', jp: '{待|ま}ってるね。', en: '"I\'ll be waiting."', gl: { 待つ: 'to wait' } }],
+      else: [{ say: 'emi', off: true, via: 'voice message', jp: '{会社|かいしゃ}で{待|ま}ってるね。', en: '"I\'ll be waiting at the office."', gl: { 会社: 'the company; here, the office', 待つ: 'to wait' } }] } },
+    { hand: null },
+    { say: 'rei', expr: 'cold', jp: '{上司|じょうし}、エミ？', en: '"Emi\'s your boss?"', gl: { 上司: 'boss, team lead', エミ: 'Emi (a name)' }, cap: 'She recognised the voice. She looks from your phone to your badge.' },
+    { choose: { options: [
+      { jp: 'うん。', en: '"Yeah."', gl: { うん: 'yeah (casual yes)' } },
+      { act: 'Nod' },
+    ] } },
+    { narrate: 'She looks as if she might say something, then takes a sip of coffee instead.' },
+    // 6. Ask, or leave it
+    { insert: 'folder' },
+    { narrate: 'She opens her folder again: a short table of figures.' },
+    { choose: { prompt: 'Talk, or let her work?', options: [
+      { jp: 'エミ、どんな{人|ひと}？', en: '"What\'s Emi like?"', gl: { どんな: 'what kind of', 人: 'person' }, then: [
+        { set: { askedAboutEmi: true } },
+        { say: 'rei', expr: 'cold', jp: '{優|やさ}しいよ。', en: '"She\'s nice."', gl: { 優しい: 'kind, nice' } },
+        { ifSupport: {
+          then: [{ say: 'rei', expr: 'cold', jp: '{仕事|しごと}、{多|おお}いよ。', en: '"There\'s a lot of work."', gl: { 仕事: 'work', 多い: 'a lot, many' }, cap: 'She puts one sheet back into the folder.' }],
+          else: [{ say: 'rei', expr: 'cold', jp: '{頼|たの}みごと、{多|おお}いけど。', en: '"Asks a lot of favours, though."', gl: { 頼みごと: 'favours, requests', 多い: 'a lot, many', けど: 'but, though' }, cap: 'She puts one sheet back into the folder.' }] } },
+      ] },
+      { act: 'Let her work', then: [{ narrate: 'A few quiet seconds. She crosses out one line, checks another, and closes the folder.' }] },
+    ] } },
+    { insert: null }, { tone: 'buzz' }, { insert: 'caller' },
+    { narrate: 'Her phone lights up. She sees the name and silences it.' },
+    { set: { sawReiSilenceEmi: true } },
+    { insert: null },
+    { if: 'askedAboutEmi', then: [
+      { say: 'rei', expr: 'cold', jp: 'あとで。', en: '"Later."', gl: { あとで: 'later' }, cap: 'She catches you looking.' },
+    ], else: [{ narrate: 'She puts the phone away.' }] },
+    // 7. Arrival
+    { clock: '08:49' }, { tone: 'chime' }, { amb: 'slow' },
+    { say: 'announcer', jp: '{天川|あまかわ}シティ、{天川|あまかわ}シティです。', en: '"Amakawa City. Amakawa City."', gl: { 天川: 'Amakawa (the company and its island)', シティ: 'city' }, cap: 'The train slows into a station and stops.' },
+    { amb: null }, { tone: 'door' }, { hideAll: true }, { bg: 'doors' },
+    { narrate: 'The doors open. People further along the carriage stand up. You pick up your backpack.' },
+    { show: 'rei', expr: 'cold', at: 'center' }, { insert: 'reibadge' },
+    { narrate: 'She tucks the folder under her arm. Her badge turns face out as she stands.' },
+    { set: { reiNamed: true } },
+    { say: 'rei', expr: 'cold', jp: 'レイ。{営業|えいぎょう}。', en: '"Rei. Sales."', gl: { レイ: 'Rei (her name)', 営業: 'Sales; her department' }, cap: 'She points at herself with the hand holding the cup.' },
+    { choose: { options: [
+      { jp: 'よろしく。', en: '"Nice to meet you."', gl: { よろしく: 'nice to meet you (asks for good relations)' } },
+      { act: 'Smile and nod' },
+    ] } },
+    { insert: null },
+    { say: 'rei', expr: 'cold', jp: 'エミによろしく。', en: '"Say hi to Emi."', gl: { よろしく: 'here: "say hi to (Emi) for me"; a way of sending good wishes through someone' }, cap: 'She nods back.' },
+    // 8. The way out
+    { say: 'rei', expr: 'cold', jp: 'どうぞ。', en: '"Go ahead."', gl: { どうぞ: 'go ahead; here, she\'s letting you go first' }, cap: 'At the open door she steps aside to let you out first.' },
+    { choose: { options: [{ act: 'Step onto the platform' }] } },
+    { hideAll: true }, { bg: 'platform' }, { music: 'calm' },
+    { narrate: 'You step out first. Rei follows, heads for the stairs, and looks back once to check you\'re coming. Then she\'s gone into the crowd.' },
+    { tone: 'buzz' },
+    { hand: { mode: 'photo', from: 'emi', jp: '{入口|いりぐち}は、ここ。', en: '"Here\'s the entrance."', gl: { 入口: 'entrance', ここ: 'here' }, task: 'Find the entrance in Emi\'s photo.' } },
+    { hand: null },
+    { autosave: true },
     { goto: 'gate' },
   ],
 
   gate: [
-    { bg: 'gate' }, { clock: '08:48' },
-    { narrate: 'Amakawa Tower. A row of glass gates, and nobody at the security desk.' },
-    { narrate: 'You hold your phone to the reader. The gate beeps and stays shut. It doesn\'t know your new ID yet.' },
-    { say: 'ishibashi', off: true, jp: 'ちょっと、{止|と|止まる}まって。', en: '"Hold it. Stop."' },
-    { narrate: 'A man\'s voice, from a speaker above the gates. Somewhere, a camera is pointed at you.' },
+    // Starts from Emi's photo (the train's last beat). gate = gate-lobby-2103, the same picture as the photo.
+    { bg: 'gate' }, { clock: '08:52' }, { music: 'calm' },
+    { narrate: 'Down the station steps and across a square, into a tall glass lobby.' },
+    { findEntrance: { prompt: 'Find the entrance from Emi\'s photo. Tap it.' } },
+    { narrate: 'The same gates as in Emi\'s photo. Nobody else around.' },
+    { narrate: 'You hold your new badge to a reader. It beeps. The gate doesn\'t open.' },
+    { say: 'ishibashi', off: true, jp: 'ちょっと、{止|と|止まる}まって。', en: '"Hold it. Stop."', cap: 'A man\'s voice, from a speaker above the gates. Somewhere, a camera is pointed at you.' },
     { say: 'ishibashi', off: true, jp: '{見|み|見る}ない{顔|かお}だな。', en: '"Don\'t know your face."' },
     { say: 'ishibashi', off: true, jp: 'IDカード、カメラに{見|み|見せる}せて。', en: '"Show your ID card to the camera."' },
     { choose: { prompt: 'What do you do?', kind: 'action', options: [
@@ -85,7 +213,7 @@ export const SCENES = {
       { jp: '{笑|わら|笑う}う', en: 'Smile at the camera', retry: true, then: [{ say: 'ishibashi', off: true, jp: '……いや、ID。', en: '"...No. ID."' }] },
       { jp: '（{何|なに}もしない）', en: 'Do nothing', retry: true, then: [{ say: 'ishibashi', off: true, jp: '……ID。', en: '"...ID."' }] },
     ] } },
-    { narrate: 'You hold the ID on your phone up to the camera.' },
+    { narrate: 'You hold your badge up to the camera.' },
     { say: 'ishibashi', off: true, jp: '……{新人|しんじん}か。', en: '"...A new hire."' },
     { say: 'ishibashi', off: true, jp: '{企画室|きかくしつ}7？　{地下|ちか}の{連中|れんちゅう}か。', en: '"Planning Office 7? That basement lot."' },
     { say: 'ishibashi', off: true, jp: '……カメラで、{見|み|見る}てる。', en: '"...I\'m watching. On camera."' },
@@ -97,21 +225,22 @@ export const SCENES = {
       ] },
       { jp: '……いつも？', en: '"...Always?"', then: [{ say: 'ishibashi', off: true, jp: '……いつも。', en: '"...Always."' }] },
     ] } },
-    { narrate: 'The gate turns green.' },
+    { narrate: 'The light turns green and the gate lets you through.' },
+    { task: '{企画室|きかくしつ}7' },
     { goto: 'elevator_b2' },
   ],
 
   elevator_b2: [
-    { bg: 'lift' },
-    { elevator: { target: 'B2', wrong: WRONG_FLOOR, floors: FLOORS_D1 } },
+    { bg: 'lift' }, { narrate: 'Past the gates, a lift. Your team is somewhere in this building.' },
+    { elevator: { target: 'B2', wrong: WRONG_FLOOR, floors: FLOORS_D1, hint: 'Your badge says {企画室|きかくしつ}7.' } },
     { goto: 'office' },
   ],
 
   office: [
-    { bg: 'office' }, { music: 'office' },
+    { bg: 'office' }, { music: 'office' }, { task: '' },
     { narrate: 'Basement level two. Pipes along the ceiling, cup noodles on the desks, no windows.' },
     { show: 'mio', expr: 'bored', at: 'right' },
-    { say: 'mio', expr: 'bored', jp: '……{誰|だれ}？', en: '"...Who are you?"' },
+    { say: 'mio', expr: 'bored', as: 'Woman with headphones', jp: '……{誰|だれ}？', en: '"...Who are you?"' },
     { choose: { prompt: 'Your reply', kind: 'reply', options: [
       { jp: '{新人|しんじん}だよ。よろしく。', en: '"The new guy. Nice to meet you." (casual)', correct: true, fx: { mio: 1 }, then: [
         { say: 'mio', expr: 'bored', jp: 'ふーん。……ミオ。', en: '"Hmm. ...Mio."' },
@@ -158,7 +287,7 @@ export const SCENES = {
 
   elevator_b1: [
     { bg: 'lift' },
-    { elevator: { target: 'B1', wrong: wrongFrom('B2', 'The office again. The copy room is somewhere else.'), floors: FLOORS_D1 } },
+    { elevator: { target: 'B1', wrong: wrongFrom('B2', 'The office again. The copy room is somewhere else.'), floors: FLOORS_D1, hint: 'Emi said: コピー{室|しつ}は、{地下一階|ちかいっかい}。' } },
     { goto: 'copyroom' },
   ],
 
@@ -253,7 +382,7 @@ export const SCENES = {
 
   elevator_back: [
     { bg: 'lift' },
-    { elevator: { target: 'B2', wrong: wrongFrom('B1', 'You\'re already here.'), floors: FLOORS_D1 } },
+    { elevator: { target: 'B2', wrong: wrongFrom('B1', 'You\'re already here.'), floors: FLOORS_D1, hint: 'Back to your office: {企画室|きかくしつ}7.' } },
     { goto: 'office2' },
   ],
 
@@ -295,6 +424,7 @@ export const SCENES = {
     { say: 'mio', expr: 'smirk', jp: '{黒田|くろだ}レイ？　……がんばって。', en: '"Rei Kuroda? ...Good luck."' },
     { say: 'mio', expr: 'bored', jp: 'あの{人|ひと}、{こわい}よ。', en: '"She\'s scary."' },
     { say: 'emi', expr: 'teasing', jp: '{こわくない|こわくない|こわい}よ。……ちょっとしか。', en: '"She\'s not scary. ...Only a little."' },
+    { narrate: 'Kuroda Rei. The woman from the train.' },
     { hideAll: true },
     { task: '{黒田|くろだ}さん・{数字|すうじ}' },
     { goto: 'elevator_3f' },
@@ -302,17 +432,18 @@ export const SCENES = {
 
   elevator_3f: [
     { bg: 'lift' },
-    { elevator: { target: '3F', wrong: WRONG_FLOOR, floors: FLOORS_D1 } },
+    { elevator: { target: '3F', wrong: WRONG_FLOOR, floors: FLOORS_D1, hint: 'Emi said: {三階|さんがい}の{営業部|えいぎょうぶ}。' } },
     { goto: 'sales' },
   ],
 
   sales: [
     { bg: 'sales' }, { music: 'lively' },
     { narrate: 'Third floor, Sales. Phones ringing, fast keyboards, and nobody looks up.' },
-    { narrate: 'At the window desk, a woman with a silver ponytail is typing. The nameplate says 黒田.' },
-    { narrate: 'You tell her you\'re from Planning 7, and that Emi sent you.' },
+    { narrate: 'At the window desk, Rei from the train is typing. The nameplate says 黒田.' },
+    { narrate: 'You tell her Emi sent you.' },
     { show: 'rei', expr: 'cold', at: 'center' },
-    { say: 'rei', expr: 'cold', jp: '{企画室|きかくしつ}7の{新人|しんじん}？　……ああ、{数字|すうじ}ね。', en: '"The new guy from Planning 7? ...Ah, the numbers."' },
+    { say: 'rei', expr: 'cold', jp: 'あ、{電車|でんしゃ}の。', en: '"Oh. The one from the train."' },
+    { say: 'rei', expr: 'cold', jp: '……エミの{数字|すうじ}ね。', en: '"...Emi\'s numbers, right."' },
     { say: 'rei', expr: 'cold', jp: '{今|いま}、{忙|いそが|忙しい}しい。{午後|ごご}に{来|き|来る}て。', en: '"I\'m busy. Come back this afternoon."' },
     { narrate: 'The man at the next desk is watching you over his monitor.' },
     { choose: { prompt: 'Rei won\'t look up.', kind: 'reply', options: [
@@ -393,7 +524,7 @@ export const SCENES = {
     { say: 'emi', expr: 'smile', jp: '{今日|きょう}は、もう{帰|かえ|帰る}っていいよ。', en: '"You can go home for today."' },
     { say: 'emi', expr: 'smile', jp: '{寮|りょう}、わかる？', en: '"Do you know where the dorm is?"' },
     { choose: { prompt: 'Your reply', kind: 'reply', options: [
-      { jp: 'うん、アプリで{見|み|見る}た。', en: '"Yeah, I saw it in the app."', fx: { emi: 1 }, then: [{ say: 'emi', expr: 'teasing', jp: 'えらい。じゃあ、おつかれ。', en: '"Look at you. OK, good work today."' }] },
+      { jp: 'うん、203。', en: '"Yeah. Room 203."', fx: { emi: 1 }, then: [{ say: 'emi', expr: 'teasing', jp: 'えらい。じゃあ、おつかれ。', en: '"Look at you. OK, good work today."' }] },
       { jp: '……たぶん。', en: '"...Probably."', then: [{ say: 'emi', expr: 'smile', jp: '{駅|えき}のとなり。……{電話|でんわ}、してね。', en: '"Next to the station. ...Call me, OK?"' }] },
     ] } },
     { hideAll: true },
@@ -401,7 +532,7 @@ export const SCENES = {
       { bg: 'gate' }, { narrate: 'On your way out, the gates.' },
       { say: 'ishibashi', off: true, jp: 'また{君|きみ}か。', en: '"You again." He remembers how you spoke to him this morning.' },
       { say: 'ishibashi', off: true, jp: '……ID。', en: '"...ID."' },
-      { narrate: 'You hold your phone up to the camera. He takes his time.' }, { time: 5 },
+      { narrate: 'You hold your badge up to the camera. He takes his time.' }, { time: 5 },
     ] },
     { task: '{寮|りょう}' },
     { goto: 'dorm' },
@@ -409,8 +540,8 @@ export const SCENES = {
 
   dorm: [
     { bg: 'dorm' }, { music: 'night' }, { clock: '18:30' }, { task: '' },
-    { narrate: 'Dorm A, room 203. Second floor. Your phone opens the door on the second try.' },
-    { narrate: 'Your boxes are stacked by the window. The window looks straight at a concrete wall, about two metres away.' },
+    { narrate: 'Dorm A, room 203. Second floor. Your card opens the door on the second try.' },
+    { narrate: 'Your boxes are stacked inside, the one with the drawn mug on top. The window looks straight at a concrete wall, about two metres away.' },
     { narrate: 'Somewhere on this island there are sea views.' },
     { msg: { from: 'emi', jp: 'おつかれ！{部屋|へや}、どう？', en: 'Good work today! How\'s the room?' } },
     { freeTalk: {

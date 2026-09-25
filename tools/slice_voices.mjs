@@ -80,10 +80,10 @@ for (const m of menus) for (const it of m.items) {
   for (let mask = 1; mask < (1 << n); mask++) { let sum = 0; for (let b = 0; b < n; b++) if (mask & (1 << b)) sum += w[b]; if (sum > it.price) payLines.add(`はい、${kanjiNum(sum - it.price)}円のおつり。`); }
 }
 for (const t of payLines) lines.push(['kaori', t]);
-const walk = o => { if (Array.isArray(o)) o.forEach(walk); else if (o && typeof o === 'object') { if (o.say) lines.push([o.say, plain(o.jp)]); Object.values(o).forEach(walk); } };
+const walk = o => { if (Array.isArray(o)) o.forEach(walk); else if (o && typeof o === 'object') { if (o.say) { lines.push([o.say, plain(o.jp)]); if (o.alt?.jp) lines.push([o.say, plain(o.alt.jp)]); } Object.values(o).forEach(walk); } };
 walk(SCENES);
 // Player lines: the Japanese of every choice option the player can pick (not actions in brackets, not English-shown choices).
-const walkP = o => { if (Array.isArray(o)) o.forEach(walkP); else if (o && typeof o === 'object') { if (o.choose && o.choose.show !== 'en') for (const op of o.choose.options) { const t = plain(op.jp); if (!t.startsWith('（')) lines.push(['player', t]); } Object.values(o).forEach(walkP); } };
+const walkP = o => { if (Array.isArray(o)) o.forEach(walkP); else if (o && typeof o === 'object') { if (o.choose && o.choose.show !== 'en') for (const op of o.choose.options) { if (!op.jp) continue; const t = plain(op.jp); if (!t.startsWith('（')) lines.push(['player', t]); if (op.alt?.jp) lines.push(['player', plain(op.alt.jp)]); } Object.values(o).forEach(walkP); } };
 walkP(SCENES);
 
 const manifest = {};
