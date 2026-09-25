@@ -49,3 +49,9 @@ Sources: Sakuga Blog on who makes openings (blog.sakugabooru.com, 2025) and its 
 Pilot result: 12 images from four models, about $1.10. Only GPT Image 2 put the driver's cab toward the city (with the sketch), and it needed one edit to add windows. Nano Banana Pro looks closest to the reference but kept the cab at the wrong end five times, including when asked to edit it.
 
 Pilot outcome (2026-09-25): Jørgen chose his own ChatGPT render (art/approved/monorail-bay-ref2.png) as the exterior master. Its prompt, "Reference prompt 2" in art/PROMPTS.md, is the template for the other four cloud masters: the camera stated plainly, everything placed in frame terms (lower left, right horizon), counts, colours, and one short "No ..." line, with no direction, cab or story wording (monorails have cabs at both ends, so direction wording made the train look like an ice cream truck). Step 7 was run on it: RealESRGAN 2x to 3344×1882, Depth Anything V2 depth map, a slow push with depth parallax and water glints in the player, rendered to proto2/opening/pilot-bay.mp4 (60 fps, the song from 3.6 s). The frame check found no tearing or warping.
+
+## Look and feel (from the reference OP frames Jørgen sent, 2026-09-25; the frames are reference only, kept outside the repo)
+1. Light and mood carry the shot: golden-hour backlight, silhouettes, deep shadow on near faces, warm shafts of light through the carriage. Avoid flat, even midday light.
+2. Simple staging: a train side-on in silhouette crossing the frame on a flat bridge, with a huge painted sky filling most of the frame. No hard perspective; the train cel just slides across, which is the easiest shot to animate well.
+3. Characters at different depths: a big dark cel-shaded profile close in the foreground, a small figure in the light behind.
+4. Film finish: grain, bloom, lens glints, floating dust, a warm grade.

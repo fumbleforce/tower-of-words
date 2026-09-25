@@ -244,8 +244,129 @@ S.bay = (lt, u, t, fx, c) => {
   }
   draw2d();
   const [sx, sy] = toScreen(P.sun.bay[0], P.sun.bay[1]);
-  fx.flare = [sx / W, sy / H]; fx.flareAmt = 0.12;
-  fx.leak = 0.08; fx.bloom = 0.3; fx.thr = 0.8; fx.vig = 0.22;
+  fx.flare = [sx / W, sy / H]; fx.flareAmt = 0.06;
+  fx.leak = 0.05; fx.bloom = 0.22; fx.thr = 0.85; fx.vig = 0.22;
+};
+
+// ---------- Version A of the exterior: layered cel animation ----------
+// The train is its own layer (a cutout split into four rigid cars) moving along a path fitted to the beam's top edge over a clean
+// plate where the train was painted out. Scale comes from the beam's apparent thickness (it shrinks toward the city).
+// Coordinates: 2x master pixels (3344x1882); the cutout is a 1000x560 crop at (260, 900).
+const TR = {
+  W: 3344, H: 1882, off: [260, 900], cw: 1000, ch: 560,
+  // underside line where the cars sit, 2x master px, measured on a grid (from the lower-left toward the city)
+  path: [[0, 1490], [320, 1364], [600, 1250], [900, 1112], [1110, 1010], [1200, 972], [1300, 945], [1400, 918], [1500, 892], [1600, 869], [1700, 846], [1800, 828], [1900, 810], [2000, 795], [2100, 781], [2200, 769], [2300, 758]],
+  cars: [[38, 393], [393, 569], [569, 712], [712, 866]],   // crop x ranges
+};
+// pixels per metre relative to the train's rear, from the beam's measured top-face thickness (100 px at x 325, 57 at 1125, about 25 at 2000)
+const TRK = [[0, 1.15], [325, 1], [1125, 0.6], [1500, 0.43], [2000, 0.3], [2400, 0.24]];
+function trK(x) { for (let i = 1; i < TRK.length; i++) if (x <= TRK[i][0]) return lerp(TRK[i - 1][1], TRK[i][1], (x - TRK[i - 1][0]) / (TRK[i][0] - TRK[i - 1][0])); return 0.24; }
+let TRP = null;
+function trPrep() {
+  // resample the path finely with cumulative "real" distance u (screen distance divided by the local scale)
+  const pts = [];
+  for (let i = 0; i < TR.path.length - 1; i++) {
+    const [x0, y0] = TR.path[i], [x1, y1] = TR.path[i + 1];
+    for (let k = 0; k < 20; k++) { const f = k / 20; pts.push([lerp(x0, x1, f), lerp(y0, y1, f)]); }
+  }
+  pts.push(TR.path[TR.path.length - 1]);
+  let u = 0; const us = [0];
+  for (let i = 1; i < pts.length; i++) { const d = Math.hypot(pts[i][0] - pts[i - 1][0], pts[i][1] - pts[i - 1][1]); u += d / trK((pts[i][0] + pts[i - 1][0]) / 2); us.push(u); }
+  const atX = x => { for (let i = 1; i < pts.length; i++) if (pts[i][0] >= x) { const f = (x - pts[i - 1][0]) / (pts[i][0] - pts[i - 1][0]); return lerp(us[i - 1], us[i], f); } return us[us.length - 1]; };
+  const atU = uu => { for (let i = 1; i < us.length; i++) if (us[i] >= uu) { const f = (uu - us[i - 1]) / (us[i] - us[i - 1]); return [lerp(pts[i - 1][0], pts[i][0], f), lerp(pts[i - 1][1], pts[i][1], f)]; } return pts[pts.length - 1]; };
+  const yAt = x => { for (let i = 1; i < pts.length; i++) if (pts[i][0] >= x) { const f = (x - pts[i - 1][0]) / (pts[i][0] - pts[i - 1][0]); return lerp(pts[i - 1][1], pts[i][1], f); } return pts[pts.length - 1][1]; };
+  TRP = { atX, atU, yAt };
+}
+const trDepth = x => x < 800 ? lerp(0.78, 0.59, (x - 400) / 400) : x < 1100 ? lerp(0.59, 0.46, (x - 800) / 300) : lerp(0.46, 0.21, Math.min(1, (x - 1100) / 900));
+function drawTrain(travel, t, par, focus) {
+  if (!TRP) trPrep();
+  const tex = TEX['bay-train'];
+  if (!tex) return;
+  // parallax: the plate shows source uv - par*(d - focus), so content at depth d moves by +par*(d - focus) in image uv
+  TR.cars.forEach(([c0, c1], i) => {
+    const ax = c0 + TR.off[0], bx = c1 + TR.off[0];
+    const A = [ax, TRP.yAt(ax)], B = [bx, TRP.yAt(bx)];          // the car's original rear and front anchors on the path
+    const A2 = TRP.atU(TRP.atX(ax) + travel), B2 = TRP.atU(TRP.atX(bx) + travel);
+    const s = Math.hypot(B2[0] - A2[0], B2[1] - A2[1]) / Math.hypot(B[0] - A[0], B[1] - A[1]);
+    const dd = trDepth((A2[0] + B2[0]) / 2), pu = par[0] * (dd - focus), pv = par[1] * (dd - focus);
+    const r = Math.atan2(B2[1] - A2[1], B2[0] - A2[0]) - Math.atan2(B[1] - A[1], B[0] - A[0]);
+    const bob = Math.sin(t * 11 + i * 1.7) * 0.8;
+    const tf = ([x, y]) => {
+      const dx = x - A[0], dy = y - A[1];
+      const X = A2[0] + s * (dx * Math.cos(r) - dy * Math.sin(r)), Y = A2[1] + bob + s * (dx * Math.sin(r) + dy * Math.cos(r));
+      return toScreen(X / TR.W + pu, Y / TR.H + pv);
+    };
+    const y0 = TR.off[1], y1 = TR.off[1] + TR.ch;
+    const corners = [[ax, y0], [bx, y0], [bx, y1], [ax, y1]].map(tf);
+    drawQuad(tex, corners, { crop: [c0 / TR.cw, 0, c1 / TR.cw, 1], depth: null });
+  });
+}
+let SPARK = null;
+S.bayA = (lt, u, t, fx, c) => {
+  const k = E.ioS(u);
+  const par = [lerp(-0.006, 0.008, k), lerp(0.002, -0.002, k)], focus = 0.12;
+  const cam = { cx: lerp(0.485, 0.5, k), cy: lerp(0.52, 0.5, k), zoom: lerp(1.03, 1.08, k), par, focus };
+  flashIn(fx, lt, 0.1);
+  // back: the whole picture, of which only the upper sky shows, drifting slowly left; front: the plate with that sky cut out
+  bg('bay-sky', Object.assign({ depth: 'bay-d', du: 0.0006 * lt }, cam));
+  bg('bay-clean', Object.assign({ depth: 'bay-d' }, cam));
+  // glints on the water, confined to measured bright sea points, twinkling on 2s
+  const x = c2d();
+  if (SPARK) {
+    const st = on2s(t, 12);
+    SPARK.forEach(([pu, pv], i) => {
+      const ph = hash(i * 3.3) * 6.28, sp = 1.3 + hash(i * 5.1) * 2.2;
+      const a = Math.pow(Math.max(0, Math.sin(st * sp + ph)), 10);
+      if (a < 0.02) return;
+      const [sx, sy] = toScreen(pu, pv);
+      star(sx, sy, (8 + 10 * hash(i + 9)) * (0.6 + pv), a * 0.9, x);
+    });
+  }
+  draw2d();
+  // the train travels toward the city at constant speed (it is already moving when the shot starts)
+  drawTrain(80 * lt, t, par, focus);
+  x.clearRect(0, 0, W, H);
+  // the sun: a soft glow that breathes a little
+  const [sx, sy] = toScreen(P.sun.bay[0], P.sun.bay[1]);
+  const pulse = 0.5 + 0.5 * Math.sin(t * 2.4);
+  const g = x.createRadialGradient(sx, sy, 0, sx, sy, 90);
+  g.addColorStop(0, `rgba(255,245,215,${0.12 + 0.08 * pulse})`); g.addColorStop(1, 'rgba(255,245,215,0)');
+  x.globalCompositeOperation = 'lighter'; x.fillStyle = g; x.fillRect(sx - 100, sy - 100, 200, 200);
+  draw2d();
+  fx.flare = [sx / W, sy / H]; fx.flareAmt = 0.03 + 0.015 * pulse;
+  fx.leak = 0.05; fx.bloom = 0.22; fx.thr = 0.85; fx.vig = 0.22;
+};
+// ---------- Version C: side-on silhouette against a golden sky, the train cel sliding across ----------
+const CT = { W: 3072, H: 2048, box: [515, 1496, 1285, 1567] };
+S.bayC = (lt, u, t, fx, c) => {
+  const k = E.ioS(u);
+  const cam = { cx: lerp(0.45, 0.5, k), cy: 0.55, zoom: 1.12, par: [lerp(-0.008, 0.008, k), 0], focus: 0.2, depth: 'c-clean-d' };
+  flashIn(fx, lt, 0.12, [1, 0.9, 0.7]);
+  bg('c-clean', cam);
+  // the train: a rigid cel sliding right along the level beam, a tiny bob, parallax matched to the beam's depth (= focus, so none)
+  const [bx0, by0, bx1, by1] = CT.box;
+  const dx = 150 + 210 * lt;                       // 2x px; the train is already moving when the cut lands
+  const bob = Math.sin(t * 9) * 0.6;
+  const p0 = toScreen((bx0 + dx) / CT.W, (by0 + bob) / CT.H), p1 = toScreen((bx1 + dx) / CT.W, (by1 + bob) / CT.H);
+  drawQuad(TEX['c-train'], [[p0[0], p0[1]], [p1[0], p0[1]], [p1[0], p1[1]], [p0[0], p1[1]]], { depth: null });
+  const x = c2d();
+  // sea glitter under the sun, floating dust in the light, lens glints
+  const [g0x, g0y] = toScreen(0.52, 0.8), [g1x, g1y] = toScreen(0.95, 0.97);
+  waterSparkle(x, t, [g0x, g0y, g1x - g0x, g1y - g0y], 40, 5, 14);
+  const st = on2s(t, 12);
+  for (let i = 0; i < 46; i++) {
+    const ph = (hash(i * 1.7) + st * (0.02 + 0.03 * hash(i * 2.3))) % 1;
+    const px = (hash(i * 4.1) * 1.2 - 0.1 + ph * 0.15) * W, py = (0.15 + 0.7 * hash(i * 6.7) - ph * 0.1) * H;
+    const a = Math.sin(ph * Math.PI) * (0.25 + 0.35 * hash(i));
+    const r = 2 + 4 * hash(i * 9.1);
+    const g = x.createRadialGradient(px, py, 0, px, py, r * 2);
+    g.addColorStop(0, `rgba(255,235,190,${a})`); g.addColorStop(1, 'rgba(255,235,190,0)');
+    x.fillStyle = g; x.beginPath(); x.arc(px, py, r * 2, 0, 7); x.fill();
+  }
+  draw2d();
+  const [sx, sy] = toScreen(0.7, 0.745);
+  fx.flare = [sx / W, sy / H]; fx.flareAmt = 0.1 + 0.03 * Math.sin(t * 2);
+  fx.leak = 0.06; fx.bloom = 0.18; fx.thr = 0.88; fx.vig = 0.35; fx.grain = 0.06; fx.ca = 0.0015;
 };
 S.oncoming = (lt, u, t, fx, c) => {
   const o = { zoom: lerp(1.12, 1.3, u), rot: lerp(-0.05, 0.04, E.ioC(u)), cx: 0.5, cy: 0.5, shake: shake(t, 6), depth: null };
