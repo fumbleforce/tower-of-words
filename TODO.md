@@ -41,5 +41,6 @@ Read GUIDE.md first. Pick up from here next session.
 - Read every branch as transcripts after each change.
 
 ## Tooling and knowledge
+- Repo cleanup, after the running agents finish: move every proto2 page except the active ones (decide2, music, voice-mio, video2, locations1) and the old proto/ to ~/repo/japanese-archive; first copy the approved reference images to art/approved/ and the voice clips from proto2/audition to tools/voice-refs/, and repoint tools. Rewriting git history to drop old media needs Jørgen's go-ahead.
 - Workflows are saved in tools/workflows and ~/ai/workflows. Save every new one there.
 - Replicate spend is about $14.22 of the $20 cap; images, music and cutouts are now local, and only voices remain on Replicate.
