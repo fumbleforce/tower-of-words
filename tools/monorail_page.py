@@ -50,7 +50,7 @@ SHOW = {
     'interior': ['interior-rdbt-0.35', 'interior-calm-rdbt-0.25-701', 'interior-oneobs-0.35', 'interior-oneobs-0.45'],
     'side-empty': ['side-empty-calm-rdbt-0.35-701', 'side-empty-calm-rdbt-0.35-702', 'side-empty-calm-rdbt-0.45-702', 'side-empty-rdbt-0.35', 'side-empty-oneobs-0.35'],
     'progress': ['progress-mid-rdbt-0.85-711', 'progress3-beam-rdbt-0.7-721', 'progress3-beam-rdbt-0.6-721',
-                 'progress3-near-crop-rdbt-0.55-721', 'progress3-near-crop-rdbt-0.45-721', 'progress-near-oneobs-0.85-711'],
+                 'progress3-near-crop-rdbt-0.55-721', 'progress3-near-crop-rdbt-0.45-721'],
 }
 NOTE = {
     'bay-rdbt-0.45': 'My pick for the style match: same composition, RDBT line and colour.',
@@ -69,6 +69,10 @@ NOTE = {
     'progress3-near-crop-rdbt-0.55-721': 'Near: the island half of bay-rdbt-0.45 cropped, scaled up and repainted at 0.55. Same towers and viaduct as the master, so it reads as the same place, closer.',
     'progress3-near-crop-rdbt-0.45-721': 'Same crop at 0.45; the reviewer saw a melted shape on the far viaduct.',
     'progress-near-oneobs-0.85-711': 'One Obsession: good distance and a four-car train, but soft (style match 2/5).',
+}
+REJECTED = {  # Jørgen's verdicts on this page
+    'progress3-beam-rdbt-0.7-721': 'Rejected (Jørgen): the cars melt into the rail and become part of the track.',
+    'progress3-beam-rdbt-0.6-721': 'Rejected (Jørgen): the cars melt into the rail and become part of the track.',
 }
 DESC = {
     'bay': 'The bay master repainted with RDBT. 0.35 to 0.55 keep the geometry; 0.65 starts to redesign the track.',
@@ -91,9 +95,10 @@ for k, (orig, path) in SRC.items():
         r = res[f'stylematch/{name}']
         m = MODEL_NAME[r['model']]
         base = os.path.basename(r['init']).replace('.png', '').replace('.webp', '')
-        figs.append(fig(name + '.webp', name, NOTE.get(name, ''), r['prompt'],
+        note = (REJECTED[name] + ' ' if name in REJECTED else '') + NOTE.get(name, '')
+        figs.append(fig(name + '.webp', name, note, r['prompt'],
                         f'{m}, img2img from {base}, strength (denoise) {r["denoise"]:g}, seed {r["seed"]}, {r["w"]}×{r["h"]}, Euler A 30 steps, CFG 5',
-                        ver.get(f'stylematch/{name}.png')))
+                        ver.get(f'stylematch/{name}.png'), cls='rej' if name in REJECTED else ''))
     title = 'Progress toward the island (outside shots)' if k == 'progress' else f'Style match: {k}'
     sections.append((title, DESC[k], f'<div class="grid">{"".join(figs)}</div>'))
 
@@ -106,7 +111,7 @@ main{max-width:2100px;margin:0 auto;padding:24px 16px 80px}h1{margin:0 0 6px;fon
 section{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:14px;margin:18px 0}h2{margin:0 0 4px;font-size:20px}.desc{margin:0 0 12px;color:var(--mute);max-width:900px}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,560px),1fr));gap:16px}
 .strip{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr));gap:12px}
-figure{margin:0;background:#eef1f3;border-radius:8px;padding:6px}figure.cur{background:#e3e6e9}
+figure{margin:0;background:#eef1f3;border-radius:8px;padding:6px}figure.cur{background:#e3e6e9}figure.rej{background:#f3e3e0}figure.rej img{opacity:.6}
 figure img{width:100%;display:block;border-radius:5px;cursor:zoom-in;background:#d5d9dd}
 figcaption{padding:6px 4px 2px}h3{margin:0;font-size:15px}.note{margin:4px 0;font-size:15px}.meta{margin:2px 0;font-size:12px;color:var(--mute)}
 .verdict{margin:4px 0;font-size:14px}.verdict.ok{color:#0b6b3a}.verdict.bad{color:#9a2a1c}
