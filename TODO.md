@@ -3,7 +3,7 @@
 Read GUIDE.md first. Pick up from here next session.
 
 ## Waiting on Jørgen
-- **Cast round 2:** approved Goro a-202, Jun a-202, Ishibashi b-201, Saki a-201. To do: Yuzuki c-202 with different hair and a smaller chest; Kiyoko outfits (not black) on her s101 face; Nanami options; the basement office from option 2 (more space, chairs, ramen cups). The rest renders with tools/decide2.py.
+- **Cast round 2 (second pass, 2026-09-25):** approved Goro a-202, Jun a-202, Ishibashi b-201, Saki a-201. Now on proto2/decide2 for picking: Yuzuki (c-202 with long hair in four colours, flat chest), Kiyoko (s101 face, four non-black outfits), Nanami (four new takes based on real building-security jobs), the basement office (option 2 widened, window moved high, chairs, ramen cups), and five new small-chested women as ideas (Tsubasa, Fumiko, Chihiro, Kanae, Sumi). Renders with tools/decide2b.py; rejected renders are in art/production/D2/rejected.
 - **Mio's voice:** candidate A (low, slightly husky) chosen; all 35 lines regenerated with it and in the game. Listen on proto2/voice-mio. Lowest line: 「……動かないで。……あと五分。」 (median 191 Hz, a sleepy whisper). 「そ。」 is too short to measure.
 - **Video round 2 (proto2/video2):** the three local options side by side on the same sources (Rei, Mio, monorail), plus a live puppet demo of Mio that lip-syncs to her voice line. By my frame checks, Wan 2.2 14B + Lightning 4-step (about 3.5 min per 5 s clip) and the DaSiWa 14B merge look best; the 5B moves well with timed prompts but is slower; the plain 5B prompt stays frozen. Needs Jørgen's verdict: video for key cutscenes, the puppet for portraits, or both. Cloud (Kling, Seedance, Veo) is still the fallback.
 - Music settled (2026-09-25): Lyria for background loops, the softer-mastered YuE2 opening theme for the title. Nothing waiting.
@@ -22,7 +22,6 @@ Read GUIDE.md first. Pick up from here next session.
 - Environments batch and story-scene CGs for days 1–5, only after the model and cast are locked.
 - Action scenes (shootout, swim, volleyball) need composition control (a pose or layout sketch as input, or regional prompting). Research and set up before retrying.
 - Fix Mio's game-night reward image (brand-like logo on the can, "MO" text on the shirt). Fix the faint pale fringe on Yuzuki's hair cutout.
-- The basement office window sits mid-wall (should be high); superseded by the decide2 office round.
 
 ## Game (builder owns game/)
 - Player voice lines for the two new coffee-machine choices (たたく, 「動いて」); commit the builder's two uncommitted voice files.
