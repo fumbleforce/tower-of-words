@@ -9,16 +9,27 @@ OUTD = os.path.join(ROOT, 'proto2', 'locations1')
 os.makedirs(OUTD, exist_ok=True)
 picks = json.load(open(os.path.join(L1, 'picks.json')))
 man = {e['name']: e for e in json.load(open(os.path.join(ROOT, 'art', 'production', 'manifest.json'))) if e['batch'] == 'L1'}
+B1 = os.path.join(ROOT, 'art', 'production', 'B1')
+b1picks = json.load(open(os.path.join(B1, 'picks.json'))) if os.path.exists(os.path.join(B1, 'picks.json')) else {}
+b1man = {e['name']: e for e in json.load(open(os.path.join(ROOT, 'art', 'production', 'manifest.json'))) if e['batch'] == 'B1'}
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), 'blockout'))
+from shots import STAGING as B1STAGING
 
 SECTIONS = [
-    ('monorail', 'Monorail (inside the carriage), redo', 'game/img/bg/monorail.webp',
-     'Redone after your note that round 1 put the carriage at sea level. The car rides on the beam about 15 m up, so the side windows show sky, a low horizon and water far below. No beam or pillars outside the side windows; the island city is small on the horizon on the right (exit) side.'),
+    ('monorail', 'Monorail: final approach, round 3', 'game/img/bg/monorail.webp',
+     'Redone after "it\'s literally a boat now" and "where is it going?". The shot is now the moment of the announcement 「まもなく、天川シティ中央駅です。お出口は右側です。」: '
+     'the last stretch of guideway, the city close, then the platform on the right. Following your interior master, the angle is the straight-on right-hand window. '
+     'Only two images passed my checks; each says how it was made. Not shown because they failed: the long aisle toward the front window from the Blender blockout '
+     '(the beam reads as a road, water near the sill), the straight-on door view from the blockout (reads as standing on a platform), '
+     'and every exterior shot of the train heading into the station (the model draws 5 to 8 cars instead of three, or puts the headlights toward the camera).'),
     ('gate', 'Gate (security entrance)', 'game/img/bg/gate.webp',
      'Picked: gate-lobby-2103.'),
     ('copyroom', 'Copy room', 'game/img/bg/copyroom.webp',
      'Picked: copyroom-copier-4203.'),
-    ('sales', 'Sales (third floor)', 'game/img/bg/sales.webp',
-     'Redone after your note that round 1 was too saturated. Back to the plain house prompt the copy room uses, with one change at a time from the earlier semi-realistic version, checked against copy room 4203 for colour.'),
+    ('sales', 'Sales, round 3', 'game/img/bg/sales.webp',
+     'Redone after "ugly, saturated and a nonsensical room". Mid-morning, seen from the entrance: a real Japanese island layout (島型), grey steel desks in facing pairs, '
+     'the section chief\'s desk at the head, phones and piles of paper, blinds half down, muted colours like copy room 4203. '
+     'The layout comes from a Blender blockout used as a line control; the prompt is five short sentences. Plain short prompts without the control gave nicer light but classroom rows.'),
 ]
 
 
@@ -44,6 +55,17 @@ for sid, title, cur, desc in SECTIONS:
         st = STAGING.get(STAGING_ALIAS.get(job, job), {})
         items.append({'f': name + '.webp', 't': name, 'note': note, 'beat': st.get('beat', ''), 'cam': st.get('camera', ''), 'prompt': e['prompt'], 'neg': e['negative'],
                       'meta': f"RDBT Anima, seed {e['seed']}, {e['w']}x{e['h']}, Euler A, 30 steps, CFG 5"})
+    # Round 3 (tools/blockout/): composition control, short prompts and compositing. picks: {name: {"note", "how", "job"}}
+    for name, pk in b1picks.items():
+        if not name.startswith(sid) and not (sid == 'monorail' and name.startswith(('mono', 'comp'))):
+            continue
+        webp(os.path.join(B1, name + '.png'), os.path.join(OUTD, name + '.webp'))
+        e = b1man.get(name, {})
+        st = B1STAGING.get(pk['job'], {})
+        items.append({'f': name + '.webp', 't': st.get('title', name), 'sub': name, 'note': pk['note'], 'beat': st.get('beat', ''),
+                      'cam': st.get('camera', ''), 'stage': [('Height', st.get('height', '')), ('In front of the lens', st.get('front', '')),
+                                                             ('Behind the camera', st.get('behind', '')), ('Must hold', st.get('sense', ''))],
+                      'prompt': pk.get('prompt') or e.get('prompt', ''), 'neg': e.get('negative', ''), 'meta': pk['how']})
     out.append({'id': sid, 'title': title, 'desc': desc, 'items': items})
 
 cards = []
@@ -54,6 +76,8 @@ for s in out:
         cls = 'cur' if it.get('cur') else ('picked' if it['note'].startswith('PICKED') else '')
         body = f'<p class="beat">Intent: {html.escape(it["beat"])}</p>' if it.get('beat') else ''
         body += f'<p class="meta">Camera: {html.escape(it["cam"])}</p>' if it.get('cam') else ''
+        body += ''.join(f'<p class="meta">{k}: {html.escape(v)}</p>' for k, v in it.get('stage', []) if v)
+        body += f'<p class="meta">File: {html.escape(it["sub"])}</p>' if it.get('sub') else ''
         body += f'<p class="note">{html.escape(it["note"])}</p>' if it['note'] else ''
         if it['prompt']:
             body += (f'<p class="meta">{html.escape(it["meta"])}</p><details open><summary>Prompt</summary><p class="prompt">{html.escape(it["prompt"])}</p></details>'
@@ -78,7 +102,7 @@ details{font-size:13px;color:var(--mute)}summary{cursor:pointer}.prompt{margin:4
 #lb p{color:#dfe5ea;margin:8px 16px;text-align:center;font-size:15px}
 </style></head><body><main>
 <h1>Day-1 locations</h1>
-<p class="intro">Round 2. The gate and copy room are picked. The monorail and Sales are redone after your notes. All drawn with RDBT Anima at the game's shape. The basement office is in the cast round (decide2). Each set starts with the current game image in grey. Nothing is in the game yet. Click an image to enlarge; arrow keys step through, Esc closes.</p>
+<p class="intro">Round 3. The gate and copy room are picked. The monorail and Sales are redone after your notes, with composition control (a 3D blockout as a line or depth guide) and compositing. All drawn with RDBT Anima at the game's shape. Under each image: what the shot is meant to show, where the camera is, what must hold, and how it was made. Each set starts with the current game image in grey. Nothing is in the game yet. Click an image to enlarge; arrow keys step through, Esc closes.</p>
 ''' + ''.join(cards) + '''</main><div id="lb"><div><img alt=""><p></p></div></div>
 <script>
 const imgs=[...document.querySelectorAll('figure img')],lb=document.getElementById('lb'),li=lb.querySelector('img'),lp=lb.querySelector('p');let cur=-1;

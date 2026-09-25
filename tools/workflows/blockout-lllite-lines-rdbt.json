@@ -1,0 +1,135 @@
+{
+ "1": {
+  "class_type": "UNETLoader",
+  "inputs": {
+   "unet_name": "rdbtAnima.safetensors",
+   "weight_dtype": "default"
+  }
+ },
+ "2": {
+  "class_type": "CLIPLoader",
+  "inputs": {
+   "clip_name": "qwen_3_06b_base.safetensors",
+   "type": "stable_diffusion"
+  }
+ },
+ "3": {
+  "class_type": "VAELoader",
+  "inputs": {
+   "vae_name": "qwen_image_vae.safetensors"
+  }
+ },
+ "4": {
+  "class_type": "CLIPTextEncode",
+  "inputs": {
+   "text": "anime screenshot, anime coloring, 2d, cel shading, clean lineart, detailed anime background art, hand-painted anime background, no humans, scenery, The sales department of a Japanese company office, seen from the entrance. Grey steel desks pushed together in facing pairs make three long islands, and the section chief's desk sits across the head of each island. Office chairs, a desk phone at every seat, binders and piles of documents. A whiteboard on the back wall. A row of windows on the right with the blinds half down, overcast sky outside. Soft even fluorescent light, grey carpet, muted grey and off-white colours.",
+   "clip": [
+    "2",
+    0
+   ]
+  }
+ },
+ "5": {
+  "class_type": "CLIPTextEncode",
+  "inputs": {
+   "text": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, people, person, 1girl, 1boy, crowd, character, readable text, logo",
+   "clip": [
+    "2",
+    0
+   ]
+  }
+ },
+ "6": {
+  "class_type": "EmptyLatentImage",
+  "inputs": {
+   "width": 1216,
+   "height": 832,
+   "batch_size": 1
+  }
+ },
+ "7": {
+  "class_type": "KSampler",
+  "inputs": {
+   "model": [
+    "A0",
+    0
+   ],
+   "positive": [
+    "4",
+    0
+   ],
+   "negative": [
+    "5",
+    0
+   ],
+   "latent_image": [
+    "6",
+    0
+   ],
+   "seed": 8303,
+   "steps": 30,
+   "cfg": 5.0,
+   "sampler_name": "euler_ancestral",
+   "scheduler": "normal",
+   "denoise": 1.0
+  }
+ },
+ "8": {
+  "class_type": "VAEDecode",
+  "inputs": {
+   "samples": [
+    "7",
+    0
+   ],
+   "vae": [
+    "3",
+    0
+   ]
+  }
+ },
+ "9": {
+  "class_type": "SaveImage",
+  "inputs": {
+   "images": [
+    "8",
+    0
+   ],
+   "filename_prefix": "blockout/sales-lines"
+  }
+ },
+ "P0": {
+  "class_type": "ModelPatchLoader",
+  "inputs": {
+   "name": "anima-lllite-lineart-1.safetensors"
+  }
+ },
+ "I0": {
+  "class_type": "LoadImage",
+  "inputs": {
+   "image": "sales-lines.png"
+  },
+  "is_changed": [
+   "51295b54600344d67b9600f9e5ec090222299ccb7ab468a80c873e6024870d67"
+  ]
+ },
+ "A0": {
+  "class_type": "AnimaLLLiteApply",
+  "inputs": {
+   "model": [
+    "1",
+    0
+   ],
+   "model_patch": [
+    "P0",
+    0
+   ],
+   "image": [
+    "I0",
+    0
+   ],
+   "strength": 0.7,
+   "start_percent": 0.0,
+   "end_percent": 0.8
+  }
+ }
+}

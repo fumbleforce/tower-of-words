@@ -34,3 +34,10 @@ Prompt pattern that made the difference: describe the shot and camera first, the
 ## Music
 - `yue2-instrumental-lora-api.json`: YuE2 3B (bf16) with the instrumental add-on on the CLIP slot and the v9 sound add-on on MODEL. The style box takes tags; the lyrics box takes only `[instrumental]` or section tags, one per line. Output goes to ~/ai/ComfyUI/output/music2/.
 - `stable-audio-3-bgm-api.json`: Stable Audio 3 Medium, 90 s instrumental, 8 steps. Write the prompt as one sentence ending in "BPM: 75. Length: 90 seconds".
+
+## Composition control (Anima LLLite, 2026-09-25)
+The layout comes from a control image; the prompt stays short. The patches are in ComfyUI/models/model_patches (from kohya-ss/Anima-LLLite) and load with the built-in **Load Model Patch** and **Apply Anima LLLite** nodes, placed between the model loader and the sampler. Control images come from the Blender blockouts in tools/blockout (see GUIDE.md, Art).
+- `blockout-lllite-lines-rdbt.json`: lineart control (black lines on white) at strength 0.7. Used for Sales (tools/blockout/shots/sales-lines.png).
+- `blockout-lllite-depth-lines-rdbt.json`: depth (white = near) and lineart chained, strength 1.0 each, active for the first 80% of the steps. Used for the monorail aisle tests.
+- `lllite-inpaint-remove-rdbt.json`: masked img2img with the LLLite inpainting patch (it gets the picture and the mask). Removes or replaces one region without a seam; used to take the man out of the interior master. Mask: white = repaint.
+- `composite-window-blend-rdbt.json`: the last step of the window composite: a masked img2img at denoise 0.4 over a pasted window view, so glass and light match the room (tools/blockout/composite.py does the whole chain).
