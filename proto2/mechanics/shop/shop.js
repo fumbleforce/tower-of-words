@@ -15,7 +15,7 @@ const GOODS = [
   ['ノート', 'notebook', 2], ['シャワー', 'shower', 2], ['トイレ', 'toilet', 2], ['ソファ', 'couch', 2], ['バッグ', 'handbag', 2], ['オレンジ', 'orange', 2], ['ボール', 'soccer-ball', 2],
   ['ハンバーガー', 'hamburger', 3], ['スーツケース', 'suitcase', 3], ['ヘッドホン', 'headphones', 3], ['プリンター', 'printer', 3], ['パソコン', 'laptop', 3],
   ['スマホ', 'device-mobile', 3], ['ゲーム', 'game-controller', 3], ['エレベーター', 'elevator', 3], ['ポップコーン', 'popcorn', 3], ['キーボード', 'keyboard', 3],
-  ['カレンダー', 'calendar', 3], ['トロフィー', 'trophy', 3], ['フォーク', 'fork-knife', 3], ['バスケットボール', 'basketball', 3], ['タブレット', 'device-tablet', 3],
+  ['カレンダー', 'calendar', 3], ['トロフィー', 'trophy', 3], ['フォーク', 'fork-knife', 3], ['バスケットボール', 'basketball', 3], 
 ].map(([w, icon, t]) => ({ w, icon, t }));
 // Letters that are easy to confuse. A fake tag swaps one of them.
 const LOOK = { シ: 'ツ', ツ: 'シ', ソ: 'ン', ン: 'ソ', ク: 'ワ', ワ: 'ク', ス: 'ヌ', チ: 'テ', テ: 'チ', ル: 'レ', レ: 'ル', マ: 'ム', ウ: 'ワ', コ: 'ユ', ト: 'ヒ', ノ: 'メ' };
@@ -26,7 +26,7 @@ function fake(w) {
 }
 
 const cfg = l => [
-  { tiers: [1], shelf: 5, fakes: 0, abc: true },
+  { tiers: [1], shelf: 6, fakes: 0, abc: true },
   { tiers: [1, 2], shelf: 6, fakes: 0, abc: true },
   { tiers: [1, 2], shelf: 7, fakes: 1, abc: true },
   { tiers: [2, 3], shelf: 8, fakes: 1, abc: true },
@@ -94,7 +94,7 @@ async function run(level) {
     wordSeen(want.map(g => g.w));
     wordSuccess(want.filter(g => !lookedUp.has(g.w)).map(g => g.w));
     prog.children[r].className = ok ? 'done' : 'miss';
-    const d = ad.push({ ok, lookups: it.lookups, ms: it.ms });
+    const d = ad.push({ ok: miss <= 1, lookups: it.lookups, ms: it.ms });
     if (d) { ses.level = ad.level; setLevel(PROTO, ad.level); showLevel(ad.level); toast(d > 0 ? 'Level up: longer words, bigger shelf' : 'Easing off: shorter words', d > 0 ? 'up' : 'down'); }
     await sleep(600);
   }

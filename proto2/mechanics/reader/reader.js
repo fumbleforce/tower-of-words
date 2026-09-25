@@ -19,6 +19,14 @@ const LINES = [
   { t: 1, jp: 'コーヒー、{飲む|のむ}？', q: ['Want some coffee?', 'Do you like coffee?', "The coffee's gone"] },
   { t: 1, jp: '{先|さき}に{行って|いって|行く|te-form: asking someone}。', q: ['Go on ahead', 'Come with me', "Don't go"] },
   { t: 1, jp: '{もう}{帰る|かえる}の？', q: ['Heading home already?', 'When are you going home?', "You're late"] },
+  { t: 1, jp: 'ここ、{座って|すわって|座る|te-form: asking someone}。', q: ['Sit here', 'Stand here', 'Wait here'] },
+  { t: 1, jp: '{何時|なんじ}に{帰る|かえる}？', q: ['What time are you going home?', 'What time did you get here?', 'What time is it?'] },
+  { t: 2, jp: '{今日|きょう}は{休んで|やすんで|休む|~ていい: you may}いいよ。', q: ['You can take today off', 'You worked hard today', 'Today is a holiday'] },
+  { t: 2, jp: 'もう{始めよう|はじめよう|始める|volitional: let\'s}。', q: ["Let's start now", "Let's stop now", "It's already started"] },
+  { t: 3, jp: '{会議|かいぎ}、もう{始めて|はじめて|始める|~てもいい: may I}もいい？', q: ['Can we start the meeting now?', 'Is the meeting over?', 'Can I skip the meeting?'] },
+  { t: 3, jp: '{疲れたら|つかれたら|疲れる|~たら: when, once}、{座って|すわって|座る|te-form}ね。', q: ['Sit down when you get tired', "Don't sit down yet", 'You look tired'] },
+  { t: 4, jp: '{早めに|はやめに|早め}{帰って|かえって|帰る|te-form}、{休んで|やすんで|休む|te-form}。', q: ['Go home early and rest', 'Come in early tomorrow', 'Rest a bit, then come back'] },
+  { t: 4, jp: '{帰る|かえる}{前|まえ}に、{電気|でんき}{消して|けして|消す|te-form}ね。', q: ['Turn off the lights before you go home', 'Turn on the lights when you get home', 'The lights went out'] },
   { t: 1, jp: 'それ、{本当|ほんとう}？', q: ['Is that true?', 'Is that yours?', 'Is that new?'] },
   { t: 2, jp: '{駅|えき}まで{歩こう|あるこう|歩く|volitional: let\'s}。', q: ["Let's walk to the station", "Let's take a taxi", 'The station is far'] },
   { t: 2, jp: '{電車|でんしゃ}、{遅れてる|おくれてる|遅れる|~ている: going on now}。', q: ['The train is running late', 'The train is packed', 'The train already left'] },
@@ -26,7 +34,7 @@ const LINES = [
   { t: 2, jp: '{窓|まど}、{開けて|あけて|開ける|te-form}くれる？', q: ['Can you open the window?', 'Can you close the window?', 'Is the window open?'] },
   { t: 2, jp: '{お昼|おひる}、{一緒|いっしょ}に{行こう|いこう|行く|volitional: let\'s}。', q: ["Let's go to lunch together", 'I already had lunch', 'Lunch is cancelled'] },
   { t: 2, jp: '{名前|なまえ}、{何|なん}だっけ？', q: ['What was your name again?', 'Nice name', 'Write your name here'] },
-  { t: 2, jp: 'エアコン、{寒すぎ|さむすぎ|寒い|~すぎ: too much}。', q: ['The AC is way too cold', 'The AC is broken', 'Turn the AC on'] },
+  { t: 2, jp: 'エアコン、{強すぎ|つよすぎ|強い|~すぎ: too much}。', q: ['The AC is turned up too high', 'The AC is broken', 'Turn the AC on'] },
   { t: 2, jp: '{傘|かさ}、{忘れた|わすれた|忘れる|past}。', q: ['I forgot my umbrella', 'I lost my wallet', "It's raining"] },
   { t: 2, jp: '{ここ}、{座って|すわって|座る|~てもいい: may I}もいい？', q: ['Can I sit here?', 'Please sit down', "This seat's taken"] },
   { t: 2, jp: '{先週|せんしゅう}の{映画|えいが}、どうだった？', q: ['How was the movie last week?', 'Want to see a movie?', 'The movie starts soon'] },
@@ -72,16 +80,16 @@ const KATA = [
 const KANJI_CHECK = [
   { w: '人', t: 1, a: ['ひと', 'いり', 'はち', 'にゅう'] },
   { w: '日本', t: 1, a: ['にほん', 'にちもと', 'ひほん', 'にっぽ'] },
-  { w: '今日', t: 1, a: ['きょう', 'いまひ', 'こんにち', 'きのう'] },
+  { w: '今日', t: 1, a: ['きょう', 'いまび', 'きゅう', 'きのう'] },
   { w: '電車', t: 1, a: ['でんしゃ', 'でんき', 'でんわ', 'くるま'] },
   { w: '名前', t: 1, a: ['なまえ', 'めいぜん', 'なまい', 'なもと'] },
   { w: '午後', t: 1, a: ['ごご', 'ごぜん', 'うしろ', 'こうご'] },
-  { w: '仕事', t: 2, a: ['しごと', 'しじ', 'じむ', 'つかえ'] },
-  { w: '地下', t: 2, a: ['ちか', 'じした', 'ちげ', 'ちかい'] },
-  { w: '写真', t: 2, a: ['しゃしん', 'しゃじん', 'うつしま', 'しゃせん'] },
-  { w: '会議', t: 3, a: ['かいぎ', 'かいしゃ', 'あいぎ', 'かいけい'] },
-  { w: '資料', t: 3, a: ['しりょう', 'しりつ', 'ざいりょう', 'しりょ'] },
-  { w: '営業', t: 4, a: ['えいぎょう', 'えいぎ', 'えいごう', 'かいぎょう'] },
+  { w: '仕事', t: 2, a: ['しごと', 'しこと', 'じごと', 'しっこと'] },
+  { w: '地下', t: 2, a: ['ちか', 'じか', 'ちした', 'ちげ'] },
+  { w: '写真', t: 2, a: ['しゃしん', 'しゃじん', 'しゃし', 'しゃっしん'] },
+  { w: '会議', t: 3, a: ['かいぎ', 'かいき', 'がいぎ', 'かいじ'] },
+  { w: '資料', t: 3, a: ['しりょう', 'しりょ', 'じりょう', 'しりゅう'] },
+  { w: '営業', t: 4, a: ['えいぎょう', 'えいぎょ', 'えぎょう', 'えいごう'] },
 ];
 
 const { stage, side } = shell({ proto: PROTO, title: 'Adaptive reader', side: `
@@ -128,7 +136,9 @@ async function check() {
     box.querySelector(`[data-a="${k.a[0]}"]`).classList.add('right');
     await sleep(a === k.a[0] ? 300 : 700);
   }
-  let level = confirmed.length ? Math.max(...confirmed.map(k => k.t)) + 1 : (claimed.length ? 1 : 0);
+  const top = confirmed.length ? Math.max(...confirmed.map(k => k.t)) : 0;
+  // One step above the hardest tier read, only when two words at that tier were read.
+  let level = confirmed.length ? top + (confirmed.filter(k => k.t === top).length >= 2 ? 1 : 0) : (claimed.length ? 1 : 0);
   for (const k of failed) level = Math.min(level, k.t);
   const hiraRate = res.hira / Math.max(1, res.hiraN);
   if (hiraRate < .5) level = Math.min(level, 1);
@@ -147,6 +157,7 @@ async function check() {
     <p class="muted">The other prototypes start from this level too, and every one of them keeps adjusting as you play.</p>
     <div class="end-row"><button class="btn" id="goRead">Start reading</button></div>`;
   await new Promise(r => $('#goRead', box).onclick = r);
+  history.replaceState(null, '', location.pathname);
   run();
 }
 
@@ -154,7 +165,7 @@ async function check() {
 async function run() {
   let level = levelFor(PROTO) ?? 2;
   showLevel(level); levelInfo(level);
-  const ad = new Adapter(level, { slowMs: 12000 });
+  const ad = new Adapter(level, { slowMs: 12000, win: 4 });
   const ses = new Session(PROTO, level);
   const used = new Set();
   stage.innerHTML = '';

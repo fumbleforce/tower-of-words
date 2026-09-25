@@ -21,6 +21,7 @@ function due() {
 
 function home(flash = []) {
   closeGloss();
+  document.querySelectorAll('.live b').forEach(b => { b.textContent = '-'; });
   const d = due();
   const met = Object.keys(S.words).filter(k => LEX[k]?.en);
   stage.innerHTML = `
@@ -81,13 +82,14 @@ async function check(words) {
     prog.children[i].className = 'now';
     const L = LEX[k];
     const wrong = shuffle(all.filter(x => x !== k && LEX[x].en !== L.en && isKata(x) === isKata(k))).slice(0, 2).map(x => LEX[x].en);
-    const opts = shuffle([L.en, ...wrong]);
+    const bare = s => s.replace(/\s*\([^)]*\)/g, '');
+    const opts = shuffle([L.en, ...wrong]).map(bare);
     area.innerHTML = `<p class="muted">What does it mean?</p><div class="line" lang="ja">${renderJP(`{${k}|${L.r || k}}`, { level: levelFor(PROTO) ?? 2, noRuby: true }).replace('class="w"', 'class="wv"')}</div>
       <div class="opts">${opts.map((o, j) => `<button class="opt" data-j="${j}">${o}</button>`).join('')}<button class="opt ghosty" data-j="-1">Not sure</button></div>`;
     ses.begin(labelJP(`{${k}|${L.r || k}}`, levelFor(PROTO) ?? 2));
     const j = await new Promise(r => area.querySelectorAll('.opt').forEach(b => b.onclick = () => r(+b.dataset.j)));
-    const ok = j >= 0 && opts[j] === L.en;
-    area.querySelectorAll('.opt').forEach(b => { b.disabled = true; const jj = +b.dataset.j; if (jj >= 0 && opts[jj] === L.en) b.classList.add('right'); else if (jj === j) b.classList.add('wrong'); });
+    const ok = j >= 0 && opts[j] === bare(L.en);
+    area.querySelectorAll('.opt').forEach(b => { b.disabled = true; const jj = +b.dataset.j; if (jj >= 0 && opts[jj] === bare(L.en)) b.classList.add('right'); else if (jj === j) b.classList.add('wrong'); });
     if (ok) wordSuccess([k]); else wordLookup(k);
     ses.end(ok);
     prog.children[i].className = ok ? 'done' : 'miss';

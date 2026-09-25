@@ -27,6 +27,6 @@
 .clock, .num { height: 64px; font: 600 24px var(--mono); }
 .thing { height: 84px; font-size: 44px; display: grid; place-items: center; }
 .people { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
-.person { width: 72px; height: 110px; font-size: 64px; display: grid; place-items: center; color: var(--c); }
+.person { width: 72px; height: 110px; font-size: 64px; display: grid; place-items: center; color: var(--c); background: #6b7282; }
 .week { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; width: 100%; max-width: 560px; }
 .wday { height: 64px; font: 600 15px var(--mono); }

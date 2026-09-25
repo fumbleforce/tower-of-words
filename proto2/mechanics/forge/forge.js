@@ -46,7 +46,9 @@ function endings(id) {
   if (v.cls === 'iku') return { te: 'って', imp: 'け', dict: 'く', past: 'った', neg: 'かないで', wrong: ['いて', 'きて'] };
   const te = TE[last], row = U_ROW[last];
   const past = te.replace('て', 'た').replace('で', 'だ');
-  const wrongPool = ['って', 'いて', 'んで', 'して', row[1] + 'て'].filter(x => x !== te);
+  // Wrong endings that happen to be real words (帰して, 回して, 急いて) are left out.
+  const REAL = { '帰る': ['して'], '回る': ['して'], '急ぐ': ['いて'], '出す': [], '落ちる': [] };
+  const wrongPool = ['って', 'いて', 'んで', 'して', row[1] + 'て'].filter(x => x !== te && !(REAL[id] || []).includes(x));
   return { te, imp: row[2], dict: last, past, neg: row[0] + 'ないで', wrong: shuffle(wrongPool).slice(0, 2) };
 }
 // Surface and reading of the stem shown on the tile row.
@@ -92,7 +94,7 @@ const OBJ = [
     fx: { ring: ['It rings louder.', 'shake'], 'ring!': ['It rings like a fire bell.', 'shake'], stop: ['The ringing stops.', 'freeze'], 'stop!': ['The alarm stops so hard it falls off the table.', 'drop'], 'not:ring': ['The alarm goes quiet.', 'freeze'],
       sleep: ['The alarm lies down on its side. Still ringing.', 'spin'], 'not:stop': ['It keeps ringing, proudly.', 'shake'] },
     last: 'It rings again, the same tune as before.' },
-  { icon: 'lightbulb', goal: 'The room is pitch dark. You need light.', verbs: ['つく', '消える'], want: ['on', 'not:off'],
+  { icon: 'lightbulb', goal: 'The room is pitch dark. You need light.', verbs: ['つく', '消える'], want: ['on'],
     fx: { on: ['The light comes on.', 'flash'], 'on!': ['The bulb blazes like a stadium floodlight. Your eyes.', 'flash'], off: ['It was already off. Now it is extra off.', 'shrink'], 'not:on': ['The bulb refuses to light.', 'freeze'], 'not:off': ['The bulb stays dark. It was never going to go out.', 'freeze'] },
     last: 'It flickers once, like it did yesterday, and goes dark.' },
   { icon: 'cat', goal: 'A cat is asleep on your keyboard. Get it off.', verbs: ['来る', '起きる', '寝る', '帰る'], want: ['come', 'home'],
@@ -123,9 +125,9 @@ const OBJ = [
   { icon: 'fan', goal: 'The fan is blowing your papers around. Make it stop.', verbs: ['回る', '止まる', '飛ぶ', '休む'], want: ['stop', 'not:spin', 'rest'],
     fx: { spin: ['It spins faster. Papers everywhere.', 'spin'], 'spin!': ['It spins like a jet engine.', 'spin'], stop: ['The fan stops.', 'freeze'], 'stop!': ['The blades stop dead with a clank.', 'shake'], fly: ['The fan lifts off the desk.', 'fly'], 'not:spin': ['The blades slow and stop.', 'freeze'], rest: ['The fan slows down and rests.', 'shrink'] },
     last: 'It turns its head, like it did a moment ago.' },
-  { icon: 'laptop', goal: 'Your meeting starts now and the laptop is asleep. Wake it.', verbs: ['起きる', '寝る', '始める'], want: ['wake'],
-    fx: { wake: ['The screen lights up.', 'flash'], 'wake!': ['The laptop wakes with every fan at full blast.', 'shake'], sleep: ['It sleeps more deeply.', 'shrink'], 'not:wake': ['The screen stays black.', 'freeze'], 'not:sleep': ['It stirs, then dozes off again.', 'freeze'],
-      'start-t': ['The laptop starts... a forty-minute update.', 'spin'] },
+  { icon: 'laptop', goal: 'Your meeting starts now and the laptop is asleep. Wake it.', verbs: ['起きる', '寝る', '始める'], want: ['wake', 'not:sleep', 'start-t'],
+    fx: { wake: ['The screen lights up.', 'flash'], 'wake!': ['The laptop wakes with every fan at full blast.', 'shake'], sleep: ['It sleeps more deeply.', 'shrink'], 'not:wake': ['The screen stays black.', 'freeze'], 'not:sleep': ['The laptop stops dozing and the screen comes on.', 'flash'],
+      'start-t': ['The laptop starts the meeting for you. You are in.', 'flash'], 'start-t!': ['The laptop starts the meeting, camera on, volume at full.', 'shake'] },
     last: 'It shows the same spinning circle as before.' },
 ];
 const ICON_SWAP = { door: { open: 'door-open' } };
@@ -160,7 +162,7 @@ function resolve(obj, verbId, form) {
 
 async function run(level) {
   showLevel(level);
-  const ad = new Adapter(level, { slowMs: 14000 });
+  const ad = new Adapter(level, { slowMs: 14000, win: 4 });
   const ses = new Session(PROTO, level);
   let clean = 0, loud = 0, fizzles = 0;
   $('#lvlBtn').onclick = () => levelSheet(ad.level, l => { ad.level = l; ad.hist = []; setLevel(PROTO, l); showLevel(l); ses.level = l; });
@@ -237,7 +239,7 @@ async function run(level) {
     if (!won) {
       // Show one way it would have worked.
       const sol = verbs.flatMap(v => ['te', 'neg'].filter(f => formsFor(lv).includes(f)).map(f => ({ v, f }))).find(x => resolve(obj, x.v, x.f).win);
-      if (sol) { const E = endings(sol.v); const st = stemOf(sol.v); react.innerHTML = `Out of casts. This would have worked: <span lang="ja" class="solution">${VERBS[sol.v].cls === 'kuru' ? E[sol.f] : st.s + E[sol.f]}</span>`; react.className = 'react'; await sleep(2200); }
+      if (sol) { const E = endings(sol.v); const st = stemOf(sol.v); react.innerHTML = `Out of casts. This would have worked: <span lang="ja" class="solution">${VERBS[sol.v].cls === 'kuru' ? E[sol.f] : wordHTML({ s: st.s, r: st.r, k: sol.v }, { level: lv }).replace('class="w"', 'class="wv"') + E[sol.f]}</span>`; react.className = 'react'; await sleep(2200); }
     }
     wordSeen(verbs);
     const it = ses.end(won && casts === 1, { casts });

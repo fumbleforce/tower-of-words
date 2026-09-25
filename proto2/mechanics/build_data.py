@@ -10,7 +10,12 @@ points = grammar['points'] if 'points' in grammar else [v for v in grammar.value
 profiles = json.load(open(lang / 'profiles.json'))['profiles']
 
 # Kanji tier from the JLPT level: N5 -> 1, N4 -> 2, N3 -> 3, N2 -> 4, N1 or none -> 5.
-tier = {k: (6 - v['n']) if v.get('n') else 5 for k, v in kanji.items()}
+# Kanji without a JLPT level fall back on the school grade (分 has none in the source lists).
+def tier_of(v):
+    if v.get('n'): return 6 - v['n']
+    g = v.get('gr') or 9
+    return 1 if g == 1 else 2 if g == 2 else 3 if g <= 4 else 5
+tier = {k: tier_of(v) for k, v in kanji.items()}
 # Keys used by the prototypes: JLPT level and the JMdict gloss for each.
 lex_src = (here / 'lexicon.js').read_text()
 keys = re.findall(r"'([^']+)': \{", lex_src)

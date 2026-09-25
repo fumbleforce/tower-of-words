@@ -56,3 +56,10 @@
 @keyframes puff { 50% { opacity: .3; filter: blur(3px); } }
 .a-nod { animation: nod .7s; }
 @keyframes nod { 30% { transform: rotate(8deg); } 60% { transform: rotate(-4deg); } }
+@media (max-width: 520px) {
+  .obj { height: 110px; } .obj > i { font-size: 92px; } .said { height: 64px; } .spell { font-size: 28px; }
+  .goal { font-size: 16px; } .react { min-height: 2.6em; font-size: 15px; }
+  .verb { min-width: 96px; min-height: 54px; font-size: 22px; padding: 6px 30px 6px 12px; }
+  .stem { font-size: 28px; } .tile { min-width: 54px; min-height: 48px; font-size: 21px; padding: 4px 12px; }
+  .ends { margin-top: 12px; }
+}

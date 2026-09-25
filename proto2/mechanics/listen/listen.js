@@ -21,7 +21,7 @@ const NEAR = { 13: [19, 17, 14], 16: [17, 14, 11], 17: [13, 16, 11], 9: [10, 17,
 const COUNTERS = [
   { tpl: 'コピー、{N}お{願い|ねがい}。', c: [[1, '{一部|いちぶ}'], [2, '{二部|にぶ}'], [3, '{三部|さんぶ}'], [4, '{四部|よんぶ}'], [5, '{五部|ごぶ}'], [6, '{六部|ろくぶ}'], [7, '{七部|ななぶ}'], [8, '{八部|はちぶ}'], [10, '{十部|じゅうぶ}']], t: 1 },
   { tpl: '{紙|かみ}、{N}ちょうだい。', c: [[1, '{一枚|いちまい}'], [2, '{二枚|にまい}'], [3, '{三枚|さんまい}'], [4, '{四枚|よんまい}'], [5, '{五枚|ごまい}'], [7, '{七枚|ななまい}'], [8, '{八枚|はちまい}'], [10, '{十枚|じゅうまい}']], t: 1 },
-  { tpl: '{椅子|いす}、あと{N}{要る|いる}。', c: [[1, '{一つ|ひとつ}'], [2, '{二つ|ふたつ}'], [3, '{三つ|みっつ}'], [4, '{四つ|よっつ}'], [5, '{五つ|いつつ}'], [6, '{六つ|むっつ}'], [7, '{七つ|ななつ}'], [8, '{八つ|やっつ}']], t: 2 },
+  { tpl: '{椅子|いす}、あと{N}{いる|いる|要る}。', c: [[1, '{一つ|ひとつ}'], [2, '{二つ|ふたつ}'], [3, '{三つ|みっつ}'], [4, '{四つ|よっつ}'], [5, '{五つ|いつつ}'], [6, '{六つ|むっつ}'], [7, '{七つ|ななつ}'], [8, '{八つ|やっつ}']], t: 2 },
   { tpl: '{今日|きょう}は{N}{来る|くる}って。', c: [[1, '{一人|ひとり}'], [2, '{二人|ふたり}'], [3, '{三人|さんにん}'], [4, '{四人|よにん}'], [5, '{五人|ごにん}'], [6, '{六人|ろくにん}'], [8, '{八人|はちにん}']], t: 2 },
 ];
 const THINGS = [
@@ -69,7 +69,7 @@ const VOICED = [
   { file: 'bd35bb27', who: 'Mio', t: 1, jp: '{新人|しんじん}くん、{土曜日|どようび}、ひま？', steps: [{ type: 'day', ans: 'Sat' }] },
   { file: '447928fe', who: 'Jun', t: 2, jp: '{日曜日|にちようび}の{朝|あさ}の{市場|いちば}、いいよ。', steps: [{ type: 'day', ans: 'Sun' }] },
   { file: '163b867b', who: 'Ishibashi', t: 2, jp: '{見ない|みない|見る}{顔|かお}だな。IDカードは？', steps: [{ type: 'thing', ans: 'identification-card', opts: ['identification-card', 'wallet', 'key', 'envelope', 'device-mobile', 'book'] }] },
-  { file: 'a5bfab6c', who: 'Jun', t: 1, jp: '{金曜日|きんようび}だね。ビール？', steps: [{ type: 'thing', ans: 'beer-stein', opts: ['beer-stein', 'coffee', 'wine', 'pint-glass', 'cake', 'pizza'] }] },
+  { file: 'a5bfab6c', who: 'Jun', t: 1, jp: '{金曜日|きんようび}だね。ビール？', steps: [{ type: 'thing', ans: 'beer-stein', opts: ['beer-stein', 'coffee', 'wine', 'cookie', 'cake', 'pizza'] }] },
   { file: '68248694', who: 'Aoi', t: 2, jp: 'これ、{昨日|きのう}のお{礼|れい}！　{缶|かん}コーヒー。{好き|すき}？', steps: [{ type: 'thing', ans: 'coffee', opts: ['coffee', 'beer-stein', 'cake', 'cookie', 'bread', 'orange'] }] },
   { file: '8bdf81fe', who: 'Yuzuki', t: 2, jp: 'じゃあ、{写真|しゃしん}。アオイさんも、ここに{立って|たって|立つ}。', steps: [{ type: 'thing', ans: 'camera', opts: ['camera', 'pen', 'book', 'umbrella', 'laptop', 'scissors'] }] },
 ];
@@ -121,7 +121,7 @@ const { stage } = shell({ proto: PROTO, title: 'Listen and act', side: `
 
 const modeFor = level => level <= 1 ? 'karaoke+ruby' : level === 2 ? 'karaoke' : 'listen-first';
 const rateFor = level => level <= 1 ? .85 : level >= 4 ? 1.1 : 1;
-const MODE_TXT = { 'karaoke+ruby': 'Text follows the voice, with readings.', karaoke: 'Text follows the voice.', 'listen-first': 'Voice first. The text appears after you act.' };
+const MODE_TXT = { 'karaoke+ruby': 'Text follows the voice, with readings where you need them.', karaoke: 'Text follows the voice.', 'listen-first': 'Voice first. The text appears after you act.' };
 
 async function run(level) {
   showLevel(level);
@@ -143,7 +143,7 @@ async function run(level) {
     const vpool = VOICED.filter(x => x.t <= Math.max(1, lv) && !usedVoice.has(x));
     let item;
     if (vpool.length && Math.random() < .35) { item = pick(vpool); usedVoice.add(item); } else item = gen(lv);
-    const hidden = mode === 'listen-first';
+    const hidden = mode === 'listen-first' && !!(item.file || v);
     area.innerHTML = `
       <div class="src">${item.file ? `Recorded voice: ${item.who}` : v ? 'Browser voice (TTS)' : 'No audio: read along'}</div>
       <div class="linebox ${hidden ? 'hidden' : ''}"><div class="line" lang="ja">${renderJP(item.jp, { level: lv })}</div><div class="veil">Listening</div></div>
