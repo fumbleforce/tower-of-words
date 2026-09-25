@@ -105,6 +105,7 @@ Everything Jørgen has asked for, and how we work. Every agent reads this before
 ## Process
 - The main thread coordinates and never blocks on waiting; long work goes to background subagents with clear file ownership: the builder owns game/; the art agents own art/ and add images to game/img; the content writer owns content/.
 - One GPU job at a time. Check nvidia-smi before GPU work; free ComfyUI's VRAM before running LLM or TTS jobs.
+- Jørgen approves every asset (2026-09-25): no image, sprite, background or shot is used in the game, the opening or any build until he has picked it on a review page. Agents render candidates, check them, put them on a page, and stop. Only approved assets move on.
 - Decide before producing: settle the style, model and cast with small comparison sets first. No bulk production (expression sets, environments, scene batches) until he has approved the model, style and character designs. "Keep the GPU busy" means useful exploration toward a decision, not mass production.
 - Build small slices and let Jørgen judge before scaling up. He benchmarks anything new (models, voices, cutouts) himself before it's adopted.
 - QA means reading as a player, not only automated runs: dump every branch as a transcript and read it; look at every screenshot.
