@@ -7,6 +7,8 @@ Open ComfyUI at http://127.0.0.1:8188 (start it with `~/ai/start-comfy.sh`). Loa
 - `anima-scene.json`: RDBT widescreen scene (1216×832).
 - `anima-with-lora.json`: Nova + the Anima RL add-on, showing how to chain add-ons.
 - `sdxl.json`: an SDXL model (WAI-Mature), for comparison.
+- `anima-img2img.json`: RDBT image-to-image. Load your picture in **Load Image**, write the full prompt, and set **denoise** on the sampler: about 0.5 keeps the layout (used for the basement office), 0.88 keeps pose and clothes but lets the hair change (used for Yuzuki).
+- `anima-img2img-masked.json`: the same, but only the white part of a mask image is repainted (used to keep Kiyoko's face and redraw her clothes at denoise 0.9). Load the mask in the second **Load Image** node (white = repaint, black = keep).
 - `example-*.png`: drag in to get the exact settings that made them. Every PNG ComfyUI saves carries its workflow.
 
 ## Video (image-to-video)

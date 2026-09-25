@@ -14,21 +14,25 @@ label.opt span,.cmp span{display:flex;gap:6px;align-items:center;font-size:14px;
 .row input[type=text]{flex:1;min-width:240px;padding:7px 10px;border:1px solid #dadee4;border-radius:6px;font:14px system-ui}
 .bar{position:sticky;bottom:0;background:#15171c;color:#fff;padding:12px 20px;display:flex;gap:12px;align-items:center}
 .bar button{height:42px;padding:0 20px;border-radius:8px;border:0;background:#0f8b99;color:#fff;font:600 16px system-ui;cursor:pointer}
+section p small{display:block;margin-top:4px;color:#6a7180}.group{margin:34px 0 0;padding:0 4px}.group h2{font-size:22px;margin:0 0 4px}.group p{color:#4b5260;max-width:860px;margin:0}
 #lb{position:fixed;inset:0;background:rgba(10,12,16,.94);display:none;place-items:center;z-index:9}#lb.on{display:grid}#lb img{max-width:96vw;max-height:92vh}
 </style></head><body><main>
 <h1>Decisions, round 2</h1>
-<p class="intro">Approved designs are shown at the top, so you can judge whether the new ones read as distinct. Pick one option per section (or "redo"), add a note if you like, then copy your picks at the bottom. Double-click any image to see it full size. Grey tiles are for comparison only.</p>
+<p class="intro">Approved designs are at the top, so you can check the new ones stand apart. Goro, Jun, Ishibashi and Saki are decided and have moved up there. Pick one option per section (or "redo"), add a note if you like, then copy your picks at the bottom. Double-click any image to see it full size. Grey tiles are for comparison only.</p>
 <section><h2>Approved so far (reference)</h2><div class="ref" id="ref"></div></section>
 <div id="list"></div></main>
 <div class="bar"><button id="copy">Copy my picks</button><span id="done"></span></div>
 <div id="lb"><img alt=""></div>
 <script>
-fetch('data.json').then(r=>r.json()).then(({ref,sections:D})=>{
+fetch('data.json').then(r=>r.json()).then(({ref,intro_new,sections:D})=>{
   document.getElementById('ref').innerHTML=ref.map(([f,l])=>`<figure><img src="${f}.webp" alt=""><figcaption>${l}</figcaption></figure>`).join('');
   const list=document.getElementById('list');
-  for(const [id,title,desc,opts,cmp] of D){
+  let grouped=false;
+  for(const [id,title,desc,opts,cmp,kind] of D){
+    if(kind==='new'&&!grouped){grouped=true;const h=document.createElement('div');h.className='group';h.innerHTML=`<h2>New character ideas</h2><p>${intro_new}</p>`;list.append(h);}
     const s=document.createElement('section');
-    s.innerHTML=`<h2>${title}</h2>${desc?`<p>${desc}</p>`:''}<div class="opts ${id==='office'?'wide':''}"></div><div class="row"><label><input type="radio" name="${id}" value="redo"> none of these, redo</label><input type="text" data-note="${id}" placeholder="note (optional)"></div>`;
+    const none=kind==='new'?'not this character':'none of these, redo';
+    s.innerHTML=`<h2>${title}</h2>${desc?`<p>${desc}</p>`:''}<div class="opts ${id==='office'?'wide':''}"></div><div class="row"><label><input type="radio" name="${id}" value="${kind==='new'?'no':'redo'}"> ${none}</label><input type="text" data-note="${id}" placeholder="note (optional)"></div>`;
     const box=s.querySelector('.opts');
     for(const [f,lab] of cmp){const d=document.createElement('div');d.className='cmp';d.innerHTML=`<img src="${f}.webp" loading="lazy" alt=""><span>${lab}</span>`;box.append(d);}
     for(const [f,lab] of opts){const l=document.createElement('label');l.className='opt';l.innerHTML=`<img src="${f}.webp" loading="lazy" alt=""><span><input type="radio" name="${id}" value="${f}"> ${lab}</span>`;box.append(l);}

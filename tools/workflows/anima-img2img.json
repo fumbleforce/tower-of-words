@@ -1,0 +1,111 @@
+{
+ "1": {
+  "class_type": "UNETLoader",
+  "inputs": {
+   "unet_name": "rdbtAnima.safetensors",
+   "weight_dtype": "default"
+  }
+ },
+ "2": {
+  "class_type": "CLIPLoader",
+  "inputs": {
+   "clip_name": "qwen_3_06b_base.safetensors",
+   "type": "stable_diffusion"
+  }
+ },
+ "3": {
+  "class_type": "VAELoader",
+  "inputs": {
+   "vae_name": "qwen_image_vae.safetensors"
+  }
+ },
+ "4": {
+  "class_type": "CLIPTextEncode",
+  "inputs": {
+   "text": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1girl, solo, Yuzuki, a 31-year-old company PR spokeswoman, athletic lean build, a long neck, a small mole on her chin, no glasses, a structured mustard-yellow corduroy blazer over a white turtleneck, silver hoop earrings, holding a paper cup of coffee in her right hand, flat chest, small breasts, slim petite torso, long light chestnut-brown hair with loose waves, parted in the middle, falling over both shoulders, dry, weary half-smile, waist-up portrait facing the viewer at a slight angle, plain light grey background, soft even studio light",
+   "clip": [
+    "2",
+    0
+   ]
+  }
+ },
+ "5": {
+  "class_type": "CLIPTextEncode",
+  "inputs": {
+   "text": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, large breasts, huge breasts, medium breasts, cleavage, busty, curvy, short hair, bob cut, pixie cut, glasses, steam, blush, two cups, silver hair, grey hair, red hair, orange hair, auburn hair, blue hair, streaked hair, multicolored hair",
+   "clip": [
+    "2",
+    0
+   ]
+  }
+ },
+ "10": {
+  "class_type": "LoadImage",
+  "inputs": {
+   "image": "yuzuki-c-202.png"
+  }
+ },
+ "11": {
+  "class_type": "VAEEncode",
+  "inputs": {
+   "pixels": [
+    "10",
+    0
+   ],
+   "vae": [
+    "3",
+    0
+   ]
+  }
+ },
+ "7": {
+  "class_type": "KSampler",
+  "inputs": {
+   "model": [
+    "1",
+    0
+   ],
+   "positive": [
+    "4",
+    0
+   ],
+   "negative": [
+    "5",
+    0
+   ],
+   "latent_image": [
+    "11",
+    0
+   ],
+   "seed": 202,
+   "steps": 30,
+   "cfg": 5,
+   "sampler_name": "euler_ancestral",
+   "scheduler": "normal",
+   "denoise": 0.88
+  }
+ },
+ "8": {
+  "class_type": "VAEDecode",
+  "inputs": {
+   "samples": [
+    "7",
+    0
+   ],
+   "vae": [
+    "3",
+    0
+   ]
+  }
+ },
+ "9": {
+  "class_type": "SaveImage",
+  "inputs": {
+   "images": [
+    "8",
+    0
+   ],
+   "filename_prefix": "decide2"
+  }
+ }
+}
