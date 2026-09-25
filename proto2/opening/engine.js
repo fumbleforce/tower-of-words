@@ -341,6 +341,7 @@ function bg(name, o = {}) {
   let cx = o.cx ?? 0.5, cy = o.cy ?? 0.5;
   cx = clamp(cx, vw / 2 + m, 1 - vw / 2 - m); cy = clamp(cy, vh / 2 + m, 1 - vh / 2 - m);
   const crop = [cx - vw / 2, cy - vh / 2, cx + vw / 2, cy + vh / 2];
+  if (o.du) { crop[0] += o.du; crop[2] += o.du; }  // layer drift (e.g. clouds) after the camera clamp
   const sx = o.shake ? o.shake[0] : 0, sy = o.shake ? o.shake[1] : 0;
   const rot = o.rot || 0;
   // rotation: grow the quad so the corners stay covered

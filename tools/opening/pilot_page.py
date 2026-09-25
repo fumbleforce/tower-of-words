@@ -97,13 +97,22 @@ input.c{{width:min(100%,600px);padding:7px 10px;border:1px solid var(--line);bor
 .bar button{{height:42px;padding:0 20px;border-radius:8px;border:0;background:var(--acc);color:#fff;font:600 16px system-ui;cursor:pointer}}
 #lb{{position:fixed;inset:0;background:rgba(10,12,16,.94);display:none;place-items:center;z-index:9}}#lb.on{{display:grid}}#lb img{{max-width:96vw;max-height:92vh}}
 </style></head><body><main>
-<h1>Opening pilot: one shot, start to finish</h1>
+<h1>Opening pilot: one shot, three ways to animate it</h1>
 <p class="intro">We test the new process on one shot before anything else: staging note, a short prompt that names only what is visible, a few cloud candidates, my check against the staging list, then your pick. After you pick, I animate just this shot (depth parallax, a few seconds, at its place in the song, 3.6 s) and show it, so you can judge the whole pipeline on one shot. Pilot spend: about $1.10 of Replicate (ledger in tools/spend.json). Click an image to see it full size.</p>
-<section id="anim"><h2>Pilot animation: your master, animated (3.2 s at 3.6 s in the song)</h2>
-<p class="intro">Your approved master (monorail-bay-ref2), upscaled 2x locally, with a depth map from Depth Anything V2. The camera pushes slowly toward the city while the depth parallax slides the near beam and train against the far sea and skyline; glints on the water change on 2s; a white flash on the cut. It plays two bars here so the motion can be judged; in the full edit the shot is one bar. Live version (plays this part of the song): <a href="index.html">index.html</a> (press R for the review bar).</p>
-<video src="pilot-bay.mp4" controls playsinline style="width:min(100%,1280px);display:block;border-radius:6px"></video>
-<p class="intro">My frame check: no tearing at the depth edges (train, pillars, beam), pillars stay straight, the train doesn't warp, motion is even from frame to frame. Weak: the parallax is gentle, so it reads more as a camera push than as depth; the train itself does not move along the beam.</p></section>
-<section id="exterior"><h2>Earlier pilot candidates (superseded by your master): shot 2: the monorail over the bay, heading into the city</h2>
+<section id="anim"><h2>The exterior shot, three ways (your master ref3; the song from 3.6 s)</h2>
+<p class="intro">Pick one approach, or say what to combine. All three are made locally; C's master image cost $0.27 of Replicate.</p>
+<div class="grid">
+<figure class="opt"><label><input type="radio" name="approach" value="A"> <b>A · layered cel animation</b></label>
+<video src="pilot-a-layered.mp4" controls playsinline style="width:100%;border-radius:5px;margin-top:4px"></video>
+<p class="chk">The train is cut out as its own layer (four rigid cars) and slides along a path fitted to the beam, shrinking with perspective, over a clean plate where it was painted out (the beam rebuilt from its own cross-section, not guessed by a model). The upper clouds drift on a separate layer, glints twinkle only on measured bright sea points, the sun breathes softly, and the camera pushes gently with depth parallax. Live: <a href="index.html?v=a">index.html?v=a</a>.<br><b>My check:</b> the cars sit on the beam the whole way, no halo around the cutout, and they shrink correctly toward the city. Weak: the cars are rigid pieces, so on the curve their joints open very slightly; a small bump where the rebuilt beam top meets the original at the rear.</p></figure>
+<figure class="opt"><label><input type="radio" name="approach" value="B"> <b>B · Wan 2.2 14B video (seed 7)</b></label>
+<video src="pilot-b-wan-7.mp4" controls playsinline style="width:100%;border-radius:5px;margin-top:4px"></video>
+<p class="chk">Image-to-video from the same master (fp8 + lightx2v, 81 frames at 16 fps, 960×528, upscaled for the page). Prompt: "the monorail train moves along the elevated beam toward the city, sunlight glitters on the calm sea, clouds drift slowly, static camera." Other seeds: <a href="pilot-b-wan-21.mp4">21</a>, <a href="pilot-b-wan-42.mp4">42</a>.<br><b>My check:</b> in all three seeds the train stays rigid and on the beam and travels far toward the city; the camera stays still; no bending pillars. Weak: low resolution (soft detail after upscaling), 16 fps motion, and the water barely moves.</p></figure>
+<figure class="opt"><label><input type="radio" name="approach" value="C"> <b>C · silhouette against a golden sky</b></label>
+<video src="pilot-c-silhouette.mp4" controls playsinline style="width:100%;border-radius:5px;margin-top:4px"></video>
+<p class="chk">In the style of the reference OP frame: flat side view, a four-car silhouette sliding right along a level beam under a huge painted sunrise sky, dust in the light, sea glitter, grain and a warm grade. The master is from GPT Image 2 with a Reference-prompt-2 style prompt (camera stated plainly, positions in frame terms, colours, one "No ..." line); the train was cut out and its patch of sky filled from the sky around it. Live: <a href="index.html?v=c">index.html?v=c</a>.<br><b>My check:</b> the train stays on the beam, no halo. Weak: the train is small in frame; where the train was, the filled sky is slightly smoother than the painted sky around it.</p></figure>
+</div><input class="c" type="text" name="approach-note" placeholder="note (optional)"></section>
+<section id="exterior"><h2>Earlier: cloud candidates for the master (superseded by your ref3): the monorail over the bay, heading into the city</h2>
 <table class="note">{note}</table>
 <p><b>Prompt for pilot-a</b> (GPT Image 2, with our line sketch tools/promptlab_guides/bay-lines.png attached as the layout):</p><div class="prompt">{e(SKETCH_LINE)} {e(PROMPT_A)}</div>
 <p><b>Then one edit</b> of that image (GPT Image 2):</p><div class="prompt">{e(EDIT_A)}</div>
@@ -121,8 +130,8 @@ const imgs=[...document.querySelectorAll('figure img')];let cur=-1;const lb=docu
 const show=i=>{{cur=(i+imgs.length)%imgs.length;li.src=imgs[cur].src;lb.classList.add('on');}};
 imgs.forEach((im,i)=>im.onclick=()=>show(i));lb.onclick=()=>lb.classList.remove('on');
 addEventListener('keydown',e=>{{if(!lb.classList.contains('on'))return;if(e.key==='Escape')lb.classList.remove('on');if(e.key==='ArrowRight')show(cur+1);if(e.key==='ArrowLeft')show(cur-1);}});
-document.getElementById('copy').onclick=()=>{{const r=document.querySelector('input[name=exterior]:checked');const n=document.querySelector('input[name=exterior-note]').value.trim();
-navigator.clipboard.writeText('Opening pilot pick: '+(r?r.value:'(none)')+(n?' ('+n+')':'')).then(()=>document.getElementById('done').textContent='Copied.');}};
+document.getElementById('copy').onclick=()=>{{const r=document.querySelector('input[name=approach]:checked');const n=document.querySelector('input[name=approach-note]').value.trim();
+navigator.clipboard.writeText('Opening pilot, approach: '+(r?r.value:'(none)')+(n?' ('+n+')':'')).then(()=>document.getElementById('done').textContent='Copied.');}};
 </script></body></html>'''
 open(os.path.join(OUT, 'shots.html'), 'w').write(page)
 print('ok')
