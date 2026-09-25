@@ -3,7 +3,7 @@
 Everything Jørgen has asked for, and how we work. Every agent reads this before starting, and it gets updated whenever new feedback comes in. When this file and older docs disagree, this file wins.
 
 ## Current focus (2026-09-25)
-- Keep the slice narrow: about 3 characters and 4 locations, and make day 1 excellent before building anything wider. No full sprite sets or expression batches for the rest of the cast yet; character decisions aren't fully settled.
+- Keep the slice narrow. Chosen slice: Emi, Mio and Rei; monorail, gate, basement office and Sales. Ishibashi is voice and text only at the gate. The canteen (Kaori), rooftop (Goro) and bar (Jun) move to day 2. Make day 1 excellent before building anything wider. No full sprite sets or expression batches for the rest of the cast yet; character decisions aren't fully settled.
 - Redraw the day-1 location backgrounds. The current ones have nonsense in them (a bed with pillows at both ends, and other logic errors). Use RDBT and check every image for physical sense before it ships.
 - The bartender's cutout is poor and ugly. Redo cutouts for the slice characters and inspect the edges closely.
 - Composition research (pose/layout sketches, regional prompting) can run on the side.
