@@ -116,6 +116,7 @@ Everything Jørgen has asked for, and how we work. Every agent reads this before
 
 ## Voices and audio
 - Replicate voices are best (MiniMax Speech 2.6 HD plus Qwen3-TTS clones). Local Qwen3-TTS is a fallback. IndexTTS is unusable.
+- Local voice test (2026-09-25, proto2/voices-local, waiting for Jørgen's ears): Irodori-TTS v4.1 Small (~/ai/tts-irodori), Sarashina2.2-TTS (~/ai/tts-sarashina), Fun-CosyVoice3 0.5B (~/ai/tts-cosyvoice) and local Qwen3-TTS cloned each voice from its reference; scripts, test lines and metrics (WavLM speaker similarity, Whisper kana CER, pitch guard) in tools/voice_bench, page built by tools/voices_local_page.py. By the numbers Irodori matched Replicate (no pitch drift, few misread words); CosyVoice3 garbles Japanese; Sarashina gave empty files and pitch drift. A full day-1 pass on Replicate is about $0.60 to $0.80.
 - Mio: voice A from proto2/voice-mio (low, slightly husky, about 228 Hz; chosen 2026-09-25). Every line is a Qwen3-TTS clone of that clip (tools/voice-refs/mio-a.wav). The original casting clip (mio-3) is retired: its lines sometimes drifted male. Don't over-tune with style instructions; only guard against male drift (redo lines with a median under 190 Hz or more than 10% under 160 Hz).
 - Per-character loudness is normalised; the player voice is quieter.
 - Music: the game uses Lyria only, one loop per mood crossfading into itself.
@@ -140,4 +141,4 @@ Everything Jørgen has asked for, and how we work. Every agent reads this before
 
 ## Live links
 - Game: https://fumbleforce.github.io/tower-of-words/game/
-- Review pages: https://fumbleforce.github.io/tower-of-words/proto2/ (gallery, local6, emi2, voice-mio, tts, music, rmbg, llm, video2, locations1, locations2, cast-fixed)
+- Review pages: https://fumbleforce.github.io/tower-of-words/proto2/ (gallery, local6, emi2, voice-mio, tts, music, rmbg, llm, video2, locations1, locations2, cast-fixed, voices-local)
