@@ -264,12 +264,12 @@ export function buildOffice() {
   }
 
   // ---- floors ----
-  root.add(tileFloor(X0, X1, Z0, Z1, 0.8, { color: '#9d9aa3', seam: '#8c8992' }));
-  root.add(tileFloor(X0, X1, CN, CS, 0.8, { color: '#94929a', seam: '#84828a', y: 0.003 }));                 // corridor, older vinyl
+  root.add(tileFloor(X0, X1, Z0, Z1, 0.8, { color: '#979ca4', seam: '#868b93' }));
+  root.add(tileFloor(X0, X1, CN, CS, 0.8, { color: '#8f949b', seam: '#80858c', y: 0.003 }));                 // corridor, older vinyl
   root.add(tileFloor(3.4, X1, Z0, CN, 0.6, { color: '#9da2a8', seam: '#8d9298', y: 0.003 }));                // machine room, painted concrete
   root.add(tileFloor(1.8, X1, CS, Z1, 0.4, { color: '#c9cccd', seam: '#b3b7ba', y: 0.003 }));                // toilets
   root.add(tileFloor(-7, -2.2, CS, Z1, 1.0, { color: '#9ea0a3', seam: '#909295', y: 0.003 }));              // copy room sheet vinyl
-  root.add(tileFloor(-2.2, 1.8, CS, Z1, 1.0, { color: '#a09ea3', seam: '#918f94', y: 0.003 }));             // kitchenette
+  root.add(tileFloor(-2.2, 1.8, CS, Z1, 1.0, { color: '#9ca0a6', seam: '#8d9197', y: 0.003 }));             // kitchenette
 
   // ---- walls ----
   const W = (...a) => root.add(wall(...a));
@@ -353,6 +353,10 @@ export function buildOffice() {
   { const p = plant({ size: 1.2, seed: 1, tall: 1.4 }); p.position.set(2.95, 0, Z0 + 0.45); root.add(p); }
   { const p = plant({ size: 1.0, seed: 3 }); p.position.set(-3.85, 0, -0.35); root.add(p); }
   for (const [x, z, s] of [[2.9, -1.5, 0.42], [2.85, -1.0, 0.36], [2.3, -0.35, 0.34]]) root.add(rbox(s, s * 0.8, s, PAL.box, { x, z, r: 0.02 }));
+  // filing row and plant along the office's left wall
+  for (let i = 0; i < 3; i++) { const f = filingCabinet(3, '#858b95'); f.rotation.y = Math.PI / 2; f.position.set(-3.95, 0, -1.9 - i * 0.48 + 0.0); root.add(f); }
+  // a bench in the corridor, by the office door
+  { const bc = bench(1.4, { seats: 2 }); bc.position.set(-1.9, 0, 0.62); root.add(bc); }
   const cr = coatRack(); cr.position.set(1.1, 0, -0.45); root.add(cr);
   // a small meeting table below the island, for the morning huddle
   { const mt = new THREE.Group(); mt.add(rbox(0.9, 0.04, 0.6, '#d5d6d3', { y: 0.4, r: 0.01 }), rbox(0.08, 0.4, 0.08, PAL.deskLeg, { r: 0.01 })); for (const x of [-0.3, 0.3]) mt.add(rbox(0.3, 0.05, 0.28, PAL.chair, { x, y: 0.24, z: 0.45, r: 0.02 }), rbox(0.03, 0.24, 0.03, PAL.deskLeg, { x, z: 0.45, r: 0.01 })); mt.add(rbox(0.3, 0.02, 0.22, PAL.paper, { x: 0.15, y: 0.44, r: 0.005 })); mt.position.set(-2.4, 0, -1.15); root.add(mt); }
@@ -483,6 +487,7 @@ export function buildOffice() {
   for (const x0 of [1.8, 4.4]) { B(x0 + 0.1, x0 + 2.55, 5.3, Z1); B(x0 + 2.15, x0 + 2.55, 3.15, 3.65); B(x0 + 2.2, x0 + 2.5, 3.85, 4.15); B(x0 + 0.25, x0 + 1.2, CS, CS + 0.32); }
   B(-4.55, -4.05, 1.85, CS); B(2.95, 3.45, 1.85, CS); B(1.45, 1.75, 1.85, 2.1); B(0.55, 1.12, 1.95, CS); B(-2.65, -2.15, 1.85, CS);
   B(-6.6, -5.8, 5.6, Z1); B(-3.95, -3.35, 2.9, 3.5); B(-2.1, -1.7, 3.4, 3.8); B(-2.15, -1.55, 4.35, 5.45); B(-2.7, -2.25, 4.8, 6.0);
+  B(-4.2, -3.7, -3.1, -1.6); B(-2.7, -1.1, 0.35, 0.9);
   nav.blockTagged('emi', -5.5, -5.1, -1.55, -1.15);
 
   for (const r of [nao, hiro, yui, sota]) r.root.visible = false;
