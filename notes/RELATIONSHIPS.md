@@ -127,7 +127,7 @@ Three beats each, around a machine. These are short enough to write fast, and an
 
 | Person | Machine | Their story | What they teach |
 |---|---|---|---|
-| Kenji (29, B2) | Vending machine | A joke council campaign for free drinks wins him a real seat. At the debate Eric interprets for him in English, and gets some of it wrong. | 出して |
+| Kenji (21, B2) | Vending machine | A joke council campaign for free drinks wins him a real seat. At the debate Eric interprets for him in English, and gets some of it wrong. | 出して |
 | Aoi (intern) | A 1994 cabinet at the arcade | The top score has been Mori's since 1996. She wants it, the machine's joystick sticks, and Mori won't say how he did it. | 全部 |
 | Kiyoko (56, old guard) | Her 1997 office terminal | The screen flickers, and it holds twenty years of her private notes on every manager. It has to be repaired in place while she watches. At the end she lets him read one entry, the one about him. | Keigo, by hearing it |
 | Tsubasa (27, runner) | Track timing board | It's been broken since spring. It still shows her coach's 1993 record, which she means to break at the New Year ekiden. | もう一回 |
