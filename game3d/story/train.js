@@ -38,7 +38,7 @@ export default {
   nodes: {
     intro: [
       { do: 'period', to: 'commute' },
-      { do: 'goal', text: 'Find a seat.' },
+      { do: 'goal', text: 'Find a seat. There is one by the woman with the laptop.' },
       { do: 'hint', text: 'Tap the floor to walk. Tap people and things to look or talk.' },
     ],
 
@@ -68,10 +68,11 @@ export default {
       { do: 'sit', who: 'eric', at: 'seat_far_r' },
       { set: 'sat' },
       { do: 'goal', text: '' },
+      { do: 'look', who: 'mio', at: 'eric' },
       { say: 'mio', emo: 'surprised', name: 'Woman with a laptop', face: 'surprised', text: "Eh... B2? You're going to B2?" },
       { say: 'eric', emo: 'tired', face: 'tired', text: "Yeah, IT support. I'm the contractor, it's my first day." },
       { say: 'mio', emo: 'dry', face: 'deadpan', text: "Ahh, you're the support contract? Mori-san said a {gaijin} is coming to help with the old machines. Amakawa never replaces anything, so, um... some of them are older than me." },
-      { say: 'mio', emo: 'reluctant', face: 'neutral', text: "I'm Mio. I'm also B2, so... same team, I guess." },
+      { say: 'mio', emo: 'dry', face: 'neutral', text: "I'm Mio. I'm also B2, so... same team, I guess." },
       { set: 'mio_named' },
       { choice: [
         { text: '“I\'m Eric.”', go: 'its_eric' },
@@ -90,6 +91,7 @@ export default {
       { go: 'lesson' },
     ],
     leave_it: [
+      { do: 'bow', who: 'eric' },
       { go: 'lesson' },
     ],
 
@@ -108,9 +110,11 @@ export default {
     lesson2: [
       { say: 'mio', emo: 'dry', text: "You know it's all Amakawa people on the island, right? Nobody speaks English. Even at the supermarket." },
       { say: 'mio', emo: 'amused', face: 'smile', text: "And Mori-san is going to be so polite with you, and you'll just stand there." },
-      { say: 'mio', emo: 'teaching', face: 'neutral', text: "えっと, okay. First one, {ohayo}. You say it to everybody in the morning. The guard at the gate is really strict about it." },
+      { say: 'mio', emo: 'casual', face: 'neutral', text: "えっと, okay. First one, {ohayo}. You say it to everybody in the morning. The guard at the gate is really strict about it." },
       { do: 'type', word: 'ohayo', from: 'mio', prompt: "mio: Say it to me, it's fine." },
       { say: 'mio', emo: 'amused', face: 'smile', text: "{ohayo}. Mm, okay, not bad." },
+      { do: 'face', who: 'mio', to: 'tama' },
+      { do: 'cam', on: 'tama', zoom: 1.4 },
       { say: 'mio', emo: 'amused', text: "Try the cat, over there. She rides this train every morning, she won't judge you." },
       { set: 'cat_task' },
       { do: 'goal', text: 'Say good morning to the cat.' },
@@ -124,10 +128,12 @@ export default {
       '> A slow blink.',
       { say: 'mio', emo: 'amused', face: 'smile', text: "See? She's fine with it." },
       { do: 'emote', who: 'kuroda', kind: 'zzz' },
+      { do: 'face', who: 'mio', to: 'kuroda' },
+      { do: 'emote', who: 'kuroda', kind: 'zzz' },
       { say: 'mio', emo: 'casual', text: "She's more awake than that guy, anyway. He's on this train every morning too, asleep the whole way, and like once a month he misses our stop and ends up back on the mainland." },
-      { say: 'mio', emo: 'teaching', face: 'neutral', text: "Anyway, when you meet someone new, it's {yoroshiku}. Like “nice to meet you”, but more like “please be nice to me”." },
+      { say: 'mio', emo: 'casual', face: 'neutral', text: "Anyway, when you meet someone new, it's {yoroshiku}. Like “nice to meet you”, but more like “please be nice to me”." },
       { do: 'type', word: 'yoroshiku', from: 'mio', prompt: 'mio: We just met, so... say it to me.' },
-      { say: 'mio', emo: 'teaching', text: "{yoroshiku}." },
+      { say: 'mio', emo: 'casual', text: "{yoroshiku}." },
       { say: 'mio', emo: 'casual', text: "With Mori-san, bow a little when you say it. He likes that." },
       { if: 'mio_warm >= 2', then: [
         { say: 'mio', emo: 'embarrassed', face: 'embarrassed', text: "Here, take a pickle. My mother made, like, way too many." },
@@ -150,7 +156,7 @@ export default {
       { do: 'stand', who: 'eric' },
       { do: 'walk', who: 'aoi', to: 'aisle', wait: true },
       { do: 'face', who: 'mio', to: 'aoi' },
-      { say: 'mio', emo: 'dry', text: "Ah, she's in the way... okay, one more. {sumimasen}. It means excuse me, and also sorry." },
+      { say: 'mio', emo: 'dry', text: "Ah, she's in the way... okay, one more. {sumimasen}. You use it for sorry too." },
       { say: 'mio', emo: 'casual', text: "You'll get lost today, everybody does. Just say it and point at things. Honestly it works for almost everything." },
       { do: 'type', word: 'sumimasen', from: 'mio', prompt: 'mio: Go on, say it to her.' },
       { do: 'face', who: 'aoi', to: 'eric' },
@@ -191,6 +197,7 @@ export default {
       { do: 'stand', who: 'kuroda' },
       { do: 'walk', who: 'kuroda', to: 'door_l', wait: true },
       { do: 'walk', who: 'kuroda', to: [-3.9, 2.35], wait: true },
+      { do: 'face', who: 'kuroda', to: 'eric' },
       { do: 'bow', who: 'kuroda', depth: 'deep' },
       { do: 'doorsClose', to: 0, ms: 900 },
       { do: 'depart' },
@@ -198,14 +205,14 @@ export default {
       { set: 'held_doors' },
       { do: 'face', who: 'mio', to: 'eric' },
       { wait: 700 },
-      { say: 'mio', face: 'surprised', emo: 'baffled', text: "...Doors don't do that. They stop for a bag or something, but yelling does nothing, I've tried like a hundred times." },
+      { say: 'mio', face: 'surprised', emo: 'surprised', text: "...Doors don't do that. They stop for a bag or something, but yelling does nothing, I've tried like a hundred times." },
       { choice: [
         { text: '“Did I do that?”', go: 'did_i' },
         { text: 'Say nothing', go: 'did_quiet' },
       ] },
     ],
     did_i: [
-      { say: 'mio', face: 'neutral', emo: 'unsure', text: "I don't know. I said it too and nothing happened, so..." },
+      { say: 'mio', face: 'neutral', emo: 'hesitant', text: "I don't know. I said it too and nothing happened, so..." },
       { go: 'mio_tests' },
     ],
     did_quiet: [{ go: 'mio_tests' }],
@@ -217,7 +224,7 @@ export default {
       { do: 'phone', who: 'mio', state: 'look' },
       { say: 'mio', face: 'tired', emo: 'groan', text: "あー, no, no... the server's down again. Sorry, I have to run." },
       { do: 'phone', who: 'mio', state: 'away' },
-      { say: 'mio', emo: 'hurried', text: "Your card won't work until nine, I think, so you'll have to talk to the guard." },
+      { say: 'mio', emo: 'hurried', text: "You can't even help, your card won't work until nine, I think. So talk to the guard." },
       { if: 'mio_warm >= 2', then: [
         { say: 'mio', face: 'smile', emo: 'warm', text: "Remember, {ohayo} first. Okay, see you downstairs." },
       ], else: [
