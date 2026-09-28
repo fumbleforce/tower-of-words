@@ -1,8 +1,11 @@
 // On-device speech recognition for voice input: Whisper (or Moonshine) through transformers.js, off the main thread
 // so the game and the level meter keep running while it thinks. Loaded by speech.js as a module worker.
-// Messages in:  { type: 'load', model, device, dtype }  |  { type: 'run', id, samples (Float32Array, 16 kHz mono), candidates? { wordId: [forms] } }
+// Messages in:  { type: 'load', model, device, dtype }  |  { type: 'run', id, samples (Float32Array, 16 kHz mono), candidates? { wordId: [forms] }, score? }
+//   (score: true scores the candidates against the last recording, no samples needed)
 // Messages out: { type: 'progress', file, loaded, total } | { type: 'ready', ms, device } | { type: 'text', id, text, ms, free?, scores? } | { type: 'error', message }
-import { pipeline, env, AutoProcessor, AutoTokenizer, MoonshineForConditionalGeneration, Tensor } from '../vendor/transformers/transformers.min.js';
+// transformers.js 4.3.0 (Apache-2.0) from jsDelivr, pinned; the browser caches it with the model and the runtime.
+// (Not vendored: GitHub's push protection flags the minified bundle as a secret.)
+import { pipeline, env, AutoProcessor, AutoTokenizer, MoonshineForConditionalGeneration, Tensor } from 'https://cdn.jsdelivr.net/npm/@huggingface/transformers@4.3.0/dist/transformers.min.js';
 
 // models and the runtime come from the Hugging Face hub and jsDelivr once, then from the browser's cache
 env.allowLocalModels = false;
@@ -56,15 +59,25 @@ async function logprob(enc, text) {
 }
 // free transcript plus a score for each candidate: { text, free, scores: { id: best mean log-prob over its forms } }
 async function transcribeAndScore(samples, candidates, max_new_tokens) {
+  const t0 = performance.now();
   const { input_features } = await wh.processor(samples);
   const mi = await wh.model._prepare_encoder_decoder_kwargs_for_generation({ inputs_tensor: input_features, model_inputs: { input_features }, model_input_name: 'input_features', generation_config: wh.model.generation_config });
   const enc = mi.encoder_outputs;
   const out = await wh.model.generate({ inputs: input_features, encoder_outputs: enc, language: 'japanese', task: 'transcribe', max_new_tokens });
   const text = wh.tokenizer.decode(out[0], { skip_special_tokens: true }).trim();
+  last = { enc, text };
+  const textMs = Math.round(performance.now() - t0);
+  if (!candidates) return { text, textMs };
+  return { text, textMs, ...(await scoreLast(candidates)) };
+}
+// scores for the last recording (the encoder output is kept, so this is decoder passes only)
+let last = null;
+async function scoreLast(candidates) {
+  const t0 = performance.now(), { enc, text } = last;
   const free = text ? await logprob(enc, text) : -Infinity;
   const scores = {};
   for (const [id, forms] of Object.entries(candidates || {})) { let b = -Infinity; for (const f of forms) b = Math.max(b, await logprob(enc, f)); scores[id] = +b.toFixed(3); }
-  return { text, free: +free.toFixed(3), scores };
+  return { free: +free.toFixed(3), scores, scoreMs: Math.round(performance.now() - t0) };
 }
 
 async function load({ model, device, dtype }) {
@@ -90,7 +103,10 @@ self.onmessage = async ({ data }) => {
     if (data.type === 'load') await load(data);
     else if (data.type === 'run') {
       const t0 = performance.now();
-      if (data.candidates && wh) {
+      if (data.score) {
+        const r = last ? await scoreLast(data.candidates) : { scores: {} };
+        postMessage({ type: 'text', id: data.id, text: last ? last.text : '', ...r, ms: Math.round(performance.now() - t0) });
+      } else if (wh) {
         const r = await transcribeAndScore(data.samples, data.candidates, 32);
         postMessage({ type: 'text', id: data.id, ...r, ms: Math.round(performance.now() - t0) });
       } else {
