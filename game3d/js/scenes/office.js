@@ -297,7 +297,16 @@ export function buildOffice() {
 
   // doors and plates on the corridor's north face (seen from the camera)
   const sd = door(0.6, 1.25, { windows: true }); sd.position.set(-6.45, 0, -3.4 + T / 2); root.add(sd);
-  const md = new THREE.Group(); md.add(door(0.8, 1.25, { windows: false })); md.position.set(5.1, 0, CN + T / 2); root.add(md);
+  // machine-room door: the frame stays in the wall; the leaf hangs on a hinge at its right edge (the handle is on
+  // the left) and swings into the machine room (Jørgen: it "slides in a strange way rather than swinging open")
+  const md = new THREE.Group(); md.position.set(5.46, 0, CN); root.add(md);
+  { const d = door(0.8, 1.25, { windows: false }); d.remove(d.children[0]);
+    // an open frame (two jambs and a header) so the doorway shows through when the leaf swings away
+    const fm = mat(PAL.doorFrame); for (const x of [4.66, 5.54]) root.add(rbox(0.08, 1.31, 0.06, null, { x, z: CN + T / 2, r: 0.02, m: fm }));
+    root.add(rbox(0.96, 0.07, 0.06, null, { x: 5.1, y: 1.24, z: CN + T / 2, r: 0.02, m: fm }));
+    // the dark room beyond the doorway, seen when it's open
+    root.add(rbox(0.8, 1.22, 0.02, '#23272e', { x: 5.1, z: CN - T / 2 - 0.02, r: 0.005, cast: false }));
+    d.position.set(-0.36, 0, T / 2 - 0.01); md.add(d); }
   const fe = door(0.7, 1.2, { windows: true }); fe.rotation.y = -Math.PI / 2; fe.position.set(X1 - 0.02, 0, 1.25); root.add(fe);
   const ex = new THREE.Mesh(new THREE.PlaneGeometry(0.34, 0.16), emissive('#6fe39a', '#3fbf6e', 1.2)); ex.position.set(X1 - 0.09, 1.38, 1.25); ex.rotation.y = -Math.PI / 2; root.add(ex);
   const addPlate = (t, x, y, z, o) => { const p = plate(t, o); p.position.set(x, y, z); root.add(p); return p; };
@@ -652,7 +661,7 @@ export function buildOffice() {
   B(1.15, 1.95, -4.0, -2.75); B(1.95, 2.45, -3.6, -3.1);             // chief's desk and chair
   // machine room: racks, fan, cart; the door keeps it shut until it opens
   B(3.7, 6.9, Z0, Z0 + 0.9); B(4.0, 6.5, -3.7, -2.9); B(3.9, 4.5, -1.55, -1.05); nav.blockTagged('chair', 5.2, 5.8, -1.6, -1.0); B(6.45, 6.95, -1.8, -0.8);
-  nav.blockTagged('mdoor', 4.7, 5.5, CN - 0.2, CN + 0.12);
+  nav.blockTagged('mdoor', 4.7, 5.5, CN - 0.2, CN + 0.12);   // shut; when it opens the leaf stands along the room's side of the jamb (see places/office.js)
   B(6.0, 6.6, 1.85, 2.25);                                           // trolley
   B(-3.35, -2.55, CS, CS + 0.75); B(-5.8, -5.0, CS, CS + 0.58); B(X0, X0 + 0.5, 3.1, 5.3); B(-5.2, -3.6, 4.25, 5.15); B(-4.25, -2.35, 5.6, Z1); B(-6.75, -6.25, 5.65, Z1); B(-2.75, -2.35, 4.4, 5.2);
   B(0.15, 1.75, CS, CS + 0.62); B(1.15, 1.8, 3.6, 5.0); B(-2.15, -1.45, CS, CS + 0.62); B(-1.25, -0.35, 4.25, 5.3); B(-2.05, -1.75, 5.85, Z1); B(1.2, 1.6, 5.8, Z1);
