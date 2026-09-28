@@ -5,7 +5,7 @@ A 3D RPG about a Western IT engineer at a giant Japanese company, where Japanese
 ## Active
 
 - `game3d/`: the game (three.js). Open `game3d/index.html` from a local server (`python3 -m http.server 8771 --bind 127.0.0.1` in the repo root, then http://127.0.0.1:8771/game3d/).
-- `bible/`: the world bible, http://127.0.0.1:8771/bible/. Hand-written facts in `bible/facts.yaml`; `python3 tools/bible/build.py` rebuilds the page data.
+- `bible/`: the world bible, http://127.0.0.1:8771/bible/. Most of it is read live from the repo when the page loads (bible/live.js: story files, ui.js portraits, lang.js words, GUIDE quotes, art/approved, notes); `./start` rebuilds the rest with `tools/bible/build.py`. `bible/facts.yaml` keeps only history, rejections and the question lists.
 - `art/approved/`: approved art only, one folder per bible id (see its README). If a file isn't in the bible, it isn't approved.
 - `art/`: prompt guides (`PROMPTS.md`, `STYLE.md`), Jørgen's reference images (`art/refs/`) and work in progress.
 - `tools/`: image, voice and build tools. `tools/imagegen/run.sh` starts the image gen dashboard, `tools/island_audio/` is the voice pipeline, `tools/voice-refs/` has the voice clone clips.
