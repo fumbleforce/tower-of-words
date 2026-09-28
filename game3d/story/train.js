@@ -112,7 +112,6 @@ export default {
       { say: 'mio', emo: 'amused', face: 'smile', text: "And Mori-san is going to be so polite with you, and you'll just stand there." },
       { say: 'mio', emo: 'casual', face: 'neutral', text: "えっと, okay. First one, {ohayo}. You say it to everybody in the morning. The guard at the gate is really strict about it." },
       { do: 'gesture', who: 'mio', kind: 'wave' },
-      '> She gives a small wave and a nod with it.',
       { say: 'mio', emo: 'slow', slow: true, text: '{ohayo}...' },
       { do: 'type', word: 'ohayo', from: 'mio', prompt: "mio: Say it to me, it's fine." },
       { say: 'mio', emo: 'amused', face: 'smile', text: "{ohayo}. Mm, okay, not bad." },
