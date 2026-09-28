@@ -177,18 +177,20 @@ export async function trainPlace(game) {
   const doorLamps = [], myLeaves = [];
   const lampShut = emissive('#ffcf8a', '#ffb24a', 1.8), lampOpen = emissive('#b8f5c8', '#46d18a', 2.2);
   for (const dx of [-DOOR_X, DOOR_X]) {
-    for (const s of [-1, 1]) car.root.add(rbox(0.07, 0.8, 0.16, '#3a404b', { x: dx + s * (DOOR_W / 2 + 0.035), z: LZ + T / 2, r: 0.02 }));
-    car.root.add(rbox(DOOR_W + 0.2, 0.08, 0.16, '#3a404b', { x: dx, y: 0.8, z: LZ + T / 2, r: 0.02 }));
-    const lamp = rbox(0.24, 0.05, 0.1, null, { x: dx, y: 0.88, z: LZ + T / 2, r: 0.015, m: lampShut, cast: false });
+    for (const s of [-1, 1]) car.root.add(rbox(0.09, 0.9, 0.2, '#2a2f38', { x: dx + s * (DOOR_W / 2 + 0.045), z: LZ + T / 2, r: 0.02 }));
+    car.root.add(rbox(DOOR_W + 0.24, 0.1, 0.2, '#2a2f38', { y: 0.88, x: dx, z: LZ + T / 2, r: 0.02 }));
+    // a dark doorway behind the leaves, so the gap shows when they open
+    car.root.add(rbox(DOOR_W - 0.02, 0.84, 0.02, '#1c2027', { x: dx, y: 0.02, z: LZ + T / 2 - 0.05, r: 0.01, cast: false }));
+    const lamp = rbox(0.3, 0.06, 0.12, null, { x: dx, y: 0.98, z: LZ + T / 2, r: 0.015, m: lampShut, cast: false });
     car.root.add(lamp); doorLamps.push(lamp);
     car.root.add(rbox(DOOR_W, 0.006, 0.12, '#d8b447', { x: dx, y: 0.001, z: LZ - 0.02, r: 0.003, cast: false }));
     // full-height sliding leaves (taller than the cut wall so they read), each with a window and a yellow edge
     for (const s of [-1, 1]) {
       const leaf = new THREE.Group();
-      leaf.add(rbox(DOOR_W / 2 - 0.01, 0.76, 0.05, '#c3c9d1', { r: 0.015 }));
-      leaf.add(rbox(DOOR_W / 2 - 0.12, 0.3, 0.056, '#4d6278', { y: 0.36, r: 0.02, m: mat('#56708a', { roughness: 0.2 }) }));
-      leaf.add(rbox(0.03, 0.74, 0.058, '#e0b83a', { x: -s * (DOOR_W / 4 - 0.02), y: 0.01, r: 0.01, cast: false }));
-      leaf.position.set(dx + s * DOOR_W / 4, 0.02, LZ + T / 2 + 0.02);
+      leaf.add(rbox(DOOR_W / 2 - 0.01, 0.84, 0.06, '#8fa2bb', { r: 0.015 }));
+      leaf.add(rbox(DOOR_W / 2 - 0.12, 0.34, 0.066, '#4d6278', { y: 0.4, r: 0.02, m: mat('#2f4257', { roughness: 0.2 }) }));
+      leaf.add(rbox(0.04, 0.82, 0.068, '#e0b83a', { x: -s * (DOOR_W / 4 - 0.02), y: 0.01, r: 0.01, cast: false }));
+      leaf.position.set(dx + s * DOOR_W / 4, 0.02, LZ + T / 2 + 0.03);
       car.root.add(leaf); myLeaves.push({ g: leaf, x0: leaf.position.x, s });
     }
   }

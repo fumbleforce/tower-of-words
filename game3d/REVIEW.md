@@ -9,6 +9,12 @@ References: train `ref/1-train-arrival.png`, gate `ref/2-security-gate-muted.png
 | Round | Train | Gate | Office | Shots |
 |---|---|---|---|---|
 | 1 | 5 | 5 | 4 | shots/round-1 |
+| 2 | 6 | 6 | 6 | shots/round-2 |
+| 3 | 6 | 7 | 6 | shots/round-3 |
+| 4 | 7 | 7 | 6 | shots/round-4 |
+| 5 | 7 | 7 | 6 | shots/round-5 |
+
+None has reached the pass mark of 8 yet.
 
 ### Round 1 (2026-09-28)
 
@@ -17,3 +23,25 @@ References: train `ref/1-train-arrival.png`, gate `ref/2-security-gate-muted.png
 - Office 4: flat bright light, beige floor and pale walls, no light pools or gloss, empty copy room, kitchenette and corridor, cloth-covered monitors reading as pillows, rack backs as black boxes.
 
 Fixed after round 1: muted slate walls with skirting, cooler floors with gloss, warm lamp pools (point lights at every wall lamp and office fixture), gradient windows, visible tinted glass, lower cameras (50 to 51 degrees), people and Eric with smaller heads (2.8 to 3 heads), markers above heads and shown only near the player, cool grey platform and ochre tactile strips, draped monitor covers, racks facing the camera, more dressing in the corridor and bottom rooms, commuters and background people in the lobby, visible ceiling fixtures removed (Jørgen), the office period set to morning on arrival.
+
+### Round 2
+- Train 6: dead band of near platform, near-bench passengers read as heads, black silhouette by the right door, artifacts at the near wall (door leaves poking through the cut wall).
+- Gate 6: camera too steep, phone bottom 30% empty, helmet-like heads, palette too saturated navy, no contact shadows.
+- Office 6: dark navy walls, beige floor, phone band, sparse bottom row, woman with buns (Mio, Meshy) reads as a lump.
+Fixed: slate walls, cooler floors, desaturated benches, lower camera and phone lead, contact shadows, hidden door leaves, more props, rougher character material.
+
+### Round 3
+- Train 6, gate 7 (strongest), office 6. Clone-like commuters, bollards that look like people, the island and bottom rooms thin.
+Fixed: varied commuters, low square bollards, bigger cat, a meeting table, tighter office camera, a fill light by the far door.
+
+### Round 4
+- Train 7, gate 7, office 6. Chairs floating off desks, a stray paper stack, lifts proud of the wall, the coffee machine cropped.
+Fixed: chairs snug, lift surrounds, coffee machine moved in. Jørgen: "the train has no door", so the platform-side doors got full-height leaves, frames, lamps (amber shut, green open), a yellow edge and threshold, and a dark gap when open.
+
+### Round 5
+- Train 7: the dark standing passenger by the far door, navy bags on the near bench, empty platform bands.
+- Gate 7: a commuter half hidden behind the front glass, the cat reads as a smear, phone framing.
+- Office 6: bottom rooms and corridor still thin, no floor light pools, Mio's buns read as a boulder from above (her model is not changed on purpose), floor slightly mauve.
+Fixed after round 5: office floor cooler, filing row on the office's left wall, corridor bench, chatting pair moved off the plant, phone gate camera leads further toward the gate, clearer door panels.
+
+Not changed on purpose: the train's passengers and car (from side/train, recoloured only), Mio's shape (Meshy, colour only), the steep train camera (Jørgen's request).
