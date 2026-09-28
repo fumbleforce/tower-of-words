@@ -87,7 +87,13 @@ export async function trainPlace(game) {
   rei.head.rotation.x = -0.2; rei.breath = 0.012; list.push(rei);
   { const b = blob(0.5, 0.3); b.position.set(2.1, 0.004, -(LZ - 0.24) + 0.26); car.root.add(b); rei.blob = b; }
   const laptop = new THREE.Group();
-  { const base = rbox(0.24, 0.015, 0.16, '#b9bec6', { r: 0.006 }); const lid = rbox(0.24, 0.16, 0.012, '#c9ced6', { y: 0.015, z: -0.075, r: 0.006 }); lid.rotation.x = -0.35; const scr = new THREE.Mesh(new THREE.PlaneGeometry(0.21, 0.13), emissive('#cfe4ff', '#9fc8ff', 0.8)); scr.position.set(0, 0.09, -0.065); scr.rotation.x = -0.35; laptop.add(base, lid, scr); }
+  { // keyboard on the lap, hinge at the far edge, screen tilted back and facing the sitter (who faces +z... so -z)
+    const base = rbox(0.24, 0.015, 0.16, '#b9bec6', { r: 0.006 });
+    const kb = rbox(0.2, 0.004, 0.08, '#3a3f48', { y: 0.015, z: -0.02, r: 0.002, cast: false });
+    const hinge = new THREE.Group(); hinge.position.set(0, 0.015, 0.08); hinge.rotation.x = 0.3;
+    const lid = rbox(0.24, 0.16, 0.012, '#c9ced6', { r: 0.006 }); lid.position.z = 0.006; hinge.add(lid);
+    const scr = new THREE.Mesh(new THREE.PlaneGeometry(0.21, 0.13), emissive('#cfe4ff', '#9fc8ff', 0.8)); scr.rotation.y = Math.PI; scr.position.set(0, 0.08, -0.002); hinge.add(scr);
+    laptop.add(base, kb, hinge); }
   laptop.position.set(0, 0.02, 0.2); rei.torso.add(laptop);
   const folder = rbox(0.22, 0.025, 0.3, '#2f3a55', { x: 1.55, y: SEAT_Y, z: -(LZ - 0.26), r: 0.008 }); car.root.add(folder);
   const cup = new THREE.Group();

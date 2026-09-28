@@ -13,12 +13,12 @@ export function setIdleT(v) { IDLE_T = v; }
 // Region colours (sRGB). The model's navy shades differ only slightly; each face keeps its shade relative
 // to the mean navy, so the planes still read.
 export const MIO_COLOURS = {
-  hair: '#3b4661',      // soft blue-black (was saturated navy)
-  hoodie: '#6e8a93',    // slate blue hoodie, lighter than the hair so the head and body separate
-  trousers: '#363c4e',  // dark charcoal cargo trousers
+  hair: '#13292f',      // dark green bordering on black, sampled from her portrait (proto2/cast-fixed/mio-after.webp)
+  hoodie: '#565e68',    // dark charcoal hoodie, separate from the hair
+  trousers: '#3b4152',  // dark charcoal cargo trousers
   shoes: '#3d4658',     // dark part of the sneakers
-  teal: '#43b8b2',      // teal bits: hair streaks, trouser tabs, shoe trim (a little softer)
-  tealDark: '#1f7f86',
+  teal: '#20a081',      // the lighter green underneath, sampled from the same portrait
+  tealDark: '#188066',
   skin: null,           // unchanged
   white: '#f3f1ec',     // sneaker soles and trim, a touch warmer
 };
@@ -239,6 +239,8 @@ export async function loadMio({ height = 1.12, colours = MIO_COLOURS } = {}) {
   reshapeJaw(skinned);
   const { cols, tints, navyLum } = recolour(skinned, data, colours);
   const NAVY_L = 0.2126 * lin(24) + 0.7152 * lin(47) + 0.0722 * lin(96);
+  const tc = colours && colours.teal ? new THREE.Color(colours.teal) : new THREE.Color(1, 1, 1);
+  const TEAL_V = colours && colours.teal ? `vec3(${tc.r.toFixed(4)}, ${tc.g.toFixed(4)}, ${tc.b.toFixed(4)})` : 'texel.rgb';
   model.traverse((o) => {
     if (!o.isMesh) return;
     o.castShadow = true; o.receiveShadow = true;
@@ -268,6 +270,9 @@ export async function loadMio({ height = 1.12, colours = MIO_COLOURS } = {}) {
  float tl = dot(texel.rgb, vec3(0.2126, 0.7152, 0.0722));
  float navy = step(0.5, vTint.a) * step(texel.r, 0.08) * step(texel.g, texel.b * 0.6) * step(0.035, texel.b) * step(texel.b, 0.3);
  texel.rgb = mix(texel.rgb, vTint.rgb * clamp(tl / ${NAVY_L.toFixed(5)}, 0.4, 1.8), navy);
+ // teal texels (hair streaks, trim) take the portrait's green, keeping their shade
+ float tealT = step(0.5, vTint.a) * step(texel.r + 0.12, texel.g) * step(0.12, texel.b);
+ texel.rgb = mix(texel.rgb, ${TEAL_V} * clamp(tl / 0.35, 0.3, 1.6), tealT);
  diffuseColor *= mix( vec4( 1.0 ), texel, vUseTex );
 #endif`);
     };
