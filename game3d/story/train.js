@@ -96,7 +96,6 @@ export default {
 
     // ------------------------------------------------------------------ the lesson
     lesson: [
-      '> A minute later she takes them off again.',
       'mio: Ne... sorry. Where are you from?',
       'eric: Norway.',
       'mio: Norway... okay. And Japanese? You speak it, like, at all?',
