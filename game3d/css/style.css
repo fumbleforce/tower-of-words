@@ -451,3 +451,56 @@ body.phone .emote.wide { width: 112px; }
 #cmdsPanel li.wrow .cw { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
 #cmdsPanel li.wrow .jp { font-size: 19px; white-space: nowrap; }
 #cmdsPanel li.wrow .rd { color: var(--ink-dim); font-size: 13px; }
+
+/* ---------- dialogue: Stage light (design/DIALOGUE-OVERLAY.md, direction 1; Jørgen's pick) ----------
+   No box. A navy gradient rises from the bottom and the edges darken a little; the line sits in the band. Portraits
+   stand on the bottom edge (placed from their face boxes in ui.js), take the room's light, the listener steps back.
+   Phone: a solid grey band at the bottom, the speaker standing on its top edge. */
+:root { --night: 14, 18, 28; --tint-top: 255, 196, 150; --tint-low: 24, 34, 58; --band-grey: #1d222b; }
+body[data-place="train"] { --tint-top: 255, 186, 128; --tint-low: 28, 40, 60; }
+body[data-place="office"] { --tint-top: 205, 226, 255; --tint-low: 22, 30, 44; }
+#stage { position: absolute; inset: 0; pointer-events: none; z-index: 1; }
+#stage[hidden] { display: none; }
+#stage .focus { position: absolute; inset: 0;
+  background:
+    linear-gradient(to top, rgba(var(--night), .94) 0, rgba(var(--night), .82) 120px, rgba(var(--night), .35) 250px, rgba(var(--night), 0) 360px),
+    radial-gradient(120% 90% at 50% 30%, transparent 55%, rgba(var(--night), .45) 100%);
+  animation: fadeIn .25s ease; }
+@keyframes fadeIn { from { opacity: 0; } }
+#stage .por { position: absolute; transform-origin: 50% 100%; transition: filter .25s, transform .25s, opacity .25s; }
+#stage .por[hidden] { display: none; }
+#stage .por img { display: block; width: 100%; height: 100%; filter: saturate(.88) brightness(.96); animation: breathe 4.2s ease-in-out infinite; transform-origin: 50% 100%; }
+#stage .por .grade, #stage .por .rim { position: absolute; inset: 0; -webkit-mask: var(--src) center / 100% 100% no-repeat; mask: var(--src) center / 100% 100% no-repeat; }
+#stage .por .grade { background: linear-gradient(180deg, rgba(var(--tint-top), .16) 0%, rgba(var(--tint-top), 0) 30%, rgba(var(--tint-low), 0) 46%, rgba(var(--tint-low), .8) 88%); mix-blend-mode: multiply; }
+#stage .por .rim { background: linear-gradient(100deg, rgba(var(--tint-top), .22) 0%, rgba(var(--tint-top), 0) 22%); mix-blend-mode: screen; }
+#stage .por.right .rim { background: linear-gradient(260deg, rgba(var(--tint-top), .2) 0%, rgba(var(--tint-top), 0) 22%); }
+/* a cut-out that ends above the cut (Eric's) dissolves into the dark instead of showing an edge */
+#stage .por.short { -webkit-mask: linear-gradient(to top, transparent 0, #000 70px); mask: linear-gradient(to top, transparent 0, #000 70px); }
+#stage .por.listen { filter: brightness(.4) saturate(.5); transform: scale(.94); }
+#stage .por.listen img { animation: none; }
+#stage .por.hop { animation: hop .32s ease-out; }
+@keyframes breathe { 50% { transform: scaleY(1.006); } }
+@keyframes hop { 0%, 100% { translate: 0 0; } 35% { translate: 0 -14px; } 65% { translate: 0 2px; } }
+
+#talk, #talk.in { position: absolute; left: 33%; right: 27%; bottom: 36px; width: auto; transform: none; padding: 0; border: 0; border-radius: 0; background: none; box-shadow: none; z-index: 2;
+  text-shadow: 0 1px 2px rgba(0,0,0,.75), 0 0 18px rgba(var(--night), .9); }
+#talk.in { animation: riseT .22s ease-out; }
+@keyframes riseT { from { translate: 0 26px; opacity: 0; } }
+#talk .who { gap: 12px; margin-bottom: 6px; }
+#talk .nm { height: auto; padding: 0; background: none; border-radius: 0; font-size: 19px; color: var(--c); letter-spacing: .01em; }
+#talk .rl { font-size: 13px; }
+#talk .line { font-size: 22px; line-height: 1.5; }
+#talk.narr .line { color: #dfe3ea; font-style: italic; }
+#talk .more { right: 0; bottom: 4px; }
+#talk .chip { text-shadow: none; }
+#talk.typing .tp-in { text-shadow: none; }
+/* the phone-call line keeps its light card */
+#talk.phone { padding: 14px 18px 16px; border-radius: 14px; text-shadow: none; }
+@media (max-width: 1100px) { #talk, #talk.in { left: 30%; right: 22%; } }
+
+body.phone #stage .focus { background: linear-gradient(to top, var(--band-grey) 0, var(--band-grey) var(--band, 180px), rgba(29, 34, 43, .55) calc(var(--band, 180px) + 26px), rgba(var(--night), 0) calc(var(--band, 180px) + 120px)); }
+body.phone #stage .por .grade { background: linear-gradient(180deg, rgba(var(--tint-top), .14) 0%, rgba(var(--tint-top), 0) 30%, rgba(var(--tint-low), 0) 50%, rgba(var(--tint-low), .55) 96%); }
+body.phone #talk, body.phone #talk.in { left: 16px; right: 16px; bottom: 0; padding: 12px 0 calc(18px + env(safe-area-inset-bottom)); border-radius: 0; }
+body.phone #talk .line { font-size: 19px; }
+body.phone #talk .nm { font-size: 17px; }
+body.phone #talk.phone { left: 10px; right: 10px; bottom: 10px; padding: 12px 14px; border-radius: 14px; }
