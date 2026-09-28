@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+# Serve the repo locally and print the hub link.
+# Usage: ./start            (port 8771)
+#        ./start --open     (also open the hub in your browser)
+#        PORT=9000 ./start
+set -euo pipefail
+cd "$(dirname "$0")"
+PORT="${PORT:-8771}"
+URL="http://127.0.0.1:${PORT}/"
+
+if curl -s -o /dev/null "$URL"; then
+  echo "Already running on port ${PORT}."
+else
+  nohup python3 -m http.server "$PORT" --bind 127.0.0.1 >/tmp/amakawa-server.log 2>&1 &
+  for _ in 1 2 3 4 5 6 7 8 9 10; do
+    curl -s -o /dev/null "$URL" && break
+    sleep 0.3
+  done
+  echo "Started the server on port ${PORT} (log: /tmp/amakawa-server.log)."
+fi
+
+echo
+echo "  Hub:    ${URL}"
+echo "  Game:   ${URL}game3d/"
+echo "  Bible:  ${URL}bible/"
+echo "  Notes:  ${URL}hub/notes.html"
+echo
+echo "Stop it with: pkill -f 'http.server ${PORT}'"
+
+if [[ "${1:-}" == "--open" ]]; then
+  xdg-open "$URL" >/dev/null 2>&1 || true
+fi

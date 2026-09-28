@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Amakawa hub</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root { --bg: #14181f; --bar: #1b2029; --line: #2a313d; --text: #dfe3ea; --dim: #8f98a8; --teal: #3fc1b0; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; background: var(--bg); color: var(--text); font: 15px/1.4 Geist, system-ui, sans-serif; }
+  body { display: flex; flex-direction: column; }
+  header { display: flex; align-items: center; gap: 4px; padding: 0 12px; height: 46px; background: var(--bar); border-bottom: 1px solid var(--line); flex: none; overflow-x: auto; }
+  header b { margin-right: 14px; white-space: nowrap; }
+  header a { color: var(--dim); text-decoration: none; padding: 7px 12px; border-radius: 8px; white-space: nowrap; }
+  header a:hover { color: var(--text); background: #232a35; }
+  header a.on { color: var(--text); background: #232a35; box-shadow: inset 0 -2px 0 var(--teal); }
+  header .sp { flex: 1; }
+  header .new { font-size: 13px; }
+  iframe { flex: 1 1 auto; min-height: 0; height: 100%; display: block; width: 100%; border: 0; background: var(--bg); }
+</style>
+</head>
+<body>
+<header>
+  <b>Amakawa</b>
+  <a href="#game" data-src="game3d/">Game</a>
+  <a href="#bible" data-src="bible/">Bible</a>
+  <a href="#notes" data-src="hub/notes.html">Notes</a>
+  <a href="#imagegen" data-src="http://127.0.0.1:8772/">Image gen</a>
+  <span class="sp"></span>
+  <a class="new" id="newtab" href="game3d/" target="_blank" rel="noopener">Open in new tab</a>
+</header>
+<iframe id="view" title="Content" allow="autoplay; fullscreen"></iframe>
+<script>
+  const tabs = [...document.querySelectorAll('header a[data-src]')];
+  const view = document.getElementById('view');
+  const newtab = document.getElementById('newtab');
+  function show() {
+    const key = location.hash.slice(1) || 'game';
+    const tab = tabs.find(t => t.hash === '#' + key) || tabs[0];
+    tabs.forEach(t => t.classList.toggle('on', t === tab));
+    if (view.getAttribute('src') !== tab.dataset.src) view.src = tab.dataset.src;
+    newtab.href = tab.dataset.src;
+    document.title = tab.textContent + ' · Amakawa';
+  }
+  addEventListener('hashchange', show);
+  show();
+</script>
+</body>
+</html>
