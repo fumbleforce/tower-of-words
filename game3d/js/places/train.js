@@ -108,7 +108,7 @@ export async function trainPlace(game) {
   const cupSt = { want: 0, k: 0 };
   // Mio's bag of food from her mother, on the free seat beside her (the folder and cup were Rei's; Mio has the seat now)
   folder.visible = false; cup.visible = false;
-  const foodBag = new THREE.Group();
+  const foodBag = new THREE.Group(); let bagWobble = false;
   { const b = rbox(0.24, 0.2, 0.14, '#c9b48d', { r: 0.03 }); const band = rbox(0.245, 0.04, 0.145, '#b8573f', { y: 0.12, r: 0.01 }); const h1 = new THREE.Mesh(new THREE.TorusGeometry(0.06, 0.01, 5, 10, Math.PI), mat('#8a6c4a')); h1.position.y = 0.2; const lid = rbox(0.1, 0.05, 0.09, '#e8e2d0', { y: 0.2, x: 0.05, r: 0.015 }); foodBag.add(b, band, h1, lid); }
   foodBag.position.set(1.62, SEAT_Y, -(LZ - 0.26)); car.root.add(foodBag);
 
@@ -398,9 +398,13 @@ export async function trainPlace(game) {
     window: { label: 'Window', kind: 'thing small', anchor: carPt(-1.1, 1.0, -LZ), ...at(-1.1, -0.3, -1.1, -LZ), noMarker: true },
     poster: { label: 'Poster', kind: 'thing small', anchor: carPt(-LX, 1.0, -0.78), ...at(-3.5, -0.4, -LX, -0.78), noMarker: true },
     sign: { label: 'Station sign', kind: 'thing small', anchor: (v) => { signs[0].getWorldPosition(v); v.y += 1.5; return v; }, ...at(2.6, LZ + 1.3, 2.6, LZ + 1.9), enabled: () => st.arrived && game.player.root.position.z > LZ },
+    foodbag: { label: 'Her lunch bag', verb: 'Catch', kind: 'thing small', anchor: (v) => { foodBag.getWorldPosition(v); v.y += 0.35; return v; }, ...at(1.62, -0.35, 1.62, -(LZ - 0.26)), enabled: () => bagWobble },
+    stander: { label: 'Man with a bag', kind: 'person small', anchor: rigAnchor(stander), ...at(3.3, -0.45, 3.58, -0.78), enabled: () => stander.root.visible },
     platform: { label: 'Platform', kind: 'thing small', anchor: carPt(DOOR_X, 0.3, LZ + 1.2), ...at(DOOR_X, LZ + 1.0, DOOR_X, LZ + 1.5), noMarker: true },
   };
-  const zones = { door_zone: (x, z) => st.door > 0.3 && z > LZ - 0.35 && Math.abs(Math.abs(x) - DOOR_X) < 0.45 };
+  const zones = { door_zone: (x, z) => st.door > 0.3 && z > LZ - 0.35 && Math.abs(Math.abs(x) - DOOR_X) < 0.45,
+    // standing on the free seat's floor spot (seat_far_r)
+    free_seat: (x, z) => Math.hypot(x - 1.58, z - (-(LZ - 0.24) + 0.55)) < 0.3 };
 
   function standUp(r) {
     r.seated = false; r.root.position.y = 0; for (const l of r.legs) l.rotation.set(0, 0, 0); for (const k of r.knees) k.rotation.set(0, 0, 0); for (const a of r.arms) a.rotation.set(0, 0, 0);
@@ -484,6 +488,7 @@ export async function trainPlace(game) {
       kitty.userData.tail.rotation.y = tc < 0.6 ? Math.sin(tc / 0.6 * Math.PI * 2) * 0.35 : Math.sin(simT * 0.8) * 0.05;
       kitty.userData.tip.rotation.y = tc < 0.6 ? Math.sin(tc / 0.6 * Math.PI * 2 - 0.8) * 0.6 : 0;
       kitty.userData.head.rotation.x = Math.sin(simT * 0.35) * 0.05;
+      if (bagWobble) { foodBag.rotation.x = Math.sin(simT * 7) * 0.12; foodBag.rotation.z = -0.15 + Math.sin(simT * 5.3) * 0.05; }
       sun.intensity = 5.6 * (1 - 0.12 * world.pillarNear() * k) * (station.visible && Math.abs(station.position.x) < PL / 2 + 4 ? 0.85 : 1);
       if (st.v > 0.5) { const j = Math.floor(tj / JOINT); if (j !== lastJ) { lastJ = j; if (k > 0.3) sfx('clack'); } }
       prevM = m;
@@ -561,7 +566,13 @@ export async function trainPlace(game) {
       },
       wake: ({ who = 'kuroda' }) => { const r = people[who]; if (!r || !r.hips) return; r.act = null; r.head.rotation.set(0.1, 0, 0); },
       bag: async ({ state }) => {
-        const p0 = foodBag.position.clone();
+        const p0 = foodBag.position.clone(); bagWobble = false; foodBag.rotation.x = 0;
+        // teeter: slides to the front edge of the free seat and wobbles there until it's caught or knocked off
+        if (state === 'teeter') {
+          sfx('clack');
+          await game.tween(0.6, (k) => { foodBag.position.set(p0.x, SEAT_Y, p0.z + 0.2 * k); foodBag.rotation.z = -0.15 * k; });
+          bagWobble = true; return;
+        }
         if (state === 'slide') {
           sfx('clack');
           await game.tween(0.7, (k) => { foodBag.position.set(p0.x + 0.05 * k, SEAT_Y + 0.02 * Math.sin(k * Math.PI) - SEAT_Y * k * k, p0.z + 0.5 * k); foodBag.rotation.z = -1.2 * k; });

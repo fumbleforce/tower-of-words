@@ -250,6 +250,141 @@
   "clear": []
  },
  {
+  "key": "oh-gtvr5a",
+  "speaker": "aoi",
+  "text": "あ、ごめん、ちょっと待って。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [
+   [
+    "matte",
+    "待って"
+   ]
+  ],
+  "clear": [],
+  "emo": "bright"
+ },
+ {
+  "key": "oh-fob4e4",
+  "speaker": "bun",
+  "text": "あ、そこ、空いてますよ。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "polite"
+ },
+ {
+  "key": "oh-1uv3627",
+  "speaker": "youth",
+  "text": "え？あ、あそこ、どうぞ。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "casual"
+ },
+ {
+  "key": "oh-1902qmc",
+  "speaker": "music",
+  "text": "え？…あっち、空いてる。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "low"
+ },
+ {
+  "key": "oh-1p65yct",
+  "speaker": "stander",
+  "text": "…あそこ。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "low"
+ },
+ {
+  "key": "oh-fqmmkq",
+  "speaker": "bun",
+  "text": "いい天気ですね。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "polite"
+ },
+ {
+  "key": "oh-322d0v",
+  "speaker": "youth",
+  "text": "…ん？",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "casual"
+ },
+ {
+  "key": "oh-1c4p8ez",
+  "speaker": "mori",
+  "text": "はい、おはようございます。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [
+   [
+    "ohayo",
+    "おはようございます"
+   ]
+  ],
+  "clear": [],
+  "emo": "polite"
+ },
+ {
+  "key": "oh-1i5g6pb",
+  "speaker": "youth",
+  "text": "あ、ども。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "casual"
+ },
+ {
+  "key": "oh-5hn713",
+  "speaker": "kuro",
+  "text": "…おはようございます。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [
+   [
+    "ohayo",
+    "おはようございます"
+   ]
+  ],
+  "clear": [],
+  "emo": "polite"
+ },
+ {
+  "key": "ln-uf8chl",
+  "speaker": "eric",
+  "text": "Sea on both sides. Nobody said the island was this far out.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "tired"
+ },
+ {
+  "key": "ln-sp6giw",
+  "speaker": "mio",
+  "text": "Ah... okay, I got it. Sorry.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "dry"
+ },
+ {
   "key": "ln-18gggjk",
   "speaker": "mio",
   "text": "Ah, sorry, sorry. Thank you.",
@@ -606,14 +741,24 @@
   "emo": "announcer"
  },
  {
-  "key": "ln-1gpo04t",
+  "key": "ln-1yjhwhw",
   "speaker": "mio",
-  "text": "Oh, this is us.",
+  "text": "Oh, this is us. Go stand by the doors, it gets crowded. I'll pack up.",
   "lang": "en",
   "overheard": false,
   "words": [],
   "clear": [],
   "emo": "casual"
+ },
+ {
+  "key": "ln-15gwc80",
+  "speaker": "mio",
+  "text": "Doors, doors. I'm coming, I'm just packing the pickles.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "dry"
  },
  {
   "key": "ln-1im6xxm",
@@ -768,9 +913,9 @@
   "emo": "hesitant"
  },
  {
-  "key": "ln-1kjjw22",
+  "key": "ln-2b9ndq",
   "speaker": "mio",
-  "text": "Um, don't tell anyone, okay? If someone makes a ticket for it, it comes to me.",
+  "text": "Um, don't tell anyone, okay? If somebody reports it broken, it goes on my list.",
   "lang": "en",
   "overheard": false,
   "words": [],
@@ -1279,21 +1424,6 @@
   "emo": "polite"
  },
  {
-  "key": "oh-5hn713",
-  "speaker": "kuro",
-  "text": "…おはようございます。",
-  "lang": "ja",
-  "overheard": true,
-  "words": [
-   [
-    "ohayo",
-    "おはようございます"
-   ]
-  ],
-  "clear": [],
-  "emo": "polite"
- },
- {
   "key": "oh-1cne4ls",
   "speaker": "kuro",
   "text": "はい…？よろしくおねがいします…",
@@ -1366,21 +1496,6 @@
   "emo": "warm"
  },
  {
-  "key": "oh-1c4p8ez",
-  "speaker": "mori",
-  "text": "はい、おはようございます。",
-  "lang": "ja",
-  "overheard": true,
-  "words": [
-   [
-    "ohayo",
-    "おはようございます"
-   ]
-  ],
-  "clear": [],
-  "emo": "polite"
- },
- {
   "key": "oh-l719zo",
   "speaker": "mori",
   "text": "どうぞ、こちらへ。",
@@ -1436,9 +1551,19 @@
   "emo": "bright"
  },
  {
-  "key": "ln-9k948c",
+  "key": "ln-gaheba",
   "speaker": "kenji",
-  "text": "Ah, sorry, sorry. Your chair... I borrow. My chair is... broken. Pshh.",
+  "text": "Eric-san? I am Kenji! I am new also, two months. So now I am not the newest. Yes!",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "excited"
+ },
+ {
+  "key": "ln-aum2vl",
+  "speaker": "kenji",
+  "text": "Ah, sorry, sorry. Your chair... I borrow it. My chair is... broken. Pshh.",
   "lang": "en",
   "overheard": false,
   "words": [],
@@ -1446,9 +1571,19 @@
   "emo": "sheepish"
  },
  {
-  "key": "ln-oknpk6",
+  "key": "ln-eugoza",
   "speaker": "kenji",
-  "text": "Now it is in machine room. And cat is sleeping on it. Sorry!",
+  "text": "I bring it back for you! It's in machine room, with the cat. Norway has the big forest cats, right? I see on YouTube, they are so big, like...",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "bright"
+ },
+ {
+  "key": "ln-8oehj6",
+  "speaker": "kenji",
+  "text": "...Ah, no. Mio-san says I can't go in machine room anymore. Sorry! You go?",
   "lang": "en",
   "overheard": false,
   "words": [],
@@ -1456,9 +1591,9 @@
   "emo": "sheepish"
  },
  {
-  "key": "ln-1feszul",
+  "key": "ln-1b6zujj",
   "speaker": "kenji",
-  "text": "Chair is okay? Sorry, my English is... very little. Very, very little.",
+  "text": "Chair is okay? If you need anything, I help! Cables, printer, um... I know where is the good tape. My English is very little, but.",
   "lang": "en",
   "overheard": false,
   "words": [],
@@ -1476,9 +1611,9 @@
   "emo": "sheepish"
  },
  {
-  "key": "ln-fsiwwp",
+  "key": "ln-4oeays",
   "speaker": "kenji",
-  "text": "Ha! Okay, okay. Same team.",
+  "text": "Ha! Okay, okay. Then we practise together. Same team!",
   "lang": "en",
   "overheard": false,
   "words": [],
@@ -1585,9 +1720,9 @@
   "emo": "dry"
  },
  {
-  "key": "ln-6fpl77",
+  "key": "ln-1k8iv68",
   "speaker": "mio",
-  "text": "Oh, and come here a second. I have a ticket for you.",
+  "text": "Oh, and come here a second. I have a job for you.",
   "lang": "en",
   "overheard": false,
   "words": [],
@@ -1595,9 +1730,9 @@
   "emo": "casual"
  },
  {
-  "key": "ln-n6hl2r",
+  "key": "ln-1lo2rgb",
   "speaker": "mio",
-  "text": "Okay, your first ticket. I changed your screen to English, by the way.",
+  "text": "Okay, your first repair request. I changed your screen to English, by the way.",
   "lang": "en",
   "overheard": false,
   "words": [],
@@ -2082,9 +2217,9 @@
   "emo": "excited"
  },
  {
-  "key": "ln-zcbvxk",
+  "key": "ln-1khuul",
   "speaker": "kenji",
-  "text": "Melon! You are... genius.",
+  "text": "Melon! You are genius. Now I owe you, I fix anything for you. Well... I try.",
   "lang": "en",
   "overheard": false,
   "words": [],
@@ -2272,9 +2407,9 @@
   "emo": "deadpan"
  },
  {
-  "key": "ln-ocmm04",
+  "key": "ln-1gdjox9",
   "speaker": "mio",
-  "text": "Ah... great. The station made a ticket about the doors. I told them it's the sensor, so now they want B2 to check the sensor.",
+  "text": "Ah... great. The station sent a repair request about the doors. I told them it's the sensor, so now they want B2 to check the sensor.",
   "lang": "en",
   "overheard": false,
   "words": [],
@@ -2282,9 +2417,9 @@
   "emo": "groan"
  },
  {
-  "key": "ln-1ulch7h",
+  "key": "ln-1swqagj",
   "speaker": "mio",
-  "text": "It was supposed to come to me. ...Okay, I'm giving it to you.",
+  "text": "It was supposed to go on my list. ...Okay, I'm putting it on yours.",
   "lang": "en",
   "overheard": false,
   "words": [],
