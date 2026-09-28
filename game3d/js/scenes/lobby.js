@@ -7,7 +7,7 @@ import { PEOPLE, sit, armsLap, walkPose, HIP, idle } from '../cast.js';
 import { cat } from '../train/people.js';
 import { blob, Nav } from '../engine.js';
 import { K } from './office.js';
-import { lightPool, dust, clockHands } from '../places/life.js';
+import { lightPool, dust, clockHands, groundShadows } from '../places/life.js';
 
 const X = 6.3, Z = 4.5, WH = 1.9; // half sizes, wall height
 
@@ -100,7 +100,7 @@ function entrance() {
   const g = new THREE.Group();
   // two fixed glass side panels and two sliding leaves, standing open: the leaves sit slid aside just inside the
   // side panels (Jørgen: "I walk straight through the glass of the doors. Just leave them open.")
-  const glassM = new THREE.MeshStandardMaterial({ color: '#dce8ef', roughness: 0.15, transparent: true, opacity: 0.55, depthWrite: false });
+  const glassM = new THREE.MeshStandardMaterial({ color: '#8ea7b8', roughness: 0.06, metalness: 0.2, transparent: true, opacity: 0.32, depthWrite: false });
   const frame = mat('#3f444e');
   const W = 4.6, H = 1.2, IN = W / 4 + 0.05;   // IN: the edge of the opening, where the side panels start
   g.add(rbox(W + 0.2, 0.08, 0.14, null, { y: H, m: frame }));
@@ -123,14 +123,29 @@ function entrance() {
 }
 
 function liftDoor(x, z) {
+  // a real opening in the back wall with a lit car behind it; the leaves slide into the wall's thickness
   const g = new THREE.Group();
-  g.add(rbox(1.44, 1.6, 0.06, '#4c515b', { z: -0.02, r: 0.02 }), rbox(1.34, 1.52, 0.08, '#5d636d', { r: 0.02 }));
-  const inside = rbox(1.1, 1.36, 0.02, '#c9c3b6', { z: -0.06, r: 0.01, m: emissive('#d8cfbf', '#f3dfb8', 0.4) }); g.add(inside);
-  const leaves = [-1, 1].map((s) => { const l = rbox(0.54, 1.36, 0.05, null, { x: s * 0.275, z: 0.03, r: 0.01, m: mat('#8e949d', { roughness: 0.45, metalness: 0.35 }) }); g.add(l); return l; });
-  const ind = rbox(0.36, 0.12, 0.03, '#1d2027', { y: 1.4, z: 0.05, r: 0.01, cast: false }); g.add(ind);
+  const fm = mat('#4c515b');
+  g.add(rbox(1.44, 0.1, 0.06, null, { y: 1.44, z: 0.02, r: 0.02, m: fm }));
+  for (const s of [-1, 1]) g.add(rbox(0.1, 1.44, 0.06, null, { x: s * 0.67, z: 0.02, r: 0.02, m: fm }));
+  g.add(rbox(1.3, 0.012, 0.1, '#6d737d', { y: 0.001, z: 0.0, r: 0.003, cast: false }));                 // sill
+  const back = emissive('#d8cfbf', '#f3dfb8', 0.32), side = emissive('#a9a79f', '#e8d4b0', 0.16);
+  const car = new THREE.Group(); car.position.z = -0.42;   // shallow, so it stays hidden behind the tall wall from the camera
+  car.add(rbox(1.2, 0.012, 0.6, '#9a9890', { r: 0.004, cast: false }));
+  car.add(rbox(1.2, 1.1, 0.05, null, { z: -0.3, r: 0.01, m: back }));
+  for (const s of [-1, 1]) { car.add(rbox(0.05, 1.1, 0.6, null, { x: s * 0.6, r: 0.01, m: side })); car.add(rbox(0.04, 0.04, 0.45, '#c9cdd2', { x: s * 0.55, y: 0.5, r: 0.015, cast: false })); }
+  car.add(rbox(0.12, 0.26, 0.02, '#8d939d', { x: 0.5, y: 0.5, z: -0.27, r: 0.01, cast: false }));
+  for (let i = 0; i < 3; i++) { const b = new THREE.Mesh(new THREE.CircleGeometry(0.018, 10), emissive('#ffe2b8', '#ffc680', 1.2)); b.position.set(0.5, 0.42 + i * 0.06, -0.259); car.add(b); }
+  g.add(car);
+  const leaves = [-1, 1].map((s) => { const l = rbox(0.6, 1.36, 0.05, null, { x: s * 0.31, z: -0.06, r: 0.01, m: mat('#8e949d', { roughness: 0.5, metalness: 0.2 }) }); l.add(rbox(0.012, 1.3, 0.052, '#5d636d', { x: -s * 0.3, y: 0.03, r: 0.003, cast: false })); g.add(l); return l; });
+  const ind = rbox(0.36, 0.12, 0.03, '#1d2027', { y: 1.52, z: 0.05, r: 0.01, cast: false }); g.add(ind);
+  const litTex = textTexture((c, W, H) => { c.fillStyle = '#1d2027'; c.fillRect(0, 0, W, H); c.fillStyle = '#ffb566'; c.font = '700 44px sans-serif'; c.textAlign = 'center'; c.textBaseline = 'middle'; c.fillText('1  \u25B2', W / 2, H / 2 + 2); }, 128, 56);
+  const lit = new THREE.Mesh(new THREE.PlaneGeometry(0.3, 0.11), new THREE.MeshBasicMaterial({ map: litTex })); lit.position.set(0, 1.52, 0.067); g.add(lit);
+  g.add(rbox(0.08, 0.16, 0.02, '#8d939d', { x: 0.82, y: 0.62, z: 0.05, r: 0.01, cast: false }));
+  { const cb = new THREE.Mesh(new THREE.CircleGeometry(0.022, 12), emissive('#ffe2b8', '#ffc680', 1.4)); cb.position.set(0.82, 0.66, 0.062); g.add(cb); }
   g.position.set(x, 0, z + 0.02);
   const L = { g, k: 0, want: 0, x };
-  L.update = () => { L.k += (L.want - L.k) * 0.08; leaves[0].position.x = -0.275 - L.k * 0.5; leaves[1].position.x = 0.275 + L.k * 0.5; };
+  L.update = () => { L.k += (L.want - L.k) * 0.08; leaves[0].position.x = -0.31 - L.k * 0.6; leaves[1].position.x = 0.31 + L.k * 0.6; };
   return L;
 }
 function noticeScreen() {
@@ -147,7 +162,7 @@ function noticeScreen() {
 
 let _winTex = null;
 function winMat(k) {
-  if (!_winTex) _winTex = textTexture((g, W, H) => { const gr = g.createLinearGradient(0, 0, 0, H); gr.addColorStop(0, '#c9d6e2'); gr.addColorStop(0.55, '#f0d6b4'); gr.addColorStop(1, '#ffc98a'); g.fillStyle = gr; g.fillRect(0, 0, W, H); g.fillStyle = 'rgba(80,90,105,.35)'; g.fillRect(W / 2 - 3, 0, 6, H); g.fillRect(0, H * 0.35, W, 5); }, 64, 128);
+  if (!_winTex) _winTex = textTexture((g, W, H) => { const gr = g.createLinearGradient(0, 0, 0, H); gr.addColorStop(0, '#b9cde0'); gr.addColorStop(0.5, '#e6dccb'); gr.addColorStop(1, '#ffcf96'); g.fillStyle = gr; g.fillRect(0, 0, W, H); g.fillStyle = 'rgba(60,68,80,.75)'; g.fillRect(W / 2 - 3, 0, 6, H); g.fillRect(0, H * 0.33, W, 5); g.fillRect(0, 0, W, 4); g.fillRect(0, H - 4, W, 4); g.fillRect(0, 0, 4, H); g.fillRect(W - 4, 0, 4, H); }, 64, 128);
   return new THREE.MeshStandardMaterial({ map: _winTex, emissive: new THREE.Color('#ffffff'), emissiveMap: _winTex, emissiveIntensity: k, roughness: 0.3 });
 }
 function mat2(w, d, color) { const m = new THREE.Mesh(new THREE.BoxGeometry(w, 0.012, d), mat(color, { roughness: 0.95 })); m.position.y = 0.006; m.receiveShadow = true; return m; }
@@ -166,7 +181,7 @@ function sign(text, sub) {
 export function buildLobby() {
   const root = new THREE.Group();
   const scene = new THREE.Scene();
-  scene.background = new THREE.Color('#3b3f47');
+  scene.background = new THREE.Color('#454a53');
   scene.add(root);
 
   // light: cool dim room, warm low sun through the right-hand windows, warm wall lamps
@@ -184,12 +199,12 @@ export function buildLobby() {
   { const p = new THREE.PointLight('#ffc27e', 0.9, 4, 1.8); p.position.set(0, 0.9, 4.3); scene.add(p); }
 
   // floor, with the darker stone bands of the reference
-  root.add(tileFloor(-X, X, -Z, Z, 1.25, { bands: [['z', -1.25, 0.28], ['z', 1.25, 0.28], ['x', -2.45, 0.28], ['x', 2.7, 0.28]] }));
+  root.add(tileFloor(-X, X, -Z, Z, 1.25, { bands: [['z', -1.25, 0.28], ['z', 1.25, 0.28], ['x', -2.45, 0.28], ['x', 2.7, 0.28], ['z', -0.35, 0.06], ['z', 0.35, 0.06]] }));
   // outside strip beyond the entrance
   root.add(tileFloor(-X - 1, X + 1, Z, Z + 2.2, 1.25, { color: '#8e8a86', seam: '#7b7774' }));
 
   // back wall with lifts, doors, posters, lamps and a sign
-  root.add(wall('x', -X - 0.15, X + 0.15, -Z - 0.08, WH, 0.16, { holes: [[3.5, 4.4, 0, 1.35]] }));
+  root.add(wall('x', -X - 0.15, X + 0.15, -Z - 0.08, WH, 0.16, { holes: [[3.5, 4.4, 0, 1.35], [-1.62, -0.38, 0, 1.4], [0.38, 1.62, 0, 1.4]] }));
   const lifts = [-1.0, 1.0].map((x) => liftDoor(x, -Z)); lifts.forEach((l) => root.add(l.g));
   { const d = door(0.9, 1.35); d.position.set(3.95, 0, -Z); root.add(d); }
   const scr = noticeScreen(); scr.position.set(-3.95, 0.55, -Z + 0.03); root.add(scr);
@@ -220,8 +235,6 @@ export function buildLobby() {
   const face = new THREE.Mesh(new THREE.CircleGeometry(0.225, 40), faceM); face.position.z = 0.027; clock.add(face);
   clock.position.set(2.9, 1.42, -Z + 0.04); root.add(clock);
   clock.userData.highlight = (on) => { faceM.map = faceM.emissiveMap = clockTex[on ? 1 : 0]; faceM.emissiveIntensity = on ? 0.6 : 0.25; faceM.needsUpdate = true; };
-  // lift call panel
-  root.add(rbox(0.1, 0.18, 0.03, '#8d939d', { x: 0, y: 0.6, z: -Z + 0.01, r: 0.01 }));
 
   // side walls with tall warm windows
   const winHoles = [[-3.4, -2.2, 0.3, 1.6], [-1.0, 0.2, 0.3, 1.6], [1.4, 2.6, 0.3, 1.6]];
@@ -244,7 +257,7 @@ export function buildLobby() {
   const PH = 3.4;
   const proxyParts = [[2 * X + 0.4, 0.2, 2 * Z + 0.4, 0, PH, 0], [2 * X + 0.4, PH, 0.2, 0, PH / 2, -Z - 0.1]];
   // right wall: solid between tall window slits
-  const slits = [[-4.2, -3.6], [-2.5, -1.8], [-0.6, 0.1], [1.3, 2.0], [3.1, 3.8]];
+  const slits = winHoles.map(([a, b]) => [a + 0.1, b - 0.1]);   // the sun comes through the windows you can see
   let zc = -Z;
   for (const [a, b] of slits) { if (a > zc) proxyParts.push([0.2, PH, a - zc, X + 0.1, PH / 2, (zc + a) / 2]); zc = b; }
   proxyParts.push([0.2, PH, Z - zc, X + 0.1, PH / 2, (zc + Z) / 2]);
@@ -257,17 +270,19 @@ export function buildLobby() {
 
   // barrier: glass panels on steel posts, readers either side of the arch, guard desk on the right
   const BZ = -0.55;
-  const glassM = new THREE.MeshStandardMaterial({ color: '#b9cad6', roughness: 0.08, metalness: 0.1, transparent: true, opacity: 0.55, depthWrite: false });
+  const glassM = new THREE.MeshStandardMaterial({ color: '#9fbccf', roughness: 0.05, metalness: 0.2, emissive: new THREE.Color('#5f7d92'), emissiveIntensity: 0.25, transparent: true, opacity: 0.42, depthWrite: false });
   function glassRun(x0, x1) {
     const n = Math.max(1, Math.round((x1 - x0) / 1.3));
     for (let i = 0; i <= n; i++) root.add(rbox(0.1, 0.62, 0.1, '#6b717c', { x: x0 + (x1 - x0) * i / n, z: BZ, r: 0.02 }));
     root.add(rbox(x1 - x0, 0.04, 0.08, '#7c828d', { x: (x0 + x1) / 2, y: 0.58, z: BZ, r: 0.015 }));
     const g = new THREE.Mesh(new THREE.BoxGeometry(x1 - x0, 0.5, 0.02), glassM); g.position.set((x0 + x1) / 2, 0.31, BZ); g.renderOrder = 2; root.add(g);
+    root.add(rbox(x1 - x0, 0.02, 0.03, '#d6e2ea', { x: (x0 + x1) / 2, y: 0.55, z: BZ + 0.012, r: 0.005, cast: false }));   // a bright top edge so the glass reads
+    root.add(rbox(x1 - x0, 0.03, 0.05, '#5a606b', { x: (x0 + x1) / 2, y: 0.03, z: BZ, r: 0.005 }));
   }
   glassRun(-X + 0.35, -1.2);
   glassRun(3.25, X - 0.35);
   const readers = [-0.93, 0.93].map((x) => { const r = readerPost(); r.position.set(x, 0, BZ); root.add(r); return r; });
-  const ar = arch(); ar.position.set(0, 0, BZ); root.add(ar);
+  const ar = arch(); ar.scale.setScalar(1.08); ar.position.set(0, 0, BZ); root.add(ar);
   const dk = guardDesk(); dk.position.set(2.2, 0, BZ); root.add(dk);
   // guard's chair behind the desk
   root.add(rbox(0.4, 0.3, 0.4, '#2c3242', { x: 2.35, z: BZ - 0.62, r: 0.04 }));
@@ -281,11 +296,14 @@ export function buildLobby() {
   counter.position.set(-4.2, 0, 0.45); root.add(counter);
   { const t = textTexture((g, W, H) => { g.fillStyle = '#2a2f38'; g.fillRect(0, 0, W, H); g.fillStyle = '#e9ecf0'; g.font = '700 54px ' + JP_FONT; g.textBaseline = 'middle'; g.fillText('受付', 24, H / 2 + 2); g.fillStyle = '#9aa3b0'; g.font = '600 34px ' + JP_FONT; g.fillText('VISITORS', 160, H / 2 + 4); }, 400, 100); const p = plane(0.8, 0.2, t); p.position.set(-4.2, 0.27, 0.72); p.rotation.x = -0.2; root.add(p); }
   const lost = new THREE.Group();
-  lost.add(rbox(0.9, 0.95, 0.36, '#9aa0a9', { r: 0.02 }));
-  for (let i = 0; i < 2; i++) lost.add(rbox(0.84, 0.02, 0.32, '#b8bcc2', { y: 0.33 + i * 0.3, r: 0.006, cast: false }));
-  lost.add(rbox(0.22, 0.14, 0.2, '#6a4f3e', { x: -0.24, y: 0.35, r: 0.03 }), rbox(0.3, 0.05, 0.2, '#b0506a', { x: 0.2, y: 0.35, r: 0.02 }), rbox(0.06, 0.26, 0.06, '#2f3649', { x: 0.3, y: 0.65, r: 0.02 }), rbox(0.2, 0.08, 0.14, '#d8c9a4', { x: -0.15, y: 0.65, r: 0.02 }));
-  { const t = textTexture((g, W, H) => { g.fillStyle = '#f2f0ea'; g.fillRect(0, 0, W, H); g.fillStyle = '#2b3140'; g.font = '700 34px ' + JP_FONT; g.textAlign = 'center'; g.textBaseline = 'middle'; g.fillText('忘れ物', W / 2, H * 0.34); g.globalAlpha = 0.72; g.font = '700 22px ' + JP_FONT; g.fillText('LOST PROPERTY', W / 2, H * 0.76); }, 256, 96); const p = plane(0.4, 0.15, t); p.position.set(0, 1.02, 0.19); lost.add(p); lost.add(rbox(0.44, 0.15, 0.02, '#8a909a', { y: 0.95, z: 0.17, r: 0.005, cast: false })); }
-  lost.position.set(-5.85, 0, 0.3); lost.rotation.y = Math.PI / 2; root.add(lost);
+  // open shelves (sides, back, three boards) so the umbrellas, a scarf, a lunch bag and a phone charger show
+  lost.add(rbox(0.9, 0.95, 0.04, '#8a909a', { z: -0.16, r: 0.01 }));
+  for (const sx of [-1, 1]) lost.add(rbox(0.04, 0.95, 0.36, '#9aa0a9', { x: sx * 0.43, r: 0.01 }));
+  for (let i = 0; i < 3; i++) lost.add(rbox(0.84, 0.03, 0.32, '#b8bcc2', { y: 0.02 + i * 0.31, r: 0.006 }));
+  lost.add(rbox(0.22, 0.14, 0.2, '#6a4f3e', { x: -0.24, y: 0.05, r: 0.03 }), rbox(0.3, 0.05, 0.2, '#b0506a', { x: 0.2, y: 0.36, r: 0.02 }), rbox(0.2, 0.08, 0.14, '#d8c9a4', { x: -0.15, y: 0.36, r: 0.02 }), rbox(0.24, 0.1, 0.18, '#4f7a64', { x: 0.18, y: 0.67, r: 0.03 }));
+  for (const [x, c] of [[-0.3, '#2f3649'], [-0.18, '#7a3b3b'], [0.28, '#3f5f8a']]) { const u = rbox(0.05, 0.62, 0.05, c, { x, y: 0.05, z: 0.12, r: 0.02 }); u.rotation.z = x * 0.3; lost.add(u); }
+  { const t = textTexture((g, W, H) => { g.fillStyle = '#f2f0ea'; g.fillRect(0, 0, W, H); g.fillStyle = '#2b3140'; g.font = '700 34px ' + JP_FONT; g.textAlign = 'center'; g.textBaseline = 'middle'; g.fillText('忘れ物', W / 2, H * 0.34); g.globalAlpha = 0.72; g.font = '700 22px ' + JP_FONT; g.fillText('LOST PROPERTY', W / 2, H * 0.76); }, 256, 96); const p = plane(0.4, 0.15, t); p.position.set(0, 1.05, 0.0); lost.add(p); lost.add(rbox(0.44, 0.17, 0.02, '#8a909a', { y: 0.965, z: -0.015, r: 0.005, cast: false })); }
+  lost.position.set(-5.7, 0, 0.55); root.add(lost);
   const kiosk = new THREE.Group();
   kiosk.add(rbox(0.8, 1.25, 0.6, '#4a4f59', { r: 0.03 }));
   kiosk.add(rbox(0.6, 0.5, 0.02, null, { x: 0, y: 0.62, z: 0.3, r: 0.02, m: emissive('#f1d8b8', '#e8b27a', 0.7), cast: false }));
@@ -299,6 +317,25 @@ export function buildLobby() {
   for (const [x, z, s] of [[-3.9, 2.55, 2.6], [3.95, 1.3, 2.6], [-4.2, 0.45, 2.4], [2.2, BZ, 2.4]]) { const b = blob(s, 0.28); b.scale.set(1, 0.35, 1); b.position.set(x, 0.004, z); root.add(b); }
 
 
+
+  // P2: the doorway lit so people coming in aren't silhouettes; a waste bin by the coffee machine, a welcome stand
+  root.add(lightPool(0, Z - 0.4, 1.1, { k: 0.3, sx: 1.4 }));
+  { const p = new THREE.PointLight('#ffd8a8', 0.8, 3, 1.8); p.position.set(0, 1.1, Z - 0.6); scene.add(p); }
+  { const st2 = new THREE.Group(); const tt = textTexture((g, W, H) => { g.fillStyle = '#2a2f38'; g.fillRect(0, 0, W, H); g.fillStyle = '#e9ecf0'; g.font = '700 44px ' + JP_FONT; g.textAlign = 'center'; g.fillText('WELCOME', W / 2, 70); g.fillStyle = '#9aa3b0'; g.font = '600 26px ' + JP_FONT; g.fillText('Visitors: reception', W / 2, 118); g.fillText('on the left', W / 2, 152); }, 300, 200);
+    st2.add(rbox(0.05, 0.62, 0.05, '#5b626d', { r: 0.01 }), rbox(0.3, 0.03, 0.3, '#5b626d', { r: 0.01 })); const pp = plane(0.5, 0.33, tt, { emissiveK: 0.2 }); pp.position.set(0, 0.72, 0.03); pp.rotation.x = -0.35; st2.add(pp); st2.add(rbox(0.54, 0.37, 0.03, '#23262c', { y: 0.55, z: 0.0, r: 0.01, cast: false })); st2.children[3].rotation.x = -0.35;
+    st2.position.set(-1.9, 0, 2.6); root.add(st2); }
+
+  // umbrella stands just inside the doors, a low brochure table by the left benches, a cleaning cart parked right
+  for (const x of [-1.45, 1.45]) { const us = new THREE.Group(); us.add(rbox(0.3, 0.36, 0.3, '#4a505b', { r: 0.03 }));
+    for (const [dx, dz, c] of [[-0.06, -0.05, '#2f3649'], [0.07, 0.03, '#6b7a8c'], [0.0, 0.08, '#7a3b3b']]) { const u = rbox(0.05, 0.62, 0.05, c, { x: dx, y: 0.1, z: dz, r: 0.02 }); u.rotation.z = dx * 1.5; u.rotation.x = dz * 1.5; us.add(u); }
+    us.position.set(x, 0, Z - 0.32); root.add(us); }
+  { const ct = new THREE.Group(); ct.add(rbox(1.0, 0.04, 0.5, '#8a909a', { y: 0.28, r: 0.01 })); for (const [dx, dz] of [[-0.45, -0.2], [0.45, -0.2], [-0.45, 0.2], [0.45, 0.2]]) ct.add(rbox(0.04, 0.28, 0.04, '#5b626d', { x: dx, z: dz, r: 0.01 }));
+    for (const [dx, c] of [[-0.3, '#f2f0ea'], [-0.05, '#9fb4cf'], [0.2, '#e0bf4a']]) ct.add(rbox(0.18, 0.02, 0.24, c, { x: dx, y: 0.32, r: 0.004 }));
+    ct.position.set(-3.9, 0, 1.75); root.add(ct); }
+  { const cc = new THREE.Group(); cc.add(rbox(0.9, 0.5, 0.45, '#5b6474', { r: 0.02 }), rbox(0.34, 0.3, 0.34, '#e0b83a', { x: 0.25, y: 0.5, r: 0.03 }), rbox(0.3, 0.2, 0.3, '#9aa0a8', { x: -0.22, y: 0.5, r: 0.02 }));
+    const mop = new THREE.Mesh(new THREE.CylinderGeometry(0.015, 0.015, 1.0, 6), mat('#b9bdc3')); mop.position.set(0.3, 0.9, -0.1); mop.rotation.z = 0.2; cc.add(mop);
+    cc.position.set(3.95, 0, 2.8); root.add(cc); }
+  groundShadows(root, { skip: new Set([proxy]) });
   // life: warm pools under the lamps, dust turning in the sun shafts, a second hand on the clock
   for (const x of [-5.3, -2.9, 2.9, 5.3]) root.add(lightPool(x, -Z + 0.45, 0.9, { k: 0.3, sx: 0.9, sz: 1.2 }));
   for (const z of [-3.4, -0.4, 2.0]) for (const s of [-1, 1]) root.add(lightPool(s * (X - 0.35), z, 0.8, { k: 0.18, sx: 0.8, sz: 1.4 }));
@@ -337,8 +374,9 @@ export function buildLobby() {
   for (const x of [-2.85, 2.85]) nav.block(x - 0.15, x + 0.15, Z + 0.35, Z + 0.65);
   nav.block(3.1, 3.75, BZ + 0.2, BZ + 0.75);                             // the cat and her bowl
   nav.block(-5.2, -3.2, BZ, 0.75);                                     // counter and receptionist
-  nav.block(-X, -5.6, -0.2, 0.8);                                      // lost and found
+  nav.block(-X, -5.2, 0.3, 0.8);                                       // lost and found
   nav.block(5.05, X, 2.55, 3.45);                                      // coffee machine
+  nav.block(-2.1, -1.7, 2.45, 2.8); nav.block(-1.65, -1.25, Z - 0.52, Z - 0.1); nav.block(1.25, 1.65, Z - 0.52, Z - 0.1); nav.block(3.3, 4.6, 2.5, 3.1);      // bins, welcome stand
 
   const world = { root, scene, sun, proxy, nav, readers, arch: ar, guard, man, kuro, aoi, aoiBlob, manBlob, tama, lifts, screen: scr, BZ, X, Z };
   world.update = (t) => {

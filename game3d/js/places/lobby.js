@@ -95,7 +95,7 @@ export async function lobbyPlace(game) {
       if (moveTo(...c.path[0])) { c.path.shift(); if (!c.path.length) { c.stage = 'enter'; c.t = 0; } }
       return;
     }
-    if (c.stage === 'enter') { if (moveTo(c.side * 1.0, -Z - 0.2, 1.0)) { r.root.visible = false; c.b.visible = false; w.lifts[c.side > 0 ? 1 : 0].want = 0; c.stage = 'wait'; c.t = -4 - Math.random() * 5; } }
+    if (c.stage === 'enter') { if (moveTo(c.side * 1.0, -Z - 0.45, 1.0)) { r.root.visible = false; c.b.visible = false; w.lifts[c.side > 0 ? 1 : 0].want = 0; c.stage = 'wait'; c.t = -4 - Math.random() * 5; } }
   }
 
   // background people who aren't going anywhere yet
@@ -147,7 +147,7 @@ export async function lobbyPlace(game) {
     desk: { label: 'Guard desk', kind: 'thing small', anchor: v3(1.6, 0.9, BZ), ...at(1.5, BZ + 0.6, 1.6, BZ), noMarker: true },
     counter: { label: 'Visitor counter', kind: 'thing small', anchor: v3(-3.7, 0.95, 0.45), ...at(-3.6, 1.1, -3.7, 0.45), noMarker: true },
     signin: { label: 'Visitor book', kind: 'thing small', anchor: v3(-3.75, 0.8, 0.5), ...at(-3.75, 1.1, -3.75, 0.5) },
-    lostfound: { label: 'Lost and found', kind: 'thing small', anchor: v3(-5.85, 1.3, 0.3), ...at(-5.1, 1.2, -5.85, 0.3) },
+    lostfound: { label: 'Lost and found', kind: 'thing small', anchor: v3(-5.7, 1.3, 0.55), ...at(-5.1, 1.2, -5.7, 0.55) },
     screen: { label: 'Notice screen', kind: 'thing small', anchor: v3(-3.95, 1.45, -Z), ...at(-3.95, -Z + 0.6, -3.95, -Z), enabled: () => st.gateOpen },
     kiosk: { label: 'Coffee machine', kind: 'thing small', anchor: v3(5.75, 1.5, 3.0), ...at(5.0, 3.0, 5.75, 3.0) },
     bench_l: { label: 'Bench', kind: 'thing small', anchor: v3(-3.9, 0.6, 2.55), ...at(-3.9, 3.2, -3.9, 2.55), noMarker: true },
@@ -174,7 +174,7 @@ export async function lobbyPlace(game) {
 
   const P = {
     // colour grade (js/post.js): toward game3d/ref/2-security-gate-muted.png: slate shadows, warm sun, low saturation
-    grade: { exposure: 1.04, temp: 0.02, sat: 0.88, contrast: 1.07, lift: [0.005, 0.008, 0.016], shadowTint: [-0.008, -0.002, 0.02], highTint: [0.022, 0.01, -0.014], vignette: 0.26, bloom: 0.4, bloomThreshold: 0.82, focusBand: 0.3 },
+    grade: { exposure: 1.1, temp: 0.05, sat: 0.84, contrast: 1.05, lift: [0.012, 0.012, 0.018], shadowTint: [-0.008, -0.002, 0.02], highTint: [0.022, 0.01, -0.014], vignette: 0.26, bloom: 0.4, bloomThreshold: 0.82, focusBand: 0.3 },
     _commuters: commuters,
     scene: w.scene, camera: cam.camera, cam, space: w.root, nav: w.nav, sun: w.sun, charScale: K, clock: w.clock,
     start: [0, Z - 1.3], startFacing: Math.PI, things, people, spots, zones, seats, glide,
@@ -182,7 +182,7 @@ export async function lobbyPlace(game) {
       const pts = [];
       for (const x of [-X - 0.2, X + 0.2]) for (const z of [-Z - 0.2, Z + 0.3]) for (const y of [0, 1.6]) pts.push(new THREE.Vector3(x, y, z));
       if (aspect >= 1) cam.fit(aspect, [new THREE.Vector3(-5.6, 0, 0), new THREE.Vector3(5.6, 0, 0), new THREE.Vector3(0, 2.25, -Z), new THREE.Vector3(0, 0, Z + 0.1)], new THREE.Vector3(0, 0, 0.05), { follow: true, clamp: [-0.9, 0.9, -0.7, 0.05], limY: 0.97 }); // headroom above the lifts for their markers; pans up when he walks north
-      else cam.fit(aspect, [new THREE.Vector3(-2.4, 0, 0), new THREE.Vector3(2.4, 0, 0), new THREE.Vector3(0, 0, -2.7), new THREE.Vector3(0, 1.4, 2.5)], new THREE.Vector3(0, 0, 0), { follow: true, clamp: [-X + 2.4, X - 2.4, -Z + 1.75, Z - 2.9], lead: -2.7 });
+      else cam.fit(aspect, [new THREE.Vector3(-2.8, 0, 0), new THREE.Vector3(2.8, 0, 0), new THREE.Vector3(0, 0, -2.7), new THREE.Vector3(0, 1.4, 2.5)], new THREE.Vector3(0, 0, 0), { follow: true, clamp: [-X + 2.4, X - 2.4, -Z + 1.75, Z - 2.9], lead: -2.3 });
     },
     pick(rc) { const p = new THREE.Vector3(); return rc.ray.intersectPlane(floor, p) ? p : null; },
     walkPerson(id, [x, z], { speed } = {}) {

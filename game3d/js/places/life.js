@@ -175,7 +175,7 @@ function footTex() {
   _footTex = new THREE.CanvasTexture(c);
   return _footTex;
 }
-export function groundShadows(root, { skip = new Set(), opacity = 0.34, y = 0.009, maxSide = 3.2 } = {}) {
+export function groundShadows(root, { skip = new Set(), opacity = 0.5, y = 0.009, maxSide = 3.2 } = {}) {
   const box = new THREE.Box3(), size = new THREE.Vector3(), ctr = new THREE.Vector3();
   const mat = new THREE.MeshBasicMaterial({ map: footTex(), color: '#141820', transparent: true, opacity, depthWrite: false });
   const out = new THREE.Group(); out.name = 'contact';

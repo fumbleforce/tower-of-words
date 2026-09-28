@@ -120,7 +120,7 @@ export async function officePlace(game) {
 
   const P = {
     // colour grade (js/post.js): cool slate shadows, warm lamp highlights, a little lift so the basement isn't murky
-    grade: { exposure: 1.12, temp: 0.05, sat: 0.94, contrast: 1.06, lift: [0.01, 0.012, 0.02], shadowTint: [-0.006, 0, 0.018], highTint: [0.02, 0.01, -0.012], vignette: 0.26, bloom: 0.4, bloomThreshold: 0.8, focusBand: 0.3 },
+    grade: { exposure: 1.12, temp: 0.03, sat: 0.94, contrast: 1.06, lift: [0.01, 0.012, 0.02], shadowTint: [-0.006, 0, 0.018], highTint: [0.02, 0.01, -0.012], vignette: 0.26, bloom: 0.4, bloomThreshold: 0.8, focusBand: 0.3 },
     _nav: w.nav,
     scene: w.scene, camera: cam.camera, cam, space: w.root, nav: w.nav, sun: w.sun, charScale: K,
     start: [-5.45, -3.05], startFacing: 0, things, people, spots, zones, seats, defaultPeriod: 'morning',
@@ -128,7 +128,7 @@ export async function officePlace(game) {
       const pts = [];
       for (const x of [w.X0 - 0.2, w.X1 + 0.2]) for (const z of [w.Z0 - 0.2, w.Z1 + 0.2]) for (const y of [0, 1.45]) pts.push(new THREE.Vector3(x, y, z));
       if (aspect >= 1) cam.fit(aspect, [new THREE.Vector3(-6.9, 0, 0), new THREE.Vector3(6.9, 0, 0), new THREE.Vector3(0, 0.6, w.Z0), new THREE.Vector3(0, 0, w.Z1)], new THREE.Vector3(0, 0, 0.1), { limY: 1.0, limX: 1.0 });
-      else cam.fit(aspect, [new THREE.Vector3(-2.5, 0, 0), new THREE.Vector3(2.5, 0, 0), new THREE.Vector3(0, 0, -2.7), new THREE.Vector3(0, 1.3, 2.5)], new THREE.Vector3(0, 0, 0), { follow: true, clamp: [w.X0 + 2.2, w.X1 - 2.2, w.Z0 + 4.1, w.Z1 - 2.2] });
+      else cam.fit(aspect, [new THREE.Vector3(-2.9, 0, 0), new THREE.Vector3(2.9, 0, 0), new THREE.Vector3(0, 0, -2.7), new THREE.Vector3(0, 1.3, 2.5)], new THREE.Vector3(0, 0, 0), { follow: true, clamp: [w.X0 + 2.5, w.X1 - 2.5, w.Z0 + 4.4, w.Z1 - 2.4] });
     },
     pick(rc) { const p = new THREE.Vector3(); return rc.ray.intersectPlane(floor, p) ? p : null; },
     walkPerson(id, [x, z], { speed } = {}) {

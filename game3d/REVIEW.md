@@ -53,12 +53,20 @@ Fresh critic per place each round, shown only the references and the round's she
 | Round | Train and platform | Lobby | Office | Lift | Sheets |
 |---|---|---|---|---|---|
 | P1 | 6 | 6.5 | 6 | (in the office critique: "reads well") | shots/round-6 |
+| P2 | 6 | 7 | 6 | 6 | shots/round-7 |
 
 ### P1
 - Done: js/post.js (grade per place, AO, bloom, tilt-shift, vignette; tiers low, medium, high), js/places/life.js (floor light pools, dust in light, kettle steam, screens that flicker and scroll, clock hands on the game clock), office dressing (carpet under the island, printer, lift car behind the doors, corridor mats, recycling row, AED, fountain, copy-room reams, shredder, trolley, kitchen rug and stools, toilet dryers), platform boarding marks, timetable, vending pair, bins, English sub-lines on the untaught signs, Eric's name card. NPC walks go over the walk grid (js/places/route.js); lobby commuters enter only through the open doorway.
 - Office 6: bottom rooms blown out by the pools, toilets half empty, lower third of the office bare, machine room flat black, corridor's right half thin, grounding weak.
 - Lobby 6.5: the barrier glass doesn't read, the entrance glass reads as white slabs, the left lift's open leaves slide over the poster, sun shafts have no visible source, a grey box by the counter, phone framing cuts the guard.
 - Train 6: nothing under the car at sea (beam, pylons), sea noise flat and saturated, platforms still thin, doors don't read as open, platform edges unfinished.
+
+### P2
+- Done: bottom-room lights and pools down, darker toilet and copy-room floors, toilet vanities with mirror strips, bins, a wet-floor sign; corridor sconces, a safety poster; machine-room cool fill, lighter racks, blinking LEDs; contact footprints under every freestanding prop (js/places/life.js groundShadows, also covers the low tier); lobby lifts get real openings with shallow lit cars, glass with a top edge, sun through the visible windows, the lost-property shelf facing the room, a lit doorway, a welcome stand; train sea toward slate, platform coping, far-platform timetable, vending and planters, light spilling from the open doors.
+- Office 6: chair-like dust sheets on the island, lower third bare, machine room flat, corridor right half, placeholder-looking floor squares in the toilets, phone view only the lift lobby.
+- Lobby 7: empty lower third, benches and walls too navy, windows read as lamps, the lost-property block, phone framing, gate small.
+- Train 6: the sea "grey concrete", pale pillar cap, neighbour cars read as empty tubs, doors still not reading as open, dash marks look like debug ticks.
+- Lifts 6: basement car reads as a lit cupboard, no frame or sill, blank indicators, no call buttons.
 
 ## Markers (after Jørgen: "small, awkwardly placed, not well designed")
 

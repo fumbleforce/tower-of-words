@@ -42,7 +42,7 @@ export async function trainPlace(game) {
 
   const world = buildWorld(scene, { sunDir: SUN_DIR });
   const U = world.sea.material.uniforms;
-  U.uDeep.value.set('#15283a'); U.uMid.value.set('#203a52'); U.uShallow.value.set('#36566f'); U.uFoam.value.set('#c3ced6'); U.uShadow.value.set('#22364c');
+  U.uDeep.value.set('#132a36'); U.uMid.value.set('#1d3d4c'); U.uShallow.value.set('#34596a'); U.uFoam.value.set('#b9c6cc'); U.uShadow.value.set('#162430');   // slate sea (production grade)
 
   const pivot = new THREE.Group(); pivot.position.y = -0.6; scene.add(pivot);
   const car = buildCar('land'); car.root.position.y = 0.6; pivot.add(car.root);
@@ -54,6 +54,10 @@ export async function trainPlace(game) {
     const nc = buildCar('land'); nc.root.remove(nc.proxy);
     const grey = new THREE.Color('#7f8896');
     nc.root.traverse((o) => { if (o.isMesh) { o.material = o.material.clone(); if (o.material.color) o.material.color.lerp(grey, 0.4).multiplyScalar(0.82); if (o.material.emissive) o.material.emissiveIntensity *= 0.5; } });
+    // the neighbours are closed cars seen from outside: a roof with two AC housings, so they don't read as empty tubs
+    { const roof = new THREE.Group(); roof.add(rbox(2 * LX + 0.1, 0.1, 2 * LZ + 0.1, '#7c8591', { r: 0.05, seg: 3 }));
+      for (const x of [-1.8, 1.8]) roof.add(rbox(1.1, 0.14, 0.9, '#8d96a2', { x, y: 0.1, r: 0.04 }), rbox(0.9, 0.02, 0.7, '#6b7480', { x, y: 0.24, r: 0.01, cast: false }));
+      roof.position.y = HF + 0.02; nc.root.add(roof); }
     nc.root.position.y = 0.6; nPivot.add(nc.root); scene.add(nPivot);
     const b = buildBellows(); b.position.set(s * (LX + T + 0.26), 0, 0); scene.add(b);
     neighbours.push({ pivot: nPivot, lag: s * 0.34, bellows: b });
@@ -139,12 +143,18 @@ export async function trainPlace(game) {
   // boarding marks at each door position (painted chevrons and a queue line), a timetable board, vending pair and
   // bins on the near platform, so the bands either side of the car read as a working station
   for (const s of [-1, 1]) for (const dx of [-DOOR_X, DOOR_X]) {
-    const zc = s * (edge + 1.05);
-    for (const k of [-1, 1]) { const tri = new THREE.Mesh(new THREE.CircleGeometry(0.16, 3), mat('#c9ccd0', { roughness: 0.8 })); tri.rotation.x = -Math.PI / 2; tri.rotation.z = s > 0 ? Math.PI / 2 : -Math.PI / 2; tri.position.set(dx + k * 0.36, 0.004, zc); station.add(tri); }
-    for (let i = 0; i < 3; i++) station.add(rbox(0.05, 0.004, 0.22, '#b9bdc3', { x: dx - 0.36 + i * 0.36, y: 0.002, z: s * (edge + 1.45), r: 0.001, cast: false }));
+    // painted boarding marks: an arrow either side of the door pointing at it, and a queue line behind each
+    for (const k of [-1, 1]) {
+      const a = new THREE.Group();
+      a.add(rbox(0.06, 0.004, 0.34, '#c9ccd0', { z: 0, r: 0.002, cast: false }));
+      for (const w2 of [-1, 1]) { const h = rbox(0.06, 0.004, 0.2, '#c9ccd0', { r: 0.002, cast: false }); h.position.set(w2 * 0.06, 0.002, -s * 0.12); h.rotation.y = w2 * s * 0.7; a.add(h); }
+      a.position.set(dx + k * 0.45, 0.002, s * (edge + 0.95)); station.add(a);
+      station.add(rbox(0.5, 0.004, 0.05, '#aeb2b8', { x: dx + k * 0.45, y: 0.002, z: s * (edge + 1.45), r: 0.001, cast: false }));
+    }
   }
+  let timetableTex;
   { const tb = new THREE.Group();
-    const tt = textTexture((g, W, H) => { g.fillStyle = '#1d2433'; g.fillRect(0, 0, W, H); g.fillStyle = '#e0bf4a'; g.fillRect(0, 0, W, 10);
+    const tt = timetableTex = textTexture((g, W, H) => { g.fillStyle = '#1d2433'; g.fillRect(0, 0, W, H); g.fillStyle = '#e0bf4a'; g.fillRect(0, 0, W, 10);
       for (let i = 0; i < 4; i++) { g.fillStyle = i ? '#9fb4cf' : '#f2f4f7'; g.font = '700 34px ' + JP_FONT; g.fillText(['8:42', '8:50', '8:58', '9:06'][i], 24, 58 + i * 46); g.fillStyle = '#6f86a6'; g.fillRect(140, 38 + i * 46, 150 + (i * 37) % 60, 12); g.fillStyle = i ? '#46d18a' : '#e0bf4a'; g.fillRect(W - 60, 40 + i * 46, 30, 12); } }, 420, 240);
     tb.add(rbox(0.06, 1.2, 0.06, '#5b626d', { r: 0.02 }), rbox(1.02, 0.6, 0.06, '#232b3d', { y: 1.0, r: 0.02 }));
     const p = plane(0.94, 0.52, tt, { emissiveK: 0.55 }); p.position.set(0, 1.3, 0.035); tb.add(p);
@@ -158,7 +168,22 @@ export async function trainPlace(game) {
     vm.rotation.y = Math.PI; vm.position.set(x, 0, edge + 2.95); station.add(vm);
     station.add(lightPool(x, edge + 2.3, 0.8, { k: 0.2, color: '#9fc2ff' }));
   }
-  for (const s of [-1, 1]) for (const x of [-9.8, 5.9]) { const bin = new THREE.Group(); for (const [dx, c] of [[-0.14, '#4f6f9a'], [0.14, '#6a8f5c']]) bin.add(rbox(0.24, 0.5, 0.24, c, { x: dx, r: 0.03 }), rbox(0.2, 0.02, 0.2, '#2c3038', { x: dx, y: 0.5, r: 0.01, cast: false })); bin.position.set(x, 0, s * (edge + 2.75)); station.add(bin); }
+  for (const s of [-1, 1]) for (const x of [-9.8, 5.9]) { const bin = new THREE.Group(); const bz = s > 0 ? edge + 2.2 : edge + 2.75; for (const [dx, c] of [[-0.14, '#4f6f9a'], [0.14, '#6a8f5c']]) bin.add(rbox(0.24, 0.5, 0.24, c, { x: dx, r: 0.03 }), rbox(0.2, 0.02, 0.2, '#2c3038', { x: dx, y: 0.5, r: 0.01, cast: false })); bin.position.set(x, 0, s * bz); station.add(bin); }
+
+  // coping: a pale concrete lip along each platform edge, and the far platform gets its own timetable, vending and planters
+  for (const s of [-1, 1]) station.add(rbox(PL, 0.03, 0.16, '#a9adb3', { y: -0.02, z: s * (edge + 0.02), r: 0.01, cast: false }));
+  { const tb = new THREE.Group(); tb.add(rbox(0.06, 1.2, 0.06, '#5b626d', { r: 0.02 }), rbox(1.02, 0.6, 0.06, '#232b3d', { y: 1.0, r: 0.02 }));
+    const p = plane(0.94, 0.52, timetableTex, { emissiveK: 0.55 }); p.position.set(0, 1.3, 0.035); tb.add(p);
+    tb.position.set(-6.2, 0, -(edge + 2.7)); station.add(tb); }
+  { const vm = new THREE.Group(); vm.add(rbox(0.8, 1.35, 0.55, '#2d3b63', { r: 0.03 }));
+    const face = new THREE.Mesh(new THREE.PlaneGeometry(0.56, 0.7), emissive('#cfe0f2', '#9fc2ff', 0.8)); face.position.set(-0.05, 0.85, 0.28); vm.add(face);
+    const cols = ['#e46a5a', '#f0b64a', '#5aa35d', '#4e8fd1', '#f2e2b0'];
+    for (let r = 0; r < 3; r++) for (let q = 0; q < 4; q++) vm.add(rbox(0.09, 0.13, 0.03, cols[(r * 4 + q) % 5], { x: -0.27 + q * 0.14, y: 0.63 + r * 0.18, z: 0.29, r: 0.02, cast: false }));
+    vm.position.set(6.4, 0, -(edge + 2.95)); station.add(vm); station.add(lightPool(6.4, -(edge + 2.3), 0.8, { k: 0.2, color: '#9fc2ff' })); }
+  for (const x of [-1.2, 4.6, 10.4]) { const p = propPlant({ size: 1.0, seed: 7 + Math.round(x) }); p.position.set(x, 0, -(edge + 2.75)); station.add(p); }
+  for (const x of [-9.2, 0.2, 12.0]) { const p = propPlant({ size: 0.9, seed: 9 + Math.round(x) }); p.position.set(x, 0, edge + 2.2); station.add(p); }
+  // light spilling out of each open door onto the platform
+  const doorSpill = [-DOOR_X, DOOR_X].map((dx) => { const m = lightPool(dx, LZ + T + 0.7, 0.8, { k: 0.001, sx: 1.2, sz: 1.1, color: '#ffe0b0', y: 0.012 }); car.root.add(m); return m; });
   // a canopy over each platform that only the sun sees, so the platforms sit in cool shade as in the reference
   { const sm = new THREE.MeshBasicMaterial({ color: '#000', colorWrite: false, depthWrite: false });
     void sm; }
@@ -318,6 +343,7 @@ export async function trainPlace(game) {
     for (const d of doorLeaves) { const dx = Math.sign(d.x0) * DOOR_X; d.m.position.x = d.x0 + (d.x0 < dx - 0.1 ? -1 : 1) * k * (DOOR_W / 2 - 0.02); d.m.visible = false; }
     for (const d of myLeaves) { const toC = -Math.sign(d.x0); d.g.position.x = d.x0 + toC * k * (d.far ? DOOR_W - 0.01 : DOOR_W / 2 - 0.005); d.g.visible = true; }
     for (const l of doorLamps) l.material = k > 0.3 ? lampOpen : lampShut;
+    for (const m of doorSpill) m.material.color.set('#ffe0b0').multiplyScalar(0.55 * k);
   }
 
   // ---- people ids for the story ----
