@@ -2,7 +2,7 @@
  "title": "Environment style study, rough round",
  "date": "2026-09-28",
  "by": "world agent",
- "status": "open",
+ "status": "superseded",
  "multi": true,
  "question": "Which of these looks should we push further toward the reference (ink lines, cel shading, navy shadows, bright window light)? Pick one or more, or none.",
  "media": [
@@ -67,5 +67,6 @@
    "label": "Try a style in the game: add ?style=N to the game URL",
    "href": "game3d/?style=3"
   }
- ]
+ ],
+ "superseded_by": "style-avenues"
 }
