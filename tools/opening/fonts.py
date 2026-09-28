@@ -1,8 +1,8 @@
 """Subset the opening's fonts (Zen Kaku Gothic New, Barlow Condensed; OFL, from github.com/google/fonts, kept in ~/ai/opening/fonts)
-to the glyphs used in proto2/opening plus all kana. Run after changing on-screen text: ~/ai/opening/venv/bin/python tools/opening/fonts.py"""
+to the glyphs used in legacy/proto2/opening plus all kana. Run after changing on-screen text: ~/ai/opening/venv/bin/python tools/opening/fonts.py"""
 import os, subprocess, tempfile
 ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..')
-D = os.path.join(ROOT, 'proto2', 'opening')
+D = os.path.join(ROOT, 'legacy', 'proto2', 'opening')
 SRC = os.path.expanduser('~/ai/opening/fonts')
 KANA = ''.join(chr(c) for c in range(0x3041, 0x3097)) + ''.join(chr(c) for c in range(0x30A1, 0x30FB)) + 'ー、。「」！？・…'
 text = open(os.path.join(D, 'op.js')).read() + open(os.path.join(D, 'index.html')).read()

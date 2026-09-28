@@ -1,11 +1,11 @@
-"""Build proto2/voices-local: the same six test lines per character from the current Replicate voices and each local model.
+"""Build legacy/proto2/voices-local: the same six test lines per character from the current Replicate voices and each local model.
 Inputs come from ~/ai/tts-bench (lines.json, refs/, out/<system>/<ch>-<i>.wav|mp3, out/metrics-<system>.json, out/<system>.json).
 Every clip is loudness-normalised to -18 LUFS (as in the game) so loudness doesn't bias the listening test."""
 import json, os, subprocess, html, statistics as st
 
 B = os.path.expanduser('~/ai/tts-bench')
 ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..')
-OUT = os.path.join(ROOT, 'proto2/voices-local')
+OUT = os.path.join(ROOT, 'legacy/proto2/voices-local')
 os.makedirs(OUT, exist_ok=True)
 L = json.load(open(f'{B}/lines.json'))
 SYSTEMS = [s for s in ['replicate', 'irodori', 'sarashina', 'cosy', 'qwen'] if os.path.exists(f'{B}/out/metrics-{s}.json')]
@@ -121,7 +121,7 @@ parts.append("""<h2>Setup notes</h2><ul>
 <li><b>Qwen3-TTS 1.7B, local</b>: the fallback that was already installed. Output length is capped; one uncapped take ran on for minutes.</li>
 <li>Not tried: Fish Audio S2 Pro (4B, about 10 GB of VRAM in bf16, so it doesn't fit next to the image jobs; research licence only), GPT-SoVITS and Style-Bert-VITS2 (these need training per voice, not a short clip), and MioTTS (Aratako, 2026; left for a second round).</li>
 </ul>""")
-parts.append("""<h2>Cost if we stay on Replicate</h2><p>game/notes/day1-draft.md has 92 spoken lines, and 33 of them already have voice files. That leaves about 41 new Emi lines, 11 Rei, 18 Mio, 1 Ishibashi, 0 announcer, plus roughly 30 player lines (choices and spell words). At the ledger's rates (MiniMax $0.0001 per character, at least $0.002 a line; Qwen3-TTS clone about $0.01 a call) that is about $0.10 for Emi and Rei, $0.20 to $0.30 for Mio with pitch-guard retries, and about $0.30 for the player: <b>roughly $0.60 to $0.80 for one full pass</b>. Two or three passes as the script changes stay under $2.50, inside the $5 left. The Qwen price is the ledger's estimate. Replicate doesn't report cost per call.</p>""")
+parts.append("""<h2>Cost if we stay on Replicate</h2><p>notes/day1-draft.md has 92 spoken lines, and 33 of them already have voice files. That leaves about 41 new Emi lines, 11 Rei, 18 Mio, 1 Ishibashi, 0 announcer, plus roughly 30 player lines (choices and spell words). At the ledger's rates (MiniMax $0.0001 per character, at least $0.002 a line; Qwen3-TTS clone about $0.01 a call) that is about $0.10 for Emi and Rei, $0.20 to $0.30 for Mio with pitch-guard retries, and about $0.30 for the player: <b>roughly $0.60 to $0.80 for one full pass</b>. Two or three passes as the script changes stay under $2.50, inside the $5 left. The Qwen price is the ledger's estimate. Replicate doesn't report cost per call.</p>""")
 for ch, lines in L.items():
     parts.append(f'<h2 id="{ch}">{TITLE[ch]}</h2><p>Game voice now: {CURRENT[ch]}. Clone reference: {REFNOTE[ch]}.</p>')
     enc(f'{B}/refs/{ch}.wav', f'{OUT}/{ch}-ref.mp3')

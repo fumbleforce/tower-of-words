@@ -1,4 +1,4 @@
-"""Still art for the anime opening (proto2/opening), RDBT Anima through ComfyUI.
+"""Still art for the anime opening (legacy/proto2/opening), RDBT Anima through ComfyUI.
 Usage: ~/ai/sd/venv/bin/python tools/opening/art.py base [name ...]     # base renders, all seeds (review these)
        ~/ai/sd/venv/bin/python tools/opening/art.py hires name:seed ...  # hires fix of the picked seed
        ~/ai/sd/venv/bin/python tools/opening/art.py sprites              # approved sprites refined at 2x (design kept)

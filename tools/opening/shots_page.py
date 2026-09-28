@@ -1,5 +1,5 @@
-"""Build proto2/opening/shots.html: candidate art for the opening's test segment, one section per shot slot with its
-staging note, for Jørgen to pick from. Images are copied as webp into proto2/opening/cand/.
+"""Build legacy/proto2/opening/shots.html: candidate art for the opening's test segment, one section per shot slot with its
+staging note, for Jørgen to pick from. Images are copied as webp into legacy/proto2/opening/cand/.
 Run: python3 tools/opening/shots_page.py"""
 import os, sys, json, html, subprocess
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -7,7 +7,7 @@ from segment import SLOTS, CUTS, END_BAR
 
 ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..')
 BASE = os.path.join(ROOT, 'art', 'opening', 'base')
-OUT = os.path.join(ROOT, 'proto2', 'opening')
+OUT = os.path.join(ROOT, 'legacy', 'proto2', 'opening')
 CAND = os.path.join(OUT, 'cand')
 os.makedirs(CAND, exist_ok=True)
 tv = json.load(open(os.path.join(ROOT, 'art', 'opening', 'audio', 'tv_map.json')))
@@ -89,7 +89,7 @@ table.cuts{{border-collapse:collapse;font-size:14px}}table.cuts td{{padding:3px 
 <p class="intro">The first 21 seconds of the opening (intro and the first two lines of verse 1, on the new 89 s TV edit of the song). Six shots need art; each has one to three candidates, drawn with RDBT Anima and checked against the staging note above it. Pick one per shot, or "redo", then copy your picks at the bottom. Nothing is animated until you've picked. The final approach into the station is left out: it waits for the Blender blockout. Click an image to see it full size (arrow keys step, Esc closes).</p>
 {verdict_html}
 <section><h2>Cut list for the segment</h2><table class="cuts">{"".join(cutrows)}</table>
-<p class="intro">Shots marked "drawn" are made in code (the company phone's welcome screen and the song title card), not generated art. The song edit: game/audio/music/opening-tv.mp3.</p></section>
+<p class="intro">Shots marked "drawn" are made in code (the company phone's welcome screen and the song title card), not generated art. The song edit: legacy/game/audio/music/opening-tv.mp3.</p></section>
 {"".join(sections)}
 </main><div class="bar"><button id="copy">Copy my picks</button><span id="done"></span></div><div id="lb"><img alt=""></div>
 <script>

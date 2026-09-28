@@ -1,4 +1,4 @@
-"""Shot list for the 89.6 s TV edit (game/audio/music/opening-tv.mp3), method of 2026-09-25 (GUIDE): simple, flat, readable
+"""Shot list for the 89.6 s TV edit (legacy/game/audio/music/opening-tv.mp3), method of 2026-09-25 (GUIDE): simple, flat, readable
 compositions (side-on or frontal, few depth planes), strong light and a big painted sky, animated as layered cels in the engine,
 with the film finish from the "Look and feel" notes. Approved: C (the monorail silhouette). Source per shot:
 approved = already picked; master = new background (this batch or later); cel = moving layer cut from a master or sprite;

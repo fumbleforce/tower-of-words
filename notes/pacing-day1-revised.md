@@ -1,6 +1,6 @@
 # Day-1 pacing check, revised script
 
-Run on the revised `day1-draft.md` and `game/data/script.js` (2026-09-25) with `tools/lang/pacing.py`, after splitting and simplifying every line the first report (`pacing-day1.md`) flagged. For Jørgen's profile one line is left over budget: the monorail announcement, which GUIDE gives word for word and which the player only needs 右 from (the door choice is shown in English). The beginner profile is still heavy (42 lines); that needs lighter beginner lines or more English support, not more cuts to the shared script.
+Run on the revised `day1-draft.md` and `legacy/game/data/script.js` (2026-09-25) with `tools/lang/pacing.py`, after splitting and simplifying every line the first report (`pacing-day1.md`) flagged. For Jørgen's profile one line is left over budget: the monorail announcement, which GUIDE gives word for word and which the player only needs 右 from (the door choice is shown in English). The beginner profile is still heavy (42 lines); that needs lighter beginner lines or more English support, not more cuts to the shared script.
 
 ### Absolute beginner (はじめて)
 

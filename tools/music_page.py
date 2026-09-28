@@ -1,16 +1,16 @@
-"""Build proto2/music/index.html.
+"""Build legacy/proto2/music/index.html.
 Top: round 2 (instrumental loops without vocals, softer opening theme, lyrics with readings).
-Below: round 1 (YuE2 next to the Lyria loops in game/audio/music).
-Round 2 numbers come from proto2/music/round2.json (written by tools/music_round2.py)."""
+Below: round 1 (YuE2 next to the Lyria loops in legacy/game/audio/music).
+Round 2 numbers come from legacy/proto2/music/round2.json (written by tools/music_round2.py)."""
 import json, os, shutil, html
 
 REPO = '/home/jorgen/repo/japanese'
-D = f'{REPO}/proto2/music'
+D = f'{REPO}/legacy/proto2/music'
 stats = json.load(open(f'{D}/stats.json')) if os.path.exists(f'{D}/stats.json') else {}
 r2 = json.load(open(f'{D}/round2.json')) if os.path.exists(f'{D}/round2.json') else {}
 NAMES = {'calm': 'Calm morning (monorail)', 'office': 'Lazy lo-fi (basement office)', 'lively': 'Upbeat lunch (canteen)', 'night': 'Late-night jazz (bar)'}
 for k in NAMES:
-    src = f'{REPO}/game/audio/music/{k}.mp3'
+    src = f'{REPO}/legacy/game/audio/music/{k}.mp3'
     if os.path.exists(src):
         shutil.copy(src, f'{D}/lyria-{k}.mp3')
 

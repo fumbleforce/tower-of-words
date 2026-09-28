@@ -1,14 +1,14 @@
 """Pacing checker: for a player profile, report per line the length and what is new
 (words, grammar points, kanji), and flag lines over the day-1 budgets.
 
-Budgets (game/notes/day1-design.md, "Pacing rules"): spoken line 16 characters or fewer where
+Budgets (notes/day1-design.md, "Pacing rules"): spoken line 16 characters or fewer where
 possible, hard cap 24 (punctuation not counted); at most one item new to the player per line;
 choice screens at most two new items across all options.
 
 "New" means new to this profile and not already met earlier in the day (lines are walked in draft
 order, so a word introduced once is not counted again later).
 
-Usage (venv): ~/ai/lang/.venv/bin/python tools/lang/pacing.py [--profile jorgen] [--draft game/notes/day1-draft.md]
+Usage (venv): ~/ai/lang/.venv/bin/python tools/lang/pacing.py [--profile jorgen] [--draft notes/day1-draft.md]
               [--md report.md]   (all three reference profiles when --profile is omitted)
 """
 import argparse

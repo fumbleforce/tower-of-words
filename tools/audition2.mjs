@@ -1,7 +1,7 @@
 // Voice audition round 2: per character, MiniMax at 44.1 kHz and Qwen3 designed voices, reading an in-character line.
 import { run, spent } from './rep.mjs';
 import fs from 'node:fs';
-const OUT = 'proto2/audition/r2/';
+const OUT = 'legacy/proto2/audition/r2/';
 const mm = (voice, text, extra = {}) => ['minimax/speech-2.6-hd', { text, voice_id: voice, language_boost: 'Japanese', sample_rate: 44100, bitrate: 128000, ...extra }];
 const qw = (desc, text) => ['qwen/qwen3-tts', { mode: 'voice_design', text, language: 'Japanese', voice_description: desc }];
 const ROLES = {

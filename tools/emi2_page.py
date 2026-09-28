@@ -1,8 +1,8 @@
-"""Build proto2/emi2/index.html from art/slice/emi2/<model>/ renders."""
+"""Build legacy/proto2/emi2/index.html from art/slice/emi2/<model>/ renders."""
 import os, subprocess
 ROOT = os.path.join(os.path.dirname(__file__), '..')
 SRC = os.path.join(ROOT, 'art/slice/emi2')
-OUT = os.path.join(ROOT, 'proto2/emi2')
+OUT = os.path.join(ROOT, 'legacy/proto2/emi2')
 os.makedirs(OUT, exist_ok=True)
 
 
@@ -13,7 +13,7 @@ def conv(src, name):
 
 
 old = None
-for c in ('game/img/ch/emi-smile.webp', 'art/slice/ch/emi-smile.png'):
+for c in ('legacy/game/img/ch/emi-smile.webp', 'art/slice/ch/emi-smile.png'):
     if os.path.exists(os.path.join(ROOT, c)):
         old = conv(os.path.join(ROOT, c), 'old-emi.webp'); break
 

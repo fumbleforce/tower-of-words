@@ -2,7 +2,7 @@
   upscale  <in.png> <out.png> [scale]   RealESRGAN x4 anime (spandrel) then Lanczos down to `scale` (default 2)
   sprites                               approved sprites: upscale 2x, cut out with BiRefNet HR matting -> art/opening/sprites/
   depth    <in.png> ...                 Depth Anything V2 Large -> <in>-d.png (near = white), smoothed and edge-grown for parallax
-  web                                   write proto2/opening/img/*.webp (+ lite/) from art/opening/final/*.png
+  web                                   write legacy/proto2/opening/img/*.webp (+ lite/) from art/opening/final/*.png
 Run with ~/ai/sd/venv/bin/python tools/opening/prep.py <cmd> ..."""
 import os, sys, subprocess, glob
 import numpy as np
@@ -134,7 +134,7 @@ def window_mask(path):
 
 def web():
     src = os.path.join(ART, 'final')
-    out = os.path.join(ROOT, 'proto2', 'opening', 'img')
+    out = os.path.join(ROOT, 'legacy', 'proto2', 'opening', 'img')
     os.makedirs(os.path.join(out, 'lite'), exist_ok=True)
     for f in sorted(glob.glob(os.path.join(src, '*.png'))):
         n = os.path.basename(f)[:-4]

@@ -1,7 +1,7 @@
-"""Build proto2/decide2/: chooser for cast decision round 2 (same format as proto2/decide)."""
+"""Build legacy/proto2/decide2/: chooser for cast decision round 2 (same format as legacy/proto2/decide)."""
 import os, json, shutil, subprocess
 ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..')
-P = os.path.join(ROOT, 'proto2')
+P = os.path.join(ROOT, 'legacy', 'proto2')
 OUTD = os.path.join(P, 'decide2')
 D2 = os.path.join(ROOT, 'art', 'production', 'D2')
 os.makedirs(OUTD, exist_ok=True)
@@ -16,10 +16,10 @@ def webp(src, name, w=640):
 
 NOTES = json.load(open(os.path.join(D2, 'notes.json'))) if os.path.exists(os.path.join(D2, 'notes.json')) else {}
 
-REF = [('proto2/emi2/r3-rdbt-work-41.webp', 'Emi (approved)'), ('proto2/gallery/M-02-it-guy-601.webp', 'Main character (approved)'),
-       ('proto2/gallery/B-rei-smirk.webp', 'Rei'), ('proto2/gallery/B-mio-bored.webp', 'Mio'), ('proto2/gallery/B-aoi-grin.webp', 'Aoi'),
-       ('proto2/gallery/B-kaori-smile.webp', 'Kaori'), ('proto2/gallery/A-luna-s101.webp', 'Kuro 玖路, night receptionist'),
-       ('proto2/gallery/A-kiyoko-s101.webp', 'Kiyoko (face approved, new clothes below)'),
+REF = [('legacy/proto2/emi2/r3-rdbt-work-41.webp', 'Emi (approved)'), ('legacy/proto2/gallery/M-02-it-guy-601.webp', 'Main character (approved)'),
+       ('legacy/proto2/gallery/B-rei-smirk.webp', 'Rei'), ('legacy/proto2/gallery/B-mio-bored.webp', 'Mio'), ('legacy/proto2/gallery/B-aoi-grin.webp', 'Aoi'),
+       ('legacy/proto2/gallery/B-kaori-smile.webp', 'Kaori'), ('legacy/proto2/gallery/A-luna-s101.webp', 'Kuro 玖路, night receptionist'),
+       ('legacy/proto2/gallery/A-kiyoko-s101.webp', 'Kiyoko (face approved, new clothes below)'),
        ('art/production/D2/goro-a-202.png', 'Goro'), ('art/production/D2/jun-a-202.png', 'Jun'),
        ('art/production/D2/ishibashi-b-201.png', 'Ishibashi'), ('art/production/D2/saki-a-201.png', 'Saki')]
 ref = []
@@ -36,15 +36,15 @@ NEW_INTRO = ('Extra women to choose from, all small or flat-chested. Each starts
              'instead of an anime type. Pick the ones you want in the game (one image each), or leave them.')
 SECTIONS = [
     ('yuzuki', 'Yuzuki (PR spokeswoman)', 'Your pick yuzuki-c-202 (shown first) repainted with long hair in four colours no other woman has, and a flat chest. Emi is shown for comparison.',
-     ['yuzuki-d', 'yuzuki-e', 'yuzuki-f', 'yuzuki-g'], [('art/production/D2/yuzuki-c-202.png', 'c-202, before'), ('proto2/emi2/r3-rdbt-work-41.webp', 'Emi, for comparison')], ''),
+     ['yuzuki-d', 'yuzuki-e', 'yuzuki-f', 'yuzuki-g'], [('art/production/D2/yuzuki-c-202.png', 'c-202, before'), ('legacy/proto2/emi2/r3-rdbt-work-41.webp', 'Emi, for comparison')], ''),
     ('kiyoko', 'Kiyoko (faction leader)', 'The s101 face is kept (masked); only the clothes are repainted. Plum haori jacket, ivory suit with a red obi belt, peacock-teal kimono-collar dress, camel coat dress with a silk scarf.',
-     ['kiyoko-plum', 'kiyoko-ivory', 'kiyoko-teal', 'kiyoko-camel'], [('proto2/gallery/A-kiyoko-s101.webp', 's101 original')], ''),
+     ['kiyoko-plum', 'kiyoko-ivory', 'kiyoko-teal', 'kiyoko-camel'], [('legacy/proto2/gallery/A-kiyoko-s101.webp', 's101 original')], ''),
     ('nanami', 'Nanami (security)', 'New start, away from the stoic woman in a black or navy tactical uniform. Each one is a real building-security job in Japan: '
      '(d) disaster-prevention centre officer who runs the fire drills, (e) traffic guard at the construction gate, (f) night-shift CCTV operator, '
      '(g) clerk at the ID-card and access desk, in the vest-and-skirt office uniform many Japanese firms still use.',
      ['nanami-d', 'nanami-e', 'nanami-f', 'nanami-g'], [], ''),
     ('office', 'Basement office (from option 2)', 'Option 2 zoomed out for more floor, the mid-wall window replaced by a narrow frosted one just under the ceiling, chairs at the desks and empty ramen cups.',
-     ['office2'], [('proto2/gallery/O-office-basement-502.webp', 'option 2 (before)')], ''),
+     ['office2'], [('legacy/proto2/gallery/O-office-basement-502.webp', 'option 2 (before)')], ''),
     ('tsubasa', 'Tsubasa, 27, company ekiden runner', 'Runs for the company ekiden team and works mornings in General Affairs. The board wants to cut the team to save money; '
      'she wants one more New Year race, and she wants to know how the new guy\'s numbers can be that good.<br><small>Usual types for this role: the bubbly sports girl, the tomboy with a crush, the one who is always eating. Here: quiet, counts everything, treats the team\'s survival as a budget fight.</small>',
      ['new-tsubasa'], [], 'new'),

@@ -1,12 +1,12 @@
-"""Build proto2/rmbg/index.html: every sprite cut out by every method, shown over a checkerboard and over a dark scene.
+"""Build legacy/proto2/rmbg/index.html: every sprite cut out by every method, shown over a checkerboard and over a dark scene.
 Run with any Python that has Pillow, e.g. ~/ai/rmbg/hf/bin/python tools/rmbg_page.py"""
 import os, json, html
 from PIL import Image
 
 ROOT = os.path.join(os.path.dirname(__file__), '..')
 SRC = os.path.join(ROOT, 'art/slice/rmbg')
-OUT = os.path.join(ROOT, 'proto2/rmbg')
-BG = Image.open(os.path.join(ROOT, 'game/img/bg/office.webp')).convert('RGB')
+OUT = os.path.join(ROOT, 'legacy/proto2/rmbg')
+BG = Image.open(os.path.join(ROOT, 'legacy/game/img/bg/office.webp')).convert('RGB')
 METHODS = [
     ('replicate', 'Replicate (current)', os.path.join(ROOT, 'art/slice/cut'), '851-labs/background-remover in the cloud. The reference.'),
     ('isnet-anime', 'rembg · ISNet anime', os.path.join(SRC, 'isnet-anime'), 'Trained on anime characters. Tiny and very fast on CPU.'),

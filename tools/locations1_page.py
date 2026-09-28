@@ -1,11 +1,11 @@
-"""Build proto2/locations1/: review page for the day-1 location backgrounds (round 1).
+"""Build legacy/proto2/locations1/: review page for the day-1 location backgrounds (round 1).
 Shows only the images listed in art/production/L1/picks.json ({"name": "note"}), grouped by location, with the current game image first."""
 import os, json, subprocess, html, re, sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from locations1 import STAGING
 ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..')
 L1 = os.path.join(ROOT, 'art', 'production', 'L1')
-OUTD = os.path.join(ROOT, 'proto2', 'locations1')
+OUTD = os.path.join(ROOT, 'legacy', 'proto2', 'locations1')
 os.makedirs(OUTD, exist_ok=True)
 picks = json.load(open(os.path.join(L1, 'picks.json')))
 man = {e['name']: e for e in json.load(open(os.path.join(ROOT, 'art', 'production', 'manifest.json'))) if e['batch'] == 'L1'}
@@ -16,17 +16,17 @@ sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), 'blo
 from shots import STAGING as B1STAGING
 
 SECTIONS = [
-    ('monorail', 'Monorail: final approach, round 3', 'game/img/bg/monorail.webp',
+    ('monorail', 'Monorail: final approach, round 3', 'legacy/game/img/bg/monorail.webp',
      'Redone after "it\'s literally a boat now" and "where is it going?". The shot is now the moment of the announcement 「まもなく、天川シティ中央駅です。お出口は右側です。」: '
      'the last stretch of guideway, the city close, then the platform on the right. Following your interior master, the angle is the straight-on right-hand window. '
      'Only two images passed my checks; each says how it was made. Not shown because they failed: the long aisle toward the front window from the Blender blockout '
      '(the beam reads as a road, water near the sill), the straight-on door view from the blockout (reads as standing on a platform), '
      'and every exterior shot of the train heading into the station (the model draws 5 to 8 cars instead of three, or puts the headlights toward the camera).'),
-    ('gate', 'Gate (security entrance)', 'game/img/bg/gate.webp',
+    ('gate', 'Gate (security entrance)', 'legacy/game/img/bg/gate.webp',
      'Picked: gate-lobby-2103.'),
-    ('copyroom', 'Copy room', 'game/img/bg/copyroom.webp',
+    ('copyroom', 'Copy room', 'legacy/game/img/bg/copyroom.webp',
      'Picked: copyroom-copier-4203.'),
-    ('sales', 'Sales, round 3', 'game/img/bg/sales.webp',
+    ('sales', 'Sales, round 3', 'legacy/game/img/bg/sales.webp',
      'Redone after "ugly, saturated and a nonsensical room". Mid-morning, seen from the entrance: a real Japanese island layout (島型), grey steel desks in facing pairs, '
      'the section chief\'s desk at the head, phones and piles of paper, blinds half down, muted colours like copy room 4203. '
      'The layout comes from a Blender blockout used as a line control; the prompt is five short sentences. Plain short prompts without the control gave nicer light but classroom rows.'),

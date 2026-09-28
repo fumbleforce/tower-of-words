@@ -1,4 +1,4 @@
-"""Like-for-like face comparison for proto2/cast-fixed (Jørgen: Tsubasa's profile was being compared with three-quarter faces).
+"""Like-for-like face comparison for legacy/proto2/cast-fixed (Jørgen: Tsubasa's profile was being compared with three-quarter faces).
 1. Tsubasa turned toward the viewer: her head and neck repainted from new-tsubasa-208 (no face-style words; hair, jacket, hands and stopwatch kept).
 2. Emi, Mio and Sumi in profile, looking down to the side like Tsubasa: head region repainted, the rest kept.
 Masked RDBT inpaint at full size (same graph as tools/puppet_frames.py), then pasted back through a feathered mask so only the head changes.

@@ -1,9 +1,9 @@
 // Dump every scene of every day as a readable branching transcript: speaker: Japanese / English.
-// Choices list each option with its branch indented; ifs show both sides. Output: game/notes/transcripts/dayN.md
+// Choices list each option with its branch indented; ifs show both sides. Output: notes/transcripts/dayN.md
 import fs from 'node:fs';
-const { SCENES: D1, CAST, SPELLS } = await import('../game/data/script.js');
+const { SCENES: D1, CAST, SPELLS } = await import('../legacy/game/data/script.js');
 const days = { 1: D1 };
-for (const d of [2, 3, 4, 5]) days[d] = (await import(`../content/day${d}.js`)).SCENES;
+for (const d of [2, 3, 4, 5]) days[d] = (await import(`../legacy/content/day${d}.js`)).SCENES;
 const plain = s => (s || '').replace(/\{([^}|]+)(?:\|[^}]*)?\}/g, '$1');
 const name = k => (CAST[k] ? `${CAST[k].en}` : k);
 // Pacing lint: spoken lines over 24 characters (punctuation not counted) are flagged in the transcript.
@@ -72,11 +72,11 @@ function steps(list, ind, out) {
     if (st.goto) out.push(`${p}→ ${st.goto}`);
   }
 }
-fs.mkdirSync('game/notes/transcripts', { recursive: true });
+fs.mkdirSync('notes/transcripts', { recursive: true });
 for (const [d, sc] of Object.entries(days)) {
   const out = [`# Day ${d}`, ''];
   for (const [id, list] of Object.entries(sc)) { out.push(`## ${id}`); steps(list, 0, out); out.push(''); }
   if (d === '1' && lint.length) out.push('', '## Pacing lint', ...lint.map(l => `- over 24 characters: ${l}`));
-  fs.writeFileSync(`game/notes/transcripts/day${d}.md`, out.join('\n'));
+  fs.writeFileSync(`notes/transcripts/day${d}.md`, out.join('\n'));
   console.log(`day${d}`, out.length, 'lines');
 }

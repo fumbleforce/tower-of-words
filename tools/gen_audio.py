@@ -5,7 +5,7 @@ import asyncio, json, os, sys
 import edge_tts
 
 ROOT = os.path.join(os.path.dirname(__file__), '..')
-OUT = os.path.join(ROOT, 'audio')
+OUT = os.path.join(ROOT, 'legacy', 'audio')
 VOICES = {  # voice code -> (voice, rate, pitch)
     'f': ('ja-JP-NanamiNeural', '-10%', '+0Hz'),
     'm': ('ja-JP-KeitaNeural', '-10%', '+0Hz'),

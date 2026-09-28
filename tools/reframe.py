@@ -7,7 +7,7 @@ these are waist-up sprites and the body is meant to leave the frame there.
 
 Usage: ~/ai/sd/venv/bin/python tools/reframe.py [key ...]   (no args = all)
 Output: art/production/RF/<key>.png (full res PNG, gitignored), art/production/RF/<key>-raw.png (before the paste-back)
-and art/production/RF/fixed/<key>.webp after --pick (shown on proto2/cast-fixed for review; not approved until Jørgen picks it).
+and art/production/RF/fixed/<key>.webp after --pick (shown on legacy/proto2/cast-fixed for review; not approved until Jørgen picks it).
 Workflow: tools/workflows/anima-outpaint.json (also copied to ~/ai/workflows)."""
 import sys, os, json, shutil
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))

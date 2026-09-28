@@ -156,7 +156,7 @@ JOBS = {
 
 
 STAGING_ALIAS = {'monorail-high2': 'monorail-high', 'monorail-high3': 'monorail-high', 'monorail-high4': 'monorail-high'}
-# Staging notes (shot-staging skill). Beat is shown under each image on proto2/locations1.
+# Staging notes (shot-staging skill). Beat is shown under each image on legacy/proto2/locations1.
 STAGING = {
     'monorail-side': dict(
         beat='He arrives on the island to live there: an empty mid-morning carriage, the island coming up on the exit side.',

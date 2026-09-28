@@ -5,7 +5,7 @@ import path from 'node:path';
 import { execFileSync } from 'node:child_process';
 
 const PY = fs.existsSync(process.env.HOME + '/ai/sd/venv/bin/python') ? process.env.HOME + '/ai/sd/venv/bin/python' : 'python3';
-const SRC = process.argv[2] || 'art/slice/ch', CUT = 'art/slice/cut', OUT = 'game/img/ch';
+const SRC = process.argv[2] || 'art/slice/ch', CUT = 'art/slice/cut', OUT = 'legacy/game/img/ch';
 fs.mkdirSync(CUT, { recursive: true }); fs.mkdirSync(OUT, { recursive: true });
 const todo = fs.readdirSync(SRC).filter(f => f.endsWith('.png') && !fs.existsSync(path.join(OUT, f.replace('.png', '.webp'))));
 if (todo.length) {

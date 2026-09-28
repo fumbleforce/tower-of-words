@@ -1,5 +1,5 @@
 """Local music with YuE2 through ComfyUI: four instrumental loops and one Japanese opening theme.
-Output: proto2/music/<name>.mp3 plus proto2/music/stats.json. Run only when the GPU is free."""
+Output: legacy/proto2/music/<name>.mp3 plus legacy/proto2/music/stats.json. Run only when the GPU is free."""
 import sys, os, time, json, random, urllib.parse
 sys.path.insert(0, os.path.dirname(__file__))
 import comfy

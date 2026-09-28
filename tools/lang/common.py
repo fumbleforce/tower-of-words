@@ -13,7 +13,7 @@ import unicodedata
 HERE = os.path.dirname(os.path.abspath(__file__))
 RAW = os.path.join(HERE, 'raw')
 ROOT = os.path.abspath(os.path.join(HERE, '..', '..'))
-OUT = os.path.join(ROOT, 'data', 'lang')
+OUT = os.path.join(ROOT, 'legacy', 'data', 'lang')
 CACHE = os.path.join(RAW, 'cache.pickle')
 
 KANJI_RE = re.compile(r'[㐀-䶿一-鿿豈-﫿々〆ヶ]')

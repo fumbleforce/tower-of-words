@@ -1,4 +1,4 @@
-"""Puppet frames for the Live2D-style sprite demo (proto2/video2): blink and mouth frames for Mio by face-only inpainting.
+"""Puppet frames for the Live2D-style sprite demo (legacy/proto2/video2): blink and mouth frames for Mio by face-only inpainting.
 The face is cropped from the approved base sprite, upscaled, repainted inside a small mask with RDBT Anima, scaled back
 and pasted over the base with a feathered mask, so everything outside the eyes or mouth stays identical.
 Candidates: art/puppet/mio/cand/<part>-<seed>.png. Run: ~/ai/sd/venv/bin/python tools/puppet_frames.py
@@ -165,7 +165,7 @@ def drawn_mouths():
     return out
 
 
-def export(dest='proto2/video2/puppet', eyes_closed=11, eyes_half=11):
+def export(dest='legacy/proto2/video2/puppet', eyes_closed=11, eyes_half=11):
     """Write the page assets: base.webp, rig.png and the eye/mouth patches (rects must match puppet.js)."""
     import shutil
     os.makedirs(dest, exist_ok=True)

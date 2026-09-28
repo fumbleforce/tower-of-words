@@ -1,4 +1,4 @@
-"""Build proto2/monorail/: our own monorail masters made locally from scratch (short prompts, no img2img from Jørgen's
+"""Build legacy/proto2/monorail/: our own monorail masters made locally from scratch (short prompts, no img2img from Jørgen's
 references), and progress shots derived only from our best master. Renders: tools/promptlab.py batches 'masters' and
 'progress_ours'; verdicts from the blind reviewer in art/production/promptlab/verdicts.json.
 The earlier style-match page (repaints of Jørgen's references, rejected) is in git history before this change."""
@@ -6,7 +6,7 @@ import os, json, html, subprocess, sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import promptlab as P
 ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..')
-OUTD = os.path.join(ROOT, 'proto2', 'monorail')
+OUTD = os.path.join(ROOT, 'legacy', 'proto2', 'monorail')
 res = P.load_results()
 ver = json.load(open(os.path.join(P.OUT, 'verdicts.json')))
 MODEL_NAME = {'rdbt': 'RDBT Anima', 'oneobs': 'One Obsession'}

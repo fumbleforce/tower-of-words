@@ -1,12 +1,12 @@
 """Video round 2: the same three source images through several local image-to-video setups.
-Output proto2/video2/<source>-<option>.mp4, stats in proto2/video2/stats.json, workflows in tools/workflows/video2-*.json.
+Output legacy/proto2/video2/<source>-<option>.mp4, stats in legacy/proto2/video2/stats.json, workflows in tools/workflows/video2-*.json.
 Run: ~/ai/sd/venv/bin/python tools/video2.py [clip names...]   (waits for an empty ComfyUI queue before each clip)
 """
 import sys, os, json, time, subprocess, random, shutil, urllib.request, urllib.parse
 sys.path.insert(0, os.path.dirname(__file__))
 import comfy
 
-OUT = 'proto2/video2'
+OUT = 'legacy/proto2/video2'
 WF_DIRS = ['tools/workflows', os.path.expanduser('~/ai/workflows')]
 STYLE = 'anime screenshot, anime coloring, 2d, cel shading, clean lineart. '
 

@@ -1,11 +1,11 @@
-"""Build proto2/promptlab/: the prompt-lab review page (baseline grid over all local models, the ablation table,
+"""Build legacy/proto2/promptlab/: the prompt-lab review page (baseline grid over all local models, the ablation table,
 our own masters and derivations, and the day-1 test shots), each image with the blind reviewer's verdict.
 Data: art/production/promptlab/{results,verdicts}.json (tools/promptlab.py, tools/promptlab_review.py)."""
 import os, re, json, html, subprocess, sys, collections, statistics
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import promptlab as P
 ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..')
-OUTD = os.path.join(ROOT, 'proto2', 'promptlab')
+OUTD = os.path.join(ROOT, 'legacy', 'proto2', 'promptlab')
 IMG = os.path.join(OUTD, 'img')
 os.makedirs(IMG, exist_ok=True)
 res = P.load_results()
