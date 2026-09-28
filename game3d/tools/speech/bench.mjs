@@ -80,13 +80,14 @@ function evaluate(useScore) {
   };
 }
 const ms = raw.out.filter((r) => r.ms).map((r) => r.ms).sort((a, b) => a - b);
+const med = (k) => { const v = raw.out.filter((r) => r[k]).map((r) => r[k]).sort((a, b) => a - b); return v.length ? v[Math.floor(v.length / 2)] : null; };
 const summary = {
   label, model: raw.model, device: raw.load.device, cpu: raw.cpu, loadMs: raw.load.ms,
-  recogniseMs: { median: ms[Math.floor(ms.length / 2)], p90: ms[Math.floor(ms.length * 0.9)], max: ms.at(-1) },
+  recogniseMs: { median: ms[Math.floor(ms.length / 2)], p90: ms[Math.floor(ms.length * 0.9)], max: ms.at(-1), textMedian: med('textMs'), scoreMedian: med('scoreMs') },
   textOnly: evaluate(false), ...(hasScores ? { withScore: evaluate(true), rule: RULE } : {}),
 };
 writeFileSync(join(here, 'results', label + '.json'), JSON.stringify(summary, null, 1));
-console.log(`${label}: load ${summary.loadMs} ms on ${summary.device}, recognise median ${summary.recogniseMs.median} ms (p90 ${summary.recogniseMs.p90})`);
+console.log(`${label}: load ${summary.loadMs} ms on ${summary.device}, recognise median ${summary.recogniseMs.median} ms (p90 ${summary.recogniseMs.p90}; transcript ${summary.recogniseMs.textMedian ?? '-'} ms, scores ${summary.recogniseMs.scoreMedian ?? '-'} ms)`);
 for (const k of ['textOnly', 'withScore']) {
   const e = summary[k]; if (!e) continue;
   console.log(`[${k}] hits ${e.total}, false accepts ${e.falseAccepts}`);

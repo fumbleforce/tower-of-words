@@ -19,7 +19,7 @@ window.runBench = async ({ model, device, dtype, clips, score }) => {
     const s = await toMono16k(await (await fetch(c)).arrayBuffer());
     const speech = hasSpeech(s);
     const r = speech ? await transcribe(trimSilence(s), score ? CANDIDATES : undefined) : { text: '', ms: 0 };
-    out.push({ clip: c, speech, text: r.text, ms: r.ms, free: r.free, scores: r.scores, sec: +(s.length / 16000).toFixed(2) });
+    out.push({ clip: c, speech, text: r.text, ms: r.ms, textMs: r.textMs, scoreMs: r.scoreMs, free: r.free, scores: r.scores, sec: +(s.length / 16000).toFixed(2) });
     log(`${c}  ${speech ? r.text : '(no speech)'}  ${r.ms} ms`);
   }
   return { load, out };
