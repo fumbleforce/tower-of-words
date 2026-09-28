@@ -31,7 +31,7 @@ export async function officePlace(game) {
 
   const spots = {
     lift_out: [-5.45, -2.4], lobby: [-5.6, -1.0], office_door: [-0.25, 0.9], my_seat: [dS1.seat[0], dS1.seat[1] + 0.45], emi_seat: [dS0.seat[0], dS0.seat[1]],
-    copier_front: [-2.95, 4.2], coffee_front: [0.7, 4.1], corridor_w: [-3.5, 1.3], corridor_e: [5.8, 1.3], machine_front: [5.1, 0.8],
+    copier_front: [-2.95, 4.2], coffee_front: [0.7, 4.1], corridor_w: [-3.5, 1.3], corridor_e: [5.8, 1.3], machine_front: [5.1, 1.3],
   };
   const seats = { my_seat: { x: dS1.seat[0], z: dS1.seat[1], top: 0.24, ry: Math.PI }, emi_seat: { x: dS0.seat[0], z: dS0.seat[1], top: 0.24, ry: Math.PI }, mio_seat: { x: dS0.seat[0], z: dS0.seat[1], top: 0.24, ry: Math.PI } };
   const rigAnchor = (rig, h = 1.65) => (v) => { rig.root.getWorldPosition(v); v.y += h; return v; };
@@ -123,7 +123,7 @@ export async function officePlace(game) {
     fit(aspect) {
       const pts = [];
       for (const x of [w.X0 - 0.2, w.X1 + 0.2]) for (const z of [w.Z0 - 0.2, w.Z1 + 0.2]) for (const y of [0, 1.45]) pts.push(new THREE.Vector3(x, y, z));
-      if (aspect >= 1) cam.fit(aspect, [new THREE.Vector3(-7.1, 0, 0), new THREE.Vector3(7.1, 0, 0), new THREE.Vector3(0, 1.45, w.Z0), new THREE.Vector3(0, 0, w.Z1 + 0.1)], new THREE.Vector3(0, 0, 0), { limY: 0.97 });
+      if (aspect >= 1) cam.fit(aspect, [new THREE.Vector3(-6.9, 0, 0), new THREE.Vector3(6.9, 0, 0), new THREE.Vector3(0, 0.6, w.Z0), new THREE.Vector3(0, 0, w.Z1)], new THREE.Vector3(0, 0, 0.1), { limY: 1.0, limX: 1.0 });
       else cam.fit(aspect, [new THREE.Vector3(-2.5, 0, 0), new THREE.Vector3(2.5, 0, 0), new THREE.Vector3(0, 0, -2.7), new THREE.Vector3(0, 1.3, 2.5)], new THREE.Vector3(0, 0, 0), { follow: true, clamp: [w.X0 + 2.2, w.X1 - 2.2, w.Z0 + 2.9, w.Z1 - 2.2] });
     },
     pick(rc) { const p = new THREE.Vector3(); return rc.ray.intersectPlane(floor, p) ? p : null; },

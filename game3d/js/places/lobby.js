@@ -48,7 +48,7 @@ export async function lobbyPlace(game) {
 
   // ---- commuters: walk in, tap a reader, pass the arch, take a lift ----
   const commuters = [];
-  [0, 1, 2, 0, 1, 2, 0].forEach((k, i) => {
+  [0, 1, 2, 3, 4, 5, 6].forEach((k, i) => {
     const r = PEOPLE.worker(k); r.root.scale.multiplyScalar(K);
     if (i === 2) { const box = rbox(0.2, 0.12, 0.2, '#f4efe6', { y: -0.3, z: 0.05, r: 0.01 }); box.add(rbox(0.21, 0.02, 0.05, '#d9534f', { y: 0.11, r: 0.004 })); r.arms[1].add(box); }
     w.root.add(r.root); r.root.visible = false;
@@ -87,7 +87,7 @@ export async function lobbyPlace(game) {
 
   // background people who aren't going anywhere yet
   const extras = [];
-  for (const [k, x, z, ry] of [[1, -3.5, -2.9, 0.9], [2, -2.95, -2.6, -2.2], [0, 5.0, 3.0, Math.PI / 2]]) {
+  for (const [k, x, z, ry] of [[4, -3.5, -2.9, 0.9], [2, -2.95, -2.6, -2.2], [5, 5.0, 3.0, Math.PI / 2]]) {
     const r = PEOPLE.worker(k); r.root.scale.multiplyScalar(K); r.root.position.set(x, 0, z); r.root.rotation.y = ry; w.root.add(r.root);
     const b = blob(0.5, 0.35); b.position.set(x, 0.004, z); w.root.add(b); extras.push(r);
     w.nav.block(x - 0.2, x + 0.2, z - 0.2, z + 0.2);
@@ -167,7 +167,7 @@ export async function lobbyPlace(game) {
       const pts = [];
       for (const x of [-X - 0.2, X + 0.2]) for (const z of [-Z - 0.2, Z + 0.3]) for (const y of [0, 1.6]) pts.push(new THREE.Vector3(x, y, z));
       if (aspect >= 1) cam.fit(aspect, [new THREE.Vector3(-5.6, 0, 0), new THREE.Vector3(5.6, 0, 0), new THREE.Vector3(0, 1.95, -Z), new THREE.Vector3(0, 0, Z + 0.1)], new THREE.Vector3(0, 0, 0.05), { follow: true, clamp: [-0.9, 0.9, 0.05, 0.05], limY: 0.97 });
-      else cam.fit(aspect, [new THREE.Vector3(-2.4, 0, 0), new THREE.Vector3(2.4, 0, 0), new THREE.Vector3(0, 0, -2.7), new THREE.Vector3(0, 1.4, 2.5)], new THREE.Vector3(0, 0, 0), { follow: true, clamp: [-X + 2.4, X - 2.4, -Z + 2.2, Z - 2.1], lead: -1.2 });
+      else cam.fit(aspect, [new THREE.Vector3(-2.4, 0, 0), new THREE.Vector3(2.4, 0, 0), new THREE.Vector3(0, 0, -2.7), new THREE.Vector3(0, 1.4, 2.5)], new THREE.Vector3(0, 0, 0), { follow: true, clamp: [-X + 2.4, X - 2.4, -Z + 2.0, Z - 2.9], lead: -2.2 });
     },
     pick(rc) { const p = new THREE.Vector3(); return rc.ray.intersectPlane(floor, p) ? p : null; },
     walkPerson(id, [x, z], { speed } = {}) {

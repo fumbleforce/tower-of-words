@@ -45,6 +45,7 @@ export async function trainPlace(game) {
   const pivot = new THREE.Group(); pivot.position.y = -0.6; scene.add(pivot);
   const car = buildCar('land'); car.root.position.y = 0.6; pivot.add(car.root);
   for (const x of [-2.0, 2.0]) { const p = new THREE.PointLight('#ffc07a', 0.8, 3.6, 1.6); p.position.set(x, 1.0, 0); car.root.add(p); }
+  { const p = new THREE.PointLight('#dfe6ff', 0.9, 2.2, 1.6); p.position.set(3.2, 1.1, -0.2); car.root.add(p); }   // fill by the far-right door
   const neighbours = [];
   for (const s of [-1, 1]) {
     const nPivot = new THREE.Group(); nPivot.position.set(s * (2 * (LX + T) + 0.52), -0.6, 0);
@@ -234,7 +235,8 @@ export async function trainPlace(game) {
   let prevM = carMotion(0, 0, 1), lastJ = 0;
 
   function setDoors(k) {
-    for (const d of doorLeaves) { const dx = Math.sign(d.x0) * DOOR_X; d.m.position.x = d.x0 + (d.x0 < dx - 0.1 ? -1 : 1) * k * (DOOR_W / 2 - 0.02); }
+    // the leaves slide into the wall pocket; once they're mostly in, they're hidden (the low cut wall can't cover them)
+    for (const d of doorLeaves) { const dx = Math.sign(d.x0) * DOOR_X; d.m.position.x = d.x0 + (d.x0 < dx - 0.1 ? -1 : 1) * k * (DOOR_W / 2 - 0.02); d.m.visible = k < 0.7; }
   }
 
   // ---- people ids for the story ----

@@ -115,11 +115,11 @@ export function wallLamp(h = 0.5, w = 0.1) {
 }
 // standing lamp post by the entrance
 export function lampPost() {
+  // a low square bollard, lit from the top only
   const g = new THREE.Group();
-  g.add(rbox(0.22, 0.62, 0.22, PAL.dark, { r: 0.03 }));
-  const glow = rbox(0.16, 0.2, 0.16, null, { y: 0.66, r: 0.03, m: emissive(PAL.lamp, PAL.lampEm, 2.6) });
-  g.add(glow);
-  g.add(rbox(0.24, 0.05, 0.24, PAL.dark, { y: 0.86, r: 0.02 }));
+  g.add(rbox(0.2, 0.36, 0.2, PAL.dark, { r: 0.02 }));
+  g.add(rbox(0.22, 0.04, 0.22, PAL.dark, { y: 0.36, r: 0.01 }));
+  const top = new THREE.Mesh(new THREE.PlaneGeometry(0.16, 0.16), emissive(PAL.lamp, PAL.lampEm, 2.4)); top.rotation.x = -Math.PI / 2; top.position.y = 0.401; g.add(top);
   return g;
 }
 

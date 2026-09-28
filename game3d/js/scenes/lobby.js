@@ -273,7 +273,7 @@ export function buildLobby() {
   { const gb = blob(0.6, 0.3); gb.position.set(2.35, 0.004, BZ - 0.55); root.add(gb); }
   const man = up(PEOPLE.kuroda()); man.root.position.set(-1.2, 0, Z + 1.6); man.root.rotation.y = Math.PI; root.add(man.root);
   const manBlob = blob(0.55, 0.38); manBlob.position.set(-1.2, 0.004, Z + 1.6); root.add(manBlob);
-  const tama = cat(); tama.scale.setScalar(1.15 * K); tama.position.set(3.45, 0, BZ + 0.42); tama.rotation.y = -0.5; root.add(tama);
+  const tama = cat(); tama.scale.setScalar(1.45 * K); tama.position.set(3.45, 0, BZ + 0.42); tama.rotation.y = -0.5; root.add(tama);
   { const bowl = new THREE.Mesh(new THREE.CylinderGeometry(0.09, 0.07, 0.05, 14), mat('#d9dde2')); bowl.position.set(3.2, 0.025, BZ + 0.56); root.add(bowl); const tb = blob(0.5, 0.3); tb.position.set(3.4, 0.004, BZ + 0.45); root.add(tb); }
   const kuro = up(PEOPLE.kuro()); kuro.root.position.set(-4.2, 0, -0.05); root.add(kuro.root);
   { const b = blob(0.55, 0.35); b.position.set(-4.2, 0.004, -0.05); root.add(b); }
