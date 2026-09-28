@@ -14,7 +14,7 @@ export function setIdleT(v) { IDLE_T = v; }
 // to the mean navy, so the planes still read.
 export const MIO_COLOURS = {
   hair: '#13292f',      // dark green bordering on black, sampled from her portrait (proto2/cast-fixed/mio-after.webp)
-  hoodie: '#565e68',    // dark charcoal hoodie, separate from the hair
+  hoodie: '#09232a',    // dark green hoodie, sampled from her portrait (proto2/cast-fixed/mio-after.webp)
   trousers: '#3b4152',  // dark charcoal cargo trousers
   shoes: '#3d4658',     // dark part of the sneakers
   teal: '#20a081',      // the lighter green underneath, sampled from the same portrait
