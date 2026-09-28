@@ -299,14 +299,16 @@ export function buildOffice() {
   const sd = door(0.6, 1.25, { windows: true }); sd.position.set(-6.45, 0, -3.4 + T / 2); root.add(sd);
   // machine-room door: the frame stays in the wall; the leaf hangs on a hinge at its right edge (the handle is on
   // the left) and swings into the machine room (Jørgen: it "slides in a strange way rather than swinging open")
-  const md = new THREE.Group(); md.position.set(5.46, 0, CN); root.add(md);
+  // the pivot is the hinge line itself: the leaf's right edge, on the room side of the wall, so that edge stays put
+  const HINGE = [5.465, CN - T / 2 + 0.035], LEAF_W = 0.76;
+  const md = new THREE.Group(); md.position.set(HINGE[0], 0, HINGE[1]); md.userData.hinge = HINGE; root.add(md);
   { const d = door(0.8, 1.25, { windows: false }); d.remove(d.children[0]);
     // an open frame (two jambs and a header) so the doorway shows through when the leaf swings away
     const fm = mat(PAL.doorFrame); for (const x of [4.66, 5.54]) root.add(rbox(0.08, 1.31, 0.06, null, { x, z: CN + T / 2, r: 0.02, m: fm }));
     root.add(rbox(0.96, 0.07, 0.06, null, { x: 5.1, y: 1.24, z: CN + T / 2, r: 0.02, m: fm }));
     // the dark room beyond the doorway, seen when it's open
     root.add(rbox(0.8, 1.22, 0.02, '#23272e', { x: 5.1, z: CN - T / 2 - 0.02, r: 0.005, cast: false }));
-    d.position.set(-0.36, 0, T / 2 - 0.01); md.add(d); }
+    d.position.set(-LEAF_W / 2, 0, -0.01); md.add(d); }   // the leaf mesh sits at z +0.01 inside door(); this centres it on the hinge line
   const fe = door(0.7, 1.2, { windows: true }); fe.rotation.y = -Math.PI / 2; fe.position.set(X1 - 0.02, 0, 1.25); root.add(fe);
   const ex = new THREE.Mesh(new THREE.PlaneGeometry(0.34, 0.16), emissive('#6fe39a', '#3fbf6e', 1.2)); ex.position.set(X1 - 0.09, 1.38, 1.25); ex.rotation.y = -Math.PI / 2; root.add(ex);
   const addPlate = (t, x, y, z, o) => { const p = plate(t, o); p.position.set(x, y, z); root.add(p); return p; };

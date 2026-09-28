@@ -250,10 +250,10 @@ export async function trainPlace(game) {
     const cutH = md === 'land' ? 0.62 : HF, fullTop = 1.22, hH = fullTop - 0.04, split = cutH - 0.1;
     const fade = (m) => { if (md === 'land') car.addFade(m); return m; };
     for (const dx of [-DOOR_X, DOOR_X]) {
-      const zo = LZ + T + 0.012;                  // outer face of the wall
+      const zo = LZ + T + 0.004;                  // just on the outer face of the wall, thin, so the leaves slide over it
       for (const s of [-1, 1]) {
-        doorSets.add(rbox(0.07, cutH, 0.03, '#2a2f38', { x: dx + s * (DOOR_W / 2 + 0.035), z: zo, r: 0.01 }));
-        if (md === 'land') doorSets.add(fade(rbox(0.07, HF - cutH, 0.03, '#2a2f38', { x: dx + s * (DOOR_W / 2 + 0.035), y: cutH, z: zo, r: 0.01 })));
+        doorSets.add(rbox(0.07, cutH, 0.012, '#2a2f38', { x: dx + s * (DOOR_W / 2 + 0.035), z: zo, r: 0.004 }));
+        if (md === 'land') doorSets.add(fade(rbox(0.07, HF - cutH, 0.012, '#2a2f38', { x: dx + s * (DOOR_W / 2 + 0.035), y: cutH, z: zo, r: 0.004 })));
       }
       const lamp = rbox(0.26, 0.05, 0.03, null, { x: dx, y: md === 'land' ? split + 0.12 : fullTop + 0.05, z: zo, r: 0.01, m: lampShut, cast: false });
       doorSets.add(lamp); doorLamps.push(lamp);
@@ -276,8 +276,11 @@ export async function trainPlace(game) {
           leaf.add(rbox(DOOR_W / 2 - 0.1, Math.min(0.2, hH * 0.4), 0.036, null, { y: wy, r: 0.015, m: emissive('#b9d3e6', '#9fc2dc', 0.35) }));
         }
         const far = s * Math.sign(dx) > 0;
-        leaf.position.set(dx + s * DOOR_W / 4, 0.037, LZ + T + (far ? 0.094 : 0.058));
-        doorSets.add(leaf); myLeaves.push({ g: leaf, x0: leaf.position.x, s, far });
+        // plug doors: shut, the leaf sits in the opening flush with the body (Jørgen: they seemed to hover in
+        // front of it); opening, it steps out a hair, then slides along the outside of the wall
+        const zShut = LZ + T - 0.02, zSlide = LZ + T + (far ? 0.052 : 0.024);
+        leaf.position.set(dx + s * DOOR_W / 4, 0.037, zShut);
+        doorSets.add(leaf); myLeaves.push({ g: leaf, x0: leaf.position.x, s, far, zShut, zSlide });
       }
     }
   }
@@ -354,7 +357,11 @@ export async function trainPlace(game) {
   function setDoors(k) {
     // the leaves slide into the wall pocket; once they're mostly in, they're hidden (the low cut wall can't cover them)
     for (const d of doorLeaves) { const dx = Math.sign(d.x0) * DOOR_X; d.m.position.x = d.x0 + (d.x0 < dx - 0.1 ? -1 : 1) * k * (DOOR_W / 2 - 0.02); d.m.visible = false; }
-    for (const d of myLeaves) { const toC = -Math.sign(d.x0); d.g.position.x = d.x0 + toC * k * (d.far ? DOOR_W - 0.01 : DOOR_W / 2 - 0.005); d.g.visible = true; }
+    for (const d of myLeaves) {
+      const toC = -Math.sign(d.x0), out = THREE.MathUtils.smoothstep(k, 0, 0.16), slide = Math.max(0, (k - 0.16) / 0.84);
+      d.g.position.z = d.zShut + out * (d.zSlide - d.zShut);
+      d.g.position.x = d.x0 + toC * slide * (d.far ? DOOR_W - 0.01 : DOOR_W / 2 - 0.005); d.g.visible = true;
+    }
     for (const l of doorLamps) l.material = k > 0.3 ? lampOpen : lampShut;
     for (const m of doorSpill) m.material.color.set('#ffe0b0').multiplyScalar(0.4 * k);
   }
@@ -579,6 +586,7 @@ export async function trainPlace(game) {
       car.root.attach(laptop); laptop.position.set(2.1, SEAT_Y + 0.2, -(LZ - 0.24) + 0.3); laptop.rotation.set(0, 0, 0);
     },
     capState(s) {
+      if (s.startsWith('dk')) { P.capState('stopped'); st.door = st.doorWant = +s.slice(2); setDoors(st.door); }   // QA: doors at k (0 shut .. 1 open)
       if (s === 'stopped') { station.visible = true; st.mode = 'stopped'; st.v = 0; st.stopX = st.dist; st.arrived = true; st.door = 1; st.doorWant = 1; setDoors(1); }
       if (s === 'platform') { P.capState('stopped'); game.player.root.position.set(DOOR_X, 0, LZ + 1.0); }
       if (s === 'sit') { const q = seats.seat_far_r; folder.visible = false; cup.visible = false; const m = game.player; m.seated = true; m.sitAt(q.x, SEAT_Y, q.z + 0.02, 0); game.walker.facing = 0; }
