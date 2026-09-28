@@ -147,18 +147,27 @@ export async function loadEric({ height = 1.2 } = {}) {
   const pose = { bow: 0 };
   let spine = null, spine2 = null; model.traverse((o) => { if (o.isBone && /spine$/i.test(o.name.replace(/[^a-z0-9]/gi, ''))) spine = o; if (o.isBone && /spine0?1$/i.test(o.name.replace(/[^a-z0-9]/gi, ''))) spine2 = o; });
   const SIT_T = calmSitTime(model, mixer, actions.sit);
-  let cur = null, curName = '', bt = 0;
+  let cur = null, curName = '', bt = 0, breath = 0;
   function setState(name) {
     if (name === curName || !actions[name]) return;
-    const a = actions[name]; a.reset(); a.setEffectiveWeight(1); if (name === 'sit') { a.time = SIT_T; a.timeScale = 0; } a.fadeIn(cur ? 0.2 : 0).play();
+    const a = actions[name]; a.reset(); a.setEffectiveWeight(1); if (name === 'sit') { a.time = SIT_T; a.timeScale = 0; }
+    // Meshy's idle clip swings his hips round by up to half a turn (Jørgen: "turn and twist like crazy"); hold its first frame
+    if (name === 'idle') { a.time = 0; a.timeScale = 0; }
+    a.fadeIn(cur ? 0.2 : 0).play();
     if (cur && cur !== a) cur.fadeOut(0.2);
     cur = a; curName = name;
   }
+  // held frames: three.js skips writing unchanged bones, so extras (breath, bow) are undone before each mixer step
+  const bones = []; model.traverse((o) => { if (o.isBone) bones.push([o, o.position.clone(), o.quaternion.clone()]); });
+  const snapBones = () => { for (const b of bones) { b[1].copy(b[0].position); b[2].copy(b[0].quaternion); } };
+  const restoreBones = () => { for (const b of bones) { b[0].position.copy(b[1]); b[0].quaternion.copy(b[2]); } };
   function update(dt, speed = 1) {
     actions.walk.timeScale = speed;
+    restoreBones();
     mixer.update(dt); bt += dt;
+    snapBones();
     if (curName !== 'sit') { hips.position.x = hipRest.x; hips.position.z = hipRest.z; }
-    else hips.position.y += Math.sin(bt * 2.0) * 0.004;
+    if (curName === 'sit' || curName === 'idle') { breath = Math.sin(bt * 2.0) * 0.004; hips.position.y += breath; }
     if (pose.bow) { spine.rotateX(pose.bow * 0.6); spine2 && spine2.rotateX(pose.bow * 0.4); }
   }
   // where the hips sit in the chair clip, in the root's space
@@ -166,7 +175,7 @@ export async function loadEric({ height = 1.2 } = {}) {
   root.updateMatrixWorld(true);
   const sitHip = new THREE.Vector3(); hips.getWorldPosition(sitHip); root.worldToLocal(sitHip);
   mixer.stopAllAction(); cur = null; curName = '';
-  setState('idle'); update(0);
+  setState('idle'); snapBones(); update(0);
   const a = {
     root, model, mixer, update, sitHip, pose, seated: false, scripted: false, meshy: true,
     setState, get state() { return curName; },

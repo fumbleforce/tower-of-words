@@ -11,15 +11,17 @@ export const LZ = 1.2;   // inner half width
 export const T = 0.1;    // wall thickness
 const RI = 0.34;         // inner corner radius (plan)
 export const HF = 1.45;  // full wall height
-const RACK_Y = 1.285, RACK_D = 0.32; // luggage shelf top (just above the window frames) and depth
+const RACK_Y = 1.28, RACK_D = 0.3; // luggage shelf top (just above the window frames) and depth
 export const SEAT_Y = 0.22; // seat cushion top
 export const BENCH_D = 0.4;
 export const RAIL_Y = 1.42;
-export const WIN = { xs: [-2.45, -1.1, 1.1, 2.45], w: 1.18 };
+// game3d: windows a little narrower and the outer ones moved in, so the doorway and the windows never share wall
+// (overlapping holes broke the wall's triangulation on phones, where this wall is full height: no windows)
+export const WIN = { xs: [-2.28, -1.0, 1.0, 2.28], w: 1.0 };
 export const BENCHES = [[-3.05, -0.42], [0.42, 3.05]];
 // game3d: the doors moved in from 3.52 so the doorway sits wholly on the straight wall, clear of the rounded
 // corner piece (which the doorway used to cut into); the near benches end short of them
-export const DOOR_X = 3.22, DOOR_W = 0.74;
+export const DOOR_X = 3.25, DOOR_W = 0.68;
 export const NEAR_END = DOOR_X - DOOR_W / 2 - 0.08;
 
 export const COL = {
@@ -318,32 +320,24 @@ function rackAndRail(x0, x1, side, straps, rack) {
     straps.push({ piv, ph: (straps.length * 2.39) % 6.28, a: 0, v: 0, b: 0, w: 0 });
   }
   if (rack) {
-    // luggage rack: a slatted shelf just above the windows, on wall brackets, with a front lip
+    // luggage rack: an open rod shelf on wall brackets (Jørgen wanted a real shelf, not floating bags), kept open
+    // so the windows under it still show the sea from the game camera (a solid shelf hid them)
     const rackM = mat('rack', COL.rack, { roughness: 0.45, metalness: 0.2 });
     const D = RACK_D, y = RACK_Y, zw = side * LZ, zf = side * (LZ - D);
-    const len = x1 - x0 - 0.1, cx = (x0 + x1) / 2;
-    // slats running along the car
     for (let i = 0; i < 5; i++) {
-      const s = new THREE.Mesh(new RoundedBoxGeometry(len, 0.014, 0.05, 1, 0.005), rackM);
-      s.position.set(cx, y - 0.007, zw - side * (0.04 + i * (D - 0.08) / 4));
-      g.add(shadowOn(s, true, true));
+      const z = zw - side * (0.035 + i * (D - 0.05) / 4);
+      g.add(shadowOn(pole([x0 + 0.06, y - 0.01, z], [x1 - 0.06, y - 0.01, z], 0.008, rackM)));
     }
-    // front lip and the back strip on the wall
-    g.add(shadowOn(pole([x0 + 0.05, y + 0.02, zf], [x1 - 0.05, y + 0.02, zf], 0.013, rackM)));
-    const back = new THREE.Mesh(new RoundedBoxGeometry(len, 0.05, 0.02, 1, 0.006), rackM);
-    back.position.set(cx, y - 0.01, zw - side * 0.012); g.add(shadowOn(back, false, true));
-    // brackets: a wall plate, the arm under the shelf and a diagonal strut back to the wall
-    for (let x = x0 + 0.12; x <= x1 - 0.1 + 1e-6; x += Math.max(0.5, (x1 - x0 - 0.24) / Math.max(1, Math.round((x1 - x0 - 0.24) / 0.8)))) {
+    // front lip, a little higher, so it reads as the shelf's edge
+    g.add(shadowOn(pole([x0 + 0.06, y + 0.015, zf], [x1 - 0.06, y + 0.015, zf], 0.012, rackM)));
+    // brackets: a small wall plate, the arm under the rods and a strut back down to the wall
+    const n = Math.max(2, Math.round((x1 - x0) / 0.8) + 1);
+    for (let i = 0; i < n; i++) {
+      const x = x0 + 0.1 + (i * (x1 - x0 - 0.2)) / (n - 1);
       const plate = new THREE.Mesh(new RoundedBoxGeometry(0.05, 0.1, 0.016, 1, 0.006), metal);
-      plate.position.set(x, y - 0.05, zw - side * 0.008); g.add(shadowOn(plate, false, true));
-      g.add(shadowOn(pole([x, y - 0.018, zw], [x, y - 0.018, zf], 0.012, metal)));
-      g.add(shadowOn(pole([x, y - 0.095, zw], [x, y - 0.02, zf + side * 0.12], 0.01, metal)));
-    }
-    // small lamps tucked under the shelf, in place of the wall lamps it covers
-    const lampM = mat('lamp', COL.lamp, { emissive: new THREE.Color('#ffd08a'), emissiveIntensity: 2.4 });
-    for (let x = x0 + 0.5; x < x1 - 0.3; x += 1.1) {
-      const l = new THREE.Mesh(new RoundedBoxGeometry(0.3, 0.02, 0.06, 1, 0.008), lampM);
-      l.position.set(x, y - 0.03, zw - side * 0.1); g.add(l);
+      plate.position.set(x, y - 0.06, zw - side * 0.008); g.add(shadowOn(plate, false, true));
+      g.add(shadowOn(pole([x, y - 0.022, zw], [x, y + 0.015, zf], 0.011, metal)));
+      g.add(shadowOn(pole([x, y - 0.1, zw], [x, y - 0.024, zf + side * 0.12], 0.009, metal)));
     }
   }
   return g;
@@ -393,12 +387,32 @@ export function bagMesh(kind, color) {
   return g;
 }
 
-let _blob = null;
-function blobTex() {
-  if (_blob) return _blob;
-  const cv = document.createElement('canvas'); cv.width = cv.height = 64; const x = cv.getContext('2d');
-  const gr = x.createRadialGradient(32, 32, 2, 32, 32, 31); gr.addColorStop(0, 'rgba(0,0,0,0.7)'); gr.addColorStop(1, 'rgba(0,0,0,0)');
-  x.fillStyle = gr; x.fillRect(0, 0, 64, 64); _blob = new THREE.CanvasTexture(cv); return _blob;
+// The body stripe runs round the whole car; on the door side it stops at the door posts (Jørgen: lines through the doors).
+// The ring's straight door-side run is dropped (its triangles span the whole side) and rebuilt as pieces between the doorways.
+function cutDoorways(mesh, y0, h, material) {
+  let g = mesh.geometry; if (g.index) g = g.toNonIndexed();
+  const p = g.attributes.position, keep = [];
+  const v = new THREE.Vector3();
+  for (let i = 0; i < p.count; i += 3) {
+    let cx = 0, cz = 0; for (let j = 0; j < 3; j++) { v.fromBufferAttribute(p, i + j); cx += v.x / 3; cz += v.z / 3; }
+    if (cz > LZ + T - 0.06 && Math.abs(cx) < LX - RI + 0.01) continue;
+    keep.push(i);
+  }
+  const out = new THREE.BufferGeometry();
+  for (const [name, a] of Object.entries(g.attributes)) {
+    const arr = new a.array.constructor(keep.length * 3 * a.itemSize);
+    keep.forEach((i, n) => { for (let j = 0; j < 3 * a.itemSize; j++) arr[n * 3 * a.itemSize + j] = a.array[i * a.itemSize + j]; });
+    out.setAttribute(name, new THREE.BufferAttribute(arr, a.itemSize));
+  }
+  mesh.geometry = out;
+  const half = DOOR_W / 2 + 0.035, E = LX - RI + 0.004;
+  const runs = [[-E, -DOOR_X - half], [-DOOR_X + half, DOOR_X - half], [DOOR_X + half, E]];
+  const grp = new THREE.Group();
+  for (const [x0, x1] of runs) {
+    const b = new THREE.Mesh(new RoundedBoxGeometry(x1 - x0, h, 0.04, 1, Math.min(0.01, h / 3)), material);
+    b.position.set((x0 + x1) / 2, y0 + h / 2, LZ + T); grp.add(shadowOn(b, false, true));
+  }
+  return grp;
 }
 
 // ---------- the car ----------
@@ -421,9 +435,9 @@ export function buildCar(mode = 'land') {
   stripeShape.holes.push(planRRect(LX + T - 0.02, LZ + T - 0.02, RI + T - 0.02));
   const stripe = new THREE.Mesh(placePlan(new THREE.ExtrudeGeometry(stripeShape, { depth: 0.05, bevelEnabled: true, bevelThickness: 0.01, bevelSize: 0.008, bevelSegments: 1, curveSegments: 10 })), mat('stripe', COL.stripe, { roughness: 0.5 }));
   stripe.position.y = 0.3;
-  root.add(shadowOn(stripe, false, true));
-  const stripe2 = stripe.clone(); stripe2.position.y = -0.02; stripe2.scale.y = 0.6;
-  root.add(stripe2);
+  root.add(cutDoorways(stripe, 0.29, 0.07, stripe.material)); root.add(shadowOn(stripe, false, true));
+  const stripe2 = new THREE.Mesh(stripe.geometry.clone(), stripe.material); stripe2.position.y = -0.02; stripe2.scale.y = 0.6;
+  root.add(cutDoorways(stripe2, -0.03, 0.042, stripe.material)); root.add(stripe2);
   // bogie housings straddling the beam
   for (const x of [-2.6, 2.6]) {
     const b = new THREE.Mesh(new RoundedBoxGeometry(1.5, 0.3, 1.0, 3, 0.1), mat('bogie', '#8e97a3', { roughness: 0.7 }));
@@ -461,9 +475,6 @@ export function buildCar(mode = 'land') {
     const onShelf = (b, x, ry = 0, lie = false) => {
       if (lie) b.rotation.x = -Math.PI / 2; // lying flat so it stays under the wall top
       b.position.set(x, RACK_Y, bz + (lie ? 0.06 : 0)); b.rotation.y = ry; benchHolder.add(b);
-      // a soft contact shadow on the slats
-      const sh = new THREE.Mesh(new THREE.PlaneGeometry(1, 1), new THREE.MeshBasicMaterial({ map: blobTex(), transparent: true, depthWrite: false, opacity: 0.55 }));
-      sh.rotation.x = -Math.PI / 2; sh.position.set(x, RACK_Y + 0.004, bz); sh.scale.set(0.55, 0.3, 1); sh.renderOrder = 1; benchHolder.add(sh);
     };
     onShelf(bagMesh('case', '#4d4a52'), -2.4);
     onShelf(bagMesh('case', '#6a4f3e'), 2.15, 0.05);

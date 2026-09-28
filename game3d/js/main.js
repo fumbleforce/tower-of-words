@@ -5,7 +5,7 @@ import { loadMio } from './mio.js';
 import { makeAvatar, loadEric, setSitLift } from './avatar.js';
 import { glide } from './places/lobby.js';
 export const isPlayer = (id) => id === 'eric' || id === 'player';
-import { ui, unlockAudio, sfx, voice, setFace, faceForEmote, playMusic } from './ui.js';
+import { ui, unlockAudio, sfx, stopSfx, voice, setFace, faceForEmote, playMusic } from './ui.js';
 // background loop per place (audio/music); after work it switches to the night loop
 const MUSIC = { train: 'calm', gate: 'lively', office: 'office' };
 import { WORDS, known, SAYABLE } from './lang.js';
@@ -221,6 +221,61 @@ H.goal = ({ text }) => ui.goal(text);
 H.hint = ({ text, what }) => { if (what === 'say') ui.introSay(text); else ui.hint(text, 5000); };
 H.wait = ({ ms }) => game.wait(ms);
 H.sound = ({ name }) => sfx(name);
+
+// ---------- kotodama: the look of a word taking hold ----------
+// One reusable effect for every command that works: the closing chime (or any cuttable sound) stops mid-note,
+// a faint cold shimmer runs along the edges of whatever the word caught, the lights dip and hum for a moment,
+// and a low tone swells. The thing itself is frozen by whoever calls this (the place's hook).
+// targets: Object3Ds whose meshes get the shimmer. Resolves when the effect has settled (about 2.6 s).
+game.kotodama = async (targets = [], { cut = ['chime'], focus, zoom = 1.25 } = {}) => {
+  for (const k of cut) stopSfx(k);
+  // clear the view: the text box and portraits sit over the bottom of the screen, where things like the doors are
+  ui.closeTalk();
+  const cam = game.place.cam; const prevClose = cam && cam.close;
+  if (focus && cam && cam.closeOn) cam.closeOn(focus, zoom);
+  sfx('kotodama');
+  const edges = [];
+  const mat = new THREE.LineBasicMaterial({ color: '#c9f4ff', transparent: true, opacity: 0, blending: THREE.AdditiveBlending, depthWrite: false });
+  const glowM = new THREE.MeshBasicMaterial({ color: '#9fe6ff', transparent: true, opacity: 0, blending: THREE.AdditiveBlending, depthWrite: false });
+  const dotM = new THREE.PointsMaterial({ color: '#ffffff', size: 0.09, transparent: true, opacity: 0, blending: THREE.AdditiveBlending, depthWrite: false });
+  const runners = [];
+  const meshes = []; for (const t of targets) t.traverse((o) => { if (o.isMesh && o.geometry) meshes.push(o); });
+  for (const o of meshes) {
+    const eg = new THREE.EdgesGeometry(o.geometry, 35);
+    const l = new THREE.LineSegments(eg, mat); l.renderOrder = 5; o.add(l); edges.push(l);
+    // a faint cold glow over the whole thing, a touch bigger than it
+    const gl = new THREE.Mesh(o.geometry, glowM); gl.scale.setScalar(1.06); gl.renderOrder = 4; gl.userData.shared = true; o.add(gl); edges.push(gl);
+    // a few bright points that run along the edges
+    const p = eg.attributes.position; const segs = p.count / 2; if (!segs) continue;
+    const pts = new THREE.BufferGeometry().setAttribute('position', new THREE.Float32BufferAttribute(new Float32Array(9), 3));
+    const d = new THREE.Points(pts, dotM); d.renderOrder = 6; o.add(d); edges.push(d);
+    runners.push({ p, segs, pts, ph: Math.random() });
+  }
+  const r = renderer, e0 = r.toneMappingExposure;
+  const a = new THREE.Vector3(), b = new THREE.Vector3();
+  await game.tween(2.6, (k) => {
+    // lights: a quick dip with a flicker, then back
+    const dip = k < 0.08 ? k / 0.08 : Math.max(0, 1 - (k - 0.45) / 0.4);
+    r.toneMappingExposure = e0 * (1 - 0.28 * dip + 0.05 * dip * Math.sin(k * 90));
+    const vis = Math.min(1, k / 0.1) * Math.max(0, 1 - Math.max(0, k - 0.6) / 0.4);
+    mat.opacity = vis * (0.7 + 0.3 * Math.sin(k * 40)); dotM.opacity = vis; glowM.opacity = vis * (0.22 + 0.12 * Math.sin(k * 23));
+    for (const q of runners) {
+      const arr = q.pts.attributes.position.array;
+      for (let j = 0; j < 3; j++) {
+        const s = ((k * 0.9 + q.ph + j / 3) % 1) * q.segs, i = Math.floor(s), f = s - i;
+        a.fromBufferAttribute(q.p, i * 2); b.fromBufferAttribute(q.p, i * 2 + 1); a.lerp(b, f);
+        arr[j * 3] = a.x; arr[j * 3 + 1] = a.y; arr[j * 3 + 2] = a.z;
+      }
+      q.pts.attributes.position.needsUpdate = true;
+    }
+  });
+  r.toneMappingExposure = e0;
+  if (focus && cam) { if (prevClose) cam.close = prevClose; else cam.release?.(); }
+  for (const l of edges) { l.parent && l.parent.remove(l); if (!l.userData.shared) l.geometry.dispose(); }
+  mat.dispose(); dotM.dispose(); glowM.dispose();
+};
+// { do: 'kotodama', target: 'doors' }: the effect on its own, on a place's named target (place.kotodamaTargets)
+H.kotodama = async ({ target }) => { const t = game.place.kotodamaTargets?.(target) || []; await game.kotodama(t); };
 H.voice = ({ key }) => voice(key);
 H.walk = async ({ who, to, wait = true, speed }) => {
   const p = posOf(to); if (!p) return;
@@ -428,6 +483,8 @@ function crossfade(url) {
 let lastT = performance.now();
 let frames = 0;
 const nearSet = new Set(), zoneSet = new Set();
+// stills and frame sequences (?cap): advance game time exactly, independent of how slow the renderer is
+if (CAP) window.__advance = (sec) => { for (let t = sec; t > 1e-6; t -= 1 / 30) step(Math.min(1 / 30, t)); };
 function frame() {
   const now = performance.now(); let dt = Math.min(0.1, (now - lastT) / 1000) * TS; lastT = now;
   if (!CAP || window.__run) while (dt > 1e-4) { const s = Math.min(0.05, dt); step(s); dt -= s; }
