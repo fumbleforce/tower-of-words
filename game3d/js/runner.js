@@ -1,5 +1,5 @@
 // Runs the story files (game3d/story/*.js, format in game3d/story/FORMAT.md) against a place.
-import { ui, voice, sfx } from './ui.js';
+import { ui, voice, sfx, setFace } from './ui.js';
 import { WORDS, learn, known, cmdHTML } from './lang.js';
 
 export const flags = {};
@@ -113,6 +113,7 @@ export class Runner {
   async step(s) {
     this.lastStep = s;
     if (typeof s === 'string') return this.line(s);
+    if (s.face && s.say) setFace(s.say, s.face);
     if (s.say) return this.sayLine(s.say, s.text, s.voice || (s.overheard ? heardKey(s.text) : undefined), s.name, s);
     if (s.choice) return this.choice(s);
     if (s.offer) return this.offer(s);
@@ -140,14 +141,14 @@ export class Runner {
     if (!voiceKey && who !== 'eric' && !s.overheard) { const k = lineKey(who, text); if (audioKeys.has(k)) voiceKey = k; }
     if (!voiceKey && who === 'eric') { const k = lineKey(who, text); if (audioKeys.has(k)) voiceKey = k; }
     if (voiceKey && s.overheard && !audioKeys.has(voiceKey)) voiceKey = null;
-    await ui.say(sp, text, { voiceKey, overheard: !!s.overheard, clear: s.clear });
+    await ui.say(sp, text, { voiceKey, overheard: !!s.overheard, clear: s.clear, whoId: who, face: s.face });
     return null;
   }
   async choice(s) {
     const opts = s.choice.filter((o) => cond(o.if));
-    let who = null, text = '';
-    if (s.prompt) { const i = s.prompt.indexOf(': '); if (i > 0 && /^\w+$/.test(s.prompt.slice(0, i))) { who = this.speaker(s.prompt.slice(0, i)); text = s.prompt.slice(i + 2); } else text = s.prompt.replace(/^>\s*/, ''); }
-    const pick = await ui.choose(who, text, opts.map((o) => ({ html: o.text.replace(/</g, '&lt;') })), { keepLine: !s.prompt });
+    let who = null, text = '', whoId = null;
+    if (s.prompt) { const i = s.prompt.indexOf(': '); if (i > 0 && /^\w+$/.test(s.prompt.slice(0, i))) { whoId = s.prompt.slice(0, i); who = this.speaker(whoId); text = s.prompt.slice(i + 2); } else text = s.prompt.replace(/^>\s*/, ''); }
+    const pick = await ui.choose(who, text, opts.map((o) => ({ html: o.text.replace(/</g, '&lt;') })), { keepLine: !s.prompt, whoId });
     const o = opts[pick];
     if (o.set) { if (typeof o.set === 'string') flags[o.set] = true; else Object.assign(flags, o.set); }
     if (o.call) await this.run(o.call);
@@ -155,9 +156,9 @@ export class Runner {
     return null;
   }
   async offer(s) {
-    let who = null, text = '';
-    if (s.line) { const i = s.line.indexOf(': '); if (i > 0 && /^\w+$/.test(s.line.slice(0, i))) { who = this.speaker(s.line.slice(0, i)); text = s.line.slice(i + 2); } else text = s.line.replace(/^>\s*/, ''); }
-    await ui.choose(who, text, [{ html: cmdHTML(s.offer), cls: 'cmdchip' }], { voiceKey: s.voice });
+    let who = null, text = '', whoId = null;
+    if (s.line) { const i = s.line.indexOf(': '); if (i > 0 && /^\w+$/.test(s.line.slice(0, i))) { whoId = s.line.slice(0, i); who = this.speaker(whoId); text = s.line.slice(i + 2); } else text = s.line.replace(/^>\s*/, ''); }
+    await ui.choose(who, text, [{ html: cmdHTML(s.offer), cls: 'cmdchip' }], { voiceKey: s.voice, whoId });
     voice(WORDS[s.offer].voice);
     this.game.mioSays?.(s.offer);
     this.game.sim?.taught && !this.game.sim.taught[s.offer] && who && (this.game.sim.taught[s.offer] = s.from || s.line.slice(0, s.line.indexOf(': ')));

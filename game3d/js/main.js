@@ -5,7 +5,7 @@ import { loadMio } from './mio.js';
 import { makeAvatar, loadEric, setSitLift } from './avatar.js';
 import { glide } from './places/lobby.js';
 export const isPlayer = (id) => id === 'eric' || id === 'player';
-import { ui, unlockAudio, sfx, voice } from './ui.js';
+import { ui, unlockAudio, sfx, voice, setFace, faceForEmote } from './ui.js';
 import { WORDS, known, SAYABLE } from './lang.js';
 import { defaultReaction } from './story.js';
 import { Runner, flags, cond } from './runner.js';
@@ -231,7 +231,9 @@ H.sit = async ({ who, at }) => {
 };
 H.stand = async ({ who }) => { await game.place.standPerson?.(who); };
 H.cam = ({ on, zoom = 1.8, back }) => { if (back) game.place.cam.release?.(); else { const p = posOf(on); if (p) game.place.cam.closeOn?.(p, zoom); } };
+H.expression = ({ who, face }) => setFace(who, face);
 H.emote = ({ who, kind }) => {
+  faceForEmote(who, kind);
   const el = document.createElement('div'); el.className = 'emote'; el.textContent = kind === 'heart' ? '♥' : kind === 'sweat' ? '💧' : kind;
   document.getElementById('ui').appendChild(el);
   const t0 = performance.now();

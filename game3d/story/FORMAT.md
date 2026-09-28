@@ -218,6 +218,15 @@ Place hooks (the unlock effects):
 
 Commands `irete` 入れて, `dashite` 出して, `tomatte` 止まって (voiced). Rei has a hidden body in the office (`show`/`walk`/`hide`, or the schedule). Bonds fire when a level is crossed, not only hit. `{ say: 'rei', name: 'Woman in white', text }` overrides the name for one line. `newsletter` `up`/`down` (the right way up now). Office hooks `kettle` `state: 'pour'` (steam) and `rackAlarm` `state: 'on'|'off'` (blinking light and beeps). Items: `tea` is royal milk tea. Speaker `kuroda` shows as Mr. Hamada.
 
+## Portraits (VN style)
+
+The speaker's approved portrait shows beside the text box (desktop: large at the left; phone: smaller, above the box). Eric's shows smaller on the right on his lines, and the listener dims. Narration shows none. Faces that exist:
+- `mio`: `neutral`, `smirk`, `suspicious`
+- `aoi`: `neutral`, `panic`
+- `eric`: `neutral`
+- `kuro`: `neutral`
+Everyone else (Mori, Kenji, Hamada, the guard and the rest) has no approved art yet and shows just the name plate. Set a face on a line with the long form `{ say: 'mio', face: 'smirk', text: '...' }` (it stays until changed), or with `{ do: 'expression', who: 'mio', face: 'suspicious' }`. The `emote` hook also changes the face when one fits: `?` suspicious, `!` panic, `♪`/`heart` smirk.
+
 ## Eric, Mio, phrases and overheard Japanese (the new premise)
 
 - The player is Eric (speaker id `eric`, shown as "Eric · you"). In hooks, `who: 'eric'` (or `'player'`) moves him. `sit` with `who: 'eric'` sits him (train seats, office `my_seat`).

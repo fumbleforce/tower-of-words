@@ -328,3 +328,18 @@ body.phone #sayTip::after { right: 40px; bottom: -8px; border: 8px solid transpa
 body.busy #sayTip { display: none; }
 .tp-who { font-weight: 700; margin-right: 4px; }
 #build { position: fixed; right: 8px; bottom: 4px; font-size: 10px; color: rgba(200, 206, 216, .45); pointer-events: none; z-index: 6; }
+
+/* VN portraits: bust-up beside the text box on desktop, smaller above it on a phone; the listener dims */
+#talk .por { position: absolute; bottom: -22px; pointer-events: none; transition: opacity .2s, filter .2s; }
+#talk .por[hidden] { display: none; }
+#talk .por img { display: block; height: 100%; width: auto; filter: drop-shadow(0 6px 14px rgba(0,0,0,.45)); }
+#talk .por.left { right: calc(100% - 30px); height: 420px; }
+#talk .por.right { left: calc(100% - 30px); height: 320px; }
+#talk .por.dim { opacity: .55; filter: brightness(.6) saturate(.7); }
+#talk .line, #talk .who, #talk .chips { position: relative; z-index: 1; }
+body.phone #talk .por { bottom: calc(100% - 4px); }
+body.phone #talk .por.left { left: 10px; right: auto; height: 190px; }
+body.phone #talk .por.right { right: 10px; left: auto; height: 150px; }
+body.phone #talk .por img { filter: drop-shadow(0 3px 8px rgba(0,0,0,.5)); }
+#talk .por.card img { border-radius: 14px; border: 2px solid rgba(255,255,255,.14); height: 88%; margin-top: 12%; }
+body.phone #talk .por.card img { border-radius: 10px; }

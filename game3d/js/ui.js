@@ -70,6 +70,27 @@ export function setMuted(m) { muted = m; if (m) for (const a of Object.values(cl
 export function isMuted() { return muted; }
 export function unlockAudio() { ac(); }
 
+// ---------- VN portraits ----------
+// Approved art only (assets/portraits/<who>-<face>.webp). People without approved art get a name plate only.
+export const PORTRAITS = { mio: ['neutral', 'smirk', 'suspicious'], aoi: ['neutral', 'panic'], eric: ['neutral'], kuro: ['neutral'] };
+const EMOTE_FACE = { '?': 'suspicious', '!': 'panic', '♪': 'smirk', heart: 'smirk', sweat: 'panic' };
+const faceNow = {};
+let lastNpc = null;
+export function setFace(who, face) { faceNow[who] = face; }
+export function faceForEmote(who, kind) { const f = EMOTE_FACE[kind]; if (f && PORTRAITS[who] && PORTRAITS[who].includes(f)) faceNow[who] = f; }
+function portraitSrc(who, face) {
+  const list = PORTRAITS[who]; if (!list) return null;
+  const f = list.includes(face) ? face : list.includes(faceNow[who]) ? faceNow[who] : 'neutral';
+  return new URL(`../assets/portraits/${who}-${f}.webp?v=${encodeURIComponent(window.BUILD || '')}`, import.meta.url).href;
+}
+function showPortraits(t, whoId, face) {
+  const L = t.querySelector('.por.left'), R = t.querySelector('.por.right');
+  if (!whoId) { L.hidden = R.hidden = true; return; }          // narration: no portrait
+  const set = (el, src) => { if (!src) { el.hidden = true; return; } el.classList.toggle('card', /\/(eric|kuro)-/.test(src)); const img = el.querySelector('img'); if (img.getAttribute('src') !== src) img.src = src; el.hidden = false; };
+  if (whoId === 'eric') { set(R, portraitSrc('eric', face)); R.classList.remove('dim'); if (lastNpc && PORTRAITS[lastNpc]) { set(L, portraitSrc(lastNpc)); L.classList.add('dim'); } else L.hidden = true; }
+  else { lastNpc = whoId; set(L, portraitSrc(whoId, face)); L.classList.remove('dim'); R.hidden = true; }
+}
+
 // ---------- overheard Japanese ----------
 // Eric can't follow it: every character he doesn't know becomes a softened, shifting stand-in glyph, and
 // the words he does know (his phrases and commands, plus the line's `clear` list) stay sharp and glossed.
@@ -126,6 +147,8 @@ export const ui = {
       </div>
       <div id="board" hidden><div class="led"></div></div>
       <div id="talk" hidden>
+        <div class="por left" hidden><img alt=""></div>
+        <div class="por right" hidden><img alt=""></div>
         <div class="who"></div>
         <div class="line"></div>
         <div class="chips"></div>
@@ -237,9 +260,10 @@ export const ui = {
     if (voiceKey) voice(voiceKey);
   },
   // Show a line and wait for a tap. speaker: {name, role, color} or null for narration.
-  say(speaker, text, { voiceKey, auto, overheard, clear } = {}) {
+  say(speaker, text, { voiceKey, auto, overheard, clear, whoId, face } = {}) {
     return new Promise((res) => {
       const t = $('#talk');
+      showPortraits(t, speaker ? whoId : null, face);
       t.classList.toggle('heard', !!overheard);
       t.hidden = false; t.classList.toggle('narr', !speaker); t.classList.toggle('phone', !!(speaker && speaker.phone));
       const who = t.querySelector('.who');
@@ -258,9 +282,10 @@ export const ui = {
     });
   },
   // Show a line with reply chips; resolves with the chip index. chips: [{html}]
-  choose(speaker, text, chips, { voiceKey, glow = -1, keepLine = false } = {}) {
+  choose(speaker, text, chips, { voiceKey, glow = -1, keepLine = false, whoId } = {}) {
     return new Promise((res) => {
       const t = $('#talk');
+      if (!keepLine || whoId) showPortraits(t, speaker ? whoId : null);
       t.hidden = false; t.classList.toggle('narr', !speaker);
       const who = t.querySelector('.who');
       who.innerHTML = speaker ? `<span class="nm" style="--c:${speaker.color || '#8fa3c0'}">${speaker.name}</span>${speaker.role ? `<span class="rl">${speaker.role}</span>` : ''}` : '';
@@ -357,7 +382,7 @@ export const ui = {
       setTimeout(() => inp.focus(), 60);
     });
   },
-  closeTalk() { const t = $('#talk'); t.hidden = true; this._advance = null; this._chipKeys = null; },
+  closeTalk() { const t = $('#talk'); t.hidden = true; lastNpc = null; this._advance = null; this._chipKeys = null; },
   get talking() { return !$('#talk').hidden; },
   fade(title, sub = '', hold = 1400) {
     const f = $('#fade');
