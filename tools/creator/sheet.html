@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><title>Creator check sheet</title>
-<script type="importmap">{"imports":{"three":"/game3d/vendor/three/three.module.js"}}</script>
+<script type="importmap">{"imports":{"three":"/game3d/vendor/three/three.module.js","three/addons/":"/game3d/vendor/"}}</script>
 <style>
   :root { --bg: #eef0f3; --ink: #1d2230; --mute: #5b6475; --card: #ffffff; }
   body { margin: 0; background: var(--bg); color: var(--ink); font: 14px/1.45 system-ui, sans-serif; }
@@ -52,18 +52,20 @@ function shot(root, { yaw = 0, look = null, dist = 3.3, wide = false, caption = 
 // scale a loaded character so its current pose is 1 tall with the feet on 0
 function normalise(root) {
   root.scale.setScalar(1); root.position.set(0, 0, 0); root.updateMatrixWorld(true);
+  root.traverse((o) => { if (o.isSkinnedMesh) o.skeleton.update(); });
   const b = new THREE.Box3().setFromObject(root, true);
   const k = 1 / (b.max.y - b.min.y); root.scale.setScalar(k);
   root.position.set(-(b.min.x + b.max.x) / 2 * k, -b.min.y * k, -(b.min.z + b.max.z) / 2 * k); root.updateMatrixWorld(true);
 }
 const bonePos = (ch, name, yaw = 0) => { ch.root.updateMatrixWorld(true); const v = ch.bones[name].getWorldPosition(new THREE.Vector3()); return v.applyAxisAngle(new THREE.Vector3(0, 1, 0), yaw); };
-function poseAt(ch, clip, t) { ch.mixer.stopAllAction(); ch.cur = null; ch.play(clip, 0); ch.actions[clip].time = t; ch.mixer.update(0); ch.update(0); }
+function poseAt(ch, clip, t) { ch.mixer.stopAllAction(); ch.cur = null; ch.play(clip, 0); if (clip !== 'idle') ch.actions[clip].time = t; ch.mixer.update(0); ch.update(0); }
 
 const lib = await loadLibrary();
 const own = (k) => ({ body: k, parts: Object.fromEntries(['hair', 'head', 'top', 'bottom', 'shoes', 'hands'].map((s) => [s, `${k}-${s}`])), height: 1 });
 
 // 1. originals next to the rebuilds, all in the bind pose
-{
+const ONLY = new URLSearchParams(location.search).get('only');
+if (!ONLY) {
   const r = section('1. Rebuilt from their own parts, next to the originals', 'Bind pose (the pose the models were rigged in). Left of each pair: the game loader (game3d/js/mio.js, avatar.js) with no colour changes; right: the six parts put back together on the shared skeleton.');
   const mio0 = await loadMio({ colours: null }); const eric0 = await loadEric();
   for (const [name, orig, k] of [['Mio', mio0, 'mio'], ['Eric', eric0, 'eric']]) {
@@ -112,9 +114,9 @@ const MIX = window.MIX = [
     const ch = m.ch;
     for (const [clip, t] of [['idle', 0.4], ['walk', 0.25]]) {
       poseAt(ch, clip, clip === 'walk' ? t * ch.actions.walk.getClip().duration : t); normalise(ch.root);
-      for (const [bone, yaw, d] of [['neck', 0.5, 0.9], ['Hips', 0.9, 1.0], ['LeftFoot', 0.4, 0.8], ['Head', 2.4, 1.1]]) {
+      for (const [bone, yaw, d] of [['headfront', 0.3, 1.2], ['neck', 0.5, 0.9], ['Hips', 0.9, 1.0], ['LeftFoot', 0.4, 0.8], ['Head', 2.4, 1.1]]) {
         const p = bonePos(ch, bone, yaw);
-        r.append(shot(ch.root, { yaw, look: p, dist: d, wide: true, caption: `${m.name}: ${bone === 'Hips' ? 'waist' : bone === 'LeftFoot' ? 'ankle' : bone === 'Head' ? 'back of head' : 'neck'}, ${clip}` }));
+        r.append(shot(ch.root, { yaw, look: p, dist: d, wide: true, caption: `${m.name}: ${bone === 'Hips' ? 'waist' : bone === 'LeftFoot' ? 'ankle' : bone === 'Head' ? 'back of head' : bone === 'headfront' ? 'face' : 'neck'}, ${clip}` }));
       }
     }
   }

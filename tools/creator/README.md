@@ -1,12 +1,41 @@
-# Character creator (feasibility experiment)
+# Character creator (experiment)
 
-Status (paused 2026-09-29, 6-agent cap): code written, not yet validated.
+A test of whether Meshy characters can be cut into parts and the parts swapped between bodies and still animate. It starts from Mio and Eric. The game doesn't use any of it.
 
-- Parts library: art/parts/ (copies of the game's Mio and Eric models and textures in src/, Eric's idle and walk clips in anim/, library.json). library.json has no parts yet: the cut hasn't been run.
-- tools/creator/recipe.js: loads the sources, puts both on the shared skeleton (Meshy API bone names and axes, each body's own joints, bone axes turned to match each body's rest pose), carries a part from one body to another bone by bone, per-part tint, and builds a character from a recipe. Eric's clips drive every body.
-- tools/creator/cut.js + cut.html: cuts each source into hair, head, top, bottom, shoes, hands by strongest bone, height and texture colour. Rules per source go in library.json ("cut": skin, hair, bottom colours, collar, hem). Next step: run `node tools/creator/run.mjs "tools/creator/cut.html?save=1" cut.png`, read the colour stats it prints, set the rules, rerun until the flat-coloured views look right.
-- tools/creator/sheet.html: the check sheet (originals vs rebuilds, six mixes, seam close-ups). tools/creator/index.html: the creator page. Neither has been run yet.
-- tools/creator/run.mjs: headless runner; takes the browser lock.
-- The probe (probe.html) ran: both skeletons load and map (Eric 24 bones; Mio's Mixamo rig maps onto them). Normalised to height 1, their joints are close (hips 0.31 vs 0.34, head 0.53 vs 0.54).
+Pages (served by ./start):
+- http://127.0.0.1:8771/tools/creator/: the creator. Pick a body, a part for each slot and a colour for each slot, then watch it in idle or walk.
+- http://127.0.0.1:8771/tools/creator/sheet.html: the check sheet (rebuilds against the originals, mixed characters, seam close-ups). Add `?only=mix` to skip the rebuilds.
+- http://127.0.0.1:8771/tools/creator/cut.html: how each model is cut, coloured by slot.
 
-Meshy credits used so far: 0.
+## How it works
+
+- `art/parts/` is the library: `src/<id>/` holds each source model (a copy of the game's GLB, texture, and for Mio her palette face data), `anim/` holds Eric's idle and walk clips, and `library.json` lists the sources, the cut rules and the parts. A part is a list of triangles from one source.
+- One shared skeleton: the Meshy API rig's 24 bones and bone axes (Eric's). Each body keeps its own joint positions. Where a body's rest pose differs (Mio's arms hang lower), its bone axes are turned so its limbs follow the clip the way Eric's do. So Eric's clips from the API library play on every body with no retargeting pass. Mio's Mixamo-style rig maps onto it by name, and her extra end bones fold into their parents.
+- The body sets the proportions. A part from the other model is carried bone by bone onto the host: each bone's piece of body is measured on both models and the part is scaled to match. Hair and faces move as one rigid piece with the head.
+- Tint: each part has a key colour (its main colour). Texels near the key take the chosen colour and keep their shade. Trim, soles, eyes and teal streaks stay as they are. Skin tints the head and hands from a fixed range of tones.
+- `recipe.js` builds a character from a recipe, `{ body, parts: { slot: id }, colours: { hair, top, bottom, shoes, skin }, height }`. `buildCharacter()` returns `{ root, play(name), update(dt) }`. It isn't wired into the game.
+
+## Adding a part
+
+From a new Meshy model rigged through the API (same skeleton as Eric):
+1. Put its walk GLB (any rigged GLB will do) and base texture in `art/parts/src/<id>/`, and add it to `library.json` under `sources`.
+2. Give it cut rules under `sources.<id>.cut`: `skin` and `hair` colours (sRGB lists), and optionally `collar` and `hem` (offsets from the head and hip joints, as fractions of height), `faceHalf` and `eyesTextured`. Colour stats per bone print when you run the cut.
+3. Run `node tools/creator/run.mjs "tools/creator/cut.html" cut.png` and look at the flat-coloured views. Adjust the rules and run it again. When it's right, run it with `?save=1`, which rewrites `library.json` with the parts.
+
+A model from the Meshy web app (a Mixamo-style rig) works the same way, as long as its bone names match the Mixamo map in `recipe.js`.
+
+A part generated on its own (say, just a jacket) isn't supported yet. It would have to be rigged on a body first: rig a full character wearing it, cut it out, and drop the rest.
+
+## Tools
+
+- `run.mjs <page> [png] [w h]`: headless run. It takes /tmp/claude-1000/browser.lock and writes any files the page hands back.
+- `mio-prep.js`: Mio's face and jaw fixes, copied from game3d/js/mio.js.
+
+## What the first test showed (2026-09-29)
+
+Sheet: art/parts/shots/sheet.png. Review item: reviews/creator-parts.
+
+- Works: Mio and Eric rebuilt from their own six parts match the game's models in the bind pose. Both bodies walk on Eric's API clips through the shared skeleton, including Mio, who never had those clips. Clothes swaps (Eric's jacket on Mio, Mio's hoodie and trousers on Eric, Eric's trousers and shoes on Mio) hold together in idle and walk. The seams at the waist and ankles hardly show, because both models are similar chibis. Tints work per slot and leave eyes, soles, trim and teal streaks alone.
+- Weak: swapping hair or heads. Meshy models have no scalp under the hair, and Mio's face skin runs up under her bangs. With Eric's hair on Mio, a few of his fringe spikes cut across her cheek and a pale strip of her nape shows at the back. Mio's hair on Eric sits well. The fit is automatic (whole-head depth, chin aligned), so each pair of heads would need a look, and maybe a nudge.
+- Animation: nothing broke that wasn't already broken. Meshy's idle clip twists and bends over after a second or two (the game holds one frame of it, and so does the creator). Skin weights carry over with the parts, so a swapped sleeve bends with the arm.
+- Not done: exporting a combined GLB, fit sliders, and parts made on their own in Meshy.

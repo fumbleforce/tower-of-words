@@ -20,7 +20,7 @@ try {
   p.on('pageerror', (e) => errs.push(e.message));
   p.on('console', (m) => { if (m.type() === 'error') errs.push(m.text()); if (m.type() === 'log') console.log('  log:', m.text()); });
   await p.goto('http://127.0.0.1:8771/' + url);
-  await p.waitForFunction(() => window.__done, null, { timeout: 240000 }).catch(() => errs.push('timeout'));
+  await p.waitForFunction(() => window.__done, null, { timeout: 500000 }).catch(() => errs.push('timeout'));
   const res = await p.evaluate(() => ({ out: window.__out || '', files: window.__files || {} }));
   if (res.out) console.log(res.out);
   for (const [f, text] of Object.entries(res.files)) { fs.writeFileSync(f, text); console.log('wrote', f); }
