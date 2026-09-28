@@ -46,17 +46,41 @@ export const game = {
   async beat(fn) {
     if (this.busy) return;
     this.busy = true; this.walker.locked = true; this.walker.stop(); document.body.classList.add('busy');
-    try { await fn(); } catch (e) { console.error(e); } finally { ui.closeTalk(); this.busy = false; if (this.walker) this.walker.locked = false; document.body.classList.remove('busy'); }
+    try { await fn(); } catch (e) { console.error(e); } finally { ui.closeTalk(); this.setHurry?.(false); this.busy = false; if (this.walker) this.walker.locked = false; document.body.classList.remove('busy'); }
     if (this.after) { const a = this.after; this.after = null; await a(); return; }
     if (this.queue.length) { const q = this.queue.shift(); this.beat(q); }
   },
   // waits hold while the game is paused (the pause menu sets game.paused)
-  wait(ms) { return new Promise((r) => { let left = ms / TS, last = performance.now(); const tick = () => { const now = performance.now(); if (!game.paused) left -= now - last; last = now; if (left <= 0) r(); else setTimeout(tick, Math.min(50, left)); }; setTimeout(tick, Math.min(50, left)); }); },
-  walkTo(x, z) { if (this.player.seated) { this.player.seated = false; this.player.setState('idle'); this.player.root.position.y = 0; } return new Promise((res) => { const was = this.walker.locked; this.walker.locked = false; this.walker.goTo(x, z, () => { this.walker.locked = was; res(); }); }); },
+  wait(ms) { return new Promise((r) => { let left = ms / TS, last = performance.now(); const tick = () => { const now = performance.now(); if (!game.paused) left -= (now - last) * (game.hurry ? HURRY : 1); last = now; if (left <= 0) r(); else setTimeout(tick, Math.min(50, left)); }; setTimeout(tick, Math.min(50, left)); }); },
+  // a scripted walk; resolves on arrival, or if the walk is dropped or stalls (a stop, a blocked path), so a scene
+  // can never hang on it
+  walkTo(x, z) {
+    if (this.player.seated) { this.player.seated = false; this.player.setState('idle'); this.player.root.position.y = 0; }
+    return new Promise((res) => {
+      const w = this.walker, was = w.locked; w.locked = false;
+      let done = false, still = 0; const p = this.player.root.position, last = p.clone();
+      const finish = () => { if (done) return; done = true; clearInterval(watch); w.locked = was; res(); };
+      w.goTo(x, z, finish);
+      const watch = setInterval(() => {
+        if (this.paused) return;
+        if (p.distanceTo(last) < 0.002) still++; else still = 0;
+        last.copy(p);
+        if (!w.path || still > 12) { if (w.path && still > 12) w.stop(); finish(); }
+      }, 250);
+    });
+  },
   event(name) { if (this.runner) this.runner.trigger('event:' + name); },
   mioSays(id) { this.place.onMioSays?.(id); },
 };
 window.__game = game;
+// Clicking while a scene plays out (a walk, a door, a gesture) with no line waiting fast-forwards it to the next line
+// (Jørgen: clicks that did nothing were frustrating). runner clears it when a line, choice or prompt shows.
+const HURRY = 6;
+game.hurry = false;
+game.setHurry = (on) => { game.hurry = on; game.timeScale = TS * (on ? HURRY : 1); document.body.classList.toggle('hurry', on); };
+function hurryIfWaiting() { if (game.busy && !ui._advance && !ui._chipKeys && !document.querySelector('#talk.typing:not([hidden])') && ui.menuClosed?.() !== false) game.setHurry(true); }
+window.addEventListener('pointerdown', (e) => { if (e.target.closest('#talk, .panel, #menu, button')) { if (!e.target.closest('#talk')) return; } hurryIfWaiting(); }, true);
+window.addEventListener('keydown', (e) => { if (['Space', 'Enter', 'KeyE'].includes(e.code)) hurryIfWaiting(); }, true);
 
 // ---------- rendering ----------
 let composer = null, post = null;
@@ -451,6 +475,7 @@ H.gesture = async ({ who, kind }) => {
 H.headphones = () => {};
 // typing prompt: Eric types the romaji of a new word, then says it (voiced) and knows it
 H.type = async ({ word, prompt, from }) => {
+  game.setHurry(false);
   if (from && game.sim && !game.sim.taught[word]) game.sim.taught[word] = from;
   if (!WORDS[word]) { console.warn('type: unknown word', word); return; }
   let pr = prompt;
@@ -563,7 +588,7 @@ const nearSet = new Set(), zoneSet = new Set();
 if (CAP) window.__advance = (sec) => { for (let t = sec; t > 1e-6; t -= 1 / 30) step(Math.min(1 / 30, t)); };
 function frame() {
   const now = performance.now();
-  if (game.paused) { lastT = now; render(); requestAnimationFrame(frame); return; } let dt = Math.min(0.1, (now - lastT) / 1000) * TS; lastT = now;
+  if (game.paused) { lastT = now; render(); requestAnimationFrame(frame); return; } let dt = Math.min(0.1, (now - lastT) / 1000) * TS * (game.hurry ? HURRY : 1); lastT = now;
   if (!CAP || window.__run) while (dt > 1e-4) { const s = Math.min(0.05, dt); step(s); dt -= s; }
   render();
   frames++;
