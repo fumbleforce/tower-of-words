@@ -79,7 +79,7 @@ export function makeAvatar() {
   root.add(rig.root);
   let state = 'idle', ph = 0, amt = 0, t = 0;
   const a = {
-    root, rig, seated: false, scripted: false,
+    root, rig, seated: false, scripted: false, pose: { bow: 0 },
     setState(s) {
       if (s === state) return;
       if (state === 'sit' && s !== 'sit') { rig.root.position.set(0, 0, 0); for (const l of rig.legs) l.rotation.set(0, 0, 0); for (const k of rig.knees) k.rotation.set(0, 0, 0); for (const r of rig.arms) r.rotation.set(0, 0, 0); }
@@ -144,6 +144,8 @@ export async function loadEric({ height = 1.2 } = {}) {
   const actions = { walk: mixer.clipAction(walk.animations[0]), run: mixer.clipAction(run.animations[0]), idle: mixer.clipAction(idle.animations[0]), sit: mixer.clipAction(sitG.animations[0]) };
   let hips = null; model.traverse((o) => { if (!hips && o.isBone && /hips/i.test(o.name)) hips = o; });
   const hipRest = hips.position.clone();
+  const pose = { bow: 0 };
+  let spine = null, spine2 = null; model.traverse((o) => { if (o.isBone && /spine$/i.test(o.name.replace(/[^a-z0-9]/gi, ''))) spine = o; if (o.isBone && /spine0?1$/i.test(o.name.replace(/[^a-z0-9]/gi, ''))) spine2 = o; });
   const SIT_T = calmSitTime(model, mixer, actions.sit);
   let cur = null, curName = '', bt = 0;
   function setState(name) {
@@ -157,6 +159,7 @@ export async function loadEric({ height = 1.2 } = {}) {
     mixer.update(dt); bt += dt;
     if (curName !== 'sit') { hips.position.x = hipRest.x; hips.position.z = hipRest.z; }
     else hips.position.y += Math.sin(bt * 2.0) * 0.004;
+    if (pose.bow) { spine.rotateX(pose.bow * 0.6); spine2 && spine2.rotateX(pose.bow * 0.4); }
   }
   // where the hips sit in the chair clip, in the root's space
   setState('sit'); for (let i = 0; i < 30; i++) update(1 / 30);
@@ -165,7 +168,7 @@ export async function loadEric({ height = 1.2 } = {}) {
   mixer.stopAllAction(); cur = null; curName = '';
   setState('idle'); update(0);
   const a = {
-    root, model, mixer, update, sitHip, seated: false, scripted: false, meshy: true,
+    root, model, mixer, update, sitHip, pose, seated: false, scripted: false, meshy: true,
     setState, get state() { return curName; },
     sitAt(x, seatTop, z, ry) {
       const k = root.scale.x;

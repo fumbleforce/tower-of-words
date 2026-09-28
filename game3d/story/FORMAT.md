@@ -104,6 +104,9 @@ A trigger value is a node name, `{ node, if, once }`, or a list of these; the fi
 | `voice` | `key` | Plays game3d/audio/<key>.mp3. |
 | `emote` | `who`, `kind`: `!`, `?`, `…`, `♪`, `heart`, `sweat` | A small bubble over a head. |
 | `show` / `hide` | `id` | Shows or hides a person or object. |
+| `bow` | `who` (anyone, `eric` too), `depth: 'small'|'deep'` | A bow, shown. |
+| `gesture` | `who`, `kind: 'nine'|'point'|'shrug'|'finger'|'skijump'` | Arm moves for the chibi cast: nine fingers up (with a 9 bubble), point, shrug, finger to the lips, Mori's ski jump. |
+| `headphones` | `who: 'mio'`, `state: 'on'|'half'|'neck'` | Mio's teal headphones: both cups on, one cup off, or round her neck. |
 | `type` | `word`, `prompt` (optional line shown above it) | The typing prompt for a new word: shows the Japanese, the romaji letter by letter and the English, and Eric types the romaji (forgiving: case, spaces, hyphens, long vowels ō = ou = oo = o). Letters light up as they're typed; a wrong Enter shows the next letter, and after three tries the whole romaji. Works with the phone keyboard. On success Eric says it (voiced), it becomes a known word (it stays sharp in overheard lines from then on) and flag `typed_<word>` is set. Use it where a word is taught, in place of a "say it" button. Any word id works: `{ do: 'type', word: 'yoroshiku', prompt: 'mio: Say it. Like this.' }` |
 | `next` | | Starts the transition to the next place (see Transitions). |
 | `end` | | The end card (office only). |
@@ -140,6 +143,7 @@ Place hooks:
 - `doorsOpen`, `doorsClose`, `chime` (starts the closing chime; the doors start closing after about 3 s unless `doorsHold` runs), `doorsHold` (the doors stop halfway and stay).
 - `wake` `who`: a sleeper jolts awake.
 - `catTo` `to`: Tama hops down and trots to a spot or person.
+- `bag` `state: 'slide'|'caught'|'dropped'`: Mio's bag of food on the free seat beside her slides off, is caught back onto the seat, or lands on the floor.
 
 ### Gate (`gate`)
 

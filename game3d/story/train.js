@@ -46,24 +46,28 @@ export default {
     // ------------------------------------------------------------------ Mio
     seat: [
       { do: 'cam', on: 'mio', zoom: 1.6 },
-      '> The train lurches, and her bag of food slides off the seat.',
+      '> The train lurches.',
+      { do: 'bag', state: 'slide' },
       { choice: [
         { text: 'Catch it', go: 'caught' },
         { text: 'Let it fall', go: 'dropped' },
       ] },
     ],
     caught: [
+      { do: 'bag', state: 'caught' },
       { inc: 'mio_warm' },
       { say: 'mio', name: 'Woman with a laptop', text: 'Ah, sorry, sorry. Thank you.' },
       { say: 'mio', name: 'Woman with a laptop', text: "It's pickles. My mother thinks island has no food, so... every time I visit." },
       { go: 'sit' },
     ],
     dropped: [
+      { do: 'bag', state: 'dropped' },
       { say: 'mio', name: 'Woman with a laptop', text: "...Okay. I think nothing broke. It's my mother's pickles." },
       { go: 'sit' },
     ],
     sit: [
       { do: 'sit', who: 'eric', at: 'seat_far_r' },
+      { do: 'headphones', who: 'mio', state: 'neck' },
       { set: 'sat' },
       { do: 'goal', text: '' },
       { say: 'mio', name: 'Woman with a laptop', text: "Eh... B2? You're going to B2?" },
@@ -79,18 +83,18 @@ export default {
     ],
     its_eric: [
       "mio: Mm, I know. It's on your card.",
-      '> She puts one side of her headphones back on.',
+      { do: 'headphones', who: 'mio', state: 'half' },
       { go: 'lesson' },
     ],
     family: [
       { inc: 'mio_warm' },
       'mio: Mm. I stayed at her place last night, on the mainland.',
       "mio: She always packs too much. Like I'm moving to another country.",
-      '> She puts one side of her headphones back on.',
+      { do: 'headphones', who: 'mio', state: 'half' },
       { go: 'lesson' },
     ],
     leave_it: [
-      '> She puts one side of her headphones back on.',
+      { do: 'headphones', who: 'mio', state: 'half' },
       { go: 'lesson' },
     ],
 

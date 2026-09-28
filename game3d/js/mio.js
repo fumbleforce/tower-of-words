@@ -318,6 +318,8 @@ export async function loadMio({ height = 1.12, colours = MIO_COLOURS } = {}) {
   const hipRest = hips.position.clone();
 
   let SIT_T0 = 0; const sitT = () => SIT_T0;
+  const pose = { bow: 0 };
+  let spine = null, spine2 = null; model.traverse((o) => { if (o.isBone && /spine$/i.test(o.name.replace(/[^a-z0-9]/gi, ''))) spine = o; if (o.isBone && /spine1$/i.test(o.name.replace(/[^a-z0-9]/gi, ''))) spine2 = o; });
   // idle: the walk clip held still at a frame with the feet together, plus a small breath
   const idleClip = clips.walk.clone(); idleClip.name = 'idle';
   actions.idle = mixer.clipAction(idleClip);
@@ -343,6 +345,7 @@ export async function loadMio({ height = 1.12, colours = MIO_COLOURS } = {}) {
     if (curName !== 'sit') { hips.position.x = hipRest.x; hips.position.z = hipRest.z; }
     if (curName === 'idle' || curName === 'sit') hips.position.y += Math.sin(t * 2.0) * 0.004;
     if (curName !== 'sit') fixFeet();
+    if (pose.bow) { spine.rotateX(pose.bow * 0.6); spine2 && spine2.rotateX(pose.bow * 0.4); }
   }
   // hold one calm frame of the chair clip, with only a breath on top
   SIT_T0 = calmSitTime(model, mixer, actions.sit);
@@ -361,5 +364,5 @@ export async function loadMio({ height = 1.12, colours = MIO_COLOURS } = {}) {
     root.rotation.y = ry;
     setState('sit');
   }
-  return { root, model, mixer, setState, update, sitAt, sitHip, get state() { return curName; }, H, height };
+  return { root, model, mixer, setState, update, sitAt, sitHip, pose, get state() { return curName; }, H, height };
 }
