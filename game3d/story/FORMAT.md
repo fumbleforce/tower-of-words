@@ -186,7 +186,7 @@ People:
 - `yui`: at the copier in the copy room (-2.95, 3.55).
 - `sota`: at the coffee machine in the kitchenette (1.05, 3.5).
 
-Objects: `lift`, `vending`, `bench`, `stairs`, `office_door`, `inout_board`, `clock`, `whiteboard`, `calendar`, `water_cooler`, `cabinets`, `fan`, `coat_rack`, `boxes`, `my_desk` (south row, middle, name card ミオ), `my_chair` (starts in the copy room), `chief_desk`, `machine_door`, `racks`, `fire_exit`, `noticeboard` (corridor), `extinguisher`, `hydrant`, `copier`, `fax`, `paper_shelf`, `worktable`, `coffee_machine`, `kettle`, `fridge`, `microwave`, `kitchen_table`, `toilet_m`, `toilet_f`, `plant`.
+Objects: `lift`, `vending`, `bench`, `stairs`, `office_door`, `inout_board`, `clock`, `whiteboard`, `calendar`, `water_cooler`, `cabinets`, `fan`, `boxes`, `my_desk` (south row, middle, name card エリック), `my_chair` (starts in the copy room), `chief_desk`, `machine_door`, `racks`, `fire_exit`, `noticeboard` (corridor), `extinguisher`, `hydrant`, `copier`, `fax`, `paper_shelf`, `worktable`, `coffee_machine`, `kettle`, `fridge`, `microwave`, `kitchen_table`, `toilet_m`, `toilet_f`, `plant`.
 
 Spots: `lift_out`, `lobby`, `office_door`, `my_seat`, `emi_seat`, `copier_front`, `coffee_front`, `corridor_w`, `corridor_e`, `machine_front`.
 

@@ -54,6 +54,8 @@ export function cond(expr) {
   try { return !!f((k) => (k.startsWith('know_') ? known.has(k.slice(5)) : (flags[k] ?? 0))); } catch { return false; }
 }
 
+// hooks that keep the current line on screen (they belong to it)
+const KEEP_TALK = new Set(['type', 'expression', 'face', 'emote', 'voice', 'sound', 'hint', 'goal', 'learn', 'bond', 'meet', 'set']);
 export class Runner {
   constructor(game) { this.game = game; this.story = null; this.place = null; this.onceDone = new Set(); }
 
@@ -128,6 +130,8 @@ export class Runner {
     if (s.go) { await this.run(s.go); return 'go'; }
     if (s.call) await this.run(s.call);
     if (s.wait) await this.game.wait(s.wait);
+    // a scene step that isn't talk (walking, doors, the camera...): the last line doesn't hang over it
+    if (s.do && !KEEP_TALK.has(s.do)) ui.closeTalk();
     if (s.do) await this.hook(s);
     if (s.end) return 'end';
     return null;
