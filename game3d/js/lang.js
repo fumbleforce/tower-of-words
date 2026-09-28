@@ -36,6 +36,10 @@ export const COMMANDS = ['matte', 'akete', 'kite', 'ugoite', 'irete', 'dashite',
 export const PHRASES = ['ohayo', 'yoroshiku', 'sumimasen'];
 export const SAYABLE = [...PHRASES, ...COMMANDS];
 
+// Interjections the gibberish filter leaves readable (ui.js INTERJ) that are real words, not just sounds.
+// Glossed where they appear so nothing readable goes unexplained (the language audit checks this).
+export const INTERJ_GLOSS = { 'はい': 'hai, yes', 'うん': 'un, yeah', 'ええ': 'ee, yes', 'まあ': 'maa, well', 'ほら': 'hora, look' };
+
 export const known = new Set();
 export function learn(id) { const isNew = !known.has(id); known.add(id); return isNew; }
 
