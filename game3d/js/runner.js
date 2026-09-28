@@ -9,7 +9,7 @@ export const audioKeys = new Set();
 fetch(new URL('../audio/index.json', import.meta.url)).then((r) => (r.ok ? r.json() : [])).then((l) => l.forEach((k) => audioKeys.add(k))).catch(() => {});
 const DEFAULT_SPEAKERS = {
   eric: { name: 'Eric', role: 'you', color: '#8fb4d8' },
-  mio: { name: 'Mio', role: 'IT support', color: '#5fc6bf' },
+  mio: { name: 'Mio', role: 'programmer', color: '#5fc6bf' },
   aoi: { name: 'Aoi', color: '#e79fb0' },
   kuroda: { name: 'Mr. Hamada', role: 'Accounts', color: '#b3a58f' },
   guard: { name: 'Mr. Ishibashi', role: 'security', color: '#8ea2c8' },

@@ -17,6 +17,8 @@ import * as trips from './trips.js';
 import { PERIODS as PERIOD_ORDER, sim, ITEMS, setPeriod, applySchedule, stepAmbient, bond, meet, noteTeacher, absorb, buy, take, peopleHTML, save, loadSave, restore, clearSave } from './sim.js';
 
 const CAP = Q.has('cap');
+const TEST = Q.get('test') === 'fast';
+const TS = TEST ? +(Q.get('ts') || 8) : 1;   // test mode: everything runs this many times faster
 const canvas = document.getElementById('c');
 const renderer = createRenderer(canvas);
 let quality = Q.has('q') ? +Q.get('q') : (renderer.userData.software ? 0 : 1);
@@ -30,7 +32,7 @@ const NEXT = { train: 'gate', gate: 'office' };
 export const game = {
   renderer, ui, mio: null, walker: null, place: null, markers: new Markers(document.getElementById('marks')),
   t: 0, busy: false, near: null, sayTarget: null, found: new Set(), after: null, hooks: {},
-  runner: null, story: null, prepared: {}, queue: [],
+  runner: null, story: null, prepared: {}, queue: [], timeScale: TS, test: TEST,
   async beat(fn) {
     if (this.busy) return;
     this.busy = true; this.walker.locked = true; this.walker.stop(); document.body.classList.add('busy');
@@ -38,8 +40,8 @@ export const game = {
     if (this.after) { const a = this.after; this.after = null; await a(); return; }
     if (this.queue.length) { const q = this.queue.shift(); this.beat(q); }
   },
-  wait(ms) { return new Promise((r) => setTimeout(r, ms)); },
-  walkTo(x, z) { return new Promise((res) => { const was = this.walker.locked; this.walker.locked = false; this.walker.goTo(x, z, () => { this.walker.locked = was; res(); }); }); },
+  wait(ms) { return new Promise((r) => setTimeout(r, ms / TS)); },
+  walkTo(x, z) { if (this.player.seated) { this.player.seated = false; this.player.setState('idle'); this.player.root.position.y = 0; } return new Promise((res) => { const was = this.walker.locked; this.walker.locked = false; this.walker.goTo(x, z, () => { this.walker.locked = was; res(); }); }); },
   event(name) { if (this.runner) this.runner.trigger('event:' + name); },
   mioSays(id) { this.place.onMioSays?.(id); },
 };
@@ -87,10 +89,12 @@ function buildMarkers(place) {
   const labels = (game.story && game.story.labels) || {};
   for (const [id, t] of Object.entries(place.things)) {
     if (t.noMarker) continue;
-    const item = { ...t, id, label: labels[id] || t.label, enabled: () => thingOn(id, t), goal: () => { const g = game.story && game.story.goal && game.story.goal[id]; return g !== undefined ? cond(g) : false; } };
+    const L = labels[id];
+    const item = { ...t, id, label: Array.isArray(L) ? L[0] : (L || t.label), labelIf: Array.isArray(L) ? { text: L[0], cond: L[1], other: t.label } : null, labelCond: cond, enabled: () => thingOn(id, t), goal: () => { const g = game.story && game.story.goal && game.story.goal[id]; return g !== undefined ? cond(g) : false; } };
     game.markers.add(item);
   }
 }
+game.use = (item) => use(item);
 function use(item) {
   if (!item || game.busy) return;
   const go = () => { if (game.busy) return; if (item.face) game.walker.faceTo(...item.face()); talk(item); };
@@ -348,8 +352,8 @@ let lastT = performance.now();
 let frames = 0;
 const nearSet = new Set(), zoneSet = new Set();
 function frame() {
-  const now = performance.now(), dt = Math.min(0.1, (now - lastT) / 1000); lastT = now;
-  if (!CAP || window.__run) step(dt);
+  const now = performance.now(); let dt = Math.min(0.1, (now - lastT) / 1000) * TS; lastT = now;
+  if (!CAP || window.__run) while (dt > 1e-4) { const s = Math.min(0.05, dt); step(s); dt -= s; }
   render();
   frames++;
   if (frames > 3 && game.place) window.__done = true;
@@ -425,7 +429,8 @@ async function boot() {
     for (let i = 0; i < 30; i++) step(1 / 60);
     return;
   }
-  if (start === 'train' && !Q.has('skip')) {
+  if (TEST) { const t = await import('./testmode.js'); t.start(game); }
+  if (start === 'train' && !Q.has('skip') && !TEST) {
     const saved = loadSave();
     const pick = await title(saved);
     if (pick === 'continue' && saved) {

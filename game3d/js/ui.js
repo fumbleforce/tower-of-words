@@ -58,7 +58,10 @@ export function unlockAudio() { ac(); }
 // the words he does know (his phrases and commands, plus the line's `clear` list) stay sharp and glossed.
 const POOL = 'あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやゆよらりるれろわをんがぎぐげござじずぜぞだでどばびぶべぼアイウエオカキクケコサシスセソタチツテトナニヌネノ会社部長話時間問題今日明後来行見出入上下中大小月火水木金土';
 function heardHTML(text, clear = []) {
-  const keep = [];
+  // {id} words written into an overheard line are what the listener catches: shown sharp and glossed
+  const marked = [];
+  text = text.replace(/\{(\w+)\}/g, (_, id) => { if (WORDS[id]) { marked.push(id); seen.add(id); return WORDS[id].ja; } return id; });
+  const keep = marked.map((id) => ({ ja: WORDS[id].ja, gl: `${WORDS[id].ro}, ${WORDS[id].en}` }));
   for (const id of new Set([...known, ...seen])) if (WORDS[id]) keep.push({ ja: WORDS[id].ja, gl: `${WORDS[id].ro}, ${WORDS[id].en}` });
   for (const c of clear || []) keep.push(typeof c === 'string' ? { ja: c } : { ja: c.ja, gl: [c.ro, c.en].filter(Boolean).join(', ') });
   keep.sort((a, b) => b.ja.length - a.ja.length);
@@ -216,6 +219,7 @@ export const ui = {
       if (overheard) scramble(t.querySelector('.line'));
       if (voiceKey) voice(voiceKey, { muffle: !!overheard });
       const started = performance.now();
+      if (this.auto) { setTimeout(() => { this._advance = null; res(); }, 15); return; }
       this._advance = () => { if (performance.now() - started < 250) return; this._advance = null; sfx('tap'); res(); };
       if (auto) setTimeout(() => { if (this._advance) { this._advance = null; res(); } }, auto);
     });
@@ -239,6 +243,7 @@ export const ui = {
       });
       this._chipKeys = btns;
       this._advance = null;
+      if (this.auto) setTimeout(() => { const i = Math.min(btns.length - 1, this.autoPick ? this.autoPick(chips) : 0); box.querySelectorAll('.chip').forEach((x) => { x.disabled = true; }); this._chipKeys = null; res(i); }, 15);
       t.classList.remove('in'); void t.offsetWidth; t.classList.add('in');
       this.refreshWords();
       if (voiceKey) voice(voiceKey);
