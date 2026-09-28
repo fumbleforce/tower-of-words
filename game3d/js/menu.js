@@ -14,6 +14,7 @@ import { ui, sfx, unlockAudio, pauseAudio, keyLabel } from './ui.js';
 import { settings, setSetting, onSettings, qualityTier } from './settings.js';
 import { sim, PERIOD_NAMES, save as simSave } from './sim.js';
 import { startOnboarding, resetOnboarding } from './onboard.js';
+import { browserSpeechAvailable, prepareVoice } from './speech.js';
 
 const Q = new URLSearchParams(location.search);
 const TEST = Q.get('test') === 'fast', CAP = Q.has('cap'), SHELL = Q.get('shell');
@@ -222,6 +223,13 @@ const SEG = {
   textSpeed: [['slow', 'Slow'], ['normal', 'Normal'], ['fast', 'Fast'], ['instant', 'Instant']],
   quality: [['auto', 'Auto'], ['low', 'Low'], ['medium', 'Medium'], ['high', 'High']],
   uiSize: [[0.85, 'Small'], [1, 'Normal'], [1.2, 'Large'], [1.4, 'Larger']],
+  voiceInput: [['off', 'Off'], ['device', 'On this device'], ['browser', 'Browser']],
+  masteryUses: [[1, '1'], [3, '3'], [5, '5']],
+};
+const VOICE_NOTE = {
+  device: 'Runs in the game. A one-time download (77 MB on a computer, 147 MB on a phone), then it works offline. What you say stays on this device.',
+  browser: "Uses the browser's own recogniser. Chrome sends what you say to Google.",
+  off: 'Type the words. Voice is optional.',
 };
 function buildSettings() {
   let s = $('#settings'); if (s) return s;
@@ -237,6 +245,9 @@ function buildSettings() {
         <div class="gap"></div>
         <div class="row"><span class="lbl" id="l-q">Graphics<small class="qnow"></small></span><div class="seg" role="radiogroup" aria-labelledby="l-q" data-key="quality"></div></div>
         <div class="row"><span class="lbl" id="l-ui">Interface size</span><div class="seg" role="radiogroup" aria-labelledby="l-ui" data-key="uiSize"></div></div>
+        <div class="gap"></div>
+        <div class="row"><span class="lbl" id="l-vi">Voice input<small class="vnote"></small></span><div class="seg" role="radiogroup" aria-labelledby="l-vi" data-key="voiceInput"></div></div>
+        <div class="row"><span class="lbl" id="l-mu">Before a word is one click<small>Times you type or say it first</small></span><div class="seg" role="radiogroup" aria-labelledby="l-mu" data-key="masteryUses"></div></div>
         <div class="row"><span class="lbl" id="l-ks">Say key<small class="kmsg">Talk is E, Space or Enter</small></span><button type="button" class="keybind" data-key="keySay" aria-labelledby="l-ks"></button></div>
         <div class="row"><span class="lbl" id="l-rm">Reduce motion<small>Less camera sway and fewer moving parts in menus</small></span><button type="button" class="sw" role="switch" data-key="reduceMotion" aria-labelledby="l-rm"><i></i></button></div>
       </div>
@@ -248,7 +259,14 @@ function buildSettings() {
     const k = seg.dataset.key;
     for (const [v, l] of SEG[k]) {
       const b = el('button', '', l); b.type = 'button'; b.setAttribute('role', 'radio'); b.dataset.v = v;
-      b.onclick = () => { setSetting(k, v); sfx('tap'); };
+      if (k === 'voiceInput' && v === 'browser' && !browserSpeechAvailable()) continue;
+      b.onclick = () => {
+        setSetting(k, v); sfx('tap');
+        if (k === 'voiceInput') {
+          const note = s.querySelector('.vnote'); note.textContent = VOICE_NOTE[v] || '';
+          if (v === 'device') prepareVoice((f) => { note.textContent = `Downloading the voice model: ${Math.round(f * 100)}%`; }).then(() => { note.textContent = VOICE_NOTE.device; }).catch(() => { note.textContent = "Couldn't load the voice model. Typing still works."; });
+        }
+      };
       seg.appendChild(b);
     }
     seg.addEventListener('keydown', (e) => {
@@ -281,6 +299,7 @@ function syncSettings() {
   for (const sw of s.querySelectorAll('.sw')) sw.setAttribute('aria-checked', !!settings[sw.dataset.key]);
   for (const r of s.querySelectorAll('input[type=range]')) { const v = Math.round((settings[r.dataset.key] ?? 0) * 100); if (+r.value !== v) r.value = v; r.nextElementSibling.textContent = v; r.style.setProperty('--p', v + '%'); }
   const kb = s.querySelector('.keybind'); if (kb && !kb.classList.contains('listening')) kb.textContent = keyLabel(settings.keySay || 'KeyQ');
+  const vn = s.querySelector('.vnote'); if (vn && !/Downloading/.test(vn.textContent)) vn.textContent = VOICE_NOTE[settings.voiceInput] || '';
   const q = s.querySelector('.qnow'); if (q) q.textContent = settings.quality === 'auto' ? `Auto picks ${qualityTier()} on this device` : 'Takes effect at once';
 }
 onSettings(syncSettings);

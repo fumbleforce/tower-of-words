@@ -2,6 +2,8 @@
 import * as THREE from 'three';
 import { createRenderer, Walker, Markers, Q, blob } from './engine.js';
 import { makePost } from './post.js';
+import { attachLift } from './places/lift.js';
+import { needsPractice } from './mastery.js';
 import { OutlinePass } from 'three/addons/postprocessing/OutlinePass.js';
 import { SmoothWalker } from './move.js';
 import * as ambience from './ambience.js';
@@ -214,6 +216,8 @@ async function say() {
   const target = game.sayTarget;
   const id = await ui.sayMenu(target ? target.label : null);
   if (!id) return;
+  // until a word has been typed or said a few times, Say asks for it again (Jørgen: not just clicking it)
+  if (needsPractice(id)) { const ok = await ui.typePrompt(id, { who: null, text: target ? `Say it to ${target.label}.` : 'Say it.' }, { cancel: true }); ui.closeTalk(); if (!ok) return; }
   const key = target ? `say:${id}:${target.id}` : null;
   if (target && target.face) game.walker.faceTo(...target.face());
   const spoken = voice(WORDS[id].voice);
@@ -552,6 +556,7 @@ async function prepare(name) {
     const story = await game.runner.load(name);
     const place = await PLACES[name](game, story);
     place.name = name;
+    attachLift(game, place);   // walk-in lift (places/lift.js)
     return { place, story };
   })();
   return game.prepared[name];

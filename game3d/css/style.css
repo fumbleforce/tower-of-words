@@ -973,3 +973,7 @@ body.phone:has(#talk:not([hidden])) #build { opacity: 0; }
 /* phone: the action chip stays as small as its words, so it never covers the floor you want to tap */
 body.phone #actMenu { min-width: 0; }
 body.phone #actMenu .act { padding: 0 12px; }
+
+/* voice input and practice dots (css from js/speech.js and js/mastery.js) */
+.tp-cancel { margin-top: 8px; height: 36px; padding: 0 14px; border-radius: var(--chip-r); border: 1px solid var(--chip-edge); background: #252b35; color: var(--ink); cursor: pointer; font: 600 14px/1 var(--font); }
+#sayMenu button.cmd { display: flex; align-items: center; }
