@@ -14,3 +14,12 @@ art/production/
 art/video/
 art/opening/
 *.blend
+
+# private reward pictures and dashboard data (local only), and the old island prototype's dev dependencies
+island/private/
+legacy/island/node_modules/
+
+# Large approved binaries live outside git until the asset bucket exists (see TODO)
+art/approved/mio/meshy/
+art/approved/mc/meshy/
+art/approved/music/

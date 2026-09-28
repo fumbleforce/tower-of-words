@@ -4,9 +4,14 @@ One folder per bible id. Each file here is a copy of one that bible/facts.yaml m
 
 ## Characters
 
-- mc/mc-it-guy-after.webp: the main character (Eric in game3d), design M-02-it-guy-601 with headroom. Bible: characters › mc, portrait.
+- mc/eric-v2-734.webp: the main character (Eric in game3d), eric-v2-734: design M-02-it-guy-601 remade with open eyes and no red rim light (approved 2026-09-28). Bible: characters › mc, portrait.
+- mc/eric-v2-734-cut.webp: the same portrait cut out (rembg ISNet anime). Bible: characters › mc, extra_images.
+- mc/eric-v2-734-tired-v3-811-cut.webp: his tired expression (tired-v3 seed 811, face-only repaint of eric-v2-734), cut out. Bible: characters › mc, extra_images.
+- mc/mc-it-guy-after.webp: the old portrait M-02-it-guy-601, replaced 2026-09-28 (eyes closed, red rim light). Kept for reference; the bible lists it as rejected.
+- mc/meshy/: Eric's Meshy 3D model (task 01a0e731-1faf-70a7-98e4-c0f2d163c246): model.glb, eric-rigged.glb, the idle, walk, run, sit and to-sit animation GLBs, rig.json, task.json, textures and preview. Copied from game3d/assets/eric-meshy/, which keeps its own copy. Bible: characters › mc, model.
 - emi/emi-after.webp: Emi, round-3 RDBT seed 41 with headroom. Bible: characters › emi, portrait.
 - mio/mio-after.webp: Mio, gallery B-mio (RDBT) with headroom. Bible: characters › mio, portrait.
+- mio/meshy/: Mio's Meshy 3D model (Neon Bun Guardian biped): the six animation GLBs, base-clean.png and base-clean.json. Copied from legacy/side/flat/meshy2/. Game colours: hair #13292f, lighter green #20a081, hoodie #09232a. Bible: characters › mio, model.
 - rei/rei-after.webp: Rei, gallery B-rei (RDBT) with headroom. Bible: characters › rei, portrait.
 - aoi/aoi-after.webp: Aoi, gallery B-aoi (RDBT) with headroom. Bible: characters › aoi, portrait.
 - kaori/kaori-after.webp: Kaori, gallery B-kaori (RDBT) with headroom. Bible: characters › kaori, portrait.
@@ -23,6 +28,14 @@ One folder per bible id. Each file here is a copy of one that bible/facts.yaml m
 - goro/goro-after.webp: Goro, goro-a-202 with headroom. Bible: characters › goro, portrait.
 - jun/jun-after.webp: Jun, jun-a-202 with headroom. Bible: characters › jun, portrait.
 - ishibashi/ishibashi-after.webp: Ishibashi, ishibashi-b-201 with headroom. Bible: characters › ishibashi, portrait.
+
+## Music
+
+- music/opening.mp3: opening theme (Mastered: softer).
+- music/opening-tv.mp3: opening, TV edit (89.6 s).
+- music/office.mp3, calm.mp3, lively.mp3, night.mp3: the Lyria background loops.
+
+All copied from legacy/game/audio/music/. Bible: audio › tracks.
 
 ## Places
 
