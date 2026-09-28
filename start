@@ -20,7 +20,7 @@ else
 fi
 
 echo
-echo "  Hub:    ${URL}"
+echo "  Hub:    ${URL}   (a menu of links)"
 echo "  Game:   ${URL}game3d/"
 echo "  Bible:  ${URL}bible/"
 echo "  Notes:  ${URL}hub/notes.html"
