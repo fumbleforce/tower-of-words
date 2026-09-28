@@ -102,6 +102,11 @@ export async function trainPlace(game) {
   { const body = new THREE.Mesh(new THREE.CylinderGeometry(0.045, 0.035, 0.12, 12), mat('#f1ede6')); body.position.y = 0.06; const lid = new THREE.Mesh(new THREE.CylinderGeometry(0.048, 0.048, 0.02, 12), mat('#3a3f48')); lid.position.y = 0.125; const sleeve = new THREE.Mesh(new THREE.CylinderGeometry(0.046, 0.04, 0.05, 12), mat('#9a7a58')); sleeve.position.y = 0.06; for (const m of [body, lid, sleeve]) { m.castShadow = true; cup.add(m); } }
   cup.position.set(1.6, SEAT_Y + 0.025, -(LZ - 0.28)); car.root.add(cup);
   const cupSt = { want: 0, k: 0 };
+  // Mio's bag of food from her mother, on the free seat beside her (the folder and cup were Rei's; Mio has the seat now)
+  folder.visible = false; cup.visible = false;
+  const foodBag = new THREE.Group();
+  { const b = rbox(0.24, 0.2, 0.14, '#c9b48d', { r: 0.03 }); const band = rbox(0.245, 0.04, 0.145, '#b8573f', { y: 0.12, r: 0.01 }); const h1 = new THREE.Mesh(new THREE.TorusGeometry(0.06, 0.01, 5, 10, Math.PI), mat('#8a6c4a')); h1.position.y = 0.2; const lid = rbox(0.1, 0.05, 0.09, '#e8e2d0', { y: 0.2, x: 0.05, r: 0.015 }); foodBag.add(b, band, h1, lid); }
+  foodBag.position.set(1.62, SEAT_Y, -(LZ - 0.26)); car.root.add(foodBag);
 
   // ---- the station: platforms both sides, yellow tactile strips, the sign, a covered walkway exit ----
   const station = new THREE.Group(); scene.add(station);
@@ -418,6 +423,17 @@ export async function trainPlace(game) {
       chime: () => { st.chimeT = 0; sfx('chime'); game.event('chime'); },
       doorsHold: () => { st.hold = true; st.holdAt = Math.max(0.45, st.door); st.doorWant = st.holdAt; sfx('no'); },
       wake: ({ who = 'kuroda' }) => { const r = people[who]; if (!r || !r.hips) return; r.act = null; r.head.rotation.set(0.1, 0, 0); },
+      bag: async ({ state }) => {
+        const p0 = foodBag.position.clone();
+        if (state === 'slide') {
+          sfx('clack');
+          await game.tween(0.7, (k) => { foodBag.position.set(p0.x + 0.05 * k, SEAT_Y + 0.02 * Math.sin(k * Math.PI) - SEAT_Y * k * k, p0.z + 0.5 * k); foodBag.rotation.z = -1.2 * k; });
+        } else if (state === 'caught') {
+          await game.tween(0.4, (k) => { foodBag.position.set(p0.x + (2.5 - p0.x) * k, p0.y + (SEAT_Y - p0.y) * k + 0.1 * Math.sin(k * Math.PI), p0.z + (-(LZ - 0.26) - p0.z) * k); foodBag.rotation.z *= 1 - k; });
+        } else if (state === 'dropped') {
+          sfx('tap'); await game.tween(0.3, (k) => { foodBag.position.y = p0.y * (1 - k); foodBag.rotation.z = -1.2 - 0.37 * k; });
+        }
+      },
       cup: ({ state }) => {
         cupSt.state = state;
         if (state === 'tip') { cupSt.want = 1; sfx('no'); }
@@ -429,7 +445,7 @@ export async function trainPlace(game) {
     // Mio (the Meshy model) sits where the laptop woman sat, laptop on her knees
     placeMio(m) {
       rei.root.visible = false; rei.blob.visible = false; if (list.includes(rei)) list.splice(list.indexOf(rei), 1);
-      m.root.visible = true; m.sitAt(2.1, SEAT_Y, -(LZ - 0.24) + 0.02, 0); m.seated = true;
+      m.root.visible = true; m.sitAt(2.1, SEAT_Y, -(LZ - 0.24) + 0.02, 0); m.seated = true; m.setHeadphones?.('on');
       car.root.attach(laptop); laptop.position.set(2.1, SEAT_Y + 0.2, -(LZ - 0.24) + 0.3); laptop.rotation.set(0, 0, 0);
     },
     capState(s) {

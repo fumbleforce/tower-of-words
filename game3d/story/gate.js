@@ -60,7 +60,8 @@ export default {
       { set: 'greeted_guard' },
       { do: 'bond', who: 'guard', add: 1 },
       { say: 'guard', overheard: true, text: '{ohayo}。' },
-      '> He bows exactly as deep as you did.',
+      { do: 'bow', who: 'eric' },
+      { do: 'bow', who: 'guard' },
     ],
     yoroshiku_guard: [
       { set: 'greeted_guard' },
@@ -78,7 +79,8 @@ export default {
       { do: 'face', who: 'eric', to: 'guard' },
       { do: 'cam', on: 'guard', zoom: 1.6 },
       { say: 'guard', overheard: true, text: '新しいカードですね。登録は九時からです。' },
-      '> He points at the clock, holds up nine fingers, then taps his watch.',
+      { do: 'gesture', who: 'guard', kind: 'point' },
+      { do: 'gesture', who: 'guard', kind: 'nine' },
       { do: 'cam', on: 'before_gate', zoom: 1.3 },
       { do: 'enter', who: 'kuroda' },
       { do: 'face', who: 'eric', to: 'kuroda' },
@@ -101,7 +103,7 @@ export default {
     jam_ohayo: [
       { set: 'greeted_guard' },
       { do: 'bond', who: 'guard', add: 1 },
-      '> He bows quickly, but he keeps his eyes on the gate.',
+      { do: 'bow', who: 'guard' },
     ],
     sumi_hamada: [{ say: 'kuroda', overheard: true, text: '{sumimasen}、{sumimasen}…' }, '> He points at the guard, helplessly.'],
     sumi_gate: [{ say: 'gatev', overheard: true, text: 'お一人ずつお通りください！' }],

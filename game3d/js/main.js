@@ -259,6 +259,47 @@ H.floor = async ({ to }) => {
   sfx('lift');
 };
 H.liftDoors = ({ state }) => { sfx(state === 'open' ? 'lift' : 'door'); };
+// ---------- small staged moves (bow, gestures, props), so beats are shown instead of narrated ----------
+const tweens = [];
+game.tween = (dur, fn) => new Promise((res) => tweens.push({ t: 0, dur, fn, res }));
+function stepTweens(dt) { for (let i = tweens.length - 1; i >= 0; i--) { const w = tweens[i]; w.t += dt; const k = Math.min(1, w.t / w.dur); w.fn(k); if (k >= 1) { tweens.splice(i, 1); w.res(); } } }
+game.stepTweens = stepTweens;
+const bell = (k) => Math.sin(Math.PI * Math.min(1, k)) ** 0.7;   // 0 -> 1 -> 0, holding at the top
+function whoRig(who) { return isPlayer(who) ? game.player : rigOf(who); }
+H.bow = async ({ who, depth = 'small' }) => {
+  const r = whoRig(who); if (!r) return;
+  const d = depth === 'deep' ? 1 : 0.5, dur = depth === 'deep' ? 1.6 : 1.1;
+  if (r.pose) { await game.tween(dur, (k) => { r.pose.bow = bell(k) * d; }); r.pose.bow = 0; return; }
+  if (r.torso) { const x0 = r.torso.rotation.x; await game.tween(dur, (k) => { r.torso.rotation.x = x0 + bell(k) * d * 0.9; r.head.rotation.x = bell(k) * d * 0.3; }); r.torso.rotation.x = x0; }
+};
+H.gesture = async ({ who, kind }) => {
+  const r = whoRig(who); if (!r || !r.arms) return;
+  const save = r.arms.map((a) => a.rotation.clone()), hy = r.hips.position.y, legs = r.legs.map((l) => l.rotation.x), knees = r.knees.map((q) => q.rotation.x);
+  if (kind === 'nine') {
+    H.emote({ who, kind: '9' });
+    await game.tween(1.6, (k) => { const b = bell(k); r.arms[0].rotation.set(-2.7 * b + save[0].x * (1 - b), 0, 0.35 * b); r.arms[1].rotation.set(-2.7 * b + save[1].x * (1 - b), 0, -0.35 * b); });
+  } else if (kind === 'point') {
+    await game.tween(1.2, (k) => { r.arms[1].rotation.x = save[1].x + (-1.5 - save[1].x) * bell(k); });
+  } else if (kind === 'skijump') {
+    // crouch with arms back, slide, then spring up with arms forward, and land
+    await game.tween(2.6, (k) => {
+      const crouch = k < 0.55 ? Math.sin((k / 0.55) * Math.PI / 2) : Math.max(0, 1 - (k - 0.55) / 0.12);
+      const air = k > 0.58 && k < 0.85 ? Math.sin(((k - 0.58) / 0.27) * Math.PI) : 0;
+      for (const l of r.legs) l.rotation.x = -0.6 * crouch; for (const q of r.knees) q.rotation.x = 1.1 * crouch;
+      r.hips.position.y = hy - 0.07 * crouch + 0.12 * air;
+      r.torso.rotation.x = 0.5 * crouch + 0.3 * air;
+      for (const a of r.arms) a.rotation.x = crouch > 0.1 && air === 0 && k < 0.6 ? 0.7 * crouch : -1.3 * air;
+    });
+    r.hips.position.y = hy; r.torso.rotation.x = 0; r.legs.forEach((l, i) => { l.rotation.x = legs[i]; }); r.knees.forEach((q, i) => { q.rotation.x = knees[i]; });
+  } else if (kind === 'shrug') {
+    await game.tween(1.0, (k) => { const b = bell(k); r.arms[0].rotation.z = save[0].z + 0.5 * b; r.arms[1].rotation.z = save[1].z - 0.5 * b; r.torso.position.y = 0.02 + 0.02 * b; });
+  } else if (kind === 'finger') {
+    await game.tween(1.4, (k) => { r.arms[1].rotation.set(save[1].x + (-2.0 - save[1].x) * bell(k), 0, save[1].z + 0.3 * bell(k)); });
+  }
+  r.arms.forEach((a, i) => a.rotation.copy(save[i]));
+};
+// Mio's headphones: on (both cups on), half (one cup off), neck (round her neck)
+H.headphones = ({ who = 'mio', state = 'on' }) => { const r = whoRig(who); if (r && r.setHeadphones) r.setHeadphones(state); };
 // typing prompt: Eric types the romaji of a new word, then says it (voiced) and knows it
 H.type = async ({ word, prompt, from }) => {
   if (from && game.sim && !game.sim.taught[word]) game.sim.taught[word] = from;
@@ -380,6 +421,7 @@ function step(dt) {
   if (!mio.seated && !mio.scripted) mio.setState(moving ? 'walk' : 'idle');
   mio.update(dt, 1.25);
   if (game.mioNpc.root.visible) game.mioNpc.update(dt, 1.25);
+  stepTweens(dt);
   place.update(dt, game.t);
   place.cam?.update?.(dt, mio.root.position);
   // nearest usable thing, the Say target, and near/zone triggers
@@ -430,6 +472,7 @@ async function boot() {
   // Mio is an NPC now: Jørgen's Meshy model, colour-tweaked only, shown wherever the story puts her
   game.mioNpc = await loadMio({ height: 1.12 });
   game.mioNpc.meshy = true; game.mioNpc.root.visible = false;
+  addHeadphones(game.mioNpc);
   game.mioNpc.blob = blob(0.55, 0.4); game.mioNpc.root.add(game.mioNpc.blob);
   requestAnimationFrame(frame);
   const start = Q.get('place') || 'train';
@@ -457,6 +500,30 @@ async function boot() {
   if (game.runner.has('event:start')) game.runner.trigger('event:start');
   else if (game.story.start) game.beat(() => game.runner.run(game.story.start));
   if (NEXT[start]) setTimeout(() => prepare(NEXT[start]), 1500);
+}
+
+// Mio's teal headphones (her approved design has them), placed from her head bone every frame
+function addHeadphones(a) {
+  let head = null; a.model.traverse((o) => { if (!head && o.isBone && /head$/i.test(o.name.replace(/[^a-z]/gi, ''))) head = o; });
+  const g = new THREE.Group(); a.root.add(g);
+  const teal = new THREE.MeshStandardMaterial({ color: '#20a081', roughness: 0.6 }), dark = new THREE.MeshStandardMaterial({ color: '#1f2a30', roughness: 0.7 });
+  const band = new THREE.Mesh(new THREE.TorusGeometry(1, 0.06, 6, 20, Math.PI), dark); g.add(band);
+  const cups = [-1, 1].map((s) => { const c = new THREE.Group(); const m = new THREE.Mesh(new THREE.CylinderGeometry(0.34, 0.34, 0.22, 14), teal); m.rotation.z = Math.PI / 2; c.add(m); c.position.x = s; g.add(c); return c; });
+  for (const o of [band, ...cups]) o.traverse((q) => { if (q.isMesh) q.castShadow = true; });
+  let state = 'neck';
+  const v = new THREE.Vector3(), top = new THREE.Vector3();
+  a.root.updateMatrixWorld(true);
+  const box = new THREE.Box3().setFromObject(a.model); top.copy(box.max); a.root.worldToLocal(top);
+  a.setHeadphones = (s) => { state = s; };
+  const up = a.update;
+  a.update = (dt, sp) => {
+    up(dt, sp);
+    head.getWorldPosition(v); a.root.worldToLocal(v);
+    const r = Math.max(0.12, (top.y - v.y) * 0.55);
+    g.scale.setScalar(r);
+    if (state === 'neck') { g.position.set(v.x, v.y - r * 1.35, v.z - r * 0.1); g.rotation.set(Math.PI / 2 - 0.3, 0, 0); cups[0].rotation.x = cups[1].rotation.x = 0; }
+    else { g.position.set(v.x, v.y + r * 0.1, v.z - r * 0.05); g.rotation.set(0, 0, 0); cups[0].position.set(-1.02, 0, 0); cups[1].position.set(1.02, state === 'half' ? 0.55 : 0, state === 'half' ? -0.35 : 0); }
+  };
 }
 
 async function title(saved) {
