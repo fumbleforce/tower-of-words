@@ -60,6 +60,7 @@ Every voiced line in the story files carries an `emo` tag, for example `{ say: '
 | hurried | Fast, already leaving. | 1.1 | Mio running for the server |
 | groan | A tired "ugh" in the voice, exasperated. | 0.95 | "あー, no, no...", the station ticket |
 | announcer | Even, clear, public-address. | 0.95 | Train announcements |
+| slow | The word on its own, said slowly and clearly for a learner, each syllable distinct, a little warmer than the line before. Lines tagged slow also carry `slow: true`. | 0.7 | Every teaching moment: the second, slow repeat of the new word |
 | machine | Cheerful recorded announcement, perfectly even. | 1.0 | The gate's voice |
 
 Faces (`face`) are separate from `emo` and only pick the portrait.
