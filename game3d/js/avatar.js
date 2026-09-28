@@ -107,3 +107,72 @@ export function makeAvatar() {
   };
   return a;
 }
+
+// ---------- Eric from Jørgen's Meshy model (the default; the chibi above is the fallback) ----------
+// Matte: the file's emissive, specular and roughness settings are dropped, and only the base colour texture is
+// used with a Lambert material (as for Mio). Colour tweak only: the texture is pulled a little toward the muted
+// palette (slightly less saturated, a touch cooler). The mesh, face and body are untouched.
+import { GLTFLoader } from '../vendor/loaders/GLTFLoader.js';
+const EDIR = new URL('../assets/eric/', import.meta.url).href;
+export async function loadEric({ height = 1.2 } = {}) {
+  const loader = new GLTFLoader();
+  const load = (u) => new Promise((ok, no) => loader.load(u, ok, undefined, no));
+  const [walk, run, idle, sitG, tex] = await Promise.all([load(EDIR + 'walk.glb'), load(EDIR + 'run.glb'), load(EDIR + 'idle.glb'), load(EDIR + 'sit.glb'), new THREE.TextureLoader().loadAsync(EDIR + 'base.webp')]);
+  tex.flipY = false; tex.colorSpace = THREE.SRGBColorSpace;
+  const model = walk.scene;
+  model.traverse((o) => {
+    if (!o.isMesh) return;
+    o.castShadow = true; o.receiveShadow = true; o.frustumCulled = false;
+    const m = new THREE.MeshLambertMaterial({ map: tex });
+    m.onBeforeCompile = (sh) => {
+      sh.fragmentShader = sh.fragmentShader.replace('#include <map_fragment>', `
+#ifdef USE_MAP
+ vec4 texel = texture2D( map, vMapUv );
+ float l = dot(texel.rgb, vec3(0.2126, 0.7152, 0.0722));
+ texel.rgb = mix(vec3(l), texel.rgb, 0.82) * vec3(0.97, 0.985, 1.02);
+ diffuseColor *= texel;
+#endif`);
+    };
+    o.material.dispose(); o.material = m;
+  });
+  const box = new THREE.Box3().setFromObject(model);
+  const H = box.max.y - box.min.y;
+  const root = new THREE.Group(), holder = new THREE.Group();
+  holder.scale.setScalar(height / H); holder.add(model); root.add(holder);
+  const mixer = new THREE.AnimationMixer(model);
+  const actions = { walk: mixer.clipAction(walk.animations[0]), run: mixer.clipAction(run.animations[0]), idle: mixer.clipAction(idle.animations[0]), sit: mixer.clipAction(sitG.animations[0]) };
+  let hips = null; model.traverse((o) => { if (!hips && o.isBone && /hips/i.test(o.name)) hips = o; });
+  const hipRest = hips.position.clone();
+  let cur = null, curName = '';
+  function setState(name) {
+    if (name === curName || !actions[name]) return;
+    const a = actions[name]; a.reset(); a.setEffectiveWeight(1); a.fadeIn(cur ? 0.2 : 0).play();
+    if (cur && cur !== a) cur.fadeOut(0.2);
+    cur = a; curName = name;
+  }
+  function update(dt, speed = 1) {
+    actions.walk.timeScale = speed;
+    mixer.update(dt);
+    if (curName !== 'sit') { hips.position.x = hipRest.x; hips.position.z = hipRest.z; }
+  }
+  // where the hips sit in the chair clip, in the root's space
+  setState('sit'); for (let i = 0; i < 30; i++) update(1 / 30);
+  root.updateMatrixWorld(true);
+  const sitHip = new THREE.Vector3(); hips.getWorldPosition(sitHip); root.worldToLocal(sitHip);
+  mixer.stopAllAction(); cur = null; curName = '';
+  setState('idle'); update(0);
+  const a = {
+    root, model, mixer, update, sitHip, seated: false, scripted: false, meshy: true,
+    setState, get state() { return curName; },
+    sitAt(x, seatTop, z, ry) {
+      const k = root.scale.x;
+      const o = sitHip.clone().multiplyScalar(k).applyAxisAngle(new THREE.Vector3(0, 1, 0), ry);
+      root.position.set(x - o.x, seatTop + SIT_LIFT * k - o.y, z - o.z);
+      root.rotation.y = ry;
+      setState('sit');
+    },
+  };
+  return a;
+}
+export let SIT_LIFT = 0.05;
+export function setSitLift(v) { SIT_LIFT = v; }
