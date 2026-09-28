@@ -910,3 +910,66 @@ body:not(.phone) #goal .ic svg { width: 20px; height: 20px; }
 #goalRing::after { content: ""; position: absolute; inset: -3px; border-radius: 50%; border: 2px solid rgba(127, 227, 216, .7); animation: goalring 1.8s ease-out infinite; }
 #goalRing[hidden] { display: none; }
 body.reduce-motion #goalRing::after { animation: none; opacity: 0; }
+
+/* ---------- onboarding and playtest 3 (notes/ONBOARDING.md) ----------
+   Pins are gone: only the thing in reach is marked, with a ring on the floor and its action beside it. The first
+   screen on the train shows one line about walking, the settings cog and the build id. */
+#marks { visibility: hidden; }
+#marks .mark, #marks .mark * { pointer-events: none !important; }
+#nearRing { position: absolute; left: 0; top: 0; z-index: 0; border-radius: 50%; border: 2px solid rgba(232, 250, 247, .9); background: radial-gradient(closest-side, rgba(191, 241, 234, .22), rgba(191, 241, 234, .06) 70%, transparent); pointer-events: none; }
+#nearRing[hidden] { display: none; }
+#goalRing::after { display: none; }
+#goalRing { border-width: 2px; border-color: rgba(127, 227, 216, .7); }
+body.ob-active #clock, body.ob-active #peopleBtn, body.ob-active #muteBtn, body.ob-active #goalArrow { display: none !important; }
+
+#ctrlLine { position: absolute; left: 50%; bottom: 40px; transform: translateX(-50%); z-index: 2; display: flex; align-items: center; gap: 6px; padding: 12px 20px; border-radius: var(--chip-r); background: var(--chip-bg); border: 1px solid var(--chip-edge); color: var(--ink); font: 600 17px/1.2 var(--font); white-space: nowrap; box-shadow: 0 6px 24px rgba(0,0,0,.35); backdrop-filter: blur(6px); pointer-events: none; animation: pop .4s ease; }
+#ctrlLine[hidden] { display: none; }
+#ctrlLine .k { display: inline-grid; place-items: center; min-width: 26px; height: 26px; margin-right: 2px; border-radius: 6px; background: #2c3441; color: #e6faf7; font-size: 13px; font-weight: 700; box-shadow: inset 0 -2px 0 rgba(0,0,0,.35); }
+#ctrlLine .k:nth-of-type(4) { margin-right: 8px; }
+#ctrlLine .tch { display: none; }
+body.phone #ctrlLine .desk { display: none; }
+body.phone #ctrlLine .tch { display: inline; }
+body.phone #ctrlLine { bottom: calc(28px + env(safe-area-inset-bottom)); font-size: 17px; }
+body:not(.phone) #ctrlLine { zoom: var(--ui, 1); }
+
+/* the action beside the target in reach: a compact chip, not a floating menu */
+#actMenu { min-width: 0; padding: 4px; gap: 3px; border-color: rgba(191, 241, 234, .4); }
+#actMenu .act { min-height: 40px; padding: 0 12px 0 6px; font-size: 16px; }
+#actMenu .act.use { background: transparent; }
+#actMenu .act:only-child { padding-right: 14px; }
+#actMenu .act .nm { max-width: 220px; }
+#actMenu .act.say.first { background: rgba(255, 201, 168, .14); box-shadow: inset 0 0 0 1px rgba(255, 201, 168, .55); }
+body.phone #actMenu .act { min-height: 46px; padding: 0 14px; }
+
+/* dialogue: one stable click target over the whole screen; only the words, chips and inputs take their own clicks */
+#talk, #talk.in { pointer-events: none; }
+#talk .chip, #talk .chips, #talk .wplay, #talk .jp[data-w], #talk .tp-in, #talk.phone { pointer-events: auto; }
+#talkHit.go:hover { background: linear-gradient(to top, rgba(111, 208, 198, .06), rgba(111, 208, 198, .02) 38%, transparent 55%); }
+#talk .more .ch { font-size: 13px; font-weight: 600; }
+
+/* the play button after a taught word */
+.wplay { position: relative; display: inline-grid; place-items: center; width: 22px; height: 22px; margin: 0 4px 0 5px; padding: 0; border: 0; border-radius: 50%; background: transparent; vertical-align: -3px; cursor: pointer; }
+.wplay::before { content: ""; position: absolute; inset: -11px; }
+.wplay svg { width: 22px; height: 22px; display: block; }
+.wplay svg circle { fill: rgba(255, 201, 168, .88); transition: fill .15s; }
+.wplay svg path { fill: #1d1a24; }
+.wplay:hover svg circle { fill: #ffd7bf; }
+.wplay:focus-visible { box-shadow: var(--focus); }
+.wplay.playing svg circle { fill: var(--accent); }
+.wplay.playing { animation: wplay 0.9s ease-in-out infinite; }
+@keyframes wplay { 50% { transform: scale(1.12); } }
+#talk .line .jp[data-w] { border-bottom: 0; }
+/* the continue hint sits on its own row under the line, never over the words */
+#talk .line { padding-right: 0; }
+#talk .more { position: static; justify-content: flex-end; margin-top: 6px; min-height: 26px; }
+#talk .wait { position: static; justify-content: flex-end; margin-top: 10px; min-height: 16px; }
+body.phone #talk .line { padding-bottom: 0; }
+body.phone:has(#talk:not([hidden])) #build { opacity: 0; }
+/* the row under the line is always there (continue or waiting), so the text never jumps between states */
+#talk:not(.can-go) .more { display: flex; visibility: hidden; }
+#talk .wait { position: absolute; right: 6px; bottom: 10px; margin: 0; }
+#talk.typing .more, #talk:has(.chips .chip) .more { display: none; }
+#talk .more[hidden] { display: flex !important; visibility: hidden; }
+/* phone: the action chip stays as small as its words, so it never covers the floor you want to tap */
+body.phone #actMenu { min-width: 0; }
+body.phone #actMenu .act { padding: 0 12px; }

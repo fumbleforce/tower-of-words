@@ -13,6 +13,7 @@ import * as THREE from 'three';
 import { ui, sfx, unlockAudio, pauseAudio, keyLabel } from './ui.js';
 import { settings, setSetting, onSettings, qualityTier } from './settings.js';
 import { sim, PERIOD_NAMES, save as simSave } from './sim.js';
+import { startOnboarding, resetOnboarding } from './onboard.js';
 
 const Q = new URLSearchParams(location.search);
 const TEST = Q.get('test') === 'fast', CAP = Q.has('cap'), SHELL = Q.get('shell');
@@ -185,7 +186,7 @@ function buildTitle() {
   go.innerHTML = '<span class="l">Start</span>';
   mc.onclick = () => { sfx('tap'); openSaves('load'); };
   ms.onclick = () => { sfx('tap'); openSettings(); };
-  go.addEventListener('click', () => { onTitleLeave(); });
+  go.addEventListener('click', () => { resetOnboarding(); onTitleLeave(); });
   cont.addEventListener('click', () => { onTitleLeave(); });
   t.addEventListener('keydown', (e) => { if (!topLayer()) trap(t, e); });
   return t;
@@ -463,8 +464,9 @@ document.addEventListener('visibilitychange', () => { if (document.hidden && can
 
 function addPauseChip() {
   const hud = $('#hud'); if (!hud || $('#pauseBtn')) return;
-  const b = el('button', 'hchip icon', '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6.5v11M15 6.5v11"/></svg>');
-  b.id = 'pauseBtn'; b.type = 'button'; b.setAttribute('aria-label', 'Pause menu');
+  // a settings cog: it opens the pause menu (resume, save, settings, quit)
+  const b = el('button', 'hchip icon', '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3.2"/><path d="M12 2.8v2.4M12 18.8v2.4M2.8 12h2.4M18.8 12h2.4M5.5 5.5l1.7 1.7M16.8 16.8l1.7 1.7M5.5 18.5l1.7-1.7M16.8 7.2l1.7-1.7"/><circle cx="12" cy="12" r="6.4"/></svg>');
+  b.id = 'pauseBtn'; b.type = 'button'; b.setAttribute('aria-label', 'Menu and settings');
   b.onclick = (e) => { e.stopPropagation(); setPaused(true); };
   hud.appendChild(b);
 }
@@ -511,6 +513,17 @@ function goalArrow() {
   a.onclick = (e) => { e.stopPropagation(); if (target) game().use(target); };
   const v = new THREE.Vector3(), v2 = new THREE.Vector3(), v3 = new THREE.Vector3();
   const ring = el('div'); ring.id = 'goalRing'; ring.hidden = true; $('#ui').prepend(ring);
+  const nring = el('div'); nring.id = 'nearRing'; nring.hidden = true; $('#ui').prepend(nring);
+  const floorRing = (g, sp, r, elm) => {
+    const fy = g.place.floorY || 0, sp3 = g.place.space;
+    const P = (x, z) => { const o = new THREE.Vector3(x, fy + 0.01, z); sp3.localToWorld(o); o.project(g.place.camera); return [((o.x + 1) / 2) * innerWidth, ((1 - o.y) / 2) * innerHeight, o.z]; };
+    const c = P(sp[0], sp[1]), rx = P(sp[0] + r, sp[1]), rz = P(sp[0], sp[1] + r);
+    const w = Math.max(24, Math.hypot(rx[0] - c[0], rx[1] - c[1]) * 2), h = Math.max(12, Math.hypot(rz[0] - c[0], rz[1] - c[1]) * 2);
+    if (c[2] >= 1) return false;
+    elm.style.width = w.toFixed(0) + 'px'; elm.style.height = h.toFixed(0) + 'px';
+    elm.style.transform = `translate(${(c[0] - w / 2).toFixed(0)}px, ${(c[1] - h / 2).toFixed(0)}px)`;
+    return true;
+  };
   const loop = () => {
     requestAnimationFrame(loop);
     const g = game(); if (!g || !g.place || !g.markers) { a.hidden = true; ring.hidden = true; return; }
@@ -519,8 +532,9 @@ function goalArrow() {
     let show = false, ringOn = false;
     for (const m of goals) {
       // a light ring on the floor where the goal is (where you stand to use it)
-      const sp = m.spot && m.spot();
-      if (sp && !ringOn) {
+      // on the thing itself (a person's feet, the object), not the spot you stand on to use it
+      const sp = (m.face && m.face()) || (m.spot && m.spot());
+      if (sp && !ringOn && !g.near) {
         const fy = g.place.floorY || 0, sp3 = g.place.space;
         const P = (x, z, o) => { o.set(x, fy + 0.01, z); sp3.localToWorld(o); o.project(g.place.camera); return [((o.x + 1) / 2) * innerWidth, ((1 - o.y) / 2) * innerHeight, o.z]; };
         const c = P(sp[0], sp[1], v2), rx = P(sp[0] + 0.42, sp[1], v3), rz = P(sp[0], sp[1] + 0.42, v3.clone());
@@ -550,7 +564,12 @@ function goalArrow() {
       a.setAttribute('aria-label', `Goal: ${nm}, off screen. Walk there`);
     }
     a.hidden = !show || b.classList.contains('busy') || b.classList.contains('trip') || b.classList.contains('at-title') || isPaused;
-    ring.hidden = !ringOn || b.classList.contains('busy') || b.classList.contains('trip') || b.classList.contains('at-title');
+    ring.hidden = !ringOn || b.classList.contains('busy') || b.classList.contains('trip') || b.classList.contains('at-title') || !!(window.__onboard && window.__onboard.holdGoal);
+    // the target in reach: a ring on the floor under it (with the action beside it, ui.placeSay)
+    const nr = g.near, nsp = nr && nr.spot && nr.spot();
+    const nOn = !!(nsp && !(window.__onboard && window.__onboard.active && !window.__onboard.moved) && !g.busy && !b.classList.contains('trip') && !b.classList.contains('at-title') && !isPaused && floorRing(g, nr.face ? nr.face() : nsp, /small/.test(nr.kind || '') ? 0.3 : 0.4, nring));
+    if (nring.hidden === nOn) nring.hidden = !nOn;
+    if (window.__onboard && window.__onboard.active) a.hidden = true;
   };
   loop();
 }
@@ -564,7 +583,7 @@ function targetCycling() {
   const g = game(); const mk = g && g.markers; if (!mk || mk._cycling) return;
   mk._cycling = true;
   const orig = mk.update.bind(mk);
-  const REACH = 1.7;
+  const REACH = 1.1;
   let lock = null, lockPlace = null, list = [];
   const dist = (m, p) => { const s = m.spot ? m.spot() : null; return s ? Math.hypot(p.x - s[0], p.z - s[1]) : 99; };
   mk.update = (camera, canvas, mp, near) => {
@@ -585,7 +604,7 @@ function targetCycling() {
   shell.cycleTarget = cycle;
 }
 window.addEventListener('keydown', (e) => {
-  if (e.code !== 'Tab' || topLayer() || isPaused || document.body.classList.contains('at-title')) return;
+  if (e.code !== 'Tab' || topLayer() || isPaused || document.body.classList.contains('at-title') || (window.__onboard && window.__onboard.active)) return;
   const g = game(); if (!g || g.busy || ui.talking || !ui.menuClosed() || !ui.cycleInfo) return;
   if (e.target && e.target.closest && e.target.closest('#ui button, input')) return;
   e.preventDefault(); e.stopImmediatePropagation(); shell.cycleTarget && shell.cycleTarget();
@@ -615,6 +634,7 @@ whenReady(() => {
   watchLoading();
   goalArrow();
   targetCycling();
+  startOnboarding(game());
   const t = $('#title');
   if (t) {
     buildTitle();
