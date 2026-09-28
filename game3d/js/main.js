@@ -2,6 +2,7 @@
 import * as THREE from 'three';
 import { createRenderer, Walker, Markers, Q, blob } from './engine.js';
 import { makePost } from './post.js';
+import { OutlinePass } from 'three/addons/postprocessing/OutlinePass.js';
 import { SmoothWalker } from './move.js';
 import * as ambience from './ambience.js';
 import { setPlace as sfxPlace } from './sfx.js';
@@ -84,14 +85,23 @@ window.addEventListener('keydown', (e) => { if (['Space', 'Enter', 'KeyE'].inclu
 
 // ---------- rendering ----------
 let composer = null, post = null;
+let outline = null;
 function setComposer(place) {
   post = makePost(renderer, place, quality); composer = post.composer;
+  // a soft outline on the current target and on what the mouse is over (Jørgen: interactive things should be
+  // highlighted slightly); right after the render pass, off at low quality
+  const [w, h] = size();
+  outline = new OutlinePass(new THREE.Vector2(w, h), place.scene, place.camera);
+  outline.visibleEdgeColor.set('#bff1ea'); outline.hiddenEdgeColor.set('#bff1ea');
+  outline.edgeStrength = 2.2; outline.edgeThickness = 1.0; outline.edgeGlow = 0; outline.pulsePeriod = 0;
+  composer.insertPass(outline, 1);
   applyQuality();
 }
 function applyQuality() {
   const dpr = Math.min(window.devicePixelRatio || 1, Q.has('dpr') ? +Q.get('dpr') : 2, post ? post.dpr(quality) : 2);
   renderer.setPixelRatio(dpr);
   if (post) post.setQuality(quality);
+  if (outline) outline.enabled = quality > 0;
   if (game.place && game.place.sun) {
     const s = game.place.sun, ms = quality ? 2048 : 1024;
     if (s.shadow.mapSize.x !== ms) { s.shadow.mapSize.set(ms, ms); if (s.shadow.map) { s.shadow.map.dispose(); s.shadow.map = null; } }
@@ -108,6 +118,38 @@ function resize() {
   if (game.place) { game.place.fit(w / h); if (game.player) game.place.cam?.snap?.(game.player.root.position); }
 }
 window.addEventListener('resize', resize);
+// the 3D objects that stand for a marker (people's bodies, a thing's obj or outline())
+function objsOf(m) {
+  const P = game.place; if (!P || !m) return [];
+  const r = P.people && P.people[m.id]; if (r && r.root && r.root.visible) return [r.root];
+  const t = P.things && P.things[m.id];
+  if (t && t.outline) return [].concat(t.outline()).filter(Boolean);
+  if (t && t.obj) return [t.obj];
+  return [];
+}
+game.objsOf = objsOf;
+const hoverRay = new THREE.Raycaster();
+canvas.addEventListener('pointermove', (e) => {
+  if (e.pointerType === 'touch' || !game.place || document.body.classList.contains('phone')) return;
+  const r = canvas.getBoundingClientRect();
+  hoverRay.setFromCamera(new THREE.Vector2(((e.clientX - r.left) / r.width) * 2 - 1, -((e.clientY - r.top) / r.height) * 2 + 1), game.place.camera);
+  let best = null, bd = 1e9;
+  for (const m of game.markers.list) {
+    if (!m.enabled()) continue;
+    for (const o of objsOf(m)) { const hit = hoverRay.intersectObject(o, true)[0]; if (hit && hit.distance < bd) { bd = hit.distance; best = m; } }
+  }
+  game.hover = best; canvas.style.cursor = best ? 'pointer' : '';
+});
+let outlineKey = '';
+function updateOutline() {
+  if (!outline || !outline.enabled) return;
+  const sel = [...new Set([game.near, !document.body.classList.contains('phone') && game.hover].filter(Boolean))];
+  const key = sel.map((m) => m.id).join(',') + (game.busy ? '|b' : '');
+  if (key === outlineKey) return; outlineKey = key;
+  outline.selectedObjects = game.busy ? [] : sel.flatMap(objsOf);
+}
+// a tap while a scene plays out with no line waiting: hurry it along (ui.js calls this)
+game.skip = () => { if (game.busy) game.setHurry(true); };
 game.setQuality = (q) => { quality = q; applyQuality(); };
 window.addEventListener('amakawa:settings', (e) => { if (e.detail && e.detail.key === 'quality' && !Q.has('q')) { quality = tierNow(); applyQuality(); } });
 
@@ -124,12 +166,15 @@ function buildMarkers(place) {
   game.markers.clear();
   const labels = (game.story && game.story.labels) || {};
   for (const [id, t] of Object.entries(place.things)) {
-    if (t.noMarker) continue;
+    // noMarker things (door_l, the plant...) stay unmarked, except while the story makes one of them the goal
+    // (the train's "Wait by the doors" goal was on door_l and had no marker: a softlock)
+    const quiet = !!t.noMarker;
     const L = labels[id];
     const item = { ...t, id, label: Array.isArray(L) ? L[0] : (L || t.label), labelIf: Array.isArray(L) ? { text: L[0], cond: L[1], other: t.label } : null, labelCond: cond, enabled: () => thingOn(id, t), goal: () => { const g = game.story && game.story.goal && game.story.goal[id]; return g !== undefined ? cond(g) : false; },
       // a thing that a word he knows does something to right now
       // (cached for a moment: it is asked every frame)
       wordable: () => { const now = performance.now(); if (!item._wa || now - item._wa > 400) { item._wa = now; item._wv = !/person/.test(t.kind || '') && SAYABLE.some((w) => known.has(w) && game.runner.has(`say:${w}:${id}`)); } return item._wv; } };
+    if (quiet) item.enabled = () => thingOn(id, t) && item.goal();
     game.markers.add(item);
   }
 }
@@ -331,10 +376,14 @@ H.phone = async (s) => {
   if (!rig) return game.place.hooks?.phone?.(s);
   clearInterval(phoneBuzz); phoneBuzz = 0;
   if (s.state === 'buzz') {
-    const buzz = () => { sfx('buzz'); H.emote({ who: s.who, kind: 'phone', ms: 1100 }); };
-    buzz(); phoneBuzz = setInterval(buzz, 1400 / TS);
+    // the phone bubble stays up (no timers on anything the player should catch) until she looks at the phone
+    H.emote({ who: s.who, kind: 'phone', ms: 1e9, id: 'phone-' + s.who });
+    sfx('buzz'); phoneBuzz = setInterval(() => sfx('buzz'), 1400 / TS);
     return;
   }
+  document.querySelector(`.emote[data-id="phone-${s.who}"]`)?.remove();
+  // her portrait looks at the phone while she does (face 'phone', neutral until the art lands)
+  if (s.who === 'mio') setFace('mio', s.state === 'look' ? 'phone' : 'neutral');
   if (rig.phone) await rig.phone(s.state);
 };
 // { do: 'kotodama', target: 'doors' }: the effect on its own, on a place's named target (place.kotodamaTargets)
@@ -377,9 +426,9 @@ const EMOTE_SVG = {
   phone: '<rect x="7" y="3" width="10" height="18" rx="2.2" fill="#fff" stroke="#2a2f3a" stroke-width="1.8"/><path d="M10.5 18h3" stroke="#2a2f3a" stroke-width="1.6" stroke-linecap="round"/><path d="M3.5 9.5c-.8 1.6-.8 3.4 0 5M20.5 9.5c.8 1.6.8 3.4 0 5" stroke="#4f6aa8" stroke-width="1.7" fill="none" stroke-linecap="round"/>',
   note: '<path d="M9 17.5V6l9-2v11.5" fill="none" stroke="#2a2f3a" stroke-width="1.9"/><circle cx="7" cy="17.5" r="2.3" fill="#2a2f3a"/><circle cx="16" cy="15.5" r="2.3" fill="#2a2f3a"/>',
 };
-H.emote = ({ who, kind, ms = 1900 }) => {
+H.emote = ({ who, kind, ms = 1900, id }) => {
   faceForEmote(who, kind);
-  const el = document.createElement('div'); el.className = 'emote';
+  const el = document.createElement('div'); el.className = 'emote'; if (id) el.dataset.id = id;
   const k = kind === '9' ? 'nine' : kind === '♪' ? 'note' : kind;
   if (EMOTE_SVG[k]) el.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true">${EMOTE_SVG[k]}</svg>${k === 'nine' ? '<span class="lbl">9:00</span>' : ''}`;
   else { el.innerHTML = `<span class="tx">${kind === '…' ? '···' : kind}</span>`; if (kind === '!') el.classList.add('bang'); if (kind === 'zzz') el.classList.add('zzz'); }
@@ -387,7 +436,7 @@ H.emote = ({ who, kind, ms = 1900 }) => {
   document.getElementById('ui').appendChild(el);
   const t0 = performance.now();
   const f = () => {
-    const dt = performance.now() - t0; if (dt > ms) { el.remove(); return; }
+    const dt = performance.now() - t0; if (dt > ms || !el.isConnected) { el.remove(); return; }
     const v = new THREE.Vector3();
     if (isPlayer(who)) game.player.root.getWorldPosition(v); else rigOf(who)?.root.getWorldPosition(v);
     v.y += 1.55 * (game.place.charScale || 1); v.project(game.place.camera);
@@ -631,7 +680,15 @@ function step(dt) {
     if (inz && !zoneSet.has(z) && !game.busy && game.runner.has('zone:' + z)) { zoneSet.add(z); game.runner.trigger('zone:' + z); }
     else if (!inz) zoneSet.delete(z);
   }
+  // a target the player chose (Tab / Next in the action menu) holds while it's usable and within 1.7 m
+  const lk = game.targetLock;
+  if (lk) {
+    const s = lk.spot && lk.spot();
+    if (game.busy || !lk.enabled() || !s || Math.hypot(mp.x - s[0], mp.z - s[1]) > 1.7) game.targetLock = null;
+    else near = lk;
+  }
   game.near = near; game.sayTarget = st;
+  updateOutline();
   // when a goal is waiting on a word he knows, the Say button lights up
   const waiting = !game.busy && known.size && game.markers.list.some((m) => m.enabled() && m.goal() && SAYABLE.some((w) => known.has(w) && game.runner.has(`say:${w}:${m.id}`)));
   ui.sayReady(waiting);
