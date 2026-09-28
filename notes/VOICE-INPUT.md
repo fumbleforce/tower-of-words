@@ -41,7 +41,7 @@ Files (voice-input agent):
 - game3d/js/speech-worker.js: the recogniser off the main thread (Whisper or Moonshine through transformers.js).
 - game3d/js/speech.js: modes, the microphone, the browser recogniser, and the mic row (`mountVoice`).
 - game3d/js/mastery.js: the practice counts (`needsPractice`, `notePractice`, `pipsHTML`), kept in the story flags so saves carry them.
-- game3d/vendor/transformers/transformers.min.js: transformers.js 4.3.0 (Apache-2.0), the self-contained browser build.
+- transformers.js 4.3.0 (Apache-2.0) loads from cdn.jsdelivr.net at first use (pinned version). It was vendored at first, but GitHub's push protection read the minified bundle as an API key, so it's no longer in git.
 - game3d/tools/speech/: clips.sh (test clips), bench.html and bench.mjs (the bench), queue.sh (the runs behind the numbers), states.html and states.mjs (the UI state sheet).
 
 The wiring into ui.js, menu.js, settings.js and main.js is requested in notes/production-requests.md.
