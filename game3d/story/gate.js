@@ -198,7 +198,7 @@ export default {
       { say: 'kuroda', face: 'panicked', overheard: true, emo: 'pleading', text: 'あ…すみません、ゲートが…' },
       { do: 'face', who: 'kuroda', to: 'gate' },
       { choice: [
-        { text: 'Say his word with him', go: 'word_type' },
+        { text: 'Say 開けて (akete, open) with him', go: 'word_type' },
         { text: 'Leave him to it', go: 'noop' },
       ] },
     ],

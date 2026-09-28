@@ -37,7 +37,7 @@ const GLOSSED_INTERJ = /INTERJ_GLOSS/.test(uiSrc) ? new Set(Object.keys(INTERJ_G
 // The main line: the nodes every player passes through, in order. 'a|b' = one of these (a route choice).
 // Everything else in `on` is a side trigger; it's walked from the earliest point its conditions can hold.
 const MAIN = [
-  ['train', ['intro', 'seat', 'ohayo_cat', 'arrival']],
+  ['train', ['intro', 'seat', 'lesson', 'ohayo_cat', 'lesson3', 'approach', 'arrival', 'platform', 'mio_phone']],
   ['transitions', ['train_to_gate']],
   ['gate', ['lobby_in', 'card_red', 'word_say|way_social', 'past_gate', 'to_lift']],
   ['transitions', ['gate_to_office']],

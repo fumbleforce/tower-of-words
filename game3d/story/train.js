@@ -6,7 +6,18 @@ export default {
     mio: { name: 'Mio', role: 'programmer' },
     kuroda: { name: 'Sleeping man' },
     reader: { name: 'Man with a book' },
+    bun: { name: 'Woman with a bun' },
+    youth: { name: 'Young man' },
+    music: { name: 'Girl with headphones' },
+    stander: { name: 'Man with a bag' },
   },
+
+  // Mio, muttering at her laptop, the first English in the car: it draws the player over without a marker
+  ambient: [
+    { id: 'mio_wifi', who: ['mio'], near: 'mio', radius: 2.5, if: '!sat', lines: [
+      { say: 'mio', emo: 'low', text: "Ugh, the Wi-Fi dies on the bridge every time... come on, come on." },
+    ] },
+  ],
 
   people: {
     mio: { name: 'Mio', about: 'Programmer, B2. The only one on the team with some English. Busy.', color: '#5fc6bf' },
@@ -15,11 +26,40 @@ export default {
   start: 'intro',
 
   on: {
-    'talk:mio': [{ if: '!sat', node: 'seat' }, { if: 'cat_task', node: 'cat_nudge' }, { if: 'can_exit', node: 'mio_after' }],
+    'talk:mio': [
+      { if: 'bag_wobble', node: 'mio_catches' },
+      { if: '!sat', node: 'seat' },
+      { if: '!lesson_on', node: 'lesson' },
+      { if: 'cat_task', node: 'cat_nudge' },
+      { if: 'cat_done && !lesson_done', node: 'lesson3' },
+      { if: 'lesson_done && !arriving', node: 'mio_doors_nudge' },
+      { if: 'phone_buzz && !can_exit', node: 'mio_phone' },
+      { if: 'can_exit', node: 'mio_after' },
+    ],
+    'talk:door_l': [{ if: 'lesson_done && !arriving', node: 'approach' }, { if: 'alighted && !on_platform', node: 'platform' }],
+    'talk:door_r': [{ if: 'lesson_done && !arriving', node: 'approach' }, { if: 'alighted && !on_platform', node: 'platform' }],
+    'talk:doors': [{ if: 'lesson_done && !arriving', node: 'approach' }, { if: 'alighted && !on_platform', node: 'platform' }],
+    'near:door_l': { if: 'lesson_done && !arriving', node: 'approach' },
+    'near:door_r': { if: 'lesson_done && !arriving', node: 'approach' },
+    'zone:door_zone': { if: 'alighted && !on_platform', node: 'platform' },
+    'zone:free_seat': [{ if: 'bag_wobble', node: 'dropped' }, { if: '!sat && !bag_wobble', node: 'seat' }],
+    'talk:foodbag': { if: 'bag_wobble', node: 'caught' },
     'talk:tama': 'tama',
     'talk:kuroda': 'hamada',
-    'talk:aoi': 'phone_girl',
+    'talk:aoi': [{ if: '!seat_goal && !sat', node: 'first_aoi' }, 'phone_girl'],
+    'talk:bun': [{ if: '!seat_goal && !sat', node: 'first_bun' }, 'bun'],
+    'talk:youth': [{ if: '!seat_goal && !sat', node: 'first_youth' }, 'youth'],
+    'talk:music': [{ if: '!seat_goal && !sat', node: 'first_music' }, 'music'],
     'talk:reader': 'reader',
+    'talk:window': 'window',
+    'talk:poster': 'poster',
+    'talk:straps': 'straps',
+    'talk:rack': 'rack',
+    'talk:plant': 'plant',
+    'talk:bags': 'seat_bags',
+    'say:ohayo:bun': 'ohayo_bun',
+    'say:ohayo:youth': 'ohayo_youth',
+    'say:ohayo:music': 'ohayo_music',
     'say:matte:tama': 'matte_tama',
     'say:ohayo:tama': [{ if: 'cat_task', node: 'ohayo_cat' }, 'ohayo_tama'],
     'say:ohayo:mio': { if: 'cat_task', node: 'ohayo_mio_again' },
@@ -31,28 +71,83 @@ export default {
     'event:arrived': 'arrival',
   },
 
-  show: { mio: '!sat' },
-  goal: { mio: '!sat', tama: 'cat_task' },
+  show: { mio: "!sat || !lesson_on || (cat_done && !lesson_done) || (phone_buzz && !can_exit)" },
+  goal: {
+    mio: "!sat || !lesson_on || (cat_done && !lesson_done) || (phone_buzz && !can_exit)",
+    tama: 'cat_task',
+    door_l: '(lesson_done && !arriving) || (alighted && !on_platform)',
+  },
   labels: { mio: ['Woman with a laptop', '!mio_named'], kuroda: 'Sleeping man' },
 
   nodes: {
-    intro: [
-      { do: 'period', to: 'commute' },
-      { do: 'goal', text: 'Find a seat. There is one by the woman with the laptop.' },
-      { do: 'hint', text: 'Tap the floor to walk. Tap people and things to look or talk.' },
+    // no goal and no text at load: the shell shows the controls line; the first goal comes from a passenger
+    intro: [],
+
+    // the first passenger he talks to answers in Japanese and nods at the free seat
+    first_aoi: [
+      { say: 'aoi', overheard: true, emo: 'bright', text: 'あ、ごめん、ちょっと待って。' },
+      { call: 'nod_seat' },
     ],
+    first_bun: [
+      { say: 'bun', overheard: true, emo: 'polite', text: 'あ、そこ、空いてますよ。' },
+      { call: 'nod_seat' },
+    ],
+    first_youth: [
+      { say: 'youth', overheard: true, emo: 'casual', text: 'え？あ、あそこ、どうぞ。' },
+      { call: 'nod_seat' },
+    ],
+    first_music: [
+      { say: 'music', overheard: true, emo: 'low', text: 'え？…あっち、空いてる。' },
+      { call: 'nod_seat' },
+    ],
+    first_stander: [
+      { say: 'stander', overheard: true, emo: 'low', text: '…あそこ。' },
+      { call: 'nod_seat' },
+    ],
+    nod_seat: [
+      { inc: 'passengers' },
+      { if: 'passengers >= 3 && !seat_goal', then: [
+        { do: 'emote', who: 'mio', kind: '…' },
+        '> A nod toward the woman with the laptop.',
+      ], else: [
+        '> A nod at the empty seat.',
+      ] },
+      { set: 'seat_goal' },
+      { do: 'goal', text: 'Sit down.', at: 'seat_far_r' },
+    ],
+    bun: [{ say: 'bun', overheard: true, emo: 'polite', text: 'いい天気ですね。' }],
+    youth: [{ say: 'youth', overheard: true, emo: 'casual', text: '…ん？' }, { do: 'emote', who: 'youth', kind: '?' }],
+    music: [{ do: 'emote', who: 'music', kind: '♪' }],
+    stander: [{ do: 'emote', who: 'stander', kind: '…' }],
+    ohayo_bun: [{ say: 'bun', overheard: true, emo: 'warm', text: 'はい、{ohayo}。' }],
+    ohayo_youth: [{ say: 'youth', overheard: true, emo: 'casual', text: 'あ、ども。' }],
+    ohayo_music: [{ do: 'emote', who: 'music', kind: '?' }],
+    ohayo_stander: [{ say: 'stander', overheard: true, emo: 'low', text: '…{ohayo}。' }],
+    window: [{ say: 'eric', emo: 'tired', text: "Sea on both sides. Nobody said the island was this far out." }],
+    poster: ['> A poster in katakana, with a smiling cartoon monorail on it.'],
+    straps: ['> You hold on as the car sways. Nobody else bothers.'],
+    rack: ['> Every suitcase up there has the same Amakawa luggage tag.'],
+    plant: ["> It's plastic. Someone has watered it anyway."],
+    seat_bags: ['> Bags on every seat but one.'],
 
     // ------------------------------------------------------------------ Mio
     seat: [
-      { do: 'cam', on: 'mio', zoom: 1.6 },
-      '> The train lurches.',
-      { do: 'bag', state: 'slide' },
-      { choice: [
-        { text: 'Catch it', go: 'caught' },
-        { text: 'Let it fall', go: 'dropped' },
-      ] },
+      { set: 'seat_goal' },
+      { do: 'goal', text: '' },
+      { do: 'cam', on: [1.6, -0.9], zoom: 1.6 },
+      { do: 'bag', state: 'teeter' },
+      "> The train lurches. The woman's lunch bag slides to the edge of the seat and wobbles there.",
+      { set: 'bag_wobble' },
+      { do: 'cam', back: true },
+    ],
+    mio_catches: [
+      { unset: 'bag_wobble' },
+      { do: 'bag', state: 'caught' },
+      { say: 'mio', emo: 'dry', name: 'Woman with a laptop', text: "Ah... okay, I got it. Sorry." },
+      { go: 'sit' },
     ],
     caught: [
+      { unset: 'bag_wobble' },
       { do: 'bag', state: 'caught' },
       { inc: 'mio_warm' },
       { say: 'mio', emo: 'flustered', name: 'Woman with a laptop', text: 'Ah, sorry, sorry. Thank you.' },
@@ -60,6 +155,7 @@ export default {
       { go: 'sit' },
     ],
     dropped: [
+      { unset: 'bag_wobble' },
       { do: 'bag', state: 'dropped' },
       { say: 'mio', emo: 'dry', name: 'Woman with a laptop', text: "...Okay. I think nothing broke. It's my mother's pickles." },
       { go: 'sit' },
@@ -82,21 +178,30 @@ export default {
     ],
     its_eric: [
       { say: 'mio', emo: 'deadpan', text: "Mm, I know. It's on your card." },
-      { go: 'lesson' },
+      { go: 'chat1_end' },
     ],
     family: [
       { inc: 'mio_warm' },
       { say: 'mio', emo: 'casual', text: "Mm. I stayed at her place last night, on the mainland." },
       { say: 'mio', emo: 'fond', face: 'tired', text: "She always packs too much. Like I'm moving to another country." },
-      { go: 'lesson' },
+      { go: 'chat1_end' },
     ],
     leave_it: [
       { do: 'bow', who: 'eric' },
-      { go: 'lesson' },
+      { go: 'chat1_end' },
     ],
 
-    // ------------------------------------------------------------------ the lesson
+    chat1_end: [
+      { set: 'chat1' },
+      { do: 'cam', back: true },
+      { do: 'goal', text: 'Talk to Mio again when you like.' },
+    ],
+
+    // ------------------------------------------------------------------ the lesson (the player comes back for it)
     lesson: [
+      { set: 'lesson_on' },
+      { do: 'cam', on: 'mio', zoom: 1.6 },
+      { do: 'goal', text: '' },
       { say: 'mio', emo: 'casual', text: "Ne... sorry. Where are you from?" },
       { say: 'eric', emo: 'tired', text: "Norway." },
       { say: 'mio', emo: 'dry', face: 'neutral', text: "Norway... okay. And Japanese? You speak it, like, at all?" },
@@ -129,7 +234,12 @@ export default {
       { do: 'goal', text: '' },
       '> A slow blink.',
       { say: 'mio', emo: 'amused', face: 'smile', text: "See? She's fine with it." },
-      { do: 'emote', who: 'kuroda', kind: 'zzz' },
+      { set: 'cat_done' },
+      { do: 'goal', text: 'Talk to Mio when you like.' },
+    ],
+    lesson3: [
+      { do: 'cam', on: 'mio', zoom: 1.6 },
+      { do: 'goal', text: '' },
       { do: 'face', who: 'mio', to: 'kuroda' },
       { do: 'emote', who: 'kuroda', kind: 'zzz' },
       { say: 'mio', emo: 'casual', text: "She's more awake than that guy, anyway. He's on this train every morning too, asleep the whole way, and like once a month he misses our stop and ends up back on the mainland." },
@@ -142,23 +252,29 @@ export default {
       { if: 'mio_warm >= 2', then: [
         { say: 'mio', emo: 'embarrassed', face: 'embarrassed', text: "Here, take a pickle. My mother made, like, way too many." },
       ] },
-      { go: 'approach' },
+      { set: 'lesson_done' },
+      { do: 'cam', back: true },
+      { do: 'announce', text: '{tsugiwa} {honsha}' },
+      { say: 'ann', emo: 'announcer', text: "{tsugiwa} {honsha}." },
+      { do: 'announce', text: '' },
+      { say: 'mio', emo: 'casual', text: "Oh, this is us. Go stand by the doors, it gets crowded. I'll pack up." },
+      { do: 'goal', text: 'Wait by the doors.' },
     ],
+    mio_doors_nudge: [{ say: 'mio', emo: 'dry', text: "Doors, doors. I'm coming, I'm just packing the pickles." }],
 
     // ------------------------------------------------------------------ arrival: すみません, then 待って
     approach: [
-      { do: 'cam', back: true },
+      { set: 'arriving' },
+      { do: 'goal', text: '' },
+      { do: 'walk', who: 'eric', to: [-2.8, 0.35], wait: true },
+      { do: 'stand', who: 'mio' },
+      { do: 'walk', who: 'mio', to: [-2.0, 0.1], wait: false },
       { do: 'arrive' },
-      { do: 'announce', text: '{tsugiwa} {honsha}' },
-      { say: 'ann', emo: 'announcer', text: "{tsugiwa} {honsha}." },
-      { say: 'mio', emo: 'casual', text: "Oh, this is us." },
     ],
     arrival: [
       { do: 'doorsOpen' },
       { do: 'announce', text: '' },
-      { do: 'stand', who: 'mio' },
-      { do: 'stand', who: 'eric' },
-      { do: 'walk', who: 'aoi', to: 'aisle', wait: true },
+      { do: 'walk', who: 'aoi', to: [-3.2, 0.2], wait: true },
       { do: 'face', who: 'mio', to: 'aoi' },
       { say: 'mio', emo: 'dry', text: "Ah, she's in the way... okay, one more. {sumimasen}. You use it for sorry too." },
       { say: 'mio', emo: 'casual', text: "You'll get lost today, everybody does. Just say it and point at things. Honestly it works for almost everything." },
@@ -172,9 +288,15 @@ export default {
       { do: 'alight', except: ['kuroda'] },
       { do: 'hide', id: 'aoi' },
       { do: 'catTo', to: [-3.0, 2.2] },
-      { do: 'walk', who: 'mio', to: 'door_l', wait: false },
-      { do: 'walk', who: 'eric', to: 'door_l', wait: true },
+      { do: 'walk', who: 'mio', to: 'door_l', wait: true },
       { do: 'walk', who: 'mio', to: [-2.2, 2.25], wait: false },
+      { set: 'alighted' },
+      { do: 'goal', text: 'Get off the train.' },
+    ],
+    // the player steps out; from the platform, the man still inside
+    platform: [
+      { set: 'on_platform' },
+      { do: 'goal', text: '' },
       { do: 'walk', who: 'eric', to: [-3.0, 2.2], wait: true },
       // 2. from the platform: he's still in there, alone
       { do: 'face', who: 'mio', to: 'kuroda' },
@@ -228,7 +350,9 @@ export default {
       { say: 'mio', face: 'embarrassed', emo: 'low', text: "Um, don't tell anyone, okay? If somebody reports it broken, it goes on my list." },
       // her phone goes, she looks, then reacts
       { do: 'phone', who: 'mio', state: 'buzz' },
-      { wait: 700 },
+      { set: 'phone_buzz' },
+    ],
+    mio_phone: [
       { do: 'phone', who: 'mio', state: 'look' },
       { say: 'mio', face: 'tired', emo: 'groan', text: "あー, no, no... the server's down again. Sorry, I have to run." },
       { do: 'phone', who: 'mio', state: 'away' },
