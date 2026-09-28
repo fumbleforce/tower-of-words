@@ -11,7 +11,7 @@ p.on('console', (m) => { if (m.type() === 'error' && !/404/.test(m.text())) errs
 const t0 = Date.now();
 await p.goto(`http://127.0.0.1:8771/game3d/index.html?test=fast&q=0${process.env.Q || ''}`);
 await p.waitForFunction(() => window.__test && window.__test.done, null, { timeout: +S * 1000 }).catch(() => {});
-const r = await p.evaluate(() => ({ ...window.__test, ended: !!window.__ended, place: window.__game.place && window.__game.place.name, goal: document.querySelector('#goal .t')?.innerText }));
+const r = await p.evaluate(() => ({ ...window.__test, ended: !!window.__ended, place: window.__game.place && window.__game.place.name, goal: window.__game.ui.goalText }));
 await p.screenshot({ path: `/tmp/claude-1000/fast-${W}x${H}.png` });
 console.log(r.ended && !errs.length && !r.errors.length ? 'PASS' : 'FAIL', `${W}x${H}`, `${((Date.now() - t0) / 1000).toFixed(0)} s`, 'places:', r.places.join(' > '), 'at:', r.place, '| goal:', r.goal);
 console.log('last steps:', r.log.slice(-8).join(' | '));

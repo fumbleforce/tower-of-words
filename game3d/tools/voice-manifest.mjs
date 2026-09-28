@@ -1,15 +1,45 @@
-// Writes audio/manifest.json: every voice clip the game plays, with its speaker and Japanese text.
-// Eric's phrases and commands come from js/lang.js; overheard lines come from the story files.
+// Writes audio/manifest.json: every voice clip the game plays, generated from the story files, so a rewrite
+// only needs this script and the TTS run again. Entry: { key, speaker, text (Japanese or English, {id}
+// resolved), lang, overheard, words: [[wordId, surface]] for known-word spans, clear: [surface] }.
+// Keys: eric-<word> for Eric's phrases and commands, ln-<hash> for spoken lines, oh-<hash> for overheard lines.
 import fs from 'node:fs';
 import path from 'node:path';
-import { execFileSync } from 'node:child_process';
 import { pathToFileURL } from 'node:url';
 const root = path.resolve(path.dirname(new URL(import.meta.url).pathname), '..');
 const { WORDS } = await import(pathToFileURL(path.join(root, 'js/lang.js')).href);
-const out = [];
-for (const [id, w] of Object.entries(WORDS)) if (w.voice) out.push({ key: w.voice, speaker: 'eric', text: w.ja + '。' });
-const heard = JSON.parse(execFileSync('node', [path.join(root, 'tools/heard-lines.mjs')], { encoding: 'utf8' }));
-for (const h of heard) out.push({ key: h.key, speaker: h.who, text: h.text });
-fs.writeFileSync(path.join(root, 'audio/manifest.json'), JSON.stringify(out, null, 1));
-const by = {}; for (const o of out) by[o.speaker] = (by[o.speaker] || 0) + 1;
-console.log(out.length, 'clips', JSON.stringify(by));
+const { heardKey, lineKey } = await import(pathToFileURL(path.join(root, 'tools/heardkey.mjs')).href);
+const out = new Map();
+const resolve = (t) => t.replace(/\{(\w+)\}/g, (_, id) => (WORDS[id] ? WORDS[id].ja : id));
+const jaRe = /[぀-ヿ一-龯]/;
+function add(who, text, s = {}) {
+  if (!who || !/^\w+$/.test(who) || !text) return;
+  const spoken = resolve(text);
+  const lang = s.overheard || (jaRe.test(spoken) && !/[a-zA-Z]{3,}/.test(spoken.replace(/\([^)]*\)/g, ''))) ? 'ja' : 'en';
+  const key = s.voice || (s.overheard ? heardKey(text) : lineKey(who, text));
+  const words = [];
+  for (const [id, w] of Object.entries(WORDS)) for (const ja of [w.ja, ...(w.alias || [])]) if (spoken.includes(ja) && !words.some(([, x]) => x.includes(ja))) words.push([id, ja]);
+  const clear = (s.clear || []).map((c) => (typeof c === 'string' ? c : c.ja));
+  // spoken text: drop the English glosses a line may carry in brackets
+  out.set(key, { key, speaker: who, text: spoken.replace(/\s*\([^)]*\)/g, ''), lang, overheard: !!s.overheard, words, clear });
+}
+function walk(list) {
+  for (const s of list || []) {
+    if (typeof s === 'string') { const i = s.indexOf(': '); if (!s.startsWith('>') && i > 0 && /^\w+$/.test(s.slice(0, i))) add(s.slice(0, i), s.slice(i + 2)); continue; }
+    if (!s || typeof s !== 'object') continue;
+    if (s.say && s.text) add(s.say, s.text, s);
+    if (s.offer && s.line) { const i = s.line.indexOf(': '); if (i > 0) add(s.line.slice(0, i), s.line.slice(i + 2), s); }
+    for (const k of ['then', 'else']) if (s[k]) walk(s[k]);
+    if (s.choice) for (const o of s.choice) if (o.say) walk(o.say);
+  }
+}
+for (const [id, w] of Object.entries(WORDS)) if (w.voice) out.set(w.voice, { key: w.voice, speaker: 'eric', text: w.ja + '。', lang: 'ja', overheard: false, words: [], clear: [] });
+for (const n of ['train', 'gate', 'office', 'transitions']) {
+  const f = path.join(root, 'story', n + '.js'); if (!fs.existsSync(f)) continue;
+  const st = (await import(pathToFileURL(f).href + '?' + Date.now())).default;
+  if (n === 'transitions') for (const v of Object.values(st)) { walk(v.walk); walk(v.ride); walk(v.arrive); }
+  else for (const nodes of Object.values(st.nodes || {})) walk(nodes);
+}
+const list = [...out.values()];
+fs.writeFileSync(path.join(root, 'audio/manifest.json'), JSON.stringify(list, null, 1));
+const by = {}; for (const o of list) by[o.speaker] = (by[o.speaker] || 0) + 1;
+console.log(list.length, 'clips', JSON.stringify(by), 'overheard', list.filter((x) => x.overheard).length, 'en', list.filter((x) => x.lang === 'en').length);
