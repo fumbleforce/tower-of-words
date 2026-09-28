@@ -1,6 +1,6 @@
 # game3d: review log
 
-Each round, a fresh critic agent sees only the reference image(s) and the screenshots, and scores the place 0 to 10 (pass mark 8, scale from island/VISUAL_QA.md). A separate cold-player agent plays the whole day in a headless browser.
+Each round, a fresh critic agent sees only the reference image(s) and the screenshots, and scores the place 0 to 10 (pass mark 8, scale from notes/VISUAL_QA.md). A separate cold-player agent plays the whole day in a headless browser.
 
 References: train `ref/1-train-arrival.png`, gate `ref/2-security-gate-muted.png` (the palette for all three places), office `ref/3-office.png` for the look only (the floor plan follows the B2 plan on Jørgen's instruction).
 
