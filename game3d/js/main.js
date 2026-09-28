@@ -14,7 +14,7 @@ import { lobbyPlace } from './places/lobby.js';
 import { officePlace } from './places/office.js';
 import { showEnd } from './end.js';
 import * as trips from './trips.js';
-import { sim, ITEMS, setPeriod, applySchedule, stepAmbient, bond, meet, noteTeacher, absorb, buy, take, peopleHTML, save, loadSave, restore, clearSave } from './sim.js';
+import { PERIODS as PERIOD_ORDER, sim, ITEMS, setPeriod, applySchedule, stepAmbient, bond, meet, noteTeacher, absorb, buy, take, peopleHTML, save, loadSave, restore, clearSave } from './sim.js';
 
 const CAP = Q.has('cap');
 const canvas = document.getElementById('c');
@@ -297,6 +297,7 @@ async function enter(name) {
   resize();
   place.cam?.snap?.(game.player.root.position);
   absorb(story);
+  if (place.defaultPeriod && PERIOD_ORDER.indexOf(sim.period) < PERIOD_ORDER.indexOf(place.defaultPeriod)) sim.period = place.defaultPeriod;
   applySchedule(game, { instant: true });
   ui.clock(sim.date, { commute: 'Morning commute', morning: 'Morning at work', lunch: 'Lunch', afternoon: 'Afternoon', evening: 'After work' }[sim.period]);
   buildMarkers(place);
@@ -413,6 +414,8 @@ async function boot() {
     if (Q.has('face')) { game.walker.facing = +Q.get('face'); game.player.root.rotation.y = +Q.get('face'); }
     game.place.cam?.snap?.(game.player.root.position);
     if (Q.has('st')) await game.place.capState?.(Q.get('st'));
+    // ?advance=N runs the world for N/30 s so moving things (commuters) are in the shot
+    for (let i = 0; i < +(Q.get('advance') || 0); i++) { game.place.update(1 / 30, game.t += 1 / 30); }
     for (let i = 0; i < 30; i++) step(1 / 60);
     return;
   }

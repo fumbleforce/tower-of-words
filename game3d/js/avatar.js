@@ -62,7 +62,7 @@ function lanyard(rig) {
 
 export function buildEric() {
   const rig = chibi({
-    skin: ERIC.skin, top: ERIC.blazer, sleeve: ERIC.blazer, bottom: ERIC.trousers, shirt: ERIC.hoodie, tie: null,
+    headK: 0.63, skin: ERIC.skin, top: ERIC.blazer, sleeve: ERIC.blazer, bottom: ERIC.trousers, shirt: ERIC.hoodie, tie: null,
     hair: ERIC.hair, glasses: '#2a2c31', eyes: 'open',
     hairOpts: { messy: 0.16, front: 0.1, vfringe: 0.0, side: -0.02, seed: 88, tufts: [[0.08, 0.3, 0.1], [-0.09, 0.29, 0.06], [0.02, 0.32, -0.02], [0.13, 0.26, 0.12], [-0.13, 0.25, 0.1], [0.0, 0.3, 0.14]] },
     shoes: ERIC.shoes, sole: '#2c2622', torsoW: 0.32,

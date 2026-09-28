@@ -168,6 +168,8 @@ export async function trainPlace(game) {
   // doors: the near-side sliding leaves in the shell
   let doorLeaves = [];
   function findDoors() {
+    // Jørgen: no visible light fixtures in the car; the point lights stay
+    const lm = carMat('lamp', COL.lamp); car.root.traverse((o) => { if (o.isMesh && o.material === lm) o.visible = false; });
     doorLeaves = [];
     const dm = carMat('door', COL.door);
     car.root.traverse((o) => { if (o.isMesh && o.material === dm && Math.abs(o.position.z - (LZ + 0.03)) < 0.002) doorLeaves.push({ m: o, x0: o.position.x }); });

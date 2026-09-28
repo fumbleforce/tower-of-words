@@ -104,7 +104,7 @@ function toilet() {
 }
 function mirror() { const m = new THREE.Mesh(new THREE.PlaneGeometry(0.42, 0.5), mat('#b7c8d4', { roughness: 0.15, metalness: 0.2 })); m.receiveShadow = true; return m; }
 function ceilingLamp(w = 0.9) {
-  const g = new THREE.Group();
+  const g = new THREE.Group(); g.visible = false; // Jørgen: don't show the fixtures, keep their light
   g.add(rbox(w + 0.06, 0.07, 0.07, PAL.trim, { r: 0.02, cast: false }));
   g.add(rbox(w, 0.04, 0.06, null, { y: 0.015, z: 0.012, r: 0.015, m: emissive('#fff3dc', '#ffe6b8', 2.2), cast: false }));
   return g;
@@ -312,6 +312,12 @@ export function buildOffice() {
   for (const x of [-5.6, -2.6, 0.9, 4.0]) { const l = ceilingLamp(0.7); l.position.set(x, 1.3, CN + T / 2 + 0.02); root.add(l); }
   const trolley = new THREE.Group(); trolley.add(rbox(0.5, 0.04, 0.34, '#4c6696', { y: 0.08, r: 0.01 }), rbox(0.04, 0.6, 0.04, '#4c6696', { x: -0.23, y: 0.08, z: -0.13, r: 0.01 }), rbox(0.04, 0.6, 0.04, '#4c6696', { x: -0.23, y: 0.08, z: 0.13, r: 0.01 }));
   trolley.position.set(6.3, 0, 2.05); root.add(trolley);
+  // corridor dressing: plants at the ends, a folded 清掃中 sign, bins, a pipe chair stack
+  { const p = plant({ size: 0.95, seed: 14 }); p.position.set(-4.3, 0, 2.05); root.add(p); }
+  { const p = plant({ size: 0.95, seed: 15 }); p.position.set(3.2, 0, 2.05); root.add(p); }
+  { const s = new THREE.Group(); s.add(rbox(0.3, 0.5, 0.04, '#e0b83a', { r: 0.02 })); s.rotation.x = -0.25; s.position.set(1.6, 0, 1.95); root.add(s); }
+  for (const [x, c] of [[0.7, '#4f6f9a'], [0.98, '#6a8f5c']]) root.add(rbox(0.22, 0.34, 0.22, c, { x, z: 2.1, r: 0.03 }));
+  for (let i = 0; i < 3; i++) root.add(rbox(0.4, 0.05, 0.36, '#6d747e', { x: -2.4, y: 0.02 + i * 0.05, z: 2.05, r: 0.01 }));
 
   // ---- lift lobby ----
   const liftDoor = new THREE.Group();
@@ -404,6 +410,8 @@ export function buildOffice() {
   work.position.set(-4.4, 0, 4.7); root.add(work);
   for (const [x, z, s] of [[-2.7, 5.9, 0.4], [-3.15, 5.95, 0.34], [-6.5, 5.9, 0.36]]) root.add(rbox(s, s * 0.8, s, PAL.box, { x, z, r: 0.02 }));
   root.add(rbox(0.26, 0.32, 0.26, '#b8453e', { x: -2.55, z: 4.6, r: 0.03 }), rbox(0.26, 0.3, 0.26, '#4f8a55', { x: -2.55, z: 5.0, r: 0.03 }));
+  { const sd = new THREE.Group(); sd.add(rbox(0.7, 0.04, 0.45, '#d5d6d3', { y: 0.4, r: 0.01 }), rbox(0.05, 0.4, 0.4, PAL.deskLeg, { x: -0.3, r: 0.01 }), rbox(0.05, 0.4, 0.4, PAL.deskLeg, { x: 0.3, r: 0.01 }), rbox(0.12, 0.05, 0.05, '#3a3f48', { x: -0.15, y: 0.44, r: 0.01 }), rbox(0.2, 0.05, 0.28, PAL.paper, { x: 0.15, y: 0.44, r: 0.004 })); sd.position.set(-6.2, 0, 5.9); root.add(sd); }
+  for (const [x, z] of [[-3.5, 3.1], [-3.8, 3.1], [-3.65, 3.3]]) root.add(rbox(0.26, 0.2, 0.34, '#e8e4da', { x, y: 0, z, r: 0.01 }));
 
   // ---- kitchenette (給湯室) ----
   const ct = counter(1.5); ct.position.set(0.95, 0, CS + T / 2 + 0.3); root.add(ct);
@@ -416,6 +424,8 @@ export function buildOffice() {
   const fr = fridge(); fr.position.set(-1.8, 0, CS + T / 2 + 0.32); root.add(fr);
   const t2 = table2(); t2.position.set(-0.8, 0, 4.6); root.add(t2);
   root.add(rbox(0.22, 0.3, 0.22, '#5c6b86', { x: -1.9, z: 6.0, r: 0.02 }));
+  { const wc = waterCooler(); wc.position.set(-1.9, 0, 3.6); root.add(wc); }
+  root.add(rbox(0.9, 0.04, 0.22, '#8a909a', { x: 0.2, y: 0.95, z: 6.2, r: 0.01 }), rbox(0.9, 0.04, 0.22, '#8a909a', { x: 0.2, y: 0.7, z: 6.2, r: 0.01 }));
   { const p = plant({ size: 0.9, seed: 8 }); p.position.set(1.4, 0, 6.0); root.add(p); }
 
   // ---- toilets: men's and women's ----
@@ -468,6 +478,8 @@ export function buildOffice() {
   B(-3.35, -2.55, CS, CS + 0.75); B(-5.8, -5.0, CS, CS + 0.58); B(X0, X0 + 0.5, 3.1, 5.3); B(-5.2, -3.6, 4.25, 5.15); B(-3.3, -2.35, 5.6, Z1); B(-6.75, -6.25, 5.65, Z1); B(-2.75, -2.35, 4.4, 5.2);
   B(0.15, 1.75, CS, CS + 0.62); B(1.15, 1.8, 3.6, 5.0); B(-2.15, -1.45, CS, CS + 0.62); B(-1.25, -0.35, 4.25, 5.3); B(-2.05, -1.75, 5.85, Z1); B(1.2, 1.6, 5.8, Z1);
   for (const x0 of [1.8, 4.4]) { B(x0 + 0.1, x0 + 2.55, 5.3, Z1); B(x0 + 2.15, x0 + 2.55, 3.15, 3.65); B(x0 + 2.2, x0 + 2.5, 3.85, 4.15); B(x0 + 0.25, x0 + 1.2, CS, CS + 0.32); }
+  B(-4.55, -4.05, 1.85, CS); B(2.95, 3.45, 1.85, CS); B(1.45, 1.75, 1.85, 2.1); B(0.55, 1.12, 1.95, CS); B(-2.65, -2.15, 1.85, CS);
+  B(-6.6, -5.8, 5.6, Z1); B(-3.95, -3.35, 2.9, 3.5); B(-2.1, -1.7, 3.4, 3.8);
   nav.blockTagged('emi', -5.5, -5.1, -1.55, -1.15);
 
   for (const r of [nao, hiro, yui, sota]) r.root.visible = false;
