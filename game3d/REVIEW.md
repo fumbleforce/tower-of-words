@@ -45,3 +45,13 @@ Fixed: chairs snug, lift surrounds, coffee machine moved in. Jørgen: "the train
 Fixed after round 5: office floor cooler, filing row on the office's left wall, corridor bench, chatting pair moved off the plant, phone gate camera leads further toward the gate, clearer door panels.
 
 Not changed on purpose: the train's passengers and car (from side/train, recoloured only), Mio's shape (Meshy, colour only), the steep train camera (Jørgen's request).
+
+## Markers (after Jørgen: "small, awkwardly placed, not well designed")
+
+Fresh critic, before → after: readability 3 → 7, placement 4 → 6, design and fit 4 → 7, phone 3 → 3 (a tag-width bug, fixed afterwards with the rest of its notes). Crops: shots/round-5/markers-before-after-desktop.png and -phone.png.
+
+## Cold player (one fresh agent, mid-N5 profile, desktop twice and phone to B2)
+
+Fun 6/10, clarity 4/10, want to keep playing 6/10. Liked: the writing, the train, the gate routes, the B2 cast. The amount of Japanese felt right; the commands felt useful, the phrases a bit like passwords.
+Bugs found and fixed: the title named the wrong character; a tap that revealed reply chips also picked one; Say targeted the nearest object over the person; overheard lines read like a broken font (now softer and more blurred); the phone goal pill overlapped the clock; a crash on arriving at B2 (moriBlob); the ending not responding while Eric was seated.
+Open, story side: Mio should walk out onto the platform where the text says she hops out; her label varies between files.
