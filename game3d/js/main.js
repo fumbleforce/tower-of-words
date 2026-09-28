@@ -95,6 +95,8 @@ function use(item) {
   if (!item || game.busy) return;
   const go = () => { if (game.busy) return; if (item.face) game.walker.faceTo(...item.face()); talk(item); };
   const sp = item.spot ? item.spot() : null;
+  // seated (at a desk, on a bench), Eric talks from where he is: the walker doesn't run while he sits
+  if (game.player.seated) { go(); return; }
   if (sp) {
     const p = game.player.root.position;
     if (Math.hypot(p.x - sp[0], p.z - sp[1]) < 0.12) go();
@@ -207,7 +209,7 @@ H.walk = async ({ who, to, wait = true, speed }) => {
   const p = posOf(to); if (!p) return;
   if (isPlayer(who)) { const pr = game.walkTo(p[0], p[1]); if (wait) await pr; return; }
   const r = rigOf(who); if (!r) return;
-  if (r.meshy) { r.root.visible = true; r.seated = false; r.setState('walk'); const pr = glide(game, r.root, p, speed || 1.2).then(() => r.setState('idle')); if (wait) await pr; return; }
+  if (r.meshy) { r.root.visible = true; if (r.seated) { r.root.position.y = 0; r.root.position.z += r.root.position.z < 0 ? 0.45 : -0.45; } r.seated = false; r.setState('walk'); const pr = glide(game, r.root, p, speed || 1.2).then(() => r.setState('idle')); if (wait) await pr; return; }
   const pr = game.place.walkPerson(who, p, { speed });
   if (wait) await pr;
 };
@@ -366,13 +368,15 @@ function step(dt) {
   place.cam?.update?.(dt, mio.root.position);
   // nearest usable thing, the Say target, and near/zone triggers
   let near = null, nd = 0.95, st = null, sd = 2.2;
+  const seatedReach = game.player.seated ? 1.6 : 0;
   const mp = mio.root.position;
   for (const m of game.markers.list) {
     if (!m.enabled()) continue;
     const s = m.spot ? m.spot() : null; if (!s) continue;
     const d = Math.hypot(mp.x - s[0], mp.z - s[1]);
-    if (!game.busy && d < nd) { nd = d; near = m; }
-    if (!game.busy && known.size && d < sd) { sd = d; st = m; }
+    if (!game.busy && d < nd + seatedReach) { nd = d - seatedReach; near = m; }
+    const bias = (m.goal && m.goal() ? -1.2 : 0) + (/person/.test(m.kind || '') ? -0.7 : 0);
+    if (!game.busy && known.size && d + bias < sd) { sd = d + bias; st = m; }
     if (d < 0.9) { if (!nearSet.has(m.id)) { nearSet.add(m.id); if (!game.busy) game.runner.trigger('near:' + m.id); } }
     else if (d > 1.3) nearSet.delete(m.id);
   }

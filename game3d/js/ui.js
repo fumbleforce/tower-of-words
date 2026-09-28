@@ -230,10 +230,11 @@ export const ui = {
       if (!keepLine) t.querySelector('.line').innerHTML = text ? lineHTML(text) : '';
       t.querySelector('.more').hidden = true;
       const box = t.querySelector('.chips'); box.innerHTML = '';
+      const shown = performance.now();   // a tap that revealed the chips must not also pick one
       const btns = chips.map((c, i) => {
         const b = el('button', 'chip' + (i === glow ? ' glow' : '') + (c.cls ? ' ' + c.cls : ''), `<span class="k">${i + 1}</span><span class="c">${c.html}</span>`);
         b.type = 'button';
-        b.onclick = (e) => { e.stopPropagation(); this._chipKeys = null; box.querySelectorAll('.chip').forEach((x) => { x.disabled = true; }); b.classList.add('picked'); res(i); };
+        b.onclick = (e) => { e.stopPropagation(); if (performance.now() - shown < 350) return; this._chipKeys = null; box.querySelectorAll('.chip').forEach((x) => { x.disabled = true; }); b.classList.add('picked'); res(i); };
         box.appendChild(b); return b;
       });
       this._chipKeys = btns;
