@@ -59,6 +59,12 @@ export async function transcribe(samples, candidates) {
   const id = ++seq;
   return new Promise((res, rej) => { waiting.set(id, { res, rej }); worker.postMessage({ type: 'run', id, samples, candidates }, [samples.buffer]); });
 }
+// the candidates' scores for the recording transcribed last: { free, scores, ms }
+export async function scoreLast(candidates) {
+  await loadRecogniser();
+  const id = ++seq;
+  return new Promise((res, rej) => { waiting.set(id, { res, rej }); worker.postMessage({ type: 'run', id, score: true, candidates }); });
+}
 
 // any encoded audio (a recording, an mp3) to 16 kHz mono samples
 export async function toMono16k(arrayBuffer) {
@@ -94,10 +100,13 @@ export function trimSilence(s, rate = 16000) {
 // The free transcript is matched first; when that misses, the word's forced-decoding score gets a say (Whisper only).
 export async function judge(samples, wordId, ro) {
   if (!hasSpeech(samples)) return { hit: false, text: '', reason: 'quiet', ms: 0 };
-  const r = await transcribe(trimSilence(samples), candidatesFor(Object.keys(SPOKEN)));
+  const r = await transcribe(trimSilence(samples));
   const m = matchWord(r.text, wordId, ro);
-  const hit = m.hit || scoreHit(r, wordId);
-  return { hit, text: r.text, heard: m.heard, other: hit ? null : m.other, ms: r.ms, by: m.hit ? 'text' : hit ? 'score' : null };
+  if (m.hit) return { hit: true, text: r.text, heard: m.heard, ms: r.ms, by: 'text' };
+  // only a miss pays for the second opinion (about 20 decoder passes)
+  let sc = null; if (engineInfo.model !== 'moon') { try { sc = await scoreLast(candidatesFor(Object.keys(SPOKEN))); } catch { /* keep the miss */ } }
+  const hit = scoreHit(sc, wordId);
+  return { hit, text: r.text, heard: m.heard, other: hit ? null : m.other, ms: r.ms + (sc ? sc.ms : 0), by: hit ? 'score' : null };
 }
 
 // ---------- which mode ----------
