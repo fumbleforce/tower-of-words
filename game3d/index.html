@@ -6,17 +6,30 @@
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Day One</title>
+<title>Amakawa</title>
+<meta name="theme-color" content="#0e121c">
+<style>
+/* the boot loader shows before the stylesheet has loaded, so its look lives here */
+html, body { margin: 0; height: 100%; background: #0e121c; }
+#boot { position: fixed; inset: 0; z-index: 20; display: grid; place-content: center; justify-items: center; gap: 22px; background: radial-gradient(120% 80% at 70% 0%, #1b2436 0%, #0e121c 60%); color: #eef0f4; transition: opacity .6s ease; font-family: "Zen Kaku Gothic New", system-ui, sans-serif; }
+#boot.gone { opacity: 0; pointer-events: none; }
+#boot .bmark { font-weight: 700; font-size: clamp(26px, 5vw, 40px); letter-spacing: .34em; margin-right: -.34em; }
+#boot .bline { position: relative; width: 168px; height: 2px; border-radius: 1px; background: rgba(238, 240, 244, .14); overflow: hidden; }
+#boot .bline i { position: absolute; top: 0; left: 0; width: 28px; height: 2px; border-radius: 1px; background: #6fd0c6; animation: bootrun 1.5s cubic-bezier(.45, 0, .55, 1) infinite alternate; }
+@keyframes bootrun { to { transform: translateX(140px); } }
+@media (prefers-reduced-motion: reduce) { #boot .bline i { animation: none; width: 100%; opacity: .5; } }
+</style>
 
 </head>
 <body>
-<canvas id="c" tabindex="0"></canvas>
+<div id="boot" role="status" aria-label="Loading"><div class="bmark">AMAKAWA</div><div class="bline"><i></i></div></div>
+<canvas id="c" tabindex="0" aria-label="The game world"></canvas>
 <div id="ui"></div>
 <div id="title" hidden>
+  <div class="grade" aria-hidden="true"></div>
   <div class="inner">
-    <h1>Amakawa</h1>
+    <h1 class="wordmark"><span class="w">AMAKAWA</span><span class="rail" aria-hidden="true"><i></i></span></h1>
     <div class="btns"><button type="button" class="go">Start</button><button type="button" class="cont" hidden>Continue</button></div>
-    <p class="keys"><span class="desk">Click or WASD to walk, click people to talk</span><span class="tch">Tap to walk, tap people to talk</span></p>
   </div>
 </div>
 <div id="build"></div>
@@ -34,6 +47,11 @@
   const map = document.createElement('script'); map.type = 'importmap'; map.textContent = JSON.stringify({ imports }); document.head.appendChild(map);
   document.getElementById('build').textContent = 'build ' + b.id;
   const s = document.createElement('script'); s.type = 'module'; s.src = './js/main.js' + v; document.body.appendChild(s);
+  // the shell (title, settings, pause, saves, loading): its own module, so a fault there never stops the game
+  const m = document.createElement('script'); m.type = 'module'; m.src = './js/menu.js' + v; document.body.appendChild(m);
+  // tests and captures don't want the loader; and it never outlives a game that started without the shell
+  if (/[?&](cap|test=)/.test(location.search)) document.getElementById('boot').remove();
+  const bootWatch = setInterval(() => { const g = window.__game, b = document.getElementById('boot'); if (!b) return clearInterval(bootWatch); if (g && g.place && !window.__shellBooted && performance.now() > 15000) { b.classList.add('gone'); clearInterval(bootWatch); } }, 500);
 })();
 </script>
 </body>

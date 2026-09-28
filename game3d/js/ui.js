@@ -1,5 +1,6 @@
 // HTML overlay: goal, words, the train's LED board, the talk panel with reply chips, fades and the end card.
-import { lineHTML, WORDS, COMMANDS, PHRASES, known, seen, cmdHTML, iconHTML } from './lang.js';
+import { lineHTML, WORDS, COMMANDS, PHRASES, known, seen, cmdHTML, iconHTML, INTERJ_GLOSS } from './lang.js';
+import { settings, onSettings, CPS } from './settings.js';
 
 const $ = (s) => document.querySelector(s);
 const el = (tag, cls, html) => { const e = document.createElement(tag); if (cls) e.className = cls; if (html != null) e.innerHTML = html; return e; };
@@ -9,7 +10,35 @@ let actx = null, muted = false;
 let voiceSpans = null;
 fetch(new URL('../audio/spans.json?v=' + (window.BUILD || ''), import.meta.url)).then((r) => (r.ok ? r.json() : null)).then((j) => { voiceSpans = j; }).catch(() => {});
 const clips = {};
-function ac() { if (!actx) { try { actx = new (window.AudioContext || window.webkitAudioContext)(); } catch { actx = null; } } if (actx && actx.state === 'suspended') actx.resume(); return actx; }
+function ac() { if (!actx) { try { actx = new (window.AudioContext || window.webkitAudioContext)(); } catch { actx = null; } } if (actx && actx.state === 'suspended' && !paused) actx.resume(); return actx; }
+// ---------- volume buses ----------
+// Everything made with Web Audio goes through a bus: sfx, music, voice (the muffled overheard path), ambience
+// (for js/ambience.js), each into the master. Voice clips played as <audio> take voice x master as their volume.
+// Settings (js/settings.js) move the gains; the mute chip silences the master.
+const buses = {};
+const vol = (k) => Math.max(0, Math.min(1, +settings[k] || 0));
+function busGainValue(name) { return name === 'master' ? (muted ? 0 : vol('master')) : name === 'sfx' ? 1 : vol(name); }
+export function audioBus(name = 'sfx') {
+  const c = ac(); if (!c) return null;
+  if (!buses.master) { buses.master = c.createGain(); buses.master.gain.value = busGainValue('master'); buses.master.connect(c.destination); }
+  if (!buses[name]) { const g = c.createGain(); g.gain.value = busGainValue(name); g.connect(buses.master); buses[name] = g; }
+  return buses[name];
+}
+function setBus(name) { const g = buses[name]; if (!g || !actx) return; const t = actx.currentTime; g.gain.cancelScheduledValues(t); g.gain.setValueAtTime(g.gain.value, t); g.gain.linearRampToValueAtTime(busGainValue(name), t + 0.15); }
+const clipVolume = (key) => (key && key.startsWith('mio') ? 0.75 : 1) * vol('voice') * (muted ? 0 : vol('master'));
+onSettings((k) => {
+  if (k === 'master') setBus('master');
+  if (k === 'music' || k === 'voice' || k === 'ambience') setBus(k);
+  if (k === 'master' || k === 'voice') for (const [key, a] of Object.entries(clips)) if (a instanceof Audio && !a._fading) a.volume = clipVolume(key);
+  if (k === 'voiceOn' && !settings.voiceOn) stopVoice();
+});
+// ---------- pause (menu.js): Web Audio stops where it is, the voice clip holds its place ----------
+let paused = false, pausedClip = null;
+export function pauseAudio(on) {
+  paused = !!on;
+  if (on) { if (actx && actx.state === 'running') actx.suspend(); if (curVoice && !curVoice.paused) { pausedClip = curVoice; curVoice.pause(); } }
+  else { if (actx && actx.state === 'suspended') actx.resume(); if (pausedClip) { const a = pausedClip; pausedClip = null; a.play().catch(() => {}); } }
+}
 // One dialogue voice at a time (Jørgen: no overlapping voices when he clicks on). A new clip, or advancing the line,
 // fades the current one out over 80 ms and the next starts only after that. window.__voiceLog counts plays and the
 // most clips ever sounding at once (the fast test checks it stays 1).
@@ -34,7 +63,7 @@ export function stopVoice(ms = 80) {
 // Returns a promise that resolves when the clip has finished (or at once if there is no sound), so a caller can
 // let a speaker finish: Eric's words must never be cut off by the next line.
 export function voice(key, opts = {}) {
-  if (muted || !key) return Promise.resolve();
+  if (muted || !key || !settings.voiceOn) return Promise.resolve();
   const wait = stopVoice(80);
   const gen = voiceGen;
   return new Promise((res) => {
@@ -64,12 +93,19 @@ function playVoice(key, { rate = 1, muffle = false } = {}, gen = voiceGen, done 
       const a = new Audio(new URL(`../audio/${key}.mp3`, import.meta.url).href); a.crossOrigin = 'anonymous';
       const src = c.createMediaElementSource(a), f = c.createBiquadFilter(), f2 = c.createBiquadFilter(), wet = c.createGain(), dry = c.createGain();
       f.type = 'lowpass'; f.frequency.value = 380; f.Q.value = 0.5; f2.type = 'lowpass'; f2.frequency.value = 380; f2.Q.value = 0.5;
-      src.connect(f); f.connect(f2); f2.connect(wet); wet.connect(c.destination);
-      src.connect(dry); dry.connect(c.destination);
+      const vb = audioBus('voice');
+      src.connect(f); f.connect(f2); f2.connect(wet); wet.connect(vb);
+      src.connect(dry); dry.connect(vb);
       const W = 0.55, X = 0.04;
       wet.gain.value = W; dry.gain.value = 0;
       // entries are [t0, t1, wordId] (clear only once he knows that word) or [t0, t1, 'clear'] (always clear)
-      const spans = ((voiceSpans && voiceSpans[key]) || []).filter(([, , id]) => id === 'clear' || known.has(id) || seen.has(id));
+      // clear spans, merged where they touch or overlap: two words back to back (すみません、すみません) used to
+      // schedule clashing ramps, and the second word stayed muffled
+      const spans = [];
+      for (const [s, e] of ((voiceSpans && voiceSpans[key]) || []).filter(([, , id]) => id === 'clear' || known.has(id) || seen.has(id)).map(([s, e]) => [s, e]).sort((a, b) => a[0] - b[0])) {
+        const last = spans[spans.length - 1];
+        if (last && s <= last[1] + 2 * X + 0.02) last[1] = Math.max(last[1], e); else spans.push([s, e]);
+      }
       a.addEventListener('playing', () => {
         const t0 = c.currentTime - a.currentTime;
         for (const [s, e] of spans) {
@@ -80,15 +116,15 @@ function playVoice(key, { rate = 1, muffle = false } = {}, gen = voiceGen, done 
         }
       }, { once: true });
       if (clips._muffled) clips._muffled.pause(); clips._muffled = a;
-      for (const ev of ['ended', 'pause', 'error']) a.addEventListener(ev, end, { once: true });
+      for (const ev of ['ended', 'pause', 'error']) a.addEventListener(ev, function onEv() { if (paused && pausedClip === a) { a.addEventListener(ev, onEv, { once: true }); return; } end(); }, { once: true });
       a.play().then(() => { began = true; started(a, gen); }).catch(end);
     } catch { /* no audio */ }
     return;
   }
   try {
     const a = clips[key] || (clips[key] = new Audio(new URL(`../audio/${key}.mp3`, import.meta.url).href));
-    a._fading = false; a.pause(); a.currentTime = 0; a.playbackRate = rate; a.volume = key.startsWith('mio') ? 0.75 : 1;
-    for (const ev of ['ended', 'pause', 'error']) a.addEventListener(ev, end, { once: true });
+    a._fading = false; a.pause(); a.currentTime = 0; a.playbackRate = rate; a.volume = clipVolume(key);
+    for (const ev of ['ended', 'pause', 'error']) a.addEventListener(ev, function onEv() { if (paused && pausedClip === a) { a.addEventListener(ev, onEv, { once: true }); return; } end(); }, { once: true });
     a.play().then(() => { began = true; started(a, gen); }).catch(end);
   } catch { /* no audio */ }
 }
@@ -100,7 +136,7 @@ export function stopSfx(kind, ms = 40) {
 }
 export function sfx(kind) {
   const c = ac(); if (!c || muted) return;
-  const t = c.currentTime, g = c.createGain(); g.connect(c.destination); liveSfx[kind] = g;
+  const t = c.currentTime, g = c.createGain(); g.connect(audioBus('sfx')); liveSfx[kind] = g;
   const tone = (f, t0, d, v = 0.12, type = 'sine') => { const o = c.createOscillator(); o.type = type; o.frequency.value = f; const gg = c.createGain(); gg.gain.setValueAtTime(0, t + t0); gg.gain.linearRampToValueAtTime(v, t + t0 + 0.01); gg.gain.exponentialRampToValueAtTime(0.0001, t + t0 + d); o.connect(gg); gg.connect(g); o.start(t + t0); o.stop(t + t0 + d + 0.05); };
   if (kind === 'chime') { tone(784, 0, 0.9, 0.09); tone(659, 0.35, 1.1, 0.09); tone(523, 0.7, 1.4, 0.08); }
   else if (kind === 'ok') { tone(1320, 0, 0.12, 0.08, 'triangle'); tone(1760, 0.1, 0.18, 0.07, 'triangle'); }
@@ -177,7 +213,7 @@ async function musicBuf(name) {
 export async function playMusic(name) {
   const c = ac(); if (!c || name === music.name) return;
   music.name = name;
-  if (!music.bus) { music.bus = c.createGain(); music.duck = c.createGain(); music.bus.gain.value = muted ? 0 : MUSIC_VOL; music.bus.connect(music.duck); music.duck.connect(c.destination); }
+  if (!music.bus) { music.bus = c.createGain(); music.duck = c.createGain(); music.bus.gain.value = MUSIC_VOL; music.bus.connect(music.duck); music.duck.connect(audioBus('music')); }
   const t = c.currentTime;
   if (music.cur) { const old = music.cur; old.stopped = true; clearTimeout(old.timer); old.g.gain.cancelScheduledValues(t); old.g.gain.setValueAtTime(old.g.gain.value, t); old.g.gain.linearRampToValueAtTime(0, t + 2.5); for (const s of old.srcs) s.stop(t + 2.6); music.cur = null; }
   if (!name) return;
@@ -216,7 +252,8 @@ function duckWhile(a) {
 }
 export function setMuted(m) {
   muted = m; if (m) for (const a of Object.values(clips)) a.pause();
-  if (music.bus && actx) { const t = actx.currentTime; music.bus.gain.cancelScheduledValues(t); music.bus.gain.setValueAtTime(music.bus.gain.value, t); music.bus.gain.linearRampToValueAtTime(m ? 0 : MUSIC_VOL, t + 0.3); }
+  setBus('master');
+  const b = document.getElementById('muteBtn'); if (b) b.classList.toggle('off', m);
 }
 export function isMuted() { return muted; }
 export function unlockAudio() { ac(); }
@@ -235,7 +272,7 @@ export const PORTRAITS = { mio: ['neutral', 'smile', 'deadpan', 'surprised', 'em
 // Each cut-out's face box (imgutils detect_faces on the neutral image, image pixels [x0, y0, x1, y1]) and image size.
 // All expressions of a person share the framing. Every portrait is placed from this: the same face height on screen,
 // the chin at the same height, the body cut at the waist.
-const FACE = {
+export const FACE = {
   aoi: { W: 630, H: 810, f: [222, 196, 413, 389] }, eric: { W: 597, H: 768, f: [218, 211, 390, 402] },
   guard: { W: 597, H: 768, f: [250, 162, 374, 300] }, kenji: { W: 597, H: 768, f: [229, 169, 371, 330] },
   kuro: { W: 630, H: 809, f: [254, 325, 452, 525] }, kuroda: { W: 597, H: 768, f: [240, 154, 364, 313] },
@@ -316,7 +353,8 @@ setTimeout(watchTalk, 0);
 // ---------- overheard Japanese ----------
 // Eric can't follow it: every character he doesn't know becomes a softened, shifting stand-in glyph, and
 // the words he does know (his phrases and commands, plus the line's `clear` list) stay sharp and glossed.
-const POOL = 'あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやゆよらりるれろわをんがぎぐげござじずぜぞだでどばびぶべぼアイウエオカキクケコサシスセソタチツテトナニヌネノ会社部長話時間問題今日明後来行見出入上下中大小月火水木金土';
+// kana only: two stand-in glyphs side by side must never spell a real word (no kanji)
+const POOL = 'あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやゆよらりるれろわをんがぎぐげござじずぜぞだでどばびぶべぼぱぴぷぺぽアイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモラリルレロワン';
 const INTERJ = ['えっと', 'あのう', 'あの', 'ああ', 'あっ', 'えっ', 'ええ', 'うん', 'おっ', 'うわ', 'わあ', 'まあ', 'ほら', 'はい', 'あー', 'えー', 'あ', 'え', 'お', 'ん'];
 function heardHTML(text, clear = []) {
   // {id} words written into an overheard line are what the listener catches: shown sharp and glossed
@@ -334,7 +372,7 @@ function heardHTML(text, clear = []) {
     // interjections and sounds (あっ, えっ, うん...) are never hidden: only real words he doesn't know are
     if (i === 0 || punct.test(text[i - 1])) {
       const it = INTERJ.find((w) => text.startsWith(w, i) && (i + w.length === text.length || punct.test(text[i + w.length])));
-      if (it) { out += `<span class="plain">${esc(it)}</span>`; i += it.length; continue; }
+      if (it) { out += `<span class="plain">${esc(it)}</span>${INTERJ_GLOSS[it] ? ` <span class="gl">(${esc(INTERJ_GLOSS[it])})</span>` : ''}`; i += it.length; continue; }
     }
     const k = keep.find((w) => text.startsWith(w.ja, i));
     if (k) { out += `<span class="${k.known ? 'jp clear' : 'plain'}">${esc(k.ja)}</span>${k.gl ? ` <span class="gl">(${esc(k.gl)})</span>` : ''}`; i += k.ja.length; continue; }
@@ -357,6 +395,43 @@ function scramble(line) {
   }, 140);
 }
 
+// ---------- text reveal (settings.textSpeed) ----------
+// The line writes itself out a few characters at a time. Every character is a span that is already laid out
+// (only its opacity changes), so the line never reflows as it appears. A tap shows the rest at once.
+function reveal(line, cps) {
+  const chars = [];
+  const walk = (n) => {
+    for (const c of [...n.childNodes]) {
+      if (c.nodeType === 3) {
+        const f = document.createDocumentFragment();
+        for (const ch of c.textContent) { if (/\s/.test(ch)) { f.appendChild(document.createTextNode(ch)); continue; } const sp = document.createElement('span'); sp.className = 'rv'; sp.textContent = ch; f.appendChild(sp); chars.push(sp); }
+        c.replaceWith(f);
+      } else if (c.nodeType === 1 && c.tagName !== 'RT' && c.tagName !== 'svg') walk(c);
+    }
+  };
+  walk(line);
+  const r = { done: !chars.length, onDone: null };
+  if (r.done) return r;
+  line.classList.add('revealing');
+  let i = 0, last = performance.now(), raf = 0;
+  const finish = () => { cancelAnimationFrame(raf); for (; i < chars.length; i++) chars[i].classList.add('on'); line.classList.remove('revealing'); r.done = true; r.onDone && r.onDone(); };
+  const tick = (now) => {
+    if (!line.isConnected) return;
+    if (paused) { last = now; raf = requestAnimationFrame(tick); return; }
+    const n = Math.floor(((now - last) / 1000) * cps);
+    if (n > 0) { last += (n / cps) * 1000; for (let k = 0; k < n && i < chars.length; k++, i++) chars[i].classList.add('on'); }
+    if (i >= chars.length) finish(); else raf = requestAnimationFrame(tick);
+  };
+  raf = requestAnimationFrame(tick);
+  // hidden tabs stall rAF: make sure a line is never stuck half-written
+  setTimeout(() => { if (!r.done && line.isConnected) finish(); }, (chars.length / cps) * 1000 + 1500);
+  r.finish = finish;
+  return r;
+}
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+export function keyLabel(code) { return /^Key[A-Z]$/.test(code) ? code.slice(3) : /^Digit\d$/.test(code) ? code.slice(5) : code.replace(/^(Arrow)/, ''); }
+async function whileUnpaused(ms) { await sleep(ms); while (paused) await sleep(200); }
+
 // ---------- layout ----------
 export const ui = {
   root: null,
@@ -366,7 +441,7 @@ export const ui = {
     r.innerHTML = `
       <div id="marks"></div>
       <div id="top">
-        <div id="goal" hidden><span class="k">Goal</span><span class="t"></span></div>
+        <button id="goal" type="button" hidden aria-label="Current goal"><span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 21V4"/><path d="M6 4.5h11l-2.5 4 2.5 4H6"/></svg></span><span class="t"></span><span class="hk" hidden aria-hidden="true">?</span></button>
         <div class="tr" id="hud">
           <div id="clock" class="hchip" hidden><span class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg></span><span class="d"></span><span class="p"></span></div>
           <button id="peopleBtn" class="hchip" type="button" hidden aria-label="People you've met"><span class="ic"><svg viewBox="0 0 24 24"><circle cx="9" cy="8.5" r="3.2"/><path d="M3.5 19c.6-3.3 2.8-5 5.5-5s4.9 1.7 5.5 5"/><circle cx="16.5" cy="9.5" r="2.6"/><path d="M15.5 14.2c2.4.1 4.3 1.6 4.9 4.8"/></svg></span><span class="lbl">People</span><span class="n">0</span></button>
@@ -390,11 +465,11 @@ export const ui = {
       <div id="peoplePanel" class="panel" hidden><div class="card"><div class="head">People</div><ul></ul><button type="button" class="close">Close</button></div></div>
       <div id="bagPanel" class="panel" hidden><div class="card"><div class="head">Bag</div><p class="yen"></p><ul></ul><button type="button" class="close">Close</button></div></div>
       <button id="giveBtn" type="button" hidden><span class="t">Give</span><span class="to"></span></button>
-      <button id="sayBtn" type="button" hidden aria-label="Say a word"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5h14a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2h-7l-4 3.5V16H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z"/></svg><span class="t">Say</span></button>
+      <button id="sayBtn" type="button" hidden aria-label="Say a word"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5h14a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2h-7l-4 3.5V16H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z"/></svg><span class="t">Say</span><span class="key" aria-hidden="true">Q</span></button>
       <div id="sayTip" hidden><b>Say</b> speaks a word you know to whoever or whatever is nearest. Try it when you're stuck.<button type="button">Got it</button></div>
       <div id="sayMenu" hidden><div class="head"></div><div class="list"></div><button type="button" class="cancel">Never mind</button></div>
-      <div id="hint" hidden></div>
-      <div id="toast" hidden></div>
+      <div id="hint" hidden role="status"><span class="hx"></span><button type="button" class="hclose" aria-label="Hide hint"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
+      <div id="toast" hidden role="status"></div>
       <div id="caption" hidden><span class="nm"></span><span class="tx"></span></div>
       <div id="liftInd" hidden><span class="arrow">▲</span><span class="fl">1</span></div>
       <img id="xfade" alt="" hidden>
@@ -410,6 +485,11 @@ export const ui = {
     for (const id of ['#peoplePanel', '#bagPanel']) $(id + ' .close').onclick = () => { $(id).hidden = true; };
     $('#sayMenu .cancel').onclick = () => { $('#sayMenu').hidden = true; this._sayRes && this._sayRes(null); };
     $('#muteBtn').onclick = (e) => { e.stopPropagation(); setMuted(!isMuted()); $('#muteBtn').classList.toggle('off', isMuted()); };
+    // the hint stays until it's closed or the goal moves on; the goal chip brings it back
+    $('#hint .hclose').onclick = (e) => { e.stopPropagation(); this.hideHint(); };
+    $('#goal').onclick = (e) => { e.stopPropagation(); if (this._hintHTML) this.hint(this._hintHTML); else { const g = $('#goal'); g.classList.remove('pop'); void g.offsetWidth; g.classList.add('pop'); } };
+    this.setSayKey(settings.keySay);
+    onSettings((k, v) => { if (k === 'keySay') this.setSayKey(v); });
     // advancing the talk panel: tap anywhere on it, or Space/Enter
     $('#talk').addEventListener('pointerdown', (e) => { if (e.target.closest('.chip')) return; e.stopPropagation(); this._advance && this._advance(); });
     window.addEventListener('keydown', (e) => {
@@ -419,15 +499,20 @@ export const ui = {
       if (e.code === 'Escape' && !$('#sayMenu').hidden) $('#sayMenu .cancel').click();
     });
   },
-  // Jørgen: no goal or story text in panels. The goal is kept for the markers (teal) but never shown as text.
+  // The current goal, in the story's words, as a HUD chip that stays until the story changes it (Jørgen, playtest:
+  // the goal must be unmistakable). A new goal clears the old hint. Tapping the chip shows the hint again.
   goal(text) {
     const g = $('#goal');
-    g.hidden = true; this.goalText = text || ''; return;
+    const was = this.goalText || '';
+    this.goalText = text || '';
+    if (text !== was) { this._hintHTML = ''; this.hideHint(); }
     if (!text) { g.hidden = true; return; }
     g.hidden = false;
     g.querySelector('.t').innerHTML = lineHTML(text, { count: false });
-    g.classList.remove('pop'); void g.offsetWidth; g.classList.add('pop');
+    g.setAttribute('aria-label', 'Goal: ' + g.querySelector('.t').textContent);
+    if (text !== was) { g.classList.remove('pop'); void g.offsetWidth; g.classList.add('pop'); }
   },
+  setSayKey(code) { const k = $('#sayBtn .key'); if (k) k.textContent = keyLabel(code || 'KeyQ'); },
   refreshWords() {
     const b = $('#cmdsBtn');
     b.hidden = known.size === 0;
@@ -469,7 +554,6 @@ export const ui = {
     const off = () => { tip.hidden = true; b.classList.remove('pulse'); this.sayIntro = false; };
     tip.querySelector('button').onclick = (e) => { e.stopPropagation(); off(); };
     b.addEventListener('click', off, { once: true });
-    setTimeout(off, 14000);
   },
   sayReady(on) { $('#sayBtn').classList.toggle('ready', !!on); },
   setSayTarget() {},
@@ -481,13 +565,29 @@ export const ui = {
     x = Math.max(mx + 8, Math.min(W - bw + mx - 8, x)); y = Math.max(my + 64, Math.min(H - 8, y));
     b.style.transform = `translate(${Math.round(x)}px, ${Math.round(y)}px)`;
   },
-  hint(html, ms = 0) {
-    const h = $('#hint'); h.innerHTML = html; h.hidden = !html;
-    clearTimeout(this._ht); if (ms) this._ht = setTimeout(() => { h.hidden = true; }, ms);
+  // No text leaves on a timer (Jørgen: "completely inaccessible"). A hint stays until the player closes it or the
+  // goal moves on (the ms argument is ignored); the goal chip shows it again.
+  hint(html) {
+    const h = $('#hint');
+    if (!html) { this.hideHint(); return; }
+    this._hintHTML = html;
+    h.querySelector('.hx').innerHTML = html; h.hidden = false;
+    h.classList.remove('in'); void h.offsetWidth; h.classList.add('in');
+    $('#goal .hk').hidden = true;
   },
-  toast(html, ms = 2200) {
+  hideHint() { const h = $('#hint'); if (h) h.hidden = true; const k = $('#goal .hk'); if (k) k.hidden = !this._hintHTML; },
+  // A notice (a new word, something picked up) stays until the player's next action after it has been up a moment:
+  // a tap, a click or a key anywhere. Nothing is swallowed; the action does what it would anyway.
+  toast(html) {
     const t = $('#toast'); t.innerHTML = html; t.hidden = false; t.classList.remove('in'); void t.offsetWidth; t.classList.add('in');
-    clearTimeout(this._tt); this._tt = setTimeout(() => { t.hidden = true; }, ms);
+    const id = (this._toastId = (this._toastId || 0) + 1);
+    const arm = () => {
+      const off = (e) => { if (e.type === 'keydown' && /^(Shift|Control|Alt|Meta)/.test(e.key)) return; removeEventListener('pointerdown', off, true); removeEventListener('keydown', off, true); if (this._toastId === id) t.hidden = true; };
+      addEventListener('pointerdown', off, true); addEventListener('keydown', off, true);
+    };
+    if (this.auto) { t.hidden = true; return; }
+    // armed after a beat, so the tap that made it appear doesn't also clear it
+    new Promise((r) => setTimeout(r, 1200)).then(() => { if (this._toastId === id && !t.hidden) arm(); });
   },
   board(text, { voiceKey } = {}) {
     const b = $('#board');
@@ -506,17 +606,34 @@ export const ui = {
       t.hidden = false; t.classList.toggle('narr', !speaker); t.classList.toggle('phone', !!(speaker && speaker.phone));
       const who = t.querySelector('.who');
       who.innerHTML = speaker ? `<span class="nm" style="--c:${speaker.color || '#8fa3c0'}">${speaker.name}</span>${speaker.role ? `<span class="rl">${speaker.role}</span>` : ''}` : '';
-      t.querySelector('.line').innerHTML = overheard ? heardHTML(text, clear) : lineHTML(text);
+      const lineEl = t.querySelector('.line');
+      lineEl.innerHTML = overheard ? heardHTML(text, clear) : lineHTML(text);
       t.querySelector('.chips').innerHTML = '';
-      t.querySelector('.more').hidden = false;
+      const more = t.querySelector('.more');
+      more.hidden = false;
       t.classList.remove('in'); void t.offsetWidth; t.classList.add('in');
       this.refreshWords();
-      if (overheard) scramble(t.querySelector('.line'));
-      if (voiceKey) voice(voiceKey, { muffle: !!overheard });
+      if (overheard) scramble(lineEl);
+      const spoken = voiceKey ? voice(voiceKey, { muffle: !!overheard }) : null;
       const started = performance.now();
       if (this.auto) { setTimeout(() => { this._advance = null; stopVoice(); res(); }, 15); return; }
-      this._advance = () => { if (performance.now() - started < 250) return; this._advance = null; stopVoice(); sfx('tap'); res(); };
-      if (auto) setTimeout(() => { if (this._advance) { this._advance = null; res(); } }, auto);
+      const cps = CPS[settings.textSpeed] || 0;
+      const rv = !overheard && cps ? reveal(lineEl, cps) : { done: true };
+      if (!rv.done) { more.hidden = true; rv.onDone = () => { more.hidden = false; }; }
+      const adv = this._advance = () => {
+        if (performance.now() - started < 250) return;
+        if (!rv.done) { rv.finish(); return; }          // first tap finishes the line, the next one moves on
+        this._advance = null; stopVoice(); sfx('tap'); res();
+      };
+      void auto;   // lines never move on by a timer of their own; only the player's auto-advance setting does that
+      if (settings.autoAdvance) {
+        // auto-advance: once the line is written out and the voice has finished (or a reading time has passed)
+        const plain = lineEl.textContent.length;
+        const revealed = new Promise((r) => { if (rv.done) r(); else { const o = rv.onDone; rv.onDone = () => { o && o(); r(); }; } });
+        Promise.all([revealed, spoken && settings.voiceOn && !muted ? spoken.then(() => whileUnpaused(700)) : whileUnpaused(1300 + plain * 45)])
+          .then(() => whileUnpaused(250))
+          .then(() => { if (this._advance === adv && settings.autoAdvance) { this._advance = null; stopVoice(); res(); } });
+      }
     });
   },
   // Show a line with reply chips; resolves with the chip index. chips: [{html}]
