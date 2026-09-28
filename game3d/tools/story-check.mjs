@@ -76,6 +76,7 @@ for (const name of ['train', 'gate', 'office', 'transitions']) {
     if (kind === 'zone' && P && !P.zones.includes(id)) bad(file, `on ${key}: no zone '${id}'`);
     if (kind === 'event' && !EVENTS[name].includes(id)) bad(file, `on ${key}: no event '${id}'`);
   }
+  for (const [id, L] of Object.entries(st.labels || {})) if (Array.isArray(L)) checkCond(file, L[1]);
   for (const [id, c] of Object.entries({ ...(st.show || {}), ...(st.goal || {}) })) { checkCond(file, c); if (P && !P.things.includes(id) && id !== 'mio') bad(file, `show/goal for unknown id ${id}`); }
 }
 console.log(problems ? `${problems} problem(s)` : 'story check: ok');

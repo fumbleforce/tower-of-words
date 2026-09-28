@@ -262,6 +262,7 @@ export async function officePlace(game) {
     m.seated = true;
   }
   async function sitMio() {
+    if (game.player.seated) return;
     if (!flags.chairHome) { await P.hooks.chairRoll({ to: 'my_seat' }); }
     await game.walkTo(dS1.seat[0], dS1.seat[1] + 0.45);
     placeMioSeated();

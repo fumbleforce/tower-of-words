@@ -263,6 +263,7 @@ export class Markers {
       const sx = ((v.x + 1) / 2) * w;
       m.el.style.transform = `translate(${sx}px, ${((1 - v.y) / 2) * h}px)`;
       m.el.classList.toggle('flip', sx > w - 190);   // tag on the left of the pin near the right edge
+      if (m.labelIf) { const want = m.labelCond(m.labelIf.cond) ? m.labelIf.text : m.labelIf.other; if (want !== m.label) { m.label = want; m.el.querySelector('.nm').textContent = want; } }
       m.el.classList.toggle('near', near === m);
       const isGoal = !!(m.goal && m.goal());
       m.el.classList.toggle('goal', isGoal);

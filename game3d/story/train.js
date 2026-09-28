@@ -29,7 +29,7 @@ export default {
 
   show: { mio: '!sat' },
   goal: { mio: '!sat', doors: 'can_exit' },
-  labels: { mio: 'Woman with a laptop', kuroda: 'Sleeping man' },
+  labels: { mio: ['Woman with a laptop', '!mio_named'], kuroda: 'Sleeping man' },
 
   nodes: {
     intro: [
@@ -68,6 +68,7 @@ export default {
       '> She glances at the card on your lanyard, then looks again.',
       { say: 'mio', name: 'Woman with a laptop', text: 'B2. You are the contractor.' },
       'mio: Mio. Same team. Okay, {gaijin}.',
+      { set: 'mio_named' },
       { choice: [
         { text: '“It\'s Eric.”', go: 'its_eric' },
         { text: '“Your mother lives out here?”', go: 'family' },
@@ -170,6 +171,8 @@ export default {
       { set: 'held_doors' },
       '> Mio stays in the doorway a second, turns, and says it to the doors herself.',
       'mio: {matte}.',
+      { do: 'walk', who: 'mio', to: 'door_r' },
+      { do: 'walk', who: 'mio', to: 'platform' },
       '> They start to close on her. She hops out onto the platform and stares at them.',
       { choice: [
         { text: '“Did I do that?”', go: 'did_i' },

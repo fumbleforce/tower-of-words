@@ -18,7 +18,7 @@ export function glide(g, obj, [x, z], speed) {
   return new Promise((res) => {
     let last = performance.now();
     const tick = () => {
-      const now = performance.now(), dt = Math.min(0.05, (now - last) / 1000); last = now;
+      const now = performance.now(), dt = Math.min(0.05, (now - last) / 1000) * (g.timeScale || 1); last = now;
       const p = obj.position, d = Math.hypot(x - p.x, z - p.z);
       if (d < 0.03) { res(); return; }
       const s = Math.min(d, speed * dt); p.x += (x - p.x) / d * s; p.z += (z - p.z) / d * s;

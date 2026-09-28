@@ -2,7 +2,7 @@
 export default {
   speakers: {
     eric: { name: 'Eric', role: 'you' },
-    mio: { name: 'Mio', role: 'IT support' },
+    mio: { name: 'Mio', role: 'programmer' },
     mori: { name: 'Mr. Mori', role: 'IT support' },
     kenji: { name: 'Kenji', role: 'IT support' },
   },
