@@ -202,6 +202,32 @@ export function calmSitTime(model, mixer, action) {
   return best;
 }
 
+// Meshy's Idle clip steps and twists (Jørgen: "turn and twist like crazy"), so it's held on one frame. Pick the
+// calmest: feet close together, head upright over the hips, hips facing forward.
+export function calmIdleTime(model, mixer, action) {
+  const find = (re) => { let h = null; model.traverse((o) => { if (!h && o.isBone && re.test(o.name.replace(/[^a-z]/gi, ''))) h = o; }); return h; };
+  const head = find(/head$/i), hips = find(/hips$/i), lf = find(/leftfoot$/i), rf = find(/rightfoot$/i);
+  const lu = find(/leftupleg$/i), ru = find(/rightupleg$/i), la = find(/leftarm$/i), ra = find(/rightarm$/i);
+  if (!head || !hips || !lf || !rf || !lu || !ru || !la || !ra) return 0;
+  const P = (bone) => { const v = new THREE.Vector3(); bone.getWorldPosition(v); return model.worldToLocal(v); };
+  const turn = (l, r) => { const L = P(l), R = P(r); return Math.abs(Math.atan2(L.z - R.z, L.x - R.x)); };  // 0 when facing +z
+  const d = action.getClip().duration, a = new THREE.Vector3(), b = new THREE.Vector3(), c = new THREE.Vector3(), e = new THREE.Vector3(), fwd = new THREE.Vector3(), q = new THREE.Quaternion();
+  action.reset().play(); action.setEffectiveWeight(1);
+  const H = (() => { action.time = 0; mixer.update(0); model.updateMatrixWorld(true); head.getWorldPosition(a); model.worldToLocal(a); return Math.max(a.y, 1e-3); })();
+  let best = 0, bestS = Infinity;
+  for (let i = 0; i < 40; i++) {
+    const t = (i / 40) * d; action.time = t; mixer.update(0); model.updateMatrixWorld(true);
+    head.getWorldPosition(a); hips.getWorldPosition(b); lf.getWorldPosition(c); rf.getWorldPosition(e);
+    for (const v of [a, b, c, e]) model.worldToLocal(v);
+    const lean = Math.hypot(a.x - b.x, a.z - b.z) / H, feet = Math.hypot(c.x - e.x, c.z - e.z) / H;
+    const yaw = turn(lu, ru) + turn(la, ra);
+    const sc = lean * 2 + feet + yaw * 0.5;
+    if (sc < bestS) { bestS = sc; best = t; }
+  }
+  action.stop();
+  return best;
+}
+
 // Foot fix from neon.html: the walk rolls her feet onto their outer edges; undo it after the mixer poses.
 const DEG = Math.PI / 180;
 function makeFootFix(model, skinned) {

@@ -2,6 +2,7 @@
 // Colours follow the muted palette: navy and charcoal suits, a few warm hair colours to tell people apart.
 import * as THREE from 'three';
 import { chibi, sit, armsLap, armsHold, walkPose, phone, SKINS, HIP, TORSO_H, HEAD } from './train/people.js';
+import { SEAT_Y } from './train/car.js';
 import { hull } from './train/hull.js';
 import { V } from './train/kit.js';
 import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.js';
@@ -11,6 +12,37 @@ const charMat = new THREE.MeshStandardMaterial({ vertexColors: true, roughness: 
 const mesh = (geo) => { const m = new THREE.Mesh(toCreasedNormals(geo.build(), 0.7), charMat); m.castShadow = true; m.receiveShadow = true; return m; };
 
 export { sit, armsLap, armsHold, walkPose, HIP };
+
+// ---------- the 3D cast from the Meshy workflow (tools/characters/, assets/characters/<id>/) ----------
+// Standing heights next to Mio (1.12) and Eric (1.2). While a model waits for Jørgen's approval it only loads with
+// ?cast3d=<id>[,<id>]; approved ids go in CAST3D_ON.
+import { loadMeshy } from './avatar.js';
+export const CAST3D = { mori: 1.2 };
+const CAST3D_ON = [];
+const Q3 = new URLSearchParams(typeof location !== 'undefined' ? location.search : '');
+const want3 = [...CAST3D_ON, ...(Q3.get('cast3d') || '').split(',')].filter((id) => CAST3D[id]);
+const PRE3 = {};
+await Promise.all(want3.map(async (id) => { PRE3[id] = await loadMeshy(id, { height: CAST3D[id] }).catch((e) => { console.warn('3D cast', id, e); return null; }); }));
+// Wrap a loaded Meshy character so the scenes can treat it like a chibi rig: the pose helpers (sit, walkPose, arms...)
+// switch its clips instead, the chibi parts they write to are harmless stand-ins (the head follows the real head bone,
+// for labels and look-at), `seated` picks sit or idle, and it updates itself each frame it's drawn.
+function meshyPerson(m) {
+  const O = () => new THREE.Object3D();
+  m.legs = [O(), O()]; m.knees = [O(), O()]; m.arms = [O(), O()]; m.torso = O(); m.hips = O(); m.hips.position.y = HIP;
+  let hb = null; m.model.traverse((o) => { if (!hb && o.isBone && /^head$/i.test(o.name)) hb = o; });
+  m.head = O(); (hb || m.root).add(m.head); m.headK = O();
+  let last = 0, sk = null; m.model.traverse((o) => { if (!sk && o.isSkinnedMesh) sk = o; });
+  sk.onBeforeRender = () => {
+    const now = performance.now(); if (now - last < 4) return;
+    const dt = last ? Math.min(0.1, (now - last) / 1000) : 0; last = now;
+    if (m.seated && m.state !== 'sit') m.sitHere(); else if (m.seated === false && m.state === 'sit') { m.setState('idle'); m.root.position.y = 0; }
+    m.update(dt);
+  };
+  // seat the hips on the chair under the root (train and office seats: SEAT_Y), keeping x, z and facing
+  m.sitHere = () => { const k = m.root.scale.x; m.sitAt(m.root.position.x, SEAT_Y, m.root.position.z, m.root.rotation.y); };
+  return m;
+}
+const meshy3 = (id) => (PRE3[id] ? meshyPerson(PRE3[id]) : null);
 
 // a peaked guard cap: crown, band and a short brim, sitting over the hair
 function guardCap(r) {
@@ -102,6 +134,7 @@ export const PEOPLE = {
     return r;
   },
   mori: () => {
+    const m3 = meshy3('mori'); if (m3) return m3;
     const r = chibi({ headK: HK, skin: SKINS[1], top: '#2b3040', sleeve: '#2b3040', bottom: '#262b39', shirt: '#e8ebef', tie: '#7a2f3a', hair: '#a2a6ad', glasses: '#2a2c31', hairOpts: { front: 0.075, side: -0.04, seed: 3 }, shoes: '#1d1d1f', sole: '#1d1d1f' });
     return r;
   },

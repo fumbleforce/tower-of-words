@@ -152,8 +152,8 @@ def main():
         prev = None
         for q in qs:
             if prev is not None and np.dot(prev, q) < 0: q = -q
-            vals += [float(x) for x in q]; prev = q
-        tracks.append({'name': n.replace(':', '') + '.quaternion', 'type': 'quaternion', 'times': [float(x - times[0]) for x in times], 'values': vals})
+            vals += [round(float(x), 4) for x in q]; prev = q
+        tracks.append({'name': n.replace(':', '') + '.quaternion', 'type': 'quaternion', 'times': [round(float(x - times[0]), 4) for x in times], 'values': vals})
     clip = {'name': a.name, 'duration': float(times[-1] - times[0]), 'tracks': tracks, 'uuid': a.name, 'blendMode': 2500}
     json.dump(clip, open(a.out, 'w'), separators=(',', ':'))
     print(a.out, len(tracks), 'tracks', len(times), 'frames')
