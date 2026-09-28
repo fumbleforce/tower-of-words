@@ -71,7 +71,8 @@ export function buildEric() {
   return rig;
 }
 
-// The player avatar: same interface as the Meshy loader returns (root, setState, update, sitAt).
+// The player avatar: same interface as the Meshy loader returns (root, setState, update, sitAt), so a Meshy
+// Eric can replace it in main.js boot() with one line: game.player = await loadMeshy('eric', ...).
 export function makeAvatar() {
   const rig = buildEric();
   const root = new THREE.Group();
