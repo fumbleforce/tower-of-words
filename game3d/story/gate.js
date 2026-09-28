@@ -47,7 +47,7 @@ export default {
     'say:matte:kuroda': { if: 'jammed && !gate_through_way', node: 'matte_hamada' },
   },
 
-  goal: { reader_r: '!guard_asked', lift: 'gate_through' },
+  goal: { reader_r: '!guard_asked', gate: 'jammed && !gate_through_way', lift: 'gate_through' },
   labels: { kuro: 'Receptionist', signin: 'Visitor book', guard: 'Guard' },
 
   nodes: {

@@ -197,6 +197,28 @@ export function buildLobby() {
   { const pl = textTexture((g, W, H) => { g.fillStyle = '#e9ebee'; g.fillRect(0, 0, W, H); g.fillStyle = '#2b3140'; g.font = '700 70px ' + JP_FONT; g.textAlign = 'center'; g.textBaseline = 'middle'; g.fillText('階段', W / 2, H / 2 + 4); }, 256, 110); const pp = plane(0.36, 0.16, pl); pp.position.set(3.95, 1.5, -Z + 0.03); root.add(pp); }
   for (const x of [-5.3, -2.9, 2.9, 5.3]) { const l = wallLamp(0.72, 0.14); l.position.set(x, 1.0, -Z + 0.01); root.add(l); }
   const sg = sign('本社', 'HONSHA'); sg.position.set(0, 1.68, -Z + 0.03); root.add(sg);
+  // wall clock over the guard's side of the gate (the guard points at it: registration opens at nine)
+  const clockFace = (hi) => textTexture((g, W, H) => {
+    const c = W / 2, r = W / 2 - 6;
+    g.fillStyle = '#f4f5f7'; g.beginPath(); g.arc(c, c, r, 0, Math.PI * 2); g.fill();
+    g.lineWidth = 10; g.strokeStyle = '#2b3140'; g.stroke();
+    if (hi) { g.fillStyle = 'rgba(111, 208, 198, .45)'; g.beginPath(); g.moveTo(c, c); g.arc(c, c, r - 8, Math.PI, Math.PI * 1.5); g.closePath(); g.fill(); }
+    g.fillStyle = '#2b3140'; for (let i = 0; i < 12; i++) { const a = (i / 12) * Math.PI * 2; g.fillRect(c + Math.sin(a) * (r - 22) - 4, c - Math.cos(a) * (r - 22) - 10, 8, 20); }
+    g.font = '700 44px sans-serif'; g.textAlign = 'center'; g.textBaseline = 'middle';
+    for (const [n, a] of [[12, 0], [3, 0.5], [6, 1], [9, 1.5]]) { g.fillStyle = hi && n === 9 ? '#1f8f84' : '#2b3140'; g.fillText(String(n), c + Math.sin(a * Math.PI) * (r - 58), c - Math.cos(a * Math.PI) * (r - 58)); }
+    // quarter to nine
+    const hand = (a, len, w) => { g.lineWidth = w; g.lineCap = 'round'; g.beginPath(); g.moveTo(c, c); g.lineTo(c + Math.sin(a) * len, c - Math.cos(a) * len); g.stroke(); };
+    g.strokeStyle = '#2b3140'; hand((8.75 / 12) * Math.PI * 2, r * 0.5, 14); hand(0.75 * Math.PI * 2, r * 0.78, 9);
+    g.fillStyle = '#c0392b'; g.beginPath(); g.arc(c, c, 10, 0, Math.PI * 2); g.fill();
+  }, 256, 256);
+  const clockTex = [clockFace(false), clockFace(true)];
+  const clock = new THREE.Group();
+  const rim = new THREE.Mesh(new THREE.CylinderGeometry(0.25, 0.25, 0.05, 40), new THREE.MeshStandardMaterial({ color: '#3a404b', roughness: 0.5 }));
+  rim.rotation.x = Math.PI / 2; clock.add(rim);
+  const faceM = new THREE.MeshStandardMaterial({ map: clockTex[0], emissive: new THREE.Color('#ffffff'), emissiveMap: clockTex[0], emissiveIntensity: 0.25, roughness: 0.6 });
+  const face = new THREE.Mesh(new THREE.CircleGeometry(0.225, 40), faceM); face.position.z = 0.027; clock.add(face);
+  clock.position.set(2.9, 1.42, -Z + 0.04); root.add(clock);
+  clock.userData.highlight = (on) => { faceM.map = faceM.emissiveMap = clockTex[on ? 1 : 0]; faceM.emissiveIntensity = on ? 0.6 : 0.25; faceM.needsUpdate = true; };
   // lift call panel
   root.add(rbox(0.1, 0.18, 0.03, '#8d939d', { x: 0, y: 0.6, z: -Z + 0.01, r: 0.01 }));
 
@@ -318,5 +340,6 @@ export function buildLobby() {
     tama.userData.tail.rotation.y = Math.sin(t * 1.3) * 0.3; tama.userData.head.rotation.x = 0.25 + Math.max(0, Math.sin(t * 2.2)) * 0.15;
     if (aoi.seated) idle(aoi, t);
   };
+  world.clock = clock;
   return world;
 }

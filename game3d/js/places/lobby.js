@@ -172,13 +172,13 @@ export async function lobbyPlace(game) {
   }
 
   const P = {
-    scene: w.scene, camera: cam.camera, cam, space: w.root, nav: w.nav, sun: w.sun, charScale: K,
+    scene: w.scene, camera: cam.camera, cam, space: w.root, nav: w.nav, sun: w.sun, charScale: K, clock: w.clock,
     start: [0, Z - 1.3], startFacing: Math.PI, things, people, spots, zones, seats, glide,
     fit(aspect) {
       const pts = [];
       for (const x of [-X - 0.2, X + 0.2]) for (const z of [-Z - 0.2, Z + 0.3]) for (const y of [0, 1.6]) pts.push(new THREE.Vector3(x, y, z));
-      if (aspect >= 1) cam.fit(aspect, [new THREE.Vector3(-5.6, 0, 0), new THREE.Vector3(5.6, 0, 0), new THREE.Vector3(0, 1.95, -Z), new THREE.Vector3(0, 0, Z + 0.1)], new THREE.Vector3(0, 0, 0.05), { follow: true, clamp: [-0.9, 0.9, 0.05, 0.05], limY: 0.97 });
-      else cam.fit(aspect, [new THREE.Vector3(-2.4, 0, 0), new THREE.Vector3(2.4, 0, 0), new THREE.Vector3(0, 0, -2.7), new THREE.Vector3(0, 1.4, 2.5)], new THREE.Vector3(0, 0, 0), { follow: true, clamp: [-X + 2.4, X - 2.4, -Z + 2.0, Z - 2.9], lead: -3.0 });
+      if (aspect >= 1) cam.fit(aspect, [new THREE.Vector3(-5.6, 0, 0), new THREE.Vector3(5.6, 0, 0), new THREE.Vector3(0, 2.25, -Z), new THREE.Vector3(0, 0, Z + 0.1)], new THREE.Vector3(0, 0, 0.05), { follow: true, clamp: [-0.9, 0.9, -0.7, 0.05], limY: 0.97 }); // headroom above the lifts for their markers; pans up when he walks north
+      else cam.fit(aspect, [new THREE.Vector3(-2.4, 0, 0), new THREE.Vector3(2.4, 0, 0), new THREE.Vector3(0, 0, -2.7), new THREE.Vector3(0, 1.4, 2.5)], new THREE.Vector3(0, 0, 0), { follow: true, clamp: [-X + 2.4, X - 2.4, -Z + 1.75, Z - 2.9], lead: -3.0 });
     },
     pick(rc) { const p = new THREE.Vector3(); return rc.ray.intersectPlane(floor, p) ? p : null; },
     walkPerson(id, [x, z], { speed } = {}) {

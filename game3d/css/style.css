@@ -398,3 +398,56 @@ body.phone #sayTip { left: 50%; right: auto; top: 96px; bottom: auto; }
 #cmdsPanel .close, #sayMenu .cancel, .panel .close { border-radius: var(--chip-r); }
 #sayMenu { border-radius: 14px; border-color: var(--chip-edge); }
 #talk .por.card img { border-radius: 14px; }
+
+/* ---------- Say menu, Words panel and typing prompt: compact rows with a line icon (Jørgen: kana too big, options
+   too tall; no brown) ---------- */
+.wi { width: 22px; height: 22px; flex: none; fill: none; stroke: #9fe3d9; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+.cmd, .chip.cmdchip { gap: 10px; padding: 7px 12px 7px 8px; min-height: 0; border-radius: var(--chip-r); border: 1px solid rgba(111, 208, 198, .35); background: #1f2c31; }
+.cmd:hover, .chip.cmdchip:hover { border-color: var(--accent); background: #243439; }
+.cmd .cw, .chip.cmdchip .cw { display: flex; flex-direction: column; min-width: 0; gap: 1px; }
+.cmd .jp, .chip.cmdchip .jp { font-size: 17px; line-height: 1.25; white-space: nowrap; }
+.cmd .rd, .chip.cmdchip .rd { font-size: 12.5px; margin: 0; color: #a9d8d1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.cmd .k { width: 20px; height: 20px; font-size: 11px; }
+.cmd.phrase { border-color: rgba(143, 166, 214, .4); background: #222837; }
+.cmd.phrase .wi { stroke: #b8c8ee; }
+.cmd.phrase .rd { color: #b9c4dc; }
+#sayMenu .list { gap: 6px; }
+#sayMenu { width: min(320px, calc(100vw - 32px)); padding: 12px; background: rgba(22, 25, 32, .96); }
+#sayMenu .list { max-height: min(60vh, 420px); overflow: auto; }
+#cmdsPanel li { grid-template-columns: 26px auto 1fr; align-items: center; }
+#cmdsPanel li .wi { grid-row: span 2; }
+#cmdsPanel li .jp { font-size: 19px; }
+.tp-jp { display: flex; align-items: center; gap: 10px; }
+.tp-ico { width: 30px; height: 30px; }
+
+/* emote bubbles: 2-3x the old size, a round bubble with a tail, drawn icons */
+.emote { position: absolute; left: 0; top: 0; margin: 0; min-width: 0; padding: 0; background: none; transform-origin: 50% 100%; pointer-events: none; z-index: 4; }
+.emote { display: grid; place-items: center; width: 64px; height: 64px; translate: -50% -100%; border-radius: 22px; background: #f6f7f9; border: 2px solid #2a2f3a; box-shadow: 0 4px 12px rgba(0,0,0,.35); color: #2a2f3a; }
+.emote::after { content: ''; position: absolute; left: 50%; bottom: -9px; width: 14px; height: 14px; translate: -50% 0; rotate: 45deg; background: #f6f7f9; border-right: 2px solid #2a2f3a; border-bottom: 2px solid #2a2f3a; }
+.emote.below::after { bottom: auto; top: -9px; rotate: 225deg; }
+.emote svg { width: 42px; height: 42px; }
+.emote .tx { font: 800 38px/1 var(--font); letter-spacing: .02em; }
+.emote.bang .tx { color: #d9483b; }
+.emote.zzz .tx { font-size: 22px; color: #4f6aa8; }
+.emote.wide { width: 128px; grid-template-columns: 44px auto; gap: 6px; }
+.emote.wide .lbl { font: 800 26px/1 var(--font); color: #2a2f3a; }
+body.phone .emote { width: 54px; height: 54px; border-radius: 18px; }
+body.phone .emote svg { width: 36px; height: 36px; }
+body.phone .emote .tx { font-size: 32px; }
+body.phone .emote.wide { width: 112px; }
+
+/* markers with no room above their target flip below it */
+.mark.below::before { top: 0; }
+.mark.below .pin { top: 22px; }
+.mark.thing.below .pin { top: 22px; }
+.mark.below .stem { top: 6px; }
+.mark.below .stem::after { bottom: auto; top: -3px; }
+.mark.below .tag, .mark.thing.below .tag { top: 24px; }
+.cmd, .chip.cmdchip { box-sizing: border-box; max-width: 100%; overflow: hidden; }
+.cmd .cw, .chip.cmdchip .cw { flex: 1; }
+.cmd .jp, .chip.cmdchip .jp { overflow: hidden; text-overflow: ellipsis; }
+
+#cmdsPanel li.wrow { display: flex; align-items: center; gap: 12px; padding: 8px 2px; }
+#cmdsPanel li.wrow .cw { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+#cmdsPanel li.wrow .jp { font-size: 19px; white-space: nowrap; }
+#cmdsPanel li.wrow .rd { color: var(--ink-dim); font-size: 13px; }

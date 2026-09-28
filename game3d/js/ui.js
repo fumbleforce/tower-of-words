@@ -1,5 +1,5 @@
 // HTML overlay: goal, words, the train's LED board, the talk panel with reply chips, fades and the end card.
-import { lineHTML, WORDS, COMMANDS, PHRASES, known, seen, cmdHTML } from './lang.js';
+import { lineHTML, WORDS, COMMANDS, PHRASES, known, seen, cmdHTML, iconHTML } from './lang.js';
 
 const $ = (s) => document.querySelector(s);
 const el = (tag, cls, html) => { const e = document.createElement(tag); if (cls) e.className = cls; if (html != null) e.innerHTML = html; return e; };
@@ -31,21 +31,31 @@ export function stopVoice(ms = 80) {
   requestAnimationFrame(tick); setTimeout(() => { if (a._fading) { a.pause(); a._fading = false; } }, ms + 30);
   return ms;
 }
+// Returns a promise that resolves when the clip has finished (or at once if there is no sound), so a caller can
+// let a speaker finish: Eric's words must never be cut off by the next line.
 export function voice(key, opts = {}) {
-  if (muted || !key) return;
+  if (muted || !key) return Promise.resolve();
   const wait = stopVoice(80);
   const gen = voiceGen;
-  if (wait) setTimeout(() => { if (gen === voiceGen) playVoice(key, opts, gen); }, wait + 5);
-  else playVoice(key, opts, gen);
+  return new Promise((res) => {
+    const go = () => { if (gen !== voiceGen) return res(); playVoice(key, opts, gen, res); };
+    if (wait) setTimeout(go, wait + 5); else go();
+  });
 }
+// wait for someone to finish speaking, then a short beat
+export async function voiceThenBeat(p, beat = 300) { if (window.__test) return; await p; await new Promise((r) => setTimeout(r, beat)); }
 function started(a, gen) {
   if (gen !== voiceGen) { a.pause(); return; }
   curVoice = a; vlog.plays++;
   const n = sounding(); vlog.maxActive = Math.max(vlog.maxActive, n); if (n > 1) vlog.overlaps++;
   duckWhile(a);
 }
-function playVoice(key, { rate = 1, muffle = false } = {}, gen = voiceGen) {
-  if (muted) return;
+function playVoice(key, { rate = 1, muffle = false } = {}, gen = voiceGen, done = () => {}) {
+  if (muted) return done();
+  // finish: when it ends, is stopped, fails, or after 8 s at most
+  let fin = false, began = false; const end = () => { if (!fin) { fin = true; done(); } }; setTimeout(end, 8000);
+  // if it never starts (no audio device, autoplay blocked), don't hold anyone up
+  setTimeout(() => { if (!began) end(); }, 1200);
   if (muffle) {
     // overheard speech: heavily muffled (low-pass, quieter), except the words he knows, which come through clear.
     // audio/spans.json lists those words' times per clip [[t0, t1], ...]; the two paths crossfade in 40 ms.
@@ -70,14 +80,16 @@ function playVoice(key, { rate = 1, muffle = false } = {}, gen = voiceGen) {
         }
       }, { once: true });
       if (clips._muffled) clips._muffled.pause(); clips._muffled = a;
-      a.play().then(() => started(a, gen)).catch(() => {});
+      for (const ev of ['ended', 'pause', 'error']) a.addEventListener(ev, end, { once: true });
+      a.play().then(() => { began = true; started(a, gen); }).catch(end);
     } catch { /* no audio */ }
     return;
   }
   try {
     const a = clips[key] || (clips[key] = new Audio(new URL(`../audio/${key}.mp3`, import.meta.url).href));
     a._fading = false; a.pause(); a.currentTime = 0; a.playbackRate = rate; a.volume = key.startsWith('mio') ? 0.75 : 1;
-    a.play().then(() => started(a, gen)).catch(() => {});
+    for (const ev of ['ended', 'pause', 'error']) a.addEventListener(ev, end, { once: true });
+    a.play().then(() => { began = true; started(a, gen); }).catch(end);
   } catch { /* no audio */ }
 }
 // sounds that can be cut short (the door chime stops mid-note when a kotodama freezes the doors)
@@ -240,6 +252,7 @@ function showPortraits(t, whoId, face) {
 // Eric can't follow it: every character he doesn't know becomes a softened, shifting stand-in glyph, and
 // the words he does know (his phrases and commands, plus the line's `clear` list) stay sharp and glossed.
 const POOL = 'あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやゆよらりるれろわをんがぎぐげござじずぜぞだでどばびぶべぼアイウエオカキクケコサシスセソタチツテトナニヌネノ会社部長話時間問題今日明後来行見出入上下中大小月火水木金土';
+const INTERJ = ['えっと', 'あのう', 'あの', 'ああ', 'あっ', 'えっ', 'ええ', 'うん', 'おっ', 'うわ', 'わあ', 'まあ', 'ほら', 'はい', 'あー', 'えー', 'あ', 'え', 'お', 'ん'];
 function heardHTML(text, clear = []) {
   // {id} words written into an overheard line are what the listener catches: shown sharp and glossed
   const marked = [];
@@ -251,7 +264,13 @@ function heardHTML(text, clear = []) {
   keep.sort((a, b) => b.ja.length - a.ja.length);
   let out = '', i = 0;
   const esc = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;');
+  const punct = /[\s、。！？!?…「」ー]/;
   while (i < text.length) {
+    // interjections and sounds (あっ, えっ, うん...) are never hidden: only real words he doesn't know are
+    if (i === 0 || punct.test(text[i - 1])) {
+      const it = INTERJ.find((w) => text.startsWith(w, i) && (i + w.length === text.length || punct.test(text[i + w.length])));
+      if (it) { out += `<span class="plain">${esc(it)}</span>`; i += it.length; continue; }
+    }
     const k = keep.find((w) => text.startsWith(w.ja, i));
     if (k) { out += `<span class="${k.known ? 'jp clear' : 'plain'}">${esc(k.ja)}</span>${k.gl ? ` <span class="gl">(${esc(k.gl)})</span>` : ''}`; i += k.ja.length; continue; }
     const ch = text[i];
@@ -348,7 +367,7 @@ export const ui = {
     b.querySelector('.n').textContent = known.size;
   },
   showCmds() {
-    const row = (id) => { const w = WORDS[id]; return `<li><span class="jp">${w.ja}</span><span class="ro">${w.ro}</span><span class="en">${w.en}</span></li>`; };
+    const row = (id) => { const w = WORDS[id]; return `<li class="wrow">${iconHTML(id)}<span class="cw"><span class="jp">${w.ja}</span><span class="rd">${w.ro} · ${w.en}</span></span></li>`; };
     const ph = PHRASES.filter((id) => known.has(id)), cm = COMMANDS.filter((id) => known.has(id));
     $('#cmdsPanel ul').innerHTML = (ph.length ? `<li class="sec">Phrases</li>${ph.map(row).join('')}` : '') + (cm.length ? `<li class="sec">Commands <span>(they make old machines listen)</span></li>${cm.map(row).join('')}` : '');
     $('#cmdsPanel').hidden = false;
@@ -388,7 +407,13 @@ export const ui = {
   sayReady(on) { $('#sayBtn').classList.toggle('ready', !!on); },
   setSayTarget() {},
   // the Say button sits beside whoever or whatever Eric can talk to, only when a word can be used there
-  placeSay(x, y, show) { const b = $('#sayBtn'); if (!show) { b.hidden = true; return; } b.hidden = false; b.style.transform = `translate(${Math.round(x)}px, ${Math.round(y)}px)`; },
+  placeSay(x, y, show) {
+    const b = $('#sayBtn'); if (!show || !$('#sayMenu').hidden || !$('#cmdsPanel').hidden || [...document.querySelectorAll('.panel')].some((p) => !p.hidden)) { b.hidden = true; return; } b.hidden = false;
+    // the chip sits up and to the left of the target (margins in CSS); keep it on screen
+    const W = innerWidth, H = innerHeight, bw = b.offsetWidth || 80, mx = 92, my = 58;
+    x = Math.max(mx + 8, Math.min(W - bw + mx - 8, x)); y = Math.max(my + 64, Math.min(H - 8, y));
+    b.style.transform = `translate(${Math.round(x)}px, ${Math.round(y)}px)`;
+  },
   hint(html, ms = 0) {
     const h = $('#hint'); h.innerHTML = html; h.hidden = !html;
     clearTimeout(this._ht); if (ms) this._ht = setTimeout(() => { h.hidden = true; }, ms);
@@ -497,7 +522,7 @@ export const ui = {
       const t = $('#talk'); t.hidden = false; t.classList.remove('narr', 'heard', 'phone'); t.classList.add('typing');
       t.querySelector('.who').innerHTML = '';
       t.querySelector('.line').innerHTML = (prompt ? `<div class="tp-prompt">${prompt.who ? `<span class="tp-who" style="color:${prompt.who.color || '#8fa3c0'}">${prompt.who.name}</span> ` : ''}${lineHTML(prompt.text)}</div>` : '') +
-        `<div class="tp"><div class="tp-jp jp">${w.ja}</div><div class="tp-ro">${toks.map((k) => (k.sp ? '<span class="sp"> </span>' : `<span class="lt">${k.ch}</span>`)).join('')}</div><div class="tp-en">${w.en}</div>` +
+        `<div class="tp"><div class="tp-jp jp">${iconHTML(id, 'wi tp-ico')}${w.ja}</div><div class="tp-ro">${toks.map((k) => (k.sp ? '<span class="sp"> </span>' : `<span class="lt">${k.ch}</span>`)).join('')}</div><div class="tp-en">${w.en}</div>` +
         `<input class="tp-in" type="text" inputmode="latin" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="Type it in romaji" aria-label="Type ${w.ro}"><div class="tp-hint"></div></div>`;
       t.querySelector('.chips').innerHTML = ''; t.querySelector('.more').hidden = true;
       t.classList.remove('in'); void t.offsetWidth; t.classList.add('in');

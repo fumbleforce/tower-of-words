@@ -253,15 +253,23 @@ export class Markers {
     const w = canvas.clientWidth, h = canvas.clientHeight, v = new THREE.Vector3();
     // only the two nearest non-goal markers show, so a crowded room isn't covered in dots
     const dist = (m) => { const s = m.spot ? m.spot() : null; return s && playerPos ? Math.hypot(playerPos.x - s[0], playerPos.z - s[1]) : 99; };
-    const shown = new Set(this.list.filter((m) => (typeof m.enabled === 'function' ? m.enabled() : m.enabled) && !(m.goal && m.goal())).map((m) => [m, dist(m)]).filter(([, d]) => d < 2.4).sort((a, b) => a[1] - b[1]).slice(0, 2).map(([m]) => m));
+    // nearby markers show (people and things alike, the nearest four within reach); things a word he knows works on
+    // show from a little further, so an object you can talk to never looks dead next to a person
+    const live = (m) => (typeof m.enabled === 'function' ? m.enabled() : m.enabled) && !(m.goal && m.goal());
+    const shown = new Set(this.list.filter(live).map((m) => [m, dist(m)]).filter(([m, d]) => d < (m.wordable && m.wordable() ? 3.4 : 2.6)).sort((a, b) => a[1] - b[1]).slice(0, 4).map(([m]) => m));
     for (const m of this.list) {
       const on = m.enabled && (typeof m.enabled !== 'function' || m.enabled());
       const vis = typeof m.enabled === 'function' ? m.enabled() : m.enabled;
       m.el.style.display = vis ? '' : 'none';
       if (!vis) continue;
       m.anchor(v); v.project(camera);
-      const sx = ((v.x + 1) / 2) * w;
-      m.el.style.transform = `translate(${sx}px, ${((1 - v.y) / 2) * h}px)`;
+      // kept on screen: clamped at the sides and bottom; with no room above (the pin sits 52 px over its target,
+      // under the HUD row at the top) the pin flips below the target instead
+      let sx = ((v.x + 1) / 2) * w, sy = ((1 - v.y) / 2) * h;
+      const top = sx > w - 480 ? 64 : 12;   // the HUD row only covers the top right
+      const below = sy - 56 < top; m.el.classList.toggle('below', below);
+      sx = Math.max(22, Math.min(w - 22, sx)); sy = below ? Math.max(sy, 8) : sy; sy = Math.min(sy, h - (below ? 60 : 6));
+      m.el.style.transform = `translate(${sx}px, ${sy}px)`;
       m.el.classList.toggle('flip', sx > w - 190);   // tag on the left of the pin near the right edge
       if (m.labelIf) { const want = m.labelCond(m.labelIf.cond) ? m.labelIf.text : m.labelIf.other; if (want !== m.label) { m.label = want; m.el.querySelector('.nm').textContent = want; } }
       m.el.classList.toggle('near', near === m);
