@@ -2,6 +2,10 @@
 import * as THREE from 'three';
 import { createRenderer, Walker, Markers, Q, blob } from './engine.js';
 import { makePost } from './post.js';
+import { SmoothWalker } from './move.js';
+import * as ambience from './ambience.js';
+import { setPlace as sfxPlace } from './sfx.js';
+import { learned } from './feel.js';
 import { loadMio } from './mio.js';
 import { makeAvatar, loadEric, setSitLift } from './avatar.js';
 import { glide } from './places/lobby.js';
@@ -168,6 +172,7 @@ async function give() {
 }
 ui.onGive = give;
 game.sim = sim;
+game.learned = (kind) => learned(game, kind);
 
 // ---------- input ----------
 const raycaster = new THREE.Raycaster();
@@ -189,7 +194,8 @@ canvas.addEventListener('pointerdown', (e) => {
   if (best) { use(best); return; }
   raycaster.setFromCamera(ndc(e), game.place.camera);
   const p = game.place.pick(raycaster);
-  if (p) { standUp(); game.walker.goTo(p.x, p.z); showTapRing(p); }
+  if (p) standUp();
+  game.walker.tapRay(raycaster, game.place);
 });
 document.getElementById('marks').addEventListener('click', (e) => {
   const b = e.target.closest('.mark'); if (!b) return;
@@ -204,14 +210,6 @@ window.addEventListener('keydown', (e) => {
 window.addEventListener('keyup', (e) => game.walker && game.walker.keys.delete(e.code));
 window.addEventListener('blur', () => game.walker && game.walker.keys.clear());
 
-let ring = null;
-function showTapRing(p) {
-  if (!ring) {
-    ring = new THREE.Mesh(new THREE.RingGeometry(0.12, 0.17, 32), new THREE.MeshBasicMaterial({ color: '#6fd0c6', transparent: true, opacity: 0.85, depthWrite: false }));
-    ring.rotation.x = -Math.PI / 2; ring.renderOrder = 3;
-  }
-  game.place.space.add(ring); ring.position.set(p.x, (game.place.floorY || 0) + 0.012, p.z); ring.userData.t = 0; ring.visible = true;
-}
 
 // ---------- hooks that work in every place ----------
 const H = game.hooks;
@@ -500,7 +498,8 @@ async function enter(name) {
   place.placeMio?.(game.mioNpc);
   game.player.root.scale.setScalar(place.charScale || 1);
   game.player.seated = false; game.player.scripted = false; game.player.setState('idle'); game.player.root.visible = true;
-  game.walker = new Walker(game.player.root, place.nav, { speed: 1.45 });
+  game.walker = new SmoothWalker(game.player.root, place.nav, { speed: 1.3 });
+  sfxPlace(name);
   game.walker.facing = place.startFacing ?? Math.PI;
   game.player.root.rotation.y = game.walker.facing;
   const [sx, sz] = place.start;
@@ -577,7 +576,7 @@ function step(dt) {
   const mio = game.player;
   let moving = false;
   if (game.walker && !mio.seated && !mio.scripted) moving = game.walker.update(dt, place.camera);
-  if (!mio.seated && !mio.scripted) mio.setState(moving ? 'walk' : 'idle');
+  if (!mio.seated && !mio.scripted) { mio.setState(moving ? 'walk' : 'idle'); mio.setGait?.(game.walker.gait ? game.walker.gait.v : null); } else mio.setGait?.(null);
   mio.update(dt, 1.25);
   if (game.mioNpc.root.visible) game.mioNpc.update(dt, 1.25);
   stepTweens(dt);
@@ -621,8 +620,8 @@ function step(dt) {
   const person = st && place.people[st.id] && /person/.test(st.kind || '');
   ui.setGiveTarget(person ? st.label : '', !!(person && sim.inv.length && !game.busy));
   stepAmbient(game);
+  ambience.update(game, dt);
   game.markers.update(place.camera, canvas, mp, near);
-  if (ring && ring.visible) { ring.userData.t += dt; ring.scale.setScalar(1 + ring.userData.t * 2); ring.material.opacity = Math.max(0, 0.7 - ring.userData.t * 1.6); if (ring.userData.t > 0.5) ring.visible = false; }
 }
 function render() {
   if (!composer || !game.place) return;

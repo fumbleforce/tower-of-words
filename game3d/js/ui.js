@@ -128,65 +128,12 @@ function playVoice(key, { rate = 1, muffle = false } = {}, gen = voiceGen, done 
     a.play().then(() => { began = true; started(a, gen); }).catch(end);
   } catch { /* no audio */ }
 }
-// sounds that can be cut short (the door chime stops mid-note when a kotodama freezes the doors)
-const liveSfx = {};
-export function stopSfx(kind, ms = 40) {
-  const g = liveSfx[kind]; if (!g || !actx) return; delete liveSfx[kind];
-  const t = actx.currentTime; g.gain.cancelScheduledValues(t); g.gain.setValueAtTime(g.gain.value, t); g.gain.linearRampToValueAtTime(0, t + ms / 1000);
-}
-export function sfx(kind) {
-  const c = ac(); if (!c || muted) return;
-  const t = c.currentTime, g = c.createGain(); g.connect(audioBus('sfx')); liveSfx[kind] = g;
-  const tone = (f, t0, d, v = 0.12, type = 'sine') => { const o = c.createOscillator(); o.type = type; o.frequency.value = f; const gg = c.createGain(); gg.gain.setValueAtTime(0, t + t0); gg.gain.linearRampToValueAtTime(v, t + t0 + 0.01); gg.gain.exponentialRampToValueAtTime(0.0001, t + t0 + d); o.connect(gg); gg.connect(g); o.start(t + t0); o.stop(t + t0 + d + 0.05); };
-  if (kind === 'chime') { tone(784, 0, 0.9, 0.09); tone(659, 0.35, 1.1, 0.09); tone(523, 0.7, 1.4, 0.08); }
-  else if (kind === 'ok') { tone(1320, 0, 0.12, 0.08, 'triangle'); tone(1760, 0.1, 0.18, 0.07, 'triangle'); }
-  else if (kind === 'no') { tone(330, 0, 0.16, 0.07, 'triangle'); tone(262, 0.14, 0.26, 0.07, 'triangle'); }
-  else if (kind === 'tap') { tone(900, 0, 0.05, 0.04, 'triangle'); }
-  else if (kind === 'word') { tone(988, 0, 0.14, 0.06, 'triangle'); tone(1318, 0.09, 0.22, 0.06, 'triangle'); }
-  else if (kind === 'door') {
-    // a door sliding: a soft band of noise that sweeps down, then a small bump at the end
-    const n = noise(c, 0.7), f = c.createBiquadFilter(), gg = c.createGain();
-    f.type = 'bandpass'; f.Q.value = 0.8; f.frequency.setValueAtTime(900, t); f.frequency.exponentialRampToValueAtTime(260, t + 0.55);
-    gg.gain.setValueAtTime(0, t); gg.gain.linearRampToValueAtTime(0.05, t + 0.08); gg.gain.linearRampToValueAtTime(0.03, t + 0.45); gg.gain.linearRampToValueAtTime(0, t + 0.62);
-    n.connect(f); f.connect(gg); gg.connect(g); n.start(t);
-    thump(c, g, t + 0.56, 0.06, 70);
-  }
-  else if (kind === 'lift') { tone(1046, 0, 0.6, 0.07); }
-  else if (kind === 'kotodama') {
-    // the word taking hold: a low tone that swells in, a fifth above it, and the lights' hum (50 Hz with a slow wobble)
-    const o = c.createOscillator(), o2 = c.createOscillator(), og = c.createGain();
-    o.type = 'sine'; o.frequency.setValueAtTime(98, t); o.frequency.exponentialRampToValueAtTime(82, t + 2.4);
-    o2.type = 'sine'; o2.frequency.setValueAtTime(147, t); o2.frequency.exponentialRampToValueAtTime(123, t + 2.4);
-    og.gain.setValueAtTime(0, t); og.gain.linearRampToValueAtTime(0.16, t + 0.35); og.gain.setValueAtTime(0.16, t + 1.2); og.gain.exponentialRampToValueAtTime(0.0001, t + 3.0);
-    o.connect(og); o2.connect(og); og.connect(g); o.start(t); o2.start(t); o.stop(t + 3.1); o2.stop(t + 3.1);
-    const h = c.createOscillator(), hf = c.createBiquadFilter(), hg = c.createGain(), lfo = c.createOscillator(), lg = c.createGain();
-    h.type = 'sawtooth'; h.frequency.value = 50; hf.type = 'lowpass'; hf.frequency.value = 260;
-    lfo.frequency.value = 7; lg.gain.value = 0.012; lfo.connect(lg); lg.connect(hg.gain);
-    hg.gain.setValueAtTime(0, t); hg.gain.linearRampToValueAtTime(0.03, t + 0.15); hg.gain.setValueAtTime(0.03, t + 1.6); hg.gain.linearRampToValueAtTime(0, t + 2.2);
-    h.connect(hf); hf.connect(hg); hg.connect(g); h.start(t); lfo.start(t); h.stop(t + 2.3); lfo.stop(t + 2.3);
-  }
-  else if (kind === 'doorslow') {
-    // doors sliding slowly: a long, soft band of noise
-    const n = noise(c, 3.2), f = c.createBiquadFilter(), gg = c.createGain();
-    f.type = 'bandpass'; f.Q.value = 0.7; f.frequency.value = 420;
-    gg.gain.setValueAtTime(0, t); gg.gain.linearRampToValueAtTime(0.025, t + 0.4); gg.gain.setValueAtTime(0.025, t + 2.6); gg.gain.linearRampToValueAtTime(0, t + 3.2);
-    n.connect(f); f.connect(gg); gg.connect(g); n.start(t);
-  }
-  else if (kind === 'clack') {
-    // the carriage going over a rail joint: two dull clunks (low noise + a low body), then a little rumble
-    thump(c, g, t, 0.11, 58); thump(c, g, t + 0.13, 0.08, 52);
-    const n = noise(c, 0.9), f = c.createBiquadFilter(), gg = c.createGain();
-    f.type = 'lowpass'; f.frequency.value = 220; gg.gain.setValueAtTime(0.0, t); gg.gain.linearRampToValueAtTime(0.06, t + 0.05); gg.gain.exponentialRampToValueAtTime(0.0001, t + 0.9);
-    n.connect(f); f.connect(gg); gg.connect(g); n.start(t);
-  }
-  else if (kind === 'beep') { tone(1480, 0, 0.12, 0.06); }
-  else if (kind === 'brake' || kind === 'crowd') {
-    const n = c.createBufferSource(), len = kind === 'brake' ? 1.6 : 2.5, buf = c.createBuffer(1, c.sampleRate * len, c.sampleRate), d = buf.getChannelData(0);
-    for (let i = 0; i < d.length; i++) d[i] = (Math.random() * 2 - 1) * (1 - i / d.length);
-    n.buffer = buf; const f = c.createBiquadFilter(); f.type = kind === 'brake' ? 'highpass' : 'bandpass'; f.frequency.value = kind === 'brake' ? 3200 : 700;
-    const gg = c.createGain(); gg.gain.value = kind === 'brake' ? 0.05 : 0.04; n.connect(f); f.connect(gg); gg.connect(g); n.start(t);
-  }
-}
+// sound effects: feel's levelled sound files (sfx.js), through audioBus('sfx')
+// (loaded after this module: sfx.js imports ui.js for its buses, so a static import here would be a cycle)
+let SFX = null, AMB = null;
+import('./sfx.js').then((m) => { SFX = m; }); import('./ambience.js').then((m) => { AMB = m; });
+export function sfx(kind, o) { return SFX ? SFX.sfx(kind, o) : undefined; }
+export function stopSfx(kind, ms = 40) { return SFX ? SFX.stopSfx(kind, ms) : undefined; }
 function noise(c, len) {
   const n = c.createBufferSource(), buf = c.createBuffer(1, Math.ceil(c.sampleRate * len), c.sampleRate), d = buf.getChannelData(0);
   for (let i = 0; i < d.length; i++) d[i] = Math.random() * 2 - 1;
@@ -240,6 +187,7 @@ export async function playMusic(name) {
 // voices duck the music
 let duckN = 0;
 function duckMusic(on) {
+  AMB?.duck(on);
   const c = actx; if (!c || !music.duck) return;
   duckN = Math.max(0, duckN + (on ? 1 : -1));
   const t = c.currentTime; music.duck.gain.cancelScheduledValues(t); music.duck.gain.setValueAtTime(music.duck.gain.value, t);
