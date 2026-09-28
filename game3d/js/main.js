@@ -179,7 +179,7 @@ window.addEventListener('blur', () => game.walker && game.walker.keys.clear());
 let ring = null;
 function showTapRing(p) {
   if (!ring) {
-    ring = new THREE.Mesh(new THREE.RingGeometry(0.1, 0.14, 24), new THREE.MeshBasicMaterial({ color: '#e8f0ff', transparent: true, opacity: 0.7, depthWrite: false }));
+    ring = new THREE.Mesh(new THREE.RingGeometry(0.12, 0.17, 32), new THREE.MeshBasicMaterial({ color: '#6fd0c6', transparent: true, opacity: 0.85, depthWrite: false }));
     ring.rotation.x = -Math.PI / 2; ring.renderOrder = 3;
   }
   game.place.space.add(ring); ring.position.set(p.x, (game.place.floorY || 0) + 0.012, p.z); ring.userData.t = 0; ring.visible = true;
@@ -281,7 +281,7 @@ async function enter(name) {
   place.space.add(game.mioNpc.root); game.mioNpc.root.visible = false; game.mioNpc.root.scale.setScalar(place.charScale || 1); game.mioNpc.setState('idle');
   place.people.mio = game.mioNpc;
   const mr = game.mioNpc.root;
-  place.things.mio = place.things.mio || { label: 'Mio', kind: 'person', anchor: (v) => { mr.getWorldPosition(v); v.y += 1.55 * (place.charScale || 1); return v; },
+  place.things.mio = place.things.mio || { label: 'Mio', kind: 'person', anchor: (v) => { mr.getWorldPosition(v); v.y += 1.12 * (place.charScale || 1); return v; },
     spot: () => { const r = mr.rotation.y; return [mr.position.x + Math.sin(r) * 0.6, mr.position.z + Math.cos(r) * 0.6]; }, face: () => [mr.position.x, mr.position.z], enabled: () => mr.visible };
   game.mioNpc.seated = false; game.mioNpc.root.position.y = 0;
   if (place.spots.mio_start) game.mioNpc.root.position.set(place.spots.mio_start[0], 0, place.spots.mio_start[1]);

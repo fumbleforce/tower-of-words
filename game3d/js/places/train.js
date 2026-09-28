@@ -282,20 +282,20 @@ export async function trainPlace(game) {
     seat_mio: { x: 2.1, z: -(LZ - 0.24), side: -1, top: SEAT_Y, ry: 0 },
   };
   const spots = { aisle: [0.4, 0.1], door_l: [-DOOR_X, LZ - 0.45], door_r: [DOOR_X, LZ - 0.45], by_aoi: [-1.7, -0.35], by_kuroda: [-2.55, -0.35], platform: [DOOR_X, LZ + 1.0], walkway: [8.4, LZ + 1.9] };
-  const rigAnchor = (rig, h = 1.5) => (v) => { rig.root.getWorldPosition(v); v.y += h; return v; };
+  const rigAnchor = (rig, h = 1.12) => (v) => { rig.root.getWorldPosition(v); v.y += h; return v; };
   const carPt = (x, y, z) => (v) => { v.set(x, y, z); car.root.localToWorld(v); return v; };
   const at = (x, z, fx, fz) => ({ spot: () => [x, z], face: () => [fx, fz] });
   const things = {
-    aoi: { label: 'Aoi', kind: 'person', anchor: rigAnchor(aoi, 1.3), ...at(-1.7, -0.3, -1.7, -1.0), enabled: () => aoi.root.visible },
-    kuroda: { label: 'Sleeping man', kind: 'person', anchor: rigAnchor(kuroda, 1.3), ...at(-2.55, -0.3, -2.55, -1.0), enabled: () => kuroda.root.visible && !kuroda._walk },
-    reader: { label: 'Man with a book', kind: 'person small', anchor: rigAnchor(reader, 1.3), ...at(1.05, -0.3, 1.05, -1.0) },
-    music: { label: 'Girl with headphones', kind: 'person small', anchor: rigAnchor(music, 1.3), ...at(0.75, 0.35, 0.75, 1.0) },
-    rei: { label: 'Woman with a laptop', kind: 'person', anchor: rigAnchor(rei, 1.3), ...at(2.1, -0.3, 2.1, -1.0), enabled: () => rei.root.visible },
+    aoi: { label: 'Aoi', kind: 'person', anchor: rigAnchor(aoi), ...at(-1.7, -0.3, -1.7, -1.0), enabled: () => aoi.root.visible },
+    kuroda: { label: 'Sleeping man', kind: 'person', anchor: rigAnchor(kuroda), ...at(-2.55, -0.3, -2.55, -1.0), enabled: () => kuroda.root.visible && !kuroda._walk },
+    reader: { label: 'Man with a book', kind: 'person small', anchor: rigAnchor(reader), ...at(1.05, -0.3, 1.05, -1.0) },
+    music: { label: 'Girl with headphones', kind: 'person small', anchor: rigAnchor(music), ...at(0.75, 0.35, 0.75, 1.0) },
+    rei: { label: 'Woman with a laptop', kind: 'person', anchor: rigAnchor(rei), ...at(2.1, -0.3, 2.1, -1.0), enabled: () => rei.root.visible },
     cup: { label: 'Coffee', kind: 'thing small', anchor: carPt(1.6, 0.6, -(LZ - 0.28)), ...at(1.6, -0.3, 1.6, -1.0), noMarker: true },
     stander: { label: 'Man by the door', kind: 'person small', anchor: rigAnchor(stander), ...at(3.1, -0.45, 3.58, -0.78) },
-    bun: { label: 'Woman with a bun', kind: 'person small', anchor: rigAnchor(bun, 1.3), ...at(-2.5, 0.35, -2.5, 1.0) },
-    youth: { label: 'Young man', kind: 'person small', anchor: rigAnchor(youth, 1.3), ...at(2.55, 0.35, 2.55, 1.0) },
-    tama: { label: 'Cat', kind: 'person small', anchor: carPt(-0.85, 0.75, -(LZ - 0.24)), ...at(-0.85, -0.3, -0.85, -1.0) },
+    bun: { label: 'Woman with a bun', kind: 'person small', anchor: rigAnchor(bun), ...at(-2.5, 0.35, -2.5, 1.0) },
+    youth: { label: 'Young man', kind: 'person small', anchor: rigAnchor(youth), ...at(2.55, 0.35, 2.55, 1.0) },
+    tama: { label: 'Cat', verb: 'Pet', kind: 'person small', anchor: carPt(-0.85, 0.5, -(LZ - 0.24)), ...at(-0.85, -0.3, -0.85, -1.0) },
     doors: { label: 'Doors', kind: 'thing', anchor: carPt(DOOR_X, 1.1, LZ), ...at(DOOR_X, LZ - 0.22, DOOR_X, LZ), enabled: () => st.door > 0.3 },
     door_l: { label: 'Doors', kind: 'thing', anchor: carPt(-DOOR_X, 1.1, LZ), ...at(-DOOR_X, LZ - 0.45, -DOOR_X, LZ), noMarker: true },
     door_r: { label: 'Doors', kind: 'thing', anchor: carPt(DOOR_X, 1.1, LZ), ...at(DOOR_X, LZ - 0.45, DOOR_X, LZ), noMarker: true },
