@@ -21,6 +21,7 @@ Make day 1 (train → gate → B2 office) the best it can be at production quali
   - Don't touch island/private.
   - Nothing destructive in git: no force-pushes and no history rewrites.
 - **Stop** when everything in progress is done and passes, or when the same problem fails three rounds running. Then write up what's stuck instead of trying something wild.
+- **Usage limit (Jørgen, 2026-09-29):** check usage every 30 minutes and stop once weekly usage reaches 50% or more; wind work down before that (no new agents past ~45%, finish and push what's in flight). The agent can't read the weekly percent directly: tools/usage.py estimates it from local session logs, calibrated against a /usage reading Jørgen gives (tools/usage.json).
 - **Morning report:** one page, with what changed (with screenshots), the live build id, what's waiting in Review, and what he should play first. It goes in notes/MORNING-REPORT.md and is sent to him.
 
 ## Plan
@@ -36,3 +37,4 @@ Make day 1 (train → gate → B2 office) the best it can be at production quali
 ## Log
 
 - 2026-09-29 00:xx: goal set; 11 agents running; creator and voice input paused to get under 6 as the others finish.
+- 2026-09-29 00:19: 6 working (builder, shell, feel, style, Eric art, Mio phone art), voice and creator pausing; lift, bible review queue and Kenji r2 finished (reports pending); review queue live with 3 open items; no push yet (live 0928-2104-64a04d8).
