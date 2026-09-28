@@ -31,7 +31,7 @@ export async function trainPlace(game) {
   // light: a slightly dimmer, cooler car with warm low sun through the far windows
   const SUN_DIR = new THREE.Vector3(-0.45, 0.62, -0.75).normalize();
   scene.add(new THREE.HemisphereLight('#c3ccd8', '#8a8078', 1.9));
-  const sun = new THREE.DirectionalLight('#ffc98f', 5.0);
+  const sun = new THREE.DirectionalLight('#ffc98f', 5.6);
   sun.position.copy(SUN_DIR).multiplyScalar(22); sun.castShadow = true;
   Object.assign(sun.shadow.camera, { left: -9, right: 9, top: 7, bottom: -7, near: 8, far: 40 });
   sun.shadow.bias = -0.0006; sun.shadow.normalBias = 0.02; sun.shadow.radius = 5; sun.shadow.mapSize.set(2048, 2048);
@@ -100,7 +100,7 @@ export async function trainPlace(game) {
   const edge = LZ + T + 0.08;
   for (const s of [-1, 1]) {
     const w = 3.2;
-    const slab = rbox(PL, 0.5, w, '#8d9197', { x: 0, y: -0.5, z: s * (edge + w / 2), r: 0.02 }); station.add(slab);
+    const slab = rbox(PL, 0.5, w, '#737a86', { x: 0, y: -0.5, z: s * (edge + w / 2), r: 0.02 }); station.add(slab);
     slab.receiveShadow = true;
     // edge line and the yellow tactile strip with bumps
     station.add(rbox(PL, 0.012, 0.08, '#e9e6de', { y: 0, z: s * (edge + 0.06), r: 0.004, cast: false }));
@@ -111,7 +111,7 @@ export async function trainPlace(game) {
     for (let x = -PL / 2 + 0.06; x < PL / 2; x += 0.12) for (const dz of [-0.08, 0, 0.08]) { m4.makeTranslation(x, 0.012, s * (edge + 0.55) + dz); inst.setMatrixAt(n++, m4); }
     inst.count = n; station.add(inst);
     // tile seams
-    for (let x = -PL / 2; x <= PL / 2; x += 1.2) station.add(rbox(0.02, 0.004, w - 0.9, '#7f8389', { x, y: 0.001, z: s * (edge + 0.9 + (w - 0.9) / 2), r: 0.001, cast: false }));
+    for (let x = -PL / 2; x <= PL / 2; x += 1.2) station.add(rbox(0.02, 0.004, w - 0.9, '#666c77', { x, y: 0.001, z: s * (edge + 0.9 + (w - 0.9) / 2), r: 0.001, cast: false }));
     // canopy posts, benches and bins along the platform
     for (let x = -12; x <= 12; x += 4) {
       station.add(rbox(0.16, 1.9, 0.16, '#6b727d', { x, z: s * (edge + 2.35), r: 0.03 }));
@@ -119,6 +119,9 @@ export async function trainPlace(game) {
     }
     { const p = propPlant({ size: 1.1, seed: s > 0 ? 3 : 5 }); p.position.set(-5.2, 0, s * (edge + 2.5)); station.add(p); }
   }
+  // a canopy over each platform that only the sun sees, so the platforms sit in cool shade as in the reference
+  { const sm = new THREE.MeshBasicMaterial({ color: '#000', colorWrite: false, depthWrite: false });
+    void sm; }
   // station signs: one on each platform, facing the camera side
   const signTex = textTexture((g, W, H) => {
     g.fillStyle = '#2c3a55'; g.fillRect(0, 0, W, H);
@@ -202,8 +205,8 @@ export async function trainPlace(game) {
     cam.follow = false;
     if (mode === 'land') {
       camera.fov = 20; const elev = THREE.MathUtils.degToRad(58);
-      cam.base.set(0, 0.45, 0.25); cam.dir.set(0, Math.sin(elev), Math.cos(elev));
-      pts = []; for (const x of [-4.72, 4.72]) for (const z of [-LZ - T - 0.3, LZ + T + 0.9]) for (const y of [-0.45, 1.45]) pts.push([x, y, z]);
+      cam.base.set(0, 0.45, 0.1); cam.dir.set(0, Math.sin(elev), Math.cos(elev));
+      pts = []; for (const x of [-4.72, 4.72]) for (const z of [-LZ - T - 0.3, LZ + T + 0.45]) for (const y of [-0.45, 1.45]) pts.push([x, y, z]);
       limX = 1.0; limY = 0.95;
     } else {
       camera.fov = 40; const elev = THREE.MathUtils.degToRad(62);
@@ -341,7 +344,7 @@ export async function trainPlace(game) {
       kitty.userData.tail.rotation.y = tc < 0.6 ? Math.sin(tc / 0.6 * Math.PI * 2) * 0.35 : Math.sin(simT * 0.8) * 0.05;
       kitty.userData.tip.rotation.y = tc < 0.6 ? Math.sin(tc / 0.6 * Math.PI * 2 - 0.8) * 0.6 : 0;
       kitty.userData.head.rotation.x = Math.sin(simT * 0.35) * 0.05;
-      sun.intensity = 5.0 * (1 - 0.12 * world.pillarNear() * k) * (station.visible && Math.abs(station.position.x) < PL / 2 + 4 ? 0.85 : 1);
+      sun.intensity = 5.6 * (1 - 0.12 * world.pillarNear() * k) * (station.visible && Math.abs(station.position.x) < PL / 2 + 4 ? 0.85 : 1);
       if (st.v > 0.5) { const j = Math.floor(tj / JOINT); if (j !== lastJ) { lastJ = j; if (k > 0.3) sfx('clack'); } }
       prevM = m;
       // doors

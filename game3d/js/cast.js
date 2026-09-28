@@ -20,7 +20,7 @@ function guardCap(r) {
     const a = (i / 14) * Math.PI * 2;
     for (const [y, k] of [[c + ry * 0.35, 1.0], [c + ry * 0.72, 1.08], [c + ry * 1.02, 1.1]]) pts.push(V((rx + 0.05) * k * Math.sin(a), y, (rz + 0.05) * k * Math.cos(a) + (y > c + ry ? 0.02 : 0)));
   }
-  r.headK.add(mesh(hull(pts, '#26304a', { grad: 0.2, name: 'cap' })));
+  r.headK.add(mesh(hull(pts, '#343b4c', { grad: 0.2, name: 'cap' })));
   r.headK.add(mesh(hull([[-0.17, c + ry * 0.36, 0.2], [0.17, c + ry * 0.36, 0.2], [-0.14, c + ry * 0.3, 0.36], [0.14, c + ry * 0.3, 0.36], [-0.17, c + ry * 0.42, 0.2], [0.17, c + ry * 0.42, 0.2], [0, c + ry * 0.33, 0.38]], '#1b2233', { grad: 0.05, name: 'brim' })));
   const badge = new THREE.Mesh(new RoundedBoxGeometry(0.07, 0.06, 0.02, 1, 0.01), new THREE.MeshStandardMaterial({ color: '#c9ccd2', roughness: 0.4, metalness: 0.3 }));
   badge.position.set(0, c + ry * 0.62, rz + 0.1); r.headK.add(badge);
@@ -62,7 +62,7 @@ export const PEOPLE = {
     return r;
   },
   guard: () => {
-    const r = chibi({ headK: HK, skin: SKINS[1], top: '#3d4a6a', sleeve: '#3d4a6a', bottom: '#28304a', shirt: '#a9b8cf', tie: '#1d2436', hair: '#2a2723', hairOpts: { front: 0.02, side: -0.1, seed: 5 }, shoes: '#1f2128', sole: '#1f2128' });
+    const r = chibi({ headK: HK, skin: SKINS[1], top: '#3e4556', sleeve: '#3e4556', bottom: '#2e3342', shirt: '#b3bccb', tie: '#1d2436', hair: '#2a2723', hairOpts: { front: 0.02, side: -0.1, seed: 5 }, shoes: '#1f2128', sole: '#1f2128' });
     guardCap(r);
     return r;
   },

@@ -15,7 +15,8 @@ export class RoomCam {
     this.camera.position.copy(this.target).addScaledVector(this.dir, this.dist);
     this.camera.lookAt(this.target); this.camera.updateMatrixWorld();
   }
-  fit(aspect, pts, centre, { limX = 0.98, limY = 0.94, follow = false, clamp = null } = {}) {
+  fit(aspect, pts, centre, { limX = 0.98, limY = 0.94, follow = false, clamp = null, lead = 0 } = {}) {
+    this.lead = lead;
     this.camera.aspect = aspect; this.camera.updateProjectionMatrix();
     this.target.copy(centre); this.follow = follow; this.clamp = clamp;
     const v = new THREE.Vector3();
@@ -37,7 +38,7 @@ export class RoomCam {
     if (this.close) return [this.close.target, this.fitDist / this.close.zoom];
     if (!this.follow || !p) return [this.base, this.fitDist];
     const w = p.isVector3 && this.space ? this.space.localToWorld(p.clone()) : p;
-    this.want.set(w.x, this.base.y, w.z);
+    this.want.set(w.x, this.base.y, w.z + (this.lead || 0));
     if (this.clamp) { this.want.x = THREE.MathUtils.clamp(this.want.x, this.clamp[0], this.clamp[1]); this.want.z = THREE.MathUtils.clamp(this.want.z, this.clamp[2], this.clamp[3]); }
     return [this.want, this.fitDist];
   }

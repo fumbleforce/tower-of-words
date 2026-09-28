@@ -251,7 +251,7 @@ export function buildOffice() {
   scene.add(root);
 
   // light: a dim cool floor lit by warm ceiling lamps; one soft key from high above for shadows
-  scene.add(new THREE.HemisphereLight('#aeb8ca', '#5a544f', 1.05));
+  scene.add(new THREE.HemisphereLight('#b3bccc', '#5e5853', 1.3));
   const sun = new THREE.DirectionalLight('#ffe6c4', 1.5);
   sun.position.set(-7, 22, 10);
   sun.castShadow = true;
@@ -264,12 +264,12 @@ export function buildOffice() {
   }
 
   // ---- floors ----
-  root.add(tileFloor(X0, X1, Z0, Z1, 0.8, { color: '#9b9b9d', seam: '#8a8a8d' }));
-  root.add(tileFloor(X0, X1, CN, CS, 0.8, { color: '#949290', seam: '#84827f', y: 0.003 }));                 // corridor, older vinyl
+  root.add(tileFloor(X0, X1, Z0, Z1, 0.8, { color: '#9d9aa3', seam: '#8c8992' }));
+  root.add(tileFloor(X0, X1, CN, CS, 0.8, { color: '#94929a', seam: '#84828a', y: 0.003 }));                 // corridor, older vinyl
   root.add(tileFloor(3.4, X1, Z0, CN, 0.6, { color: '#9da2a8', seam: '#8d9298', y: 0.003 }));                // machine room, painted concrete
   root.add(tileFloor(1.8, X1, CS, Z1, 0.4, { color: '#c9cccd', seam: '#b3b7ba', y: 0.003 }));                // toilets
   root.add(tileFloor(-7, -2.2, CS, Z1, 1.0, { color: '#9ea0a3', seam: '#909295', y: 0.003 }));              // copy room sheet vinyl
-  root.add(tileFloor(-2.2, 1.8, CS, Z1, 1.0, { color: '#a09d98', seam: '#918e89', y: 0.003 }));             // kitchenette
+  root.add(tileFloor(-2.2, 1.8, CS, Z1, 1.0, { color: '#a09ea3', seam: '#918f94', y: 0.003 }));             // kitchenette
 
   // ---- walls ----
   const W = (...a) => root.add(wall(...a));
@@ -303,8 +303,8 @@ export function buildOffice() {
   for (const [k, x] of [['m', 3.25], ['f', 5.85]]) { const p = toiletSign(k); p.scale.setScalar(0.6); p.position.set(x, LO + 0.13, CS); p.rotation.x = -0.5; root.add(p); }
   // corridor dressing: noticeboard, extinguisher, hydrant, distribution board, notices
   const nb = pinboard(0.9, 0.46); nb.position.set(-3.0, 0.72, CN + T / 2 + 0.01); root.add(nb);
-  root.add(rbox(0.26, 0.4, 0.08, '#b8413b', { x: 1.5, y: 0.35, z: CN + T / 2 + 0.04, r: 0.02 }));
-  const hy = rbox(0.5, 0.62, 0.1, '#c9473f', { x: 2.6, y: 0.2, z: CN + T / 2 + 0.05, r: 0.02 }); root.add(hy);
+  root.add(rbox(0.26, 0.4, 0.08, '#9c4a44', { x: 1.5, y: 0.35, z: CN + T / 2 + 0.04, r: 0.02 }));
+  const hy = rbox(0.5, 0.62, 0.1, '#9c4a44', { x: 2.6, y: 0.2, z: CN + T / 2 + 0.05, r: 0.02 }); root.add(hy);
   const lampR = new THREE.Mesh(new THREE.SphereGeometry(0.05, 10, 8), emissive('#ff8a7a', '#ff4a3a', 2.2)); lampR.position.set(2.6, 0.95, CN + T / 2 + 0.06); root.add(lampR);
   root.add(rbox(0.4, 0.5, 0.06, '#9aa0a8', { x: 3.7, y: 0.5, z: CN + T / 2 + 0.03, r: 0.01 }));
   addPlate('', -1.9, 0.62, CN + T / 2 + 0.006, { w: 0.18, h: 0.24, bg: '#f2f0ea' });
@@ -397,7 +397,7 @@ export function buildOffice() {
   const fan2 = standFan(); fan2.position.set(6.6, 0, -1.2); root.add(fan2);
   const cart = new THREE.Group(); cart.add(rbox(0.5, 0.5, 0.4, '#6e747e', { r: 0.02 })); const cm = monitor(); cm.position.set(0, 0.5, 0); cart.add(cm);
   cart.position.set(4.2, 0, -1.3); root.add(cart);
-  for (const [x0, z0, x1, z1] of [[3.7, -2.5, 6.8, -2.45], [3.7, -2.35, 6.8, -2.3]]) root.add(rbox(x1 - x0, 0.02, 0.05, '#2d3139', { x: (x0 + x1) / 2, z: (z0 + z1) / 2, r: 0.01, cast: false }));
+  for (const [x0, z0, x1, z1] of [[3.7, -2.5, 6.8, -2.45], [3.7, -2.35, 6.8, -2.3]]) root.add(rbox(x1 - x0, 0.04, 0.08, '#5a5f68', { x: (x0 + x1) / 2, y: 0.01, z: (z0 + z1) / 2, r: 0.015, cast: false }));
 
   // ---- copy room ----
   const cp = copier(); cp.position.set(-2.95, 0, CS + T / 2 + 0.36); root.add(cp);
@@ -413,6 +413,7 @@ export function buildOffice() {
   { const sd = new THREE.Group(); sd.add(rbox(0.7, 0.04, 0.45, '#d5d6d3', { y: 0.4, r: 0.01 }), rbox(0.05, 0.4, 0.4, PAL.deskLeg, { x: -0.3, r: 0.01 }), rbox(0.05, 0.4, 0.4, PAL.deskLeg, { x: 0.3, r: 0.01 }), rbox(0.12, 0.05, 0.05, '#3a3f48', { x: -0.15, y: 0.44, r: 0.01 }), rbox(0.2, 0.05, 0.28, PAL.paper, { x: 0.15, y: 0.44, r: 0.004 })); sd.position.set(-6.2, 0, 5.9); root.add(sd); }
   for (const [x, z] of [[-3.5, 3.1], [-3.8, 3.1], [-3.65, 3.3]]) root.add(rbox(0.26, 0.2, 0.34, '#e8e4da', { x, y: 0, z, r: 0.01 }));
 
+  { const s4 = shelf(1.2, 1.0, 0.36, { fill: 'binders', seed: 9 }); s4.rotation.y = -Math.PI / 2; s4.position.set(-2.45, 0, 5.4); root.add(s4); }
   // ---- kitchenette (給湯室) ----
   const ct = counter(1.5); ct.position.set(0.95, 0, CS + T / 2 + 0.3); root.add(ct);
   root.add(rbox(0.36, 0.02, 0.3, '#8d939b', { x: 0.55, y: 0.5, z: CS + 0.36, r: 0.01, cast: false }));
@@ -425,6 +426,7 @@ export function buildOffice() {
   const t2 = table2(); t2.position.set(-0.8, 0, 4.6); root.add(t2);
   root.add(rbox(0.22, 0.3, 0.22, '#5c6b86', { x: -1.9, z: 6.0, r: 0.02 }));
   { const wc = waterCooler(); wc.position.set(-1.9, 0, 3.6); root.add(wc); }
+  { const cb = counter(1.0); cb.rotation.y = Math.PI / 2; cb.position.set(-1.85, 0, 4.9); root.add(cb); const kt2 = new THREE.Mesh(new THREE.CylinderGeometry(0.06, 0.07, 0.16, 12), mat('#c9ccd0', { roughness: 0.35, metalness: 0.3 })); kt2.position.set(-1.85, 0.56, 4.7); root.add(sh(kt2)); root.add(rbox(0.3, 0.12, 0.2, '#e8e4da', { x: -1.85, y: 0.5, z: 5.1, r: 0.01 })); }
   root.add(rbox(0.9, 0.04, 0.22, '#8a909a', { x: 0.2, y: 0.95, z: 6.2, r: 0.01 }), rbox(0.9, 0.04, 0.22, '#8a909a', { x: 0.2, y: 0.7, z: 6.2, r: 0.01 }));
   { const p = plant({ size: 0.9, seed: 8 }); p.position.set(1.4, 0, 6.0); root.add(p); }
 
@@ -479,7 +481,7 @@ export function buildOffice() {
   B(0.15, 1.75, CS, CS + 0.62); B(1.15, 1.8, 3.6, 5.0); B(-2.15, -1.45, CS, CS + 0.62); B(-1.25, -0.35, 4.25, 5.3); B(-2.05, -1.75, 5.85, Z1); B(1.2, 1.6, 5.8, Z1);
   for (const x0 of [1.8, 4.4]) { B(x0 + 0.1, x0 + 2.55, 5.3, Z1); B(x0 + 2.15, x0 + 2.55, 3.15, 3.65); B(x0 + 2.2, x0 + 2.5, 3.85, 4.15); B(x0 + 0.25, x0 + 1.2, CS, CS + 0.32); }
   B(-4.55, -4.05, 1.85, CS); B(2.95, 3.45, 1.85, CS); B(1.45, 1.75, 1.85, 2.1); B(0.55, 1.12, 1.95, CS); B(-2.65, -2.15, 1.85, CS);
-  B(-6.6, -5.8, 5.6, Z1); B(-3.95, -3.35, 2.9, 3.5); B(-2.1, -1.7, 3.4, 3.8);
+  B(-6.6, -5.8, 5.6, Z1); B(-3.95, -3.35, 2.9, 3.5); B(-2.1, -1.7, 3.4, 3.8); B(-2.15, -1.55, 4.35, 5.45); B(-2.7, -2.25, 4.8, 6.0);
   nav.blockTagged('emi', -5.5, -5.1, -1.55, -1.15);
 
   for (const r of [nao, hiro, yui, sota]) r.root.visible = false;

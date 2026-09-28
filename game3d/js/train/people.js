@@ -11,7 +11,7 @@ import { toCreasedNormals } from 'three/addons/utils/BufferGeometryUtils.js';
 export const S = 1.15; // chibi scale against the car
 
 // soft shading: normals are smoothed across gentle angles and kept crisp at real edges
-const charMat = new THREE.MeshStandardMaterial({ vertexColors: true, flatShading: false, roughness: 0.78, metalness: 0 });
+const charMat = new THREE.MeshStandardMaterial({ vertexColors: true, flatShading: false, roughness: 0.93, metalness: 0 }); // game3d: rougher so hair has no hot spots under the lamps
 const screenMat = new THREE.MeshStandardMaterial({ color: '#bfe6ff', emissive: new THREE.Color('#9fd8ff'), emissiveIntensity: 0.9, roughness: 0.3 });
 
 function mesh(geo, m = charMat) { const x = new THREE.Mesh(geo.isBufferGeometry ? geo : toCreasedNormals(geo.build(), 0.7), m); x.castShadow = true; x.receiveShadow = true; return x; }
