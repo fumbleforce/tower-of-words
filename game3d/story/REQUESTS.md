@@ -11,6 +11,11 @@ The new premise is wired (FORMAT.md, "Eric, Mio, phrases and overheard Japanese"
 5. **The guard on the phone.** gate.js used to say the guard was on hold to the gate company, but nothing on screen shows it, so it's cut. If you add a hook like `phone` `who`, `state: 'on'|'off'` (handset at his ear, faint hold music), the joke can come back.
 
 
+6. **The first kotodama: the train doors (train.js, `arrival`).** Jørgen couldn't tell anything special happened when the doors held. The beat now needs two things from the engine:
+   - `{ do: 'doorsClose', to: 0.35, ms: 20000 }`: the doors slide steadily from where they are to `to` (1 = open, 0 = shut) over `ms`, then wait there, with the door sound. No `to` means shut, as now. This lets them keep creeping shut through Mio's two lines and Eric's typing, so they are visibly still moving when he finishes the word. Nothing should stop them before that.
+   - `{ do: 'doorsHold', kotodama: true }`: the doors freeze dead at the exact point they've reached, and it has to look and sound wrong: the closing chime cuts off mid-note, a faint shimmer runs along the door edges, the car lights dip and hum for a second or two, and a low tone plays. Then everything stays still, doors part-open, until the player leaves the car. The sleeping man wakes on the next step, so the effect can be what wakes him.
+   Without these, the scene still runs (the doors shut in about two seconds and `doorsHold` pops them back to 0.45), but it won't read as magic. If you'd rather make the effect a general hook for later (the copier, the gate), `{ do: 'kotodama', target: 'doors' }` is fine too: tell me and I'll swap the step.
+
 ## Open
 
 - (done) `bow`, plus `gesture`, `headphones` and train `bag`; the builder has already swapped the narrated bows, the nine fingers, the shrug, the finger to the lips, the ski jump, the headphones and the sliding bag for these steps. (`headphones` has since been removed: Mio has no headphones prop; the hook does nothing.)
