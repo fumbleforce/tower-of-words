@@ -4,7 +4,7 @@ The intro day only. Dialogue data: train.js, gate.js, office.js, transitions.js 
 
 ## Premise
 
-Eric, a tired Nordic IT engineer, starts a contract to upgrade Amakawa's IT. He's based in the IT support room on B2 with a small team. He barely speaks Japanese. Only Mio on the team speaks some English, and she's busy. The island's old systems, installed in the nineties, answer to spoken commands (kotodama), but only when Eric says them. Nobody knows why, Eric included.
+Eric, a tired Nordic IT engineer, starts a support contract: he's here to help keep Amakawa's ancient systems running, because the company refuses to replace any of them. He's based in the IT support room on B2 with a small team. He barely speaks Japanese. Only Mio on the team speaks some English, and she's busy. The island's old systems, installed in the nineties, answer to spoken commands (kotodama), but only when Eric says them. Nobody knows why, Eric included.
 
 ## Language on day 1
 

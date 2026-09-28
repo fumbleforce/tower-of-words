@@ -70,7 +70,7 @@ export default {
       { do: 'goal', text: '' },
       { say: 'mio', emo: 'surprised', name: 'Woman with a laptop', face: 'surprised', text: "Eh... B2? You're going to B2?" },
       { say: 'eric', emo: 'tired', face: 'tired', text: "Yeah, IT support. I'm the contractor, it's my first day." },
-      { say: 'mio', emo: 'dry', face: 'deadpan', text: "Ahh, the IT upgrade. Mori-san said a {gaijin} is coming to fix everything. That's you?" },
+      { say: 'mio', emo: 'dry', face: 'deadpan', text: "Ahh, you're the support contract? Mori-san said a {gaijin} is coming to help with the old machines. Amakawa never replaces anything, so, um... some of them are older than me." },
       { say: 'mio', emo: 'reluctant', face: 'neutral', text: "I'm Mio. I'm also B2, so... same team, I guess." },
       { set: 'mio_named' },
       { choice: [
@@ -99,7 +99,7 @@ export default {
       { say: 'eric', emo: 'tired', text: "Norway." },
       { say: 'mio', emo: 'dry', face: 'neutral', text: "Norway... okay. And Japanese? You speak it, like, at all?" },
       { choice: [
-        { text: '“ありがとう (arigatō). That\'s about it.”', go: 'jp_one' },
+        { text: '“ありがとう (arigatō, thanks). That\'s about it.”', go: 'jp_one' },
         { text: '“Not really.”', go: 'jp_none' },
       ] },
     ],
@@ -213,7 +213,6 @@ export default {
       { say: 'mio', face: 'embarrassed', emo: 'low', text: "Um, don't tell anyone, okay? If someone makes a ticket for it, it comes to me." },
       // her phone goes, she looks, then reacts
       { do: 'phone', who: 'mio', state: 'buzz' },
-      { do: 'emote', who: 'mio', kind: '!' },
       { wait: 700 },
       { do: 'phone', who: 'mio', state: 'look' },
       { say: 'mio', face: 'tired', emo: 'groan', text: "あー, no, no... the server's down again. Sorry, I have to run." },
