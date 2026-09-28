@@ -29,7 +29,9 @@ Read this before writing a line in train.js, gate.js, office.js or transitions.j
 
 **Eric** (the player). Tired, polite, dry. Says little; his lines are short but whole sentences ("The copier's fixed." not "Fixed."). Choice texts are things he'd actually say.
 
-**Kenji** (29). Almost no English, cheerful about it. Speaks Japanese casually; his English is a few words strung together with a laugh ("Ah, sorry, sorry, the chair. My English is... very little.").
+**Kenji** (29). Almost no English, cheerful about it. Speaks Japanese casually; his English is nouns and "is" with no articles, sound effects for what he can't say, and a laugh ("My chair is... broken. Pshh." / "Machine room. Chair. Cat. Sorry!"). Never Mio's loose fluency.
+
+**Emi** (32, B2's team lead). Native British English, quick and complete sentences, talks like she's between two meetings. Brightness over worry: she says the good news first and the problem as an aside ("I got it. Well. I may have told them...").
 
 **Mr. Mori** (58). Only polite Japanese. Warmth shows in what he does: bows, tea, making room that was already there.
 
@@ -38,3 +40,9 @@ Read this before writing a line in train.js, gate.js, office.js or transitions.j
 **Mr. Hamada** (54). Japanese only, apologises constantly, talks to machines like animals.
 
 **Narration**. Second person, a few words, only for what the scene can't show.
+
+**Mio's texts** (`miotext`). Lower case, no full stops, short: "is that you?", "loud".
+
+## Voice direction
+
+Every voiced line has an `emo` tag; the list and what each means are in VOICE-DIRECTION.md.
