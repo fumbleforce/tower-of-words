@@ -7,16 +7,16 @@ import { V } from './train/kit.js';
 
 // Muted palette from game3d/ref/2-security-gate-muted.png
 export const PAL = {
-  floor: '#adaba8', floorSeam: '#999794', floorDark: '#a19f9c',
-  wall: '#646a78', wallTop: '#9aa0aa', wallInner: '#6c7280', skirting: '#454a54', trim: '#565c67',
+  floor: '#a4a2a7', floorSeam: '#918f95', floorDark: '#99979c',
+  wall: '#6b7180', wallTop: '#a3a9b3', wallInner: '#6c7280', skirting: '#454a54', trim: '#565c67',
   door: '#474d57', doorFrame: '#666c77', doorWin: '#9fb1c2',
-  bench: '#384059', benchBack: '#3e4761', benchFrame: '#858b96',
+  bench: '#3d4456', benchBack: '#434a5c', benchFrame: '#858b96',
   metal: '#9aa0aa', dark: '#3e434d', charcoal: '#2f333b',
   glass: '#b9cbd6', planter: '#c7c3bb', soil: '#4b3f38',
   leaf: ['#4d6b47', '#577650', '#43603f', '#5f7d57', '#4a6645'],
   lamp: '#ffe2b8', lampEm: '#ffcf8a',
   desk: '#d5d6d3', deskTop: '#e3e3df', deskLeg: '#8b919b', drawer: '#8e949e',
-  chair: '#2f3a55', chairDark: '#252c3f',
+  chair: '#3a4254', chairDark: '#2c3242',
   screen: '#9cc3e8', monitor: '#2e323a',
   paper: '#f2f0ea', box: '#b99a73', boxDark: '#a3865f',
   tileWhite: '#d8dadb', tileBlue: '#8fa0b3',

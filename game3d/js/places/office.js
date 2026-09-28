@@ -124,7 +124,7 @@ export async function officePlace(game) {
       const pts = [];
       for (const x of [w.X0 - 0.2, w.X1 + 0.2]) for (const z of [w.Z0 - 0.2, w.Z1 + 0.2]) for (const y of [0, 1.45]) pts.push(new THREE.Vector3(x, y, z));
       if (aspect >= 1) cam.fit(aspect, [new THREE.Vector3(-7.1, 0, 0), new THREE.Vector3(7.1, 0, 0), new THREE.Vector3(0, 1.45, w.Z0), new THREE.Vector3(0, 0, w.Z1 + 0.1)], new THREE.Vector3(0, 0, 0), { limY: 0.97 });
-      else cam.fit(aspect, [new THREE.Vector3(-2.5, 0, 0), new THREE.Vector3(2.5, 0, 0), new THREE.Vector3(0, 0, -2.7), new THREE.Vector3(0, 1.3, 2.5)], new THREE.Vector3(0, 0, 0), { follow: true, clamp: [w.X0 + 2.5, w.X1 - 2.5, w.Z0 + 2.0, w.Z1 - 1.5] });
+      else cam.fit(aspect, [new THREE.Vector3(-2.5, 0, 0), new THREE.Vector3(2.5, 0, 0), new THREE.Vector3(0, 0, -2.7), new THREE.Vector3(0, 1.3, 2.5)], new THREE.Vector3(0, 0, 0), { follow: true, clamp: [w.X0 + 2.2, w.X1 - 2.2, w.Z0 + 2.9, w.Z1 - 2.2] });
     },
     pick(rc) { const p = new THREE.Vector3(); return rc.ray.intersectPlane(floor, p) ? p : null; },
     walkPerson(id, [x, z], { speed } = {}) {

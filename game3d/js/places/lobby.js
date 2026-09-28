@@ -32,7 +32,7 @@ export function glide(g, obj, [x, z], speed) {
 export async function lobbyPlace(game) {
   const w = buildLobby();
   const { BZ, X, Z } = w;
-  const cam = new RoomCam({ elev: 50, fov: 24 });
+  const cam = new RoomCam({ elev: 46, fov: 24 });
   const floor = new THREE.Plane(new THREE.Vector3(0, 1, 0), 0);
   const st = { cardOk: false, gateOpen: false, flap: 0, flapWant: 0, jam: 0, slam: 0, rush: true, typing: 0 };
   const rei = PEOPLE.rei(); rei.root.scale.multiplyScalar(K); w.root.add(rei.root); rei.root.visible = false;
@@ -162,12 +162,12 @@ export async function lobbyPlace(game) {
 
   const P = {
     scene: w.scene, camera: cam.camera, cam, space: w.root, nav: w.nav, sun: w.sun, charScale: K,
-    start: [0, Z - 0.8], startFacing: Math.PI, things, people, spots, zones, seats, glide,
+    start: [0, Z - 1.3], startFacing: Math.PI, things, people, spots, zones, seats, glide,
     fit(aspect) {
       const pts = [];
       for (const x of [-X - 0.2, X + 0.2]) for (const z of [-Z - 0.2, Z + 0.3]) for (const y of [0, 1.6]) pts.push(new THREE.Vector3(x, y, z));
       if (aspect >= 1) cam.fit(aspect, [new THREE.Vector3(-5.6, 0, 0), new THREE.Vector3(5.6, 0, 0), new THREE.Vector3(0, 1.95, -Z), new THREE.Vector3(0, 0, Z + 0.1)], new THREE.Vector3(0, 0, 0.05), { follow: true, clamp: [-0.9, 0.9, 0.05, 0.05], limY: 0.97 });
-      else cam.fit(aspect, [new THREE.Vector3(-2.4, 0, 0), new THREE.Vector3(2.4, 0, 0), new THREE.Vector3(0, 0, -2.7), new THREE.Vector3(0, 1.4, 2.5)], new THREE.Vector3(0, 0, 0), { follow: true, clamp: [-X + 2.4, X - 2.4, -Z + 1.8, Z - 0.6] });
+      else cam.fit(aspect, [new THREE.Vector3(-2.4, 0, 0), new THREE.Vector3(2.4, 0, 0), new THREE.Vector3(0, 0, -2.7), new THREE.Vector3(0, 1.4, 2.5)], new THREE.Vector3(0, 0, 0), { follow: true, clamp: [-X + 2.4, X - 2.4, -Z + 2.2, Z - 2.1], lead: -1.2 });
     },
     pick(rc) { const p = new THREE.Vector3(); return rc.ray.intersectPlane(floor, p) ? p : null; },
     walkPerson(id, [x, z], { speed } = {}) {
@@ -259,7 +259,7 @@ export async function lobbyPlace(game) {
       sfx('door'); sfx('crowd');
       mio.setState('walk');
       const aoiWalk = walkers.length ? Promise.all(walkers) : null;
-      await glide(g, mio.root, [0, Z - 0.8], 1.3);
+      await glide(g, mio.root, [0, Z - 1.3], 1.3);
       g.walker.facing = Math.PI; mio.root.rotation.y = Math.PI;
       mio.setState('idle'); mio.scripted = false;
       cam.release();

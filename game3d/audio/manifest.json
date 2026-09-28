@@ -1,0 +1,257 @@
+[
+ {
+  "key": "eric-matte",
+  "speaker": "eric",
+  "text": "待って。"
+ },
+ {
+  "key": "eric-akete",
+  "speaker": "eric",
+  "text": "開けて。"
+ },
+ {
+  "key": "eric-kite",
+  "speaker": "eric",
+  "text": "来て。"
+ },
+ {
+  "key": "eric-ugoite",
+  "speaker": "eric",
+  "text": "動いて。"
+ },
+ {
+  "key": "eric-irete",
+  "speaker": "eric",
+  "text": "入れて。"
+ },
+ {
+  "key": "eric-dashite",
+  "speaker": "eric",
+  "text": "出して。"
+ },
+ {
+  "key": "eric-tomatte",
+  "speaker": "eric",
+  "text": "止まって。"
+ },
+ {
+  "key": "eric-ohayo",
+  "speaker": "eric",
+  "text": "おはようございます。"
+ },
+ {
+  "key": "eric-yoroshiku",
+  "speaker": "eric",
+  "text": "よろしくおねがいします。"
+ },
+ {
+  "key": "eric-sumimasen",
+  "speaker": "eric",
+  "text": "すみません。"
+ },
+ {
+  "key": "oh-oy386m",
+  "speaker": "conductor",
+  "text": "おはようございます！"
+ },
+ {
+  "key": "oh-88r7b3",
+  "speaker": "aoi",
+  "text": "あっ、よろしくお願いします！"
+ },
+ {
+  "key": "oh-d5a90l",
+  "speaker": "kuroda",
+  "text": "あっ！すみません、すみません！"
+ },
+ {
+  "key": "oh-1wyzao6",
+  "speaker": "aoi",
+  "text": "だから今日、配属が決まるの！どこでもいいけど、地下はいや。"
+ },
+ {
+  "key": "oh-oy47jh",
+  "speaker": "guard",
+  "text": "おはようございます。"
+ },
+ {
+  "key": "oh-1242cc3",
+  "speaker": "gatev",
+  "text": "カードを確認できません。係員にお声がけください。"
+ },
+ {
+  "key": "oh-1vm0kku",
+  "speaker": "guard",
+  "text": "新しいカードですね。登録は九時からです。"
+ },
+ {
+  "key": "oh-16c7qcz",
+  "speaker": "kuroda",
+  "text": "すみません、すみません、通ります！"
+ },
+ {
+  "key": "oh-vfghg0",
+  "speaker": "gatev",
+  "text": "共連れを検知しました！"
+ },
+ {
+  "key": "oh-fl8dqq",
+  "speaker": "kuroda",
+  "text": "{akete}…お願い、{akete}…"
+ },
+ {
+  "key": "oh-kz6n0u",
+  "speaker": "gatev",
+  "text": "お一人ずつお通りください！"
+ },
+ {
+  "key": "oh-zoc8ud",
+  "speaker": "kuroda",
+  "text": "{akete}…{akete}…"
+ },
+ {
+  "key": "oh-1st1kx5",
+  "speaker": "kuroda",
+  "text": "え？今の？"
+ },
+ {
+  "key": "oh-10umez5",
+  "speaker": "guard",
+  "text": "猫はいません。"
+ },
+ {
+  "key": "oh-1je4ust",
+  "speaker": "guard",
+  "text": "浜田さん！頭の上に！"
+ },
+ {
+  "key": "oh-d4ennl",
+  "speaker": "kuroda",
+  "text": "ありがとうございます！この方、うちの…いや、新しい方で…私がサインします！"
+ },
+ {
+  "key": "oh-w0fzye",
+  "speaker": "kuro",
+  "text": "いらっしゃいませ。ご用件は？"
+ },
+ {
+  "key": "oh-13a81rh",
+  "speaker": "kuro",
+  "text": "……おはようございます。"
+ },
+ {
+  "key": "oh-19uh2s6",
+  "speaker": "guard",
+  "text": "猫？何の猫ですか。"
+ },
+ {
+  "key": "oh-1tygzrl",
+  "speaker": "gatev",
+  "text": "おはようございます！カードをタッチしてください！"
+ },
+ {
+  "key": "oh-1jn4pe8",
+  "speaker": "mori",
+  "text": "おはようございます。森と申します。ITサポートへ、ようこそ。"
+ },
+ {
+  "key": "oh-1gsq7v7",
+  "speaker": "mori",
+  "text": "こちらこそ、よろしくお願いいたします。"
+ },
+ {
+  "key": "oh-yymqef",
+  "speaker": "mori",
+  "text": "はい、おはようございます。"
+ },
+ {
+  "key": "oh-1yevp27",
+  "speaker": "kenji",
+  "text": "あ、新しい人？ごめん、椅子借りてた。壊れちゃってさ、俺の。"
+ },
+ {
+  "key": "oh-m1j0c0",
+  "speaker": "kenji",
+  "text": "椅子、あった？"
+ },
+ {
+  "key": "oh-s2r34k",
+  "speaker": "kenji",
+  "text": "かたっ！おはよう、でいいよ。"
+ },
+ {
+  "key": "oh-1hzcx7w",
+  "speaker": "kenji",
+  "text": "おはよう。"
+ },
+ {
+  "key": "oh-14e7hyx",
+  "speaker": "kenji",
+  "text": "よろしく！"
+ },
+ {
+  "key": "oh-zq869p",
+  "speaker": "kenji",
+  "text": "え、何？大丈夫？"
+ },
+ {
+  "key": "oh-1w092m3",
+  "speaker": "mio",
+  "text": "森さん、外人にコピー機お願い。"
+ },
+ {
+  "key": "oh-1q8rpu4",
+  "speaker": "mori",
+  "text": "外国の方、ですよ。"
+ },
+ {
+  "key": "oh-1h03b93",
+  "speaker": "mori",
+  "text": "また食べられました…"
+ },
+ {
+  "key": "oh-yowtk",
+  "speaker": "mori",
+  "text": "ノルウェーから、ですね。私、1994年にリレハンメルへ行きました。"
+ },
+ {
+  "key": "oh-k9mi0a",
+  "speaker": "mori",
+  "text": "経理の浜田さんから？珍しい。"
+ },
+ {
+  "key": "oh-f89jzv",
+  "speaker": "kenji",
+  "text": "朝、ゲートが勝手に開いたって。全部。"
+ },
+ {
+  "key": "oh-k1xb2b",
+  "speaker": "mori",
+  "text": "ああ、ちょうど飲みたかった。ありがとうございます。"
+ },
+ {
+  "key": "oh-k10rxg",
+  "speaker": "kenji",
+  "text": "マジで？神！"
+ },
+ {
+  "key": "oh-1qrzznu",
+  "speaker": "kenji",
+  "text": "あ、ありがとう…"
+ },
+ {
+  "key": "oh-1dltuqt",
+  "speaker": "sales1",
+  "text": "十時の会議、四番目の議題見た？"
+ },
+ {
+  "key": "oh-1aenxld",
+  "speaker": "sales2",
+  "text": "B2のやつでしょ。コンサルタントが来るって。"
+ },
+ {
+  "key": "oh-1etvxoe",
+  "speaker": "sales1",
+  "text": "え、今日から？"
+ }
+]

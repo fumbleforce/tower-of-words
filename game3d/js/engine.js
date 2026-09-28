@@ -244,6 +244,9 @@ export class Markers {
   clear() { for (const m of this.list) m.el.remove(); this.list = []; }
   update(camera, canvas, playerPos, near) {
     const w = canvas.clientWidth, h = canvas.clientHeight, v = new THREE.Vector3();
+    // only the two nearest non-goal markers show, so a crowded room isn't covered in dots
+    const dist = (m) => { const s = m.spot ? m.spot() : null; return s && playerPos ? Math.hypot(playerPos.x - s[0], playerPos.z - s[1]) : 99; };
+    const shown = new Set(this.list.filter((m) => (typeof m.enabled === 'function' ? m.enabled() : m.enabled) && !(m.goal && m.goal())).map((m) => [m, dist(m)]).filter(([, d]) => d < 2.4).sort((a, b) => a[1] - b[1]).slice(0, 2).map(([m]) => m));
     for (const m of this.list) {
       const on = m.enabled && (typeof m.enabled !== 'function' || m.enabled());
       const vis = typeof m.enabled === 'function' ? m.enabled() : m.enabled;
@@ -256,7 +259,7 @@ export class Markers {
       m.el.classList.toggle('goal', isGoal);
       // only nearby things and the current goal show a marker, so the room isn't covered in dots
       const s = m.spot ? m.spot() : null;
-      const far = !isGoal && s && playerPos && Math.hypot(playerPos.x - s[0], playerPos.z - s[1]) > (/person/.test(m.kind || '') && !/small/.test(m.kind || '') ? 2.1 : 1.4);
+      const far = !isGoal && !shown.has(m); void s;
       m.el.classList.toggle('far', !!far);
       void on;
     }

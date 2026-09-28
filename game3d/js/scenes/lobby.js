@@ -162,7 +162,7 @@ export function buildLobby() {
   // light: cool dim room, warm low sun through the right-hand windows, warm wall lamps
   const SUN_DIR = new THREE.Vector3(0.86, 0.3, -0.42).normalize();
   scene.add(new THREE.HemisphereLight('#b7c1d2', '#6a625c', 1.55));
-  const sun = new THREE.DirectionalLight('#ffc990', 4.2);
+  const sun = new THREE.DirectionalLight('#ffc990', 3.8);
   sun.position.copy(SUN_DIR).multiplyScalar(30);
   sun.castShadow = true;
   Object.assign(sun.shadow.camera, { left: -12, right: 12, top: 12, bottom: -12, near: 5, far: 70 });
@@ -196,7 +196,7 @@ export function buildLobby() {
   for (const s of [-1, 1]) {
     root.add(wall('z', -Z, Z - 0.9, s * (X + 0.08), WH, 0.16, { holes: winHoles }));
     for (const [a, b, y0, y1] of winHoles) {
-      const pane = new THREE.Mesh(new THREE.PlaneGeometry(b - a, y1 - y0), winMat(s > 0 ? 1.2 : 0.85));
+      const pane = new THREE.Mesh(new THREE.PlaneGeometry(b - a, y1 - y0), winMat(s > 0 ? 0.85 : 0.6));
       pane.position.set(s * (X + 0.06), (y0 + y1) / 2, (a + b) / 2); pane.rotation.y = -s * Math.PI / 2; root.add(pane);
     }
   }
@@ -225,7 +225,7 @@ export function buildLobby() {
 
   // barrier: glass panels on steel posts, readers either side of the arch, guard desk on the right
   const BZ = -0.55;
-  const glassM = new THREE.MeshStandardMaterial({ color: '#9fb6c6', roughness: 0.08, metalness: 0.1, transparent: true, opacity: 0.42, depthWrite: false });
+  const glassM = new THREE.MeshStandardMaterial({ color: '#b9cad6', roughness: 0.08, metalness: 0.1, transparent: true, opacity: 0.55, depthWrite: false });
   function glassRun(x0, x1) {
     const n = Math.max(1, Math.round((x1 - x0) / 1.3));
     for (let i = 0; i <= n; i++) root.add(rbox(0.1, 0.62, 0.1, '#6b717c', { x: x0 + (x1 - x0) * i / n, z: BZ, r: 0.02 }));
@@ -264,6 +264,7 @@ export function buildLobby() {
   const b1 = bench(2.1); b1.position.set(-3.9, 0, 2.55); root.add(b1);
   const b2 = bench(2.1); b2.position.set(3.95, 0, 1.3); root.add(b2);
   const bag = rbox(0.22, 0.17, 0.1, '#6a4f3e', { x: 4.55, y: 0.29, z: 1.3, r: 0.03 }); root.add(bag);
+  for (const [x, z, s] of [[-3.9, 2.55, 2.6], [3.95, 1.3, 2.6], [-4.2, 0.45, 2.4], [2.2, BZ, 2.4]]) { const b = blob(s, 0.28); b.scale.set(1, 0.35, 1); b.position.set(x, 0.004, z); root.add(b); }
 
   // people
   const up = (r) => { r.root.scale.multiplyScalar(K); return r; };
