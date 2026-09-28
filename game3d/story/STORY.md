@@ -29,7 +29,7 @@ Eric, a tired Nordic IT engineer, starts a support contract: he's here to help k
 - **Mr. Ishibashi** (64): the gate guard. Strict, fair, polite Japanese. Likes a proper おはようございます.
 - **Mr. Hamada** (54, Accounts): asleep on every train, late through every gate, says すみません constantly.
 - **Mr. Mori** (58): a former manager, now on the team. Formal, kind, makes the tea. Opened the copier repair request in 1996. Likes corn soup.
-- **Kenji** (29): the team's other engineer. Casual, a bit sheepish about the chair; tries his few words of English on Eric. Likes melon soda.
+- **Kenji** (21): the team's newest engineer, two months in. Keen to help, easily distracted, a bit sheepish about the chair; tries his school English on Eric. Likes melon soda.
 - **Emi** (32): B2's team lead, native English. Spent day one upstairs winning a parts budget by promising more than B2 can do.
 - **Tama**: a calico cat who rides the train to work.
 
