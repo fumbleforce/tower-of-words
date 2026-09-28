@@ -3,115 +3,227 @@
  "model": "tiny",
  "device": "wasm",
  "cpu": 1,
- "loadMs": 8183,
+ "loadMs": 3499,
  "recogniseMs": {
-  "median": 1485,
-  "p90": 1975,
-  "max": 2312
+  "median": 2345,
+  "p90": 2375,
+  "max": 3407,
+  "textMedian": 1285,
+  "scoreMedian": 1059
  },
- "perWord": {
-  "akete": {
-   "native": "5/5",
-   "eric": "0/5",
-   "misses": [
-    "eric.clean: OK",
-    "eric.far: お気持ちいい?",
-    "eric.phone: お会いしましょう",
-    "eric.slow: OK",
-    "eric.train: OK"
-   ]
+ "textOnly": {
+  "perWord": {
+   "akete": {
+    "native": "5/5",
+    "eric": "0/5",
+    "misses": [
+     "eric.clean: OK",
+     "eric.far: お気持ちいい?",
+     "eric.phone: お会いしましょう",
+     "eric.slow: OK",
+     "eric.train: OK"
+    ]
+   },
+   "dashite": {
+    "native": "5/5",
+    "eric": "1/5",
+    "misses": [
+     "eric.clean: ダッシュ",
+     "eric.far: ダッシュ",
+     "eric.phone: ダッシャイッ",
+     "eric.train: ダッシャイッ"
+    ]
+   },
+   "irete": {
+    "native": "5/5",
+    "eric": "0/5",
+    "misses": [
+     "eric.clean: いいね",
+     "eric.far: いいね",
+     "eric.phone: OK",
+     "eric.slow: いいね",
+     "eric.train: OK"
+    ]
+   },
+   "kite": {
+    "native": "2/5",
+    "eric": "0/5",
+    "misses": [
+     "eric.clean: カイッ",
+     "eric.far: カイッ",
+     "eric.phone: カイッ",
+     "eric.slow: カイッ",
+     "eric.train: カイッ",
+     "word.clean: ちょっと",
+     "word.phone: おかしい",
+     "word.slow: ちょっと"
+    ]
+   },
+   "matte": {
+    "native": "5/5",
+    "eric": "5/5",
+    "misses": []
+   },
+   "ohayo": {
+    "native": "5/5",
+    "eric": "5/5",
+    "misses": []
+   },
+   "sumimasen": {
+    "native": "5/5",
+    "eric": "3/5",
+    "misses": [
+     "eric.phone: そういうことで、お店さん",
+     "eric.slow: そういうことで、お店をお店をお店をお店をお店をお店をお店をお店をお店をお"
+    ]
+   },
+   "tomatte": {
+    "native": "5/5",
+    "eric": "4/5",
+    "misses": [
+     "eric.far: じゃあ待って"
+    ]
+   },
+   "ugoite": {
+    "native": "5/5",
+    "eric": "0/5",
+    "misses": [
+     "eric.clean: どうも、お会いしましょう。",
+     "eric.far: どうも、",
+     "eric.phone: どうも、お会いしましょう。",
+     "eric.slow: どうも、",
+     "eric.train: お会いしましょう"
+    ]
+   },
+   "yoroshiku": {
+    "native": "5/5",
+    "eric": "5/5",
+    "misses": []
+   }
   },
-  "dashite": {
-   "native": "5/5",
-   "eric": "1/5",
-   "misses": [
-    "eric.clean: ダッシュ",
-    "eric.far: ダッシュ",
-    "eric.phone: ダッシャイッ",
-    "eric.train: ダッシャイッ"
-   ]
+  "perVariant": {
+   "clean": "14/20",
+   "far": "14/20",
+   "phone": "13/20",
+   "slow": "14/20",
+   "train": "15/20"
   },
-  "irete": {
-   "native": "5/5",
-   "eric": "0/5",
-   "misses": [
-    "eric.clean: いいね",
-    "eric.far: いいね",
-    "eric.phone: OK",
-    "eric.slow: いいね",
-    "eric.train: OK"
-   ]
-  },
-  "kite": {
-   "native": "2/5",
-   "eric": "0/5",
-   "misses": [
-    "eric.clean: カイッ",
-    "eric.far: カイッ",
-    "eric.phone: カイッ",
-    "eric.slow: カイッ",
-    "eric.train: カイッ",
-    "word.clean: ちょっと",
-    "word.phone: おかしい",
-    "word.slow: ちょっと"
-   ]
-  },
-  "matte": {
-   "native": "5/5",
-   "eric": "5/5",
-   "misses": []
-  },
-  "ohayo": {
-   "native": "5/5",
-   "eric": "5/5",
-   "misses": []
-  },
-  "sumimasen": {
-   "native": "5/5",
-   "eric": "3/5",
-   "misses": [
-    "eric.phone: そういうことで、お店さん",
-    "eric.slow: そういうことで、お店をお店をお店をお店をお店をお店をお店をお店をお店をお"
-   ]
-  },
-  "tomatte": {
-   "native": "5/5",
-   "eric": "4/5",
-   "misses": [
-    "eric.far: じゃあ待って"
-   ]
-  },
-  "ugoite": {
-   "native": "5/5",
-   "eric": "0/5",
-   "misses": [
-    "eric.clean: どうも、お会いしましょう。",
-    "eric.far: どうも、",
-    "eric.phone: どうも、お会いしましょう。",
-    "eric.slow: どうも、",
-    "eric.train: お会いしましょう"
-   ]
-  },
-  "yoroshiku": {
-   "native": "5/5",
-   "eric": "5/5",
-   "misses": []
-  }
+  "total": "70/100 (70%)",
+  "falseAccepts": "4/979",
+  "falseHits": [
+   "eric-tomatte.clean as matte: ちょまーて",
+   "eric-tomatte.far as matte: じゃあ待って",
+   "eric-tomatte.phone as matte: ちょまーて",
+   "eric-tomatte.train as matte: またまで"
+  ]
  },
- "perVariant": {
-  "clean": "14/20",
-  "far": "14/20",
-  "phone": "13/20",
-  "slow": "14/20",
-  "train": "15/20"
+ "withScore": {
+  "perWord": {
+   "akete": {
+    "native": "5/5",
+    "eric": "0/5",
+    "misses": [
+     "eric.clean: OK",
+     "eric.far: お気持ちいい?",
+     "eric.phone: お会いしましょう",
+     "eric.slow: OK",
+     "eric.train: OK"
+    ]
+   },
+   "dashite": {
+    "native": "5/5",
+    "eric": "1/5",
+    "misses": [
+     "eric.clean: ダッシュ",
+     "eric.far: ダッシュ",
+     "eric.phone: ダッシャイッ",
+     "eric.train: ダッシャイッ"
+    ]
+   },
+   "irete": {
+    "native": "5/5",
+    "eric": "0/5",
+    "misses": [
+     "eric.clean: いいね",
+     "eric.far: いいね",
+     "eric.phone: OK",
+     "eric.slow: いいね",
+     "eric.train: OK"
+    ]
+   },
+   "kite": {
+    "native": "2/5",
+    "eric": "0/5",
+    "misses": [
+     "eric.clean: カイッ",
+     "eric.far: カイッ",
+     "eric.phone: カイッ",
+     "eric.slow: カイッ",
+     "eric.train: カイッ",
+     "word.clean: ちょっと",
+     "word.phone: おかしい",
+     "word.slow: ちょっと"
+    ]
+   },
+   "matte": {
+    "native": "5/5",
+    "eric": "5/5",
+    "misses": []
+   },
+   "ohayo": {
+    "native": "5/5",
+    "eric": "5/5",
+    "misses": []
+   },
+   "sumimasen": {
+    "native": "5/5",
+    "eric": "5/5",
+    "misses": []
+   },
+   "tomatte": {
+    "native": "5/5",
+    "eric": "4/5",
+    "misses": [
+     "eric.far: じゃあ待って"
+    ]
+   },
+   "ugoite": {
+    "native": "5/5",
+    "eric": "0/5",
+    "misses": [
+     "eric.clean: どうも、お会いしましょう。",
+     "eric.far: どうも、",
+     "eric.phone: どうも、お会いしましょう。",
+     "eric.slow: どうも、",
+     "eric.train: お会いしましょう"
+    ]
+   },
+   "yoroshiku": {
+    "native": "5/5",
+    "eric": "5/5",
+    "misses": []
+   }
+  },
+  "perVariant": {
+   "clean": "14/20",
+   "far": "14/20",
+   "phone": "14/20",
+   "slow": "15/20",
+   "train": "15/20"
+  },
+  "total": "72/100 (72%)",
+  "falseAccepts": "5/979",
+  "falseHits": [
+   "eric-tomatte.clean as matte: ちょまーて",
+   "eric-tomatte.far as matte: じゃあ待って",
+   "eric-tomatte.phone as matte: ちょまーて",
+   "eric-tomatte.train as matte: またまで",
+   "word-kite.phone as ohayo: おかしい"
+  ]
  },
- "total": "70/100 (70%)",
- "falseAccepts": "5/980",
- "falseHits": [
-  "eric-tomatte.clean as matte: ちょまーて",
-  "eric-tomatte.far as matte: じゃあ待って",
-  "eric-tomatte.phone as matte: ちょまーて",
-  "eric-tomatte.train as matte: またまで",
-  "neg-mori-design.clean as ohayo: 皆さん、おはようございます。"
- ]
+ "rule": {
+  "margin": 1,
+  "floor": -2,
+  "lead": 0.8
+ }
 }

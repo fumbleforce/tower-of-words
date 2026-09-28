@@ -20,18 +20,31 @@ async function build(model, device, dtype, progress_callback) {
     keepWhisper(asr);
     return async (s, max_new_tokens) => ((await asr(s, { language: 'japanese', task: 'transcribe', max_new_tokens })).text || '');
   }
-  // Moonshine Tiny JA: its ONNX export wants an attention mask the pipeline doesn't pass, so it runs by hand
+  // Moonshine Tiny JA: its ONNX export wants masks transformers.js doesn't send (the encoder's attention_mask, the
+  // decoder's encoder_attention_mask). Each session gets a wrapper that adds a mask of all ones.
   const [m, proc, tok] = await Promise.all([
     MoonshineForConditionalGeneration.from_pretrained(model, { device, dtype: dtype || 'q8', progress_callback }),
     AutoProcessor.from_pretrained(model), AutoTokenizer.from_pretrained(model),
   ]);
+  addMask(m, 'model', 'attention_mask', (f) => f.input_values);
+  addMask(m, 'decoder_model_merged', 'encoder_attention_mask', (f) => f.encoder_hidden_states, 2);
   return async (s, max_new_tokens) => {
-    const inputs = await proc(s);
-    const dims = inputs.input_values.dims, n = dims.reduce((a, b) => a * b, 1);
-    const attention_mask = new Tensor('int64', new BigInt64Array(n).fill(1n), dims);
-    const out = await m.generate({ ...inputs, attention_mask, max_new_tokens });
+    const out = await m.generate({ ...(await proc(s)), max_new_tokens });
     return tok.decode(out[0], { skip_special_tokens: true });
   };
+}
+
+function addMask(m, key, name, like, rank) {
+  const t = m.sessions[key]; if (!t || !t.inputNames.includes(name)) return;
+  const run = t.run.bind(t);
+  m.sessions[key] = new Proxy(t, { get(o, k) {
+    if (k === 'inputNames') return o.inputNames.filter((n) => n !== name);
+    if (k === 'run') return (feeds, ...r) => {
+      const ref = like(feeds), dims = rank ? ref.dims.slice(0, rank) : ref.dims, n = dims.reduce((a, b) => a * b, 1);
+      return run({ ...feeds, [name]: new ref.constructor('int64', new BigInt64Array(n).fill(1n), dims) }, ...r);
+    };
+    const x = o[k]; return typeof x === 'function' ? x.bind(o) : x;
+  } });
 }
 
 // Whisper can also be asked how likely each candidate word is for this audio (forced decoding). That catches a

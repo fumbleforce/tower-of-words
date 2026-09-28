@@ -1,0 +1,139 @@
+{
+ "title": "Voice input: mic row and practice dots",
+ "date": "2026-09-29",
+ "by": "voice-input agent",
+ "status": "open",
+ "question": "Does saying the word look and read right in each state, and is three tries before a word is one click the right number?",
+ "multi": true,
+ "media": [
+  {
+   "image": "game3d/shots/voice/states-sheet.png",
+   "caption": "Every state, desktop on top, phone below"
+  }
+ ],
+ "options": [
+  {
+   "id": "voice-idle",
+   "label": "voice-idle",
+   "image": "game3d/shots/voice/idle-desktop.png",
+   "images": [
+    "game3d/shots/voice/idle-phone.png"
+   ],
+   "note": "Idle: the mic row under the typing box"
+  },
+  {
+   "id": "voice-asking",
+   "label": "voice-asking",
+   "image": "game3d/shots/voice/asking-desktop.png",
+   "images": [
+    "game3d/shots/voice/asking-phone.png"
+   ],
+   "note": "First press: where the audio goes"
+  },
+  {
+   "id": "voice-loading",
+   "label": "voice-loading",
+   "image": "game3d/shots/voice/loading-desktop.png",
+   "images": [
+    "game3d/shots/voice/loading-phone.png"
+   ],
+   "note": "One-time model download"
+  },
+  {
+   "id": "voice-listening",
+   "label": "voice-listening",
+   "image": "game3d/shots/voice/listening-desktop.png",
+   "images": [
+    "game3d/shots/voice/listening-phone.png"
+   ],
+   "note": "Listening, with the level meter"
+  },
+  {
+   "id": "voice-thinking",
+   "label": "voice-thinking",
+   "image": "game3d/shots/voice/thinking-desktop.png",
+   "images": [
+    "game3d/shots/voice/thinking-phone.png"
+   ],
+   "note": "Thinking"
+  },
+  {
+   "id": "voice-hit",
+   "label": "voice-hit",
+   "image": "game3d/shots/voice/hit-desktop.png",
+   "images": [
+    "game3d/shots/voice/hit-phone.png"
+   ],
+   "note": "Hit"
+  },
+  {
+   "id": "voice-miss",
+   "label": "voice-miss",
+   "image": "game3d/shots/voice/miss-desktop.png",
+   "images": [
+    "game3d/shots/voice/miss-phone.png"
+   ],
+   "note": "Miss, with what it heard"
+  },
+  {
+   "id": "voice-miss2",
+   "label": "voice-miss2",
+   "image": "game3d/shots/voice/miss2-desktop.png",
+   "images": [
+    "game3d/shots/voice/miss2-phone.png"
+   ],
+   "note": "Second miss: Hear it"
+  },
+  {
+   "id": "voice-other",
+   "label": "voice-other",
+   "image": "game3d/shots/voice/other-desktop.png",
+   "images": [
+    "game3d/shots/voice/other-phone.png"
+   ],
+   "note": "Sounded like another word"
+  },
+  {
+   "id": "voice-quiet",
+   "label": "voice-quiet",
+   "image": "game3d/shots/voice/quiet-desktop.png",
+   "images": [
+    "game3d/shots/voice/quiet-phone.png"
+   ],
+   "note": "Nothing heard"
+  },
+  {
+   "id": "voice-blocked",
+   "label": "voice-blocked",
+   "image": "game3d/shots/voice/blocked-desktop.png",
+   "images": [
+    "game3d/shots/voice/blocked-phone.png"
+   ],
+   "note": "Mic blocked"
+  },
+  {
+   "id": "voice-saymenu",
+   "label": "voice-saymenu",
+   "image": "game3d/shots/voice/saymenu-desktop.png",
+   "images": [
+    "game3d/shots/voice/saymenu-phone.png"
+   ],
+   "note": "Say menu with practice dots"
+  },
+  {
+   "id": "voice-words",
+   "label": "voice-words",
+   "image": "game3d/shots/voice/words-desktop.png",
+   "images": [
+    "game3d/shots/voice/words-phone.png"
+   ],
+   "note": "Words panel with practice dots"
+  }
+ ],
+ "links": [
+  {
+   "label": "Numbers and design notes",
+   "href": "notes/VOICE-INPUT.md"
+  }
+ ]
+}

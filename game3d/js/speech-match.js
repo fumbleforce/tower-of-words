@@ -151,7 +151,7 @@ export function bestOf(text, ids, roOf = () => null) {
 // For each word the recogniser also reports how likely its written forms are for this audio (mean log-probability
 // per token), next to how likely its own free transcript is. A learner's accent often makes the free transcript some
 // other word (よろしく came out 喜悔しましょう) while the target still scores close to it and above every other word.
-export const SCORE_RULE = { margin: 1.0, floor: -2.5, lead: 0.3 };
+export const SCORE_RULE = { margin: 1.0, floor: -2.0, lead: 0.8 };   // tuned on the bench (notes/VOICE-INPUT.md)
 // the forms each word is scored as: its kana and its usual written form
 export function candidatesFor(ids) {
   return Object.fromEntries(ids.filter((id) => SPOKEN[id]).map((id) => [id, [...new Set([SPOKEN[id].kana[0], SPOKEN[id].forms[0] || SPOKEN[id].kana[0]])]]));

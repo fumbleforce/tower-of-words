@@ -17,6 +17,7 @@
 <div id="bg"></div>
 <div id="stateTag"></div>
 <div id="ui">
+  <div id="stage"><div class="focus"></div></div>
   <div id="talk">
     <div class="who"></div>
     <div class="line"></div>
@@ -36,8 +37,9 @@ import { pipsHTML, MASTERY_CSS } from '../../js/mastery.js';
 const q = new URLSearchParams(location.search), st = q.get('state') || 'idle', id = q.get('word') || 'matte', phone = q.get('phone') === '1';
 document.body.classList.toggle('phone', phone);
 document.documentElement.style.setProperty('--ui', 1);
+document.body.dataset.place = 'gate'; if (phone) document.documentElement.style.setProperty('--band', '300px');
 window.__settings = { voiceInput: q.get('mode') || 'device', voiceKey: 'KeyV', masteryUses: 3, voice: 1, master: 1 };
-document.getElementById('bg').style.backgroundImage = `url(../../shots/shell2/act-${phone ? 'phone' : 'desktop'}.png)`;
+document.getElementById('bg').style.backgroundImage = `url(../../shots/shell2/hudfar-${phone ? 'phone' : 'desktop'}.png)`;
 document.getElementById('stateTag').textContent = st + (phone ? ' · phone' : ' · desktop');
 const css = document.createElement('style'); css.textContent = MASTERY_CSS; document.head.appendChild(css);
 
@@ -45,7 +47,7 @@ const css = document.createElement('style'); css.textContent = MASTERY_CSS; docu
 Object.assign(flags, { practice_ohayo: 3, practice_yoroshiku: 1, practice_matte: 2, practice_sumimasen: 0 });
 
 if (st === 'saymenu' || st === 'words') {
-  document.getElementById('talk').hidden = true;
+  document.getElementById('talk').hidden = true; document.getElementById('stage').hidden = true;
   const ids = ['ohayo', 'yoroshiku', 'sumimasen', 'matte'];
   if (st === 'saymenu') {
     const m = document.getElementById('sayMenu'); m.hidden = false;

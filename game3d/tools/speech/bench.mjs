@@ -32,10 +32,10 @@ if (process.env.RESCORE && existsSync(rawPath)) raw = JSON.parse(readFileSync(ra
 else {
   const port = +(process.env.PORT || 18779);
   const srv = spawn('python3', ['-m', 'http.server', String(port), '--bind', '127.0.0.1'], { cwd: root, stdio: 'ignore' });
-  await new Promise((r) => setTimeout(r, 700));
-  const args = device === 'webgpu' ? ['--enable-unsafe-webgpu', '--enable-features=Vulkan', '--use-angle=vulkan'] : [];
+  for (let i = 0; i < 50; i++) { try { await fetch(`http://127.0.0.1:${port}/`); break; } catch { await new Promise((r) => setTimeout(r, 200)); } }
+  const args = device === 'webgpu' ? ['--enable-unsafe-webgpu', '--enable-features=Vulkan', '--use-vulkan=native', '--use-angle=vulkan', '--ignore-gpu-blocklist'] : [];
   await takeBrowserLock();
-  const browser = await chromium.launch({ headless: true, args });
+  const browser = await chromium.launch({ headless: true, args, ...(process.env.CHANNEL ? { channel: process.env.CHANNEL } : {}) });
   try {
     const page = await browser.newPage();
     page.on('console', (m) => { if (m.type() === 'error') console.error('page:', m.text()); });

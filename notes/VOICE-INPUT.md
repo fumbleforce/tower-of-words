@@ -29,9 +29,30 @@ What that adds up to:
 
 ## 2. Tech (local first)
 
-Choice: Whisper base (multilingual), run in the browser by transformers.js in a web worker, with the model downloaded once from Hugging Face and kept in the browser's cache. The Web Speech API is the opt-in fallback for devices that can't run the model.
+On-device recognition runs in the browser through transformers.js (4.3.0, from jsDelivr) in a web worker, so the game and the level meter keep moving while it thinks. The model downloads once from Hugging Face and stays in the browser's cache (Cache Storage, with the WASM runtime cached too), so it works offline on the train after the first time. The mic is opened only on the first press and closed when the prompt closes.
 
-Numbers and the hit rates are in section 4 (filled from game3d/tools/speech/results/).
+Matching (js/speech-match.js). Whatever the recogniser writes (kanji, kana or romaji) goes to one plain romaji spelling: the day's words written in kanji become kana, katakana become hiragana, fillers (えーと, あの) drop, long vowels and the small tsu collapse, and l is read as r. It's then compared by sound. A wrong consonant costs 1, and a vowel slip or a dropped y, w or h costs a half, so "kait" for kite, "E-rate" for irete and "You Go It" for ugoite pass. A word may sit inside a longer answer, but anything left over costs a little. If the answer is closer to another word Eric knows, it counts as that word (止まって is not まって), and the miss says so.
+
+Second opinion (Whisper only). When the transcript misses, the worker asks Whisper how likely each word Eric can say is for the same audio (forced decoding on the kept encoder output). The target passes if it scores within 1.0 of the free transcript, above -2.0, and 0.8 ahead of every other word (SCORE_RULE, tuned on the bench). This is what caught よろしく when Whisper wrote 喜悔しましょう. Moonshine's scores lean toward long phrases, so it doesn't use this.
+
+The bench plays our own clips into the real browser code (game3d/tools/speech/bench.mjs, headless Chromium, one thread, which is what GitHub Pages allows without cross-origin isolation). There are 10 words, each as the native word clip (word-<id>.mp3) and Eric's learner clip (eric-<id>.mp3), in 5 conditions: clean with mic silence around it, over the train's ambience, through a phone band, slowed to 0.8, and quiet in a room. That's 100 tries. Each try is also checked against the 9 wrong words, plus 5 other speakers' Japanese sentences and 3 rooms with nobody talking, which gives 979 checks that should all fail.
+
+| Model | Download | First load | Time per word (desktop, 1 thread) | Hits | Native | Eric | False accepts |
+|---|---|---|---|---|---|---|---|
+| Whisper base q8 + second opinion | 77 MB | 4.9 s | 2.7 s, plus 2.3 s only after a miss | **92%** | 50/50 | 42/50 | 6/979 |
+| Whisper base q8, transcript only | 77 MB | 4.9 s | 2.7 s | 85% | 49/50 | 36/50 | 6/979 |
+| Whisper tiny q8 + second opinion | 41 MB | 3.5 s | 1.3 s (+1.1 s) | 72% | 47/50 | 25/50 | 5/979 |
+| Moonshine Tiny JA q8 | 147 MB | 9.7 s | **0.05 s** | 72% | 49/50 | 23/50 | 6/979 |
+
+Per word, Whisper base with the second opinion (native / Eric): matte 5/5 5/5, akete 5/5 2/5, kite 5/5 4/5, ugoite 5/5 4/5, irete 5/5 5/5, dashite 5/5 2/5, tomatte 5/5 5/5, ohayo 5/5 5/5, yoroshiku 5/5 5/5, sumimasen 5/5 5/5. By condition: clean 19/20, train 18/20, phone band 17/20, slow 19/20, quiet room 19/20. Eric's akete comes out かて, which really is closer to 来て, and his dashite comes out as a dash or ダシアイト. All 6 false accepts are Eric's own words heard as a neighbouring word (his akete as kite, tomatte as matte, yoroshiku on the phone band as sumimasen). None of the other speakers' sentences or the empty rooms passed as a word. A silent recording never reaches the model at all (Whisper invents "thanks for watching" from silence).
+
+For reference, Whisper large-v3-turbo on the same clips (CPU, not in the game) heard Eric's clips as マテ, Aketai, KITE, ユーゴイト, イレイティ, Dashite, トマテ, おはようございます, よろしくお願いします and Sumimasen. His TTS reads some words with an English accent, which makes these clips a harsh stand-in for a real learner.
+
+Phone. Chrome's CPU throttling doesn't reach web workers (the 4x-throttled run took the same time as the normal one), so the phone numbers are an estimate. A mid-range Android phone is about 3 to 4 times slower per thread than this desktop (Ryzen 9 9950X3D), so Whisper base would take about 7 to 10 s a word, tiny about 4 to 5 s, and Moonshine about 0.2 s. So the game picks per device (`pickModel()` in speech.js): Whisper base on a computer and Moonshine on a phone, with `settings.voiceModel` to override. Two things would change this. Cross-origin isolation (a small service worker, requested from the builder as optional) lets the WASM runtime use several threads, which is 2 to 4 times faster. WebGPU would make Whisper base fast on the desktop and on newer Android phones. I couldn't measure WebGPU: headless Chromium's Vulkan device here runs out of memory on the first run, even with the GPU free. It needs a check in a real browser window.
+
+Web Speech API (Settings > Voice input > Browser). It's opt-in and small, with live partial results, and matched the same way. Chrome sends the audio to Google's servers and needs a connection, so it won't work on the train, and the setting says so. It can't be tested headlessly, and I couldn't measure it here.
+
+Licences: transformers.js and Whisper are Apache-2.0 and MIT. Moonshine's Japanese model is under the Moonshine AI Community License (free below a revenue threshold). Check it before selling anything.
 
 ## 3. Build
 
@@ -46,14 +67,25 @@ Files (voice-input agent):
 
 The wiring into ui.js, menu.js, settings.js and main.js is requested in notes/production-requests.md.
 
-## Where I am (paused 2026-09-29, overnight agent cap)
+## 4. UI states
 
-Done: the study (section 1), the matcher, the worker (Whisper and Moonshine, plus forced-decoding scores), speech.js with the mic row in all states, mastery.js, the bench and clip set, the state-sheet page, and the shell and builder requests in notes/production-requests.md (not yet sent to them).
+Sheet: game3d/shots/voice/states-sheet.png (desktop 1366x860 on top, phone 390x844 below), from `node game3d/tools/speech/states.mjs`. The single shots are in game3d/shots/voice/<state>-<desktop|phone>.png. States:
 
-First numbers (whisper, WASM, one thread, while three benches shared the CPU, so the times are high), 100 positive tries (10 words, native and Eric's clips, 5 mic conditions each) and about 980 wrong-word checks:
+- idle: "or [mic] Hold V or the mic and say it" under the typing box (phone: "Hold the mic and say it").
+- asking: the first press says where the audio goes before the browser's permission prompt.
+- loading: a progress bar for the one-time download, and typing still works.
+- listening: the mic fills teal, a ring swells with loudness, and a nine-bar meter moves with the voice. A long press stops on release. A quick tap listens until 0.9 s of quiet after speech (or 6 s).
+- thinking: three dots.
+- hit: the romaji letters all light up, then "待って Got it." and the prompt closes as if typed.
+- miss: "Didn't catch that (heard かて). Try again, or type it." From the second miss there's also a "Hear it" button that plays the word slowly. Other variants: "That sounded like 止まって." and "Didn't hear anything. Hold V or the mic while you talk."
+- blocked: the mic is denied, and the line explains how to allow it and to type meanwhile.
+- The Say menu and the Words panel show three dots per word, filling as it's typed or said, then "by heart".
 
-- whisper-base q8 (77 MB): 85% hits with the sound-weighted matcher (native 49/50, Eric 36/50), 6 false accepts. About 2.8 s per word.
-- whisper-tiny q8 (41 MB): 70% hits (native 49/50, Eric 21/50), 5 false accepts. About 1.4 s per word.
-- Eric's misses on base are mostly よろしく heard as kanji nonsense (喜悔しましょう) and akete heard as かて.
+The mic row takes its styles from the game's tokens (teal for on, coral for trouble, no glow). It is published for Jørgen as review item `voice-input-ui`.
 
-Next, in this order: run `game3d/tools/speech/queue.sh` (one browser at a time, takes /tmp/claude-1000/browser.lock), then `SCORE=1 node game3d/tools/speech/bench.mjs base wasm 1 base-score` to tune SCORE_RULE in js/speech-match.js; get Moonshine working (its run is untested); fill section 2 with clean load and recognition times for desktop, the 4x-slowed phone profile and WebGPU; run `node game3d/tools/speech/states.mjs` for the UI sheet (game3d/shots/voice/states-sheet.png) and look at every state; then message the main agent.
+## Wiring (requested)
+
+notes/production-requests.md, 2026-09-29, voice-input:
+
+- shell: settings.js keys (`voiceInput`, `voiceKey`, `voiceModel`, `masteryUses`); a Settings row "Voice input" (Off / On this device / Browser, with a plain note on where the audio goes and the download) and "Before a word is one click" (1 / 3 / 5); ui.js typePrompt mounts the mic row, counts every success and can be cancelled; the Say menu and Words panel show the dots.
+- builder: main.js say() opens the type-or-say prompt for a word that still needs practice, and backing out does nothing. Optional: cross-origin isolation for faster voice.
