@@ -13,6 +13,9 @@ import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
 import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
 import { GTAOPass } from 'three/addons/postprocessing/GTAOPass.js';
 import { Pass, FullScreenQuad } from 'three/addons/postprocessing/Pass.js';
+import { currentStyle, styleGrade, PALETTE } from './style/index.js';
+import { patchScene, setToon, U as TOON_U } from './style/toon.js';
+import { GBufferPass, InkPass } from './style/ink.js';
 
 // Neutral defaults. Values are in display space unless noted.
 export const GRADE = {
@@ -124,6 +127,8 @@ uniform float uExposure, uBloom, uTemp, uTint, uSat, uContrast, uVignette;
 uniform vec3 uLift, uGain, uShadowTint, uHighTint;
 uniform float uFocusY, uFocusBand, uFocusRamp, uBlur;
 uniform int uTaps;
+uniform float uPalAmt, uGrain, uTime;
+uniform vec3 uPal0, uPal1, uPal2, uPal3;
 varying vec2 vUv;
 
 vec3 neutral(vec3 color){
@@ -176,6 +181,18 @@ void main(){
   c = (c - 0.45) * uContrast + 0.45;
   l = dot(c, vec3(0.2126, 0.7152, 0.0722));
   c = mix(vec3(l), c, uSat);
+  // style study (?style=): map the tones toward the reference's navy, slate and pale palette, sparing warm skin
+  if (uPalAmt > 0.0) {
+    float pl = clamp(dot(c, vec3(0.2126, 0.7152, 0.0722)), 0.0, 1.0);
+    vec3 pm = pl < 0.35 ? mix(uPal0, uPal1, pl / 0.35) : pl < 0.7 ? mix(uPal1, uPal2, (pl - 0.35) / 0.35) : mix(uPal2, uPal3, (pl - 0.7) / 0.3);
+    float warm = smoothstep(0.04, 0.16, c.r - c.b);
+    c = mix(c, pm + (c - vec3(pl)) * 0.6, uPalAmt * (1.0 - 0.7 * warm));
+  }
+  if (uGrain > 0.0) {
+    float gn = fract(sin(dot(gl_FragCoord.xy + fract(uTime) * 91.7, vec2(12.9898, 78.233))) * 43758.5453);
+    float gl = dot(c, vec3(0.2126, 0.7152, 0.0722));
+    c += (gn - 0.5) * uGrain * (1.0 - 0.6 * abs(gl * 2.0 - 1.0));
+  }
   // vignette, rounder on a phone
   vec2 v = (vUv - 0.5) * vec2(uRes.x / max(uRes.x, uRes.y), uRes.y / max(uRes.x, uRes.y)) * 2.0;
   c *= 1.0 - uVignette * smoothstep(0.35, 1.25, dot(v, v));
@@ -195,6 +212,8 @@ class FinalPass extends Pass {
         uExposure: { value: 1 }, uBloom: { value: 0 }, uTemp: { value: 0 }, uTint: { value: 0 }, uSat: { value: 1 }, uContrast: { value: 1 }, uVignette: { value: 0.2 },
         uLift: { value: new THREE.Vector3() }, uGain: { value: new THREE.Vector3(1, 1, 1) }, uShadowTint: { value: new THREE.Vector3() }, uHighTint: { value: new THREE.Vector3() },
         uFocusY: { value: 0.5 }, uFocusBand: { value: 0.26 }, uFocusRamp: { value: 0.3 }, uBlur: { value: 2 }, uTaps: { value: 0 },
+        uPalAmt: { value: 0 }, uGrain: { value: 0 }, uTime: { value: 0 },
+        uPal0: { value: new THREE.Vector3(...PALETTE[0]) }, uPal1: { value: new THREE.Vector3(...PALETTE[1]) }, uPal2: { value: new THREE.Vector3(...PALETTE[2]) }, uPal3: { value: new THREE.Vector3(...PALETTE[3]) },
       },
       vertexShader: VERT, fragmentShader: FINAL_FRAG, depthTest: false, depthWrite: false,
     });
@@ -218,18 +237,30 @@ export function makePost(renderer, place, tier = 2) {
   const composer = new EffectComposer(renderer, new THREE.WebGLRenderTarget(4, 4, { type: THREE.HalfFloatType, samples: 4 }));
   composer.addPass(new RenderPass(scene, camera));
   if (place.beforeAO) composer.addPass(place.beforeAO);
+  // style study (?style=1..6): cel shading patched into every lit material, and a G-buffer that feeds both the ink
+  // lines and the AO pass (so AO doesn't draw the scene a second time)
+  const S = currentStyle();
+  let gbuf = null, ink = null;
+  if (S) {
+    setToon(S.toon); patchScene(scene);
+    gbuf = new GBufferPass(scene, camera);
+    composer.addPass(gbuf);
+  }
   const gtao = new GTAOPass(scene, camera, 4, 4);
   gtao.updateGtaoMaterial({ radius: 0.55, distanceExponent: 1.0, thickness: 1.5, scale: 1.2, samples: 16, distanceFallOff: 1.0 });
   gtao.updatePdMaterial({ lumaPhi: 10, depthPhi: 2, normalPhi: 3, radius: 5, rings: 2, samples: 16 });
+  if (gbuf) gtao.setGBuffer(gbuf.depthTexture, gbuf.texture);
   composer.addPass(gtao);
+  if (S && S.ink) { ink = new InkPass(gbuf, camera); ink.set(S.ink); composer.addPass(ink); }
   const bloom = new BloomPass();
   composer.addPass(bloom);
   const final = new FinalPass(bloom);
   final.exposure = 1;
   composer.addPass(final);
 
-  const g = { ...GRADE, ...(place.grade || {}) };
+  const g = styleGrade({ ...GRADE, ...(place.grade || {}) }, S);
   const u = final.mat.uniforms;
+  if (S) { u.uPalAmt.value = S.final.pal || 0; u.uGrain.value = S.final.grain || 0; }
   function applyGrade() {
     final.exposure = g.exposure;
     u.uTemp.value = g.temp; u.uTint.value = g.tint; u.uSat.value = g.sat; u.uContrast.value = g.contrast; u.uVignette.value = g.vignette;
@@ -251,6 +282,7 @@ export function makePost(renderer, place, tier = 2) {
     u.uBloom.value = T.bloom > 0 ? g.bloom : 0;
     u.uTaps.value = T.blurTaps;
     u.uPR.value = renderer.getPixelRatio();
+    if (gbuf) gbuf.enabled = !!ink || gtao.enabled;
   }
   applyGrade(); setQuality(tier);
   const post = {
@@ -261,7 +293,24 @@ export function makePost(renderer, place, tier = 2) {
     dpr: (q = cur) => (TIERS[q] || TIERS[2]).dpr,
     // change the grade live (a place can shift it with the time of day)
     setGrade(patch) { Object.assign(g, patch); applyGrade(); setQuality(cur); },
-    render() { u.uPR.value = renderer.getPixelRatio(); composer.render(); },
+    render() {
+      u.uPR.value = renderer.getPixelRatio();
+      if (S) styleFrame();
+      composer.render();
+    },
   };
+  // style study: characters and props added after load get patched too; the line weight follows the camera distance
+  let sf = 0;
+  const fwd = new THREE.Vector3();
+  function styleFrame() {
+    if ((sf++ % 20) === 0) patchScene(scene);
+    u.uTime.value = (u.uTime.value + 0.618) % 1;
+    if (ink) {
+      camera.getWorldDirection(fwd);
+      const d = fwd.y < -0.05 ? camera.position.y / -fwd.y : 15;
+      ink.mat.uniforms.uNearRef.value = d;
+    }
+  }
+  if (S) window.__style = { id: S.id, name: S.name, toon: { U: TOON_U, set: setToon }, ink, post, gbuf };
   return post;
 }
