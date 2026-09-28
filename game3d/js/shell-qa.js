@@ -30,13 +30,29 @@ export async function run(mode, api) {
     g.ui.closeTalk();
     if (mode === 'pause') api.setPaused(true);
     if (mode === 'save') { api.setPaused(true); await wait(300); api.openSaves('save'); }
-    if (mode === 'hud') {
+    if (['hud', 'act', 'goal'].includes(mode)) {
       // the opening beat is still running: hold the scene as if the player were free to walk
       g.runner.trigger = () => false; setInterval(() => { document.body.classList.remove('busy'); g.busy = false; g.ui.closeTalk(); }, 50);
+    }
+    if (mode === 'act') {
+      // stand Eric where several things are in reach, and step the target once so Next shows
+      const at = Q.get('at'); const m = g.markers.list.find((x) => x.id === at) || g.markers.list.find((x) => x.enabled());
+      const sp = m.spot(); g.player.root.position.set(sp[0] + 0.1, g.player.root.position.y, sp[1] + 0.1);
+      if (Q.get('cycle')) { await wait(400); for (let i = 0; i < +Q.get('cycle'); i++) window.__shell.cycleTarget?.(); }
+    }
+    if (mode === 'goal') { g.ui.goal(Q.get('goal') || 'Find a seat.'); }
+    if (mode === 'talk' || mode === 'wait') {
+      g.runner.trigger = () => false;
+      const known = await import('./lang.js'); known.known.add('ohayo');
+      g.ui.say({ name: 'Mio', role: 'programmer', color: '#5fc6bf' }, Q.get('line') || 'In the morning you say {ohayo} to everyone. The guard really cares about that one.', { whoId: 'mio' });
+      await wait(900);
+      if (mode === 'wait') { g.ui._advance = null; await wait(200); g.ui.waitPulse(innerWidth / 2, innerHeight - 80); }
+    }
+    if (mode === 'hud') {
       g.ui.goal(Q.get('goal') || 'Get through the gate.');
       g.ui.hint('If something won\'t budge, try a word you know on it.');
       g.ui.toast('New command: <span class="jp">開けて</span> <span class="gl">akete, open</span>');
-      if (Q.get('far')) { const c = g.place.cam; c.closeOn && c.closeOn(Q.get('far').split(',').map(Number), 2.4); }
+      if (Q.get('far')) { const c = g.place.cam; c.closeOn && c.closeOn(Q.get('far').split(',').map(Number), +(Q.get('zoom') || 2.4)); }
     }
     if (mode === 'loading') { document.body.classList.add('trip', 'loading'); }
     if (mode === 'end') {

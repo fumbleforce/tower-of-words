@@ -749,11 +749,13 @@ export const ui = {
     const canGo = !!this._advance && open && !typing;
     t.classList.toggle('can-go', canGo);
     t.classList.toggle('waiting', open && !canGo && !typing && !choosing);
-    hit.hidden = this.auto || !(open || busy) || typing || choosing;
+    // (only write what changed: #talk is watched by a MutationObserver, and even a same-value write is a mutation)
+    const hide = !!(this.auto || !(open || busy) || typing || choosing); if (hit.hidden !== hide) hit.hidden = hide;
     hit.classList.toggle('go', canGo);
     if (canGo && this._shownLine !== t.querySelector('.line')?.textContent) { this._shownLine = t.querySelector('.line')?.textContent; this._lines = (this._lines || 0) + 1; }
     const phone = document.body.classList.contains('phone');
-    const ch = t.querySelector('.more .ch'); if (ch) { ch.textContent = phone ? 'Tap to continue' : 'Click to continue'; ch.hidden = (this._lines || 0) > 8; }
+    const ch = t.querySelector('.more .ch');
+    if (ch) { const tx = phone ? 'Tap to continue' : 'Click to continue', hd = (this._lines || 0) > 8; if (ch.textContent !== tx) ch.textContent = tx; if (ch.hidden !== hd) ch.hidden = hd; }
   },
   waitPulse(x, y) {
     const t = $('#talk');

@@ -24,7 +24,7 @@ export function endHTML(game, { photos = {}, outro } = {}) {
   const people = met.map((id) => {
     const p = sim.people[id] || {}, sp = game.runner ? game.runner.speaker(id) : {};
     const name = p.name || sp.name || id, role = sp.role && sp.role !== 'you' ? sp.role : '';
-    return `<li>${faceHTML(id, p.color || sp.color, name)}<span class="who"><b>${esc(name)}</b>${role ? `<span class="rl">${esc(role)}</span>` : ''}${p.about ? `<span class="ab">${esc(p.about)}</span>` : ''}</span></li>`;
+    return `<li>${faceHTML(id, p.color || sp.color, name)}<span class="who"><b>${esc(name)}</b>${role ? `<span class="rl">${esc(role)}</span>` : ''}</span></li>`;
   }).join('');
   const word = (id) => { const w = WORDS[id]; return `<li class="wrow">${iconHTML(id)}<span class="cw"><span class="jp">${esc(w.ja)}</span><span class="rd">${esc(w.ro)} · ${esc(w.en)}</span></span></li>`; };
   const ph = PHRASES.filter((id) => known.has(id)), cm = COMMANDS.filter((id) => known.has(id));
