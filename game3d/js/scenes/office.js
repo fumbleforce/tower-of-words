@@ -39,7 +39,7 @@ function nameCard(name, ro) {
 }
 function vending(lit) {
   const g = new THREE.Group();
-  g.add(rbox(0.82, 1.3, 0.62, lit ? '#2d3b63' : '#2e3139', { r: 0.03 }));
+  g.add(rbox(0.82, 1.3, 0.62, lit ? '#3b4458' : '#2e3139', { r: 0.03 }));
   const face = new THREE.Mesh(new THREE.PlaneGeometry(0.58, 0.72), lit ? emissive('#b9d6ff', '#7fb2ff', 0.9) : mat('#20242b', { roughness: 0.4 }));
   face.position.set(-0.06, 0.8, 0.312); g.add(face);
   const cols = ['#e46a5a', '#f0b64a', '#5aa35d', '#4e8fd1', '#c77ab8', '#f2e2b0'];
@@ -203,17 +203,16 @@ function fridge() {
 }
 function counter(len) {
   const g = new THREE.Group();
-  g.add(rbox(len, 0.48, 0.56, '#9ea4ad', { r: 0.02 }));
-  g.add(rbox(len + 0.04, 0.04, 0.6, '#d9dad6', { y: 0.48, r: 0.012 }));
+  g.add(rbox(len, 0.48, 0.56, '#6f7682', { r: 0.02 }));
+  g.add(rbox(len + 0.04, 0.04, 0.6, '#c3c6c8', { y: 0.48, r: 0.012 }));
   const n = Math.round(len / 0.55);
-  for (let i = 0; i < n; i++) g.add(rbox(len / n - 0.06, 0.38, 0.01, '#aab0b8', { x: -len / 2 + (i + 0.5) * len / n, y: 0.05, z: 0.283, r: 0.006, cast: false }));
+  for (let i = 0; i < n; i++) g.add(rbox(len / n - 0.06, 0.38, 0.01, '#7f8692', { x: -len / 2 + (i + 0.5) * len / n, y: 0.05, z: 0.283, r: 0.006, cast: false }));
   return g;
 }
 function stairs() {
   const g = new THREE.Group();
   for (let i = 0; i < 7; i++) g.add(rbox(1.1, 0.12 * (i + 1), 0.34, i % 2 ? '#9ca1a8' : '#a6abb2', { z: -i * 0.34, r: 0.01 }));
   for (let i = 0; i < 5; i++) g.add(rbox(1.1, 0.02, 0.3, '#6e747e', { y: -0.001, z: 0.9 + i * 0.0, r: 0.005, cast: false }));
-  g.add(rbox(0.05, 0.05, 2.4, '#c9ccd0', { x: 0.58, y: 0.95, z: -1.0, r: 0.02 }));
   return g;
 }
 function table2() {
@@ -330,12 +329,12 @@ export function buildOffice() {
   // ---- lift lobby ----
   const liftDoor = new THREE.Group();
   const leaves = [];
-  for (const s of [-1, 1]) { const l = rbox(0.5, 1.22, 0.05, null, { x: s * 0.255, z: 0.02, r: 0.01, m: mat('#a2a8b0', { roughness: 0.5, metalness: 0.2 }) }); l.add(rbox(0.012, 1.16, 0.052, '#5d636d', { x: -s * 0.245, y: 0.03, r: 0.003, cast: false })); liftDoor.add(l); leaves.push(l); }
+  for (const s of [-1, 1]) { const l = rbox(0.5, 1.22, 0.05, null, { x: s * 0.255, z: 0.02, r: 0.01, m: mat('#a2a8b0', { roughness: 0.5, metalness: 0.2 }) }); l.add(rbox(0.012, 1.16, 0.052, '#5d636d', { x: -s * 0.245, y: -0.58, r: 0.003, cast: false })); liftDoor.add(l); leaves.push(l); }
   liftDoor.position.set(-5.45, 0, -3.4 + T / 2 + 0.01); root.add(liftDoor);
   root.add(rbox(0.36, 0.12, 0.03, '#1d2027', { x: -5.45, y: 1.31, z: -3.4 + T / 2 + 0.02, r: 0.01, cast: false }));
   root.add(rbox(0.07, 0.13, 0.03, '#b9bec6', { x: -4.8, y: 0.62, z: -3.4 + T / 2 + 0.02, r: 0.01 }));
-  const vm = vending(true); vm.scale.setScalar(0.82); vm.rotation.y = -Math.PI / 2; vm.position.set(-4.55, 0, -2.72); root.add(vm);   // against the east wall, clear of the lift jamb
-  root.add(rbox(0.2, 0.3, 0.2, '#6d7684', { x: -4.45, z: -1.95, r: 0.02 }));
+  const vm = vending(true); vm.scale.setScalar(0.82); vm.position.set(-4.62, 0, -2.3); root.add(vm);   // facing the room, clear of the lift jamb
+  root.add(rbox(0.2, 0.3, 0.2, '#6d7684', { x: -4.45, z: -1.55, r: 0.02 }));
   const bn = bench(1.6); bn.rotation.y = Math.PI / 2; bn.position.set(-6.72, 0, -1.4); root.add(bn);
   { const p = plant({ size: 1.0, seed: 6 }); p.position.set(-6.65, 0, -0.05); root.add(p); }
   { const l = ceilingLamp(0.6); l.position.set(-6.6, 1.3, -3.4 + T / 2 + 0.02); root.add(l); }
@@ -382,7 +381,7 @@ export function buildOffice() {
   for (let i = 0; i < 3; i++) { const f = filingCabinet(3, '#858b95'); f.rotation.y = Math.PI / 2; f.position.set(-3.95, 0, -1.9 - i * 0.48 + 0.0); root.add(f); }
   // a bench in the corridor, by the office door
   { const bc = bench(1.4, { seats: 2 }); bc.position.set(-1.9, 0, 0.62); root.add(bc); }
-  const cr = coatRack(); cr.position.set(1.1, 0, -0.45); root.add(cr);
+  
   // a small meeting table below the island, for the morning huddle
   { const mt = new THREE.Group(); mt.add(rbox(0.9, 0.04, 0.6, '#d5d6d3', { y: 0.4, r: 0.01 }), rbox(0.08, 0.4, 0.08, PAL.deskLeg, { r: 0.01 })); for (const x of [-0.3, 0.3]) mt.add(rbox(0.3, 0.05, 0.28, PAL.chair, { x, y: 0.24, z: 0.45, r: 0.02 }), rbox(0.03, 0.24, 0.03, PAL.deskLeg, { x, z: 0.45, r: 0.01 })); mt.add(rbox(0.3, 0.02, 0.22, PAL.paper, { x: 0.15, y: 0.44, r: 0.005 })); mt.position.set(-2.4, 0, -1.15); root.add(mt); }
   const fan = standFan(); fan.position.set(-3.3, 0, -2.2); root.add(fan);
@@ -471,8 +470,7 @@ export function buildOffice() {
   // ---- toilets: men's and women's ----
   for (const [x0, k] of [[1.8, 'm'], [4.4, 'f']]) {
     for (let i = 0; i < 2; i++) { const s = stall(0.9, 1.0); s.rotation.y = Math.PI; s.position.set(x0 + 0.62 + i * 0.95, 0, 5.85); root.add(s); }
-    if (k === 'm') { for (let i = 0; i < 2; i++) root.add(rbox(0.26, 0.5, 0.2, '#eeefee', { x: x0 + 0.45 + i * 0.45, y: 0.2, z: CS + T / 2 + 0.12, r: 0.06 })); }
-    else root.add(rbox(0.5, 0.05, 0.3, '#d8dadb', { x: x0 + 0.7, y: 0.45, z: CS + T / 2 + 0.17, r: 0.01 }));
+    // (the urinals and the changing shelf stood in the doorways and read as blobs: removed, Jørgen 2026-09-28)
   }
 
   // ---- people ----
@@ -501,7 +499,7 @@ export function buildOffice() {
     pool(x, z + 0.3, 0.42, { k: (0.14 + 0.08 * k) * (z > CS ? 0.5 : 1), sx: 0.55, sz: 2.4, color: '#fff0d8' });
   }
   for (const x of [-5.6, -2.6, 0.9, 4.0]) { pool(x, 1.2, 0.95, { k: 0.3, sx: 1.6, sz: 0.9 }); pool(x, 1.35, 0.35, { k: 0.2, sx: 0.6, sz: 2.2, color: '#fff0d8' }); }
-  pool(-5.0, -2.72, 0.7, { k: 0.22, color: '#8fb8ff' });            // vending glow on the floor
+  pool(-4.62, -1.8, 0.6, { k: 0.2, color: '#8fb8ff' });            // vending glow on the floor
   pool(X1 - 0.35, 1.25, 0.55, { k: 0.18, color: '#7fe0a4' });          // the exit sign
 
   // ---- main office ----
@@ -549,9 +547,9 @@ export function buildOffice() {
   // shredder, a pallet of paper reams, a paper box stack by the copier, a cutter and stapler on the table
   { const s2 = new THREE.Group(); s2.add(rbox(0.36, 0.5, 0.3, '#3a3f48', { r: 0.02 }), rbox(0.3, 0.03, 0.08, '#15181d', { y: 0.5, r: 0.005, cast: false })); s2.position.set(-6.45, 0, 2.85); root.add(s2); }
   { const pl = new THREE.Group(); pl.add(rbox(0.8, 0.1, 0.6, '#8a7a64', { r: 0.01 }));
-    for (let i = 0; i < 3; i++) for (let j = 0; j < 2; j++) pl.add(rbox(0.36, 0.14, 0.26, i % 2 ? '#e7e3d8' : '#dcd8cc', { x: -0.19 + j * 0.38, y: 0.1 + i * 0.145, z: 0, r: 0.01 }));
+    for (let i = 0; i < 3; i++) for (let j = 0; j < 2; j++) { pl.add(rbox(0.36, 0.14, 0.26, i % 2 ? '#e7e3d8' : '#dcd8cc', { x: -0.19 + j * 0.38, y: 0.1 + i * 0.145, z: 0, r: 0.01 })); pl.add(rbox(0.365, 0.03, 0.265, '#4a74b8', { x: -0.19 + j * 0.38, y: 0.155 + i * 0.145, z: 0, r: 0.004, cast: false })); }
     pl.position.set(-4.7, 0, 5.95); root.add(pl); }
-  for (let i = 0; i < 3; i++) root.add(rbox(0.34, 0.14, 0.26, i % 2 ? '#e7e3d8' : '#dcd8cc', { x: -2.45, y: i * 0.145, z: 3.3, r: 0.01 }));
+  for (let i = 0; i < 3; i++) root.add(rbox(0.34, 0.14, 0.26, i % 2 ? '#e7e3d8' : '#dcd8cc', { x: -2.45, y: i * 0.145, z: 3.3, r: 0.01 }), rbox(0.345, 0.03, 0.265, '#c9473f', { x: -2.45, y: i * 0.145 + 0.055, z: 3.3, r: 0.004, cast: false }));
   root.add(rbox(0.36, 0.04, 0.26, '#6d747e', { x: -4.0, y: 0.46, z: 4.55, r: 0.01 }), rbox(0.12, 0.05, 0.04, '#3a3f48', { x: -4.75, y: 0.46, z: 4.9, r: 0.01 }));
   { const p = plant({ size: 0.8, seed: 21 }); p.position.set(-2.6, 0, 6.05); root.add(p); }
   // a paper trolley parked by the shelves
@@ -574,14 +572,12 @@ export function buildOffice() {
   // ---- toilets ----
   for (const x0 of [1.8, 4.4]) {
     // hand dryer and paper towels over the sink, a mat, a small plant on the sink shelf
-    root.add(rbox(0.1, 0.24, 0.22, '#e3e4e2', { x: x0 + 2.52, y: 0.62, z: 4.5, r: 0.03 }));
-    root.add(rbox(0.1, 0.26, 0.24, '#d0d3d6', { x: x0 + 2.52, y: 0.6, z: 2.72, r: 0.02 }));
     { const p = plant({ size: 0.4, seed: 23 + x0 }); p.position.set(x0 + 2.33, 0.48, 3.55); root.add(p); }
   }
-  { const mb = new THREE.Group(); mb.add(rbox(0.32, 0.26, 0.32, '#e0b83a', { r: 0.04 })); const h = new THREE.Mesh(new THREE.CylinderGeometry(0.012, 0.012, 1.0, 6), mat('#9aa0a8')); h.position.set(0.05, 0.6, 0); h.rotation.z = 0.25; mb.add(sh(h)); mb.position.set(6.6, 0, 3.0); root.add(mb); }
+  { const mb = new THREE.Group(); mb.add(rbox(0.32, 0.26, 0.32, '#e0b83a', { r: 0.04 })); const h = new THREE.Mesh(new THREE.CylinderGeometry(0.012, 0.012, 1.0, 6), mat('#9aa0a8')); h.position.set(0.05, 0.6, 0); h.rotation.z = 0.25; mb.add(sh(h)); mb.position.set(4.8, 0, 4.85); root.add(mb); }
   // ---- machine room ----
   // an UPS, cable bundles, a step ladder
-  root.add(rbox(0.5, 0.7, 0.6, '#2c3038', { x: 6.55, z: -3.3, r: 0.02 }));
+  root.add(rbox(0.5, 0.7, 0.6, '#4a505b', { x: 6.55, z: -3.3, r: 0.02 })); for (let i = 0; i < 4; i++) root.add(rbox(0.4, 0.02, 0.01, '#6b7280', { x: 6.55, y: 0.12 + i * 0.1, z: -2.995, r: 0.003, cast: false }));
   { const l = new THREE.Mesh(new THREE.PlaneGeometry(0.08, 0.03), new THREE.MeshBasicMaterial({ color: '#5fd38f' })); l.position.set(6.55, 0.6, -2.995); root.add(l); }
   for (let i = 0; i < 3; i++) { const c = new THREE.Mesh(new THREE.CylinderGeometry(0.025, 0.025, 2.4, 6), mat(['#3f5f8a', '#5a606b', '#8a6a3a'][i])); c.rotation.z = Math.PI / 2; c.position.set(5.3, 0.03, -2.2 + i * 0.05); root.add(sh(c)); }
   { const lad = new THREE.Group(); for (const s of [-1, 1]) { const r = rbox(0.04, 0.9, 0.04, '#b9bdc3', { x: s * 0.18, r: 0.01 }); r.rotation.x = 0.12; lad.add(r); } for (let i = 0; i < 3; i++) lad.add(rbox(0.36, 0.03, 0.12, '#9aa0a8', { y: 0.2 + i * 0.25, z: -0.02 * i, r: 0.01 })); lad.position.set(6.6, 0, -0.4); root.add(lad); }
@@ -593,7 +589,7 @@ export function buildOffice() {
     for (const dz of [-0.33, 0.33]) { v.add(rbox(0.3, 0.02, 0.3, '#f4f5f5', { x: -0.02, y: 0.48, z: dz, r: 0.04, cast: false })); v.add(rbox(0.04, 0.12, 0.04, '#b9bcc0', { x: 0.15, y: 0.48, z: dz, r: 0.01 })); }
     v.position.set(x0 + 2.3, 0, 3.55); root.add(v);
     const ms = new THREE.Mesh(new THREE.PlaneGeometry(1.2, 0.36), mat('#b7c8d4', { roughness: 0.12, metalness: 0.25 })); ms.rotation.y = -Math.PI / 2; ms.position.set(x0 + 2.53, 0.78, 3.55); root.add(ms);
-    root.add(rbox(0.22, 0.3, 0.22, '#d8dadb', { x: x0 + 2.3, z: 4.5, r: 0.03 }));                                         // bin
+    { const pb = new THREE.Mesh(new THREE.CylinderGeometry(0.11, 0.1, 0.3, 14), mat('#6d747e', { roughness: 0.5, metalness: 0.3 })); pb.position.set(x0 + 2.3, 0.15, 4.5); root.add(sh(pb)); }   // pedal bin
   }
   { const ws = new THREE.Group(); ws.add(rbox(0.3, 0.44, 0.03, '#e0b83a', { r: 0.02 })); ws.rotation.x = -0.28; ws.position.set(3.0, 0, 4.9); root.add(ws); }   // wet-floor sign
   // office: low binder cabinets along the corridor wall, a whiteboard on a stand, mugs on the desks
@@ -646,11 +642,11 @@ export function buildOffice() {
   const wallsZ = [[Z0, CN, -4.2], [Z0, CN, 3.4], [CS, Z1, -2.2], [CS, Z1, 1.8], [CS, Z1, 4.4]];
   for (const [a, b, x] of wallsZ) B(x - t2w, x + t2w, a, b);
   B(-5.95, -4.95, -3.4, -3.3);                                      // lift (you don't walk into it)
-  B(-4.85, -4.2, -3.1, -2.35); B(-4.6, -4.3, -2.1, -1.8);          // vending, bin
+  B(-4.98, -4.26, -2.6, -2.0); B(-4.6, -4.3, -1.7, -1.4);          // vending, bin
   B(X0, -6.4, -2.25, -0.55); B(-6.9, -6.4, -0.3, 0.2);             // bench, plant
   B(X0, -4.2, Z0, -3.45);                                           // stairwell (not walkable today)
   B(-4.15, -2.8, Z0, Z0 + 0.5); B(-4.1, -3.6, -5.15, -4.65); B(1.8, 3.35, Z0, Z0 + 0.62);
-  B(-4.1, -3.6, -0.6, -0.1); B(2.05, 3.2, -1.8, -0.15); B(0.9, 1.3, -0.65, -0.25); B(-3.5, -3.1, -2.4, -2.0); B(-2.9, -1.9, -1.5, -0.55); B(-4.1, -3.6, -3.2, -2.8);
+  B(-4.1, -3.6, -0.6, -0.1); B(2.05, 3.2, -1.8, -0.15); B(-3.5, -3.1, -2.4, -2.0); B(-2.9, -1.9, -1.5, -0.55); B(-4.1, -3.6, -3.2, -2.8);
   B(-2.62, 1.0, ZN - 0.36, ZS + 0.36);                               // island
   for (const d of desks) B(d.seat[0] - 0.24, d.seat[0] + 0.24, Math.min(d.seat[1], d.seat[1] + d.face * 0.25) - 0.02, Math.max(d.seat[1], d.seat[1] + d.face * 0.25) + 0.02);
   B(1.15, 1.95, -4.0, -2.75); B(1.95, 2.45, -3.6, -3.1);             // chief's desk and chair
@@ -660,7 +656,7 @@ export function buildOffice() {
   B(6.0, 6.6, 1.85, 2.25);                                           // trolley
   B(-3.35, -2.55, CS, CS + 0.75); B(-5.8, -5.0, CS, CS + 0.58); B(X0, X0 + 0.5, 3.1, 5.3); B(-5.2, -3.6, 4.25, 5.15); B(-4.25, -2.35, 5.6, Z1); B(-6.75, -6.25, 5.65, Z1); B(-2.75, -2.35, 4.4, 5.2);
   B(0.15, 1.75, CS, CS + 0.62); B(1.15, 1.8, 3.6, 5.0); B(-2.15, -1.45, CS, CS + 0.62); B(-1.25, -0.35, 4.25, 5.3); B(-2.05, -1.75, 5.85, Z1); B(1.2, 1.6, 5.8, Z1);
-  for (const x0 of [1.8, 4.4]) { B(x0 + 0.1, x0 + 2.55, 5.3, Z1); B(x0 + 2.15, x0 + 2.55, 3.15, 3.65); B(x0 + 2.2, x0 + 2.5, 3.85, 4.15); B(x0 + 0.25, x0 + 1.2, CS, CS + 0.32); }
+  for (const x0 of [1.8, 4.4]) { B(x0 + 0.1, x0 + 2.55, 5.3, Z1); B(x0 + 2.15, x0 + 2.55, 3.15, 3.65); B(x0 + 2.2, x0 + 2.5, 3.85, 4.15); }
   B(-4.55, -4.05, 1.85, CS); B(2.95, 3.45, 1.85, CS); B(1.45, 1.75, 1.85, 2.1); B(0.55, 1.12, 1.95, CS); B(-2.65, -2.15, 1.85, CS);
   B(-6.6, -5.8, 5.6, Z1); B(-3.95, -3.35, 2.9, 3.5); B(-2.1, -1.7, 3.4, 3.8); B(-2.15, -1.55, 4.35, 5.45); B(-2.7, -2.25, 4.8, 6.0);
   B(-4.2, -3.7, -3.1, -1.6); B(-2.7, -1.1, 0.35, 0.9);
@@ -672,12 +668,12 @@ export function buildOffice() {
   B(-1.7, -0.85, 1.95, CS);                                                 // recycling row
   B(-6.65, -6.25, CS, 3.05); B(-5.1, -4.3, 5.65, Z1); B(-2.65, -2.25, CS, 3.45); B(-2.8, -2.4, 5.85, 6.25);
   B(-1.25, -0.35, 3.9, 4.25); B(-6.5, -6.0, 3.85, 4.55);                        // kitchen stools, paper trolley
-  B(6.4, 6.8, 2.8, 3.2); B(6.3, 6.8, -3.6, -2.95); B(6.4, 6.8, -0.6, -0.2); // mop bucket, UPS, ladder
+  B(4.6, 5.0, 4.65, 5.05); B(6.3, 6.8, -3.6, -2.95); B(6.4, 6.8, -0.6, -0.2); // mop bucket, UPS, ladder
   for (const x0 of [1.8, 4.4]) { B(x0 + 2.05, x0 + 2.55, 2.85, 4.25); B(x0 + 2.15, x0 + 2.45, 4.35, 4.65); } B(2.85, 3.15, 4.8, 5.0); B(2.8, 4.1, 0.35, 0.9); B(2.8, 3.3, -1.8, -0.7);
   B(-2.0, -0.55, -1.55, -1.15);
 
   for (const r of [nao, hiro, yui, sota]) r.root.visible = false;
-  const world = { root, scene, sun, nav, desks, dN, dS, kenji, nao, hiro, mori, emi, emiBlob, yui, sota, tama, covers, leaves, card, X0, X1, Z0, Z1, secHand, fanHead: fan.children[2], fan2Head: fan2.children[2], copier: cp, myChair, machineDoor: md, vendingPos: [-5.1, -2.72], coffeePos: [1.1, CS + 0.36] };
+  const world = { root, scene, sun, nav, desks, dN, dS, kenji, nao, hiro, mori, emi, emiBlob, yui, sota, tama, covers, leaves, card, X0, X1, Z0, Z1, secHand, fanHead: fan.children[2], fan2Head: fan2.children[2], copier: cp, myChair, machineDoor: md, vendingPos: [-4.62, -1.75], coffeePos: [1.1, CS + 0.36] };
   world.life = life;
   world.update = (t) => {
     for (const s2 of life.steam) s2.userData.update(t);
