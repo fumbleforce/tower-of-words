@@ -327,3 +327,4 @@ body.phone #sayTip { right: 12px; bottom: 150px; width: auto; left: 12px; }
 body.phone #sayTip::after { right: 40px; bottom: -8px; border: 8px solid transparent; border-bottom: 0; border-top-color: rgba(111, 208, 198, .5); }
 body.busy #sayTip { display: none; }
 .tp-who { font-weight: 700; margin-right: 4px; }
+#build { position: fixed; right: 8px; bottom: 4px; font-size: 10px; color: rgba(200, 206, 216, .45); pointer-events: none; z-index: 6; }

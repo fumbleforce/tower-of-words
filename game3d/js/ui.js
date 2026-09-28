@@ -7,7 +7,7 @@ const el = (tag, cls, html) => { const e = document.createElement(tag); if (cls)
 // ---------- sound ----------
 let actx = null, muted = false;
 let voiceSpans = null;
-fetch(new URL('../audio/spans.json', import.meta.url)).then((r) => (r.ok ? r.json() : null)).then((j) => { voiceSpans = j; }).catch(() => {});
+fetch(new URL('../audio/spans.json?v=' + (window.BUILD || ''), import.meta.url)).then((r) => (r.ok ? r.json() : null)).then((j) => { voiceSpans = j; }).catch(() => {});
 const clips = {};
 function ac() { if (!actx) { try { actx = new (window.AudioContext || window.webkitAudioContext)(); } catch { actx = null; } } if (actx && actx.state === 'suspended') actx.resume(); return actx; }
 export function voice(key, { rate = 1, muffle = false } = {}) {

@@ -7,6 +7,7 @@ import * as THREE from 'three';
 import { GLTFLoader } from '../vendor/loaders/GLTFLoader.js';
 
 const DIR = new URL('../assets/mio/', import.meta.url).href;
+export const V = () => '?v=' + encodeURIComponent(window.BUILD || '');
 export let IDLE_T = 0.0; // set from the page for testing
 export function setIdleT(v) { IDLE_T = v; }
 
@@ -246,9 +247,9 @@ export async function loadMio({ height = 1.12, colours = MIO_COLOURS } = {}) {
   const loader = new GLTFLoader();
   const load = (u) => new Promise((ok, no) => loader.load(u, ok, undefined, no));
   const [walk, run, sit, data, tex] = await Promise.all([
-    load(DIR + 'walk.glb'), load(DIR + 'run.glb'), load(DIR + 'sit.glb'),
-    fetch(DIR + 'base-clean.json').then((r) => r.json()),
-    new THREE.TextureLoader().loadAsync(DIR + 'base-clean.webp'),
+    load(DIR + 'walk.glb' + V()), load(DIR + 'run.glb' + V()), load(DIR + 'sit.glb' + V()),
+    fetch(DIR + 'base-clean.json' + V()).then((r) => r.json()),
+    new THREE.TextureLoader().loadAsync(DIR + 'base-clean.webp' + V()),
   ]);
   tex.flipY = false; tex.colorSpace = THREE.SRGBColorSpace;
   const model = walk.scene;

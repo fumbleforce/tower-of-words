@@ -9,7 +9,7 @@ const errs = [];
 p.on('pageerror', (e) => errs.push(e.message));
 p.on('console', (m) => { if (m.type() === 'error' && !/404/.test(m.text())) errs.push(m.text()); });
 const t0 = Date.now();
-await p.goto(`http://127.0.0.1:8771/game3d/index.html?test=fast&q=0${process.env.Q || ''}`);
+await p.goto(`http://127.0.0.1:8771/game3d/index.html?test=fast&q=0${process.env.Q || ''}`); await p.waitForFunction(() => window.__game, null, { timeout: 60000 });
 await p.waitForFunction(() => window.__test && window.__test.done, null, { timeout: +S * 1000 }).catch(() => {});
 const r = await p.evaluate(() => ({ ...window.__test, ended: !!window.__ended, place: window.__game.place && window.__game.place.name, goal: window.__game.ui.goalText }));
 await p.screenshot({ path: `/tmp/claude-1000/fast-${W}x${H}.png` });
