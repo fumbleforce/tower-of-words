@@ -106,7 +106,6 @@ A trigger value is a node name, `{ node, if, once }`, or a list of these; the fi
 | `show` / `hide` | `id` | Shows or hides a person or object. |
 | `bow` | `who` (anyone, `eric` too), `depth: 'small'|'deep'` | A bow, shown. |
 | `gesture` | `who`, `kind: 'nine'|'point'|'shrug'|'finger'|'skijump'` | Arm moves for the chibi cast: nine fingers up (with a 9 bubble), point, shrug, finger to the lips, Mori's ski jump. |
-| `headphones` | `who: 'mio'`, `state: 'on'|'half'|'neck'` | Mio's teal headphones: both cups on, one cup off, or round her neck. |
 | `type` | `word`, `prompt` (optional line shown above it) | The typing prompt for a new word: shows the Japanese, the romaji letter by letter and the English, and Eric types the romaji (forgiving: case, spaces, hyphens, long vowels ō = ou = oo = o). Letters light up as they're typed; a wrong Enter shows the next letter, and after three tries the whole romaji. Works with the phone keyboard. On success Eric says it (voiced), it becomes a known word (it stays sharp in overheard lines from then on) and flag `typed_<word>` is set. Use it where a word is taught, in place of a "say it" button. Any word id works: `{ do: 'type', word: 'yoroshiku', prompt: 'mio: Say it. Like this.' }` |
 | `next` | | Starts the transition to the next place (see Transitions). |
 | `end` | | The end card (office only). |
@@ -220,12 +219,8 @@ Commands `irete` 入れて, `dashite` 出して, `tomatte` 止まって (voiced)
 
 ## Portraits (VN style)
 
-The speaker's approved portrait shows beside the text box (desktop: large at the left; phone: smaller, above the box). Eric's shows smaller on the right on his lines, and the listener dims. Narration shows none. Faces that exist:
-- `mio`: `neutral`, `smirk`, `suspicious`
-- `aoi`: `neutral`, `panic`
-- `eric`: `neutral`
-- `kuro`: `neutral`
-Everyone else (Mori, Kenji, Hamada, the guard and the rest) has no approved art yet and shows just the name plate. Set a face on a line with the long form `{ say: 'mio', face: 'smirk', text: '...' }` (it stays until changed), or with `{ do: 'expression', who: 'mio', face: 'suspicious' }`. The `emote` hook also changes the face when one fits: `?` suspicious, `!` panic, `♪`/`heart` smirk.
+The speaker's approved portrait shows beside the text box (desktop: large at the left; phone: smaller, above the box). Eric's shows smaller on the right on his lines, and the listener dims. Narration shows none. Faces that exist: only `neutral`, for `mio`, `aoi`, `eric` and `kuro` (cut-outs of the approved bible portraits). The old smirk/suspicious/panic sprites were old art and are gone; new expressions will be repainted from the approved portraits later. Face steps are kept and fall back to neutral until then.
+Everyone else (Mori, Kenji, Hamada, the guard and the rest) has no approved art yet and shows just the name plate. Once more faces exist: set one on a line with the long form `{ say: 'mio', face: 'smirk', text: '...' }` (it stays until changed), or with `{ do: 'expression', who: 'mio', face: 'suspicious' }`; the `emote` hook also picks one when it fits (`?` suspicious, `!` panic, `♪`/`heart` smirk).
 
 ## Eric, Mio, phrases and overheard Japanese (the new premise)
 
@@ -280,3 +275,7 @@ export default {
 ```
 
 `walk` lines show on their own and don't stop the walk; `ride` and `arrive` are normal steps and wait for taps. Flags work in all of them (use `{ if: ... }` steps).
+
+
+### Music
+Each place has its own loop (train calm, gate lively, office office; after work, night). Voices duck it. To change it in a scene: `{ hook: 'music', name: 'night' }` (`calm`, `office`, `lively`, `night`, or `null` for silence).

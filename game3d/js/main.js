@@ -5,7 +5,9 @@ import { loadMio } from './mio.js';
 import { makeAvatar, loadEric, setSitLift } from './avatar.js';
 import { glide } from './places/lobby.js';
 export const isPlayer = (id) => id === 'eric' || id === 'player';
-import { ui, unlockAudio, sfx, voice, setFace, faceForEmote } from './ui.js';
+import { ui, unlockAudio, sfx, voice, setFace, faceForEmote, playMusic } from './ui.js';
+// background loop per place (audio/music); after work it switches to the night loop
+const MUSIC = { train: 'calm', gate: 'lively', office: 'office' };
 import { WORDS, known, SAYABLE } from './lang.js';
 import { defaultReaction } from './story.js';
 import { Runner, flags, cond } from './runner.js';
@@ -95,12 +97,23 @@ function buildMarkers(place) {
   }
 }
 game.use = (item) => use(item);
+// get Eric out of his seat (a tap on the floor or on something out of reach does this)
+function standUp() {
+  const pl = game.player; if (!pl.seated) return;
+  if (game.place.standPerson) game.place.standPerson('eric'); else { pl.seated = false; pl.setState('idle'); pl.root.position.y = 0; }
+  pl.seated = false; pl.setState('idle');
+}
+game.standUp = standUp;
 function use(item) {
   if (!item || game.busy) return;
   const go = () => { if (game.busy) return; if (item.face) game.walker.faceTo(...item.face()); talk(item); };
   const sp = item.spot ? item.spot() : null;
-  // seated (at a desk, on a bench), Eric talks from where he is: the walker doesn't run while he sits
-  if (game.player.seated) { go(); return; }
+  // seated: he talks from his seat to what's within reach; for anything further he stands up and walks over
+  if (game.player.seated) {
+    const p = game.player.root.position, a = item.anchor(new THREE.Vector3()); game.place.space.worldToLocal(a);
+    if (Math.hypot(p.x - a.x, p.z - a.z) < 1.3) { go(); return; }
+    standUp();
+  }
   if (sp) {
     const p = game.player.root.position;
     if (Math.hypot(p.x - sp[0], p.z - sp[1]) < 0.12) go();
@@ -166,7 +179,7 @@ canvas.addEventListener('pointerdown', (e) => {
   if (best) { use(best); return; }
   raycaster.setFromCamera(ndc(e), game.place.camera);
   const p = game.place.pick(raycaster);
-  if (p) { game.walker.goTo(p.x, p.z); showTapRing(p); }
+  if (p) { standUp(); game.walker.goTo(p.x, p.z); showTapRing(p); }
 });
 document.getElementById('marks').addEventListener('click', (e) => {
   const b = e.target.closest('.mark'); if (!b) return;
@@ -174,7 +187,7 @@ document.getElementById('marks').addEventListener('click', (e) => {
 });
 window.addEventListener('keydown', (e) => {
   if (!game.walker) return;
-  if (/^(Arrow|Key[WASD])/.test(e.code)) { game.walker.keys.add(e.code); e.preventDefault(); unlockAudio(); }
+  if (/^(Arrow|Key[WASD])/.test(e.code)) { if (!game.busy) standUp(); game.walker.keys.add(e.code); e.preventDefault(); unlockAudio(); }
   if ((e.code === 'KeyE' || e.code === 'Space' || e.code === 'Enter') && !game.busy && game.near && !ui.talking && ui.menuClosed()) { e.preventDefault(); use(game.near); }
   if (e.code === 'KeyF' && !ui.talking && !game.busy && ui.menuClosed()) say();
   if (e.code === 'KeyQ' && !CAP) { quality = quality ? 0 : 1; applyQuality(); }
@@ -229,7 +242,12 @@ H.sit = async ({ who, at }) => {
   if (r && r.meshy) { const s = game.place.seats[at]; if (!s) return; r.root.visible = true; await H.walk({ who, to: [s.x, s.z + (s.ry ? -0.5 : 0.5)] }); r.sitAt(s.x, s.top, s.z, s.ry || 0); r.seated = true; return; }
   await game.place.sitPerson?.(isPlayer(who) ? 'eric' : who, at);
 };
-H.stand = async ({ who }) => { await game.place.standPerson?.(who); };
+H.stand = async ({ who }) => {
+  const r = rigOf(who);
+  // Meshy rigs (Mio, and Eric when it's him) stand by leaving the sit pose and stepping off the bench
+  if (r && r.meshy && !isPlayer(who)) { if (r.seated) { r.seated = false; r.setState('idle'); r.root.position.y = 0; r.root.position.z += r.root.position.z < 0 ? 0.45 : -0.45; } return; }
+  await game.place.standPerson?.(who);
+};
 H.cam = ({ on, zoom = 1.8, back }) => { if (back) game.place.cam.release?.(); else { const p = posOf(on); if (p) game.place.cam.closeOn?.(p, zoom); } };
 H.expression = ({ who, face }) => setFace(who, face);
 H.emote = ({ who, kind }) => {
@@ -301,7 +319,8 @@ H.gesture = async ({ who, kind }) => {
   r.arms.forEach((a, i) => a.rotation.copy(save[i]));
 };
 // Mio's headphones: on (both cups on), half (one cup off), neck (round her neck)
-H.headphones = ({ who = 'mio', state = 'on' }) => { const r = whoRig(who); if (r && r.setHeadphones) r.setHeadphones(state); };
+// headphones: removed (Jørgen: no props on his models); kept as a no-op so old story steps don't break
+H.headphones = () => {};
 // typing prompt: Eric types the romaji of a new word, then says it (voiced) and knows it
 H.type = async ({ word, prompt, from }) => {
   if (from && game.sim && !game.sim.taught[word]) game.sim.taught[word] = from;
@@ -314,7 +333,9 @@ H.type = async ({ word, prompt, from }) => {
   flags['typed_' + word] = true;
   await game.wait(500);
 };
-H.period = ({ to }) => setPeriod(to, game);
+H.period = ({ to }) => { setPeriod(to, game); if (to === 'evening') playMusic('night'); };
+// a story can change the loop: { hook: 'music', name: 'calm' | 'office' | 'lively' | 'night' | null }
+H.music = ({ name }) => playMusic(name || null);
 H.bond = ({ who, add = 1 }) => { bond(game, who, add); };
 H.meet = ({ who }) => { meet(game, who); ui.refreshPeople(sim.met.size); };
 H.buy = ({ item }) => { if (buy(game, item)) flags['bought_' + item] = true; else flags['cant_buy'] = true; };
@@ -361,6 +382,7 @@ async function enter(name) {
   if (place.defaultPeriod && PERIOD_ORDER.indexOf(sim.period) < PERIOD_ORDER.indexOf(place.defaultPeriod)) sim.period = place.defaultPeriod;
   applySchedule(game, { instant: true });
   ui.clock(sim.date, { commute: 'Morning commute', morning: 'Morning at work', lunch: 'Lunch', afternoon: 'Afternoon', evening: 'After work' }[sim.period]);
+  playMusic(sim.period === 'evening' ? 'night' : (place.music || MUSIC[name] || 'calm'));
   buildMarkers(place);
   ui.goal('');
   save(game);
@@ -428,7 +450,8 @@ function step(dt) {
   place.cam?.update?.(dt, mio.root.position);
   // nearest usable thing, the Say target, and near/zone triggers
   let near = null, nd = 0.95, st = null, sd = 2.2;
-  const seatedReach = game.player.seated ? 1.6 : 0;
+  // seated he can reach a bit further (his seat spot is not the bench edge), but not across the carriage
+  const seatedReach = game.player.seated ? 0.35 : 0;
   const mp = mio.root.position;
   for (const m of game.markers.list) {
     if (!m.enabled()) continue;
@@ -436,7 +459,8 @@ function step(dt) {
     const d = Math.hypot(mp.x - s[0], mp.z - s[1]);
     if (!game.busy && d < nd + seatedReach) { nd = d - seatedReach; near = m; }
     const bias = (m.goal && m.goal() ? -1.2 : 0) + (/person/.test(m.kind || '') ? -0.7 : 0);
-    if (!game.busy && known.size && d + bias < sd) { sd = d + bias; st = m; }
+    // Say works on what's in reach; goals and people win over things when several are close
+    if (!game.busy && known.size && d < 1.6 + seatedReach && d + bias < sd) { sd = d + bias; st = m; }
     if (d < 0.9) { if (!nearSet.has(m.id)) { nearSet.add(m.id); if (!game.busy) game.runner.trigger('near:' + m.id); } }
     else if (d > 1.3) nearSet.delete(m.id);
   }
@@ -449,7 +473,13 @@ function step(dt) {
   // when a goal is waiting on a word he knows, the Say button lights up
   const waiting = !game.busy && known.size && game.markers.list.some((m) => m.enabled() && m.goal() && SAYABLE.some((w) => known.has(w) && game.runner.has(`say:${w}:${m.id}`)));
   ui.sayReady(waiting);
-  ui.setSayTarget(st ? st.label : '');
+  // Say beside the target: shown when a known word does something there (or while the Say tip is up)
+  let sayShow = false, sx = 0, sy = 0;
+  if (st && !game.busy && known.size) {
+    const any = SAYABLE.some((w) => known.has(w) && (game.runner.has(`say:${w}:${st.id}`) || game.runner.has(`say:${w}:*`)));
+    if (any || ui.sayIntro) { const v = st.anchor(new THREE.Vector3()).project(place.camera); sx = ((v.x + 1) / 2) * canvas.clientWidth; sy = ((1 - v.y) / 2) * canvas.clientHeight; sayShow = true; }
+  }
+  ui.placeSay(sx, sy, sayShow);
   const person = st && place.people[st.id] && /person/.test(st.kind || '');
   ui.setGiveTarget(person ? st.label : '', !!(person && sim.inv.length && !game.busy));
   stepAmbient(game);
@@ -474,7 +504,6 @@ async function boot() {
   // Mio is an NPC now: Jørgen's Meshy model, colour-tweaked only, shown wherever the story puts her
   game.mioNpc = await loadMio({ height: 1.12 });
   game.mioNpc.meshy = true; game.mioNpc.root.visible = false;
-  addHeadphones(game.mioNpc);
   game.mioNpc.blob = blob(0.55, 0.4); game.mioNpc.root.add(game.mioNpc.blob);
   requestAnimationFrame(frame);
   const start = Q.get('place') || 'train';
@@ -502,34 +531,6 @@ async function boot() {
   if (game.runner.has('event:start')) game.runner.trigger('event:start');
   else if (game.story.start) game.beat(() => game.runner.run(game.story.start));
   if (NEXT[start]) setTimeout(() => prepare(NEXT[start]), 1500);
-}
-
-// Mio's teal headphones (her approved design has them), placed from her head bone every frame
-function addHeadphones(a) {
-  let head = null; a.model.traverse((o) => { if (!head && o.isBone && /head$/i.test(o.name.replace(/[^a-z]/gi, ''))) head = o; });
-  const g = new THREE.Group(); a.root.add(g);
-  const teal = new THREE.MeshStandardMaterial({ color: '#20a081', roughness: 0.6 }), dark = new THREE.MeshStandardMaterial({ color: '#1f2a30', roughness: 0.7 });
-  const band = new THREE.Mesh(new THREE.TorusGeometry(1, 0.06, 6, 20, Math.PI), dark); g.add(band);
-  const cups = [-1, 1].map((s) => { const c = new THREE.Group(); const m = new THREE.Mesh(new THREE.CylinderGeometry(0.34, 0.34, 0.22, 14), teal); m.rotation.z = Math.PI / 2; c.add(m); c.position.x = s; g.add(c); return c; });
-  for (const o of [band, ...cups]) o.traverse((q) => { if (q.isMesh) q.castShadow = true; });
-  let state = 'neck';
-  const v = new THREE.Vector3(), top = new THREE.Vector3();
-  a.root.updateMatrixWorld(true);
-  const box = new THREE.Box3().setFromObject(a.model); top.copy(box.max); a.root.worldToLocal(top);
-  // head size measured once, standing (seated, the head is lower and this would blow up)
-  head.getWorldPosition(v); a.root.worldToLocal(v);
-  const R = Math.max(0.1, (top.y - v.y) * 0.55);
-  a.setHeadphones = (s) => { state = s; };
-  const up = a.update;
-  a.update = (dt, sp) => {
-    up(dt, sp);
-    head.getWorldPosition(v); a.root.worldToLocal(v);
-    const r = R;
-    g.scale.setScalar(r);
-    // round the neck: a small band arcing behind the neck, cups resting at the collar
-    if (state === 'neck') { g.position.set(v.x, v.y - r * 0.2, v.z + r * 0.05); g.rotation.set(-Math.PI / 2 + 0.2, 0, 0); g.scale.setScalar(r * 0.62); cups[0].position.set(-1.0, 0.25, 0); cups[1].position.set(1.0, 0.25, 0); }
-    else { g.scale.setScalar(r); g.position.set(v.x, v.y + r * 0.1, v.z - r * 0.05); g.rotation.set(0, 0, 0); cups[0].position.set(-1.02, 0, 0); cups[1].position.set(1.02, state === 'half' ? 0.55 : 0, state === 'half' ? -0.35 : 0); }
-  };
 }
 
 async function title(saved) {

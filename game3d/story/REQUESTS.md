@@ -13,7 +13,7 @@ The new premise is wired (FORMAT.md, "Eric, Mio, phrases and overheard Japanese"
 
 ## Open
 
-- (done) `bow`, plus `gesture`, `headphones` and train `bag`; the builder has already swapped the narrated bows, the nine fingers, the shrug, the finger to the lips, the ski jump, the headphones and the sliding bag for these steps.
+- (done) `bow`, plus `gesture`, `headphones` and train `bag`; the builder has already swapped the narrated bows, the nine fingers, the shrug, the finger to the lips, the ski jump, the headphones and the sliding bag for these steps. (`headphones` has since been removed: Mio has no headphones prop; the hook does nothing.)
 
 ## Done (builder, 2026-09-28)
 3. `{ do: 'hint', what: 'say', text }` points at the Say button with `text` (and it pulses). The button is also taught automatically the first time Eric learns a word, and lights up whenever a goal answers to a word he knows.

@@ -67,7 +67,6 @@ export default {
     ],
     sit: [
       { do: 'sit', who: 'eric', at: 'seat_far_r' },
-      { do: 'headphones', who: 'mio', state: 'neck' },
       { set: 'sat' },
       { do: 'goal', text: '' },
       { say: 'mio', name: 'Woman with a laptop', text: "Eh... B2? You're going to B2?" },
@@ -83,18 +82,15 @@ export default {
     ],
     its_eric: [
       "mio: Mm, I know. It's on your card.",
-      { do: 'headphones', who: 'mio', state: 'half' },
       { go: 'lesson' },
     ],
     family: [
       { inc: 'mio_warm' },
       'mio: Mm. I stayed at her place last night, on the mainland.',
       "mio: She always packs too much. Like I'm moving to another country.",
-      { do: 'headphones', who: 'mio', state: 'half' },
       { go: 'lesson' },
     ],
     leave_it: [
-      { do: 'headphones', who: 'mio', state: 'half' },
       { go: 'lesson' },
     ],
 

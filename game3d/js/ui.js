@@ -10,8 +10,42 @@ let voiceSpans = null;
 fetch(new URL('../audio/spans.json?v=' + (window.BUILD || ''), import.meta.url)).then((r) => (r.ok ? r.json() : null)).then((j) => { voiceSpans = j; }).catch(() => {});
 const clips = {};
 function ac() { if (!actx) { try { actx = new (window.AudioContext || window.webkitAudioContext)(); } catch { actx = null; } } if (actx && actx.state === 'suspended') actx.resume(); return actx; }
-export function voice(key, { rate = 1, muffle = false } = {}) {
+// One dialogue voice at a time (Jørgen: no overlapping voices when he clicks on). A new clip, or advancing the line,
+// fades the current one out over 80 ms and the next starts only after that. window.__voiceLog counts plays and the
+// most clips ever sounding at once (the fast test checks it stays 1).
+let curVoice = null, voiceGen = 0;
+const vlog = (window.__voiceLog = { plays: 0, maxActive: 0, overlaps: 0 });
+const sounding = () => [...Object.values(clips), clips._muffled].filter((a) => a && a instanceof Audio && !a.paused && !a.ended && !a._fading).length;
+export function stopVoice(ms = 80) {
+  voiceGen++; // a clip still starting up for the old line won't play on
+  const a = curVoice; curVoice = null;
+  if (!a || a.paused || a.ended) return 0;
+  a._fading = true;
+  const v0 = a.volume, t0 = performance.now();
+  const tick = () => {
+    const k = Math.min(1, (performance.now() - t0) / ms);
+    try { a.volume = v0 * (1 - k); } catch { /* */ }
+    if (k < 1) requestAnimationFrame(tick); else { a.pause(); a._fading = false; }
+  };
+  // rAF stalls in hidden tabs; a timer makes sure it stops anyway
+  requestAnimationFrame(tick); setTimeout(() => { if (a._fading) { a.pause(); a._fading = false; } }, ms + 30);
+  return ms;
+}
+export function voice(key, opts = {}) {
   if (muted || !key) return;
+  const wait = stopVoice(80);
+  const gen = voiceGen;
+  if (wait) setTimeout(() => { if (gen === voiceGen) playVoice(key, opts, gen); }, wait + 5);
+  else playVoice(key, opts, gen);
+}
+function started(a, gen) {
+  if (gen !== voiceGen) { a.pause(); return; }
+  curVoice = a; vlog.plays++;
+  const n = sounding(); vlog.maxActive = Math.max(vlog.maxActive, n); if (n > 1) vlog.overlaps++;
+  duckWhile(a);
+}
+function playVoice(key, { rate = 1, muffle = false } = {}, gen = voiceGen) {
+  if (muted) return;
   if (muffle) {
     // overheard speech: heavily muffled (low-pass, quieter), except the words he knows, which come through clear.
     // audio/spans.json lists those words' times per clip [[t0, t1], ...]; the two paths crossfade in 40 ms.
@@ -35,15 +69,15 @@ export function voice(key, { rate = 1, muffle = false } = {}) {
           wet.gain.setValueAtTime(0, t0 + e); wet.gain.linearRampToValueAtTime(W, t0 + e + X);
         }
       }, { once: true });
-      a.play().catch(() => {});
       if (clips._muffled) clips._muffled.pause(); clips._muffled = a;
+      a.play().then(() => started(a, gen)).catch(() => {});
     } catch { /* no audio */ }
     return;
   }
   try {
     const a = clips[key] || (clips[key] = new Audio(new URL(`../audio/${key}.mp3`, import.meta.url).href));
-    a.pause(); a.currentTime = 0; a.playbackRate = rate; a.volume = key.startsWith('mio') ? 0.75 : 1;
-    a.play().catch(() => {});
+    a._fading = false; a.pause(); a.currentTime = 0; a.playbackRate = rate; a.volume = key.startsWith('mio') ? 0.75 : 1;
+    a.play().then(() => started(a, gen)).catch(() => {});
   } catch { /* no audio */ }
 }
 export function sfx(kind) {
@@ -52,13 +86,26 @@ export function sfx(kind) {
   const tone = (f, t0, d, v = 0.12, type = 'sine') => { const o = c.createOscillator(); o.type = type; o.frequency.value = f; const gg = c.createGain(); gg.gain.setValueAtTime(0, t + t0); gg.gain.linearRampToValueAtTime(v, t + t0 + 0.01); gg.gain.exponentialRampToValueAtTime(0.0001, t + t0 + d); o.connect(gg); gg.connect(g); o.start(t + t0); o.stop(t + t0 + d + 0.05); };
   if (kind === 'chime') { tone(784, 0, 0.9, 0.09); tone(659, 0.35, 1.1, 0.09); tone(523, 0.7, 1.4, 0.08); }
   else if (kind === 'ok') { tone(1320, 0, 0.12, 0.08, 'triangle'); tone(1760, 0.1, 0.18, 0.07, 'triangle'); }
-  else if (kind === 'no') { tone(220, 0, 0.18, 0.1, 'square'); tone(196, 0.2, 0.25, 0.1, 'square'); }
+  else if (kind === 'no') { tone(330, 0, 0.16, 0.07, 'triangle'); tone(262, 0.14, 0.26, 0.07, 'triangle'); }
   else if (kind === 'tap') { tone(900, 0, 0.05, 0.04, 'triangle'); }
   else if (kind === 'word') { tone(988, 0, 0.14, 0.06, 'triangle'); tone(1318, 0.09, 0.22, 0.06, 'triangle'); }
-  else if (kind === 'door') { const o = c.createOscillator(); o.type = 'sawtooth'; o.frequency.setValueAtTime(90, t); o.frequency.linearRampToValueAtTime(60, t + 0.5); const gg = c.createGain(); gg.gain.setValueAtTime(0.03, t); gg.gain.linearRampToValueAtTime(0, t + 0.55); o.connect(gg); gg.connect(g); o.start(t); o.stop(t + 0.6); }
+  else if (kind === 'door') {
+    // a door sliding: a soft band of noise that sweeps down, then a small bump at the end
+    const n = noise(c, 0.7), f = c.createBiquadFilter(), gg = c.createGain();
+    f.type = 'bandpass'; f.Q.value = 0.8; f.frequency.setValueAtTime(900, t); f.frequency.exponentialRampToValueAtTime(260, t + 0.55);
+    gg.gain.setValueAtTime(0, t); gg.gain.linearRampToValueAtTime(0.05, t + 0.08); gg.gain.linearRampToValueAtTime(0.03, t + 0.45); gg.gain.linearRampToValueAtTime(0, t + 0.62);
+    n.connect(f); f.connect(gg); gg.connect(g); n.start(t);
+    thump(c, g, t + 0.56, 0.06, 70);
+  }
   else if (kind === 'lift') { tone(1046, 0, 0.6, 0.07); }
-  else if (kind === 'clack') { tone(140, 0, 0.05, 0.05, 'square'); tone(120, 0.07, 0.05, 0.04, 'square'); }
-  else if (kind === 'beep') { tone(1500, 0, 0.09, 0.06, 'square'); }
+  else if (kind === 'clack') {
+    // the carriage going over a rail joint: two dull clunks (low noise + a low body), then a little rumble
+    thump(c, g, t, 0.11, 58); thump(c, g, t + 0.13, 0.08, 52);
+    const n = noise(c, 0.9), f = c.createBiquadFilter(), gg = c.createGain();
+    f.type = 'lowpass'; f.frequency.value = 220; gg.gain.setValueAtTime(0.0, t); gg.gain.linearRampToValueAtTime(0.06, t + 0.05); gg.gain.exponentialRampToValueAtTime(0.0001, t + 0.9);
+    n.connect(f); f.connect(gg); gg.connect(g); n.start(t);
+  }
+  else if (kind === 'beep') { tone(1480, 0, 0.12, 0.06); }
   else if (kind === 'brake' || kind === 'crowd') {
     const n = c.createBufferSource(), len = kind === 'brake' ? 1.6 : 2.5, buf = c.createBuffer(1, c.sampleRate * len, c.sampleRate), d = buf.getChannelData(0);
     for (let i = 0; i < d.length; i++) d[i] = (Math.random() * 2 - 1) * (1 - i / d.length);
@@ -66,13 +113,81 @@ export function sfx(kind) {
     const gg = c.createGain(); gg.gain.value = kind === 'brake' ? 0.05 : 0.04; n.connect(f); f.connect(gg); gg.connect(g); n.start(t);
   }
 }
-export function setMuted(m) { muted = m; if (m) for (const a of Object.values(clips)) a.pause(); }
+function noise(c, len) {
+  const n = c.createBufferSource(), buf = c.createBuffer(1, Math.ceil(c.sampleRate * len), c.sampleRate), d = buf.getChannelData(0);
+  for (let i = 0; i < d.length; i++) d[i] = Math.random() * 2 - 1;
+  n.buffer = buf; return n;
+}
+// a dull knock: a short burst of low-passed noise with a falling sine under it
+function thump(c, out, t, v, hz) {
+  const n = noise(c, 0.2), f = c.createBiquadFilter(), gg = c.createGain();
+  f.type = 'lowpass'; f.frequency.value = 320; gg.gain.setValueAtTime(v, t); gg.gain.exponentialRampToValueAtTime(0.0001, t + 0.16);
+  n.connect(f); f.connect(gg); gg.connect(out); n.start(t);
+  const o = c.createOscillator(), og = c.createGain(); o.frequency.setValueAtTime(hz * 1.6, t); o.frequency.exponentialRampToValueAtTime(hz, t + 0.08);
+  og.gain.setValueAtTime(v * 1.2, t); og.gain.exponentialRampToValueAtTime(0.0001, t + 0.22); o.connect(og); og.connect(out); o.start(t); o.stop(t + 0.25);
+}
+
+// ---------- music ----------
+// Lyria loops (audio/music/*.mp3), one per place. Each loop is played as overlapping copies with a 2 s crossfade
+// so the seam never clicks; places crossfade over 2.5 s; voices duck the music while someone talks.
+const MUSIC_VOL = 0.2, DUCK = 0.4;
+const music = { name: null, bus: null, duck: null, bufs: {}, cur: null, timer: 0 };
+async function musicBuf(name) {
+  if (!music.bufs[name]) music.bufs[name] = fetch(new URL(`../audio/music/${name}.mp3?v=${window.BUILD || ''}`, import.meta.url)).then((r) => r.arrayBuffer()).then((b) => ac().decodeAudioData(b));
+  return music.bufs[name];
+}
+export async function playMusic(name) {
+  const c = ac(); if (!c || name === music.name) return;
+  music.name = name;
+  if (!music.bus) { music.bus = c.createGain(); music.duck = c.createGain(); music.bus.gain.value = muted ? 0 : MUSIC_VOL; music.bus.connect(music.duck); music.duck.connect(c.destination); }
+  const t = c.currentTime;
+  if (music.cur) { const old = music.cur; old.stopped = true; clearTimeout(old.timer); old.g.gain.cancelScheduledValues(t); old.g.gain.setValueAtTime(old.g.gain.value, t); old.g.gain.linearRampToValueAtTime(0, t + 2.5); for (const s of old.srcs) s.stop(t + 2.6); music.cur = null; }
+  if (!name) return;
+  let buf; try { buf = await musicBuf(name); } catch { return; }
+  if (music.name !== name) return;
+  const g = c.createGain(); g.connect(music.bus);
+  const track = { g, srcs: [], stopped: false, timer: 0 };
+  music.cur = track;
+  const X = 2, start = c.currentTime + 0.05;
+  g.gain.setValueAtTime(0, start); g.gain.linearRampToValueAtTime(1, start + 2.5);
+  const play = (at, fadeIn) => {
+    if (track.stopped) return;
+    const s = c.createBufferSource(), sg = c.createGain(); s.buffer = buf; s.connect(sg); sg.connect(g);
+    const end = at + buf.duration;
+    sg.gain.setValueAtTime(fadeIn ? 0 : 1, at); if (fadeIn) sg.gain.linearRampToValueAtTime(1, at + X);
+    sg.gain.setValueAtTime(1, end - X); sg.gain.linearRampToValueAtTime(0, end);
+    s.start(at); s.stop(end + 0.05);
+    track.srcs.push(s); if (track.srcs.length > 3) track.srcs.shift();
+    const next = end - X;
+    track.timer = setTimeout(() => play(next, true), Math.max(0, (next - c.currentTime - 1) * 1000));
+  };
+  play(start, false);
+}
+// voices duck the music
+let duckN = 0;
+function duckMusic(on) {
+  const c = actx; if (!c || !music.duck) return;
+  duckN = Math.max(0, duckN + (on ? 1 : -1));
+  const t = c.currentTime; music.duck.gain.cancelScheduledValues(t); music.duck.gain.setValueAtTime(music.duck.gain.value, t);
+  music.duck.gain.linearRampToValueAtTime(duckN ? DUCK : 1, t + (duckN ? 0.15 : 0.6));
+}
+function duckWhile(a) {
+  duckMusic(true); let done = false;
+  const off = () => { if (!done) { done = true; duckMusic(false); } };
+  a.addEventListener('ended', off, { once: true }); a.addEventListener('pause', off, { once: true }); a.addEventListener('error', off, { once: true });
+}
+export function setMuted(m) {
+  muted = m; if (m) for (const a of Object.values(clips)) a.pause();
+  if (music.bus && actx) { const t = actx.currentTime; music.bus.gain.cancelScheduledValues(t); music.bus.gain.setValueAtTime(music.bus.gain.value, t); music.bus.gain.linearRampToValueAtTime(m ? 0 : MUSIC_VOL, t + 0.3); }
+}
 export function isMuted() { return muted; }
 export function unlockAudio() { ac(); }
 
 // ---------- VN portraits ----------
-// Approved art only (assets/portraits/<who>-<face>.webp). People without approved art get a name plate only.
-export const PORTRAITS = { mio: ['neutral', 'smirk', 'suspicious'], aoi: ['neutral', 'panic'], eric: ['neutral'], kuro: ['neutral'] };
+// Approved art only: cut-outs of the bible portraits (bible/facts.yaml `portrait:`, proto2/cast-fixed/*-after.webp).
+// One neutral face each for now; expressions will be face repaints of the same portrait. Faces a story asks for that
+// don't exist yet fall back to neutral. People without approved art get a name plate only.
+export const PORTRAITS = { mio: ['neutral'], aoi: ['neutral'], eric: ['neutral'], kuro: ['neutral'] };
 const EMOTE_FACE = { '?': 'suspicious', '!': 'panic', '♪': 'smirk', heart: 'smirk', sweat: 'panic' };
 const faceNow = {};
 let lastNpc = null;
@@ -86,7 +201,7 @@ function portraitSrc(who, face) {
 function showPortraits(t, whoId, face) {
   const L = t.querySelector('.por.left'), R = t.querySelector('.por.right');
   if (!whoId) { L.hidden = R.hidden = true; return; }          // narration: no portrait
-  const set = (el, src) => { if (!src) { el.hidden = true; return; } el.classList.toggle('card', /\/(eric|kuro)-/.test(src)); const img = el.querySelector('img'); if (img.getAttribute('src') !== src) img.src = src; el.hidden = false; };
+  const set = (el, src) => { if (!src) { el.hidden = true; return; } const img = el.querySelector('img'); if (img.getAttribute('src') !== src) img.src = src; el.hidden = false; };
   if (whoId === 'eric') { set(R, portraitSrc('eric', face)); R.classList.remove('dim'); if (lastNpc && PORTRAITS[lastNpc]) { set(L, portraitSrc(lastNpc)); L.classList.add('dim'); } else L.hidden = true; }
   else { lastNpc = whoId; set(L, portraitSrc(whoId, face)); L.classList.remove('dim'); R.hidden = true; }
 }
@@ -138,11 +253,12 @@ export const ui = {
       <div id="marks"></div>
       <div id="top">
         <div id="goal" hidden><span class="k">Goal</span><span class="t"></span></div>
-        <div class="tr">
-          <div id="clock" hidden><span class="d"></span><span class="p"></span></div>
-          <button id="peopleBtn" type="button" hidden aria-label="People you've met"><span class="lbl">People</span><span class="n">0</span></button>
-          <button id="bagBtn" type="button" hidden aria-label="Bag"><span class="lbl">Bag</span><span class="n">0</span></button>
-          <button id="cmdsBtn" type="button" hidden aria-label="Words you can say"><span class="lbl">Words</span><span class="n">0</span></button>
+        <div class="tr" id="hud">
+          <div id="clock" class="hchip" hidden><span class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg></span><span class="d"></span><span class="p"></span></div>
+          <button id="peopleBtn" class="hchip" type="button" hidden aria-label="People you've met"><span class="ic"><svg viewBox="0 0 24 24"><circle cx="9" cy="8.5" r="3.2"/><path d="M3.5 19c.6-3.3 2.8-5 5.5-5s4.9 1.7 5.5 5"/><circle cx="16.5" cy="9.5" r="2.6"/><path d="M15.5 14.2c2.4.1 4.3 1.6 4.9 4.8"/></svg></span><span class="lbl">People</span><span class="n">0</span></button>
+          <button id="bagBtn" class="hchip" type="button" hidden aria-label="Bag"><span class="ic"><svg viewBox="0 0 24 24"><path d="M6 8h12l-1 11H7L6 8z"/><path d="M9 8V6.5a3 3 0 0 1 6 0V8"/></svg></span><span class="lbl">Bag</span><span class="n">0</span></button>
+          <button id="cmdsBtn" class="hchip" type="button" hidden aria-label="Words you can say"><span class="ic"><svg viewBox="0 0 24 24"><path d="M5 5h14a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2h-7l-4 3.5V16H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z"/><path d="M8 9.5h8M8 12.5h5"/></svg></span><span class="lbl">Words</span><span class="n">0</span></button>
+          <button id="muteBtn" class="hchip icon" type="button" aria-label="Sound on or off"><svg viewBox="0 0 24 24"><path d="M4 10v4h3.5L12 18V6L7.5 10H4z"/><path class="w" d="M15.5 9a4 4 0 0 1 0 6M18 6.5a7.5 7.5 0 0 1 0 11"/></svg></button>
         </div>
       </div>
       <div id="board" hidden><div class="led"></div></div>
@@ -158,7 +274,7 @@ export const ui = {
       <div id="peoplePanel" class="panel" hidden><div class="card"><div class="head">People</div><ul></ul><button type="button" class="close">Close</button></div></div>
       <div id="bagPanel" class="panel" hidden><div class="card"><div class="head">Bag</div><p class="yen"></p><ul></ul><button type="button" class="close">Close</button></div></div>
       <button id="giveBtn" type="button" hidden><span class="t">Give</span><span class="to"></span></button>
-      <button id="sayBtn" type="button" hidden><span class="t">Say</span><span class="sub">a word</span><span class="to"></span></button>
+      <button id="sayBtn" type="button" hidden aria-label="Say a word"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5h14a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2h-7l-4 3.5V16H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z"/></svg><span class="t">Say</span></button>
       <div id="sayTip" hidden><b>Say</b> speaks a word you know to whoever or whatever is nearest. Try it when you're stuck.<button type="button">Got it</button></div>
       <div id="sayMenu" hidden><div class="head"></div><div class="list"></div><button type="button" class="cancel">Never mind</button></div>
       <div id="hint" hidden></div>
@@ -168,7 +284,6 @@ export const ui = {
       <img id="xfade" alt="" hidden>
       <div id="fade"><div class="title"></div><div class="sub"></div></div>
       <div id="end" hidden></div>
-      <button id="muteBtn" type="button" aria-label="Sound on or off">Sound on</button>
     `;
     $('#cmdsBtn').onclick = () => this.showCmds();
     $('#cmdsPanel .close').onclick = () => { $('#cmdsPanel').hidden = true; };
@@ -178,7 +293,7 @@ export const ui = {
     $('#bagBtn').onclick = () => { $('#bagPanel').hidden = false; };
     for (const id of ['#peoplePanel', '#bagPanel']) $(id + ' .close').onclick = () => { $(id).hidden = true; };
     $('#sayMenu .cancel').onclick = () => { $('#sayMenu').hidden = true; this._sayRes && this._sayRes(null); };
-    $('#muteBtn').onclick = (e) => { e.stopPropagation(); setMuted(!isMuted()); $('#muteBtn').textContent = isMuted() ? 'Sound off' : 'Sound on'; };
+    $('#muteBtn').onclick = (e) => { e.stopPropagation(); setMuted(!isMuted()); $('#muteBtn').classList.toggle('off', isMuted()); };
     // advancing the talk panel: tap anywhere on it, or Space/Enter
     $('#talk').addEventListener('pointerdown', (e) => { if (e.target.closest('.chip')) return; e.stopPropagation(); this._advance && this._advance(); });
     window.addEventListener('keydown', (e) => {
@@ -201,7 +316,6 @@ export const ui = {
     const b = $('#cmdsBtn');
     b.hidden = known.size === 0;
     b.querySelector('.n').textContent = known.size;
-    $('#sayBtn').hidden = known.size === 0;
   },
   showCmds() {
     const row = (id) => { const w = WORDS[id]; return `<li><span class="jp">${w.ja}</span><span class="ro">${w.ro}</span><span class="en">${w.en}</span></li>`; };
@@ -233,16 +347,18 @@ export const ui = {
   // the first time Eric knows a word: the Say button pulses and a short tip points at it
   introSay(text) {
     const b = $('#sayBtn'), tip = $('#sayTip');
-    b.hidden = false;
+    this.sayIntro = true;
     if (text) tip.firstChild.textContent !== undefined && (tip.innerHTML = `${lineHTML(text)}<button type="button">Got it</button>`);
     b.classList.add('pulse'); tip.hidden = false;
-    const off = () => { tip.hidden = true; b.classList.remove('pulse'); };
+    const off = () => { tip.hidden = true; b.classList.remove('pulse'); this.sayIntro = false; };
     tip.querySelector('button').onclick = (e) => { e.stopPropagation(); off(); };
     b.addEventListener('click', off, { once: true });
     setTimeout(off, 14000);
   },
   sayReady(on) { $('#sayBtn').classList.toggle('ready', !!on); },
-  setSayTarget(name) { const t = $('#sayBtn .to'); if (t.textContent !== (name || '')) t.textContent = name || ''; },
+  setSayTarget() {},
+  // the Say button sits beside whoever or whatever Eric can talk to, only when a word can be used there
+  placeSay(x, y, show) { const b = $('#sayBtn'); if (!show) { b.hidden = true; return; } b.hidden = false; b.style.transform = `translate(${Math.round(x)}px, ${Math.round(y)}px)`; },
   hint(html, ms = 0) {
     const h = $('#hint'); h.innerHTML = html; h.hidden = !html;
     clearTimeout(this._ht); if (ms) this._ht = setTimeout(() => { h.hidden = true; }, ms);
@@ -276,8 +392,8 @@ export const ui = {
       if (overheard) scramble(t.querySelector('.line'));
       if (voiceKey) voice(voiceKey, { muffle: !!overheard });
       const started = performance.now();
-      if (this.auto) { setTimeout(() => { this._advance = null; res(); }, 15); return; }
-      this._advance = () => { if (performance.now() - started < 250) return; this._advance = null; sfx('tap'); res(); };
+      if (this.auto) { setTimeout(() => { this._advance = null; stopVoice(); res(); }, 15); return; }
+      this._advance = () => { if (performance.now() - started < 250) return; this._advance = null; stopVoice(); sfx('tap'); res(); };
       if (auto) setTimeout(() => { if (this._advance) { this._advance = null; res(); } }, auto);
     });
   },
@@ -296,12 +412,12 @@ export const ui = {
       const btns = chips.map((c, i) => {
         const b = el('button', 'chip' + (i === glow ? ' glow' : '') + (c.cls ? ' ' + c.cls : ''), `<span class="k">${i + 1}</span><span class="c">${c.html}</span>`);
         b.type = 'button';
-        b.onclick = (e) => { e.stopPropagation(); if (performance.now() - shown < 350) return; this._chipKeys = null; box.querySelectorAll('.chip').forEach((x) => { x.disabled = true; }); b.classList.add('picked'); res(i); };
+        b.onclick = (e) => { e.stopPropagation(); if (performance.now() - shown < 350) return; this._chipKeys = null; box.querySelectorAll('.chip').forEach((x) => { x.disabled = true; }); b.classList.add('picked'); stopVoice(); res(i); };
         box.appendChild(b); return b;
       });
       this._chipKeys = btns;
       this._advance = null;
-      if (this.auto) setTimeout(() => { const i = Math.min(btns.length - 1, this.autoPick ? this.autoPick(chips) : 0); box.querySelectorAll('.chip').forEach((x) => { x.disabled = true; }); this._chipKeys = null; res(i); }, 15);
+      if (this.auto) setTimeout(() => { const i = Math.min(btns.length - 1, this.autoPick ? this.autoPick(chips) : 0); box.querySelectorAll('.chip').forEach((x) => { x.disabled = true; }); this._chipKeys = null; stopVoice(); res(i); }, 15);
       t.classList.remove('in'); void t.offsetWidth; t.classList.add('in');
       this.refreshWords();
       if (voiceKey) voice(voiceKey);
@@ -367,7 +483,7 @@ export const ui = {
         letters.forEach((el, i) => { el.classList.toggle('on', i <= lit); el.classList.toggle('bad', v.length > ok && i === (ok < target.length ? map[ok] : -1)); });
         return v === target;
       };
-      const done = () => { t.classList.remove('typing'); sfx('ok'); res(); };
+      const done = () => { t.classList.remove('typing'); stopVoice(); sfx('ok'); res(); };
       inp.addEventListener('input', () => { if (paint()) setTimeout(done, 250); });
       inp.addEventListener('keydown', (e) => {
         e.stopPropagation();
