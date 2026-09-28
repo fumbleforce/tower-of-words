@@ -16,7 +16,7 @@ export const PAL = {
   floor: '#a4a2a7', floorSeam: '#918f95', floorDark: '#99979c',
   wall: '#6b7180', wallTop: '#a3a9b3', wallInner: '#6c7280', skirting: '#454a54', trim: '#565c67',
   door: '#474d57', doorFrame: '#666c77', doorWin: '#9fb1c2',
-  bench: '#3d4456', benchBack: '#434a5c', benchFrame: '#858b96',
+  bench: '#454956', benchBack: '#4a4e5b', benchFrame: '#858b96',
   metal: '#9aa0aa', dark: '#3e434d', charcoal: '#2f333b',
   glass: '#b9cbd6', planter: '#c7c3bb', soil: '#4b3f38',
   leaf: ['#4d6b47', '#577650', '#43603f', '#5f7d57', '#4a6645'],

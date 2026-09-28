@@ -110,7 +110,7 @@ void main(){
     float d = length((p - pc) * vec2(1.0, 1.2));
     foam = max(foam, smoothstep(1.3, 0.75, d + h0 * 0.6) * 0.9);
   }
-  col = mix(col, uFoam, clamp(foam, 0.0, 1.0) * 0.92);
+  col = mix(col, uFoam, clamp(foam, 0.0, 1.0) * 0.72);
 
   // shadows of the beam, the train and the pillars, thrown along the (steep) sea sun
   vec2 sh = uShadowDir.xz / uShadowDir.y;
@@ -127,7 +127,7 @@ void main(){
     float d = segDist(p, base, base - sh * hTop);
     shade = max(shade, smoothstep(0.55, 0.3, d));
   }
-  col = mix(col, col * uShadow, shade * 0.6);
+  col = mix(col, col * uShadow, shade * 0.78);
 
   // sun glints off the wave facets
   vec3 V = normalize(uCamPos - vW);
@@ -137,7 +137,10 @@ void main(){
   col += vec3(1.0, 0.96, 0.88) * spec * 0.6 * tw * (1.0 - shade) * uQuality;
 
   // haze: the bay sits far below, a little softened by the air
-  col = mix(col, vec3(0.42, 0.6, 0.76), 0.2);
+  col = mix(col, vec3(0.38, 0.5, 0.56), 0.16);
+  // a warm sheen toward the low sun (top of the frame), deeper water toward the viewer
+  col += vec3(0.95, 0.7, 0.42) * 0.14 * smoothstep(8.0, -22.0, p.y) * (0.5 + 0.5 * lit);
+  col *= 1.0 - 0.16 * smoothstep(-4.0, 22.0, p.y);
   gl_FragColor = vec4(col, 1.0);
   #include <tonemapping_fragment>
   #include <colorspace_fragment>
@@ -168,8 +171,8 @@ export function buildWorld(scene, { sunDir }) {
   root.add(sea);
 
   // Concrete beam: one long rounded box. Joint plates slide along it to show speed.
-  const concrete = new THREE.MeshStandardMaterial({ color: '#aeb7c3', roughness: 0.92 });
-  const concreteDark = new THREE.MeshStandardMaterial({ color: '#8f99a7', roughness: 0.95 });
+  const concrete = new THREE.MeshStandardMaterial({ color: '#8b939e', roughness: 0.92 });
+  const concreteDark = new THREE.MeshStandardMaterial({ color: '#737c88', roughness: 0.95 });
   const beam = new THREE.Mesh(new RoundedBoxGeometry(160, 0.9, 0.62, 3, 0.1), concrete);
   beam.position.set(0, BEAM_TOP - 0.45, 0);
   beam.receiveShadow = true;
