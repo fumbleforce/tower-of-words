@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dialogue mock 3: Flat-shaded slab</title>
+<style>
+@font-face { font-family: "Zen Kaku Gothic New"; src: url("../fonts/zkg-medium.woff2") format("woff2"); font-weight: 500; }
+@font-face { font-family: "Zen Kaku Gothic New"; src: url("../fonts/zkg-bold.woff2") format("woff2"); font-weight: 700; }
+:root {
+  --ink: #eef0f4; --ink-dim: #a9b1bf; --jp: #ffc9a8; --gl: #9aa6b8;
+  /* the slab uses the lobby's own wall colours: a lit top face, a front face, a dark lip */
+  --top: #4a5468; --face: #202634; --lip: #141923;
+  --c-guard: #8ea2c8; --c-eric: #a9c3c9;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; overflow: hidden; background: #2a2e36; color: var(--ink); font: 500 16px/1.45 "Zen Kaku Gothic New", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+.world { position: fixed; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.shade { position: fixed; inset: 0; background: linear-gradient(to top, rgba(14,18,28,.55), rgba(14,18,28,0) 45%); }
+
+/* a prism in the speaker's colour stands behind them: two flat faces, lit from the window side */
+.plate { position: fixed; left: 150px; bottom: 90px; width: 420px; height: 440px; }
+.plate svg { width: 100%; height: 100%; display: block; }
+.plate .a { fill: #46526c; }
+.plate .b { fill: #333d54; }
+.plate .d { fill: #58647e; }
+.plate .lit { fill: none; stroke: #f3c48f; stroke-width: 5; opacity: .55; }
+.plate .key { fill: var(--c); }
+.por { position: fixed; bottom: 40px; height: 600px; aspect-ratio: 597 / 768; }
+.por img { display: block; width: 100%; height: 100%; filter: saturate(.9) drop-shadow(-10px 8px 0 rgba(14,18,28,.35)); }
+.por.speaker { left: 110px; bottom: 30px; }
+.por.listener { right: 110px; height: 420px; bottom: 30px; filter: brightness(.34) saturate(.45); }
+
+.slab { position: fixed; left: 60px; right: 60px; bottom: 24px; height: 100px;
+  clip-path: polygon(0 18px, 34px 0, 100% 0, 100% calc(100% - 22px), calc(100% - 30px) 100%, 0 100%);
+  background: linear-gradient(180deg, var(--top) 0 12px, var(--face) 12px calc(100% - 12px), var(--lip) calc(100% - 12px));
+  box-shadow: 0 10px 24px rgba(0,0,0,.4); }
+.slab::after { content: ""; position: absolute; left: 0; top: 0; width: 45%; height: 12px; background: linear-gradient(90deg, rgba(243, 196, 143, .45), rgba(243, 196, 143, 0)); }
+.tab { position: fixed; left: 470px; bottom: 108px; height: 36px; padding: 0 26px 0 20px; display: flex; align-items: center; gap: 12px;
+  background: var(--c); color: #141923; clip-path: polygon(12px 0, 100% 0, calc(100% - 12px) 100%, 0 100%); }
+.tab .nm { font-weight: 700; font-size: 18px; }
+.tab .rl { font-size: 12.5px; opacity: .75; }
+.say { position: fixed; left: 480px; right: 110px; bottom: 38px; height: 62px; }
+.line { font-size: 22px; line-height: 1.5; }
+.jp { color: var(--jp); font-weight: 700; }
+.gl { color: var(--gl); font-size: .8em; white-space: nowrap; }
+.gx { color: #6d7688; filter: blur(.7px); }
+.more { position: absolute; right: 0; bottom: 0; width: 12px; height: 10px; background: var(--c); clip-path: polygon(0 0, 100% 0, 50% 100%); }
+/* an expression mark rides the prism corner: a flat diamond, only for strong beats */
+.mark { position: fixed; left: 420px; bottom: 480px; width: 44px; height: 44px; display: none; place-items: center; background: #eef0f4; color: #141923; font-weight: 700; font-size: 24px; clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%); }
+[data-face="surprised"] .mark { display: grid; }
+[data-who="guard"] { --c: var(--c-guard); }
+[data-who="eric"] { --c: var(--c-eric); }
+
+@keyframes slide { from { translate: -30px 0; opacity: 0; } }
+@keyframes snap { 0% { scale: 1; } 40% { scale: 1.03; } 100% { scale: 1; } }
+@keyframes shake { 20%, 60% { translate: -4px 0; } 40%, 80% { translate: 4px 0; } }
+.plate { animation: slide .2s ease-out; }
+.por.speaker { animation: slide .24s ease-out; transform-origin: 50% 100%; }
+[data-face="surprised"] .por.speaker { animation: snap .2s ease-out, shake .3s .05s linear; }
+.still *, .still *::before { animation: none !important; transition: none !important; }
+
+@media (max-width: 600px) {
+  .slab { left: 8px; right: 8px; bottom: 16px; height: 132px; }
+  .plate { left: 40px; bottom: 136px; width: 220px; height: 300px; }
+  .por.speaker { left: 0; height: 400px; bottom: 90px; }
+  .por.listener { display: none; }
+  .tab { left: 24px; bottom: 130px; height: 32px; }
+  .tab .nm { font-size: 16px; }
+  .say { left: 26px; right: 26px; bottom: 30px; height: 88px; }
+  .line { font-size: 19px; }
+  .mark { left: 220px; bottom: 410px; width: 38px; height: 38px; font-size: 20px; }
+}
+</style>
+</head>
+<body>
+<picture><source media="(max-width: 600px)" srcset="bg-lobby-390.webp"><img class="world" src="bg-lobby-1366.webp" alt=""></picture>
+<div class="shade"></div>
+<div class="plate"><svg viewBox="0 0 320 440" preserveAspectRatio="none"><polygon class="a" points="70,0 190,24 170,440 0,410"/><polygon class="b" points="190,24 320,70 300,430 170,440"/><polygon class="d" points="70,0 190,24 320,70 250,40"/><polyline class="lit" points="0,410 70,0 190,24"/><polygon class="key" points="300,430 320,70 311,68 290,431"/></svg></div>
+<div class="por listener"><img id="lis" alt=""></div>
+<div class="por speaker"><img data-p="speaker" alt=""></div>
+<div class="mark">!</div>
+<div class="slab"></div>
+<div class="tab"><span class="nm" data-f="name"></span><span class="rl" data-f="role"></span></div>
+<div class="say"><div class="line" data-f="line"></div><span class="more"></span></div>
+<script src="mock.js"></script>
+<script>
+const w = document.documentElement.dataset.who;
+document.getElementById('lis').src = w === 'guard' ? '../assets/portraits/eric-neutral.webp' : '../assets/portraits/guard-stern.webp';
+</script>
+</body>
+</html>
