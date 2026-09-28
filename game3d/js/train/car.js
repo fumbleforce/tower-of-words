@@ -11,6 +11,7 @@ export const LZ = 1.2;   // inner half width
 export const T = 0.1;    // wall thickness
 const RI = 0.34;         // inner corner radius (plan)
 export const HF = 1.45;  // full wall height
+const RACK_Y = 1.285, RACK_D = 0.32; // luggage shelf top (just above the window frames) and depth
 export const SEAT_Y = 0.22; // seat cushion top
 export const BENCH_D = 0.4;
 export const RAIL_Y = 1.42;
@@ -144,7 +145,7 @@ function buildShell(mode) {
       g.add(shadowOn(fr, false, true));
       // lamps between windows high on the wall
     }
-    if (h >= HF) {
+    if (h >= HF && !(mode === 'land' && side < 0)) {
       for (const x of [-3.32, -1.78, 0, 1.78, 3.32]) {
         const lamp = new THREE.Mesh(new RoundedBoxGeometry(0.34, 0.1, 0.035, 2, 0.015), lampM);
         lamp.position.set(x, h - 0.15, side * (LZ - 0.005));
@@ -188,6 +189,7 @@ function buildShell(mode) {
     // posters either side of the door
     if (h >= HF) {
       for (const [z, k] of [[-0.78, 0], [0.78, 1]]) {
+        if ((z > 0 ? hA : hB) < HF) continue; // that end of the wall steps down to the cut line; a poster there would hang in the air
         const p = new THREE.Mesh(new THREE.PlaneGeometry(0.34, 0.45), new THREE.MeshStandardMaterial({ map: posterTexture((k + (side > 0 ? 1 : 0)) % 2), roughness: 0.7 }));
         p.rotation.y = side > 0 ? -Math.PI / 2 : Math.PI / 2;
         p.position.set(side * (LX - 0.004), 0.95, z);
@@ -316,10 +318,33 @@ function rackAndRail(x0, x1, side, straps, rack) {
     straps.push({ piv, ph: (straps.length * 2.39) % 6.28, a: 0, v: 0, b: 0, w: 0 });
   }
   if (rack) {
-    // luggage rack on brackets at the top of the far wall
-    const rz = side * (LZ - 0.17);
-    for (const dz of [-0.1, 0.1]) g.add(pole([x0 + 0.05, HF - 0.1, rz + dz], [x1 - 0.05, HF - 0.1, rz + dz], 0.015, mat('rack', COL.rack, { roughness: 0.45, metalness: 0.2 })));
-    for (let x = x0 + 0.2; x < x1; x += 0.8) g.add(pole([x, HF - 0.1, side * LZ], [x, HF - 0.1, rz - side * 0.12], 0.014, metal));
+    // luggage rack: a slatted shelf just above the windows, on wall brackets, with a front lip
+    const rackM = mat('rack', COL.rack, { roughness: 0.45, metalness: 0.2 });
+    const D = RACK_D, y = RACK_Y, zw = side * LZ, zf = side * (LZ - D);
+    const len = x1 - x0 - 0.1, cx = (x0 + x1) / 2;
+    // slats running along the car
+    for (let i = 0; i < 5; i++) {
+      const s = new THREE.Mesh(new RoundedBoxGeometry(len, 0.014, 0.05, 1, 0.005), rackM);
+      s.position.set(cx, y - 0.007, zw - side * (0.04 + i * (D - 0.08) / 4));
+      g.add(shadowOn(s, true, true));
+    }
+    // front lip and the back strip on the wall
+    g.add(shadowOn(pole([x0 + 0.05, y + 0.02, zf], [x1 - 0.05, y + 0.02, zf], 0.013, rackM)));
+    const back = new THREE.Mesh(new RoundedBoxGeometry(len, 0.05, 0.02, 1, 0.006), rackM);
+    back.position.set(cx, y - 0.01, zw - side * 0.012); g.add(shadowOn(back, false, true));
+    // brackets: a wall plate, the arm under the shelf and a diagonal strut back to the wall
+    for (let x = x0 + 0.12; x <= x1 - 0.1 + 1e-6; x += Math.max(0.5, (x1 - x0 - 0.24) / Math.max(1, Math.round((x1 - x0 - 0.24) / 0.8)))) {
+      const plate = new THREE.Mesh(new RoundedBoxGeometry(0.05, 0.1, 0.016, 1, 0.006), metal);
+      plate.position.set(x, y - 0.05, zw - side * 0.008); g.add(shadowOn(plate, false, true));
+      g.add(shadowOn(pole([x, y - 0.018, zw], [x, y - 0.018, zf], 0.012, metal)));
+      g.add(shadowOn(pole([x, y - 0.095, zw], [x, y - 0.02, zf + side * 0.12], 0.01, metal)));
+    }
+    // small lamps tucked under the shelf, in place of the wall lamps it covers
+    const lampM = mat('lamp', COL.lamp, { emissive: new THREE.Color('#ffd08a'), emissiveIntensity: 2.4 });
+    for (let x = x0 + 0.5; x < x1 - 0.3; x += 1.1) {
+      const l = new THREE.Mesh(new RoundedBoxGeometry(0.3, 0.02, 0.06, 1, 0.008), lampM);
+      l.position.set(x, y - 0.03, zw - side * 0.1); g.add(l);
+    }
   }
   return g;
 }
@@ -366,6 +391,14 @@ export function bagMesh(kind, color) {
     g.add(shadowOn(b), shadowOn(h));
   }
   return g;
+}
+
+let _blob = null;
+function blobTex() {
+  if (_blob) return _blob;
+  const cv = document.createElement('canvas'); cv.width = cv.height = 64; const x = cv.getContext('2d');
+  const gr = x.createRadialGradient(32, 32, 2, 32, 32, 31); gr.addColorStop(0, 'rgba(0,0,0,0.7)'); gr.addColorStop(1, 'rgba(0,0,0,0)');
+  x.fillStyle = gr; x.fillRect(0, 0, 64, 64); _blob = new THREE.CanvasTexture(cv); return _blob;
 }
 
 // ---------- the car ----------
@@ -424,10 +457,18 @@ export function buildCar(mode = 'land') {
     for (const dx of [-DOOR_X, DOOR_X]) for (const k of [-1, 1]) benchHolder.add(pole([dx + k * 0.5, 0, LZ - 0.12], [dx + k * 0.5, RAIL_Y, LZ - 0.12], 0.02, metal));
     // bags up on the far rack
     if (md === 'land') {
-    const r1 = bagMesh('case', '#4d4a52'); r1.position.set(-2.4, HF - 0.08, -(LZ - 0.17)); benchHolder.add(r1);
-    const r2 = bagMesh('case', '#6a4f3e'); r2.position.set(2.15, HF - 0.08, -(LZ - 0.17)); r2.rotation.y = 0.05; benchHolder.add(r2);
-    const r3 = bagMesh('pack', '#7a8a6a'); r3.position.set(-0.95, HF - 0.08, -(LZ - 0.17)); r3.rotation.set(-1.2, 0.3, 0); benchHolder.add(r3);
-    const r4 = bagMesh('tote', '#9b6b54'); r4.position.set(2.75, HF - 0.08, -(LZ - 0.17)); benchHolder.add(r4);
+    const bz = -(LZ - RACK_D / 2 - 0.01);
+    const onShelf = (b, x, ry = 0, lie = false) => {
+      if (lie) b.rotation.x = -Math.PI / 2; // lying flat so it stays under the wall top
+      b.position.set(x, RACK_Y, bz + (lie ? 0.06 : 0)); b.rotation.y = ry; benchHolder.add(b);
+      // a soft contact shadow on the slats
+      const sh = new THREE.Mesh(new THREE.PlaneGeometry(1, 1), new THREE.MeshBasicMaterial({ map: blobTex(), transparent: true, depthWrite: false, opacity: 0.55 }));
+      sh.rotation.x = -Math.PI / 2; sh.position.set(x, RACK_Y + 0.004, bz); sh.scale.set(0.55, 0.3, 1); sh.renderOrder = 1; benchHolder.add(sh);
+    };
+    onShelf(bagMesh('case', '#4d4a52'), -2.4);
+    onShelf(bagMesh('case', '#6a4f3e'), 2.15, 0.05);
+    onShelf(bagMesh('brief', '#7a8a6a'), -0.95, 0.1);
+    onShelf(bagMesh('tote', '#9b6b54'), 2.75, 0, true);
     }
   }
   furnish(mode);
