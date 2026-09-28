@@ -389,7 +389,7 @@ export default {
       { say: 'mori', face: 'smile', emo: 'bright', text: 'ノルウェーから、ですね。私、1994年にリレハンメルへ行きました。', overheard: true, clear: [{ ja: 'ノルウェー', ro: 'noruwē', en: 'Norway' }, '1994', { ja: 'リレハンメル', ro: 'Rirehanmeru', en: 'Lillehammer' }] },
       { do: 'gesture', who: 'mori', kind: 'skijump' },
       { choice: [
-        { text: 'Mime the landing', go: 'mori_landing' },
+        { text: 'Mime the ski-jump landing', go: 'mori_landing' },
         { text: 'Pour his tea for him', go: 'mori_pour' },
       ] },
     ],
