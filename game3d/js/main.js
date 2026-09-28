@@ -1,6 +1,7 @@
 // Day one: train, lobby, office. One renderer, one Mio, three places joined by continuous trips.
 import * as THREE from 'three';
-import { createRenderer, makeComposer, Walker, Markers, Q, blob } from './engine.js';
+import { createRenderer, Walker, Markers, Q, blob } from './engine.js';
+import { makePost } from './post.js';
 import { loadMio } from './mio.js';
 import { makeAvatar, loadEric, setSitLift } from './avatar.js';
 import { glide } from './places/lobby.js';
@@ -23,7 +24,10 @@ const TEST = Q.get('test') === 'fast';
 const TS = TEST ? +(Q.get('ts') || 8) : 1;   // test mode: everything runs this many times faster
 const canvas = document.getElementById('c');
 const renderer = createRenderer(canvas);
-let quality = Q.has('q') ? +Q.get('q') : (renderer.userData.software ? 0 : 1);
+// quality tier 0 low, 1 medium, 2 high (post.js). ?q= forces it; otherwise Settings > Graphics (window.__qualityTier)
+const TIER = { low: 0, medium: 1, high: 2 };
+const tierNow = () => (Q.has('q') ? +Q.get('q') : window.__qualityTier ? TIER[window.__qualityTier()] ?? 1 : (renderer.userData.software ? 0 : 2));
+let quality = tierNow();
 ui.build();
 if (CAP) document.body.classList.add('cap');
 
@@ -42,7 +46,8 @@ export const game = {
     if (this.after) { const a = this.after; this.after = null; await a(); return; }
     if (this.queue.length) { const q = this.queue.shift(); this.beat(q); }
   },
-  wait(ms) { return new Promise((r) => setTimeout(r, ms / TS)); },
+  // waits hold while the game is paused (the pause menu sets game.paused)
+  wait(ms) { return new Promise((r) => { let left = ms / TS, last = performance.now(); const tick = () => { const now = performance.now(); if (!game.paused) left -= now - last; last = now; if (left <= 0) r(); else setTimeout(tick, Math.min(50, left)); }; setTimeout(tick, Math.min(50, left)); }); },
   walkTo(x, z) { if (this.player.seated) { this.player.seated = false; this.player.setState('idle'); this.player.root.position.y = 0; } return new Promise((res) => { const was = this.walker.locked; this.walker.locked = false; this.walker.goTo(x, z, () => { this.walker.locked = was; res(); }); }); },
   event(name) { if (this.runner) this.runner.trigger('event:' + name); },
   mioSays(id) { this.place.onMioSays?.(id); },
@@ -50,16 +55,15 @@ export const game = {
 window.__game = game;
 
 // ---------- rendering ----------
-let composer = null, gtao = null;
+let composer = null, post = null;
 function setComposer(place) {
-  const c = makeComposer(renderer, place.scene, place.camera, { beforeAO: place.beforeAO });
-  composer = c.composer; gtao = c.gtao;
+  post = makePost(renderer, place, quality); composer = post.composer;
   applyQuality();
 }
 function applyQuality() {
-  const dpr = Math.min(window.devicePixelRatio || 1, Q.has('dpr') ? +Q.get('dpr') : 2);
-  renderer.setPixelRatio(quality ? dpr : 1);
-  if (gtao) gtao.enabled = !!quality;
+  const dpr = Math.min(window.devicePixelRatio || 1, Q.has('dpr') ? +Q.get('dpr') : 2, post ? post.dpr(quality) : 2);
+  renderer.setPixelRatio(dpr);
+  if (post) post.setQuality(quality);
   if (game.place && game.place.sun) {
     const s = game.place.sun, ms = quality ? 2048 : 1024;
     if (s.shadow.mapSize.x !== ms) { s.shadow.mapSize.set(ms, ms); if (s.shadow.map) { s.shadow.map.dispose(); s.shadow.map = null; } }
@@ -76,6 +80,8 @@ function resize() {
   if (game.place) { game.place.fit(w / h); if (game.player) game.place.cam?.snap?.(game.player.root.position); }
 }
 window.addEventListener('resize', resize);
+game.setQuality = (q) => { quality = q; applyQuality(); };
+window.addEventListener('amakawa:settings', (e) => { if (e.detail && e.detail.key === 'quality' && !Q.has('q')) { quality = tierNow(); applyQuality(); } });
 
 // ---------- things, markers, triggers ----------
 function thingOn(id, t) {
@@ -194,7 +200,6 @@ window.addEventListener('keydown', (e) => {
   if (/^(Arrow|Key[WASD])/.test(e.code)) { if (!game.busy) standUp(); game.walker.keys.add(e.code); e.preventDefault(); unlockAudio(); }
   if ((e.code === 'KeyE' || e.code === 'Space' || e.code === 'Enter') && !game.busy && game.near && !ui.talking && ui.menuClosed()) { e.preventDefault(); use(game.near); }
   if (e.code === 'KeyF' && !ui.talking && !game.busy && ui.menuClosed()) say();
-  if (e.code === 'KeyQ' && !CAP) { quality = quality ? 0 : 1; applyQuality(); }
 });
 window.addEventListener('keyup', (e) => game.walker && game.walker.keys.delete(e.code));
 window.addEventListener('blur', () => game.walker && game.walker.keys.clear());
@@ -295,6 +300,21 @@ game.kotodama = async (targets = [], { cut = ['chime'], focus, zoom = 1.25, puls
   mat.dispose(); dotM.dispose(); glowM.dispose();
   for (const q of rings) { q.ring.parent?.remove(q.ring); q.ring.geometry.dispose(); q.rm.dispose(); }
 };
+// { do: 'phone', who: 'mio', state: 'buzz' | 'look' | 'away' }: her phone. buzz: a buzz and a phone bubble over
+// her head, repeating until she looks; look/away: her rig's phone pose if it has one (characters agent), else nothing.
+// Other people (the guard in the lobby) go to the place's own phone hook.
+let phoneBuzz = 0;
+H.phone = async (s) => {
+  const rig = s.who === 'mio' ? game.mioNpc : isPlayer(s.who) ? game.player : null;
+  if (!rig) return game.place.hooks?.phone?.(s);
+  clearInterval(phoneBuzz); phoneBuzz = 0;
+  if (s.state === 'buzz') {
+    const buzz = () => { sfx('buzz'); H.emote({ who: s.who, kind: 'phone', ms: 1100 }); };
+    buzz(); phoneBuzz = setInterval(buzz, 1400 / TS);
+    return;
+  }
+  if (rig.phone) await rig.phone(s.state);
+};
 // { do: 'kotodama', target: 'doors' }: the effect on its own, on a place's named target (place.kotodamaTargets)
 H.kotodama = async ({ target }) => { const t = game.place.kotodamaTargets?.(target) || []; await game.kotodama(t); };
 H.voice = ({ key }) => voice(key);
@@ -332,6 +352,7 @@ const EMOTE_SVG = {
   heart: '<path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z" fill="#e0607a" stroke="#b8405a"/>',
   sweat: '<path d="M12 3c3 4.2 5 7 5 9.6a5 5 0 0 1-10 0C7 10 9 7.2 12 3z" fill="#7cc4f0" stroke="#3e8fc4"/>',
   nine: '<circle cx="12" cy="12" r="8.5" fill="#fff" stroke="#2a2f3a" stroke-width="1.8"/><path d="M12 12V6.2M12 12H7.2" stroke="#2a2f3a" stroke-width="2.2" stroke-linecap="round"/><circle cx="12" cy="12" r="1.2" fill="#2a2f3a"/>',
+  phone: '<rect x="7" y="3" width="10" height="18" rx="2.2" fill="#fff" stroke="#2a2f3a" stroke-width="1.8"/><path d="M10.5 18h3" stroke="#2a2f3a" stroke-width="1.6" stroke-linecap="round"/><path d="M3.5 9.5c-.8 1.6-.8 3.4 0 5M20.5 9.5c.8 1.6.8 3.4 0 5" stroke="#4f6aa8" stroke-width="1.7" fill="none" stroke-linecap="round"/>',
   note: '<path d="M9 17.5V6l9-2v11.5" fill="none" stroke="#2a2f3a" stroke-width="1.9"/><circle cx="7" cy="17.5" r="2.3" fill="#2a2f3a"/><circle cx="16" cy="15.5" r="2.3" fill="#2a2f3a"/>',
 };
 H.emote = ({ who, kind, ms = 1900 }) => {
@@ -387,7 +408,12 @@ H.bow = async ({ who, depth = 'small' }) => {
   if (r.torso) { const x0 = r.torso.rotation.x; await game.tween(dur, (k) => { r.torso.rotation.x = x0 + bell(k) * d * 0.9; r.head.rotation.x = bell(k) * d * 0.3; }); r.torso.rotation.x = x0; }
 };
 H.gesture = async ({ who, kind }) => {
-  const r = whoRig(who); if (!r || !r.arms) return;
+  const r = whoRig(who);
+  // Meshy rigs play their own library clips (wave, shrug, nod, bow); others fall through (point, nine... do their
+  // emote and camera parts only on them)
+  if (r && r.gesture && r.gestures && r.gestures.includes(kind)) return r.gesture(kind);
+  if (r && r.meshy && kind === 'nine') { game.place.clock?.userData.highlight(true); H.emote({ who, kind: 'nine', ms: 3600 }); await game.wait(2600); game.place.clock?.userData.highlight(false); return; }
+  if (!r || !r.arms || r.meshy) return;
   const save = r.arms.map((a) => a.rotation.clone()), hy = r.hips.position.y, legs = r.legs.map((l) => l.rotation.x), knees = r.knees.map((q) => q.rotation.x);
   if (kind === 'nine') {
     // "at nine": he points up at the wall clock (which lights up, the nine picked out) and a 9:00 clock shows over him
@@ -501,10 +527,12 @@ async function travel(name) {
   const from = game.place;
   game.busy = true; game.walker.locked = true; document.body.classList.add('busy', 'trip');
   const ready = prepare(name);
+  document.body.classList.add('loading');
   const tr = await game.runner.load('transitions');
   const slot = (tr && tr[`${from.name}_to_${name}`]) || {};
   await trips.leave(game, from, slot);
   await ready;
+  document.body.classList.remove('loading');
   const snap = snapshot();
   await enter(name);
   crossfade(snap);
@@ -535,7 +563,8 @@ const nearSet = new Set(), zoneSet = new Set();
 // stills and frame sequences (?cap): advance game time exactly, independent of how slow the renderer is
 if (CAP) window.__advance = (sec) => { for (let t = sec; t > 1e-6; t -= 1 / 30) step(Math.min(1 / 30, t)); };
 function frame() {
-  const now = performance.now(); let dt = Math.min(0.1, (now - lastT) / 1000) * TS; lastT = now;
+  const now = performance.now();
+  if (game.paused) { lastT = now; render(); requestAnimationFrame(frame); return; } let dt = Math.min(0.1, (now - lastT) / 1000) * TS; lastT = now;
   if (!CAP || window.__run) while (dt > 1e-4) { const s = Math.min(0.05, dt); step(s); dt -= s; }
   render();
   frames++;
@@ -567,12 +596,15 @@ function step(dt) {
     const bias = (m.goal && m.goal() ? -1.2 : 0) + (/person/.test(m.kind || '') ? -0.7 : 0) + (m.wordable && m.wordable() ? -0.6 : 0);
     // Say works on what's in reach; goals and people win over things when several are close
     if (!game.busy && known.size && d < 1.6 + seatedReach && d + bias < sd) { sd = d + bias; st = m; }
-    if (d < 0.9) { if (!nearSet.has(m.id)) { nearSet.add(m.id); if (!game.busy) game.runner.trigger('near:' + m.id); } }
+    if (d < 0.9) { if (!nearSet.has(m.id) && !game.busy) { nearSet.add(m.id); game.runner.trigger('near:' + m.id); } }
     else if (d > 1.3) nearSet.delete(m.id);
   }
   for (const [z, fn] of Object.entries(place.zones || {})) {
     const inz = fn(mp.x, mp.z);
-    if (inz && !zoneSet.has(z)) { zoneSet.add(z); if (!game.busy) game.runner.trigger('zone:' + z); }
+    // a zone fires once per visit, but only when it can: if he walked in during a scene, or before the zone's
+    // condition was true (the lift before the gate flag), it fires as soon as it can while he's still inside.
+    // (Jørgen's lift softlock: entered while busy, the trigger was dropped and never came back.)
+    if (inz && !zoneSet.has(z) && !game.busy && game.runner.has('zone:' + z)) { zoneSet.add(z); game.runner.trigger('zone:' + z); }
     else if (!inz) zoneSet.delete(z);
   }
   game.near = near; game.sayTarget = st;
@@ -596,7 +628,7 @@ function render() {
   if (!composer || !game.place) return;
   game.place.beforeRender?.();
   renderer.shadowMap.needsUpdate = true;
-  composer.render();
+  post.render();
 }
 game.step = step;
 

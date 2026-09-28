@@ -11,6 +11,9 @@ export function start(game) {
   window.addEventListener('error', (e) => T.errors.push(String(e.message)));
   window.addEventListener('unhandledrejection', (e) => T.errors.push(String(e.reason)));
   const tried = new Set();
+  // ?route=social takes the other way through the gate (no akete; sumimasen to the guard)
+  const route = new URLSearchParams(location.search).get('route') || 'magic';
+  T.route = route;
   let lastPlace = '', idle = 0, busyFor = 0;
   setInterval(() => {
     if (window.__ended) { T.done = true; return; }
@@ -29,6 +32,7 @@ export function start(game) {
       if (!known.has(w)) continue;
       const key = `say:${w}:${m.id}`;
       if (tried.has(key) || !game.runner.has(key)) continue;
+      if (route === 'social' && w === 'akete') continue;
       tried.add(key); T.log.push(p.name + ' ' + key);
       const fire = () => { game.found.add(key); game.runner.trigger(key); };
       if (game.player.seated) fire(); else { const s = m.spot(); game.walker.goTo(s[0], s[1], fire); }
@@ -38,6 +42,7 @@ export function start(game) {
     for (const m of list) { const k = 'use:' + m.id; if (!tried.has(k)) { tried.add(k); T.log.push(p.name + ' ' + k); game.use(m); return; } }
     idle++;
     if (idle % 16 === 0) for (const k of [...tried]) if (k.startsWith('use:')) tried.delete(k);   // look again
-    if (idle > 300) { T.log.push('STUCK: nothing left to try'); T.done = true; }
+    // a softlock: nothing left to do and no way on. Fails the build.
+    if (idle > 300) { T.log.push('STUCK: nothing left to try'); T.errors.push(`softlock in ${p.name}: no reachable next goal (goal text: "${game.ui.goalText || ''}", goal markers: ${goals.map((g) => g.id).join(',') || 'none'})`); T.done = true; }
   }, 60);
 }
