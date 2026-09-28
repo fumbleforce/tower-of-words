@@ -126,7 +126,7 @@ export default {
       { say: 'mio', face: 'smile', text: "See? She's fine with it." },
       { do: 'emote', who: 'kuroda', kind: 'zzz' },
       "mio: She's more awake than that guy, anyway. He's on this train every morning too, asleep the whole way, and like once a month he misses our stop and ends up back on the mainland.",
-      { say: 'mio', face: 'neutral', text: "Anyway, when you meet someone new, it's {yoroshiku}. Like \\\"nice to meet you\\\", but more like \\\"please be nice to me\\\"." },
+      { say: 'mio', face: 'neutral', text: "Anyway, when you meet someone new, it's {yoroshiku}. Like “nice to meet you”, but more like “please be nice to me”." },
       { do: 'type', word: 'yoroshiku', from: 'mio', prompt: 'mio: We just met, so... say it to me.' },
       'mio: {yoroshiku}.',
       'mio: With Mori-san, bow a little when you say it. He likes that.',
