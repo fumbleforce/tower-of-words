@@ -271,12 +271,14 @@ export function buildOffice() {
   }
 
   // ---- floors ----
+  // room floors sit at y 0.006, above the base floor's seams (their tops are at 0.004), so each room shows only
+  // its own tile grid (at 0.003 the base grid poked through and every room had two grids)
   root.add(tileFloor(X0, X1, Z0, Z1, 0.8, { color: '#979ca4', seam: '#868b93' }));
-  root.add(tileFloor(X0, X1, CN, CS, 0.8, { color: '#8f949b', seam: '#80858c', y: 0.003 }));                 // corridor, older vinyl
-  root.add(tileFloor(3.4, X1, Z0, CN, 0.6, { color: '#9da2a8', seam: '#8d9298', y: 0.003 }));                // machine room, painted concrete
-  root.add(tileFloor(1.8, X1, CS, Z1, 0.4, { color: '#a3a8ae', seam: '#90959b', y: 0.003 }));                // toilets
-  root.add(tileFloor(-7, -2.2, CS, Z1, 1.0, { color: '#979a9e', seam: '#898c90', y: 0.003 }));              // copy room sheet vinyl
-  root.add(tileFloor(-2.2, 1.8, CS, Z1, 1.0, { color: '#92969c', seam: '#83878d', y: 0.003 }));             // kitchenette
+  root.add(tileFloor(X0, X1, CN, CS, 0.8, { color: '#8f949b', seam: '#80858c', y: 0.006 }));                 // corridor, older vinyl
+  root.add(tileFloor(3.4, X1, Z0, CN, 0.6, { color: '#9da2a8', seam: '#8d9298', y: 0.006 }));                // machine room, painted concrete
+  root.add(tileFloor(1.8, X1, CS, Z1, 0.4, { color: '#a3a8ae', seam: '#90959b', y: 0.006 }));                // toilets
+  root.add(tileFloor(-7, -2.2, CS, Z1, 1.0, { color: '#979a9e', seam: '#898c90', y: 0.006 }));              // copy room sheet vinyl
+  root.add(tileFloor(-2.2, 1.8, CS, Z1, 1.0, { color: '#92969c', seam: '#83878d', y: 0.006 }));             // kitchenette
 
   // ---- walls ----
   const W = (...a) => root.add(wall(...a));
