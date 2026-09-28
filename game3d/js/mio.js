@@ -1,0 +1,337 @@
+// Mio, the player: Jørgen's Meshy model (side/flat/meshy2), loaded the way side/flat/neon.html shows her.
+// The face fix, jaw fix, cleaned texture and foot fix are ported from neon.html with its default settings, so her
+// shape, face and eyes are exactly as approved there. The only change for the game is colour: the flat palette
+// colours are remapped per region (hair, hoodie, trousers, shoes) so she reads at game scale and sits in the
+// muted office palette. Nothing is moved, reshaped or removed for that.
+import * as THREE from 'three';
+import { GLTFLoader } from '../vendor/loaders/GLTFLoader.js';
+
+const DIR = new URL('../assets/mio/', import.meta.url).href;
+export let IDLE_T = 0.0; // set from the page for testing
+export function setIdleT(v) { IDLE_T = v; }
+
+// Region colours (sRGB). The model's navy shades differ only slightly; each face keeps its shade relative
+// to the mean navy, so the planes still read.
+export const MIO_COLOURS = {
+  hair: '#3b4661',      // soft blue-black (was saturated navy)
+  hoodie: '#6e8a93',    // slate blue hoodie, lighter than the hair so the head and body separate
+  trousers: '#363c4e',  // dark charcoal cargo trousers
+  shoes: '#3d4658',     // dark part of the sneakers
+  teal: '#43b8b2',      // teal bits: hair streaks, trouser tabs, shoe trim (a little softer)
+  tealDark: '#1f7f86',
+  skin: null,           // unchanged
+  white: '#f3f1ec',     // sneaker soles and trim, a touch warmer
+};
+
+function plainFace(mesh, faces, palette) {
+  const g = mesh.geometry, pos = g.attributes.position, idx = g.index.array;
+  const si = g.attributes.skinIndex, sw = g.attributes.skinWeight;
+  const names = mesh.skeleton.bones.map((b) => b.name);
+  const headBones = new Set([names.indexOf('mixamorigHead'), names.indexOf('headfront')]);
+  const skin = palette.reduce((a, c) => (c[0] - c[2] > a[0] - a[2] ? c : a)).join();
+  const map = new Map(), uid = new Int32Array(pos.count), groups = [];
+  for (let i = 0; i < pos.count; i++) {
+    const k = [pos.getX(i), pos.getY(i), pos.getZ(i)].map((v) => v.toFixed(4)).join();
+    if (!map.has(k)) { map.set(k, groups.length); groups.push([]); }
+    uid[i] = map.get(k); groups[uid[i]].push(i);
+  }
+  const P = groups.map((gr) => new THREE.Vector3().fromBufferAttribute(pos, gr[0]));
+  const N = P.map(() => new THREE.Vector3());
+  const onFace = new Uint8Array(P.length), onOther = new Uint8Array(P.length);
+  const e1 = new THREE.Vector3(), e2 = new THREE.Vector3(), c = new THREE.Vector3();
+  for (let f = 0; f < idx.length / 3; f++) {
+    const [a, b, d] = [uid[idx[f * 3]], uid[idx[f * 3 + 1]], uid[idx[f * 3 + 2]]];
+    e1.subVectors(P[b], P[a]); e2.subVectors(P[d], P[a]); const n = e1.cross(e2);
+    c.copy(P[a]).add(P[b]).add(P[d]).divideScalar(3);
+    const col = faces[f];
+    const isFace = col ? col.join() === skin : Math.abs(c.x) < 0.31 && c.y < 1.8 && n.z > 0.3 * n.length();
+    for (const u of [a, b, d]) { N[u].add(n); if (isFace) onFace[u] = 1; else onOther[u] = 1; }
+  }
+  const sel = [];
+  for (let u = 0; u < P.length; u++) {
+    const i = groups[u][0]; let bi = 0;
+    for (let k = 1; k < 4; k++) if (sw.getComponent(i, k) > sw.getComponent(i, bi)) bi = k;
+    const p = P[u], n = N[u].normalize();
+    if (headBones.has(si.getComponent(i, bi)) && onFace[u] && n.z > 0.45 && p.y > 1.38 && p.y < 1.87 && Math.abs(p.x) < 0.36 && p.z > 0.25) sel.push(u);
+  }
+  const Y0 = 1.65, basis = (p) => [1, p.y - Y0, (p.y - Y0) ** 2, p.x * p.x];
+  const A = [0, 1, 2, 3].map(() => [0, 0, 0, 0, 0]);
+  for (const u of sel) { const r = basis(P[u]); for (let i = 0; i < 4; i++) { for (let j = 0; j < 4; j++) A[i][j] += r[i] * r[j]; A[i][4] += r[i] * P[u].z; } }
+  for (let i = 0; i < 4; i++) {
+    let m = i; for (let k = i + 1; k < 4; k++) if (Math.abs(A[k][i]) > Math.abs(A[m][i])) m = k;
+    [A[i], A[m]] = [A[m], A[i]];
+    for (let k = 0; k < 4; k++) if (k !== i) { const t = A[k][i] / A[i][i]; for (let j = i; j < 5; j++) A[k][j] -= t * A[i][j]; }
+  }
+  const coef = A.map((r, i) => r[4] / r[i]);
+  const k = 0.3, mx2 = sel.reduce((s, u) => s + P[u].x ** 2, 0) / sel.length;
+  coef[0] += (1 - k) * coef[3] * mx2; coef[3] *= k;
+  const kv = 0.3, my2 = sel.reduce((s, u) => s + (P[u].y - Y0) ** 2, 0) / sel.length;
+  coef[0] += (1 - kv) * coef[2] * my2; coef[2] *= kv;
+  const surf = (p) => basis(p).reduce((s, v, i) => s + v * coef[i], 0);
+  for (const u of sel) {
+    const p = P[u];
+    const r = Math.hypot(p.x / 0.31, (p.y - Y0) / 0.22);
+    const w = onOther[u] ? 0 : 1 - THREE.MathUtils.smoothstep(r, 0.85, 1.1);
+    const z = p.z + w * (surf(p) - p.z);
+    for (const i of groups[u]) pos.setZ(i, z);
+  }
+  pos.needsUpdate = true; g.computeBoundingBox(); g.computeBoundingSphere();
+}
+
+function reshapeJaw(mesh) {
+  const g = mesh.geometry, pos = g.attributes.position, si = g.attributes.skinIndex, sw = g.attributes.skinWeight;
+  const names = mesh.skeleton.bones.map((b) => b.name);
+  const head = new Set([names.indexOf('mixamorigHead'), names.indexOf('headfront')]);
+  const map = new Map(), groups = [];
+  for (let i = 0; i < pos.count; i++) {
+    const k = [pos.getX(i), pos.getY(i), pos.getZ(i)].map((v) => v.toFixed(4)).join();
+    if (!map.has(k)) { map.set(k, groups.length); groups.push([]); }
+    groups[map.get(k)].push(i);
+  }
+  const dom = (i) => { let bi = 0; for (let k = 1; k < 4; k++) if (sw.getComponent(i, k) > sw.getComponent(i, bi)) bi = k; return si.getComponent(i, bi); };
+  const V = groups.map((gr) => ({ gr, p: new THREE.Vector3().fromBufferAttribute(pos, gr[0]), head: head.has(dom(gr[0])) }));
+  const EYE = 1.62, L = 1.08, CH = 0.8;
+  const low = V.filter((v) => v.head && v.p.y < EYE && v.p.z > -0.1);
+  const front = low.filter((v) => v.p.z > 0.28);
+  const minY = Math.min(...front.map((v) => v.p.y));
+  const tip = front.filter((v) => Math.abs(v.p.x) < 0.08 && v.p.y < minY + 0.02);
+  const side = front.filter((v) => Math.abs(v.p.x) > 0.08 && Math.abs(v.p.x) < 0.25 && v.p.y < minY + 0.12).sort((a, b) => a.p.y - b.p.y).slice(0, 2);
+  const jawY = side.length ? side.reduce((s, v) => s + v.p.y, 0) / side.length : minY;
+  const lift = tip.length ? CH * Math.max(0, jawY - tip[0].p.y) : 0;
+  for (const v of tip) v.p.y += lift;
+  for (const v of low) if (!tip.includes(v) && Math.abs(v.p.x) < 0.08 && v.p.z > 0.12 && v.p.z <= 0.28 && v.p.y < minY + 0.05) v.p.y += lift * 0.5;
+  for (const v of low) v.p.y = EYE - (EYE - v.p.y) * L;
+  for (const v of V) if (v.head && v.p.z > -0.1 && v.p.y < EYE) for (const i of v.gr) { pos.setY(i, v.p.y); pos.setZ(i, v.p.z); }
+  pos.needsUpdate = true; g.computeBoundingBox(); g.computeBoundingSphere();
+}
+
+// region of a triangle from its vertices' strongest bones
+export let HEM = 0.8, COLLAR = 1.36;
+export function setCollar(v) { COLLAR = v; }
+export let HEM_ = 0;   // hoodie hem height in model units (the body is skinned to the hips above and below it)
+export function setHem(v) { HEM = v; }
+function regionOf(boneName, y) {
+  const n = boneName.replace(/mixamorig:?/, '');
+  if (/Head|headfront|HeadTop/i.test(n)) return y > COLLAR ? 'hair' : 'hoodie';
+  if (/Neck/i.test(n)) return y > COLLAR ? 'hair' : 'hoodie';
+  if (/Foot|Toe/i.test(n)) return 'shoes';
+  if (/^(Left|Right)Leg/i.test(n)) return 'trousers';
+  if (/UpLeg|Hips|Spine/i.test(n)) return y > HEM ? 'hoodie' : 'trousers';
+  return 'hoodie';
+}
+
+const lin = (v) => { v /= 255; return v <= 0.04045 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4); };
+const hexLin = (h) => { const c = new THREE.Color(h); return [c.r, c.g, c.b]; }; // THREE.Color stores linear
+
+function recolour(mesh, data, colours) {
+  // classify palette entries
+  const pal = data.palette;
+  const key = (c) => c.join();
+  const lum = (c) => 0.3 * c[0] + 0.59 * c[1] + 0.11 * c[2];
+  const skin = pal.reduce((a, c) => (c[0] - c[2] > a[0] - a[2] ? c : a));
+  const cls = new Map();
+  const navy = [];
+  for (const c of pal) {
+    if (key(c) === key(skin)) cls.set(key(c), 'skin');
+    else if (lum(c) > 200) cls.set(key(c), 'white');
+    else if (c[1] > c[0] + 40 && lum(c) > 90) cls.set(key(c), 'teal');
+    else if (c[1] > c[0] + 40) cls.set(key(c), 'tealDark');
+    else { cls.set(key(c), 'navy'); navy.push(c); }
+  }
+  const navyMean = navy.reduce((s, c) => s + lum(c), 0) / navy.length;
+  const g = mesh.geometry, idx = g.index.array, si = g.attributes.skinIndex, sw = g.attributes.skinWeight;
+  const names = mesh.skeleton.bones.map((b) => b.name);
+  const out = [], tints = [];
+  const pos = g.attributes.position;
+  const regionOfFace = (f) => {
+    const votes = {};
+    const cy = (pos.getY(idx[f * 3]) + pos.getY(idx[f * 3 + 1]) + pos.getY(idx[f * 3 + 2])) / 3;
+    for (let v = 0; v < 3; v++) {
+      const i = idx[f * 3 + v];
+      let bi = 0; for (let q = 1; q < 4; q++) if (sw.getComponent(i, q) > sw.getComponent(i, bi)) bi = q;
+      const r = regionOf(names[si.getComponent(i, bi)] || '', cy);
+      votes[r] = (votes[r] || 0) + 1;
+    }
+    return Object.entries(votes).sort((a, b) => b[1] - a[1])[0][0];
+  };
+  // the eye band on the face front: textured triangles here are never tinted, so the eyes, lashes and brows
+  // keep their exact colours
+  const eyeBand = (f) => {
+    let x = 0, y = 0, z = 0;
+    for (let v = 0; v < 3; v++) { const i = idx[f * 3 + v]; x += pos.getX(i) / 3; y += pos.getY(i) / 3; z += pos.getZ(i) / 3; }
+    return z > 0.2 && y > 1.4 && y < 1.76 && Math.abs(x) < 0.33;
+  };
+  data.faces.forEach((c, f) => {
+    if (!c) {
+      out.push(null);
+      if (!colours || eyeBand(f)) { tints.push(null); return; }
+      tints.push(hexLin(colours[regionOfFace(f)]));
+      return;
+    }
+    tints.push(null);
+    const k = cls.get(key(c));
+    if (!colours) out.push([lin(c[0]), lin(c[1]), lin(c[2])]);
+    else if (k === 'navy') {
+      const base = hexLin(colours[regionOfFace(f)]);
+      const s = Math.pow(lum(c) / navyMean, 2.2);
+      out.push(base.map((x) => x * s));
+    } else if (colours[k]) out.push(hexLin(colours[k]));
+    else out.push([lin(c[0]), lin(c[1]), lin(c[2])]);
+  });
+  return { cols: out, tints, navyLum: lin(navyMean) };
+}
+
+// Foot fix from neon.html: the walk rolls her feet onto their outer edges; undo it after the mixer poses.
+const DEG = Math.PI / 180;
+function makeFootFix(model, skinned) {
+  const FOOT_ROLL = 30 * DEG, FOOT_YAW = 5 * DEG;
+  const feet = [['Left', 1], ['Right', -1]].map(([s, side]) => ({ bone: model.getObjectByName('mixamorig' + s + 'Foot'), side, sole: [] }));
+  { const p = skinned.geometry.attributes.position;
+    for (let i = 0; i < p.count; i++) if (p.getY(i) < 0.005) feet[p.getX(i) > 0 ? 0 : 1].sole.push(i); }
+  const _qm = new THREE.Quaternion(), _qp = new THREE.Quaternion(), _qw = new THREE.Quaternion(), _qr = new THREE.Quaternion();
+  const _e = new THREE.Euler(), _v = new THREE.Vector3(), _toModel = new THREE.Matrix4();
+  function soleRoll(f) {
+    _toModel.copy(model.matrixWorld).invert().multiply(skinned.matrixWorld);
+    let n = 0, sx = 0, sz = 0, sy = 0, sxx = 0, szz = 0, sxz = 0, sxy = 0, szy = 0;
+    for (const i of f.sole) {
+      skinned.getVertexPosition(i, _v).applyMatrix4(_toModel);
+      n++; sx += _v.x; sz += _v.z; sy += _v.y; sxx += _v.x * _v.x; szz += _v.z * _v.z; sxz += _v.x * _v.z; sxy += _v.x * _v.y; szy += _v.z * _v.y;
+    }
+    const m = new THREE.Matrix3().set(n, sx, sz, sx, sxx, sxz, sz, sxz, szz).invert();
+    const slope = new THREE.Vector3(sy, sxy, szy).applyMatrix3(m).y;
+    return Math.atan(-f.side * slope);
+  }
+  function turnFoot(f, roll, yaw) {
+    _qr.setFromEuler(_e.set(0, f.side * yaw, f.side * roll, 'YZX'));
+    _qr.premultiply(_qm).multiply(_qp.copy(_qm).invert());
+    f.bone.parent.getWorldQuaternion(_qp);
+    f.bone.quaternion.copy(_qp.invert().multiply(_qr.multiply(_qw.copy(f.world))));
+    f.bone.updateMatrixWorld(true);
+  }
+  return function fixFeet() {
+    model.updateMatrixWorld(true);
+    model.getWorldQuaternion(_qm);
+    for (const f of feet) {
+      f.world = f.bone.getWorldQuaternion(f.world || new THREE.Quaternion());
+      const inv = soleRoll(f);
+      const w = 1 - THREE.MathUtils.smoothstep(inv, 28 * DEG, 45 * DEG);
+      let roll = THREE.MathUtils.clamp(inv * 1.3, 0, FOOT_ROLL) * w;
+      turnFoot(f, roll, FOOT_YAW * w);
+      if (roll > 0 && roll < FOOT_ROLL) { roll = THREE.MathUtils.clamp(roll + soleRoll(f) * 1.3 * w, 0, FOOT_ROLL); turnFoot(f, roll, FOOT_YAW * w); }
+    }
+  };
+}
+
+// Load her once. `height` is her standing height in world units.
+export async function loadMio({ height = 1.12, colours = MIO_COLOURS } = {}) {
+  const loader = new GLTFLoader();
+  const load = (u) => new Promise((ok, no) => loader.load(u, ok, undefined, no));
+  const [walk, run, sit, data, tex] = await Promise.all([
+    load(DIR + 'walk.glb'), load(DIR + 'run.glb'), load(DIR + 'sit.glb'),
+    fetch(DIR + 'base-clean.json').then((r) => r.json()),
+    new THREE.TextureLoader().loadAsync(DIR + 'base-clean.webp'),
+  ]);
+  tex.flipY = false; tex.colorSpace = THREE.SRGBColorSpace;
+  const model = walk.scene;
+  let skinned;
+  model.traverse((o) => { if (o.isSkinnedMesh) skinned = o; });
+  plainFace(skinned, data.faces, data.palette);
+  reshapeJaw(skinned);
+  const { cols, tints, navyLum } = recolour(skinned, data, colours);
+  const NAVY_L = 0.2126 * lin(24) + 0.7152 * lin(47) + 0.0722 * lin(96);
+  model.traverse((o) => {
+    if (!o.isMesh) return;
+    o.castShadow = true; o.receiveShadow = true;
+    const old = o.material;
+    const g = o.geometry.index ? o.geometry.toNonIndexed() : o.geometry;
+    const n = g.attributes.position.count, col = new Float32Array(n * 3), use = new Float32Array(n), tint = new Float32Array(n * 4);
+    cols.forEach((c, f) => {
+      for (let k = 0; k < 3; k++) {
+        const i = f * 3 + k;
+        if (c) { col[i * 3] = c[0]; col[i * 3 + 1] = c[1]; col[i * 3 + 2] = c[2]; use[i] = 0; }
+        else { col[i * 3] = col[i * 3 + 1] = col[i * 3 + 2] = 1; use[i] = 1; }
+        const t = tints[f];
+        if (t) { tint[i * 4] = t[0]; tint[i * 4 + 1] = t[1]; tint[i * 4 + 2] = t[2]; tint[i * 4 + 3] = 1; }
+      }
+    });
+    g.setAttribute('color', new THREE.BufferAttribute(col, 3));
+    g.setAttribute('useTex', new THREE.BufferAttribute(use, 1));
+    g.setAttribute('tint', new THREE.BufferAttribute(tint, 4));
+    o.geometry = g;
+    const m = new THREE.MeshLambertMaterial({ map: tex, vertexColors: true, flatShading: true });
+    m.onBeforeCompile = (sh) => {
+      sh.vertexShader = 'attribute float useTex;\nattribute vec4 tint;\nvarying float vUseTex;\nvarying vec4 vTint;\n' + sh.vertexShader.replace('#include <begin_vertex>', '#include <begin_vertex>\nvUseTex = useTex; vTint = tint;');
+      // textured triangles outside the eye band: navy texels take the region colour, keeping their shade
+      sh.fragmentShader = 'varying float vUseTex;\nvarying vec4 vTint;\n' + sh.fragmentShader.replace('#include <map_fragment>', `
+#ifdef USE_MAP
+ vec4 texel = texture2D( map, vMapUv );
+ float tl = dot(texel.rgb, vec3(0.2126, 0.7152, 0.0722));
+ float navy = step(0.5, vTint.a) * step(texel.r, 0.08) * step(texel.g, texel.b * 0.6) * step(0.035, texel.b) * step(texel.b, 0.3);
+ texel.rgb = mix(texel.rgb, vTint.rgb * clamp(tl / ${NAVY_L.toFixed(5)}, 0.4, 1.8), navy);
+ diffuseColor *= mix( vec4( 1.0 ), texel, vUseTex );
+#endif`);
+    };
+    o.material = m;
+    old.dispose();
+    o.frustumCulled = false;
+  });
+  const box = new THREE.Box3().setFromObject(model);
+  const H = box.max.y - box.min.y;
+  const root = new THREE.Group();
+  const holder = new THREE.Group();
+  holder.scale.setScalar(height / H);
+  holder.add(model);
+  root.add(holder);
+  const mixer = new THREE.AnimationMixer(model);
+  const clips = { walk: walk.animations[0], run: run.animations[0], sit: sit.animations[0] };
+  const actions = {};
+  for (const [k, c] of Object.entries(clips)) { actions[k] = mixer.clipAction(c); }
+  const bind = [];
+  model.traverse((o) => { if (o.isBone) bind.push([o, o.position.clone(), o.quaternion.clone(), o.scale.clone()]); });
+  const fixFeet = makeFootFix(model, skinned);
+  // the walk clip's hips travel forward a little; keep her in place (root motion off on x/z)
+  const hips = model.getObjectByName('mixamorigHips');
+  const hipRest = hips.position.clone();
+
+  // idle: the walk clip held still at a frame with the feet together, plus a small breath
+  const idleClip = clips.walk.clone(); idleClip.name = 'idle';
+  actions.idle = mixer.clipAction(idleClip);
+  actions.idle.timeScale = 0;
+  let cur = null, curName = '';
+  function setState(name) {
+    if (name === curName) return;
+    const prev = cur;
+    curName = name;
+    const a = actions[name];
+    a.reset(); a.setEffectiveWeight(1);
+    if (name === 'idle') { a.time = IDLE_T; a.timeScale = 0; }
+    a.fadeIn(prev ? 0.2 : 0).play();
+    if (prev && prev !== a) prev.fadeOut(0.2);
+    cur = a;
+  }
+  let t = 0;
+  function update(dt, speed = 1) {
+    t += dt;
+    actions.walk.timeScale = speed;
+    mixer.update(dt);
+    if (curName !== 'sit') { hips.position.x = hipRest.x; hips.position.z = hipRest.z; }
+    if (curName === 'idle') hips.position.y += Math.sin(t * 2.0) * 0.004;
+    if (curName !== 'sit') fixFeet();
+  }
+  // where the hips sit in the chair clip, measured once in the root's own space
+  setState('sit'); for (let i = 0; i < 30; i++) update(1 / 30);
+  root.updateMatrixWorld(true);
+  const sitHip = new THREE.Vector3(); hips.getWorldPosition(sitHip); root.worldToLocal(sitHip);
+  cur = null; curName = ''; mixer.stopAllAction();
+  setState('idle');
+  update(0);
+  // put her in a seat: the hips land on (x, seatTop + 0.07, z), facing ry
+  function sitAt(x, seatTop, z, ry) {
+    const k = root.scale.x;
+    const o = sitHip.clone().multiplyScalar(k).applyAxisAngle(new THREE.Vector3(0, 1, 0), ry);
+    root.position.set(x - o.x, seatTop + 0.07 * k - o.y, z - o.z);
+    root.rotation.y = ry;
+    setState('sit');
+  }
+  return { root, model, mixer, setState, update, sitAt, sitHip, get state() { return curName; }, H, height };
+}

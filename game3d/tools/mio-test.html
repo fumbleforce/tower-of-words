@@ -1,0 +1,29 @@
+<!doctype html><html><head><meta charset="utf-8">
+<script type="importmap">{ "imports": { "three": "../vendor/three/three.module.js", "three/addons/": "../vendor/" } }</script>
+<style>html,body{margin:0;height:100%;background:#8d8a86}canvas{display:block}</style></head><body>
+<script type="module">
+import * as THREE from 'three';
+import { loadMio, setIdleT, setHem, setCollar, MIO_COLOURS } from '../js/mio.js';
+const q = new URLSearchParams(location.search);
+const r = new THREE.WebGLRenderer({ antialias: true }); r.setSize(innerWidth, innerHeight); document.body.appendChild(r.domElement);
+r.outputColorSpace = THREE.SRGBColorSpace; r.toneMapping = THREE.NeutralToneMapping; r.shadowMap.enabled = true;
+const s = new THREE.Scene(); s.background = new THREE.Color('#9d978f');
+s.add(new THREE.HemisphereLight('#d3def0', '#8a7a68', 2.1));
+const sun = new THREE.DirectionalLight('#ffc987', 3); sun.position.set(+(q.get('sx')||-1.5), 4, +(q.get('sz')||3)); sun.castShadow = true; s.add(sun);
+const cam = new THREE.PerspectiveCamera(22, innerWidth / innerHeight, 0.1, 100);
+const el = +(q.get('el') || 20) * Math.PI / 180, d = +(q.get('d') || 5);
+cam.position.set(0, 0.6 + Math.sin(el) * d, Math.cos(el) * d); cam.lookAt(0, 0.55, 0);
+const fl = new THREE.Mesh(new THREE.PlaneGeometry(10, 10), new THREE.MeshStandardMaterial({ color: '#c9c2b8' })); fl.rotation.x = -Math.PI / 2; fl.receiveShadow = true; s.add(fl);
+const cols = { ...MIO_COLOURS }; for (const k of Object.keys(cols)) if (q.has(k)) cols[k] = '#' + q.get(k);
+if (q.has('hem')) setHem(+q.get('hem')); if (q.has('collar')) setCollar(+q.get('collar'));
+if (q.has('idle')) setIdleT(+q.get('idle'));
+const n = +(q.get('n') || 1);
+const ms = [];
+for (let i = 0; i < n; i++) {
+  const m = await loadMio({ height: 1.12, colours: q.has('orig') && i === 0 ? null : cols });
+  m.root.position.x = (i - (n - 1) / 2) * 0.9; m.root.rotation.y = +(q.get('ry') || 0.3);
+  m.setState(q.get('st') || 'idle'); s.add(m.root); ms.push(m);
+}
+for (const m of ms) m.update(+(q.get('t') || 0.001));
+r.render(s, cam); window.__done = true;
+</script></body></html>

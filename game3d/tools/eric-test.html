@@ -1,0 +1,21 @@
+<!doctype html><html><head><meta charset="utf-8">
+<script type="importmap">{ "imports": { "three": "../vendor/three/three.module.js", "three/addons/": "../vendor/" } }</script>
+<style>html,body{margin:0;height:100%;background:#8d8a86}canvas{display:block}</style></head><body>
+<script type="module">
+import * as THREE from 'three';
+import { makeAvatar } from '../js/avatar.js';
+import { loadMio } from '../js/mio.js';
+const q = new URLSearchParams(location.search);
+const r = new THREE.WebGLRenderer({ antialias: true }); r.setSize(innerWidth, innerHeight); document.body.appendChild(r.domElement);
+r.outputColorSpace = THREE.SRGBColorSpace; r.toneMapping = THREE.NeutralToneMapping; r.shadowMap.enabled = true;
+const s = new THREE.Scene(); s.background = new THREE.Color('#9d978f');
+s.add(new THREE.HemisphereLight('#d3def0', '#8a7a68', 2.1));
+const sun = new THREE.DirectionalLight('#ffe0c0', 2.5); sun.position.set(-1.5, 4, 3); sun.castShadow = true; s.add(sun);
+const cam = new THREE.PerspectiveCamera(22, innerWidth / innerHeight, 0.1, 100);
+const el = +(q.get('el') || 15) * Math.PI / 180, d = +(q.get('d') || 4.5);
+cam.position.set(0, 0.6 + Math.sin(el) * d, Math.cos(el) * d); cam.lookAt(0, 0.6, 0);
+const fl = new THREE.Mesh(new THREE.PlaneGeometry(10, 10), new THREE.MeshStandardMaterial({ color: '#c9c2b8' })); fl.rotation.x = -Math.PI / 2; fl.receiveShadow = true; s.add(fl);
+const a = makeAvatar(); a.root.position.x = -0.45; a.root.rotation.y = +(q.get('ry') || 0.25); s.add(a.root); a.update(0.016);
+const m = await loadMio({ height: 1.12 }); m.root.position.x = 0.45; m.root.rotation.y = -0.25; m.setState('idle'); m.update(0.01); s.add(m.root);
+r.render(s, cam); window.__done = true;
+</script></body></html>
