@@ -137,7 +137,7 @@ function liftDoor(x, z) {
   car.add(rbox(0.12, 0.26, 0.02, '#8d939d', { x: 0.5, y: 0.5, z: -0.27, r: 0.01, cast: false }));
   for (let i = 0; i < 3; i++) { const b = new THREE.Mesh(new THREE.CircleGeometry(0.018, 10), emissive('#ffe2b8', '#ffc680', 1.2)); b.position.set(0.5, 0.42 + i * 0.06, -0.259); car.add(b); }
   g.add(car);
-  const leaves = [-1, 1].map((s) => { const l = rbox(0.6, 1.36, 0.05, null, { x: s * 0.31, z: -0.06, r: 0.01, m: mat('#8e949d', { roughness: 0.5, metalness: 0.2 }) }); l.add(rbox(0.012, 1.3, 0.052, '#5d636d', { x: -s * 0.3, y: 0.03, r: 0.003, cast: false })); g.add(l); return l; });
+  const leaves = [-1, 1].map((s) => { const l = rbox(0.6, 1.36, 0.05, null, { x: s * 0.31, z: -0.06, r: 0.01, m: mat('#8e949d', { roughness: 0.5, metalness: 0.2 }) }); l.add(rbox(0.012, 1.3, 0.052, '#5d636d', { x: -s * 0.3, y: -0.65, r: 0.003, cast: false })); g.add(l); return l; });
   const ind = rbox(0.36, 0.12, 0.03, '#1d2027', { y: 1.52, z: 0.05, r: 0.01, cast: false }); g.add(ind);
   const litTex = textTexture((c, W, H) => { c.fillStyle = '#1d2027'; c.fillRect(0, 0, W, H); c.fillStyle = '#ffb566'; c.font = '700 44px sans-serif'; c.textAlign = 'center'; c.textBaseline = 'middle'; c.fillText('1  \u25B2', W / 2, H / 2 + 2); }, 128, 56);
   const lit = new THREE.Mesh(new THREE.PlaneGeometry(0.3, 0.11), new THREE.MeshBasicMaterial({ map: litTex })); lit.position.set(0, 1.52, 0.067); g.add(lit);
@@ -325,14 +325,8 @@ export function buildLobby() {
     st2.add(rbox(0.05, 0.62, 0.05, '#5b626d', { r: 0.01 }), rbox(0.3, 0.03, 0.3, '#5b626d', { r: 0.01 })); const pp = plane(0.5, 0.33, tt, { emissiveK: 0.2 }); pp.position.set(0, 0.72, 0.03); pp.rotation.x = -0.35; st2.add(pp); st2.add(rbox(0.54, 0.37, 0.03, '#23262c', { y: 0.55, z: 0.0, r: 0.01, cast: false })); st2.children[3].rotation.x = -0.35;
     st2.position.set(-1.9, 0, 2.6); root.add(st2); }
 
-  // umbrella stands just inside the doors, a low brochure table by the left benches, a cleaning cart parked right
-  for (const x of [-1.45, 1.45]) { const us = new THREE.Group(); us.add(rbox(0.3, 0.36, 0.3, '#4a505b', { r: 0.03 }));
-    for (const [dx, dz, c] of [[-0.06, -0.05, '#2f3649'], [0.07, 0.03, '#6b7a8c'], [0.0, 0.08, '#7a3b3b']]) { const u = rbox(0.05, 0.62, 0.05, c, { x: dx, y: 0.1, z: dz, r: 0.02 }); u.rotation.z = dx * 1.5; u.rotation.x = dz * 1.5; us.add(u); }
-    us.position.set(x, 0, Z - 0.32); root.add(us); }
-  { const ct = new THREE.Group(); ct.add(rbox(1.0, 0.04, 0.5, '#8a909a', { y: 0.28, r: 0.01 })); for (const [dx, dz] of [[-0.45, -0.2], [0.45, -0.2], [-0.45, 0.2], [0.45, 0.2]]) ct.add(rbox(0.04, 0.28, 0.04, '#5b626d', { x: dx, z: dz, r: 0.01 }));
-    for (const [dx, c] of [[-0.3, '#f2f0ea'], [-0.05, '#9fb4cf'], [0.2, '#e0bf4a']]) ct.add(rbox(0.18, 0.02, 0.24, c, { x: dx, y: 0.32, r: 0.004 }));
-    ct.position.set(-3.9, 0, 1.95); root.add(ct); }
-  { const cc = new THREE.Group(); cc.add(rbox(0.9, 0.06, 0.45, '#5b6474', { y: 0.06, r: 0.02 }), rbox(0.06, 0.62, 0.4, '#5b6474', { x: -0.42, r: 0.02 }), rbox(0.36, 0.34, 0.36, '#3f5f8a', { x: -0.18, y: 0.12, r: 0.03 }));
+  // a cleaning cart parked by the right bench
+  { const cc = new THREE.Group(); cc.add(rbox(0.9, 0.06, 0.45, '#5b6474', { y: 0.06, r: 0.02 }), rbox(0.06, 0.62, 0.4, '#5b6474', { x: -0.42, r: 0.02 }), rbox(0.34, 0.4, 0.34, '#4a505b', { x: -0.18, y: 0.12, r: 0.12, seg: 3 }));
     { const bk = new THREE.Mesh(new THREE.CylinderGeometry(0.17, 0.14, 0.3, 14), mat('#e0b83a')); bk.position.set(0.22, 0.27, 0); cc.add(sh(bk)); const wr = rbox(0.26, 0.08, 0.14, '#3a3f48', { x: 0.22, y: 0.42, r: 0.02 }); cc.add(wr); const wt = new THREE.Mesh(new THREE.CylinderGeometry(0.15, 0.15, 0.01, 14), mat('#6b8fa8', { roughness: 0.2 })); wt.position.set(0.22, 0.38, 0); cc.add(wt); }
     const mop = new THREE.Mesh(new THREE.CylinderGeometry(0.015, 0.015, 1.0, 6), mat('#b9bdc3')); mop.position.set(0.3, 0.9, -0.1); mop.rotation.z = 0.2; cc.add(mop);
     cc.position.set(3.95, 0, 2.8); root.add(cc); }
@@ -380,7 +374,7 @@ export function buildLobby() {
   nav.block(-5.2, -3.2, BZ, 1.05);                                     // counter and receptionist
   nav.block(-X, -5.2, 0.3, 0.8);                                       // lost and found
   nav.block(5.05, X, 2.55, 3.45);                                      // coffee machine
-  nav.block(-2.1, -1.7, 2.45, 2.8); nav.block(-4.45, -3.35, 1.65, 2.25); nav.block(-1.65, -1.25, Z - 0.52, Z - 0.1); nav.block(1.25, 1.65, Z - 0.52, Z - 0.1); nav.block(3.3, 4.6, 2.5, 3.1);      // bins, welcome stand
+  nav.block(-2.1, -1.7, 2.45, 2.8); nav.block(3.3, 4.6, 2.5, 3.1);      // bins, welcome stand
 
   const world = { root, scene, sun, proxy, nav, readers, arch: ar, guard, man, kuro, aoi, aoiBlob, manBlob, tama, lifts, screen: scr, BZ, X, Z };
   world.update = (t) => {
