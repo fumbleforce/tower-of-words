@@ -187,12 +187,16 @@ export function unlockAudio() { ac(); }
 // Approved art only: cut-outs of the bible portraits (bible/facts.yaml `portrait:`, proto2/cast-fixed/*-after.webp).
 // One neutral face each for now; expressions will be face repaints of the same portrait. Faces a story asks for that
 // don't exist yet fall back to neutral. People without approved art get a name plate only.
-export const PORTRAITS = { mio: ['neutral'], aoi: ['neutral'], eric: ['neutral'], kuro: ['neutral'] };
-const EMOTE_FACE = { '?': 'suspicious', '!': 'panic', '♪': 'smirk', heart: 'smirk', sweat: 'panic' };
+// Provisional (the art agent's picks, not approved yet): Eric seed 734 v2, Mori 713, Kenji 711, Hamada (speaker kuroda) 721,
+// the guard Ishibashi. See story/FORMAT.md.
+export const PORTRAITS = { mio: ['neutral'], aoi: ['neutral'], kuro: ['neutral'], eric: ['neutral', 'surprised'],
+  mori: ['neutral', 'smile', 'flustered'], kenji: ['neutral', 'grin', 'sheepish'], kuroda: ['neutral', 'sleepy', 'panicked'],
+  guard: ['neutral', 'stern', 'amused'] };
+const EMOTE_FACE = { '?': ['suspicious', 'stern'], '!': ['panic', 'panicked', 'surprised'], '♪': ['smirk', 'smile', 'grin', 'amused'], heart: ['smirk', 'smile', 'grin'], sweat: ['panic', 'panicked', 'flustered', 'sheepish'], 'zzz': ['sleepy'] };
 const faceNow = {};
 let lastNpc = null;
 export function setFace(who, face) { faceNow[who] = face; }
-export function faceForEmote(who, kind) { const f = EMOTE_FACE[kind]; if (f && PORTRAITS[who] && PORTRAITS[who].includes(f)) faceNow[who] = f; }
+export function faceForEmote(who, kind) { const f = (EMOTE_FACE[kind] || []).find((x) => PORTRAITS[who] && PORTRAITS[who].includes(x)); if (f) faceNow[who] = f; }
 function portraitSrc(who, face) {
   const list = PORTRAITS[who]; if (!list) return null;
   const f = list.includes(face) ? face : list.includes(faceNow[who]) ? faceNow[who] : 'neutral';
