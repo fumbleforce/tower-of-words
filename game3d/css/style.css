@@ -20,23 +20,43 @@ button { font: inherit; color: inherit; }
 #ui > * { pointer-events: auto; }
 #ui > #marks, #ui > #hint, #ui > #toast, #ui > #top, #ui > #board { pointer-events: none; }
 
-/* ---------- markers over people and things ---------- */
+/* ---------- markers over people and things ----------
+   A pin floats above the head (stem pointing down at it), so it never covers a face. Close up, a tag with the
+   verb and the name slides out beside the pin. Goals are teal and bob gently; everything else is quiet slate. */
 #marks { position: absolute; inset: 0; }
-.mark { position: absolute; left: 0; top: 0; margin: 0; padding: 0; border: 0; background: none; pointer-events: auto; cursor: pointer; display: flex; flex-direction: column; align-items: center; transform-origin: 0 0; }
-.mark .dot { width: 22px; height: 22px; margin: -11px 0 0 -11px; border-radius: 50% 50% 50% 4px; background: rgba(238, 240, 244, 0.92); box-shadow: 0 1px 3px rgba(0,0,0,.35); position: relative; }
-.mark .dot::after { content: ""; position: absolute; left: 6px; top: 9px; width: 10px; height: 3px; border-radius: 2px; background: #3a404c; box-shadow: 0 -4px 0 #3a404c; }
-.mark.thing .dot { border-radius: 50%; width: 16px; height: 16px; margin: -8px 0 0 -8px; background: rgba(238, 240, 244, 0.75); }
-.mark.thing .dot::after { left: 5px; top: 5px; width: 6px; height: 6px; border-radius: 50%; box-shadow: none; }
-.mark.small .dot { opacity: .7; }
-.mark.goal .dot { background: var(--accent); }
-.mark.goal .dot::after { background: #173b38; box-shadow: 0 -4px 0 #173b38; }
-.mark.thing.goal .dot::after { box-shadow: none; }
-.mark .lbl { position: absolute; left: 0; top: -44px; transform: translateX(-50%); white-space: nowrap; padding: 3px 9px; border-radius: 6px; background: var(--panel); font-size: 13px; color: var(--ink); opacity: 0; transition: opacity .15s; }
-.mark.near .lbl, .mark:hover .lbl { opacity: 1; }
-.mark.near .dot { outline: 2px solid rgba(255,255,255,.85); outline-offset: 2px; }
+.mark { position: absolute; left: 0; top: 0; width: 0; height: 0; margin: 0; padding: 0; border: 0; background: none; pointer-events: auto; cursor: pointer; transition: opacity .25s; }
+.mark::before { content: ""; position: absolute; left: -24px; top: -62px; width: 48px; height: 62px; }   /* touch area */
+.mark .pin { position: absolute; left: -15px; top: -52px; width: 30px; height: 30px; border-radius: 50%; display: grid; place-items: center; background: rgba(30, 34, 42, .88); border: 2px solid rgba(232, 236, 242, .9); box-shadow: 0 2px 6px rgba(0,0,0,.45); transition: transform .18s ease, background .18s, border-color .18s; }
+.mark .pin svg { width: 16px; height: 16px; fill: #e9edf3; }
+.mark .stem { position: absolute; left: -1px; top: -22px; width: 2px; height: 16px; background: rgba(232, 236, 242, .75); border-radius: 1px; }
+.mark .stem::after { content: ""; position: absolute; left: -2px; bottom: -3px; width: 6px; height: 6px; border-radius: 50%; background: rgba(232, 236, 242, .75); }
+.mark.thing .pin { width: 26px; height: 26px; left: -13px; top: -48px; }
+.mark.thing .pin svg { width: 14px; height: 14px; }
+.mark.small .pin { background: rgba(30, 34, 42, .72); border-color: rgba(232, 236, 242, .6); }
+.mark .tag { position: absolute; left: 20px; top: -50px; width: max-content; display: flex; align-items: center; gap: 7px; height: 26px; padding: 0 10px 0 9px; border-radius: 13px; background: rgba(24, 27, 34, .92); border: 1px solid rgba(255,255,255,.12); white-space: nowrap; font-size: 14px; line-height: 1; color: var(--ink); text-shadow: 0 1px 2px rgba(0,0,0,.6); opacity: 0; transform: translateX(-6px); transition: opacity .18s, transform .18s; pointer-events: none; }
+.mark.thing .tag { top: -46px; left: 17px; }
+.mark .tag .vb { color: var(--accent); font-weight: 700; font-size: 12px; letter-spacing: .02em; }
+.mark .tag .nm { font-weight: 500; }
+.mark .tag .key { display: grid; place-items: center; min-width: 18px; height: 18px; padding: 0 4px; border-radius: 4px; background: #3b4250; color: var(--ink-dim); font-size: 11px; font-weight: 700; }
+.mark.near .tag, .mark:hover .tag { opacity: 1; transform: none; }
+.mark:not(.near) .tag .key { display: none; }
+.mark:hover:not(.near) .tag { opacity: .75; }
+.mark.near .pin { transform: scale(1.12); border-color: #fff; }
+.mark.goal .pin { background: #1d4744; border-color: var(--accent); animation: bob 1.6s ease-in-out infinite; }
+.mark.goal .pin svg { fill: #bff1ea; }
+.mark.goal .stem, .mark.goal .stem::after { background: var(--accent); }
+@keyframes bob { 50% { transform: translateY(-3px); } }
+.mark.near.goal .pin { animation: none; transform: scale(1.12); }
 body.busy #marks { display: none; }
-.mark { transition: opacity .25s; }
+.mark.flip .tag { left: auto; right: 20px; transform: translateX(6px); }
+.mark.flip.near .tag, .mark.flip:hover .tag { transform: none; }
+body.phone .mark.flip .tag { right: 22px; }
 .mark.far { opacity: 0; pointer-events: none; }
+body.phone .mark .pin { width: 36px; height: 36px; left: -18px; top: -58px; }
+body.phone .mark .stem { top: -22px; }
+body.phone .mark .pin svg { width: 18px; height: 18px; }
+body.phone .mark .tag { font-size: 13px; left: 23px; top: -53px; }
+body.phone .mark .tag .key { display: none; }
 
 /* ---------- top: goal and words ---------- */
 #top { position: absolute; left: 16px; right: 16px; top: 14px; display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }

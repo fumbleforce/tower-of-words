@@ -34,18 +34,18 @@ export async function officePlace(game) {
     copier_front: [-2.95, 4.2], coffee_front: [0.7, 4.1], corridor_w: [-3.5, 1.3], corridor_e: [5.8, 1.3], machine_front: [5.1, 1.3],
   };
   const seats = { my_seat: { x: dS1.seat[0], z: dS1.seat[1], top: 0.24, ry: Math.PI }, emi_seat: { x: dS0.seat[0], z: dS0.seat[1], top: 0.24, ry: Math.PI }, mio_seat: { x: dS0.seat[0], z: dS0.seat[1], top: 0.24, ry: Math.PI } };
-  const rigAnchor = (rig, h = 1.65) => (v) => { rig.root.getWorldPosition(v); v.y += h; return v; };
+  const rigAnchor = (rig, h = 1.25) => (v) => { rig.root.getWorldPosition(v); v.y += h; return v; };
   const v3 = (x, y, z) => (v) => v.set(x, y, z);
   const at = (x, z, fx, fz) => ({ spot: () => [x, z], face: () => [fx, fz] });
   const Z0 = w.Z0;
 
   const things = {
     emi: { label: 'Emi', kind: 'person', anchor: rigAnchor(w.emi), spot: () => (w.emi.seated ? [dS0.seat[0] - 0.55, dS0.seat[1] + 0.5] : [w.emi.root.position.x, w.emi.root.position.z - 0.62]), face: () => [w.emi.root.position.x, w.emi.root.position.z], enabled: () => !w.emi._walk },
-    kenji: { label: 'Kenji', kind: 'person', anchor: rigAnchor(w.kenji, 1.45), ...at(-2.9, -4.3, -2.0, -4.34) },
+    kenji: { label: 'Kenji', kind: 'person', anchor: rigAnchor(w.kenji), ...at(-2.9, -4.3, -2.0, -4.34) },
     rei: { label: 'Rei', kind: 'person', anchor: rigAnchor(rei), spot: () => [rei.root.position.x, rei.root.position.z + 0.6], face: () => [rei.root.position.x, rei.root.position.z], enabled: () => rei.root.visible && !rei._walk },
     aoi: { label: 'Aoi', kind: 'person', anchor: rigAnchor(aoi), spot: () => [aoi.root.position.x, aoi.root.position.z + 0.6], face: () => [aoi.root.position.x, aoi.root.position.z], enabled: () => aoi.root.visible && !aoi._walk },
-    mori: { label: 'Mr. Mori', kind: 'person', anchor: rigAnchor(w.mori, 1.45), spot: () => (w.mori.seated === false ? [w.mori.root.position.x, w.mori.root.position.z + 0.6] : [2.3, -2.55]), face: () => [w.mori.root.position.x, w.mori.root.position.z], enabled: () => !w.mori._walk },
-    tama: { label: 'Cat', kind: 'person small', anchor: (v) => { w.tama.getWorldPosition(v); v.y += 0.45; return v; }, spot: () => { const v = new THREE.Vector3(); w.tama.getWorldPosition(v); return [v.x, v.z + 0.6]; }, face: () => { const v = new THREE.Vector3(); w.tama.getWorldPosition(v); return [v.x, v.z]; } },
+    mori: { label: 'Mr. Mori', kind: 'person', anchor: rigAnchor(w.mori), spot: () => (w.mori.seated === false ? [w.mori.root.position.x, w.mori.root.position.z + 0.6] : [2.3, -2.55]), face: () => [w.mori.root.position.x, w.mori.root.position.z], enabled: () => !w.mori._walk },
+    tama: { label: 'Cat', verb: 'Pet', kind: 'person small', anchor: (v) => { w.tama.getWorldPosition(v); v.y += 0.45; return v; }, spot: () => { const v = new THREE.Vector3(); w.tama.getWorldPosition(v); return [v.x, v.z + 0.6]; }, face: () => { const v = new THREE.Vector3(); w.tama.getWorldPosition(v); return [v.x, v.z]; } },
     covered: { label: 'Covered desk', kind: 'thing small', anchor: v3(w.dN(1).x, 1.0, w.dN(1).z), ...at(w.dN(1).x, -5.05, w.dN(1).x, w.dN(1).z) },
     covered_monitor: { label: 'Covered monitor', kind: 'thing small', anchor: v3(w.dS(2).x, 1.0, w.dS(2).z), ...at(w.dS(2).x, -1.75, w.dS(2).x, w.dS(2).z) },
     box_crowns: { label: 'Box', kind: 'thing small', anchor: v3(-3.5, 1.6, Z0 + 0.3), ...at(-3.5, -5.2, -3.5, Z0), noMarker: true },

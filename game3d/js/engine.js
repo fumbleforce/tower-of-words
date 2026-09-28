@@ -234,7 +234,14 @@ export class Markers {
     const el = document.createElement('button');
     el.className = 'mark' + (item.kind ? ' ' + item.kind : '');
     el.type = 'button';
-    el.innerHTML = `<span class="dot" aria-hidden="true"></span><span class="lbl">${item.label}</span>`;
+    // a pin with an icon (speech for people, a small eye for things), and a tag with the verb and name that
+    // opens out when you're close. The whole button is at least 48 px for touch.
+    const person = /person/.test(item.kind || '');
+    const paw = '<svg viewBox="0 0 24 24" aria-hidden="true"><ellipse cx="12" cy="15.5" rx="5" ry="4.2"/><circle cx="6.2" cy="10" r="2"/><circle cx="9.6" cy="6.8" r="2"/><circle cx="14.4" cy="6.8" r="2"/><circle cx="17.8" cy="10" r="2"/></svg>';
+    const icon = item.verb === 'Pet' ? paw : person
+      ? '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5h14a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2h-7l-4 3.5V16H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z"/></svg>'
+      : '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 6c4.4 0 7.8 3.3 9 6-1.2 2.7-4.6 6-9 6s-7.8-3.3-9-6c1.2-2.7 4.6-6 9-6zm0 3a3 3 0 1 0 0 6 3 3 0 0 0 0-6z"/></svg>';
+    el.innerHTML = `<span class="pin" aria-hidden="true">${icon}</span><span class="tag"><span class="vb">${item.verb || (person ? 'Talk' : 'Look')}</span><span class="nm">${item.label}</span><span class="key">E</span></span><span class="stem" aria-hidden="true"></span>`;
     el.setAttribute('aria-label', item.label);
     this.layer.appendChild(el);
     item.el = el; item.enabled = item.enabled ?? true;
@@ -253,7 +260,9 @@ export class Markers {
       m.el.style.display = vis ? '' : 'none';
       if (!vis) continue;
       m.anchor(v); v.project(camera);
-      m.el.style.transform = `translate(${((v.x + 1) / 2) * w}px, ${((1 - v.y) / 2) * h}px)`;
+      const sx = ((v.x + 1) / 2) * w;
+      m.el.style.transform = `translate(${sx}px, ${((1 - v.y) / 2) * h}px)`;
+      m.el.classList.toggle('flip', sx > w - 190);   // tag on the left of the pin near the right edge
       m.el.classList.toggle('near', near === m);
       const isGoal = !!(m.goal && m.goal());
       m.el.classList.toggle('goal', isGoal);
