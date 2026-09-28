@@ -2,7 +2,7 @@
 import * as THREE from 'three';
 import { createRenderer, makeComposer, Walker, Markers, Q, blob } from './engine.js';
 import { loadMio } from './mio.js';
-import { makeAvatar } from './avatar.js';
+import { makeAvatar, loadEric, setSitLift } from './avatar.js';
 import { glide } from './places/lobby.js';
 export const isPlayer = (id) => id === 'eric' || id === 'player';
 import { ui, unlockAudio, sfx, voice } from './ui.js';
@@ -400,7 +400,9 @@ game.step = step;
 // ---------- boot ----------
 async function boot() {
   game.runner = new Runner(game);
-  game.player = makeAvatar();
+  if (Q.has('slift')) setSitLift(+Q.get('slift'));
+  // Eric: Jørgen's Meshy model; the code-built chibi is the fallback (?eric=chibi, or if loading fails)
+  game.player = Q.get('eric') === 'chibi' ? makeAvatar() : await loadEric().catch((e) => { console.warn('Meshy Eric failed, using the chibi', e); return makeAvatar(); });
   game.player.root.add(blob(0.55, 0.4));
   // Mio is an NPC now: Jørgen's Meshy model, colour-tweaked only, shown wherever the story puts her
   game.mioNpc = await loadMio({ height: 1.12 });

@@ -4,9 +4,12 @@ Usage: python3 game3d/tools/slim_glb.py"""
 import json, struct, os
 SRC = 'side/flat/meshy2/Meshy_AI_Neon_Bun_Guardian_biped/Meshy_AI_Neon_Bun_Guardian_biped_Animation_{}_withSkin.glb'
 OUT = 'game3d/assets/mio/{}.glb'
+import sys
 CLIPS = {'Walking': 'walk', 'Running': 'run', 'Chair_Sit_Idle_F': 'sit', 'Step_to_Sit_Transition': 'tosit'}
-for src, dst in CLIPS.items():
-    b = open(SRC.format(src), 'rb').read()
+JOBS = [(SRC.format(s), OUT.format(d)) for s, d in CLIPS.items()]
+if len(sys.argv) > 2: JOBS = [(sys.argv[i], sys.argv[i + 1]) for i in range(1, len(sys.argv), 2)]   # src dst pairs
+for src_path, dst_path in JOBS:
+    b = open(src_path, 'rb').read()
     jl = struct.unpack('<I', b[12:16])[0]
     j = json.loads(b[20:20 + jl])
     bin0 = 20 + jl + 8
@@ -28,12 +31,13 @@ for src, dst in CLIPS.items():
     j['bufferViews'] = views
     for k in ('images', 'textures', 'samplers'): j.pop(k, None)
     j['materials'] = [{'name': m.get('name', 'm'), 'pbrMetallicRoughness': {'baseColorFactor': [1, 1, 1, 1], 'metallicFactor': 0, 'roughnessFactor': 1}} for m in j['materials']]
+    j.pop('extensionsUsed', None); j.pop('extensionsRequired', None)
     j['buffers'] = [{'byteLength': len(out)}]
     js = json.dumps(j, separators=(',', ':')).encode()
     while len(js) % 4: js += b' '
     total = 12 + 8 + len(js) + 8 + len(out)
-    with open(OUT.format(dst), 'wb') as f:
+    with open(dst_path, 'wb') as f:
         f.write(struct.pack('<III', 0x46546C67, 2, total))
         f.write(struct.pack('<II', len(js), 0x4E4F534A)); f.write(js)
         f.write(struct.pack('<II', len(out), 0x004E4942)); f.write(out)
-    print(dst, os.path.getsize(OUT.format(dst)))
+    print(dst_path, os.path.getsize(dst_path))
