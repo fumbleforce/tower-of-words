@@ -4,6 +4,12 @@ import * as THREE from 'three';
 import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.js';
 import { hull, icoPoints } from './train/hull.js';
 import { V } from './train/kit.js';
+import { screenMat, Screens } from './places/life.js';
+
+// every lit monitor built here flickers and scrolls; the active place calls liveScreens.update(t)
+export const liveScreens = new Screens();
+const KINDS = ['sheet', 'mail', 'sheet', 'code', 'mail'];
+let _kind = 0;
 
 // Muted palette from game3d/ref/2-security-gate-muted.png
 export const PAL = {
@@ -15,7 +21,7 @@ export const PAL = {
   glass: '#b9cbd6', planter: '#c7c3bb', soil: '#4b3f38',
   leaf: ['#4d6b47', '#577650', '#43603f', '#5f7d57', '#4a6645'],
   lamp: '#ffe2b8', lampEm: '#ffcf8a',
-  desk: '#d5d6d3', deskTop: '#e3e3df', deskLeg: '#8b919b', drawer: '#8e949e',
+  desk: '#d5d6d3', deskTop: '#d8d9d5', deskLeg: '#8b919b', drawer: '#8e949e',
   chair: '#3a4254', chairDark: '#2c3242',
   screen: '#9cc3e8', monitor: '#2e323a',
   paper: '#f2f0ea', box: '#b99a73', boxDark: '#a3865f',
@@ -223,12 +229,12 @@ export function officeChair(color = PAL.chair) {
   g.add(rbox(0.34, 0.34, 0.07, color, { y: 0.26, z: -0.17, r: 0.035 }));
   return g;
 }
-export function monitor({ on = true } = {}) {
+export function monitor({ on = true, kind } = {}) {
   const g = new THREE.Group();
   g.add(rbox(0.18, 0.02, 0.12, PAL.monitor, { r: 0.008 }));
   g.add(rbox(0.04, 0.12, 0.03, PAL.monitor, { y: 0.02, r: 0.01 }));
   g.add(rbox(0.46, 0.3, 0.035, PAL.monitor, { y: 0.1, r: 0.015 }));
-  const s = new THREE.Mesh(new THREE.PlaneGeometry(0.41, 0.25), on ? emissive(PAL.screen, '#8fbde6', 0.9) : mat('#3a4150'));
+  const s = new THREE.Mesh(new THREE.PlaneGeometry(0.41, 0.25), on ? liveScreens.add(screenMat(kind || KINDS[_kind++ % KINDS.length], 0.75)) : mat('#3a4150'));
   s.position.set(0, 0.25, 0.019); g.add(s);
   return g;
 }

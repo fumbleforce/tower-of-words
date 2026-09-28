@@ -7,6 +7,7 @@ import { PEOPLE, sit, armsLap, walkPose, HIP, idle } from '../cast.js';
 import { cat } from '../train/people.js';
 import { blob, Nav } from '../engine.js';
 import { K } from './office.js';
+import { lightPool, dust, clockHands } from '../places/life.js';
 
 const X = 6.3, Z = 4.5, WH = 1.9; // half sizes, wall height
 
@@ -194,7 +195,7 @@ export function buildLobby() {
   const scr = noticeScreen(); scr.position.set(-3.95, 0.55, -Z + 0.03); root.add(scr);
   const p1 = poster(['PEOPLE', 'IDEAS', 'PROGRESS'], 'hills'); p1.position.set(-2.1, 0.45, -Z + 0.02); root.add(p1);
   const p2 = poster(['A', 'BRIGHTER', 'TOMORROW'], 'city'); p2.position.set(2.1, 0.45, -Z + 0.02); root.add(p2);
-  { const pl = textTexture((g, W, H) => { g.fillStyle = '#e9ebee'; g.fillRect(0, 0, W, H); g.fillStyle = '#2b3140'; g.font = '700 70px ' + JP_FONT; g.textAlign = 'center'; g.textBaseline = 'middle'; g.fillText('階段', W / 2, H / 2 + 4); }, 256, 110); const pp = plane(0.36, 0.16, pl); pp.position.set(3.95, 1.5, -Z + 0.03); root.add(pp); }
+  { const pl = textTexture((g, W, H) => { g.fillStyle = '#e9ebee'; g.fillRect(0, 0, W, H); g.fillStyle = '#2b3140'; g.font = '700 58px ' + JP_FONT; g.textAlign = 'center'; g.textBaseline = 'middle'; g.fillText('階段', W / 2, H * 0.36); g.globalAlpha = 0.72; g.font = '700 30px ' + JP_FONT; g.fillText('STAIRS', W / 2, H * 0.78); }, 256, 128); const pp = plane(0.36, 0.18, pl); pp.position.set(3.95, 1.5, -Z + 0.03); root.add(pp); }
   for (const x of [-5.3, -2.9, 2.9, 5.3]) { const l = wallLamp(0.72, 0.14); l.position.set(x, 1.0, -Z + 0.01); root.add(l); }
   const sg = sign('本社', 'HONSHA'); sg.position.set(0, 1.68, -Z + 0.03); root.add(sg);
   // wall clock over the guard's side of the gate (the guard points at it: registration opens at nine)
@@ -283,7 +284,7 @@ export function buildLobby() {
   lost.add(rbox(0.9, 0.95, 0.36, '#9aa0a9', { r: 0.02 }));
   for (let i = 0; i < 2; i++) lost.add(rbox(0.84, 0.02, 0.32, '#b8bcc2', { y: 0.33 + i * 0.3, r: 0.006, cast: false }));
   lost.add(rbox(0.22, 0.14, 0.2, '#6a4f3e', { x: -0.24, y: 0.35, r: 0.03 }), rbox(0.3, 0.05, 0.2, '#b0506a', { x: 0.2, y: 0.35, r: 0.02 }), rbox(0.06, 0.26, 0.06, '#2f3649', { x: 0.3, y: 0.65, r: 0.02 }), rbox(0.2, 0.08, 0.14, '#d8c9a4', { x: -0.15, y: 0.65, r: 0.02 }));
-  { const t = textTexture((g, W, H) => { g.fillStyle = '#f2f0ea'; g.fillRect(0, 0, W, H); g.fillStyle = '#2b3140'; g.font = '700 44px ' + JP_FONT; g.textAlign = 'center'; g.textBaseline = 'middle'; g.fillText('忘れ物', W / 2, H / 2 + 2); }, 256, 80); const p = plane(0.4, 0.12, t); p.position.set(0, 1.02, 0.19); lost.add(p); lost.add(rbox(0.44, 0.15, 0.02, '#8a909a', { y: 0.95, z: 0.17, r: 0.005, cast: false })); }
+  { const t = textTexture((g, W, H) => { g.fillStyle = '#f2f0ea'; g.fillRect(0, 0, W, H); g.fillStyle = '#2b3140'; g.font = '700 34px ' + JP_FONT; g.textAlign = 'center'; g.textBaseline = 'middle'; g.fillText('忘れ物', W / 2, H * 0.34); g.globalAlpha = 0.72; g.font = '700 22px ' + JP_FONT; g.fillText('LOST PROPERTY', W / 2, H * 0.76); }, 256, 96); const p = plane(0.4, 0.15, t); p.position.set(0, 1.02, 0.19); lost.add(p); lost.add(rbox(0.44, 0.15, 0.02, '#8a909a', { y: 0.95, z: 0.17, r: 0.005, cast: false })); }
   lost.position.set(-5.85, 0, 0.3); lost.rotation.y = Math.PI / 2; root.add(lost);
   const kiosk = new THREE.Group();
   kiosk.add(rbox(0.8, 1.25, 0.6, '#4a4f59', { r: 0.03 }));
@@ -296,6 +297,14 @@ export function buildLobby() {
   const b2 = bench(2.1); b2.position.set(3.95, 0, 1.3); root.add(b2);
   const bag = rbox(0.22, 0.17, 0.1, '#6a4f3e', { x: 4.55, y: 0.29, z: 1.3, r: 0.03 }); root.add(bag);
   for (const [x, z, s] of [[-3.9, 2.55, 2.6], [3.95, 1.3, 2.6], [-4.2, 0.45, 2.4], [2.2, BZ, 2.4]]) { const b = blob(s, 0.28); b.scale.set(1, 0.35, 1); b.position.set(x, 0.004, z); root.add(b); }
+
+
+  // life: warm pools under the lamps, dust turning in the sun shafts, a second hand on the clock
+  for (const x of [-5.3, -2.9, 2.9, 5.3]) root.add(lightPool(x, -Z + 0.45, 0.9, { k: 0.3, sx: 0.9, sz: 1.2 }));
+  for (const z of [-3.4, -0.4, 2.0]) for (const s of [-1, 1]) root.add(lightPool(s * (X - 0.35), z, 0.8, { k: 0.18, sx: 0.8, sz: 1.4 }));
+  for (const x of [-2.85, 2.85]) root.add(lightPool(x, Z + 0.5, 0.6, { k: 0.3 }));
+  const motes = dust([0.2, X - 0.3, 0.15, 1.6, -3.6, 3.4], 90, { opacity: 0.55, size: 0.026 }); root.add(motes);
+  const sec = clockHands(0.2); sec.children.slice(0, 2).forEach((c) => { c.visible = false; }); sec.position.set(2.9, 1.42, -Z + 0.072); root.add(sec);
 
   // people
   const up = (r) => { r.root.scale.multiplyScalar(K); return r; };
@@ -316,6 +325,7 @@ export function buildLobby() {
   nav.block(-X - 1, X + 1, Z + 0.02, Z + 0.3);                       // front wall (gap made below)
   nav.rects.pop();
   nav.block(-X - 1, -2.4, Z - 0.02, Z + 0.3); nav.block(2.4, X + 1, Z - 0.02, Z + 0.3);
+  nav.block(-2.4, -1.12, Z - 0.16, Z + 0.3); nav.block(1.12, 2.4, Z - 0.16, Z + 0.3);   // the fixed glass and the parked leaves either side of the doorway
   nav.block(-X + 0.3, -1.1, BZ - 0.08, BZ + 0.08); nav.block(3.2, X, BZ - 0.08, BZ + 0.08);
   for (const x of [-0.93, 0.93]) nav.block(x - 0.15, x + 0.15, BZ - 0.17, BZ + 0.17);
   nav.block(-0.75, -0.6, BZ - 0.17, BZ + 0.17); nav.block(0.6, 0.75, BZ - 0.17, BZ + 0.17);
@@ -332,6 +342,7 @@ export function buildLobby() {
 
   const world = { root, scene, sun, proxy, nav, readers, arch: ar, guard, man, kuro, aoi, aoiBlob, manBlob, tama, lifts, screen: scr, BZ, X, Z };
   world.update = (t) => {
+    motes.userData.update(t); sec.userData.set(0, Math.floor(t));
     idle(guard, t); idle(kuro, t);
     for (const l of lifts) l.update(t);
     scr.userData.update(t);

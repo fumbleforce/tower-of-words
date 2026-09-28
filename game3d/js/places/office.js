@@ -10,6 +10,7 @@ import { blob } from '../engine.js';
 import { flags } from '../runner.js';
 import { glide } from './lobby.js';
 import { mat, rbox, PAL } from '../props.js';
+import { route } from './route.js';
 
 export async function officePlace(game) {
   const w = buildOffice();
@@ -118,13 +119,16 @@ export async function officePlace(game) {
   }
 
   const P = {
+    // colour grade (js/post.js): cool slate shadows, warm lamp highlights, a little lift so the basement isn't murky
+    grade: { exposure: 1.12, temp: 0.05, sat: 0.94, contrast: 1.06, lift: [0.01, 0.012, 0.02], shadowTint: [-0.006, 0, 0.018], highTint: [0.02, 0.01, -0.012], vignette: 0.26, bloom: 0.4, bloomThreshold: 0.8, focusBand: 0.3 },
+    _nav: w.nav,
     scene: w.scene, camera: cam.camera, cam, space: w.root, nav: w.nav, sun: w.sun, charScale: K,
     start: [-5.45, -3.05], startFacing: 0, things, people, spots, zones, seats, defaultPeriod: 'morning',
     fit(aspect) {
       const pts = [];
       for (const x of [w.X0 - 0.2, w.X1 + 0.2]) for (const z of [w.Z0 - 0.2, w.Z1 + 0.2]) for (const y of [0, 1.45]) pts.push(new THREE.Vector3(x, y, z));
       if (aspect >= 1) cam.fit(aspect, [new THREE.Vector3(-6.9, 0, 0), new THREE.Vector3(6.9, 0, 0), new THREE.Vector3(0, 0.6, w.Z0), new THREE.Vector3(0, 0, w.Z1)], new THREE.Vector3(0, 0, 0.1), { limY: 1.0, limX: 1.0 });
-      else cam.fit(aspect, [new THREE.Vector3(-2.5, 0, 0), new THREE.Vector3(2.5, 0, 0), new THREE.Vector3(0, 0, -2.7), new THREE.Vector3(0, 1.3, 2.5)], new THREE.Vector3(0, 0, 0), { follow: true, clamp: [w.X0 + 2.2, w.X1 - 2.2, w.Z0 + 2.9, w.Z1 - 2.2] });
+      else cam.fit(aspect, [new THREE.Vector3(-2.5, 0, 0), new THREE.Vector3(2.5, 0, 0), new THREE.Vector3(0, 0, -2.7), new THREE.Vector3(0, 1.3, 2.5)], new THREE.Vector3(0, 0, 0), { follow: true, clamp: [w.X0 + 2.2, w.X1 - 2.2, w.Z0 + 4.1, w.Z1 - 2.2] });
     },
     pick(rc) { const p = new THREE.Vector3(); return rc.ray.intersectPlane(floor, p) ? p : null; },
     walkPerson(id, [x, z], { speed } = {}) {
@@ -156,7 +160,9 @@ export async function officePlace(game) {
       st.liftK += (st.liftWant - st.liftK) * Math.min(1, dt * 4); w.openLift(st.liftK);
       st.mdoor += (st.mdoorWant - st.mdoor) * Math.min(1, dt * 3); w.machineDoor.rotation.y = -st.mdoor * 1.4; w.machineDoor.position.x = 5.1 - Math.sin(st.mdoor * 1.4) * 0.4; w.machineDoor.position.z = CN + 0.08 - (1 - Math.cos(st.mdoor * 1.4)) * 0.4;
       // clock
-      if (st.clockStop > 0) st.clockStop -= dt; else w.secHand.rotation.z = -Math.floor(t) * Math.PI / 30;
+      if (st.clockStop > 0) st.clockStop -= dt; else { st.clockT = (st.clockT || 0) + dt; w.secHand.rotation.z = -Math.floor(t) * Math.PI / 30; }
+      // 8:55 when the floor opens, ticking with game time; the stop command freezes it
+      w.life.hands.userData.set(8 * 60 + 55 + st.clockT / 60, Math.floor(st.clockT));
       // fans
       const fs = st.fan === 'wild' ? 30 : st.fan === 'on' ? 6 : 0;
       st.fanSpin += (fs - st.fanSpin) * Math.min(1, dt * 2);
@@ -237,7 +243,9 @@ export async function officePlace(game) {
   };
 
   // corridor-aware route between the office, corridor, lobby and bottom rooms (for Emi and the chair)
-  function routeTo(from, [x, z]) {
+  // people take the walk grid's route; the old door-to-door plan is the fallback if the grid finds no way
+  function routeTo(from, to) { return route(w.nav, from, to, roomRoute(from, to)); }
+  function roomRoute(from, [x, z]) {
     const area = (px, pz) => (pz < CN - 0.1 ? (px < -4.2 ? 'lobby' : px < 3.4 ? 'office' : 'machine') : pz > CS + 0.1 ? 'bottom' : 'corridor');
     const a = area(from.x, from.z), b = area(x, z);
     const path = [];

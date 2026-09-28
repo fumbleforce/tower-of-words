@@ -6,6 +6,8 @@ import { PAL, mat, emissive, rbox, plant, wall, tileFloor, door, desk, officeCha
 import { PEOPLE, sit, armsHold, idle, mug } from '../cast.js';
 import { cat } from '../train/people.js';
 import { blob, Nav } from '../engine.js';
+import { lightPool, steam, dust, clockHands, screenMat } from '../places/life.js';
+import { liveScreens } from '../props.js';
 
 export const K = 1.18;              // people scale in the office and lobby
 const WH = 1.45, T = 0.16;
@@ -23,10 +25,11 @@ function toiletSign(kind) {
   return plane(0.26, 0.38, tex);
 }
 function nameCard(name, ro) {
+  // printed katakana, the English added by hand in blue pen
   const tex = textTexture((g, W, H) => {
     g.fillStyle = '#f4f2ec'; g.fillRect(0, 0, W, H);
-    g.fillStyle = '#2b3140'; g.font = '700 86px ' + JP_FONT; g.textAlign = 'center'; g.textBaseline = 'middle'; g.fillText(name, W / 2, H * 0.42);
-    g.fillStyle = '#6a7282'; g.font = '600 40px ' + JP_FONT; g.fillText(ro, W / 2, H * 0.82);
+    g.fillStyle = '#2b3140'; g.font = '700 80px ' + JP_FONT; g.textAlign = 'center'; g.textBaseline = 'middle'; g.fillText(name, W / 2, H * 0.38);
+    g.save(); g.translate(W / 2 + 6, H * 0.8); g.rotate(-0.06); g.fillStyle = '#2f4f9a'; g.font = 'italic 600 54px "Comic Neue", "Segoe Print", cursive, sans-serif'; g.fillText(ro, 0, 0); g.restore();
   }, 320, 170);
   const g = new THREE.Group();
   const p = new THREE.Mesh(new THREE.PlaneGeometry(0.3, 0.16), new THREE.MeshStandardMaterial({ map: tex, roughness: 0.7 }));
@@ -111,10 +114,14 @@ function ceilingLamp(w = 0.9) {
 }
 
 // ---------- more office parts ----------
-function plate(text, { w = 0.5, h = 0.16, bg = '#e9ebee', fg = '#2b3140' } = {}) {
+function plate(text, { w = 0.5, h = 0.16, bg = '#e9ebee', fg = '#2b3140', sub = '' } = {}) {
+  // Japanese on top, the English under it (signs the player hasn't been taught carry both)
   const tex = textTexture((g, W, H) => {
     g.fillStyle = bg; g.fillRect(0, 0, W, H);
-    g.fillStyle = fg; g.font = '700 ' + Math.round(H * 0.62) + 'px ' + JP_FONT; g.textAlign = 'center'; g.textBaseline = 'middle'; g.fillText(text, W / 2, H / 2 + 3);
+    g.fillStyle = fg; g.textAlign = 'center'; g.textBaseline = 'middle';
+    if (!sub) { g.font = '700 ' + Math.round(H * 0.62) + 'px ' + JP_FONT; g.fillText(text, W / 2, H / 2 + 3); return; }
+    g.font = '700 ' + Math.round(H * 0.42) + 'px ' + JP_FONT; g.fillText(text, W / 2, H * 0.34);
+    g.globalAlpha = 0.8; g.font = '700 ' + Math.round(H * 0.3) + 'px ' + JP_FONT; g.fillText(sub, W / 2, H * 0.76);
   }, 400, Math.round(400 * h / w));
   return plane(w, h, tex);
 }
@@ -126,7 +133,7 @@ function inOutBoard() {
     for (const x of [110, 200, 290, 380]) { g.beginPath(); g.moveTo(x, 30); g.lineTo(x, 246); g.stroke(); }
     const cols = ['#d9534f', '#4a74b8', '#5aa05d', '#d9534f', '#4a74b8', '#e2a33d'];
     for (let r = 0; r < 6; r++) { g.fillStyle = '#5a616c'; g.fillRect(20, 40 + r * 36, 70, 14); g.fillStyle = cols[r]; g.beginPath(); g.arc(135 + (r % 3) * 90, 48 + r * 36, 9, 0, Math.PI * 2); g.fill(); }
-    g.fillStyle = '#2b3140'; g.font = '700 22px ' + JP_FONT; g.fillText('行動予定表', 16, 22);
+    g.fillStyle = '#2b3140'; g.font = '700 22px ' + JP_FONT; g.fillText('行動予定表', 16, 22); g.fillStyle = '#6a7282'; g.font = '700 18px ' + JP_FONT; g.fillText('IN / OUT', 150, 22);
   }, 480, 260);
   const grp = new THREE.Group();
   grp.add(rbox(1.0, 0.58, 0.03, '#b9bdc3', { r: 0.01, cast: false }));
@@ -294,12 +301,12 @@ export function buildOffice() {
   const fe = door(0.7, 1.2, { windows: true }); fe.rotation.y = -Math.PI / 2; fe.position.set(X1 - 0.02, 0, 1.25); root.add(fe);
   const ex = new THREE.Mesh(new THREE.PlaneGeometry(0.34, 0.16), emissive('#6fe39a', '#3fbf6e', 1.2)); ex.position.set(X1 - 0.09, 1.38, 1.25); ex.rotation.y = -Math.PI / 2; root.add(ex);
   const addPlate = (t, x, y, z, o) => { const p = plate(t, o); p.position.set(x, y, z); root.add(p); return p; };
-  addPlate('企画室７', -1.3, 1.02, CN + T / 2 + 0.005);
-  addPlate('機械室', 5.95, 1.02, CN + T / 2 + 0.005);
-  addPlate('階段', -6.45, 1.34, -3.4 + T / 2 + 0.005, { w: 0.4 });
+  addPlate('ITサポート', -1.3, 1.0, CN + T / 2 + 0.005, { w: 0.56, h: 0.2, sub: 'IT SUPPORT' });
+  addPlate('機械室', 5.95, 1.0, CN + T / 2 + 0.005, { w: 0.56, h: 0.2, sub: 'MACHINE ROOM' });
+  addPlate('階段', -6.45, 1.34, -3.4 + T / 2 + 0.005, { w: 0.4, h: 0.18, sub: 'STAIRS' });
   addPlate('B2', -4.55, 1.05, -3.4 + T / 2 + 0.005, { w: 0.3, h: 0.3, bg: '#3b414c', fg: '#e9ecf0' });
   // plates for the bottom rooms stand on the low wall tops, tilted up toward the camera
-  for (const [t, x] of [['コピー室', -3.1], ['給湯室', 0.55]]) { const p = plate(t, { w: 0.5, h: 0.14 }); p.position.set(x, LO + 0.1, CS); p.rotation.x = -0.5; root.add(p); root.add(rbox(0.52, 0.1, 0.03, '#8a909a', { x, y: LO, z: CS - 0.02, r: 0.01, cast: false })); }
+  for (const [t, x, sub] of [['コピー室', -3.1, 'COPY ROOM'], ['給湯室', 0.55, 'KITCHEN']]) { const p = plate(t, { w: 0.5, h: 0.18, sub }); p.position.set(x, LO + 0.1, CS); p.rotation.x = -0.5; root.add(p); root.add(rbox(0.52, 0.1, 0.03, '#8a909a', { x, y: LO, z: CS - 0.02, r: 0.01, cast: false })); }
   for (const [k, x] of [['m', 3.25], ['f', 5.85]]) { const p = toiletSign(k); p.scale.setScalar(0.6); p.position.set(x, LO + 0.13, CS); p.rotation.x = -0.5; root.add(p); }
   // corridor dressing: noticeboard, extinguisher, hydrant, distribution board, notices
   const nb = pinboard(0.9, 0.46); nb.position.set(-3.0, 0.72, CN + T / 2 + 0.01); root.add(nb);
@@ -333,7 +340,19 @@ export function buildOffice() {
   { const p = plant({ size: 1.0, seed: 6 }); p.position.set(-6.65, 0, -0.05); root.add(p); }
   { const l = ceilingLamp(0.6); l.position.set(-6.6, 1.3, -3.4 + T / 2 + 0.02); root.add(l); }
   // stairwell behind the lobby
-  const stw = stairs(); stw.position.set(-6.1, 0, -4.0); root.add(stw);
+  const stw = stairs(); stw.position.set(-6.42, 0, -4.0); root.add(stw);
+  // the lift car behind the doors: a lit cabin in its shaft, seen from above like every other room
+  { const cab = new THREE.Group(); const cw = 0.92, cd = 0.95, ch = 1.3;
+    cab.add(rbox(cw + 0.16, 0.02, cd + 0.12, '#2a2e36', { y: -0.01, r: 0.005, cast: false }));                           // shaft floor edge
+    const inner = emissive('#d9d2c4', '#f3dfb8', 0.28);
+    cab.add(rbox(cw, 0.012, cd, '#5a5f68', { r: 0.004, cast: false }));                                                   // cabin floor
+    cab.add(rbox(cw, ch, 0.05, null, { z: -cd / 2, r: 0.01, m: inner }));                                                  // back wall
+    for (const sx of [-1, 1]) cab.add(rbox(0.05, ch, cd, null, { x: sx * cw / 2, r: 0.01, m: inner }));
+    for (const sx of [-1, 1]) cab.add(rbox(0.04, 0.04, cd - 0.2, '#b9bdc3', { x: sx * (cw / 2 - 0.05), y: 0.5, r: 0.015, cast: false }));   // handrails
+    cab.add(rbox(0.14, 0.34, 0.02, '#8d939d', { x: cw / 2 - 0.05, y: 0.55, z: cd / 2 - 0.2, r: 0.01, cast: false }));
+    for (const sx of [-1, 1]) cab.add(rbox(0.08, ch + 0.1, cd + 0.1, '#3a3f48', { x: sx * (cw / 2 + 0.08), r: 0.01 }));   // shaft sides
+    cab.position.set(-5.45, 0, -3.4 - T / 2 - cd / 2 - 0.02); root.add(cab);
+    const cl = new THREE.PointLight('#ffe2b8', 0.9, 1.6, 1.8); cl.position.set(-5.45, 1.1, -3.95); scene.add(cl); }
   root.add(rbox(2.6, 0.05, 1.0, '#b2b5b8', { x: -5.6, y: -0.02, z: -4.1, r: 0.01, cast: false }));
 
   // ---- main office ----
@@ -390,7 +409,7 @@ export function buildOffice() {
   for (let i = 0; i < 7; i++) { const cu = mug(['#e9e6df', '#c96a5a', '#7aa0c8', '#e9e6df', '#9cc39a', '#e2c26a', '#e9e6df'][i]); cu.position.set(-0.17 + (i % 4) * 0.11, 0.05, i < 4 ? -0.06 : 0.06); cu.scale.setScalar(0.8); tray.add(cu); }
   tray.position.set(0.4, 0.5, CS + T / 2 + 0.34); root.add(tray);
   root.add(rbox(0.26, 0.02, 0.08, '#3a3f48', { x: 1.55, y: 0.42, z: -3.1, r: 0.005 }));
-  const card = nameCard('ミオ', 'Mio'); card.position.set(DX[1] + 0.32, 0.42, ZS + 0.2); root.add(card);
+  const card = nameCard('エリック', 'ERIC'); card.position.set(DX[1] + 0.32, 0.42, ZS + 0.2); root.add(card);
 
   const myChair = officeChair(); myChair.position.set(5.5, 0, -1.3); myChair.rotation.y = -0.5; root.add(myChair);
   const tama = cat(); tama.scale.setScalar(1.15 * K * 0.9); tama.position.set(0, 0.24, 0.02); tama.rotation.y = 0.4; myChair.add(tama);
@@ -401,7 +420,7 @@ export function buildOffice() {
   for (let i = 0; i < 3; i++) { const r = rack(); r.position.set(4.4 + i * 0.72, 0, -3.3); root.add(r); }
   const ac = acUnit(); ac.position.set(5.9, 1.05, Z0 + T / 2 + 0.1); root.add(ac);
   const fan2 = standFan(); fan2.position.set(6.6, 0, -1.2); root.add(fan2);
-  const cart = new THREE.Group(); cart.add(rbox(0.5, 0.5, 0.4, '#6e747e', { r: 0.02 })); const cm = monitor(); cm.position.set(0, 0.5, 0); cart.add(cm);
+  const cart = new THREE.Group(); cart.add(rbox(0.5, 0.5, 0.4, '#6e747e', { r: 0.02 })); const cm = monitor({ kind: 'term' }); cm.position.set(0, 0.5, 0); cart.add(cm);
   cart.position.set(4.2, 0, -1.3); root.add(cart);
   for (const [x0, z0, x1, z1] of [[3.7, -2.5, 6.8, -2.45], [3.7, -2.35, 6.8, -2.3]]) root.add(rbox(x1 - x0, 0.04, 0.08, '#5a5f68', { x: (x0 + x1) / 2, y: 0.01, z: (z0 + z1) / 2, r: 0.015, cast: false }));
 
@@ -432,7 +451,11 @@ export function buildOffice() {
   root.add(rbox(0.22, 0.3, 0.22, '#5c6b86', { x: -1.9, z: 6.0, r: 0.02 }));
   { const wc = waterCooler(); wc.position.set(-1.9, 0, 3.6); root.add(wc); }
   { const cb = counter(1.0); cb.rotation.y = Math.PI / 2; cb.position.set(-1.85, 0, 4.9); root.add(cb); const kt2 = new THREE.Mesh(new THREE.CylinderGeometry(0.06, 0.07, 0.16, 12), mat('#c9ccd0', { roughness: 0.35, metalness: 0.3 })); kt2.position.set(-1.85, 0.56, 4.7); root.add(sh(kt2)); root.add(rbox(0.3, 0.12, 0.2, '#e8e4da', { x: -1.85, y: 0.5, z: 5.1, r: 0.01 })); }
-  root.add(rbox(0.9, 0.04, 0.22, '#8a909a', { x: 0.2, y: 0.95, z: 6.2, r: 0.01 }), rbox(0.9, 0.04, 0.22, '#8a909a', { x: 0.2, y: 0.7, z: 6.2, r: 0.01 }));
+  // a low sideboard against the front wall with the team's cups and a tea tin
+  { const sb = new THREE.Group(); sb.add(rbox(1.0, 0.3, 0.3, '#8a909a', { r: 0.015 }), rbox(1.04, 0.03, 0.34, '#c9ccd0', { y: 0.3, r: 0.01 }));
+    for (let i = 0; i < 4; i++) { const cu = mug(['#e9e6df', '#7aa0c8', '#c96a5a', '#9cc39a'][i]); cu.scale.setScalar(0.85); cu.position.set(-0.36 + i * 0.13, 0.33, 0.02); sb.add(cu); }
+    const tin = new THREE.Mesh(new THREE.CylinderGeometry(0.05, 0.05, 0.12, 12), mat('#4f7a64', { roughness: 0.4, metalness: 0.3 })); tin.position.set(0.3, 0.39, 0); sb.add(sh(tin));
+    sb.position.set(0.2, 0, 6.12); root.add(sb); }
   { const p = plant({ size: 0.9, seed: 8 }); p.position.set(1.4, 0, 6.0); root.add(p); }
 
   // ---- toilets: men's and women's ----
@@ -459,6 +482,103 @@ export function buildOffice() {
   const sota = scaleUp(PEOPLE.sota()); sota.root.position.set(1.05, 0, 3.5); sota.root.rotation.y = Math.PI; root.add(sota.root);
   const sm2 = mug('#c96a5a'); sm2.position.set(0, -0.26, 0.02); sota.arms[1].add(sm2); sota.arms[1].rotation.x = -0.9;
   for (const [x, z] of [dN(0).seat]) { const b = blob(0.6, 0.3); b.position.set(x, 0.004, z); root.add(b); }
+
+
+  // ================= dressing and life (world agent, production pass) =================
+  const life = { steam: [], dust: [], pools: new THREE.Group() };
+  root.add(life.pools);
+  const pool = (x, z, r, o) => life.pools.add(lightPool(x, z, r, { y: 0.02, ...o }));
+  // warm pools under every hidden ceiling lamp, and long soft streaks where the fittings shine in the floor
+  for (const [x, z, k] of [[-2.2, -3.4, 1.5], [0.8, -3.4, 1.5], [-0.6, -1.0, 1.0], [-5.6, -1.6, 1.3], [5.2, -3.4, 0.9], [-4.4, 1.3, 1.1], [0.2, 1.3, 1.1], [4.6, 1.3, 1.1], [-4.6, 4.2, 1.3], [-0.2, 4.2, 1.2], [3.1, 4.4, 0.9], [5.7, 4.4, 0.9], [-5.6, -5.0, 0.8]]) {
+    pool(x, z, 1.3, { k: 0.2 + 0.12 * k });
+    pool(x, z + 0.3, 0.42, { k: 0.14 + 0.08 * k, sx: 0.55, sz: 2.4, color: '#fff0d8' });
+  }
+  for (const x of [-5.6, -2.6, 0.9, 4.0]) { pool(x, 1.2, 0.95, { k: 0.3, sx: 1.6, sz: 0.9 }); pool(x, 1.35, 0.35, { k: 0.2, sx: 0.6, sz: 2.2, color: '#fff0d8' }); }
+  pool(-4.62, -2.75, 0.7, { k: 0.22, color: '#8fb8ff' });            // vending glow on the floor
+  pool(X1 - 0.35, 1.25, 0.55, { k: 0.18, color: '#7fe0a4' });          // the exit sign
+
+  // ---- main office ----
+  // carpet tiles under the island, two greys in a checker, so the work area reads as its own zone
+  { const cg = new THREE.Group(); const x0 = -3.9, x1 = 3.1, z0 = -5.75, z1 = -1.95, t = 0.5;
+    cg.add(new THREE.Mesh(new THREE.BoxGeometry(x1 - x0, 0.01, z1 - z0), mat('#7c8390', { roughness: 0.95 })));
+    const alt = mat('#737a87', { roughness: 0.95 });
+    for (let x = x0; x < x1 - 0.01; x += t) for (let z = z0; z < z1 - 0.01; z += t) if ((Math.round((x - x0) / t) + Math.round((z - z0) / t)) % 2) { const q = new THREE.Mesh(new THREE.BoxGeometry(t - 0.01, 0.012, t - 0.01), alt); q.position.set(x + t / 2 - (x0 + x1) / 2, 0.001, z + t / 2 - (z0 + z1) / 2); cg.add(q); }
+    cg.children.forEach((m) => { m.receiveShadow = true; }); cg.position.set((x0 + x1) / 2, 0.006, (z0 + z1) / 2); root.add(cg); }
+  // under the desks: bins, a bag, cable boxes
+  for (const d of desks) { const b = rbox(0.16, 0.2, 0.16, '#5b6474', { x: d.x + 0.36, z: d.z - d.face * 0.05, r: 0.02 }); root.add(b); }
+  root.add(rbox(0.26, 0.2, 0.12, '#3d4556', { x: DX[0] - 0.3, z: ZN + 0.55, r: 0.04 }));
+  // printer on a stand against the machine-room wall, with a tray of printouts
+  { const pr = new THREE.Group(); pr.add(rbox(0.56, 0.4, 0.46, '#8a909a', { r: 0.02 }), rbox(0.52, 0.26, 0.44, '#d7d8d4', { y: 0.4, r: 0.03 }), rbox(0.3, 0.03, 0.2, PAL.paper, { y: 0.66, z: 0.06, r: 0.005 }), rbox(0.1, 0.03, 0.06, '#5ec28b', { x: 0.18, y: 0.66, z: -0.12, r: 0.01, cast: false }));
+    pr.rotation.y = -Math.PI / 2; pr.position.set(3.0, 0, -2.4); root.add(pr); }
+  { const p = plant({ size: 0.85, seed: 12 }); p.position.set(3.05, 0, -1.95); root.add(p); }
+  // desk lamps on the chief's desk and a stack of trays
+  root.add(rbox(0.28, 0.12, 0.2, '#5b6474', { x: 1.5, y: 0.42, z: -3.85, r: 0.01 }), rbox(0.26, 0.02, 0.18, PAL.paper, { x: 1.5, y: 0.54, z: -3.85, r: 0.004 }));
+  // the wall clock gets real hands (8:55 when the day starts here, moving with the game clock)
+  const officeHands = clockHands(0.15); officeHands.position.set(-1.6, 1.3, Z0 + T / 2 + 0.03); root.add(officeHands);
+  secHand.visible = false;
+  // cable tray along the island's spine
+  root.add(rbox(3.5, 0.03, 0.08, '#5a606b', { x: -0.8, y: 0.01, z: (ZN + ZS) / 2, r: 0.01, cast: false }));
+
+  // ---- lift lobby ----
+  { const ind = new THREE.Mesh(new THREE.PlaneGeometry(0.2, 0.07), emissive('#ffb566', '#ff9a3a', 1.6)); ind.position.set(-5.45, 1.32, -3.4 + T / 2 + 0.036); root.add(ind); }
+  { const m = new THREE.Mesh(new THREE.BoxGeometry(1.3, 0.012, 0.8), mat('#4a5263', { roughness: 0.95 })); m.position.set(-5.45, 0.006, -2.75); m.receiveShadow = true; root.add(m); }
+  { const bin2 = rbox(0.3, 0.46, 0.26, '#5c6b86', { x: -6.72, z: -2.55, r: 0.03 }); root.add(bin2); }
+
+  // ---- corridor ----
+  // a muted guide line down the corridor floor and a runner mat at the office door
+  root.add(rbox(X1 - X0 - 0.4, 0.004, 0.06, '#7d858f', { x: 0, y: 0.004, z: 1.72, r: 0.002, cast: false }));
+  { const m = new THREE.Mesh(new THREE.BoxGeometry(1.1, 0.012, 0.7), mat('#4a5263', { roughness: 0.95 })); m.position.set(-0.25, 0.006, 0.62); m.receiveShadow = true; root.add(m); }
+  // AED box (green light), a drinking fountain, a tall plant by the fire exit
+  { const a = new THREE.Group(); a.add(rbox(0.3, 0.36, 0.1, '#e9ecef', { r: 0.02 }), rbox(0.2, 0.08, 0.02, null, { y: 0.24, z: 0.05, r: 0.01, m: emissive('#7fe0a4', '#3fbf6e', 1.4), cast: false }), rbox(0.14, 0.14, 0.02, '#3fbf6e', { y: 0.06, z: 0.05, r: 0.01, cast: false }));
+    a.position.set(4.3, 0.55, CN + T / 2 + 0.05); root.add(a); }
+  { const f = new THREE.Group(); f.add(rbox(0.32, 0.62, 0.26, '#c9ccd0', { r: 0.03 }), rbox(0.3, 0.05, 0.24, '#9aa0a8', { y: 0.62, r: 0.02 })); f.position.set(6.55, 0, CN + T / 2 + 0.15); root.add(f); }
+  { const p = plant({ size: 1.05, seed: 17, tall: 1.3 }); p.position.set(6.6, 0, 2.05); root.add(p); }
+  { const p = plant({ size: 0.95, seed: 19 }); p.position.set(-6.65, 0, 2.05); root.add(p); }
+  // recycling row by the kitchenette door: burnable, cans, paper (colour only)
+  for (const [x, c] of [[-1.55, '#4f6f9a'], [-1.28, '#6a8f5c'], [-1.01, '#b58c46']]) { root.add(rbox(0.24, 0.42, 0.24, c, { x, z: 2.1, r: 0.03 }), rbox(0.2, 0.02, 0.2, '#2c3038', { x, y: 0.42, z: 2.1, r: 0.01, cast: false })); }
+
+  // ---- copy room ----
+  { const m = new THREE.Mesh(new THREE.BoxGeometry(0.9, 0.012, 0.5), mat('#454c5a', { roughness: 0.95 })); m.position.set(-2.95, 0.006, 3.45); m.receiveShadow = true; root.add(m); }
+  // shredder, a pallet of paper reams, a paper box stack by the copier, a cutter and stapler on the table
+  { const s2 = new THREE.Group(); s2.add(rbox(0.36, 0.5, 0.3, '#3a3f48', { r: 0.02 }), rbox(0.3, 0.03, 0.08, '#15181d', { y: 0.5, r: 0.005, cast: false })); s2.position.set(-6.45, 0, 2.85); root.add(s2); }
+  { const pl = new THREE.Group(); pl.add(rbox(0.8, 0.1, 0.6, '#8a7a64', { r: 0.01 }));
+    for (let i = 0; i < 3; i++) for (let j = 0; j < 2; j++) pl.add(rbox(0.36, 0.14, 0.26, i % 2 ? '#e7e3d8' : '#dcd8cc', { x: -0.19 + j * 0.38, y: 0.1 + i * 0.145, z: 0, r: 0.01 }));
+    pl.position.set(-4.7, 0, 5.95); root.add(pl); }
+  for (let i = 0; i < 3; i++) root.add(rbox(0.34, 0.14, 0.26, i % 2 ? '#e7e3d8' : '#dcd8cc', { x: -2.45, y: i * 0.145, z: 3.3, r: 0.01 }));
+  root.add(rbox(0.36, 0.04, 0.26, '#6d747e', { x: -4.0, y: 0.46, z: 4.55, r: 0.01 }), rbox(0.12, 0.05, 0.04, '#3a3f48', { x: -4.75, y: 0.46, z: 4.9, r: 0.01 }));
+  { const p = plant({ size: 0.8, seed: 21 }); p.position.set(-2.6, 0, 6.05); root.add(p); }
+  // a paper trolley parked by the shelves
+  { const tr = new THREE.Group(); tr.add(rbox(0.6, 0.04, 0.4, '#6d747e', { y: 0.1, r: 0.01 }), rbox(0.6, 0.04, 0.4, '#6d747e', { y: 0.5, r: 0.01 }));
+    for (const [dx, dz] of [[-0.28, -0.18], [0.28, -0.18], [-0.28, 0.18], [0.28, 0.18]]) tr.add(rbox(0.03, 0.5, 0.03, '#9aa0a8', { x: dx, y: 0.04, z: dz, r: 0.01 }));
+    for (let i = 0; i < 2; i++) tr.add(rbox(0.34, 0.14, 0.26, '#e7e3d8', { x: -0.12 + i * 0.26, y: 0.54, r: 0.01 }), rbox(0.34, 0.12, 0.26, '#dcd8cc', { x: -0.12 + i * 0.26, y: 0.14, r: 0.01 }));
+    tr.rotation.y = Math.PI / 2; tr.position.set(-6.25, 0, 4.2); root.add(tr); }
+  // ---- kitchenette ----
+  { const rug = new THREE.Mesh(new THREE.BoxGeometry(1.5, 0.012, 1.6), mat('#56607a', { roughness: 0.95 })); rug.position.set(-0.8, 0.006, 4.75); rug.receiveShadow = true; root.add(rug); }
+  for (const x of [-0.3 - 0.8, 0.3 - 0.8]) { root.add(rbox(0.26, 0.04, 0.26, PAL.chair, { x, y: 0.26, z: 4.05, r: 0.02 }), rbox(0.03, 0.26, 0.03, PAL.deskLeg, { x, z: 4.05, r: 0.01 })); }
+  { const k = new THREE.Mesh(new THREE.CylinderGeometry(0.04, 0.05, 0.03, 10), mat('#e9e6df')); k.position.set(-1.0, 0.44, 4.5); root.add(k); }
+  // kettle and coffee machine steam; a cleaning rota on the partition
+  { const s1 = steam({ n: 6, rise: 0.5, size: 0.11, opacity: 0.3 }); s1.position.set(1.45, 0.72, CS + 0.36); root.add(s1); life.steam.push(s1); }
+  { const s2 = steam({ n: 5, rise: 0.35, size: 0.08, opacity: 0.22, period: 3.3 }); s2.position.set(1.1, 0.84, CS + 0.36); root.add(s2); life.steam.push(s2); }
+  { const s3 = steam({ n: 4, rise: 0.3, size: 0.07, opacity: 0.2, period: 3.0 }); s3.position.set(-1.0, 0.47, 4.5); root.add(s3); life.steam.push(s3); }
+  { const rota = new THREE.Group(); rota.add(rbox(0.5, 0.36, 0.02, '#e9ebee', { r: 0.01, cast: false }));
+    for (let i = 0; i < 4; i++) for (let j = 0; j < 5; j++) rota.add(rbox(0.07, 0.05, 0.004, (i + j) % 3 ? '#c9ced6' : '#8fb0c9', { x: -0.18 + j * 0.09, y: 0.06 + i * 0.07, z: 0.012, r: 0.005, cast: false }));
+    rota.rotation.y = Math.PI / 2; rota.position.set(-2.2 + T / 2 + 0.01, 0.45, 5.7); root.add(rota); }
+  { const d = dust([-1.6, 0.0, 0.3, 1.3, 4.0, 5.3], 26, { opacity: 0.4 }); root.add(d); life.dust.push(d); }
+  // ---- toilets ----
+  for (const x0 of [1.8, 4.4]) {
+    // hand dryer and paper towels over the sink, a mat, a small plant on the sink shelf
+    root.add(rbox(0.1, 0.24, 0.22, '#e3e4e2', { x: x0 + 2.52, y: 0.5, z: 4.0, r: 0.03 }));
+    root.add(rbox(0.1, 0.26, 0.28, '#d0d3d6', { x: x0 + 2.52, y: 0.55, z: 2.85, r: 0.02 }));
+    { const p = plant({ size: 0.4, seed: 23 + x0 }); p.position.set(x0 + 2.35, 0.49, 3.62); root.add(p); }
+  }
+  { const mb = new THREE.Group(); mb.add(rbox(0.32, 0.26, 0.32, '#e0b83a', { r: 0.04 })); const h = new THREE.Mesh(new THREE.CylinderGeometry(0.012, 0.012, 1.0, 6), mat('#9aa0a8')); h.position.set(0.05, 0.6, 0); h.rotation.z = 0.25; mb.add(sh(h)); mb.position.set(6.6, 0, 3.0); root.add(mb); }
+  // ---- machine room ----
+  // an UPS, cable bundles, a step ladder
+  root.add(rbox(0.5, 0.7, 0.6, '#2c3038', { x: 6.55, z: -3.3, r: 0.02 }));
+  { const l = new THREE.Mesh(new THREE.PlaneGeometry(0.08, 0.03), new THREE.MeshBasicMaterial({ color: '#5fd38f' })); l.position.set(6.55, 0.6, -2.995); root.add(l); }
+  for (let i = 0; i < 3; i++) { const c = new THREE.Mesh(new THREE.CylinderGeometry(0.025, 0.025, 2.4, 6), mat(['#3f5f8a', '#5a606b', '#8a6a3a'][i])); c.rotation.z = Math.PI / 2; c.position.set(5.3, 0.03, -2.2 + i * 0.05); root.add(sh(c)); }
+  { const lad = new THREE.Group(); for (const s of [-1, 1]) { const r = rbox(0.04, 0.9, 0.04, '#b9bdc3', { x: s * 0.18, r: 0.01 }); r.rotation.x = 0.12; lad.add(r); } for (let i = 0; i < 3; i++) lad.add(rbox(0.36, 0.03, 0.12, '#9aa0a8', { y: 0.2 + i * 0.25, z: -0.02 * i, r: 0.01 })); lad.position.set(6.6, 0, -0.4); root.add(lad); }
+  life.hands = officeHands;
 
   // ---- walk grid ----
   const nav = new Nav(X0, X1, Z0, Z1, 0.1);
@@ -489,10 +609,22 @@ export function buildOffice() {
   B(-6.6, -5.8, 5.6, Z1); B(-3.95, -3.35, 2.9, 3.5); B(-2.1, -1.7, 3.4, 3.8); B(-2.15, -1.55, 4.35, 5.45); B(-2.7, -2.25, 4.8, 6.0);
   B(-4.2, -3.7, -3.1, -1.6); B(-2.7, -1.1, 0.35, 0.9);
   nav.blockTagged('emi', -5.5, -5.1, -1.55, -1.15);
+  // production dressing
+  B(2.7, 3.3, -2.7, -2.1); B(2.85, 3.25, -2.15, -1.75);                  // printer, plant
+  B(-6.9, -6.55, -2.75, -2.35);                                            // lobby bin
+  B(4.15, 4.45, CN, CN + 0.2); B(6.35, 6.75, CN, CN + 0.35); B(6.4, 6.8, 1.85, 2.25); B(-6.85, -6.45, 1.85, 2.25);
+  B(-1.7, -0.85, 1.95, CS);                                                 // recycling row
+  B(-6.65, -6.25, CS, 3.05); B(-5.1, -4.3, 5.65, Z1); B(-2.65, -2.25, CS, 3.45); B(-2.8, -2.4, 5.85, 6.25);
+  B(-1.25, -0.35, 3.9, 4.25); B(-6.5, -6.0, 3.85, 4.55);                        // kitchen stools, paper trolley
+  B(6.4, 6.8, 2.8, 3.2); B(6.3, 6.8, -3.6, -2.95); B(6.4, 6.8, -0.6, -0.2); // mop bucket, UPS, ladder
 
   for (const r of [nao, hiro, yui, sota]) r.root.visible = false;
   const world = { root, scene, sun, nav, desks, dN, dS, kenji, nao, hiro, mori, emi, emiBlob, yui, sota, tama, covers, leaves, card, X0, X1, Z0, Z1, secHand, fanHead: fan.children[2], fan2Head: fan2.children[2], copier: cp, myChair, machineDoor: md, vendingPos: [-4.62, -2.6], coffeePos: [1.1, CS + 0.36] };
+  world.life = life;
   world.update = (t) => {
+    for (const s2 of life.steam) s2.userData.update(t);
+    for (const d of life.dust) d.userData.update(t);
+    liveScreens.update(t);
     for (const r of [kenji, nao, hiro, mori, yui, sota]) idle(r, t);
     if (!emi._walk) idle(emi, t);
     kenji.arms[1].rotation.x = -1.2 + Math.max(0, Math.sin(t * 6)) * 0.06;

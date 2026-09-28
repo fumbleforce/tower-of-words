@@ -10,6 +10,7 @@ import { PEOPLE, sit, armsLap, walkPose, HIP, idle } from '../cast.js';
 import { blob } from '../engine.js';
 import { flags, cond } from '../runner.js';
 import { rbox } from '../props.js';
+import { route } from './route.js';
 
 export const withList = (slot) => (slot.with || []).filter((e) => typeof e === 'string' || cond(e.if)).map((e) => (typeof e === 'string' ? e : e.who));
 
@@ -59,7 +60,7 @@ export async function lobbyPlace(game) {
     const r = c.r, p = r.root.position;
     c.t += dt;
     if (c.stage === 'wait') {
-      if (c.t > 0 && st.rush && !game.busyTrip) { c.stage = 'in'; r.root.visible = true; c.b.visible = true; p.set(c.side * (1.0 + Math.random() * 0.4), 0, Z + 1.6); c.path = [[c.side * (1.0 + Math.random() * 0.3), Z - 0.9], [c.side * 0.93, BZ + 0.55]]; }
+      if (c.t > 0 && st.rush && !game.busyTrip) { c.stage = 'in'; r.root.visible = true; c.b.visible = true; p.set(c.side * (0.3 + Math.random() * 0.45), 0, Z + 1.6); c.path = [[c.side * (0.45 + Math.random() * 0.35), Z - 0.9], [c.side * 0.93, BZ + 0.55]]; }  // in through the open doorway (|x| < 1.1), never the glass
       return;
     }
     const moveTo = (tx, tz, sp = 1.25) => {
@@ -172,20 +173,23 @@ export async function lobbyPlace(game) {
   }
 
   const P = {
+    // colour grade (js/post.js): toward game3d/ref/2-security-gate-muted.png: slate shadows, warm sun, low saturation
+    grade: { exposure: 1.04, temp: 0.02, sat: 0.88, contrast: 1.07, lift: [0.005, 0.008, 0.016], shadowTint: [-0.008, -0.002, 0.02], highTint: [0.022, 0.01, -0.014], vignette: 0.26, bloom: 0.4, bloomThreshold: 0.82, focusBand: 0.3 },
+    _commuters: commuters,
     scene: w.scene, camera: cam.camera, cam, space: w.root, nav: w.nav, sun: w.sun, charScale: K, clock: w.clock,
     start: [0, Z - 1.3], startFacing: Math.PI, things, people, spots, zones, seats, glide,
     fit(aspect) {
       const pts = [];
       for (const x of [-X - 0.2, X + 0.2]) for (const z of [-Z - 0.2, Z + 0.3]) for (const y of [0, 1.6]) pts.push(new THREE.Vector3(x, y, z));
       if (aspect >= 1) cam.fit(aspect, [new THREE.Vector3(-5.6, 0, 0), new THREE.Vector3(5.6, 0, 0), new THREE.Vector3(0, 2.25, -Z), new THREE.Vector3(0, 0, Z + 0.1)], new THREE.Vector3(0, 0, 0.05), { follow: true, clamp: [-0.9, 0.9, -0.7, 0.05], limY: 0.97 }); // headroom above the lifts for their markers; pans up when he walks north
-      else cam.fit(aspect, [new THREE.Vector3(-2.4, 0, 0), new THREE.Vector3(2.4, 0, 0), new THREE.Vector3(0, 0, -2.7), new THREE.Vector3(0, 1.4, 2.5)], new THREE.Vector3(0, 0, 0), { follow: true, clamp: [-X + 2.4, X - 2.4, -Z + 1.75, Z - 2.9], lead: -3.0 });
+      else cam.fit(aspect, [new THREE.Vector3(-2.4, 0, 0), new THREE.Vector3(2.4, 0, 0), new THREE.Vector3(0, 0, -2.7), new THREE.Vector3(0, 1.4, 2.5)], new THREE.Vector3(0, 0, 0), { follow: true, clamp: [-X + 2.4, X - 2.4, -Z + 1.75, Z - 2.9], lead: -2.7 });
     },
     pick(rc) { const p = new THREE.Vector3(); return rc.ray.intersectPlane(floor, p) ? p : null; },
     walkPerson(id, [x, z], { speed } = {}) {
       const r = people[id]; if (!r || !r.hips) return Promise.resolve();
       if (r.seated) standUp(id);
       r.root.visible = true; if (blobs[id]) blobs[id].visible = true;
-      return walkPerson(r, [[x, z]], { speed: speed || 1.2, blobM: blobs[id] });
+      return walkPerson(r, route(w.nav, r.root.position, [x, z]), { speed: speed || 1.2, blobM: blobs[id] });
     },
     async sitPerson(id, seatId) {
       const s = seats[seatId]; if (!s || (id === 'eric' || id === 'player')) return;
