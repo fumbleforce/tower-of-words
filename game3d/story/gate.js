@@ -176,7 +176,7 @@ export default {
       '> The little screen on the gate counts two people, him and his briefcase.',
       { do: 'face', who: 'kuroda', to: 'gate' },
       { say: 'kuroda', face: 'panicked', emo: 'pleading', text: '{akete}...' },
-      { do: 'gesture', who: 'kuroda', kind: 'pull' },
+      '> He mimes hauling two heavy doors apart, then pats the gate like a nervous horse.',
       { say: 'kuroda', emo: 'slow', slow: true, text: '{akete}...' },
       { say: 'kuroda', face: 'panicked', overheard: true, emo: 'pleading', text: 'お願い、{akete}…いい子だから…' },
       // the guard calls the gate company and gets hold music
