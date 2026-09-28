@@ -9,10 +9,10 @@ Overall score per round:
 | Place | R1 | R2 | R3 | R4 | R5 (all files) | R6 (all files) | Later |
 |---|---|---|---|---|---|---|---|
 | Train | 6.5 | 7 | 7.5 | 7.5 | 7 | **8** | |
-| Gate (+ lift) | 6.5 | 7.5 | 7.5 | 7.5 | 7 | 7.5 | R7 7, R8 7.5, R9 7.5 |
+| Gate (+ lift) | 6.5 | 7.5 | 7.5 | 7.5 | 7 | 7.5 | R7 7, R8 7.5, R9 7.5; cut to two routes: R10 7, R11–R16 7.5, R17 7 |
 | Office | 7 | 7 | 7 | 7 | 7 | **8** | |
 
-The train and office passed in round 6. The gate has not passed: it held at 7.5 through rounds 6 to 9. After round 9, fixes went in and were not re-scored: the cause-and-effect order in the 待って beat, one duplicated line, Hamada's label, and a way back to greeting the guard after "Leave him".
+The train and office passed in round 6. The gate has not passed. It held at 7.5 through rounds 6 to 9. It was then cut to two routes, the word 開けて or the social route (すみません and a mime for the guard), and scored 7 to 7.5 over eight more rounds. Fixes from round 17 (wrong mimes, a clearer hint, the guard staying cool if you skipped the greeting) were not re-scored. After round 9, fixes went in and were not re-scored: the cause-and-effect order in the 待って beat, one duplicated line, Hamada's label, and a way back to greeting the guard after "Leave him".
 
 What the gate critics kept saying: dialogue and character score 8, and the guard, the cat and Hamada's horse-whispering all land. What holds it back is fun and clarity (7). There are many ways through, and most end the same way, so no single choice feels like it counts. The most useful next step is to cut routes (drop the bench wait, or `self_open`) rather than add lines.
 
