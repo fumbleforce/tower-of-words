@@ -1,0 +1,9 @@
+{
+  "reference": "eric",
+  "sources": {
+    "eric": { "glb": "src/eric/mesh.glb", "tex": "src/eric/tex.webp", "look": { "sat": 0.82, "mul": [0.97, 0.985, 1.02] } },
+    "mio": { "glb": "src/mio/mesh.glb", "tex": "src/mio/tex.webp", "faces": "src/mio/faces.json", "flat": true }
+  },
+  "anims": { "idle": "anim/idle.glb", "walk": "anim/walk.glb" },
+  "parts": []
+}
