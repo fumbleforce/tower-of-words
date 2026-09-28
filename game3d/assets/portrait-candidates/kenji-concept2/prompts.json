@@ -1,0 +1,343 @@
+{
+ "kenji2-a-soft-761": {
+  "model": "rdbtAnima",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, adult, Kenji, a 21-year-old fresh graduate, a young adult man with a youthful boyish face, smooth young skin, big eyes, not handsome, plain ordinary looks, short and a little soft with a round face and chubby cheeks, narrow sloping shoulders, fluffy messy black hair like a mop with a cowlick sticking up, a white work shirt with the sleeves pushed up, a navy tie knotted loose and crooked, at work in a Japanese office, the company lanyard with an ID card around his neck, a small cat charm hanging from the lanyard, holding a coiled blue network cable in both hands, leaning forward, keen eager smile, eyebrows raised, waist-up portrait facing the viewer at a slight angle, (the whole head inside the frame with empty space above the hair:1.2), plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, nude, nsfw, child, loli, fat, obese, rim light, red rim light, backlighting, mature male, old man, middle-aged, stubble, facial hair, beard, moustache, square jaw, manly, handsome, bishounen, muscular, athletic, muscles, pectorals, abs, bodybuilder, broad shoulders, shota, glasses, headphones, hat, costume, tall",
+  "seed": 761,
+  "w": 896,
+  "h": 1152,
+  "steps": 30,
+  "cfg": 5,
+  "sampler": "euler_ancestral normal",
+  "frame_warn": [
+   "head/hair 19px from the top edge (want >= 34)"
+  ]
+ },
+ "kenji2-a-soft-762": {
+  "model": "rdbtAnima",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, adult, Kenji, a 21-year-old fresh graduate, a young adult man with a youthful boyish face, smooth young skin, big eyes, not handsome, plain ordinary looks, short and a little soft with a round face and chubby cheeks, narrow sloping shoulders, fluffy messy black hair like a mop with a cowlick sticking up, a white work shirt with the sleeves pushed up, a navy tie knotted loose and crooked, at work in a Japanese office, the company lanyard with an ID card around his neck, a small cat charm hanging from the lanyard, holding a coiled blue network cable in both hands, leaning forward, keen eager smile, eyebrows raised, waist-up portrait facing the viewer at a slight angle, (the whole head inside the frame with empty space above the hair:1.2), plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, nude, nsfw, child, loli, fat, obese, rim light, red rim light, backlighting, mature male, old man, middle-aged, stubble, facial hair, beard, moustache, square jaw, manly, handsome, bishounen, muscular, athletic, muscles, pectorals, abs, bodybuilder, broad shoulders, shota, glasses, headphones, hat, costume, tall",
+  "seed": 762,
+  "w": 896,
+  "h": 1152,
+  "steps": 30,
+  "cfg": 5,
+  "sampler": "euler_ancestral normal",
+  "frame_warn": []
+ },
+ "kenji2-a-soft-full-761": {
+  "model": "rdbtAnima",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, adult, Kenji, a 21-year-old fresh graduate, a young adult man with a youthful boyish face, smooth young skin, big eyes, not handsome, plain ordinary looks, short and a little soft with a round face and chubby cheeks, narrow sloping shoulders, fluffy messy black hair like a mop with a cowlick sticking up, a white work shirt with the sleeves pushed up, a navy tie knotted loose and crooked, at work in a Japanese office, the company lanyard with an ID card around his neck, a small cat charm hanging from the lanyard, holding a coiled blue network cable in both hands, leaning forward, keen eager smile, eyebrows raised, full body standing, feet and shoes visible, facing the viewer at a slight angle, (the whole figure inside the frame with empty space above the head:1.2), plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, nude, nsfw, child, loli, fat, obese, rim light, red rim light, backlighting, mature male, old man, middle-aged, stubble, facial hair, beard, moustache, square jaw, manly, handsome, bishounen, muscular, athletic, muscles, pectorals, abs, bodybuilder, broad shoulders, shota, glasses, headphones, hat, costume, tall",
+  "seed": 761,
+  "w": 896,
+  "h": 1152,
+  "steps": 30,
+  "cfg": 5,
+  "sampler": "euler_ancestral normal",
+  "frame_warn": []
+ },
+ "kenji2-b-gangly-761": {
+  "model": "rdbtAnima",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, adult, Kenji, a 21-year-old fresh graduate, a young adult man with a youthful boyish face, smooth young skin, big eyes, not handsome, plain ordinary looks, tall gangly and very skinny with a long thin neck and bony wrists, a few acne marks on his cheeks, an untidy mop of wavy black hair falling into his eyes, a pen tucked behind his ear, a light blue work shirt a size too big with one shirt tail untucked, at work in a Japanese office, the company lanyard with an ID card around his neck, a tablet held against his chest with a cat sticker on its back, his head turned to the side looking at something off to the side, distracted open-mouthed curious look, waist-up portrait facing the viewer at a slight angle, (the whole head inside the frame with empty space above the hair:1.2), plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, fat, obese, plump, rim light, red rim light, backlighting, mature male, old man, middle-aged, stubble, facial hair, beard, moustache, square jaw, manly, handsome, bishounen, muscular, athletic, muscles, pectorals, abs, bodybuilder, broad shoulders, shota, glasses, headphones, hat, costume",
+  "seed": 761,
+  "w": 896,
+  "h": 1152,
+  "steps": 30,
+  "cfg": 5,
+  "sampler": "euler_ancestral normal",
+  "frame_warn": [
+   "head/hair 24px from the top edge (want >= 34)"
+  ]
+ },
+ "kenji2-b-gangly-762": {
+  "model": "rdbtAnima",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, adult, Kenji, a 21-year-old fresh graduate, a young adult man with a youthful boyish face, smooth young skin, big eyes, not handsome, plain ordinary looks, tall gangly and very skinny with a long thin neck and bony wrists, a few acne marks on his cheeks, an untidy mop of wavy black hair falling into his eyes, a pen tucked behind his ear, a light blue work shirt a size too big with one shirt tail untucked, at work in a Japanese office, the company lanyard with an ID card around his neck, a tablet held against his chest with a cat sticker on its back, his head turned to the side looking at something off to the side, distracted open-mouthed curious look, waist-up portrait facing the viewer at a slight angle, (the whole head inside the frame with empty space above the hair:1.2), plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, fat, obese, plump, rim light, red rim light, backlighting, mature male, old man, middle-aged, stubble, facial hair, beard, moustache, square jaw, manly, handsome, bishounen, muscular, athletic, muscles, pectorals, abs, bodybuilder, broad shoulders, shota, glasses, headphones, hat, costume",
+  "seed": 762,
+  "w": 896,
+  "h": 1152,
+  "steps": 30,
+  "cfg": 5,
+  "sampler": "euler_ancestral normal",
+  "frame_warn": [
+   "head/hair 25px from the top edge (want >= 34)"
+  ]
+ },
+ "kenji2-b-gangly-full-761": {
+  "model": "rdbtAnima",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, adult, Kenji, a 21-year-old fresh graduate, a young adult man with a youthful boyish face, smooth young skin, big eyes, not handsome, plain ordinary looks, tall gangly and very skinny with a long thin neck and bony wrists, a few acne marks on his cheeks, an untidy mop of wavy black hair falling into his eyes, a pen tucked behind his ear, a light blue work shirt a size too big with one shirt tail untucked, at work in a Japanese office, the company lanyard with an ID card around his neck, a tablet held against his chest with a cat sticker on its back, his head turned to the side looking at something off to the side, distracted open-mouthed curious look, full body standing, feet and shoes visible, facing the viewer at a slight angle, (the whole figure inside the frame with empty space above the head:1.2), plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, fat, obese, plump, rim light, red rim light, backlighting, mature male, old man, middle-aged, stubble, facial hair, beard, moustache, square jaw, manly, handsome, bishounen, muscular, athletic, muscles, pectorals, abs, bodybuilder, broad shoulders, shota, glasses, headphones, hat, costume",
+  "seed": 761,
+  "w": 896,
+  "h": 1152,
+  "steps": 30,
+  "cfg": 5,
+  "sampler": "euler_ancestral normal",
+  "frame_warn": [
+   "head/hair 30px from the top edge (want >= 34)"
+  ]
+ },
+ "kenji2-c-stocky-761": {
+  "model": "rdbtAnima",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, adult, Kenji, a 21-year-old fresh graduate, a young adult man with a youthful boyish face, smooth young skin, big eyes, not handsome, plain ordinary looks, short and stocky with a soft thick-set body, a wide boyish face, thick eyebrows, grown-out light brown dyed hair with black roots, short and tousled, a white short-sleeved work shirt with a dark tie tucked into the shirt between two buttons, at work in a Japanese office, the company lanyard with an ID card around his neck, a yellow sticky note stuck on his sleeve, a snack wrapper poking out of his breast pocket, holding a screwdriver up in his right hand, big grin with a gap between his front teeth, waist-up portrait facing the viewer at a slight angle, (the whole head inside the frame with empty space above the hair:1.2), plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, nude, nsfw, child, loli, fat, obese, rim light, red rim light, backlighting, mature male, old man, middle-aged, stubble, facial hair, beard, moustache, square jaw, manly, handsome, bishounen, muscular, athletic, muscles, pectorals, abs, bodybuilder, broad shoulders, shota, glasses, headphones, hat, costume, tall",
+  "seed": 761,
+  "w": 896,
+  "h": 1152,
+  "steps": 30,
+  "cfg": 5,
+  "sampler": "euler_ancestral normal",
+  "frame_warn": []
+ },
+ "kenji2-c-stocky-762": {
+  "model": "rdbtAnima",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, adult, Kenji, a 21-year-old fresh graduate, a young adult man with a youthful boyish face, smooth young skin, big eyes, not handsome, plain ordinary looks, short and stocky with a soft thick-set body, a wide boyish face, thick eyebrows, grown-out light brown dyed hair with black roots, short and tousled, a white short-sleeved work shirt with a dark tie tucked into the shirt between two buttons, at work in a Japanese office, the company lanyard with an ID card around his neck, a yellow sticky note stuck on his sleeve, a snack wrapper poking out of his breast pocket, holding a screwdriver up in his right hand, big grin with a gap between his front teeth, waist-up portrait facing the viewer at a slight angle, (the whole head inside the frame with empty space above the hair:1.2), plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, nude, nsfw, child, loli, fat, obese, rim light, red rim light, backlighting, mature male, old man, middle-aged, stubble, facial hair, beard, moustache, square jaw, manly, handsome, bishounen, muscular, athletic, muscles, pectorals, abs, bodybuilder, broad shoulders, shota, glasses, headphones, hat, costume, tall",
+  "seed": 762,
+  "w": 896,
+  "h": 1152,
+  "steps": 30,
+  "cfg": 5,
+  "sampler": "euler_ancestral normal",
+  "frame_warn": []
+ },
+ "kenji2-c-stocky-full-761": {
+  "model": "rdbtAnima",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, adult, Kenji, a 21-year-old fresh graduate, a young adult man with a youthful boyish face, smooth young skin, big eyes, not handsome, plain ordinary looks, short and stocky with a soft thick-set body, a wide boyish face, thick eyebrows, grown-out light brown dyed hair with black roots, short and tousled, a white short-sleeved work shirt with a dark tie tucked into the shirt between two buttons, at work in a Japanese office, the company lanyard with an ID card around his neck, a yellow sticky note stuck on his sleeve, a snack wrapper poking out of his breast pocket, holding a screwdriver up in his right hand, big grin with a gap between his front teeth, full body standing, feet and shoes visible, facing the viewer at a slight angle, (the whole figure inside the frame with empty space above the head:1.2), plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, nude, nsfw, child, loli, fat, obese, rim light, red rim light, backlighting, mature male, old man, middle-aged, stubble, facial hair, beard, moustache, square jaw, manly, handsome, bishounen, muscular, athletic, muscles, pectorals, abs, bodybuilder, broad shoulders, shota, glasses, headphones, hat, costume, tall",
+  "seed": 761,
+  "w": 896,
+  "h": 1152,
+  "steps": 30,
+  "cfg": 5,
+  "sampler": "euler_ancestral normal",
+  "frame_warn": []
+ },
+ "kenji2-d-freckles-761": {
+  "model": "rdbtAnima",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, adult, Kenji, a 21-year-old fresh graduate, a young adult man with a youthful boyish face, smooth young skin, big eyes, not handsome, plain ordinary looks, average height and skinny with narrow shoulders, freckles across his nose and cheeks, thick messy black bedhead hair sticking up at the back, one small white wireless earbud in his ear, a navy knit sweater vest over a white work shirt with the sleeves rolled up, at work in a Japanese office, the company lanyard with an ID card around his neck, an open laptop balanced on his left forearm while he types with his right hand, glancing to the side, eager, lips pressed in concentration, waist-up portrait facing the viewer at a slight angle, (the whole head inside the frame with empty space above the hair:1.2), plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, fat, obese, plump, rim light, red rim light, backlighting, mature male, old man, middle-aged, stubble, facial hair, beard, moustache, square jaw, manly, handsome, bishounen, muscular, athletic, muscles, pectorals, abs, bodybuilder, broad shoulders, shota, glasses, headphones, hat, costume, tall",
+  "seed": 761,
+  "w": 896,
+  "h": 1152,
+  "steps": 30,
+  "cfg": 5,
+  "sampler": "euler_ancestral normal",
+  "frame_warn": [
+   "head/hair 34px from the top edge (want >= 34)"
+  ]
+ },
+ "kenji2-d-freckles-762": {
+  "model": "rdbtAnima",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, adult, Kenji, a 21-year-old fresh graduate, a young adult man with a youthful boyish face, smooth young skin, big eyes, not handsome, plain ordinary looks, average height and skinny with narrow shoulders, freckles across his nose and cheeks, thick messy black bedhead hair sticking up at the back, one small white wireless earbud in his ear, a navy knit sweater vest over a white work shirt with the sleeves rolled up, at work in a Japanese office, the company lanyard with an ID card around his neck, an open laptop balanced on his left forearm while he types with his right hand, glancing to the side, eager, lips pressed in concentration, waist-up portrait facing the viewer at a slight angle, (the whole head inside the frame with empty space above the hair:1.2), plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, fat, obese, plump, rim light, red rim light, backlighting, mature male, old man, middle-aged, stubble, facial hair, beard, moustache, square jaw, manly, handsome, bishounen, muscular, athletic, muscles, pectorals, abs, bodybuilder, broad shoulders, shota, glasses, headphones, hat, costume, tall",
+  "seed": 762,
+  "w": 896,
+  "h": 1152,
+  "steps": 30,
+  "cfg": 5,
+  "sampler": "euler_ancestral normal",
+  "frame_warn": [
+   "head/hair 27px from the top edge (want >= 34)"
+  ]
+ },
+ "kenji2-d-freckles-full-761": {
+  "model": "rdbtAnima",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, adult, Kenji, a 21-year-old fresh graduate, a young adult man with a youthful boyish face, smooth young skin, big eyes, not handsome, plain ordinary looks, average height and skinny with narrow shoulders, freckles across his nose and cheeks, thick messy black bedhead hair sticking up at the back, one small white wireless earbud in his ear, a navy knit sweater vest over a white work shirt with the sleeves rolled up, at work in a Japanese office, the company lanyard with an ID card around his neck, an open laptop balanced on his left forearm while he types with his right hand, glancing to the side, eager, lips pressed in concentration, full body standing, feet and shoes visible, facing the viewer at a slight angle, (the whole figure inside the frame with empty space above the head:1.2), plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, fat, obese, plump, rim light, red rim light, backlighting, mature male, old man, middle-aged, stubble, facial hair, beard, moustache, square jaw, manly, handsome, bishounen, muscular, athletic, muscles, pectorals, abs, bodybuilder, broad shoulders, shota, glasses, headphones, hat, costume, tall",
+  "seed": 761,
+  "w": 896,
+  "h": 1152,
+  "steps": 30,
+  "cfg": 5,
+  "sampler": "euler_ancestral normal",
+  "frame_warn": [
+   "head/hair 18px from the top edge (want >= 34)"
+  ]
+ },
+ "kenji2-e-buzz-761": {
+  "model": "rdbtAnima",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, adult, Kenji, a 21-year-old fresh graduate, a young adult man with a youthful boyish face, smooth young skin, big eyes, not handsome, plain ordinary looks, short and slight, a round head with a very short black buzz cut, big ears sticking out, thick straight eyebrows, a navy company work jacket half zipped over a white collared shirt, sleeves pushed up, at work in a Japanese office, the company lanyard with an ID card around his neck, a boxed computer keyboard tucked under his left arm, a green bottle of melon soda in his right hand, bright cheerful smile, eyes creased, waist-up portrait facing the viewer at a slight angle, (the whole head inside the frame with empty space above the hair:1.2), plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, fat, obese, plump, rim light, red rim light, backlighting, mature male, old man, middle-aged, stubble, facial hair, beard, moustache, square jaw, manly, handsome, bishounen, muscular, athletic, muscles, pectorals, abs, bodybuilder, broad shoulders, shota, glasses, headphones, hat, costume, tall",
+  "seed": 761,
+  "w": 896,
+  "h": 1152,
+  "steps": 30,
+  "cfg": 5,
+  "sampler": "euler_ancestral normal",
+  "frame_warn": []
+ },
+ "kenji2-e-buzz-762": {
+  "model": "rdbtAnima",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, adult, Kenji, a 21-year-old fresh graduate, a young adult man with a youthful boyish face, smooth young skin, big eyes, not handsome, plain ordinary looks, short and slight, a round head with a very short black buzz cut, big ears sticking out, thick straight eyebrows, a navy company work jacket half zipped over a white collared shirt, sleeves pushed up, at work in a Japanese office, the company lanyard with an ID card around his neck, a boxed computer keyboard tucked under his left arm, a green bottle of melon soda in his right hand, bright cheerful smile, eyes creased, waist-up portrait facing the viewer at a slight angle, (the whole head inside the frame with empty space above the hair:1.2), plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, fat, obese, plump, rim light, red rim light, backlighting, mature male, old man, middle-aged, stubble, facial hair, beard, moustache, square jaw, manly, handsome, bishounen, muscular, athletic, muscles, pectorals, abs, bodybuilder, broad shoulders, shota, glasses, headphones, hat, costume, tall",
+  "seed": 762,
+  "w": 896,
+  "h": 1152,
+  "steps": 30,
+  "cfg": 5,
+  "sampler": "euler_ancestral normal",
+  "frame_warn": []
+ },
+ "kenji2-e-buzz-full-761": {
+  "model": "rdbtAnima",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, adult, Kenji, a 21-year-old fresh graduate, a young adult man with a youthful boyish face, smooth young skin, big eyes, not handsome, plain ordinary looks, short and slight, a round head with a very short black buzz cut, big ears sticking out, thick straight eyebrows, a navy company work jacket half zipped over a white collared shirt, sleeves pushed up, at work in a Japanese office, the company lanyard with an ID card around his neck, a boxed computer keyboard tucked under his left arm, a green bottle of melon soda in his right hand, bright cheerful smile, eyes creased, full body standing, feet and shoes visible, facing the viewer at a slight angle, (the whole figure inside the frame with empty space above the head:1.2), plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, fat, obese, plump, rim light, red rim light, backlighting, mature male, old man, middle-aged, stubble, facial hair, beard, moustache, square jaw, manly, handsome, bishounen, muscular, athletic, muscles, pectorals, abs, bodybuilder, broad shoulders, shota, glasses, headphones, hat, costume, tall",
+  "seed": 761,
+  "w": 896,
+  "h": 1152,
+  "steps": 30,
+  "cfg": 5,
+  "sampler": "euler_ancestral normal",
+  "frame_warn": []
+ },
+ "kenji2-c2-pudgy-761": {
+  "model": "rdbtAnima",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, adult, Kenji, a 21-year-old fresh graduate, a young adult man with a youthful boyish face, smooth young skin, big eyes, not handsome, plain ordinary looks, short and pudgy with a soft round tummy and a round chubby face, thick eyebrows, grown-out light brown dyed hair with black roots, short and tousled, a white short-sleeved work shirt with a dark tie tucked into the shirt between two buttons, at work in a Japanese office, the company lanyard with an ID card around his neck, a yellow sticky note stuck on his sleeve, a snack wrapper poking out of his breast pocket, holding a screwdriver up in his right hand, big grin with a gap between his front teeth, waist-up portrait facing the viewer at a slight angle, (the whole head inside the frame with empty space above the hair:1.2), plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, nude, nsfw, child, loli, fat, obese, rim light, red rim light, backlighting, mature male, old man, middle-aged, stubble, facial hair, beard, moustache, square jaw, manly, handsome, bishounen, muscular, athletic, muscles, pectorals, abs, bodybuilder, broad shoulders, shota, glasses, headphones, hat, costume, tall",
+  "seed": 761,
+  "w": 896,
+  "h": 1152,
+  "steps": 30,
+  "cfg": 5,
+  "sampler": "euler_ancestral normal",
+  "frame_warn": [
+   "head/hair 25px from the top edge (want >= 34)",
+   "figure touches the right edge (2% of it)"
+  ]
+ },
+ "kenji2-c2-pudgy-762": {
+  "model": "rdbtAnima",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, adult, Kenji, a 21-year-old fresh graduate, a young adult man with a youthful boyish face, smooth young skin, big eyes, not handsome, plain ordinary looks, short and pudgy with a soft round tummy and a round chubby face, thick eyebrows, grown-out light brown dyed hair with black roots, short and tousled, a white short-sleeved work shirt with a dark tie tucked into the shirt between two buttons, at work in a Japanese office, the company lanyard with an ID card around his neck, a yellow sticky note stuck on his sleeve, a snack wrapper poking out of his breast pocket, holding a screwdriver up in his right hand, big grin with a gap between his front teeth, waist-up portrait facing the viewer at a slight angle, (the whole head inside the frame with empty space above the hair:1.2), plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, nude, nsfw, child, loli, fat, obese, rim light, red rim light, backlighting, mature male, old man, middle-aged, stubble, facial hair, beard, moustache, square jaw, manly, handsome, bishounen, muscular, athletic, muscles, pectorals, abs, bodybuilder, broad shoulders, shota, glasses, headphones, hat, costume, tall",
+  "seed": 762,
+  "w": 896,
+  "h": 1152,
+  "steps": 30,
+  "cfg": 5,
+  "sampler": "euler_ancestral normal",
+  "frame_warn": []
+ },
+ "kenji2-c2-pudgy-full-761": {
+  "model": "rdbtAnima",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, adult, Kenji, a 21-year-old fresh graduate, a young adult man with a youthful boyish face, smooth young skin, big eyes, not handsome, plain ordinary looks, short and pudgy with a soft round tummy and a round chubby face, thick eyebrows, grown-out light brown dyed hair with black roots, short and tousled, a white short-sleeved work shirt with a dark tie tucked into the shirt between two buttons, at work in a Japanese office, the company lanyard with an ID card around his neck, a yellow sticky note stuck on his sleeve, a snack wrapper poking out of his breast pocket, holding a screwdriver up in his right hand, big grin with a gap between his front teeth, full body standing, feet and shoes visible, facing the viewer at a slight angle, (the whole figure inside the frame with empty space above the head:1.2), plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, nude, nsfw, child, loli, fat, obese, rim light, red rim light, backlighting, mature male, old man, middle-aged, stubble, facial hair, beard, moustache, square jaw, manly, handsome, bishounen, muscular, athletic, muscles, pectorals, abs, bodybuilder, broad shoulders, shota, glasses, headphones, hat, costume, tall",
+  "seed": 761,
+  "w": 896,
+  "h": 1152,
+  "steps": 30,
+  "cfg": 5,
+  "sampler": "euler_ancestral normal",
+  "frame_warn": []
+ },
+ "kenji2-e2-babyface-761": {
+  "model": "rdbtAnima",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, adult, Kenji, a 21-year-old fresh graduate, a young adult man with a youthful boyish face, smooth young skin, big eyes, not handsome, plain ordinary looks, short and slight, a round baby face with soft full cheeks, a very short black buzz cut, big ears sticking out, thick straight eyebrows, a navy company work jacket half zipped over a white collared shirt, sleeves pushed up, at work in a Japanese office, the company lanyard with an ID card around his neck, a boxed computer keyboard tucked under his left arm, a green bottle of melon soda in his right hand, bright cheerful smile, eyes creased, waist-up portrait facing the viewer at a slight angle, (the whole head inside the frame with empty space above the hair:1.2), plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, fat, obese, plump, rim light, red rim light, backlighting, mature male, old man, middle-aged, stubble, facial hair, beard, moustache, square jaw, manly, handsome, bishounen, muscular, athletic, muscles, pectorals, abs, bodybuilder, broad shoulders, shota, glasses, headphones, hat, costume, tall",
+  "seed": 761,
+  "w": 896,
+  "h": 1152,
+  "steps": 30,
+  "cfg": 5,
+  "sampler": "euler_ancestral normal",
+  "frame_warn": []
+ },
+ "kenji2-e2-babyface-762": {
+  "model": "rdbtAnima",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, adult, Kenji, a 21-year-old fresh graduate, a young adult man with a youthful boyish face, smooth young skin, big eyes, not handsome, plain ordinary looks, short and slight, a round baby face with soft full cheeks, a very short black buzz cut, big ears sticking out, thick straight eyebrows, a navy company work jacket half zipped over a white collared shirt, sleeves pushed up, at work in a Japanese office, the company lanyard with an ID card around his neck, a boxed computer keyboard tucked under his left arm, a green bottle of melon soda in his right hand, bright cheerful smile, eyes creased, waist-up portrait facing the viewer at a slight angle, (the whole head inside the frame with empty space above the hair:1.2), plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, fat, obese, plump, rim light, red rim light, backlighting, mature male, old man, middle-aged, stubble, facial hair, beard, moustache, square jaw, manly, handsome, bishounen, muscular, athletic, muscles, pectorals, abs, bodybuilder, broad shoulders, shota, glasses, headphones, hat, costume, tall",
+  "seed": 762,
+  "w": 896,
+  "h": 1152,
+  "steps": 30,
+  "cfg": 5,
+  "sampler": "euler_ancestral normal",
+  "frame_warn": []
+ },
+ "kenji2-e2-babyface-full-761": {
+  "model": "rdbtAnima",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, adult, Kenji, a 21-year-old fresh graduate, a young adult man with a youthful boyish face, smooth young skin, big eyes, not handsome, plain ordinary looks, short and slight, a round baby face with soft full cheeks, a very short black buzz cut, big ears sticking out, thick straight eyebrows, a navy company work jacket half zipped over a white collared shirt, sleeves pushed up, at work in a Japanese office, the company lanyard with an ID card around his neck, a boxed computer keyboard tucked under his left arm, a green bottle of melon soda in his right hand, bright cheerful smile, eyes creased, full body standing, feet and shoes visible, facing the viewer at a slight angle, (the whole figure inside the frame with empty space above the head:1.2), plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, fat, obese, plump, rim light, red rim light, backlighting, mature male, old man, middle-aged, stubble, facial hair, beard, moustache, square jaw, manly, handsome, bishounen, muscular, athletic, muscles, pectorals, abs, bodybuilder, broad shoulders, shota, glasses, headphones, hat, costume, tall",
+  "seed": 761,
+  "w": 896,
+  "h": 1152,
+  "steps": 30,
+  "cfg": 5,
+  "sampler": "euler_ancestral normal",
+  "frame_warn": []
+ },
+ "kenji2-e2-babyface-763": {
+  "model": "rdbtAnima",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, adult, Kenji, a 21-year-old fresh graduate, a young adult man with a youthful boyish face, smooth young skin, big eyes, not handsome, plain ordinary looks, short and slight, a round baby face with soft full cheeks, a very short black buzz cut, big ears sticking out, thick straight eyebrows, a navy company work jacket half zipped over a white collared shirt, sleeves pushed up, at work in a Japanese office, the company lanyard with an ID card around his neck, a boxed computer keyboard tucked under his left arm, a green bottle of melon soda in his right hand, bright cheerful smile, eyes creased, waist-up portrait facing the viewer at a slight angle, (the whole head inside the frame with empty space above the hair:1.2), plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, fat, obese, plump, rim light, red rim light, backlighting, mature male, old man, middle-aged, stubble, facial hair, beard, moustache, square jaw, manly, handsome, bishounen, muscular, athletic, muscles, pectorals, abs, bodybuilder, broad shoulders, shota, glasses, headphones, hat, costume, tall",
+  "seed": 763,
+  "w": 896,
+  "h": 1152,
+  "steps": 30,
+  "cfg": 5,
+  "sampler": "euler_ancestral normal",
+  "frame_warn": []
+ },
+ "kenji2-e2-babyface-764": {
+  "model": "rdbtAnima",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, adult, Kenji, a 21-year-old fresh graduate, a young adult man with a youthful boyish face, smooth young skin, big eyes, not handsome, plain ordinary looks, short and slight, a round baby face with soft full cheeks, a very short black buzz cut, big ears sticking out, thick straight eyebrows, a navy company work jacket half zipped over a white collared shirt, sleeves pushed up, at work in a Japanese office, the company lanyard with an ID card around his neck, a boxed computer keyboard tucked under his left arm, a green bottle of melon soda in his right hand, bright cheerful smile, eyes creased, waist-up portrait facing the viewer at a slight angle, (the whole head inside the frame with empty space above the hair:1.2), plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, fat, obese, plump, rim light, red rim light, backlighting, mature male, old man, middle-aged, stubble, facial hair, beard, moustache, square jaw, manly, handsome, bishounen, muscular, athletic, muscles, pectorals, abs, bodybuilder, broad shoulders, shota, glasses, headphones, hat, costume, tall",
+  "seed": 764,
+  "w": 896,
+  "h": 1152,
+  "steps": 30,
+  "cfg": 5,
+  "sampler": "euler_ancestral normal",
+  "frame_warn": []
+ },
+ "kenji2-e2-babyface-full-763": {
+  "model": "rdbtAnima",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, adult, Kenji, a 21-year-old fresh graduate, a young adult man with a youthful boyish face, smooth young skin, big eyes, not handsome, plain ordinary looks, short and slight, a round baby face with soft full cheeks, a very short black buzz cut, big ears sticking out, thick straight eyebrows, a navy company work jacket half zipped over a white collared shirt, sleeves pushed up, at work in a Japanese office, the company lanyard with an ID card around his neck, a boxed computer keyboard tucked under his left arm, a green bottle of melon soda in his right hand, bright cheerful smile, eyes creased, full body standing, feet and shoes visible, facing the viewer at a slight angle, (the whole figure inside the frame with empty space above the head:1.2), plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, fat, obese, plump, rim light, red rim light, backlighting, mature male, old man, middle-aged, stubble, facial hair, beard, moustache, square jaw, manly, handsome, bishounen, muscular, athletic, muscles, pectorals, abs, bodybuilder, broad shoulders, shota, glasses, headphones, hat, costume, tall",
+  "seed": 763,
+  "w": 896,
+  "h": 1152,
+  "steps": 30,
+  "cfg": 5,
+  "sampler": "euler_ancestral normal",
+  "frame_warn": []
+ },
+ "kenji2-e3-fringe-761": {
+  "model": "rdbtAnima",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, adult, Kenji, a 21-year-old fresh graduate, a young adult man with a youthful boyish face, smooth young skin, big eyes, not handsome, plain ordinary looks, short and slight, a round baby face with soft full cheeks, short soft black hair with a blunt straight fringe, big ears sticking out, thick straight eyebrows, a navy company work jacket half zipped over a white collared shirt, sleeves pushed up, at work in a Japanese office, the company lanyard with an ID card around his neck, a boxed computer keyboard tucked under his left arm, a green bottle of melon soda in his right hand, bright cheerful smile, eyes creased, waist-up portrait facing the viewer at a slight angle, (the whole head inside the frame with empty space above the hair:1.2), plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, fat, obese, plump, rim light, red rim light, backlighting, mature male, old man, middle-aged, stubble, facial hair, beard, moustache, square jaw, manly, handsome, bishounen, muscular, athletic, muscles, pectorals, abs, bodybuilder, broad shoulders, shota, glasses, headphones, hat, costume, tall",
+  "seed": 761,
+  "w": 896,
+  "h": 1152,
+  "steps": 30,
+  "cfg": 5,
+  "sampler": "euler_ancestral normal",
+  "frame_warn": []
+ },
+ "kenji2-e3-fringe-762": {
+  "model": "rdbtAnima",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, adult, Kenji, a 21-year-old fresh graduate, a young adult man with a youthful boyish face, smooth young skin, big eyes, not handsome, plain ordinary looks, short and slight, a round baby face with soft full cheeks, short soft black hair with a blunt straight fringe, big ears sticking out, thick straight eyebrows, a navy company work jacket half zipped over a white collared shirt, sleeves pushed up, at work in a Japanese office, the company lanyard with an ID card around his neck, a boxed computer keyboard tucked under his left arm, a green bottle of melon soda in his right hand, bright cheerful smile, eyes creased, waist-up portrait facing the viewer at a slight angle, (the whole head inside the frame with empty space above the hair:1.2), plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, fat, obese, plump, rim light, red rim light, backlighting, mature male, old man, middle-aged, stubble, facial hair, beard, moustache, square jaw, manly, handsome, bishounen, muscular, athletic, muscles, pectorals, abs, bodybuilder, broad shoulders, shota, glasses, headphones, hat, costume, tall",
+  "seed": 762,
+  "w": 896,
+  "h": 1152,
+  "steps": 30,
+  "cfg": 5,
+  "sampler": "euler_ancestral normal",
+  "frame_warn": []
+ },
+ "kenji2-e3-fringe-full-761": {
+  "model": "rdbtAnima",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, adult, Kenji, a 21-year-old fresh graduate, a young adult man with a youthful boyish face, smooth young skin, big eyes, not handsome, plain ordinary looks, short and slight, a round baby face with soft full cheeks, short soft black hair with a blunt straight fringe, big ears sticking out, thick straight eyebrows, a navy company work jacket half zipped over a white collared shirt, sleeves pushed up, at work in a Japanese office, the company lanyard with an ID card around his neck, a boxed computer keyboard tucked under his left arm, a green bottle of melon soda in his right hand, bright cheerful smile, eyes creased, full body standing, feet and shoes visible, facing the viewer at a slight angle, (the whole figure inside the frame with empty space above the head:1.2), plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, fat, obese, plump, rim light, red rim light, backlighting, mature male, old man, middle-aged, stubble, facial hair, beard, moustache, square jaw, manly, handsome, bishounen, muscular, athletic, muscles, pectorals, abs, bodybuilder, broad shoulders, shota, glasses, headphones, hat, costume, tall",
+  "seed": 761,
+  "w": 896,
+  "h": 1152,
+  "steps": 30,
+  "cfg": 5,
+  "sampler": "euler_ancestral normal",
+  "frame_warn": []
+ }
+}
