@@ -1,0 +1,319 @@
+[
+ {
+  "file": "../../../../tmp/claude-1000/eric-oldstyle/base-derim-hood-841.png",
+  "kind": "hood edge repaint",
+  "base": "../../../../tmp/claude-1000/eric-oldstyle/base-derim.png",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, close-up of the shoulder of a man, a navy blazer over a grey hoodie with the hood down, flat even studio light, plain light grey background",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, fat, obese, plump, closed eyes, rim light, red rim light, backlighting",
+  "seed": 841,
+  "denoise": 0.5,
+  "crop": [
+   560,
+   540,
+   800,
+   780
+  ]
+ },
+ {
+  "file": "../../../../tmp/claude-1000/eric-oldstyle/base-derim-hood-843.png",
+  "kind": "hood edge repaint",
+  "base": "../../../../tmp/claude-1000/eric-oldstyle/base-derim.png",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, close-up of the shoulder of a man, a navy blazer over a dark slate-blue hoodie with the hood down, flat even studio light, plain light grey background",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, fat, obese, plump, closed eyes, rim light, red rim light, backlighting",
+  "seed": 843,
+  "denoise": 0.5,
+  "crop": [
+   560,
+   540,
+   800,
+   780
+  ]
+ },
+ {
+  "file": "../../../../tmp/claude-1000/eric-oldstyle/base-derim-hood-842.png",
+  "kind": "hood edge repaint",
+  "base": "../../../../tmp/claude-1000/eric-oldstyle/base-derim.png",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, close-up of the shoulder of a man, a navy blazer over a dark slate-blue hoodie with the hood down, flat even studio light, plain light grey background",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, fat, obese, plump, closed eyes, rim light, red rim light, backlighting",
+  "seed": 842,
+  "denoise": 0.5,
+  "crop": [
+   560,
+   540,
+   800,
+   780
+  ]
+ },
+ {
+  "file": "../../../../tmp/claude-1000/eric-oldstyle/eric-old-neutral-d60-831-raw.png",
+  "kind": "expression",
+  "base": "../../../../tmp/claude-1000/eric-oldstyle/base-derim-hood-842.png",
+  "expression": "neutral",
+  "model": "rdbtAnima (face-only masked img2img, DifferentialDiffusion)",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, Eric, a 34-year-old Scandinavian man, short dark-blond hair, short dark-blond beard, fair pale skin, glasses with clear lenses, blue eyes, calm neutral expression, eyes open looking at the viewer, mouth closed, close-up of his face, plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, fat, obese, plump, closed eyes, rim light, red rim light, backlighting",
+  "seed": 831,
+  "denoise": 0.6,
+  "face_box": [
+   390,
+   322,
+   674,
+   642
+  ]
+ },
+ {
+  "file": "../../../../tmp/claude-1000/eric-oldstyle/eric-old-neutral-d60-832-raw.png",
+  "kind": "expression",
+  "base": "../../../../tmp/claude-1000/eric-oldstyle/base-derim-hood-842.png",
+  "expression": "neutral",
+  "model": "rdbtAnima (face-only masked img2img, DifferentialDiffusion)",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, Eric, a 34-year-old Scandinavian man, short dark-blond hair, short dark-blond beard, fair pale skin, glasses with clear lenses, blue eyes, calm neutral expression, eyes open looking at the viewer, mouth closed, close-up of his face, plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, fat, obese, plump, closed eyes, rim light, red rim light, backlighting",
+  "seed": 832,
+  "denoise": 0.6,
+  "face_box": [
+   390,
+   322,
+   674,
+   642
+  ]
+ },
+ {
+  "file": "../../../../tmp/claude-1000/eric-oldstyle/eric-old-neutral-d60-833-raw.png",
+  "kind": "expression",
+  "base": "../../../../tmp/claude-1000/eric-oldstyle/base-derim-hood-842.png",
+  "expression": "neutral",
+  "model": "rdbtAnima (face-only masked img2img, DifferentialDiffusion)",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, Eric, a 34-year-old Scandinavian man, short dark-blond hair, short dark-blond beard, fair pale skin, glasses with clear lenses, blue eyes, calm neutral expression, eyes open looking at the viewer, mouth closed, close-up of his face, plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, fat, obese, plump, closed eyes, rim light, red rim light, backlighting",
+  "seed": 833,
+  "denoise": 0.6,
+  "face_box": [
+   390,
+   322,
+   674,
+   642
+  ]
+ },
+ {
+  "file": "../../../../tmp/claude-1000/eric-oldstyle/eric-old-neutral-d60-834-raw.png",
+  "kind": "expression",
+  "base": "../../../../tmp/claude-1000/eric-oldstyle/base-derim-hood-842.png",
+  "expression": "neutral",
+  "model": "rdbtAnima (face-only masked img2img, DifferentialDiffusion)",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, Eric, a 34-year-old Scandinavian man, short dark-blond hair, short dark-blond beard, fair pale skin, glasses with clear lenses, blue eyes, calm neutral expression, eyes open looking at the viewer, mouth closed, close-up of his face, plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, fat, obese, plump, closed eyes, rim light, red rim light, backlighting",
+  "seed": 834,
+  "denoise": 0.6,
+  "face_box": [
+   390,
+   322,
+   674,
+   642
+  ]
+ },
+ {
+  "file": "../../../../tmp/claude-1000/eric-oldstyle/eric-old-neutral-831-raw.png",
+  "kind": "expression",
+  "base": "../../../../tmp/claude-1000/eric-oldstyle/base-derim-hood-842.png",
+  "expression": "neutral",
+  "model": "rdbtAnima (face-only masked img2img, DifferentialDiffusion)",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, Eric, a 34-year-old Scandinavian man, short dark-blond hair, short dark-blond beard, fair pale skin, glasses with clear lenses, blue eyes, calm neutral expression, eyes open looking at the viewer, mouth closed, close-up of his face, plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, fat, obese, plump, closed eyes, rim light, red rim light, backlighting",
+  "seed": 831,
+  "denoise": 0.72,
+  "face_box": [
+   390,
+   322,
+   674,
+   642
+  ]
+ },
+ {
+  "file": "../../../../tmp/claude-1000/eric-oldstyle/eric-old-neutral-832-raw.png",
+  "kind": "expression",
+  "base": "../../../../tmp/claude-1000/eric-oldstyle/base-derim-hood-842.png",
+  "expression": "neutral",
+  "model": "rdbtAnima (face-only masked img2img, DifferentialDiffusion)",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, Eric, a 34-year-old Scandinavian man, short dark-blond hair, short dark-blond beard, fair pale skin, glasses with clear lenses, blue eyes, calm neutral expression, eyes open looking at the viewer, mouth closed, close-up of his face, plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, fat, obese, plump, closed eyes, rim light, red rim light, backlighting",
+  "seed": 832,
+  "denoise": 0.72,
+  "face_box": [
+   390,
+   322,
+   674,
+   642
+  ]
+ },
+ {
+  "file": "../../../../tmp/claude-1000/eric-oldstyle/eric-old-neutral-833-raw.png",
+  "kind": "expression",
+  "base": "../../../../tmp/claude-1000/eric-oldstyle/base-derim-hood-842.png",
+  "expression": "neutral",
+  "model": "rdbtAnima (face-only masked img2img, DifferentialDiffusion)",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, Eric, a 34-year-old Scandinavian man, short dark-blond hair, short dark-blond beard, fair pale skin, glasses with clear lenses, blue eyes, calm neutral expression, eyes open looking at the viewer, mouth closed, close-up of his face, plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, fat, obese, plump, closed eyes, rim light, red rim light, backlighting",
+  "seed": 833,
+  "denoise": 0.72,
+  "face_box": [
+   390,
+   322,
+   674,
+   642
+  ]
+ },
+ {
+  "file": "../../../../tmp/claude-1000/eric-oldstyle/eric-old-neutral-834-raw.png",
+  "kind": "expression",
+  "base": "../../../../tmp/claude-1000/eric-oldstyle/base-derim-hood-842.png",
+  "expression": "neutral",
+  "model": "rdbtAnima (face-only masked img2img, DifferentialDiffusion)",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, Eric, a 34-year-old Scandinavian man, short dark-blond hair, short dark-blond beard, fair pale skin, glasses with clear lenses, blue eyes, calm neutral expression, eyes open looking at the viewer, mouth closed, close-up of his face, plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, fat, obese, plump, closed eyes, rim light, red rim light, backlighting",
+  "seed": 834,
+  "denoise": 0.72,
+  "face_box": [
+   390,
+   322,
+   674,
+   642
+  ]
+ },
+ {
+  "file": "../../../../tmp/claude-1000/eric-oldstyle/eric-old-surprised-831-raw.png",
+  "kind": "expression",
+  "base": "../../../../tmp/claude-1000/eric-oldstyle/base-derim-hood-842.png",
+  "expression": "surprised",
+  "model": "rdbtAnima (face-only masked img2img, DifferentialDiffusion)",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, Eric, a 34-year-old Scandinavian man, short dark-blond hair, short dark-blond beard, fair pale skin, glasses with clear lenses, blue eyes, surprised, eyes wide open, eyebrows raised, mouth slightly open, close-up of his face, plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, fat, obese, plump, closed eyes, rim light, red rim light, backlighting",
+  "seed": 831,
+  "denoise": 0.72,
+  "face_box": [
+   390,
+   322,
+   674,
+   642
+  ]
+ },
+ {
+  "file": "../../../../tmp/claude-1000/eric-oldstyle/eric-old-surprised-832-raw.png",
+  "kind": "expression",
+  "base": "../../../../tmp/claude-1000/eric-oldstyle/base-derim-hood-842.png",
+  "expression": "surprised",
+  "model": "rdbtAnima (face-only masked img2img, DifferentialDiffusion)",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, Eric, a 34-year-old Scandinavian man, short dark-blond hair, short dark-blond beard, fair pale skin, glasses with clear lenses, blue eyes, surprised, eyes wide open, eyebrows raised, mouth slightly open, close-up of his face, plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, fat, obese, plump, closed eyes, rim light, red rim light, backlighting",
+  "seed": 832,
+  "denoise": 0.72,
+  "face_box": [
+   390,
+   322,
+   674,
+   642
+  ]
+ },
+ {
+  "file": "../../../../tmp/claude-1000/eric-oldstyle/eric-old-surprised-833-raw.png",
+  "kind": "expression",
+  "base": "../../../../tmp/claude-1000/eric-oldstyle/base-derim-hood-842.png",
+  "expression": "surprised",
+  "model": "rdbtAnima (face-only masked img2img, DifferentialDiffusion)",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, Eric, a 34-year-old Scandinavian man, short dark-blond hair, short dark-blond beard, fair pale skin, glasses with clear lenses, blue eyes, surprised, eyes wide open, eyebrows raised, mouth slightly open, close-up of his face, plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, fat, obese, plump, closed eyes, rim light, red rim light, backlighting",
+  "seed": 833,
+  "denoise": 0.72,
+  "face_box": [
+   390,
+   322,
+   674,
+   642
+  ]
+ },
+ {
+  "file": "../../../../tmp/claude-1000/eric-oldstyle/eric-old-surprised-834-raw.png",
+  "kind": "expression",
+  "base": "../../../../tmp/claude-1000/eric-oldstyle/base-derim-hood-842.png",
+  "expression": "surprised",
+  "model": "rdbtAnima (face-only masked img2img, DifferentialDiffusion)",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, Eric, a 34-year-old Scandinavian man, short dark-blond hair, short dark-blond beard, fair pale skin, glasses with clear lenses, blue eyes, surprised, eyes wide open, eyebrows raised, mouth slightly open, close-up of his face, plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, fat, obese, plump, closed eyes, rim light, red rim light, backlighting",
+  "seed": 834,
+  "denoise": 0.72,
+  "face_box": [
+   390,
+   322,
+   674,
+   642
+  ]
+ },
+ {
+  "file": "../../../../tmp/claude-1000/eric-oldstyle/eric-old-tired-831-raw.png",
+  "kind": "expression",
+  "base": "../../../../tmp/claude-1000/eric-oldstyle/base-derim-hood-842.png",
+  "expression": "tired",
+  "model": "rdbtAnima (face-only masked img2img, DifferentialDiffusion)",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, Eric, a 34-year-old Scandinavian man, short dark-blond hair, short dark-blond beard, fair pale skin, glasses with clear lenses, blue eyes, weary tired expression, half-lidded eyes looking at the viewer, mouth a flat line with slightly drooping corners, no smile, close-up of his face, plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, fat, obese, plump, closed eyes, rim light, red rim light, backlighting, smile, smiling, grin, blush, flushed cheeks, drunk",
+  "seed": 831,
+  "denoise": 0.72,
+  "face_box": [
+   390,
+   322,
+   674,
+   642
+  ]
+ },
+ {
+  "file": "../../../../tmp/claude-1000/eric-oldstyle/eric-old-tired-832-raw.png",
+  "kind": "expression",
+  "base": "../../../../tmp/claude-1000/eric-oldstyle/base-derim-hood-842.png",
+  "expression": "tired",
+  "model": "rdbtAnima (face-only masked img2img, DifferentialDiffusion)",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, Eric, a 34-year-old Scandinavian man, short dark-blond hair, short dark-blond beard, fair pale skin, glasses with clear lenses, blue eyes, weary tired expression, half-lidded eyes looking at the viewer, mouth a flat line with slightly drooping corners, no smile, close-up of his face, plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, fat, obese, plump, closed eyes, rim light, red rim light, backlighting, smile, smiling, grin, blush, flushed cheeks, drunk",
+  "seed": 832,
+  "denoise": 0.72,
+  "face_box": [
+   390,
+   322,
+   674,
+   642
+  ]
+ },
+ {
+  "file": "../../../../tmp/claude-1000/eric-oldstyle/eric-old-tired-833-raw.png",
+  "kind": "expression",
+  "base": "../../../../tmp/claude-1000/eric-oldstyle/base-derim-hood-842.png",
+  "expression": "tired",
+  "model": "rdbtAnima (face-only masked img2img, DifferentialDiffusion)",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, Eric, a 34-year-old Scandinavian man, short dark-blond hair, short dark-blond beard, fair pale skin, glasses with clear lenses, blue eyes, weary tired expression, half-lidded eyes looking at the viewer, mouth a flat line with slightly drooping corners, no smile, close-up of his face, plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, fat, obese, plump, closed eyes, rim light, red rim light, backlighting, smile, smiling, grin, blush, flushed cheeks, drunk",
+  "seed": 833,
+  "denoise": 0.72,
+  "face_box": [
+   390,
+   322,
+   674,
+   642
+  ]
+ },
+ {
+  "file": "../../../../tmp/claude-1000/eric-oldstyle/eric-old-tired-834-raw.png",
+  "kind": "expression",
+  "base": "../../../../tmp/claude-1000/eric-oldstyle/base-derim-hood-842.png",
+  "expression": "tired",
+  "model": "rdbtAnima (face-only masked img2img, DifferentialDiffusion)",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, Eric, a 34-year-old Scandinavian man, short dark-blond hair, short dark-blond beard, fair pale skin, glasses with clear lenses, blue eyes, weary tired expression, half-lidded eyes looking at the viewer, mouth a flat line with slightly drooping corners, no smile, close-up of his face, plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, fat, obese, plump, closed eyes, rim light, red rim light, backlighting, smile, smiling, grin, blush, flushed cheeks, drunk",
+  "seed": 834,
+  "denoise": 0.72,
+  "face_box": [
+   390,
+   322,
+   674,
+   642
+  ]
+ }
+]
