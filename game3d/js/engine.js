@@ -256,7 +256,7 @@ export class Markers {
       m.el.classList.toggle('goal', isGoal);
       // only nearby things and the current goal show a marker, so the room isn't covered in dots
       const s = m.spot ? m.spot() : null;
-      const far = !isGoal && s && playerPos && Math.hypot(playerPos.x - s[0], playerPos.z - s[1]) > (/person/.test(m.kind || '') && !/small/.test(m.kind || '') ? 3.2 : 1.9);
+      const far = !isGoal && s && playerPos && Math.hypot(playerPos.x - s[0], playerPos.z - s[1]) > (/person/.test(m.kind || '') && !/small/.test(m.kind || '') ? 2.1 : 1.4);
       m.el.classList.toggle('far', !!far);
       void on;
     }

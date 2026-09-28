@@ -48,18 +48,18 @@ export async function lobbyPlace(game) {
 
   // ---- commuters: walk in, tap a reader, pass the arch, take a lift ----
   const commuters = [];
-  [0, 1, 2, 0].forEach((k, i) => {
+  [0, 1, 2, 0, 1, 2, 0].forEach((k, i) => {
     const r = PEOPLE.worker(k); r.root.scale.multiplyScalar(K);
     if (i === 2) { const box = rbox(0.2, 0.12, 0.2, '#f4efe6', { y: -0.3, z: 0.05, r: 0.01 }); box.add(rbox(0.21, 0.02, 0.05, '#d9534f', { y: 0.11, r: 0.004 })); r.arms[1].add(box); }
     w.root.add(r.root); r.root.visible = false;
     const b = blob(0.5, 0.35); w.root.add(b); b.visible = false;
-    commuters.push({ r, b, t: -2 - i * 4.5, side: i % 2 ? 1 : -1, stage: 'wait', ph: 0 });
+    commuters.push({ r, b, t: 1 - i * 2.6, side: i % 2 ? 1 : -1, stage: 'wait', ph: 0 });
   });
   function stepCommuter(c, dt) {
     const r = c.r, p = r.root.position;
     c.t += dt;
     if (c.stage === 'wait') {
-      if (c.t > 0 && st.rush && !st.jam && !game.busyTrip) { c.stage = 'in'; r.root.visible = true; c.b.visible = true; p.set(c.side * 0.45 + (Math.random() - 0.5) * 0.3, 0, Z + 1.6); c.path = [[c.side * 0.35, Z - 0.8], [c.side * 0.93, BZ + 0.5]]; }
+      if (c.t > 0 && st.rush && !st.jam && !game.busyTrip) { c.stage = 'in'; r.root.visible = true; c.b.visible = true; p.set(c.side * (1.0 + Math.random() * 0.4), 0, Z + 1.6); c.path = [[c.side * (1.0 + Math.random() * 0.3), Z - 0.9], [c.side * 0.93, BZ + 0.55]]; }
       return;
     }
     const moveTo = (tx, tz, sp = 1.25) => {
@@ -82,9 +82,16 @@ export async function lobbyPlace(game) {
       if (moveTo(...c.path[0])) { c.path.shift(); if (!c.path.length) { c.stage = 'enter'; c.t = 0; } }
       return;
     }
-    if (c.stage === 'enter') { if (moveTo(c.side * 1.0, -Z - 0.2, 1.0)) { r.root.visible = false; c.b.visible = false; w.lifts[c.side > 0 ? 1 : 0].want = 0; c.stage = 'wait'; c.t = -8 - Math.random() * 6; } }
+    if (c.stage === 'enter') { if (moveTo(c.side * 1.0, -Z - 0.2, 1.0)) { r.root.visible = false; c.b.visible = false; w.lifts[c.side > 0 ? 1 : 0].want = 0; c.stage = 'wait'; c.t = -4 - Math.random() * 5; } }
   }
 
+  // background people who aren't going anywhere yet
+  const extras = [];
+  for (const [k, x, z, ry] of [[1, -3.5, -2.9, 0.9], [2, -2.95, -2.6, -2.2], [0, 5.0, 3.0, Math.PI / 2]]) {
+    const r = PEOPLE.worker(k); r.root.scale.multiplyScalar(K); r.root.position.set(x, 0, z); r.root.rotation.y = ry; w.root.add(r.root);
+    const b = blob(0.5, 0.35); b.position.set(x, 0.004, z); w.root.add(b); extras.push(r);
+    w.nav.block(x - 0.2, x + 0.2, z - 0.2, z + 0.2);
+  }
   // ---- gate ----
   function readerFlash(i, state, quiet) {
     w.readers[i].userData.set(state === 'green' ? 'ok' : state === 'red' ? 'no' : 'idle');
@@ -181,6 +188,7 @@ export async function lobbyPlace(game) {
       w.update(t);
       stepPeople([w.aoi, w.man, w.guard, rei], dt);
       for (const c of commuters) stepCommuter(c, dt);
+      for (const [i, r] of extras.entries()) { idle(r, t + i); r.head.rotation.y = Math.sin(t * 0.7 + i * 2) * 0.35; if (i < 2) r.arms[i].rotation.x = -0.3 - Math.max(0, Math.sin(t * 2 + i)) * 0.4; }
       if (openTimer > 0) { openTimer -= dt; if (openTimer <= 0 && !st.gateOpen) st.flapWant = 0; }
       const jit = st.jam ? Math.abs(Math.sin(t * 38)) * 0.07 * (Math.sin(t * 2.5) > 0.3 ? 1 : 0) : 0;
       st.flap += (st.flapWant - st.flap) * Math.min(1, dt * (st.slam ? 10 : 5));

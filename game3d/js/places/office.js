@@ -21,13 +21,13 @@ export async function officePlace(game) {
   const rei = PEOPLE.rei(); rei.root.scale.multiplyScalar(K); rei.root.visible = false; rei.root.position.set(-5.45, 0, -3.25); w.root.add(rei.root);
   const reiBlob = blob(0.55, 0.38); reiBlob.visible = false; w.root.add(reiBlob); rei.blob = reiBlob;
   const people = { emi: w.emi, kenji: w.kenji, mori: w.mori, aoi, rei, tama: { root: w.tama, head: w.tama.userData.head } };
-  const blobs = { emi: w.emiBlob, aoi: aoiBlob, rei: reiBlob, mori: moriBlob };
+  const blobs = { emi: w.emiBlob, aoi: aoiBlob, rei: reiBlob };
   // a steam puff for the kettle and a blinking light on the racks
   const steam = new THREE.Mesh(new THREE.SphereGeometry(0.06, 8, 6), new THREE.MeshBasicMaterial({ color: '#ffffff', transparent: true, opacity: 0 })); steam.position.set(1.45, 0.75, CS + 0.36); w.root.add(steam);
   const alarm = new THREE.Mesh(new THREE.SphereGeometry(0.05, 10, 8), new THREE.MeshBasicMaterial({ color: '#ff5a4a' })); alarm.position.set(5.2, 1.4, -3.3); alarm.visible = false; w.root.add(alarm);
   const dS1 = w.dS(1), dS0 = w.dS(0);
   { const r = w.mori; r.seated = false; r.root.position.set(-5.2, 0, -1.9); r.root.rotation.y = Math.PI; for (const l of r.legs) l.rotation.set(0, 0, 0); for (const k of r.knees) k.rotation.set(0, 0, 0); for (const a of r.arms) a.rotation.set(0, 0, 0); }
-  const moriBlob = blob(0.55, 0.38); moriBlob.position.set(-5.2, 0.004, -1.9); w.root.add(moriBlob); w.mori.blob = moriBlob;
+  const moriBlob = blob(0.55, 0.38); moriBlob.position.set(-5.2, 0.004, -1.9); w.root.add(moriBlob); w.mori.blob = moriBlob; blobs.mori = moriBlob;
 
   const spots = {
     lift_out: [-5.45, -2.4], lobby: [-5.6, -1.0], office_door: [-0.25, 0.9], my_seat: [dS1.seat[0], dS1.seat[1] + 0.45], emi_seat: [dS0.seat[0], dS0.seat[1]],
@@ -119,11 +119,11 @@ export async function officePlace(game) {
 
   const P = {
     scene: w.scene, camera: cam.camera, cam, space: w.root, nav: w.nav, sun: w.sun, charScale: K,
-    start: [-5.45, -3.05], startFacing: 0, things, people, spots, zones, seats,
+    start: [-5.45, -3.05], startFacing: 0, things, people, spots, zones, seats, defaultPeriod: 'morning',
     fit(aspect) {
       const pts = [];
       for (const x of [w.X0 - 0.2, w.X1 + 0.2]) for (const z of [w.Z0 - 0.2, w.Z1 + 0.2]) for (const y of [0, 1.45]) pts.push(new THREE.Vector3(x, y, z));
-      if (aspect >= 1) cam.fit(aspect, [new THREE.Vector3(-4.9, 0, 0), new THREE.Vector3(4.9, 0, 0), new THREE.Vector3(0, 0, -4.2), new THREE.Vector3(0, 1.4, -4.4), new THREE.Vector3(0, 0, 4.0)], new THREE.Vector3(0, 0, 0), { follow: true, clamp: [-2.2, 2.2, -2.0, 2.3] });
+      if (aspect >= 1) cam.fit(aspect, [new THREE.Vector3(-7.1, 0, 0), new THREE.Vector3(7.1, 0, 0), new THREE.Vector3(0, 1.45, w.Z0), new THREE.Vector3(0, 0, w.Z1 + 0.1)], new THREE.Vector3(0, 0, 0), { limY: 0.97 });
       else cam.fit(aspect, [new THREE.Vector3(-2.5, 0, 0), new THREE.Vector3(2.5, 0, 0), new THREE.Vector3(0, 0, -2.7), new THREE.Vector3(0, 1.3, 2.5)], new THREE.Vector3(0, 0, 0), { follow: true, clamp: [w.X0 + 2.5, w.X1 - 2.5, w.Z0 + 2.0, w.Z1 - 1.5] });
     },
     pick(rc) { const p = new THREE.Vector3(); return rc.ray.intersectPlane(floor, p) ? p : null; },
