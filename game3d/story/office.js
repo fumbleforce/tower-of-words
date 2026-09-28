@@ -12,7 +12,7 @@ export default {
   people: {
     mio: { name: 'Mio', about: 'Programmer. The only one with English. Hates bowing. Drinks black canned coffee.', color: '#5fc6bf' },
     mori: { name: 'Mr. Mori', about: 'Used to be a manager. Formal and kind. Makes the tea. Drinks corn soup from a can.', color: '#b9a3d3' },
-    kenji: { name: 'Kenji', about: 'Engineer. Casual. Borrowed your chair. Lives on melon soda.', color: '#9fb6d8' },
+    kenji: { name: 'Kenji', about: 'Newest on the team before you, 21. Keen to help, easily distracted. Borrowed your chair. Lives on melon soda.', color: '#9fb6d8' },
     emi: { name: 'Emi', about: 'Runs B2. Spent day one upstairs fighting for a parts budget.', color: '#c98a6b' },
   },
 
@@ -179,16 +179,18 @@ export default {
       { do: 'meet', who: 'kenji' },
       { do: 'face', who: 'kenji', to: 'eric' },
       { say: 'kenji', face: 'grin', emo: 'bright', text: 'あ！新しい人！', overheard: true },
-      { say: 'kenji', face: 'sheepish', emo: 'sheepish', text: "Ah, sorry, sorry. Your chair... I borrow. My chair is... broken. Pshh." },
+      { say: 'kenji', face: 'grin', emo: 'excited', text: "Eric-san? I am Kenji! I am new also, two months. So now I am not the newest. Yes!" },
+      { say: 'kenji', face: 'sheepish', emo: 'sheepish', text: "Ah, sorry, sorry. Your chair... I borrow it. My chair is... broken. Pshh." },
       { do: 'gesture', who: 'kenji', kind: 'point' },
       { do: 'face', who: 'kenji', to: 'machine_door' },
-      { say: 'kenji', face: 'sheepish', emo: 'sheepish', text: "Now it is in machine room. And cat is sleeping on it. Sorry!" },
+      { say: 'kenji', face: 'grin', emo: 'bright', text: "I bring it back for you! It's in machine room, with the cat. Norway has the big forest cats, right? I see on YouTube, they are so big, like..." },
+      { say: 'kenji', face: 'sheepish', emo: 'sheepish', text: "...Ah, no. Mio-san says I can't go in machine room anymore. Sorry! You go?" },
       { do: 'goal', text: 'Get your chair back from the machine room.' },
     ],
     kenji_again: [
       { if: 'chair_back && !kenji_talked', then: [
         { set: 'kenji_talked' },
-        { say: 'kenji', face: 'sheepish', emo: 'sheepish', text: "Chair is okay? Sorry, my English is... very little. Very, very little." },
+        { say: 'kenji', face: 'sheepish', emo: 'sheepish', text: "Chair is okay? If you need anything, I help! Cables, printer, um... I know where is the good tape. My English is very little, but." },
         { choice: [
           { text: '“Mine\'s worse. My Japanese, I mean.”', go: 'kenji_small' },
           { text: 'Pat the chair', go: 'kenji_pat' },
@@ -198,7 +200,7 @@ export default {
       ] },
     ],
     kenji_small: [
-      { say: 'kenji', face: 'grin', emo: 'laugh', text: "Ha! Okay, okay. Same team." },
+      { say: 'kenji', face: 'grin', emo: 'laugh', text: "Ha! Okay, okay. Then we practise together. Same team!" },
       { do: 'gesture', who: 'kenji', kind: 'highfive' },
       { set: 'kenji_laughed' },
     ],
@@ -502,7 +504,7 @@ export default {
     gift_kenji_melon: [
       { set: 'gifted_kenji' },
       { say: 'kenji', face: 'grin', emo: 'excited', text: 'マジで？神！', overheard: true },
-      { say: 'kenji', face: 'grin', emo: 'excited', text: "Melon! You are... genius." },
+      { say: 'kenji', face: 'grin', emo: 'excited', text: "Melon! You are genius. Now I owe you, I fix anything for you. Well... I try." },
       { do: 'emote', who: 'kenji', kind: 'heart' },
     ],
     gift_kenji_other: [

@@ -29,7 +29,7 @@ Read this before writing a line in train.js, gate.js, office.js or transitions.j
 
 **Eric** (the player). Tired, polite, dry. Says little; his lines are short but whole sentences ("The copier's fixed." not "Fixed."). Choice texts are things he'd actually say.
 
-**Kenji** (29). Almost no English, cheerful about it. Speaks Japanese casually; his English is nouns and "is" with no articles, sound effects for what he can't say, and a laugh ("My chair is... broken. Pshh." / "Machine room. Chair. Cat. Sorry!"). Never Mio's loose fluency.
+**Kenji** (21, the newest before Eric; two months in). Keen to help and easily distracted: he offers to do things he isn't allowed to, and wanders off mid-sentence onto whatever caught his eye (forest cats on YouTube). School English he's eager to practise, cheerful about how little of it there is. Speaks Japanese casually; his English is nouns and "is" with no articles, sound effects for what he can't say, and a laugh ("My chair is... broken. Pshh." / "Machine room. Chair. Cat. Sorry!"). Never Mio's loose fluency.
 
 **Emi** (32, B2's team lead). Native British English, quick and complete sentences, talks like she's between two meetings. Brightness over worry: she says the good news first and the problem as an aside ("I got it. Well. I may have told them...").
 
