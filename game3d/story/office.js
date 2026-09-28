@@ -1,5 +1,5 @@
-// Place 3: IT support on B2. Mori, Kenji, Mio, the copier ticket, the lunch choice, one gift, and Mio's question.
-// The day ends on a new ticket with Eric's name on it. See STORY.md and VOICE.md.
+// Place 3: IT support on B2. Mori, Kenji, Mio, the copier repair, the lunch choice, one gift, and Mio's question.
+// The day ends on a new repair request with Eric's name on it. See STORY.md and VOICE.md.
 export default {
   speakers: {
     eric: { name: 'Eric', role: 'you' },
@@ -244,7 +244,7 @@ export default {
       { do: 'chairRoll', to: 'my_seat' },
       { set: 'chair_back' },
       { say: 'mio', face: 'deadpan', emo: 'dry', text: "Ah, that's your chair? Sorry. She comes with it, I think." },
-      { say: 'mio', emo: 'casual', text: "Oh, and come here a second. I have a ticket for you." },
+      { say: 'mio', emo: 'casual', text: "Oh, and come here a second. I have a job for you." },
       { do: 'goal', text: 'Talk to Mio.' },
     ],
 
@@ -252,8 +252,8 @@ export default {
     ticket: [
       { set: 'got_ticket' },
       { do: 'meet', who: 'mio' },
-      { say: 'mio', face: 'neutral', emo: 'casual', text: "Okay, your first ticket. I changed your screen to English, by the way." },
-      '> TICKET #1. Copier, B2 copy room. Eats paper. Opened 1 April 1996.',
+      { say: 'mio', face: 'neutral', emo: 'casual', text: "Okay, your first repair request. I changed your screen to English, by the way." },
+      '> REPAIR REQUEST #1. Copier, B2 copy room. Eats paper. Opened 1 April 1996.',
       { say: 'eric', face: 'surprised', emo: 'surprised', text: 'Nineteen ninety-six?' },
       { say: 'mio', emo: 'dry', text: "Yeah. Mori-san opened it when he was new here, I think. Nobody closes it, it's like... tradition. He can show you." },
       { say: 'mio', emo: 'shout', text: '森さん、{gaijin}にコピー機お願い。', overheard: true },
@@ -302,7 +302,7 @@ export default {
       { do: 'bond', who: 'mori', add: 1 },
       { do: 'cam', back: true },
       { do: 'walk', who: 'mori', to: 'chief_desk', wait: false },
-      { do: 'goal', text: 'Tell Mio the ticket is done.' },
+      { do: 'goal', text: 'Tell Mio the copier is fixed.' },
     ],
     copier_look: [],
     ugoite_copier_again: [{ do: 'copier', state: 'run' }, '> It prints one blank sheet, very neatly.'],
@@ -542,7 +542,7 @@ export default {
       { do: 'hide', id: 'emi' },
     ],
 
-    // ================================================================== EVENING: her question, and a new ticket
+    // ================================================================== EVENING: her question, and a new repair request
     ending: [
       { do: 'cam', on: 'mio', zoom: 1.6 },
       { do: 'goal', text: '' },
@@ -563,16 +563,16 @@ export default {
     end_dunno: [{ say: 'mio', face: 'neutral', emo: 'low', text: '...Yeah. Me neither.' }, { go: 'end_ticket' }],
     end_nicely: [{ say: 'mio', face: 'deadpan', emo: 'deadpan', text: 'Mm. Very funny.' }, { go: 'end_ticket' }],
     end_quiet: [{ do: 'emote', who: 'mio', kind: '…' }, { go: 'end_ticket' }],
-    // the station sends B2 a ticket about the doors, and it lands on Eric
+    // the station sends B2 a repair request about the doors, and it lands on Eric
     end_ticket: [
       { do: 'phone', who: 'mio', state: 'buzz' },
       { wait: 700 },
       { do: 'phone', who: 'mio', state: 'look' },
-      { say: 'mio', face: 'tired', emo: 'groan', text: "Ah... great. The station made a ticket about the doors. I told them it's the sensor, so now they want B2 to check the sensor." },
-      { say: 'mio', face: 'embarrassed', emo: 'low', text: "It was supposed to come to me. ...Okay, I'm giving it to you." },
+      { say: 'mio', face: 'tired', emo: 'groan', text: "Ah... great. The station sent a repair request about the doors. I told them it's the sensor, so now they want B2 to check the sensor." },
+      { say: 'mio', face: 'embarrassed', emo: 'low', text: "It was supposed to go on my list. ...Okay, I'm putting it on yours." },
       { do: 'phone', who: 'mio', state: 'away' },
       { do: 'sound', name: 'beep' },
-      '> TICKET #2. Train doors, Honsha station. Assigned to: ERIC.',
+      '> REPAIR REQUEST #2. Train doors, Honsha station. Assigned to: ERIC.',
       { say: 'mio', face: 'deadpan', emo: 'dry', text: "You're the IT guy. You tell them it's the sensor." },
       { if: 'lunch_mio || mio_warm >= 2', then: [
         { say: 'mio', face: 'smile', emo: 'teasing', text: "Take the 8:40 tomorrow, okay? I'm in the front car. I want to see how you, um... fix a sensor." },

@@ -225,7 +225,7 @@ export default {
     ],
     did_quiet: [{ go: 'mio_tests' }],
     mio_tests: [
-      { say: 'mio', face: 'embarrassed', emo: 'low', text: "Um, don't tell anyone, okay? If someone makes a ticket for it, it comes to me." },
+      { say: 'mio', face: 'embarrassed', emo: 'low', text: "Um, don't tell anyone, okay? If somebody reports it broken, it goes on my list." },
       // her phone goes, she looks, then reacts
       { do: 'phone', who: 'mio', state: 'buzz' },
       { wait: 700 },
