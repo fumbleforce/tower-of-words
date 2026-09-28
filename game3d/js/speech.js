@@ -21,6 +21,15 @@ export const MODELS = {
   moon: { id: 'wmoto-ai/moonshine-tiny-ja-ONNX', mb: 147 },   // Moonshine Tiny JA: tested, see notes/VOICE-INPUT.md
 };
 export const DEFAULT_MODEL = 'base';
+// Which model this device gets (settings.voiceModel: 'auto' | 'base' | 'moon' | 'tiny'). Auto: Whisper base on a
+// computer (92% on the bench, about 2.7 s a word on one thread); Moonshine on a phone, where Whisper base would take
+// 7 to 10 s (Moonshine: about 50 ms on the desktop bench, 72%, weaker with a strong accent). notes/VOICE-INPUT.md.
+export function pickModel() {
+  const want = window.__settings && window.__settings.voiceModel;
+  if (want && want !== 'auto' && MODELS[want]) return want;
+  const phone = document.body.classList.contains('phone') || (matchMedia('(pointer: coarse)').matches && Math.min(screen.width, screen.height) < 700);
+  return phone ? 'moon' : DEFAULT_MODEL;
+}
 
 let worker = null, ready = null, seq = 0;
 const waiting = new Map();
@@ -28,7 +37,7 @@ const progressSubs = new Set();
 export const engineInfo = { device: null, loadMs: null, model: null };
 
 // start (or reuse) the worker and the model; resolves when it can listen. onProgress(fraction 0..1)
-export function loadRecogniser({ model = DEFAULT_MODEL, device = 'auto', dtype, onProgress } = {}) {
+export function loadRecogniser({ model = pickModel(), device = 'auto', dtype, onProgress } = {}) {
   if (onProgress) progressSubs.add(onProgress);
   if (ready) return ready;
   const files = new Map();
@@ -49,6 +58,7 @@ export function loadRecogniser({ model = DEFAULT_MODEL, device = 'auto', dtype, 
     };
     worker.onerror = (e) => { rej(e); ready = null; };
     worker.postMessage({ type: 'load', model: (MODELS[model] || MODELS[DEFAULT_MODEL]).id, device, dtype });
+    engineInfo.model = model;
   });
   return ready;
 }
@@ -227,7 +237,7 @@ export function mountVoice(host, id, opts = {}) {
     }
     if (!alive || my !== gen) return;
     if (mode === 'device' && !engineInfo.device) {
-      set('loading', `Getting the voice model ready (${MODELS[DEFAULT_MODEL].mb} MB, only this once). You can type meanwhile.`); bar.hidden = false;
+      set('loading', `Getting the voice model ready (${MODELS[pickModel()].mb} MB, only this once). You can type meanwhile.`); bar.hidden = false;
       try { await loadRecogniser({ onProgress: (f) => bar.firstElementChild.style.width = `${Math.round(f * 100)}%` }); }
       catch { bar.hidden = true; set('blocked', 'The voice model didn\'t load. Type it for now; it will try again next time.'); return; }
       bar.hidden = true;
@@ -299,7 +309,7 @@ export function mountVoice(host, id, opts = {}) {
   cleanup.demo = (st, d = {}) => {
     if (st === 'idle') set('idle', idleText);
     else if (st === 'asking') set('asking', mode === 'browser' ? 'The browser will ask for the microphone. Chrome sends what you say to Google to turn it into text.' : 'The browser will ask for the microphone. What you say stays on this device.');
-    else if (st === 'loading') { set('loading', `Getting the voice model ready (${MODELS[DEFAULT_MODEL].mb} MB, only this once). You can type meanwhile.`); bar.hidden = false; bar.firstElementChild.style.width = (d.progress ?? 40) + '%'; }
+    else if (st === 'loading') { set('loading', `Getting the voice model ready (${MODELS[pickModel()].mb} MB, only this once). You can type meanwhile.`); bar.hidden = false; bar.firstElementChild.style.width = (d.progress ?? 40) + '%'; }
     else if (st === 'listening') { set('listening', 'Listening. Let go when you\'re done.'); row.style.setProperty('--lv', d.level ?? 0.6); bars.forEach((b, i) => { b.style.transform = `scaleY(${[0.3, 0.6, 0.9, 0.7, 1, 0.8, 0.5, 0.35, 0.2][i]})`; }); }
     else if (st === 'thinking') set('thinking', '<span class="vc-dots"><i></i><i></i><i></i></span>');
     else if (st === 'hit') showHit();

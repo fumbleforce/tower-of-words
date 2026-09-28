@@ -3,11 +3,13 @@
  "model": "base",
  "device": "wasm",
  "cpu": 1,
- "loadMs": 9571,
+ "loadMs": 4879,
  "recogniseMs": {
-  "median": 2805,
-  "p90": 3600,
-  "max": 3967
+  "median": 4973,
+  "p90": 5022,
+  "max": 5132,
+  "textMedian": 2688,
+  "scoreMedian": 2289
  },
  "textOnly": {
   "perWord": {
@@ -100,5 +102,93 @@
    "eric-tomatte.far as matte: しまって",
    "eric-yoroshiku.phone as sumimasen: 喜悔しません"
   ]
+ },
+ "withScore": {
+  "perWord": {
+   "akete": {
+    "native": "5/5",
+    "eric": "2/5",
+    "misses": [
+     "eric.far: カテ?",
+     "eric.slow: カテ?",
+     "eric.train: カテイ?"
+    ]
+   },
+   "dashite": {
+    "native": "5/5",
+    "eric": "2/5",
+    "misses": [
+     "eric.clean: -",
+     "eric.phone: -",
+     "eric.train: ダシアイト"
+    ]
+   },
+   "irete": {
+    "native": "5/5",
+    "eric": "5/5",
+    "misses": []
+   },
+   "kite": {
+    "native": "5/5",
+    "eric": "4/5",
+    "misses": [
+     "eric.phone: かいっ"
+    ]
+   },
+   "matte": {
+    "native": "5/5",
+    "eric": "5/5",
+    "misses": []
+   },
+   "ohayo": {
+    "native": "5/5",
+    "eric": "5/5",
+    "misses": []
+   },
+   "sumimasen": {
+    "native": "5/5",
+    "eric": "5/5",
+    "misses": []
+   },
+   "tomatte": {
+    "native": "5/5",
+    "eric": "5/5",
+    "misses": []
+   },
+   "ugoite": {
+    "native": "5/5",
+    "eric": "4/5",
+    "misses": [
+     "eric.phone: よく言う"
+    ]
+   },
+   "yoroshiku": {
+    "native": "5/5",
+    "eric": "5/5",
+    "misses": []
+   }
+  },
+  "perVariant": {
+   "clean": "19/20",
+   "far": "19/20",
+   "phone": "17/20",
+   "slow": "19/20",
+   "train": "18/20"
+  },
+  "total": "92/100 (92%)",
+  "falseAccepts": "6/979",
+  "falseHits": [
+   "eric-akete.far as kite: カテ?",
+   "eric-akete.phone as kite: あ、キャティ?",
+   "eric-akete.slow as kite: カテ?",
+   "eric-akete.train as kite: カテイ?",
+   "eric-tomatte.far as matte: しまって",
+   "eric-yoroshiku.phone as sumimasen: 喜悔しません"
+  ]
+ },
+ "rule": {
+  "margin": 1,
+  "floor": -2,
+  "lead": 0.8
  }
 }
