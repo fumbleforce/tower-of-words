@@ -219,8 +219,16 @@ Commands `irete` 入れて, `dashite` 出して, `tomatte` 止まって (voiced)
 
 ## Portraits (VN style)
 
-The speaker's approved portrait shows beside the text box (desktop: large at the left; phone: smaller, above the box). Eric's shows smaller on the right on his lines, and the listener dims. Narration shows none. Faces that exist: only `neutral`, for `mio`, `aoi`, `eric` and `kuro` (cut-outs of the approved bible portraits). The old smirk/suspicious/panic sprites were old art and are gone; new expressions will be repainted from the approved portraits later. Face steps are kept and fall back to neutral until then.
-Everyone else (Mori, Kenji, Hamada, the guard and the rest) has no approved art yet and shows just the name plate. Once more faces exist: set one on a line with the long form `{ say: 'mio', face: 'smirk', text: '...' }` (it stays until changed), or with `{ do: 'expression', who: 'mio', face: 'suspicious' }`; the `emote` hook also picks one when it fits (`?` suspicious, `!` panic, `♪`/`heart` smirk).
+The speaker's approved portrait shows beside the text box (desktop: large at the left; phone: smaller, above the box). Eric's shows smaller on the right on his lines, and the listener dims. Narration shows none. Faces that exist:
+- `mio`, `aoi`, `kuro`: `neutral` (cut-outs of the approved bible portraits). New expressions will be repainted from those portraits later.
+- PROVISIONAL (the art agent's picks, used as defaults until Jørgen approves or replaces them):
+  - `eric`: `neutral`, `surprised` (seed 734 v2)
+  - `mori`: `neutral`, `smile`, `flustered` (seed 713)
+  - `kenji`: `neutral`, `grin`, `sheepish` (seed 711)
+  - `kuroda` (Mr. Hamada): `neutral`, `sleepy`, `panicked` (seed 721)
+  - `guard` (Mr. Ishibashi): `neutral`, `stern`, `amused`
+
+Everyone else shows just the name plate. A face that doesn't exist for that person falls back to neutral. Set one on a line with the long form `{ say: 'mori', face: 'smile', text: '...' }` (it stays until changed), or with `{ do: 'expression', who: 'guard', face: 'stern' }`. The `emote` hook also picks a face when that person has a fitting one: `?` suspicious/stern, `!` panicked/surprised, `♪`/`heart` smile/grin/amused, `sweat` flustered/sheepish/panicked, `zzz` sleepy.
 
 ## Eric, Mio, phrases and overheard Japanese (the new premise)
 
