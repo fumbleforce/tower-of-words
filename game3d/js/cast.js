@@ -116,10 +116,15 @@ export const PEOPLE = {
     return r;
   },
   worker: (i = 0) => {
-    const hairs = ['#2c2622', '#3a2f2a', '#1f2229'], tops = ['#eef0f3', '#e6e9ee', '#dfe3ea'];
-    const r = chibi({ headK: HK, skin: SKINS[i % 4], top: tops[i % 3], sleeve: tops[i % 3], bottom: '#2e3446', shirt: null, hair: hairs[i % 3], hairOpts: { messy: 0.1, front: 0.06, seed: 50 + i }, shoes: '#222', sole: '#222' });
+    // background office workers: varied hair, jackets and shirts so a crowd doesn't read as clones
+    const hairs = ['#2c2622', '#6b4a36', '#8d8f94', '#1f2229', '#9b5a3c', '#4a3a33', '#c2b08a'];
+    const tops = ['#3e4556', '#8b8f96', '#a39683', '#2f3548', '#e6e9ee', '#5b6474', '#6e6258'];
+    const bottoms = ['#2e3446', '#3a3f4b', '#4a4f5c', '#2a2f3c'];
+    const skirt = i % 3 === 1;
+    const r = chibi({ headK: HK, skin: SKINS[i % 4], top: tops[i % tops.length], sleeve: tops[i % tops.length], bottom: bottoms[i % 4], legs: bottoms[i % 4], skirt, shin: skirt ? '#e3c3ae' : undefined, shirt: i % 2 ? '#eef0f3' : null, tie: i % 4 === 0 ? '#5a3f46' : null, hair: hairs[i % hairs.length], hairOpts: skirt ? { locks: 0.15, front: 0.06, seed: 50 + i, long: i % 2 ? 0.2 : 0 } : { messy: 0.1, front: 0.06, seed: 50 + i }, shoes: '#222', sole: '#222', torsoW: skirt ? 0.28 : 0.31 });
     return r;
   },
+
 };
 
 // idle life: breathing and small head turns

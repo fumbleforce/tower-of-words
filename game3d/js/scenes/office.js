@@ -354,6 +354,8 @@ export function buildOffice() {
   { const p = plant({ size: 1.0, seed: 3 }); p.position.set(-3.85, 0, -0.35); root.add(p); }
   for (const [x, z, s] of [[2.9, -1.5, 0.42], [2.85, -1.0, 0.36], [2.3, -0.35, 0.34]]) root.add(rbox(s, s * 0.8, s, PAL.box, { x, z, r: 0.02 }));
   const cr = coatRack(); cr.position.set(1.1, 0, -0.45); root.add(cr);
+  // a small meeting table below the island, for the morning huddle
+  { const mt = new THREE.Group(); mt.add(rbox(0.9, 0.04, 0.6, '#d5d6d3', { y: 0.4, r: 0.01 }), rbox(0.08, 0.4, 0.08, PAL.deskLeg, { r: 0.01 })); for (const x of [-0.3, 0.3]) mt.add(rbox(0.3, 0.05, 0.28, PAL.chair, { x, y: 0.24, z: 0.45, r: 0.02 }), rbox(0.03, 0.24, 0.03, PAL.deskLeg, { x, z: 0.45, r: 0.01 })); mt.add(rbox(0.3, 0.02, 0.22, PAL.paper, { x: 0.15, y: 0.44, r: 0.005 })); mt.position.set(-2.4, 0, -1.15); root.add(mt); }
   const fan = standFan(); fan.position.set(-3.3, 0, -2.2); root.add(fan);
   root.add(rbox(0.36, 0.36, 0.3, '#6a7b93', { x: -3.85, z: -3.0, r: 0.02 }));
 
@@ -469,7 +471,7 @@ export function buildOffice() {
   B(X0, -6.4, -2.25, -0.55); B(-6.9, -6.4, -0.3, 0.2);             // bench, plant
   B(X0, -4.2, Z0, -3.45);                                           // stairwell (not walkable today)
   B(-4.15, -2.8, Z0, Z0 + 0.5); B(-4.1, -3.6, -5.15, -4.65); B(1.8, 3.35, Z0, Z0 + 0.62);
-  B(-4.1, -3.6, -0.6, -0.1); B(2.05, 3.2, -1.8, -0.15); B(0.9, 1.3, -0.65, -0.25); B(-3.5, -3.1, -2.4, -2.0); B(-4.1, -3.6, -3.2, -2.8);
+  B(-4.1, -3.6, -0.6, -0.1); B(2.05, 3.2, -1.8, -0.15); B(0.9, 1.3, -0.65, -0.25); B(-3.5, -3.1, -2.4, -2.0); B(-2.9, -1.9, -1.5, -0.55); B(-4.1, -3.6, -3.2, -2.8);
   B(-2.62, 1.0, ZN - 0.36, ZS + 0.36);                               // island
   for (const d of desks) B(d.seat[0] - 0.24, d.seat[0] + 0.24, Math.min(d.seat[1], d.seat[1] + d.face * 0.25) - 0.02, Math.max(d.seat[1], d.seat[1] + d.face * 0.25) + 0.02);
   B(1.15, 1.95, -4.0, -2.75); B(1.95, 2.45, -3.6, -3.1);             // chief's desk and chair
