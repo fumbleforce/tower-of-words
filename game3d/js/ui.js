@@ -189,10 +189,10 @@ export function unlockAudio() { ac(); }
 // don't exist yet fall back to neutral. People without approved art get a name plate only.
 // Provisional (the art agent's picks, not approved yet): Eric seed 734 v2, Mori 713, Kenji 711, Hamada (speaker kuroda) 721,
 // the guard Ishibashi. See story/FORMAT.md.
-export const PORTRAITS = { mio: ['neutral'], aoi: ['neutral'], kuro: ['neutral'], eric: ['neutral', 'surprised'],
+export const PORTRAITS = { mio: ['neutral'], aoi: ['neutral'], kuro: ['neutral'], eric: ['neutral', 'surprised', 'tired'],
   mori: ['neutral', 'smile', 'flustered'], kenji: ['neutral', 'grin', 'sheepish'], kuroda: ['neutral', 'sleepy', 'panicked'],
   guard: ['neutral', 'stern', 'amused'] };
-const EMOTE_FACE = { '?': ['suspicious', 'stern'], '!': ['panic', 'panicked', 'surprised'], '♪': ['smirk', 'smile', 'grin', 'amused'], heart: ['smirk', 'smile', 'grin'], sweat: ['panic', 'panicked', 'flustered', 'sheepish'], 'zzz': ['sleepy'] };
+const EMOTE_FACE = { '?': ['suspicious', 'stern'], '!': ['panic', 'panicked', 'surprised'], '♪': ['smirk', 'smile', 'grin', 'amused'], heart: ['smirk', 'smile', 'grin'], sweat: ['panic', 'panicked', 'flustered', 'sheepish'], 'zzz': ['sleepy', 'tired'], '…': ['tired'] };
 const faceNow = {};
 let lastNpc = null;
 export function setFace(who, face) { faceNow[who] = face; }
