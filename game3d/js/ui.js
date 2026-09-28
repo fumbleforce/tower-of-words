@@ -239,7 +239,7 @@ const FACE = {
   aoi: { W: 630, H: 810, f: [222, 196, 413, 389] }, eric: { W: 597, H: 768, f: [218, 211, 390, 402] },
   guard: { W: 597, H: 768, f: [250, 162, 374, 300] }, kenji: { W: 597, H: 768, f: [229, 169, 371, 330] },
   kuro: { W: 630, H: 809, f: [254, 325, 452, 525] }, kuroda: { W: 597, H: 768, f: [240, 154, 364, 313] },
-  mio: { W: 630, H: 810, f: [201, 224, 383, 402] }, mori: { W: 597, H: 768, f: [234, 171, 372, 339] },
+  mio: { W: 597, H: 768, f: [192, 214, 361, 383] }, mori: { W: 597, H: 768, f: [234, 171, 372, 339] },
 };
 const EMOTE_FACE = { '?': ['suspicious', 'deadpan', 'stern'], '!': ['surprised', 'panicked', 'panic'], '♪': ['smile', 'grin', 'amused'], heart: ['smile', 'embarrassed', 'grin'], sweat: ['flustered', 'embarrassed', 'sheepish', 'panicked'], zzz: ['sleepy', 'tired'], '…': ['tired', 'deadpan'] };
 const faceNow = {};
