@@ -157,7 +157,7 @@ export async function officePlace(game) {
       if (st.alarm) { alarm.visible = Math.sin(t * 10) > 0; if (Math.floor(t * 2) !== st.beepT) { st.beepT = Math.floor(t * 2); sfx('beep'); } } else alarm.visible = false;
       if (aoi.root.visible && !aoi._walk) idle(aoi, t);
       st.liftK += (st.liftWant - st.liftK) * Math.min(1, dt * 4); w.openLift(st.liftK);
-      st.mdoor += (st.mdoorWant - st.mdoor) * Math.min(1, dt * 3); w.machineDoor.rotation.y = -st.mdoor * 1.4; w.machineDoor.position.x = 5.1 - Math.sin(st.mdoor * 1.4) * 0.4; w.machineDoor.position.z = CN + 0.08 - (1 - Math.cos(st.mdoor * 1.4)) * 0.4;
+      st.mdoor += (st.mdoorWant - st.mdoor) * Math.min(1, dt * 3); w.machineDoor.rotation.y = -st.mdoor * 1.5;   // on its hinge, into the machine room
       // clock
       if (st.clockStop > 0) st.clockStop -= dt; else { st.clockT = (st.clockT || 0) + dt; w.secHand.rotation.z = -Math.floor(t) * Math.PI / 30; }
       // 8:55 when the floor opens, ticking with game time; the stop command freezes it
@@ -207,7 +207,7 @@ export async function officePlace(game) {
       coffee: async () => { sfx('ok'); st.coffee = 1; st.steam = 1.6; },
       kettle: ({ state }) => { if (state === 'pour') { st.steam = 1.6; sfx('ok'); } },
       rackAlarm: ({ state }) => { st.alarm = state === 'on'; },
-      machineDoor: ({ state }) => { st.mdoorWant = state === 'open' ? 1 : 0; if (state === 'open') { w.nav.unblock('mdoor'); flags.machineOpen = true; } sfx('door'); },
+      machineDoor: ({ state }) => { st.mdoorWant = state === 'open' ? 1 : 0; if (state === 'open') { w.nav.unblock('mdoor'); w.nav.blockTagged('mdoorLeaf', 5.22, 5.62, CN - 0.8, CN - 0.02); flags.machineOpen = true; } else { w.nav.unblock('mdoorLeaf'); } sfx('door'); },
       vendingDrop: () => { sfx('tap'); setTimeout(() => sfx('tap'), 180); const can = rbox(0.06, 0.1, 0.06, '#7fc07a', { x: -4.62, y: 0.02, z: -1.95, r: 0.02 }); can.rotation.z = Math.PI / 2; w.root.add(can); },
       clockStop: ({ ms = 3000 }) => { st.clockStop = ms / 1000; },
       fan: ({ state }) => { st.fan = state; },
@@ -216,6 +216,7 @@ export async function officePlace(game) {
       sitDown: async () => { await sitMio(); game.event('sat_down'); },
     },
     capState(s) {
+      if (s.startsWith('mdoor')) { st.mdoor = st.mdoorWant = +s.slice(5); }   // QA stills of the door's swing
       if (s === 'open') st.liftWant = 1;
       if (s === 'sit') { w.myChair.position.set(dS1.seat[0], 0, dS1.seat[1]); w.myChair.rotation.y = Math.PI; placeMioSeated(); }
       if (s === 'wild') { st.copier = 'wild'; spray(40, true); }

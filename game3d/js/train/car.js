@@ -111,10 +111,12 @@ function posterTexture(kind) {
 
 // ---------- the shell ----------
 // mode 'land': camera on the +z side, so the +z wall is cut low. 'port': camera at the -x end.
-function buildShell(mode) {
+// mode 'closed': every wall full height (the car seen from outside); `nearLeaves: false` leaves out the near-side
+// door leaves (the train place hangs its own sliding leaves there).
+function buildShell(mode, { nearLeaves = true } = {}) {
   const g = new THREE.Group();
   g.name = 'shell';
-  const low = mode === 'land' ? { zp: 0.62, xn: HF } : { zp: HF, xn: 0.86 };
+  const low = mode === 'land' ? { zp: 0.62, xn: HF } : mode === 'closed' ? { zp: HF, xn: HF } : { zp: HF, xn: 0.86 };
   const H = { zn: HF, zp: low.zp, xn: low.xn, xp: HF };
   const inner = mat('inner', COL.inner), shell = mat('shell', COL.shell, { roughness: 0.55 }), frame = mat('frame', COL.frame, { roughness: 0.5 });
   const lampM = mat('lamp', COL.lamp, { emissive: new THREE.Color('#ffd08a'), emissiveIntensity: 2.4 });
@@ -217,7 +219,7 @@ function buildShell(mode) {
   }
 
   // near-side door leaves (sliding doors), with tall windows
-  for (const dx of [-DOOR_X, DOOR_X]) {
+  if (nearLeaves) for (const dx of [-DOOR_X, DOOR_X]) {
     const h = Math.min(H.zp - 0.1, 1.22) - 0.035;
     for (const k of [-1, 1]) {
       const s = new THREE.Shape(); rrectPath(s, 0, 0, DOOR_W / 2 - 0.01, h, 0.04);
@@ -415,8 +417,36 @@ function cutDoorways(mesh, y0, h, material) {
   return grp;
 }
 
+
+// ---------- the closed car: full walls, a roof and tinted glass, for shots from outside ----------
+// The roof sits just above the wall tops; two low AC housings on it, as on the neighbour cars.
+function buildRoof() {
+  const g = new THREE.Group(); g.name = 'roof';
+  const rm = mat('roof', '#8e99a7', { roughness: 0.75 });
+  const roof = new THREE.Mesh(placePlan(new THREE.ExtrudeGeometry(planRRect(LX + T - 0.02, LZ + T - 0.02, RI + T - 0.02), { depth: 0.06, bevelEnabled: true, bevelThickness: 0.04, bevelSize: 0.04, bevelSegments: 3, curveSegments: 10 })), rm);
+  roof.position.y = HF + 0.02; g.add(shadowOn(roof, false, true));
+  for (const x of [-2.1, 2.1]) {
+    const ac = new THREE.Mesh(new RoundedBoxGeometry(1.3, 0.14, 1.0, 2, 0.05), mat('roofAc', '#7d8896', { roughness: 0.8 }));
+    ac.position.set(x, HF + 0.18, 0); g.add(shadowOn(ac, false, true));
+  }
+  return g;
+}
+function buildGlass() {
+  const g = new THREE.Group(); g.name = 'glass';
+  const gm = new THREE.MeshStandardMaterial({ color: '#5f7892', roughness: 0.15, metalness: 0.35, transparent: true, opacity: 0.6, depthWrite: false });
+  gm.userData.base = 0.6;
+  for (const sz of [-1, 1]) for (const x of WIN.xs) {
+    const pane = new THREE.Mesh(new THREE.PlaneGeometry(WIN.w - 0.02, 1.22 - 0.44 - 0.02), gm);
+    pane.position.set(x, (1.22 + 0.44) / 2, sz * (LZ + T * 0.55)); if (sz < 0) pane.rotation.y = Math.PI; pane.renderOrder = 2;
+    g.add(pane);
+  }
+  return g;
+}
+
 // ---------- the car ----------
-export function buildCar(mode = 'land') {
+// mode 'land' / 'port': the cut-away car the play camera looks into, with a closed overlay (full walls, doors'
+// frames, roof, glass) faded in by setClosed(k) for shots from outside. mode 'closed': a closed car (neighbours).
+export function buildCar(mode = 'land', { furnished = true } = {}) {
   const root = new THREE.Group();
   root.name = 'car';
   const straps = [];
@@ -449,6 +479,21 @@ export function buildCar(mode = 'land') {
   root.add(shellHolder);
   let shell = buildShell(mode);
   shellHolder.add(shell);
+  // the closed overlay: its own material copies, so it can fade without touching the cut shell
+  let closed = null; const fadeMats = [];
+  if (mode === 'closed') { root.add(buildRoof(), buildGlass()); }
+  else {
+    closed = new THREE.Group(); closed.name = 'closed';
+    closed.add(buildShell('closed', { nearLeaves: false }), buildRoof(), buildGlass());
+    const lampM = mat('lamp', COL.lamp);
+    closed.traverse((o) => {
+      if (!o.isMesh) return;
+      if (o.material === lampM) { o.visible = false; return; }
+      o.material = o.material.clone(); o.material.userData.base = o.material.opacity; fadeMats.push(o.material);
+      o.castShadow = false;
+    });
+    closed.visible = false; root.add(closed);
+  }
   const proxy = buildShadowProxy();
   root.add(proxy);
 
@@ -482,7 +527,7 @@ export function buildCar(mode = 'land') {
     onShelf(bagMesh('tote', '#9b6b54'), 2.75, 0, true);
     }
   }
-  furnish(mode);
+  if (furnished) furnish(mode);
 
   const pl = plant();
   pl.position.set(-3.6, 0, -0.82);
@@ -498,9 +543,35 @@ export function buildCar(mode = 'land') {
     shell = buildShell(md);
     shellHolder.add(shell);
     furnish(md);
+    applyFade();
   }
 
-  return { root, straps, nodders, proxy, setMode, get mode() { return mode; } };
+  // 0: the cut-away car only; 1: the closed car only; between: the closed car fading in over it.
+  // Extra meshes (the place's door leaf tops, frame posts) can join the fade through addFade(mesh).
+  let closedK = 0;
+  function applyFade() {
+    const k = closedK;
+    if (!closed) return;
+    closed.visible = k > 0.001; shell.visible = k < 0.999;
+    for (const m of fadeMats) {
+      const b = m.userData.base ?? 1;
+      const tr = k < 0.999 || b < 1;
+      if (m.transparent !== tr) { m.transparent = tr; m.needsUpdate = true; }
+      m.opacity = b * k;
+      m.depthWrite = b >= 1;
+    }
+  }
+  function setClosed(k) { k = Math.max(0, Math.min(1, k)); if (Math.abs(k - closedK) < 1e-4) return; closedK = k; applyFade(); }
+  function addFade(mesh) {
+    mesh.material = mesh.material.clone(); mesh.material.userData.base = mesh.material.opacity; fadeMats.push(mesh.material); mesh.castShadow = false;
+    const o = mesh.onBeforeRender; void o;
+    closedParts.push(mesh); mesh.visible = closedK > 0.001;
+  }
+  const closedParts = [];
+  const _apply = applyFade;
+  // extra parts show and hide with the overlay
+  const applyAll = () => { _apply(); for (const m of closedParts) m.visible = closedK > 0.001; };
+  return { root, straps, nodders, proxy, setMode, get mode() { return mode; }, setClosed: (k) => { setClosed(k); applyAll(); }, addFade, get closedK() { return closedK; } };
 }
 
 // Neighbouring car: a closed body with a roof, a touch darker and greyer, seen only at the frame edge.

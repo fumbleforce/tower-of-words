@@ -51,13 +51,11 @@ export async function trainPlace(game) {
   const neighbours = [];
   for (const s of [-1, 1]) {
     const nPivot = new THREE.Group(); nPivot.position.set(s * (2 * (LX + T) + 0.52), -0.6, 0);
-    const nc = buildCar('land'); nc.root.remove(nc.proxy);
+    // the neighbours are closed cars, the same build as ours with its walls up and a roof (Jørgen: the open one
+    // behind "looks like some sort of pavilion")
+    const nc = buildCar('closed', { furnished: false }); nc.root.remove(nc.proxy);
     const grey = new THREE.Color('#7f8896');
-    nc.root.traverse((o) => { if (o.isMesh) { o.material = o.material.clone(); if (o.material.color) o.material.color.lerp(grey, 0.4).multiplyScalar(0.82); if (o.material.emissive) o.material.emissiveIntensity *= 0.5; } });
-    // the neighbours are closed cars seen from outside: a roof with two AC housings, so they don't read as empty tubs
-    { const roof = new THREE.Group(); roof.add(rbox(2 * LX + 0.1, 0.1, 2 * LZ + 0.1, '#5f6774', { r: 0.08, seg: 3 }));
-      roof.add(rbox(2 * LX - 0.4, 0.02, 0.1, '#4a515c', { y: 0.1, z: -0.5, r: 0.01, cast: false }), rbox(2 * LX - 0.4, 0.02, 0.1, '#4a515c', { y: 0.1, z: 0.5, r: 0.01, cast: false }));
-      roof.position.y = HF + 0.02; nc.root.add(roof); }
+    nc.root.traverse((o) => { if (o.isMesh) { o.material = o.material.clone(); if (o.material.color && !o.material.transparent) o.material.color.lerp(grey, 0.25).multiplyScalar(0.9); if (o.material.emissive) o.material.emissiveIntensity *= 0.5; } });
     nc.root.position.y = 0.6; nPivot.add(nc.root); scene.add(nPivot);
     const b = buildBellows(); b.position.set(s * (LX + T + 0.26), 0, 0); scene.add(b);
     neighbours.push({ pivot: nPivot, lag: s * 0.34, bellows: b });
@@ -247,21 +245,36 @@ export async function trainPlace(game) {
   const doorSets = new THREE.Group(); car.root.add(doorSets);
   function buildDoors(md) {
     doorSets.clear(); doorLamps.length = 0; myLeaves.length = 0;
-    const wallH = md === 'land' ? 0.62 : HF, top = Math.min(wallH - 0.1, 1.22), hH = top - 0.04;
+    // leaves and frames are full height, as on a real monorail; in the cut-away view the part above the cut wall
+    // belongs to the closed overlay and fades out with it (car.setClosed), so the play camera still sees inside
+    const cutH = md === 'land' ? 0.62 : HF, fullTop = 1.22, hH = fullTop - 0.04, split = cutH - 0.1;
+    const fade = (m) => { if (md === 'land') car.addFade(m); return m; };
     for (const dx of [-DOOR_X, DOOR_X]) {
       const zo = LZ + T + 0.012;                  // outer face of the wall
-      for (const s of [-1, 1]) doorSets.add(rbox(0.07, wallH, 0.03, '#2a2f38', { x: dx + s * (DOOR_W / 2 + 0.035), z: zo, r: 0.01 }));
-      const lamp = rbox(0.26, 0.05, 0.03, null, { x: dx, y: md === 'land' ? top + 0.02 : top + 0.05, z: zo, r: 0.01, m: lampShut, cast: false });
+      for (const s of [-1, 1]) {
+        doorSets.add(rbox(0.07, cutH, 0.03, '#2a2f38', { x: dx + s * (DOOR_W / 2 + 0.035), z: zo, r: 0.01 }));
+        if (md === 'land') doorSets.add(fade(rbox(0.07, HF - cutH, 0.03, '#2a2f38', { x: dx + s * (DOOR_W / 2 + 0.035), y: cutH, z: zo, r: 0.01 })));
+      }
+      const lamp = rbox(0.26, 0.05, 0.03, null, { x: dx, y: md === 'land' ? split + 0.12 : fullTop + 0.05, z: zo, r: 0.01, m: lampShut, cast: false });
       doorSets.add(lamp); doorLamps.push(lamp);
+      if (md === 'land') { const up = rbox(0.26, 0.05, 0.03, null, { x: dx, y: fullTop + 0.05, z: zo, r: 0.01, m: lampShut, cast: false }); doorSets.add(up); doorLamps.push(up); up.userData.upper = true; lamp.userData.lower = true; }
       doorSets.add(rbox(DOOR_W - 0.04, 0.004, 0.1, '#d8b447', { x: dx, y: 0.003, z: LZ - 0.07, r: 0.002, cast: false }));
       // the leaves hang just outside the wall (outside-sliding doors) and both slide toward the middle of the car
       // over the wall, the far one further, so nothing ever has to pass through the wall or the rounded corner
       for (const s of [-1, 1]) {
         const leaf = new THREE.Group();
-        leaf.add(rbox(DOOR_W / 2 - 0.004, hH, 0.03, '#56698a', { r: 0.01 }));
-        const wy = Math.max(0.08, hH - 0.24);
-        leaf.add(rbox(DOOR_W / 2 - 0.1, Math.min(0.2, hH * 0.4), 0.036, null, { y: wy, r: 0.015, m: emissive('#b9d3e6', '#9fc2dc', 0.35) }));
-        leaf.add(rbox(0.03, hH - 0.02, 0.038, '#e0b83a', { x: -s * (DOOR_W / 4 - 0.02), y: 0.01, r: 0.008, cast: false }));
+        const lowH = md === 'land' ? split : hH;
+        leaf.add(rbox(DOOR_W / 2 - 0.004, lowH, 0.03, '#56698a', { r: 0.01 }));
+        leaf.add(rbox(0.03, lowH - 0.02, 0.038, '#e0b83a', { x: -s * (DOOR_W / 4 - 0.02), y: 0.01, r: 0.008, cast: false }));
+        if (md === 'land') {
+          // the top of the leaf with its tall window, above the cut
+          leaf.add(fade(rbox(DOOR_W / 2 - 0.004, hH - split, 0.03, '#56698a', { y: split, r: 0.01 })));
+          leaf.add(fade(rbox(DOOR_W / 2 - 0.1, hH - split - 0.2, 0.036, null, { y: split + 0.08, r: 0.015, m: emissive('#b9d3e6', '#9fc2dc', 0.35) })));
+          leaf.add(fade(rbox(0.03, hH - split - 0.02, 0.038, '#e0b83a', { x: -s * (DOOR_W / 4 - 0.02), y: split, r: 0.008, cast: false })));
+        } else {
+          const wy = Math.max(0.08, hH - 0.24);
+          leaf.add(rbox(DOOR_W / 2 - 0.1, Math.min(0.2, hH * 0.4), 0.036, null, { y: wy, r: 0.015, m: emissive('#b9d3e6', '#9fc2dc', 0.35) }));
+        }
         const far = s * Math.sign(dx) > 0;
         leaf.position.set(dx + s * DOOR_W / 4, 0.037, LZ + T + (far ? 0.094 : 0.058));
         doorSets.add(leaf); myLeaves.push({ g: leaf, x0: leaf.position.x, s, far });
@@ -389,13 +402,15 @@ export async function trainPlace(game) {
   }
 
   let simT = 0;
+  const _camDir = new THREE.Vector3();
+  const CLOSE_LO = +(new URLSearchParams(location.search).get('closeLo') || 42), CLOSE_HI = +(new URLSearchParams(location.search).get('closeHi') || 48);   // camera pitch (deg) where the car closes
   const P = {
     // colour grade (js/post.js): muted like the lobby, a warm key, the sea kept from going cyan
     grade: { exposure: 1.0, temp: 0.03, sat: 0.9, contrast: 1.05, shadowTint: [-0.004, 0.0, 0.014], highTint: [0.018, 0.008, -0.01], vignette: 0.24, bloom: 0.3, bloomThreshold: 0.9, focusBand: 0.28 },
     scene, camera, cam, space, nav, sun, charScale: 1, floorY: 0,
     start: [-0.2, 0.1], startFacing: 0.0, things, people, spots, zones, seats,
     beforeAO: new (class extends Pass { constructor() { super(); this.needsSwap = false; } render() { car.proxy.visible = false; } })(),
-    beforeRender() { car.proxy.visible = true; },
+    beforeRender() { car.proxy.visible = !st.departing; },
     fit,
     pick(rc) {
       const floorM = car.root.getObjectByName('floor');
@@ -426,6 +441,13 @@ export async function trainPlace(game) {
       const r = people[id]; if (r && r.hips) standUp(r);
     },
     update(dt, t) {
+      // cut-away for the steep play camera, the closed car for shallow shots from outside (the title) and while it
+      // pulls out of the station
+      { camera.getWorldDirection(_camDir); const elev = Math.asin(Math.max(-1, Math.min(1, -_camDir.y))) * 180 / Math.PI;
+        const want = st.leaving ? 1 : 1 - THREE.MathUtils.smoothstep(elev, CLOSE_LO, CLOSE_HI);
+        st.closedK = st.closedK === undefined ? want : st.closedK + (want - st.closedK) * Math.min(1, dt * (st.leaving ? 2.5 : 6));
+        car.setClosed(st.closedK);
+        for (const l of doorLamps) l.visible = l.userData.upper ? st.closedK > 0.5 : l.userData.lower ? st.closedK <= 0.5 : true; }
       simT += dt;
       // speed: cruise, brake into the station, stop, leave
       if (st.mode === 'brake') {
@@ -513,11 +535,14 @@ export async function trainPlace(game) {
       },
       // the empty car pulls out and away; people on the platform (Eric, Mio, whoever got off) stay where they are
       depart: async () => {
+        st.leaving = true;
         const stay = new Set([game.player.root, game.mioNpc.root, kitty, kb]);
         for (const r of Object.values(people)) if (r && r.root && r.root.position.z > LZ + T) { stay.add(r.root); if (r.blob) stay.add(r.blob); }
-        const movers = car.root.children.filter((o) => !stay.has(o));
+        // the shadow proxy (roof and full walls for the sun) goes too, hidden: it shows in the AO pass once it moves
+        if (car.proxy) { car.proxy.visible = false; stay.add(car.proxy); }
+        const movers = car.root.children.filter((o) => !stay.has(o));   // the closed overlay is a child of the car, so it leaves with it
         const x0 = movers.map((o) => o.position.x), n0 = neighbours.map((n) => n.pivot.position.x), b0 = neighbours.map((n) => n.bellows.position.x);
-        sfx('brake');
+        sfx('brake'); st.departing = true;
         await game.tween(7, (k) => {
           const d = -34 * k * k;                           // a slow start, then away
           movers.forEach((o, i) => { o.position.x = x0[i] + d; });
