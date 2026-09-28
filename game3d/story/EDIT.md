@@ -36,14 +36,14 @@ The train is the reference. Jørgen: "I love the dialogue now, Mio's lines are g
 
 ## Office, morning
 
-- Want: settle in (a desk, a chair, a first ticket). Obstacle: nobody but Mio has English and she's busy; his chair is gone. Turn: the copier, broken since 1996, works for him in front of Mori.
+- Want: settle in (a desk, a chair, a first repair request). Obstacle: nobody but Mio has English and she's busy; his chair is gone. Turn: the copier, broken since 1996, works for him in front of Mori.
 - Flat, before:
   - Kenji's first meeting never played when you tapped him, because tapping sets `met_kenji` in the engine before the trigger checks it. Players only ever saw his second line.
   - Kenji's first meeting, when it did play, was Japanese plus narration ("He points at your empty desk, then at the machine room door"), so the funniest person in the room had no voice.
   - Mori's greeting: "He looks very pleased" (the face shows it). After greeting, nobody led Eric anywhere; the goal said "Find your desk".
   - The copier: "> Nothing." and "> Your turn." narrate what the screen and the prompt already show. Mori's finger to his lips had nothing to pay off.
   - Mio's reply to "I asked it nicely" was a shrug; she has seen the train doors and should connect them.
-- Changed: Mori says "どうぞ、こちらへ" and leads him in. Kenji meets him in his own broken English ("Your chair... I borrow. My chair is... broken. Pshh." / "Now it is in machine room. And cat is sleeping on it. Sorry!"). Mio on the chair that rolls back with the cat on it: "Sorry. She comes with it, I think." The ticket was opened by Mori when he came down to B2; at the copier he murmurs 三十年 (thirty years) before the finger to his lips, and it pays off at the end ("Mori-san won't tell me why, he just smiles"). Mio: "...Asked it nicely. Like the doors, this morning?" Mori's correction 外国の方 is now readable, since Mio explains it in the next line. The copier, and every command beat, plays the kotodama effect.
+- Changed: Mori says "どうぞ、こちらへ" and leads him in. Kenji meets him in his own broken English ("Your chair... I borrow. My chair is... broken. Pshh." / "Now it is in machine room. And cat is sleeping on it. Sorry!"). Mio on the chair that rolls back with the cat on it: "Sorry. She comes with it, I think." The repair request was opened by Mori when he came down to B2; at the copier he murmurs 三十年 (thirty years) before the finger to his lips, and it pays off at the end ("Mori-san won't tell me why, he just smiles"). Mio: "...Asked it nicely. Like the doors, this morning?" Mori's correction 外国の方 is now readable, since Mio explains it in the next line. The copier, and every command beat, plays the kotodama effect.
 
 ## Lunch
 
@@ -60,4 +60,4 @@ The train is the reference. Jørgen: "I love the dialogue now, Mio's lines are g
 ## Evening
 
 - Want: go home. Obstacle: Mio's question. Turn, before: she listed what she'd seen and asked "How are you doing that?", then the day ended. The list read as a recap and there was no reason to come back tomorrow.
-- Changed: her list names the words ("On the train you said 待って and the doors just stopped"; Mori has said 動いて to the copier every morning for thirty years), with her own asides. Eric answers ("I don't know" / "I asked nicely" / nothing). Then her phone goes: the station has made a ticket about the 8:40's doors, and it lands on Eric: "It's an IT ticket, and you're the IT guy, so." If they had lunch together: "Take the 8:40 tomorrow. I'm in the front car. I want to see you fix that sensor." Otherwise: "It's the 8:40. Don't sleep through it, 外人." That pays off her train line ("If someone makes a ticket for it, it comes to me") and gives day 2 a specific first scene without writing it.
+- Changed: her list names the words ("On the train you said 待って and the doors just stopped"; Mori has said 動いて to the copier every morning for thirty years), with her own asides. Eric answers ("I don't know" / "I asked nicely" / nothing). Then her phone goes: the station has made a repair request about the 8:40's doors, and it lands on Eric: "It's an IT repair request, and you're the IT guy, so." If they had lunch together: "Take the 8:40 tomorrow. I'm in the front car. I want to see you fix that sensor." Otherwise: "It's the 8:40. Don't sleep through it, 外人." That pays off her train line ("If somebody reports it broken, it goes on my list") and gives day 2 a specific first scene without writing it.
