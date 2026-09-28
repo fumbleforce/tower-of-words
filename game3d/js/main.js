@@ -461,7 +461,7 @@ async function prepare(name) {
 async function enter(name) {
   const { place, story } = await prepare(name);
   if (game.place && game.place.leave) game.place.leave();
-  game.place = place; game.story = story;
+  game.place = place; game.story = story; document.body.dataset.place = name;
   game.runner.use(place, story);
   place.space.add(game.player.root);
   place.space.add(game.mioNpc.root); game.mioNpc.root.visible = false; game.mioNpc.root.scale.setScalar(place.charScale || 1); game.mioNpc.setState('idle');

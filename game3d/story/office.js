@@ -110,7 +110,7 @@ export default {
     office_in: [
       { do: 'period', to: 'morning' },
       { do: 'cam', on: 'mori', zoom: 1.6 },
-      { say: 'mori', text: '{ohayo}。森と申します。ITサポートへ、ようこそ。', overheard: true, clear: ['IT'] },
+      { say: 'mori', face: 'smile', text: '{ohayo}。森と申します。ITサポートへ、ようこそ。', overheard: true, clear: ['IT'] },
       { do: 'bow', who: 'mori', depth: 'deep' },
       '> He waits.',
       { do: 'goal', text: 'Greet him. Mio said something about new people.' },
@@ -151,7 +151,7 @@ export default {
     kenji_first: [
       { set: 'met_kenji' },
       { do: 'meet', who: 'kenji' },
-      { say: 'kenji', text: 'あ、新しい人？ごめん、椅子借りてた。壊れちゃってさ、俺の。', overheard: true },
+      { say: 'kenji', face: 'sheepish', text: 'あ、新しい人？ごめん、椅子借りてた。壊れちゃってさ、俺の。', overheard: true },
       { do: 'face', who: 'kenji', to: 'machine_door' },
       '> He points at your empty desk, then at the machine room door.',
       { do: 'goal', text: 'Get your chair back from the machine room.' },
@@ -165,7 +165,7 @@ export default {
     ],
     kenji_again: [
       { if: 'chair_back', then: [
-        'kenji: Ah, sorry, sorry, the chair. My English is... very little.',
+        { say: 'kenji', face: 'sheepish', text: 'Ah, sorry, sorry, the chair. My English is... very little.' },
         { choice: [
           { text: '“Mine\'s worse. My Japanese, I mean.”', go: 'kenji_small' },
           { text: 'Pat the chair sympathetically', go: 'kenji_pat' },
@@ -174,14 +174,14 @@ export default {
     ],
     ohayo_kenji: [
       { set: 'greeted_kenji' },
-      { say: 'kenji', text: 'かたっ！おはよう、でいいよ。', overheard: true },
+      { say: 'kenji', face: 'grin', text: 'かたっ！おはよう、でいいよ。', overheard: true },
       '> He laughs, and says it again, shorter.',
       { say: 'kenji', text: 'おはよう。', overheard: true, clear: [{ ja: 'おはよう', ro: 'ohayō', en: 'morning (casual)' }] },
       { if: '!met_kenji', then: [{ go: 'kenji_first' }] },
     ],
     yoroshiku_kenji: [
       { set: 'greeted_kenji' },
-      { say: 'kenji', text: 'よろしく！', overheard: true, clear: [{ ja: 'よろしく', ro: 'yoroshiku', en: 'nice to meet you (casual)' }] },
+      { say: 'kenji', face: 'grin', text: 'よろしく！', overheard: true, clear: [{ ja: 'よろしく', ro: 'yoroshiku', en: 'nice to meet you (casual)' }] },
       '> He holds out a fist. You bump it.',
       { if: '!met_kenji', then: [{ go: 'kenji_first' }] },
     ],
@@ -221,7 +221,7 @@ export default {
       { do: 'meet', who: 'mio' },
       "mio: Okay, your first ticket. I changed your screen to English, by the way.",
       '> TICKET #1. Copier, B2 copy room. Eats paper. Opened 1 April 1996.',
-      'eric: Nineteen ninety-six?',
+      { say: 'eric', face: 'surprised', text: 'Nineteen ninety-six?' },
       "mio: Yeah. It's kind of a tradition now, nobody closes it. Mori-san knows the copier, he can show you.",
       { say: 'mio', text: '森さん、{gaijin}にコピー機お願い。', overheard: true },
       { say: 'mori', text: '外国の方、ですよ。', overheard: true },
@@ -237,7 +237,7 @@ export default {
       { set: 'copier_started' },
       { do: 'cam', on: 'mori', zoom: 1.6 },
       { do: 'copier', state: 'jam' },
-      { say: 'mori', text: 'また食べられました…', overheard: true },
+      { say: 'mori', face: 'flustered', text: 'また食べられました…', overheard: true },
       { do: 'face', who: 'mori', to: 'copier' },
       { do: 'bow', who: 'mori' },
       'mori: {ugoite}.',
@@ -330,7 +330,7 @@ export default {
       { set: 'lunch_mori' },
       { do: 'walk', who: 'eric', to: 'coffee_front', wait: true },
       { do: 'cam', on: 'mori', zoom: 1.6 },
-      { say: 'mori', text: 'ノルウェーから、ですね。私、1994年にリレハンメルへ行きました。', overheard: true, clear: [{ ja: 'ノルウェー', ro: 'noruwē', en: 'Norway' }, '1994', { ja: 'リレハンメル', ro: 'Rirehanmeru', en: 'Lillehammer' }] },
+      { say: 'mori', face: 'smile', text: 'ノルウェーから、ですね。私、1994年にリレハンメルへ行きました。', overheard: true, clear: [{ ja: 'ノルウェー', ro: 'noruwē', en: 'Norway' }, '1994', { ja: 'リレハンメル', ro: 'Rirehanmeru', en: 'Lillehammer' }] },
       { do: 'gesture', who: 'mori', kind: 'skijump' },
       { choice: [
         { text: 'Mime the landing', go: 'mori_landing' },
@@ -412,7 +412,7 @@ export default {
     ],
     gift_mori_cornsoup: [
       { set: 'gifted_mori' }, { do: 'bond', who: 'mori', add: 1 },
-      { say: 'mori', text: 'ああ、ちょうど飲みたかった。ありがとうございます。', overheard: true, clear: [{ ja: 'ありがとう', ro: 'arigatō', en: 'thank you' }] },
+      { say: 'mori', face: 'smile', text: 'ああ、ちょうど飲みたかった。ありがとうございます。', overheard: true, clear: [{ ja: 'ありがとう', ro: 'arigatō', en: 'thank you' }] },
       '> Later, a cup of tea turns up next to your keyboard.',
     ],
     gift_mori_other: [
@@ -421,7 +421,7 @@ export default {
     ],
     gift_kenji_melon: [
       { set: 'gifted_kenji' },
-      { say: 'kenji', text: 'マジで？神！', overheard: true },
+      { say: 'kenji', face: 'grin', text: 'マジで？神！', overheard: true },
       { do: 'emote', who: 'kenji', kind: 'heart' },
     ],
     gift_kenji_other: [
