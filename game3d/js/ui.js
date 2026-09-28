@@ -1,6 +1,11 @@
 // HTML overlay: goal, words, the train's LED board, the talk panel with reply chips, fades and the end card.
 import { lineHTML, WORDS, COMMANDS, PHRASES, known, seen, cmdHTML, iconHTML, INTERJ_GLOSS } from './lang.js';
 import { settings, onSettings, CPS } from './settings.js';
+import { mountVoice, VOICE_CSS } from './speech.js';
+import { notePractice, needsPractice, pipsHTML, MASTERY_CSS } from './mastery.js';
+// the practice dots' css ships with mastery.js; the voice row injects its own
+{ const st = document.createElement('style'); st.id = 'mastery-css'; st.textContent = MASTERY_CSS; document.head.appendChild(st); }
+void VOICE_CSS;
 
 const $ = (s) => document.querySelector(s);
 const el = (tag, cls, html) => { const e = document.createElement(tag); if (cls) e.className = cls; if (html != null) e.innerHTML = html; return e; };
@@ -501,7 +506,7 @@ export const ui = {
     b.querySelector('.n').textContent = known.size;
   },
   showCmds() {
-    const row = (id) => { const w = WORDS[id]; return `<li class="wrow">${iconHTML(id)}<span class="cw"><span class="jp">${w.ja}</span><span class="rd">${w.ro} · ${w.en}</span></span></li>`; };
+    const row = (id) => { const w = WORDS[id]; return `<li class="wrow">${iconHTML(id)}<span class="cw"><span class="jp">${w.ja}</span><span class="rd">${w.ro} · ${w.en}</span></span>${pipsHTML(id)}</li>`; };
     const ph = PHRASES.filter((id) => known.has(id)), cm = COMMANDS.filter((id) => known.has(id));
     $('#cmdsPanel ul').innerHTML = (ph.length ? `<li class="sec">Phrases</li>${ph.map(row).join('')}` : '') + (cm.length ? `<li class="sec">Commands <span>(they make old machines listen)</span></li>${cm.map(row).join('')}` : '');
     $('#cmdsPanel').hidden = false;
@@ -517,7 +522,7 @@ export const ui = {
         const have = ids.filter((id) => known.has(id)); if (!have.length) continue;
         list.appendChild(el('div', 'sec', title));
         for (const id of have) {
-          const b = el('button', 'cmd' + (WORDS[id].phrase ? ' phrase' : ''), `<span class="k">${++n}</span>${cmdHTML(id)}`); b.type = 'button';
+          const b = el('button', 'cmd' + (WORDS[id].phrase ? ' phrase' : '') + (needsPractice(id) ? ' practice' : ''), `<span class="k">${++n}</span>${cmdHTML(id)}${pipsHTML(id)}`); b.type = 'button';
           b.onclick = (e) => { e.stopPropagation(); m.hidden = true; this._sayKeys = null; res(id); };
           list.appendChild(b);
         }
@@ -720,7 +725,7 @@ export const ui = {
   },
   // Type the romaji of a word. Forgiving: case, spaces, hyphens and long vowels (ō = ou = oo = o) don't matter.
   // Each letter lights up as it's typed; a wrong try shows where it went off. Resolves when it's right.
-  typePrompt(id, prompt) {
+  typePrompt(id, prompt, opts = {}) {
     return new Promise((res) => {
       const w = WORDS[id];
       const canon = (s) => s.toLowerCase().normalize('NFC').replace(/[āâ]/g, 'a').replace(/[īî]/g, 'i').replace(/[ūû]/g, 'u').replace(/[ēê]/g, 'e').replace(/[ōô]/g, 'o')
@@ -732,12 +737,13 @@ export const ui = {
       t.querySelector('.who').innerHTML = '';
       t.querySelector('.line').innerHTML = (prompt ? `<div class="tp-prompt">${prompt.who ? `<span class="tp-who" style="color:${prompt.who.color || '#8fa3c0'}">${prompt.who.name}</span> ` : ''}${lineHTML(prompt.text)}</div>` : '') +
         `<div class="tp"><div class="tp-jp jp">${iconHTML(id, 'wi tp-ico')}${w.ja}</div><div class="tp-ro">${toks.map((k) => (k.sp ? '<span class="sp"> </span>' : `<span class="lt">${k.ch}</span>`)).join('')}</div><div class="tp-en">${w.en}</div>` +
-        `<input class="tp-in" type="text" inputmode="latin" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="Type it in romaji" aria-label="Type ${w.ro}"><div class="tp-hint"></div></div>`;
+        `<input class="tp-in" type="text" inputmode="latin" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="${(window.__settings && window.__settings.voiceInput !== 'off') ? 'Type it in romaji, or say it' : 'Type it in romaji'}" aria-label="Type ${w.ro}"><div class="tp-hint"></div>${opts.cancel ? '<button type="button" class="tp-cancel">Never mind</button>' : ''}</div>`;
       t.querySelector('.chips').innerHTML = ''; t.querySelector('.more').hidden = true;
       t.classList.remove('in'); void t.offsetWidth; t.classList.add('in');
       this._advance = null; this._chipKeys = null;
       const inp = t.querySelector('.tp-in'), hint = t.querySelector('.tp-hint');
       const letters = [...t.querySelectorAll('.tp-ro .lt')];
+      const offVoice = mountVoice(t.querySelector('.tp'), id, { phone: document.body.classList.contains('phone'), ro: w.ro, ja: w.ja, onHit: () => done('voice') });
       // which display letters each canonical position covers
       const map = []; { let c = ''; letters.forEach((el, i) => { const before = canon(c); c += el.textContent; const after = canon(c); for (let k = before.length; k < after.length; k++) map[k] = i; if (after.length === before.length) map[before.length - 1] = i; }); }
       let tries = 0;
@@ -747,18 +753,22 @@ export const ui = {
         letters.forEach((el, i) => { el.classList.toggle('on', i <= lit); el.classList.toggle('bad', v.length > ok && i === (ok < target.length ? map[ok] : -1)); });
         return v === target;
       };
-      const done = () => { t.classList.remove('typing'); stopVoice(); sfx('ok'); res(); };
-      inp.addEventListener('input', () => { if (paint()) setTimeout(done, 250); });
+      let over = false;
+      const done = (how = 'typed') => { if (over) return; over = true; offVoice(); notePractice(id, how); t.classList.remove('typing'); stopVoice(); sfx('ok'); res(true); };
+      const cancel = () => { if (over) return; over = true; offVoice(); t.classList.remove('typing'); res(false); };
+      const cb = t.querySelector('.tp-cancel'); if (cb) cb.onclick = (e) => { e.stopPropagation(); cancel(); };
+      inp.addEventListener('input', () => { if (paint()) setTimeout(() => done('typed'), 250); });
       inp.addEventListener('keydown', (e) => {
         e.stopPropagation();
+        if (e.key === 'Escape' && opts.cancel) { cancel(); return; }
         if (e.key !== 'Enter') return;
-        if (paint()) { done(); return; }
+        if (paint()) { done('typed'); return; }
         tries++; sfx('no');
         const v = canon(inp.value); let ok = 0; while (ok < v.length && v[ok] === target[ok]) ok++;
         const next = letters[map[Math.min(ok, target.length - 1)]];
         hint.innerHTML = tries < 3 ? `Close. Next letter: <b>${next ? next.textContent : ''}</b>. Follow the letters under the word.` : `Type it just as shown: <b>${w.ro}</b>`;
       });
-      if (this.auto) { setTimeout(() => { inp.value = w.ro; paint(); done(); }, 20); return; }
+      if (this.auto) { setTimeout(() => { inp.value = w.ro; paint(); done('typed'); }, 20); return; }
       setTimeout(() => inp.focus(), 60);
     });
   },

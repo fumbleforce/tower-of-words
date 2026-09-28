@@ -15,7 +15,11 @@ export const DEFAULTS = {
   quality: 'auto',        // 'auto' | 'low' | 'medium' | 'high' (post.js reads the tier; see qualityTier())
   reduceMotion: reduceDefault,
   keySay: 'KeyQ',
-  uiSize: 1,              // a multiplier on the viewport-based UI scale (0.85, 1, 1.2, 1.4)         // the Say key (KeyboardEvent.code); Talk stays on E, Space and Enter
+  uiSize: 1,              // a multiplier on the viewport-based UI scale (0.85, 1, 1.2, 1.4)
+  voiceInput: 'device',   // 'off' | 'device' | 'browser': saying a word into the mic (the mic is only asked for on first press)
+  voiceKey: 'KeyV',       // hold-to-talk key
+  voiceModel: 'auto',     // 'auto' | 'base' | 'moon' | 'tiny' (testing only, no UI)
+  masteryUses: 3,         // how many times a word is typed or said before Say sends it with one click
 };
 // characters per second for each text speed (0 = all at once)
 export const CPS = { slow: 28, normal: 55, fast: 110, instant: 0 };
