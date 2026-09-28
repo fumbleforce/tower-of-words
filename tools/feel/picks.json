@@ -1,0 +1,17 @@
+{
+ "bed_train": ["bed_train-5231", 0, 29.5],
+ "bed_station": ["bed_station-5231", 0, 29.5],
+ "bed_lobby": ["bed_lobby-5493", 0, 29.5],
+ "bed_office": ["bed_office-5100", 0, 29.5],
+ "brake": ["brake-5362", 0, 5.8],
+ "copier_run": ["copier_run-5362", 0, 5.8],
+ "flap_open": ["flap_open-5231", 0, 1.8],
+ "glass_doors": ["glass_doors-5231", 0, 2.2],
+ "train_doors": ["train_doors-5100", 0, 2.7],
+ "lift_doors": ["lift_doors-5231", 0, 2.4],
+ "kettle_pour": ["kettle_pour-5362", 0, 3.6],
+ "vending": ["vending-5493", 0, 1.8],
+ "phone_far": ["phone_far-5493", 0, 5.8],
+ "printer": ["printer-5493", 0, 7.8],
+ "typing": ["typing-5362", 0, 5.8]
+}
