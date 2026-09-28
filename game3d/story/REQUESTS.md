@@ -11,10 +11,13 @@ The new premise is wired (FORMAT.md, "Eric, Mio, phrases and overheard Japanese"
 5. **The guard on the phone.** gate.js used to say the guard was on hold to the gate company, but nothing on screen shows it, so it's cut. If you add a hook like `phone` `who`, `state: 'on'|'off'` (handset at his ear, faint hold music), the joke can come back.
 
 
+## Open
+
+- **A bow.** Bowing carries a lot on day one (Mori at the lift, Mori to the copier, the guard). A hook like `bow` `who`, `depth: 'small'|'deep'` would let the story stage it instead of narrating it. Until then the lines say it in a few words.
+
 ## Done (builder, 2026-09-28)
 3. `{ do: 'hint', what: 'say', text }` points at the Say button with `text` (and it pulses). The button is also taught automatically the first time Eric learns a word, and lights up whenever a goal answers to a word he knows.
 4. Commuters keep arriving while the gate is shut or jammed and wait to the left of the readers with their phones out; they flow again once the gate opens. Three commuters in all.
 5. Hook `phone` `who: 'guard'`, `state: 'on'|'off'`: handset at his ear and a faint hold-music blip.
 6. `type` accepts `from`.
 Also new: `type` (the typing prompt), `typing` (the guard's typing animation, renamed from `type`), `clear` entries now plain for that line only, and nothing counts as known until taught. See FORMAT.md.
-6. **A bow.** Bowing carries a lot on day one (Mori at the lift, Mori to the copier, the guard). A hook like `bow` `who`, `depth: 'small'|'deep'` would let the story stage it instead of narrating it. Until then the lines say it in a few words.
