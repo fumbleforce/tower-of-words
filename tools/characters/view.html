@@ -7,7 +7,7 @@
 <script type="module">
 import * as THREE from 'three';
 import { loadMio, setPhone, PHONE } from '../../game3d/js/mio.js';
-import { loadEric } from '../../game3d/js/avatar.js';
+import { loadEric, loadMeshy } from '../../game3d/js/avatar.js';
 const q = new URLSearchParams(location.search);
 const cells = (q.get('cells') || 'idle,0;idle,90;idle,180;idle,270').split(';').map((c) => c.split(','));
 const cols = +(q.get('cols') || Math.min(cells.length, 4)), rows = Math.ceil(cells.length / cols);
@@ -22,7 +22,21 @@ if (q.has('ppos')) setPhone({ pos: q.get('ppos').split(',').map(Number) });
 if (q.has('prot')) setPhone({ rot: q.get('prot').split(',').map((v) => +v * Math.PI / 180) });
 if (q.has('pt')) setPhone({ t: +q.get('pt') }); if (q.has('lift')) setPhone({ lift: +q.get('lift') }); if (q.has('lift2')) setPhone({ lift2: +q.get('lift2') }); if (q.has('nohead')) setPhone({ only: /Spine|Shoulder|Arm|Hand$/ });
 const who = q.get('who') || 'mio';
-const m = who === 'eric' ? await loadEric() : await loadMio({ height: 1.12 });
+async function loadGlb(src, height) {
+  const { GLTFLoader } = await import('../../game3d/vendor/loaders/GLTFLoader.js');
+  const g = await new GLTFLoader().loadAsync(src);
+  g.scene.traverse((o) => { if (o.isMesh) { const map = o.material.map; o.material = new THREE.MeshLambertMaterial(map ? { map } : { color: '#b9bcc2', flatShading: true }); o.castShadow = true; } });
+  const box = new THREE.Box3().setFromObject(g.scene), root = new THREE.Group(); g.scene.scale.setScalar(height / (box.max.y - box.min.y)); g.scene.position.y = -box.min.y * height / (box.max.y - box.min.y); root.add(g.scene);
+  return { root, setState() {}, update() {}, placePhone() {}, layers: { layers: {}, add: () => ({}) } };
+}
+const LOAD = (w) => (w === 'eric' ? loadEric() : w === 'mio' ? loadMio({ height: 1.12 }) : loadMeshy(w, { height: +(q.get('h_' + w) || 1.2) }));
+// line=mio,eric,mori: everyone side by side in each cell (same state), spaced along x
+if (q.has('line')) {
+  const ids = q.get('line').split(','), all = await Promise.all(ids.map(LOAD));
+  all.forEach((c, i) => { c.root.position.x = (i - (ids.length - 1) / 2) * +(q.get('gap') || 0.8); s.add(c.root); });
+  window.__line = all;
+}
+const m = window.__line ? { root: new THREE.Group(), setState(st) { for (const c of window.__line) c.setState(st); }, update(dt) { for (const c of window.__line) c.update(dt); }, placePhone() {}, layers: { layers: {} } } : who === 'eric' ? await loadEric() : who === 'glb' ? await loadGlb(q.get('src'), +(q.get('h') || 1.12)) : who === 'mio' ? await loadMio({ height: 1.12 }) : await loadMeshy(who, { height: +(q.get('h_' + who) || 1.2) });
 s.add(m.root);
 const clip = q.has('clip') ? await fetch(q.get('clip')).then((x) => x.json()) : null;
 const zoom = +(q.get('zoom') || 1), el = +(q.get('el') || 12) * Math.PI / 180, d = 4.2 / zoom, ty = +(q.get('ty') || 0.56);
@@ -30,12 +44,17 @@ const cam = new THREE.PerspectiveCamera(22, CW / CH, 0.05, 50);
 const lab = document.getElementById('l');
 cells.forEach((c, i) => {
   const [st, ang, pw, ct] = c;
-  m.setState(st === 'phone' ? 'idle' : st);
+  const gm = /^g:(\w+)@([\d.]+)$/.exec(st);
+  m.setState(gm || st === 'phone' ? 'idle' : st.split('@')[0]);
+  if (!gm && st.includes('@')) { const a = (m.mixer && m.mixer._actions) || []; for (const c of window.__line || [m]) for (const x of (c.mixer ? c.mixer._actions : [])) if (x.isRunning() && x.timeScale) x.time = 0; }
+  if (gm) { for (const c of window.__line || [m]) if (c.gesture) { c.gesture(gm[1]); c.update(+gm[2]); } }
+  else if (st.includes('@')) { for (const c of window.__line || [m]) c.update(+st.split('@')[1]); }
   if (clip && ct !== undefined) { const l = m.layers.add('scan', clip, +ct, { only: PHONE.only }); l.w = l.target = 1; }
   else if (m.layers.layers.scan) m.layers.layers.scan.w = m.layers.layers.scan.target = 0;
   if (m.layers.layers.phone) { const w = st === 'phone' ? 1 : +(pw || 0); m.layers.layers.phone.w = m.layers.layers.phone.target = w; }
   m.placePhone();
-  for (let k = 0; k < 3; k++) m.update(1 / 60);
+  const prevSt = window.__prevSt; window.__prevSt = st.split('@')[0];
+  for (let k = 0; k < (gm || prevSt === window.__prevSt ? 3 : 30); k++) m.update(1 / 60);
   const a = (+ang) * Math.PI / 180;
   cam.position.set(Math.sin(a) * Math.cos(el) * d, ty + Math.sin(el) * d, Math.cos(a) * Math.cos(el) * d); cam.lookAt(0, ty, 0);
   const x = (i % cols) * CW, y = (rows - 1 - Math.floor(i / cols)) * CH;

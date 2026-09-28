@@ -1,0 +1,258 @@
+{
+ "prompt": "Turn the person from image 1 into a 3D chibi anime character in the exact style of image 2: a low-poly faceted 3D render with a big head about half the body height, a short simple blocky body, large simple anime eyes that are open, flat matte colours and soft even studio light on a plain white background. He is an older Japanese man with short grey hair swept back, a kind lined face, a dark charcoal suit jacket, a white shirt and a navy tie, dark trousers and black shoes. Simplify the character a lot to match the detail level of image 2. Full body, standing, turned at an angle, looking to the left, same orientation as the body, like image 2. Keep all features thick and sturdy, no fine strands or thin spikes. Empty hands. No text, no props, no extra subjects, no photorealism. Flat matte texture.",
+ "seed": 14,
+ "steps": 4,
+ "cfg": 1.0,
+ "portrait": "game3d/assets/portraits-v2/mori-neutral.webp",
+ "style": "/home/jorgen/repo/japanese/tools/characters/ref/mio-chibi-angled.png",
+ "model": "flux-2-klein-4b-fp8",
+ "workflow": {
+  "1": {
+   "class_type": "UNETLoader",
+   "inputs": {
+    "unet_name": "flux-2-klein-4b-fp8.safetensors",
+    "weight_dtype": "default"
+   }
+  },
+  "2": {
+   "class_type": "CLIPLoader",
+   "inputs": {
+    "clip_name": "qwen_3_4b.safetensors",
+    "type": "flux2"
+   }
+  },
+  "3": {
+   "class_type": "VAELoader",
+   "inputs": {
+    "vae_name": "flux2-vae.safetensors"
+   }
+  },
+  "4": {
+   "class_type": "CLIPTextEncode",
+   "inputs": {
+    "text": "Turn the person from image 1 into a 3D chibi anime character in the exact style of image 2: a low-poly faceted 3D render with a big head about half the body height, a short simple blocky body, large simple anime eyes that are open, flat matte colours and soft even studio light on a plain white background. He is an older Japanese man with short grey hair swept back, a kind lined face, a dark charcoal suit jacket, a white shirt and a navy tie, dark trousers and black shoes. Simplify the character a lot to match the detail level of image 2. Full body, standing, turned at an angle, looking to the left, same orientation as the body, like image 2. Keep all features thick and sturdy, no fine strands or thin spikes. Empty hands. No text, no props, no extra subjects, no photorealism. Flat matte texture.",
+    "clip": [
+     "2",
+     0
+    ]
+   }
+  },
+  "5": {
+   "class_type": "ConditioningZeroOut",
+   "inputs": {
+    "conditioning": [
+     "4",
+     0
+    ]
+   }
+  },
+  "10": {
+   "class_type": "LoadImage",
+   "inputs": {
+    "image": "chr-mori-portrait.png"
+   }
+  },
+  "11": {
+   "class_type": "ImageScaleToTotalPixels",
+   "inputs": {
+    "image": [
+     "10",
+     0
+    ],
+    "upscale_method": "lanczos",
+    "megapixels": 1.0,
+    "resolution_steps": 16
+   }
+  },
+  "12": {
+   "class_type": "VAEEncode",
+   "inputs": {
+    "pixels": [
+     "11",
+     0
+    ],
+    "vae": [
+     "3",
+     0
+    ]
+   }
+  },
+  "13": {
+   "class_type": "ReferenceLatent",
+   "inputs": {
+    "conditioning": [
+     "4",
+     0
+    ],
+    "latent": [
+     "12",
+     0
+    ]
+   }
+  },
+  "14": {
+   "class_type": "ReferenceLatent",
+   "inputs": {
+    "conditioning": [
+     "5",
+     0
+    ],
+    "latent": [
+     "12",
+     0
+    ]
+   }
+  },
+  "20": {
+   "class_type": "LoadImage",
+   "inputs": {
+    "image": "chr-style-mio-chibi-angled.png"
+   }
+  },
+  "21": {
+   "class_type": "ImageScaleToTotalPixels",
+   "inputs": {
+    "image": [
+     "20",
+     0
+    ],
+    "upscale_method": "lanczos",
+    "megapixels": 1.0,
+    "resolution_steps": 16
+   }
+  },
+  "22": {
+   "class_type": "VAEEncode",
+   "inputs": {
+    "pixels": [
+     "21",
+     0
+    ],
+    "vae": [
+     "3",
+     0
+    ]
+   }
+  },
+  "23": {
+   "class_type": "ReferenceLatent",
+   "inputs": {
+    "conditioning": [
+     "13",
+     0
+    ],
+    "latent": [
+     "22",
+     0
+    ]
+   }
+  },
+  "24": {
+   "class_type": "ReferenceLatent",
+   "inputs": {
+    "conditioning": [
+     "14",
+     0
+    ],
+    "latent": [
+     "22",
+     0
+    ]
+   }
+  },
+  "30": {
+   "class_type": "EmptyFlux2LatentImage",
+   "inputs": {
+    "width": 896,
+    "height": 1184,
+    "batch_size": 1
+   }
+  },
+  "31": {
+   "class_type": "Flux2Scheduler",
+   "inputs": {
+    "steps": 4,
+    "width": 896,
+    "height": 1184
+   }
+  },
+  "32": {
+   "class_type": "KSamplerSelect",
+   "inputs": {
+    "sampler_name": "euler"
+   }
+  },
+  "33": {
+   "class_type": "RandomNoise",
+   "inputs": {
+    "noise_seed": 14
+   }
+  },
+  "34": {
+   "class_type": "CFGGuider",
+   "inputs": {
+    "model": [
+     "1",
+     0
+    ],
+    "positive": [
+     "23",
+     0
+    ],
+    "negative": [
+     "24",
+     0
+    ],
+    "cfg": 1.0
+   }
+  },
+  "35": {
+   "class_type": "SamplerCustomAdvanced",
+   "inputs": {
+    "noise": [
+     "33",
+     0
+    ],
+    "guider": [
+     "34",
+     0
+    ],
+    "sampler": [
+     "32",
+     0
+    ],
+    "sigmas": [
+     "31",
+     0
+    ],
+    "latent_image": [
+     "30",
+     0
+    ]
+   }
+  },
+  "36": {
+   "class_type": "VAEDecode",
+   "inputs": {
+    "samples": [
+     "35",
+     0
+    ],
+    "vae": [
+     "3",
+     0
+    ]
+   }
+  },
+  "37": {
+   "class_type": "SaveImage",
+   "inputs": {
+    "images": [
+     "36",
+     0
+    ],
+    "filename_prefix": "chr-mori"
+   }
+  }
+ }
+}

@@ -113,13 +113,19 @@ export function makeAvatar() {
 // used with a Lambert material (as for Mio). Colour tweak only: the texture is pulled a little toward the muted
 // palette (slightly less saturated, a touch cooler). The mesh, face and body are untouched.
 import { GLTFLoader } from '../vendor/loaders/GLTFLoader.js';
-import { calmSitTime, V as ver, poseLayer, addPhone, API_PHONE_BONES, CDIR } from './mio.js';
+import { calmSitTime, calmIdleTime, V as ver, poseLayer, addPhone, API_PHONE_BONES, CDIR } from './mio.js';
 const EDIR = new URL('../assets/eric/', import.meta.url).href;
-export async function loadEric({ height = 1.2 } = {}) {
+export const loadEric = (o = {}) => loadMeshy('eric', { dir: EDIR, height: 1.2, ...o });
+// one-shot gesture clips from Meshy's library (bow, wave, shrug, nod), retargeted onto each rig as JSON
+export const GESTURES = ['bow', 'wave', 'shrug', 'nod'];
+const json = (u) => fetch(u + ver()).then((r) => (r.ok ? r.json() : null)).catch(() => null);
+// Any character made with the 3D workflow and rigged through Meshy's API (Eric, and the cast in assets/characters/<id>/):
+// walk, run, idle, sit clips, the base colour texture, and optional phone and gesture clips.
+export async function loadMeshy(id, { height = 1.2, dir = CDIR + id + '/' } = {}) {
   const loader = new GLTFLoader();
   const load = (u) => new Promise((ok, no) => loader.load(u, ok, undefined, no));
-  const [walk, run, idle, sitG, tex, phoneJson] = await Promise.all([load(EDIR + 'walk.glb' + ver()), load(EDIR + 'run.glb' + ver()), load(EDIR + 'idle.glb' + ver()), load(EDIR + 'sit.glb' + ver()), new THREE.TextureLoader().loadAsync(EDIR + 'base.webp' + ver()),
-    fetch(CDIR + 'eric/phone.json' + ver()).then((r) => (r.ok ? r.json() : null)).catch(() => null)]);
+  const [walk, run, idle, sitG, tex, phoneJson, ...gj] = await Promise.all([load(dir + 'walk.glb' + ver()), load(dir + 'run.glb' + ver()), load(dir + 'idle.glb' + ver()), load(dir + 'sit.glb' + ver()), new THREE.TextureLoader().loadAsync(dir + 'base.webp' + ver()),
+    json(CDIR + id + '/phone.json'), ...GESTURES.map((g) => json(CDIR + id + '/' + g + '.json'))]);
   tex.flipY = false; tex.colorSpace = THREE.SRGBColorSpace;
   const model = walk.scene;
   model.traverse((o) => {
@@ -147,15 +153,21 @@ export async function loadEric({ height = 1.2 } = {}) {
   const hipRest = hips.position.clone();
   const pose = { bow: 0 };
   let spine = null, spine2 = null; model.traverse((o) => { if (o.isBone && /spine$/i.test(o.name.replace(/[^a-z0-9]/gi, ''))) spine = o; if (o.isBone && /spine0?1$/i.test(o.name.replace(/[^a-z0-9]/gi, ''))) spine2 = o; });
-  const SIT_T = calmSitTime(model, mixer, actions.sit);
+  const SIT_T = calmSitTime(model, mixer, actions.sit), IDLE_T = calmIdleTime(model, mixer, actions.idle);
   const layers = poseLayer(model);
   const ph = addPhone({ model, root, height, layers, json: phoneJson, bones: API_PHONE_BONES });
+  const gact = {};
+  GESTURES.forEach((g, i) => { if (gj[i]) { const c = mixer.clipAction(THREE.AnimationClip.parse(gj[i])); c.setLoop(THREE.LoopOnce, 1); c.clampWhenFinished = true; gact[g] = c; } });
+  let gesturing = null;
   let cur = null, curName = '', bt = 0, breath = 0;
   function setState(name) {
     if (name === curName || !actions[name]) return;
+    // seated, the model shifts back so the root stands over the hips (sitAt and the chibi-style sit() both use it)
+    if (sitHip) { if (name === 'sit') holder.position.set(-sitHip.x, 0, -sitHip.z); else holder.position.set(0, 0, 0); }
+    if (gesturing) { gesturing.a.fadeOut(0.2); gesturing.ok(true); gesturing = null; }
     const a = actions[name]; a.reset(); a.setEffectiveWeight(1); if (name === 'sit') { a.time = SIT_T; a.timeScale = 0; }
     // Meshy's idle clip swings his hips round by up to half a turn (Jørgen: "turn and twist like crazy"); hold its first frame
-    if (name === 'idle') { a.time = 0; a.timeScale = 0; }
+    if (name === 'idle') { a.time = IDLE_T; a.timeScale = 0; }
     a.fadeIn(cur ? 0.2 : 0).play();
     if (cur && cur !== a) cur.fadeOut(0.2);
     cur = a; curName = name;
@@ -164,10 +176,21 @@ export async function loadEric({ height = 1.2 } = {}) {
   const bones = []; model.traverse((o) => { if (o.isBone) bones.push([o, o.position.clone(), o.quaternion.clone()]); });
   const snapBones = () => { for (const b of bones) { b[1].copy(b[0].position); b[2].copy(b[0].quaternion); } };
   const restoreBones = () => { for (const b of bones) { b[0].position.copy(b[1]); b[0].quaternion.copy(b[2]); } };
+  // play a gesture clip once over the current state, then fade back; resolves when it's done
+  function gesture(kind) {
+    const g = gact[kind]; if (!g || curName === 'sit' || curName === 'walk') return Promise.resolve(false);
+    if (gesturing) { gesturing.a.fadeOut(0.15); gesturing.ok(true); }
+    g.reset(); g.setEffectiveWeight(1); g.fadeIn(0.25).play(); if (cur) cur.fadeOut(0.25);
+    return new Promise((ok) => { gesturing = { a: g, ok, out: false }; });
+  }
   function update(dt, speed = 1) {
     actions.walk.timeScale = speed;
     restoreBones();
     mixer.update(dt); bt += dt;
+    if (gesturing && !gesturing.out && gesturing.a.time >= gesturing.a.getClip().duration - 0.35) {
+      gesturing.out = true; gesturing.a.fadeOut(0.35); if (cur) { cur.reset(); if (curName === 'idle' || curName === 'sit') cur.timeScale = 0; if (curName === 'sit') cur.time = SIT_T; if (curName === 'idle') cur.time = IDLE_T; cur.fadeIn(0.35).play(); }
+      const g = gesturing; setTimeout(() => { if (gesturing === g) gesturing = null; g.ok(true); }, 380);
+    }
     snapBones();
     if (curName !== 'sit') { hips.position.x = hipRest.x; hips.position.z = hipRest.z; }
     if (curName === 'sit' || curName === 'idle') { breath = Math.sin(bt * 2.0) * 0.004; hips.position.y += breath; }
@@ -175,18 +198,19 @@ export async function loadEric({ height = 1.2 } = {}) {
     layers.step(dt); ph.place();
   }
   // where the hips sit in the chair clip, in the root's space
+  let sitHip = null;
   setState('sit'); for (let i = 0; i < 30; i++) update(1 / 30);
   root.updateMatrixWorld(true);
-  const sitHip = new THREE.Vector3(); hips.getWorldPosition(sitHip); root.worldToLocal(sitHip);
+  sitHip = new THREE.Vector3(); hips.getWorldPosition(sitHip); root.worldToLocal(sitHip);
   mixer.stopAllAction(); cur = null; curName = '';
   setState('idle'); snapBones(); update(0);
   const a = {
-    root, model, mixer, update, sitHip, pose, layers, phone: ph.hook, placePhone: ph.place, seated: false, scripted: false, meshy: true,
+    id, root, model, mixer, update, sitHip, pose, layers, phone: ph.hook, placePhone: ph.place, gesture, gestures: Object.keys(gact), seated: false, scripted: false, meshy: true,
     setState, get state() { return curName; },
+    // hips on the seat top at (x, z), facing ry
     sitAt(x, seatTop, z, ry) {
       const k = root.scale.x;
-      const o = sitHip.clone().multiplyScalar(k).applyAxisAngle(new THREE.Vector3(0, 1, 0), ry);
-      root.position.set(x - o.x, seatTop + SIT_LIFT * k - o.y, z - o.z);
+      root.position.set(x, seatTop + SIT_LIFT * k - sitHip.y * k, z);
       root.rotation.y = ry;
       setState('sit');
     },

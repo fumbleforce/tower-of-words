@@ -232,13 +232,14 @@ export function chibi(o) {
 
 // Poses
 export function sit(r) {
+  if (r.meshy) { r.seated = true; r.sitHere ? r.sitHere() : r.setState('sit'); return; }
   r.root.position.y = SEAT_Y - (HIP - 0.075) * r.root.scale.y + 0.012;
   for (const l of r.legs) l.rotation.x = -1.5;
   for (const k of r.knees) k.rotation.x = 1.35;
   r.legs[0].rotation.z = 0.04; r.legs[1].rotation.z = -0.04;
 }
-export function armsLap(r) { for (const [i, a] of r.arms.entries()) { a.rotation.x = -0.75; a.rotation.z = (i ? -1 : 1) * 0.28; } }
-export function armsHold(r, x = -1.15, z = 0.52) { for (const [i, a] of r.arms.entries()) { a.rotation.x = x; a.rotation.z = (i ? -1 : 1) * z; } }
+export function armsLap(r) { if (r.meshy) return; for (const [i, a] of r.arms.entries()) { a.rotation.x = -0.75; a.rotation.z = (i ? -1 : 1) * 0.28; } }
+export function armsHold(r, x = -1.15, z = 0.52) { if (r.meshy) return; for (const [i, a] of r.arms.entries()) { a.rotation.x = x; a.rotation.z = (i ? -1 : 1) * z; } }
 
 // small props held in the hands
 export function phone() {
@@ -395,6 +396,7 @@ export function buildPlayer() {
 
 // walk cycle (phase in radians) and idle
 export function walkPose(r, ph, amt) {
+  if (r.meshy) { if (!r.seated) r.setState(amt > 0.5 ? 'walk' : 'idle'); return; }
   const s = Math.sin(ph);
   r.legs[0].rotation.x = s * 0.6 * amt; r.legs[1].rotation.x = -s * 0.6 * amt;
   r.knees[0].rotation.x = Math.max(0, -Math.cos(ph)) * 0.5 * amt; r.knees[1].rotation.x = Math.max(0, Math.cos(ph)) * 0.5 * amt;
