@@ -34,7 +34,7 @@ const SITES = {
 const FLOORS = ['B2', 'B1', '1', '2', '3', '4', '5'];
 
 // ---------- the car, in its own space: x 0 is the door's centre, z 0 the back face of the landing wall ----------
-const W = 1.3, D = 1.3, H = 1.55, T = 0.05;   // inside width and depth, wall height, wall thickness
+const W = 1.44, D = 1.55, H = 1.55, T = 0.05;   // inside width and depth, wall height, wall thickness
 const DW = 1.0, DH = 1.34;                     // door opening
 const ZF = -0.09, ZB = ZF - D;                 // inside faces of the front and back walls
 const CUT = 0.5;                               // the front wall's height while he's inside (cutaway)
@@ -42,7 +42,9 @@ const RIDE_ELEV = 50;                          // camera elevation for the ride,
 const DARK = 0.08;                             // how much of a place's own light stays on during the ride
 const DARK_BG = new THREE.Color('#14171d');
 // where people stand in the car (x, z in car space), all facing the doors
-const SLOTS = { eric: [0.02, -0.6], sales1: [-0.36, -1.03], sales2: [0.37, -1.06], with0: [0.42, -0.5], with1: [-0.42, -0.52] };
+const SLOTS = { eric: [0, -0.42], sales1: [-0.47, -1.3], sales2: [0.47, -1.33], with0: [0.47, -0.8], with1: [-0.47, -0.8], aside: [-0.49, -0.5] };
+// the way out at another floor (car space): along the right, then the left one behind; he steps aside for them
+const EXITS = { sales2: { delay: 0, pts: [[0.3, -0.95], [0.28, -0.1], [0.28, 0.5], [1.5, 0.55]] }, sales1: { delay: 1000, pts: [[-0.12, -1.05], [0.04, -0.6], [0.04, -0.1], [0.0, 0.5], [-1.5, 0.55]] } };
 // the two from Sales who ride up to 5 (they're in the car when it arrives at 1)
 const RIDERS = [{ id: 'sales1', worker: 9, off: '5' }, { id: 'sales2', worker: 1, off: '5' }];   // grey-haired man in a light jacket; woman with long brown hair
 
@@ -243,8 +245,8 @@ export function attachLift(game, place) {
     const p = o.getWorldPosition(new THREE.Vector3());
     if (place.name === 'gate' && Math.abs(p.x - site.x) < 0.02 && Math.abs(p.z - (site.zBack - 0.42 + 0.18)) < 0.05 && Math.abs(o.position.z + 0.42) < 0.01) o.visible = false;
     if (place.name === 'office' && Math.abs(p.x - site.x) < 0.02 && Math.abs(p.z + 3.975) < 0.03) o.visible = false;
-    // the office stairwell runs into the car's left side: narrow it to the stair door (-6.75..-6.15)
-    if (place.name === 'office' && Math.abs(p.x + 6.42) < 0.02 && Math.abs(p.z + 4.0) < 0.02 && !o.userData.liftFit) { o.userData.liftFit = true; o.scale.x = 0.58 / 1.1; o.position.x -= 0.03; }
+    // the office stairwell runs into the car's left side: narrow it to x -6.75..-6.25
+    if (place.name === 'office' && Math.abs(p.x + 6.42) < 0.02 && Math.abs(p.z + 4.0) < 0.02 && !o.userData.liftFit) { o.userData.liftFit = true; o.scale.x = 0.5 / 1.1; o.position.x -= 0.08; }
   });
   // everything in front of the car that the cut takes down: the wall above the doors, the landing doors and frame
   clipBox(site, CUT);
@@ -389,10 +391,13 @@ async function doors(game, L, state) {
     await game.wait(650);
     // anyone getting off here walks out onto the landing
     const off = L.riders.filter((rd) => rd.off === f && ride.aboard.has(rd.id));
-    const walks = off.map((rd, i) => {
-      const r = rd.r, s = i ? 1 : -1; r.lookTarget = null;
-      const ex = L.site.x + s * 0.12, ez = L.site.zFront + 0.35;
-      return new Promise((res) => setTimeout(res, i * 380)).then(() => walkPerson(r, [[r.root.position.x * 0.5 + ex * 0.5, L.site.zBack - 0.35], [ex, L.site.zBack + 0.1], [ex, ez], [L.site.x + s * 1.5, ez + 0.2]], { speed: 1.15 }));
+    // he steps aside to the front left corner so they can get by
+    const eric = game.player;
+    if (off.length) { eric.scripted = true; eric.setState('walk'); await glide(game, eric.root, slotW(L, 'aside'), 0.9); eric.setState('idle'); turnTo(game, eric.root, 0.5); }
+    const walks = off.map((rd) => {
+      const r = rd.r, e = EXITS[rd.id] || EXITS.sales2; r.lookTarget = null;
+      const pts = e.pts.map(([x, z]) => [L.site.x + x, L.site.zBack + z]);
+      return game.wait(e.delay).then(() => walkPerson(r, pts, { speed: 1.1 }));
     });
     L.leaving = Promise.all(walks).then(() => { for (const rd of off) ride.aboard.delete(rd.id); });
     await game.wait(900);
@@ -406,6 +411,9 @@ async function doors(game, L, state) {
     c.landWant = 0;
     await game.wait(450);
     for (const rd of L.riders) if (!ride.aboard.has(rd.id)) { rd.r.root.visible = false; rd.r.blob.visible = false; rd.r._walk = null; }
+    // and back to the middle once they're gone
+    const eric = game.player, [ex, ez] = slotW(L, 'eric');
+    if (Math.hypot(eric.root.position.x - ex, eric.root.position.z - ez) > 0.05) { eric.setState('walk'); await glide(game, eric.root, [ex, ez], 0.9); eric.setState('idle'); await turnTo(game, eric.root, 0); }
   }
 }
 
@@ -434,7 +442,7 @@ async function rideOut(g, L, slot) {
     anim(g, 1.1, (k) => setDark(L, k)),
   ]);
   const [ex, ez] = slotW(L, 'eric');
-  await glide(g, eric.root, [ex, ez + 0.05], 1.0);
+  await glide(g, eric.root, [ex, ez], 1.0);
   eric.setState('idle');
   // anyone coming along walks in after him
   const wl = withList(slot);
@@ -472,7 +480,7 @@ async function rideIn(g, L, slot) {
   // the frame the lobby ended on: the car in the dark, the front cut, everyone in their place
   setDark(L, 1); setCut(L, CUT); L.car.want = 0; L.car.k = 0;
   const [ex, ez] = slotW(L, 'eric');
-  eric.root.position.set(ex, 0, ez + 0.05); eric.root.rotation.y = 0; eric.setState('idle'); g.walker.facing = 0;
+  eric.root.position.set(ex, 0, ez); eric.root.rotation.y = 0; eric.setState('idle'); g.walker.facing = 0;
   for (const rd of L.riders) if (ride.aboard.has(rd.id)) placeRider(L, rd);
   const wl = (ride.with || []).filter((id) => P.people[id]);
   wl.forEach((id, i) => { const r = P.people[id], [x, z] = slotW(L, 'with' + i); r.root.visible = true; if (r.blob) r.blob.visible = true; r.root.position.set(x, 0, z); r.root.rotation.y = 0; });
