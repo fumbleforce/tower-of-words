@@ -113,12 +113,13 @@ export function makeAvatar() {
 // used with a Lambert material (as for Mio). Colour tweak only: the texture is pulled a little toward the muted
 // palette (slightly less saturated, a touch cooler). The mesh, face and body are untouched.
 import { GLTFLoader } from '../vendor/loaders/GLTFLoader.js';
-import { calmSitTime, V as ver } from './mio.js';
+import { calmSitTime, V as ver, poseLayer, addPhone, API_PHONE_BONES, CDIR } from './mio.js';
 const EDIR = new URL('../assets/eric/', import.meta.url).href;
 export async function loadEric({ height = 1.2 } = {}) {
   const loader = new GLTFLoader();
   const load = (u) => new Promise((ok, no) => loader.load(u, ok, undefined, no));
-  const [walk, run, idle, sitG, tex] = await Promise.all([load(EDIR + 'walk.glb' + ver()), load(EDIR + 'run.glb' + ver()), load(EDIR + 'idle.glb' + ver()), load(EDIR + 'sit.glb' + ver()), new THREE.TextureLoader().loadAsync(EDIR + 'base.webp' + ver())]);
+  const [walk, run, idle, sitG, tex, phoneJson] = await Promise.all([load(EDIR + 'walk.glb' + ver()), load(EDIR + 'run.glb' + ver()), load(EDIR + 'idle.glb' + ver()), load(EDIR + 'sit.glb' + ver()), new THREE.TextureLoader().loadAsync(EDIR + 'base.webp' + ver()),
+    fetch(CDIR + 'eric/phone.json' + ver()).then((r) => (r.ok ? r.json() : null)).catch(() => null)]);
   tex.flipY = false; tex.colorSpace = THREE.SRGBColorSpace;
   const model = walk.scene;
   model.traverse((o) => {
@@ -147,6 +148,8 @@ export async function loadEric({ height = 1.2 } = {}) {
   const pose = { bow: 0 };
   let spine = null, spine2 = null; model.traverse((o) => { if (o.isBone && /spine$/i.test(o.name.replace(/[^a-z0-9]/gi, ''))) spine = o; if (o.isBone && /spine0?1$/i.test(o.name.replace(/[^a-z0-9]/gi, ''))) spine2 = o; });
   const SIT_T = calmSitTime(model, mixer, actions.sit);
+  const layers = poseLayer(model);
+  const ph = addPhone({ model, root, height, layers, json: phoneJson, bones: API_PHONE_BONES });
   let cur = null, curName = '', bt = 0, breath = 0;
   function setState(name) {
     if (name === curName || !actions[name]) return;
@@ -169,6 +172,7 @@ export async function loadEric({ height = 1.2 } = {}) {
     if (curName !== 'sit') { hips.position.x = hipRest.x; hips.position.z = hipRest.z; }
     if (curName === 'sit' || curName === 'idle') { breath = Math.sin(bt * 2.0) * 0.004; hips.position.y += breath; }
     if (pose.bow) { spine.rotateX(pose.bow * 0.6); spine2 && spine2.rotateX(pose.bow * 0.4); }
+    layers.step(dt); ph.place();
   }
   // where the hips sit in the chair clip, in the root's space
   setState('sit'); for (let i = 0; i < 30; i++) update(1 / 30);
@@ -177,7 +181,7 @@ export async function loadEric({ height = 1.2 } = {}) {
   mixer.stopAllAction(); cur = null; curName = '';
   setState('idle'); snapBones(); update(0);
   const a = {
-    root, model, mixer, update, sitHip, pose, seated: false, scripted: false, meshy: true,
+    root, model, mixer, update, sitHip, pose, layers, phone: ph.hook, placePhone: ph.place, seated: false, scripted: false, meshy: true,
     setState, get state() { return curName; },
     sitAt(x, seatTop, z, ry) {
       const k = root.scale.x;

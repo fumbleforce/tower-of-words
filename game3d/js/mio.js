@@ -243,6 +243,106 @@ function makeFootFix(model, skinned) {
   };
 }
 
+
+// ---------- held poses on top of the clips (phone, and later gestures) ----------
+// A pose is one frame of a clip retargeted onto this skeleton (tools/characters/retarget.py), kept as bone
+// rotations. Its weight eases in and out, and each frame the bones are turned toward it by that weight after the
+// mixer has posed them, so the legs and the breath keep coming from the idle underneath.
+const _mq = new THREE.Quaternion(), _pw = new THREE.Quaternion(), _r = new THREE.Quaternion(), _ax = new THREE.Vector3();
+export function poseLayer(model) {
+  const layers = {};
+  const byName = (n) => { let b = null; model.traverse((o) => { if (!b && o.isBone && o.name === n) b = o; }); return b; };
+  return {
+    layers,
+    add(name, json, t, { only = null, rate = 6, lift = null } = {}) {
+      const clip = THREE.AnimationClip.parse(json), pose = [];
+      for (const tr of clip.tracks) {
+        const [bn, prop] = tr.name.split('.');
+        if (prop !== 'quaternion' || (only && !only.test(bn))) continue;
+        const b = byName(bn); if (!b) continue;
+        const v = tr.createInterpolant().evaluate(Math.min(t, clip.duration));
+        pose.push([b, new THREE.Quaternion(v[0], v[1], v[2], v[3]).normalize()]);
+      }
+      // lift: [boneName, radians] pairs, turned forward about the body's side axis after the pose (arms up)
+      const lb = (lift || []).map(([n, a]) => [byName(n), a]).filter((x) => x[0]);
+      layers[name] = { pose, w: 0, target: 0, rate, onW: null, lift: lb };
+      return layers[name];
+    },
+    set(name, on) { const l = layers[name]; if (l) l.target = on ? 1 : 0; },
+    step(dt) {
+      for (const l of Object.values(layers)) {
+        l.w += Math.sign(l.target - l.w) * Math.min(Math.abs(l.target - l.w), dt * l.rate / 1.6);
+        if (l.onW) l.onW(l.w);
+        if (l.w < 1e-3) continue;
+        const k = l.w * l.w * (3 - 2 * l.w);
+        for (const [b, q] of l.pose) b.quaternion.slerp(q, k);
+        if (l.lift.length) {
+          model.updateMatrixWorld(true);
+          model.getWorldQuaternion(_mq); _ax.set(1, 0, 0).applyQuaternion(_mq);
+          for (const [b, a] of l.lift) {
+            b.parent.getWorldQuaternion(_pw);
+            _r.setFromAxisAngle(_ax, -a * k);
+            b.quaternion.premultiply(_pw.clone().invert().multiply(_r).multiply(_pw));
+            b.updateMatrixWorld(true);
+          }
+        }
+      }
+    },
+  };
+}
+
+// a small phone for a hand bone: dark body, screen facing the palm side
+export function phoneProp(height = 1.12) {
+  const g = new THREE.Group();
+  const body = new THREE.Mesh(new THREE.BoxGeometry(0.052, 0.1, 0.009), new THREE.MeshLambertMaterial({ color: '#23262d' }));
+  const screen = new THREE.Mesh(new THREE.PlaneGeometry(0.044, 0.088), new THREE.MeshBasicMaterial({ color: '#a9d4e6' }));
+  screen.position.z = 0.0048; body.castShadow = true;
+  g.add(body, screen);
+  g.userData.k = height / 1.12 * (PHONE.size || 1);
+  return g;
+}
+
+// the phone pose: a frame of Meshy's Texting_Walk_inplace, retargeted from Eric's API rig (upper body only)
+export const PHONE = { t: 0, pos: [0, 0.035, 0.035], rot: [-0.95, 0, 0], size: 1.3, lift: 0.4, lift2: 0.4, only: /Spine|Neck|Head$|Shoulder|Arm|Hand$/ };
+export function setPhone(o) { Object.assign(PHONE, o); }
+export const CDIR = new URL('../assets/characters/', import.meta.url).href;
+
+// Give a loaded Meshy character a phone: the held pose from `json` (see PHONE), a phone prop on the right hand,
+// and a hook: phone('look') raises it and looks at it, phone('away') puts it down; both resolve when done.
+// `bones` names the hands, upper arms and forearms in this rig ([right, left] each).
+export const MIXAMO_PHONE_BONES = { hand: ['mixamorigRightHand', 'mixamorigLeftHand'], arm: ['mixamorigRightArm', 'mixamorigLeftArm'], fore: ['mixamorigRightForeArm', 'mixamorigLeftForeArm'], only: PHONE.only };
+export const API_PHONE_BONES = { hand: ['RightHand', 'LeftHand'], arm: ['RightArm', 'LeftArm'], fore: ['RightForeArm', 'LeftForeArm'], only: /Spine|neck|Head$|Shoulder|Arm|Hand$/ };
+export function addPhone({ model, root, height, layers, json, bones }) {
+  if (!json) return { place() {}, hook: () => Promise.resolve() };
+  const lift = [[bones.arm[0], PHONE.lift], [bones.arm[1], PHONE.lift], [bones.fore[0], PHONE.lift2], [bones.fore[1], PHONE.lift2]];
+  const l = layers.add('phone', json, PHONE.t, { only: bones.only, lift });
+  const hand = model.getObjectByName(bones.hand[0]), other = model.getObjectByName(bones.hand[1]);
+  const phone = phoneProp(height); phone.visible = false; hand.add(phone);
+  l.onW = (w) => { phone.visible = w > 0.45; };
+  const _a = new THREE.Vector3(), _b = new THREE.Vector3(), _q = new THREE.Quaternion(), _qh = new THREE.Quaternion(), _e = new THREE.Euler();
+  const up = new THREE.Vector3(), fwd = new THREE.Vector3(), ws = new THREE.Vector3(), hs = new THREE.Vector3();
+  // between the hands, long side forward, screen tilted up toward the face; set each frame while it shows
+  function place() {
+    if (!phone.visible) return;
+    model.updateMatrixWorld(true);
+    hand.getWorldPosition(_a); other.getWorldPosition(_b); _a.add(_b).multiplyScalar(0.5);
+    root.getWorldQuaternion(_q);
+    up.set(0, 1, 0).applyQuaternion(_q); fwd.set(0, 0, 1).applyQuaternion(_q);
+    root.getWorldScale(ws);
+    _a.addScaledVector(fwd, PHONE.pos[2] * ws.x).addScaledVector(up, PHONE.pos[1] * ws.x);
+    phone.position.copy(hand.worldToLocal(_a));
+    _q.multiply(_qh.setFromEuler(_e.set(-Math.PI / 2 + PHONE.rot[0], PHONE.rot[1], PHONE.rot[2])));
+    hand.getWorldQuaternion(_qh); phone.quaternion.copy(_qh.invert().multiply(_q));
+    hand.getWorldScale(hs); phone.scale.setScalar(ws.x * phone.userData.k / hs.x);
+  }
+  function hook(state) {
+    const want = state === 'look' ? 1 : 0;
+    layers.set('phone', want === 1);
+    return new Promise((ok) => { const chk = () => (Math.abs(l.w - want) < 1e-3 ? ok() : setTimeout(chk, 50)); chk(); });
+  }
+  return { place, hook, prop: phone };
+}
+
 // Load her once. `height` is her standing height in world units.
 export async function loadMio({ height = 1.12, colours = MIO_COLOURS } = {}) {
   const loader = new GLTFLoader();
@@ -252,6 +352,7 @@ export async function loadMio({ height = 1.12, colours = MIO_COLOURS } = {}) {
     fetch(DIR + 'base-clean.json' + V()).then((r) => r.json()),
     new THREE.TextureLoader().loadAsync(DIR + 'base-clean.webp' + V()),
   ]);
+  const phoneJson = await fetch(CDIR + 'mio/phone.json' + V()).then((r) => (r.ok ? r.json() : null)).catch(() => null);
   tex.flipY = false; tex.colorSpace = THREE.SRGBColorSpace;
   const model = walk.scene;
   let skinned;
@@ -322,6 +423,8 @@ export async function loadMio({ height = 1.12, colours = MIO_COLOURS } = {}) {
   let SIT_T0 = 0; const sitT = () => SIT_T0;
   const pose = { bow: 0 };
   let spine = null, spine2 = null; model.traverse((o) => { if (o.isBone && /spine$/i.test(o.name.replace(/[^a-z0-9]/gi, ''))) spine = o; if (o.isBone && /spine1$/i.test(o.name.replace(/[^a-z0-9]/gi, ''))) spine2 = o; });
+  const layers = poseLayer(model);
+  const ph = addPhone({ model, root, height, layers, json: phoneJson, bones: MIXAMO_PHONE_BONES });
   // idle: the walk clip held still at a frame with the feet together, plus a small breath
   const idleClip = clips.walk.clone(); idleClip.name = 'idle';
   actions.idle = mixer.clipAction(idleClip);
@@ -358,6 +461,8 @@ export async function loadMio({ height = 1.12, colours = MIO_COLOURS } = {}) {
     if (curName === 'idle' || curName === 'sit') { breath = Math.sin(t * 2.0) * 0.004; hips.position.y += breath; }
     if (curName !== 'sit') fixFeet();
     if (pose.bow) { spine.rotateX(pose.bow * 0.6); spine2 && spine2.rotateX(pose.bow * 0.4); }
+    layers.step(dt);
+    ph.place();
   }
   // hold one calm frame of the chair clip, with only a breath on top
   SIT_T0 = calmSitTime(model, mixer, actions.sit);
@@ -376,5 +481,5 @@ export async function loadMio({ height = 1.12, colours = MIO_COLOURS } = {}) {
     root.rotation.y = ry;
     setState('sit');
   }
-  return { root, model, mixer, setState, update, sitAt, sitHip, pose, get state() { return curName; }, H, height };
+  return { root, model, mixer, setState, update, sitAt, sitHip, pose, layers, phone: ph.hook, placePhone: ph.place, get state() { return curName; }, H, height };
 }
