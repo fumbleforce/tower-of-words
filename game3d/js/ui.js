@@ -214,7 +214,7 @@ export function unlockAudio() { ac(); }
 // the guard Ishibashi. See story/FORMAT.md.
 export const PORTRAITS = { mio: ['neutral', 'smile', 'deadpan', 'surprised', 'embarrassed', 'tired'], aoi: ['neutral'], kuro: ['neutral'],
   eric: ['neutral', 'surprised', 'tired'], mori: ['neutral', 'smile', 'flustered'], kenji: ['neutral', 'grin', 'sheepish'],
-  kuroda: ['neutral', 'sleepy', 'panicked'], guard: ['neutral', 'stern', 'amused'] };
+  kuroda: ['neutral', 'sleepy', 'panicked'], guard: ['neutral', 'stern', 'amused'], emi: ['neutral'] };
 // Mio's new faces are still being made: they are listed so they switch in by name when the files land; until then
 // a missing file falls back to neutral (the img's error handler below).
 // Each cut-out's face box (imgutils detect_faces on the neutral image, image pixels [x0, y0, x1, y1]) and image size.
@@ -224,7 +224,7 @@ export const FACE = {
   aoi: { W: 630, H: 810, f: [222, 196, 413, 389] }, eric: { W: 597, H: 768, f: [218, 211, 390, 402] },
   guard: { W: 597, H: 768, f: [250, 162, 374, 300] }, kenji: { W: 597, H: 768, f: [229, 169, 371, 330] },
   kuro: { W: 630, H: 809, f: [254, 325, 452, 525] }, kuroda: { W: 597, H: 768, f: [240, 154, 364, 313] },
-  mio: { W: 597, H: 768, f: [192, 214, 361, 383] }, mori: { W: 597, H: 768, f: [234, 171, 372, 339] },
+  mio: { W: 597, H: 768, f: [192, 214, 361, 383] }, emi: { W: 597, H: 768, f: [203, 159, 395, 349] }, mori: { W: 597, H: 768, f: [234, 171, 372, 339] },
 };
 const EMOTE_FACE = { '?': ['suspicious', 'deadpan', 'stern'], '!': ['surprised', 'panicked', 'panic'], '♪': ['smile', 'grin', 'amused'], heart: ['smile', 'embarrassed', 'grin'], sweat: ['flustered', 'embarrassed', 'sheepish', 'panicked'], zzz: ['sleepy', 'tired'], '…': ['tired', 'deadpan'] };
 const faceNow = {};
@@ -377,6 +377,9 @@ function reveal(line, cps) {
   return r;
 }
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+// slow clips for taught words (<voice>-slow), if the voice agent made them
+const slowClips = new Set();
+fetch(new URL('../audio/index.json?v=' + (window.BUILD || ''), import.meta.url)).then((r) => (r.ok ? r.json() : [])).then((l) => l.forEach((k) => { if (/-slow$/.test(k)) slowClips.add(k); })).catch(() => {});
 export function keyLabel(code) { return /^Key[A-Z]$/.test(code) ? code.slice(3) : /^Digit\d$/.test(code) ? code.slice(5) : code.replace(/^(Arrow)/, ''); }
 async function whileUnpaused(ms) { await sleep(ms); while (paused) await sleep(200); }
 
@@ -407,12 +410,15 @@ export const ui = {
         <div class="who"></div>
         <div class="line"></div>
         <div class="chips"></div>
-        <div class="more" aria-hidden="true"></div>
+        <div class="more" aria-hidden="true"><span class="ch">Click to continue</span><i></i></div>
+        <div class="wait" aria-hidden="true"><i></i><i></i><i></i></div>
       </div>
       <div id="cmdsPanel" hidden><div class="card"><div class="head">Words you can say</div><p class="note">Use the Say button. It speaks to whoever or whatever is nearest.</p><ul></ul><button type="button" class="close">Close</button></div></div>
       <div id="peoplePanel" class="panel" hidden><div class="card"><div class="head">People</div><ul></ul><button type="button" class="close">Close</button></div></div>
       <div id="bagPanel" class="panel" hidden><div class="card"><div class="head">Bag</div><p class="yen"></p><ul></ul><button type="button" class="close">Close</button></div></div>
       <button id="giveBtn" type="button" hidden><span class="t">Give</span><span class="to"></span></button>
+      <div id="actMenu" hidden role="group" aria-label="Actions"></div>
+      <div id="talkHit" hidden aria-hidden="true"></div>
       <button id="sayBtn" type="button" hidden aria-label="Say a word"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5h14a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2h-7l-4 3.5V16H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z"/></svg><span class="t">Say</span><span class="key" aria-hidden="true">Q</span></button>
       <div id="sayTip" hidden><b>Say</b> speaks a word you know to whoever or whatever is nearest. Try it when you're stuck.<button type="button">Got it</button></div>
       <div id="sayMenu" hidden><div class="head"></div><div class="list"></div><button type="button" class="cancel">Never mind</button></div>
@@ -439,7 +445,19 @@ export const ui = {
     this.setSayKey(settings.keySay);
     onSettings((k, v) => { if (k === 'keySay') this.setSayKey(v); });
     // advancing the talk panel: tap anywhere on it, or Space/Enter
-    $('#talk').addEventListener('pointerdown', (e) => { if (e.target.closest('.chip')) return; e.stopPropagation(); this._advance && this._advance(); });
+    // The whole screen moves the story on while a line is up (Jørgen: the tiny arrow was hard to hit). A tap on a
+    // taught word plays it instead. While the story is busy (a walk, a door) a tap shows the wait marker instead of
+    // doing nothing, and asks main.js to hurry the scripted move along (game.skip, if it has one).
+    const tapTalk = (e) => {
+      if (e.target.closest('.chip, .tp-in, button')) return;
+      const w = e.target.closest('.jp[data-w]'); if (w) { e.stopPropagation(); e.preventDefault(); this.sayWord(w.dataset.w, w); return; }
+      e.stopPropagation();
+      if (this._advance) { this._advance(); return; }
+      this.waitPulse(e.clientX, e.clientY);
+    };
+    $('#talk').addEventListener('pointerdown', tapTalk);
+    $('#talkHit').addEventListener('pointerdown', tapTalk);
+    setInterval(() => this.syncTalkState(), 80);
     window.addEventListener('keydown', (e) => {
       if (e.code === 'Space' || e.code === 'Enter') { if (this._advance) { e.preventDefault(); this._advance(); } }
       if (this._chipKeys && /^Digit[1-9]$/.test(e.code)) { const b = this._chipKeys[+e.code.slice(5) - 1]; if (b) b.click(); }
@@ -506,12 +524,43 @@ export const ui = {
   sayReady(on) { $('#sayBtn').classList.toggle('ready', !!on); },
   setSayTarget() {},
   // the Say button sits beside whoever or whatever Eric can talk to, only when a word can be used there
+  // The action menu (Jørgen's playtest: Talk and Say were separate popups that came and went on their own). One small
+  // menu beside the current target: its verb on E (Talk, Look, Pet...) and Say on Q, stacked, both whenever both
+  // apply; Next cycles through things in reach when several are close (menu.js). main.js calls this every frame
+  // with where the Say target is and whether a word does something there.
   placeSay(x, y, show) {
-    const b = $('#sayBtn'); if (!show || !$('#sayMenu').hidden || !$('#cmdsPanel').hidden || [...document.querySelectorAll('.panel')].some((p) => !p.hidden)) { b.hidden = true; return; } b.hidden = false;
-    // the chip sits up and to the left of the target (margins in CSS); keep it on screen
-    const W = innerWidth, H = innerHeight, bw = b.offsetWidth || 80, mx = 92, my = 58;
-    x = Math.max(mx + 8, Math.min(W - bw + mx - 8, x)); y = Math.max(my + 64, Math.min(H - 8, y));
-    b.style.transform = `translate(${Math.round(x)}px, ${Math.round(y)}px)`;
+    $('#sayBtn').hidden = true;
+    const act = $('#actMenu'), g = window.__game; if (!act || !g) return;
+    const blocked = !$('#sayMenu').hidden || !$('#cmdsPanel').hidden || [...document.querySelectorAll('.panel')].some((p) => !p.hidden) || document.body.classList.contains('busy') || document.body.classList.contains('trip') || this.talking;
+    const near = g.near, st = g.sayTarget;
+    const target = near || (show ? st : null);
+    if (!target || blocked) { act.hidden = true; this._actKey = ''; return; }
+    const phone = document.body.classList.contains('phone');
+    const verb = target.el ? target.el.querySelector('.vb')?.textContent : '', name = target.label || '';
+    const sayTo = show && st && st !== target ? st.label : '';
+    const cyc = this.cycleInfo && this.cycleInfo.n > 1 ? this.cycleInfo : null;
+    const key = [target.id, verb, name, show, sayTo, near ? 1 : 0, cyc ? cyc.i + '/' + cyc.n : '', phone, settings.keySay].join('|');
+    if (key !== this._actKey) {
+      this._actKey = key;
+      const k = (c) => (phone ? '' : `<span class="k">${c}</span>`);
+      act.innerHTML = (near ? `<button type="button" class="act use">${k('E')}<span class="vb">${verb || 'Look'}</span><span class="nm">${name}</span></button>` : '') +
+        (show ? `<button type="button" class="act say">${k(keyLabel(settings.keySay || 'KeyQ'))}<span class="vb">Say</span><span class="nm">${sayTo ? 'to ' + sayTo : 'a word'}</span></button>` : '') +
+        (cyc ? `<button type="button" class="act next">${k('Tab')}<span class="vb">Next</span><span class="nm">${cyc.i + 1} of ${cyc.n}</span></button>` : '');
+      act.querySelector('.use')?.addEventListener('click', (e) => { e.stopPropagation(); g.use(g.near || target); });
+      act.querySelector('.say')?.addEventListener('click', (e) => { e.stopPropagation(); this.onSay && this.onSay(); });
+      act.querySelector('.next')?.addEventListener('click', (e) => { e.stopPropagation(); this.cycleInfo?.next(); });
+    }
+    act.hidden = false;
+    // beside the target's pin (the marker's own position), kept on screen
+    const m = target.el && target.el.style.transform.match(/translate\(([-\d.]+)px,\s*([-\d.]+)px\)/);
+    let px = m ? +m[1] : x, py = m ? +m[2] : y;
+    const sc = phone ? 1 : (+getComputedStyle(document.documentElement).getPropertyValue('--ui') || 1);
+    const W = innerWidth, H = innerHeight, aw = (act.offsetWidth || 200) * sc, ah = (act.offsetHeight || 100) * sc;
+    const flip = px + 34 + aw > W - 8;
+    let ax = flip ? px - 34 - aw : px + 34, ay = py - 70 * sc;
+    ax = Math.max(8, Math.min(W - aw - 8, ax)); ay = Math.max((phone ? 110 : 70) * sc, Math.min(H - ah - 12, ay));
+    act.style.transform = `translate(${Math.round(ax)}px, ${Math.round(ay)}px) scale(${sc})`;
+    act.classList.toggle('flip', flip);
   },
   // No text leaves on a timer (Jørgen: "completely inaccessible"). A hint stays until the player closes it or the
   // goal moves on (the ms argument is ignored); the goal chip shows it again.
@@ -684,6 +733,36 @@ export const ui = {
       if (this.auto) { setTimeout(() => { inp.value = w.ro; paint(); done(); }, 20); return; }
       setTimeout(() => inp.focus(), 60);
     });
+  },
+  // play a taught word again (slowly if there's a slow clip), without moving the story on
+  sayWord(id, el) {
+    const w = WORDS[id]; if (!w || !w.voice) { sfx('tap'); return; }
+    const slow = slowClips.has(w.voice + '-slow');
+    voice(slow ? w.voice + '-slow' : w.voice, slow ? {} : { rate: 0.9 });
+    if (el) { el.classList.remove('said'); void el.offsetWidth; el.classList.add('said'); }
+  },
+  // what the dialogue area shows: continue (with words for the first lines), waiting, or nothing; the tap layer
+  syncTalkState() {
+    const t = $('#talk'), hit = $('#talkHit'); if (!t || !hit) return;
+    const busy = document.body.classList.contains('busy'), open = !t.hidden;
+    const typing = t.classList.contains('typing'), choosing = !!t.querySelector('.chips .chip');
+    const canGo = !!this._advance && open && !typing;
+    t.classList.toggle('can-go', canGo);
+    t.classList.toggle('waiting', open && !canGo && !typing && !choosing);
+    hit.hidden = this.auto || !(open || busy) || typing || choosing;
+    hit.classList.toggle('go', canGo);
+    if (canGo && this._shownLine !== t.querySelector('.line')?.textContent) { this._shownLine = t.querySelector('.line')?.textContent; this._lines = (this._lines || 0) + 1; }
+    const phone = document.body.classList.contains('phone');
+    const ch = t.querySelector('.more .ch'); if (ch) { ch.textContent = phone ? 'Tap to continue' : 'Click to continue'; ch.hidden = (this._lines || 0) > 8; }
+  },
+  waitPulse(x, y) {
+    const t = $('#talk');
+    if (t && !t.hidden) { t.classList.remove('pulse'); void t.offsetWidth; t.classList.add('pulse'); }
+    else {
+      let d = $('#waitDot'); if (!d) { d = el('div', '', '<i></i><i></i><i></i>'); d.id = 'waitDot'; $('#ui').appendChild(d); }
+      d.style.transform = `translate(${Math.round(x)}px, ${Math.round(y)}px)`; d.classList.remove('on'); void d.offsetWidth; d.classList.add('on');
+    }
+    window.__game?.skip?.();
   },
   closeTalk() { const t = $('#talk'); t.hidden = true; $('#stage').hidden = true; lastNpc = null; this._advance = null; this._chipKeys = null; },
   get talking() { return !$('#talk').hidden; },

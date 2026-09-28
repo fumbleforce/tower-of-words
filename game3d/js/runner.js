@@ -148,6 +148,7 @@ export class Runner {
     if (!voiceKey && who !== 'eric' && !s.overheard) { const k = lineKey(who, text); if (audioKeys.has(k)) voiceKey = k; }
     if (!voiceKey && who === 'eric') { const k = lineKey(who, text); if (audioKeys.has(k)) voiceKey = k; }
     if (voiceKey && s.overheard && !audioKeys.has(voiceKey)) voiceKey = null;
+    this.game.setHurry?.(false);
     const shown = ui.say(sp, text, { voiceKey, overheard: !!s.overheard, clear: s.clear, whoId: who, face: s.face });
     // test mode: record what an overheard line rendered, so the fast test fails on a known word shown garbled
     if (s.overheard && window.__test) {
@@ -164,6 +165,7 @@ export class Runner {
     const opts = s.choice.filter((o) => cond(o.if));
     let who = null, text = '', whoId = null;
     if (s.prompt) { const i = s.prompt.indexOf(': '); if (i > 0 && /^\w+$/.test(s.prompt.slice(0, i))) { whoId = s.prompt.slice(0, i); who = this.speaker(whoId); text = s.prompt.slice(i + 2); } else text = s.prompt.replace(/^>\s*/, ''); }
+    this.game.setHurry?.(false);
     const pick = await ui.choose(who, text, opts.map((o) => ({ html: o.text.replace(/</g, '&lt;') })), { keepLine: !s.prompt, whoId });
     const o = opts[pick];
     if (o.set) { if (typeof o.set === 'string') flags[o.set] = true; else Object.assign(flags, o.set); }

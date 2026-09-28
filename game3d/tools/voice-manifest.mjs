@@ -22,7 +22,7 @@ function add(who, text, s = {}) {
   for (const [id, w] of Object.entries(WORDS)) for (const ja of [w.ja, ...(w.alias || [])]) if (spoken.includes(ja) && !words.some(([, x]) => x.includes(ja))) words.push([id, ja]);
   const clear = (s.clear || []).map((c) => (typeof c === 'string' ? c : c.ja));
   // spoken text: drop the English glosses a line may carry in brackets
-  out.set(key, { key, speaker: who, text: spoken.replace(/\s*\([^)]*\)/g, ''), lang, overheard: !!s.overheard, words, clear, ...(s.emo ? { emo: s.emo } : {}) });
+  out.set(key, { key, speaker: who, text: spoken.replace(/\s*\([^)]*\)/g, ''), lang, overheard: !!s.overheard, words, clear, ...(s.emo ? { emo: s.emo } : {}), ...(s.slow || s.emo === 'slow' ? { slow: true } : {}) });
 }
 function walk(list) {
   for (const s of list || []) {
@@ -34,6 +34,9 @@ function walk(list) {
     if (s.choice) for (const o of s.choice) if (o.say) walk(o.say);
   }
 }
+// each word Mio teaches, said slowly on its own in her voice: the shell plays audio/word-<id>.mp3 when the player taps
+// the word to hear it again
+for (const [id, w] of Object.entries(WORDS)) if (w.voice) out.set('word-' + id, { key: 'word-' + id, speaker: 'mio', text: w.ja + '。', lang: 'ja', overheard: false, words: [[id, w.ja]], clear: [], emo: 'slow', slow: true });
 for (const [id, w] of Object.entries(WORDS)) if (w.voice) out.set(w.voice, { key: w.voice, speaker: 'eric', text: w.ja + '。', lang: 'ja', overheard: false, words: [], clear: [] });
 for (const n of ['train', 'gate', 'office', 'transitions']) {
   const f = path.join(root, 'story', n + '.js'); if (!fs.existsSync(f)) continue;

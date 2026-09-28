@@ -1,5 +1,165 @@
 [
  {
+  "key": "word-matte",
+  "speaker": "mio",
+  "text": "待って。",
+  "lang": "ja",
+  "overheard": false,
+  "words": [
+   [
+    "matte",
+    "待って"
+   ]
+  ],
+  "clear": [],
+  "emo": "slow",
+  "slow": true
+ },
+ {
+  "key": "word-akete",
+  "speaker": "mio",
+  "text": "開けて。",
+  "lang": "ja",
+  "overheard": false,
+  "words": [
+   [
+    "akete",
+    "開けて"
+   ]
+  ],
+  "clear": [],
+  "emo": "slow",
+  "slow": true
+ },
+ {
+  "key": "word-kite",
+  "speaker": "mio",
+  "text": "来て。",
+  "lang": "ja",
+  "overheard": false,
+  "words": [
+   [
+    "kite",
+    "来て"
+   ]
+  ],
+  "clear": [],
+  "emo": "slow",
+  "slow": true
+ },
+ {
+  "key": "word-ugoite",
+  "speaker": "mio",
+  "text": "動いて。",
+  "lang": "ja",
+  "overheard": false,
+  "words": [
+   [
+    "ugoite",
+    "動いて"
+   ]
+  ],
+  "clear": [],
+  "emo": "slow",
+  "slow": true
+ },
+ {
+  "key": "word-irete",
+  "speaker": "mio",
+  "text": "入れて。",
+  "lang": "ja",
+  "overheard": false,
+  "words": [
+   [
+    "irete",
+    "入れて"
+   ]
+  ],
+  "clear": [],
+  "emo": "slow",
+  "slow": true
+ },
+ {
+  "key": "word-dashite",
+  "speaker": "mio",
+  "text": "出して。",
+  "lang": "ja",
+  "overheard": false,
+  "words": [
+   [
+    "dashite",
+    "出して"
+   ]
+  ],
+  "clear": [],
+  "emo": "slow",
+  "slow": true
+ },
+ {
+  "key": "word-tomatte",
+  "speaker": "mio",
+  "text": "止まって。",
+  "lang": "ja",
+  "overheard": false,
+  "words": [
+   [
+    "tomatte",
+    "止まって"
+   ]
+  ],
+  "clear": [],
+  "emo": "slow",
+  "slow": true
+ },
+ {
+  "key": "word-ohayo",
+  "speaker": "mio",
+  "text": "おはようございます。",
+  "lang": "ja",
+  "overheard": false,
+  "words": [
+   [
+    "ohayo",
+    "おはようございます"
+   ]
+  ],
+  "clear": [],
+  "emo": "slow",
+  "slow": true
+ },
+ {
+  "key": "word-yoroshiku",
+  "speaker": "mio",
+  "text": "よろしくおねがいします。",
+  "lang": "ja",
+  "overheard": false,
+  "words": [
+   [
+    "yoroshiku",
+    "よろしくおねがいします"
+   ]
+  ],
+  "clear": [],
+  "emo": "slow",
+  "slow": true
+ },
+ {
+  "key": "word-sumimasen",
+  "speaker": "mio",
+  "text": "すみません。",
+  "lang": "ja",
+  "overheard": false,
+  "words": [
+   [
+    "sumimasen",
+    "すみません"
+   ]
+  ],
+  "clear": [],
+  "emo": "slow",
+  "slow": true
+ },
+ {
   "key": "eric-matte",
   "speaker": "eric",
   "text": "待って。",
@@ -280,6 +440,22 @@
   "emo": "casual"
  },
  {
+  "key": "ln-nwr97u",
+  "speaker": "mio",
+  "text": "おはようございます...",
+  "lang": "ja",
+  "overheard": false,
+  "words": [
+   [
+    "ohayo",
+    "おはようございます"
+   ]
+  ],
+  "clear": [],
+  "emo": "slow",
+  "slow": true
+ },
+ {
   "key": "ln-u7v3gq",
   "speaker": "mio",
   "text": "おはようございます. Mm, okay, not bad.",
@@ -360,10 +536,26 @@
   "emo": "casual"
  },
  {
-  "key": "ln-1iyar5p",
+  "key": "ln-zihcn1",
   "speaker": "mio",
-  "text": "よろしくおねがいします.",
+  "text": "よろしくおねがいします...",
   "lang": "ja",
+  "overheard": false,
+  "words": [
+   [
+    "yoroshiku",
+    "よろしくおねがいします"
+   ]
+  ],
+  "clear": [],
+  "emo": "slow",
+  "slow": true
+ },
+ {
+  "key": "ln-1xfjxb0",
+  "speaker": "mio",
+  "text": "よろしくおねがいします. Mm, good.",
+  "lang": "en",
   "overheard": false,
   "words": [
    [
@@ -449,6 +641,22 @@
   "emo": "casual"
  },
  {
+  "key": "ln-kha2to",
+  "speaker": "mio",
+  "text": "すみません...",
+  "lang": "ja",
+  "overheard": false,
+  "words": [
+   [
+    "sumimasen",
+    "すみません"
+   ]
+  ],
+  "clear": [],
+  "emo": "slow",
+  "slow": true
+ },
+ {
   "key": "oh-f4h8qf",
   "speaker": "aoi",
   "text": "あ、すみません！",
@@ -507,6 +715,22 @@
   ],
   "clear": [],
   "emo": "shout"
+ },
+ {
+  "key": "ln-q0z6r7",
+  "speaker": "mio",
+  "text": "待って...",
+  "lang": "ja",
+  "overheard": false,
+  "words": [
+   [
+    "matte",
+    "待って"
+   ]
+  ],
+  "clear": [],
+  "emo": "slow",
+  "slow": true
  },
  {
   "key": "oh-6afzfp",
@@ -780,7 +1004,8 @@
    ]
   ],
   "clear": [],
-  "emo": "pleading"
+  "emo": "slow",
+  "slow": true
  },
  {
   "key": "oh-10nz594",
@@ -1511,6 +1736,22 @@
   "emo": "warm"
  },
  {
+  "key": "ln-196mf9p",
+  "speaker": "mori",
+  "text": "動いて...",
+  "lang": "ja",
+  "overheard": false,
+  "words": [
+   [
+    "ugoite",
+    "動いて"
+   ]
+  ],
+  "clear": [],
+  "emo": "slow",
+  "slow": true
+ },
+ {
   "key": "oh-19jgh3x",
   "speaker": "mori",
   "text": "…三十年。",
@@ -1672,6 +1913,26 @@
   "emo": "curious"
  },
  {
+  "key": "ln-fntfew",
+  "speaker": "mio",
+  "text": "止まって...",
+  "lang": "ja",
+  "overheard": false,
+  "words": [
+   [
+    "matte",
+    "まって"
+   ],
+   [
+    "tomatte",
+    "止まって"
+   ]
+  ],
+  "clear": [],
+  "emo": "slow",
+  "slow": true
+ },
+ {
   "key": "ln-1sykdyx",
   "speaker": "mio",
   "text": "...Okay. You can eat here tomorrow also, if you want.",
@@ -1719,6 +1980,22 @@
   ],
   "clear": [],
   "emo": "warm"
+ },
+ {
+  "key": "ln-1v2kj7r",
+  "speaker": "mori",
+  "text": "入れて...",
+  "lang": "ja",
+  "overheard": false,
+  "words": [
+   [
+    "irete",
+    "入れて"
+   ]
+  ],
+  "clear": [],
+  "emo": "slow",
+  "slow": true
  },
  {
   "key": "oh-k9mi0a",
