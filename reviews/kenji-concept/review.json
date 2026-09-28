@@ -1,0 +1,70 @@
+{
+ "title": "Kenji concept round",
+ "date": "2026-09-28",
+ "by": "characters agent",
+ "status": "open",
+ "multi": true,
+ "question": "Kenji is about 21, inexperienced, eager to help and easily distracted. Which direction is him? Two seeds and a full body each.",
+ "media": [
+  {
+   "image": "game3d/assets/portrait-candidates/kenji-concept-sheet.png",
+   "caption": "The whole round on one sheet"
+  }
+ ],
+ "options": [
+  {
+   "id": "a",
+   "label": "a. Trains",
+   "image": "game3d/assets/portrait-candidates/kenji-concept/kenji-a-trains-751.webp",
+   "images": [
+    "game3d/assets/portrait-candidates/kenji-concept/kenji-a-trains-752.webp",
+    "game3d/assets/portrait-candidates/kenji-concept/kenji-a-trains-full-751.webp"
+   ]
+  },
+  {
+   "id": "b",
+   "label": "b. Gashapon",
+   "image": "game3d/assets/portrait-candidates/kenji-concept/kenji-b-gashapon-751.webp",
+   "images": [
+    "game3d/assets/portrait-candidates/kenji-concept/kenji-b-gashapon-752.webp",
+    "game3d/assets/portrait-candidates/kenji-concept/kenji-b-gashapon-full-751.webp"
+   ]
+  },
+  {
+   "id": "c",
+   "label": "c. City pop",
+   "image": "game3d/assets/portrait-candidates/kenji-concept/kenji-c-citypop-751.webp",
+   "images": [
+    "game3d/assets/portrait-candidates/kenji-concept/kenji-c-citypop-752.webp",
+    "game3d/assets/portrait-candidates/kenji-concept/kenji-c-citypop-full-751.webp"
+   ]
+  },
+  {
+   "id": "d",
+   "label": "d. Climber",
+   "image": "game3d/assets/portrait-candidates/kenji-concept/kenji-d-climber-751.webp",
+   "images": [
+    "game3d/assets/portrait-candidates/kenji-concept/kenji-d-climber-752.webp",
+    "game3d/assets/portrait-candidates/kenji-concept/kenji-d-climber-full-751.webp"
+   ]
+  },
+  {
+   "id": "e",
+   "label": "e. Plants",
+   "image": "game3d/assets/portrait-candidates/kenji-concept/kenji-e-plants-751.webp",
+   "images": [
+    "game3d/assets/portrait-candidates/kenji-concept/kenji-e-plants-752.webp",
+    "game3d/assets/portrait-candidates/kenji-concept/kenji-e-plants-full-751.webp"
+   ]
+  },
+  {
+   "id": "f",
+   "label": "f. Rookie suit",
+   "image": "game3d/assets/portrait-candidates/kenji-concept/kenji-f-rookiesuit-751.webp",
+   "images": [
+    "game3d/assets/portrait-candidates/kenji-concept/kenji-f-rookiesuit-752.webp",
+    "game3d/assets/portrait-candidates/kenji-concept/kenji-f-rookiesuit-full-751.webp"
+   ]
+  }
+ ]
+}

@@ -1,0 +1,34 @@
+{
+ "title": "Eric's voice",
+ "date": "2026-09-28",
+ "by": "voice agent",
+ "status": "decided",
+ "multi": false,
+ "question": "Which voice is Eric? Voice design 2 had the best timbre; the Nordic accent versions were tried on top of it.",
+ "options": [
+  {
+   "id": "eric-2",
+   "label": "eric-2, no accent",
+   "audio": "tools/voice-refs/eric-voice.wav"
+  },
+  {
+   "id": "nordic-v2",
+   "label": "eric-2 with a Nordic accent (v2)",
+   "audio": "tools/voice-refs/eric-nordic-v2.wav"
+  },
+  {
+   "id": "nordic-v3",
+   "label": "Lighter accent (v3)",
+   "audio": "tools/voice-refs/eric-nordic-v3.wav"
+  },
+  {
+   "id": "nordic-v3-lighter",
+   "label": "Lightest accent (v3 lighter)",
+   "audio": "tools/voice-refs/eric-nordic-v3-lighter.wav"
+  }
+ ],
+ "decided": [
+  "eric-2"
+ ],
+ "decision": "eric-2 with no accent. Jørgen on the accents: \"not any better, just drop it, English accent instead\" (GUIDE.md, Accents)."
+}
