@@ -15,6 +15,8 @@ import { walkPerson, stepPeople, lookAt } from '../story.js';
 import { rbox, mat, emissive, textTexture, plane, JP_FONT, plant as propPlant } from '../props.js';
 import { glide, withList } from './lobby.js';
 import { flags } from '../runner.js';
+import { dust, lightPool } from './life.js';
+import { route } from './route.js';
 
 // Muted palette, after game3d/ref/2-security-gate-muted.png (Jørgen: "mute train too"): slate and charcoal,
 // dark navy seats, a calmer floor. Only colours; set before the car is built.
@@ -133,6 +135,30 @@ export async function trainPlace(game) {
     }
     { const p = propPlant({ size: 1.1, seed: s > 0 ? 3 : 5 }); p.position.set(-5.2, 0, s * (edge + 2.5)); station.add(p); }
   }
+
+  // boarding marks at each door position (painted chevrons and a queue line), a timetable board, vending pair and
+  // bins on the near platform, so the bands either side of the car read as a working station
+  for (const s of [-1, 1]) for (const dx of [-DOOR_X, DOOR_X]) {
+    const zc = s * (edge + 1.05);
+    for (const k of [-1, 1]) { const tri = new THREE.Mesh(new THREE.CircleGeometry(0.16, 3), mat('#c9ccd0', { roughness: 0.8 })); tri.rotation.x = -Math.PI / 2; tri.rotation.z = s > 0 ? Math.PI / 2 : -Math.PI / 2; tri.position.set(dx + k * 0.36, 0.004, zc); station.add(tri); }
+    for (let i = 0; i < 3; i++) station.add(rbox(0.05, 0.004, 0.22, '#b9bdc3', { x: dx - 0.36 + i * 0.36, y: 0.002, z: s * (edge + 1.45), r: 0.001, cast: false }));
+  }
+  { const tb = new THREE.Group();
+    const tt = textTexture((g, W, H) => { g.fillStyle = '#1d2433'; g.fillRect(0, 0, W, H); g.fillStyle = '#e0bf4a'; g.fillRect(0, 0, W, 10);
+      for (let i = 0; i < 4; i++) { g.fillStyle = i ? '#9fb4cf' : '#f2f4f7'; g.font = '700 34px ' + JP_FONT; g.fillText(['8:42', '8:50', '8:58', '9:06'][i], 24, 58 + i * 46); g.fillStyle = '#6f86a6'; g.fillRect(140, 38 + i * 46, 150 + (i * 37) % 60, 12); g.fillStyle = i ? '#46d18a' : '#e0bf4a'; g.fillRect(W - 60, 40 + i * 46, 30, 12); } }, 420, 240);
+    tb.add(rbox(0.06, 1.2, 0.06, '#5b626d', { r: 0.02 }), rbox(1.02, 0.6, 0.06, '#232b3d', { y: 1.0, r: 0.02 }));
+    const p = plane(0.94, 0.52, tt, { emissiveK: 0.55 }); p.position.set(0, 1.3, 0.035); tb.add(p);
+    tb.position.set(-2.6, 0, edge + 2.55); station.add(tb); }
+  for (const [x, c, lit] of [[-7.4, '#2d3b63', true], [-6.55, '#8a3b3b', true]]) {
+    const vm = new THREE.Group(); vm.add(rbox(0.8, 1.35, 0.55, c, { r: 0.03 }));
+    const face = new THREE.Mesh(new THREE.PlaneGeometry(0.56, 0.7), emissive('#cfe0f2', lit ? '#9fc2ff' : '#000', 0.8)); face.position.set(-0.05, 0.85, 0.28); vm.add(face);
+    const cols = ['#e46a5a', '#f0b64a', '#5aa35d', '#4e8fd1', '#f2e2b0'];
+    for (let r = 0; r < 3; r++) for (let q = 0; q < 4; q++) vm.add(rbox(0.09, 0.13, 0.03, cols[(r * 4 + q) % 5], { x: -0.27 + q * 0.14, y: 0.63 + r * 0.18, z: 0.29, r: 0.02, cast: false }));
+    vm.add(rbox(0.46, 0.12, 0.03, '#15181d', { x: -0.05, y: 0.14, z: 0.29, r: 0.02, cast: false }));
+    vm.rotation.y = Math.PI; vm.position.set(x, 0, edge + 2.95); station.add(vm);
+    station.add(lightPool(x, edge + 2.3, 0.8, { k: 0.2, color: '#9fc2ff' }));
+  }
+  for (const s of [-1, 1]) for (const x of [-9.8, 5.9]) { const bin = new THREE.Group(); for (const [dx, c] of [[-0.14, '#4f6f9a'], [0.14, '#6a8f5c']]) bin.add(rbox(0.24, 0.5, 0.24, c, { x: dx, r: 0.03 }), rbox(0.2, 0.02, 0.2, '#2c3038', { x: dx, y: 0.5, r: 0.01, cast: false })); bin.position.set(x, 0, s * (edge + 2.75)); station.add(bin); }
   // a canopy over each platform that only the sun sees, so the platforms sit in cool shade as in the reference
   { const sm = new THREE.MeshBasicMaterial({ color: '#000', colorWrite: false, depthWrite: false });
     void sm; }
@@ -163,6 +189,8 @@ export async function trainPlace(game) {
   const wp = plane(1.9, 0.37, wt, { emissiveK: 0.3 }); wp.position.set(0, 1.5, 1.32); walk.add(wp);
   walk.position.set(8.4, 0, edge + 1.9); station.add(walk);
   station.visible = false;
+
+  const carDust = dust([-LX + 0.3, LX - 0.3, 0.15, 1.3, -LZ + 0.3, LZ - 0.3], 70, { opacity: 0.5, size: 0.024 }); car.root.add(carDust);
 
   // ---- Mio lives in the car ----
   const space = car.root;
@@ -299,7 +327,8 @@ export async function trainPlace(game) {
     seat_near_l: { x: -1.3, z: LZ - 0.24, side: 1, bag: 4, top: SEAT_Y, ry: Math.PI }, seat_near_r: { x: 1.4, z: LZ - 0.24, side: 1, bag: 5, top: SEAT_Y, ry: Math.PI },
     seat_mio: { x: 2.1, z: -(LZ - 0.24), side: -1, top: SEAT_Y, ry: 0 },
   };
-  const spots = { aisle: [0.4, 0.1], door_l: [-DOOR_X, LZ - 0.45], door_r: [DOOR_X, LZ - 0.45], by_aoi: [-1.7, -0.35], by_kuroda: [-2.55, -0.35], platform: [DOOR_X, LZ + 1.0], walkway: [8.4, LZ + 1.9] };
+  const spots = { aisle: [0.4, 0.1], door_l: [-DOOR_X, LZ - 0.45], door_r: [DOOR_X, LZ - 0.45], by_aoi: [-1.7, -0.35], by_kuroda: [-2.55, -0.35], platform: [DOOR_X, LZ + 1.0], walkway: [8.4, LZ + 1.9],
+    plat_l: [-3.0, 2.2], plat_l2: [-2.2, 2.25], plat_hamada: [-3.75, 2.35] };
   const rigAnchor = (rig, h = 1.12) => (v) => { rig.root.getWorldPosition(v); v.y += h; return v; };
   const carPt = (x, y, z) => (v) => { v.set(x, y, z); car.root.localToWorld(v); return v; };
   const at = (x, z, fx, fz) => ({ spot: () => [x, z], face: () => [fx, fz] });
@@ -335,6 +364,8 @@ export async function trainPlace(game) {
 
   let simT = 0;
   const P = {
+    // colour grade (js/post.js): muted like the lobby, a warm key, the sea kept from going cyan
+    grade: { exposure: 1.0, temp: 0.03, sat: 0.9, contrast: 1.05, shadowTint: [-0.004, 0.0, 0.014], highTint: [0.018, 0.008, -0.01], vignette: 0.24, bloom: 0.3, bloomThreshold: 0.9, focusBand: 0.28 },
     scene, camera, cam, space, nav, sun, charScale: 1, floorY: 0,
     start: [-0.2, 0.1], startFacing: 0.0, things, people, spots, zones, seats,
     beforeAO: new (class extends Pass { constructor() { super(); this.needsSwap = false; } render() { car.proxy.visible = false; } })(),
@@ -350,7 +381,7 @@ export async function trainPlace(game) {
     walkPerson(id, [x, z], { speed } = {}) {
       const r = people[id]; if (!r || !r.hips) return Promise.resolve();
       if (r.seated !== false && r.root.position.y > 0.01) standUp(r);
-      return walkPerson(r, [[x, z]], { speed: speed || 1.2, blobM: r.blob });
+      return walkPerson(r, route(nav, r.root.position, [x, z]), { speed: speed || 1.2, blobM: r.blob });
     },
     async sitPerson(id, seatId) {
       const s = seats[seatId]; if (!s) return;
@@ -378,7 +409,7 @@ export async function trainPlace(game) {
       }
       st.dist += st.v * dt;
       const k = st.v / SPEED;
-      world.update(st.dist / SPEED, camera); U.uTime.value = simT;
+      world.update(st.dist / SPEED, camera); U.uTime.value = simT; carDust.userData.update(simT);
       station.position.x = st.stopX - st.dist;
       const tj = st.dist / SPEED;
       const m = carMotion(tj, simT, Math.max(0.04, k));
@@ -411,7 +442,7 @@ export async function trainPlace(game) {
       setDoors(st.door);
       if (st.door > 0.3) nav.unblock('doors');
       else if (!nav.rects.some((r) => r.tag === 'doors')) nav.blockTagged('doors', -LX, LX + 8, LZ - 0.02, LZ + T + 0.06);
-      stepPeople([kuroda, aoi, rei], dt);
+      stepPeople([...list, rei], dt);
       if (cupSt.state === 'tip') { cupSt.k += (cupSt.want - cupSt.k) * Math.min(1, dt * 3); cup.rotation.z = -cupSt.k * 0.5 + Math.sin(simT * 9) * 0.04 * cupSt.k; }
       const p = game.player.root.position;
       if (aoi.lookTarget) lookAt(aoi, aoi.lookTarget[0], aoi.lookTarget[1], 1);
@@ -430,7 +461,7 @@ export async function trainPlace(game) {
       // { to, ms }: a slow, steady slide from where they are to `to` (1 open, 0 shut) over ms; without ms, the quick close
       doorsClose: ({ to = 0, ms } = {}) => {
         st.hold = false; st.chimeT = -1; st.doorWant = to;
-        if (ms) { st.slide = { from: st.door, to, t: 0, dur: ms / 1000 }; sfx('doorslow'); cam.closeOn(DOOR_SHOT, 1.75); } else { st.slide = null; sfx('door'); } // slow close: frame the door Hamada needs, with him asleep in the shot
+        if (ms) { st.slide = { from: st.door, to, t: 0, dur: ms / 1000 }; sfx('doorslow'); } else { st.slide = null; sfx('door'); } // the story frames the shot itself (Jørgen missed the man when it jumped to the door)
       },
       chime: () => { st.chimeT = 0; sfx('chime'); game.event('chime'); },
       // kotodama: they freeze dead where they are, with the effect; otherwise they bounce back a little, as before
@@ -438,6 +469,37 @@ export async function trainPlace(game) {
         st.slide = null; st.hold = true; st.chimeT = -1;
         if (kotodama) { st.holdAt = st.door; st.doorWant = st.door; st.frozen = true; await game.kotodama(myLeaves.map((d) => d.g), { pulse: myLeaves.filter((d) => d.x0 < 0).map((d) => d.g) }); return; } // the camera stays on the door until the story pulls back
         st.holdAt = Math.max(0.45, st.door); st.doorWant = st.holdAt; sfx('no');
+      },
+      // everyone still in the car gets off, a second or so apart: up, to the nearest open door, out and along the
+      // platform to the walkway, then gone. Resolves when only `except` (and Eric and Mio) are left.
+      alight: async ({ except = [] } = {}) => {
+        const skip = new Set(except);
+        const leaving = Object.entries(people).filter(([id, r]) => !skip.has(id) && r && r.hips && r.root.visible && r.root.position.z < LZ);
+        const walks = leaving.map(([id, r], i) => (async () => {
+          await game.wait(250 + i * 900);
+          if (r.root.position.y > 0.01) standUp(r);
+          r.act = null;
+          const dx = r.root.position.x < 0 ? -DOOR_X : DOOR_X;
+          await walkPerson(r, [...route(nav, r.root.position, [dx, LZ - 0.4]), [dx, LZ + 1.0], [dx + 1.2, LZ + 1.45], [7.6, LZ + 1.5], [8.4, LZ + 1.9]], { speed: 1.35, blobM: r.blob });   // along the platform clear of the sign posts
+          r.root.visible = false; if (r.blob) r.blob.visible = false;
+        })());
+        await Promise.all(walks);
+      },
+      // the empty car pulls out and away; people on the platform (Eric, Mio, whoever got off) stay where they are
+      depart: async () => {
+        const stay = new Set([game.player.root, game.mioNpc.root, kitty, kb]);
+        for (const r of Object.values(people)) if (r && r.root && r.root.position.z > LZ + T) { stay.add(r.root); if (r.blob) stay.add(r.blob); }
+        const movers = car.root.children.filter((o) => !stay.has(o));
+        const x0 = movers.map((o) => o.position.x), n0 = neighbours.map((n) => n.pivot.position.x), b0 = neighbours.map((n) => n.bellows.position.x);
+        sfx('brake');
+        await game.tween(7, (k) => {
+          const d = -34 * k * k;                           // a slow start, then away
+          movers.forEach((o, i) => { o.position.x = x0[i] + d; });
+          neighbours.forEach((n, i) => { n.pivot.position.x = n0[i] + d; n.bellows.position.x = b0[i] + d; });
+        });
+        for (const o of movers) if (!o.isLight) o.visible = false;
+        for (const n of neighbours) { n.pivot.visible = false; n.bellows.visible = false; }
+        st.departed = true;
       },
       wake: ({ who = 'kuroda' }) => { const r = people[who]; if (!r || !r.hips) return; r.act = null; r.head.rotation.set(0.1, 0, 0); },
       bag: async ({ state }) => {

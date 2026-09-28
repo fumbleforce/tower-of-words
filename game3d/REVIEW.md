@@ -46,6 +46,20 @@ Fixed after round 5: office floor cooler, filing row on the office's left wall, 
 
 Not changed on purpose: the train's passengers and car (from side/train, recoloured only), Mio's shape (Meshy, colour only), the steep train camera (Jørgen's request).
 
+## Production pass, world (from 2026-09-28)
+
+Fresh critic per place each round, shown only the references and the round's sheets (desktop 1366x860 and phone 390x844 side by side, rendered at the high tier with js/post.js). Pass mark 8.
+
+| Round | Train and platform | Lobby | Office | Lift | Sheets |
+|---|---|---|---|---|---|
+| P1 | 6 | 6.5 | 6 | (in the office critique: "reads well") | shots/round-6 |
+
+### P1
+- Done: js/post.js (grade per place, AO, bloom, tilt-shift, vignette; tiers low, medium, high), js/places/life.js (floor light pools, dust in light, kettle steam, screens that flicker and scroll, clock hands on the game clock), office dressing (carpet under the island, printer, lift car behind the doors, corridor mats, recycling row, AED, fountain, copy-room reams, shredder, trolley, kitchen rug and stools, toilet dryers), platform boarding marks, timetable, vending pair, bins, English sub-lines on the untaught signs, Eric's name card. NPC walks go over the walk grid (js/places/route.js); lobby commuters enter only through the open doorway.
+- Office 6: bottom rooms blown out by the pools, toilets half empty, lower third of the office bare, machine room flat black, corridor's right half thin, grounding weak.
+- Lobby 6.5: the barrier glass doesn't read, the entrance glass reads as white slabs, the left lift's open leaves slide over the poster, sun shafts have no visible source, a grey box by the counter, phone framing cuts the guard.
+- Train 6: nothing under the car at sea (beam, pylons), sea noise flat and saturated, platforms still thin, doors don't read as open, platform edges unfinished.
+
 ## Markers (after Jørgen: "small, awkwardly placed, not well designed")
 
 Fresh critic, before → after: readability 3 → 7, placement 4 → 6, design and fit 4 → 7, phone 3 → 3 (a tag-width bug, fixed afterwards with the rest of its notes). Crops: shots/round-5/markers-before-after-desktop.png and -phone.png.
