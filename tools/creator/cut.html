@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>Part cuts</title>
+<script type="importmap">{"imports":{"three":"/game3d/vendor/three/three.module.js"}}</script>
+<style>
+  :root { --bg: #eef0f3; --ink: #1d2230; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 14px/1.4 system-ui, sans-serif; }
+  h2 { margin: 16px 16px 4px; font-size: 16px; }
+  .row { display: flex; flex-wrap: wrap; gap: 8px; padding: 0 16px; }
+  .row canvas { width: 260px; height: 340px; background: #fff; border-radius: 6px; }
+  .legend { padding: 8px 16px; display: flex; gap: 14px; }
+  .legend i { display: inline-block; width: 12px; height: 12px; border-radius: 2px; margin-right: 4px; vertical-align: -1px; }
+</style></head>
+<body>
+<div class="legend" id="legend"></div>
+<div id="out"></div>
+<script type="module">
+// Cuts every source into slots with the rules in library.json and shows each cut from four sides, flat-coloured
+// by slot, next to the textured model. ?save=1 hands the new library.json (parts filled in) to tools/creator/run.mjs.
+import * as THREE from 'three';
+import { loadLibrary, SLOTS, ROOT } from './recipe.js';
+import { cutSource } from './cut.js';
+const SLOT_COL = { hair: '#e0457b', head: '#f2c14e', top: '#3a86ff', bottom: '#2a9d8f', shoes: '#8338ec', hands: '#fb8500', null: '#000000' };
+document.getElementById('legend').innerHTML = SLOTS.map((s) => `<span><i style="background:${SLOT_COL[s]}"></i>${s}</span>`).join('');
+const lib = await loadLibrary();
+const raw = await (await fetch(ROOT + 'library.json', { cache: 'no-store' })).json();
+raw.parts = [];
+let log = '';
+const renderer = new THREE.WebGLRenderer({ antialias: true, preserveDrawingBuffer: true });
+renderer.setSize(260, 340); renderer.setPixelRatio(2);
+function shot(obj, yaw) {
+  const scene = new THREE.Scene(); scene.background = new THREE.Color('#ffffff');
+  scene.add(new THREE.HemisphereLight(0xffffff, 0x8890a0, 2.2)); const d = new THREE.DirectionalLight(0xffffff, 1.2); d.position.set(1, 2, 2); scene.add(d);
+  const g = new THREE.Group(); g.add(obj); g.rotation.y = yaw; scene.add(g);
+  const cam = new THREE.PerspectiveCamera(22, 260 / 340, 0.1, 20); cam.position.set(0, 0.5, 3.2); cam.lookAt(0, 0.5, 0);
+  renderer.render(scene, cam);
+  const c = document.createElement('canvas'); c.width = 520; c.height = 680; c.getContext('2d').drawImage(renderer.domElement, 0, 0);
+  g.remove(obj); return c;
+}
+for (const [k, src] of Object.entries(lib.src)) {
+  const cfg = raw.sources[k].cut || { skin: [[250, 220, 200]] };
+  const { labels, keys, facts } = cutSource(src, cfg);
+  // colour stats per bone group, to set the rules
+  const stats = {};
+  facts.forEach((f, t) => { const g = f.bone.replace(/^(Left|Right)/, ''); const key = f.rgb.map((x) => Math.round(x / 32) * 32).join(','); stats[g] = stats[g] || {}; stats[g][key] = (stats[g][key] || 0) + f.area; });
+  log += `== ${k}\n`;
+  for (const [g, m] of Object.entries(stats)) log += `  ${g}: ` + Object.entries(m).sort((a, b) => b[1] - a[1]).slice(0, 6).map(([c, a]) => `${c}:${(a * 1000).toFixed(1)}`).join('  ') + '\n';
+  log += '  counts: ' + SLOTS.map((s) => s + ' ' + labels.filter((l) => l === s).length).join(', ') + '\n';
+  log += '  keys: ' + JSON.stringify(keys) + '\n';
+  for (const slot of SLOTS) {
+    const tris = []; labels.forEach((l, t) => { if (l === slot) tris.push(t); });
+    raw.parts.push({ id: `${k}-${slot}`, source: k, slot, key: keys[slot], tris });
+  }
+  // preview
+  const g = new THREE.BufferGeometry();
+  g.setAttribute('position', new THREE.BufferAttribute(src.pos, 3));
+  const col = new Float32Array(src.n * 3), cc = new THREE.Color();
+  labels.forEach((l, t) => { cc.set(SLOT_COL[l]); for (let q = 0; q < 3; q++) cc.toArray(col, (t * 3 + q) * 3); });
+  g.setAttribute('color', new THREE.BufferAttribute(col, 3)); g.computeVertexNormals();
+  const flat = new THREE.Mesh(g, new THREE.MeshLambertMaterial({ vertexColors: true, flatShading: true, side: THREE.DoubleSide }));
+  const tg = new THREE.BufferGeometry();
+  tg.setAttribute('position', new THREE.BufferAttribute(src.pos, 3)); tg.setAttribute('uv', new THREE.BufferAttribute(src.uv, 2));
+  tg.setAttribute('color', new THREE.BufferAttribute(src.col, 3)); tg.setAttribute('useTex', new THREE.BufferAttribute(src.useTex, 1)); tg.computeVertexNormals();
+  const tm = new THREE.MeshLambertMaterial({ map: src.tex, vertexColors: true, flatShading: true });
+  tm.onBeforeCompile = (sh) => {
+    sh.vertexShader = 'attribute float useTex;\nvarying float vU;\n' + sh.vertexShader.replace('#include <begin_vertex>', '#include <begin_vertex>\nvU = useTex;');
+    sh.fragmentShader = 'varying float vU;\n' + sh.fragmentShader.replace('#include <map_fragment>', 'vec4 texel = texture2D(map, vMapUv); diffuseColor.rgb *= mix(vec3(1.0), texel.rgb, vU);');
+  };
+  const tex = new THREE.Mesh(tg, tm);
+  const sec = document.createElement('div');
+  sec.innerHTML = `<h2>${k}</h2>`; const row = document.createElement('div'); row.className = 'row';
+  row.append(shot(tex, 0.5), shot(flat, 0), shot(flat, Math.PI / 2), shot(flat, Math.PI), shot(flat, -0.6));
+  sec.append(row); document.getElementById('out').append(sec);
+}
+window.__out = log;
+if (new URLSearchParams(location.search).get('save')) window.__files = { 'art/parts/library.json': JSON.stringify(raw, null, 1).replace(/\[[\d,.\s-]+\]/g, (m) => m.replace(/\s+/g, '')) + '\n' };
+window.__done = 1;
+</script>
+</body></html>

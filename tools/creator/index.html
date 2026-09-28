@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Character creator</title>
+<script type="importmap">{"imports":{"three":"/game3d/vendor/three/three.module.js"}}</script>
+<style>
+  :root { --bg: #e9ecf1; --panel: #ffffff; --ink: #1b2130; --mute: #5d6678; --line: #d5dae3; --accent: #2f6fde; }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --bg: #151923; --panel: #1f2533; --ink: #e8ecf3; --mute: #9aa4b8; --line: #323a4c; --accent: #6d9cff; } }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; background: var(--bg); color: var(--ink); font: 14px/1.4 system-ui, -apple-system, "Segoe UI", sans-serif; }
+  .app { display: grid; grid-template-columns: 1fr 340px; height: 100%; }
+  #view { position: relative; min-height: 0; }
+  #view canvas { display: block; width: 100%; height: 100%; }
+  .bar { position: absolute; left: 16px; bottom: 16px; display: flex; gap: 6px; }
+  .bar button, .panel button { font: inherit; border: 1px solid var(--line); background: var(--panel); color: var(--ink); border-radius: 6px; padding: 7px 12px; cursor: pointer; }
+  .bar button[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .panel { background: var(--panel); border-left: 1px solid var(--line); padding: 16px; overflow-y: auto; }
+  h1 { font-size: 17px; margin: 0 0 12px; }
+  .slot { display: grid; grid-template-columns: 64px 1fr 40px; gap: 8px; align-items: center; padding: 7px 0; border-top: 1px solid var(--line); }
+  .slot label { color: var(--mute); }
+  select { font: inherit; width: 100%; padding: 6px; border-radius: 6px; border: 1px solid var(--line); background: var(--panel); color: var(--ink); }
+  input[type=color] { width: 40px; height: 32px; padding: 0; border: 1px solid var(--line); border-radius: 6px; background: none; }
+  .swatches { grid-column: 2 / 4; display: flex; gap: 5px; flex-wrap: wrap; }
+  .swatches button { width: 26px; height: 26px; padding: 0; border-radius: 50%; }
+  .swatches button[aria-pressed="true"] { outline: 2px solid var(--accent); outline-offset: 2px; }
+  textarea { width: 100%; height: 130px; font: 12px/1.35 ui-monospace, monospace; border: 1px solid var(--line); border-radius: 6px; background: var(--bg); color: var(--ink); padding: 8px; margin-top: 8px; }
+  .note { color: var(--mute); font-size: 12px; margin-top: 10px; }
+  #status { position: absolute; top: 16px; left: 16px; color: var(--mute); }
+  @media (max-width: 760px) {
+    .app { grid-template-columns: 1fr; grid-template-rows: 52vh auto; height: auto; }
+    .panel { border-left: 0; border-top: 1px solid var(--line); }
+  }
+</style></head>
+<body>
+<div class="app">
+  <div id="view"><div id="status">Loading parts…</div>
+    <div class="bar"><button data-anim="idle" aria-pressed="true">Idle</button><button data-anim="walk" aria-pressed="false">Walk</button><button id="spin" aria-pressed="true">Turn</button></div>
+  </div>
+  <div class="panel">
+    <h1>Character creator</h1>
+    <div class="slot"><label for="body">Body</label><select id="body"></select><span></span></div>
+    <div id="slots"></div>
+    <textarea id="recipe" spellcheck="false" aria-label="Recipe JSON"></textarea>
+    <button id="copy">Copy recipe</button>
+    <p class="note">Experiment. Parts cut from Mio and Eric, on one skeleton. The body sets the proportions; parts from the other model are stretched to fit it.</p>
+  </div>
+</div>
+<script type="module">
+import * as THREE from 'three';
+import { loadLibrary, buildCharacter, setColours, SLOTS, SKIN_TONES } from './recipe.js';
+
+const view = document.getElementById('view');
+const renderer = new THREE.WebGLRenderer({ antialias: true });
+renderer.setPixelRatio(Math.min(2, devicePixelRatio)); renderer.outputColorSpace = THREE.SRGBColorSpace;
+view.prepend(renderer.domElement);
+const scene = new THREE.Scene();
+const bg = () => getComputedStyle(document.documentElement).getPropertyValue('--bg').trim();
+scene.background = new THREE.Color(bg());
+scene.add(new THREE.HemisphereLight(0xffffff, 0x8f98ab, 2.0));
+const sun = new THREE.DirectionalLight(0xffffff, 1.6); sun.position.set(1.5, 3, 2.5); scene.add(sun);
+const floor = new THREE.Mesh(new THREE.CircleGeometry(0.7, 48), new THREE.MeshLambertMaterial({ color: 0xc9cfda })); floor.rotation.x = -Math.PI / 2; scene.add(floor);
+const cam = new THREE.PerspectiveCamera(28, 1, 0.05, 50);
+function resize() { const w = view.clientWidth, h = view.clientHeight; renderer.setSize(w, h, false); cam.aspect = w / h; cam.position.set(0, 0.72, w < h ? 3.6 : 2.9); cam.lookAt(0, 0.55, 0); cam.updateProjectionMatrix(); }
+addEventListener('resize', resize);
+
+const lib = await loadLibrary();
+const bySlot = {}; for (const p of lib.parts) (bySlot[p.slot] = bySlot[p.slot] || []).push(p);
+const recipe = { body: 'mio', parts: {}, colours: {}, height: 1.1 };
+for (const s of SLOTS) recipe.parts[s] = `mio-${s}`;
+const params = new URLSearchParams(location.search);
+if (params.get('recipe')) Object.assign(recipe, JSON.parse(params.get('recipe')));
+
+const bodySel = document.getElementById('body');
+bodySel.innerHTML = Object.keys(lib.sources).map((k) => `<option value="${k}">${k[0].toUpperCase() + k.slice(1)}</option>`).join('');
+bodySel.value = recipe.body;
+bodySel.onchange = () => { recipe.body = bodySel.value; rebuild(); };
+const slotsEl = document.getElementById('slots');
+const label = (p) => p.source[0].toUpperCase() + p.source.slice(1) + '’s ' + p.slot;
+for (const s of SLOTS) {
+  const row = document.createElement('div'); row.className = 'slot';
+  const opts = (bySlot[s] || []).map((p) => `<option value="${p.id}">${label(p)}</option>`).join('');
+  const tintable = s !== 'head' && s !== 'hands';
+  row.innerHTML = `<label for="s-${s}">${s[0].toUpperCase() + s.slice(1)}</label><select id="s-${s}">${opts}</select>` + (tintable ? `<input type="color" id="c-${s}" aria-label="${s} colour">` : '<span></span>');
+  slotsEl.append(row);
+  const sel = row.querySelector('select'); sel.value = recipe.parts[s];
+  sel.onchange = () => { recipe.parts[s] = sel.value; rebuild(); };
+  if (tintable) {
+    const c = row.querySelector('input'); const p = lib.byId[recipe.parts[s]];
+    c.value = '#' + p.key.map((x) => x.toString(16).padStart(2, '0')).join('');
+    c.oninput = () => { recipe.colours[s] = c.value; if (ch) setColours(ch, recipe.colours); showRecipe(); };
+  }
+  if (s === 'hands') {
+    const sw = document.createElement('div'); sw.className = 'slot';
+    sw.innerHTML = '<label>Skin</label><div class="swatches"><button aria-pressed="true" title="As made" style="background:conic-gradient(#f7e3d8 0 50%, #f3d3c0 0)"></button>' + SKIN_TONES.map((t) => `<button aria-pressed="false" data-tone="${t}" style="background:${t}" title="${t}"></button>`).join('') + '</div>';
+    slotsEl.append(sw);
+    sw.querySelectorAll('button').forEach((b) => b.onclick = () => {
+      sw.querySelectorAll('button').forEach((x) => x.setAttribute('aria-pressed', 'false')); b.setAttribute('aria-pressed', 'true');
+      if (b.dataset.tone) recipe.colours.skin = b.dataset.tone; else delete recipe.colours.skin;
+      if (ch) setColours(ch, recipe.colours); showRecipe();
+    });
+  }
+}
+function showRecipe() { document.getElementById('recipe').value = JSON.stringify(recipe, null, 1); }
+document.getElementById('copy').onclick = () => navigator.clipboard && navigator.clipboard.writeText(document.getElementById('recipe').value);
+
+let ch = null, anim = 'idle', spin = true, busy = 0;
+async function rebuild() {
+  const my = ++busy;
+  const next = await buildCharacter(lib, recipe);
+  if (my !== busy) return;
+  if (ch) scene.remove(ch.root);
+  ch = next; scene.add(ch.root); ch.play(anim, 0);
+  document.getElementById('status').textContent = '';
+  showRecipe();
+}
+document.querySelectorAll('[data-anim]').forEach((b) => b.onclick = () => {
+  anim = b.dataset.anim; document.querySelectorAll('[data-anim]').forEach((x) => x.setAttribute('aria-pressed', String(x === b))); if (ch) ch.play(anim);
+});
+document.getElementById('spin').onclick = (e) => { spin = !spin; e.target.setAttribute('aria-pressed', String(spin)); };
+// drag to turn
+let drag = null, yaw = 0.5;
+renderer.domElement.addEventListener('pointerdown', (e) => { drag = e.clientX; });
+addEventListener('pointerup', () => { drag = null; });
+addEventListener('pointermove', (e) => { if (drag !== null) { yaw += (e.clientX - drag) * 0.01; drag = e.clientX; } });
+
+resize(); await rebuild();
+const clock = new THREE.Clock();
+renderer.setAnimationLoop(() => {
+  const dt = Math.min(clock.getDelta(), 0.05);
+  if (spin && drag === null) yaw += dt * 0.5;
+  if (ch) { ch.update(dt); ch.root.rotation.y = yaw; }
+  renderer.render(scene, cam);
+});
+if (params.get('t')) { for (let i = 0; i < +params.get('t') * 30; i++) ch && ch.update(1 / 30); }
+window.__done = 1;
+</script>
+</body></html>

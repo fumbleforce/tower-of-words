@@ -1,0 +1,12 @@
+<!doctype html><meta charset="utf-8"><script type="importmap">{"imports":{"three":"/game3d/vendor/three/three.module.js"}}</script>
+<pre id="o"></pre>
+<script type="module">
+import { loadLibrary, BONES } from './recipe.js';
+const lib = await loadLibrary();
+let s = '';
+for (const [k, src] of Object.entries(lib.src)) {
+  s += `${k} H=${src.height.toFixed(3)} T=${src.T}\n`;
+  for (const b of BONES) s += `  ${b} ${src.P[b].toArray().map((x) => x.toFixed(3)).join(' ')}\n`;
+}
+document.getElementById('o').textContent = s; window.__out = s; window.__done = 1;
+</script>

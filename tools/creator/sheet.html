@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>Creator check sheet</title>
+<script type="importmap">{"imports":{"three":"/game3d/vendor/three/three.module.js"}}</script>
+<style>
+  :root { --bg: #eef0f3; --ink: #1d2230; --mute: #5b6475; --card: #ffffff; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 14px/1.45 system-ui, sans-serif; }
+  h1 { font-size: 20px; margin: 18px 16px 2px; }
+  h2 { font-size: 16px; margin: 22px 16px 4px; }
+  p { margin: 2px 16px 8px; color: var(--mute); max-width: 1100px; }
+  .row { display: flex; flex-wrap: wrap; gap: 10px; padding: 0 16px; }
+  figure { margin: 0; background: var(--card); border-radius: 6px; padding: 6px; }
+  figure canvas { display: block; width: 220px; height: 290px; }
+  figure.wide canvas { width: 300px; height: 220px; }
+  figcaption { font-size: 12px; color: var(--mute); padding: 4px 2px 0; max-width: 300px; }
+</style></head>
+<body>
+<h1>Character creator: feasibility check</h1>
+<p>Built by tools/creator/sheet.html from art/parts/library.json. Every body here runs on the shared skeleton (the Meshy API rig) and Eric's idle and walk clips.</p>
+<div id="out"></div>
+<script type="module">
+import * as THREE from 'three';
+import { loadLibrary, buildCharacter } from './recipe.js';
+import { loadMio } from '../../game3d/js/mio.js';
+import { loadEric } from '../../game3d/js/avatar.js';
+
+const W = 220, H = 290;
+const renderer = new THREE.WebGLRenderer({ antialias: true, preserveDrawingBuffer: true });
+renderer.setPixelRatio(2); renderer.outputColorSpace = THREE.SRGBColorSpace;
+const out = document.getElementById('out');
+function section(title, note) { const h = document.createElement('h2'); h.textContent = title; out.append(h); if (note) { const p = document.createElement('p'); p.textContent = note; out.append(p); } const r = document.createElement('div'); r.className = 'row'; out.append(r); return r; }
+function scene() {
+  const s = new THREE.Scene(); s.background = new THREE.Color('#f7f8fa');
+  s.add(new THREE.HemisphereLight(0xffffff, 0x9aa3b5, 2.0));
+  const d = new THREE.DirectionalLight(0xffffff, 1.6); d.position.set(1.2, 2.5, 2.2); s.add(d);
+  return s;
+}
+// frame: 'full' or a close-up on a point (world) at distance dist
+function shot(root, { yaw = 0, look = null, dist = 3.3, wide = false, caption = '' } = {}) {
+  const w = wide ? 300 : W, h = wide ? 220 : H;
+  renderer.setSize(w, h);
+  const s = scene(); const g = new THREE.Group(); g.rotation.y = yaw; g.add(root); s.add(g); g.updateMatrixWorld(true);
+  const cam = new THREE.PerspectiveCamera(22, w / h, 0.01, 50);
+  const tgt = look ? look.clone() : new THREE.Vector3(0, 0.5, 0);
+  cam.position.set(tgt.x, tgt.y + (look ? 0.02 : 0.08), tgt.z + dist); cam.lookAt(tgt);
+  renderer.render(s, cam);
+  const fig = document.createElement('figure'); if (wide) fig.className = 'wide';
+  const c = document.createElement('canvas'); c.width = w * 2; c.height = h * 2; c.getContext('2d').drawImage(renderer.domElement, 0, 0);
+  fig.append(c); const fc = document.createElement('figcaption'); fc.textContent = caption; fig.append(fc);
+  g.remove(root);
+  return fig;
+}
+// scale a loaded character so its current pose is 1 tall with the feet on 0
+function normalise(root) {
+  root.scale.setScalar(1); root.position.set(0, 0, 0); root.updateMatrixWorld(true);
+  const b = new THREE.Box3().setFromObject(root, true);
+  const k = 1 / (b.max.y - b.min.y); root.scale.setScalar(k);
+  root.position.set(-(b.min.x + b.max.x) / 2 * k, -b.min.y * k, -(b.min.z + b.max.z) / 2 * k); root.updateMatrixWorld(true);
+}
+const bonePos = (ch, name, yaw = 0) => { ch.root.updateMatrixWorld(true); const v = ch.bones[name].getWorldPosition(new THREE.Vector3()); return v.applyAxisAngle(new THREE.Vector3(0, 1, 0), yaw); };
+function poseAt(ch, clip, t) { ch.mixer.stopAllAction(); ch.cur = null; ch.play(clip, 0); ch.actions[clip].time = t; ch.mixer.update(0); ch.update(0); }
+
+const lib = await loadLibrary();
+const own = (k) => ({ body: k, parts: Object.fromEntries(['hair', 'head', 'top', 'bottom', 'shoes', 'hands'].map((s) => [s, `${k}-${s}`])), height: 1 });
+
+// 1. originals next to the rebuilds, all in the bind pose
+{
+  const r = section('1. Rebuilt from their own parts, next to the originals', 'Bind pose (the pose the models were rigged in). Left of each pair: the game loader (game3d/js/mio.js, avatar.js) with no colour changes; right: the six parts put back together on the shared skeleton.');
+  const mio0 = await loadMio({ colours: null }); const eric0 = await loadEric();
+  for (const [name, orig, k] of [['Mio', mio0, 'mio'], ['Eric', eric0, 'eric']]) {
+    orig.mixer.stopAllAction(); orig.model.traverse((o) => { if (o.isSkinnedMesh) o.skeleton.pose(); });
+    normalise(orig.root);
+    const re = await buildCharacter(lib, own(k)); re.bindPose(); normalise(re.root);
+    for (const yaw of [0, 0.7, Math.PI]) {
+      r.append(shot(orig.root, { yaw, caption: `${name} original, turn ${yaw.toFixed(1)}` }));
+      r.append(shot(re.root, { yaw, caption: `${name} rebuilt, turn ${yaw.toFixed(1)}` }));
+    }
+  }
+  const r2 = section('1b. Rebuilt Mio and Eric in idle and walk', 'Eric\'s API clips on both bodies. Mio never had these clips: the shared skeleton is what lets them play on her.');
+  for (const k of ['mio', 'eric']) {
+    const ch = await buildCharacter(lib, own(k));
+    poseAt(ch, 'idle', 0.4); normalise(ch.root); r2.append(shot(ch.root, { yaw: 0.5, caption: `${k} idle` }));
+    for (const f of [0, 0.25, 0.5, 0.75]) { poseAt(ch, 'walk', f * ch.actions.walk.getClip().duration); normalise(ch.root); r2.append(shot(ch.root, { yaw: 1.2, caption: `${k} walk ${f}` })); }
+  }
+}
+
+// 2. mixed characters
+const MIX = window.MIX = [
+  { name: 'Eric with Mio\'s hair', r: { body: 'eric', parts: { ...own('eric').parts, hair: 'mio-hair' } } },
+  { name: 'Mio with Eric\'s hair', r: { body: 'mio', parts: { ...own('mio').parts, hair: 'eric-hair' } } },
+  { name: 'Mio in Eric\'s jacket', r: { body: 'mio', parts: { ...own('mio').parts, top: 'eric-top' } } },
+  { name: 'Eric in Mio\'s hoodie and trousers', r: { body: 'eric', parts: { ...own('eric').parts, top: 'mio-top', bottom: 'mio-bottom' } } },
+  { name: 'Mio\'s head and hair on Eric\'s body', r: { body: 'eric', parts: { ...own('eric').parts, head: 'mio-head', hair: 'mio-hair' } } },
+  { name: 'Tinted: Mio body, Eric trousers and shoes', r: { body: 'mio', parts: { ...own('mio').parts, bottom: 'eric-bottom', shoes: 'eric-shoes' }, colours: { hair: '#6b3a2a', top: '#c0392b', bottom: '#2f3640', shoes: '#f1f1f1', skin: '#d9a47f' } } },
+];
+{
+  const r = section('2. Mixed characters', 'Each: idle from the front and three-quarter, then walk at two points of the stride.');
+  for (const m of MIX) {
+    const ch = await buildCharacter(lib, { height: 1, ...m.r }); m.ch = ch;
+    poseAt(ch, 'idle', 0.4); normalise(ch.root);
+    r.append(shot(ch.root, { yaw: 0, caption: m.name + ', idle' }));
+    r.append(shot(ch.root, { yaw: 0.7, caption: m.name + ', idle 3/4' }));
+    for (const f of [0.25, 0.75]) { poseAt(ch, 'walk', f * ch.actions.walk.getClip().duration); normalise(ch.root); r.append(shot(ch.root, { yaw: 1.3, caption: `${m.name}, walk ${f}` })); }
+    poseAt(ch, 'idle', 0.4); normalise(ch.root);
+    r.append(shot(ch.root, { yaw: Math.PI, caption: m.name + ', back' }));
+  }
+}
+
+// 3. seams
+{
+  const r = section('3. Seams, close up', 'Where a part from one model meets a part from the other: the neck, the waist and the ankles, in idle and mid-stride.');
+  for (const m of MIX) {
+    const ch = m.ch;
+    for (const [clip, t] of [['idle', 0.4], ['walk', 0.25]]) {
+      poseAt(ch, clip, clip === 'walk' ? t * ch.actions.walk.getClip().duration : t); normalise(ch.root);
+      for (const [bone, yaw, d] of [['neck', 0.5, 0.9], ['Hips', 0.9, 1.0], ['LeftFoot', 0.4, 0.8], ['Head', 2.4, 1.1]]) {
+        const p = bonePos(ch, bone, yaw);
+        r.append(shot(ch.root, { yaw, look: p, dist: d, wide: true, caption: `${m.name}: ${bone === 'Hips' ? 'waist' : bone === 'LeftFoot' ? 'ankle' : bone === 'Head' ? 'back of head' : 'neck'}, ${clip}` }));
+      }
+    }
+  }
+}
+window.__done = 1;
+</script>
+</body></html>
