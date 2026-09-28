@@ -48,18 +48,18 @@ export async function lobbyPlace(game) {
 
   // ---- commuters: walk in, tap a reader, pass the arch, take a lift ----
   const commuters = [];
-  [0, 1, 2, 3, 4, 5, 6].forEach((k, i) => {
+  [0, 2, 5].forEach((k, i) => {   // a small crowd, so the story's people stand out
     const r = PEOPLE.worker(k); r.root.scale.multiplyScalar(K);
     if (i === 2) { const box = rbox(0.2, 0.12, 0.2, '#f4efe6', { y: -0.3, z: 0.05, r: 0.01 }); box.add(rbox(0.21, 0.02, 0.05, '#d9534f', { y: 0.11, r: 0.004 })); r.arms[1].add(box); }
     w.root.add(r.root); r.root.visible = false;
     const b = blob(0.5, 0.35); w.root.add(b); b.visible = false;
-    commuters.push({ r, b, t: 1 - i * 2.6, side: i % 2 ? 1 : -1, stage: 'wait', ph: 0 });
+    commuters.push({ r, b, t: 1 - i * 3.5, side: i % 2 ? 1 : -1, stage: 'wait', ph: 0, qi: i });
   });
   function stepCommuter(c, dt) {
     const r = c.r, p = r.root.position;
     c.t += dt;
     if (c.stage === 'wait') {
-      if (c.t > 0 && st.rush && !st.jam && !game.busyTrip) { c.stage = 'in'; r.root.visible = true; c.b.visible = true; p.set(c.side * (1.0 + Math.random() * 0.4), 0, Z + 1.6); c.path = [[c.side * (1.0 + Math.random() * 0.3), Z - 0.9], [c.side * 0.93, BZ + 0.55]]; }
+      if (c.t > 0 && st.rush && !game.busyTrip) { c.stage = 'in'; r.root.visible = true; c.b.visible = true; p.set(c.side * (1.0 + Math.random() * 0.4), 0, Z + 1.6); c.path = [[c.side * (1.0 + Math.random() * 0.3), Z - 0.9], [c.side * 0.93, BZ + 0.55]]; }
       return;
     }
     const moveTo = (tx, tz, sp = 1.25) => {
@@ -68,7 +68,19 @@ export async function lobbyPlace(game) {
       r.root.rotation.y = Math.atan2(tx - p.x, tz - p.z); c.ph += dt * 9.5; walkPose(r, c.ph, 1); c.b.position.set(p.x, 0.004, p.z);
       return false;
     };
-    if (c.stage === 'in') { if (moveTo(...c.path[0])) { c.path.shift(); if (!c.path.length) { c.stage = 'tap'; c.t = 0; walkPose(r, 0, 0); r.hips.position.y = HIP; r.arms[0].rotation.x = -1.2; } } return; }
+    if (c.stage === 'in') {
+      if (!st.gateOpen && c.path.length === 1) { c.stage = 'toqueue'; c.path = [[-1.9 - c.qi * 0.55, BZ + 1.15 + (c.qi % 2) * 0.35]]; }
+      else if (moveTo(...c.path[0])) { c.path.shift(); if (!c.path.length) { c.stage = 'tap'; c.t = 0; walkPose(r, 0, 0); r.hips.position.y = HIP; r.arms[0].rotation.x = -1.2; } }
+      return;
+    }
+    if (c.stage === 'toqueue') { if (moveTo(...c.path[0], 1.1)) { c.stage = 'queue'; c.t = 0; walkPose(r, 0, 0); r.hips.position.y = HIP; r.root.rotation.y = Math.PI * 0.9; } return; }
+    if (c.stage === 'queue') {
+      // waiting: a phone out, a glance at the gate now and then, a sigh (shoulders drop)
+      r.arms[1].rotation.x = -1.25; r.head.rotation.x = 0.35 - Math.max(0, Math.sin(c.t * 0.7 + c.qi)) * 0.35; r.head.rotation.y = Math.sin(c.t * 0.4 + c.qi) * 0.4;
+      r.torso.position.y = 0.02 - Math.max(0, Math.sin(c.t * 0.9 + c.qi * 2) - 0.96) * 0.3;
+      if (st.gateOpen) { r.arms[1].rotation.x = 0; r.head.rotation.set(0, 0, 0); r.torso.position.y = 0.02; c.stage = 'in'; c.path = [[c.side * 0.93, BZ + 0.55]]; }
+      return;
+    }
     if (c.stage === 'tap') {
       if (st.jam) { if (c.t > 1.5) { r.arms[0].rotation.x = 0; c.stage = 'back'; } return; }
       if (c.t > 0.4 && c.t - dt <= 0.4) { readerFlash(c.side > 0 ? 1 : 0, 'green', true); openFor(1.6); }
@@ -87,10 +99,9 @@ export async function lobbyPlace(game) {
 
   // background people who aren't going anywhere yet
   const extras = [];
-  for (const [k, x, z, ry] of [[4, -3.0, -2.9, 0.9], [2, -2.45, -2.6, -2.2], [5, 4.75, 3.0, Math.PI / 2 + 0.4]]) {
+  for (const [k, x, z, ry] of [[4, -3.0, -2.9, 0.9], [2, -2.45, -2.6, -2.2]]) {
     const r = PEOPLE.worker(k); r.root.scale.multiplyScalar(K); r.root.position.set(x, 0, z); r.root.rotation.y = ry; w.root.add(r.root);
     const b = blob(0.5, 0.35); b.position.set(x, 0.004, z); w.root.add(b); extras.push(r);
-    w.nav.block(x - 0.2, x + 0.2, z - 0.2, z + 0.2);
   }
   // ---- gate ----
   function readerFlash(i, state, quiet) {
@@ -218,7 +229,13 @@ export async function lobbyPlace(game) {
         const pr = walkPerson(r, [[0.5, Z - 0.6], game.posOf(to)], { speed: 1.7, blobM: blobs[who] });
         if (wait) await pr;
       },
-      type: ({ ms = 2500 }) => { st.typing = ms / 1000; },
+      typing: ({ ms = 2500 }) => { st.typing = ms / 1000; },
+      // the guard on hold: handset at his ear, faint hold music
+      phone: ({ who = 'guard', state = 'on' }) => {
+        const r = people[who]; if (!r || !r.arms) return;
+        if (state === 'on') { r.arms[1].rotation.set(-2.5, 0, -0.35); if (!st.hold) st.hold = setInterval(() => { sfx('tap'); setTimeout(() => sfx('tap'), 180); }, 1600); }
+        else { r.arms[1].rotation.set(-1.1, 0, 0); clearInterval(st.hold); st.hold = null; }
+      },
       rush: ({ on }) => { st.rush = !!on; },
       catTo: async ({ to }) => {
         const p = game.posOf(to); if (!p) return;

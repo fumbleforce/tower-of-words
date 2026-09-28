@@ -133,7 +133,7 @@ ruby rt { font-size: .5em; color: var(--gl); font-weight: 500; }
 #cmdsPanel li .jp { grid-row: span 2; font-size: 24px; align-self: center; }
 #cmdsPanel li .en { color: var(--ink-dim); font-size: 14px; }
 #cmdsPanel .close, #sayMenu .cancel { width: 100%; padding: 10px; border-radius: 10px; border: 1px solid var(--panel-edge); background: #2a303b; cursor: pointer; }
-#sayBtn { position: absolute; right: 16px; bottom: 58px; display: flex; flex-direction: column; align-items: center; justify-content: center; width: 76px; height: 76px; border-radius: 50%; border: 2px solid rgba(111, 208, 198, .6); background: #1f2c30; color: var(--ink); cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,.35); }
+#sayBtn { position: absolute; right: 16px; bottom: 58px; display: flex; flex-direction: column; align-items: center; justify-content: center; width: 92px; height: 92px; border-radius: 50%; border: 2px solid rgba(111, 208, 198, .6); background: #1f2c30; color: var(--ink); cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,.35); }
 #sayBtn[hidden] { display: none; }
 #sayBtn .t { font-weight: 700; font-size: 17px; color: var(--accent); }
 #sayBtn .to { font-size: 11px; color: var(--ink-dim); max-width: 68px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
@@ -290,9 +290,40 @@ body.phone #giveBtn { right: 88px; bottom: 58px; }
 #talk.heard .line { letter-spacing: .02em; }
 #talk .gx { display: inline-block; color: #8d96a6; filter: blur(2.6px); opacity: .6; transform: translateY(1px); font-weight: 500; }
 #talk .jp.clear { filter: none; }
+#talk .plain { color: var(--ink); }
 #talk .heardico { display: inline-block; width: 18px; height: 14px; margin-right: 8px; vertical-align: -1px; border-radius: 3px; background: linear-gradient(90deg, #6f7a8c 0 3px, transparent 3px 6px, #6f7a8c 6px 9px, transparent 9px 12px, #6f7a8c 12px 15px); opacity: .7; }
 #talk.heard .rl::after { content: " · in Japanese"; }
 #sayMenu .sec, #cmdsPanel li.sec { color: var(--ink-dim); font-size: 13px; margin: 4px 0 -2px; display: block; border: 0; }
 #cmdsPanel li.sec span { font-size: 12px; }
 .cmd.phrase { border-color: rgba(255, 201, 168, .35); background: #332c28; }
 .cmd.phrase .rd { color: #f0d6c6; }
+
+/* typing a new word */
+#talk.typing { cursor: default; }
+.tp { display: grid; justify-items: start; gap: 6px; margin-top: 4px; }
+.tp-prompt { margin-bottom: 8px; }
+.tp-jp { font-size: 30px; line-height: 1.2; }
+.tp-ro { font-size: 24px; letter-spacing: .06em; font-weight: 700; color: #5d6676; }
+.tp-ro .lt { transition: color .12s; }
+.tp-ro .lt.on { color: var(--accent); }
+.tp-ro .lt.bad { color: var(--warn); text-decoration: underline; }
+.tp-en { color: var(--ink-dim); font-size: 15px; }
+.tp-in { margin-top: 6px; width: min(360px, 100%); height: 46px; padding: 0 14px; border-radius: 10px; border: 1px solid rgba(111, 208, 198, .45); background: #151920; color: var(--ink); font: 600 20px/1 var(--font); letter-spacing: .04em; outline: none; }
+.tp-in:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(111, 208, 198, .18); }
+.tp-hint { min-height: 1.2em; color: var(--ink-dim); font-size: 14px; }
+.tp-hint b { color: var(--jp); }
+body.phone .tp-in { width: 100%; font-size: 18px; }
+
+#sayBtn .t { font-size: 20px; }
+#sayBtn .sub { font-size: 11px; color: #bfe9e3; margin-top: -2px; }
+#sayBtn.ready { border-color: var(--accent); background: #1d4744; box-shadow: 0 0 0 4px rgba(111, 208, 198, .25); }
+#sayBtn.pulse { animation: sayPulse 1.1s ease-in-out infinite; }
+@keyframes sayPulse { 50% { box-shadow: 0 0 0 10px rgba(111, 208, 198, .28); transform: scale(1.05); } }
+#sayTip { position: absolute; right: 118px; bottom: 70px; width: 250px; padding: 12px 14px; border-radius: 12px; background: #1d2129; border: 1px solid rgba(111, 208, 198, .5); font-size: 14px; line-height: 1.45; }
+#sayTip::after { content: ""; position: absolute; right: -8px; bottom: 30px; border: 8px solid transparent; border-right: 0; border-left-color: rgba(111, 208, 198, .5); }
+#sayTip button { display: block; margin-top: 8px; padding: 6px 12px; border-radius: 8px; border: 1px solid var(--panel-edge); background: #2a303b; cursor: pointer; font-size: 13px; }
+body.phone #sayBtn { width: 80px; height: 80px; }
+body.phone #sayTip { right: 12px; bottom: 150px; width: auto; left: 12px; }
+body.phone #sayTip::after { right: 40px; bottom: -8px; border: 8px solid transparent; border-bottom: 0; border-top-color: rgba(111, 208, 198, .5); }
+body.busy #sayTip { display: none; }
+.tp-who { font-weight: 700; margin-right: 4px; }

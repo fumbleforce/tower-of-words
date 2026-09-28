@@ -181,6 +181,25 @@ function recolour(mesh, data, colours) {
   return { cols: out, tints, navyLum: lin(navyMean) };
 }
 
+// The chair clip rocks forward and back (Jørgen: "looks like they are constantly bending over to throw up").
+// Hold one calm frame instead: sample the clip and keep the time where the head sits furthest back over the hips.
+export function calmSitTime(model, mixer, action) {
+  const head = (() => { let h = null; model.traverse((o) => { if (!h && o.isBone && /head$/i.test(o.name.replace(/[^a-z]/gi, ''))) h = o; }); return h; })();
+  const hips = (() => { let h = null; model.traverse((o) => { if (!h && o.isBone && /hips/i.test(o.name)) h = o; }); return h; })();
+  if (!head || !hips) return 0;
+  const d = action.getClip().duration, a = new THREE.Vector3(), b = new THREE.Vector3();
+  action.reset().play(); action.setEffectiveWeight(1);
+  let best = 0, bestLean = Infinity;
+  for (let i = 0; i < 24; i++) {
+    const t = (i / 24) * d; action.time = t; mixer.update(0); model.updateMatrixWorld(true);
+    head.getWorldPosition(a); hips.getWorldPosition(b); model.worldToLocal(a); model.worldToLocal(b);
+    const lean = a.z - b.z;
+    if (lean < bestLean) { bestLean = lean; best = t; }
+  }
+  action.stop();
+  return best;
+}
+
 // Foot fix from neon.html: the walk rolls her feet onto their outer edges; undo it after the mixer poses.
 const DEG = Math.PI / 180;
 function makeFootFix(model, skinned) {
@@ -298,6 +317,7 @@ export async function loadMio({ height = 1.12, colours = MIO_COLOURS } = {}) {
   const hips = model.getObjectByName('mixamorigHips');
   const hipRest = hips.position.clone();
 
+  let SIT_T0 = 0; const sitT = () => SIT_T0;
   // idle: the walk clip held still at a frame with the feet together, plus a small breath
   const idleClip = clips.walk.clone(); idleClip.name = 'idle';
   actions.idle = mixer.clipAction(idleClip);
@@ -310,6 +330,7 @@ export async function loadMio({ height = 1.12, colours = MIO_COLOURS } = {}) {
     const a = actions[name];
     a.reset(); a.setEffectiveWeight(1);
     if (name === 'idle') { a.time = IDLE_T; a.timeScale = 0; }
+    if (name === 'sit') { a.time = sitT(); a.timeScale = 0; }
     a.fadeIn(prev ? 0.2 : 0).play();
     if (prev && prev !== a) prev.fadeOut(0.2);
     cur = a;
@@ -320,9 +341,11 @@ export async function loadMio({ height = 1.12, colours = MIO_COLOURS } = {}) {
     actions.walk.timeScale = speed;
     mixer.update(dt);
     if (curName !== 'sit') { hips.position.x = hipRest.x; hips.position.z = hipRest.z; }
-    if (curName === 'idle') hips.position.y += Math.sin(t * 2.0) * 0.004;
+    if (curName === 'idle' || curName === 'sit') hips.position.y += Math.sin(t * 2.0) * 0.004;
     if (curName !== 'sit') fixFeet();
   }
+  // hold one calm frame of the chair clip, with only a breath on top
+  SIT_T0 = calmSitTime(model, mixer, actions.sit);
   // where the hips sit in the chair clip, measured once in the root's own space
   setState('sit'); for (let i = 0; i < 30; i++) update(1 / 30);
   root.updateMatrixWorld(true);

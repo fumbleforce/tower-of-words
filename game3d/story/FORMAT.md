@@ -104,6 +104,7 @@ A trigger value is a node name, `{ node, if, once }`, or a list of these; the fi
 | `voice` | `key` | Plays game3d/audio/<key>.mp3. |
 | `emote` | `who`, `kind`: `!`, `?`, `…`, `♪`, `heart`, `sweat` | A small bubble over a head. |
 | `show` / `hide` | `id` | Shows or hides a person or object. |
+| `type` | `word`, `prompt` (optional line shown above it) | The typing prompt for a new word: shows the Japanese, the romaji letter by letter and the English, and Eric types the romaji (forgiving: case, spaces, hyphens, long vowels ō = ou = oo = o). Letters light up as they're typed; a wrong Enter shows the next letter, and after three tries the whole romaji. Works with the phone keyboard. On success Eric says it (voiced), it becomes a known word (it stays sharp in overheard lines from then on) and flag `typed_<word>` is set. Use it where a word is taught, in place of a "say it" button. Any word id works: `{ do: 'type', word: 'yoroshiku', prompt: 'mio: Say it. Like this.' }` |
 | `next` | | Starts the transition to the next place (see Transitions). |
 | `end` | | The end card (office only). |
 
@@ -165,7 +166,7 @@ Place hooks:
 - `gate` `state: 'open'|'closed'|'jam'|'slam'`: the flaps (`jam` rattles, `slam` bursts open and bounces).
 - `cardOk`: Mio's card now works; her next tap turns the reader green and opens the gate.
 - `enter` `who`: someone walks in through the entrance.
-- `type` `who`: typing animation (the guard at his computer).
+- `typing` `who`, `ms`: typing animation (the guard at his computer). (Renamed from `type`, which is now the typing prompt below.)
 - `rush` `on`: commuters on or off.
 - `liftOpen` / `liftClose`: one of the lifts opens.
 
@@ -218,6 +219,8 @@ Commands `irete` 入れて, `dashite` 出して, `tomatte` 止まって (voiced)
 - The player is Eric (speaker id `eric`, shown as "Eric · you"). In hooks, `who: 'eric'` (or `'player'`) moves him. `sit` with `who: 'eric'` sits him (train seats, office `my_seat`).
 - Mio is an NPC with a body in every place (Jørgen's Meshy model). Speaker and id `mio`: `talk:mio`, `say:<word>:mio`, `walk`, `face`, `sit` (any seat id), `show`/`hide`, `with` in transitions. She is hidden until shown, except on the train, where she starts seated on the far bench (x 2.1, `seat_mio`) with her laptop, beside the free seat `seat_far_r`. `labels: { mio: '...' }` renames her marker.
 - Phrases: `ohayo` おはようございます, `yoroshiku` よろしくおねがいします, `sumimasen` すみません. Learn them with `{ learn: 'ohayo' }` (or `offer`). They sit in the Say menu above the commands and trigger `say:<phrase>:<id>`, exactly like commands (voiced by Eric). Commands: `matte`, `akete`, `kite`, `ugoite`, `irete`, `dashite`, `tomatte`.
+- The Say button is taught automatically: the first time Eric learns any word (`type`, `learn` or `offer`), the button pulses and a tip explains it. Whenever a goal marker answers to a word Eric knows (a `say:<word>:<id>` trigger on a goal), the button lights up. So put the first `type` where Eric can use the word right after, and mark the thing waiting on a word as a goal.
+- Words count as known only once taught in play: through `type`, `learn`/`offer`, or a glossed `{id}` in a normal line. Nothing is known at the start. `clear` entries in an overheard line are readable for that line only (plain, not styled as known) and don't become known.
 - Overheard Japanese: `{ say: 'guard', overheard: true, text: '日本語の文。', clear: ['B2', { ja: 'コンサルタント', ro: 'konsarutanto', en: 'consultant' }] }`. The text is the Japanese itself. Every character Eric doesn't know shows as a soft, shifting stand-in glyph; his phrases and commands, and the `clear` entries, stay sharp (with reading and English when given). The voice plays muffled through a low-pass filter. Voice clips for overheard lines are generated from the text by `tools/voices.py` (run it after adding lines; no `voice` key needed). Only the long form supports `overheard`. Words shown glossed in ordinary lines (for example `{gaijin}` 外人, gaijin, foreigner) are remembered, and stay sharp in later overheard lines too.
 
 ## Sim data (clock, schedules, ambient talk, bonds, gifts, save)

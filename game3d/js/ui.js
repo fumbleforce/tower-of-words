@@ -6,18 +6,35 @@ const el = (tag, cls, html) => { const e = document.createElement(tag); if (cls)
 
 // ---------- sound ----------
 let actx = null, muted = false;
+let voiceSpans = null;
+fetch(new URL('../audio/spans.json', import.meta.url)).then((r) => (r.ok ? r.json() : null)).then((j) => { voiceSpans = j; }).catch(() => {});
 const clips = {};
 function ac() { if (!actx) { try { actx = new (window.AudioContext || window.webkitAudioContext)(); } catch { actx = null; } } if (actx && actx.state === 'suspended') actx.resume(); return actx; }
 export function voice(key, { rate = 1, muffle = false } = {}) {
   if (muted || !key) return;
   if (muffle) {
-    // overheard speech: through a low-pass filter, a little quieter, as if from across the room
+    // overheard speech: heavily muffled (low-pass, quieter), except the words he knows, which come through clear.
+    // audio/spans.json lists those words' times per clip [[t0, t1], ...]; the two paths crossfade in 40 ms.
     const c = ac(); if (!c) return;
     try {
       const a = new Audio(new URL(`../audio/${key}.mp3`, import.meta.url).href); a.crossOrigin = 'anonymous';
-      const src = c.createMediaElementSource(a), f = c.createBiquadFilter(), g = c.createGain();
-      f.type = 'lowpass'; f.frequency.value = 650; f.Q.value = 0.6; g.gain.value = 0.8;
-      src.connect(f); f.connect(g); g.connect(c.destination);
+      const src = c.createMediaElementSource(a), f = c.createBiquadFilter(), f2 = c.createBiquadFilter(), wet = c.createGain(), dry = c.createGain();
+      f.type = 'lowpass'; f.frequency.value = 380; f.Q.value = 0.5; f2.type = 'lowpass'; f2.frequency.value = 380; f2.Q.value = 0.5;
+      src.connect(f); f.connect(f2); f2.connect(wet); wet.connect(c.destination);
+      src.connect(dry); dry.connect(c.destination);
+      const W = 0.55, X = 0.04;
+      wet.gain.value = W; dry.gain.value = 0;
+      // entries are [t0, t1, wordId] (clear only once he knows that word) or [t0, t1, 'clear'] (always clear)
+      const spans = ((voiceSpans && voiceSpans[key]) || []).filter(([, , id]) => id === 'clear' || known.has(id) || seen.has(id));
+      a.addEventListener('playing', () => {
+        const t0 = c.currentTime - a.currentTime;
+        for (const [s, e] of spans) {
+          dry.gain.setValueAtTime(0, t0 + s - X); dry.gain.linearRampToValueAtTime(1, t0 + s);
+          dry.gain.setValueAtTime(1, t0 + e); dry.gain.linearRampToValueAtTime(0, t0 + e + X);
+          wet.gain.setValueAtTime(W, t0 + s - X); wet.gain.linearRampToValueAtTime(0, t0 + s);
+          wet.gain.setValueAtTime(0, t0 + e); wet.gain.linearRampToValueAtTime(W, t0 + e + X);
+        }
+      }, { once: true });
       a.play().catch(() => {});
       if (clips._muffled) clips._muffled.pause(); clips._muffled = a;
     } catch { /* no audio */ }
@@ -61,15 +78,16 @@ function heardHTML(text, clear = []) {
   // {id} words written into an overheard line are what the listener catches: shown sharp and glossed
   const marked = [];
   text = text.replace(/\{(\w+)\}/g, (_, id) => { if (WORDS[id]) { marked.push(id); seen.add(id); return WORDS[id].ja; } return id; });
-  const keep = marked.map((id) => ({ ja: WORDS[id].ja, gl: `${WORDS[id].ro}, ${WORDS[id].en}` }));
-  for (const id of new Set([...known, ...seen])) if (WORDS[id]) keep.push({ ja: WORDS[id].ja, gl: `${WORDS[id].ro}, ${WORDS[id].en}` });
+  const keep = marked.map((id) => ({ ja: WORDS[id].ja, gl: `${WORDS[id].ro}, ${WORDS[id].en}`, known: true }));
+  for (const id of new Set([...known, ...seen])) { const w = WORDS[id]; if (!w) continue; for (const ja of [w.ja, ...(w.alias || [])]) keep.push({ ja, gl: `${w.ro}, ${w.en}`, known: true }); }
+  // `clear` entries are readable for this line only: plain text, not styled as known, never added to what he knows
   for (const c of clear || []) keep.push(typeof c === 'string' ? { ja: c } : { ja: c.ja, gl: [c.ro, c.en].filter(Boolean).join(', ') });
   keep.sort((a, b) => b.ja.length - a.ja.length);
   let out = '', i = 0;
   const esc = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;');
   while (i < text.length) {
     const k = keep.find((w) => text.startsWith(w.ja, i));
-    if (k) { out += `<span class="jp clear">${esc(k.ja)}</span>${k.gl ? ` <span class="gl">(${esc(k.gl)})</span>` : ''}`; i += k.ja.length; continue; }
+    if (k) { out += `<span class="${k.known ? 'jp clear' : 'plain'}">${esc(k.ja)}</span>${k.gl ? ` <span class="gl">(${esc(k.gl)})</span>` : ''}`; i += k.ja.length; continue; }
     const ch = text[i];
     if (/[\s、。！？!?…「」]/.test(ch)) out += esc(ch);
     else out += `<span class="gx" data-c="${esc(ch)}">${POOL[(ch.charCodeAt(0) * 7 + i) % POOL.length]}</span>`;
@@ -117,7 +135,8 @@ export const ui = {
       <div id="peoplePanel" class="panel" hidden><div class="card"><div class="head">People</div><ul></ul><button type="button" class="close">Close</button></div></div>
       <div id="bagPanel" class="panel" hidden><div class="card"><div class="head">Bag</div><p class="yen"></p><ul></ul><button type="button" class="close">Close</button></div></div>
       <button id="giveBtn" type="button" hidden><span class="t">Give</span><span class="to"></span></button>
-      <button id="sayBtn" type="button" hidden><span class="t">Say</span><span class="to"></span></button>
+      <button id="sayBtn" type="button" hidden><span class="t">Say</span><span class="sub">a word</span><span class="to"></span></button>
+      <div id="sayTip" hidden><b>Say</b> speaks a word you know to whoever or whatever is nearest. Try it when you're stuck.<button type="button">Got it</button></div>
       <div id="sayMenu" hidden><div class="head"></div><div class="list"></div><button type="button" class="cancel">Never mind</button></div>
       <div id="hint" hidden></div>
       <div id="toast" hidden></div>
@@ -146,8 +165,10 @@ export const ui = {
       if (e.code === 'Escape' && !$('#sayMenu').hidden) $('#sayMenu .cancel').click();
     });
   },
+  // Jørgen: no goal or story text in panels. The goal is kept for the markers (teal) but never shown as text.
   goal(text) {
     const g = $('#goal');
+    g.hidden = true; this.goalText = text || ''; return;
     if (!text) { g.hidden = true; return; }
     g.hidden = false;
     g.querySelector('.t').innerHTML = lineHTML(text, { count: false });
@@ -186,6 +207,18 @@ export const ui = {
       m.hidden = false;
     });
   },
+  // the first time Eric knows a word: the Say button pulses and a short tip points at it
+  introSay(text) {
+    const b = $('#sayBtn'), tip = $('#sayTip');
+    b.hidden = false;
+    if (text) tip.firstChild.textContent !== undefined && (tip.innerHTML = `${lineHTML(text)}<button type="button">Got it</button>`);
+    b.classList.add('pulse'); tip.hidden = false;
+    const off = () => { tip.hidden = true; b.classList.remove('pulse'); };
+    tip.querySelector('button').onclick = (e) => { e.stopPropagation(); off(); };
+    b.addEventListener('click', off, { once: true });
+    setTimeout(off, 14000);
+  },
+  sayReady(on) { $('#sayBtn').classList.toggle('ready', !!on); },
   setSayTarget(name) { const t = $('#sayBtn .to'); if (t.textContent !== (name || '')) t.textContent = name || ''; },
   hint(html, ms = 0) {
     const h = $('#hint'); h.innerHTML = html; h.hidden = !html;
@@ -278,6 +311,50 @@ export const ui = {
       this._sayKeys = [...list.children];
       this._sayRes = (v) => { this._sayKeys = null; res(v); };
       m.hidden = false;
+    });
+  },
+  // Type the romaji of a word. Forgiving: case, spaces, hyphens and long vowels (ō = ou = oo = o) don't matter.
+  // Each letter lights up as it's typed; a wrong try shows where it went off. Resolves when it's right.
+  typePrompt(id, prompt) {
+    return new Promise((res) => {
+      const w = WORDS[id];
+      const canon = (s) => s.toLowerCase().normalize('NFC').replace(/[āâ]/g, 'a').replace(/[īî]/g, 'i').replace(/[ūû]/g, 'u').replace(/[ēê]/g, 'e').replace(/[ōô]/g, 'o')
+        .replace(/[^a-z]/g, '').replace(/ou/g, 'o').replace(/oo/g, 'o').replace(/uu/g, 'u').replace(/aa/g, 'a').replace(/ii/g, 'i');
+      const target = canon(w.ro);
+      // display tokens: each romaji letter of the word, with long vowels as one token
+      const toks = []; for (const ch of w.ro) { if (/\s|-/.test(ch)) toks.push({ ch, sp: true }); else toks.push({ ch }); }
+      const t = $('#talk'); t.hidden = false; t.classList.remove('narr', 'heard', 'phone'); t.classList.add('typing');
+      t.querySelector('.who').innerHTML = '';
+      t.querySelector('.line').innerHTML = (prompt ? `<div class="tp-prompt">${prompt.who ? `<span class="tp-who" style="color:${prompt.who.color || '#8fa3c0'}">${prompt.who.name}</span> ` : ''}${lineHTML(prompt.text)}</div>` : '') +
+        `<div class="tp"><div class="tp-jp jp">${w.ja}</div><div class="tp-ro">${toks.map((k) => (k.sp ? '<span class="sp"> </span>' : `<span class="lt">${k.ch}</span>`)).join('')}</div><div class="tp-en">${w.en}</div>` +
+        `<input class="tp-in" type="text" inputmode="latin" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="Type it in romaji" aria-label="Type ${w.ro}"><div class="tp-hint"></div></div>`;
+      t.querySelector('.chips').innerHTML = ''; t.querySelector('.more').hidden = true;
+      t.classList.remove('in'); void t.offsetWidth; t.classList.add('in');
+      this._advance = null; this._chipKeys = null;
+      const inp = t.querySelector('.tp-in'), hint = t.querySelector('.tp-hint');
+      const letters = [...t.querySelectorAll('.tp-ro .lt')];
+      // which display letters each canonical position covers
+      const map = []; { let c = ''; letters.forEach((el, i) => { const before = canon(c); c += el.textContent; const after = canon(c); for (let k = before.length; k < after.length; k++) map[k] = i; if (after.length === before.length) map[before.length - 1] = i; }); }
+      let tries = 0;
+      const paint = () => {
+        const v = canon(inp.value); let ok = 0; while (ok < v.length && v[ok] === target[ok]) ok++;
+        const lit = ok ? map[ok - 1] : -1;
+        letters.forEach((el, i) => { el.classList.toggle('on', i <= lit); el.classList.toggle('bad', v.length > ok && i === (ok < target.length ? map[ok] : -1)); });
+        return v === target;
+      };
+      const done = () => { t.classList.remove('typing'); sfx('ok'); res(); };
+      inp.addEventListener('input', () => { if (paint()) setTimeout(done, 250); });
+      inp.addEventListener('keydown', (e) => {
+        e.stopPropagation();
+        if (e.key !== 'Enter') return;
+        if (paint()) { done(); return; }
+        tries++; sfx('no');
+        const v = canon(inp.value); let ok = 0; while (ok < v.length && v[ok] === target[ok]) ok++;
+        const next = letters[map[Math.min(ok, target.length - 1)]];
+        hint.innerHTML = tries < 3 ? `Close. Next letter: <b>${next ? next.textContent : ''}</b>. Follow the letters under the word.` : `Type it just as shown: <b>${w.ro}</b>`;
+      });
+      if (this.auto) { setTimeout(() => { inp.value = w.ro; paint(); done(); }, 20); return; }
+      setTimeout(() => inp.focus(), 60);
     });
   },
   closeTalk() { const t = $('#talk'); t.hidden = true; this._advance = null; this._chipKeys = null; },

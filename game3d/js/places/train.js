@@ -6,7 +6,7 @@ import * as THREE from 'three';
 import { Pass } from 'three/addons/postprocessing/Pass.js';
 import { SimplexNoise } from 'three/addons/math/SimplexNoise.js';
 import { buildWorld, SPEED } from '../train/world.js';
-import { buildCar, buildBellows, bagMesh, LX, LZ, T, SEAT_Y, BENCH_D, BENCHES, DOOR_X, DOOR_W, COL, mat as carMat } from '../train/car.js';
+import { buildCar, buildBellows, bagMesh, LX, LZ, T, HF, SEAT_Y, BENCH_D, BENCHES, DOOR_X, DOOR_W, NEAR_END, COL, mat as carMat } from '../train/car.js';
 import { buildPassengers, cat, walkPose, HIP, sit, armsHold } from '../train/people.js';
 import { PEOPLE } from '../cast.js';
 import { Nav, blob } from '../engine.js';
@@ -79,6 +79,8 @@ export async function trainPlace(game) {
     const sb = blob(0.36, 0.35); sb.position.set(x, SEAT_Y + 0.003, side * (LZ - 0.24)); car.root.add(sb); b.userData.blob = sb;
   }
 
+  // Jørgen: the dark standing man by the far door read as a burglar; he's gone
+  stander.root.visible = false; if (stander.blob) stander.blob.visible = false; list.splice(list.indexOf(stander), 1);
   // Rei (the writer's train conversation) takes the headphone girl's place on the far bench, laptop on
   // her knees, her folder and a lidded coffee on the free seat beside her
   // the girl with headphones moves to the near bench (seen from behind), still nodding along
@@ -161,8 +163,8 @@ export async function trainPlace(game) {
   const space = car.root;
   const nav = new Nav(-LX, LX + 8, -LZ, LZ + 3.2, 0.1);
   nav.R = 0.16;
-  for (const [x0, x1] of BENCHES) { nav.block(x0 - 0.04, x1 + 0.04, -LZ, -(LZ - BENCH_D) + 0.1); nav.block(x0 - 0.04, x1 + 0.04, LZ - BENCH_D - 0.1, LZ); }
-  nav.block(-3.85, -3.35, -1.2, -0.58); nav.block(3.38, 3.78, -1.0, -0.56);
+  for (const [x0, x1] of BENCHES) { nav.block(x0 - 0.04, x1 + 0.04, -LZ, -(LZ - BENCH_D) + 0.1); nav.block(Math.max(x0, -NEAR_END) - 0.04, Math.min(x1, NEAR_END) + 0.04, LZ - BENCH_D - 0.1, LZ); }
+  nav.block(-3.85, -3.35, -1.2, -0.58);
   for (const z of [-0.5, 0.5]) nav.block(-0.05, 0.05, z - 0.05, z + 0.05);
   nav.block(LX, LX + 8, -LZ, LZ + T + 0.05);                                                  // beyond the car end
   // near wall, with gaps at the doors; the gaps and the platform are shut until the doors open
@@ -180,26 +182,32 @@ export async function trainPlace(game) {
   // the platform-side door sets, made to read from above (Jørgen: "the train has no door"): dark frame posts
   // standing a little proud of the cut wall, a header with a lamp (amber shut, green open), a yellow edge
   // stripe on each leaf and a yellow threshold on the floor
+  // Built to the cut wall's doorway exactly: the leaves sit inside the wall's thickness and are no taller than
+  // the opening, so when they slide into the wall they vanish into it instead of overlapping it.
   const doorLamps = [], myLeaves = [];
   const lampShut = emissive('#ffcf8a', '#ffb24a', 1.8), lampOpen = emissive('#b8f5c8', '#46d18a', 2.2);
-  for (const dx of [-DOOR_X, DOOR_X]) {
-    for (const s of [-1, 1]) car.root.add(rbox(0.09, 0.9, 0.2, '#2a2f38', { x: dx + s * (DOOR_W / 2 + 0.045), z: LZ + T / 2, r: 0.02 }));
-    car.root.add(rbox(DOOR_W + 0.24, 0.1, 0.2, '#2a2f38', { y: 0.88, x: dx, z: LZ + T / 2, r: 0.02 }));
-    // a dark doorway behind the leaves, so the gap shows when they open
-    car.root.add(rbox(DOOR_W - 0.02, 0.84, 0.02, '#1c2027', { x: dx, y: 0.02, z: LZ + T / 2 - 0.05, r: 0.01, cast: false }));
-    const lamp = rbox(0.3, 0.06, 0.12, null, { x: dx, y: 0.98, z: LZ + T / 2, r: 0.015, m: lampShut, cast: false });
-    car.root.add(lamp); doorLamps.push(lamp);
-    car.root.add(rbox(DOOR_W, 0.006, 0.12, '#d8b447', { x: dx, y: 0.001, z: LZ - 0.02, r: 0.003, cast: false }));
-    // full-height sliding leaves (taller than the cut wall so they read), each with a window and a yellow edge
-    for (const s of [-1, 1]) {
-      const leaf = new THREE.Group();
-      leaf.add(rbox(DOOR_W / 2 - 0.01, 0.84, 0.06, '#8fa2bb', { r: 0.015 }));
-      leaf.add(rbox(DOOR_W / 2 - 0.12, 0.34, 0.066, '#4d6278', { y: 0.4, r: 0.02, m: mat('#2f4257', { roughness: 0.2 }) }));
-      leaf.add(rbox(0.04, 0.82, 0.068, '#e0b83a', { x: -s * (DOOR_W / 4 - 0.02), y: 0.01, r: 0.01, cast: false }));
-      leaf.position.set(dx + s * DOOR_W / 4, 0.02, LZ + T / 2 + 0.03);
-      car.root.add(leaf); myLeaves.push({ g: leaf, x0: leaf.position.x, s });
+  const doorSets = new THREE.Group(); car.root.add(doorSets);
+  function buildDoors(md) {
+    doorSets.clear(); doorLamps.length = 0; myLeaves.length = 0;
+    const wallH = md === 'land' ? 0.62 : HF, top = Math.min(wallH - 0.1, 1.22), hH = top - 0.04;
+    for (const dx of [-DOOR_X, DOOR_X]) {
+      const zo = LZ + T + 0.012;                  // outer face of the wall
+      for (const s of [-1, 1]) doorSets.add(rbox(0.07, wallH, 0.03, '#2a2f38', { x: dx + s * (DOOR_W / 2 + 0.035), z: zo, r: 0.01 }));
+      const lamp = rbox(0.26, 0.05, 0.03, null, { x: dx, y: md === 'land' ? top + 0.02 : top + 0.05, z: zo, r: 0.01, m: lampShut, cast: false });
+      doorSets.add(lamp); doorLamps.push(lamp);
+      doorSets.add(rbox(DOOR_W - 0.04, 0.004, 0.1, '#d8b447', { x: dx, y: 0.003, z: LZ - 0.07, r: 0.002, cast: false }));
+      for (const s of [-1, 1]) {
+        const leaf = new THREE.Group();
+        leaf.add(rbox(DOOR_W / 2 - 0.012, hH, 0.034, '#56698a', { r: 0.01 }));
+        const wy = Math.max(0.08, hH - 0.24);
+        leaf.add(rbox(DOOR_W / 2 - 0.12, Math.min(0.2, hH * 0.4), 0.04, null, { y: wy, r: 0.015, m: emissive('#b9d3e6', '#9fc2dc', 0.35) }));
+        leaf.add(rbox(0.035, hH - 0.02, 0.042, '#e0b83a', { x: -s * (DOOR_W / 4 - 0.022), y: 0.01, r: 0.008, cast: false }));
+        leaf.position.set(dx + s * DOOR_W / 4, 0.037, LZ + T / 2);
+        doorSets.add(leaf); myLeaves.push({ g: leaf, x0: leaf.position.x, s });
+      }
     }
   }
+  buildDoors('land');
   function findDoors() {
     // Jørgen: no visible light fixtures in the car; the point lights stay
     const lm = carMat('lamp', COL.lamp); car.root.traverse((o) => { if (o.isMesh && o.material === lm) o.visible = false; });
@@ -233,7 +241,7 @@ export async function trainPlace(game) {
   const _v = new THREE.Vector3();
   function fit(aspect) {
     const mode = aspect >= 1 ? 'land' : 'port';
-    if (car.mode !== mode) { car.setMode(mode); findDoors(); setDoors(st.door); }
+    if (car.mode !== mode) { car.setMode(mode); findDoors(); buildDoors(mode); setDoors(st.door); }
     camera.aspect = aspect;
     let pts, limX, limY;
     cam.follow = false;
@@ -270,7 +278,7 @@ export async function trainPlace(game) {
   function setDoors(k) {
     // the leaves slide into the wall pocket; once they're mostly in, they're hidden (the low cut wall can't cover them)
     for (const d of doorLeaves) { const dx = Math.sign(d.x0) * DOOR_X; d.m.position.x = d.x0 + (d.x0 < dx - 0.1 ? -1 : 1) * k * (DOOR_W / 2 - 0.02); d.m.visible = false; }
-    for (const d of myLeaves) d.g.position.x = d.x0 + d.s * k * (DOOR_W / 2 - 0.03);
+    for (const d of myLeaves) { const toC = -Math.sign(d.x0); const far = d.s * Math.sign(d.x0) > 0; d.g.position.x = d.x0 + toC * k * (far ? DOOR_W - 0.02 : DOOR_W / 2 - 0.01); d.g.visible = !(car.mode === 'port' && k > 0.9); }
     for (const l of doorLamps) l.material = k > 0.3 ? lampOpen : lampShut;
   }
 
@@ -292,7 +300,6 @@ export async function trainPlace(game) {
     music: { label: 'Girl with headphones', kind: 'person small', anchor: rigAnchor(music), ...at(0.75, 0.35, 0.75, 1.0) },
     rei: { label: 'Woman with a laptop', kind: 'person', anchor: rigAnchor(rei), ...at(2.1, -0.3, 2.1, -1.0), enabled: () => rei.root.visible },
     cup: { label: 'Coffee', kind: 'thing small', anchor: carPt(1.6, 0.6, -(LZ - 0.28)), ...at(1.6, -0.3, 1.6, -1.0), noMarker: true },
-    stander: { label: 'Man by the door', kind: 'person small', anchor: rigAnchor(stander), ...at(3.1, -0.45, 3.58, -0.78) },
     bun: { label: 'Woman with a bun', kind: 'person small', anchor: rigAnchor(bun), ...at(-2.5, 0.35, -2.5, 1.0) },
     youth: { label: 'Young man', kind: 'person small', anchor: rigAnchor(youth), ...at(2.55, 0.35, 2.55, 1.0) },
     tama: { label: 'Cat', verb: 'Pet', kind: 'person small', anchor: carPt(-0.85, 0.5, -(LZ - 0.24)), ...at(-0.85, -0.3, -0.85, -1.0) },

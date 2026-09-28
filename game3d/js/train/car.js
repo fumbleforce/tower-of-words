@@ -16,7 +16,10 @@ export const BENCH_D = 0.4;
 export const RAIL_Y = 1.42;
 export const WIN = { xs: [-2.45, -1.1, 1.1, 2.45], w: 1.18 };
 export const BENCHES = [[-3.05, -0.42], [0.42, 3.05]];
-export const DOOR_X = 3.52, DOOR_W = 0.74;
+// game3d: the doors moved in from 3.52 so the doorway sits wholly on the straight wall, clear of the rounded
+// corner piece (which the doorway used to cut into); the near benches end short of them
+export const DOOR_X = 3.22, DOOR_W = 0.74;
+export const NEAR_END = DOOR_X - DOOR_W / 2 - 0.08;
 
 export const COL = {
   shell: '#c9d4e2', shellDark: '#a7b3c3', inner: '#f2e9dc', floor: '#e6d5ba', stripe: '#4d86c4',
@@ -410,9 +413,9 @@ export function buildCar(mode = 'land') {
     straps.length = 0;
     for (const [x0, x1] of BENCHES) {
       benchHolder.add(bench(x0, x1, -1, true));
-      benchHolder.add(bench(x0, x1, 1, true));
+      benchHolder.add(bench(Math.max(x0, -NEAR_END), Math.min(x1, NEAR_END), 1, true));
       benchHolder.add(rackAndRail(x0, x1, -1, straps, md === 'land'));
-      benchHolder.add(rackAndRail(x0, x1, 1, straps, false));
+      benchHolder.add(rackAndRail(Math.max(x0, -NEAR_END), Math.min(x1, NEAR_END), 1, straps, false));
     }
     // middle standing poles
     const metal = mat('metal', COL.metal, { roughness: 0.4, metalness: 0.25 });

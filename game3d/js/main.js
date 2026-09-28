@@ -6,7 +6,7 @@ import { makeAvatar, loadEric, setSitLift } from './avatar.js';
 import { glide } from './places/lobby.js';
 export const isPlayer = (id) => id === 'eric' || id === 'player';
 import { ui, unlockAudio, sfx, voice } from './ui.js';
-import { WORDS, known } from './lang.js';
+import { WORDS, known, SAYABLE } from './lang.js';
 import { defaultReaction } from './story.js';
 import { Runner, flags, cond } from './runner.js';
 import { trainPlace } from './places/train.js';
@@ -205,7 +205,7 @@ function posOf(to) {
 }
 game.posOf = posOf;
 H.goal = ({ text }) => ui.goal(text);
-H.hint = ({ text }) => ui.hint(text, 5000);
+H.hint = ({ text, what }) => { if (what === 'say') ui.introSay(text); else ui.hint(text, 5000); };
 H.wait = ({ ms }) => game.wait(ms);
 H.sound = ({ name }) => sfx(name);
 H.voice = ({ key }) => voice(key);
@@ -259,6 +259,18 @@ H.floor = async ({ to }) => {
   sfx('lift');
 };
 H.liftDoors = ({ state }) => { sfx(state === 'open' ? 'lift' : 'door'); };
+// typing prompt: Eric types the romaji of a new word, then says it (voiced) and knows it
+H.type = async ({ word, prompt, from }) => {
+  if (from && game.sim && !game.sim.taught[word]) game.sim.taught[word] = from;
+  if (!WORDS[word]) { console.warn('type: unknown word', word); return; }
+  let pr = prompt;
+  if (prompt) { const i = prompt.indexOf(': '); if (i > 0 && /^\w+$/.test(prompt.slice(0, i))) pr = { who: game.runner.speaker(prompt.slice(0, i)), text: prompt.slice(i + 2) }; else pr = { who: null, text: prompt.replace(/^>\s*/, '') }; }
+  await ui.typePrompt(word, pr);
+  voice(WORDS[word].voice || '');
+  game.runner.learnCmd(word);
+  flags['typed_' + word] = true;
+  await game.wait(500);
+};
 H.period = ({ to }) => setPeriod(to, game);
 H.bond = ({ who, add = 1 }) => { bond(game, who, add); };
 H.meet = ({ who }) => { meet(game, who); ui.refreshPeople(sim.met.size); };
@@ -390,6 +402,9 @@ function step(dt) {
     else if (!inz) zoneSet.delete(z);
   }
   game.near = near; game.sayTarget = st;
+  // when a goal is waiting on a word he knows, the Say button lights up
+  const waiting = !game.busy && known.size && game.markers.list.some((m) => m.enabled() && m.goal() && SAYABLE.some((w) => known.has(w) && game.runner.has(`say:${w}:${m.id}`)));
+  ui.sayReady(waiting);
   ui.setSayTarget(st ? st.label : '');
   const person = st && place.people[st.id] && /person/.test(st.kind || '');
   ui.setGiveTarget(person ? st.label : '', !!(person && sim.inv.length && !game.busy));

@@ -113,6 +113,7 @@ export function makeAvatar() {
 // used with a Lambert material (as for Mio). Colour tweak only: the texture is pulled a little toward the muted
 // palette (slightly less saturated, a touch cooler). The mesh, face and body are untouched.
 import { GLTFLoader } from '../vendor/loaders/GLTFLoader.js';
+import { calmSitTime } from './mio.js';
 const EDIR = new URL('../assets/eric/', import.meta.url).href;
 export async function loadEric({ height = 1.2 } = {}) {
   const loader = new GLTFLoader();
@@ -143,17 +144,19 @@ export async function loadEric({ height = 1.2 } = {}) {
   const actions = { walk: mixer.clipAction(walk.animations[0]), run: mixer.clipAction(run.animations[0]), idle: mixer.clipAction(idle.animations[0]), sit: mixer.clipAction(sitG.animations[0]) };
   let hips = null; model.traverse((o) => { if (!hips && o.isBone && /hips/i.test(o.name)) hips = o; });
   const hipRest = hips.position.clone();
-  let cur = null, curName = '';
+  const SIT_T = calmSitTime(model, mixer, actions.sit);
+  let cur = null, curName = '', bt = 0;
   function setState(name) {
     if (name === curName || !actions[name]) return;
-    const a = actions[name]; a.reset(); a.setEffectiveWeight(1); a.fadeIn(cur ? 0.2 : 0).play();
+    const a = actions[name]; a.reset(); a.setEffectiveWeight(1); if (name === 'sit') { a.time = SIT_T; a.timeScale = 0; } a.fadeIn(cur ? 0.2 : 0).play();
     if (cur && cur !== a) cur.fadeOut(0.2);
     cur = a; curName = name;
   }
   function update(dt, speed = 1) {
     actions.walk.timeScale = speed;
-    mixer.update(dt);
+    mixer.update(dt); bt += dt;
     if (curName !== 'sit') { hips.position.x = hipRest.x; hips.position.z = hipRest.z; }
+    else hips.position.y += Math.sin(bt * 2.0) * 0.004;
   }
   // where the hips sit in the chair clip, in the root's space
   setState('sit'); for (let i = 0; i < 30; i++) update(1 / 30);
