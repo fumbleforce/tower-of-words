@@ -1,1 +1,266 @@
-{"oh-14e7hyx": [[0.0, 0.42, "clear"], [0.0, 0.42, "yoroshiku"]], "oh-19g18x": [[0.0, 0.956, "ohayo"]], "oh-1aenxld": [[0.0, 0.335, "clear"], [1.86, 2.885, "clear"]], "oh-1c4p8ez": [[0.0, 0.24, "clear"], [0.24, 1.556, "ohayo"]], "oh-1hzcx7w": [[0.0, 0.495, "clear"], [0.0, 0.495, "ohayo"]], "oh-1j05rm4": [[0.0, 0.271, "clear"], [0.271, 2.06, "yoroshiku"]], "oh-1ke18uq": [[0.641, 2.21, "yoroshiku"]], "oh-1lxs17m": [[0.0, 0.64, "sumimasen"], [0.56, 1.24, "sumimasen"]], "oh-1qrzznu": [[0.0, 0.147, "clear"], [0.147, 1.132, "clear"]], "oh-1tygzrl": [[0.0, 1.578, "ohayo"]], "oh-1x4ha4x": [[0.0, 1.05, "ohayo"]], "oh-2kggvg": [[0.0, 1.556, "ohayo"], [2.487, 2.904, "clear"]], "oh-45hdir": [[0.0, 0.819, "sumimasen"], [0.739, 1.597, "sumimasen"]], "oh-6afzfp": [[0.0, 0.12, "clear"], [0.12, 1.0, "sumimasen"], [0.92, 1.8, "sumimasen"]], "oh-6gg3pv": [[0.523, 0.978, "gaijin"]], "oh-f4h8qf": [[0.0, 0.183, "clear"], [0.183, 1.367, "sumimasen"]], "oh-f89jzv": [[0.142, 0.766, "clear"]], "oh-fl8dqq": [[0.0, 0.78, "akete"], [1.44, 2.247, "akete"]], "oh-k1xb2b": [[0.0, 0.38, "clear"], [1.793, 2.636, "clear"]], "oh-s2r34k": [[0.396, 1.348, "ohayo"]], "oh-yowtk": [[0.0, 1.037, "clear"], [2.152, 3.03, "clear"], [3.348, 4.624, "clear"]], "oh-zoc8ud": [[0.0, 0.52, "akete"], [0.44, 1.0, "akete"]], "oh-1st1kx5": [[0.0, 0.25, "clear"]], "oh-1yevp27": [[0.0, 0.25, "clear"]], "oh-zq869p": [[0.0, 0.25, "clear"]], "oh-1etvxoe": [[0.0, 0.25, "clear"]]}
+{
+ "oh-10nz594": [
+  [
+   0.685,
+   1.49,
+   "akete"
+  ]
+ ],
+ "oh-14e7hyx": [
+  [
+   0.0,
+   0.42,
+   "clear"
+  ],
+  [
+   0.0,
+   0.42,
+   "yoroshiku"
+  ]
+ ],
+ "oh-18qexd9": [
+  [
+   0.0,
+   1.464,
+   "ohayo"
+  ]
+ ],
+ "oh-19g18x": [
+  [
+   0.0,
+   0.956,
+   "ohayo"
+  ]
+ ],
+ "oh-1aenxld": [
+  [
+   0.0,
+   0.335,
+   "clear"
+  ],
+  [
+   1.86,
+   2.885,
+   "clear"
+  ]
+ ],
+ "oh-1c4p8ez": [
+  [
+   0.24,
+   1.556,
+   "ohayo"
+  ]
+ ],
+ "oh-1cne4ls": [
+  [
+   0.289,
+   2.18,
+   "yoroshiku"
+  ]
+ ],
+ "oh-1dxmpp2": [
+  [
+   0.988,
+   1.582,
+   "honsha"
+  ]
+ ],
+ "oh-1hzcx7w": [
+  [
+   0.0,
+   0.495,
+   "clear"
+  ],
+  [
+   0.0,
+   0.495,
+   "ohayo"
+  ]
+ ],
+ "oh-1j05rm4": [
+  [
+   0.271,
+   2.06,
+   "yoroshiku"
+  ]
+ ],
+ "oh-1ke18uq": [
+  [
+   0.641,
+   2.21,
+   "yoroshiku"
+  ]
+ ],
+ "oh-1lxs17m": [
+  [
+   0.0,
+   0.64,
+   "sumimasen"
+  ],
+  [
+   0.56,
+   1.24,
+   "sumimasen"
+  ]
+ ],
+ "oh-1ognzc5": [
+  [
+   0.0,
+   0.694,
+   "matte"
+  ],
+  [
+   0.614,
+   1.348,
+   "matte"
+  ]
+ ],
+ "oh-1q8rpu4": [
+  [
+   0.0,
+   0.886,
+   "clear"
+  ]
+ ],
+ "oh-1qrzznu": [
+  [
+   0.147,
+   1.132,
+   "clear"
+  ]
+ ],
+ "oh-1yg9alo": [
+  [
+   0.0,
+   0.884,
+   "clear"
+  ],
+  [
+   2.156,
+   3.08,
+   "sumimasen"
+  ]
+ ],
+ "oh-2kggvg": [
+  [
+   0.0,
+   1.556,
+   "ohayo"
+  ],
+  [
+   2.487,
+   2.904,
+   "clear"
+  ]
+ ],
+ "oh-45hdir": [
+  [
+   0.0,
+   0.819,
+   "sumimasen"
+  ],
+  [
+   0.739,
+   1.597,
+   "sumimasen"
+  ]
+ ],
+ "oh-5hn713": [
+  [
+   0.0,
+   0.911,
+   "ohayo"
+  ]
+ ],
+ "oh-6afzfp": [
+  [
+   0.12,
+   1.0,
+   "sumimasen"
+  ],
+  [
+   0.92,
+   1.8,
+   "sumimasen"
+  ]
+ ],
+ "oh-6gg3pv": [
+  [
+   0.523,
+   0.978,
+   "gaijin"
+  ]
+ ],
+ "oh-ehjyjs": [],
+ "oh-ekqqn0": [
+  [
+   0.184,
+   1.384,
+   "sumimasen"
+  ]
+ ],
+ "oh-f4h8qf": [
+  [
+   0.183,
+   1.367,
+   "sumimasen"
+  ]
+ ],
+ "oh-f89jzv": [
+  [
+   0.142,
+   0.766,
+   "clear"
+  ]
+ ],
+ "oh-fgq8j5": [
+  [
+   0.0,
+   0.923,
+   "sumimasen"
+  ]
+ ],
+ "oh-k1xb2b": [
+  [
+   1.793,
+   2.636,
+   "clear"
+  ]
+ ],
+ "oh-s2r34k": [
+  [
+   0.396,
+   1.348,
+   "ohayo"
+  ]
+ ],
+ "oh-xqnxpi": [
+  [
+   0.142,
+   1.86,
+   "ohayo"
+  ],
+  [
+   1.78,
+   2.77,
+   "sumimasen"
+  ]
+ ],
+ "oh-yowtk": [
+  [
+   0.0,
+   1.037,
+   "clear"
+  ],
+  [
+   2.152,
+   3.03,
+   "clear"
+  ],
+  [
+   3.348,
+   4.624,
+   "clear"
+  ]
+ ]
+}

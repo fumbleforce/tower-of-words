@@ -70,7 +70,9 @@ export class Runner {
   speaker(id) { return this.speakers[id] || { name: id }; }
 
   // find what should run for a trigger key; returns a node name or null
-  resolve(key) {
+  // resolve(key, { peek: true }) only looks: has() must never use up a `once` trigger (it's asked every frame by the
+  // Say chip, the markers and the zones; a peek used to spend them, so the real trigger found nothing)
+  resolve(key, { peek = false } = {}) {
     const on = (this.story && this.story.on) || {};
     let v = on[key];
     if (v === undefined) return null;
@@ -79,12 +81,12 @@ export class Runner {
       const t = typeof e === 'string' ? { node: e } : e;
       if (t.once && this.onceDone.has(key + '>' + t.node)) continue;
       if (!cond(t.if)) continue;
-      if (t.once) this.onceDone.add(key + '>' + t.node);
+      if (t.once && !peek) this.onceDone.add(key + '>' + t.node);
       return t.node;
     }
     return null;
   }
-  has(key) { return !!this.resolve(key); }
+  has(key) { return !!this.resolve(key, { peek: true }); }
   // run a trigger inside a beat (locks walking); returns true if something ran
   trigger(key, { beat = true } = {}) {
     const node = this.resolve(key);
@@ -142,7 +144,16 @@ export class Runner {
     if (!voiceKey && who !== 'eric' && !s.overheard) { const k = lineKey(who, text); if (audioKeys.has(k)) voiceKey = k; }
     if (!voiceKey && who === 'eric') { const k = lineKey(who, text); if (audioKeys.has(k)) voiceKey = k; }
     if (voiceKey && s.overheard && !audioKeys.has(voiceKey)) voiceKey = null;
-    await ui.say(sp, text, { voiceKey, overheard: !!s.overheard, clear: s.clear, whoId: who, face: s.face });
+    const shown = ui.say(sp, text, { voiceKey, overheard: !!s.overheard, clear: s.clear, whoId: who, face: s.face });
+    // test mode: record what an overheard line rendered, so the fast test fails on a known word shown garbled
+    if (s.overheard && window.__test) {
+      const line = document.querySelector('#talk .line');
+      const garbled = [...line.querySelectorAll('.gx')].map((e) => e.dataset.c).join('');
+      const bad = [...known].filter((id) => { const w = WORDS[id]; return w && [w.ja, ...(w.alias || [])].some((ja) => garbled.includes(ja)); });
+      (window.__test.heard ||= []).push({ key: voiceKey, text, known: [...known], tokens: [...line.children].map((e) => `${e.className}:${e.textContent}`), garbledKnown: bad });
+      if (bad.length) window.__test.errors.push(`known word shown garbled in "${text}": ${bad.join(', ')}`);
+    }
+    await shown;
     return null;
   }
   async choice(s) {
@@ -171,7 +182,8 @@ export class Runner {
     const first = known.size === 0;
     if (learn(id)) {
       if (first) setTimeout(() => ui.introSay(), 600);
-      sfx('word'); ui.refreshWords();
+      if (this.game.learned) this.game.learned(WORDS[id].cmd ? 'command' : 'word'); else sfx('word');
+      ui.refreshWords();
       ui.toast(`New command: <span class="jp">${WORDS[id].ja}</span> <span class="gl">${WORDS[id].ro}, ${WORDS[id].en}</span>`, 3400);
     }
   }

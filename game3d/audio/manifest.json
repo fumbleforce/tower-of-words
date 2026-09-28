@@ -96,7 +96,8 @@
   "lang": "en",
   "overheard": false,
   "words": [],
-  "clear": []
+  "clear": [],
+  "emo": "flustered"
  },
  {
   "key": "ln-itq12c",
@@ -105,7 +106,8 @@
   "lang": "en",
   "overheard": false,
   "words": [],
-  "clear": []
+  "clear": [],
+  "emo": "sheepish"
  },
  {
   "key": "ln-1tkjv3k",
@@ -114,7 +116,8 @@
   "lang": "en",
   "overheard": false,
   "words": [],
-  "clear": []
+  "clear": [],
+  "emo": "dry"
  },
  {
   "key": "ln-16kysq9",
@@ -123,7 +126,8 @@
   "lang": "en",
   "overheard": false,
   "words": [],
-  "clear": []
+  "clear": [],
+  "emo": "surprised"
  },
  {
   "key": "ln-nv21v1",
@@ -132,12 +136,13 @@
   "lang": "en",
   "overheard": false,
   "words": [],
-  "clear": []
+  "clear": [],
+  "emo": "tired"
  },
  {
-  "key": "ln-1c9eir2",
+  "key": "ln-1smowy6",
   "speaker": "mio",
-  "text": "Ahh, the IT upgrade. Mori-san said a 外人 is coming to fix everything. That's you?",
+  "text": "Ahh, you're the support contract? Mori-san said a 外人 is coming to help with the old machines. Amakawa never replaces anything, so, um... some of them are older than me.",
   "lang": "en",
   "overheard": false,
   "words": [
@@ -146,7 +151,8 @@
     "外人"
    ]
   ],
-  "clear": []
+  "clear": [],
+  "emo": "dry"
  },
  {
   "key": "ln-1en4jir",
@@ -155,7 +161,8 @@
   "lang": "en",
   "overheard": false,
   "words": [],
-  "clear": []
+  "clear": [],
+  "emo": "dry"
  },
  {
   "key": "ln-1ag2vpj",
@@ -164,7 +171,8 @@
   "lang": "en",
   "overheard": false,
   "words": [],
-  "clear": []
+  "clear": [],
+  "emo": "deadpan"
  },
  {
   "key": "ln-1ycddwa",
@@ -173,7 +181,8 @@
   "lang": "en",
   "overheard": false,
   "words": [],
-  "clear": []
+  "clear": [],
+  "emo": "casual"
  },
  {
   "key": "ln-4iwfo",
@@ -182,7 +191,8 @@
   "lang": "en",
   "overheard": false,
   "words": [],
-  "clear": []
+  "clear": [],
+  "emo": "fond"
  },
  {
   "key": "ln-1ryn3il",
@@ -191,7 +201,8 @@
   "lang": "en",
   "overheard": false,
   "words": [],
-  "clear": []
+  "clear": [],
+  "emo": "casual"
  },
  {
   "key": "ln-15pioie",
@@ -200,7 +211,8 @@
   "lang": "en",
   "overheard": false,
   "words": [],
-  "clear": []
+  "clear": [],
+  "emo": "tired"
  },
  {
   "key": "ln-y9brzn",
@@ -209,7 +221,8 @@
   "lang": "en",
   "overheard": false,
   "words": [],
-  "clear": []
+  "clear": [],
+  "emo": "dry"
  },
  {
   "key": "ln-5ykiwy",
@@ -218,7 +231,8 @@
   "lang": "en",
   "overheard": false,
   "words": [],
-  "clear": []
+  "clear": [],
+  "emo": "casual"
  },
  {
   "key": "ln-1l18x7q",
@@ -227,7 +241,8 @@
   "lang": "en",
   "overheard": false,
   "words": [],
-  "clear": []
+  "clear": [],
+  "emo": "deadpan"
  },
  {
   "key": "ln-p7h9ql",
@@ -236,7 +251,8 @@
   "lang": "en",
   "overheard": false,
   "words": [],
-  "clear": []
+  "clear": [],
+  "emo": "dry"
  },
  {
   "key": "ln-mr4c5a",
@@ -245,7 +261,8 @@
   "lang": "en",
   "overheard": false,
   "words": [],
-  "clear": []
+  "clear": [],
+  "emo": "amused"
  },
  {
   "key": "ln-ywlaq7",
@@ -259,7 +276,8 @@
     "おはようございます"
    ]
   ],
-  "clear": []
+  "clear": [],
+  "emo": "casual"
  },
  {
   "key": "ln-u7v3gq",
@@ -273,7 +291,8 @@
     "おはようございます"
    ]
   ],
-  "clear": []
+  "clear": [],
+  "emo": "amused"
  },
  {
   "key": "ln-11m7ob5",
@@ -282,7 +301,8 @@
   "lang": "en",
   "overheard": false,
   "words": [],
-  "clear": []
+  "clear": [],
+  "emo": "amused"
  },
  {
   "key": "ln-7v53ll",
@@ -291,7 +311,8 @@
   "lang": "en",
   "overheard": false,
   "words": [],
-  "clear": []
+  "clear": [],
+  "emo": "dry"
  },
  {
   "key": "ln-1wapqs5",
@@ -300,7 +321,8 @@
   "lang": "en",
   "overheard": false,
   "words": [],
-  "clear": []
+  "clear": [],
+  "emo": "deadpan"
  },
  {
   "key": "ln-gs8qkh",
@@ -309,12 +331,23 @@
   "lang": "en",
   "overheard": false,
   "words": [],
-  "clear": []
+  "clear": [],
+  "emo": "amused"
  },
  {
-  "key": "ln-3jlf6m",
+  "key": "ln-z7qqlo",
   "speaker": "mio",
-  "text": "And when you meet someone new, it's よろしくおねがいします. Like \"nice to meet you\", but more like \"please be nice to me\".",
+  "text": "She's more awake than that guy, anyway. He's on this train every morning too, asleep the whole way, and like once a month he misses our stop and ends up back on the mainland.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "casual"
+ },
+ {
+  "key": "ln-1nbjpvk",
+  "speaker": "mio",
+  "text": "Anyway, when you meet someone new, it's よろしくおねがいします. Like “nice to meet you”, but more like “please be nice to me”.",
   "lang": "en",
   "overheard": false,
   "words": [
@@ -323,7 +356,8 @@
     "よろしくおねがいします"
    ]
   ],
-  "clear": []
+  "clear": [],
+  "emo": "casual"
  },
  {
   "key": "ln-1iyar5p",
@@ -337,7 +371,8 @@
     "よろしくおねがいします"
    ]
   ],
-  "clear": []
+  "clear": [],
+  "emo": "casual"
  },
  {
   "key": "ln-6wd5ry",
@@ -346,7 +381,8 @@
   "lang": "en",
   "overheard": false,
   "words": [],
-  "clear": []
+  "clear": [],
+  "emo": "casual"
  },
  {
   "key": "ln-fylmwt",
@@ -355,7 +391,8 @@
   "lang": "en",
   "overheard": false,
   "words": [],
-  "clear": []
+  "clear": [],
+  "emo": "embarrassed"
  },
  {
   "key": "ln-1llfryn",
@@ -373,7 +410,8 @@
     "つぎは"
    ]
   ],
-  "clear": []
+  "clear": [],
+  "emo": "announcer"
  },
  {
   "key": "ln-1gpo04t",
@@ -382,12 +420,13 @@
   "lang": "en",
   "overheard": false,
   "words": [],
-  "clear": []
+  "clear": [],
+  "emo": "casual"
  },
  {
-  "key": "ln-1x9vhf6",
+  "key": "ln-1im6xxm",
   "speaker": "mio",
-  "text": "Ah, she's in the way... okay, one more. すみません. It means excuse me, and also sorry.",
+  "text": "Ah, she's in the way... okay, one more. すみません. You use it for sorry too.",
   "lang": "en",
   "overheard": false,
   "words": [
@@ -396,7 +435,8 @@
     "すみません"
    ]
   ],
-  "clear": []
+  "clear": [],
+  "emo": "dry"
  },
  {
   "key": "ln-1eilv1d",
@@ -405,7 +445,8 @@
   "lang": "en",
   "overheard": false,
   "words": [],
-  "clear": []
+  "clear": [],
+  "emo": "casual"
  },
  {
   "key": "oh-f4h8qf",
@@ -419,22 +460,44 @@
     "すみません"
    ]
   ],
-  "clear": []
+  "clear": [],
+  "emo": "bright"
  },
  {
-  "key": "ln-1lp23mq",
+  "key": "ln-wth9xt",
   "speaker": "mio",
-  "text": "Ah, that guy's still asleep. He's asleep every morning, I swear.",
+  "text": "Ah... wait. The sleeping guy, he's still in there.",
   "lang": "en",
   "overheard": false,
   "words": [],
-  "clear": []
+  "clear": [],
+  "emo": "surprised"
  },
  {
-  "key": "ln-1q1xiv0",
-  "speaker": "mio",
-  "text": "待って!",
+  "key": "oh-pcpzah",
+  "speaker": "ann",
+  "text": "この電車は、折り返し本土行きとなります。",
   "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "announcer"
+ },
+ {
+  "key": "ln-jb1f1x",
+  "speaker": "mio",
+  "text": "And now it goes back to the mainland. So today is the once a month, I guess.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "tired"
+ },
+ {
+  "key": "ln-1im76tm",
+  "speaker": "mio",
+  "text": "待って! Hey, 待って!",
+  "lang": "en",
   "overheard": false,
   "words": [
    [
@@ -442,16 +505,8 @@
     "待って"
    ]
   ],
-  "clear": []
- },
- {
-  "key": "ln-1m9tnge",
-  "speaker": "mio",
-  "text": "Ha, see? You're supposed to say that and the doors stop. It's the old system, it never works. Everybody tries it once.",
-  "lang": "en",
-  "overheard": false,
-  "words": [],
-  "clear": []
+  "clear": [],
+  "emo": "shout"
  },
  {
   "key": "oh-6afzfp",
@@ -465,16 +520,28 @@
     "すみません"
    ]
   ],
-  "clear": []
+  "clear": [],
+  "emo": "panicked"
  },
  {
-  "key": "ln-kd3fcr",
+  "key": "ln-1osyqvu",
   "speaker": "mio",
-  "text": "I don't know. Maybe? ...I don't want to think about it.",
+  "text": "...Doors don't do that. They stop for a bag or something, but yelling does nothing, I've tried like a hundred times.",
   "lang": "en",
   "overheard": false,
   "words": [],
-  "clear": []
+  "clear": [],
+  "emo": "surprised"
+ },
+ {
+  "key": "ln-13l4zbe",
+  "speaker": "mio",
+  "text": "I don't know. I said it too and nothing happened, so...",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "hesitant"
  },
  {
   "key": "ln-1kjjw22",
@@ -483,16 +550,28 @@
   "lang": "en",
   "overheard": false,
   "words": [],
-  "clear": []
+  "clear": [],
+  "emo": "low"
  },
  {
-  "key": "ln-1j4whx4",
+  "key": "ln-1x6wckw",
   "speaker": "mio",
-  "text": "あー, no, no... Sorry, a server is down, I have to run. Your card won't work until nine, I think, so you'll have to talk to the guard.",
+  "text": "あー, no, no... the server's down again. Sorry, I have to run.",
   "lang": "en",
   "overheard": false,
   "words": [],
-  "clear": []
+  "clear": [],
+  "emo": "groan"
+ },
+ {
+  "key": "ln-1wes4ls",
+  "speaker": "mio",
+  "text": "You can't even help, your card won't work until nine, I think. So talk to the guard.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "hurried"
  },
  {
   "key": "ln-1ha8crt",
@@ -506,7 +585,8 @@
     "おはようございます"
    ]
   ],
-  "clear": []
+  "clear": [],
+  "emo": "warm"
  },
  {
   "key": "ln-yxxzqh",
@@ -524,7 +604,8 @@
     "外人"
    ]
   ],
-  "clear": []
+  "clear": [],
+  "emo": "dry"
  },
  {
   "key": "ln-3hxn1x",
@@ -533,7 +614,8 @@
   "lang": "en",
   "overheard": false,
   "words": [],
-  "clear": []
+  "clear": [],
+  "emo": "hurried"
  },
  {
   "key": "oh-1wyzao6",
@@ -542,7 +624,8 @@
   "lang": "ja",
   "overheard": true,
   "words": [],
-  "clear": []
+  "clear": [],
+  "emo": "bright"
  },
  {
   "key": "oh-19g18x",
@@ -556,7 +639,18 @@
     "おはようございます"
    ]
   ],
-  "clear": []
+  "clear": [],
+  "emo": "polite"
+ },
+ {
+  "key": "ln-mn2vz",
+  "speaker": "eric",
+  "text": "Hi. Um... good morning?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "hesitant"
  },
  {
   "key": "oh-1j05rm4",
@@ -570,7 +664,18 @@
     "よろしくおねがいします"
    ]
   ],
-  "clear": []
+  "clear": [],
+  "emo": "amused"
+ },
+ {
+  "key": "oh-1gamfp7",
+  "speaker": "guard",
+  "text": "カードを、どうぞ。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "polite"
  },
  {
   "key": "oh-1242cc3",
@@ -579,7 +684,33 @@
   "lang": "ja",
   "overheard": true,
   "words": [],
-  "clear": []
+  "clear": [],
+  "emo": "machine"
+ },
+ {
+  "key": "oh-fgq8j5",
+  "speaker": "commuter",
+  "text": "…すみません。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [
+   [
+    "sumimasen",
+    "すみません"
+   ]
+  ],
+  "clear": [],
+  "emo": "curt"
+ },
+ {
+  "key": "oh-6z5r52",
+  "speaker": "guard",
+  "text": "新しいカードですね。申し訳ありません、登録は九時からです。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "polite"
  },
  {
   "key": "oh-1vm0kku",
@@ -588,7 +719,28 @@
   "lang": "ja",
   "overheard": true,
   "words": [],
-  "clear": []
+  "clear": [],
+  "emo": "stern"
+ },
+ {
+  "key": "ln-2gdgdf",
+  "speaker": "eric",
+  "text": "Right, Mio did say nine.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "tired"
+ },
+ {
+  "key": "oh-1wqxvbv",
+  "speaker": "guard",
+  "text": "あちらで、お待ちください。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "polite"
  },
  {
   "key": "oh-45hdir",
@@ -602,7 +754,8 @@
     "すみません"
    ]
   ],
-  "clear": []
+  "clear": [],
+  "emo": "panicked"
  },
  {
   "key": "oh-vfghg0",
@@ -611,12 +764,28 @@
   "lang": "ja",
   "overheard": true,
   "words": [],
-  "clear": []
+  "clear": [],
+  "emo": "machine"
  },
  {
-  "key": "oh-fl8dqq",
+  "key": "ln-c8biix",
   "speaker": "kuroda",
-  "text": "開けて…お願い、開けて…",
+  "text": "開けて...",
+  "lang": "ja",
+  "overheard": false,
+  "words": [
+   [
+    "akete",
+    "開けて"
+   ]
+  ],
+  "clear": [],
+  "emo": "pleading"
+ },
+ {
+  "key": "oh-10nz594",
+  "speaker": "kuroda",
+  "text": "お願い、開けて…いい子だから…",
   "lang": "ja",
   "overheard": true,
   "words": [
@@ -625,7 +794,195 @@
     "開けて"
    ]
   ],
-  "clear": []
+  "clear": [],
+  "emo": "pleading"
+ },
+ {
+  "key": "oh-1dxmpp2",
+  "speaker": "guard",
+  "text": "はい、アマカワ本社、正面ゲートです。…はい。待ちます。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [
+   [
+    "honsha",
+    "本社"
+   ]
+  ],
+  "clear": [],
+  "emo": "stern"
+ },
+ {
+  "key": "oh-ekqqn0",
+  "speaker": "kuroda",
+  "text": "あ…すみません、ゲートが…",
+  "lang": "ja",
+  "overheard": true,
+  "words": [
+   [
+    "sumimasen",
+    "すみません"
+   ]
+  ],
+  "clear": [],
+  "emo": "pleading"
+ },
+ {
+  "key": "oh-7p8glr",
+  "speaker": "kuroda",
+  "text": "え？今の…？",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "surprised"
+ },
+ {
+  "key": "oh-ki3dwa",
+  "speaker": "guard",
+  "text": "…あ、もしもし。いえ…開きました。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "deadpan"
+ },
+ {
+  "key": "ln-1a2t8zl",
+  "speaker": "eric",
+  "text": "The train doors, and now this...",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "whisper"
+ },
+ {
+  "key": "oh-nauv5v",
+  "speaker": "guard",
+  "text": "少々お待ちください。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "curt"
+ },
+ {
+  "key": "oh-2ywt8x",
+  "speaker": "guard",
+  "text": "はい？",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "curt"
+ },
+ {
+  "key": "oh-lk0tl",
+  "speaker": "guard",
+  "text": "はい、わかってます。二人だと思ってるんです。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "polite"
+ },
+ {
+  "key": "oh-10umez5",
+  "speaker": "guard",
+  "text": "猫はいません。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "stern"
+ },
+ {
+  "key": "oh-cjdbth",
+  "speaker": "guard",
+  "text": "…無理ですね。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "dry"
+ },
+ {
+  "key": "oh-qzyr6s",
+  "speaker": "guard",
+  "text": "ははっ。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "laugh"
+ },
+ {
+  "key": "oh-jprr3j",
+  "speaker": "guard",
+  "text": "浜田さん！かばん、頭の上！",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "shout"
+ },
+ {
+  "key": "oh-17r1yc3",
+  "speaker": "guard",
+  "text": "…あ、もしもし。いえ、もう大丈夫です。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "dry"
+ },
+ {
+  "key": "oh-1yg9alo",
+  "speaker": "kuroda",
+  "text": "ありがとうございます！本当に、すみません…",
+  "lang": "ja",
+  "overheard": true,
+  "words": [
+   [
+    "sumimasen",
+    "すみません"
+   ]
+  ],
+  "clear": [
+   "ありがとう"
+  ],
+  "emo": "warm"
+ },
+ {
+  "key": "oh-qzwp7a",
+  "speaker": "guard",
+  "text": "どうぞ。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "curt"
+ },
+ {
+  "key": "oh-sm1b0m",
+  "speaker": "guard",
+  "text": "どうぞ、どうぞ。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-t645tb",
+  "speaker": "eric",
+  "text": "Arigatō.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "tired"
  },
  {
   "key": "oh-1lxs17m",
@@ -639,7 +996,27 @@
     "すみません"
    ]
   ],
-  "clear": []
+  "clear": [],
+  "emo": "flustered"
+ },
+ {
+  "key": "oh-xqnxpi",
+  "speaker": "kuroda",
+  "text": "あ、おはようございます…すみません、今ちょっと…",
+  "lang": "ja",
+  "overheard": true,
+  "words": [
+   [
+    "ohayo",
+    "おはようございます"
+   ],
+   [
+    "sumimasen",
+    "すみません"
+   ]
+  ],
+  "clear": [],
+  "emo": "flustered"
  },
  {
   "key": "oh-kz6n0u",
@@ -648,57 +1025,23 @@
   "lang": "ja",
   "overheard": true,
   "words": [],
-  "clear": []
+  "clear": [],
+  "emo": "machine"
  },
  {
-  "key": "oh-zoc8ud",
+  "key": "oh-1ognzc5",
   "speaker": "kuroda",
-  "text": "開けて…開けて…",
+  "text": "待って…？待ってますけど…",
   "lang": "ja",
   "overheard": true,
   "words": [
    [
-    "akete",
-    "開けて"
+    "matte",
+    "待って"
    ]
   ],
-  "clear": []
- },
- {
-  "key": "oh-1st1kx5",
-  "speaker": "kuroda",
-  "text": "え？今の？",
-  "lang": "ja",
-  "overheard": true,
-  "words": [],
-  "clear": []
- },
- {
-  "key": "oh-10umez5",
-  "speaker": "guard",
-  "text": "猫はいません。",
-  "lang": "ja",
-  "overheard": true,
-  "words": [],
-  "clear": []
- },
- {
-  "key": "oh-1je4ust",
-  "speaker": "guard",
-  "text": "浜田さん！頭の上に！",
-  "lang": "ja",
-  "overheard": true,
-  "words": [],
-  "clear": []
- },
- {
-  "key": "oh-d4ennl",
-  "speaker": "kuroda",
-  "text": "ありがとうございます！この方、うちの…いや、新しい方で…私がサインします！",
-  "lang": "ja",
-  "overheard": true,
-  "words": [],
-  "clear": []
+  "clear": [],
+  "emo": "surprised"
  },
  {
   "key": "oh-w0fzye",
@@ -707,12 +1050,13 @@
   "lang": "ja",
   "overheard": true,
   "words": [],
-  "clear": []
+  "clear": [],
+  "emo": "polite"
  },
  {
-  "key": "oh-1x4ha4x",
+  "key": "oh-5hn713",
   "speaker": "kuro",
-  "text": "……おはようございます。",
+  "text": "…おはようございます。",
   "lang": "ja",
   "overheard": true,
   "words": [
@@ -721,19 +1065,26 @@
     "おはようございます"
    ]
   ],
-  "clear": []
+  "clear": [],
+  "emo": "polite"
  },
  {
-  "key": "oh-19uh2s6",
-  "speaker": "guard",
-  "text": "猫？何の猫ですか。",
+  "key": "oh-1cne4ls",
+  "speaker": "kuro",
+  "text": "はい…？よろしくおねがいします…",
   "lang": "ja",
   "overheard": true,
-  "words": [],
-  "clear": []
+  "words": [
+   [
+    "yoroshiku",
+    "よろしくおねがいします"
+   ]
+  ],
+  "clear": [],
+  "emo": "puzzled"
  },
  {
-  "key": "oh-1tygzrl",
+  "key": "oh-18qexd9",
   "speaker": "gatev",
   "text": "おはようございます！カードをタッチしてください！",
   "lang": "ja",
@@ -744,7 +1095,18 @@
     "おはようございます"
    ]
   ],
-  "clear": []
+  "clear": [],
+  "emo": "machine"
+ },
+ {
+  "key": "oh-19uh2s6",
+  "speaker": "guard",
+  "text": "猫？何の猫ですか。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "stern"
  },
  {
   "key": "oh-2kggvg",
@@ -760,7 +1122,8 @@
   ],
   "clear": [
    "IT"
-  ]
+  ],
+  "emo": "polite"
  },
  {
   "key": "oh-1ke18uq",
@@ -774,7 +1137,8 @@
     "よろしくおねがいします"
    ]
   ],
-  "clear": []
+  "clear": [],
+  "emo": "warm"
  },
  {
   "key": "oh-1c4p8ez",
@@ -788,34 +1152,113 @@
     "おはようございます"
    ]
   ],
-  "clear": []
+  "clear": [],
+  "emo": "polite"
  },
  {
-  "key": "oh-1yevp27",
-  "speaker": "kenji",
-  "text": "あ、新しい人？ごめん、椅子借りてた。壊れちゃってさ、俺の。",
+  "key": "oh-l719zo",
+  "speaker": "mori",
+  "text": "どうぞ、こちらへ。",
   "lang": "ja",
   "overheard": true,
   "words": [],
-  "clear": []
+  "clear": [],
+  "emo": "polite"
  },
  {
-  "key": "ln-i8x181",
+  "key": "oh-srx4r8",
+  "speaker": "mori",
+  "text": "コピー機は、あちらです。よく食べるんですよ。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "sheepish"
+ },
+ {
+  "key": "oh-ehjyjs",
+  "speaker": "mori",
+  "text": "…入れて。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [
+   [
+    "irete",
+    "入れて"
+   ]
+  ],
+  "clear": [],
+  "emo": "whisper"
+ },
+ {
+  "key": "oh-cgk7l4",
+  "speaker": "mori",
+  "text": "やっぱり、だめですね。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "amused"
+ },
+ {
+  "key": "oh-1f7qwse",
   "speaker": "kenji",
-  "text": "Ah, sorry, sorry, the chair. My English is... very little.",
+  "text": "あ！新しい人！",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "bright"
+ },
+ {
+  "key": "ln-9k948c",
+  "speaker": "kenji",
+  "text": "Ah, sorry, sorry. Your chair... I borrow. My chair is... broken. Pshh.",
   "lang": "en",
   "overheard": false,
   "words": [],
-  "clear": []
+  "clear": [],
+  "emo": "sheepish"
  },
  {
-  "key": "oh-m1j0c0",
+  "key": "ln-oknpk6",
   "speaker": "kenji",
-  "text": "椅子、あった？",
-  "lang": "ja",
-  "overheard": true,
+  "text": "Now it is in machine room. And cat is sleeping on it. Sorry!",
+  "lang": "en",
+  "overheard": false,
   "words": [],
-  "clear": []
+  "clear": [],
+  "emo": "sheepish"
+ },
+ {
+  "key": "ln-1feszul",
+  "speaker": "kenji",
+  "text": "Chair is okay? Sorry, my English is... very little. Very, very little.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "sheepish"
+ },
+ {
+  "key": "ln-7brw5p",
+  "speaker": "kenji",
+  "text": "Machine room. Chair. Cat. Sorry!",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "sheepish"
+ },
+ {
+  "key": "ln-fsiwwp",
+  "speaker": "kenji",
+  "text": "Ha! Okay, okay. Same team.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "laugh"
  },
  {
   "key": "oh-s2r34k",
@@ -829,7 +1272,8 @@
     "おはよう"
    ]
   ],
-  "clear": []
+  "clear": [],
+  "emo": "laugh"
  },
  {
   "key": "oh-1hzcx7w",
@@ -845,7 +1289,8 @@
   ],
   "clear": [
    "おはよう"
-  ]
+  ],
+  "emo": "bright"
  },
  {
   "key": "oh-14e7hyx",
@@ -861,7 +1306,8 @@
   ],
   "clear": [
    "よろしく"
-  ]
+  ],
+  "emo": "bright"
  },
  {
   "key": "oh-zq869p",
@@ -870,25 +1316,28 @@
   "lang": "ja",
   "overheard": true,
   "words": [],
-  "clear": []
+  "clear": [],
+  "emo": "curious"
  },
  {
-  "key": "ln-k0rwmx",
+  "key": "ln-b6r5at",
   "speaker": "mio",
-  "text": "One minute!",
+  "text": "Mm, one minute!",
   "lang": "en",
   "overheard": false,
   "words": [],
-  "clear": []
+  "clear": [],
+  "emo": "shout"
  },
  {
-  "key": "ln-1sut6ck",
+  "key": "ln-1bavawo",
   "speaker": "mio",
-  "text": "Yes, yes, I'm coming. Come in, but don't touch anything, okay?",
+  "text": "Okay, okay, I'm coming... Come in, but don't touch anything, okay? Especially the cables.",
   "lang": "en",
   "overheard": false,
   "words": [],
-  "clear": []
+  "clear": [],
+  "emo": "hurried"
  },
  {
   "key": "ln-5264r9",
@@ -897,16 +1346,18 @@
   "lang": "en",
   "overheard": false,
   "words": [],
-  "clear": []
+  "clear": [],
+  "emo": "deadpan"
  },
  {
-  "key": "ln-1aa9ew",
+  "key": "ln-h4y8dv",
   "speaker": "mio",
-  "text": "Ah, you found your chair. The cat sleeps on it every day, she'll be sad.",
+  "text": "Ah, that's your chair? Sorry. She comes with it, I think.",
   "lang": "en",
   "overheard": false,
   "words": [],
-  "clear": []
+  "clear": [],
+  "emo": "dry"
  },
  {
   "key": "ln-6fpl77",
@@ -915,7 +1366,8 @@
   "lang": "en",
   "overheard": false,
   "words": [],
-  "clear": []
+  "clear": [],
+  "emo": "casual"
  },
  {
   "key": "ln-n6hl2r",
@@ -924,7 +1376,8 @@
   "lang": "en",
   "overheard": false,
   "words": [],
-  "clear": []
+  "clear": [],
+  "emo": "casual"
  },
  {
   "key": "ln-2sij6r",
@@ -933,16 +1386,18 @@
   "lang": "en",
   "overheard": false,
   "words": [],
-  "clear": []
+  "clear": [],
+  "emo": "surprised"
  },
  {
-  "key": "ln-1hjr4dx",
+  "key": "ln-1xv1l4m",
   "speaker": "mio",
-  "text": "Yeah. It's kind of a tradition now, nobody closes it. Mori-san knows the copier, he can show you.",
+  "text": "Yeah. Mori-san opened it when he was new here, I think. Nobody closes it, it's like... tradition. He can show you.",
   "lang": "en",
   "overheard": false,
   "words": [],
-  "clear": []
+  "clear": [],
+  "emo": "dry"
  },
  {
   "key": "oh-6gg3pv",
@@ -956,7 +1411,8 @@
     "外人"
    ]
   ],
-  "clear": []
+  "clear": [],
+  "emo": "shout"
  },
  {
   "key": "oh-1q8rpu4",
@@ -965,7 +1421,10 @@
   "lang": "ja",
   "overheard": true,
   "words": [],
-  "clear": []
+  "clear": [
+   "外国の方"
+  ],
+  "emo": "warm"
  },
  {
   "key": "ln-ivpqkt",
@@ -974,16 +1433,18 @@
   "lang": "en",
   "overheard": false,
   "words": [],
-  "clear": []
+  "clear": [],
+  "emo": "embarrassed"
  },
  {
-  "key": "ln-wgaz9u",
+  "key": "ln-3xy3nr",
   "speaker": "mio",
-  "text": "Now people upstairs ask me about the copier. ...Sorry, I'm busy.",
+  "text": "Now people from upstairs come down to use our copier. ...Sorry, I'm busy.",
   "lang": "en",
   "overheard": false,
   "words": [],
-  "clear": []
+  "clear": [],
+  "emo": "tired"
  },
  {
   "key": "ln-m1r85k",
@@ -992,7 +1453,37 @@
   "lang": "en",
   "overheard": false,
   "words": [],
-  "clear": []
+  "clear": [],
+  "emo": "low"
+ },
+ {
+  "key": "ln-1gowqxf",
+  "speaker": "mio",
+  "text": "止まって. ...止まって!",
+  "lang": "ja",
+  "overheard": false,
+  "words": [
+   [
+    "matte",
+    "まって"
+   ],
+   [
+    "tomatte",
+    "止まって"
+   ]
+  ],
+  "clear": [],
+  "emo": "deadpan"
+ },
+ {
+  "key": "ln-1oxvk8c",
+  "speaker": "mio",
+  "text": "Mm. Only for you, I guess.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "tired"
  },
  {
   "key": "oh-1h03b93",
@@ -1001,7 +1492,8 @@
   "lang": "ja",
   "overheard": true,
   "words": [],
-  "clear": []
+  "clear": [],
+  "emo": "sheepish"
  },
  {
   "key": "ln-w0p3h",
@@ -1015,7 +1507,20 @@
     "動いて"
    ]
   ],
-  "clear": []
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "oh-19jgh3x",
+  "speaker": "mori",
+  "text": "…三十年。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [
+   "三十年"
+  ],
+  "emo": "whisper"
  },
  {
   "key": "ln-1y5timr",
@@ -1024,16 +1529,18 @@
   "lang": "en",
   "overheard": false,
   "words": [],
-  "clear": []
+  "clear": [],
+  "emo": "tired"
  },
  {
-  "key": "ln-tfnkuv",
+  "key": "ln-1wiu7hh",
   "speaker": "mio",
-  "text": "Eh? The B2 copier? It's older than me, nobody can fix that.",
+  "text": "Eh? The B2 copier? Three companies came to look at it, and they all said buy a new one.",
   "lang": "en",
   "overheard": false,
   "words": [],
-  "clear": []
+  "clear": [],
+  "emo": "surprised"
  },
  {
   "key": "ln-xstxo2",
@@ -1042,16 +1549,28 @@
   "lang": "en",
   "overheard": false,
   "words": [],
-  "clear": []
+  "clear": [],
+  "emo": "dry"
  },
  {
-  "key": "ln-1174ye9",
+  "key": "ln-7i4z33",
   "speaker": "mio",
-  "text": "...Okay. Okay, I'll close it. Um. It's lunch anyway.",
+  "text": "...Asked it nicely. Like the doors, this morning?",
   "lang": "en",
   "overheard": false,
   "words": [],
-  "clear": []
+  "clear": [],
+  "emo": "deadpan"
+ },
+ {
+  "key": "ln-wwro0f",
+  "speaker": "mio",
+  "text": "Okay. Okay, I'll close it. Um. It's lunch anyway.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "low"
  },
  {
   "key": "ln-1turrej",
@@ -1060,7 +1579,8 @@
   "lang": "en",
   "overheard": false,
   "words": [],
-  "clear": []
+  "clear": [],
+  "emo": "casual"
  },
  {
   "key": "ln-if7eko",
@@ -1069,7 +1589,8 @@
   "lang": "en",
   "overheard": false,
   "words": [],
-  "clear": []
+  "clear": [],
+  "emo": "casual"
  },
  {
   "key": "ln-1qc5xgx",
@@ -1078,7 +1599,8 @@
   "lang": "en",
   "overheard": false,
   "words": [],
-  "clear": []
+  "clear": [],
+  "emo": "tired"
  },
  {
   "key": "ln-1cirab9",
@@ -1087,16 +1609,38 @@
   "lang": "en",
   "overheard": false,
   "words": [],
-  "clear": []
+  "clear": [],
+  "emo": "fond"
  },
  {
-  "key": "ln-ayq53w",
+  "key": "ln-ezo7ct",
   "speaker": "mio",
-  "text": "I don't know. Maybe the doors were just broken? I'll check the logs tonight, maybe.",
+  "text": "And the company won't buy new ones, ever. So now they pay you to babysit them with me.",
   "lang": "en",
   "overheard": false,
   "words": [],
-  "clear": []
+  "clear": [],
+  "emo": "dry"
+ },
+ {
+  "key": "ln-jy07t3",
+  "speaker": "mio",
+  "text": "Mm. The station asked me already, so I said it's the sensor.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "low"
+ },
+ {
+  "key": "ln-132nb4z",
+  "speaker": "mio",
+  "text": "It's probably the sensor.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "low"
  },
  {
   "key": "ln-ia4rj",
@@ -1105,7 +1649,8 @@
   "lang": "en",
   "overheard": false,
   "words": [],
-  "clear": []
+  "clear": [],
+  "emo": "groan"
  },
  {
   "key": "ln-ju49oa",
@@ -1123,7 +1668,8 @@
     "止まって"
    ]
   ],
-  "clear": []
+  "clear": [],
+  "emo": "curious"
  },
  {
   "key": "ln-1sykdyx",
@@ -1132,7 +1678,8 @@
   "lang": "en",
   "overheard": false,
   "words": [],
-  "clear": []
+  "clear": [],
+  "emo": "embarrassed"
  },
  {
   "key": "ln-1hs2f2z",
@@ -1141,7 +1688,8 @@
   "lang": "en",
   "overheard": false,
   "words": [],
-  "clear": []
+  "clear": [],
+  "emo": "low"
  },
  {
   "key": "oh-yowtk",
@@ -1154,7 +1702,8 @@
    "ノルウェー",
    "1994",
    "リレハンメル"
-  ]
+  ],
+  "emo": "bright"
  },
  {
   "key": "ln-1a6ceiv",
@@ -1168,7 +1717,8 @@
     "入れて"
    ]
   ],
-  "clear": []
+  "clear": [],
+  "emo": "warm"
  },
  {
   "key": "oh-k9mi0a",
@@ -1177,18 +1727,40 @@
   "lang": "ja",
   "overheard": true,
   "words": [],
-  "clear": []
+  "clear": [],
+  "emo": "warm"
  },
  {
-  "key": "oh-f89jzv",
+  "key": "oh-1gafjkp",
   "speaker": "kenji",
-  "text": "朝、ゲートが勝手に開いたって。全部。",
+  "text": "朝、ゲートが勝手に開いたって。",
   "lang": "ja",
   "overheard": true,
   "words": [],
   "clear": [
    "ゲート"
-  ]
+  ],
+  "emo": "casual"
+ },
+ {
+  "key": "ln-56ai20",
+  "speaker": "mio",
+  "text": "Oh, if you go to the vending machine, Mori-san drinks corn soup. From a can, yes. Every afternoon.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "casual"
+ },
+ {
+  "key": "ln-1aex6pt",
+  "speaker": "eric",
+  "text": "Thanks.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "dry"
  },
  {
   "key": "ln-ry384o",
@@ -1197,7 +1769,8 @@
   "lang": "en",
   "overheard": false,
   "words": [],
-  "clear": []
+  "clear": [],
+  "emo": "warm"
  },
  {
   "key": "ln-ovts65",
@@ -1206,7 +1779,8 @@
   "lang": "en",
   "overheard": false,
   "words": [],
-  "clear": []
+  "clear": [],
+  "emo": "dry"
  },
  {
   "key": "oh-k1xb2b",
@@ -1217,7 +1791,8 @@
   "words": [],
   "clear": [
    "ありがとう"
-  ]
+  ],
+  "emo": "bright"
  },
  {
   "key": "oh-k10rxg",
@@ -1226,7 +1801,18 @@
   "lang": "ja",
   "overheard": true,
   "words": [],
-  "clear": []
+  "clear": [],
+  "emo": "excited"
+ },
+ {
+  "key": "ln-zcbvxk",
+  "speaker": "kenji",
+  "text": "Melon! You are... genius.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "excited"
  },
  {
   "key": "oh-1qrzznu",
@@ -1237,21 +1823,58 @@
   "words": [],
   "clear": [
    "ありがとう"
-  ]
+  ],
+  "emo": "dry"
  },
  {
-  "key": "ln-1cjihnv",
-  "speaker": "mio",
-  "text": "Tomorrow, say おはようございます to Mori-san first thing, okay? He'll be waiting at the lift again.",
+  "key": "ln-qeqh9y",
+  "speaker": "emi",
+  "text": "You must be Eric. Emi, I run this lot. Sorry I wasn't about, I've been upstairs since seven begging for money.",
   "lang": "en",
   "overheard": false,
-  "words": [
-   [
-    "ohayo",
-    "おはようございます"
-   ]
-  ],
-  "clear": []
+  "words": [],
+  "clear": [],
+  "emo": "bright"
+ },
+ {
+  "key": "ln-18mkp4n",
+  "speaker": "eric",
+  "text": "How did it go?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "tired"
+ },
+ {
+  "key": "ln-1rarxx8",
+  "speaker": "emi",
+  "text": "I got it. Well. I may have told them B2 can keep every machine on this island running for another ten years.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "bright"
+ },
+ {
+  "key": "ln-1faal93",
+  "speaker": "emi",
+  "text": "With the right contractor, I said. So, welcome aboard. Tomorrow you and I should have a proper chat about what you can actually do.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "bright"
+ },
+ {
+  "key": "ln-139xjag",
+  "speaker": "mio",
+  "text": "Okay, I'm going home.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "tired"
  },
  {
   "key": "ln-1nuypj",
@@ -1260,7 +1883,8 @@
   "lang": "en",
   "overheard": false,
   "words": [],
-  "clear": []
+  "clear": [],
+  "emo": "hesitant"
  },
  {
   "key": "ln-10hhlz4",
@@ -1274,43 +1898,71 @@
     "外人"
    ]
   ],
-  "clear": []
+  "clear": [],
+  "emo": "hesitant"
  },
  {
-  "key": "ln-19kzim6",
+  "key": "ln-1hidfwu",
   "speaker": "mio",
-  "text": "This morning, the train doors... then the copier. And Kenji says the gate opened by itself, everybody's talking about it.",
+  "text": "On the train you said 待って and the doors just stopped. And Mori-san says 動いて to that copier every morning for thirty years, and today it works for you.",
+  "lang": "en",
+  "overheard": false,
+  "words": [
+   [
+    "matte",
+    "待って"
+   ],
+   [
+    "ugoite",
+    "動いて"
+   ]
+  ],
+  "clear": [],
+  "emo": "low"
+ },
+ {
+  "key": "ln-15gccr3",
+  "speaker": "mio",
+  "text": "And now everybody upstairs is talking about the lobby gate. That was 開けて, I guess?",
+  "lang": "en",
+  "overheard": false,
+  "words": [
+   [
+    "akete",
+    "開けて"
+   ]
+  ],
+  "clear": [],
+  "emo": "low"
+ },
+ {
+  "key": "ln-rr7eej",
+  "speaker": "mio",
+  "text": "And the rack, 止まって. That one I asked you, so... that one is my fault.",
+  "lang": "en",
+  "overheard": false,
+  "words": [
+   [
+    "matte",
+    "まって"
+   ],
+   [
+    "tomatte",
+    "止まって"
+   ]
+  ],
+  "clear": [],
+  "emo": "dry"
+ },
+ {
+  "key": "ln-h3lmo",
+  "speaker": "mio",
+  "text": "And Mori-san came back from lunch with seven clean cups. He won't tell me why, he just smiles.",
   "lang": "en",
   "overheard": false,
   "words": [],
-  "clear": []
- },
- {
-  "key": "ln-9cx6cd",
-  "speaker": "mio",
-  "text": "This morning, the train doors... and then the copier.",
-  "lang": "en",
-  "overheard": false,
-  "words": [],
-  "clear": []
- },
- {
-  "key": "ln-k8jmz9",
-  "speaker": "mio",
-  "text": "My door too. I saw it.",
-  "lang": "en",
-  "overheard": false,
-  "words": [],
-  "clear": []
- },
- {
-  "key": "ln-tp52j4",
-  "speaker": "mio",
-  "text": "And the rack, at lunch.",
-  "lang": "en",
-  "overheard": false,
-  "words": [],
-  "clear": []
+  "clear": [],
+  "emo": "puzzled"
  },
  {
   "key": "ln-6jz48a",
@@ -1319,7 +1971,83 @@
   "lang": "en",
   "overheard": false,
   "words": [],
-  "clear": []
+  "clear": [],
+  "emo": "low"
+ },
+ {
+  "key": "ln-1ipea20",
+  "speaker": "mio",
+  "text": "...Yeah. Me neither.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "low"
+ },
+ {
+  "key": "ln-vysu1s",
+  "speaker": "mio",
+  "text": "Mm. Very funny.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "deadpan"
+ },
+ {
+  "key": "ln-ocmm04",
+  "speaker": "mio",
+  "text": "Ah... great. The station made a ticket about the doors. I told them it's the sensor, so now they want B2 to check the sensor.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "groan"
+ },
+ {
+  "key": "ln-1ulch7h",
+  "speaker": "mio",
+  "text": "It was supposed to come to me. ...Okay, I'm giving it to you.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "low"
+ },
+ {
+  "key": "ln-wz8s26",
+  "speaker": "mio",
+  "text": "You're the IT guy. You tell them it's the sensor.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "dry"
+ },
+ {
+  "key": "ln-16463ao",
+  "speaker": "mio",
+  "text": "Take the 8:40 tomorrow, okay? I'm in the front car. I want to see how you, um... fix a sensor.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "teasing"
+ },
+ {
+  "key": "ln-15xvgtf",
+  "speaker": "mio",
+  "text": "It's the 8:40, tomorrow. And if anybody asks, it was the sensor. Don't sleep through it, 外人.",
+  "lang": "en",
+  "overheard": false,
+  "words": [
+   [
+    "gaijin",
+    "外人"
+   ]
+  ],
+  "clear": [],
+  "emo": "dry"
  },
  {
   "key": "ln-9bh9si",
@@ -1333,7 +2061,8 @@
     "おはよう"
    ]
   ],
-  "clear": []
+  "clear": [],
+  "emo": "amused"
  },
  {
   "key": "ln-5mpbdo",
@@ -1342,7 +2071,8 @@
   "lang": "en",
   "overheard": false,
   "words": [],
-  "clear": []
+  "clear": [],
+  "emo": "deadpan"
  },
  {
   "key": "ln-ldyry2",
@@ -1351,7 +2081,18 @@
   "lang": "en",
   "overheard": false,
   "words": [],
-  "clear": []
+  "clear": [],
+  "emo": "low"
+ },
+ {
+  "key": "oh-2zff04",
+  "speaker": "kenji",
+  "text": "あれ？",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "puzzled"
  },
  {
   "key": "oh-1dltuqt",
@@ -1360,7 +2101,8 @@
   "lang": "ja",
   "overheard": true,
   "words": [],
-  "clear": []
+  "clear": [],
+  "emo": "low"
  },
  {
   "key": "oh-1aenxld",
@@ -1372,7 +2114,8 @@
   "clear": [
    "B2",
    "コンサルタント"
-  ]
+  ],
+  "emo": "casual"
  },
  {
   "key": "oh-1etvxoe",
@@ -1381,6 +2124,7 @@
   "lang": "ja",
   "overheard": true,
   "words": [],
-  "clear": []
+  "clear": [],
+  "emo": "surprised"
  }
 ]
