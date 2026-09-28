@@ -201,14 +201,17 @@ export async function trainPlace(game) {
       const lamp = rbox(0.26, 0.05, 0.03, null, { x: dx, y: md === 'land' ? top + 0.02 : top + 0.05, z: zo, r: 0.01, m: lampShut, cast: false });
       doorSets.add(lamp); doorLamps.push(lamp);
       doorSets.add(rbox(DOOR_W - 0.04, 0.004, 0.1, '#d8b447', { x: dx, y: 0.003, z: LZ - 0.07, r: 0.002, cast: false }));
+      // the leaves hang just outside the wall (outside-sliding doors) and both slide toward the middle of the car
+      // over the wall, the far one further, so nothing ever has to pass through the wall or the rounded corner
       for (const s of [-1, 1]) {
         const leaf = new THREE.Group();
-        leaf.add(rbox(DOOR_W / 2 - 0.012, hH, 0.034, '#56698a', { r: 0.01 }));
+        leaf.add(rbox(DOOR_W / 2 - 0.004, hH, 0.03, '#56698a', { r: 0.01 }));
         const wy = Math.max(0.08, hH - 0.24);
-        leaf.add(rbox(DOOR_W / 2 - 0.12, Math.min(0.2, hH * 0.4), 0.04, null, { y: wy, r: 0.015, m: emissive('#b9d3e6', '#9fc2dc', 0.35) }));
-        leaf.add(rbox(0.035, hH - 0.02, 0.042, '#e0b83a', { x: -s * (DOOR_W / 4 - 0.022), y: 0.01, r: 0.008, cast: false }));
-        leaf.position.set(dx + s * DOOR_W / 4, 0.037, LZ + T / 2);
-        doorSets.add(leaf); myLeaves.push({ g: leaf, x0: leaf.position.x, s });
+        leaf.add(rbox(DOOR_W / 2 - 0.1, Math.min(0.2, hH * 0.4), 0.036, null, { y: wy, r: 0.015, m: emissive('#b9d3e6', '#9fc2dc', 0.35) }));
+        leaf.add(rbox(0.03, hH - 0.02, 0.038, '#e0b83a', { x: -s * (DOOR_W / 4 - 0.02), y: 0.01, r: 0.008, cast: false }));
+        const far = s * Math.sign(dx) > 0;
+        leaf.position.set(dx + s * DOOR_W / 4, 0.037, LZ + T + (far ? 0.094 : 0.058));
+        doorSets.add(leaf); myLeaves.push({ g: leaf, x0: leaf.position.x, s, far });
       }
     }
   }
@@ -283,7 +286,7 @@ export async function trainPlace(game) {
   function setDoors(k) {
     // the leaves slide into the wall pocket; once they're mostly in, they're hidden (the low cut wall can't cover them)
     for (const d of doorLeaves) { const dx = Math.sign(d.x0) * DOOR_X; d.m.position.x = d.x0 + (d.x0 < dx - 0.1 ? -1 : 1) * k * (DOOR_W / 2 - 0.02); d.m.visible = false; }
-    for (const d of myLeaves) { const toC = -Math.sign(d.x0); const far = d.s * Math.sign(d.x0) > 0; d.g.position.x = d.x0 + toC * k * (far ? DOOR_W - 0.02 : DOOR_W / 2 - 0.01); d.g.visible = !(car.mode === 'port' && k > 0.9); }
+    for (const d of myLeaves) { const toC = -Math.sign(d.x0); d.g.position.x = d.x0 + toC * k * (d.far ? DOOR_W - 0.01 : DOOR_W / 2 - 0.005); d.g.visible = true; }
     for (const l of doorLamps) l.material = k > 0.3 ? lampOpen : lampShut;
   }
 
@@ -398,7 +401,10 @@ export async function trainPlace(game) {
       prevM = m;
       // doors
       if (st.chimeT >= 0) { st.chimeT += dt; if (st.chimeT > 3 && !st.hold) st.doorWant = 0; }
-      st.door += (st.doorWant - st.door) * Math.min(1, dt * (st.doorWant ? 3 : 2));
+      // while they creep shut the closing chime keeps going, so a kotodama can cut it off mid-note
+      if (st.slide) { st.chimeLoop = (st.chimeLoop ?? 2.2) - dt; if (st.chimeLoop <= 0) { st.chimeLoop = 2.6; sfx('chime'); } }
+      if (st.slide) { const s = st.slide; s.t += dt; const k = Math.min(1, s.t / s.dur); st.door = s.from + (s.to - s.from) * k; if (k >= 1) st.slide = null; }
+      else if (!st.frozen) st.door += (st.doorWant - st.door) * Math.min(1, dt * (st.doorWant ? 3 : 2));
       if (st.hold && st.door < st.holdAt) st.door = st.holdAt;
       setDoors(st.door);
       if (st.door > 0.3) nav.unblock('doors');
@@ -418,10 +424,19 @@ export async function trainPlace(game) {
         st.stopAt = st.dist + D; st.stopX = st.stopAt;           // the station's centre lines up with the car when stopped
         sfx('brake'); game.event('approach');
       },
-      doorsOpen: () => { st.doorWant = 1; st.chimeT = -1; st.hold = false; sfx('door'); },
-      doorsClose: () => { st.doorWant = 0; st.hold = false; st.chimeT = -1; sfx('door'); },
+      doorsOpen: () => { st.doorWant = 1; st.chimeT = -1; st.hold = false; st.slide = null; st.frozen = false; sfx('door'); },
+      // { to, ms }: a slow, steady slide from where they are to `to` (1 open, 0 shut) over ms; without ms, the quick close
+      doorsClose: ({ to = 0, ms } = {}) => {
+        st.hold = false; st.chimeT = -1; st.doorWant = to;
+        if (ms) { st.slide = { from: st.door, to, t: 0, dur: ms / 1000 }; sfx('doorslow'); cam.closeOn([0, 0.45], 1.0); } // lifts the car above the text box so the doors stay in view else { st.slide = null; sfx('door'); }
+      },
       chime: () => { st.chimeT = 0; sfx('chime'); game.event('chime'); },
-      doorsHold: () => { st.hold = true; st.holdAt = Math.max(0.45, st.door); st.doorWant = st.holdAt; sfx('no'); },
+      // kotodama: they freeze dead where they are, with the effect; otherwise they bounce back a little, as before
+      doorsHold: async ({ kotodama } = {}) => {
+        st.slide = null; st.hold = true; st.chimeT = -1;
+        if (kotodama) { st.holdAt = st.door; st.doorWant = st.door; st.frozen = true; await game.kotodama(myLeaves.map((d) => d.g), { focus: [0, 0.55], zoom: 1.35 }); cam.release(); return; }
+        st.holdAt = Math.max(0.45, st.door); st.doorWant = st.holdAt; sfx('no');
+      },
       wake: ({ who = 'kuroda' }) => { const r = people[who]; if (!r || !r.hips) return; r.act = null; r.head.rotation.set(0.1, 0, 0); },
       bag: async ({ state }) => {
         const p0 = foodBag.position.clone();
@@ -481,7 +496,8 @@ export async function trainPlace(game) {
     P.hooks.doorsOpen();
     game.event('arrived');
   }
-  st.stopX = 1e6; P._st = st;
+  st.stopX = 1e6; P._st = st; P._setDoors = setDoors;
+  P.kotodamaTargets = (name) => (name === 'doors' ? myLeaves.map((d) => d.g) : []);
   kitty.userData.tail.rotation.y = 0;
   return P;
 }

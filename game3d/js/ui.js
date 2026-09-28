@@ -80,9 +80,15 @@ function playVoice(key, { rate = 1, muffle = false } = {}, gen = voiceGen) {
     a.play().then(() => started(a, gen)).catch(() => {});
   } catch { /* no audio */ }
 }
+// sounds that can be cut short (the door chime stops mid-note when a kotodama freezes the doors)
+const liveSfx = {};
+export function stopSfx(kind, ms = 40) {
+  const g = liveSfx[kind]; if (!g || !actx) return; delete liveSfx[kind];
+  const t = actx.currentTime; g.gain.cancelScheduledValues(t); g.gain.setValueAtTime(g.gain.value, t); g.gain.linearRampToValueAtTime(0, t + ms / 1000);
+}
 export function sfx(kind) {
   const c = ac(); if (!c || muted) return;
-  const t = c.currentTime, g = c.createGain(); g.connect(c.destination);
+  const t = c.currentTime, g = c.createGain(); g.connect(c.destination); liveSfx[kind] = g;
   const tone = (f, t0, d, v = 0.12, type = 'sine') => { const o = c.createOscillator(); o.type = type; o.frequency.value = f; const gg = c.createGain(); gg.gain.setValueAtTime(0, t + t0); gg.gain.linearRampToValueAtTime(v, t + t0 + 0.01); gg.gain.exponentialRampToValueAtTime(0.0001, t + t0 + d); o.connect(gg); gg.connect(g); o.start(t + t0); o.stop(t + t0 + d + 0.05); };
   if (kind === 'chime') { tone(784, 0, 0.9, 0.09); tone(659, 0.35, 1.1, 0.09); tone(523, 0.7, 1.4, 0.08); }
   else if (kind === 'ok') { tone(1320, 0, 0.12, 0.08, 'triangle'); tone(1760, 0.1, 0.18, 0.07, 'triangle'); }
@@ -98,6 +104,26 @@ export function sfx(kind) {
     thump(c, g, t + 0.56, 0.06, 70);
   }
   else if (kind === 'lift') { tone(1046, 0, 0.6, 0.07); }
+  else if (kind === 'kotodama') {
+    // the word taking hold: a low tone that swells in, a fifth above it, and the lights' hum (50 Hz with a slow wobble)
+    const o = c.createOscillator(), o2 = c.createOscillator(), og = c.createGain();
+    o.type = 'sine'; o.frequency.setValueAtTime(98, t); o.frequency.exponentialRampToValueAtTime(82, t + 2.4);
+    o2.type = 'sine'; o2.frequency.setValueAtTime(147, t); o2.frequency.exponentialRampToValueAtTime(123, t + 2.4);
+    og.gain.setValueAtTime(0, t); og.gain.linearRampToValueAtTime(0.16, t + 0.35); og.gain.setValueAtTime(0.16, t + 1.2); og.gain.exponentialRampToValueAtTime(0.0001, t + 3.0);
+    o.connect(og); o2.connect(og); og.connect(g); o.start(t); o2.start(t); o.stop(t + 3.1); o2.stop(t + 3.1);
+    const h = c.createOscillator(), hf = c.createBiquadFilter(), hg = c.createGain(), lfo = c.createOscillator(), lg = c.createGain();
+    h.type = 'sawtooth'; h.frequency.value = 50; hf.type = 'lowpass'; hf.frequency.value = 260;
+    lfo.frequency.value = 7; lg.gain.value = 0.012; lfo.connect(lg); lg.connect(hg.gain);
+    hg.gain.setValueAtTime(0, t); hg.gain.linearRampToValueAtTime(0.03, t + 0.15); hg.gain.setValueAtTime(0.03, t + 1.6); hg.gain.linearRampToValueAtTime(0, t + 2.2);
+    h.connect(hf); hf.connect(hg); hg.connect(g); h.start(t); lfo.start(t); h.stop(t + 2.3); lfo.stop(t + 2.3);
+  }
+  else if (kind === 'doorslow') {
+    // doors sliding slowly: a long, soft band of noise
+    const n = noise(c, 3.2), f = c.createBiquadFilter(), gg = c.createGain();
+    f.type = 'bandpass'; f.Q.value = 0.7; f.frequency.value = 420;
+    gg.gain.setValueAtTime(0, t); gg.gain.linearRampToValueAtTime(0.025, t + 0.4); gg.gain.setValueAtTime(0.025, t + 2.6); gg.gain.linearRampToValueAtTime(0, t + 3.2);
+    n.connect(f); f.connect(gg); gg.connect(g); n.start(t);
+  }
   else if (kind === 'clack') {
     // the carriage going over a rail joint: two dull clunks (low noise + a low body), then a little rumble
     thump(c, g, t, 0.11, 58); thump(c, g, t + 0.13, 0.08, 52);

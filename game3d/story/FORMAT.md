@@ -287,3 +287,9 @@ export default {
 
 ### Music
 Each place has its own loop (train calm, gate lively, office office; after work, night). Voices duck it. To change it in a scene: `{ hook: 'music', name: 'night' }` (`calm`, `office`, `lively`, `night`, or `null` for silence).
+
+### Kotodama (a word taking hold)
+- `{ do: 'doorsClose', to: 0.35, ms: 20000 }` (train): slow steady close to `to` (1 open, 0 shut) over `ms`; no `ms` = the quick close.
+- `{ do: 'doorsHold', kotodama: true }` (train): freeze the doors where they are, with the kotodama effect; without `kotodama` they bounce back to about half open as before.
+- `{ do: 'kotodama', target: 'doors' }`: the effect on its own on a place's named target (shimmer on its edges, lights dip and hum, low tone, cuttable sounds like the chime stop, text box clears). The place does the freezing; ask for new targets in REQUESTS.md.
+- `gesture` `point` works on chibi people only; on Mio it does nothing.

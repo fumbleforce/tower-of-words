@@ -20,6 +20,9 @@ The new premise is wired (FORMAT.md, "Eric, Mio, phrases and overheard Japanese"
 
 - (done) `bow`, plus `gesture`, `headphones` and train `bag`; the builder has already swapped the narrated bows, the nine fingers, the shrug, the finger to the lips, the ski jump, the headphones and the sliding bag for these steps. (`headphones` has since been removed: Mio has no headphones prop; the hook does nothing.)
 
+## Done (builder, 2026-09-28, second batch)
+6. `doorsClose` takes `to` and `ms`: a steady slide over `ms` with a soft door sound, and the closing chime repeats while they move. It also lifts the camera a little so the doors stay above the text box. `doorsHold` with `kotodama: true` freezes them exactly where they are and plays the kotodama effect: the chime cuts off mid-note, a cold shimmer runs along the door edges, the lights dip and hum, a low tone swells, and the text box clears while it happens (about 2.6 s). The doors stay part-open until the doors open again. The effect is also a general hook: `{ do: 'kotodama', target: 'doors' }`, and places can name more targets later (copier, gate). `gesture` `point` does nothing on Mio (her model has no arm rig for it); on chibi people it works.
+
 ## Done (builder, 2026-09-28)
 3. `{ do: 'hint', what: 'say', text }` points at the Say button with `text` (and it pulses). The button is also taught automatically the first time Eric learns a word, and lights up whenever a goal answers to a word he knows.
 4. Commuters keep arriving while the gate is shut or jammed and wait to the left of the readers with their phones out; they flow again once the gate opens. Three commuters in all.

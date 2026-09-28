@@ -8,6 +8,7 @@ import { GLTFLoader } from '../vendor/loaders/GLTFLoader.js';
 
 const DIR = new URL('../assets/mio/', import.meta.url).href;
 export const V = () => '?v=' + encodeURIComponent(window.BUILD || '');
+const HELD = 1e-6;
 export let IDLE_T = 0.0; // set from the page for testing
 export function setIdleT(v) { IDLE_T = v; }
 
@@ -324,7 +325,7 @@ export async function loadMio({ height = 1.12, colours = MIO_COLOURS } = {}) {
   // idle: the walk clip held still at a frame with the feet together, plus a small breath
   const idleClip = clips.walk.clone(); idleClip.name = 'idle';
   actions.idle = mixer.clipAction(idleClip);
-  actions.idle.timeScale = 0;
+  actions.idle.timeScale = HELD;
   let cur = null, curName = '';
   function setState(name) {
     if (name === curName) return;
@@ -332,19 +333,29 @@ export async function loadMio({ height = 1.12, colours = MIO_COLOURS } = {}) {
     curName = name;
     const a = actions[name];
     a.reset(); a.setEffectiveWeight(1);
-    if (name === 'idle') { a.time = IDLE_T; a.timeScale = 0; }
-    if (name === 'sit') { a.time = sitT(); a.timeScale = 0; }
+    if (name === 'idle') { a.time = IDLE_T; a.timeScale = HELD; }
+    if (name === 'sit') { a.time = sitT(); a.timeScale = HELD; }
     a.fadeIn(prev ? 0.2 : 0).play();
     if (prev && prev !== a) prev.fadeOut(0.2);
     cur = a;
   }
-  let t = 0;
+  let t = 0, breath = 0;
+  // three.js only writes a bone when the clip's value changes, so on a held frame whatever we add on top (breath,
+  // bow, the foot fix) would pile up frame after frame: that was her floating and her feet jiggling. So every frame
+  // the bones go back to what the mixer last gave them before the extras are added again.
+  const bones = []; model.traverse((o) => { if (o.isBone) bones.push([o, o.position.clone(), o.quaternion.clone()]); });
+  const snapBones = () => { for (const b of bones) { b[1].copy(b[0].position); b[2].copy(b[0].quaternion); } };
+  const restoreBones = () => { for (const b of bones) { b[0].position.copy(b[1]); b[0].quaternion.copy(b[2]); } };
   function update(dt, speed = 1) {
     t += dt;
     actions.walk.timeScale = speed;
+    // the held idle/sit frames don't rewrite the hips every frame, so the breath has to be taken back off first,
+    // or it piles up (that was her floating and her feet jiggling)
+    restoreBones();
     mixer.update(dt);
+    snapBones();
     if (curName !== 'sit') { hips.position.x = hipRest.x; hips.position.z = hipRest.z; }
-    if (curName === 'idle' || curName === 'sit') hips.position.y += Math.sin(t * 2.0) * 0.004;
+    if (curName === 'idle' || curName === 'sit') { breath = Math.sin(t * 2.0) * 0.004; hips.position.y += breath; }
     if (curName !== 'sit') fixFeet();
     if (pose.bow) { spine.rotateX(pose.bow * 0.6); spine2 && spine2.rotateX(pose.bow * 0.4); }
   }
@@ -355,7 +366,7 @@ export async function loadMio({ height = 1.12, colours = MIO_COLOURS } = {}) {
   root.updateMatrixWorld(true);
   const sitHip = new THREE.Vector3(); hips.getWorldPosition(sitHip); root.worldToLocal(sitHip);
   cur = null; curName = ''; mixer.stopAllAction();
-  setState('idle');
+  setState('idle'); snapBones();
   update(0);
   // put her in a seat: the hips land on (x, seatTop + 0.07, z), facing ry
   function sitAt(x, seatTop, z, ry) {
