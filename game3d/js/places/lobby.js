@@ -121,7 +121,7 @@ export async function lobbyPlace(game) {
 
   const spots = {
     entrance_in: [0, Z - 0.8], bench_l: [-3.9, 3.2], bench_r: [3.6, 1.95], before_gate: [0.93, BZ + 0.55], after_gate: [0, BZ - 0.9],
-    lift_front: [-1.0, -Z + 0.6], counter_front: [-4.2, 1.1], desk_front: [2.1, BZ + 0.72], outside: [0, Z + 1.5],
+    lift_front: [-1.0, -Z + 0.6], counter_front: [-4.2, 1.4], desk_front: [2.1, BZ + 0.72], outside: [0, Z + 1.5],
   };
   const seats = { bench_r: { x: 3.6, z: 1.15, y: 0.29, top: 0.29, ry: 0 }, bench_l: { x: -3.9, z: 2.4, y: 0.29, top: 0.29, ry: 0 } };
   const rigAnchor = (rig, h = 1.25) => (v) => { rig.root.getWorldPosition(v); v.y += h; return v; };
@@ -139,7 +139,7 @@ export async function lobbyPlace(game) {
     guard: { label: 'Mr. Ishibashi', kind: 'person', anchor: rigAnchor(w.guard), ...at(2.1, BZ + 0.72, 2.35, BZ - 0.6) },
     kuroda: { label: 'Mr. Hamada', kind: 'person', anchor: rigAnchor(w.man), spot: () => [w.man.root.position.x, w.man.root.position.z + 0.6], face: () => [w.man.root.position.x, w.man.root.position.z], enabled: () => w.man.root.visible && !w.man._walk },
     aoi: { label: 'Aoi', kind: 'person', anchor: rigAnchor(w.aoi), spot: () => (w.aoi.seated ? [3.6, 1.95] : [w.aoi.root.position.x, w.aoi.root.position.z + 0.6]), face: () => [w.aoi.root.position.x, w.aoi.root.position.z], enabled: () => w.aoi.root.visible && !w.aoi._walk },
-    kuro: { label: 'Receptionist', kind: 'person', anchor: rigAnchor(w.kuro), ...at(-4.2, 1.1, -4.2, -0.05) },
+    kuro: { label: 'Receptionist', kind: 'person', anchor: rigAnchor(w.kuro), ...at(-4.2, 1.4, -4.2, 0.18) },
     tama: { label: 'Tama', verb: 'Pet', kind: 'person small', anchor: v3(3.45, 0.55, BZ + 0.42), ...at(3.45, BZ + 1.05, 3.45, BZ + 0.42) },
     reader_l: { label: 'Card reader', kind: 'thing', anchor: v3(-0.93, 1.0, BZ), ...at(-0.93, BZ + 0.48, -0.93, BZ), act: () => readerTap(0), enabled: () => !st.gateOpen },
     reader_r: { label: 'Card reader', kind: 'thing', anchor: v3(0.93, 1.0, BZ), ...at(0.93, BZ + 0.48, 0.93, BZ), act: () => readerTap(1), enabled: () => !st.gateOpen },

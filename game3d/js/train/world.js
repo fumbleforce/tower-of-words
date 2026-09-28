@@ -127,6 +127,8 @@ void main(){
     float d = segDist(p, base, base - sh * hTop);
     shade = max(shade, smoothstep(0.55, 0.3, d));
   }
+  // the train and its beam throw one long soft band on the water, well off to the side of the car (it runs 17 m up)
+  shade = max(shade, 0.75 * smoothstep(2.6, 1.1, abs(p.y - 5.2)));
   col = mix(col, col * uShadow, shade * 0.78);
 
   // sun glints off the wave facets
