@@ -1,12 +1,12 @@
-"""Build proto2/gallery/index.html from art/production/manifest.json (webp previews, large grid, lightbox, prompt per image)."""
+"""Build legacy/proto2/gallery/index.html from art/production/manifest.json (webp previews, large grid, lightbox, prompt per image)."""
 import json, os, html, subprocess
 ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..')
 SRC = os.path.join(ROOT, 'art', 'production')
-OUT = os.path.join(ROOT, 'proto2', 'gallery')
+OUT = os.path.join(ROOT, 'legacy', 'proto2', 'gallery')
 os.makedirs(OUT, exist_ok=True)
 TITLES = {'R': 'Round 6 retries', 'O': 'Basement office background (Planning Office 7)', 'M': 'Main character options', 'A': 'A. New characters', 'B': 'B. Cast expression sets (RDBT)', 'C': 'C. Environments', 'D': 'D. Story scenes (RDBT and JANIMA)'}
 NOTES = {
-    'O': 'Four seeds on RDBT. Seed 504 now replaces game/img/bg/office.webp; the old sunny version is kept as office-old.webp.',
+    'O': 'Four seeds on RDBT. Seed 504 now replaces legacy/game/img/bg/office.webp; the old sunny version is kept as office-old.webp.',
     'M': 'Ten directions for the player character, two seeds each on RDBT, waist-up on plain grey. Note: several came out with tanned skin despite "fair pale skin" in the prompt.',
     'R': 'The five weak scenes from round 6, rewritten: the camera position and facing are stated, emotions sit inside each character block, and anime style anchors are added. Originals from round 6 are shown first in each scene, then the retries (2 seeds each on RDBT, One Obsession and JANIMA). Captions describe what is actually in each image.',
     'A': 'Two seeds per character (s101, s102), then four expressions on the picked seed. Model: RDBT Anima. Oguri and Ren are rejected; expression sets are on hold until style, model and cast are settled.',
@@ -33,7 +33,7 @@ if any(e['batch'] == 'R' for e in m):
     for scene in ['copyroom', 'shootout', 'swim', 'volleyball', 'romance']:
         figs = ''
         for mdl, lab in (('rdbtAnima', 'rdbt'), ('oneObsessionAnima', 'oneObsession'), ('janima', 'janima')):
-            src = os.path.join(ROOT, 'proto2', 'local6', f'{mdl}-{scene}.webp')
+            src = os.path.join(ROOT, 'legacy', 'proto2', 'local6', f'{mdl}-{scene}.webp')
             if os.path.exists(src):
                 dst = f'R-orig-{scene}-{lab}.webp'; shutil.copy(src, os.path.join(OUT, dst))
                 figs += fig(dst, f'{scene} round 6 original · {lab}')

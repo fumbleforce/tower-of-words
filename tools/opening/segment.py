@@ -1,6 +1,6 @@
-"""Test segment of the anime opening: intro + verse 1 lines 1-2 (0 to 21.2 s of game/audio/music/opening-tv.mp3).
+"""Test segment of the anime opening: intro + verse 1 lines 1-2 (0 to 21.2 s of legacy/game/audio/music/opening-tv.mp3).
 Six art slots, each staged with the shot-staging skill (every field), and the cut list that uses them.
-Nothing here is approved yet: Jørgen picks one candidate per slot on proto2/opening/shots.html before any animation."""
+Nothing here is approved yet: Jørgen picks one candidate per slot on legacy/proto2/opening/shots.html before any animation."""
 
 # slot id -> staging note (all fields of the skill) and candidate files under art/opening/base (name-seed.png)
 SLOTS = [

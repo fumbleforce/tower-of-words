@@ -1,7 +1,7 @@
 """Local LLM comparison for Amakawa NPC conversation (Emi) + a daily-request generator.
 Starts llama-server per model, runs a scripted conversation, records speed, JSON validity and transcripts.
 Usage: ~/ai/sd/venv/bin/python tools/llm_test.py [model_key ...]
-Output: proto2/llm/data/<model_key>.json"""
+Output: legacy/proto2/llm/data/<model_key>.json"""
 import json, os, re, subprocess, sys, time, urllib.request
 
 HOME = os.path.expanduser('~')

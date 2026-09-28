@@ -1,25 +1,25 @@
-// Voice every `say` line in game/data/script.js with the cast's chosen voices, loudness-normalised.
-// Output: game/audio/voice/<key>.mp3 and game/audio/voice/index.js (key = fnv(char|text)).
+// Voice every `say` line in legacy/game/data/script.js with the cast's chosen voices, loudness-normalised.
+// Output: legacy/game/audio/voice/<key>.mp3 and legacy/game/audio/voice/index.js (key = fnv(char|text)).
 import fs from 'node:fs';
 import path from 'node:path';
 import { execFileSync } from 'node:child_process';
 import { run, spent } from './rep.mjs';
-import { SCENES as DAY1, SPELLS } from '../game/data/script.js';
-import { SCENES as D2 } from '../content/day2.js';
-import { SCENES as D3 } from '../content/day3.js';
-import { SCENES as D4 } from '../content/day4.js';
-import { SCENES as D5 } from '../content/day5.js';
+import { SCENES as DAY1, SPELLS } from '../legacy/game/data/script.js';
+import { SCENES as D2 } from '../legacy/content/day2.js';
+import { SCENES as D3 } from '../legacy/content/day3.js';
+import { SCENES as D4 } from '../legacy/content/day4.js';
+import { SCENES as D5 } from '../legacy/content/day5.js';
 const SCENES = { ...DAY1, ...D2, ...D3, ...D4, ...D5, __spells: SPELLS };
 
 const ROOT = path.join(path.dirname(new URL(import.meta.url).pathname), '..');
-const OUT = path.join(ROOT, 'game/audio/voice');
+const OUT = path.join(ROOT, 'legacy/game/audio/voice');
 const RAW = path.join(ROOT, 'art/voice-raw');
 fs.mkdirSync(OUT, { recursive: true }); fs.mkdirSync(RAW, { recursive: true });
 
 export const fnv = s => { let x = 0x811c9dc5; for (const c of s) { x ^= c.codePointAt(0); x = Math.imul(x, 0x01000193) >>> 0; } return x.toString(16).padStart(8, '0'); };
 export const plain = s => s.replace(/\{([^}|]+)(?:\|[^}]*)?\}/g, '$1');
 
-const R2 = path.join(ROOT, 'proto2/audition/r2');
+const R2 = path.join(ROOT, 'legacy/proto2/audition/r2');
 const mm = (voice, extra = {}) => ({ kind: 'minimax', voice, extra });
 const clone = (ref, refText) => ({ kind: 'clone', ref, refText });
 const VOICES = {
@@ -27,7 +27,7 @@ const VOICES = {
   emi: mm('Japanese_CalmLady', { volume: 0.55 }),
   rei: mm('Japanese_ColdQueen'),
   kaori: mm('Japanese_DependableWoman'),
-  // Mio = candidate A (proto2/voice-mio/mio-a.mp3), chosen 2026-09-25: the voice-design clip, cloned for every line.
+  // Mio = candidate A (legacy/proto2/voice-mio/mio-a.mp3), chosen 2026-09-25: the voice-design clip, cloned for every line.
   mio: clone(path.join(ROOT, 'tools/voice-refs/mio-a.wav'), 'ミオ。……べつに、ゲームしてるだけ。話しかけてもいいけど、つまんないよ。あ、そのお菓子、ちょっとちょうだい。'),
   ishibashi: clone(path.join(ROOT, 'tools/voice-refs/ishibashi-ref12.wav'), '止まって。IDカード、見せて。…はい、次の人。ここは毎朝、何百人も通るんだ。顔はだいたい覚えてる。知らない顔は、止める。それが俺の仕事だ。'),
   goro: clone(path.join(ROOT, 'tools/voice-refs/goro-ref12.wav'), 'おや、いい天気だね。今日もトマトがよく育っているよ。このトマトはね、毎朝水をやって、話しかけてるんだ。大丈夫だよ、って。そうすると、よく育つんだよ。'),
@@ -67,7 +67,7 @@ async function designRef(ch, v) {
 }
 
 const lines = [];
-// Engine-generated lines: prices and change (kanji numbers must match game/main.js kanjiNum()).
+// Engine-generated lines: prices and change (kanji numbers must match legacy/game/main.js kanjiNum()).
 const DIG = ['', '一', '二', '三', '四', '五', '六', '七', '八', '九'];
 function kanjiNum(n) { let out = ''; for (const [v, u] of [[1000, '千'], [100, '百'], [10, '十']]) { const d = Math.floor(n / v); if (d) out += (d > 1 ? DIG[d] : '') + u; n %= v; } return out + (n ? DIG[n] : ''); }
 const payLines = new Set(['足りないよ。', 'ちょうどね。ありがとう。']);

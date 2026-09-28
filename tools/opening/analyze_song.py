@@ -1,4 +1,4 @@
-"""Beat, downbeat, section and vocal-phrase analysis of game/audio/music/opening.mp3 for the anime opening cut sheet.
+"""Beat, downbeat, section and vocal-phrase analysis of legacy/game/audio/music/opening.mp3 for the anime opening cut sheet.
 Needs the Demucs vocal stem in art/opening/audio/htdemucs_ft/opening/vocals.wav (see GUIDE). Writes art/opening/audio/analysis.json.
 Run: ~/ai/sd/venv/bin/python tools/opening/analyze_song.py"""
 import json, os

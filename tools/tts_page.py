@@ -1,10 +1,10 @@
-"""Build proto2/tts/index.html: local TTS models next to the Replicate voices used in the slice."""
+"""Build legacy/proto2/tts/index.html: local TTS models next to the Replicate voices used in the slice."""
 import json, os, shutil, subprocess, sys, html
 sys.path.insert(0, '/home/jorgen/ai/tts')
 from lines import LINES, REFS, DESIGN, fnv
 
 REPO = '/home/jorgen/repo/japanese'
-D = f'{REPO}/proto2/tts'
+D = f'{REPO}/legacy/proto2/tts'
 RAW = f'{D}/raw'
 
 
@@ -26,7 +26,7 @@ if os.path.exists(f'{RAW}/qwen-design.wav'):
     norm(f'{RAW}/qwen-design.wav', f'{D}/qwen-design.mp3')
 for ch, lines in LINES.items():
     for i, text in enumerate(lines):
-        ref = f'{REPO}/game/audio/voice/{fnv(ch + "|" + text)}.mp3'
+        ref = f'{REPO}/legacy/game/audio/voice/{fnv(ch + "|" + text)}.mp3'
         if os.path.exists(ref):
             shutil.copy(ref, f'{D}/ref-{ch}-{i}.mp3')
     shutil.copy(REFS[ch][0], f'{D}/source-{ch}.mp3')

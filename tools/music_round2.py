@@ -1,5 +1,5 @@
-"""Round 2 of proto2/music: turn the raw takes from tools/music_inst.py into loops, soften the opening theme,
-measure the vocals in everything, and write proto2/music/round2.json for tools/music_page.py.
+"""Round 2 of legacy/proto2/music: turn the raw takes from tools/music_inst.py into loops, soften the opening theme,
+measure the vocals in everything, and write legacy/proto2/music/round2.json for tools/music_page.py.
 Run with ~/ai/sep/bin/python tools/music_round2.py (needs demucs + librosa, CPU only)."""
 import os, json, subprocess, sys
 sys.path.insert(0, os.path.dirname(__file__))
@@ -7,7 +7,7 @@ from make_loop import make_loop
 from vocal_check import measure
 
 REPO = '/home/jorgen/repo/japanese'
-D = f'{REPO}/proto2/music'
+D = f'{REPO}/legacy/proto2/music'
 RAW = os.path.expanduser('~/ai/music-raw')
 SEP = os.path.expanduser('~/ai/sep/out/htdemucs_ft')
 BPM = {'office': 75, 'night': 70}

@@ -1,6 +1,6 @@
 # Story diagnosis: week one (days 1–5)
 
-Method: story-sense (state diagnosis), story-analysis, scene-sequencing (goal → conflict → disaster; reaction → dilemma → decision), key-moments, character-arc, dialogue (text, subtext, context). Read from the branch transcripts in game/notes/transcripts/.
+Method: story-sense (state diagnosis), story-analysis, scene-sequencing (goal → conflict → disaster; reaction → dilemma → decision), key-moments, character-arc, dialogue (text, subtext, context). Read from the branch transcripts in notes/transcripts/.
 
 ## State
 The week is at story-sense state 4.5 / 5 ("plot without pacing / without purpose" in places): scenes mostly work on their own, and the spine (probation, the closure memo, Monday's announcement) is sound, but day one breaks the rules of setup and continuity, which spoils the magic reveal and makes the world feel stitched together.

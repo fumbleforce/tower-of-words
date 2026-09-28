@@ -22,7 +22,7 @@ To use: in the **Load Image** node, pick or upload your start image (it shows IN
 Tips: keep "static camera" for sprites; subtle motion works better than big actions; the model can add a wink or an expression change you didn't ask for, so reroll the seed.
 - `location-bg-rdbt.json`: RDBT location background with no people, 1216×832 (the game's background shape). Prompts for the monorail, gate, copy room and Sales are in tools/locations1.py.
 
-## Video round 2 (proto2/video2)
+## Video round 2 (legacy/proto2/video2)
 - `video2-<source>-14b-lx.json`: Wan 2.2 I2V 14B fp8 (high and low noise experts) with the lightx2v 4-step LoRA. 4 steps, CFG 1, shift 5, 81 frames at 16 fps (5 s). About 3.5 min on the 3080; the 14 GB models stream from RAM. The best all-round choice in round 2.
 - `video2-<source>-dasiwa.json`: DaSiWa Wan 2.2 I2V 14B Lightspeed v11 (Civitai), speed-up baked in, no LoRA. Same settings and time. Best camera moves.
 - `video2-<source>-14b-anime.json`: the 14B setup plus the Civitai "Anime Style" LoRA (trigger "An1meStyl3, AnimeStyle") and, for portraits, the "live 2d dynamic wallpaper" LoRA on the low-noise expert.
@@ -42,7 +42,7 @@ The layout comes from a control image; the prompt stays short. The patches are i
 - `lllite-inpaint-remove-rdbt.json`: masked img2img with the LLLite inpainting patch (it gets the picture and the mask). Removes or replaces one region without a seam; used to take the man out of the interior master. Mask: white = repaint.
 - `composite-window-blend-rdbt.json`: the last step of the window composite: a masked img2img at denoise 0.4 over a pasted window view, so glass and light match the room (tools/blockout/composite.py does the whole chain).
 
-## Prompt lab recipes (proto2/promptlab, art/PROMPTS.md "Local playbook")
+## Prompt lab recipes (legacy/proto2/promptlab, art/PROMPTS.md "Local playbook")
 - `promptlab-scenery-oneobs.json`: One Obsession, outdoor scenery from a short plain prompt (the exterior monorail master ext-ref-oneobs-906). 1216×832, Euler A 30 steps, CFG 5.
 - `promptlab-interior-window-oneobs.json`: One Obsession, straight-on side window of the monorail (int-oneobs-901).
 - `promptlab-derive-crop-oneobs.json`: a closer shot from our own master: load the cropped, scaled-up part of the master (tools/promptlab_guides/m906-crop-mid.png) and repaint at strength 0.5.

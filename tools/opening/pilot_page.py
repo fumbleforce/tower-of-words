@@ -1,4 +1,4 @@
-"""Build proto2/opening/shots.html for the one-shot pilot: the exterior master from cloud models (staging note, prompt,
+"""Build legacy/proto2/opening/shots.html for the one-shot pilot: the exterior master from cloud models (staging note, prompt,
 candidates with their check), the model and price comparison, and the revised shot list for the whole TV edit.
 Run: python3 tools/opening/pilot_page.py"""
 import os, sys, html, subprocess
@@ -7,7 +7,7 @@ from shotlist import SHOTS, CLOUD_MASTERS
 
 ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..')
 CL = os.path.join(ROOT, 'art', 'opening', 'cloud')
-OUT = os.path.join(ROOT, 'proto2', 'opening')
+OUT = os.path.join(ROOT, 'legacy', 'proto2', 'opening')
 CAND = os.path.join(OUT, 'cand')
 os.makedirs(CAND, exist_ok=True)
 e = html.escape

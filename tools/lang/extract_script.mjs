@@ -1,10 +1,10 @@
-// Dump every Japanese string in game/data/script.js as JSON lines for annotate.py.
+// Dump every Japanese string in legacy/game/data/script.js as JSON lines for annotate.py.
 // Usage: node tools/lang/extract_script.mjs > out.json
 import { pathToFileURL } from 'node:url';
 import path from 'node:path';
 
 const root = path.resolve(path.dirname(new URL(import.meta.url).pathname), '../..');
-const mod = await import(pathToFileURL(path.join(root, 'game/data/script.js')).href);
+const mod = await import(pathToFileURL(path.join(root, 'legacy/game/data/script.js')).href);
 const out = [];
 const hasJa = (s) => /[぀-ヿ一-鿿]/.test(s);
 

@@ -1,5 +1,5 @@
 """Version B of the opening's exterior shot: Wan 2.2 I2V 14B (fp8 + lightx2v 4-step LoRA, the GUIDE "Video" recipe) from the approved
-master art/approved/monorail-bay-ref3.png. Three seeds, 81 frames at 16 fps (5 s), 960x528.
+master art/refs/monorail-bay-ref3.png. Three seeds, 81 frames at 16 fps (5 s), 960x528.
 Output: art/opening/wan/bay3-wan-<seed>.mp4 (silent) and the workflow in tools/workflows/opening-wan14-lx.json.
 Run: ~/ai/sd/venv/bin/python tools/opening/wan_pilot.py"""
 import os, sys, json

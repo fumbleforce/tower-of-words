@@ -1,6 +1,6 @@
 """Tokenise the game's Japanese lines and write data/lang/lines.json.
 
-Sources: game/data/script.js (via extract_script.mjs) and game/notes/day1-draft.md.
+Sources: legacy/game/data/script.js (via extract_script.mjs) and notes/day1-draft.md.
 Usage (venv): ~/ai/lang/.venv/bin/python tools/lang/annotate.py [--review out.txt] [--text "日本語"]
 """
 import argparse
@@ -12,7 +12,7 @@ import subprocess
 from common import JA_RE, OUT, ROOT, has_kanji, kata2hira
 from tokens import Tokenizer, detect_grammar, public, strip_markup
 
-DRAFT = os.path.join(ROOT, 'game', 'notes', 'day1-draft.md')
+DRAFT = os.path.join(ROOT, 'notes', 'day1-draft.md')
 
 
 def draft_lines(path=DRAFT):

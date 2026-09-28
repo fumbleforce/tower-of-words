@@ -5,15 +5,15 @@ Patterns collected from strong community prompts and our own tests. Anima reads 
 
 ## Reference prompt (Jørgen, 2026-09-25): monorail over the bay
 
-Result: art/approved/monorail-bay-ref.webp. This is the target quality and the target prompt style: a style line, then a few plain sentences about what's in the picture, one idea each. No staging jargon, no stacked weights, no long lists.
+Result: art/refs/monorail-bay-ref.webp. This is the target quality and the target prompt style: a style line, then a few plain sentences about what's in the picture, one idea each. No staging jargon, no stacked weights, no long lists.
 
 ```
 anime screenshot, anime coloring, 2d, cel shading, clean lineart, (detailed anime background art, hand-painted anime background, painted clouds, no humans, scenery, showing a monorail train riding high above a Bay on a curving elevated monorail. The monorail is crossing toward a large man-made island city with office towers and other buildings. the office towers are catching the low morning sun, the calm sea below with sunlight glittering on the water, early morning sun low on the horizon. dominant clear sky blue and sea blue, broad white cloud and glass, sparse warm sunrise orange accents, bright hopeful light. No other city in the background, only island and monorail going towards it.
 ```
 
-## Local playbook (tested 2026-09-25, proto2/promptlab)
+## Local playbook (tested 2026-09-25, legacy/proto2/promptlab)
 
-Tested on the 3080 with 450+ renders. Every render was judged by a separate reviewer that saw only the picture and a one-line intent, with the model names hidden. Full tables and every image: proto2/promptlab. Runner: tools/promptlab.py. Loadable workflows: tools/workflows/promptlab-*.json.
+Tested on the 3080 with 450+ renders. Every render was judged by a separate reviewer that saw only the picture and a one-line intent, with the model names hidden. Full tables and every image: legacy/proto2/promptlab. Runner: tools/promptlab.py. Loadable workflows: tools/workflows/promptlab-*.json.
 
 **Where we stand.** Local models don't reach Jørgen's reference. The best local scenery (One Obsession) scores 4/5 for finish and about 3/5 for closeness to the reference, and roughly one render in three is free of logic errors. Plan on 6 to 8 seeds per shot and a check of every image.
 
@@ -65,7 +65,7 @@ Only from our own approved master; Jørgen's images are a quality bar and never 
 
 ## Reference prompt 2 (Jørgen via ChatGPT, GPT image, medium effort, 2026-09-25): the exterior shot
 
-Result: art/approved/monorail-bay-ref2.png (reference only; render our own). This is the model for cloud scene prompts: the camera stated plainly, everything placed in frame terms (lower left, right horizon), counts, colours, and one short "No ..." line. No direction, cab or story wording.
+Result: art/approved/plaza/monorail-bay-ref2.png (reference only; render our own). This is the model for cloud scene prompts: the camera stated plainly, everything placed in frame terms (lower left, right horizon), counts, colours, and one short "No ..." line. No direction, cab or story wording.
 
 ```
 anime screenshot, anime coloring, 2d, cel shading, clean lineart, detailed anime background art, hand-painted anime background, no humans, scenery, wide view from high above a calm bay. A white elevated concrete monorail beam on round pillars curves from the lower left across the water to an office island on the right horizon. A short white monorail train of four cars sits on top of the beam in the lower left. The sea is calm with sunlight glitter. Early morning, low sun just above the horizon left of the city, soft clouds. Dominant sky blue and sea blue, broad white, sparse warm sunrise orange accents. No second track, no boats, no mountains behind the city.
@@ -79,7 +79,7 @@ Result: art/approved/monorail-side-ref.webp, made by img2img from monorail-bay-r
 showing a view looking directly at one carriage from the side in the train, carriage covering the image end to end, window dimly reflecting only sea and sky, sunlight obscuring the interior.
 ```
 
-Interior, also img2img from the masters (art/approved/monorail-interior-ref.webp). The straight-on side window from a seat is an angle the model handles well; a long aisle toward a front window is not.
+Interior, also img2img from the masters (art/refs/monorail-interior-ref.webp). The straight-on side window from a seat is an angle the model handles well; a long aisle toward a front window is not.
 
 ```
 interior view inside the monorail train, window showing sea and sky. 2 seats visible, window is fully visible, straight on angle. Main character sitting in the seat looking out the window: brown haired, black rounded glasses, wearing checkered office shirt of an engineer, tired expression.

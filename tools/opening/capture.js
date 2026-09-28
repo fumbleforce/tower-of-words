@@ -1,4 +1,4 @@
-// Frame-exact capture of proto2/opening with headless Chromium (GPU WebGL), piped into ffmpeg with the song.
+// Frame-exact capture of legacy/proto2/opening with headless Chromium (GPU WebGL), piped into ffmpeg with the song.
 // Needs Playwright (installed in ~/ai/opening) and a static server on the repo root:
 //   python3 -m http.server 8765 --directory ~/repo/japanese &
 //   NODE_PATH=~/ai/opening/node_modules node tools/opening/capture.js video out.mp4 [fps=30] [t0] [t1]
@@ -32,7 +32,7 @@ async function grab(p, t, q = 0.93) {
     const dur = await p.evaluate(() => DUR);
     const t1 = +(rest[2] || dur);
     const ff = spawn('ffmpeg', ['-y', '-v', 'error', '-f', 'image2pipe', '-framerate', String(fps), '-c:v', 'mjpeg', '-i', '-',
-      '-ss', String(t0), '-t', String(t1 - t0), '-i', path.join(ROOT, 'game/audio/music/opening-tv.mp3'),
+      '-ss', String(t0), '-t', String(t1 - t0), '-i', path.join(ROOT, 'legacy/game/audio/music/opening-tv.mp3'),
       '-af', `afade=t=in:d=0.12,afade=t=out:st=${Math.max(0, t1 - t0 - 0.3)}:d=0.3`,
       '-c:v', 'libx264', '-preset', 'slow', '-crf', '19', '-pix_fmt', 'yuv420p', '-c:a', 'aac', '-b:a', '192k', '-shortest', '-movflags', '+faststart', out],
       { stdio: ['pipe', 'inherit', 'inherit'] });

@@ -9,7 +9,7 @@ const voiceFor = sp => sp === 'リン' ? 'f' : LOW.includes(sp) ? 'g' : 'm';
 const out = new Map();
 const add = (text, voice = 'f') => { if (!text) return; const t = norm(text); const key = fnv(voice + '|' + t); out.set(key, { key, text: t, voice }); };
 const w = {};
-for (const f of fs.readdirSync(path.join(root, 'data')).filter(f => /^floor\d+\.js$/.test(f)).sort()) vm.runInNewContext(fs.readFileSync(path.join(root, 'data', f), 'utf8'), { window: w });
+for (const f of fs.readdirSync(path.join(root, 'legacy', 'data')).filter(f => /^floor\d+\.js$/.test(f)).sort()) vm.runInNewContext(fs.readFileSync(path.join(root, 'legacy', 'data', f), 'utf8'), { window: w });
 const KANA = 'あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやゆよらりるれろわをんがぎぐげござじずぜぞだぢづでどばびぶべぼぱぴぷぺぽ';
 for (const f of w.FLOORS) {
   (f.kana || []).forEach(k => add(k.k));

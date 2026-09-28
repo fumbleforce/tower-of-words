@@ -1,9 +1,9 @@
-"""Version A of the opening's exterior shot (layered cel animation) from the approved master art/approved/monorail-bay-ref3.png,
+"""Version A of the opening's exterior shot (layered cel animation) from the approved master art/refs/monorail-bay-ref3.png,
 upscaled 2x (art/opening/pilot/bay3.png, 3344x1882). Local and free.
   matte     train matte: BiRefNet matte of a crop around the train, intersected with a hand-measured outline of the train above the
             beam's top edge (the matte alone also keeps the beam and pillars) -> art/opening/pilot/train.png (RGBA, crop coords)
   clean     clean plate: the train inpainted out with One Obsession (masked, denoise 1.0, three seeds) -> art/opening/pilot/clean-<seed>.png
-  masks     sky mask (for cloud drift) and sea sparkle points -> art/opening/pilot/sky.png, proto2/opening/sparkles.json
+  masks     sky mask (for cloud drift) and sea sparkle points -> art/opening/pilot/sky.png, legacy/proto2/opening/sparkles.json
 Run: ~/ai/sd/venv/bin/python tools/opening/layers.py <step>"""
 import os, sys, json
 import numpy as np
@@ -113,7 +113,7 @@ def masks(plate_path):
         if len(pts) >= 220:
             break
     json.dump({'w': W, 'h': H, 'pts': [[round(x / W, 4), round(y / H, 4)] for x, y in pts]},
-              open(os.path.join(ROOT, 'proto2', 'opening', 'sparkles.json'), 'w'))
+              open(os.path.join(ROOT, 'legacy', 'proto2', 'opening', 'sparkles.json'), 'w'))
     print('masks ok', len(pts), 'sparkle points')
 
 

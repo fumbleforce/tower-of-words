@@ -581,5 +581,5 @@ IF reiMagic (any cast Rei felt):
 - Every scene change goes through the floor panel or a narration line; the office is the only room visited more than once, and who is in it is stated each time (Mio leaves before you, is back after; Emi leaves for her meeting when you're back from Sales and is back at 17:50).
 - Nothing refers to what the player hasn't seen: the slippers and 「つながらない」 are set up in the office before the footsteps; 見せる appears at the gate and on the ID screen before Rei's spell; the map shows the dorm next to the station before Emi says 駅のとなり.
 - Old draft problems that no longer apply: the timed runaway (gone), the double 「動いて」 (gone with the coffee machine), the trade route and 「あれ、九部？」 (gone).
-- Pacing (tools/lang/pacing.py, 2026-09-25): every line flagged for Jørgen's profile was split or simplified; only the monorail announcement (GUIDE's exact words) carries more than one new item. Report: game/notes/pacing-day1-revised.md.
+- Pacing (tools/lang/pacing.py, 2026-09-25): every line flagged for Jørgen's profile was split or simplified; only the monorail announcement (GUIDE's exact words) carries more than one new item. Report: notes/pacing-day1-revised.md.
 - Lines marked (kept) keep their old voice files; every other line was voiced new.

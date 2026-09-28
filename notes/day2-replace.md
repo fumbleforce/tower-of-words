@@ -2,7 +2,7 @@
 
 Written 2026-09-25, after the day-1 revision. Day 2 has not been rewritten yet; this note says what has to change so it doesn't repeat day 1. GUIDE: "Day 2 must not repeat day 1 (the old day-2 copier and Rei scenes get replaced, not overlapped)."
 
-## What the current `content/day2.js` does that day 1 now does
+## What the current `legacy/content/day2.js` does that day 1 now does
 | Old day-2 scene | Overlap with the new day 1 |
 |---|---|
 | `day2_morning`: Emi messages "make ten copies of the handout", Mio messages "the B1 copier is broken again", the player pins time/place/thing | Day 1 is built around exactly this job: ten copies, the broken B1 copier, a meeting. |

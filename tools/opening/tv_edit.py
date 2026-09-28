@@ -1,5 +1,5 @@
 """TV-size edit (~89 s) of the opening theme, by cutting and splicing only (no EQ or other processing).
-Source: game/audio/music/opening.mp3 (left untouched). Output: game/audio/music/opening-tv.mp3 and art/opening/audio/tv_map.json
+Source: legacy/game/audio/music/opening.mp3 (left untouched). Output: legacy/game/audio/music/opening-tv.mp3 and art/opening/audio/tv_map.json
 (segments and the edit's beat grid, mapped from the original's grid).
 Structure: intro + verse 1 + chorus (orig 0-66.01) | verse 2 lines 1-2 (orig 75.63-88.42) | the chorus's last line
 "世界が少し動き出す" (orig 56.42-66.01) | a 1.2 s tail faded out. Every splice is on a downbeat (bar line) and nudged to the
@@ -65,7 +65,7 @@ if __name__ == '__main__':
     out, segs, edges = build()
     wav = os.path.join(D, 'opening-tv.wav')
     sf.write(wav, out.T, SR, subtype='PCM_24')
-    mp3 = os.path.join(ROOT, 'game', 'audio', 'music', 'opening-tv.mp3')
+    mp3 = os.path.join(ROOT, 'legacy', 'game', 'audio', 'music', 'opening-tv.mp3')
     subprocess.run(['ffmpeg', '-y', '-v', 'error', '-i', wav, '-c:a', 'libmp3lame', '-q:a', '0', mp3], check=True)
     dur = out.shape[1] / SR
     # map the original beat grid into the edit

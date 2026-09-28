@@ -1,4 +1,4 @@
-"""Build proto2/opening/shots.html: the approved monorail shot (C), batch-1 masters for intro + verse 1 (ID, staging line, my check,
+"""Build legacy/proto2/opening/shots.html: the approved monorail shot (C), batch-1 masters for intro + verse 1 (ID, staging line, my check,
 prompt), and the revised shot list. Run: python3 tools/opening/masters_page.py"""
 import os, sys, html, subprocess, re
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -6,7 +6,7 @@ from shotlist import SHOTS
 
 ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..')
 M = os.path.join(ROOT, 'art', 'opening', 'masters')
-OUT = os.path.join(ROOT, 'proto2', 'opening')
+OUT = os.path.join(ROOT, 'legacy', 'proto2', 'opening')
 MD = os.path.join(OUT, 'masters')
 os.makedirs(MD, exist_ok=True)
 e = html.escape

@@ -1,5 +1,5 @@
 """Tsubasa face redo: repaint only her face (brow to chin, profile edge) in the house RDBT style.
-Base: art/production/D2/new-tsubasa-208.png (approved design, reframed on proto2/cast-fixed). Her face came out with a long jutting
+Base: art/production/D2/new-tsubasa-208.png (approved design, reframed on legacy/proto2/cast-fixed). Her face came out with a long jutting
 profile and heavy contour shading, unlike the rest of the cast. Hair, outfit, pose and framing must stay identical, so the face
 area is cropped, upscaled, inpainted with a latent noise mask (same graph as tools/puppet_frames.py), scaled back and pasted
 through a feathered mask. The result is then placed into the reframed canvas at (56, 144), where reframe.py put the original.

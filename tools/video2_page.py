@@ -1,8 +1,8 @@
-"""Build proto2/video2/index.html: the same three sources through each local video option, side by side, plus the puppet demo."""
+"""Build legacy/proto2/video2/index.html: the same three sources through each local video option, side by side, plus the puppet demo."""
 import os, json, html
 
 ROOT = os.path.join(os.path.dirname(__file__), '..')
-OUT = os.path.join(ROOT, 'proto2/video2')
+OUT = os.path.join(ROOT, 'legacy/proto2/video2')
 stats = json.load(open(os.path.join(OUT, 'stats.json')))
 notes = json.load(open(os.path.join(OUT, 'notes.json')))
 
@@ -61,9 +61,9 @@ for src, title, img in SOURCES:
                  f'<div class="grid {"wide" if src == "monorail" else ""}">{cards}</div></section>')
 
 optlist = ''.join(f'<li><b>{esc(l)}.</b> {esc(d)}</li>' for _, l, d in OPTIONS)
-LINES = [('game/audio/voice/00e13cec.mp3', '……ふふ。ミオ。今ゲーム中。話しかけないで。'),
-         ('game/audio/voice/1a1d6c60.mp3', '静かな場所。……と、ゲーム。人は、ちょっときらい。'),
-         ('game/audio/voice/f5108407.mp3', '新人くん、土曜日、ひま？')]
+LINES = [('legacy/game/audio/voice/00e13cec.mp3', '……ふふ。ミオ。今ゲーム中。話しかけないで。'),
+         ('legacy/game/audio/voice/1a1d6c60.mp3', '静かな場所。……と、ゲーム。人は、ちょっときらい。'),
+         ('legacy/game/audio/voice/f5108407.mp3', '新人くん、土曜日、ひま？')]
 buttons = ''.join(f'<button data-src="../../{p}">▶ {esc(t)}</button>' for p, t in LINES)
 
 page = f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Video round 2</title>
@@ -91,7 +91,7 @@ button:hover{{background:#e6f3f1}}
 @media(max-width:800px){{.grid,.grid.wide{{grid-template-columns:1fr}}.puppetwrap{{grid-template-columns:1fr}}.head img{{width:90px}}}}
 </style></head><body><main>
 <h1>Video round 2: three local options, same sources</h1>
-<div class="intro"><p>Round 1 (proto2/video) was rejected: the train rippled like a worm and the women barely moved. Here every option gets the same three images:
+<div class="intro"><p>Round 1 (legacy/proto2/video) was rejected: the train rippled like a worm and the women barely moved. Here every option gets the same three images:
 Rei and Mio from the approved RDBT sprites, and the monorail scene from round 1. All local on the RTX 3080 (10 GB) with 60 GB of RAM; no cloud.
 Times are ComfyUI's own execution time (queue waiting excluded). Peak GPU is the whole card, including about 1.4 GB used by the desktop.
 The notes under each clip come from checking extracted frames, not from the prompt.</p><ul>{optlist}</ul>

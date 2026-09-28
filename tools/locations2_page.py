@@ -1,4 +1,4 @@
-"""Build proto2/locations2/: review page for day-1 locations round 2 (basement office from scratch, dorm room).
+"""Build legacy/proto2/locations2/: review page for day-1 locations round 2 (basement office from scratch, dorm room).
 Shows the images listed in art/production/L2/picks.json ({"name": "note"}); rejects in art/production/L2/rejects.json
 ({"name": "reason"}) are listed as text at the end of each section."""
 import os, json, subprocess, html, re, sys
@@ -6,17 +6,17 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from locations2 import STAGING, OFFICE_FIX, OFFICE_FIX_P, WALL_VIEW_P, DORM_OPTIONS, DORM_VIEW_STAGING
 ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..')
 L2 = os.path.join(ROOT, 'art', 'production', 'L2')
-OUTD = os.path.join(ROOT, 'proto2', 'locations2')
+OUTD = os.path.join(ROOT, 'legacy', 'proto2', 'locations2')
 os.makedirs(OUTD, exist_ok=True)
 picks = json.load(open(os.path.join(L2, 'picks.json')))
 rejects = json.load(open(os.path.join(L2, 'rejects.json'))) if os.path.exists(os.path.join(L2, 'rejects.json')) else {}
 man = {e['name']: e for e in json.load(open(os.path.join(ROOT, 'art', 'production', 'manifest.json'))) if e['batch'] == 'L2'}
 
 SECTIONS = [
-    ('office', 'Basement office: Planning Office 7, B2', 'game/img/bg/office.webp',
+    ('office', 'Basement office: Planning Office 7, B2', 'legacy/game/img/bg/office.webp',
      'Redone from scratch, not from option 2. Asked for: a big forgotten room on basement level 2 with a four-desk block in the middle, Emi\'s desk facing it, Mio\'s gaming corner, ramen cups, filing cabinets, fluorescent tubes and no windows. '
      'RDBT gives every room plenty of floor but mostly puts the desks along the walls; only island-5402 has desks in the middle. It would not do a high corner view (four tries, all at eye level). The first image is the wide shot from the doorway.'),
-    ('dorm', 'Dorm room (end of day 1)', 'game/img/bg/dorm.webp',
+    ('dorm', 'Dorm room (end of day 1)', 'legacy/game/img/bg/dorm.webp',
      'His new company dorm room, seen for the first time at night after day 1. Small studio, bed with one pillow at the head end, desk, kitchenette, '
      'three unopened moving boxes that were sent ahead, and the company towers lit up outside the window. The current game image (grey) has pillows at both ends of the bed.'),
 ]

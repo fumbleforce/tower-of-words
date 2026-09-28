@@ -1,5 +1,5 @@
 """Prompt lab: how to get reference-level, logically correct scenery out of the LOCAL models.
-Jørgen's reference (art/approved/monorail-bay-ref.webp) came from a short plain prompt; this runs that prompt and
+Jørgen's reference (art/refs/monorail-bay-ref.webp) came from a short plain prompt; this runs that prompt and
 controlled variations of it, one factor at a time, and records the execution time of each render.
 
 Usage: ~/ai/sd/venv/bin/python tools/promptlab.py <batch> [<batch> ...]     batches: see BATCHES at the bottom
@@ -322,7 +322,7 @@ def derive_for(m, denoises=(0.55, 0.7, 0.8, 0.9), seeds=(601, 602), variant='pla
 
 # ---- style match (RETIRED 2026-09-25): repainting Jørgen's references was rejected ("very minor alterations to my images which I
 # told you not to use"). Kept only so the recorded results stay reproducible; do not run for new work. ----
-SIDE_EMPTY = os.path.join(ROOT, 'proto2', 'monorail', 'monorail-side-empty.webp')
+SIDE_EMPTY = os.path.join(ROOT, 'legacy', 'proto2', 'monorail', 'monorail-side-empty.webp')
 BG = STYLE + ', detailed anime background art, no humans, scenery, '
 STYLEMATCH = {  # name -> (source, w, h, prompt describing only what is visible)
     'bay': (MASTER_BAY, 1344, 768, BG + 'a white monorail train on a curving elevated concrete track on tall pillars high above a calm bay, '

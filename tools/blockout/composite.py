@@ -1,5 +1,5 @@
 """Final-approach interior by compositing (Jørgen's idea, 2026-09-25): start from his approved straight-on window shot
-(art/approved/monorail-interior-ref.webp), make it an empty seat bay at the game's size, and paste a separately rendered
+(art/refs/monorail-interior-ref.webp), make it an empty seat bay at the game's size, and paste a separately rendered
 view of the island station into the window, then blend with a light masked img2img pass.
 
 Steps (all RDBT Anima, short prompts that describe only what is visible):

@@ -1,4 +1,4 @@
-"""Build proto2/cast-fixed/: before/after for the reframed cast portraits (tools/reframe.py).
+"""Build legacy/proto2/cast-fixed/: before/after for the reframed cast portraits (tools/reframe.py).
 Before = the original render (896x1152); after = art/production/RF/fixed/<key>.webp (1008x1296, headroom and side room added).
 A thin red line on the 'before' image marks the frame edge the head or arms touched (from tools/framecheck.py)."""
 import os, sys, html, subprocess, json
@@ -6,7 +6,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from reframe import CAST, ROOT, FIXED
 from framecheck import check
 
-OUTD = os.path.join(ROOT, 'proto2', 'cast-fixed')
+OUTD = os.path.join(ROOT, 'legacy', 'proto2', 'cast-fixed')
 os.makedirs(OUTD, exist_ok=True)
 NAMES = {'emi': 'Emi', 'mc-it-guy': 'Main character', 'rei': 'Rei', 'mio': 'Mio', 'aoi': 'Aoi', 'kaori': 'Kaori', 'kuro': 'Kuro (玖路)',
          'kiyoko-camel': 'Kiyoko (camel coat, your pick)', 'yuzuki-e': 'Yuzuki (e-201, your pick)', 'nanami-g': 'Nanami (g-204, ID-card desk)',
