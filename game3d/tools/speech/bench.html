@@ -1,0 +1,28 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>Voice bench</title>
+<body style="background:#111;color:#ddd;font:14px system-ui">
+<pre id="log">voice bench: driven by bench.mjs</pre>
+<script type="module">
+import { loadRecogniser, transcribe, toMono16k, hasSpeech, trimSilence, engineInfo } from '../../js/speech.js';
+import { SPOKEN, candidatesFor } from '../../js/speech-match.js';
+const CANDIDATES = candidatesFor(Object.keys(SPOKEN));
+const log = (t) => { document.getElementById('log').textContent += '\n' + t; };
+// runs every clip through the recogniser; the matching happens in Node (bench.mjs) so it can be re-scored offline
+window.runBench = async ({ model, device, dtype, clips, score }) => {
+  const t0 = performance.now();
+  await loadRecogniser({ model, device, dtype });
+  const load = { ms: Math.round(performance.now() - t0), device: engineInfo.device };
+  log(`loaded ${model} on ${load.device} in ${load.ms} ms`);
+  const out = [];
+  for (const c of clips) {
+    const s = await toMono16k(await (await fetch(c)).arrayBuffer());
+    const speech = hasSpeech(s);
+    const r = speech ? await transcribe(trimSilence(s), score ? CANDIDATES : undefined) : { text: '', ms: 0 };
+    out.push({ clip: c, speech, text: r.text, ms: r.ms, free: r.free, scores: r.scores, sec: +(s.length / 16000).toFixed(2) });
+    log(`${c}  ${speech ? r.text : '(no speech)'}  ${r.ms} ms`);
+  }
+  return { load, out };
+};
+window.benchReady = true;
+</script>

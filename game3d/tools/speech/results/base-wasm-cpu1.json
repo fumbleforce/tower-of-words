@@ -1,0 +1,104 @@
+{
+ "label": "base-wasm-cpu1",
+ "model": "base",
+ "device": "wasm",
+ "cpu": 1,
+ "loadMs": 9571,
+ "recogniseMs": {
+  "median": 2805,
+  "p90": 3600,
+  "max": 3967
+ },
+ "textOnly": {
+  "perWord": {
+   "akete": {
+    "native": "5/5",
+    "eric": "2/5",
+    "misses": [
+     "eric.far: カテ?",
+     "eric.slow: カテ?",
+     "eric.train: カテイ?"
+    ]
+   },
+   "dashite": {
+    "native": "5/5",
+    "eric": "2/5",
+    "misses": [
+     "eric.clean: -",
+     "eric.phone: -",
+     "eric.train: ダシアイト"
+    ]
+   },
+   "irete": {
+    "native": "5/5",
+    "eric": "5/5",
+    "misses": []
+   },
+   "kite": {
+    "native": "4/5",
+    "eric": "4/5",
+    "misses": [
+     "eric.phone: かいっ",
+     "word.phone: つて"
+    ]
+   },
+   "matte": {
+    "native": "5/5",
+    "eric": "5/5",
+    "misses": []
+   },
+   "ohayo": {
+    "native": "5/5",
+    "eric": "5/5",
+    "misses": []
+   },
+   "sumimasen": {
+    "native": "5/5",
+    "eric": "5/5",
+    "misses": []
+   },
+   "tomatte": {
+    "native": "5/5",
+    "eric": "4/5",
+    "misses": [
+     "eric.far: しまって"
+    ]
+   },
+   "ugoite": {
+    "native": "5/5",
+    "eric": "4/5",
+    "misses": [
+     "eric.phone: よく言う"
+    ]
+   },
+   "yoroshiku": {
+    "native": "5/5",
+    "eric": "0/5",
+    "misses": [
+     "eric.clean: 喜悔しましょう",
+     "eric.far: 喜悪をお願いしまっすよ",
+     "eric.phone: 喜悔しません",
+     "eric.slow: 喜悔しましょう",
+     "eric.train: 喜悔しましょう"
+    ]
+   }
+  },
+  "perVariant": {
+   "clean": "18/20",
+   "far": "17/20",
+   "phone": "15/20",
+   "slow": "18/20",
+   "train": "17/20"
+  },
+  "total": "85/100 (85%)",
+  "falseAccepts": "6/979",
+  "falseHits": [
+   "eric-akete.far as kite: カテ?",
+   "eric-akete.phone as kite: あ、キャティ?",
+   "eric-akete.slow as kite: カテ?",
+   "eric-akete.train as kite: カテイ?",
+   "eric-tomatte.far as matte: しまって",
+   "eric-yoroshiku.phone as sumimasen: 喜悔しません"
+  ]
+ }
+}

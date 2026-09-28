@@ -1,0 +1,117 @@
+{
+ "label": "tiny-wasm-cpu1",
+ "model": "tiny",
+ "device": "wasm",
+ "cpu": 1,
+ "loadMs": 8183,
+ "recogniseMs": {
+  "median": 1485,
+  "p90": 1975,
+  "max": 2312
+ },
+ "perWord": {
+  "akete": {
+   "native": "5/5",
+   "eric": "0/5",
+   "misses": [
+    "eric.clean: OK",
+    "eric.far: お気持ちいい?",
+    "eric.phone: お会いしましょう",
+    "eric.slow: OK",
+    "eric.train: OK"
+   ]
+  },
+  "dashite": {
+   "native": "5/5",
+   "eric": "1/5",
+   "misses": [
+    "eric.clean: ダッシュ",
+    "eric.far: ダッシュ",
+    "eric.phone: ダッシャイッ",
+    "eric.train: ダッシャイッ"
+   ]
+  },
+  "irete": {
+   "native": "5/5",
+   "eric": "0/5",
+   "misses": [
+    "eric.clean: いいね",
+    "eric.far: いいね",
+    "eric.phone: OK",
+    "eric.slow: いいね",
+    "eric.train: OK"
+   ]
+  },
+  "kite": {
+   "native": "2/5",
+   "eric": "0/5",
+   "misses": [
+    "eric.clean: カイッ",
+    "eric.far: カイッ",
+    "eric.phone: カイッ",
+    "eric.slow: カイッ",
+    "eric.train: カイッ",
+    "word.clean: ちょっと",
+    "word.phone: おかしい",
+    "word.slow: ちょっと"
+   ]
+  },
+  "matte": {
+   "native": "5/5",
+   "eric": "5/5",
+   "misses": []
+  },
+  "ohayo": {
+   "native": "5/5",
+   "eric": "5/5",
+   "misses": []
+  },
+  "sumimasen": {
+   "native": "5/5",
+   "eric": "3/5",
+   "misses": [
+    "eric.phone: そういうことで、お店さん",
+    "eric.slow: そういうことで、お店をお店をお店をお店をお店をお店をお店をお店をお店をお"
+   ]
+  },
+  "tomatte": {
+   "native": "5/5",
+   "eric": "4/5",
+   "misses": [
+    "eric.far: じゃあ待って"
+   ]
+  },
+  "ugoite": {
+   "native": "5/5",
+   "eric": "0/5",
+   "misses": [
+    "eric.clean: どうも、お会いしましょう。",
+    "eric.far: どうも、",
+    "eric.phone: どうも、お会いしましょう。",
+    "eric.slow: どうも、",
+    "eric.train: お会いしましょう"
+   ]
+  },
+  "yoroshiku": {
+   "native": "5/5",
+   "eric": "5/5",
+   "misses": []
+  }
+ },
+ "perVariant": {
+  "clean": "14/20",
+  "far": "14/20",
+  "phone": "13/20",
+  "slow": "14/20",
+  "train": "15/20"
+ },
+ "total": "70/100 (70%)",
+ "falseAccepts": "5/980",
+ "falseHits": [
+  "eric-tomatte.clean as matte: ちょまーて",
+  "eric-tomatte.far as matte: じゃあ待って",
+  "eric-tomatte.phone as matte: ちょまーて",
+  "eric-tomatte.train as matte: またまで",
+  "neg-mori-design.clean as ohayo: 皆さん、おはようございます。"
+ ]
+}
