@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dialogue mock 1: Stage light</title>
+<style>
+@font-face { font-family: "Zen Kaku Gothic New"; src: url("../fonts/zkg-medium.woff2") format("woff2"); font-weight: 500; }
+@font-face { font-family: "Zen Kaku Gothic New"; src: url("../fonts/zkg-bold.woff2") format("woff2"); font-weight: 700; }
+:root {
+  --ink: #eef0f4; --ink-dim: #a9b1bf; --jp: #ffc9a8; --gl: #9aa6b8;
+  --night: 14, 18, 28;              /* the lobby's darkest navy, sampled from the backdrop */
+  --c-guard: #8ea2c8; --c-eric: #d9b98a;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; overflow: hidden; background: #2a2e36; color: var(--ink); font: 500 16px/1.45 "Zen Kaku Gothic New", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+.world { position: fixed; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+/* talking dims the room a little and pulls the eye to the middle, like a camera stop */
+.focus { position: fixed; inset: 0; pointer-events: none;
+  background:
+    linear-gradient(to top, rgba(var(--night), .94) 0, rgba(var(--night), .82) 120px, rgba(var(--night), .35) 250px, rgba(var(--night), 0) 360px),
+    radial-gradient(120% 90% at 50% 30%, transparent 55%, rgba(var(--night), .45) 100%); }
+
+/* portraits stand on the bottom edge of the screen, never float; the room's light is laid over them */
+.por { position: fixed; bottom: -150px; height: 620px; aspect-ratio: 597 / 768; transition: filter .25s, transform .25s; transform-origin: 50% 100%; }
+.por img { display: block; width: 100%; height: 100%; filter: saturate(.86) brightness(.95); }
+.por .grade { position: absolute; inset: 0; -webkit-mask: var(--src) center / contain no-repeat; mask: var(--src) center / contain no-repeat;
+  background: linear-gradient(180deg, rgba(255, 196, 150, .16) 0%, rgba(255, 196, 150, 0) 30%, rgba(24, 34, 58, 0) 48%, rgba(24, 34, 58, .78) 82%);
+  mix-blend-mode: multiply; }
+.por .rim { position: absolute; inset: 0; -webkit-mask: var(--src) center / contain no-repeat; mask: var(--src) center / contain no-repeat;
+  background: linear-gradient(100deg, rgba(255, 214, 170, .22) 0%, rgba(255, 214, 170, 0) 22%); mix-blend-mode: screen; }
+.por.guard { left: 20px; }
+.por.eric { right: -10px; height: 580px; bottom: -170px; }
+/* the listener steps back into the dark */
+.por.listen { filter: brightness(.38) saturate(.5) blur(.6px); transform: scale(.94); }
+
+.say { position: fixed; left: 470px; bottom: 44px; width: 560px; text-shadow: 0 1px 2px rgba(0,0,0,.7), 0 0 18px rgba(var(--night), .9); }
+.who { display: flex; align-items: baseline; gap: 12px; margin-bottom: 6px; }
+.nm { font-weight: 700; font-size: 19px; color: var(--c); letter-spacing: .01em; }
+.rl { font-size: 13px; color: var(--ink-dim); }
+.line { font-size: 23px; line-height: 1.5; min-height: 2em; }
+.jp { color: var(--jp); font-weight: 700; }
+.gl { color: var(--gl); font-size: .8em; white-space: nowrap; }
+.gx { color: #6d7688; filter: blur(.7px); }
+.more { position: absolute; right: 0; bottom: 4px; width: 0; height: 0; border-left: 6px solid transparent; border-right: 6px solid transparent; border-top: 7px solid var(--ink-dim); }
+[data-who="guard"] .say { --c: var(--c-guard); }
+[data-who="eric"] .say { --c: var(--c-eric); }
+
+/* motion: rise in, breathe, and a hop when an expression turns to surprise */
+@keyframes rise { from { transform: translateY(26px); opacity: 0; } }
+@keyframes breathe { 50% { transform: scaleY(1.006); } }
+@keyframes hop { 0%, 100% { translate: 0 0; } 35% { translate: 0 -14px; } 65% { translate: 0 2px; } }
+.por:not(.listen) img { animation: breathe 4.2s ease-in-out infinite; transform-origin: 50% 100%; }
+[data-face="surprised"] .por.eric { animation: hop .32s ease-out; }
+.say { animation: rise .22s ease-out; }
+.still *, .still *::before { animation: none !important; transition: none !important; }
+
+/* phone: the band takes the lower 45%, the speaker rises out of it, the listener is left out */
+@media (max-width: 600px) {
+  .focus { background: linear-gradient(to top, rgba(var(--night), .95) 0, rgba(var(--night), .9) 190px, rgba(var(--night), .4) 320px, rgba(var(--night), 0) 420px); }
+  .por { height: 400px; bottom: 150px; }
+  .por.guard { left: -34px; }
+  .por.eric { right: -34px; left: auto; height: 400px; bottom: 150px; }
+  .por.listen { display: none; }
+  .por .grade { background: linear-gradient(180deg, rgba(255, 196, 150, .14) 0%, rgba(255,196,150,0) 30%, rgba(24,34,58,0) 45%, rgba(var(--night), 1) 86%); }
+  .say { left: 16px; right: 16px; width: auto; bottom: 30px; }
+  .nm { font-size: 18px; }
+  .line { font-size: 20px; }
+}
+</style>
+</head>
+<body>
+<picture><source media="(max-width: 600px)" srcset="bg-lobby-390.webp"><img class="world" src="bg-lobby-1366.webp" alt=""></picture>
+<div class="focus"></div>
+<div class="por guard" data-p="guard"><img data-p="guard" alt=""><div class="grade"></div><div class="rim"></div></div>
+<div class="por eric" data-p="eric"><img data-p="eric" alt=""><div class="grade"></div><div class="rim"></div></div>
+<div class="say">
+  <div class="who"><span class="nm" data-f="name"></span><span class="rl" data-f="role"></span></div>
+  <div class="line" data-f="line"></div>
+  <span class="more"></span>
+</div>
+<script src="mock.js"></script>
+<script>document.querySelector(`.por.${document.documentElement.dataset.who === 'guard' ? 'eric' : 'guard'}`).classList.add('listen');</script>
+</body>
+</html>
