@@ -200,7 +200,7 @@ export default {
     akete_machine: [
       { do: 'machineDoor', state: 'open' },
       { do: 'emote', who: 'mio', kind: '…' },
-      "mio: ...That door has a card reader, you know.",
+      { say: 'mio', face: 'deadpan', text: "...That door has a card reader, you know." },
       { set: 'machine_open' },
       { set: 'door_magic' },
     ],
@@ -219,19 +219,19 @@ export default {
     ticket: [
       { set: 'got_ticket' },
       { do: 'meet', who: 'mio' },
-      "mio: Okay, your first ticket. I changed your screen to English, by the way.",
+      { say: 'mio', face: 'neutral', text: "Okay, your first ticket. I changed your screen to English, by the way." },
       '> TICKET #1. Copier, B2 copy room. Eats paper. Opened 1 April 1996.',
       { say: 'eric', face: 'surprised', text: 'Nineteen ninety-six?' },
       "mio: Yeah. It's kind of a tradition now, nobody closes it. Mori-san knows the copier, he can show you.",
       { say: 'mio', text: '森さん、{gaijin}にコピー機お願い。', overheard: true },
       { say: 'mori', text: '外国の方、ですよ。', overheard: true },
-      "mio: He says I should say gaikoku no kata. It's more polite. ...Anyway, go.",
+      { say: 'mio', face: 'embarrassed', text: "He says I should say gaikoku no kata. It's more polite. ...Anyway, go." },
       { do: 'walk', who: 'mori', to: 'copier_front', wait: true },
       { do: 'goal', text: 'Ticket #1: the copier.' },
     ],
     mio_busy: [
       { if: 'afternoon_on', then: ["mio: Now people upstairs ask me about the copier. ...Sorry, I'm busy.", { end: true }] },
-      "mio: Mm, sorry, I'm in the middle of something.",
+      { say: 'mio', face: 'tired', text: "Mm, sorry, I'm in the middle of something." },
     ],
     copier: [
       { set: 'copier_started' },
@@ -260,7 +260,7 @@ export default {
     ticket_done: [
       { set: 'ticket_closed' },
       "eric: The copier's fixed.",
-      "mio: Eh? The B2 copier? It's older than me, nobody can fix that.",
+      { say: 'mio', face: 'surprised', text: "Eh? The B2 copier? It's older than me, nobody can fix that." },
       'eric: I asked it nicely.',
       { do: 'emote', who: 'mio', kind: '…' },
       "mio: ...Okay. Okay, I'll close it. Um. It's lunch anyway.",
@@ -273,7 +273,7 @@ export default {
       { set: 'lunch_on' },
       '> 12:10.',
       { do: 'walk', who: 'mori', to: 'kitchen_table', wait: false },
-      "mio: I usually eat in the machine room. It's quiet, and nobody talks to me there.",
+      { say: 'mio', face: 'neutral', text: "I usually eat in the machine room. It's quiet, and nobody talks to me there." },
       { choice: [
         { text: 'Lunch with Mio, in the machine room', go: 'lunch_mio' },
         { text: 'Lunch with Mori, in the kitchenette', go: 'lunch_mori' },
@@ -292,8 +292,8 @@ export default {
       ] },
     ],
     mio_b2: [
-      "mio: Upstairs you have to bow to everybody all day, it's so tiring. Down here it's just me and these guys.",
-      "mio: They're from the nineties. If I don't watch them, they just... die.",
+      { say: 'mio', face: 'tired', text: "Upstairs you have to bow to everybody all day, it's so tiring. Down here it's just me and these guys." },
+      { say: 'mio', face: 'smile', text: "They're from the nineties. If I don't watch them, they just... die." },
       { go: 'mio_lunch_end' },
     ],
     mio_doors: [
@@ -322,7 +322,7 @@ export default {
       "mio: Wait. You try it. {tomatte}, it means stop. ...I want to see something.",
       { do: 'type', word: 'tomatte', from: 'mio', prompt: 'mio: Go on.' },
       { do: 'rackAlarm', state: 'off' },
-      { if: 'mio_warm >= 1', then: ['mio: ...Okay. You can eat here tomorrow also, if you want.'], else: ['mio: Huh. Okay.'] },
+      { if: 'mio_warm >= 1', then: [{ say: 'mio', face: 'embarrassed', text: "...Okay. You can eat here tomorrow also, if you want." }], else: ['mio: Huh. Okay.'] },
       { do: 'cam', back: true },
     ],
 
@@ -403,12 +403,12 @@ export default {
 
     gift_mio_coffee: [
       { set: 'gifted_mio' }, { do: 'bond', who: 'mio', add: 1 },
-      'mio: Oh, black. Nice, thank you.',
+      { say: 'mio', face: 'smile', text: "Oh, black. Nice, thank you." },
       '> She drinks half of it without looking away from her screen.',
     ],
     gift_mio_other: [
       { set: 'gifted_mio' },
-      "mio: Ah... thanks. It's a bit sweet for me. I'll drink it later, maybe.",
+      { say: 'mio', face: 'deadpan', text: "Ah... thanks. It's a bit sweet for me. I'll drink it later, maybe." },
     ],
     gift_mori_cornsoup: [
       { set: 'gifted_mori' }, { do: 'bond', who: 'mori', add: 1 },
@@ -446,14 +446,14 @@ export default {
       { if: 'gate_magic', then: ["mio: This morning, the train doors... then the copier. And Kenji says the gate opened by itself, everybody's talking about it."], else: ['mio: This morning, the train doors... and then the copier.'] },
       { if: 'door_magic', then: ['mio: My door too. I saw it.'] },
       { if: 'lunch_mio', then: ['mio: And the rack, at lunch.'] },
-      "mio: How are you doing that?",
+      { say: 'mio', face: 'surprised', text: "How are you doing that?" },
       { do: 'save' },
       { do: 'end' },
     ],
 
     // ------------------------------------------------------------------ greetings to Mio
-    ohayo_mio: ["mio: Ha, too polite. I'm not your boss. Just おはよう (ohayō) is fine."],
-    yoroshiku_mio: ['mio: We did that already, on the train.'],
+    ohayo_mio: [{ say: 'mio', face: 'smile', text: "Ha, too polite. I'm not your boss. Just おはよう (ohayō) is fine." }],
+    yoroshiku_mio: [{ say: 'mio', face: 'deadpan', text: "We did that already, on the train." }],
     sumimasen_mio: ['mio: Hm? What is it?'],
 
     // ------------------------------------------------------------------ things to poke
