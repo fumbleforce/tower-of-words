@@ -14,7 +14,8 @@ export const DEFAULTS = {
   voiceOn: true,
   quality: 'auto',        // 'auto' | 'low' | 'medium' | 'high' (post.js reads the tier; see qualityTier())
   reduceMotion: reduceDefault,
-  keySay: 'KeyQ',         // the Say key (KeyboardEvent.code); Talk stays on E, Space and Enter
+  keySay: 'KeyQ',
+  uiSize: 1,              // a multiplier on the viewport-based UI scale (0.85, 1, 1.2, 1.4)         // the Say key (KeyboardEvent.code); Talk stays on E, Space and Enter
 };
 // characters per second for each text speed (0 = all at once)
 export const CPS = { slow: 28, normal: 55, fast: 110, instant: 0 };
@@ -48,8 +49,17 @@ export function qualityTier() {
 }
 window.__qualityTier = qualityTier;
 
-// body classes that CSS reads
+// The UI scales with the screen (Jørgen, QHD: "default interface size is probably too small"): 1 at 1366 x 860 CSS
+// px and up to 2 on big screens, times the UI size setting. Phones keep 1 (their layout is built for the size).
+export function uiScale() {
+  const w = innerWidth, h = innerHeight, phone = w / h < 0.8 || w < 640;
+  const base = phone ? 1 : Math.max(1, Math.min(2, Math.min(w / 1366, h / 860)));
+  return +(base * (+settings.uiSize || 1)).toFixed(3);
+}
+// body classes and the --ui scale that CSS reads
 function apply() {
   document.body.classList.toggle('reduce-motion', !!settings.reduceMotion);
+  document.documentElement.style.setProperty('--ui', uiScale());
 }
+addEventListener('resize', () => apply());
 if (document.body) apply(); else addEventListener('DOMContentLoaded', apply);

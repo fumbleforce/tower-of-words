@@ -15,7 +15,8 @@ const rel = path.relative(ROOT, out).split(path.sep).join('/');
 const BASE = 'http://127.0.0.1:8771/';
 const gl = process.env.GL === 'gpu' ? ['--use-angle=vulkan', '--enable-features=Vulkan', '--ignore-gpu-blocklist', '--enable-gpu'] : ['--use-angle=swiftshader', '--enable-unsafe-swiftshader'];
 const b = await chromium.launch({ headless: true, args: gl });
-const SIZES = { desktop: [1366, 860], phone: [390, 844] };
+const ALL = { desktop: [1366, 860], qhd: [2560, 1440], phone: [390, 844] };
+const SIZES = Object.fromEntries((process.env.SIZES || 'desktop,phone').split(',').map((k) => [k, ALL[k]]));
 
 // 1. a frame of each place, for the thumbnails and the end-of-day photos
 if (!only || only.includes('end') || only.includes('load') || only.includes('save')) {
@@ -31,7 +32,9 @@ if (!only || only.includes('end') || only.includes('load') || only.includes('sav
 }
 
 // 2. each screen
-const SCREENS = ['title', 'settings', 'load', 'pause', 'save', 'loading', 'hud', 'hudfar', 'end'];
+const SCREENS = ['title', 'settings', 'load', 'pause', 'save', 'loading', 'hud', 'hudfar', 'end', 'act', 'actnext', 'talk', 'wait', 'goaltrain'];
+const QS = { hudfar: 'hud&far=-6,3&zoom=3.4', act: 'act&at=guard', actnext: 'act&at=guard&cycle=1', goaltrain: 'goal' };
+const PLACE = { goaltrain: 'train' };
 const results = [];
 for (const s of SCREENS.filter((x) => !only || only.includes(x))) {
   for (const [dev, [w, h]] of Object.entries(SIZES)) {
@@ -39,8 +42,8 @@ for (const s of SCREENS.filter((x) => !only || only.includes(x))) {
     const errs = [];
     p.on('pageerror', (e) => errs.push(e.message));
     p.on('console', (m) => { if (m.type() === 'error' && !/404|Failed to load resource/.test(m.text())) errs.push(m.text()); });
-    const inGame = ['pause', 'save', 'loading', 'end', 'hud', 'hudfar'].includes(s);
-    const q = `shell=${s === 'hudfar' ? 'hud&far=-6,2' : s}&pics=${encodeURIComponent('/' + rel + '/places')}${inGame ? '&place=gate&skip' : ''}`;
+    const inGame = !['title', 'settings', 'load'].includes(s);
+    const q = `shell=${QS[s] || s}&pics=${encodeURIComponent('/' + rel + '/places')}${inGame ? `&place=${PLACE[s] || 'gate'}&skip` : ''}`;
     await p.goto(`${BASE}game3d/index.html?${q}`);
     await p.waitForFunction(() => window.__shellReady, null, { timeout: 90000 }).catch(() => errs.push('timeout'));
     await p.waitForTimeout(900);
@@ -66,7 +69,7 @@ except Exception: font = ImageFont.load_default()
 tiles = []
 for s, d in by.items():
     ims = []
-    for dev in ('desktop', 'phone'):
+    for dev in ('desktop', 'qhd', 'phone'):
         if dev in d:
             im = Image.open(d[dev]).convert('RGB'); im = im.resize((int(im.width * H / im.height), H)); ims.append(im)
     w = sum(i.width for i in ims) + pad * (len(ims) - 1)

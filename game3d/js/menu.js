@@ -73,6 +73,7 @@ function trap(root, e) {
 const layers = [];     // open layers, top last: { el, close }
 function openLayer(elm, close) {
   const prev = document.activeElement;
+  for (const l of layers) l.el.classList.add('under');
   elm.hidden = false; elm.classList.remove('out'); void elm.offsetWidth; elm.classList.add('in');
   layers.push({ el: elm, close, prev });
   // focus at once (not in an animation frame: a slow frame would leave the keyboard on the page behind)
@@ -81,6 +82,7 @@ function openLayer(elm, close) {
 function closeLayer(elm) {
   const i = layers.findIndex((l) => l.el === elm); if (i < 0) return;
   const [l] = layers.splice(i, 1);
+  if (layers.length) layers[layers.length - 1].el.classList.remove('under');
   elm.classList.remove('in'); elm.classList.add('out');
   setTimeout(() => { if (!elm.classList.contains('in')) elm.hidden = true; }, 180);
   if (l.prev && l.prev.isConnected) l.prev.focus({ preventScroll: true });
@@ -218,6 +220,7 @@ function onTitleLeave() {
 const SEG = {
   textSpeed: [['slow', 'Slow'], ['normal', 'Normal'], ['fast', 'Fast'], ['instant', 'Instant']],
   quality: [['auto', 'Auto'], ['low', 'Low'], ['medium', 'Medium'], ['high', 'High']],
+  uiSize: [[0.85, 'Small'], [1, 'Normal'], [1.2, 'Large'], [1.4, 'Larger']],
 };
 function buildSettings() {
   let s = $('#settings'); if (s) return s;
@@ -226,19 +229,17 @@ function buildSettings() {
     <section class="pane" role="dialog" aria-modal="true" aria-labelledby="setTitle">
       <header><h2 id="setTitle">Settings</h2><button type="button" class="x" data-close aria-label="Close settings"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button></header>
       <div class="rows">
-        <h3>Text</h3>
         <div class="row"><span class="lbl" id="l-ts">Text speed</span><div class="seg" role="radiogroup" aria-labelledby="l-ts" data-key="textSpeed"></div></div>
         <div class="row"><span class="lbl" id="l-aa">Auto-advance<small>Lines move on once they've been spoken</small></span><button type="button" class="sw" role="switch" data-key="autoAdvance" aria-labelledby="l-aa"><i></i></button></div>
-        <h3>Sound</h3>
-        ${[['master', 'Master volume'], ['music', 'Music'], ['voice', 'Voices'], ['ambience', 'Ambience']].map(([k, l]) => `<label class="row"><span class="lbl">${l}</span><span class="rng"><input type="range" min="0" max="100" step="5" data-key="${k}" aria-label="${l}"><output></output></span></label>`).join('')}
-        <div class="row"><span class="lbl" id="l-vo">Voices on</span><button type="button" class="sw" role="switch" data-key="voiceOn" aria-labelledby="l-vo"><i></i></button></div>
-        <h3>Display</h3>
+        <div class="gap"></div>
+        ${[['master', 'Master volume'], ['music', 'Music'], ['voice', 'Voices'], ['ambience', 'Ambience']].map(([k, l]) => `<div class="row"><span class="lbl" id="l-${k}">${l}</span><span class="rng">${k === 'voice' ? '<button type="button" class="sw sm" role="switch" data-key="voiceOn" aria-label="Voices on or off"><i></i></button>' : ''}<input type="range" min="0" max="100" step="5" data-key="${k}" aria-labelledby="l-${k}"><output></output></span></div>`).join('')}
+        <div class="gap"></div>
         <div class="row"><span class="lbl" id="l-q">Graphics<small class="qnow"></small></span><div class="seg" role="radiogroup" aria-labelledby="l-q" data-key="quality"></div></div>
-        <h3>Controls</h3>
+        <div class="row"><span class="lbl" id="l-ui">Interface size</span><div class="seg" role="radiogroup" aria-labelledby="l-ui" data-key="uiSize"></div></div>
         <div class="row"><span class="lbl" id="l-ks">Say key<small class="kmsg">Talk is E, Space or Enter</small></span><button type="button" class="keybind" data-key="keySay" aria-labelledby="l-ks"></button></div>
         <div class="row"><span class="lbl" id="l-rm">Reduce motion<small>Less camera sway and fewer moving parts in menus</small></span><button type="button" class="sw" role="switch" data-key="reduceMotion" aria-labelledby="l-rm"><i></i></button></div>
       </div>
-      <footer><button type="button" class="done primary" data-close>Done</button></footer>
+      <footer><button type="button" class="done" data-close>Done</button></footer>
     </section>`);
   s.id = 'settings'; s.hidden = true;
   document.body.appendChild(s);
@@ -275,7 +276,7 @@ const RESERVED = /^(Escape|Tab|Enter|Space|Key[WASDE]|Arrow\w+|Digit\d|Shift\w*|
 function stopListen(msg) { const kb = listening; listening = null; if (!kb) return; kb.classList.remove('listening'); syncSettings(); const m = $('#settings .kmsg'); if (m) m.textContent = msg || 'Talk is E, Space or Enter'; }
 function syncSettings() {
   const s = $('#settings'); if (!s) return;
-  for (const seg of s.querySelectorAll('.seg')) for (const b of seg.children) { const on = settings[seg.dataset.key] === b.dataset.v; b.setAttribute('aria-checked', on); b.tabIndex = on ? 0 : -1; }
+  for (const seg of s.querySelectorAll('.seg')) for (const b of seg.children) { const on = String(settings[seg.dataset.key]) === b.dataset.v; b.setAttribute('aria-checked', on); b.tabIndex = on ? 0 : -1; }
   for (const sw of s.querySelectorAll('.sw')) sw.setAttribute('aria-checked', !!settings[sw.dataset.key]);
   for (const r of s.querySelectorAll('input[type=range]')) { const v = Math.round((settings[r.dataset.key] ?? 0) * 100); if (+r.value !== v) r.value = v; r.nextElementSibling.textContent = v; r.style.setProperty('--p', v + '%'); }
   const kb = s.querySelector('.keybind'); if (kb && !kb.classList.contains('listening')) kb.textContent = keyLabel(settings.keySay || 'KeyQ');
@@ -321,7 +322,7 @@ function renderSaves(mode) {
   for (const i of [1, 2, 3]) {
     const info = slotInfo(i);
     const c = slotCard(info, i, mode);
-    if (mode === 'load') { if (!info) c.disabled = true; else c.onclick = () => loadInto(info); }
+    if (mode === 'load') { if (!info) continue; c.onclick = () => loadInto(info); }
     else c.onclick = () => {
       if (info && !c.classList.contains('confirm')) { list.querySelectorAll('.confirm').forEach((x) => x.classList.remove('confirm')); c.classList.add('confirm'); note.textContent = `Slot ${i} has a save. Press it again to replace it.`; return; }
       saveTo(i).then((ok) => { note.textContent = ok ? `Saved to slot ${i}.` : "Couldn't save: this browser isn't keeping data for the game."; if (ok) { sfx('ok'); renderSaves('save'); s.querySelector('.note').textContent = `Saved to slot ${i}.`; s.querySelectorAll('.slot')[i - 1]?.focus(); } });
@@ -476,6 +477,7 @@ function addPauseChip() {
 function buildLoadChip() {
   let c = $('#loadchip'); if (c) return c;
   c = el('div', 'hchip', '<span class="track" aria-hidden="true"><i></i></span><span class="lt">Loading</span><span class="dest"></span>');
+  c.update = () => { const next = { train: 'gate', gate: 'office' }[document.body.dataset.place]; const d = PLACE_NAMES[next]; c.querySelector('.dest').textContent = d || ''; c.querySelector('.lt').textContent = d ? 'On the way to' : 'Loading'; };
   c.id = 'loadchip'; c.hidden = true; c.setAttribute('role', 'status');
   document.body.appendChild(c);
   return c;
@@ -489,8 +491,10 @@ function watchLoading() {
     if (trip && (!tripSince || place !== tripPlace)) { tripSince = now; tripPlace = place; }
     if (!trip) tripSince = 0;
     const want = b.classList.contains('loading') || (trip && tripSince && now - tripSince > 6000 && place === tripPlace);
-    if (want && c.hidden && !loadTimer) loadTimer = setTimeout(() => { loadTimer = 0; c.hidden = false; c.classList.add('in'); }, 350);
-    if (!want) { clearTimeout(loadTimer); loadTimer = 0; if (!c.hidden) { c.classList.remove('in'); c.hidden = true; } }
+    if (want && c.hidden && !loadTimer) loadTimer = setTimeout(() => { loadTimer = 0; c.update(); c.hidden = false; c.classList.add('in'); b.classList.add('loadwait'); }, 350);
+    // (only touch the class when it changes: classList.remove rewrites the attribute even when the class isn't there,
+    // which fires this observer again, forever: the page hung on load)
+    if (!want) { clearTimeout(loadTimer); loadTimer = 0; if (b.classList.contains('loadwait')) b.classList.remove('loadwait'); if (!c.hidden) { c.classList.remove('in'); c.hidden = true; } }
   };
   new MutationObserver(check).observe(document.body, { attributes: true, attributeFilter: ['class', 'data-place'] });
   setInterval(check, 500);
@@ -505,14 +509,28 @@ function goalArrow() {
   $('#ui').appendChild(a);
   let target = null;
   a.onclick = (e) => { e.stopPropagation(); if (target) game().use(target); };
-  const v = new THREE.Vector3();
+  const v = new THREE.Vector3(), v2 = new THREE.Vector3(), v3 = new THREE.Vector3();
+  const ring = el('div'); ring.id = 'goalRing'; ring.hidden = true; $('#ui').prepend(ring);
   const loop = () => {
     requestAnimationFrame(loop);
-    const g = game(); if (!g || !g.place || !g.markers) { a.hidden = true; return; }
+    const g = game(); if (!g || !g.place || !g.markers) { a.hidden = true; ring.hidden = true; return; }
     const b = document.body;
     const goals = g.markers.list.filter((m) => { try { return m.enabled() && m.goal && m.goal(); } catch { return false; } });
-    let show = false;
+    let show = false, ringOn = false;
     for (const m of goals) {
+      // a light ring on the floor where the goal is (where you stand to use it)
+      const sp = m.spot && m.spot();
+      if (sp && !ringOn) {
+        const fy = g.place.floorY || 0, sp3 = g.place.space;
+        const P = (x, z, o) => { o.set(x, fy + 0.01, z); sp3.localToWorld(o); o.project(g.place.camera); return [((o.x + 1) / 2) * innerWidth, ((1 - o.y) / 2) * innerHeight, o.z]; };
+        const c = P(sp[0], sp[1], v2), rx = P(sp[0] + 0.42, sp[1], v3), rz = P(sp[0], sp[1] + 0.42, v3.clone());
+        const w = Math.max(24, Math.hypot(rx[0] - c[0], rx[1] - c[1]) * 2), h = Math.max(12, Math.hypot(rz[0] - c[0], rz[1] - c[1]) * 2);
+        if (c[2] < 1 && c[0] > -w && c[0] < innerWidth + w && c[1] > -h && c[1] < innerHeight + h) {
+          ringOn = true;
+          ring.style.width = w.toFixed(0) + 'px'; ring.style.height = h.toFixed(0) + 'px';
+          ring.style.transform = `translate(${(c[0] - w / 2).toFixed(0)}px, ${(c[1] - h / 2).toFixed(0)}px)`;
+        }
+      }
       m.anchor(v); v.project(g.place.camera);
       const behind = v.z > 1;
       const W = innerWidth, H = innerHeight;
@@ -522,21 +540,56 @@ function goalArrow() {
       m.el.classList.toggle('offscreen', off);
       if (!off || show) continue;
       show = true; target = m;
-      // put the arrow on the edge, on the line from the screen centre to the goal
-      const cx = W / 2, cy = H / 2, dx = x - cx, dy = y - cy;
-      const mx = W / 2 - 34, my = H / 2 - (phone() ? 90 : 60);
-      const k = Math.min(Math.abs(mx / (dx || 1e-6)), Math.abs(my / (dy || 1e-6)));
-      const ax = cx + dx * k, ay = cy + dy * k;
+      // the arrow sits where the goal would be, pulled in to the screen edge, and points out toward it
+      const edge = 34, topM = phone() ? 150 : 90, botM = phone() ? 110 : 70;
+      const ax = Math.max(edge, Math.min(W - edge, x)), ay = Math.max(topM, Math.min(H - botM, y));
       a.style.transform = `translate(${Math.round(ax)}px, ${Math.round(ay)}px)`;
-      a.querySelector('.ar').style.transform = `rotate(${Math.atan2(dy, dx)}rad)`;
+      a.querySelector('.ar').style.transform = `rotate(${Math.atan2(y - ay, x - ax)}rad)`;
       a.classList.toggle('lefty', ax > W / 2);
       const nm = m.label || ''; if (a.querySelector('.gn').textContent !== nm) a.querySelector('.gn').textContent = nm;
       a.setAttribute('aria-label', `Goal: ${nm}, off screen. Walk there`);
     }
     a.hidden = !show || b.classList.contains('busy') || b.classList.contains('trip') || b.classList.contains('at-title') || isPaused;
+    ring.hidden = !ringOn || b.classList.contains('busy') || b.classList.contains('trip') || b.classList.contains('at-title');
   };
   loop();
 }
+
+// ---------- the current target, and cycling through things in reach ----------
+// main.js picks the nearest thing as the target every frame. When several are close (the gate: guard, gate, cat,
+// sign-in sheet), Tab (or Next in the action menu) steps through the ones in reach and holds that choice until
+// Eric walks away from it. Done by wrapping the markers' per-frame update, where main.js hands over its pick.
+// (A shim until main.js takes game.targetLock itself; see notes/production-requests.md.)
+function targetCycling() {
+  const g = game(); const mk = g && g.markers; if (!mk || mk._cycling) return;
+  mk._cycling = true;
+  const orig = mk.update.bind(mk);
+  const REACH = 1.7;
+  let lock = null, lockPlace = null, list = [];
+  const dist = (m, p) => { const s = m.spot ? m.spot() : null; return s ? Math.hypot(p.x - s[0], p.z - s[1]) : 99; };
+  mk.update = (camera, canvas, mp, near) => {
+    const G = game();
+    if (G.place !== lockPlace) { lock = null; lockPlace = G.place; }
+    list = G.busy ? [] : mk.list.filter((m) => { try { return m.enabled() && dist(m, mp) < REACH; } catch { return false; } }).sort((x, y) => dist(x, mp) - dist(y, mp));
+    if (near && !list.includes(near)) list.unshift(near);
+    if (lock && (!list.includes(lock) || G.busy)) lock = null;
+    if (lock) { near = lock; G.near = lock; }
+    ui.cycleInfo = list.length > 1 && near ? { n: list.length, i: Math.max(0, list.indexOf(near)), next: cycle } : null;
+    return orig(camera, canvas, mp, near);
+  };
+  function cycle() {
+    const G = game(); if (!list.length) return;
+    const cur = lock || G.near; const i = list.indexOf(cur);
+    lock = list[(i + 1) % list.length]; G.near = lock; sfx('tap');
+  }
+  shell.cycleTarget = cycle;
+}
+window.addEventListener('keydown', (e) => {
+  if (e.code !== 'Tab' || topLayer() || isPaused || document.body.classList.contains('at-title')) return;
+  const g = game(); if (!g || g.busy || ui.talking || !ui.menuClosed() || !ui.cycleInfo) return;
+  if (e.target && e.target.closest && e.target.closest('#ui button, input')) return;
+  e.preventDefault(); e.stopImmediatePropagation(); shell.cycleTarget && shell.cycleTarget();
+}, true);
 
 // ---------- photos of the day, for the end screen ----------
 // one frame of each place, taken a few seconds in, when nobody is mid-sentence
@@ -561,6 +614,7 @@ whenReady(() => {
   addPauseChip();
   watchLoading();
   goalArrow();
+  targetCycling();
   const t = $('#title');
   if (t) {
     buildTitle();
