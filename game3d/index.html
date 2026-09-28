@@ -2,12 +2,12 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Day One</title>
-<link rel="stylesheet" href="css/style.css">
-<script type="importmap">
-{ "imports": { "three": "./vendor/three/three.module.js", "three/addons/": "./vendor/" } }
-</script>
+
 </head>
 <body>
 <canvas id="c" tabindex="0"></canvas>
@@ -19,6 +19,22 @@
     <p class="keys"><span class="desk">Click or WASD to walk, click people to talk</span><span class="tch">Tap to walk, tap people to talk</span></p>
   </div>
 </div>
-<script type="module" src="./js/main.js"></script>
+<div id="build"></div>
+<script>
+// Cache-busting: build.json is fetched fresh every time; its id versions the CSS, every module (through an import
+// map, so imports inside modules are versioned too), the story files, data and models.
+(async () => {
+  let b = { id: String(Date.now()), files: [] };
+  try { b = await (await fetch('build.json', { cache: 'no-store' })).json(); } catch (e) { /* offline: fall back to a fresh id */ }
+  window.BUILD = b.id;
+  const v = '?v=' + encodeURIComponent(b.id);
+  const css = document.createElement('link'); css.rel = 'stylesheet'; css.href = 'css/style.css' + v; document.head.appendChild(css);
+  const imports = { three: './vendor/three/three.module.js', 'three/addons/': './vendor/' };
+  for (const f of b.files) imports[new URL(f, location.href).href] = new URL(f + v, location.href).href;
+  const map = document.createElement('script'); map.type = 'importmap'; map.textContent = JSON.stringify({ imports }); document.head.appendChild(map);
+  document.getElementById('build').textContent = 'build ' + b.id;
+  const s = document.createElement('script'); s.type = 'module'; s.src = './js/main.js' + v; document.body.appendChild(s);
+})();
+</script>
 </body>
 </html>

@@ -113,12 +113,12 @@ export function makeAvatar() {
 // used with a Lambert material (as for Mio). Colour tweak only: the texture is pulled a little toward the muted
 // palette (slightly less saturated, a touch cooler). The mesh, face and body are untouched.
 import { GLTFLoader } from '../vendor/loaders/GLTFLoader.js';
-import { calmSitTime } from './mio.js';
+import { calmSitTime, V as ver } from './mio.js';
 const EDIR = new URL('../assets/eric/', import.meta.url).href;
 export async function loadEric({ height = 1.2 } = {}) {
   const loader = new GLTFLoader();
   const load = (u) => new Promise((ok, no) => loader.load(u, ok, undefined, no));
-  const [walk, run, idle, sitG, tex] = await Promise.all([load(EDIR + 'walk.glb'), load(EDIR + 'run.glb'), load(EDIR + 'idle.glb'), load(EDIR + 'sit.glb'), new THREE.TextureLoader().loadAsync(EDIR + 'base.webp')]);
+  const [walk, run, idle, sitG, tex] = await Promise.all([load(EDIR + 'walk.glb' + ver()), load(EDIR + 'run.glb' + ver()), load(EDIR + 'idle.glb' + ver()), load(EDIR + 'sit.glb' + ver()), new THREE.TextureLoader().loadAsync(EDIR + 'base.webp' + ver())]);
   tex.flipY = false; tex.colorSpace = THREE.SRGBColorSpace;
   const model = walk.scene;
   model.traverse((o) => {
