@@ -1,0 +1,46 @@
+<!doctype html><html><head><meta charset="utf-8">
+<!-- Character check sheet: one character in a grid of cells (angles x states or clip frames), lit like the game.
+     Served from the repo root: http://127.0.0.1:8771/tools/characters/view.html?who=mio&cells=...
+     cells = ';'-separated "state,angleDeg[,phoneWeight][,clipTime]"; clip = a retargeted clip JSON to scan frames from. -->
+<script type="importmap">{ "imports": { "three": "../../game3d/vendor/three/three.module.js", "three/addons/": "../../game3d/vendor/" } }</script>
+<style>html,body{margin:0;background:#9d978f;font:13px system-ui;color:#222}canvas{display:block}#l{position:absolute;inset:0;pointer-events:none}#l div{position:absolute;padding:3px 6px;background:#fffc}</style></head><body><div id="l"></div>
+<script type="module">
+import * as THREE from 'three';
+import { loadMio, setPhone, PHONE } from '../../game3d/js/mio.js';
+import { loadEric } from '../../game3d/js/avatar.js';
+const q = new URLSearchParams(location.search);
+const cells = (q.get('cells') || 'idle,0;idle,90;idle,180;idle,270').split(';').map((c) => c.split(','));
+const cols = +(q.get('cols') || Math.min(cells.length, 4)), rows = Math.ceil(cells.length / cols);
+const CW = +(q.get('cw') || 360), CH = +(q.get('ch') || 440);
+const r = new THREE.WebGLRenderer({ antialias: true, preserveDrawingBuffer: true }); r.setSize(CW * cols, CH * rows); document.body.appendChild(r.domElement);
+r.outputColorSpace = THREE.SRGBColorSpace; r.toneMapping = THREE.NeutralToneMapping; r.shadowMap.enabled = true; r.setScissorTest(true);
+const s = new THREE.Scene(); s.background = new THREE.Color('#9d978f');
+s.add(new THREE.HemisphereLight('#d3def0', '#8a7a68', 2.1));
+const sun = new THREE.DirectionalLight('#ffc987', 3); sun.position.set(-1.5, 4, 3); sun.castShadow = true; s.add(sun);
+const fl = new THREE.Mesh(new THREE.PlaneGeometry(10, 10), new THREE.MeshStandardMaterial({ color: '#c9c2b8' })); fl.rotation.x = -Math.PI / 2; fl.receiveShadow = true; s.add(fl);
+if (q.has('ppos')) setPhone({ pos: q.get('ppos').split(',').map(Number) });
+if (q.has('prot')) setPhone({ rot: q.get('prot').split(',').map((v) => +v * Math.PI / 180) });
+if (q.has('pt')) setPhone({ t: +q.get('pt') }); if (q.has('lift')) setPhone({ lift: +q.get('lift') }); if (q.has('lift2')) setPhone({ lift2: +q.get('lift2') }); if (q.has('nohead')) setPhone({ only: /Spine|Shoulder|Arm|Hand$/ });
+const who = q.get('who') || 'mio';
+const m = who === 'eric' ? await loadEric() : await loadMio({ height: 1.12 });
+s.add(m.root);
+const clip = q.has('clip') ? await fetch(q.get('clip')).then((x) => x.json()) : null;
+const zoom = +(q.get('zoom') || 1), el = +(q.get('el') || 12) * Math.PI / 180, d = 4.2 / zoom, ty = +(q.get('ty') || 0.56);
+const cam = new THREE.PerspectiveCamera(22, CW / CH, 0.05, 50);
+const lab = document.getElementById('l');
+cells.forEach((c, i) => {
+  const [st, ang, pw, ct] = c;
+  m.setState(st === 'phone' ? 'idle' : st);
+  if (clip && ct !== undefined) { const l = m.layers.add('scan', clip, +ct, { only: PHONE.only }); l.w = l.target = 1; }
+  else if (m.layers.layers.scan) m.layers.layers.scan.w = m.layers.layers.scan.target = 0;
+  if (m.layers.layers.phone) { const w = st === 'phone' ? 1 : +(pw || 0); m.layers.layers.phone.w = m.layers.layers.phone.target = w; }
+  m.placePhone();
+  for (let k = 0; k < 3; k++) m.update(1 / 60);
+  const a = (+ang) * Math.PI / 180;
+  cam.position.set(Math.sin(a) * Math.cos(el) * d, ty + Math.sin(el) * d, Math.cos(a) * Math.cos(el) * d); cam.lookAt(0, ty, 0);
+  const x = (i % cols) * CW, y = (rows - 1 - Math.floor(i / cols)) * CH;
+  r.setViewport(x, y, CW, CH); r.setScissor(x, y, CW, CH); r.render(s, cam);
+  const dv = document.createElement('div'); dv.style.left = (i % cols) * CW + 'px'; dv.style.top = Math.floor(i / cols) * CH + 'px'; dv.textContent = c.join(' '); lab.appendChild(dv);
+});
+window.__done = true;
+</script></body></html>
