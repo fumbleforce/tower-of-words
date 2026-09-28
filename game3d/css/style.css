@@ -277,7 +277,9 @@ body.phone #end ul.w { grid-template-columns: 1fr; }
 #giveBtn .to { font-size: 10px; color: var(--ink-dim); max-width: 54px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 body.busy #giveBtn { display: none; }
 .cmd .en { font-size: 17px; }
-body.phone #clock { position: absolute; right: 0; top: 44px; font-size: 12px; }
+body.phone #clock { position: absolute; right: 0; top: 46px; font-size: 12px; }
+body.phone #clock .d { display: none; }
+body.phone #goal { max-width: calc(100vw - 170px); }
 body.phone #peopleBtn .lbl, body.phone #bagBtn .lbl, body.phone #cmdsBtn .lbl { display: none; }
 body.phone #peopleBtn::before { content: "☺"; } body.phone #bagBtn::before { content: "▣"; } body.phone #cmdsBtn::before { content: "言"; }
 body.phone #giveBtn { right: 88px; bottom: 58px; }
@@ -286,7 +288,7 @@ body.phone #giveBtn { right: 88px; bottom: 58px; }
 
 /* overheard Japanese: soft stand-in glyphs, known words sharp */
 #talk.heard .line { letter-spacing: .02em; }
-#talk .gx { display: inline-block; color: #9aa3b3; filter: blur(1.7px); opacity: .75; transform: translateY(1px); font-weight: 500; }
+#talk .gx { display: inline-block; color: #8d96a6; filter: blur(2.6px); opacity: .6; transform: translateY(1px); font-weight: 500; }
 #talk .jp.clear { filter: none; }
 #talk .heardico { display: inline-block; width: 18px; height: 14px; margin-right: 8px; vertical-align: -1px; border-radius: 3px; background: linear-gradient(90deg, #6f7a8c 0 3px, transparent 3px 6px, #6f7a8c 6px 9px, transparent 9px 12px, #6f7a8c 12px 15px); opacity: .7; }
 #talk.heard .rl::after { content: " · in Japanese"; }
