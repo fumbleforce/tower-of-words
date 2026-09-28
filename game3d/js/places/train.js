@@ -283,6 +283,8 @@ export async function trainPlace(game) {
   const applyMotion = (obj, m) => { obj.position.y = -0.6 + m.y; obj.position.z = m.z; obj.rotation.set(m.roll, m.yaw, m.pitch); };
   let prevM = carMotion(0, 0, 1), lastJ = 0;
 
+  // the shot for the doors closing on the sleeping man: the left door and Hamada (far bench, x -2.55)
+  const DOOR_SHOT = [-2.85, 0.62];
   function setDoors(k) {
     // the leaves slide into the wall pocket; once they're mostly in, they're hidden (the low cut wall can't cover them)
     for (const d of doorLeaves) { const dx = Math.sign(d.x0) * DOOR_X; d.m.position.x = d.x0 + (d.x0 < dx - 0.1 ? -1 : 1) * k * (DOOR_W / 2 - 0.02); d.m.visible = false; }
@@ -428,13 +430,13 @@ export async function trainPlace(game) {
       // { to, ms }: a slow, steady slide from where they are to `to` (1 open, 0 shut) over ms; without ms, the quick close
       doorsClose: ({ to = 0, ms } = {}) => {
         st.hold = false; st.chimeT = -1; st.doorWant = to;
-        if (ms) { st.slide = { from: st.door, to, t: 0, dur: ms / 1000 }; sfx('doorslow'); cam.closeOn([0, 0.45], 1.0); } // lifts the car above the text box so the doors stay in view else { st.slide = null; sfx('door'); }
+        if (ms) { st.slide = { from: st.door, to, t: 0, dur: ms / 1000 }; sfx('doorslow'); cam.closeOn(DOOR_SHOT, 1.75); } else { st.slide = null; sfx('door'); } // slow close: frame the door Hamada needs, with him asleep in the shot
       },
       chime: () => { st.chimeT = 0; sfx('chime'); game.event('chime'); },
       // kotodama: they freeze dead where they are, with the effect; otherwise they bounce back a little, as before
       doorsHold: async ({ kotodama } = {}) => {
         st.slide = null; st.hold = true; st.chimeT = -1;
-        if (kotodama) { st.holdAt = st.door; st.doorWant = st.door; st.frozen = true; await game.kotodama(myLeaves.map((d) => d.g), { focus: [0, 0.55], zoom: 1.35 }); cam.release(); return; }
+        if (kotodama) { st.holdAt = st.door; st.doorWant = st.door; st.frozen = true; await game.kotodama(myLeaves.map((d) => d.g), { pulse: myLeaves.filter((d) => d.x0 < 0).map((d) => d.g) }); return; } // the camera stays on the door until the story pulls back
         st.holdAt = Math.max(0.45, st.door); st.doorWant = st.holdAt; sfx('no');
       },
       wake: ({ who = 'kuroda' }) => { const r = people[who]; if (!r || !r.hips) return; r.act = null; r.head.rotation.set(0.1, 0, 0); },

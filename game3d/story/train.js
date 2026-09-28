@@ -174,6 +174,7 @@ export default {
       { do: 'emote', who: 'kuroda', kind: '!' },
       { say: 'kuroda', text: 'あっ！{sumimasen}、{sumimasen}！', overheard: true },
       { do: 'stand', who: 'kuroda' },
+      { do: 'cam', back: true },
       { do: 'walk', who: 'kuroda', to: 'door_l', wait: true },
       { do: 'hide', id: 'kuroda' },
       { set: 'held_doors' },
