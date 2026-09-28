@@ -1,0 +1,121 @@
+{
+ "label": "moon-wasm-cpu1",
+ "model": "moon",
+ "device": "wasm",
+ "cpu": 1,
+ "loadMs": 9686,
+ "recogniseMs": {
+  "median": 51,
+  "p90": 95,
+  "max": 139,
+  "textMedian": null,
+  "scoreMedian": null
+ },
+ "textOnly": {
+  "perWord": {
+   "akete": {
+    "native": "5/5",
+    "eric": "0/5",
+    "misses": [
+     "eric.clean: あっキャーチャー",
+     "eric.far: あっキャンチャレ？",
+     "eric.phone: 明けちゃん",
+     "eric.slow: あっキャーチャー",
+     "eric.train: あっキャーチャー"
+    ]
+   },
+   "dashite": {
+    "native": "5/5",
+    "eric": "1/5",
+    "misses": [
+     "eric.clean: 出したい。",
+     "eric.far: 大丈夫。",
+     "eric.phone: ダッシュアイズ",
+     "eric.train: 大丈夫。"
+    ]
+   },
+   "irete": {
+    "native": "5/5",
+    "eric": "3/5",
+    "misses": [
+     "eric.clean: 言われちゃえ。",
+     "eric.train: 言われちゃえ。"
+    ]
+   },
+   "kite": {
+    "native": "4/5",
+    "eric": "4/5",
+    "misses": [
+     "eric.far: 「彼女」",
+     "word.phone: つけ。"
+    ]
+   },
+   "matte": {
+    "native": "5/5",
+    "eric": "0/5",
+    "misses": [
+     "eric.clean: まずい。",
+     "eric.far: まさに。",
+     "eric.phone: まずい。",
+     "eric.slow: まずい。",
+     "eric.train: まずい。"
+    ]
+   },
+   "ohayo": {
+    "native": "5/5",
+    "eric": "5/5",
+    "misses": []
+   },
+   "sumimasen": {
+    "native": "5/5",
+    "eric": "1/5",
+    "misses": [
+     "eric.clean: そうめん屋さん。",
+     "eric.far: そう皆さん。",
+     "eric.slow: そうめんめさん。",
+     "eric.train: そうめん屋さん。"
+    ]
+   },
+   "tomatte": {
+    "native": "5/5",
+    "eric": "4/5",
+    "misses": [
+     "eric.far: 止まれ。"
+    ]
+   },
+   "ugoite": {
+    "native": "5/5",
+    "eric": "0/5",
+    "misses": [
+     "eric.clean: よく会える。",
+     "eric.far: ＵＦＯへ。",
+     "eric.phone: 「よく会える」",
+     "eric.slow: 言うがはいつ？",
+     "eric.train: 言うかはいて。"
+    ]
+   },
+   "yoroshiku": {
+    "native": "5/5",
+    "eric": "5/5",
+    "misses": []
+   }
+  },
+  "perVariant": {
+   "clean": "14/20",
+   "far": "13/20",
+   "phone": "15/20",
+   "slow": "16/20",
+   "train": "14/20"
+  },
+  "total": "72/100 (72%)",
+  "falseAccepts": "6/979",
+  "falseHits": [
+   "eric-tomatte.clean as matte: ちょっと待て。",
+   "eric-tomatte.far as matte: 止まれ。",
+   "eric-tomatte.phone as matte: ちょっと待て。",
+   "eric-tomatte.slow as matte: ちょっと待て。",
+   "eric-tomatte.train as matte: ちょっと待て。",
+   "neg-kuro-design.clean as ohayo: 受 付 で ご ざ い ま す お 名 前 と"
+  ]
+ }
+}
