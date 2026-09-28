@@ -516,15 +516,19 @@ function addHeadphones(a) {
   const v = new THREE.Vector3(), top = new THREE.Vector3();
   a.root.updateMatrixWorld(true);
   const box = new THREE.Box3().setFromObject(a.model); top.copy(box.max); a.root.worldToLocal(top);
+  // head size measured once, standing (seated, the head is lower and this would blow up)
+  head.getWorldPosition(v); a.root.worldToLocal(v);
+  const R = Math.max(0.1, (top.y - v.y) * 0.55);
   a.setHeadphones = (s) => { state = s; };
   const up = a.update;
   a.update = (dt, sp) => {
     up(dt, sp);
     head.getWorldPosition(v); a.root.worldToLocal(v);
-    const r = Math.max(0.12, (top.y - v.y) * 0.55);
+    const r = R;
     g.scale.setScalar(r);
-    if (state === 'neck') { g.position.set(v.x, v.y - r * 1.35, v.z - r * 0.1); g.rotation.set(Math.PI / 2 - 0.3, 0, 0); cups[0].rotation.x = cups[1].rotation.x = 0; }
-    else { g.position.set(v.x, v.y + r * 0.1, v.z - r * 0.05); g.rotation.set(0, 0, 0); cups[0].position.set(-1.02, 0, 0); cups[1].position.set(1.02, state === 'half' ? 0.55 : 0, state === 'half' ? -0.35 : 0); }
+    // round the neck: a small band arcing behind the neck, cups resting at the collar
+    if (state === 'neck') { g.position.set(v.x, v.y - r * 0.2, v.z + r * 0.05); g.rotation.set(-Math.PI / 2 + 0.2, 0, 0); g.scale.setScalar(r * 0.62); cups[0].position.set(-1.0, 0.25, 0); cups[1].position.set(1.0, 0.25, 0); }
+    else { g.scale.setScalar(r); g.position.set(v.x, v.y + r * 0.1, v.z - r * 0.05); g.rotation.set(0, 0, 0); cups[0].position.set(-1.02, 0, 0); cups[1].position.set(1.02, state === 'half' ? 0.55 : 0, state === 'half' ? -0.35 : 0); }
   };
 }
 
