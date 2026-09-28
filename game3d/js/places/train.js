@@ -1,0 +1,425 @@
+// Place 1, the train. The car, its passengers and its motion come from side/train (copied into js/train/
+// unchanged); this file only recolours it to the muted palette (colours and light only), adds Mio as the
+// player, the company station with its platforms, the doors and the walk out to the covered walkway.
+// Every word said here comes from game3d/story/train.js (placeholder: story/placeholder/train.js).
+import * as THREE from 'three';
+import { Pass } from 'three/addons/postprocessing/Pass.js';
+import { SimplexNoise } from 'three/addons/math/SimplexNoise.js';
+import { buildWorld, SPEED } from '../train/world.js';
+import { buildCar, buildBellows, bagMesh, LX, LZ, T, SEAT_Y, BENCH_D, BENCHES, DOOR_X, DOOR_W, COL, mat as carMat } from '../train/car.js';
+import { buildPassengers, cat, walkPose, HIP, sit, armsHold } from '../train/people.js';
+import { PEOPLE } from '../cast.js';
+import { Nav, blob } from '../engine.js';
+import { ui, sfx } from '../ui.js';
+import { walkPerson, stepPeople, lookAt } from '../story.js';
+import { rbox, mat, emissive, textTexture, plane, JP_FONT, plant as propPlant } from '../props.js';
+import { glide, withList } from './lobby.js';
+import { flags } from '../runner.js';
+
+// Muted palette, after game3d/ref/2-security-gate-muted.png (Jørgen: "mute train too"): slate and charcoal,
+// dark navy seats, a calmer floor. Only colours; set before the car is built.
+Object.assign(COL, {
+  shell: '#a7afba', shellDark: '#838b97', inner: '#bdbab5', floor: '#aea9a2', stripe: '#445d7d',
+  seat: '#37425c', seatBack: '#313b53', seatBase: '#747b86', metal: '#aeb4bc', strap: '#707984', loop: '#dde1e6',
+  frame: '#aab1ba', lamp: '#ffe7c6', door: '#b6bcc5', rack: '#9ea6b1',
+});
+
+export async function trainPlace(game) {
+  const scene = new THREE.Scene();
+  scene.background = new THREE.Color('#3f5a6b');
+
+  // light: a slightly dimmer, cooler car with warm low sun through the far windows
+  const SUN_DIR = new THREE.Vector3(-0.45, 0.62, -0.75).normalize();
+  scene.add(new THREE.HemisphereLight('#c3ccd8', '#8a8078', 1.9));
+  const sun = new THREE.DirectionalLight('#ffc98f', 5.0);
+  sun.position.copy(SUN_DIR).multiplyScalar(22); sun.castShadow = true;
+  Object.assign(sun.shadow.camera, { left: -9, right: 9, top: 7, bottom: -7, near: 8, far: 40 });
+  sun.shadow.bias = -0.0006; sun.shadow.normalBias = 0.02; sun.shadow.radius = 5; sun.shadow.mapSize.set(2048, 2048);
+  scene.add(sun, sun.target);
+  const fill = new THREE.DirectionalLight('#dfe7ff', 0.45); fill.position.set(0.3, 1, 0.9); scene.add(fill);
+
+  const world = buildWorld(scene, { sunDir: SUN_DIR });
+  const U = world.sea.material.uniforms;
+  U.uDeep.value.set('#15283a'); U.uMid.value.set('#203a52'); U.uShallow.value.set('#36566f'); U.uFoam.value.set('#c3ced6'); U.uShadow.value.set('#22364c');
+
+  const pivot = new THREE.Group(); pivot.position.y = -0.6; scene.add(pivot);
+  const car = buildCar('land'); car.root.position.y = 0.6; pivot.add(car.root);
+  for (const x of [-2.0, 2.0]) { const p = new THREE.PointLight('#ffc07a', 0.8, 3.6, 1.6); p.position.set(x, 1.0, 0); car.root.add(p); }
+  const neighbours = [];
+  for (const s of [-1, 1]) {
+    const nPivot = new THREE.Group(); nPivot.position.set(s * (2 * (LX + T) + 0.52), -0.6, 0);
+    const nc = buildCar('land'); nc.root.remove(nc.proxy);
+    const grey = new THREE.Color('#7f8896');
+    nc.root.traverse((o) => { if (o.isMesh) { o.material = o.material.clone(); if (o.material.color) o.material.color.lerp(grey, 0.4).multiplyScalar(0.82); if (o.material.emissive) o.material.emissiveIntensity *= 0.5; } });
+    nc.root.position.y = 0.6; nPivot.add(nc.root); scene.add(nPivot);
+    const b = buildBellows(); b.position.set(s * (LX + T + 0.26), 0, 0); scene.add(b);
+    neighbours.push({ pivot: nPivot, lag: s * 0.34, bellows: b });
+  }
+
+  // passengers, cat and bags as in side/train
+  const list = buildPassengers(LZ, SEAT_Y);
+  const [kuroda, aoi, reader, music, stander, bun, youth] = list;
+  const blobs = {};
+  for (const p of list) {
+    car.root.add(p.root);
+    const seated = p.root.position.y > 0.01;
+    const b = blob(0.5, seated ? 0.3 : 0.4);
+    b.position.set(p.root.position.x, 0.004, p.root.position.z + (seated ? Math.sign(-p.root.position.z) * 0.26 : 0));
+    car.root.add(b); p.blob = b;
+  }
+  blobs.kuroda = kuroda.blob; blobs.aoi = aoi.blob;
+  const kitty = cat(); kitty.scale.setScalar(1.15); kitty.position.set(-0.85, SEAT_Y, -(LZ - 0.24)); kitty.rotation.y = 0.2; car.root.add(kitty);
+  const kb = blob(0.42, 0.3); kb.position.set(-0.85, SEAT_Y + 0.003, -(LZ - 0.24)); car.root.add(kb);
+  const bags = [['brief', '#5b4336', -2.12, -1, 0.1], ['tote', '#b88563', -1.3, -1, -0.2], ['tote', '#2f3446', -2.08, 1, 0.3], ['brief', '#6b4a36', 2.12, 1, -0.1], ['pack', '#3f4656', -1.3, 1, 0.15], ['tote', '#7a6a5a', 1.4, 1, -0.2]];
+  const bagObjs = [];
+  for (const [k, c, x, side, ry] of bags) {
+    const b = bagMesh(k, c); b.position.set(x, SEAT_Y, side * (LZ - 0.24)); b.rotation.y = ry + (side > 0 ? Math.PI : 0);
+    car.root.add(b); car.nodders.push({ obj: b, k: 0.25 }); bagObjs.push(b);
+    const sb = blob(0.36, 0.35); sb.position.set(x, SEAT_Y + 0.003, side * (LZ - 0.24)); car.root.add(sb); b.userData.blob = sb;
+  }
+
+  // Rei (the writer's train conversation) takes the headphone girl's place on the far bench, laptop on
+  // her knees, her folder and a lidded coffee on the free seat beside her
+  // the girl with headphones moves to the near bench (seen from behind), still nodding along
+  music.root.position.set(0.75, music.root.position.y, LZ - 0.24); music.root.rotation.y = Math.PI; music.blob.position.set(0.75, 0.004, LZ - 0.5);
+  const rei = PEOPLE.rei(); sit(rei); armsHold(rei, -1.05, 0.5); rei.seated = true; rei.root.position.set(2.1, rei.root.position.y, -(LZ - 0.24)); rei.root.rotation.y = 0; car.root.add(rei.root);
+  rei.head.rotation.x = -0.2; rei.breath = 0.012; list.push(rei);
+  { const b = blob(0.5, 0.3); b.position.set(2.1, 0.004, -(LZ - 0.24) + 0.26); car.root.add(b); rei.blob = b; }
+  const laptop = new THREE.Group();
+  { const base = rbox(0.24, 0.015, 0.16, '#b9bec6', { r: 0.006 }); const lid = rbox(0.24, 0.16, 0.012, '#c9ced6', { y: 0.015, z: -0.075, r: 0.006 }); lid.rotation.x = -0.35; const scr = new THREE.Mesh(new THREE.PlaneGeometry(0.21, 0.13), emissive('#cfe4ff', '#9fc8ff', 0.8)); scr.position.set(0, 0.09, -0.065); scr.rotation.x = -0.35; laptop.add(base, lid, scr); }
+  laptop.position.set(0, 0.02, 0.2); rei.torso.add(laptop);
+  const folder = rbox(0.22, 0.025, 0.3, '#2f3a55', { x: 1.55, y: SEAT_Y, z: -(LZ - 0.26), r: 0.008 }); car.root.add(folder);
+  const cup = new THREE.Group();
+  { const body = new THREE.Mesh(new THREE.CylinderGeometry(0.045, 0.035, 0.12, 12), mat('#f1ede6')); body.position.y = 0.06; const lid = new THREE.Mesh(new THREE.CylinderGeometry(0.048, 0.048, 0.02, 12), mat('#3a3f48')); lid.position.y = 0.125; const sleeve = new THREE.Mesh(new THREE.CylinderGeometry(0.046, 0.04, 0.05, 12), mat('#9a7a58')); sleeve.position.y = 0.06; for (const m of [body, lid, sleeve]) { m.castShadow = true; cup.add(m); } }
+  cup.position.set(1.6, SEAT_Y + 0.025, -(LZ - 0.28)); car.root.add(cup);
+  const cupSt = { want: 0, k: 0 };
+
+  // ---- the station: platforms both sides, yellow tactile strips, the sign, a covered walkway exit ----
+  const station = new THREE.Group(); scene.add(station);
+  const PL = 34;                                   // platform length
+  const edge = LZ + T + 0.08;
+  for (const s of [-1, 1]) {
+    const w = 3.2;
+    const slab = rbox(PL, 0.5, w, '#8d9197', { x: 0, y: -0.5, z: s * (edge + w / 2), r: 0.02 }); station.add(slab);
+    slab.receiveShadow = true;
+    // edge line and the yellow tactile strip with bumps
+    station.add(rbox(PL, 0.012, 0.08, '#e9e6de', { y: 0, z: s * (edge + 0.06), r: 0.004, cast: false }));
+    station.add(rbox(PL, 0.012, 0.28, '#a8914f', { y: 0.001, z: s * (edge + 0.55), r: 0.004, cast: false }));
+    const dot = new THREE.CylinderGeometry(0.018, 0.018, 0.012, 6);
+    const inst = new THREE.InstancedMesh(dot, mat('#977f45'), Math.floor(PL / 0.12) * 3);
+    let n = 0; const m4 = new THREE.Matrix4();
+    for (let x = -PL / 2 + 0.06; x < PL / 2; x += 0.12) for (const dz of [-0.08, 0, 0.08]) { m4.makeTranslation(x, 0.012, s * (edge + 0.55) + dz); inst.setMatrixAt(n++, m4); }
+    inst.count = n; station.add(inst);
+    // tile seams
+    for (let x = -PL / 2; x <= PL / 2; x += 1.2) station.add(rbox(0.02, 0.004, w - 0.9, '#7f8389', { x, y: 0.001, z: s * (edge + 0.9 + (w - 0.9) / 2), r: 0.001, cast: false }));
+    // canopy posts, benches and bins along the platform
+    for (let x = -12; x <= 12; x += 4) {
+      station.add(rbox(0.16, 1.9, 0.16, '#6b727d', { x, z: s * (edge + 2.35), r: 0.03 }));
+      if (x % 8 === 0) { const bn = new THREE.Group(); bn.add(rbox(1.0, 0.07, 0.36, '#37425c', { y: 0.2, r: 0.02 }), rbox(1.0, 0.3, 0.06, '#313b53', { y: 0.24, z: s * 0.17, r: 0.02 }), rbox(0.05, 0.22, 0.34, '#747b86', { x: -0.45, r: 0.01 }), rbox(0.05, 0.22, 0.34, '#747b86', { x: 0.45, r: 0.01 })); bn.position.set(x + 1.6, 0, s * (edge + 2.2)); station.add(bn); }
+    }
+    { const p = propPlant({ size: 1.1, seed: s > 0 ? 3 : 5 }); p.position.set(-5.2, 0, s * (edge + 2.5)); station.add(p); }
+  }
+  // station signs: one on each platform, facing the camera side
+  const signTex = textTexture((g, W, H) => {
+    g.fillStyle = '#2c3a55'; g.fillRect(0, 0, W, H);
+    g.fillStyle = '#f2f4f7'; g.fillRect(20, 20, 118, 118);
+    g.fillStyle = '#2c3a55'; g.fillRect(44, 40, 70, 60); g.fillRect(52, 104, 16, 16); g.fillRect(90, 104, 16, 16); g.fillStyle = '#f2f4f7'; g.fillRect(52, 50, 54, 22);
+    g.fillStyle = '#f2f4f7'; g.font = '700 96px ' + JP_FONT; g.textBaseline = 'middle'; g.fillText('本社', 170, 66);
+    g.font = '600 38px ' + JP_FONT; g.fillStyle = '#b9c6da'; g.fillText('HONSHA · Head Office', 172, 132);
+    g.fillStyle = '#e0bf4a'; g.fillRect(0, H - 14, W, 14);
+  }, 640, 170);
+  const signs = [];
+  for (const [x, s] of [[2.6, 1], [-2.2, -1]]) {
+    const sg = new THREE.Group();
+    sg.add(rbox(0.08, 1.35, 0.08, '#5b626d', { x: -0.9, r: 0.02 }), rbox(0.08, 1.35, 0.08, '#5b626d', { x: 0.9, r: 0.02 }));
+    const p = plane(2.1, 0.56, signTex, { emissiveK: 0.25 }); p.position.set(0, 1.35, 0.05); sg.add(p);
+    sg.add(rbox(2.16, 0.62, 0.06, '#232b3d', { y: 1.04, r: 0.02 }));
+    sg.position.set(x, 0, s * (edge + 1.85)); if (s < 0) sg.rotation.y = 0; station.add(sg); signs.push(sg);
+  }
+  // covered walkway to the company building, at the right end of the near platform
+  const walk = new THREE.Group();
+  // cutaway like everything else: posts, a low glass side and the sign, no roof over the player
+  walk.add(rbox(3.2, 0.1, 0.12, '#6b727d', { y: 1.72, z: 1.25, r: 0.03 }), rbox(3.2, 0.1, 0.12, '#6b727d', { y: 1.72, z: -1.25, r: 0.03 }));
+  walk.add(rbox(3.0, 0.5, 0.04, '#c9d6de', { y: 0.05, z: -1.25, r: 0.01, m: new THREE.MeshStandardMaterial({ color: '#d5e2ea', transparent: true, opacity: 0.45, roughness: 0.1 }) }));
+  for (const [dx, dz] of [[-1.5, -1.2], [1.5, -1.2], [-1.5, 1.2], [1.5, 1.2]]) walk.add(rbox(0.12, 1.75, 0.12, '#5b626d', { x: dx, z: dz, r: 0.02 }));
+  const wt = textTexture((g, W, H) => { g.fillStyle = '#2c3a55'; g.fillRect(0, 0, W, H); g.fillStyle = '#f2f4f7'; g.font = '700 58px ' + JP_FONT; g.textBaseline = 'middle'; g.fillText('本社ビル →', 24, H / 2); g.fillStyle = '#b9c6da'; g.font = '600 32px ' + JP_FONT; g.fillText('To the office', 330, H / 2 + 6); }, 560, 110);
+  const wp = plane(1.9, 0.37, wt, { emissiveK: 0.3 }); wp.position.set(0, 1.5, 1.32); walk.add(wp);
+  walk.position.set(8.4, 0, edge + 1.9); station.add(walk);
+  station.visible = false;
+
+  // ---- Mio lives in the car ----
+  const space = car.root;
+  const nav = new Nav(-LX, LX + 8, -LZ, LZ + 3.2, 0.1);
+  nav.R = 0.16;
+  for (const [x0, x1] of BENCHES) { nav.block(x0 - 0.04, x1 + 0.04, -LZ, -(LZ - BENCH_D) + 0.1); nav.block(x0 - 0.04, x1 + 0.04, LZ - BENCH_D - 0.1, LZ); }
+  nav.block(-3.85, -3.35, -1.2, -0.58); nav.block(3.38, 3.78, -1.0, -0.56);
+  for (const z of [-0.5, 0.5]) nav.block(-0.05, 0.05, z - 0.05, z + 0.05);
+  nav.block(LX, LX + 8, -LZ, LZ + T + 0.05);                                                  // beyond the car end
+  // near wall, with gaps at the doors; the gaps and the platform are shut until the doors open
+  nav.block(-LX, -DOOR_X - DOOR_W / 2 + 0.05, LZ, LZ + T + 0.05); nav.block(-DOOR_X + DOOR_W / 2 - 0.05, DOOR_X - DOOR_W / 2 + 0.05, LZ, LZ + T + 0.05); nav.block(DOOR_X + DOOR_W / 2 - 0.05, LX, LZ, LZ + T + 0.05);
+  nav.blockTagged('doors', -LX, LX + 8, LZ - 0.02, LZ + T + 0.06);
+  nav.block(-LX, -LX + 0.2, LZ + T, LZ + 3.2);
+  nav.extra = (x, z) => {
+    if (z > LZ + 0.02) return true;
+    const cx = Math.abs(x) - (LX - 0.34), cz = Math.abs(z) - (LZ - 0.34);
+    return !(cx > 0 && cz > 0 && Math.hypot(cx, cz) > 0.34 - 0.17);
+  };
+
+  // doors: the near-side sliding leaves in the shell
+  let doorLeaves = [];
+  function findDoors() {
+    doorLeaves = [];
+    const dm = carMat('door', COL.door);
+    car.root.traverse((o) => { if (o.isMesh && o.material === dm && Math.abs(o.position.z - (LZ + 0.03)) < 0.002) doorLeaves.push({ m: o, x0: o.position.x }); });
+  }
+  findDoors();
+  const st = { v: SPEED, dist: 0, mode: 'cruise', brakeFrom: 0, stopAt: 0, door: 0, doorWant: 0, hold: false, chimeT: -1, arrived: false };
+
+  // ---- camera: side/train's framing (whole car on a wide screen, the car running up a phone screen) ----
+  const camera = new THREE.PerspectiveCamera(20, 16 / 9, 1, 160);
+  const cam = {
+    camera, dir: new THREE.Vector3(), dist: 10, target: new THREE.Vector3(), base: new THREE.Vector3(), fitDist: 10, follow: false, fx: 0, close: null,
+    place() { camera.position.copy(this.target).addScaledVector(this.dir, this.dist); camera.up.set(0, 1, 0); camera.lookAt(this.target); camera.updateMatrixWorld(); },
+    closeOn([x, z], zoom = 1.8) { this.close = { x, z, zoom }; },
+    release() { this.close = null; },
+    wanted(p) {
+      if (this.close) return [new THREE.Vector3(this.close.x, 0.45, this.close.z), this.fitDist / this.close.zoom];
+      const t = this.base.clone();
+      if (this.follow && p) t.x = THREE.MathUtils.clamp(p.x + 0.6, -1.7, 2.6);
+      return [t, this.fitDist];
+    },
+    update(dt, p) { const [t, d] = this.wanted(p); const k = Math.min(1, dt * (this.close ? 2.2 : 3)); this.target.lerp(t, k); this.dist += (d - this.dist) * k; this.place(); },
+    snap(p) { const [t, d] = this.wanted(p); this.target.copy(t); this.dist = d; this.place(); },
+  };
+  const _v = new THREE.Vector3();
+  function fit(aspect) {
+    const mode = aspect >= 1 ? 'land' : 'port';
+    if (car.mode !== mode) { car.setMode(mode); findDoors(); setDoors(st.door); }
+    camera.aspect = aspect;
+    let pts, limX, limY;
+    cam.follow = false;
+    if (mode === 'land') {
+      camera.fov = 20; const elev = THREE.MathUtils.degToRad(58);
+      cam.base.set(0, 0.45, 0.25); cam.dir.set(0, Math.sin(elev), Math.cos(elev));
+      pts = []; for (const x of [-4.72, 4.72]) for (const z of [-LZ - T - 0.3, LZ + T + 0.9]) for (const y of [-0.45, 1.45]) pts.push([x, y, z]);
+      limX = 1.0; limY = 0.95;
+    } else {
+      camera.fov = 40; const elev = THREE.MathUtils.degToRad(62);
+      cam.base.set(0, 0.3, 0.3); cam.dir.set(-Math.cos(elev), Math.sin(elev), 0);
+      pts = []; for (const z of [-LZ - T - 0.42, LZ + T + 0.9]) for (const y of [0, 1.45]) pts.push([0, y, z]);
+      limX = 1.0; limY = 3; cam.follow = true;
+    }
+    camera.updateProjectionMatrix();
+    cam.target.copy(cam.base);
+    let lo = 2, hi = 120;
+    for (let i = 0; i < 40; i++) { cam.dist = (lo + hi) / 2; cam.place(); let ok = true; for (const p of pts) { _v.set(...p).project(camera); if (Math.abs(_v.x) > limX || Math.abs(_v.y) > limY) { ok = false; break; } } if (ok) hi = cam.dist; else lo = cam.dist; }
+    cam.dist = hi; cam.fitDist = hi; cam.place();
+  }
+
+  // ---- motion (side/train's sway, scaled by speed) ----
+  const noise = new SimplexNoise({ random: (() => { let s = 7; return () => (s = (s * 16807) % 2147483647) / 2147483647; })() });
+  const JOINT = 1.36, BOGIE_GAP = 0.3;
+  const ringF = (tb) => (tb < 0 ? 0 : Math.exp(-tb / 0.11) * Math.sin(2 * Math.PI * 4.2 * tb));
+  function carMotion(tj, t, k) {
+    const tf = ((tj % JOINT) + JOINT) % JOINT, tr = (((tj - BOGIE_GAP) % JOINT) + JOINT) % JOINT;
+    const rf = ringF(tf) * k, rr = ringF(tr) * k;
+    return { y: 0.026 * (rf + rr) + 0.006 * noise.noise(t * 0.9, 3) * k, pitch: 0.006 * (rf - rr), roll: (0.011 * noise.noise(t * 0.31, 1) + 0.004 * noise.noise(t * 1.05, 2)) * k + 0.0015 * (rf + rr), z: 0.02 * noise.noise(t * 0.22, 5) * k, yaw: 0.0012 * noise.noise(t * 0.17, 9) * k };
+  }
+  const applyMotion = (obj, m) => { obj.position.y = -0.6 + m.y; obj.position.z = m.z; obj.rotation.set(m.roll, m.yaw, m.pitch); };
+  let prevM = carMotion(0, 0, 1), lastJ = 0;
+
+  function setDoors(k) {
+    for (const d of doorLeaves) { const dx = Math.sign(d.x0) * DOOR_X; d.m.position.x = d.x0 + (d.x0 < dx - 0.1 ? -1 : 1) * k * (DOOR_W / 2 - 0.02); }
+  }
+
+  // ---- people ids for the story ----
+  const people = { kuroda, aoi, reader, rei, music, stander, bun, youth, tama: { root: kitty, head: kitty.userData.head } };
+  const seats = {
+    seat_aoi: { x: -1.25, z: -(LZ - 0.24), side: -1, bag: 1, top: SEAT_Y, ry: 0 }, seat_far_r: { x: 1.58, z: -(LZ - 0.24), side: -1, props: true, top: SEAT_Y, ry: 0 },
+    seat_near_l: { x: -1.3, z: LZ - 0.24, side: 1, bag: 4, top: SEAT_Y, ry: Math.PI }, seat_near_r: { x: 1.4, z: LZ - 0.24, side: 1, bag: 5, top: SEAT_Y, ry: Math.PI },
+    seat_mio: { x: 2.1, z: -(LZ - 0.24), side: -1, top: SEAT_Y, ry: 0 },
+  };
+  const spots = { aisle: [0.4, 0.1], door_l: [-DOOR_X, LZ - 0.45], door_r: [DOOR_X, LZ - 0.45], by_aoi: [-1.7, -0.35], by_kuroda: [-2.55, -0.35], platform: [DOOR_X, LZ + 1.0], walkway: [8.4, LZ + 1.9] };
+  const rigAnchor = (rig, h = 1.5) => (v) => { rig.root.getWorldPosition(v); v.y += h; return v; };
+  const carPt = (x, y, z) => (v) => { v.set(x, y, z); car.root.localToWorld(v); return v; };
+  const at = (x, z, fx, fz) => ({ spot: () => [x, z], face: () => [fx, fz] });
+  const things = {
+    aoi: { label: 'Aoi', kind: 'person', anchor: rigAnchor(aoi, 1.3), ...at(-1.7, -0.3, -1.7, -1.0), enabled: () => aoi.root.visible },
+    kuroda: { label: 'Sleeping man', kind: 'person', anchor: rigAnchor(kuroda, 1.3), ...at(-2.55, -0.3, -2.55, -1.0), enabled: () => kuroda.root.visible && !kuroda._walk },
+    reader: { label: 'Man with a book', kind: 'person small', anchor: rigAnchor(reader, 1.3), ...at(1.05, -0.3, 1.05, -1.0) },
+    music: { label: 'Girl with headphones', kind: 'person small', anchor: rigAnchor(music, 1.3), ...at(0.75, 0.35, 0.75, 1.0) },
+    rei: { label: 'Woman with a laptop', kind: 'person', anchor: rigAnchor(rei, 1.3), ...at(2.1, -0.3, 2.1, -1.0), enabled: () => rei.root.visible },
+    cup: { label: 'Coffee', kind: 'thing small', anchor: carPt(1.6, 0.6, -(LZ - 0.28)), ...at(1.6, -0.3, 1.6, -1.0), noMarker: true },
+    stander: { label: 'Man by the door', kind: 'person small', anchor: rigAnchor(stander), ...at(3.1, -0.45, 3.58, -0.78) },
+    bun: { label: 'Woman with a bun', kind: 'person small', anchor: rigAnchor(bun, 1.3), ...at(-2.5, 0.35, -2.5, 1.0) },
+    youth: { label: 'Young man', kind: 'person small', anchor: rigAnchor(youth, 1.3), ...at(2.55, 0.35, 2.55, 1.0) },
+    tama: { label: 'Cat', kind: 'person small', anchor: carPt(-0.85, 0.75, -(LZ - 0.24)), ...at(-0.85, -0.3, -0.85, -1.0) },
+    doors: { label: 'Doors', kind: 'thing', anchor: carPt(DOOR_X, 1.1, LZ), ...at(DOOR_X, LZ - 0.22, DOOR_X, LZ), enabled: () => st.door > 0.3 },
+    door_l: { label: 'Doors', kind: 'thing', anchor: carPt(-DOOR_X, 1.1, LZ), ...at(-DOOR_X, LZ - 0.45, -DOOR_X, LZ), noMarker: true },
+    door_r: { label: 'Doors', kind: 'thing', anchor: carPt(DOOR_X, 1.1, LZ), ...at(DOOR_X, LZ - 0.45, DOOR_X, LZ), noMarker: true },
+    plant: { label: 'Plant', kind: 'thing small', anchor: carPt(-3.6, 0.7, -0.82), ...at(-3.2, -0.5, -3.6, -0.82), noMarker: true },
+    bags: { label: 'Bags', kind: 'thing small', anchor: carPt(-1.3, 0.5, -(LZ - 0.24)), ...at(-1.3, -0.3, -1.3, -1.0), noMarker: true },
+    rack: { label: 'Luggage rack', kind: 'thing small', anchor: carPt(0, 1.5, -LZ), ...at(0, -0.3, 0, -1.0), noMarker: true },
+    straps: { label: 'Straps', kind: 'thing small', anchor: carPt(-1.5, 1.3, -0.65), ...at(-1.5, -0.2, -1.5, -0.65), noMarker: true },
+    window: { label: 'Window', kind: 'thing small', anchor: carPt(-1.1, 1.0, -LZ), ...at(-1.1, -0.3, -1.1, -LZ), noMarker: true },
+    poster: { label: 'Poster', kind: 'thing small', anchor: carPt(-LX, 1.0, -0.78), ...at(-3.5, -0.4, -LX, -0.78), noMarker: true },
+    sign: { label: 'Station sign', kind: 'thing small', anchor: (v) => { signs[0].getWorldPosition(v); v.y += 1.5; return v; }, ...at(2.6, LZ + 1.3, 2.6, LZ + 1.9), enabled: () => st.arrived && game.player.root.position.z > LZ },
+    platform: { label: 'Platform', kind: 'thing small', anchor: carPt(DOOR_X, 0.3, LZ + 1.2), ...at(DOOR_X, LZ + 1.0, DOOR_X, LZ + 1.5), noMarker: true },
+  };
+  const zones = { door_zone: (x, z) => st.door > 0.3 && z > LZ - 0.35 && Math.abs(Math.abs(x) - DOOR_X) < 0.45 };
+
+  function standUp(r) {
+    r.seated = false; r.root.position.y = 0; for (const l of r.legs) l.rotation.set(0, 0, 0); for (const k of r.knees) k.rotation.set(0, 0, 0); for (const a of r.arms) a.rotation.set(0, 0, 0);
+    r.head.rotation.set(0, 0, 0); r.act = null;
+    r.root.position.z += Math.sign(-r.root.position.z) * 0.4;
+  }
+
+  let simT = 0;
+  const P = {
+    scene, camera, cam, space, nav, sun, charScale: 1, floorY: 0,
+    start: [-0.2, 0.1], startFacing: 0.0, things, people, spots, zones, seats,
+    beforeAO: new (class extends Pass { constructor() { super(); this.needsSwap = false; } render() { car.proxy.visible = false; } })(),
+    beforeRender() { car.proxy.visible = true; },
+    fit,
+    pick(rc) {
+      const floorM = car.root.getObjectByName('floor');
+      const hit = rc.intersectObject(floorM, false)[0];
+      if (hit) return car.root.worldToLocal(hit.point.clone());
+      if (st.arrived) { const p = new THREE.Vector3(); if (rc.ray.intersectPlane(new THREE.Plane(new THREE.Vector3(0, 1, 0), 0), p)) return car.root.worldToLocal(p); }
+      return null;
+    },
+    walkPerson(id, [x, z], { speed } = {}) {
+      const r = people[id]; if (!r || !r.hips) return Promise.resolve();
+      if (r.seated !== false && r.root.position.y > 0.01) standUp(r);
+      return walkPerson(r, [[x, z]], { speed: speed || 1.2, blobM: r.blob });
+    },
+    async sitPerson(id, seatId) {
+      const s = seats[seatId]; if (!s) return;
+      if ((id === 'eric' || id === 'player')) {
+        if (s.bag !== undefined) { const b = bagObjs[s.bag]; b.visible = false; b.userData.blob.visible = false; }
+        if (s.props) { folder.visible = false; if (cupSt.state !== 'safe') cup.visible = false; }
+        if (game.mioNpc.root.visible && seatId === 'seat_far_r') { /* keep the laptop on Mio's lap */ }
+        await game.walkTo(s.x, s.z + (s.side < 0 ? 0.55 : -0.55));
+        const m = game.player; m.seated = true;
+        m.sitAt(s.x, SEAT_Y, s.z - s.side * 0.02, s.side < 0 ? 0 : Math.PI); game.walker.facing = m.root.rotation.y;
+        return;
+      }
+    },
+    async standPerson(id) {
+      if ((id === 'eric' || id === 'player')) { const m = game.player; if (!m.seated) return; m.seated = false; m.setState('idle'); m.root.position.y = 0; m.root.position.z += m.root.position.z < 0 ? 0.55 : -0.55; for (const b of bagObjs) { b.visible = true; b.userData.blob.visible = true; } return; }
+      const r = people[id]; if (r && r.hips) standUp(r);
+    },
+    update(dt, t) {
+      simT += dt;
+      // speed: cruise, brake into the station, stop, leave
+      if (st.mode === 'brake') {
+        const rem = st.stopAt - st.dist;
+        st.v = Math.sqrt(Math.max(0, 2 * st.decel * rem));
+        if (rem < 0.01) { st.v = 0; st.mode = 'stopped'; st.dist = st.stopAt; onStop(); }
+      }
+      st.dist += st.v * dt;
+      const k = st.v / SPEED;
+      world.update(st.dist / SPEED, camera); U.uTime.value = simT;
+      station.position.x = st.stopX - st.dist;
+      const tj = st.dist / SPEED;
+      const m = carMotion(tj, simT, Math.max(0.04, k));
+      applyMotion(pivot, m);
+      for (const n of neighbours) { const mn = carMotion(tj - n.lag + 5, simT + 5, Math.max(0.04, k)); applyMotion(n.pivot, mn); n.bellows.rotation.x = (m.roll + mn.roll) / 2; n.bellows.position.y = (m.y + mn.y) / 2; }
+      const latVel = (m.z - prevM.z) / Math.max(dt, 1e-3), bump = (m.y - prevM.y) / Math.max(dt, 1e-3), rollVel = (m.roll - prevM.roll) / Math.max(dt, 1e-3);
+      const brakeKick = st.mode === 'brake' ? -st.decel * 0.05 : 0;
+      for (const s of car.straps) {
+        const wv = 6.2 + (s.ph % 1.3), zeta = 0.09;
+        s.v += (-(wv * wv) * (s.a - (-m.roll * 7 - latVel * 2.5 - rollVel * 0.6)) - 2 * zeta * wv * s.v) * dt; s.a += s.v * dt;
+        s.w += (-(wv * wv) * (s.b - (-m.pitch * 6 + bump * 1.2 * (0.6 + 0.4 * Math.sin(s.ph)) + brakeKick)) - 2 * zeta * wv * s.w) * dt; s.b += s.w * dt;
+        s.piv.rotation.x = s.a + 0.03 * Math.sin(simT * 1.3 + s.ph); s.piv.rotation.z = s.b;
+      }
+      for (const nd of car.nodders) { nd.obj.rotation.z = -m.roll * 4 * nd.k + Math.sin(simT * 1.7) * 0.015 * nd.k; nd.obj.rotation.x = bump * 0.5 * nd.k; }
+      for (const p of list) { if (p.torso && p.breath) p.torso.scale.y = 1 + p.breath * Math.sin(simT * 1.7 + p.ph); if (p.act) p.act(simT, p, m.roll); }
+      const tc = (simT + 0.8) % 3.4;
+      kitty.userData.tail.rotation.y = tc < 0.6 ? Math.sin(tc / 0.6 * Math.PI * 2) * 0.35 : Math.sin(simT * 0.8) * 0.05;
+      kitty.userData.tip.rotation.y = tc < 0.6 ? Math.sin(tc / 0.6 * Math.PI * 2 - 0.8) * 0.6 : 0;
+      kitty.userData.head.rotation.x = Math.sin(simT * 0.35) * 0.05;
+      sun.intensity = 5.0 * (1 - 0.12 * world.pillarNear() * k) * (station.visible && Math.abs(station.position.x) < PL / 2 + 4 ? 0.85 : 1);
+      if (st.v > 0.5) { const j = Math.floor(tj / JOINT); if (j !== lastJ) { lastJ = j; if (k > 0.3) sfx('clack'); } }
+      prevM = m;
+      // doors
+      if (st.chimeT >= 0) { st.chimeT += dt; if (st.chimeT > 3 && !st.hold) st.doorWant = 0; }
+      st.door += (st.doorWant - st.door) * Math.min(1, dt * (st.doorWant ? 3 : 2));
+      if (st.hold && st.door < st.holdAt) st.door = st.holdAt;
+      setDoors(st.door);
+      if (st.door > 0.3) nav.unblock('doors');
+      else if (!nav.rects.some((r) => r.tag === 'doors')) nav.blockTagged('doors', -LX, LX + 8, LZ - 0.02, LZ + T + 0.06);
+      stepPeople([kuroda, aoi, rei], dt);
+      if (cupSt.state === 'tip') { cupSt.k += (cupSt.want - cupSt.k) * Math.min(1, dt * 3); cup.rotation.z = -cupSt.k * 0.5 + Math.sin(simT * 9) * 0.04 * cupSt.k; }
+      const p = game.player.root.position;
+      if (aoi.lookTarget) lookAt(aoi, aoi.lookTarget[0], aoi.lookTarget[1], 1);
+      else if (!aoi.act && Math.hypot(p.x - aoi.root.position.x, p.z - aoi.root.position.z) < 2) lookAt(aoi, p.x, p.z, 0.8);
+    },
+    hooks: {
+      announce: ({ text, voice: v }) => ui.board(text, { voiceKey: v }),
+      arrive: () => {
+        station.visible = true;
+        st.decel = 1.15; st.mode = 'brake';
+        const D = (st.v * st.v) / (2 * st.decel);
+        st.stopAt = st.dist + D; st.stopX = st.stopAt;           // the station's centre lines up with the car when stopped
+        sfx('brake'); game.event('approach');
+      },
+      doorsOpen: () => { st.doorWant = 1; st.chimeT = -1; st.hold = false; sfx('door'); },
+      doorsClose: () => { st.doorWant = 0; st.hold = false; st.chimeT = -1; sfx('door'); },
+      chime: () => { st.chimeT = 0; sfx('chime'); game.event('chime'); },
+      doorsHold: () => { st.hold = true; st.holdAt = Math.max(0.45, st.door); st.doorWant = st.holdAt; sfx('no'); },
+      wake: ({ who = 'kuroda' }) => { const r = people[who]; if (!r || !r.hips) return; r.act = null; r.head.rotation.set(0.1, 0, 0); },
+      cup: ({ state }) => {
+        cupSt.state = state;
+        if (state === 'tip') { cupSt.want = 1; sfx('no'); }
+        if (state === 'safe') { cupSt.want = 0; cup.rotation.set(0, 0, 0); if (rei.root.visible) { cup.position.set(0.08, 0.14, 0.18); rei.torso.add(cup); } else { cup.position.set(2.32, SEAT_Y + 0.02, -(LZ - 0.3)); } }
+      },
+      catTo: async ({ to }) => { const p = game.posOf(to); if (!p) return; await glide(game, kitty, p, 1.0); kitty.position.y = 0; },
+    },
+    onEnter: async () => {},
+    // Mio (the Meshy model) sits where the laptop woman sat, laptop on her knees
+    placeMio(m) {
+      rei.root.visible = false; rei.blob.visible = false; if (list.includes(rei)) list.splice(list.indexOf(rei), 1);
+      m.root.visible = true; m.sitAt(2.1, SEAT_Y, -(LZ - 0.24) + 0.02, 0); m.seated = true;
+      car.root.attach(laptop); laptop.position.set(2.1, SEAT_Y + 0.2, -(LZ - 0.24) + 0.3); laptop.rotation.set(0, 0, 0);
+    },
+    capState(s) {
+      if (s === 'stopped') { station.visible = true; st.mode = 'stopped'; st.v = 0; st.stopX = st.dist; st.arrived = true; st.door = 1; st.doorWant = 1; setDoors(1); }
+      if (s === 'platform') { P.capState('stopped'); game.player.root.position.set(DOOR_X, 0, LZ + 1.0); }
+      if (s === 'sit') { const q = seats.seat_far_r; folder.visible = false; cup.visible = false; const m = game.player; m.seated = true; m.sitAt(q.x, SEAT_Y, q.z + 0.02, 0); game.walker.facing = 0; }
+    },
+    // leaving: out onto the platform if she isn't there yet, then along it to the covered walkway
+    async tripOut(g, slot) {
+      const mio = g.player; mio.scripted = true;
+      if (mio.seated) await P.standPerson('eric');
+      const p = mio.root.position;
+      mio.setState('walk');
+      if (p.z < LZ + 0.2) { const dx = Math.abs(p.x - DOOR_X) < Math.abs(p.x + DOOR_X) ? DOOR_X : -DOOR_X; await glide(g, mio.root, [dx, LZ - 0.35], 1.4); await glide(g, mio.root, [dx, LZ + 0.9], 1.4); }
+      for (const id of withList(slot)) {
+        const r = people[id] || (id === 'mio' ? game.mioNpc : null); if (!r) continue;
+        if (r.meshy) { if (r.seated) { r.seated = false; r.setState('idle'); r.root.position.y = 0; r.root.position.z += 0.5; } r.root.visible = true; r.setState('walk'); glide(game, r.root, [DOOR_X - 0.3, LZ - 0.3], 1.4).then(() => glide(game, r.root, [DOOR_X - 0.3, LZ + 1.3], 1.4)).then(() => glide(game, r.root, [7.6, LZ + 1.7], 1.45)); continue; }
+        if (!r.hips) continue;
+        r.root.visible = true; if (r.blob) r.blob.visible = true;
+        const go = () => walkPerson(r, [[DOOR_X - 0.3, LZ + 1.3], [7.6, LZ + 1.7]], { speed: 1.45, blobM: r.blob });
+        if (r.root.position.z < LZ) P.walkPerson(id, [DOOR_X - 0.3, LZ - 0.3]).then(go); else go();
+      }
+      cam.closeOn([p.x, LZ + 1.0], 1.35);
+      const follow = setInterval(() => { cam.close = { x: mio.root.position.x, z: LZ + 1.0, zoom: 1.35 }; }, 50);
+      await glide(g, mio.root, [7.4, LZ + 1.5], 1.45);
+      clearInterval(follow);
+      mio.setState('idle');
+    },
+  };
+  function onStop() {
+    st.arrived = true; flags.arrived = true;
+    sfx('brake');
+    P.hooks.doorsOpen();
+    game.event('arrived');
+  }
+  st.stopX = 1e6; P._st = st;
+  kitty.userData.tail.rotation.y = 0;
+  return P;
+}
+// Mio's sitting pose on a bench: offsets from the seat top (tuned against screenshots)
+const _q = new URLSearchParams(location.search);
+export const MIO_SIT = { y: _q.has('sy') ? +_q.get('sy') : -0.36, dz: _q.has('sdz') ? +_q.get('sdz') : 0.1 };

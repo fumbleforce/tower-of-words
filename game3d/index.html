@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Day One</title>
+<link rel="stylesheet" href="css/style.css">
+<script type="importmap">
+{ "imports": { "three": "./vendor/three/three.module.js", "three/addons/": "./vendor/" } }
+</script>
+</head>
+<body>
+<canvas id="c" tabindex="0"></canvas>
+<div id="ui"></div>
+<div id="title" hidden>
+  <div class="inner">
+    <p class="day">Day one</p>
+    <h1>First morning at Amakawa</h1>
+    <p class="lede">You're Mio, a programmer from Bergen, on your first morning at a company so big it has its own island. Take the train in, get past the gate, find your desk. A few everyday Japanese words will work better for you than they should.</p>
+    <div class="btns"><button type="button" class="go">Start</button><button type="button" class="cont" hidden>Continue</button></div>
+    <p class="keys"><span class="desk">Click the floor or use WASD to walk. Click people to talk. Space goes on.</span><span class="tch">Tap the floor to walk. Tap people to talk.</span></p>
+  </div>
+</div>
+<script type="module" src="./js/main.js"></script>
+</body>
+</html>
