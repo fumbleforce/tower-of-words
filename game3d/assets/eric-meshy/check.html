@@ -1,0 +1,37 @@
+<!doctype html><html><head><meta charset="utf-8">
+<script type="importmap">{ "imports": { "three": "../../vendor/three/three.module.js", "three/addons/": "../../vendor/" } }</script>
+<style>html,body{margin:0;height:100%;background:#9d978f}canvas{display:block}</style></head><body>
+<script type="module">
+// Headless rig check for Eric. ?files=a.glb,b.glb&t=0.3,0.5&bones=1&ry=0.4 : one panel per file at clip time t (fraction).
+import * as THREE from 'three';
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+const q = new URLSearchParams(location.search);
+const files = (q.get('files') || 'eric-idle.glb').split(','), ts = (q.get('t') || '0.3').split(',').map(Number);
+const W = innerWidth, H = innerHeight, n = files.length;
+const r = new THREE.WebGLRenderer({ antialias: true }); r.setSize(W, H); r.setScissorTest(true); document.body.appendChild(r.domElement);
+r.outputColorSpace = THREE.SRGBColorSpace;
+const loader = new GLTFLoader();
+const gs = await Promise.all(files.map(f => loader.loadAsync(f)));
+for (let i = 0; i < n; i++) {
+  const g = gs[i];
+  const s = new THREE.Scene(); s.background = new THREE.Color('#9d978f');
+  s.add(new THREE.HemisphereLight('#e8eef8', '#8a7a68', 2.2));
+  const sun = new THREE.DirectionalLight('#fff0e0', 2); sun.position.set(-1.5, 4, 3); s.add(sun);
+  const fl = new THREE.Mesh(new THREE.PlaneGeometry(10, 10), new THREE.MeshStandardMaterial({ color: '#c9c2b8' })); fl.rotation.x = -Math.PI / 2; s.add(fl);
+  const grid = new THREE.GridHelper(4, 40, '#666', '#888'); grid.position.y = 0.001; s.add(grid);
+  const m = g.scene; m.rotation.y = +(q.get('ry') || 0.5); s.add(m);
+  const mixer = new THREE.AnimationMixer(m);
+  if (g.animations.length) { const c = g.animations[0]; mixer.clipAction(c).play(); mixer.setTime(c.duration * (ts[i] ?? ts[0])); }
+  m.updateMatrixWorld(true);
+  if (q.get('bones')) { const h = new THREE.SkeletonHelper(m); h.material.depthTest = false; h.material.linewidth = 3; s.add(h); }
+  const hip = new THREE.Vector3(), bb = new THREE.Box3().setFromObject(m, true), info = {};
+  m.traverse(o => { if (o.isBone && /^(Hips|Head|LeftFoot|RightFoot|LeftToeBase|RightToeBase)$/.test(o.name)) { const v = o.getWorldPosition(new THREE.Vector3()); info[o.name] = v.toArray().map(x => +x.toFixed(3)); } });
+  info.meshMinY = +bb.min.y.toFixed(3); info.meshMaxY = +bb.max.y.toFixed(3); (window.__info ||= []).push([files[i], info]);
+  const fx = q.get('follow') ? info.Hips[0] : 0, fz = q.get('follow') ? info.Hips[2] : 0;
+  const cam = new THREE.PerspectiveCamera(24, (W / n) / H, 0.05, 50);
+  const el = +(q.get('el') || 8) * Math.PI / 180, d = +(q.get('d') || 3.4), cy = +(q.get('cy') || 0.55);
+  cam.position.set(fx, cy + Math.sin(el) * d, fz + Math.cos(el) * d); cam.lookAt(fx, cy, fz);
+  r.setViewport(i * W / n, 0, W / n, H); r.setScissor(i * W / n, 0, W / n, H); r.render(s, cam);
+}
+window.__done = true;
+</script></body></html>

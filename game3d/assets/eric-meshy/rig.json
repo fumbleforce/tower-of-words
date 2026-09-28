@@ -1,0 +1,27 @@
+{
+ "source_task": "01a0e731-1faf-70a7-98e4-c0f2d163c246 (web app image-to-3d; rigged via model_url since the API rejects web tasks as input_task_id)",
+ "rig_task": "01a0e73c-899a-705a-a27e-767620e5cda0",
+ "height_meters": 1.1,
+ "files": {
+  "eric-rigged.glb": "rigged T-pose",
+  "eric-walk.glb": "rigging basic walking",
+  "eric-run.glb": "rigging basic running"
+ },
+ "animation_tasks": {
+  "eric-idle.glb": {
+   "task": "01a0e73e-84d6-712a-8f5a-da4230b25bff",
+   "action_id": 0,
+   "key": "Idle"
+  },
+  "eric-sit.glb": {
+   "task": "01a0e73e-8f83-7114-aff8-8a72efa35403",
+   "action_id": 33,
+   "key": "Chair_Sit_Idle_M"
+  },
+  "eric-tosit.glb": {
+   "task": "01a0e73e-99eb-774b-b7ab-0defefc2a85b",
+   "action_id": 58,
+   "key": "Step_to_Sit_Transition"
+  }
+ }
+}
