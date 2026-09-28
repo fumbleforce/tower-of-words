@@ -212,7 +212,7 @@ export function unlockAudio() { ac(); }
 // don't exist yet fall back to neutral. People without approved art get a name plate only.
 // Provisional (the art agent's picks, not approved yet): Eric seed 734 v2, Mori 713, Kenji 711, Hamada (speaker kuroda) 721,
 // the guard Ishibashi. See story/FORMAT.md.
-export const PORTRAITS = { mio: ['neutral', 'smile', 'deadpan', 'surprised', 'embarrassed', 'tired'], aoi: ['neutral'], kuro: ['neutral'],
+export const PORTRAITS = { mio: ['neutral', 'smile', 'deadpan', 'surprised', 'embarrassed', 'tired', 'phone'], aoi: ['neutral'], kuro: ['neutral'],
   eric: ['neutral', 'surprised', 'tired'], mori: ['neutral', 'smile', 'flustered'], kenji: ['neutral', 'grin', 'sheepish'],
   kuroda: ['neutral', 'sleepy', 'panicked'], guard: ['neutral', 'stern', 'amused'], emi: ['neutral'] };
 // Mio's new faces are still being made: they are listed so they switch in by name when the files land; until then
@@ -377,6 +377,16 @@ function reveal(line, cps) {
   return r;
 }
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+// a small play button after each taught word in a line: tap it (or the word) to hear the word again
+function addPlayButtons(line) {
+  for (const w of line.querySelectorAll('.jp[data-w]')) {
+    const id = w.dataset.w; if (!WORDS[id] || !WORDS[id].voice) continue;
+    const b = document.createElement('button'); b.type = 'button'; b.className = 'wplay'; b.dataset.w = id;
+    b.setAttribute('aria-label', `Hear ${WORDS[id].ro}`);
+    b.innerHTML = '<svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="10"/><path d="M8 6.2v7.6l6-3.8z"/></svg>';
+    w.after(b);
+  }
+}
 // slow clips for taught words (<voice>-slow), if the voice agent made them
 const slowClips = new Set();
 fetch(new URL('../audio/index.json?v=' + (window.BUILD || ''), import.meta.url)).then((r) => (r.ok ? r.json() : [])).then((l) => l.forEach((k) => { if (/-slow$/.test(k)) slowClips.add(k); })).catch(() => {});
@@ -450,7 +460,8 @@ export const ui = {
     // doing nothing, and asks main.js to hurry the scripted move along (game.skip, if it has one).
     const tapTalk = (e) => {
       if (e.target.closest('.chip, .tp-in, button')) return;
-      const w = e.target.closest('.jp[data-w]'); if (w) { e.stopPropagation(); e.preventDefault(); this.sayWord(w.dataset.w, w); return; }
+      const pb = e.target.closest('.wplay'); if (pb) { e.stopPropagation(); e.preventDefault(); this.sayWord(pb.dataset.w, pb); return; }
+      const w = e.target.closest('.jp[data-w]'); if (w) { e.stopPropagation(); e.preventDefault(); this.sayWord(w.dataset.w, w.nextElementSibling && w.nextElementSibling.classList.contains('wplay') ? w.nextElementSibling : w); return; }
       e.stopPropagation();
       if (this._advance) { this._advance(); return; }
       this.waitPulse(e.clientX, e.clientY);
@@ -469,7 +480,11 @@ export const ui = {
   // the goal must be unmistakable). A new goal clears the old hint. Tapping the chip shows the hint again.
   goal(text) {
     const g = $('#goal');
-    const was = this.goalText || '';
+    // onboarding (notes/ONBOARDING.md rule 5): no goal until talking has been taught; it shows then
+    if (window.__onboard && window.__onboard.holdGoal && text) { this._heldGoal = text; this.goalText = text; g.hidden = true; return; }
+    this._heldGoal = '';
+    const was = this._shownGoal || '';
+    this._shownGoal = text || '';
     this.goalText = text || '';
     if (text !== was) { this._hintHTML = ''; this.hideHint(); }
     if (!text) { g.hidden = true; return; }
@@ -478,6 +493,7 @@ export const ui = {
     g.setAttribute('aria-label', 'Goal: ' + g.querySelector('.t').textContent);
     if (text !== was) { g.classList.remove('pop'); void g.offsetWidth; g.classList.add('pop'); }
   },
+  releaseGoal() { if (this._heldGoal) { const t = this._heldGoal; this._heldGoal = ''; this.goal(t); } },
   setSayKey(code) { const k = $('#sayBtn .key'); if (k) k.textContent = keyLabel(code || 'KeyQ'); },
   refreshWords() {
     const b = $('#cmdsBtn');
@@ -530,35 +546,43 @@ export const ui = {
   // with where the Say target is and whether a word does something there.
   placeSay(x, y, show) {
     $('#sayBtn').hidden = true;
-    const act = $('#actMenu'), g = window.__game; if (!act || !g) return;
+    const act = $('#actMenu'), g = window.__game; if (!act || !g || !g.place) return;
     const blocked = !$('#sayMenu').hidden || !$('#cmdsPanel').hidden || [...document.querySelectorAll('.panel')].some((p) => !p.hidden) || document.body.classList.contains('busy') || document.body.classList.contains('trip') || this.talking;
-    const near = g.near, st = g.sayTarget;
-    const target = near || (show ? st : null);
-    if (!target || blocked) { act.hidden = true; this._actKey = ''; return; }
+    // only the target in reach (notes/ONBOARDING.md rule 4): never something across the room
+    const target = g.near, st = g.sayTarget;
+    const obw = window.__onboard;
+    if (!target || blocked || (obw && obw.active && !obw.moved)) { if (!act.hidden) act.hidden = true; this._actKey = ''; return; }
+    const ob = window.__onboard || {};
     const phone = document.body.classList.contains('phone');
-    const verb = target.el ? target.el.querySelector('.vb')?.textContent : '', name = target.label || '';
-    const sayTo = show && st && st !== target ? st.label : '';
-    const cyc = this.cycleInfo && this.cycleInfo.n > 1 ? this.cycleInfo : null;
-    const key = [target.id, verb, name, show, sayTo, near ? 1 : 0, cyc ? cyc.i + '/' + cyc.n : '', phone, settings.keySay].join('|');
+    const verb = target.verb || (/person/.test(target.kind || '') ? 'Talk' : 'Look'), name = target.label || '';
+    const isGoal = !!(target.goal && target.goal());
+    // Say shows for this target when a word does something here; the first time only at the goal (the cat)
+    const sayHere = show && st === target && (ob.sayUsed || !ob.active || isGoal);
+    const uses = ob.uses || 0;
+    const cyc = !ob.active && this.cycleInfo && this.cycleInfo.n > 1 ? this.cycleInfo : null;
+    const key = [target.id, verb, name, sayHere, cyc ? cyc.i + '/' + cyc.n : '', phone, settings.keySay, Math.min(uses, 5), ob.sayUsed ? 1 : 0].join('|');
     if (key !== this._actKey) {
       this._actKey = key;
-      const k = (c) => (phone ? '' : `<span class="k">${c}</span>`);
-      act.innerHTML = (near ? `<button type="button" class="act use">${k('E')}<span class="vb">${verb || 'Look'}</span><span class="nm">${name}</span></button>` : '') +
-        (show ? `<button type="button" class="act say">${k(keyLabel(settings.keySay || 'KeyQ'))}<span class="vb">Say</span><span class="nm">${sayTo ? 'to ' + sayTo : 'a word'}</span></button>` : '') +
+      const k = (c, cls = '') => (phone ? '' : `<span class="k${cls}">${c}</span>`);
+      // the verb word goes after two uses, the key cap after five (the name always stays)
+      const useFace = phone ? `<span class="vb">${verb}</span><span class="nm">${name}</span>`
+        : uses >= 5 ? `<span class="nm">${name}</span>` : uses >= 2 ? `${k('E')}<span class="nm">${name}</span>` : `${k('E')}<span class="vb">${verb}</span><span class="nm">${name}</span>`;
+      act.innerHTML = `<button type="button" class="act use">${useFace}</button>` +
+        (sayHere ? `<button type="button" class="act say${ob.sayUsed ? '' : ' first'}">${k(keyLabel(settings.keySay || 'KeyQ'))}<span class="vb">Say</span><span class="nm">a word</span></button>` : '') +
         (cyc ? `<button type="button" class="act next">${k('Tab')}<span class="vb">Next</span><span class="nm">${cyc.i + 1} of ${cyc.n}</span></button>` : '');
       act.querySelector('.use')?.addEventListener('click', (e) => { e.stopPropagation(); g.use(g.near || target); });
       act.querySelector('.say')?.addEventListener('click', (e) => { e.stopPropagation(); this.onSay && this.onSay(); });
       act.querySelector('.next')?.addEventListener('click', (e) => { e.stopPropagation(); this.cycleInfo?.next(); });
     }
-    act.hidden = false;
-    // beside the target's pin (the marker's own position), kept on screen
-    const m = target.el && target.el.style.transform.match(/translate\(([-\d.]+)px,\s*([-\d.]+)px\)/);
-    let px = m ? +m[1] : x, py = m ? +m[2] : y;
+    if (act.hidden) act.hidden = false;
+    // beside the target, level with its head: never over the target itself; flips to the left near the right edge
+    const V = g.place.camera.position.constructor, v = target.anchor(new V()).project(g.place.camera);
+    const px = ((v.x + 1) / 2) * innerWidth, py = ((1 - v.y) / 2) * innerHeight;
     const sc = phone ? 1 : (+getComputedStyle(document.documentElement).getPropertyValue('--ui') || 1);
-    const W = innerWidth, H = innerHeight, aw = (act.offsetWidth || 200) * sc, ah = (act.offsetHeight || 100) * sc;
-    const flip = px + 34 + aw > W - 8;
-    let ax = flip ? px - 34 - aw : px + 34, ay = py - 70 * sc;
-    ax = Math.max(8, Math.min(W - aw - 8, ax)); ay = Math.max((phone ? 110 : 70) * sc, Math.min(H - ah - 12, ay));
+    const W = innerWidth, H = innerHeight, aw = (act.offsetWidth || 180) * sc, ah = (act.offsetHeight || 50) * sc;
+    const gap = 30 * sc, flip = px + gap + aw > W - 8;
+    let ax = flip ? px - gap - aw : px + gap, ay = py - ah / 2;
+    ax = Math.max(8, Math.min(W - aw - 8, ax)); ay = Math.max((phone ? 60 : 64) * sc, Math.min(H - ah - 12, ay));
     act.style.transform = `translate(${Math.round(ax)}px, ${Math.round(ay)}px) scale(${sc})`;
     act.classList.toggle('flip', flip);
   },
@@ -567,6 +591,8 @@ export const ui = {
   hint(html) {
     const h = $('#hint');
     if (!html) { this.hideHint(); return; }
+    // onboarding: the first screen has one line only (the controls); story hints wait until talking is taught
+    if (window.__onboard && window.__onboard.holdHints) return;
     this._hintHTML = html;
     h.querySelector('.hx').innerHTML = html; h.hidden = false;
     h.classList.remove('in'); void h.offsetWidth; h.classList.add('in');
@@ -605,6 +631,7 @@ export const ui = {
       who.innerHTML = speaker ? `<span class="nm" style="--c:${speaker.color || '#8fa3c0'}">${speaker.name}</span>${speaker.role ? `<span class="rl">${speaker.role}</span>` : ''}` : '';
       const lineEl = t.querySelector('.line');
       lineEl.innerHTML = overheard ? heardHTML(text, clear) : lineHTML(text);
+      if (!overheard) addPlayButtons(lineEl);
       t.querySelector('.chips').innerHTML = '';
       const more = t.querySelector('.more');
       more.hidden = false;
@@ -613,6 +640,7 @@ export const ui = {
       if (overheard) scramble(lineEl);
       const spoken = voiceKey ? voice(voiceKey, { muffle: !!overheard }) : null;
       const started = performance.now();
+      this._lines = (this._lines || 0) + 1;   // the continue hint shows with words for the first few lines
       if (this.auto) { setTimeout(() => { this._advance = null; stopVoice(); res(); }, 15); return; }
       const cps = CPS[settings.textSpeed] || 0;
       const rv = !overheard && cps ? reveal(lineEl, cps) : { done: true };
@@ -738,8 +766,8 @@ export const ui = {
   sayWord(id, el) {
     const w = WORDS[id]; if (!w || !w.voice) { sfx('tap'); return; }
     const slow = slowClips.has(w.voice + '-slow');
-    voice(slow ? w.voice + '-slow' : w.voice, slow ? {} : { rate: 0.9 });
-    if (el) { el.classList.remove('said'); void el.offsetWidth; el.classList.add('said'); }
+    const p = voice(slow ? w.voice + '-slow' : w.voice, slow ? {} : { rate: 0.9 });
+    if (el) { el.classList.add('playing'); p.then(() => el.classList.remove('playing')); }
   },
   // what the dialogue area shows: continue (with words for the first lines), waiting, or nothing; the tap layer
   syncTalkState() {
@@ -752,10 +780,9 @@ export const ui = {
     // (only write what changed: #talk is watched by a MutationObserver, and even a same-value write is a mutation)
     const hide = !!(this.auto || !(open || busy) || typing || choosing); if (hit.hidden !== hide) hit.hidden = hide;
     hit.classList.toggle('go', canGo);
-    if (canGo && this._shownLine !== t.querySelector('.line')?.textContent) { this._shownLine = t.querySelector('.line')?.textContent; this._lines = (this._lines || 0) + 1; }
     const phone = document.body.classList.contains('phone');
     const ch = t.querySelector('.more .ch');
-    if (ch) { const tx = phone ? 'Tap to continue' : 'Click to continue', hd = (this._lines || 0) > 8; if (ch.textContent !== tx) ch.textContent = tx; if (ch.hidden !== hd) ch.hidden = hd; }
+    if (ch) { const tx = phone ? 'Tap this area to continue' : 'Press Space or click this area to continue', hd = (this._lines || 0) > 5; if (ch.textContent !== tx) ch.textContent = tx; if (ch.hidden !== hd) ch.hidden = hd; }
   },
   waitPulse(x, y) {
     const t = $('#talk');

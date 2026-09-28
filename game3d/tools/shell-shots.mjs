@@ -44,12 +44,11 @@ for (const s of SCREENS.filter((x) => !only || only.includes(x))) {
     p.on('console', (m) => { if (m.type() === 'error' && !/404|Failed to load resource/.test(m.text())) errs.push(m.text()); });
     const inGame = !['title', 'settings', 'load'].includes(s);
     const q = `shell=${QS[s] || s}&pics=${encodeURIComponent('/' + rel + '/places')}${inGame ? `&place=${PLACE[s] || 'gate'}&skip` : ''}`;
-    await p.goto(`${BASE}game3d/index.html?${q}`);
+    await p.goto(`${BASE}game3d/index.html?${q}${dev === 'qhd' ? '&q=0' : ''}`);
     await p.waitForFunction(() => window.__shellReady, null, { timeout: 90000 }).catch(() => errs.push('timeout'));
     await p.waitForTimeout(900);
     const file = path.join(out, `${s}-${dev}.png`);
-    await p.screenshot({ path: file });
-    results.push({ s, dev, file, errs });
+    try { await p.screenshot({ path: file, timeout: 180000 }); results.push({ s, dev, file, errs }); } catch (e) { errs.push('screenshot: ' + e.message.split('\n')[0]); }
     console.log(s, dev, errs.length ? 'ERR ' + errs.slice(0, 3).join(' | ') : 'ok');
     await p.close();
   }

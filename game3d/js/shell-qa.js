@@ -41,6 +41,13 @@ export async function run(mode, api) {
       if (Q.get('cycle')) { await wait(400); for (let i = 0; i < +Q.get('cycle'); i++) window.__shell.cycleTarget?.(); }
     }
     if (mode === 'goal') { g.ui.goal(Q.get('goal') || 'Find a seat.'); }
+    if (mode === 'talkseq') {
+      // a run of lines for click and hover tests: window.__line counts the lines shown
+      g.runner.trigger = () => false; g.ui.closeTalk();
+      const lang = await import('./lang.js'); lang.known.add('ohayo');
+      (async () => { for (let i = 0; i < 40; i++) { window.__line = i; await g.ui.say({ name: 'Mio', role: 'programmer', color: '#5fc6bf' }, `Line ${i + 1}. In the morning you say {ohayo} to everyone here.`, { whoId: 'mio' }); } })();
+      await wait(800);
+    }
     if (mode === 'talk' || mode === 'wait') {
       g.runner.trigger = () => false;
       const known = await import('./lang.js'); known.known.add('ohayo');
