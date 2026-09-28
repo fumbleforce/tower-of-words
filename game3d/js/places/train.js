@@ -171,12 +171,37 @@ export async function trainPlace(game) {
 
   // doors: the near-side sliding leaves in the shell
   let doorLeaves = [];
+  // the platform-side door sets, made to read from above (Jørgen: "the train has no door"): dark frame posts
+  // standing a little proud of the cut wall, a header with a lamp (amber shut, green open), a yellow edge
+  // stripe on each leaf and a yellow threshold on the floor
+  const doorLamps = [], myLeaves = [];
+  const lampShut = emissive('#ffcf8a', '#ffb24a', 1.8), lampOpen = emissive('#b8f5c8', '#46d18a', 2.2);
+  for (const dx of [-DOOR_X, DOOR_X]) {
+    for (const s of [-1, 1]) car.root.add(rbox(0.07, 0.8, 0.16, '#3a404b', { x: dx + s * (DOOR_W / 2 + 0.035), z: LZ + T / 2, r: 0.02 }));
+    car.root.add(rbox(DOOR_W + 0.2, 0.08, 0.16, '#3a404b', { x: dx, y: 0.8, z: LZ + T / 2, r: 0.02 }));
+    const lamp = rbox(0.24, 0.05, 0.1, null, { x: dx, y: 0.88, z: LZ + T / 2, r: 0.015, m: lampShut, cast: false });
+    car.root.add(lamp); doorLamps.push(lamp);
+    car.root.add(rbox(DOOR_W, 0.006, 0.12, '#d8b447', { x: dx, y: 0.001, z: LZ - 0.02, r: 0.003, cast: false }));
+    // full-height sliding leaves (taller than the cut wall so they read), each with a window and a yellow edge
+    for (const s of [-1, 1]) {
+      const leaf = new THREE.Group();
+      leaf.add(rbox(DOOR_W / 2 - 0.01, 0.76, 0.05, '#c3c9d1', { r: 0.015 }));
+      leaf.add(rbox(DOOR_W / 2 - 0.12, 0.3, 0.056, '#4d6278', { y: 0.36, r: 0.02, m: mat('#56708a', { roughness: 0.2 }) }));
+      leaf.add(rbox(0.03, 0.74, 0.058, '#e0b83a', { x: -s * (DOOR_W / 4 - 0.02), y: 0.01, r: 0.01, cast: false }));
+      leaf.position.set(dx + s * DOOR_W / 4, 0.02, LZ + T / 2 + 0.02);
+      car.root.add(leaf); myLeaves.push({ g: leaf, x0: leaf.position.x, s });
+    }
+  }
   function findDoors() {
     // Jørgen: no visible light fixtures in the car; the point lights stay
     const lm = carMat('lamp', COL.lamp); car.root.traverse((o) => { if (o.isMesh && o.material === lm) o.visible = false; });
     doorLeaves = [];
     const dm = carMat('door', COL.door);
     car.root.traverse((o) => { if (o.isMesh && o.material === dm && Math.abs(o.position.z - (LZ + 0.03)) < 0.002) doorLeaves.push({ m: o, x0: o.position.x }); });
+    for (const d of doorLeaves) if (!d.m.userData.stripe) {
+      const inner = d.x0 < Math.sign(d.x0) * DOOR_X - 0.1 ? DOOR_W / 2 - 0.03 : 0.02;   // the edge where the leaves meet
+      const st = rbox(0.03, 0.44, 0.05, '#e0b83a', { x: inner, y: 0.02, z: 0.01, r: 0.01, cast: false }); d.m.add(st); d.m.userData.stripe = st;
+    }
   }
   findDoors();
   const st = { v: SPEED, dist: 0, mode: 'cruise', brakeFrom: 0, stopAt: 0, door: 0, doorWant: 0, hold: false, chimeT: -1, arrived: false };
@@ -236,7 +261,9 @@ export async function trainPlace(game) {
 
   function setDoors(k) {
     // the leaves slide into the wall pocket; once they're mostly in, they're hidden (the low cut wall can't cover them)
-    for (const d of doorLeaves) { const dx = Math.sign(d.x0) * DOOR_X; d.m.position.x = d.x0 + (d.x0 < dx - 0.1 ? -1 : 1) * k * (DOOR_W / 2 - 0.02); d.m.visible = k < 0.7; }
+    for (const d of doorLeaves) { const dx = Math.sign(d.x0) * DOOR_X; d.m.position.x = d.x0 + (d.x0 < dx - 0.1 ? -1 : 1) * k * (DOOR_W / 2 - 0.02); d.m.visible = false; }
+    for (const d of myLeaves) d.g.position.x = d.x0 + d.s * k * (DOOR_W / 2 - 0.03);
+    for (const l of doorLamps) l.material = k > 0.3 ? lampOpen : lampShut;
   }
 
   // ---- people ids for the story ----

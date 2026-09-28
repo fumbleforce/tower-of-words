@@ -114,7 +114,7 @@ function entrance() {
 
 function liftDoor(x, z) {
   const g = new THREE.Group();
-  g.add(rbox(1.34, 1.52, 0.08, '#5d636d', { r: 0.02 }));
+  g.add(rbox(1.44, 1.6, 0.06, '#4c515b', { z: -0.02, r: 0.02 }), rbox(1.34, 1.52, 0.08, '#5d636d', { r: 0.02 }));
   const inside = rbox(1.1, 1.36, 0.02, '#c9c3b6', { z: -0.06, r: 0.01, m: emissive('#d8cfbf', '#f3dfb8', 0.4) }); g.add(inside);
   const leaves = [-1, 1].map((s) => { const l = rbox(0.54, 1.36, 0.05, null, { x: s * 0.275, z: 0.03, r: 0.01, m: mat('#8e949d', { roughness: 0.45, metalness: 0.35 }) }); g.add(l); return l; });
   const ind = rbox(0.36, 0.12, 0.03, '#1d2027', { y: 1.4, z: 0.05, r: 0.01, cast: false }); g.add(ind);
@@ -259,7 +259,7 @@ export function buildLobby() {
   kiosk.add(rbox(0.6, 0.5, 0.02, null, { x: 0, y: 0.62, z: 0.3, r: 0.02, m: emissive('#f1d8b8', '#e8b27a', 0.7), cast: false }));
   kiosk.add(rbox(0.24, 0.2, 0.2, '#1c1d20', { y: 0.2, z: 0.26, r: 0.02 }));
   { const t = textTexture((g, W, H) => { g.fillStyle = '#4a4f59'; g.fillRect(0, 0, W, H); g.fillStyle = '#f1e4d0'; g.font = '700 56px ' + JP_FONT; g.textAlign = 'center'; g.fillText('COFFEE', W / 2, 70); g.font = '600 34px ' + JP_FONT; g.fillText('¥120', W / 2, 118); }, 256, 140); const p = plane(0.5, 0.27, t); p.position.set(0, 0.62, 0.315); kiosk.add(p); }
-  kiosk.position.set(5.72, 0, 3.0); kiosk.rotation.y = -Math.PI / 2; root.add(kiosk);
+  kiosk.position.set(5.45, 0, 3.0); kiosk.rotation.y = -Math.PI / 2; root.add(kiosk);
   // benches
   const b1 = bench(2.1); b1.position.set(-3.9, 0, 2.55); root.add(b1);
   const b2 = bench(2.1); b2.position.set(3.95, 0, 1.3); root.add(b2);
@@ -297,7 +297,7 @@ export function buildLobby() {
   nav.block(3.1, 3.75, BZ + 0.2, BZ + 0.75);                             // the cat and her bowl
   nav.block(-5.2, -3.2, BZ, 0.75);                                     // counter and receptionist
   nav.block(-X, -5.6, -0.2, 0.8);                                      // lost and found
-  nav.block(5.35, X, 2.55, 3.45);                                      // coffee machine
+  nav.block(5.05, X, 2.55, 3.45);                                      // coffee machine
 
   const world = { root, scene, sun, proxy, nav, readers, arch: ar, guard, man, kuro, aoi, aoiBlob, manBlob, tama, lifts, screen: scr, BZ, X, Z };
   world.update = (t) => {

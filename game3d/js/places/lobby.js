@@ -87,7 +87,7 @@ export async function lobbyPlace(game) {
 
   // background people who aren't going anywhere yet
   const extras = [];
-  for (const [k, x, z, ry] of [[4, -3.5, -2.9, 0.9], [2, -2.95, -2.6, -2.2], [5, 5.0, 3.0, Math.PI / 2]]) {
+  for (const [k, x, z, ry] of [[4, -3.5, -2.9, 0.9], [2, -2.95, -2.6, -2.2], [5, 4.75, 3.0, Math.PI / 2 + 0.4]]) {
     const r = PEOPLE.worker(k); r.root.scale.multiplyScalar(K); r.root.position.set(x, 0, z); r.root.rotation.y = ry; w.root.add(r.root);
     const b = blob(0.5, 0.35); b.position.set(x, 0.004, z); w.root.add(b); extras.push(r);
     w.nav.block(x - 0.2, x + 0.2, z - 0.2, z + 0.2);
