@@ -52,7 +52,7 @@ export function cutSource(src, cfg) {
     const y = f.cen.y, b = f.bone;
     if (/^(Head|head_end|headfront)$/.test(b)) {
       if (skin(f.rgb)) return 'head';
-      const inFace = faceBox.containsPoint(f.cen) && f.n.z > 0.1;
+      const inFace = faceBox.containsPoint(f.cen) && f.n.z > 0.1 && Math.abs(f.cen.x - src.P.Head.x) < (cfg.faceHalf || 1);
       if (inFace && (cfg.eyesTextured ? f.textured : !hairC(f.rgb))) return 'head';
       return y < collar ? 'top' : 'hair';
     }

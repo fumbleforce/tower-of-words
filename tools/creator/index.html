@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Character creator</title>
-<script type="importmap">{"imports":{"three":"/game3d/vendor/three/three.module.js"}}</script>
+<script type="importmap">{"imports":{"three":"/game3d/vendor/three/three.module.js","three/addons/":"/game3d/vendor/"}}</script>
 <style>
   :root { --bg: #e9ecf1; --panel: #ffffff; --ink: #1b2130; --mute: #5d6678; --line: #d5dae3; --accent: #2f6fde; }
   @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --bg: #151923; --panel: #1f2533; --ink: #e8ecf3; --mute: #9aa4b8; --line: #323a4c; --accent: #6d9cff; } }
@@ -59,7 +59,7 @@ scene.add(new THREE.HemisphereLight(0xffffff, 0x8f98ab, 2.0));
 const sun = new THREE.DirectionalLight(0xffffff, 1.6); sun.position.set(1.5, 3, 2.5); scene.add(sun);
 const floor = new THREE.Mesh(new THREE.CircleGeometry(0.7, 48), new THREE.MeshLambertMaterial({ color: 0xc9cfda })); floor.rotation.x = -Math.PI / 2; scene.add(floor);
 const cam = new THREE.PerspectiveCamera(28, 1, 0.05, 50);
-function resize() { const w = view.clientWidth, h = view.clientHeight; renderer.setSize(w, h, false); cam.aspect = w / h; cam.position.set(0, 0.72, w < h ? 3.6 : 2.9); cam.lookAt(0, 0.55, 0); cam.updateProjectionMatrix(); }
+function resize() { const w = view.clientWidth, h = view.clientHeight; renderer.setSize(w, h, false); cam.aspect = w / h; cam.position.set(0, 0.75, w < h ? 4.4 : 3.6); cam.lookAt(0, 0.55, 0); cam.updateProjectionMatrix(); }
 addEventListener('resize', resize);
 
 const lib = await loadLibrary();

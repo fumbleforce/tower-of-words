@@ -1,0 +1,24 @@
+{
+ "title": "Character creator experiment",
+ "date": "2026-09-29",
+ "by": "creator agent",
+ "status": "open",
+ "question": "Mio and Eric can be cut into parts that swap and still walk. Keep going with this?",
+ "multi": false,
+ "media": [
+  {"image": "art/parts/shots/sheet.png", "caption": "The check sheet. 1: Mio and Eric rebuilt from their own parts next to the game's models (they match). 1b: both walking on Eric's clips. 2: six mixes in idle and walk. 3: close-ups of the neck, waist, ankles and head."},
+  {"image": "art/parts/shots/cut.png", "caption": "How each model is cut: hair, head, top, bottom, shoes, hands."},
+  {"image": "art/parts/shots/ui-desktop.png", "caption": "The creator page, desktop"},
+  {"image": "art/parts/shots/ui-phone.png", "caption": "The creator page, phone (Eric's body, Mio's hair and hoodie)"}
+ ],
+ "options": [
+  {"id": "keep", "label": "keep: build it out", "note": "Next: more source models through the same cut, fixing the hair gap at the face, an export for the game."},
+  {"id": "clothes-only", "label": "clothes-only: swap clothes and colours, keep heads whole", "note": "Clothes and colour swaps look clean. Hair and head swaps are the weak part."},
+  {"id": "stop", "label": "stop: park it", "note": "Keep making each character whole in Meshy."}
+ ],
+ "links": [
+  {"label": "Try the creator", "href": "tools/creator/"},
+  {"label": "Check sheet (live)", "href": "tools/creator/sheet.html"},
+  {"label": "How it works", "href": "tools/creator/README.md"}
+ ]
+}

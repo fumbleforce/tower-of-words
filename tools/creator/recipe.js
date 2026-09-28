@@ -164,6 +164,12 @@ function boneBoxes(src) {
     const i = t * 3 + k; v.fromArray(src.pos, i * 3).sub(src.P.Head).applyQuaternion(inv.Head); hb.min.min(v); hb.max.max(v); hb.n++;
   }
   out.Head = hb;
+  // the whole head (face and hair), for fitting hair from one head onto another
+  const sk = { min: new THREE.Vector3(Infinity, Infinity, Infinity), max: new THREE.Vector3(-Infinity, -Infinity, -Infinity), n: 0 };
+  for (let t = 0; t < src.T; t++) if (src.slotOf[t] === 'head' || src.slotOf[t] === 'hair') for (let k = 0; k < 3; k++) {
+    const i = t * 3 + k; v.fromArray(src.pos, i * 3).sub(src.P.Head).applyQuaternion(inv.Head); sk.min.min(v); sk.max.max(v); sk.n++;
+  }
+  out.Skull = sk;
   return out;
 }
 
@@ -177,6 +183,14 @@ function carry(S, H, b) {
     cH.copy(fh.min).add(fh.max).multiplyScalar(0.5);
     const es = fs.max.clone().sub(fs.min), eh = fh.max.clone().sub(fh.min);
     for (let i = 0; i < 3; i++) r.setComponent(i, THREE.MathUtils.clamp(eh.getComponent(i) / Math.max(es.getComponent(i), 1e-4), 0.55, 1.8));
+    // The head keeps its shape: one scale, from the depth of the whole head (face plus hair; width and height
+    // are thrown off by buns and spikes). The chin lines up; left-right and front-back centre on the whole head.
+    if (bb === 'Head') {
+      const ks = S.fit.Skull, kh = H.fit.Skull;
+      r.setScalar(THREE.MathUtils.clamp((kh.max.z - kh.min.z) / Math.max(ks.max.z - ks.min.z, 1e-4), 0.55, 1.8));
+      cS.set((ks.min.x + ks.max.x) / 2, fs.min.y, (ks.min.z + ks.max.z) / 2);
+      cH.set((kh.min.x + kh.max.x) / 2, fh.min.y, (kh.min.z + kh.max.z) / 2);
+    }
   }
   const M = new THREE.Matrix4().makeTranslation(-S.P[bb].x, -S.P[bb].y, -S.P[bb].z);
   M.premultiply(new THREE.Matrix4().makeRotationFromQuaternion(S.B[bb].clone().invert()));
@@ -196,7 +210,7 @@ function partGeometry(lib, part, H, fit = {}) {
   const S = lib.src[part.source], tris = part.tris, n = tris.length * 3;
   const pos = new Float32Array(n * 3), nrm = new Float32Array(n * 3), uv = new Float32Array(n * 2), col = new Float32Array(n * 3);
   const use = new Float32Array(n), si = new Uint16Array(n * 4), sw = new Float32Array(n * 4);
-  const same = S === H;
+  const same = S === H, rigid = part.slot === 'hair' || part.slot === 'head';
   const car = same ? null : Object.fromEntries(BONES.map((b) => [b, carry(S, H, b)]));
   const a = new THREE.Vector3(), acc = new THREE.Vector3(), na = new THREE.Vector3(), nacc = new THREE.Vector3();
   let o = 0;
@@ -207,7 +221,8 @@ function partGeometry(lib, part, H, fit = {}) {
       acc.set(0, 0, 0); nacc.set(0, 0, 0); let wsum = 0;
       for (let q = 0; q < 4; q++) {
         const w = S.sw[i * 4 + q]; if (w <= 0) continue;
-        const c = car[BONES[S.si[i * 4 + q]]];
+        // hair and faces move as one rigid piece with the head: per-bone boxes tore their lower strands apart
+        const c = rigid ? car.Head : car[BONES[S.si[i * 4 + q]]];
         acc.addScaledVector(a.fromArray(S.pos, i * 3).applyMatrix4(c.M), w);
         nacc.addScaledVector(na.fromArray(S.nrm, i * 3).applyMatrix3(c.N), w); wsum += w;
       }
@@ -345,9 +360,12 @@ export async function buildCharacter(lib, recipe) {
   setColours(ch, recipe.colours || {});
   const clips = await clipsFor(lib, H);
   for (const [k, c] of Object.entries(clips)) ch.actions[k] = ch.mixer.clipAction(c);
+  // Meshy's idle clip swings the hips round and bends over within a few seconds (the game holds one frame of it too)
+  const IDLE_HOLD = 0.4;
   ch.play = (name, fade = 0.2) => {
     const a = ch.actions[name]; if (!a || a === ch.cur) return;
-    a.reset().fadeIn(ch.cur ? fade : 0).play(); if (ch.cur) ch.cur.fadeOut(fade); ch.cur = a;
+    a.reset(); if (name === 'idle') { a.time = IDLE_HOLD; a.timeScale = 0; }
+    a.fadeIn(ch.cur ? fade : 0).play(); if (ch.cur) ch.cur.fadeOut(fade); ch.cur = a;
   };
   ch.update = (dt) => { ch.mixer.update(dt); if (ch.cur && bones.Hips) { bones.Hips.position.x = H.P.Hips.x; bones.Hips.position.z = H.P.Hips.z; } };
   ch.bindPose = () => { ch.mixer.stopAllAction(); ch.cur = null; skeleton.pose(); };
