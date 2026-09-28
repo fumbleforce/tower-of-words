@@ -220,7 +220,7 @@ function coatRack() {
   const g = new THREE.Group();
   g.add(rbox(0.3, 0.03, 0.3, '#3c414b', { r: 0.01 }));
   const pole = new THREE.Mesh(new THREE.CylinderGeometry(0.02, 0.02, 1.2, 8), mat('#3c414b')); pole.position.y = 0.6; g.add(sh(pole));
-  g.add(rbox(0.3, 0.55, 0.12, '#5c6273', { y: 0.55, z: 0.06, r: 0.05 }));
+  g.add(rbox(0.3, 0.55, 0.12, '#8a7d6c', { y: 0.55, z: 0.06, r: 0.05 }));
   return g;
 }
 function standFan() {
@@ -368,9 +368,9 @@ export function buildOffice() {
     d.position.set(DX[i], 0, z);
     if (face < 0) d.rotation.y = Math.PI;
     root.add(d);
-    const c = officeChair(); c.position.set(DX[i], 0, z + face * 0.62); c.rotation.y = face > 0 ? Math.PI : 0;
+    const c = officeChair(); c.position.set(DX[i], 0, z + face * 0.5); c.rotation.y = face > 0 ? Math.PI : 0;
     if (!(row === 's' && i === 1)) root.add(c);
-    desks.push({ x: DX[i], z, face, chair: c, seat: [DX[i], z + face * 0.62], row, i });
+    desks.push({ x: DX[i], z, face, chair: c, seat: [DX[i], z + face * 0.5], row, i });
   }
   // the section chief's desk at the head of the island, facing along it
   const chief = desk({ w: 1.2, d: 0.72, seed: 7 }); chief.rotation.y = -Math.PI / 2; chief.position.set(1.55, 0, -3.36); root.add(chief);
@@ -413,7 +413,6 @@ export function buildOffice() {
   for (const [x, z, s] of [[-2.7, 5.9, 0.4], [-3.15, 5.95, 0.34], [-6.5, 5.9, 0.36]]) root.add(rbox(s, s * 0.8, s, PAL.box, { x, z, r: 0.02 }));
   root.add(rbox(0.26, 0.32, 0.26, '#b8453e', { x: -2.55, z: 4.6, r: 0.03 }), rbox(0.26, 0.3, 0.26, '#4f8a55', { x: -2.55, z: 5.0, r: 0.03 }));
   { const sd = new THREE.Group(); sd.add(rbox(0.7, 0.04, 0.45, '#d5d6d3', { y: 0.4, r: 0.01 }), rbox(0.05, 0.4, 0.4, PAL.deskLeg, { x: -0.3, r: 0.01 }), rbox(0.05, 0.4, 0.4, PAL.deskLeg, { x: 0.3, r: 0.01 }), rbox(0.12, 0.05, 0.05, '#3a3f48', { x: -0.15, y: 0.44, r: 0.01 }), rbox(0.2, 0.05, 0.28, PAL.paper, { x: 0.15, y: 0.44, r: 0.004 })); sd.position.set(-6.2, 0, 5.9); root.add(sd); }
-  for (const [x, z] of [[-3.5, 3.1], [-3.8, 3.1], [-3.65, 3.3]]) root.add(rbox(0.26, 0.2, 0.34, '#e8e4da', { x, y: 0, z, r: 0.01 }));
 
   { const s4 = shelf(1.2, 1.0, 0.36, { fill: 'binders', seed: 9 }); s4.rotation.y = -Math.PI / 2; s4.position.set(-2.45, 0, 5.4); root.add(s4); }
   // ---- kitchenette (給湯室) ----
