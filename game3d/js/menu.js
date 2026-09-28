@@ -75,7 +75,8 @@ function openLayer(elm, close) {
   const prev = document.activeElement;
   elm.hidden = false; elm.classList.remove('out'); void elm.offsetWidth; elm.classList.add('in');
   layers.push({ el: elm, close, prev });
-  requestAnimationFrame(() => { const f = focusables(elm); (elm.querySelector('[data-first]') || f[0])?.focus({ preventScroll: true }); });
+  // focus at once (not in an animation frame: a slow frame would leave the keyboard on the page behind)
+  const f = focusables(elm); (elm.querySelector('[data-first]') || f[0])?.focus({ preventScroll: true });
 }
 function closeLayer(elm) {
   const i = layers.findIndex((l) => l.el === elm); if (i < 0) return;
@@ -98,7 +99,7 @@ function hideBoot() {
 // flies from there into the car and lands on the play view while the title fades, so the day starts with no cut.
 const TITLE_POSE = {
   land: { t: [-2.6, -0.9, 0.6], el: 24, yaw: 30, d: 16, fov: 30 },
-  port: { t: [0.6, -2.2, 0.2], el: 34, yaw: 72, d: 17, fov: 40 },
+  port: { t: [-0.3, -2.0, 0.6], el: 32, yaw: -62, d: 17, fov: 40 },
 };
 let titleCam = null;
 function poseTitleCamera() {
@@ -142,6 +143,20 @@ function releaseTitleCamera(ms = 1600) {
     };
   });
 }
+
+// QA: hold the camera at a point k (0..1) of the flight from the title shot into the car, for stills
+shell._flightAt = (k) => {
+  if (!titleCam) poseTitleCamera();
+  const tc = titleCam; if (!tc) return;
+  const { cam, camera, orig } = tc;
+  tc.place(); const p0 = camera.position.clone(), q0 = camera.quaternion.clone(), f0 = camera.fov;
+  camera.fov = orig.fov; (cam._titleSnap || orig.update).call(cam, game().player.root.position);
+  const e = k < 0.5 ? 4 * k * k * k : 1 - Math.pow(-2 * k + 2, 3) / 2;
+  const pg = camera.position.clone(), qg = camera.quaternion.clone();
+  camera.position.lerpVectors(p0, pg, e); camera.quaternion.slerpQuaternions(q0, qg, e);
+  camera.fov = f0 + (orig.fov - f0) * e; camera.updateProjectionMatrix(); camera.updateMatrixWorld();
+  cam.update = () => {};
+};
 
 function autosaveInfo() {
   const d = store.get(SAVE_KEY); if (!d || !d.place) return null;
@@ -250,7 +265,7 @@ function buildSettings() {
     r.addEventListener('change', () => { if (r.dataset.key !== 'music') sfx('tap'); });
   }
   s.querySelectorAll('[data-close]').forEach((b) => { b.onclick = () => closeLayer(s); });
-  s.addEventListener('keydown', (e) => trap(s, e));
+  s.addEventListener('keydown', (e) => { trap(s, e); e.stopPropagation(); });
   syncSettings();
   return s;
 }
@@ -289,7 +304,7 @@ function buildSaves() {
     </section>`);
   s.id = 'saves'; s.hidden = true; document.body.appendChild(s);
   s.querySelectorAll('[data-close]').forEach((b) => { b.onclick = () => closeLayer(s); });
-  s.addEventListener('keydown', (e) => trap(s, e));
+  s.addEventListener('keydown', (e) => { trap(s, e); e.stopPropagation(); });
   return s;
 }
 let pendingThumb = null;
@@ -376,7 +391,7 @@ function buildPause() {
   p.querySelector('.quit').onclick = () => { sfx('tap'); p.querySelector('.pmenu').hidden = true; p.querySelector('.confirmq').hidden = false; p.querySelector('.confirmq .no').focus(); };
   p.querySelector('.confirmq .no').onclick = () => { p.querySelector('.confirmq').hidden = true; p.querySelector('.pmenu').hidden = false; p.querySelector('.quit').focus(); };
   p.querySelector('.confirmq .yes').onclick = () => { document.body.classList.add('reloading'); setTimeout(() => location.reload(), 200); };
-  p.addEventListener('keydown', (e) => { if (topLayer()?.el === p) trap(p, e); });
+  p.addEventListener('keydown', (e) => { if (topLayer()?.el === p) trap(p, e); e.stopPropagation(); });
   return p;
 }
 let isPaused = false;
@@ -409,6 +424,9 @@ shell.isPaused = () => isPaused;
 // Esc: closes the top layer (or a game panel that's open); otherwise opens or closes the pause menu. Registered
 // in the capture phase so it sees the state before ui.js's own Esc handling. While paused, keys don't reach the game.
 window.addEventListener('keydown', (e) => {
+  // Enter and Space on a focused menu button click it; the game's own Enter/Space (talk, advance) must not
+  // swallow them first
+  if ((e.code === 'Enter' || e.code === 'Space' || e.code === 'NumpadEnter') && e.target && e.target.tagName === 'BUTTON' && e.target.closest('#title, .layer, #end, #sayMenu, .panel, #cmdsPanel, #hint, #sayTip')) { e.stopImmediatePropagation(); return; }
   if (listening) {
     e.preventDefault(); e.stopImmediatePropagation();
     if (e.code === 'Escape') { stopListen(); return; }
@@ -432,11 +450,11 @@ window.addEventListener('keydown', (e) => {
     if (canPause()) { e.preventDefault(); setPaused(true); }
     return;
   }
-  if (isPaused || (topLayer() && !document.body.classList.contains('at-title'))) {
-    // inside the menus only: the game doesn't walk, talk or advance underneath
-    if (!e.target.closest || !e.target.closest('.layer')) { e.stopImmediatePropagation(); if (/^(Space|Enter|Key[WASDEFQ]|Arrow|Digit)/.test(e.code)) e.preventDefault(); }
-    else if (!/^(Tab|Enter|Space|Arrow|Escape)/.test(e.code) && !(e.target.tagName === 'INPUT')) e.stopImmediatePropagation();
-    else if (/^(Space|Enter|Arrow)/.test(e.code)) e.stopImmediatePropagation();   // handled by the focused control, not ui.js
+  if (isPaused || topLayer()) {
+    // keys inside a menu go to it (its own listener stops them there, before the game's window listeners);
+    // keys anywhere else don't reach the game while a menu is open
+    if (e.target.closest && e.target.closest('.layer')) return;
+    e.stopImmediatePropagation(); if (/^(Space|Enter|Key[WASDEFQ]|Arrow|Digit)/.test(e.code)) e.preventDefault();
   }
 }, true);
 // the page going to the background pauses the game (phones switching apps)

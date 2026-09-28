@@ -1,0 +1,4 @@
+# per-build shots stay local; the approved set is kept
+/*
+!/.gitignore
+!/approved-*/
