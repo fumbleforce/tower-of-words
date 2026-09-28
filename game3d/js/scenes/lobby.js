@@ -97,18 +97,27 @@ function guardDesk() {
 
 function entrance() {
   const g = new THREE.Group();
-  // two glass leaves and two side panels
+  // two fixed glass side panels and two sliding leaves, standing open: the leaves sit slid aside just inside the
+  // side panels (Jørgen: "I walk straight through the glass of the doors. Just leave them open.")
   const glassM = new THREE.MeshStandardMaterial({ color: '#dce8ef', roughness: 0.15, transparent: true, opacity: 0.55, depthWrite: false });
   const frame = mat('#3f444e');
-  const W = 4.6, H = 1.2;
+  const W = 4.6, H = 1.2, IN = W / 4 + 0.05;   // IN: the edge of the opening, where the side panels start
   g.add(rbox(W + 0.2, 0.08, 0.14, null, { y: H, m: frame }));
-  for (const x of [-W / 2, -W / 4 - 0.05, 0, W / 4 + 0.05, W / 2]) g.add(rbox(0.09, H, 0.12, null, { x, m: frame }));
-  const panes = [];
-  for (const [x0, x1] of [[-W / 2, -W / 4 - 0.05], [-W / 4 - 0.05, 0], [0, W / 4 + 0.05], [W / 4 + 0.05, W / 2]]) {
+  for (const x of [-W / 2, -IN, IN, W / 2]) g.add(rbox(0.09, H, 0.12, null, { x, m: frame }));
+  for (const [x0, x1] of [[-W / 2, -IN], [IN, W / 2]]) {
     const p = new THREE.Mesh(new THREE.BoxGeometry(x1 - x0 - 0.09, H - 0.04, 0.02), glassM);
-    p.position.set((x0 + x1) / 2, H / 2, 0); p.renderOrder = 2; g.add(p); panes.push(p);
+    p.position.set((x0 + x1) / 2, H / 2, 0); p.renderOrder = 2; g.add(p);
   }
-  g.add(rbox(0.03, 0.34, 0.04, '#c9cdd3', { x: -0.08, y: 0.45, z: 0.06, r: 0.01 }), rbox(0.03, 0.34, 0.04, '#c9cdd3', { x: 0.08, y: 0.45, z: 0.06, r: 0.01 }));
+  // the open leaves: glass in a thin frame, parked over the side panels on the inside
+  for (const s of [-1, 1]) {
+    const lw = IN - 0.1, cx = s * (IN + lw / 2 + 0.02), z = -0.1;
+    const p = new THREE.Mesh(new THREE.BoxGeometry(lw - 0.06, H - 0.1, 0.02), glassM); p.position.set(cx, H / 2, z); p.renderOrder = 2; g.add(p);
+    for (const dx of [-lw / 2, lw / 2]) g.add(rbox(0.04, H - 0.06, 0.04, null, { x: cx + dx, y: 0.02, z, m: frame }));
+    g.add(rbox(lw, 0.04, 0.04, null, { x: cx, y: H - 0.1, z, m: frame }), rbox(lw, 0.04, 0.04, null, { x: cx, y: 0.02, z, m: frame }));
+    g.add(rbox(0.03, 0.34, 0.04, '#c9cdd3', { x: cx - s * (lw / 2 - 0.08), y: 0.45, z: z - 0.05, r: 0.01 }));
+  }
+  // a floor track across the opening
+  g.add(rbox(2 * IN, 0.01, 0.1, '#5a606b', { y: 0.0, cast: false }));
   return g;
 }
 
