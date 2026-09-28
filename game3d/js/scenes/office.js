@@ -259,7 +259,7 @@ export function buildOffice() {
   scene.add(root);
 
   // light: a dim cool floor lit by warm ceiling lamps; one soft key from high above for shadows
-  scene.add(new THREE.HemisphereLight('#b3bccc', '#5e5853', 1.3));
+  scene.add(new THREE.HemisphereLight('#aab4c6', '#5a5552', 0.95));
   const sun = new THREE.DirectionalLight('#ffe6c4', 1.5);
   sun.position.set(-7, 22, 10);
   sun.castShadow = true;
@@ -268,16 +268,16 @@ export function buildOffice() {
   scene.add(sun, sun.target);
   const fill = new THREE.DirectionalLight('#dde6ff', 0.5); fill.position.set(0.3, 1, 0.9); scene.add(fill);
   for (const [x, z, k] of [[-2.2, -3.4, 1.5], [0.8, -3.4, 1.5], [-0.6, -1.0, 1.0], [-5.6, -1.6, 1.3], [5.2, -3.4, 0.9], [-4.4, 1.3, 1.1], [0.2, 1.3, 1.1], [4.6, 1.3, 1.1], [-4.6, 4.2, 1.3], [-0.2, 4.2, 1.2], [3.1, 4.4, 0.9], [5.7, 4.4, 0.9], [-5.6, -5.0, 0.8]]) {
-    const p = new THREE.PointLight('#ffd6a0', k * 2.1 * (z > CS ? 0.62 : 1), 3.6, 1.9); p.position.set(x, 1.3, z); scene.add(p);
+    const p = new THREE.PointLight('#ffd6a0', k * 2.1 * (z > CS ? 0.8 : 1), 3.2, 2.0); p.position.set(x, 1.3, z); scene.add(p);
   }
 
   // ---- floors ----
   root.add(tileFloor(X0, X1, Z0, Z1, 0.8, { color: '#979ca4', seam: '#868b93' }));
   root.add(tileFloor(X0, X1, CN, CS, 0.8, { color: '#8f949b', seam: '#80858c', y: 0.003 }));                 // corridor, older vinyl
   root.add(tileFloor(3.4, X1, Z0, CN, 0.6, { color: '#9da2a8', seam: '#8d9298', y: 0.003 }));                // machine room, painted concrete
-  root.add(tileFloor(1.8, X1, CS, Z1, 0.4, { color: '#b2b7bc', seam: '#9ea3a9', y: 0.003 }));                // toilets
+  root.add(tileFloor(1.8, X1, CS, Z1, 0.4, { color: '#a3a8ae', seam: '#90959b', y: 0.003 }));                // toilets
   root.add(tileFloor(-7, -2.2, CS, Z1, 1.0, { color: '#979a9e', seam: '#898c90', y: 0.003 }));              // copy room sheet vinyl
-  root.add(tileFloor(-2.2, 1.8, CS, Z1, 1.0, { color: '#9ca0a6', seam: '#8d9197', y: 0.003 }));             // kitchenette
+  root.add(tileFloor(-2.2, 1.8, CS, Z1, 1.0, { color: '#92969c', seam: '#83878d', y: 0.003 }));             // kitchenette
 
   // ---- walls ----
   const W = (...a) => root.add(wall(...a));
@@ -329,14 +329,13 @@ export function buildOffice() {
 
   // ---- lift lobby ----
   const liftDoor = new THREE.Group();
-  liftDoor.add(rbox(1.14, 1.3, 0.06, '#5d636d', { r: 0.02 }));
   const leaves = [];
-  for (const s of [-1, 1]) { const l = rbox(0.5, 1.22, 0.05, null, { x: s * 0.255, z: 0.02, r: 0.01, m: mat('#8e949d', { roughness: 0.45, metalness: 0.35 }) }); liftDoor.add(l); leaves.push(l); }
+  for (const s of [-1, 1]) { const l = rbox(0.5, 1.22, 0.05, null, { x: s * 0.255, z: 0.02, r: 0.01, m: mat('#a2a8b0', { roughness: 0.5, metalness: 0.2 }) }); l.add(rbox(0.012, 1.16, 0.052, '#5d636d', { x: -s * 0.245, y: 0.03, r: 0.003, cast: false })); liftDoor.add(l); leaves.push(l); }
   liftDoor.position.set(-5.45, 0, -3.4 + T / 2 + 0.01); root.add(liftDoor);
   root.add(rbox(0.36, 0.12, 0.03, '#1d2027', { x: -5.45, y: 1.31, z: -3.4 + T / 2 + 0.02, r: 0.01, cast: false }));
   root.add(rbox(0.07, 0.13, 0.03, '#b9bec6', { x: -4.8, y: 0.62, z: -3.4 + T / 2 + 0.02, r: 0.01 }));
-  const vm = vending(true); vm.scale.setScalar(0.82); vm.position.set(-4.62, 0, -3.4 + T / 2 + 0.3); root.add(vm);
-  root.add(rbox(0.2, 0.3, 0.2, '#6d7684', { x: -4.45, z: -2.35, r: 0.02 }));
+  const vm = vending(true); vm.scale.setScalar(0.82); vm.rotation.y = -Math.PI / 2; vm.position.set(-4.55, 0, -2.72); root.add(vm);   // against the east wall, clear of the lift jamb
+  root.add(rbox(0.2, 0.3, 0.2, '#6d7684', { x: -4.45, z: -1.95, r: 0.02 }));
   const bn = bench(1.6); bn.rotation.y = Math.PI / 2; bn.position.set(-6.72, 0, -1.4); root.add(bn);
   { const p = plant({ size: 1.0, seed: 6 }); p.position.set(-6.65, 0, -0.05); root.add(p); }
   { const l = ceilingLamp(0.6); l.position.set(-6.6, 1.3, -3.4 + T / 2 + 0.02); root.add(l); }
@@ -345,7 +344,7 @@ export function buildOffice() {
   // the lift car behind the doors: a lit cabin in its shaft, seen from above like every other room
   { const cab = new THREE.Group(); const cw = 0.92, cd = 0.95, ch = 1.3;
     cab.add(rbox(cw + 0.16, 0.02, cd + 0.12, '#2a2e36', { y: -0.01, r: 0.005, cast: false }));                           // shaft floor edge
-    const inner = emissive('#d9d2c4', '#f3dfb8', 0.28), sideM = emissive('#a9a79f', '#e8d4b0', 0.14);
+    const inner = emissive('#b9bcbf', '#e8dcc4', 0.18), sideM = emissive('#9a9ea4', '#e0d2b8', 0.1);
     cab.add(rbox(cw, 0.012, cd, '#9a9890', { r: 0.004, cast: false }));                                                   // cabin floor
     cab.add(rbox(cw, ch, 0.05, null, { z: -cd / 2, r: 0.01, m: inner }));                                                  // back wall
     for (const sx of [-1, 1]) cab.add(rbox(0.05, ch, cd, null, { x: sx * cw / 2, r: 0.01, m: sideM }));
@@ -498,11 +497,11 @@ export function buildOffice() {
   const pool = (x, z, r, o) => life.pools.add(lightPool(x, z, r, { y: 0.02, ...o }));
   // warm pools under every hidden ceiling lamp, and long soft streaks where the fittings shine in the floor
   for (const [x, z, k] of [[-2.2, -3.4, 1.5], [0.8, -3.4, 1.5], [-0.6, -1.0, 1.0], [-5.6, -1.6, 1.3], [5.2, -3.4, 0.9], [-4.4, 1.3, 1.1], [0.2, 1.3, 1.1], [4.6, 1.3, 1.1], [-4.6, 4.2, 1.3], [-0.2, 4.2, 1.2], [3.1, 4.4, 0.9], [5.7, 4.4, 0.9], [-5.6, -5.0, 0.8]]) {
-    pool(x, z, 1.3, { k: (0.2 + 0.12 * k) * (z > CS ? 0.55 : 1) });
+    pool(x, z, 1.2, { k: (0.2 + 0.12 * k) * (z > CS ? 0.8 : 1) });
     pool(x, z + 0.3, 0.42, { k: (0.14 + 0.08 * k) * (z > CS ? 0.5 : 1), sx: 0.55, sz: 2.4, color: '#fff0d8' });
   }
   for (const x of [-5.6, -2.6, 0.9, 4.0]) { pool(x, 1.2, 0.95, { k: 0.3, sx: 1.6, sz: 0.9 }); pool(x, 1.35, 0.35, { k: 0.2, sx: 0.6, sz: 2.2, color: '#fff0d8' }); }
-  pool(-4.62, -2.75, 0.7, { k: 0.22, color: '#8fb8ff' });            // vending glow on the floor
+  pool(-5.0, -2.72, 0.7, { k: 0.22, color: '#8fb8ff' });            // vending glow on the floor
   pool(X1 - 0.35, 1.25, 0.55, { k: 0.18, color: '#7fe0a4' });          // the exit sign
 
   // ---- main office ----
@@ -622,6 +621,13 @@ export function buildOffice() {
   root.add(rbox(3.0, 0.03, 0.12, '#5a606b', { x: 5.2, y: 1.34, z: -4.4, r: 0.01, cast: false }));   // cable ladder between the rack rows
   // corridor, right half: a second bench under a noticeboard, and warm pools
   { const bc2 = bench(1.2, { seats: 2 }); bc2.position.set(3.45, 0, 0.62); root.add(bc2); }
+
+  // copy room, lower half: supply cabinets along the front wall, a pinboard on the partition, taped cartons
+  for (const x of [-3.9, -3.3]) { const sc = new THREE.Group(); sc.add(rbox(0.56, 0.72, 0.4, '#8a909a', { r: 0.015 }), rbox(0.012, 0.66, 0.41, '#6d737d', { y: 0.03, r: 0.003, cast: false }), rbox(0.54, 0.02, 0.38, '#a3a9b2', { y: 0.72, r: 0.006 }));
+    sc.add(rbox(0.3, 0.1, 0.24, '#e7e3d8', { x: -0.1, y: 0.74, r: 0.01 })); sc.position.set(x, 0, 6.1); root.add(sc); }
+  { const pb = pinboard(0.7, 0.36); pb.rotation.y = -Math.PI / 2; pb.position.set(-2.2 - T / 2 - 0.01, 0.46, 3.9); root.add(pb); }
+  for (const [x, z, s2] of [[-2.7, 5.9, 0.4], [-3.15, 5.95, 0.34], [-6.5, 5.9, 0.36], [2.3, -0.35, 0.34]]) root.add(rbox(s2 + 0.005, 0.02, 0.08, '#c9b089', { x, y: s2 * 0.8 - 0.005, z, r: 0.004, cast: false }));
+  pool(-3.0, 3.5, 0.8, { k: 0.26 }); pool(-4.4, 4.7, 1.0, { k: 0.26 }); pool(-0.8, 4.7, 0.9, { k: 0.26 }); pool(4.1, 3.55, 0.7, { k: 0.2, sx: 0.8, sz: 1.5 }); pool(6.7, 3.55, 0.7, { k: 0.2, sx: 0.8, sz: 1.5 });
   // corridor: warm sconces washing the north wall, and a pictogram safety poster
   for (const x of [-3.75, 0.8, 3.2]) { const l = wallLamp(0.36, 0.1); l.position.set(x, 0.9, CN + T / 2 + 0.01); root.add(l); pool(x, CN + 0.55, 0.7, { k: 0.26, sx: 1.1, sz: 0.8 }); }
   { const pt = textTexture((g, W, H) => { g.fillStyle = '#f1efe9'; g.fillRect(0, 0, W, H); g.fillStyle = '#3f6fae'; g.fillRect(0, 0, W, 34); g.fillStyle = '#2b3140'; g.beginPath(); g.arc(W / 2, 110, 36, 0, Math.PI * 2); g.fill(); g.fillRect(W / 2 - 28, 150, 56, 90); g.fillStyle = '#e0b83a'; g.beginPath(); g.moveTo(40, 300); g.lineTo(W - 40, 300); g.lineTo(W / 2, 250); g.fill(); }, 200, 320);
@@ -640,7 +646,7 @@ export function buildOffice() {
   const wallsZ = [[Z0, CN, -4.2], [Z0, CN, 3.4], [CS, Z1, -2.2], [CS, Z1, 1.8], [CS, Z1, 4.4]];
   for (const [a, b, x] of wallsZ) B(x - t2w, x + t2w, a, b);
   B(-5.95, -4.95, -3.4, -3.3);                                      // lift (you don't walk into it)
-  B(-4.95, -4.2, -3.4, -2.85); B(-4.6, -4.3, -2.5, -2.2);          // vending, bin
+  B(-4.85, -4.2, -3.1, -2.35); B(-4.6, -4.3, -2.1, -1.8);          // vending, bin
   B(X0, -6.4, -2.25, -0.55); B(-6.9, -6.4, -0.3, 0.2);             // bench, plant
   B(X0, -4.2, Z0, -3.45);                                           // stairwell (not walkable today)
   B(-4.15, -2.8, Z0, Z0 + 0.5); B(-4.1, -3.6, -5.15, -4.65); B(1.8, 3.35, Z0, Z0 + 0.62);
@@ -652,7 +658,7 @@ export function buildOffice() {
   B(3.7, 6.9, Z0, Z0 + 0.9); B(4.0, 6.5, -3.7, -2.9); B(3.9, 4.5, -1.55, -1.05); nav.blockTagged('chair', 5.2, 5.8, -1.6, -1.0); B(6.45, 6.95, -1.8, -0.8);
   nav.blockTagged('mdoor', 4.7, 5.5, CN - 0.2, CN + 0.12);
   B(6.0, 6.6, 1.85, 2.25);                                           // trolley
-  B(-3.35, -2.55, CS, CS + 0.75); B(-5.8, -5.0, CS, CS + 0.58); B(X0, X0 + 0.5, 3.1, 5.3); B(-5.2, -3.6, 4.25, 5.15); B(-3.3, -2.35, 5.6, Z1); B(-6.75, -6.25, 5.65, Z1); B(-2.75, -2.35, 4.4, 5.2);
+  B(-3.35, -2.55, CS, CS + 0.75); B(-5.8, -5.0, CS, CS + 0.58); B(X0, X0 + 0.5, 3.1, 5.3); B(-5.2, -3.6, 4.25, 5.15); B(-4.25, -2.35, 5.6, Z1); B(-6.75, -6.25, 5.65, Z1); B(-2.75, -2.35, 4.4, 5.2);
   B(0.15, 1.75, CS, CS + 0.62); B(1.15, 1.8, 3.6, 5.0); B(-2.15, -1.45, CS, CS + 0.62); B(-1.25, -0.35, 4.25, 5.3); B(-2.05, -1.75, 5.85, Z1); B(1.2, 1.6, 5.8, Z1);
   for (const x0 of [1.8, 4.4]) { B(x0 + 0.1, x0 + 2.55, 5.3, Z1); B(x0 + 2.15, x0 + 2.55, 3.15, 3.65); B(x0 + 2.2, x0 + 2.5, 3.85, 4.15); B(x0 + 0.25, x0 + 1.2, CS, CS + 0.32); }
   B(-4.55, -4.05, 1.85, CS); B(2.95, 3.45, 1.85, CS); B(1.45, 1.75, 1.85, 2.1); B(0.55, 1.12, 1.95, CS); B(-2.65, -2.15, 1.85, CS);
@@ -671,7 +677,7 @@ export function buildOffice() {
   B(-2.0, -0.55, -1.55, -1.15);
 
   for (const r of [nao, hiro, yui, sota]) r.root.visible = false;
-  const world = { root, scene, sun, nav, desks, dN, dS, kenji, nao, hiro, mori, emi, emiBlob, yui, sota, tama, covers, leaves, card, X0, X1, Z0, Z1, secHand, fanHead: fan.children[2], fan2Head: fan2.children[2], copier: cp, myChair, machineDoor: md, vendingPos: [-4.62, -2.6], coffeePos: [1.1, CS + 0.36] };
+  const world = { root, scene, sun, nav, desks, dN, dS, kenji, nao, hiro, mori, emi, emiBlob, yui, sota, tama, covers, leaves, card, X0, X1, Z0, Z1, secHand, fanHead: fan.children[2], fan2Head: fan2.children[2], copier: cp, myChair, machineDoor: md, vendingPos: [-5.1, -2.72], coffeePos: [1.1, CS + 0.36] };
   world.life = life;
   world.update = (t) => {
     for (const s2 of life.steam) s2.userData.update(t);

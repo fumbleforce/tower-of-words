@@ -54,6 +54,10 @@ Fresh critic per place each round, shown only the references and the round's she
 |---|---|---|---|---|---|
 | P1 | 6 | 6.5 | 6 | (in the office critique: "reads well") | shots/round-6 |
 | P2 | 6 | 7 | 6 | 6 | shots/round-7 |
+| P3 | 6 | 7 | 6.5 | 6 | shots/round-8 |
+| P4 | 6.5 | 7 | 6.5 | 6 | shots/round-9 |
+
+No place reached 8 in four rounds. Open items are listed under P4.
 
 ### P1
 - Done: js/post.js (grade per place, AO, bloom, tilt-shift, vignette; tiers low, medium, high), js/places/life.js (floor light pools, dust in light, kettle steam, screens that flicker and scroll, clock hands on the game clock), office dressing (carpet under the island, printer, lift car behind the doors, corridor mats, recycling row, AED, fountain, copy-room reams, shredder, trolley, kitchen rug and stools, toilet dryers), platform boarding marks, timetable, vending pair, bins, English sub-lines on the untaught signs, Eric's name card. NPC walks go over the walk grid (js/places/route.js); lobby commuters enter only through the open doorway.
@@ -67,6 +71,22 @@ Fresh critic per place each round, shown only the references and the round's she
 - Lobby 7: empty lower third, benches and walls too navy, windows read as lamps, the lost-property block, phone framing, gate small.
 - Train 6: the sea "grey concrete", pale pillar cap, neighbour cars read as empty tubs, doors still not reading as open, dash marks look like debug ticks.
 - Lifts 6: basement car reads as a lit cupboard, no frame or sill, blank indicators, no call buttons.
+
+### P3
+- Done: dust sheets as pale drapes, a divider shelf behind the island, steel storage by the machine-room wall, a frame on the office doorway, a tape shelf instead of the machine room's floor fan, LED glow on the floor, a cable ladder, a second corridor bench; lobby lost-property as open shelves, glazed windows with mullions, umbrella stands, a brochure table, a cleaning cart, a slightly larger gate, lighter benches; neighbour cars get roofs, darker concrete, a stronger sea shadow; lift frames, sills, B2 and "1 ▲" indicators, lit call buttons, seams on the leaves.
+- Office 6.5: bottom row lit flat, copy room floor empty, vanities read as mid-room, plates and plants on the wall tops, phone crowded at the lift.
+- Lobby 7: props not grounded enough, the cleaning cart's yellow cube, the visitor counter jammed against the barrier, lower middle bare, entrance glass reads as a railing.
+- Train 6: the sea doesn't show height, neighbour cars and gangways, doors not reading as open, near platform band bare, a grey square by the laptop woman's feet.
+- Lifts 6: the basement doorway showed a dark slab, the vending machine against the jamb, flat cream car interiors.
+
+### P4 (last round)
+- Done: office ambient down with warmer pools per bottom room and darker floors, supply cabinets and a pinboard in the copy room, taped cartons; the basement lift's backing slab removed (the car shows through the doorway), vending machine turned against the east wall, cooler car interiors; lobby counter moved off the barrier (receptionist and her spot with it), a real cleaning cart, a bike rack outside, stronger footprints; neighbour roofs darker, a long soft train shadow on the water, less door spill. Queue posts were tried and removed again: they sat on the commuters' path.
+- Office 6.5: bottom row still reads flat to the critic, copy room still open, the kitchen's side counter reads as a loose block, dust sheets read as boxes.
+- Lobby 7: light doesn't focus on the gate, lower third bare, cat and bowl grounding, the open car flat cream, phone: the front door frame covers the player's legs.
+- Train 6.5: sea still reads as a tiled texture without height, neighbour cars plain, doors still don't read as open from this height, the aisle and near platform bare. Several fixes it asks for touch the approved car (door cut-outs, interior dressing), which this pass left alone.
+- Lifts 6: stray car cables in the basement shaft crossing the wall top, the vending machine still saturated blue, the lobby's open car flat.
+- Path audit (every walker sampled over a full fast day against the walk grid): no NPC inside walls, glass or props; only lift-car interiors and the plaza outside the entrance are off-grid, both intended.
+- Look pass cost (SwiftShader, office, 390x844 at DPR 2.6, relative): low 1x, medium 3.2x, high 5.9x. Not yet measured on a GPU (the GPU lock was held).
 
 ## Markers (after Jørgen: "small, awkwardly placed, not well designed")
 

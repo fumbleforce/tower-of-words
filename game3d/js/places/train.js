@@ -55,8 +55,8 @@ export async function trainPlace(game) {
     const grey = new THREE.Color('#7f8896');
     nc.root.traverse((o) => { if (o.isMesh) { o.material = o.material.clone(); if (o.material.color) o.material.color.lerp(grey, 0.4).multiplyScalar(0.82); if (o.material.emissive) o.material.emissiveIntensity *= 0.5; } });
     // the neighbours are closed cars seen from outside: a roof with two AC housings, so they don't read as empty tubs
-    { const roof = new THREE.Group(); roof.add(rbox(2 * LX + 0.1, 0.1, 2 * LZ + 0.1, '#7c8591', { r: 0.05, seg: 3 }));
-      for (const x of [-1.8, 1.8]) roof.add(rbox(1.1, 0.14, 0.9, '#8d96a2', { x, y: 0.1, r: 0.04 }), rbox(0.9, 0.02, 0.7, '#6b7480', { x, y: 0.24, r: 0.01, cast: false }));
+    { const roof = new THREE.Group(); roof.add(rbox(2 * LX + 0.1, 0.1, 2 * LZ + 0.1, '#5f6774', { r: 0.08, seg: 3 }));
+      roof.add(rbox(2 * LX - 0.4, 0.02, 0.1, '#4a515c', { y: 0.1, z: -0.5, r: 0.01, cast: false }), rbox(2 * LX - 0.4, 0.02, 0.1, '#4a515c', { y: 0.1, z: 0.5, r: 0.01, cast: false }));
       roof.position.y = HF + 0.02; nc.root.add(roof); }
     nc.root.position.y = 0.6; nPivot.add(nc.root); scene.add(nPivot);
     const b = buildBellows(); b.position.set(s * (LX + T + 0.26), 0, 0); scene.add(b);
@@ -343,7 +343,7 @@ export async function trainPlace(game) {
     for (const d of doorLeaves) { const dx = Math.sign(d.x0) * DOOR_X; d.m.position.x = d.x0 + (d.x0 < dx - 0.1 ? -1 : 1) * k * (DOOR_W / 2 - 0.02); d.m.visible = false; }
     for (const d of myLeaves) { const toC = -Math.sign(d.x0); d.g.position.x = d.x0 + toC * k * (d.far ? DOOR_W - 0.01 : DOOR_W / 2 - 0.005); d.g.visible = true; }
     for (const l of doorLamps) l.material = k > 0.3 ? lampOpen : lampShut;
-    for (const m of doorSpill) m.material.color.set('#ffe0b0').multiplyScalar(0.55 * k);
+    for (const m of doorSpill) m.material.color.set('#ffe0b0').multiplyScalar(0.4 * k);
   }
 
   // ---- people ids for the story ----

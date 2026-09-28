@@ -2,7 +2,7 @@
 // Local space: floor at y = 0, the entrance at +z (near the camera), lifts on the back wall at -z.
 import * as THREE from 'three';
 import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.js';
-import { PAL, mat, emissive, rbox, plant, bench, wallLamp, lampPost, door, wall, tileFloor, shadowProxy, textTexture, plane, JP_FONT } from '../props.js';
+import { PAL, mat, emissive, rbox, plant, bench, wallLamp, lampPost, door, wall, tileFloor, shadowProxy, textTexture, plane, JP_FONT, sh } from '../props.js';
 import { PEOPLE, sit, armsLap, walkPose, HIP, idle } from '../cast.js';
 import { cat } from '../train/people.js';
 import { blob, Nav } from '../engine.js';
@@ -100,7 +100,7 @@ function entrance() {
   const g = new THREE.Group();
   // two fixed glass side panels and two sliding leaves, standing open: the leaves sit slid aside just inside the
   // side panels (Jørgen: "I walk straight through the glass of the doors. Just leave them open.")
-  const glassM = new THREE.MeshStandardMaterial({ color: '#8ea7b8', roughness: 0.06, metalness: 0.2, transparent: true, opacity: 0.32, depthWrite: false });
+  const glassM = new THREE.MeshStandardMaterial({ color: '#9fb8c9', roughness: 0.05, metalness: 0.2, emissive: new THREE.Color('#5f7d92'), emissiveIntensity: 0.3, transparent: true, opacity: 0.42, depthWrite: false });
   const frame = mat('#3f444e');
   const W = 4.6, H = 1.2, IN = W / 4 + 0.05;   // IN: the edge of the opening, where the side panels start
   g.add(rbox(W + 0.2, 0.08, 0.14, null, { y: H, m: frame }));
@@ -293,8 +293,8 @@ export function buildLobby() {
   counter.add(rbox(0.34, 0.03, 0.24, '#f2f0ea', { x: 0.45, y: 0.57, z: 0.08, r: 0.005 }), rbox(0.02, 0.02, 0.18, '#2b3140', { x: 0.62, y: 0.58, z: 0.1, r: 0.005 }));
   counter.add(rbox(0.3, 0.2, 0.03, PAL.monitor, { x: -0.5, y: 0.58, z: -0.08, r: 0.01 }));
   { const cp = plant({ size: 0.45, seed: 11 }); cp.position.set(-0.8, 0.57, 0.05); counter.add(cp); }
-  counter.position.set(-4.2, 0, 0.45); root.add(counter);
-  { const t = textTexture((g, W, H) => { g.fillStyle = '#2a2f38'; g.fillRect(0, 0, W, H); g.fillStyle = '#e9ecf0'; g.font = '700 54px ' + JP_FONT; g.textBaseline = 'middle'; g.fillText('受付', 24, H / 2 + 2); g.fillStyle = '#9aa3b0'; g.font = '600 34px ' + JP_FONT; g.fillText('VISITORS', 160, H / 2 + 4); }, 400, 100); const p = plane(0.8, 0.2, t); p.position.set(-4.2, 0.27, 0.72); p.rotation.x = -0.2; root.add(p); }
+  counter.position.set(-4.2, 0, 0.75); root.add(counter);
+  { const t = textTexture((g, W, H) => { g.fillStyle = '#2a2f38'; g.fillRect(0, 0, W, H); g.fillStyle = '#e9ecf0'; g.font = '700 54px ' + JP_FONT; g.textBaseline = 'middle'; g.fillText('受付', 24, H / 2 + 2); g.fillStyle = '#9aa3b0'; g.font = '600 34px ' + JP_FONT; g.fillText('VISITORS', 160, H / 2 + 4); }, 400, 100); const p = plane(0.8, 0.2, t); p.position.set(-4.2, 0.27, 1.02); p.rotation.x = -0.2; root.add(p); }
   const lost = new THREE.Group();
   // open shelves (sides, back, three boards) so the umbrellas, a scarf, a lunch bag and a phone charger show
   lost.add(rbox(0.9, 0.95, 0.04, '#8a909a', { z: -0.16, r: 0.01 }));
@@ -314,7 +314,7 @@ export function buildLobby() {
   const b1 = bench(2.1); b1.position.set(-3.9, 0, 2.55); root.add(b1);
   const b2 = bench(2.1); b2.position.set(3.95, 0, 1.3); root.add(b2);
   const bag = rbox(0.22, 0.17, 0.1, '#6a4f3e', { x: 4.55, y: 0.29, z: 1.3, r: 0.03 }); root.add(bag);
-  for (const [x, z, s] of [[-3.9, 2.55, 2.6], [3.95, 1.3, 2.6], [-4.2, 0.45, 2.4], [2.2, BZ, 2.4]]) { const b = blob(s, 0.28); b.scale.set(1, 0.35, 1); b.position.set(x, 0.004, z); root.add(b); }
+  for (const [x, z, s] of [[-3.9, 2.55, 2.6], [3.95, 1.3, 2.6], [-4.2, 0.75, 2.4], [2.2, BZ, 2.4]]) { const b = blob(s, 0.28); b.scale.set(1, 0.35, 1); b.position.set(x, 0.004, z); root.add(b); }
 
 
 
@@ -331,11 +331,15 @@ export function buildLobby() {
     us.position.set(x, 0, Z - 0.32); root.add(us); }
   { const ct = new THREE.Group(); ct.add(rbox(1.0, 0.04, 0.5, '#8a909a', { y: 0.28, r: 0.01 })); for (const [dx, dz] of [[-0.45, -0.2], [0.45, -0.2], [-0.45, 0.2], [0.45, 0.2]]) ct.add(rbox(0.04, 0.28, 0.04, '#5b626d', { x: dx, z: dz, r: 0.01 }));
     for (const [dx, c] of [[-0.3, '#f2f0ea'], [-0.05, '#9fb4cf'], [0.2, '#e0bf4a']]) ct.add(rbox(0.18, 0.02, 0.24, c, { x: dx, y: 0.32, r: 0.004 }));
-    ct.position.set(-3.9, 0, 1.75); root.add(ct); }
-  { const cc = new THREE.Group(); cc.add(rbox(0.9, 0.5, 0.45, '#5b6474', { r: 0.02 }), rbox(0.34, 0.3, 0.34, '#e0b83a', { x: 0.25, y: 0.5, r: 0.03 }), rbox(0.3, 0.2, 0.3, '#9aa0a8', { x: -0.22, y: 0.5, r: 0.02 }));
+    ct.position.set(-3.9, 0, 1.95); root.add(ct); }
+  { const cc = new THREE.Group(); cc.add(rbox(0.9, 0.06, 0.45, '#5b6474', { y: 0.06, r: 0.02 }), rbox(0.06, 0.62, 0.4, '#5b6474', { x: -0.42, r: 0.02 }), rbox(0.36, 0.34, 0.36, '#3f5f8a', { x: -0.18, y: 0.12, r: 0.03 }));
+    { const bk = new THREE.Mesh(new THREE.CylinderGeometry(0.17, 0.14, 0.3, 14), mat('#e0b83a')); bk.position.set(0.22, 0.27, 0); cc.add(sh(bk)); const wr = rbox(0.26, 0.08, 0.14, '#3a3f48', { x: 0.22, y: 0.42, r: 0.02 }); cc.add(wr); const wt = new THREE.Mesh(new THREE.CylinderGeometry(0.15, 0.15, 0.01, 14), mat('#6b8fa8', { roughness: 0.2 })); wt.position.set(0.22, 0.38, 0); cc.add(wt); }
     const mop = new THREE.Mesh(new THREE.CylinderGeometry(0.015, 0.015, 1.0, 6), mat('#b9bdc3')); mop.position.set(0.3, 0.9, -0.1); mop.rotation.z = 0.2; cc.add(mop);
     cc.position.set(3.95, 0, 2.8); root.add(cc); }
-  groundShadows(root, { skip: new Set([proxy]) });
+
+  // a bike rack on the plaza outside
+  { const br = new THREE.Group(); br.add(rbox(1.6, 0.04, 0.08, '#6b727d', { r: 0.01 })); for (let i = 0; i < 5; i++) { const h = new THREE.Mesh(new THREE.TorusGeometry(0.16, 0.018, 5, 12, Math.PI), mat('#8a919c')); h.position.set(-0.64 + i * 0.32, 0.02, 0); br.add(sh(h)); } br.position.set(-4.2, 0, Z + 1.2); root.add(br); }
+  groundShadows(root, { skip: new Set([proxy]), opacity: 0.6 });
   // life: warm pools under the lamps, dust turning in the sun shafts, a second hand on the clock
   for (const x of [-5.3, -2.9, 2.9, 5.3]) root.add(lightPool(x, -Z + 0.45, 0.9, { k: 0.3, sx: 0.9, sz: 1.2 }));
   for (const z of [-3.4, -0.4, 2.0]) for (const s of [-1, 1]) root.add(lightPool(s * (X - 0.35), z, 0.8, { k: 0.18, sx: 0.8, sz: 1.4 }));
@@ -352,8 +356,8 @@ export function buildLobby() {
   const manBlob = blob(0.55, 0.38); manBlob.position.set(-1.2, 0.004, Z + 1.6); root.add(manBlob);
   const tama = cat(); tama.scale.setScalar(1.45 * K); tama.position.set(3.45, 0, BZ + 0.42); tama.rotation.y = -0.5; root.add(tama);
   { const bowl = new THREE.Mesh(new THREE.CylinderGeometry(0.09, 0.07, 0.05, 14), mat('#d9dde2')); bowl.position.set(3.2, 0.025, BZ + 0.56); root.add(bowl); const tb = blob(0.5, 0.3); tb.position.set(3.4, 0.004, BZ + 0.45); root.add(tb); }
-  const kuro = up(PEOPLE.kuro()); kuro.root.position.set(-4.2, 0, -0.05); root.add(kuro.root);
-  { const b = blob(0.55, 0.35); b.position.set(-4.2, 0.004, -0.05); root.add(b); }
+  const kuro = up(PEOPLE.kuro()); kuro.root.position.set(-4.2, 0, 0.18); root.add(kuro.root);
+  { const b = blob(0.55, 0.35); b.position.set(-4.2, 0.004, 0.18); root.add(b); }
   const aoi = up(PEOPLE.aoi()); aoi.root.position.set(1.0, 0, Z + 0.8); root.add(aoi.root);
   const aoiBlob = blob(0.55, 0.38); root.add(aoiBlob);
 
@@ -373,10 +377,10 @@ export function buildLobby() {
   nav.block(-5.0, -2.8, 2.25, 2.85); nav.block(2.85, 5.05, 1.0, 1.6);
   for (const x of [-2.85, 2.85]) nav.block(x - 0.15, x + 0.15, Z + 0.35, Z + 0.65);
   nav.block(3.1, 3.75, BZ + 0.2, BZ + 0.75);                             // the cat and her bowl
-  nav.block(-5.2, -3.2, BZ, 0.75);                                     // counter and receptionist
+  nav.block(-5.2, -3.2, BZ, 1.05);                                     // counter and receptionist
   nav.block(-X, -5.2, 0.3, 0.8);                                       // lost and found
   nav.block(5.05, X, 2.55, 3.45);                                      // coffee machine
-  nav.block(-2.1, -1.7, 2.45, 2.8); nav.block(-1.65, -1.25, Z - 0.52, Z - 0.1); nav.block(1.25, 1.65, Z - 0.52, Z - 0.1); nav.block(3.3, 4.6, 2.5, 3.1);      // bins, welcome stand
+  nav.block(-2.1, -1.7, 2.45, 2.8); nav.block(-4.45, -3.35, 1.65, 2.25); nav.block(-1.65, -1.25, Z - 0.52, Z - 0.1); nav.block(1.25, 1.65, Z - 0.52, Z - 0.1); nav.block(3.3, 4.6, 2.5, 3.1);      // bins, welcome stand
 
   const world = { root, scene, sun, proxy, nav, readers, arch: ar, guard, man, kuro, aoi, aoiBlob, manBlob, tama, lifts, screen: scr, BZ, X, Z };
   world.update = (t) => {
