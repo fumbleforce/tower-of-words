@@ -18,11 +18,12 @@ export async function run(mode, api) {
     api.store.set(api.AUTO_META, { at: now - 5 * 60e3, thumb: pic('train'), date: 'Thu 1 Oct' });
   }
   const atTitle = () => document.body.classList.contains('at-title');
-  if (mode === 'title' || mode === 'settings' || mode === 'load') {
+  if (mode === 'title' || mode === 'settings' || mode === 'load' || mode === 'flight') {
     await until(atTitle);
     await wait(1200);
     if (mode === 'settings') api.openSettings();
     if (mode === 'load') api.openSaves('load');
+    if (mode === 'flight') { const k = +(Q.get('k') || 0.5); window.__shell._flightAt(k); document.body.classList.add('title-leaving'); document.body.classList.remove('at-title'); const t = document.getElementById('title'); t.style.opacity = String(Math.max(0, 1 - k * 1.6)); }
   } else {
     await until(() => g.place && !g.busy, 20000);
     await wait(600);

@@ -1,0 +1,4 @@
+# only the contact sheet is kept
+*
+!.gitignore
+!sheet.png

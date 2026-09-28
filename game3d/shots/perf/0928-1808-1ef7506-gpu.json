@@ -1,0 +1,98 @@
+{
+ "build": "0928-1808-1ef7506",
+ "profile": {
+  "viewport": "393x851@2.75",
+  "cpu": "4x",
+  "net": "4G 12 Mbit/s 70 ms",
+  "gl": "gpu",
+  "q": "1"
+ },
+ "title": {
+  "ms": 5958,
+  "MB": 5.72,
+  "requests": 72,
+  "errors": []
+ },
+ "places": {
+  "train": {
+   "loadMs": 6487,
+   "loadMB": 6.18,
+   "meshes": 845,
+   "fps": 43.7,
+   "p50": 16.7,
+   "p95": 33.4,
+   "worst": 50.1,
+   "longTasks": 1,
+   "calls": 2970,
+   "tris": 502962,
+   "heapMB": 68.9,
+   "px": [
+    589,
+    1276
+   ],
+   "gpu": "ANGLE (NVIDIA, Vulkan 1.4.341 (NVIDIA NVIDIA GeForce RTX 3080 (0x00002206)), NVIDIA)",
+   "errors": []
+  },
+  "gate": {
+   "loadMs": 6195,
+   "loadMB": 6.33,
+   "meshes": 679,
+   "fps": 46.9,
+   "p50": 16.7,
+   "p95": 33.4,
+   "worst": 66.7,
+   "longTasks": 1,
+   "calls": 2354,
+   "tris": 277236,
+   "heapMB": 73.1,
+   "px": [
+    589,
+    1276
+   ],
+   "gpu": "ANGLE (NVIDIA, Vulkan 1.4.341 (NVIDIA NVIDIA GeForce RTX 3080 (0x00002206)), NVIDIA)",
+   "errors": []
+  },
+  "office": {
+   "loadMs": 7561,
+   "loadMB": 6.32,
+   "meshes": 1729,
+   "fps": 32.4,
+   "p50": 33.3,
+   "p95": 50.1,
+   "worst": 66.7,
+   "longTasks": 14,
+   "calls": 3372,
+   "tris": 628086,
+   "heapMB": 64.8,
+   "px": [
+    589,
+    1276
+   ],
+   "gpu": "ANGLE (NVIDIA, Vulkan 1.4.341 (NVIDIA NVIDIA GeForce RTX 3080 (0x00002206)), NVIDIA)",
+   "errors": []
+  }
+ },
+ "dayMB": 5.89,
+ "biggest": [
+  "vendor/three/three.core.js 1.39 MB",
+  "assets/mio/sit.glb 0.74 MB",
+  "vendor/three/three.module.js 0.63 MB",
+  "assets/eric/base.webp 0.26 MB",
+  "assets/mio/base-clean.webp 0.26 MB",
+  "assets/mio/walk.glb 0.24 MB",
+  "assets/mio/run.glb 0.23 MB",
+  "assets/eric/sit.glb 0.23 MB"
+ ],
+ "over": [
+  "train: load 6487 ms > 6000",
+  "train: 2970 draw calls a frame (845 visible meshes) > 250",
+  "train: 502962 triangles > 300000",
+  "gate: load 6195 ms > 6000",
+  "gate: 2354 draw calls a frame (679 visible meshes) > 250",
+  "office: load 7561 ms > 6000",
+  "office: p95 frame 50.1 ms > 50",
+  "office: 3372 draw calls a frame (1729 visible meshes) > 250",
+  "office: 628086 triangles > 300000",
+  "office: 14 long tasks in 8 s"
+ ]
+}
