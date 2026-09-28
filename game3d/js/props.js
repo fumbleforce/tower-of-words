@@ -187,6 +187,7 @@ export function tileFloor(x0, x1, z0, z1, tile = 1.2, { color = PAL.floor, seam 
   f.position.set((x0 + x1) / 2, y - 0.05, (z0 + z1) / 2); f.receiveShadow = true; f.name = 'floor';
   g.add(f);
   const sm = mat(seam, { roughness: 0.7 });
+  sm.userData.noInk = true;   // the style study's ink pass leaves seams as colour only (else each seam gets two lines)
   const lines = [];
   for (let x = x0 + tile; x < x1 - 0.01; x += tile) lines.push(['z', x]);
   for (let z = z0 + tile; z < z1 - 0.01; z += tile) lines.push(['x', z]);
