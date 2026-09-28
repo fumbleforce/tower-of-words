@@ -5,7 +5,7 @@ import { loadMio } from './mio.js';
 import { makeAvatar, loadEric, setSitLift } from './avatar.js';
 import { glide } from './places/lobby.js';
 export const isPlayer = (id) => id === 'eric' || id === 'player';
-import { ui, unlockAudio, sfx, stopSfx, voice, setFace, faceForEmote, playMusic } from './ui.js';
+import { ui, unlockAudio, sfx, stopSfx, voice, voiceThenBeat, setFace, faceForEmote, playMusic } from './ui.js';
 // background loop per place (audio/music); after work it switches to the night loop
 const MUSIC = { train: 'calm', gate: 'lively', office: 'office' };
 import { WORDS, known, SAYABLE } from './lang.js';
@@ -92,7 +92,10 @@ function buildMarkers(place) {
   for (const [id, t] of Object.entries(place.things)) {
     if (t.noMarker) continue;
     const L = labels[id];
-    const item = { ...t, id, label: Array.isArray(L) ? L[0] : (L || t.label), labelIf: Array.isArray(L) ? { text: L[0], cond: L[1], other: t.label } : null, labelCond: cond, enabled: () => thingOn(id, t), goal: () => { const g = game.story && game.story.goal && game.story.goal[id]; return g !== undefined ? cond(g) : false; } };
+    const item = { ...t, id, label: Array.isArray(L) ? L[0] : (L || t.label), labelIf: Array.isArray(L) ? { text: L[0], cond: L[1], other: t.label } : null, labelCond: cond, enabled: () => thingOn(id, t), goal: () => { const g = game.story && game.story.goal && game.story.goal[id]; return g !== undefined ? cond(g) : false; },
+      // a thing that a word he knows does something to right now
+      // (cached for a moment: it is asked every frame)
+      wordable: () => { const now = performance.now(); if (!item._wa || now - item._wa > 400) { item._wa = now; item._wv = !/person/.test(t.kind || '') && SAYABLE.some((w) => known.has(w) && game.runner.has(`say:${w}:${id}`)); } return item._wv; } };
     game.markers.add(item);
   }
 }
@@ -134,9 +137,10 @@ async function say() {
   if (!id) return;
   const key = target ? `say:${id}:${target.id}` : null;
   if (target && target.face) game.walker.faceTo(...target.face());
-  voice(WORDS[id].voice);
+  const spoken = voice(WORDS[id].voice);
   game.mioSays(id);
-  await game.wait(350);
+  // Eric finishes his word before anyone answers
+  await voiceThenBeat(spoken, 300);
   if (key && game.runner.has(key)) { game.found.add(key); game.runner.trigger(key); return; }
   if (game.runner.has(`say:${id}:*`)) { game.runner.trigger(`say:${id}:*`); return; }
   game.beat(async () => {
@@ -322,18 +326,36 @@ H.stand = async ({ who }) => {
 };
 H.cam = ({ on, zoom = 1.8, back }) => { if (back) game.place.cam.release?.(); else { const p = posOf(on); if (p) game.place.cam.closeOn?.(p, zoom); } };
 H.expression = ({ who, face }) => setFace(who, face);
-H.emote = ({ who, kind }) => {
+// Emote bubbles: big and drawn, readable on a phone (Jørgen: much bigger). Kinds: ! ? … zzz heart sweat ♪ and
+// 'nine' / '9' (a clock at 9:00). They stay on screen: clamped to the edges, and below the head if there's no room above.
+const EMOTE_SVG = {
+  heart: '<path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z" fill="#e0607a" stroke="#b8405a"/>',
+  sweat: '<path d="M12 3c3 4.2 5 7 5 9.6a5 5 0 0 1-10 0C7 10 9 7.2 12 3z" fill="#7cc4f0" stroke="#3e8fc4"/>',
+  nine: '<circle cx="12" cy="12" r="8.5" fill="#fff" stroke="#2a2f3a" stroke-width="1.8"/><path d="M12 12V6.2M12 12H7.2" stroke="#2a2f3a" stroke-width="2.2" stroke-linecap="round"/><circle cx="12" cy="12" r="1.2" fill="#2a2f3a"/>',
+  note: '<path d="M9 17.5V6l9-2v11.5" fill="none" stroke="#2a2f3a" stroke-width="1.9"/><circle cx="7" cy="17.5" r="2.3" fill="#2a2f3a"/><circle cx="16" cy="15.5" r="2.3" fill="#2a2f3a"/>',
+};
+H.emote = ({ who, kind, ms = 1900 }) => {
   faceForEmote(who, kind);
-  const el = document.createElement('div'); el.className = 'emote'; el.textContent = kind === 'heart' ? '♥' : kind === 'sweat' ? '💧' : kind;
+  const el = document.createElement('div'); el.className = 'emote';
+  const k = kind === '9' ? 'nine' : kind === '♪' ? 'note' : kind;
+  if (EMOTE_SVG[k]) el.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true">${EMOTE_SVG[k]}</svg>${k === 'nine' ? '<span class="lbl">9:00</span>' : ''}`;
+  else { el.innerHTML = `<span class="tx">${kind === '…' ? '···' : kind}</span>`; if (kind === '!') el.classList.add('bang'); if (kind === 'zzz') el.classList.add('zzz'); }
+  if (k === 'nine') { el.classList.add('wide'); ms = Math.max(ms, 3200); }
   document.getElementById('ui').appendChild(el);
   const t0 = performance.now();
   const f = () => {
-    const dt = performance.now() - t0; if (dt > 1700) { el.remove(); return; }
+    const dt = performance.now() - t0; if (dt > ms) { el.remove(); return; }
     const v = new THREE.Vector3();
     if (isPlayer(who)) game.player.root.getWorldPosition(v); else rigOf(who)?.root.getWorldPosition(v);
     v.y += 1.55 * (game.place.charScale || 1); v.project(game.place.camera);
-    el.style.transform = `translate(${((v.x + 1) / 2) * canvas.clientWidth}px, ${((1 - v.y) / 2) * canvas.clientHeight - dt * 0.012}px)`;
-    el.style.opacity = dt > 1300 ? String(1 - (dt - 1300) / 400) : '1';
+    const W = canvas.clientWidth, Hh = canvas.clientHeight, bw = el.offsetWidth || 64, bh = el.offsetHeight || 64;
+    let x = ((v.x + 1) / 2) * W, y = ((1 - v.y) / 2) * Hh - Math.min(10, dt * 0.012);
+    // the bubble's bottom sits at y; keep it inside the screen, and under the head if the top is too close
+    const below = y - bh - 12 < 8; el.classList.toggle('below', below);
+    if (below) y += bh + 40;
+    x = Math.max(bw / 2 + 8, Math.min(W - bw / 2 - 8, x)); y = Math.max(bh + 8, Math.min(Hh - 8, y));
+    el.style.transform = `translate(${x}px, ${y}px)`;
+    el.style.opacity = dt < 120 ? String(dt / 120) : dt > ms - 400 ? String(Math.max(0, (ms - dt) / 400)) : '1';
     requestAnimationFrame(f);
   };
   f();
@@ -368,8 +390,18 @@ H.gesture = async ({ who, kind }) => {
   const r = whoRig(who); if (!r || !r.arms) return;
   const save = r.arms.map((a) => a.rotation.clone()), hy = r.hips.position.y, legs = r.legs.map((l) => l.rotation.x), knees = r.knees.map((q) => q.rotation.x);
   if (kind === 'nine') {
-    H.emote({ who, kind: '9' });
-    await game.tween(1.6, (k) => { const b = bell(k); r.arms[0].rotation.set(-2.7 * b + save[0].x * (1 - b), 0, 0.35 * b); r.arms[1].rotation.set(-2.7 * b + save[1].x * (1 - b), 0, -0.35 * b); });
+    // "at nine": he points up at the wall clock (which lights up, the nine picked out) and a 9:00 clock shows over him
+    const clk = game.place.clock; clk?.userData.highlight(true);
+    // frame him and the clock together for the moment, then back to whatever the story had
+    const cam = game.place.cam, prev = cam?.close;
+    if (clk && cam?.closeOn) { const c = clk.getWorldPosition(new THREE.Vector3()); game.place.space.worldToLocal(c); const g0 = r.root.position; cam.closeOn([(c.x + g0.x) / 2, (c.z + g0.z) / 2 + 0.6], 1.25); }
+    H.emote({ who, kind: 'nine', ms: 3600 });
+    const h0 = r.head.rotation.clone();
+    // arm straight up and out, toward the clock behind him; head turned up at it
+    await game.tween(2.8, (k) => { const b = bell(k); r.arms[1].rotation.set(save[1].x + (-0.3 - save[1].x) * b, 0, save[1].z + (2.7 - save[1].z) * b); r.head.rotation.x = h0.x - 0.3 * b; });
+    r.head.rotation.copy(h0);
+    clk?.userData.highlight(false);
+    if (cam) { if (prev) cam.close = prev; else cam.release?.(); }
   } else if (kind === 'point') {
     await game.tween(1.2, (k) => { r.arms[1].rotation.x = save[1].x + (-1.5 - save[1].x) * bell(k); });
   } else if (kind === 'skijump') {
@@ -400,10 +432,10 @@ H.type = async ({ word, prompt, from }) => {
   let pr = prompt;
   if (prompt) { const i = prompt.indexOf(': '); if (i > 0 && /^\w+$/.test(prompt.slice(0, i))) pr = { who: game.runner.speaker(prompt.slice(0, i)), text: prompt.slice(i + 2) }; else pr = { who: null, text: prompt.replace(/^>\s*/, '') }; }
   await ui.typePrompt(word, pr);
-  voice(WORDS[word].voice || '');
+  const spoken = voice(WORDS[word].voice || '');
   game.runner.learnCmd(word);
   flags['typed_' + word] = true;
-  await game.wait(500);
+  await voiceThenBeat(spoken, 350);
 };
 H.period = ({ to }) => { setPeriod(to, game); if (to === 'evening') playMusic('night'); };
 // a story can change the loop: { hook: 'music', name: 'calm' | 'office' | 'lively' | 'night' | null }
@@ -532,7 +564,7 @@ function step(dt) {
     const s = m.spot ? m.spot() : null; if (!s) continue;
     const d = Math.hypot(mp.x - s[0], mp.z - s[1]);
     if (!game.busy && d < nd + seatedReach) { nd = d - seatedReach; near = m; }
-    const bias = (m.goal && m.goal() ? -1.2 : 0) + (/person/.test(m.kind || '') ? -0.7 : 0);
+    const bias = (m.goal && m.goal() ? -1.2 : 0) + (/person/.test(m.kind || '') ? -0.7 : 0) + (m.wordable && m.wordable() ? -0.6 : 0);
     // Say works on what's in reach; goals and people win over things when several are close
     if (!game.busy && known.size && d < 1.6 + seatedReach && d + bias < sd) { sd = d + bias; st = m; }
     if (d < 0.9) { if (!nearSet.has(m.id)) { nearSet.add(m.id); if (!game.busy) game.runner.trigger('near:' + m.id); } }

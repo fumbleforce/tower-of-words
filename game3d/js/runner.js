@@ -1,4 +1,5 @@
 // Runs the story files (game3d/story/*.js, format in game3d/story/FORMAT.md) against a place.
+import { voiceThenBeat } from './ui.js';
 import { ui, voice, sfx, setFace } from './ui.js';
 import { WORDS, learn, known, cmdHTML } from './lang.js';
 
@@ -159,11 +160,11 @@ export class Runner {
     let who = null, text = '', whoId = null;
     if (s.line) { const i = s.line.indexOf(': '); if (i > 0 && /^\w+$/.test(s.line.slice(0, i))) { whoId = s.line.slice(0, i); who = this.speaker(whoId); text = s.line.slice(i + 2); } else text = s.line.replace(/^>\s*/, ''); }
     await ui.choose(who, text, [{ html: cmdHTML(s.offer), cls: 'cmdchip' }], { voiceKey: s.voice, whoId });
-    voice(WORDS[s.offer].voice);
+    const spoken = voice(WORDS[s.offer].voice);
     this.game.mioSays?.(s.offer);
     this.game.sim?.taught && !this.game.sim.taught[s.offer] && who && (this.game.sim.taught[s.offer] = s.from || s.line.slice(0, s.line.indexOf(': ')));
     this.learnCmd(s.offer);
-    await this.game.wait(600);
+    await voiceThenBeat(spoken, 350);
     return null;
   }
   learnCmd(id) {
