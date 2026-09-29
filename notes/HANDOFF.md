@@ -56,7 +56,12 @@ Read GUIDE.md first. The game is game3d/ (day 1: train, gate and lobby, lift, B2
 
 ## Known broken or unfinished
 
-1. **Phone softlock:** on phone, after the gate, "Take the lift down to B2" has no marker ("no reachable next goal"). Desktop passes. It's probably the lift.js takeover of the lobby's tripOut or the lift thing's marker on phone. The builder was on it when work stopped; see its last status in notes/OVERNIGHT.md.
+1. **Seating Eric on the gate bench (QA 22) is backed out** (306b7d3).
+   - The builder's H.sit/H.stand change caused the phone softlock at "Take the lift down to B2" (no goal marker).
+   - Without it, HEAD passes: phone in 64 s on the GPU.
+   - The last full checks, on cd66389, were phone, desktop social and desktop magic. All passed with 0 overlaps and 0 spins, and the movement check fails on any overlap again.
+   - Desktop hasn't been re-run on the newest HEAD.
+   - To redo: find why standing Eric up at the bench breaks the past_gate/gate_through step.
 2. **Performance:** the perf pass is committed (e1ef56a, game3d/js/perf/batch.js) but not wired in yet.
    - **Wiring needed in main.js:**
      - add `import { optimizePlace } from './perf/batch.js';`
@@ -81,6 +86,7 @@ Read GUIDE.md first. The game is game3d/ (day 1: train, gate and lobby, lift, B2
    - Known issues:
      - step-aside can shift Eric up to about 1.4 m in a crowd
      - QA 9: "Sit down" has no seat marked (story/world)
+   - not started: QA 24 (props for the lobby and copy room) and QA 25 (one taught form per word)
      - the lift exit crossing is fixed in 29ae650; recheck it
 5. **bench_r's seat point** sits between two cushions (world data).
 
