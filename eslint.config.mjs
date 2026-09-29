@@ -37,7 +37,7 @@ export default [
     'game3d/test/support/trace-clock.mjs', 'game3d/test/support/wait-ready.mjs',
     'game3d/test/unit/checkpoint.test.mjs', 'game3d/test/unit/save-restore.test.mjs',
     'game3d/tools/a11y.mjs', 'game3d/tools/beat-shots.mjs', 'game3d/tools/fast.mjs',
-    'game3d/tools/hud-shots.mjs', 'game3d/tools/pins-outline-shots.mjs', 'game3d/tools/lift-door-shots.mjs', 'game3d/tools/look-bench.mjs',
+    'game3d/tools/hud-shots.mjs', 'game3d/tools/pins-outline-shots.mjs', 'game3d/tools/lift-door-shots.mjs', 'game3d/tools/look-bench.mjs', 'game3d/tools/train-door-shots.mjs',
     'game3d/tools/look-extra-shots.mjs', 'game3d/tools/look-shots.mjs', 'game3d/tools/lunch-shots.mjs',
     'game3d/tools/opening-frames.mjs', 'game3d/tools/perf.mjs', 'game3d/tools/perf/*.mjs',
     'game3d/tools/play.mjs', 'game3d/tools/printer-shots.mjs', 'game3d/tools/shell-shots.mjs',

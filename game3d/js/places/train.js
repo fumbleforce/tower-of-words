@@ -585,57 +585,29 @@ export async function trainPlace(game) {
   let doorLeaves = [];
   // the platform-side door sets, made to read from above (Jørgen: "the train has no door"): dark frame posts
   // standing a little proud of the cut wall, a header with a lamp (amber shut, green open), a yellow edge
-  // stripe on each leaf and a yellow threshold on the floor
-  // Built to the cut wall's doorway exactly: the leaves sit inside the wall's thickness and are no taller than
-  // the opening, so when they slide into the wall they vanish into it instead of overlapping it.
+  // stripe on each leaf and a yellow threshold on the floor.
+  // Leaves and frames are full height in both framings and never fade with the cut wall (Jørgen: "the doors are
+  // still half size when trying to leave the train wagon, then magically transform to full height as the train
+  // leaves"). They sit at the corners, clear of the seats, so the play camera still sees into the car.
   const doorLamps = [],
     myLeaves = [];
   const lampShut = emissive('#ffcf8a', '#ffb24a', 1.8),
     lampOpen = emissive('#b8f5c8', '#46d18a', 2.2);
   const doorSets = new THREE.Group();
   car.root.add(doorSets);
-  function buildDoors(md) {
+  function buildDoors() {
     doorSets.clear();
     doorLamps.length = 0;
     myLeaves.length = 0;
-    // leaves and frames are full height, as on a real monorail; in the cut-away view the part above the cut wall
-    // belongs to the closed overlay and fades out with it (car.setClosed), so the play camera still sees inside
-    const cutH = md === 'land' ? 0.62 : HF,
-      fullTop = 1.22,
-      hH = fullTop - 0.04,
-      split = cutH - 0.1;
-    const fade = (m) => {
-      if (md === 'land') car.addFade(m);
-      return m;
-    };
+    const fullTop = 1.22,
+      hH = fullTop - 0.04;
     for (const dx of [-DOOR_X, DOOR_X]) {
       const zo = LZ + T + 0.004; // just on the outer face of the wall, thin, so the leaves slide over it
-      for (const s of [-1, 1]) {
-        doorSets.add(rbox(0.07, cutH, 0.012, '#2a2f38', { x: dx + s * (DOOR_W / 2 + 0.035), z: zo, r: 0.004 }));
-        if (md === 'land')
-          doorSets.add(
-            fade(
-              rbox(0.07, HF - cutH, 0.012, '#2a2f38', { x: dx + s * (DOOR_W / 2 + 0.035), y: cutH, z: zo, r: 0.004 }),
-            ),
-          );
-      }
-      const lamp = rbox(0.26, 0.05, 0.03, null, {
-        x: dx,
-        y: md === 'land' ? split + 0.12 : fullTop + 0.05,
-        z: zo,
-        r: 0.01,
-        m: lampShut,
-        cast: false,
-      });
+      for (const s of [-1, 1])
+        doorSets.add(rbox(0.07, HF, 0.012, '#2a2f38', { x: dx + s * (DOOR_W / 2 + 0.035), z: zo, r: 0.004 }));
+      const lamp = rbox(0.26, 0.05, 0.03, null, { x: dx, y: fullTop + 0.05, z: zo, r: 0.01, m: lampShut, cast: false });
       doorSets.add(lamp);
       doorLamps.push(lamp);
-      if (md === 'land') {
-        const up = rbox(0.26, 0.05, 0.03, null, { x: dx, y: fullTop + 0.05, z: zo, r: 0.01, m: lampShut, cast: false });
-        doorSets.add(up);
-        doorLamps.push(up);
-        up.userData.upper = true;
-        lamp.userData.lower = true;
-      }
       doorSets.add(
         rbox(DOOR_W - 0.04, 0.004, 0.1, '#d8b447', { x: dx, y: 0.003, z: LZ - 0.07, r: 0.002, cast: false }),
       );
@@ -643,43 +615,17 @@ export async function trainPlace(game) {
       // over the wall, the far one further, so nothing ever has to pass through the wall or the rounded corner
       for (const s of [-1, 1]) {
         const leaf = new THREE.Group();
-        const lowH = md === 'land' ? split : hH;
-        leaf.add(rbox(DOOR_W / 2 - 0.004, lowH, 0.03, '#56698a', { r: 0.01 }));
+        leaf.add(rbox(DOOR_W / 2 - 0.004, hH, 0.03, '#56698a', { r: 0.01 }));
         leaf.add(
-          rbox(0.03, lowH - 0.02, 0.038, '#e0b83a', { x: -s * (DOOR_W / 4 - 0.02), y: 0.01, r: 0.008, cast: false }),
+          rbox(0.03, hH - 0.02, 0.038, '#e0b83a', { x: -s * (DOOR_W / 4 - 0.02), y: 0.01, r: 0.008, cast: false }),
         );
-        if (md === 'land') {
-          // the top of the leaf with its tall window, above the cut
-          leaf.add(fade(rbox(DOOR_W / 2 - 0.004, hH - split, 0.03, '#56698a', { y: split, r: 0.01 })));
-          leaf.add(
-            fade(
-              rbox(DOOR_W / 2 - 0.1, hH - split - 0.2, 0.036, null, {
-                y: split + 0.08,
-                r: 0.015,
-                m: emissive('#b9d3e6', '#9fc2dc', 0.35),
-              }),
-            ),
-          );
-          leaf.add(
-            fade(
-              rbox(0.03, hH - split - 0.02, 0.038, '#e0b83a', {
-                x: -s * (DOOR_W / 4 - 0.02),
-                y: split,
-                r: 0.008,
-                cast: false,
-              }),
-            ),
-          );
-        } else {
-          const wy = Math.max(0.08, hH - 0.24);
-          leaf.add(
-            rbox(DOOR_W / 2 - 0.1, Math.min(0.2, hH * 0.4), 0.036, null, {
-              y: wy,
-              r: 0.015,
-              m: emissive('#b9d3e6', '#9fc2dc', 0.35),
-            }),
-          );
-        }
+        leaf.add(
+          rbox(DOOR_W / 2 - 0.1, Math.min(0.2, hH * 0.4), 0.036, null, {
+            y: Math.max(0.08, hH - 0.24),
+            r: 0.015,
+            m: emissive('#b9d3e6', '#9fc2dc', 0.35),
+          }),
+        );
         const far = s * Math.sign(dx) > 0;
         // plug doors: shut, the leaf sits in the opening flush with the body (Jørgen: they seemed to hover in
         // front of it); opening, it steps out a hair, then slides along the outside of the wall
@@ -691,7 +637,7 @@ export async function trainPlace(game) {
       }
     }
   }
-  buildDoors('land');
+  buildDoors();
   function findDoors() {
     // Jørgen: no visible light fixtures in the car; the point lights stay
     const lm = carMat('lamp', COL.lamp);
@@ -798,7 +744,6 @@ export async function trainPlace(game) {
     if (car.mode !== mode) {
       car.setMode(mode);
       findDoors();
-      buildDoors(mode);
       setDoors(st.door);
     }
     camera.aspect = aspect;
@@ -1212,8 +1157,6 @@ export async function trainPlace(game) {
         st.closedK =
           st.closedK === undefined ? want : st.closedK + (want - st.closedK) * Math.min(1, dt * (st.leaving ? 2.5 : 6));
         car.setClosed(st.closedK);
-        for (const l of doorLamps)
-          l.visible = l.userData.upper ? st.closedK > 0.5 : l.userData.lower ? st.closedK <= 0.5 : true;
       }
       simT += dt;
       // speed: cruise, brake into the station, stop, leave
@@ -1420,6 +1363,10 @@ export async function trainPlace(game) {
       // the empty car pulls out and away; people on the platform (Eric, Mio, whoever got off) stay where they are
       depart: async () => {
         st.leaving = true;
+        // let the doors finish shutting first: the leaves stop following st.door once the car moves, and a
+        // full-height leaf left half open would ride off with it
+        for (let i = 0; i < 30 && st.door > 0.01; i++) await game.wait(50);
+        setDoors(0);
         const movers = departureMovers();
         const x0 = movers.map((o) => o.position.x),
           n0 = neighbours.map((n) => n.pivot.position.x),
