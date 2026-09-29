@@ -1,6 +1,6 @@
 # Places
 
-Day 1 has five places: the monorail (`train`), Honsha station’s security room with the gate (`gate`), the station forecourt and head-office entrance (`forecourt`), the lift (`lift`) and IT support on B2 (`office`). For each: its things and their labels, spots, seats, zones, who is there in each period, and its small moments; also places decided but not built, and how you get between places. Forecourt route added on 2026-09-30.
+Day 1 has five places: the monorail (`train`), Honsha station’s security room with the gate (`gate`), the station forecourt and head-office entrance (`forecourt`), the lift (`lift`) and IT support on B2 (`office`). Eric's dorm room (`dorms`) is built but not on the route yet. For each: its things and their labels, spots, seats, zones, who is there in each period, and its small moments; also places decided but not built, and how you get between places. Forecourt route added on 2026-09-30.
 
 Elsewhere: the island as a whole is in [setting.md](setting.md); the people in [cast.md](cast.md); what happens in a place as part of a storyline is in [stories/](stories/); how places look (palette, light, style) in [art-and-sound.md](art-and-sound.md). The hooks a story can call in each place (doors, the gate, the copier) are in game3d/story/FORMAT.md.
 
@@ -14,7 +14,6 @@ The picked full-island layout is [island-map-4](../../reviews/island-map-4/revie
 
 - Fountain plaza (`plaza`): the next walkable chunk east of the office forecourt. A direct pedestrian lane follows the near edge of the central fountain toward the dorms. Things: fountain, benches and a planted verge; proposed spots: `office_entry`, `fountain_edge`, `dorm_exit`. Covered shop roofs and fronts remain south of the route, with the canteen behind the fountain. Their interiors are not part of day 1.
 - Dorm courtyard (`dorm_court`): the small entrance court on the west side of the map's eastern apartment cluster. Things: the dorm entry, bicycle shelter, mailboxes and planting; proposed spots: `plaza_entry`, `dorm_entry`. Laundry and sento can be background frontages. The courtyard leads through a short shared passage to Eric's room; no apartment district simulation.
-- Eric's dorm room (`dorms`): the decided outlook is the nearby bare concrete wall in [cast.md](cast.md). Keep a clear aisle from the room entry to that window, with a single bed, desk and his delivered boxes. Proposed spots: `room_entry`, `window_front`. The exact furnishings and thresholds are to be staged within this final chunk; the rejected dorm-b option is not the room layout approval.
 
 ## Getting between places
 
@@ -28,7 +27,7 @@ There are no cuts to black (Jørgen, 2026-09-28: "elegant, continuous transition
 - `lift` → `forecourt`, lift then walk: planned return to head office floor 1; Eric walks through its entrance lobby and out into the same forecourt.
 - `forecourt` → `plaza`, walk: planned eastward walk from the tower forecourt onto the fountain-side lane. Stitch the two small chunks at the shared path edge while the camera follows Eric.
 - `plaza` → `dorm_court`, walk: planned continuation along the fountain's near edge into the west-facing dorm entrance court. The shop roofs stay south of the route.
-- `dorm_court` → `dorms`, walk: planned entry through the sheltered dorm door and short passage into Eric's room. Camera movement and near-wall removal reveal the interior without a black cut.
+- `dorm_court` → `dorms`, walk: planned entry through the sheltered dorm door and short passage into Eric's room, arriving at his front door (`room_entry`). Camera movement and near-wall removal reveal the interior without a black cut.
 
 The dialogue slots for each trip are in game3d/story/transitions.js (format: FORMAT.md, Transitions).
 
@@ -292,3 +291,43 @@ The story moves the clock ([systems.md](systems.md)): morning when Eric arrives,
 | `matte_clock` | 待って to the clock | The second hand stops; Mori looks up. |
 | `tomatte_fan` | 止まって to the fan | It stops; Kenji: あれ？ |
 | `noop` | – | An empty node for choices and triggers that do nothing. |
+
+## Eric's dorm room (`dorms`)
+
+The worst room in the dorm ([cast.md](cast.md)), built from the room view in [dorm-route-1](../../reviews/dorm-route-1/review.json) (2026-09-30). The camera looks north. At the back is the room itself, about 3 by 4 metres: a single bed along the left wall (grey frame, navy cover), a grey steel desk and chair on the right, and his two shipped boxes, taped shut, by the desk. A clear aisle runs from the doorway to the one window, straight ahead, which looks onto a bare concrete wall about two metres outside. In front of the room is the entry strip: the front door with a small genkan, a kitchenette on the left (sink, one hob ring, a small fridge under the counter, a kettle) and the unit bath on the right behind its closed door. The room's front wall, the strip's near wall and the bath's walls are cut low for the camera. The light is a dim cool evening, with the warm light of the ceiling lamp over the middle of the room; the fitting itself is on the ceiling the camera looks through, so it isn't drawn.
+
+It isn't on the day's route yet: the trip in from the dorm courtyard is planned (Getting between places), and until then it is loaded directly with `?place=dorms`. Nobody else is here.
+
+### Things
+
+| Id | Label | What it is |
+|---|---|---|
+| `window` | Window | The one window, onto the concrete wall. |
+| `boxes` | Boxes | His two boxes, sent ahead, by the desk. |
+| `bed` | Bed | The single bed. |
+
+### Spots
+
+`room_entry`, `window_front`
+
+### Seats
+
+None.
+
+### Zones
+
+None.
+
+### Who's there when
+
+Played in the evening, after work.
+
+| Id | Usually | Schedule |
+|---|---|---|
+| `mio` | Not here. | – |
+
+### Small moments
+
+| Nodes | When | What happens |
+|---|---|---|
+| `window`, `boxes`, `bed` | Talk to them | One plain line each from Eric; stand-ins until Codex writes them. |

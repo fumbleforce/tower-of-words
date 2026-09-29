@@ -134,6 +134,18 @@ export const PLACE_DETAILS = {
     people: [],
     hooks: ['liftOpen', 'liftClose'],
   },
+  dorms: {
+    things: {
+      window: { label: 'Window', kind: 'thing' },
+      boxes: { label: 'Boxes', kind: 'thing' },
+      bed: { label: 'Bed', kind: 'thing' },
+    },
+    spots: ['room_entry', 'window_front'],
+    seats: [],
+    zones: [],
+    people: [],
+    hooks: [],
+  },
   'office': {
     'things': {
       'emi': {

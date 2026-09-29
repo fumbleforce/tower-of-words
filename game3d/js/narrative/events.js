@@ -15,6 +15,7 @@ export const PLACE_EVENTS = {
     gate_opened: { id: 'gate_opened', source: 'compatibility' },
   },
   forecourt: { start: { id: 'start', source: 'engine' } },
+  dorms: { start: { id: 'start', source: 'engine' } },
   office: {
     start: { id: 'start', source: 'engine' },
     sat_down: { id: 'sat_down', source: 'place', hook: 'sitDown' },

@@ -31,6 +31,7 @@ import { trainPlace } from './places/train.js';
 import { lobbyPlace } from './places/lobby.js';
 import { forecourtPlace } from './places/forecourt.js';
 import { officePlace } from './places/office.js';
+import { dormsPlace as dorms } from './places/dorms.js';
 import { showEnd } from './end.js';
 import { installSim, sim, stepAmbient, save, loadSave, restore, clearSave } from './sim.js';
 
@@ -53,7 +54,7 @@ let quality = tierNow();
 ui.build();
 if (CAP) document.body.classList.add('cap');
 
-const PLACES = { train: trainPlace, gate: lobbyPlace, forecourt: forecourtPlace, office: officePlace };
+const PLACES = { train: trainPlace, gate: lobbyPlace, forecourt: forecourtPlace, office: officePlace, dorms };
 assertRegistered(Object.keys(PLACE_FILES), PLACES, 'place factories');
 
 // ---------- shared game state ----------

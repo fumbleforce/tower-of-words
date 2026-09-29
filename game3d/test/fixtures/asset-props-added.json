@@ -1,5 +1,74 @@
 [
   {
+    "id_": "prop/dorms/bed",
+    "kind": "prop",
+    "name": "Bed",
+    "paths": [
+      "game3d/js/places/dorms.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "dorms.js things.bed",
+    "place": "dorms",
+    "used": [
+      "Eric's dorm room: tap target 'Bed'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "dorms"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/dorms/boxes",
+    "kind": "prop",
+    "name": "Boxes",
+    "paths": [
+      "game3d/js/places/dorms.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "dorms.js things.boxes",
+    "place": "dorms",
+    "used": [
+      "Eric's dorm room: tap target 'Boxes'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "dorms"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/dorms/window",
+    "kind": "prop",
+    "name": "Window",
+    "paths": [
+      "game3d/js/places/dorms.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "dorms.js things.window",
+    "place": "dorms",
+    "used": [
+      "Eric's dorm room: tap target 'Window'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "dorms"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
     "id_": "prop/forecourt/lift",
     "kind": "prop",
     "name": "Lift to B2",
@@ -199,7 +268,7 @@
       "room": "office",
       "anchor": [
         5.2,
-        1.0,
+        1,
         2.4
       ],
       "spot": [
@@ -232,7 +301,7 @@
       "room": "office",
       "anchor": [
         2.6,
-        1.0,
+        1,
         2.4
       ],
       "spot": [
