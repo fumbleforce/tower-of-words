@@ -1,8 +1,7 @@
-import { PORTRAITS } from './ui/portrait-data.js';
 export { PORTRAITS } from './ui/portrait-data.js';
 // HTML overlay: goal, words, the train's LED board, the talk panel with reply chips, fades and the end card.
 import { lineHTML, WORDS, COMMANDS, PHRASES, known, cmdHTML, iconHTML, baseHTML, FORM_NOTE } from './lang.js';
-import { settings, onSettings, CPS } from './settings.js';
+import { settings, onSettings } from './settings.js';
 import { mountVoice, VOICE_CSS } from './speech.js';
 import { notePractice, needsPractice, pipsHTML, MASTERY_CSS } from './mastery.js';
 // the practice dots' css ships with mastery.js; the voice row injects its own
@@ -14,16 +13,13 @@ import { notePractice, needsPractice, pipsHTML, MASTERY_CSS } from './mastery.js
 }
 void VOICE_CSS;
 
-const $ = (s) => document.querySelector(s);
-const el = (tag, cls, html) => {
-  const e = document.createElement(tag);
-  if (cls) e.className = cls;
-  if (html != null) e.innerHTML = html;
-  return e;
-};
+import { $, el } from './ui/dom.js';
+import { showPortraits, resetPortraitSpeaker } from './ui/portraits.js';
+import { createDialogue } from './ui/dialogue.js';
+export { FACE, setFace, faceForEmote, layoutStage } from './ui/portraits.js';
 
 // Existing UI imports remain valid while audio ownership moves to its modules.
-import { voice, stopVoice, setAudioMuted, isMuted, muted, paused, setVoiceDucking } from './audio/core.js';
+import { voice, stopVoice, setAudioMuted, isMuted, setVoiceDucking } from './audio/core.js';
 import { duckWhile } from './audio/music.js';
 export { audioBus, pauseAudio, voice, stopVoice, voiceThenBeat, isMuted, unlockAudio } from './audio/core.js';
 export { playMusic } from './audio/music.js';
@@ -78,336 +74,6 @@ function thump(c, out, t, v, hz) {
   o.stop(t + 0.25);
 }
 
-// ---------- VN portraits ----------
-// Available expressions are declared in ui/portrait-data.js; missing files fall back to neutral.
-// Each cut-out's face box (imgutils detect_faces on the neutral image, image pixels [x0, y0, x1, y1]) and image size.
-// All expressions of a person share the framing. Every portrait is placed from this: the same face height on screen,
-// the chin at the same height, the body cut at the waist.
-export const FACE = {
-  aoi: { W: 630, H: 810, f: [222, 196, 413, 389] },
-  eric: { W: 597, H: 768, f: [218, 211, 390, 402] },
-  guard: { W: 597, H: 768, f: [250, 162, 374, 300] },
-  kenji: { W: 597, H: 768, f: [229, 169, 371, 330] },
-  kuro: { W: 630, H: 809, f: [254, 325, 452, 525] },
-  kuroda: { W: 597, H: 768, f: [240, 154, 364, 313] },
-  mio: { W: 597, H: 768, f: [192, 214, 361, 383] },
-  emi: { W: 597, H: 768, f: [203, 159, 395, 349] },
-  mori: { W: 597, H: 768, f: [234, 171, 372, 339] },
-};
-const EMOTE_FACE = {
-  '?': ['suspicious', 'deadpan', 'stern'],
-  '!': ['surprised', 'panicked', 'panic'],
-  '♪': ['smile', 'grin', 'amused'],
-  heart: ['smile', 'embarrassed', 'grin'],
-  sweat: ['flustered', 'embarrassed', 'sheepish', 'panicked'],
-  zzz: ['sleepy', 'tired'],
-  '…': ['tired', 'deadpan'],
-};
-const faceNow = {};
-let lastNpc = null;
-export function setFace(who, face) {
-  faceNow[who] = face;
-}
-export function faceForEmote(who, kind) {
-  const f = (EMOTE_FACE[kind] || []).find((x) => PORTRAITS[who] && PORTRAITS[who].includes(x));
-  if (f) faceNow[who] = f;
-}
-function faceOf(who, face) {
-  const list = PORTRAITS[who];
-  if (!list) return null;
-  return list.includes(face) ? face : list.includes(faceNow[who]) ? faceNow[who] : 'neutral';
-}
-function portraitSrc(who, face) {
-  if (!PORTRAITS[who]) return null;
-  return new URL(
-    `../assets/portraits/${who}-${faceOf(who, face)}.webp?v=${encodeURIComponent(window.BUILD || '')}`,
-    import.meta.url,
-  ).href;
-}
-const HOPS = new Set(['surprised', 'panicked', 'panic']);
-function showPortraits(t, whoId, face) {
-  const S = $('#stage'),
-    L = S.querySelector('.por.left'),
-    R = S.querySelector('.por.right');
-  S.hidden = false;
-  if (!whoId) {
-    L.hidden = R.hidden = true;
-    return;
-  } // narration: no portrait
-  const set = (el, who, f, listen) => {
-    const src = portraitSrc(who, f);
-    if (!src) {
-      el.hidden = true;
-      return;
-    }
-    const img = el.querySelector('img');
-    if (img.getAttribute('src') !== src) {
-      img.onerror = () => {
-        const n = portraitSrc(who, 'neutral');
-        if (img.getAttribute('src') !== n) {
-          img.src = n;
-          el.style.setProperty('--src', `url("${n}")`);
-        }
-      };
-      img.src = src;
-      el.style.setProperty('--src', `url("${src}")`);
-      const fc = faceOf(who, f);
-      if (!listen && el.dataset.face !== fc && HOPS.has(fc)) {
-        el.classList.remove('hop');
-        void el.offsetWidth;
-        el.classList.add('hop');
-      }
-      el.dataset.face = fc;
-    }
-    el.dataset.who = who;
-    el.hidden = false;
-    el.classList.toggle('listen', !!listen);
-  };
-  const phone = document.body.classList.contains('phone');
-  if (whoId === 'eric') {
-    set(R, 'eric', face, false);
-    if (!phone && lastNpc && PORTRAITS[lastNpc]) set(L, lastNpc, undefined, true);
-    else L.hidden = true;
-  } else {
-    lastNpc = whoId;
-    set(L, whoId, face, false);
-    if (!phone && PORTRAITS[whoId]) set(R, 'eric', undefined, true);
-    else R.hidden = true;
-  }
-  if (!PORTRAITS[whoId]) L.hidden = true;
-  layoutStage();
-}
-// Place each portrait from its face box: face height F on screen, chin at the same height for everyone, the body
-// cut at the waist by the bottom of the screen (desktop) or by the top of the solid band (phone).
-export function layoutStage() {
-  const S = $('#stage');
-  if (!S || S.hidden) return;
-  const phone = document.body.classList.contains('phone'),
-    vw = innerWidth,
-    vh = innerHeight;
-  const talk = $('#talk');
-  const band = phone ? Math.max(170, (talk.hidden ? 0 : talk.offsetHeight) + 18) : 0;
-  S.style.setProperty('--band', band + 'px');
-  // phone: a small bust docked to the side, cut on the solid band (QA round 1: a phone portrait covered 60% of the scene)
-  const F = phone ? Math.min(58, vh * 0.068) : Math.min(124, vh * 0.13);
-  const cutK = phone ? 1.55 : 2.25; // chin to the cut, in face heights (the waist on desktop)
-  const base = vh - band;
-  for (const el of S.querySelectorAll('.por')) {
-    const d = FACE[el.dataset.who];
-    if (!d || el.hidden) continue;
-    const s = F / (d.f[3] - d.f[1]),
-      cx = (d.f[0] + d.f[2]) / 2;
-    const chin = base - cutK * F,
-      top = chin - d.f[3] * s;
-    const left = el.classList.contains('left');
-    const fx = phone ? vw * (left ? 0.2 : 0.8) : vw * (left ? 0.16 : 0.86);
-    el.style.width = d.W * s + 'px';
-    el.style.height = d.H * s + 'px';
-    el.style.left = fx - cx * s + 'px';
-    el.style.top = top + 'px';
-    // how far above the cut the image itself ends (Eric's cut-out is shorter); that bottom edge is faded out
-    el.style.setProperty('--short', Math.max(0, base - (top + d.H * s)) + 'px');
-    el.classList.toggle('short', top + d.H * s < base - 2);
-    // cut exactly at the base: the screen edge on desktop, the top of the solid band on phone
-    el.style.clipPath = `inset(0 -40px ${Math.max(0, top + d.H * s - base)}px -40px)`;
-  }
-}
-addEventListener('resize', () => layoutStage());
-// the stage follows the talk panel: shown with it, hidden with it, re-laid out when its content changes (the phone
-// band grows with the text)
-let stageRaf = 0;
-function watchTalk() {
-  const t = $('#talk');
-  if (!t) {
-    setTimeout(watchTalk, 100);
-    return;
-  }
-  new MutationObserver(() => {
-    cancelAnimationFrame(stageRaf);
-    stageRaf = requestAnimationFrame(() => {
-      const S = $('#stage');
-      if (t.hidden) {
-        S.hidden = true;
-        return;
-      }
-      S.hidden = false;
-      S.classList.toggle('narr', t.classList.contains('narr'));
-      layoutStage();
-    });
-  }).observe(t, { attributes: true, childList: true, subtree: true, characterData: true });
-}
-setTimeout(watchTalk, 0);
-
-// ---------- overheard Japanese ----------
-// Eric can't follow it: every character he doesn't know becomes a softened, shifting stand-in glyph, and
-// the words he does know (his phrases and commands, plus the line's `clear` list) stay sharp and glossed.
-// kana only: two stand-in glyphs side by side must never spell a real word (no kanji)
-const POOL =
-  'あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやゆよらりるれろわをんがぎぐげござじずぜぞだでどばびぶべぼぱぴぷぺぽアイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモラリルレロワン';
-// only sounds stay readable: real words like はい, うん, ええ, まあ, ほら are words he hasn't been taught, so they
-// blur like the rest (Jørgen: hai showed as a known word on day 1)
-const INTERJ = [
-  'えっと',
-  'あのう',
-  'あの',
-  'ああ',
-  'あっ',
-  'えっ',
-  'おっ',
-  'うわ',
-  'わあ',
-  'あー',
-  'えー',
-  'あ',
-  'え',
-  'お',
-  'ん',
-];
-function heardHTML(text, clear = []) {
-  // {id} words in an overheard line are sharp and glossed only once he's been taught them (typed, learned or
-  // offered); seeing a word glossed somewhere (the train announcement's 本社) doesn't teach it
-  text = text.replace(/\{(\w+)\}/g, (_, id) => (WORDS[id] ? WORDS[id].ja : id));
-  const keep = [];
-  for (const id of known) {
-    const w = WORDS[id];
-    if (!w) continue;
-    for (const ja of [w.ja, ...(w.alias || [])]) keep.push({ ja, gl: `${w.ro}, ${w.en}`, known: true });
-  }
-  // `clear` entries are readable for this line only: plain text, not styled as known, never added to what he knows
-  for (const c of clear || [])
-    keep.push(typeof c === 'string' ? { ja: c } : { ja: c.ja, gl: [c.ro, c.en].filter(Boolean).join(', ') });
-  keep.sort((a, b) => b.ja.length - a.ja.length);
-  let out = '',
-    i = 0;
-  const esc = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;');
-  const punct = /[\s、。！？!?…「」ー]/;
-  while (i < text.length) {
-    // interjections and sounds (あっ, えっ, うん...) are never hidden: only real words he doesn't know are
-    if (i === 0 || punct.test(text[i - 1])) {
-      const it = INTERJ.find(
-        (w) => text.startsWith(w, i) && (i + w.length === text.length || punct.test(text[i + w.length])),
-      );
-      if (it) {
-        out += `<span class="plain">${esc(it)}</span>`;
-        i += it.length;
-        continue;
-      }
-    }
-    const k = keep.find((w) => text.startsWith(w.ja, i));
-    if (k) {
-      out += `<span class="${k.known ? 'jp clear' : 'plain'}">${esc(k.ja)}</span>${k.gl ? ` <span class="gl">(${esc(k.gl)})</span>` : ''}`;
-      i += k.ja.length;
-      continue;
-    }
-    const ch = text[i];
-    if (/[\s、。！？!?…「」]/.test(ch)) out += esc(ch);
-    else out += `<span class="gx" data-c="${esc(ch)}">${POOL[(ch.charCodeAt(0) * 7 + i) % POOL.length]}</span>`;
-    i++;
-  }
-  return `<span class="heardico" aria-hidden="true"></span>${out}`;
-}
-let scrambleTimer = null;
-function scramble(line) {
-  clearInterval(scrambleTimer);
-  let n = 0;
-  scrambleTimer = setInterval(() => {
-    if (!line.isConnected || !line.closest('#talk.heard')) {
-      clearInterval(scrambleTimer);
-      return;
-    }
-    const g = line.querySelectorAll('.gx');
-    if (!g.length) {
-      clearInterval(scrambleTimer);
-      return;
-    }
-    for (let k = 0; k < 3; k++) {
-      const e = g[(n * 5 + k * 7) % g.length];
-      e.textContent = POOL[(Math.random() * POOL.length) | 0];
-    }
-    n++;
-  }, 140);
-}
-
-// ---------- text reveal (settings.textSpeed) ----------
-// The line writes itself out a few characters at a time. Every character is a span that is already laid out
-// (only its opacity changes), so the line never reflows as it appears. A tap shows the rest at once.
-function reveal(line, cps) {
-  const chars = [];
-  const walk = (n) => {
-    for (const c of [...n.childNodes]) {
-      if (c.nodeType === 3) {
-        const f = document.createDocumentFragment();
-        for (const ch of c.textContent) {
-          if (/\s/.test(ch)) {
-            f.appendChild(document.createTextNode(ch));
-            continue;
-          }
-          const sp = document.createElement('span');
-          sp.className = 'rv';
-          sp.textContent = ch;
-          f.appendChild(sp);
-          chars.push(sp);
-        }
-        c.replaceWith(f);
-      } else if (c.nodeType === 1 && c.tagName !== 'RT' && c.tagName !== 'svg') walk(c);
-    }
-  };
-  walk(line);
-  const r = { done: !chars.length, onDone: null };
-  if (r.done) return r;
-  line.classList.add('revealing');
-  let i = 0,
-    last = performance.now(),
-    raf = 0;
-  const finish = () => {
-    cancelAnimationFrame(raf);
-    for (; i < chars.length; i++) chars[i].classList.add('on');
-    line.classList.remove('revealing');
-    r.done = true;
-    r.onDone && r.onDone();
-  };
-  const tick = (now) => {
-    if (!line.isConnected) return;
-    if (paused) {
-      last = now;
-      raf = requestAnimationFrame(tick);
-      return;
-    }
-    const n = Math.floor(((now - last) / 1000) * cps);
-    if (n > 0) {
-      last += (n / cps) * 1000;
-      for (let k = 0; k < n && i < chars.length; k++, i++) chars[i].classList.add('on');
-    }
-    if (i >= chars.length) finish();
-    else raf = requestAnimationFrame(tick);
-  };
-  raf = requestAnimationFrame(tick);
-  // hidden tabs stall rAF: make sure a line is never stuck half-written
-  setTimeout(
-    () => {
-      if (!r.done && line.isConnected) finish();
-    },
-    (chars.length / cps) * 1000 + 1500,
-  );
-  r.finish = finish;
-  return r;
-}
-const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
-// a small play button after each taught word in a line: tap it (or the word) to hear the word again
-function addPlayButtons(line) {
-  for (const w of line.querySelectorAll('.jp[data-w]')) {
-    const id = w.dataset.w;
-    if (!WORDS[id] || !WORDS[id].voice) continue;
-    const b = document.createElement('button');
-    b.type = 'button';
-    b.className = 'wplay';
-    b.dataset.w = id;
-    b.setAttribute('aria-label', `Hear ${WORDS[id].ro}`);
-    b.innerHTML =
-      '<svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="10"/><path d="M8 6.2v7.6l6-3.8z"/></svg>';
-    w.after(b);
-  }
-}
 // slow clips for taught words (<voice>-slow), if the voice agent made them
 const slowClips = new Set();
 fetch(new URL('../audio/index.json?v=' + (window.BUILD || ''), import.meta.url))
@@ -425,13 +91,9 @@ export function keyLabel(code) {
       ? code.slice(5)
       : code.replace(/^(Arrow)/, '');
 }
-async function whileUnpaused(ms) {
-  await sleep(ms);
-  while (paused) await sleep(200);
-}
-
 // ---------- layout ----------
 export const ui = {
+  ...createDialogue({ sfx }),
   root: null,
   build() {
     const r = $('#ui');
@@ -955,161 +617,6 @@ export const ui = {
     this.refreshWords();
     if (voiceKey) voice(voiceKey);
   },
-  // Show a line and wait for a tap. speaker: {name, role, color} or null for narration.
-  say(speaker, text, { voiceKey, auto, overheard, clear, whoId, face } = {}) {
-    return new Promise((res) => {
-      const t = $('#talk');
-      showPortraits(t, speaker ? whoId : null, face);
-      t.classList.toggle('heard', !!overheard);
-      t.hidden = false;
-      t.classList.toggle('narr', !speaker);
-      t.classList.toggle('phone', !!(speaker && speaker.phone));
-      const who = t.querySelector('.who');
-      who.innerHTML = speaker
-        ? `<span class="nm" style="--c:${speaker.color || '#8fa3c0'}">${speaker.name}</span>${speaker.role ? `<span class="rl">${speaker.role}</span>` : ''}`
-        : '';
-      const lineEl = t.querySelector('.line');
-      lineEl.innerHTML = overheard ? heardHTML(text, clear) : lineHTML(text);
-      if (!overheard) addPlayButtons(lineEl);
-      t.querySelector('.chips').innerHTML = '';
-      const more = t.querySelector('.more');
-      more.hidden = false;
-      t.classList.remove('in');
-      void t.offsetWidth;
-      t.classList.add('in');
-      this.refreshWords();
-      if (overheard) scramble(lineEl);
-      const spoken = voiceKey ? voice(voiceKey, { muffle: !!overheard }) : null;
-      const started = performance.now();
-      this._lines = (this._lines || 0) + 1; // the continue hint shows with words for the first few lines
-      if (this.auto) {
-        setTimeout(() => {
-          this._advance = null;
-          stopVoice();
-          res();
-        }, 15);
-        return;
-      }
-      const cps = CPS[settings.textSpeed] || 0;
-      const rv = !overheard && cps ? reveal(lineEl, cps) : { done: true };
-      if (!rv.done) {
-        more.hidden = true;
-        rv.onDone = () => {
-          more.hidden = false;
-        };
-      }
-      const adv = (this._advance = () => {
-        if (performance.now() - started < 250) return;
-        if (!rv.done) {
-          rv.finish();
-          return;
-        } // first tap finishes the line, the next one moves on
-        this._advance = null;
-        stopVoice();
-        sfx('tap');
-        res();
-      });
-      void auto; // lines never move on by a timer of their own; only the player's auto-advance setting does that
-      if (settings.autoAdvance) {
-        // auto-advance: once the line is written out and the voice has finished (or a reading time has passed)
-        const plain = lineEl.textContent.length;
-        const revealed = new Promise((r) => {
-          if (rv.done) r();
-          else {
-            const o = rv.onDone;
-            rv.onDone = () => {
-              o && o();
-              r();
-            };
-          }
-        });
-        Promise.all([
-          revealed,
-          spoken && settings.voiceOn && !muted
-            ? spoken.then(() => whileUnpaused(700))
-            : whileUnpaused(1300 + plain * 45),
-        ])
-          .then(() => whileUnpaused(250))
-          .then(() => {
-            if (this._advance === adv && settings.autoAdvance) {
-              this._advance = null;
-              stopVoice();
-              res();
-            }
-          });
-      }
-    });
-  },
-  // Show a line with reply chips; resolves with the chip index. chips: [{html}]
-  choose(speaker, text, chips, { voiceKey, glow = -1, keepLine = false, whoId } = {}) {
-    return new Promise((res) => {
-      const t = $('#talk');
-      if (!keepLine || whoId) showPortraits(t, speaker ? whoId : null);
-      t.hidden = false;
-      t.classList.toggle('narr', !speaker);
-      const who = t.querySelector('.who');
-      who.innerHTML = speaker
-        ? `<span class="nm" style="--c:${speaker.color || '#8fa3c0'}">${speaker.name}</span>${speaker.role ? `<span class="rl">${speaker.role}</span>` : ''}`
-        : '';
-      if (!keepLine) t.querySelector('.line').innerHTML = text ? lineHTML(text) : '';
-      t.querySelector('.more').hidden = true;
-      const box = t.querySelector('.chips');
-      box.innerHTML = '';
-      const shown = performance.now(); // a tap that revealed the chips must not also pick one
-      const btns = chips.map((c, i) => {
-        const b = el(
-          'button',
-          'chip' + (i === glow ? ' glow' : '') + (c.cls ? ' ' + c.cls : ''),
-          `<span class="k">${i + 1}</span><span class="c">${c.html}</span>`,
-        );
-        b.type = 'button';
-        b.onclick = (e) => {
-          e.stopPropagation();
-          if (performance.now() - shown < 350) return;
-          this._chipKeys = null;
-          box.querySelectorAll('.chip').forEach((x) => {
-            x.disabled = true;
-          });
-          b.classList.add('picked');
-          stopVoice();
-          res(i);
-        };
-        box.appendChild(b);
-        return b;
-      });
-      this._chipKeys = btns;
-      this._advance = null;
-      if (this.auto)
-        setTimeout(() => {
-          const i = Math.min(btns.length - 1, this.autoPick ? this.autoPick(chips) : 0);
-          box.querySelectorAll('.chip').forEach((x) => {
-            x.disabled = true;
-          });
-          this._chipKeys = null;
-          stopVoice();
-          res(i);
-        }, 15);
-      t.classList.remove('in');
-      void t.offsetWidth;
-      t.classList.add('in');
-      this.refreshWords();
-      if (voiceKey) voice(voiceKey);
-    });
-  },
-  caption(sp, text) {
-    const c = $('#caption');
-    if (!text) {
-      c.hidden = true;
-      return;
-    }
-    c.hidden = false;
-    c.querySelector('.nm').innerHTML = sp ? sp.name : '';
-    c.querySelector('.nm').style.color = sp ? sp.color || '' : '';
-    c.querySelector('.tx').innerHTML = lineHTML(text);
-    c.classList.remove('in');
-    void c.offsetWidth;
-    c.classList.add('in');
-  },
   lift(floor, dir) {
     const l = $('#liftInd');
     if (floor == null) {
@@ -1190,7 +697,7 @@ export const ui = {
         if (prompt && prompt.whoId) {
           showPortraits(t0, prompt.whoId);
         } else {
-          lastNpc = null;
+          resetPortraitSpeaker();
           showPortraits(t0, 'eric');
         }
       }
@@ -1344,31 +851,6 @@ export const ui = {
       p.then(() => el.classList.remove('playing'));
     }
   },
-  // what the dialogue area shows: continue (with words for the first lines), waiting, or nothing; the tap layer
-  syncTalkState() {
-    const t = $('#talk'),
-      hit = $('#talkHit');
-    if (!t || !hit) return;
-    const busy = document.body.classList.contains('busy'),
-      open = !t.hidden;
-    const typing = t.classList.contains('typing'),
-      choosing = !!t.querySelector('.chips .chip');
-    const canGo = !!this._advance && open && !typing;
-    t.classList.toggle('can-go', canGo);
-    t.classList.toggle('waiting', open && !canGo && !typing && !choosing);
-    // (only write what changed: #talk is watched by a MutationObserver, and even a same-value write is a mutation)
-    const hide = !!(this.auto || !(open || busy) || typing || choosing);
-    if (hit.hidden !== hide) hit.hidden = hide;
-    hit.classList.toggle('go', canGo);
-    const phone = document.body.classList.contains('phone');
-    const ch = t.querySelector('.more .ch');
-    if (ch) {
-      const tx = phone ? 'Tap this area to continue' : 'Press Space or click this area to continue',
-        hd = (this._lines || 0) > 5;
-      if (ch.textContent !== tx) ch.textContent = tx;
-      if (ch.hidden !== hd) ch.hidden = hd;
-    }
-  },
   waitPulse(x, y) {
     const t = $('#talk');
     if (t && !t.hidden) {
@@ -1388,14 +870,6 @@ export const ui = {
       d.classList.add('on');
     }
     window.__game?.skip?.();
-  },
-  closeTalk() {
-    const t = $('#talk');
-    t.hidden = true;
-    $('#stage').hidden = true;
-    lastNpc = null;
-    this._advance = null;
-    this._chipKeys = null;
   },
   get talking() {
     return !$('#talk').hidden;

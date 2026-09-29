@@ -56,13 +56,13 @@ export function assetSourceData(read) {
   }));
   const strings = new Set(), sfxCalls = new Set(), sceneCalls = {};
   for (const file of assetSourceFiles) visitSource(ast(file), (node, ancestors) => {
-    const topLevelFile = /^game3d\/js\/[^/]+\.js$/.test(file);
+    const presentationFile = /^game3d\/js\/[^/]+\.js$/.test(file) || /^game3d\/js\/(ui|audio)\//.test(file);
     const parent = ancestors.at(-1);
     const propertyKey = parent?.type === 'Property' && parent.key === node && !parent.computed;
-    if (topLevelFile && !propertyKey && node.type === 'Literal' && typeof node.value === 'string') strings.add(node.value);
-    if (topLevelFile && node.type === 'TemplateLiteral' && !node.expressions.length) strings.add(staticValue(node));
+    if (presentationFile && !propertyKey && node.type === 'Literal' && typeof node.value === 'string') strings.add(node.value);
+    if (presentationFile && node.type === 'TemplateLiteral' && !node.expressions.length) strings.add(staticValue(node));
     if (node.type !== 'CallExpression') return;
-    if (topLevelFile && node.callee.name === 'sfx' && typeof node.arguments[0]?.value === 'string')
+    if (presentationFile && node.callee.name === 'sfx' && typeof node.arguments[0]?.value === 'string')
       sfxCalls.add(node.arguments[0].value);
     if (!/^game3d\/js\/(places|scenes)\//.test(file)) return;
     const place = file.split('/').at(-1).replace('.js', '').replace(/^lobby$/, 'gate');
@@ -100,10 +100,9 @@ export function assetSourceData(read) {
       .filter(([, person]) => person.name).map(([id, person]) => [id, person.name]));
     stories[name] = { speakers, texts, names };
   }
-  const icons = ['ui', 'menu', 'engine', 'speech'].flatMap(name => {
-    const file = `game3d/js/${name}.js`;
-    return inlineIcons(ast(file), file);
-  });
+  const iconFiles = ['game3d/js/ui.js', ...assetSourceFiles.filter(file => file.startsWith('game3d/js/ui/')),
+    ...['menu', 'engine', 'speech'].map(name => `game3d/js/${name}.js`)];
+  const icons = iconFiles.flatMap(file => inlineIcons(ast(file), file));
   return { words, wordIcons, music, emotes, beds, events, sfx, cast3d, styles, people, stories,
     icons, sceneCalls, exportedFunctions, strings: [...strings].sort(), sfxCalls: [...sfxCalls].sort() };
 }
