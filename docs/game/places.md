@@ -21,8 +21,8 @@ The picked full-island layout is [island-map-4](../../reviews/island-map-4/revie
 There are no cuts to black (Jørgen, 2026-09-28: "elegant, continuous transitions"). Each move is one trip the player watches. One line per trip: from, to, how, then what the player sees; a trip to or from a planned place is planned too. The bible draws these as the places diagram (http://127.0.0.1:8771/bible/#place-map).
 
 - `train` → `gate`, walk: Eric steps off onto the platform, follows the covered walkway and enters Honsha station's security room through its glass doors.
-- `gate` → `forecourt`, walk: exit through the station security room's island-side doors into the open court. Eric stays visible while the camera follows him outside.
-- `forecourt` → `lift`, walk: short crossing to the head office entrance, then into its small lobby and the existing B2 lift. Both entrance doors and the open-air gap must read on screen.
+- `gate` → `forecourt`, walk: Eric walks north out of the security room's back exit. The camera stays close and keeps its angle, then crossfades to him stepping out of the station's north door onto the court.
+- `forecourt` → `lift`, walk: a short crossing north-east to the head office door, through its small lobby, and into the lift.
 - `lift` → `office`, lift: the camera stays inside the car for the whole ride. The floor display counts from 1; someone has pressed 5, where the two from Sales get out; then down to B2. The doors open on the B2 lift landing.
 - `office` → `lift`, walk: planned return from B2 into the existing lift after work, keeping Eric visible through its doors.
 - `lift` → `forecourt`, lift then walk: planned return to head office floor 1; Eric walks through its entrance lobby and out into the same forecourt.
@@ -162,7 +162,7 @@ The lobby is played in the early morning, before nine.
 
 ## Station forecourt and head office entrance (`forecourt`)
 
-The first outdoor chunk of the picked island-map-4 layout (Jørgen, 2026-09-29). Honsha station is on the west, with its blue-roof platform behind it; the separate head-office entrance is on the east. An open pedestrian court connects their doors. Low planting and bicycle racks border the walk. The office entrance reveals a short cutaway lobby with the existing lift to B2 and no second security gate. Nearby buildings are background massing. Materials and lighting use the existing muted game palette.
+The first outdoor chunk of the picked island-map-4 layout (Jørgen, 2026-09-29). The camera looks north, as in the security room. The station's north wall runs along the bottom, cut low like the indoor near walls, with its open doors; the blue platform roof runs along the west edge. The head office stands up and to the right: a glass-fronted ground floor, its front wall also cut low, with the tower rising behind it. Inside is a small lobby with two wall lamps, a plant and the lift to B2 in the back wall. There is no second security gate. The court between the two doors is about five metres of stone paving with a worn line along the walk. Bicycle racks and a bench stand on the west side, a planted bed with two trees on the east, and two lit bollards along the way. By the head office door stands a low stone sign reading 本社 HEAD OFFICE. A hedge on the east edge marks the lane on toward the plaza. The palette and the warm, low morning sun are the security room's.
 
 Eric walks out of the station, crosses the court under player control, and walks into the lift. The return trip and onward path to the fountain plaza are still to build.
 

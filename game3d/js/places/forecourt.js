@@ -8,7 +8,7 @@ import { snapshotPeople, restorePeople } from './saved-people.js';
 
 export function forecourtPlace(game) {
   const w = buildForecourt();
-  const cam = new RoomCam(w.camera);
+  const cam = new RoomCam(w.camera); // the security room's camera, so the crossfade out of it keeps its angle
   const floor = new THREE.Plane(new THREE.Vector3(0, 1, 0), 0);
   const spots = {
     station_exit: w.start,
@@ -45,7 +45,7 @@ export function forecourtPlace(game) {
     sun: w.sun,
     charScale: K,
     start: w.start,
-    startFacing: Math.PI / 2,
+    startFacing: Math.PI,
     music: 'calm',
     grade: {
       exposure: 1.04,
@@ -74,16 +74,31 @@ export function forecourtPlace(game) {
     liftSite: w.liftSite,
     liftLanding: w.liftLanding,
     fit(aspect) {
-      const wide = aspect >= 1;
-      const bounds = wide ? [-4.3, 6.8, -3.1, 3.0] : [-2.6, 2.6, -2.2, 2.2];
-      const points = [];
-      for (const x of bounds.slice(0, 2))
-        for (const z of bounds.slice(2)) points.push(new THREE.Vector3(x, 1.7, z), new THREE.Vector3(x, 0, z));
-      cam.fit(aspect, points, new THREE.Vector3(wide ? 1 : 0, 0, 0), {
-        follow: true,
-        clamp: wide ? [1, 1, 0, 0] : [-2.6, 5.2, -0.9, 1.2],
-        limY: 0.94,
-      });
+      // desktop: the whole short crossing, station door to lift, in one still frame; phone: follow him
+      if (aspect >= 1)
+        cam.fit(
+          aspect,
+          [
+            new THREE.Vector3(-4.7, 0, 0),
+            new THREE.Vector3(5.6, 0, 0),
+            new THREE.Vector3(w.liftSite.x, 3.2, w.towerZ),
+            new THREE.Vector3(w.doorX, 0, w.stationExit[1] - 0.2),
+          ],
+          new THREE.Vector3(0.45, 0, -0.6),
+          { follow: true, clamp: [0.2, 0.7, -0.6, 0.0], limY: 0.96 },
+        );
+      else
+        cam.fit(
+          aspect,
+          [
+            new THREE.Vector3(-2.9, 0, 0),
+            new THREE.Vector3(2.9, 0, 0),
+            new THREE.Vector3(0, 0, -2.6),
+            new THREE.Vector3(0, 1.2, 2.4),
+          ],
+          new THREE.Vector3(0, 0, 0),
+          { follow: true, clamp: [-1.0, 1.4, -1.9, 0.6], lead: -1.6 },
+        );
     },
     pick(rc) {
       const point = new THREE.Vector3();
@@ -110,7 +125,7 @@ export function forecourtPlace(game) {
       const eric = g.player;
       eric.scripted = true;
       eric.root.position.set(w.stationExit[0], 0, w.stationExit[1]);
-      eric.root.rotation.y = Math.PI / 2;
+      eric.root.rotation.y = Math.PI; // north, as he left the security room
       cam.closeOn(w.stationExit, 1.7);
       cam.snap(eric.root.position);
       await glide(g, eric.root, w.start, 1.1);
