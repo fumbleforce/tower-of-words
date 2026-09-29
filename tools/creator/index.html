@@ -33,7 +33,7 @@
 <body>
 <div class="app">
   <div id="view"><div id="status">Loading parts…</div>
-    <div class="bar"><button data-anim="idle" aria-pressed="true">Idle</button><button data-anim="walk" aria-pressed="false">Walk</button><button id="spin" aria-pressed="true">Turn</button></div>
+    <div class="bar"><button data-anim="idle" aria-pressed="true">Idle</button><button data-anim="walk" aria-pressed="false">Walk</button><button id="spin" aria-pressed="false">Auto-turn</button></div>
   </div>
   <div class="panel">
     <h1>Character creator</h1>
@@ -102,7 +102,7 @@ for (const s of SLOTS) {
 function showRecipe() { document.getElementById('recipe').value = JSON.stringify(recipe, null, 1); }
 document.getElementById('copy').onclick = () => navigator.clipboard && navigator.clipboard.writeText(document.getElementById('recipe').value);
 
-let ch = null, anim = 'idle', spin = true, busy = 0;
+let ch = null, anim = 'idle', spin = false, busy = 0;
 async function rebuild() {
   const my = ++busy;
   const next = await buildCharacter(lib, recipe);
