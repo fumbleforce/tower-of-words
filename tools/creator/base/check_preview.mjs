@@ -1,0 +1,52 @@
+// Bounded smoke/interaction checks for the candidate viewer, plus review shots.
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import { withBrowserJob } from '../browser-job.mjs';
+const out = process.argv[2] || 'art/parts/base/shots/preview-v14';
+fs.mkdirSync(out, {recursive:true});
+await withBrowserJob('base-preview-check', async browser => {
+  const page = await browser.newPage({viewport:{width:1366,height:860}}), errors=[];
+  page.on('pageerror', error=>errors.push(error.message));
+  const response = await page.goto('http://127.0.0.1:8771/tools/creator/base/preview.html');
+  assert.equal(response.status(),200);
+  await page.waitForFunction(()=>window.__ready || window.__error);
+  assert.equal(await page.evaluate(()=>window.__error),undefined);
+  assert.equal(await page.locator('#stubble-label').isVisible(),false);
+  assert.equal(await page.locator('[data-layer="hair"]').isChecked(),false);
+  await page.screenshot({path:out+'/desktop-bare.png'});
+  await page.selectOption('#body','eric');
+  await page.waitForFunction(()=>window.__ready && window.__candidate.body==='eric');
+  assert.equal(await page.locator('#stubble-label').isVisible(),true);
+  await page.locator('[data-layer="hair"]').check();
+  await page.selectOption('#motion','walk');
+  await page.locator('#pause').check();
+  await page.locator('#side').click();
+  await page.screenshot({path:out+'/desktop-eric-hair.png'});
+  // Rapid switches must settle on the last requested character.
+  await page.evaluate(()=>{for(const body of ['mio','eric','mio']){const select=document.getElementById('body');select.value=body;select.dispatchEvent(new Event('change'));}});
+  await page.waitForFunction(()=>window.__ready && window.__candidate.body==='mio');
+  assert.equal(await page.locator('#body').inputValue(),'mio');
+  assert.equal(await page.locator('#stubble-label').isVisible(),false);
+  await page.locator('[data-layer="hair"]').uncheck();
+  await page.selectOption('#motion','neutral');
+  await page.locator('#front').click();
+  await page.setViewportSize({width:390,height:844});
+  await page.screenshot({path:out+'/phone-bare.png',fullPage:true});
+  const width = await page.evaluate(()=>({scroll:document.documentElement.scrollWidth,screen:innerWidth,canvas:document.querySelector('canvas').getBoundingClientRect().width}));
+  assert.ok(width.scroll<=width.screen,JSON.stringify(width));assert.ok(width.canvas>0);
+  assert.deepEqual(errors,[]);
+  // Initial failure is readable and does not produce an unhandled page error.
+  const failed = await browser.newPage();failed.on('pageerror',error=>errors.push(error.message));
+  await failed.route('**/base/clean-mio-v14.json',route=>route.fulfill({status:503,body:'Unavailable'}));
+  await failed.goto('http://127.0.0.1:8771/tools/creator/base/preview.html');
+  await failed.waitForFunction(()=>window.__error);
+  assert.match(await failed.locator('#status').textContent(),/HTTP 503/);
+  await failed.unroute('**/base/clean-mio-v14.json');
+  await failed.selectOption('#body','eric');
+  await failed.waitForFunction(()=>window.__ready);
+  await failed.selectOption('#body','mio');
+  await failed.waitForFunction(()=>window.__ready && window.__candidate.body==='mio');
+  assert.deepEqual(errors,[]);
+  await failed.close();await page.close();
+  console.log('PASS: candidate load, layers, motions, rapid switches, phone layout, failure and retry.');
+},{timeoutMs:60000});

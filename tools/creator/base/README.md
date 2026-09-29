@@ -10,7 +10,36 @@ The Meshy models are one surface: hair, face, hoodie and skin are all the same s
 the hair, no body under the clothes, no chin under the stubble. tools/creator cut that shell into triangle lists
 per slot, so taking a slot away left an open hole where it had been.
 
-## What this does
+## Current candidate pipeline
+
+`build_clean_base.py` constructs a connected ring mesh on the original 24-bone skeleton. Each v14 body has
+398 welded vertices and 792 triangles, smooth normals, authored body dimensions and projected source eyes.
+The dimensions are hand-tuned; they are not a recovered unclothed scan. Hair, garments and Eric’s stubble remain
+separate source layers. These are review candidates, not replacements for the game assets.
+
+```sh
+# Use the Python environment with numpy, Pillow and trimesh available.
+python3 tools/creator/base/build_clean_base.py eric v14
+python3 tools/creator/base/build_clean_base.py mio v14
+node tools/creator/base/check_deformation.mjs --strict --all-crossings clean-eric-v14 clean-mio-v14
+node tools/creator/base/check_deformation.mjs --strict --all-crossings --host-rest clean-eric-v14 clean-mio-v14
+node tools/creator/base/run.mjs 'tools/creator/base/shots.html?clean=v14&retarget=rest' art/parts/base/shots/clean-v14-rest
+node tools/creator/base/check_preview.mjs
+python3 tools/creator/base/build_review.py v14 creator-base-2
+```
+
+Inspect candidates at `http://127.0.0.1:8771/tools/creator/base/preview.html?v=v14`.
+The viewer supports orbit/zoom, individual layers, neutral idle, walk and bind pose. Capture parameters and
+input hashes are recorded in `capture.json`; animated WebP durations match the source clips.
+Use a fresh review id for each published round; the review builder refuses to overwrite existing decisions.
+
+Both deformation modes pass 264 sampled posed meshes combined. This checks finite coordinates and proper
+triangle crossings, not continuous animation, coplanar contact or garment clearance. Source clothing still
+intersects these bodies, the bounded fit2 experiment remains explicitly `not-ready`, and walking feet can
+penetrate the floor. See [measurements and limits](../../../notes/clean-base-deformation.md).
+All prior exported versions and captures are preserved for comparison.
+
+## Earlier voxel pipeline
 
 - `export.html` dumps each source as the creator loads it (shared skeleton, bind pose, height 1, Mio's face fixes,
   cut labels) to `art/parts/base/src-<id>.json`.
