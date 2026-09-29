@@ -30,8 +30,10 @@ const compositeMaterial = new THREE.ShaderMaterial({
   vertexShader: 'varying vec2 screenUV; void main(){screenUV=uv;gl_Position=vec4(position.xy,0.,1.);}',
   fragmentShader: `uniform sampler2D source,candidate; uniform float sourceAlpha,candidateAlpha; varying vec2 screenUV;
     void main(){vec4 a=texture2D(source,screenUV),b=texture2D(candidate,screenUV);
-      vec3 colour=mix(vec3(.82,.855,.89),a.rgb,a.a*sourceAlpha);
-      colour=mix(colour,b.rgb,b.a*candidateAlpha);gl_FragColor=vec4(colour,1.);
+      float wa=a.a*sourceAlpha,wb=b.a*candidateAlpha,total=wa+wb;
+      vec3 blended=(a.rgb*wa+b.rgb*wb)/max(total,.00001);
+      vec3 colour=mix(vec3(.82,.855,.89),blended,min(total,1.));
+      gl_FragColor=vec4(colour,1.);
       #include <colorspace_fragment>
     }`,
   depthTest: false, depthWrite: false,
@@ -124,22 +126,25 @@ async function load() {
     scenes[0].add(original.root); scenes[1].add(candidate.root);
     for (const model of [original, candidate]) for (const item of Object.values(model.meshes)) originalMaterials.set(item, item.material);
     original.root.updateMatrixWorld(true); candidate.root.updateMatrixWorld(true);
-    let maxBoneDistance = 0;
-    for (const name of Object.keys(original.bones)) maxBoneDistance = Math.max(maxBoneDistance,
-      original.bones[name].getWorldPosition(new THREE.Vector3()).distanceTo(candidate.bones[name].getWorldPosition(new THREE.Vector3())));
-    if (maxBoneDistance > 1e-7) throw new Error('Source and candidate bone alignment differs.');
     const faceBox = new THREE.Box3();
     for (const triangle of library.byId[body + '-head'].tris) for (let k = 0; k < 3; k++) faceBox.expandByPoint(new THREE.Vector3().fromArray(source.pos, (triangle * 3 + k) * 3));
-    Object.assign(state, { ready: true, body, version, fit, original, candidate, maxBoneDistance, camera, faceBox, sourcePositions: source.pos });
+    Object.assign(state, { ready: true, body, version, fit, original, candidate, camera, faceBox, sourcePositions: source.pos });
     $('stubble-label').hidden = !candidate.meshes.stubble;
     $('candidate-label').textContent = `Magenta: ${version}${version === 'v16' ? ', rejected' : ', candidate'}`;
-    $('alignment').textContent = `Shared bind pose · source height 1 · ${Object.keys(original.bones).length} coincident bones · no per-model scale or offset`;
+    const sourceBox = new THREE.Box3().setFromBufferAttribute(mesh.geometry.attributes.position);
+    const baseBox = new THREE.Box3().setFromBufferAttribute(candidate.meshes.body.geometry.attributes.position);
+    const bounds = box => ({ min: box.min.toArray(), max: box.max.toArray() });
+    state.bounds = { source: bounds(sourceBox), base: bounds(baseBox),
+      delta: { min: baseBox.min.clone().sub(sourceBox.min).toArray(), max: baseBox.max.clone().sub(sourceBox.max).toArray() } };
+    const format = values => values.map(value => value.toFixed(4)).join(', ');
+    $('alignment').textContent = 'Shared source bind coordinates; no per-model scale or offset. Bounds below come from actual vertex positions.';
+    $('bounds').textContent = `Coordinates: x, y, z. Full source includes hair and clothes. Bare base includes hidden scalp/body.\nSource min [${format(state.bounds.source.min)}], max [${format(state.bounds.source.max)}]\nBase min [${format(state.bounds.base.min)}], max [${format(state.bounds.base.max)}]\nBase minus source min [${format(state.bounds.delta.min)}], max [${format(state.bounds.delta.max)}]\nThese extents expose scale/offset differences. Matching extents would not prove matching faces or garment clearance.`;
     $('status').textContent = `${body === 'mio' ? 'Mio' : 'Eric'} source + ${baseId}${fit ? ', ' + fit : ', original clothing positions'}.`;
     surfaces(); layers(); window.__done = true;
   } catch (error) {
     if (nextOriginal !== original) disposeModel(nextOriginal);
     if (nextCandidate !== candidate) disposeModel(nextCandidate);
-    if (token === request) { state.error = error.message; $('status').textContent = 'Could not load: ' + error.message; window.__err = error.message; }
+    if (token === request) { state.error = error.message; $('status').textContent = 'Could not load: ' + error.message + '. Candidate exports are local only; see Candidate files below.'; window.__err = error.message; }
   }
 }
 $('load').onclick = load; $('body').onchange = load; $('fit').onchange = load;

@@ -83,12 +83,37 @@ The review is [creator-base-overlay](http://127.0.0.1:8771/bible/#review/creator
 
 The source uses all original triangles through `loadLibrary` and `layerMesh`, with the creator's existing Mio
 preparation. Both figures retain the same source-normalized coordinates and shared bind skeleton, at height 1.
-The viewer checks that all bone world positions coincide. It applies no independent bounding-box fit, offset,
-scale or geometry change. Skin-only and dressed views retain the same coordinates.
+The vertex-bounds panel reports the actual source and base extents and their difference. The full source
+includes hair/clothes and the bare base includes hidden scalp/body, so equal bounds are not expected. Matching
+extents would not establish facial agreement. The viewer applies no independent fit, offset, scale or geometry change.
+Skin-only and dressed views retain the same coordinates.
 
 Front, character-left side, back and top are orthographic; face framing changes only the camera. Source and
 candidate opacity are independent. Cyan/magenta, source textures and independent wireframes help inspect
-shape differences. Each model renders into its own depth-tested target before the candidate is composited
-over the source, so transparency cannot reveal its own occluded surfaces. Switch a model off or use wireframe
+shape differences. Each model renders into its own depth-tested target. At each pixel the two colours are
+weighted by opacity
+and coverage, with their combined opacity capped at 1. Equal sliders give equal weight where both surfaces
+cover the pixel. Transparency cannot reveal a model’s own occluded surfaces. Switch a model off or use wireframe
 to inspect those. Rendering happens only when a control or viewport changes. This bind-pose view does not
 verify animated garment clearance.
+
+### Local candidate files
+
+The review’s v16/fit3 links use rejected local exports in `/home/jorgen/repo/japanese/art/parts/base/`.
+Those candidate JSON and PNG files are not committed or uploaded. A clean clone does not contain them.
+Source assets are in the asset library; pull them using `python3 tools/assets/sync.py pull` before generating.
+With the local review server on port 8771 serving the checkout you want to use, run these commands from that
+checkout (the exporter writes to the current directory):
+
+```sh
+mkdir -p art/parts/base
+node tools/creator/run.mjs tools/creator/base/export.html
+# Use Python with numpy, Pillow and trimesh installed.
+python3 tools/creator/base/build_clean_base.py mio v16
+python3 tools/creator/base/build_clean_base.py eric v16
+```
+
+This writes `src-{mio,eric}.json`, then `clean-{mio,eric}-v16.json` and their PNG textures. Keep the default
+“Original positions” clothing setting; fit3 additionally requires the existing local
+`clean-{mio,eric}-v16-fit3-layers.json` trial exports. A future candidate needs its own JSON and the texture
+named by its `tex` field in `art/parts/`. Generation recreates the rejected baseline; it does not repair it.

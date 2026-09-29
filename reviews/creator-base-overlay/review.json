@@ -3,7 +3,7 @@
   "date": "2026-09-29",
   "by": "Codex",
   "status": "open",
-  "question": "Compare the rejected base against the originals; corrected geometry is in progress.",
+  "question": "Local diagnostic viewer for the rejected base; corrected geometry is in progress. Candidate exports must be generated on a clean clone (setup link below).",
   "multi": true,
   "options": [
     {
@@ -19,11 +19,11 @@
   ],
   "links": [
     {
-      "label": "Mio: live transparent overlay",
+      "label": "Mio: local transparent overlay (requires v16 export)",
       "href": "tools/creator/base/overlay.html?body=mio&version=v16"
     },
     {
-      "label": "Eric: live transparent overlay",
+      "label": "Eric: local transparent overlay (requires v16 export)",
       "href": "tools/creator/base/overlay.html?body=eric&version=v16"
     },
     {
@@ -33,6 +33,10 @@
     {
       "label": "Measured v16 face deviations (height 1 units)",
       "href": "reviews/creator-base-overlay/v16-face-distances.json"
+    },
+    {
+      "label": "Candidate availability and generation commands",
+      "href": "tools/creator/base/README.md#local-candidate-files"
     }
   ]
 }
