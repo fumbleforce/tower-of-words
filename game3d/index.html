@@ -48,6 +48,8 @@ html, body { margin: 0; height: 100%; background: #0e121c; }
   for (const f of b.files) imports[new URL(f, location.href).href] = new URL(f + v, location.href).href;
   const map = document.createElement('script'); map.type = 'importmap'; map.textContent = JSON.stringify({ imports }); document.head.appendChild(map);
   document.getElementById('build').textContent = 'build ' + b.id;
+  // the feedback window (F8), local only: loaded before the game so its keys come first while it's open
+  if (/^(127\.0\.0\.1|localhost|\[::1\])$/.test(location.hostname)) { try { await import('./js/feedback.js'); } catch (e) { console.warn('feedback window', e); } }
   const s = document.createElement('script'); s.type = 'module'; s.src = './js/main.js' + v; document.body.appendChild(s);
   // the shell (title, settings, pause, saves, loading): its own module, so a fault there never stops the game
   const m = document.createElement('script'); m.type = 'module'; m.src = './js/menu.js' + v; document.body.appendChild(m);

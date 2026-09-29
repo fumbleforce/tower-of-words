@@ -1,0 +1,25 @@
+/* the feedback window (js/feedback.js): the settings sheet's slate panel with a text field, the screenshot and Send */
+#feedback { z-index: 40; }
+#feedback .pane { height: auto; }
+#feedback header h2 { font-size: 20px; }
+#feedback .fb-body { display: flex; flex-direction: column; gap: 12px; padding: 16px 22px 6px; overflow: auto; }
+#feedback textarea { display: block; width: 100%; min-height: 132px; max-height: 40vh; resize: vertical; padding: 12px 14px; border-radius: var(--chip-r); border: 1px solid var(--chip-edge); background: rgba(255, 255, 255, .04); color: var(--ink); font: 500 16px/1.45 var(--font); }
+#feedback textarea::placeholder { color: var(--ink-dim); opacity: .8; }
+#feedback textarea:focus { outline: none; border-color: rgba(111, 208, 198, .6); }
+#feedback textarea:disabled { opacity: .6; }
+#feedback .fb-shot { display: flex; align-items: center; gap: 12px; margin: 0; }
+#feedback .fb-shot img { flex: none; width: auto; max-width: 128px; max-height: 84px; border-radius: 8px; border: 1px solid var(--chip-edge); background: #1b2030; }
+#feedback figcaption { display: flex; flex-direction: column; gap: 3px; font-size: 14px; line-height: 1.35; color: var(--ink); }
+#feedback figcaption .where { font-size: 13px; color: var(--ink-dim); }
+#feedback .fb-status { min-height: 20px; margin: 0; font-size: 14px; line-height: 1.4; color: var(--ink-dim); overflow-wrap: anywhere; }
+#feedback .fb-status.bad { color: var(--warn); }
+#feedback .fb-status.ok { color: var(--accent); }
+#feedback footer .keys { margin: 10px 0 0; text-align: center; font-size: 13px; color: var(--ink-dim); }
+#feedback .done:disabled { opacity: .6; cursor: default; }
+body.phone #feedback footer .keys { display: none; }
+/* phone: the panel hangs from the top so the keyboard never covers Send */
+body.phone #feedback .pane { top: calc(12px + env(safe-area-inset-top)); left: 12px; right: 12px; bottom: auto; width: auto; max-height: calc(100dvh - 24px); }
+body.phone #feedback textarea { min-height: 112px; }
+#feedbackBtn svg { stroke-width: 1.9; }
+/* above the whole-screen "continue" area, so feedback can be sent in the middle of a conversation */
+#feedbackBtn { position: relative; z-index: 2; }
