@@ -532,17 +532,6 @@ function goalArrow() {
   a.onclick = (e) => { e.stopPropagation(); if (target) game().use(target); };
   const v = new THREE.Vector3(), v2 = new THREE.Vector3(), v3 = new THREE.Vector3();
   const ring = el('div'); ring.id = 'goalRing'; ring.hidden = true; $('#ui').prepend(ring);
-  const nring = el('div'); nring.id = 'nearRing'; nring.hidden = true; $('#ui').prepend(nring);
-  const floorRing = (g, sp, r, elm) => {
-    const fy = g.place.floorY || 0, sp3 = g.place.space;
-    const P = (x, z) => { const o = new THREE.Vector3(x, fy + 0.01, z); sp3.localToWorld(o); o.project(g.place.camera); return [((o.x + 1) / 2) * innerWidth, ((1 - o.y) / 2) * innerHeight, o.z]; };
-    const c = P(sp[0], sp[1]), rx = P(sp[0] + r, sp[1]), rz = P(sp[0], sp[1] + r);
-    const w = Math.max(24, Math.hypot(rx[0] - c[0], rx[1] - c[1]) * 2), h = Math.max(12, Math.hypot(rz[0] - c[0], rz[1] - c[1]) * 2);
-    if (c[2] >= 1) return false;
-    elm.style.width = w.toFixed(0) + 'px'; elm.style.height = h.toFixed(0) + 'px';
-    elm.style.transform = `translate(${(c[0] - w / 2).toFixed(0)}px, ${(c[1] - h / 2).toFixed(0)}px)`;
-    return true;
-  };
   const loop = () => {
     requestAnimationFrame(loop);
     const g = game(); if (!g || !g.place || !g.markers) { a.hidden = true; ring.hidden = true; return; }
@@ -584,10 +573,8 @@ function goalArrow() {
     }
     a.hidden = !show || b.classList.contains('busy') || b.classList.contains('trip') || b.classList.contains('at-title') || isPaused;
     ring.hidden = !ringOn || b.classList.contains('busy') || b.classList.contains('trip') || b.classList.contains('at-title') || !!(window.__onboard && window.__onboard.holdGoal);
-    // the target in reach: a ring on the floor under it (with the action beside it, ui.placeSay)
-    const nr = g.near, nsp = nr && nr.spot && nr.spot();
-    const nOn = !!(nsp && !(window.__onboard && window.__onboard.active && !window.__onboard.moved) && !g.busy && !b.classList.contains('trip') && !b.classList.contains('at-title') && !isPaused && floorRing(g, nr.face ? nr.face() : nsp, /small/.test(nr.kind || '') ? 0.3 : 0.4, nring));
-    if (nring.hidden === nOn) nring.hidden = !nOn;
+    // the target in reach has no floor ring any more (Jørgen: "brutally ugly and overlaps the whole screen"): its dot
+    // over the head turns into a small pointer instead (engine.js Markers, css/marks.css), with the 3D outline
     if (window.__onboard && window.__onboard.active) a.hidden = true;
   };
   loop();
