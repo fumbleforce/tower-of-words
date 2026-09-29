@@ -177,7 +177,7 @@ The faces each person can show beside the text box: `game3d/assets/portraits/<id
 | Id | Faces |
 |---|---|
 | `eric` | neutral, surprised, tired |
-| `mio` | neutral, smile, deadpan, surprised, embarrassed, tired, phone (to build) |
+| `mio` | neutral, smile, deadpan, surprised, embarrassed, tired, phone |
 | `mori` | neutral, smile, flustered |
 | `kenji` | neutral, grin, sheepish |
 | `emi` | neutral |
@@ -186,7 +186,7 @@ The faces each person can show beside the text box: `game3d/assets/portraits/<id
 | `kuro` | neutral |
 | `aoi` | neutral |
 
-Mio's `phone` face is her looking down at her phone, a dialogue portrait of its own (Jørgen asked for it instead of a timed phone icon). The game lists it but the file hasn't landed, so it shows her neutral face.
+Mio's `phone` face is her looking down at her phone, a dialogue portrait of its own (Jørgen asked for it instead of a timed phone icon). Approved 2026-09-29 (reviews/mio-phone-5).
 
 ## In the code, in no storyline
 

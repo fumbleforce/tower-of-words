@@ -30,7 +30,7 @@ The anime portraits beside the dialogue box. The faces each person has are in [c
 
 | Id | Status |
 |---|---|
-| `mio` | Approved: the v3 faces, from art/approved/mio/mio-after.webp. The phone face is to build. |
+| `mio` | Approved: the v3 faces, from art/approved/mio/mio-after.webp. The phone face is mio-phone-5's blendk25-3501-exact-3401-v2 (Jørgen, 2026-09-29: "close enough... dont stress it"). |
 | `emi` | Approved: art/approved/emi/emi-after.webp. |
 | `aoi` | Approved: art/approved/aoi/aoi-after.webp. |
 | `kuro` | Approved: art/approved/kuro/kuro-after.webp. |
