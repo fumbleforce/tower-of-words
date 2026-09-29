@@ -1,0 +1,97 @@
+{
+ "title": "Eric's portrait: shoulder no longer cut straight",
+ "date": "2026-09-29",
+ "by": "art agent (eric-canvas-1)",
+ "status": "decided",
+ "multi": false,
+ "question": "Should the game use the wider cut, where his shoulder and arm end inside the picture?",
+ "media": [
+  {
+   "image": "art/candidates/portraits/eric-canvas-1/ingame-2560x1440-shoulder-2x.webp",
+   "caption": "In the game at 2560x1440, zoomed 2x on his left shoulder (image right). Before: the blazer ends in a straight vertical line. After: the arm curves and closes with its outline."
+  },
+  {
+   "image": "art/candidates/portraits/eric-canvas-1/ingame-2560x1440-neutral.webp",
+   "caption": "2560x1440, neutral, before and after. His face, size and chin height are the same."
+  },
+  {
+   "image": "art/candidates/portraits/eric-canvas-1/ingame-2560x1440-surprised.webp",
+   "caption": "2560x1440, surprised."
+  },
+  {
+   "image": "art/candidates/portraits/eric-canvas-1/ingame-2560x1440-tired.webp",
+   "caption": "2560x1440, tired."
+  },
+  {
+   "image": "art/candidates/portraits/eric-canvas-1/ingame-2560x1440-before-full.webp",
+   "caption": "Whole screen at 2560x1440, before."
+  },
+  {
+   "image": "art/candidates/portraits/eric-canvas-1/ingame-2560x1440-after-full.webp",
+   "caption": "Whole screen at 2560x1440, after."
+  },
+  {
+   "image": "art/candidates/portraits/eric-canvas-1/ingame-1366x860-neutral.webp",
+   "caption": "1366x860, neutral. At this size his arm already runs off the right screen edge, before and after, so nothing changes here."
+  },
+  {
+   "image": "art/candidates/portraits/eric-canvas-1/ingame-1366x860-surprised.webp",
+   "caption": "1366x860, surprised."
+  },
+  {
+   "image": "art/candidates/portraits/eric-canvas-1/ingame-1366x860-tired.webp",
+   "caption": "1366x860, tired."
+  },
+  {
+   "image": "art/candidates/portraits/eric-canvas-1/ingame-390x844-neutral.webp",
+   "caption": "Phone 390x844, neutral. The picture still runs past the right screen edge (its right side is at 438 px on a 390 px screen); the re-cut can't change that, because the phone layout places his face at 80% of the screen width. The page doesn't scroll sideways."
+  },
+  {
+   "image": "art/candidates/portraits/eric-canvas-1/ingame-390x844-surprised.webp",
+   "caption": "Phone, surprised."
+  },
+  {
+   "image": "art/candidates/portraits/eric-canvas-1/ingame-390x844-tired.webp",
+   "caption": "Phone, tired."
+  },
+  {
+   "image": "art/candidates/portraits/eric-canvas-1/sheet-before.webp",
+   "caption": "The three game files now (597x768) on dark, light and a checkerboard."
+  },
+  {
+   "image": "art/candidates/portraits/eric-canvas-1/sheet-after.webp",
+   "caption": "The three new files (648x768). The red tick at the top marks where the old picture ended."
+  },
+  {
+   "image": "art/candidates/portraits/eric-canvas-1/closeup-shoulder.webp",
+   "caption": "The new strip at 2x over a checkerboard: the matte is clean and the outline is closed."
+  },
+  {
+   "image": "art/candidates/portraits/eric-canvas-1/imgqa-sheet.webp",
+   "caption": "tools/imgqa.py on the new files: all pass (red rim 0 to 0.1%, glasses cover 1.00, matte frame 0.01 to 0.03, headroom 7%). imgqa still assumes the old 597 px width, so its face-similarity number is lower than it should be; a direct pixel check shows the face area differs from today's files by 0.4 of 255 on average (webp re-encoding only)."
+  }
+ ],
+ "options": [
+  {
+   "id": "eric-canvas-648",
+   "label": "eric-canvas-648: wider cut",
+   "image": "art/candidates/portraits/eric-canvas-1/ingame-2560x1440-shoulder-2x.webp",
+   "images": [
+    "art/candidates/portraits/eric-canvas-1/eric-neutral.webp",
+    "art/candidates/portraits/eric-canvas-1/eric-surprised.webp",
+    "art/candidates/portraits/eric-canvas-1/eric-tired.webp"
+   ],
+   "note": "No outpaint or new render was needed: the approved render r4-909 already has his whole arm, and the game crop stopped at source x 735. This is the same crop (scale 1.051125 from source x 167.30, y -47.35) taken 51 px wider, 648x768 instead of 597x768. Only the new strip x 597 to 647 is added to each approved file; the rest, face and expressions included, is today's pixels. The arm ends at x 626. In the game only FACE.eric's width changes (597 to 648); its face box [112,208,348,399] stays. Scripts: art/candidates/portraits/eric-canvas-1/make.py, sheet.py, ingame.py; shots: game3d/tools/eric-canvas-shots.mjs."
+  },
+  {
+   "id": "eric-canvas-keep",
+   "label": "eric-canvas-keep: keep today's cut",
+   "image": "art/candidates/portraits/eric-canvas-1/sheet-before.webp",
+   "note": "The current 597x768 files, unchanged."
+  }
+ ],
+ "decided": [
+  "eric-canvas-648"
+ ],
+ "decision": "eric-canvas-648, wider cut"
+}
