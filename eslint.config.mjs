@@ -35,6 +35,7 @@ export default [
     'game3d/js/bonds/day1-check.mjs', 'game3d/qa/*.mjs',
     'game3d/test/support/behavior-trace.mjs', 'game3d/test/support/open-game.mjs',
     'game3d/test/support/trace-clock.mjs', 'game3d/test/support/wait-ready.mjs',
+    'game3d/test/routes/driver.mjs',
     'game3d/test/unit/checkpoint.test.mjs', 'game3d/test/unit/save-restore.test.mjs',
     'game3d/tools/a11y.mjs', 'game3d/tools/beat-shots.mjs', 'game3d/tools/fast.mjs',
     'game3d/tools/hud-shots.mjs', 'game3d/tools/pins-outline-shots.mjs', 'game3d/tools/pin-tap-check.mjs', 'game3d/tools/lift-door-shots.mjs', 'game3d/tools/look-bench.mjs', 'game3d/tools/train-door-shots.mjs',
