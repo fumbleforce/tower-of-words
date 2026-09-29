@@ -22,7 +22,7 @@ export function start(game) {
     const p = game.place; if (!p || !game.walker) return;
     if (p.name !== lastPlace) { lastPlace = p.name; T.places.push(p.name); tried.clear(); idle = 0; }
     if (game.player.seated && game.walker.path) game.walker.stop();
-    if (game.busy || game.walker.path) { if (++busyFor > 600) { T.log.push('stuck busy'); busyFor = 0; } return; }
+    if (game.busy || game.saying || game.walker.path) { if (++busyFor > 600) { T.log.push('stuck busy'); busyFor = 0; } return; }
     busyFor = 0;
     const list = game.markers.list.filter((m) => m.enabled());
     const goals = list.filter((m) => m.goal());
