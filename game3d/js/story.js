@@ -70,13 +70,18 @@ export function walkPerson(rig, pts, { speed = 1.2, blobM } = {}) {
     // the last point on someone ("walk to Eric"): stop at a talking distance in front of them instead
     if (pts.length && window.__game) pts = [...pts.slice(0, -1), standOff(window.__game, rig, pts[pts.length - 1])];
     const path = pts.map(([x, z]) => new THREE.Vector3(x, 0, z));
-    let ph = 0;
+    rig._blk = 0; rig._hold = 0; rig._press = 0; rig._detour = false; rig._blocker = null;   // nothing left over from an earlier walk
+    let ph = 0, age = 0, plen = 0;
+    { let q = rig.root.position; for (const v of path) { plen += Math.hypot(v.x - q.x, v.z - q.z); q = v; } }
+    const limit = plen / Math.max(0.3, speed) * 3 + 6;   // a hard cap: whatever happens, the walk ends (soft collision)
     rig._walk = (dt) => {
+      if ((age += dt) > limit) path.length = 0;
       const p = rig.root.position, t = path[0];
       if (!t) { walkPose(rig, 0, 0); rig.hips.position.y = HIP; rig._walk = null; res(); return; }
       const d = Math.hypot(t.x - p.x, t.z - p.z);
       // arrived; or the last leg is held up by someone standing on the spot: stop here, next to them (move.js personStep)
-      if (d < 0.05 || (path.length === 1 && (rig._blk || 0) > 1.2 && d < 1.2) || (rig._blk || 0) > 4) { path.shift(); rig._blk = 0; rig._detour = false; rig._blocker = null; return; }
+      const onSpot = rig._blocker && Math.hypot(rig._blocker.x - t.x, rig._blocker.z - t.z) < rig._blocker.r + 0.35;
+      if (d < 0.05 || (path.length === 1 && onSpot && (rig._blk || 0) > 1.2 && d < 1.2) || (rig._blk || 0) > 4) { path.shift(); rig._blk = 0; rig._detour = false; rig._blocker = null; return; }
       // held up by someone standing in the way for a moment: go round them (one detour per leg)
       if ((rig._blk || 0) > 0.6 && rig._blocker && !rig._blocker.rig._walk && !rig._detour && window.__game) {
         const w = detourPoint(window.__game, rig, rig._blocker, [t.x, t.z]);
