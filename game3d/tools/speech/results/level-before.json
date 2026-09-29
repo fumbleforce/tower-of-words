@@ -1,0 +1,214 @@
+{
+ "speech-50": [
+  {
+   "slot": "word-matte",
+   "id": "matte",
+   "peakDb": -24.5,
+   "rmsDb": -45.4,
+   "meterMax": 0.2,
+   "tapFrames": 13,
+   "speech": true,
+   "hit": true,
+   "text": "待て",
+   "reason": ""
+  },
+  {
+   "slot": "eric-kite",
+   "id": "kite",
+   "peakDb": -15.6,
+   "rmsDb": -44.9,
+   "meterMax": 0.28,
+   "tapFrames": 9,
+   "speech": true,
+   "hit": true,
+   "text": "kite",
+   "reason": ""
+  },
+  {
+   "slot": "(nobody)",
+   "id": "matte",
+   "peakDb": -44.3,
+   "rmsDb": -59,
+   "meterMax": 0.02,
+   "tapFrames": 0,
+   "speech": false,
+   "hit": false,
+   "text": "",
+   "reason": "quiet"
+  },
+  {
+   "slot": "eric-ohayo",
+   "id": "ohayo",
+   "peakDb": -15.3,
+   "rmsDb": -35.7,
+   "meterMax": 0.48,
+   "tapFrames": 56,
+   "speech": true,
+   "hit": true,
+   "text": "おはようございます",
+   "reason": ""
+  },
+  {
+   "slot": "word-akete",
+   "id": "akete",
+   "peakDb": -12.8,
+   "rmsDb": -37,
+   "meterMax": 0.53,
+   "tapFrames": 24,
+   "speech": true,
+   "hit": true,
+   "text": "開けて",
+   "reason": ""
+  }
+ ],
+ "fresh-60": [
+  {
+   "slot": "open 1",
+   "id": "kite",
+   "peakDb": -33.7,
+   "peakAt": 0.44,
+   "rmsDb": -54.2,
+   "meterMax": 0.05,
+   "tapFrames": 0,
+   "speech": true,
+   "hit": false,
+   "text": "タイト",
+   "reason": ""
+  },
+  {
+   "slot": "open 2",
+   "id": "kite",
+   "peakDb": -33.4,
+   "peakAt": 0.35,
+   "rmsDb": -54.6,
+   "meterMax": 0.06,
+   "tapFrames": 0,
+   "speech": true,
+   "hit": false,
+   "text": "タイト",
+   "reason": ""
+  }
+ ],
+ "fresh-50": [
+  {
+   "slot": "open 1",
+   "id": "kite",
+   "peakDb": -21.2,
+   "peakAt": 0.47,
+   "rmsDb": -47,
+   "meterMax": 0.16,
+   "tapFrames": 5,
+   "speech": true,
+   "hit": true,
+   "text": "kite",
+   "reason": ""
+  },
+  {
+   "slot": "open 2",
+   "id": "kite",
+   "peakDb": -19.5,
+   "peakAt": 0.5,
+   "rmsDb": -46.4,
+   "meterMax": 0.2,
+   "tapFrames": 7,
+   "speech": true,
+   "hit": true,
+   "text": "kite",
+   "reason": ""
+  }
+ ],
+ "fresh-40": [
+  {
+   "slot": "open 1",
+   "id": "kite",
+   "peakDb": -9.5,
+   "peakAt": 0.37,
+   "rmsDb": -36.8,
+   "meterMax": 0.55,
+   "tapFrames": 15,
+   "speech": true,
+   "hit": true,
+   "text": "kite",
+   "reason": ""
+  },
+  {
+   "slot": "open 2",
+   "id": "kite",
+   "peakDb": -8.5,
+   "peakAt": 0.5,
+   "rmsDb": -35.7,
+   "meterMax": 0.71,
+   "tapFrames": 16,
+   "speech": true,
+   "hit": true,
+   "text": "カイト",
+   "reason": ""
+  }
+ ],
+ "fresh-30": [
+  {
+   "slot": "open 1",
+   "id": "kite",
+   "peakDb": -0.2,
+   "peakAt": 0.47,
+   "rmsDb": -26,
+   "meterMax": 1,
+   "tapFrames": 18,
+   "speech": true,
+   "hit": true,
+   "text": "kite",
+   "reason": ""
+  },
+  {
+   "slot": "open 2",
+   "id": "kite",
+   "peakDb": -0.1,
+   "peakAt": 0.49,
+   "rmsDb": -25.8,
+   "meterMax": 1,
+   "tapFrames": 18,
+   "speech": true,
+   "hit": true,
+   "text": "kite",
+   "reason": ""
+  }
+ ],
+ "noise": [
+  {
+   "slot": "(nobody)",
+   "id": "matte",
+   "peakDb": -29.4,
+   "rmsDb": -45.7,
+   "meterMax": 0.12,
+   "tapFrames": 19,
+   "speech": true,
+   "hit": false,
+   "text": "ご視聴ありがとうございました",
+   "reason": ""
+  },
+  {
+   "slot": "(nobody)",
+   "id": "matte",
+   "peakDb": -35.6,
+   "rmsDb": -50.2,
+   "meterMax": 0.06,
+   "tapFrames": 0,
+   "speech": false,
+   "hit": false,
+   "text": "",
+   "reason": "quiet"
+  },
+  {
+   "slot": "(nobody)",
+   "id": "matte",
+   "peakDb": -36,
+   "rmsDb": -49.8,
+   "meterMax": 0.06,
+   "tapFrames": 0,
+   "speech": false,
+   "hit": false,
+   "text": "",
+   "reason": "quiet"
+  }
+ ]
+}

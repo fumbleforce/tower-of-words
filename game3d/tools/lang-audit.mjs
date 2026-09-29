@@ -345,18 +345,14 @@ for (const f of files) {
     }
   });
 }
-// speech-match.js: the one spelling of SPOKEN that reaches the screen is speech.js WORDS_JA
-// ("That sounded like X"), forms[0] or else kana[0]; it should be the spelling the game teaches
+// speech-match.js: the one spelling of SPOKEN that reaches the screen is the mic's "That sounded like X" hint.
+// speech.js takes it from lang.js (WORDS[k].ja) and shows it only for a word the player knows (known.has).
 {
   const { SPOKEN = {} } = await imp('js/speech-match.js');
-  const shown = /const WORDS_JA = .*w\.forms\[0\] \|\| w\.kana\[0\]/.test(rd('js/speech.js'));
-  if (!shown) flag('WARN', 'builder', 'js/speech.js WORDS_JA', 'no longer built from SPOKEN forms[0] || kana[0]; update the speech-match check in lang-audit.mjs');
-  for (const [id, w] of Object.entries(SPOKEN)) {
-    const ja = (w.forms && w.forms[0]) || (w.kana && w.kana[0]);
-    if (!WORDS[id]) flag('ERROR', 'builder', `js/speech-match.js SPOKEN.${id}`, `not a word in lang.js; the mic retry hint would show ${ja}`);
-    else if (!everTaught.has(id)) flag('ERROR', 'builder', `js/speech-match.js SPOKEN.${id}`, `the mic retry hint can show ${ja}, a word never taught`);
-    else if (ja !== WORDS[id].ja) flag('WARN', 'builder', `js/speech-match.js SPOKEN.${id}`, `the mic retry hint shows ${ja}, but the game teaches ${WORDS[id].ja} (speech.js WORDS_JA could use the lang.js spelling)`);
-  }
+  const src = rd('js/speech.js');
+  const fromLang = /WORDS\[\w+\]\.ja/.test(src) && /known\.has\(/.test(src);
+  if (!fromLang) flag('WARN', 'builder', 'js/speech.js "That sounded like"', 'the hint no longer takes lang.js WORDS[id].ja for known words only; update the speech-match check in lang-audit.mjs');
+  for (const id of Object.keys(SPOKEN)) if (!WORDS[id]) flag('ERROR', 'builder', `js/speech-match.js SPOKEN.${id}`, 'not a word in lang.js; the mic can\'t name it');
 }
 // the gibberish glyph pool: real kanji side by side can spell real words
 {

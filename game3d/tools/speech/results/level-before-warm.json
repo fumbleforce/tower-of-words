@@ -1,0 +1,124 @@
+{
+ "fresh-50": [
+  {
+   "slot": "open 1",
+   "id": "kite",
+   "peakDb": -21.4,
+   "peakAt": 0.37,
+   "rmsDb": -47.1,
+   "meterMax": 0.15,
+   "tapFrames": 4,
+   "speech": true,
+   "hit": false,
+   "text": "タイト",
+   "reason": ""
+  },
+  {
+   "slot": "open 2",
+   "id": "kite",
+   "peakDb": -21.1,
+   "peakAt": 0.48,
+   "rmsDb": -46.8,
+   "meterMax": 0.19,
+   "tapFrames": 6,
+   "speech": true,
+   "hit": false,
+   "text": "タイト",
+   "reason": ""
+  }
+ ],
+ "warm-60": [
+  {
+   "slot": "open 1",
+   "id": "kite",
+   "peakDb": -28.4,
+   "peakAt": 0.46,
+   "rmsDb": -53,
+   "meterMax": 0.06,
+   "tapFrames": 0,
+   "speech": true,
+   "hit": true,
+   "text": "カイト",
+   "reason": ""
+  },
+  {
+   "slot": "open 2",
+   "id": "kite",
+   "peakDb": -28.4,
+   "peakAt": 0.5,
+   "rmsDb": -53.5,
+   "meterMax": 0.06,
+   "tapFrames": 0,
+   "speech": true,
+   "hit": true,
+   "text": "カイト",
+   "reason": ""
+  }
+ ],
+ "warm-50": [
+  {
+   "slot": "open 1",
+   "id": "kite",
+   "peakDb": -17.8,
+   "peakAt": 0.46,
+   "rmsDb": -45.4,
+   "meterMax": 0.21,
+   "tapFrames": 6,
+   "speech": true,
+   "hit": false,
+   "text": "タイトル",
+   "reason": ""
+  },
+  {
+   "slot": "open 2",
+   "id": "kite",
+   "peakDb": -17.8,
+   "peakAt": 0.47,
+   "rmsDb": -45.3,
+   "meterMax": 0.21,
+   "tapFrames": 6,
+   "speech": true,
+   "hit": true,
+   "text": "kite",
+   "reason": ""
+  }
+ ],
+ "noise": [
+  {
+   "slot": "(nobody)",
+   "id": "matte",
+   "peakDb": -29.4,
+   "rmsDb": -45.7,
+   "meterMax": 0.12,
+   "tapFrames": 19,
+   "speech": true,
+   "hit": false,
+   "text": "ご視聴ありがとうございました",
+   "reason": ""
+  },
+  {
+   "slot": "(nobody)",
+   "id": "matte",
+   "peakDb": -36.4,
+   "rmsDb": -50.2,
+   "meterMax": 0.06,
+   "tapFrames": 0,
+   "speech": false,
+   "hit": false,
+   "text": "",
+   "reason": "quiet"
+  },
+  {
+   "slot": "(nobody)",
+   "id": "matte",
+   "peakDb": -36,
+   "rmsDb": -49.8,
+   "meterMax": 0.06,
+   "tapFrames": 0,
+   "speech": false,
+   "hit": false,
+   "text": "",
+   "reason": "quiet"
+  }
+ ]
+}

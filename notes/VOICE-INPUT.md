@@ -83,6 +83,34 @@ Sheet: game3d/shots/voice/states-sheet.png (desktop 1366x860 on top, phone 390x8
 
 The mic row takes its styles from the game's tokens (teal for on, coral for trouble, no glow). It is published for Jørgen as review item `voice-input-ui`.
 
+## 5. Mic level (2026-09-29)
+
+Jørgen: "it works but I had to talk very loudly for some reason for it to pick me up."
+
+What was wrong. The level meter and the "is he talking" check used a fixed scale: the meter was the raw level times 7, and talking meant a level over 0.08 (about -39 dBFS). A normal voice on a quiet mic sits well under that, so the bars hardly moved (0.15 to 0.28 at -50 dBFS) and tap-to-talk didn't register the voice (it needs a few frames over the bar, and got 0 to 6). The mic also opened only on the press, so the browser's gain control started cold on the very word he was saying. The recogniser itself was fine: with the browser's gain control, echo cancelling and noise suppression on (they were already on), Whisper got the words from -50 to -10 dBFS in the old code too.
+
+The fix (speech.js):
+
+- Level against the room. The mic keeps the room's level (the quietest stretch of the last 2 s). The meter shows how far the voice is above it (flat up to 6 dB over the room, full at 30 dB), and talking means 12 dB over the room and above -56 dBFS, the same bar the speech check uses.
+- The speech check before the model (hasSpeech, trimSilence) uses that relative bar with a lower absolute floor (-56 dBFS instead of -50), so steady room noise still never counts, however loud.
+- Once the browser has allowed the mic, the prompt opens it as it comes up, so the gain control has settled before the press, and the last 0.35 s before the press is kept (people start talking as they press). It still closes when the prompt closes, and the first press is still what asks for permission.
+- "That sounded like X" names X only if Eric has learned it, in the lang.js spelling (the audit had caught 来て and 出して, and お早うございます for おはようございます).
+
+Tried and dropped: raising the recording to -20 dBFS before Whisper. It changed nothing measurable.
+
+Test: game3d/tools/speech/level-clips.py makes the files and level.mjs plays them into Chromium's fake microphone through the game's own capture path (browser processing on) and judge(). Word levels -50 to -10 dBFS RMS over office noise at -55, fresh opens with the word 0.3 s after the mic starts, warm opens (mic open 1.75 s before the press), and a louder room (-42) with nobody talking.
+
+| | Old | New |
+|---|---|---|
+| Meter peak, speech at -50 (steady / fresh / warm) | 0.20 to 0.53 / 0.15 to 0.20 / 0.21 | 1.00 / 0.77 to 0.90 / 1.00 |
+| Meter peak, speech at -60 (fresh / warm) | 0.05 / 0.06 | 0.3 to 0.5 / 0.7 |
+| Talking frames on the word at -50, fresh and warm opens (tap-to-talk needs more than 6) | 4 to 6 | 11 to 37 |
+| Words recognised, -50 to -10 | 27/28 | 19/20 |
+| Room noise only: counted as a word | 0 | 0 |
+| Room noise only: meter | 0.0 to 0.1 | 0.15 to 0.3; 1.0 for a moment when the mic has just opened on a loud room |
+
+Eric's learner "kite" near -50 comes out as タイト about half the time in both versions; that's the recogniser on a hard clip, not the level. Not tested: his own mic (a SteelSeries Arctis Nova 7 on PipeWire is the system default), and the Browser mode (Web Speech), which has its own endpointing.
+
 ## Wiring (requested)
 
 notes/production-requests.md, 2026-09-29, voice-input:
