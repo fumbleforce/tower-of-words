@@ -1,0 +1,50 @@
+{
+  "title": "People on the train",
+  "date": "2026-09-29",
+  "by": "Codex",
+  "status": "not-ready",
+  "question": "Which passenger encounters would you like in the train?",
+  "multi": true,
+  "options": [
+    {
+      "id": "train-aoi",
+      "label": "train-aoi: Aoi realises where Eric will work",
+      "note": "Her complaint about the basement lands awkwardly when Eric introduces himself."
+    },
+    {
+      "id": "train-bun",
+      "label": "train-bun: A snack from the mainland",
+      "note": "She shares something she brought back because she is tired of the company snacks."
+    },
+    {
+      "id": "train-youth",
+      "label": "train-youth: The goal he keeps looking at",
+      "note": "He is pleased with his first goal even though his team lost badly."
+    },
+    {
+      "id": "train-music",
+      "label": "train-music: He is listening to his own practice",
+      "note": "The headphones belong to someone trying to get a guitar part right."
+    },
+    {
+      "id": "train-reader",
+      "label": "train-reader: The book and the work computer",
+      "note": "His new Excel book does not match the old version he has to use at work."
+    },
+    {
+      "id": "train-hamada",
+      "label": "train-hamada: Hamada silences his reminder",
+      "note": "His reminder is working; he has learned to dismiss it in his sleep."
+    }
+  ],
+  "links": [
+    {
+      "label": "Read each complete encounter and choose",
+      "href": "reviews/train-discoveries-1/"
+    },
+    {
+      "label": "Staging and scope",
+      "href": "bible/#doc/reviews/train-discoveries-1/draft-notes.md"
+    }
+  ]
+}
