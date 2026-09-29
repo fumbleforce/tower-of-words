@@ -30,11 +30,11 @@
       "reason": "Existing detailed prop builders; preserve geometry until the visual owner reviews extraction."
     },
     "game3d/js/main.js": {
-      "lines": 1720,
-      "bytes": 61179,
+      "lines": 1129,
+      "bytes": 39392,
       "owner": "codex-tui",
-      "review": "C-0071",
-      "reason": "Existing game orchestration and hook wiring; stage 4 extraction is planned."
+      "review": "C-0080",
+      "reason": "Game composition, interactions and place lifecycle remain after the stage 4 global hook extraction."
     },
     "game3d/js/menu.js": {
       "lines": 1313,

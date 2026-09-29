@@ -29,6 +29,10 @@ test('structural migration preserves ordered graph IDs, edges and engine declara
   const expected = structuredClone(baseline);
   expected.engine.events.gate = { card_red: null, card_ok: null };
   expected.engine.prefix.gave_ = ['game3d/js/gameplay/gifts.js'];
+  expected.engine.prefix.shown_ = ['game3d/js/narrative/hooks/movement.js'];
+  expected.engine.prefix.typed_ = ['game3d/js/narrative/hooks/progression.js'];
+  expected.engine.prefix.bought_ = ['game3d/js/narrative/hooks/progression.js'];
+  expected.engine.exact.cant_buy = ['game3d/js/narrative/hooks/progression.js'];
   expected.engine.exact.say_tip = ['game3d/js/ui.js'];
   assert.deepEqual(plain, expected);
 });

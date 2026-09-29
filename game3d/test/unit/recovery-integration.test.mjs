@@ -53,7 +53,11 @@ test('the actual Continue branch migrates old openings after hydration and prese
 });
 
 test('real staging boundary restores world, camera and prompts while retaining durable flags', () => {
-  const callbacks = Object.fromEntries(ast.body.filter(n => n.type === 'ExpressionStatement'
+  const stagingSource = readFileSync(new URL('../../js/narrative/hooks/movement.js', import.meta.url), 'utf8');
+  const stagingAst = parse(stagingSource, { ecmaVersion: 'latest', sourceType: 'module', range: true });
+  const installer = stagingAst.body.find(n => n.type === 'ExportNamedDeclaration'
+    && n.declaration?.id?.name === 'installMovementHooks').declaration;
+  const callbacks = Object.fromEntries(installer.body.body.filter(n => n.type === 'ExpressionStatement'
     && n.expression.type === 'AssignmentExpression' && n.expression.left.object?.name === 'game'
     && ['captureStaging', 'restoreStaging'].includes(n.expression.left.property?.name))
     .map(n => [n.expression.left.property.name, n.expression.right]));
@@ -70,7 +74,7 @@ test('real staging boundary restores world, camera and prompts while retaining d
       world = structuredClone(saved.world);
     } } };
   for (const [name, body] of Object.entries(callbacks)) {
-    game[name] = new Function('game', 'ui', 'flags', 'THREE', `return ${text(body)}`)(game, ui, flags, THREE);
+    game[name] = new Function('game', 'ui', 'flags', 'THREE', `return ${stagingSource.slice(...body.range)}`)(game, ui, flags, THREE);
   }
   const captured = game.captureStaging();
   flags.paid = true; world.chair[0] = 2; cam.close.target.x = 10;

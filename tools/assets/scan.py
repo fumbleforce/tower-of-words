@@ -676,8 +676,8 @@ for k, svg in RUNTIME['source']['wordIcons'].items():
         'In the game; not reviewed as an icon set', source='Hand-drawn 24×24 line icon (lang.js ICON)',
         used=[f"Say menu and word chips for {w.get('ro', k)} ({w.get('en', '')})"], svg=f'<svg viewBox="0 0 24 24">{svg}</svg>', tags=['word'])
 for k, svg in RUNTIME['source']['emotes'].items():
-    add(f'icon/emote-{k}', 'icon', f'Emote: {k}', ['game3d/js/main.js'], 'provisional',
-        quote('GUIDE.md', 'Over-head icons and labels (Jørgen)') or 'In the game', source='main.js EMOTE_SVG', used=['Over-head emote bubble (story hook `emote`)'],
+    add(f'icon/emote-{k}', 'icon', f'Emote: {k}', ['game3d/js/narrative/hooks/presentation.js'], 'provisional',
+        quote('GUIDE.md', 'Over-head icons and labels (Jørgen)') or 'In the game', source='narrative/hooks/presentation.js EMOTE_SVG', used=['Over-head emote bubble (story hook `emote`)'],
         svg=f'<svg viewBox="0 0 24 24">{svg}</svg>', tags=['emote'])
 for icon in RUNTIME['source']['icons']:
     f, body = icon['file'], icon['body']

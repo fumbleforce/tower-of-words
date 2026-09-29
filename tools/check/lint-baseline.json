@@ -57,30 +57,6 @@
       "context": "3c14ef032cd84d78c82426764db4b30123f9913008c49cca3d4a2326467f6e04"
     },
     {
-      "file": "game3d/js/main.js",
-      "ruleId": "no-unused-vars",
-      "message": "'Walker' is defined but never used.",
-      "context": "f2dfb1decb63c8f3d062b28f6ad775a3bd501d585209186766494650520629f6"
-    },
-    {
-      "file": "game3d/js/main.js",
-      "ruleId": "no-unused-vars",
-      "message": "'glide' is defined but never used.",
-      "context": "7c16ad9ccd0d12e244fcd2647f15a77bc84bafb8ef69e8ed7603929d484e74ee"
-    },
-    {
-      "file": "game3d/js/main.js",
-      "ruleId": "no-unused-vars",
-      "message": "'bond' is defined but never used.",
-      "context": "eac19af1eb706be8cfdb8ca00f9ea4adc9c1b0764dd6f6687d2bc1e5f7ac49e4"
-    },
-    {
-      "file": "game3d/js/main.js",
-      "ruleId": "no-unused-vars",
-      "message": "'noteTeacher' is defined but never used.",
-      "context": "64b586e75b7a21c380d1bbfbe2aff71cadd85db9e833bbb512fb74957f1c2b16"
-    },
-    {
       "file": "game3d/js/mio.js",
       "ruleId": "no-unused-vars",
       "message": "'fwd' is assigned a value but never used.",
