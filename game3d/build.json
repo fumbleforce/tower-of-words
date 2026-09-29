@@ -62,6 +62,7 @@
 "js/places/definitions.js",
 "js/places/life.js",
 "js/places/lifecycle.js",
+"js/places/lift-materials.js",
 "js/places/lift.js",
 "js/places/lobby.js",
 "js/places/office.js",

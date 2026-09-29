@@ -58,8 +58,8 @@
       "reason": "Authored structural registration data for every place; retain as a coherent data module."
     },
     "game3d/js/places/lift.js": {
-      "lines": 1130,
-      "bytes": 40691,
+      "lines": 1121,
+      "bytes": 40592,
       "owner": "codex-tui",
       "review": "C-0071",
       "reason": "Existing shared lift geometry, movement and dialogue staging; extract after behavior characterization."

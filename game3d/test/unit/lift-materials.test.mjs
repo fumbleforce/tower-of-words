@@ -1,0 +1,51 @@
+import assert from 'node:assert/strict';
+import { test } from 'node:test';
+import { Mesh, MeshStandardMaterial, Plane, Texture } from '../../vendor/three/three.module.js';
+import { isolateLiftMaterials } from '../../js/places/lift-materials.js';
+
+test('lift clipping stays on selected meshes and shares each clone only within its attachment', () => {
+  const texture = new Texture();
+  const source = new MeshStandardMaterial({ color: '#987654', map: texture });
+  const planes = [new Plane()];
+  const wall = new Mesh(undefined, source), door = new Mesh(undefined, [source, source]);
+  const desk = new Mesh(undefined, source), otherLanding = new Mesh(undefined, source);
+  const first = {}, second = {};
+  const assign = isolateLiftMaterials(first, planes);
+  assign(wall); assign(door); assign(wall);
+  isolateLiftMaterials(second, planes)(otherLanding);
+  assert.equal(source.clippingPlanes, null);
+  assert.equal(source.userData.liftClip, undefined);
+  assert.equal(desk.material, source);
+  assert.notEqual(wall.material, source);
+  assert.equal(wall.material, door.material[0]);
+  assert.equal(door.material[0], door.material[1]);
+  assert.notEqual(wall.material, otherLanding.material);
+  assert.equal(wall.material.clippingPlanes, planes);
+  assert.equal(wall.material.clipIntersection, true);
+  assert.equal(wall.material.clipShadows, true);
+  assert.equal(wall.material.map, texture);
+  assert.equal(wall.material.color.getHex(), source.color.getHex());
+  planes[0].constant = 0.5;
+  assert.equal(wall.material.clippingPlanes[0].constant, 0.5);
+  first.dispose(); second.dispose();
+});
+
+test('release restores assignments, preserves later swaps and disposes only owned clones once', () => {
+  const source = new MeshStandardMaterial({ map: new Texture() });
+  const original = [source, source], mesh = new Mesh(undefined, original);
+  const changed = new Mesh(undefined, source), replacement = new MeshStandardMaterial();
+  let sharedDisposals = 0, cloneDisposals = 0, previousCalls = 0;
+  source.addEventListener('dispose', () => sharedDisposals++);
+  source.map.addEventListener('dispose', () => sharedDisposals++);
+  const place = { dispose(arg) { assert.equal(this, place); assert.equal(arg, 7); previousCalls++; } };
+  const assign = isolateLiftMaterials(place, [new Plane()]);
+  assign(mesh); assign(changed);
+  mesh.material[0].addEventListener('dispose', () => cloneDisposals++);
+  changed.material = replacement;
+  place.dispose(7); place.dispose(7);
+  assert.equal(mesh.material, original);
+  assert.equal(changed.material, replacement);
+  assert.equal(sharedDisposals, 0);
+  assert.equal(cloneDisposals, 1);
+  assert.equal(previousCalls, 2);
+});
