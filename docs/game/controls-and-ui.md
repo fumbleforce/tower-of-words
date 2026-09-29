@@ -27,7 +27,7 @@ While Eric is saying a word (its practice prompt, his voice, the answer), clicks
 
 On the train (game3d/js/onboard.js, notes/ONBOARDING.md for the design):
 
-- At the start the screen shows only one line on walking ("W A S D or click the floor to walk" / "Tap the floor to walk"). It goes once Eric has walked a few steps and never comes back.
+- At the start the screen shows only one line on walking ("W A S D or click the floor to walk" / "Tap the floor to walk"). It steps aside while a line or caption is up, goes once Eric has walked a few steps and never comes back.
 - No goal and no story hints until he has talked to a person. The first passenger he talks to nods at the free seat, and that gives the first goal.
 - The action prompt drops its verb after two uses and its key cap after five.
 - Say first shows only at the goal target (the cat), after Mio teaches おはようございます; after one use it shows wherever a word works.

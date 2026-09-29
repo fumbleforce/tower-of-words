@@ -149,7 +149,8 @@ export function createDialogue({ sfx }) {
         if (voiceKey) voice(voiceKey);
       });
     },
-    caption(sp, text) {
+    // a line nobody has to tap (ambient moments); overheard Japanese is garbled as in the dialogue box
+    caption(sp, text, { overheard, clear } = {}) {
       const c = $('#caption');
       if (!text) {
         c.hidden = true;
@@ -158,7 +159,9 @@ export function createDialogue({ sfx }) {
       c.hidden = false;
       c.querySelector('.nm').innerHTML = sp ? sp.name : '';
       c.querySelector('.nm').style.color = sp ? sp.color || '' : '';
-      c.querySelector('.tx').innerHTML = lineHTML(text);
+      const tx = c.querySelector('.tx');
+      tx.innerHTML = overheard ? heardHTML(text, clear) : lineHTML(text);
+      if (overheard) scramble(tx);
       c.classList.remove('in');
       void c.offsetWidth;
       c.classList.add('in');

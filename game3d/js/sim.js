@@ -142,17 +142,16 @@ export function applySchedule(game, { instant = false } = {}) {
 }
 
 // ---------- ambient NPC-to-NPC moments ----------
-// story `ambient: [{ id, who: [a, b], near, radius, pair, rel, if, period, once, lines, set }]`: plays as captions
-// when Eric comes within `radius` of `near` (or the first person), both people are here and visible, within
-// `pair` of each other (if given), the relation `rel` holds ('kenji likes mori'), `if` holds and the period
-// matches. once: true (default, once ever), 'day', 'period' or false.
+// story `ambient: [{ id, who, near, radius, pair, rel, if, period, once, lines, set }]`: captions when Eric is within
+// `radius` of `near` (or who[0]), all `who` are here and visible, within `pair` of each other, `rel` ('kenji likes
+// mori'), `if` and period hold; never behind the title. once: true (default), 'day', 'period' or false.
 const ambientDone = new Set();
 let ambientBusy = false;
 export function stepAmbient(game) {
   installSim(game);
   checkSteps(game);
   const list = game.story && game.story.ambient;
-  if (!list || ambientBusy || game.busy) return;
+  if (!list || ambientBusy || game.busy || /\b(at-title|title-leaving)\b/.test(document.body.className)) return;
   const mp = game.player.root.position;
   for (const a of list) {
     const k = ambientKey(a);
