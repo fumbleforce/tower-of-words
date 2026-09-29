@@ -2,7 +2,7 @@
  "title": "Kenji concept round 2",
  "date": "2026-09-29",
  "by": "art agent (kenji-concept2)",
- "status": "open",
+ "status": "superseded",
  "multi": true,
  "question": "Which of these is Kenji? He is 21 and at work in work clothes, with a different height, build and face in each.",
  "media": [
@@ -62,5 +62,6 @@
    ],
    "note": "Blunt fringe, work jacket, keyboard and melon soda. Ears not big as asked; jacket reads a bit like a track top."
   }
- ]
+ ],
+ "decision": "c, with other hair styles and a less intense look (round 3: kenji-concept-3)"
 }
