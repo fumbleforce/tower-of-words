@@ -104,6 +104,16 @@ export async function officePlace(game) {
 
   // paper sheets for the copier
   const sheetM = mat(PAL.paper);
+  // the jam you can see before the repair: the status light is steady amber (its own material, not the shared
+  // green) and one sheet hangs half out of the feed slot, crumpled; both clear when it runs (Codex review item 3, QA #16)
+  const copierLight = w.copier.children[w.copier.children.length - 1];
+  const lightM = { jam: new THREE.MeshStandardMaterial({ color: '#f0a830', emissive: '#f09a20', emissiveIntensity: 0.9, roughness: 0.5 }), ok: copierLight.material };
+  const jamSheet = new THREE.Group();
+  { const a = new THREE.Mesh(new THREE.BoxGeometry(0.22, 0.004, 0.1), sheetM), b = new THREE.Mesh(new THREE.BoxGeometry(0.22, 0.004, 0.09), sheetM);
+    a.position.set(0, 0, 0.05); b.position.set(0.01, -0.035, 0.12); b.rotation.x = 0.9; a.castShadow = b.castShadow = true; jamSheet.add(a, b);
+    jamSheet.position.set(-0.05, 0.47, 0.3); jamSheet.rotation.set(0.35, 0.12, 0.06); w.copier.add(jamSheet); }
+  const showJam = (on) => { jamSheet.visible = on; copierLight.material = on ? lightM.jam : lightM.ok; };
+  showJam(!flags.copier_done);
   function spray(n, wild) {
     for (let i = 0; i < n; i++) {
       const s = new THREE.Mesh(new THREE.BoxGeometry(0.2, 0.004, 0.27), sheetM); s.castShadow = true;
@@ -173,8 +183,9 @@ export async function officePlace(game) {
       st.fanSpin += (fs - st.fanSpin) * Math.min(1, dt * 2);
       w.fanRotor.rotation.z += st.fanSpin * dt; w.fanHead.rotation.y = Math.sin(t * 0.5) * 0.6;
       w.fan2Head.rotation.z += 6 * dt;
-      // copier blink while jammed, shake when wild
+      // copier: the jam (amber light, a sheet stuck in the feed) until it runs; shake when running or wild
       w.copier.position.x = -2.95 + (st.copier === 'wild' || st.copier === 'run' ? Math.sin(t * 60) * 0.006 : 0);
+      { const j = st.copier === 'jam' && !flags.copier_done; if (j !== jamSheet.visible) showJam(j); }
       stepPaper(dt);
       // the chair rolling to its spot
       if (st.chairTo) {

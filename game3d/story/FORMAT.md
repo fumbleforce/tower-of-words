@@ -229,7 +229,7 @@ The speaker's approved portrait shows beside the text box (desktop: large at the
   - `kuroda` (Mr. Hamada): `neutral`, `sleepy`, `panicked` (seed 721)
   - `guard` (Mr. Ishibashi): `neutral`, `stern`, `amused`
 
-Everyone else shows just the name plate. A face that doesn't exist for that person falls back to neutral. Set one on a line with the long form `{ say: 'mori', face: 'smile', text: '...' }` (it stays until changed), or with `{ do: 'expression', who: 'guard', face: 'stern' }`. The `emote` hook also picks a face when that person has a fitting one: `?` suspicious/stern, `!` panicked/surprised, `♪`/`heart` smile/grin/amused, `sweat` flustered/sheepish/panicked, `zzz` sleepy/tired, `…` tired.
+Everyone else shows just the name plate. A face that doesn't exist for that person falls back to neutral. Set one on a line with the long form `{ say: 'mori', face: 'smile', text: '...' }` (it stays until changed or the scene ends: every triggered scene starts everyone on neutral), or with `{ do: 'expression', who: 'guard', face: 'stern' }`. The `emote` hook also picks a face when that person has a fitting one: `?` suspicious/stern, `!` panicked/surprised, `♪`/`heart` smile/grin/amused, `sweat` flustered/sheepish/panicked, `zzz` sleepy/tired, `…` tired.
 
 ## Eric, Mio, phrases and overheard Japanese (the new premise)
 
