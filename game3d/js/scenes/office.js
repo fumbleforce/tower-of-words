@@ -2,6 +2,7 @@
 // palette of the lobby. Local space: floor y = 0, the lift at the bottom centre (+z, near the camera).
 import * as THREE from 'three';
 import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.js';
+import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
 import { PAL, mat, emissive, rbox, plant, wall, tileFloor, door, desk, officeChair, filingCabinet, shelf, pinboard, clock, textTexture, plane, JP_FONT, sh, monitor, bench, wallLamp } from '../props.js';
 import { PEOPLE, sit, armsHold, idle, mug } from '../cast.js';
 import { cat } from '../train/people.js';
@@ -230,11 +231,76 @@ function coatRack() {
   g.add(rbox(0.3, 0.55, 0.12, '#8a7d6c', { y: 0.55, z: 0.06, r: 0.05 }));
   return g;
 }
+// a Japanese stand fan (senpuki): round weighted base, telescopic pole, a motor pod, and a head tipped up so the
+// high camera sees the face: a wire guard (rings and spokes, front and back) around four pitched pale-blue blades
+// with gaps between them. userData.head yaws (the oscillation), userData.rotor spins about its local z; both are
+// noBatch, the base and pole can batch.
 function standFan() {
   const g = new THREE.Group();
-  g.add(rbox(0.26, 0.03, 0.26, '#d9dad8', { r: 0.01 }));
-  const pole = new THREE.Mesh(new THREE.CylinderGeometry(0.018, 0.018, 0.7, 8), mat('#d9dad8')); pole.position.y = 0.35; g.add(sh(pole));
-  const head = new THREE.Mesh(new THREE.CylinderGeometry(0.17, 0.17, 0.08, 16), mat('#e6e7e5')); head.rotation.x = Math.PI / 2; head.position.y = 0.78; g.add(sh(head));
+  const body = '#e4e5e2', bodyDark = '#b9bcbf', wire = '#d2d5d8', blade = '#9fc0d6', hubC = '#e9eae7';
+  const flat = (c) => mat(c, { flatShading: true });
+  // base: a low octagonal dome, a darker foot ring, the switch pod
+  const foot = new THREE.Mesh(new THREE.CylinderGeometry(0.2, 0.21, 0.03, 8), flat(bodyDark)); foot.position.y = 0.015; g.add(sh(foot));
+  const dome = new THREE.Mesh(new THREE.CylinderGeometry(0.07, 0.19, 0.06, 8), flat(body)); dome.position.y = 0.06; g.add(sh(dome));
+  const sw = new THREE.Mesh(new THREE.BoxGeometry(0.07, 0.025, 0.05), flat('#7fa7c3')); sw.position.set(0, 0.085, 0.1); sw.rotation.x = 0.35; g.add(sh(sw));
+  // pole: a thick lower tube and a thin chrome-ish upper tube with a collar
+  const lo = new THREE.Mesh(new THREE.CylinderGeometry(0.028, 0.03, 0.42, 8), flat(body)); lo.position.y = 0.3; g.add(sh(lo));
+  const col = new THREE.Mesh(new THREE.CylinderGeometry(0.034, 0.034, 0.03, 8), flat(bodyDark)); col.position.y = 0.52; g.add(sh(col));
+  const up = new THREE.Mesh(new THREE.CylinderGeometry(0.017, 0.017, 0.3, 6), flat('#c9ccd0')); up.position.y = 0.67; g.add(sh(up));
+
+  const HY = 0.84, R = 0.2, TILT = 0.5;
+  const head = new THREE.Group(); head.position.y = HY; g.add(head);
+  const tilt = new THREE.Group(); tilt.rotation.x = -TILT; head.add(tilt);   // face tipped up toward the camera
+  const nb = (m) => { m.userData.noBatch = true; return sh(m); };
+  // motor pod behind the guard, a short neck down to the pole
+  const pod = new THREE.Mesh(new THREE.CylinderGeometry(0.075, 0.09, 0.14, 8), flat(body)); pod.rotation.x = Math.PI / 2; pod.position.z = -0.12; tilt.add(nb(pod));
+  const cap = new THREE.Mesh(new THREE.CylinderGeometry(0.04, 0.075, 0.05, 8), flat(bodyDark)); cap.rotation.x = Math.PI / 2; cap.position.z = -0.215; tilt.add(nb(cap));
+  const neck = new THREE.Mesh(new THREE.BoxGeometry(0.05, 0.1, 0.05), flat(bodyDark)); neck.position.set(0, -0.06, -0.12); tilt.add(nb(neck));
+  // guard: front and back rims, an inner ring at the front, spokes to a front badge; one merged mesh
+  const parts = [];
+  const ring = (r, z, t) => { const q = new THREE.TorusGeometry(r, t, 4, 28); q.translate(0, 0, z); return q; };
+  parts.push(ring(R, 0.02, 0.009), ring(R * 0.62, 0.05, 0.006), ring(R, -0.06, 0.008));
+  const NS = 8;
+  for (let i = 0; i < NS; i++) {
+    const a = (i / NS) * Math.PI * 2;
+    // front spokes all round; at the back only every other one, so the two layers don't tangle from above
+    for (const [z0, z1, r0] of i % 2 ? [[0.06, 0.02, 0.035]] : [[0.06, 0.02, 0.035], [-0.075, -0.06, 0.07]]) {
+      // spoke from the badge (or the pod) out to the rim, bowed: two straight pieces
+      const pts = [[r0, z0], [R * 0.62, z0 - 0.01 * Math.sign(z0)], [R, z1]];
+      for (let k = 0; k < 2; k++) {
+        const [ra, za] = pts[k], [rb, zb] = pts[k + 1];
+        const len = Math.hypot(rb - ra, zb - za);
+        const s = new THREE.BoxGeometry(0.008, len, 0.008);
+        s.rotateX(Math.atan2(zb - za, rb - ra));   // lean along z
+        s.applyMatrix4(new THREE.Matrix4().makeTranslation(0, (ra + rb) / 2, (za + zb) / 2));
+        s.applyMatrix4(new THREE.Matrix4().makeRotationZ(a));
+        parts.push(s);
+      }
+    }
+    // rim to rim bars around the side
+    if (i % 2 === 0) { const s = new THREE.BoxGeometry(0.007, 0.007, 0.08); s.translate(Math.cos(a) * R, Math.sin(a) * R, -0.02); parts.push(s); }
+  }
+  const badge = new THREE.CylinderGeometry(0.035, 0.035, 0.012, 10); badge.rotateX(Math.PI / 2); badge.translate(0, 0, 0.062);
+  const guard = new THREE.Mesh(mergeGeometries(parts.map((p) => (p.index ? p.toNonIndexed() : p))), flat(wire)); tilt.add(nb(guard));
+  const bm = new THREE.Mesh(badge, flat('#7fa7c3')); tilt.add(nb(bm));
+  // rotor: hub and four blades with pitch and wide gaps
+  const rotor = new THREE.Group(); rotor.position.z = -0.015; tilt.add(rotor);
+  const hub = new THREE.Mesh(new THREE.CylinderGeometry(0.03, 0.045, 0.05, 8), flat(hubC)); hub.rotation.x = Math.PI / 2; rotor.add(nb(hub));
+  const shape = new THREE.Shape();
+  // blade outline in the rotor plane: narrow at the hub, a wide rounded paddle at the tip, swept back
+  shape.moveTo(0.035, -0.018); shape.bezierCurveTo(0.08, -0.05, 0.16, -0.075, 0.18, -0.03);
+  shape.bezierCurveTo(0.19, 0.0, 0.17, 0.045, 0.13, 0.05); shape.bezierCurveTo(0.09, 0.05, 0.06, 0.03, 0.035, 0.018);
+  shape.lineTo(0.035, -0.018);
+  const bl = [];
+  const NB = 4;
+  for (let i = 0; i < NB; i++) {
+    const q = new THREE.ExtrudeGeometry(shape, { depth: 0.008, bevelEnabled: false, curveSegments: 4 });
+    q.translate(0, 0, -0.004); q.rotateX(0.45);     // pitch about the blade's own radial axis
+    q.rotateZ((i / NB) * Math.PI * 2);
+    bl.push(q.index ? q.toNonIndexed() : q);
+  }
+  const blades = new THREE.Mesh(mergeGeometries(bl), flat(blade)); rotor.add(nb(blades));
+  g.userData.head = head; g.userData.rotor = rotor;
   return g;
 }
 function acUnit() {
@@ -686,7 +752,7 @@ export function buildOffice() {
   B(-2.0, -0.55, -1.55, -1.15);
 
   for (const r of [nao, hiro, yui, sota]) r.root.visible = false;
-  const world = { root, scene, sun, nav, desks, dN, dS, kenji, nao, hiro, mori, emi, emiBlob, yui, sota, tama, covers, leaves, card, X0, X1, Z0, Z1, secHand, fanHead: fan.children[2], fan2Head: fan2.children[2], copier: cp, myChair, machineDoor: md, vendingPos: [-4.62, -1.75], coffeePos: [1.1, CS + 0.36] };
+  const world = { root, scene, sun, nav, desks, dN, dS, kenji, nao, hiro, mori, emi, emiBlob, yui, sota, tama, covers, leaves, card, X0, X1, Z0, Z1, secHand, fanHead: fan.userData.head, fanRotor: fan.userData.rotor, fan2Head: fan2.children[2], copier: cp, myChair, machineDoor: md, vendingPos: [-4.62, -1.75], coffeePos: [1.1, CS + 0.36] };
   world.life = life;
   world.update = (t) => {
     for (const s2 of life.steam) s2.userData.update(t);

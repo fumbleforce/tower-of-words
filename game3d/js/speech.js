@@ -198,7 +198,7 @@ const MIC_SVG = '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="3" w
 const say = (t) => t.replace(/</g, '&lt;');
 let told = false;   // the privacy line shows on the first press of a session
 
-// Adds "or [mic] Hold V and say it" to a typing prompt. host: the prompt block (ui.js .tp). Returns a cleanup.
+// Adds the mic and "Hold V or the mic and say it" to a typing prompt. host: the prompt block (ui.js .tp). Returns a cleanup.
 // opts: { onHit(info), phone, ro (the romaji, for matching), ja (to show what was heard), candidates (ids to tell apart) }
 export function mountVoice(host, id, opts = {}) {
   const mode = voiceMode();
@@ -212,7 +212,8 @@ export function mountVoice(host, id, opts = {}) {
   const btn = row.querySelector('.vc-mic'), msg = row.querySelector('.vc-msg'), bars = [...row.querySelectorAll('.vc-meter i')], bar = row.querySelector('.vc-bar');
   const idleText = phone ? 'Hold the mic and say it' : `Hold <kbd>${keyName}</kbd> or the mic and say it`;
   let state = 'idle', misses = 0, alive = true, raf = 0, t0 = 0, tapMode = false, heardSpeech = 0, quietSince = 0, web = null, gen = 0;
-  const set = (s, html) => { state = s; row.dataset.state = s; if (html != null) msg.innerHTML = html; };
+  // the answer block has one hint line: the mic's message, unless a typing hint came after it (ui.js sets data-last)
+  const set = (s, html) => { state = s; row.dataset.state = s; if (html != null) msg.innerHTML = html; if (s !== 'idle' && row.parentNode) row.parentNode.dataset.last = 'voice'; };
   set('idle', idleText);
 
   const meter = () => {

@@ -166,7 +166,7 @@ export async function officePlace(game) {
       // fans
       const fs = st.fan === 'wild' ? 30 : st.fan === 'on' ? 6 : 0;
       st.fanSpin += (fs - st.fanSpin) * Math.min(1, dt * 2);
-      w.fanHead.rotation.z += st.fanSpin * dt; w.fanHead.rotation.y = Math.sin(t * 0.5) * 0.6;
+      w.fanRotor.rotation.z += st.fanSpin * dt; w.fanHead.rotation.y = Math.sin(t * 0.5) * 0.6;
       w.fan2Head.rotation.z += 6 * dt;
       // copier blink while jammed, shake when wild
       w.copier.position.x = -2.95 + (st.copier === 'wild' || st.copier === 'run' ? Math.sin(t * 60) * 0.006 : 0);

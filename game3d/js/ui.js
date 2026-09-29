@@ -755,8 +755,9 @@ export const ui = {
       const t = $('#talk'); t.hidden = false; t.classList.remove('narr', 'heard', 'phone'); t.classList.add('typing');
       t.querySelector('.who').innerHTML = '';
       t.querySelector('.line').innerHTML = (prompt ? `<div class="tp-prompt">${prompt.who ? `<span class="tp-who" style="color:${prompt.who.color || '#8fa3c0'}">${prompt.who.name}</span> ` : ''}${lineHTML(prompt.text)}</div>` : '') +
-        `<div class="tp"><div class="tp-jp jp">${iconHTML(id, 'wi tp-ico')}${w.ja}</div><div class="tp-ro">${toks.map((k) => (k.sp ? '<span class="sp"> </span>' : `<span class="lt">${k.ch}</span>`)).join('')}</div><div class="tp-en">${w.en}</div>` +
-        `<input class="tp-in" type="text" inputmode="latin" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="${(window.__settings && window.__settings.voiceInput !== 'off') ? 'Type it in romaji, or say it' : 'Type it in romaji'}" aria-label="Type ${w.ro}"><div class="tp-hint"></div>${opts.cancel ? '<button type="button" class="tp-cancel">Never mind</button>' : ''}</div>`;
+        // two blocks: the word (icon, kana, romaji, meaning) and the answer (input, mic, one hint line, never mind)
+        `<div class="tp"><div class="tp-word">${iconHTML(id, 'wi tp-ico')}<div class="tp-jp jp">${w.ja}</div><div class="tp-ro">${toks.map((k) => (k.sp ? '<span class="sp"> </span>' : `<span class="lt">${k.ch}</span>`)).join('')}</div><div class="tp-en">${w.en}</div></div>` +
+        `<div class="tp-ans"><input class="tp-in" type="text" inputmode="latin" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="Type it in romaji" aria-label="Type ${w.ro}"><div class="tp-hint"></div>${opts.cancel ? '<button type="button" class="tp-cancel">Never mind</button>' : ''}</div></div>`;
       t.querySelector('.chips').innerHTML = ''; t.querySelector('.more').hidden = true;
       t.classList.remove('in'); void t.offsetWidth; t.classList.add('in');
       this._advance = null; this._chipKeys = null;
@@ -785,6 +786,7 @@ export const ui = {
         tries++; sfx('no');
         const v = canon(inp.value); let ok = 0; while (ok < v.length && v[ok] === target[ok]) ok++;
         const next = letters[map[Math.min(ok, target.length - 1)]];
+        hint.parentNode.dataset.last = 'type';   // the hint line shows the typing hint, not the mic's message
         hint.innerHTML = tries < 3 ? `Close. Next letter: <b>${next ? next.textContent : ''}</b>. Follow the letters under the word.` : `Type it just as shown: <b>${w.ro}</b>`;
       });
       if (this.auto) { setTimeout(() => { inp.value = w.ro; paint(); done('typed'); }, 20); return; }

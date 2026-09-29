@@ -315,9 +315,14 @@ const OWN = (f) => (/^js\/(places|scenes|train\/(car|world|hull|kit)|props)/.tes
 const files = [];
 const walkDir = (d) => { for (const e of fs.readdirSync(path.join(root, d), { withFileTypes: true })) { const p = path.posix.join(d, e.name); if (e.isDirectory()) walkDir(p); else if (/\.(js|css|html)$/.test(e.name)) files.push(p); } };
 walkDir('js'); walkDir('css'); files.push('index.html');
+// Internal data modules: their Japanese literals are lookup data, never put on screen as they stand.
+// Each one names what it holds and gets its own check below instead of the on-screen text scan.
+const DATA_MODULES = {
+  'js/speech-match.js': 'recogniser aliases and kana tables for matching what the mic heard (SPOKEN, H)',
+};
 const NOT_GLOSS = /^(#|\d|center|middle|left|right|top|bottom|alphabetic|round|butt|square|bold|normal|italic|anonymous|sans-serif|serif)/;
 for (const f of files) {
-  if (f === 'js/lang.js' || !fs.existsSync(path.join(root, f))) continue;
+  if (f === 'js/lang.js' || DATA_MODULES[f] || !fs.existsSync(path.join(root, f))) continue;
   const lines = rd(f).split('\n');
   lines.forEach((raw, n) => {
     if (f === 'js/ui.js' && /^const (POOL|INTERJ) =/.test(raw)) return;   // checked on their own below
@@ -339,6 +344,19 @@ for (const f of files) {
       else flag('ERROR', OWN(f), where, `readable Japanese ${run} with no English beside it, never taught`, l);
     }
   });
+}
+// speech-match.js: the one spelling of SPOKEN that reaches the screen is speech.js WORDS_JA
+// ("That sounded like X"), forms[0] or else kana[0]; it should be the spelling the game teaches
+{
+  const { SPOKEN = {} } = await imp('js/speech-match.js');
+  const shown = /const WORDS_JA = .*w\.forms\[0\] \|\| w\.kana\[0\]/.test(rd('js/speech.js'));
+  if (!shown) flag('WARN', 'builder', 'js/speech.js WORDS_JA', 'no longer built from SPOKEN forms[0] || kana[0]; update the speech-match check in lang-audit.mjs');
+  for (const [id, w] of Object.entries(SPOKEN)) {
+    const ja = (w.forms && w.forms[0]) || (w.kana && w.kana[0]);
+    if (!WORDS[id]) flag('ERROR', 'builder', `js/speech-match.js SPOKEN.${id}`, `not a word in lang.js; the mic retry hint would show ${ja}`);
+    else if (!everTaught.has(id)) flag('ERROR', 'builder', `js/speech-match.js SPOKEN.${id}`, `the mic retry hint can show ${ja}, a word never taught`);
+    else if (ja !== WORDS[id].ja) flag('WARN', 'builder', `js/speech-match.js SPOKEN.${id}`, `the mic retry hint shows ${ja}, but the game teaches ${WORDS[id].ja} (speech.js WORDS_JA could use the lang.js spelling)`);
+  }
 }
 // the gibberish glyph pool: real kanji side by side can spell real words
 {
