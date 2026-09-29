@@ -308,3 +308,9 @@ Next is stage 4. The read-only agent mapped six hook responsibilities: targets, 
 Six modules under narrative/hooks own target resolution, movement/staging, presentation, gestures/tweens, kotodama and progression. Main composes them with the same shared game and hook table. Flag declarations, the staging integration fixture and asset metadata readers follow the new owners. Main shrank from 1720 to 1129 lines; four unused imports were removed from the lint inventory.
 
 Normal fast passes desktop 70 s and phone 69 s, with 12 practice prompts and zero overlaps/spins each; both end screenshots inspected. Logs: `/tmp/codex-stage4-hooks-{desktop,phone}.log`. The installed commit gate runs the full CPU suite (`/tmp/codex-stage4-hooks-commit2.log`); the first attempt caught the graph fixture's old flag-owner paths. Interactions are next, then place lifecycle with strict traces. C-0080 defers the stage review until those boundaries finish.
+
+### Stage 4: interactions (2026-09-29)
+
+Global hooks committed as `3816a3f`, with all 13 CPU groups passing. Marker availability, approach/use/talk, Say practice, gifting and bond notices now live in gameplay/interactions.js (218 lines); main keeps input routing and shrinks to 920 lines. The gift integration fixture now evaluates the extracted callback, and asset sound discovery includes gameplay modules. Existing input guards and callback ordering are preserved.
+
+Normal fast passes both viewports in 69 s, with 12 practice prompts and zero overlaps/spins each; both screenshots inspected. Logs: `/tmp/codex-stage4-interactions-{desktop,phone}.log`; staged CPU: `/tmp/codex-stage4-interactions-commit.log`. Place lifecycle follows with strict comparison against the retained stage-3 traces, whose manifest and harness inputs still match.
