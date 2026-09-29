@@ -1,0 +1,41 @@
+# Island map 4: one site arrangement
+
+Basis: inspected picked `art/candidates/island-map-3/07-overview.png`; read C-0117, C-0134, C-0135, setting.md and the shot-staging skill. No missing source dependency. This is a map proposal, not a change to the built game.
+
+## Keep the centre, give the island a deeper northern half
+
+Keep the picked image's relationships: monorail and head office on the west, fountain in the centre, covered shopping street along its south edge, apartments to the east, beach below the shops and onsen on the rocky east shore. Extend the land mainly north and northwest, with a modest eastern expansion. The core remains recognisable; the larger island gives the recreation grounds and harbour their own ground rather than filling every leftover gap with a building.
+
+The town grew inland from a working harbour: old works by the quay, offices behind the station, shops between work and housing, leisure along the quieter shore. Buildings share lanes and courts. Block edges turn with the coast; buildings within each block share an alignment. Use uneven setbacks, narrow side passages, weathered concrete and some laundry. Avoid one landmark per rectangular plot.
+
+## Two clear day-1 walks
+
+**Station to head office:** retain the west-coast blue-roof monorail platform, with a clearly separate low station/security building at its landward exit. The guideway reaches the station continuously from the left edge over the bay. Replace the picked image's enclosed station-to-tower bridge with a short, visibly outdoor pedestrian forecourt. The security building's east-facing exit and the head office's west-facing ground-floor entrance face each other across this court. Their roofs and walls never join. Put a small entrance canopy on each building; leave the middle of the walk open to the sky. Keep the arrival court at a shared accessible level, with the raised rail structure supported independently. This preserves the existing security room as part of the station and makes the next outdoor step obvious.
+
+**Head office to dorms:** the tower's south/east forecourt opens onto a gently bending pedestrian lane around the near edge of the fountain square. Continue east to the west-facing entrance court of the existing apartment cluster. This is the short direct walk home. The shop roofs sit south of it and never hide either end. The seafront remains an optional parallel promenade, not a mandatory long detour. Show both walk surfaces continuously in the overview; let their entrances establish the route without relying on arrows.
+
+## Neighbourhoods and shared edges
+
+- **Western work and arrival district:** station/security at the coast, head office immediately east, smaller offices stepping north behind it. New-employee training stays inside an office. A modest university group shares an inland court farther north. The company canteen occupies the fountain's north side, where workers and residents naturally meet. The clinic sits on the quieter lane between this district and the dorms.
+- **Central daily-life street:** keep two continuous rows of shops facing each other under one covered lane south of the fountain. The combined konbini/100-yen/drugstore and bakery occupy recognisable bays rather than extra standalone buildings. Ramen and izakaya cluster at the eastern end, where a small lane leads into the dorm court; karaoke and the game centre share this same evening-use block. South-row entrances face the covered lane, with their backs toward the sea. The route home stays visible immediately north of the shops.
+- **Eastern residential district:** keep the existing reasonably uniform apartment cluster, with one or two slightly more generous buildings on its quieter outer edge. Sento and coin laundry share a small frontage at the dorm approach. They remain distinct from the onsen farther along the coast. The dorm court has bike parking and some planted shade; bikes also collect at the station and shops. No cars, vehicle lanes or car parks.
+- **Northern recreation and park ground:** put the enlarged event field behind the housing and university, large enough for a full oval/playing field and an open assembly apron. The existing gym, pool and a clearly low shower/changing pavilion form one edge of the sports ground. Keep the shower pavilion directly on the pool deck, with changing-room doors, rather than another glass office. A broad park continues west of the field; its cherry-tree path connects the residential edge to a small matsuri stage on the park lawn. The company history hall faces the park's town entrance, with the founder's statue in its forecourt. Let open park ground separate these groups instead of more buildings.
+- **Northwestern working waterfront:** a sheltered inlet on the enlarged coast holds a ferry berth with a short passenger landing and a separate supply quay with loading shelter/crates. Both must have visible water access, moored vessels, and piers meeting land. Just inland sits a compact old-works cluster: one disused factory, an old power plant, and a low early-90s server hall around their existing yard. A shared pedestrian/service path connects the docks to this yard and onward to the work district. No new large utility compound; functioning utilities remain tucked into basements.
+- **Coastal continuation:** the westward park spur, clear of the working quay, forms the mainland viewpoint; the hazy mainland should lie in that direction if shown. The east shore keeps the onsen and visibly separated men's/women's bath courtyards, reached by one continuous path through its red entrance. Farther along the rocky northeastern headland, a small company shrine sits back from the edge among trees. The southern beach keeps believable access from the promenade. Coastal planting and rocks soften changes between districts; the harbour edge is practical, the beach edge is sandy.
+
+## Overview staging
+
+- **Beat/moment:** full-island planning overview before the day-1 outdoor route is built; no dialogue scene.
+- **Ground:** one expanded island with sea around its whole outline. The supported monorail beam enters from west/left and reaches the separate station. Station/security → open court → head office → fountain-side lane → dorms reads in that order.
+- **Camera/scale:** high oblique from south/southwest toward north/northeast, close to the picked image. Roughly 200–300 m above sea level; tower remains tallest, ordinary housing 4–6 floors. These guide composition, not prompt measurements. Raise the angle enough that the tower and shopping roofs hide neither day-1 walk.
+- **Frame/depth:** wide landscape, sea margin on every side, beam exits left edge. Foreground: beach, covered shops, promenade. Midground: western station and office, fountain, direct dorm lane, eastern housing. Background: enlarged park/sports/university grounds, harbour/old works to the left, shrine headland to the right. Onsen stays on the east shore. No cropped docks.
+- **Behind camera:** open bay; omit extra foreground islands or road bridges.
+- **Motion/eyelines:** static map. Tiny people follow paths, boats lie alongside quays, bikes stay on shared paths or in racks. No character close-up.
+- **Light:** soft afternoon light from upper left; grey concrete, desaturated blue glazing, muted foliage, slate shadows. Retain simple faceted 3D forms while reducing the source's resort brightness. Shop windows should not glow white.
+- **Physical checks:** distinct station and tower footprints with open-air gap; routes meet doors; beam supported; shop fronts face covered lane; docks touch land and navigable water; event field large; pool showers and onsen approach clear; no cars.
+
+## Minimum labels and prompt handoff
+
+Three primary labels with short leaders: **Honsha Station / Security**, **Head Office · B2**, **Dorms**. Optional secondary district labels: **Ferry & Supply Dock**, **Sports Field**, **Park**. Other identities belong in a keyed detail, so labels do not bury the island. A thin route line may trace both walks only after their surfaces read in the image.
+
+Keep this brief as the completeness check. The render prompt should describe the coherent regions and visible geography, not paste the entire place inventory. Small shops are bays in one street, not extra standalone landmarks.
