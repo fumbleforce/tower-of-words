@@ -23,7 +23,7 @@ Each writing agent works in its own git worktree on its own branch, and one scri
    - refuses if the worktree has uncommitted or untracked files,
    - rebases the branch on main (a conflicting rebase is aborted and refused),
    - checks the rebased commit: a valid Facts line on every new commit and `npm run check` on that commit's own tree in a throwaway copy (tools/check/commit-cpu.mjs, about 15 s),
-   - fast-forwards main in the main checkout, retrying once if main moved during the checks,
+   - fast-forwards main in the main checkout (waiting while a commit there holds the index), and if main moved during the checks, rebases and checks again, up to three rounds,
    - removes the worktree and deletes the branch. `--keep` leaves them.
 
 It prints `land: main is now <sha>` and `removed ...` when done. Nothing is pushed (GUIDE: Definition of done).
