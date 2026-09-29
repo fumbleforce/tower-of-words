@@ -1,38 +1,39 @@
 {
-  "title": "Chibi bases from the original models",
-  "date": "2026-09-29",
-  "by": "Codex",
-  "status": "open",
-  "question": "Do these keep Mio and Eric’s shapes while the clothes fit?",
-  "multi": true,
-  "options": [
-    {
-      "id": "source15-mio",
-      "label": "source15-mio",
-      "note": "Uses Mio’s original head and hands, with a rebuilt body underneath and joined wrists. The clothes keep their original design. A small jagged skin edge remains at her collar. Open the moving model below; show the original and fade between them to compare."
-    },
-    {
-      "id": "source15-eric",
-      "label": "source15-eric",
-      "note": "Uses Eric’s original head and hands, with a rebuilt body underneath and joined wrists. The clothes keep their original design. Fine dotted seams remain in the hair, and face shading is more faceted than the original. Open the moving model below to compare."
-    }
-  ],
-  "links": [
-    {
-      "label": "Mio: play, undress and compare with the original",
-      "href": "tools/creator/base/overlay.html?body=mio&version=source15&review=creator-base-5&motion=walk&play=1&colours=original&source=0"
-    },
-    {
-      "label": "Eric: play, undress and compare with the original",
-      "href": "tools/creator/base/overlay.html?body=eric&version=source15&review=creator-base-5&motion=walk&play=1&colours=original&source=0"
-    },
-    {
-      "label": "Every attempt and check",
-      "href": "reviews/creator-base-5/attempts.html"
-    },
-    {
-      "label": "Previous round and your feedback",
-      "href": "bible/#review/creator-base-4"
-    }
-  ]
+ "title": "Chibi bases from the original models",
+ "date": "2026-09-29",
+ "by": "Codex",
+ "status": "decided",
+ "question": "Do these keep Mio and Eric’s shapes while the clothes fit?",
+ "multi": true,
+ "options": [
+  {
+   "id": "source15-mio",
+   "label": "source15-mio",
+   "note": "Uses Mio’s original head and hands, with a rebuilt body underneath and joined wrists. The clothes keep their original design. A small jagged skin edge remains at her collar. Open the moving model below; show the original and fade between them to compare."
+  },
+  {
+   "id": "source15-eric",
+   "label": "source15-eric",
+   "note": "Uses Eric’s original head and hands, with a rebuilt body underneath and joined wrists. The clothes keep their original design. Fine dotted seams remain in the hair, and face shading is more faceted than the original. Open the moving model below to compare."
+  }
+ ],
+ "links": [
+  {
+   "label": "Mio: play, undress and compare with the original",
+   "href": "tools/creator/base/overlay.html?body=mio&version=source15&review=creator-base-5&motion=walk&play=1&colours=original&source=0"
+  },
+  {
+   "label": "Eric: play, undress and compare with the original",
+   "href": "tools/creator/base/overlay.html?body=eric&version=source15&review=creator-base-5&motion=walk&play=1&colours=original&source=0"
+  },
+  {
+   "label": "Every attempt and check",
+   "href": "reviews/creator-base-5/attempts.html"
+  },
+  {
+   "label": "Previous round and your feedback",
+   "href": "bible/#review/creator-base-4"
+  }
+ ],
+ "decision": "Getting close. Fix: hair colour bleeding onto body, Eric's bare head not attached. Next: small assortment of other clothes and hair, customizable eyes; use the approved relaxed idle, not the still one."
 }
