@@ -1,45 +1,47 @@
 # Story format for game3d
 
-The engine (game3d/js) owns the places, people, objects, camera and effects. The story files own every word anyone says. This page is the contract between the two.
+The engine (game3d/js) owns the places, people, objects, camera and effects. The story files own every word anyone says. This page is the contract between the two: how to write a story file, and the steps, triggers and hooks the engine runs.
 
-Files: `game3d/story/train.js`, `game3d/story/gate.js`, `game3d/story/office.js`, and `game3d/story/transitions.js`. Each is a plain ES module with one default export. Until a file exists, the engine uses its own placeholder in `game3d/story/placeholder/` (same format). Check a file with `node --check game3d/story/train.js`, and run `node game3d/tools/story-check.mjs` to catch unknown ids, missing nodes and bad conditions.
+What the game has (the people and their ids, the things, spots, seats and zones in each place, the words, the storylines, how the systems behave, which portraits exist) is in docs/game/. Read those for ids; this page only says how to use them.
+
+Files: `game3d/story/train.js`, `game3d/story/gate.js`, `game3d/story/office.js`, and `game3d/story/transitions.js`. Each is a plain ES module with one default export. Until a file exists, the engine uses its own placeholder in `game3d/story/placeholder/` (same format). Check a file with `node --check game3d/story/train.js`, run `node game3d/tools/story-check.mjs` to catch unknown ids, missing nodes and bad conditions, and `node tools/facts/check.mjs` to check it against docs/game/.
 
 ## Shape of a file
 
 ```js
 export default {
-  // optional: names and roles for this file's speakers (merged over the defaults below)
+  // optional: names and roles for this file's speakers (merged over the engine's defaults)
   speakers: {
-    aoi: { name: 'Aoi', role: 'sales, second year' },
+    guard: { name: 'Guard' },
   },
 
   // runs when the place begins (after the transition into it)
-  start: 'intro',
+  start: 'lobby_in',
 
   // what runs when the player does something (see Triggers)
   on: {
-    'talk:aoi': [{ if: '!metAoi', node: 'aoi_first' }, 'aoi_again'],
-    'say:matte:doors': 'doors_hold',
+    'talk:guard': [{ if: '!greeted_guard', node: 'guard_look' }, 'guard_again'],
+    'say:akete:gate': { if: 'jammed', node: 'word_say' },
     'near:tama': { node: 'cat_notice', once: true },
-    'event:arrived': 'arrival',
+    'event:card_red': 'card_red',
   },
 
   // optional: when a marker shows over a person or object, and when it is highlighted as the next goal
-  show: { kuroda: 'kurodaArrived' },
-  goal: { reader_r: 'guardAskedCard && !gateOpen' },
+  show: { kuroda: 'jammed' },
+  goal: { reader_r: 'greeted_guard && !guard_asked' },
 
-  // optional: the label shown over an object (defaults are in the lists below)
-  labels: { bowl: "Tama's bowl" },
+  // optional: the label shown over a person or object, over the engine's; [text, condition] shows text while
+  // the condition holds and the engine's label after
+  labels: { signin: 'Visitor book', mio: ['Woman with a laptop', '!mio_named'] },
 
   nodes: {
-    intro: [
-      { do: 'goal', text: 'Ride to {honsha}.' },
-      '> The train hums across the bay.',
-      'aoi: Oh! You have the new-hire lanyard.',
-      'aoi: Sit, sit. It is a long bridge.',
+    lobby_in: [
+      { do: 'goal', text: 'Say good morning to the guard.' },
+      { say: 'guard', overheard: true, emo: 'polite', text: '{ohayo}。' },
+      'eric: Hi. Um... good morning?',
       { choice: [
-        { text: 'Sit next to her', go: 'aoi_sit' },
-        { text: 'Stay standing', go: 'aoi_stand', set: 'standing' },
+        { text: 'Sit on the bench', go: 'bench' },
+        { text: 'Wait by the gate', go: 'wait', set: 'standing' },
       ] },
     ],
     // ...
@@ -53,14 +55,13 @@ A node is a list of steps, run in order.
 
 | Step | Meaning |
 |---|---|
-| `'aoi: text'` | A line. The id before the first `: ` is the speaker; the name and role show above the text. |
-| `'> text'` | Narration (no speaker). Short and in the second person. |
-| `'mio: text'` | Mio speaks (she's the player; use sparingly). |
-| `{ say: 'aoi', text: '...', voice: 'aoi-hi' }` | A line with a voice clip (game3d/audio/<voice>.mp3). Use the long form only when you need extra fields. |
-| `{ choice: [ {...}, ... ], prompt: 'optional line shown above the buttons' }` | Reply buttons. Each option: `text` (what Mio says or does), and any of `go` (jump), `call` (run a node, then carry on after the choice), `set`, `if` (option only shows when true). |
-| `{ offer: 'matte', line: 'aoi: Shout {matte}!', voice: 'aoi-matte' }` | Hands Mio a command: the line, then one big button with the Japanese, reading and English. When tapped, Mio says it (voiced) and the command is learned (first time). Carries on after. |
-| `{ learn: 'kite' }` | Mio picks up a command without saying it (e.g. Emi says "来て" and Mio just follows). Shows the "New command" note. |
-| `{ set: 'flag' }`, `{ set: { flag: 3 } }`, `{ unset: 'flag' }`, `{ inc: 'counter' }` | Flags. They are shared by all three places. |
+| `'mio: text'` | A line. The id before the first `: ` is the speaker; the name and role show above the text. |
+| `'> text'` | Narration (no speaker). Short, second person, only for what the scene can't show. |
+| `{ say: 'mio', text: '...', emo: 'dry', face: 'smile', voice: 'key' }` | The long form of a line: `emo` is the voice direction tag (VOICE-DIRECTION.md), `face` the portrait (see Portraits), `voice` a clip (game3d/audio/<voice>.mp3) when it isn't found by the line's text. `name` overrides the name for this line (`{ say: 'mio', name: 'Woman with a laptop', text }`). `slow: true` marks the slow repeat of a new word. `overheard` and `clear`: see Overheard Japanese. |
+| `{ choice: [ {...}, ... ], prompt: 'optional line shown above the buttons' }` | Reply buttons. Each option: `text` (what Eric says or does), and any of `go` (jump), `call` (run a node, then carry on after the choice), `set`, `if` (option only shows when true). |
+| `{ offer: 'matte', line: 'mio: Shout {matte}!' }` | Hands Eric a word: the line, then one big button with the Japanese, reading and English. When tapped he says it (voiced) and it's learned. Carries on after. `from:` names who taught it. |
+| `{ learn: 'kite' }` | Eric picks up a word without saying it. Shows the "New word" note. Takes `from:`. |
+| `{ set: 'flag' }`, `{ set: { flag: 3 } }`, `{ unset: 'flag' }`, `{ inc: 'counter' }` | Flags. They are shared by all places. |
 | `{ if: 'expr', then: [steps], else: [steps] }` | Branch. |
 | `{ go: 'node' }` | Jump to another node (the rest of this node is skipped). |
 | `{ call: 'node' }` | Run another node, then come back. |
@@ -68,190 +69,129 @@ A node is a list of steps, run in order.
 | `{ do: 'hook', ...args }` | An engine action (lists below). |
 | `{ end: true }` | Stop this node here. |
 
-Text: plain English. Japanese words go in braces and always show with reading and English, e.g. `{matte}` shows as 待って (matte, wait). Known ids: `matte`, `akete`, `kite`, `ugoite`, `honsha`, `tsugiwa`. Ask for more in REQUESTS.md. Lines can be as long as a comfortable two or three lines on a phone; there is no limit on how many lines a node has. The player taps to go on, so there is no timed read speed.
+Text: plain English. Japanese words go in braces as word ids and always show with reading and English, e.g. `{matte}` shows as 待って (matte, wait). The ids are in docs/game/words.md; ask for new ones in REQUESTS.md. Lines can be as long as a comfortable two or three lines on a phone. The player taps to go on, so there is no timed read speed.
 
-Conditions (`if`, `show`, `goal`, trigger `if`): flag names with `!`, `&&`, `||`, parentheses, and comparisons with numbers (`coffees >= 2`). Unset flags are false/0. Built-in flags: `know_matte`, `know_akete`, `know_kite`, `know_ugoite` (true once learned), `talked_<id>` (true after the first `talk:<id>` trigger has run), `place` (`'train'`, `'gate'`, `'office'`).
+Conditions (`if`, `show`, `goal`, trigger `if`): flag names with `!`, `&&`, `||`, parentheses, and comparisons with numbers (`coffees >= 2`) or strings (`gift_mio == 'like'`). Unset flags are false/0. Built-in flags: `know_<word>` (true once learned), `typed_<word>`, `talked_<id>` (true after the first `talk:<id>` trigger has run), `place` (`'train'`, `'gate'`, `'office'`), and the sim flags under Sim data.
 
 ## Triggers (`on`)
 
 | Key | When |
 |---|---|
-| `talk:<id>` | The player taps the person or object, or presses E/Space beside it. Mio walks up first. |
-| `say:<cmd>:<id>` | Mio says a command (`matte`, `akete`, `kite`, `ugoite`) while that person or object is the nearest target. |
-| `say:<cmd>:*` | Fallback for that command anywhere in this place. With no match at all, the engine uses a small built-in joke. |
-| `near:<id>` | Mio walks within about one step of it (checked every frame; use `once: true` for a one-off). |
-| `zone:<zone>` | Mio steps into a named zone (per place, below). |
+| `talk:<id>` | The player taps the person or object, or presses E/Space beside it. Eric walks up first. |
+| `say:<word>:<id>` | Eric says a phrase or command from the Say menu while that person or object is the nearest target. |
+| `say:<word>:*` | Fallback for that word anywhere in this place. With no match at all, the engine uses a small built-in reaction. |
+| `give:<item>:<id>`, `give:*:<id>` | Eric gives an item (the Give button, next to a person). See Sim data. |
+| `near:<id>` | Eric walks within about one step of it (checked every frame; use `once: true` for a one-off). |
+| `zone:<zone>` | Eric steps into a named zone (docs/game/places.md). |
 | `event:<name>` | Engine events (per place, below). |
 
 A trigger value is a node name, `{ node, if, once }`, or a list of these; the first one whose `if` holds runs. While a node runs, the player can't walk and the markers hide.
 
-## Speakers (defaults)
+## Speakers
 
-`mio`, `aoi`, `kuroda`, `guard` (Mr. Ishibashi), `kuro` (receptionist), `emi`, `mori`, `kenji`, `yui`, `sota`, `nao`, `hiro`, `ann` (station or lift announcement), `reader`, `music`, `bun`, `youth`, `stander`, `commuter`. Add names, roles or new speakers under `speakers`. A new speaker can talk, but only the people listed below have a body in a place; ask in REQUESTS.md for new bodies.
+Any id in docs/game/cast.md "Everyone" can speak. Add names or roles under `speakers`. A new speaker can talk, but only people with a body in a place (docs/game/places.md, Who's there when) can be shown, walked or tapped; ask in REQUESTS.md for new bodies. The player is `eric` (`who: 'eric'` or `'player'` in hooks). A speaker with `phone: true` (e.g. `miotext`) shows as a text message on its own dark card.
 
 ## Hooks that work everywhere
 
 | Hook | Args | Does |
 |---|---|---|
-| `goal` | `text` | Sets the goal line top left (`text: ''` clears it). |
-| `hint` | `text` | A short hint at the bottom for a few seconds. |
-| `walk` | `who`, `to` (a spot id or `[x, z]`), `wait: true/false` | A person walks there (Mio too: `who: 'mio'`). |
+| `goal` | `text`, `at` (optional spot or id), `side: true` | Sets the goal line top left (`text: ''` clears it). `side: true` sets the small side line under it instead. |
+| `hint` | `text`, `what: 'say'` (optional) | A tip, shown as the second line of the goal box until closed or the goal moves on. `what: 'say'` points at the Say button. |
+| `walk` | `who`, `to` (a spot id, a person or object id, or `[x, z]`), `wait: true/false` | A person walks there. People route through doors and corridors on their own. |
 | `face` | `who`, `to` (id or `[x, z]`) | Turns someone toward a person, spot or object. |
-| `sit` / `stand` | `who`, `at` (seat id) | Sits someone down (Mio included) or stands them up. |
+| `sit` / `stand` | `who`, `at` (seat id) | Sits someone down (Eric included) or stands them up. |
 | `look` | `who`, `at` | Head turn only. |
-| `cam` | `on` (id), `zoom` (1 to 2.5), `back: true` | Moves the camera in on a person or spot for a conversation, and back. |
+| `cam` | `on` (id or `[x, z]`), `zoom` (1 to 2.5), `back: true` | Moves the camera in on a person or spot for a conversation, and back. |
 | `sound` | `name`: `chime`, `ok`, `no`, `door`, `lift`, `word`, `beep`, `brake`, `crowd` | A sound. |
 | `voice` | `key` | Plays game3d/audio/<key>.mp3. |
-| `emote` | `who`, `kind`: `!`, `?`, `…`, `♪`, `heart`, `sweat` | A small bubble over a head. |
-| `show` / `hide` | `id` | Shows or hides a person or object. |
+| `emote` | `who`, `kind`: `!`, `?`, `…`, `♪`, `heart`, `sweat`, `zzz`; `ms` | A bubble over a head. |
+| `expression` | `who`, `face` | Sets someone's portrait face (see Portraits). |
+| `show` / `hide` | `id` | Shows or hides a person or object (and a person's floor shadow). |
 | `hold` | `who` (a person), or nothing to let go | Keeps Eric with that person until the story lets go: walking and taps on anything else only get a small bow from them; that person and Say still work. Only holds once he knows a word that person answers to. |
 | `bow` | `who` (anyone, `eric` too), `depth: 'small'|'deep'` | A bow, shown. |
-| `gesture` | `who`, `kind: 'nine'|'point'|'shrug'|'finger'|'skijump'` | Arm moves for the chibi cast: nine fingers up (with a 9 bubble), point, shrug, finger to the lips, Mori's ski jump. |
-| `type` | `word`, `prompt` (optional line shown above it) | The typing prompt for a new word: shows the Japanese, the romaji letter by letter and the English, and Eric types the romaji (forgiving: case, spaces, hyphens, long vowels ō = ou = oo = o). Letters light up as they're typed; a wrong Enter shows the next letter, and after three tries the whole romaji. Works with the phone keyboard. On success Eric says it (voiced), it becomes a known word (it stays sharp in overheard lines from then on) and flag `typed_<word>` is set. Use it where a word is taught, in place of a "say it" button. Any word id works: `{ do: 'type', word: 'yoroshiku', prompt: 'mio: Say it. Like this.' }` |
+| `gesture` | `who`, `kind`: `nine`, `point`, `shrug`, `finger`, `skijump`; `to` | Arm moves for the chibi cast: nine fingers up (with a 9 bubble), point, shrug, finger to the lips, Mori's ski jump. `point` does nothing on Mio. Other kinds the story files use (`beckon`, `lift`, `squeeze`, `highfive`, `fistbump`) do nothing yet; ask in REQUESTS.md. |
+| `phone` | `who`, `state`: `buzz`, `look`, `away` (Mio, Eric); `on`, `off` (the guard) | A phone: Mio's buzzes with a bubble until she looks; the guard's handset at his ear with faint hold music. |
+| `type` | `word`, `prompt` (optional line shown above it), `from` | The typing prompt for a new word (docs/game/systems.md, Typing a word). On success Eric says it, it becomes known, and flag `typed_<word>` is set. Use it where a word is taught, in place of a "say it" button: `{ do: 'type', word: 'yoroshiku', from: 'mio', prompt: 'mio: Say it. Like this.' }` |
+| `kotodama` | `target` | The kotodama effect on a place's named target (docs/game/systems.md). The place does the rest; ask for new targets in REQUESTS.md. |
 | `next` | | Starts the transition to the next place (see Transitions). |
-| `end` | | The end card (office only). |
+| `end` | | The end of the day (office only). |
 
-## Places
+Sim hooks (`period`, `bond`, `bondStep`, `remember`, `fact`, `relate`, `meet`, `buy`, `take`, `save`) are under Sim data.
 
-Coordinates: x runs left to right on screen, z runs from the back (negative) toward the camera (positive); units are about a metre and a half. People are about 1.15 tall.
+## Place hooks and events
+
+The things, spots, seats and zones each hook refers to are listed in docs/game/places.md.
 
 ### Train (`train`)
 
-The car from side/train, crossing the bay; the camera looks at it from the platform side. The car is about 8 long (x -4 to 4) and 2.4 wide (z -1.2 far seats to +1.2 near seats). Sliding doors at the near-side corners (x -3.5 and x 3.5).
+Events: `start`, `approach` (the train starts slowing, when the story runs `{ do: 'arrive' }`), `arrived` (stopped, doors open), `chime` (the door-closing chime starts).
 
-People (ids, where they are):
-- `aoi`: pink hair, far bench, x -1.7 (on her phone).
-- `kuroda`: salaryman asleep, far bench, x -2.55.
-- `reader`: glasses, reading a book, far bench, x 1.05.
-- `music`: cap and headphones, nodding, far bench, x 2.5.
-- `stander`: man standing by the far right corner with a bag.
-- `bun`: woman with a bun on the near bench, x -2.5 (seen from behind).
-- `youth`: young man with olive hair on the near bench, x 2.55 (seen from behind).
-- `tama`: the calico cat, far bench, x -0.85.
-
-Objects: `doors` (both door pairs), `door_l`, `door_r`, `plant`, `bags`, `rack`, `straps`, `window`, `poster`, `sign` (the station sign, visible when stopped), `platform`.
-
-Seats for `sit`: `seat_aoi` (right beside Aoi, far bench x -1.25; the tote there moves), `seat_far_r` (far bench x 1.6), `seat_near_l` (near bench x -1.3), `seat_near_r` (near bench x 1.4). Spots for `walk`: `aisle`, `door_l`, `door_r`, `by_aoi`, `by_kuroda`.
-
-Zones: `door_zone` (either door, only while the doors are open).
-
-Events: `start`, `approach` (the train starts slowing for the station, fired when the story runs `{ do: 'arrive' }`), `arrived` (stopped, doors open), `chime` (door-closing chime starts, fired by `{ do: 'chime' }`).
-
-Place hooks:
 - `announce` `text`, `voice`: the LED board at the top with the station announcement (`text: ''` hides it).
-- `arrive`: the train brakes and pulls into the company station (about 8 s), then fires `event:arrived`.
-- `doorsOpen`, `doorsClose`, `chime` (starts the closing chime; the doors start closing after about 3 s unless `doorsHold` runs), `doorsHold` (the doors stop halfway and stay).
+- `arrive`: the train brakes and pulls into the station (about 8 s), then fires `event:arrived`.
+- `doorsOpen`; `doorsClose` (`to`, 1 open to 0 shut, and `ms` for a slow steady close; no `ms` is the quick close); `chime` (starts the closing chime; the doors start closing after about 3 s unless `doorsHold` runs); `doorsHold` (`kotodama: true` freezes the doors where they are, with the effect; without it they bounce back to about half open).
+- `alight` `except`: everyone gets off but those listed. `depart`: the train leaves.
 - `wake` `who`: a sleeper jolts awake.
 - `catTo` `to`: Tama hops down and trots to a spot or person.
-- `bag` `state: 'slide'|'caught'|'dropped'`: Mio's bag of food on the free seat beside her slides off, is caught back onto the seat, or lands on the floor.
+- `bag` `state: 'teeter'|'slide'|'caught'|'dropped'`: Mio's bag on the free seat.
+- `cup` `state: 'tip'|'safe'`: the coffee on the free seat.
 
 ### Gate (`gate`)
 
-The company lobby, muted palette. About 12.6 wide (x -6.3 to 6.3) and 9 deep (z -4.5 back wall to +4.5 entrance). Glass entrance doors at the bottom centre. The barrier runs across at z -0.55 with two card readers (x -0.93 and 0.93) either side of the scanner arch (x 0), which has two glass flaps. The guard desk sits in the barrier line on the right (x 1.2 to 3.2). The lift bank (two lifts) is on the back wall, past the barrier.
+Events: `start`, `card_red` (a card reader tapped before it works), `card_ok`, `arch_blocked` (walking into the closed gate), `gate_opened`.
 
-People:
-- `guard`: Mr. Ishibashi, seated behind his desk (2.35, -1.2).
-- `aoi`: comes in with Mio; her default place is the right bench (3.6, 1.2).
-- `kuroda`: comes in late through the entrance when the story runs `{ do: 'enter', who: 'kuroda' }`.
-- `kuro`: the receptionist, behind the visitor counter on the left (-4.3, 0.1).
-- `tama`: the cat, by the guard desk (3.45, -0.15), eating.
-- Office workers walk in, tap through the gate and take the lifts on their own (not tappable). `{ do: 'rush', on: true/false }` turns the morning rush up or down.
-
-Objects: `reader_l`, `reader_r`, `gate` (the arch and flaps), `desk` (guard desk), `counter` (visitor counter), `signin` (visitor book on the counter), `lostfound` (lost-and-found shelf by the counter), `screen` (notice screen on the back wall), `kiosk` (coffee vending machine, front right), `bench_l`, `bench_r`, `poster_l`, `poster_r`, `lift` (the lift bank), `entrance`, `plant`, `bowl` (Tama's).
-
-Spots: `entrance_in`, `bench_l`, `bench_r`, `before_gate`, `after_gate`, `lift_front`, `counter_front`, `desk_front`.
-
-Zones: `arch` (walking into the gate), `past_gate`, `lift_front`.
-
-Events: `start`, `card_red` (Mio holds her card to a reader before it works), `card_ok`, `arch_blocked` (walks into the closed gate), `gate_opened`.
-
-Place hooks:
 - `reader` `side: 'l'|'r'`, `state: 'red'|'green'|'idle'`: the reader's light and beep.
-- `gate` `state: 'open'|'closed'|'jam'|'slam'`: the flaps (`jam` rattles, `slam` bursts open and bounces). The small count screen on the arch shows 1 person, and 2 in red while `jam` is on.
-- `cardOk`: Mio's card now works; her next tap turns the reader green and opens the gate.
+- `gate` `state: 'open'|'closed'|'jam'|'slam'`: the flaps (`jam` rattles and the count screen shows 2 in red; `slam` bursts open and bounces).
+- `cardOk`: Eric's card now works; his next tap turns the reader green and opens the gate.
 - `enter` `who`: someone walks in through the entrance.
-- `typing` `who`, `ms`: typing animation (the guard at his computer). (Renamed from `type`, which is now the typing prompt below.)
-- `rush` `on`: office workers on or off.
+- `typing` `who`, `ms`: typing animation (the guard at his computer).
+- `rush` `on`: office workers on or off. While the gate is shut or jammed they wait by the readers.
+- `newsletter` `state: 'down'|'up'`: Aoi's newsletter on the bench.
+- `catTo` `to`: Tama moves (crossing the barrier flashes the gate red).
 - `liftOpen` / `liftClose`: one of the lifts opens.
+
+### Lift
+
+In `transitions.js` `gate_to_office.ride`: `{ do: 'floor', to: '5' }` moves the floor display one floor at a time (`B2`, `B1`, `1` ... `5`; the ride starts at 1), and `{ do: 'liftDoors', state: 'open'|'closed' }` plays the doors. If the ride doesn't end on B2, the engine finishes the count to B2.
 
 ### Office (`office`)
 
-Third floor, one compact rectangle (x -7 to 7, z -6.4 to 6.4). Top row, left to right: lift lobby (with the stairwell behind it), the main office 企画室 (one island of six desks and the section chief's desk across its head), the machine room 機械室. A corridor runs right across the middle (z 0.2 to 2.4), with the fire exit at its right end. Bottom row: copy room コピー室, kitchenette 給湯室 (its door faces the office door), men's and women's toilets.
-
-People:
-- `emi`: waiting by the lift (-5.3, -1.35); her desk is the south row, left (-2.0, -2.4), next to Mio's.
-- `kenji`: north row, left desk, facing the camera.
-- `nao`: north row, middle desk, headphones.
-- `hiro`: south row, right desk, on the phone.
-- `mori`: section chief, at the head of the island (2.2, -3.4), facing along it.
-- `yui`: at the copier in the copy room (-2.95, 3.55).
-- `sota`: at the coffee machine in the kitchenette (1.05, 3.5).
-
-Objects: `lift`, `vending`, `bench`, `stairs`, `office_door`, `inout_board`, `clock`, `whiteboard`, `calendar`, `water_cooler`, `cabinets`, `fan`, `boxes`, `my_desk` (south row, middle, name card エリック), `my_chair` (starts in the copy room), `chief_desk`, `machine_door`, `racks`, `fire_exit`, `noticeboard` (corridor), `extinguisher`, `hydrant`, `copier`, `fax`, `paper_shelf`, `worktable`, `coffee_machine`, `kettle`, `fridge`, `microwave`, `kitchen_table`, `toilet_m`, `toilet_f`, `plant`.
-
-Spots: `lift_out`, `lobby`, `office_door`, `my_seat`, `emi_seat`, `copier_front`, `coffee_front`, `corridor_w`, `corridor_e`, `machine_front`.
-
-Zones: `office`, `copy_room`, `kitchen`, `machine_room`, `corridor`, `toilets`.
-
 Events: `start`, `sat_down`.
 
-Place hooks (the unlock effects):
 - `copier` `state: 'jam'|'run'|'wild'|'idle'`: `run` prints a neat stack, `wild` sprays paper.
-- `chairRoll` `to`: Mio's chair rolls itself to a spot (e.g. `my_seat`).
+- `chairRoll` `to`: Eric's chair rolls itself to a spot (carrying Tama if she's on it).
 - `coffee`: the coffee machine brews.
+- `kettle` `state: 'pour'`: the pot pours, with steam.
+- `rackAlarm` `state: 'on'|'off'`: a blinking light and beeps on the racks.
 - `machineDoor` `state: 'open'|'closed'`.
 - `vendingDrop`: a can drops out.
 - `clockStop` `ms`: the wall clock's second hand stops for a while.
 - `fan` `state: 'on'|'off'|'wild'`.
 - `liftOpen` / `liftClose`.
-- `sitDown`: Mio sits at her desk (fires `event:sat_down`).
+- `sitDown`: Eric sits at his desk (fires `event:sat_down`).
+- `lunchSit` `with: 'mio'|'mori'`: Eric and the partner sit down to lunch (machine room floor, or the kitchenette table). `lunchOver`: lunch packed away, everyone back on the floor.
+- `catTo` `to`: lifts Tama off the chair and walks her (a spot or an id).
 
-## Done from REQUESTS.md (engine side)
+## Portraits
 
-- Words: `ohayo`, `yoroshiku`, `otsukare`, `kotodama`. Speakers: `rei`, `kanae`, `sales1`, `sales2`, `gatev`, `reitext` (shown as a text message on its own dark card).
-- Train: `rei` has a body on the far bench at x 2.1 with a laptop; `music` is gone. Her folder and a lidded coffee (`cup`) are on `seat_far_r`; sitting Mio there moves them. Hook `cup` `state: 'tip'|'safe'` (`safe` puts it upright in Rei's hand). Bags sit on `seat_aoi`, `seat_near_l` and `seat_near_r` (sitting there moves the bag). `hide` also hides the person's floor shadow.
-- Gate: `rei` has a body (walks in with Mio when she's in `with`). `aoi` starts seated on `bench_r` behind an upside-down newsletter (hook `newsletter` `state: 'down'|'up'`). `catTo` works (crossing the barrier flashes the gate red). One office worker carries a cake box. `with` entries can be conditional: `with: [{ who: 'aoi', if: 'aoi_with' }]`.
-- Lift: the ride starts at 1. Put `{ do: 'floor', to: '5' }` steps in `ride` to move the counter one floor at a time (`B2`, `B1`, `1` ... `5`), and `{ do: 'liftDoors', state: 'open'|'closed' }` for the doors' sound. If the ride doesn't end on B2, the engine finishes the count to B2. The office is on B2 (plates B2 and 企画室７).
-- Office: `yui`, `sota`, `nao`, `hiro` are gone. `aoi` has a hidden body at the lift (`show`, then `walk` from `lift_out`). Three desks have cloth over their monitors: ids `covered` (north middle) and `covered_monitor` (south right). New ids `box_crowns`, `cups`, `nameplate`. `my_chair` starts in the machine room with `tama` asleep on it; `chairRoll` carries her along; `catTo` lifts her off and walks her (spots or ids, e.g. `catTo` `to: 'my_desk'`). `mori` can `walk` anywhere (people route through doors and the corridor on their own).
+The speaker's portrait shows beside the text box ([docs/game/controls-and-ui.md](../../docs/game/controls-and-ui.md)). The faces each person has are listed in docs/game/cast.md, Portraits. Set one on a line with the long form `{ say: 'mori', face: 'smile', text: '...' }` (it stays until changed or the scene ends: every triggered scene starts everyone on neutral), or with `{ do: 'expression', who: 'guard', face: 'stern' }`. A face that person doesn't have falls back to neutral. The `emote` hook also picks a face when that person has a fitting one: `?` suspicious/stern, `!` panicked/surprised, `♪`/`heart` smile/grin/amused, `sweat` flustered/sheepish/panicked, `zzz` sleepy/tired, `…` tired.
 
-## Done from REQUESTS.md, round two
+## Overheard Japanese
 
-Commands `irete` 入れて, `dashite` 出して, `tomatte` 止まって (voiced). Rei has a hidden body in the office (`show`/`walk`/`hide`, or the schedule). Bonds fire when a level is crossed, not only hit. `{ say: 'rei', name: 'Woman in white', text }` overrides the name for one line. `newsletter` `up`/`down` (the right way up now). Office hooks `kettle` `state: 'pour'` (steam) and `rackAlarm` `state: 'on'|'off'` (blinking light and beeps). Items: `tea` is royal milk tea. Speaker `kuroda` shows as Mr. Hamada.
+`{ say: 'guard', overheard: true, text: '日本語の文。', clear: ['B2', { ja: 'コンサルタント', ro: 'konsarutanto', en: 'consultant' }] }`. The text is the Japanese itself; how it shows and sounds is in docs/game/systems.md. Only the long form supports `overheard`. `clear` entries are readable for that line only and don't become known. An `{id}` in an overheard line is sharp only once that word is known; before that it blurs like the rest, even if it was shown glossed earlier (Jørgen: 本社 from the train announcement showed as known at the gate). Voice clips for overheard lines are generated from the text by `tools/voices.py` (run it after adding lines; no `voice` key needed).
 
-## Portraits (VN style)
-
-The speaker's approved portrait shows beside the text box (desktop: large at the left; phone: smaller, above the box). Eric's shows smaller on the right on his lines, and the listener dims. Narration shows none. Faces that exist:
-- `mio`: `neutral`, `smile`, `deadpan`, `surprised`, `embarrassed`, `tired` (v3, approved).
-- `aoi`, `kuro`: `neutral`.
-- PROVISIONAL (the art agent's picks, used as defaults until Jørgen approves or replaces them):
-  - `eric`: `neutral`, `surprised` (seed 734 v2), `tired` (seed 811, Jørgen's pick)
-  - `mori`: `neutral`, `smile`, `flustered` (seed 713)
-  - `kenji`: `neutral`, `grin`, `sheepish` (seed 711)
-  - `kuroda` (Mr. Hamada): `neutral`, `sleepy`, `panicked` (seed 721)
-  - `guard` (Mr. Ishibashi): `neutral`, `stern`, `amused`
-
-Everyone else shows just the name plate. A face that doesn't exist for that person falls back to neutral. Set one on a line with the long form `{ say: 'mori', face: 'smile', text: '...' }` (it stays until changed or the scene ends: every triggered scene starts everyone on neutral), or with `{ do: 'expression', who: 'guard', face: 'stern' }`. The `emote` hook also picks a face when that person has a fitting one: `?` suspicious/stern, `!` panicked/surprised, `♪`/`heart` smile/grin/amused, `sweat` flustered/sheepish/panicked, `zzz` sleepy/tired, `…` tired.
-
-## Eric, Mio, phrases and overheard Japanese (the new premise)
-
-- The player is Eric (speaker id `eric`, shown as "Eric · you"). In hooks, `who: 'eric'` (or `'player'`) moves him. `sit` with `who: 'eric'` sits him (train seats, office `my_seat`).
-- Mio is an NPC with a body in every place (Jørgen's Meshy model). Speaker and id `mio`: `talk:mio`, `say:<word>:mio`, `walk`, `face`, `sit` (any seat id), `show`/`hide`, `with` in transitions. She is hidden until shown, except on the train, where she starts seated on the far bench (x 2.1, `seat_mio`) with her laptop, beside the free seat `seat_far_r`. `labels: { mio: '...' }` renames her marker.
-- Phrases: `ohayo` おはようございます, `yoroshiku` よろしくおねがいします, `sumimasen` すみません. Learn them with `{ learn: 'ohayo' }` (or `offer`). They sit in the Say menu above the commands and trigger `say:<phrase>:<id>`, exactly like commands (voiced by Eric). Commands: `matte`, `akete`, `kite`, `ugoite`, `irete`, `dashite`, `tomatte`.
-- The Say button is taught automatically: the first time Eric learns any word (`type`, `learn` or `offer`), the button pulses and a tip explains it. Whenever a goal marker answers to a word Eric knows (a `say:<word>:<id>` trigger on a goal), the button lights up. So put the first `type` where Eric can use the word right after, and mark the thing waiting on a word as a goal.
-- Words count as known only once taught in play: through `type`, `learn` or `offer`. A glossed `{id}` in a normal line explains the word there but doesn't teach it. Nothing is known at the start. `clear` entries in an overheard line are readable for that line only (plain, not styled as known) and don't become known.
-- Overheard Japanese: `{ say: 'guard', overheard: true, text: '日本語の文。', clear: ['B2', { ja: 'コンサルタント', ro: 'konsarutanto', en: 'consultant' }] }`. The text is the Japanese itself. Every character Eric doesn't know shows as a soft, shifting stand-in glyph; his phrases and commands, and the `clear` entries, stay sharp (with reading and English when given). The voice plays muffled through a low-pass filter. Voice clips for overheard lines are generated from the text by `tools/voices.py` (run it after adding lines; no `voice` key needed). Only the long form supports `overheard`. An `{id}` in an overheard line is sharp only once that word is known; before that it blurs like the rest, even if it was shown glossed earlier (Jørgen: 本社 from the train announcement showed as known at the gate). Sounds (あっ, えっ, ああ...) stay readable; real words like はい, うん, ええ, まあ, ほら blur until taught.
+Words count as known only once taught with `type`, `learn` or `offer`; a glossed `{id}` in a normal line doesn't teach it. The first time Eric learns any word, the Say button is taught automatically; whenever a goal answers to a word Eric knows (a `say:<word>:<id>` trigger on a goal), the button lights up. So put the first `type` where Eric can use the word right after, and mark the thing waiting on a word as a goal.
 
 ## Sim data (clock, schedules, ambient moments, bonds, gifts, memory, save)
 
-All optional, all per story file, all generic so they carry over to later days. The engine side is game3d/js/sim.js, the bond maths js/bonds/model.js (tested by `node game3d/js/bonds/test.mjs`), standing cast data js/bonds/cast.js, and day 1's recorded moments js/bonds/day1.js.
+All optional, all per story file, all generic so they carry over to later days. How these behave for the player (bond steps and points, gifts, memory) is in docs/game/systems.md. The engine side is game3d/js/sim.js, the bond maths js/bonds/model.js (tested by `node game3d/js/bonds/test.mjs`), standing cast data js/bonds/cast.js, and day 1's recorded moments js/bonds/day1.js.
 
 ```js
 export default {
   // who they are, for the People panel (shown once Eric has talked to them)
-  people: { rei: { name: 'Rei', about: 'Sales, fifth floor. Short sentences.', color: '#c9ced8' } },
+  people: { kuroda: { name: 'Mr. Hamada', about: 'Accounts, 12th floor. Falls asleep on trains.', color: '#b3a58f' } },
   // where people are in each period ('*' = any period); `at` is a spot, object id or [x, z]; `sit` a seat id;
-  // `hide: true` takes them out of the place. Applied when a place starts and whenever the period changes.
-  schedule: { mori: { morning: { at: 'chief_desk' }, lunch: { at: 'coffee_front', face: 'coffee_machine' } } },
+  // `face` an id to turn to; `hide: true` takes them out of the place. Applied when a place starts and whenever the period changes.
+  schedule: { mori: { lunch: { at: 'kitchen_table' }, afternoon: { at: 'chief_desk' }, evening: { hide: true } } },
   // NPC-to-NPC moments, played as captions (no tapping) when Eric comes within `radius` (default 2.4) of `near`
   // (or the first person in `who`). Both people must be here and visible. Optional: `pair` (they must be within
   // this distance of each other), `rel` (a relation that must hold, 'kenji likes mori', or a list), `if`, `period`
@@ -276,59 +216,42 @@ export default {
 };
 ```
 
-**Bond steps.** 0 Stranger, 1 Known (met: in People), 2 Friendly (6 points), 3 Trusted (14 points and their turn scene), 4 Close (24 and their payoff scene), 5 Partner or friend (step 4 and the last scene). Points come from sources, at most 3 per person per day in all, and never go down. While a step's scene hasn't played, points stop at its threshold, so nobody can be ground past it.
-
-| Source | Points (when `add` is left out) | Limit |
-|---|---|---|
-| `greet` | 1 | the first greeting only |
-| `talk` | 1 | once a day |
-| `gift` | by reaction: need 3, like 1, neutral or dislike 0 | one gift a week counts (a need: once) |
-| `need` | 3 | once per need |
-| `ticket` | 2 | |
-| `help` | 1 | once a day |
-| `their_way` | 1 | once a day |
-| `register` | 1 | once a day |
-| `scene` | 1 | once per node (the default for a `bond` step with no source) |
+Bond point sources, for `source`: `greet`, `talk`, `gift`, `need`, `ticket`, `help`, `their_way`, `register`, `scene` (what each is worth: docs/game/systems.md).
 
 **Hooks.**
-- `bond` `who`, `add`, `source`, `why`: adds points (see above). `{ do: 'bond', who: 'mori', source: 'ticket', why: 'fixed his copier' }`. Without `source`, the node's entry in `reasons` (or day1.js) names it.
+- `bond` `who`, `add`, `source`, `why`: adds points. `{ do: 'bond', who: 'mori', source: 'ticket', why: 'fixed his copier' }`. Without `source`, the node's entry in `reasons` (or day1.js) names it, else `scene`.
 - `bondStep` `who`, `to` (3, 4 or 5): the scene that step waits on has played. Same as setting its gate flag.
-- `remember` `who`, `id`, `text`: something Eric did that they'll remember. Shows in People as "They remember: ...". Test it with the flag `rem_<who>_<id>`: `{ if: 'rem_mio_caught_bag', then: [...] }`.
+- `remember` `who`, `id`, `text`: something Eric did that they'll remember. Shows in People as "They remember: ...". Test it with the flag `rem_<who>_<id>`.
 - `fact` `who`, `id`, `text`, `like`: something Eric has learned about them, for People; `like: 'coffee'` also shows that taste as noticed.
 - `relate` `a`, `b`, `kind` (`likes`, `owes`, `rivals`, `none`): changes how a feels about b.
 - `meet` `who`: adds them to People (step 1); talking to a person does this too.
-- `period` `to: 'early'|'morning'|'lunch'|'afternoon'|'evening'` (the HUD shows "Thu 1 Oct · Morning at work"; only the story moves it), `buy` `item` (`coffee`, `tea`, `melon`, `cornsoup`; ¥1000 to start; sets `bought_<item>`, or `cant_buy`), `take` `item`, `save`.
+- `period` `to: 'early'|'morning'|'lunch'|'afternoon'|'evening'`; only the story moves it.
+- `buy` `item` (item ids: docs/game/systems.md, Gifts): sets `bought_<item>`, or `cant_buy`. `take` `item`. `save`.
 
 **Flags for conditions.** `bond_<who>` (points), `step_<who>`, `bondready_<who>` (the step whose scene is due, else 0), `met_<who>`, `rem_<who>_<id>`, `fact_<who>_<id>`, `rel_<a>_<b>` (`'likes'`...), `register_<who>` (`'right'` or `'wrong'`: the register of the last word Eric said to them), and after a gift `gave_<item>_<who>`, `gift_<who>` and `gift_reaction` (`'need'`, `'like'`, `'neutral'`, `'dislike'`), set before the `give:` node runs. So one trigger can answer any gift: `'give:*:mio': [{ if: "gift_mio == 'like'", node: 'mio_likes_it' }, 'mio_polite_thanks']`. A refusal entry takes `keep: true` (`{ if: 'gifted_mio', node: 'gift_again', keep: true }`): its node runs, but the item stays in the bag and none of the gift flags are set.
 
-Commands record who taught them (the speaker of the `offer` line, or `from:` on `offer`/`learn`/`type`), shown in People. The game saves flags, bonds, memory, period, bag, commands and place at every place change and on `save`; the title offers Continue.
+Words record who taught them (the speaker of the `offer` line, or `from:` on `offer`/`learn`/`type`), shown in People.
 
 ## Transitions (`transitions.js`)
 
-There are no cuts to black between places. Each move is one continuous trip, and each has an optional dialogue slot.
+There are no cuts to black between places. Each move is one continuous trip (docs/game/places.md, Getting between places), and each has optional dialogue slots.
 
 ```js
 export default {
-  train_to_gate: {           // Mio steps out, walks along the platform to the covered walkway, and in through the lobby doors
-    walk: ['aoi: This way, the walkway is warmer.'],   // lines while walking (auto, no tap needed, about 3 s each)
-    arrive: [],              // steps run as she comes in through the glass doors, before the gate scene's start node
-    with: ['aoi'],           // who walks with her into the next place (only people who exist in both)
+  train_to_gate: {           // off the train, along the platform and the walkway, in through the lobby doors
+    walk: ['mio: This way, the walkway is warmer.'],   // lines while walking (auto, no tap needed, about 3 s each)
+    arrive: [],              // steps run as he comes in through the glass doors, before the gate's start node
+    with: ['mio'],           // who walks with him into the next place (only people who exist in both)
   },
-  gate_to_office: {          // into the lift, doors close, the floor indicator counts 1 to 3, doors open on the office lift lobby
-    ride: ['kuroda: Third floor? Planning. Good luck.'],  // lines during the ride (tap to go on; the ride waits for them)
+  gate_to_office: {          // into the lift; the ride counts floors; the doors open on the B2 landing
+    ride: [{ do: 'floor', to: '5' }, 'sales1: ...', { do: 'floor', to: 'B2' }],   // lines during the ride (tap to go on; the ride waits for them)
     with: [],
   },
 };
 ```
 
-`walk` lines show on their own and don't stop the walk; `ride` and `arrive` are normal steps and wait for taps. Flags work in all of them (use `{ if: ... }` steps).
+`walk` lines show on their own and don't stop the walk; `ride` and `arrive` are normal steps and wait for taps. Flags work in all of them (use `{ if: ... }` steps). `with` entries can be conditional: `with: [{ who: 'aoi', if: 'aoi_with' }]`.
 
+## Music
 
-### Music
-Each place has its own loop (train calm, gate lively, office office; after work, night). Voices duck it. To change it in a scene: `{ hook: 'music', name: 'night' }` (`calm`, `office`, `lively`, `night`, or `null` for silence).
-
-### Kotodama (a word taking hold)
-- `{ do: 'doorsClose', to: 0.35, ms: 20000 }` (train): slow steady close to `to` (1 open, 0 shut) over `ms`; no `ms` = the quick close.
-- `{ do: 'doorsHold', kotodama: true }` (train): freeze the doors where they are, with the kotodama effect; without `kotodama` they bounce back to about half open as before.
-- `{ do: 'kotodama', target: 'doors' }`: the effect on its own on a place's named target (shimmer on its edges, lights dip and hum, low tone, cuttable sounds like the chime stop, text box clears). The place does the freezing; ask for new targets in REQUESTS.md.
-- `gesture` `point` works on chibi people only; on Mio it does nothing.
+Each place has its own loop (docs/game/art-and-sound.md). To change it in a scene: `{ hook: 'music', name: 'night' }` (`calm`, `office`, `lively`, `night`, or `null` for silence).
