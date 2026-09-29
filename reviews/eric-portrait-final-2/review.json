@@ -2,7 +2,7 @@
  "title": "Eric's dialogue portrait: 10% closer",
  "date": "2026-09-29",
  "by": "art agent (Eric portrait final 2)",
- "status": "open",
+ "status": "decided",
  "multi": false,
  "question": "Is this the right amount closer?",
  "media": [
@@ -29,5 +29,9 @@
    ],
    "note": "Same render, re-cut from the full-size cut-out 10% closer. His chin is at the same height as before and his face stays in the same spot left to right. Already in the game as eric-neutral.webp; the previous crop is kept in art/production/eric-portrait-final/."
   }
- ]
+ ],
+ "decided": [
+  "eric-final-zoom110"
+ ],
+ "decision": "25% bigger"
 }
