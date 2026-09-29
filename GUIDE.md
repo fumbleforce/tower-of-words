@@ -166,7 +166,7 @@ One home per fact, one task per agent, the main thread never waits, validate fix
 - Facts in the same commit (Jørgen, 2026-09-29): a commit that changes what the game is (a person, place, object, word, beat, choice, control or UI piece) updates its docs/game/ file in the same commit, and its message ends with `Facts: docs/game/<file>` or `Facts: none`. `node tools/facts/check.mjs` checks the docs against the game.
 - Definition of done, for every agent (2026-09-29, review productivity-review; the agent definitions in .claude/agents/ link here):
   1. Only your own hunks are committed: stage them with `git add -p` or `git add <your new files>`, read `git diff --cached` first, never `git add -A` or `git add .`, never another agent's hunks. No push unless Jørgen asked.
-  2. The commit message ends with `Facts: docs/game/<file>` or `Facts: none`.
+  2. The commit message has one trailer line `Facts: docs/game/<file>` or `Facts: none` (anywhere among the trailers; attribution lines may follow it).
   3. `npm run check` passes. If game3d/ changed, the fast test passes too.
   4. The exact thing is checked in isolation.
   5. Anything Jørgen has to pick or judge is a Review item (reviews/README.md); chat gets the id only.
