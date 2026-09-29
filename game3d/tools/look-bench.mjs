@@ -20,7 +20,7 @@ const res = {};
 
 async function open(place, extra) {
   const ctx = await b.newContext(view);
-  await ctx.route('**/js/main.js*', async (route) => { const r = await route.fetch(); const body = (await r.text()).replace('place.name = name;', "place.name = name; (await import('./perf/batch.js')).optimizePlace(place, { game });"); await route.fulfill({ response: r, body }); });
+  await ctx.route('**/js/places/lifecycle.js*', async (route) => { const r = await route.fetch(); const body = (await r.text()).replace('place.name = name;', "place.name = name; (await import('../perf/batch.js')).optimizePlace(place, { game });"); await route.fulfill({ response: r, body }); });
   const p = await ctx.newPage();
   p.on('pageerror', (e) => console.log('pageerror', e.message));
   if (CPU > 1) { const s = await ctx.newCDPSession(p); await s.send('Emulation.setCPUThrottlingRate', { rate: CPU }); }

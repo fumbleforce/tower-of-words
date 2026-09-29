@@ -29,7 +29,7 @@ for (const [v, q] of variants) {
 }
 async function run(j) {
   const ctx = await b.newContext({ viewport: { width: j.w, height: j.h }, deviceScaleFactor: j.dpr, isMobile: j.mobile, hasTouch: j.mobile });
-  if (HOOK) await ctx.route('**/js/main.js*', async (route) => { const r = await route.fetch(); const body = (await r.text()).replace('place.name = name;', "place.name = name; (await import('./perf/batch.js')).optimizePlace(place, { game });"); await route.fulfill({ response: r, body }); });
+  if (HOOK) await ctx.route('**/js/places/lifecycle.js*', async (route) => { const r = await route.fetch(); const body = (await r.text()).replace('place.name = name;', "place.name = name; (await import('../perf/batch.js')).optimizePlace(place, { game });"); await route.fulfill({ response: r, body }); });
   const p = await ctx.newPage();
   const errs = [];
   p.on('pageerror', (e) => errs.push(e.message));

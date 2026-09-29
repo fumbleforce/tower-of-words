@@ -118,7 +118,7 @@ export function checkDeclarations(read = readSource) {
       if (node.type === 'CallExpression' && ['eventId', 'eventTrigger'].some(symbol => imported(node.callee.name, 'events.js', symbol))) {
         assert.equal(node.arguments.length, 2, file + ': event call needs place and name');
         const [place, name] = node.arguments, places = place.type === 'Literal' ? [place.value]
-          : file === 'game3d/js/main.js' && ['name', 'start'].includes(place.name) ? Object.keys(PLACE_FILES) : null;
+          : file === 'game3d/js/places/lifecycle.js' && place.name === 'name' ? Object.keys(PLACE_FILES) : null;
         assert.ok(places && typeof name.value === 'string', file + ': unresolved event emission');
         if (place.type !== 'Literal') assert.equal(name.value, 'start', file + ': unknown dynamic event');
         const resolve = imports.get(node.callee.name).name === 'eventId' ? eventId : eventTrigger;

@@ -1,6 +1,6 @@
 // perf.mjs (the shell's budget run) with the perf pass hooked in, for before/after tables:
 //   node game3d/tools/perf/budget.mjs [--cpu 4] [--q 1] [--secs 8] [--hook]      GL=gpu to render on the GPU (take the GPU lock)
-// --hook serves main.js with the one-line hook from notes/production-requests.md (js/perf/batch.js after each
+// --hook serves places/lifecycle.js with the one-line hook from notes/production-requests.md (js/perf/batch.js after each
 // place is built); without it this is the same run as perf.mjs. Writes game3d/shots/perf/<build>-<gl>[-hook].json.
 // Original notes from perf.mjs:
 // Profile: a 393 x 851 phone screen at DPR 2.75 (the game caps it at 2), touch, CPU throttled 4x in Chrome
@@ -27,7 +27,7 @@ const b = await chromium.launch({ headless: true, args: [...gl, '--autoplay-poli
 
 async function open(url, { net = true } = {}) {
   const ctx = await b.newContext({ viewport: { width: 393, height: 851 }, deviceScaleFactor: 2.75, isMobile: true, hasTouch: true });
-  if (HOOK) await ctx.route('**/js/main.js*', async (route) => { const r = await route.fetch(); const body = (await r.text()).replace('place.name = name;', "place.name = name; (await import('./perf/batch.js')).optimizePlace(place, { game });"); await route.fulfill({ response: r, body }); });
+  if (HOOK) await ctx.route('**/js/places/lifecycle.js*', async (route) => { const r = await route.fetch(); const body = (await r.text()).replace('place.name = name;', "place.name = name; (await import('../perf/batch.js')).optimizePlace(place, { game });"); await route.fulfill({ response: r, body }); });
   const p = await ctx.newPage();
   const cdp = await ctx.newCDPSession(p);
   await cdp.send('Network.enable');

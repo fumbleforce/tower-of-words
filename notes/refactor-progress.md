@@ -314,3 +314,9 @@ Normal fast passes desktop 70 s and phone 69 s, with 12 practice prompts and zer
 Global hooks committed as `3816a3f`, with all 13 CPU groups passing. Marker availability, approach/use/talk, Say practice, gifting and bond notices now live in gameplay/interactions.js (218 lines); main keeps input routing and shrinks to 920 lines. The gift integration fixture now evaluates the extracted callback, and asset sound discovery includes gameplay modules. Existing input guards and callback ordering are preserved.
 
 Normal fast passes both viewports in 69 s, with 12 practice prompts and zero overlaps/spins each; both screenshots inspected. Logs: `/tmp/codex-stage4-interactions-{desktop,phone}.log`; staged CPU: `/tmp/codex-stage4-interactions-commit.log`. Place lifecycle follows with strict comparison against the retained stage-3 traces, whose manifest and harness inputs still match.
+
+### Stage 4: place lifecycle (2026-09-29)
+
+Interactions committed as `038a4ff`, with all 13 CPU groups passing. places/lifecycle.js now owns prepare/enter/travel/startScene (152 lines). Main injects the existing factories and rendering/marker callbacks; boot/Continue remains in main, now 785 lines. Music metadata discovery, dynamic start-event validation and six performance-capture hook paths follow the new owner.
+
+Strict desktop/phone comparisons against the retained stage-3 traces pass with zero input or behavior differences and 10 changed sources, covering the entire stage-4 extraction (`/tmp/codex-stage4-lifecycle-*-diff.json`). Normal fast passes desktop 69 s and phone 70 s, each with 12 practice prompts and zero overlaps/spins; both screenshots inspected. Staged CPU log: `/tmp/codex-stage4-lifecycle-commit.log`. Stage 5 movement extraction is prepared; room assembly is outside this mechanical movement boundary.
