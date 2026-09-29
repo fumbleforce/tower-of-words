@@ -171,8 +171,8 @@ export default {
       { say: 'eric', emo: 'tired', face: 'tired', text: "Yeah, IT support. I'm the contractor, it's my first day." },
       { say: 'mio', emo: 'dry', face: 'deadpan', text: "Ahh, you're the support contract? Mori-san said a {gaijin} is coming to help with the old machines. Amakawa never replaces anything, so, um... some of them are older than me." },
       { say: 'eric', emo: 'tired', text: 'A what?' },
-      { do: 'type', word: 'gaijin', from: 'mio', prompt: 'mio: Gaijin. Um, foreigner? So, you.' },
-      { say: 'mio', emo: 'casual', face: 'neutral', text: "Mm, like that. Don't worry, it's not mean, it's like saying “the new guy”, basically." },
+      { do: 'type', word: 'gaijin', from: 'mio', prompt: 'mio: Gaijin. Um, foreigner? So... you, obviously.' },
+      { say: 'mio', emo: 'teasing', face: 'neutral', text: "Mm, like that. Don't worry, it's not mean, it's like saying “the new guy”. Only, you stay new guy for, um, maybe ten years." },
       { say: 'mio', emo: 'dry', face: 'neutral', text: "I'm Mio. I'm also B2, so... same team, I guess." },
       { set: 'mio_named' },
       { choice: [
