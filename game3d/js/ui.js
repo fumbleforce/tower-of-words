@@ -6,65 +6,144 @@ import { settings, onSettings, CPS } from './settings.js';
 import { mountVoice, VOICE_CSS } from './speech.js';
 import { notePractice, needsPractice, pipsHTML, MASTERY_CSS } from './mastery.js';
 // the practice dots' css ships with mastery.js; the voice row injects its own
-{ const st = document.createElement('style'); st.id = 'mastery-css'; st.textContent = MASTERY_CSS; document.head.appendChild(st); }
+{
+  const st = document.createElement('style');
+  st.id = 'mastery-css';
+  st.textContent = MASTERY_CSS;
+  document.head.appendChild(st);
+}
 void VOICE_CSS;
 
 const $ = (s) => document.querySelector(s);
-const el = (tag, cls, html) => { const e = document.createElement(tag); if (cls) e.className = cls; if (html != null) e.innerHTML = html; return e; };
+const el = (tag, cls, html) => {
+  const e = document.createElement(tag);
+  if (cls) e.className = cls;
+  if (html != null) e.innerHTML = html;
+  return e;
+};
 
 // ---------- sound ----------
-let actx = null, muted = false;
+let actx = null,
+  muted = false;
 let voiceSpans = null;
-fetch(new URL('../audio/spans.json?v=' + (window.BUILD || ''), import.meta.url)).then((r) => (r.ok ? r.json() : null)).then((j) => { voiceSpans = j; }).catch(() => {});
+fetch(new URL('../audio/spans.json?v=' + (window.BUILD || ''), import.meta.url))
+  .then((r) => (r.ok ? r.json() : null))
+  .then((j) => {
+    voiceSpans = j;
+  })
+  .catch(() => {});
 const clips = {};
-function ac() { if (!actx) { try { actx = new (window.AudioContext || window.webkitAudioContext)(); } catch { actx = null; } } if (actx && actx.state === 'suspended' && !paused) actx.resume(); return actx; }
+function ac() {
+  if (!actx) {
+    try {
+      actx = new (window.AudioContext || window.webkitAudioContext)();
+    } catch {
+      actx = null;
+    }
+  }
+  if (actx && actx.state === 'suspended' && !paused) actx.resume();
+  return actx;
+}
 // ---------- volume buses ----------
 // Everything made with Web Audio goes through a bus: sfx, music, voice (the muffled overheard path), ambience
 // (for js/ambience.js), each into the master. Voice clips played as <audio> take voice x master as their volume.
 // Settings (js/settings.js) move the gains; the mute chip silences the master.
 const buses = {};
 const vol = (k) => Math.max(0, Math.min(1, +settings[k] || 0));
-function busGainValue(name) { return name === 'master' ? (muted ? 0 : vol('master')) : name === 'sfx' ? 1 : vol(name); }
+function busGainValue(name) {
+  return name === 'master' ? (muted ? 0 : vol('master')) : name === 'sfx' ? 1 : vol(name);
+}
 export function audioBus(name = 'sfx') {
-  const c = ac(); if (!c) return null;
-  if (!buses.master) { buses.master = c.createGain(); buses.master.gain.value = busGainValue('master'); buses.master.connect(c.destination); }
-  if (!buses[name]) { const g = c.createGain(); g.gain.value = busGainValue(name); g.connect(buses.master); buses[name] = g; }
+  const c = ac();
+  if (!c) return null;
+  if (!buses.master) {
+    buses.master = c.createGain();
+    buses.master.gain.value = busGainValue('master');
+    buses.master.connect(c.destination);
+  }
+  if (!buses[name]) {
+    const g = c.createGain();
+    g.gain.value = busGainValue(name);
+    g.connect(buses.master);
+    buses[name] = g;
+  }
   return buses[name];
 }
-function setBus(name) { const g = buses[name]; if (!g || !actx) return; const t = actx.currentTime; g.gain.cancelScheduledValues(t); g.gain.setValueAtTime(g.gain.value, t); g.gain.linearRampToValueAtTime(busGainValue(name), t + 0.15); }
+function setBus(name) {
+  const g = buses[name];
+  if (!g || !actx) return;
+  const t = actx.currentTime;
+  g.gain.cancelScheduledValues(t);
+  g.gain.setValueAtTime(g.gain.value, t);
+  g.gain.linearRampToValueAtTime(busGainValue(name), t + 0.15);
+}
 const clipVolume = (key) => (key && key.startsWith('mio') ? 0.75 : 1) * vol('voice') * (muted ? 0 : vol('master'));
 onSettings((k) => {
   if (k === 'master') setBus('master');
   if (k === 'music' || k === 'voice' || k === 'ambience') setBus(k);
-  if (k === 'master' || k === 'voice') for (const [key, a] of Object.entries(clips)) if (a instanceof Audio && !a._fading) a.volume = clipVolume(key);
+  if (k === 'master' || k === 'voice')
+    for (const [key, a] of Object.entries(clips)) if (a instanceof Audio && !a._fading) a.volume = clipVolume(key);
   if (k === 'voiceOn' && !settings.voiceOn) stopVoice();
 });
 // ---------- pause (menu.js): Web Audio stops where it is, the voice clip holds its place ----------
-let paused = false, pausedClip = null;
+let paused = false,
+  pausedClip = null;
 export function pauseAudio(on) {
   paused = !!on;
-  if (on) { if (actx && actx.state === 'running') actx.suspend(); if (curVoice && !curVoice.paused) { pausedClip = curVoice; curVoice.pause(); } }
-  else { if (actx && actx.state === 'suspended') actx.resume(); if (pausedClip) { const a = pausedClip; pausedClip = null; a.play().catch(() => {}); } }
+  if (on) {
+    if (actx && actx.state === 'running') actx.suspend();
+    if (curVoice && !curVoice.paused) {
+      pausedClip = curVoice;
+      curVoice.pause();
+    }
+  } else {
+    if (actx && actx.state === 'suspended') actx.resume();
+    if (pausedClip) {
+      const a = pausedClip;
+      pausedClip = null;
+      a.play().catch(() => {});
+    }
+  }
 }
 // One dialogue voice at a time (Jørgen: no overlapping voices when he clicks on). A new clip, or advancing the line,
 // fades the current one out over 80 ms and the next starts only after that. window.__voiceLog counts plays and the
 // most clips ever sounding at once (the fast test checks it stays 1).
-let curVoice = null, voiceGen = 0;
+let curVoice = null,
+  voiceGen = 0;
 const vlog = (window.__voiceLog = { plays: 0, maxActive: 0, overlaps: 0 });
-const sounding = () => [...Object.values(clips), clips._muffled].filter((a) => a && a instanceof Audio && !a.paused && !a.ended && !a._fading).length;
+const sounding = () =>
+  [...Object.values(clips), clips._muffled].filter(
+    (a) => a && a instanceof Audio && !a.paused && !a.ended && !a._fading,
+  ).length;
 export function stopVoice(ms = 80) {
   voiceGen++; // a clip still starting up for the old line won't play on
-  const a = curVoice; curVoice = null;
+  const a = curVoice;
+  curVoice = null;
   if (!a || a.paused || a.ended) return 0;
   a._fading = true;
-  const v0 = a.volume, t0 = performance.now();
+  const v0 = a.volume,
+    t0 = performance.now();
   const tick = () => {
     const k = Math.min(1, (performance.now() - t0) / ms);
-    try { a.volume = v0 * (1 - k); } catch { /* */ }
-    if (k < 1) requestAnimationFrame(tick); else { a.pause(); a._fading = false; }
+    try {
+      a.volume = v0 * (1 - k);
+    } catch {
+      /* */
+    }
+    if (k < 1) requestAnimationFrame(tick);
+    else {
+      a.pause();
+      a._fading = false;
+    }
   };
   // rAF stalls in hidden tabs; a timer makes sure it stops anyway
-  requestAnimationFrame(tick); setTimeout(() => { if (a._fading) { a.pause(); a._fading = false; } }, ms + 30);
+  requestAnimationFrame(tick);
+  setTimeout(() => {
+    if (a._fading) {
+      a.pause();
+      a._fading = false;
+    }
+  }, ms + 30);
   return ms;
 }
 // Returns a promise that resolves when the clip has finished (or at once if there is no sound), so a caller can
@@ -74,118 +153,277 @@ export function voice(key, opts = {}) {
   const wait = stopVoice(80);
   const gen = voiceGen;
   return new Promise((res) => {
-    const go = () => { if (gen !== voiceGen) return res(); playVoice(key, opts, gen, res); };
-    if (wait) setTimeout(go, wait + 5); else go();
+    const go = () => {
+      if (gen !== voiceGen) return res();
+      playVoice(key, opts, gen, res);
+    };
+    if (wait) setTimeout(go, wait + 5);
+    else go();
   });
 }
 // wait for someone to finish speaking, then a short beat
-export async function voiceThenBeat(p, beat = 300) { if (window.__test) return; await p; await new Promise((r) => setTimeout(r, beat)); }
+export async function voiceThenBeat(p, beat = 300) {
+  if (window.__test) return;
+  await p;
+  await new Promise((r) => setTimeout(r, beat));
+}
 function started(a, gen) {
-  if (gen !== voiceGen) { a.pause(); return; }
-  curVoice = a; vlog.plays++;
-  const n = sounding(); vlog.maxActive = Math.max(vlog.maxActive, n); if (n > 1) vlog.overlaps++;
+  if (gen !== voiceGen) {
+    a.pause();
+    return;
+  }
+  curVoice = a;
+  vlog.plays++;
+  const n = sounding();
+  vlog.maxActive = Math.max(vlog.maxActive, n);
+  if (n > 1) vlog.overlaps++;
   duckWhile(a);
 }
 function playVoice(key, { rate = 1, muffle = false } = {}, gen = voiceGen, done = () => {}) {
   if (muted) return done();
   // finish: when it ends, is stopped, fails, or after 8 s at most
-  let fin = false, began = false; const end = () => { if (!fin) { fin = true; done(); } }; setTimeout(end, 8000);
+  let fin = false,
+    began = false;
+  const end = () => {
+    if (!fin) {
+      fin = true;
+      done();
+    }
+  };
+  setTimeout(end, 8000);
   // if it never starts (no audio device, autoplay blocked), don't hold anyone up
-  setTimeout(() => { if (!began) end(); }, 1200);
+  setTimeout(() => {
+    if (!began) end();
+  }, 1200);
   if (muffle) {
     // overheard speech: heavily muffled (low-pass, quieter), except the words he knows, which come through clear.
     // audio/spans.json lists those words' times per clip [[t0, t1], ...]; the two paths crossfade in 40 ms.
-    const c = ac(); if (!c) return;
+    const c = ac();
+    if (!c) return;
     try {
-      const a = new Audio(new URL(`../audio/${key}.mp3`, import.meta.url).href); a.crossOrigin = 'anonymous';
-      const src = c.createMediaElementSource(a), f = c.createBiquadFilter(), f2 = c.createBiquadFilter(), wet = c.createGain(), dry = c.createGain();
-      f.type = 'lowpass'; f.frequency.value = 380; f.Q.value = 0.5; f2.type = 'lowpass'; f2.frequency.value = 380; f2.Q.value = 0.5;
+      const a = new Audio(new URL(`../audio/${key}.mp3`, import.meta.url).href);
+      a.crossOrigin = 'anonymous';
+      const src = c.createMediaElementSource(a),
+        f = c.createBiquadFilter(),
+        f2 = c.createBiquadFilter(),
+        wet = c.createGain(),
+        dry = c.createGain();
+      f.type = 'lowpass';
+      f.frequency.value = 380;
+      f.Q.value = 0.5;
+      f2.type = 'lowpass';
+      f2.frequency.value = 380;
+      f2.Q.value = 0.5;
       const vb = audioBus('voice');
-      src.connect(f); f.connect(f2); f2.connect(wet); wet.connect(vb);
-      src.connect(dry); dry.connect(vb);
-      const W = 0.55, X = 0.04;
-      wet.gain.value = W; dry.gain.value = 0;
+      src.connect(f);
+      f.connect(f2);
+      f2.connect(wet);
+      wet.connect(vb);
+      src.connect(dry);
+      dry.connect(vb);
+      const W = 0.55,
+        X = 0.04;
+      wet.gain.value = W;
+      dry.gain.value = 0;
       // entries are [t0, t1, wordId] (clear only once he knows that word) or [t0, t1, 'clear'] (always clear)
       // clear spans, merged where they touch or overlap: two words back to back (すみません、すみません) used to
       // schedule clashing ramps, and the second word stayed muffled
       const spans = [];
-      for (const [s, e] of ((voiceSpans && voiceSpans[key]) || []).filter(([, , id]) => id === 'clear' || known.has(id)).map(([s, e]) => [s, e]).sort((a, b) => a[0] - b[0])) {
+      for (const [s, e] of ((voiceSpans && voiceSpans[key]) || [])
+        .filter(([, , id]) => id === 'clear' || known.has(id))
+        .map(([s, e]) => [s, e])
+        .sort((a, b) => a[0] - b[0])) {
         const last = spans[spans.length - 1];
-        if (last && s <= last[1] + 2 * X + 0.02) last[1] = Math.max(last[1], e); else spans.push([s, e]);
+        if (last && s <= last[1] + 2 * X + 0.02) last[1] = Math.max(last[1], e);
+        else spans.push([s, e]);
       }
-      a.addEventListener('playing', () => {
-        const t0 = c.currentTime - a.currentTime;
-        for (const [s, e] of spans) {
-          dry.gain.setValueAtTime(0, t0 + s - X); dry.gain.linearRampToValueAtTime(1, t0 + s);
-          dry.gain.setValueAtTime(1, t0 + e); dry.gain.linearRampToValueAtTime(0, t0 + e + X);
-          wet.gain.setValueAtTime(W, t0 + s - X); wet.gain.linearRampToValueAtTime(0, t0 + s);
-          wet.gain.setValueAtTime(0, t0 + e); wet.gain.linearRampToValueAtTime(W, t0 + e + X);
-        }
-      }, { once: true });
-      if (clips._muffled) clips._muffled.pause(); clips._muffled = a;
-      for (const ev of ['ended', 'pause', 'error']) a.addEventListener(ev, function onEv() { if (paused && pausedClip === a) { a.addEventListener(ev, onEv, { once: true }); return; } end(); }, { once: true });
-      a.play().then(() => { began = true; started(a, gen); }).catch(end);
-    } catch { /* no audio */ }
+      a.addEventListener(
+        'playing',
+        () => {
+          const t0 = c.currentTime - a.currentTime;
+          for (const [s, e] of spans) {
+            dry.gain.setValueAtTime(0, t0 + s - X);
+            dry.gain.linearRampToValueAtTime(1, t0 + s);
+            dry.gain.setValueAtTime(1, t0 + e);
+            dry.gain.linearRampToValueAtTime(0, t0 + e + X);
+            wet.gain.setValueAtTime(W, t0 + s - X);
+            wet.gain.linearRampToValueAtTime(0, t0 + s);
+            wet.gain.setValueAtTime(0, t0 + e);
+            wet.gain.linearRampToValueAtTime(W, t0 + e + X);
+          }
+        },
+        { once: true },
+      );
+      if (clips._muffled) clips._muffled.pause();
+      clips._muffled = a;
+      for (const ev of ['ended', 'pause', 'error'])
+        a.addEventListener(
+          ev,
+          function onEv() {
+            if (paused && pausedClip === a) {
+              a.addEventListener(ev, onEv, { once: true });
+              return;
+            }
+            end();
+          },
+          { once: true },
+        );
+      a.play()
+        .then(() => {
+          began = true;
+          started(a, gen);
+        })
+        .catch(end);
+    } catch {
+      /* no audio */
+    }
     return;
   }
   try {
     const a = clips[key] || (clips[key] = new Audio(new URL(`../audio/${key}.mp3`, import.meta.url).href));
-    a._fading = false; a.pause(); a.currentTime = 0; a.playbackRate = rate; a.volume = clipVolume(key);
-    for (const ev of ['ended', 'pause', 'error']) a.addEventListener(ev, function onEv() { if (paused && pausedClip === a) { a.addEventListener(ev, onEv, { once: true }); return; } end(); }, { once: true });
-    a.play().then(() => { began = true; started(a, gen); }).catch(end);
-  } catch { /* no audio */ }
+    a._fading = false;
+    a.pause();
+    a.currentTime = 0;
+    a.playbackRate = rate;
+    a.volume = clipVolume(key);
+    for (const ev of ['ended', 'pause', 'error'])
+      a.addEventListener(
+        ev,
+        function onEv() {
+          if (paused && pausedClip === a) {
+            a.addEventListener(ev, onEv, { once: true });
+            return;
+          }
+          end();
+        },
+        { once: true },
+      );
+    a.play()
+      .then(() => {
+        began = true;
+        started(a, gen);
+      })
+      .catch(end);
+  } catch {
+    /* no audio */
+  }
 }
 // sound effects: feel's levelled sound files (sfx.js), through audioBus('sfx')
 // (loaded after this module: sfx.js imports ui.js for its buses, so a static import here would be a cycle)
-let SFX = null, AMB = null;
-import('./sfx.js').then((m) => { SFX = m; }); import('./ambience.js').then((m) => { AMB = m; });
-export function sfx(kind, o) { return SFX ? SFX.sfx(kind, o) : undefined; }
-export function stopSfx(kind, ms = 40) { return SFX ? SFX.stopSfx(kind, ms) : undefined; }
+let SFX = null,
+  AMB = null;
+import('./sfx.js').then((m) => {
+  SFX = m;
+});
+import('./ambience.js').then((m) => {
+  AMB = m;
+});
+export function sfx(kind, o) {
+  return SFX ? SFX.sfx(kind, o) : undefined;
+}
+export function stopSfx(kind, ms = 40) {
+  return SFX ? SFX.stopSfx(kind, ms) : undefined;
+}
 function noise(c, len) {
-  const n = c.createBufferSource(), buf = c.createBuffer(1, Math.ceil(c.sampleRate * len), c.sampleRate), d = buf.getChannelData(0);
+  const n = c.createBufferSource(),
+    buf = c.createBuffer(1, Math.ceil(c.sampleRate * len), c.sampleRate),
+    d = buf.getChannelData(0);
   for (let i = 0; i < d.length; i++) d[i] = Math.random() * 2 - 1;
-  n.buffer = buf; return n;
+  n.buffer = buf;
+  return n;
 }
 // a dull knock: a short burst of low-passed noise with a falling sine under it
 function thump(c, out, t, v, hz) {
-  const n = noise(c, 0.2), f = c.createBiquadFilter(), gg = c.createGain();
-  f.type = 'lowpass'; f.frequency.value = 320; gg.gain.setValueAtTime(v, t); gg.gain.exponentialRampToValueAtTime(0.0001, t + 0.16);
-  n.connect(f); f.connect(gg); gg.connect(out); n.start(t);
-  const o = c.createOscillator(), og = c.createGain(); o.frequency.setValueAtTime(hz * 1.6, t); o.frequency.exponentialRampToValueAtTime(hz, t + 0.08);
-  og.gain.setValueAtTime(v * 1.2, t); og.gain.exponentialRampToValueAtTime(0.0001, t + 0.22); o.connect(og); og.connect(out); o.start(t); o.stop(t + 0.25);
+  const n = noise(c, 0.2),
+    f = c.createBiquadFilter(),
+    gg = c.createGain();
+  f.type = 'lowpass';
+  f.frequency.value = 320;
+  gg.gain.setValueAtTime(v, t);
+  gg.gain.exponentialRampToValueAtTime(0.0001, t + 0.16);
+  n.connect(f);
+  f.connect(gg);
+  gg.connect(out);
+  n.start(t);
+  const o = c.createOscillator(),
+    og = c.createGain();
+  o.frequency.setValueAtTime(hz * 1.6, t);
+  o.frequency.exponentialRampToValueAtTime(hz, t + 0.08);
+  og.gain.setValueAtTime(v * 1.2, t);
+  og.gain.exponentialRampToValueAtTime(0.0001, t + 0.22);
+  o.connect(og);
+  og.connect(out);
+  o.start(t);
+  o.stop(t + 0.25);
 }
 
 // ---------- music ----------
 // Lyria loops (audio/music/*.mp3), one per place. Each loop is played as overlapping copies with a 2 s crossfade
 // so the seam never clicks; places crossfade over 2.5 s; voices duck the music while someone talks.
-const MUSIC_VOL = 0.2, DUCK = 0.4;
+const MUSIC_VOL = 0.2,
+  DUCK = 0.4;
 const music = { name: null, bus: null, duck: null, bufs: {}, cur: null, timer: 0 };
 async function musicBuf(name) {
-  if (!music.bufs[name]) music.bufs[name] = fetch(new URL(`../audio/music/${name}.mp3?v=${window.BUILD || ''}`, import.meta.url)).then((r) => r.arrayBuffer()).then((b) => ac().decodeAudioData(b));
+  if (!music.bufs[name])
+    music.bufs[name] = fetch(new URL(`../audio/music/${name}.mp3?v=${window.BUILD || ''}`, import.meta.url))
+      .then((r) => r.arrayBuffer())
+      .then((b) => ac().decodeAudioData(b));
   return music.bufs[name];
 }
 export async function playMusic(name) {
-  const c = ac(); if (!c || name === music.name) return;
+  const c = ac();
+  if (!c || name === music.name) return;
   music.name = name;
-  if (!music.bus) { music.bus = c.createGain(); music.duck = c.createGain(); music.bus.gain.value = MUSIC_VOL; music.bus.connect(music.duck); music.duck.connect(audioBus('music')); }
+  if (!music.bus) {
+    music.bus = c.createGain();
+    music.duck = c.createGain();
+    music.bus.gain.value = MUSIC_VOL;
+    music.bus.connect(music.duck);
+    music.duck.connect(audioBus('music'));
+  }
   const t = c.currentTime;
-  if (music.cur) { const old = music.cur; old.stopped = true; clearTimeout(old.timer); old.g.gain.cancelScheduledValues(t); old.g.gain.setValueAtTime(old.g.gain.value, t); old.g.gain.linearRampToValueAtTime(0, t + 2.5); for (const s of old.srcs) s.stop(t + 2.6); music.cur = null; }
+  if (music.cur) {
+    const old = music.cur;
+    old.stopped = true;
+    clearTimeout(old.timer);
+    old.g.gain.cancelScheduledValues(t);
+    old.g.gain.setValueAtTime(old.g.gain.value, t);
+    old.g.gain.linearRampToValueAtTime(0, t + 2.5);
+    for (const s of old.srcs) s.stop(t + 2.6);
+    music.cur = null;
+  }
   if (!name) return;
-  let buf; try { buf = await musicBuf(name); } catch { return; }
+  let buf;
+  try {
+    buf = await musicBuf(name);
+  } catch {
+    return;
+  }
   if (music.name !== name) return;
-  const g = c.createGain(); g.connect(music.bus);
+  const g = c.createGain();
+  g.connect(music.bus);
   const track = { g, srcs: [], stopped: false, timer: 0 };
   music.cur = track;
-  const X = 2, start = c.currentTime + 0.05;
-  g.gain.setValueAtTime(0, start); g.gain.linearRampToValueAtTime(1, start + 2.5);
+  const X = 2,
+    start = c.currentTime + 0.05;
+  g.gain.setValueAtTime(0, start);
+  g.gain.linearRampToValueAtTime(1, start + 2.5);
   const play = (at, fadeIn) => {
     if (track.stopped) return;
-    const s = c.createBufferSource(), sg = c.createGain(); s.buffer = buf; s.connect(sg); sg.connect(g);
+    const s = c.createBufferSource(),
+      sg = c.createGain();
+    s.buffer = buf;
+    s.connect(sg);
+    sg.connect(g);
     const end = at + buf.duration;
-    sg.gain.setValueAtTime(fadeIn ? 0 : 1, at); if (fadeIn) sg.gain.linearRampToValueAtTime(1, at + X);
-    sg.gain.setValueAtTime(1, end - X); sg.gain.linearRampToValueAtTime(0, end);
-    s.start(at); s.stop(end + 0.05);
-    track.srcs.push(s); if (track.srcs.length > 3) track.srcs.shift();
+    sg.gain.setValueAtTime(fadeIn ? 0 : 1, at);
+    if (fadeIn) sg.gain.linearRampToValueAtTime(1, at + X);
+    sg.gain.setValueAtTime(1, end - X);
+    sg.gain.linearRampToValueAtTime(0, end);
+    s.start(at);
+    s.stop(end + 0.05);
+    track.srcs.push(s);
+    if (track.srcs.length > 3) track.srcs.shift();
     const next = end - X;
     track.timer = setTimeout(() => play(next, true), Math.max(0, (next - c.currentTime - 1) * 1000));
   };
@@ -195,23 +433,40 @@ export async function playMusic(name) {
 let duckN = 0;
 function duckMusic(on) {
   AMB?.duck(on);
-  const c = actx; if (!c || !music.duck) return;
+  const c = actx;
+  if (!c || !music.duck) return;
   duckN = Math.max(0, duckN + (on ? 1 : -1));
-  const t = c.currentTime; music.duck.gain.cancelScheduledValues(t); music.duck.gain.setValueAtTime(music.duck.gain.value, t);
+  const t = c.currentTime;
+  music.duck.gain.cancelScheduledValues(t);
+  music.duck.gain.setValueAtTime(music.duck.gain.value, t);
   music.duck.gain.linearRampToValueAtTime(duckN ? DUCK : 1, t + (duckN ? 0.15 : 0.6));
 }
 function duckWhile(a) {
-  duckMusic(true); let done = false;
-  const off = () => { if (!done) { done = true; duckMusic(false); } };
-  a.addEventListener('ended', off, { once: true }); a.addEventListener('pause', off, { once: true }); a.addEventListener('error', off, { once: true });
+  duckMusic(true);
+  let done = false;
+  const off = () => {
+    if (!done) {
+      done = true;
+      duckMusic(false);
+    }
+  };
+  a.addEventListener('ended', off, { once: true });
+  a.addEventListener('pause', off, { once: true });
+  a.addEventListener('error', off, { once: true });
 }
 export function setMuted(m) {
-  muted = m; if (m) for (const a of Object.values(clips)) a.pause();
+  muted = m;
+  if (m) for (const a of Object.values(clips)) a.pause();
   setBus('master');
-  const b = document.getElementById('muteBtn'); if (b) b.classList.toggle('off', m);
+  const b = document.getElementById('muteBtn');
+  if (b) b.classList.toggle('off', m);
 }
-export function isMuted() { return muted; }
-export function unlockAudio() { ac(); }
+export function isMuted() {
+  return muted;
+}
+export function unlockAudio() {
+  ac();
+}
 
 // ---------- VN portraits ----------
 // Available expressions are declared in ui/portrait-data.js; missing files fall back to neutral.
@@ -219,64 +474,127 @@ export function unlockAudio() { ac(); }
 // All expressions of a person share the framing. Every portrait is placed from this: the same face height on screen,
 // the chin at the same height, the body cut at the waist.
 export const FACE = {
-  aoi: { W: 630, H: 810, f: [222, 196, 413, 389] }, eric: { W: 597, H: 768, f: [218, 211, 390, 402] },
-  guard: { W: 597, H: 768, f: [250, 162, 374, 300] }, kenji: { W: 597, H: 768, f: [229, 169, 371, 330] },
-  kuro: { W: 630, H: 809, f: [254, 325, 452, 525] }, kuroda: { W: 597, H: 768, f: [240, 154, 364, 313] },
-  mio: { W: 597, H: 768, f: [192, 214, 361, 383] }, emi: { W: 597, H: 768, f: [203, 159, 395, 349] }, mori: { W: 597, H: 768, f: [234, 171, 372, 339] },
+  aoi: { W: 630, H: 810, f: [222, 196, 413, 389] },
+  eric: { W: 597, H: 768, f: [218, 211, 390, 402] },
+  guard: { W: 597, H: 768, f: [250, 162, 374, 300] },
+  kenji: { W: 597, H: 768, f: [229, 169, 371, 330] },
+  kuro: { W: 630, H: 809, f: [254, 325, 452, 525] },
+  kuroda: { W: 597, H: 768, f: [240, 154, 364, 313] },
+  mio: { W: 597, H: 768, f: [192, 214, 361, 383] },
+  emi: { W: 597, H: 768, f: [203, 159, 395, 349] },
+  mori: { W: 597, H: 768, f: [234, 171, 372, 339] },
 };
-const EMOTE_FACE = { '?': ['suspicious', 'deadpan', 'stern'], '!': ['surprised', 'panicked', 'panic'], '♪': ['smile', 'grin', 'amused'], heart: ['smile', 'embarrassed', 'grin'], sweat: ['flustered', 'embarrassed', 'sheepish', 'panicked'], zzz: ['sleepy', 'tired'], '…': ['tired', 'deadpan'] };
+const EMOTE_FACE = {
+  '?': ['suspicious', 'deadpan', 'stern'],
+  '!': ['surprised', 'panicked', 'panic'],
+  '♪': ['smile', 'grin', 'amused'],
+  heart: ['smile', 'embarrassed', 'grin'],
+  sweat: ['flustered', 'embarrassed', 'sheepish', 'panicked'],
+  zzz: ['sleepy', 'tired'],
+  '…': ['tired', 'deadpan'],
+};
 const faceNow = {};
 let lastNpc = null;
-export function setFace(who, face) { faceNow[who] = face; }
-export function faceForEmote(who, kind) { const f = (EMOTE_FACE[kind] || []).find((x) => PORTRAITS[who] && PORTRAITS[who].includes(x)); if (f) faceNow[who] = f; }
-function faceOf(who, face) { const list = PORTRAITS[who]; if (!list) return null; return list.includes(face) ? face : list.includes(faceNow[who]) ? faceNow[who] : 'neutral'; }
+export function setFace(who, face) {
+  faceNow[who] = face;
+}
+export function faceForEmote(who, kind) {
+  const f = (EMOTE_FACE[kind] || []).find((x) => PORTRAITS[who] && PORTRAITS[who].includes(x));
+  if (f) faceNow[who] = f;
+}
+function faceOf(who, face) {
+  const list = PORTRAITS[who];
+  if (!list) return null;
+  return list.includes(face) ? face : list.includes(faceNow[who]) ? faceNow[who] : 'neutral';
+}
 function portraitSrc(who, face) {
   if (!PORTRAITS[who]) return null;
-  return new URL(`../assets/portraits/${who}-${faceOf(who, face)}.webp?v=${encodeURIComponent(window.BUILD || '')}`, import.meta.url).href;
+  return new URL(
+    `../assets/portraits/${who}-${faceOf(who, face)}.webp?v=${encodeURIComponent(window.BUILD || '')}`,
+    import.meta.url,
+  ).href;
 }
 const HOPS = new Set(['surprised', 'panicked', 'panic']);
 function showPortraits(t, whoId, face) {
-  const S = $('#stage'), L = S.querySelector('.por.left'), R = S.querySelector('.por.right');
+  const S = $('#stage'),
+    L = S.querySelector('.por.left'),
+    R = S.querySelector('.por.right');
   S.hidden = false;
-  if (!whoId) { L.hidden = R.hidden = true; return; }          // narration: no portrait
+  if (!whoId) {
+    L.hidden = R.hidden = true;
+    return;
+  } // narration: no portrait
   const set = (el, who, f, listen) => {
-    const src = portraitSrc(who, f); if (!src) { el.hidden = true; return; }
+    const src = portraitSrc(who, f);
+    if (!src) {
+      el.hidden = true;
+      return;
+    }
     const img = el.querySelector('img');
     if (img.getAttribute('src') !== src) {
-      img.onerror = () => { const n = portraitSrc(who, 'neutral'); if (img.getAttribute('src') !== n) { img.src = n; el.style.setProperty('--src', `url("${n}")`); } };
-      img.src = src; el.style.setProperty('--src', `url("${src}")`);
+      img.onerror = () => {
+        const n = portraitSrc(who, 'neutral');
+        if (img.getAttribute('src') !== n) {
+          img.src = n;
+          el.style.setProperty('--src', `url("${n}")`);
+        }
+      };
+      img.src = src;
+      el.style.setProperty('--src', `url("${src}")`);
       const fc = faceOf(who, f);
-      if (!listen && el.dataset.face !== fc && HOPS.has(fc)) { el.classList.remove('hop'); void el.offsetWidth; el.classList.add('hop'); }
+      if (!listen && el.dataset.face !== fc && HOPS.has(fc)) {
+        el.classList.remove('hop');
+        void el.offsetWidth;
+        el.classList.add('hop');
+      }
       el.dataset.face = fc;
     }
-    el.dataset.who = who; el.hidden = false; el.classList.toggle('listen', !!listen);
+    el.dataset.who = who;
+    el.hidden = false;
+    el.classList.toggle('listen', !!listen);
   };
   const phone = document.body.classList.contains('phone');
-  if (whoId === 'eric') { set(R, 'eric', face, false); if (!phone && lastNpc && PORTRAITS[lastNpc]) set(L, lastNpc, undefined, true); else L.hidden = true; }
-  else { lastNpc = whoId; set(L, whoId, face, false); if (!phone && PORTRAITS[whoId]) set(R, 'eric', undefined, true); else R.hidden = true; }
+  if (whoId === 'eric') {
+    set(R, 'eric', face, false);
+    if (!phone && lastNpc && PORTRAITS[lastNpc]) set(L, lastNpc, undefined, true);
+    else L.hidden = true;
+  } else {
+    lastNpc = whoId;
+    set(L, whoId, face, false);
+    if (!phone && PORTRAITS[whoId]) set(R, 'eric', undefined, true);
+    else R.hidden = true;
+  }
   if (!PORTRAITS[whoId]) L.hidden = true;
   layoutStage();
 }
 // Place each portrait from its face box: face height F on screen, chin at the same height for everyone, the body
 // cut at the waist by the bottom of the screen (desktop) or by the top of the solid band (phone).
 export function layoutStage() {
-  const S = $('#stage'); if (!S || S.hidden) return;
-  const phone = document.body.classList.contains('phone'), vw = innerWidth, vh = innerHeight;
+  const S = $('#stage');
+  if (!S || S.hidden) return;
+  const phone = document.body.classList.contains('phone'),
+    vw = innerWidth,
+    vh = innerHeight;
   const talk = $('#talk');
   const band = phone ? Math.max(170, (talk.hidden ? 0 : talk.offsetHeight) + 18) : 0;
   S.style.setProperty('--band', band + 'px');
   // phone: a small bust docked to the side, cut on the solid band (QA round 1: a phone portrait covered 60% of the scene)
   const F = phone ? Math.min(58, vh * 0.068) : Math.min(124, vh * 0.13);
-  const cutK = phone ? 1.55 : 2.25;                 // chin to the cut, in face heights (the waist on desktop)
+  const cutK = phone ? 1.55 : 2.25; // chin to the cut, in face heights (the waist on desktop)
   const base = vh - band;
   for (const el of S.querySelectorAll('.por')) {
-    const d = FACE[el.dataset.who]; if (!d || el.hidden) continue;
-    const s = F / (d.f[3] - d.f[1]), cx = (d.f[0] + d.f[2]) / 2;
-    const chin = base - cutK * F, top = chin - d.f[3] * s;
+    const d = FACE[el.dataset.who];
+    if (!d || el.hidden) continue;
+    const s = F / (d.f[3] - d.f[1]),
+      cx = (d.f[0] + d.f[2]) / 2;
+    const chin = base - cutK * F,
+      top = chin - d.f[3] * s;
     const left = el.classList.contains('left');
     const fx = phone ? vw * (left ? 0.2 : 0.8) : vw * (left ? 0.16 : 0.86);
-    el.style.width = d.W * s + 'px'; el.style.height = d.H * s + 'px';
-    el.style.left = fx - cx * s + 'px'; el.style.top = top + 'px';
+    el.style.width = d.W * s + 'px';
+    el.style.height = d.H * s + 'px';
+    el.style.left = fx - cx * s + 'px';
+    el.style.top = top + 'px';
     // how far above the cut the image itself ends (Eric's cut-out is shorter); that bottom edge is faded out
     el.style.setProperty('--short', Math.max(0, base - (top + d.H * s)) + 'px');
     el.classList.toggle('short', top + d.H * s < base - 2);
@@ -289,10 +607,23 @@ addEventListener('resize', () => layoutStage());
 // band grows with the text)
 let stageRaf = 0;
 function watchTalk() {
-  const t = $('#talk'); if (!t) { setTimeout(watchTalk, 100); return; }
+  const t = $('#talk');
+  if (!t) {
+    setTimeout(watchTalk, 100);
+    return;
+  }
   new MutationObserver(() => {
     cancelAnimationFrame(stageRaf);
-    stageRaf = requestAnimationFrame(() => { const S = $('#stage'); if (t.hidden) { S.hidden = true; return; } S.hidden = false; S.classList.toggle('narr', t.classList.contains('narr')); layoutStage(); });
+    stageRaf = requestAnimationFrame(() => {
+      const S = $('#stage');
+      if (t.hidden) {
+        S.hidden = true;
+        return;
+      }
+      S.hidden = false;
+      S.classList.toggle('narr', t.classList.contains('narr'));
+      layoutStage();
+    });
   }).observe(t, { attributes: true, childList: true, subtree: true, characterData: true });
 }
 setTimeout(watchTalk, 0);
@@ -301,30 +632,63 @@ setTimeout(watchTalk, 0);
 // Eric can't follow it: every character he doesn't know becomes a softened, shifting stand-in glyph, and
 // the words he does know (his phrases and commands, plus the line's `clear` list) stay sharp and glossed.
 // kana only: two stand-in glyphs side by side must never spell a real word (no kanji)
-const POOL = 'あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやゆよらりるれろわをんがぎぐげござじずぜぞだでどばびぶべぼぱぴぷぺぽアイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモラリルレロワン';
+const POOL =
+  'あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやゆよらりるれろわをんがぎぐげござじずぜぞだでどばびぶべぼぱぴぷぺぽアイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモラリルレロワン';
 // only sounds stay readable: real words like はい, うん, ええ, まあ, ほら are words he hasn't been taught, so they
 // blur like the rest (Jørgen: hai showed as a known word on day 1)
-const INTERJ = ['えっと', 'あのう', 'あの', 'ああ', 'あっ', 'えっ', 'おっ', 'うわ', 'わあ', 'あー', 'えー', 'あ', 'え', 'お', 'ん'];
+const INTERJ = [
+  'えっと',
+  'あのう',
+  'あの',
+  'ああ',
+  'あっ',
+  'えっ',
+  'おっ',
+  'うわ',
+  'わあ',
+  'あー',
+  'えー',
+  'あ',
+  'え',
+  'お',
+  'ん',
+];
 function heardHTML(text, clear = []) {
   // {id} words in an overheard line are sharp and glossed only once he's been taught them (typed, learned or
   // offered); seeing a word glossed somewhere (the train announcement's 本社) doesn't teach it
   text = text.replace(/\{(\w+)\}/g, (_, id) => (WORDS[id] ? WORDS[id].ja : id));
   const keep = [];
-  for (const id of known) { const w = WORDS[id]; if (!w) continue; for (const ja of [w.ja, ...(w.alias || [])]) keep.push({ ja, gl: `${w.ro}, ${w.en}`, known: true }); }
+  for (const id of known) {
+    const w = WORDS[id];
+    if (!w) continue;
+    for (const ja of [w.ja, ...(w.alias || [])]) keep.push({ ja, gl: `${w.ro}, ${w.en}`, known: true });
+  }
   // `clear` entries are readable for this line only: plain text, not styled as known, never added to what he knows
-  for (const c of clear || []) keep.push(typeof c === 'string' ? { ja: c } : { ja: c.ja, gl: [c.ro, c.en].filter(Boolean).join(', ') });
+  for (const c of clear || [])
+    keep.push(typeof c === 'string' ? { ja: c } : { ja: c.ja, gl: [c.ro, c.en].filter(Boolean).join(', ') });
   keep.sort((a, b) => b.ja.length - a.ja.length);
-  let out = '', i = 0;
+  let out = '',
+    i = 0;
   const esc = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;');
   const punct = /[\s、。！？!?…「」ー]/;
   while (i < text.length) {
     // interjections and sounds (あっ, えっ, うん...) are never hidden: only real words he doesn't know are
     if (i === 0 || punct.test(text[i - 1])) {
-      const it = INTERJ.find((w) => text.startsWith(w, i) && (i + w.length === text.length || punct.test(text[i + w.length])));
-      if (it) { out += `<span class="plain">${esc(it)}</span>`; i += it.length; continue; }
+      const it = INTERJ.find(
+        (w) => text.startsWith(w, i) && (i + w.length === text.length || punct.test(text[i + w.length])),
+      );
+      if (it) {
+        out += `<span class="plain">${esc(it)}</span>`;
+        i += it.length;
+        continue;
+      }
     }
     const k = keep.find((w) => text.startsWith(w.ja, i));
-    if (k) { out += `<span class="${k.known ? 'jp clear' : 'plain'}">${esc(k.ja)}</span>${k.gl ? ` <span class="gl">(${esc(k.gl)})</span>` : ''}`; i += k.ja.length; continue; }
+    if (k) {
+      out += `<span class="${k.known ? 'jp clear' : 'plain'}">${esc(k.ja)}</span>${k.gl ? ` <span class="gl">(${esc(k.gl)})</span>` : ''}`;
+      i += k.ja.length;
+      continue;
+    }
     const ch = text[i];
     if (/[\s、。！？!?…「」]/.test(ch)) out += esc(ch);
     else out += `<span class="gx" data-c="${esc(ch)}">${POOL[(ch.charCodeAt(0) * 7 + i) % POOL.length]}</span>`;
@@ -337,9 +701,19 @@ function scramble(line) {
   clearInterval(scrambleTimer);
   let n = 0;
   scrambleTimer = setInterval(() => {
-    if (!line.isConnected || !line.closest('#talk.heard')) { clearInterval(scrambleTimer); return; }
-    const g = line.querySelectorAll('.gx'); if (!g.length) { clearInterval(scrambleTimer); return; }
-    for (let k = 0; k < 3; k++) { const e = g[(n * 5 + k * 7) % g.length]; e.textContent = POOL[(Math.random() * POOL.length) | 0]; }
+    if (!line.isConnected || !line.closest('#talk.heard')) {
+      clearInterval(scrambleTimer);
+      return;
+    }
+    const g = line.querySelectorAll('.gx');
+    if (!g.length) {
+      clearInterval(scrambleTimer);
+      return;
+    }
+    for (let k = 0; k < 3; k++) {
+      const e = g[(n * 5 + k * 7) % g.length];
+      e.textContent = POOL[(Math.random() * POOL.length) | 0];
+    }
     n++;
   }, 140);
 }
@@ -353,7 +727,17 @@ function reveal(line, cps) {
     for (const c of [...n.childNodes]) {
       if (c.nodeType === 3) {
         const f = document.createDocumentFragment();
-        for (const ch of c.textContent) { if (/\s/.test(ch)) { f.appendChild(document.createTextNode(ch)); continue; } const sp = document.createElement('span'); sp.className = 'rv'; sp.textContent = ch; f.appendChild(sp); chars.push(sp); }
+        for (const ch of c.textContent) {
+          if (/\s/.test(ch)) {
+            f.appendChild(document.createTextNode(ch));
+            continue;
+          }
+          const sp = document.createElement('span');
+          sp.className = 'rv';
+          sp.textContent = ch;
+          f.appendChild(sp);
+          chars.push(sp);
+        }
         c.replaceWith(f);
       } else if (c.nodeType === 1 && c.tagName !== 'RT' && c.tagName !== 'svg') walk(c);
     }
@@ -362,18 +746,39 @@ function reveal(line, cps) {
   const r = { done: !chars.length, onDone: null };
   if (r.done) return r;
   line.classList.add('revealing');
-  let i = 0, last = performance.now(), raf = 0;
-  const finish = () => { cancelAnimationFrame(raf); for (; i < chars.length; i++) chars[i].classList.add('on'); line.classList.remove('revealing'); r.done = true; r.onDone && r.onDone(); };
+  let i = 0,
+    last = performance.now(),
+    raf = 0;
+  const finish = () => {
+    cancelAnimationFrame(raf);
+    for (; i < chars.length; i++) chars[i].classList.add('on');
+    line.classList.remove('revealing');
+    r.done = true;
+    r.onDone && r.onDone();
+  };
   const tick = (now) => {
     if (!line.isConnected) return;
-    if (paused) { last = now; raf = requestAnimationFrame(tick); return; }
+    if (paused) {
+      last = now;
+      raf = requestAnimationFrame(tick);
+      return;
+    }
     const n = Math.floor(((now - last) / 1000) * cps);
-    if (n > 0) { last += (n / cps) * 1000; for (let k = 0; k < n && i < chars.length; k++, i++) chars[i].classList.add('on'); }
-    if (i >= chars.length) finish(); else raf = requestAnimationFrame(tick);
+    if (n > 0) {
+      last += (n / cps) * 1000;
+      for (let k = 0; k < n && i < chars.length; k++, i++) chars[i].classList.add('on');
+    }
+    if (i >= chars.length) finish();
+    else raf = requestAnimationFrame(tick);
   };
   raf = requestAnimationFrame(tick);
   // hidden tabs stall rAF: make sure a line is never stuck half-written
-  setTimeout(() => { if (!r.done && line.isConnected) finish(); }, (chars.length / cps) * 1000 + 1500);
+  setTimeout(
+    () => {
+      if (!r.done && line.isConnected) finish();
+    },
+    (chars.length / cps) * 1000 + 1500,
+  );
   r.finish = finish;
   return r;
 }
@@ -381,18 +786,39 @@ const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 // a small play button after each taught word in a line: tap it (or the word) to hear the word again
 function addPlayButtons(line) {
   for (const w of line.querySelectorAll('.jp[data-w]')) {
-    const id = w.dataset.w; if (!WORDS[id] || !WORDS[id].voice) continue;
-    const b = document.createElement('button'); b.type = 'button'; b.className = 'wplay'; b.dataset.w = id;
+    const id = w.dataset.w;
+    if (!WORDS[id] || !WORDS[id].voice) continue;
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'wplay';
+    b.dataset.w = id;
     b.setAttribute('aria-label', `Hear ${WORDS[id].ro}`);
-    b.innerHTML = '<svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="10"/><path d="M8 6.2v7.6l6-3.8z"/></svg>';
+    b.innerHTML =
+      '<svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="10"/><path d="M8 6.2v7.6l6-3.8z"/></svg>';
     w.after(b);
   }
 }
 // slow clips for taught words (<voice>-slow), if the voice agent made them
 const slowClips = new Set();
-fetch(new URL('../audio/index.json?v=' + (window.BUILD || ''), import.meta.url)).then((r) => (r.ok ? r.json() : [])).then((l) => l.forEach((k) => { if (/-slow$/.test(k)) slowClips.add(k); })).catch(() => {});
-export function keyLabel(code) { return /^Key[A-Z]$/.test(code) ? code.slice(3) : /^Digit\d$/.test(code) ? code.slice(5) : code.replace(/^(Arrow)/, ''); }
-async function whileUnpaused(ms) { await sleep(ms); while (paused) await sleep(200); }
+fetch(new URL('../audio/index.json?v=' + (window.BUILD || ''), import.meta.url))
+  .then((r) => (r.ok ? r.json() : []))
+  .then((l) =>
+    l.forEach((k) => {
+      if (/-slow$/.test(k)) slowClips.add(k);
+    }),
+  )
+  .catch(() => {});
+export function keyLabel(code) {
+  return /^Key[A-Z]$/.test(code)
+    ? code.slice(3)
+    : /^Digit\d$/.test(code)
+      ? code.slice(5)
+      : code.replace(/^(Arrow)/, '');
+}
+async function whileUnpaused(ms) {
+  await sleep(ms);
+  while (paused) await sleep(200);
+}
 
 // ---------- layout ----------
 export const ui = {
@@ -444,41 +870,107 @@ export const ui = {
       <div id="end" hidden></div>
     `;
     $('#cmdsBtn').onclick = () => this.showCmds();
-    $('#cmdsPanel .close').onclick = () => { $('#cmdsPanel').hidden = true; };
-    $('#sayBtn').onclick = (e) => { e.stopPropagation(); this.onSay && this.onSay(); };
-    $('#giveBtn').onclick = (e) => { e.stopPropagation(); this.onGive && this.onGive(); };
-    $('#peopleBtn').onclick = () => { $('#peoplePanel ul').innerHTML = this.peopleHTML ? this.peopleHTML() : ''; $('#peoplePanel').hidden = false; };
-    $('#bagBtn').onclick = () => { $('#bagPanel').hidden = false; };
-    for (const id of ['#peoplePanel', '#bagPanel']) $(id + ' .close').onclick = () => { $(id).hidden = true; };
-    $('#sayMenu .cancel').onclick = () => { $('#sayMenu').hidden = true; this._sayRes && this._sayRes(null); };
-    $('#muteBtn').onclick = (e) => { e.stopPropagation(); setMuted(!isMuted()); $('#muteBtn').classList.toggle('off', isMuted()); };
+    $('#cmdsPanel .close').onclick = () => {
+      $('#cmdsPanel').hidden = true;
+    };
+    $('#sayBtn').onclick = (e) => {
+      e.stopPropagation();
+      this.onSay && this.onSay();
+    };
+    $('#giveBtn').onclick = (e) => {
+      e.stopPropagation();
+      this.onGive && this.onGive();
+    };
+    $('#peopleBtn').onclick = () => {
+      $('#peoplePanel ul').innerHTML = this.peopleHTML ? this.peopleHTML() : '';
+      $('#peoplePanel').hidden = false;
+    };
+    $('#bagBtn').onclick = () => {
+      $('#bagPanel').hidden = false;
+    };
+    for (const id of ['#peoplePanel', '#bagPanel'])
+      $(id + ' .close').onclick = () => {
+        $(id).hidden = true;
+      };
+    $('#sayMenu .cancel').onclick = () => {
+      $('#sayMenu').hidden = true;
+      this._sayRes && this._sayRes(null);
+    };
+    $('#muteBtn').onclick = (e) => {
+      e.stopPropagation();
+      setMuted(!isMuted());
+      $('#muteBtn').classList.toggle('off', isMuted());
+    };
     // the hint stays until it's closed or the goal moves on; the goal chip brings it back
     // the tip line inside the goal box: its close button hides it (the Say tip for good); the goal line brings a
     // closed story hint back
-    $('#hint .hclose').onclick = (e) => { e.stopPropagation(); if (this._sayTipHTML) this._sayTipOff?.(); else this.hideHint(); };
-    $('#goal .gl').onclick = (e) => { e.stopPropagation(); if (this._hintHTML) this.hint(this._hintHTML); else { const g = $('#goal'); g.classList.remove('pop'); void g.offsetWidth; g.classList.add('pop'); } };
+    $('#hint .hclose').onclick = (e) => {
+      e.stopPropagation();
+      if (this._sayTipHTML) this._sayTipOff?.();
+      else this.hideHint();
+    };
+    $('#goal .gl').onclick = (e) => {
+      e.stopPropagation();
+      if (this._hintHTML) this.hint(this._hintHTML);
+      else {
+        const g = $('#goal');
+        g.classList.remove('pop');
+        void g.offsetWidth;
+        g.classList.add('pop');
+      }
+    };
     this.setSayKey(settings.keySay);
-    onSettings((k, v) => { if (k === 'keySay') this.setSayKey(v); });
+    onSettings((k, v) => {
+      if (k === 'keySay') this.setSayKey(v);
+    });
     // advancing the talk panel: tap anywhere on it, or Space/Enter
     // The whole screen moves the story on while a line is up (Jørgen: the tiny arrow was hard to hit). A tap on a
     // taught word plays it instead. While the story is busy (a walk, a door) a tap shows the wait marker instead of
     // doing nothing, and asks main.js to hurry the scripted move along (game.skip, if it has one).
     const tapTalk = (e) => {
       // the play button is a <button>: check it before the button guard below, or it does nothing
-      const pb = e.target.closest('.wplay'); if (pb) { e.stopPropagation(); e.preventDefault(); this.sayWord(pb.dataset.w, pb); return; }
+      const pb = e.target.closest('.wplay');
+      if (pb) {
+        e.stopPropagation();
+        e.preventDefault();
+        this.sayWord(pb.dataset.w, pb);
+        return;
+      }
       if (e.target.closest('.chip, .tp-in, button')) return;
-      const w = e.target.closest('.jp[data-w]'); if (w) { e.stopPropagation(); e.preventDefault(); this.sayWord(w.dataset.w, w.nextElementSibling && w.nextElementSibling.classList.contains('wplay') ? w.nextElementSibling : w); return; }
+      const w = e.target.closest('.jp[data-w]');
+      if (w) {
+        e.stopPropagation();
+        e.preventDefault();
+        this.sayWord(
+          w.dataset.w,
+          w.nextElementSibling && w.nextElementSibling.classList.contains('wplay') ? w.nextElementSibling : w,
+        );
+        return;
+      }
       e.stopPropagation();
-      if (this._advance) { this._advance(); return; }
+      if (this._advance) {
+        this._advance();
+        return;
+      }
       this.waitPulse(e.clientX, e.clientY);
     };
     $('#talk').addEventListener('pointerdown', tapTalk);
     $('#talkHit').addEventListener('pointerdown', tapTalk);
     setInterval(() => this.syncTalkState(), 80);
     window.addEventListener('keydown', (e) => {
-      if (e.code === 'Space' || e.code === 'Enter') { if (this._advance) { e.preventDefault(); this._advance(); } }
-      if (this._chipKeys && /^Digit[1-9]$/.test(e.code)) { const b = this._chipKeys[+e.code.slice(5) - 1]; if (b) b.click(); }
-      else if (this._sayKeys && /^Digit[1-9]$/.test(e.code)) { const b = this._sayKeys[+e.code.slice(5) - 1]; if (b) b.click(); }
+      if (e.code === 'Space' || e.code === 'Enter') {
+        if (this._advance) {
+          e.preventDefault();
+          this._advance();
+        }
+      }
+      if (this._chipKeys && /^Digit[1-9]$/.test(e.code)) {
+        const b = this._chipKeys[+e.code.slice(5) - 1];
+        if (b) b.click();
+      } else if (this._sayKeys && /^Digit[1-9]$/.test(e.code)) {
+        const b = this._sayKeys[+e.code.slice(5) - 1];
+        if (b) b.click();
+      }
       if (e.code === 'Escape' && !$('#sayMenu').hidden) $('#sayMenu .cancel').click();
     });
   },
@@ -487,24 +979,52 @@ export const ui = {
   goal(text) {
     const g = $('#goal');
     // onboarding (notes/ONBOARDING.md rule 5): no goal until talking has been taught; it shows then
-    if (window.__onboard && window.__onboard.holdGoal && text) { this._heldGoal = text; this.goalText = text; g.hidden = true; return; }
+    if (window.__onboard && window.__onboard.holdGoal && text) {
+      this._heldGoal = text;
+      this.goalText = text;
+      g.hidden = true;
+      return;
+    }
     this._heldGoal = '';
     const was = this._shownGoal || '';
     this._shownGoal = text || '';
     this.goalText = text || '';
-    if (text !== was) { this._hintHTML = ''; this.hideHint(); }
+    if (text !== was) {
+      this._hintHTML = '';
+      this.hideHint();
+    }
     g.classList.toggle('nogoal', !text);
-    if (!text) { this._syncGoalBox(); return; }
+    if (!text) {
+      this._syncGoalBox();
+      return;
+    }
     g.querySelector('.t').innerHTML = lineHTML(text, { count: false });
     g.querySelector('.gl').setAttribute('aria-label', 'Goal: ' + g.querySelector('.t').textContent);
     this._syncGoalBox();
-    if (text !== was) { g.classList.remove('pop'); void g.offsetWidth; g.classList.add('pop'); }
+    if (text !== was) {
+      g.classList.remove('pop');
+      void g.offsetWidth;
+      g.classList.add('pop');
+    }
   },
   // a side goal: a second, smaller line under the main one (QA round 1: a side poke replaced the main goal)
-  sideGoal(text) { const g = $('#goal2'); if (!g) return; this.sideText = text || ''; if (!text) { g.hidden = true; this._syncGoalBox(); return; } g.hidden = false; g.querySelector('.t').innerHTML = lineHTML(text, { count: false }); this._syncGoalBox(); },
+  sideGoal(text) {
+    const g = $('#goal2');
+    if (!g) return;
+    this.sideText = text || '';
+    if (!text) {
+      g.hidden = true;
+      this._syncGoalBox();
+      return;
+    }
+    g.hidden = false;
+    g.querySelector('.t').innerHTML = lineHTML(text, { count: false });
+    this._syncGoalBox();
+  },
   // the goal box (top left) holds the goal line, a side goal and the current tip; it shows while any of them does
   _syncGoalBox() {
-    const g = $('#goal'); if (!g) return;
+    const g = $('#goal');
+    if (!g) return;
     const held = window.__onboard && window.__onboard.holdGoal && this._heldGoal;
     const any = (!held && !!this._shownGoal) || !$('#goal2').hidden || !$('#hint').hidden;
     g.hidden = !any;
@@ -512,63 +1032,127 @@ export const ui = {
   },
   // on desktop the notice sits under the goal box, which grows while a tip shows
   _placeToast() {
-    const t = $('#toast'), g = $('#goal'); if (!t || document.body.classList.contains('phone')) return;
+    const t = $('#toast'),
+      g = $('#goal');
+    if (!t || document.body.classList.contains('phone')) return;
     const z = +getComputedStyle(document.documentElement).getPropertyValue('--ui') || 1;
     t.style.top = g && !g.hidden && g.offsetParent ? Math.round(g.getBoundingClientRect().bottom / z + 8) + 'px' : '';
   },
-  releaseGoal() { if (this._heldGoal) { const t = this._heldGoal; this._heldGoal = ''; this.goal(t); } },
-  setSayKey(code) { const k = $('#sayBtn .key'); if (k) k.textContent = keyLabel(code || 'KeyQ'); },
+  releaseGoal() {
+    if (this._heldGoal) {
+      const t = this._heldGoal;
+      this._heldGoal = '';
+      this.goal(t);
+    }
+  },
+  setSayKey(code) {
+    const k = $('#sayBtn .key');
+    if (k) k.textContent = keyLabel(code || 'KeyQ');
+  },
   refreshWords() {
     const b = $('#cmdsBtn');
     b.hidden = known.size === 0;
     b.querySelector('.n').textContent = known.size;
   },
   showCmds() {
-    const row = (id) => { const w = WORDS[id]; return `<li class="wrow">${iconHTML(id)}<span class="cw"><span class="jp">${w.ja}</span><span class="rd">${w.ro} · ${w.en}</span>${baseHTML(id)}</span>${pipsHTML(id)}</li>`; };
-    const ph = PHRASES.filter((id) => known.has(id)), cm = COMMANDS.filter((id) => known.has(id));
+    const row = (id) => {
+      const w = WORDS[id];
+      return `<li class="wrow">${iconHTML(id)}<span class="cw"><span class="jp">${w.ja}</span><span class="rd">${w.ro} · ${w.en}</span>${baseHTML(id)}</span>${pipsHTML(id)}</li>`;
+    };
+    const ph = PHRASES.filter((id) => known.has(id)),
+      cm = COMMANDS.filter((id) => known.has(id));
     // words he understands but doesn't say (外人 gaijin): no practice marks, they never go in the Say menu
     const wd = [...known].filter((id) => WORDS[id] && !PHRASES.includes(id) && !COMMANDS.includes(id));
-    const wrow = (id) => { const w = WORDS[id]; return `<li class="wrow"><span class="cw"><span class="jp">${w.ja}</span><span class="rd">${w.ro} · ${w.en}</span></span></li>`; };
-    $('#cmdsPanel ul').innerHTML = (ph.length ? `<li class="sec">Phrases</li>${ph.map(row).join('')}` : '') + (cm.length ? `<li class="sec">Commands <span>(they make old machines listen)</span></li><li class="fnote">${FORM_NOTE.te}</li>${cm.map(row).join('')}` : '') + (wd.length ? `<li class="sec">Words</li>${wd.map(wrow).join('')}` : '');
+    const wrow = (id) => {
+      const w = WORDS[id];
+      return `<li class="wrow"><span class="cw"><span class="jp">${w.ja}</span><span class="rd">${w.ro} · ${w.en}</span></span></li>`;
+    };
+    $('#cmdsPanel ul').innerHTML =
+      (ph.length ? `<li class="sec">Phrases</li>${ph.map(row).join('')}` : '') +
+      (cm.length
+        ? `<li class="sec">Commands <span>(they make old machines listen)</span></li><li class="fnote">${FORM_NOTE.te}</li>${cm.map(row).join('')}`
+        : '') +
+      (wd.length ? `<li class="sec">Words</li>${wd.map(wrow).join('')}` : '');
     $('#cmdsPanel').hidden = false;
   },
   // the Say menu: resolves with a command id or null
-  closeSayMenu() { const m = $('#sayMenu'); if (m && !m.hidden) { m.hidden = true; this._sayKeys = null; if (this._sayRes) { const r = this._sayRes; this._sayRes = null; r(null); } } },
+  closeSayMenu() {
+    const m = $('#sayMenu');
+    if (m && !m.hidden) {
+      m.hidden = true;
+      this._sayKeys = null;
+      if (this._sayRes) {
+        const r = this._sayRes;
+        this._sayRes = null;
+        r(null);
+      }
+    }
+  },
   sayMenu(targetName) {
     this._sayTipOff?.();
     return new Promise((res) => {
       const m = $('#sayMenu');
       m.querySelector('.head').innerHTML = targetName ? `Say to <b>${targetName}</b>` : 'Say';
-      const list = m.querySelector('.list'); list.innerHTML = '';
+      const list = m.querySelector('.list');
+      list.innerHTML = '';
       let n = 0;
-      for (const [title, ids] of [['Phrases', PHRASES], ['Commands', COMMANDS]]) {
-        const have = ids.filter((id) => known.has(id)); if (!have.length) continue;
+      for (const [title, ids] of [
+        ['Phrases', PHRASES],
+        ['Commands', COMMANDS],
+      ]) {
+        const have = ids.filter((id) => known.has(id));
+        if (!have.length) continue;
         list.appendChild(el('div', 'sec', title));
         for (const id of have) {
-          const b = el('button', 'cmd' + (WORDS[id].phrase ? ' phrase' : '') + (needsPractice(id) ? ' practice' : ''), `<span class="k">${++n}</span>${cmdHTML(id)}${pipsHTML(id)}`); b.type = 'button';
-          b.onclick = (e) => { e.stopPropagation(); m.hidden = true; this._sayKeys = null; res(id); };
+          const b = el(
+            'button',
+            'cmd' + (WORDS[id].phrase ? ' phrase' : '') + (needsPractice(id) ? ' practice' : ''),
+            `<span class="k">${++n}</span>${cmdHTML(id)}${pipsHTML(id)}`,
+          );
+          b.type = 'button';
+          b.onclick = (e) => {
+            e.stopPropagation();
+            m.hidden = true;
+            this._sayKeys = null;
+            res(id);
+          };
           list.appendChild(b);
         }
       }
       this._sayKeys = [...list.querySelectorAll('button.cmd')];
-      this._sayRes = (v) => { this._sayKeys = null; res(v); };
+      this._sayRes = (v) => {
+        this._sayKeys = null;
+        res(v);
+      };
       m.hidden = false;
     });
   },
   // the first time Eric knows a word: the Say button pulses and a short tip points at it
   introSay() {
     // once per game (flag say_tip), worded for the input in use, closed by the first Say (QA round 1)
-    const F = window.__game && window.__game.flagsRef; if (F && F.say_tip) return;
+    const F = window.__game && window.__game.flagsRef;
+    if (F && F.say_tip) return;
     const touch = document.body.classList.contains('phone') || matchMedia('(pointer: coarse)').matches;
     const key = keyLabel((settings && settings.keySay) || 'KeyQ');
-    this._sayTipHTML = touch ? 'Tap <b>Say</b> to say a word you know.' : `Press <span class="k">${key}</span> to say a word you know.`;
-    this.sayIntro = true; this._showTip();
+    this._sayTipHTML = touch
+      ? 'Tap <b>Say</b> to say a word you know.'
+      : `Press <span class="k">${key}</span> to say a word you know.`;
+    this.sayIntro = true;
+    this._showTip();
     // closing it (or the first Say) puts back the story hint it covered, if that was still open
-    const off = () => { this._sayTipHTML = ''; this.sayIntro = false; this._sayTipOff = null; if (F) F.say_tip = true; this._showTip(); };
+    const off = () => {
+      this._sayTipHTML = '';
+      this.sayIntro = false;
+      this._sayTipOff = null;
+      if (F) F.say_tip = true;
+      this._showTip();
+    };
     this._sayTipOff = off;
   },
 
-  sayReady(on) { $('#sayBtn').classList.toggle('ready', !!on); },
+  sayReady(on) {
+    $('#sayBtn').classList.toggle('ready', !!on);
+  },
   setSayTarget() {},
   // the Say button sits beside whoever or whatever Eric can talk to, only when a word can be used there
   // The action menu (Jørgen's playtest: Talk and Say were separate popups that came and went on their own). One small
@@ -577,21 +1161,45 @@ export const ui = {
   // with where the Say target is and whether a word does something there.
   placeSay(x, y, show) {
     $('#sayBtn').hidden = true;
-    const act = $('#actMenu'), g = window.__game; if (!act || !g || !g.place) return;
-    const blocked = !$('#sayMenu').hidden || !$('#cmdsPanel').hidden || [...document.querySelectorAll('.panel')].some((p) => !p.hidden) || document.body.classList.contains('busy') || document.body.classList.contains('trip') || this.talking;
+    const act = $('#actMenu'),
+      g = window.__game;
+    if (!act || !g || !g.place) return;
+    const blocked =
+      !$('#sayMenu').hidden ||
+      !$('#cmdsPanel').hidden ||
+      [...document.querySelectorAll('.panel')].some((p) => !p.hidden) ||
+      document.body.classList.contains('busy') ||
+      document.body.classList.contains('trip') ||
+      this.talking;
     // only the target in reach (notes/ONBOARDING.md rule 4): never something across the room
-    const target = g.near, st = g.sayTarget;
+    const target = g.near,
+      st = g.sayTarget;
     const obw = window.__onboard;
-    if (!target || blocked || (obw && obw.active && !obw.moved)) { if (!act.hidden) act.hidden = true; this._actKey = ''; return; }
+    if (!target || blocked || (obw && obw.active && !obw.moved)) {
+      if (!act.hidden) act.hidden = true;
+      this._actKey = '';
+      return;
+    }
     const ob = window.__onboard || {};
     const phone = document.body.classList.contains('phone');
-    const verb = target.verb || (/person/.test(target.kind || '') ? 'Talk' : 'Look'), name = target.label || '';
+    const verb = target.verb || (/person/.test(target.kind || '') ? 'Talk' : 'Look'),
+      name = target.label || '';
     const isGoal = !!(target.goal && target.goal());
     // Say shows for this target when a word does something here; the first time only at the goal (the cat)
     const sayHere = show && st === target && (ob.sayUsed || !ob.active || isGoal);
     const uses = ob.uses || 0;
     const cyc = !ob.active && this.cycleInfo && this.cycleInfo.n > 1 ? this.cycleInfo : null;
-    const key = [target.id, verb, name, sayHere, cyc ? cyc.i + '/' + cyc.n : '', phone, settings.keySay, Math.min(uses, 5), ob.sayUsed ? 1 : 0].join('|');
+    const key = [
+      target.id,
+      verb,
+      name,
+      sayHere,
+      cyc ? cyc.i + '/' + cyc.n : '',
+      phone,
+      settings.keySay,
+      Math.min(uses, 5),
+      ob.sayUsed ? 1 : 0,
+    ].join('|');
     if (key !== this._actKey) {
       this._actKey = key;
       // Jørgen: "the interaction box is also not very pretty". The name on top, then one row per action: a key cap
@@ -600,26 +1208,54 @@ export const ui = {
       const k = (c) => (phone ? '' : `<span class="k">${c}</span>`);
       const withVerb = phone || uses < 2 || !name;
       const head = withVerb && name ? `<div class="hd">${name}</div>` : '';
-      const useFace = withVerb ? `${k('E')}<span class="lb">${verb}</span>` : `${uses < 5 ? k('E') : ''}<span class="lb">${name}</span>`;
-      act.innerHTML = head + `<button type="button" class="act use${withVerb ? '' : ' named'}">${useFace}</button>` +
-        (sayHere ? `<button type="button" class="act say${ob.sayUsed ? '' : ' first'}">${k(keyLabel(settings.keySay || 'KeyQ'))}<span class="lb">Say a word</span></button>` : '') +
-        (cyc ? `<button type="button" class="act next">${k('Tab')}<span class="lb">Next</span><span class="ct">${cyc.i + 1} of ${cyc.n}</span></button>` : '');
-      act.querySelector('.use')?.addEventListener('click', (e) => { e.stopPropagation(); g.use(g.near || target); });
-      act.querySelector('.say')?.addEventListener('click', (e) => { e.stopPropagation(); this.onSay && this.onSay(); });
-      act.querySelector('.next')?.addEventListener('click', (e) => { e.stopPropagation(); this.cycleInfo?.next(); });
+      const useFace = withVerb
+        ? `${k('E')}<span class="lb">${verb}</span>`
+        : `${uses < 5 ? k('E') : ''}<span class="lb">${name}</span>`;
+      act.innerHTML =
+        head +
+        `<button type="button" class="act use${withVerb ? '' : ' named'}">${useFace}</button>` +
+        (sayHere
+          ? `<button type="button" class="act say${ob.sayUsed ? '' : ' first'}">${k(keyLabel(settings.keySay || 'KeyQ'))}<span class="lb">Say a word</span></button>`
+          : '') +
+        (cyc
+          ? `<button type="button" class="act next">${k('Tab')}<span class="lb">Next</span><span class="ct">${cyc.i + 1} of ${cyc.n}</span></button>`
+          : '');
+      act.querySelector('.use')?.addEventListener('click', (e) => {
+        e.stopPropagation();
+        g.use(g.near || target);
+      });
+      act.querySelector('.say')?.addEventListener('click', (e) => {
+        e.stopPropagation();
+        this.onSay && this.onSay();
+      });
+      act.querySelector('.next')?.addEventListener('click', (e) => {
+        e.stopPropagation();
+        this.cycleInfo?.next();
+      });
     }
     if (act.hidden) act.hidden = false;
     // beside the target, level with its head: never over the target itself; flips to the left near the right edge
-    const V = g.place.camera.position.constructor, v = target.anchor(new V()).project(g.place.camera);
-    const px = ((v.x + 1) / 2) * innerWidth, py = ((1 - v.y) / 2) * innerHeight;
-    const sc = phone ? 1 : (+getComputedStyle(document.documentElement).getPropertyValue('--ui') || 1);
-    const W = innerWidth, H = innerHeight, aw = (act.offsetWidth || 180) * sc, ah = (act.offsetHeight || 50) * sc;
-    const gap = 22 * sc, flip = px + gap + aw > W - 8;
-    let ax = flip ? px - gap - aw : px + gap, ay = py - ah / 2;
-    ax = Math.max(8, Math.min(W - aw - 8, ax)); ay = Math.max((phone ? 60 : 64) * sc, Math.min(H - ah - 12, ay));
+    const V = g.place.camera.position.constructor,
+      v = target.anchor(new V()).project(g.place.camera);
+    const px = ((v.x + 1) / 2) * innerWidth,
+      py = ((1 - v.y) / 2) * innerHeight;
+    const sc = phone ? 1 : +getComputedStyle(document.documentElement).getPropertyValue('--ui') || 1;
+    const W = innerWidth,
+      H = innerHeight,
+      aw = (act.offsetWidth || 180) * sc,
+      ah = (act.offsetHeight || 50) * sc;
+    const gap = 22 * sc,
+      flip = px + gap + aw > W - 8;
+    let ax = flip ? px - gap - aw : px + gap,
+      ay = py - ah / 2;
+    ax = Math.max(8, Math.min(W - aw - 8, ax));
+    ay = Math.max((phone ? 60 : 64) * sc, Math.min(H - ah - 12, ay));
     // never under the goal box (it grows with a tip): drop below it
     const gb = $('#goal');
-    if (gb && !gb.hidden && gb.offsetParent) { const q = gb.getBoundingClientRect(); if (ax < q.right + 6 && ax + aw > q.left && ay < q.bottom + 6 && ay + ah > q.top) ay = q.bottom + 8; }
+    if (gb && !gb.hidden && gb.offsetParent) {
+      const q = gb.getBoundingClientRect();
+      if (ax < q.right + 6 && ax + aw > q.left && ay < q.bottom + 6 && ay + ah > q.top) ay = q.bottom + 8;
+    }
     act.style.transform = `translate(${Math.round(ax)}px, ${Math.round(ay)}px) scale(${sc})`;
     act.classList.toggle('flip', flip);
     // the small pointer on the box's near side sits level with the target, wherever the box was clamped to
@@ -630,43 +1266,82 @@ export const ui = {
   // Tips live in the goal box, as a second line under the goal (Jørgen: one place for goal and tips). One tip at a
   // time: the Say tip while it's up, else the story hint.
   hint(html) {
-    if (!html) { this.hideHint(); return; }
+    if (!html) {
+      this.hideHint();
+      return;
+    }
     // onboarding: the first screen has one line only (the controls); story hints wait until talking is taught
     if (window.__onboard && window.__onboard.holdHints) return;
-    this._hintHTML = html; this._hintOpen = true;
+    this._hintHTML = html;
+    this._hintOpen = true;
     this._showTip();
   },
-  hideHint() { this._hintOpen = false; this._showTip(); },
+  hideHint() {
+    this._hintOpen = false;
+    this._showTip();
+  },
   _showTip() {
-    const h = $('#hint'); if (!h) return;
+    const h = $('#hint');
+    if (!h) return;
     const html = this._sayTipHTML || (this._hintOpen && this._hintHTML) || '';
     const was = h.hidden ? '' : h.dataset.tip || '';
     h.hidden = !html;
-    if (html && html !== was) { h.querySelector('.hx').innerHTML = html; h.classList.remove('in'); void h.offsetWidth; h.classList.add('in'); }
+    if (html && html !== was) {
+      h.querySelector('.hx').innerHTML = html;
+      h.classList.remove('in');
+      void h.offsetWidth;
+      h.classList.add('in');
+    }
     h.dataset.tip = html;
     h.querySelector('.hclose').setAttribute('aria-label', this._sayTipHTML ? 'Got it' : 'Hide tip');
-    const k = $('#goal .hk'); if (k) k.hidden = !(this._hintHTML && !html);
+    const k = $('#goal .hk');
+    if (k) k.hidden = !(this._hintHTML && !html);
     this._syncGoalBox();
   },
   // A notice (a new word, something picked up) stays until the player's next action after it has been up a moment:
   // a tap, a click or a key anywhere. Nothing is swallowed; the action does what it would anyway.
   toast(html) {
-    const t = $('#toast'); t.innerHTML = html; t.hidden = false; t.classList.remove('in'); void t.offsetWidth; t.classList.add('in');
+    const t = $('#toast');
+    t.innerHTML = html;
+    t.hidden = false;
+    t.classList.remove('in');
+    void t.offsetWidth;
+    t.classList.add('in');
     this._placeToast();
     const id = (this._toastId = (this._toastId || 0) + 1);
     const arm = () => {
-      const off = (e) => { if (e.type === 'keydown' && /^(Shift|Control|Alt|Meta)/.test(e.key)) return; removeEventListener('pointerdown', off, true); removeEventListener('keydown', off, true); if (this._toastId === id) t.hidden = true; };
-      addEventListener('pointerdown', off, true); addEventListener('keydown', off, true);
+      const off = (e) => {
+        if (e.type === 'keydown' && /^(Shift|Control|Alt|Meta)/.test(e.key)) return;
+        removeEventListener('pointerdown', off, true);
+        removeEventListener('keydown', off, true);
+        if (this._toastId === id) t.hidden = true;
+      };
+      addEventListener('pointerdown', off, true);
+      addEventListener('keydown', off, true);
     };
-    if (this.auto) { t.hidden = true; return; }
+    if (this.auto) {
+      t.hidden = true;
+      return;
+    }
     // armed after a beat, so the tap that made it appear doesn't also clear it
-    new Promise((r) => setTimeout(r, 1200)).then(() => { if (this._toastId === id && !t.hidden) arm(); });
+    new Promise((r) => setTimeout(r, 1200)).then(() => {
+      if (this._toastId === id && !t.hidden) arm();
+    });
   },
   board(text, { voiceKey } = {}) {
     const b = $('#board');
-    if (!text) { b.classList.remove('in'); setTimeout(() => { if (!b.classList.contains('in')) b.hidden = true; }, 400); return; }
-    b.hidden = false; b.querySelector('.led').innerHTML = lineHTML(text);
-    b.classList.remove('in'); void b.offsetWidth; b.classList.add('in');
+    if (!text) {
+      b.classList.remove('in');
+      setTimeout(() => {
+        if (!b.classList.contains('in')) b.hidden = true;
+      }, 400);
+      return;
+    }
+    b.hidden = false;
+    b.querySelector('.led').innerHTML = lineHTML(text);
+    b.classList.remove('in');
+    void b.offsetWidth;
+    b.classList.add('in');
     this.refreshWords();
     if (voiceKey) voice(voiceKey);
   },
@@ -676,38 +1351,82 @@ export const ui = {
       const t = $('#talk');
       showPortraits(t, speaker ? whoId : null, face);
       t.classList.toggle('heard', !!overheard);
-      t.hidden = false; t.classList.toggle('narr', !speaker); t.classList.toggle('phone', !!(speaker && speaker.phone));
+      t.hidden = false;
+      t.classList.toggle('narr', !speaker);
+      t.classList.toggle('phone', !!(speaker && speaker.phone));
       const who = t.querySelector('.who');
-      who.innerHTML = speaker ? `<span class="nm" style="--c:${speaker.color || '#8fa3c0'}">${speaker.name}</span>${speaker.role ? `<span class="rl">${speaker.role}</span>` : ''}` : '';
+      who.innerHTML = speaker
+        ? `<span class="nm" style="--c:${speaker.color || '#8fa3c0'}">${speaker.name}</span>${speaker.role ? `<span class="rl">${speaker.role}</span>` : ''}`
+        : '';
       const lineEl = t.querySelector('.line');
       lineEl.innerHTML = overheard ? heardHTML(text, clear) : lineHTML(text);
       if (!overheard) addPlayButtons(lineEl);
       t.querySelector('.chips').innerHTML = '';
       const more = t.querySelector('.more');
       more.hidden = false;
-      t.classList.remove('in'); void t.offsetWidth; t.classList.add('in');
+      t.classList.remove('in');
+      void t.offsetWidth;
+      t.classList.add('in');
       this.refreshWords();
       if (overheard) scramble(lineEl);
       const spoken = voiceKey ? voice(voiceKey, { muffle: !!overheard }) : null;
       const started = performance.now();
-      this._lines = (this._lines || 0) + 1;   // the continue hint shows with words for the first few lines
-      if (this.auto) { setTimeout(() => { this._advance = null; stopVoice(); res(); }, 15); return; }
+      this._lines = (this._lines || 0) + 1; // the continue hint shows with words for the first few lines
+      if (this.auto) {
+        setTimeout(() => {
+          this._advance = null;
+          stopVoice();
+          res();
+        }, 15);
+        return;
+      }
       const cps = CPS[settings.textSpeed] || 0;
       const rv = !overheard && cps ? reveal(lineEl, cps) : { done: true };
-      if (!rv.done) { more.hidden = true; rv.onDone = () => { more.hidden = false; }; }
-      const adv = this._advance = () => {
+      if (!rv.done) {
+        more.hidden = true;
+        rv.onDone = () => {
+          more.hidden = false;
+        };
+      }
+      const adv = (this._advance = () => {
         if (performance.now() - started < 250) return;
-        if (!rv.done) { rv.finish(); return; }          // first tap finishes the line, the next one moves on
-        this._advance = null; stopVoice(); sfx('tap'); res();
-      };
-      void auto;   // lines never move on by a timer of their own; only the player's auto-advance setting does that
+        if (!rv.done) {
+          rv.finish();
+          return;
+        } // first tap finishes the line, the next one moves on
+        this._advance = null;
+        stopVoice();
+        sfx('tap');
+        res();
+      });
+      void auto; // lines never move on by a timer of their own; only the player's auto-advance setting does that
       if (settings.autoAdvance) {
         // auto-advance: once the line is written out and the voice has finished (or a reading time has passed)
         const plain = lineEl.textContent.length;
-        const revealed = new Promise((r) => { if (rv.done) r(); else { const o = rv.onDone; rv.onDone = () => { o && o(); r(); }; } });
-        Promise.all([revealed, spoken && settings.voiceOn && !muted ? spoken.then(() => whileUnpaused(700)) : whileUnpaused(1300 + plain * 45)])
+        const revealed = new Promise((r) => {
+          if (rv.done) r();
+          else {
+            const o = rv.onDone;
+            rv.onDone = () => {
+              o && o();
+              r();
+            };
+          }
+        });
+        Promise.all([
+          revealed,
+          spoken && settings.voiceOn && !muted
+            ? spoken.then(() => whileUnpaused(700))
+            : whileUnpaused(1300 + plain * 45),
+        ])
           .then(() => whileUnpaused(250))
-          .then(() => { if (this._advance === adv && settings.autoAdvance) { this._advance = null; stopVoice(); res(); } });
+          .then(() => {
+            if (this._advance === adv && settings.autoAdvance) {
+              this._advance = null;
+              stopVoice();
+              res();
+            }
+          });
       }
     });
   },
@@ -716,55 +1435,137 @@ export const ui = {
     return new Promise((res) => {
       const t = $('#talk');
       if (!keepLine || whoId) showPortraits(t, speaker ? whoId : null);
-      t.hidden = false; t.classList.toggle('narr', !speaker);
+      t.hidden = false;
+      t.classList.toggle('narr', !speaker);
       const who = t.querySelector('.who');
-      who.innerHTML = speaker ? `<span class="nm" style="--c:${speaker.color || '#8fa3c0'}">${speaker.name}</span>${speaker.role ? `<span class="rl">${speaker.role}</span>` : ''}` : '';
+      who.innerHTML = speaker
+        ? `<span class="nm" style="--c:${speaker.color || '#8fa3c0'}">${speaker.name}</span>${speaker.role ? `<span class="rl">${speaker.role}</span>` : ''}`
+        : '';
       if (!keepLine) t.querySelector('.line').innerHTML = text ? lineHTML(text) : '';
       t.querySelector('.more').hidden = true;
-      const box = t.querySelector('.chips'); box.innerHTML = '';
-      const shown = performance.now();   // a tap that revealed the chips must not also pick one
+      const box = t.querySelector('.chips');
+      box.innerHTML = '';
+      const shown = performance.now(); // a tap that revealed the chips must not also pick one
       const btns = chips.map((c, i) => {
-        const b = el('button', 'chip' + (i === glow ? ' glow' : '') + (c.cls ? ' ' + c.cls : ''), `<span class="k">${i + 1}</span><span class="c">${c.html}</span>`);
+        const b = el(
+          'button',
+          'chip' + (i === glow ? ' glow' : '') + (c.cls ? ' ' + c.cls : ''),
+          `<span class="k">${i + 1}</span><span class="c">${c.html}</span>`,
+        );
         b.type = 'button';
-        b.onclick = (e) => { e.stopPropagation(); if (performance.now() - shown < 350) return; this._chipKeys = null; box.querySelectorAll('.chip').forEach((x) => { x.disabled = true; }); b.classList.add('picked'); stopVoice(); res(i); };
-        box.appendChild(b); return b;
+        b.onclick = (e) => {
+          e.stopPropagation();
+          if (performance.now() - shown < 350) return;
+          this._chipKeys = null;
+          box.querySelectorAll('.chip').forEach((x) => {
+            x.disabled = true;
+          });
+          b.classList.add('picked');
+          stopVoice();
+          res(i);
+        };
+        box.appendChild(b);
+        return b;
       });
       this._chipKeys = btns;
       this._advance = null;
-      if (this.auto) setTimeout(() => { const i = Math.min(btns.length - 1, this.autoPick ? this.autoPick(chips) : 0); box.querySelectorAll('.chip').forEach((x) => { x.disabled = true; }); this._chipKeys = null; stopVoice(); res(i); }, 15);
-      t.classList.remove('in'); void t.offsetWidth; t.classList.add('in');
+      if (this.auto)
+        setTimeout(() => {
+          const i = Math.min(btns.length - 1, this.autoPick ? this.autoPick(chips) : 0);
+          box.querySelectorAll('.chip').forEach((x) => {
+            x.disabled = true;
+          });
+          this._chipKeys = null;
+          stopVoice();
+          res(i);
+        }, 15);
+      t.classList.remove('in');
+      void t.offsetWidth;
+      t.classList.add('in');
       this.refreshWords();
       if (voiceKey) voice(voiceKey);
     });
   },
   caption(sp, text) {
     const c = $('#caption');
-    if (!text) { c.hidden = true; return; }
+    if (!text) {
+      c.hidden = true;
+      return;
+    }
     c.hidden = false;
     c.querySelector('.nm').innerHTML = sp ? sp.name : '';
-    c.querySelector('.nm').style.color = sp ? (sp.color || '') : '';
+    c.querySelector('.nm').style.color = sp ? sp.color || '' : '';
     c.querySelector('.tx').innerHTML = lineHTML(text);
-    c.classList.remove('in'); void c.offsetWidth; c.classList.add('in');
+    c.classList.remove('in');
+    void c.offsetWidth;
+    c.classList.add('in');
   },
-  lift(floor, dir) { const l = $('#liftInd'); if (floor == null) { l.hidden = true; return; } l.hidden = false; l.querySelector('.fl').textContent = floor; l.querySelector('.arrow').textContent = dir === 'down' ? '▼' : '▲'; },
-  menuClosed() { return $('#sayMenu').hidden && $('#cmdsPanel').hidden && $('#peoplePanel').hidden && $('#bagPanel').hidden; },
-  clock(date, period) { const c = $('#clock'); c.hidden = false; c.querySelector('.d').textContent = date; c.querySelector('.p').textContent = period; },
-  refreshPeople(n) { const b = $('#peopleBtn'); b.hidden = !n; b.querySelector('.n').textContent = n; },
+  lift(floor, dir) {
+    const l = $('#liftInd');
+    if (floor == null) {
+      l.hidden = true;
+      return;
+    }
+    l.hidden = false;
+    l.querySelector('.fl').textContent = floor;
+    l.querySelector('.arrow').textContent = dir === 'down' ? '▼' : '▲';
+  },
+  menuClosed() {
+    return $('#sayMenu').hidden && $('#cmdsPanel').hidden && $('#peoplePanel').hidden && $('#bagPanel').hidden;
+  },
+  clock(date, period) {
+    const c = $('#clock');
+    c.hidden = false;
+    c.querySelector('.d').textContent = date;
+    c.querySelector('.p').textContent = period;
+  },
+  refreshPeople(n) {
+    const b = $('#peopleBtn');
+    b.hidden = !n;
+    b.querySelector('.n').textContent = n;
+  },
   refreshBag(sim) {
-    const b = $('#bagBtn'); b.hidden = !sim.inv.length; b.querySelector('.n').textContent = sim.inv.length;
+    const b = $('#bagBtn');
+    b.hidden = !sim.inv.length;
+    b.querySelector('.n').textContent = sim.inv.length;
     $('#bagPanel .yen').textContent = `¥${sim.yen} left`;
-    $('#bagPanel ul').innerHTML = sim.inv.map((i) => `<li>${(this.items && this.items[i] && this.items[i].name) || i}</li>`).join('');
+    $('#bagPanel ul').innerHTML = sim.inv
+      .map((i) => `<li>${(this.items && this.items[i] && this.items[i].name) || i}</li>`)
+      .join('');
   },
-  setGiveTarget(name, on) { const g = $('#giveBtn'); g.hidden = !on; const t = g.querySelector('.to'); if (t.textContent !== (name || '')) t.textContent = name || ''; },
+  setGiveTarget(name, on) {
+    const g = $('#giveBtn');
+    g.hidden = !on;
+    const t = g.querySelector('.to');
+    if (t.textContent !== (name || '')) t.textContent = name || '';
+  },
   // pick an item to give: resolves with the item id or null
   giveMenu(targetName, inv, items) {
     return new Promise((res) => {
       const m = $('#sayMenu');
       m.querySelector('.head').innerHTML = `Give to <b>${targetName}</b>`;
-      const list = m.querySelector('.list'); list.innerHTML = '';
-      [...new Set(inv)].forEach((id, i) => { const b = el('button', 'cmd', `<span class="k">${i + 1}</span><span class="en">${items[id] ? items[id].name : id}</span>`); b.type = 'button'; b.onclick = (e) => { e.stopPropagation(); m.hidden = true; this._sayKeys = null; res(id); }; list.appendChild(b); });
+      const list = m.querySelector('.list');
+      list.innerHTML = '';
+      [...new Set(inv)].forEach((id, i) => {
+        const b = el(
+          'button',
+          'cmd',
+          `<span class="k">${i + 1}</span><span class="en">${items[id] ? items[id].name : id}</span>`,
+        );
+        b.type = 'button';
+        b.onclick = (e) => {
+          e.stopPropagation();
+          m.hidden = true;
+          this._sayKeys = null;
+          res(id);
+        };
+        list.appendChild(b);
+      });
       this._sayKeys = [...list.children];
-      this._sayRes = (v) => { this._sayKeys = null; res(v); };
+      this._sayRes = (v) => {
+        this._sayKeys = null;
+        res(v);
+      };
       m.hidden = false;
     });
   },
@@ -774,87 +1575,221 @@ export const ui = {
     return new Promise((res) => {
       // portraits: a lesson prompt shows the person who asks (Eric listening); Eric saying a word to someone or
       // something shows Eric alone (QA round 1: Mio showed for "Say it to Cat" and for machines)
-      { const t0 = $('#talk'); if (prompt && prompt.whoId) { showPortraits(t0, prompt.whoId); } else { lastNpc = null; showPortraits(t0, 'eric'); } }
+      {
+        const t0 = $('#talk');
+        if (prompt && prompt.whoId) {
+          showPortraits(t0, prompt.whoId);
+        } else {
+          lastNpc = null;
+          showPortraits(t0, 'eric');
+        }
+      }
       const w = WORDS[id];
-      const canon = (s) => s.toLowerCase().normalize('NFC').replace(/[āâ]/g, 'a').replace(/[īî]/g, 'i').replace(/[ūû]/g, 'u').replace(/[ēê]/g, 'e').replace(/[ōô]/g, 'o')
-        .replace(/[^a-z]/g, '').replace(/ou/g, 'o').replace(/oo/g, 'o').replace(/uu/g, 'u').replace(/aa/g, 'a').replace(/ii/g, 'i');
+      const canon = (s) =>
+        s
+          .toLowerCase()
+          .normalize('NFC')
+          .replace(/[āâ]/g, 'a')
+          .replace(/[īî]/g, 'i')
+          .replace(/[ūû]/g, 'u')
+          .replace(/[ēê]/g, 'e')
+          .replace(/[ōô]/g, 'o')
+          .replace(/[^a-z]/g, '')
+          .replace(/ou/g, 'o')
+          .replace(/oo/g, 'o')
+          .replace(/uu/g, 'u')
+          .replace(/aa/g, 'a')
+          .replace(/ii/g, 'i');
       const target = canon(w.ro);
       // display tokens: each romaji letter of the word, with long vowels as one token
-      const toks = []; for (const ch of w.ro) { if (/\s|-/.test(ch)) toks.push({ ch, sp: true }); else toks.push({ ch }); }
-      const t = $('#talk'); t.hidden = false; t.classList.remove('narr', 'heard', 'phone'); t.classList.add('typing');
+      const toks = [];
+      for (const ch of w.ro) {
+        if (/\s|-/.test(ch)) toks.push({ ch, sp: true });
+        else toks.push({ ch });
+      }
+      const t = $('#talk');
+      t.hidden = false;
+      t.classList.remove('narr', 'heard', 'phone');
+      t.classList.add('typing');
       t.querySelector('.who').innerHTML = '';
-      t.querySelector('.line').innerHTML = (prompt ? `<div class="tp-prompt">${prompt.who ? `<span class="tp-who" style="color:${prompt.who.color || '#8fa3c0'}">${prompt.who.name}</span> ` : ''}${lineHTML(prompt.text)}</div>` : '') +
+      t.querySelector('.line').innerHTML =
+        (prompt
+          ? `<div class="tp-prompt">${prompt.who ? `<span class="tp-who" style="color:${prompt.who.color || '#8fa3c0'}">${prompt.who.name}</span> ` : ''}${lineHTML(prompt.text)}</div>`
+          : '') +
         // two blocks: the word (icon, kana, romaji, meaning) and the answer (input, mic, one hint line, never mind)
         `<div class="tp"><div class="tp-word">${iconHTML(id, 'wi tp-ico')}<div class="tp-jp jp">${w.ja}</div><div class="tp-ro">${toks.map((k) => (k.sp ? '<span class="sp"> </span>' : `<span class="lt">${k.ch}</span>`)).join('')}</div><div class="tp-en">${w.en}</div></div>` +
         `<div class="tp-ans"><input class="tp-in" type="text" inputmode="latin" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="Type it in romaji" aria-label="Type ${w.ro}"><div class="tp-hint"></div>${opts.cancel ? '<button type="button" class="tp-cancel">Never mind</button>' : ''}</div></div>`;
-      t.querySelector('.chips').innerHTML = ''; t.querySelector('.more').hidden = true;
-      t.classList.remove('in'); void t.offsetWidth; t.classList.add('in');
-      this._advance = null; this._chipKeys = null;
-      const inp = t.querySelector('.tp-in'), hint = t.querySelector('.tp-hint');
+      t.querySelector('.chips').innerHTML = '';
+      t.querySelector('.more').hidden = true;
+      t.classList.remove('in');
+      void t.offsetWidth;
+      t.classList.add('in');
+      this._advance = null;
+      this._chipKeys = null;
+      const inp = t.querySelector('.tp-in'),
+        hint = t.querySelector('.tp-hint');
       const letters = [...t.querySelectorAll('.tp-ro .lt')];
-      const offVoice = mountVoice(t.querySelector('.tp'), id, { phone: document.body.classList.contains('phone'), ro: w.ro, ja: w.ja, onHit: () => done('voice') });
+      const offVoice = mountVoice(t.querySelector('.tp'), id, {
+        phone: document.body.classList.contains('phone'),
+        ro: w.ro,
+        ja: w.ja,
+        onHit: () => done('voice'),
+      });
       // which display letters each canonical position covers
-      const map = []; { let c = ''; letters.forEach((el, i) => { const before = canon(c); c += el.textContent; const after = canon(c); for (let k = before.length; k < after.length; k++) map[k] = i; if (after.length === before.length) map[before.length - 1] = i; }); }
+      const map = [];
+      {
+        let c = '';
+        letters.forEach((el, i) => {
+          const before = canon(c);
+          c += el.textContent;
+          const after = canon(c);
+          for (let k = before.length; k < after.length; k++) map[k] = i;
+          if (after.length === before.length) map[before.length - 1] = i;
+        });
+      }
       let tries = 0;
       const paint = () => {
-        const v = canon(inp.value); let ok = 0; while (ok < v.length && v[ok] === target[ok]) ok++;
+        const v = canon(inp.value);
+        let ok = 0;
+        while (ok < v.length && v[ok] === target[ok]) ok++;
         const lit = ok ? map[ok - 1] : -1;
-        letters.forEach((el, i) => { el.classList.toggle('on', i <= lit); el.classList.toggle('bad', v.length > ok && i === (ok < target.length ? map[ok] : -1)); });
+        letters.forEach((el, i) => {
+          el.classList.toggle('on', i <= lit);
+          el.classList.toggle('bad', v.length > ok && i === (ok < target.length ? map[ok] : -1));
+        });
         return v === target;
       };
       let over = false;
-      const done = (how = 'typed') => { if (over) return; over = true; offVoice(); notePractice(id, how); t.classList.remove('typing'); stopVoice(); sfx('ok'); res(true); };
-      const cancel = () => { if (over) return; over = true; offVoice(); t.classList.remove('typing'); res(false); };
-      const cb = t.querySelector('.tp-cancel'); if (cb) cb.onclick = (e) => { e.stopPropagation(); cancel(); };
-      inp.addEventListener('input', () => { if (paint()) setTimeout(() => done('typed'), 250); });
+      const done = (how = 'typed') => {
+        if (over) return;
+        over = true;
+        offVoice();
+        notePractice(id, how);
+        t.classList.remove('typing');
+        stopVoice();
+        sfx('ok');
+        res(true);
+      };
+      const cancel = () => {
+        if (over) return;
+        over = true;
+        offVoice();
+        t.classList.remove('typing');
+        res(false);
+      };
+      const cb = t.querySelector('.tp-cancel');
+      if (cb)
+        cb.onclick = (e) => {
+          e.stopPropagation();
+          cancel();
+        };
+      inp.addEventListener('input', () => {
+        if (paint()) setTimeout(() => done('typed'), 250);
+      });
       inp.addEventListener('keydown', (e) => {
         e.stopPropagation();
-        if (e.key === 'Escape' && opts.cancel) { cancel(); return; }
+        if (e.key === 'Escape' && opts.cancel) {
+          cancel();
+          return;
+        }
         if (e.key !== 'Enter') return;
-        if (paint()) { done('typed'); return; }
-        tries++; sfx('no');
-        const v = canon(inp.value); let ok = 0; while (ok < v.length && v[ok] === target[ok]) ok++;
+        if (paint()) {
+          done('typed');
+          return;
+        }
+        tries++;
+        sfx('no');
+        const v = canon(inp.value);
+        let ok = 0;
+        while (ok < v.length && v[ok] === target[ok]) ok++;
         const next = letters[map[Math.min(ok, target.length - 1)]];
-        hint.parentNode.dataset.last = 'type';   // the hint line shows the typing hint, not the mic's message
-        hint.innerHTML = tries < 3 ? `Close. Next letter: <b>${next ? next.textContent : ''}</b>. Follow the letters under the word.` : `Type it just as shown: <b>${w.ro}</b>`;
+        hint.parentNode.dataset.last = 'type'; // the hint line shows the typing hint, not the mic's message
+        hint.innerHTML =
+          tries < 3
+            ? `Close. Next letter: <b>${next ? next.textContent : ''}</b>. Follow the letters under the word.`
+            : `Type it just as shown: <b>${w.ro}</b>`;
       });
-      if (this.auto) { setTimeout(() => { inp.value = w.ro; paint(); done('typed'); }, 20); return; }
+      if (this.auto) {
+        setTimeout(() => {
+          inp.value = w.ro;
+          paint();
+          done('typed');
+        }, 20);
+        return;
+      }
       setTimeout(() => inp.focus(), 60);
     });
   },
   // play a taught word again (slowly if there's a slow clip), without moving the story on
   sayWord(id, el) {
-    const w = WORDS[id]; if (!w || !w.voice) { sfx('tap'); return; }
+    const w = WORDS[id];
+    if (!w || !w.voice) {
+      sfx('tap');
+      return;
+    }
     const slow = slowClips.has(w.voice + '-slow');
     const p = voice(slow ? w.voice + '-slow' : w.voice, slow ? {} : { rate: 0.9 });
-    if (el) { el.classList.add('playing'); p.then(() => el.classList.remove('playing')); }
+    if (el) {
+      el.classList.add('playing');
+      p.then(() => el.classList.remove('playing'));
+    }
   },
   // what the dialogue area shows: continue (with words for the first lines), waiting, or nothing; the tap layer
   syncTalkState() {
-    const t = $('#talk'), hit = $('#talkHit'); if (!t || !hit) return;
-    const busy = document.body.classList.contains('busy'), open = !t.hidden;
-    const typing = t.classList.contains('typing'), choosing = !!t.querySelector('.chips .chip');
+    const t = $('#talk'),
+      hit = $('#talkHit');
+    if (!t || !hit) return;
+    const busy = document.body.classList.contains('busy'),
+      open = !t.hidden;
+    const typing = t.classList.contains('typing'),
+      choosing = !!t.querySelector('.chips .chip');
     const canGo = !!this._advance && open && !typing;
     t.classList.toggle('can-go', canGo);
     t.classList.toggle('waiting', open && !canGo && !typing && !choosing);
     // (only write what changed: #talk is watched by a MutationObserver, and even a same-value write is a mutation)
-    const hide = !!(this.auto || !(open || busy) || typing || choosing); if (hit.hidden !== hide) hit.hidden = hide;
+    const hide = !!(this.auto || !(open || busy) || typing || choosing);
+    if (hit.hidden !== hide) hit.hidden = hide;
     hit.classList.toggle('go', canGo);
     const phone = document.body.classList.contains('phone');
     const ch = t.querySelector('.more .ch');
-    if (ch) { const tx = phone ? 'Tap this area to continue' : 'Press Space or click this area to continue', hd = (this._lines || 0) > 5; if (ch.textContent !== tx) ch.textContent = tx; if (ch.hidden !== hd) ch.hidden = hd; }
+    if (ch) {
+      const tx = phone ? 'Tap this area to continue' : 'Press Space or click this area to continue',
+        hd = (this._lines || 0) > 5;
+      if (ch.textContent !== tx) ch.textContent = tx;
+      if (ch.hidden !== hd) ch.hidden = hd;
+    }
   },
   waitPulse(x, y) {
     const t = $('#talk');
-    if (t && !t.hidden) { t.classList.remove('pulse'); void t.offsetWidth; t.classList.add('pulse'); }
-    else {
-      let d = $('#waitDot'); if (!d) { d = el('div', '', '<i></i><i></i><i></i>'); d.id = 'waitDot'; $('#ui').appendChild(d); }
-      d.style.transform = `translate(${Math.round(x)}px, ${Math.round(y)}px)`; d.classList.remove('on'); void d.offsetWidth; d.classList.add('on');
+    if (t && !t.hidden) {
+      t.classList.remove('pulse');
+      void t.offsetWidth;
+      t.classList.add('pulse');
+    } else {
+      let d = $('#waitDot');
+      if (!d) {
+        d = el('div', '', '<i></i><i></i><i></i>');
+        d.id = 'waitDot';
+        $('#ui').appendChild(d);
+      }
+      d.style.transform = `translate(${Math.round(x)}px, ${Math.round(y)}px)`;
+      d.classList.remove('on');
+      void d.offsetWidth;
+      d.classList.add('on');
     }
     window.__game?.skip?.();
   },
-  closeTalk() { const t = $('#talk'); t.hidden = true; $('#stage').hidden = true; lastNpc = null; this._advance = null; this._chipKeys = null; },
-  get talking() { return !$('#talk').hidden; },
+  closeTalk() {
+    const t = $('#talk');
+    t.hidden = true;
+    $('#stage').hidden = true;
+    lastNpc = null;
+    this._advance = null;
+    this._chipKeys = null;
+  },
+  get talking() {
+    return !$('#talk').hidden;
+  },
   fade(title, sub = '', hold = 1400) {
     const f = $('#fade');
     f.querySelector('.title').textContent = title || '';
@@ -862,6 +1797,14 @@ export const ui = {
     f.classList.add('on');
     return new Promise((res) => setTimeout(res, 650 + hold));
   },
-  unfade() { $('#fade').classList.remove('on'); return new Promise((res) => setTimeout(res, 600)); },
-  showEnd(html) { const e = $('#end'); e.innerHTML = html; e.hidden = false; requestAnimationFrame(() => e.classList.add('in')); },
+  unfade() {
+    $('#fade').classList.remove('on');
+    return new Promise((res) => setTimeout(res, 600));
+  },
+  showEnd(html) {
+    const e = $('#end');
+    e.innerHTML = html;
+    e.hidden = false;
+    requestAnimationFrame(() => e.classList.add('in'));
+  },
 };

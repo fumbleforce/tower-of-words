@@ -14,12 +14,23 @@ export async function leave(game, place, slot) {
 // old place ghosted over the first line)
 function fadeGone(game) {
   const img = document.getElementById('xfade');
-  return new Promise((res) => { const t0 = performance.now(); const tick = () => { if (!img || img.hidden || game.test || performance.now() - t0 > 1800) res(); else setTimeout(tick, 60); }; tick(); });
+  return new Promise((res) => {
+    const t0 = performance.now();
+    const tick = () => {
+      if (!img || img.hidden || game.test || performance.now() - t0 > 1800) res();
+      else setTimeout(tick, 60);
+    };
+    tick();
+  });
 }
 
 export async function arrive(game, place, slot) {
   if (place.tripIn) await place.tripIn(game, slot);
   await fadeGone(game);
-  if (slot.arrive && slot.arrive.length) { game.busy = true; await game.runner.steps(slot.arrive); ui.closeTalk(); }
+  if (slot.arrive && slot.arrive.length) {
+    game.busy = true;
+    await game.runner.steps(slot.arrive);
+    ui.closeTalk();
+  }
   ui.caption(null, '');
 }

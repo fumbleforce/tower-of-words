@@ -11,24 +11,24 @@
 export const CAST = {
   mio: {
     likes: ['coffee'],
-    dislikes: ['cornsoup', 'tea'],   // walkthrough/mio.md; melon soda is "a bit sweet" but no dislike
+    dislikes: ['cornsoup', 'tea'], // walkthrough/mio.md; melon soda is "a bit sweet" but no dislike
     register: 'casual',
-    rel: { mori: 'likes' },          // she speaks for him on the train ("Mori-san is going to be so polite") and knows his soup
+    rel: { mori: 'likes' }, // she speaks for him on the train ("Mori-san is going to be so polite") and knows his soup
   },
   mori: {
     likes: ['cornsoup'],
     register: 'polite',
-    rel: { mio: 'likes' },           // corrects her 外人 gently, the only time he interrupts
+    rel: { mio: 'likes' }, // corrects her 外人 gently, the only time he interrupts
   },
   kenji: {
     likes: ['melon'],
-    register: 'casual',              // "かたっ！おはよう、でいいよ"
-    rel: { mori: 'likes', mio: 'owes' },   // asks Mori about the new guy; Mio has barred him from the machine room
+    register: 'casual', // "かたっ！おはよう、でいいよ"
+    rel: { mori: 'likes', mio: 'owes' }, // asks Mori about the new guy; Mio has barred him from the machine room
   },
   guard: { register: 'polite' },
   kuroda: {
     register: 'polite',
-    rel: { guard: 'owes' },          // late through the gate every morning; the guard gets him through
+    rel: { guard: 'owes' }, // late through the gate every morning; the guard gets him through
   },
   kuro: { register: 'polite' },
   emi: {},
@@ -36,6 +36,14 @@ export const CAST = {
 
 // the register of each word Eric can say (for the `register_<id>` flag)
 export const WORD_REGISTER = {
-  ohayo: 'polite', yoroshiku: 'polite', sumimasen: 'polite',
-  matte: 'casual', akete: 'casual', kite: 'casual', ugoite: 'casual', irete: 'casual', dashite: 'casual', tomatte: 'casual',
+  ohayo: 'polite',
+  yoroshiku: 'polite',
+  sumimasen: 'polite',
+  matte: 'casual',
+  akete: 'casual',
+  kite: 'casual',
+  ugoite: 'casual',
+  irete: 'casual',
+  dashite: 'casual',
+  tomatte: 'casual',
 };

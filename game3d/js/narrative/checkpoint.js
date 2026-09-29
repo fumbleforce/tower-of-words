@@ -1,8 +1,16 @@
 // Checkpoints address existing story arrays; they never contain executable code or story text.
 export function nodeFingerprint(steps) {
-  const source = JSON.stringify(steps, (_key, value) => value && typeof value === 'object' && !Array.isArray(value)
-    ? Object.fromEntries(Object.keys(value).sort().map(key => [key, value[key]])) : value);
-  let a = 2166136261, b = 5381;
+  const source = JSON.stringify(steps, (_key, value) =>
+    value && typeof value === 'object' && !Array.isArray(value)
+      ? Object.fromEntries(
+          Object.keys(value)
+            .sort()
+            .map((key) => [key, value[key]]),
+        )
+      : value,
+  );
+  let a = 2166136261,
+    b = 5381;
   for (let i = 0; i < source.length; i++) {
     a = Math.imul(a ^ source.charCodeAt(i), 16777619) >>> 0;
     b = (Math.imul(b, 33) ^ source.charCodeAt(i)) >>> 0;
@@ -11,7 +19,17 @@ export function nodeFingerprint(steps) {
 }
 
 export function newFrame(node, steps, trigger = null) {
-  return { node, fingerprint: nodeFingerprint(steps), trigger, cursors: [], done: [], branches: {}, choices: {}, staging: null, worldAfter: {} };
+  return {
+    node,
+    fingerprint: nodeFingerprint(steps),
+    trigger,
+    cursors: [],
+    done: [],
+    branches: {},
+    choices: {},
+    staging: null,
+    worldAfter: {},
+  };
 }
 
 export function listAt(story, node, path) {
@@ -30,22 +48,43 @@ function stepAt(story, node, key) {
     const index = path.pop();
     if (!Number.isInteger(index) || index < 0) return null;
     return listAt(story, node, path)?.[index];
-  } catch { return null; }
+  } catch {
+    return null;
+  }
 }
 
 export function readCheckpoint(data, place, story) {
-  if (!data || data.v !== 3 || data.place !== place || !Array.isArray(data.frames)
-    || !data.frames.length || data.frames.length > 32) return null;
+  if (
+    !data ||
+    data.v !== 3 ||
+    data.place !== place ||
+    !Array.isArray(data.frames) ||
+    !data.frames.length ||
+    data.frames.length > 32
+  )
+    return null;
   for (const [i, frame] of data.frames.entries()) {
-    if (!frame || !Array.isArray(story.nodes[frame.node])
-      || frame.fingerprint !== nodeFingerprint(story.nodes[frame.node])
-      || (frame.trigger !== null && typeof frame.trigger !== 'string')
-      || !Array.isArray(frame.done) || !frame.done.every(k => typeof k === 'string')
-      || !frame.branches || typeof frame.branches !== 'object' || Array.isArray(frame.branches)
-      || !frame.choices || typeof frame.choices !== 'object' || Array.isArray(frame.choices)
-      || (frame.staging !== null && (!frame.staging || typeof frame.staging !== 'object' || Array.isArray(frame.staging)))
-      || !frame.worldAfter || typeof frame.worldAfter !== 'object' || Array.isArray(frame.worldAfter)
-      || !Array.isArray(frame.cursors)) return null;
+    if (
+      !frame ||
+      !Array.isArray(story.nodes[frame.node]) ||
+      frame.fingerprint !== nodeFingerprint(story.nodes[frame.node]) ||
+      (frame.trigger !== null && typeof frame.trigger !== 'string') ||
+      !Array.isArray(frame.done) ||
+      !frame.done.every((k) => typeof k === 'string') ||
+      !frame.branches ||
+      typeof frame.branches !== 'object' ||
+      Array.isArray(frame.branches) ||
+      !frame.choices ||
+      typeof frame.choices !== 'object' ||
+      Array.isArray(frame.choices) ||
+      (frame.staging !== null &&
+        (!frame.staging || typeof frame.staging !== 'object' || Array.isArray(frame.staging))) ||
+      !frame.worldAfter ||
+      typeof frame.worldAfter !== 'object' ||
+      Array.isArray(frame.worldAfter) ||
+      !Array.isArray(frame.cursors)
+    )
+      return null;
     for (const [key, value] of Object.entries(frame.branches)) {
       const step = stepAt(story, frame.node, key);
       if (typeof value !== 'boolean' || !step || step.if === undefined || !(step.then || step.else)) return null;
@@ -57,16 +96,31 @@ export function readCheckpoint(data, place, story) {
     for (const [depth, cursor] of frame.cursors.entries()) {
       if (!cursor || !Array.isArray(cursor.path) || cursor.path.length % 2) return null;
       const list = listAt(story, frame.node, cursor.path);
-      if (!list || !Number.isInteger(cursor.index) || cursor.index < 0 || cursor.index >= list.length
-        || !['step', 'branch', 'call', 'choice-call'].includes(cursor.phase)) return null;
+      if (
+        !list ||
+        !Number.isInteger(cursor.index) ||
+        cursor.index < 0 ||
+        cursor.index >= list.length ||
+        !['step', 'branch', 'call', 'choice-call'].includes(cursor.phase)
+      )
+        return null;
       const parent = frame.cursors[depth - 1];
       if (!parent && cursor.path.length) return null;
-      if (parent && (parent.phase !== 'branch' || cursor.path.length !== parent.path.length + 2
-        || JSON.stringify(cursor.path.slice(0, -2)) !== JSON.stringify(parent.path)
-        || cursor.path.at(-2) !== parent.index)) return null;
+      if (
+        parent &&
+        (parent.phase !== 'branch' ||
+          cursor.path.length !== parent.path.length + 2 ||
+          JSON.stringify(cursor.path.slice(0, -2)) !== JSON.stringify(parent.path) ||
+          cursor.path.at(-2) !== parent.index)
+      )
+        return null;
       const step = list[cursor.index];
       if (cursor.phase === 'call' && !step?.call) return null;
-      if (cursor.phase === 'choice-call' && !step?.choice?.[frame.choices[JSON.stringify([...cursor.path, cursor.index])]]?.call) return null;
+      if (
+        cursor.phase === 'choice-call' &&
+        !step?.choice?.[frame.choices[JSON.stringify([...cursor.path, cursor.index])]]?.call
+      )
+        return null;
     }
     // Every suspended caller must be waiting on its child, possibly inside a branch.
     if (i < data.frames.length - 1 && !['call', 'choice-call'].includes(frame.cursors.at(-1)?.phase)) return null;

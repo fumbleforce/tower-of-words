@@ -19,22 +19,25 @@ import { GBufferPass, InkPass } from './style/ink.js';
 
 // Neutral defaults. Values are in display space unless noted.
 export const GRADE = {
-  exposure: 1.0,          // before tone mapping
-  temp: 0,                // -1 cool .. +1 warm (white balance)
-  tint: 0,                // -1 green .. +1 magenta
+  exposure: 1.0, // before tone mapping
+  temp: 0, // -1 cool .. +1 warm (white balance)
+  tint: 0, // -1 green .. +1 magenta
   sat: 1.0,
   contrast: 1.0,
-  lift: [0, 0, 0],        // added to the shadows
-  gain: [1, 1, 1],        // multiplies the highlights
-  shadowTint: [0, 0, 0],  // split toning: pushed into the darks
-  highTint: [0, 0, 0],    // and into the lights
+  lift: [0, 0, 0], // added to the shadows
+  gain: [1, 1, 1], // multiplies the highlights
+  shadowTint: [0, 0, 0], // split toning: pushed into the darks
+  highTint: [0, 0, 0], // and into the lights
   vignette: 0.22,
-  bloom: 0.35, bloomThreshold: 0.85, bloomKnee: 0.35, bloomRadius: 0.8,
-  focusY: 0.5,            // tilt-shift: centre of the sharp band (0 bottom, 1 top)
-  focusBand: 0.26,        // half height of the sharp band
-  focusRamp: 0.32,        // how far the blur takes to reach full
-  blur: 2.2,              // max blur radius in CSS pixels
-  ao: 1.0,                // AO blend
+  bloom: 0.35,
+  bloomThreshold: 0.85,
+  bloomKnee: 0.35,
+  bloomRadius: 0.8,
+  focusY: 0.5, // tilt-shift: centre of the sharp band (0 bottom, 1 top)
+  focusBand: 0.26, // half height of the sharp band
+  focusRamp: 0.32, // how far the blur takes to reach full
+  blur: 2.2, // max blur radius in CSS pixels
+  ao: 1.0, // AO blend
 };
 
 const TIERS = {
@@ -49,12 +52,21 @@ const VERT = 'varying vec2 vUv; void main(){ vUv = uv; gl_Position = vec4(positi
 class BloomPass extends Pass {
   constructor() {
     super();
-    this.levels = 5; this.strength = 0.35; this.threshold = 0.85; this.knee = 0.35; this.radius = 0.8;
+    this.levels = 5;
+    this.strength = 0.35;
+    this.threshold = 0.85;
+    this.knee = 0.35;
+    this.radius = 0.8;
     this.rts = [];
     const rtOpts = { type: THREE.HalfFloatType, depthBuffer: false };
     for (let i = 0; i < 6; i++) this.rts.push(new THREE.WebGLRenderTarget(4, 4, rtOpts));
     this.pre = new THREE.ShaderMaterial({
-      uniforms: { tDiffuse: { value: null }, uTexel: { value: new THREE.Vector2() }, uThreshold: { value: 0.85 }, uKnee: { value: 0.35 } },
+      uniforms: {
+        tDiffuse: { value: null },
+        uTexel: { value: new THREE.Vector2() },
+        uThreshold: { value: 0.85 },
+        uKnee: { value: 0.35 },
+      },
       vertexShader: VERT,
       fragmentShader: `uniform sampler2D tDiffuse; uniform vec2 uTexel; uniform float uThreshold, uKnee; varying vec2 vUv;
         vec3 pick(vec2 uv){ vec3 c = texture2D(tDiffuse, uv).rgb; float l = max(c.r, max(c.g, c.b));
@@ -63,7 +75,8 @@ class BloomPass extends Pass {
         void main(){ vec2 o = uTexel;
           vec3 c = pick(vUv) * 4.0 + pick(vUv + vec2(-o.x, -o.y)) + pick(vUv + vec2(o.x, -o.y)) + pick(vUv + vec2(-o.x, o.y)) + pick(vUv + vec2(o.x, o.y));
           gl_FragColor = vec4(min(c / 8.0, vec3(24.0)), 1.0); }`,
-      depthTest: false, depthWrite: false,
+      depthTest: false,
+      depthWrite: false,
     });
     this.down = new THREE.ShaderMaterial({
       uniforms: { tDiffuse: { value: null }, uTexel: { value: new THREE.Vector2() } },
@@ -73,7 +86,8 @@ class BloomPass extends Pass {
           vec3 c = texture2D(tDiffuse, vUv).rgb * 4.0 + texture2D(tDiffuse, vUv - o).rgb + texture2D(tDiffuse, vUv + o).rgb
             + texture2D(tDiffuse, vUv + vec2(o.x, -o.y)).rgb + texture2D(tDiffuse, vUv + vec2(-o.x, o.y)).rgb;
           gl_FragColor = vec4(c / 8.0, 1.0); }`,
-      depthTest: false, depthWrite: false,
+      depthTest: false,
+      depthWrite: false,
     });
     this.up = new THREE.ShaderMaterial({
       uniforms: { tDiffuse: { value: null }, uTexel: { value: new THREE.Vector2() }, uRadius: { value: 0.8 } },
@@ -85,38 +99,66 @@ class BloomPass extends Pass {
             + (texture2D(tDiffuse, vUv + o).rgb + texture2D(tDiffuse, vUv - o).rgb
             + texture2D(tDiffuse, vUv + vec2(o.x, -o.y)).rgb + texture2D(tDiffuse, vUv + vec2(-o.x, o.y)).rgb) * 2.0;
           gl_FragColor = vec4(c / 12.0, 1.0); }`,
-      depthTest: false, depthWrite: false, blending: THREE.AdditiveBlending, transparent: true,
+      depthTest: false,
+      depthWrite: false,
+      blending: THREE.AdditiveBlending,
+      transparent: true,
     });
     this.quad = new FullScreenQuad(null);
-    this.needsSwap = false;   // the result is read by the final pass from this.texture
+    this.needsSwap = false; // the result is read by the final pass from this.texture
   }
   setSize(w, h) {
-    let W = Math.max(1, w >> 1), H = Math.max(1, h >> 1);
-    for (const rt of this.rts) { rt.setSize(W, H); W = Math.max(1, W >> 1); H = Math.max(1, H >> 1); }
+    let W = Math.max(1, w >> 1),
+      H = Math.max(1, h >> 1);
+    for (const rt of this.rts) {
+      rt.setSize(W, H);
+      W = Math.max(1, W >> 1);
+      H = Math.max(1, H >> 1);
+    }
   }
-  get texture() { return this.rts[0].texture; }
+  get texture() {
+    return this.rts[0].texture;
+  }
   render(renderer, writeBuffer, readBuffer) {
-    const q = this.quad, n = Math.min(this.levels, this.rts.length);
-    const old = renderer.autoClear; renderer.autoClear = false;
+    const q = this.quad,
+      n = Math.min(this.levels, this.rts.length);
+    const old = renderer.autoClear;
+    renderer.autoClear = false;
     this.pre.uniforms.tDiffuse.value = readBuffer.texture;
     this.pre.uniforms.uTexel.value.set(1 / readBuffer.width, 1 / readBuffer.height);
-    this.pre.uniforms.uThreshold.value = this.threshold; this.pre.uniforms.uKnee.value = Math.max(0.01, this.knee);
-    q.material = this.pre; renderer.setRenderTarget(this.rts[0]); renderer.clear(); q.render(renderer);
+    this.pre.uniforms.uThreshold.value = this.threshold;
+    this.pre.uniforms.uKnee.value = Math.max(0.01, this.knee);
+    q.material = this.pre;
+    renderer.setRenderTarget(this.rts[0]);
+    renderer.clear();
+    q.render(renderer);
     q.material = this.down;
     for (let i = 1; i < n; i++) {
       const src = this.rts[i - 1];
-      this.down.uniforms.tDiffuse.value = src.texture; this.down.uniforms.uTexel.value.set(1 / src.width, 1 / src.height);
-      renderer.setRenderTarget(this.rts[i]); renderer.clear(); q.render(renderer);
+      this.down.uniforms.tDiffuse.value = src.texture;
+      this.down.uniforms.uTexel.value.set(1 / src.width, 1 / src.height);
+      renderer.setRenderTarget(this.rts[i]);
+      renderer.clear();
+      q.render(renderer);
     }
-    q.material = this.up; this.up.uniforms.uRadius.value = this.radius;
+    q.material = this.up;
+    this.up.uniforms.uRadius.value = this.radius;
     for (let i = n - 1; i > 0; i--) {
       const src = this.rts[i];
-      this.up.uniforms.tDiffuse.value = src.texture; this.up.uniforms.uTexel.value.set(1 / src.width, 1 / src.height);
-      renderer.setRenderTarget(this.rts[i - 1]); q.render(renderer);   // added onto the level above
+      this.up.uniforms.tDiffuse.value = src.texture;
+      this.up.uniforms.uTexel.value.set(1 / src.width, 1 / src.height);
+      renderer.setRenderTarget(this.rts[i - 1]);
+      q.render(renderer); // added onto the level above
     }
     renderer.autoClear = old;
   }
-  dispose() { for (const rt of this.rts) rt.dispose(); this.pre.dispose(); this.down.dispose(); this.up.dispose(); this.quad.dispose(); }
+  dispose() {
+    for (const rt of this.rts) rt.dispose();
+    this.pre.dispose();
+    this.down.dispose();
+    this.up.dispose();
+    this.quad.dispose();
+  }
 }
 
 // ---------- final: bloom add, tilt-shift, tone map, grade, vignette, to the screen ----------
@@ -208,18 +250,44 @@ class FinalPass extends Pass {
     this.bloom = bloom;
     this.mat = new THREE.ShaderMaterial({
       uniforms: {
-        tDiffuse: { value: null }, tBloom: { value: null }, uRes: { value: new THREE.Vector2(1, 1) }, uPR: { value: 1 },
-        uExposure: { value: 1 }, uBloom: { value: 0 }, uTemp: { value: 0 }, uTint: { value: 0 }, uSat: { value: 1 }, uContrast: { value: 1 }, uVignette: { value: 0.2 },
-        uLift: { value: new THREE.Vector3() }, uGain: { value: new THREE.Vector3(1, 1, 1) }, uShadowTint: { value: new THREE.Vector3() }, uHighTint: { value: new THREE.Vector3() },
-        uFocusY: { value: 0.5 }, uFocusBand: { value: 0.26 }, uFocusRamp: { value: 0.3 }, uBlur: { value: 2 }, uTaps: { value: 0 },
-        uPalAmt: { value: 0 }, uGrain: { value: 0 }, uTime: { value: 0 },
-        uPal0: { value: new THREE.Vector3(...PALETTE[0]) }, uPal1: { value: new THREE.Vector3(...PALETTE[1]) }, uPal2: { value: new THREE.Vector3(...PALETTE[2]) }, uPal3: { value: new THREE.Vector3(...PALETTE[3]) },
+        tDiffuse: { value: null },
+        tBloom: { value: null },
+        uRes: { value: new THREE.Vector2(1, 1) },
+        uPR: { value: 1 },
+        uExposure: { value: 1 },
+        uBloom: { value: 0 },
+        uTemp: { value: 0 },
+        uTint: { value: 0 },
+        uSat: { value: 1 },
+        uContrast: { value: 1 },
+        uVignette: { value: 0.2 },
+        uLift: { value: new THREE.Vector3() },
+        uGain: { value: new THREE.Vector3(1, 1, 1) },
+        uShadowTint: { value: new THREE.Vector3() },
+        uHighTint: { value: new THREE.Vector3() },
+        uFocusY: { value: 0.5 },
+        uFocusBand: { value: 0.26 },
+        uFocusRamp: { value: 0.3 },
+        uBlur: { value: 2 },
+        uTaps: { value: 0 },
+        uPalAmt: { value: 0 },
+        uGrain: { value: 0 },
+        uTime: { value: 0 },
+        uPal0: { value: new THREE.Vector3(...PALETTE[0]) },
+        uPal1: { value: new THREE.Vector3(...PALETTE[1]) },
+        uPal2: { value: new THREE.Vector3(...PALETTE[2]) },
+        uPal3: { value: new THREE.Vector3(...PALETTE[3]) },
       },
-      vertexShader: VERT, fragmentShader: FINAL_FRAG, depthTest: false, depthWrite: false,
+      vertexShader: VERT,
+      fragmentShader: FINAL_FRAG,
+      depthTest: false,
+      depthWrite: false,
     });
     this.quad = new FullScreenQuad(this.mat);
   }
-  setSize(w, h) { this.mat.uniforms.uRes.value.set(w, h); }
+  setSize(w, h) {
+    this.mat.uniforms.uRes.value.set(w, h);
+  }
   render(renderer, writeBuffer, readBuffer) {
     const u = this.mat.uniforms;
     u.tDiffuse.value = readBuffer.texture;
@@ -229,29 +297,49 @@ class FinalPass extends Pass {
     renderer.setRenderTarget(this.renderToScreen ? null : writeBuffer);
     this.quad.render(renderer);
   }
-  dispose() { this.mat.dispose(); this.quad.dispose(); }
+  dispose() {
+    this.mat.dispose();
+    this.quad.dispose();
+  }
 }
 
 export function makePost(renderer, place, tier = 2) {
-  const scene = place.scene, camera = place.camera;
-  const composer = new EffectComposer(renderer, new THREE.WebGLRenderTarget(4, 4, { type: THREE.HalfFloatType, samples: 4 }));
+  const scene = place.scene,
+    camera = place.camera;
+  const composer = new EffectComposer(
+    renderer,
+    new THREE.WebGLRenderTarget(4, 4, { type: THREE.HalfFloatType, samples: 4 }),
+  );
   composer.addPass(new RenderPass(scene, camera));
   if (place.beforeAO) composer.addPass(place.beforeAO);
   // style study (?style=1..6): cel shading patched into every lit material, and a G-buffer that feeds both the ink
   // lines and the AO pass (so AO doesn't draw the scene a second time)
   const S = currentStyle();
-  let gbuf = null, ink = null;
+  let gbuf = null,
+    ink = null;
   if (S) {
-    setToon(S.toon); patchScene(scene);
+    setToon(S.toon);
+    patchScene(scene);
     gbuf = new GBufferPass(scene, camera);
     composer.addPass(gbuf);
   }
   const gtao = new GTAOPass(scene, camera, 4, 4);
-  gtao.updateGtaoMaterial({ radius: 0.55, distanceExponent: 1.0, thickness: 1.5, scale: 1.2, samples: 16, distanceFallOff: 1.0 });
+  gtao.updateGtaoMaterial({
+    radius: 0.55,
+    distanceExponent: 1.0,
+    thickness: 1.5,
+    scale: 1.2,
+    samples: 16,
+    distanceFallOff: 1.0,
+  });
   gtao.updatePdMaterial({ lumaPhi: 10, depthPhi: 2, normalPhi: 3, radius: 5, rings: 2, samples: 16 });
   if (gbuf) gtao.setGBuffer(gbuf.depthTexture, gbuf.texture);
   composer.addPass(gtao);
-  if (S && S.ink) { ink = new InkPass(gbuf, camera); ink.set(S.ink); composer.addPass(ink); }
+  if (S && S.ink) {
+    ink = new InkPass(gbuf, camera);
+    ink.set(S.ink);
+    composer.addPass(ink);
+  }
   const bloom = new BloomPass();
   composer.addPass(bloom);
   const final = new FinalPass(bloom);
@@ -260,39 +348,66 @@ export function makePost(renderer, place, tier = 2) {
 
   const g = styleGrade({ ...GRADE, ...(place.grade || {}) }, S);
   const u = final.mat.uniforms;
-  if (S) { u.uPalAmt.value = S.final.pal || 0; u.uGrain.value = S.final.grain || 0; }
+  if (S) {
+    u.uPalAmt.value = S.final.pal || 0;
+    u.uGrain.value = S.final.grain || 0;
+  }
   function applyGrade() {
     final.exposure = g.exposure;
-    u.uTemp.value = g.temp; u.uTint.value = g.tint; u.uSat.value = g.sat; u.uContrast.value = g.contrast; u.uVignette.value = g.vignette;
-    u.uLift.value.fromArray(g.lift); u.uGain.value.fromArray(g.gain); u.uShadowTint.value.fromArray(g.shadowTint); u.uHighTint.value.fromArray(g.highTint);
-    u.uFocusY.value = g.focusY; u.uFocusBand.value = g.focusBand; u.uFocusRamp.value = g.focusRamp; u.uBlur.value = g.blur;
-    bloom.threshold = g.bloomThreshold; bloom.knee = g.bloomKnee; bloom.radius = g.bloomRadius;
+    u.uTemp.value = g.temp;
+    u.uTint.value = g.tint;
+    u.uSat.value = g.sat;
+    u.uContrast.value = g.contrast;
+    u.uVignette.value = g.vignette;
+    u.uLift.value.fromArray(g.lift);
+    u.uGain.value.fromArray(g.gain);
+    u.uShadowTint.value.fromArray(g.shadowTint);
+    u.uHighTint.value.fromArray(g.highTint);
+    u.uFocusY.value = g.focusY;
+    u.uFocusBand.value = g.focusBand;
+    u.uFocusRamp.value = g.focusRamp;
+    u.uBlur.value = g.blur;
+    bloom.threshold = g.bloomThreshold;
+    bloom.knee = g.bloomKnee;
+    bloom.radius = g.bloomRadius;
     gtao.blendIntensity = g.ao;
   }
   let cur = tier;
   function setQuality(q) {
-    cur = q in TIERS ? q : (q ? 2 : 0);
+    cur = q in TIERS ? q : q ? 2 : 0;
     const T = TIERS[cur];
     gtao.enabled = !!T.ao;
     if (T.ao) {
       gtao.updateGtaoMaterial({ samples: T.aoSamples });
       gtao.updatePdMaterial({ samples: T.pdSamples });
     }
-    bloom.enabled = T.bloom > 0; bloom.levels = T.bloom || 1;
+    bloom.enabled = T.bloom > 0;
+    bloom.levels = T.bloom || 1;
     u.uBloom.value = T.bloom > 0 ? g.bloom : 0;
     u.uTaps.value = T.blurTaps;
     u.uPR.value = renderer.getPixelRatio();
     if (gbuf) gbuf.enabled = !!ink || gtao.enabled;
   }
-  applyGrade(); setQuality(tier);
+  applyGrade();
+  setQuality(tier);
   const post = {
-    composer, gtao, bloom, final, grade: g,
+    composer,
+    gtao,
+    bloom,
+    final,
+    grade: g,
     setQuality,
-    get quality() { return cur; },
+    get quality() {
+      return cur;
+    },
     // pixel-ratio cap for a tier
     dpr: (q = cur) => (TIERS[q] || TIERS[2]).dpr,
     // change the grade live (a place can shift it with the time of day)
-    setGrade(patch) { Object.assign(g, patch); applyGrade(); setQuality(cur); },
+    setGrade(patch) {
+      Object.assign(g, patch);
+      applyGrade();
+      setQuality(cur);
+    },
     render() {
       u.uPR.value = renderer.getPixelRatio();
       if (S) styleFrame();
@@ -303,7 +418,7 @@ export function makePost(renderer, place, tier = 2) {
   let sf = 0;
   const fwd = new THREE.Vector3();
   function styleFrame() {
-    if ((sf++ % 20) === 0) patchScene(scene);
+    if (sf++ % 20 === 0) patchScene(scene);
     u.uTime.value = (u.uTime.value + 0.618) % 1;
     if (ink) {
       camera.getWorldDirection(fwd);

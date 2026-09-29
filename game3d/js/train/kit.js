@@ -23,24 +23,40 @@ function rgb(c) {
   return [_col.r, _col.g, _col.b];
 }
 
-const _ab = V(), _ac = V(), _n = V();
+const _ab = V(),
+  _ac = V(),
+  _n = V();
 function faceNormal(a, b, c, out = V()) {
-  _ab.subVectors(b, a); _ac.subVectors(c, a);
+  _ab.subVectors(b, a);
+  _ac.subVectors(c, a);
   return out.crossVectors(_ab, _ac).normalize();
 }
 
 export class Geo {
-  constructor() { this.t = []; } // each: {a,b,c,col}
+  constructor() {
+    this.t = [];
+  } // each: {a,b,c,col}
 
-  get count() { return this.t.length; }
+  get count() {
+    return this.t.length;
+  }
 
   // Add a triangle. If `inside` is given, the winding is flipped so the face points away from it.
   tri(a, b, c, col, inside) {
     if (a.distanceToSquared(b) < 1e-12 || b.distanceToSquared(c) < 1e-12 || a.distanceToSquared(c) < 1e-12) return this;
     if (inside) {
       faceNormal(a, b, c, _n);
-      const g = V().add(a).add(b).add(c).multiplyScalar(1 / 3).sub(inside);
-      if (_n.dot(g) < 0) { const t = b; b = c; c = t; }
+      const g = V()
+        .add(a)
+        .add(b)
+        .add(c)
+        .multiplyScalar(1 / 3)
+        .sub(inside);
+      if (_n.dot(g) < 0) {
+        const t = b;
+        b = c;
+        c = t;
+      }
     }
     this.t.push({ a: a.clone(), b: b.clone(), c: c.clone(), col: rgb(col) });
     return this;
@@ -52,14 +68,31 @@ export class Geo {
     if (_n.dot(dir) < 0) return this.tri(a, c, b, col);
     return this.tri(a, b, c, col);
   }
-  quadDir(a, b, c, d, col, dir) { this.triDir(a, b, c, col, dir); this.triDir(a, c, d, col, dir); return this; }
+  quadDir(a, b, c, d, col, dir) {
+    this.triDir(a, b, c, col, dir);
+    this.triDir(a, c, d, col, dir);
+    return this;
+  }
 
-  quad(a, b, c, d, col, inside) { this.tri(a, b, c, col, inside); this.tri(a, c, d, col, inside); return this; }
+  quad(a, b, c, d, col, inside) {
+    this.tri(a, b, c, col, inside);
+    this.tri(a, c, d, col, inside);
+    return this;
+  }
 
   add(g, m) {
     for (const f of g.t) {
       const n = { a: f.a.clone(), b: f.b.clone(), c: f.c.clone(), col: f.col };
-      if (m) { n.a.applyMatrix4(m); n.b.applyMatrix4(m); n.c.applyMatrix4(m); if (m.determinant() < 0) { const t = n.b; n.b = n.c; n.c = t; } }
+      if (m) {
+        n.a.applyMatrix4(m);
+        n.b.applyMatrix4(m);
+        n.c.applyMatrix4(m);
+        if (m.determinant() < 0) {
+          const t = n.b;
+          n.b = n.c;
+          n.c = t;
+        }
+      }
       this.t.push(n);
     }
     return this;
@@ -67,25 +100,60 @@ export class Geo {
 
   apply(m) {
     const flip = m.determinant() < 0;
-    for (const f of this.t) { f.a.applyMatrix4(m); f.b.applyMatrix4(m); f.c.applyMatrix4(m); if (flip) { const t = f.b; f.b = f.c; f.c = t; } }
+    for (const f of this.t) {
+      f.a.applyMatrix4(m);
+      f.b.applyMatrix4(m);
+      f.c.applyMatrix4(m);
+      if (flip) {
+        const t = f.b;
+        f.b = f.c;
+        f.c = t;
+      }
+    }
     return this;
   }
-  move(x, y, z) { return this.apply(new THREE.Matrix4().makeTranslation(x, y, z)); }
-  scale(x, y = x, z = x) { return this.apply(new THREE.Matrix4().makeScale(x, y, z)); }
-  rot(x = 0, y = 0, z = 0, order = 'XYZ') { return this.apply(new THREE.Matrix4().makeRotationFromEuler(new THREE.Euler(x, y, z, order))); }
+  move(x, y, z) {
+    return this.apply(new THREE.Matrix4().makeTranslation(x, y, z));
+  }
+  scale(x, y = x, z = x) {
+    return this.apply(new THREE.Matrix4().makeScale(x, y, z));
+  }
+  rot(x = 0, y = 0, z = 0, order = 'XYZ') {
+    return this.apply(new THREE.Matrix4().makeRotationFromEuler(new THREE.Euler(x, y, z, order)));
+  }
   // Pose a part: rotate, then move.
-  place(pos, rotEuler = [0, 0, 0]) { this.rot(...rotEuler); return this.move(pos.x, pos.y, pos.z); }
+  place(pos, rotEuler = [0, 0, 0]) {
+    this.rot(...rotEuler);
+    return this.move(pos.x, pos.y, pos.z);
+  }
 
-  mirrorX() { const g = new Geo(); g.add(this, new THREE.Matrix4().makeScale(-1, 1, 1)); return g; }
-  clone() { return new Geo().add(this); }
+  mirrorX() {
+    const g = new Geo();
+    g.add(this, new THREE.Matrix4().makeScale(-1, 1, 1));
+    return g;
+  }
+  clone() {
+    return new Geo().add(this);
+  }
 
   // Deform every vertex (shared positions move together because they are equal values).
-  warp(fn) { for (const f of this.t) { fn(f.a); fn(f.b); fn(f.c); } return this; }
+  warp(fn) {
+    for (const f of this.t) {
+      fn(f.a);
+      fn(f.b);
+      fn(f.c);
+    }
+    return this;
+  }
 
   // Recolour faces: fn(centroid, normal, face) returns a colour or undefined to keep.
   paint(fn) {
     for (const f of this.t) {
-      const g = V().add(f.a).add(f.b).add(f.c).multiplyScalar(1 / 3);
+      const g = V()
+        .add(f.a)
+        .add(f.b)
+        .add(f.c)
+        .multiplyScalar(1 / 3);
       const n = faceNormal(f.a, f.b, f.c);
       const c = fn(g, n, f);
       if (c !== undefined && c !== null) f.col = rgb(c);
@@ -95,20 +163,42 @@ export class Geo {
 
   // Drop faces: keep(centroid, normal) returns false to remove.
   filter(keep) {
-    this.t = this.t.filter((f) => keep(V().add(f.a).add(f.b).add(f.c).multiplyScalar(1 / 3), faceNormal(f.a, f.b, f.c)));
+    this.t = this.t.filter((f) =>
+      keep(
+        V()
+          .add(f.a)
+          .add(f.b)
+          .add(f.c)
+          .multiplyScalar(1 / 3),
+        faceNormal(f.a, f.b, f.c),
+      ),
+    );
     return this;
   }
 
-  bounds() { const b = new THREE.Box3(); for (const f of this.t) { b.expandByPoint(f.a); b.expandByPoint(f.b); b.expandByPoint(f.c); } return b; }
+  bounds() {
+    const b = new THREE.Box3();
+    for (const f of this.t) {
+      b.expandByPoint(f.a);
+      b.expandByPoint(f.b);
+      b.expandByPoint(f.c);
+    }
+    return b;
+  }
 
   build() {
     const n = this.t.length;
-    const pos = new Float32Array(n * 9), col = new Float32Array(n * 9);
+    const pos = new Float32Array(n * 9),
+      col = new Float32Array(n * 9);
     let i = 0;
     for (const f of this.t) {
       for (const p of [f.a, f.b, f.c]) {
-        pos[i] = p.x; pos[i + 1] = p.y; pos[i + 2] = p.z;
-        col[i] = f.col[0]; col[i + 1] = f.col[1]; col[i + 2] = f.col[2];
+        pos[i] = p.x;
+        pos[i + 1] = p.y;
+        pos[i + 2] = p.z;
+        col[i] = f.col[0];
+        col[i + 1] = f.col[1];
+        col[i + 2] = f.col[2];
         i += 3;
       }
     }
@@ -120,30 +210,46 @@ export class Geo {
   }
 }
 
-export function merge(...gs) { const g = new Geo(); for (const x of gs) if (x) g.add(x); return g; }
+export function merge(...gs) {
+  const g = new Geo();
+  for (const x of gs) if (x) g.add(x);
+  return g;
+}
 
 // ---------- rings (cross-sections) ----------
 
 // Chamfered rectangle in the XZ plane at height y. ch=0 gives 4 points.
 export function rrect(w, d, ch = 0, y = 0, cx = 0, cz = 0) {
-  const x = w / 2, z = d / 2;
+  const x = w / 2,
+    z = d / 2;
   if (ch <= 0) return [V(cx - x, y, cz + z), V(cx + x, y, cz + z), V(cx + x, y, cz - z), V(cx - x, y, cz - z)];
   const c = Math.min(ch, x * 0.95, z * 0.95);
   return [
-    V(cx - x + c, y, cz + z), V(cx + x - c, y, cz + z), V(cx + x, y, cz + z - c), V(cx + x, y, cz - z + c),
-    V(cx + x - c, y, cz - z), V(cx - x + c, y, cz - z), V(cx - x, y, cz - z + c), V(cx - x, y, cz + z - c),
+    V(cx - x + c, y, cz + z),
+    V(cx + x - c, y, cz + z),
+    V(cx + x, y, cz + z - c),
+    V(cx + x, y, cz - z + c),
+    V(cx + x - c, y, cz - z),
+    V(cx - x + c, y, cz - z),
+    V(cx - x, y, cz - z + c),
+    V(cx - x, y, cz + z - c),
   ];
 }
 
 // Regular n-gon in the XZ plane.
 export function ngon(n, rx, rz = rx, y = 0, phase = 0, cx = 0, cz = 0) {
   const r = [];
-  for (let i = 0; i < n; i++) { const a = phase + (i / n) * Math.PI * 2; r.push(V(cx + Math.cos(a) * rx, y, cz + Math.sin(a) * rz)); }
+  for (let i = 0; i < n; i++) {
+    const a = phase + (i / n) * Math.PI * 2;
+    r.push(V(cx + Math.cos(a) * rx, y, cz + Math.sin(a) * rz));
+  }
   return r;
 }
 
 // Ring from 2D points (x, z) at height y.
-export function ringXZ(pts, y = 0) { return pts.map(([x, z]) => V(x, y, z)); }
+export function ringXZ(pts, y = 0) {
+  return pts.map(([x, z]) => V(x, y, z));
+}
 
 const centroid = (ring) => ring.reduce((s, p) => s.add(p), V()).multiplyScalar(1 / ring.length);
 
@@ -157,15 +263,25 @@ export function loft(rings, { color = '#888', caps = [true, true] } = {}) {
   const C = R.map(centroid);
   const pick = (info, a, b, c) => {
     if (typeof color !== 'function') return color;
-    info.g = V().add(a).add(b).add(c).multiplyScalar(1 / 3);
+    info.g = V()
+      .add(a)
+      .add(b)
+      .add(c)
+      .multiplyScalar(1 / 3);
     return color(info);
   };
   for (let i = 0; i < R.length - 1; i++) {
-    const r0 = R[i], r1 = R[i + 1];
-    const inside = V().addVectors(C[i], C[i + 1]).multiplyScalar(0.5);
+    const r0 = R[i],
+      r1 = R[i + 1];
+    const inside = V()
+      .addVectors(C[i], C[i + 1])
+      .multiplyScalar(0.5);
     for (let j = 0; j < N; j++) {
       const k = (j + 1) % N;
-      const a = r0[j], b = r0[k], c = r1[k], d = r1[j];
+      const a = r0[j],
+        b = r0[k],
+        c = r1[k],
+        d = r1[j];
       const col = pick({ kind: 'side', i, j }, a, b, c);
       geo.tri(a, b, c, col, inside);
       geo.tri(a, c, d, col, inside);
@@ -196,10 +312,23 @@ export function aloft(rings, { color = '#888', caps = [true, true] } = {}) {
   const geo = new Geo();
   const N = rings[0].length;
   const C = rings.map(centroid);
-  const col = (info, a, b, c) => (typeof color === 'function' ? color({ ...info, g: V().add(a).add(b).add(c).multiplyScalar(1 / 3) }) : color);
+  const col = (info, a, b, c) =>
+    typeof color === 'function'
+      ? color({
+          ...info,
+          g: V()
+            .add(a)
+            .add(b)
+            .add(c)
+            .multiplyScalar(1 / 3),
+        })
+      : color;
   for (let i = 0; i < rings.length - 1; i++) {
-    const A = rings[i], B = rings[i + 1];
-    const inside = V().addVectors(C[i], C[i + 1]).multiplyScalar(0.5);
+    const A = rings[i],
+      B = rings[i + 1];
+    const inside = V()
+      .addVectors(C[i], C[i + 1])
+      .multiplyScalar(0.5);
     for (let j = 0; j < N; j++) {
       const k = (j + 1) % N;
       geo.tri(A[j], A[k], B[j], col({ i, j, up: true }, A[j], A[k], B[j]), inside);
@@ -207,8 +336,10 @@ export function aloft(rings, { color = '#888', caps = [true, true] } = {}) {
     }
   }
   const cap = (ri, other) => {
-    const r = rings[ri], c = C[ri];
-    for (let j = 0; j < N; j++) geo.tri(c, r[j], r[(j + 1) % N], col({ i: ri, j, cap: true }, c, r[j], r[(j + 1) % N]), C[other]);
+    const r = rings[ri],
+      c = C[ri];
+    for (let j = 0; j < N; j++)
+      geo.tri(c, r[j], r[(j + 1) % N], col({ i: ri, j, cap: true }, c, r[j], r[(j + 1) % N]), C[other]);
   };
   if (caps[0]) cap(0, 1);
   if (caps[1]) cap(rings.length - 1, rings.length - 2);
@@ -221,8 +352,10 @@ export function oring(n, y, rx, rz, { cx = 0, cz = 0, half = false, e = 1, tilt 
   const r = [];
   for (let j = 0; j < n; j++) {
     const a = phase + ((j + (half ? 0.5 : 0)) / n) * Math.PI * 2;
-    const s = Math.sin(a), c = Math.cos(a);
-    const x = rx * Math.sign(s) * Math.abs(s) ** e, z = rz * Math.sign(c) * Math.abs(c) ** e;
+    const s = Math.sin(a),
+      c = Math.cos(a);
+    const x = rx * Math.sign(s) * Math.abs(s) ** e,
+      z = rz * Math.sign(c) * Math.abs(c) ** e;
     r.push(V(cx + x, y - tilt * (x / rx), cz + z));
   }
   return r;
@@ -236,7 +369,8 @@ export function box(w, h, d, { bevel = 0, taper = [1, 1], color = '#888', top, b
   let rings;
   if (bevel > 0) {
     const b = bevel;
-    const s1 = b / h, s2 = 1 - b / h;
+    const s1 = b / h,
+      s2 = 1 - b / h;
     rings = [
       rrect(w - 2 * b, d - 2 * b, b * 0.8, 0),
       rrect(w * lerp(1, tx, s1), d * lerp(1, tz, s1), b, b),
@@ -258,7 +392,9 @@ export function box(w, h, d, { bevel = 0, taper = [1, 1], color = '#888', top, b
 }
 
 // Box centred on the origin (all axes).
-export function cbox(w, h, d, opts) { return box(w, h, d, opts).move(0, -h / 2, 0); }
+export function cbox(w, h, d, opts) {
+  return box(w, h, d, opts).move(0, -h / 2, 0);
+}
 
 // Cylinder / prism along y from 0 to h.
 export function cyl(n, r0, r1, h, { color = '#888', phase = 0, rz0, rz1 } = {}) {
@@ -268,9 +404,12 @@ export function cyl(n, r0, r1, h, { color = '#888', phase = 0, rz0, rz1 } = {}) 
 // Flat ring (washer) lying in the XZ plane, y from 0 to h.
 export function washer(n, rOut, rIn, h, { color = '#888', phase = 0 } = {}) {
   const g = new Geo();
-  const o0 = ngon(n, rOut, rOut, 0, phase), o1 = ngon(n, rOut, rOut, h, phase);
-  const i0 = ngon(n, rIn, rIn, 0, phase), i1 = ngon(n, rIn, rIn, h, phase);
-  const up = V(0, 1, 0), down = V(0, -1, 0);
+  const o0 = ngon(n, rOut, rOut, 0, phase),
+    o1 = ngon(n, rOut, rOut, h, phase);
+  const i0 = ngon(n, rIn, rIn, 0, phase),
+    i1 = ngon(n, rIn, rIn, h, phase);
+  const up = V(0, 1, 0),
+    down = V(0, -1, 0);
   for (let j = 0; j < n; j++) {
     const k = (j + 1) % n;
     const mid = o0[j].clone().add(o0[k]).setY(0).normalize();
@@ -302,11 +441,19 @@ export function flat(pts, z, { color = '#888' } = {}) {
 // Low-poly ellipsoid. ws segments around, hs rings from top to bottom.
 // deform(v, u, t) may move each vertex (u around 0..1, t from top 0 to bottom 1).
 // keep(centroid, normal) may drop faces. color: hex or fn(centroid, normal).
-export function ball(rx, ry, rz, ws = 8, hs = 6, { color = '#888', deform, keep, phase = 0, jitter = 0, seed = 1 } = {}) {
+export function ball(
+  rx,
+  ry,
+  rz,
+  ws = 8,
+  hs = 6,
+  { color = '#888', deform, keep, phase = 0, jitter = 0, seed = 1 } = {},
+) {
   const rnd = rng(seed);
   const rows = [];
   for (let i = 0; i <= hs; i++) {
-    const t = i / hs, th = t * Math.PI;
+    const t = i / hs,
+      th = t * Math.PI;
     if (i === 0 || i === hs) {
       const v = V(0, Math.cos(th) * ry, 0);
       if (deform) deform(v, 0, t);
@@ -315,9 +462,13 @@ export function ball(rx, ry, rz, ws = 8, hs = 6, { color = '#888', deform, keep,
     }
     const row = [];
     for (let j = 0; j < ws; j++) {
-      const u = j / ws, ph = phase + u * Math.PI * 2 + (i % 2 ? Math.PI / ws : 0) * 0;
+      const u = j / ws,
+        ph = phase + u * Math.PI * 2 + (i % 2 ? Math.PI / ws : 0) * 0;
       const v = V(Math.sin(th) * Math.sin(ph) * rx, Math.cos(th) * ry, Math.sin(th) * Math.cos(ph) * rz);
-      if (jitter) { const s = 1 + (rnd() - 0.5) * 2 * jitter; v.multiplyScalar(s); }
+      if (jitter) {
+        const s = 1 + (rnd() - 0.5) * 2 * jitter;
+        v.multiplyScalar(s);
+      }
       if (deform) deform(v, u, t);
       row.push(v);
     }
@@ -327,16 +478,30 @@ export function ball(rx, ry, rz, ws = 8, hs = 6, { color = '#888', deform, keep,
   const O = V();
   const colOf = (a, b, c) => {
     if (typeof color !== 'function') return color;
-    const gc = V().add(a).add(b).add(c).multiplyScalar(1 / 3);
+    const gc = V()
+      .add(a)
+      .add(b)
+      .add(c)
+      .multiplyScalar(1 / 3);
     return color(gc, faceNormal(a, b, c));
   };
   for (let i = 0; i < hs; i++) {
-    const r0 = rows[i], r1 = rows[i + 1];
+    const r0 = rows[i],
+      r1 = rows[i + 1];
     for (let j = 0; j < ws; j++) {
       const k = (j + 1) % ws;
-      if (r0.length === 1) { const c = colOf(r0[0], r1[j], r1[k]); g.tri(r0[0], r1[j], r1[k], c, O); }
-      else if (r1.length === 1) { const c = colOf(r0[j], r0[k], r1[0]); g.tri(r0[j], r0[k], r1[0], c, O); }
-      else { const c = colOf(r0[j], r0[k], r1[k]); g.tri(r0[j], r0[k], r1[k], c, O); const c2 = colOf(r0[j], r1[k], r1[j]); g.tri(r0[j], r1[k], r1[j], c2, O); }
+      if (r0.length === 1) {
+        const c = colOf(r0[0], r1[j], r1[k]);
+        g.tri(r0[0], r1[j], r1[k], c, O);
+      } else if (r1.length === 1) {
+        const c = colOf(r0[j], r0[k], r1[0]);
+        g.tri(r0[j], r0[k], r1[0], c, O);
+      } else {
+        const c = colOf(r0[j], r0[k], r1[k]);
+        g.tri(r0[j], r0[k], r1[k], c, O);
+        const c2 = colOf(r0[j], r1[k], r1[j]);
+        g.tri(r0[j], r1[k], r1[j], c2, O);
+      }
     }
   }
   if (keep) g.filter(keep);
@@ -350,15 +515,28 @@ export function strand(path, w, t, out, { color = '#888', tipColor, tipFrom = 1,
   const rings = [];
   for (let i = 0; i < path.length; i++) {
     const p = path[i];
-    const T = (i === 0 ? path[1].clone().sub(path[0]) : i === path.length - 1 ? p.clone().sub(path[i - 1]) : path[i + 1].clone().sub(path[i - 1])).normalize();
+    const T = (
+      i === 0
+        ? path[1].clone().sub(path[0])
+        : i === path.length - 1
+          ? p.clone().sub(path[i - 1])
+          : path[i + 1].clone().sub(path[i - 1])
+    ).normalize();
     const O = (typeof out === 'function' ? out(i, p) : out).clone().normalize();
     const S = V().crossVectors(T, O).normalize();
     const N = V().crossVectors(S, T).normalize();
-    if (w[i] <= 1e-5) { rings.push(p.clone()); continue; }
-    const hw = w[i] / 2, th = t[i];
+    if (w[i] <= 1e-5) {
+      rings.push(p.clone());
+      continue;
+    }
+    const hw = w[i] / 2,
+      th = t[i];
     rings.push([
       p.clone().addScaledVector(S, -hw),
-      p.clone().addScaledVector(S, ridge * hw).addScaledVector(N, th),
+      p
+        .clone()
+        .addScaledVector(S, ridge * hw)
+        .addScaledVector(N, th),
       p.clone().addScaledVector(S, hw),
       p.clone().addScaledVector(N, -th * inner),
     ]);

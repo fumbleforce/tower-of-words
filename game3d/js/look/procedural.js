@@ -17,21 +17,61 @@
 import * as THREE from 'three';
 
 const KIND = {
-  tile: 1, grout: 1, carpet: 2, plaster: 3, wallcap: 3, frame: 3, metal: 4, drawerfront: 4, handle: 4, laminate: 5, fabric: 6,
-  plastic: 7, monitor: 7, tower: 7, keys: 7, binder: 7, skirting: 7, card: 8, paper: 8, door: 9, ceramic: 10, concrete: 11, stone: 12,
-  soil: 13, paint: 14,
+  tile: 1,
+  grout: 1,
+  carpet: 2,
+  plaster: 3,
+  wallcap: 3,
+  frame: 3,
+  metal: 4,
+  drawerfront: 4,
+  handle: 4,
+  laminate: 5,
+  fabric: 6,
+  plastic: 7,
+  monitor: 7,
+  tower: 7,
+  keys: 7,
+  binder: 7,
+  skirting: 7,
+  card: 8,
+  paper: 8,
+  door: 9,
+  ceramic: 10,
+  concrete: 11,
+  stone: 12,
+  soil: 13,
+  paint: 14,
 };
 export const KINDS = Object.keys(KIND);
-const FN = { 1: 'pTile', 2: 'pCarpet', 3: 'pPlaster', 4: 'pMetal', 5: 'pLaminate', 6: 'pFabric', 7: 'pPlastic', 8: 'pCard', 9: 'pDoor', 10: 'pCeramic', 11: 'pConcrete', 12: 'pStone', 13: 'pSoil', 14: 'pPaint' };
+const FN = {
+  1: 'pTile',
+  2: 'pCarpet',
+  3: 'pPlaster',
+  4: 'pMetal',
+  5: 'pLaminate',
+  6: 'pFabric',
+  7: 'pPlastic',
+  8: 'pCard',
+  9: 'pDoor',
+  10: 'pCeramic',
+  11: 'pConcrete',
+  12: 'pStone',
+  13: 'pSoil',
+  14: 'pPaint',
+};
 
 export const PROC = { on: true };
 // shared by every procedural material
 export const PU = {
   uDetail: { value: 1 },
-  uWearA: { value: new THREE.Vector2(1e4, 1e4) }, uWearB: { value: new THREE.Vector2(1e4, 1e4) },   // the carpet's worn path (off unless set)
+  uWearA: { value: new THREE.Vector2(1e4, 1e4) },
+  uWearB: { value: new THREE.Vector2(1e4, 1e4) }, // the carpet's worn path (off unless set)
 };
 // fine detail per quality tier: 0 low, 1 medium (phone), 2 high
-export const setDetail = (tier) => { PU.uDetail.value = tier >= 2 ? 1 : tier === 1 ? 0.7 : 0.35; };
+export const setDetail = (tier) => {
+  PU.uDetail.value = tier >= 2 ? 1 : tier === 1 ? 0.7 : 0.35;
+};
 
 const VERT = `
 attribute vec4 aLook; varying vec3 vPW; varying vec3 vPN; varying vec4 vLook;
@@ -151,14 +191,18 @@ vec3 pPaint(vec3 c){
 
 function roughBody(kind) {
   // tile: a little gloss variation per tile; metal: streaks in the gloss too; ceramic: a glaze; carpet and fabric stay matte
-  if (kind === 1) return 'roughnessFactor = clamp(roughnessFactor + (ph(floor((vPW.xz - uTileO) / uTileS) + 5.1) - 0.5) * 0.12, 0.05, 1.0);';
-  if (kind === 4) return 'roughnessFactor = clamp(roughnessFactor - 0.25 + (pn(vPW.xz * vec2(3.0, 200.0) + vPW.y * 200.0) - 0.5) * 0.15, 0.2, 1.0);';
-  if (kind === 10) return 'roughnessFactor = clamp(roughnessFactor - 0.12 + (pfbm(pplane(vPW, vPN) * 7.0) - 0.5) * 0.2, 0.15, 1.0);';
+  if (kind === 1)
+    return 'roughnessFactor = clamp(roughnessFactor + (ph(floor((vPW.xz - uTileO) / uTileS) + 5.1) - 0.5) * 0.12, 0.05, 1.0);';
+  if (kind === 4)
+    return 'roughnessFactor = clamp(roughnessFactor - 0.25 + (pn(vPW.xz * vec2(3.0, 200.0) + vPW.y * 200.0) - 0.5) * 0.15, 0.2, 1.0);';
+  if (kind === 10)
+    return 'roughnessFactor = clamp(roughnessFactor - 0.12 + (pfbm(pplane(vPW, vPN) * 7.0) - 0.5) * 0.2, 0.15, 1.0);';
   return '';
 }
 
 export const kindOf = (surf) => KIND[surf] || 0;
-export const takes = (m) => !!m && (m.isMeshStandardMaterial || m.isMeshLambertMaterial || m.isMeshPhongMaterial) && !m.isShaderMaterial;
+export const takes = (m) =>
+  !!m && (m.isMeshStandardMaterial || m.isMeshLambertMaterial || m.isMeshPhongMaterial) && !m.isShaderMaterial;
 const PATCHED = new WeakSet();
 export const isPatched = (m) => PATCHED.has(m);
 
@@ -166,7 +210,8 @@ export const isPatched = (m) => PATCHED.has(m);
 // draw-call pass (perf/batch.js), whatever each mesh is made of
 function pick() {
   let f = 'int lookK = int(vLook.x + 0.5);\n';
-  for (const [k, fn] of Object.entries(FN)) f += `${k === '1' ? '' : 'else '}if (lookK == ${k}) diffuseColor.rgb = ${fn}(diffuseColor.rgb);\n`;
+  for (const [k, fn] of Object.entries(FN))
+    f += `${k === '1' ? '' : 'else '}if (lookK == ${k}) diffuseColor.rgb = ${fn}(diffuseColor.rgb);\n`;
   return f;
 }
 function roughPick() {
@@ -178,9 +223,16 @@ function roughPick() {
 // The per-mesh surface: a constant vertex attribute aLook = (kind, tile origin x, z, tile size). A mesh without it
 // (or kind 0) is drawn as before. Geometry shared with a mesh of another kind must be copied first (look/index.js).
 export function setSurface(geometry, surf, tile = null) {
-  const k = KIND[surf] || 0, n = geometry.attributes.position.count, a = new Float32Array(n * 4);
+  const k = KIND[surf] || 0,
+    n = geometry.attributes.position.count,
+    a = new Float32Array(n * 4);
   const t = tile || [0, 0, 0.8];
-  for (let i = 0; i < n; i++) { a[i * 4] = k; a[i * 4 + 1] = t[0]; a[i * 4 + 2] = t[1]; a[i * 4 + 3] = t[2]; }
+  for (let i = 0; i < n; i++) {
+    a[i * 4] = k;
+    a[i * 4 + 1] = t[0];
+    a[i * 4 + 2] = t[1];
+    a[i * 4 + 3] = t[2];
+  }
   geometry.setAttribute('aLook', new THREE.BufferAttribute(a, 4));
   return k;
 }
@@ -191,22 +243,38 @@ export function patchMaterial(m) {
   if (!takes(m)) return false;
   if (PATCHED.has(m)) return true;
   PATCHED.add(m);
-  const prev = m.onBeforeCompile, prevKey = m.customProgramCacheKey;
+  const prev = m.onBeforeCompile,
+    prevKey = m.customProgramCacheKey;
   const had = prev !== THREE.Material.prototype.onBeforeCompile;
   m.onBeforeCompile = function (sh, r) {
     if (had) prev.call(this, sh, r);
     Object.assign(sh.uniforms, PU);
-    sh.vertexShader = VERT + 'attribute vec3 aBake; varying vec3 vBake;\n' + sh.vertexShader.replace('#include <project_vertex>', '#include <project_vertex>\n' + VERT_MAIN + '  vBake = aBake;\n');
+    sh.vertexShader =
+      VERT +
+      'attribute vec3 aBake; varying vec3 vBake;\n' +
+      sh.vertexShader.replace(
+        '#include <project_vertex>',
+        '#include <project_vertex>\n' + VERT_MAIN + '  vBake = aBake;\n',
+      );
     let f = '#include <color_fragment>\ndiffuseColor.rgb *= 1.0 - vBake;\n';
-    if (PROC.on) f += pick(); else f += 'int lookK = 0;\n';
-    sh.fragmentShader = FRAG + 'varying vec3 vBake;\n' + sh.fragmentShader
-      .replace('#include <color_fragment>', f)
-      .replace('#include <roughnessmap_fragment>', '#include <roughnessmap_fragment>\n' + (PROC.on && this.isMeshStandardMaterial ? roughPick() : ''));
+    if (PROC.on) f += pick();
+    else f += 'int lookK = 0;\n';
+    sh.fragmentShader =
+      FRAG +
+      'varying vec3 vBake;\n' +
+      sh.fragmentShader
+        .replace('#include <color_fragment>', f)
+        .replace(
+          '#include <roughnessmap_fragment>',
+          '#include <roughnessmap_fragment>\n' + (PROC.on && this.isMeshStandardMaterial ? roughPick() : ''),
+        );
   };
-  m.customProgramCacheKey = function () { return (had ? prevKey.call(this) : '') + '|look' + (PROC.on ? 1 : 0); };
+  m.customProgramCacheKey = function () {
+    return (had ? prevKey.call(this) : '') + '|look' + (PROC.on ? 1 : 0);
+  };
   // a mesh without aLook / aBake reads 0 (no change); without this WebGL would keep whatever value the slot had last
   m.defaultAttributeValues = { ...(m.defaultAttributeValues || {}), aBake: [0, 0, 0], aLook: [0, 0, 0, 0.8] };
-  m.userData.look = true;   // the draw-call pass reads userData as part of a material's settings
+  m.userData.look = true; // the draw-call pass reads userData as part of a material's settings
   m.needsUpdate = true;
   return true;
 }
@@ -214,8 +282,10 @@ export function patchMaterial(m) {
 // Switch the surface patterns on or off in these scenes: every patched material recompiles (same objects).
 export function setProcedural(on, scenes = []) {
   PROC.on = !!on;
-  for (const s of scenes) s && s.traverse((o) => {
-    const ms = o.material ? [].concat(o.material) : [];
-    for (const m of ms) if (m && m.userData && m.userData.look) m.needsUpdate = true;
-  });
+  for (const s of scenes)
+    s &&
+      s.traverse((o) => {
+        const ms = o.material ? [].concat(o.material) : [];
+        for (const m of ms) if (m && m.userData && m.userData.look) m.needsUpdate = true;
+      });
 }
