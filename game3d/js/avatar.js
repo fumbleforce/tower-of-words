@@ -113,7 +113,7 @@ export function makeAvatar() {
 // used with a Lambert material (as for Mio). Colour tweak only: the texture is pulled a little toward the muted
 // palette (slightly less saturated, a touch cooler). The mesh, face and body are untouched.
 import { GLTFLoader } from '../vendor/loaders/GLTFLoader.js';
-import { calmSitTime, calmIdleTime, V as ver, poseLayer, addPhone, API_PHONE_BONES, CDIR } from './mio.js';
+import { calmSitTime, calmIdleTime, V as ver, poseLayer, addPhone, API_PHONE_BONES, CDIR, makeGait } from './mio.js';
 const EDIR = new URL('../assets/eric/', import.meta.url).href;
 export const loadEric = (o = {}) => loadMeshy('eric', { dir: EDIR, height: 1.2, ...o });
 // one-shot gesture clips from Meshy's library (bow, wave, shrug, nod), retargeted onto each rig as JSON
@@ -183,8 +183,10 @@ export async function loadMeshy(id, { height = 1.2, dir = CDIR + id + '/' } = {}
     g.reset(); g.setEffectiveWeight(1); g.fadeIn(0.25).play(); if (cur) cur.fadeOut(0.25);
     return new Promise((ok) => { gesturing = { a: g, ok, out: false }; });
   }
+  // Eric's measured strides; other API-rigged cast use the same until measured (their clips come from the same library)
+  const gait = makeGait(actions, { walkV: 0.44, runV: 1.1, runOff: 0.03 });
   function update(dt, speed = 1) {
-    actions.walk.timeScale = speed;
+    gait.step(dt, curName, speed);
     restoreBones();
     mixer.update(dt); bt += dt;
     if (gesturing && !gesturing.out && gesturing.a.time >= gesturing.a.getClip().duration - 0.35) {
@@ -206,7 +208,7 @@ export async function loadMeshy(id, { height = 1.2, dir = CDIR + id + '/' } = {}
   setState('idle'); snapBones(); update(0);
   const a = {
     id, root, model, mixer, update, sitHip, pose, layers, phone: ph.hook, placePhone: ph.place, gesture, gestures: Object.keys(gact), seated: false, scripted: false, meshy: true,
-    setState, get state() { return curName; },
+    setState, setGait: gait.set, get state() { return curName; },
     // hips on the seat top at (x, z), facing ry
     sitAt(x, seatTop, z, ry) {
       const k = root.scale.x;
