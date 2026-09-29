@@ -59,18 +59,6 @@
     {
       "file": "game3d/js/mio.js",
       "ruleId": "no-unused-vars",
-      "message": "'fwd' is assigned a value but never used.",
-      "context": "6293ce54703878347ab8f884882982121f77b3a8de03bec1a1887f3370d3ed31"
-    },
-    {
-      "file": "game3d/js/mio.js",
-      "ruleId": "no-unused-vars",
-      "message": "'q' is assigned a value but never used.",
-      "context": "3419cc3c6d857cd673b57a0eddde92a59d6adc3b102343856af75b7355410181"
-    },
-    {
-      "file": "game3d/js/mio.js",
-      "ruleId": "no-unused-vars",
       "message": "'navyLum' is assigned a value but never used.",
       "context": "30f8a22be21c40217e511076064e1bb82790c4218f9f11c1656968c4bad573fa"
     },
