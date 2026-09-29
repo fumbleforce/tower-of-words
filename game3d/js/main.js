@@ -3,6 +3,7 @@ import * as THREE from 'three';
 import { createRenderer, Walker, Markers, Q, blob } from './engine.js';
 import { makePost } from './post.js';
 import { attachLift } from './places/lift.js';
+import { applyLook } from './look/index.js';
 import { needsPractice } from './mastery.js';
 import { OutlinePass } from 'three/addons/postprocessing/OutlinePass.js';
 import { SmoothWalker, walkRig, faceRig, approachSpot, pickPerson, standOut, bodies, softSeparate } from './move.js';
@@ -631,6 +632,7 @@ async function prepare(name) {
     const place = await PLACES[name](game, story);
     place.name = name;
     attachLift(game, place);   // walk-in lift (places/lift.js)
+    applyLook(place, game);    // surface patterns, baked light (look/index.js); materials patched in place
     return { place, story };
   })();
   return game.prepared[name];

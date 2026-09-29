@@ -1,0 +1,371 @@
+{
+ "before/train-phone": {
+  "calls": 1638,
+  "tris": 311761,
+  "programs": 31,
+  "look": null,
+  "errs": []
+ },
+ "before/train-desk": {
+  "calls": 1837,
+  "tris": 339479,
+  "programs": 30,
+  "look": null,
+  "errs": []
+ },
+ "before/gate-desk": {
+  "calls": 1819,
+  "tris": 208432,
+  "programs": 28,
+  "look": null,
+  "errs": []
+ },
+ "before/train-close": {
+  "calls": 932,
+  "tris": 139345,
+  "programs": 30,
+  "look": null,
+  "errs": []
+ },
+ "before/gate-phone": {
+  "calls": 1171,
+  "tris": 146838,
+  "programs": 28,
+  "look": null,
+  "errs": []
+ },
+ "before/gate-close": {
+  "calls": 643,
+  "tris": 76800,
+  "programs": 28,
+  "look": null,
+  "errs": []
+ },
+ "before/office-phone": {
+  "calls": 3163,
+  "tris": 599739,
+  "programs": 35,
+  "look": null,
+  "errs": []
+ },
+ "before/office-desk": {
+  "calls": 6318,
+  "tris": 1154111,
+  "programs": 37,
+  "look": null,
+  "errs": []
+ },
+ "before/office-close": {
+  "calls": 1893,
+  "tris": 361781,
+  "programs": 37,
+  "look": null,
+  "errs": []
+ },
+ "after/train-desk": {
+  "calls": 1837,
+  "tris": 339479,
+  "programs": 31,
+  "look": {
+   "meshes": 823,
+   "materials": 223,
+   "patched": 223,
+   "bake": {
+    "meshes": 823,
+    "verts": 655032,
+    "occluders": 754
+   },
+   "ms": 151
+  },
+  "errs": []
+ },
+ "after/train-phone": {
+  "calls": 1638,
+  "tris": 311761,
+  "programs": 32,
+  "look": {
+   "meshes": 823,
+   "materials": 223,
+   "patched": 223,
+   "bake": {
+    "meshes": 823,
+    "verts": 655032,
+    "occluders": 754
+   },
+   "ms": 198
+  },
+  "errs": []
+ },
+ "after/train-close": {
+  "calls": 932,
+  "tris": 139345,
+  "programs": 31,
+  "look": {
+   "meshes": 823,
+   "materials": 223,
+   "patched": 223,
+   "bake": {
+    "meshes": 823,
+    "verts": 655032,
+    "occluders": 754
+   },
+   "ms": 185
+  },
+  "errs": []
+ },
+ "after/gate-desk": {
+  "calls": 2079,
+  "tris": 251176,
+  "programs": 30,
+  "look": {
+   "meshes": 583,
+   "materials": 93,
+   "patched": 93,
+   "bake": {
+    "meshes": 582,
+    "verts": 245058,
+    "occluders": 466
+   },
+   "ms": 97
+  },
+  "errs": []
+ },
+ "after/gate-phone": {
+  "calls": 1275,
+  "tris": 174318,
+  "programs": 30,
+  "look": {
+   "meshes": 583,
+   "materials": 93,
+   "patched": 93,
+   "bake": {
+    "meshes": 582,
+    "verts": 245058,
+    "occluders": 466
+   },
+   "ms": 77
+  },
+  "errs": []
+ },
+ "after/gate-close": {
+  "calls": 685,
+  "tris": 98684,
+  "programs": 30,
+  "look": {
+   "meshes": 583,
+   "materials": 93,
+   "patched": 93,
+   "bake": {
+    "meshes": 582,
+    "verts": 245058,
+    "occluders": 466
+   },
+   "ms": 92
+  },
+  "errs": []
+ },
+ "after/office-desk": {
+  "calls": 9580,
+  "tris": 1222491,
+  "programs": 40,
+  "look": {
+   "meshes": 2430,
+   "materials": 211,
+   "patched": 211,
+   "bake": {
+    "meshes": 2428,
+    "verts": 943822,
+    "occluders": 1925
+   },
+   "ms": 399
+  },
+  "errs": []
+ },
+ "after/office-phone": {
+  "calls": 4721,
+  "tris": 623905,
+  "programs": 38,
+  "look": {
+   "meshes": 2430,
+   "materials": 211,
+   "patched": 211,
+   "bake": {
+    "meshes": 2428,
+    "verts": 943822,
+    "occluders": 1925
+   },
+   "ms": 410
+  },
+  "errs": []
+ },
+ "after/office-close": {
+  "calls": 3259,
+  "tris": 427503,
+  "programs": 40,
+  "look": {
+   "meshes": 2430,
+   "materials": 211,
+   "patched": 211,
+   "bake": {
+    "meshes": 2428,
+    "verts": 943822,
+    "occluders": 1925
+   },
+   "ms": 429
+  },
+  "errs": []
+ },
+ "hard/train-desk": {
+  "calls": 1837,
+  "tris": 339479,
+  "programs": 31,
+  "look": {
+   "meshes": 823,
+   "materials": 223,
+   "patched": 223,
+   "bake": {
+    "meshes": 823,
+    "verts": 655032,
+    "occluders": 754
+   },
+   "ms": 245
+  },
+  "errs": []
+ },
+ "hard/train-phone": {
+  "calls": 1638,
+  "tris": 311761,
+  "programs": 32,
+  "look": {
+   "meshes": 823,
+   "materials": 223,
+   "patched": 223,
+   "bake": {
+    "meshes": 823,
+    "verts": 655032,
+    "occluders": 754
+   },
+   "ms": 232
+  },
+  "errs": []
+ },
+ "hard/train-close": {
+  "calls": 932,
+  "tris": 139345,
+  "programs": 31,
+  "look": {
+   "meshes": 823,
+   "materials": 223,
+   "patched": 223,
+   "bake": {
+    "meshes": 823,
+    "verts": 655032,
+    "occluders": 754
+   },
+   "ms": 160
+  },
+  "errs": []
+ },
+ "hard/gate-desk": {
+  "calls": 2079,
+  "tris": 296288,
+  "programs": 30,
+  "look": {
+   "meshes": 583,
+   "materials": 93,
+   "patched": 93,
+   "bake": {
+    "meshes": 582,
+    "verts": 257690,
+    "occluders": 466
+   },
+   "ms": 87
+  },
+  "errs": []
+ },
+ "hard/gate-phone": {
+  "calls": 1275,
+  "tris": 203502,
+  "programs": 30,
+  "look": {
+   "meshes": 583,
+   "materials": 93,
+   "patched": 93,
+   "bake": {
+    "meshes": 582,
+    "verts": 257690,
+    "occluders": 466
+   },
+   "ms": 82
+  },
+  "errs": []
+ },
+ "hard/gate-close": {
+  "calls": 685,
+  "tris": 120760,
+  "programs": 30,
+  "look": {
+   "meshes": 583,
+   "materials": 93,
+   "patched": 93,
+   "bake": {
+    "meshes": 582,
+    "verts": 257690,
+    "occluders": 466
+   },
+   "ms": 82
+  },
+  "errs": []
+ },
+ "hard/office-desk": {
+  "calls": 9580,
+  "tris": 1357715,
+  "programs": 40,
+  "look": {
+   "meshes": 2430,
+   "materials": 211,
+   "patched": 211,
+   "bake": {
+    "meshes": 2428,
+    "verts": 977352,
+    "occluders": 1925
+   },
+   "ms": 334
+  },
+  "errs": []
+ },
+ "hard/office-phone": {
+  "calls": 4721,
+  "tris": 699477,
+  "programs": 38,
+  "look": {
+   "meshes": 2430,
+   "materials": 211,
+   "patched": 211,
+   "bake": {
+    "meshes": 2428,
+    "verts": 977352,
+    "occluders": 1925
+   },
+   "ms": 362
+  },
+  "errs": []
+ },
+ "hard/office-close": {
+  "calls": 3259,
+  "tris": 477125,
+  "programs": 40,
+  "look": {
+   "meshes": 2430,
+   "materials": 211,
+   "patched": 211,
+   "bake": {
+    "meshes": 2428,
+    "verts": 977352,
+    "occluders": 1925
+   },
+   "ms": 341
+  },
+  "errs": []
+ }
+}

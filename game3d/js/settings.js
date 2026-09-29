@@ -13,6 +13,7 @@ export const DEFAULTS = {
   master: 0.9, music: 0.7, voice: 1, ambience: 0.8,   // 0..1
   voiceOn: true,
   quality: 'auto',        // 'auto' | 'low' | 'medium' | 'high' (post.js reads the tier; see qualityTier())
+  surfaces: true,         // Surface detail: patterns in floors, walls, fabric and metal (look/procedural.js)
   reduceMotion: reduceDefault,
   keySay: 'KeyQ',
   uiSize: 1,              // a multiplier on the viewport-based UI scale (0.85, 1, 1.2, 1.4)

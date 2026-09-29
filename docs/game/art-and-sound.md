@@ -12,7 +12,11 @@ Elsewhere: every approved file is listed in art/approved/README.md, and the bibl
 - The office is a 90s to 00s Japanese office, not sci-fi: steel desks in islands with the section head's desk across the end, beige CRT monitors, a fax, filing cabinets and binders, an in/out board, venetian blinds, grey carpet tiles, a 給湯室 with an electric thermos pot.
 - Environment style is open (Jørgen, 2026-09-28: soft is good but "extremely plain, like straight out of Blender with zero texture but a base colour"). A style study aims at the polish of our anime art (reference art/refs/style-target-kuro-pose-s202.webp: ink lines, cel shading, navy shadows, bright window light). Verdict on painted cel (2026-09-29): it "looks more like evening... doesn't add the texture to the world I was hoping for"; he wants the theoretical options written up as text to decide.
 - Floors must not show doubled tile grids.
-- Surface patterns on every model, softer baked light and small modelled detail in props (Jørgen, 2026-09-29, review style-avenues-room): for now in GUIDE, Visual design, "World look"; it moves here once that edit is committed.
+- The approved world look (Jørgen, 2026-09-29, reviews style-avenues-room and style-in-game), on top of the flat colours in every place:
+  - Surface patterns on every model, props included ("so also the chair, flower pot gets it"): tiles with per-tile shade and chips, plaster clouds, brushed metal, desk grain, fabric weave, glazed pots and mugs, card, painted doors, concrete and stone. The people keep their flat colours. It is a switch in Settings > Graphics > Surface detail, on by default. Verdict on the game shots: "looks good".
+  - Baked light in a softer version (the first was "over the top hard"): corners, wall bottoms, under desks and around feet a little darker, faces toward the light a little warmer, repeated props slightly different tints. Verdict: "good".
+  - Small modelled detail as in the showcase: keyboards, trays, pen cups and drawer handles on desks, five-star chair bases, pot rims with saucers and pebbles, panelled doors with handles and hinges, skirting and wall caps, shelves, filing cabinets, mugs with handles. Verdict: "great".
+  - Rejected avenues: decals and wear (3), trim sheets (7). Code: game3d/js/look/ (design/style/AVENUES.md, "In the game").
 
 ## People in the world
 

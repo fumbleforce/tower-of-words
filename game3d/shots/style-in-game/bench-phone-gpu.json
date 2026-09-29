@@ -1,0 +1,148 @@
+{
+ "gpu": true,
+ "desk": false,
+ "cpu": 4,
+ "res": {
+  "train": {
+   "before": {
+    "calls": 690,
+    "tris": 340469,
+    "load": 5448,
+    "frame": {
+     "mean": 23.93,
+     "p50": 18.6,
+     "p95": 53.8
+    }
+   },
+   "after": {
+    "calls": 745,
+    "tris": 330053,
+    "load": 4201,
+    "look": {
+     "meshes": 823,
+     "materials": 223,
+     "patched": 223,
+     "bake": {
+      "meshes": 823,
+      "verts": 655032,
+      "occluders": 754
+     },
+     "ms": 571
+    },
+    "frameSurfOn": {
+     "mean": 85.54,
+     "p50": 85.4,
+     "p95": 142.8
+    },
+    "frameSurfOff": {
+     "mean": 40,
+     "p50": 38.8,
+     "p95": 68.2
+    },
+    "offCount": {
+     "calls": 739,
+     "tris": 326249
+    },
+    "frameSurfOn2": {
+     "mean": 26.14,
+     "p50": 20.5,
+     "p95": 74.5
+    }
+   }
+  },
+  "gate": {
+   "before": {
+    "calls": 544,
+    "tris": 190358,
+    "load": 2502,
+    "frame": {
+     "mean": 53.88,
+     "p50": 42.7,
+     "p95": 139.9
+    }
+   },
+   "after": {
+    "calls": 747,
+    "tris": 210938,
+    "load": 5972,
+    "look": {
+     "meshes": 583,
+     "materials": 93,
+     "patched": 93,
+     "bake": {
+      "meshes": 582,
+      "verts": 245058,
+      "occluders": 466
+     },
+     "ms": 609
+    },
+    "frameSurfOn": {
+     "mean": 26.99,
+     "p50": 18.7,
+     "p95": 81.5
+    },
+    "frameSurfOff": {
+     "mean": 15.85,
+     "p50": 11,
+     "p95": 43.5
+    },
+    "offCount": {
+     "calls": 580,
+     "tris": 216834
+    },
+    "frameSurfOn2": {
+     "mean": 12.12,
+     "p50": 12,
+     "p95": 14.9
+    }
+   }
+  },
+  "office": {
+   "before": {
+    "calls": 408,
+    "tris": 399031,
+    "load": 2130,
+    "frame": {
+     "mean": 16.49,
+     "p50": 13.9,
+     "p95": 32.4
+    }
+   },
+   "after": {
+    "calls": 655,
+    "tris": 429891,
+    "load": 4238,
+    "look": {
+     "meshes": 2430,
+     "materials": 211,
+     "patched": 211,
+     "bake": {
+      "meshes": 2428,
+      "verts": 943822,
+      "occluders": 1925
+     },
+     "ms": 1074
+    },
+    "frameSurfOn": {
+     "mean": 22.3,
+     "p50": 22.1,
+     "p95": 30
+    },
+    "frameSurfOff": {
+     "mean": 21.38,
+     "p50": 20.8,
+     "p95": 30.4
+    },
+    "offCount": {
+     "calls": 639,
+     "tris": 429891
+    },
+    "frameSurfOn2": {
+     "mean": 22.59,
+     "p50": 21.2,
+     "p95": 43.1
+    }
+   }
+  }
+ }
+}

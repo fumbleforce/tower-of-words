@@ -124,3 +124,11 @@ Tools (take /tmp/claude-1000/browser.lock; `sh game3d/tools/perf/locked.sh <name
 `tools/perf/ab.mjs` (paired numbers and pixel diffs), `tools/perf/day.mjs` (whole-day check), `tools/perf/budget.mjs`
 (perf.mjs with the hook), `tools/perf/calls.mjs` (draw calls by pass and kind), `tools/perf/probe.mjs` (what a place
 is made of).
+
+## World look (js/look/, 2026-09-29)
+
+`applyLook(place, game)` runs in main.js prepare() after attachLift and before the draw-call pass's first scan (that
+scan is deferred, so the perf tools' hook after `place.name = name;` still sees the look). It patches materials in
+place and adds a per-vertex `aBake` attribute; batch.js folds `aBake` into its vertex colours and copies the shader
+patch onto its batch materials (clone() drops onBeforeCompile). Numbers: game3d/shots/style-in-game/ and review
+style-in-game.

@@ -373,14 +373,18 @@ export function optimizePlace(place, opt = {}) {
     let nv = 0, ni = 0;
     for (const o of list) { const g = o.geometry; nv += g.attributes.position.count; ni += g.index ? g.index.count : g.attributes.position.count; }
     const pos = new Float32Array(nv * 3), nor = nrm ? new Float32Array(nv * 3) : null, uvs = uv ? new Float32Array(nv * 2) : null;
-    const withCol = !shadow && (bake || gr.mat.vertexColors);
+    // baked light from look/bake.js (aBake, 1 minus a colour) goes into the vertex colours too
+    const baked = !shadow && list.some((o) => o.geometry.attributes.aBake);
+    const withCol = !shadow && (bake || gr.mat.vertexColors || baked);
     const cols = withCol ? new Float32Array(nv * 3) : null;
+    // what each mesh is made of (look/procedural.js aLook) rides along per vertex
+    const lookA = !shadow && list.some((o) => o.geometry.attributes.aLook) ? new Float32Array(nv * 4) : null;
     const idx = nv > 65535 ? new Uint32Array(ni) : new Uint16Array(ni);
     const nm = new THREE.Matrix3();
     let v0 = 0, i0 = 0;
     const parts = [];
     for (const o of list) {
-      const g = o.geometry, P = g.attributes.position, N = g.attributes.normal, U = g.attributes.uv, C = g.attributes.color;
+      const g = o.geometry, P = g.attributes.position, N = g.attributes.normal, U = g.attributes.uv, C = g.attributes.color, AB = baked ? g.attributes.aBake : null;
       _m.multiplyMatrices(_inv, o.matrixWorld);
       nm.getNormalMatrix(_m);
       const flip = _m.determinant() < 0;
@@ -396,11 +400,13 @@ export function optimizePlace(place, opt = {}) {
           nor[j] = nx; nor[j + 1] = ny; nor[j + 2] = nz;
         }
         if (uvs) { uvs[(v0 + i) * 2] = U.getX(i); uvs[(v0 + i) * 2 + 1] = U.getY(i); }
+        if (lookA) { const L = g.attributes.aLook, q = (v0 + i) * 4; if (L) { lookA[q] = L.getX(i); lookA[q + 1] = L.getY(i); lookA[q + 2] = L.getZ(i); lookA[q + 3] = L.getW(i); } else lookA[q + 3] = 0.8; }
         if (cols) {
           const mc = bake ? o.material.color : null;
           let r = 1, gg = 1, bb = 1;
           if (o.material.vertexColors && C) { r = C.getX(i); gg = C.getY(i); bb = C.getZ(i); }
           if (mc) { r *= mc.r; gg *= mc.g; bb *= mc.b; }
+          if (AB) { r *= 1 - AB.getX(i); gg *= 1 - AB.getY(i); bb *= 1 - AB.getZ(i); }
           cols[j] = r; cols[j + 1] = gg; cols[j + 2] = bb;
         }
       }
@@ -418,6 +424,7 @@ export function optimizePlace(place, opt = {}) {
     if (nor) geo.setAttribute('normal', new THREE.BufferAttribute(nor, 3));
     if (uvs) geo.setAttribute('uv', new THREE.BufferAttribute(uvs, 2));
     if (cols) geo.setAttribute('color', new THREE.BufferAttribute(cols, 3));
+    if (lookA) geo.setAttribute('aLook', new THREE.BufferAttribute(lookA, 4));
     geo.setIndex(new THREE.BufferAttribute(idx, 1));
     geo.computeBoundingSphere(); geo.computeBoundingBox();
     const src = list[0];
@@ -426,6 +433,10 @@ export function optimizePlace(place, opt = {}) {
     else {
       mat = gr.mat.clone();
       if (bake) { mat.color && mat.color.setRGB(1, 1, 1); mat.vertexColors = true; }
+      if (baked) mat.vertexColors = true;
+      // clone() leaves out shader patches (look/procedural.js): the batch draws with the same one
+      if (gr.mat.onBeforeCompile !== THREE.Material.prototype.onBeforeCompile) { mat.onBeforeCompile = gr.mat.onBeforeCompile; mat.customProgramCacheKey = gr.mat.customProgramCacheKey; }
+      if (gr.mat.defaultAttributeValues) mat.defaultAttributeValues = gr.mat.defaultAttributeValues;
     }
     mat.userData = { ...(shadow ? {} : gr.mat.userData), perfBatch: true };
     const mesh = new THREE.Mesh(geo, mat);

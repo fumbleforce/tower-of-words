@@ -5,9 +5,9 @@
 // skirting, laminate, metal, drawerfront, handle, plastic, monitor, tower, keys, fabric, binder, paper, card, ceramic,
 // frame, door, glass, leaf, soil, screen, print.
 import * as THREE from 'three';
-import { PAL, mat, emissive, rbox, plant, wall, tileFloor, door, desk, officeChair, filingCabinet, shelf, pinboard, clock, shadowProxy } from '../props.js';
+import { PAL, mat, emissive, rbox, plainPlant as plant, plainWall as wall, tileFloor, plainDoor, plainDesk as desk, plainChair as officeChair, plainFilingCabinet as filingCabinet, plainShelf as shelf, pinboard, clock, shadowProxy } from '../props.js';
 import { mug } from '../cast.js';
-import * as D from './detail.js';
+import * as D from '../look/detail.js';
 
 export const R = { X0: -2.6, X1: 2.6, Z0: -2.0, Z1: 2.0, WH: 1.45, T: 0.16 };
 export const WIN = { x0: -1.55, x1: -0.15, y0: 0.42, y1: 1.28 };   // window hole in the back wall
@@ -71,7 +71,7 @@ export function buildRoom({ detail = false } = {}) {
   const win = detail ? D.windowFrame(ww, wh) : windowFrame(ww, wh);
   win.position.set(wx, WIN.y0, Z0); root.add(tagBy(win, {}, 'frame'));
   // door, closed, in the left wall
-  const dr = detail ? D.door(DOOR.z1 - DOOR.z0 - 0.02, DOOR.h) : door(DOOR.z1 - DOOR.z0 - 0.02, DOOR.h, { windows: true });
+  const dr = detail ? D.door(DOOR.z1 - DOOR.z0 - 0.02, DOOR.h, { depth: 0.2 }) : plainDoor(DOOR.z1 - DOOR.z0 - 0.02, DOOR.h, { windows: true });
   dr.rotation.y = Math.PI / 2; dr.position.set(X0, 0, (DOOR.z0 + DOOR.z1) / 2); root.add(tagBy(dr, { [PAL.doorFrame]: 'frame', [PAL.door]: 'door', [PAL.doorWin]: 'glass', [PAL.metal]: 'handle' }, 'door'));
   if (detail) { const s = D.switchPlate(); s.rotation.y = Math.PI / 2; s.position.set(X0 + T / 2, 0.68, DOOR.z1 + 0.16); root.add(tagAll(s, 'plastic')); }
 

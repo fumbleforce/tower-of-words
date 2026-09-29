@@ -2,7 +2,7 @@
  "title": "Texture avenues in a showcase room",
  "date": "2026-09-29",
  "by": "style showcase agent",
- "status": "open",
+ "status": "decided",
  "multi": true,
  "question": "Which of these effects do you want in the game? Pick one or more, or none.",
  "media": [
@@ -93,5 +93,11 @@
    "label": "What each avenue is meant to be",
    "href": "game3d/design/style/AVENUES.md"
   }
- ]
+ ],
+ "decided": [
+  "2",
+  "4",
+  "8"
+ ],
+ "decision": "2 as a toggle (Settings > Graphics > Surface detail) on all models, props included; 4 in a softer version; 8 as in the showcase. In the game: review style-in-game."
 }

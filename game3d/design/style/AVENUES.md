@@ -103,3 +103,14 @@ Risks: slow to spread across the whole world; can make the silhouettes busy, and
 ## How they combine
 
 Avenue 4 goes under anything. 1 or 2 (pick one) plus 3 gives the most surface texture for the cost. 5 is the one most likely to match the polish of our generated images, and also the most work to keep in step with layout changes. 6, 7 and 8 add material and detail rather than texture. The ink lines and cel shading from the style study can sit on top of any of them.
+
+## In the game (2026-09-29)
+
+Jørgen picked 2, 4 and 8 (review style-avenues-room): 2 "as a toggle in graphics settings ... apply it to all the models so also the chair, flower pot gets it", 4 "over the top hard, softer version", 8 "looks good". They are in every day-1 place now, in `game3d/js/look/` (the showcase imports the same code):
+
+- `procedural.js`: avenue 2. Every lit model (people aside) gets a surface kind from its colour or shape (tile, plaster, metal, laminate, fabric, plastic, ceramic, card, painted wood, concrete, stone, soil, a generic paint), patched into its material in place. Settings > Graphics > Surface detail turns it off and on at once (materials recompile; nothing is swapped).
+- `bake.js`: avenue 4, SOFT by default (about half the first version's darkening); `?bake=hard` shows the first version.
+- `detail.js`: avenue 8. props.js hands wall, door, desk, monitor, office chair, filing cabinet, shelf and plant to it, cast.js the mug.
+- `index.js`: `applyLook(place, game)`, called from main.js prepare() after the lift is attached. Flags: `?plainlook` (all off), `?surf=0|1`, `?bake=0|soft|hard`, `?detail=0`.
+
+Shots and numbers: game3d/shots/style-in-game/, review style-in-game.

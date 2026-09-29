@@ -244,6 +244,7 @@ function buildSettings() {
         ${[['master', 'Master volume'], ['music', 'Music'], ['voice', 'Voices'], ['ambience', 'Ambience']].map(([k, l]) => `<div class="row"><span class="lbl" id="l-${k}">${l}</span><span class="rng">${k === 'voice' ? '<button type="button" class="sw sm" role="switch" data-key="voiceOn" aria-label="Voices on or off"><i></i></button>' : ''}<input type="range" min="0" max="100" step="5" data-key="${k}" aria-labelledby="l-${k}"><output></output></span></div>`).join('')}
         <div class="gap"></div>
         <div class="row"><span class="lbl" id="l-q">Graphics<small class="qnow"></small></span><div class="seg" role="radiogroup" aria-labelledby="l-q" data-key="quality"></div></div>
+        <div class="row"><span class="lbl" id="l-sf">Surface detail<small>Patterns in floors, walls, fabric and metal</small></span><button type="button" class="sw" role="switch" data-key="surfaces" aria-labelledby="l-sf"><i></i></button></div>
         <div class="row"><span class="lbl" id="l-ui">Interface size</span><div class="seg" role="radiogroup" aria-labelledby="l-ui" data-key="uiSize"></div></div>
         <div class="gap"></div>
         <div class="row"><span class="lbl" id="l-vi">Voice input<small class="vnote"></small></span><div class="seg" role="radiogroup" aria-labelledby="l-vi" data-key="voiceInput"></div></div>
