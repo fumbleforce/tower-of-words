@@ -36,7 +36,8 @@ export const WORDS = {
     voice: 'eric-sumimasen',
   },
   otsukare: { ja: 'お疲れさまです', ro: 'otsukaresama desu', en: 'the everyday hello at work' },
-  gaijin: { ja: '外人', ro: 'gaijin', en: 'foreigner' },
+  // Eric never says it, so the replay is Mio's slow word clip (audio/word-gaijin.mp3), not an eric- clip
+  gaijin: { ja: '外人', ro: 'gaijin', en: 'foreigner', voice: 'word-gaijin' },
   kotodama: { ja: '言霊', ro: 'kotodama', en: 'words with power in them' },
 };
 // Verbs are met in a form, not as the dictionary word: 待って matte is the -te form of 待つ matsu.

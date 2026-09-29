@@ -9,18 +9,20 @@ Voice rules are in GUIDE.md (Voices and audio: Local first, the Mio pitch guard,
 
 ## The pipeline
 
-1. Manifest: `node game3d/tools/voice-manifest.mjs` writes game3d/audio/manifest.json from the story files (keys `eric-<word>`, `ln-<hash>`, `oh-<hash>`). `node game3d/tools/voice-manifest.mjs --check` lists lines with no clip (fast.mjs runs this check too).
-2. Take the GPU lock (GUIDE: GPU lock). Free ComfyUI's VRAM first if it is running.
-3. Generate takes: gen2.py (Qwen3-TTS 1.7B Base clones, batched per speaker, several seeds; checks the GPU lock before every batch).
-4. Check takes: `DEV=cuda check2.py takes`, which uses tools/island_audio/check.py (Whisper reading check, pitch guard, WavLM similarity).
-5. Export: export2.py picks the best passing take per line and writes game3d/audio/<key>.mp3 with per-speaker loudness; `--dry` lists the lines with no passing take (NOPASS). Retry those with new seeds, up to two rounds.
-6. Fallback: edge2.py voices lines no local take passed, with edge-tts, and records them (GUIDE: edge-tts only as a fallback).
-7. Release the GPU lock. Run the fast-qa skill; the manifest check must be clean.
+One command does it: `sh tools/voice/run.sh`. It
 
-all.sh runs steps 3 to 6 in order. The Python is ~/ai/tts-bench/.venv/bin/python.
+1. rewrites game3d/audio/manifest.json from the story (`node game3d/tools/voice-manifest.mjs`; keys `eric-<word>`, `word-<word>`, `ln-<hash>`, `oh-<hash>`) and finds the lines with no clip for their current text (tools/voice/clips.json records the text of every exported clip);
+2. takes the GPU lock as `$LOCK_ME` (default game3d-voices), waiting while someone else holds it (GUIDE: GPU lock), and releases it when done or interrupted;
+3. makes three takes per line with Qwen3-TTS 1.7B Base clones (gen_takes.py, batched per speaker, checks the lock before every batch) and checks them (check_takes.py: tools/island_audio/check.py's Whisper reading check, pitch guard and WavLM similarity), with up to two retry rounds of new seeds for lines with no passing take;
+4. exports the best passing take to game3d/audio/<key>.mp3 with per-speaker loudness (export.py), voices any line still failing with edge-tts and records it in tools/voice/edge.json (edge.py; GUIDE: edge-tts only as a fallback, so say which lines it voiced);
+5. re-times known words in overheard clips if a new clip is overheard (spans.py, game3d/audio/spans.json), then runs `voice-manifest.mjs --check`, whose result is the exit code.
 
-## Where the scripts are (pending move)
+`sh tools/voice/run.sh --dry` lists the lines that need a clip without touching the GPU; `--no-manifest` skips step 1. Before a run, check nvidia-smi and free ComfyUI's VRAM if it is running. After it, run the fast-qa skill and commit the new mp3s with game3d/audio/index.json and tools/voice/clips.json (and edge.json if it changed).
 
-gen2.py, check2.py, export2.py, edge2.py, cfg2.py and all.sh are not in the repo yet. The working copy is in an old session's scratchpad, /tmp/claude-1000/-home-jorgen-repo-japanese/59b28a83-94ef-4467-b091-9bca84b00a6b/scratchpad/g3v2/, which is on tmpfs and is lost on reboot. TODO.md asks to move them into tools/ (tools/voice/ in notes/productivity-review.md, section 6); that is a tools change for after the code freeze. Until then, run them from that folder, and if it is gone, say so and stop: don't rewrite the pipeline from scratch.
+- Who speaks with which clone reference, loudness per speaker, TTS text fixes: tools/voice/cfg.py (references in tools/voice-refs/). A new speaker id in the story needs a line in `speakers()` there; gen_takes.py stops and names it otherwise.
+- A take picked by ear: put `"<key>": "<take>"` in tools/voice/force.json. Other English wording for a line that keeps failing: tools/voice/alt_text.json, then `~/ai/tts/qwen/venv/bin/python tools/voice/gen_takes.py 404,505,606 <key> --alt` under the lock.
+- To redo a clip whose text didn't change, delete its key from tools/voice/clips.json.
+- Takes, metrics, reports and run logs live in `$GAME3D_VOICE_WORK` (default ~/ai/game3d-voice/), outside git. Python venvs: ~/ai/tts/qwen/venv (takes), ~/ai/tts-bench/.venv (checks, export, spans), ~/ai/voice-pipeline/edge-venv (edge-tts); override with QWEN_PY, BENCH_PY, EDGE_PY.
+- The clone reference wavs in tools/voice-refs/ are not all in git yet; on another machine, copy that folder over first.
 
 New or changed voices (a new cast voice, a different timbre) are a Review item for Jørgen's ears (post-review-item), not a pipeline run.

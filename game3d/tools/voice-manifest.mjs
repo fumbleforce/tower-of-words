@@ -37,7 +37,8 @@ function walk(list) {
 // each word Mio teaches, said slowly on its own in her voice: the shell plays audio/word-<id>.mp3 when the player taps
 // the word to hear it again
 for (const [id, w] of Object.entries(WORDS)) if (w.voice) out.set('word-' + id, { key: 'word-' + id, speaker: 'mio', text: w.ja + '。', lang: 'ja', overheard: false, words: [[id, w.ja]], clear: [], emo: 'slow', slow: true });
-for (const [id, w] of Object.entries(WORDS)) if (w.voice) out.set(w.voice, { key: w.voice, speaker: 'eric', text: w.ja + '。', lang: 'ja', overheard: false, words: [], clear: [] });
+// and Eric saying it (eric-<word>), for the words he says; a word only heard (外人) replays Mio's word clip instead
+for (const [id, w] of Object.entries(WORDS)) if (w.voice && w.voice !== 'word-' + id) out.set(w.voice, { key: w.voice, speaker: 'eric', text: w.ja + '。', lang: 'ja', overheard: false, words: [], clear: [] });
 for (const n of ['train', 'gate', 'office', 'transitions']) {
   const f = path.join(root, 'story', n + '.js'); if (!fs.existsSync(f)) continue;
   const st = (await import(pathToFileURL(f).href + '?' + Date.now())).default;

@@ -42,7 +42,7 @@ Day 1 teaches nine words, in the order a player meets them. Who teaches each, an
 ## How a word is shown
 
 - Every Japanese word in a line shows with its reading and its English, every time: 待って (matte, wait). English always carries the text ([setting.md](setting.md)).
-- A new word is said once, then again slowly; a short narration line says how the speaker gets the meaning across (a gesture), because the models don't act it out (Jørgen: "too much fiddly work"). Then Eric types its romaji ([systems.md](systems.md), Typing a word). Taught words in dialogue can be clicked to hear them again.
+- A new word is said once, then again slowly; a short narration line says how the speaker gets the meaning across (a gesture), because the models don't act it out (Jørgen: "too much fiddly work"). Then Eric types its romaji ([systems.md](systems.md), Typing a word). Taught words in dialogue can be clicked (or their small play button) to hear them again: the phrases and commands in Eric's voice (audio/eric-<id>.mp3), 外人 in Mio's slow word clip (audio/word-gaijin.mp3), since Eric never says it. The other words (`honsha`, `tsugiwa`, `otsukare`, `kotodama`) have no clip and no play button.
 - Katakana always shows its reading. Loanwords Eric would catch by ear (コンサルタント, ゲート, ノルウェー, IT, B2) can be made clear inside an overheard line for that line only; they don't become known.
 
 ## When a word is known
