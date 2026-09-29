@@ -173,6 +173,30 @@ test('an event queued during dialogue survives its once trigger being consumed',
   assert.equal(resumed.runner.has('event:arrived'), false);
 });
 
+test('busy events retain their selected conditions and FIFO order across saving', async () => {
+  const story = { on: {
+    'event:first': [{ node: 'selected', if: 'eligible', once: true }, { node: 'wrong' }],
+    'event:second': { node: 'second', once: true },
+  }, nodes: { parent: ['STOP'], selected: ['FIRST'], second: ['SECOND'], wrong: ['WRONG'] } };
+  const { game } = await capture(story);
+  game.busy = true;
+  flags.eligible = true;
+  assert.equal(game.runner.trigger('event:first'), true);
+  assert.equal(game.runner.trigger('event:second'), true);
+  assert.deepEqual([...game.runner.onceDone], ['event:first>selected', 'event:second>second']);
+  flags.eligible = false;
+  S.save(game);
+  const saved = S.loadSave();
+  assert.deepEqual(saved.runner.queued, [
+    { node: 'selected', trigger: 'event:first' }, { node: 'second', trigger: 'event:second' },
+  ]);
+  const { game: resumed, lines } = await replay(story, saved);
+  while (resumed.queue.length) await resumed.queue.shift()();
+  assert.deepEqual(lines, ['STOP', 'FIRST', 'SECOND']);
+  assert.equal(flags.eligible, false);
+  assert.equal(S.loadSave().runner.queued, undefined);
+});
+
 test('without a staging snapshot, a completed physical action is not repeated', async () => {
   const story = { nodes: { parent: [{ do: 'depart' }, 'STOP'] } };
   let reached;

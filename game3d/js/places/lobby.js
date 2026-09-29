@@ -13,7 +13,7 @@ import { ui, sfx } from '../ui.js';
 import { walkPerson, stepPeople, lookAt } from '../story.js';
 import { PEOPLE, sit, armsLap, walkPose, HIP, idle } from '../cast.js';
 import { blob } from '../engine.js';
-import { flags, cond } from '../runner.js';
+import { flags, cond } from '../narrative/state.js';
 import { rbox } from '../props.js';
 import { route } from './route.js';
 

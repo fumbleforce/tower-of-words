@@ -3,11 +3,12 @@
 // Pure data, no DOM: the bible's story map (bible/story-map.js) draws it, and tools/bible/story-map-check.mjs runs
 // it in node to prove every story file still loads and parses.
 //
-// Conditions use the runner's own grammar (game3d/js/runner.js cond(): flag names, !, &&, ||, (), comparisons).
+// Shared compilation decides condition validity. The analysis below infers requirements only for its supported subset.
 // Trigger lists work like Runner.entry(): the first entry whose `if` holds runs, so a later entry also needs every
 // earlier one to fail (unless the earlier one is `once`).
 import { DEFAULT_SPEAKERS, NEXT, PLACE_FILES, STORY_FILES, ENGINE_WRITES, PLACE_EVENTS } from '../game3d/js/narrative/contracts.js';
 export { STORY_FILES } from '../game3d/js/narrative/contracts.js';
+import { allowedConditionCharacters, compileCondition } from '../game3d/js/narrative/conditions.js';
 import { CAST } from '../game3d/js/bonds/cast.js';
 import { storyBondGate } from '../game3d/js/bonds/gates.js';
 
@@ -28,20 +29,20 @@ function tokens(src) {
   }
   return out;
 }
-// or := and ('||' and)* ; and := not ('&&' not)* ; not := '!' not | cmp ; cmp := atom (op atom)? ; atom := id | num | str | '(' or ')'
-export function parseCond(src) {
+// or := and ('||' and)* ; and := cmp ('&&' cmp)* ; cmp := not (op not)? ; not := '!' not | atom
+function parseCondSubset(src) {
   if (src === undefined || src === null || src === true) return { k: 'true' };
   if (src === false) return { k: 'false' };
   const T = tokens(String(src));
   let p = 0;
   const peek = () => T[p], eat = (v) => { if (T[p] && T[p].v === v) { p++; return true; } return false; };
   const or = () => { let a = and(); while (eat('||')) a = { k: 'or', a, b: and() }; return a; };
-  const and = () => { let a = not(); while (eat('&&')) a = { k: 'and', a, b: not() }; return a; };
-  const not = () => (eat('!') ? { k: 'not', a: not() } : cmp());
+  const and = () => { let a = cmp(); while (eat('&&')) a = { k: 'and', a, b: cmp() }; return a; };
+  const not = () => (eat('!') ? { k: 'not', a: not() } : atom());
   const cmp = () => {
-    const a = atom();
+    const a = not();
     const o = peek();
-    if (o && o.t === 'op' && /^(===|!==|==|!=|>=|<=|<|>)$/.test(o.v)) { p++; return { k: 'cmp', op: o.v, a, b: atom() }; }
+    if (o && o.t === 'op' && /^(===|!==|==|!=|>=|<=|<|>)$/.test(o.v)) { p++; return { k: 'cmp', op: o.v, a, b: not() }; }
     return a;
   };
   const atom = () => {
@@ -56,9 +57,18 @@ export function parseCond(src) {
   if (p < T.length) throw new Error(`unexpected ${T[p].v}`);
   return e;
 }
+export function parseCond(src) {
+  if (src === undefined || src === null || typeof src === 'boolean') return parseCondSubset(src);
+  if (!allowedConditionCharacters(src)) throw new Error(`condition has odd characters: ${src}`);
+  const compiled = compileCondition(src);
+  if (compiled.error) throw compiled.error;
+  try { return parseCondSubset(src); }
+  catch { return { k: 'opaque', source: src, flags: compiled.flags }; }
+}
 export function condFlags(ast, out = new Set()) {
   if (!ast) return out;
   if (ast.k === 'flag') out.add(ast.v);
+  if (ast.k === 'opaque') for (const flag of ast.flags) out.add(flag);
   for (const x of [ast.a, ast.b]) if (x && typeof x === 'object') condFlags(x, out);
   return out;
 }

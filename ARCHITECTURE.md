@@ -13,6 +13,11 @@ implementation evidence is in [notes/refactor-progress.md](notes/refactor-progre
 - `game3d/story/` owns authored narrative data. Structural IDs and declarations
   shared with tools live in runtime modules under `narrative/`, `places/` and
   `gameplay/`. Authored game facts belong in `docs/game/`.
+- `game3d/js/narrative/state.js` owns the shared flags object and its condition
+  evaluator. Runner retains its existing exports as a compatibility facade.
+  Pure condition compilation lives in `narrative/conditions.js`; story checking
+  and graph validation use it too. The graph infers requirements only for the
+  expression subset it understands and retains other valid expressions as opaque.
 - `tools/lib/` owns reusable tooling support. Browser admission, deadlines and
   cleanup belong in `browser-job.mjs`; game startup belongs in
   `game3d/test/support/open-game.mjs`. Scenario drivers own their actions and checks.

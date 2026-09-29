@@ -45,7 +45,7 @@ export function checkDeclarations(read = readSource) {
     for (const declaration of ast.body.filter(node => node.type === 'ImportDeclaration')) {
       const source = new URL(declaration.source.value, 'file:///' + file).pathname;
       for (const specifier of declaration.specifiers) {
-        if (source === '/game3d/js/runner.js' && specifier.imported?.name === 'flags')
+        if (['/game3d/js/runner.js', '/game3d/js/narrative/state.js'].includes(source) && specifier.imported?.name === 'flags')
           assert.equal(specifier.local.name, 'flags', file + ': flags aliases are not supported');
         imports.set(specifier.local.name, { source, name: specifier.imported?.name });
       }

@@ -1,3 +1,4 @@
+import { allowedConditionCharacters, compileCondition } from '../js/narrative/conditions.js';
 import { WORDS, SAYABLE } from '../js/lang.js';
 import { DEFAULT_SPEAKERS, ITEMS, PLACE_DETAILS, STORY_FILES, GLOBAL_HOOKS, PLACE_EVENTS } from '../js/narrative/contracts.js';
 // Checks the story files against the engine: unknown speakers, words, hooks, ids, spots, missing nodes,
@@ -17,7 +18,11 @@ const EVENTS = Object.fromEntries(Object.entries(PLACE_EVENTS).map(([place, even
 
 let problems = 0;
 const bad = (f, msg) => { problems++; console.log(`${f}: ${msg}`); };
-function checkCond(f, c) { if (typeof c !== 'string') return; if (!/^[\w\s!&|()<>=.'"+-]*$/.test(c)) bad(f, `condition has odd characters: ${c}`); try { new Function('F', 'return (' + c.replace(/'[^']*'|"[^"]*"|\b[A-Za-z_]\w*\b/g, (m) => (/^['"]/.test(m) || m === 'true' || m === 'false' ? m : `F(${JSON.stringify(m)})`)) + ');'); } catch { bad(f, `condition doesn't parse: ${c}`); } }
+function checkCond(f, c) {
+  if (typeof c !== 'string') return;
+  if (!allowedConditionCharacters(c)) bad(f, `condition has odd characters: ${c}`);
+  if (compileCondition(c).error) bad(f, `condition doesn't parse: ${c}`);
+}
 function checkText(f, t) { for (const m of t.matchAll(/\{(\w+)\}/g)) if (!words.includes(m[1])) bad(f, `unknown word {${m[1]}} in "${t.slice(0, 60)}"`); }
 
 for (const name of STORY_FILES) {

@@ -12,7 +12,7 @@ import { ui, sfx } from '../ui.js';
 import { walkPerson, stepPeople, lookAt } from '../story.js';
 import { sit, armsLap, PEOPLE, idle } from '../cast.js';
 import { blob } from '../engine.js';
-import { flags } from '../runner.js';
+import { flags } from '../narrative/state.js';
 import { glide } from './lobby.js';
 import { walkRig } from '../move.js';
 import { mat, rbox, PAL } from '../props.js';

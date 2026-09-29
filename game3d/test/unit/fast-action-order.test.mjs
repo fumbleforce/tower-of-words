@@ -9,7 +9,7 @@ test('the fast driver finishes Say practice and voice before choosing another ac
         const modules = {
           './ui.js': 'export const ui = {}; export function setMuted() {}',
           './lang.js': 'export const known = new Set(); export const SAYABLE = [];',
-          './runner.js': 'export const flags = {};',
+          './narrative/state.js': 'export const flags = {};',
           './move.js': 'export function startMoveCheck() {}',
         };
         if (modules[specifier]) return { url: 'data:text/javascript,' + encodeURIComponent(modules[specifier]), shortCircuit: true };

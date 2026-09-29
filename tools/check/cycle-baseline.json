@@ -5,12 +5,9 @@
   "edges": [
     "game3d/js/ambience.js -> game3d/js/sfx.js",
     "game3d/js/look/detail.js -> game3d/js/props.js",
-    "game3d/js/mastery.js -> game3d/js/runner.js",
     "game3d/js/props.js -> game3d/js/look/detail.js",
-    "game3d/js/runner.js -> game3d/js/ui.js",
     "game3d/js/sfx.js -> game3d/js/ui.js",
     "game3d/js/ui.js -> game3d/js/ambience.js",
-    "game3d/js/ui.js -> game3d/js/mastery.js",
     "game3d/js/ui.js -> game3d/js/sfx.js"
   ],
   "dynamic": [
