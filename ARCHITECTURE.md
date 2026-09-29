@@ -18,6 +18,10 @@ implementation evidence is in [notes/refactor-progress.md](notes/refactor-progre
   Pure condition compilation lives in `narrative/conditions.js`; story checking
   and graph validation use it too. The graph infers requirements only for the
   expression subset it understands and retains other valid expressions as opaque.
+- `game3d/js/audio/core.js` owns the shared context, volume buses, voice clips,
+  mute and pause state. `audio/music.js` owns loop crossfades and ducking. The UI
+  facade wires voice ducking and retains its existing exports; sound effects use
+  the audio core directly.
 - `tools/lib/` owns reusable tooling support. Browser admission, deadlines and
   cleanup belong in `browser-job.mjs`; game startup belongs in
   `game3d/test/support/open-game.mjs`. Scenario drivers own their actions and checks.

@@ -1,9 +1,9 @@
 // Sound effects: every effect is a small pre-levelled file in audio/sfx/ (made by tools/feel/: interface and magic
 // sounds are synthesised offline as one soft mallet family, world sounds are local Stable Audio takes). Files are
 // levelled to their in-game loudness (audio/sfx/levels.json), so they all play at gain 1 apart from a little random
-// spread. They go through the shell's 'sfx' bus (ui.js audioBus: settings volumes and mute live there).
+// spread. They go through the shared 'sfx' bus (audio/core.js audioBus: settings volumes and mute live there).
 // Before a file has loaded, a kind simply doesn't sound; all of them are preloaded on the first tap.
-import { audioBus, isMuted } from './ui.js';
+import { audioBus, isMuted } from './audio/core.js';
 
 let C = null;
 const bufs = {}; // file -> AudioBuffer | Promise
