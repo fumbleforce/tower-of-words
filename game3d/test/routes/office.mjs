@@ -167,7 +167,7 @@ export default [
     description: 'Tama has no drink gift handler, so the generic refusal leaves the coffee in the bag.',
     seed: seed('afternoon', { ...afternoon }, { inv: ['coffee'] }),
     choices: [],
-    actions: [give('coffee', 'tama', "Tama doesn't seem to want the canned coffee. You keep it.")],
+    actions: [give('coffee', 'tama', "Cat doesn't seem to want the canned coffee. You keep it.")],
     expect: { nodes: [], flags: { gave_coffee_tama: false }, inv: ['coffee'] },
   },
   ...endingRoutes,
