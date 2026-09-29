@@ -1,0 +1,252 @@
+{
+  "places": [
+    [
+      "Honsha station",
+      "Single monorail approach from the mainland"
+    ],
+    [
+      "Head office · IT on B2",
+      "Covered station link; IT is below ground"
+    ],
+    [
+      "Fountain square",
+      "Shared junction visible in both districts"
+    ],
+    [
+      "Canteen",
+      "Blue roof and terrace above the square"
+    ],
+    [
+      "Gymnasium",
+      "Sage roof beside the pool and court"
+    ],
+    [
+      "University",
+      "Three wings around the planted courtyard"
+    ],
+    [
+      "Shopping street",
+      "Two rows of shops face the pedestrian lane under a continuous canopy"
+    ],
+    [
+      "Bar",
+      "Izakaya at the eastern arcade entrance: timber sign, indigo noren and red lanterns"
+    ],
+    [
+      "Apartments / dorms",
+      "Clustered blocks joined by corridors around narrow courtyards"
+    ],
+    [
+      "Office district",
+      "Additional blocks behind head office and the canteen"
+    ],
+    [
+      "Pool and changing block",
+      "Lap lanes with an attached changing/shower building on the north edge"
+    ],
+    [
+      "Onsen",
+      "Separate bathing courtyards with blue and red entrance curtains"
+    ],
+    [
+      "Beach",
+      "Sandy cove below the western promenade"
+    ],
+    [
+      "Sports court",
+      "Fenced court beside the pool"
+    ]
+  ],
+  "note": "Map-2 is layout inspiration only. Facade and service details vary between these planning views. The canopy now covers the lane between two shop rows; the izakaya has its own frontage. A supported coastal path replaces the southeast dead-end stairs. Pool showers and onsen changing-room circulation still need interior design; the pool block exterior remains plain. IT stays on head office’s B2. Additional island-place picks are queued for round 4 (docs/game/setting.md); apartment interiors follow the layout decision.",
+  "views": {
+    "overview": {
+      "file": "07-overview.png",
+      "title": "island-03 · Overview",
+      "width": 1536,
+      "height": 1024,
+      "pins": [
+        [
+          1,
+          265,
+          307
+        ],
+        [
+          2,
+          415,
+          200
+        ],
+        [
+          3,
+          690,
+          439
+        ],
+        [
+          4,
+          714,
+          306
+        ],
+        [
+          5,
+          874,
+          161
+        ],
+        [
+          6,
+          1110,
+          298
+        ],
+        [
+          7,
+          598,
+          559
+        ],
+        [
+          8,
+          903,
+          629
+        ],
+        [
+          9,
+          1170,
+          647
+        ],
+        [
+          10,
+          635,
+          147
+        ],
+        [
+          11,
+          1020,
+          181
+        ],
+        [
+          12,
+          1387,
+          178
+        ],
+        [
+          13,
+          416,
+          723
+        ],
+        [
+          14,
+          1162,
+          192
+        ]
+      ]
+    },
+    "west": {
+      "file": "08-west.png",
+      "title": "island-03 · West: arrival, offices and shopping",
+      "width": 1536,
+      "height": 1024,
+      "pins": [
+        [
+          1,
+          300,
+          251
+        ],
+        [
+          2,
+          650,
+          160
+        ],
+        [
+          3,
+          1100,
+          510
+        ],
+        [
+          4,
+          1175,
+          323
+        ],
+        [
+          7,
+          845,
+          670
+        ],
+        [
+          8,
+          1367,
+          860
+        ],
+        [
+          10,
+          1088,
+          140
+        ],
+        [
+          13,
+          418,
+          792
+        ]
+      ]
+    },
+    "east": {
+      "file": "09-east.png",
+      "title": "island-03 · East: campus, dorms and onsen",
+      "width": 1536,
+      "height": 1024,
+      "pins": [
+        [
+          3,
+          156,
+          532
+        ],
+        [
+          4,
+          220,
+          336
+        ],
+        [
+          5,
+          465,
+          145
+        ],
+        [
+          6,
+          872,
+          391
+        ],
+        [
+          7,
+          249,
+          765
+        ],
+        [
+          8,
+          500,
+          790
+        ],
+        [
+          9,
+          881,
+          774
+        ],
+        [
+          10,
+          185,
+          155
+        ],
+        [
+          11,
+          706,
+          163
+        ],
+        [
+          12,
+          1280,
+          178
+        ],
+        [
+          14,
+          921,
+          161
+        ]
+      ]
+    }
+  }
+}
