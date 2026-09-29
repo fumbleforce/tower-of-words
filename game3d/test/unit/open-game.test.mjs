@@ -57,3 +57,13 @@ test('cleanup failure preserves the original startup error', async () => {
   await assert.rejects(openGame(browser), error => /Game HTTP 503/.test(error.message) && /close boom/.test(error.message));
   assert.equal(calls.closed, 1);
 });
+
+test('trace setup runs before navigation and its failure closes the context', async () => {
+  const { browser, calls } = browserFixture();
+  await assert.rejects(openGame(browser, { beforeNavigate: () => {
+    assert.equal(calls.url, undefined);
+    throw new Error('trace setup failed');
+  } }), /trace setup failed/);
+  assert.equal(calls.closed, 1);
+  assert.equal(calls.url, undefined);
+});

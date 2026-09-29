@@ -3,7 +3,7 @@ import { waitForGame } from './wait-ready.mjs';
 
 export async function openGame(browser, {
   viewport = { width: 1366, height: 860 }, mode = 'play', initialOnboarding, route,
-  quality = 0, url, touch = false, timeoutMs = 60000,
+  quality = 0, url, touch = false, timeoutMs = 60000, beforeNavigate,
 } = {}) {
   if (!['play', 'title', 'fast'].includes(mode)) throw new Error(`Unknown startup mode: ${mode}`);
   const context = await browser.newContext({ viewport, isMobile: touch, hasTouch: touch });
@@ -18,6 +18,7 @@ export async function openGame(browser, {
     if (initialOnboarding !== undefined) await page.addInitScript(value => {
       localStorage.setItem('amakawa-onboard', JSON.stringify(value));
     }, initialOnboarding);
+    if (beforeNavigate) await beforeNavigate(page, context);
     const target = new URL(url || `http://127.0.0.1:${process.env.PORT || 8771}/game3d/index.html`);
     if (!url) {
       target.searchParams.set('q', String(quality));
