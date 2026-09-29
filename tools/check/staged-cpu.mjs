@@ -2,6 +2,7 @@ import { fileURLToPath } from 'node:url';
 import { withGitSnapshot } from '../lib/git-snapshot.mjs';
 import { stagedSnapshot, assertSnapshotCurrent } from '../lib/staged-tree.mjs';
 import { boundedCommand } from '../lib/bounded-command.mjs';
+import { materializeLockedAssets } from './locked-assets.mjs';
 
 export async function checkStagedCpu(cwd, {
   env = process.env, snapshot = stagedSnapshot(cwd, { env }),
@@ -12,6 +13,8 @@ export async function checkStagedCpu(cwd, {
   await withGitSnapshot(cwd, snapshot.tree, async ({ directory, env: cleanEnv }) => {
     const options = () => ({ cwd: directory, env: { ...cleanEnv, PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: '1' },
       timeoutMs: deadline - Date.now(), signal, stdio });
+    // Binaries are not in git: copy the staged asset lock file's files in, sha-checked.
+    materializeLockedAssets(cwd, directory, { env });
     // Install the captured lockfile in isolation; shared node_modules may be changing.
     await boundedCommand('npm', ['ci', '--ignore-scripts', '--include=dev', '--no-audit', '--no-fund'], options());
     await boundedCommand('npm', ['run', '--ignore-scripts', 'check'], options());
