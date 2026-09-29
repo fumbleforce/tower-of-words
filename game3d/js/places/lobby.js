@@ -105,6 +105,8 @@ export async function lobbyPlace(game) {
     if (state === 'closed') { st.jam = 0; st.gateOpen = false; st.flapWant = 0; w.arch.userData.set('idle'); }
     if (state === 'jam') { st.jam = 1; st.flapWant = 0; w.arch.userData.set('no'); sfx('no'); }
     if (state === 'slam') { st.jam = 0; st.slam = 1; st.flap = 1.3; st.flapWant = 1; sfx('door'); openTimer = 2.5; w.arch.userData.set('ok'); }
+    // the head-count screen on the arch: 2 while jammed (it counted the briefcase), back to 1 once the gate moves
+    w.arch.userData.count(state === 'jam' ? 'two' : state === 'closed' ? 'idle' : 'ok');
   }
 
   const spots = {

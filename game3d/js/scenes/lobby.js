@@ -78,7 +78,27 @@ function arch() {
     hinge.add(f, edge); g.add(hinge); flaps.push([hinge, s]);
   }
   g.userData.flaps = (k) => { for (const [h, s] of flaps) h.rotation.y = s * k * Math.PI / 2 * 0.95; };
+  // the head count: a small screen on the crossbar, right of the light bar, tipped toward the entrance. The
+  // tailgating jam shows the gate counting two (Hamada and his briefcase, story/gate.js bench_wait).
+  const cnt = new THREE.Group(); cnt.position.set(0.44, H + 0.28, 0.02); cnt.rotation.x = -0.75;
+  cnt.add(rbox(0.36, 0.22, 0.05, '#3a3e46', { y: -0.11, r: 0.015, cast: false }));
+  const face = { idle: countTex('#9fd4ff', 1), ok: countTex('#8fe0b4', 1), two: countTex('#ff8f86', 2) };
+  const scr = new THREE.Mesh(new THREE.PlaneGeometry(0.31, 0.17), new THREE.MeshBasicMaterial({ map: face.idle }));
+  scr.position.set(0, 0, 0.027); scr.name = 'gate-count'; scr.userData.noBatch = true; cnt.add(scr); g.add(cnt);
+  g.userData.count = (k) => { scr.material.map = face[k] || face.idle; scr.material.needsUpdate = true; };
   return g;
+}
+// the count screen's face: one or two little people and the number, in the gate's own light colours
+function countTex(col, n) {
+  return textTexture((g, W, H) => {
+    g.fillStyle = '#15181d'; g.fillRect(0, 0, W, H);
+    g.fillStyle = col;
+    const person = (x) => { g.beginPath(); g.arc(x, 44, 17, 0, Math.PI * 2); g.fill(); g.beginPath(); g.moveTo(x - 26, 118); g.quadraticCurveTo(x - 26, 68, x, 68); g.quadraticCurveTo(x + 26, 68, x + 26, 118); g.fill(); };
+    if (n === 2) { person(52); person(112); } else person(82);
+    g.font = '700 104px ' + JP_FONT; g.textAlign = 'center'; g.textBaseline = 'middle';
+    g.fillText(String(n), 196, 76);
+    if (n === 2) { g.fillRect(0, 0, W, 6); g.fillRect(0, H - 6, W, 6); }
+  }, 256, 140);
 }
 
 function guardDesk() {

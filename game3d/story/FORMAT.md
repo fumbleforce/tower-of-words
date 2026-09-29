@@ -166,7 +166,7 @@ Events: `start`, `card_red` (Mio holds her card to a reader before it works), `c
 
 Place hooks:
 - `reader` `side: 'l'|'r'`, `state: 'red'|'green'|'idle'`: the reader's light and beep.
-- `gate` `state: 'open'|'closed'|'jam'|'slam'`: the flaps (`jam` rattles, `slam` bursts open and bounces).
+- `gate` `state: 'open'|'closed'|'jam'|'slam'`: the flaps (`jam` rattles, `slam` bursts open and bounces). The small count screen on the arch shows 1 person, and 2 in red while `jam` is on.
 - `cardOk`: Mio's card now works; her next tap turns the reader green and opens the gate.
 - `enter` `who`: someone walks in through the entrance.
 - `typing` `who`, `ms`: typing animation (the guard at his computer). (Renamed from `type`, which is now the typing prompt below.)
