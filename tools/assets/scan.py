@@ -742,18 +742,15 @@ add('style/prompt-playbook', 'style', 'Anime image style (prompt playbook)', ['a
     source='RDBT Anima, Euler A 30 steps CFG 5, style anchors first ("anime screenshot, anime coloring, 2d, cel shading"), drift negatives',
     used=['Every portrait and background'], tags=['prompts'])
 
-# ------------------------------------------------------------------ git-ignored files never go in the manifest
-def ignored(paths):
-    if not paths:
-        return set()
-    r = subprocess.run(['git', 'check-ignore', '--stdin'], input='\n'.join(paths), capture_output=True, text=True, cwd=ROOT)
-    return set(r.stdout.split())
+# ------------------------------------------------------------------ private files never go in the manifest
+# Git-ignored files stay: every binary is git-ignored (notes/asset-storage-proposal.md), and used ones come back
+# on another machine with `python3 tools/assets/sync.py pull`.
+def private(p):
+    return 'private' in p.split('/')
 
 
-allp = sorted({p for e in A.values() for p in e['paths']})
-ign = ignored(allp)
 for e in list(A.values()):
-    e['paths'] = [p for p in e['paths'] if p not in ign and 'island/private' not in p]
+    e['paths'] = [p for p in e['paths'] if not private(p)]
     if not e['paths'] and not e.get('svg') and e['view'].get('type') not in ('chibi', 'kit'):
         del A[e['id']]
 
