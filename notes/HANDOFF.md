@@ -57,7 +57,23 @@ Read GUIDE.md first. The game is game3d/ (day 1: train, gate and lobby, lift, B2
 ## Known broken or unfinished
 
 1. **Phone softlock:** on phone, after the gate, "Take the lift down to B2" has no marker ("no reachable next goal"). Desktop passes. It's probably the lift.js takeover of the lobby's tripOut or the lift thing's marker on phone. The builder was on it when work stopped; see its last status in notes/OVERNIGHT.md.
-2. **Performance:** about 2,500–3,500 draw calls against a budget of 250, and 640k triangles against 300k, on the phone profile. A perf agent was working in game3d/js/perf/; see notes/PERF.md for its numbers and whether the hook is wired.
+2. **Performance:** the perf pass is committed (e1ef56a, game3d/js/perf/batch.js) but not wired in yet.
+   - **Wiring needed in main.js:**
+     - add `import { optimizePlace } from './perf/batch.js';`
+     - in `prepare()`, after `place.name = name;`, add `optimizePlace(place, { game });`
+     - after the hoverRay line, add `hoverRay.layers.enable(31);`
+     - add js/perf/batch.js to build.json
+   - **Measured on the phone profile:**
+     - draw calls: train 1,643 → 692, gate 1,296 → 496, office 1,720 → 392
+     - fps: 70 → 105, 105 → 176, 69 → 142
+     - perf.mjs had been counting two frames, so the earlier figures in PERF.md were about double
+   - **Open:**
+     - a kitchen tray shows slight z-fighting when merged
+     - people's parts could be merged too
+     - the OutlinePass adds a pass
+     - still over the 250 budget
+     - `?nobatch` turns the pass off
+   - Details are in notes/PERF.md.
 3. **QA round 1** (notes/QA-ROUND-1.md): about 20 of 31 items are fixed. Still open: 24 (props for the empty middle of the lobby and the copy room), 25 (one taught form per word), 31 (perf), and whatever round 2 finds. Nothing has been re-scored since the fixes.
 4. **The feel agent's human-pace checks** (human.mjs at 390 and 1366) of the movement fixes haven't run.
 5. **bench_r's seat point** sits between two cushions (world data).
