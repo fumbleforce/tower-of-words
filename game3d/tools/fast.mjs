@@ -3,6 +3,7 @@
 import { withBrowserJob } from '../../tools/lib/browser-job.mjs';
 import { fastResult } from '../test/support/fast-result.mjs';
 import { openGame } from '../test/support/open-game.mjs';
+import { writePerf } from '../test/support/perf-report.mjs';
 import { execFileSync } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
@@ -40,7 +41,7 @@ const output = fileURLToPath(new URL(`../shots/fast/${new Date().toISOString().r
 fs.mkdirSync(output, { recursive: true });
 const started = Date.now(), jobBudgetMs = 295000, captureReserveMs = 10000;
 const errors = [];
-let run = {}, result, pageErrors = [];
+let run = {}, result, pageErrors = [], perf = null;
 try {
   if (![W, H, S].every(value => Number.isFinite(+value) && +value > 0)) throw new Error('Width, height and seconds must be positive numbers');
   await withBrowserJob('fast-test', async browser => {
@@ -57,6 +58,9 @@ try {
       ...window.__test, ended: !!window.__ended, place: window.__game.place?.name,
       goal: window.__game.ui.goalText, voices: window.__voiceLog, move: window.__moveCheck,
     }));
+    // per-place frame times, draw calls and triangles (js/perf/metrics.js); written to perf.json below
+    try { perf = await page.evaluate(() => window.__perfReport?.() ?? null); }
+    catch (error) { console.log(`perf numbers unavailable: ${error.message.split('\n')[0]}`); }
     try {
       if (run.ended) await page.waitForFunction(() => {
         const end = document.querySelector('#end');
@@ -91,5 +95,10 @@ for (const heard of (run.heard || []).filter(entry => /sumimasen|すみません
     heard.garbledKnown.length ? 'GARBLED ' + heard.garbledKnown : 'clear');
 }
 console.log('last steps:', (run.log || []).slice(-8).join(' | '));
+if (perf) {
+  let build = '';
+  try { build = JSON.parse(fs.readFileSync(new URL('../build.json', import.meta.url), 'utf8')).id; } catch { /* no build id */ }
+  writePerf(output, perf, { build, pass: result.pass });
+}
 if (result.errors.length) console.log('errors:', result.errors.slice(0, 8).join(' | '));
 console.log('artifacts:', output);

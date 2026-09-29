@@ -1,0 +1,75 @@
+{
+  "tolerance": 0.2,
+  "desktop": {
+    "viewport": [
+      1366,
+      860
+    ],
+    "quality": 0,
+    "places": {
+      "train": {
+        "calls": 779,
+        "tris": 145745,
+        "gpu": {
+          "medianMs": 16.7,
+          "p99Ms": 16.8,
+          "build": "0929-1848-b196ef5"
+        }
+      },
+      "gate": {
+        "calls": 1246,
+        "tris": 152425,
+        "gpu": {
+          "medianMs": 16.7,
+          "p99Ms": 16.8,
+          "build": "0929-1848-b196ef5"
+        }
+      },
+      "office": {
+        "calls": 4130,
+        "tris": 524805,
+        "gpu": {
+          "medianMs": 16.7,
+          "p99Ms": 33.4,
+          "build": "0929-1848-b196ef5"
+        }
+      }
+    }
+  },
+  "phone": {
+    "viewport": [
+      390,
+      844
+    ],
+    "quality": 0,
+    "places": {
+      "train": {
+        "calls": 648,
+        "tris": 132993,
+        "gpu": {
+          "medianMs": 16.7,
+          "p99Ms": 16.8,
+          "build": "0929-1848-b196ef5"
+        }
+      },
+      "gate": {
+        "calls": 833,
+        "tris": 107383,
+        "gpu": {
+          "medianMs": 16.7,
+          "p99Ms": 16.8,
+          "build": "0929-1848-b196ef5"
+        }
+      },
+      "office": {
+        "calls": 2714,
+        "tris": 345397,
+        "gpu": {
+          "medianMs": 16.7,
+          "p99Ms": 33.4,
+          "build": "0929-1848-b196ef5"
+        }
+      }
+    }
+  }
+}

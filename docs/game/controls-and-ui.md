@@ -16,6 +16,7 @@ Elsewhere: the rules every screen has to meet (no timers, one menu per target, s
 | Move the story on | Click anywhere on the dialogue area, Space or Enter | Tap the dialogue area |
 | Give a drink | The Give button, next to someone | The same |
 | Pause, or close a panel | Esc, or the menu button top right | The menu button |
+| Performance numbers on or off | F3, or Settings | Settings |
 
 Clicking while the story is busy (a walk, a door) shows that the game is waiting and hurries the scripted move along. Every attempt does something visible.
 
@@ -62,7 +63,8 @@ Every control is introduced the first time it's needed, and ambient people never
 - Words: the words he can say, each with its dictionary form and practice dots, and a note on the -te form ([words.md](words.md)).
 - Title: the train seen from outside at dawn; on Start the camera flies into the car. Continue when there's a save.
 - Pause (Esc): settings, the three save slots (save and Load), back to title. What loading restores: systems.md, Saving.
-- Settings: text speed (default fast), auto-advance (off), volumes for master, music, voices and ambience, voices on or off, graphics tier (auto), surface detail, interface size, reduce motion, the Say key, voice input (device, browser or off), and how many tries a word needs before it's a click (3).
+- Settings: text speed (default fast), auto-advance (off), volumes for master, music, voices and ambience, voices on or off, graphics tier (auto), surface detail, interface size, reduce motion, the Say key, voice input (device, browser or off), how many tries a word needs before it's a click (3), and performance numbers (off).
+- Performance numbers (F3 or the Settings switch; kept between visits): a small dark box top right, under the menu button, with the frame rate, average frame time, 1% low, draw calls, triangles, geometries and textures in memory, the JS heap (Chrome only), the place and the graphics tier. It sits under the menus and takes no clicks. How to read the numbers: notes/PERF.md.
 - A loading chip between places, if a place takes a moment to build.
 - The end of the day: the places (a frame of each from play), the people met and the words he can use; the story's closing line; back to the title. No quiz and no score.
 - The build id shows in a corner (game3d/build.json).

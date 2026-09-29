@@ -23,17 +23,17 @@
       "reason": "Existing detailed prop builders; preserve geometry until the visual owner reviews extraction."
     },
     "game3d/js/main.js": {
-      "lines": 785,
-      "bytes": 26971,
+      "lines": 787,
+      "bytes": 27112,
       "owner": "codex-tui",
-      "review": "C-0080",
+      "review": "C-0089",
       "reason": "Composition, boot/Continue, input, rendering and frame loop remain after stage 4 hooks, interactions and place lifecycle extraction."
     },
     "game3d/js/menu.js": {
-      "lines": 1276,
-      "bytes": 44355,
+      "lines": 1277,
+      "bytes": 44607,
       "owner": "codex-tui",
-      "review": "C-0071",
+      "review": "C-0089",
       "reason": "Existing action menus and target selection; stage 4 interaction extraction is planned."
     },
     "game3d/js/mio.js": {
