@@ -28,11 +28,15 @@
   .panel button:disabled { opacity: .55; cursor: default; }
   #recipe-status { min-height: 1.4em; color: var(--mute); }
   details { margin-top: 12px; }
+  #fit-controls fieldset { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; align-items: center; padding: 12px 0; margin: 0; border: 0; }
+  #fit-controls input { width: 100%; min-height: 40px; font: inherit; padding: 6px; border: 1px solid var(--line); border-radius: 6px; background: var(--panel); color: var(--ink); }
+  #fit-controls button { grid-column: 1 / -1; min-height: 44px; }
   textarea { width: 100%; height: 130px; font: 12px/1.35 ui-monospace, monospace; border: 1px solid var(--line); border-radius: 6px; background: var(--bg); color: var(--ink); padding: 8px; margin-top: 8px; }
   .note { color: var(--mute); font-size: 12px; margin-top: 10px; }
   #status { position: absolute; top: 16px; left: 16px; color: var(--mute); }
   @media (max-width: 760px) {
     .app { grid-template-columns: 1fr; grid-template-rows: 52vh auto; height: auto; }
+    #view { position: sticky; top: 0; z-index: 1; background: var(--bg); }
     .panel { border-left: 0; border-top: 1px solid var(--line); }
   }
 </style></head>
@@ -45,6 +49,7 @@
     <h1>Character creator</h1>
     <div class="slot"><label for="body">Body</label><select id="body"></select><span></span></div>
     <div id="slots"></div>
+    <details id="fit-controls"></details>
     <div class="recipe-actions"><button id="save-recipe" disabled>Save recipe</button><button id="load-recipe" disabled>Load recipe</button></div>
     <input id="recipe-file" type="file" accept=".json,application/json" hidden>
     <p id="recipe-status" role="status" aria-live="polite"></p>
@@ -58,6 +63,7 @@ import * as THREE from 'three';
 import { loadLibrary, buildCharacter, setColours, SLOTS, SKIN_TONES } from './recipe.js';
 import { disposeCharacter } from './dispose.js';
 import { parseRecipe, recipeFile, MAX_RECIPE_BYTES } from './recipe-file.js';
+import { createFitControls } from './fit-controls.js';
 
 const view = document.getElementById('view');
 const renderer = new THREE.WebGLRenderer({ antialias: true });
@@ -114,8 +120,10 @@ for (const s of SLOTS) {
     });
   }
 }
+const fitControls = createFitControls(document.getElementById('fit-controls'), recipe, () => rebuild());
 function showRecipe() { document.getElementById('recipe').value = JSON.stringify(recipe, null, 1); }
 function syncRecipeControls() {
+  fitControls.sync();
   bodySel.value = recipe.body;
   for (const slot of SLOTS) {
     document.getElementById('s-' + slot).value = recipe.parts[slot];
@@ -164,6 +172,7 @@ document.getElementById('copy').onclick = async () => {
 let ch = null, anim = 'idle', spin = false, busy = 0;
 async function rebuild() {
   const my = ++busy;
+  fitControls.setDisabled(true);
   document.querySelectorAll('.recipe-actions button').forEach(button => { button.disabled = true; });
   const status = document.getElementById('status'); status.textContent = 'Updating character…';
   try {
@@ -180,6 +189,7 @@ async function rebuild() {
     if (my === busy) {
       if (ch) {
         const colours = structuredClone(recipe.colours || {});
+        for (const key of Object.keys(recipe)) delete recipe[key];
         Object.assign(recipe, structuredClone(ch.recipe), {colours});
         document.getElementById('body').value = recipe.body;
         for (const slot of SLOTS) document.getElementById('s-' + slot).value = recipe.parts[slot];
@@ -190,7 +200,10 @@ async function rebuild() {
       return false;
     }
   } finally {
-    if (my === busy) document.querySelectorAll('.recipe-actions button').forEach(button => { button.disabled = !ch; });
+    if (my === busy) {
+      fitControls.setDisabled(!ch);
+      document.querySelectorAll('.recipe-actions button').forEach(button => { button.disabled = !ch; });
+    }
   }
 }
 document.querySelectorAll('[data-anim]').forEach((b) => b.onclick = () => {
