@@ -10,7 +10,7 @@ const ENGINE_KEYS = flagKeys('game3d/js/mastery.js');
 //
 // The counts live in the story flags (`practice_<id>`), so they are saved and loaded with the game as they are.
 
-import { flags } from './runner.js';
+import { flags } from './narrative/state.js';
 import { settings } from './settings.js';
 
 export const MASTERY_DEFAULT = 3;

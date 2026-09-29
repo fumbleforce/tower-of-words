@@ -7,7 +7,7 @@ export { ITEMS } from './gameplay/items.js';
 // what people remember of Eric, gifts, and save/load. Day one uses it lightly. Data comes from the story files
 // (story/FORMAT.md, "Sim data"), js/bonds/cast.js (tastes, registers, relations) and js/bonds/day1.js (day 1's
 // moments, recorded by node name so the story's lines stay as they are). The maths is js/bonds/model.js.
-import { flags, cond } from './runner.js';
+import { flags, cond } from './narrative/state.js';
 import { known, seen, WORDS, COMMANDS } from './lang.js';
 import { ui, sfx } from './ui.js';
 import { Bonds, STEPS, dateOf, safeKey } from './bonds/model.js';

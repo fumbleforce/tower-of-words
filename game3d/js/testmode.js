@@ -3,7 +3,7 @@
 // whatever answers to them, the way a curious player would. window.__test reports progress and errors.
 import { ui, setMuted } from './ui.js';
 import { known, SAYABLE } from './lang.js';
-import { flags } from './runner.js';
+import { flags } from './narrative/state.js';
 
 export function start(game) {
   setMuted(true);

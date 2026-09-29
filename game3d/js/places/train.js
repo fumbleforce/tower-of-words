@@ -37,7 +37,7 @@ import { rbox, mat, emissive, textTexture, plane, JP_FONT, plant as propPlant } 
 import { glide, withList } from './lobby.js';
 import { standOut, walkRig } from '../move.js';
 import { damp, goalSpot } from '../cam.js';
-import { flags } from '../runner.js';
+import { flags } from '../narrative/state.js';
 import { dust, lightPool } from './life.js';
 import { route } from './route.js';
 
