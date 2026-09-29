@@ -28,16 +28,16 @@
   <section id="stage" aria-label="Live original and candidate animation comparison">
     <div class="views">
       <article class="view"><header><h2 id="original-title">Original idle</h2><p id="original-caption">Full source clip, playing.</p></header><div id="original-view" class="viewport"></div></article>
-      <article class="view"><header><h2>Neutral idle candidate</h2><p id="candidate-caption">Four-second breathing loop.</p></header><div id="candidate-view" class="viewport"></div></article>
+      <article class="view"><header><h2 id="candidate-title">Neutral idle candidate</h2><p id="candidate-caption">Four-second breathing loop.</p></header><div id="candidate-view" class="viewport"></div></article>
     </div>
   </section>
   <aside>
-    <a href="/bible/#review/creator-idle-neutral-2">← Back to review</a>
+    <a id="review-link" href="/bible/#review/creator-idle-neutral-2">← Back to review</a>
     <h1>Live idle comparison</h1>
     <p>Same character, light and camera on both sides. Drag either side to turn both views.</p>
     <p id="status" role="status" aria-live="polite">Loading the characters…</p><button id="retry" hidden>Retry loading</button>
     <fieldset><legend>Character</legend><select id="body" aria-label="Character"><option value="mio">Mio</option><option value="eric">Eric</option></select></fieldset>
-    <fieldset><legend>Original on the left</legend><select id="baseline" aria-label="Original idle playback"><option value="source">Full original clip</option><option value="held">Current creator: held at 0.4 s</option></select></fieldset>
+    <fieldset><legend>Compare on the left</legend><select id="baseline" aria-label="Original idle playback"><option id="previous-idle" value="previous" hidden>Previous neutral idle</option><option value="source">Full original clip</option><option value="held">Current creator: held at 0.4 s</option></select></fieldset>
     <fieldset><legend>Animation</legend><button id="play">Pause animation</button><div class="row"><button id="walk" aria-pressed="false">Idle → walk</button><button id="idle" aria-pressed="true">Walk → idle</button></div><p>Both sides change together with a 0.2-second fade.</p><button id="restart">Restart current motion</button></fieldset>
     <fieldset><legend>View</legend><div class="row"><button id="front">Front</button><button id="side">Side</button><button id="back">Back</button></div><label for="zoom">Zoom</label><input id="zoom" type="range" min="1.8" max="5.5" step=".1" value="3.2"><p>Scroll or use the slider to zoom. Focus the view and use arrow keys to turn; + / − zoom.</p></fieldset>
     <p class="note">Candidate only. The game and source models are unchanged. The current creator holds the original idle still; select that option to compare its frozen pose.</p>

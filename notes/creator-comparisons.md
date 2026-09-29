@@ -27,3 +27,11 @@ The first attempt visibly leaves shoulders/arms outside sleeves, with exposed sk
 One unchanged-fitter run produced separate fit3 layer files for each body, under four minutes each. Both remain not-ready. Mio penetrating faces by layer: hair 0, top 18, bottom 30, shoes 4. Eric: hair 4, top 9, bottom 11, shoes 1, stubble 2. All retain clearance failures; no reversed faces were reported. The fitted images cover more skin but pull hems outward and distort shoes. These are recorded attempts, not game-ready outfits. No further fitting loop was run.
 
 Browser checks loaded both bodies, v15/v16, original/fitted layers and Idle/Walk, with stable scale while toggling layers and no page errors. All captures are preserved in the review archive; JSON and images stay local. Game integration remains unapproved.
+
+## Relaxed idle round 3
+
+C-0086 asks for visible breathing/sway and relaxed arms. [creator-idle-neutral-3](http://127.0.0.1:8771/bible/#review/creator-idle-neutral-3) uses the existing live comparison with `?round=3`; the previous neutral loop plays on the left by default. Earlier viewer URLs retain their earlier candidate.
+
+The new four-second clip aims shoulder-to-hand chains about 12 degrees from vertical, preserving elbow/wrist bind angles. Chest rotation totals four degrees across two spine joints, torso sway is two degrees, and arm swing is 1.2 degrees. Inverse-bind reconstruction preserves the twist correction. The generator's sampled hips/legs/soles have zero drift; endpoints match and rotations remain finite/normalized. Source assets and the previous candidate stay untouched.
+
+One focused browser pass covered both bodies, previous/source/held baselines, advancing playback and idle/walk changes. All seven desktop/phone captures are on the review page and were inspected. Arms visibly sit closer to the body, with a larger head/posture change across breathing endpoints. A separate visual skim found no clear new fit defect; Mio's fingers sit close to the cargo pockets. Breathing strength and naturalness at phone size remain a live motion judgment for Jørgen.
