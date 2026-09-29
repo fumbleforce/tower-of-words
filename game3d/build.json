@@ -1,5 +1,5 @@
 {
-"id": "0928-2236-21c9fd4",
+"id": "0929-0028-82c1b24",
 "files": [
 "js/ambience.js",
 "js/avatar.js",
@@ -15,6 +15,7 @@
 "js/mio.js",
 "js/move.js",
 "js/onboard.js",
+"js/perf/batch.js",
 "js/places/life.js",
 "js/places/lift.js",
 "js/places/lobby.js",
