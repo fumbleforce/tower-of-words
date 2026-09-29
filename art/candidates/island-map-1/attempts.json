@@ -1,0 +1,108 @@
+{
+  "date": "2026-09-29",
+  "tool": "Built-in image_gen",
+  "settings": {
+    "transparent_background": false,
+    "seed": "not exposed",
+    "model": "tool default; model identifier not exposed",
+    "size": "chosen by tool; actual file dimensions recorded with QA"
+  },
+  "attempts": [
+    {
+      "id": "01-overview",
+      "file": "01-overview.png",
+      "kind": "generate",
+      "reference": null,
+      "note": "First attempt: realistic surface detail and two rail approaches. Preserved for comparison.",
+      "prompt": "High overhead map of a compact Japanese company island, north at the top, flat-shaded low-poly 3D with subtle surface patterns, small modelled details and soft daytime shadows. Wide landscape composition with the whole coastline visible and calm blue sea around it. At the left shore, a concrete monorail beam on piers meets a long navy station canopy beside a tall slate office tower with at least twelve floors; a short covered walkway joins the raised platform terrace directly to its pale glass entrance wing. A broad pedestrian street runs right through a central square containing a round shallow fountain and a clock pole, with a low blue-roofed canteen immediately above the square. To the upper right are a sage-roofed gym, a small sports court and three university wings around a courtyard; to the lower right are a short teal-awning shop row, a small charcoal bar and three pale apartment blocks around an asymmetric garden. Visible paths reach every building entrance. A waterfront path circles the seawall, with a service lane along the upper edge. Muted slate, pale concrete and green planting, clear cool daylight. No text or interface.",
+      "dimensions": [
+        1536,
+        1024
+      ]
+    },
+    {
+      "id": "02-flat",
+      "file": "02-flat.png",
+      "kind": "edit",
+      "reference": "01-overview.png",
+      "note": "Style correction. Two rail approaches still present.",
+      "prompt": "Restyle this exact island map as an appealing simple flat-shaded 3D RPG world. Keep the camera, coastline, building footprints, relative heights, paths and all facility positions exactly the same. Give buildings broad flat coloured faces, trees chunky faceted crowns, rocks a few clear polygon faces, water a calm uniform blue with a few simple wave marks, and windows simplified repeating shapes. Keep soft contact shadows, modelled roof details and subtle tile variation. Use the same muted slate, navy, pale concrete and greens. No photographic surface grain, tiny realistic foliage or texture noise. No text. This is one style change, not a redesign.",
+      "dimensions": [
+        1536,
+        1024
+      ]
+    },
+    {
+      "id": "03-overview-monorail",
+      "file": "03-overview-monorail.png",
+      "kind": "edit",
+      "reference": "02-flat.png",
+      "note": "Current overview: one monorail approach. Geography remains a proposal.",
+      "prompt": "Correct only the monorail approach at the left edge of this map. Remove the upper-left bridge completely and restore calm blue sea there. Keep the lower-left approach but make it one narrow concrete straddle-monorail beam on piers that curves smoothly into the near end of the existing navy station canopy. The beam must align along the length of the platform, not meet it at a sharp corner. No paired steel railway rails. Keep the covered pedestrian link from station to head office. Preserve the exact camera, coastline, entire rest of island, all building shapes and positions, paths, fountain, colours, flat-shaded 3D style and lighting. No train, text or additional structures.",
+      "dimensions": [
+        1536,
+        1024
+      ]
+    },
+    {
+      "id": "04-west",
+      "file": "04-west.png",
+      "kind": "edit",
+      "reference": "03-overview-monorail.png",
+      "note": "West district: station, head office and shared square. A generated closer view, not an exact crop.",
+      "prompt": "Create a closer west-district map from this exact island overview. Crop and magnify the left 58 percent of the source, keeping the entire north-south extent of the land. Preserve the original camera angle, north-up orientation, relative positions, building designs, colours and flat-shaded 3D style. The view shows the single monorail beam from the left, navy station canopy, covered station-to-head-office walkway, full tall head-office tower, forecourt and western waterfront. Along the right edge include the ENTIRE central fountain square with its clock pole, the ENTIRE blue-roofed canteen immediately above it and the west end of the teal shop row below. These shared landmarks must remain exactly where they are relative to one another in the source. Buildings outside this crop stay outside; do not rearrange the campus to fill the image. No new train, buildings, text or interface.",
+      "dimensions": [
+        1362,
+        1155
+      ]
+    },
+    {
+      "id": "05-east",
+      "file": "05-east.png",
+      "kind": "edit",
+      "reference": "03-overview-monorail.png",
+      "note": "East district: gym, university, shops, bar and dorms. Landmark arrangement matches; small facade, terrace and planting details vary.",
+      "prompt": "Create a closer east-district map from this exact island overview. Crop and magnify the right-hand area beginning just to the left of the central fountain square and blue-roofed canteen, keeping the whole east shoreline and the original north-south extent of the land. Preserve the original camera angle, north-up orientation, relative positions, building designs, colours and flat-shaded 3D style. At the left edge include the ENTIRE fountain square, its clock pole above-right of the fountain, and the ENTIRE blue-roofed canteen immediately above the square. Keep the teal shop row below the fountain and the charcoal bar beside its right end. Keep the sage-roofed gym above-right of the canteen, sports court to the gym's right, university courtyard wings below that court, and three apartment blocks and garden at the lower right. Preserve all joining paths and the waterfront. These shared landmarks must remain exactly where they are relative to one another in the source. Station and office tower are outside the crop. Do not rearrange the campus to fill the image. No new buildings, text or interface.",
+      "dimensions": [
+        1536,
+        1024
+      ]
+    },
+    {
+      "id": "06-dense-overview",
+      "file": "06-dense-overview.png",
+      "kind": "edit",
+      "reference": "03-overview-monorail.png",
+      "note": "Denser alternative following Claude's skim: added workplace blocks and taller, closer dorms. The narrow rear gap is a proposal for Eric's wall-facing room; its precise distance is not measured.",
+      "prompt": "Make one change to this island map: increase the density so it reads as a Japanese company town where a large workforce lives. Keep this camera, flat-shaded 3D style, light, coastline and landmark positions. Replace the broad landscaped area behind and between the existing office tower and blue-roofed canteen with a close group of four additional office towers and several low service blocks, separated by narrow usable lanes. Keep the existing main tower, navy station canopy and station bridge clearly visible. In the southeast residential area, replace the three widely spaced five-storey blocks with a compact group of taller eight-to-twelve-storey company dorm slabs, a small shared courtyard and a narrow back alley where one block faces the blank concrete rear wall of its neighbour only a couple of metres away. Keep the square, fountain, clock, canteen, sage gym, sports court, university court, teal shops, charcoal bar, single monorail beam and main pedestrian connections unchanged and visible. Keep trees along routes and small gardens, with less parkland between buildings. No text or interface.",
+      "dimensions": [
+        1536,
+        1024
+      ]
+    },
+    {
+      "id": "07-dense-west",
+      "file": "07-dense-west.png",
+      "kind": "edit",
+      "reference": "06-dense-overview.png",
+      "note": "Denser west district, including additional workplaces and the shared square.",
+      "prompt": "Create a closer west-district view from this exact company-island map. Crop and magnify the left 58 percent, retaining the land's north and south edges. Keep the same camera angle, north-up orientation, simple flat-shaded 3D style, light and every building footprint. Show the full navy monorail station, covered link, main office tower, cluster of offices behind it, forecourt and west waterfront. At the right edge keep the entire blue-roofed canteen and entire fountain square with clock, plus the teal shop row below. Match all paths and shared landmarks exactly. Do not rearrange buildings or add objects. No text or interface.",
+      "dimensions": [
+        1536,
+        1024
+      ]
+    },
+    {
+      "id": "08-dense-east",
+      "file": "08-dense-east.png",
+      "kind": "edit",
+      "reference": "06-dense-overview.png",
+      "note": "Denser east district with clustered dorms, university, gym and daily-life destinations.",
+      "prompt": "Create a closer east-district view from this exact company-island map. Crop and magnify the right side, beginning just left of the fountain square and blue-roofed canteen, keeping the full east shoreline and north-south extent of the land. Keep the same camera angle, north-up orientation, flat-shaded 3D style and every building footprint. At the left show the whole fountain square, its clock and blue-roofed canteen. Keep the gym, court and university above-right, teal shops and charcoal bar below the square, and the tight cluster of tall dorm slabs at lower right, including its narrow rear gaps and blank side walls. Keep all paths, building forms and relative positions exactly as in the source. Station and office tower stay outside the crop. No text or interface.",
+      "dimensions": [
+        1536,
+        1024
+      ]
+    }
+  ]
+}
