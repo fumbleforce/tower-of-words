@@ -1,5 +1,8 @@
 .env
-node_modules/
+# no trailing slash: agent worktrees have node_modules as a symlink to the main checkout's
+node_modules
+# agent worktrees (tools/worktree.sh, tools/land.sh)
+/.claude/worktrees/
 dist/
 art/**/*.wav
 art/company/local2/
