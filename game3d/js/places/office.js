@@ -195,7 +195,7 @@ export async function officePlace(game) {
         const p = game.posOf(to); if (!p) return;
         if (w.tama.parent !== w.root) { w.root.attach(w.tama); w.tama.position.y = 0; }
         w.tama.userData.head.rotation.x = 0;
-        await glide(game, w.tama, p, 1.1);
+        await walkRig(game, w.tama, p, { speed: 1.1 });
       },
       chairRoll: ({ to = 'my_seat' }) => new Promise((res) => {
         w.nav.unblock('chair');

@@ -3,7 +3,7 @@ import * as THREE from 'three';
 import { ui, voice, sfx } from './ui.js';
 import { WORDS, learn, cmdHTML, lineHTML } from './lang.js';
 import { walkPose, HIP } from './cast.js';
-import { personStep } from './move.js';
+import { personStep, standOff, detourPoint } from './move.js';
 
 export const WHO = {
   aoi: { name: 'Aoi', color: '#e79fb0' },
@@ -67,13 +67,21 @@ export function defaultReaction(item, id) {
 // a person walking along waypoints (chibi rig), resolves on arrival
 export function walkPerson(rig, pts, { speed = 1.2, blobM } = {}) {
   return new Promise((res) => {
+    // the last point on someone ("walk to Eric"): stop at a talking distance in front of them instead
+    if (pts.length && window.__game) pts = [...pts.slice(0, -1), standOff(window.__game, rig, pts[pts.length - 1])];
     const path = pts.map(([x, z]) => new THREE.Vector3(x, 0, z));
     let ph = 0;
     rig._walk = (dt) => {
       const p = rig.root.position, t = path[0];
       if (!t) { walkPose(rig, 0, 0); rig.hips.position.y = HIP; rig._walk = null; res(); return; }
       const d = Math.hypot(t.x - p.x, t.z - p.z);
-      if (d < 0.05) { path.shift(); return; }
+      // arrived; or the last leg is held up by someone standing on the spot: stop here, next to them (move.js personStep)
+      if (d < 0.05 || (path.length === 1 && (rig._blk || 0) > 1.2 && d < 1.2) || (rig._blk || 0) > 4) { path.shift(); rig._blk = 0; rig._detour = false; rig._blocker = null; return; }
+      // held up by someone standing in the way for a moment: go round them (one detour per leg)
+      if ((rig._blk || 0) > 0.6 && rig._blocker && !rig._blocker.rig._walk && !rig._detour && window.__game) {
+        const w = detourPoint(window.__game, rig, rig._blocker, [t.x, t.z]);
+        if (w) { path.unshift(new THREE.Vector3(w[0], 0, w[1])); rig._detour = true; rig._blk = 0; return; }
+      }
       const s = Math.min(d, speed * dt);
       // people keep their distance: hold back behind someone, slide round them (move.js personStep)
       const [qx, qz] = personStep(window.__game, rig, p.x, p.z, p.x + (t.x - p.x) / d * s, p.z + (t.z - p.z) / d * s, dt);

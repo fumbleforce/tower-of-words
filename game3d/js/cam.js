@@ -24,6 +24,16 @@ const AHEAD = 0.5, AHEAD_MAX = 0.65;                 // look-ahead: seconds of t
 // the Reduce motion setting (settings.js): no push-ins, a smaller lead
 const calm = () => !!(window.__settings && window.__settings.reduceMotion);
 
+// where the current goal is used (the first enabled marker the story marks as the goal), in the place's own space
+const GOAL_LEAN = 1.1;
+export function goalSpot(game = window.__game) {
+  if (!game || !game.markers || game.busy) return null;
+  for (const m of game.markers.list) {
+    try { if (m.goal && m.goal() && (typeof m.enabled === 'function' ? m.enabled() : m.enabled) && m.spot) { const s = m.spot(); if (s) return s; } } catch { /* */ }
+  }
+  return null;
+}
+
 export class RoomCam {
   constructor({ elev = 56, fov = 22, yaw = 0, space = null } = {}) {
     this.camera = new THREE.PerspectiveCamera(fov, 1, 0.5, 200);
@@ -32,7 +42,7 @@ export class RoomCam {
     this.follow = false; this.clamp = null; this.close = null; this.base = new THREE.Vector3();
     this.vel = [0, 0, 0, 0];                 // spring velocities: x, y, z, dist
     this.pv = new THREE.Vector3(); this.pPrev = null; this.ahead = new THREE.Vector3();
-    this.smooth = FOLLOW; this.nudgeK = 0;
+    this.smooth = FOLLOW; this.nudgeK = 0; this.goalLean = { x: 0, z: 0 };
   }
   get dir() { return new THREE.Vector3(Math.sin(this.yaw) * Math.cos(this.elev), Math.sin(this.elev), Math.cos(this.yaw) * Math.cos(this.elev)); }
   place() {
@@ -65,7 +75,11 @@ export class RoomCam {
     if (this.close) return [this.close.target, this.fitDist / this.close.zoom];
     if (!this.follow || !p) return [this.base, this.fitDist];
     const w = p.isVector3 && this.space ? this.space.localToWorld(p.clone()) : p;
-    this.want.set(w.x + this.ahead.x, this.base.y, w.z + this.ahead.z + (this.lead || 0));
+    // lean toward the current goal (a third of the way, at most GOAL_LEAN), so what the game points at is on screen
+    const gs = goalSpot(), gl = this.goalLean;
+    if (gs) { const gw = this.toWorld(gs[0], gs[1]); let gx = (gw.x - w.x) * 0.35, gz = (gw.z - w.z) * 0.35; const m = Math.hypot(gx, gz); if (m > GOAL_LEAN) { gx *= GOAL_LEAN / m; gz *= GOAL_LEAN / m; } gl.x += (gx - gl.x) * 0.05; gl.z += (gz - gl.z) * 0.05; }
+    else { gl.x *= 0.95; gl.z *= 0.95; }
+    this.want.set(w.x + this.ahead.x + gl.x, this.base.y, w.z + this.ahead.z + gl.z + (this.lead || 0));
     if (this.clamp) { this.want.x = THREE.MathUtils.clamp(this.want.x, this.clamp[0], this.clamp[1]); this.want.z = THREE.MathUtils.clamp(this.want.z, this.clamp[2], this.clamp[3]); }
     return [this.want, this.fitDist];
   }

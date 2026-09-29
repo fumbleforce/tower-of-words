@@ -539,5 +539,5 @@ export async function loadMio({ height = 1.12, colours = MIO_COLOURS } = {}) {
     root.rotation.y = ry;
     setState('sit'); sitO = o.clone();
   }
-  return { root, model, mixer, setState, update, setGait: gait.set, sitAt, sitHip, pose, layers, phone: ph.hook, placePhone: ph.place, get state() { return curName; }, H, height };
+  return { root, model, mixer, setState, update, setGait: gait.set, get sitOff() { return sitO; }, sitAt, sitHip, pose, layers, phone: ph.hook, placePhone: ph.place, get state() { return curName; }, H, height };
 }

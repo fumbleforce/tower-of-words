@@ -15,6 +15,7 @@ import { walkPerson, stepPeople, lookAt } from '../story.js';
 import { rbox, mat, emissive, textTexture, plane, JP_FONT, plant as propPlant } from '../props.js';
 import { glide, withList } from './lobby.js';
 import { standOut, walkRig } from '../move.js';
+import { damp, goalSpot } from '../cam.js';
 import { flags } from '../runner.js';
 import { dust, lightPool } from './life.js';
 import { route } from './route.js';
@@ -307,14 +308,34 @@ export async function trainPlace(game) {
     place() { camera.position.copy(this.target).addScaledVector(this.dir, this.dist); camera.up.set(0, 1, 0); camera.lookAt(this.target); camera.updateMatrixWorld(); },
     closeOn([x, z], zoom = 1.8) { this.close = { x, z, zoom }; },
     release() { this.close = null; },
+    // follows Eric out of the car too (feel agent, QA round 1: the phone camera lost him on the platform), leans toward
+    // the current goal on a phone, and moves on the same critically damped springs as the other places (cam.js damp)
+    vel: [0, 0, 0, 0], smooth: 0.32,
     wanted(p) {
       if (this.close) return [new THREE.Vector3(this.close.x, 0.45, this.close.z), this.fitDist / this.close.zoom];
       const t = this.base.clone();
-      if (this.follow && p) t.x = THREE.MathUtils.clamp(p.x + 0.6, -1.7, 2.6);
+      if (!p) return [t, this.fitDist];
+      const clamp = THREE.MathUtils.clamp, out = st.arrived;
+      if (this.follow) {
+        // phone: the car runs up the screen (x); the platform is off to the side (z)
+        let x = p.x + 0.6;
+        const gs = goalSpot(); if (gs) x += clamp((gs[0] - p.x) * 0.35, -1.1, 1.1);
+        t.x = clamp(x, -1.7, out ? 8.2 : 2.6);
+        if (p.z > LZ) t.z = this.base.z + Math.min(2.4, (p.z - LZ) * 0.9);
+      } else if (out && (Math.abs(p.x) > 4.0 || p.z > LZ + 1.0)) {
+        // wide screen, off along the platform: shift to keep him in
+        t.x = clamp(p.x * 0.85, -3.5, 6.5); t.z = this.base.z + clamp((p.z - LZ - 0.8) * 0.8, 0, 2.0);
+      }
       return [t, this.fitDist];
     },
-    update(dt, p) { const [t, d] = this.wanted(p); const k = Math.min(1, dt * (this.close ? 2.2 : 3)); this.target.lerp(t, k); this.dist += (d - this.dist) * k; this.place(); },
-    snap(p) { const [t, d] = this.wanted(p); this.target.copy(t); this.dist = d; this.place(); },
+    update(dt, p) {
+      if (dt <= 0) return;
+      const [t, d] = this.wanted(p), s = this.close ? 0.7 : this.smooth;
+      this.target.x = damp(this.target.x, t.x, this.vel, 0, s, dt); this.target.y = damp(this.target.y, t.y, this.vel, 1, s, dt);
+      this.target.z = damp(this.target.z, t.z, this.vel, 2, s, dt); this.dist = damp(this.dist, d, this.vel, 3, s * 1.15, dt);
+      this.place();
+    },
+    snap(p) { const [t, d] = this.wanted(p); this.target.copy(t); this.dist = d; this.vel.fill(0); this.place(); },
   };
   const _v = new THREE.Vector3();
   function fit(aspect) {
@@ -528,7 +549,7 @@ export async function trainPlace(game) {
       // kotodama: they freeze dead where they are, with the effect; otherwise they bounce back a little, as before
       doorsHold: async ({ kotodama } = {}) => {
         st.slide = null; st.hold = true; st.chimeT = -1;
-        if (kotodama) { st.holdAt = st.door; st.doorWant = st.door; st.frozen = true; await game.kotodama(myLeaves.map((d) => d.g), { pulse: myLeaves.filter((d) => d.x0 < 0).map((d) => d.g) }); return; } // the camera stays on the door until the story pulls back
+        if (kotodama) { st.holdAt = st.door; st.doorWant = st.door; st.frozen = true; await game.kotodama(myLeaves.map((d) => d.g), { pulse: myLeaves.filter((d) => d.x0 < 0).map((d) => d.g), focus: DOOR_SHOT, zoom: 1.45 }); return; }   // framed on the door, so the moment isn't off camera (QA round 1) // the camera stays on the door until the story pulls back
         st.holdAt = Math.max(0.45, st.door); st.doorWant = st.holdAt; sfx('no');
       },
       // everyone still in the car gets off, a second or so apart: up, to the nearest open door, out and along the
@@ -536,8 +557,10 @@ export async function trainPlace(game) {
       alight: async ({ except = [] } = {}) => {
         const skip = new Set(except);
         const leaving = Object.entries(people).filter(([id, r]) => !skip.has(id) && r && r.hips && r.root.visible && r.root.position.z < LZ);
-        const walks = leaving.map(([id, r], i) => (async () => {
-          await game.wait(250 + i * 900);
+        // each goes to the nearer door; people for the same door leave one after another with room between them
+        const perDoor = { l: 0, r: 0 };
+        const walks = leaving.map(([id, r]) => { const side = r.root.position.x < 0 ? 'l' : 'r'; return [id, r, perDoor[side]++]; }).map(([id, r, k]) => (async () => {
+          await game.wait(250 + k * 1500 + (r.root.position.x < 0 ? 0 : 400));
           if (r.root.position.y > 0.01) standUp(r);
           r.act = null;
           const dx = r.root.position.x < 0 ? -DOOR_X : DOOR_X;
@@ -588,7 +611,7 @@ export async function trainPlace(game) {
         if (state === 'tip') { cupSt.want = 1; sfx('no'); }
         if (state === 'safe') { cupSt.want = 0; cup.rotation.set(0, 0, 0); if (rei.root.visible) { cup.position.set(0.08, 0.14, 0.18); rei.torso.add(cup); } else { cup.position.set(2.32, SEAT_Y + 0.02, -(LZ - 0.3)); } }
       },
-      catTo: async ({ to }) => { const p = game.posOf(to); if (!p) return; await glide(game, kitty, p, 1.0); kitty.position.y = 0; },
+      catTo: async ({ to }) => { const p = game.posOf(to); if (!p) return; await walkRig(game, kitty, p, { speed: 1.0 }); kitty.position.y = 0; },
     },
     onEnter: async () => {},
     // Mio (the Meshy model) sits where the laptop woman sat, laptop on her knees
