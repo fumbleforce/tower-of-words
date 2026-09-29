@@ -374,8 +374,8 @@ export function buildOffice() {
     // an open frame (two jambs and a header) so the doorway shows through when the leaf swings away
     const fm = mat(PAL.doorFrame); for (const x of [4.66, 5.54]) root.add(rbox(0.08, 1.31, 0.06, null, { x, z: CN + T / 2, r: 0.02, m: fm }));
     root.add(rbox(0.96, 0.07, 0.06, null, { x: 5.1, y: 1.24, z: CN + T / 2, r: 0.02, m: fm }));
-    // the dark room beyond the doorway, seen when it's open
-    root.add(rbox(0.8, 1.22, 0.02, '#23272e', { x: 5.1, z: CN - T / 2 - 0.02, r: 0.005, cast: false }));
+    // no backing panel in the opening: when the leaf swings in, the room's own floor and light show through, matching
+    // where Eric can walk (it used to be an opaque dark panel that he walked through; Codex world review, item 1)
     d.position.set(-LEAF_W / 2, 0, -0.01); md.add(d); }   // the leaf mesh sits at z +0.01 inside door(); this centres it on the hinge line
   const fe = door(0.7, 1.2, { windows: true }); fe.rotation.y = -Math.PI / 2; fe.position.set(X1 - 0.02, 0, 1.25); root.add(fe);
   const ex = new THREE.Mesh(new THREE.PlaneGeometry(0.34, 0.16), emissive('#6fe39a', '#3fbf6e', 1.2)); ex.position.set(X1 - 0.09, 1.38, 1.25); ex.rotation.y = -Math.PI / 2; root.add(ex);

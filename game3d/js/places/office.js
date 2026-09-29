@@ -38,7 +38,7 @@ export async function officePlace(game) {
 
   const spots = {
     lift_out: [-5.45, -2.4], mori_greet: [(LIFT_OUT[0] + MORI_WAIT[0]) / 2, (LIFT_OUT[1] + MORI_WAIT[1]) / 2], lobby: [-5.6, -1.0], office_door: [-0.25, 0.9], my_seat: [dS1.seat[0], dS1.seat[1] + 0.45], emi_seat: [dS0.seat[0], dS0.seat[1]],
-    copier_front: [-2.95, 4.2], coffee_front: [0.7, 4.1], corridor_w: [-3.5, 1.3], corridor_e: [5.8, 1.3], machine_front: [5.1, 1.3],
+    copier_front: [-2.95, 4.2], coffee_front: [0.7, 4.1], corridor_w: [-3.5, 1.3], corridor_e: [5.8, 1.3], machine_front: [5.1, 1.3], kenji_desk: [-2.9, -4.3],
   };
   const seats = { my_seat: { x: dS1.seat[0], z: dS1.seat[1], top: 0.24, ry: Math.PI }, emi_seat: { x: dS0.seat[0], z: dS0.seat[1], top: 0.24, ry: Math.PI }, mio_seat: { x: dS0.seat[0], z: dS0.seat[1], top: 0.24, ry: Math.PI } };
   const rigAnchor = (rig, h = 1.25) => (v) => { rig.root.getWorldPosition(v); v.y += h; return v; };
@@ -131,6 +131,114 @@ export async function officePlace(game) {
       u.v.y -= 9 * dt; s.position.addScaledVector(u.v, dt); s.rotation.y += u.spin * dt; u.v.multiplyScalar(1 - dt * 0.8);
       if (s.position.y < 0.004) { s.position.y = 0.004; u.v.set(0, 0, 0); }
     }
+  }
+
+  // ---- lunch (story lunch_mio / lunch_mori / lunch_end) ----
+  // Jørgen: "I went to eat with Mori, but I never reach the server room, I am left standing 'eating' in the hallway,
+  // without food." The scene used to walk Eric to machine_front, which is the corridor outside the door, and there
+  // was no food anywhere. Now lunchSit brings him to a set spot (a walk, then a snap if the walk hasn't made it in
+  // time), seats him and his lunch partner, and puts a bento in each lap (Mio) or on the table (Mori). lunchOver
+  // clears it all at the 14:00 cut and brings everyone back to the office floor for the afternoon beat.
+  const LUNCH_TOP = 0.24;   // crate top, the same height as the office chairs, so the sit clip's feet meet the floor
+  const lunchSeats = { eric: { x: 4.45, z: -2.3, ry: Math.PI / 2, walk: [4.75, -1.8] }, mio: { x: 5.95, z: -2.3, ry: -Math.PI / 2, walk: [5.95, -1.8] } };
+  // two crates of backup tapes in the machine room, between the rack row and the cart: the lunch seats
+  for (const s of Object.values(lunchSeats)) {
+    const c = new THREE.Group();
+    c.add(rbox(0.42, LUNCH_TOP - 0.02, 0.32, '#56606e', { y: 0, r: 0.02 }), rbox(0.44, 0.02, 0.34, '#6b7584', { y: LUNCH_TOP - 0.02, r: 0.006 }));
+    for (const dx of [-0.12, 0, 0.12]) c.add(rbox(0.09, 0.012, 0.3, '#2c3139', { x: dx, y: LUNCH_TOP - 0.004, r: 0.003, cast: false }));   // tape spines under the lid slots
+    c.position.set(s.x, 0, s.z); c.rotation.y = s.ry; w.root.add(c);
+    w.nav.block(s.x - 0.23, s.x + 0.23, s.z - 0.18, s.z + 0.18);
+  }
+  function bento(color) {
+    const g = new THREE.Group();
+    g.add(rbox(0.19, 0.045, 0.13, color, { r: 0.012 }));                                   // box
+    g.add(rbox(0.1, 0.012, 0.11, '#f3f1ea', { x: -0.035, y: 0.04, r: 0.004, cast: false }));  // rice
+    g.add(rbox(0.022, 0.014, 0.022, '#c8424f', { x: -0.035, y: 0.047, r: 0.008, cast: false }));   // umeboshi
+    g.add(rbox(0.06, 0.02, 0.045, '#e8c34a', { x: 0.05, y: 0.042, z: -0.025, r: 0.006, cast: false }));  // tamagoyaki
+    g.add(rbox(0.06, 0.018, 0.045, '#5f9a4f', { x: 0.05, y: 0.041, z: 0.027, r: 0.006, cast: false }));  // greens, pickles
+    const sticks = rbox(0.012, 0.008, 0.2, '#d9c7a0', { x: 0.11, y: 0.028, r: 0.003, cast: false }); sticks.rotation.y = 0.2; g.add(sticks);
+    g.scale.setScalar(1.35); g.visible = false; w.root.add(g);
+    return g;
+  }
+  const lunchFood = { eric: bento('#3d7fa8'), partner: bento('#b8434f') };
+  // on someone seated facing ry: in the lap, just in front of the hips
+  const inLap = (b, s) => { b.position.set(s.x + Math.sin(s.ry) * 0.18, LUNCH_TOP + 0.13, s.z + Math.cos(s.ry) * 0.18); b.rotation.y = s.ry; b.visible = true; };
+  // a scripted walk that can't strand the scene: gives up after `ms` (game time) and the caller snaps
+  const walkOrGiveUp = (pr, ms) => Promise.race([pr.then(() => true), game.wait(ms).then(() => false)]);
+  async function lunchSit({ with: partner = 'mio' } = {}) {
+    const me = game.player;
+    if (partner === 'mio') {
+      if (!flags.machineOpen) P.hooks.machineDoor({ state: 'open' });   // she eats in there, so the door is open
+      const es = lunchSeats.eric, ms = lunchSeats.mio, mio = game.mioNpc;
+      // Mio: finish whatever walk she's on (every walk ends by itself: move.js walkRig caps them), then to her crate,
+      // while Eric walks in through the door
+      let mioWalk = Promise.resolve();
+      if (mio) {
+        mio.root.visible = true;
+        for (let i = 0; i < 40 && mio._walk; i++) await game.wait(150);
+        if (!mio._walk && !mio.seated) mioWalk = walkRig(game, mio, ms.walk, { speed: 1.0 });
+      }
+      // if Eric isn't there in time (a blocked path, the cat, someone in the way), he's put there
+      const ok = await walkOrGiveUp(game.walkTo(es.walk[0], es.walk[1]), 9000);
+      const miss = Math.hypot(me.root.position.x - es.walk[0], me.root.position.z - es.walk[1]);
+      if (!ok || miss > 0.5) console.warn(`lunch: Eric's walk into the machine room stopped ${miss.toFixed(2)} m short; snapping him to his seat`);
+      game.walker.stop();
+      me.sitAt(es.x, LUNCH_TOP, es.z, es.ry); me.seated = true; game.walker.sync?.(); game.walker.facing = es.ry;
+      inLap(lunchFood.eric, es);
+      // Mio sits down too; if she's still on the way, her walk is ended and she's put there with him
+      if (mio && !mio.seated) {
+        if (!(await walkOrGiveUp(mioWalk, 3000))) await endWalk(mio);
+        seatMio();
+      }
+      lunchState.on = true;
+      return;
+    }
+    // with Mori: at the kitchenette table, Eric at its east end, Mori on the far side; lunch on the table
+    const spot = [0.05, 4.6];
+    const ok = await walkOrGiveUp(game.walkTo(spot[0], spot[1]), 20000);   // from the machine room it's about 12 m
+    game.walker.stop(); me.setState('idle');
+    const miss = Math.hypot(me.root.position.x - spot[0], me.root.position.z - spot[1]);
+    if (!ok || miss > 0.5) { console.warn(`lunch: Eric's walk to the kitchenette stopped ${miss.toFixed(2)} m short; snapping him there`); me.root.position.set(spot[0], 0, spot[1]); }
+    game.walker.sync?.(); game.walker.faceTo(-0.8, 5.2);
+    const mo = w.mori;
+    if (mo._walk) { for (let i = 0; i < 30 && mo._walk; i++) await game.wait(150); }
+    for (let i = 0; i < 60 && mo._walk; i++) mo._walk(5);   // still on the way: finish his walk at once (story.js walkPerson steps)
+    if (Math.hypot(mo.root.position.x + 0.8, mo.root.position.z - 5.5) > 0.4) { mo._walk = null; standUp('mori'); mo.root.position.set(-0.8, 0, 5.5); moriBlob.position.set(-0.8, 0.004, 5.5); }
+    mo.root.rotation.y = Math.PI;
+    const tb = 0.45;   // on the kitchen table's top (0.42: scenes/office.js table2 at -0.8, 4.6), box half-height above it
+    lunchFood.eric.position.set(-0.52, tb, 4.6); lunchFood.eric.rotation.y = -Math.PI / 2; lunchFood.eric.visible = true;
+    lunchFood.partner.position.set(-0.85, tb, 4.8); lunchFood.partner.rotation.y = Math.PI; lunchFood.partner.visible = true;
+    lunchState.on = true;
+  }
+  const lunchState = { on: false };
+  // ends a walkRig walk now (it stops itself on the next frame when its rig is out of the scene)
+  async function endWalk(r) {
+    const par = r.root.parent; if (!par || !r._walk) return;
+    par.remove(r.root);
+    for (let i = 0; i < 20 && r._walk; i++) await new Promise((q) => requestAnimationFrame(q));
+    par.add(r.root);
+  }
+  function seatMio() {
+    const mio = game.mioNpc, s = lunchSeats.mio; if (!mio) return;
+    mio.root.visible = true; mio.sitAt(s.x, LUNCH_TOP, s.z, s.ry); mio.seated = true;
+    inLap(lunchFood.partner, s);
+  }
+  // the 14:00 cut: lunch packed away, Eric back on his feet by his desk, Mio at hers and Mori at his, so the
+  // afternoon lines (the crackers, Mio's tip about the vending machine) play with everyone in the room
+  async function lunchOver() {
+    const was = lunchState.on; lunchState.on = false;
+    lunchFood.eric.visible = lunchFood.partner.visible = false;
+    if (was) await ui.fade('', '', 250);
+    const me = game.player;
+    if (me.seated) { me.seated = false; me.setState('idle'); me.root.position.y = 0; }
+    const [px, pz] = spots.my_seat;
+    me.root.position.set(px, 0, pz); game.walker.stop(); game.walker.sync?.(); game.walker.faceTo(dS0.seat[0], dS0.seat[1]);
+    const mio = game.mioNpc;
+    if (mio && mio.root.visible) { mio.setState('idle'); mio.seated = false; mio.root.position.set(dS0.seat[0], 0, dS0.seat[1]); }
+    const mo = w.mori;
+    if (!mo.seated || Math.hypot(mo.root.position.x - 2.16, mo.root.position.z + 3.36) > 0.3) { mo._walk = null; standUp('mori'); mo.root.position.set(2.3, 0, -2.55); moriBlob.position.set(2.3, 0.004, -2.55); }
+    cam.snap?.(me.root.position);
+    if (was) await ui.unfade();
   }
 
   const P = {
@@ -231,6 +339,9 @@ export async function officePlace(game) {
       liftOpen: () => { st.liftWant = 1; sfx('lift'); },
       liftClose: () => { st.liftWant = 0; },
       sitDown: async () => { await sitMio(); game.event('sat_down'); },
+      // lunch: { do: 'lunchSit', with: 'mio' | 'mori' } and { do: 'lunchOver' } (see the lunch block above)
+      lunchSit: (s) => lunchSit(s),
+      lunchOver: () => lunchOver(),
     },
     // the lift's landing doors here (places/lift.js hides them while the wall is cut away and waits on k)
     liftLanding: { leaves: w.leaves, k: () => st.liftK },
@@ -295,6 +406,7 @@ export async function officePlace(game) {
     placeMioSeated();
     await game.wait(600);
   }
+  P.lunch = { food: lunchFood, state: lunchState };   // QA (tools/lunch-shots.mjs)
   return P;
 }
 export const MIO_SEAT_Y = 0.0, MIO_SEAT_DZ = 0.0;

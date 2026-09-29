@@ -20,7 +20,8 @@ export default {
     emi: { '*': { hide: true } },
     aoi: { '*': { hide: true } },
     rei: { '*': { hide: true } },
-    mio: { morning: { at: 'machine_front' }, lunch: { at: 'racks' }, afternoon: { at: 'emi_seat' }, evening: { at: 'my_desk' } },
+    // morning: inside the machine room, behind its shut door (the door scene shouts through it), not in the corridor
+    mio: { morning: { at: 'racks' }, lunch: { at: 'racks' }, afternoon: { at: 'emi_seat' }, evening: { at: 'my_desk' } },
     mori: { lunch: { at: 'kitchen_table' }, afternoon: { at: 'chief_desk' }, evening: { hide: true } },
     kenji: { evening: { hide: true } },
   },
@@ -178,6 +179,8 @@ export default {
 
     // ------------------------------------------------------------------ Kenji and the chair
     kenji_first: [
+      // from the machine-room door he'd be talking across the floor and through a wall: go over to him first
+      { do: 'walk', who: 'eric', to: 'kenji_desk', wait: true },
       { set: 'kenji_intro' },
       { do: 'meet', who: 'kenji' },
       { do: 'face', who: 'kenji', to: 'eric' },
@@ -347,7 +350,8 @@ export default {
 
     lunch_mio: [
       { set: 'lunch_mio' },
-      { do: 'walk', who: 'eric', to: 'machine_front', wait: true },
+      // into the machine room and sat down with her, lunch in their laps (places/office.js lunchSit)
+      { do: 'lunchSit', with: 'mio' },
       { do: 'cam', on: 'mio', zoom: 1.6 },
       { say: 'mio', emo: 'casual', text: "You can sit on the floor, it's warm from the servers." },
       { choice: [
@@ -397,7 +401,8 @@ export default {
 
     lunch_mori: [
       { set: 'lunch_mori' },
-      { do: 'walk', who: 'eric', to: 'coffee_front', wait: true },
+      // to the kitchenette table with him, lunch on the table (places/office.js lunchSit)
+      { do: 'lunchSit', with: 'mori' },
       { do: 'cam', on: 'mori', zoom: 1.6 },
       { say: 'mori', face: 'smile', emo: 'bright', text: 'ノルウェーから、ですね。私、1994年にリレハンメルへ行きました。', overheard: true, clear: [{ ja: 'ノルウェー', ro: 'noruwē', en: 'Norway' }, '1994', { ja: 'リレハンメル', ro: 'Rirehanmeru', en: 'Lillehammer' }] },
       { do: 'gesture', who: 'mori', kind: 'skijump' },
@@ -441,6 +446,8 @@ export default {
     ],
 
     lunch_end: [
+      // the 14:00 cut: lunch packed away, everyone back on the office floor for the lines below
+      { do: 'lunchOver' },
       { unset: 'lunch_on' },
       { do: 'period', to: 'afternoon' },
       { set: 'afternoon_on' },
