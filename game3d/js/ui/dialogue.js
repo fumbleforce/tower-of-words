@@ -109,6 +109,11 @@ export function createDialogue({ sfx }) {
         const box = t.querySelector('.chips');
         box.innerHTML = '';
         const shown = performance.now(); // a tap that revealed the chips must not also pick one
+        // phone: the replies come up where the thumb was tapping the lines on, so they take taps only after a moment,
+        // dimmed until then (cold playtest 2026-09-30: the next tap picked "Just nod" by accident)
+        const armMs = document.body.classList.contains('phone') ? 900 : 350;
+        box.classList.toggle('arming', armMs > 350);
+        if (armMs > 350) setTimeout(() => box.classList.remove('arming'), armMs);
         const btns = chips.map((c, i) => {
           const b = el(
             'button',
@@ -118,7 +123,7 @@ export function createDialogue({ sfx }) {
           b.type = 'button';
           b.onclick = (e) => {
             e.stopPropagation();
-            if (performance.now() - shown < 350) return;
+            if (performance.now() - shown < armMs) return;
             this._chipKeys = null;
             box.querySelectorAll('.chip').forEach((x) => {
               x.disabled = true;

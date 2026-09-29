@@ -349,6 +349,8 @@
     "office:sumimasen_kenji",
     "office:machine_door",
     "office:mio_opens",
+    "office:machine_walk_in",
+    "office:akete_open_door",
     "office:akete_machine",
     "office:machine_in",
     "office:chair_push",
@@ -833,6 +835,30 @@
       "kind": "go",
       "labels": [],
       "cond": "(!kenji_intro)"
+    },
+    {
+      "from": "office:machine_door",
+      "to": "office:mio_opens",
+      "kind": "call",
+      "labels": [],
+      "cond": "",
+      "call": true
+    },
+    {
+      "from": "office:mio_opens",
+      "to": "office:machine_walk_in",
+      "kind": "call",
+      "labels": [],
+      "cond": "",
+      "call": true
+    },
+    {
+      "from": "office:akete_machine",
+      "to": "office:machine_walk_in",
+      "kind": "call",
+      "labels": [],
+      "cond": "",
+      "call": true
     },
     {
       "from": "office:ticket_done",
