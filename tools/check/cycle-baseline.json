@@ -1,0 +1,22 @@
+{
+  "owner": "codex-tui",
+  "review": "C-0071",
+  "reason": "Existing cyclic edges retained during formatting; remove allowances as extraction eliminates them.",
+  "edges": [
+    "game3d/js/ambience.js -> game3d/js/sfx.js",
+    "game3d/js/look/detail.js -> game3d/js/props.js",
+    "game3d/js/mastery.js -> game3d/js/runner.js",
+    "game3d/js/props.js -> game3d/js/look/detail.js",
+    "game3d/js/runner.js -> game3d/js/ui.js",
+    "game3d/js/sfx.js -> game3d/js/ui.js",
+    "game3d/js/ui.js -> game3d/js/ambience.js",
+    "game3d/js/ui.js -> game3d/js/mastery.js",
+    "game3d/js/ui.js -> game3d/js/sfx.js"
+  ],
+  "dynamic": [
+    {
+      "file": "game3d/js/runner.js",
+      "expression": "p"
+    }
+  ]
+}

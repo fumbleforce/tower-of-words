@@ -1,0 +1,201 @@
+{
+  "defaultLines": 400,
+  "exceptions": {
+    "game3d/js/avatar.js": {
+      "lines": 489,
+      "bytes": 16036,
+      "owner": "codex-tui",
+      "review": "C-0071",
+      "reason": "Existing avatar loading, rig mapping and animation playback; keep the ceiling until the character pipeline split."
+    },
+    "game3d/js/cast.js": {
+      "lines": 483,
+      "bytes": 14239,
+      "owner": "codex-tui",
+      "review": "C-0071",
+      "reason": "Existing mixed character factories, appearance data and rig setup. Split factory families during the later character/module boundary review; avoid splitting coupled rig construction merely to hit a line target."
+    },
+    "game3d/js/engine.js": {
+      "lines": 441,
+      "bytes": 16004,
+      "owner": "codex-tui",
+      "review": "C-0071",
+      "reason": "Existing renderer, navigation primitives and scene setup; split by responsibility in the approved later stages."
+    },
+    "game3d/js/look/detail.js": {
+      "lines": 670,
+      "bytes": 26877,
+      "owner": "codex-tui",
+      "review": "C-0071",
+      "reason": "Existing detailed prop builders; preserve geometry until the visual owner reviews extraction."
+    },
+    "game3d/js/main.js": {
+      "lines": 1720,
+      "bytes": 61179,
+      "owner": "codex-tui",
+      "review": "C-0071",
+      "reason": "Existing game orchestration and hook wiring; stage 4 extraction is planned."
+    },
+    "game3d/js/menu.js": {
+      "lines": 1313,
+      "bytes": 45919,
+      "owner": "codex-tui",
+      "review": "C-0071",
+      "reason": "Existing action menus and target selection; stage 4 interaction extraction is planned."
+    },
+    "game3d/js/mio.js": {
+      "lines": 946,
+      "bytes": 33385,
+      "owner": "codex-tui",
+      "review": "C-0071",
+      "reason": "Existing procedural character and animation implementation; changes require character review."
+    },
+    "game3d/js/move.js": {
+      "lines": 1461,
+      "bytes": 59272,
+      "owner": "codex-tui",
+      "review": "C-0071",
+      "reason": "Existing movement, crowd and pathfinding implementation; stage 5 extraction is planned."
+    },
+    "game3d/js/perf/batch.js": {
+      "lines": 1133,
+      "bytes": 40184,
+      "owner": "codex-tui",
+      "review": "C-0071",
+      "reason": "Existing batching and geometry optimization utilities; preserve rendering behavior during this pass."
+    },
+    "game3d/js/places/catalog.js": {
+      "lines": 467,
+      "bytes": 10058,
+      "owner": "codex-tui",
+      "review": "C-0071",
+      "reason": "Authored structural registration data for every place; retain as a coherent data module."
+    },
+    "game3d/js/places/lift.js": {
+      "lines": 1130,
+      "bytes": 40691,
+      "owner": "codex-tui",
+      "review": "C-0071",
+      "reason": "Existing shared lift geometry, movement and dialogue staging; extract after behavior characterization."
+    },
+    "game3d/js/places/lobby.js": {
+      "lines": 850,
+      "bytes": 28351,
+      "owner": "codex-tui",
+      "review": "C-0071",
+      "reason": "Existing gate place geometry and interaction hooks; stage 5 room-builder review is planned."
+    },
+    "game3d/js/places/office.js": {
+      "lines": 1130,
+      "bytes": 40556,
+      "owner": "codex-tui",
+      "review": "C-0071",
+      "reason": "Existing office place geometry and interaction hooks; stage 5 room-builder review is planned."
+    },
+    "game3d/js/places/train.js": {
+      "lines": 1799,
+      "bytes": 66299,
+      "owner": "codex-tui",
+      "review": "C-0071",
+      "reason": "Existing train place geometry, animation and scene hooks; stage 5 room-builder review is planned."
+    },
+    "game3d/js/post.js": {
+      "lines": 431,
+      "bytes": 16658,
+      "owner": "codex-tui",
+      "review": "C-0071",
+      "reason": "Existing post-processing pipeline and shader text; keep shader contents intact."
+    },
+    "game3d/js/props.js": {
+      "lines": 533,
+      "bytes": 19265,
+      "owner": "codex-tui",
+      "review": "C-0071",
+      "reason": "Existing primitive prop and material builders; coordinate the look/detail cycle split with visual work."
+    },
+    "game3d/js/runner.js": {
+      "lines": 542,
+      "bytes": 20245,
+      "owner": "codex-tui",
+      "review": "C-0071",
+      "reason": "Existing narrative execution, state and conditions; stage 2c begins extracting the pure rules."
+    },
+    "game3d/js/scenes/lobby.js": {
+      "lines": 1137,
+      "bytes": 37297,
+      "owner": "codex-tui",
+      "review": "C-0071",
+      "reason": "Existing lobby geometry composition; preserve the room while extracting responsibilities later."
+    },
+    "game3d/js/scenes/office.js": {
+      "lines": 2044,
+      "bytes": 72439,
+      "owner": "codex-tui",
+      "review": "C-0071",
+      "reason": "Existing office geometry composition; preserve the room while extracting responsibilities later."
+    },
+    "game3d/js/showcase/decals.js": {
+      "lines": 564,
+      "bytes": 17312,
+      "owner": "codex-tui",
+      "review": "C-0071",
+      "reason": "Existing showcase decal geometry and material data; keep its visual composition intact."
+    },
+    "game3d/js/showcase/main.js": {
+      "lines": 401,
+      "bytes": 12974,
+      "owner": "codex-tui",
+      "review": "C-0071",
+      "reason": "Existing standalone showcase setup and controls; separate responsibility review before growth."
+    },
+    "game3d/js/showcase/trim.js": {
+      "lines": 411,
+      "bytes": 12683,
+      "owner": "codex-tui",
+      "review": "C-0071",
+      "reason": "Existing wall, window and edge geometry builders share showcase dimensions and materials. Stage 5 room-builder review will separate reusable trim construction from room composition."
+    },
+    "game3d/js/sim.js": {
+      "lines": 557,
+      "bytes": 21354,
+      "owner": "codex-tui",
+      "review": "C-0071",
+      "reason": "Existing simulation, save and relationship integration; retain compatibility while extracting state."
+    },
+    "game3d/js/speech.js": {
+      "lines": 723,
+      "bytes": 28260,
+      "owner": "codex-tui",
+      "review": "C-0071",
+      "reason": "Existing speech recognition model/worker lifecycle, microphone capture, result handling and UI feedback. A focused speech-service split must characterize cancellation and capture cleanup; matching already lives in speech-match.js."
+    },
+    "game3d/js/train/car.js": {
+      "lines": 985,
+      "bytes": 35107,
+      "owner": "codex-tui",
+      "review": "C-0071",
+      "reason": "Existing complete carriage geometry combines seating, doors, windows and structural surfaces. Stage 5 room-builder review will extract these geometry responsibilities with visual checks."
+    },
+    "game3d/js/train/kit.js": {
+      "lines": 548,
+      "bytes": 16272,
+      "owner": "codex-tui",
+      "review": "C-0071",
+      "reason": "Existing shared train geometry helpers combine material construction, surfaces and furniture primitives. Stage 5 room-builder review will separate primitive helpers and material ownership."
+    },
+    "game3d/js/train/people.js": {
+      "lines": 1018,
+      "bytes": 31682,
+      "owner": "codex-tui",
+      "review": "C-0071",
+      "reason": "Existing passenger mesh factories, per-seat placement and idle motion share rig conventions. Stage 5 crowd and room-builder review will separate appearance construction from placement and motion."
+    },
+    "game3d/js/ui.js": {
+      "lines": 1810,
+      "bytes": 67990,
+      "owner": "codex-tui",
+      "review": "C-0071",
+      "reason": "Existing dialogue, portraits, menus and audio presentation; stage 3 extraction is planned."
+    }
+  }
+}
