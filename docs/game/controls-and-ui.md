@@ -19,6 +19,8 @@ Elsewhere: the rules every screen has to meet (no timers, one menu per target, s
 
 Clicking while the story is busy (a walk, a door) shows that the game is waiting and hurries the scripted move along. Every attempt does something visible.
 
+While Eric is saying a word (its practice prompt, his voice, the answer), clicks and taps on people, things and markers, and E, are ignored, so the word isn't lost to a new talk. They work again as soon as the word is done or the prompt is cancelled.
+
 ## When each control is taught
 
 On the train (game3d/js/onboard.js, notes/ONBOARDING.md for the design):

@@ -91,13 +91,16 @@ export function installInteractions(game) {
     });
   }
   function use(item) {
-    if (!item || game.busy) return;
+    // while Eric is saying a word (its practice prompt, his voice, the answer) a tap on anything else is ignored, so
+    // the word is never lost to a new talk; saying is cleared in sayWord's finally, so this can't stick
+    if (!item || game.busy || game.saying) return;
     if (held() && item.id !== game.hold) {
       holdNudge();
       return;
     }
     const go = () => {
-      if (game.busy) return;
+      // he may arrive after a Say started on the way
+      if (game.busy || game.saying) return;
       if (item.face) game.walker.faceTo(...item.face());
       talk(item);
     };
