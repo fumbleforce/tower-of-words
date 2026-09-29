@@ -1,0 +1,6 @@
+#!/bin/sh
+set -e
+message_file="$1"
+case "$message_file" in /*) ;; *) message_file="$PWD/$message_file" ;; esac
+cd "$(git rev-parse --show-toplevel)"
+exec node tools/check/commit-message.mjs "$message_file"
