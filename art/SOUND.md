@@ -1,0 +1,18 @@
+# Voice and music methods
+
+How we make voices, songs and background music, and what we learned doing it. Copied from GUIDE.md on 2026-09-29 (the guide diet). Which voices and tracks are approved is in docs/game/art-and-sound.md; the rules in force (local first, Mio's male-drift guard) are in GUIDE.md, Voices and audio.
+
+## Voices
+- Accents (2026-09-28, Eric): Qwen3 VoiceDesign ignores accent descriptions. What works: a Norwegian Piper voice reads the line in rough Norwegian spelling, Qwen3 Base clones that clip reading the real English line, then CosyVoice3 voice conversion puts the chosen timbre (eric-2) on it. Reference: tools/voice-refs/eric-nordic-v2.wav (not yet approved by ear). Jørgen on v2: too strong ("unbearable... the game just won't be taken seriously, but it is quite funny"); then on the lighter versions: "not any better, just drop it, English accent instead". Eric uses voice design eric-2 with no accent (tools/voice-refs/eric-voice.wav).
+- Replicate voices tested best (MiniMax Speech 2.6 HD plus Qwen3-TTS clones), but local Qwen3-TTS is now the default (see Local first). IndexTTS is unusable.
+
+## Music
+- Music: the game uses Lyria only, one loop per mood crossfading into itself.
+- Music verdict (2026-09-25): YuE2 round-1 loops had great fidelity but came out with vocals and sounded like theme songs; Lyria loops are bland but work as background. The YuE2 opening theme is great but a little too sharp.
+- Music round 2 verdict (2026-09-25): Lyria wins background music by far. YuE2 loops, even vocal-free, are simple and repeat within the track and lose variety; the best YuE2 was round 1 with the voice removed by Demucs, still not as good. Stable Audio 3 is terrible. Opening theme = "Mastered: softer" (legacy/game/audio/music/opening.mp3). Don't process vocals further: heavier EQ made them crackly and low quality. The softer-tags regeneration was not interesting.
+- Karaoke and voice lessons (2026-09-26, legacy/island/godot/assets/audio/README.md):
+  - YuE2's own score for sparse lyrics runs about 190 s, so write the score first and shorten only instrumental bars. Never cut a bar that has a sung note.
+  - The score YuE2 writes before singing, about one note per mora, is a better source of karaoke timing than Whisper, which was 5 s off on singing.
+  - When checking a TTS or sung line, compare Whisper's text with the written line as well as its kana: pykakasi misreads 人, 今日 and 君.
+  - Licences: YuE2 is CC BY-NC 4.0 (non-commercial, which also covers the opening theme) and Stable Audio 3 is under the Stability AI Community License. Fine for the prototype; check before selling anything.
+- Instrumental YuE2 (what works): tags and lyrics alone don't stop the singing ([Instrumental] sections still got vocals, about -8 dB vocal energy). The fix is the instrumental AR add-on Mothersuperior/YuE2-instrumental-cot-full-loras (ar_lora_inst_v3abc_comfyui.safetensors) on the CLIP output of LoraLoader, strength 1, with the bf16 checkpoint, mode full, and lyrics set to only `[instrumental]` or bare section tags one per line (`[intro]` `[verse]` ... `[outro]`). Vocal energy dropped to -65 to -77 dB (Lyria: about -32). Optional NAR add-on nar_lora_joint_v9_comfyui on MODEL. For calmer BGM: tags "background music, low energy, sparse, minimal", and optionally mute the Ins melody in the ABC score so only chords remain (tools/music_inst.py mute_melody). About 60–90 s per 90 s take. Stable Audio 3 Medium (native in ComfyUI, 8 steps, ~40 s) is the other local instrumental option. Check vocals with tools/vocal_check.py (Demucs) and cut loops with tools/make_loop.py; the build is tools/music_round2.py.

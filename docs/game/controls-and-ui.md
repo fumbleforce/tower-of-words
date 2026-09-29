@@ -2,7 +2,7 @@
 
 The controls, the HUD, the action prompt, the dialogue box, menus and panels, the phone and desktop layouts, and when each control is taught. Last checked against the game on 2026-09-29.
 
-Elsewhere: the rules every screen has to meet (no timers, one menu per target, separate phone and desktop layouts, the design language) are in GUIDE, Visual design and Process ("First screen"). What the systems behind the panels do is in [systems.md](systems.md).
+Elsewhere: the rules every screen has to meet (no timers, one menu per target, separate phone and desktop layouts, the design language) are in GUIDE, Visual design (with "First screen"). What the systems behind the panels do is in [systems.md](systems.md).
 
 ## Controls
 

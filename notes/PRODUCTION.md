@@ -23,7 +23,7 @@ Only edit files you own. If you need a change in someone else's files, write it 
 - Commit only your own files with `git commit --only <paths>`; never `git add -A`. Don't push; the builder pushes through tools/push.sh after the fast test.
 - Test with the fast mode (`node game3d/tools/fast.mjs 1366 860 300`, and `390 844`), max 5 minutes, in the foreground. No wait or poll tasks.
 - Validate every change in isolation before calling it done: close-ups or frame sequences of the thing, desktop and phone, looked at yourself. Send the sheet path to the main agent.
-- GPU work only under the GPU lock (GUIDE, Process).
+- GPU work only under the GPU lock (GUIDE, Engineering).
 - Nothing opened on Jørgen's screen. Plain writing everywhere (no AI-sounding copy). No brown, gold or serif defaults. Never paper or cut-out styles.
 - Day 1 only for game content. No later-day content.
 

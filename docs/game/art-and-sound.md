@@ -1,6 +1,6 @@
 # Art and sound
 
-How the world and the people look and sound in the game, and which art and voices are approved. Pointers to the decisions; prompts and methods stay in art/PROMPTS.md and GUIDE (Art, Voices and audio). Last checked on 2026-09-29.
+How the world and the people look and sound in the game, and which art and voices are approved. Pointers to the decisions; prompts and methods are in art/PROMPTS.md and art/SOUND.md. Last checked on 2026-09-29.
 
 Elsewhere: every approved file is listed in art/approved/README.md, and the bible (http://127.0.0.1:8771/bible/) has each person's art history and candidates. Each person's approved look in words is in [cast.md](cast.md).
 
@@ -22,7 +22,7 @@ Elsewhere: every approved file is listed in art/approved/README.md, and the bibl
 
 - Eric and Mio are Meshy models (Jørgen, 2026-09-28: "of course we need Mio and Eric's Meshy models"): Eric from art/approved/mc/meshy/ (the game's copy is game3d/assets/eric-meshy/), Mio from art/approved/mio/meshy/. They only get colour tweaks; never reshape or re-model them. Accessories such as glasses and lanyards are left off the models.
 - Everyone else is a chibi figure built in code (game3d/js/cast.js, game3d/js/train/people.js), about 2.8 to 3 heads tall. Mori's Meshy model is parked ([cast.md](cast.md)).
-- New chibi pictures and 3D models are steered by tools/characters/ref/eric-chibi-ref.png and Jørgen's Mio chibi picture (Jørgen). The workflow that worked for Eric is in GUIDE, Art.
+- New chibi pictures and 3D models are steered by tools/characters/ref/eric-chibi-ref.png and Jørgen's Mio chibi picture (Jørgen). The workflow that worked for Eric is in art/PROMPTS.md (3D characters).
 
 ## Portraits
 
