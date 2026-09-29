@@ -81,3 +81,4 @@ for (const name of ['train', 'gate', 'office', 'transitions']) {
   for (const [id, c] of Object.entries({ ...(st.show || {}), ...(st.goal || {}) })) { checkCond(file, c); if (P && !P.things.includes(id) && id !== 'mio') bad(file, `show/goal for unknown id ${id}`); }
 }
 console.log(problems ? `${problems} problem(s)` : 'story check: ok');
+process.exitCode = problems ? 1 : 0;
