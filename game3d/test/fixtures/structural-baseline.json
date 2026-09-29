@@ -454,6 +454,33 @@
       "call": true
     },
     {
+      "from": "train:seat",
+      "to": "train:caught",
+      "kind": "choice",
+      "labels": [
+        "Catch the lunchbox"
+      ],
+      "cond": ""
+    },
+    {
+      "from": "train:seat",
+      "to": "train:dropped",
+      "kind": "choice",
+      "labels": [
+        "Let the lunchbox fall"
+      ],
+      "cond": ""
+    },
+    {
+      "from": "train:seat",
+      "to": "train:mio_catches",
+      "kind": "choice",
+      "labels": [
+        "Let her catch the lunchbox"
+      ],
+      "cond": ""
+    },
+    {
       "from": "train:mio_catches",
       "to": "train:sit",
       "kind": "go",

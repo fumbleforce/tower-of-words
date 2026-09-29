@@ -10,7 +10,7 @@ Eric's arrival on the island. He finds a seat next to a woman with a laptop, who
 
 1. The game opens in the car with nothing but the walking line ([controls-and-ui.md](../controls-and-ui.md)). Mio mutters at the Wi-Fi when he comes near, the first English in the car.
 2. The first passenger he talks to answers in Japanese and nods at the free seat, which gives the first goal: sit down. After three passengers the nod goes to the woman with the laptop.
-3. At the seat the train lurches and her bag of pickles slides. He can catch it (she's flustered and tells him about her mother), let it drop (dry: "I think nothing broke"), or she catches it herself.
+3. At the seat, two steps: the camera frames her lunchbox and the choice says "Her lunchbox is about to fall off the seat." He chooses to catch it, let it fall, or let her catch it. Mio gives one reply, then he sits automatically and their conversation continues. Catching it flusters her; catching or dropping it gets her talking about her mother's pickles. The player never needs to click the box (Jørgen, 2026-09-29).
 4. Sitting, she sees B2 on his card: he's the support contractor Mori told them about. She calls him 外人 and he types it. She says her name.
 5. Talking to her again starts the lesson: where he's from (Norway), how much Japanese he has. おはようございます: he types it, then says it to the cat with the Say button (his first use of Say).
 6. Back to her: she points out the sleeping man ("one day he's going to miss our stop"), and teaches よろしくおねがいします with the smallest bow he's ever seen. If she's warmed to him twice, she offers a pickle. The announcement: つぎは本社.
