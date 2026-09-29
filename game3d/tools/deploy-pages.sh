@@ -6,17 +6,18 @@
 #   EXTRA="legacy/game legacy/proto2" sh game3d/tools/deploy-pages.sh --push
 #                                              also carry other folders, at the same paths as today
 #
-# Why: today Pages serves the main branch, so every build's binaries (models, audio, shots) stay in main's history
-# forever. This publishes only what the game loads, from the committed tree (HEAD), as one fresh commit with no
-# parent, every time. gh-pages never has more than one commit, and main stops needing to carry build output.
+# Why: git keeps no binaries (notes/asset-storage-proposal.md), so the site is built from two sources: the committed
+# game3d tree (HEAD) for code and text, and the used binaries listed under game3d/ in HEAD's
+# tools/assets/assets.lock.json, copied from this disk after checking each sha256 against the lock file. A file that
+# is missing here or differs from the lock file stops the build: run `python3 tools/assets/sync.py pull game3d`, or
+# push and commit the lock file first. gh-pages is one fresh commit with no parent every time.
 #
-# NOT switched on. It needs the main agent's OK, and one GitHub setting changed (see notes/PERF.md, "Deploy"):
+# Pages must serve gh-pages (one GitHub setting, see notes/PERF.md, "Deploy"):
 #   Settings > Pages > Build and deployment > Source: "Deploy from a branch", Branch: gh-pages, folder / (root).
-# Until that setting changes, pushing gh-pages is harmless: Pages keeps serving main.
 #
 # The site: /game3d/ with index.html, build.json, css, js, story (.js), fonts, vendor, audio (mp3, json) and the
-# assets the game loads. Left out: tools, design, ref, shots, notes (*.md), portrait candidates and contact sheets.
-# Only committed files go up (git archive of HEAD), so nothing local or git-ignored can leak.
+# assets the game loads. Left out: tools, design, ref, shots, notes (*.md) and contact sheets. Only committed files
+# and files in the committed lock file go up, so nothing local, private or git-ignored beyond those can leak.
 set -e
 ROOT=$(git rev-parse --show-toplevel)
 cd "$ROOT"
@@ -28,8 +29,29 @@ STAGE=$(mktemp -d "${TMPDIR:-/tmp}/pages.XXXXXX")
 [ -z "$KEEP" ] && trap 'rm -rf "$STAGE" "$STAGE.idx"' EXIT
 REV=$(git rev-parse --short HEAD)
 
-# 1. the committed game3d tree, then prune everything the game doesn't load
+# 1. the committed game3d tree, the locked binaries from disk, then prune everything the game doesn't load
 git archive HEAD game3d | tar -x -C "$STAGE"
+git show HEAD:tools/assets/assets.lock.json | python3 -c '
+import hashlib, json, os, shutil, sys
+root, stage = sys.argv[1], sys.argv[2]
+files = {p: v for p, v in json.load(sys.stdin)["files"].items() if p.startswith("game3d/")}
+bad = []
+for p, v in sorted(files.items()):
+    src = os.path.join(root, p)
+    if not os.path.isfile(src):
+        bad.append(p + ": missing here"); continue
+    h = hashlib.sha256()
+    with open(src, "rb") as f:
+        for chunk in iter(lambda: f.read(1 << 20), b""): h.update(chunk)
+    if h.hexdigest() != v["sha256"]:
+        bad.append(p + ": differs from the lock file"); continue
+    os.makedirs(os.path.dirname(os.path.join(stage, p)), exist_ok=True)
+    shutil.copy2(src, os.path.join(stage, p))
+if bad:
+    print("\n".join(bad[:20]) + ("\n..." if len(bad) > 20 else ""), file=sys.stderr)
+    sys.exit(f"{len(bad)} locked game3d files are missing or changed: python3 tools/assets/sync.py pull game3d, or push and commit the lock file")
+print(f"binaries: {len(files)} from the lock file, sha256 checked")
+' "$ROOT" "$STAGE"
 G="$STAGE/game3d"
 rm -rf "$G/tools" "$G/design" "$G/ref" "$G/shots" "$G/js/shell-qa.js"
 find "$G" -name '*.md' -delete
