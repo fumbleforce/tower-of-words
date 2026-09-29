@@ -5,10 +5,17 @@ const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt
 const id = 'day1-frames', draftKey = 'review-frames:' + id;
 const names = { eric:'Eric', mio:'Mio', miotext:'Mio · message', guard:'Ishibashi', kuroda:'Hamada', mori:'Mori', kenji:'Kenji', kuro:'Receptionist', gatev:'Gate', commuter:'Commuter', sales1:'Colleague', sales2:'Colleague', emi:'Emi' };
 let sections, all, passage = 0, translations;
-let draft = { choices:{}, comments:{} }, revision = 0, saving = false;
+let draft = { choices:{}, comments:{} }, revision = 0, saving = false, savedDraft = {choices:{}, comments:{}};
 const current = () => all[passage];
 const applyLabel = change => ({remove:'Remove this line',merge:'Use merged lines',flow:'Use shorter sequence',replace:'Use revised line'}[change.kind] || 'Use revision');
-function status(text) { $('#status').textContent = text; }
+function status(text) { $('#status').textContent = text; $('#save-state').textContent = text; }
+function renderSave() {
+  const count=all.filter(c=>(draft.choices[c.id]||'')!==(savedDraft.choices[c.id]||'') || (draft.comments[c.id]||'')!==(savedDraft.comments[c.id]||'')).length;
+  for(const button of [$('#save'),$('#save-top')]) {
+    button.disabled=saving || count===0;
+    button.textContent=saving ? 'Saving…' : count ? `Save ${count} change${count===1?'':'s'}` : 'Saved';
+  }
+}
 function remember() {
   revision++;
   try { localStorage.setItem(draftKey, JSON.stringify({...draft, updated:Date.now()})); status('Draft saved in this browser. Save decisions to send it.'); }
@@ -57,7 +64,9 @@ function renderDecision() {
   const choice=draft.choices[current().id];
   $('#keep').setAttribute('aria-pressed',String(choice==='keep'));
   $('#apply').setAttribute('aria-pressed',String(choice==='apply'));
-  $('#apply').textContent=applyLabel(current());
+  $('#keep').textContent=(choice==='keep'?'✓ ':'')+'Keep original';
+  $('#apply').textContent=(choice==='apply'?'✓ ':'')+applyLabel(current());
+  renderSave();
   $('#decision').textContent=choice==='keep'?'✓ Keep original':choice==='apply'?'✓ Use revision':'Undecided';
   const count=all.filter(c=>draft.choices[c.id]).length;
   $('#progress').textContent=`${count} of ${all.length} decided`;
@@ -88,15 +97,16 @@ async function save() {
   const snapshot=JSON.parse(JSON.stringify(draft)), sentRevision=revision;
   const body={picked:all.filter(c=>snapshot.choices[c.id]==='apply').map(c=>c.id),options:{},comment:'Frame review: picked = apply the shown revision; reject = keep the original; absent = undecided.'};
   for(const c of all){ const choice=snapshot.choices[c.id],comment=snapshot.comments[c.id]||''; if(choice || comment)body.options[c.id]={star:false,reject:choice==='keep',comment}; }
-  saving=true; $('#save').disabled=true;status('Saving…');
+  saving=true; renderSave();status('Saving…');
   const abort=new AbortController(),timer=setTimeout(()=>abort.abort(),12000);
   try{
     const response=await fetch('/api/review/'+id,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body),signal:abort.signal});
     const result=await response.json(); if(!response.ok || !result.ok)throw Error(result.error || 'Could not save');
+    savedDraft=snapshot;
     if(sentRevision===revision){try{localStorage.removeItem(draftKey);}catch{} status('Saved. You can revise any choice and save again.');}
     else status('Saved the previous choices. Newer changes are still a draft.');
   }catch(error){status(`Could not save. Your choices are still here. ${error.name==='AbortError'?'The server took too long.':error.message}`);}
-  finally{clearTimeout(timer);saving=false;$('#save').disabled=false;}
+  finally{clearTimeout(timer);saving=false;renderSave();}
 }
 async function init(){
   const response=await fetch('./frames.json');if(!response.ok)throw Error('Could not load passages');
@@ -105,6 +115,7 @@ async function init(){
   let feedback=null;
   try {const r=await fetch('./feedback.json',{cache:'no-store'});if(r.ok)feedback=await r.json();}catch{}
   if(feedback){for(const c of all){if(feedback.picked?.includes(c.id))draft.choices[c.id]='apply';else if(feedback.options?.[c.id]?.reject)draft.choices[c.id]='keep'; draft.comments[c.id]=feedback.options?.[c.id]?.comment || '';}}
+  savedDraft=JSON.parse(JSON.stringify(draft));
   let local=null;try{local=JSON.parse(localStorage.getItem(draftKey));}catch{}
   if(local?.choices && local?.comments && (!feedback?.sent || local.updated>Date.parse(feedback.sent))){draft=local;status('Restored your unsent draft.');}else status(feedback?'Loaded your saved decisions.':'No decisions saved yet.');
   $('#passages').onchange=e=>select(Number(e.target.value));
@@ -112,8 +123,9 @@ async function init(){
   $('#keep').onclick=()=>decide('keep');
   $('#apply').onclick=()=>decide('apply');
   $('#clear').onclick=()=>{delete draft.choices[current().id];remember();};
-  $('#comment').oninput=e=>{draft.comments[current().id]=e.target.value;remember();};$('#save').onclick=save;
+  $('#comment').oninput=e=>{draft.comments[current().id]=e.target.value;remember();};$('#save').onclick=save;$('#save-top').onclick=save;
   document.addEventListener('keydown',e=>{if(/INPUT|TEXTAREA|SELECT|BUTTON/.test(e.target.tagName))return;if(e.key==='ArrowRight'){move(1);e.preventDefault();}if(e.key==='ArrowLeft'){move(-1);e.preventDefault();}});
+  new ResizeObserver(()=>document.documentElement.style.setProperty('--header-height',document.querySelector('header').getBoundingClientRect().height+'px')).observe(document.querySelector('header'));
   render();window.__framesReady=true;
 }
-init().catch(e=>{status(e.message);$('#title').textContent='Review could not load';$('#save').disabled=true;});
+init().catch(e=>{status(e.message);$('#title').textContent='Review could not load';$('#save').disabled=true;$('#save-top').disabled=true;});
