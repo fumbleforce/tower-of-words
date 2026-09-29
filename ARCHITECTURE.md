@@ -29,6 +29,8 @@ implementation evidence is in [notes/refactor-progress.md](notes/refactor-progre
 - `game3d/js/narrative/hooks/` owns global hook registration by responsibility:
   targets, movement and saved staging, presentation, gestures, kotodama effects,
   and progression. Main injects the game and rendering/travel dependencies.
+- `game3d/js/gameplay/interactions.js` installs marker availability, use/talk,
+  Say practice and gifting against the shared game. Main retains input routing.
 - `tools/lib/` owns reusable tooling support. Browser admission, deadlines and
   cleanup belong in `browser-job.mjs`; game startup belongs in
   `game3d/test/support/open-game.mjs`. Scenario drivers own their actions and checks.

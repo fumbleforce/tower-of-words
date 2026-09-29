@@ -7,14 +7,16 @@ import { parseModule } from '../../../tools/lib/place-source.mjs';
 import { giveItem } from '../../js/gameplay/gifts.js';
 import { ITEMS } from '../../js/gameplay/items.js';
 
-const source = fs.readFileSync(new URL('../../js/main.js', import.meta.url), 'utf8');
+const source = fs.readFileSync(new URL('../../js/gameplay/interactions.js', import.meta.url), 'utf8');
 function boundary(source) {
   const ast = parseModule(source);
-  const callback = ast.body.find(n => n.type === 'FunctionDeclaration' && n.id.name === 'give');
-  const binding = ast.body.find(n => n.type === 'ExpressionStatement' &&
+  const body = ast.body.find(n => n.type === 'ExportNamedDeclaration'
+    && n.declaration?.id?.name === 'installInteractions').declaration.body.body;
+  const callback = body.find(n => n.type === 'FunctionDeclaration' && n.id.name === 'give');
+  const binding = body.find(n => n.type === 'ExpressionStatement' &&
     n.expression.type === 'AssignmentExpression' && n.expression.left.object?.name === 'ui' &&
     n.expression.left.property?.name === 'onGive');
-  assert.ok(callback && binding, 'main must connect its gift callback');
+  assert.ok(callback && binding, 'interactions must connect its gift callback');
   return [callback, binding].map(n => source.slice(...n.range)).join('\n');
 }
 
@@ -55,7 +57,7 @@ async function checkBoundary(source) {
   }
 }
 
-test('main gift UI delegates acceptance and refusal before changing inventory', async () => {
+test('interaction gift UI delegates acceptance and refusal before changing inventory', async () => {
   await checkBoundary(source);
   await checkBoundary(await format(source, { parser: 'babel' }));
 });

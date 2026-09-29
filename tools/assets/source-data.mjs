@@ -56,7 +56,7 @@ export function assetSourceData(read) {
   }));
   const strings = new Set(), sfxCalls = new Set(), sceneCalls = {};
   for (const file of assetSourceFiles) visitSource(ast(file), (node, ancestors) => {
-    const presentationFile = /^game3d\/js\/[^/]+\.js$/.test(file) || /^game3d\/js\/(ui|audio|narrative\/hooks)\//.test(file);
+    const presentationFile = /^game3d\/js\/[^/]+\.js$/.test(file) || /^game3d\/js\/(ui|audio|narrative\/hooks|gameplay)\//.test(file);
     const parent = ancestors.at(-1);
     const propertyKey = parent?.type === 'Property' && parent.key === node && !parent.computed;
     if (presentationFile && !propertyKey && node.type === 'Literal' && typeof node.value === 'string') strings.add(node.value);
