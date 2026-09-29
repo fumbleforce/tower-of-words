@@ -7,7 +7,7 @@ const names = { eric:'Eric', mio:'Mio', miotext:'Mio · message', guard:'Ishibas
 let sections, all, passage = 0, translations;
 let draft = { choices:{}, comments:{} }, revision = 0, saving = false, savedDraft = {choices:{}, comments:{}};
 const current = () => all[passage];
-const applyLabel = change => ({remove:'Remove this line',merge:'Use merged lines',flow:'Use shorter sequence',replace:'Use revised line'}[change.kind] || 'Use revision');
+const versionTitles = change => change.kind==='remove' ? ['With the line','Without it'] : ['Original',({merge:'Merged',flow:'Shorter sequence',replace:'Revised'}[change.kind] || 'Revised')];
 function status(text) { $('#status').textContent = text; $('#save-state').textContent = text; }
 function renderSave() {
   const count=all.filter(c=>(draft.choices[c.id]||'')!==(savedDraft.choices[c.id]||'') || (draft.comments[c.id]||'')!==(savedDraft.comments[c.id]||'')).length;
@@ -36,7 +36,7 @@ function textContent(text) {
 function content(f) {
   return `<div class="frame-text">${textContent(f.text || '')}</div>${f.options?.length ? `<ul class="choice-list">${f.options.map(o => `<li>${textContent(typeof o === 'string' ? o : o.text)}</li>`).join('')}</ul>` : ''}`;
 }
-// Match unchanged frames, then show each old/new span together in story order.
+// Match frames to highlight only the differences inside each complete version.
 function compare(before, after) {
   const key = f => JSON.stringify([f.kind, f.speaker, f.text, f.options]);
   const a = before.map(key), b = after.map(key);
@@ -51,23 +51,37 @@ function compare(before, after) {
   }
   return rows;
 }
-function renderPassage() {
-  const rows=compare(current().before,current().after);
-  $('#passage').innerHTML=rows.map(({frame:f,type},i)=>{
+function passageHTML(frames, changed) {
+  let branchOpen=false;
+  const html=frames.map(f=>{
+    if(f.kind==='action' && /^(If |Or, if |Otherwise:)/.test(f.text)) {
+      const close=branchOpen ? '</div>' : '';branchOpen=true;
+      return `${close}<div class="branch"><h4>${esc(f.text)}</h4>`;
+    }
     const img=portrait(f), label=names[f.speaker] || f.speaker || ({action:'Action',choice:'Your choice',prompt:'Your turn'}[f.kind] || 'Narration');
-    const tag=type==='removed' ? 'Remove' : type==='added' ? (current().kind==='merge' ? '→ Merged line' : '→ Proposed') : '';
-    const showTag=tag && (i===0 || rows[i-1].type!==type);
-    return `<article class="line ${f.kind} ${type} ${img?'':'no-portrait'}">${img}<div>${showTag?`<div class="change-label">${tag}</div>`:''}<div class="speaker">${esc(label)}</div>${content(f)}</div></article>`;
+    return `<div class="line ${f.kind} ${changed.has(f)?'changed':''} ${img?'':'no-portrait'}">${img}<div><div class="speaker">${esc(label)}</div>${content(f)}</div></div>`;
   }).join('');
+  return html+(branchOpen?'</div>':'');
+}
+function renderPassage() {
+  const change=current(), rows=compare(change.before,change.after), [original,revised]=versionTitles(change);
+  $('#original-title').textContent=original;$('#revised-title').textContent=revised;
+  $('#jump-original').textContent=original+' ↓';$('#jump-revised').textContent=revised+' ↓';
+  $('#keep').setAttribute('aria-label','Use '+original.toLowerCase());
+  $('#apply').setAttribute('aria-label','Use '+revised.toLowerCase());
+  $('#original-passage').innerHTML=passageHTML(change.before,new Set(rows.filter(r=>r.type==='removed').map(r=>r.frame)));
+  $('#revised-passage').innerHTML=passageHTML(change.after,new Set(rows.filter(r=>r.type==='added').map(r=>r.frame)));
 }
 function renderDecision() {
   const choice=draft.choices[current().id];
   $('#keep').setAttribute('aria-pressed',String(choice==='keep'));
   $('#apply').setAttribute('aria-pressed',String(choice==='apply'));
-  $('#keep').textContent=(choice==='keep'?'✓ ':'')+'Keep original';
-  $('#apply').textContent=(choice==='apply'?'✓ ':'')+applyLabel(current());
+  $('#keep').textContent=choice==='keep'?'✓ Selected':'Use this';
+  $('#apply').textContent=choice==='apply'?'✓ Selected':'Use this';
+  $('#original-version').classList.toggle('selected',choice==='keep');
+  $('#revised-version').classList.toggle('selected',choice==='apply');
   renderSave();
-  $('#decision').textContent=choice==='keep'?'✓ Keep original':choice==='apply'?'✓ Use revision':'Undecided';
+  $('#decision').textContent=choice ? '✓ '+versionTitles(current())[choice==='keep'?0:1] : 'Undecided';
   const count=all.filter(c=>draft.choices[c.id]).length;
   $('#progress').textContent=`${count} of ${all.length} decided`;
   $('#passages').innerHTML=sections.map(s=>`<optgroup label="${esc(s.title)}">${s.changes.map(c=>`<option value="${all.indexOf(c)}" ${c===current()?'selected':''}>${draft.choices[c.id]?'✓':'○'} ${all.indexOf(c)+1}. ${esc(c.title)}</option>`).join('')}</optgroup>`).join('');
