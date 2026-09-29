@@ -2,7 +2,7 @@
  "title": "Eric: anime portrait, round 4 (p3 and p6, one hair colour)",
  "date": "2026-09-29",
  "by": "art agent (Eric anime 4)",
- "status": "open",
+ "status": "superseded",
  "multi": true,
  "question": "Which of these has the hair you want, one colour and length all over?",
  "media": [
@@ -192,5 +192,6 @@
    "id": "none",
    "label": "None of these (say why in the comment)"
   }
- ]
+ ],
+ "decision": "p3h2-909, p6h2-3909, p3m75-5909 minus coffee; fix poses, no props, 3 options (round eric-portrait-anime-5)"
 }
