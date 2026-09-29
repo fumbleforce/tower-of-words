@@ -27,7 +27,7 @@ const imp = async (p) => (await import(pathToFileURL(path.join(root, p)).href));
 const args = new Set(process.argv.slice(2));
 
 const { WORDS } = await imp('js/lang.js');
-const uiSrc = rd('js/ui.js');
+const uiSrc = rd('js/ui/dialogue-text.js');
 const { INTERJ, POOL, glossed: usesInterjectionGlosses } = heardTextData(uiSrc);
 // interjections that are only sounds; the rest of INTERJ (はい, うん, ええ, まあ, ほら, あの...) are words
 // (hesitation fillers like えっと read as "um" in any language, so they count as sounds too)
@@ -326,7 +326,7 @@ const NOT_GLOSS = /^(#|\d|center|middle|left|right|top|bottom|alphabetic|round|b
 for (const f of files) {
   if (f === 'js/lang.js' || DATA_MODULES[f] || !fs.existsSync(path.join(root, f))) continue;
   const source = rd(f);
-  const groups = f.endsWith('.js') ? javascriptTextGroups(source, f === 'js/ui.js' ? ['POOL', 'INTERJ'] : [])
+  const groups = f.endsWith('.js') ? javascriptTextGroups(source, f === 'js/ui/dialogue-text.js' ? ['POOL', 'INTERJ'] : [])
     : source.split('\n').map((raw, n) => {
     // drop comments (// outside strings, /* */ on one line)
     let line = '', q = null;
@@ -365,7 +365,7 @@ for (const f of files) {
   const pool = new Set(POOL);
   const hits = COMMON.filter((w) => [...w].every((c) => pool.has(c)));
   const kanji = [...POOL].filter((c) => /[一-鿿]/.test(c));
-  if (kanji.length) flag('WARN', 'shell', 'js/ui.js POOL', `the gibberish stand-in glyphs include ${kanji.length} real kanji (${kanji.join('')}); neighbours can spell real words like ${hits.slice(0, 6).join(', ')}`);
+  if (kanji.length) flag('WARN', 'shell', 'js/ui/dialogue-text.js POOL', `the gibberish stand-in glyphs include ${kanji.length} real kanji (${kanji.join('')}); neighbours can spell real words like ${hits.slice(0, 6).join(', ')}`);
 }
 
 // ---------------------------------------------------------------- reuse

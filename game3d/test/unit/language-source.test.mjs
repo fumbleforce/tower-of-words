@@ -9,7 +9,7 @@ import { format } from 'prettier';
 import { heardTextData, javascriptTextGroups, speechHintUsesKnownWord } from '../../../tools/lib/language-source.mjs';
 
 const root = fileURLToPath(new URL('../../../', import.meta.url));
-const ui = fs.readFileSync(path.join(root, 'game3d/js/ui.js'), 'utf8');
+const ui = fs.readFileSync(path.join(root, 'game3d/js/ui/dialogue-text.js'), 'utf8');
 
 test('heard-text declarations require data and survive quotes and wrapping', async () => {
   const expected = heardTextData(ui);

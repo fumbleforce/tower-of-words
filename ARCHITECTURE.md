@@ -22,6 +22,10 @@ implementation evidence is in [notes/refactor-progress.md](notes/refactor-progre
   mute and pause state. `audio/music.js` owns loop crossfades and ducking. The UI
   facade wires voice ducking and retains its existing exports; sound effects use
   the audio core directly.
+- `game3d/js/ui/portraits.js` owns portrait state and layout. `ui/dialogue.js`
+  supplies dialogue methods to the existing UI object, preserving its input state
+  and public methods. `ui/dialogue-text.js` owns overheard text and reveal timing;
+  `ui/dom.js` supplies their small DOM helpers.
 - `tools/lib/` owns reusable tooling support. Browser admission, deadlines and
   cleanup belong in `browser-job.mjs`; game startup belongs in
   `game3d/test/support/open-game.mjs`. Scenario drivers own their actions and checks.
