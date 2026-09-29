@@ -1,17 +1,19 @@
-// Browser jobs follow GUIDE's per-process browser / exclusive GPU policy.
+// Browser jobs keep per-process markers and share a bounded GPU slot pool.
 import fs from 'node:fs';
 import os from 'node:os';
 import { randomUUID } from 'node:crypto';
 import { chromium } from 'playwright';
+import { tryAcquireBrowserGpuSlot } from './browser-gpu-slots.mjs';
 
 export async function withBrowserJob(name, run, {
-  timeoutMs = 285000, loadWaitMs = 60000, loadPollMs = 5000,
+  timeoutMs = 285000, loadWaitMs = 60000, loadPollMs = 5000, gpuWaitMs = 60000,
 } = {}) {
   if (!Number.isFinite(timeoutMs) || timeoutMs <= 0 || !Number.isFinite(loadWaitMs) || loadWaitMs < 0
-    || !Number.isFinite(loadPollMs) || loadPollMs <= 0) throw new Error('Invalid browser job time limits');
+    || !Number.isFinite(loadPollMs) || loadPollMs <= 0
+    || !Number.isFinite(gpuWaitMs) || gpuWaitMs < 0) throw new Error('Invalid browser job time limits');
   const started = Date.now();
   const owner = `${name} pid=${process.pid} ${randomUUID()}`, locks = [];
-  let safeToRelease = true;
+  let safeToRelease = true, gpuSlot;
   const acquire = path => {
     fs.mkdirSync(path);
     try { fs.writeFileSync(path + '/owner', owner); }
@@ -26,11 +28,14 @@ export async function withBrowserJob(name, run, {
       console.error(`${name}: retaining locks; browser shutdown is unconfirmed (${owner})`);
       return;
     }
+    if (gpuSlot && !gpuSlot.release()) return false;
+    gpuSlot = null;
     for (const path of locks) {
       try {
         if (fs.readFileSync(path + '/owner', 'utf8') === owner) fs.rmSync(path, { recursive: true });
       } catch (error) { if (error.code !== 'ENOENT') console.error(error.message); }
     }
+    return true;
   };
   let browser, timer, pollTimer, rejectSignal, cancelledError, deadlineError;
   const cancelled = new Promise((_, reject) => { rejectSignal = reject; });
@@ -65,15 +70,28 @@ export async function withBrowserJob(name, run, {
     // Check the clock too: an event-loop stall can delay the deadline callback.
     if (Date.now() - started >= timeoutMs) throw new Error(`${name} exceeded ${timeoutMs / 1000} seconds`);
     acquire('/tmp/claude-1000/browser.lock.' + process.pid);
-    let gpu = false;
-    if (process.env.GL !== 'soft') {
-      try { acquire('/tmp/claude-1000/gpu.lock'); gpu = true; }
-      catch (error) { if (error.code !== 'EEXIST') throw error; }
+    const gpu = process.env.GL !== 'soft';
+    if (gpu) {
+      const gpuUntil = Math.min(started + timeoutMs, Date.now() + gpuWaitMs);
+      let waitingForGpu = false;
+      while (!(gpuSlot = tryAcquireBrowserGpuSlot({ owner }))) {
+        const remaining = gpuUntil - Date.now();
+        if (remaining <= 0) throw Object.assign(new Error(`${name}: render deferred; browser GPU slots or exclusive GPU lock busy`), { code: 'GPU_DEFERRED' });
+        if (!waitingForGpu) console.log(`${name}: waiting up to ${gpuWaitMs / 1000}s for a browser GPU slot`);
+        waitingForGpu = true;
+        await Promise.race([deadline, cancelled, new Promise(resolve => {
+          pollTimer = setTimeout(resolve, Math.min(1000, remaining));
+        })]);
+        clearTimeout(pollTimer);
+      }
     }
+    if (cancelledError) throw cancelledError;
+    if (deadlineError) throw deadlineError;
+    if (Date.now() - started >= timeoutMs) throw new Error(`${name} exceeded ${timeoutMs / 1000} seconds`);
     const args = gpu
       ? ['--use-angle=vulkan', '--enable-features=Vulkan', '--ignore-gpu-blocklist', '--enable-gpu']
       : ['--use-angle=swiftshader', '--enable-unsafe-swiftshader'];
-    console.log(`${name}: ${gpu ? 'GPU' : 'software GL'}`);
+    console.log(`${name}: ${gpu ? `GPU slot ${gpuSlot.slot + 1}` : 'software GL (explicit GL=soft)'}`);
     safeToRelease = false;
     try {
       browser = await chromium.launch({ headless: true,
@@ -98,7 +116,11 @@ export async function withBrowserJob(name, run, {
       safeToRelease = true;
     }
     finally {
-      clearTimeout(closeLimit); release();
+      clearTimeout(closeLimit);
+      const releaseUntil = Math.min(started + 300000, Date.now() + 3000);
+      while (release() === false && Date.now() < releaseUntil)
+        await new Promise(resolve => setTimeout(resolve, 25));
+      if (gpuSlot) console.error(`${name}: retaining GPU slot; pool mutex remained busy`);
       process.off('exit', release);
       for (const [signal, handler] of signals) process.off(signal, handler);
     }
