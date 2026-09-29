@@ -1,3 +1,7 @@
+import { eventTrigger } from '../narrative/events.js';
+import { flagKeys } from '../narrative/engine-flags.js';
+const ENGINE_KEYS = flagKeys('game3d/js/places/lobby.js');
+import { PLACE_DETAILS } from './catalog.js';
 // Place 2, the lobby and security gate, as the engine side: things, spots, zones, hooks, commuters and trips.
 // Every word said here comes from game3d/story/gate.js (placeholder: story/placeholder/gate.js).
 import * as THREE from 'three';
@@ -101,7 +105,7 @@ export async function lobbyPlace(game) {
   let openTimer = 0;
   function openFor(sec) { if (st.jam) return; st.flapWant = 1; openTimer = Math.max(openTimer, sec); }
   function setGate(state) {
-    if (state === 'open') { st.jam = 0; st.gateOpen = true; st.flapWant = 1; w.nav.unblock('gate'); w.arch.userData.set('ok'); flags.gateOpen = true; }
+    if (state === 'open') { st.jam = 0; st.gateOpen = true; st.flapWant = 1; w.nav.unblock('gate'); w.arch.userData.set('ok'); flags[ENGINE_KEYS.gateOpen] = true; }
     if (state === 'closed') { st.jam = 0; st.gateOpen = false; st.flapWant = 0; w.arch.userData.set('idle'); }
     if (state === 'jam') { st.jam = 1; st.flapWant = 0; w.arch.userData.set('no'); sfx('no'); }
     if (state === 'slam') { st.jam = 0; st.slam = 1; st.flap = 1.3; st.flapWant = 1; sfx('door'); openTimer = 2.5; w.arch.userData.set('ok'); }
@@ -120,34 +124,34 @@ export async function lobbyPlace(game) {
 
   function readerTap(i) {
     return (async () => {
-      if (!st.cardOk && !st.gateOpen) { readerFlash(i, 'red'); if (game.runner.has('event:card_red')) await game.runner.run(game.runner.resolve('event:card_red')); else await ui.say(null, 'Red cross. Your card does nothing yet.'); return; }
+      if (!st.cardOk && !st.gateOpen) { readerFlash(i, 'red'); if (game.runner.has(eventTrigger('gate', 'card_red'))) await game.runner.run(game.runner.resolve(eventTrigger('gate', 'card_red'))); else await ui.say(null, 'Red cross. Your card does nothing yet.'); return; }
       readerFlash(i, 'green'); setGate('open');
-      const n = game.runner.resolve('event:card_ok'); if (n) await game.runner.run(n);
+      const n = game.runner.resolve(eventTrigger('gate', 'card_ok')); if (n) await game.runner.run(n);
     })();
   }
   const things = {
-    guard: { label: 'Mr. Ishibashi', kind: 'person', anchor: rigAnchor(w.guard), ...at(2.1, BZ + 0.72, 2.35, BZ - 0.6) },
-    kuroda: { label: 'Mr. Hamada', kind: 'person', anchor: rigAnchor(w.man), spot: () => [w.man.root.position.x, w.man.root.position.z + 0.6], face: () => [w.man.root.position.x, w.man.root.position.z], enabled: () => w.man.root.visible && !w.man._walk },
-    aoi: { label: 'Aoi', kind: 'person', anchor: rigAnchor(w.aoi), spot: () => (w.aoi.seated ? [3.6, 1.95] : [w.aoi.root.position.x, w.aoi.root.position.z + 0.6]), face: () => [w.aoi.root.position.x, w.aoi.root.position.z], enabled: () => w.aoi.root.visible && !w.aoi._walk },
-    kuro: { label: 'Receptionist', kind: 'person', anchor: rigAnchor(w.kuro), ...at(-4.2, 1.4, -4.2, 0.18) },
-    tama: { label: 'Tama', verb: 'Pet', kind: 'person small', anchor: v3(3.45, 0.55, BZ + 0.42), ...at(3.45, BZ + 1.05, 3.45, BZ + 0.42) },
-    reader_l: { label: 'Card reader', kind: 'thing', anchor: v3(-0.93, 1.0, BZ), ...at(-0.93, BZ + 0.48, -0.93, BZ), act: () => readerTap(0), enabled: () => !st.gateOpen },
-    reader_r: { label: 'Card reader', kind: 'thing', anchor: v3(0.93, 1.0, BZ), ...at(0.93, BZ + 0.48, 0.93, BZ), act: () => readerTap(1), enabled: () => !st.gateOpen },
-    gate: { label: 'Gate', kind: 'thing', anchor: v3(0, 1.75, BZ), ...at(0, BZ + 0.6, 0, BZ), enabled: () => !st.gateOpen },
-    desk: { label: 'Guard desk', kind: 'thing small', anchor: v3(1.6, 0.9, BZ), ...at(1.5, BZ + 0.6, 1.6, BZ), noMarker: true },
-    counter: { label: 'Visitor counter', kind: 'thing small', anchor: v3(-3.7, 0.95, 0.45), ...at(-3.6, 1.1, -3.7, 0.45), noMarker: true },
-    signin: { label: 'Visitor book', kind: 'thing small', anchor: v3(-3.75, 0.8, 0.5), ...at(-3.75, 1.1, -3.75, 0.5) },
-    lostfound: { label: 'Lost and found', kind: 'thing small', anchor: v3(-5.7, 1.3, 0.55), ...at(-5.1, 1.2, -5.7, 0.55) },
-    screen: { label: 'Notice screen', kind: 'thing small', anchor: v3(-3.95, 1.45, -Z), ...at(-3.95, -Z + 0.6, -3.95, -Z), enabled: () => st.gateOpen },
-    kiosk: { label: 'Coffee machine', kind: 'thing small', anchor: v3(5.75, 1.5, 3.0), ...at(5.0, 3.0, 5.75, 3.0) },
-    bench_l: { label: 'Bench', kind: 'thing small', anchor: v3(-3.9, 0.6, 2.55), ...at(-3.9, 3.2, -3.9, 2.55), noMarker: true },
-    bench_r: { label: 'Bench', kind: 'thing small', anchor: v3(3.95, 0.6, 1.3), ...at(4.4, 1.95, 4.4, 1.3), noMarker: true },
-    poster_l: { label: 'Poster', kind: 'thing small', anchor: v3(-2.1, 1.7, -Z), ...at(-2.1, -Z + 0.6, -2.1, -Z), enabled: () => st.gateOpen },
-    poster_r: { label: 'Poster', kind: 'thing small', anchor: v3(2.1, 1.7, -Z), ...at(2.1, -Z + 0.6, 2.1, -Z), enabled: () => st.gateOpen },
-    lift: { label: 'Lift', kind: 'thing', anchor: v3(-1.0, 1.7, -Z), ...at(-1.0, -Z + 0.6, -1.0, -Z), enabled: () => st.gateOpen },
-    entrance: { label: 'Entrance', kind: 'thing small', anchor: v3(0, 1.3, Z), ...at(0, Z - 0.6, 0, Z), noMarker: true },
-    plant: { label: 'Plant', kind: 'thing small', anchor: v3(1.95, 0.9, 3.95), ...at(1.95, 3.35, 1.95, 3.95), noMarker: true },
-    bowl: { label: "Tama's bowl", kind: 'thing small', anchor: v3(3.2, 0.3, BZ + 0.56), ...at(3.2, BZ + 1.1, 3.2, BZ + 0.56), noMarker: true },
+    guard: { ...PLACE_DETAILS.gate.things.guard, anchor: rigAnchor(w.guard), ...at(2.1, BZ + 0.72, 2.35, BZ - 0.6) },
+    kuroda: { ...PLACE_DETAILS.gate.things.kuroda, anchor: rigAnchor(w.man), spot: () => [w.man.root.position.x, w.man.root.position.z + 0.6], face: () => [w.man.root.position.x, w.man.root.position.z], enabled: () => w.man.root.visible && !w.man._walk },
+    aoi: { ...PLACE_DETAILS.gate.things.aoi, anchor: rigAnchor(w.aoi), spot: () => (w.aoi.seated ? [3.6, 1.95] : [w.aoi.root.position.x, w.aoi.root.position.z + 0.6]), face: () => [w.aoi.root.position.x, w.aoi.root.position.z], enabled: () => w.aoi.root.visible && !w.aoi._walk },
+    kuro: { ...PLACE_DETAILS.gate.things.kuro, anchor: rigAnchor(w.kuro), ...at(-4.2, 1.4, -4.2, 0.18) },
+    tama: { ...PLACE_DETAILS.gate.things.tama, anchor: v3(3.45, 0.55, BZ + 0.42), ...at(3.45, BZ + 1.05, 3.45, BZ + 0.42) },
+    reader_l: { ...PLACE_DETAILS.gate.things.reader_l, anchor: v3(-0.93, 1.0, BZ), ...at(-0.93, BZ + 0.48, -0.93, BZ), act: () => readerTap(0), enabled: () => !st.gateOpen },
+    reader_r: { ...PLACE_DETAILS.gate.things.reader_r, anchor: v3(0.93, 1.0, BZ), ...at(0.93, BZ + 0.48, 0.93, BZ), act: () => readerTap(1), enabled: () => !st.gateOpen },
+    gate: { ...PLACE_DETAILS.gate.things.gate, anchor: v3(0, 1.75, BZ), ...at(0, BZ + 0.6, 0, BZ), enabled: () => !st.gateOpen },
+    desk: { ...PLACE_DETAILS.gate.things.desk, anchor: v3(1.6, 0.9, BZ), ...at(1.5, BZ + 0.6, 1.6, BZ), noMarker: true },
+    counter: { ...PLACE_DETAILS.gate.things.counter, anchor: v3(-3.7, 0.95, 0.45), ...at(-3.6, 1.1, -3.7, 0.45), noMarker: true },
+    signin: { ...PLACE_DETAILS.gate.things.signin, anchor: v3(-3.75, 0.8, 0.5), ...at(-3.75, 1.1, -3.75, 0.5) },
+    lostfound: { ...PLACE_DETAILS.gate.things.lostfound, anchor: v3(-5.7, 1.3, 0.55), ...at(-5.1, 1.2, -5.7, 0.55) },
+    screen: { ...PLACE_DETAILS.gate.things.screen, anchor: v3(-3.95, 1.45, -Z), ...at(-3.95, -Z + 0.6, -3.95, -Z), enabled: () => st.gateOpen },
+    kiosk: { ...PLACE_DETAILS.gate.things.kiosk, anchor: v3(5.75, 1.5, 3.0), ...at(5.0, 3.0, 5.75, 3.0) },
+    bench_l: { ...PLACE_DETAILS.gate.things.bench_l, anchor: v3(-3.9, 0.6, 2.55), ...at(-3.9, 3.2, -3.9, 2.55), noMarker: true },
+    bench_r: { ...PLACE_DETAILS.gate.things.bench_r, anchor: v3(3.95, 0.6, 1.3), ...at(4.4, 1.95, 4.4, 1.3), noMarker: true },
+    poster_l: { ...PLACE_DETAILS.gate.things.poster_l, anchor: v3(-2.1, 1.7, -Z), ...at(-2.1, -Z + 0.6, -2.1, -Z), enabled: () => st.gateOpen },
+    poster_r: { ...PLACE_DETAILS.gate.things.poster_r, anchor: v3(2.1, 1.7, -Z), ...at(2.1, -Z + 0.6, 2.1, -Z), enabled: () => st.gateOpen },
+    lift: { ...PLACE_DETAILS.gate.things.lift, anchor: v3(-1.0, 1.7, -Z), ...at(-1.0, -Z + 0.6, -1.0, -Z), enabled: () => st.gateOpen },
+    entrance: { ...PLACE_DETAILS.gate.things.entrance, anchor: v3(0, 1.3, Z), ...at(0, Z - 0.6, 0, Z), noMarker: true },
+    plant: { ...PLACE_DETAILS.gate.things.plant, anchor: v3(1.95, 0.9, 3.95), ...at(1.95, 3.35, 1.95, 3.95), noMarker: true },
+    bowl: { ...PLACE_DETAILS.gate.things.bowl, anchor: v3(3.2, 0.3, BZ + 0.56), ...at(3.2, BZ + 1.1, 3.2, BZ + 0.56), noMarker: true },
   };
 
   const zones = {
@@ -214,7 +218,7 @@ export async function lobbyPlace(game) {
     hooks: {
       reader: ({ side = 'r', state = 'green' }) => readerFlash(side === 'l' ? 0 : 1, state),
       gate: ({ state }) => setGate(state),
-      cardOk: () => { st.cardOk = true; flags.cardOk = true; },
+      cardOk: () => { st.cardOk = true; flags[ENGINE_KEYS.cardOk] = true; },
       enter: async ({ who, to = 'before_gate', wait = true }) => {
         const r = people[who]; if (!r) return;
         r.root.visible = true; r.root.position.set(0.6, 0, Z + 1.6); r.root.rotation.y = Math.PI;

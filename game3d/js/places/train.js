@@ -1,3 +1,7 @@
+import { eventId } from '../narrative/events.js';
+import { flagKeys } from '../narrative/engine-flags.js';
+const ENGINE_KEYS = flagKeys('game3d/js/places/train.js');
+import { PLACE_DETAILS } from './catalog.js';
 // Place 1, the train. The car, its passengers and its motion come from side/train (copied into js/train/
 // unchanged); this file only recolours it to the muted palette (colours and light only), adds Mio as the
 // player, the company station with its platforms, the doors and the walk out to the covered walkway.
@@ -401,28 +405,28 @@ export async function trainPlace(game) {
   const carPt = (x, y, z) => (v) => { v.set(x, y, z); car.root.localToWorld(v); return v; };
   const at = (x, z, fx, fz) => ({ spot: () => [x, z], face: () => [fx, fz] });
   const things = {
-    aoi: { label: 'Aoi', kind: 'person', anchor: rigAnchor(aoi), ...at(-1.7, -0.3, -1.7, -1.0), enabled: () => aoi.root.visible },
-    kuroda: { label: 'Sleeping man', kind: 'person', anchor: rigAnchor(kuroda), ...at(-2.55, -0.3, -2.55, -1.0), enabled: () => kuroda.root.visible && !kuroda._walk },
-    reader: { label: 'Man with a book', kind: 'person small', anchor: rigAnchor(reader), ...at(1.05, -0.3, 1.05, -1.0) },
-    music: { label: 'Girl with headphones', kind: 'person small', anchor: rigAnchor(music), ...at(0.75, 0.35, 0.75, 1.0) },
-    rei: { label: 'Woman with a laptop', kind: 'person', anchor: rigAnchor(rei), ...at(2.1, -0.3, 2.1, -1.0), enabled: () => rei.root.visible },
-    cup: { label: 'Coffee', kind: 'thing small', anchor: carPt(1.6, 0.6, -(LZ - 0.28)), ...at(1.6, -0.3, 1.6, -1.0), noMarker: true },
-    bun: { label: 'Woman with a bun', kind: 'person small', anchor: rigAnchor(bun), ...at(-2.5, 0.35, -2.5, 1.0) },
-    youth: { label: 'Young man', kind: 'person small', anchor: rigAnchor(youth), ...at(2.55, 0.35, 2.55, 1.0) },
-    tama: { label: 'Cat', verb: 'Pet', kind: 'person small', anchor: carPt(-0.85, 0.5, -(LZ - 0.24)), ...at(-0.85, -0.3, -0.85, -1.0) },
-    doors: { label: 'Doors', kind: 'thing', anchor: carPt(DOOR_X, 1.1, LZ), ...at(DOOR_X, LZ - 0.22, DOOR_X, LZ), enabled: () => st.door > 0.3 },
-    door_l: { label: 'Doors', kind: 'thing', anchor: carPt(-DOOR_X, 1.1, LZ), ...at(-DOOR_X, LZ - 0.45, -DOOR_X, LZ), noMarker: true },
-    door_r: { label: 'Doors', kind: 'thing', anchor: carPt(DOOR_X, 1.1, LZ), ...at(DOOR_X, LZ - 0.45, DOOR_X, LZ), noMarker: true },
-    plant: { label: 'Plant', kind: 'thing small', anchor: carPt(-3.6, 0.7, -0.82), ...at(-3.2, -0.5, -3.6, -0.82), noMarker: true },
-    bags: { label: 'Bags', kind: 'thing small', anchor: carPt(-1.3, 0.5, -(LZ - 0.24)), ...at(-1.3, -0.3, -1.3, -1.0), noMarker: true },
-    rack: { label: 'Luggage rack', kind: 'thing small', anchor: carPt(0, 1.5, -LZ), ...at(0, -0.3, 0, -1.0), noMarker: true },
-    straps: { label: 'Straps', kind: 'thing small', anchor: carPt(-1.5, 1.3, -0.65), ...at(-1.5, -0.2, -1.5, -0.65), noMarker: true },
-    window: { label: 'Window', kind: 'thing small', anchor: carPt(-1.1, 1.0, -LZ), ...at(-1.1, -0.3, -1.1, -LZ), noMarker: true },
-    poster: { label: 'Poster', kind: 'thing small', anchor: carPt(-LX, 1.0, -0.78), ...at(-3.5, -0.4, -LX, -0.78), noMarker: true },
-    sign: { label: 'Station sign', kind: 'thing small', anchor: (v) => { signs[0].getWorldPosition(v); v.y += 1.5; return v; }, ...at(2.6, LZ + 1.3, 2.6, LZ + 1.9), enabled: () => st.arrived && game.player.root.position.z > LZ },
-    foodbag: { label: 'Her lunch bag', verb: 'Catch', kind: 'thing small', anchor: (v) => { foodBag.getWorldPosition(v); v.y += 0.35; return v; }, ...at(1.62, -0.35, 1.62, -(LZ - 0.26)), enabled: () => bagWobble },
-    stander: { label: 'Man with a bag', kind: 'person small', anchor: rigAnchor(stander), ...at(3.3, -0.45, 3.58, -0.78), enabled: () => stander.root.visible },
-    platform: { label: 'Platform', kind: 'thing small', anchor: carPt(DOOR_X, 0.3, LZ + 1.2), ...at(DOOR_X, LZ + 1.0, DOOR_X, LZ + 1.5), noMarker: true },
+    aoi: { ...PLACE_DETAILS.train.things.aoi, anchor: rigAnchor(aoi), ...at(-1.7, -0.3, -1.7, -1.0), enabled: () => aoi.root.visible },
+    kuroda: { ...PLACE_DETAILS.train.things.kuroda, anchor: rigAnchor(kuroda), ...at(-2.55, -0.3, -2.55, -1.0), enabled: () => kuroda.root.visible && !kuroda._walk },
+    reader: { ...PLACE_DETAILS.train.things.reader, anchor: rigAnchor(reader), ...at(1.05, -0.3, 1.05, -1.0) },
+    music: { ...PLACE_DETAILS.train.things.music, anchor: rigAnchor(music), ...at(0.75, 0.35, 0.75, 1.0) },
+    rei: { ...PLACE_DETAILS.train.things.rei, anchor: rigAnchor(rei), ...at(2.1, -0.3, 2.1, -1.0), enabled: () => rei.root.visible },
+    cup: { ...PLACE_DETAILS.train.things.cup, anchor: carPt(1.6, 0.6, -(LZ - 0.28)), ...at(1.6, -0.3, 1.6, -1.0), noMarker: true },
+    bun: { ...PLACE_DETAILS.train.things.bun, anchor: rigAnchor(bun), ...at(-2.5, 0.35, -2.5, 1.0) },
+    youth: { ...PLACE_DETAILS.train.things.youth, anchor: rigAnchor(youth), ...at(2.55, 0.35, 2.55, 1.0) },
+    tama: { ...PLACE_DETAILS.train.things.tama, anchor: carPt(-0.85, 0.5, -(LZ - 0.24)), ...at(-0.85, -0.3, -0.85, -1.0) },
+    doors: { ...PLACE_DETAILS.train.things.doors, anchor: carPt(DOOR_X, 1.1, LZ), ...at(DOOR_X, LZ - 0.22, DOOR_X, LZ), enabled: () => st.door > 0.3 },
+    door_l: { ...PLACE_DETAILS.train.things.door_l, anchor: carPt(-DOOR_X, 1.1, LZ), ...at(-DOOR_X, LZ - 0.45, -DOOR_X, LZ), noMarker: true },
+    door_r: { ...PLACE_DETAILS.train.things.door_r, anchor: carPt(DOOR_X, 1.1, LZ), ...at(DOOR_X, LZ - 0.45, DOOR_X, LZ), noMarker: true },
+    plant: { ...PLACE_DETAILS.train.things.plant, anchor: carPt(-3.6, 0.7, -0.82), ...at(-3.2, -0.5, -3.6, -0.82), noMarker: true },
+    bags: { ...PLACE_DETAILS.train.things.bags, anchor: carPt(-1.3, 0.5, -(LZ - 0.24)), ...at(-1.3, -0.3, -1.3, -1.0), noMarker: true },
+    rack: { ...PLACE_DETAILS.train.things.rack, anchor: carPt(0, 1.5, -LZ), ...at(0, -0.3, 0, -1.0), noMarker: true },
+    straps: { ...PLACE_DETAILS.train.things.straps, anchor: carPt(-1.5, 1.3, -0.65), ...at(-1.5, -0.2, -1.5, -0.65), noMarker: true },
+    window: { ...PLACE_DETAILS.train.things.window, anchor: carPt(-1.1, 1.0, -LZ), ...at(-1.1, -0.3, -1.1, -LZ), noMarker: true },
+    poster: { ...PLACE_DETAILS.train.things.poster, anchor: carPt(-LX, 1.0, -0.78), ...at(-3.5, -0.4, -LX, -0.78), noMarker: true },
+    sign: { ...PLACE_DETAILS.train.things.sign, anchor: (v) => { signs[0].getWorldPosition(v); v.y += 1.5; return v; }, ...at(2.6, LZ + 1.3, 2.6, LZ + 1.9), enabled: () => st.arrived && game.player.root.position.z > LZ },
+    foodbag: { ...PLACE_DETAILS.train.things.foodbag, anchor: (v) => { foodBag.getWorldPosition(v); v.y += 0.35; return v; }, ...at(1.62, -0.35, 1.62, -(LZ - 0.26)), enabled: () => bagWobble },
+    stander: { ...PLACE_DETAILS.train.things.stander, anchor: rigAnchor(stander), ...at(3.3, -0.45, 3.58, -0.78), enabled: () => stander.root.visible },
+    platform: { ...PLACE_DETAILS.train.things.platform, anchor: carPt(DOOR_X, 0.3, LZ + 1.2), ...at(DOOR_X, LZ + 1.0, DOOR_X, LZ + 1.5), noMarker: true },
   };
   const zones = { door_zone: (x, z) => st.door > 0.3 && z > LZ - 0.35 && Math.abs(Math.abs(x) - DOOR_X) < 0.45,
     // standing on the free seat's floor spot (seat_far_r)
@@ -537,7 +541,7 @@ export async function trainPlace(game) {
         st.decel = 1.15; st.mode = 'brake';
         const D = (st.v * st.v) / (2 * st.decel);
         st.stopAt = st.dist + D; st.stopX = st.stopAt;           // the station's centre lines up with the car when stopped
-        sfx('brake'); game.event('approach');
+        sfx('brake'); game.event(eventId('train', 'approach'));
       },
       doorsOpen: () => { st.doorWant = 1; st.chimeT = -1; st.hold = false; st.slide = null; st.frozen = false; sfx('door'); },
       // { to, ms }: a slow, steady slide from where they are to `to` (1 open, 0 shut) over ms; without ms, the quick close
@@ -545,7 +549,7 @@ export async function trainPlace(game) {
         st.hold = false; st.chimeT = -1; st.doorWant = to;
         if (ms) { st.slide = { from: st.door, to, t: 0, dur: ms / 1000 }; sfx('doorslow'); } else { st.slide = null; sfx('door'); } // the story frames the shot itself (Jørgen missed the man when it jumped to the door)
       },
-      chime: () => { st.chimeT = 0; sfx('chime'); game.event('chime'); },
+      chime: () => { st.chimeT = 0; sfx('chime'); game.event(eventId('train', 'chime')); },
       // kotodama: they freeze dead where they are, with the effect; otherwise they bounce back a little, as before
       doorsHold: async ({ kotodama } = {}) => {
         st.slide = null; st.hold = true; st.chimeT = -1;
@@ -660,10 +664,10 @@ export async function trainPlace(game) {
     },
   };
   function onStop() {
-    st.arrived = true; flags.arrived = true;
+    st.arrived = true; flags[ENGINE_KEYS.arrived] = true;
     sfx('brake');
     P.hooks.doorsOpen();
-    game.event('arrived');
+    game.event(eventId('train', 'arrived'));
   }
   st.stopX = 1e6; P._st = st; P._setDoors = setDoors;
   P.kotodamaTargets = (name) => (name === 'doors' ? myLeaves.map((d) => d.g) : []);

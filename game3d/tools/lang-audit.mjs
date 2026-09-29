@@ -1,3 +1,5 @@
+import { STORY_FILES } from '../js/places/definitions.js';
+import { DEFAULT_SPEAKERS } from '../js/narrative/speakers.js';
 // Language audit for day 1. node game3d/tools/lang-audit.mjs [--brief] [--json]
 //
 // Walks the day in story order (every branch of every choice, both routes through the gate, both lunches),
@@ -17,6 +19,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';
+import { heardTextData, javascriptTextGroups, speechHintUsesKnownWord } from '../../tools/lib/language-source.mjs';
 
 const root = path.resolve(path.dirname(new URL(import.meta.url).pathname), '..');
 const rd = (p) => fs.readFileSync(path.join(root, p), 'utf8');
@@ -25,14 +28,13 @@ const args = new Set(process.argv.slice(2));
 
 const { WORDS } = await imp('js/lang.js');
 const uiSrc = rd('js/ui.js');
-const INTERJ = (/const INTERJ = \[([^\]]*)\]/.exec(uiSrc) || [, ''])[1].match(/'[^']*'/g)?.map((s) => s.slice(1, -1)) || [];
-const POOL = (/const POOL = '([^']*)'/.exec(uiSrc) || [, ''])[1];
+const { INTERJ, POOL, glossed: usesInterjectionGlosses } = heardTextData(uiSrc);
 // interjections that are only sounds; the rest of INTERJ (はい, うん, ええ, まあ, ほら, あの...) are words
 // (hesitation fillers like えっと read as "um" in any language, so they count as sounds too)
 const SOUNDS = new Set(['あ', 'え', 'お', 'ん', 'あっ', 'えっ', 'おっ', 'ああ', 'あー', 'えー', 'うわ', 'わあ', 'えっと', 'あの', 'あのう']);
-// word interjections are fine once the UI glosses them (lang.js INTERJ_GLOSS, used by ui.js heardHTML)
+// Word interjections are fine once the UI actually reads their glossary.
 const { INTERJ_GLOSS = {} } = await imp('js/lang.js');
-const GLOSSED_INTERJ = /INTERJ_GLOSS/.test(uiSrc) ? new Set(Object.keys(INTERJ_GLOSS)) : new Set();
+const GLOSSED_INTERJ = usesInterjectionGlosses ? new Set(Object.keys(INTERJ_GLOSS)) : new Set();
 
 // The main line: the nodes every player passes through, in order. 'a|b' = one of these (a route choice).
 // Everything else in `on` is a side trigger; it's walked from the earliest point its conditions can hold.
@@ -45,7 +47,7 @@ const MAIN = [
 ];
 
 const STORY = {};
-for (const n of ['train', 'gate', 'office', 'transitions']) {
+for (const n of STORY_FILES) {
   const f = fs.existsSync(path.join(root, `story/${n}.js`)) ? `story/${n}.js` : `story/placeholder/${n}.js`;
   STORY[n] = (await imp(f)).default;
 }
@@ -298,13 +300,13 @@ for (const place of ['train', 'gate', 'office']) {
 }
 
 // ---------------------------------------------------------------- names, labels, people
-for (const place of ['train', 'gate', 'office', 'transitions']) {
+for (const place of STORY_FILES) {
   const st = STORY[place];
   for (const [id, sp] of Object.entries(st.speakers || {})) for (const k of ['name', 'role']) if (sp[k] && isJP(sp[k])) flag('ERROR', 'story', `${place} speakers.${id}`, `name plate ${k} in Japanese: ${sp[k]}`);
   for (const [id, p] of Object.entries(st.people || {})) for (const k of ['name', 'about']) if (p[k] && isJP(p[k])) flag('ERROR', 'story', `${place} people.${id}`, `People panel ${k} has Japanese`, p[k]);
   for (const [id, l] of Object.entries(st.labels || {})) { const t = Array.isArray(l) ? l[0] : l; if (isJP(t)) flag('ERROR', 'story', `${place} labels.${id}`, `marker label in Japanese: ${t}`); }
 }
-{ const runnerSrc = rd('js/runner.js'); for (const m of runnerSrc.matchAll(/(\w+): \{ name: '([^']*)'(?:, role: '([^']*)')?/g)) for (const t of [m[2], m[3]]) if (t && isJP(t)) flag('ERROR', 'builder', `runner.js speaker ${m[1]}`, `default name plate in Japanese: ${t}`); }
+for (const [id, speaker] of Object.entries(DEFAULT_SPEAKERS)) for (const text of [speaker.name, speaker.role]) if (text && isJP(text)) flag('ERROR', 'builder', `narrative/speakers.js speaker ${id}`, `default name plate in Japanese: ${text}`);
 
 // ---------------------------------------------------------------- the 3D scenes and the UI
 const everTaught = new Set(teach.keys());
@@ -323,34 +325,37 @@ const DATA_MODULES = {
 const NOT_GLOSS = /^(#|\d|center|middle|left|right|top|bottom|alphabetic|round|butt|square|bold|normal|italic|anonymous|sans-serif|serif)/;
 for (const f of files) {
   if (f === 'js/lang.js' || DATA_MODULES[f] || !fs.existsSync(path.join(root, f))) continue;
-  const lines = rd(f).split('\n');
-  lines.forEach((raw, n) => {
-    if (f === 'js/ui.js' && /^const (POOL|INTERJ) =/.test(raw)) return;   // checked on their own below
+  const source = rd(f);
+  const groups = f.endsWith('.js') ? javascriptTextGroups(source, f === 'js/ui.js' ? ['POOL', 'INTERJ'] : [])
+    : source.split('\n').map((raw, n) => {
     // drop comments (// outside strings, /* */ on one line)
     let line = '', q = null;
     for (let i = 0; i < raw.length; i++) { const c = raw[i]; if (q) { line += c; if (c === '\\') { line += raw[++i] || ''; continue; } if (c === q) q = null; continue; } if (c === '/' && raw[i + 1] === '/') break; if (c === '/' && raw[i + 1] === '*') { const e = raw.indexOf('*/', i + 2); if (e < 0) break; i = e + 1; continue; } if (c === "'" || c === '"' || c === '`') q = c; line += c; }
     const lits = [...line.matchAll(/'(?:[^'\\]|\\.)*'|"(?:[^"\\]|\\.)*"|`(?:[^`\\]|\\.)*`/g)].map((m) => m[0].slice(1, -1));
-    const cssContent = f.endsWith('.css') ? [...line.matchAll(/content:\s*"([^"]*)"/g)].map((m) => m[1]) : [];
-    const jpLits = [...lits, ...cssContent].filter(isJP);
-    if (!jpLits.length) return;
+    return lits.map(value => ({ value, line: n + 1 }));
+  });
+  for (const group of groups) {
+    const lits = group.map(entry => entry.value);
+    const jpLits = group.filter(entry => isJP(entry.value));
+    if (!jpLits.length) continue;
     const gloss = lits.some((l) => !isJP(l) && /[A-Za-z]{3,}/.test(l) && !NOT_GLOSS.test(l) && !/px|JP_FONT/.test(l));
-    for (const l of jpLits) for (const m of l.matchAll(JP)) {
+    for (const { value: l, line: lineNumber } of jpLits) for (const m of l.matchAll(JP)) {
       const run = m[0], id = wordOf(run) || wordOf(run.replace(/[ビル室]+$/, ''));
-      const where = `${f}:${n + 1}`;
+      const where = `${f}:${lineNumber}`;
       const base = FORMS.find(([ja]) => run.startsWith(ja) && run !== ja);
       if (id && alwaysMet.has(id) && run === WORDS[id].ja) flag('INFO', OWN(f), where, `shows ${alwaysTaught.has(id) ? 'taught' : 'glossed'} word ${run} (${id})${gloss ? ' with English beside it' : ', no gloss (fine: he knows it by then)'}`);
       else if (gloss) flag('INFO', OWN(f), where, `${run} has English or romaji beside it`, l);
       else if (base && alwaysTaught.has(base[1])) flag('WARN', OWN(f), where, `${run}: starts with taught ${base[0]} but the rest (${run.slice(base[0].length)}) isn't taught or glossed`, l);
       else flag('ERROR', OWN(f), where, `readable Japanese ${run} with no English beside it, never taught`, l);
     }
-  });
+  }
 }
 // speech-match.js: the one spelling of SPOKEN that reaches the screen is the mic's "That sounded like X" hint.
 // speech.js takes it from lang.js (WORDS[k].ja) and shows it only for a word the player knows (known.has).
 {
   const { SPOKEN = {} } = await imp('js/speech-match.js');
   const src = rd('js/speech.js');
-  const fromLang = /WORDS\[\w+\]\.ja/.test(src) && /known\.has\(/.test(src);
+  const fromLang = speechHintUsesKnownWord(src);
   if (!fromLang) flag('WARN', 'builder', 'js/speech.js "That sounded like"', 'the hint no longer takes lang.js WORDS[id].ja for known words only; update the speech-match check in lang-audit.mjs');
   for (const id of Object.keys(SPOKEN)) if (!WORDS[id]) flag('ERROR', 'builder', `js/speech-match.js SPOKEN.${id}`, 'not a word in lang.js; the mic can\'t name it');
 }

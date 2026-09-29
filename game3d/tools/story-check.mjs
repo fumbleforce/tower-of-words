@@ -1,3 +1,5 @@
+import { WORDS, SAYABLE } from '../js/lang.js';
+import { DEFAULT_SPEAKERS, ITEMS, PLACE_DETAILS, STORY_FILES, GLOBAL_HOOKS, PLACE_EVENTS } from '../js/narrative/contracts.js';
 // Checks the story files against the engine: unknown speakers, words, hooks, ids, spots, missing nodes,
 // conditions that don't parse. node game3d/tools/story-check.mjs
 import fs from 'node:fs';
@@ -5,30 +7,20 @@ import path from 'node:path';
 import { pathToFileURL } from 'node:url';
 
 const root = path.resolve(path.dirname(new URL(import.meta.url).pathname), '..');
-const rd = (p) => fs.readFileSync(path.join(root, p), 'utf8');
 
-// what the engine offers, scraped from the sources
-const SAYABLE = ['ohayo', 'yoroshiku', 'sumimasen', 'matte', 'akete', 'kite', 'ugoite', 'irete', 'dashite', 'tomatte'];
-const words = [...rd('js/lang.js').matchAll(/^\s+(\w+): \{ ja:/gm)].map((m) => m[1]);
-const speakers = [...rd('js/runner.js').matchAll(/^\s+(\w+): \{ name:/gm)].map((m) => m[1]);
-// global hooks: main.js's H.x, plus the ones sim.js registers (bond, bondStep, remember, fact, relate)
-const globalHooks = [...rd('js/main.js').matchAll(/^H\.(\w+) =/gm), ...rd('js/sim.js').matchAll(/H\.(\w+) =/g), ...rd('js/sim.js').matchAll(/hooks\.(\w+) =/g)].map((m) => m[1]).concat(['bond', 'bondStep', 'remember', 'fact', 'relate']);
-function placeInfo(file) {
-  const s = rd(file);
-  const block = (name) => { const i = s.indexOf(`const ${name} = {`); if (i < 0) return ''; let d = 0, j = s.indexOf('{', i); for (let k = j; k < s.length; k++) { if (s[k] === '{') d++; if (s[k] === '}') { d--; if (!d) return s.slice(j, k); } } return ''; };
-  const keys = (b) => [...b.matchAll(/^\s{4}(\w+):/gm)].map((m) => m[1]);
-  const hooksB = (() => { const i = s.indexOf('hooks: {'); let d = 0; for (let k = s.indexOf('{', i); k < s.length; k++) { if (s[k] === '{') d++; if (s[k] === '}') { d--; if (!d) return s.slice(i, k); } } return ''; })();
-  return { things: keys(block('things')), spots: [...block('spots').matchAll(/(\w+): \[/g)].map((m) => m[1]), seats: [...block('seats').matchAll(/(\w+): \{ x/g)].map((m) => m[1]), zones: [...block('zones').matchAll(/(\w+): \(x, z\)/g)].map((m) => m[1]), hooks: [...hooksB.matchAll(/^\s{6}(\w+):/gm)].map((m) => m[1]), people: [...s.matchAll(/const people = \{([^}]*)\}/g)].flatMap((m) => m[1].split(',').map((x) => x.trim().split(':')[0].trim())).filter(Boolean) };
-}
-const PL = { train: placeInfo('js/places/train.js'), gate: placeInfo('js/places/lobby.js'), office: placeInfo('js/places/office.js') };
-const EVENTS = { train: ['start', 'approach', 'arrived', 'chime'], gate: ['start', 'card_red', 'card_ok', 'arch_blocked', 'gate_opened'], office: ['start', 'sat_down'] };
+// Runtime declarations; place registries migrate next.
+const words = Object.keys(WORDS);
+const speakers = Object.keys(DEFAULT_SPEAKERS);
+const globalHooks = GLOBAL_HOOKS;
+const PL = Object.fromEntries(Object.entries(PLACE_DETAILS).map(([id, details]) => [id, { ...details, things: Object.keys(details.things) }]));
+const EVENTS = Object.fromEntries(Object.entries(PLACE_EVENTS).map(([place, events]) => [place, Object.values(events).map(event => event.id)]));
 
 let problems = 0;
 const bad = (f, msg) => { problems++; console.log(`${f}: ${msg}`); };
 function checkCond(f, c) { if (typeof c !== 'string') return; if (!/^[\w\s!&|()<>=.'"+-]*$/.test(c)) bad(f, `condition has odd characters: ${c}`); try { new Function('F', 'return (' + c.replace(/'[^']*'|"[^"]*"|\b[A-Za-z_]\w*\b/g, (m) => (/^['"]/.test(m) || m === 'true' || m === 'false' ? m : `F(${JSON.stringify(m)})`)) + ');'); } catch { bad(f, `condition doesn't parse: ${c}`); } }
 function checkText(f, t) { for (const m of t.matchAll(/\{(\w+)\}/g)) if (!words.includes(m[1])) bad(f, `unknown word {${m[1]}} in "${t.slice(0, 60)}"`); }
 
-for (const name of ['train', 'gate', 'office', 'transitions']) {
+for (const name of STORY_FILES) {
   let file = `story/${name}.js`;
   if (!fs.existsSync(path.join(root, file))) { file = `story/placeholder/${name}.js`; console.log(`(${name}: using the placeholder)`); }
   const st = (await import(pathToFileURL(path.join(root, file)).href)).default;
@@ -68,7 +60,7 @@ for (const name of ['train', 'gate', 'office', 'transitions']) {
   for (const [key, v] of Object.entries(st.on || {})) {
     for (const e of Array.isArray(v) ? v : [v]) { const t = typeof e === 'string' ? { node: e } : e; if (!nodes[t.node]) bad(file, `on ${key}: missing node ${t.node}`); if (t.if) checkCond(file, t.if); }
     const g = /^give:(\w+|\*):(\w+)$/.exec(key);
-    if (g) { if (g[1] !== '*' && !['coffee', 'tea', 'melon', 'cornsoup'].includes(g[1])) bad(file, `on ${key}: unknown item`); if (P && !P.things.includes(g[2]) && g[2] !== 'mio') bad(file, `on ${key}: no person '${g[2]}' here`); continue; }
+    if (g) { if (g[1] !== '*' && !Object.hasOwn(ITEMS, g[1])) bad(file, `on ${key}: unknown item`); if (P && !P.things.includes(g[2]) && g[2] !== 'mio') bad(file, `on ${key}: no person '${g[2]}' here`); continue; }
     const m = /^(talk|say|near|zone|event):(?:(\w+):)?(.+)$/.exec(key);
     if (!m) { bad(file, `odd trigger ${key}`); continue; }
     const [, kind, cmd, id] = m;

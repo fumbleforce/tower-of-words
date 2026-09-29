@@ -1,7 +1,7 @@
 // Day-1 choice checks on the real Runner (CPU only, no browser): repeat gifts keep the item, the stuck vending
 // machine takes no second order until 動いて, and the "mum" question on the train needs its setup line first.
 // node game3d/tools/choice-check.mjs  (bugs from notes/day1-choice-review-codex.md)
-import fs from 'node:fs';
+import { giveItem } from '../js/gameplay/gifts.js';
 import path from 'node:path';
 import { register } from 'node:module';
 import { pathToFileURL } from 'node:url';
@@ -23,38 +23,61 @@ const load = async (n) => (await import(pathToFileURL(path.join(root, `story/${n
 
 let fails = 0;
 const ok = (c, msg) => { if (!c) { fails++; console.log('FAIL ' + msg); } };
-const calls = [];
+const calls = [], pendingBeats = [];
 function fresh(story) {
   for (const k in flags) delete flags[k];
-  calls.length = 0; offered = [];
+  calls.length = 0; pendingBeats.length = 0; offered = [];
   const inv = [];
-  const hooks = new Proxy({ buy: async (s) => { inv.push(s.item); calls.push('buy'); } }, { get: (t, k) => t[k] || (async () => { calls.push(k); }) });
-  const game = { hooks, busy: false, queue: [], wait: async () => {}, beat: (f) => f() };
+  const hooks = new Proxy({ buy: (s) => { inv.push(s.item); calls.push('buy'); } }, { get: (t, k) => t[k] || (() => { calls.push(k); }) });
+  const game = { hooks, busy: false, queue: [], wait: async () => {}, beat: (f) => { const pending = f(); pendingBeats.push(pending); return pending; } };
   const r = new Runner(game); r.use({ name: 'test', hooks: {} }, story);
   return { r, inv };
 }
 const run = async (r, key) => { const n = r.resolve(key); ok(n, `nothing runs for ${key}`); if (n) await r.run(n); };
 
-// 1. gifts: main.js give() consumes only when the matched entry isn't keep: true; mirror that here
+// 1. gifts: exercise the operation used by main with the real Runner and story.
 const office = await load('office');
-ok(/if \(!game\.runner\.entry\(k, \{ peek: true \}\)\.keep\) \{ take\(item\)/.test(fs.readFileSync(path.join(root, 'js/main.js'), 'utf8')), 'main.js give() no longer checks keep before take()');
 for (const [who, fav, other] of [['mio', 'coffee', 'tea'], ['mori', 'cornsoup', 'melon'], ['kenji', 'melon', 'coffee']]) {
   const { r } = fresh(office);
   const bag = [fav, other, fav];
   const give = async (item) => {
-    const k = [`give:${item}:${who}`, `give:*:${who}`].find((x) => r.has(x));
-    if (!k) return 'none';
-    if (!r.entry(k, { peek: true }).keep) { bag.splice(bag.indexOf(item), 1); flags[`gave_${item}_${who}`] = true; }
-    await r.run(r.resolve(k)); return k;
+    const k = giveItem({ runner: r, flags, take: item => bag.splice(bag.indexOf(item), 1) }, item, who);
+    await Promise.all(pendingBeats);
+    return k;
   };
-  await give(fav);
-  ok(bag.length === 2 && flags['gifted_' + who], `${who}: first gift not taken`);
+  ok(await give(fav) === `give:${fav}:${who}`, `${who}: favourite gift returned the wrong key`);
+  ok(r.trace.at(-1) === `gift_${who}_${fav}`, `${who}: favourite gift ran the wrong scene`);
+  ok(bag.length === 2 && flags['gifted_' + who] && flags[`gave_${fav}_${who}`], `${who}: first gift not taken`);
   const bond = calls.filter((c) => c === 'bond').length;
-  await give(fav); ok(bag.length === 2, `${who}: repeat ${fav} (exact trigger) used up the item`);
-  await give(other); ok(bag.length === 2 && !flags[`gave_${other}_${who}`], `${who}: repeat ${other} (wildcard trigger) used up the item`);
+  ok(await give(fav) === `give:${fav}:${who}`, `${who}: repeat favourite returned the wrong key`);
+  ok(r.trace.at(-1) === 'gift_again', `${who}: repeat favourite ran the wrong scene`);
+  ok(bag.length === 2, `${who}: repeat ${fav} (exact trigger) used up the item`);
+  ok(await give(other) === `give:*:${who}`, `${who}: repeat other gift returned the wrong key`);
+  ok(r.trace.at(-1) === 'gift_again', `${who}: repeat other gift ran the wrong scene`);
+  ok(bag.length === 2 && !flags[`gave_${other}_${who}`], `${who}: repeat ${other} (wildcard trigger) used up the item`);
   ok(calls.filter((c) => c === 'bond').length === bond, `${who}: repeat gift changed the bond`);
+  const firstOther = fresh(office);
+  let taken = false;
+  const key = giveItem({ runner: firstOther.r, flags, take: () => { taken = true; } }, other, who);
+  await Promise.all(pendingBeats);
+  ok(key === `give:*:${who}` && taken && firstOther.r.trace.at(-1) === `gift_${who}_other`,
+    `${who}: first non-favourite gift must run the wildcard scene and take the item`);
 }
-{ const { r } = fresh(office); ok(!r.has('give:coffee:tama') && !r.has('give:*:tama'), 'someone with no gift trigger would take the item'); }
+{
+  const { r } = fresh({ on: { 'give:*:mio': { node: 'accept', once: true } }, nodes: { accept: [{ set: 'accepted' }] } });
+  const key = giveItem({ runner: r, flags, take: () => {} }, 'tea', 'mio');
+  await Promise.all(pendingBeats);
+  ok(key === 'give:*:mio' && flags.accepted, 'checking acceptance must not consume a once gift trigger');
+}
+{
+  const { r } = fresh(office), before = { ...flags };
+  let taken = false, triggered = false;
+  const trigger = r.trigger; r.trigger = () => { triggered = true; };
+  const result = giveItem({ runner: r, flags, take: () => { taken = true; } }, 'coffee', 'tama');
+  r.trigger = trigger;
+  ok(result === null && !taken && !triggered && JSON.stringify(flags) === JSON.stringify(before),
+    'someone with no gift trigger must leave the item, flags and runner untouched');
+}
 
 // 2. vending: first order sticks, talking again doesn't sell, 動いて drops that one order once, then normal sales
 for (const [i, item] of ['coffee', 'tea', 'melon', 'cornsoup'].entries()) {

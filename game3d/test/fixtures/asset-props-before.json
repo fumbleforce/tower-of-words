@@ -1,0 +1,2031 @@
+[
+  {
+    "id_": "prop/gate/bench_l",
+    "kind": "prop",
+    "name": "Bench",
+    "paths": [
+      "game3d/js/places/lobby.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code); props are judged with their room",
+    "source": "lobby.js things.bench_l; geometry in scenes/lobby.js",
+    "place": "gate",
+    "used": [
+      "Lobby and gate: tap target 'Bench' (no marker)"
+    ],
+    "view": {
+      "type": "room",
+      "room": "lobby",
+      "anchor": [
+        -3.9,
+        0.6,
+        2.55
+      ],
+      "spot": [
+        -3.9,
+        3.2
+      ],
+      "small": true
+    },
+    "tags": [
+      "in game",
+      "thing small"
+    ]
+  },
+  {
+    "id_": "prop/gate/bench_r",
+    "kind": "prop",
+    "name": "Bench",
+    "paths": [
+      "game3d/js/places/lobby.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code); props are judged with their room",
+    "source": "lobby.js things.bench_r; geometry in scenes/lobby.js",
+    "place": "gate",
+    "used": [
+      "Lobby and gate: tap target 'Bench' (no marker)"
+    ],
+    "view": {
+      "type": "room",
+      "room": "lobby",
+      "anchor": [
+        3.95,
+        0.6,
+        1.3
+      ],
+      "spot": [
+        4.4,
+        1.95
+      ],
+      "small": true
+    },
+    "tags": [
+      "in game",
+      "thing small"
+    ]
+  },
+  {
+    "id_": "prop/gate/counter",
+    "kind": "prop",
+    "name": "Visitor counter",
+    "paths": [
+      "game3d/js/places/lobby.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code); props are judged with their room",
+    "source": "lobby.js things.counter; geometry in scenes/lobby.js",
+    "place": "gate",
+    "used": [
+      "Lobby and gate: tap target 'Visitor counter' (no marker)"
+    ],
+    "view": {
+      "type": "room",
+      "room": "lobby",
+      "anchor": [
+        -3.7,
+        0.95,
+        0.45
+      ],
+      "spot": [
+        -3.6,
+        1.1
+      ],
+      "small": true
+    },
+    "tags": [
+      "in game",
+      "thing small"
+    ]
+  },
+  {
+    "id_": "prop/gate/desk",
+    "kind": "prop",
+    "name": "Guard desk",
+    "paths": [
+      "game3d/js/places/lobby.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code); props are judged with their room",
+    "source": "lobby.js things.desk; geometry in scenes/lobby.js",
+    "place": "gate",
+    "used": [
+      "Lobby and gate: tap target 'Guard desk' (no marker)"
+    ],
+    "view": {
+      "type": "room",
+      "room": "lobby",
+      "anchor": [
+        1.6,
+        0.9,
+        -0.55
+      ],
+      "spot": [
+        1.5,
+        0.04999999999999993
+      ],
+      "small": true
+    },
+    "tags": [
+      "in game",
+      "thing small"
+    ]
+  },
+  {
+    "id_": "prop/gate/entrance",
+    "kind": "prop",
+    "name": "Entrance",
+    "paths": [
+      "game3d/js/places/lobby.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code); props are judged with their room",
+    "source": "lobby.js things.entrance; geometry in scenes/lobby.js",
+    "place": "gate",
+    "used": [
+      "Lobby and gate: tap target 'Entrance' (no marker)"
+    ],
+    "view": {
+      "type": "room",
+      "room": "lobby",
+      "anchor": [
+        0.0,
+        1.3,
+        4.5
+      ],
+      "spot": [
+        0.0,
+        3.9
+      ],
+      "small": true
+    },
+    "tags": [
+      "in game",
+      "thing small"
+    ]
+  },
+  {
+    "id_": "prop/gate/gate",
+    "kind": "prop",
+    "name": "Gate",
+    "paths": [
+      "game3d/js/places/lobby.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code); props are judged with their room",
+    "source": "lobby.js things.gate; geometry in scenes/lobby.js",
+    "place": "gate",
+    "used": [
+      "Lobby and gate: tap target 'Gate'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "lobby",
+      "anchor": [
+        0.0,
+        1.75,
+        -0.55
+      ],
+      "spot": [
+        0.0,
+        0.04999999999999993
+      ],
+      "small": false
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/gate/kiosk",
+    "kind": "prop",
+    "name": "Coffee machine",
+    "paths": [
+      "game3d/js/places/lobby.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code); props are judged with their room",
+    "source": "lobby.js things.kiosk; geometry in scenes/lobby.js",
+    "place": "gate",
+    "used": [
+      "Lobby and gate: tap target 'Coffee machine'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "lobby",
+      "anchor": [
+        5.75,
+        1.5,
+        3.0
+      ],
+      "spot": [
+        5.0,
+        3.0
+      ],
+      "small": true
+    },
+    "tags": [
+      "in game",
+      "thing small"
+    ]
+  },
+  {
+    "id_": "prop/gate/lift",
+    "kind": "prop",
+    "name": "Lift",
+    "paths": [
+      "game3d/js/places/lobby.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code); props are judged with their room",
+    "source": "lobby.js things.lift; geometry in scenes/lobby.js",
+    "place": "gate",
+    "used": [
+      "Lobby and gate: tap target 'Lift'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "lobby",
+      "anchor": [
+        -1.0,
+        1.7,
+        -4.5
+      ],
+      "spot": [
+        -1.0,
+        -3.9
+      ],
+      "small": false
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/gate/lostfound",
+    "kind": "prop",
+    "name": "Lost and found",
+    "paths": [
+      "game3d/js/places/lobby.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code); props are judged with their room",
+    "source": "lobby.js things.lostfound; geometry in scenes/lobby.js",
+    "place": "gate",
+    "used": [
+      "Lobby and gate: tap target 'Lost and found'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "lobby",
+      "anchor": [
+        -5.7,
+        1.3,
+        0.55
+      ],
+      "spot": [
+        -5.1,
+        1.2
+      ],
+      "small": true
+    },
+    "tags": [
+      "in game",
+      "thing small"
+    ]
+  },
+  {
+    "id_": "prop/gate/plant",
+    "kind": "prop",
+    "name": "Plant",
+    "paths": [
+      "game3d/js/places/lobby.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code); props are judged with their room",
+    "source": "lobby.js things.plant; geometry in scenes/lobby.js",
+    "place": "gate",
+    "used": [
+      "Lobby and gate: tap target 'Plant' (no marker)"
+    ],
+    "view": {
+      "type": "room",
+      "room": "lobby",
+      "anchor": [
+        1.95,
+        0.9,
+        3.95
+      ],
+      "spot": [
+        1.95,
+        3.35
+      ],
+      "small": true
+    },
+    "tags": [
+      "in game",
+      "thing small"
+    ]
+  },
+  {
+    "id_": "prop/gate/poster_l",
+    "kind": "prop",
+    "name": "Poster",
+    "paths": [
+      "game3d/js/places/lobby.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code); props are judged with their room",
+    "source": "lobby.js things.poster_l; geometry in scenes/lobby.js",
+    "place": "gate",
+    "used": [
+      "Lobby and gate: tap target 'Poster'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "lobby",
+      "anchor": [
+        -2.1,
+        1.7,
+        -4.5
+      ],
+      "spot": [
+        -2.1,
+        -3.9
+      ],
+      "small": true
+    },
+    "tags": [
+      "in game",
+      "thing small"
+    ]
+  },
+  {
+    "id_": "prop/gate/poster_r",
+    "kind": "prop",
+    "name": "Poster",
+    "paths": [
+      "game3d/js/places/lobby.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code); props are judged with their room",
+    "source": "lobby.js things.poster_r; geometry in scenes/lobby.js",
+    "place": "gate",
+    "used": [
+      "Lobby and gate: tap target 'Poster'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "lobby",
+      "anchor": [
+        2.1,
+        1.7,
+        -4.5
+      ],
+      "spot": [
+        2.1,
+        -3.9
+      ],
+      "small": true
+    },
+    "tags": [
+      "in game",
+      "thing small"
+    ]
+  },
+  {
+    "id_": "prop/gate/reader_l",
+    "kind": "prop",
+    "name": "Card reader",
+    "paths": [
+      "game3d/js/places/lobby.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code); props are judged with their room",
+    "source": "lobby.js things.reader_l; geometry in scenes/lobby.js",
+    "place": "gate",
+    "used": [
+      "Lobby and gate: tap target 'Card reader'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "lobby",
+      "anchor": [
+        -0.93,
+        1.0,
+        -0.55
+      ],
+      "spot": [
+        -0.93,
+        -0.07000000000000006
+      ],
+      "small": false
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/gate/reader_r",
+    "kind": "prop",
+    "name": "Card reader",
+    "paths": [
+      "game3d/js/places/lobby.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code); props are judged with their room",
+    "source": "lobby.js things.reader_r; geometry in scenes/lobby.js",
+    "place": "gate",
+    "used": [
+      "Lobby and gate: tap target 'Card reader'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "lobby",
+      "anchor": [
+        0.93,
+        1.0,
+        -0.55
+      ],
+      "spot": [
+        0.93,
+        -0.07000000000000006
+      ],
+      "small": false
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/gate/screen",
+    "kind": "prop",
+    "name": "Notice screen",
+    "paths": [
+      "game3d/js/places/lobby.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code); props are judged with their room",
+    "source": "lobby.js things.screen; geometry in scenes/lobby.js",
+    "place": "gate",
+    "used": [
+      "Lobby and gate: tap target 'Notice screen'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "lobby",
+      "anchor": [
+        -3.95,
+        1.45,
+        -4.5
+      ],
+      "spot": [
+        -3.95,
+        -3.9
+      ],
+      "small": true
+    },
+    "tags": [
+      "in game",
+      "thing small"
+    ]
+  },
+  {
+    "id_": "prop/gate/signin",
+    "kind": "prop",
+    "name": "Visitor book",
+    "paths": [
+      "game3d/js/places/lobby.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code); props are judged with their room",
+    "source": "lobby.js things.signin; geometry in scenes/lobby.js",
+    "place": "gate",
+    "used": [
+      "Lobby and gate: tap target 'Visitor book'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "lobby",
+      "anchor": [
+        -3.75,
+        0.8,
+        0.5
+      ],
+      "spot": [
+        -3.75,
+        1.1
+      ],
+      "small": true
+    },
+    "tags": [
+      "in game",
+      "thing small"
+    ]
+  },
+  {
+    "id_": "prop/office/bench",
+    "kind": "prop",
+    "name": "Bench",
+    "paths": [
+      "game3d/js/places/office.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code); props are judged with their room",
+    "source": "office.js things.bench; geometry in scenes/office.js",
+    "place": "office",
+    "used": [
+      "B2 office: tap target 'Bench' (no marker)"
+    ],
+    "view": {
+      "type": "room",
+      "room": "office",
+      "anchor": [
+        -6.72,
+        0.6,
+        -1.4
+      ],
+      "spot": [
+        -6.1,
+        -1.4
+      ],
+      "small": true
+    },
+    "tags": [
+      "in game",
+      "thing small"
+    ]
+  },
+  {
+    "id_": "prop/office/box_crowns",
+    "kind": "prop",
+    "name": "Box",
+    "paths": [
+      "game3d/js/places/office.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code); props are judged with their room",
+    "source": "office.js things.box_crowns; geometry in scenes/office.js",
+    "place": "office",
+    "used": [
+      "B2 office: tap target 'Box' (no marker)"
+    ],
+    "view": {
+      "type": "room",
+      "room": "office",
+      "anchor": [
+        -3.5,
+        1.6,
+        -6.1000000000000005
+      ],
+      "spot": [
+        -3.5,
+        -5.2
+      ],
+      "small": true
+    },
+    "tags": [
+      "in game",
+      "thing small"
+    ]
+  },
+  {
+    "id_": "prop/office/boxes",
+    "kind": "prop",
+    "name": "Boxes",
+    "paths": [
+      "game3d/js/places/office.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code); props are judged with their room",
+    "source": "office.js things.boxes; geometry in scenes/office.js",
+    "place": "office",
+    "used": [
+      "B2 office: tap target 'Boxes' (no marker)"
+    ],
+    "view": {
+      "type": "room",
+      "room": "office",
+      "anchor": [
+        2.85,
+        0.6,
+        -1.2
+      ],
+      "spot": [
+        2.3,
+        -1.2
+      ],
+      "small": true
+    },
+    "tags": [
+      "in game",
+      "thing small"
+    ]
+  },
+  {
+    "id_": "prop/office/cabinets",
+    "kind": "prop",
+    "name": "Cabinets",
+    "paths": [
+      "game3d/js/places/office.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code); props are judged with their room",
+    "source": "office.js things.cabinets; geometry in scenes/office.js",
+    "place": "office",
+    "used": [
+      "B2 office: tap target 'Cabinets' (no marker)"
+    ],
+    "view": {
+      "type": "room",
+      "room": "office",
+      "anchor": [
+        -3.5,
+        1.35,
+        -6.4
+      ],
+      "spot": [
+        -3.5,
+        -5.2
+      ],
+      "small": true
+    },
+    "tags": [
+      "in game",
+      "thing small"
+    ]
+  },
+  {
+    "id_": "prop/office/calendar",
+    "kind": "prop",
+    "name": "Calendar",
+    "paths": [
+      "game3d/js/places/office.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code); props are judged with their room",
+    "source": "office.js things.calendar; geometry in scenes/office.js",
+    "place": "office",
+    "used": [
+      "B2 office: tap target 'Calendar' (no marker)"
+    ],
+    "view": {
+      "type": "room",
+      "room": "office",
+      "anchor": [
+        -0.6,
+        1.2,
+        -6.4
+      ],
+      "spot": [
+        -0.6,
+        -5.3
+      ],
+      "small": true
+    },
+    "tags": [
+      "in game",
+      "thing small"
+    ]
+  },
+  {
+    "id_": "prop/office/clock",
+    "kind": "prop",
+    "name": "Clock",
+    "paths": [
+      "game3d/js/places/office.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code); props are judged with their room",
+    "source": "office.js things.clock; geometry in scenes/office.js",
+    "place": "office",
+    "used": [
+      "B2 office: tap target 'Clock' (no marker)"
+    ],
+    "view": {
+      "type": "room",
+      "room": "office",
+      "anchor": [
+        -1.6,
+        1.6,
+        -6.4
+      ],
+      "spot": [
+        -1.8,
+        -5.3
+      ],
+      "small": true
+    },
+    "tags": [
+      "in game",
+      "thing small"
+    ]
+  },
+  {
+    "id_": "prop/office/coffee_machine",
+    "kind": "prop",
+    "name": "Coffee machine",
+    "paths": [
+      "game3d/js/places/office.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code); props are judged with their room",
+    "source": "office.js things.coffee_machine; geometry in scenes/office.js",
+    "place": "office",
+    "used": [
+      "B2 office: tap target 'Coffee machine'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "office",
+      "anchor": [
+        1.1,
+        1.05,
+        2.76
+      ],
+      "spot": [
+        1.1,
+        3.35
+      ],
+      "small": false
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/office/copier",
+    "kind": "prop",
+    "name": "Copier",
+    "paths": [
+      "game3d/js/places/office.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code); props are judged with their room",
+    "source": "office.js things.copier; geometry in scenes/office.js",
+    "place": "office",
+    "used": [
+      "B2 office: tap target 'Copier'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "office",
+      "anchor": [
+        -2.95,
+        1.1,
+        2.76
+      ],
+      "spot": [
+        -2.95,
+        4.2
+      ],
+      "small": false
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/office/cups",
+    "kind": "prop",
+    "name": "Cups",
+    "paths": [
+      "game3d/js/places/office.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code); props are judged with their room",
+    "source": "office.js things.cups; geometry in scenes/office.js",
+    "place": "office",
+    "used": [
+      "B2 office: tap target 'Cups'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "office",
+      "anchor": [
+        0.4,
+        0.8,
+        2.82
+      ],
+      "spot": [
+        0.4,
+        3.35
+      ],
+      "small": true
+    },
+    "tags": [
+      "in game",
+      "thing small"
+    ]
+  },
+  {
+    "id_": "prop/office/extinguisher",
+    "kind": "prop",
+    "name": "Extinguisher",
+    "paths": [
+      "game3d/js/places/office.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code); props are judged with their room",
+    "source": "office.js things.extinguisher; geometry in scenes/office.js",
+    "place": "office",
+    "used": [
+      "B2 office: tap target 'Extinguisher' (no marker)"
+    ],
+    "view": {
+      "type": "room",
+      "room": "office",
+      "anchor": [
+        1.5,
+        0.8,
+        0.2
+      ],
+      "spot": [
+        1.5,
+        0.85
+      ],
+      "small": true
+    },
+    "tags": [
+      "in game",
+      "thing small"
+    ]
+  },
+  {
+    "id_": "prop/office/fan",
+    "kind": "prop",
+    "name": "Fan",
+    "paths": [
+      "game3d/js/places/office.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code); props are judged with their room",
+    "source": "office.js things.fan; geometry in scenes/office.js",
+    "place": "office",
+    "used": [
+      "B2 office: tap target 'Fan'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "office",
+      "anchor": [
+        -3.3,
+        1.0,
+        -2.2
+      ],
+      "spot": [
+        -3.3,
+        -1.6
+      ],
+      "small": true
+    },
+    "tags": [
+      "in game",
+      "thing small"
+    ]
+  },
+  {
+    "id_": "prop/office/fax",
+    "kind": "prop",
+    "name": "Fax",
+    "paths": [
+      "game3d/js/places/office.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code); props are judged with their room",
+    "source": "office.js things.fax; geometry in scenes/office.js",
+    "place": "office",
+    "used": [
+      "B2 office: tap target 'Fax' (no marker)"
+    ],
+    "view": {
+      "type": "room",
+      "room": "office",
+      "anchor": [
+        -5.4,
+        0.9,
+        2.6999999999999997
+      ],
+      "spot": [
+        -5.4,
+        3.4
+      ],
+      "small": true
+    },
+    "tags": [
+      "in game",
+      "thing small"
+    ]
+  },
+  {
+    "id_": "prop/office/fire_exit",
+    "kind": "prop",
+    "name": "Fire exit",
+    "paths": [
+      "game3d/js/places/office.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code); props are judged with their room",
+    "source": "office.js things.fire_exit; geometry in scenes/office.js",
+    "place": "office",
+    "used": [
+      "B2 office: tap target 'Fire exit'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "office",
+      "anchor": [
+        6.9,
+        1.45,
+        1.25
+      ],
+      "spot": [
+        6.4,
+        1.25
+      ],
+      "small": true
+    },
+    "tags": [
+      "in game",
+      "thing small"
+    ]
+  },
+  {
+    "id_": "prop/office/fridge",
+    "kind": "prop",
+    "name": "Fridge",
+    "paths": [
+      "game3d/js/places/office.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code); props are judged with their room",
+    "source": "office.js things.fridge; geometry in scenes/office.js",
+    "place": "office",
+    "used": [
+      "B2 office: tap target 'Fridge'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "office",
+      "anchor": [
+        -1.8,
+        1.35,
+        2.7199999999999998
+      ],
+      "spot": [
+        -1.8,
+        3.35
+      ],
+      "small": true
+    },
+    "tags": [
+      "in game",
+      "thing small"
+    ]
+  },
+  {
+    "id_": "prop/office/hydrant",
+    "kind": "prop",
+    "name": "Hydrant",
+    "paths": [
+      "game3d/js/places/office.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code); props are judged with their room",
+    "source": "office.js things.hydrant; geometry in scenes/office.js",
+    "place": "office",
+    "used": [
+      "B2 office: tap target 'Hydrant' (no marker)"
+    ],
+    "view": {
+      "type": "room",
+      "room": "office",
+      "anchor": [
+        2.6,
+        1.0,
+        0.2
+      ],
+      "spot": [
+        2.6,
+        0.85
+      ],
+      "small": true
+    },
+    "tags": [
+      "in game",
+      "thing small"
+    ]
+  },
+  {
+    "id_": "prop/office/inout_board",
+    "kind": "prop",
+    "name": "In/out board",
+    "paths": [
+      "game3d/js/places/office.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code); props are judged with their room",
+    "source": "office.js things.inout_board; geometry in scenes/office.js",
+    "place": "office",
+    "used": [
+      "B2 office: tap target 'In/out board'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "office",
+      "anchor": [
+        -1.6,
+        1.35,
+        -6.4
+      ],
+      "spot": [
+        -1.4,
+        -5.3
+      ],
+      "small": true
+    },
+    "tags": [
+      "in game",
+      "thing small"
+    ]
+  },
+  {
+    "id_": "prop/office/kettle",
+    "kind": "prop",
+    "name": "Kettle",
+    "paths": [
+      "game3d/js/places/office.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code); props are judged with their room",
+    "source": "office.js things.kettle; geometry in scenes/office.js",
+    "place": "office",
+    "used": [
+      "B2 office: tap target 'Kettle' (no marker)"
+    ],
+    "view": {
+      "type": "room",
+      "room": "office",
+      "anchor": [
+        1.45,
+        0.95,
+        2.76
+      ],
+      "spot": [
+        1.45,
+        3.35
+      ],
+      "small": true
+    },
+    "tags": [
+      "in game",
+      "thing small"
+    ]
+  },
+  {
+    "id_": "prop/office/kitchen_table",
+    "kind": "prop",
+    "name": "Table",
+    "paths": [
+      "game3d/js/places/office.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code); props are judged with their room",
+    "source": "office.js things.kitchen_table; geometry in scenes/office.js",
+    "place": "office",
+    "used": [
+      "B2 office: tap target 'Table' (no marker)"
+    ],
+    "view": {
+      "type": "room",
+      "room": "office",
+      "anchor": [
+        -0.8,
+        0.7,
+        4.6
+      ],
+      "spot": [
+        -0.8,
+        5.5
+      ],
+      "small": true
+    },
+    "tags": [
+      "in game",
+      "thing small"
+    ]
+  },
+  {
+    "id_": "prop/office/lift",
+    "kind": "prop",
+    "name": "Lift",
+    "paths": [
+      "game3d/js/places/office.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code); props are judged with their room",
+    "source": "office.js things.lift; geometry in scenes/office.js",
+    "place": "office",
+    "used": [
+      "B2 office: tap target 'Lift'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "office",
+      "anchor": [
+        -5.45,
+        1.5,
+        -3.4
+      ],
+      "spot": [
+        -5.45,
+        -2.8
+      ],
+      "small": true
+    },
+    "tags": [
+      "in game",
+      "thing small"
+    ]
+  },
+  {
+    "id_": "prop/office/machine_door",
+    "kind": "prop",
+    "name": "Machine room",
+    "paths": [
+      "game3d/js/places/office.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code); props are judged with their room",
+    "source": "office.js things.machine_door; geometry in scenes/office.js",
+    "place": "office",
+    "used": [
+      "B2 office: tap target 'Machine room'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "office",
+      "anchor": [
+        5.1,
+        1.4,
+        0.2
+      ],
+      "spot": [
+        5.1,
+        0.8
+      ],
+      "small": true
+    },
+    "tags": [
+      "in game",
+      "thing small"
+    ]
+  },
+  {
+    "id_": "prop/office/microwave",
+    "kind": "prop",
+    "name": "Microwave",
+    "paths": [
+      "game3d/js/places/office.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code); props are judged with their room",
+    "source": "office.js things.microwave; geometry in scenes/office.js",
+    "place": "office",
+    "used": [
+      "B2 office: tap target 'Microwave' (no marker)"
+    ],
+    "view": {
+      "type": "room",
+      "room": "office",
+      "anchor": [
+        1.45,
+        0.95,
+        4.3
+      ],
+      "spot": [
+        0.8,
+        4.3
+      ],
+      "small": true
+    },
+    "tags": [
+      "in game",
+      "thing small"
+    ]
+  },
+  {
+    "id_": "prop/office/my_chair",
+    "kind": "prop",
+    "name": "Your chair",
+    "paths": [
+      "game3d/js/places/office.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "office.js things.my_chair",
+    "place": "office",
+    "used": [
+      "B2 office: tap target 'Your chair'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "office"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/office/my_desk",
+    "kind": "prop",
+    "name": "Your desk",
+    "paths": [
+      "game3d/js/places/office.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code); props are judged with their room",
+    "source": "office.js things.my_desk; geometry in scenes/office.js",
+    "place": "office",
+    "used": [
+      "B2 office: tap target 'Your desk'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "office"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/office/nameplate",
+    "kind": "prop",
+    "name": "Nameplate",
+    "paths": [
+      "game3d/js/places/office.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code); props are judged with their room",
+    "source": "office.js things.nameplate; geometry in scenes/office.js",
+    "place": "office",
+    "used": [
+      "B2 office: tap target 'Nameplate' (no marker)"
+    ],
+    "view": {
+      "type": "room",
+      "room": "office",
+      "anchor": [
+        1.55,
+        0.6,
+        -3.1
+      ],
+      "spot": [
+        2.3,
+        -2.55
+      ],
+      "small": true
+    },
+    "tags": [
+      "in game",
+      "thing small"
+    ]
+  },
+  {
+    "id_": "prop/office/noticeboard",
+    "kind": "prop",
+    "name": "Noticeboard",
+    "paths": [
+      "game3d/js/places/office.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code); props are judged with their room",
+    "source": "office.js things.noticeboard; geometry in scenes/office.js",
+    "place": "office",
+    "used": [
+      "B2 office: tap target 'Noticeboard'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "office",
+      "anchor": [
+        -3.0,
+        1.25,
+        0.2
+      ],
+      "spot": [
+        -3.0,
+        0.85
+      ],
+      "small": true
+    },
+    "tags": [
+      "in game",
+      "thing small"
+    ]
+  },
+  {
+    "id_": "prop/office/office_door",
+    "kind": "prop",
+    "name": "Office door",
+    "paths": [
+      "game3d/js/places/office.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code); props are judged with their room",
+    "source": "office.js things.office_door; geometry in scenes/office.js",
+    "place": "office",
+    "used": [
+      "B2 office: tap target 'Office door' (no marker)"
+    ],
+    "view": {
+      "type": "room",
+      "room": "office",
+      "anchor": [
+        -0.25,
+        1.5,
+        0.2
+      ],
+      "spot": [
+        -0.25,
+        0.9
+      ],
+      "small": true
+    },
+    "tags": [
+      "in game",
+      "thing small"
+    ]
+  },
+  {
+    "id_": "prop/office/paper_shelf",
+    "kind": "prop",
+    "name": "Paper shelf",
+    "paths": [
+      "game3d/js/places/office.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code); props are judged with their room",
+    "source": "office.js things.paper_shelf; geometry in scenes/office.js",
+    "place": "office",
+    "used": [
+      "B2 office: tap target 'Paper shelf' (no marker)"
+    ],
+    "view": {
+      "type": "room",
+      "room": "office",
+      "anchor": [
+        -6.7,
+        1.3,
+        3.6
+      ],
+      "spot": [
+        -6.2,
+        3.6
+      ],
+      "small": true
+    },
+    "tags": [
+      "in game",
+      "thing small"
+    ]
+  },
+  {
+    "id_": "prop/office/plant",
+    "kind": "prop",
+    "name": "Plant",
+    "paths": [
+      "game3d/js/places/office.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code); props are judged with their room",
+    "source": "office.js things.plant; geometry in scenes/office.js",
+    "place": "office",
+    "used": [
+      "B2 office: tap target 'Plant' (no marker)"
+    ],
+    "view": {
+      "type": "room",
+      "room": "office",
+      "anchor": [
+        2.95,
+        1.2,
+        -5.95
+      ],
+      "spot": [
+        2.95,
+        -5.3
+      ],
+      "small": true
+    },
+    "tags": [
+      "in game",
+      "thing small"
+    ]
+  },
+  {
+    "id_": "prop/office/racks",
+    "kind": "prop",
+    "name": "Server racks",
+    "paths": [
+      "game3d/js/places/office.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code); props are judged with their room",
+    "source": "office.js things.racks; geometry in scenes/office.js",
+    "place": "office",
+    "used": [
+      "B2 office: tap target 'Server racks'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "office",
+      "anchor": [
+        5.2,
+        1.5,
+        -3.3
+      ],
+      "spot": [
+        5.2,
+        -2.1
+      ],
+      "small": true
+    },
+    "tags": [
+      "in game",
+      "thing small"
+    ]
+  },
+  {
+    "id_": "prop/office/stairs",
+    "kind": "prop",
+    "name": "Stairs",
+    "paths": [
+      "game3d/js/places/office.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code); props are judged with their room",
+    "source": "office.js things.stairs; geometry in scenes/office.js",
+    "place": "office",
+    "used": [
+      "B2 office: tap target 'Stairs'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "office",
+      "anchor": [
+        -6.45,
+        1.45,
+        -3.4
+      ],
+      "spot": [
+        -6.45,
+        -2.8
+      ],
+      "small": true
+    },
+    "tags": [
+      "in game",
+      "thing small"
+    ]
+  },
+  {
+    "id_": "prop/office/vending",
+    "kind": "prop",
+    "name": "Vending machine",
+    "paths": [
+      "game3d/js/places/office.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code); props are judged with their room",
+    "source": "office.js things.vending; geometry in scenes/office.js",
+    "place": "office",
+    "used": [
+      "B2 office: tap target 'Vending machine'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "office",
+      "anchor": [
+        -4.62,
+        1.35,
+        -2.3
+      ],
+      "spot": [
+        -4.62,
+        -1.75
+      ],
+      "small": true
+    },
+    "tags": [
+      "in game",
+      "thing small"
+    ]
+  },
+  {
+    "id_": "prop/office/water_cooler",
+    "kind": "prop",
+    "name": "Water cooler",
+    "paths": [
+      "game3d/js/places/office.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code); props are judged with their room",
+    "source": "office.js things.water_cooler; geometry in scenes/office.js",
+    "place": "office",
+    "used": [
+      "B2 office: tap target 'Water cooler'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "office",
+      "anchor": [
+        -3.85,
+        1.2,
+        -4.9
+      ],
+      "spot": [
+        -3.3,
+        -4.9
+      ],
+      "small": true
+    },
+    "tags": [
+      "in game",
+      "thing small"
+    ]
+  },
+  {
+    "id_": "prop/office/whiteboard",
+    "kind": "prop",
+    "name": "Whiteboard",
+    "paths": [
+      "game3d/js/places/office.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code); props are judged with their room",
+    "source": "office.js things.whiteboard; geometry in scenes/office.js",
+    "place": "office",
+    "used": [
+      "B2 office: tap target 'Whiteboard'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "office",
+      "anchor": [
+        0.55,
+        1.3,
+        -6.4
+      ],
+      "spot": [
+        0.55,
+        -5.3
+      ],
+      "small": true
+    },
+    "tags": [
+      "in game",
+      "thing small"
+    ]
+  },
+  {
+    "id_": "prop/office/worktable",
+    "kind": "prop",
+    "name": "Worktable",
+    "paths": [
+      "game3d/js/places/office.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code); props are judged with their room",
+    "source": "office.js things.worktable; geometry in scenes/office.js",
+    "place": "office",
+    "used": [
+      "B2 office: tap target 'Worktable' (no marker)"
+    ],
+    "view": {
+      "type": "room",
+      "room": "office",
+      "anchor": [
+        -4.4,
+        0.8,
+        4.7
+      ],
+      "spot": [
+        -4.4,
+        3.9
+      ],
+      "small": true
+    },
+    "tags": [
+      "in game",
+      "thing small"
+    ]
+  },
+  {
+    "id_": "prop/train/bags",
+    "kind": "prop",
+    "name": "Bags",
+    "paths": [
+      "game3d/js/places/train.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code); props are judged with their room",
+    "source": "train.js things.bags; geometry in train/car.js",
+    "place": "train",
+    "used": [
+      "Train: tap target 'Bags' (no marker)"
+    ],
+    "view": {
+      "type": "room",
+      "room": "train",
+      "anchor": [
+        -1.3,
+        0.5,
+        -0.96
+      ],
+      "spot": [
+        -1.3,
+        -0.3
+      ],
+      "small": true
+    },
+    "tags": [
+      "in game",
+      "thing small"
+    ]
+  },
+  {
+    "id_": "prop/train/cup",
+    "kind": "prop",
+    "name": "Coffee",
+    "paths": [
+      "game3d/js/places/train.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code); props are judged with their room",
+    "source": "train.js things.cup; geometry in train/car.js",
+    "place": "train",
+    "used": [
+      "Train: tap target 'Coffee' (no marker)"
+    ],
+    "view": {
+      "type": "room",
+      "room": "train",
+      "anchor": [
+        1.6,
+        0.6,
+        -0.9199999999999999
+      ],
+      "spot": [
+        1.6,
+        -0.3
+      ],
+      "small": true
+    },
+    "tags": [
+      "in game",
+      "thing small"
+    ]
+  },
+  {
+    "id_": "prop/train/door_l",
+    "kind": "prop",
+    "name": "Doors",
+    "paths": [
+      "game3d/js/places/train.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code); props are judged with their room",
+    "source": "train.js things.door_l; geometry in train/car.js",
+    "place": "train",
+    "used": [
+      "Train: tap target 'Doors' (no marker)"
+    ],
+    "view": {
+      "type": "room",
+      "room": "train",
+      "anchor": [
+        -3.25,
+        1.1,
+        1.2
+      ],
+      "spot": [
+        -3.25,
+        0.75
+      ],
+      "small": false
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/train/door_r",
+    "kind": "prop",
+    "name": "Doors",
+    "paths": [
+      "game3d/js/places/train.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code); props are judged with their room",
+    "source": "train.js things.door_r; geometry in train/car.js",
+    "place": "train",
+    "used": [
+      "Train: tap target 'Doors' (no marker)"
+    ],
+    "view": {
+      "type": "room",
+      "room": "train",
+      "anchor": [
+        3.25,
+        1.1,
+        1.2
+      ],
+      "spot": [
+        3.25,
+        0.75
+      ],
+      "small": false
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/train/doors",
+    "kind": "prop",
+    "name": "Doors",
+    "paths": [
+      "game3d/js/places/train.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code); props are judged with their room",
+    "source": "train.js things.doors; geometry in train/car.js",
+    "place": "train",
+    "used": [
+      "Train: tap target 'Doors'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "train",
+      "anchor": [
+        3.25,
+        1.1,
+        1.2
+      ],
+      "spot": [
+        3.25,
+        0.98
+      ],
+      "small": false
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/train/foodbag",
+    "kind": "prop",
+    "name": "Her lunch bag",
+    "paths": [
+      "game3d/js/places/train.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "train.js things.foodbag",
+    "place": "train",
+    "used": [
+      "Train: tap target 'Her lunch bag'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "train"
+    },
+    "tags": [
+      "in game",
+      "thing small"
+    ]
+  },
+  {
+    "id_": "prop/train/plant",
+    "kind": "prop",
+    "name": "Plant",
+    "paths": [
+      "game3d/js/places/train.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code); props are judged with their room",
+    "source": "train.js things.plant; geometry in train/car.js",
+    "place": "train",
+    "used": [
+      "Train: tap target 'Plant' (no marker)"
+    ],
+    "view": {
+      "type": "room",
+      "room": "train",
+      "anchor": [
+        -3.6,
+        0.7,
+        -0.82
+      ],
+      "spot": [
+        -3.2,
+        -0.5
+      ],
+      "small": true
+    },
+    "tags": [
+      "in game",
+      "thing small"
+    ]
+  },
+  {
+    "id_": "prop/train/platform",
+    "kind": "prop",
+    "name": "Platform",
+    "paths": [
+      "game3d/js/places/train.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code); props are judged with their room",
+    "source": "train.js things.platform; geometry in train/car.js",
+    "place": "train",
+    "used": [
+      "Train: tap target 'Platform' (no marker)"
+    ],
+    "view": {
+      "type": "room",
+      "room": "train"
+    },
+    "tags": [
+      "in game",
+      "thing small"
+    ]
+  },
+  {
+    "id_": "prop/train/poster",
+    "kind": "prop",
+    "name": "Poster",
+    "paths": [
+      "game3d/js/places/train.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code); props are judged with their room",
+    "source": "train.js things.poster; geometry in train/car.js",
+    "place": "train",
+    "used": [
+      "Train: tap target 'Poster' (no marker)"
+    ],
+    "view": {
+      "type": "room",
+      "room": "train",
+      "anchor": [
+        -4.0,
+        1.0,
+        -0.78
+      ],
+      "spot": [
+        -3.5,
+        -0.4
+      ],
+      "small": true
+    },
+    "tags": [
+      "in game",
+      "thing small"
+    ]
+  },
+  {
+    "id_": "prop/train/rack",
+    "kind": "prop",
+    "name": "Luggage rack",
+    "paths": [
+      "game3d/js/places/train.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code); props are judged with their room",
+    "source": "train.js things.rack; geometry in train/car.js",
+    "place": "train",
+    "used": [
+      "Train: tap target 'Luggage rack' (no marker)"
+    ],
+    "view": {
+      "type": "room",
+      "room": "train",
+      "anchor": [
+        0.0,
+        1.5,
+        -1.2
+      ],
+      "spot": [
+        0.0,
+        -0.3
+      ],
+      "small": true
+    },
+    "tags": [
+      "in game",
+      "thing small"
+    ]
+  },
+  {
+    "id_": "prop/train/sign",
+    "kind": "prop",
+    "name": "Station sign",
+    "paths": [
+      "game3d/js/places/train.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "train.js things.sign",
+    "place": "train",
+    "used": [
+      "Train: tap target 'Station sign'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "train"
+    },
+    "tags": [
+      "in game",
+      "thing small"
+    ]
+  },
+  {
+    "id_": "prop/train/straps",
+    "kind": "prop",
+    "name": "Straps",
+    "paths": [
+      "game3d/js/places/train.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code); props are judged with their room",
+    "source": "train.js things.straps; geometry in train/car.js",
+    "place": "train",
+    "used": [
+      "Train: tap target 'Straps' (no marker)"
+    ],
+    "view": {
+      "type": "room",
+      "room": "train",
+      "anchor": [
+        -1.5,
+        1.3,
+        -0.65
+      ],
+      "spot": [
+        -1.5,
+        -0.2
+      ],
+      "small": true
+    },
+    "tags": [
+      "in game",
+      "thing small"
+    ]
+  },
+  {
+    "id_": "prop/train/window",
+    "kind": "prop",
+    "name": "Window",
+    "paths": [
+      "game3d/js/places/train.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code); props are judged with their room",
+    "source": "train.js things.window; geometry in train/car.js",
+    "place": "train",
+    "used": [
+      "Train: tap target 'Window' (no marker)"
+    ],
+    "view": {
+      "type": "room",
+      "room": "train",
+      "anchor": [
+        -1.1,
+        1.0,
+        -1.2
+      ],
+      "spot": [
+        -1.1,
+        -0.3
+      ],
+      "small": true
+    },
+    "tags": [
+      "in game",
+      "thing small"
+    ]
+  }
+]

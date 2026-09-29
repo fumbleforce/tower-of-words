@@ -1,16 +1,15 @@
 // The day as a graph, built from the story files themselves (game3d/story/*.js, format in game3d/story/FORMAT.md)
-// and the engine files that move between places (game3d/js/main.js NEXT) or set flags on their own.
+// and shared engine declarations (place order in game3d/js/places/definitions.js, named flags and events).
 // Pure data, no DOM: the bible's story map (bible/story-map.js) draws it, and tools/bible/story-map-check.mjs runs
 // it in node to prove every story file still loads and parses.
 //
 // Conditions use the runner's own grammar (game3d/js/runner.js cond(): flag names, !, &&, ||, (), comparisons).
 // Trigger lists work like Runner.entry(): the first entry whose `if` holds runs, so a later entry also needs every
 // earlier one to fail (unless the earlier one is `once`).
-
-export const STORY_FILES = ['train', 'gate', 'office', 'transitions'];
-// engine files scanned for flags the game sets itself (flags.x = ..., flags['x_' + id] = ...)
-export const ENGINE_FILES = ['game3d/js/main.js', 'game3d/js/runner.js', 'game3d/js/sim.js', 'game3d/js/mastery.js',
-  'game3d/js/places/train.js', 'game3d/js/places/lobby.js', 'game3d/js/places/office.js', 'game3d/js/places/lift.js'];
+import { DEFAULT_SPEAKERS, NEXT, PLACE_FILES, STORY_FILES, ENGINE_WRITES, PLACE_EVENTS } from '../game3d/js/narrative/contracts.js';
+export { STORY_FILES } from '../game3d/js/narrative/contracts.js';
+import { CAST } from '../game3d/js/bonds/cast.js';
+import { storyBondGate } from '../game3d/js/bonds/gates.js';
 
 // ------------------------------------------------------------------ conditions
 function tokens(src) {
@@ -100,51 +99,18 @@ function merge(x, y) {
 const safeNeed = (src, want = true) => { try { return need(parseCond(src), want); } catch { return new Map(); } };
 
 // ------------------------------------------------------------------ engine facts
-// NEXT = { train: 'gate', gate: 'office' } from main.js, and every flag an engine file sets by itself.
-export function engineFacts(files) {
-  const main = files['game3d/js/main.js'] || '';
-  let next = {};
-  const m = main.match(/const\s+NEXT\s*=\s*(\{[^}]*\})/);
-  if (m) try { next = Function(`return (${m[1]});`)(); } catch { next = {}; }
+// Runtime-backed declarations; source reads below are only for story line references.
+export function engineFacts() {
   const exact = new Map(), prefix = new Map();
-  for (const [path, src] of Object.entries(files)) {
-    if (!src || !ENGINE_FILES.includes(path)) continue;
-    const add = (map, k) => { if (!map.has(k)) map.set(k, new Set()); map.get(k).add(path); };
-    for (const x of src.matchAll(/\bflags\.(\w+)\s*(?:=(?!=)|\|\|=|\+\+|\+=)/g)) add(exact, x[1]);
-    for (const x of src.matchAll(/\bflags\[\s*['"](\w+)['"]\s*\]\s*(?:=(?!=)|\|\|=)/g)) add(exact, x[1]);
-    for (const x of src.matchAll(/\bflags\[\s*['"](\w+)['"]\s*\+/g)) add(prefix, x[1]);
-    for (const x of src.matchAll(/\bflags\[\s*`(\w+)\$\{/g)) add(prefix, x[1]);
-    // Object.assign(flags, ...) and flags[s.set] are the story's own set steps: counted from the story side
+  for (const [file, spec] of Object.entries(ENGINE_WRITES)) {
+    for (const [kind, map] of [['exact', exact], ['prefix', prefix]]) for (const key of spec[kind]) {
+      if (!map.has(key)) map.set(key, new Set());
+      map.get(key).add(file);
+    }
   }
-  // which place file runs which place (PLACES = { train: trainPlace, ... } and its imports), and which of its hooks
-  // fire story events (game.event('arrived') inside hooks: { arrive: ... }); events fired elsewhere come from the place
-  const placeFile = {};
-  const imports = {};
-  for (const x of main.matchAll(/import\s*\{([^}]*)\}\s*from\s*'\.\/(places\/\w+\.js)'/g)) for (const n of x[1].split(',')) imports[n.trim()] = 'game3d/js/' + x[2];
-  const pm = main.match(/const\s+PLACES\s*=\s*\{([^}]*)\}/);
-  if (pm) for (const x of pm[1].matchAll(/(\w+)\s*:\s*(\w+)/g)) if (imports[x[2]]) placeFile[x[1]] = imports[x[2]];
-  const events = {};   // place -> { event: hook name or null }
-  for (const [place, path] of Object.entries(placeFile)) {
-    const src = files[path] || '';
-    const lines = src.split('\n');
-    const hi = lines.findIndex((l) => /^\s*hooks:\s*\{/.test(l));
-    const ind = hi >= 0 ? lines[hi].match(/^\s*/)[0].length + 2 : -1;
-    const ev = (events[place] = {});
-    lines.forEach((l, i) => {
-      for (const x of l.matchAll(/game\.event\(\s*['"](\w+)['"]/g)) {
-        let hook = null;
-        if (hi >= 0 && i > hi) for (let k = i; k > hi; k--) { const h = lines[k].match(/^(\s*)(\w+):/); if (h && h[1].length === ind) { hook = h[2]; break; } if (/^\s*\S/.test(lines[k]) && lines[k].match(/^\s*/)[0].length < ind && k !== i) break; }
-        ev[x[1]] = hook;
-      }
-    });
-  }
-  // the runner's cond() answers know_<word> from the learned words; the story teaches those (type, learn, offer)
-  // default speaker names (runner.js DEFAULT_SPEAKERS), merged with each file's own speakers when drawn
-  let speakers = {};
-  const rs = files['game3d/js/runner.js'] || '';
-  const si = rs.indexOf('const DEFAULT_SPEAKERS = {');
-  if (si >= 0) { let d = 0, j = rs.indexOf('{', si); for (let k = j; k < rs.length; k++) { if (rs[k] === '{') d++; if (rs[k] === '}' && !--d) { try { speakers = Function(`return (${rs.slice(j, k + 1)});`)(); } catch { speakers = {}; } break; } } }
-  return { next, exact, prefix, placeFile, events, speakers };
+  const events = Object.fromEntries(Object.entries(PLACE_EVENTS).map(([place, entries]) => [place,
+    Object.fromEntries(Object.values(entries).filter(event => event.source === 'place').map(event => [event.id, event.hook]))]));
+  return { next: NEXT, exact, prefix, placeFile: PLACE_FILES, events, speakers: DEFAULT_SPEAKERS };
 }
 
 // ------------------------------------------------------------------ the graph
@@ -160,7 +126,7 @@ export function lineOf(s) {
   return null;
 }
 
-export function buildGraph({ mods, files = {}, errors = [] }) {
+export function buildGraph({ mods, files = {}, errors = [], cast = CAST }) {
   const E = engineFacts(files);
   const G = { speakers: { transitions: { ...engineFacts(files).speakers, ...((mods.transitions || {}).speakers || {}) } }, places: [], nodes: new Map(), edges: [], flags: new Map(), errors: [...errors], engine: E, drift: {} };
   const flag = (f) => { if (!G.flags.has(f)) G.flags.set(f, { name: f, set: [], read: [] }); return G.flags.get(f); };
@@ -180,9 +146,11 @@ export function buildGraph({ mods, files = {}, errors = [] }) {
   let cur = placeIds.find((p) => !targets.has(p)) || placeIds[0];
   while (cur && !order.includes(cur)) { order.push(cur); cur = E.next[cur]; }
   for (const p of placeIds) if (!order.includes(p)) order.push(p);
+  const storiesThrough = Object.fromEntries(order.map((place, i) =>
+    [place, order.slice(0, i + 1).map(id => mods[id]).filter(Boolean)]));
 
   // ---- walk every node's steps
-  function walkSteps(node, list, conds) {
+  function walkSteps(node, list, conds, gateStories = storiesThrough[node.place] || []) {
     if (!Array.isArray(list)) { node.problems.push('steps are not a list'); return; }
     for (const s of list) {
       const ln = lineOf(s);
@@ -196,8 +164,8 @@ export function buildGraph({ mods, files = {}, errors = [] }) {
       if (s.offer) teach(node, s.offer, 'offer', here);
       if (s.if !== undefined && (s.then || s.else)) {
         node.reads.push({ cond: String(s.if), where: 'if' });
-        if (s.then) walkSteps(node, s.then, [...conds, `(${s.if})`]);
-        if (s.else) walkSteps(node, s.else, [...conds, `!(${s.if})`]);
+        if (s.then) walkSteps(node, s.then, [...conds, `(${s.if})`], gateStories);
+        if (s.else) walkSteps(node, s.else, [...conds, `!(${s.if})`], gateStories);
       }
       if (s.go) node.jumps.push({ to: s.go, kind: 'go', cond: here });
       if (s.call) node.jumps.push({ to: s.call, kind: 'call', cond: here });
@@ -220,7 +188,7 @@ export function buildGraph({ mods, files = {}, errors = [] }) {
         if (d === 'end') node.exit = 'end';
         if (d === 'period' && s.to) { node.periods.push(s.to); node.sets.push({ flag: 'period', how: 'period', value: s.to, cond: here }); }
         if (d === 'meet' && s.who) node.sets.push({ flag: 'met_' + s.who, how: 'meet', cond: here });
-        if (d === 'bondStep' && s.who && s.to) node.sets.push({ flag: `bond${s.to}_${s.who}`, how: 'bondStep', cond: here });
+        if (d === 'bondStep' && s.who && s.to) node.sets.push({ flag: storyBondGate(cast, gateStories, s.who, s.to), how: 'bondStep', cond: here });
         if (d === 'remember' && s.who && s.id) node.sets.push({ flag: `rem_${s.who}_${s.id}`, how: 'remember', cond: here });
         if (d === 'fact' && s.who && s.id) node.sets.push({ flag: `fact_${s.who}_${s.id}`, how: 'fact', cond: here });
         if (d === 'buy' && s.item) node.sets.push({ flag: 'bought_' + s.item, how: 'buy', cond: here });
@@ -303,11 +271,12 @@ export function buildGraph({ mods, files = {}, errors = [] }) {
     const steps = [...(slot.walk || []), ...(slot.ride || []), ...(slot.arrive || [])];
     const tt = (files['game3d/story/transitions.js'] || '').split('\n').findIndex((l) => new RegExp(`^\\s*${key}\\s*:`).test(l));
     const n = newNode(`transitions:${key}`, 'transitions', key, steps, { transition: { from, to, slot }, line: tt >= 0 ? tt + 1 : null });
-    walkSteps(n, steps, []);
+    walkSteps(n, [...(slot.walk || []), ...(slot.ride || [])], [], storiesThrough[from] || []);
+    walkSteps(n, slot.arrive || [], [], storiesThrough[to] || []);
     n.entries.push({ trigger: `leaving ${from}`, cond: '', ifCond: '', req: new Map(), ok: true });
   }
   for (const k of Object.keys(tr)) if (k !== 'speakers' && !/^\w+_to_\w+$/.test(k)) G.errors.push(`transitions.js: odd key ${k}`);
-  for (const k of Object.keys(tr)) { const mm = /^(\w+)_to_(\w+)$/.exec(k); if (mm && E.next[mm[1]] !== mm[2]) G.errors.push(`transitions.js: ${k} is never played (main.js NEXT has ${mm[1]} → ${E.next[mm[1]] || 'nothing'})`); }
+  for (const k of Object.keys(tr)) { const mm = /^(\w+)_to_(\w+)$/.exec(k); if (mm && E.next[mm[1]] !== mm[2]) G.errors.push(`transitions.js: ${k} is never played (places/definitions.js NEXT has ${mm[1]} → ${E.next[mm[1]] || 'nothing'})`); }
 
   // ---- edges: jumps, place changes, flag unlocks
   for (const n of G.nodes.values()) {
@@ -319,7 +288,7 @@ export function buildGraph({ mods, files = {}, errors = [] }) {
     }
     if (n.exit === 'next') {
       const to = E.next[n.place];
-      if (!to) { n.problems.push(`does next, but main.js has no place after ${n.place}`); continue; }
+      if (!to) { n.problems.push(`does next, but places/definitions.js has no place after ${n.place}`); continue; }
       const tn = G.nodes.get(`transitions:${n.place}_to_${to}`);
       const startOf = (p) => { const P = G.places.find((x) => x.id === p); return P && P.start ? `${p}:${P.start}` : null; };
       if (tn) { edge(n.id, tn.id, 'next'); const s = startOf(to); if (s && G.nodes.has(s)) edge(tn.id, s, 'next'); }
@@ -425,7 +394,7 @@ export function buildGraph({ mods, files = {}, errors = [] }) {
     const exits = P.nodes.map((id) => G.nodes.get(id)).filter((n) => n.exit && n.reachable);
     P.exits = exits.map((n) => n.id);
     if (!exits.length) D.deadEnds.push({ node: P.start ? `${P.id}:${P.start}` : P.id, why: `no reachable node in ${P.id} moves on (next) or ends the day (end)` });
-    if (P.next && !exits.some((n) => n.exit === 'next')) D.deadEnds.push({ node: P.id, why: `main.js says ${P.id} leads to ${P.next}, but no reachable node runs next` });
+    if (P.next && !exits.some((n) => n.exit === 'next')) D.deadEnds.push({ node: P.id, why: `places/definitions.js says ${P.id} leads to ${P.next}, but no reachable node runs next` });
   }
   D.badConds = G.places.flatMap((P) => P.checks.filter((c) => c.bad).map((c) => ({ place: P.id, where: c.where, cond: c.cond, why: c.bad })));
   for (const n of G.nodes.values()) for (const r of n.reads) try { parseCond(r.cond); } catch (e) { D.badConds.push({ place: n.place, where: n.id, cond: r.cond, why: e.message }); }
@@ -454,10 +423,6 @@ export async function loadStoryGraph(ROOT) {
       try { mods[p] = (await import(new URL(path, base).href + '?t=' + Date.now())).default; if (!mods[p]) throw new Error('no default export'); }
       catch (e) { errors.push(`${path}: ${e.message}`); delete mods[p]; }
       try { const r = await fetch(new URL(path, base), { cache: 'no-cache' }); if (r.ok) files[path] = await r.text(); } catch (_) { /* line numbers only */ }
-    }),
-    ...ENGINE_FILES.map(async (p) => {
-      try { const r = await fetch(new URL(p, base), { cache: 'no-cache' }); if (!r.ok) throw new Error(r.status); files[p] = await r.text(); }
-      catch (e) { errors.push(`${p}: ${e.message}`); }
     }),
   ]);
   return buildGraph({ mods, files, errors });

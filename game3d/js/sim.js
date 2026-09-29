@@ -1,3 +1,7 @@
+import { flagKeys } from './narrative/engine-flags.js';
+const ENGINE_KEYS = flagKeys('game3d/js/sim.js');
+import { ITEMS } from './gameplay/items.js';
+export { ITEMS } from './gameplay/items.js';
 // Social-sim layer, data-driven so it can grow into the open world: the day clock and its periods, NPC
 // schedules, ambient NPC-to-NPC moments, bonds (steps 0-5, points with caps, steps 3-5 gated on a scene),
 // what people remember of Eric, gifts, and save/load. Day one uses it lightly. Data comes from the story files
@@ -12,12 +16,7 @@ import { MOMENTS, REASONS, EXPECT } from './bonds/day1.js';
 
 export const PERIODS = ['early', 'morning', 'lunch', 'afternoon', 'evening'];
 export const PERIOD_NAMES = { early: 'Early morning', morning: 'Morning at work', lunch: 'Lunch', afternoon: 'Afternoon', evening: 'After work' };
-export const ITEMS = {
-  coffee: { name: 'Canned coffee', price: 120 },
-  tea: { name: 'Royal milk tea', price: 130 },
-  melon: { name: 'Melon soda', price: 130 },
-  cornsoup: { name: 'Hot corn soup', price: 130 },
-};
+
 export { STEPS };
 
 export const sim = {
@@ -65,14 +64,14 @@ const curNode = () => stack[stack.length - 1] || (G && G.runner && G.runner.trac
 // ---------- clock ----------
 export function setPeriod(p, game) {
   if (!PERIODS.includes(p)) return;
-  sim.period = p; flags.period = p;
+  sim.period = p; flags[ENGINE_KEYS.period] = p;
   ui.clock(sim.date, PERIOD_NAMES[p]);
   applySchedule(game);
   save(game);
 }
 // a new day (later days): the date moves on, daily caps reset, the day starts early
 export function newDay(game) {
-  sim.day++; sim.date = dateOf(sim.day); flags.day = sim.day;
+  sim.day++; sim.date = dateOf(sim.day); flags[ENGINE_KEYS.day] = sim.day;
   bonds.setDay(sim.day);
   setPeriod('early', game);
 }
@@ -150,7 +149,7 @@ export function bond(game, who, add, opts = {}) {
 }
 export function meet(game, who) {
   if (!sim.people[who]) return;
-  if (!sim.met.has(who)) { sim.met.add(who); flags['met_' + who] = true; }
+  if (!sim.met.has(who)) { sim.met.add(who); flags[ENGINE_KEYS.met + who] = true; }
   if (bonds.meet(who)) { sync(who); checkSteps(game); }
 }
 // the scene a step waits on has played: { do: 'bondStep', who, to: 3 } (same as setting its gate flag)
@@ -165,18 +164,18 @@ export function noteTeacher(who, cmd) { if (who && !sim.taught[cmd]) sim.taught[
 function sync(who) {
   const q = bonds.p[who]; if (!q) return;
   sim.bonds[who] = q.pts;
-  flags['bond_' + who] = q.pts; flags['step_' + who] = bonds.step(who); flags['bondready_' + who] = bonds.ready(who);
+  flags[ENGINE_KEYS.bond + who] = q.pts; flags[ENGINE_KEYS.step + who] = bonds.step(who); flags[ENGINE_KEYS.bondready + who] = bonds.ready(who);
 }
 function syncAll() {
   for (const id of Object.keys(bonds.p)) sync(id);
-  for (const [a, r] of Object.entries(bonds.rel)) for (const [b, kind] of Object.entries(r)) flags[`rel_${a}_${b}`] = kind;
+  for (const [a, r] of Object.entries(bonds.rel)) for (const [b, kind] of Object.entries(r)) flags[`${ENGINE_KEYS.rel}${a}_${b}`] = kind;
 }
 // step changes: tell the shell (a bond-step moment), and run the story's scene for a step when it's due
 function checkSteps(game) {
   for (const id of Object.keys(bonds.p)) {
     const st = bonds.step(id), was = sim.steps[id] ?? 0;
     if (st !== was) {
-      sim.steps[id] = st; flags['step_' + id] = st;
+      sim.steps[id] = st; flags[ENGINE_KEYS.step + id] = st;
       const detail = { who: id, from: was, to: st, name: STEPS[st].name };
       try { window.dispatchEvent(new CustomEvent('amakawa:bondstep', { detail })); } catch { /* node */ }
       game && game.onBondStep && game.onBondStep(detail);
@@ -197,14 +196,14 @@ function checkSteps(game) {
 
 // ---------- rememberedBy, facts, relations ----------
 // flags rem_<who>_<id>, e.g. { if: 'rem_mio_caught_bag', then: [...] }
-export function remember(game, who, id, text) { if (bonds.remember(who, id, text)) flags[`rem_${who}_${safeKey(id)}`] = true; }
+export function remember(game, who, id, text) { if (bonds.remember(who, id, text)) flags[`${ENGINE_KEYS.rem}${who}_${safeKey(id)}`] = true; }
 export function rememberedBy(who, id) { return bonds.remembers(who, id); }
 // what Eric has learned about them (People panel); `like` also marks that taste as noticed
 export function learnFact(game, who, id, text, like) {
-  if (text && bonds.learnFact(who, id, text)) flags[`fact_${who}_${safeKey(id)}`] = true;
+  if (text && bonds.learnFact(who, id, text)) flags[`${ENGINE_KEYS.fact}${who}_${safeKey(id)}`] = true;
   if (like) bonds.notice(who, like);
 }
-export function relate(a, b, kind) { bonds.relate(a, b, kind); flags[`rel_${a}_${b}`] = kind && kind !== 'none' ? kind : ''; }
+export function relate(a, b, kind) { bonds.relate(a, b, kind); flags[`${ENGINE_KEYS.rel}${a}_${b}`] = kind && kind !== 'none' ? kind : ''; }
 export function giftReaction(who, item) { return bonds.giftReaction(who, item); }
 
 // a node's day-1 (or story) moment, once
@@ -223,7 +222,7 @@ function moment(game, node) {
 function observe(key) {
   const m = /^say:(\w+):(\w+)$/.exec(key); if (!m) return;
   const want = bonds.cast[m[2]] && bonds.cast[m[2]].register, have = WORD_REGISTER[m[1]];
-  if (want && have) flags['register_' + m[2]] = want === have ? 'right' : 'wrong';
+  if (want && have) flags[ENGINE_KEYS.register + m[2]] = want === have ? 'right' : 'wrong';
 }
 
 // merge a story file's sim data
@@ -240,7 +239,7 @@ export function absorb(story) {
   for (const k of ['likes', 'dislikes', 'needs', 'gates', 'register']) for (const [id, v] of Object.entries(story[k] || {})) put(id, k, v);
   for (const [a, r] of Object.entries(story.relations || {})) put(a, 'rel', r);
   bonds.merge(cast);
-  for (const [a, r] of Object.entries(story.relations || {})) for (const [b, kind] of Object.entries(r)) flags[`rel_${a}_${b}`] = kind;
+  for (const [a, r] of Object.entries(story.relations || {})) for (const [b, kind] of Object.entries(r)) flags[`${ENGINE_KEYS.rel}${a}_${b}`] = kind;
   const pl = place();
   if (story.moments) storyMoments[pl] = story.moments;
   if (story.reasons) storyReasons[pl] = story.reasons;
@@ -262,7 +261,7 @@ export function take(item) {
   const who = G && G.sayTarget && G.sayTarget.id;
   if (who && G.place && G.place.people[who]) {
     const r = bonds.giftReaction(who, item);
-    flags['gift_' + who] = r; flags.gift_reaction = r; lastGift[who] = item;
+    flags[ENGINE_KEYS.gift + who] = r; flags[ENGINE_KEYS.gift_reaction] = r; lastGift[who] = item;
     if (r === 'like' || r === 'dislike') bonds.notice(who, item);
   }
 }

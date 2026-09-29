@@ -1,3 +1,5 @@
+import { flagKeys } from './narrative/engine-flags.js';
+const ENGINE_KEYS = flagKeys('game3d/js/mastery.js');
 // Word practice (Jørgen, 2026-09-28): "Up until you have written/said it a few times, you still have to type it /
 // say it in the game, so it is not just clicking it." Each word Eric can say counts how often he has typed or said
 // it successfully (the typing prompt where it's taught counts as the first). Below the bar, choosing it in the
@@ -17,14 +19,14 @@ export function masteryNeeded() {
   const n = Math.round(+(settings && settings.masteryUses));
   return Number.isFinite(n) && n >= 0 ? n : MASTERY_DEFAULT;
 }
-export const practiced = (id) => +flags['practice_' + id] || 0;
+export const practiced = (id) => +flags[ENGINE_KEYS.practice + id] || 0;
 export const needsPractice = (id) => practiced(id) < masteryNeeded();
 
 // one more success. how: 'typed' | 'voice'. Returns { count, mastered } (mastered is true on the try that crosses the bar)
 export function notePractice(id, how = 'typed') {
   const before = practiced(id), count = before + 1;
-  flags['practice_' + id] = count;
-  if (how === 'voice') flags['voiced_' + id] = true;
+  flags[ENGINE_KEYS.practice + id] = count;
+  if (how === 'voice') flags[ENGINE_KEYS.voiced + id] = true;
   return { count, mastered: before < masteryNeeded() && count >= masteryNeeded() };
 }
 

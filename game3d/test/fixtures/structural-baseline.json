@@ -1,0 +1,1571 @@
+{
+  "engine": {
+    "next": {
+      "train": "gate",
+      "gate": "office"
+    },
+    "exact": {
+      "cant_buy": [
+        "game3d/js/main.js"
+      ],
+      "place": [
+        "game3d/js/runner.js"
+      ],
+      "period": [
+        "game3d/js/sim.js"
+      ],
+      "day": [
+        "game3d/js/sim.js"
+      ],
+      "gift_reaction": [
+        "game3d/js/sim.js"
+      ],
+      "arrived": [
+        "game3d/js/places/train.js"
+      ],
+      "gateOpen": [
+        "game3d/js/places/lobby.js"
+      ],
+      "cardOk": [
+        "game3d/js/places/lobby.js"
+      ],
+      "chairHome": [
+        "game3d/js/places/office.js"
+      ],
+      "machineOpen": [
+        "game3d/js/places/office.js"
+      ]
+    },
+    "prefix": {
+      "gave_": [
+        "game3d/js/main.js"
+      ],
+      "shown_": [
+        "game3d/js/main.js"
+      ],
+      "typed_": [
+        "game3d/js/main.js"
+      ],
+      "bought_": [
+        "game3d/js/main.js"
+      ],
+      "talked_": [
+        "game3d/js/runner.js"
+      ],
+      "met_": [
+        "game3d/js/sim.js"
+      ],
+      "bond_": [
+        "game3d/js/sim.js"
+      ],
+      "step_": [
+        "game3d/js/sim.js"
+      ],
+      "bondready_": [
+        "game3d/js/sim.js"
+      ],
+      "register_": [
+        "game3d/js/sim.js"
+      ],
+      "gift_": [
+        "game3d/js/sim.js"
+      ],
+      "rel_": [
+        "game3d/js/sim.js"
+      ],
+      "rem_": [
+        "game3d/js/sim.js"
+      ],
+      "fact_": [
+        "game3d/js/sim.js"
+      ],
+      "practice_": [
+        "game3d/js/mastery.js"
+      ],
+      "voiced_": [
+        "game3d/js/mastery.js"
+      ]
+    },
+    "placeFile": {
+      "train": "game3d/js/places/train.js",
+      "gate": "game3d/js/places/lobby.js",
+      "office": "game3d/js/places/office.js"
+    },
+    "events": {
+      "train": {
+        "approach": "arrive",
+        "chime": "chime",
+        "arrived": null
+      },
+      "gate": {},
+      "office": {
+        "sat_down": "sitDown"
+      }
+    },
+    "speakers": {
+      "eric": {
+        "name": "Eric",
+        "role": "you",
+        "color": "#8fb4d8"
+      },
+      "mio": {
+        "name": "Mio",
+        "role": "programmer",
+        "color": "#5fc6bf"
+      },
+      "aoi": {
+        "name": "Aoi",
+        "color": "#e79fb0"
+      },
+      "kuroda": {
+        "name": "Mr. Hamada",
+        "role": "Accounts",
+        "color": "#b3a58f"
+      },
+      "guard": {
+        "name": "Mr. Ishibashi",
+        "role": "security",
+        "color": "#8ea2c8"
+      },
+      "kuro": {
+        "name": "Kuro",
+        "role": "reception",
+        "color": "#c3a7d6"
+      },
+      "emi": {
+        "name": "Emi",
+        "color": "#e0906f"
+      },
+      "mori": {
+        "name": "Mr. Mori",
+        "role": "section chief",
+        "color": "#b9a3d3"
+      },
+      "kenji": {
+        "name": "Kenji",
+        "color": "#9fb6d8"
+      },
+      "yui": {
+        "name": "Yui",
+        "color": "#d7b27e"
+      },
+      "sota": {
+        "name": "Sota",
+        "color": "#9cc39a"
+      },
+      "nao": {
+        "name": "Nao",
+        "color": "#a9c3c0"
+      },
+      "hiro": {
+        "name": "Hiro",
+        "color": "#c0b39f"
+      },
+      "ann": {
+        "name": "Announcement",
+        "color": "#9aa9bd"
+      },
+      "reader": {
+        "name": "Man with a book",
+        "color": "#a8b0bf"
+      },
+      "music": {
+        "name": "Girl with headphones",
+        "color": "#a8b0bf"
+      },
+      "bun": {
+        "name": "Woman with a bun",
+        "color": "#a8b0bf"
+      },
+      "youth": {
+        "name": "Young man",
+        "color": "#a8b0bf"
+      },
+      "stander": {
+        "name": "Man by the door",
+        "color": "#a8b0bf"
+      },
+      "commuter": {
+        "name": "Office worker",
+        "color": "#a8b0bf"
+      },
+      "rei": {
+        "name": "Rei",
+        "role": "Sales",
+        "color": "#c9ced8"
+      },
+      "kanae": {
+        "name": "Kanae",
+        "color": "#f0a060"
+      },
+      "sales1": {
+        "name": "Man from Sales",
+        "color": "#a8b0bf"
+      },
+      "sales2": {
+        "name": "Woman from Sales",
+        "color": "#a8b0bf"
+      },
+      "gatev": {
+        "name": "Gate",
+        "role": "recorded voice",
+        "color": "#7fd0c8"
+      },
+      "reitext": {
+        "name": "Rei",
+        "role": "message",
+        "color": "#c9ced8",
+        "phone": true
+      }
+    }
+  },
+  "places": [
+    "train",
+    "gate",
+    "office"
+  ],
+  "nodes": [
+    "train:intro",
+    "train:first_aoi",
+    "train:first_bun",
+    "train:first_youth",
+    "train:first_music",
+    "train:first_stander",
+    "train:nod_seat",
+    "train:bun",
+    "train:youth",
+    "train:music",
+    "train:stander",
+    "train:ohayo_bun",
+    "train:ohayo_youth",
+    "train:ohayo_music",
+    "train:ohayo_stander",
+    "train:window",
+    "train:poster",
+    "train:straps",
+    "train:rack",
+    "train:plant",
+    "train:seat_bags",
+    "train:seat",
+    "train:mio_catches",
+    "train:caught",
+    "train:dropped",
+    "train:sit",
+    "train:its_eric",
+    "train:family",
+    "train:leave_it",
+    "train:chat1_end",
+    "train:lesson",
+    "train:jp_one",
+    "train:jp_none",
+    "train:lesson2",
+    "train:cat_nudge",
+    "train:ohayo_mio_again",
+    "train:ohayo_cat",
+    "train:lesson3",
+    "train:mio_doors_nudge",
+    "train:approach",
+    "train:arrival",
+    "train:platform",
+    "train:did_i",
+    "train:did_quiet",
+    "train:mio_tests",
+    "train:mio_phone",
+    "train:mio_after",
+    "train:tama",
+    "train:ohayo_tama",
+    "train:ohayo_aoi",
+    "train:ohayo_reader",
+    "train:asleep",
+    "train:matte_tama",
+    "train:hamada",
+    "train:phone_girl",
+    "train:reader",
+    "train:~mio_wifi",
+    "gate:lobby_in",
+    "gate:guard_look",
+    "gate:ohayo_guard",
+    "gate:yoroshiku_guard",
+    "gate:guard_points_reader",
+    "gate:greet_again_guard",
+    "gate:card_red",
+    "gate:card_red_again",
+    "gate:guard_again",
+    "gate:bench",
+    "gate:bench_wait",
+    "gate:hamada_stuck",
+    "gate:word_type",
+    "gate:word_say",
+    "gate:guard_after",
+    "gate:guard_busy",
+    "gate:jam_greet",
+    "gate:way_social",
+    "gate:mime_menu",
+    "gate:pt_case",
+    "gate:pt_man",
+    "gate:guard_knows",
+    "gate:mime_cat",
+    "gate:mime_squeeze",
+    "gate:mime_lift",
+    "gate:sumi_hamada",
+    "gate:greet_hamada",
+    "gate:sumi_gate",
+    "gate:sumi_kuro",
+    "gate:matte_hamada",
+    "gate:matte_gate",
+    "gate:akete_guard",
+    "gate:past_gate",
+    "gate:to_lift",
+    "gate:noop",
+    "gate:kuro",
+    "gate:ohayo_kuro",
+    "gate:yoroshiku_kuro",
+    "gate:ohayo_gate",
+    "gate:gate_talk",
+    "gate:tama",
+    "gate:tama_ohayo",
+    "gate:tama_matte",
+    "gate:tama_sumimasen",
+    "gate:signin",
+    "gate:poster",
+    "office:noop",
+    "office:office_in",
+    "office:mori_wait",
+    "office:yoroshiku_mori",
+    "office:ohayo_mori",
+    "office:lead_in",
+    "office:greet_again_mori",
+    "office:sumimasen_mori",
+    "office:mori_copier_hint",
+    "office:mori_again",
+    "office:mori_irete_echo",
+    "office:kenji_first",
+    "office:kenji_again",
+    "office:kenji_small",
+    "office:kenji_pat",
+    "office:ohayo_kenji",
+    "office:yoroshiku_kenji",
+    "office:greet_again_kenji",
+    "office:sumimasen_kenji",
+    "office:machine_door",
+    "office:mio_opens",
+    "office:akete_machine",
+    "office:machine_in",
+    "office:chair_push",
+    "office:ticket",
+    "office:mio_busy",
+    "office:mio_tomatte_echo",
+    "office:copier",
+    "office:copier_look",
+    "office:ugoite_copier_again",
+    "office:ticket_done",
+    "office:lunch_start",
+    "office:lunch_mio",
+    "office:mio_b2",
+    "office:mio_doors",
+    "office:mio_quiet",
+    "office:mio_lunch_end",
+    "office:mio_bond",
+    "office:lunch_mori",
+    "office:mori_landing",
+    "office:mori_pour",
+    "office:mori_cups",
+    "office:mori_bond",
+    "office:lunch_end",
+    "office:vending",
+    "office:buy_coffee",
+    "office:buy_tea",
+    "office:buy_melon",
+    "office:buy_cornsoup",
+    "office:vend_stuck",
+    "office:vend_ugoite",
+    "office:vend_ugoite_idle",
+    "office:vend_still_stuck",
+    "office:gift_mio_coffee",
+    "office:gift_mio_other",
+    "office:gift_mori_cornsoup",
+    "office:gift_mori_other",
+    "office:gift_kenji_melon",
+    "office:gift_kenji_other",
+    "office:gift_again",
+    "office:work_afternoon",
+    "office:emi_drops_in",
+    "office:ending",
+    "office:end_dunno",
+    "office:end_nicely",
+    "office:end_quiet",
+    "office:end_ticket",
+    "office:ohayo_mio",
+    "office:yoroshiku_mio",
+    "office:sumimasen_mio",
+    "office:tama",
+    "office:tama_ohayo",
+    "office:desk_look",
+    "office:irete_kettle",
+    "office:inout_board",
+    "office:covered",
+    "office:stairs",
+    "office:ugoite_coffee",
+    "office:matte_clock",
+    "office:tomatte_fan",
+    "office:~kenji_mori",
+    "transitions:train_to_gate",
+    "transitions:gate_to_office"
+  ],
+  "edges": [
+    {
+      "from": "train:first_aoi",
+      "to": "train:nod_seat",
+      "kind": "call",
+      "labels": [],
+      "cond": "",
+      "call": true
+    },
+    {
+      "from": "train:first_bun",
+      "to": "train:nod_seat",
+      "kind": "call",
+      "labels": [],
+      "cond": "",
+      "call": true
+    },
+    {
+      "from": "train:first_youth",
+      "to": "train:nod_seat",
+      "kind": "call",
+      "labels": [],
+      "cond": "",
+      "call": true
+    },
+    {
+      "from": "train:first_music",
+      "to": "train:nod_seat",
+      "kind": "call",
+      "labels": [],
+      "cond": "",
+      "call": true
+    },
+    {
+      "from": "train:first_stander",
+      "to": "train:nod_seat",
+      "kind": "call",
+      "labels": [],
+      "cond": "",
+      "call": true
+    },
+    {
+      "from": "train:mio_catches",
+      "to": "train:sit",
+      "kind": "go",
+      "labels": [],
+      "cond": ""
+    },
+    {
+      "from": "train:caught",
+      "to": "train:sit",
+      "kind": "go",
+      "labels": [],
+      "cond": ""
+    },
+    {
+      "from": "train:dropped",
+      "to": "train:sit",
+      "kind": "go",
+      "labels": [],
+      "cond": ""
+    },
+    {
+      "from": "train:sit",
+      "to": "train:its_eric",
+      "kind": "choice",
+      "labels": [
+        "“I'm Eric.”"
+      ],
+      "cond": ""
+    },
+    {
+      "from": "train:sit",
+      "to": "train:family",
+      "kind": "choice",
+      "labels": [
+        "“Were you visiting your mum?”"
+      ],
+      "cond": "(heard_mum)"
+    },
+    {
+      "from": "train:sit",
+      "to": "train:leave_it",
+      "kind": "choice",
+      "labels": [
+        "Just nod"
+      ],
+      "cond": ""
+    },
+    {
+      "from": "train:its_eric",
+      "to": "train:chat1_end",
+      "kind": "go",
+      "labels": [],
+      "cond": ""
+    },
+    {
+      "from": "train:family",
+      "to": "train:chat1_end",
+      "kind": "go",
+      "labels": [],
+      "cond": ""
+    },
+    {
+      "from": "train:leave_it",
+      "to": "train:chat1_end",
+      "kind": "go",
+      "labels": [],
+      "cond": ""
+    },
+    {
+      "from": "train:lesson",
+      "to": "train:jp_one",
+      "kind": "choice",
+      "labels": [
+        "“ありがとう (arigatō, thanks). That's about it.”"
+      ],
+      "cond": ""
+    },
+    {
+      "from": "train:lesson",
+      "to": "train:jp_none",
+      "kind": "choice",
+      "labels": [
+        "“Not really.”"
+      ],
+      "cond": ""
+    },
+    {
+      "from": "train:jp_one",
+      "to": "train:lesson2",
+      "kind": "go",
+      "labels": [],
+      "cond": ""
+    },
+    {
+      "from": "train:jp_none",
+      "to": "train:lesson2",
+      "kind": "go",
+      "labels": [],
+      "cond": ""
+    },
+    {
+      "from": "train:platform",
+      "to": "train:did_i",
+      "kind": "choice",
+      "labels": [
+        "“Did I do that?”"
+      ],
+      "cond": ""
+    },
+    {
+      "from": "train:platform",
+      "to": "train:did_quiet",
+      "kind": "choice",
+      "labels": [
+        "Say nothing"
+      ],
+      "cond": ""
+    },
+    {
+      "from": "train:did_i",
+      "to": "train:mio_tests",
+      "kind": "go",
+      "labels": [],
+      "cond": ""
+    },
+    {
+      "from": "train:did_quiet",
+      "to": "train:mio_tests",
+      "kind": "go",
+      "labels": [],
+      "cond": ""
+    },
+    {
+      "from": "train:mio_phone",
+      "to": "transitions:train_to_gate",
+      "kind": "next",
+      "labels": []
+    },
+    {
+      "from": "transitions:train_to_gate",
+      "to": "gate:lobby_in",
+      "kind": "next",
+      "labels": []
+    },
+    {
+      "from": "gate:ohayo_guard",
+      "to": "gate:guard_points_reader",
+      "kind": "call",
+      "labels": [],
+      "cond": "",
+      "call": true
+    },
+    {
+      "from": "gate:yoroshiku_guard",
+      "to": "gate:guard_points_reader",
+      "kind": "call",
+      "labels": [],
+      "cond": "",
+      "call": true
+    },
+    {
+      "from": "gate:card_red",
+      "to": "gate:bench_wait",
+      "kind": "go",
+      "labels": [],
+      "cond": ""
+    },
+    {
+      "from": "gate:hamada_stuck",
+      "to": "gate:word_type",
+      "kind": "choice",
+      "labels": [
+        "Say 開けて (akete, open) with him"
+      ],
+      "cond": ""
+    },
+    {
+      "from": "gate:hamada_stuck",
+      "to": "gate:noop",
+      "kind": "choice",
+      "labels": [
+        "Leave him to it"
+      ],
+      "cond": ""
+    },
+    {
+      "from": "gate:word_type",
+      "to": "gate:word_say",
+      "kind": "go",
+      "labels": [],
+      "cond": ""
+    },
+    {
+      "from": "gate:way_social",
+      "to": "gate:mime_menu",
+      "kind": "go",
+      "labels": [],
+      "cond": ""
+    },
+    {
+      "from": "gate:mime_menu",
+      "to": "gate:pt_case",
+      "kind": "choice",
+      "labels": [
+        "Point at the briefcase"
+      ],
+      "cond": "(!pt_case)"
+    },
+    {
+      "from": "gate:mime_menu",
+      "to": "gate:pt_man",
+      "kind": "choice",
+      "labels": [
+        "Point at the man"
+      ],
+      "cond": "(!pt_man)"
+    },
+    {
+      "from": "gate:mime_menu",
+      "to": "gate:mime_cat",
+      "kind": "choice",
+      "labels": [
+        "Point at the cat under his desk"
+      ],
+      "cond": "(!pt_cat)"
+    },
+    {
+      "from": "gate:mime_menu",
+      "to": "gate:mime_squeeze",
+      "kind": "choice",
+      "labels": [
+        "Mime squeezing sideways through a gap"
+      ],
+      "cond": "(pt_case && pt_man && !m_squeeze)"
+    },
+    {
+      "from": "gate:mime_menu",
+      "to": "gate:mime_lift",
+      "kind": "choice",
+      "labels": [
+        "Mime lifting something over your head"
+      ],
+      "cond": "(pt_case && pt_man)"
+    },
+    {
+      "from": "gate:pt_case",
+      "to": "gate:guard_knows",
+      "kind": "call",
+      "labels": [],
+      "cond": "(pt_man)",
+      "call": true
+    },
+    {
+      "from": "gate:pt_case",
+      "to": "gate:mime_menu",
+      "kind": "go",
+      "labels": [],
+      "cond": ""
+    },
+    {
+      "from": "gate:pt_man",
+      "to": "gate:guard_knows",
+      "kind": "call",
+      "labels": [],
+      "cond": "(pt_case)",
+      "call": true
+    },
+    {
+      "from": "gate:pt_man",
+      "to": "gate:mime_menu",
+      "kind": "go",
+      "labels": [],
+      "cond": ""
+    },
+    {
+      "from": "gate:mime_cat",
+      "to": "gate:mime_menu",
+      "kind": "go",
+      "labels": [],
+      "cond": ""
+    },
+    {
+      "from": "gate:mime_squeeze",
+      "to": "gate:mime_menu",
+      "kind": "go",
+      "labels": [],
+      "cond": ""
+    },
+    {
+      "from": "gate:to_lift",
+      "to": "transitions:gate_to_office",
+      "kind": "next",
+      "labels": []
+    },
+    {
+      "from": "transitions:gate_to_office",
+      "to": "office:office_in",
+      "kind": "next",
+      "labels": []
+    },
+    {
+      "from": "office:yoroshiku_mori",
+      "to": "office:lead_in",
+      "kind": "go",
+      "labels": [],
+      "cond": ""
+    },
+    {
+      "from": "office:ohayo_mori",
+      "to": "office:lead_in",
+      "kind": "go",
+      "labels": [],
+      "cond": ""
+    },
+    {
+      "from": "office:kenji_again",
+      "to": "office:kenji_small",
+      "kind": "choice",
+      "labels": [
+        "“Mine's worse. My Japanese, I mean.”"
+      ],
+      "cond": "(chair_back && !kenji_talked)"
+    },
+    {
+      "from": "office:kenji_again",
+      "to": "office:kenji_pat",
+      "kind": "choice",
+      "labels": [
+        "Pat the chair"
+      ],
+      "cond": "(chair_back && !kenji_talked)"
+    },
+    {
+      "from": "office:ohayo_kenji",
+      "to": "office:kenji_first",
+      "kind": "go",
+      "labels": [],
+      "cond": "(!kenji_intro)"
+    },
+    {
+      "from": "office:yoroshiku_kenji",
+      "to": "office:kenji_first",
+      "kind": "go",
+      "labels": [],
+      "cond": "(!kenji_intro)"
+    },
+    {
+      "from": "office:ticket_done",
+      "to": "office:lunch_start",
+      "kind": "go",
+      "labels": [],
+      "cond": ""
+    },
+    {
+      "from": "office:lunch_start",
+      "to": "office:lunch_mio",
+      "kind": "choice",
+      "labels": [
+        "Lunch with Mio, in the machine room"
+      ],
+      "cond": ""
+    },
+    {
+      "from": "office:lunch_start",
+      "to": "office:lunch_mori",
+      "kind": "choice",
+      "labels": [
+        "Lunch with Mori, in the kitchenette"
+      ],
+      "cond": ""
+    },
+    {
+      "from": "office:lunch_mio",
+      "to": "office:mio_b2",
+      "kind": "choice",
+      "labels": [
+        "“Why B2?”"
+      ],
+      "cond": ""
+    },
+    {
+      "from": "office:lunch_mio",
+      "to": "office:mio_doors",
+      "kind": "choice",
+      "labels": [
+        "“The doors this morning...”"
+      ],
+      "cond": ""
+    },
+    {
+      "from": "office:lunch_mio",
+      "to": "office:mio_quiet",
+      "kind": "choice",
+      "labels": [
+        "Eat, and say nothing"
+      ],
+      "cond": ""
+    },
+    {
+      "from": "office:mio_b2",
+      "to": "office:mio_lunch_end",
+      "kind": "go",
+      "labels": [],
+      "cond": ""
+    },
+    {
+      "from": "office:mio_doors",
+      "to": "office:mio_lunch_end",
+      "kind": "go",
+      "labels": [],
+      "cond": ""
+    },
+    {
+      "from": "office:mio_quiet",
+      "to": "office:mio_lunch_end",
+      "kind": "go",
+      "labels": [],
+      "cond": ""
+    },
+    {
+      "from": "office:mio_lunch_end",
+      "to": "office:mio_bond",
+      "kind": "call",
+      "labels": [],
+      "cond": "",
+      "call": true
+    },
+    {
+      "from": "office:mio_lunch_end",
+      "to": "office:lunch_end",
+      "kind": "go",
+      "labels": [],
+      "cond": ""
+    },
+    {
+      "from": "office:lunch_mori",
+      "to": "office:mori_landing",
+      "kind": "choice",
+      "labels": [
+        "Mime the ski-jump landing"
+      ],
+      "cond": ""
+    },
+    {
+      "from": "office:lunch_mori",
+      "to": "office:mori_pour",
+      "kind": "choice",
+      "labels": [
+        "Pour his tea for him"
+      ],
+      "cond": ""
+    },
+    {
+      "from": "office:mori_landing",
+      "to": "office:mori_cups",
+      "kind": "go",
+      "labels": [],
+      "cond": ""
+    },
+    {
+      "from": "office:mori_pour",
+      "to": "office:mori_cups",
+      "kind": "go",
+      "labels": [],
+      "cond": ""
+    },
+    {
+      "from": "office:mori_cups",
+      "to": "office:mori_bond",
+      "kind": "call",
+      "labels": [],
+      "cond": "",
+      "call": true
+    },
+    {
+      "from": "office:mori_cups",
+      "to": "office:lunch_end",
+      "kind": "go",
+      "labels": [],
+      "cond": ""
+    },
+    {
+      "from": "office:vending",
+      "to": "office:buy_coffee",
+      "kind": "choice",
+      "labels": [
+        "Canned coffee"
+      ],
+      "cond": ""
+    },
+    {
+      "from": "office:vending",
+      "to": "office:buy_tea",
+      "kind": "choice",
+      "labels": [
+        "Royal milk tea"
+      ],
+      "cond": ""
+    },
+    {
+      "from": "office:vending",
+      "to": "office:buy_melon",
+      "kind": "choice",
+      "labels": [
+        "Melon soda"
+      ],
+      "cond": ""
+    },
+    {
+      "from": "office:vending",
+      "to": "office:buy_cornsoup",
+      "kind": "choice",
+      "labels": [
+        "Corn soup"
+      ],
+      "cond": ""
+    },
+    {
+      "from": "office:vending",
+      "to": "office:noop",
+      "kind": "choice",
+      "labels": [
+        "Nothing"
+      ],
+      "cond": ""
+    },
+    {
+      "from": "office:buy_coffee",
+      "to": "office:vend_stuck",
+      "kind": "go",
+      "labels": [],
+      "cond": "(!vend_tried)"
+    },
+    {
+      "from": "office:buy_tea",
+      "to": "office:vend_stuck",
+      "kind": "go",
+      "labels": [],
+      "cond": "(!vend_tried)"
+    },
+    {
+      "from": "office:buy_melon",
+      "to": "office:vend_stuck",
+      "kind": "go",
+      "labels": [],
+      "cond": "(!vend_tried)"
+    },
+    {
+      "from": "office:buy_cornsoup",
+      "to": "office:vend_stuck",
+      "kind": "go",
+      "labels": [],
+      "cond": "(!vend_tried)"
+    },
+    {
+      "from": "office:work_afternoon",
+      "to": "office:emi_drops_in",
+      "kind": "call",
+      "labels": [],
+      "cond": "",
+      "call": true
+    },
+    {
+      "from": "office:work_afternoon",
+      "to": "office:ending",
+      "kind": "go",
+      "labels": [],
+      "cond": ""
+    },
+    {
+      "from": "office:ending",
+      "to": "office:end_dunno",
+      "kind": "choice",
+      "labels": [
+        "“I don't know.”"
+      ],
+      "cond": ""
+    },
+    {
+      "from": "office:ending",
+      "to": "office:end_nicely",
+      "kind": "choice",
+      "labels": [
+        "“I asked nicely.”"
+      ],
+      "cond": ""
+    },
+    {
+      "from": "office:ending",
+      "to": "office:end_quiet",
+      "kind": "choice",
+      "labels": [
+        "Say nothing"
+      ],
+      "cond": ""
+    },
+    {
+      "from": "office:end_dunno",
+      "to": "office:end_ticket",
+      "kind": "go",
+      "labels": [],
+      "cond": ""
+    },
+    {
+      "from": "office:end_nicely",
+      "to": "office:end_ticket",
+      "kind": "go",
+      "labels": [],
+      "cond": ""
+    },
+    {
+      "from": "office:end_quiet",
+      "to": "office:end_ticket",
+      "kind": "go",
+      "labels": [],
+      "cond": ""
+    },
+    {
+      "from": "train:seat",
+      "to": "train:mio_catches",
+      "kind": "unlock",
+      "labels": [
+        "bag_wobble"
+      ],
+      "cross": false
+    },
+    {
+      "from": "train:seat",
+      "to": "train:caught",
+      "kind": "unlock",
+      "labels": [
+        "bag_wobble"
+      ],
+      "cross": false
+    },
+    {
+      "from": "train:seat",
+      "to": "train:dropped",
+      "kind": "unlock",
+      "labels": [
+        "bag_wobble"
+      ],
+      "cross": false
+    },
+    {
+      "from": "train:sit",
+      "to": "train:lesson",
+      "kind": "unlock",
+      "labels": [
+        "sat"
+      ],
+      "cross": false
+    },
+    {
+      "from": "train:lesson2",
+      "to": "train:ohayo_cat",
+      "kind": "unlock",
+      "labels": [
+        "cat_task",
+        "know_ohayo"
+      ],
+      "cross": false
+    },
+    {
+      "from": "train:ohayo_cat",
+      "to": "train:lesson3",
+      "kind": "unlock",
+      "labels": [
+        "cat_done"
+      ],
+      "cross": false
+    },
+    {
+      "from": "train:sit",
+      "to": "train:lesson3",
+      "kind": "unlock",
+      "labels": [
+        "sat"
+      ],
+      "cross": false
+    },
+    {
+      "from": "train:lesson",
+      "to": "train:lesson3",
+      "kind": "unlock",
+      "labels": [
+        "lesson_on"
+      ],
+      "cross": false
+    },
+    {
+      "from": "train:lesson3",
+      "to": "train:approach",
+      "kind": "unlock",
+      "labels": [
+        "lesson_done"
+      ],
+      "cross": false
+    },
+    {
+      "from": "train:arrival",
+      "to": "train:platform",
+      "kind": "unlock",
+      "labels": [
+        "alighted"
+      ],
+      "cross": false
+    },
+    {
+      "from": "train:mio_tests",
+      "to": "train:mio_phone",
+      "kind": "unlock",
+      "labels": [
+        "phone_buzz"
+      ],
+      "cross": false
+    },
+    {
+      "from": "train:sit",
+      "to": "train:mio_phone",
+      "kind": "unlock",
+      "labels": [
+        "sat"
+      ],
+      "cross": false
+    },
+    {
+      "from": "train:lesson",
+      "to": "train:mio_phone",
+      "kind": "unlock",
+      "labels": [
+        "lesson_on"
+      ],
+      "cross": false
+    },
+    {
+      "from": "train:lesson2",
+      "to": "gate:ohayo_guard",
+      "kind": "unlock",
+      "labels": [
+        "know_ohayo"
+      ],
+      "cross": true
+    },
+    {
+      "from": "train:lesson3",
+      "to": "gate:yoroshiku_guard",
+      "kind": "unlock",
+      "labels": [
+        "know_yoroshiku"
+      ],
+      "cross": true
+    },
+    {
+      "from": "gate:bench_wait",
+      "to": "gate:hamada_stuck",
+      "kind": "unlock",
+      "labels": [
+        "jammed"
+      ],
+      "cross": false
+    },
+    {
+      "from": "gate:bench_wait",
+      "to": "gate:word_say",
+      "kind": "unlock",
+      "labels": [
+        "jammed"
+      ],
+      "cross": false
+    },
+    {
+      "from": "gate:word_type",
+      "to": "gate:word_say",
+      "kind": "unlock",
+      "labels": [
+        "know_akete"
+      ],
+      "cross": false
+    },
+    {
+      "from": "gate:bench_wait",
+      "to": "gate:way_social",
+      "kind": "unlock",
+      "labels": [
+        "jammed"
+      ],
+      "cross": false
+    },
+    {
+      "from": "train:arrival",
+      "to": "gate:way_social",
+      "kind": "unlock",
+      "labels": [
+        "know_sumimasen"
+      ],
+      "cross": true
+    },
+    {
+      "from": "gate:past_gate",
+      "to": "gate:to_lift",
+      "kind": "unlock",
+      "labels": [
+        "gate_through"
+      ],
+      "cross": false
+    },
+    {
+      "from": "train:lesson3",
+      "to": "office:yoroshiku_mori",
+      "kind": "unlock",
+      "labels": [
+        "know_yoroshiku"
+      ],
+      "cross": true
+    },
+    {
+      "from": "train:lesson2",
+      "to": "office:ohayo_mori",
+      "kind": "unlock",
+      "labels": [
+        "know_ohayo"
+      ],
+      "cross": true
+    },
+    {
+      "from": "office:lunch_mori",
+      "to": "office:mori_irete_echo",
+      "kind": "unlock",
+      "labels": [
+        "lunch_mori"
+      ],
+      "cross": false
+    },
+    {
+      "from": "office:lunch_end",
+      "to": "office:mori_irete_echo",
+      "kind": "unlock",
+      "labels": [
+        "afternoon_on"
+      ],
+      "cross": false
+    },
+    {
+      "from": "office:yoroshiku_mori",
+      "to": "office:mori_irete_echo",
+      "kind": "unlock",
+      "labels": [
+        "greeted_mori"
+      ],
+      "cross": false
+    },
+    {
+      "from": "office:ohayo_mori",
+      "to": "office:mori_irete_echo",
+      "kind": "unlock",
+      "labels": [
+        "greeted_mori"
+      ],
+      "cross": false
+    },
+    {
+      "from": "office:kenji_first",
+      "to": "office:kenji_again",
+      "kind": "unlock",
+      "labels": [
+        "kenji_intro"
+      ],
+      "cross": false
+    },
+    {
+      "from": "train:lesson2",
+      "to": "office:ohayo_kenji",
+      "kind": "unlock",
+      "labels": [
+        "know_ohayo"
+      ],
+      "cross": true
+    },
+    {
+      "from": "train:lesson3",
+      "to": "office:yoroshiku_kenji",
+      "kind": "unlock",
+      "labels": [
+        "know_yoroshiku"
+      ],
+      "cross": true
+    },
+    {
+      "from": "office:kenji_first",
+      "to": "office:machine_door",
+      "kind": "unlock",
+      "labels": [
+        "kenji_intro"
+      ],
+      "cross": false
+    },
+    {
+      "from": "office:machine_door",
+      "to": "office:mio_opens",
+      "kind": "unlock",
+      "labels": [
+        "knocked"
+      ],
+      "cross": false
+    },
+    {
+      "from": "office:kenji_first",
+      "to": "office:mio_opens",
+      "kind": "unlock",
+      "labels": [
+        "kenji_intro"
+      ],
+      "cross": false
+    },
+    {
+      "from": "gate:word_type",
+      "to": "office:akete_machine",
+      "kind": "unlock",
+      "labels": [
+        "know_akete"
+      ],
+      "cross": true
+    },
+    {
+      "from": "office:mio_opens",
+      "to": "office:machine_in",
+      "kind": "unlock",
+      "labels": [
+        "machine_open"
+      ],
+      "cross": false
+    },
+    {
+      "from": "office:akete_machine",
+      "to": "office:machine_in",
+      "kind": "unlock",
+      "labels": [
+        "machine_open"
+      ],
+      "cross": false
+    },
+    {
+      "from": "office:machine_in",
+      "to": "office:chair_push",
+      "kind": "unlock",
+      "labels": [
+        "found_chair"
+      ],
+      "cross": false
+    },
+    {
+      "from": "office:chair_push",
+      "to": "office:ticket",
+      "kind": "unlock",
+      "labels": [
+        "chair_back"
+      ],
+      "cross": false
+    },
+    {
+      "from": "office:lunch_mio",
+      "to": "office:mio_tomatte_echo",
+      "kind": "unlock",
+      "labels": [
+        "lunch_mio"
+      ],
+      "cross": false
+    },
+    {
+      "from": "office:lunch_end",
+      "to": "office:mio_tomatte_echo",
+      "kind": "unlock",
+      "labels": [
+        "afternoon_on"
+      ],
+      "cross": false
+    },
+    {
+      "from": "office:ticket",
+      "to": "office:copier",
+      "kind": "unlock",
+      "labels": [
+        "got_ticket"
+      ],
+      "cross": false
+    },
+    {
+      "from": "office:copier",
+      "to": "office:ticket_done",
+      "kind": "unlock",
+      "labels": [
+        "copier_done"
+      ],
+      "cross": false
+    },
+    {
+      "from": "office:lunch_end",
+      "to": "office:work_afternoon",
+      "kind": "unlock",
+      "labels": [
+        "afternoon_on"
+      ],
+      "cross": false
+    },
+    {
+      "from": "office:kenji_first",
+      "to": "office:work_afternoon",
+      "kind": "unlock",
+      "labels": [
+        "kenji_intro"
+      ],
+      "cross": false
+    },
+    {
+      "from": "office:work_afternoon",
+      "to": "office:ending",
+      "kind": "unlock",
+      "labels": [
+        "evening_on"
+      ],
+      "cross": false
+    }
+  ],
+  "flags": [
+    "passengers",
+    "seat_goal",
+    "bag_wobble",
+    "mio_warm",
+    "heard_mum",
+    "sat",
+    "know_gaijin",
+    "typed_gaijin",
+    "mio_named",
+    "chat1",
+    "lesson_on",
+    "know_ohayo",
+    "typed_ohayo",
+    "cat_task",
+    "cat_done",
+    "know_yoroshiku",
+    "typed_yoroshiku",
+    "lesson_done",
+    "arriving",
+    "know_sumimasen",
+    "typed_sumimasen",
+    "alighted",
+    "on_platform",
+    "know_matte",
+    "typed_matte",
+    "held_doors",
+    "phone_buzz",
+    "can_exit",
+    "greeted_guard",
+    "guard_asked",
+    "jammed",
+    "know_akete",
+    "typed_akete",
+    "gate_through_way",
+    "gate_magic",
+    "late_greet",
+    "guard_cool",
+    "pt_case",
+    "pt_man",
+    "pt_cat",
+    "m_squeeze",
+    "met_kuroda",
+    "hamada_friend",
+    "gate_through",
+    "period",
+    "greeted_mori",
+    "met_mori",
+    "mori_echo",
+    "kenji_intro",
+    "met_kenji",
+    "kenji_talked",
+    "kenji_laughed",
+    "greeted_kenji",
+    "knocked",
+    "machine_open",
+    "door_magic",
+    "found_chair",
+    "chair_back",
+    "got_ticket",
+    "met_mio",
+    "mio_echo",
+    "copier_started",
+    "know_ugoite",
+    "typed_ugoite",
+    "copier_done",
+    "ticket_closed",
+    "lunch_on",
+    "lunch_mio",
+    "mio_bond_done",
+    "know_tomatte",
+    "typed_tomatte",
+    "lunch_mori",
+    "mori_bond_done",
+    "know_irete",
+    "typed_irete",
+    "afternoon_on",
+    "vend_want",
+    "bought_coffee",
+    "bought_tea",
+    "bought_melon",
+    "bought_cornsoup",
+    "vend_tried",
+    "vend_stuck",
+    "gifted_mio",
+    "gifted_mori",
+    "gifted_kenji",
+    "evening_on",
+    "met_emi"
+  ]
+}

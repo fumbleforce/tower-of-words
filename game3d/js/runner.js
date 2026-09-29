@@ -1,3 +1,6 @@
+import { flagKeys, KNOW_PREFIX } from './narrative/engine-flags.js';
+const ENGINE_KEYS = flagKeys('game3d/js/runner.js');
+import { DEFAULT_SPEAKERS } from './narrative/speakers.js';
 // Runs the story files (game3d/story/*.js, format in game3d/story/FORMAT.md) against a place.
 import { voiceThenBeat } from './ui.js';
 import { ui, voice, sfx, setFace, PORTRAITS } from './ui.js';
@@ -9,34 +12,7 @@ export function lineKey(who, text = '') { return 'ln-' + heardKey(who + '|' + te
 export function heardKey(text = '') { let h = 5381; for (let i = 0; i < text.length; i++) h = ((h * 33) ^ text.charCodeAt(i)) >>> 0; return 'oh-' + h.toString(36); }
 export const audioKeys = new Set();
 fetch(new URL('../audio/index.json?v=' + (window.BUILD || ''), import.meta.url)).then((r) => (r.ok ? r.json() : [])).then((l) => l.forEach((k) => audioKeys.add(k))).catch(() => {});
-const DEFAULT_SPEAKERS = {
-  eric: { name: 'Eric', role: 'you', color: '#8fb4d8' },
-  mio: { name: 'Mio', role: 'programmer', color: '#5fc6bf' },
-  aoi: { name: 'Aoi', color: '#e79fb0' },
-  kuroda: { name: 'Mr. Hamada', role: 'Accounts', color: '#b3a58f' },
-  guard: { name: 'Mr. Ishibashi', role: 'security', color: '#8ea2c8' },
-  kuro: { name: 'Kuro', role: 'reception', color: '#c3a7d6' },
-  emi: { name: 'Emi', color: '#e0906f' },
-  mori: { name: 'Mr. Mori', role: 'section chief', color: '#b9a3d3' },
-  kenji: { name: 'Kenji', color: '#9fb6d8' },
-  yui: { name: 'Yui', color: '#d7b27e' },
-  sota: { name: 'Sota', color: '#9cc39a' },
-  nao: { name: 'Nao', color: '#a9c3c0' },
-  hiro: { name: 'Hiro', color: '#c0b39f' },
-  ann: { name: 'Announcement', color: '#9aa9bd' },
-  reader: { name: 'Man with a book', color: '#a8b0bf' },
-  music: { name: 'Girl with headphones', color: '#a8b0bf' },
-  bun: { name: 'Woman with a bun', color: '#a8b0bf' },
-  youth: { name: 'Young man', color: '#a8b0bf' },
-  stander: { name: 'Man by the door', color: '#a8b0bf' },
-  commuter: { name: 'Office worker', color: '#a8b0bf' },
-  rei: { name: 'Rei', role: 'Sales', color: '#c9ced8' },
-  kanae: { name: 'Kanae', color: '#f0a060' },
-  sales1: { name: 'Man from Sales', color: '#a8b0bf' },
-  sales2: { name: 'Woman from Sales', color: '#a8b0bf' },
-  gatev: { name: 'Gate', role: 'recorded voice', color: '#7fd0c8' },
-  reitext: { name: 'Rei', role: 'message', color: '#c9ced8', phone: true },
-};
+
 
 // ---------- conditions ----------
 const cache = new Map();
@@ -51,7 +27,7 @@ export function cond(expr) {
     try { f = new Function('F', `return (${js});`); } catch (e) { console.warn('bad condition', expr, e); f = () => false; }
     cache.set(expr, f);
   }
-  try { return !!f((k) => (k.startsWith('know_') ? known.has(k.slice(5)) : (flags[k] ?? 0))); } catch { return false; }
+  try { return !!f((k) => (k.startsWith(KNOW_PREFIX) ? known.has(k.slice(KNOW_PREFIX.length)) : (flags[k] ?? 0))); } catch { return false; }
 }
 
 // hooks that keep the current line on screen (they belong to it)
@@ -66,7 +42,7 @@ export class Runner {
   }
   use(place, story) {
     this.place = place; this.story = story;
-    flags.place = place.name;
+    flags[ENGINE_KEYS.place] = place.name;
     this.speakers = { ...DEFAULT_SPEAKERS, ...(story.speakers || {}) };
   }
   speaker(id) { return this.speakers[id] || { name: id }; }
@@ -100,7 +76,7 @@ export class Runner {
     // a new beat starts everyone on their neutral face: a face set on a line lasts for its scene only. It used to
     // last all day, so the listening portrait kept an old look (Jørgen: at the copier Eric looked surprised, still
     // from "Nineteen ninety-six?" in the ticket scene, and Mori flustered from the jam)
-    const go = async () => { for (const who in PORTRAITS) setFace(who, undefined); await this.run(node); if (m) flags['talked_' + m[1]] = true; };
+    const go = async () => { for (const who in PORTRAITS) setFace(who, undefined); await this.run(node); if (m) flags[ENGINE_KEYS.talked + m[1]] = true; };
     // an event that fires while a scene is running waits for it to end
     if (beat && this.game.busy && /^(event|zone|near):/.test(key)) { this.game.queue.push(go); return true; }
     if (beat) this.game.beat(go); else go();

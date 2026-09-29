@@ -1,3 +1,7 @@
+import { eventId } from '../narrative/events.js';
+import { flagKeys } from '../narrative/engine-flags.js';
+const ENGINE_KEYS = flagKeys('game3d/js/places/office.js');
+import { PLACE_DETAILS } from './catalog.js';
 // Place 3, the office floor, as the engine side: things, spots, zones, the command effects and the arrival by lift.
 // Every word said here comes from game3d/story/office.js (placeholder: story/placeholder/office.js).
 import * as THREE from 'three';
@@ -47,51 +51,51 @@ export async function officePlace(game) {
   const Z0 = w.Z0;
 
   const things = {
-    emi: { label: 'Emi', kind: 'person', anchor: rigAnchor(w.emi), spot: () => (w.emi.seated ? [dS0.seat[0] - 0.55, dS0.seat[1] + 0.5] : [w.emi.root.position.x, w.emi.root.position.z - 0.62]), face: () => [w.emi.root.position.x, w.emi.root.position.z], enabled: () => !w.emi._walk },
-    kenji: { label: 'Kenji', kind: 'person', anchor: rigAnchor(w.kenji), ...at(-2.9, -4.3, -2.0, -4.34) },
-    rei: { label: 'Rei', kind: 'person', anchor: rigAnchor(rei), spot: () => [rei.root.position.x, rei.root.position.z + 0.6], face: () => [rei.root.position.x, rei.root.position.z], enabled: () => rei.root.visible && !rei._walk },
-    aoi: { label: 'Aoi', kind: 'person', anchor: rigAnchor(aoi), spot: () => [aoi.root.position.x, aoi.root.position.z + 0.6], face: () => [aoi.root.position.x, aoi.root.position.z], enabled: () => aoi.root.visible && !aoi._walk },
-    mori: { label: 'Mr. Mori', kind: 'person', anchor: rigAnchor(w.mori), spot: () => (!flags.greeted_mori ? LIFT_OUT : w.mori.seated === false ? [w.mori.root.position.x, w.mori.root.position.z + 0.6] : [2.3, -2.55]), face: () => [w.mori.root.position.x, w.mori.root.position.z], enabled: () => !w.mori._walk },
-    tama: { label: 'Cat', verb: 'Pet', kind: 'person small', anchor: (v) => { w.tama.getWorldPosition(v); v.y += 0.45; return v; }, spot: () => { const v = new THREE.Vector3(); w.tama.getWorldPosition(v); return [v.x, v.z + 0.6]; }, face: () => { const v = new THREE.Vector3(); w.tama.getWorldPosition(v); return [v.x, v.z]; } },
-    covered: { label: 'Covered desk', kind: 'thing small', anchor: v3(w.dN(1).x, 1.0, w.dN(1).z), ...at(w.dN(1).x, -5.05, w.dN(1).x, w.dN(1).z) },
-    covered_monitor: { label: 'Covered monitor', kind: 'thing small', anchor: v3(w.dS(2).x, 1.0, w.dS(2).z), ...at(w.dS(2).x, -1.75, w.dS(2).x, w.dS(2).z) },
-    box_crowns: { label: 'Box', kind: 'thing small', anchor: v3(-3.5, 1.6, Z0 + 0.3), ...at(-3.5, -5.2, -3.5, Z0), noMarker: true },
-    cups: { label: 'Cups', kind: 'thing small', anchor: v3(0.4, 0.8, CS + 0.42), ...at(0.4, 3.35, 0.4, CS + 0.42) },
-    nameplate: { label: 'Nameplate', kind: 'thing small', anchor: v3(1.55, 0.6, -3.1), ...at(2.3, -2.55, 1.55, -3.1), noMarker: true },
-    my_desk: { label: 'Your desk', kind: 'thing', anchor: v3(dS1.x, 0.95, dS1.z), ...at(dS1.seat[0], dS1.seat[1] + 0.5, dS1.x, dS1.z) },
-    my_chair: { label: 'Your chair', kind: 'thing', anchor: (v) => { v.copy(w.myChair.position); v.y = 0.75; return v; }, spot: () => [w.myChair.position.x + 0.1, w.myChair.position.z + 0.55], face: () => [w.myChair.position.x, w.myChair.position.z], enabled: () => !flags.chairHome },
-    lift: { label: 'Lift', kind: 'thing small', anchor: v3(-5.45, 1.5, -3.4), ...at(-5.45, -2.8, -5.45, -3.4) },
-    vending: { label: 'Vending machine', kind: 'thing small', anchor: v3(-4.62, 1.35, -2.3), ...at(-4.62, -1.75, -4.62, -2.3) },
-    bench: { label: 'Bench', kind: 'thing small', anchor: v3(-6.72, 0.6, -1.4), ...at(-6.1, -1.4, -6.72, -1.4), noMarker: true },
-    stairs: { label: 'Stairs', kind: 'thing small', anchor: v3(-6.45, 1.45, -3.4), ...at(-6.45, -2.8, -6.45, -3.4) },
-    office_door: { label: 'Office door', kind: 'thing small', anchor: v3(-0.25, 1.5, CN), ...at(-0.25, 0.9, -0.25, CN), noMarker: true },
-    inout_board: { label: 'In/out board', kind: 'thing small', anchor: v3(-1.6, 1.35, Z0), ...at(-1.4, -5.3, -1.6, Z0) },
-    clock: { label: 'Clock', kind: 'thing small', anchor: v3(-1.6, 1.6, Z0), ...at(-1.8, -5.3, -1.6, Z0), noMarker: true },
-    whiteboard: { label: 'Whiteboard', kind: 'thing small', anchor: v3(0.55, 1.3, Z0), ...at(0.55, -5.3, 0.55, Z0) },
-    calendar: { label: 'Calendar', kind: 'thing small', anchor: v3(-0.6, 1.2, Z0), ...at(-0.6, -5.3, -0.6, Z0), noMarker: true },
-    water_cooler: { label: 'Water cooler', kind: 'thing small', anchor: v3(-3.85, 1.2, -4.9), ...at(-3.3, -4.9, -3.85, -4.9) },
-    cabinets: { label: 'Cabinets', kind: 'thing small', anchor: v3(-3.5, 1.35, Z0), ...at(-3.5, -5.2, -3.5, Z0), noMarker: true },
-    fan: { label: 'Fan', kind: 'thing small', anchor: v3(-3.3, 1.0, -2.2), ...at(-3.3, -1.6, -3.3, -2.2) },
-    boxes: { label: 'Boxes', kind: 'thing small', anchor: v3(2.85, 0.6, -1.2), ...at(2.3, -1.2, 2.85, -1.2), noMarker: true },
-    chief_desk: { label: "Mr. Mori's desk", kind: 'thing small', anchor: v3(1.55, 0.8, -3.36), ...at(2.3, -2.55, 1.55, -3.36), noMarker: true },
-    machine_door: { label: 'Machine room', kind: 'thing small', anchor: v3(5.1, 1.4, CN), ...at(5.1, 0.8, 5.1, CN) },
-    racks: { label: 'Server racks', kind: 'thing small', anchor: v3(5.2, 1.5, -3.3), ...at(5.2, -2.1, 5.2, -3.3), enabled: () => st.mdoor > 0.5 },
-    fire_exit: { label: 'Fire exit', kind: 'thing small', anchor: v3(6.9, 1.45, 1.25), ...at(6.4, 1.25, 7, 1.25) },
-    noticeboard: { label: 'Noticeboard', kind: 'thing small', anchor: v3(-3.0, 1.25, CN), ...at(-3.0, 0.85, -3.0, CN) },
-    extinguisher: { label: 'Extinguisher', kind: 'thing small', anchor: v3(1.5, 0.8, CN), ...at(1.5, 0.85, 1.5, CN), noMarker: true },
-    hydrant: { label: 'Hydrant', kind: 'thing small', anchor: v3(2.6, 1.0, CN), ...at(2.6, 0.85, 2.6, CN), noMarker: true },
-    copier: { label: 'Copier', kind: 'thing', anchor: v3(-2.95, 1.1, CS + 0.36), ...at(-2.95, 4.2, -2.95, CS + 0.36) },
-    fax: { label: 'Fax', kind: 'thing small', anchor: v3(-5.4, 0.9, CS + 0.3), ...at(-5.4, 3.4, -5.4, CS + 0.3), noMarker: true },
-    paper_shelf: { label: 'Paper shelf', kind: 'thing small', anchor: v3(-6.7, 1.3, 3.6), ...at(-6.2, 3.6, -6.7, 3.6), noMarker: true },
-    worktable: { label: 'Worktable', kind: 'thing small', anchor: v3(-4.4, 0.8, 4.7), ...at(-4.4, 3.9, -4.4, 4.7), noMarker: true },
-    coffee_machine: { label: 'Coffee machine', kind: 'thing', anchor: v3(1.1, 1.05, CS + 0.36), ...at(1.1, 3.35, 1.1, CS + 0.36) },
-    kettle: { label: 'Kettle', kind: 'thing small', anchor: v3(1.45, 0.95, CS + 0.36), ...at(1.45, 3.35, 1.45, CS + 0.36), noMarker: true },
-    fridge: { label: 'Fridge', kind: 'thing small', anchor: v3(-1.8, 1.35, CS + 0.32), ...at(-1.8, 3.35, -1.8, CS + 0.32) },
-    microwave: { label: 'Microwave', kind: 'thing small', anchor: v3(1.45, 0.95, 4.3), ...at(0.8, 4.3, 1.45, 4.3), noMarker: true },
-    kitchen_table: { label: 'Table', kind: 'thing small', anchor: v3(-0.8, 0.7, 4.6), ...at(-0.8, 5.5, -0.8, 4.6), noMarker: true },
-    toilet_m: { label: "Men's toilet", kind: 'thing small', anchor: v3(2.6, 1.0, CS), ...at(2.6, 1.85, 2.6, CS) },
-    toilet_f: { label: "Women's toilet", kind: 'thing small', anchor: v3(5.2, 1.0, CS), ...at(5.2, 1.85, 5.2, CS) },
-    plant: { label: 'Plant', kind: 'thing small', anchor: v3(2.95, 1.2, Z0 + 0.45), ...at(2.95, -5.3, 2.95, Z0 + 0.45), noMarker: true },
+    emi: { ...PLACE_DETAILS.office.things.emi, anchor: rigAnchor(w.emi), spot: () => (w.emi.seated ? [dS0.seat[0] - 0.55, dS0.seat[1] + 0.5] : [w.emi.root.position.x, w.emi.root.position.z - 0.62]), face: () => [w.emi.root.position.x, w.emi.root.position.z], enabled: () => !w.emi._walk },
+    kenji: { ...PLACE_DETAILS.office.things.kenji, anchor: rigAnchor(w.kenji), ...at(-2.9, -4.3, -2.0, -4.34) },
+    rei: { ...PLACE_DETAILS.office.things.rei, anchor: rigAnchor(rei), spot: () => [rei.root.position.x, rei.root.position.z + 0.6], face: () => [rei.root.position.x, rei.root.position.z], enabled: () => rei.root.visible && !rei._walk },
+    aoi: { ...PLACE_DETAILS.office.things.aoi, anchor: rigAnchor(aoi), spot: () => [aoi.root.position.x, aoi.root.position.z + 0.6], face: () => [aoi.root.position.x, aoi.root.position.z], enabled: () => aoi.root.visible && !aoi._walk },
+    mori: { ...PLACE_DETAILS.office.things.mori, anchor: rigAnchor(w.mori), spot: () => (!flags.greeted_mori ? LIFT_OUT : w.mori.seated === false ? [w.mori.root.position.x, w.mori.root.position.z + 0.6] : [2.3, -2.55]), face: () => [w.mori.root.position.x, w.mori.root.position.z], enabled: () => !w.mori._walk },
+    tama: { ...PLACE_DETAILS.office.things.tama, anchor: (v) => { w.tama.getWorldPosition(v); v.y += 0.45; return v; }, spot: () => { const v = new THREE.Vector3(); w.tama.getWorldPosition(v); return [v.x, v.z + 0.6]; }, face: () => { const v = new THREE.Vector3(); w.tama.getWorldPosition(v); return [v.x, v.z]; } },
+    covered: { ...PLACE_DETAILS.office.things.covered, anchor: v3(w.dN(1).x, 1.0, w.dN(1).z), ...at(w.dN(1).x, -5.05, w.dN(1).x, w.dN(1).z) },
+    covered_monitor: { ...PLACE_DETAILS.office.things.covered_monitor, anchor: v3(w.dS(2).x, 1.0, w.dS(2).z), ...at(w.dS(2).x, -1.75, w.dS(2).x, w.dS(2).z) },
+    box_crowns: { ...PLACE_DETAILS.office.things.box_crowns, anchor: v3(-3.5, 1.6, Z0 + 0.3), ...at(-3.5, -5.2, -3.5, Z0), noMarker: true },
+    cups: { ...PLACE_DETAILS.office.things.cups, anchor: v3(0.4, 0.8, CS + 0.42), ...at(0.4, 3.35, 0.4, CS + 0.42) },
+    nameplate: { ...PLACE_DETAILS.office.things.nameplate, anchor: v3(1.55, 0.6, -3.1), ...at(2.3, -2.55, 1.55, -3.1), noMarker: true },
+    my_desk: { ...PLACE_DETAILS.office.things.my_desk, anchor: v3(dS1.x, 0.95, dS1.z), ...at(dS1.seat[0], dS1.seat[1] + 0.5, dS1.x, dS1.z) },
+    my_chair: { ...PLACE_DETAILS.office.things.my_chair, anchor: (v) => { v.copy(w.myChair.position); v.y = 0.75; return v; }, spot: () => [w.myChair.position.x + 0.1, w.myChair.position.z + 0.55], face: () => [w.myChair.position.x, w.myChair.position.z], enabled: () => !flags[ENGINE_KEYS.chairHome] },
+    lift: { ...PLACE_DETAILS.office.things.lift, anchor: v3(-5.45, 1.5, -3.4), ...at(-5.45, -2.8, -5.45, -3.4) },
+    vending: { ...PLACE_DETAILS.office.things.vending, anchor: v3(-4.62, 1.35, -2.3), ...at(-4.62, -1.75, -4.62, -2.3) },
+    bench: { ...PLACE_DETAILS.office.things.bench, anchor: v3(-6.72, 0.6, -1.4), ...at(-6.1, -1.4, -6.72, -1.4), noMarker: true },
+    stairs: { ...PLACE_DETAILS.office.things.stairs, anchor: v3(-6.45, 1.45, -3.4), ...at(-6.45, -2.8, -6.45, -3.4) },
+    office_door: { ...PLACE_DETAILS.office.things.office_door, anchor: v3(-0.25, 1.5, CN), ...at(-0.25, 0.9, -0.25, CN), noMarker: true },
+    inout_board: { ...PLACE_DETAILS.office.things.inout_board, anchor: v3(-1.6, 1.35, Z0), ...at(-1.4, -5.3, -1.6, Z0) },
+    clock: { ...PLACE_DETAILS.office.things.clock, anchor: v3(-1.6, 1.6, Z0), ...at(-1.8, -5.3, -1.6, Z0), noMarker: true },
+    whiteboard: { ...PLACE_DETAILS.office.things.whiteboard, anchor: v3(0.55, 1.3, Z0), ...at(0.55, -5.3, 0.55, Z0) },
+    calendar: { ...PLACE_DETAILS.office.things.calendar, anchor: v3(-0.6, 1.2, Z0), ...at(-0.6, -5.3, -0.6, Z0), noMarker: true },
+    water_cooler: { ...PLACE_DETAILS.office.things.water_cooler, anchor: v3(-3.85, 1.2, -4.9), ...at(-3.3, -4.9, -3.85, -4.9) },
+    cabinets: { ...PLACE_DETAILS.office.things.cabinets, anchor: v3(-3.5, 1.35, Z0), ...at(-3.5, -5.2, -3.5, Z0), noMarker: true },
+    fan: { ...PLACE_DETAILS.office.things.fan, anchor: v3(-3.3, 1.0, -2.2), ...at(-3.3, -1.6, -3.3, -2.2) },
+    boxes: { ...PLACE_DETAILS.office.things.boxes, anchor: v3(2.85, 0.6, -1.2), ...at(2.3, -1.2, 2.85, -1.2), noMarker: true },
+    chief_desk: { ...PLACE_DETAILS.office.things.chief_desk, anchor: v3(1.55, 0.8, -3.36), ...at(2.3, -2.55, 1.55, -3.36), noMarker: true },
+    machine_door: { ...PLACE_DETAILS.office.things.machine_door, anchor: v3(5.1, 1.4, CN), ...at(5.1, 0.8, 5.1, CN) },
+    racks: { ...PLACE_DETAILS.office.things.racks, anchor: v3(5.2, 1.5, -3.3), ...at(5.2, -2.1, 5.2, -3.3), enabled: () => st.mdoor > 0.5 },
+    fire_exit: { ...PLACE_DETAILS.office.things.fire_exit, anchor: v3(6.9, 1.45, 1.25), ...at(6.4, 1.25, 7, 1.25) },
+    noticeboard: { ...PLACE_DETAILS.office.things.noticeboard, anchor: v3(-3.0, 1.25, CN), ...at(-3.0, 0.85, -3.0, CN) },
+    extinguisher: { ...PLACE_DETAILS.office.things.extinguisher, anchor: v3(1.5, 0.8, CN), ...at(1.5, 0.85, 1.5, CN), noMarker: true },
+    hydrant: { ...PLACE_DETAILS.office.things.hydrant, anchor: v3(2.6, 1.0, CN), ...at(2.6, 0.85, 2.6, CN), noMarker: true },
+    copier: { ...PLACE_DETAILS.office.things.copier, anchor: v3(-2.95, 1.1, CS + 0.36), ...at(-2.95, 4.2, -2.95, CS + 0.36) },
+    fax: { ...PLACE_DETAILS.office.things.fax, anchor: v3(-5.4, 0.9, CS + 0.3), ...at(-5.4, 3.4, -5.4, CS + 0.3), noMarker: true },
+    paper_shelf: { ...PLACE_DETAILS.office.things.paper_shelf, anchor: v3(-6.7, 1.3, 3.6), ...at(-6.2, 3.6, -6.7, 3.6), noMarker: true },
+    worktable: { ...PLACE_DETAILS.office.things.worktable, anchor: v3(-4.4, 0.8, 4.7), ...at(-4.4, 3.9, -4.4, 4.7), noMarker: true },
+    coffee_machine: { ...PLACE_DETAILS.office.things.coffee_machine, anchor: v3(1.1, 1.05, CS + 0.36), ...at(1.1, 3.35, 1.1, CS + 0.36) },
+    kettle: { ...PLACE_DETAILS.office.things.kettle, anchor: v3(1.45, 0.95, CS + 0.36), ...at(1.45, 3.35, 1.45, CS + 0.36), noMarker: true },
+    fridge: { ...PLACE_DETAILS.office.things.fridge, anchor: v3(-1.8, 1.35, CS + 0.32), ...at(-1.8, 3.35, -1.8, CS + 0.32) },
+    microwave: { ...PLACE_DETAILS.office.things.microwave, anchor: v3(1.45, 0.95, 4.3), ...at(0.8, 4.3, 1.45, 4.3), noMarker: true },
+    kitchen_table: { ...PLACE_DETAILS.office.things.kitchen_table, anchor: v3(-0.8, 0.7, 4.6), ...at(-0.8, 5.5, -0.8, 4.6), noMarker: true },
+    toilet_m: { ...PLACE_DETAILS.office.things.toilet_m, anchor: v3(2.6, 1.0, CS), ...at(2.6, 1.85, 2.6, CS) },
+    toilet_f: { ...PLACE_DETAILS.office.things.toilet_f, anchor: v3(5.2, 1.0, CS), ...at(5.2, 1.85, 5.2, CS) },
+    plant: { ...PLACE_DETAILS.office.things.plant, anchor: v3(2.95, 1.2, Z0 + 0.45), ...at(2.95, -5.3, 2.95, Z0 + 0.45), noMarker: true },
   };
   const zones = {
     office: (x, z) => x > -4.2 && x < 3.4 && z < CN && z > Z0,
@@ -168,7 +172,7 @@ export async function officePlace(game) {
   async function lunchSit({ with: partner = 'mio' } = {}) {
     const me = game.player;
     if (partner === 'mio') {
-      if (!flags.machineOpen) P.hooks.machineDoor({ state: 'open' });   // she eats in there, so the door is open
+      if (!flags[ENGINE_KEYS.machineOpen]) P.hooks.machineDoor({ state: 'open' });   // she eats in there, so the door is open
       const es = lunchSeats.eric, ms = lunchSeats.mio, mio = game.mioNpc;
       // Mio: finish whatever walk she's on (every walk ends by itself: move.js walkRig caps them), then to her crate,
       // while Eric walks in through the door
@@ -326,19 +330,19 @@ export async function officePlace(game) {
         const [x, z] = to === 'my_seat' ? dS1.seat : game.posOf(to);
         const c = w.myChair.position;
         const path = routeTo(c, [x, z]);
-        st.chairTo = path; st.chairDone = () => { flags.chairHome = to === 'my_seat'; res(); };
+        st.chairTo = path; st.chairDone = () => { flags[ENGINE_KEYS.chairHome] = to === 'my_seat'; res(); };
         sfx('door');
       }),
       coffee: async () => { sfx('ok'); st.coffee = 1; st.steam = 1.6; },
       kettle: ({ state }) => { if (state === 'pour') { st.steam = 1.6; sfx('ok'); } },
       rackAlarm: ({ state }) => { st.alarm = state === 'on'; },
-      machineDoor: ({ state }) => { st.mdoorWant = state === 'open' ? 1 : 0; if (state === 'open') { w.nav.unblock('mdoor'); w.nav.blockTagged('mdoorLeaf', 5.22, 5.62, CN - 0.8, CN - 0.02); flags.machineOpen = true; } else { w.nav.unblock('mdoorLeaf'); } sfx('door'); },
+      machineDoor: ({ state }) => { st.mdoorWant = state === 'open' ? 1 : 0; if (state === 'open') { w.nav.unblock('mdoor'); w.nav.blockTagged('mdoorLeaf', 5.22, 5.62, CN - 0.8, CN - 0.02); flags[ENGINE_KEYS.machineOpen] = true; } else { w.nav.unblock('mdoorLeaf'); } sfx('door'); },
       vendingDrop: () => { sfx('tap'); setTimeout(() => sfx('tap'), 180); const can = rbox(0.06, 0.1, 0.06, '#7fc07a', { x: -4.62, y: 0.02, z: -1.95, r: 0.02 }); can.rotation.z = Math.PI / 2; w.root.add(can); },
       clockStop: ({ ms = 3000 }) => { st.clockStop = ms / 1000; },
       fan: ({ state }) => { st.fan = state; },
       liftOpen: () => { st.liftWant = 1; sfx('lift'); },
       liftClose: () => { st.liftWant = 0; },
-      sitDown: async () => { await sitMio(); game.event('sat_down'); },
+      sitDown: async () => { await sitMio(); game.event(eventId('office', 'sat_down')); },
       // lunch: { do: 'lunchSit', with: 'mio' | 'mori' } and { do: 'lunchOver' } (see the lunch block above)
       lunchSit: (s) => lunchSit(s),
       lunchOver: () => lunchOver(),
@@ -401,7 +405,7 @@ export async function officePlace(game) {
   }
   async function sitMio() {
     if (game.player.seated) return;
-    if (!flags.chairHome) { await P.hooks.chairRoll({ to: 'my_seat' }); }
+    if (!flags[ENGINE_KEYS.chairHome]) { await P.hooks.chairRoll({ to: 'my_seat' }); }
     await game.walkTo(dS1.seat[0], dS1.seat[1] + 0.45);
     placeMioSeated();
     await game.wait(600);

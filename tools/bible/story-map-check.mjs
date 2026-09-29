@@ -8,7 +8,7 @@ import path from 'node:path';
 import { pathToFileURL } from 'node:url';
 
 const root = path.resolve(path.dirname(new URL(import.meta.url).pathname), '../..');
-const { STORY_FILES, ENGINE_FILES, buildGraph } = await import(pathToFileURL(path.join(root, 'bible/story-graph.js')).href);
+const { STORY_FILES, buildGraph } = await import(pathToFileURL(path.join(root, 'bible/story-graph.js')).href);
 const quiet = process.argv.includes('--quiet');
 
 const mods = {}, files = {}, errors = [];
@@ -17,9 +17,6 @@ for (const p of STORY_FILES) {
   try { mods[p] = (await import(pathToFileURL(f).href + '?t=' + Date.now())).default; if (!mods[p]) throw new Error('no default export'); }
   catch (e) { errors.push(`game3d/story/${p}.js: ${e.message}`); }
   try { files[`game3d/story/${p}.js`] = fs.readFileSync(f, 'utf8'); } catch (_) { /* reported above */ }
-}
-for (const p of ENGINE_FILES) {
-  try { files[p] = fs.readFileSync(path.join(root, p), 'utf8'); } catch (e) { errors.push(`${p}: ${e.message}`); }
 }
 let G;
 try { G = buildGraph({ mods, files, errors }); } catch (e) { console.log(`story map: the graph didn't build: ${e.stack}`); process.exit(1); }
