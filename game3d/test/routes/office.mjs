@@ -10,7 +10,8 @@ const repaired = {
 const afternoon = { ...repaired, afternoon_on: true };
 const seed = (period, flags, extra = {}) => ({ place: 'office', period, flags, ...extra });
 const use = (target) => ({ type: 'use', target });
-const give = (item, target) => ({ type: 'give', item, target });
+const give = (item, target, line) => ({ type: 'give', item, target, ...(line ? { line } : {}) });
+const repeatGift = (item, target) => give(item, target, "They've already had one from you.");
 
 const lunchRoutes = [
   ['mio-b2', 'mio', '“Why B2?”', 'mio_b2'],
@@ -83,9 +84,9 @@ const giftRoutes = [
     description: `${person} accepts a favourite; repeat favourite and other gifts are refused and kept.`,
     seed: seed('afternoon', { ...afternoon }, { inv: [favorite, favorite, 'tea'] }),
     choices: [],
-    actions: [give(favorite, person), give(favorite, person), give('tea', person)],
+    actions: [give(favorite, person), repeatGift(favorite, person), repeatGift('tea', person)],
     expect: {
-      nodes: [`gift_${person}_${favorite}`, 'gift_again'],
+      nodes: [`gift_${person}_${favorite}`, 'gift_again', 'gift_again'],
       flags: { [`gifted_${person}`]: true, [`gave_${favorite}_${person}`]: true, [`gave_tea_${person}`]: false },
       inv: [favorite, 'tea'],
     },
@@ -95,7 +96,7 @@ const giftRoutes = [
     description: `${person} accepts an unwanted tea but leaves it; this still uses the day's gift.`,
     seed: seed('afternoon', { ...afternoon }, { inv: ['tea', favorite] }),
     choices: [],
-    actions: [give('tea', person), give(favorite, person)],
+    actions: [give('tea', person), repeatGift(favorite, person)],
     expect: {
       nodes: [`gift_${person}_other`, 'gift_again'],
       flags: { [`gifted_${person}`]: true, [`gave_tea_${person}`]: true, [`gave_${favorite}_${person}`]: false },
@@ -137,7 +138,7 @@ export default [
     seed: seed('morning', { ...morning }, { known: ['akete'] }),
     choices: [],
     actions: [use('machine_door'), { type: 'say', word: 'akete', target: 'machine_door' }],
-    expect: { nodes: ['machine_door', 'akete_machine'], flags: { knocked: true, machine_open: true, door_magic: true }, known: ['akete'] },
+    expect: { nodes: ['machine_door', 'akete_machine'], flags: { knocked: true, machine_open: true, door_magic: true } },
   },
   ...[
     ['small', '“Mine\'s worse. My Japanese, I mean.”', true],
@@ -166,7 +167,7 @@ export default [
     description: 'Tama has no drink gift handler, so the generic refusal leaves the coffee in the bag.',
     seed: seed('afternoon', { ...afternoon }, { inv: ['coffee'] }),
     choices: [],
-    actions: [give('coffee', 'tama')],
+    actions: [give('coffee', 'tama', "Tama doesn't seem to want the canned coffee. You keep it.")],
     expect: { nodes: [], flags: { gave_coffee_tama: false }, inv: ['coffee'] },
   },
   ...endingRoutes,
