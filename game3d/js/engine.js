@@ -73,6 +73,8 @@ export function blob(size, opacity = 0.42, color = '#1d1a22') {
   m.rotation.x = -Math.PI / 2;
   m.position.y = 0.004;
   m.renderOrder = 1;
+  m.name = 'blob';
+  m.userData.noOutline = true; // a shadow, not part of the model: the hover outline skips it (main.js)
   return m;
 }
 
@@ -191,7 +193,7 @@ export class Walker {
 }
 
 // ---------- screen markers for people and things ----------
-// A small DOM tag that follows a 3D point: a round speech mark when idle, the name when close.
+// A small DOM pin that follows a 3D point: a circle with a symbol on a short line down to the person or thing.
 export class Markers {
   constructor(layer) {
     this.layer = layer;
@@ -228,8 +230,11 @@ export class Markers {
     const w = canvas.clientWidth,
       h = canvas.clientHeight,
       v = new THREE.Vector3();
-    // every usable thing on screen shows its small dot (Jørgen, 2026-09-29: "it should be EASY to see what can be
-    // interacted with"); the one in reach gets the stronger state (css/marks.css)
+    // every usable thing on screen shows its pin, a circle with a symbol on a short line down to it (Jørgen,
+    // 2026-09-29: "earlier you had a line and a circle with a symbol which was better"). Pins further from Eric are
+    // smaller and paler, and where two pins would overlap only the one nearer to Eric shows, so they never pile up
+    // over people (css/marks.css draws them)
+    const shown = [];
     for (const m of this.list) {
       const on = m.enabled && (typeof m.enabled !== 'function' || m.enabled());
       const vis = typeof m.enabled === 'function' ? m.enabled() : m.enabled;
@@ -237,8 +242,8 @@ export class Markers {
       if (!vis) continue;
       m.anchor(v);
       v.project(camera);
-      // kept on screen: clamped at the sides and bottom; with no room above (the pin sits 52 px over its target,
-      // under the HUD row at the top) the pin flips below the target instead
+      // kept on screen: clamped at the sides and bottom; with no room above (the pin sits up to 56 px over its target,
+      // under the HUD row at the top) the pin moves beside the head instead, never down over the face
       let sx = ((v.x + 1) / 2) * w,
         sy = ((1 - v.y) / 2) * h;
       // off screen: no marker squeezed into a corner (the goal has its own edge arrow)
@@ -250,10 +255,15 @@ export class Markers {
       const below = sy - 56 < top;
       m.el.classList.toggle('below', below);
       sx = Math.max(22, Math.min(w - 22, sx));
-      sy = below ? Math.max(sy, 8) : sy;
-      sy = Math.min(sy, h - (below ? 60 : 6));
-      m.el.style.transform = `translate(${sx}px, ${sy}px)`;
-      m.el.classList.toggle('flip', sx > w - 190); // tag on the left of the pin near the right edge
+      sy = below ? Math.max(sy, top + 20) : sy;
+      sy = Math.min(sy, h - (below ? 24 : 6));
+      // distance from Eric: full size within 3 m, down to 70% and a paler pin from 8 m on (scaled from its tip)
+      const s = m.spot ? m.spot() : null;
+      const d = s && playerPos ? Math.hypot(playerPos.x - s[0], playerPos.z - s[1]) : 0;
+      const k = near === m ? 0 : Math.max(0, Math.min(1, (d - 3) / 5));
+      m.el.style.transform = `translate(${sx}px, ${sy}px) scale(${(1 - 0.3 * k).toFixed(3)})`;
+      m.el.style.setProperty('--mo', (1 - 0.35 * k).toFixed(3));
+      m.el.classList.toggle('flip', sx > w - 90); // a pin beside the head goes on the left near the right edge
       if (m.labelIf) {
         const want = m.labelCond(m.labelIf.cond) ? m.labelIf.text : m.labelIf.other;
         if (want !== m.label) {
@@ -264,7 +274,17 @@ export class Markers {
       m.el.classList.toggle('near', near === m);
       const isGoal = !!(m.goal && m.goal());
       m.el.classList.toggle('goal', isGoal);
+      shown.push({ m, sx, sy, d, rank: near === m ? -2 : isGoal ? -1 : d });
       void on;
+    }
+    // overlapping pins: the one in reach, then the goal, then the nearest wins; the others hide until there's room
+    shown.sort((a, b) => a.rank - b.rank);
+    const kept = [],
+      gap = document.body.classList.contains('phone') ? 36 : 30;
+    for (const e of shown) {
+      const hit = kept.some((o) => Math.abs(o.sx - e.sx) < gap && Math.abs(o.sy - e.sy) < gap);
+      e.m.el.classList.toggle('crowded', hit);
+      if (!hit) kept.push(e);
     }
   }
 }

@@ -1,6 +1,7 @@
 import { createPlaceLifecycle } from './places/lifecycle.js';
 import { GLOBAL_HOOKS } from './narrative/hooks.js';
 import { installInteractions } from './gameplay/interactions.js';
+import { outlineMeshes } from './gameplay/highlight.js';
 import { PLACE_FILES, NEXT } from './places/definitions.js';
 import { assertRegistered } from './narrative/registration.js';
 import { needsLegacyOpening } from './narrative/legacy-opening.js';
@@ -234,9 +235,8 @@ function setComposer(place) {
   outline.visibleEdgeColor.set('#bff1ea');
   outline.hiddenEdgeColor.set('#000000');
   outline.edgeStrength = 5.0;
-  outline.edgeThickness = 1.0; // was 2.2: too faint to see on hover (Jørgen: "i want the MODEL ITSELF to get an outline") outline.edgeGlow = 0; outline.pulsePeriod = 0;
-  // after the place's beforeAO pass: the train's shadow proxy (a roof) hides there, and seen by the outline's depth
-  // mask it made every target count as behind a wall, so the train showed no outline at all
+  outline.edgeThickness = 1.0; // Jørgen: "i want the MODEL ITSELF to get an outline"
+  // after the place's beforeAO pass, where the train's roof proxy hides (else it masks every target on the train)
   composer.insertPass(outline, place.beforeAO ? 2 : 1);
   applyQuality();
 }
@@ -367,10 +367,10 @@ function updateOutline() {
     return;
   }
   const sel = [...new Set([game.near, !document.body.classList.contains('phone') && game.hover].filter(Boolean))];
-  const key = sel.map((m) => m.id).join(',') + (game.busy ? '|b' : '');
+  const key = sel.map((m) => m.id).join(',') + (game.busy ? '|b' : '') + ((performance.now() / 500) | 0);
   if (key === outlineKey) return;
   outlineKey = key;
-  outline.selectedObjects = game.busy ? [] : sel.flatMap(objsOf);
+  outline.selectedObjects = game.busy ? [] : outlineMeshes(sel.flatMap(objsOf));
 }
 // a tap while a scene plays out with no line waiting: hurry it along (ui.js calls this)
 game.skip = () => {
