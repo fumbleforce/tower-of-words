@@ -417,7 +417,7 @@ export default {
       { do: 'hide', id: 'bowl' },
     ],
     tama_ohayo: [
-      '> A slow blink.',
+      { do: 'emote', who: 'tama', kind: 'heart' },
       { say: 'guard', face: 'stern', overheard: true, emo: 'stern', text: '猫はいません。' },
     ],
     tama_matte: [

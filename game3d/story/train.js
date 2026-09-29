@@ -136,7 +136,7 @@ export default {
       { do: 'goal', text: '' },
       { do: 'cam', on: [1.6, -0.9], zoom: 1.6 },
       { do: 'bag', state: 'teeter' },
-      "> The train lurches. The woman's lunch bag slides to the edge of the seat and wobbles there.",
+      '> The train lurches.',
       { set: 'bag_wobble' },
       { do: 'cam', back: true },
     ],
@@ -232,7 +232,7 @@ export default {
     ohayo_cat: [
       { unset: 'cat_task' },
       { do: 'goal', text: '' },
-      '> A slow blink.',
+      { do: 'emote', who: 'tama', kind: 'heart' },
       { say: 'mio', emo: 'amused', face: 'smile', text: "See? She's fine with it." },
       { set: 'cat_done' },
       { do: 'goal', text: 'Talk to Mio when you like.' },
@@ -371,10 +371,10 @@ export default {
 
     // ------------------------------------------------------------------ things to poke
     tama: ['> She lets you scratch behind one ear, then goes back to watching the door.'],
-    ohayo_tama: ['> A slow blink.'],
+    ohayo_tama: [{ do: 'emote', who: 'tama', kind: 'heart' }],
     ohayo_aoi: ['> She gives you a quick nod without taking the phone from her ear.'],
     ohayo_reader: ['> He nods, still reading.'],
-    asleep: ['> He is fast asleep.'],
+    asleep: [{ do: 'emote', who: 'kuroda', kind: 'zzz' }],
     matte_tama: ['> She stops washing, one paw in the air, and stares at you. Then she carries on.'],
     hamada: ['> A sticky note on his briefcase says "12F 9:00!!"'],
     phone_girl: [
