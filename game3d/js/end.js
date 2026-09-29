@@ -18,7 +18,12 @@ function faceHTML(id, color, name, size = 56) {
   return `<span class="face" style="--c:${esc(color || '#8a93a3')};background-image:url('${src}');background-size:${(f.W * s).toFixed(1)}px ${(f.H * s).toFixed(1)}px;background-position:${(size / 2 - cx * s).toFixed(1)}px ${(size / 2 - cy * s).toFixed(1)}px" aria-hidden="true"></span>`;
 }
 
-export function endHTML(game, { photos = {}, outro } = {}) {
+// the day-2 hook as a closing card: the repair request Mio handed over (story `ticket`, with a default)
+function ticketHTML(t) {
+  if (!t) return '';
+  return `<section class="ticket" aria-label="Repair request"><p class="tno">${esc(t.no || 'Repair request')}</p><p class="ttl">${esc(t.title || '')}</p>${(t.lines || []).map((l) => `<p class="tl">${esc(l)}</p>`).join('')}</section>`;
+}
+export function endHTML(game, { photos = {}, outro, ticket } = {}) {
   const shots = ORDER.filter((p) => photos[p]).map((p) => `<figure class="shot"><img alt="" src="${photos[p].src}"><figcaption><b>${PLACE_NAMES[p]}</b><span>${esc(PERIOD_NAMES[photos[p].period] || '')}</span></figcaption></figure>`).join('');
   const met = [...sim.met].filter((id) => id !== 'eric');
   const people = met.map((id) => {
@@ -35,14 +40,20 @@ export function endHTML(game, { photos = {}, outro } = {}) {
       ${people ? `<section class="met"><h3>People you met</h3><ul class="people">${people}</ul></section>` : ''}
       ${ph.length || cm.length ? `<section class="words"><h3>Words you can use</h3>${ph.length ? `<ul class="wl">${ph.map(word).join('')}</ul>` : ''}${cm.length ? `<p class="sub2">Commands</p><ul class="wl cmds">${cm.map(word).join('')}</ul>` : ''}</section>` : ''}
     </div>
+    ${ticketHTML(ticket)}
     <footer>${outro ? `<p class="outro">${esc(outro)}</p>` : ''}<button type="button" class="again primary">Back to title</button></footer>
   </div>`;
 }
 
 export async function showEnd(game) {
-  const outro = (game.story && game.story.outro) || 'Tomorrow is day two.';
+  const S = game.story || {};
+  const outro = S.outro || 'Tomorrow: the 8:40, front car.';
+  const ticket = S.ticket || { no: 'Repair request #2', title: 'Monorail doors: sensor check', lines: ['Raised by: Amakawa Station', 'Handed to: Eric (from Mio, B2)', 'Tomorrow, the 8:40, front car.'] };
   document.body.classList.add('ended');
-  ui.showEnd(endHTML(game, { photos: (window.__shell && window.__shell.photos) || {}, outro }));
+  // the scene fades out first, then the card comes in (QA round 1: the card faded in over live play)
+  document.body.classList.add('ending');
+  await new Promise((r) => setTimeout(r, 700));
+  ui.showEnd(endHTML(game, { photos: (window.__shell && window.__shell.photos) || {}, outro, ticket }));
   const b = document.querySelector('#end .again');
   b.onclick = () => { document.body.classList.add('reloading'); setTimeout(() => location.reload(), 200); };
   setTimeout(() => b.focus({ preventScroll: true }), 700);

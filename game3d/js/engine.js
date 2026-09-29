@@ -266,6 +266,8 @@ export class Markers {
       // kept on screen: clamped at the sides and bottom; with no room above (the pin sits 52 px over its target,
       // under the HUD row at the top) the pin flips below the target instead
       let sx = ((v.x + 1) / 2) * w, sy = ((1 - v.y) / 2) * h;
+      // off screen: no marker squeezed into a corner (the goal has its own edge arrow)
+      if ((v.z > 1 || v.x < -1.02 || v.x > 1.02 || v.y < -1.02 || v.y > 1.02) && !(m.goal && m.goal())) { m.el.style.display = 'none'; continue; }
       const top = sx > w - 480 ? 64 : 12;   // the HUD row only covers the top right
       const below = sy - 56 < top; m.el.classList.toggle('below', below);
       sx = Math.max(22, Math.min(w - 22, sx)); sy = below ? Math.max(sy, 8) : sy; sy = Math.min(sy, h - (below ? 60 : 6));

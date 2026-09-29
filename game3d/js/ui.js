@@ -407,6 +407,7 @@ export const ui = {
     this.root = r;
     r.innerHTML = `
       <div id="marks"></div>
+      <div id="goal2" hidden aria-live="polite"><span class="t"></span></div>
       <div id="top">
         <button id="goal" type="button" hidden aria-label="Current goal"><span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 21V4"/><path d="M6 4.5h11l-2.5 4 2.5 4H6"/></svg></span><span class="t"></span><span class="hk" hidden aria-hidden="true">?</span></button>
         <div class="tr" id="hud">
@@ -499,6 +500,8 @@ export const ui = {
     g.setAttribute('aria-label', 'Goal: ' + g.querySelector('.t').textContent);
     if (text !== was) { g.classList.remove('pop'); void g.offsetWidth; g.classList.add('pop'); }
   },
+  // a side goal: a second, smaller line under the main one (QA round 1: a side poke replaced the main goal)
+  sideGoal(text) { const g = $('#goal2'); if (!g) return; this.sideText = text || ''; if (!text) { g.hidden = true; return; } g.hidden = false; g.querySelector('.t').innerHTML = lineHTML(text, { count: false }); },
   releaseGoal() { if (this._heldGoal) { const t = this._heldGoal; this._heldGoal = ''; this.goal(t); } },
   setSayKey(code) { const k = $('#sayBtn .key'); if (k) k.textContent = keyLabel(code || 'KeyQ'); },
   refreshWords() {
