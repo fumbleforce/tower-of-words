@@ -57,7 +57,7 @@ test('real factory mutations fail CPU registration checks', () => {
   const mutations = [
     ['game3d/js/places/office.js', 'lunchSit:', 'lunchSit2:'],
     ['game3d/js/places/train.js', 'by_aoi:', 'missing_spot:'],
-    ['game3d/js/main.js', 'gate: lobbyPlace, office: officePlace', 'gate: officePlace, office: lobbyPlace'],
+    ['game3d/js/main.js', 'gate: lobbyPlace, forecourt: forecourtPlace', 'gate: forecourtPlace, forecourt: lobbyPlace'],
     ['game3d/js/places/train.js', '...PLACE_DETAILS.train.things.cup', '...PLACE_DETAILS.train.things.rack'],
   ];
   for (const [file, before, after] of mutations) {

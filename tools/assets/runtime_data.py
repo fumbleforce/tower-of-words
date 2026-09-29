@@ -7,7 +7,9 @@ import subprocess
 
 ROOT = Path(__file__).resolve().parents[2]
 CONST = {'lobby': {'BZ': -0.55, 'Z': 4.5, 'X': 6.3}, 'office': {'CN': 0.2, 'CS': 2.4, 'Z0': -6.4}, 'train': {'LZ': 1.2, 'LX': 4.0, 'DOOR_X': 3.25}}
-PLACES = {'train': 'Train', 'gate': 'Lobby and gate', 'office': 'B2 office'}
+# Library labels for every place the game registers (game3d/js/places/definitions.js PLACE_FILES), plus the lift,
+# which rides between places. load_runtime_data() refuses a registered place that has no label here.
+PLACES = {'train': 'Train', 'gate': 'Station security room', 'forecourt': 'Forecourt', 'lift': 'Lift', 'office': 'B2 office'}
 
 
 def num(expr, consts):
@@ -29,7 +31,7 @@ def prop_entry(prop):
                  view={'type': 'room', 'room': room}, tags=['in game', kind])
     if prop['moving']:
         return entry
-    consts = CONST[room]
+    consts = CONST.get(room, {})
     args = prop['anchor']['args']
     anchor = [num(a, consts) for a in args] if len(args) == 3 else [None]
     spot = None
@@ -50,6 +52,10 @@ def load_runtime_data():
     result = subprocess.run(['node', str(ROOT / 'tools/assets/runtime-data.mjs')], cwd=ROOT,
                             check=True, capture_output=True, text=True, timeout=30)
     data = json.loads(result.stdout)
+    unnamed = sorted(set(data['places']) - set(PLACES))
+    if unnamed:
+        raise RuntimeError(f"place(s) {', '.join(unnamed)} are registered in game3d/js/places/definitions.js "
+                         'but have no label in tools/assets/runtime_data.py PLACES')
     return {'portraits': data['portraits'], 'props': [prop_entry(prop) for prop in data['props']], 'source': data['source']}
 
 

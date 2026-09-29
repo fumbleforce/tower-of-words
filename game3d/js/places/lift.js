@@ -29,17 +29,6 @@ import { clipLiftMaterial, isolateLiftMaterials } from './lift-materials.js';
 // front of the landing's frame and indicator; hole: the doorway in that wall; wallH: that wall's height;
 // floor: the floor the place is on; out: where he stands outside the doors.
 const SITES = {
-  gate: {
-    x: -1.0,
-    zBack: -4.66,
-    zFront: -4.36,
-    hole: [-1.62, -0.38],
-    wallH: 1.9,
-    floor: '1',
-    out: [-1.0, -3.9],
-    cap: true,
-    shaft: true,
-  },
   office: { x: -5.45, zBack: -3.48, zFront: -3.22, hole: [-5.95, -4.95], wallH: 1.45, floor: 'B2', out: [-5.45, -2.4] },
 };
 const FLOORS = ['B2', 'B1', '1', '2', '3', '4', '5'];
@@ -515,7 +504,7 @@ const cars = new Map(); // place -> lift
 let looping = false;
 
 export function attachLift(game, place) {
-  const site = SITES[place.name];
+  const site = place.liftSite || SITES[place.name];
   if (!site || cars.has(place)) return;
   game.renderer.localClippingEnabled = true;
   hookDoors(game);
@@ -525,15 +514,6 @@ export function attachLift(game, place) {
   place.space.traverse((o) => {
     if (!o.isGroup || o === car.g) return;
     const p = o.getWorldPosition(new THREE.Vector3());
-    // the neighbour lift's stand-in car pokes out of the wall at QHD: it goes too
-    if (place.name === 'gate' && Math.abs(p.x - 1.0) < 0.02 && Math.abs(o.position.z + 0.42) < 0.01) o.visible = false;
-    if (
-      place.name === 'gate' &&
-      Math.abs(p.x - site.x) < 0.02 &&
-      Math.abs(p.z - (site.zBack - 0.42 + 0.18)) < 0.05 &&
-      Math.abs(o.position.z + 0.42) < 0.01
-    )
-      o.visible = false;
     if (place.name === 'office' && Math.abs(p.x - site.x) < 0.02 && Math.abs(p.z + 3.975) < 0.03) o.visible = false;
     // the office stairwell runs into the car's left side: narrow it to x -6.75..-6.25
     if (place.name === 'office' && Math.abs(p.x + 6.42) < 0.02 && Math.abs(p.z + 4.0) < 0.02 && !o.userData.liftFit) {
@@ -617,7 +597,7 @@ export function attachLift(game, place) {
   cars.set(place, L);
   setCap(L, 1);
   // the car is in the place from the start; its lid hides it in the lobby
-  if (place.name === 'gate') {
+  if (place.name === 'forecourt') {
     place.tripOut = (g, slot) => rideOut(g, L, slot);
   }
   if (place.name === 'office') {

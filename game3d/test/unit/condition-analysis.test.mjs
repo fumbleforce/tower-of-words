@@ -36,7 +36,7 @@ test('analysis never accepts expressions rejected by shared character or compila
 test('opaque trigger expressions retain reads without inventing missing prerequisites', () => {
   const graph = buildGraph({ mods: { train: {
     on: { 'talk:mio': { node: 'sample', if: 'n | 1' } }, nodes: { sample: ['Hello.'] },
-  }, gate: { nodes: {} }, office: { nodes: {} } } });
+  }, gate: { nodes: {} }, forecourt: { nodes: {} }, office: { nodes: {} } } });
   const node = graph.nodes.get('train:sample');
   assert(node, 'fixture node must be present');
   assert.equal(node.entries[0].req.size, 0);

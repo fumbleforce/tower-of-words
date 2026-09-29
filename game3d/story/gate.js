@@ -228,7 +228,7 @@ export default {
       { wait: 700 },
       { do: 'gesture', who: 'guard', kind: 'point' },
       { do: 'face', who: 'guard', to: 'lift' },
-      { do: 'goal', text: 'Take the lift down to B2.' },
+      { do: 'goal', text: 'Leave the station and walk to head office.' },
     ],
     guard_after: [
       { if: 'gate_magic', then: [
@@ -350,7 +350,7 @@ export default {
         { say: 'guard', face: 'amused', overheard: true, emo: 'warm', text: 'どうぞ、どうぞ。' },
       ] },
       { say: 'eric', emo: 'tired', text: 'Arigatō.' },
-      { do: 'goal', text: 'Take the lift down to B2.' },
+      { do: 'goal', text: 'Leave the station and walk to head office.' },
     ],
 
     // wrong words during the jam, answered honestly

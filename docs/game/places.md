@@ -1,6 +1,6 @@
 # Places
 
-Day 1 has four places: the monorail (`train`), Honsha station’s security room with the gate (`gate`), the lift (`lift`) and IT support on B2 (`office`). For each: its things and their labels, spots, seats, zones, who is there in each period, and its small moments; also places decided but not built, and how you get between places. Last checked against the game on 2026-09-29.
+Day 1 has five places: the monorail (`train`), Honsha station’s security room with the gate (`gate`), the station forecourt and head-office entrance (`forecourt`), the lift (`lift`) and IT support on B2 (`office`). For each: its things and their labels, spots, seats, zones, who is there in each period, and its small moments; also places decided but not built, and how you get between places. Forecourt route added on 2026-09-30.
 
 Elsewhere: the island as a whole is in [setting.md](setting.md); the people in [cast.md](cast.md); what happens in a place as part of a storyline is in [stories/](stories/); how places look (palette, light, style) in [art-and-sound.md](art-and-sound.md). The hooks a story can call in each place (doors, the gate, the copier) are in game3d/story/FORMAT.md.
 
@@ -12,7 +12,6 @@ The company city has dorms, a canteen, shops, a bar and a university ([setting.m
 
 The picked full-island layout is [island-map-4](../../reviews/island-map-4/review.json). Only the day-1 route is to be built, one chunk at a time, using the game's existing palette rather than the map's saturated colours. The following chunks replace the earlier single outdoor `path` proposal.
 
-- Station forecourt and head office entrance (`forecourt`): the open-air court between the separate Honsha station/security building and the head office tower, with a short walk between their facing ground-floor doors. Keep the station's blue-roof platform on the west and the tower on the east, following the map. Things: station entrance, head office entrance, bicycle racks and a low planted edge. Proposed spots: `station_entry`, `office_entry`, `plaza_exit`. The head office's small entrance lobby holds the existing lift to B2; no second security gate. Nearby office buildings stay background massing. This is the first chunk to build.
 - Fountain plaza (`plaza`): the next walkable chunk east of the office forecourt. A direct pedestrian lane follows the near edge of the central fountain toward the dorms. Things: fountain, benches and a planted verge; proposed spots: `office_entry`, `fountain_edge`, `dorm_exit`. Covered shop roofs and fronts remain south of the route, with the canteen behind the fountain. Their interiors are not part of day 1.
 - Dorm courtyard (`dorm_court`): the small entrance court on the west side of the map's eastern apartment cluster. Things: the dorm entry, bicycle shelter, mailboxes and planting; proposed spots: `plaza_entry`, `dorm_entry`. Laundry and sento can be background frontages. The courtyard leads through a short shared passage to Eric's room; no apartment district simulation.
 - Eric's dorm room (`dorms`): the decided outlook is the nearby bare concrete wall in [cast.md](cast.md). Keep a clear aisle from the room entry to that window, with a single bed, desk and his delivered boxes. Proposed spots: `room_entry`, `window_front`. The exact furnishings and thresholds are to be staged within this final chunk; the rejected dorm-b option is not the room layout approval.
@@ -22,9 +21,8 @@ The picked full-island layout is [island-map-4](../../reviews/island-map-4/revie
 There are no cuts to black (Jørgen, 2026-09-28: "elegant, continuous transitions"). Each move is one trip the player watches. One line per trip: from, to, how, then what the player sees; a trip to or from a planned place is planned too. The bible draws these as the places diagram (http://127.0.0.1:8771/bible/#place-map).
 
 - `train` → `gate`, walk: Eric steps off onto the platform, follows the covered walkway and enters Honsha station's security room through its glass doors.
-- `gate` → `lift`, walk: the current runtime still goes directly from the gate room into its attached lift. The first outdoor landing replaces this shortcut with the two following trips.
-- `gate` → `forecourt`, walk: planned exit through the station security room's island-side doors into the open court. Eric stays visible while the camera follows him outside.
-- `forecourt` → `lift`, walk: planned short crossing to the head office entrance, then into its small lobby and the existing B2 lift. Both entrance doors and the open-air gap must read on screen.
+- `gate` → `forecourt`, walk: exit through the station security room's island-side doors into the open court. Eric stays visible while the camera follows him outside.
+- `forecourt` → `lift`, walk: short crossing to the head office entrance, then into its small lobby and the existing B2 lift. Both entrance doors and the open-air gap must read on screen.
 - `lift` → `office`, lift: the camera stays inside the car for the whole ride. The floor display counts from 1; someone has pressed 5, where the two from Sales get out; then down to B2. The doors open on the B2 lift landing.
 - `office` → `lift`, walk: planned return from B2 into the existing lift after work, keeping Eric visible through its doors.
 - `lift` → `forecourt`, lift then walk: planned return to head office floor 1; Eric walks through its entrance lobby and out into the same forecourt.
@@ -102,9 +100,9 @@ Planned passenger revisions, awaiting [train-discoveries-1](../../reviews/train-
 
 ## Honsha station security room (`gate`)
 
-Honsha station's security room, in the muted palette ([art-and-sound.md](art-and-sound.md)). About 12.6 wide and 9 deep, glass entrance doors at the front. A security barrier runs across the middle with two card readers either side of a scanner arch with two glass flaps and a small head-count screen. The guard's desk sits in the barrier line on the right; the visitor counter with the visitor book and a lost-and-found shelf on the left; benches either side; posters and a notice screen on the back wall, where the lift bank is. Office workers walk in, tap through and take the lifts on their own (not tappable); their number follows the story (a jammed gate means a queue, waiting by the readers with their phones out). One of them carries a cake box.
+Honsha station's security room, in the muted palette ([art-and-sound.md](art-and-sound.md)). About 12.6 wide and 9 deep, glass entrance doors at the front. A security barrier runs across the middle with two card readers either side of a scanner arch with two glass flaps and a small head-count screen. The guard's desk sits in the barrier line on the right; the visitor counter with the visitor book and a lost-and-found shelf on the left; benches either side; posters and a notice screen on the back wall, beside the open exit to the forecourt. Office workers walk in, tap through and leave toward head office on their own (not tappable); their number follows the story (a jammed gate means a queue, waiting by the readers with their phones out). One of them carries a cake box.
 
-The gate stays in this room, as Jørgen picked in [gate-location](../../reviews/gate-location/review.json). Its geometry stays as built. The direct lift attachment is still the current runtime; the decided plan replaces that exit with a walk outside to the separate head office building. The map is picked; this move is the first outdoor chunk to build. No new gate dialogue or extra security stop is proposed.
+The gate stays in this room, as Jørgen picked in [gate-location](../../reviews/gate-location/review.json). Its mechanism and layout stay as built. The former lift bank is now an open exit to the forecourt; the lift is inside the separate head office. The internal `lift`, `lift_front` and `to_lift` ids remain for saved-game compatibility.
 
 ### Things
 
@@ -123,7 +121,7 @@ The gate stays in this room, as Jørgen picked in [gate-location](../../reviews/
 | `bench_r` | Bench | Right bench, where Eric waits for nine. |
 | `poster_l` | Poster | "PEOPLE. IDEAS. PROGRESS." |
 | `poster_r` | Poster | The same. |
-| `lift` | Lift | The lift bank. |
+| `lift` | Station exit | Open doorway to the forecourt, beyond the security gate. |
 | `entrance` | Entrance | The glass doors. |
 | `plant` | Plant | A plant. |
 | `bowl` | Tama's bowl | By the guard's desk. |
@@ -162,9 +160,51 @@ The lobby is played in the early morning, before nine.
 | `poster` | Talk to a poster | "PEOPLE. IDEAS. PROGRESS." |
 | `noop` | – | An empty node for choices that do nothing. |
 
+## Station forecourt and head office entrance (`forecourt`)
+
+The first outdoor chunk of the picked island-map-4 layout (Jørgen, 2026-09-29). Honsha station is on the west, with its blue-roof platform behind it; the separate head-office entrance is on the east. An open pedestrian court connects their doors. Low planting and bicycle racks border the walk. The office entrance reveals a short cutaway lobby with the existing lift to B2 and no second security gate. Nearby buildings are background massing. Materials and lighting use the existing muted game palette.
+
+Eric walks out of the station, crosses the court under player control, and walks into the lift. The return trip and onward path to the fountain plaza are still to build.
+
+### Things
+
+| Id | Label | What it is |
+|---|---|---|
+| `station_exit` | Station | The station's island-side doorway, behind Eric as he enters the court. |
+| `office_entrance` | Head office | The separate head-office entrance and short lift lobby. |
+| `lift` | Lift to B2 | The lift inside head office. |
+
+### Spots
+
+`station_exit`, `office_entrance`, `lift_front`
+
+### Seats
+
+None.
+
+### Zones
+
+`lift_front`
+
+### Who's there when
+
+Nobody lives here in this first outdoor chunk. The two from Sales appear inside the lift during the ride.
+
+| Id | Usually | Schedule |
+|---|---|---|
+| `mio` | Hidden (she ran ahead to a server). | – |
+
+### Small moments
+
+| Nodes | When | What happens |
+|---|---|---|
+| `outside` | Arrive from the station | The goal points to the head-office lift. |
+| `head_office` | Use the head-office entrance | The goal points inside to the B2 lift. |
+| `to_b2` | Reach or use the lift | Eric boards the existing watched lift ride. |
+
 ## The lift (`lift`)
 
-A small lit car, the same in the lobby (floor 1) and on B2. The display counts floors: B2, B1, 1 to 5 in the ride. No things of its own; the ride's lines are in the [`emi-budget`](stories/emi-budget.md) storyline.
+A small lit car, the same inside head office at the forecourt (floor 1) and on B2. The display counts floors: B2, B1, 1 to 5 in the ride. No things of its own; the ride's lines are in the [`emi-budget`](stories/emi-budget.md) storyline.
 
 ## IT support, B2 (`office`)
 

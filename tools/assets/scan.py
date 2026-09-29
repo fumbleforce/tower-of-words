@@ -29,7 +29,7 @@ import sys
 import time
 from datetime import datetime
 
-from runtime_data import load_runtime_data, register_runtime_assets
+from runtime_data import PLACES, load_runtime_data, register_runtime_assets
 
 # Exercise the exact declaration/preview reads without scanning directories or writing assets.json.
 RUNTIME = load_runtime_data()
@@ -65,7 +65,6 @@ KINDS = {
     'icon': 'UI icons',
     'style': 'Style presets',
 }
-PLACES = {'train': 'Train', 'gate': 'Lobby and gate', 'lift': 'Lift', 'office': 'B2 office'}
 FACT_STATUS = {'approved': 'approved', 'review': 'provisional', 'draft': 'candidate', 'open': 'candidate',
                'rejected': 'rejected', 'legacy': 'legacy'}
 
@@ -520,7 +519,8 @@ latest = rounds[-1] if rounds else None
 ROOMS = [
     ('train', 'Monorail carriage', 'train', 'train.png', {'type': 'room', 'room': 'train'}, 'game3d/js/train/car.js buildCar() and places/train.js'),
     ('platform', 'Honsha platform', 'train', 'platform.png', None, 'places/train.js (the arrival)'),
-    ('gate', 'Lobby and security gate', 'gate', 'gate.png', {'type': 'room', 'room': 'lobby'}, 'game3d/js/scenes/lobby.js buildLobby() and places/lobby.js'),
+    ('gate', 'Station security room', 'gate', 'gate.png', {'type': 'room', 'room': 'lobby'}, 'game3d/js/scenes/lobby.js buildLobby() and places/lobby.js'),
+    ('forecourt', 'Forecourt', 'forecourt', 'forecourt.png', {'type': 'room', 'room': 'forecourt'}, 'game3d/js/scenes/forecourt.js buildForecourt() and places/forecourt.js'),
     ('lift', 'Lift car', 'lift', 'lift.png', None, 'game3d/js/places/lift.js attachLift()'),
     ('office', 'B2 IT support floor', 'office', 'office.png', {'type': 'room', 'room': 'office'}, 'game3d/js/scenes/office.js buildOffice() and places/office.js'),
 ]

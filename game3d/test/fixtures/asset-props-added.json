@@ -1,5 +1,74 @@
 [
   {
+    "id_": "prop/forecourt/lift",
+    "kind": "prop",
+    "name": "Lift to B2",
+    "paths": [
+      "game3d/js/places/forecourt.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "forecourt.js things.lift",
+    "place": "forecourt",
+    "used": [
+      "Forecourt: tap target 'Lift to B2'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "forecourt"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/forecourt/office_entrance",
+    "kind": "prop",
+    "name": "Head office",
+    "paths": [
+      "game3d/js/places/forecourt.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "forecourt.js things.office_entrance",
+    "place": "forecourt",
+    "used": [
+      "Forecourt: tap target 'Head office'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "forecourt"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/forecourt/station_exit",
+    "kind": "prop",
+    "name": "Station",
+    "paths": [
+      "game3d/js/places/forecourt.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "forecourt.js things.station_exit",
+    "place": "forecourt",
+    "used": [
+      "Forecourt: tap target 'Station'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "forecourt"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
     "id_": "prop/gate/bowl",
     "kind": "prop",
     "name": "Tama's bowl",
@@ -11,7 +80,7 @@
     "source": "lobby.js things.bowl; geometry in scenes/lobby.js",
     "place": "gate",
     "used": [
-      "Lobby and gate: tap target 'Tama's bowl' (no marker)"
+      "Station security room: tap target 'Tama's bowl' (no marker)"
     ],
     "view": {
       "type": "room",

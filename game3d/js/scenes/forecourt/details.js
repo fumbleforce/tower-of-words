@@ -1,0 +1,107 @@
+// Small outdoor fittings. Shared prop materials and low-sided geometry keep the court inexpensive.
+import * as THREE from 'three';
+import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
+import { PAL, mat, rbox, sh, textTexture, plane } from '../../props.js';
+
+export function boxes(parts, color) {
+  const geometries = parts.map(([w, h, d, x, y, z]) => new THREE.BoxGeometry(w, h, d).translate(x, y + h / 2, z));
+  const mesh = sh(new THREE.Mesh(mergeGeometries(geometries), mat(color)));
+  geometries.forEach((g) => g.dispose());
+  return mesh;
+}
+
+export function sign(label, width = 1.6, height = 0.25) {
+  const texture = textTexture(
+    (ctx, w, h) => {
+      ctx.fillStyle = '#454d57';
+      ctx.fillRect(0, 0, w, h);
+      ctx.fillStyle = '#e1e3df';
+      ctx.font = '600 34px sans-serif';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(label, w / 2, h / 2, w - 24);
+    },
+    512,
+    80,
+  );
+  return plane(width, height, texture);
+}
+
+export function planter(length) {
+  const group = new THREE.Group();
+  group.add(rbox(length, 0.25, 0.65, '#858a87', { seg: 1, r: 0.025 }));
+  group.add(rbox(length - 0.12, 0.025, 0.53, PAL.soil, { y: 0.25, r: 0.01 }));
+  for (let i = 0; i < Math.ceil(length / 0.45); i++) {
+    const shrub = sh(new THREE.Mesh(new THREE.IcosahedronGeometry(0.3, 0), mat(PAL.leaf[i % PAL.leaf.length])));
+    shrub.position.set(-length / 2 + 0.25 + i * 0.43, 0.43, Math.sin(i * 2) * 0.07);
+    shrub.scale.set(1, 0.68 + (i % 3) * 0.07, 0.78);
+    group.add(shrub);
+  }
+  return group;
+}
+
+function bar(a, b, radius, color) {
+  const from = new THREE.Vector3(...a),
+    to = new THREE.Vector3(...b);
+  const mesh = sh(new THREE.Mesh(new THREE.CylinderGeometry(radius, radius, from.distanceTo(to), 6), mat(color)));
+  mesh.position.copy(from).add(to).multiplyScalar(0.5);
+  mesh.quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), to.sub(from).normalize());
+  return mesh;
+}
+
+export function bicycle(color) {
+  const group = new THREE.Group();
+  // The two triangular frame sections and a small rack distinguish parked bikes at game scale.
+  for (const x of [-0.38, 0.38]) {
+    const wheel = sh(new THREE.Mesh(new THREE.TorusGeometry(0.25, 0.028, 4, 12), mat(PAL.charcoal)));
+    wheel.position.set(x, 0.28, 0);
+    group.add(wheel);
+    group.add(bar([x - 0.22, 0.28, 0], [x + 0.22, 0.28, 0], 0.008, PAL.metal));
+    group.add(bar([x, 0.06, 0], [x, 0.5, 0], 0.008, PAL.metal));
+  }
+  const points = [
+    [-0.38, 0.28, 0],
+    [-0.08, 0.59, 0],
+    [0.04, 0.28, 0],
+    [0.28, 0.65, 0],
+    [0.38, 0.28, 0],
+  ];
+  for (const [a, b] of [
+    [0, 1],
+    [1, 2],
+    [2, 0],
+    [1, 3],
+    [3, 2],
+    [3, 4],
+  ]) {
+    group.add(bar(points[a], points[b], 0.018, color));
+  }
+  group.add(bar([-0.08, 0.54, 0], [-0.1, 0.73, 0], 0.018, PAL.metal));
+  group.add(bar([0.28, 0.63, 0], [0.24, 0.82, 0], 0.016, PAL.metal));
+  group.add(bar([0.24, 0.82, -0.13], [0.24, 0.82, 0.13], 0.019, PAL.dark));
+  group.add(
+    rbox(0.2, 0.045, 0.13, PAL.charcoal, {
+      x: -0.12,
+      y: 0.7,
+      r: 0.012,
+      seg: 1,
+    }),
+  );
+  group.add(rbox(0.3, 0.025, 0.14, PAL.metal, { x: -0.38, y: 0.56, r: 0.008, seg: 1 }));
+  group.rotation.x = -0.09;
+  return group;
+}
+
+export function openDoor() {
+  const group = new THREE.Group();
+  for (const side of [-1, 1]) {
+    group.add(rbox(0.07, 1.75, 0.16, PAL.doorFrame, { x: side * 0.86, seg: 1 }));
+    // Leaves parked beside the opening, with opaque glazing like the existing lobby.
+    group.add(rbox(0.54, 1.65, 0.045, PAL.doorFrame, { x: side * 1.15, seg: 1 }));
+    group.add(rbox(0.46, 1.38, 0.055, '#84969f', { x: side * 1.15, y: 0.17, seg: 1 }));
+    group.add(rbox(0.025, 0.28, 0.07, PAL.metal, { x: side * 0.95, y: 0.62, seg: 1 }));
+  }
+  group.add(rbox(1.8, 0.1, 0.18, PAL.doorFrame, { y: 1.7, seg: 1 }));
+  group.add(rbox(1.65, 0.012, 0.22, PAL.metal, { y: 0.003, seg: 1, r: 0.003 }));
+  return group;
+}

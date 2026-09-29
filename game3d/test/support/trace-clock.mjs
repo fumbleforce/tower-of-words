@@ -42,7 +42,7 @@ export async function installTraceClock(page, { wallTimeoutMs = 230000, log = co
       // travel loads transitions outside game.prepared and could otherwise let
       // an extra movement frame run while its module arrives over the network.
       await guard(() => page.evaluate(async () => {
-        await Promise.all(['train', 'gate', 'office', 'transitions'].map(name => window.__game.runner.load(name)));
+        await Promise.all(['train', 'gate', 'forecourt', 'office', 'transitions'].map(name => window.__game.runner.load(name)));
       }));
       await guard(() => page.waitForLoadState('networkidle', { timeout: 30000 }));
       log('trace clock: initial assets and story modules ready');

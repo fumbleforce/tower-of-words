@@ -11,7 +11,9 @@ export default {
     with: [],
   },
 
-  gate_to_office: {
+  gate_to_forecourt: { walk: [], arrive: [], with: [] },
+
+  forecourt_to_office: {
     ride: [
       { do: 'liftDoors', state: 'closed' },
       '> Someone has pressed 5.',

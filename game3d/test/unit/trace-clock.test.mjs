@@ -25,7 +25,7 @@ class Page extends EventEmitter {
       } } };
     this.clock = { install: async () => {}, pauseAt: async () => {},
       runFor: async ticks => {
-        assert.deepEqual(page.loaded, ['train', 'gate', 'office', 'transitions']);
+        assert.deepEqual(page.loaded, ['train', 'gate', 'forecourt', 'office', 'transitions']);
         page.advances.push(ticks);
       } };
   }

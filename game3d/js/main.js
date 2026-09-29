@@ -1,3 +1,5 @@
+import { title } from './ui/title.js';
+import { migrateForecourtSave } from './places/forecourt-save.js';
 import { createPlaceLifecycle } from './places/lifecycle.js';
 import { GLOBAL_HOOKS } from './narrative/hooks.js';
 import { installInteractions } from './gameplay/interactions.js';
@@ -22,11 +24,12 @@ import { installPresentationHooks } from './narrative/hooks/presentation.js';
 import { installGesturesHooks } from './narrative/hooks/gestures.js';
 import { installKotodamaHooks } from './narrative/hooks/kotodama.js';
 import { installProgressionHooks } from './narrative/hooks/progression.js';
-import { ui, unlockAudio, sfx } from './ui.js';
+import { ui, unlockAudio } from './ui.js';
 import { known, SAYABLE } from './lang.js';
 import { Runner, flags } from './runner.js';
 import { trainPlace } from './places/train.js';
 import { lobbyPlace } from './places/lobby.js';
+import { forecourtPlace } from './places/forecourt.js';
 import { officePlace } from './places/office.js';
 import { showEnd } from './end.js';
 import { installSim, sim, stepAmbient, save, loadSave, restore, clearSave } from './sim.js';
@@ -50,7 +53,7 @@ let quality = tierNow();
 ui.build();
 if (CAP) document.body.classList.add('cap');
 
-const PLACES = { train: trainPlace, gate: lobbyPlace, office: officePlace };
+const PLACES = { train: trainPlace, gate: lobbyPlace, forecourt: forecourtPlace, office: officePlace };
 assertRegistered(Object.keys(PLACE_FILES), PLACES, 'place factories');
 
 // ---------- shared game state ----------
@@ -695,7 +698,7 @@ async function boot() {
   requestAnimationFrame(frame);
   const start = Q.get('place') || 'train';
   const showTitle = start === 'train' && !Q.has('skip') && !TEST && !CAP;
-  const saved = showTitle ? loadSave() : null;
+  const saved = showTitle ? migrateForecourtSave(loadSave()) : null;
   game.saveEnabled = !showTitle;
   await enter(start, { persist: !showTitle });
   if (CAP) {
@@ -762,24 +765,6 @@ async function boot() {
   await game.place.onEnter?.();
   startScene(start);
   if (NEXT[start]) setTimeout(() => prepare(NEXT[start]), 1500);
-}
-
-async function title(saved) {
-  const t = document.getElementById('title');
-  t.hidden = false;
-  const cont = t.querySelector('.cont');
-  cont.hidden = !(saved && saved.place);
-  const pick = await new Promise((res) => {
-    t.querySelector('.go').addEventListener('click', () => res('new'), { once: true });
-    cont.addEventListener('click', () => res('continue'), { once: true });
-  });
-  unlockAudio();
-  sfx('tap');
-  t.classList.add('out');
-  setTimeout(() => {
-    t.hidden = true;
-  }, 700);
-  return pick;
 }
 
 boot().catch((e) => {
