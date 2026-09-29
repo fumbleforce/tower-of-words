@@ -10,12 +10,17 @@
 import * as THREE from 'three';
 import { loadLibrary, buildCharacter } from '../recipe.js';
 import { dressed } from './base.js';
+import { disposeCharacter } from '../dispose.js';
 
 const Q = new URLSearchParams(location.search), TAG = Q.get('v') || '', ONLY = Q.get('only');
+const CLEAN = Q.get('clean');
+const FIT = Q.get('fit');
 const lib = await loadLibrary();
+lib.retargetRest = Q.get('retarget') === 'rest';
+if (CLEAN) lib.anims.neutral = 'candidates/idle-neutral.glb';
 const renderer = new THREE.WebGLRenderer({ antialias: true, preserveDrawingBuffer: true });
 renderer.outputColorSpace = THREE.SRGBColorSpace; renderer.shadowMap.enabled = true;
-window.__files = {}; window.__bin = {};
+window.__files = {}; window.__bin = {}; window.__durations = {};
 const PR = 2;
 
 function scene(floor = false) {
@@ -40,6 +45,8 @@ function view(objs, { yaw = 0, elev = 4, dist = 3.2, tgt = [0, 0.5, 0], fov = 22
   cam.lookAt(t); renderer.render(s, cam);
   for (const o of objs) s.remove(o);
   const c = document.createElement('canvas'); c.width = w * PR; c.height = h * PR; c.getContext('2d').drawImage(renderer.domElement, 0, 0);
+  // Models were detached above; release only this shot's floor/lights/shadow map.
+  s.traverse(o => { if (o.geometry) o.geometry.dispose(); if (o.material) o.material.dispose(); if (o.shadow) o.shadow.dispose(); });
   return c;
 }
 // a sheet: rows of [canvas, caption]; a title on top
@@ -64,6 +71,7 @@ function sheet(name, title, rows) {
 function pose(ch, clip, t) {
   ch.mixer.stopAllAction(); ch.cur = null;
   if (!clip) { ch.skeleton.pose(); ch.root.updateMatrixWorld(true); return; }
+  if (CLEAN && clip === 'idle') clip = 'neutral';
   ch.play(clip, 0); if (clip !== 'idle') ch.actions[clip].time = t; ch.mixer.update(0); ch.update(0); ch.root.updateMatrixWorld(true);
 }
 const walkT = (ch, f) => f * ch.actions.walk.getClip().duration;
@@ -72,14 +80,19 @@ const bone = (ch, b) => { ch.root.updateMatrixWorld(true); return ch.bones[b].ge
 const IDS = ['mio', 'eric'], NAME = { mio: 'Mio', eric: 'Eric' };
 const ALL = { mio: ['hair', 'top', 'bottom', 'shoes'], eric: ['hair', 'top', 'bottom', 'shoes', 'stubble'] };
 const C = {};
+window.__sources = ['tools/creator/base/shots.html', 'tools/creator/base/base.js', 'tools/creator/recipe.js', 'tools/creator/retarget.js', 'art/parts/library.json', 'art/parts/anim/idle.glb', 'art/parts/anim/walk.glb'];
+if (CLEAN) window.__sources.push('art/parts/candidates/idle-neutral.glb');
 for (const id of IDS) {
-  const base = id + '-base' + TAG;
+  const base = CLEAN ? `clean-${id}-${CLEAN}` : id + '-base' + TAG;
+  const fit = FIT ? `${base}-${FIT}-layers` : null;
   C[id] = {
     bare: await dressed(lib, id, { base }),
-    hair: await dressed(lib, id, { base, layers: ['hair', ...(id === 'eric' ? ['stubble'] : [])] }),
-    full: await dressed(lib, id, { base, layers: ALL[id] }),
+    hair: await dressed(lib, id, { base, fit, layers: ['hair', ...(id === 'eric' ? ['stubble'] : [])] }),
+    full: await dressed(lib, id, { base, fit, layers: ALL[id] }),
     orig: await buildCharacter(lib, { body: id, parts: Object.fromEntries(['hair', 'head', 'top', 'bottom', 'shoes', 'hands'].map((s) => [s, `${id}-${s}`])), height: 1 }),
   };
+  window.__sources.push(`art/parts/base/${base}.json`, 'art/parts/' + C[id].bare.base.d.tex, 'art/parts/' + lib.sources[id].glb, 'art/parts/' + lib.sources[id].tex);
+  if (fit) window.__sources.push(`art/parts/base/${fit}.json`, 'tools/creator/base/fit_clean_layers.py');
 }
 // ?poke=1: the base drawn flat red, so any skin that shows through a layer stands out
 if (Q.get('poke')) for (const id of IDS) for (const k of ['bare', 'hair', 'full']) { const m = C[id][k].meshes.body.material; m.map = null; m.color.set('#ff0000'); m.onBeforeCompile = () => {}; m.needsUpdate = true; }
@@ -92,7 +105,8 @@ if (!ONLY || ONLY === 'bare') {
     const ch = C[id].bare; pose(ch, 'idle', 0);
     rows.push(turns.map(([y, n]) => [view([ch.root], { yaw: y }), `${NAME[id]} base, ${n}`]));
   }
-  sheet('1-bases', 'Base bodies: skin only, one closed shell (idle pose)', rows);
+  const stats = IDS.map(id => `${NAME[id]}: ${C[id].bare.base.d.T} triangles`).join(', ');
+  sheet('1-bases', 'Base bodies: skin only, one closed shell (' + (CLEAN ? 'neutral pose' : 'held idle') + '). ' + stats, rows);
   // the head from above and behind, the neck, the hands: where the old cut left holes
   const rows2 = [];
   for (const id of IDS) {
@@ -162,7 +176,11 @@ if (!ONLY || ONLY === 'dressed') {
 }
 
 // 4. walking, close turnaround, and 5. the game camera
-const frames = (name, fn, n = 12) => { const out = []; for (let i = 0; i < n; i++) out.push(fn(i / n)); window.__bin[name] = out.map((c) => c.toDataURL('image/png')); };
+const frames = (name, fn, n, duration) => {
+  const out = []; for (let i = 0; i < n; i++) out.push(fn(i / n));
+  window.__bin[name] = out.map((c) => c.toDataURL('image/png'));
+  window.__durations[name] = duration;
+};
 if (!ONLY || ONLY === 'walk') {
   const rows = [];
   for (const id of IDS) for (const k of ['bare', 'full']) {
@@ -172,7 +190,7 @@ if (!ONLY || ONLY === 'walk') {
   sheet('5-walk', 'Walking (Eric\'s walk clip on the shared skeleton), camera turning round', rows);
   for (const id of IDS) for (const k of ['bare', 'full']) {
     const ch = C[id][k];
-    frames(`walk-${id}-${k}`, (f) => { pose(ch, 'walk', walkT(ch, f)); return view([ch.root], { yaw: 0.9 + f * Math.PI * 2, w: 260, h: 340 }); }, 24);
+    frames(`walk-${id}-${k}`, (f) => { pose(ch, 'walk', walkT(ch, f)); return view([ch.root], { yaw: 0.9 + f * Math.PI * 2, w: 260, h: 340 }); }, 24, ch.actions.walk.getClip().duration);
   }
 }
 if (!ONLY || ONLY === 'game') {
@@ -190,9 +208,11 @@ if (!ONLY || ONLY === 'game') {
   const rows = [];
   for (const k of ['bare', 'full']) rows.push([0, 0.25, 0.5].map((f) => [view(group(k, f), { ...G, tgt: [0, 0.6, 0] }), `${k === 'bare' ? 'Bases' : 'Dressed'}, walk ${Math.round(f * 100)}%, game camera`]));
   sheet('6-game', 'At the game camera (office angle, 51 degrees down), walking', rows);
-  for (const k of ['bare', 'full']) frames(`game-${k}`, (f) => view(group(k, f), { ...G, tgt: [0, 0.6, 0] }), 16);
+  for (const k of ['bare', 'full']) frames(`game-${k}`, (f) => view(group(k, f), { ...G, tgt: [0, 0.6, 0] }), 16, C.mio[k].actions.walk.getClip().duration);
   reset();
 }
 window.__out = 'images: ' + Object.keys(window.__bin).join(', ');
+for (const id of IDS) for (const ch of Object.values(C[id])) disposeCharacter(ch);
+renderer.dispose();
 window.__done = true;
 </script></body></html>

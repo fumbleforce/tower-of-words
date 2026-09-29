@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chibi base review</title>
+<script type="importmap">{"imports":{"three":"/game3d/vendor/three/three.module.js","three/addons/":"/game3d/vendor/"}}</script>
+<style>
+:root{color-scheme:light;--ink:#253045;--muted:#596579;--line:#c9d1db;--paper:#fafbf9;--accent:#235868}
+*{box-sizing:border-box}[hidden]{display:none!important}body{margin:0;background:#e9ecf1;color:var(--ink);font:16px/1.45 system-ui,sans-serif}
+main{display:grid;grid-template-columns:minmax(0,1fr) 320px;min-height:100dvh}#view{position:relative;min-height:65dvh;height:100dvh}
+canvas{display:block;width:100%;height:100%;touch-action:none}aside{background:var(--paper);border-left:1px solid var(--line);padding:24px;overflow:auto;max-height:100dvh}
+h1{font-size:23px;margin:16px 0 8px}p{color:var(--muted);font-size:14px}a{color:var(--accent)}fieldset{border:0;padding:0;margin:22px 0}legend{font-weight:650;margin-bottom:8px}
+label{display:flex;align-items:center;gap:10px;min-height:44px}select,button{font:inherit;color:inherit;background:white;border:1px solid var(--line);border-radius:6px;min-height:44px;padding:8px 12px}
+select{width:100%}input[type=checkbox]{width:20px;height:20px;accent-color:var(--accent)}button{cursor:pointer}button:hover{background:#e8f0f1}button:focus-visible,select:focus-visible,input:focus-visible,a:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+.row{display:flex;gap:8px;flex-wrap:wrap}.row button{flex:1}#status{position:absolute;left:16px;top:16px;background:#fafbf9e8;padding:8px 12px;max-width:calc(100% - 32px);font-size:14px;pointer-events:none}
+#status:empty{display:none}.hint{position:absolute;left:16px;bottom:16px;margin:0;background:#fafbf9e8;padding:8px 12px;font-size:14px;pointer-events:none}
+@media(max-width:760px){main{grid-template-columns:1fr}#view{height:58dvh;min-height:360px}aside{max-height:none;border:0;border-top:1px solid var(--line);padding:20px}fieldset{margin:16px 0}}
+</style>
+</head>
+<body>
+<main>
+<section id="view" aria-label="Rotatable character preview"><div id="status" role="status" aria-live="polite">Loading the base…</div><p class="hint">Drag to turn · Scroll to zoom</p></section>
+<aside>
+<a href="/bible/#review/creator-base-2">← Back to review</a>
+<h1>Chibi bases</h1><p>Work in progress. Hair and clothes still need fitting; walking feet can cross the floor.</p>
+<fieldset><legend>Character</legend><select id="body" aria-label="Character"><option value="mio">Mio</option><option value="eric">Eric</option></select></fieldset>
+<fieldset><legend>Layers</legend>
+<label><input type="checkbox" data-layer="hair">Hair</label>
+<label><input type="checkbox" data-layer="top">Top</label>
+<label><input type="checkbox" data-layer="bottom">Trousers</label>
+<label><input type="checkbox" data-layer="shoes">Shoes</label>
+<label id="stubble-label" hidden><input type="checkbox" data-layer="stubble">Stubble</label>
+</fieldset>
+<fieldset><legend>Movement</legend><select id="motion" aria-label="Movement"><option value="neutral">Neutral</option><option value="walk">Walk</option><option value="bind">Bind pose</option></select><label><input id="pause" type="checkbox">Pause</label></fieldset>
+<fieldset><legend>View</legend><div class="row"><button id="front">Front</button><button id="side">Side</button><button id="back">Back</button></div><label for="zoom">Zoom</label><input id="zoom" type="range" min="1.7" max="5" step=".1" value="3.2" style="width:100%;min-height:44px"></fieldset>
+<details><summary>Candidate details</summary><p id="details"></p><p>The latest base stays underneath every layer. Earlier candidates and fit attempts are linked in Review.</p></details>
+</aside>
+</main>
+<script type="module">
+import * as THREE from 'three';
+import { loadLibrary } from '../recipe.js';
+import { dressed } from './base.js';
+import { disposeCharacter } from '../dispose.js';
+const $ = id => document.getElementById(id), params = new URLSearchParams(location.search);
+const version = /^v\d+$/.test(params.get('v')) ? params.get('v') : 'v14';
+const fit = /^fit\d+$/.test(params.get('fit')) ? params.get('fit') : null;
+const view = $('view'), status = $('status'), selectors = [...document.querySelectorAll('[data-layer]')];
+let character, generation = 0, dead = false, lib, yaw = 0, elevation = .08, distance = 3.2, drag;
+const renderer = new THREE.WebGLRenderer({antialias:true});
+renderer.setPixelRatio(Math.min(devicePixelRatio, 2));renderer.outputColorSpace=THREE.SRGBColorSpace;view.prepend(renderer.domElement);
+renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;
+const scene = new THREE.Scene();scene.background = new THREE.Color('#e9ecf1');
+scene.add(new THREE.HemisphereLight(0xffffff,0x9aa3b5,2));
+const sun = new THREE.DirectionalLight(0xffffff,1.6);sun.position.set(1.2,2.5,2.2);scene.add(sun);
+sun.castShadow=true;sun.shadow.mapSize.set(1024,1024);Object.assign(sun.shadow.camera,{left:-1,right:1,top:1.2,bottom:-1,near:.1,far:8});sun.shadow.bias=-.0002;
+const floor = new THREE.Mesh(new THREE.CircleGeometry(.55,48),new THREE.MeshLambertMaterial({color:'#d7dbe2'}));
+floor.rotation.x=-Math.PI/2;floor.receiveShadow=true;scene.add(floor);
+const camera = new THREE.PerspectiveCamera(24,1,.01,30);
+function resize(){const w=view.clientWidth,h=view.clientHeight;renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix();}
+const observer=new ResizeObserver(resize);observer.observe(view);resize();
+function applyLayers(){if(!character)return;for(const input of selectors){const mesh=character.meshes[input.dataset.layer];if(mesh)mesh.visible=input.checked;}}
+function applyMotion(){if(!character)return;if($('motion').value==='bind')character.bindPose();else character.play($('motion').value,0);character.update(0);}
+async function rebuild(){
+ const token=++generation, id=$('body').value;status.textContent='Loading '+(id==='mio'?'Mio':'Eric')+'…';window.__ready=false;
+ try{
+  const base=`clean-${id}-${version}`, next=await dressed(lib,id,{base,fit:fit?`${base}-${fit}-layers`:null,layers:['hair','top','bottom','shoes',...(id==='eric'?['stubble']:[])]});
+  if(token!==generation||dead){disposeCharacter(next);return;}
+  disposeCharacter(character);character=next;scene.add(next.root);applyLayers();applyMotion();
+  $('stubble-label').hidden=id!=='eric';$('details').textContent=`${version} · ${next.base.d.T} base triangles · ${fit || 'original layers'} · host rest correction on`;
+  status.textContent='';window.__ready=true;window.__candidate={body:id,version,fit};
+ }catch(error){if(token===generation){status.textContent='Could not load this candidate: '+error.message;if(character)$('body').value=character.recipe.body;window.__error=error.message;}}
+}
+$('body').onchange=()=>{window.__error=null;rebuild();};$('motion').onchange=applyMotion;selectors.forEach(input=>input.onchange=applyLayers);
+for(const [id,angle]of[['front',0],['side',Math.PI/2],['back',Math.PI]])$(id).onclick=()=>{yaw=angle;elevation=.08;};
+$('zoom').oninput=()=>{distance=Number($('zoom').value);};
+const canvas=renderer.domElement;
+canvas.addEventListener('pointerdown',e=>{drag={x:e.clientX,y:e.clientY};canvas.setPointerCapture(e.pointerId);});
+canvas.addEventListener('pointermove',e=>{if(!drag)return;yaw-=(e.clientX-drag.x)*.01;elevation=THREE.MathUtils.clamp(elevation+(e.clientY-drag.y)*.005,-.25,1.2);drag={x:e.clientX,y:e.clientY};});
+for(const event of['pointerup','pointercancel','lostpointercapture'])canvas.addEventListener(event,()=>{drag=null;});
+canvas.addEventListener('wheel',e=>{e.preventDefault();distance=THREE.MathUtils.clamp(distance+e.deltaY*.003,1.7,5);$('zoom').value=distance;},{passive:false});
+let last=performance.now();
+renderer.setAnimationLoop(now=>{const dt=Math.min((now-last)/1000,.05);last=now;if(!document.hidden){if(character&&!$('pause').checked)character.update(dt);camera.position.set(Math.sin(yaw)*Math.cos(elevation)*distance,.5+Math.sin(elevation)*distance,Math.cos(yaw)*Math.cos(elevation)*distance);camera.lookAt(0,.5,0);renderer.render(scene,camera);}});
+addEventListener('pagehide',()=>{dead=true;generation++;renderer.setAnimationLoop(null);observer.disconnect();disposeCharacter(character);floor.geometry.dispose();floor.material.dispose();sun.shadow.dispose();renderer.dispose();});
+try{lib=await loadLibrary();lib.anims.neutral='candidates/idle-neutral.glb';lib.retargetRest=true;if(params.get('body')==='eric')$('body').value='eric';if(matchMedia('(prefers-reduced-motion: reduce)').matches)$('pause').checked=true;await rebuild();}catch(error){status.textContent='Could not load the library: '+error.message;window.__error=error.message;}
+</script>
+</body>
+</html>
