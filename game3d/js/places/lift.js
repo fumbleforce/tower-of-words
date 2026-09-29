@@ -43,10 +43,10 @@ const DARK = 0.4;                              // how much of a place's own ligh
 const DARK_BG = new THREE.Color('#14171d'), BG_K = 0.45;   // the background goes this far toward DARK_BG
 // where people stand in the car (x, z in car space), all facing the doors
 const SLOTS = { eric: [0, -0.42], sales1: [-0.47, -1.3], sales2: [0.47, -1.33], with0: [0.47, -0.8], with1: [-0.47, -0.8], aside: [-0.49, -0.5] };
-// the way out at another floor (car space): along the right, then the left one behind; he steps aside for them
+// the way out at another floor (car space): both along the right, well clear of him in the front left corner
 // the second one sets off only once the first is out on the landing and turning away (not on a timer: at test
 // speed a timer let them bunch up)
-const EXITS = { sales2: { pts: [[0.3, -0.95], [0.28, -0.1], [0.28, 0.5], [2.3, 0.6]] }, sales1: { after: 'sales2', pts: [[-0.12, -1.05], [0.04, -0.6], [0.04, -0.1], [0.0, 0.5], [-2.3, 0.6]] } };
+const EXITS = { sales2: { pts: [[0.3, -0.95], [0.28, -0.1], [0.28, 0.5], [2.3, 0.6]] }, sales1: { after: 'sales2', pts: [[-0.1, -1.1], [0.22, -0.95], [0.3, -0.1], [0.28, 0.5], [-2.3, 0.6]] } };
 // the two from Sales who ride up to 5 (they're in the car when it arrives at 1)
 const RIDERS = [{ id: 'sales1', worker: 9, off: '5' }, { id: 'sales2', worker: 1, off: '5' }];   // grey-haired man in a light jacket; woman with long brown hair
 
