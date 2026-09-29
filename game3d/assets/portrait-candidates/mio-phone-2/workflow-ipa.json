@@ -1,0 +1,137 @@
+{
+ "1": {
+  "class_type": "UNETLoader",
+  "inputs": {
+   "unet_name": "rdbtAnima.safetensors",
+   "weight_dtype": "default"
+  }
+ },
+ "2": {
+  "class_type": "CLIPLoader",
+  "inputs": {
+   "clip_name": "qwen_3_06b_base.safetensors",
+   "type": "stable_diffusion"
+  }
+ },
+ "3": {
+  "class_type": "VAELoader",
+  "inputs": {
+   "vae_name": "qwen_image_vae.safetensors"
+  }
+ },
+ "4": {
+  "class_type": "CLIPTextEncode",
+  "inputs": {
+   "text": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1girl, solo, Mio, a 25-year-old woman: messy black hair with bright green underneath in a loose bun, blunt fringe, thin grey rectangular glasses with clear lenses, light tan eyes, oversized black hoodie, dark teal and white headphones around her neck, teal company lanyard, holding a smartphone with both hands in front of her chest, the back of the phone facing the viewer, looking down at the screen, head tilted down, tired, small frown, waist-up portrait facing the viewer at a slight angle, (the whole head inside the frame with empty space above the hair:1.2), plain light grey background, soft even studio light",
+   "clip": [
+    "2",
+    0
+   ]
+  }
+ },
+ "5": {
+  "class_type": "CLIPTextEncode",
+  "inputs": {
+   "text": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, fused fingers, extra hands, extra arms, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, western cartoon, comic book, flat vector, thick outlines, poster art, pop art, rim light, red rim light, backlighting, looking at viewer, hands in pockets",
+   "clip": [
+    "2",
+    0
+   ]
+  }
+ },
+ "6": {
+  "class_type": "EmptyLatentImage",
+  "inputs": {
+   "width": 896,
+   "height": 1152,
+   "batch_size": 1
+  }
+ },
+ "7": {
+  "class_type": "KSampler",
+  "inputs": {
+   "model": [
+    "IPA",
+    0
+   ],
+   "positive": [
+    "4",
+    0
+   ],
+   "negative": [
+    "5",
+    0
+   ],
+   "latent_image": [
+    "6",
+    0
+   ],
+   "seed": 1006,
+   "steps": 30,
+   "cfg": 5,
+   "sampler_name": "euler_ancestral",
+   "scheduler": "normal",
+   "denoise": 1.0
+  }
+ },
+ "8": {
+  "class_type": "VAEDecode",
+  "inputs": {
+   "samples": [
+    "7",
+    0
+   ],
+   "vae": [
+    "3",
+    0
+   ]
+  }
+ },
+ "9": {
+  "class_type": "SaveImage",
+  "inputs": {
+   "images": [
+    "8",
+    0
+   ],
+   "filename_prefix": "miophone2/mio-phone2-ipab-1006"
+  }
+ },
+ "IPL": {
+  "class_type": "AnimaIPAdapterLoader",
+  "inputs": {
+   "ip_adapter_name": "ip_adapter-Character_Reference-10.safetensors",
+   "auto_download": false
+  }
+ },
+ "RI": {
+  "class_type": "LoadImage",
+  "inputs": {
+   "image": "png-2cd9c070a62e1049.png"
+  }
+ },
+ "IPA": {
+  "class_type": "AnimaIPAdapterApply",
+  "inputs": {
+   "model": [
+    "1",
+    0
+   ],
+   "ip_adapter": [
+    "IPL",
+    0
+   ],
+   "ref_image": [
+    "RI",
+    0
+   ],
+   "strength": 0.5,
+   "ref_image_size": 512,
+   "siglip_layer": -1,
+   "ip_cfg_scale": 4.0,
+   "ip_cfg_separate": false,
+   "gray_null": false,
+   "use_lora": true
+  }
+ }
+}
