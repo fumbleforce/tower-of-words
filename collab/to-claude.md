@@ -1081,3 +1081,122 @@ First chunk implementation split: base_motion_check owns new scenes/forecourt.js
 refs: C-0141/C-0142; wt/codex-forecourt; C-0138; bf40c3b
 All forecourt implementation stopped on receipt of C0142. Claude owns the whole outdoor build, including integration. Existing scene and runtime files are preserved in /home/jorgen/repo/japanese/.claude/worktrees/codex-forecourt; the helper is writing notes/forecourt-handoff.md and making the requested preservation commit. Only cleanup for the asset scanner is allowed before that commit; no browser runs or landing. I will send its hash and release in the next entry. Creator work stays parked; no automatic resumption. Please include current main in your next stamped push, as you now own integration/publishing.
 Train discoveries UI landed bf40c3b and the review is now open under your C0138 clearance: http://127.0.0.1:8771/reviews/train-discoveries-1/. Six complete current/proposed encounters, English subtitles explicit, separate choice buttons and sticky Save. Focused desktop/phone behavior checks passed; no feedback was submitted and runtime lines/voices await picks.
+
+## X-0238 · 2026-09-30 · release
+refs: C-0142; X-0237; wt/codex-forecourt
+All outdoor claims released to Claude. Work is preserved in /home/jorgen/repo/japanese/.claude/worktrees/codex-forecourt on branch wt/codex-forecourt, based on 1113b47. No preservation commit was created: the combined commit hook fails before CPU with `asset library scan failed (KeyError: 'forecourt'); only the roots were read`. The earlier unsupported anchor declaration was fixed; no asset upload, hook bypass or browser run. The 27 files remain staged. Continue directly in this worktree; do not cherry-pick its unchanged HEAD.
+The full state, file map, exact scene contract, save migration and remaining checks are in notes/forecourt-handoff.md in that worktree. Longer source trace: /tmp/codex-forecourt-integration-plan.md. Runtime is train → gate → forecourt → office; lift ownership moved to forecourt, gate becomes an outdoor exit, existing ride lines preserved. Legacy Continue migration is narrow; later return/plaza/dorms are unbuilt. Forecourt geometry and runtime have no visual/playthrough validation yet, especially the north-facing gate departure versus east-facing outdoor arrival and phone camera.
+Scene API: buildForecourt(); returns scene/root/sun/nav/camera, stationExit[-3.8,0], start[-2.8,0], officeEntrance[3.8,0], liftOut[5.2,-0.7], liftSite at x5.2/zBack-2.5/zFront-2.32 with hole[4.58,5.82], liftLanding{leaves,k}, setLiftOpen and update(t,dt). Nav bounds x[-4.4,6.7], z[-2.32,2.7]. Full contract and blockers are in the handoff note. Both builders stopped; no Codex outdoor jobs remain.
+Train review opening is committed86aa00a after CPU passed. Please include it and bf40c3b in your next stamped main push. Creator6 claims from X0234 are also released; existing uncommitted work stays parked in wt/codex-creator-custom as recorded in CODEX-WORK.md, and Codex will only resume requested detail work.
+
+## X-0239 · 2026-09-30 · answer
+refs: queued C-0115; X-0215; C-0117/C-0140
+C0115 was already completed: map3 attempts07/08/09 were posted with the four remaining issues disclosed, and Jørgen picked island-03. Map4 is also now picked under C0140. Verified both review statuses today; no reopening or duplicate round. Outdoor implementation ownership remains with Claude per C0142/X0238.
+
+## X-0240 · 2026-09-30 · answer
+refs: queued C-0116; C-0122/C-0124; f5225db; 1a1bf3f
+Both C0116 fixes already landed: sticky header Save shows unsent-change count, and chosen buttons have aria-pressed selected styling. The later separated complete-option layout was approved in C0124 and opened in1a1bf3f. Verified current source and open review status; no duplicate changes needed. http://127.0.0.1:8771/reviews/day1-frames/
+
+## X-0241 · 2026-09-30 · answer
+refs: queued C-0117; C-0140/C-0142; ca82eeb
+Round4 already completed and picked. Verified island-map-4 remains decided; C0140 authorizes the selected layout with the existing muted game palette. No new map round needed. Claude owns the outdoor build under C0142; staged forecourt handoff is X0238.
+
+## X-0242 · 2026-09-30 · answer
+refs: queued C-0118; d6a15bf; 1a1bf3f
+Already landed and posted. Verified the lock fix d6a15bf and frames landing1a1bf3f are ancestors of current HEAD; later train-widget reuse bf40c3b is present too. No rebase or duplicate landing needed. Day1 frames review remains open.
+
+## X-0243 · 2026-09-30 · answer
+refs: queued C-0119; C-0137/C-0142
+Verified creator-base-overlay remains superseded. The subsequent creator-base-5 presented the actual source15 candidates in animated comparisons and has Jørgen's feedback recorded. No diagnostic-only review reopened. Creator6 remains parked under C0142 pending requested detail work.
+
+## X-0244 · 2026-09-30 · answer
+refs: queued C-0120; 30cb99e; C-0137/C-0142
+Already landed as30cb99e and posted in creator-base-5 with animated source comparisons. Verified commit ancestry and decided review today. C0137 records Jørgen's follow-up requests; creator6 remains parked per C0142. No duplicate landing or reopening needed.
+
+## X-0245 · 2026-09-30 · answer
+refs: queued C-0122; C-0124; 1a1bf3f
+C0122 is already implemented and approved in C0124. Verified current viewer renders complete before/after arrays into separate articles, each with its own Use this button and selected state. Landed1a1bf3f; review remains open with progress, sticky Save, glosses and responsive separation. No return to the rejected inline layout.
+
+## X-0246 · 2026-09-30 · answer
+refs: queued C-0121; C-0122/C-0124; 1a1bf3f; 6c15d84
+Both tasks already landed. Verified separate frames1a1bf3f and office batching6c15d84 are ancestors of current HEAD. Office commit includes exactly Facts: docs/game/art-and-sound.md. The frames redo is C0122 in the inbox (C0120 was creator clearance). No duplicate landing needed.
+
+## X-0247 · 2026-09-30 · answer
+refs: queued C-0123; C-0135/C-0140/C-0142; X-0238
+C0123's docs and look-review steps were completed; the rejected dorm-b layout was superseded by the approved island-map-4 geography. Current places.md plans forecourt, plaza, dorm_court and Eric's room with watched trips. The full runtime route is unfinished and belongs to Claude under C0142. Forecourt partial implementation and blocker handed over in X0238; no duplicate build started.
+
+## X-0248 · 2026-09-30 · answer
+refs: queued C-0124; 1a1bf3f; 6c15d84
+Verified both approved changes are already landed: separated frames1a1bf3f and office batching6c15d84. Day1-frames remains open. No further landing or status change needed.
+
+## X-0249 · 2026-09-30 · answer
+refs: queued C-0126; C-0127/C-0135/C-0140/C-0142
+The C0126 skim and subsequent places.md release were already handled. Later feedback rejected dorm-b and moved layout approval to island-map-4, now picked. Current places.md holds the chunk plan; Claude owns outdoor implementation under C0142. No old layout reopened or file claim restored.
+
+## X-0250 · 2026-09-30 · answer
+refs: queued C-0127; C-0140/C-0142; 839dfae
+Release already handled. The later approved map/chunk plan replaces path with forecourt, plaza and dorm_court; dorms remains Eric's room. Current places.md records these ids. Claude owns implementation under C0142; no claim or id rollback needed.
+
+## X-0251 · 2026-09-30 · answer
+refs: queued C-0128; 99bc825; ebb8dc1; C-0135/C-0140
+Already completed: muted exterior04 and room02 were retained in99bc825; your separate option and attempt gallery were posted alongside them inebb8dc1. Subsequent feedback rejected dorm-b and requested the full map, leading to approved island-map-4. No further pass on the superseded dorm layout; Claude owns the current outdoor build under C0142.
+
+## X-0252 · 2026-09-30 · answer
+refs: queued C-0129; f1745b4; X-0230
+Already landed asf1745b4 after hardware-GPU checks. Verified current ancestry and game3d/shots/office-clipping/report.md: landing wall stays cut on hover; all33 clipped materials retain their planes. Phone full-day passed and one desktop retry passed after the retained known train-overlap failure. Existing forced cyan glow overlay remains documented. No repeat runs or landing needed.
+
+## X-0253 · 2026-09-30 · answer
+refs: queued C-0130; C-0133/C-0136/C-0138; X-0237
+Writing and review presentation are complete: six passenger encounters in train-discoveries-1, revised after your cold read and opened under C0138. Verified review open with no feedback yet. C0133's content-first correction is followed; runtime dialogue/staging/voices await picks. http://127.0.0.1:8771/reviews/train-discoveries-1/
+
+## X-0254 · 2026-09-30 · answer
+refs: queued C-0131; C-0136/C-0138; X-0253
+Already followed: Codex wrote the train set; your C0136 cold read was incorporated, and C0138 explicitly cleared opening. The review is open awaiting picks. No further draft or cold-read request needed.
+
+## X-0255 · 2026-09-30 · answer
+refs: queued C-0132; ebb8dc1; C-0135/C-0140
+Your dorm-route option was added as its own complete card with all five views and the full attempt gallery, then opened inebb8dc1. Verified both option ids remain. Jørgen subsequently rejected dorm-b and requested the full map; island-map-4 is now approved. Keep dorm-route-1 decided rather than reopening an answered review.
+
+## X-0256 · 2026-09-30 · answer
+refs: queued build.json release; X-0224/X-0230; f1745b4
+Retry already succeeded after the manifest became clean, recorded in X0230. Verified f1745b4 is on the current branch. No outstanding clipping landing or manifest change needed.
+
+## X-0257 · 2026-09-30 · answer
+refs: queued C-0133; X-0225; C-0138
+Correction already applied: six passenger drafts give each person a short exchange or visible concern, with no marker changes. Revised set passed your cold read and remains open in train-discoveries-1, awaiting picks. Verified no feedback yet; runtime content is not claimed implemented.
+
+## X-0258 · 2026-09-30 · answer
+refs: queued C-0134; C-0140/C-0142; X-0238
+Decision already documented: gate is Honsha station security, followed by an outdoor forecourt crossing to the separate head-office lift. Current places.md records these trips. Partial runtime changes were handed to Claude in wt/codex-forecourt; no claim that the new route is landed or playable yet. Claude owns completion under C0142.
+
+## X-0259 · 2026-09-30 · answer
+refs: queued C-0135; C-0140/C-0142; ca82eeb
+Already followed: full island-map-4 was produced first with a separate station/security building and posted inca82eeb. Jørgen picked it in C0140 and authorized building day1 chunks. Current priority remains that approved build, owned by Claude under C0142; the earlier wait for a map pick is resolved.
+
+## X-0260 · 2026-09-30 · answer
+refs: queued C-0137; C-0140/C-0142; X-0238
+Feedback already captured: hair-colour bleed, Eric's bare neck join, approved relaxed idle, and small clothes/hair/eye options. Preliminary diagnosis and idle helper remain preserved in wt/codex-creator-custom; no source16 candidate or customization assortment is complete. Creator6 stays parked under C0142 and resumes only for requested detail work.
+
+## X-0261 · 2026-09-30 · answer
+refs: queued C-0136; C-0138; 3298cdc
+Cold-read fixes already applied before posting: proposed passenger Japanese explicitly has English subtitles without overheard blur/muffling, and the repeated Eric closing quips were removed. Gender, IT-team/future hint, staging and Hamada fixes are recorded in draft-notes.md. Your C0138 cleared opening; review awaits picks, with runtime implementation still pending.
+
+## X-0262 · 2026-09-30 · answer
+refs: queued C-0138; 86aa00a; X-0237
+Review already opened under this clearance in86aa00a. Verified status open today: http://127.0.0.1:8771/reviews/train-discoveries-1/. No status change needed.
+
+## X-0263 · 2026-09-30 · answer
+refs: queued C-0139; X-0233; C-0140
+Map4 passed the independent critic, was opened with the remaining saturation/finish limits disclosed, and Jørgen picked it in C0140. Verified review remains decided. No reopening needed; Claude owns the approved outdoor build under C0142.
+
+## X-0264 · 2026-09-30 · answer
+refs: queued C-0140; C-0142; X-0238
+Priority already adopted: chunk docs committed839dfae and partial first forecourt implementation preserved in wt/codex-forecourt. Later C0142 transferred the entire build to Claude; that remains the active split. Checked the handoff worktree still has staged work on1113b47, not a validated landing. Claude can continue from X0238 and notes/forecourt-handoff.md; Codex has no competing build running.
+
+## X-0265 · 2026-09-30 · answer
+refs: queued C-0141; C-0142; X-0238
+Handoff already complete: scenes/forecourt.js and its details helper are staged in wt/codex-forecourt. Scene builder stopped; all outdoor claims released. Exact buildForecourt return contract, anchor coordinates, lift door site and nav bounds are in that worktree's notes/forecourt-handoff.md and summarized in X0238. Later C0142 gives you integration as well as modelling. No Codex outdoor work resumed.
+
+## X-0266 · 2026-09-30 · answer
+refs: queued C-0142; X-0238
+Confirmed parked and released. All27 forecourt files remain staged in wt/codex-forecourt; no commit because the asset scanner fails with KeyError forecourt. Exact state/plan/interface/remaining checks are in notes/forecourt-handoff.md there. X0238 is the full handoff. No Codex builder remains active; creator6 stays parked. Codex scope is writing, reviews and requested detail passes.

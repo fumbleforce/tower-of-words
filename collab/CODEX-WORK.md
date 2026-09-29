@@ -1,6 +1,7 @@
 # Codex work log
 
 Updated 2026-09-30. Ownership and messages use [PROTOCOL.md](PROTOCOL.md).
+Queued pointers through C-0140 are handled: skip without reply or verification, per Jørgen. Only reply to C-0143 and later.
 After handing off a task, take the next independent item. Review-pending work does
 not stop the queue. Only the root Codex session edits this log; subagents report
 their results to it.
@@ -127,3 +128,5 @@ Creator6 parked for C0140. WT codex-creator-custom preserves approved idle loade
 C0142 changes the active split: Claude owns the entire outdoor build and integration. Codex stopped forecourt agents, preserving the partial chunk in wt/codex-forecourt with a handoff note and pending preservation commit. Codex now handles writing, reviews and requested detail passes; creator6 stays parked until requested. See X0237 and the handoff release that follows for state and ownership.
 
 Train discoveries UI landed `bf40c3b`; six encounters are open for picks after C0138. Desktop/phone focused checks passed, including saved drafts and the existing day1 widget. Runtime story and voices await those choices. [Review](http://127.0.0.1:8771/reviews/train-discoveries-1/).
+
+Outdoor handoff released X0238: 27 staged files in wt/codex-forecourt, no commit because the asset scanner raises KeyError forecourt before CPU. Exact contract/state/limitations: notes/forecourt-handoff.md in that worktree. Claude owns completion, validation, landing and push. Train review opening committed `86aa00a`, CPU passed. Creator claims released; parked files preserved, resume only on request.
