@@ -13,6 +13,15 @@ body.busy #marks, body.trip #marks, body.at-title #marks { display: none; }
 #marks .mark .tag { display: none; }
 #marks .mark.offscreen { visibility: hidden; }
 
+/* tapping or clicking a pin acts like tapping its target (main.js, the #marks click). Only the pin itself takes the
+   tap, with a slightly larger invisible area round it for thumbs; the rest of the button lets taps through to the
+   world. Crowded-out and off-screen pins take nothing. */
+#marks .mark, #marks .mark * { pointer-events: none; }
+#marks .mark::before { display: none; }
+#marks .mark:not(.crowded):not(.offscreen):not(.far) .pin { pointer-events: auto; cursor: pointer; }
+#marks .mark .pin::before { content: ""; position: absolute; inset: -8px; border-radius: 50%; }
+#marks .mark:not(.near) .pin:hover { transform: scale(1.15); border-color: #fff; }
+
 #marks .mark { opacity: var(--mo, 1); transition: opacity .2s; }
 #marks .mark.crowded { opacity: 0; }
 body:has(.mark.near) #marks .mark:not(.near):not(.crowded) { opacity: calc(var(--mo, 1) * .85); }

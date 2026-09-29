@@ -1041,19 +1041,12 @@ function goalArrow() {
     e.stopPropagation();
     if (target) game().use(target);
   };
-  const v = new THREE.Vector3(),
-    v2 = new THREE.Vector3(),
-    v3 = new THREE.Vector3();
-  const ring = el('div');
-  ring.id = 'goalRing';
-  ring.hidden = true;
-  $('#ui').prepend(ring);
+  const v = new THREE.Vector3();
   const loop = () => {
     requestAnimationFrame(loop);
     const g = game();
     if (!g || !g.place || !g.markers) {
       a.hidden = true;
-      ring.hidden = true;
       return;
     }
     const b = document.body;
@@ -1064,33 +1057,8 @@ function goalArrow() {
         return false;
       }
     });
-    let show = false,
-      ringOn = false;
+    let show = false;
     for (const m of goals) {
-      // a light ring on the floor where the goal is (where you stand to use it)
-      // on the thing itself (a person's feet, the object), not the spot you stand on to use it
-      const sp = (m.face && m.face()) || (m.spot && m.spot());
-      if (sp && !ringOn && !g.near) {
-        const fy = g.place.floorY || 0,
-          sp3 = g.place.space;
-        const P = (x, z, o) => {
-          o.set(x, fy + 0.01, z);
-          sp3.localToWorld(o);
-          o.project(g.place.camera);
-          return [((o.x + 1) / 2) * innerWidth, ((1 - o.y) / 2) * innerHeight, o.z];
-        };
-        const c = P(sp[0], sp[1], v2),
-          rx = P(sp[0] + 0.42, sp[1], v3),
-          rz = P(sp[0], sp[1] + 0.42, v3.clone());
-        const w = Math.max(24, Math.hypot(rx[0] - c[0], rx[1] - c[1]) * 2),
-          h = Math.max(12, Math.hypot(rz[0] - c[0], rz[1] - c[1]) * 2);
-        if (c[2] < 1 && c[0] > -w && c[0] < innerWidth + w && c[1] > -h && c[1] < innerHeight + h) {
-          ringOn = true;
-          ring.style.width = w.toFixed(0) + 'px';
-          ring.style.height = h.toFixed(0) + 'px';
-          ring.style.transform = `translate(${(c[0] - w / 2).toFixed(0)}px, ${(c[1] - h / 2).toFixed(0)}px)`;
-        }
-      }
       m.anchor(v);
       v.project(g.place.camera);
       const behind = v.z > 1;
@@ -1126,14 +1094,9 @@ function goalArrow() {
       b.classList.contains('trip') ||
       b.classList.contains('at-title') ||
       isPaused;
-    ring.hidden =
-      !ringOn ||
-      b.classList.contains('busy') ||
-      b.classList.contains('trip') ||
-      b.classList.contains('at-title') ||
-      !!(window.__onboard && window.__onboard.holdGoal);
-    // the target in reach has no floor ring any more (Jørgen: "brutally ugly and overlaps the whole screen"): its dot
-    // over the head turns into a small pointer instead (engine.js Markers, css/marks.css), with the 3D outline
+    // no floor ring under the goal or the target in reach (Jørgen: "brutally ugly and overlaps the whole screen", and
+    // "the ring comes around any character that you are currently selecting / interacting with"): the pin and the
+    // model's outline (gameplay/highlight.js) show them instead
     if (window.__onboard && window.__onboard.active) a.hidden = true;
   };
   loop();

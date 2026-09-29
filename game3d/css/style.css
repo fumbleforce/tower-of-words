@@ -893,20 +893,10 @@ body:not(.phone) #goal .ic svg { width: 20px; height: 20px; }
 .mark.goal .tag { top: -62px; left: 30px; height: 30px; font-size: 15px; font-weight: 700; }
 .mark.goal .tag::before { content: "Goal"; color: var(--accent); font-size: 12px; font-weight: 800; margin-right: 2px; }
 .mark.goal .stem { height: 22px; top: -26px; }
-#goalRing { position: absolute; left: 0; top: 0; z-index: 0; border-radius: 50%; border: 3px solid rgba(127, 227, 216, .85); background: radial-gradient(closest-side, rgba(111, 208, 198, .28), rgba(111, 208, 198, .08) 70%, transparent); box-shadow: 0 0 0 2px rgba(14, 18, 28, .25); pointer-events: none; }
-#goalRing::after { content: ""; position: absolute; inset: -3px; border-radius: 50%; border: 2px solid rgba(127, 227, 216, .7); animation: goalring 1.8s ease-out infinite; }
-#goalRing[hidden] { display: none; }
-body.reduce-motion #goalRing::after { animation: none; opacity: 0; }
 
 /* ---------- onboarding and playtest 3 (notes/ONBOARDING.md) ----------
-   Pins are gone: only the thing in reach is marked, with a ring on the floor and its action beside it. The first
-   screen on the train shows one line about walking, the settings cog and the build id. */
+   The first screen on the train shows one line about walking, the settings cog and the build id. */
 #marks { visibility: hidden; }
-#marks .mark, #marks .mark * { pointer-events: none !important; }
-#nearRing { position: absolute; left: 0; top: 0; z-index: 0; border-radius: 50%; border: 2px solid rgba(232, 250, 247, .9); background: radial-gradient(closest-side, rgba(191, 241, 234, .22), rgba(191, 241, 234, .06) 70%, transparent); pointer-events: none; }
-#nearRing[hidden] { display: none; }
-#goalRing::after { display: none; }
-#goalRing { border-width: 2px; border-color: rgba(127, 227, 216, .7); }
 body.ob-active #clock, body.ob-active #peopleBtn, body.ob-active #muteBtn, body.ob-active #goalArrow { display: none !important; }
 
 #ctrlLine { position: absolute; left: 50%; bottom: 40px; transform: translateX(-50%); z-index: 2; display: flex; align-items: center; gap: 6px; padding: 12px 20px; border-radius: var(--chip-r); background: var(--chip-bg); border: 1px solid var(--chip-edge); color: var(--ink); font: 600 17px/1.2 var(--font); white-space: nowrap; box-shadow: 0 6px 24px rgba(0,0,0,.35); backdrop-filter: blur(6px); pointer-events: none; animation: pop .4s ease; }
