@@ -1,0 +1,18 @@
+{
+  "name": "amakawa-tools",
+  "private": true,
+  "engines": { "node": ">=24 <25" },
+  "scripts": {
+    "check": "node tools/check/run.mjs",
+    "check:syntax": "node tools/check/syntax.mjs",
+    "check:browser": "node tools/check/browser.mjs",
+    "test": "node --test game3d/test/unit/*.test.mjs",
+    "browser:install": "playwright install chromium"
+  },
+  "devDependencies": {
+    "eslint": "10.11.0",
+    "madge": "8.0.0",
+    "playwright": "1.63.0",
+    "prettier": "3.9.9"
+  }
+}
