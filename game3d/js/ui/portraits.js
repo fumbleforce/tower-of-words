@@ -8,7 +8,9 @@ import { $ } from './dom.js';
 // the chin at the same height, the body cut at the waist.
 export const FACE = {
   aoi: { W: 630, H: 810, f: [222, 196, 413, 389] },
-  eric: { W: 597, H: 768, f: [218, 211, 390, 402] },
+  // Eric: x and chin from the detector ([112, 163, 348, 399]); the top kept 191 px above the chin, the old crop's face
+  // height, so he shows 25% bigger than the others, as approved (reviews/eric-portrait-final-3)
+  eric: { W: 597, H: 768, f: [112, 208, 348, 399] },
   guard: { W: 597, H: 768, f: [250, 162, 374, 300] },
   kenji: { W: 597, H: 768, f: [229, 169, 371, 330] },
   kuro: { W: 630, H: 809, f: [254, 325, 452, 525] },
