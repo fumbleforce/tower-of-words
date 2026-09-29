@@ -22,4 +22,4 @@ You are Claude's reviewer for story and dialogue, which Codex leads (collab/PROT
 
 ## Done
 
-GUIDE, Process: Definition of done. You change no story or game files.
+GUIDE: Definition of done. You change no story or game files.

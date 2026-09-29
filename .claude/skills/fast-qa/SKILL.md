@@ -5,7 +5,7 @@ description: Runs the project's quick checks: the CPU checks (npm run check: syn
 
 # Fast QA
 
-Why and how long: GUIDE.md, Process (Fast tests; game3d QA is programmatic). Browser and GPU rules: GUIDE, Process (Headless browser runs, GPU lock). The review server must be up at http://127.0.0.1:8771/ (./start).
+Why and how long: GUIDE.md, Process (Fast tests; game3d QA is programmatic). Browser and GPU rules: GUIDE (Headless browser runs, GPU lock). The review server must be up at http://127.0.0.1:8771/ (./start).
 
 ## 1. CPU checks (under a minute, no browser)
 
@@ -32,7 +32,7 @@ Run both at once as background Bash commands (the harness tells you when each ex
 
 - `FAIL build checks`: a missing clip (NO CLIP; the voice-clips skill) or escape leftovers in story text (ESCAPE), found before the browser starts.
 - Page errors: the stack names the file. Check it on the committed snapshot before blaming your change, since other agents' unsaved edits are in the working tree.
-- The route stalls (the last steps repeat, or the day doesn't reach its end): a softlock or an unreachable goal, which is a bug even if a human could get past it (GUIDE, Visual design: No text on timers).
+- The route stalls (the last steps repeat, or the day doesn't reach its end): a softlock or an unreachable goal, which is a bug even if a human could get past it (GUIDE: No text on timers).
 - Overlaps or spins in movement: people walking through each other or turning in place; look at the shots.
 - "Render deferred" (LOAD_DEFERRED): the machine was busy, not a test failure. Run it again later and say so.
 - PASS WITH OVERRIDES: a check was switched off by an env variable; report which.
@@ -40,4 +40,4 @@ Run both at once as background Bash commands (the harness tells you when each ex
 ## Also
 
 - `npm run check:browser` runs the browser routes (registration, transitions, checkpoints, continue) when your change touches saving, loading or place changes.
-- A green fast test says nothing about looks. Look at close-ups of what you changed (GUIDE, Process: Validate each fix in isolation); the critic agent scores visuals.
+- A green fast test says nothing about looks. Look at close-ups of what you changed (GUIDE: Validate each fix in isolation); the critic agent scores visuals.

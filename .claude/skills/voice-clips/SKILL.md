@@ -10,11 +10,11 @@ Voice rules are in GUIDE.md (Voices and audio: Local first, the Mio pitch guard,
 ## The pipeline
 
 1. Manifest: `node game3d/tools/voice-manifest.mjs` writes game3d/audio/manifest.json from the story files (keys `eric-<word>`, `ln-<hash>`, `oh-<hash>`). `node game3d/tools/voice-manifest.mjs --check` lists lines with no clip (fast.mjs runs this check too).
-2. Take the GPU lock (GUIDE, Process: GPU lock). Free ComfyUI's VRAM first if it is running.
+2. Take the GPU lock (GUIDE: GPU lock). Free ComfyUI's VRAM first if it is running.
 3. Generate takes: gen2.py (Qwen3-TTS 1.7B Base clones, batched per speaker, several seeds; checks the GPU lock before every batch).
 4. Check takes: `DEV=cuda check2.py takes`, which uses tools/island_audio/check.py (Whisper reading check, pitch guard, WavLM similarity).
 5. Export: export2.py picks the best passing take per line and writes game3d/audio/<key>.mp3 with per-speaker loudness; `--dry` lists the lines with no passing take (NOPASS). Retry those with new seeds, up to two rounds.
-6. Fallback: edge2.py voices lines no local take passed, with edge-tts, and records them (GUIDE, Voices and audio: edge-tts only as a fallback).
+6. Fallback: edge2.py voices lines no local take passed, with edge-tts, and records them (GUIDE: edge-tts only as a fallback).
 7. Release the GPU lock. Run the fast-qa skill; the manifest check must be clean.
 
 all.sh runs steps 3 to 6 in order. The Python is ~/ai/tts-bench/.venv/bin/python.
