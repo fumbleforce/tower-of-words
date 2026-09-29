@@ -12,6 +12,8 @@ per slot, so taking a slot away left an open hole where it had been.
 
 ## Current candidate pipeline
 
+The latest dressed comparison is [creator-base-4](http://127.0.0.1:8771/bible/#review/creator-base-4), with a live viewer at `compare.html?round=4`. It follows Jørgen's v15-flat choice with one simpler hip contour and the source hair/clothes. Original positions and the separate fit3 trial both remain unfinished; [round notes](../../../notes/creator-comparisons.md#dressed-round-4) record the visible defects and checks. Earlier candidates below remain reproducible.
+
 `build_clean_base.py` constructs a connected ring mesh on the original 24-bone skeleton. Each v14 body has
 398 welded vertices and 792 triangles, smooth normals, authored body dimensions and projected source eyes.
 The dimensions are hand-tuned; they are not a recovered unclothed scan. Hair, garments and Eric’s stubble remain

@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 import { loadLibrary } from '../recipe.js';
-import { dressed } from './base.js';
+import { dressed, layersOf } from './base.js';
 import { disposeCharacter } from '../dispose.js';
 import { loadMio } from '../../../game3d/js/mio.js';
 import { loadEric } from '../../../game3d/js/avatar.js';
@@ -13,6 +13,17 @@ import { buildOffice } from '../../../game3d/js/scenes/office.js';
 // Both cameras orbit together. Office lights are cloned from buildOffice;
 // the old studio preset is available to isolate the effect of lighting.
 const $ = id => document.getElementById(id);
+const dressedRound = new URLSearchParams(location.search).get('round') === '4';
+if (dressedRound) {
+  document.title = 'Dressed chibi bases'; document.querySelector('h1').textContent = document.title;
+  $('review-link').href = '/bible/#review/creator-base-4';
+  $('intro').textContent = 'Original hair and clothes over the closed base, beside the current game character. Hide layers to inspect the body underneath.';
+  $('candidate').innerHTML = '<option value="v16-flat">v16: simpler hips, dressed</option><option value="v15-flat">v15: previous body, dressed</option>';
+  $('layers').hidden = false;
+  $('fit-control').hidden = false;
+  $('scale-note').textContent = 'Both figures are scaled to their dressed standing height. Hiding layers keeps that scale; the skin-only body does not grow to fill the missing hair or shoes.';
+  $('geometry-note').textContent = 'v16 removes one hip ring from v15. Head, eyes, limbs and rig stay the same. Choose original layer positions or the automatic fitted trial. Both still have fit defects.';
+}
 const state = window.__baseComparison = { ready: false, body: 'mio', candidate: 'v15-flat', panels: [] };
 const office = buildOffice();
 const officeLights = office.scene.children.filter(object => object.isLight);
@@ -86,26 +97,65 @@ function pose() {
   }
   state.pose = name;
 }
+function layers() {
+  if (!base || !dressedRound) return;
+  let visible = 0;
+  document.querySelectorAll('[data-layer]').forEach(input => {
+    const mesh = base.meshes[input.dataset.layer];
+    if (mesh) { mesh.visible = input.checked; if (input.checked) visible++; }
+  });
+  $('candidate-title').textContent = $('candidate').selectedOptions[0].textContent.replace(', dressed', '');
+  $('candidate-detail').textContent = `${base.base.d.T} base triangles · ${visible ? visible + ' layers, ' + ($('fit').value ? 'fitted trial' : 'original positions') : 'skin only'}`;
+}
+function matchMioLayerColours(candidate, reference) {
+  // Keep the game shader and its per-face colours, including green trim. Both
+  // readers preserve the source GLB triangle order when expanding the mesh.
+  let original;
+  reference.root.traverse(object => { if (object.isSkinnedMesh) original = object; });
+  if (!original || original.geometry.attributes.position.count !== lib.src.mio.pos.length / 3) {
+    throw new Error('Mio source topology differs; cannot copy game layer colours.');
+  }
+  for (const [slot, layer] of Object.entries(layersOf(lib, 'mio', candidate.base))) {
+    const mesh = candidate.meshes[slot]; if (!mesh) continue;
+    for (const key of ['color', 'useTex', 'tint']) {
+      const attribute = original.geometry.getAttribute(key), width = attribute.itemSize;
+      const values = new Float32Array(layer.tris.length * 3 * width);
+      layer.tris.forEach((triangle, index) => values.set(attribute.array.subarray(triangle * 3 * width, (triangle + 1) * 3 * width), index * 3 * width));
+      mesh.geometry.setAttribute(key, new THREE.BufferAttribute(values, width));
+    }
+    mesh.material.dispose(); mesh.material = original.material.clone();
+    mesh.material.onBeforeCompile = original.material.onBeforeCompile;
+    mesh.material.side = THREE.DoubleSide;
+  }
+}
 async function rebuild() {
   const token = ++generation, body = $('body').value, choice = $('candidate').value;
+  $('fit').disabled = choice !== 'v16-flat';
+  if ($('fit').disabled) $('fit').value = '';
   state.ready = false; state.error = null; $('retry').hidden = true; $('status').textContent = 'Loading models…';
   let nextSource, nextBase;
   try {
     lib ||= await loadLibrary(); lib.anims.neutral = 'candidates/idle-neutral.glb'; lib.retargetRest = true;
     // Await both so a later resolution cannot leak a character after an error.
-    const results = await Promise.allSettled([body === 'mio' ? loadMio({ height: 1 }) : loadEric({ height: 1 }), dressed(lib, body, { base: `clean-${body}-${choice.split('-')[0]}`, height: 1 })]);
+    const visibleLayers = dressedRound ? ['hair', 'top', 'bottom', 'shoes', ...(body === 'eric' ? ['stubble'] : [])] : [];
+    const baseId = `clean-${body}-${choice.split('-')[0]}`;
+    const fit = dressedRound && $('fit').value ? `${baseId}-${$('fit').value}-layers` : null;
+    const results = await Promise.allSettled([body === 'mio' ? loadMio({ height: 1 }) : loadEric({ height: 1 }), dressed(lib, body, { base: baseId, height: 1, layers: visibleLayers, fit })]);
     if (results[0].status === 'fulfilled') nextSource = results[0].value;
     if (results[1].status === 'fulfilled') nextBase = results[1].value;
     const failure = results.find(result => result.status === 'rejected'); if (failure) throw failure.reason;
+    if (dressedRound && body === 'mio') matchMioLayerColours(nextBase, nextSource);
     if (dead || token !== generation) { disposeSource(nextSource); disposeCharacter(nextBase); return; }
     disposeSource(source); disposeCharacter(base); source = nextSource; base = nextBase;
     base.meshes.body.material.flatShading = !choice.endsWith('smooth'); base.meshes.body.material.needsUpdate = true;
     source.setState('idle'); source.update(0); base.play('neutral', 0); base.update(0);
     normalize(panels[0], source); normalize(panels[1], base); pose();
+    $('stubble-control').hidden = body !== 'eric';
     Object.assign(state, { ready: true, body, candidate: choice, source, base });
     $('reference-detail').textContent = `${body === 'mio' ? 'Mio' : 'Eric'}: game materials and model`;
     $('candidate-title').textContent = $('candidate').selectedOptions[0].textContent;
-    $('candidate-detail').textContent = `${base.base.d.T} triangles · skin-only base`;
+    $('candidate-detail').textContent = `${base.base.d.T} base triangles · ${dressedRound ? 'original source layers' : 'skin-only base'}`;
+    layers();
     $('status').textContent = '';
   } catch (error) {
     disposeSource(nextSource); disposeCharacter(nextBase);
@@ -113,6 +163,11 @@ async function rebuild() {
   }
 }
 $('body').onchange = rebuild; $('candidate').onchange = rebuild; $('retry').onclick = rebuild;
+$('fit').onchange = rebuild;
+document.querySelectorAll('[data-layer]').forEach(input => { input.onchange = layers; });
+for (const id of ['bare', 'clothed']) $(id).onclick = () => {
+  document.querySelectorAll('[data-layer]').forEach(input => { input.checked = id === 'clothed'; }); layers();
+};
 $('pose').onchange = pose; $('light').onchange = lighting;
 $('pause').onclick = () => { paused = !paused; $('pause').setAttribute('aria-pressed', String(paused)); $('pause').textContent = paused ? 'Play' : 'Pause'; };
 for (const [id, angle] of [['front', 0], ['side', Math.PI / 2], ['back', Math.PI]]) $(id).onclick = () => { yaw = angle; elevation = .04; };

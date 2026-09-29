@@ -96,9 +96,9 @@ class Mesh:
         self.normal=np.array([unit(n) for n in normals])
 
 def make(sid,variant):
-    supported_variants={f'v{number}':number for number in range(1,16)}
+    supported_variants={f'v{number}':number for number in range(1,17)}
     if variant not in supported_variants:
-        raise ValueError(f'Unknown clean-base variant {variant!r}; expected v1 through v15')
+        raise ValueError(f'Unknown clean-base variant {variant!r}; expected v1 through v16')
     if sid not in ('eric','mio'):
         raise ValueError(f'Unknown clean-base source {sid!r}; expected eric or mio')
     revision=supported_variants[variant]
@@ -115,7 +115,7 @@ def make(sid,variant):
     revised=revision>=2
     sole=0.0 if revised else .013
     hips=P['Hips'][1]; chest=P['Spine'][1]; neck=P['neck'][1]
-    # Six torso rings; chest opening edges are reused by the arms.
+    # Torso and neck rings; chest opening edges are reused by the arms.
     specs=[(hips-.032,.083,.052,0,{'Hips':1}),
            (hips+.010,.088,.057,-.004,{'Hips':.8,'Spine02':.2}),
            (P['Spine02'][1]+.008,.076,.049,-.009,{'Spine02':.7,'Spine01':.3}),
@@ -125,6 +125,11 @@ def make(sid,variant):
            (P['Head'][1]+.010,.035,.031,-.025,{'neck':.35,'Head':.65})]
     if not eric and revision>=8:
         specs[-1]=(P['Head'][1]-.015,.035,.031,-.025,{'neck':.35,'Head':.65})
+    if revision>=16:
+        # The extra hip ring flares out before the waist contracts, making a
+        # horizontal roll in flat shading. Join the pelvis straight to the waist.
+        del specs[1]
+    chest_row=2 if revision>=16 else 3
     rings=[m.ring([0,y,z],rx*scale,rz,w) for y,rx,rz,z,w in specs]
     if graded_hips:
         for index,vertex in enumerate(rings[0]):
@@ -136,7 +141,7 @@ def make(sid,variant):
                 m.w[vertex]={'Hips':1-amount,side+'UpLeg':amount}
     if motion_revision:
         for side,start in [('Left',2),('Right',8)]:
-            for row,amounts in [(3,[.2,.45,.2]),(4,[.5,.8,.5])]:
+            for row,amounts in [(chest_row,[.2,.45,.2]),(chest_row+1,[.5,.8,.5])]:
                 for index,amount in zip(range(start,start+3),amounts):
                     m.w[rings[row][index]]={'Spine':1-amount,side+'Arm':amount}
     if deltoid_transition:
@@ -144,10 +149,10 @@ def make(sid,variant):
         # This replaces the horizontal under-arm shelf with a descending curve.
         for start in (2,8):
             for index,drop in zip(range(start,start+3),(.004,.008,.004)):
-                m.v[rings[4][index]][1]-=drop
+                m.v[rings[chest_row+1][index]][1]-=drop
             for index,lift in zip(range(start,start+3),(.003,.007,.003)):
-                m.v[rings[3][index]][1]+=lift
-    for k in range(len(rings)-1): m.bridge(rings[k],rings[k+1],skip=(2,3,8,9) if k==3 else ())
+                m.v[rings[chest_row][index]][1]+=lift
+    for k in range(len(rings)-1): m.bridge(rings[k],rings[k+1],skip=(2,3,8,9) if k==chest_row else ())
     # Broad rounded head, curved jaw, full skull. The neck connects underneath.
     head0=P['Head'][1]
     hs=([(head0+.021,.097,.084),(head0+.045,.151,.140),(head0+.090,.177,.176),
@@ -200,7 +205,8 @@ def make(sid,variant):
     # Shoulder openings use six vertices each. Rings follow the actual arm axis.
     for side,start in [('Left',2),('Right',8)]:
         a,b=P[side+'Arm'],P[side+'ForeArm']; h=P[side+'Hand']; axis=unit(h-a)
-        boundary=[rings[3][start],rings[3][start+1],rings[3][start+2],rings[4][start+2],rings[4][start+1],rings[4][start]]
+        boundary=[rings[chest_row][start],rings[chest_row][start+1],rings[chest_row][start+2],
+                  rings[chest_row+1][start+2],rings[chest_row+1][start+1],rings[chest_row+1][start]]
         center=np.mean([m.v[i] for i in boundary],axis=0)
         directions=[unit((m.v[i]-center)-axis*np.dot(m.v[i]-center,axis)) for i in boundary]
         # Even six-sided rings avoid concentrating vertices at the side seam.
