@@ -47,6 +47,7 @@
 <script type="module">
 import * as THREE from 'three';
 import { loadLibrary, buildCharacter, setColours, SLOTS, SKIN_TONES } from './recipe.js';
+import { disposeCharacter } from './dispose.js';
 
 const view = document.getElementById('view');
 const renderer = new THREE.WebGLRenderer({ antialias: true });
@@ -105,12 +106,28 @@ document.getElementById('copy').onclick = () => navigator.clipboard && navigator
 let ch = null, anim = 'idle', spin = false, busy = 0;
 async function rebuild() {
   const my = ++busy;
-  const next = await buildCharacter(lib, recipe);
-  if (my !== busy) return;
-  if (ch) scene.remove(ch.root);
-  ch = next; scene.add(ch.root); ch.play(anim, 0);
-  document.getElementById('status').textContent = '';
-  showRecipe();
+  const status = document.getElementById('status'); status.textContent = 'Updating character…';
+  try {
+    const next = await buildCharacter(lib, structuredClone(recipe));
+    if (my !== busy) { disposeCharacter(next); return; }
+    next.recipe.colours = structuredClone(recipe.colours || {});
+    setColours(next, next.recipe.colours);
+    disposeCharacter(ch);
+    ch = next; scene.add(ch.root); ch.play(anim, 0);
+    status.textContent = '';
+    showRecipe();
+  } catch (error) {
+    if (my === busy) {
+      if (ch) {
+        const colours = structuredClone(recipe.colours || {});
+        Object.assign(recipe, structuredClone(ch.recipe), {colours});
+        document.getElementById('body').value = recipe.body;
+        for (const slot of SLOTS) document.getElementById('s-' + slot).value = recipe.parts[slot];
+        showRecipe();
+      }
+      status.textContent = 'Could not update character: ' + error.message;
+    }
+  }
 }
 document.querySelectorAll('[data-anim]').forEach((b) => b.onclick = () => {
   anim = b.dataset.anim; document.querySelectorAll('[data-anim]').forEach((x) => x.setAttribute('aria-pressed', String(x === b))); if (ch) ch.play(anim);
