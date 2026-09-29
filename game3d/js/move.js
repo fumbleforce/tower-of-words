@@ -43,7 +43,7 @@ export function bodies(game) {
   const add = (id, r) => {
     if (!r || !r.root || seen.has(r.root) || !r.root.visible || !r.root.parent) return;
     seen.add(r.root); r.root.getWorldPosition(_v); P.space.worldToLocal(_v);
-    out.push({ id, rig: r, root: r.root, x: _v.x, z: _v.z, r: (id === 'tama' ? 0.12 : BODY) * K, seated: !!r.seated });
+    out.push({ id, rig: r, root: r.root, x: _v.x, z: _v.z, r: (id === 'tama' ? 0.12 : r.seated ? BODY * 0.8 : BODY) * K, seated: !!r.seated });
   };
   add('eric', game.player); add('mio', game.mioNpc);
   for (const [id, r] of Object.entries(P.people || {})) add(id, r);
@@ -264,6 +264,29 @@ export class SmoothWalker extends Walker {
   }
 }
 
+// One step of a scripted walk by the chibi cast (story.js walkPerson): hold back for a moment when someone is right
+// ahead (so people leaving together fall into a line instead of a heap), then slide round them. Seated people are left
+// to the walk grid. Returns [x, z].
+export function personStep(game, rig, ox, oz, nx, nz, dt) {
+  const P = game && game.place; if (!P || !P.space || rig.root.parent !== P.space) return [nx, nz];
+  const me = BODY * (P.charScale || 1), step = Math.hypot(nx - ox, nz - oz); if (step < 1e-6) return [nx, nz];
+  const fx = (nx - ox) / step, fz = (nz - oz) / step;
+  const list = bodies(game).filter((b) => b.root !== rig.root && !b.seated);
+  const ahead = list.find((b) => { const rx = b.x - ox, rz = b.z - oz, bd = Math.hypot(rx, rz) || 1e-4; return bd < b.r + me + 0.15 && (rx * fx + rz * fz) / bd > 0.55; });
+  if (ahead && (rig._hold || 0) < 0.8) { rig._hold = (rig._hold || 0) + dt; return [ox, oz]; }
+  if (!ahead) rig._hold = 0;
+  let x = nx, z = nz;
+  for (const b of list) {
+    const [sx, sz] = slideStep(ox, oz, x, z, b, b.r + me, fx, fz, step);
+    if (sx === x && sz === z) continue;
+    if (!P.nav || P.nav.free(sx, sz)) { x = sx; z = sz; } else { x = ox; z = oz; }
+  }
+  // truly boxed in for a while: carry on through rather than hang the scene
+  rig._stuck = Math.hypot(x - ox, z - oz) < step * 0.1 ? (rig._stuck || 0) + dt : 0;
+  if (rig._stuck > 1.5) return [nx, nz];
+  return [x, z];
+}
+
 // ---------- scripted moves ----------
 // walkRig(game, rig, [x, z], { speed, route = true, avoid = true, brakeTo = 0 }): walk someone to a spot. Routed over
 // the place's walk grid (never through desks), the end moved off anyone standing there, smooth turns, gait for the
@@ -420,14 +443,14 @@ export function glide(g, obj, to, speed) { return walkRig(g, obj, to, { speed, r
 // places keep hand-placed spots) and for things.
 export function approachSpot(game, item) {
   const P = game.place; if (!P || !item || !/person/.test(item.kind || '')) return null;
-  const r = P.people && P.people[item.id]; if (!r || !r.root || r.seated || !r.root.visible) return null;
+  const r = P.people && P.people[item.id]; if (!r || !r.root || !r.root.visible) return null;
   const nav = P.nav, K = P.charScale || 1, me = game.player.root.position;
   // their place and heading in the walk grid's space (a rig can sit inside a sub-group of the place)
   const c = r.root.getWorldPosition(new THREE.Vector3()); P.space.worldToLocal(c);
   const f = new THREE.Vector3(0, 0, 1).applyQuaternion(r.root.getWorldQuaternion(new THREE.Quaternion()));
   f.applyQuaternion(P.space.getWorldQuaternion(new THREE.Quaternion()).invert());
   const x = c.x, z = c.z, yaw = Math.atan2(f.x, f.z);
-  const D = (item.id === 'tama' ? 0.5 : TALK) * K;
+  const D = (item.id === 'tama' ? 0.5 : TALK + (r.seated ? 0.08 : 0)) * K;   // seated: their knees reach into the aisle
   const others = bodies(game).filter((b) => b.root !== r.root && b.root !== game.player.root);
   const toMe = Math.atan2(me.x - x, me.z - z);
   const cands = [];
