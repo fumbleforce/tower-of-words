@@ -94,4 +94,6 @@ When a command takes hold, the target shimmers at its edges, the lights dip and 
 
 ## Saving
 
-The game saves by itself at every place change and at the end of the day: flags, bonds, memory, the period, the Bag, the words and where they came from, and the place. There are three save slots with thumbnails, and the title offers Continue. The end of the day shows the places, the people met and the words he can use now, with no quiz and no score.
+The game saves by itself at every place change and at the end of the day: flags, bonds, memory, the period, the Bag, money, goals, the words and where they came from, which scenes have played, and the place. There are three save slots with thumbnails.
+
+Continuing a save (the title's Continue, or Load from a slot) resumes exactly where it was made: same place, period, flags, bonds, words, Bag and money; Eric appears at a safe spot in that place; the place's doors, gate and props are as they were; no scene that already played replays, and nothing resets to morning. Starting the game never overwrites a save before the player chooses (fixed 2026-09-29; the old build always sent Continue back to the train). If a save is made in the middle of a scene, only that scene restarts from its beginning (to build). The end of the day shows the places, the people met and the words he can use now, with no quiz and no score.
