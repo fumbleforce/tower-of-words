@@ -5,6 +5,8 @@ import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.j
 import { hull, icoPoints } from './train/hull.js';
 import { V } from './train/kit.js';
 import { screenMat, Screens } from './places/life.js';
+import { LOOK } from './look/flags.js';
+import * as D from './look/detail.js';
 
 // every lit monitor built here flickers and scrolls; the active place calls liveScreens.update(t)
 export const liveScreens = new Screens();
@@ -64,7 +66,10 @@ export function plane(w, h, tex, { emissiveK = 0 } = {}) {
 }
 
 // ---------- plants: square planter and a crown of leaf blades (like the references) ----------
-export function plant({ size = 1, seed = 1, pot = PAL.planter, tall = 1 } = {}) {
+// the builders below hand over to look/detail.js (small modelled detail, same footprints) while LOOK.detail is on;
+// the plain versions stay for ?detail=0 and the showcase room's other looks
+export const plant = (o) => (LOOK.detail ? D.plant(o) : plainPlant(o));
+export function plainPlant({ size = 1, seed = 1, pot = PAL.planter, tall = 1 } = {}) {
   const g = new THREE.Group();
   const s = size;
   g.add(rbox(0.36 * s, 0.34 * s, 0.36 * s, pot, { r: 0.03 }));
@@ -130,7 +135,8 @@ export function lampPost() {
 }
 
 // ---------- doors ----------
-export function door(w = 0.8, h = 1.25, { double = false, windows = true } = {}) {
+export const door = (w, h, o) => (LOOK.detail ? D.door(w, h, o) : plainDoor(w, h, o));
+export function plainDoor(w = 0.8, h = 1.25, { double = false, windows = true } = {}) {
   const g = new THREE.Group();
   g.add(rbox(w + 0.12, h + 0.06, 0.06, PAL.doorFrame, { r: 0.02 }));
   const leaves = double ? 2 : 1, lw = (w - 0.02) / leaves;
@@ -146,7 +152,8 @@ export function door(w = 0.8, h = 1.25, { double = false, windows = true } = {})
 // ---------- walls: a solid slab with an optional list of openings along its length ----------
 // A wall along x (axis 'x') or along z (axis 'z') from a to b at c, height h, thickness t.
 // holes: [[from, to, bottom, top]] measured along the wall
-export function wall(axis, a, b, c, h, t, { holes = [], color = PAL.wall, top = PAL.wallTop } = {}) {
+export const wall = (...a) => (LOOK.detail ? D.wall(...a) : plainWall(...a));
+export function plainWall(axis, a, b, c, h, t, { holes = [], color = PAL.wall, top = PAL.wallTop } = {}) {
   const g = new THREE.Group();
   const segs = [];
   const len = b - a;
@@ -185,6 +192,7 @@ export function tileFloor(x0, x1, z0, z1, tile = 1.2, { color = PAL.floor, seam 
   const g = new THREE.Group();
   const f = new THREE.Mesh(new THREE.BoxGeometry(x1 - x0, 0.1, z1 - z0), mat(color, { roughness: 0.3, metalness: 0.04 }));
   f.position.set((x0 + x1) / 2, y - 0.05, (z0 + z1) / 2); f.receiveShadow = true; f.name = 'floor';
+  f.userData.surf = 'tile'; f.userData.tile = [x0, z0, tile];   // the procedural look lines its tiles up with the seams
   g.add(f);
   const sm = mat(seam, { roughness: 0.7 });
   sm.userData.noInk = true;   // the style study's ink pass leaves seams as colour only (else each seam gets two lines)
@@ -194,14 +202,14 @@ export function tileFloor(x0, x1, z0, z1, tile = 1.2, { color = PAL.floor, seam 
   for (const [ax, v] of lines) {
     const m = new THREE.Mesh(new THREE.BoxGeometry(ax === 'x' ? x1 - x0 : seamW, 0.004, ax === 'x' ? seamW : z1 - z0), sm);
     m.position.set(ax === 'x' ? (x0 + x1) / 2 : v, y + 0.002, ax === 'x' ? v : (z0 + z1) / 2);
-    m.receiveShadow = true;
+    m.receiveShadow = true; m.userData.surf = 'grout'; m.userData.tile = [x0, z0, tile];
     g.add(m);
   }
   // wide darker bands like the stone inlays in the lobby reference
   for (const [ax, v, w] of bands || []) {
     const m = new THREE.Mesh(new THREE.BoxGeometry(ax === 'x' ? x1 - x0 : w, 0.004, ax === 'x' ? w : z1 - z0), mat(PAL.floorDark, { roughness: 0.6 }));
     m.position.set(ax === 'x' ? (x0 + x1) / 2 : v, y + 0.003, ax === 'x' ? v : (z0 + z1) / 2);
-    m.receiveShadow = true; g.add(m);
+    m.receiveShadow = true; m.userData.surf = 'stone'; g.add(m);
   }
   return g;
 }
@@ -221,7 +229,8 @@ export function shadowProxy(parts) {
 }
 
 // ---------- office furniture ----------
-export function officeChair(color = PAL.chair) {
+export const officeChair = (c) => (LOOK.detail ? D.chair(c) : plainChair(c));
+export function plainChair(color = PAL.chair) {
   const g = new THREE.Group();
   g.add(rbox(0.06, 0.03, 0.42, PAL.dark, { y: 0.03, r: 0.01 }));
   g.add(rbox(0.42, 0.03, 0.06, PAL.dark, { y: 0.03, r: 0.01 }));
@@ -230,7 +239,8 @@ export function officeChair(color = PAL.chair) {
   g.add(rbox(0.34, 0.34, 0.07, color, { y: 0.26, z: -0.17, r: 0.035 }));
   return g;
 }
-export function monitor({ on = true, kind } = {}) {
+export const monitor = (o) => (LOOK.detail ? D.monitor(o) : plainMonitor(o));
+export function plainMonitor({ on = true, kind } = {}) {
   const g = new THREE.Group();
   g.add(rbox(0.18, 0.02, 0.12, PAL.monitor, { r: 0.008 }));
   g.add(rbox(0.04, 0.12, 0.03, PAL.monitor, { y: 0.02, r: 0.01 }));
@@ -240,7 +250,8 @@ export function monitor({ on = true, kind } = {}) {
   return g;
 }
 // desk facing +z (the sitter sits on the +z side)
-export function desk({ w = 1.4, d = 0.72, mon = true, clutter = 1, seed = 1 } = {}) {
+export const desk = (o) => (LOOK.detail ? D.desk(o) : plainDesk(o));
+export function plainDesk({ w = 1.4, d = 0.72, mon = true, clutter = 1, seed = 1 } = {}) {
   const g = new THREE.Group();
   const H = 0.42;
   g.add(rbox(w, 0.04, d, PAL.deskTop, { y: H - 0.04, r: 0.012 }));
@@ -250,7 +261,7 @@ export function desk({ w = 1.4, d = 0.72, mon = true, clutter = 1, seed = 1 } = 
     for (let k = 0; k < 3; k++) g.add(rbox(0.26, 0.012, 0.01, PAL.trim, { x: sx * (w / 2 - 0.19), y: 0.08 + k * 0.1, z: (d - 0.06) / 2 + 0.003, r: 0.004, cast: false }));
   }
   g.add(rbox(w - 0.72, 0.2, 0.03, PAL.drawer, { y: 0.16, z: -d / 2 + 0.05, r: 0.01 }));
-  if (mon) { const m = monitor(); m.position.set(0, H, -d * 0.2); g.add(m); }
+  if (mon) { const m = plainMonitor(); m.position.set(0, H, -d * 0.2); g.add(m); }
   g.add(rbox(0.36, 0.02, 0.12, '#cfd1d4', { y: H, z: d * 0.12, r: 0.008 }));
   if (clutter) {
     // a paper tray, a pen cup, a binder or two
@@ -263,7 +274,8 @@ export function desk({ w = 1.4, d = 0.72, mon = true, clutter = 1, seed = 1 } = 
   }
   return g;
 }
-export function filingCabinet(drawers = 3, color = '#8a909a') {
+export const filingCabinet = (n, c) => (LOOK.detail ? D.filingCabinet(n, c) : plainFilingCabinet(n, c));
+export function plainFilingCabinet(drawers = 3, color = '#8a909a') {
   const g = new THREE.Group();
   const h = 0.22 * drawers + 0.04;
   g.add(rbox(0.42, h, 0.46, color, { r: 0.015 }));
@@ -273,7 +285,8 @@ export function filingCabinet(drawers = 3, color = '#8a909a') {
   }
   return g;
 }
-export function shelf(w = 0.9, h = 1.1, d = 0.36, { fill = 'box', seed = 1 } = {}) {
+export const shelf = (w, h, d, o = {}) => (LOOK.detail ? D.shelf(w, h, d, { fill: 'box', ...o }) : plainShelf(w, h, d, o));
+export function plainShelf(w = 0.9, h = 1.1, d = 0.36, { fill = 'box', seed = 1 } = {}) {
   const g = new THREE.Group();
   for (const sx of [-1, 1]) g.add(rbox(0.04, h, d, PAL.metal, { x: sx * (w / 2 - 0.02), r: 0.01 }));
   const levels = 4;

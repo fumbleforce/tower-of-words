@@ -145,6 +145,7 @@ Game first, learning light (docs/game/setting.md) overrides these where they con
 - Desktop and phone get separate layouts. Check both with screenshots. Every part of the interface must match the same design language (the "you reply" box has failed this twice).
 - Every option on a review page has its unique ID as the card heading (e.g. sales-8301), so Jørgen can name his pick.
 - Review pages: large responsive grids (images at least about 480–520 px, not 2 per row), a lightbox with arrow keys, and the full prompt visible under each scene title.
+- World look (Jørgen, 2026-09-29, review style-avenues-room): procedural surface patterns on every model, props included ("so also the chair, flower pot gets it"), behind Settings > Graphics > Surface detail; baked light in a softer version (the first was "over the top hard"); small modelled detail in the props. Code in game3d/js/look/ (the showcase imports it); new props built with props.js get all three. Paper, card or cut-out looks stay out.
 
 ## Art
 - 3D character workflow (Jørgen, 2026-09-28; worked first try for Eric):

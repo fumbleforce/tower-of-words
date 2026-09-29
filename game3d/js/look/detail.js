@@ -1,10 +1,13 @@
-// Avenue 8, small modelled detail: the same props as props.js with more geometry where the eye lands. Chamfered
-// edges (rounded boxes with one segment, so the bevel is one flat face), door and window frames and skirting in
-// relief, cables, rims on cups, paper piles of separate sheets, handles and hinges. Same colours as props.js, so the
-// room's colour tags still apply. Small parts are merged per material in showcase/main.js like every other look.
+// Small modelled detail (texture avenue 8, game3d/design/style/AVENUES.md): the props of props.js with more geometry
+// where the eye lands. Chamfered edges (rounded boxes with one segment, so the bevel is one flat face), door and
+// window frames and skirting in relief, rims on cups, paper piles of separate sheets, handles and hinges. Same colours
+// and the same footprints as props.js, so the places don't change. props.js hands its builders (wall, door, desk,
+// monitor, officeChair, filingCabinet, shelf, plant) to these while LOOK.detail is on (look/flags.js, ?detail=0 turns
+// it off); cast.js does the same for mug(). The showcase room uses them for its look 8 and for the extras here
+// (window frame, switch, socket, cables, tower, bin, pins, clock rim).
 import * as THREE from 'three';
 import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
-import { PAL, mat, emissive, rbox, plant as basePlant, monitor as baseMonitor, sh } from '../props.js';
+import { PAL, mat, emissive, rbox, plainPlant as basePlant, plainMonitor as baseMonitor, sh } from '../props.js';
 
 // chamfered box: one-segment rounded box, so the edge is a single flat bevel
 const cbox = (w, h, d, color, o = {}) => rbox(w, h, d, color, { seg: 1, r: 0.012, ...o });
@@ -20,7 +23,7 @@ function boxes(list, color, { cast = true } = {}) {
 }
 
 // ---------- walls: slab, a skirting board in relief with a chamfered top, a chamfered cap ----------
-export function wall(axis, a, b, c, h, t, { holes = [] } = {}) {
+export function wall(axis, a, b, c, h, t, { holes = [], color = PAL.wall, top = PAL.wallTop } = {}) {
   const g = new THREE.Group();
   const cuts = [...new Set([0, b - a, ...holes.flatMap(([f, tt]) => [f - a, tt - a])])].sort((p, q) => p - q);
   const segs = [];
@@ -33,14 +36,14 @@ export function wall(axis, a, b, c, h, t, { holes = [] } = {}) {
   const put = (m, cU, y) => { m.position.x = axis === 'x' ? cU : c; m.position.z = axis === 'x' ? c : cU; m.position.y += y; if (axis !== 'x') m.rotation.y = Math.PI / 2; g.add(m); };
   for (const [u0, u1, y0, y1] of segs) {
     const L = u1 - u0, cU = a + (u0 + u1) / 2;
-    const slab = sh(new THREE.Mesh(new THREE.BoxGeometry(L, y1 - y0, t), mat(PAL.wall))); put(slab, cU, (y0 + y1) / 2);
+    const slab = sh(new THREE.Mesh(new THREE.BoxGeometry(L, y1 - y0, t), mat(color))); put(slab, cU, (y0 + y1) / 2);
     if (y0 < 0.001 && y1 > 0.3) {
       // skirting: a board proud of the wall on both faces, chamfered along the top
-      const sk = rbox(L, 0.11, t + 0.036, PAL.skirting, { seg: 1, r: 0.01, cast: false }); sk.position.y = 0; put(sk, cU, 0);
+      const sk = rbox(L, 0.11, t + 0.036, PAL.skirting, { seg: 1, r: 0.01, cast: false }); put(sk, cU, 0);
       const bead = rbox(L, 0.012, t + 0.044, PAL.trim, { seg: 1, r: 0.004, cast: false }); put(bead, cU, 0.105);
     }
     if (y1 >= h - 0.001) {
-      const cap = rbox(L + 0.002, 0.035, t + 0.03, PAL.wallTop, { seg: 1, r: 0.012, cast: false }); put(cap, cU, h);
+      const cap = rbox(L + 0.002, 0.035, t + 0.03, top, { seg: 1, r: 0.012, cast: false }); put(cap, cU, h);
     }
   }
   return g;
@@ -73,34 +76,46 @@ export function windowFrame(w, h) {
   return g;
 }
 
-// ---------- door: architrave both sides, a leaf with raised panel mouldings, a window with a bead, lever
-// handle, hinges and a kick plate ----------
-export function door(w = 0.8, h = 1.25) {
-  const g = new THREE.Group();
-  g.add(cbox(w + 0.06, 0.03, 0.2, PAL.doorFrame, { y: h }));
-  for (const s of [-1, 1]) g.add(cbox(0.03, h, 0.2, PAL.doorFrame, { x: s * (w / 2 + 0.015) }));
-  for (const zs of [-1, 1]) {
-    g.add(cbox(w + 0.2, 0.07, 0.024, PAL.doorFrame, { y: h, z: zs * 0.1 }));
-    for (const s of [-1, 1]) g.add(cbox(0.07, h + 0.07, 0.024, PAL.doorFrame, { x: s * (w / 2 + 0.035), z: zs * 0.1 }));
+// ---------- door: architrave, leaves with raised panel mouldings, a window with a bead, lever handles with a rose,
+// hinges and a kick plate. children[0] is the frame (a group), as in props.js (the office takes it off the
+// machine-room door). depth: null for a door mounted on a wall's face (the game: the frame is a 6 cm backing slab,
+// leaves at z +0.01, fittings on the front), or the wall's thickness for a door set in a hole (the showcase room:
+// frame through the wall, architrave and fittings on both sides) ----------
+export function door(w = 0.8, h = 1.25, { double = false, windows = true, depth = null } = {}) {
+  const g = new THREE.Group(), frame = new THREE.Group(); g.add(frame);
+  const inHole = depth != null, A = 0.07;
+  if (inHole) {
+    frame.add(cbox(w + 0.06, 0.03, depth, PAL.doorFrame, { y: h }));
+    for (const s of [-1, 1]) frame.add(cbox(0.03, h, depth, PAL.doorFrame, { x: s * (w / 2 + 0.015) }));
+  } else frame.add(rbox(w + 0.12, h + 0.06, 0.06, PAL.doorFrame, { r: 0.02 }));
+  const faces = inHole ? [-1, 1] : [1], zf = inHole ? depth / 2 : 0.03;
+  for (const zs of faces) {
+    frame.add(cbox(w + 2 * A + (inHole ? 0.06 : 0), A, 0.024, PAL.doorFrame, { y: h, z: zs * zf }));
+    for (const s of [-1, 1]) frame.add(cbox(A, h + A, 0.024, PAL.doorFrame, { x: s * (w / 2 + A / 2 + (inHole ? 0.03 : 0)), z: zs * zf }));
   }
-  const leaf = cbox(w - 0.01, h - 0.012, 0.05, PAL.door, { x: 0, y: 0.006, r: 0.008 }); g.add(leaf);
-  // raised panel mouldings on both faces, the upper one around the window
-  for (const zs of [-1, 1]) {
-    const z = zs * 0.028, M = 0.016, pw = w - 0.2;
-    const frame = (y0, y1) => [[pw, M, M, 0, y0, z], [pw, M, M, 0, y1 - M, z], [M, y1 - y0, M, -pw / 2 + M / 2, y0, z], [M, y1 - y0, M, pw / 2 - M / 2, y0, z]];
-    g.add(boxes([...frame(0.12, h * 0.46), ...frame(h * 0.52, h - 0.1)], '#525862', { cast: false }));
-    g.add(cbox(w - 0.06, 0.13, 0.006, PAL.metal, { y: 0.02, z: zs * 0.028, r: 0.003, cast: false }));   // kick plate
+  const leaves = double ? 2 : 1, lw = (w - 0.02) / leaves, z0 = inHole ? 0 : 0.01, T = 0.05;
+  for (let i = 0; i < leaves; i++) {
+    const x = -w / 2 + lw * (i + 0.5) + 0.01, hs = double ? (i ? -1 : 1) : 1;   // hs: the side the handle is on (-x for a single door)
+    g.add(cbox(lw - 0.012, h - 0.012, T, PAL.door, { x, y: 0.006, z: z0, r: 0.008 }));
+    for (const zs of faces) {
+      const z = z0 + zs * (T / 2 + 0.003), M = 0.016, pw = lw - 0.2;
+      const fr = (y0, y1) => [[pw, M, M, x, y0, z], [pw, M, M, x, y1 - M, z], [M, y1 - y0, M, x - pw / 2 + M / 2, y0, z], [M, y1 - y0, M, x + pw / 2 - M / 2, y0, z]];
+      g.add(boxes([...fr(0.12, h * 0.46), ...fr(h * 0.52, h - 0.1)], '#525862', { cast: false }));
+      g.add(cbox(lw - 0.06, 0.13, 0.006, PAL.metal, { x, y: 0.02, z: z0 + zs * (T / 2 + 0.003), r: 0.003, cast: false }));   // kick plate
+    }
+    if (windows) g.add(cbox(double ? 0.1 : 0.2, 0.34, T + 0.006, null, { x: x + (double ? hs * lw * 0.22 : 0), y: h * 0.6, z: z0, r: 0.006, m: mat(PAL.doorWin, { roughness: 0.3 }) }));
+    // lever handle and a rose on each face
+    const hx = double ? x + hs * (lw / 2 - 0.08) : x - lw / 2 + 0.09, hy = h * 0.47, dir = double ? -hs : 1;
+    for (const zs of faces) {
+      const z = z0 + zs * (T / 2 + 0.011);
+      g.add(cyl(0.022, 0.022, 0.008, PAL.metal, { x: hx, y: hy, z, rx: Math.PI / 2 }));
+      g.add(cyl(0.008, 0.008, 0.04, PAL.metal, { x: hx, y: hy, z: z + zs * 0.02, rx: Math.PI / 2, seg: 8 }));
+      g.add(cbox(0.1, 0.016, 0.018, PAL.metal, { x: hx + dir * 0.05, y: hy - 0.008, z: z + zs * 0.04, r: 0.006 }));
+    }
+    // hinges on the far edge
+    const ex = double ? x - hs * (lw / 2 - 0.005) : x + lw / 2 - 0.005;
+    for (const y of [0.15, h * 0.5, h - 0.2]) g.add(cyl(0.012, 0.012, 0.08, PAL.metal, { x: ex, y, z: z0 + (inHole ? 0.03 : T / 2), seg: 8 }));
   }
-  const glass = cbox(0.2, 0.34, 0.056, null, { y: h * 0.6, r: 0.006, m: mat(PAL.doorWin, { roughness: 0.3 }) }); g.add(glass);
-  // lever handles on both sides and a rose
-  for (const zs of [-1, 1]) {
-    const hx = -w / 2 + 0.09, hy = h * 0.47, z = zs * 0.036;
-    g.add(cyl(0.022, 0.022, 0.008, PAL.metal, { x: hx, y: hy, z, rx: Math.PI / 2 }));
-    g.add(cyl(0.008, 0.008, 0.04, PAL.metal, { x: hx, y: hy, z: z + zs * 0.02, rx: Math.PI / 2, seg: 8 }));
-    g.add(cbox(0.1, 0.016, 0.018, PAL.metal, { x: hx + 0.05, y: hy - 0.008, z: z + zs * 0.04, r: 0.006 }));
-  }
-  // hinges on the far edge
-  for (const y of [0.15, h * 0.5, h - 0.2]) g.add(cyl(0.012, 0.012, 0.08, PAL.metal, { x: w / 2 - 0.005, y, z: 0.03, seg: 8 }));
   return g;
 }
 
@@ -119,7 +134,7 @@ export function socket() {
 
 // ---------- desk: chamfered top, pedestals with inset drawer fronts and bar handles, a modesty panel,
 // a keyboard with keys, a mouse, a tray with a lip, a pen cup with pens, binders with a ring hole ----------
-export function desk({ w = 1.4, d = 0.72, seed = 1 } = {}) {
+export function desk({ w = 1.4, d = 0.72, mon = true, clutter = 1, seed = 1 } = {}) {
   const g = new THREE.Group();
   const H = 0.42;
   g.add(cbox(w, 0.04, d, PAL.deskTop, { y: H - 0.04, r: 0.014 }));
@@ -136,7 +151,7 @@ export function desk({ w = 1.4, d = 0.72, seed = 1 } = {}) {
   }
   g.add(cbox(w - 0.72, 0.22, 0.022, PAL.drawer, { y: 0.15, z: -d / 2 + 0.05 }));
   // monitor: bezel frame, inset screen, a stand with a round foot and a hinge
-  const mon = monitor(); mon.position.set(0, H, -d * 0.2); g.add(mon);
+  if (mon) { const m = monitor(); m.position.set(0, H, -d * 0.2); g.add(m); }
   // keyboard with keys, mouse on a pad
   const kx = 0, kz = d * 0.12;
   g.add(cbox(0.37, 0.016, 0.13, '#cfd1d4', { x: kx, y: H, z: kz, r: 0.006 }));
@@ -146,6 +161,7 @@ export function desk({ w = 1.4, d = 0.72, seed = 1 } = {}) {
   g.add(boxes(keys, '#e6e7e8', { cast: false }));
   g.add(cbox(0.2, 0.004, 0.17, PAL.charcoal, { x: kx + 0.3, y: H, z: kz, r: 0.003, cast: false }));
   const mouse = new THREE.Mesh(new THREE.SphereGeometry(0.03, 10, 6), mat('#d8dadc')); mouse.scale.set(0.8, 0.45, 1.2); mouse.position.set(kx + 0.3, H + 0.008, kz); g.add(sh(mouse));
+  if (!clutter) return g;
   // tray with a lip and paper in it
   const tx = -w * 0.36, tz = -0.05;
   g.add(cbox(0.21, 0.01, 0.27, PAL.dark, { x: tx, y: H, z: tz, r: 0.004 }));
@@ -167,10 +183,10 @@ export function desk({ w = 1.4, d = 0.72, seed = 1 } = {}) {
   }
   return g;
 }
-function monitor() {
-  const g = baseMonitor();
-  // drop the base monitor's body and stand, keep its live screen
-  const screen = g.children.find((o) => o.material && o.material.emissiveMap);
+export function monitor(o = {}) {
+  const g = baseMonitor(o);
+  // drop the base monitor's body and stand, keep its screen (live, or off)
+  const screen = g.children.find((c) => c.geometry && c.geometry.type === 'PlaneGeometry');
   g.clear(); g.add(screen);
   const foot = new THREE.Mesh(new THREE.CylinderGeometry(0.085, 0.09, 0.014, 20), mat(PAL.monitor)); foot.scale.z = 0.7; foot.position.y = 0.007; g.add(sh(foot));
   g.add(cbox(0.05, 0.14, 0.022, PAL.monitor, { y: 0.01, z: -0.03, r: 0.008 }));
@@ -183,13 +199,15 @@ function monitor() {
   return g;
 }
 
-export function mug() {
-  const g = new THREE.Group();
+// centre: the origin at the middle of the cup, like cast.js's plain mug (the game places mugs by their middle)
+export function mug(color = '#e9e6df', { centre = false } = {}) {
+  const g = new THREE.Group(), c = centre ? new THREE.Group() : g;
+  if (centre) { c.position.y = -0.044; g.add(c); }
   const prof = [[0, 0], [0.034, 0], [0.037, 0.004], [0.04, 0.08], [0.043, 0.084], [0.043, 0.088], [0.036, 0.088], [0.034, 0.012], [0, 0.012]].map(([x, y]) => new THREE.Vector2(x, y));
-  const body = new THREE.Mesh(new THREE.LatheGeometry(prof, 18), mat('#e9e6df', { roughness: 0.5 })); g.add(sh(body));
-  const coffee = new THREE.Mesh(new THREE.CircleGeometry(0.035, 16), mat('#33282a', { roughness: 0.3 })); coffee.rotation.x = -Math.PI / 2; coffee.position.y = 0.07; g.add(coffee);
-  const hd = new THREE.Mesh(new THREE.TorusGeometry(0.022, 0.006, 6, 10, Math.PI), mat('#e9e6df', { roughness: 0.5 }));
-  hd.rotation.z = -Math.PI / 2; hd.position.set(0.041, 0.045, 0); g.add(sh(hd));
+  const body = new THREE.Mesh(new THREE.LatheGeometry(prof, 18), mat(color, { roughness: 0.5 })); c.add(sh(body));
+  const coffee = new THREE.Mesh(new THREE.CircleGeometry(0.035, 16), mat('#33282a', { roughness: 0.3 })); coffee.rotation.x = -Math.PI / 2; coffee.position.y = 0.07; c.add(coffee);
+  const hd = new THREE.Mesh(new THREE.TorusGeometry(0.022, 0.006, 6, 10, Math.PI), mat(color, { roughness: 0.5 }));
+  hd.rotation.z = -Math.PI / 2; hd.position.set(0.041, 0.045, 0); c.add(sh(hd));
   return g;
 }
 export function paperPile(n = 6) {
@@ -264,7 +282,9 @@ export function cables(DESK, wallZ, towerXZ) {
 }
 
 // ---------- shelf: folded lips on each shelf, cross bracing at the back, binders with ring holes and labels ----------
-export function shelf(w = 0.9, h = 1.1, d = 0.36, { seed = 1 } = {}) {
+// ---------- shelf: posts, folded lips on each shelf, cross bracing at the back; binders with ring holes and labels,
+// or boxes or paper as in props.js ----------
+export function shelf(w = 0.9, h = 1.1, d = 0.36, { fill = 'binders', seed = 1 } = {}) {
   const g = new THREE.Group();
   for (const sx of [-1, 1]) {
     g.add(cbox(0.04, h, 0.04, PAL.metal, { x: sx * (w / 2 - 0.02), z: d / 2 - 0.02, r: 0.008 }));
@@ -283,6 +303,19 @@ export function shelf(w = 0.9, h = 1.1, d = 0.36, { seed = 1 } = {}) {
     g.add(cbox(w - 0.02, 0.035, 0.012, '#a3a9b2', { y: y - 0.015, z: d / 2 - 0.004, r: 0.004, cast: false }));   // folded lip
     if (i === levels - 1) continue;
     const gap = (h - 0.1) / (levels - 1) - 0.05;
+    if (fill === 'box') {
+      let x = -w / 2 + 0.08;
+      while (x < w / 2 - 0.2) {
+        const bw = 0.22 + rnd() * 0.1, bh = Math.min(gap, 0.16 + rnd() * 0.08);
+        if (rnd() > 0.2) { const col = rnd() > 0.5 ? PAL.box : PAL.boxDark; g.add(cbox(bw, bh, d * 0.8, col, { x: x + bw / 2, y: y + 0.013, r: 0.008 })); g.add(cbox(bw * 0.3, 0.02, 0.004, '#3e434d', { x: x + bw / 2, y: y + 0.013 + bh * 0.62, z: d * 0.4 + 0.001, r: 0.002, cast: false })); }   // a hand hole
+        x += bw + 0.04;
+      }
+      continue;
+    }
+    if (fill === 'paper') {
+      for (let k = 0; k < 3; k++) { const pile = paperPile(8 + ((rnd() * 5) | 0)); pile.scale.set(w * 0.26 / 0.21, 1.5, d * 0.75 / 0.297); pile.position.set(-w * 0.3 + k * w * 0.3, y + 0.013, 0); g.add(pile); }
+      continue;
+    }
     let x = -w / 2 + 0.06;
     const cols = ['#4a6490', '#6a7a8c', '#3d4d6b', '#7f8ea3', '#56657e'];
     const labels = [], holes = [];
@@ -317,9 +350,9 @@ export function filingCabinet(drawers = 3, color = '#8a909a') {
 }
 
 // ---------- plant: the base plant plus a rolled rim on the pot, a saucer and pebbles on the soil ----------
-export function plant(o) {
+export function plant(o = {}) {
   const g = basePlant(o), s = o.size || 1;
-  g.add(boxes([[0.39 * s, 0.03, 0.03, 0, 0.33 * s, 0.18 * s], [0.39 * s, 0.03, 0.03, 0, 0.33 * s, -0.18 * s], [0.03, 0.03, 0.39 * s, 0.18 * s, 0.33 * s, 0], [0.03, 0.03, 0.39 * s, -0.18 * s, 0.33 * s, 0]], PAL.planter));
+  g.add(boxes([[0.39 * s, 0.03, 0.03, 0, 0.33 * s, 0.18 * s], [0.39 * s, 0.03, 0.03, 0, 0.33 * s, -0.18 * s], [0.03, 0.03, 0.39 * s, 0.18 * s, 0.33 * s, 0], [0.03, 0.03, 0.39 * s, -0.18 * s, 0.33 * s, 0]], o.pot || PAL.planter));
   g.add(cbox(0.42 * s, 0.02, 0.42 * s, '#b3aea5', { y: -0.004, r: 0.008, cast: false }));
   for (let i = 0; i < 6; i++) { const p = new THREE.Mesh(new THREE.IcosahedronGeometry(0.015 * s, 0), mat('#8d8f93')); p.position.set(Math.cos(i * 2.1) * 0.1 * s, 0.35 * s + 0.008, Math.sin(i * 2.1) * 0.1 * s); g.add(p); }
   return g;

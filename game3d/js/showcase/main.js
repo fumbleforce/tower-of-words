@@ -12,17 +12,18 @@ import { RoomCam } from '../cam.js';
 import { liveScreens } from '../props.js';
 import { loadMio } from '../mio.js';
 import { loadEric } from '../avatar.js';
-import { buildRoom, R, GRADE, SPOTS } from './room.js';
-import { proceduralMaterial, PU } from './procedural.js';
+import { buildRoom, R, WIN, GRADE, SPOTS } from './room.js';
 import { buildDecals } from './decals.js';
-import { bakeRoom } from './bake.js';
 import { trimRoom } from './trim.js';
+// avenues 2, 4 and 8 are the game's own code (js/look/), the same the places use
+import { applyLook, LOOK } from '../look/index.js';
+import { PROC } from '../look/procedural.js';
 
 export const LOOKS = {
   0: { key: '0', name: 'Today', note: 'The current look: one colour per face, the office lights and colour grade.' },
   2: { key: '2', name: 'Procedural', note: 'Avenue 2. Tile, carpet, plaster, metal, laminate and fabric computed in the shader from world position. No textures.' },
   3: { key: '3', name: 'Decals', note: 'Avenue 3. Scuffs, a worn path, a coffee ring, tape marks, a water mark and stickers from one atlas, drawn in one pass.' },
-  4: { key: '4', name: 'Vertex colour', note: 'Avenue 4. Darker corners and feet, warmer toward the window, a floor gradient, slightly different tints on repeated things.' },
+  4: { key: '4', name: 'Vertex colour', note: 'Avenue 4, the softer version in the game (?bake=hard: the first one). Darker corners and feet, warmer toward the window, a floor gradient, slightly different tints on repeated things.' },
   7: { key: '7', name: 'Trim sheet', note: 'Avenue 7. One atlas of edge detail on made things: panels and screws, vents, rubber edges, skirting, keys, labels, drawer fronts.' },
   8: { key: '8', name: 'Modelled detail', note: 'Avenue 8. Chamfers, frames and skirting in relief, cables, handles and hinges, a mug rim, separate paper sheets.' },
 };
@@ -64,14 +65,18 @@ function mergeStatic(root) {
   return n;
 }
 
-function applyProcedural(root) {
-  const cache = new Map();
-  PU.uDetail.value = tier >= 2 ? 1 : tier === 1 ? 0.7 : 0.35;
-  root.traverse((o) => {
-    if (!o.isMesh || !o.material || Array.isArray(o.material)) return;
-    const k = o.material.uuid + o.userData.surf;
-    if (!cache.has(k)) cache.set(k, proceduralMaterial(o.material, o.userData.surf));
-    o.material = cache.get(k);
+// the look patches materials in place, and props.js shares materials by colour: the room gets its own copies first,
+// so one look doesn't leak into the next
+function ownMaterials(root) {
+  const copy = new Map();
+  root.traverse((o) => { if (o.isMesh && o.material && !Array.isArray(o.material) && !o.userData.keep) { if (!copy.has(o.material)) copy.set(o.material, o.material.clone()); o.material = copy.get(o.material); } });
+}
+function withLook(scene, root, n) {
+  ownMaterials(root);
+  PROC.on = true;
+  const winC = new THREE.Vector3((WIN.x0 + WIN.x1) / 2, (WIN.y0 + WIN.y1) / 2, R.Z0);
+  return applyLook({ scene, space: root }, null, {
+    surf: n === 2, bake: n === 4 ? (Q.get('bake') || 'soft') : '0', tier, warmAt: winC, floorGrad: { z0: R.Z0, z1: R.Z1 },
   });
 }
 
@@ -83,11 +88,12 @@ function dispose(c) {
 
 async function build(n) {
   const t0 = performance.now();
+  LOOK.detail = n === 8;   // props.js builds the detailed props only for look 8
   const { scene, root, sun } = buildRoom({ detail: n === 8 });
   let extra = '';
-  if (n === 2) applyProcedural(root);
+  if (n === 2) withLook(scene, root, 2);
   if (n === 3) root.add(buildDecals());
-  if (n === 4) extra = bakeRoom(root) + ' meshes baked';
+  if (n === 4) extra = withLook(scene, root, 4).bake.meshes + ' meshes baked';
   if (n === 7) extra = trimRoom(root).n + ' meshes on the trim sheet';
   mergeStatic(root);
   // the two characters, as in the game (Meshy models, blob shadows)

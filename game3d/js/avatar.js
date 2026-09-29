@@ -10,6 +10,7 @@ import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.j
 import { toCreasedNormals } from 'three/addons/utils/BufferGeometryUtils.js';
 
 const charMat = new THREE.MeshStandardMaterial({ vertexColors: true, roughness: 0.78, metalness: 0 });
+charMat.userData.noLook = true;   // people keep their flat colours (look/index.js)
 const mesh = (g) => { const m = new THREE.Mesh(toCreasedNormals(g.build(), 0.7), charMat); m.castShadow = true; m.receiveShadow = true; return m; };
 
 export const ERIC = { skin: '#f6ddcf', hair: '#ad8d5c', beard: '#9a7b52', blazer: '#2d3a58', hoodie: '#8f9298', trousers: '#373c48', shoes: '#4a3a30' };

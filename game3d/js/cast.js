@@ -7,8 +7,11 @@ import { hull } from './train/hull.js';
 import { V } from './train/kit.js';
 import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.js';
 import { toCreasedNormals } from 'three/addons/utils/BufferGeometryUtils.js';
+import { LOOK } from './look/flags.js';
+import { mug as detailMug } from './look/detail.js';
 
 const charMat = new THREE.MeshStandardMaterial({ vertexColors: true, roughness: 0.78, metalness: 0 });
+charMat.userData.noLook = true;   // people keep their flat colours (look/index.js)
 const mesh = (geo) => { const m = new THREE.Mesh(toCreasedNormals(geo.build(), 0.7), charMat); m.castShadow = true; m.receiveShadow = true; return m; };
 
 export { sit, armsLap, armsHold, walkPose, HIP };
@@ -88,6 +91,7 @@ export function briefcase() {
   return g;
 }
 export function mug(color = '#e9e6df') {
+  if (LOOK.detail) return detailMug(color, { centre: true });   // a rim, a handle and coffee (look/detail.js)
   const m = new THREE.Mesh(new THREE.CylinderGeometry(0.04, 0.036, 0.08, 10), new THREE.MeshStandardMaterial({ color, roughness: 0.5 }));
   m.castShadow = true; return m;
 }
