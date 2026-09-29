@@ -2,8 +2,8 @@
   "defaultLines": 400,
   "exceptions": {
     "game3d/js/avatar.js": {
-      "lines": 475,
-      "bytes": 15309,
+      "lines": 474,
+      "bytes": 15220,
       "owner": "codex-tui",
       "review": "C-0071",
       "reason": "Existing avatar loading, rig mapping and animation playback; keep the ceiling until the character pipeline split."

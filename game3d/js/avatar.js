@@ -238,7 +238,7 @@ export function makeAvatar() {
 // palette (slightly less saturated, a touch cooler). The mesh, face and body are untouched.
 import { GLTFLoader } from '../vendor/loaders/GLTFLoader.js';
 import { calmSitTime, V as ver, poseLayer, addPhone, API_PHONE_BONES, CDIR, makeGait } from './mio.js';
-import { loadRelaxedIdle, fitSharedIdle } from './relaxed-idle.js';
+import { loadRelaxedIdle } from './relaxed-idle.js';
 const EDIR = new URL('../assets/eric/', import.meta.url).href;
 export const loadEric = (o = {}) => loadMeshy('eric', { dir: EDIR, height: 1.2, ...o });
 // one-shot gesture clips from Meshy's library (bow, wave, shrug, nod), retargeted onto each rig as JSON
@@ -255,7 +255,7 @@ export async function loadMeshy(id, { height = 1.2, dir = CDIR + id + '/' } = {}
   const [walk, run, idle, sitG, tex, phoneJson, ...gj] = await Promise.all([
     load(dir + 'walk.glb' + ver()),
     load(dir + 'run.glb' + ver()),
-    loadRelaxedIdle('eric', ver()),
+    loadRelaxedIdle(id, ver()),
     load(dir + 'sit.glb' + ver()),
     new THREE.TextureLoader().loadAsync(dir + 'base.webp' + ver()),
     json(CDIR + id + '/phone.json'),
@@ -293,11 +293,10 @@ export async function loadMeshy(id, { height = 1.2, dir = CDIR + id + '/' } = {}
   holder.add(model);
   root.add(holder);
   const mixer = new THREE.AnimationMixer(model);
-  const idleSrc = id === 'eric' ? idle : fitSharedIdle(idle, model);
   const actions = {
     walk: mixer.clipAction(walk.animations[0]),
     run: mixer.clipAction(run.animations[0]),
-    idle: mixer.clipAction(idleSrc),
+    idle: mixer.clipAction(idle),
     sit: mixer.clipAction(sitG.animations[0]),
   };
   let hips = null;
@@ -348,8 +347,8 @@ export async function loadMeshy(id, { height = 1.2, dir = CDIR + id + '/' } = {}
       a.time = SIT_T;
       a.timeScale = 0;
     }
-    a.fadeIn(cur ? 0.2 : 0).play();
-    if (cur && cur !== a) cur.fadeOut(0.2);
+    a.fadeIn(cur ? 0.25 : 0).play();
+    if (cur && cur !== a) cur.fadeOut(0.25);
     cur = a;
     curName = name;
   }
