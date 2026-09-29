@@ -9,6 +9,7 @@ import { sit, armsLap, PEOPLE, idle } from '../cast.js';
 import { blob } from '../engine.js';
 import { flags } from '../runner.js';
 import { glide } from './lobby.js';
+import { walkRig } from '../move.js';
 import { mat, rbox, PAL } from '../props.js';
 import { route } from './route.js';
 
@@ -133,7 +134,7 @@ export async function officePlace(game) {
     walkPerson(id, [x, z], { speed } = {}) {
       const r = people[id]; if (!r) return Promise.resolve();
       if (r.seated) standUp(id);
-      if (r.root && !r.hips) return glide(game, r.root, [x, z], speed || 1.0);
+      if (r.root && !r.hips) return walkRig(game, r, [x, z], { speed: speed || 1.0 });
       r.root.visible = true; if (blobs[id]) blobs[id].visible = true;
       const chief = id === 'mori' && Math.hypot(x - 2.3, z + 2.55) < 0.05;
       const path = routeTo(r.root.position, chief ? [2.3, -2.7] : [x, z]);

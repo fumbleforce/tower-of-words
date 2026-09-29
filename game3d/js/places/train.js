@@ -14,6 +14,7 @@ import { ui, sfx } from '../ui.js';
 import { walkPerson, stepPeople, lookAt } from '../story.js';
 import { rbox, mat, emissive, textTexture, plane, JP_FONT, plant as propPlant } from '../props.js';
 import { glide, withList } from './lobby.js';
+import { standOut, walkRig } from '../move.js';
 import { flags } from '../runner.js';
 import { dust, lightPool } from './life.js';
 import { route } from './route.js';
@@ -448,7 +449,7 @@ export async function trainPlace(game) {
       }
     },
     async standPerson(id) {
-      if ((id === 'eric' || id === 'player')) { const m = game.player; if (!m.seated) return; m.seated = false; m.setState('idle'); m.root.position.y = 0; m.root.position.z += m.root.position.z < 0 ? 0.55 : -0.55; for (const b of bagObjs) { b.visible = true; b.userData.blob.visible = true; } return; }
+      if ((id === 'eric' || id === 'player')) { const m = game.player; if (!m.seated) return; for (const b of bagObjs) { b.visible = true; b.userData.blob.visible = true; } await standOut(game, m, m.root.position.z < 0 ? 0.55 : -0.55); return; }
       const r = people[id]; if (r && r.hips) standUp(r);
     },
     update(dt, t) {
@@ -611,7 +612,18 @@ export async function trainPlace(game) {
       if (p.z < LZ + 0.2) { const dx = Math.abs(p.x - DOOR_X) < Math.abs(p.x + DOOR_X) ? DOOR_X : -DOOR_X; await glide(g, mio.root, [dx, LZ - 0.35], 1.4); await glide(g, mio.root, [dx, LZ + 0.9], 1.4); }
       for (const id of withList(slot)) {
         const r = people[id] || (id === 'mio' ? game.mioNpc : null); if (!r) continue;
-        if (r.meshy) { if (r.seated) { r.seated = false; r.setState('idle'); r.root.position.y = 0; r.root.position.z += 0.5; } r.root.visible = true; r.setState('walk'); glide(game, r.root, [DOOR_X - 0.3, LZ - 0.3], 1.4).then(() => glide(game, r.root, [DOOR_X - 0.3, LZ + 1.3], 1.4)).then(() => glide(game, r.root, [7.6, LZ + 1.7], 1.45)); continue; }
+        // Mio (Meshy): out of the car if she's still in it, then beside Eric (a body to his left, a step behind), never on his line
+        if (r.meshy) {
+          (async () => {
+            if (r.seated) await standOut(game, r, 0.5);
+            r.root.visible = true;
+            if (r.root.position.z < LZ) { await glide(game, r.root, [DOOR_X - 0.3, LZ - 0.3], 1.4); await glide(game, r.root, [DOOR_X - 0.3, LZ + 1.3], 1.4); }
+            else await g.wait(350);
+            await walkRig(game, r, [7.0, LZ + 2.2], { speed: 1.45, route: false });   // steers round Eric
+            r.setState('idle'); r.setGait?.(null);
+          })();
+          continue;
+        }
         if (!r.hips) continue;
         r.root.visible = true; if (r.blob) r.blob.visible = true;
         const go = () => walkPerson(r, [[DOOR_X - 0.3, LZ + 1.3], [7.6, LZ + 1.7]], { speed: 1.45, blobM: r.blob });

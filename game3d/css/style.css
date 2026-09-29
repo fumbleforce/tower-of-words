@@ -977,3 +977,18 @@ body.phone #actMenu .act { padding: 0 12px; }
 /* voice input and practice dots (css from js/speech.js and js/mastery.js) */
 .tp-cancel { margin-top: 8px; height: 36px; padding: 0 14px; border-radius: var(--chip-r); border: 1px solid var(--chip-edge); background: #252b35; color: var(--ink); cursor: pointer; font: 600 14px/1 var(--font); }
 #sayMenu button.cmd { display: flex; align-items: center; }
+
+/* QA round 1 */
+/* 3: phone HUD fits: no clock chip, tighter chips */
+body.phone #clock { display: none !important; }
+body.phone #hud { gap: 4px; }
+body.phone .hchip { padding: 0 7px 0 6px; }
+/* 4: the Say tip on the UI scale, clear of the goal */
+#sayTip { font-size: calc(14px * var(--ui, 1)); width: min(calc(340px * var(--ui, 1)), calc(100vw - 32px)); }
+#sayTip b { color: var(--accent); }
+/* 6: the typing prompt on a dark card; romaji readable before it's typed */
+#talk.typing { padding: 16px 20px 18px; border-radius: 14px; background: rgba(20, 23, 29, .94); border: 1px solid var(--chip-edge); box-shadow: 0 6px 24px rgba(0,0,0,.4); text-shadow: none; }
+.tp-ro { color: #c3ccd8; }
+body.phone #talk.typing { left: 10px; right: 10px; bottom: 10px; padding: 14px 14px 16px; }
+/* 26: taught words never break across lines */
+.jp[data-w], .tp-jp, .cmd .jp { white-space: nowrap; }

@@ -3,6 +3,7 @@ import * as THREE from 'three';
 import { ui, voice, sfx } from './ui.js';
 import { WORDS, learn, cmdHTML, lineHTML } from './lang.js';
 import { walkPose, HIP } from './cast.js';
+import { personStep } from './move.js';
 
 export const WHO = {
   aoi: { name: 'Aoi', color: '#e79fb0' },
@@ -74,7 +75,9 @@ export function walkPerson(rig, pts, { speed = 1.2, blobM } = {}) {
       const d = Math.hypot(t.x - p.x, t.z - p.z);
       if (d < 0.05) { path.shift(); return; }
       const s = Math.min(d, speed * dt);
-      p.x += (t.x - p.x) / d * s; p.z += (t.z - p.z) / d * s;
+      // people keep their distance: hold back behind someone, slide round them (move.js personStep)
+      const [qx, qz] = personStep(window.__game, rig, p.x, p.z, p.x + (t.x - p.x) / d * s, p.z + (t.z - p.z) / d * s, dt);
+      p.x = qx; p.z = qz;
       const want = Math.atan2(t.x - p.x, t.z - p.z);
       let a = want - rig.root.rotation.y; a = Math.atan2(Math.sin(a), Math.cos(a));
       rig.root.rotation.y += a * Math.min(1, dt * 10);

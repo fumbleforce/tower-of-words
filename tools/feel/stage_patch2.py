@@ -28,7 +28,7 @@ rep('places/train.js', "import { glide, withList } from './lobby.js';", "import 
 p = f'{J}/places/lobby.js'; s = open(p).read()
 if 'export function glide(' in s:
     a = s.index('export function glide('); b = s.index('export async function lobbyPlace')
-    s = s[:a] + "export { glide } from '../move.js';   // smooth start, turn and stop; never touches the player's facing\n\n" + s[b:]
+    s = s[:a] + "import { glide } from '../move.js';   // smooth start, turn and stop; never touches the player's facing\nexport { glide };\n\n" + s[b:]
     open(p, 'w').write(s)
 # places/office.js (world): Meshy NPCs walk routed, not in a straight line through desks
 rep('places/office.js', "if (r.root && !r.hips) return glide(game, r.root, [x, z], speed || 1.0);", "if (r.root && !r.hips) return walkRig(game, r, [x, z], { speed: speed || 1.0 });")

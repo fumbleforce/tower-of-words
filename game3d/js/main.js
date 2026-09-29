@@ -5,7 +5,7 @@ import { makePost } from './post.js';
 import { attachLift } from './places/lift.js';
 import { needsPractice } from './mastery.js';
 import { OutlinePass } from 'three/addons/postprocessing/OutlinePass.js';
-import { SmoothWalker } from './move.js';
+import { SmoothWalker, walkRig, faceRig, approachSpot, pickPerson, standOut } from './move.js';
 import * as ambience from './ambience.js';
 import { setPlace as sfxPlace } from './sfx.js';
 import { learned } from './feel.js';
@@ -48,7 +48,7 @@ export const game = {
   runner: null, story: null, prepared: {}, queue: [], timeScale: TS, test: TEST,
   async beat(fn) {
     if (this.busy) return;
-    this.busy = true; this.walker.locked = true; this.walker.stop(); document.body.classList.add('busy');
+    this.busy = true; this.walker.locked = true; this.walker.stop(); document.body.classList.add('busy'); ui.closeSayMenu?.();
     try { await fn(); } catch (e) { console.error(e); } finally { ui.closeTalk(); this.setHurry?.(false); this.busy = false; if (this.walker) this.walker.locked = false; document.body.classList.remove('busy'); }
     if (this.after) { const a = this.after; this.after = null; await a(); return; }
     if (this.queue.length) { const q = this.queue.shift(); this.beat(q); }
@@ -76,6 +76,7 @@ export const game = {
   mioSays(id) { this.place.onMioSays?.(id); },
 };
 window.__game = game;
+game.flagsRef = flags;
 // Clicking while a scene plays out (a walk, a door, a gesture) with no line waiting fast-forwards it to the next line
 // (Jørgen: clicks that did nothing were frustrating). runner clears it when a line, choice or prompt shows.
 const HURRY = 6;
@@ -191,7 +192,7 @@ game.standUp = standUp;
 function use(item) {
   if (!item || game.busy) return;
   const go = () => { if (game.busy) return; if (item.face) game.walker.faceTo(...item.face()); talk(item); };
-  const sp = item.spot ? item.spot() : null;
+  const sp = approachSpot(game, item) || (item.spot ? item.spot() : null);
   // seated: he talks from his seat to what's within reach; for anything further he stands up and walks over
   if (game.player.seated) {
     const p = game.player.root.position, a = item.anchor(new THREE.Vector3()); game.place.space.worldToLocal(a);
@@ -212,7 +213,8 @@ function talk(item) {
   if (look) game.beat(() => ui.say(null, typeof look === 'function' ? look() : look));
 }
 async function say() {
-  if (game.busy || !known.size) return;
+  // one Say at a time: no reopening while the last word's reaction is still coming (QA round 1: menu under the dialogue, the cat line twice)
+  if (game.busy || !known.size || game.saying) return;
   const target = game.sayTarget;
   const id = await ui.sayMenu(target ? target.label : null);
   if (!id) return;
@@ -220,8 +222,12 @@ async function say() {
 }
 // saying a chosen word to a target, as the Say menu does (the fast test drives words through this too)
 async function sayWord(id, target) {
+  game.saying = true;
+  try { return await sayWord0(id, target); } finally { game.saying = false; }
+}
+async function sayWord0(id, target) {
   // until a word has been typed or said a few times, Say asks for it again (Jørgen: not just clicking it)
-  if (needsPractice(id)) { const ok = await ui.typePrompt(id, { who: null, text: target ? `Say it to ${target.label}.` : 'Say it.' }, { cancel: true }); ui.closeTalk(); if (!ok) return; }
+  if (needsPractice(id)) { const ok = await ui.typePrompt(id, { who: null, text: target ? `Say it to ${sayName(target)}.` : 'Say it.' }, { cancel: true }); ui.closeTalk(); if (!ok) return; }
   const key = target ? `say:${id}:${target.id}` : null;
   if (target && target.face) game.walker.faceTo(...target.face());
   const spoken = voice(WORDS[id].voice);
@@ -235,6 +241,8 @@ async function sayWord(id, target) {
     else await ui.say(null, `You say ${WORDS[id].ja} to nobody in particular. Nobody in particular does anything.`);
   });
 }
+// "Say it to Mio.", "Say it to the sleeping man.", "Say it to the machine room."
+function sayName(t) { const l = t.label || ''; return /^(Mr|Ms|Mrs)\.? |^[A-Z][a-z]+$/.test(l) && /person/.test(t.kind || '') ? l : 'the ' + l.charAt(0).toLowerCase() + l.slice(1); }
 ui.onSay = say;
 game.sayWord = sayWord;
 ui.peopleHTML = peopleHTML; ui.items = ITEMS;
@@ -258,6 +266,7 @@ function ndc(e) { const r = canvas.getBoundingClientRect(); return new THREE.Vec
 canvas.addEventListener('pointerdown', (e) => {
   unlockAudio();
   if (game.busy || !game.place) return;
+  const who = pickPerson(game, e.clientX, e.clientY, canvas); if (who) { use(who); return; }
   const [w, h] = [canvas.clientWidth, canvas.clientHeight];
   let best = null, bd = 44;
   const v = new THREE.Vector3();
@@ -402,7 +411,7 @@ H.walk = async ({ who, to, wait = true, speed }) => {
   const p = posOf(to); if (!p) return;
   if (isPlayer(who)) { const pr = game.walkTo(p[0], p[1]); if (wait) await pr; return; }
   const r = rigOf(who); if (!r) return;
-  if (r.meshy) { r.root.visible = true; if (r.seated) { r.root.position.y = 0; r.root.position.z += r.root.position.z < 0 ? 0.45 : -0.45; } r.seated = false; r.setState('walk'); const pr = glide(game, r.root, p, speed || 1.2).then(() => r.setState('idle')); if (wait) await pr; return; }
+  if (r.meshy) { r.root.visible = true; if (r.seated) { r.root.position.y = 0; r.root.position.z += r.root.position.z < 0 ? 0.45 : -0.45; } r.seated = false; const pr = walkRig(game, r, p, { speed: speed || 1.0 }); if (wait) await pr; return; }
   const pr = game.place.walkPerson(who, p, { speed });
   if (wait) await pr;
 };
@@ -410,7 +419,7 @@ H.face = ({ who, to }) => {
   const p = posOf(to); if (!p) return;
   if (isPlayer(who)) { game.walker.faceTo(p[0], p[1]); return; }
   const r = rigOf(who); if (!r) return;
-  r.root.rotation.y = Math.atan2(p[0] - r.root.position.x, p[1] - r.root.position.z);
+  faceRig(game, r, p);
 };
 H.look = ({ who, at }) => { const r = rigOf(who); const p = posOf(at); if (r && p) r.lookTarget = p; };
 H.sit = async ({ who, at }) => {
@@ -421,7 +430,7 @@ H.sit = async ({ who, at }) => {
 H.stand = async ({ who }) => {
   const r = rigOf(who);
   // Meshy rigs (Mio, and Eric when it's him) stand by leaving the sit pose and stepping off the bench
-  if (r && r.meshy && !isPlayer(who)) { if (r.seated) { r.seated = false; r.setState('idle'); r.root.position.y = 0; r.root.position.z += r.root.position.z < 0 ? 0.45 : -0.45; } return; }
+  if (r && r.meshy && !isPlayer(who)) { if (r.seated) await standOut(game, r, r.root.position.z < 0 ? 0.45 : -0.45); return; }
   await game.place.standPerson?.(who);
 };
 H.cam = ({ on, zoom = 1.8, back }) => { if (back) game.place.cam.release?.(); else { const p = posOf(on); if (p) game.place.cam.closeOn?.(p, zoom); } };
@@ -537,7 +546,7 @@ H.type = async ({ word, prompt, from }) => {
   if (from && game.sim && !game.sim.taught[word]) game.sim.taught[word] = from;
   if (!WORDS[word]) { console.warn('type: unknown word', word); return; }
   let pr = prompt;
-  if (prompt) { const i = prompt.indexOf(': '); if (i > 0 && /^\w+$/.test(prompt.slice(0, i))) pr = { who: game.runner.speaker(prompt.slice(0, i)), text: prompt.slice(i + 2) }; else pr = { who: null, text: prompt.replace(/^>\s*/, '') }; }
+  if (prompt) { const i = prompt.indexOf(': '); if (i > 0 && /^\w+$/.test(prompt.slice(0, i))) pr = { who: game.runner.speaker(prompt.slice(0, i)), whoId: prompt.slice(0, i), text: prompt.slice(i + 2) }; else pr = { who: null, text: prompt.replace(/^>\s*/, '') }; }
   await ui.typePrompt(word, pr);
   const spoken = voice(WORDS[word].voice || '');
   game.runner.learnCmd(word);

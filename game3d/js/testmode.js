@@ -8,6 +8,7 @@ import { flags } from './runner.js';
 export function start(game) {
   setMuted(true);
   ui.auto = true;
+  import('./move.js').then((m) => m.startMoveCheck(game));
   const T = window.__test = { log: [], errors: [], places: [], done: false, t0: performance.now() };
   window.addEventListener('error', (e) => T.errors.push(String(e.message)));
   window.addEventListener('unhandledrejection', (e) => T.errors.push(String(e.reason)));
