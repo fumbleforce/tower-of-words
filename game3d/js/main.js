@@ -236,7 +236,7 @@ function talk(item) {
 }
 async function say() {
   // one Say at a time: no reopening while the last word's reaction is still coming (QA round 1: menu under the dialogue, the cat line twice)
-  if (game.busy || !known.size || game.saying) return;
+  if (game.busy || !SAYABLE.some((w) => known.has(w)) || game.saying) return;
   const target = game.sayTarget;
   const id = await ui.sayMenu(target ? target.label : null);
   if (!id) return;

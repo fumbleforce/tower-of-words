@@ -515,7 +515,10 @@ export const ui = {
   showCmds() {
     const row = (id) => { const w = WORDS[id]; return `<li class="wrow">${iconHTML(id)}<span class="cw"><span class="jp">${w.ja}</span><span class="rd">${w.ro} · ${w.en}</span></span>${pipsHTML(id)}</li>`; };
     const ph = PHRASES.filter((id) => known.has(id)), cm = COMMANDS.filter((id) => known.has(id));
-    $('#cmdsPanel ul').innerHTML = (ph.length ? `<li class="sec">Phrases</li>${ph.map(row).join('')}` : '') + (cm.length ? `<li class="sec">Commands <span>(they make old machines listen)</span></li>${cm.map(row).join('')}` : '');
+    // words he understands but doesn't say (外人 gaijin): no practice marks, they never go in the Say menu
+    const wd = [...known].filter((id) => WORDS[id] && !PHRASES.includes(id) && !COMMANDS.includes(id));
+    const wrow = (id) => { const w = WORDS[id]; return `<li class="wrow"><span class="cw"><span class="jp">${w.ja}</span><span class="rd">${w.ro} · ${w.en}</span></span></li>`; };
+    $('#cmdsPanel ul').innerHTML = (ph.length ? `<li class="sec">Phrases</li>${ph.map(row).join('')}` : '') + (cm.length ? `<li class="sec">Commands <span>(they make old machines listen)</span></li>${cm.map(row).join('')}` : '') + (wd.length ? `<li class="sec">Words</li>${wd.map(wrow).join('')}` : '');
     $('#cmdsPanel').hidden = false;
   },
   // the Say menu: resolves with a command id or null
