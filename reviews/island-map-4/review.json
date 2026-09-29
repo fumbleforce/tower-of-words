@@ -1,0 +1,30 @@
+{
+  "title": "Full island map, round 4",
+  "date": "2026-09-29",
+  "by": "Codex",
+  "status": "open",
+  "question": "Does this larger island make the station, office and dorm walks clear?",
+  "multi": false,
+  "options": [
+    {
+      "id": "island-04",
+      "label": "island-04",
+      "image": "art/candidates/island-map-4/01-overview.png",
+      "note": "The island03 centre remains, with a distinct station/security building, an open forecourt to head office, a direct fountain-side walk toward the dorms, a larger event field and park, and separate ferry/supply docks beside the old works. The map still has bright, saturated colours and a tidy resort-like finish; that feedback is not resolved. No clear cars or car parks were found on inspection. Exact dorm doors and small shared-building functions such as laundry, sento and pool changing rooms cannot all be verified at this overview scale. No new outdoor game location is built."
+    }
+  ],
+  "links": [
+    {
+      "label": "Full-size map",
+      "href": "art/candidates/island-map-4/01-overview.png"
+    },
+    {
+      "label": "Every attempt and full prompt",
+      "href": "bible/#doc/art/candidates/island-map-4/attempts.md"
+    },
+    {
+      "label": "Neighbourhoods, walking routes and staging",
+      "href": "bible/#doc/art/candidates/island-map-4/brief.md"
+    }
+  ]
+}
