@@ -1,23 +1,21 @@
 // The Words panel with every phrase and command taught, at desktop and phone sizes, plus a data check:
 // every -te/-masu word in it shows its dictionary word, and the -te note is there.
-//   game3d/tools/with-browser-lock.sh node game3d/tools/words-menu-shots.mjs [outdir]
-import { chromium } from '/home/jorgen/ai/opening/node_modules/playwright/index.mjs';
+//   node game3d/tools/words-menu-shots.mjs [outdir]
+import { withBrowserJob } from '../../tools/lib/browser-job.mjs';
+import { openGame } from '../test/support/open-game.mjs';
 import fs from 'node:fs';
-const [out = 'game3d/shots/words-menu'] = process.argv.slice(2);
+import { fileURLToPath } from 'node:url';
+const [out = fileURLToPath(new URL(`../shots/words-menu/${new Date().toISOString().replace(/[:.]/g, '-')}-${process.pid}`, import.meta.url))] = process.argv.slice(2);
 fs.mkdirSync(out, { recursive: true });
-const b = await chromium.launch({ headless: true, args: ['--use-angle=swiftshader', '--enable-unsafe-swiftshader'] });
 let bad = 0;
+await withBrowserJob('words-menu', async b => {
 for (const [tag, W, H] of [['desktop', 1366, 860], ['phone', 390, 844]]) {
   const phone = W < 700;
-  const p = await b.newPage({ viewport: { width: W, height: H }, isMobile: phone, hasTouch: phone });
-  const errs = []; p.on('pageerror', (e) => errs.push(e.message)); p.on('console', (m) => { if (m.text().startsWith('panel')) console.log(tag, m.text()); });
-  await p.addInitScript(() => { try { localStorage.setItem('amakawa-onboard', JSON.stringify({ moved: true, talked: true, uses: 1, sayUsed: false })); } catch {} });
-  await p.goto(`http://127.0.0.1:${process.env.PORT || 8771}/game3d/index.html?q=0`);
-  await p.waitForFunction(() => document.body.classList.contains('at-title'), null, { timeout: 120000 });
-  await p.waitForTimeout(1000);
-  if (phone) await p.tap('#title .go'); else await p.click('#title .go');
-  await p.waitForFunction(() => window.__game && window.__game.player && !document.body.classList.contains('at-title'), null, { timeout: 60000 });
-  await p.waitForTimeout(2500);
+  const { page: p, errors: errs, close } = await openGame(b, {
+    viewport: { width: W, height: H }, touch: phone, timeoutMs: 120000,
+    initialOnboarding: { moved: true, talked: true, uses: 1, sayUsed: false },
+  });
+  p.on('console', message => { if (message.text().startsWith('panel')) console.log(tag, message.text()); });
   // talk to a passenger once (onboarding keeps the HUD back until then), click through their lines
   await p.evaluate(() => { const G = window.__game, q = G.player.root.position; const m = G.markers.list.filter((m) => m.enabled() && /person/.test(m.kind || '') && !['mio', 'kuroda', 'tama'].includes(m.id)).sort((a, b) => Math.hypot(q.x - a.spot()[0], q.z - a.spot()[1]) - Math.hypot(q.x - b.spot()[0], q.z - b.spot()[1]))[0]; const s = m.spot(); q.x = s[0]; q.z = s[1]; });
   await p.waitForTimeout(600);
@@ -40,10 +38,10 @@ for (const [tag, W, H] of [['desktop', 1366, 860], ['phone', 390, 844]]) {
   await p.waitForTimeout(300);
   await p.screenshot({ path: `${out}/${tag}-end.png` });
   const missing = res.rows.filter((r) => /て$|ます$|ません$/.test(r.ja) && !r.base);
-  if (missing.length || !res.note || res.te.length) bad++;
+  if (errs.length || missing.length || !res.note || res.te.length) bad++;
   console.log(tag, errs.length ? 'ERR ' + errs.join(' | ') : 'ok', '| rows', res.rows.length, '| missing base', JSON.stringify(missing), '| note', !!res.note);
   for (const r of res.rows) console.log('  ', r.ja, '|', r.base);
-  await p.close();
+  await close();
 }
-await b.close();
-process.exit(bad ? 1 : 0);
+});
+process.exitCode = bad ? 1 : 0;

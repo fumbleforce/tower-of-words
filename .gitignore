@@ -23,3 +23,7 @@ legacy/island/node_modules/
 art/approved/mio/meshy/
 art/approved/mc/meshy/
 art/approved/music/
+
+# Per-run automated QA artifacts (review assets remain retained separately)
+game3d/shots/fast/
+game3d/shots/words-menu/

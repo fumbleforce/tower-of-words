@@ -3,7 +3,7 @@ import fs from 'node:fs';
 import { EventEmitter } from 'node:events';
 
 // Exercise the real lifecycle, with fake external resources and no browser/GPU.
-const source = fs.readFileSync(new URL('./browser-job.mjs', import.meta.url), 'utf8')
+const source = fs.readFileSync(new URL('../lib/browser-job.mjs', import.meta.url), 'utf8')
   .replace(/^import .*;\n/gm, '').replace('export async function', 'async function');
 function harness({load=0, launchFails=false, delay=0, gl='soft', writeFails=false, closeFails=false, onLoad}={}) {
   const dirs = new Map(), proc = new EventEmitter();
