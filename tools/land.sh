@@ -8,9 +8,10 @@
 #   gone is taken over).
 # - Refuses if the worktree has uncommitted or untracked changes, if the rebase conflicts (it is aborted, nothing
 #   changes), if the commit checks fail (tools/check/commit-cpu.mjs: a Facts line on every new commit, and
-#   `npm run check` on the rebased commit's own tree), or if main moves during the checks twice in a row.
+#   `npm run check` on the rebased commit's own tree), or if main moves during the checks three times in a row.
 # - main moves with `git merge --ff-only` in the main checkout, which only touches the files the branch changed and
-#   refuses rather than overwrite someone's unsaved edit there. Nothing is pushed.
+#   refuses rather than overwrite someone's unsaved edit there (it waits while a commit there holds the index).
+#   Nothing is pushed.
 # - Afterwards the worktree is removed and the branch deleted (--keep leaves both). If the worktree holds new real
 #   files under the asset roots (git-ignored, so not in the commit), it is kept and they are listed.
 # - The day test is not run here: if game3d/ changed it must already have passed in the worktree (fast-qa skill).
@@ -82,9 +83,26 @@ $dirty"
 [[ ! -d "$(git -C "$wt" rev-parse --git-path rebase-merge)" && ! -d "$(git -C "$wt" rev-parse --git-path rebase-apply)" ]] \
   || refuse "$wt is in the middle of a rebase"
 
-# ---------------------------------------------------------------- rebase, check, fast-forward (main may move once)
+# ---------------------------------------------------------------- rebase, check, fast-forward
+# Agents still commit straight to main in the main checkout, so main may move while we check: up to three rounds.
+fast_forward() {  # 0 landed; 1 main moved (go round again); refuses on anything else
+  local out tries=0
+  while (( tries < 18 )); do  # a commit in the main checkout holds its index.lock for its whole pre-commit (~15 s)
+    [[ "$(g rev-parse main)" == "$base" ]] || return 1
+    if [[ -z "$main_wt" ]]; then
+      g update-ref refs/heads/main "$commit" "$base" && return 0
+      return 1
+    fi
+    out=$(git -C "$main_wt" merge --ff-only --quiet "$commit" 2>&1) && return 0
+    if grep -q 'index.lock' <<<"$out"; then tries=$((tries + 1)); sleep 5; continue; fi
+    [[ "$(g rev-parse main)" == "$base" ]] || return 1
+    refuse "main could not fast-forward in $main_wt (another agent's unsaved edits in the files this branch changes?):
+$out"
+  done
+  refuse "the main checkout's index stayed locked for 90 s (a git command running there?); try again"
+}
 landed=""
-for attempt in 1 2; do
+for attempt in 1 2 3; do
   base=$(g rev-parse main)
   if ! git -C "$wt" rebase --quiet main >/dev/null 2>&1; then
     conflicts=$(git -C "$wt" diff --name-only --diff-filter=U)
@@ -102,20 +120,10 @@ Rebase it yourself in $wt (resolve only your own files), then land again."
   (cd "$main" && node "$main/tools/check/commit-cpu.mjs" "$commit" --since "$base") > "$LAND_LOG" 2>&1 \
     || { tail -40 "$LAND_LOG" >&2; refuse "the commit checks failed on $(g rev-parse --short "$commit") (full log: $LAND_LOG); main is unchanged"; }
   grep -E '^(commit messages|commit CPU):' "$LAND_LOG" | sed 's/^/land: /'
-  if [[ "$(g rev-parse main)" != "$base" ]]; then
-    (( attempt == 1 )) && { say "main moved during the checks; rebasing and checking again"; continue; }
-    refuse "main moved during the checks twice; try again"
-  fi
-  if [[ -n "$main_wt" ]]; then
-    out=$(git -C "$main_wt" merge --ff-only --quiet "$commit" 2>&1) \
-      || refuse "main could not fast-forward in $main_wt (another agent's unsaved edits in the files this branch changes?):
-$out"
-  else
-    g update-ref refs/heads/main "$commit" "$base" || refuse "main moved at the last moment; try again"
-  fi
-  landed="$commit"; break
+  if fast_forward; then landed="$commit"; break; fi
+  (( attempt < 3 )) && say "main moved during the checks; rebasing and checking again"
 done
-[[ -n "$landed" ]] || refuse "not landed"
+[[ -n "$landed" ]] || refuse "main moved during the checks three times; try again"
 [[ "$landed" == "$base" ]] || say "main is now $(g rev-parse --short main) ($count commit(s) from $branch)"
 if g diff --quiet "$base" "$landed" -- game3d/; then :; else
   say "game3d/ changed: the day test at both sizes should already have passed in the worktree (fast-qa skill)"
