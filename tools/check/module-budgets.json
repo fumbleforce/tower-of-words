@@ -100,8 +100,8 @@
       "reason": "Existing primitive prop and material builders; coordinate the look/detail cycle split with visual work."
     },
     "game3d/js/runner.js": {
-      "lines": 513,
-      "bytes": 19380,
+      "lines": 491,
+      "bytes": 18553,
       "owner": "codex-tui",
       "review": "C-0076",
       "reason": "Narrative execution, checkpoint replay and dialogue/audio dispatch remain after stage 2c; stage 3 reviews the presentation/audio boundary."
@@ -142,8 +142,8 @@
       "reason": "Existing wall, window and edge geometry builders share showcase dimensions and materials. Stage 5 room-builder review will separate reusable trim construction from room composition."
     },
     "game3d/js/sim.js": {
-      "lines": 557,
-      "bytes": 21363,
+      "lines": 556,
+      "bytes": 21362,
       "owner": "codex-tui",
       "review": "C-0076",
       "reason": "Existing simulation, save and relationship integration; retain compatibility while extracting state."

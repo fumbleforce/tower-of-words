@@ -1,6 +1,7 @@
 // The first minutes on the train (notes/ONBOARDING.md): the screen starts with one line about walking and nothing
 // else, and each thing arrives when it first matters.
-//   - the controls line goes once Eric has walked a few steps (1.2 m), and never comes back
+//   - the controls line goes once Eric has walked a few steps (1.2 m), and never comes back; it steps aside while a
+//     line or caption is up
 //   - no goal and no story hints until he has used E on a person (ui.goal holds the story's goal until then)
 //   - the E prompt drops its verb after two uses and its key cap after five (ui.placeSay reads `uses`)
 //   - Say (Q) first shows only at the goal target (the cat); after one use it shows wherever a word works
@@ -129,7 +130,10 @@ export function startOnboarding(game) {
       !g.busy &&
       !b.classList.contains('at-title') &&
       !b.classList.contains('title-leaving') &&
-      !b.classList.contains('paused');
+      !b.classList.contains('paused') &&
+      // never over a line: the dialogue box and captions sit where this line does
+      !!document.getElementById('talk')?.hidden &&
+      !!document.getElementById('caption')?.hidden;
     if (line.hidden === show) line.hidden = !show;
   };
   tick();
