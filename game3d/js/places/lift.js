@@ -36,7 +36,13 @@ const FLOORS = ['B2', 'B1', '1', '2', '3', '4', '5'];
 // ---------- the car, in its own space: x 0 is the door's centre, z 0 the back face of the landing wall ----------
 const W = 1.44, D = 1.55, H = 1.55, T = 0.05;   // inside width and depth, wall height, wall thickness
 const DW = 1.0, DH = 1.34;                     // door opening
+// car door leaves: closed centres (x from the middle) and depth for the fast (0) and slow (1) leaf of each side;
+// open, the fast one travels DW/2 and the slow one DW/4, both ending over the front panel (DW/2 .. W/2+T)
+// (the fast leaves meet at the middle; the slow one overlaps the fast one's outer edge from behind)
+const LEAF_WS = [DW / 4, DW / 4 + 0.02], LEAF_X = [DW / 8, 3 * DW / 8 - 0.01], LEAF_Z = [-0.011, -0.03], LEAF_OPEN = DW / 2 + 0.13;
+const LEAF_RUN = LEAF_X.map((x) => LEAF_OPEN - x);
 const ZF = -0.09, ZB = ZF - D;                 // inside faces of the front and back walls
+const SILL_Z = 0.125;                          // the car floor's front edge, where the landing's sill starts
 const CUT = 0.5;                               // the front wall's height while he's inside (cutaway)
 const RIDE_ELEV = 50;                          // camera elevation for the ride, the same in both places
 const DARK = 0.4;                              // how much of a place's own light stays on during the ride (dimmed, not black: QA round 1)
@@ -75,7 +81,7 @@ function clipBox(site, cut) {
   planes[3].constant = site.zBack + ZF - T - 0.02; planes[4].constant = -(site.zFront + 0.02);
 }
 function clipMat(m) {
-  for (const mm of Array.isArray(m) ? m : [m]) { if (!mm || mm.userData.liftClip) continue; mm.clippingPlanes = planes; mm.clipIntersection = true; mm.userData.liftClip = true; mm.needsUpdate = true; }
+  for (const mm of Array.isArray(m) ? m : [m]) { if (!mm || mm.userData.liftClip) continue; mm.clippingPlanes = planes; mm.clipIntersection = true; mm.clipShadows = true; mm.userData.liftClip = true; mm.needsUpdate = true; }
 }
 
 // ---------- displays ----------
@@ -149,9 +155,10 @@ function buildCar(site) {
   const shaftM = M('#2b2f36', { roughness: 0.95 });
   const zc = (ZF + ZB) / 2;
   // floor, with a pale inlay border and the door sill
-  g.add(box(W + 2 * T, 0.02, D + 2 * T + 0.05, floorM, 0, 0, zc + 0.025, 0.004, false));
+  // (the floor runs forward under the landing wall to meet the landing's sill: no dark gap across the doorway)
+  g.add(box(W + 2 * T, 0.02, (ZB - T) * -1 + SILL_Z, floorM, 0, 0, (ZB - T + SILL_Z) / 2, 0.004, false));
   for (const [w, d, x, z] of [[W - 0.12, 0.03, 0, ZB + 0.08], [W - 0.12, 0.03, 0, ZF - 0.08], [0.03, D - 0.16, -W / 2 + 0.06, zc], [0.03, D - 0.16, W / 2 - 0.06, zc]]) g.add(box(w, 0.004, d, inlayM, x, 0.02, z, 0.002, false));
-  g.add(box(DW, 0.006, 0.09, inlayM, 0, 0.02, ZF + 0.03, 0.002, false));
+  g.add(box(DW, 0.006, SILL_Z - ZF + 0.03, inlayM, 0, 0.02, (ZF - 0.03 + SILL_Z) / 2, 0.002, false));   // the car's sill, one strip across the doorway
   // back wall: stainless panels, a mirror across the middle, a handrail, the floor display above the mirror
   g.add(box(W + 2 * T, H, T, wallM, 0, 0, ZB - T / 2));
   g.add(box(W, 0.12, 0.012, kickM, 0, 0, ZB + 0.006, 0.004, false));
@@ -177,14 +184,19 @@ function buildCar(site) {
   const frontM = new THREE.MeshStandardMaterial({ color: '#9ea3aa', roughness: 0.42, metalness: 0.25, emissive: new THREE.Color('#e9e2d6'), emissiveIntensity: 0.06 });
   const leafM = new THREE.MeshStandardMaterial({ color: '#b3b8bf', roughness: 0.35, metalness: 0.35 });
   const leafSeamM = new THREE.MeshStandardMaterial({ color: '#7d838c', roughness: 0.5 });
-  const capTopM = new THREE.MeshStandardMaterial({ color: '#c7ccd2', roughness: 0.5 });
   const front = new THREE.Group();
   const pw = W / 2 + T - DW / 2;
   for (const s of [-1, 1]) front.add(box(pw, H, T, frontM, s * (DW / 2 + pw / 2), 0, ZF - T / 2 + T, 0.006));
   front.add(box(W + 2 * T, H - DH, T, frontM, 0, DH, ZF + T / 2, 0.006));
-  const leaves = [-1, 1].map((s) => { const l = box(DW / 2 + 0.01, DH, 0.025, leafM, s * DW / 4, 0, -0.022, 0.005); l.add(box(0.008, DH - 0.06, 0.027, leafSeamM, -s * (DW / 4), -DH / 2 + 0.03, 0, 0.002, false)); front.add(l); return l; });
-  // a lit strip along the cut, so the cutaway reads as a clean edge
-  const cutEdge = box(W + 2 * T, 0.012, T + 0.004, capTopM, 0, CUT - 0.006, ZF + T / 2, 0.003, false); cutEdge.visible = false; front.add(cutEdge);
+  // the car doors: two-speed, two leaves a side (a fast one at the middle, a slow one behind it), so when open
+  // both stack behind the narrow front panels and never poke out past the car's sides into the shaft
+  const leaves = [];
+  for (const s of [-1, 1]) for (const [i, z] of [[0, LEAF_Z[0]], [1, LEAF_Z[1]]]) {
+    const l = box(LEAF_WS[i], DH, 0.018, leafM, s * LEAF_X[i], 0, z, 0.004);
+    if (i === 0) l.add(box(0.008, DH - 0.06, 0.02, leafSeamM, -s * (LEAF_WS[0] / 2 - 0.004), -DH / 2 + 0.03, 0, 0.002, false));
+    l.castShadow = false;   // cut to the wall's cut height while he's inside, but a shadow would still be full height
+    l.userData.door = { s, i }; front.add(l); leaves.push(l);
+  }
   g.add(front);
   // the shaft around the car (dark), so nothing shows through past the car's sides
   const sh = site.wallH;
@@ -214,7 +226,7 @@ function buildCar(site) {
   }
   clipMat(frontM); clipMat(leafM); clipMat(leafSeamM);
   g.position.set(site.x, 0, site.zBack);
-  return { g, leaves, front, cutEdge, backInd, cop, lamp, pool, landing, landLamp, spill, cap, k: 0, want: 0, land: 0, landWant: 0 };
+  return { g, leaves, front, backInd, cop, lamp, pool, landing, landLamp, spill, cap, k: 0, want: 0, land: 0, landWant: 0 };
 }
 
 // ---------- small timing helpers (game time: they follow the time scale, hurry and pause) ----------
@@ -230,6 +242,15 @@ function anim(game, secs, fn) {
   });
 }
 const lerp = (a, b, k) => a + (b - a) * k;
+// wait until the car doors (and this landing's doors, when the car is at this place's floor) are open, so nobody
+// walks through a leaf; capped, so a stalled frame loop can't hold the story up
+async function doorsOpen(game, L, at = 0.96) {
+  const land = L.place.liftLanding, here = () => (game.liftFloor || L.site.floor) === L.site.floor;
+  for (let i = 0; i < 60; i++) {
+    if (L.car.k >= at && (!land || !here() || land.k() >= at)) return;
+    await game.wait(50);
+  }
+}
 
 // ---------- one place's lift ----------
 const cars = new Map();   // place -> lift
@@ -269,9 +290,14 @@ export function attachLift(game, place) {
     clipMat(o.material);
   });
   clipBox(site, 999);
-  // the cut's top face over the dropped wall, in the walls' top colour, like every cut wall in the office
-  const cutCap = new THREE.Mesh(new THREE.BoxGeometry(x1 - x0 - 0.04, 0.014, z1 - z0), new THREE.MeshStandardMaterial({ color: '#a3a9b3', roughness: 0.8 }));
-  cutCap.position.set((x0 + x1) / 2, CUT - 0.007, (z0 + z1) / 2); cutCap.receiveShadow = true; cutCap.visible = false; place.space.add(cutCap);
+  // the cut's top face over the dropped wall, in the walls' top colour, like every cut wall in the office: one
+  // piece each side of the doorway (never across it: people walk through there)
+  const cutCap = new THREE.Group(), capM = new THREE.MeshStandardMaterial({ color: '#a3a9b3', roughness: 0.8 });
+  for (const [a, b] of [[x0 + 0.02, site.x - DW / 2], [site.x + DW / 2, x1 - 0.02]]) {
+    const m = new THREE.Mesh(new THREE.BoxGeometry(b - a, 0.014, z1 - z0), capM);
+    m.position.set((a + b) / 2, CUT - 0.007, (z0 + z1) / 2); m.receiveShadow = true; cutCap.add(m);
+  }
+  cutCap.visible = false; place.space.add(cutCap);
 
   // riders: the Sales pair (chibi office workers), hidden until the ride
   const riders = RIDERS.map((d) => {
@@ -303,7 +329,7 @@ function loop(game) {
     if (L) {
       const c = L.car;
       c.k += (c.want - c.k) * Math.min(1, dt * 4.5);
-      c.leaves[0].position.x = -DW / 4 - c.k * (DW / 2 + 0.02); c.leaves[1].position.x = DW / 4 + c.k * (DW / 2 + 0.02);
+      for (const l of c.leaves) { const { s, i } = l.userData.door; l.position.x = s * (LEAF_X[i] + c.k * LEAF_RUN[i]); }
       c.land += (c.landWant - c.land) * Math.min(1, dt * 5);
       c.landing.visible = c.land > 0.01; c.landLamp.intensity = 2.2 * c.land; c.spill.material.opacity = c.land;
       for (const rd of L.riders) { const r = rd.r; if (!r._walk && r.root.visible && rd.turn != null) r.root.rotation.y += (rd.turn - r.root.rotation.y) * Math.min(1, dt * 5); if (r._walk) { r._walk(dt); r.blob.position.set(r.root.position.x, 0.004, r.root.position.z); } else if (r.root.visible) idle(r, t + (rd.worker % 5)); }
@@ -333,8 +359,11 @@ function setDark(L, k) {
 function isOurs(L, o) { let q = o; while (q) { if (q === L.car.g) return true; q = q.parent; } return false; }
 function setCut(L, h) {
   const prev = L.cut; L.cut = h; clipBox(L.site, h);
-  L.car.cutEdge.visible = h < CUT + 0.01;
   L.cutCap.visible = h < CUT + 0.01;
+  // the landing's own doors: while the wall is cut away only the car's doors show (one pair of doors, not two
+  // stacked plates; at other floors the car has left this landing anyway). They're open whenever the cut starts.
+  const land = L.place.liftLanding;
+  if (land) for (const o of land.leaves) o.visible = h >= L.site.wallH;
   // signs half over the car go as the wall starts down and come back as it starts up
   const down = h < prev ? h < L.site.wallH : h <= CUT + 0.01;
   for (const o of L.hide) { if (down && o.visible) { o.visible = false; o.userData.liftHid = true; } else if (!down && o.userData.liftHid) { o.visible = true; o.userData.liftHid = false; } }
@@ -416,7 +445,7 @@ async function doors(game, L, state) {
     if (c.want === 1) return;
     ride.lit.delete(f);
     sfx('lift'); c.want = 1; if (f !== L.site.floor) c.landWant = 1;
-    await game.wait(650);
+    await game.wait(650); await doorsOpen(game, L);
     // anyone getting off here walks out onto the landing
     const off = L.riders.filter((rd) => rd.off === f && ride.aboard.has(rd.id));
     // he steps aside to the front left corner so they can get by
@@ -466,7 +495,7 @@ async function rideOut(g, L, slot) {
   L.riders[0].r.lookTarget = slotW(L, 'sales2'); L.riders[1].r.lookTarget = slotW(L, 'sales1');
   P.hooks.liftOpen && P.hooks.liftOpen(); L.car.want = 1;
   shootRide(L); elevTo(g, L, RIDE_ELEV, 1.4);
-  await g.wait(700);
+  await g.wait(700); await doorsOpen(g, L);
   eric.setState('walk');
   await glide(g, eric.root, [L.site.x, L.site.zFront + 0.05], 1.05);
   // across the threshold: the wall in front comes down and the lights outside go down
@@ -524,7 +553,7 @@ async function rideIn(g, L, slot) {
   await anim(g, 0.9, (k) => setDark(L, 1 - k));
   P.hooks.liftOpen && P.hooks.liftOpen(); L.car.want = 1;
   ride.pendingOpen = false;
-  await g.wait(650);
+  await g.wait(650); await doorsOpen(g, L);
   // out, while the camera eases back to the floor's own view
   cam.release(); elevTo(g, L, THREE.MathUtils.radToDeg(L.elev0), 1.4);
   eric.setState('walk');

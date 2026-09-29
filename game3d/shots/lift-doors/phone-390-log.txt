@@ -1,0 +1,28 @@
+00 gate floor 1 car 0.42 landing 0.92 
+01 gate floor 1 car 1 landing 1 in doorway: eric
+02 gate floor 1 car 1 landing 1 
+03 gate floor 1 car 0.03 landing 0.02 
+04 gate floor 1 car 0 landing 0 
+05 gate floor 3 car 0 landing null 
+06 gate floor 4 car 0 landing null 
+07 gate floor 5 car 1 landing null 
+08 gate floor 5 car 1 landing null 
+09 gate floor 5 car 1 landing null 
+10 gate floor 5 car 1 landing null in doorway: sales1
+11 gate floor 5 car 1 landing null 
+12 gate floor 5 car 1 landing null 
+13 gate floor 5 car 1 landing null 
+14 gate floor 5 car 1 landing null 
+15 gate floor 5 car 1 landing null 
+16 gate floor 5 car 0 landing null 
+17 gate floor 5 car 0 landing null 
+18 gate floor 3 car 0 landing null 
+19 gate floor 2 car 0 landing null 
+20 gate floor B1 car 0 landing null 
+21 office floor B2 car 0 landing 0 
+22 office floor B2 car 0 landing 0 
+23 office floor B2 car 0.98 landing 0.97 
+24 office floor B2 car 1 landing 1 
+25 office floor B2 car 0.06 landing 0.09 
+closed-door crossings: 0
+errors: 
