@@ -22,6 +22,7 @@ import { ui, sfx } from '../ui.js';
 import { lightPool } from './life.js';
 import { glide, withList } from './lobby.js';
 import { K } from '../scenes/office.js';
+import { clipLiftMaterial, isolateLiftMaterials } from './lift-materials.js';
 
 // ---------- where the lift is in each place ----------
 // x: the door's centre; zBack: the back face of the wall the doors are in (the car starts here); zFront: just in
@@ -150,17 +151,6 @@ function clipBox(site, cut) {
   planes[3].constant = site.zBack + ZF - T - 0.02;
   planes[4].constant = -(site.zFront + 0.02);
 }
-function clipMat(m) {
-  for (const mm of Array.isArray(m) ? m : [m]) {
-    if (!mm || mm.userData.liftClip) continue;
-    mm.clippingPlanes = planes;
-    mm.clipIntersection = true;
-    mm.clipShadows = true;
-    mm.userData.liftClip = true;
-    mm.needsUpdate = true;
-  }
-}
-
 // ---------- displays ----------
 function drawIndicator(g, W2, H2, floor, dir, moving) {
   g.fillStyle = '#16181d';
@@ -468,9 +458,9 @@ function buildCar(site) {
     cap.renderOrder = 3;
     g.add(cap);
   }
-  clipMat(frontM);
-  clipMat(leafM);
-  clipMat(leafSeamM);
+  clipLiftMaterial(frontM, planes);
+  clipLiftMaterial(leafM, planes);
+  clipLiftMaterial(leafSeamM, planes);
   g.position.set(site.x, 0, site.zBack);
   return {
     g,
@@ -560,6 +550,7 @@ export function attachLift(game, place) {
     z0 = planes[3].constant,
     z1 = -planes[4].constant;
   const hide = [];
+  const clipMesh = isolateLiftMaterials(place, planes);
   const people = new Set();
   for (const r of Object.values(place.people || {})) r && r.root && r.root.traverse((o) => people.add(o));
   place.space.updateMatrixWorld(true);
@@ -578,7 +569,7 @@ export function attachLift(game, place) {
       if (inside > 0.02) hide.push(o);
       return;
     }
-    clipMat(o.material);
+    clipMesh(o);
   });
   clipBox(site, 999);
   // the cut's top face over the dropped wall, in the walls' top colour, like every cut wall in the office: one
