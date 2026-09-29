@@ -19,3 +19,5 @@ Claude cross-team visual skim requested in X-0174, pending.
 ## C-0106 corrections
 
 Claude rejected 01–03: roof over shops rather than street, no bar frontage, inaccessible coastal steps. Original set and score retained. 04 adds lower coastal access; 05 makes the izakaya readable; 06 failed the arcade correction; 07 succeeds with two shop rows flanking a roofed pedestrian lane. 08/09 are new matching districts. Root inspected every correction render. Current set07/08/09 awaits final Claude score. C-0107 additional places move to round4.
+
+C-0115: Claude accepts posting07/08/09 after the three major fixes. Four open points are now visible in the option note: pool block reads as offices; south shop fronts face the promenade with gaps; red onsen entrance access unclear; clean/cosy finish. No further render round before Jørgen answers. Full scores retained locally as claude-score-2.md.
