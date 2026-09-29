@@ -275,7 +275,8 @@ async function give() {
   if (!item) return;
   const keys = [`give:${item}:${target.id}`, `give:*:${target.id}`];
   const k = keys.find((x) => game.runner.has(x));
-  if (k) { take(item); flags['gave_' + item + '_' + target.id] = true; game.runner.trigger(k); return; }
+  // a refusal (keep: true on the trigger entry, e.g. a second gift) runs its lines but leaves the item in the bag
+  if (k) { if (!game.runner.entry(k, { peek: true }).keep) { take(item); flags['gave_' + item + '_' + target.id] = true; } game.runner.trigger(k); return; }
   game.beat(() => ui.say(null, `${target.label} doesn't seem to want the ${ITEMS[item].name.toLowerCase()}. You keep it.`));
 }
 ui.onGive = give;

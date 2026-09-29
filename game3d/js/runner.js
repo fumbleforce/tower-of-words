@@ -74,7 +74,9 @@ export class Runner {
   // find what should run for a trigger key; returns a node name or null
   // resolve(key, { peek: true }) only looks: has() must never use up a `once` trigger (it's asked every frame by the
   // Say chip, the markers and the zones; a peek used to spend them, so the real trigger found nothing)
-  resolve(key, { peek = false } = {}) {
+  resolve(key, opts) { const t = this.entry(key, opts); return t ? t.node : null; }
+  // the matching trigger entry itself, so a caller can read its options (a give: entry with keep: true is a refusal)
+  entry(key, { peek = false } = {}) {
     const on = (this.story && this.story.on) || {};
     let v = on[key];
     if (v === undefined) return null;
@@ -84,7 +86,7 @@ export class Runner {
       if (t.once && this.onceDone.has(key + '>' + t.node)) continue;
       if (!cond(t.if)) continue;
       if (t.once && !peek) this.onceDone.add(key + '>' + t.node);
-      return t.node;
+      return t;
     }
     return null;
   }
