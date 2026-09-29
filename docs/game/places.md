@@ -8,14 +8,20 @@ The tables are checked by `node tools/facts/check.mjs`: things and their labels,
 
 ## Places decided but not built
 
-The company city has dorms, a canteen, shops, a bar and a university ([setting.md](setting.md)); none are built. Eric's dorm room is described in [cast.md](cast.md) (to build). Only the places below exist.
+The company city has dorms, a canteen, shops, a bar and a university ([setting.md](setting.md)); only the places in the list below are planned, and only the `##` sections further down are built. One line per planned place: name, id, what it is.
+
+- The walk to the dorms (`path`): the outdoors stretch of the island between the head office building and the dorms (Jørgen, 2026-09-29: "we dont need to build out most of the locations, just need to add the section of the island outdoors to connect our work office location to the dorms, and visualize dorms"). Its layout comes from the island map he picked (reviews/island-map-3, island-03).
+- The dorms (`dorms`): the dorm building from outside, and Eric's room, described in [cast.md](cast.md) (Eric, Home).
 
 ## Getting between places
 
-There are no cuts to black (Jørgen, 2026-09-28: "elegant, continuous transitions"). Each move is one trip the player watches:
+There are no cuts to black (Jørgen, 2026-09-28: "elegant, continuous transitions"). Each move is one trip the player watches. One line per trip: from, to, how, then what the player sees; a trip to or from a planned place is planned too. The bible draws these as the places diagram (http://127.0.0.1:8771/bible/#place-map).
 
-- Monorail to lobby: Eric steps off onto the platform, walks along it to the covered walkway and in through the lobby's glass doors.
-- Lobby to B2: the lift. It is a small lit room he walks into, and the camera stays inside the car for the whole ride (Jørgen: "You should always be seeing your character. Ideally you'd have the elevator as a room in the lobby you go into."). The floor display counts from 1; someone has pressed 5, where the two from Sales get out; then down to B2. The doors open on the B2 lift landing.
+- `train` → `gate`, walk: Eric steps off onto the platform, walks along it to the covered walkway and in through the lobby's glass doors.
+- `gate` → `lift`, walk: the lift is a small lit room at the back of the lobby that he walks into (Jørgen: "Ideally you'd have the elevator as a room in the lobby you go into.").
+- `lift` → `office`, lift: the camera stays inside the car for the whole ride (Jørgen: "You should always be seeing your character."). The floor display counts from 1; someone has pressed 5, where the two from Sales get out; then down to B2. The doors open on the B2 lift landing.
+- `gate` → `path`, walk: out of the head office building to the walk to the dorms.
+- `path` → `dorms`, walk: the walk ends at the dorms.
 
 The dialogue slots for each trip are in game3d/story/transitions.js (format: FORMAT.md, Transitions).
 

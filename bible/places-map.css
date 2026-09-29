@@ -1,0 +1,49 @@
+/* Places diagram (#place-map). Uses the bible's tokens from app.css; planned places and trips are dashed. */
+.pmap .lede { max-width: 80ch; }
+.pm-err { border: 1px solid var(--no); background: var(--no-bg); border-radius: 8px; padding: 10px 14px; }
+.pm-wrap { position: relative; padding: 18px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--panel-2); }
+.pm-grid { position: relative; z-index: 1; display: grid; column-gap: 68px; row-gap: 28px; align-items: start; }
+.pm-edges { position: absolute; inset: 0; z-index: 0; pointer-events: none; overflow: visible; }
+.pm-edges path { fill: none; stroke: var(--ink-3); stroke-width: 1.6; }
+.pm-edges path.planned { stroke-dasharray: 5 4; }
+.pm-edges .pm-tip { fill: var(--ink-3); stroke: none; }
+.pm-labels { position: absolute; inset: 0; z-index: 2; pointer-events: none; }
+.pm-how { position: absolute; transform: translate(-50%, -50%); pointer-events: auto; font-size: 12px; font-weight: 600; line-height: 20px; padding: 0 8px; border-radius: 999px; background: var(--panel); border: 1px solid var(--ink-3); color: var(--ink); white-space: nowrap; }
+.pm-how.planned { border-style: dashed; color: var(--ink-2); }
+
+.pm-node { display: flex; flex-direction: column; padding: 0; text-align: left; cursor: pointer; background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); transition: border-color .15s, transform .18s cubic-bezier(.16,1,.3,1); }
+.pm-node:hover { border-color: var(--ink-3); transform: translateY(-1px); }
+.pm-node.on { border-color: var(--accent); box-shadow: 0 0 0 2px var(--accent); }
+.pm-node.planned { border: 1.5px dashed var(--ink-3); box-shadow: none; background: var(--bg); }
+.pm-node.planned.on { border-color: var(--accent); }
+.pm-ph { display: block; position: relative; overflow: hidden; aspect-ratio: 16 / 10; background: repeating-linear-gradient(135deg, var(--panel-2) 0 8px, var(--bg) 8px 16px); }
+.pm-ph img { position: absolute; inset: 0; width: 100%; height: 100%; max-width: none; object-fit: cover; }
+.pm-node.planned .pm-ph img { opacity: .8; }
+.pm-t { display: flex; flex-direction: column; gap: 2px; padding: 8px 11px 10px; min-width: 0; }
+.pm-t b { font-size: 14px; line-height: 1.25; }
+.pm-t > span { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--ink-3); }
+.pm-t code { font: 11.5px var(--mono); }
+.pm-t i { font-style: normal; font-weight: 600; font-size: 11px; padding: 0 6px; border-radius: 999px; background: var(--draft-bg); color: var(--draft); }
+
+.pm-key { display: flex; gap: 16px; margin: 8px 2px 0; font-size: 12.5px; color: var(--ink-3); }
+.pm-key span { display: inline-flex; align-items: center; gap: 6px; }
+.pm-key i { width: 22px; height: 0; border-top: 1.6px solid var(--ink-3); }
+.pm-key i.k-plan { border-top-style: dashed; }
+
+.pm-panel { margin-top: 22px; scroll-margin-top: 12px; }
+.pm-detail { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 22px; align-items: start; background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); padding: 16px; }
+.pm-detail figure { margin: 0; }
+.pm-detail figure img { border-radius: 8px; cursor: zoom-in; width: 100%; }
+.pm-detail figcaption { font-size: 12.5px; color: var(--ink-3); margin-top: 6px; }
+.pm-detail h2 { margin: 0 0 8px; }
+.pm-trips { padding-left: 18px; margin: 0; }
+.pm-trips li + li { margin-top: 8px; }
+.pm-trips .md p { margin: 2px 0 0; }
+
+.pmap[data-vertical="true"] .pm-wrap { padding: 12px; }
+.pmap[data-vertical="true"] .pm-grid { column-gap: 12px; row-gap: 46px; }
+.pmap[data-vertical="true"] .pm-t { padding: 6px 8px 8px; }
+.pmap[data-vertical="true"] .pm-t b { font-size: 13px; }
+@media (max-width: 860px) {
+  .pm-detail { grid-template-columns: minmax(0, 1fr); padding: 12px; }
+}
