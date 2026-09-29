@@ -225,12 +225,6 @@
       "context": "57bd599463d9ff7bd84f8c1a79b0aaa8f38e4bc184bd5865ad9dde5005626996"
     },
     {
-      "file": "game3d/tools/voice-manifest.mjs",
-      "ruleId": "no-unused-vars",
-      "message": "'id' is assigned a value but never used.",
-      "context": "0659a424f62d63813988ac5eb019d1ca0f8f581a1a6af0d7743c0fb2b986d8fd"
-    },
-    {
       "file": "tools/creator/base/base.js",
       "ruleId": "no-unused-vars",
       "message": "'BONES' is defined but never used.",

@@ -42,7 +42,7 @@ The anime portraits beside the dialogue box. The faces each person has are in [c
 
 ## Voices
 
-- Game voices are local Qwen3-TTS clones of a reference clip per character (references in tools/voice-refs/, pipeline in tools/island_audio/). Each line's delivery comes from its `emo` tag (game3d/story/VOICE-DIRECTION.md).
+- Game voices are local Qwen3-TTS clones of a reference clip per character (references in tools/voice-refs/; `sh tools/voice/run.sh` voices every line with no clip, reusing tools/island_audio/'s checks). Each line's delivery comes from its `emo` tag (game3d/story/VOICE-DIRECTION.md).
 - Mio: voice A (tools/voice-refs/mio-a.wav), low and slightly husky.
 - Eric: voice design eric-2 with no accent (tools/voice-refs/eric-voice.wav). The Nordic accent was dropped (Jørgen: "not any better, just drop it, English accent instead").
 - Japanese speakers speak Japanese; overheard lines play muffled ([systems.md](systems.md)).

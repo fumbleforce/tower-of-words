@@ -160,6 +160,22 @@
   "slow": true
  },
  {
+  "key": "word-gaijin",
+  "speaker": "mio",
+  "text": "外人。",
+  "lang": "ja",
+  "overheard": false,
+  "words": [
+   [
+    "gaijin",
+    "外人"
+   ]
+  ],
+  "clear": [],
+  "emo": "slow",
+  "slow": true
+ },
+ {
   "key": "eric-matte",
   "speaker": "eric",
   "text": "待って。",
