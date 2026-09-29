@@ -62,3 +62,65 @@ The first approved set (0928-1808-1ef7506, 30 beats) was taken before Jørgen sa
 **Not switched on.** It needs the main agent's OK. The one GitHub setting to change: **Settings > Pages > Build and deployment > Source: "Deploy from a branch", Branch: `gh-pages`, folder `/ (root)`** (today it is `main`). After that switch, the old links (legacy/game, legacy/proto2) only keep working if they are published with `EXTRA`. Pushing gh-pages before the switch changes nothing on the live site.
 
 Why: Pages from main means every build's binaries stay in main's history forever. With gh-pages as a single orphan commit, a new deploy replaces the old one and main can stop carrying build output. Main still keeps the source assets; moving large binaries out of main is a separate decision.
+
+## Draw-call pass (perf agent, 2026-09-29): js/perf/batch.js
+
+One generic pass per place, no place files touched: `optimizePlace(place, { game })` right after a place is built.
+**Not wired yet**: it needs the one-line hook in main.js (notes/production-requests.md, 2026-09-29, perf). Until then it
+only runs in the perf tools, which serve main.js with the hook added. `?nobatch` turns it off.
+
+What it does:
+- Merges static meshes into one mesh per look: materials that differ only in colour share one material with the
+  colour baked into vertex colours (same shading maths); everything else groups by identical settings. Groups are
+  split by median cuts (at most 3 m or 6,000 triangles each; light groups under 1,500 triangles stay whole) so parts
+  off screen still get culled.
+- Shadow casters go into separate shadow-only batches (culled by every camera except the sun's shadow camera), so
+  the shadow pass is a handful of draws instead of hundreds.
+- People and story things (their `obj`) only merge within themselves, under their own root. Eric, Mio, skinned
+  meshes, named meshes, see-through materials, clipped materials (the lift cut-away), custom shaders and exactly
+  coplanar surfaces stay on their own.
+- A merged mesh stays where it was, on layer 31 only (cameras skip it; a raycaster with layer 31 still hits it).
+  Every frame, before the first pass, every merged mesh and every node above it is checked (transform, visibility,
+  parent, material, geometry, and the material's colour, opacity and so on). On any change that mesh draws itself
+  again at once (its triangles in the batch are collapsed; no rebuild). A group that moves (the swaying car, a door)
+  gets its meshes re-merged under it once they are still for 2 s. Meshes main.js outlines (game.near, game.hover via
+  game.objsOf) are lifted out of their batch while outlined and put back after.
+- The merging runs in 6 ms slices between frames, so place load time is unchanged.
+- InstancedMesh: not used. Almost every prop has its own geometry (1,964 geometries for 1,978 meshes in the office),
+  so merging per material is what cuts draws. Triangles were not reduced (no simplification of any prop or character).
+
+### Before / after (build 0929-0419-8a1cf62, 393x851 at DPR 2.75, CPU 4x, q=1, GL=gpu with vsync off)
+
+Draw calls and triangles are for exactly one frame (all passes). Note: perf.mjs counts two frames (it reads
+`renderer.info` after two animation frames), so its "calls a frame" are about twice these; the tables above are
+two-frame numbers. Frame times are paired in one page (pass off, then on), after 10 s of walking about.
+
+| place  | calls before | calls after | tris before | tris after | p50 ms before | p50 after | p95 before | p95 after | fps before | fps after |
+|--------|-------------:|------------:|------------:|-----------:|--------------:|----------:|-----------:|----------:|-----------:|----------:|
+| train  | 1,643 | 692 | 314k | 343k | 13.8 | 9.3 | 18.8 | 11.1 | 70 | 105 |
+| gate   | 1,296 | 496 | 151k | 188k | 9.2 | 5.5 | 11.1 | 6.8 | 105 | 176 |
+| office | 1,720 | 392 | 327k | 396k | 13.9 | 6.8 | 29.9 | 9.2 | 69 | 142 |
+
+Low tier (q=0, no AO or outline): train 759 → 487 calls, gate 880 → 450, office 1,305 → 589; p50 office 9.5 → 6.1 ms.
+Load time of one place (budget.mjs, 4G, CPU 4x): train 6.08 → 6.23 s, gate 5.74 → 5.81 s, office 6.46 → 6.53 s
+(within run-to-run noise; the pass defers its work). JS heap is 30 to 50 MB higher (the merged copies).
+
+Still over budget: 250 calls a frame at q=1 (people, single meshes and the extra full-scene pass OutlinePass makes
+while anything is outlined); triangles 300k (they rose 10 to 25% because merged groups cull less finely; the GPU
+cost of that is small next to the CPU saved, see the frame times).
+
+### Look unchanged
+
+- `node game3d/tools/perf/ab.mjs` (pass off vs on in the same paused frame, per place): mean difference 0.000 to
+  0.002/255, under 0.003% of pixels off by more than 8/255 (z-fighting speckle), frame-to-frame noise 0.
+- `node game3d/tools/perf/day.mjs 393 851` plays the whole day (test mode) and compares off/on every 4 s: day ends,
+  no page errors. Phone q=1 and desktop q=2 passed all 16 pairs before outline lifting was added; the last run
+  flags one spot in the office kitchen (a tray near the kettle, 7 meshes, mean up to 0.1/255, 0.17% of pixels):
+  the batch draws the tray top differently from the meshes on their own. Not fixed yet (coplanar check did not
+  catch it). The tool names the batch responsible when a pair is over tolerance.
+- Lift ride (clipping), train doors, car sway, NPC walks and outlines checked in those runs.
+
+Tools (take /tmp/claude-1000/browser.lock; `sh game3d/tools/perf/locked.sh <name> <cmd>`; GL=gpu under the GPU lock):
+`tools/perf/ab.mjs` (paired numbers and pixel diffs), `tools/perf/day.mjs` (whole-day check), `tools/perf/budget.mjs`
+(perf.mjs with the hook), `tools/perf/calls.mjs` (draw calls by pass and kind), `tools/perf/probe.mjs` (what a place
+is made of).
