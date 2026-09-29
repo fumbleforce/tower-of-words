@@ -23,6 +23,7 @@ export function walkRig(
     nav = P && obj.parent === P.space ? P.nav : null;
   const player = game.player && obj === game.player.root;
   const self = (b) => b.root === obj;
+  const hardMe = avoid && bodies(game).some((b) => self(b) && isHard(b)); // the cat keeps her distance, she doesn't lean in
   let [tx, tz] = avoid && game.place ? standOff(game, rig || { root: obj }, to) : to;
   const people = () => (avoid ? bodies(game).filter((b) => !self(b)) : []);
   // the destination: free floor, and not on top of someone
@@ -192,7 +193,7 @@ export function walkRig(
           list = people();
         for (const b of list) {
           if (isPassing(obj, b.root)) continue;
-          const [sx, sz] = slideStep(p.x, p.z, nx, nz, b, b.r + BODY * sc, fx, fz, step, isHard(b));
+          const [sx, sz] = slideStep(p.x, p.z, nx, nz, b, b.r + BODY * sc, fx, fz, step, hardMe || isHard(b));
           if (sx === nx && sz === nz) continue;
           blockedBy = b;
           if (nav) [nx, nz] = nav.collide(sx, sz, p.x, p.z);
