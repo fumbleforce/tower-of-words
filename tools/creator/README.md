@@ -15,6 +15,12 @@ Files use `{ "format": "amakawa-creator", "version": 1, "recipe": { ... } }`. Pl
 
 Height must be 0.1–3; optional fit scales 0.05–5 and three-axis offsets −3–3. Colours use six-digit hex values. The file limit is 64 KB. A combined GLB export remains separate work.
 
+## Adjust a part
+
+Open **Adjust part fit**, choose hair, top, bottom or shoes, then change its size or position. Changes apply when you leave a field. **Reset this part** restores its automatic fit without affecting other parts. Check the result in Idle and Walk. Fit adjustments belong to the slot and stay when you switch its part or body; reset them when they no longer suit the new selection.
+
+Size is a percentage of the automatic fit. Position uses the normalized body's coordinates before the character's overall height is applied; 0.01 is a small nudge. Saved recipes keep all adjustments. These controls work on the original cut-part experiment; base-body candidates remain on their separate review pages.
+
 ## How it works
 
 - `art/parts/` is the library: `src/<id>/` holds each source model (a copy of the game's GLB, texture, and for Mio her palette face data), `anim/` holds Eric's idle and walk clips, and `library.json` lists the sources, the cut rules and the parts. A part is a list of triangles from one source.
@@ -46,7 +52,7 @@ Sheet: art/parts/shots/sheet.png. Review item: reviews/creator-parts.
 - Works: Mio and Eric rebuilt from their own six parts match the game's models in the bind pose. Both bodies walk on Eric's API clips through the shared skeleton, including Mio, who never had those clips. Clothes swaps (Eric's jacket on Mio, Mio's hoodie and trousers on Eric, Eric's trousers and shoes on Mio) hold together in idle and walk. The seams at the waist and ankles hardly show, because both models are similar chibis. Tints work per slot and leave eyes, soles, trim and teal streaks alone.
 - Weak: swapping hair or heads. Meshy models have no scalp under the hair, and Mio's face skin runs up under her bangs. With Eric's hair on Mio, a few of his fringe spikes cut across her cheek and a pale strip of her nape shows at the back. Mio's hair on Eric sits well. The fit is automatic (whole-head depth, chin aligned), so each pair of heads would need a look, and maybe a nudge.
 - Animation: nothing broke that wasn't already broken. Meshy's idle clip twists and bends over after a second or two (the game holds one frame of it, and so does the creator). Skin weights carry over with the parts, so a swapped sleeve bends with the arm.
-- Not done: exporting a combined GLB, fit sliders, and parts made on their own in Meshy.
+- Not done: exporting a combined GLB and parts made on their own in Meshy.
 
 ## Base bodies (2026-09-29)
 

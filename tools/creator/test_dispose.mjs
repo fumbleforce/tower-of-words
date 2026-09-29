@@ -43,7 +43,7 @@ const recipe = {body:'eric',parts:{head:'eric-head'},colours:{head:'#ffffff'}};
 const status = {textContent:''}, pending = [], retired = [];
 const old = {id:'old'}, sceneStub = {add() {}};
 const api = new Function('buildCharacter','disposeCharacter','setColours','recipe','document','scene','old','SLOTS', `
-  let busy=0, ch=old, anim='idle'; const lib={}; function showRecipe() {} function syncRecipeControls() {}
+  let busy=0, ch=old, anim='idle'; const lib={}, fitControls={setDisabled() {}}; function showRecipe() {} function syncRecipeControls() {}
   ${handler}
   return {rebuild, current:()=>ch};
 `)(
@@ -64,6 +64,7 @@ assert.equal(newest.appliedColours.head,'#123456');
 assert.deepEqual(retired,['old','stale']);
 assert.equal(status.textContent,'');
 recipe.body='missing'; recipe.parts.head='missing-head'; recipe.colours.head='#abcdef';
+recipe.fit={hair:{offset:[0,.1,0]}};
 const failure=api.rebuild(); pending[2].reject(new Error('asset unavailable')); await failure;
 assert.equal(api.current(),newest);
 assert.match(status.textContent,/asset unavailable/);
@@ -71,6 +72,7 @@ assert.deepEqual(retired,['old','stale']);
 assert.equal(recipe.body,'mio');
 assert.equal(recipe.parts.head,'eric-head');
 assert.equal(recipe.colours.head,'#abcdef');
+assert.equal(recipe.fit,undefined);
 recipe.colours=null;
 const nullColours=api.rebuild(); pending[3].resolve(result('null-colours')); await nullColours;
 assert.deepEqual(api.current().appliedColours,{});
