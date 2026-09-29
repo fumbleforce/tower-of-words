@@ -10,8 +10,8 @@ The tables are checked by `node tools/facts/check.mjs`: things and their labels,
 
 The company city has dorms, a canteen, shops, a bar and a university ([setting.md](setting.md)); only the places in the list below are planned, and only the `##` sections further down are built. One line per planned place: name, id, what it is.
 
-- The walk to the dorms (`path`): the outdoors stretch of the island between the head office building and the dorms (Jørgen, 2026-09-29: "we dont need to build out most of the locations, just need to add the section of the island outdoors to connect our work office location to the dorms, and visualize dorms"). Its layout comes from the island map he picked (reviews/island-map-3, island-03).
-- The dorms (`dorms`): the dorm building from outside, and Eric's room, described in [cast.md](cast.md) (Eric, Home).
+- The walk to the dorms (`path`): the outdoors stretch of the island between the head office building and the dorms (Jørgen, 2026-09-29: "we dont need to build out most of the locations, just need to add the section of the island outdoors to connect our work office location to the dorms, and visualize dorms"). Its layout comes from the island map he picked (reviews/island-map-3, island-03). Proposed for layout review: leave the tower forecourt, pass the near edge of the fountain square behind the covered shops, and enter the existing apartment cluster. Keep this one short pedestrian stretch; bicycles use a rack clear of the path. Things: fountain edge, bicycle shelter, planted verge and dorm entrance. Proposed spots: `office_exit`, `fountain_edge`, `dorm_approach`. Nearby shops and the sento/laundry can remain background buildings. Layout/look options are in [dorm-route-1](../../reviews/dorm-route-1/review.json); none are built or picked yet.
+- The dorms (`dorms`): the dorm building from outside, and Eric's room, described in [cast.md](cast.md) (Eric, Home). Proposed for layout review: a pale concrete apartment block with a sheltered entry and mailboxes; a short ground-floor passage reaches the room. Things: entrance, mailboxes, room door, bed, desk, delivered boxes and window. Proposed spots: `entrance`, `corridor_turn`, `room_entry`, `window_front`. A clear aisle connects the entry to the window, with bed and desk against opposite walls. The neighbouring building's blank end wall supplies the decided outlook. The compact entry strip can contain a kitchenette and a closed bathroom door. These fittings and the ground-floor position are proposals, not additional decided room facts.
 
 ## Getting between places
 
@@ -20,8 +20,10 @@ There are no cuts to black (Jørgen, 2026-09-28: "elegant, continuous transition
 - `train` → `gate`, walk: Eric steps off onto the platform, walks along it to the covered walkway and in through the lobby's glass doors.
 - `gate` → `lift`, walk: the lift is a small lit room at the back of the lobby that he walks into (Jørgen: "Ideally you'd have the elevator as a room in the lobby you go into.").
 - `lift` → `office`, lift: the camera stays inside the car for the whole ride (Jørgen: "You should always be seeing your character."). The floor display counts from 1; someone has pressed 5, where the two from Sales get out; then down to B2. The doors open on the B2 lift landing.
-- `gate` → `path`, walk: out of the head office building to the walk to the dorms.
-- `path` → `dorms`, walk: the walk ends at the dorms.
+- `office` → `lift`, walk: planned return from the B2 landing into the existing lift after work; Eric stays visible through the doors.
+- `lift` → `gate`, lift: planned ride to floor 1, keeping the camera inside the car until the lobby doors open.
+- `gate` → `path`, walk: planned exit through the existing lobby entrance onto the tower forecourt. The camera follows Eric outside without a black cut.
+- `path` → `dorms`, walk: proposed route around the near edge of the fountain to the dorm entrance, then through the short passage into Eric’s room. Keep him visible across both thresholds; camera movement and near-wall removal reveal the interior. This trip is planned, with no new dialogue implemented.
 
 The dialogue slots for each trip are in game3d/story/transitions.js (format: FORMAT.md, Transitions).
 

@@ -1,0 +1,33 @@
+{
+  "title": "The walk home and Eric’s dorm",
+  "date": "2026-09-29",
+  "by": "Codex and Claude",
+  "status": "not-ready",
+  "question": "Does this short walk and room layout work for day 1?",
+  "multi": false,
+  "options": [
+    {
+      "id": "dorm-a",
+      "label": "dorm-a: fountain path and direct entrance",
+      "image": "art/candidates/dorm-route-1/04-route-muted.png",
+      "images": [
+        "art/candidates/dorm-route-1/02-room.png"
+      ],
+      "note": "Walk from head office around the fountain to a sheltered dorm entrance, then through a short passage to Eric’s room. Bed left, desk right, boxes beside the desk; the window faces a nearby concrete wall. These are layout concepts, with the muted exterior revised after review. The room view does not establish the exact distance to the wall."
+    }
+  ],
+  "links": [
+    {
+      "label": "Every render attempt and full prompt",
+      "href": "bible/#doc/art/candidates/dorm-route-1/attempts.md"
+    },
+    {
+      "label": "Planned places and the continuous trip",
+      "href": "bible/#doc/docs/game/places.md"
+    },
+    {
+      "label": "Picked island layout",
+      "href": "bible/#review/island-map-3"
+    }
+  ]
+}
