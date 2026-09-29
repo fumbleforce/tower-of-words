@@ -8,6 +8,7 @@ const root = fileURLToPath(new URL('../../', import.meta.url));
 const unitTests = fs.readdirSync(path.join(root, 'game3d/test/unit'), { recursive: true })
   .filter(name => name.endsWith('.test.mjs')).sort().map(name => path.join('game3d/test/unit', name));
 const checks = [
+  ['robots', ['tools/check/robots.py'], 'python3'],
   ['syntax', ['tools/check/syntax.mjs']],
   ['unit', ['--test', ...unitTests]],
   ['choices', ['game3d/tools/choice-check.mjs']],
@@ -18,9 +19,9 @@ const checks = [
   ['story map', ['tools/bible/story-map-check.mjs']],
 ];
 let failures = 0;
-for (const [name, args] of checks) {
+for (const [name, args, command = process.execPath] of checks) {
   const start = performance.now();
-  const result = spawnSync(process.execPath, args, { cwd: root, encoding: 'utf8', timeout: 55000 });
+  const result = spawnSync(command, args, { cwd: root, encoding: 'utf8', timeout: 55000 });
   if (result.stdout) process.stdout.write(result.stdout);
   if (result.stderr) process.stderr.write(result.stderr);
   const pass = result.status === 0 && !result.error;
