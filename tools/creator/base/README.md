@@ -73,3 +73,22 @@ Settings per run go in as JSON after the tag (`-- mio 4 '{"limb": 0.8}'`); the d
 build_base.py.
 
 Round 1 (review creator-base-1): attempts in `art/parts/base/shots/a2`..`a8`, skin-through checks in `poke-b4`, `poke-b8`, `poke-b9`. The kept exports are base9 (a7) and base10 (a8, a7 smoothed). Known problems: bodies are thin and lumpy where they were pushed under the clothes, a ridge where Eric's face meets the skull, small slivers of skin at Eric's jacket shoulders.
+
+## Source overlay
+
+`overlay.html?body=mio&version=v16` (or `body=eric`) superimposes the complete original source and a candidate.
+The default v16 is the rejected baseline; enter a later exported version in the field to load
+`art/parts/base/clean-<body>-<version>.json`. The optional `fit=fit3` selects the existing rejected clothing trial.
+The review is [creator-base-overlay](http://127.0.0.1:8771/bible/#review/creator-base-overlay).
+
+The source uses all original triangles through `loadLibrary` and `layerMesh`, with the creator's existing Mio
+preparation. Both figures retain the same source-normalized coordinates and shared bind skeleton, at height 1.
+The viewer checks that all bone world positions coincide. It applies no independent bounding-box fit, offset,
+scale or geometry change. Skin-only and dressed views retain the same coordinates.
+
+Front, character-left side, back and top are orthographic; face framing changes only the camera. Source and
+candidate opacity are independent. Cyan/magenta, source textures and independent wireframes help inspect
+shape differences. Each model renders into its own depth-tested target before the candidate is composited
+over the source, so transparency cannot reveal its own occluded surfaces. Switch a model off or use wireframe
+to inspect those. Rendering happens only when a control or viewport changes. This bind-pose view does not
+verify animated garment clearance.

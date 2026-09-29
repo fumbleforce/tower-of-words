@@ -1,0 +1,38 @@
+{
+  "title": "Creator: original and candidate overlay",
+  "date": "2026-09-29",
+  "by": "Codex",
+  "status": "open",
+  "question": "Compare the rejected base against the originals; corrected geometry is in progress.",
+  "multi": true,
+  "options": [
+    {
+      "id": "mio-overlay",
+      "label": "mio-overlay: source and rejected v16",
+      "note": "The original and v16 share the source bind pose and bone positions. Fade either surface; inspect front, side, back and top, with a face close-up. v16 remains rejected."
+    },
+    {
+      "id": "eric-overlay",
+      "label": "eric-overlay: source and rejected v16",
+      "note": "The broad face and skin through clothing remain visible in this baseline. The viewer itself changes no model geometry."
+    }
+  ],
+  "links": [
+    {
+      "label": "Mio: live transparent overlay",
+      "href": "tools/creator/base/overlay.html?body=mio&version=v16"
+    },
+    {
+      "label": "Eric: live transparent overlay",
+      "href": "tools/creator/base/overlay.html?body=eric&version=v16"
+    },
+    {
+      "label": "Earlier dressed comparison and rejected fits",
+      "href": "tools/creator/base/compare.html?round=4"
+    },
+    {
+      "label": "Measured v16 face deviations (height 1 units)",
+      "href": "reviews/creator-base-overlay/v16-face-distances.json"
+    }
+  ]
+}
