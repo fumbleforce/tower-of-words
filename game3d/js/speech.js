@@ -12,6 +12,7 @@
 // The microphone is asked for only the first time the player presses the mic, never before.
 
 import { matchWord, SPOKEN, candidatesFor, scoreHit } from './speech-match.js';
+import { WORDS, known } from './lang.js';
 
 // ---------- the on-device recogniser ----------
 
@@ -88,19 +89,22 @@ export async function toMono16k(arrayBuffer) {
 
 // Did anyone speak? Whisper makes up a sentence out of silence ("thanks for watching"), so a recording with no
 // speech in it never reaches the model. Speech = at least 0.15 s of 20 ms frames well above the quietest ones.
+// The bar is relative: 4x (12 dB) over the recording's own quiet frames, and at least SPEECH_MIN (-56 dBFS), so a
+// soft voice on a quiet mic counts while steady room noise, however loud, doesn't. (It was a fixed 0.003, -50 dBFS.)
+export const SPEECH_MIN = 0.0016;
+const frameRms = (s, n) => { const r = []; for (let i = 0; i + n <= s.length; i += n) { let a = 0; for (let k = i; k < i + n; k++) a += s[k] * s[k]; r.push(Math.sqrt(a / n)); } return r; };
+function noiseFloor(s, n) { const r = frameRms(s, n).sort((a, b) => a - b); return r[Math.floor(r.length * 0.1)] || 0; }
+const speechBar = (s, n) => Math.max(SPEECH_MIN, noiseFloor(s, n) * 4);
 export function hasSpeech(s, rate = 16000) {
-  const n = Math.floor(rate * 0.02), rms = [];
-  for (let i = 0; i + n <= s.length; i += n) { let a = 0; for (let k = i; k < i + n; k++) a += s[k] * s[k]; rms.push(Math.sqrt(a / n)); }
+  const n = Math.floor(rate * 0.02), rms = frameRms(s, n);
   if (!rms.length) return false;
-  const sorted = [...rms].sort((a, b) => a - b), floor = sorted[Math.floor(sorted.length * 0.1)];
-  const loud = rms.filter((r) => r > Math.max(0.003, floor * 4)).length;
-  return loud * 0.02 >= 0.15;
+  const thr = speechBar(s, n);
+  return rms.filter((r) => r > thr).length * 0.02 >= 0.15;
 }
-function noiseFloor(s, n) { const r = []; for (let i = 0; i + n <= s.length; i += n) { let a = 0; for (let k = i; k < i + n; k++) a += s[k] * s[k]; r.push(Math.sqrt(a / n)); } r.sort((a, b) => a - b); return r[Math.floor(r.length * 0.1)] || 0; }
 // the stretch with speech in it, with a little air around it (shorter input, faster answer)
 export function trimSilence(s, rate = 16000) {
   const n = Math.floor(rate * 0.02); let first = -1, last = -1;
-  const thr = Math.max(0.003, noiseFloor(s, n) * 4);
+  const thr = speechBar(s, n);
   for (let i = 0, f = 0; i + n <= s.length; i += n, f++) { let a = 0; for (let k = i; k < i + n; k++) a += s[k] * s[k]; if (Math.sqrt(a / n) > thr) { if (first < 0) first = f; last = f; } }
   if (first < 0) return s;
   return s.slice(Math.max(0, (first - 15) * n), Math.min(s.length, (last + 20) * n));
@@ -132,32 +136,51 @@ export const browserSpeechAvailable = () => !!(window.SpeechRecognition || windo
 export function prepareVoice(onProgress) { return loadRecogniser({ onProgress }); }
 
 // ---------- the microphone ----------
-// Opened on the first press only (that's when the browser asks), kept open while a prompt with the mic row is up,
-// closed when it goes, so the browser's recording light is on only then.
+// Opened on the first press (that's when the browser asks). Once allowed, a prompt with the mic row opens it as the
+// prompt comes up, so the browser's gain control has settled and nothing of the first word is lost to the mic
+// starting. It's closed when the prompt goes, so the browser's recording light is on only then.
 
-let mic = null;   // { stream, ctx, src, an, proc, chunks, rate, on }
-async function openMic() {
-  if (mic) return mic;
-  const stream = await navigator.mediaDevices.getUserMedia({ audio: { echoCancellation: true, noiseSuppression: true, autoGainControl: true, channelCount: 1 } });
-  const ctx = new (window.AudioContext || window.webkitAudioContext)();
-  const src = ctx.createMediaStreamSource(stream), an = ctx.createAnalyser(); an.fftSize = 512;
-  const proc = ctx.createScriptProcessor(4096, 1, 1), sink = ctx.createGain(); sink.gain.value = 0;
-  mic = { stream, ctx, src, an, proc, chunks: [], rate: ctx.sampleRate, on: false };
-  proc.onaudioprocess = (e) => { if (mic && mic.on) mic.chunks.push(e.inputBuffer.getChannelData(0).slice()); };
-  src.connect(an); src.connect(proc); proc.connect(sink); sink.connect(ctx.destination);
-  return mic;
+let mic = null, micOpening = null, micGen = 0;   // mic: { stream, ctx, src, an, proc, chunks, pre, floor, rate, on }
+const PRE_S = 0.35;   // audio kept from just before the press: people start talking as they press
+function openMic() {
+  if (mic) return Promise.resolve(mic);
+  if (micOpening) return micOpening;
+  const my = micGen;
+  micOpening = (async () => {
+    const stream = await navigator.mediaDevices.getUserMedia({ audio: { echoCancellation: true, noiseSuppression: true, autoGainControl: true, channelCount: 1 } });
+    if (my !== micGen) { stream.getTracks().forEach((t) => t.stop()); throw new Error('mic closed while opening'); }
+    const ctx = new (window.AudioContext || window.webkitAudioContext)();
+    const src = ctx.createMediaStreamSource(stream), an = ctx.createAnalyser(); an.fftSize = 1024;
+    const proc = ctx.createScriptProcessor(4096, 1, 1), sink = ctx.createGain(); sink.gain.value = 0;
+    const m = { stream, ctx, src, an, proc, chunks: [], pre: [], hist: [], floor: 0, rate: ctx.sampleRate, on: false };
+    proc.onaudioprocess = (e) => {
+      const d = e.inputBuffer.getChannelData(0).slice();
+      let a = 0; for (const v of d) a += v * v; const r = Math.sqrt(a / d.length), dt = d.length / m.rate;
+      // the room's level: the quietest stretch of the last 2 s (a word always has a gap in it somewhere)
+      m.hist.push(r); if (m.hist.length * dt > 2) m.hist.shift(); m.floor = Math.min(...m.hist);
+      if (m.on) m.chunks.push(d);
+      else { m.pre.push(d); while (m.pre.length > 1 && (m.pre.length - 1) * dt >= PRE_S) m.pre.shift(); }
+    };
+    src.connect(an); src.connect(proc); proc.connect(sink); sink.connect(ctx.destination);
+    mic = m; return m;
+  })().finally(() => { micOpening = null; });
+  return micOpening;
 }
 function closeMic() {
+  micGen++;
   if (!mic) return;
   try { mic.stream.getTracks().forEach((t) => t.stop()); mic.ctx.close(); } catch { /* already gone */ }
   mic = null;
 }
-// 0..1 loudness right now, for the meter
-function micLevel() {
-  if (!mic) return 0;
+const micGranted = async () => { try { return (await navigator.permissions.query({ name: 'microphone' })).state === 'granted'; } catch { return false; } };
+// The voice right now, measured against the room: { lv 0..1 for the meter (0 up to 6 dB over the room, 1 at 30 dB over),
+// talk: loud enough to count as speech, the same bar hasSpeech uses }. A fixed scale needed a loud voice to move.
+function micRead() {
+  if (!mic) return { lv: 0, talk: false };
   const a = new Float32Array(mic.an.fftSize); mic.an.getFloatTimeDomainData(a);
-  let s = 0; for (const v of a) s += v * v;
-  return Math.min(1, Math.sqrt(s / a.length) * 7);
+  let e = 0; for (const v of a) e += v * v;
+  const r = Math.sqrt(e / a.length), fl = Math.max(SPEECH_MIN / 4, mic.floor || 0);
+  return { lv: Math.max(0, Math.min(1, (20 * Math.log10(r / fl) - 6) / 24)), talk: r > Math.max(SPEECH_MIN, fl * 4) };
 }
 async function micSamples16k() {
   const n = mic.chunks.reduce((a, c) => a + c.length, 0), all = new Float32Array(n);
@@ -169,6 +192,8 @@ async function micSamples16k() {
   const s = off.createBufferSource(); s.buffer = buf; s.connect(off.destination); s.start();
   return (await off.startRendering()).getChannelData(0);
 }
+// for the mic-level test (game3d/tools/speech/level.mjs): the real capture path without the mic row
+export const micTest = { open: openMic, close: closeMic, read: micRead, take: micSamples16k, record: (on) => { if (mic) { mic.on = on; mic.chunks = on ? mic.pre.splice(0) : mic.chunks; } } };
 
 // ---------- the browser's recogniser (opt-in; Chrome sends the audio to Google) ----------
 
@@ -215,14 +240,15 @@ export function mountVoice(host, id, opts = {}) {
   // the answer block has one hint line: the mic's message, unless a typing hint came after it (ui.js sets data-last)
   const set = (s, html) => { state = s; row.dataset.state = s; if (html != null) msg.innerHTML = html; if (s !== 'idle' && row.parentNode) row.parentNode.dataset.last = 'voice'; };
   set('idle', idleText);
+  micGranted().then((ok) => { if (ok && alive && state === 'idle') openMic().catch(() => { /* the press will say */ }); });
 
   const meter = () => {
     if (!alive || state !== 'listening') return;
-    const lv = micLevel(), now = performance.now();
-    bars.forEach((b, i) => { const k = Math.max(0.12, Math.min(1, lv * (0.55 + 0.45 * Math.sin(now / 90 + i * 1.7) ** 2) * 1.6)); b.style.transform = `scaleY(${k.toFixed(3)})`; });
+    const { lv, talk } = micRead(), now = performance.now();
+    bars.forEach((b, i) => { const k = Math.max(0.12, Math.min(1, lv * (0.6 + 0.4 * Math.sin(now / 90 + i * 1.7) ** 2) * 1.25)); b.style.transform = `scaleY(${k.toFixed(3)})`; });
     row.style.setProperty('--lv', lv.toFixed(3));
     // tap-to-talk stops by itself: after speech, 0.9 s of quiet; or 6 s in all
-    if (lv > 0.08) { heardSpeech += 1; quietSince = now; }
+    if (talk) { heardSpeech += 1; quietSince = now; }
     if (tapMode && ((heardSpeech > 6 && now - quietSince > 900) || now - t0 > 6000)) { stop(); return; }
     raf = requestAnimationFrame(meter);
   };
@@ -246,7 +272,7 @@ export function mountVoice(host, id, opts = {}) {
       set('idle', 'Ready. ' + idleText); return;           // they let go long ago; the next press listens
     }
     if (!downAt) tapMode = true;                           // let go during the permission prompt: stop on silence
-    mic.chunks = []; mic.on = true; t0 = quietSince = performance.now(); heardSpeech = 0;
+    mic.chunks = mic.pre.splice(0); mic.on = true; t0 = quietSince = performance.now(); heardSpeech = 0;
     if (mic.ctx.state === 'suspended') mic.ctx.resume();
     if (mode === 'browser') web = browserListen((t) => { msg.innerHTML = `<span class="vc-heard jp">${say(t)}</span>`; });
     set('listening', 'Listening. Let go when you\'re done.');
@@ -283,7 +309,7 @@ export function mountVoice(host, id, opts = {}) {
   function showMiss({ quiet, other, heardText }) {
     let line;
     if (quiet) line = phone ? 'Didn\'t hear anything. Hold the mic while you talk.' : `Didn't hear anything. Hold ${keyName} or the mic while you talk.`;
-    else if (other && WORDS_JA[other]) line = `That sounded like <span class="jp">${WORDS_JA[other]}</span>. Try again, or type it.`;
+    else if (other && hintJa(other)) line = `That sounded like <span class="jp">${hintJa(other)}</span>. Try again, or type it.`;
     else line = `Didn't catch that${heardText ? ` (heard <span class="jp">${say(heardText.slice(0, 16))}</span>)` : ''}. Try again, or type it.`;
     if (misses >= 2 && !quiet) line += ' <button type="button" class="vc-hear">Hear it</button>';
     set('miss', line);
@@ -320,8 +346,8 @@ export function mountVoice(host, id, opts = {}) {
   return cleanup;
 }
 
-// the Japanese of each word, for "That sounded like ..."
-const WORDS_JA = Object.fromEntries(Object.entries(SPOKEN).map(([k, w]) => [k, w.forms[0] || w.kana[0]]));
+// "That sounded like X" names X only when Eric has learned it, spelled the way the game teaches it
+const hintJa = (k) => (WORDS[k] && known.has(k) ? WORDS[k].ja : null);
 
 function playWord(id) {
   const s = window.__settings || {}, a = new Audio(WORD_CLIP(id));

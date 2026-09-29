@@ -2,7 +2,7 @@
  "title": "Voice input: mic row and practice dots",
  "date": "2026-09-29",
  "by": "voice-input agent",
- "status": "open",
+ "status": "decided",
  "question": "Does saying the word look and read right in each state, and is three tries before a word is one click the right number?",
  "multi": true,
  "media": [
@@ -135,5 +135,6 @@
    "label": "Numbers and design notes",
    "href": "notes/VOICE-INPUT.md"
   }
- ]
+ ],
+ "decision": "Approved: \"it works but I had to talk very loudly for some reason for it to pick me up\" (the mic level is fixed separately)"
 }

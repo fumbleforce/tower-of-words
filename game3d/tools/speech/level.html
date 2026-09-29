@@ -1,0 +1,61 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>Mic level test</title>
+<body style="background:#111;color:#ddd;font:14px system-ui">
+<pre id="log">mic level test: driven by level.mjs</pre>
+<script type="module">
+// Records the fake microphone (Chromium plays a level/*.wav file into it) through the game's own capture path,
+// with the browser's echo cancelling, noise suppression and gain control, then judges each slot like the game does.
+// ?impl=before loads a saved copy of the old speech.js (js/speech-before.js, not kept in git) for a before/after run
+const impl = new URLSearchParams(location.search).get('impl');
+const { loadRecogniser, micTest, judge, hasSpeech, engineInfo } = await import(impl ? `../../js/speech-${impl}.js` : '../../js/speech.js');
+// the old code had micTest.level() and a fixed talking bar of 0.08; now micTest.read() -> { lv, talk }
+const read = () => (micTest.read ? micTest.read() : ((l) => ({ lv: l, talk: l > 0.08 }))(micTest.level()));
+const RO = { ohayo: 'ohayō gozaimasu', sumimasen: 'sumimasen' };
+const log = (t) => { document.getElementById('log').textContent += '\n' + t; };
+window.runLevel = async ({ slots, slot, lead }) => {
+  await loadRecogniser({ model: 'base', device: 'wasm' });
+  log('model ' + engineInfo.device);
+  await micTest.open(); micTest.record(true);
+  const t0 = performance.now(), trace = [];
+  const iv = setInterval(() => trace.push([performance.now() - t0, read()]), 16);
+  await new Promise((r) => setTimeout(r, (slots.length * slot + 0.3) * 1000));
+  clearInterval(iv); micTest.record(false);
+  const all = await micTest.take(); micTest.close();
+  const out = [];
+  for (let i = 0; i < slots.length; i++) {
+    const s = all.slice(Math.round(i * slot * 16000), Math.round((i + 1) * slot * 16000));
+    let pk = 0, e = 0; for (const v of s) { pk = Math.max(pk, Math.abs(v)); e += v * v; }
+    const tr = trace.filter(([t]) => t >= i * slot * 1000 && t < (i + 1) * slot * 1000).map(([, l]) => l);
+    const id = slots[i] ? slots[i].split('-')[1] : 'matte';   // an empty slot is judged as matte (and must miss)
+    const r = await judge(s, id, RO[id]);
+    out.push({ slot: slots[i] || '(nobody)', id, peakDb: +(20 * Math.log10(pk + 1e-9)).toFixed(1), rmsDb: +(10 * Math.log10(e / s.length + 1e-12)).toFixed(1),
+      meterMax: +Math.max(0, ...tr.map((x) => x.lv)).toFixed(2), tapFrames: tr.filter((x) => x.talk).length, speech: hasSpeech(s), hit: r.hit, text: r.text, reason: r.reason || '' });
+    log(JSON.stringify(out.at(-1)));
+  }
+  return out;
+};
+// fresh: open the mic (warm: `wait` s before the press), hold for 2.6 s, let go, close (a real press on a new prompt); twice, to see the file restart
+window.runFresh = async ({ id, n = 2, wait = 0 }) => {
+  await loadRecogniser({ model: 'base', device: 'wasm' });
+  const out = [];
+  for (let k = 0; k < n; k++) {
+    await micTest.open();
+    if (wait) await new Promise((r) => setTimeout(r, wait * 1000));   // warm: the prompt is up, the press comes later
+    micTest.record(true);
+    const t0 = performance.now(), tr = [];
+    const iv = setInterval(() => tr.push(read()), 16);
+    await new Promise((r) => setTimeout(r, 2600));
+    clearInterval(iv); micTest.record(false);
+    const s = await micTest.take(); micTest.close();
+    let pk = 0, at = 0, e = 0; s.forEach((v, i) => { e += v * v; if (Math.abs(v) > pk) { pk = Math.abs(v); at = i; } });
+    const r = await judge(s, id, RO[id]);
+    out.push({ slot: `open ${k + 1}`, id, peakDb: +(20 * Math.log10(pk + 1e-9)).toFixed(1), peakAt: +(at / 16000).toFixed(2), rmsDb: +(10 * Math.log10(e / s.length + 1e-12)).toFixed(1),
+      meterMax: +Math.max(0, ...tr.map((x) => x.lv)).toFixed(2), tapFrames: tr.filter((x) => x.talk).length, speech: hasSpeech(s), hit: r.hit, text: r.text, reason: r.reason || '' });
+    log(JSON.stringify(out.at(-1)));
+    await new Promise((r) => setTimeout(r, 300));
+  }
+  return out;
+};
+window.levelReady = true;
+</script>
