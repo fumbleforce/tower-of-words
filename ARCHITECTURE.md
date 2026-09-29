@@ -78,5 +78,15 @@ record source hashes. Keep failed captures and investigate differences; do not
 drop physical or ordered state merely to obtain an equal comparison.
 
 Cross-team review and game-fact trailers follow the collaboration protocol and
-GUIDE. The staged-snapshot hook package is still being implemented; the current
-checks are runnable commands, not an installed Git hook guarantee.
+GUIDE. Install the local hooks with `sh tools/check/install-hooks.sh`; the old
+asset installer forwards to it. Pre-commit checks staged syntax, blocks private
+paths and unallowed binaries using the staged asset policy, then runs `npm run
+check` in a disposable public Git snapshot with its own dependencies and index.
+It never stashes or replaces shared working files. Commit-msg requires one
+`Facts: none` or `Facts: docs/game/<file>.md` line; a named fact file must be part
+of the staged change. Attribution trailers may follow it.
+
+Run `node tools/check/pre-commit.mjs` for the same check outside Git. Hooks are
+locally bypassable. Receipt enforcement, committed-HEAD browser checks, pre-push
+secret scanning and asset-lock/live-disk synchronization are deferred under
+C-0080 so the runtime extractions can proceed.

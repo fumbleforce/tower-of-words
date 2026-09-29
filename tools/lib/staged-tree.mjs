@@ -5,7 +5,7 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 
-const git = (cwd, args, options = {}) => execFileSync('git', args,
+const git = (cwd, args, options = {}) => execFileSync('git', ['--no-replace-objects', ...args],
   { cwd, encoding: 'utf8', maxBuffer: 8 * 1024 * 1024, timeout: 10000, ...options });
 
 export function reapInterruptedIndexes(directory = os.tmpdir(), now = Date.now()) {
@@ -79,7 +79,7 @@ export function readStagedPrefix(cwd, snapshot, file, { env = process.env } = {}
   publicPath(file);
   const change = snapshot.changes.find(change => change.file === file);
   assert(change && change.status !== 'D' && ['100644', '100755'].includes(change.mode), 'No regular staged blob');
-  const result = spawnSync('git', ['cat-file', 'blob', change.oid],
+  const result = spawnSync('git', ['--no-replace-objects', 'cat-file', 'blob', change.oid],
     { cwd, env, encoding: null, timeout: 10000, maxBuffer: 1024 });
   assert(result.status === 0 || (result.error?.code === 'ENOBUFS' && result.stdout?.length >= 1024),
     result.error?.message || 'Cannot read staged script prefix');
