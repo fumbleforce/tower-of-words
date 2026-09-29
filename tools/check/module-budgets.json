@@ -23,10 +23,10 @@
       "reason": "Existing detailed prop builders; preserve geometry until the visual owner reviews extraction."
     },
     "game3d/js/main.js": {
-      "lines": 787,
-      "bytes": 27112,
+      "lines": 788,
+      "bytes": 27198,
       "owner": "codex-tui",
-      "review": "C-0089",
+      "review": "C-0110 / X-0193: one office batch integration line; existing responsibility unchanged",
       "reason": "Composition, boot/Continue, input, rendering and frame loop remain after stage 4 hooks, interactions and place lifecycle extraction."
     },
     "game3d/js/menu.js": {
@@ -114,10 +114,10 @@
       "reason": "Existing lobby geometry composition; preserve the room while extracting responsibilities later."
     },
     "game3d/js/scenes/office.js": {
-      "lines": 2044,
-      "bytes": 72439,
+      "lines": 2048,
+      "bytes": 72686,
       "owner": "codex-tui",
-      "review": "C-0071",
+      "review": "C-0110 / X-0193: preserve cup-tray, counter and sink overlap order; existing responsibility unchanged",
       "reason": "Existing office geometry composition; preserve the room while extracting responsibilities later."
     },
     "game3d/js/showcase/decals.js": {

@@ -1059,6 +1059,7 @@ export function buildOffice() {
   // the 2019 party box on the cabinets, a tray of seven cups in the kitchenette, a nameplate face down on the chief's desk
   root.add(rbox(0.42, 0.22, 0.3, PAL.box, { x: -3.5, y: 1.2, z: Z0 + 0.3, r: 0.02 }));
   const tray = new THREE.Group();
+  tray.userData.noBatch = true; // Preserve overlapping cup/tray surfaces in their original draw order.
   tray.add(rbox(0.46, 0.02, 0.26, '#6d5a4a', { r: 0.006 }));
   for (let i = 0; i < 7; i++) {
     const cu = mug(['#e9e6df', '#c96a5a', '#7aa0c8', '#e9e6df', '#9cc39a', '#e2c26a', '#e9e6df'][i]);
@@ -1177,9 +1178,12 @@ export function buildOffice() {
   }
   // ---- kitchenette (給湯室) ----
   const ct = counter(1.5);
+  ct.userData.noBatch = true; // Its top overlaps the tray and sink plate.
   ct.position.set(0.95, 0, CS + T / 2 + 0.3);
   root.add(ct);
-  root.add(rbox(0.36, 0.02, 0.3, '#8d939b', { x: 0.55, y: 0.5, z: CS + 0.36, r: 0.01, cast: false }));
+  const sinkPlate = rbox(0.36, 0.02, 0.3, '#8d939b', { x: 0.55, y: 0.5, z: CS + 0.36, r: 0.01, cast: false });
+  sinkPlate.userData.noBatch = true;
+  root.add(sinkPlate);
   root.add(
     rbox(0.22, 0.32, 0.24, '#2c3038', { x: 1.1, y: 0.5, z: CS + 0.36, r: 0.03 }),
     rbox(0.1, 0.1, 0.1, '#3e444e', { x: 1.1, y: 0.56, z: CS + 0.46, r: 0.02 }),

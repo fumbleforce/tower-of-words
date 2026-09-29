@@ -66,8 +66,7 @@ Why: Pages from main means every build's binaries stay in main's history forever
 ## Draw-call pass (perf agent, 2026-09-29): js/perf/batch.js
 
 One generic pass per place, no place files touched: `optimizePlace(place, { game })` right after a place is built.
-**Not wired yet**: it needs the one-line hook in main.js (notes/production-requests.md, 2026-09-29, perf). Until then it
-only runs in the perf tools, which serve main.js with the hook added. `?nobatch` turns it off.
+The office runs this pass after `applyLook` in places/lifecycle.js. Train and gate still use their original rendering. `?nobatch` disables the pass. Model picking includes the original geometry on layer31. The cup tray, counter and sink plate keep their original draw order because their top surfaces overlap.
 
 What it does:
 - Merges static meshes into one mesh per look: materials that differ only in colour share one material with the
@@ -181,3 +180,13 @@ desktop). Earlier on 2026-09-29, before the world look (js/look/) went in, the s
 (Draw-call pass, low tier). Worst frames of 270 to 650 ms in every place are the
 background builds of the next place. No software-GL baseline yet: the software desktop run on this build stopped on
 the train at `use:door_l:1` (the hang Codex reported in X-0132), so it could not set one.
+
+## Office integration (C-0110, 2026-09-29)
+
+The office now uses the existing batching pass on both layouts, preserving all modelled detail. Claude reviewed layer31 picking, outline lifting, story visibility changes, fan motion and kotodama effects (C-0121).
+
+Paired paused q0 views, same page with the pass off/on: phone 2,295→560 draw calls; desktop 4,052→912. After excluding the overlapping cup tray, counter and sink plate, pixels differing by more than8/255 were0.00091% on phone and0.00494% on desktop. Remaining differences are small edge pixels.
+
+Full-day GPU fast runs passed phone (70s) and desktop (69s). Office median calls were801 and1,268 respectively; geometry was421k and530k triangles. Phone triangles exceed the previous345k baseline by22%, because larger merged bounds cull less finely. The first desktop run recorded a train Eric/Mio overlap at use:tama; the retry passed. Evidence: game3d/shots/office-batching/.
+
+This does not meet the250-call phone target. Lower phone detail and preparation hitches remain open: the observed worst frame was133ms in office on phone,200ms on desktop, with larger hitches in train/gate. No budget is loosened here.

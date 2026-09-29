@@ -5,6 +5,7 @@ import { NEXT } from './definitions.js';
 import { cancelSavedWalk } from './saved-people.js';
 import { attachLift } from './lift.js';
 import { applyLook } from '../look/index.js';
+import { optimizePlace } from '../perf/batch.js';
 import { SmoothWalker } from '../move.js';
 import { setPlace as sfxPlace } from '../sfx.js';
 import { playMusic } from '../ui.js';
@@ -27,6 +28,7 @@ export function createPlaceLifecycle(
         place.name = name;
         attachLift(game, place); // walk-in lift (places/lift.js)
         applyLook(place, game); // surface patterns, baked light (look/index.js); materials patched in place
+        if (name === 'office') optimizePlace(place, { game });
         return { place, story };
       })();
     return game.prepared[name];
