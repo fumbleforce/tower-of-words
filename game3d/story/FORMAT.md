@@ -207,7 +207,7 @@ Place hooks (the unlock effects):
 
 ## Done from REQUESTS.md (engine side)
 
-- Words: `ohayo`, `yoroshiku`, `otsukare`, `kotodama`. Speakers: `rei`, `kanae`, `sales1`, `sales2`, `gatev`, `reitext` (shown as a text message on a light card).
+- Words: `ohayo`, `yoroshiku`, `otsukare`, `kotodama`. Speakers: `rei`, `kanae`, `sales1`, `sales2`, `gatev`, `reitext` (shown as a text message on its own dark card).
 - Train: `rei` has a body on the far bench at x 2.1 with a laptop; `music` is gone. Her folder and a lidded coffee (`cup`) are on `seat_far_r`; sitting Mio there moves them. Hook `cup` `state: 'tip'|'safe'` (`safe` puts it upright in Rei's hand). Bags sit on `seat_aoi`, `seat_near_l` and `seat_near_r` (sitting there moves the bag). `hide` also hides the person's floor shadow.
 - Gate: `rei` has a body (walks in with Mio when she's in `with`). `aoi` starts seated on `bench_r` behind an upside-down newsletter (hook `newsletter` `state: 'down'|'up'`). `catTo` works (crossing the barrier flashes the gate red). One commuter carries a cake box. `with` entries can be conditional: `with: [{ who: 'aoi', if: 'aoi_with' }]`.
 - Lift: the ride starts at 1. Put `{ do: 'floor', to: '5' }` steps in `ride` to move the counter one floor at a time (`B2`, `B1`, `1` ... `5`), and `{ do: 'liftDoors', state: 'open'|'closed' }` for the doors' sound. If the ride doesn't end on B2, the engine finishes the count to B2. The office is on B2 (plates B2 and 企画室７).

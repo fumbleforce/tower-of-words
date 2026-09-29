@@ -237,13 +237,7 @@ body.phone .chip.cmdchip { flex: 1 1 100%; }
 body.phone #end .stars { grid-template-columns: 1fr; }
 body.phone #end ul.w { grid-template-columns: 1fr; }
 
-/* a text message on Mio's phone */
-#talk.phone { background: #eef1f5; color: #1f2430; border-color: #cfd6df; }
-#talk.phone .line { color: #1f2430; }
-#talk.phone .rl::before { content: ""; display: inline-block; width: 8px; height: 12px; margin-right: 6px; border: 2px solid #6b7686; border-radius: 3px; vertical-align: -1px; }
-#talk.phone .nm { color: #3b4658 !important; }
-#talk.phone .jp { color: #b8542e; }
-#talk.phone .gl { color: #6b7686; }
+/* a text message (Mio, Rei): styled with the Stage light overlay below */
 
 /* ---------- sim: clock, people, bag, give ---------- */
 #top .tr { display: flex; gap: 8px; margin-left: auto; }
@@ -493,8 +487,14 @@ body[data-place="office"] { --tint-top: 205, 226, 255; --tint-low: 22, 30, 44; }
 #talk .more { right: 0; bottom: 4px; }
 #talk .chip { text-shadow: none; }
 #talk.typing .tp-in { text-shadow: none; }
-/* the phone-call line keeps its light card */
-#talk.phone { padding: 14px 18px 16px; border-radius: 14px; text-shadow: none; }
+/* a text message (Mio, Rei): its own dark card, since the faded overlay has no panel and the message can land over
+   any scene (Jørgen: "impossible to read, black on black"). A teal phone outline and "message"
+   mark it as a text; a teal edge on the left sets it apart from spoken lines. */
+#talk.phone, #talk.phone.in { padding: 14px 18px 16px; border-radius: 14px; background: rgba(20, 23, 29, .95); border: 1px solid var(--chip-edge); border-left: 3px solid var(--accent); box-shadow: 0 6px 24px rgba(0,0,0,.4); text-shadow: none; color: var(--ink); }
+#talk.phone .line { color: var(--ink); }
+#talk.phone .who { align-items: center; }
+#talk.phone .rl { display: inline-flex; align-items: center; gap: 6px; color: var(--ink-dim); font-size: 13px; }
+#talk.phone .rl::before { content: ""; display: inline-block; width: 8px; height: 13px; border: 2px solid var(--accent); border-radius: 3px; }
 @media (max-width: 1100px) { #talk, #talk.in { left: 30%; right: 22%; } }
 
 body.phone #stage .focus { background: linear-gradient(to top, var(--band-grey) 0, var(--band-grey) var(--band, 180px), rgba(29, 34, 43, .55) calc(var(--band, 180px) + 26px), rgba(var(--night), 0) calc(var(--band, 180px) + 120px)); }
