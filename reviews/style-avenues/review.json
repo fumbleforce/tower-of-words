@@ -2,7 +2,7 @@
  "title": "Texture avenues for the world",
  "date": "2026-09-29",
  "by": "style agent",
- "status": "open",
+ "status": "decided",
  "multi": true,
  "question": "Which avenues should we try?",
  "media": [
@@ -58,5 +58,13 @@
    "label": "Full write-up: what you'd see, references, how it's built, costs and risks",
    "href": "game3d/design/style/AVENUES.md"
   }
- ]
+ ],
+ "decided": [
+  "2",
+  "3",
+  "4",
+  "7",
+  "8"
+ ],
+ "decision": "Picked 2, 3, 4, 7 and 8: try them in a small showcase room so we can see the different effects (now style-avenues-room)"
 }

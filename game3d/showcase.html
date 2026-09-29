@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Texture Avenues Room</title>
+<meta name="theme-color" content="#0e121c">
+<script type="importmap">{ "imports": { "three": "./vendor/three/three.module.js", "three/addons/": "./vendor/" } }</script>
+<style>
+:root { --bg: #0e121c; --panel: rgba(14, 18, 28, 0.86); --line: rgba(238, 240, 244, 0.14); --text: #eef0f4; --dim: #a9b0bd; --accent: #6fd0c6; }
+html, body { margin: 0; height: 100%; background: var(--bg); color: var(--text); font: 14px/1.4 "Zen Kaku Gothic New", system-ui, sans-serif; overflow: hidden; }
+canvas { display: block; width: 100vw; height: 100vh; touch-action: none; }
+#panel { position: fixed; left: 16px; top: 16px; max-width: min(620px, calc(100vw - 32px)); box-sizing: border-box; padding: 12px 14px; background: var(--panel); border: 1px solid var(--line); border-radius: 10px; backdrop-filter: blur(6px); }
+#panel[hidden] { display: none; }
+#panel.busy { opacity: 0.7; }
+#panel .row { display: flex; flex-wrap: wrap; gap: 6px; }
+#panel .views { margin-top: 8px; }
+#panel button { font: inherit; color: var(--text); background: transparent; border: 1px solid var(--line); border-radius: 7px; padding: 6px 10px; cursor: pointer; min-height: 34px; }
+#panel button:hover { border-color: rgba(238, 240, 244, 0.35); }
+#panel button[aria-pressed="true"] { border-color: var(--accent); background: rgba(111, 208, 198, 0.14); }
+#panel .views button { font-size: 12px; color: var(--dim); min-height: 30px; padding: 4px 9px; }
+#panel .views button[aria-pressed="true"] { color: var(--text); }
+#panel .k { display: inline-block; min-width: 1.2em; margin-right: 6px; color: var(--accent); font-variant-numeric: tabular-nums; }
+#panel .note { margin: 10px 0 4px; }
+#panel .perf { color: var(--dim); font-size: 12px; font-variant-numeric: tabular-nums; }
+#panel .keys { color: var(--dim); font-size: 12px; margin-top: 2px; }
+.err { position: fixed; inset: auto 16px 16px; color: #ffb4a8; white-space: pre-wrap; }
+@media (max-width: 640px) {
+  #panel { top: auto; bottom: 12px; left: 12px; right: 12px; max-width: none; padding: 10px; }
+  #panel button { padding: 5px 8px; font-size: 13px; }
+  #panel .keys { display: none; }
+}
+</style>
+</head>
+<body>
+<canvas id="c" tabindex="0" aria-label="Showcase room"></canvas>
+<div id="panel" role="region" aria-label="Looks">
+  <div class="row looks"></div>
+  <div class="row views"></div>
+  <div class="note"></div>
+  <div class="perf"></div>
+  <div class="keys">Keys: 0 2 3 4 7 8 pick a look, V changes the view, H hides this panel.</div>
+</div>
+<script type="module" src="./js/showcase/main.js"></script>
+</body>
+</html>
