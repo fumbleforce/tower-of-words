@@ -49,5 +49,5 @@ Use `node game3d/tools/fast-routes.mjs --list` to list routes or append route ID
 
 ## Also
 
-- `npm run check:browser` runs the browser routes (registration, transitions, checkpoints, continue) when your change touches saving, loading or place changes.
+- `npm run check:browser` runs the browser routes (registration, transitions, checkpoints, continue) when your change touches saving, loading or place changes. `npm run check:browser opening` plays the train opening as a player (title, Start, Continue, real clicks, both sizes, about 75 s); run it when you touch the title, dialogue box, captions or the train's first minute.
 - A green fast test says nothing about looks. Look at close-ups of what you changed (GUIDE: Validate each fix in isolation); the critic agent scores visuals.

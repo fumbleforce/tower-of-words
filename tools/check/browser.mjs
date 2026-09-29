@@ -12,6 +12,7 @@ const jobs = {
   transitions: ['tools/check/transition-browser.mjs'],
   recovery: ['tools/check/recovery-browser.mjs'],
   typing: ['tools/check/typing-browser.mjs'],
+  opening: ['tools/check/opening-browser.mjs'],
   'staging-platform': ['tools/check/staging-browser.mjs', 'platform'],
   'staging-arrival': ['tools/check/staging-browser.mjs', 'arrival'],
 };
