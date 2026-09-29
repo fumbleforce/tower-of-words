@@ -40,6 +40,31 @@ def hair_mask(img):
     return (tall & band).astype(np.float32)
 
 
+def fill_hidden_bar(A, am):
+    """The portrait's fringe hangs in front of the top bar of her left lens (the lens on the image's right) between x 464
+    and 518, so that stretch of bar isn't in the portrait at all: the colour mask stops at x 471 and starts again at 511.
+    Transplanted onto ipa7a-1001, whose fringe ends higher, that left a gap in the bar that showed the face through it
+    (Jørgen, rounds 3 and 4: "transparent frame on the top of the left glass", her left). Fill it with the bar's own
+    cross-section (the median of columns 521-529, where the bar is whole), slid along the line joining the two ends."""
+    cols = range(521, 530)
+    prof = np.median(np.stack([A[414:438, x] for x in cols]), 0)
+    pm = np.max(np.stack([am[414:438, x] for x in cols]), 0)
+    y_end, y_start = 426.0, 441.0          # bar centre at x 519 and x 463
+    keep = (pm > 0.5) & (prof.max(-1) < 175) & (prof.max(-1) - prof.min(-1) < 45)   # the bar, not the skin in the grown mask
+    src = np.arange(414, 438, dtype=np.float32)
+    k0, k1 = src[keep].min() - 0.5, src[keep].max() + 0.5   # the bar's extent in the profile
+    for x in range(462, 521):
+        t = (x - 463) / (519 - 463)
+        dy = (1 - t) * y_start + t * y_end - 426   # sub-pixel shift, so the bar edge doesn't step
+        rows = np.arange(int(np.floor(414 + dy)), int(np.ceil(438 + dy)) + 1)
+        sy = rows - dy                              # where each row samples the profile
+        cov = np.clip(np.minimum(sy - k0, k1 - sy) + 0.5, 0, 1)   # 1 inside the bar, fractional at its edges
+        col = np.stack([np.interp(sy, src[keep], prof[keep][:, c]) for c in range(3)], -1)
+        A[rows, x] = A[rows, x] * (1 - cov[:, None]) + col * cov[:, None]
+        am[rows, x] = np.maximum(am[rows, x], cov)
+    return A, am
+
+
 def build(scale=1.0, rot=None, ramp=(0.30, 0.46)):
     A = np.asarray(Image.open(APPR).convert('RGB')).astype(np.float32)
     T = np.asarray(Image.open(TGT).convert('RGB'))
@@ -53,6 +78,7 @@ def build(scale=1.0, rot=None, ramp=(0.30, 0.46)):
     # no hair: the portrait's navy hair strands where they cross the frame (hinge) are not frame
     Av = A.max(-1)
     am[(A[..., 2] > A[..., 0] + 6) & (Av < 110)] = 0
+    A, am = fill_hidden_bar(A, am)
     am = cv2.GaussianBlur(am, (0, 0), 0.7)
 
     ang_a = np.arctan2(*(EA[1] - EA[0])[::-1])

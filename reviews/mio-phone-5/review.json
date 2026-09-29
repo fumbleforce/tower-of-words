@@ -1,0 +1,82 @@
+{
+ "title": "Mio looking at her phone, round 5 (top of her left lens)",
+ "date": "2026-09-29",
+ "by": "art agent (Mio phone 5)",
+ "status": "open",
+ "multi": false,
+ "question": "Is the top of her left lens solid now?",
+ "media": [
+  {
+   "image": "game3d/assets/portrait-candidates/mio-phone-5/frame-blendk20-3501-exact-3401-v2.webp",
+   "caption": "Her left lens (on the right of the picture), round 4 and round 5, cut out over a checkerboard."
+  },
+  {
+   "image": "game3d/assets/portrait-candidates/mio-phone-5/bg-blendk20-3501-exact-3401-v2.webp",
+   "caption": "The round 5 pick cut out, over dark, light and a checkerboard."
+  },
+  {
+   "image": "game3d/assets/portrait-candidates/mio-phone-5/approved-lens.webp",
+   "caption": "Why: in the approved portrait her fringe hangs in front of that stretch of the bar, so the frame copied from it had a gap there. Round 5 continues the bar across it."
+  }
+ ],
+ "options": [
+  {
+   "id": "blendk20-3501-exact-3401-v2",
+   "label": "blendk20-3501-exact-3401-v2",
+   "image": "game3d/assets/portrait-candidates/mio-phone-5/glasses-blendk20-3501-exact-3401-v2.webp",
+   "images": [
+    "game3d/assets/portrait-candidates/mio-phone-5/frame-blendk20-3501-exact-3401-v2.webp",
+    "game3d/assets/portrait-candidates/mio-phone-5/bg-blendk20-3501-exact-3401-v2.webp",
+    "game3d/assets/portrait-candidates/mio-phone-5/mio-phone3-blendk20-3501-exact-3401-v2.webp",
+    "game3d/assets/portrait-candidates/mio-phone-5/mio-phone3-blendk20-3501-exact-3401-v2-cut.webp"
+   ],
+   "note": "The round 3 pick. The top bar of her left lens now runs unbroken from the corner to the hinge."
+  },
+  {
+   "id": "blendk25-3501-exact-3401-v2",
+   "label": "blendk25-3501-exact-3401-v2",
+   "image": "game3d/assets/portrait-candidates/mio-phone-5/glasses-blendk25-3501-exact-3401-v2.webp",
+   "images": [
+    "game3d/assets/portrait-candidates/mio-phone-5/frame-blendk25-3501-exact-3401-v2.webp",
+    "game3d/assets/portrait-candidates/mio-phone-5/bg-blendk25-3501-exact-3401-v2.webp",
+    "game3d/assets/portrait-candidates/mio-phone-5/mio-phone3-blendk25-3501-exact-3401-v2.webp",
+    "game3d/assets/portrait-candidates/mio-phone-5/mio-phone3-blendk25-3501-exact-3401-v2-cut.webp"
+   ],
+   "note": "Same at 0.25."
+  },
+  {
+   "id": "exact-3401-v2",
+   "label": "exact-3401-v2",
+   "image": "game3d/assets/portrait-candidates/mio-phone-5/glasses-exact-3401-v2.webp",
+   "images": [
+    "game3d/assets/portrait-candidates/mio-phone-5/frame-exact-3401-v2.webp",
+    "game3d/assets/portrait-candidates/mio-phone-5/bg-exact-3401-v2.webp",
+    "game3d/assets/portrait-candidates/mio-phone-5/mio-phone3-exact-3401-v2.webp",
+    "game3d/assets/portrait-candidates/mio-phone-5/mio-phone3-exact-3401-v2-cut.webp"
+   ],
+   "note": "Without the light blend."
+  },
+  {
+   "id": "blendk20-3501-exact-3403-v2",
+   "label": "blendk20-3501-exact-3403-v2",
+   "image": "game3d/assets/portrait-candidates/mio-phone-5/glasses-blendk20-3501-exact-3403-v2.webp",
+   "images": [
+    "game3d/assets/portrait-candidates/mio-phone-5/frame-blendk20-3501-exact-3403-v2.webp",
+    "game3d/assets/portrait-candidates/mio-phone-5/bg-blendk20-3501-exact-3403-v2.webp",
+    "game3d/assets/portrait-candidates/mio-phone-5/mio-phone3-blendk20-3501-exact-3403-v2.webp",
+    "game3d/assets/portrait-candidates/mio-phone-5/mio-phone3-blendk20-3501-exact-3403-v2-cut.webp"
+   ],
+   "note": "The same method on the other bare face. It has a small teal fleck above her right eye."
+  },
+  {
+   "id": "redo",
+   "label": "Redo it (say what to change)"
+  }
+ ],
+ "links": [
+  {
+   "label": "Round 4",
+   "href": "bible/#review/mio-phone-4"
+  }
+ ]
+}

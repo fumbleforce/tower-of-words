@@ -1,0 +1,34 @@
+[
+ {
+  "name": "mio-phone3-exact-3401-v2",
+  "method": "the saved bare face of round 3, then the approved frame pixels warped on (composite.py) with the fixed hair mask (round 4: the top bar of the left lens is no longer cut)"
+ },
+ {
+  "name": "mio-phone3-blendk20-3501-exact-3401-v2",
+  "method": "mio-phone3-exact-3401-v2, then a light masked img2img over the glasses band (RDBT, denoise 0.2, no inpainting patch); nothing pasted back; her eyes left out of the mask; the frame's core left out of the mask (it stays the portrait's pixels)",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1girl, solo, Mio, a 25-year-old woman, close-up of her face looking down, messy black hair with a blunt fringe, light tan eyes, tired, small frown, plain light grey background, soft even studio light, glasses with thick taupe-grey frames, rounded rectangular lenses, clear lenses",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, text, watermark, signature, 3d, realistic, photorealistic, render, child, loli, western cartoon, comic book, flat vector, thick outlines, poster art, pop art, rim light, red rim light, backlighting, sunglasses, tinted eyewear, silver frames",
+  "seed": 3501,
+  "denoise": 0.2
+ },
+ {
+  "name": "mio-phone3-blendk25-3501-exact-3401-v2",
+  "method": "mio-phone3-exact-3401-v2, then a light masked img2img over the glasses band (RDBT, denoise 0.25, no inpainting patch); nothing pasted back; her eyes left out of the mask; the frame's core left out of the mask (it stays the portrait's pixels)",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1girl, solo, Mio, a 25-year-old woman, close-up of her face looking down, messy black hair with a blunt fringe, light tan eyes, tired, small frown, plain light grey background, soft even studio light, glasses with thick taupe-grey frames, rounded rectangular lenses, clear lenses",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, text, watermark, signature, 3d, realistic, photorealistic, render, child, loli, western cartoon, comic book, flat vector, thick outlines, poster art, pop art, rim light, red rim light, backlighting, sunglasses, tinted eyewear, silver frames",
+  "seed": 3501,
+  "denoise": 0.25
+ },
+ {
+  "name": "mio-phone3-exact-3403-v2",
+  "method": "the saved bare face of round 3, then the approved frame pixels warped on (composite.py) with the fixed hair mask (round 4: the top bar of the left lens is no longer cut)"
+ },
+ {
+  "name": "mio-phone3-blendk20-3501-exact-3403-v2",
+  "method": "mio-phone3-exact-3403-v2, then a light masked img2img over the glasses band (RDBT, denoise 0.2, no inpainting patch); nothing pasted back; her eyes left out of the mask; the frame's core left out of the mask (it stays the portrait's pixels)",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1girl, solo, Mio, a 25-year-old woman, close-up of her face looking down, messy black hair with a blunt fringe, light tan eyes, tired, small frown, plain light grey background, soft even studio light, glasses with thick taupe-grey frames, rounded rectangular lenses, clear lenses",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, text, watermark, signature, 3d, realistic, photorealistic, render, child, loli, western cartoon, comic book, flat vector, thick outlines, poster art, pop art, rim light, red rim light, backlighting, sunglasses, tinted eyewear, silver frames",
+  "seed": 3501,
+  "denoise": 0.2
+ }
+]
