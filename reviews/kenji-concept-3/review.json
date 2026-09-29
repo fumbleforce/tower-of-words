@@ -7,7 +7,7 @@
  "question": "Which expression and which hair? All are c with one thing changed; hair tries use x3's expression.",
  "media": [
   {
-   "image": "game3d/assets/portrait-candidates/kenji-concept3-sheet.png",
+   "image": "art/candidates/portraits/kenji-concept3-sheet.png",
    "caption": "The whole round: c, the three expression tries, then six hair styles (two portraits and a full body each). Same prompt, seeds (761, 762) and settings as c; only the named phrase changes."
   }
  ],
@@ -15,99 +15,99 @@
   {
    "id": "c",
    "label": "kenji2-c2-pudgy (round 2 c)",
-   "image": "game3d/assets/portrait-candidates/kenji-concept2/kenji2-c2-pudgy-761.webp",
+   "image": "art/candidates/portraits/kenji-concept2/kenji2-c2-pudgy-761.webp",
    "images": [
-    "game3d/assets/portrait-candidates/kenji-concept2/kenji2-c2-pudgy-762.webp",
-    "game3d/assets/portrait-candidates/kenji-concept2/kenji2-c2-pudgy-full-761.webp",
-    "game3d/assets/portrait-candidates/kenji-concept3/kenji3-c-761.webp",
-    "game3d/assets/portrait-candidates/kenji-concept3/kenji3-c-762.webp"
+    "art/candidates/portraits/kenji-concept2/kenji2-c2-pudgy-762.webp",
+    "art/candidates/portraits/kenji-concept2/kenji2-c2-pudgy-full-761.webp",
+    "art/candidates/portraits/kenji-concept3/kenji3-c-761.webp",
+    "art/candidates/portraits/kenji-concept3/kenji3-c-762.webp"
    ],
    "note": "Your pick from round 2, for comparison. The last two are c re-rendered with the same prompt and seeds: the same guy, not pixel-identical."
   },
   {
    "id": "x1",
    "label": "kenji3-x1-smile",
-   "image": "game3d/assets/portrait-candidates/kenji-concept3/kenji3-x1-smile-761.webp",
+   "image": "art/candidates/portraits/kenji-concept3/kenji3-x1-smile-761.webp",
    "images": [
-    "game3d/assets/portrait-candidates/kenji-concept3/kenji3-x1-smile-762.webp"
+    "art/candidates/portraits/kenji-concept3/kenji3-x1-smile-762.webp"
    ],
    "note": "Step 1, expression only: \"friendly smile, relaxed eyes\". Closed mouth. Calmest of the three."
   },
   {
    "id": "x2",
    "label": "kenji3-x2-small-grin",
-   "image": "game3d/assets/portrait-candidates/kenji-concept3/kenji3-x2-small-grin-761.webp",
+   "image": "art/candidates/portraits/kenji-concept3/kenji3-x2-small-grin-761.webp",
    "images": [
-    "game3d/assets/portrait-candidates/kenji-concept3/kenji3-x2-small-grin-762.webp"
+    "art/candidates/portraits/kenji-concept3/kenji3-x2-small-grin-762.webp"
    ],
    "note": "Step 1, expression only: \"small easy grin\" with the tooth gap. Barely changed from c, still toothy."
   },
   {
    "id": "x3",
    "label": "kenji3-x3-open-smile",
-   "image": "game3d/assets/portrait-candidates/kenji-concept3/kenji3-x3-open-smile-761.webp",
+   "image": "art/candidates/portraits/kenji-concept3/kenji3-x3-open-smile-761.webp",
    "images": [
-    "game3d/assets/portrait-candidates/kenji-concept3/kenji3-x3-open-smile-762.webp"
+    "art/candidates/portraits/kenji-concept3/kenji3-x3-open-smile-762.webp"
    ],
    "note": "Step 1, expression only: \"cheerful open-mouthed smile, soft eyebrows\". I used this one for the hair tries below."
   },
   {
    "id": "h1",
    "label": "kenji3-h1-mushroom",
-   "image": "game3d/assets/portrait-candidates/kenji-concept3/kenji3-h1-mushroom-761.webp",
+   "image": "art/candidates/portraits/kenji-concept3/kenji3-h1-mushroom-761.webp",
    "images": [
-    "game3d/assets/portrait-candidates/kenji-concept3/kenji3-h1-mushroom-762.webp",
-    "game3d/assets/portrait-candidates/kenji-concept3/kenji3-h1-mushroom-full-761.webp"
+    "art/candidates/portraits/kenji-concept3/kenji3-h1-mushroom-762.webp",
+    "art/candidates/portraits/kenji-concept3/kenji3-h1-mushroom-full-761.webp"
    ],
    "note": "Step 2 (on x3), hair only: black mushroom cut with a thick fringe."
   },
   {
    "id": "h2",
    "label": "kenji3-h2-perm",
-   "image": "game3d/assets/portrait-candidates/kenji-concept3/kenji3-h2-perm-761.webp",
+   "image": "art/candidates/portraits/kenji-concept3/kenji3-h2-perm-761.webp",
    "images": [
-    "game3d/assets/portrait-candidates/kenji-concept3/kenji3-h2-perm-762.webp",
-    "game3d/assets/portrait-candidates/kenji-concept3/kenji3-h2-perm-full-761.webp"
+    "art/candidates/portraits/kenji-concept3/kenji3-h2-perm-762.webp",
+    "art/candidates/portraits/kenji-concept3/kenji3-h2-perm-full-761.webp"
    ],
    "note": "Step 2 (on x3), hair only: fluffy light brown perm with soft curls."
   },
   {
    "id": "h3",
    "label": "kenji3-h3-centre-part",
-   "image": "game3d/assets/portrait-candidates/kenji-concept3/kenji3-h3-centre-part-761.webp",
+   "image": "art/candidates/portraits/kenji-concept3/kenji3-h3-centre-part-761.webp",
    "images": [
-    "game3d/assets/portrait-candidates/kenji-concept3/kenji3-h3-centre-part-762.webp",
-    "game3d/assets/portrait-candidates/kenji-concept3/kenji3-h3-centre-part-full-761.webp"
+    "art/candidates/portraits/kenji-concept3/kenji3-h3-centre-part-762.webp",
+    "art/candidates/portraits/kenji-concept3/kenji3-h3-centre-part-full-761.webp"
    ],
    "note": "Step 2 (on x3), hair only: black, parted in the middle with curtain bangs. The bangs came out shorter than asked."
   },
   {
    "id": "h4",
    "label": "kenji3-h4-bedhead",
-   "image": "game3d/assets/portrait-candidates/kenji-concept3/kenji3-h4-bedhead-761.webp",
+   "image": "art/candidates/portraits/kenji-concept3/kenji3-h4-bedhead-761.webp",
    "images": [
-    "game3d/assets/portrait-candidates/kenji-concept3/kenji3-h4-bedhead-762.webp",
-    "game3d/assets/portrait-candidates/kenji-concept3/kenji3-h4-bedhead-full-761.webp"
+    "art/candidates/portraits/kenji-concept3/kenji3-h4-bedhead-762.webp",
+    "art/candidates/portraits/kenji-concept3/kenji3-h4-bedhead-full-761.webp"
    ],
    "note": "Step 2 (on x3), hair only: messy black bedhead with a cowlick."
   },
   {
    "id": "h5",
    "label": "kenji3-h5-side-part",
-   "image": "game3d/assets/portrait-candidates/kenji-concept3/kenji3-h5-side-part-761.webp",
+   "image": "art/candidates/portraits/kenji-concept3/kenji3-h5-side-part-761.webp",
    "images": [
-    "game3d/assets/portrait-candidates/kenji-concept3/kenji3-h5-side-part-762.webp",
-    "game3d/assets/portrait-candidates/kenji-concept3/kenji3-h5-side-part-full-761.webp"
+    "art/candidates/portraits/kenji-concept3/kenji3-h5-side-part-762.webp",
+    "art/candidates/portraits/kenji-concept3/kenji3-h5-side-part-full-761.webp"
    ],
    "note": "Step 2 (on x3), hair only: his dyed hair with roots, combed over into a side part."
   },
   {
    "id": "h6",
    "label": "kenji3-h6-ponytail",
-   "image": "game3d/assets/portrait-candidates/kenji-concept3/kenji3-h6-ponytail-761.webp",
+   "image": "art/candidates/portraits/kenji-concept3/kenji3-h6-ponytail-761.webp",
    "images": [
-    "game3d/assets/portrait-candidates/kenji-concept3/kenji3-h6-ponytail-762.webp",
-    "game3d/assets/portrait-candidates/kenji-concept3/kenji3-h6-ponytail-full-761.webp"
+    "art/candidates/portraits/kenji-concept3/kenji3-h6-ponytail-762.webp",
+    "art/candidates/portraits/kenji-concept3/kenji3-h6-ponytail-full-761.webp"
    ],
    "note": "Step 2 (on x3), hair only: black hair to the jaw, tied in a small ponytail."
   }

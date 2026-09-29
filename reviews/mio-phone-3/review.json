@@ -7,11 +7,11 @@
  "question": "Which one has her glasses right?",
  "media": [
   {
-   "image": "game3d/assets/portrait-candidates/mio-phone-3-glasses-sheet.webp",
+   "image": "art/candidates/portraits/mio-phone-3-glasses-sheet.webp",
    "caption": "Every attempt in the order it was made, each beside the approved portrait at the same scale. Only the glasses band changed; the rest of ipa7a-1001 is pixel for pixel the same."
   },
   {
-   "image": "game3d/assets/portrait-candidates/mio-phone-3-sheet.webp",
+   "image": "art/candidates/portraits/mio-phone-3-sheet.webp",
    "caption": "The whole pictures: approved portrait, ipa7a-1001 before, then every attempt."
   }
  ],
@@ -19,247 +19,247 @@
   {
    "id": "comp",
    "label": "mio-phone3-comp",
-   "image": "game3d/assets/portrait-candidates/mio-phone-3/glasses-comp.webp",
+   "image": "art/candidates/portraits/mio-phone-3/glasses-comp.webp",
    "images": [
-    "game3d/assets/portrait-candidates/mio-phone-3/mio-phone3-comp.webp"
+    "art/candidates/portraits/mio-phone-3/mio-phone3-comp.webp"
    ],
    "note": "The portrait's frame pixels warped onto her face; her silver frame rubbed out on the CPU. Smudges where the old frame was."
   },
   {
    "id": "clean-3101",
    "label": "mio-phone3-clean-3101",
-   "image": "game3d/assets/portrait-candidates/mio-phone-3/glasses-clean-3101.webp",
+   "image": "art/candidates/portraits/mio-phone-3/glasses-clean-3101.webp",
    "images": [
-    "game3d/assets/portrait-candidates/mio-phone-3/mio-phone3-clean-3101.webp"
+    "art/candidates/portraits/mio-phone-3/mio-phone3-clean-3101.webp"
    ],
    "note": "comp, then the old frame's leftovers repainted; portrait frame pasted back. Old line still across her left eye, smudged hinge."
   },
   {
    "id": "clean-3102",
    "label": "mio-phone3-clean-3102",
-   "image": "game3d/assets/portrait-candidates/mio-phone-3/glasses-clean-3102.webp",
+   "image": "art/candidates/portraits/mio-phone-3/glasses-clean-3102.webp",
    "images": [
-    "game3d/assets/portrait-candidates/mio-phone-3/mio-phone3-clean-3102.webp"
+    "art/candidates/portraits/mio-phone-3/mio-phone3-clean-3102.webp"
    ],
    "note": "Same, another seed. Same faults."
   },
   {
    "id": "clean-3103",
    "label": "mio-phone3-clean-3103",
-   "image": "game3d/assets/portrait-candidates/mio-phone-3/glasses-clean-3103.webp",
+   "image": "art/candidates/portraits/mio-phone-3/glasses-clean-3103.webp",
    "images": [
-    "game3d/assets/portrait-candidates/mio-phone-3/mio-phone3-clean-3103.webp"
+    "art/candidates/portraits/mio-phone-3/mio-phone3-clean-3103.webp"
    ],
    "note": "Same, another seed. Same faults."
   },
   {
    "id": "ipa-3201",
    "label": "mio-phone3-ipa-3201",
-   "image": "game3d/assets/portrait-candidates/mio-phone-3/glasses-ipa-3201.webp",
+   "image": "art/candidates/portraits/mio-phone-3/glasses-ipa-3201.webp",
    "images": [
-    "game3d/assets/portrait-candidates/mio-phone-3/mio-phone3-ipa-3201.webp"
+    "art/candidates/portraits/mio-phone-3/mio-phone3-ipa-3201.webp"
    ],
    "note": "Diffusion only, IP-Adapter on the portrait plus words. Black frames and green eyes: off-model."
   },
   {
    "id": "ipa-3202",
    "label": "mio-phone3-ipa-3202",
-   "image": "game3d/assets/portrait-candidates/mio-phone-3/glasses-ipa-3202.webp",
+   "image": "art/candidates/portraits/mio-phone-3/glasses-ipa-3202.webp",
    "images": [
-    "game3d/assets/portrait-candidates/mio-phone-3/mio-phone3-ipa-3202.webp"
+    "art/candidates/portraits/mio-phone-3/mio-phone3-ipa-3202.webp"
    ],
    "note": "Same, another seed. Green-grey frames, green eyes: off-model."
   },
   {
    "id": "dip-3301",
    "label": "mio-phone3-dip-3301",
-   "image": "game3d/assets/portrait-candidates/mio-phone-3/glasses-dip-3301.webp",
+   "image": "art/candidates/portraits/mio-phone-3/glasses-dip-3301.webp",
    "images": [
-    "game3d/assets/portrait-candidates/mio-phone-3/mio-phone3-dip-3301.webp"
+    "art/candidates/portraits/mio-phone-3/mio-phone3-dip-3301.webp"
    ],
    "note": "Diffusion only, the portrait's head beside hers (diptych). Frame close to the portrait, but her eyes were repainted too."
   },
   {
    "id": "dip-3302",
    "label": "mio-phone3-dip-3302",
-   "image": "game3d/assets/portrait-candidates/mio-phone-3/glasses-dip-3302.webp",
+   "image": "art/candidates/portraits/mio-phone-3/glasses-dip-3302.webp",
    "images": [
-    "game3d/assets/portrait-candidates/mio-phone-3/mio-phone3-dip-3302.webp"
+    "art/candidates/portraits/mio-phone-3/mio-phone3-dip-3302.webp"
    ],
    "note": "Same, another seed. Rounder lenses; green glint in one eye."
   },
   {
    "id": "clean2-3111",
    "label": "mio-phone3-clean2-3111",
-   "image": "game3d/assets/portrait-candidates/mio-phone-3/glasses-clean2-3111.webp",
+   "image": "art/candidates/portraits/mio-phone-3/glasses-clean2-3111.webp",
    "images": [
-    "game3d/assets/portrait-candidates/mio-phone-3/mio-phone3-clean2-3111.webp"
+    "art/candidates/portraits/mio-phone-3/mio-phone3-clean2-3111.webp"
    ],
    "note": "comp cleaned by the diptych repaint. Broke her eyes."
   },
   {
    "id": "clean2-3112",
    "label": "mio-phone3-clean2-3112",
-   "image": "game3d/assets/portrait-candidates/mio-phone-3/glasses-clean2-3112.webp",
+   "image": "art/candidates/portraits/mio-phone-3/glasses-clean2-3112.webp",
    "images": [
-    "game3d/assets/portrait-candidates/mio-phone-3/mio-phone3-clean2-3112.webp"
+    "art/candidates/portraits/mio-phone-3/mio-phone3-clean2-3112.webp"
    ],
    "note": "Same, another seed. Broke her eyes."
   },
   {
    "id": "clean2-3113",
    "label": "mio-phone3-clean2-3113",
-   "image": "game3d/assets/portrait-candidates/mio-phone-3/glasses-clean2-3113.webp",
+   "image": "art/candidates/portraits/mio-phone-3/glasses-clean2-3113.webp",
    "images": [
-    "game3d/assets/portrait-candidates/mio-phone-3/mio-phone3-clean2-3113.webp"
+    "art/candidates/portraits/mio-phone-3/mio-phone3-clean2-3113.webp"
    ],
    "note": "Same, another seed. Broke her eyes."
   },
   {
    "id": "dipk-3301",
    "label": "mio-phone3-dipk-3301",
-   "image": "game3d/assets/portrait-candidates/mio-phone-3/glasses-dipk-3301.webp",
+   "image": "art/candidates/portraits/mio-phone-3/glasses-dipk-3301.webp",
    "images": [
-    "game3d/assets/portrait-candidates/mio-phone-3/mio-phone3-dipk-3301.webp",
-    "game3d/assets/portrait-candidates/mio-phone-3/mio-phone3-dipk-3301-cut.webp"
+    "art/candidates/portraits/mio-phone-3/mio-phone3-dipk-3301.webp",
+    "art/candidates/portraits/mio-phone-3/mio-phone3-dipk-3301-cut.webp"
    ],
    "note": "Diptych repaint with her eyes kept. Clean; a redrawn copy, not the portrait's own pixels."
   },
   {
    "id": "dipk-3302",
    "label": "mio-phone3-dipk-3302",
-   "image": "game3d/assets/portrait-candidates/mio-phone-3/glasses-dipk-3302.webp",
+   "image": "art/candidates/portraits/mio-phone-3/glasses-dipk-3302.webp",
    "images": [
-    "game3d/assets/portrait-candidates/mio-phone-3/mio-phone3-dipk-3302.webp"
+    "art/candidates/portraits/mio-phone-3/mio-phone3-dipk-3302.webp"
    ],
    "note": "Same, another seed. Taller, rounder lenses than the portrait."
   },
   {
    "id": "dipk-3303",
    "label": "mio-phone3-dipk-3303",
-   "image": "game3d/assets/portrait-candidates/mio-phone-3/glasses-dipk-3303.webp",
+   "image": "art/candidates/portraits/mio-phone-3/glasses-dipk-3303.webp",
    "images": [
-    "game3d/assets/portrait-candidates/mio-phone-3/mio-phone3-dipk-3303.webp"
+    "art/candidates/portraits/mio-phone-3/mio-phone3-dipk-3303.webp"
    ],
    "note": "Same, another seed. Thicker, darker frame."
   },
   {
    "id": "dipk-3304",
    "label": "mio-phone3-dipk-3304",
-   "image": "game3d/assets/portrait-candidates/mio-phone-3/glasses-dipk-3304.webp",
+   "image": "art/candidates/portraits/mio-phone-3/glasses-dipk-3304.webp",
    "images": [
-    "game3d/assets/portrait-candidates/mio-phone-3/mio-phone3-dipk-3304.webp"
+    "art/candidates/portraits/mio-phone-3/mio-phone3-dipk-3304.webp"
    ],
    "note": "Same, another seed. Darker frame."
   },
   {
    "id": "exact-3401",
    "label": "mio-phone3-exact-3401",
-   "image": "game3d/assets/portrait-candidates/mio-phone-3/glasses-exact-3401.webp",
+   "image": "art/candidates/portraits/mio-phone-3/glasses-exact-3401.webp",
    "images": [
-    "game3d/assets/portrait-candidates/mio-phone-3/mio-phone3-exact-3401.webp"
+    "art/candidates/portraits/mio-phone-3/mio-phone3-exact-3401.webp"
    ],
    "note": "Glasses taken off first, then the portrait's frame pixels put on. Her old nose pads kept, with grey stubs; dark blot at the hinge."
   },
   {
    "id": "exact-3402",
    "label": "mio-phone3-exact-3402",
-   "image": "game3d/assets/portrait-candidates/mio-phone-3/glasses-exact-3402.webp",
+   "image": "art/candidates/portraits/mio-phone-3/glasses-exact-3402.webp",
    "images": [
-    "game3d/assets/portrait-candidates/mio-phone-3/mio-phone3-exact-3402.webp"
+    "art/candidates/portraits/mio-phone-3/mio-phone3-exact-3402.webp"
    ],
    "note": "Same, another seed. Also a stray glint over her eyes."
   },
   {
    "id": "exact-3403",
    "label": "mio-phone3-exact-3403",
-   "image": "game3d/assets/portrait-candidates/mio-phone-3/glasses-exact-3403.webp",
+   "image": "art/candidates/portraits/mio-phone-3/glasses-exact-3403.webp",
    "images": [
-    "game3d/assets/portrait-candidates/mio-phone-3/mio-phone3-exact-3403.webp"
+    "art/candidates/portraits/mio-phone-3/mio-phone3-exact-3403.webp"
    ],
    "note": "Same, another seed. Stray glints."
   },
   {
    "id": "exact-3401-v2",
    "label": "mio-phone3-exact-3401-v2",
-   "image": "game3d/assets/portrait-candidates/mio-phone-3/glasses-exact-3401-v2.webp",
+   "image": "art/candidates/portraits/mio-phone-3/glasses-exact-3401-v2.webp",
    "images": [
-    "game3d/assets/portrait-candidates/mio-phone-3/mio-phone3-exact-3401-v2.webp",
-    "game3d/assets/portrait-candidates/mio-phone-3/mio-phone3-exact-3401-v2-cut.webp"
+    "art/candidates/portraits/mio-phone-3/mio-phone3-exact-3401-v2.webp",
+    "art/candidates/portraits/mio-phone-3/mio-phone3-exact-3401-v2-cut.webp"
    ],
    "note": "As exact, but with the portrait's nose pads and no hair pixels in the frame. The frame is the portrait's own pixels; a few rough edges at the hinge."
   },
   {
    "id": "exact-3403-v2",
    "label": "mio-phone3-exact-3403-v2",
-   "image": "game3d/assets/portrait-candidates/mio-phone-3/glasses-exact-3403-v2.webp",
+   "image": "art/candidates/portraits/mio-phone-3/glasses-exact-3403-v2.webp",
    "images": [
-    "game3d/assets/portrait-candidates/mio-phone-3/mio-phone3-exact-3403-v2.webp"
+    "art/candidates/portraits/mio-phone-3/mio-phone3-exact-3403-v2.webp"
    ],
    "note": "Same, another seed."
   },
   {
    "id": "exact-3404-v2",
    "label": "mio-phone3-exact-3404-v2",
-   "image": "game3d/assets/portrait-candidates/mio-phone-3/glasses-exact-3404-v2.webp",
+   "image": "art/candidates/portraits/mio-phone-3/glasses-exact-3404-v2.webp",
    "images": [
-    "game3d/assets/portrait-candidates/mio-phone-3/mio-phone3-exact-3404-v2.webp"
+    "art/candidates/portraits/mio-phone-3/mio-phone3-exact-3404-v2.webp"
    ],
    "note": "Same, another seed."
   },
   {
    "id": "blend20-3501-exact-3401-v2",
    "label": "mio-phone3-blend20-3501-exact-3401-v2",
-   "image": "game3d/assets/portrait-candidates/mio-phone-3/glasses-blend20-3501-exact-3401-v2.webp",
+   "image": "art/candidates/portraits/mio-phone-3/glasses-blend20-3501-exact-3401-v2.webp",
    "images": [
-    "game3d/assets/portrait-candidates/mio-phone-3/mio-phone3-blend20-3501-exact-3401-v2.webp"
+    "art/candidates/portraits/mio-phone-3/mio-phone3-blend20-3501-exact-3401-v2.webp"
    ],
    "note": "exact-3401-v2 with a light repaint (0.2) over the glasses and eyes. Clean edges; her irises shift a little."
   },
   {
    "id": "blend20-3501-exact-3403-v2",
    "label": "mio-phone3-blend20-3501-exact-3403-v2",
-   "image": "game3d/assets/portrait-candidates/mio-phone-3/glasses-blend20-3501-exact-3403-v2.webp",
+   "image": "art/candidates/portraits/mio-phone-3/glasses-blend20-3501-exact-3403-v2.webp",
    "images": [
-    "game3d/assets/portrait-candidates/mio-phone-3/mio-phone3-blend20-3501-exact-3403-v2.webp"
+    "art/candidates/portraits/mio-phone-3/mio-phone3-blend20-3501-exact-3403-v2.webp"
    ],
    "note": "Same on exact-3403-v2."
   },
   {
    "id": "blend30-3501-exact-3401-v2",
    "label": "mio-phone3-blend30-3501-exact-3401-v2",
-   "image": "game3d/assets/portrait-candidates/mio-phone-3/glasses-blend30-3501-exact-3401-v2.webp",
+   "image": "art/candidates/portraits/mio-phone-3/glasses-blend30-3501-exact-3401-v2.webp",
    "images": [
-    "game3d/assets/portrait-candidates/mio-phone-3/mio-phone3-blend30-3501-exact-3401-v2.webp"
+    "art/candidates/portraits/mio-phone-3/mio-phone3-blend30-3501-exact-3401-v2.webp"
    ],
    "note": "Stronger (0.3): frame gets thicker and glossier than the portrait."
   },
   {
    "id": "blend30-3501-exact-3403-v2",
    "label": "mio-phone3-blend30-3501-exact-3403-v2",
-   "image": "game3d/assets/portrait-candidates/mio-phone-3/glasses-blend30-3501-exact-3403-v2.webp",
+   "image": "art/candidates/portraits/mio-phone-3/glasses-blend30-3501-exact-3403-v2.webp",
    "images": [
-    "game3d/assets/portrait-candidates/mio-phone-3/mio-phone3-blend30-3501-exact-3403-v2.webp"
+    "art/candidates/portraits/mio-phone-3/mio-phone3-blend30-3501-exact-3403-v2.webp"
    ],
    "note": "Same on exact-3403-v2, thicker frame."
   },
   {
    "id": "blendk20-3501-exact-3401-v2",
    "label": "mio-phone3-blendk20-3501-exact-3401-v2",
-   "image": "game3d/assets/portrait-candidates/mio-phone-3/glasses-blendk20-3501-exact-3401-v2.webp",
+   "image": "art/candidates/portraits/mio-phone-3/glasses-blendk20-3501-exact-3401-v2.webp",
    "images": [
-    "game3d/assets/portrait-candidates/mio-phone-3/mio-phone3-blendk20-3501-exact-3401-v2.webp",
-    "game3d/assets/portrait-candidates/mio-phone-3/mio-phone3-blendk20-3501-exact-3401-v2-cut.webp"
+    "art/candidates/portraits/mio-phone-3/mio-phone3-blendk20-3501-exact-3401-v2.webp",
+    "art/candidates/portraits/mio-phone-3/mio-phone3-blendk20-3501-exact-3401-v2-cut.webp"
    ],
    "note": "My pick: exact-3401-v2 with a light repaint (0.2) over the glasses only, her eyes kept. Portrait's frame shape, size and taupe colour, clean hinge."
   },
   {
    "id": "blendk25-3501-exact-3401-v2",
    "label": "mio-phone3-blendk25-3501-exact-3401-v2",
-   "image": "game3d/assets/portrait-candidates/mio-phone-3/glasses-blendk25-3501-exact-3401-v2.webp",
+   "image": "art/candidates/portraits/mio-phone-3/glasses-blendk25-3501-exact-3401-v2.webp",
    "images": [
-    "game3d/assets/portrait-candidates/mio-phone-3/mio-phone3-blendk25-3501-exact-3401-v2.webp",
-    "game3d/assets/portrait-candidates/mio-phone-3/mio-phone3-blendk25-3501-exact-3401-v2-cut.webp"
+    "art/candidates/portraits/mio-phone-3/mio-phone3-blendk25-3501-exact-3401-v2.webp",
+    "art/candidates/portraits/mio-phone-3/mio-phone3-blendk25-3501-exact-3401-v2-cut.webp"
    ],
    "note": "Same at 0.25. Slightly softer frame edges."
   },

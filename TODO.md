@@ -12,7 +12,7 @@ See notes/HANDOFF.md (2026-09-29): what's done, what's broken (phone lift softlo
 - Eric's voice: decided (eric-2, English, no accent).
 - Overheard audio: known words clear, the rest heavily muffled; never checked by ear.
 - New sounds from the feel agent (game3d/audio/sfx, audio/amb; picks in tools/feel/picks.json): ambience beds per place, UI and learned-word chimes, the kotodama sound. The lobby bed may have footstep-like noise. Listen when possible.
-- Portraits in use provisionally: Mori 713, Kenji 711, Hamada 721, guard = Ishibashi with new expressions (sheets in game3d/assets/portrait-candidates/). Confirm or pick others.
+- Portraits in use provisionally: Mori 713, Kenji 711, Hamada 721, guard = Ishibashi with new expressions (sheets in art/candidates/portraits/). Confirm or pick others.
 
 ## Deferred: asset storage (Jørgen, 2026-09-28)
 - Supabase chosen (paid plan, new project "amakawa", eu-north-1); creation deferred. Then: bucket for source assets, service role key in .env, sync script with checksums in git.

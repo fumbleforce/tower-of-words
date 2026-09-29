@@ -1,5 +1,5 @@
 {
-"generated":"2026-09-29T20:41:05+02:00",
+"generated":"2026-09-29T20:44:03+02:00",
 "kinds":{
 "portrait":"Portraits and expressions",
 "model":"3D models",
@@ -502,7 +502,7 @@
 "who":"eric",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/eric-expressions-1/bg-s2-d70-1.webp"
+"art/candidates/portraits/eric-expressions-1/bg-s2-d70-1.webp"
 ],
 "status":"approved",
 "status_from":{
@@ -513,9 +513,9 @@
 "review":"eric-expressions-1",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/eric-expressions-1/bg-s2-d70-1.webp"
+"src":"art/candidates/portraits/eric-expressions-1/bg-s2-d70-1.webp"
 },
-"thumb":"tools/assets/thumbs/366f57a93417ef91.webp"
+"thumb":"tools/assets/thumbs/ae90647b14e8e3d4.webp"
 },
 {
 "id":"portrait/bg-t3-d65-1",
@@ -524,7 +524,7 @@
 "who":"eric",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/eric-expressions-1/bg-t3-d65-1.webp"
+"art/candidates/portraits/eric-expressions-1/bg-t3-d65-1.webp"
 ],
 "status":"approved",
 "status_from":{
@@ -535,9 +535,9 @@
 "review":"eric-expressions-1",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/eric-expressions-1/bg-t3-d65-1.webp"
+"src":"art/candidates/portraits/eric-expressions-1/bg-t3-d65-1.webp"
 },
-"thumb":"tools/assets/thumbs/eb328381e0427e48.webp"
+"thumb":"tools/assets/thumbs/19299913e65cfda4.webp"
 },
 {
 "id":"portrait/chibi-ref-eric-chibi-ref",
@@ -572,7 +572,7 @@
 "who":"eric",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/eric-anime5/eric-r4-909.webp"
+"art/candidates/portraits/eric-anime5/eric-r4-909.webp"
 ],
 "status":"approved",
 "status_from":{
@@ -583,9 +583,9 @@
 "review":"eric-portrait-anime-5",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/eric-anime5/eric-r4-909.webp"
+"src":"art/candidates/portraits/eric-anime5/eric-r4-909.webp"
 },
-"thumb":"tools/assets/thumbs/b5e9eb9e35718cda.webp"
+"thumb":"tools/assets/thumbs/f0baee5cef6d0640.webp"
 },
 {
 "id":"portrait/eric-s2-d70-1",
@@ -594,7 +594,7 @@
 "who":"eric",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/eric-expressions-1/eric-s2-d70-1.webp"
+"art/candidates/portraits/eric-expressions-1/eric-s2-d70-1.webp"
 ],
 "status":"approved",
 "status_from":{
@@ -605,9 +605,9 @@
 "review":"eric-expressions-1",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/eric-expressions-1/eric-s2-d70-1.webp"
+"src":"art/candidates/portraits/eric-expressions-1/eric-s2-d70-1.webp"
 },
-"thumb":"tools/assets/thumbs/713be2af1d6759fc.webp"
+"thumb":"tools/assets/thumbs/2e0167299ba50148.webp"
 },
 {
 "id":"portrait/eric-t3-d65-1",
@@ -616,7 +616,7 @@
 "who":"eric",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/eric-expressions-1/eric-t3-d65-1.webp"
+"art/candidates/portraits/eric-expressions-1/eric-t3-d65-1.webp"
 ],
 "status":"approved",
 "status_from":{
@@ -627,9 +627,9 @@
 "review":"eric-expressions-1",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/eric-expressions-1/eric-t3-d65-1.webp"
+"src":"art/candidates/portraits/eric-expressions-1/eric-t3-d65-1.webp"
 },
-"thumb":"tools/assets/thumbs/67f3a147918ccfb2.webp"
+"thumb":"tools/assets/thumbs/ae812a294c749cea.webp"
 },
 {
 "id":"portrait/face-s2-d70-1",
@@ -638,7 +638,7 @@
 "who":"eric",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/eric-expressions-1/face-s2-d70-1.webp"
+"art/candidates/portraits/eric-expressions-1/face-s2-d70-1.webp"
 ],
 "status":"approved",
 "status_from":{
@@ -649,9 +649,9 @@
 "review":"eric-expressions-1",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/eric-expressions-1/face-s2-d70-1.webp"
+"src":"art/candidates/portraits/eric-expressions-1/face-s2-d70-1.webp"
 },
-"thumb":"tools/assets/thumbs/77310742cf3ad4c5.webp"
+"thumb":"tools/assets/thumbs/68313e02bc58cf8d.webp"
 },
 {
 "id":"portrait/face-t3-d65-1",
@@ -660,7 +660,7 @@
 "who":"eric",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/eric-expressions-1/face-t3-d65-1.webp"
+"art/candidates/portraits/eric-expressions-1/face-t3-d65-1.webp"
 ],
 "status":"approved",
 "status_from":{
@@ -671,9 +671,9 @@
 "review":"eric-expressions-1",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/eric-expressions-1/face-t3-d65-1.webp"
+"src":"art/candidates/portraits/eric-expressions-1/face-t3-d65-1.webp"
 },
-"thumb":"tools/assets/thumbs/1a4ef3c1703e5149.webp"
+"thumb":"tools/assets/thumbs/05a320607ff558c3.webp"
 },
 {
 "id":"portrait/lineup-game-size",
@@ -682,7 +682,7 @@
 "who":"eric",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/eric-final/lineup-game-size.webp"
+"art/candidates/portraits/eric-final/lineup-game-size.webp"
 ],
 "status":"approved",
 "status_from":{
@@ -693,9 +693,9 @@
 "review":"eric-portrait-final",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/eric-final/lineup-game-size.webp"
+"src":"art/candidates/portraits/eric-final/lineup-game-size.webp"
 },
-"thumb":"tools/assets/thumbs/89fde7cfb347ca5d.webp"
+"thumb":"tools/assets/thumbs/cf8439890bd694ef.webp"
 },
 {
 "id":"portrait/lineup-zoom-after",
@@ -704,7 +704,7 @@
 "who":"eric",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/eric-final/lineup-zoom-after.webp"
+"art/candidates/portraits/eric-final/lineup-zoom-after.webp"
 ],
 "status":"approved",
 "status_from":{
@@ -715,9 +715,9 @@
 "review":"eric-portrait-final-2",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/eric-final/lineup-zoom-after.webp"
+"src":"art/candidates/portraits/eric-final/lineup-zoom-after.webp"
 },
-"thumb":"tools/assets/thumbs/f625b1166e6f50a1.webp"
+"thumb":"tools/assets/thumbs/a56cbbfac02800eb.webp"
 },
 {
 "id":"portrait/lineup-zoom125-after",
@@ -726,7 +726,7 @@
 "who":"eric",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/eric-final/lineup-zoom125-after.webp"
+"art/candidates/portraits/eric-final/lineup-zoom125-after.webp"
 ],
 "status":"approved",
 "status_from":{
@@ -737,9 +737,9 @@
 "review":"eric-portrait-final-3",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/eric-final/lineup-zoom125-after.webp"
+"src":"art/candidates/portraits/eric-final/lineup-zoom125-after.webp"
 },
-"thumb":"tools/assets/thumbs/5eba129d7f58183c.webp"
+"thumb":"tools/assets/thumbs/88b996f8f0156d34.webp"
 },
 {
 "id":"portrait/mc-eric-tired-v3",
@@ -748,7 +748,7 @@
 "who":"eric",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/eric-tired-v3.png"
+"art/candidates/portraits/eric-tired-v3.png"
 ],
 "status":"approved",
 "status_from":{
@@ -760,9 +760,9 @@
 "review":null,
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/eric-tired-v3.png"
+"src":"art/candidates/portraits/eric-tired-v3.png"
 },
-"thumb":"tools/assets/thumbs/8f5b8240e1a3eafe.webp"
+"thumb":"tools/assets/thumbs/e8038d70e92903d8.webp"
 },
 {
 "id":"portrait/pair-s2-d70-1",
@@ -771,7 +771,7 @@
 "who":"eric",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/eric-expressions-1/pair-s2-d70-1.webp"
+"art/candidates/portraits/eric-expressions-1/pair-s2-d70-1.webp"
 ],
 "status":"approved",
 "status_from":{
@@ -782,9 +782,9 @@
 "review":"eric-expressions-1",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/eric-expressions-1/pair-s2-d70-1.webp"
+"src":"art/candidates/portraits/eric-expressions-1/pair-s2-d70-1.webp"
 },
-"thumb":"tools/assets/thumbs/8319df4ab744a0fc.webp"
+"thumb":"tools/assets/thumbs/2623638475aa4d86.webp"
 },
 {
 "id":"portrait/pair-t3-d65-1",
@@ -793,7 +793,7 @@
 "who":"eric",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/eric-expressions-1/pair-t3-d65-1.webp"
+"art/candidates/portraits/eric-expressions-1/pair-t3-d65-1.webp"
 ],
 "status":"approved",
 "status_from":{
@@ -804,9 +804,9 @@
 "review":"eric-expressions-1",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/eric-expressions-1/pair-t3-d65-1.webp"
+"src":"art/candidates/portraits/eric-expressions-1/pair-t3-d65-1.webp"
 },
-"thumb":"tools/assets/thumbs/c39787f17ae02f64.webp"
+"thumb":"tools/assets/thumbs/b9c1ee0a051a1b57.webp"
 },
 {
 "id":"portrait/approved-goro-goro-after",
@@ -950,7 +950,7 @@
 "who":"kenji",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/kenji-concept3/kenji3-h4-bedhead-761.webp"
+"art/candidates/portraits/kenji-concept3/kenji3-h4-bedhead-761.webp"
 ],
 "status":"approved",
 "status_from":{
@@ -961,9 +961,9 @@
 "review":"kenji-concept-3",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/kenji-concept3/kenji3-h4-bedhead-761.webp"
+"src":"art/candidates/portraits/kenji-concept3/kenji3-h4-bedhead-761.webp"
 },
-"thumb":"tools/assets/thumbs/f156c65526bb1d7d.webp"
+"thumb":"tools/assets/thumbs/180d55937e2c560d.webp"
 },
 {
 "id":"portrait/kenji3-h4-bedhead-762",
@@ -972,7 +972,7 @@
 "who":"kenji",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/kenji-concept3/kenji3-h4-bedhead-762.webp"
+"art/candidates/portraits/kenji-concept3/kenji3-h4-bedhead-762.webp"
 ],
 "status":"approved",
 "status_from":{
@@ -983,9 +983,9 @@
 "review":"kenji-concept-3",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/kenji-concept3/kenji3-h4-bedhead-762.webp"
+"src":"art/candidates/portraits/kenji-concept3/kenji3-h4-bedhead-762.webp"
 },
-"thumb":"tools/assets/thumbs/18f4ad420806fd37.webp"
+"thumb":"tools/assets/thumbs/3192173fe674d137.webp"
 },
 {
 "id":"portrait/kenji3-h4-bedhead-full-761",
@@ -994,7 +994,7 @@
 "who":"kenji",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/kenji-concept3/kenji3-h4-bedhead-full-761.webp"
+"art/candidates/portraits/kenji-concept3/kenji3-h4-bedhead-full-761.webp"
 ],
 "status":"approved",
 "status_from":{
@@ -1005,9 +1005,9 @@
 "review":"kenji-concept-3",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/kenji-concept3/kenji3-h4-bedhead-full-761.webp"
+"src":"art/candidates/portraits/kenji-concept3/kenji3-h4-bedhead-full-761.webp"
 },
-"thumb":"tools/assets/thumbs/c8e86316767ed07c.webp"
+"thumb":"tools/assets/thumbs/d6cfe30832006ab7.webp"
 },
 {
 "id":"portrait/approved-kiyoko-kiyoko-camel-after",
@@ -1262,7 +1262,7 @@
 "who":"mio",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/mio-expressions-v3-sheet.png"
+"art/candidates/portraits/mio-expressions-v3-sheet.png"
 ],
 "status":"approved",
 "status_from":{
@@ -1274,9 +1274,9 @@
 "review":null,
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/mio-expressions-v3-sheet.png"
+"src":"art/candidates/portraits/mio-expressions-v3-sheet.png"
 },
-"thumb":"tools/assets/thumbs/05e5203afabe2698.webp",
+"thumb":"tools/assets/thumbs/d6fd50acc5bfd9ba.webp",
 "tags":[
 "sheet"
 ]
@@ -1346,7 +1346,7 @@
 "who":"mio",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/mio-phone-2/mio-phone2-ipa7a-1001.webp"
+"art/candidates/portraits/mio-phone-2/mio-phone2-ipa7a-1001.webp"
 ],
 "status":"approved",
 "status_from":{
@@ -1357,9 +1357,9 @@
 "review":"mio-phone-2",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/mio-phone-2/mio-phone2-ipa7a-1001.webp"
+"src":"art/candidates/portraits/mio-phone-2/mio-phone2-ipa7a-1001.webp"
 },
-"thumb":"tools/assets/thumbs/0cb79207adde1c04.webp"
+"thumb":"tools/assets/thumbs/146d18566b2dd73c.webp"
 },
 {
 "id":"portrait/mio-phone2-ipa7a-1001-cut",
@@ -1368,7 +1368,7 @@
 "who":"mio",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/mio-phone-2/mio-phone2-ipa7a-1001-cut.webp"
+"art/candidates/portraits/mio-phone-2/mio-phone2-ipa7a-1001-cut.webp"
 ],
 "status":"approved",
 "status_from":{
@@ -1379,9 +1379,9 @@
 "review":"mio-phone-2",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/mio-phone-2/mio-phone2-ipa7a-1001-cut.webp"
+"src":"art/candidates/portraits/mio-phone-2/mio-phone2-ipa7a-1001-cut.webp"
 },
-"thumb":"tools/assets/thumbs/822df3f2e82e5ff5.webp"
+"thumb":"tools/assets/thumbs/239a6c0718df9d30.webp"
 },
 {
 "id":"portrait/mio-smile",
@@ -1710,7 +1710,7 @@
 "who":null,
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/kenji-concept3-sheet.png"
+"art/candidates/portraits/kenji-concept3-sheet.png"
 ],
 "status":"approved",
 "status_from":{
@@ -1721,9 +1721,9 @@
 "review":"kenji-concept-3",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/kenji-concept3-sheet.png"
+"src":"art/candidates/portraits/kenji-concept3-sheet.png"
 },
-"thumb":"tools/assets/thumbs/60de2f25d0863d4a.webp",
+"thumb":"tools/assets/thumbs/708d02e5a2f8cadf.webp",
 "tags":[
 "sheet"
 ]
@@ -1893,7 +1893,7 @@
 "who":"eric",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/eric-sheet-v2.png"
+"art/candidates/portraits/eric-sheet-v2.png"
 ],
 "status":"provisional",
 "status_from":{
@@ -1905,9 +1905,9 @@
 "review":null,
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/eric-sheet-v2.png"
+"src":"art/candidates/portraits/eric-sheet-v2.png"
 },
-"thumb":"tools/assets/thumbs/a96b4b531607b35d.webp",
+"thumb":"tools/assets/thumbs/574abc2a4c61be30.webp",
 "tags":[
 "sheet"
 ]
@@ -2014,7 +2014,7 @@
 "line":40,
 "text":"Provisional (seed 711, which Jørgen hasn't approved); new concept art is coming."
 },
-"source":"Provisional (seed 711, which Jørgen hasn't approved); new concept art is coming. Cut-out (rembg ISNet anime), face box in ui.js FACE; master game3d/assets/portrait-candidates/kenji-sheet.png",
+"source":"Provisional (seed 711, which Jørgen hasn't approved); new concept art is coming. Cut-out (rembg ISNet anime), face box in ui.js FACE; master art/candidates/portraits/kenji-sheet.png",
 "used":[
 "Dialogue portrait when Kenji speaks: B2 office (18 lines)"
 ],
@@ -2043,7 +2043,7 @@
 "line":40,
 "text":"Provisional (seed 711, which Jørgen hasn't approved); new concept art is coming."
 },
-"source":"Provisional (seed 711, which Jørgen hasn't approved); new concept art is coming. Cut-out (rembg ISNet anime), face box in ui.js FACE; master game3d/assets/portrait-candidates/kenji-sheet.png",
+"source":"Provisional (seed 711, which Jørgen hasn't approved); new concept art is coming. Cut-out (rembg ISNet anime), face box in ui.js FACE; master art/candidates/portraits/kenji-sheet.png",
 "used":[
 "Dialogue portrait when Kenji speaks: B2 office (18 lines)"
 ],
@@ -2072,7 +2072,7 @@
 "line":40,
 "text":"Provisional (seed 711, which Jørgen hasn't approved); new concept art is coming."
 },
-"source":"Provisional (seed 711, which Jørgen hasn't approved); new concept art is coming. Cut-out (rembg ISNet anime), face box in ui.js FACE; master game3d/assets/portrait-candidates/kenji-sheet.png",
+"source":"Provisional (seed 711, which Jørgen hasn't approved); new concept art is coming. Cut-out (rembg ISNet anime), face box in ui.js FACE; master art/candidates/portraits/kenji-sheet.png",
 "used":[
 "Dialogue portrait when Kenji speaks: B2 office (18 lines)"
 ],
@@ -2101,7 +2101,7 @@
 "line":41,
 "text":"Provisional (seed 721)."
 },
-"source":"Provisional (seed 721). Cut-out (rembg ISNet anime), face box in ui.js FACE; master game3d/assets/portrait-candidates/hamada-sheet.png",
+"source":"Provisional (seed 721). Cut-out (rembg ISNet anime), face box in ui.js FACE; master art/candidates/portraits/hamada-sheet.png",
 "used":[
 "Dialogue portrait when Mr. Hamada speaks: Train (1 lines), Lobby and gate (11 lines)"
 ],
@@ -2130,7 +2130,7 @@
 "line":41,
 "text":"Provisional (seed 721)."
 },
-"source":"Provisional (seed 721). Cut-out (rembg ISNet anime), face box in ui.js FACE; master game3d/assets/portrait-candidates/hamada-sheet.png",
+"source":"Provisional (seed 721). Cut-out (rembg ISNet anime), face box in ui.js FACE; master art/candidates/portraits/hamada-sheet.png",
 "used":[
 "Dialogue portrait when Mr. Hamada speaks: Train (1 lines), Lobby and gate (11 lines)"
 ],
@@ -2159,7 +2159,7 @@
 "line":41,
 "text":"Provisional (seed 721)."
 },
-"source":"Provisional (seed 721). Cut-out (rembg ISNet anime), face box in ui.js FACE; master game3d/assets/portrait-candidates/hamada-sheet.png",
+"source":"Provisional (seed 721). Cut-out (rembg ISNet anime), face box in ui.js FACE; master art/candidates/portraits/hamada-sheet.png",
 "used":[
 "Dialogue portrait when Mr. Hamada speaks: Train (1 lines), Lobby and gate (11 lines)"
 ],
@@ -2188,7 +2188,7 @@
 "line":39,
 "text":"Provisional (seed 713)."
 },
-"source":"Provisional (seed 713). Cut-out (rembg ISNet anime), face box in ui.js FACE; master game3d/assets/portrait-candidates/mori-sheet.png",
+"source":"Provisional (seed 713). Cut-out (rembg ISNet anime), face box in ui.js FACE; master art/candidates/portraits/mori-sheet.png",
 "used":[
 "Dialogue portrait when Mr. Mori speaks: B2 office (18 lines)"
 ],
@@ -2217,7 +2217,7 @@
 "line":39,
 "text":"Provisional (seed 713)."
 },
-"source":"Provisional (seed 713). Cut-out (rembg ISNet anime), face box in ui.js FACE; master game3d/assets/portrait-candidates/mori-sheet.png",
+"source":"Provisional (seed 713). Cut-out (rembg ISNet anime), face box in ui.js FACE; master art/candidates/portraits/mori-sheet.png",
 "used":[
 "Dialogue portrait when Mr. Mori speaks: B2 office (18 lines)"
 ],
@@ -2246,7 +2246,7 @@
 "line":39,
 "text":"Provisional (seed 713)."
 },
-"source":"Provisional (seed 713). Cut-out (rembg ISNet anime), face box in ui.js FACE; master game3d/assets/portrait-candidates/mori-sheet.png",
+"source":"Provisional (seed 713). Cut-out (rembg ISNet anime), face box in ui.js FACE; master art/candidates/portraits/mori-sheet.png",
 "used":[
 "Dialogue portrait when Mr. Mori speaks: B2 office (18 lines)"
 ],
@@ -2320,7 +2320,7 @@
 "who":"guard",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/guard-sheet.png"
+"art/candidates/portraits/guard-sheet.png"
 ],
 "status":"candidate",
 "status_from":{
@@ -2332,9 +2332,9 @@
 "review":null,
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/guard-sheet.png"
+"src":"art/candidates/portraits/guard-sheet.png"
 },
-"thumb":"tools/assets/thumbs/1f15ca35ca13e096.webp",
+"thumb":"tools/assets/thumbs/56c215cc380129c1.webp",
 "tags":[
 "sheet"
 ]
@@ -2346,7 +2346,7 @@
 "who":"kuroda",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/hamada-sheet.png"
+"art/candidates/portraits/hamada-sheet.png"
 ],
 "status":"candidate",
 "status_from":{
@@ -2358,9 +2358,9 @@
 "review":null,
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/hamada-sheet.png"
+"src":"art/candidates/portraits/hamada-sheet.png"
 },
-"thumb":"tools/assets/thumbs/0443330f705307ce.webp",
+"thumb":"tools/assets/thumbs/4abcdaa70db50874.webp",
 "tags":[
 "sheet"
 ]
@@ -2372,7 +2372,7 @@
 "who":"mori",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/mori-sheet.png"
+"art/candidates/portraits/mori-sheet.png"
 ],
 "status":"candidate",
 "status_from":{
@@ -2384,9 +2384,9 @@
 "review":null,
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/mori-sheet.png"
+"src":"art/candidates/portraits/mori-sheet.png"
 },
-"thumb":"tools/assets/thumbs/19ce710a3d9b5240.webp",
+"thumb":"tools/assets/thumbs/5b28b0414ac8fd66.webp",
 "tags":[
 "sheet"
 ]
@@ -2398,7 +2398,7 @@
 "who":null,
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/eric-anime2-sheet.png"
+"art/candidates/portraits/eric-anime2-sheet.png"
 ],
 "status":"legacy",
 "status_from":{
@@ -2409,9 +2409,9 @@
 "review":"eric-portrait-anime-2",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/eric-anime2-sheet.png"
+"src":"art/candidates/portraits/eric-anime2-sheet.png"
 },
-"thumb":"tools/assets/thumbs/2c8b43f31df1a942.webp",
+"thumb":"tools/assets/thumbs/7e0d2e81d0bed2ca.webp",
 "tags":[
 "sheet"
 ]
@@ -2423,7 +2423,7 @@
 "who":null,
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/eric-anime3-sheet.png"
+"art/candidates/portraits/eric-anime3-sheet.png"
 ],
 "status":"legacy",
 "status_from":{
@@ -2434,9 +2434,9 @@
 "review":"eric-portrait-anime-3",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/eric-anime3-sheet.png"
+"src":"art/candidates/portraits/eric-anime3-sheet.png"
 },
-"thumb":"tools/assets/thumbs/7d06bc7a62de1a4e.webp",
+"thumb":"tools/assets/thumbs/6900d6d04b5f0a72.webp",
 "tags":[
 "sheet"
 ]
@@ -2448,7 +2448,7 @@
 "who":null,
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/eric-anime4-sheet.png"
+"art/candidates/portraits/eric-anime4-sheet.png"
 ],
 "status":"legacy",
 "status_from":{
@@ -2459,9 +2459,9 @@
 "review":"eric-portrait-anime-4",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/eric-anime4-sheet.png"
+"src":"art/candidates/portraits/eric-anime4-sheet.png"
 },
-"thumb":"tools/assets/thumbs/8cdd1b3df1682955.webp",
+"thumb":"tools/assets/thumbs/2e270f109274fd0f.webp",
 "tags":[
 "sheet"
 ]
@@ -2473,7 +2473,7 @@
 "who":null,
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/eric-oldstyle-sheet.png"
+"art/candidates/portraits/eric-oldstyle-sheet.png"
 ],
 "status":"legacy",
 "status_from":{
@@ -2484,9 +2484,9 @@
 "review":"eric-portrait-style",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/eric-oldstyle-sheet.png"
+"src":"art/candidates/portraits/eric-oldstyle-sheet.png"
 },
-"thumb":"tools/assets/thumbs/1d47bff65a13a902.webp",
+"thumb":"tools/assets/thumbs/363f257bd3a26659.webp",
 "tags":[
 "sheet"
 ]
@@ -2498,7 +2498,7 @@
 "who":null,
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/kenji-concept-sheet.png"
+"art/candidates/portraits/kenji-concept-sheet.png"
 ],
 "status":"legacy",
 "status_from":{
@@ -2509,9 +2509,9 @@
 "review":"kenji-concept",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/kenji-concept-sheet.png"
+"src":"art/candidates/portraits/kenji-concept-sheet.png"
 },
-"thumb":"tools/assets/thumbs/f2b37d2b0598b1fd.webp",
+"thumb":"tools/assets/thumbs/c19f68be4fc51d9b.webp",
 "tags":[
 "sheet"
 ]
@@ -2523,7 +2523,7 @@
 "who":null,
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/kenji-concept2-sheet.png"
+"art/candidates/portraits/kenji-concept2-sheet.png"
 ],
 "status":"legacy",
 "status_from":{
@@ -2534,9 +2534,9 @@
 "review":"kenji-concept-2",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/kenji-concept2-sheet.png"
+"src":"art/candidates/portraits/kenji-concept2-sheet.png"
 },
-"thumb":"tools/assets/thumbs/cb74fdfd327e45cf.webp",
+"thumb":"tools/assets/thumbs/350f03f2d77d4f63.webp",
 "tags":[
 "sheet"
 ]
@@ -2548,7 +2548,7 @@
 "who":null,
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/mio-phone-2-sheet.webp"
+"art/candidates/portraits/mio-phone-2-sheet.webp"
 ],
 "status":"legacy",
 "status_from":{
@@ -2559,9 +2559,9 @@
 "review":"mio-phone-2",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/mio-phone-2-sheet.webp"
+"src":"art/candidates/portraits/mio-phone-2-sheet.webp"
 },
-"thumb":"tools/assets/thumbs/21bf616561ab344d.webp",
+"thumb":"tools/assets/thumbs/ccbb9096f7c8e0c5.webp",
 "tags":[
 "sheet"
 ]
@@ -2573,7 +2573,7 @@
 "who":null,
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/mio-phone-3-glasses-sheet.webp"
+"art/candidates/portraits/mio-phone-3-glasses-sheet.webp"
 ],
 "status":"legacy",
 "status_from":{
@@ -2584,9 +2584,9 @@
 "review":"mio-phone-3",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/mio-phone-3-glasses-sheet.webp"
+"src":"art/candidates/portraits/mio-phone-3-glasses-sheet.webp"
 },
-"thumb":"tools/assets/thumbs/617c67f5b01b584d.webp",
+"thumb":"tools/assets/thumbs/8a0f0805a8e06866.webp",
 "tags":[
 "sheet"
 ]
@@ -2598,7 +2598,7 @@
 "who":null,
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/mio-phone-3-sheet.webp"
+"art/candidates/portraits/mio-phone-3-sheet.webp"
 ],
 "status":"legacy",
 "status_from":{
@@ -2609,9 +2609,9 @@
 "review":"mio-phone-3",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/mio-phone-3-sheet.webp"
+"src":"art/candidates/portraits/mio-phone-3-sheet.webp"
 },
-"thumb":"tools/assets/thumbs/4bb69ce2d18fc17d.webp",
+"thumb":"tools/assets/thumbs/a91ca40d59a25073.webp",
 "tags":[
 "sheet"
 ]
@@ -2623,7 +2623,7 @@
 "who":null,
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/mio-phone-sheet.png"
+"art/candidates/portraits/mio-phone-sheet.png"
 ],
 "status":"legacy",
 "status_from":{
@@ -2634,9 +2634,9 @@
 "review":"mio-phone",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/mio-phone-sheet.png"
+"src":"art/candidates/portraits/mio-phone-sheet.png"
 },
-"thumb":"tools/assets/thumbs/7e1eb0bfa8438904.webp",
+"thumb":"tools/assets/thumbs/c93532e5fecd7bdd.webp",
 "tags":[
 "sheet"
 ]
@@ -2780,7 +2780,7 @@
 "who":"eric",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/eric-expressions-1/bg-s2-d60-1.webp"
+"art/candidates/portraits/eric-expressions-1/bg-s2-d60-1.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -2791,9 +2791,9 @@
 "review":"eric-expressions-1",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/eric-expressions-1/bg-s2-d60-1.webp"
+"src":"art/candidates/portraits/eric-expressions-1/bg-s2-d60-1.webp"
 },
-"thumb":"tools/assets/thumbs/3f6a4a6e39550331.webp"
+"thumb":"tools/assets/thumbs/e2f8c132ce0703b9.webp"
 },
 {
 "id":"portrait/bg-s2-d70-3",
@@ -2802,7 +2802,7 @@
 "who":"eric",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/eric-expressions-1/bg-s2-d70-3.webp"
+"art/candidates/portraits/eric-expressions-1/bg-s2-d70-3.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -2813,9 +2813,9 @@
 "review":"eric-expressions-1",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/eric-expressions-1/bg-s2-d70-3.webp"
+"src":"art/candidates/portraits/eric-expressions-1/bg-s2-d70-3.webp"
 },
-"thumb":"tools/assets/thumbs/7628ca682bbf1dde.webp"
+"thumb":"tools/assets/thumbs/9a3fc154334d4380.webp"
 },
 {
 "id":"portrait/bg-t1-d60-3",
@@ -2824,7 +2824,7 @@
 "who":"eric",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/eric-expressions-1/bg-t1-d60-3.webp"
+"art/candidates/portraits/eric-expressions-1/bg-t1-d60-3.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -2835,9 +2835,9 @@
 "review":"eric-expressions-1",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/eric-expressions-1/bg-t1-d60-3.webp"
+"src":"art/candidates/portraits/eric-expressions-1/bg-t1-d60-3.webp"
 },
-"thumb":"tools/assets/thumbs/02c17d7b8e757e70.webp"
+"thumb":"tools/assets/thumbs/c7abc97428bde067.webp"
 },
 {
 "id":"portrait/bg-t3-d75-3",
@@ -2846,7 +2846,7 @@
 "who":"eric",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/eric-expressions-1/bg-t3-d75-3.webp"
+"art/candidates/portraits/eric-expressions-1/bg-t3-d75-3.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -2857,9 +2857,9 @@
 "review":"eric-expressions-1",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/eric-expressions-1/bg-t3-d75-3.webp"
+"src":"art/candidates/portraits/eric-expressions-1/bg-t3-d75-3.webp"
 },
-"thumb":"tools/assets/thumbs/bcc0f000bc81a5d2.webp"
+"thumb":"tools/assets/thumbs/985491ec4cb6195c.webp"
 },
 {
 "id":"portrait/eric-a01-901",
@@ -2868,7 +2868,7 @@
 "who":"eric",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/eric-anime2/eric-a01-901.webp"
+"art/candidates/portraits/eric-anime2/eric-a01-901.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -2879,9 +2879,9 @@
 "review":"eric-portrait-anime-2",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/eric-anime2/eric-a01-901.webp"
+"src":"art/candidates/portraits/eric-anime2/eric-a01-901.webp"
 },
-"thumb":"tools/assets/thumbs/894447455239b2b0.webp"
+"thumb":"tools/assets/thumbs/1bd93a8d0a52b7bc.webp"
 },
 {
 "id":"portrait/eric-a02-902",
@@ -2890,7 +2890,7 @@
 "who":"eric",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/eric-anime2/eric-a02-902.webp"
+"art/candidates/portraits/eric-anime2/eric-a02-902.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -2901,9 +2901,9 @@
 "review":"eric-portrait-anime-2",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/eric-anime2/eric-a02-902.webp"
+"src":"art/candidates/portraits/eric-anime2/eric-a02-902.webp"
 },
-"thumb":"tools/assets/thumbs/4bed8632daef139a.webp"
+"thumb":"tools/assets/thumbs/d4c75ba082d73391.webp"
 },
 {
 "id":"portrait/eric-a03-903",
@@ -2912,7 +2912,7 @@
 "who":"eric",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/eric-anime2/eric-a03-903.webp"
+"art/candidates/portraits/eric-anime2/eric-a03-903.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -2923,9 +2923,9 @@
 "review":"eric-portrait-anime-2",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/eric-anime2/eric-a03-903.webp"
+"src":"art/candidates/portraits/eric-anime2/eric-a03-903.webp"
 },
-"thumb":"tools/assets/thumbs/fd925a5ce81f0304.webp"
+"thumb":"tools/assets/thumbs/bbb773e8e29775d4.webp"
 },
 {
 "id":"portrait/eric-a04-904",
@@ -2934,7 +2934,7 @@
 "who":"eric",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/eric-anime2/eric-a04-904.webp"
+"art/candidates/portraits/eric-anime2/eric-a04-904.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -2945,9 +2945,9 @@
 "review":"eric-portrait-anime-2",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/eric-anime2/eric-a04-904.webp"
+"src":"art/candidates/portraits/eric-anime2/eric-a04-904.webp"
 },
-"thumb":"tools/assets/thumbs/5bb7964bfa000519.webp"
+"thumb":"tools/assets/thumbs/835a7a7d7ebe962e.webp"
 },
 {
 "id":"portrait/eric-a05-905",
@@ -2956,7 +2956,7 @@
 "who":"eric",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/eric-anime2/eric-a05-905.webp"
+"art/candidates/portraits/eric-anime2/eric-a05-905.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -2967,9 +2967,9 @@
 "review":"eric-portrait-anime-2",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/eric-anime2/eric-a05-905.webp"
+"src":"art/candidates/portraits/eric-anime2/eric-a05-905.webp"
 },
-"thumb":"tools/assets/thumbs/0757a50896ea5c3d.webp"
+"thumb":"tools/assets/thumbs/dfe7fdd08ac3ce24.webp"
 },
 {
 "id":"portrait/eric-a06-906",
@@ -2978,7 +2978,7 @@
 "who":"eric",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/eric-anime2/eric-a06-906.webp"
+"art/candidates/portraits/eric-anime2/eric-a06-906.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -2989,9 +2989,9 @@
 "review":"eric-portrait-anime-2",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/eric-anime2/eric-a06-906.webp"
+"src":"art/candidates/portraits/eric-anime2/eric-a06-906.webp"
 },
-"thumb":"tools/assets/thumbs/8c5b7f8a622fe528.webp"
+"thumb":"tools/assets/thumbs/f7379cdfd252316c.webp"
 },
 {
 "id":"portrait/eric-a06r-906",
@@ -3000,7 +3000,7 @@
 "who":"eric",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/eric-anime2/eric-a06r-906.webp"
+"art/candidates/portraits/eric-anime2/eric-a06r-906.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -3011,9 +3011,9 @@
 "review":"eric-portrait-anime-2",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/eric-anime2/eric-a06r-906.webp"
+"src":"art/candidates/portraits/eric-anime2/eric-a06r-906.webp"
 },
-"thumb":"tools/assets/thumbs/c9e51fd99c6d18bd.webp"
+"thumb":"tools/assets/thumbs/f7b6541962c69edb.webp"
 },
 {
 "id":"portrait/eric-a07-907",
@@ -3022,7 +3022,7 @@
 "who":"eric",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/eric-anime2/eric-a07-907.webp"
+"art/candidates/portraits/eric-anime2/eric-a07-907.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -3033,9 +3033,9 @@
 "review":"eric-portrait-anime-2",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/eric-anime2/eric-a07-907.webp"
+"src":"art/candidates/portraits/eric-anime2/eric-a07-907.webp"
 },
-"thumb":"tools/assets/thumbs/a856810f68b00cd5.webp"
+"thumb":"tools/assets/thumbs/b664248d2b4aa820.webp"
 },
 {
 "id":"portrait/eric-a07r-907",
@@ -3044,7 +3044,7 @@
 "who":"eric",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/eric-anime2/eric-a07r-907.webp"
+"art/candidates/portraits/eric-anime2/eric-a07r-907.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -3055,9 +3055,9 @@
 "review":"eric-portrait-anime-2",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/eric-anime2/eric-a07r-907.webp"
+"src":"art/candidates/portraits/eric-anime2/eric-a07r-907.webp"
 },
-"thumb":"tools/assets/thumbs/e40ccd9ae74db838.webp"
+"thumb":"tools/assets/thumbs/2b2aa0c8a7995b03.webp"
 },
 {
 "id":"portrait/eric-a08-908",
@@ -3066,7 +3066,7 @@
 "who":"eric",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/eric-anime2/eric-a08-908.webp"
+"art/candidates/portraits/eric-anime2/eric-a08-908.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -3077,9 +3077,9 @@
 "review":"eric-portrait-anime-2",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/eric-anime2/eric-a08-908.webp"
+"src":"art/candidates/portraits/eric-anime2/eric-a08-908.webp"
 },
-"thumb":"tools/assets/thumbs/8972649356703ca8.webp"
+"thumb":"tools/assets/thumbs/8f6226e53d0bfebe.webp"
 },
 {
 "id":"portrait/eric-a09-909",
@@ -3088,7 +3088,7 @@
 "who":"eric",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/eric-anime2/eric-a09-909.webp"
+"art/candidates/portraits/eric-anime2/eric-a09-909.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -3099,9 +3099,9 @@
 "review":"eric-portrait-anime-2",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/eric-anime2/eric-a09-909.webp"
+"src":"art/candidates/portraits/eric-anime2/eric-a09-909.webp"
 },
-"thumb":"tools/assets/thumbs/55c3736a121fd324.webp"
+"thumb":"tools/assets/thumbs/762aa7a3bf75fda8.webp"
 },
 {
 "id":"portrait/eric-a09w-909",
@@ -3110,7 +3110,7 @@
 "who":"eric",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/eric-anime3/eric-a09w-909.webp"
+"art/candidates/portraits/eric-anime3/eric-a09w-909.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -3121,9 +3121,9 @@
 "review":"eric-portrait-anime-3",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/eric-anime3/eric-a09w-909.webp"
+"src":"art/candidates/portraits/eric-anime3/eric-a09w-909.webp"
 },
-"thumb":"tools/assets/thumbs/2e66e03f3c2250d5.webp"
+"thumb":"tools/assets/thumbs/e31ae1d8e71e122a.webp"
 },
 {
 "id":"portrait/eric-a10-910",
@@ -3132,7 +3132,7 @@
 "who":"eric",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/eric-anime2/eric-a10-910.webp"
+"art/candidates/portraits/eric-anime2/eric-a10-910.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -3143,9 +3143,9 @@
 "review":"eric-portrait-anime-2",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/eric-anime2/eric-a10-910.webp"
+"src":"art/candidates/portraits/eric-anime2/eric-a10-910.webp"
 },
-"thumb":"tools/assets/thumbs/778f40100f388185.webp"
+"thumb":"tools/assets/thumbs/cb2c5d45f9455a60.webp"
 },
 {
 "id":"portrait/eric-a11-911",
@@ -3154,7 +3154,7 @@
 "who":"eric",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/eric-anime2/eric-a11-911.webp"
+"art/candidates/portraits/eric-anime2/eric-a11-911.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -3165,9 +3165,9 @@
 "review":"eric-portrait-anime-2",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/eric-anime2/eric-a11-911.webp"
+"src":"art/candidates/portraits/eric-anime2/eric-a11-911.webp"
 },
-"thumb":"tools/assets/thumbs/c43e34ff637a4f2f.webp"
+"thumb":"tools/assets/thumbs/7d865534e3601ce2.webp"
 },
 {
 "id":"portrait/eric-a12-912",
@@ -3176,7 +3176,7 @@
 "who":"eric",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/eric-anime2/eric-a12-912.webp"
+"art/candidates/portraits/eric-anime2/eric-a12-912.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -3187,9 +3187,9 @@
 "review":"eric-portrait-anime-2",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/eric-anime2/eric-a12-912.webp"
+"src":"art/candidates/portraits/eric-anime2/eric-a12-912.webp"
 },
-"thumb":"tools/assets/thumbs/a19e1d6565f84f8f.webp"
+"thumb":"tools/assets/thumbs/cbf93d13e4f603b8.webp"
 },
 {
 "id":"portrait/eric-a13-913",
@@ -3198,7 +3198,7 @@
 "who":"eric",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/eric-anime2/eric-a13-913.webp"
+"art/candidates/portraits/eric-anime2/eric-a13-913.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -3209,9 +3209,9 @@
 "review":"eric-portrait-anime-2",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/eric-anime2/eric-a13-913.webp"
+"src":"art/candidates/portraits/eric-anime2/eric-a13-913.webp"
 },
-"thumb":"tools/assets/thumbs/9585a199dd166fde.webp"
+"thumb":"tools/assets/thumbs/ed4f29177c380f55.webp"
 },
 {
 "id":"portrait/eric-a13w-913",
@@ -3220,7 +3220,7 @@
 "who":"eric",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/eric-anime3/eric-a13w-913.webp"
+"art/candidates/portraits/eric-anime3/eric-a13w-913.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -3231,9 +3231,9 @@
 "review":"eric-portrait-anime-3",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/eric-anime3/eric-a13w-913.webp"
+"src":"art/candidates/portraits/eric-anime3/eric-a13w-913.webp"
 },
-"thumb":"tools/assets/thumbs/92d3aaafd200139c.webp"
+"thumb":"tools/assets/thumbs/9005d2507c0ef40a.webp"
 },
 {
 "id":"portrait/eric-a14-914",
@@ -3242,7 +3242,7 @@
 "who":"eric",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/eric-anime2/eric-a14-914.webp"
+"art/candidates/portraits/eric-anime2/eric-a14-914.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -3253,9 +3253,9 @@
 "review":"eric-portrait-anime-2",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/eric-anime2/eric-a14-914.webp"
+"src":"art/candidates/portraits/eric-anime2/eric-a14-914.webp"
 },
-"thumb":"tools/assets/thumbs/c3f48e713ef353d8.webp"
+"thumb":"tools/assets/thumbs/54c48fd617606aa6.webp"
 },
 {
 "id":"portrait/eric-b01-921",
@@ -3264,7 +3264,7 @@
 "who":"eric",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/eric-anime2/eric-b01-921.webp"
+"art/candidates/portraits/eric-anime2/eric-b01-921.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -3275,9 +3275,9 @@
 "review":"eric-portrait-anime-2",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/eric-anime2/eric-b01-921.webp"
+"src":"art/candidates/portraits/eric-anime2/eric-b01-921.webp"
 },
-"thumb":"tools/assets/thumbs/b545f6652eb5f155.webp"
+"thumb":"tools/assets/thumbs/a6e0b29cee2ec467.webp"
 },
 {
 "id":"portrait/eric-b02-922",
@@ -3286,7 +3286,7 @@
 "who":"eric",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/eric-anime2/eric-b02-922.webp"
+"art/candidates/portraits/eric-anime2/eric-b02-922.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -3297,9 +3297,9 @@
 "review":"eric-portrait-anime-2",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/eric-anime2/eric-b02-922.webp"
+"src":"art/candidates/portraits/eric-anime2/eric-b02-922.webp"
 },
-"thumb":"tools/assets/thumbs/92c5e4356e818890.webp"
+"thumb":"tools/assets/thumbs/ed9f5cb92f9cfef0.webp"
 },
 {
 "id":"portrait/eric-b03-923",
@@ -3308,7 +3308,7 @@
 "who":"eric",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/eric-anime2/eric-b03-923.webp"
+"art/candidates/portraits/eric-anime2/eric-b03-923.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -3319,9 +3319,9 @@
 "review":"eric-portrait-anime-2",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/eric-anime2/eric-b03-923.webp"
+"src":"art/candidates/portraits/eric-anime2/eric-b03-923.webp"
 },
-"thumb":"tools/assets/thumbs/b16e7318fac7d9e0.webp"
+"thumb":"tools/assets/thumbs/a702e0b92f557987.webp"
 },
 {
 "id":"portrait/eric-b03r-923",
@@ -3330,7 +3330,7 @@
 "who":"eric",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/eric-anime2/eric-b03r-923.webp"
+"art/candidates/portraits/eric-anime2/eric-b03r-923.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -3341,9 +3341,9 @@
 "review":"eric-portrait-anime-2",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/eric-anime2/eric-b03r-923.webp"
+"src":"art/candidates/portraits/eric-anime2/eric-b03r-923.webp"
 },
-"thumb":"tools/assets/thumbs/ca41fd1b0fc0ccf0.webp"
+"thumb":"tools/assets/thumbs/159a5db52d6decef.webp"
 },
 {
 "id":"portrait/eric-b04-924",
@@ -3352,7 +3352,7 @@
 "who":"eric",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/eric-anime2/eric-b04-924.webp"
+"art/candidates/portraits/eric-anime2/eric-b04-924.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -3363,9 +3363,9 @@
 "review":"eric-portrait-anime-2",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/eric-anime2/eric-b04-924.webp"
+"src":"art/candidates/portraits/eric-anime2/eric-b04-924.webp"
 },
-"thumb":"tools/assets/thumbs/8dad51c32052b1ed.webp"
+"thumb":"tools/assets/thumbs/ff6526361a7199b0.webp"
 },
 {
 "id":"portrait/eric-b05-925",
@@ -3374,7 +3374,7 @@
 "who":"eric",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/eric-anime2/eric-b05-925.webp"
+"art/candidates/portraits/eric-anime2/eric-b05-925.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -3385,9 +3385,9 @@
 "review":"eric-portrait-anime-2",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/eric-anime2/eric-b05-925.webp"
+"src":"art/candidates/portraits/eric-anime2/eric-b05-925.webp"
 },
-"thumb":"tools/assets/thumbs/7d63c009634d0e26.webp"
+"thumb":"tools/assets/thumbs/e98e263afd01ef42.webp"
 },
 {
 "id":"portrait/eric-b06-926",
@@ -3396,7 +3396,7 @@
 "who":"eric",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/eric-anime2/eric-b06-926.webp"
+"art/candidates/portraits/eric-anime2/eric-b06-926.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -3407,9 +3407,9 @@
 "review":"eric-portrait-anime-2",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/eric-anime2/eric-b06-926.webp"
+"src":"art/candidates/portraits/eric-anime2/eric-b06-926.webp"
 },
-"thumb":"tools/assets/thumbs/e3601ba9da3f505e.webp"
+"thumb":"tools/assets/thumbs/801852b68a139402.webp"
 },
 {
 "id":"portrait/eric-b06r-926",
@@ -3418,7 +3418,7 @@
 "who":"eric",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/eric-anime2/eric-b06r-926.webp"
+"art/candidates/portraits/eric-anime2/eric-b06r-926.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -3429,9 +3429,9 @@
 "review":"eric-portrait-anime-2",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/eric-anime2/eric-b06r-926.webp"
+"src":"art/candidates/portraits/eric-anime2/eric-b06r-926.webp"
 },
-"thumb":"tools/assets/thumbs/6c6bf5f09f0eea39.webp"
+"thumb":"tools/assets/thumbs/63d14553abd7bdb4.webp"
 },
 {
 "id":"portrait/eric-b07-927",
@@ -3440,7 +3440,7 @@
 "who":"eric",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/eric-anime2/eric-b07-927.webp"
+"art/candidates/portraits/eric-anime2/eric-b07-927.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -3451,9 +3451,9 @@
 "review":"eric-portrait-anime-2",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/eric-anime2/eric-b07-927.webp"
+"src":"art/candidates/portraits/eric-anime2/eric-b07-927.webp"
 },
-"thumb":"tools/assets/thumbs/5de2801b9916952d.webp"
+"thumb":"tools/assets/thumbs/7c45b9e4e1f62d63.webp"
 },
 {
 "id":"portrait/eric-b07r-927",
@@ -3462,7 +3462,7 @@
 "who":"eric",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/eric-anime2/eric-b07r-927.webp"
+"art/candidates/portraits/eric-anime2/eric-b07r-927.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -3473,9 +3473,9 @@
 "review":"eric-portrait-anime-2",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/eric-anime2/eric-b07r-927.webp"
+"src":"art/candidates/portraits/eric-anime2/eric-b07r-927.webp"
 },
-"thumb":"tools/assets/thumbs/09411a456a286048.webp"
+"thumb":"tools/assets/thumbs/112e80d544f79e05.webp"
 },
 {
 "id":"portrait/eric-b08-928",
@@ -3484,7 +3484,7 @@
 "who":"eric",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/eric-anime2/eric-b08-928.webp"
+"art/candidates/portraits/eric-anime2/eric-b08-928.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -3495,9 +3495,9 @@
 "review":"eric-portrait-anime-2",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/eric-anime2/eric-b08-928.webp"
+"src":"art/candidates/portraits/eric-anime2/eric-b08-928.webp"
 },
-"thumb":"tools/assets/thumbs/2f9c05fd354bdc80.webp"
+"thumb":"tools/assets/thumbs/8032ab7655f24486.webp"
 },
 {
 "id":"portrait/eric-c1-913",
@@ -3506,7 +3506,7 @@
 "who":"eric",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/eric-anime3/eric-c1-913.webp"
+"art/candidates/portraits/eric-anime3/eric-c1-913.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -3517,9 +3517,9 @@
 "review":"eric-portrait-anime-3",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/eric-anime3/eric-c1-913.webp"
+"src":"art/candidates/portraits/eric-anime3/eric-c1-913.webp"
 },
-"thumb":"tools/assets/thumbs/c167ab1cf5666e39.webp"
+"thumb":"tools/assets/thumbs/81ffcc3d4f1a909c.webp"
 },
 {
 "id":"portrait/eric-c2-913",
@@ -3528,7 +3528,7 @@
 "who":"eric",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/eric-anime3/eric-c2-913.webp"
+"art/candidates/portraits/eric-anime3/eric-c2-913.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -3539,9 +3539,9 @@
 "review":"eric-portrait-anime-3",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/eric-anime3/eric-c2-913.webp"
+"src":"art/candidates/portraits/eric-anime3/eric-c2-913.webp"
 },
-"thumb":"tools/assets/thumbs/413a252cde5e3e00.webp"
+"thumb":"tools/assets/thumbs/95f4c4fa6371f03a.webp"
 },
 {
 "id":"portrait/eric-c3-913",
@@ -3550,7 +3550,7 @@
 "who":"eric",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/eric-anime3/eric-c3-913.webp"
+"art/candidates/portraits/eric-anime3/eric-c3-913.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -3561,9 +3561,9 @@
 "review":"eric-portrait-anime-3",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/eric-anime3/eric-c3-913.webp"
+"src":"art/candidates/portraits/eric-anime3/eric-c3-913.webp"
 },
-"thumb":"tools/assets/thumbs/42b5333e10cf89d9.webp"
+"thumb":"tools/assets/thumbs/fb3fdda13981f487.webp"
 },
 {
 "id":"portrait/eric-c4-913",
@@ -3572,7 +3572,7 @@
 "who":"eric",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/eric-anime3/eric-c4-913.webp"
+"art/candidates/portraits/eric-anime3/eric-c4-913.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -3583,9 +3583,9 @@
 "review":"eric-portrait-anime-3",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/eric-anime3/eric-c4-913.webp"
+"src":"art/candidates/portraits/eric-anime3/eric-c4-913.webp"
 },
-"thumb":"tools/assets/thumbs/8af05b79d5a66209.webp"
+"thumb":"tools/assets/thumbs/85c20bcb10aa69ec.webp"
 },
 {
 "id":"portrait/eric-c5-913",
@@ -3594,7 +3594,7 @@
 "who":"eric",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/eric-anime3/eric-c5-913.webp"
+"art/candidates/portraits/eric-anime3/eric-c5-913.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -3605,9 +3605,9 @@
 "review":"eric-portrait-anime-3",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/eric-anime3/eric-c5-913.webp"
+"src":"art/candidates/portraits/eric-anime3/eric-c5-913.webp"
 },
-"thumb":"tools/assets/thumbs/15d7753c1be69ba8.webp"
+"thumb":"tools/assets/thumbs/b5d626b6740df06e.webp"
 },
 {
 "id":"portrait/eric-j15-915",
@@ -3616,7 +3616,7 @@
 "who":"eric",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/eric-anime2/eric-j15-915.webp"
+"art/candidates/portraits/eric-anime2/eric-j15-915.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -3627,9 +3627,9 @@
 "review":"eric-portrait-anime-2",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/eric-anime2/eric-j15-915.webp"
+"src":"art/candidates/portraits/eric-anime2/eric-j15-915.webp"
 },
-"thumb":"tools/assets/thumbs/263f61dc5d53e1cc.webp"
+"thumb":"tools/assets/thumbs/b89ec10bff96d48f.webp"
 },
 {
 "id":"portrait/eric-j16-916",
@@ -3638,7 +3638,7 @@
 "who":"eric",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/eric-anime2/eric-j16-916.webp"
+"art/candidates/portraits/eric-anime2/eric-j16-916.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -3649,9 +3649,9 @@
 "review":"eric-portrait-anime-2",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/eric-anime2/eric-j16-916.webp"
+"src":"art/candidates/portraits/eric-anime2/eric-j16-916.webp"
 },
-"thumb":"tools/assets/thumbs/807c4dac73464d0e.webp"
+"thumb":"tools/assets/thumbs/b1891d4a0601a652.webp"
 },
 {
 "id":"portrait/eric-old-neutral-d60-831-cut",
@@ -3660,7 +3660,7 @@
 "who":"eric",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/eric-oldstyle/eric-old-neutral-d60-831-cut.webp"
+"art/candidates/portraits/eric-oldstyle/eric-old-neutral-d60-831-cut.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -3671,9 +3671,9 @@
 "review":"eric-portrait-style",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/eric-oldstyle/eric-old-neutral-d60-831-cut.webp"
+"src":"art/candidates/portraits/eric-oldstyle/eric-old-neutral-d60-831-cut.webp"
 },
-"thumb":"tools/assets/thumbs/7c55262bc7337456.webp"
+"thumb":"tools/assets/thumbs/fc53194c94fe24d5.webp"
 },
 {
 "id":"portrait/eric-old-surprised-831-cut",
@@ -3682,7 +3682,7 @@
 "who":"eric",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/eric-oldstyle/eric-old-surprised-831-cut.webp"
+"art/candidates/portraits/eric-oldstyle/eric-old-surprised-831-cut.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -3693,9 +3693,9 @@
 "review":"eric-portrait-style",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/eric-oldstyle/eric-old-surprised-831-cut.webp"
+"src":"art/candidates/portraits/eric-oldstyle/eric-old-surprised-831-cut.webp"
 },
-"thumb":"tools/assets/thumbs/a3f81872904e4c2a.webp"
+"thumb":"tools/assets/thumbs/762cfc52ccdfc931.webp"
 },
 {
 "id":"portrait/eric-old-tired-833-cut",
@@ -3704,7 +3704,7 @@
 "who":"eric",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/eric-oldstyle/eric-old-tired-833-cut.webp"
+"art/candidates/portraits/eric-oldstyle/eric-old-tired-833-cut.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -3715,9 +3715,9 @@
 "review":"eric-portrait-style",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/eric-oldstyle/eric-old-tired-833-cut.webp"
+"src":"art/candidates/portraits/eric-oldstyle/eric-old-tired-833-cut.webp"
 },
-"thumb":"tools/assets/thumbs/046273d73333bbbd.webp"
+"thumb":"tools/assets/thumbs/3f6fac3221d20052.webp"
 },
 {
 "id":"portrait/eric-p1-1909",
@@ -3726,7 +3726,7 @@
 "who":"eric",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/eric-anime3/eric-p1-1909.webp"
+"art/candidates/portraits/eric-anime3/eric-p1-1909.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -3737,9 +3737,9 @@
 "review":"eric-portrait-anime-3",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/eric-anime3/eric-p1-1909.webp"
+"src":"art/candidates/portraits/eric-anime3/eric-p1-1909.webp"
 },
-"thumb":"tools/assets/thumbs/60a66b1a2bfdb5cb.webp"
+"thumb":"tools/assets/thumbs/d26e7a00dd42fbfd.webp"
 },
 {
 "id":"portrait/eric-p1-909",
@@ -3748,7 +3748,7 @@
 "who":"eric",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/eric-anime3/eric-p1-909.webp"
+"art/candidates/portraits/eric-anime3/eric-p1-909.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -3759,9 +3759,9 @@
 "review":"eric-portrait-anime-3",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/eric-anime3/eric-p1-909.webp"
+"src":"art/candidates/portraits/eric-anime3/eric-p1-909.webp"
 },
-"thumb":"tools/assets/thumbs/34d71df55a35cf03.webp"
+"thumb":"tools/assets/thumbs/701f73942de46f82.webp"
 },
 {
 "id":"portrait/eric-p2-1909",
@@ -3770,7 +3770,7 @@
 "who":"eric",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/eric-anime3/eric-p2-1909.webp"
+"art/candidates/portraits/eric-anime3/eric-p2-1909.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -3781,9 +3781,9 @@
 "review":"eric-portrait-anime-3",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/eric-anime3/eric-p2-1909.webp"
+"src":"art/candidates/portraits/eric-anime3/eric-p2-1909.webp"
 },
-"thumb":"tools/assets/thumbs/98680366dc542819.webp"
+"thumb":"tools/assets/thumbs/1da5ed8c149311d4.webp"
 },
 {
 "id":"portrait/eric-p2-909",
@@ -3792,7 +3792,7 @@
 "who":"eric",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/eric-anime3/eric-p2-909.webp"
+"art/candidates/portraits/eric-anime3/eric-p2-909.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -3803,9 +3803,9 @@
 "review":"eric-portrait-anime-3",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/eric-anime3/eric-p2-909.webp"
+"src":"art/candidates/portraits/eric-anime3/eric-p2-909.webp"
 },
-"thumb":"tools/assets/thumbs/12e76248f8b97d8e.webp"
+"thumb":"tools/assets/thumbs/30071712d3ba444b.webp"
 },
 {
 "id":"portrait/eric-p3-1909",
@@ -3814,7 +3814,7 @@
 "who":"eric",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/eric-anime3/eric-p3-1909.webp"
+"art/candidates/portraits/eric-anime3/eric-p3-1909.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -3825,9 +3825,9 @@
 "review":"eric-portrait-anime-3",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/eric-anime3/eric-p3-1909.webp"
+"src":"art/candidates/portraits/eric-anime3/eric-p3-1909.webp"
 },
-"thumb":"tools/assets/thumbs/8c707898a60fcac8.webp"
+"thumb":"tools/assets/thumbs/4eded85458c23974.webp"
 },
 {
 "id":"portrait/eric-p3-909",
@@ -3836,7 +3836,7 @@
 "who":"eric",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/eric-anime3/eric-p3-909.webp"
+"art/candidates/portraits/eric-anime3/eric-p3-909.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -3847,9 +3847,9 @@
 "review":"eric-portrait-anime-3",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/eric-anime3/eric-p3-909.webp"
+"src":"art/candidates/portraits/eric-anime3/eric-p3-909.webp"
 },
-"thumb":"tools/assets/thumbs/6836417182448f5b.webp"
+"thumb":"tools/assets/thumbs/86a08ec967a54a9e.webp"
 },
 {
 "id":"portrait/eric-p3h1-2909",
@@ -3858,7 +3858,7 @@
 "who":"eric",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/eric-anime4/eric-p3h1-2909.webp"
+"art/candidates/portraits/eric-anime4/eric-p3h1-2909.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -3869,9 +3869,9 @@
 "review":"eric-portrait-anime-4",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/eric-anime4/eric-p3h1-2909.webp"
+"src":"art/candidates/portraits/eric-anime4/eric-p3h1-2909.webp"
 },
-"thumb":"tools/assets/thumbs/20a7b866b9379418.webp"
+"thumb":"tools/assets/thumbs/ba5b93cb81f4ce3f.webp"
 },
 {
 "id":"portrait/eric-p3h1-3909",
@@ -3880,7 +3880,7 @@
 "who":"eric",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/eric-anime4/eric-p3h1-3909.webp"
+"art/candidates/portraits/eric-anime4/eric-p3h1-3909.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -3891,9 +3891,9 @@
 "review":"eric-portrait-anime-4",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/eric-anime4/eric-p3h1-3909.webp"
+"src":"art/candidates/portraits/eric-anime4/eric-p3h1-3909.webp"
 },
-"thumb":"tools/assets/thumbs/8f34c8e4854d4d49.webp"
+"thumb":"tools/assets/thumbs/9b862d4d87963e46.webp"
 },
 {
 "id":"portrait/eric-p3h1-909",
@@ -3902,7 +3902,7 @@
 "who":"eric",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/eric-anime4/eric-p3h1-909.webp"
+"art/candidates/portraits/eric-anime4/eric-p3h1-909.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -3913,9 +3913,9 @@
 "review":"eric-portrait-anime-4",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/eric-anime4/eric-p3h1-909.webp"
+"src":"art/candidates/portraits/eric-anime4/eric-p3h1-909.webp"
 },
-"thumb":"tools/assets/thumbs/a6d6a429b028364f.webp"
+"thumb":"tools/assets/thumbs/d6db1d99a410044d.webp"
 },
 {
 "id":"portrait/eric-p3h2-2909",
@@ -3924,7 +3924,7 @@
 "who":"eric",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/eric-anime4/eric-p3h2-2909.webp"
+"art/candidates/portraits/eric-anime4/eric-p3h2-2909.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -3935,9 +3935,9 @@
 "review":"eric-portrait-anime-4",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/eric-anime4/eric-p3h2-2909.webp"
+"src":"art/candidates/portraits/eric-anime4/eric-p3h2-2909.webp"
 },
-"thumb":"tools/assets/thumbs/e1ba7050b73e2a62.webp"
+"thumb":"tools/assets/thumbs/0d88a98758b2fa01.webp"
 },
 {
 "id":"portrait/eric-p3h2-3909",
@@ -3946,7 +3946,7 @@
 "who":"eric",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/eric-anime4/eric-p3h2-3909.webp"
+"art/candidates/portraits/eric-anime4/eric-p3h2-3909.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -3957,9 +3957,9 @@
 "review":"eric-portrait-anime-4",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/eric-anime4/eric-p3h2-3909.webp"
+"src":"art/candidates/portraits/eric-anime4/eric-p3h2-3909.webp"
 },
-"thumb":"tools/assets/thumbs/2875b47c34697c7f.webp"
+"thumb":"tools/assets/thumbs/0acf431f03642f83.webp"
 },
 {
 "id":"portrait/eric-p3h2-909",
@@ -3968,7 +3968,7 @@
 "who":"eric",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/eric-anime4/eric-p3h2-909.webp"
+"art/candidates/portraits/eric-anime4/eric-p3h2-909.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -3979,9 +3979,9 @@
 "review":"eric-portrait-anime-4",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/eric-anime4/eric-p3h2-909.webp"
+"src":"art/candidates/portraits/eric-anime4/eric-p3h2-909.webp"
 },
-"thumb":"tools/assets/thumbs/b2fd795466a42d1c.webp"
+"thumb":"tools/assets/thumbs/fe421db646e11d5a.webp"
 },
 {
 "id":"portrait/eric-p3m45-4909",
@@ -3990,7 +3990,7 @@
 "who":"eric",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/eric-anime4/eric-p3m45-4909.webp"
+"art/candidates/portraits/eric-anime4/eric-p3m45-4909.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -4001,9 +4001,9 @@
 "review":"eric-portrait-anime-4",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/eric-anime4/eric-p3m45-4909.webp"
+"src":"art/candidates/portraits/eric-anime4/eric-p3m45-4909.webp"
 },
-"thumb":"tools/assets/thumbs/ca824db26460e7f9.webp"
+"thumb":"tools/assets/thumbs/4410117789b98eda.webp"
 },
 {
 "id":"portrait/eric-p3m45-5909",
@@ -4012,7 +4012,7 @@
 "who":"eric",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/eric-anime4/eric-p3m45-5909.webp"
+"art/candidates/portraits/eric-anime4/eric-p3m45-5909.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -4023,9 +4023,9 @@
 "review":"eric-portrait-anime-4",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/eric-anime4/eric-p3m45-5909.webp"
+"src":"art/candidates/portraits/eric-anime4/eric-p3m45-5909.webp"
 },
-"thumb":"tools/assets/thumbs/b81fb4a46f09383d.webp"
+"thumb":"tools/assets/thumbs/62d3badf61d45152.webp"
 },
 {
 "id":"portrait/eric-p3m60-4909",
@@ -4034,7 +4034,7 @@
 "who":"eric",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/eric-anime4/eric-p3m60-4909.webp"
+"art/candidates/portraits/eric-anime4/eric-p3m60-4909.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -4045,9 +4045,9 @@
 "review":"eric-portrait-anime-4",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/eric-anime4/eric-p3m60-4909.webp"
+"src":"art/candidates/portraits/eric-anime4/eric-p3m60-4909.webp"
 },
-"thumb":"tools/assets/thumbs/cb845bf586b191ee.webp"
+"thumb":"tools/assets/thumbs/eaa2b86d8bf330e8.webp"
 },
 {
 "id":"portrait/eric-p3m60-5909",
@@ -4056,7 +4056,7 @@
 "who":"eric",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/eric-anime4/eric-p3m60-5909.webp"
+"art/candidates/portraits/eric-anime4/eric-p3m60-5909.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -4067,9 +4067,9 @@
 "review":"eric-portrait-anime-4",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/eric-anime4/eric-p3m60-5909.webp"
+"src":"art/candidates/portraits/eric-anime4/eric-p3m60-5909.webp"
 },
-"thumb":"tools/assets/thumbs/6504acd9dd2e4b22.webp"
+"thumb":"tools/assets/thumbs/a3de941a36dc1dbd.webp"
 },
 {
 "id":"portrait/eric-p3m60n-4909",
@@ -4078,7 +4078,7 @@
 "who":"eric",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/eric-anime4/eric-p3m60n-4909.webp"
+"art/candidates/portraits/eric-anime4/eric-p3m60n-4909.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -4089,9 +4089,9 @@
 "review":"eric-portrait-anime-4",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/eric-anime4/eric-p3m60n-4909.webp"
+"src":"art/candidates/portraits/eric-anime4/eric-p3m60n-4909.webp"
 },
-"thumb":"tools/assets/thumbs/f965b3cb89f5b198.webp"
+"thumb":"tools/assets/thumbs/4c896577eef46b45.webp"
 },
 {
 "id":"portrait/eric-p3m60n-5909",
@@ -4100,7 +4100,7 @@
 "who":"eric",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/eric-anime4/eric-p3m60n-5909.webp"
+"art/candidates/portraits/eric-anime4/eric-p3m60n-5909.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -4111,9 +4111,9 @@
 "review":"eric-portrait-anime-4",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/eric-anime4/eric-p3m60n-5909.webp"
+"src":"art/candidates/portraits/eric-anime4/eric-p3m60n-5909.webp"
 },
-"thumb":"tools/assets/thumbs/9642f0c32d309159.webp"
+"thumb":"tools/assets/thumbs/cf24d11e107591f7.webp"
 },
 {
 "id":"portrait/eric-p3m75-4909",
@@ -4122,7 +4122,7 @@
 "who":"eric",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/eric-anime4/eric-p3m75-4909.webp"
+"art/candidates/portraits/eric-anime4/eric-p3m75-4909.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -4133,9 +4133,9 @@
 "review":"eric-portrait-anime-4",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/eric-anime4/eric-p3m75-4909.webp"
+"src":"art/candidates/portraits/eric-anime4/eric-p3m75-4909.webp"
 },
-"thumb":"tools/assets/thumbs/c5e041cb1d088011.webp"
+"thumb":"tools/assets/thumbs/e4ba16ba8acff323.webp"
 },
 {
 "id":"portrait/eric-p3m75-5909",
@@ -4144,7 +4144,7 @@
 "who":"eric",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/eric-anime4/eric-p3m75-5909.webp"
+"art/candidates/portraits/eric-anime4/eric-p3m75-5909.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -4155,9 +4155,9 @@
 "review":"eric-portrait-anime-4",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/eric-anime4/eric-p3m75-5909.webp"
+"src":"art/candidates/portraits/eric-anime4/eric-p3m75-5909.webp"
 },
-"thumb":"tools/assets/thumbs/8189bcacebf82a25.webp"
+"thumb":"tools/assets/thumbs/e6468b4a8548a711.webp"
 },
 {
 "id":"portrait/eric-p4-1909",
@@ -4166,7 +4166,7 @@
 "who":"eric",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/eric-anime3/eric-p4-1909.webp"
+"art/candidates/portraits/eric-anime3/eric-p4-1909.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -4177,9 +4177,9 @@
 "review":"eric-portrait-anime-3",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/eric-anime3/eric-p4-1909.webp"
+"src":"art/candidates/portraits/eric-anime3/eric-p4-1909.webp"
 },
-"thumb":"tools/assets/thumbs/56c451c70c077607.webp"
+"thumb":"tools/assets/thumbs/663177fc23fd9c6a.webp"
 },
 {
 "id":"portrait/eric-p4-909",
@@ -4188,7 +4188,7 @@
 "who":"eric",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/eric-anime3/eric-p4-909.webp"
+"art/candidates/portraits/eric-anime3/eric-p4-909.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -4199,9 +4199,9 @@
 "review":"eric-portrait-anime-3",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/eric-anime3/eric-p4-909.webp"
+"src":"art/candidates/portraits/eric-anime3/eric-p4-909.webp"
 },
-"thumb":"tools/assets/thumbs/f69f7d8aed00e447.webp"
+"thumb":"tools/assets/thumbs/5fbbbfe160f56947.webp"
 },
 {
 "id":"portrait/eric-p5-1909",
@@ -4210,7 +4210,7 @@
 "who":"eric",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/eric-anime3/eric-p5-1909.webp"
+"art/candidates/portraits/eric-anime3/eric-p5-1909.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -4221,9 +4221,9 @@
 "review":"eric-portrait-anime-3",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/eric-anime3/eric-p5-1909.webp"
+"src":"art/candidates/portraits/eric-anime3/eric-p5-1909.webp"
 },
-"thumb":"tools/assets/thumbs/d3ba9950420984eb.webp"
+"thumb":"tools/assets/thumbs/56a849e6e7419e4f.webp"
 },
 {
 "id":"portrait/eric-p5-909",
@@ -4232,7 +4232,7 @@
 "who":"eric",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/eric-anime3/eric-p5-909.webp"
+"art/candidates/portraits/eric-anime3/eric-p5-909.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -4243,9 +4243,9 @@
 "review":"eric-portrait-anime-3",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/eric-anime3/eric-p5-909.webp"
+"src":"art/candidates/portraits/eric-anime3/eric-p5-909.webp"
 },
-"thumb":"tools/assets/thumbs/52bae35eb3c3cc72.webp"
+"thumb":"tools/assets/thumbs/d630b80a5fc4e863.webp"
 },
 {
 "id":"portrait/eric-p6-1909",
@@ -4254,7 +4254,7 @@
 "who":"eric",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/eric-anime3/eric-p6-1909.webp"
+"art/candidates/portraits/eric-anime3/eric-p6-1909.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -4265,9 +4265,9 @@
 "review":"eric-portrait-anime-3",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/eric-anime3/eric-p6-1909.webp"
+"src":"art/candidates/portraits/eric-anime3/eric-p6-1909.webp"
 },
-"thumb":"tools/assets/thumbs/82d9ca550baccaab.webp"
+"thumb":"tools/assets/thumbs/3de294aaca8545eb.webp"
 },
 {
 "id":"portrait/eric-p6-909",
@@ -4276,7 +4276,7 @@
 "who":"eric",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/eric-anime3/eric-p6-909.webp"
+"art/candidates/portraits/eric-anime3/eric-p6-909.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -4287,9 +4287,9 @@
 "review":"eric-portrait-anime-3",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/eric-anime3/eric-p6-909.webp"
+"src":"art/candidates/portraits/eric-anime3/eric-p6-909.webp"
 },
-"thumb":"tools/assets/thumbs/2889eacd5ce2be10.webp"
+"thumb":"tools/assets/thumbs/33147ba4ada001bc.webp"
 },
 {
 "id":"portrait/eric-p6h1-1909",
@@ -4298,7 +4298,7 @@
 "who":"eric",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/eric-anime4/eric-p6h1-1909.webp"
+"art/candidates/portraits/eric-anime4/eric-p6h1-1909.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -4309,9 +4309,9 @@
 "review":"eric-portrait-anime-4",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/eric-anime4/eric-p6h1-1909.webp"
+"src":"art/candidates/portraits/eric-anime4/eric-p6h1-1909.webp"
 },
-"thumb":"tools/assets/thumbs/cb2b992bf698d621.webp"
+"thumb":"tools/assets/thumbs/e11e6c3271514204.webp"
 },
 {
 "id":"portrait/eric-p6h1-2909",
@@ -4320,7 +4320,7 @@
 "who":"eric",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/eric-anime4/eric-p6h1-2909.webp"
+"art/candidates/portraits/eric-anime4/eric-p6h1-2909.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -4331,9 +4331,9 @@
 "review":"eric-portrait-anime-4",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/eric-anime4/eric-p6h1-2909.webp"
+"src":"art/candidates/portraits/eric-anime4/eric-p6h1-2909.webp"
 },
-"thumb":"tools/assets/thumbs/62c2962db0488446.webp"
+"thumb":"tools/assets/thumbs/acefbfea531b518f.webp"
 },
 {
 "id":"portrait/eric-p6h1-3909",
@@ -4342,7 +4342,7 @@
 "who":"eric",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/eric-anime4/eric-p6h1-3909.webp"
+"art/candidates/portraits/eric-anime4/eric-p6h1-3909.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -4353,9 +4353,9 @@
 "review":"eric-portrait-anime-4",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/eric-anime4/eric-p6h1-3909.webp"
+"src":"art/candidates/portraits/eric-anime4/eric-p6h1-3909.webp"
 },
-"thumb":"tools/assets/thumbs/26f588be76396075.webp"
+"thumb":"tools/assets/thumbs/9855818a7beee9ec.webp"
 },
 {
 "id":"portrait/eric-p6h2-1909",
@@ -4364,7 +4364,7 @@
 "who":"eric",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/eric-anime4/eric-p6h2-1909.webp"
+"art/candidates/portraits/eric-anime4/eric-p6h2-1909.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -4375,9 +4375,9 @@
 "review":"eric-portrait-anime-4",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/eric-anime4/eric-p6h2-1909.webp"
+"src":"art/candidates/portraits/eric-anime4/eric-p6h2-1909.webp"
 },
-"thumb":"tools/assets/thumbs/f88e1fc159fed368.webp"
+"thumb":"tools/assets/thumbs/d026568ad09401d4.webp"
 },
 {
 "id":"portrait/eric-p6h2-2909",
@@ -4386,7 +4386,7 @@
 "who":"eric",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/eric-anime4/eric-p6h2-2909.webp"
+"art/candidates/portraits/eric-anime4/eric-p6h2-2909.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -4397,9 +4397,9 @@
 "review":"eric-portrait-anime-4",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/eric-anime4/eric-p6h2-2909.webp"
+"src":"art/candidates/portraits/eric-anime4/eric-p6h2-2909.webp"
 },
-"thumb":"tools/assets/thumbs/31462c6d063d67ec.webp"
+"thumb":"tools/assets/thumbs/5c2b087a31d8758c.webp"
 },
 {
 "id":"portrait/eric-p6h2-3909",
@@ -4408,7 +4408,7 @@
 "who":"eric",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/eric-anime4/eric-p6h2-3909.webp"
+"art/candidates/portraits/eric-anime4/eric-p6h2-3909.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -4419,9 +4419,9 @@
 "review":"eric-portrait-anime-4",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/eric-anime4/eric-p6h2-3909.webp"
+"src":"art/candidates/portraits/eric-anime4/eric-p6h2-3909.webp"
 },
-"thumb":"tools/assets/thumbs/751bc7de9743398e.webp"
+"thumb":"tools/assets/thumbs/7dad562e30ac4ac7.webp"
 },
 {
 "id":"portrait/eric-p6m45-4909",
@@ -4430,7 +4430,7 @@
 "who":"eric",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/eric-anime4/eric-p6m45-4909.webp"
+"art/candidates/portraits/eric-anime4/eric-p6m45-4909.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -4441,9 +4441,9 @@
 "review":"eric-portrait-anime-4",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/eric-anime4/eric-p6m45-4909.webp"
+"src":"art/candidates/portraits/eric-anime4/eric-p6m45-4909.webp"
 },
-"thumb":"tools/assets/thumbs/d7a41f09b1986a54.webp"
+"thumb":"tools/assets/thumbs/40004c3798d7fce8.webp"
 },
 {
 "id":"portrait/eric-p6m45-5909",
@@ -4452,7 +4452,7 @@
 "who":"eric",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/eric-anime4/eric-p6m45-5909.webp"
+"art/candidates/portraits/eric-anime4/eric-p6m45-5909.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -4463,9 +4463,9 @@
 "review":"eric-portrait-anime-4",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/eric-anime4/eric-p6m45-5909.webp"
+"src":"art/candidates/portraits/eric-anime4/eric-p6m45-5909.webp"
 },
-"thumb":"tools/assets/thumbs/fb808c8cec1a1b9e.webp"
+"thumb":"tools/assets/thumbs/7a5eb34ac5bb1a15.webp"
 },
 {
 "id":"portrait/eric-p6m60-4909",
@@ -4474,7 +4474,7 @@
 "who":"eric",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/eric-anime4/eric-p6m60-4909.webp"
+"art/candidates/portraits/eric-anime4/eric-p6m60-4909.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -4485,9 +4485,9 @@
 "review":"eric-portrait-anime-4",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/eric-anime4/eric-p6m60-4909.webp"
+"src":"art/candidates/portraits/eric-anime4/eric-p6m60-4909.webp"
 },
-"thumb":"tools/assets/thumbs/3776b8d06f93c16c.webp"
+"thumb":"tools/assets/thumbs/c124447d56f0d1ec.webp"
 },
 {
 "id":"portrait/eric-p6m60-5909",
@@ -4496,7 +4496,7 @@
 "who":"eric",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/eric-anime4/eric-p6m60-5909.webp"
+"art/candidates/portraits/eric-anime4/eric-p6m60-5909.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -4507,9 +4507,9 @@
 "review":"eric-portrait-anime-4",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/eric-anime4/eric-p6m60-5909.webp"
+"src":"art/candidates/portraits/eric-anime4/eric-p6m60-5909.webp"
 },
-"thumb":"tools/assets/thumbs/e36a1a8a613661b5.webp"
+"thumb":"tools/assets/thumbs/7e59657d15515f45.webp"
 },
 {
 "id":"portrait/eric-p6m60n-4909",
@@ -4518,7 +4518,7 @@
 "who":"eric",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/eric-anime4/eric-p6m60n-4909.webp"
+"art/candidates/portraits/eric-anime4/eric-p6m60n-4909.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -4529,9 +4529,9 @@
 "review":"eric-portrait-anime-4",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/eric-anime4/eric-p6m60n-4909.webp"
+"src":"art/candidates/portraits/eric-anime4/eric-p6m60n-4909.webp"
 },
-"thumb":"tools/assets/thumbs/ea25732634ad0805.webp"
+"thumb":"tools/assets/thumbs/ca14724af0b20781.webp"
 },
 {
 "id":"portrait/eric-p6m60n-5909",
@@ -4540,7 +4540,7 @@
 "who":"eric",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/eric-anime4/eric-p6m60n-5909.webp"
+"art/candidates/portraits/eric-anime4/eric-p6m60n-5909.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -4551,9 +4551,9 @@
 "review":"eric-portrait-anime-4",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/eric-anime4/eric-p6m60n-5909.webp"
+"src":"art/candidates/portraits/eric-anime4/eric-p6m60n-5909.webp"
 },
-"thumb":"tools/assets/thumbs/1c859864b59c0738.webp"
+"thumb":"tools/assets/thumbs/d936c60ae50aaa6a.webp"
 },
 {
 "id":"portrait/eric-p6m75-4909",
@@ -4562,7 +4562,7 @@
 "who":"eric",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/eric-anime4/eric-p6m75-4909.webp"
+"art/candidates/portraits/eric-anime4/eric-p6m75-4909.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -4573,9 +4573,9 @@
 "review":"eric-portrait-anime-4",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/eric-anime4/eric-p6m75-4909.webp"
+"src":"art/candidates/portraits/eric-anime4/eric-p6m75-4909.webp"
 },
-"thumb":"tools/assets/thumbs/2c196d6fd88f7c43.webp"
+"thumb":"tools/assets/thumbs/845e7bf92e4fac0c.webp"
 },
 {
 "id":"portrait/eric-p6m75-5909",
@@ -4584,7 +4584,7 @@
 "who":"eric",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/eric-anime4/eric-p6m75-5909.webp"
+"art/candidates/portraits/eric-anime4/eric-p6m75-5909.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -4595,9 +4595,9 @@
 "review":"eric-portrait-anime-4",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/eric-anime4/eric-p6m75-5909.webp"
+"src":"art/candidates/portraits/eric-anime4/eric-p6m75-5909.webp"
 },
-"thumb":"tools/assets/thumbs/bcfb65fc929e3886.webp"
+"thumb":"tools/assets/thumbs/87002056a9733a29.webp"
 },
 {
 "id":"portrait/eric-r3-3909",
@@ -4606,7 +4606,7 @@
 "who":"eric",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/eric-anime5/eric-r3-3909.webp"
+"art/candidates/portraits/eric-anime5/eric-r3-3909.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -4617,9 +4617,9 @@
 "review":"eric-portrait-anime-5",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/eric-anime5/eric-r3-3909.webp"
+"src":"art/candidates/portraits/eric-anime5/eric-r3-3909.webp"
 },
-"thumb":"tools/assets/thumbs/ab664b5eced6c5a4.webp"
+"thumb":"tools/assets/thumbs/da2976e085d80ca5.webp"
 },
 {
 "id":"portrait/eric-r3-7909",
@@ -4628,7 +4628,7 @@
 "who":"eric",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/eric-anime5/eric-r3-7909.webp"
+"art/candidates/portraits/eric-anime5/eric-r3-7909.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -4639,9 +4639,9 @@
 "review":"eric-portrait-anime-5",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/eric-anime5/eric-r3-7909.webp"
+"src":"art/candidates/portraits/eric-anime5/eric-r3-7909.webp"
 },
-"thumb":"tools/assets/thumbs/5a8cd0fae16bf8b4.webp"
+"thumb":"tools/assets/thumbs/db78bab1b9edc363.webp"
 },
 {
 "id":"portrait/eric-s2-d60-1",
@@ -4650,7 +4650,7 @@
 "who":"eric",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/eric-expressions-1/eric-s2-d60-1.webp"
+"art/candidates/portraits/eric-expressions-1/eric-s2-d60-1.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -4661,9 +4661,9 @@
 "review":"eric-expressions-1",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/eric-expressions-1/eric-s2-d60-1.webp"
+"src":"art/candidates/portraits/eric-expressions-1/eric-s2-d60-1.webp"
 },
-"thumb":"tools/assets/thumbs/37fb0745371313a1.webp"
+"thumb":"tools/assets/thumbs/80153ff140740a71.webp"
 },
 {
 "id":"portrait/eric-s2-d70-3",
@@ -4672,7 +4672,7 @@
 "who":"eric",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/eric-expressions-1/eric-s2-d70-3.webp"
+"art/candidates/portraits/eric-expressions-1/eric-s2-d70-3.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -4683,9 +4683,9 @@
 "review":"eric-expressions-1",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/eric-expressions-1/eric-s2-d70-3.webp"
+"src":"art/candidates/portraits/eric-expressions-1/eric-s2-d70-3.webp"
 },
-"thumb":"tools/assets/thumbs/5c4e6c434eeff9ab.webp"
+"thumb":"tools/assets/thumbs/0eb98ee8dd106fce.webp"
 },
 {
 "id":"portrait/eric-t1-d60-3",
@@ -4694,7 +4694,7 @@
 "who":"eric",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/eric-expressions-1/eric-t1-d60-3.webp"
+"art/candidates/portraits/eric-expressions-1/eric-t1-d60-3.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -4705,9 +4705,9 @@
 "review":"eric-expressions-1",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/eric-expressions-1/eric-t1-d60-3.webp"
+"src":"art/candidates/portraits/eric-expressions-1/eric-t1-d60-3.webp"
 },
-"thumb":"tools/assets/thumbs/6b798d2f75261e73.webp"
+"thumb":"tools/assets/thumbs/ad937dfe36f38ce8.webp"
 },
 {
 "id":"portrait/eric-t3-d75-3",
@@ -4716,7 +4716,7 @@
 "who":"eric",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/eric-expressions-1/eric-t3-d75-3.webp"
+"art/candidates/portraits/eric-expressions-1/eric-t3-d75-3.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -4727,9 +4727,9 @@
 "review":"eric-expressions-1",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/eric-expressions-1/eric-t3-d75-3.webp"
+"src":"art/candidates/portraits/eric-expressions-1/eric-t3-d75-3.webp"
 },
-"thumb":"tools/assets/thumbs/c6146e9f62c7c71b.webp"
+"thumb":"tools/assets/thumbs/e1ea6071f211e63c.webp"
 },
 {
 "id":"portrait/eric-x1-913",
@@ -4738,7 +4738,7 @@
 "who":"eric",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/eric-anime3/eric-x1-913.webp"
+"art/candidates/portraits/eric-anime3/eric-x1-913.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -4749,9 +4749,9 @@
 "review":"eric-portrait-anime-3",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/eric-anime3/eric-x1-913.webp"
+"src":"art/candidates/portraits/eric-anime3/eric-x1-913.webp"
 },
-"thumb":"tools/assets/thumbs/690b8bad335f2761.webp"
+"thumb":"tools/assets/thumbs/8af21059492fb525.webp"
 },
 {
 "id":"portrait/eric-x2-913",
@@ -4760,7 +4760,7 @@
 "who":"eric",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/eric-anime3/eric-x2-913.webp"
+"art/candidates/portraits/eric-anime3/eric-x2-913.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -4771,9 +4771,9 @@
 "review":"eric-portrait-anime-3",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/eric-anime3/eric-x2-913.webp"
+"src":"art/candidates/portraits/eric-anime3/eric-x2-913.webp"
 },
-"thumb":"tools/assets/thumbs/f5abc680938e180e.webp"
+"thumb":"tools/assets/thumbs/dcf307f17ae25ad5.webp"
 },
 {
 "id":"portrait/eric-x3-913",
@@ -4782,7 +4782,7 @@
 "who":"eric",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/eric-anime3/eric-x3-913.webp"
+"art/candidates/portraits/eric-anime3/eric-x3-913.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -4793,9 +4793,9 @@
 "review":"eric-portrait-anime-3",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/eric-anime3/eric-x3-913.webp"
+"src":"art/candidates/portraits/eric-anime3/eric-x3-913.webp"
 },
-"thumb":"tools/assets/thumbs/0782f365b846d61b.webp"
+"thumb":"tools/assets/thumbs/379bbbca5f1c5134.webp"
 },
 {
 "id":"portrait/eric-x4-913",
@@ -4804,7 +4804,7 @@
 "who":"eric",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/eric-anime3/eric-x4-913.webp"
+"art/candidates/portraits/eric-anime3/eric-x4-913.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -4815,9 +4815,9 @@
 "review":"eric-portrait-anime-3",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/eric-anime3/eric-x4-913.webp"
+"src":"art/candidates/portraits/eric-anime3/eric-x4-913.webp"
 },
-"thumb":"tools/assets/thumbs/5e66ca2e2116937f.webp"
+"thumb":"tools/assets/thumbs/395607156e00b2be.webp"
 },
 {
 "id":"portrait/eric-x5-913",
@@ -4826,7 +4826,7 @@
 "who":"eric",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/eric-anime3/eric-x5-913.webp"
+"art/candidates/portraits/eric-anime3/eric-x5-913.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -4837,9 +4837,9 @@
 "review":"eric-portrait-anime-3",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/eric-anime3/eric-x5-913.webp"
+"src":"art/candidates/portraits/eric-anime3/eric-x5-913.webp"
 },
-"thumb":"tools/assets/thumbs/139870301d31a60a.webp"
+"thumb":"tools/assets/thumbs/6cdb3f661c447c12.webp"
 },
 {
 "id":"portrait/face-s2-d60-1",
@@ -4848,7 +4848,7 @@
 "who":"eric",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/eric-expressions-1/face-s2-d60-1.webp"
+"art/candidates/portraits/eric-expressions-1/face-s2-d60-1.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -4859,9 +4859,9 @@
 "review":"eric-expressions-1",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/eric-expressions-1/face-s2-d60-1.webp"
+"src":"art/candidates/portraits/eric-expressions-1/face-s2-d60-1.webp"
 },
-"thumb":"tools/assets/thumbs/16b97b7e03e6a754.webp"
+"thumb":"tools/assets/thumbs/3151abf8eb986547.webp"
 },
 {
 "id":"portrait/face-s2-d70-3",
@@ -4870,7 +4870,7 @@
 "who":"eric",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/eric-expressions-1/face-s2-d70-3.webp"
+"art/candidates/portraits/eric-expressions-1/face-s2-d70-3.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -4881,9 +4881,9 @@
 "review":"eric-expressions-1",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/eric-expressions-1/face-s2-d70-3.webp"
+"src":"art/candidates/portraits/eric-expressions-1/face-s2-d70-3.webp"
 },
-"thumb":"tools/assets/thumbs/ad82f994ef232045.webp"
+"thumb":"tools/assets/thumbs/860b6c5a5b2ba098.webp"
 },
 {
 "id":"portrait/face-t1-d60-3",
@@ -4892,7 +4892,7 @@
 "who":"eric",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/eric-expressions-1/face-t1-d60-3.webp"
+"art/candidates/portraits/eric-expressions-1/face-t1-d60-3.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -4903,9 +4903,9 @@
 "review":"eric-expressions-1",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/eric-expressions-1/face-t1-d60-3.webp"
+"src":"art/candidates/portraits/eric-expressions-1/face-t1-d60-3.webp"
 },
-"thumb":"tools/assets/thumbs/087699fef58f2cd8.webp"
+"thumb":"tools/assets/thumbs/52f1801d5c087ebf.webp"
 },
 {
 "id":"portrait/face-t3-d75-3",
@@ -4914,7 +4914,7 @@
 "who":"eric",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/eric-expressions-1/face-t3-d75-3.webp"
+"art/candidates/portraits/eric-expressions-1/face-t3-d75-3.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -4925,9 +4925,9 @@
 "review":"eric-expressions-1",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/eric-expressions-1/face-t3-d75-3.webp"
+"src":"art/candidates/portraits/eric-expressions-1/face-t3-d75-3.webp"
 },
-"thumb":"tools/assets/thumbs/b339c5e2d07c2d28.webp"
+"thumb":"tools/assets/thumbs/154aeb357852fb9a.webp"
 },
 {
 "id":"portrait/mc-eric-poses-sheet",
@@ -4936,7 +4936,7 @@
 "who":"eric",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/eric-poses-sheet.png"
+"art/candidates/portraits/eric-poses-sheet.png"
 ],
 "status":"rejected",
 "status_from":{
@@ -4948,9 +4948,9 @@
 "review":null,
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/eric-poses-sheet.png"
+"src":"art/candidates/portraits/eric-poses-sheet.png"
 },
-"thumb":"tools/assets/thumbs/842def970191ab05.webp",
+"thumb":"tools/assets/thumbs/34da252906260fc4.webp",
 "tags":[
 "sheet"
 ]
@@ -4962,7 +4962,7 @@
 "who":"eric",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/eric-sheet.png"
+"art/candidates/portraits/eric-sheet.png"
 ],
 "status":"rejected",
 "status_from":{
@@ -4974,9 +4974,9 @@
 "review":null,
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/eric-sheet.png"
+"src":"art/candidates/portraits/eric-sheet.png"
 },
-"thumb":"tools/assets/thumbs/12694b267908d793.webp",
+"thumb":"tools/assets/thumbs/5c0a82b96e2ef44e.webp",
 "tags":[
 "sheet"
 ]
@@ -4988,7 +4988,7 @@
 "who":"eric",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/eric-expressions-1/pair-s2-d60-1.webp"
+"art/candidates/portraits/eric-expressions-1/pair-s2-d60-1.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -4999,9 +4999,9 @@
 "review":"eric-expressions-1",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/eric-expressions-1/pair-s2-d60-1.webp"
+"src":"art/candidates/portraits/eric-expressions-1/pair-s2-d60-1.webp"
 },
-"thumb":"tools/assets/thumbs/9e63be3d1bafdda8.webp"
+"thumb":"tools/assets/thumbs/9ebef70bf71c6aa4.webp"
 },
 {
 "id":"portrait/pair-s2-d70-3",
@@ -5010,7 +5010,7 @@
 "who":"eric",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/eric-expressions-1/pair-s2-d70-3.webp"
+"art/candidates/portraits/eric-expressions-1/pair-s2-d70-3.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -5021,9 +5021,9 @@
 "review":"eric-expressions-1",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/eric-expressions-1/pair-s2-d70-3.webp"
+"src":"art/candidates/portraits/eric-expressions-1/pair-s2-d70-3.webp"
 },
-"thumb":"tools/assets/thumbs/047adaf7af5e8636.webp"
+"thumb":"tools/assets/thumbs/1943c93a7aaa9930.webp"
 },
 {
 "id":"portrait/pair-t1-d60-3",
@@ -5032,7 +5032,7 @@
 "who":"eric",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/eric-expressions-1/pair-t1-d60-3.webp"
+"art/candidates/portraits/eric-expressions-1/pair-t1-d60-3.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -5043,9 +5043,9 @@
 "review":"eric-expressions-1",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/eric-expressions-1/pair-t1-d60-3.webp"
+"src":"art/candidates/portraits/eric-expressions-1/pair-t1-d60-3.webp"
 },
-"thumb":"tools/assets/thumbs/9b0d5cdd5d46ee00.webp"
+"thumb":"tools/assets/thumbs/b07cf3d5f05a1a95.webp"
 },
 {
 "id":"portrait/pair-t3-d75-3",
@@ -5054,7 +5054,7 @@
 "who":"eric",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/eric-expressions-1/pair-t3-d75-3.webp"
+"art/candidates/portraits/eric-expressions-1/pair-t3-d75-3.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -5065,9 +5065,9 @@
 "review":"eric-expressions-1",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/eric-expressions-1/pair-t3-d75-3.webp"
+"src":"art/candidates/portraits/eric-expressions-1/pair-t3-d75-3.webp"
 },
-"thumb":"tools/assets/thumbs/686c58a89cdff61f.webp"
+"thumb":"tools/assets/thumbs/7bead522c529a0b7.webp"
 },
 {
 "id":"portrait/kenji-a-trains-751",
@@ -5076,7 +5076,7 @@
 "who":"kenji",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/kenji-concept/kenji-a-trains-751.webp"
+"art/candidates/portraits/kenji-concept/kenji-a-trains-751.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -5087,9 +5087,9 @@
 "review":"kenji-concept",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/kenji-concept/kenji-a-trains-751.webp"
+"src":"art/candidates/portraits/kenji-concept/kenji-a-trains-751.webp"
 },
-"thumb":"tools/assets/thumbs/9b542d60774663c5.webp"
+"thumb":"tools/assets/thumbs/2cd2802ff2f7f405.webp"
 },
 {
 "id":"portrait/kenji-a-trains-752",
@@ -5098,7 +5098,7 @@
 "who":"kenji",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/kenji-concept/kenji-a-trains-752.webp"
+"art/candidates/portraits/kenji-concept/kenji-a-trains-752.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -5109,9 +5109,9 @@
 "review":"kenji-concept",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/kenji-concept/kenji-a-trains-752.webp"
+"src":"art/candidates/portraits/kenji-concept/kenji-a-trains-752.webp"
 },
-"thumb":"tools/assets/thumbs/fc1bff4426c2a7b5.webp"
+"thumb":"tools/assets/thumbs/f104ef15b91bcd56.webp"
 },
 {
 "id":"portrait/kenji-a-trains-full-751",
@@ -5120,7 +5120,7 @@
 "who":"kenji",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/kenji-concept/kenji-a-trains-full-751.webp"
+"art/candidates/portraits/kenji-concept/kenji-a-trains-full-751.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -5131,9 +5131,9 @@
 "review":"kenji-concept",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/kenji-concept/kenji-a-trains-full-751.webp"
+"src":"art/candidates/portraits/kenji-concept/kenji-a-trains-full-751.webp"
 },
-"thumb":"tools/assets/thumbs/4059ea6d526dc9de.webp"
+"thumb":"tools/assets/thumbs/e2bbf3390a095da1.webp"
 },
 {
 "id":"portrait/kenji-b-gashapon-751",
@@ -5142,7 +5142,7 @@
 "who":"kenji",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/kenji-concept/kenji-b-gashapon-751.webp"
+"art/candidates/portraits/kenji-concept/kenji-b-gashapon-751.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -5153,9 +5153,9 @@
 "review":"kenji-concept",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/kenji-concept/kenji-b-gashapon-751.webp"
+"src":"art/candidates/portraits/kenji-concept/kenji-b-gashapon-751.webp"
 },
-"thumb":"tools/assets/thumbs/cef67c40029ff977.webp"
+"thumb":"tools/assets/thumbs/8e207b170a57c1ca.webp"
 },
 {
 "id":"portrait/kenji-b-gashapon-752",
@@ -5164,7 +5164,7 @@
 "who":"kenji",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/kenji-concept/kenji-b-gashapon-752.webp"
+"art/candidates/portraits/kenji-concept/kenji-b-gashapon-752.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -5175,9 +5175,9 @@
 "review":"kenji-concept",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/kenji-concept/kenji-b-gashapon-752.webp"
+"src":"art/candidates/portraits/kenji-concept/kenji-b-gashapon-752.webp"
 },
-"thumb":"tools/assets/thumbs/09c2ad1ca5817ba0.webp"
+"thumb":"tools/assets/thumbs/b4a920aa61d4aacd.webp"
 },
 {
 "id":"portrait/kenji-b-gashapon-full-751",
@@ -5186,7 +5186,7 @@
 "who":"kenji",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/kenji-concept/kenji-b-gashapon-full-751.webp"
+"art/candidates/portraits/kenji-concept/kenji-b-gashapon-full-751.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -5197,9 +5197,9 @@
 "review":"kenji-concept",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/kenji-concept/kenji-b-gashapon-full-751.webp"
+"src":"art/candidates/portraits/kenji-concept/kenji-b-gashapon-full-751.webp"
 },
-"thumb":"tools/assets/thumbs/ce9e889307f4f712.webp"
+"thumb":"tools/assets/thumbs/c9dd4d1598cdf6fa.webp"
 },
 {
 "id":"portrait/kenji-c-citypop-751",
@@ -5208,7 +5208,7 @@
 "who":"kenji",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/kenji-concept/kenji-c-citypop-751.webp"
+"art/candidates/portraits/kenji-concept/kenji-c-citypop-751.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -5219,9 +5219,9 @@
 "review":"kenji-concept",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/kenji-concept/kenji-c-citypop-751.webp"
+"src":"art/candidates/portraits/kenji-concept/kenji-c-citypop-751.webp"
 },
-"thumb":"tools/assets/thumbs/a9c60fbda8546655.webp"
+"thumb":"tools/assets/thumbs/e26f23870d437129.webp"
 },
 {
 "id":"portrait/kenji-c-citypop-752",
@@ -5230,7 +5230,7 @@
 "who":"kenji",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/kenji-concept/kenji-c-citypop-752.webp"
+"art/candidates/portraits/kenji-concept/kenji-c-citypop-752.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -5241,9 +5241,9 @@
 "review":"kenji-concept",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/kenji-concept/kenji-c-citypop-752.webp"
+"src":"art/candidates/portraits/kenji-concept/kenji-c-citypop-752.webp"
 },
-"thumb":"tools/assets/thumbs/956a65f9a060d488.webp"
+"thumb":"tools/assets/thumbs/3d9ad98517eef265.webp"
 },
 {
 "id":"portrait/kenji-c-citypop-full-751",
@@ -5252,7 +5252,7 @@
 "who":"kenji",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/kenji-concept/kenji-c-citypop-full-751.webp"
+"art/candidates/portraits/kenji-concept/kenji-c-citypop-full-751.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -5263,9 +5263,9 @@
 "review":"kenji-concept",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/kenji-concept/kenji-c-citypop-full-751.webp"
+"src":"art/candidates/portraits/kenji-concept/kenji-c-citypop-full-751.webp"
 },
-"thumb":"tools/assets/thumbs/28cba66f282eef13.webp"
+"thumb":"tools/assets/thumbs/b8ce6aab07c09cff.webp"
 },
 {
 "id":"portrait/kenji-d-climber-751",
@@ -5274,7 +5274,7 @@
 "who":"kenji",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/kenji-concept/kenji-d-climber-751.webp"
+"art/candidates/portraits/kenji-concept/kenji-d-climber-751.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -5285,9 +5285,9 @@
 "review":"kenji-concept",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/kenji-concept/kenji-d-climber-751.webp"
+"src":"art/candidates/portraits/kenji-concept/kenji-d-climber-751.webp"
 },
-"thumb":"tools/assets/thumbs/814d78b8f3511d07.webp"
+"thumb":"tools/assets/thumbs/b254b6e5776487aa.webp"
 },
 {
 "id":"portrait/kenji-d-climber-752",
@@ -5296,7 +5296,7 @@
 "who":"kenji",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/kenji-concept/kenji-d-climber-752.webp"
+"art/candidates/portraits/kenji-concept/kenji-d-climber-752.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -5307,9 +5307,9 @@
 "review":"kenji-concept",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/kenji-concept/kenji-d-climber-752.webp"
+"src":"art/candidates/portraits/kenji-concept/kenji-d-climber-752.webp"
 },
-"thumb":"tools/assets/thumbs/825d6a3ee2b0f0da.webp"
+"thumb":"tools/assets/thumbs/2e2fb5d215d89ba2.webp"
 },
 {
 "id":"portrait/kenji-d-climber-full-751",
@@ -5318,7 +5318,7 @@
 "who":"kenji",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/kenji-concept/kenji-d-climber-full-751.webp"
+"art/candidates/portraits/kenji-concept/kenji-d-climber-full-751.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -5329,9 +5329,9 @@
 "review":"kenji-concept",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/kenji-concept/kenji-d-climber-full-751.webp"
+"src":"art/candidates/portraits/kenji-concept/kenji-d-climber-full-751.webp"
 },
-"thumb":"tools/assets/thumbs/b8982433faefa659.webp"
+"thumb":"tools/assets/thumbs/b4de6a720954a2b8.webp"
 },
 {
 "id":"portrait/kenji-e-plants-751",
@@ -5340,7 +5340,7 @@
 "who":"kenji",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/kenji-concept/kenji-e-plants-751.webp"
+"art/candidates/portraits/kenji-concept/kenji-e-plants-751.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -5351,9 +5351,9 @@
 "review":"kenji-concept",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/kenji-concept/kenji-e-plants-751.webp"
+"src":"art/candidates/portraits/kenji-concept/kenji-e-plants-751.webp"
 },
-"thumb":"tools/assets/thumbs/d427f09968489dd1.webp"
+"thumb":"tools/assets/thumbs/6b2fcba302905e94.webp"
 },
 {
 "id":"portrait/kenji-e-plants-752",
@@ -5362,7 +5362,7 @@
 "who":"kenji",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/kenji-concept/kenji-e-plants-752.webp"
+"art/candidates/portraits/kenji-concept/kenji-e-plants-752.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -5373,9 +5373,9 @@
 "review":"kenji-concept",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/kenji-concept/kenji-e-plants-752.webp"
+"src":"art/candidates/portraits/kenji-concept/kenji-e-plants-752.webp"
 },
-"thumb":"tools/assets/thumbs/c055c5490d2e1a7e.webp"
+"thumb":"tools/assets/thumbs/c67d06fb3159f8c9.webp"
 },
 {
 "id":"portrait/kenji-e-plants-full-751",
@@ -5384,7 +5384,7 @@
 "who":"kenji",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/kenji-concept/kenji-e-plants-full-751.webp"
+"art/candidates/portraits/kenji-concept/kenji-e-plants-full-751.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -5395,9 +5395,9 @@
 "review":"kenji-concept",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/kenji-concept/kenji-e-plants-full-751.webp"
+"src":"art/candidates/portraits/kenji-concept/kenji-e-plants-full-751.webp"
 },
-"thumb":"tools/assets/thumbs/887f2d25eb200bc4.webp"
+"thumb":"tools/assets/thumbs/e2cf8bac46d45b67.webp"
 },
 {
 "id":"portrait/kenji-f-rookiesuit-751",
@@ -5406,7 +5406,7 @@
 "who":"kenji",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/kenji-concept/kenji-f-rookiesuit-751.webp"
+"art/candidates/portraits/kenji-concept/kenji-f-rookiesuit-751.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -5417,9 +5417,9 @@
 "review":"kenji-concept",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/kenji-concept/kenji-f-rookiesuit-751.webp"
+"src":"art/candidates/portraits/kenji-concept/kenji-f-rookiesuit-751.webp"
 },
-"thumb":"tools/assets/thumbs/06f7adc6ac51d379.webp"
+"thumb":"tools/assets/thumbs/9637c88f8b2e5527.webp"
 },
 {
 "id":"portrait/kenji-f-rookiesuit-752",
@@ -5428,7 +5428,7 @@
 "who":"kenji",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/kenji-concept/kenji-f-rookiesuit-752.webp"
+"art/candidates/portraits/kenji-concept/kenji-f-rookiesuit-752.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -5439,9 +5439,9 @@
 "review":"kenji-concept",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/kenji-concept/kenji-f-rookiesuit-752.webp"
+"src":"art/candidates/portraits/kenji-concept/kenji-f-rookiesuit-752.webp"
 },
-"thumb":"tools/assets/thumbs/db633c3d49233e65.webp"
+"thumb":"tools/assets/thumbs/0326bc7a9d3a8d40.webp"
 },
 {
 "id":"portrait/kenji-f-rookiesuit-full-751",
@@ -5450,7 +5450,7 @@
 "who":"kenji",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/kenji-concept/kenji-f-rookiesuit-full-751.webp"
+"art/candidates/portraits/kenji-concept/kenji-f-rookiesuit-full-751.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -5461,9 +5461,9 @@
 "review":"kenji-concept",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/kenji-concept/kenji-f-rookiesuit-full-751.webp"
+"src":"art/candidates/portraits/kenji-concept/kenji-f-rookiesuit-full-751.webp"
 },
-"thumb":"tools/assets/thumbs/fbe6f22e49b58e7f.webp"
+"thumb":"tools/assets/thumbs/7578265890a8beb3.webp"
 },
 {
 "id":"portrait/kenji-kenji-sheet",
@@ -5472,7 +5472,7 @@
 "who":"kenji",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/kenji-sheet.png"
+"art/candidates/portraits/kenji-sheet.png"
 ],
 "status":"rejected",
 "status_from":{
@@ -5484,9 +5484,9 @@
 "review":null,
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/kenji-sheet.png"
+"src":"art/candidates/portraits/kenji-sheet.png"
 },
-"thumb":"tools/assets/thumbs/5a1abd30541d2b54.webp",
+"thumb":"tools/assets/thumbs/7fde99944e9ee925.webp",
 "tags":[
 "sheet"
 ]
@@ -5498,7 +5498,7 @@
 "who":"kenji",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/kenji-concept2/kenji2-a-soft-761.webp"
+"art/candidates/portraits/kenji-concept2/kenji2-a-soft-761.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -5509,9 +5509,9 @@
 "review":"kenji-concept-2",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/kenji-concept2/kenji2-a-soft-761.webp"
+"src":"art/candidates/portraits/kenji-concept2/kenji2-a-soft-761.webp"
 },
-"thumb":"tools/assets/thumbs/58ac44d6bbda5323.webp"
+"thumb":"tools/assets/thumbs/67179b42a3d143e7.webp"
 },
 {
 "id":"portrait/kenji2-a-soft-762",
@@ -5520,7 +5520,7 @@
 "who":"kenji",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/kenji-concept2/kenji2-a-soft-762.webp"
+"art/candidates/portraits/kenji-concept2/kenji2-a-soft-762.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -5531,9 +5531,9 @@
 "review":"kenji-concept-2",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/kenji-concept2/kenji2-a-soft-762.webp"
+"src":"art/candidates/portraits/kenji-concept2/kenji2-a-soft-762.webp"
 },
-"thumb":"tools/assets/thumbs/83d72f3b03c26362.webp"
+"thumb":"tools/assets/thumbs/c17598b4ee3bdf67.webp"
 },
 {
 "id":"portrait/kenji2-a-soft-full-761",
@@ -5542,7 +5542,7 @@
 "who":"kenji",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/kenji-concept2/kenji2-a-soft-full-761.webp"
+"art/candidates/portraits/kenji-concept2/kenji2-a-soft-full-761.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -5553,9 +5553,9 @@
 "review":"kenji-concept-2",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/kenji-concept2/kenji2-a-soft-full-761.webp"
+"src":"art/candidates/portraits/kenji-concept2/kenji2-a-soft-full-761.webp"
 },
-"thumb":"tools/assets/thumbs/9bd5b1f9b7646ee2.webp"
+"thumb":"tools/assets/thumbs/6c38e536ab07b9c6.webp"
 },
 {
 "id":"portrait/kenji2-b-gangly-761",
@@ -5564,7 +5564,7 @@
 "who":"kenji",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/kenji-concept2/kenji2-b-gangly-761.webp"
+"art/candidates/portraits/kenji-concept2/kenji2-b-gangly-761.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -5575,9 +5575,9 @@
 "review":"kenji-concept-2",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/kenji-concept2/kenji2-b-gangly-761.webp"
+"src":"art/candidates/portraits/kenji-concept2/kenji2-b-gangly-761.webp"
 },
-"thumb":"tools/assets/thumbs/6058f776f57f89b6.webp"
+"thumb":"tools/assets/thumbs/45d460391b8e5991.webp"
 },
 {
 "id":"portrait/kenji2-b-gangly-762",
@@ -5586,7 +5586,7 @@
 "who":"kenji",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/kenji-concept2/kenji2-b-gangly-762.webp"
+"art/candidates/portraits/kenji-concept2/kenji2-b-gangly-762.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -5597,9 +5597,9 @@
 "review":"kenji-concept-2",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/kenji-concept2/kenji2-b-gangly-762.webp"
+"src":"art/candidates/portraits/kenji-concept2/kenji2-b-gangly-762.webp"
 },
-"thumb":"tools/assets/thumbs/b218445a6ffba510.webp"
+"thumb":"tools/assets/thumbs/325a9c87699da586.webp"
 },
 {
 "id":"portrait/kenji2-b-gangly-full-761",
@@ -5608,7 +5608,7 @@
 "who":"kenji",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/kenji-concept2/kenji2-b-gangly-full-761.webp"
+"art/candidates/portraits/kenji-concept2/kenji2-b-gangly-full-761.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -5619,9 +5619,9 @@
 "review":"kenji-concept-2",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/kenji-concept2/kenji2-b-gangly-full-761.webp"
+"src":"art/candidates/portraits/kenji-concept2/kenji2-b-gangly-full-761.webp"
 },
-"thumb":"tools/assets/thumbs/da8c7e59993c0f55.webp"
+"thumb":"tools/assets/thumbs/27e04c0ea2fa154a.webp"
 },
 {
 "id":"portrait/kenji2-c2-pudgy-761",
@@ -5630,7 +5630,7 @@
 "who":"kenji",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/kenji-concept2/kenji2-c2-pudgy-761.webp"
+"art/candidates/portraits/kenji-concept2/kenji2-c2-pudgy-761.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -5641,9 +5641,9 @@
 "review":"kenji-concept-2",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/kenji-concept2/kenji2-c2-pudgy-761.webp"
+"src":"art/candidates/portraits/kenji-concept2/kenji2-c2-pudgy-761.webp"
 },
-"thumb":"tools/assets/thumbs/b2e2a3ff445f2296.webp"
+"thumb":"tools/assets/thumbs/3b8a529fadcc3916.webp"
 },
 {
 "id":"portrait/kenji2-c2-pudgy-762",
@@ -5652,7 +5652,7 @@
 "who":"kenji",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/kenji-concept2/kenji2-c2-pudgy-762.webp"
+"art/candidates/portraits/kenji-concept2/kenji2-c2-pudgy-762.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -5663,9 +5663,9 @@
 "review":"kenji-concept-2",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/kenji-concept2/kenji2-c2-pudgy-762.webp"
+"src":"art/candidates/portraits/kenji-concept2/kenji2-c2-pudgy-762.webp"
 },
-"thumb":"tools/assets/thumbs/0b009643734d1f6c.webp"
+"thumb":"tools/assets/thumbs/8bfe0d92e42426f1.webp"
 },
 {
 "id":"portrait/kenji2-c2-pudgy-full-761",
@@ -5674,7 +5674,7 @@
 "who":"kenji",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/kenji-concept2/kenji2-c2-pudgy-full-761.webp"
+"art/candidates/portraits/kenji-concept2/kenji2-c2-pudgy-full-761.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -5685,9 +5685,9 @@
 "review":"kenji-concept-2",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/kenji-concept2/kenji2-c2-pudgy-full-761.webp"
+"src":"art/candidates/portraits/kenji-concept2/kenji2-c2-pudgy-full-761.webp"
 },
-"thumb":"tools/assets/thumbs/5152bbf6983a79ef.webp"
+"thumb":"tools/assets/thumbs/a6bb14b43afa991c.webp"
 },
 {
 "id":"portrait/kenji2-d-freckles-761",
@@ -5696,7 +5696,7 @@
 "who":"kenji",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/kenji-concept2/kenji2-d-freckles-761.webp"
+"art/candidates/portraits/kenji-concept2/kenji2-d-freckles-761.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -5707,9 +5707,9 @@
 "review":"kenji-concept-2",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/kenji-concept2/kenji2-d-freckles-761.webp"
+"src":"art/candidates/portraits/kenji-concept2/kenji2-d-freckles-761.webp"
 },
-"thumb":"tools/assets/thumbs/7e33162cc74d735e.webp"
+"thumb":"tools/assets/thumbs/479173c135aeed25.webp"
 },
 {
 "id":"portrait/kenji2-d-freckles-762",
@@ -5718,7 +5718,7 @@
 "who":"kenji",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/kenji-concept2/kenji2-d-freckles-762.webp"
+"art/candidates/portraits/kenji-concept2/kenji2-d-freckles-762.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -5729,9 +5729,9 @@
 "review":"kenji-concept-2",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/kenji-concept2/kenji2-d-freckles-762.webp"
+"src":"art/candidates/portraits/kenji-concept2/kenji2-d-freckles-762.webp"
 },
-"thumb":"tools/assets/thumbs/5176f2419c6a6739.webp"
+"thumb":"tools/assets/thumbs/1d4559000da0db6f.webp"
 },
 {
 "id":"portrait/kenji2-d-freckles-full-761",
@@ -5740,7 +5740,7 @@
 "who":"kenji",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/kenji-concept2/kenji2-d-freckles-full-761.webp"
+"art/candidates/portraits/kenji-concept2/kenji2-d-freckles-full-761.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -5751,9 +5751,9 @@
 "review":"kenji-concept-2",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/kenji-concept2/kenji2-d-freckles-full-761.webp"
+"src":"art/candidates/portraits/kenji-concept2/kenji2-d-freckles-full-761.webp"
 },
-"thumb":"tools/assets/thumbs/649a4e4d5f2bfff6.webp"
+"thumb":"tools/assets/thumbs/ae38fb68a539caba.webp"
 },
 {
 "id":"portrait/kenji2-e3-fringe-761",
@@ -5762,7 +5762,7 @@
 "who":"kenji",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/kenji-concept2/kenji2-e3-fringe-761.webp"
+"art/candidates/portraits/kenji-concept2/kenji2-e3-fringe-761.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -5773,9 +5773,9 @@
 "review":"kenji-concept-2",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/kenji-concept2/kenji2-e3-fringe-761.webp"
+"src":"art/candidates/portraits/kenji-concept2/kenji2-e3-fringe-761.webp"
 },
-"thumb":"tools/assets/thumbs/00811002fba623bf.webp"
+"thumb":"tools/assets/thumbs/9fde37843e36fbbf.webp"
 },
 {
 "id":"portrait/kenji2-e3-fringe-762",
@@ -5784,7 +5784,7 @@
 "who":"kenji",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/kenji-concept2/kenji2-e3-fringe-762.webp"
+"art/candidates/portraits/kenji-concept2/kenji2-e3-fringe-762.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -5795,9 +5795,9 @@
 "review":"kenji-concept-2",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/kenji-concept2/kenji2-e3-fringe-762.webp"
+"src":"art/candidates/portraits/kenji-concept2/kenji2-e3-fringe-762.webp"
 },
-"thumb":"tools/assets/thumbs/783c7e1ff5dd4106.webp"
+"thumb":"tools/assets/thumbs/9cc9f1207b333ef8.webp"
 },
 {
 "id":"portrait/kenji2-e3-fringe-full-761",
@@ -5806,7 +5806,7 @@
 "who":"kenji",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/kenji-concept2/kenji2-e3-fringe-full-761.webp"
+"art/candidates/portraits/kenji-concept2/kenji2-e3-fringe-full-761.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -5817,9 +5817,9 @@
 "review":"kenji-concept-2",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/kenji-concept2/kenji2-e3-fringe-full-761.webp"
+"src":"art/candidates/portraits/kenji-concept2/kenji2-e3-fringe-full-761.webp"
 },
-"thumb":"tools/assets/thumbs/1571550940e3c616.webp"
+"thumb":"tools/assets/thumbs/366bd9701721e391.webp"
 },
 {
 "id":"portrait/kenji3-c-761",
@@ -5828,7 +5828,7 @@
 "who":"kenji",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/kenji-concept3/kenji3-c-761.webp"
+"art/candidates/portraits/kenji-concept3/kenji3-c-761.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -5839,9 +5839,9 @@
 "review":"kenji-concept-3",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/kenji-concept3/kenji3-c-761.webp"
+"src":"art/candidates/portraits/kenji-concept3/kenji3-c-761.webp"
 },
-"thumb":"tools/assets/thumbs/b30c215a1b155a34.webp"
+"thumb":"tools/assets/thumbs/908bd529720d56b5.webp"
 },
 {
 "id":"portrait/kenji3-c-762",
@@ -5850,7 +5850,7 @@
 "who":"kenji",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/kenji-concept3/kenji3-c-762.webp"
+"art/candidates/portraits/kenji-concept3/kenji3-c-762.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -5861,9 +5861,9 @@
 "review":"kenji-concept-3",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/kenji-concept3/kenji3-c-762.webp"
+"src":"art/candidates/portraits/kenji-concept3/kenji3-c-762.webp"
 },
-"thumb":"tools/assets/thumbs/aacf90b6f0f9708c.webp"
+"thumb":"tools/assets/thumbs/594a8e4f664160dc.webp"
 },
 {
 "id":"portrait/kenji3-h1-mushroom-761",
@@ -5872,7 +5872,7 @@
 "who":"kenji",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/kenji-concept3/kenji3-h1-mushroom-761.webp"
+"art/candidates/portraits/kenji-concept3/kenji3-h1-mushroom-761.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -5883,9 +5883,9 @@
 "review":"kenji-concept-3",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/kenji-concept3/kenji3-h1-mushroom-761.webp"
+"src":"art/candidates/portraits/kenji-concept3/kenji3-h1-mushroom-761.webp"
 },
-"thumb":"tools/assets/thumbs/3917b36c595a851b.webp"
+"thumb":"tools/assets/thumbs/14451d442e06cfce.webp"
 },
 {
 "id":"portrait/kenji3-h1-mushroom-762",
@@ -5894,7 +5894,7 @@
 "who":"kenji",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/kenji-concept3/kenji3-h1-mushroom-762.webp"
+"art/candidates/portraits/kenji-concept3/kenji3-h1-mushroom-762.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -5905,9 +5905,9 @@
 "review":"kenji-concept-3",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/kenji-concept3/kenji3-h1-mushroom-762.webp"
+"src":"art/candidates/portraits/kenji-concept3/kenji3-h1-mushroom-762.webp"
 },
-"thumb":"tools/assets/thumbs/21024299465c39f9.webp"
+"thumb":"tools/assets/thumbs/c9ee3cec1d664bbb.webp"
 },
 {
 "id":"portrait/kenji3-h1-mushroom-full-761",
@@ -5916,7 +5916,7 @@
 "who":"kenji",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/kenji-concept3/kenji3-h1-mushroom-full-761.webp"
+"art/candidates/portraits/kenji-concept3/kenji3-h1-mushroom-full-761.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -5927,9 +5927,9 @@
 "review":"kenji-concept-3",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/kenji-concept3/kenji3-h1-mushroom-full-761.webp"
+"src":"art/candidates/portraits/kenji-concept3/kenji3-h1-mushroom-full-761.webp"
 },
-"thumb":"tools/assets/thumbs/5620c191d734dac3.webp"
+"thumb":"tools/assets/thumbs/80a20142c8d6be6e.webp"
 },
 {
 "id":"portrait/kenji3-h2-perm-761",
@@ -5938,7 +5938,7 @@
 "who":"kenji",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/kenji-concept3/kenji3-h2-perm-761.webp"
+"art/candidates/portraits/kenji-concept3/kenji3-h2-perm-761.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -5949,9 +5949,9 @@
 "review":"kenji-concept-3",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/kenji-concept3/kenji3-h2-perm-761.webp"
+"src":"art/candidates/portraits/kenji-concept3/kenji3-h2-perm-761.webp"
 },
-"thumb":"tools/assets/thumbs/281fdcd46b23c2ec.webp"
+"thumb":"tools/assets/thumbs/eb0eac35f6a419ff.webp"
 },
 {
 "id":"portrait/kenji3-h2-perm-762",
@@ -5960,7 +5960,7 @@
 "who":"kenji",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/kenji-concept3/kenji3-h2-perm-762.webp"
+"art/candidates/portraits/kenji-concept3/kenji3-h2-perm-762.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -5971,9 +5971,9 @@
 "review":"kenji-concept-3",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/kenji-concept3/kenji3-h2-perm-762.webp"
+"src":"art/candidates/portraits/kenji-concept3/kenji3-h2-perm-762.webp"
 },
-"thumb":"tools/assets/thumbs/ac80f2c70ab25032.webp"
+"thumb":"tools/assets/thumbs/6afe61af68264fbb.webp"
 },
 {
 "id":"portrait/kenji3-h2-perm-full-761",
@@ -5982,7 +5982,7 @@
 "who":"kenji",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/kenji-concept3/kenji3-h2-perm-full-761.webp"
+"art/candidates/portraits/kenji-concept3/kenji3-h2-perm-full-761.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -5993,9 +5993,9 @@
 "review":"kenji-concept-3",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/kenji-concept3/kenji3-h2-perm-full-761.webp"
+"src":"art/candidates/portraits/kenji-concept3/kenji3-h2-perm-full-761.webp"
 },
-"thumb":"tools/assets/thumbs/b938505a67971f1a.webp"
+"thumb":"tools/assets/thumbs/7b322841a55bfc91.webp"
 },
 {
 "id":"portrait/kenji3-h3-centre-part-761",
@@ -6004,7 +6004,7 @@
 "who":"kenji",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/kenji-concept3/kenji3-h3-centre-part-761.webp"
+"art/candidates/portraits/kenji-concept3/kenji3-h3-centre-part-761.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -6015,9 +6015,9 @@
 "review":"kenji-concept-3",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/kenji-concept3/kenji3-h3-centre-part-761.webp"
+"src":"art/candidates/portraits/kenji-concept3/kenji3-h3-centre-part-761.webp"
 },
-"thumb":"tools/assets/thumbs/ca1a8ad08585599b.webp"
+"thumb":"tools/assets/thumbs/5d91d024df60fe80.webp"
 },
 {
 "id":"portrait/kenji3-h3-centre-part-762",
@@ -6026,7 +6026,7 @@
 "who":"kenji",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/kenji-concept3/kenji3-h3-centre-part-762.webp"
+"art/candidates/portraits/kenji-concept3/kenji3-h3-centre-part-762.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -6037,9 +6037,9 @@
 "review":"kenji-concept-3",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/kenji-concept3/kenji3-h3-centre-part-762.webp"
+"src":"art/candidates/portraits/kenji-concept3/kenji3-h3-centre-part-762.webp"
 },
-"thumb":"tools/assets/thumbs/cf179408c3c170bf.webp"
+"thumb":"tools/assets/thumbs/d12947fcfbf0e537.webp"
 },
 {
 "id":"portrait/kenji3-h3-centre-part-full-761",
@@ -6048,7 +6048,7 @@
 "who":"kenji",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/kenji-concept3/kenji3-h3-centre-part-full-761.webp"
+"art/candidates/portraits/kenji-concept3/kenji3-h3-centre-part-full-761.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -6059,9 +6059,9 @@
 "review":"kenji-concept-3",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/kenji-concept3/kenji3-h3-centre-part-full-761.webp"
+"src":"art/candidates/portraits/kenji-concept3/kenji3-h3-centre-part-full-761.webp"
 },
-"thumb":"tools/assets/thumbs/4379ce9657badb19.webp"
+"thumb":"tools/assets/thumbs/200f4338928f91df.webp"
 },
 {
 "id":"portrait/kenji3-h5-side-part-761",
@@ -6070,7 +6070,7 @@
 "who":"kenji",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/kenji-concept3/kenji3-h5-side-part-761.webp"
+"art/candidates/portraits/kenji-concept3/kenji3-h5-side-part-761.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -6081,9 +6081,9 @@
 "review":"kenji-concept-3",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/kenji-concept3/kenji3-h5-side-part-761.webp"
+"src":"art/candidates/portraits/kenji-concept3/kenji3-h5-side-part-761.webp"
 },
-"thumb":"tools/assets/thumbs/1d6d566b19311b5f.webp"
+"thumb":"tools/assets/thumbs/ba4a9a993e08b90e.webp"
 },
 {
 "id":"portrait/kenji3-h5-side-part-762",
@@ -6092,7 +6092,7 @@
 "who":"kenji",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/kenji-concept3/kenji3-h5-side-part-762.webp"
+"art/candidates/portraits/kenji-concept3/kenji3-h5-side-part-762.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -6103,9 +6103,9 @@
 "review":"kenji-concept-3",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/kenji-concept3/kenji3-h5-side-part-762.webp"
+"src":"art/candidates/portraits/kenji-concept3/kenji3-h5-side-part-762.webp"
 },
-"thumb":"tools/assets/thumbs/14f5e07ffc3d664f.webp"
+"thumb":"tools/assets/thumbs/13d806a503183efe.webp"
 },
 {
 "id":"portrait/kenji3-h5-side-part-full-761",
@@ -6114,7 +6114,7 @@
 "who":"kenji",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/kenji-concept3/kenji3-h5-side-part-full-761.webp"
+"art/candidates/portraits/kenji-concept3/kenji3-h5-side-part-full-761.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -6125,9 +6125,9 @@
 "review":"kenji-concept-3",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/kenji-concept3/kenji3-h5-side-part-full-761.webp"
+"src":"art/candidates/portraits/kenji-concept3/kenji3-h5-side-part-full-761.webp"
 },
-"thumb":"tools/assets/thumbs/2c00d201f19fa08a.webp"
+"thumb":"tools/assets/thumbs/46a839f1aac98041.webp"
 },
 {
 "id":"portrait/kenji3-h6-ponytail-761",
@@ -6136,7 +6136,7 @@
 "who":"kenji",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/kenji-concept3/kenji3-h6-ponytail-761.webp"
+"art/candidates/portraits/kenji-concept3/kenji3-h6-ponytail-761.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -6147,9 +6147,9 @@
 "review":"kenji-concept-3",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/kenji-concept3/kenji3-h6-ponytail-761.webp"
+"src":"art/candidates/portraits/kenji-concept3/kenji3-h6-ponytail-761.webp"
 },
-"thumb":"tools/assets/thumbs/cdae9abc68f92737.webp"
+"thumb":"tools/assets/thumbs/4e9d0249646d197a.webp"
 },
 {
 "id":"portrait/kenji3-h6-ponytail-762",
@@ -6158,7 +6158,7 @@
 "who":"kenji",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/kenji-concept3/kenji3-h6-ponytail-762.webp"
+"art/candidates/portraits/kenji-concept3/kenji3-h6-ponytail-762.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -6169,9 +6169,9 @@
 "review":"kenji-concept-3",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/kenji-concept3/kenji3-h6-ponytail-762.webp"
+"src":"art/candidates/portraits/kenji-concept3/kenji3-h6-ponytail-762.webp"
 },
-"thumb":"tools/assets/thumbs/090dce3eab69c4a4.webp"
+"thumb":"tools/assets/thumbs/6e3dbf843481cb18.webp"
 },
 {
 "id":"portrait/kenji3-h6-ponytail-full-761",
@@ -6180,7 +6180,7 @@
 "who":"kenji",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/kenji-concept3/kenji3-h6-ponytail-full-761.webp"
+"art/candidates/portraits/kenji-concept3/kenji3-h6-ponytail-full-761.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -6191,9 +6191,9 @@
 "review":"kenji-concept-3",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/kenji-concept3/kenji3-h6-ponytail-full-761.webp"
+"src":"art/candidates/portraits/kenji-concept3/kenji3-h6-ponytail-full-761.webp"
 },
-"thumb":"tools/assets/thumbs/7da7f8887c7367e4.webp"
+"thumb":"tools/assets/thumbs/a2167ad3aca1cee5.webp"
 },
 {
 "id":"portrait/kenji3-x1-smile-761",
@@ -6202,7 +6202,7 @@
 "who":"kenji",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/kenji-concept3/kenji3-x1-smile-761.webp"
+"art/candidates/portraits/kenji-concept3/kenji3-x1-smile-761.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -6213,9 +6213,9 @@
 "review":"kenji-concept-3",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/kenji-concept3/kenji3-x1-smile-761.webp"
+"src":"art/candidates/portraits/kenji-concept3/kenji3-x1-smile-761.webp"
 },
-"thumb":"tools/assets/thumbs/9606e7ba6bd77c24.webp"
+"thumb":"tools/assets/thumbs/9a1f91ed2a7ffe64.webp"
 },
 {
 "id":"portrait/kenji3-x1-smile-762",
@@ -6224,7 +6224,7 @@
 "who":"kenji",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/kenji-concept3/kenji3-x1-smile-762.webp"
+"art/candidates/portraits/kenji-concept3/kenji3-x1-smile-762.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -6235,9 +6235,9 @@
 "review":"kenji-concept-3",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/kenji-concept3/kenji3-x1-smile-762.webp"
+"src":"art/candidates/portraits/kenji-concept3/kenji3-x1-smile-762.webp"
 },
-"thumb":"tools/assets/thumbs/dbb45da9813a1819.webp"
+"thumb":"tools/assets/thumbs/6092a2f3ac8562af.webp"
 },
 {
 "id":"portrait/kenji3-x2-small-grin-761",
@@ -6246,7 +6246,7 @@
 "who":"kenji",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/kenji-concept3/kenji3-x2-small-grin-761.webp"
+"art/candidates/portraits/kenji-concept3/kenji3-x2-small-grin-761.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -6257,9 +6257,9 @@
 "review":"kenji-concept-3",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/kenji-concept3/kenji3-x2-small-grin-761.webp"
+"src":"art/candidates/portraits/kenji-concept3/kenji3-x2-small-grin-761.webp"
 },
-"thumb":"tools/assets/thumbs/2275a7e05844d892.webp"
+"thumb":"tools/assets/thumbs/cc3e4001822d7ef7.webp"
 },
 {
 "id":"portrait/kenji3-x2-small-grin-762",
@@ -6268,7 +6268,7 @@
 "who":"kenji",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/kenji-concept3/kenji3-x2-small-grin-762.webp"
+"art/candidates/portraits/kenji-concept3/kenji3-x2-small-grin-762.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -6279,9 +6279,9 @@
 "review":"kenji-concept-3",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/kenji-concept3/kenji3-x2-small-grin-762.webp"
+"src":"art/candidates/portraits/kenji-concept3/kenji3-x2-small-grin-762.webp"
 },
-"thumb":"tools/assets/thumbs/960ddb5ab96c709a.webp"
+"thumb":"tools/assets/thumbs/35ab393f7fa16af8.webp"
 },
 {
 "id":"portrait/kenji3-x3-open-smile-761",
@@ -6290,7 +6290,7 @@
 "who":"kenji",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/kenji-concept3/kenji3-x3-open-smile-761.webp"
+"art/candidates/portraits/kenji-concept3/kenji3-x3-open-smile-761.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -6301,9 +6301,9 @@
 "review":"kenji-concept-3",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/kenji-concept3/kenji3-x3-open-smile-761.webp"
+"src":"art/candidates/portraits/kenji-concept3/kenji3-x3-open-smile-761.webp"
 },
-"thumb":"tools/assets/thumbs/98432c1bda077f69.webp"
+"thumb":"tools/assets/thumbs/c06b67448c918ca0.webp"
 },
 {
 "id":"portrait/kenji3-x3-open-smile-762",
@@ -6312,7 +6312,7 @@
 "who":"kenji",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/kenji-concept3/kenji3-x3-open-smile-762.webp"
+"art/candidates/portraits/kenji-concept3/kenji3-x3-open-smile-762.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -6323,9 +6323,9 @@
 "review":"kenji-concept-3",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/kenji-concept3/kenji3-x3-open-smile-762.webp"
+"src":"art/candidates/portraits/kenji-concept3/kenji3-x3-open-smile-762.webp"
 },
-"thumb":"tools/assets/thumbs/05b75d982ff90bc3.webp"
+"thumb":"tools/assets/thumbs/9451083e55789413.webp"
 },
 {
 "id":"portrait/bg-blendk20-3501-exact-3401-v2",
@@ -6334,7 +6334,7 @@
 "who":"mio",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/mio-phone-4/bg-blendk20-3501-exact-3401-v2.webp"
+"art/candidates/portraits/mio-phone-4/bg-blendk20-3501-exact-3401-v2.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -6345,9 +6345,9 @@
 "review":"mio-phone-4",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/mio-phone-4/bg-blendk20-3501-exact-3401-v2.webp"
+"src":"art/candidates/portraits/mio-phone-4/bg-blendk20-3501-exact-3401-v2.webp"
 },
-"thumb":"tools/assets/thumbs/3cb7dbffe41ed27a.webp"
+"thumb":"tools/assets/thumbs/6f73059c66cd574a.webp"
 },
 {
 "id":"portrait/bg-blendk20-3501-exact-3403-v2",
@@ -6356,7 +6356,7 @@
 "who":"mio",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/mio-phone-4/bg-blendk20-3501-exact-3403-v2.webp"
+"art/candidates/portraits/mio-phone-4/bg-blendk20-3501-exact-3403-v2.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -6367,9 +6367,9 @@
 "review":"mio-phone-4",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/mio-phone-4/bg-blendk20-3501-exact-3403-v2.webp"
+"src":"art/candidates/portraits/mio-phone-4/bg-blendk20-3501-exact-3403-v2.webp"
 },
-"thumb":"tools/assets/thumbs/e036351b35e09786.webp"
+"thumb":"tools/assets/thumbs/3cdcff3edcc7ea4f.webp"
 },
 {
 "id":"portrait/bg-blendk25-3501-exact-3401-v2",
@@ -6378,7 +6378,7 @@
 "who":"mio",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/mio-phone-4/bg-blendk25-3501-exact-3401-v2.webp"
+"art/candidates/portraits/mio-phone-4/bg-blendk25-3501-exact-3401-v2.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -6389,9 +6389,9 @@
 "review":"mio-phone-4",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/mio-phone-4/bg-blendk25-3501-exact-3401-v2.webp"
+"src":"art/candidates/portraits/mio-phone-4/bg-blendk25-3501-exact-3401-v2.webp"
 },
-"thumb":"tools/assets/thumbs/b3cfc18069a85e92.webp"
+"thumb":"tools/assets/thumbs/9890709177fc924b.webp"
 },
 {
 "id":"portrait/bg-exact-3401-v2",
@@ -6400,7 +6400,7 @@
 "who":"mio",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/mio-phone-4/bg-exact-3401-v2.webp"
+"art/candidates/portraits/mio-phone-4/bg-exact-3401-v2.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -6411,9 +6411,9 @@
 "review":"mio-phone-4",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/mio-phone-4/bg-exact-3401-v2.webp"
+"src":"art/candidates/portraits/mio-phone-4/bg-exact-3401-v2.webp"
 },
-"thumb":"tools/assets/thumbs/2c0c700ef2cef219.webp"
+"thumb":"tools/assets/thumbs/95d36e251a0922b4.webp"
 },
 {
 "id":"portrait/frame-blendk20-3501-exact-3401-v2",
@@ -6422,7 +6422,7 @@
 "who":"mio",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/mio-phone-4/frame-blendk20-3501-exact-3401-v2.webp"
+"art/candidates/portraits/mio-phone-4/frame-blendk20-3501-exact-3401-v2.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -6433,9 +6433,9 @@
 "review":"mio-phone-4",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/mio-phone-4/frame-blendk20-3501-exact-3401-v2.webp"
+"src":"art/candidates/portraits/mio-phone-4/frame-blendk20-3501-exact-3401-v2.webp"
 },
-"thumb":"tools/assets/thumbs/3d795d49ed3c3288.webp"
+"thumb":"tools/assets/thumbs/2147217025bc433c.webp"
 },
 {
 "id":"portrait/frame-blendk20-3501-exact-3403-v2",
@@ -6444,7 +6444,7 @@
 "who":"mio",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/mio-phone-4/frame-blendk20-3501-exact-3403-v2.webp"
+"art/candidates/portraits/mio-phone-4/frame-blendk20-3501-exact-3403-v2.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -6455,9 +6455,9 @@
 "review":"mio-phone-4",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/mio-phone-4/frame-blendk20-3501-exact-3403-v2.webp"
+"src":"art/candidates/portraits/mio-phone-4/frame-blendk20-3501-exact-3403-v2.webp"
 },
-"thumb":"tools/assets/thumbs/2c4e80c676ab5439.webp"
+"thumb":"tools/assets/thumbs/a8974615080ae193.webp"
 },
 {
 "id":"portrait/frame-blendk25-3501-exact-3401-v2",
@@ -6466,7 +6466,7 @@
 "who":"mio",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/mio-phone-4/frame-blendk25-3501-exact-3401-v2.webp"
+"art/candidates/portraits/mio-phone-4/frame-blendk25-3501-exact-3401-v2.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -6477,9 +6477,9 @@
 "review":"mio-phone-4",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/mio-phone-4/frame-blendk25-3501-exact-3401-v2.webp"
+"src":"art/candidates/portraits/mio-phone-4/frame-blendk25-3501-exact-3401-v2.webp"
 },
-"thumb":"tools/assets/thumbs/7ba2767dbf48fec3.webp"
+"thumb":"tools/assets/thumbs/3043da8505360229.webp"
 },
 {
 "id":"portrait/frame-exact-3401-v2",
@@ -6488,7 +6488,7 @@
 "who":"mio",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/mio-phone-4/frame-exact-3401-v2.webp"
+"art/candidates/portraits/mio-phone-4/frame-exact-3401-v2.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -6499,9 +6499,9 @@
 "review":"mio-phone-4",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/mio-phone-4/frame-exact-3401-v2.webp"
+"src":"art/candidates/portraits/mio-phone-4/frame-exact-3401-v2.webp"
 },
-"thumb":"tools/assets/thumbs/f6cddef67aac3b39.webp"
+"thumb":"tools/assets/thumbs/bbdbf0f974344439.webp"
 },
 {
 "id":"portrait/glasses-blend20-3501-exact-3401-v2",
@@ -6510,7 +6510,7 @@
 "who":"mio",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/mio-phone-3/glasses-blend20-3501-exact-3401-v2.webp"
+"art/candidates/portraits/mio-phone-3/glasses-blend20-3501-exact-3401-v2.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -6521,9 +6521,9 @@
 "review":"mio-phone-3",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/mio-phone-3/glasses-blend20-3501-exact-3401-v2.webp"
+"src":"art/candidates/portraits/mio-phone-3/glasses-blend20-3501-exact-3401-v2.webp"
 },
-"thumb":"tools/assets/thumbs/28537522459f60ef.webp"
+"thumb":"tools/assets/thumbs/a4e76dd668beb490.webp"
 },
 {
 "id":"portrait/glasses-blend20-3501-exact-3403-v2",
@@ -6532,7 +6532,7 @@
 "who":"mio",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/mio-phone-3/glasses-blend20-3501-exact-3403-v2.webp"
+"art/candidates/portraits/mio-phone-3/glasses-blend20-3501-exact-3403-v2.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -6543,9 +6543,9 @@
 "review":"mio-phone-3",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/mio-phone-3/glasses-blend20-3501-exact-3403-v2.webp"
+"src":"art/candidates/portraits/mio-phone-3/glasses-blend20-3501-exact-3403-v2.webp"
 },
-"thumb":"tools/assets/thumbs/5aa28ef9e399b0d9.webp"
+"thumb":"tools/assets/thumbs/8d70b73109523d94.webp"
 },
 {
 "id":"portrait/glasses-blend30-3501-exact-3401-v2",
@@ -6554,7 +6554,7 @@
 "who":"mio",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/mio-phone-3/glasses-blend30-3501-exact-3401-v2.webp"
+"art/candidates/portraits/mio-phone-3/glasses-blend30-3501-exact-3401-v2.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -6565,9 +6565,9 @@
 "review":"mio-phone-3",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/mio-phone-3/glasses-blend30-3501-exact-3401-v2.webp"
+"src":"art/candidates/portraits/mio-phone-3/glasses-blend30-3501-exact-3401-v2.webp"
 },
-"thumb":"tools/assets/thumbs/98d0b216933200cb.webp"
+"thumb":"tools/assets/thumbs/a36787665f44c020.webp"
 },
 {
 "id":"portrait/glasses-blend30-3501-exact-3403-v2",
@@ -6576,7 +6576,7 @@
 "who":"mio",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/mio-phone-3/glasses-blend30-3501-exact-3403-v2.webp"
+"art/candidates/portraits/mio-phone-3/glasses-blend30-3501-exact-3403-v2.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -6587,9 +6587,9 @@
 "review":"mio-phone-3",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/mio-phone-3/glasses-blend30-3501-exact-3403-v2.webp"
+"src":"art/candidates/portraits/mio-phone-3/glasses-blend30-3501-exact-3403-v2.webp"
 },
-"thumb":"tools/assets/thumbs/0b8f722d56654783.webp"
+"thumb":"tools/assets/thumbs/eff36b3dba0a7989.webp"
 },
 {
 "id":"portrait/glasses-blendk20-3501-exact-3401-v2",
@@ -6598,7 +6598,7 @@
 "who":"mio",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/mio-phone-3/glasses-blendk20-3501-exact-3401-v2.webp"
+"art/candidates/portraits/mio-phone-3/glasses-blendk20-3501-exact-3401-v2.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -6609,9 +6609,9 @@
 "review":"mio-phone-3",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/mio-phone-3/glasses-blendk20-3501-exact-3401-v2.webp"
+"src":"art/candidates/portraits/mio-phone-3/glasses-blendk20-3501-exact-3401-v2.webp"
 },
-"thumb":"tools/assets/thumbs/70b92ace1220eb81.webp"
+"thumb":"tools/assets/thumbs/6989a99bda8983b2.webp"
 },
 {
 "id":"portrait/glasses-blendk20-3501-exact-3403-v2",
@@ -6620,7 +6620,7 @@
 "who":"mio",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/mio-phone-4/glasses-blendk20-3501-exact-3403-v2.webp"
+"art/candidates/portraits/mio-phone-4/glasses-blendk20-3501-exact-3403-v2.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -6631,9 +6631,9 @@
 "review":"mio-phone-4",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/mio-phone-4/glasses-blendk20-3501-exact-3403-v2.webp"
+"src":"art/candidates/portraits/mio-phone-4/glasses-blendk20-3501-exact-3403-v2.webp"
 },
-"thumb":"tools/assets/thumbs/af30ef856ccf7a4f.webp"
+"thumb":"tools/assets/thumbs/4ea5f9d8267e1649.webp"
 },
 {
 "id":"portrait/glasses-blendk25-3501-exact-3401-v2",
@@ -6642,7 +6642,7 @@
 "who":"mio",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/mio-phone-3/glasses-blendk25-3501-exact-3401-v2.webp"
+"art/candidates/portraits/mio-phone-3/glasses-blendk25-3501-exact-3401-v2.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -6653,9 +6653,9 @@
 "review":"mio-phone-3",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/mio-phone-3/glasses-blendk25-3501-exact-3401-v2.webp"
+"src":"art/candidates/portraits/mio-phone-3/glasses-blendk25-3501-exact-3401-v2.webp"
 },
-"thumb":"tools/assets/thumbs/39628377b5f72a11.webp"
+"thumb":"tools/assets/thumbs/05f80aebbeaa9605.webp"
 },
 {
 "id":"portrait/glasses-clean-3101",
@@ -6664,7 +6664,7 @@
 "who":"mio",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/mio-phone-3/glasses-clean-3101.webp"
+"art/candidates/portraits/mio-phone-3/glasses-clean-3101.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -6675,9 +6675,9 @@
 "review":"mio-phone-3",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/mio-phone-3/glasses-clean-3101.webp"
+"src":"art/candidates/portraits/mio-phone-3/glasses-clean-3101.webp"
 },
-"thumb":"tools/assets/thumbs/9f0ab6135967d5ae.webp"
+"thumb":"tools/assets/thumbs/fac9f3fc38839dc6.webp"
 },
 {
 "id":"portrait/glasses-clean-3102",
@@ -6686,7 +6686,7 @@
 "who":"mio",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/mio-phone-3/glasses-clean-3102.webp"
+"art/candidates/portraits/mio-phone-3/glasses-clean-3102.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -6697,9 +6697,9 @@
 "review":"mio-phone-3",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/mio-phone-3/glasses-clean-3102.webp"
+"src":"art/candidates/portraits/mio-phone-3/glasses-clean-3102.webp"
 },
-"thumb":"tools/assets/thumbs/8a539ef21a6a2e35.webp"
+"thumb":"tools/assets/thumbs/bbd82589c505f242.webp"
 },
 {
 "id":"portrait/glasses-clean-3103",
@@ -6708,7 +6708,7 @@
 "who":"mio",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/mio-phone-3/glasses-clean-3103.webp"
+"art/candidates/portraits/mio-phone-3/glasses-clean-3103.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -6719,9 +6719,9 @@
 "review":"mio-phone-3",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/mio-phone-3/glasses-clean-3103.webp"
+"src":"art/candidates/portraits/mio-phone-3/glasses-clean-3103.webp"
 },
-"thumb":"tools/assets/thumbs/cf887e5b66293bc7.webp"
+"thumb":"tools/assets/thumbs/017c65f8c46eb201.webp"
 },
 {
 "id":"portrait/glasses-clean2-3111",
@@ -6730,7 +6730,7 @@
 "who":"mio",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/mio-phone-3/glasses-clean2-3111.webp"
+"art/candidates/portraits/mio-phone-3/glasses-clean2-3111.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -6741,9 +6741,9 @@
 "review":"mio-phone-3",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/mio-phone-3/glasses-clean2-3111.webp"
+"src":"art/candidates/portraits/mio-phone-3/glasses-clean2-3111.webp"
 },
-"thumb":"tools/assets/thumbs/db7d7274de58120f.webp"
+"thumb":"tools/assets/thumbs/06ad51c6d6d52fb2.webp"
 },
 {
 "id":"portrait/glasses-clean2-3112",
@@ -6752,7 +6752,7 @@
 "who":"mio",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/mio-phone-3/glasses-clean2-3112.webp"
+"art/candidates/portraits/mio-phone-3/glasses-clean2-3112.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -6763,9 +6763,9 @@
 "review":"mio-phone-3",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/mio-phone-3/glasses-clean2-3112.webp"
+"src":"art/candidates/portraits/mio-phone-3/glasses-clean2-3112.webp"
 },
-"thumb":"tools/assets/thumbs/7aa5475b364a8577.webp"
+"thumb":"tools/assets/thumbs/21b095859c1258ca.webp"
 },
 {
 "id":"portrait/glasses-clean2-3113",
@@ -6774,7 +6774,7 @@
 "who":"mio",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/mio-phone-3/glasses-clean2-3113.webp"
+"art/candidates/portraits/mio-phone-3/glasses-clean2-3113.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -6785,9 +6785,9 @@
 "review":"mio-phone-3",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/mio-phone-3/glasses-clean2-3113.webp"
+"src":"art/candidates/portraits/mio-phone-3/glasses-clean2-3113.webp"
 },
-"thumb":"tools/assets/thumbs/799ba09fd2b9a978.webp"
+"thumb":"tools/assets/thumbs/3d16c332a984bbdc.webp"
 },
 {
 "id":"portrait/glasses-comp",
@@ -6796,7 +6796,7 @@
 "who":"mio",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/mio-phone-3/glasses-comp.webp"
+"art/candidates/portraits/mio-phone-3/glasses-comp.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -6807,9 +6807,9 @@
 "review":"mio-phone-3",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/mio-phone-3/glasses-comp.webp"
+"src":"art/candidates/portraits/mio-phone-3/glasses-comp.webp"
 },
-"thumb":"tools/assets/thumbs/d26f417498c86837.webp"
+"thumb":"tools/assets/thumbs/2c41b1f419f64a63.webp"
 },
 {
 "id":"portrait/glasses-dip-3301",
@@ -6818,7 +6818,7 @@
 "who":"mio",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/mio-phone-3/glasses-dip-3301.webp"
+"art/candidates/portraits/mio-phone-3/glasses-dip-3301.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -6829,9 +6829,9 @@
 "review":"mio-phone-3",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/mio-phone-3/glasses-dip-3301.webp"
+"src":"art/candidates/portraits/mio-phone-3/glasses-dip-3301.webp"
 },
-"thumb":"tools/assets/thumbs/1648ab1eacca975d.webp"
+"thumb":"tools/assets/thumbs/485c083d48bc2ab4.webp"
 },
 {
 "id":"portrait/glasses-dip-3302",
@@ -6840,7 +6840,7 @@
 "who":"mio",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/mio-phone-3/glasses-dip-3302.webp"
+"art/candidates/portraits/mio-phone-3/glasses-dip-3302.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -6851,9 +6851,9 @@
 "review":"mio-phone-3",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/mio-phone-3/glasses-dip-3302.webp"
+"src":"art/candidates/portraits/mio-phone-3/glasses-dip-3302.webp"
 },
-"thumb":"tools/assets/thumbs/ef7cb36adc9326fb.webp"
+"thumb":"tools/assets/thumbs/06093548996903b2.webp"
 },
 {
 "id":"portrait/glasses-dipk-3301",
@@ -6862,7 +6862,7 @@
 "who":"mio",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/mio-phone-3/glasses-dipk-3301.webp"
+"art/candidates/portraits/mio-phone-3/glasses-dipk-3301.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -6873,9 +6873,9 @@
 "review":"mio-phone-3",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/mio-phone-3/glasses-dipk-3301.webp"
+"src":"art/candidates/portraits/mio-phone-3/glasses-dipk-3301.webp"
 },
-"thumb":"tools/assets/thumbs/95d8739260840a43.webp"
+"thumb":"tools/assets/thumbs/fb4089e453400b6d.webp"
 },
 {
 "id":"portrait/glasses-dipk-3302",
@@ -6884,7 +6884,7 @@
 "who":"mio",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/mio-phone-3/glasses-dipk-3302.webp"
+"art/candidates/portraits/mio-phone-3/glasses-dipk-3302.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -6895,9 +6895,9 @@
 "review":"mio-phone-3",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/mio-phone-3/glasses-dipk-3302.webp"
+"src":"art/candidates/portraits/mio-phone-3/glasses-dipk-3302.webp"
 },
-"thumb":"tools/assets/thumbs/fca379f975c4ed23.webp"
+"thumb":"tools/assets/thumbs/220b1783854ccf0a.webp"
 },
 {
 "id":"portrait/glasses-dipk-3303",
@@ -6906,7 +6906,7 @@
 "who":"mio",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/mio-phone-3/glasses-dipk-3303.webp"
+"art/candidates/portraits/mio-phone-3/glasses-dipk-3303.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -6917,9 +6917,9 @@
 "review":"mio-phone-3",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/mio-phone-3/glasses-dipk-3303.webp"
+"src":"art/candidates/portraits/mio-phone-3/glasses-dipk-3303.webp"
 },
-"thumb":"tools/assets/thumbs/76a1c021572a0ba6.webp"
+"thumb":"tools/assets/thumbs/875fa548e1d298ed.webp"
 },
 {
 "id":"portrait/glasses-dipk-3304",
@@ -6928,7 +6928,7 @@
 "who":"mio",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/mio-phone-3/glasses-dipk-3304.webp"
+"art/candidates/portraits/mio-phone-3/glasses-dipk-3304.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -6939,9 +6939,9 @@
 "review":"mio-phone-3",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/mio-phone-3/glasses-dipk-3304.webp"
+"src":"art/candidates/portraits/mio-phone-3/glasses-dipk-3304.webp"
 },
-"thumb":"tools/assets/thumbs/5f92e8cebb8e8983.webp"
+"thumb":"tools/assets/thumbs/6e104b94fd0b8ffa.webp"
 },
 {
 "id":"portrait/glasses-exact-3401",
@@ -6950,7 +6950,7 @@
 "who":"mio",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/mio-phone-3/glasses-exact-3401.webp"
+"art/candidates/portraits/mio-phone-3/glasses-exact-3401.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -6961,9 +6961,9 @@
 "review":"mio-phone-3",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/mio-phone-3/glasses-exact-3401.webp"
+"src":"art/candidates/portraits/mio-phone-3/glasses-exact-3401.webp"
 },
-"thumb":"tools/assets/thumbs/c64d165b2c5f573c.webp"
+"thumb":"tools/assets/thumbs/79a415f3c95d126f.webp"
 },
 {
 "id":"portrait/glasses-exact-3401-v2",
@@ -6972,7 +6972,7 @@
 "who":"mio",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/mio-phone-3/glasses-exact-3401-v2.webp"
+"art/candidates/portraits/mio-phone-3/glasses-exact-3401-v2.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -6983,9 +6983,9 @@
 "review":"mio-phone-3",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/mio-phone-3/glasses-exact-3401-v2.webp"
+"src":"art/candidates/portraits/mio-phone-3/glasses-exact-3401-v2.webp"
 },
-"thumb":"tools/assets/thumbs/a95074eb5cbb415f.webp"
+"thumb":"tools/assets/thumbs/7c91ae4846b62817.webp"
 },
 {
 "id":"portrait/glasses-exact-3402",
@@ -6994,7 +6994,7 @@
 "who":"mio",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/mio-phone-3/glasses-exact-3402.webp"
+"art/candidates/portraits/mio-phone-3/glasses-exact-3402.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -7005,9 +7005,9 @@
 "review":"mio-phone-3",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/mio-phone-3/glasses-exact-3402.webp"
+"src":"art/candidates/portraits/mio-phone-3/glasses-exact-3402.webp"
 },
-"thumb":"tools/assets/thumbs/d6ae4ddaa6ddc406.webp"
+"thumb":"tools/assets/thumbs/d389f0f7bcdc58e9.webp"
 },
 {
 "id":"portrait/glasses-exact-3403",
@@ -7016,7 +7016,7 @@
 "who":"mio",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/mio-phone-3/glasses-exact-3403.webp"
+"art/candidates/portraits/mio-phone-3/glasses-exact-3403.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -7027,9 +7027,9 @@
 "review":"mio-phone-3",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/mio-phone-3/glasses-exact-3403.webp"
+"src":"art/candidates/portraits/mio-phone-3/glasses-exact-3403.webp"
 },
-"thumb":"tools/assets/thumbs/7b0616b473d70a3b.webp"
+"thumb":"tools/assets/thumbs/6e2b37135e036c50.webp"
 },
 {
 "id":"portrait/glasses-exact-3403-v2",
@@ -7038,7 +7038,7 @@
 "who":"mio",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/mio-phone-3/glasses-exact-3403-v2.webp"
+"art/candidates/portraits/mio-phone-3/glasses-exact-3403-v2.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -7049,9 +7049,9 @@
 "review":"mio-phone-3",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/mio-phone-3/glasses-exact-3403-v2.webp"
+"src":"art/candidates/portraits/mio-phone-3/glasses-exact-3403-v2.webp"
 },
-"thumb":"tools/assets/thumbs/6c7534e6d45f6161.webp"
+"thumb":"tools/assets/thumbs/4f62594731713b43.webp"
 },
 {
 "id":"portrait/glasses-exact-3404-v2",
@@ -7060,7 +7060,7 @@
 "who":"mio",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/mio-phone-3/glasses-exact-3404-v2.webp"
+"art/candidates/portraits/mio-phone-3/glasses-exact-3404-v2.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -7071,9 +7071,9 @@
 "review":"mio-phone-3",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/mio-phone-3/glasses-exact-3404-v2.webp"
+"src":"art/candidates/portraits/mio-phone-3/glasses-exact-3404-v2.webp"
 },
-"thumb":"tools/assets/thumbs/d1f59e6e2d085d7f.webp"
+"thumb":"tools/assets/thumbs/f2b226cae078ba49.webp"
 },
 {
 "id":"portrait/glasses-ipa-3201",
@@ -7082,7 +7082,7 @@
 "who":"mio",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/mio-phone-3/glasses-ipa-3201.webp"
+"art/candidates/portraits/mio-phone-3/glasses-ipa-3201.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -7093,9 +7093,9 @@
 "review":"mio-phone-3",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/mio-phone-3/glasses-ipa-3201.webp"
+"src":"art/candidates/portraits/mio-phone-3/glasses-ipa-3201.webp"
 },
-"thumb":"tools/assets/thumbs/cfb946f86cadbd01.webp"
+"thumb":"tools/assets/thumbs/c49956dc9c97f60d.webp"
 },
 {
 "id":"portrait/glasses-ipa-3202",
@@ -7104,7 +7104,7 @@
 "who":"mio",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/mio-phone-3/glasses-ipa-3202.webp"
+"art/candidates/portraits/mio-phone-3/glasses-ipa-3202.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -7115,9 +7115,9 @@
 "review":"mio-phone-3",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/mio-phone-3/glasses-ipa-3202.webp"
+"src":"art/candidates/portraits/mio-phone-3/glasses-ipa-3202.webp"
 },
-"thumb":"tools/assets/thumbs/8f4a5a79c8769007.webp"
+"thumb":"tools/assets/thumbs/79e52bb7f1ccdef3.webp"
 },
 {
 "id":"portrait/mio-mio-expressions-sheet",
@@ -7126,7 +7126,7 @@
 "who":"mio",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/mio-expressions-sheet.png"
+"art/candidates/portraits/mio-expressions-sheet.png"
 ],
 "status":"rejected",
 "status_from":{
@@ -7138,9 +7138,9 @@
 "review":null,
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/mio-expressions-sheet.png"
+"src":"art/candidates/portraits/mio-expressions-sheet.png"
 },
-"thumb":"tools/assets/thumbs/ebbf8edd4136ea82.webp",
+"thumb":"tools/assets/thumbs/11ff9f9f935b4a9f.webp",
 "tags":[
 "sheet"
 ]
@@ -7152,7 +7152,7 @@
 "who":"mio",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/mio-phone/mio-phone-two-923-cut.webp"
+"art/candidates/portraits/mio-phone/mio-phone-two-923-cut.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -7163,9 +7163,9 @@
 "review":"mio-phone",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/mio-phone/mio-phone-two-923-cut.webp"
+"src":"art/candidates/portraits/mio-phone/mio-phone-two-923-cut.webp"
 },
-"thumb":"tools/assets/thumbs/8123e914500ad92d.webp"
+"thumb":"tools/assets/thumbs/477ab1ebeb2e3fae.webp"
 },
 {
 "id":"portrait/mio-phone2-ipa7a-1002",
@@ -7174,7 +7174,7 @@
 "who":"mio",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/mio-phone-2/mio-phone2-ipa7a-1002.webp"
+"art/candidates/portraits/mio-phone-2/mio-phone2-ipa7a-1002.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -7185,9 +7185,9 @@
 "review":"mio-phone-2",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/mio-phone-2/mio-phone2-ipa7a-1002.webp"
+"src":"art/candidates/portraits/mio-phone-2/mio-phone2-ipa7a-1002.webp"
 },
-"thumb":"tools/assets/thumbs/a61bf11b61ec2a05.webp"
+"thumb":"tools/assets/thumbs/242c13298852b595.webp"
 },
 {
 "id":"portrait/mio-phone2-ipa7a-1002-cut",
@@ -7196,7 +7196,7 @@
 "who":"mio",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/mio-phone-2/mio-phone2-ipa7a-1002-cut.webp"
+"art/candidates/portraits/mio-phone-2/mio-phone2-ipa7a-1002-cut.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -7207,9 +7207,9 @@
 "review":"mio-phone-2",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/mio-phone-2/mio-phone2-ipa7a-1002-cut.webp"
+"src":"art/candidates/portraits/mio-phone-2/mio-phone2-ipa7a-1002-cut.webp"
 },
-"thumb":"tools/assets/thumbs/d553a768f504d111.webp"
+"thumb":"tools/assets/thumbs/b450520969dc3afd.webp"
 },
 {
 "id":"portrait/mio-phone2-ipa7a-1003",
@@ -7218,7 +7218,7 @@
 "who":"mio",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/mio-phone-2/mio-phone2-ipa7a-1003.webp"
+"art/candidates/portraits/mio-phone-2/mio-phone2-ipa7a-1003.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -7229,9 +7229,9 @@
 "review":"mio-phone-2",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/mio-phone-2/mio-phone2-ipa7a-1003.webp"
+"src":"art/candidates/portraits/mio-phone-2/mio-phone2-ipa7a-1003.webp"
 },
-"thumb":"tools/assets/thumbs/2327b0b2341a838c.webp"
+"thumb":"tools/assets/thumbs/5a53099b17271307.webp"
 },
 {
 "id":"portrait/mio-phone2-ipa7a-1010",
@@ -7240,7 +7240,7 @@
 "who":"mio",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/mio-phone-2/mio-phone2-ipa7a-1010.webp"
+"art/candidates/portraits/mio-phone-2/mio-phone2-ipa7a-1010.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -7251,9 +7251,9 @@
 "review":"mio-phone-2",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/mio-phone-2/mio-phone2-ipa7a-1010.webp"
+"src":"art/candidates/portraits/mio-phone-2/mio-phone2-ipa7a-1010.webp"
 },
-"thumb":"tools/assets/thumbs/0ad5d9553a21b589.webp"
+"thumb":"tools/assets/thumbs/a46a912140d9565c.webp"
 },
 {
 "id":"portrait/mio-phone2-ipa7a-1010-cut",
@@ -7262,7 +7262,7 @@
 "who":"mio",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/mio-phone-2/mio-phone2-ipa7a-1010-cut.webp"
+"art/candidates/portraits/mio-phone-2/mio-phone2-ipa7a-1010-cut.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -7273,9 +7273,9 @@
 "review":"mio-phone-2",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/mio-phone-2/mio-phone2-ipa7a-1010-cut.webp"
+"src":"art/candidates/portraits/mio-phone-2/mio-phone2-ipa7a-1010-cut.webp"
 },
-"thumb":"tools/assets/thumbs/aa0b4f8acb7012fa.webp"
+"thumb":"tools/assets/thumbs/9a339a4f25c95f59.webp"
 },
 {
 "id":"portrait/mio-phone2-ipa7a-1011",
@@ -7284,7 +7284,7 @@
 "who":"mio",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/mio-phone-2/mio-phone2-ipa7a-1011.webp"
+"art/candidates/portraits/mio-phone-2/mio-phone2-ipa7a-1011.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -7295,9 +7295,9 @@
 "review":"mio-phone-2",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/mio-phone-2/mio-phone2-ipa7a-1011.webp"
+"src":"art/candidates/portraits/mio-phone-2/mio-phone2-ipa7a-1011.webp"
 },
-"thumb":"tools/assets/thumbs/598ca7fe50c008bb.webp"
+"thumb":"tools/assets/thumbs/9f2142db89dea8db.webp"
 },
 {
 "id":"portrait/mio-phone2-ipa7a-1011-cut",
@@ -7306,7 +7306,7 @@
 "who":"mio",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/mio-phone-2/mio-phone2-ipa7a-1011-cut.webp"
+"art/candidates/portraits/mio-phone-2/mio-phone2-ipa7a-1011-cut.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -7317,9 +7317,9 @@
 "review":"mio-phone-2",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/mio-phone-2/mio-phone2-ipa7a-1011-cut.webp"
+"src":"art/candidates/portraits/mio-phone-2/mio-phone2-ipa7a-1011-cut.webp"
 },
-"thumb":"tools/assets/thumbs/caa92b60d719d25c.webp"
+"thumb":"tools/assets/thumbs/85d177049eed86fa.webp"
 },
 {
 "id":"portrait/mio-phone2-ipa7a-1012",
@@ -7328,7 +7328,7 @@
 "who":"mio",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/mio-phone-2/mio-phone2-ipa7a-1012.webp"
+"art/candidates/portraits/mio-phone-2/mio-phone2-ipa7a-1012.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -7339,9 +7339,9 @@
 "review":"mio-phone-2",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/mio-phone-2/mio-phone2-ipa7a-1012.webp"
+"src":"art/candidates/portraits/mio-phone-2/mio-phone2-ipa7a-1012.webp"
 },
-"thumb":"tools/assets/thumbs/ce16ec5650537b7a.webp"
+"thumb":"tools/assets/thumbs/294da82c2b14e52b.webp"
 },
 {
 "id":"portrait/mio-phone2-ipa7a-1012-cut",
@@ -7350,7 +7350,7 @@
 "who":"mio",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/mio-phone-2/mio-phone2-ipa7a-1012-cut.webp"
+"art/candidates/portraits/mio-phone-2/mio-phone2-ipa7a-1012-cut.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -7361,9 +7361,9 @@
 "review":"mio-phone-2",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/mio-phone-2/mio-phone2-ipa7a-1012-cut.webp"
+"src":"art/candidates/portraits/mio-phone-2/mio-phone2-ipa7a-1012-cut.webp"
 },
-"thumb":"tools/assets/thumbs/143db38378c4a20d.webp"
+"thumb":"tools/assets/thumbs/40e76357387b1a4a.webp"
 },
 {
 "id":"portrait/mio-phone2-ipa7b-1007",
@@ -7372,7 +7372,7 @@
 "who":"mio",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/mio-phone-2/mio-phone2-ipa7b-1007.webp"
+"art/candidates/portraits/mio-phone-2/mio-phone2-ipa7b-1007.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -7383,9 +7383,9 @@
 "review":"mio-phone-2",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/mio-phone-2/mio-phone2-ipa7b-1007.webp"
+"src":"art/candidates/portraits/mio-phone-2/mio-phone2-ipa7b-1007.webp"
 },
-"thumb":"tools/assets/thumbs/9472d933a76a7d8b.webp"
+"thumb":"tools/assets/thumbs/23c7d7239a5adf56.webp"
 },
 {
 "id":"portrait/mio-phone2-ipa7b-1007-cut",
@@ -7394,7 +7394,7 @@
 "who":"mio",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/mio-phone-2/mio-phone2-ipa7b-1007-cut.webp"
+"art/candidates/portraits/mio-phone-2/mio-phone2-ipa7b-1007-cut.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -7405,9 +7405,9 @@
 "review":"mio-phone-2",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/mio-phone-2/mio-phone2-ipa7b-1007-cut.webp"
+"src":"art/candidates/portraits/mio-phone-2/mio-phone2-ipa7b-1007-cut.webp"
 },
-"thumb":"tools/assets/thumbs/bba7f38feff36963.webp"
+"thumb":"tools/assets/thumbs/afcbba9b64d978d1.webp"
 },
 {
 "id":"portrait/mio-phone2-ipa7b-1008",
@@ -7416,7 +7416,7 @@
 "who":"mio",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/mio-phone-2/mio-phone2-ipa7b-1008.webp"
+"art/candidates/portraits/mio-phone-2/mio-phone2-ipa7b-1008.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -7427,9 +7427,9 @@
 "review":"mio-phone-2",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/mio-phone-2/mio-phone2-ipa7b-1008.webp"
+"src":"art/candidates/portraits/mio-phone-2/mio-phone2-ipa7b-1008.webp"
 },
-"thumb":"tools/assets/thumbs/e7557d8a0a318e74.webp"
+"thumb":"tools/assets/thumbs/84bb700ddfede6ed.webp"
 },
 {
 "id":"portrait/mio-phone2-ipa7b-1008-cut",
@@ -7438,7 +7438,7 @@
 "who":"mio",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/mio-phone-2/mio-phone2-ipa7b-1008-cut.webp"
+"art/candidates/portraits/mio-phone-2/mio-phone2-ipa7b-1008-cut.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -7449,9 +7449,9 @@
 "review":"mio-phone-2",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/mio-phone-2/mio-phone2-ipa7b-1008-cut.webp"
+"src":"art/candidates/portraits/mio-phone-2/mio-phone2-ipa7b-1008-cut.webp"
 },
-"thumb":"tools/assets/thumbs/1e979077d8ee3bf6.webp"
+"thumb":"tools/assets/thumbs/267379045946b7a1.webp"
 },
 {
 "id":"portrait/mio-phone2-ipa7b-1009",
@@ -7460,7 +7460,7 @@
 "who":"mio",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/mio-phone-2/mio-phone2-ipa7b-1009.webp"
+"art/candidates/portraits/mio-phone-2/mio-phone2-ipa7b-1009.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -7471,9 +7471,9 @@
 "review":"mio-phone-2",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/mio-phone-2/mio-phone2-ipa7b-1009.webp"
+"src":"art/candidates/portraits/mio-phone-2/mio-phone2-ipa7b-1009.webp"
 },
-"thumb":"tools/assets/thumbs/7853433648dda675.webp"
+"thumb":"tools/assets/thumbs/1c01aa256c1e3dc1.webp"
 },
 {
 "id":"portrait/mio-phone2-ipaa-1001",
@@ -7482,7 +7482,7 @@
 "who":"mio",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/mio-phone-2/mio-phone2-ipaa-1001.webp"
+"art/candidates/portraits/mio-phone-2/mio-phone2-ipaa-1001.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -7493,9 +7493,9 @@
 "review":"mio-phone-2",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/mio-phone-2/mio-phone2-ipaa-1001.webp"
+"src":"art/candidates/portraits/mio-phone-2/mio-phone2-ipaa-1001.webp"
 },
-"thumb":"tools/assets/thumbs/d274d194d08434fd.webp"
+"thumb":"tools/assets/thumbs/05d20e8eebbaf3fa.webp"
 },
 {
 "id":"portrait/mio-phone2-ipaa-1001-cut",
@@ -7504,7 +7504,7 @@
 "who":"mio",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/mio-phone-2/mio-phone2-ipaa-1001-cut.webp"
+"art/candidates/portraits/mio-phone-2/mio-phone2-ipaa-1001-cut.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -7515,9 +7515,9 @@
 "review":"mio-phone-2",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/mio-phone-2/mio-phone2-ipaa-1001-cut.webp"
+"src":"art/candidates/portraits/mio-phone-2/mio-phone2-ipaa-1001-cut.webp"
 },
-"thumb":"tools/assets/thumbs/83ab74fd7f4fc9f2.webp"
+"thumb":"tools/assets/thumbs/fcd2bf2d0b1173ad.webp"
 },
 {
 "id":"portrait/mio-phone2-ipaa-1002",
@@ -7526,7 +7526,7 @@
 "who":"mio",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/mio-phone-2/mio-phone2-ipaa-1002.webp"
+"art/candidates/portraits/mio-phone-2/mio-phone2-ipaa-1002.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -7537,9 +7537,9 @@
 "review":"mio-phone-2",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/mio-phone-2/mio-phone2-ipaa-1002.webp"
+"src":"art/candidates/portraits/mio-phone-2/mio-phone2-ipaa-1002.webp"
 },
-"thumb":"tools/assets/thumbs/7a1a8321eed1b490.webp"
+"thumb":"tools/assets/thumbs/d18be1fb2f322c6e.webp"
 },
 {
 "id":"portrait/mio-phone2-ipaa-1002-cut",
@@ -7548,7 +7548,7 @@
 "who":"mio",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/mio-phone-2/mio-phone2-ipaa-1002-cut.webp"
+"art/candidates/portraits/mio-phone-2/mio-phone2-ipaa-1002-cut.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -7559,9 +7559,9 @@
 "review":"mio-phone-2",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/mio-phone-2/mio-phone2-ipaa-1002-cut.webp"
+"src":"art/candidates/portraits/mio-phone-2/mio-phone2-ipaa-1002-cut.webp"
 },
-"thumb":"tools/assets/thumbs/bfedf7688ab365bd.webp"
+"thumb":"tools/assets/thumbs/33aa2aee98e2faa0.webp"
 },
 {
 "id":"portrait/mio-phone2-ipaa-1003",
@@ -7570,7 +7570,7 @@
 "who":"mio",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/mio-phone-2/mio-phone2-ipaa-1003.webp"
+"art/candidates/portraits/mio-phone-2/mio-phone2-ipaa-1003.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -7581,9 +7581,9 @@
 "review":"mio-phone-2",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/mio-phone-2/mio-phone2-ipaa-1003.webp"
+"src":"art/candidates/portraits/mio-phone-2/mio-phone2-ipaa-1003.webp"
 },
-"thumb":"tools/assets/thumbs/e916a70d6859f98f.webp"
+"thumb":"tools/assets/thumbs/dc19811cd8495788.webp"
 },
 {
 "id":"portrait/mio-phone2-ipaa-1003-cut",
@@ -7592,7 +7592,7 @@
 "who":"mio",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/mio-phone-2/mio-phone2-ipaa-1003-cut.webp"
+"art/candidates/portraits/mio-phone-2/mio-phone2-ipaa-1003-cut.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -7603,9 +7603,9 @@
 "review":"mio-phone-2",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/mio-phone-2/mio-phone2-ipaa-1003-cut.webp"
+"src":"art/candidates/portraits/mio-phone-2/mio-phone2-ipaa-1003-cut.webp"
 },
-"thumb":"tools/assets/thumbs/2e2cb4fe84375f75.webp"
+"thumb":"tools/assets/thumbs/ab54a3977b563f58.webp"
 },
 {
 "id":"portrait/mio-phone2-ipab-1004",
@@ -7614,7 +7614,7 @@
 "who":"mio",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/mio-phone-2/mio-phone2-ipab-1004.webp"
+"art/candidates/portraits/mio-phone-2/mio-phone2-ipab-1004.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -7625,9 +7625,9 @@
 "review":"mio-phone-2",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/mio-phone-2/mio-phone2-ipab-1004.webp"
+"src":"art/candidates/portraits/mio-phone-2/mio-phone2-ipab-1004.webp"
 },
-"thumb":"tools/assets/thumbs/b47fc7d6ac852cdb.webp"
+"thumb":"tools/assets/thumbs/06633cfa0131aea0.webp"
 },
 {
 "id":"portrait/mio-phone2-ipab-1004-cut",
@@ -7636,7 +7636,7 @@
 "who":"mio",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/mio-phone-2/mio-phone2-ipab-1004-cut.webp"
+"art/candidates/portraits/mio-phone-2/mio-phone2-ipab-1004-cut.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -7647,9 +7647,9 @@
 "review":"mio-phone-2",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/mio-phone-2/mio-phone2-ipab-1004-cut.webp"
+"src":"art/candidates/portraits/mio-phone-2/mio-phone2-ipab-1004-cut.webp"
 },
-"thumb":"tools/assets/thumbs/e6ebff78c8574721.webp"
+"thumb":"tools/assets/thumbs/30a814e4b0870296.webp"
 },
 {
 "id":"portrait/mio-phone2-ipab-1005",
@@ -7658,7 +7658,7 @@
 "who":"mio",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/mio-phone-2/mio-phone2-ipab-1005.webp"
+"art/candidates/portraits/mio-phone-2/mio-phone2-ipab-1005.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -7669,9 +7669,9 @@
 "review":"mio-phone-2",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/mio-phone-2/mio-phone2-ipab-1005.webp"
+"src":"art/candidates/portraits/mio-phone-2/mio-phone2-ipab-1005.webp"
 },
-"thumb":"tools/assets/thumbs/ffecb5e44b440d69.webp"
+"thumb":"tools/assets/thumbs/a85a565343f950f8.webp"
 },
 {
 "id":"portrait/mio-phone2-ipab-1005-cut",
@@ -7680,7 +7680,7 @@
 "who":"mio",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/mio-phone-2/mio-phone2-ipab-1005-cut.webp"
+"art/candidates/portraits/mio-phone-2/mio-phone2-ipab-1005-cut.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -7691,9 +7691,9 @@
 "review":"mio-phone-2",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/mio-phone-2/mio-phone2-ipab-1005-cut.webp"
+"src":"art/candidates/portraits/mio-phone-2/mio-phone2-ipab-1005-cut.webp"
 },
-"thumb":"tools/assets/thumbs/00c26d6f94fab5d3.webp"
+"thumb":"tools/assets/thumbs/508f934a044d3a63.webp"
 },
 {
 "id":"portrait/mio-phone2-ipab-1006",
@@ -7702,7 +7702,7 @@
 "who":"mio",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/mio-phone-2/mio-phone2-ipab-1006.webp"
+"art/candidates/portraits/mio-phone-2/mio-phone2-ipab-1006.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -7713,9 +7713,9 @@
 "review":"mio-phone-2",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/mio-phone-2/mio-phone2-ipab-1006.webp"
+"src":"art/candidates/portraits/mio-phone-2/mio-phone2-ipab-1006.webp"
 },
-"thumb":"tools/assets/thumbs/459278fedffd1d4b.webp"
+"thumb":"tools/assets/thumbs/c303944f63efdd4f.webp"
 },
 {
 "id":"portrait/mio-phone2-ipab-1006-cut",
@@ -7724,7 +7724,7 @@
 "who":"mio",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/mio-phone-2/mio-phone2-ipab-1006-cut.webp"
+"art/candidates/portraits/mio-phone-2/mio-phone2-ipab-1006-cut.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -7735,9 +7735,9 @@
 "review":"mio-phone-2",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/mio-phone-2/mio-phone2-ipab-1006-cut.webp"
+"src":"art/candidates/portraits/mio-phone-2/mio-phone2-ipab-1006-cut.webp"
 },
-"thumb":"tools/assets/thumbs/28f7e81b378e9629.webp"
+"thumb":"tools/assets/thumbs/0f8344696d0010aa.webp"
 },
 {
 "id":"portrait/mio-phone2-txta-1001",
@@ -7746,7 +7746,7 @@
 "who":"mio",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/mio-phone-2/mio-phone2-txta-1001.webp"
+"art/candidates/portraits/mio-phone-2/mio-phone2-txta-1001.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -7757,9 +7757,9 @@
 "review":"mio-phone-2",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/mio-phone-2/mio-phone2-txta-1001.webp"
+"src":"art/candidates/portraits/mio-phone-2/mio-phone2-txta-1001.webp"
 },
-"thumb":"tools/assets/thumbs/fb9ae20b99b48087.webp"
+"thumb":"tools/assets/thumbs/a4ccbe3df78ee9e7.webp"
 },
 {
 "id":"portrait/mio-phone2-txta-1002",
@@ -7768,7 +7768,7 @@
 "who":"mio",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/mio-phone-2/mio-phone2-txta-1002.webp"
+"art/candidates/portraits/mio-phone-2/mio-phone2-txta-1002.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -7779,9 +7779,9 @@
 "review":"mio-phone-2",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/mio-phone-2/mio-phone2-txta-1002.webp"
+"src":"art/candidates/portraits/mio-phone-2/mio-phone2-txta-1002.webp"
 },
-"thumb":"tools/assets/thumbs/88cb0ad02a3d82c4.webp"
+"thumb":"tools/assets/thumbs/3f480db5c5093004.webp"
 },
 {
 "id":"portrait/mio-phone2-txta-1003",
@@ -7790,7 +7790,7 @@
 "who":"mio",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/mio-phone-2/mio-phone2-txta-1003.webp"
+"art/candidates/portraits/mio-phone-2/mio-phone2-txta-1003.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -7801,9 +7801,9 @@
 "review":"mio-phone-2",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/mio-phone-2/mio-phone2-txta-1003.webp"
+"src":"art/candidates/portraits/mio-phone-2/mio-phone2-txta-1003.webp"
 },
-"thumb":"tools/assets/thumbs/8b01cd81d58aa2f2.webp"
+"thumb":"tools/assets/thumbs/bbb1b88d6d21275e.webp"
 },
 {
 "id":"portrait/mio-phone3-blend20-3501-exact-3401-v2",
@@ -7812,7 +7812,7 @@
 "who":"mio",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/mio-phone-3/mio-phone3-blend20-3501-exact-3401-v2.webp"
+"art/candidates/portraits/mio-phone-3/mio-phone3-blend20-3501-exact-3401-v2.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -7823,9 +7823,9 @@
 "review":"mio-phone-3",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/mio-phone-3/mio-phone3-blend20-3501-exact-3401-v2.webp"
+"src":"art/candidates/portraits/mio-phone-3/mio-phone3-blend20-3501-exact-3401-v2.webp"
 },
-"thumb":"tools/assets/thumbs/1f4b2057db94a2fd.webp"
+"thumb":"tools/assets/thumbs/328d5cf425f5d449.webp"
 },
 {
 "id":"portrait/mio-phone3-blend20-3501-exact-3403-v2",
@@ -7834,7 +7834,7 @@
 "who":"mio",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/mio-phone-3/mio-phone3-blend20-3501-exact-3403-v2.webp"
+"art/candidates/portraits/mio-phone-3/mio-phone3-blend20-3501-exact-3403-v2.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -7845,9 +7845,9 @@
 "review":"mio-phone-3",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/mio-phone-3/mio-phone3-blend20-3501-exact-3403-v2.webp"
+"src":"art/candidates/portraits/mio-phone-3/mio-phone3-blend20-3501-exact-3403-v2.webp"
 },
-"thumb":"tools/assets/thumbs/e957f3dccb5065df.webp"
+"thumb":"tools/assets/thumbs/07f59b7819dc5afc.webp"
 },
 {
 "id":"portrait/mio-phone3-blend30-3501-exact-3401-v2",
@@ -7856,7 +7856,7 @@
 "who":"mio",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/mio-phone-3/mio-phone3-blend30-3501-exact-3401-v2.webp"
+"art/candidates/portraits/mio-phone-3/mio-phone3-blend30-3501-exact-3401-v2.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -7867,9 +7867,9 @@
 "review":"mio-phone-3",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/mio-phone-3/mio-phone3-blend30-3501-exact-3401-v2.webp"
+"src":"art/candidates/portraits/mio-phone-3/mio-phone3-blend30-3501-exact-3401-v2.webp"
 },
-"thumb":"tools/assets/thumbs/3b572df4d5e9497e.webp"
+"thumb":"tools/assets/thumbs/d175d4904ab79bc6.webp"
 },
 {
 "id":"portrait/mio-phone3-blend30-3501-exact-3403-v2",
@@ -7878,7 +7878,7 @@
 "who":"mio",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/mio-phone-3/mio-phone3-blend30-3501-exact-3403-v2.webp"
+"art/candidates/portraits/mio-phone-3/mio-phone3-blend30-3501-exact-3403-v2.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -7889,9 +7889,9 @@
 "review":"mio-phone-3",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/mio-phone-3/mio-phone3-blend30-3501-exact-3403-v2.webp"
+"src":"art/candidates/portraits/mio-phone-3/mio-phone3-blend30-3501-exact-3403-v2.webp"
 },
-"thumb":"tools/assets/thumbs/0325173ea5f48193.webp"
+"thumb":"tools/assets/thumbs/b182c48e8134ece0.webp"
 },
 {
 "id":"portrait/mio-phone3-blendk20-3501-exact-3401-v2",
@@ -7900,7 +7900,7 @@
 "who":"mio",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/mio-phone-3/mio-phone3-blendk20-3501-exact-3401-v2.webp"
+"art/candidates/portraits/mio-phone-3/mio-phone3-blendk20-3501-exact-3401-v2.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -7911,9 +7911,9 @@
 "review":"mio-phone-3",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/mio-phone-3/mio-phone3-blendk20-3501-exact-3401-v2.webp"
+"src":"art/candidates/portraits/mio-phone-3/mio-phone3-blendk20-3501-exact-3401-v2.webp"
 },
-"thumb":"tools/assets/thumbs/6689af1efaa60e72.webp"
+"thumb":"tools/assets/thumbs/10732d9b0e6b8ecc.webp"
 },
 {
 "id":"portrait/mio-phone3-blendk20-3501-exact-3401-v2-cut",
@@ -7922,7 +7922,7 @@
 "who":"mio",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/mio-phone-3/mio-phone3-blendk20-3501-exact-3401-v2-cut.webp"
+"art/candidates/portraits/mio-phone-3/mio-phone3-blendk20-3501-exact-3401-v2-cut.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -7933,9 +7933,9 @@
 "review":"mio-phone-3",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/mio-phone-3/mio-phone3-blendk20-3501-exact-3401-v2-cut.webp"
+"src":"art/candidates/portraits/mio-phone-3/mio-phone3-blendk20-3501-exact-3401-v2-cut.webp"
 },
-"thumb":"tools/assets/thumbs/03681bb0a8b6081a.webp"
+"thumb":"tools/assets/thumbs/2d0cc1a092098ff8.webp"
 },
 {
 "id":"portrait/mio-phone3-blendk20-3501-exact-3403-v2",
@@ -7944,7 +7944,7 @@
 "who":"mio",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/mio-phone-4/mio-phone3-blendk20-3501-exact-3403-v2.webp"
+"art/candidates/portraits/mio-phone-4/mio-phone3-blendk20-3501-exact-3403-v2.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -7955,9 +7955,9 @@
 "review":"mio-phone-4",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/mio-phone-4/mio-phone3-blendk20-3501-exact-3403-v2.webp"
+"src":"art/candidates/portraits/mio-phone-4/mio-phone3-blendk20-3501-exact-3403-v2.webp"
 },
-"thumb":"tools/assets/thumbs/f5e2cbfc78fb79b8.webp"
+"thumb":"tools/assets/thumbs/554ae88b02d8b151.webp"
 },
 {
 "id":"portrait/mio-phone3-blendk20-3501-exact-3403-v2-cut",
@@ -7966,7 +7966,7 @@
 "who":"mio",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/mio-phone-4/mio-phone3-blendk20-3501-exact-3403-v2-cut.webp"
+"art/candidates/portraits/mio-phone-4/mio-phone3-blendk20-3501-exact-3403-v2-cut.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -7977,9 +7977,9 @@
 "review":"mio-phone-4",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/mio-phone-4/mio-phone3-blendk20-3501-exact-3403-v2-cut.webp"
+"src":"art/candidates/portraits/mio-phone-4/mio-phone3-blendk20-3501-exact-3403-v2-cut.webp"
 },
-"thumb":"tools/assets/thumbs/e9a88c5dcb4915c2.webp"
+"thumb":"tools/assets/thumbs/26bdc04e84063bbb.webp"
 },
 {
 "id":"portrait/mio-phone3-blendk25-3501-exact-3401-v2",
@@ -7988,7 +7988,7 @@
 "who":"mio",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/mio-phone-3/mio-phone3-blendk25-3501-exact-3401-v2.webp"
+"art/candidates/portraits/mio-phone-3/mio-phone3-blendk25-3501-exact-3401-v2.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -7999,9 +7999,9 @@
 "review":"mio-phone-3",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/mio-phone-3/mio-phone3-blendk25-3501-exact-3401-v2.webp"
+"src":"art/candidates/portraits/mio-phone-3/mio-phone3-blendk25-3501-exact-3401-v2.webp"
 },
-"thumb":"tools/assets/thumbs/62e7631382a4eaaa.webp"
+"thumb":"tools/assets/thumbs/e842770550716a8c.webp"
 },
 {
 "id":"portrait/mio-phone3-blendk25-3501-exact-3401-v2-cut",
@@ -8010,7 +8010,7 @@
 "who":"mio",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/mio-phone-3/mio-phone3-blendk25-3501-exact-3401-v2-cut.webp"
+"art/candidates/portraits/mio-phone-3/mio-phone3-blendk25-3501-exact-3401-v2-cut.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -8021,9 +8021,9 @@
 "review":"mio-phone-3",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/mio-phone-3/mio-phone3-blendk25-3501-exact-3401-v2-cut.webp"
+"src":"art/candidates/portraits/mio-phone-3/mio-phone3-blendk25-3501-exact-3401-v2-cut.webp"
 },
-"thumb":"tools/assets/thumbs/f829519a9f076df7.webp"
+"thumb":"tools/assets/thumbs/37a5449a854750ae.webp"
 },
 {
 "id":"portrait/mio-phone3-clean-3101",
@@ -8032,7 +8032,7 @@
 "who":"mio",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/mio-phone-3/mio-phone3-clean-3101.webp"
+"art/candidates/portraits/mio-phone-3/mio-phone3-clean-3101.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -8043,9 +8043,9 @@
 "review":"mio-phone-3",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/mio-phone-3/mio-phone3-clean-3101.webp"
+"src":"art/candidates/portraits/mio-phone-3/mio-phone3-clean-3101.webp"
 },
-"thumb":"tools/assets/thumbs/c76f7ec92399be0f.webp"
+"thumb":"tools/assets/thumbs/66a0cbab015693eb.webp"
 },
 {
 "id":"portrait/mio-phone3-clean-3102",
@@ -8054,7 +8054,7 @@
 "who":"mio",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/mio-phone-3/mio-phone3-clean-3102.webp"
+"art/candidates/portraits/mio-phone-3/mio-phone3-clean-3102.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -8065,9 +8065,9 @@
 "review":"mio-phone-3",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/mio-phone-3/mio-phone3-clean-3102.webp"
+"src":"art/candidates/portraits/mio-phone-3/mio-phone3-clean-3102.webp"
 },
-"thumb":"tools/assets/thumbs/113fdd2274d39b0a.webp"
+"thumb":"tools/assets/thumbs/9ba878f392ae4e79.webp"
 },
 {
 "id":"portrait/mio-phone3-clean-3103",
@@ -8076,7 +8076,7 @@
 "who":"mio",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/mio-phone-3/mio-phone3-clean-3103.webp"
+"art/candidates/portraits/mio-phone-3/mio-phone3-clean-3103.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -8087,9 +8087,9 @@
 "review":"mio-phone-3",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/mio-phone-3/mio-phone3-clean-3103.webp"
+"src":"art/candidates/portraits/mio-phone-3/mio-phone3-clean-3103.webp"
 },
-"thumb":"tools/assets/thumbs/10ce64e1e8d3ad3e.webp"
+"thumb":"tools/assets/thumbs/3e738caaaf25fd03.webp"
 },
 {
 "id":"portrait/mio-phone3-clean2-3111",
@@ -8098,7 +8098,7 @@
 "who":"mio",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/mio-phone-3/mio-phone3-clean2-3111.webp"
+"art/candidates/portraits/mio-phone-3/mio-phone3-clean2-3111.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -8109,9 +8109,9 @@
 "review":"mio-phone-3",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/mio-phone-3/mio-phone3-clean2-3111.webp"
+"src":"art/candidates/portraits/mio-phone-3/mio-phone3-clean2-3111.webp"
 },
-"thumb":"tools/assets/thumbs/5c54685e109b25da.webp"
+"thumb":"tools/assets/thumbs/6f7e06c89e9d0483.webp"
 },
 {
 "id":"portrait/mio-phone3-clean2-3112",
@@ -8120,7 +8120,7 @@
 "who":"mio",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/mio-phone-3/mio-phone3-clean2-3112.webp"
+"art/candidates/portraits/mio-phone-3/mio-phone3-clean2-3112.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -8131,9 +8131,9 @@
 "review":"mio-phone-3",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/mio-phone-3/mio-phone3-clean2-3112.webp"
+"src":"art/candidates/portraits/mio-phone-3/mio-phone3-clean2-3112.webp"
 },
-"thumb":"tools/assets/thumbs/dfd5524521de3378.webp"
+"thumb":"tools/assets/thumbs/056d4c3f5d5e321c.webp"
 },
 {
 "id":"portrait/mio-phone3-clean2-3113",
@@ -8142,7 +8142,7 @@
 "who":"mio",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/mio-phone-3/mio-phone3-clean2-3113.webp"
+"art/candidates/portraits/mio-phone-3/mio-phone3-clean2-3113.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -8153,9 +8153,9 @@
 "review":"mio-phone-3",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/mio-phone-3/mio-phone3-clean2-3113.webp"
+"src":"art/candidates/portraits/mio-phone-3/mio-phone3-clean2-3113.webp"
 },
-"thumb":"tools/assets/thumbs/1c1438b0773aa727.webp"
+"thumb":"tools/assets/thumbs/af755154f02ae41c.webp"
 },
 {
 "id":"portrait/mio-phone3-comp",
@@ -8164,7 +8164,7 @@
 "who":"mio",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/mio-phone-3/mio-phone3-comp.webp"
+"art/candidates/portraits/mio-phone-3/mio-phone3-comp.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -8175,9 +8175,9 @@
 "review":"mio-phone-3",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/mio-phone-3/mio-phone3-comp.webp"
+"src":"art/candidates/portraits/mio-phone-3/mio-phone3-comp.webp"
 },
-"thumb":"tools/assets/thumbs/b815b2e9f93fb06a.webp"
+"thumb":"tools/assets/thumbs/082bb09398311981.webp"
 },
 {
 "id":"portrait/mio-phone3-dip-3301",
@@ -8186,7 +8186,7 @@
 "who":"mio",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/mio-phone-3/mio-phone3-dip-3301.webp"
+"art/candidates/portraits/mio-phone-3/mio-phone3-dip-3301.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -8197,9 +8197,9 @@
 "review":"mio-phone-3",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/mio-phone-3/mio-phone3-dip-3301.webp"
+"src":"art/candidates/portraits/mio-phone-3/mio-phone3-dip-3301.webp"
 },
-"thumb":"tools/assets/thumbs/1a2ffaeaed0d78f2.webp"
+"thumb":"tools/assets/thumbs/bf98e0b3642ebba4.webp"
 },
 {
 "id":"portrait/mio-phone3-dip-3302",
@@ -8208,7 +8208,7 @@
 "who":"mio",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/mio-phone-3/mio-phone3-dip-3302.webp"
+"art/candidates/portraits/mio-phone-3/mio-phone3-dip-3302.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -8219,9 +8219,9 @@
 "review":"mio-phone-3",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/mio-phone-3/mio-phone3-dip-3302.webp"
+"src":"art/candidates/portraits/mio-phone-3/mio-phone3-dip-3302.webp"
 },
-"thumb":"tools/assets/thumbs/1e1154c4cd6674f0.webp"
+"thumb":"tools/assets/thumbs/ba9586c1bc224888.webp"
 },
 {
 "id":"portrait/mio-phone3-dipk-3301",
@@ -8230,7 +8230,7 @@
 "who":"mio",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/mio-phone-3/mio-phone3-dipk-3301.webp"
+"art/candidates/portraits/mio-phone-3/mio-phone3-dipk-3301.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -8241,9 +8241,9 @@
 "review":"mio-phone-3",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/mio-phone-3/mio-phone3-dipk-3301.webp"
+"src":"art/candidates/portraits/mio-phone-3/mio-phone3-dipk-3301.webp"
 },
-"thumb":"tools/assets/thumbs/55f64b225ff58526.webp"
+"thumb":"tools/assets/thumbs/6aec6d000eed64ae.webp"
 },
 {
 "id":"portrait/mio-phone3-dipk-3301-cut",
@@ -8252,7 +8252,7 @@
 "who":"mio",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/mio-phone-3/mio-phone3-dipk-3301-cut.webp"
+"art/candidates/portraits/mio-phone-3/mio-phone3-dipk-3301-cut.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -8263,9 +8263,9 @@
 "review":"mio-phone-3",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/mio-phone-3/mio-phone3-dipk-3301-cut.webp"
+"src":"art/candidates/portraits/mio-phone-3/mio-phone3-dipk-3301-cut.webp"
 },
-"thumb":"tools/assets/thumbs/07dc3922e2f6f959.webp"
+"thumb":"tools/assets/thumbs/8982e999af7639a4.webp"
 },
 {
 "id":"portrait/mio-phone3-dipk-3302",
@@ -8274,7 +8274,7 @@
 "who":"mio",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/mio-phone-3/mio-phone3-dipk-3302.webp"
+"art/candidates/portraits/mio-phone-3/mio-phone3-dipk-3302.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -8285,9 +8285,9 @@
 "review":"mio-phone-3",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/mio-phone-3/mio-phone3-dipk-3302.webp"
+"src":"art/candidates/portraits/mio-phone-3/mio-phone3-dipk-3302.webp"
 },
-"thumb":"tools/assets/thumbs/dcfd9e28439161c3.webp"
+"thumb":"tools/assets/thumbs/ae25347961b5a9e6.webp"
 },
 {
 "id":"portrait/mio-phone3-dipk-3303",
@@ -8296,7 +8296,7 @@
 "who":"mio",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/mio-phone-3/mio-phone3-dipk-3303.webp"
+"art/candidates/portraits/mio-phone-3/mio-phone3-dipk-3303.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -8307,9 +8307,9 @@
 "review":"mio-phone-3",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/mio-phone-3/mio-phone3-dipk-3303.webp"
+"src":"art/candidates/portraits/mio-phone-3/mio-phone3-dipk-3303.webp"
 },
-"thumb":"tools/assets/thumbs/08ed4d90c95d7406.webp"
+"thumb":"tools/assets/thumbs/f249ade00639ee91.webp"
 },
 {
 "id":"portrait/mio-phone3-dipk-3304",
@@ -8318,7 +8318,7 @@
 "who":"mio",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/mio-phone-3/mio-phone3-dipk-3304.webp"
+"art/candidates/portraits/mio-phone-3/mio-phone3-dipk-3304.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -8329,9 +8329,9 @@
 "review":"mio-phone-3",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/mio-phone-3/mio-phone3-dipk-3304.webp"
+"src":"art/candidates/portraits/mio-phone-3/mio-phone3-dipk-3304.webp"
 },
-"thumb":"tools/assets/thumbs/9c051a5001718475.webp"
+"thumb":"tools/assets/thumbs/4f9e75a1be4c97b0.webp"
 },
 {
 "id":"portrait/mio-phone3-exact-3401",
@@ -8340,7 +8340,7 @@
 "who":"mio",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/mio-phone-3/mio-phone3-exact-3401.webp"
+"art/candidates/portraits/mio-phone-3/mio-phone3-exact-3401.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -8351,9 +8351,9 @@
 "review":"mio-phone-3",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/mio-phone-3/mio-phone3-exact-3401.webp"
+"src":"art/candidates/portraits/mio-phone-3/mio-phone3-exact-3401.webp"
 },
-"thumb":"tools/assets/thumbs/ec950e87a6ae8fea.webp"
+"thumb":"tools/assets/thumbs/39882df6e98930ce.webp"
 },
 {
 "id":"portrait/mio-phone3-exact-3401-v2",
@@ -8362,7 +8362,7 @@
 "who":"mio",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/mio-phone-3/mio-phone3-exact-3401-v2.webp"
+"art/candidates/portraits/mio-phone-3/mio-phone3-exact-3401-v2.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -8373,9 +8373,9 @@
 "review":"mio-phone-3",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/mio-phone-3/mio-phone3-exact-3401-v2.webp"
+"src":"art/candidates/portraits/mio-phone-3/mio-phone3-exact-3401-v2.webp"
 },
-"thumb":"tools/assets/thumbs/c815f683f8ad3ab1.webp"
+"thumb":"tools/assets/thumbs/da77b299b39ec9d3.webp"
 },
 {
 "id":"portrait/mio-phone3-exact-3401-v2-cut",
@@ -8384,7 +8384,7 @@
 "who":"mio",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/mio-phone-3/mio-phone3-exact-3401-v2-cut.webp"
+"art/candidates/portraits/mio-phone-3/mio-phone3-exact-3401-v2-cut.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -8395,9 +8395,9 @@
 "review":"mio-phone-3",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/mio-phone-3/mio-phone3-exact-3401-v2-cut.webp"
+"src":"art/candidates/portraits/mio-phone-3/mio-phone3-exact-3401-v2-cut.webp"
 },
-"thumb":"tools/assets/thumbs/c6521ee4264e0d6c.webp"
+"thumb":"tools/assets/thumbs/e05d3f0e97dc802f.webp"
 },
 {
 "id":"portrait/mio-phone3-exact-3402",
@@ -8406,7 +8406,7 @@
 "who":"mio",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/mio-phone-3/mio-phone3-exact-3402.webp"
+"art/candidates/portraits/mio-phone-3/mio-phone3-exact-3402.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -8417,9 +8417,9 @@
 "review":"mio-phone-3",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/mio-phone-3/mio-phone3-exact-3402.webp"
+"src":"art/candidates/portraits/mio-phone-3/mio-phone3-exact-3402.webp"
 },
-"thumb":"tools/assets/thumbs/05c59458c36a6ebe.webp"
+"thumb":"tools/assets/thumbs/e120f6c3fbbf3f47.webp"
 },
 {
 "id":"portrait/mio-phone3-exact-3403",
@@ -8428,7 +8428,7 @@
 "who":"mio",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/mio-phone-3/mio-phone3-exact-3403.webp"
+"art/candidates/portraits/mio-phone-3/mio-phone3-exact-3403.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -8439,9 +8439,9 @@
 "review":"mio-phone-3",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/mio-phone-3/mio-phone3-exact-3403.webp"
+"src":"art/candidates/portraits/mio-phone-3/mio-phone3-exact-3403.webp"
 },
-"thumb":"tools/assets/thumbs/93b45a96bdcff94f.webp"
+"thumb":"tools/assets/thumbs/28fb87954495bf05.webp"
 },
 {
 "id":"portrait/mio-phone3-exact-3403-v2",
@@ -8450,7 +8450,7 @@
 "who":"mio",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/mio-phone-3/mio-phone3-exact-3403-v2.webp"
+"art/candidates/portraits/mio-phone-3/mio-phone3-exact-3403-v2.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -8461,9 +8461,9 @@
 "review":"mio-phone-3",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/mio-phone-3/mio-phone3-exact-3403-v2.webp"
+"src":"art/candidates/portraits/mio-phone-3/mio-phone3-exact-3403-v2.webp"
 },
-"thumb":"tools/assets/thumbs/6affcd9192c7fc76.webp"
+"thumb":"tools/assets/thumbs/574e38ee59d49e3c.webp"
 },
 {
 "id":"portrait/mio-phone3-exact-3404-v2",
@@ -8472,7 +8472,7 @@
 "who":"mio",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/mio-phone-3/mio-phone3-exact-3404-v2.webp"
+"art/candidates/portraits/mio-phone-3/mio-phone3-exact-3404-v2.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -8483,9 +8483,9 @@
 "review":"mio-phone-3",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/mio-phone-3/mio-phone3-exact-3404-v2.webp"
+"src":"art/candidates/portraits/mio-phone-3/mio-phone3-exact-3404-v2.webp"
 },
-"thumb":"tools/assets/thumbs/8c38c64ca6515fa5.webp"
+"thumb":"tools/assets/thumbs/1d5501b52ed24b0c.webp"
 },
 {
 "id":"portrait/mio-phone3-ipa-3201",
@@ -8494,7 +8494,7 @@
 "who":"mio",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/mio-phone-3/mio-phone3-ipa-3201.webp"
+"art/candidates/portraits/mio-phone-3/mio-phone3-ipa-3201.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -8505,9 +8505,9 @@
 "review":"mio-phone-3",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/mio-phone-3/mio-phone3-ipa-3201.webp"
+"src":"art/candidates/portraits/mio-phone-3/mio-phone3-ipa-3201.webp"
 },
-"thumb":"tools/assets/thumbs/4ea6c017506ee68e.webp"
+"thumb":"tools/assets/thumbs/8c914b30494135ed.webp"
 },
 {
 "id":"portrait/mio-phone3-ipa-3202",
@@ -8516,7 +8516,7 @@
 "who":"mio",
 "place":null,
 "paths":[
-"game3d/assets/portrait-candidates/mio-phone-3/mio-phone3-ipa-3202.webp"
+"art/candidates/portraits/mio-phone-3/mio-phone3-ipa-3202.webp"
 ],
 "status":"rejected",
 "status_from":{
@@ -8527,9 +8527,9 @@
 "review":"mio-phone-3",
 "view":{
 "type":"image",
-"src":"game3d/assets/portrait-candidates/mio-phone-3/mio-phone3-ipa-3202.webp"
+"src":"art/candidates/portraits/mio-phone-3/mio-phone3-ipa-3202.webp"
 },
-"thumb":"tools/assets/thumbs/217b9a1485e3d2e9.webp"
+"thumb":"tools/assets/thumbs/a76c74169b42f3c7.webp"
 },
 {
 "id":"portrait/mori-3d-base",
@@ -8829,6 +8829,8 @@
 "game3d/assets/eric/run.glb",
 "game3d/assets/eric/sit.glb",
 "game3d/assets/eric/walk.glb",
+"art/approved/mc/meshy/check-anim.png",
+"art/approved/mc/meshy/check-side.png",
 "art/approved/mc/meshy/eric-idle.glb",
 "art/approved/mc/meshy/eric-rigged.glb",
 "art/approved/mc/meshy/eric-run.glb",
@@ -8842,28 +8844,12 @@
 "art/approved/mc/meshy/tex0_base_color.png",
 "art/approved/mc/meshy/tex0_metallic.png",
 "art/approved/mc/meshy/tex0_normal.png",
-"art/approved/mc/meshy/tex0_roughness.png",
-"game3d/assets/eric-meshy/check-anim.png",
-"game3d/assets/eric-meshy/check-side.png",
-"game3d/assets/eric-meshy/eric-idle.glb",
-"game3d/assets/eric-meshy/eric-rigged.glb",
-"game3d/assets/eric-meshy/eric-run.glb",
-"game3d/assets/eric-meshy/eric-sit.glb",
-"game3d/assets/eric-meshy/eric-tosit.glb",
-"game3d/assets/eric-meshy/eric-walk.glb",
-"game3d/assets/eric-meshy/model.glb",
-"game3d/assets/eric-meshy/preview.png",
-"game3d/assets/eric-meshy/rig.json",
-"game3d/assets/eric-meshy/task.json",
-"game3d/assets/eric-meshy/tex0_base_color.png",
-"game3d/assets/eric-meshy/tex0_metallic.png",
-"game3d/assets/eric-meshy/tex0_normal.png",
-"game3d/assets/eric-meshy/tex0_roughness.png"
+"art/approved/mc/meshy/tex0_roughness.png"
 ],
 "status":"approved",
 "status_from":{
 "path":"bible/facts.yaml",
-"text":"Meshy task 01a0e731-1faf-70a7-98e4-c0f2d163c246. The game loads its own copy from game3d/assets/eric-meshy/. Approved (Jørgen, 2026-09-28: \"of course we need Mio and Eric's Meshy models\")."
+"text":"Meshy task 01a0e731-1faf-70a7-98e4-c0f2d163c246. The game loads slimmed copies from game3d/assets/eric/. Approved (Jørgen, 2026-09-28: \"of course we need Mio and Eric's Meshy models\")."
 },
 "source":"Meshy image-to-3D from tools/characters/ref/eric-chibi-ref.png, auto-rigged, ~1050 polygons (Meshy task 01a0e731-1faf-70a7-98e4-c0f2d163c246). The game loads game3d/assets/eric/ (slimmed by game3d/tools/slim_glb.py) with base.webp as a matte Lambert texture.",
 "used":[
@@ -8902,13 +8888,7 @@
 "art/approved/mio/meshy/Meshy_AI_Neon_Bun_Guardian_biped_Animation_Walking_Woman_withSkin.glb",
 "art/approved/mio/meshy/Meshy_AI_Neon_Bun_Guardian_biped_Animation_Walking_withSkin.glb",
 "art/approved/mio/meshy/base-clean.json",
-"art/approved/mio/meshy/base-clean.png",
-"legacy/side/flat/meshy2/Meshy_AI_Neon_Bun_Guardian_biped/Meshy_AI_Neon_Bun_Guardian_biped_Animation_Chair_Sit_Idle_F_withSkin.glb",
-"legacy/side/flat/meshy2/Meshy_AI_Neon_Bun_Guardian_biped/Meshy_AI_Neon_Bun_Guardian_biped_Animation_Running_withSkin.glb",
-"legacy/side/flat/meshy2/Meshy_AI_Neon_Bun_Guardian_biped/Meshy_AI_Neon_Bun_Guardian_biped_Animation_Sit_Cross_Legged_withSkin.glb",
-"legacy/side/flat/meshy2/Meshy_AI_Neon_Bun_Guardian_biped/Meshy_AI_Neon_Bun_Guardian_biped_Animation_Step_to_Sit_Transition_withSkin.glb",
-"legacy/side/flat/meshy2/Meshy_AI_Neon_Bun_Guardian_biped/Meshy_AI_Neon_Bun_Guardian_biped_Animation_Walking_Woman_withSkin.glb",
-"legacy/side/flat/meshy2/Meshy_AI_Neon_Bun_Guardian_biped/Meshy_AI_Neon_Bun_Guardian_biped_Animation_Walking_withSkin.glb"
+"art/approved/mio/meshy/base-clean.png"
 ],
 "status":"approved",
 "status_from":{
@@ -10154,7 +10134,7 @@
 "who":"eric",
 "place":null,
 "paths":[
-"game3d/assets/eric-meshy/eric-tosit.glb"
+"art/approved/mc/meshy/eric-tosit.glb"
 ],
 "status":"approved",
 "status_from":{
@@ -10167,7 +10147,7 @@
 "review":null,
 "view":{
 "type":"glb",
-"src":"game3d/assets/eric-meshy/eric-tosit.glb"
+"src":"art/approved/mc/meshy/eric-tosit.glb"
 },
 "thumb":"tools/assets/thumbs/3d-animation-eric-tosit.webp",
 "tags":[

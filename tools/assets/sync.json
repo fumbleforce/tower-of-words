@@ -11,9 +11,6 @@
     "tools/assets/thumbs/"
   ],
   "exclude": [
-    "game3d/assets/portrait-candidates/",
-    "game3d/assets/portraits-v2/",
-    "game3d/assets/portraits-v2-sheet.png",
     "*.blend1"
   ],
   "library_statuses": ["approved", "provisional"],

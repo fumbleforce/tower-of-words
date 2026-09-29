@@ -13,7 +13,7 @@ Every render keeps the weighted red-rim negative and is measured with tools/redr
 
 Usage: ~/ai/sd/venv/bin/python tools/eric_anime4.py [ids]   (needs the GPU lock with owner eric-anime4 and ComfyUI on :8188)
        ~/ai/sd/venv/bin/python tools/eric_anime4.py sheet
-Raw PNGs: art/production/PC/eric-anime4/ (gitignored); webp copies for review: game3d/assets/portrait-candidates/eric-anime4/"""
+Raw PNGs: art/production/PC/eric-anime4/ (gitignored); webp copies for review: art/candidates/portraits/eric-anime4/"""
 import sys, os, json
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from PIL import Image, ImageDraw, ImageFont, ImageFilter
@@ -24,8 +24,8 @@ from eric_anime3 import NEG, A09, POSES, prompt
 OWNER = 'eric-anime4'
 RAW = os.path.join(OUT, 'PC', 'eric-anime4')
 RAW3 = os.path.join(OUT, 'PC', 'eric-anime3')
-WEB = os.path.join(ROOT, 'game3d', 'assets', 'portrait-candidates', 'eric-anime4')
-WEB3 = os.path.join(ROOT, 'game3d', 'assets', 'portrait-candidates', 'eric-anime3')
+WEB = os.path.join(ROOT, 'art', 'candidates', 'portraits', 'eric-anime4')
+WEB3 = os.path.join(ROOT, 'art', 'candidates', 'portraits', 'eric-anime3')
 LOG = os.path.join(WEB, 'log.json')
 HAIR = 'dark-blond hair, same colour all over, tied in a short ponytail at the back'
 NEG2 = NEG + ', undercut, shaved sides, two-tone hair'
@@ -152,7 +152,7 @@ def sheet():
             x, y = c * tw, r * (th + 40)
             S.paste(Image.open(path).convert('RGB').resize((tw, th), Image.LANCZOS), (x, y))
             d.text((x + 8, y + th + 8), f'{name}  red {pct:.2f}%', fill=(20, 20, 20), font=font)
-    S.save(os.path.join(ROOT, 'game3d', 'assets', 'portrait-candidates', 'eric-anime4-sheet.png'))
+    S.save(os.path.join(ROOT, 'art', 'candidates', 'portraits', 'eric-anime4-sheet.png'))
 
 
 if __name__ == '__main__':

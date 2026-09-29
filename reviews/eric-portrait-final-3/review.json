@@ -7,15 +7,15 @@
  "question": "Is this the right amount closer?",
  "media": [
   {
-   "image": "game3d/assets/portrait-candidates/eric-final/lineup-zoom125-before.webp",
+   "image": "art/candidates/portraits/eric-final/lineup-zoom125-before.webp",
    "caption": "Before (the original crop): Mio, Eric and Emi placed the way the game places them at 2560x1440."
   },
   {
-   "image": "game3d/assets/portrait-candidates/eric-final/eric-neutral-zoom125-bg.webp",
+   "image": "art/candidates/portraits/eric-final/eric-neutral-zoom125-bg.webp",
    "caption": "The new cut-out at game file size (597x768) over dark, light and a checkerboard. His right shoulder now runs off the right edge of the image."
   },
   {
-   "image": "game3d/assets/portrait-candidates/eric-final/eric-neutral-zoom125-glasses-hair.webp",
+   "image": "art/candidates/portraits/eric-final/eric-neutral-zoom125-glasses-hair.webp",
    "caption": "Close-up of the glasses, hair and ponytail edges. The glasses frame is solid."
   }
  ],
@@ -23,7 +23,7 @@
   {
    "id": "eric-final-zoom125",
    "label": "25% bigger",
-   "image": "game3d/assets/portrait-candidates/eric-final/lineup-zoom125-after.webp",
+   "image": "art/candidates/portraits/eric-final/lineup-zoom125-after.webp",
    "images": [
     "game3d/assets/portraits/eric-neutral.webp"
    ],

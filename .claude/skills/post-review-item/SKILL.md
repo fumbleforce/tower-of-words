@@ -10,7 +10,7 @@ Anything Jørgen picks or judges goes to the Review queue, never into chat (GUID
 ## Post
 
 1. Choose the id (lower case, digits, hyphens). A new round gets a new id; set the old item's status to `superseded` with `python3 tools/review.py set-status <old-id> superseded`.
-2. Put the files next to the work (e.g. game3d/assets/portrait-candidates/<round>/), as webp or mp3, never raw PNGs or WAVs in git (the asset hook refuses binaries it doesn't expect).
+2. Put the files next to the work (e.g. art/candidates/portraits/<round>/), as webp or mp3, never raw PNGs or WAVs in git (the asset hook refuses binaries it doesn't expect).
 3. Write reviews/<id>/review.json as reviews/README.md shows. Include:
    - every attempt, in the order made, including the ones you'd reject (GUIDE: Show every attempt), each with a `note` giving the prompt or settings, the seed and any measured numbers;
    - for animations and 3D models, a live viewer under `links`, not stills (reviews/README.md, step 2);

@@ -48,20 +48,20 @@ characters:
       - [legacy/proto2/gallery/A-mc-smile.webp, "A-mc gallery set: smile", review]
       - [legacy/proto2/gallery/A-mc-nervous.webp, "A-mc gallery set: nervous", review]
       - [legacy/proto2/gallery/A-mc-magic.webp, "A-mc gallery set: magic", review]
-    model: {dir: art/approved/mc/meshy, preview: art/approved/mc/meshy/preview.png, status: approved, src: "GUIDE.md ~ 3D character workflow", note: "Meshy task 01a0e731-1faf-70a7-98e4-c0f2d163c246. The game loads its own copy from game3d/assets/eric-meshy/. Approved (Jørgen, 2026-09-28: \"of course we need Mio and Eric's Meshy models\")."}
+    model: {dir: art/approved/mc/meshy, preview: art/approved/mc/meshy/preview.png, status: approved, src: "GUIDE.md ~ 3D character workflow", note: "Meshy task 01a0e731-1faf-70a7-98e4-c0f2d163c246. The game loads slimmed copies from game3d/assets/eric/. Approved (Jørgen, 2026-09-28: \"of course we need Mio and Eric's Meshy models\")."}
     facts:
-      - ["Portrait eric-v2-734 (Jørgen, 2026-09-28: \"734 is best\"): the M-02-it-guy-601 design with his eyes open and without the red rim light. RDBT, seed 734.", review, "game3d/assets/portrait-candidates/eric-sheet-v2.png"]
-      - ["Tired face: tired-v3 seed 811 (Jørgen: \"811 looks pretty tired, like -_-\"). Face-only repaint of 734 with weary half-lidded eyes and a flat mouth.", approved, "game3d/assets/portrait-candidates/eric-tired-v3.png"]
+      - ["Portrait eric-v2-734 (Jørgen, 2026-09-28: \"734 is best\"): the M-02-it-guy-601 design with his eyes open and without the red rim light. RDBT, seed 734.", review, "art/candidates/portraits/eric-sheet-v2.png"]
+      - ["Tired face: tired-v3 seed 811 (Jørgen: \"811 looks pretty tired, like -_-\"). Face-only repaint of 734 with weary half-lidded eyes and a flat mouth.", approved, "art/candidates/portraits/eric-tired-v3.png"]
       - ["His age isn't written in any current file. The old approved portrait prompt said 34; tools/production.py said 29.", draft, "tools/production.py ~ 29-year-old Nordic man"]
     history:
       - ["Chooser, main character options 01 to 10 (M-02 picked)", legacy/proto2/gallery/index.html, legacy]
       - ["Headroom fix of M-02-it-guy-601", legacy/proto2/cast-fixed/index.html, legacy]
-      - ["Portrait remake with open eyes, round 1 (731 to 734)", game3d/assets/portrait-candidates/eric-sheet.png, rejected]
-      - ["Portrait remake v2, no red rim light (734 picked)", game3d/assets/portrait-candidates/eric-sheet-v2.png, review]
-      - ["Tired face v3 (811 picked)", game3d/assets/portrait-candidates/eric-tired-v3.png, approved]
-      - ["Natural poses (neck, coffee)", game3d/assets/portrait-candidates/eric-poses-sheet.png, rejected]
+      - ["Portrait remake with open eyes, round 1 (731 to 734)", art/candidates/portraits/eric-sheet.png, rejected]
+      - ["Portrait remake v2, no red rim light (734 picked)", art/candidates/portraits/eric-sheet-v2.png, review]
+      - ["Tired face v3 (811 picked)", art/candidates/portraits/eric-tired-v3.png, approved]
+      - ["Natural poses (neck, coffee)", art/candidates/portraits/eric-poses-sheet.png, rejected]
     rejected:
-      - ["The first open-eyed picks 731 and 734 (red rim light), and the v2 tired face: \"happy and drunk\".", rejected, game3d/assets/portrait-candidates/eric-sheet.png]
+      - ["The first open-eyed picks 731 and 734 (red rim light), and the v2 tired face: \"happy and drunk\".", rejected, art/candidates/portraits/eric-sheet.png]
       - ["Natural-pose portraits (neck, coffee): \"sides shaved too close and too dark, the top reads like a furry hat\".", rejected, "docs/game/art-and-sound.md ~ The natural-pose portraits (neck, coffee) were rejected"]
       - ["A Nordic accent on his voice: \"not any better, just drop it, English accent instead\".", rejected, "art/SOUND.md ~ just drop it, English accent instead"]
       - ["The other nine main-character options on the chooser.", rejected, "legacy/notes/GUIDE-history.md ~ main character = option 02"]
@@ -88,7 +88,7 @@ characters:
       - {q: "GUIDE.md ~ Low-poly Mio paused", s: approved}
     images:
       - [art/approved/mio/mio-after.webp, "gallery B-mio (RDBT) with headroom, the portrait her game cut-outs come from", approved]
-      - [game3d/assets/portrait-candidates/mio-expressions-v3-sheet.png, "Expression sheet v3 (the six faces in the game)", approved]
+      - [art/candidates/portraits/mio-expressions-v3-sheet.png, "Expression sheet v3 (the six faces in the game)", approved]
     model: {dir: art/approved/mio/meshy, preview: art/approved/mio/meshy/base-clean.png, status: approved, src: "docs/game/art-and-sound.md ~ Eric and Mio are Meshy models", note: "Meshy Neon Bun Guardian biped: six animation GLBs, base-clean.png and base-clean.json. The game loads its own copy. Only colour tweaks allowed."}
     facts:
       - ["Portrait details: light tan eyes (about #dbcdb6) and thin taupe-grey glasses frames (about #574b49). Face repaints keep her original frames pixel for pixel and colour-match the irises (tools/portrait_candidates.py).", approved, "art/approved/mio/mio-after.webp"]
@@ -96,8 +96,8 @@ characters:
       - ["Art production gallery (B-mio)", legacy/proto2/gallery/index.html, legacy]
       - ["Headroom fix", legacy/proto2/cast-fixed/index.html, legacy]
       - ["Mio's voice, all lines in voice A", legacy/proto2/voice-mio/index.html, approved]
-      - ["Expression sheet v1", game3d/assets/portrait-candidates/mio-expressions-sheet.png, rejected]
-      - ["Expression sheet v3", game3d/assets/portrait-candidates/mio-expressions-v3-sheet.png, approved]
+      - ["Expression sheet v1", art/candidates/portraits/mio-expressions-sheet.png, rejected]
+      - ["Expression sheet v3", art/candidates/portraits/mio-expressions-v3-sheet.png, approved]
       - ["Pixel Mio: Claude by hand, Retro Diffusion, PixelLab", legacy/proto2/pixel-compare/index.html, legacy]
       - ["Low-poly Mio by hand, rounds 1 to 14b (paused)", legacy/side/flat/index.html, legacy]
     rejected:
@@ -124,11 +124,11 @@ characters:
     decisions:
       - {q: "docs/game/cast.md ~ The B2 team is Eric, Mio, Mori and Kenji #1", s: approved}
     images:
-      - [game3d/assets/portrait-candidates/mori-sheet.png, "Portrait candidates (713 in use)", draft]
+      - [art/candidates/portraits/mori-sheet.png, "Portrait candidates (713 in use)", draft]
       - [game3d/assets/characters/mori/base.webp, "3D test through the Meshy workflow: the chibi picture it started from", draft]
     model3d: {id: mori, dir: game3d/assets/characters/mori, note: "Meshy test (commit b01e6b0). Loads only with ?cast3d=mori until approved."}
     history:
-      - ["Portrait candidates", game3d/assets/portrait-candidates/mori-sheet.png, draft]
+      - ["Portrait candidates", art/candidates/portraits/mori-sheet.png, draft]
 
   - id: kenji
     name: Kenji
@@ -141,7 +141,7 @@ characters:
     decisions:
       - {q: "docs/game/cast.md ~ Look: about 21, inexperienced", s: approved}
     images:
-      - [game3d/assets/portrait-candidates/kenji-sheet.png, "Portrait candidates (711, not approved)", rejected]
+      - [art/candidates/portraits/kenji-sheet.png, "Portrait candidates (711, not approved)", rejected]
     rejected:
       - ["The 711 portrait and the old profile (29, a different job).", rejected, "docs/game/art-and-sound.md ~ Provisional (seed 711"]
 
@@ -181,7 +181,7 @@ characters:
     decisions:
       - {q: "docs/game/cast.md ~ Look: chibi figure in code, and provisional portraits #2", s: approved}
     images:
-      - [game3d/assets/portrait-candidates/hamada-sheet.png, "Portrait candidates (721 in use)", draft]
+      - [art/candidates/portraits/hamada-sheet.png, "Portrait candidates (721 in use)", draft]
     facts:
       - ["His speaker id in the story files is kuroda (an older name); the game shows him as Mr. Hamada.", approved, "docs/game/cast.md ~ The id `kuroda` is Mr. Hamada"]
 
@@ -198,7 +198,7 @@ characters:
       - {q: "legacy/notes/GUIDE-history.md ~ Ishibashi = ishibashi-b-201 #1", s: approved}
     images:
       - [art/approved/ishibashi/ishibashi-after.webp, "ishibashi-b-201 with headroom", approved]
-      - [game3d/assets/portrait-candidates/guard-sheet.png, "Expression candidates", draft]
+      - [art/candidates/portraits/guard-sheet.png, "Expression candidates", draft]
     history:
       - ["Decisions, round 2 (ishibashi-b-201)", legacy/proto2/decide2/index.html, approved]
       - ["Headroom fix", legacy/proto2/cast-fixed/index.html, legacy]
@@ -645,14 +645,14 @@ reviews:
   game3d/design/mock-1.html: ["Dialogue overlay direction 1, Stage light.", decided, "Picked: direction 1 \"faded\", with a more solid grey band on phone."]
   game3d/design/mock-2.html: ["Dialogue overlay direction 2, Pinned card.", decided, "Not picked."]
   game3d/design/mock-3.html: ["Dialogue overlay direction 3, Flat-shaded slab.", decided, "Not picked."]
-  game3d/assets/portrait-candidates/eric-sheet-v2.png: ["Eric's portrait remake v2 (seeds 731 to 734, no red rim light).", open, "734 was picked; the MC's style is under review again."]
-  game3d/assets/portrait-candidates/eric-tired-v3.png: ["Eric's tired face v3.", decided, "811 picked."]
-  game3d/assets/portrait-candidates/eric-poses-sheet.png: ["Eric in natural poses.", decided, "Rejected (sides shaved too close, a furry-hat top)."]
-  game3d/assets/portrait-candidates/mio-expressions-v3-sheet.png: ["Mio's six expressions, v3.", decided, "Approved; in the game."]
-  game3d/assets/portrait-candidates/mori-sheet.png: ["Mr. Mori portrait candidates.", open, "713 in use provisionally."]
-  game3d/assets/portrait-candidates/kenji-sheet.png: ["Kenji portrait candidates.", decided, "711 not approved; new concept art is coming."]
-  game3d/assets/portrait-candidates/hamada-sheet.png: ["Mr. Hamada portrait candidates.", open, "721 in use provisionally."]
-  game3d/assets/portrait-candidates/guard-sheet.png: ["Mr. Ishibashi's new expressions.", open, "Stern and amused in use provisionally."]
+  art/candidates/portraits/eric-sheet-v2.png: ["Eric's portrait remake v2 (seeds 731 to 734, no red rim light).", open, "734 was picked; the MC's style is under review again."]
+  art/candidates/portraits/eric-tired-v3.png: ["Eric's tired face v3.", decided, "811 picked."]
+  art/candidates/portraits/eric-poses-sheet.png: ["Eric in natural poses.", decided, "Rejected (sides shaved too close, a furry-hat top)."]
+  art/candidates/portraits/mio-expressions-v3-sheet.png: ["Mio's six expressions, v3.", decided, "Approved; in the game."]
+  art/candidates/portraits/mori-sheet.png: ["Mr. Mori portrait candidates.", open, "713 in use provisionally."]
+  art/candidates/portraits/kenji-sheet.png: ["Kenji portrait candidates.", decided, "711 not approved; new concept art is coming."]
+  art/candidates/portraits/hamada-sheet.png: ["Mr. Hamada portrait candidates.", open, "721 in use provisionally."]
+  art/candidates/portraits/guard-sheet.png: ["Mr. Ishibashi's new expressions.", open, "Stern and amused in use provisionally."]
   game3d/REVIEW.md: ["The critic log for the three places (scores per round, shots).", open, "No place has reached 8 yet."]
   art/company/local2/index.html: ["Round-2 local model comparison, including the onsen image that is the bar for rewards.", decided, "The 'spicy' row set the reward bar."]
   art/concept/index.html: ["Concept batch 1 (the erased-language idea, golems).", legacy, "Golems and the old concept were rejected."]

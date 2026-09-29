@@ -7,15 +7,15 @@
  "question": "Is the frame solid all the way round now?",
  "media": [
   {
-   "image": "game3d/assets/portrait-candidates/mio-phone-4/frame-blendk20-3501-exact-3401-v2.webp",
+   "image": "art/candidates/portraits/mio-phone-4/frame-blendk20-3501-exact-3401-v2.webp",
    "caption": "Round 3 and round 4 of the pick, left lens over a checkerboard."
   },
   {
-   "image": "game3d/assets/portrait-candidates/mio-phone-4/bg-blendk20-3501-exact-3401-v2.webp",
+   "image": "art/candidates/portraits/mio-phone-4/bg-blendk20-3501-exact-3401-v2.webp",
    "caption": "The round 4 pick cut out, over dark, light and a checkerboard."
   },
   {
-   "image": "game3d/assets/portrait-candidates/mio-phone-4/approved-frame.webp",
+   "image": "art/candidates/portraits/mio-phone-4/approved-frame.webp",
    "caption": "Her approved game portrait (mio-neutral) had a see-through spot too, on the bottom of the left lens where it crosses the background. Before and after. All six expressions are fixed the same way."
   }
  ],
@@ -23,48 +23,48 @@
   {
    "id": "blendk20-3501-exact-3401-v2",
    "label": "blendk20-3501-exact-3401-v2",
-   "image": "game3d/assets/portrait-candidates/mio-phone-4/glasses-blendk20-3501-exact-3401-v2.webp",
+   "image": "art/candidates/portraits/mio-phone-4/glasses-blendk20-3501-exact-3401-v2.webp",
    "images": [
-    "game3d/assets/portrait-candidates/mio-phone-4/frame-blendk20-3501-exact-3401-v2.webp",
-    "game3d/assets/portrait-candidates/mio-phone-4/bg-blendk20-3501-exact-3401-v2.webp",
-    "game3d/assets/portrait-candidates/mio-phone-4/mio-phone3-blendk20-3501-exact-3401-v2.webp",
-    "game3d/assets/portrait-candidates/mio-phone-4/mio-phone3-blendk20-3501-exact-3401-v2-cut.webp"
+    "art/candidates/portraits/mio-phone-4/frame-blendk20-3501-exact-3401-v2.webp",
+    "art/candidates/portraits/mio-phone-4/bg-blendk20-3501-exact-3401-v2.webp",
+    "art/candidates/portraits/mio-phone-4/mio-phone3-blendk20-3501-exact-3401-v2.webp",
+    "art/candidates/portraits/mio-phone-4/mio-phone3-blendk20-3501-exact-3401-v2-cut.webp"
    ],
    "note": "Round 3 pick, fixed. The top bar of the left lens is solid now. A few grey strokes show through the lens just under that bar."
   },
   {
    "id": "blendk25-3501-exact-3401-v2",
    "label": "blendk25-3501-exact-3401-v2",
-   "image": "game3d/assets/portrait-candidates/mio-phone-4/glasses-blendk25-3501-exact-3401-v2.webp",
+   "image": "art/candidates/portraits/mio-phone-4/glasses-blendk25-3501-exact-3401-v2.webp",
    "images": [
-    "game3d/assets/portrait-candidates/mio-phone-4/frame-blendk25-3501-exact-3401-v2.webp",
-    "game3d/assets/portrait-candidates/mio-phone-4/bg-blendk25-3501-exact-3401-v2.webp",
-    "game3d/assets/portrait-candidates/mio-phone-4/mio-phone3-blendk25-3501-exact-3401-v2.webp",
-    "game3d/assets/portrait-candidates/mio-phone-4/mio-phone3-blendk25-3501-exact-3401-v2-cut.webp"
+    "art/candidates/portraits/mio-phone-4/frame-blendk25-3501-exact-3401-v2.webp",
+    "art/candidates/portraits/mio-phone-4/bg-blendk25-3501-exact-3401-v2.webp",
+    "art/candidates/portraits/mio-phone-4/mio-phone3-blendk25-3501-exact-3401-v2.webp",
+    "art/candidates/portraits/mio-phone-4/mio-phone3-blendk25-3501-exact-3401-v2-cut.webp"
    ],
    "note": "Same at 0.25."
   },
   {
    "id": "exact-3401-v2",
    "label": "exact-3401-v2",
-   "image": "game3d/assets/portrait-candidates/mio-phone-4/glasses-exact-3401-v2.webp",
+   "image": "art/candidates/portraits/mio-phone-4/glasses-exact-3401-v2.webp",
    "images": [
-    "game3d/assets/portrait-candidates/mio-phone-4/frame-exact-3401-v2.webp",
-    "game3d/assets/portrait-candidates/mio-phone-4/bg-exact-3401-v2.webp",
-    "game3d/assets/portrait-candidates/mio-phone-4/mio-phone3-exact-3401-v2.webp",
-    "game3d/assets/portrait-candidates/mio-phone-4/mio-phone3-exact-3401-v2-cut.webp"
+    "art/candidates/portraits/mio-phone-4/frame-exact-3401-v2.webp",
+    "art/candidates/portraits/mio-phone-4/bg-exact-3401-v2.webp",
+    "art/candidates/portraits/mio-phone-4/mio-phone3-exact-3401-v2.webp",
+    "art/candidates/portraits/mio-phone-4/mio-phone3-exact-3401-v2-cut.webp"
    ],
    "note": "Without the light blend: the portrait frame pixels on the bare face."
   },
   {
    "id": "blendk20-3501-exact-3403-v2",
    "label": "blendk20-3501-exact-3403-v2",
-   "image": "game3d/assets/portrait-candidates/mio-phone-4/glasses-blendk20-3501-exact-3403-v2.webp",
+   "image": "art/candidates/portraits/mio-phone-4/glasses-blendk20-3501-exact-3403-v2.webp",
    "images": [
-    "game3d/assets/portrait-candidates/mio-phone-4/frame-blendk20-3501-exact-3403-v2.webp",
-    "game3d/assets/portrait-candidates/mio-phone-4/bg-blendk20-3501-exact-3403-v2.webp",
-    "game3d/assets/portrait-candidates/mio-phone-4/mio-phone3-blendk20-3501-exact-3403-v2.webp",
-    "game3d/assets/portrait-candidates/mio-phone-4/mio-phone3-blendk20-3501-exact-3403-v2-cut.webp"
+    "art/candidates/portraits/mio-phone-4/frame-blendk20-3501-exact-3403-v2.webp",
+    "art/candidates/portraits/mio-phone-4/bg-blendk20-3501-exact-3403-v2.webp",
+    "art/candidates/portraits/mio-phone-4/mio-phone3-blendk20-3501-exact-3403-v2.webp",
+    "art/candidates/portraits/mio-phone-4/mio-phone3-blendk20-3501-exact-3403-v2-cut.webp"
    ],
    "note": "Same method on the other bare face, exact-3403-v2. It has a small teal fleck above her left eye."
   },

@@ -10,7 +10,7 @@ Staging (every shot): dialogue portrait, waist-up, camera at eye level a couple 
 soft even front light, nothing else in frame. Eyelines per shot (at the viewer, or off to one side).
 
 Usage: ~/ai/sd/venv/bin/python tools/eric_anime2.py   (needs the GPU lock with owner eric-anime2 and ComfyUI on :8188)
-Raw PNGs: art/production/PC/eric-anime2/ (gitignored); webp copies for review: game3d/assets/portrait-candidates/eric-anime2/"""
+Raw PNGs: art/production/PC/eric-anime2/ (gitignored); webp copies for review: art/candidates/portraits/eric-anime2/"""
 import sys, os, json
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import comfy
@@ -20,7 +20,7 @@ from PIL import Image
 
 OWNER = 'eric-anime2'
 RAW = os.path.join(OUT, 'PC', 'eric-anime2')
-WEB = os.path.join(ROOT, 'game3d', 'assets', 'portrait-candidates', 'eric-anime2')
+WEB = os.path.join(ROOT, 'art', 'candidates', 'portraits', 'eric-anime2')
 LOG = os.path.join(WEB, 'log.json')
 NEG = N + ', fat, obese, plump, closed eyes, rim light, red rim light, backlighting'
 

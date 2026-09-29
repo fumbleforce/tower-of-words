@@ -1,5 +1,5 @@
 {
- "generated": "2026-09-29 15:11",
+ "generated": "2026-09-29 20:44",
  "characters": [
   {
    "id": "mc",
@@ -67,11 +67,11 @@
     "status": "approved",
     "src": {
      "path": "GUIDE.md",
-     "label": "GUIDE.md:126",
-     "line": 126,
+     "label": "GUIDE.md:129",
+     "line": 129,
      "phrase": "3D character workflow"
     },
-    "note": "Meshy task 01a0e731-1faf-70a7-98e4-c0f2d163c246. The game loads its own copy from game3d/assets/eric-meshy/. Approved (Jørgen, 2026-09-28: \"of course we need Mio and Eric's Meshy models\").",
+    "note": "Meshy task 01a0e731-1faf-70a7-98e4-c0f2d163c246. The game loads slimmed copies from game3d/assets/eric/. Approved (Jørgen, 2026-09-28: \"of course we need Mio and Eric's Meshy models\").",
     "exists": true
    },
    "decisions": [
@@ -141,8 +141,8 @@
      "s": "approved",
      "src": {
       "path": "GUIDE.md",
-      "label": "GUIDE.md:126",
-      "line": 126,
+      "label": "GUIDE.md:129",
+      "line": 129,
       "phrase": "3D character workflow (Jørgen, 2026-09-28; worked first try for Eric)"
      }
     }
@@ -152,16 +152,16 @@
      "t": "Portrait eric-v2-734 (Jørgen, 2026-09-28: \"734 is best\"): the M-02-it-guy-601 design with his eyes open and without the red rim light. RDBT, seed 734.",
      "s": "review",
      "src": {
-      "path": "game3d/assets/portrait-candidates/eric-sheet-v2.png",
-      "label": "game3d/assets/portrait-candidates/eric-sheet-v2.png"
+      "path": "art/candidates/portraits/eric-sheet-v2.png",
+      "label": "art/candidates/portraits/eric-sheet-v2.png"
      }
     },
     {
      "t": "Tired face: tired-v3 seed 811 (Jørgen: \"811 looks pretty tired, like -_-\"). Face-only repaint of 734 with weary half-lidded eyes and a flat mouth.",
      "s": "approved",
      "src": {
-      "path": "game3d/assets/portrait-candidates/eric-tired-v3.png",
-      "label": "game3d/assets/portrait-candidates/eric-tired-v3.png"
+      "path": "art/candidates/portraits/eric-tired-v3.png",
+      "label": "art/candidates/portraits/eric-tired-v3.png"
      }
     },
     {
@@ -180,8 +180,8 @@
      "t": "The first open-eyed picks 731 and 734 (red rim light), and the v2 tired face: \"happy and drunk\".",
      "s": "rejected",
      "src": {
-      "path": "game3d/assets/portrait-candidates/eric-sheet.png",
-      "label": "game3d/assets/portrait-candidates/eric-sheet.png"
+      "path": "art/candidates/portraits/eric-sheet.png",
+      "label": "art/candidates/portraits/eric-sheet.png"
      }
     },
     {
@@ -252,25 +252,25 @@
     },
     {
      "label": "Portrait remake with open eyes, round 1 (731 to 734)",
-     "path": "game3d/assets/portrait-candidates/eric-sheet.png",
+     "path": "art/candidates/portraits/eric-sheet.png",
      "s": "rejected",
      "exists": true
     },
     {
      "label": "Portrait remake v2, no red rim light (734 picked)",
-     "path": "game3d/assets/portrait-candidates/eric-sheet-v2.png",
+     "path": "art/candidates/portraits/eric-sheet-v2.png",
      "s": "review",
      "exists": true
     },
     {
      "label": "Tired face v3 (811 picked)",
-     "path": "game3d/assets/portrait-candidates/eric-tired-v3.png",
+     "path": "art/candidates/portraits/eric-tired-v3.png",
      "s": "approved",
      "exists": true
     },
     {
      "label": "Natural poses (neck, coffee)",
-     "path": "game3d/assets/portrait-candidates/eric-poses-sheet.png",
+     "path": "art/candidates/portraits/eric-poses-sheet.png",
      "s": "rejected",
      "exists": true
     }
@@ -298,7 +298,7 @@
      "s": "approved"
     },
     {
-     "src": "game3d/assets/portrait-candidates/mio-expressions-v3-sheet.png",
+     "src": "art/candidates/portraits/mio-expressions-v3-sheet.png",
      "label": "Expression sheet v3 (the six faces in the game)",
      "s": "approved"
     }
@@ -309,8 +309,8 @@
     "status": "approved",
     "src": {
      "path": "docs/game/art-and-sound.md",
-     "label": "docs/game/art-and-sound.md:23",
-     "line": 23,
+     "label": "docs/game/art-and-sound.md:3",
+     "line": 3,
      "phrase": "Eric and Mio are Meshy models"
     },
     "note": "Meshy Neon Bun Guardian biped: six animation GLBs, base-clean.png and base-clean.json. The game loads its own copy. Only colour tweaks allowed.",
@@ -366,8 +366,8 @@
      "s": "approved",
      "src": {
       "path": "GUIDE.md",
-      "label": "GUIDE.md:57",
-      "line": 57,
+      "label": "GUIDE.md:56",
+      "line": 56,
       "phrase": "What works (Jørgen, 2026-09-28"
      }
     },
@@ -376,8 +376,8 @@
      "s": "approved",
      "src": {
       "path": "GUIDE.md",
-      "label": "GUIDE.md:146",
-      "line": 146,
+      "label": "GUIDE.md:151",
+      "line": 151,
       "phrase": "Mio: voice A from legacy/proto2/voice-mio"
      }
     },
@@ -386,8 +386,8 @@
      "s": "approved",
      "src": {
       "path": "GUIDE.md",
-      "label": "GUIDE.md:129",
-      "line": 129,
+      "label": "GUIDE.md:132",
+      "line": 132,
       "phrase": "Low-poly Mio paused"
      }
     }
@@ -418,8 +418,8 @@
      "s": "rejected",
      "src": {
       "path": "GUIDE.md",
-      "label": "GUIDE.md:128",
-      "line": 128,
+      "label": "GUIDE.md:131",
+      "line": 131,
       "phrase": "simplifying an inherently broken model"
      }
     },
@@ -458,8 +458,8 @@
      "s": "rejected",
      "src": {
       "path": "GUIDE.md",
-      "label": "GUIDE.md:146",
-      "line": 146,
+      "label": "GUIDE.md:151",
+      "line": 151,
       "phrase": "The original casting clip (mio-3) is retired"
      }
     }
@@ -515,13 +515,13 @@
     },
     {
      "label": "Expression sheet v1",
-     "path": "game3d/assets/portrait-candidates/mio-expressions-sheet.png",
+     "path": "art/candidates/portraits/mio-expressions-sheet.png",
      "s": "rejected",
      "exists": true
     },
     {
      "label": "Expression sheet v3",
-     "path": "game3d/assets/portrait-candidates/mio-expressions-v3-sheet.png",
+     "path": "art/candidates/portraits/mio-expressions-v3-sheet.png",
      "s": "approved",
      "exists": true
     },
@@ -653,14 +653,14 @@
     "s": "draft",
     "src": {
      "path": "TODO.md",
-     "label": "TODO.md:32",
-     "line": 32,
+     "label": "TODO.md:34",
+     "line": 34,
      "phrase": "Portraits in use provisionally"
     }
    },
    "images": [
     {
-     "src": "game3d/assets/portrait-candidates/mori-sheet.png",
+     "src": "art/candidates/portraits/mori-sheet.png",
      "label": "Portrait candidates (713 in use)",
      "s": "draft"
     },
@@ -689,7 +689,7 @@
    "history": [
     {
      "label": "Portrait candidates",
-     "path": "game3d/assets/portrait-candidates/mori-sheet.png",
+     "path": "art/candidates/portraits/mori-sheet.png",
      "s": "draft",
      "exists": true
     }
@@ -720,7 +720,7 @@
    },
    "images": [
     {
-     "src": "game3d/assets/portrait-candidates/kenji-sheet.png",
+     "src": "art/candidates/portraits/kenji-sheet.png",
      "label": "Portrait candidates (711, not approved)",
      "s": "rejected"
     }
@@ -1014,7 +1014,7 @@
    },
    "images": [
     {
-     "src": "game3d/assets/portrait-candidates/hamada-sheet.png",
+     "src": "art/candidates/portraits/hamada-sheet.png",
      "label": "Portrait candidates (721 in use)",
      "s": "draft"
     }
@@ -1067,8 +1067,8 @@
     "s": "draft",
     "src": {
      "path": "TODO.md",
-     "label": "TODO.md:32",
-     "line": 32,
+     "label": "TODO.md:34",
+     "line": 34,
      "phrase": "guard = Ishibashi with new expressions"
     }
    },
@@ -1079,7 +1079,7 @@
      "s": "approved"
     },
     {
-     "src": "game3d/assets/portrait-candidates/guard-sheet.png",
+     "src": "art/candidates/portraits/guard-sheet.png",
      "label": "Expression candidates",
      "s": "draft"
     }
@@ -2934,8 +2934,8 @@
    "s": "rejected",
    "src": {
     "path": "GUIDE.md",
-    "label": "GUIDE.md:84",
-    "line": 84,
+    "label": "GUIDE.md:83",
+    "line": 83,
     "phrase": "the knitting tough guy"
    }
   },
@@ -2966,8 +2966,8 @@
    "s": "approved",
    "src": {
     "path": "GUIDE.md",
-    "label": "GUIDE.md:124",
-    "line": 124,
+    "label": "GUIDE.md:127",
+    "line": 127,
     "phrase": "The cast stays (Jørgen",
     "n": 2
    }
@@ -2977,8 +2977,8 @@
    "s": "approved",
    "src": {
     "path": "GUIDE.md",
-    "label": "GUIDE.md:123",
-    "line": 123,
+    "label": "GUIDE.md:126",
+    "line": 126,
     "phrase": "Cast palette"
    }
   },
@@ -2997,8 +2997,8 @@
    "s": "approved",
    "src": {
     "path": "GUIDE.md",
-    "label": "GUIDE.md:122",
-    "line": 122,
+    "label": "GUIDE.md:125",
+    "line": 125,
     "phrase": "Expression sets must keep everything"
    }
   },
@@ -3017,8 +3017,8 @@
    "s": "approved",
    "src": {
     "path": "GUIDE.md",
-    "label": "GUIDE.md:84",
-    "line": 84,
+    "label": "GUIDE.md:83",
+    "line": 83,
     "phrase": "Don't repeat ideas"
    }
   },
@@ -3027,8 +3027,8 @@
    "s": "approved",
    "src": {
     "path": "GUIDE.md",
-    "label": "GUIDE.md:86",
-    "line": 86,
+    "label": "GUIDE.md:85",
+    "line": 85,
     "phrase": "Characters have their own concerns"
    }
   },
@@ -3100,8 +3100,8 @@
      "s": "approved",
      "src": {
       "path": "docs/game/controls-and-ui.md",
-      "label": "docs/game/controls-and-ui.md:70",
-      "line": 70,
+      "label": "docs/game/controls-and-ui.md:73",
+      "line": 73,
       "phrase": "The player character is always in view"
      }
     }
@@ -3451,8 +3451,8 @@
      "s": "approved",
      "src": {
       "path": "GUIDE.md",
-      "label": "GUIDE.md:90",
-      "line": 90,
+      "label": "GUIDE.md:89",
+      "line": 89,
       "phrase": "Game first, learning light"
      }
     },
@@ -3461,8 +3461,8 @@
      "s": "approved",
      "src": {
       "path": "GUIDE.md",
-      "label": "GUIDE.md:28",
-      "line": 28,
+      "label": "GUIDE.md:25",
+      "line": 25,
       "phrase": "Scope (Jørgen, 2026-09-28)"
      }
     },
@@ -3492,8 +3492,8 @@
      "s": "approved",
      "src": {
       "path": "GUIDE.md",
-      "label": "GUIDE.md:31",
-      "line": 31,
+      "label": "GUIDE.md:28",
+      "line": 28,
       "phrase": "Character arcs are to be designed in full RPG-walkthrough detail"
      }
     }
@@ -3507,8 +3507,8 @@
      "s": "approved",
      "src": {
       "path": "docs/game/words.md",
-      "label": "docs/game/words.md:41",
-      "line": 41,
+      "label": "docs/game/words.md:50",
+      "line": 50,
       "phrase": "Only words taught in play count as known"
      }
     },
@@ -3527,8 +3527,8 @@
      "s": "approved",
      "src": {
       "path": "docs/game/controls-and-ui.md",
-      "label": "docs/game/controls-and-ui.md:33",
-      "line": 33,
+      "label": "docs/game/controls-and-ui.md:35",
+      "line": 35,
       "phrase": "Every control is introduced the first time"
      }
     }
@@ -3542,8 +3542,8 @@
      "s": "approved",
      "src": {
       "path": "GUIDE.md",
-      "label": "GUIDE.md:59",
-      "line": 59,
+      "label": "GUIDE.md:58",
+      "line": 58,
       "phrase": "NO EXPOSITION IN PANELS"
      }
     },
@@ -3552,19 +3552,9 @@
      "s": "approved",
      "src": {
       "path": "GUIDE.md",
-      "label": "GUIDE.md:60",
-      "line": 60,
+      "label": "GUIDE.md:59",
+      "line": 59,
       "phrase": "No narration of what the player can see"
-     }
-    },
-    {
-     "q": true,
-     "s": "approved",
-     "src": {
-      "path": "GUIDE.md",
-      "label": "GUIDE.md:65",
-      "line": 65,
-      "phrase": "Story and screen must match"
      }
     },
     {
@@ -3574,7 +3564,7 @@
       "path": "GUIDE.md",
       "label": "GUIDE.md:64",
       "line": 64,
-      "phrase": "Big moments must read on their own"
+      "phrase": "Story and screen must match"
      }
     },
     {
@@ -3584,6 +3574,16 @@
       "path": "GUIDE.md",
       "label": "GUIDE.md:63",
       "line": 63,
+      "phrase": "Big moments must read on their own"
+     }
+    },
+    {
+     "q": true,
+     "s": "approved",
+     "src": {
+      "path": "GUIDE.md",
+      "label": "GUIDE.md:62",
+      "line": 62,
       "phrase": "Stage in steps a slow reader can follow"
      }
     }
@@ -3597,8 +3597,8 @@
      "s": "approved",
      "src": {
       "path": "GUIDE.md",
-      "label": "GUIDE.md:108",
-      "line": 108,
+      "label": "GUIDE.md:109",
+      "line": 109,
       "phrase": "World style (Jørgen, 2026-09-27)"
      }
     },
@@ -3618,8 +3618,8 @@
      "s": "approved",
      "src": {
       "path": "docs/game/controls-and-ui.md",
-      "label": "docs/game/controls-and-ui.md:47",
-      "line": 47,
+      "label": "docs/game/controls-and-ui.md:50",
+      "line": 50,
       "phrase": "Direction 1, \"faded\""
      }
     },
@@ -3628,8 +3628,8 @@
      "s": "approved",
      "src": {
       "path": "GUIDE.md",
-      "label": "GUIDE.md:100",
-      "line": 100,
+      "label": "GUIDE.md:101",
+      "line": 101,
       "phrase": "No text on timers, ever"
      }
     },
@@ -3638,9 +3638,7 @@
      "s": "approved",
      "src": {
       "path": "docs/game/controls-and-ui.md",
-      "label": "docs/game/controls-and-ui.md:39",
-      "line": 39,
-      "phrase": "The over-head icons and labels are being redesigned"
+      "label": "docs/game/controls-and-ui.md"
      }
     },
     {
@@ -3648,8 +3646,8 @@
      "s": "approved",
      "src": {
       "path": "GUIDE.md",
-      "label": "GUIDE.md:106",
-      "line": 106,
+      "label": "GUIDE.md:107",
+      "line": 107,
       "phrase": "Avoid default AI aesthetics"
      }
     }
@@ -3663,8 +3661,8 @@
      "s": "approved",
      "src": {
       "path": "GUIDE.md",
-      "label": "GUIDE.md:33",
-      "line": 33,
+      "label": "GUIDE.md:30",
+      "line": 30,
       "phrase": "Jørgen approves every asset"
      }
     },
@@ -3673,8 +3671,8 @@
      "s": "approved",
      "src": {
       "path": "GUIDE.md",
-      "label": "GUIDE.md:34",
-      "line": 34,
+      "label": "GUIDE.md:31",
+      "line": 31,
       "phrase": "Show every attempt"
      }
     },
@@ -3683,8 +3681,8 @@
      "s": "approved",
      "src": {
       "path": "GUIDE.md",
-      "label": "GUIDE.md:154",
-      "line": 154,
+      "label": "GUIDE.md:161",
+      "line": 161,
       "phrase": "Validate each fix in isolation"
      }
     },
@@ -3693,8 +3691,8 @@
      "s": "approved",
      "src": {
       "path": "GUIDE.md",
-      "label": "GUIDE.md:38",
-      "line": 38,
+      "label": "GUIDE.md:35",
+      "line": 35,
       "phrase": "Relay feedback as given"
      }
     },
@@ -3703,8 +3701,8 @@
      "s": "approved",
      "src": {
       "path": "GUIDE.md",
-      "label": "GUIDE.md:42",
-      "line": 42,
+      "label": "GUIDE.md:39",
+      "line": 39,
       "phrase": "Every build announcement to Jørgen names the build id"
      }
     }
@@ -3842,8 +3840,8 @@
     "s": "approved",
     "src": {
      "path": "GUIDE.md",
-     "label": "GUIDE.md:126",
-     "line": 126,
+     "label": "GUIDE.md:129",
+     "line": 129,
      "phrase": "3D character workflow (Jørgen, 2026-09-28"
     }
    },
@@ -3852,8 +3850,8 @@
     "s": "approved",
     "src": {
      "path": "GUIDE.md",
-     "label": "GUIDE.md:127",
-     "line": 127,
+     "label": "GUIDE.md:130",
+     "line": 130,
      "phrase": "Meshy parts (Jørgen, 2026-09-27, round 14)"
     }
    },
@@ -3882,8 +3880,8 @@
     "s": "approved",
     "src": {
      "path": "GUIDE.md",
-     "label": "GUIDE.md:117",
-     "line": 117,
+     "label": "GUIDE.md:120",
+     "line": 120,
      "phrase": "Every image and video prompt starts with the shot-staging skill"
     }
    },
@@ -3892,8 +3890,8 @@
     "s": "approved",
     "src": {
      "path": "GUIDE.md",
-     "label": "GUIDE.md:118",
-     "line": 118,
+     "label": "GUIDE.md:121",
+     "line": 121,
      "phrase": "The main prompt rule"
     }
    },
@@ -3902,8 +3900,8 @@
     "s": "approved",
     "src": {
      "path": "GUIDE.md",
-     "label": "GUIDE.md:119",
-     "line": 119,
+     "label": "GUIDE.md:122",
+     "line": 122,
      "phrase": "Don't overcorrect"
     }
    },
@@ -3912,8 +3910,8 @@
     "s": "approved",
     "src": {
      "path": "GUIDE.md",
-     "label": "GUIDE.md:137",
-     "line": 137,
+     "label": "GUIDE.md:140",
+     "line": 140,
      "phrase": "Perspective is not an anatomy fault"
     }
    },
@@ -3922,8 +3920,8 @@
     "s": "approved",
     "src": {
      "path": "GUIDE.md",
-     "label": "GUIDE.md:125",
-     "line": 125,
+     "label": "GUIDE.md:128",
+     "line": 128,
      "phrase": "Consistent characters (Jørgen, 2026-09-27)"
     }
    }
@@ -3934,8 +3932,8 @@
     "s": "rejected",
     "src": {
      "path": "GUIDE.md",
-     "label": "GUIDE.md:108",
-     "line": 108,
+     "label": "GUIDE.md:109",
+     "line": 109,
      "phrase": "Never mention or propose paper"
     }
    },
@@ -3944,8 +3942,8 @@
     "s": "rejected",
     "src": {
      "path": "GUIDE.md",
-     "label": "GUIDE.md:106",
-     "line": 106,
+     "label": "GUIDE.md:107",
+     "line": 107,
      "phrase": "Avoid default AI aesthetics"
     }
    },
@@ -3964,8 +3962,8 @@
     "s": "rejected",
     "src": {
      "path": "GUIDE.md",
-     "label": "GUIDE.md:128",
-     "line": 128,
+     "label": "GUIDE.md:131",
+     "line": 131,
      "phrase": "Shrinking or recolouring a generated mesh"
     }
    },
@@ -3974,8 +3972,8 @@
     "s": "rejected",
     "src": {
      "path": "GUIDE.md",
-     "label": "GUIDE.md:125",
-     "line": 125,
+     "label": "GUIDE.md:128",
+     "line": 128,
      "phrase": "we don't want to train models"
     }
    },
@@ -3984,8 +3982,8 @@
     "s": "rejected",
     "src": {
      "path": "GUIDE.md",
-     "label": "GUIDE.md:120",
-     "line": 120,
+     "label": "GUIDE.md:123",
+     "line": 123,
      "phrase": "Jørgen's own images (art/refs"
     }
    },
@@ -4014,8 +4012,8 @@
     "s": "rejected",
     "src": {
      "path": "docs/game/controls-and-ui.md",
-     "label": "docs/game/controls-and-ui.md:71",
-     "line": 71,
+     "label": "docs/game/controls-and-ui.md:74",
+     "line": 74,
      "phrase": "Ceiling light fixtures are not shown"
     }
    }
@@ -4050,8 +4048,8 @@
     "s": "approved",
     "src": {
      "path": "GUIDE.md",
-     "label": "GUIDE.md:145",
-     "line": 145,
+     "label": "GUIDE.md:150",
+     "line": 150,
      "phrase": "Local first (Jørgen, 2026-09-28)"
     }
    },
@@ -4070,8 +4068,8 @@
     "s": "approved",
     "src": {
      "path": "GUIDE.md",
-     "label": "GUIDE.md:146",
-     "line": 146,
+     "label": "GUIDE.md:151",
+     "line": 151,
      "phrase": "Mio: voice A from legacy/proto2/voice-mio"
     }
    },
@@ -4080,8 +4078,8 @@
     "s": "approved",
     "src": {
      "path": "GUIDE.md",
-     "label": "GUIDE.md:147",
-     "line": 147,
+     "label": "GUIDE.md:152",
+     "line": 152,
      "phrase": "Per-character loudness is normalised"
     }
    }
@@ -4699,94 +4697,6 @@
    "area": "legacy/side"
   },
   {
-   "path": "game3d/assets/portrait-candidates/mori-sheet.png",
-   "title": "mori-sheet.png",
-   "what": "Mr. Mori portrait candidates.",
-   "status": "open",
-   "note": "713 in use provisionally.",
-   "date": "2026-09-28",
-   "where": "tracked",
-   "group": "current",
-   "area": "game3d"
-  },
-  {
-   "path": "game3d/assets/portrait-candidates/mio-expressions-v3-sheet.png",
-   "title": "mio-expressions-v3-sheet.png",
-   "what": "Mio's six expressions, v3.",
-   "status": "decided",
-   "note": "Approved; in the game.",
-   "date": "2026-09-28",
-   "where": "tracked",
-   "group": "current",
-   "area": "game3d"
-  },
-  {
-   "path": "game3d/assets/portrait-candidates/kenji-sheet.png",
-   "title": "kenji-sheet.png",
-   "what": "Kenji portrait candidates.",
-   "status": "decided",
-   "note": "711 not approved; new concept art is coming.",
-   "date": "2026-09-28",
-   "where": "tracked",
-   "group": "current",
-   "area": "game3d"
-  },
-  {
-   "path": "game3d/assets/portrait-candidates/hamada-sheet.png",
-   "title": "hamada-sheet.png",
-   "what": "Mr. Hamada portrait candidates.",
-   "status": "open",
-   "note": "721 in use provisionally.",
-   "date": "2026-09-28",
-   "where": "tracked",
-   "group": "current",
-   "area": "game3d"
-  },
-  {
-   "path": "game3d/assets/portrait-candidates/guard-sheet.png",
-   "title": "guard-sheet.png",
-   "what": "Mr. Ishibashi's new expressions.",
-   "status": "open",
-   "note": "Stern and amused in use provisionally.",
-   "date": "2026-09-28",
-   "where": "tracked",
-   "group": "current",
-   "area": "game3d"
-  },
-  {
-   "path": "game3d/assets/portrait-candidates/eric-tired-v3.png",
-   "title": "eric-tired-v3.png",
-   "what": "Eric's tired face v3.",
-   "status": "decided",
-   "note": "811 picked.",
-   "date": "2026-09-28",
-   "where": "tracked",
-   "group": "current",
-   "area": "game3d"
-  },
-  {
-   "path": "game3d/assets/portrait-candidates/eric-sheet-v2.png",
-   "title": "eric-sheet-v2.png",
-   "what": "Eric's portrait remake v2 (seeds 731 to 734, no red rim light).",
-   "status": "open",
-   "note": "734 was picked; the MC's style is under review again.",
-   "date": "2026-09-28",
-   "where": "tracked",
-   "group": "current",
-   "area": "game3d"
-  },
-  {
-   "path": "game3d/assets/portrait-candidates/eric-poses-sheet.png",
-   "title": "eric-poses-sheet.png",
-   "what": "Eric in natural poses.",
-   "status": "decided",
-   "note": "Rejected (sides shaved too close, a furry-hat top).",
-   "date": "2026-09-28",
-   "where": "tracked",
-   "group": "current",
-   "area": "game3d"
-  },
-  {
    "path": "game3d/REVIEW.md",
    "title": "REVIEW.md",
    "what": "The critic log for the three places (scores per round, shots).",
@@ -4796,6 +4706,94 @@
    "where": "tracked",
    "group": "current",
    "area": "game3d"
+  },
+  {
+   "path": "art/candidates/portraits/mori-sheet.png",
+   "title": "mori-sheet.png",
+   "what": "Mr. Mori portrait candidates.",
+   "status": "open",
+   "note": "713 in use provisionally.",
+   "date": "2026-09-28",
+   "where": "not committed",
+   "group": "current",
+   "area": "art"
+  },
+  {
+   "path": "art/candidates/portraits/mio-expressions-v3-sheet.png",
+   "title": "mio-expressions-v3-sheet.png",
+   "what": "Mio's six expressions, v3.",
+   "status": "decided",
+   "note": "Approved; in the game.",
+   "date": "2026-09-28",
+   "where": "not committed",
+   "group": "current",
+   "area": "art"
+  },
+  {
+   "path": "art/candidates/portraits/kenji-sheet.png",
+   "title": "kenji-sheet.png",
+   "what": "Kenji portrait candidates.",
+   "status": "decided",
+   "note": "711 not approved; new concept art is coming.",
+   "date": "2026-09-28",
+   "where": "not committed",
+   "group": "current",
+   "area": "art"
+  },
+  {
+   "path": "art/candidates/portraits/hamada-sheet.png",
+   "title": "hamada-sheet.png",
+   "what": "Mr. Hamada portrait candidates.",
+   "status": "open",
+   "note": "721 in use provisionally.",
+   "date": "2026-09-28",
+   "where": "not committed",
+   "group": "current",
+   "area": "art"
+  },
+  {
+   "path": "art/candidates/portraits/guard-sheet.png",
+   "title": "guard-sheet.png",
+   "what": "Mr. Ishibashi's new expressions.",
+   "status": "open",
+   "note": "Stern and amused in use provisionally.",
+   "date": "2026-09-28",
+   "where": "not committed",
+   "group": "current",
+   "area": "art"
+  },
+  {
+   "path": "art/candidates/portraits/eric-tired-v3.png",
+   "title": "eric-tired-v3.png",
+   "what": "Eric's tired face v3.",
+   "status": "decided",
+   "note": "811 picked.",
+   "date": "2026-09-28",
+   "where": "not committed",
+   "group": "current",
+   "area": "art"
+  },
+  {
+   "path": "art/candidates/portraits/eric-sheet-v2.png",
+   "title": "eric-sheet-v2.png",
+   "what": "Eric's portrait remake v2 (seeds 731 to 734, no red rim light).",
+   "status": "open",
+   "note": "734 was picked; the MC's style is under review again.",
+   "date": "2026-09-28",
+   "where": "not committed",
+   "group": "current",
+   "area": "art"
+  },
+  {
+   "path": "art/candidates/portraits/eric-poses-sheet.png",
+   "title": "eric-poses-sheet.png",
+   "what": "Eric in natural poses.",
+   "status": "decided",
+   "note": "Rejected (sides shaved too close, a furry-hat top).",
+   "date": "2026-09-28",
+   "where": "not committed",
+   "group": "current",
+   "area": "art"
   },
   {
    "path": "legacy/side/train/index.html",
@@ -5013,8 +5011,8 @@
     "t": "Mori's 3D look: a Meshy test exists, and it loads only with ?cast3d=mori until he approves it.",
     "src": {
      "path": "game3d/js/cast.js",
-     "label": "game3d/js/cast.js:20",
-     "line": 20,
+     "label": "game3d/js/cast.js:25",
+     "line": 25,
      "phrase": "While a model waits for Jørgen's approval"
     },
     "char": "mori"
@@ -5033,8 +5031,8 @@
     "t": "The portraits in use provisionally: Mori 713, Hamada 721 and Ishibashi's stern and amused faces. Confirm or pick others.",
     "src": {
      "path": "TODO.md",
-     "label": "TODO.md:32",
-     "line": 32,
+     "label": "TODO.md:34",
+     "line": 34,
      "phrase": "Portraits in use provisionally"
     },
     "char": null
@@ -5053,8 +5051,8 @@
     "t": "Whether the bible goes public. It has never been committed.",
     "src": {
      "path": "TODO.md",
-     "label": "TODO.md:39",
-     "line": 39,
+     "label": "TODO.md:41",
+     "line": 41,
      "phrase": "The bible (bible/) has never been committed"
     },
     "char": null
@@ -5063,8 +5061,8 @@
     "t": "The walkthrough's scope: Mio and Mori have full walkthroughs; GUIDE asks for arcs in full walkthrough detail, and also not to write ahead of the intro day.",
     "src": {
      "path": "GUIDE.md",
-     "label": "GUIDE.md:31",
-     "line": 31,
+     "label": "GUIDE.md:28",
+     "line": 28,
      "phrase": "Character arcs are to be designed in full RPG-walkthrough detail"
     },
     "char": null
@@ -5083,9 +5081,7 @@
     "t": "Over-head icons and labels are being redesigned.",
     "src": {
      "path": "docs/game/controls-and-ui.md",
-     "label": "docs/game/controls-and-ui.md:39",
-     "line": 39,
-     "phrase": "The over-head icons and labels are being redesigned"
+     "label": "docs/game/controls-and-ui.md"
     },
     "char": null
    },
@@ -5187,8 +5183,8 @@
     "t": "How hard the language should be (the Difficulty rules against the VN-era reverse learning).",
     "src": {
      "path": "GUIDE.md",
-     "label": "GUIDE.md:90",
-     "line": 90,
+     "label": "GUIDE.md:89",
+     "line": 89,
      "phrase": "Game first, learning light",
      "n": 2
     }
@@ -5207,8 +5203,8 @@
     "t": "The character look in the 3D rooms.",
     "src": {
      "path": "GUIDE.md",
-     "label": "GUIDE.md:126",
-     "line": 126,
+     "label": "GUIDE.md:129",
+     "line": 129,
      "phrase": "3D character workflow (Jørgen, 2026-09-28; worked first try for Eric)"
     }
    },
@@ -5216,8 +5212,8 @@
     "t": "Low-poly Mio round 10.",
     "src": {
      "path": "GUIDE.md",
-     "label": "GUIDE.md:129",
-     "line": 129,
+     "label": "GUIDE.md:132",
+     "line": 132,
      "phrase": "Low-poly Mio paused",
      "n": 1
     }
@@ -5226,8 +5222,8 @@
     "t": "Local voices waiting for his ears.",
     "src": {
      "path": "GUIDE.md",
-     "label": "GUIDE.md:145",
-     "line": 145,
+     "label": "GUIDE.md:150",
+     "line": 150,
      "phrase": "Local first (Jørgen, 2026-09-28)",
      "n": 1
     }
@@ -5285,8 +5281,8 @@
     "t": "The dialogue overlay direction.",
     "src": {
      "path": "docs/game/controls-and-ui.md",
-     "label": "docs/game/controls-and-ui.md:47",
-     "line": 47,
+     "label": "docs/game/controls-and-ui.md:50",
+     "line": 50,
      "phrase": "Direction 1, \"faded\"",
      "n": 1
     }
@@ -5765,17 +5761,21 @@
    "beats/",
    "blobs-2026-09-28/",
    "doors-2026-09-28/",
+   "eric-face/",
    "fast/",
    "gate-display/",
    "hud-goal/",
    "lift-doors/",
    "lunch/",
+   "lunchbox-two-steps/",
    "machine-door-2026-09-28/",
    "mori-greet/",
+   "no-ring/",
    "office-fan/",
    "opening/",
    "perf/",
    "phone-msg/",
+   "pins-outline/",
    "practice-box/",
    "printer/",
    "round-1/",
@@ -5795,6 +5795,7 @@
    "target-ring/",
    "that-guy/",
    "train-closed-2026-09-28/",
+   "train-doors/",
    "voice/",
    "words-menu/"
   ],
@@ -5805,7 +5806,9 @@
    "codex-contest-start/",
    "creator-base-1/",
    "creator-base-2/",
+   "creator-base-3/",
    "creator-idle-neutral/",
+   "creator-idle-neutral-2/",
    "creator-parts/",
    "eric-expressions-1/",
    "eric-portrait-ancient/",
@@ -5830,8 +5833,10 @@
    "mio-phone-4/",
    "mio-phone-5/",
    "mori-3d/",
+   "openviking-trial/",
    "productivity-review/",
    "r2-setup/",
+   "refactor-next/",
    "source-of-truth-audit/",
    "style-avenues/",
    "style-avenues-room/",
