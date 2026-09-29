@@ -15,7 +15,7 @@ import { route } from './route.js';
 export const withList = (slot) => (slot.with || []).filter((e) => typeof e === 'string' || cond(e.if)).map((e) => (typeof e === 'string' ? e : e.who));
 
 // walk an object in a straight line, ignoring the walk grid (scripted moves)
-import { glide } from '../move.js';
+import { glide, walkRig } from '../move.js';
 export { glide };   // smooth start, turn and stop; never touches the player's facing
 
 export async function lobbyPlace(game) {
@@ -232,7 +232,7 @@ export async function lobbyPlace(game) {
       catTo: async ({ to }) => {
         const p = game.posOf(to); if (!p) return;
         const crosses = (w.tama.position.z - BZ) * (p[1] - BZ) < 0;
-        const run = glide(game, w.tama, p, 1.1);
+        const run = walkRig(game, w.tama, p, { speed: 1.1 });
         if (crosses) { await game.wait(Math.abs(w.tama.position.z - BZ) / 1.1 * 1000); readerFlash(1, 'red'); w.arch.userData.set('no'); setTimeout(() => w.arch.userData.set(st.gateOpen ? 'ok' : 'idle'), 1200); }
         await run;
       },
