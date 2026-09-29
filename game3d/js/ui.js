@@ -466,8 +466,9 @@ export const ui = {
     // taught word plays it instead. While the story is busy (a walk, a door) a tap shows the wait marker instead of
     // doing nothing, and asks main.js to hurry the scripted move along (game.skip, if it has one).
     const tapTalk = (e) => {
-      if (e.target.closest('.chip, .tp-in, button')) return;
+      // the play button is a <button>: check it before the button guard below, or it does nothing
       const pb = e.target.closest('.wplay'); if (pb) { e.stopPropagation(); e.preventDefault(); this.sayWord(pb.dataset.w, pb); return; }
+      if (e.target.closest('.chip, .tp-in, button')) return;
       const w = e.target.closest('.jp[data-w]'); if (w) { e.stopPropagation(); e.preventDefault(); this.sayWord(w.dataset.w, w.nextElementSibling && w.nextElementSibling.classList.contains('wplay') ? w.nextElementSibling : w); return; }
       e.stopPropagation();
       if (this._advance) { this._advance(); return; }
