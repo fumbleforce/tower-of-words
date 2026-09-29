@@ -43,14 +43,14 @@ const recipe = {body:'eric',parts:{head:'eric-head'},colours:{head:'#ffffff'}};
 const status = {textContent:''}, pending = [], retired = [];
 const old = {id:'old'}, sceneStub = {add() {}};
 const api = new Function('buildCharacter','disposeCharacter','setColours','recipe','document','scene','old','SLOTS', `
-  let busy=0, ch=old, anim='idle'; const lib={}; function showRecipe() {}
+  let busy=0, ch=old, anim='idle'; const lib={}; function showRecipe() {} function syncRecipeControls() {}
   ${handler}
   return {rebuild, current:()=>ch};
 `)(
   (lib, snapshot) => new Promise((resolve,reject)=>pending.push({snapshot,resolve,reject})),
   character => retired.push(character.id),
   (character, colours) => { character.appliedColours={...colours}; },
-  recipe,{getElementById:()=>status},sceneStub,old,['head'],
+  recipe,{getElementById:()=>status,querySelectorAll:()=>[]},sceneStub,old,['head'],
 );
 const result = id => ({id,root:{},recipe:structuredClone(recipe),play(){}});
 const slow = api.rebuild(); recipe.body='mio'; const fast = api.rebuild();

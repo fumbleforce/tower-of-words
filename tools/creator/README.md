@@ -7,6 +7,14 @@ Pages (served by ./start):
 - http://127.0.0.1:8771/tools/creator/sheet.html: the check sheet (rebuilds against the originals, mixed characters, seam close-ups). Add `?only=mix` to skip the rebuilds.
 - http://127.0.0.1:8771/tools/creator/cut.html: how each model is cut, coloured by slot.
 
+## Save a character recipe
+
+Use **Save recipe** to download the current body, six parts, colours, height and any existing fit adjustments as a JSON file. **Load recipe** restores that file. Under **Recipe JSON**, paste an earlier copied recipe and press **Apply JSON**; **Copy JSON** keeps the plain recipe format.
+
+Files use `{ "format": "amakawa-creator", "version": 1, "recipe": { ... } }`. Plain recipes from the old Copy button and `?recipe=` links also load. Recipes refer to the local parts library; they contain selections, not meshes or textures. Missing parts, parts in the wrong slot and unsupported file versions are reported without replacing the current character. Invalid URL recipes show the default character and an error message.
+
+Height must be 0.1–3; optional fit scales 0.05–5 and three-axis offsets −3–3. Colours use six-digit hex values. The file limit is 64 KB. A combined GLB export remains separate work.
+
 ## How it works
 
 - `art/parts/` is the library: `src/<id>/` holds each source model (a copy of the game's GLB, texture, and for Mio her palette face data), `anim/` holds Eric's idle and walk clips, and `library.json` lists the sources, the cut rules and the parts. A part is a list of triangles from one source.
