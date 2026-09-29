@@ -448,11 +448,20 @@ H.face = ({ who, to }) => {
 };
 H.look = ({ who, at }) => { const r = rigOf(who); const p = posOf(at); if (r && p) r.lookTarget = p; };
 H.sit = async ({ who, at }) => {
+  // the player (QA 22: nothing seated Eric; the lobby's sitPerson returns early for him)
+  // (the train and office seat him themselves, with their bags and props)
+  if (isPlayer(who) && game.player.sitAt && !['train', 'office'].includes(game.place.name)) {
+    const s = game.place.seats[at]; if (!s) return;
+    await H.walk({ who, to: [s.x, s.z + (s.ry ? -0.5 : 0.5)] });
+    game.player.sitAt(s.x, s.top, s.z, s.ry || 0); game.player.seated = true; if (game.walker) game.walker.facing = s.ry || 0;
+    return;
+  }
   const r = rigOf(who);
   if (r && r.meshy) { const s = game.place.seats[at]; if (!s) return; r.root.visible = true; await H.walk({ who, to: [s.x, s.z + (s.ry ? -0.5 : 0.5)] }); r.sitAt(s.x, s.top, s.z, s.ry || 0); r.seated = true; return; }
   await game.place.sitPerson?.(isPlayer(who) ? 'eric' : who, at);
 };
 H.stand = async ({ who }) => {
+  if (isPlayer(who) && game.player.seated && !['train', 'office'].includes(game.place.name)) { game.player.seated = false; game.player.setState('idle'); game.player.root.position.y = 0; game.player.root.position.z += 0.45; return; }
   const r = rigOf(who);
   // Meshy rigs (Mio, and Eric when it's him) stand by leaving the sit pose and stepping off the bench
   if (r && r.meshy && !isPlayer(who)) { if (r.seated) await standOut(game, r, r.root.position.z < 0 ? 0.45 : -0.45); return; }

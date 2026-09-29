@@ -32,7 +32,7 @@ import { pathToFileURL } from 'node:url';
   else if (fails.length) { console.log('FAIL build checks\n' + fails.join('\n')); process.exit(1); }
 }
 const [W = '1366', H = '860', S = '180'] = process.argv.slice(2);
-const gl = process.env.GL === 'gpu' ? ['--use-angle=vulkan', '--enable-features=Vulkan', '--ignore-gpu-blocklist', '--enable-gpu'] : ['--use-angle=swiftshader', '--enable-unsafe-swiftshader'];
+let gl = process.env.GL === 'gpu' ? ['--use-angle=vulkan', '--enable-features=Vulkan', '--ignore-gpu-blocklist', '--enable-gpu'] : ['--use-angle=swiftshader', '--enable-unsafe-swiftshader'];
 gl.push('--autoplay-policy=no-user-gesture-required');
 // one headless browser at a time across all agents (GUIDE, Process): take /tmp/claude-1000/browser.lock, wait if held
 const LOCK = '/tmp/claude-1000/browser.lock', ME = process.env.LOCK_NAME || 'fast-test';
@@ -42,6 +42,12 @@ for (let tries = 0; ; tries++) {
 }
 const unlock = () => { try { if (fs.readFileSync(LOCK + '/owner', 'utf8').startsWith(ME)) fs.rmSync(LOCK, { recursive: true, force: true }); } catch {} };
 process.on('exit', unlock); process.on('SIGINT', () => { unlock(); process.exit(130); }); process.on('SIGTERM', () => { unlock(); process.exit(143); });
+// the real GPU is about 20x faster than SwiftShader: take the GPU lock if it's free (as game3d/qa/run.sh does)
+const GLOCK = '/tmp/claude-1000/gpu.lock'; let gpuMine = false;
+if (process.env.GL !== 'soft') { try { fs.mkdirSync(GLOCK); fs.writeFileSync(GLOCK + '/owner', ME + ' fast-test'); gpuMine = true; gl = ['--use-angle=vulkan', '--enable-features=Vulkan', '--ignore-gpu-blocklist', '--enable-gpu']; } catch { /* busy: software */ } }
+console.log('GL', gpuMine || process.env.GL === 'gpu' ? 'gpu' : 'swiftshader');
+const unGpu = () => { if (!gpuMine) return; try { if (fs.readFileSync(GLOCK + '/owner', 'utf8').startsWith(ME)) fs.rmSync(GLOCK, { recursive: true, force: true }); } catch {} gpuMine = false; };
+process.on('exit', unGpu);
 const b = await chromium.launch({ headless: true, args: gl });
 const p = await b.newPage({ viewport: { width: +W, height: +H } });
 const errs = [];
@@ -64,4 +70,4 @@ for (const h of (r.heard || []).filter((h) => /sumimasen|すみません/.test(h
 console.log('last steps:', r.log.slice(-8).join(' | '));
 if (errs.length || r.errors.length) console.log('errors:', [...errs, ...r.errors].slice(0, 6).join(' | '));
 await b.close();
-unlock();
+unGpu(); unlock();
