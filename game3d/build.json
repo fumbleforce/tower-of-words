@@ -1,5 +1,5 @@
 {
-"id": "0929-1906-52144e9",
+"id": "0929-2044-d64b4b4",
 "files": [
 "js/ambience.js",
 "js/audio/core.js",
@@ -70,6 +70,7 @@
 "js/places/train.js",
 "js/post.js",
 "js/props.js",
+"js/relaxed-idle.js",
 "js/runner.js",
 "js/scenes/lobby.js",
 "js/scenes/office.js",
