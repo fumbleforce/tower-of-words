@@ -1,0 +1,52 @@
+{
+  "date": "2026-09-29",
+  "tool": "Built-in image_gen",
+  "settings": {
+    "mode": "edit",
+    "transparent_background": false,
+    "seed": "not exposed",
+    "model_identifier": "not exposed"
+  },
+  "attempts": [
+    {
+      "id": "01-overview",
+      "file": "01-overview.png",
+      "kind": "overview",
+      "reference": "art/candidates/island-map-1/06-dense-overview.png",
+      "note": "Adds requested offices, shopping neighbourhood, pool, onsen and beach; retains the western station/HQ connection and central square.",
+      "prompt": "Edit this overhead map of a Japanese company island, keeping its cute flat-shaded 3D style, camera direction and daylight. Keep the navy station on the left, its single monorail approach and covered bridge into the tall head-office tower, and the central fountain square with its blue-roofed canteen. Fill the workplace district behind the tower and canteen with several additional office blocks and narrow connected streets. Expand the small teal shop row below the square into a compact shopping neighbourhood: two intersecting pedestrian shopping streets lined on both sides with small varied storefronts and awnings, keeping the dark-roofed bar. Add a clearly visible outdoor lap pool beside the sage-roofed gym, keeping its sports court and nearby university courtyard. Extend the right shoreline slightly into a rocky headland with a small tiled-roof onsen bathhouse and outdoor stone hot-spring pools overlooking the sea. Add a sandy beach cove along the lower-left shore with steps down from the waterfront promenade. Keep the tight tall dorm cluster at lower right and connect every new place to the existing pedestrian paths. Show the whole expanded island with water around it; no text or interface.",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "original": "/home/jorgen/.codex/generated_images/01a0ec11-5467-7f12-8cb3-978cf1b7bbe0/exec-af0495c1-72c8-4337-b1fd-1c1f4d87ef87.png"
+    },
+    {
+      "id": "02-west",
+      "file": "02-west.png",
+      "kind": "district",
+      "reference": "art/candidates/island-map-2/01-overview.png",
+      "note": "Arrival and workplace district, shopping streets and beach. Shared fountain, clock and canteen match the overview’s arrangement; small details vary.",
+      "prompt": "Create a closer west-district view from this exact island map, preserving the cute flat-shaded 3D style, camera direction, daylight, coastline and building arrangement. Frame the left portion including the entire station and monorail approach, covered link into the full head-office tower, the additional office blocks, the entire blue-roofed canteen and fountain square, shopping streets below the square, and the beach cove. Keep the fountain, clock, canteen, shopfronts and connecting paths in the same relative positions. Magnify this existing area without redesigning it. The eastern gym, university, dorms and onsen are outside this crop. No new buildings, text or interface.",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "original": "/home/jorgen/.codex/generated_images/01a0ec11-5467-7f12-8cb3-978cf1b7bbe0/exec-c64ed764-1a84-4f20-99d6-d9df87d90004.png"
+    },
+    {
+      "id": "03-east",
+      "file": "03-east.png",
+      "kind": "district",
+      "reference": "art/candidates/island-map-2/01-overview.png",
+      "note": "Gym, pool and court above the university; dorms below; onsen on the eastern headland. The complete canteen and fountain square form the overlap with the west view.",
+      "prompt": "Create a closer east-district view from this exact island map, preserving the cute flat-shaded 3D style, camera direction, daylight, coastline and building arrangement. Frame from just left of the blue-roofed canteen and fountain square to the far eastern headland, keeping the entire canteen and square at the left. Show the gym, lap pool beside it, sports court, university courtyard, compact tall dorm cluster, shopping streets below the square, dark-roofed bar and the onsen bathhouse with outdoor rock pools on its sea-facing headland. Keep the fountain, clock, shopfronts and connecting paths in the same relative positions. Magnify this existing area without redesigning it. The station and main office tower are outside this crop. No new buildings, text or interface.",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "original": "/home/jorgen/.codex/generated_images/01a0ec11-5467-7f12-8cb3-978cf1b7bbe0/exec-716dfbda-eb78-458b-9fe3-6b321bc112a6.png"
+    }
+  ]
+}
+
