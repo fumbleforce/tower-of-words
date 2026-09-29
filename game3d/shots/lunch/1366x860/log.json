@@ -1,0 +1,960 @@
+[
+ {
+  "run": "mio0",
+  "errs": [],
+  "nodes": [
+   "mori_wait",
+   "mori_wait",
+   "mio_opens",
+   "lunch_start",
+   "lunch_mio",
+   "mio_b2",
+   "mio_lunch_end",
+   "mio_bond",
+   "lunch_end"
+  ],
+  "shots": [
+   {
+    "name": "first-line",
+    "node": "lunch_mio",
+    "text": "You can sit on the floor, it's warm from the servers.",
+    "eric": {
+     "x": 4.45,
+     "z": -2.3,
+     "zone": "machine_room",
+     "seated": true,
+     "visible": true
+    },
+    "mio": {
+     "x": 5.48,
+     "z": -2.46,
+     "zone": "machine_room",
+     "seated": true,
+     "visible": true
+    },
+    "mori": {
+     "x": -0.14,
+     "z": 2.25,
+     "zone": "corridor",
+     "seated": false,
+     "visible": true
+    },
+    "food": [
+     "eric@4.63,0.37,-2.30",
+     "partner@5.77,0.37,-2.30"
+    ]
+   },
+   {
+    "name": "choice",
+    "node": "mio_b2",
+    "eric": {
+     "x": 4.45,
+     "z": -2.3,
+     "zone": "machine_room",
+     "seated": true,
+     "visible": true
+    },
+    "mio": {
+     "x": 5.48,
+     "z": -2.46,
+     "zone": "machine_room",
+     "seated": true,
+     "visible": true
+    },
+    "mori": {
+     "x": -0.14,
+     "z": 2.25,
+     "zone": "corridor",
+     "seated": false,
+     "visible": true
+    },
+    "food": [
+     "eric@4.63,0.37,-2.30",
+     "partner@5.77,0.37,-2.30"
+    ]
+   },
+   {
+    "name": "reply",
+    "node": "mio_b2",
+    "text": "Upstairs you have to bow to everybody all day, it's so tiring. Down here it's ju",
+    "eric": {
+     "x": 4.45,
+     "z": -2.3,
+     "zone": "machine_room",
+     "seated": true,
+     "visible": true
+    },
+    "mio": {
+     "x": 5.48,
+     "z": -2.46,
+     "zone": "machine_room",
+     "seated": true,
+     "visible": true
+    },
+    "mori": {
+     "x": -0.14,
+     "z": 2.25,
+     "zone": "corridor",
+     "seated": false,
+     "visible": true
+    },
+    "food": [
+     "eric@4.63,0.37,-2.30",
+     "partner@5.77,0.37,-2.30"
+    ]
+   },
+   {
+    "name": "bond",
+    "node": "mio_bond",
+    "text": "No, no, not now...",
+    "eric": {
+     "x": 4.45,
+     "z": -2.3,
+     "zone": "machine_room",
+     "seated": true,
+     "visible": true
+    },
+    "mio": {
+     "x": 5.48,
+     "z": -2.46,
+     "zone": "machine_room",
+     "seated": true,
+     "visible": true
+    },
+    "mori": {
+     "x": -0.14,
+     "z": 3.29,
+     "zone": "kitchen",
+     "seated": false,
+     "visible": true
+    },
+    "food": [
+     "eric@4.63,0.37,-2.30",
+     "partner@5.77,0.37,-2.30"
+    ]
+   },
+   {
+    "name": "crackers",
+    "node": "work_afternoon",
+    "text": "Mori hands the crackers round. Even Mio takes one.",
+    "eric": {
+     "x": -0.8,
+     "z": -2.48,
+     "zone": "office",
+     "seated": true,
+     "visible": true
+    },
+    "mio": {
+     "x": -2,
+     "z": -2.5,
+     "zone": "office",
+     "seated": false,
+     "visible": true
+    },
+    "mori": {
+     "x": 2.16,
+     "z": -3.36,
+     "zone": "office",
+     "seated": true,
+     "visible": true
+    },
+    "food": []
+   },
+   {
+    "name": "afternoon",
+    "node": "work_afternoon",
+    "text": "Oh, if you go to the vending machine, Mori-san drinks corn soup. From a can, yes",
+    "eric": {
+     "x": -0.8,
+     "z": -2.48,
+     "zone": "office",
+     "seated": true,
+     "visible": true
+    },
+    "mio": {
+     "x": -2,
+     "z": -2.5,
+     "zone": "office",
+     "seated": false,
+     "visible": true
+    },
+    "mori": {
+     "x": 2.16,
+     "z": -3.36,
+     "zone": "office",
+     "seated": true,
+     "visible": true
+    },
+    "food": []
+   }
+  ]
+ },
+ {
+  "run": "mio1",
+  "errs": [
+   "timeout before the afternoon line"
+  ],
+  "nodes": [
+   "mori_wait",
+   "mori_wait",
+   "mio_opens",
+   "lunch_start",
+   "lunch_mio",
+   "mio_doors",
+   "mio_lunch_end",
+   "mio_bond",
+   "lunch_end"
+  ],
+  "shots": [
+   {
+    "name": "first-line",
+    "node": "lunch_mio",
+    "text": "You can sit on the floor, it's warm from the servers.",
+    "eric": {
+     "x": 4.45,
+     "z": -2.3,
+     "zone": "machine_room",
+     "seated": true,
+     "visible": true
+    },
+    "mio": {
+     "x": 5.48,
+     "z": -2.46,
+     "zone": "machine_room",
+     "seated": true,
+     "visible": true
+    },
+    "mori": {
+     "x": -0.14,
+     "z": 1.6,
+     "zone": "corridor",
+     "seated": false,
+     "visible": true
+    },
+    "food": [
+     "eric@4.63,0.37,-2.30",
+     "partner@5.77,0.37,-2.30"
+    ]
+   },
+   {
+    "name": "choice",
+    "node": "mio_bond",
+    "eric": {
+     "x": 4.45,
+     "z": -2.3,
+     "zone": "machine_room",
+     "seated": true,
+     "visible": true
+    },
+    "mio": {
+     "x": 5.48,
+     "z": -2.46,
+     "zone": "machine_room",
+     "seated": true,
+     "visible": true
+    },
+    "mori": {
+     "x": -0.14,
+     "z": 1.6,
+     "zone": "corridor",
+     "seated": false,
+     "visible": true
+    },
+    "food": [
+     "eric@4.63,0.37,-2.30",
+     "partner@5.77,0.37,-2.30"
+    ]
+   },
+   {
+    "name": "reply",
+    "node": "mio_bond",
+    "text": "Mm. The station asked me already, so I said it's the sensor.",
+    "eric": {
+     "x": 4.45,
+     "z": -2.3,
+     "zone": "machine_room",
+     "seated": true,
+     "visible": true
+    },
+    "mio": {
+     "x": 5.48,
+     "z": -2.46,
+     "zone": "machine_room",
+     "seated": true,
+     "visible": true
+    },
+    "mori": {
+     "x": -0.14,
+     "z": 1.6,
+     "zone": "corridor",
+     "seated": false,
+     "visible": true
+    },
+    "food": [
+     "eric@4.63,0.37,-2.30",
+     "partner@5.77,0.37,-2.30"
+    ]
+   },
+   {
+    "name": "bond",
+    "node": "mio_bond",
+    "text": "No, no, not now...",
+    "eric": {
+     "x": 4.45,
+     "z": -2.3,
+     "zone": "machine_room",
+     "seated": true,
+     "visible": true
+    },
+    "mio": {
+     "x": 5.48,
+     "z": -2.46,
+     "zone": "machine_room",
+     "seated": true,
+     "visible": true
+    },
+    "mori": {
+     "x": -0.14,
+     "z": 1.6,
+     "zone": "corridor",
+     "seated": false,
+     "visible": true
+    },
+    "food": [
+     "eric@4.63,0.37,-2.30",
+     "partner@5.77,0.37,-2.30"
+    ]
+   },
+   {
+    "name": "crackers",
+    "node": "work_afternoon",
+    "text": "Mori hands the crackers round. Even Mio takes one.",
+    "eric": {
+     "x": -0.8,
+     "z": -2.05,
+     "zone": "office",
+     "seated": false,
+     "visible": true
+    },
+    "mio": {
+     "x": -2,
+     "z": -2.49,
+     "zone": "office",
+     "seated": false,
+     "visible": true
+    },
+    "mori": {
+     "x": 2.16,
+     "z": -3.36,
+     "zone": "office",
+     "seated": true,
+     "visible": true
+    },
+    "food": []
+   },
+   {
+    "name": "afternoon",
+    "node": "work_afternoon",
+    "text": "Oh, if you go to the vending machine, Mori-san drinks corn soup. From a can, yes",
+    "eric": {
+     "x": -0.8,
+     "z": -2.05,
+     "zone": "office",
+     "seated": false,
+     "visible": true
+    },
+    "mio": {
+     "x": -2,
+     "z": -2.49,
+     "zone": "office",
+     "seated": false,
+     "visible": true
+    },
+    "mori": {
+     "x": 2.16,
+     "z": -3.36,
+     "zone": "office",
+     "seated": true,
+     "visible": true
+    },
+    "food": []
+   }
+  ]
+ },
+ {
+  "run": "mio2",
+  "errs": [
+   "console: lunch: Eric's walk into the machine room stopped 0.56 m short; snapping him to his seat"
+  ],
+  "nodes": [
+   "mori_wait",
+   "mori_wait",
+   "mio_opens",
+   "lunch_start",
+   "lunch_mio",
+   "mio_quiet",
+   "mio_lunch_end",
+   "mio_bond",
+   "lunch_end"
+  ],
+  "shots": [
+   {
+    "name": "first-line",
+    "node": "lunch_mio",
+    "text": "You can sit on the floor, it's warm from the servers.",
+    "eric": {
+     "x": 4.45,
+     "z": -2.3,
+     "zone": "machine_room",
+     "seated": true,
+     "visible": true
+    },
+    "mio": {
+     "x": 5.48,
+     "z": -2.46,
+     "zone": "machine_room",
+     "seated": true,
+     "visible": true
+    },
+    "mori": {
+     "x": -0.15,
+     "z": 0.41,
+     "zone": "corridor",
+     "seated": false,
+     "visible": true
+    },
+    "food": [
+     "eric@4.63,0.37,-2.30",
+     "partner@5.77,0.37,-2.30"
+    ]
+   },
+   {
+    "name": "choice",
+    "node": "mio_quiet",
+    "eric": {
+     "x": 4.45,
+     "z": -2.3,
+     "zone": "machine_room",
+     "seated": true,
+     "visible": true
+    },
+    "mio": {
+     "x": 5.48,
+     "z": -2.46,
+     "zone": "machine_room",
+     "seated": true,
+     "visible": true
+    },
+    "mori": {
+     "x": -0.15,
+     "z": 0.41,
+     "zone": "corridor",
+     "seated": false,
+     "visible": true
+    },
+    "food": [
+     "eric@4.63,0.37,-2.30",
+     "partner@5.77,0.37,-2.30"
+    ]
+   },
+   {
+    "name": "reply",
+    "node": "mio_quiet",
+    "text": "After a while she pushes the pickles toward you, without looking.",
+    "eric": {
+     "x": 4.45,
+     "z": -2.3,
+     "zone": "machine_room",
+     "seated": true,
+     "visible": true
+    },
+    "mio": {
+     "x": 5.48,
+     "z": -2.46,
+     "zone": "machine_room",
+     "seated": true,
+     "visible": true
+    },
+    "mori": {
+     "x": -0.15,
+     "z": 0.41,
+     "zone": "corridor",
+     "seated": false,
+     "visible": true
+    },
+    "food": [
+     "eric@4.63,0.37,-2.30",
+     "partner@5.77,0.37,-2.30"
+    ]
+   },
+   {
+    "name": "bond",
+    "node": "mio_bond",
+    "text": "No, no, not now...",
+    "eric": {
+     "x": 4.45,
+     "z": -2.3,
+     "zone": "machine_room",
+     "seated": true,
+     "visible": true
+    },
+    "mio": {
+     "x": 5.48,
+     "z": -2.46,
+     "zone": "machine_room",
+     "seated": true,
+     "visible": true
+    },
+    "mori": {
+     "x": -0.15,
+     "z": 0.41,
+     "zone": "corridor",
+     "seated": false,
+     "visible": true
+    },
+    "food": [
+     "eric@4.63,0.37,-2.30",
+     "partner@5.77,0.37,-2.30"
+    ]
+   },
+   {
+    "name": "crackers",
+    "node": "work_afternoon",
+    "text": "Mori hands the crackers round. Even Mio takes one.",
+    "eric": {
+     "x": -0.8,
+     "z": -2.05,
+     "zone": "office",
+     "seated": false,
+     "visible": true
+    },
+    "mio": {
+     "x": -2,
+     "z": -2.5,
+     "zone": "office",
+     "seated": false,
+     "visible": true
+    },
+    "mori": {
+     "x": 2.3,
+     "z": -2.55,
+     "zone": "office",
+     "seated": false,
+     "visible": true
+    },
+    "food": []
+   },
+   {
+    "name": "afternoon",
+    "node": "work_afternoon",
+    "text": "Oh, if you go to the vending machine, Mori-san drinks corn soup. From a can, yes",
+    "eric": {
+     "x": -0.8,
+     "z": -2.05,
+     "zone": "office",
+     "seated": false,
+     "visible": true
+    },
+    "mio": {
+     "x": -2,
+     "z": -2.5,
+     "zone": "office",
+     "seated": false,
+     "visible": true
+    },
+    "mori": {
+     "x": 2.3,
+     "z": -2.55,
+     "zone": "office",
+     "seated": false,
+     "visible": true
+    },
+    "food": []
+   }
+  ]
+ },
+ {
+  "run": "mori0",
+  "errs": [
+   "console: lunch: the walk to the kitchenette did not arrive; snapping Eric there"
+  ],
+  "nodes": [
+   "mori_wait",
+   "mori_wait",
+   "mio_opens",
+   "lunch_start",
+   "lunch_mori",
+   "mori_landing",
+   "mori_cups",
+   "mori_bond",
+   "lunch_end"
+  ],
+  "shots": [
+   {
+    "name": "first-line",
+    "node": "lunch_mori",
+    "text": "ノルウェーから、ですね。私、1994年にリレハンメルへ行きました。",
+    "eric": {
+     "x": 0.05,
+     "z": 4.6,
+     "zone": "kitchen",
+     "seated": false,
+     "visible": true
+    },
+    "mio": {
+     "x": 5.26,
+     "z": -2.23,
+     "zone": "machine_room",
+     "seated": false,
+     "visible": true
+    },
+    "mori": {
+     "x": -0.8,
+     "z": 5.5,
+     "zone": "kitchen",
+     "seated": false,
+     "visible": true
+    },
+    "food": [
+     "eric@-0.52,0.45,4.60",
+     "partner@-0.85,0.45,4.80"
+    ]
+   },
+   {
+    "name": "choice",
+    "node": "mori_bond",
+    "eric": {
+     "x": 0.05,
+     "z": 4.6,
+     "zone": "kitchen",
+     "seated": false,
+     "visible": true
+    },
+    "mio": {
+     "x": 5.2,
+     "z": -2.1,
+     "zone": "machine_room",
+     "seated": false,
+     "visible": true
+    },
+    "mori": {
+     "x": -0.8,
+     "z": 5.5,
+     "zone": "kitchen",
+     "seated": false,
+     "visible": true
+    },
+    "food": [
+     "eric@-0.52,0.45,4.60",
+     "partner@-0.85,0.45,4.80"
+    ]
+   },
+   {
+    "name": "reply",
+    "node": "mori_bond",
+    "text": "You stick the landing. He claps three small claps, and you both laugh.",
+    "eric": {
+     "x": 0.05,
+     "z": 4.6,
+     "zone": "kitchen",
+     "seated": false,
+     "visible": true
+    },
+    "mio": {
+     "x": 5.2,
+     "z": -2.1,
+     "zone": "machine_room",
+     "seated": false,
+     "visible": true
+    },
+    "mori": {
+     "x": -0.8,
+     "z": 5.5,
+     "zone": "kitchen",
+     "seated": false,
+     "visible": true
+    },
+    "food": [
+     "eric@-0.52,0.45,4.60",
+     "partner@-0.85,0.45,4.80"
+    ]
+   },
+   {
+    "name": "bond",
+    "node": "mori_bond",
+    "text": "There are seven cups on the tray behind him. Three of them are dusty.",
+    "eric": {
+     "x": 0.05,
+     "z": 4.6,
+     "zone": "kitchen",
+     "seated": false,
+     "visible": true
+    },
+    "mio": {
+     "x": 5.2,
+     "z": -2.1,
+     "zone": "machine_room",
+     "seated": false,
+     "visible": true
+    },
+    "mori": {
+     "x": -0.8,
+     "z": 5.5,
+     "zone": "kitchen",
+     "seated": false,
+     "visible": true
+    },
+    "food": [
+     "eric@-0.52,0.45,4.60",
+     "partner@-0.85,0.45,4.80"
+    ]
+   },
+   {
+    "name": "crackers",
+    "node": "lunch_end",
+    "text": "Mori hands the crackers round. Even Mio takes one.",
+    "eric": {
+     "x": -0.8,
+     "z": -2.05,
+     "zone": "office",
+     "seated": false,
+     "visible": true
+    },
+    "mio": {
+     "x": -2,
+     "z": -2.5,
+     "zone": "office",
+     "seated": false,
+     "visible": true
+    },
+    "mori": {
+     "x": 2.16,
+     "z": -3.36,
+     "zone": "office",
+     "seated": true,
+     "visible": true
+    },
+    "food": []
+   },
+   {
+    "name": "afternoon",
+    "node": "lunch_end",
+    "text": "Oh, if you go to the vending machine, Mori-san drinks corn soup. From a can, yes",
+    "eric": {
+     "x": -0.8,
+     "z": -2.05,
+     "zone": "office",
+     "seated": false,
+     "visible": true
+    },
+    "mio": {
+     "x": -2,
+     "z": -2.5,
+     "zone": "office",
+     "seated": false,
+     "visible": true
+    },
+    "mori": {
+     "x": 2.16,
+     "z": -3.36,
+     "zone": "office",
+     "seated": true,
+     "visible": true
+    },
+    "food": []
+   }
+  ]
+ },
+ {
+  "run": "mori1",
+  "errs": [
+   "console: lunch: the walk to the kitchenette did not arrive; snapping Eric there"
+  ],
+  "nodes": [
+   "mori_wait",
+   "mori_wait",
+   "mio_opens",
+   "lunch_start",
+   "lunch_mori",
+   "mori_pour",
+   "mori_cups",
+   "mori_bond",
+   "lunch_end"
+  ],
+  "shots": [
+   {
+    "name": "first-line",
+    "node": "lunch_mori",
+    "text": "ノルウェーから、ですね。私、1994年にリレハンメルへ行きました。",
+    "eric": {
+     "x": 0.77,
+     "z": 4.63,
+     "zone": "kitchen",
+     "seated": false,
+     "visible": true
+    },
+    "mio": {
+     "x": 5.2,
+     "z": -2.1,
+     "zone": "machine_room",
+     "seated": false,
+     "visible": true
+    },
+    "mori": {
+     "x": -0.8,
+     "z": 5.5,
+     "zone": "kitchen",
+     "seated": false,
+     "visible": true
+    },
+    "food": [
+     "eric@-0.52,0.45,4.60",
+     "partner@-0.85,0.45,4.80"
+    ]
+   },
+   {
+    "name": "choice",
+    "node": "mori_pour",
+    "eric": {
+     "x": 0.77,
+     "z": 4.63,
+     "zone": "kitchen",
+     "seated": false,
+     "visible": true
+    },
+    "mio": {
+     "x": 5.2,
+     "z": -2.1,
+     "zone": "machine_room",
+     "seated": false,
+     "visible": true
+    },
+    "mori": {
+     "x": -0.8,
+     "z": 5.5,
+     "zone": "kitchen",
+     "seated": false,
+     "visible": true
+    },
+    "food": [
+     "eric@-0.52,0.45,4.60",
+     "partner@-0.85,0.45,4.80"
+    ]
+   },
+   {
+    "name": "reply",
+    "node": "mori_pour",
+    "text": "You fill his cup before your own.",
+    "eric": {
+     "x": 0.77,
+     "z": 4.63,
+     "zone": "kitchen",
+     "seated": false,
+     "visible": true
+    },
+    "mio": {
+     "x": 5.2,
+     "z": -2.1,
+     "zone": "machine_room",
+     "seated": false,
+     "visible": true
+    },
+    "mori": {
+     "x": -0.8,
+     "z": 5.5,
+     "zone": "kitchen",
+     "seated": false,
+     "visible": true
+    },
+    "food": [
+     "eric@-0.52,0.45,4.60",
+     "partner@-0.85,0.45,4.80"
+    ]
+   },
+   {
+    "name": "bond",
+    "node": "mori_bond",
+    "text": "There are seven cups on the tray behind him. Three of them are dusty.",
+    "eric": {
+     "x": 0.77,
+     "z": 4.63,
+     "zone": "kitchen",
+     "seated": false,
+     "visible": true
+    },
+    "mio": {
+     "x": 5.2,
+     "z": -2.1,
+     "zone": "machine_room",
+     "seated": false,
+     "visible": true
+    },
+    "mori": {
+     "x": -0.8,
+     "z": 5.5,
+     "zone": "kitchen",
+     "seated": false,
+     "visible": true
+    },
+    "food": [
+     "eric@-0.52,0.45,4.60",
+     "partner@-0.85,0.45,4.80"
+    ]
+   },
+   {
+    "name": "crackers",
+    "node": "work_afternoon",
+    "text": "Mori hands the crackers round. Even Mio takes one.",
+    "eric": {
+     "x": -0.8,
+     "z": -2.05,
+     "zone": "office",
+     "seated": false,
+     "visible": true
+    },
+    "mio": {
+     "x": -2,
+     "z": -2.5,
+     "zone": "office",
+     "seated": false,
+     "visible": true
+    },
+    "mori": {
+     "x": 2.3,
+     "z": -2.55,
+     "zone": "office",
+     "seated": false,
+     "visible": true
+    },
+    "food": []
+   },
+   {
+    "name": "afternoon",
+    "node": "work_afternoon",
+    "text": "Oh, if you go to the vending machine, Mori-san drinks corn soup. From a can, yes",
+    "eric": {
+     "x": -0.8,
+     "z": -2.05,
+     "zone": "office",
+     "seated": false,
+     "visible": true
+    },
+    "mio": {
+     "x": -2,
+     "z": -2.5,
+     "zone": "office",
+     "seated": false,
+     "visible": true
+    },
+    "mori": {
+     "x": 2.3,
+     "z": -2.55,
+     "zone": "office",
+     "seated": false,
+     "visible": true
+    },
+    "food": []
+   }
+  ]
+ }
+]
