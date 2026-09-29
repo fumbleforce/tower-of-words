@@ -240,30 +240,67 @@ Everyone else shows just the name plate. A face that doesn't exist for that pers
 - Words count as known only once taught in play: through `type`, `learn`/`offer`, or a glossed `{id}` in a normal line. Nothing is known at the start. `clear` entries in an overheard line are readable for that line only (plain, not styled as known) and don't become known.
 - Overheard Japanese: `{ say: 'guard', overheard: true, text: '日本語の文。', clear: ['B2', { ja: 'コンサルタント', ro: 'konsarutanto', en: 'consultant' }] }`. The text is the Japanese itself. Every character Eric doesn't know shows as a soft, shifting stand-in glyph; his phrases and commands, and the `clear` entries, stay sharp (with reading and English when given). The voice plays muffled through a low-pass filter. Voice clips for overheard lines are generated from the text by `tools/voices.py` (run it after adding lines; no `voice` key needed). Only the long form supports `overheard`. Words shown glossed in ordinary lines (for example `{gaijin}` 外人, gaijin, foreigner) are remembered, and stay sharp in later overheard lines too.
 
-## Sim data (clock, schedules, ambient talk, bonds, gifts, save)
+## Sim data (clock, schedules, ambient moments, bonds, gifts, memory, save)
 
-All optional, all per story file, all generic so they carry over to later days.
+All optional, all per story file, all generic so they carry over to later days. The engine side is game3d/js/sim.js, the bond maths js/bonds/model.js (tested by `node game3d/js/bonds/test.mjs`), standing cast data js/bonds/cast.js, and day 1's recorded moments js/bonds/day1.js.
 
 ```js
 export default {
-  // who they are, for the People panel (shown once Mio has talked to them)
+  // who they are, for the People panel (shown once Eric has talked to them)
   people: { rei: { name: 'Rei', about: 'Sales, fifth floor. Short sentences.', color: '#c9ced8' } },
   // where people are in each period ('*' = any period); `at` is a spot, object id or [x, z]; `sit` a seat id;
   // `hide: true` takes them out of the place. Applied when a place starts and whenever the period changes.
   schedule: { mori: { morning: { at: 'chief_desk' }, lunch: { at: 'coffee_front', face: 'coffee_machine' } } },
-  // NPC-to-NPC talk that plays as captions (no tapping) when Mio comes within `radius` (default 2.4) of `near`
-  // (or the first person in `who`). once: true by default. `set` sets a flag when it has played.
-  ambient: [{ id: 'kenji_mori', who: ['kenji', 'mori'], period: 'morning', if: '!copies', lines: ['kenji: ...', 'mori: ...'], set: 'heard_km' }],
-  // scenes that run when a bond first reaches a level
-  bonds: { rei: [{ at: 3, node: 'rei_bond3' }] },
+  // NPC-to-NPC moments, played as captions (no tapping) when Eric comes within `radius` (default 2.4) of `near`
+  // (or the first person in `who`). Both people must be here and visible. Optional: `pair` (they must be within
+  // this distance of each other), `rel` (a relation that must hold, 'kenji likes mori', or a list), `if`, `period`
+  // (one or a list), `once` (true by default: once ever; 'day', 'period', or false), `set` (a flag when done).
+  ambient: [{ id: 'kenji_mori', who: ['kenji', 'mori'], pair: 4, rel: 'kenji likes mori', period: 'afternoon', lines: ['kenji: ...', 'mori: ...'] }],
+  // how people stand with each other, one way: 'likes', 'owes' or 'rivals' (over js/bonds/cast.js)
+  relations: { kenji: { mori: 'likes' } },
+  // tastes, for gifts: item ids. A need counts once they've said it out loud (`said` is that flag).
+  likes: { mio: ['coffee'] }, dislikes: { mio: ['cornsoup', 'tea'] },
+  needs: { mori: [{ id: 'thermos', item: 'tea', said: 'mori_said_empty' }] },
+  register: { kenji: 'casual' },                     // the Japanese they expect from Eric: 'casual' or 'polite'
+  gates: { mio: { 3: 'mio_turn_done' } },            // the scene flag each of steps 3-5 waits on (default bond3_mio ...)
+  // a scene to run when someone reaches a step; for steps 3-5, when the points are there and it waits on its scene
+  bondStep: { mio: { 2: 'mio_friendly', 3: 'mio_turn' } },
+  // record things when a node starts, without writing steps into it (the way day1.js wires day 1)
+  moments: { caught: { remember: [['mio', 'caught_bag', 'You caught her lunch bag.']], bond: [['mio', 'help', 1, 'the bag']] } },
+  reasons: { copier: { source: 'ticket' } },         // the source of a `bond` step in that node ('node:who' for one person)
   on: {
-    'give:coffee:mori': 'mori_coffee',   // Mio gives an item (Give button next to Say, when a person is near)
+    'give:coffee:mori': 'mori_coffee',   // Eric gives an item (Give button, when a person is near)
     'give:*:kenji': 'kenji_any_gift',    // any item
   },
 };
 ```
 
-Hooks: `period` `to: 'commute'|'morning'|'lunch'|'afternoon'|'evening'` (the HUD shows "Thu 1 Oct · Morning at work"; only the story moves it), `bond` `who`, `add` (default 1; flag `bond_<who>` holds the level), `meet` `who` (adds them to People; tapping a person does this too), `buy` `item` (`coffee`, `tea`, `melon`, `cornsoup`; ¥1000 to start; sets `bought_<item>`, or `cant_buy`), `take` `item`, `save`. A given item is removed from the bag and sets `gave_<item>_<who>`. Commands record who taught them (the speaker of the `offer` line, or `from:` on `offer`/`learn`), shown in People. The game saves flags, bonds, period, bag, commands and place at every place change and on `save`; the title offers Continue.
+**Bond steps.** 0 Stranger, 1 Known (met: in People), 2 Friendly (6 points), 3 Trusted (14 points and their turn scene), 4 Close (24 and their payoff scene), 5 Partner or friend (step 4 and the last scene). Points come from sources, at most 3 per person per day in all, and never go down. While a step's scene hasn't played, points stop at its threshold, so nobody can be ground past it.
+
+| Source | Points (when `add` is left out) | Limit |
+|---|---|---|
+| `greet` | 1 | the first greeting only |
+| `talk` | 1 | once a day |
+| `gift` | by reaction: need 3, like 1, neutral or dislike 0 | one gift a week counts (a need: once) |
+| `need` | 3 | once per need |
+| `ticket` | 2 | |
+| `help` | 1 | once a day |
+| `their_way` | 1 | once a day |
+| `register` | 1 | once a day |
+| `scene` | 1 | once per node (the default for a `bond` step with no source) |
+
+**Hooks.**
+- `bond` `who`, `add`, `source`, `why`: adds points (see above). `{ do: 'bond', who: 'mori', source: 'ticket', why: 'fixed his copier' }`. Without `source`, the node's entry in `reasons` (or day1.js) names it.
+- `bondStep` `who`, `to` (3, 4 or 5): the scene that step waits on has played. Same as setting its gate flag.
+- `remember` `who`, `id`, `text`: something Eric did that they'll remember. Shows in People as "They remember: ...". Test it with the flag `rem_<who>_<id>`: `{ if: 'rem_mio_caught_bag', then: [...] }`.
+- `fact` `who`, `id`, `text`, `like`: something Eric has learned about them, for People; `like: 'coffee'` also shows that taste as noticed.
+- `relate` `a`, `b`, `kind` (`likes`, `owes`, `rivals`, `none`): changes how a feels about b.
+- `meet` `who`: adds them to People (step 1); talking to a person does this too.
+- `period` `to: 'commute'|'morning'|'lunch'|'afternoon'|'evening'` (the HUD shows "Thu 1 Oct · Morning at work"; only the story moves it), `buy` `item` (`coffee`, `tea`, `melon`, `cornsoup`; ¥1000 to start; sets `bought_<item>`, or `cant_buy`), `take` `item`, `save`.
+
+**Flags for conditions.** `bond_<who>` (points), `step_<who>`, `bondready_<who>` (the step whose scene is due, else 0), `met_<who>`, `rem_<who>_<id>`, `fact_<who>_<id>`, `rel_<a>_<b>` (`'likes'`...), `register_<who>` (`'right'` or `'wrong'`: the register of the last word Eric said to them), and after a gift `gave_<item>_<who>`, `gift_<who>` and `gift_reaction` (`'need'`, `'like'`, `'neutral'`, `'dislike'`), set before the `give:` node runs. So one trigger can answer any gift: `'give:*:mio': [{ if: "gift_mio == 'like'", node: 'mio_likes_it' }, 'mio_polite_thanks']`.
+
+Commands record who taught them (the speaker of the `offer` line, or `from:` on `offer`/`learn`/`type`), shown in People. The game saves flags, bonds, memory, period, bag, commands and place at every place change and on `save`; the title offers Continue.
 
 ## Transitions (`transitions.js`)
 
