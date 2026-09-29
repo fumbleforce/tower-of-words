@@ -39,3 +39,7 @@ Sheet: art/parts/shots/sheet.png. Review item: reviews/creator-parts.
 - Weak: swapping hair or heads. Meshy models have no scalp under the hair, and Mio's face skin runs up under her bangs. With Eric's hair on Mio, a few of his fringe spikes cut across her cheek and a pale strip of her nape shows at the back. Mio's hair on Eric sits well. The fit is automatic (whole-head depth, chin aligned), so each pair of heads would need a look, and maybe a nudge.
 - Animation: nothing broke that wasn't already broken. Meshy's idle clip twists and bends over after a second or two (the game holds one frame of it, and so does the creator). Skin weights carry over with the parts, so a swapped sleeve bends with the arm.
 - Not done: exporting a combined GLB, fit sliders, and parts made on their own in Meshy.
+
+## Base bodies (2026-09-29)
+
+Jørgen's answer on creator-parts: make closed, skin-only base bodies first and put hair, clothes and facial hair on as layers. That work is in `tools/creator/base/` (README there); review creator-base-1.

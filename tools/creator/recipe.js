@@ -206,7 +206,7 @@ function carry(S, H, b) {
 // ---------- building ----------
 
 // one part as geometry in the host's bind space
-function partGeometry(lib, part, H, fit = {}) {
+export function partGeometry(lib, part, H, fit = {}) {
   const S = lib.src[part.source], tris = part.tris, n = tris.length * 3;
   const pos = new Float32Array(n * 3), nrm = new Float32Array(n * 3), uv = new Float32Array(n * 2), col = new Float32Array(n * 3);
   const use = new Float32Array(n), si = new Uint16Array(n * 4), sw = new Float32Array(n * 4);
@@ -287,7 +287,7 @@ export function partMaterial(S, part) {
 }
 
 // the shared skeleton with the host body's joints
-function makeRig(H, ref) {
+export function makeRig(H, ref) {
   const rig = new THREE.Group(); rig.name = 'rig';
   const bones = {};
   for (const b of BONES) { bones[b] = new THREE.Bone(); bones[b].name = b; }

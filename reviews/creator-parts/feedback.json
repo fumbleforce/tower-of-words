@@ -1,0 +1,16 @@
+{
+ "sent": "2026-09-29T09:20:00+0200",
+ "picked": [
+  "keep"
+ ],
+ "options": {
+  "keep": {
+   "star": false,
+   "reject": false,
+   "comment": "You need to make PROPER base models and make hair that fits. You must first \"undress\" the models so they appear with just their skin, so they dont have gaps on them, which they currently do. For example eric's stubble is just a colored triangle part of his body, if you remove that his head gets a hole. "
+  }
+ },
+ "comment": "work on making base chibi models to dress up, the two existing ones provide very good proportions to build from",
+ "read": true,
+ "history": []
+}

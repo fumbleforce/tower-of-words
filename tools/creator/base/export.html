@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>Base export</title>
+<script type="importmap">{"imports":{"three":"/game3d/vendor/three/three.module.js","three/addons/":"/game3d/vendor/"}}</script>
+</head><body>
+<script type="module">
+// Dumps each source (Mio, Eric) the way the creator loads it (shared skeleton, bind pose, height 1, Mio's face
+// fixes applied, cut labels) to art/parts/base/src-<id>.json, for the Blender base-body build (build_base.py).
+import { loadLibrary, BONES } from '../recipe.js';
+const lib = await loadLibrary();
+const r = (a, k = 5) => Array.from(a, (x) => +x.toFixed(k));
+window.__files = {};
+for (const [id, s] of Object.entries(lib.src)) {
+  const P = {}, B = {};
+  for (const b of BONES) { P[b] = s.P[b].toArray().map((x) => +x.toFixed(6)); B[b] = s.B[b].toArray().map((x) => +x.toFixed(6)); }
+  const out = { id, bones: BONES, parent: s.parent, P, B, height: s.height, T: s.T,
+    pos: r(s.pos), uv: r(s.uv), col: r(s.col, 4), useTex: Array.from(s.useTex), si: Array.from(s.si), sw: r(s.sw, 4),
+    slot: s.slotOf, faceRGB: s.faceRGB, tex: s.meta.tex, look: s.meta.look || null, flat: !!s.meta.flat };
+  window.__files[`art/parts/base/src-${id}.json`] = JSON.stringify(out);
+}
+window.__out = Object.keys(window.__files).join(', ');
+window.__done = true;
+</script></body></html>
