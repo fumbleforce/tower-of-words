@@ -49,6 +49,8 @@ export class Bonds {
   // cast: { id: { likes, dislikes, needs, gates, register, rel } }; flag(name) reads a story flag
   constructor({ cast = {}, flag = () => false } = {}) {
     this.cast = {}; this.flag = flag; this.day = 1; this.p = {}; this.rel = {};
+    this.gateDefaults = Object.fromEntries(Object.entries(cast).filter(([, person]) => person.gates)
+      .map(([id, person]) => [id, { ...person.gates }]));
     this.merge(cast);
   }
 
@@ -196,9 +198,15 @@ export class Bonds {
     for (const [id, q] of Object.entries(this.p)) p[id] = { ...q };
     const changed = {};
     for (const k of this.relChanged || []) { const [a, b] = k.split('>'); changed[k] = this.relation(a, b) || 'none'; }
-    return { v: 1, day: this.day, p, rel: changed };
+    const gates = Object.fromEntries(Object.entries(this.cast).filter(([, person]) => person.gates)
+      .map(([id, person]) => [id, { ...person.gates }]));
+    return { v: 1, day: this.day, p, rel: changed, ...(Object.keys(gates).length ? { gates } : {}) };
   }
   load(d) {
+    // Loading another slot or an old save must not retain overrides from this session.
+    for (const person of Object.values(this.cast)) delete person.gates;
+    for (const [id, gates] of Object.entries({ ...this.gateDefaults, ...(d?.v === 1 ? d.gates : {}) }))
+      this.merge({ [id]: { gates: { ...gates } } });
     if (!d || d.v !== 1) return false;
     this.day = d.day || 1; this.p = {};
     for (const [id, q] of Object.entries(d.p || {})) this.p[id] = { ...this.person(id), ...q };

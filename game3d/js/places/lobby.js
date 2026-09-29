@@ -2,6 +2,7 @@ import { eventTrigger } from '../narrative/events.js';
 import { flagKeys } from '../narrative/engine-flags.js';
 const ENGINE_KEYS = flagKeys('game3d/js/places/lobby.js');
 import { PLACE_DETAILS } from './catalog.js';
+import { snapshotPeople, restorePeople, snapshotObject, restoreObject } from './saved-people.js';
 // Place 2, the lobby and security gate, as the engine side: things, spots, zones, hooks, commuters and trips.
 // Every word said here comes from game3d/story/gate.js (placeholder: story/placeholder/gate.js).
 import * as THREE from 'three';
@@ -172,6 +173,48 @@ export async function lobbyPlace(game) {
     _commuters: commuters,
     scene: w.scene, camera: cam.camera, cam, space: w.root, nav: w.nav, sun: w.sun, charScale: K, clock: w.clock,
     start: [0, Z - 1.3], startFacing: Math.PI, things, people, spots, zones, seats, glide,
+    snapshotState() {
+      return { cardOk: st.cardOk, gateOpen: st.gateOpen, jam: !!st.jam,
+        flap: st.flap, flapWant: st.flapWant, slam: st.slam, openTimer,
+        rush: st.rush, typing: st.typing, paper: snapshotObject(paper),
+        lifts: w.lifts.map(lift => ({ value: lift.k, target: lift.want, leaves: lift.leaves.map(snapshotObject) })),
+        people: snapshotPeople(people), player: snapshotPeople({ eric: game.player }) };
+    },
+    restoreState(saved) {
+      const f = saved.flags || {}, state = saved.world || {};
+      st.cardOk = state.cardOk ?? !!f.cardOk;
+      st.gateOpen = state.gateOpen ?? !!(f.gateOpen || f.gate_through_way);
+      st.jam = state.jam ?? !!(f.jammed && !st.gateOpen);
+      st.flap = state.flap ?? (st.gateOpen ? 1 : 0);
+      st.flapWant = state.flapWant ?? (st.gateOpen ? 1 : 0);
+      st.slam = state.slam || 0;
+      openTimer = state.openTimer || 0;
+      st.rush = state.rush ?? true;
+      st.typing = state.typing || 0;
+      restoreObject(paper, state.paper);
+      state.lifts?.forEach((savedLift, i) => {
+        const lift = w.lifts[i]; if (!lift) return;
+        lift.k = savedLift.value; lift.want = savedLift.target; lift.t = null;
+        lift.leaves.forEach((leaf, j) => restoreObject(leaf, savedLift.leaves[j]));
+      });
+      w.nav.unblock('gate');
+      if (!st.gateOpen) w.nav.blockTagged('gate', -0.6, 0.6, BZ - 0.1, BZ + 0.1);
+      w.arch.userData.flaps(st.flap);
+      w.arch.userData.set(st.gateOpen ? 'ok' : st.jam ? 'no' : 'idle');
+      w.arch.userData.count(st.jam ? 'two' : st.gateOpen ? 'ok' : 'idle');
+      if (st.jam) {
+        w.man.root.visible = w.manBlob.visible = true;
+        w.man.root.position.set(0.93, 0, BZ + 0.6); w.man.root.rotation.y = Math.PI;
+        w.manBlob.position.set(0.93, 0.004, BZ + 0.6);
+      }
+      restorePeople(people, state.people);
+      if (saved.runner?.execution && state.player) {
+        game.walker.stop();
+        restorePeople({ eric: game.player }, state.player);
+        game.walker.sync?.(); game.walker.facing = game.player.root.rotation.y;
+        cam.snap?.(game.player.root.position);
+      }
+    },
     fit(aspect) {
       const pts = [];
       for (const x of [-X - 0.2, X + 0.2]) for (const z of [-Z - 0.2, Z + 0.3]) for (const y of [0, 1.6]) pts.push(new THREE.Vector3(x, y, z));

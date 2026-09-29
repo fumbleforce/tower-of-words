@@ -6,6 +6,8 @@ const ENGINE_KEYS = flagKeys('game3d/js/main.js');
 import { PLACE_FILES, NEXT } from './places/definitions.js';
 import { assertRegistered, assertPlaceRegistered } from './narrative/registration.js';
 import { PLACE_DETAILS, SHARED_THINGS } from './places/catalog.js';
+import { beginSavedWalk, cancelSavedWalk } from './places/saved-people.js';
+import { needsLegacyOpening } from './narrative/legacy-opening.js';
 // Day one: train, lobby, office. One renderer, one Mio, three places joined by continuous trips.
 import * as THREE from 'three';
 import { createRenderer, Walker, Markers, Q, blob } from './engine.js';
@@ -53,12 +55,17 @@ assertRegistered(Object.keys(PLACE_FILES), PLACES, 'place factories');
 // ---------- shared game state ----------
 export const game = {
   renderer, ui, mio: null, walker: null, place: null, markers: new Markers(document.getElementById('marks')),
-  t: 0, busy: false, near: null, sayTarget: null, found: new Set(), after: null, hooks: {},
+  t: 0, busy: false, saveEnabled: false, near: null, sayTarget: null, found: new Set(), after: null, hooks: {},
   runner: null, story: null, prepared: {}, queue: [], timeScale: TS, test: TEST,
   async beat(fn) {
-    if (this.busy) return;
+    if (this.busy || this.runner?.recoveryError) return;
     this.busy = true; this.walker.locked = true; this.walker.stop(); document.body.classList.add('busy'); ui.closeSayMenu?.();
-    try { await fn(); } catch (e) { console.error(e); } finally { ui.closeTalk(); this.setHurry?.(false); this.busy = false; if (this.walker) this.walker.locked = false; document.body.classList.remove('busy'); }
+    try { await fn(); } catch (e) { console.error(e); } finally {
+      ui.closeTalk(); this.setHurry?.(false); this.busy = !!this.runner?.recoveryError;
+      if (this.walker) this.walker.locked = this.busy;
+      document.body.classList.toggle('busy', this.busy);
+    }
+    if (this.runner?.recoveryError) return;
     if (this.after) { const a = this.after; this.after = null; await a(); return; }
     if (this.queue.length) { const q = this.queue.shift(); this.beat(q); }
   },
@@ -88,6 +95,22 @@ export const game = {
 };
 window.__game = game;
 game.flagsRef = flags;
+game.onRecoveryError = message => {
+  game.saveEnabled = false;
+  game.paused = true;
+  const notice = document.createElement('dialog');
+  notice.className = 'save-recovery';
+  notice.setAttribute('role', 'alertdialog');
+  notice.setAttribute('aria-label', 'Unable to resume scene');
+  notice.textContent = `${message} Your last save is preserved. `;
+  const back = document.createElement('button');
+  back.textContent = 'Return to title';
+  back.addEventListener('click', () => location.reload());
+  notice.append(back);
+  notice.addEventListener('cancel', event => event.preventDefault());
+  document.body.append(notice);
+  notice.showModal();
+};
 // Clicking while a scene plays out (a walk, a door, a gesture) with no line waiting fast-forwards it to the next line
 // (Jørgen: clicks that did nothing were frustrating). runner clears it when a line, choice or prompt shows.
 const HURRY = 6;
@@ -468,11 +491,44 @@ H.kotodama = async ({ target }) => { let t = game.place.kotodamaTargets?.(target
 H.voice = ({ key }) => voice(key);
 H.walk = async ({ who, to, wait = true, speed }) => {
   const p = posOf(to); if (!p) return;
-  if (isPlayer(who)) { const pr = game.walkTo(p[0], p[1]); if (wait) await pr; return; }
-  const r = rigOf(who); if (!r) return;
-  if (r.meshy) { r.root.visible = true; if (r.seated) { r.root.position.y = 0; r.root.position.z += r.root.position.z < 0 ? 0.45 : -0.45; } r.seated = false; const pr = walkRig(game, r, p, { speed: speed || 1.0 }); if (wait) await pr; return; }
-  const pr = game.place.walkPerson(who, p, { speed });
+  const r = isPlayer(who) ? game.player : rigOf(who); if (!r) return;
+  const place = game.place;
+  const pr = beginSavedWalk(r, { to: [...p], ...(speed ? { speed } : {}) }, () => {
+    if (isPlayer(who)) return game.walkTo(p[0], p[1]);
+    if (r.meshy) {
+      r.root.visible = true;
+      if (r.seated) { r.root.position.y = 0; r.root.position.z += r.root.position.z < 0 ? 0.45 : -0.45; }
+      r.seated = false;
+      return walkRig(game, r, p, { speed: speed || 1.0 });
+    }
+    return place.walkPerson(who, p, { speed });
+  }, () => { if (game.place === place) save(game); });
   if (wait) await pr;
+  else void pr.catch(error => { game.runner.failRecovery('A character could not finish walking.'); console.error(error); });
+};
+game.resumeWalks = () => {
+  for (const [who, person] of Object.entries({ ...game.place.people, eric: game.player })) {
+    if (person.savedWalk) void H.walk({ who, ...person.savedWalk, wait: false });
+  }
+};
+game.captureStaging = () => {
+  const close = game.place.cam?.close;
+  return { place: game.place.name, flags: { ...flags }, world: game.place.snapshotState?.(),
+    ui: { goal: ui.goalText || '', sideGoal: ui.sideText || '', hold: game.hold || null },
+    camera: close ? { ...close, ...(close.target ? { target: close.target.toArray() } : {}) } : null };
+};
+game.restoreStaging = staging => {
+  if (staging.place !== game.place.name) throw new Error('Scene staging belongs to another place');
+  game.walker.stop();
+  game.place.restoreState?.({ flags: staging.flags, world: staging.world, runner: { execution: true } });
+  if (staging.ui) { ui.goal(staging.ui.goal); ui.sideGoal(staging.ui.sideGoal); game.hold = staging.ui.hold; }
+  const cam = game.place.cam;
+  if (cam) {
+    cam.close = staging.camera ? { ...staging.camera,
+      ...(staging.camera.target ? { target: new THREE.Vector3().fromArray(staging.camera.target) } : {}) } : null;
+    cam.snap?.(game.player.root.position);
+  }
+  game.resumeWalks();
 };
 H.face = ({ who, to }) => {
   const p = posOf(to); if (!p) return;
@@ -609,7 +665,7 @@ H.gesture = async ({ who, kind }) => {
 // headphones: removed (Jørgen: no props on his models); kept as a no-op so old story steps don't break
 H.headphones = () => {};
 // typing prompt: Eric types the romaji of a new word, then says it (voiced) and knows it
-H.type = async ({ word, prompt, from }) => {
+H.type = async ({ word, prompt, from }, complete = (apply) => apply()) => {
   game.setHurry(false);
   if (from && game.sim && !game.sim.taught[word]) game.sim.taught[word] = from;
   if (!WORDS[word]) { console.warn('type: unknown word', word); return; }
@@ -617,8 +673,10 @@ H.type = async ({ word, prompt, from }) => {
   if (prompt) { const i = prompt.indexOf(': '); if (i > 0 && /^\w+$/.test(prompt.slice(0, i))) pr = { who: game.runner.speaker(prompt.slice(0, i)), whoId: prompt.slice(0, i), text: prompt.slice(i + 2) }; else pr = { who: null, text: prompt.replace(/^>\s*/, '') }; }
   await ui.typePrompt(word, pr);
   const spoken = voice(WORDS[word].voice || '');
-  game.runner.learnCmd(word);
-  flags[ENGINE_KEYS.typed + word] = true;
+  complete(() => {
+    game.runner.learnCmd(word);
+    flags[ENGINE_KEYS.typed + word] = true;
+  });
   await voiceThenBeat(spoken, 350);
 };
 H.period = ({ to }) => { setPeriod(to, game); if (to === 'evening') playMusic('night'); };
@@ -628,8 +686,11 @@ H.meet = ({ who }) => { meet(game, who); ui.refreshPeople(sim.met.size); };
 H.buy = ({ item }) => { if (buy(game, item)) flags[ENGINE_KEYS.bought + item] = true; else flags[ENGINE_KEYS.cant_buy] = true; };
 H.take = ({ item }) => take(item);
 H.save = () => save(game);
-H.next = () => { game.after = () => travel(NEXT[game.place.name]); };
-H.end = () => { game.after = async () => { await game.wait(500); showEnd(game); }; };
+H.next = () => {
+  game.transition = { from: game.place.name, to: NEXT[game.place.name], phase: 'leaving' };
+  game.after = () => travel(game.transition.to);
+};
+H.end = () => { game.ended = true; game.after = async () => { await game.wait(500); showEnd(game); }; };
 
 // ---------- entering places ----------
 async function prepare(name) {
@@ -644,12 +705,14 @@ async function prepare(name) {
   })();
   return game.prepared[name];
 }
-async function enter(name) {
+async function enter(name, { persist = true, resuming = false } = {}) {
   const { place, story } = await prepare(name);
   if (game.place && game.place.leave) game.place.leave();
+  cancelSavedWalk(game.player); cancelSavedWalk(game.mioNpc);
   game.hold = null;
   game.place = place; game.story = story; document.body.dataset.place = name;
   game.runner.use(place, story);
+  if (!resuming) game.pendingStart = name;
   place.space.add(game.player.root);
   place.space.add(game.mioNpc.root); game.mioNpc.root.visible = false; game.mioNpc.root.scale.setScalar(place.charScale || 1); game.mioNpc.setState('idle');
   place.people.mio = game.mioNpc;
@@ -671,13 +734,13 @@ async function enter(name) {
   resize();
   place.cam?.snap?.(game.player.root.position);
   absorb(story);
-  if (place.defaultPeriod && PERIOD_ORDER.indexOf(sim.period) < PERIOD_ORDER.indexOf(place.defaultPeriod)) sim.period = place.defaultPeriod;
+  if (!resuming && place.defaultPeriod && PERIOD_ORDER.indexOf(sim.period) < PERIOD_ORDER.indexOf(place.defaultPeriod)) sim.period = place.defaultPeriod;
   applySchedule(game, { instant: true });
   ui.clock(sim.date, { early: 'Early morning', morning: 'Morning at work', lunch: 'Lunch', afternoon: 'Afternoon', evening: 'After work' }[sim.period]);
   playMusic(sim.period === 'evening' ? 'night' : (place.music || MUSIC[name] || 'calm'));
   buildMarkers(place);
   ui.goal('');
-  save(game);
+  if (persist) save(game);
   nearSet.clear(); zoneSet.clear();
   return place;
 }
@@ -685,28 +748,40 @@ async function enter(name) {
 // The trip between places: the old place plays its leaving move while the next one is ready (it was built
 // in the background), then a soft crossfade from the last frame into the next place, where its arriving
 // move plays. No black screens.
-async function travel(name) {
-  const from = game.place;
+async function travel(name, { arriving = false, fromName } = {}) {
+  const from = arriving ? { name: fromName } : game.place;
+  game.transition = { from: from.name, to: name, phase: arriving ? 'arriving' : 'leaving' };
+  save(game);
   game.busy = true; game.walker.locked = true; document.body.classList.add('busy', 'trip');
   const ready = prepare(name);
   document.body.classList.add('loading');
   const tr = await game.runner.load('transitions');
   const slot = (tr && tr[`${from.name}_to_${name}`]) || {};
-  await trips.leave(game, from, slot);
+  if (!arriving) await trips.leave(game, from, slot);
   await ready;
   document.body.classList.remove('loading');
-  const snap = snapshot();
-  await enter(name);
-  crossfade(snap);
+  if (!arriving) {
+    const snap = snapshot();
+    game.transition.phase = 'arriving';
+    await enter(name);
+    crossfade(snap);
+  }
   await trips.arrive(game, game.place, slot);
   document.body.classList.remove('busy', 'trip');
   game.busy = false; game.walker.locked = false;
   game.player.scripted = false;
   if (NEXT[name]) setTimeout(() => prepare(NEXT[name]), 1500);
-  if (game.runner.has(eventTrigger(name, 'start'))) game.runner.trigger(eventTrigger(name, 'start'));
-  else if (game.story.start) game.beat(() => game.runner.run(game.story.start));
+  game.transition = null;
+  startScene(name);
 }
 game.travel = travel;
+
+function startScene(name) {
+  game.pendingStart = null;
+  if (game.runner.has(eventTrigger(name, 'start'))) game.runner.trigger(eventTrigger(name, 'start'));
+  else if (game.story.start) game.beat(() => game.runner.run(game.story.start));
+  else save(game);
+}
 function snapshot() {
   render();
   try { return canvas.toDataURL('image/jpeg', 0.9); } catch { return null; }
@@ -747,6 +822,7 @@ function step(dt) {
   place.update(dt, game.t);
   softSeparate(game, dt);   // people overlapping are pushed apart gently (move.js, soft collision)
   place.cam?.update?.(dt, mio.root.position);
+  if (!game.saveEnabled) return;
   // nearest usable thing, the Say target, and near/zone triggers
   let near = null, nd = 0.95, st = null, sd = 2.2;
   // seated he can reach a bit further (his seat spot is not the bench edge), but not across the carriage
@@ -826,7 +902,10 @@ async function boot() {
   game.mioNpc.blob = blob(0.55, 0.4); game.mioNpc.root.add(game.mioNpc.blob);
   requestAnimationFrame(frame);
   const start = Q.get('place') || 'train';
-  await enter(start);
+  const showTitle = start === 'train' && !Q.has('skip') && !TEST && !CAP;
+  const saved = showTitle ? loadSave() : null;
+  game.saveEnabled = !showTitle;
+  await enter(start, { persist: !showTitle });
   if (CAP) {
     if (Q.has('mx')) game.player.root.position.set(+Q.get('mx'), game.player.root.position.y, +Q.get('mz'));
     if (Q.has('face')) { game.walker.facing = +Q.get('face'); game.player.root.rotation.y = +Q.get('face'); }
@@ -838,17 +917,40 @@ async function boot() {
     return;
   }
   if (TEST) { const t = await import('./testmode.js'); t.start(game); }
-  if (start === 'train' && !Q.has('skip') && !TEST) {
-    const saved = loadSave();
+  if (showTitle) {
     const pick = await title(saved);
     if (pick === 'continue' && saved) {
-      restore(game, saved); ui.refreshWords(); ui.refreshPeople(sim.met.size); ui.refreshBag(sim);
-      if (saved.place && saved.place !== 'train') { await enter(saved.place); game.place.tripIn && (await game.place.tripIn(game, {})); }
-    } else clearSave();
+      game.busy = true;
+      restore(game, saved);
+      await enter(saved.place || 'train', { persist: false, resuming: true });
+      // Rebuild the saved room directly. Arrival cinematics and opening scenes belong to new visits.
+      game.place.restoreState?.(saved);
+      // Schedule hooks may set visibility flags; saved progression remains authoritative.
+      for (const key of Object.keys(flags)) delete flags[key];
+      Object.assign(flags, saved.flags || {});
+      ui.refreshWords(); ui.refreshPeople(sim.met.size); ui.refreshBag(sim);
+      ui.goal(saved.ui?.goal || ''); ui.sideGoal(saved.ui?.sideGoal || '');
+      game.hold = saved.ui?.hold || null;
+      game.busy = false;
+      game.saveEnabled = true;
+      const transition = saved.transition;
+      if (saved.ended) { showEnd(game); save(game); }
+      else if (transition && NEXT[transition.from] === transition.to && PLACES[transition.to]) {
+        await travel(transition.to, { arriving: saved.place === transition.to, fromName: transition.from });
+      } else if (saved.runner?.execution || saved.runner?.queued?.length) await game.beat(async () => {
+        await game.runner.resume();
+      });
+      else if (saved.pendingStart === game.place.name || needsLegacyOpening(saved, game.story)) startScene(game.place.name);
+      else { game.resumeWalks(); save(game); }
+      return;
+    }
+    clearSave();
+    game.saveEnabled = true;
+    game.pendingStart = start;
+    save(game);
   }
   await game.place.onEnter?.();
-  if (game.runner.has(eventTrigger(start, 'start'))) game.runner.trigger(eventTrigger(start, 'start'));
-  else if (game.story.start) game.beat(() => game.runner.run(game.story.start));
+  startScene(start);
   if (NEXT[start]) setTimeout(() => prepare(NEXT[start]), 1500);
 }
 

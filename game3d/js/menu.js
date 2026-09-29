@@ -76,6 +76,7 @@ const layers = [];     // open layers, top last: { el, close }
 function openLayer(elm, close) {
   const prev = document.activeElement;
   for (const l of layers) l.el.classList.add('under');
+  document.body.append(elm);   // the active layer must paint above layers opened earlier
   elm.hidden = false; elm.classList.remove('out'); void elm.offsetWidth; elm.classList.add('in');
   layers.push({ el: elm, close, prev });
   // focus at once (not in an animation frame: a slow frame would leave the keyboard on the page behind)
@@ -355,7 +356,7 @@ function renderSaves(mode) {
 }
 function openSaves(mode) { const s = renderSaves(mode); openLayer(s, () => closeLayer(s)); }
 async function saveTo(i) {
-  const g = game(); if (!g || !g.place) return false;
+  const g = game(); if (!g || !g.place || g.runner?.recoveryError) return false;
   simSave(g);
   const data = store.get(SAVE_KEY); if (!data) return false;
   const thumb = pendingThumb || (await grab());
@@ -397,6 +398,7 @@ function buildPause() {
       <nav class="mlist pmenu">
         <button type="button" class="resume primary" data-first>Resume</button>
         <button type="button" class="save">Save</button>
+        <button type="button" class="load">Load</button>
         <button type="button" class="settings">Settings</button>
         <button type="button" class="quit">Quit to title</button>
       </nav>
@@ -409,6 +411,7 @@ function buildPause() {
   p.id = 'pause'; p.hidden = true; document.body.appendChild(p);
   p.querySelector('.resume').onclick = () => setPaused(false);
   p.querySelector('.save').onclick = () => { sfx('tap'); openSaves('save'); };
+  p.querySelector('.load').onclick = () => { sfx('tap'); openSaves('load'); };
   p.querySelector('.settings').onclick = () => { sfx('tap'); openSettings(); };
   p.querySelector('.quit').onclick = () => { sfx('tap'); p.querySelector('.pmenu').hidden = true; p.querySelector('.confirmq').hidden = false; p.querySelector('.confirmq .no').focus(); };
   p.querySelector('.confirmq .no').onclick = () => { p.querySelector('.confirmq').hidden = true; p.querySelector('.pmenu').hidden = false; p.querySelector('.quit').focus(); };
@@ -419,9 +422,10 @@ function buildPause() {
 let isPaused = false;
 function canPause() {
   const g = game();
-  return g && g.place && !TEST && !CAP && !document.body.classList.contains('at-title') && !document.body.classList.contains('title-leaving') && !window.__ended;
+  return g && !g.runner?.recoveryError && g.place && !TEST && !CAP && !document.body.classList.contains('at-title') && !document.body.classList.contains('title-leaving') && !window.__ended;
 }
 function setPaused(on) {
+  if (game()?.runner?.recoveryError) return;
   if (on === isPaused) return;
   if (on && !canPause() && !SHELL) return;
   const g = game(), p = buildPause();
@@ -431,6 +435,7 @@ function setPaused(on) {
   document.body.classList.toggle('paused', on);
   if (on) {
     grab().then((t) => { pendingThumb = t; });
+    p.querySelector('.load').disabled = !anySave();
     p.querySelector('.where').textContent = [PLACE_NAMES[g?.place?.name] || '', PERIOD_NAMES[sim.period] || '', sim.date].filter(Boolean).join(' · ');
     p.querySelector('.pmenu').hidden = false; p.querySelector('.confirmq').hidden = true;
     sfx('tap');
@@ -446,6 +451,11 @@ shell.isPaused = () => isPaused;
 // Esc: closes the top layer (or a game panel that's open); otherwise opens or closes the pause menu. Registered
 // in the capture phase so it sees the state before ui.js's own Esc handling. While paused, keys don't reach the game.
 window.addEventListener('keydown', (e) => {
+  if (game()?.runner?.recoveryError) {
+    e.stopImmediatePropagation();
+    if (e.code === 'Escape') e.preventDefault();
+    return; // Tab and button activation keep their native dialog behaviour.
+  }
   // Enter and Space on a focused menu button click it; the game's own Enter/Space (talk, advance) must not
   // swallow them first
   if ((e.code === 'Enter' || e.code === 'Space' || e.code === 'NumpadEnter') && e.target && e.target.tagName === 'BUTTON' && e.target.closest('#title, .layer, #end, #sayMenu, .panel, #cmdsPanel, #hint, #sayTip')) { e.stopImmediatePropagation(); return; }

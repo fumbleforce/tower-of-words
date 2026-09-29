@@ -57,7 +57,13 @@ try {
       ...window.__test, ended: !!window.__ended, place: window.__game.place?.name,
       goal: window.__game.ui.goalText, voices: window.__voiceLog, move: window.__moveCheck,
     }));
-    try { await page.screenshot({ path: path.join(output, `${W}x${H}.png`), timeout: 5000 }); }
+    try {
+      if (run.ended) await page.waitForFunction(() => {
+        const end = document.querySelector('#end');
+        return end && !end.hidden && Number(getComputedStyle(end).opacity) >= 0.99;
+      }, null, { timeout: 2000 });
+      await page.screenshot({ path: path.join(output, `${W}x${H}.png`), timeout: 5000 });
+    }
     catch (error) { errors.push(`Capture failed: ${error.message.split('\n')[0]}`); }
   }, { timeoutMs: jobBudgetMs });
   // Print only after the entire lifecycle resolves: a late deadline/close failure cannot race a PASS.

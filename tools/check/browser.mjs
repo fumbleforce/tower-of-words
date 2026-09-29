@@ -3,13 +3,20 @@ import { spawn } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 const root = fileURLToPath(new URL('../../', import.meta.url));
 const jobs = {
+  registration: ['tools/check/registration-browser.mjs'],
   desktop: ['game3d/tools/fast.mjs', '1366', '860'],
   phone: ['game3d/tools/fast.mjs', '390', '844'],
   bible: ['tools/bible/check.mjs', '--public-only'],
+  continue: ['tools/check/continue-browser.mjs'],
+  checkpoints: ['tools/check/checkpoint-browser.mjs'],
+  transitions: ['tools/check/transition-browser.mjs'],
+  recovery: ['tools/check/recovery-browser.mjs'],
+  'staging-platform': ['tools/check/staging-browser.mjs', 'platform'],
+  'staging-arrival': ['tools/check/staging-browser.mjs', 'arrival'],
 };
 const requested = process.argv.slice(2);
 const selected = requested.length ? requested : Object.keys(jobs);
-if (selected.some(name => !jobs[name])) throw new Error('Browser checks: desktop, phone, bible');
+if (selected.some(name => !jobs[name])) throw new Error('Browser checks: ' + Object.keys(jobs).join(', '));
 let active, interrupted = false, failed = false, deferred = false;
 const handlers = ['SIGINT', 'SIGTERM', 'SIGHUP'].map(signal => {
   const handler = () => { interrupted = true; active?.kill(signal); };

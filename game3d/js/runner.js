@@ -1,3 +1,4 @@
+import { newFrame, readCheckpoint } from './narrative/checkpoint.js';
 import { flagKeys, KNOW_PREFIX } from './narrative/engine-flags.js';
 const ENGINE_KEYS = flagKeys('game3d/js/runner.js');
 import { DEFAULT_SPEAKERS } from './narrative/speakers.js';
@@ -32,8 +33,10 @@ export function cond(expr) {
 
 // hooks that keep the current line on screen (they belong to it)
 const KEEP_TALK = new Set(['type', 'expression', 'face', 'emote', 'voice', 'sound', 'hint', 'goal', 'learn', 'bond', 'meet', 'set', 'remember', 'fact', 'bondStep', 'relate']);
+const DURABLE_HOOKS = new Set(['period', 'meet', 'buy', 'take', 'bond', 'bondStep', 'remember', 'fact', 'relate']);
+const WORLD_HOOKS = new Set(['depart', 'bag', 'arrive', 'alight', 'cup', 'lunchSit', 'lunchOver', 'sitDown']);
 export class Runner {
-  constructor(game) { this.game = game; this.story = null; this.place = null; this.onceDone = new Set(); }
+  constructor(game) { this.game = game; this.story = null; this.place = null; this.onceDone = new Set(); this.frames = []; this.queued = []; this.effectDepth = 0; }
 
   async load(name) {
     const tryImport = async (p) => { try { return (await import(p)).default; } catch (e) { if (!/Failed to fetch|Cannot find|404|error loading/i.test(String(e))) console.error(e); return null; } };
@@ -72,51 +75,191 @@ export class Runner {
     this.game.onTrigger?.(key);
     const node = this.resolve(key);
     if (!node) return false;
-    const m = /^talk:(.+)$/.exec(key);
     // a new beat starts everyone on their neutral face: a face set on a line lasts for its scene only. It used to
     // last all day, so the listening portrait kept an old look (Jørgen: at the copier Eric looked surprised, still
     // from "Nineteen ninety-six?" in the ticket scene, and Mori flustered from the jam)
-    const go = async () => { for (const who in PORTRAITS) setFace(who, undefined); await this.run(node); if (m) flags[ENGINE_KEYS.talked + m[1]] = true; };
+    const go = async () => { for (const who in PORTRAITS) setFace(who, undefined); await this.run(node, { trigger: key }); };
     // an event that fires while a scene is running waits for it to end
-    if (beat && this.game.busy && /^(event|zone|near):/.test(key)) { this.game.queue.push(go); return true; }
+    if (beat && this.game.busy && /^(event|zone|near):/.test(key)) { this.enqueue(node, key); return true; }
     if (beat) this.game.beat(go); else go();
     return true;
   }
 
-  async run(node) {
-    (this.trace = this.trace || []).push(node); if (this.trace.length > 20) this.trace.shift();
+  enqueue(node, trigger = null, persist = true) {
+    const queued = { node, trigger };
+    this.queued.push(queued);
+    this.game.queue.push(async () => {
+      this.queued.splice(this.queued.indexOf(queued), 1);
+      for (const who in PORTRAITS) setFace(who, undefined);
+      await this.run(node, { trigger });
+    });
+    if (persist) this.persist();
+  }
+
+  get currentNode() { return this.frames.at(-1)?.node || ''; }
+  snapshot() {
+    return { onceDone: [...this.onceDone], execution: this.recoveryError ? structuredClone(this.pendingExecution) : this.frames.length
+      ? structuredClone({ v: 3, place: this.place.name, frames: this.frames }) : this.pendingExecution || null,
+      ...(this.queued.length ? { queued: structuredClone(this.queued) } : {}) };
+  }
+  restore(data) {
+    this.recoveryError = null;
+    this.onceDone = new Set(data?.onceDone || []);
+    this.pendingExecution = data?.execution || null;
+    this.pendingQueue = Array.isArray(data?.queued) ? data.queued : [];
+  }
+  async resume() {
+    const frames = readCheckpoint(this.pendingExecution, this.place.name, this.story);
+    if (this.pendingExecution && !frames) {
+      this.failRecovery('This saved scene has changed and cannot be resumed.');
+      return false;
+    }
+    this.pendingExecution = null;
+    for (const queued of this.pendingQueue || []) {
+      if (queued && Array.isArray(this.story.nodes[queued.node]) && (queued.trigger === null || typeof queued.trigger === 'string')) {
+        this.enqueue(queued.node, queued.trigger, false);
+      }
+    }
+    this.pendingQueue = [];
+    if (!frames?.at(-1)?.staging) this.game.resumeWalks?.();
+    if (frames) await this.run(frames[0].node, { restored: frames });
+    else if (this.queued.length) await this.game.queue.shift()();
+    else return false;
+    return true;
+  }
+  persist() { this.onCheckpoint?.(); }
+  failRecovery(message) {
+    if (this.recoveryError) return;
+    this.pendingExecution ||= this.snapshot().execution;
+    this.recoveryError = message;
+    this.game.onRecoveryError?.(message);
+  }
+  // Simulation operations may save internally. Their state and journal entry must be saved together.
+  effect(context, key, fn) {
+    const frame = context?.frame;
+    if (!frame) return fn();
+    if (frame.done.includes(key)) return;
+    this.effectDepth++;
+    let completed = false;
+    try {
+      const result = fn();
+      if (result?.then) throw new Error('Checkpoint effect must be synchronous: ' + key);
+      frame.done.push(key);
+      completed = true;
+      return result;
+    } finally {
+      this.effectDepth--;
+      if (!this.effectDepth) { this.savePending = false; if (completed) this.persist(); }
+    }
+  }
+  async run(node, { restored = null, trigger = null, replace = null } = {}) {
     const steps = this.story.nodes[node];
     if (!steps) { console.warn('missing node', node); return; }
-    this.game.onNode?.(node, 'start');
-    await this.steps(steps);
-    this.game.onNode?.(node, 'end');
+    const frame = restored?.[0] || newFrame(node, steps, trigger || replace?.trigger);
+    if (!restored) frame.staging = this.game.captureStaging?.() || null;
+    const continuing = restored?.length > 1;
+    const context = { frame, replaying: !!restored && !continuing && !!frame.staging,
+      targets: continuing ? structuredClone(frame.cursors) : [], children: restored?.slice(1) || [] };
+    frame.cursors = [];
+    if (replace) this.frames.splice(this.frames.indexOf(replace), 1, frame);
+    else this.frames.push(frame);
+    try {
+      if (context.replaying) this.game.restoreStaging(frame.staging);
+      if (!continuing) {
+        (this.trace = this.trace || []).push(node); if (this.trace.length > 20) this.trace.shift();
+        this.effect(context, 'entry', () => this.onNodeStart?.(node));
+        this.game.onNode?.(node, 'start');
+      }
+      await this.steps(steps, context);
+      this.game.onNode?.(node, 'end');
+      if (this.frames.includes(frame)) {
+        const talk = /^talk:(.+)$/.exec(frame.trigger || '');
+        if (talk) flags[ENGINE_KEYS.talked + talk[1]] = true;
+      }
+    } catch (error) {
+      this.failRecovery('The scene could not finish.');
+      throw error;
+    } finally {
+      const index = this.frames.indexOf(frame);
+      if (index >= 0) this.frames.splice(index, 1);
+    }
+    if (!this.frames.length && !this.recoveryError) this.persist();
   }
   // returns 'go' when a jump happened, 'end' to stop
-  async steps(list) {
-    for (const s of list) {
-      const r = await this.step(s);
-      if (r === 'end' || r === 'go') return r;
+  async steps(list, context = null, path = []) {
+    const target = context?.targets.find(c => JSON.stringify(c.path) === JSON.stringify(path));
+    const cursor = { path, index: target?.index || 0, phase: target?.phase || 'step' };
+    context?.frame.cursors.push(cursor);
+    try {
+      for (let index = cursor.index; index < list.length; index++) {
+        cursor.index = index;
+        cursor.phase = index === target?.index ? target.phase : 'step';
+        const key = JSON.stringify([...path, index]);
+        const result = await this.step(list[index], context, key, cursor);
+        if (result === 'end' || result === 'go') return result;
+      }
+      return null;
+    } catch (error) {
+      // Capture suspended callers before unwinding removes their cursor paths.
+      this.failRecovery('The scene could not finish.');
+      throw error;
+    } finally {
+      if (context) context.frame.cursors.splice(context.frame.cursors.indexOf(cursor), 1);
     }
-    return null;
   }
-  async step(s) {
+  async call(node, context, key, cursor) {
+    if (context?.frame.done.includes(key + ':call')) {
+      if (context.replaying && context.frame.worldAfter[key + ':call']) this.game.restoreStaging(context.frame.worldAfter[key + ':call']);
+      return;
+    }
+    const restored = context?.children.length ? context.children.splice(0) : null;
+    await this.run(restored?.[0].node || node, { restored });
+    if (context) {
+      context.frame.worldAfter[key + ':call'] = this.game.captureStaging?.() || null;
+      context.frame.done.push(key + ':call');
+    }
+    this.persist();
+  }
+  async jump(node, context) {
+    await this.run(node, { replace: context?.frame || null });
+    return 'go';
+  }
+  async step(s, context = null, key = '', cursor = { phase: 'step', path: [], index: 0 }) {
     this.lastStep = s;
     if (typeof s === 'string') return this.line(s);
     if (s.face && s.say) setFace(s.say, s.face);
     if (s.say) return this.sayLine(s.say, s.text, s.voice || (s.overheard ? heardKey(s.text) : undefined), s.name, s);
-    if (s.choice) return this.choice(s);
-    if (s.offer) return this.offer(s);
-    if (s.learn) { if (this.game.sim && !this.game.sim.taught[s.learn]) this.game.sim.taught[s.learn] = s.from || this.game.talkingTo; this.learnCmd(s.learn); return null; }
-    if (s.set !== undefined) { if (typeof s.set === 'string') flags[s.set] = true; else Object.assign(flags, s.set); }
-    if (s.unset) flags[s.unset] = false;
-    if (s.inc) flags[s.inc] = (flags[s.inc] || 0) + 1;
-    if (s.if !== undefined && (s.then || s.else)) { const r = await this.steps(cond(s.if) ? (s.then || []) : (s.else || [])); if (r) return r; }
-    if (s.go) { await this.run(s.go); return 'go'; }
-    if (s.call) await this.run(s.call);
+    if (s.choice) return this.choice(s, context, key, cursor);
+    if (s.offer) return this.offer(s, context, key);
+    if (s.learn) {
+      this.effect(context, key + ':learn', () => {
+        if (this.game.sim && !this.game.sim.taught[s.learn]) this.game.sim.taught[s.learn] = s.from || this.game.talkingTo;
+        this.learnCmd(s.learn);
+      });
+      return null;
+    }
+    const continuing = cursor.phase;
+    if (continuing === 'step') {
+      if (s.set !== undefined) this.effect(context, key + ':set', () => { if (typeof s.set === 'string') flags[s.set] = true; else Object.assign(flags, s.set); });
+      if (s.unset) this.effect(context, key + ':unset', () => { flags[s.unset] = false; });
+      if (s.inc) this.effect(context, key + ':inc', () => { flags[s.inc] = (flags[s.inc] || 0) + 1; });
+    }
+    if (continuing !== 'call') {
+      if (s.if !== undefined && (s.then || s.else)) {
+        const branches = context?.frame.branches;
+        const yes = branches && Object.hasOwn(branches, key) ? branches[key] : cond(s.if);
+        if (branches) branches[key] = yes;
+        cursor.phase = 'branch';
+        const branch = yes ? 'then' : 'else';
+        const result = await this.steps(s[branch] || [], context, [...cursor.path, cursor.index, branch]);
+        if (result) return result;
+      }
+      if (s.go) return this.jump(s.go, context);
+    }
+    if (s.call) { cursor.phase = 'call'; await this.call(s.call, context, key, cursor); }
     if (s.wait) await this.game.wait(s.wait);
-    // a scene step that isn't talk (walking, doors, the camera...): the last line doesn't hang over it
     if (s.do && !KEEP_TALK.has(s.do)) ui.closeTalk();
-    if (s.do) await this.hook(s);
+    if (s.do) await this.hook(s, context, key);
     if (s.end) return 'end';
     return null;
   }
@@ -145,26 +288,36 @@ export class Runner {
     await shown;
     return null;
   }
-  async choice(s) {
-    const opts = s.choice.filter((o) => cond(o.if));
-    let who = null, text = '', whoId = null;
-    if (s.prompt) { const i = s.prompt.indexOf(': '); if (i > 0 && /^\w+$/.test(s.prompt.slice(0, i))) { whoId = s.prompt.slice(0, i); who = this.speaker(whoId); text = s.prompt.slice(i + 2); } else text = s.prompt.replace(/^>\s*/, ''); }
-    this.game.setHurry?.(false);
-    const pick = await ui.choose(who, text, opts.map((o) => ({ html: o.text.replace(/</g, '&lt;') })), { keepLine: !s.prompt, whoId });
-    const o = opts[pick];
-    if (o.set) { if (typeof o.set === 'string') flags[o.set] = true; else Object.assign(flags, o.set); }
-    if (o.call) await this.run(o.call);
-    if (o.go) { await this.run(o.go); return 'go'; }
+  async choice(s, context, key, cursor) {
+    const choices = context?.frame.choices;
+    let selected = choices && Object.hasOwn(choices, key) ? choices[key] : null;
+    if (selected === null) {
+      const opts = s.choice.filter((o) => cond(o.if));
+      let who = null, text = '', whoId = null;
+      if (s.prompt) { const i = s.prompt.indexOf(': '); if (i > 0 && /^\w+$/.test(s.prompt.slice(0, i))) { whoId = s.prompt.slice(0, i); who = this.speaker(whoId); text = s.prompt.slice(i + 2); } else text = s.prompt.replace(/^>\s*/, ''); }
+      this.game.setHurry?.(false);
+      const pick = await ui.choose(who, text, opts.map((o) => ({ html: o.text.replace(/</g, '&lt;') })), { keepLine: !s.prompt, whoId });
+      selected = s.choice.indexOf(opts[pick]);
+      if (choices) choices[key] = selected;
+    }
+    const o = s.choice[selected];
+    if (!o) throw new Error('Saved choice no longer exists');
+    if (o.set) this.effect(context, key + ':choice-set', () => { if (typeof o.set === 'string') flags[o.set] = true; else Object.assign(flags, o.set); });
+    if (o.call) { cursor.phase = 'choice-call'; await this.call(o.call, context, key, cursor); }
+    if (o.go) return this.jump(o.go, context);
     return null;
   }
-  async offer(s) {
+  async offer(s, context, key) {
+    if (context?.frame.done.includes(key + ":offer")) return null;
     let who = null, text = '', whoId = null;
     if (s.line) { const i = s.line.indexOf(': '); if (i > 0 && /^\w+$/.test(s.line.slice(0, i))) { whoId = s.line.slice(0, i); who = this.speaker(whoId); text = s.line.slice(i + 2); } else text = s.line.replace(/^>\s*/, ''); }
     await ui.choose(who, text, [{ html: cmdHTML(s.offer), cls: 'cmdchip' }], { voiceKey: s.voice, whoId });
     const spoken = voice(WORDS[s.offer].voice);
     this.game.mioSays?.(s.offer);
-    this.game.sim?.taught && !this.game.sim.taught[s.offer] && who && (this.game.sim.taught[s.offer] = s.from || s.line.slice(0, s.line.indexOf(': ')));
-    this.learnCmd(s.offer);
+    this.effect(context, key + ':offer', () => {
+      this.game.sim?.taught && !this.game.sim.taught[s.offer] && who && (this.game.sim.taught[s.offer] = s.from || s.line.slice(0, s.line.indexOf(': ')));
+      this.learnCmd(s.offer);
+    });
     await voiceThenBeat(spoken, 350);
     return null;
   }
@@ -178,10 +331,29 @@ export class Runner {
       ui.toast(`${sayable ? 'New command' : 'New word'}: <span class="jp">${WORDS[id].ja}</span> <span class="gl">${WORDS[id].ro}, ${WORDS[id].en}</span>`, 3400);
     }
   }
-  async hook(s) {
+  async hook(s, context, key) {
     const h = this.game.hooks[s.do] || (this.place.hooks && this.place.hooks[s.do]);
     if (!h) { console.warn('unknown hook', s.do); return; }
-    await h(s);
+    if (DURABLE_HOOKS.has(s.do)) {
+      if (s.do === 'period' && context?.replaying && context.frame.done.includes(key + ':hook')) {
+        const world = context.frame.worldAfter[key + ':hook'];
+        if (world) this.game.restoreStaging(world);
+      } else this.effect(context, key + ':hook', () => {
+        const result = h(s);
+        if (s.do === 'period' && context) context.frame.worldAfter[key + ':hook'] = this.game.captureStaging?.() || null;
+        return result;
+      });
+    }
+    else if (WORLD_HOOKS.has(s.do) && context) {
+      if (context.frame.done.includes(key + ':hook') && !context.replaying) return;
+      await h(s);
+      if (!context.frame.done.includes(key + ':hook')) context.frame.done.push(key + ':hook');
+      this.persist();
+    }
+    else if (s.do === 'type') {
+      if (context?.frame.done.includes(key + ':hook')) return;
+      await h(s, apply => this.effect(context, key + ':hook', apply));
+    } else await h(s);
   }
   // non-blocking lines shown while something else happens (transition walks)
   async ambient(lines, gap = 2800) {

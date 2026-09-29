@@ -2,6 +2,7 @@ import { eventId } from '../narrative/events.js';
 import { flagKeys } from '../narrative/engine-flags.js';
 const ENGINE_KEYS = flagKeys('game3d/js/places/office.js');
 import { PLACE_DETAILS } from './catalog.js';
+import { snapshotPeople, restorePeople, snapshotObject, restoreObject } from './saved-people.js';
 // Place 3, the office floor, as the engine side: things, spots, zones, the command effects and the arrival by lift.
 // Every word said here comes from game3d/story/office.js (placeholder: story/placeholder/office.js).
 import * as THREE from 'three';
@@ -21,7 +22,8 @@ export async function officePlace(game) {
   const w = buildOffice();
   const cam = new RoomCam({ elev: 51, fov: 24 });
   const floor = new THREE.Plane(new THREE.Vector3(0, 1, 0), 0);
-  const st = { liftK: 0, liftWant: 0, copier: 'jam', fan: 'on', fanSpin: 0, clockStop: 0, mdoor: 0, mdoorWant: 0, coffee: 0, paper: [], chairTo: null };
+  const st = { liftK: 0, liftWant: 0, copier: 'jam', fan: 'on', fanSpin: 0, clockStop: 0, mdoor: 0, mdoorWant: 0, coffee: 0, paper: [], cans: [], chairTo: null };
+  const initialChair = snapshotObject(w.myChair);
   const aoi = PEOPLE.aoi(); aoi.root.scale.multiplyScalar(K); aoi.root.visible = false; aoi.root.position.set(-5.45, 0, -3.25); w.root.add(aoi.root);
   const aoiBlob = blob(0.55, 0.38); aoiBlob.visible = false; w.root.add(aoiBlob); aoi.blob = aoiBlob; w.emi.blob = w.emiBlob;
   const rei = PEOPLE.rei(); rei.root.scale.multiplyScalar(K); rei.root.visible = false; rei.root.position.set(-5.45, 0, -3.25); w.root.add(rei.root);
@@ -118,13 +120,23 @@ export async function officePlace(game) {
     jamSheet.position.set(-0.05, 0.47, 0.3); jamSheet.rotation.set(0.35, 0.12, 0.06); w.copier.add(jamSheet); }
   const showJam = (on) => { jamSheet.visible = on; copierLight.material = on ? lightM.jam : lightM.ok; };
   showJam(!flags.copier_done);
+  function sheet() {
+    const object = new THREE.Mesh(new THREE.BoxGeometry(0.2, 0.004, 0.27), sheetM);
+    object.castShadow = true;
+    w.root.add(object); st.paper.push(object);
+    return object;
+  }
+  function vendingCan() {
+    const can = rbox(0.06, 0.1, 0.06, '#7fc07a', { x: -4.62, y: 0.02, z: -1.95, r: 0.02 });
+    can.rotation.z = Math.PI / 2; w.root.add(can); st.cans.push(can);
+    return can;
+  }
   function spray(n, wild) {
     for (let i = 0; i < n; i++) {
-      const s = new THREE.Mesh(new THREE.BoxGeometry(0.2, 0.004, 0.27), sheetM); s.castShadow = true;
+      const s = sheet();
       s.position.set(-2.95 - 0.44 + (Math.random() - 0.5) * 0.05, 0.56, CS + 0.36);
       const a = Math.random() * Math.PI * 2, v = wild ? 1.2 + Math.random() * 1.5 : 0;
       s.userData = { v: new THREE.Vector3(Math.cos(a) * v, wild ? 1.2 + Math.random() : 0, Math.abs(Math.sin(a)) * v), stack: wild ? null : i, t: -i * 0.12, spin: (Math.random() - 0.5) * 6 };
-      w.root.add(s); st.paper.push(s);
     }
   }
   function stepPaper(dt) {
@@ -172,7 +184,7 @@ export async function officePlace(game) {
   async function lunchSit({ with: partner = 'mio' } = {}) {
     const me = game.player;
     if (partner === 'mio') {
-      if (!flags[ENGINE_KEYS.machineOpen]) P.hooks.machineDoor({ state: 'open' });   // she eats in there, so the door is open
+      if (!st.mdoorWant) P.hooks.machineDoor({ state: 'open' });   // she eats in there, so the door is open
       const es = lunchSeats.eric, ms = lunchSeats.mio, mio = game.mioNpc;
       // Mio: finish whatever walk she's on (every walk ends by itself: move.js walkRig caps them), then to her crate,
       // while Eric walks in through the door
@@ -257,6 +269,59 @@ export async function officePlace(game) {
       if (aspect >= 1) cam.fit(aspect, [new THREE.Vector3(-6.9, 0, 0), new THREE.Vector3(6.9, 0, 0), new THREE.Vector3(0, 0.6, w.Z0), new THREE.Vector3(0, 0, w.Z1)], new THREE.Vector3(0, 0, 0.1), { limY: 1.0, limX: 1.0 });
       else cam.fit(aspect, [new THREE.Vector3(-2.9, 0, 0), new THREE.Vector3(2.9, 0, 0), new THREE.Vector3(0, 0, -2.7), new THREE.Vector3(0, 1.3, 2.5)], new THREE.Vector3(0, 0, 0), { follow: true, clamp: [w.X0 + 2.5, w.X1 - 2.5, w.Z0 + 4.4, w.Z1 - 2.4] });
     },
+    snapshotState() {
+      return { machineOpen: st.mdoorWant > 0, chairHome: Math.hypot(w.myChair.position.x - dS1.seat[0], w.myChair.position.z - dS1.seat[1]) < 0.1,
+        machineDoor: { value: st.mdoor, target: st.mdoorWant }, chair: snapshotObject(w.myChair),
+        blockers: Object.fromEntries(['mdoor', 'mdoorLeaf', 'chair'].map(tag => [tag, w.nav.rects.filter(r => r.tag === tag).map(r => [...r])])),
+        copier: st.copier, fan: st.fan, alarm: !!st.alarm, clockStop: st.clockStop,
+        lift: { value: st.liftK, target: st.liftWant },
+        paper: st.paper.map(s => ({ ...snapshotObject(s), motion: { ...s.userData, v: s.userData.v.toArray() } })),
+        cans: st.cans.map(snapshotObject),
+        people: snapshotPeople(people), player: snapshotPeople({ eric: game.player }), lunch: lunchState.on,
+        food: Object.fromEntries(Object.entries(lunchFood).map(([id, object]) => [id, snapshotObject(object)])) };
+    },
+    restoreState(saved) {
+      const f = saved.flags || {}, state = saved.world || {};
+      st.mdoorWant = state.machineDoor?.target ?? ((state.machineOpen ?? (f.machineOpen || f.machine_open)) ? 1 : 0);
+      st.mdoor = state.machineDoor?.value ?? st.mdoorWant;
+      w.machineDoor.rotation.y = -st.mdoor * 1.5;
+      w.nav.unblock('mdoor'); w.nav.unblock('mdoorLeaf');
+      if (st.mdoorWant) {
+        w.nav.unblock('mdoor'); w.nav.blockTagged('mdoorLeaf', 5.22, 5.62, CN - 0.8, CN - 0.02);
+      } else w.nav.blockTagged('mdoor', 4.7, 5.5, CN - 0.2, CN + 0.12);
+      st.chairTo = null; st.chairDone = null;
+      w.nav.unblock('chair');
+      restoreObject(w.myChair, state.chair || initialChair);
+      if (state.chairHome ?? (f.chairHome || f.chair_back)) {
+        w.nav.unblock('chair'); w.myChair.position.set(dS1.seat[0], w.myChair.position.y, dS1.seat[1]);
+        w.myChair.rotation.y = Math.PI;
+      } else w.nav.blockTagged('chair', 5.2, 5.8, -1.6, -1.0);
+      if (state.blockers) for (const [tag, rects] of Object.entries(state.blockers)) {
+        w.nav.unblock(tag); rects.forEach(rect => w.nav.blockTagged(tag, ...rect));
+      }
+      st.copier = state.copier || (f.copier_done ? 'idle' : 'jam');
+      showJam(st.copier === 'jam');
+      if (state.fan) st.fan = state.fan;
+      st.alarm = !!state.alarm; st.clockStop = state.clockStop || 0;
+      if (state.lift) { st.liftK = state.lift.value; st.liftWant = state.lift.target; w.openLift(st.liftK); }
+      if (state.paper) {
+        st.paper.forEach(s => { s.removeFromParent(); s.geometry.dispose(); }); st.paper = [];
+        for (const data of state.paper) { const s = sheet(); restoreObject(s, data); s.userData = { ...data.motion, v: new THREE.Vector3().fromArray(data.motion.v) }; }
+      }
+      if (state.cans) {
+        st.cans.forEach(can => { can.removeFromParent(); can.geometry.dispose(); }); st.cans = [];
+        state.cans.forEach(data => restoreObject(vendingCan(), data));
+      }
+      restorePeople(people, state.people);
+      lunchState.on = !!state.lunch;
+      for (const [id, object] of Object.entries(lunchFood)) restoreObject(object, state.food?.[id]);
+      if (saved.runner?.execution && state.player) {
+        game.walker.stop();
+        restorePeople({ eric: game.player }, state.player);
+        game.walker.sync?.(); game.walker.facing = game.player.root.rotation.y;
+        cam.snap?.(game.player.root.position);
+      }
+    },
     pick(rc) { const p = new THREE.Vector3(); return rc.ray.intersectPlane(floor, p) ? p : null; },
     walkPerson(id, [x, z], { speed } = {}) {
       const r = people[id]; if (!r) return Promise.resolve();
@@ -297,7 +362,7 @@ export async function officePlace(game) {
       w.fan2Head.rotation.z += 6 * dt;
       // copier: the jam (amber light, a sheet stuck in the feed) until it runs; shake when running or wild
       w.copier.position.x = -2.95 + (st.copier === 'wild' || st.copier === 'run' ? Math.sin(t * 60) * 0.006 : 0);
-      { const j = st.copier === 'jam' && !flags.copier_done; if (j !== jamSheet.visible) showJam(j); }
+      { const j = st.copier === 'jam'; if (j !== jamSheet.visible) showJam(j); }
       stepPaper(dt);
       // the chair rolling to its spot
       if (st.chairTo) {
@@ -337,7 +402,7 @@ export async function officePlace(game) {
       kettle: ({ state }) => { if (state === 'pour') { st.steam = 1.6; sfx('ok'); } },
       rackAlarm: ({ state }) => { st.alarm = state === 'on'; },
       machineDoor: ({ state }) => { st.mdoorWant = state === 'open' ? 1 : 0; if (state === 'open') { w.nav.unblock('mdoor'); w.nav.blockTagged('mdoorLeaf', 5.22, 5.62, CN - 0.8, CN - 0.02); flags[ENGINE_KEYS.machineOpen] = true; } else { w.nav.unblock('mdoorLeaf'); } sfx('door'); },
-      vendingDrop: () => { sfx('tap'); setTimeout(() => sfx('tap'), 180); const can = rbox(0.06, 0.1, 0.06, '#7fc07a', { x: -4.62, y: 0.02, z: -1.95, r: 0.02 }); can.rotation.z = Math.PI / 2; w.root.add(can); },
+      vendingDrop: () => { sfx('tap'); setTimeout(() => sfx('tap'), 180); vendingCan(); },
       clockStop: ({ ms = 3000 }) => { st.clockStop = ms / 1000; },
       fan: ({ state }) => { st.fan = state; },
       liftOpen: () => { st.liftWant = 1; sfx('lift'); },
@@ -405,7 +470,7 @@ export async function officePlace(game) {
   }
   async function sitMio() {
     if (game.player.seated) return;
-    if (!flags[ENGINE_KEYS.chairHome]) { await P.hooks.chairRoll({ to: 'my_seat' }); }
+    if (Math.hypot(w.myChair.position.x - dS1.seat[0], w.myChair.position.z - dS1.seat[1]) > 0.1) { await P.hooks.chairRoll({ to: 'my_seat' }); }
     await game.walkTo(dS1.seat[0], dS1.seat[1] + 0.45);
     placeMioSeated();
     await game.wait(600);

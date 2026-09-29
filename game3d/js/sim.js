@@ -33,7 +33,6 @@ const storyMoments = {}, storyReasons = {};
 let G = null;   // the game, once installed
 
 // ---------- install: hooks and the watchers (idempotent; applySchedule calls it too, until main.js does) ----------
-const stack = [];
 export function installSim(game) {
   if (G === game) return; G = game;
   const H = game.hooks;
@@ -45,12 +44,9 @@ export function installSim(game) {
   const r = game.runner;
   if (r && !r.__sim) {
     r.__sim = true;
-    // which node is running (for the moments and the source of a `bond` step)
-    const run = r.run.bind(r);
-    r.run = async (node) => {
-      stack.push(node);
-      try { moment(game, node); return await run(node); } finally { const i = stack.lastIndexOf(node); if (i >= 0) stack.splice(i, 1); }
-    };
+    // Runner installs the frame before moment() can autosave an award.
+    r.onNodeStart = (node) => { moment(game, node); save(game); };
+    r.onCheckpoint = () => save(game);
     // the register of the last word said to someone, for lines that react to it
     const trig = r.trigger.bind(r);
     r.trigger = (key, o) => { observe(key); return trig(key, o); };
@@ -59,7 +55,7 @@ export function installSim(game) {
   syncAll();
 }
 const place = () => flags.place || (G && G.place && G.place.name) || '';
-const curNode = () => stack[stack.length - 1] || (G && G.runner && G.runner.trace && G.runner.trace[G.runner.trace.length - 1]) || '';
+const curNode = () => G?.runner?.currentNode || G?.runner?.trace?.at(-1) || '';
 
 // ---------- clock ----------
 export function setPeriod(p, game) {
@@ -189,7 +185,10 @@ function checkSteps(game) {
       if (!game || !game.story || !game.story.nodes || !game.story.nodes[t.node]) continue;   // runs where its node lives
       sim.firedBonds.add(key);
       const go = () => game.runner.run(t.node);
-      if (game.busy) game.queue.push(go); else game.beat(go);
+      if (game.busy) {
+        if (game.runner.enqueue) game.runner.enqueue(t.node);
+        else game.queue.push(go);
+      } else game.beat(go);
     }
   }
 }
@@ -321,9 +320,19 @@ function dayCheck() {
 // ---------- save and load ----------
 const KEY = 'amakawa-day1-save';
 export function save(game) {
+  if (game.saveEnabled === false || game.runner?.recoveryError) return;
+  if (game.runner?.effectDepth) { game.runner.savePending = true; return; }
   try {
     const data = { v: 1, day: sim.day, period: sim.period, bonds: sim.bonds, inv: sim.inv, taught: sim.taught, met: [...sim.met], yen: sim.yen, flags: { ...flags }, known: [...known], seen: [...seen], found: [...game.found], place: game.place && game.place.name,
       rel: { bonds: bonds.toJSON(), moments: [...sim.momentsDone], fired: [...sim.firedBonds], ambient: [...ambientDone] } };
+    if (typeof ui.goalText === 'string') data.ui = { goal: ui.goalText, sideGoal: ui.sideText || '',
+      ...(game.hold ? { hold: game.hold } : {}) };
+    if (game.runner?.snapshot) data.runner = game.runner.snapshot();
+    else if (game.runner?.onceDone) data.runner = { onceDone: [...game.runner.onceDone] };
+    if (game.place?.snapshotState) data.world = game.place.snapshotState();
+    if (game.transition) data.transition = { ...game.transition };
+    data.pendingStart = game.pendingStart || null;
+    if (game.ended) data.ended = true;
     localStorage.setItem(KEY, JSON.stringify(data));
   } catch { /* storage may be off */ }
 }
@@ -331,6 +340,11 @@ export function loadSave() {
   try { const d = JSON.parse(localStorage.getItem(KEY) || 'null'); return d && d.v === 1 ? d : null; } catch { return null; }
 }
 export function restore(game, d) {
+  game.pendingStart = d.pendingStart || null;
+  game.transition = d.transition || null;
+  game.ended = !!d.ended;
+  if (game.runner?.restore) game.runner.restore(d.runner);
+  else if (game.runner?.onceDone) game.runner.onceDone = new Set(d.runner?.onceDone || []);
   Object.assign(sim, { day: d.day, period: d.period === 'commute' ? 'early' : d.period, bonds: d.bonds || {}, inv: d.inv || [], taught: d.taught || {}, yen: d.yen ?? 1000 });
   sim.date = dateOf(sim.day || 1);
   sim.met = new Set(d.met || []);
