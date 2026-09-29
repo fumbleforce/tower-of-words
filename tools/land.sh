@@ -75,7 +75,8 @@ if [[ -z "$wt" ]]; then
   g worktree add --quiet "$temp_wt" "$branch" || refuse "could not check out $branch in a temporary worktree"
   wt="$temp_wt"
 fi
-dirty=$(git -C "$wt" status --porcelain --untracked-files=normal)
+# __pycache__ folders are rebuilt by any Python run (npm run check makes some) and never belong in a commit.
+dirty=$(git -C "$wt" status --porcelain --untracked-files=normal | grep -v '^?? \(.*/\)\{0,1\}__pycache__/$')
 [[ -z "$dirty" ]] || refuse "$wt has uncommitted or untracked changes; commit them (your own files only) or remove them:
 $dirty"
 [[ ! -d "$(git -C "$wt" rev-parse --git-path rebase-merge)" && ! -d "$(git -C "$wt" rev-parse --git-path rebase-apply)" ]] \
