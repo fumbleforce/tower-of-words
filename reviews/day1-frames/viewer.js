@@ -2,12 +2,12 @@ import { lineHTML, WORDS } from '../../game3d/js/lang.js';
 import { PORTRAITS } from '../../game3d/js/ui/portrait-data.js';
 const $ = s => document.querySelector(s);
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const id = 'day1-frames', draftKey = 'review-frames:' + id;
-const names = { eric:'Eric', mio:'Mio', miotext:'Mio · message', guard:'Ishibashi', kuroda:'Hamada', mori:'Mori', kenji:'Kenji', kuro:'Receptionist', gatev:'Gate', commuter:'Commuter', sales1:'Colleague', sales2:'Colleague', emi:'Emi' };
+const id = document.documentElement.dataset.reviewId || 'day1-frames', draftKey = 'review-frames:' + id;
+const names = { eric:'Eric', mio:'Mio', miotext:'Mio · message', guard:'Ishibashi', kuroda:'Hamada', mori:'Mori', kenji:'Kenji', kuro:'Receptionist', gatev:'Gate', commuter:'Commuter', sales1:'Colleague', sales2:'Colleague', emi:'Emi', aoi:'Aoi', reader:'Man with a book', bun:'Woman with a bun', youth:'Young man', music:'Girl with headphones', stander:'Man with a bag' };
 let sections, all, passage = 0, translations;
 let draft = { choices:{}, comments:{} }, revision = 0, saving = false, savedDraft = {choices:{}, comments:{}};
 const current = () => all[passage];
-const versionTitles = change => change.kind==='remove' ? ['With the line','Without it'] : ['Original',({merge:'Merged',flow:'Shorter sequence',replace:'Revised'}[change.kind] || 'Revised')];
+const versionTitles = change => change.titles || (change.kind==='remove' ? ['With the line','Without it'] : ['Original',({merge:'Merged',flow:'Shorter sequence',replace:'Revised'}[change.kind] || 'Revised')]);
 function status(text) { $('#status').textContent = text; $('#save-state').textContent = text; }
 function renderSave() {
   const count=all.filter(c=>(draft.choices[c.id]||'')!==(savedDraft.choices[c.id]||'') || (draft.comments[c.id]||'')!==(savedDraft.comments[c.id]||'')).length;
@@ -89,7 +89,7 @@ function renderDecision() {
 function render() {
   const section=sections.find(s=>s.changes.includes(current()));
   $('#position').textContent=`${section.title} · ${passage+1} of ${all.length}`;
-  $('#title').textContent=current().title;
+  $('#title').textContent=(document.documentElement.dataset.showIds==='true' ? current().id+' · ' : '')+current().title;
   $('#summary').textContent=current().summary.split(/(?<=\.) /)[0];
   $('#comment').value=draft.comments[current().id] || '';
   $('#previous').disabled=passage===0;
@@ -124,7 +124,8 @@ async function save() {
 }
 async function init(){
   const response=await fetch('./frames.json');if(!response.ok)throw Error('Could not load passages');
-  ({sections,translations={}}=await response.json()); all=sections.flatMap(s=>s.changes);
+  const data=await response.json(); ({sections,translations={}}=data); all=sections.flatMap(s=>s.changes);
+  if ($('#presentation')) $('#presentation').textContent=data.presentation || '';
   if(!all.length || all.some(c=>!c.before?.length || !c.after?.length))throw Error('A passage is missing its context');
   let feedback=null;
   try {const r=await fetch('./feedback.json',{cache:'no-store'});if(r.ok)feedback=await r.json();}catch{}
