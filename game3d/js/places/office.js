@@ -28,11 +28,16 @@ export async function officePlace(game) {
   const steam = new THREE.Mesh(new THREE.SphereGeometry(0.06, 8, 6), new THREE.MeshBasicMaterial({ color: '#ffffff', transparent: true, opacity: 0 })); steam.position.set(1.45, 0.75, CS + 0.36); w.root.add(steam);
   const alarm = new THREE.Mesh(new THREE.SphereGeometry(0.05, 10, 8), new THREE.MeshBasicMaterial({ color: '#ff5a4a' })); alarm.position.set(5.2, 1.4, -3.3); alarm.visible = false; w.root.add(alarm);
   const dS1 = w.dS(1), dS0 = w.dS(0);
-  { const r = w.mori; r.seated = false; r.root.position.set(-5.2, 0, -1.9); r.root.rotation.y = Math.PI; for (const l of r.legs) l.rotation.set(0, 0, 0); for (const k of r.knees) k.rotation.set(0, 0, 0); for (const a of r.arms) a.rotation.set(0, 0, 0); }
-  const moriBlob = blob(0.55, 0.38); moriBlob.position.set(-5.2, 0.004, -1.9); w.root.add(moriBlob); w.mori.blob = moriBlob; blobs.mori = moriBlob;
+  // Mori waits for him on the landing: about 1.7 m out from the lift and off to the stairs side, facing the spot
+  // where Eric stops (LIFT_OUT, places/lift.js), clear of the doors, of anyone else stepping out (they go 0.7 m to
+  // either side) and of the way to the corridor on the right, so his deep bow can't reach into Eric
+  // (Jørgen: "Mori stands right in front of you and bows into your model")
+  const LIFT_OUT = [-5.45, -2.4], MORI_WAIT = [-6.0, -0.75];
+  { const r = w.mori; r.seated = false; r.root.position.set(MORI_WAIT[0], 0, MORI_WAIT[1]); r.root.rotation.y = Math.atan2(LIFT_OUT[0] - MORI_WAIT[0], LIFT_OUT[1] - MORI_WAIT[1]); for (const l of r.legs) l.rotation.set(0, 0, 0); for (const k of r.knees) k.rotation.set(0, 0, 0); for (const a of r.arms) a.rotation.set(0, 0, 0); }
+  const moriBlob = blob(0.55, 0.38); moriBlob.position.set(MORI_WAIT[0], 0.004, MORI_WAIT[1]); w.root.add(moriBlob); w.mori.blob = moriBlob; blobs.mori = moriBlob;
 
   const spots = {
-    lift_out: [-5.45, -2.4], lobby: [-5.6, -1.0], office_door: [-0.25, 0.9], my_seat: [dS1.seat[0], dS1.seat[1] + 0.45], emi_seat: [dS0.seat[0], dS0.seat[1]],
+    lift_out: [-5.45, -2.4], mori_greet: [(LIFT_OUT[0] + MORI_WAIT[0]) / 2, (LIFT_OUT[1] + MORI_WAIT[1]) / 2], lobby: [-5.6, -1.0], office_door: [-0.25, 0.9], my_seat: [dS1.seat[0], dS1.seat[1] + 0.45], emi_seat: [dS0.seat[0], dS0.seat[1]],
     copier_front: [-2.95, 4.2], coffee_front: [0.7, 4.1], corridor_w: [-3.5, 1.3], corridor_e: [5.8, 1.3], machine_front: [5.1, 1.3],
   };
   const seats = { my_seat: { x: dS1.seat[0], z: dS1.seat[1], top: 0.24, ry: Math.PI }, emi_seat: { x: dS0.seat[0], z: dS0.seat[1], top: 0.24, ry: Math.PI }, mio_seat: { x: dS0.seat[0], z: dS0.seat[1], top: 0.24, ry: Math.PI } };
@@ -46,7 +51,7 @@ export async function officePlace(game) {
     kenji: { label: 'Kenji', kind: 'person', anchor: rigAnchor(w.kenji), ...at(-2.9, -4.3, -2.0, -4.34) },
     rei: { label: 'Rei', kind: 'person', anchor: rigAnchor(rei), spot: () => [rei.root.position.x, rei.root.position.z + 0.6], face: () => [rei.root.position.x, rei.root.position.z], enabled: () => rei.root.visible && !rei._walk },
     aoi: { label: 'Aoi', kind: 'person', anchor: rigAnchor(aoi), spot: () => [aoi.root.position.x, aoi.root.position.z + 0.6], face: () => [aoi.root.position.x, aoi.root.position.z], enabled: () => aoi.root.visible && !aoi._walk },
-    mori: { label: 'Mr. Mori', kind: 'person', anchor: rigAnchor(w.mori), spot: () => (w.mori.seated === false ? [w.mori.root.position.x, w.mori.root.position.z + 0.6] : [2.3, -2.55]), face: () => [w.mori.root.position.x, w.mori.root.position.z], enabled: () => !w.mori._walk },
+    mori: { label: 'Mr. Mori', kind: 'person', anchor: rigAnchor(w.mori), spot: () => (!flags.greeted_mori ? LIFT_OUT : w.mori.seated === false ? [w.mori.root.position.x, w.mori.root.position.z + 0.6] : [2.3, -2.55]), face: () => [w.mori.root.position.x, w.mori.root.position.z], enabled: () => !w.mori._walk },
     tama: { label: 'Cat', verb: 'Pet', kind: 'person small', anchor: (v) => { w.tama.getWorldPosition(v); v.y += 0.45; return v; }, spot: () => { const v = new THREE.Vector3(); w.tama.getWorldPosition(v); return [v.x, v.z + 0.6]; }, face: () => { const v = new THREE.Vector3(); w.tama.getWorldPosition(v); return [v.x, v.z]; } },
     covered: { label: 'Covered desk', kind: 'thing small', anchor: v3(w.dN(1).x, 1.0, w.dN(1).z), ...at(w.dN(1).x, -5.05, w.dN(1).x, w.dN(1).z) },
     covered_monitor: { label: 'Covered monitor', kind: 'thing small', anchor: v3(w.dS(2).x, 1.0, w.dS(2).z), ...at(w.dS(2).x, -1.75, w.dS(2).x, w.dS(2).z) },
