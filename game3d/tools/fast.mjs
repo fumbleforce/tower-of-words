@@ -8,6 +8,7 @@ import { execFileSync } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
+import { ensureBuild } from '../../tools/lib/build-stamp.mjs';
 // Build checks first (fail the build): every spoken line has a voice clip, and no text in the story carries escape
 // leftovers (a backslash, &quot; ...), in spoken lines, narration, choices or prompts alike.
 {
@@ -42,6 +43,9 @@ fs.mkdirSync(output, { recursive: true });
 const started = Date.now(), jobBudgetMs = 295000, captureReserveMs = 10000;
 const errors = [];
 let run = {}, result, pageErrors = [], perf = null;
+// build.json is generated: stamp it before the page asks for it (the review server also stamps on request)
+let build = '';
+try { build = ensureBuild().id; } catch (error) { console.log('build stamp failed:', error.message); }
 try {
   if (![W, H, S].every(value => Number.isFinite(+value) && +value > 0)) throw new Error('Width, height and seconds must be positive numbers');
   await withBrowserJob('fast-test', async browser => {
@@ -96,8 +100,6 @@ for (const heard of (run.heard || []).filter(entry => /sumimasen|すみません
 }
 console.log('last steps:', (run.log || []).slice(-8).join(' | '));
 if (perf) {
-  let build = '';
-  try { build = JSON.parse(fs.readFileSync(new URL('../build.json', import.meta.url), 'utf8')).id; } catch { /* no build id */ }
   writePerf(output, perf, { build, pass: result.pass });
 }
 if (result.errors.length) console.log('errors:', result.errors.slice(0, 8).join(' | '));
