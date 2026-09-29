@@ -191,11 +191,11 @@
       "reason": "Existing passenger mesh factories, per-seat placement and idle motion share rig conventions. Stage 5 crowd and room-builder review will separate appearance construction from placement and motion."
     },
     "game3d/js/ui.js": {
-      "lines": 1810,
-      "bytes": 67990,
+      "lines": 1420,
+      "bytes": 55784,
       "owner": "codex-tui",
-      "review": "C-0071",
-      "reason": "Existing dialogue, portraits, menus and audio presentation; stage 3 extraction is planned."
+      "review": "C-0080",
+      "reason": "Remaining dialogue, portrait layout, menus and practice UI; stage 3 continues after audio extraction."
     }
   }
 }

@@ -288,3 +288,9 @@ Next implementation is the complete staged commit gate: materialize immutable pu
 Jørgen asked to stop overtesting and proceed. Stages 3–5 are approved in the same freeze (C-0078); each boundary gets a commit, CPU checks and one fast run per viewport. Strict traces are reserved for dialogue, place lifecycle and navigation. Claude skims finished stages.
 
 The hook package is narrowed to staged syntax, immutable staged CPU checks, binary/private blocking and a Facts trailer. Snapshot fixtures and a complete isolated candidate CPU run pass (`/tmp/codex-staged-cpu-candidate.log`). C-0079 permits attribution trailers after Facts. Receipt enforcement, committed-HEAD boot, pre-push gitleaks and safe asset-lock/live-disk synchronization are deferred. The unfinished receipt implementation and tests are parked at `/tmp/codex-deferred-hook-receipts/`; none is installed. Next boundary: extract UI audio, then dialogue/portrait ownership.
+
+### Stage 3: audio boundary (2026-09-29)
+
+Minimal hooks are installed and committed as `c02912c`; that commit passed all 13 CPU groups through the hook itself. Audio context/buses/voice/pause/mute now live in `game3d/js/audio/core.js` (307 lines), music loops and ducking in `audio/music.js` (104 lines). UI keeps its public facade and wires voice ducking. SFX imports the audio core directly, removing all four audio/UI cycle edges; only the existing props/detail cycle remains. UI shrank from 1810 to 1420 lines.
+
+All 13 CPU groups pass (`/tmp/codex-stage3-audio-cpu.log`). Desktop fast passes in 70 s and phone in 69 s, each with 12 practice prompts and zero overlaps/spins; both end screenshots inspected. A focused real-browser audio check passes voice playback, music decoding, pause/resume and mute (`/tmp/codex-stage3-audio-smoke.log`). This checks actual audio APIs without judging speaker output. No story, controls or assets changed. Next: portrait/dialogue ownership, with strict before/after traces for dialogue.
