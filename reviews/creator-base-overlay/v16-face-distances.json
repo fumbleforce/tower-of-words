@@ -1,0 +1,20 @@
+{
+  "mio": {
+    "sourceFaceTriangles": 179,
+    "samples": 716,
+    "meanDistance": 0.02190140192011854,
+    "p95Distance": 0.04509389746566751,
+    "maxDistance": 0.06372594548521399,
+    "units": "source full dressed standing height = 1",
+    "metric": "source head-bone skin corners and centroids to nearest v16 base triangle; bind only, unsigned, no texture or silhouette score"
+  },
+  "eric": {
+    "sourceFaceTriangles": 68,
+    "samples": 272,
+    "meanDistance": 0.010788567129854819,
+    "p95Distance": 0.03156093994949761,
+    "maxDistance": 0.0438056687800148,
+    "units": "source full dressed standing height = 1",
+    "metric": "source head-bone skin corners and centroids to nearest v16 base triangle; bind only, unsigned, no texture or silhouette score"
+  }
+}
