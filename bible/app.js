@@ -912,14 +912,19 @@ async function init() {
       route();
     }, 140);
   });
+  // Single-key shortcuts never fire while typing (Jørgen: "/" jumped to search while he typed a comment), during
+  // IME composition (Japanese input), or with a modifier held.
+  const typing = (e) => e.isComposing || e.keyCode === 229 || e.ctrlKey || e.metaKey || e.altKey ||
+    !!(e.target.closest && e.target.closest('input, textarea, select, [contenteditable]:not([contenteditable="false"])'));
   document.addEventListener('keydown', (e) => {
+    if (typing(e)) return;
     if ($('#lb').classList.contains('on')) {
       if (e.key === 'Escape') closeLB();
       if (e.key === 'ArrowRight') { LB.i = (LB.i + 1) % LB.list.length; showLB(); }
       if (e.key === 'ArrowLeft') { LB.i = (LB.i - 1 + LB.list.length) % LB.list.length; showLB(); }
       return;
     }
-    if (e.key === '/' && document.activeElement.tagName !== 'INPUT') { e.preventDefault(); $('#q').focus(); }
+    if (e.key === '/') { e.preventDefault(); $('#q').focus(); }
   });
   document.addEventListener('input', (e) => {
     const page = e.target.closest('.page.review');
