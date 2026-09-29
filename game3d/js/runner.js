@@ -1,6 +1,6 @@
 // Runs the story files (game3d/story/*.js, format in game3d/story/FORMAT.md) against a place.
 import { voiceThenBeat } from './ui.js';
-import { ui, voice, sfx, setFace } from './ui.js';
+import { ui, voice, sfx, setFace, PORTRAITS } from './ui.js';
 import { WORDS, learn, known, cmdHTML, SAYABLE } from './lang.js';
 
 export const flags = {};
@@ -97,7 +97,10 @@ export class Runner {
     const node = this.resolve(key);
     if (!node) return false;
     const m = /^talk:(.+)$/.exec(key);
-    const go = async () => { await this.run(node); if (m) flags['talked_' + m[1]] = true; };
+    // a new beat starts everyone on their neutral face: a face set on a line lasts for its scene only. It used to
+    // last all day, so the listening portrait kept an old look (Jørgen: at the copier Eric looked surprised, still
+    // from "Nineteen ninety-six?" in the ticket scene, and Mori flustered from the jam)
+    const go = async () => { for (const who in PORTRAITS) setFace(who, undefined); await this.run(node); if (m) flags['talked_' + m[1]] = true; };
     // an event that fires while a scene is running waits for it to end
     if (beat && this.game.busy && /^(event|zone|near):/.test(key)) { this.game.queue.push(go); return true; }
     if (beat) this.game.beat(go); else go();

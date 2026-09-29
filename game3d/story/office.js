@@ -258,6 +258,7 @@ export default {
       { say: 'mio', face: 'neutral', emo: 'casual', text: "Okay, your first repair request. I changed your screen to English, by the way." },
       '> REPAIR REQUEST #1. Copier, B2 copy room. Eats paper. Opened 1 April 1996.',
       { say: 'eric', face: 'surprised', emo: 'surprised', text: 'Nineteen ninety-six?' },
+      { do: 'expression', who: 'eric', face: 'neutral' },
       { say: 'mio', emo: 'dry', text: "Yeah. Mori-san opened it when he was new here, I think. Nobody closes it, it's like... tradition. He can show you." },
       { say: 'mio', emo: 'shout', text: '森さん、{gaijin}にコピー機お願い。', overheard: true },
       { say: 'mori', emo: 'warm', text: '外国の方、ですよ。', overheard: true, clear: [{ ja: '外国の方', ro: 'gaikoku no kata', en: 'person from abroad, polite' }] },
@@ -281,6 +282,12 @@ export default {
     ],
     copier: [
       { set: 'copier_started' },
+      // the zone fires in the doorway, which is Mori's way in and out (past the paper boxes, x about -4): Eric steps
+      // over to the fax, well off that line, and Mori finishes his walk to the copier (Jørgen: Mori got stuck on him
+      // and walked out and back in)
+      { do: 'walk', who: 'eric', to: 'fax' },
+      { do: 'walk', who: 'mori', to: 'copier_front' },
+      { do: 'face', who: 'eric', to: 'copier' },
       { do: 'cam', on: 'mori', zoom: 1.6 },
       { do: 'copier', state: 'jam' },
       { say: 'mori', face: 'flustered', emo: 'sheepish', text: 'また食べられました…', overheard: true },
@@ -294,16 +301,19 @@ export default {
       { say: 'mori', emo: 'slow', slow: true, text: '{ugoite}...' },
       { do: 'type', word: 'ugoite', from: 'mori', prompt: '> Mori looks at you, then at the copier.' },
       { do: 'kotodama', target: 'copier' },
+      { do: 'emote', who: 'mori', kind: '!', ms: 2600 },
       { do: 'copier', state: 'run' },
       { do: 'copier', state: 'idle' },
       { do: 'face', who: 'mori', to: 'copier' },
-      { say: 'mori', emo: 'whisper', text: '…三十年。', overheard: true, clear: [{ ja: '三十年', ro: 'sanjūnen', en: 'thirty years' }] },
+      { say: 'mori', face: 'neutral', emo: 'whisper', text: '…三十年。', overheard: true, clear: [{ ja: '三十年', ro: 'sanjūnen', en: 'thirty years' }] },
       { do: 'face', who: 'mori', to: 'eric' },
       { do: 'gesture', who: 'mori', kind: 'finger' },
       { do: 'bow', who: 'mori' },
       { set: 'copier_done' },
       { do: 'bond', who: 'mori', add: 1 },
       { do: 'cam', back: true },
+      // out through the doorway before Eric can follow into it, then on to his desk
+      { do: 'walk', who: 'mori', to: 'corridor_w' },
       { do: 'walk', who: 'mori', to: 'chief_desk', wait: false },
       { do: 'goal', text: 'Tell Mio the copier is fixed.' },
     ],
