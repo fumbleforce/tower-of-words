@@ -15,20 +15,8 @@ import { route } from './route.js';
 export const withList = (slot) => (slot.with || []).filter((e) => typeof e === 'string' || cond(e.if)).map((e) => (typeof e === 'string' ? e : e.who));
 
 // walk an object in a straight line, ignoring the walk grid (scripted moves)
-export function glide(g, obj, [x, z], speed) {
-  return new Promise((res) => {
-    let last = performance.now();
-    const tick = () => {
-      const now = performance.now(), dt = Math.min(0.05, (now - last) / 1000) * (g.timeScale || 1); last = now;
-      const p = obj.position, d = Math.hypot(x - p.x, z - p.z);
-      if (d < 0.03) { res(); return; }
-      const s = Math.min(d, speed * dt); p.x += (x - p.x) / d * s; p.z += (z - p.z) / d * s;
-      obj.rotation.y = Math.atan2(x - p.x, z - p.z); if (g.walker) g.walker.facing = obj.rotation.y;
-      requestAnimationFrame(tick);
-    };
-    tick();
-  });
-}
+import { glide } from '../move.js';
+export { glide };   // smooth start, turn and stop; never touches the player's facing
 
 export async function lobbyPlace(game) {
   const w = buildLobby();

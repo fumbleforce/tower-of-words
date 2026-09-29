@@ -50,10 +50,14 @@ p.on('console', (m) => { if (m.type() === 'error' && !/404/.test(m.text())) errs
 const t0 = Date.now();
 await p.goto(`http://127.0.0.1:8771/${process.env.BASE || 'game3d'}/index.html?test=fast&q=0${process.env.ROUTE ? '&route=' + process.env.ROUTE : ''}${process.env.Q || ''}`); await p.waitForFunction(() => window.__game, null, { timeout: 60000 });
 await p.waitForFunction(() => window.__test && window.__test.done, null, { timeout: +S * 1000 }).catch(() => {});
-const r = await p.evaluate(() => ({ ...window.__test, ended: !!window.__ended, place: window.__game.place && window.__game.place.name, goal: window.__game.ui.goalText, voices: window.__voiceLog, heard: window.__test.heard }));
+const r = await p.evaluate(() => ({ ...window.__test, ended: !!window.__ended, place: window.__game.place && window.__game.place.name, goal: window.__game.ui.goalText, voices: window.__voiceLog, heard: window.__test.heard, move: window.__moveCheck }));
 await p.screenshot({ path: `/tmp/claude-1000/fast-${W}x${H}.png` });
 console.log(r.ended && !errs.length && !r.errors.length ? 'PASS' : 'FAIL', `${W}x${H}`, `${((Date.now() - t0) / 1000).toFixed(0)} s`, 'route:', r.route, 'places:', r.places.join(' > '), 'at:', r.place, '| goal:', r.goal);
 console.log('practice prompts passed via Say:', r.practice || 0);
+const mv = r.move || {}; const ov = (mv.overlaps || []).length ?? mv.overlaps, sp = (mv.spins || []).length ?? mv.spins;
+console.log(`movement: ${mv.steps || 0} steps, ${ov || 0} overlaps, ${sp || 0} spins`); for (const l of [...(mv.overlaps || []), ...(mv.spins || [])].slice(0, 8)) console.log('  ', typeof l === 'string' ? l : JSON.stringify(l));
+// MOVE_WARN=1: overlaps and spins warn instead of failing (while the feel agent fixes the scripted walks)
+if ((ov || sp) && process.env.MOVE_WARN) console.log('WARN movement (MOVE_WARN)'); else if (ov || sp) r.errors.push(`movement: ${ov || 0} overlaps, ${sp || 0} spins`);
 console.log('voices:', JSON.stringify(r.voices), r.voices && r.voices.overlaps ? 'OVERLAP' : 'one at a time');
 for (const h of (r.heard || []).filter((h) => /sumimasen|すみません/.test(h.text))) console.log('heard:', h.key, h.text, '| known', h.known.join(','), '| tokens', h.tokens.join(' '), h.garbledKnown.length ? 'GARBLED ' + h.garbledKnown : 'clear');
 console.log('last steps:', r.log.slice(-8).join(' | '));

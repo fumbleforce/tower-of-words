@@ -272,15 +272,16 @@ export function layoutStage() {
   const talk = $('#talk');
   const band = phone ? Math.max(170, (talk.hidden ? 0 : talk.offsetHeight) + 18) : 0;
   S.style.setProperty('--band', band + 'px');
-  const F = phone ? Math.min(92, vh * 0.1) : Math.min(124, vh * 0.13);
-  const cutK = phone ? 1.95 : 2.25;                 // chin to the cut, in face heights (the waist on desktop)
+  // phone: a small bust docked to the side, cut on the solid band (QA round 1: a phone portrait covered 60% of the scene)
+  const F = phone ? Math.min(58, vh * 0.068) : Math.min(124, vh * 0.13);
+  const cutK = phone ? 1.55 : 2.25;                 // chin to the cut, in face heights (the waist on desktop)
   const base = vh - band;
   for (const el of S.querySelectorAll('.por')) {
     const d = FACE[el.dataset.who]; if (!d || el.hidden) continue;
     const s = F / (d.f[3] - d.f[1]), cx = (d.f[0] + d.f[2]) / 2;
     const chin = base - cutK * F, top = chin - d.f[3] * s;
     const left = el.classList.contains('left');
-    const fx = phone ? vw * (left ? 0.36 : 0.64) : vw * (left ? 0.16 : 0.86);
+    const fx = phone ? vw * (left ? 0.2 : 0.8) : vw * (left ? 0.16 : 0.86);
     el.style.width = d.W * s + 'px'; el.style.height = d.H * s + 'px';
     el.style.left = fx - cx * s + 'px'; el.style.top = top + 'px';
     // how far above the cut the image itself ends (Eric's cut-out is shorter); that bottom edge is faded out
@@ -512,7 +513,9 @@ export const ui = {
     $('#cmdsPanel').hidden = false;
   },
   // the Say menu: resolves with a command id or null
+  closeSayMenu() { const m = $('#sayMenu'); if (m && !m.hidden) { m.hidden = true; this._sayKeys = null; if (this._sayRes) { const r = this._sayRes; this._sayRes = null; r(null); } } },
   sayMenu(targetName) {
+    this._sayTipOff?.();
     return new Promise((res) => {
       const m = $('#sayMenu');
       m.querySelector('.head').innerHTML = targetName ? `Say to <b>${targetName}</b>` : 'Say';
@@ -533,15 +536,19 @@ export const ui = {
     });
   },
   // the first time Eric knows a word: the Say button pulses and a short tip points at it
-  introSay(text) {
-    const b = $('#sayBtn'), tip = $('#sayTip');
-    this.sayIntro = true;
-    if (text) tip.firstChild.textContent !== undefined && (tip.innerHTML = `${lineHTML(text)}<button type="button">Got it</button>`);
-    b.classList.add('pulse'); tip.hidden = false;
-    const off = () => { tip.hidden = true; b.classList.remove('pulse'); this.sayIntro = false; };
+  introSay() {
+    // once per game (flag say_tip), worded for the input in use, closed by the first Say (QA round 1)
+    const F = window.__game && window.__game.flagsRef; if (F && F.say_tip) return;
+    const tip = $('#sayTip'); if (!tip) return;
+    const touch = document.body.classList.contains('phone') || matchMedia('(pointer: coarse)').matches;
+    const key = keyLabel((settings && settings.keySay) || 'KeyQ');
+    tip.innerHTML = `<span>${touch ? 'Tap <b>Say</b> to say a word you know.' : `Press <b>${key}</b> to say a word you know.`}</span><button type="button">Got it</button>`;
+    this.sayIntro = true; tip.hidden = false;
+    const off = () => { tip.hidden = true; this.sayIntro = false; if (F) F.say_tip = true; };
+    this._sayTipOff = off;
     tip.querySelector('button').onclick = (e) => { e.stopPropagation(); off(); };
-    b.addEventListener('click', off, { once: true });
   },
+
   sayReady(on) { $('#sayBtn').classList.toggle('ready', !!on); },
   setSayTarget() {},
   // the Say button sits beside whoever or whatever Eric can talk to, only when a word can be used there
@@ -727,6 +734,9 @@ export const ui = {
   // Each letter lights up as it's typed; a wrong try shows where it went off. Resolves when it's right.
   typePrompt(id, prompt, opts = {}) {
     return new Promise((res) => {
+      // portraits: a lesson prompt shows the person who asks (Eric listening); Eric saying a word to someone or
+      // something shows Eric alone (QA round 1: Mio showed for "Say it to Cat" and for machines)
+      { const t0 = $('#talk'); if (prompt && prompt.whoId) { showPortraits(t0, prompt.whoId); } else { lastNpc = null; showPortraits(t0, 'eric'); } }
       const w = WORDS[id];
       const canon = (s) => s.toLowerCase().normalize('NFC').replace(/[āâ]/g, 'a').replace(/[īî]/g, 'i').replace(/[ūû]/g, 'u').replace(/[ēê]/g, 'e').replace(/[ōô]/g, 'o')
         .replace(/[^a-z]/g, '').replace(/ou/g, 'o').replace(/oo/g, 'o').replace(/uu/g, 'u').replace(/aa/g, 'a').replace(/ii/g, 'i');
