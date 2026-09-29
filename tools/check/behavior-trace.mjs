@@ -10,6 +10,7 @@ import { openGame } from '../../game3d/test/support/open-game.mjs';
 import { installBehaviorTrace } from '../../game3d/test/support/behavior-trace.mjs';
 import { fastResult } from '../../game3d/test/support/fast-result.mjs';
 import { installTraceClock } from '../../game3d/test/support/trace-clock.mjs';
+import { ensureBuild } from '../lib/build-stamp.mjs';
 
 const root = fileURLToPath(new URL('../../', import.meta.url));
 const [output, width = '1366', height = '860', route = 'magic'] = process.argv.slice(2);
@@ -31,7 +32,7 @@ const harnessFiles = ['tools/check/behavior-trace.mjs', 'tools/lib/browser-job.m
 const harnessHashes = () => Object.fromEntries(harnessFiles.map(file => [file, hash(fs.readFileSync(path.join(root, file)))]));
 const metadata = { version: 1, settings, commit: execFileSync('git', ['rev-parse', 'HEAD'], { cwd: root, encoding: 'utf8' }).trim(),
   manifest: hash(fs.readFileSync(path.join(root, 'tools/assets/assets.json'))), sources: sourceHashes(),
-  harness: harnessHashes(), randomAlgorithm: 'mulberry32', build: JSON.parse(fs.readFileSync(path.join(root, 'game3d/build.json'), 'utf8')) };
+  harness: harnessHashes(), randomAlgorithm: 'mulberry32', build: ensureBuild() };
 const responses = {}, pending = [], errors = [];
 let capture, clock;
 try {

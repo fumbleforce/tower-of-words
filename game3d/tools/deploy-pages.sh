@@ -15,14 +15,14 @@
 # Pages must serve gh-pages (one GitHub setting, see notes/PERF.md, "Deploy"):
 #   Settings > Pages > Build and deployment > Source: "Deploy from a branch", Branch: gh-pages, folder / (root).
 #
-# The site: /game3d/ with index.html, build.json, css, js, story (.js), fonts, vendor, audio (mp3, json) and the
+# The site: /game3d/ with index.html, build.json (stamped here), css, js, story (.js), fonts, vendor, audio (mp3, json) and the
 # assets the game loads. Left out: tools, design, ref, shots, notes (*.md) and contact sheets. Only committed files
 # and files in the committed lock file go up, so nothing local, private or git-ignored beyond those can leak.
 set -e
 ROOT=$(git rev-parse --show-toplevel)
 cd "$ROOT"
 PUSH=0; [ "$1" = "--push" ] && PUSH=1
-[ -n "$(git status --porcelain game3d/index.html game3d/build.json)" ] && echo "note: game3d/index.html or build.json has uncommitted changes; the site uses the committed version"
+[ -n "$(git status --porcelain game3d/index.html)" ] && echo "note: game3d/index.html has uncommitted changes; the site uses the committed version"
 
 STAGE=$(mktemp -d "${TMPDIR:-/tmp}/pages.XXXXXX")
 # KEEP=1 keeps the built site folder (to serve and check it locally)
@@ -53,7 +53,10 @@ if bad:
 print(f"binaries: {len(files)} from the lock file, sha256 checked")
 ' "$ROOT" "$STAGE"
 G="$STAGE/game3d"
-rm -rf "$G/tools" "$G/design" "$G/ref" "$G/shots" "$G/js/shell-qa.js"
+rm -f "$G/js/shell-qa.js"
+# build.json is generated, never committed: stamp the staged copy (HEAD's id, the staged module list)
+GIT_DIR=$(git rev-parse --absolute-git-dir) python3 "$G/tools/stamp.py" | sed 's/^/build: /'
+rm -rf "$G/tools" "$G/design" "$G/ref" "$G/shots"
 find "$G" -name '*.md' -delete
 # assets: keep only the folders the code loads from (assets/<folder>/ written in js/), drop loose files
 USED=$(grep -rhoE "assets/[A-Za-z0-9_-]+/" "$G/js" | sort -u | sed 's#assets/##; s#/##')

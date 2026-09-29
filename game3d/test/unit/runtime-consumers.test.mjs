@@ -5,6 +5,7 @@ import { test } from 'node:test';
 import { fileURLToPath } from 'node:url';
 import { format } from 'prettier';
 import { loadLive } from '../../../bible/live.js';
+import { ensureBuild } from '../../../tools/lib/build-stamp.mjs';
 import { checkRegistrations } from '../../../tools/check/registrations.mjs';
 import { assetRuntimeData } from '../../../tools/assets/runtime-data.mjs';
 import { PLACE_FILES } from '../../js/places/definitions.js';
@@ -15,6 +16,7 @@ const root = new URL('../../../', import.meta.url);
 const read = file => fs.readFileSync(new URL(file, root), 'utf8');
 
 test('actual bible loader preserves the complete portrait table', async () => {
+  ensureBuild(); // generated file; the review server stamps it when the bible fetches it
   const originalFetch = globalThis.fetch, originalLocation = globalThis.location;
   const requested = [];
   globalThis.location = { href: new URL('bible/index.html', root).href };

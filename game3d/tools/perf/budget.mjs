@@ -14,12 +14,13 @@
 import { chromium } from '/home/jorgen/ai/opening/node_modules/playwright/index.mjs';
 import fs from 'node:fs';
 import path from 'node:path';
+import { ensureBuild } from '../../../tools/lib/build-stamp.mjs';
 
 const arg = (k, d) => { const i = process.argv.indexOf('--' + k); return i > 0 ? process.argv[i + 1] : d; };
 const CPU = +arg('cpu', 4), QUAL = arg('q', '1'), SECS = +arg('secs', 8);
 const G = path.resolve(path.dirname(new URL(import.meta.url).pathname), '../..');
 const HOOK = process.argv.includes('--hook');
-const build = JSON.parse(fs.readFileSync(path.join(G, 'build.json'), 'utf8')).id;
+const build = ensureBuild().id;
 const BUDGET = { titleMs: 8000, titleMB: 12, placeMs: 6000, dayMB: 40, fps: 30, p95: 50, calls: 250, tris: 300000, longTasks: 5 };
 const GPU = process.env.GL === 'gpu';
 const gl = GPU ? ['--use-angle=vulkan', '--enable-features=Vulkan', '--ignore-gpu-blocklist', '--enable-gpu'] : ['--use-angle=swiftshader', '--enable-unsafe-swiftshader'];

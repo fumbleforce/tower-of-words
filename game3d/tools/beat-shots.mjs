@@ -12,12 +12,13 @@ import { chromium } from '/home/jorgen/ai/opening/node_modules/playwright/index.
 import fs from 'node:fs';
 import path from 'node:path';
 import { execFileSync } from 'node:child_process';
+import { ensureBuild } from '../../tools/lib/build-stamp.mjs';
 
 const args = process.argv.slice(2).filter((a) => !a.startsWith('--'));
 const APPROVE = process.argv.includes('--approve');
 const [W = '1366', H = '860'] = args;
 const G = path.resolve(path.dirname(new URL(import.meta.url).pathname), '..');
-const build = JSON.parse(fs.readFileSync(path.join(G, 'build.json'), 'utf8')).id;
+const build = ensureBuild().id;
 const base = path.join(G, 'shots/beats');
 const out = path.join(base, `${build}-${W}x${H}`);
 const approved = path.join(base, `approved-${W}x${H}`);

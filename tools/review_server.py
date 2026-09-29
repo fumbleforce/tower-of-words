@@ -10,13 +10,18 @@ so nothing he wrote is lost.
 POST /api/feedback saves feedback sent from the game's feedback window (game3d/js/feedback.js): a new folder
 notes/feedback-game/<time>/ with text.md, shot.png (git-ignored) and context.json, plus an entry in the day's
 notes/feedback-log/ file. GET /api/feedback answers {"ok": true} so the game knows it can show the button.
-Both refuse anything not from this machine. Nothing else on disk is written.
+Both refuse anything not from this machine.
+
+GET .../game3d/build.json (the main checkout's or a worktree's) first runs that game3d's tools/stamp.py --if-stale:
+build.json is generated and never committed, so it is written when missing or when HEAD or the module list changed.
 """
 import base64
 import json
 import os
 import re
+import subprocess
 import sys
+import threading
 import time
 from functools import partial
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
@@ -27,6 +32,19 @@ MAX_BODY = 256 * 1024
 FEEDBACK = os.path.join(ROOT, 'notes', 'feedback-game')
 FEEDBACK_LOG = os.path.join(ROOT, 'notes', 'feedback-log')
 MAX_FEEDBACK = 40 * 1024 * 1024  # a full-size PNG of a 4K screen, base64
+STAMP_LOCK = threading.Lock()
+
+
+def stamp_build(url_path):
+    """Before serving <dir>/game3d/build.json, stamp it if it's missing or stale. A failure only logs."""
+    stamp = os.path.realpath(os.path.join(ROOT, url_path.lstrip('/'), '..', 'tools', 'stamp.py'))
+    if not stamp.startswith(os.path.realpath(ROOT) + os.sep) or not os.path.isfile(stamp):
+        return
+    with STAMP_LOCK:
+        try:
+            subprocess.run([sys.executable, stamp, '--if-stale'], capture_output=True, timeout=20, check=True)
+        except Exception as e:
+            print(f'build stamp failed for {url_path}: {e}', file=sys.stderr, flush=True)
 
 
 def save_game_feedback(data):
@@ -93,6 +111,9 @@ class Handler(SimpleHTTPRequestHandler):
     def do_GET(self):
         if self.path.split('?')[0] == '/api/feedback':
             return self._json(200 if self._local() else 403, {'ok': self._local()})
+        path = self.path.split('?')[0]
+        if path == '/game3d/build.json' or path.endswith('/game3d/build.json'):
+            stamp_build(path)
         return super().do_GET()
 
     def _feedback(self):

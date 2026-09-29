@@ -8,7 +8,7 @@ Only edit files you own. If you need a change in someone else's files, write it 
 
 | Agent | Owns | Must not touch |
 |---|---|---|
-| builder (integrator) | js/main.js, js/engine.js, js/runner.js, js/story.js, js/testmode.js, tools/push.sh, tools/fast.mjs, build.json. The only agent that pushes. | story text |
+| builder (integrator) | js/main.js, js/engine.js, js/runner.js, js/story.js, js/testmode.js, tools/push.sh, tools/fast.mjs, tools/stamp.py (build.json is generated, never committed). The only agent that pushes. | story text |
 | world | js/places/*, js/scenes/*, js/train/car.js, js/train/world.js, js/train/hull.js, js/train/kit.js, js/props.js, new js/post.js (post-processing) | ui, story |
 | characters | assets/characters/ (new), js/cast.js, js/train/people.js, js/avatar.js, js/mio.js, tools/characters/ (new) | places, ui |
 | feel | js/cam.js, js/trips.js, js/train/audio.js, new js/sfx.js and js/ambience.js, audio/ (except voices), animation blending in avatar code only by request to characters | ui.js, story |
