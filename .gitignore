@@ -22,6 +22,7 @@ legacy/island/node_modules/
 
 # Per-run automated QA artifacts (review assets remain retained separately)
 game3d/shots/fast/
+game3d/shots/routes/
 game3d/shots/words-menu/
 
 # No binary is tracked anywhere (notes/asset-storage-proposal.md). Used assets sync with R2 through
