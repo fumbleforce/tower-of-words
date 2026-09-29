@@ -136,9 +136,12 @@ export default {
       { do: 'goal', text: '' },
       { do: 'cam', on: [1.6, -0.9], zoom: 1.6 },
       { do: 'bag', state: 'teeter' },
-      '> The train lurches.',
       { set: 'bag_wobble' },
-      { do: 'cam', back: true },
+      { choice: [
+        { text: 'Catch the lunchbox', go: 'caught' },
+        { text: 'Let the lunchbox fall', go: 'dropped' },
+        { text: 'Let her catch the lunchbox', go: 'mio_catches' },
+      ], prompt: 'Her lunchbox is about to fall off the seat.' },
     ],
     mio_catches: [
       { unset: 'bag_wobble' },
@@ -150,8 +153,7 @@ export default {
       { unset: 'bag_wobble' },
       { do: 'bag', state: 'caught' },
       { inc: 'mio_warm' },
-      { say: 'mio', emo: 'flustered', name: 'Woman with a laptop', text: 'Ah, sorry, sorry. Thank you.' },
-      { say: 'mio', emo: 'sheepish', name: 'Woman with a laptop', text: "It's pickles. My mother thinks island has no food, so... every time I visit." },
+      { say: 'mio', emo: 'flustered', name: 'Woman with a laptop', text: "Ah, sorry, sorry. Thank you. It's pickles. My mother thinks island has no food, so... every time I visit." },
       { set: 'heard_mum' },
       { go: 'sit' },
     ],
@@ -163,6 +165,7 @@ export default {
       { go: 'sit' },
     ],
     sit: [
+      { do: 'cam', back: true },
       { do: 'sit', who: 'eric', at: 'seat_far_r' },
       { set: 'sat' },
       { do: 'goal', text: '' },
