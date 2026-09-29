@@ -30,6 +30,7 @@ The inboxes (collab/to-codex.md, collab/to-claude.md) and dated notes record mes
 | Voices: local models, Mio's pitch guard | GUIDE.md, Voices and audio |
 | Process: one task per agent, QA gates, the commit message `Facts:` line, the definition of done | GUIDE.md, Process |
 | Review server port, GPU lock, browser lock, the fast test, where screenshots go, the world bible, the asset library, repo layout | GUIDE.md, Engineering |
+| Where code goes, module responsibilities, what `npm run check` enforces (lint, formatting, file sizes, dependencies) | ARCHITECTURE.md |
 | Who leads what (story writing, engine, UI, 3D, language), who owns the code right now (the code freeze), how to message Codex, claiming files | [collab/PROTOCOL.md](../../collab/PROTOCOL.md) |
 | Production pass: which agent owns which files, the production bar | [notes/PRODUCTION.md](../../notes/PRODUCTION.md) |
 | The visual critic's scoring bar | [notes/VISUAL_QA.md](../../notes/VISUAL_QA.md) |
