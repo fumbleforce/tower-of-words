@@ -1,5 +1,28 @@
 [
   {
+    "id_": "prop/dorm_court/dorm_entry",
+    "kind": "prop",
+    "name": "Dorm entrance",
+    "paths": [
+      "game3d/js/places/dorm-court.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "dorm-court.js things.dorm_entry",
+    "place": "dorm_court",
+    "used": [
+      "Dorm courtyard: tap target 'Dorm entrance'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "dorm-court"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
     "id_": "prop/dorms/bed",
     "kind": "prop",
     "name": "Bed",

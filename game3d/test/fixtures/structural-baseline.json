@@ -3,7 +3,8 @@
     "next": {
       "train": "gate",
       "gate": "forecourt",
-      "forecourt": "office"
+      "forecourt": "office",
+      "dorm_court": "dorms"
     },
     "exact": {
       "cant_buy": [
@@ -93,6 +94,7 @@
       "forecourt": "game3d/js/places/forecourt.js",
       "plaza": "game3d/js/places/plaza.js",
       "office": "game3d/js/places/office.js",
+      "dorm_court": "game3d/js/places/dorm-court.js",
       "dorms": "game3d/js/places/dorms.js"
     },
     "events": {
@@ -103,11 +105,12 @@
       },
       "gate": {},
       "forecourt": {},
+      "plaza": {},
+      "dorm_court": {},
+      "dorms": {},
       "office": {
         "sat_down": "sitDown"
-      },
-      "dorms": {},
-      "plaza": {}
+      }
     },
     "speakers": {
       "eric": {
@@ -232,6 +235,7 @@
     "forecourt",
     "office",
     "plaza",
+    "dorm_court",
     "dorms"
   ],
   "nodes": [
@@ -429,12 +433,15 @@
     "plaza:fountain",
     "plaza:dorms_later",
     "plaza:to_forecourt",
+    "dorm_court:arrive",
+    "dorm_court:go_in",
     "dorms:window",
     "dorms:boxes",
     "dorms:bed",
     "transitions:train_to_gate",
     "transitions:gate_to_forecourt",
-    "transitions:forecourt_to_office"
+    "transitions:forecourt_to_office",
+    "transitions:dorm_court_to_dorms"
   ],
   "edges": [
     {
@@ -1164,6 +1171,12 @@
       "kind": "go",
       "labels": [],
       "cond": ""
+    },
+    {
+      "from": "dorm_court:go_in",
+      "to": "transitions:dorm_court_to_dorms",
+      "kind": "next",
+      "labels": []
     },
     {
       "from": "forecourt:to_plaza",

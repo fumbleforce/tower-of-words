@@ -359,6 +359,7 @@ export function buildDorms() {
     nav,
     start: [-0.15, 0.72],
     roomEntry: [-0.15, 0.72],
+    frontDoor: [-0.14, NEAR + 0.04],
     windowFront: [win[0], BACK + 0.45],
     window: win,
     windowY: (WIN[2] + WIN[3]) / 2,

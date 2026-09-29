@@ -2,11 +2,12 @@ import * as THREE from 'three';
 import { buildDorms } from '../scenes/dorms.js';
 import { RoomCam } from '../cam.js';
 import { K } from '../scenes/office.js';
+import { glide } from '../move.js';
 import { PLACE_DETAILS } from './catalog.js';
 import { snapshotPeople, restorePeople } from './saved-people.js';
 
-// Eric's dorm room. Not on the day's route yet: the trip in from the dorm courtyard is planned (places.md), so
-// for now it is loaded directly (?place=dorms).
+// Eric's dorm room. The trip in from the dorm courtyard (dorm-court.js) ends with him stepping in through his
+// front door; the room also loads directly with ?place=dorms.
 export function dormsPlace(game) {
   const w = buildDorms();
   const cam = new RoomCam(w.camera);
@@ -95,6 +96,20 @@ export function dormsPlace(game) {
         game.walker.sync();
         cam.snap(game.player.root.position);
       }
+    },
+    async tripIn(g) {
+      // in from the passage: through the front door, over the genkan, to the doorway of the room
+      const eric = g.player;
+      eric.scripted = true;
+      eric.root.position.set(w.frontDoor[0], 0, w.frontDoor[1] + 0.5);
+      eric.root.rotation.y = Math.PI;
+      cam.closeOn(w.frontDoor, 1.5);
+      cam.snap(eric.root.position);
+      await glide(g, eric.root, w.roomEntry, 1.0);
+      eric.setState('idle');
+      eric.scripted = false;
+      g.walker.sync();
+      cam.release();
     },
   };
   return P;

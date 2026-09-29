@@ -16,6 +16,7 @@ export const PLACE_EVENTS = {
   },
   forecourt: { start: { id: 'start', source: 'engine' } },
   plaza: { start: { id: 'start', source: 'engine' } },
+  dorm_court: { start: { id: 'start', source: 'engine' } },
   dorms: { start: { id: 'start', source: 'engine' } },
   office: {
     start: { id: 'start', source: 'engine' },

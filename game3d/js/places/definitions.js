@@ -5,6 +5,7 @@ export const PLACE_FILES = {
   forecourt: 'game3d/js/places/forecourt.js',
   plaza: 'game3d/js/places/plaza.js',
   office: 'game3d/js/places/office.js',
+  dorm_court: 'game3d/js/places/dorm-court.js',
   dorms: 'game3d/js/places/dorms.js',
 };
 // Place names for the save list and the end-of-day photos.
@@ -14,10 +15,11 @@ export const PLACE_NAMES = {
   forecourt: 'Forecourt',
   plaza: 'Fountain plaza',
   office: 'IT support, B2',
+  dorm_court: 'Dorm courtyard',
   dorms: "Eric's room",
 };
-export const NEXT = { train: 'gate', gate: 'forecourt', forecourt: 'office' };
+export const NEXT = { train: 'gate', gate: 'forecourt', forecourt: 'office', dorm_court: 'dorms' };
 // Side trips off the day's line: walks between outdoor chunks, both ways, played by the story's `trip` step.
 export const TRIPS = { forecourt: ['plaza'], plaza: ['forecourt'] };
 export const canTravel = (from, to) => NEXT[from] === to || !!TRIPS[from]?.includes(to);
-export const STORY_FILES = ['train', 'gate', 'forecourt', 'plaza', 'office', 'dorms', 'transitions'];
+export const STORY_FILES = ['train', 'gate', 'forecourt', 'plaza', 'office', 'dorm_court', 'dorms', 'transitions'];
