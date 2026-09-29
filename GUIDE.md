@@ -175,6 +175,8 @@ One home per fact, one task per agent, the main thread never waits, validate fix
 
 ## Engineering
 
+Where code goes and what the checks enforce: [ARCHITECTURE.md](ARCHITECTURE.md).
+
 The review server port, the GPU lock, headless browser runs, the image gen dashboard, ComfyUI workflows, the fast test, where screenshots go, the world bible, the asset library, and where things live in the repo.
 
 - Local review server (2026-09-27): port 8000 here is another project's Docker container. The repo is served at http://127.0.0.1:8771/ (`python3 -m http.server 8771 --bind 127.0.0.1` from the repo root, or ./start).
