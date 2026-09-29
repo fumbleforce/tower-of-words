@@ -1,5 +1,5 @@
 // HTML overlay: goal, words, the train's LED board, the talk panel with reply chips, fades and the end card.
-import { lineHTML, WORDS, COMMANDS, PHRASES, known, seen, cmdHTML, iconHTML, INTERJ_GLOSS } from './lang.js';
+import { lineHTML, WORDS, COMMANDS, PHRASES, known, cmdHTML, iconHTML } from './lang.js';
 import { settings, onSettings, CPS } from './settings.js';
 import { mountVoice, VOICE_CSS } from './speech.js';
 import { notePractice, needsPractice, pipsHTML, MASTERY_CSS } from './mastery.js';
@@ -107,7 +107,7 @@ function playVoice(key, { rate = 1, muffle = false } = {}, gen = voiceGen, done 
       // clear spans, merged where they touch or overlap: two words back to back (すみません、すみません) used to
       // schedule clashing ramps, and the second word stayed muffled
       const spans = [];
-      for (const [s, e] of ((voiceSpans && voiceSpans[key]) || []).filter(([, , id]) => id === 'clear' || known.has(id) || seen.has(id)).map(([s, e]) => [s, e]).sort((a, b) => a[0] - b[0])) {
+      for (const [s, e] of ((voiceSpans && voiceSpans[key]) || []).filter(([, , id]) => id === 'clear' || known.has(id)).map(([s, e]) => [s, e]).sort((a, b) => a[0] - b[0])) {
         const last = spans[spans.length - 1];
         if (last && s <= last[1] + 2 * X + 0.02) last[1] = Math.max(last[1], e); else spans.push([s, e]);
       }
@@ -309,13 +309,15 @@ setTimeout(watchTalk, 0);
 // the words he does know (his phrases and commands, plus the line's `clear` list) stay sharp and glossed.
 // kana only: two stand-in glyphs side by side must never spell a real word (no kanji)
 const POOL = 'あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやゆよらりるれろわをんがぎぐげござじずぜぞだでどばびぶべぼぱぴぷぺぽアイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモラリルレロワン';
-const INTERJ = ['えっと', 'あのう', 'あの', 'ああ', 'あっ', 'えっ', 'ええ', 'うん', 'おっ', 'うわ', 'わあ', 'まあ', 'ほら', 'はい', 'あー', 'えー', 'あ', 'え', 'お', 'ん'];
+// only sounds stay readable: real words like はい, うん, ええ, まあ, ほら are words he hasn't been taught, so they
+// blur like the rest (Jørgen: hai showed as a known word on day 1)
+const INTERJ = ['えっと', 'あのう', 'あの', 'ああ', 'あっ', 'えっ', 'おっ', 'うわ', 'わあ', 'あー', 'えー', 'あ', 'え', 'お', 'ん'];
 function heardHTML(text, clear = []) {
-  // {id} words written into an overheard line are what the listener catches: shown sharp and glossed
-  const marked = [];
-  text = text.replace(/\{(\w+)\}/g, (_, id) => { if (WORDS[id]) { marked.push(id); seen.add(id); return WORDS[id].ja; } return id; });
-  const keep = marked.map((id) => ({ ja: WORDS[id].ja, gl: `${WORDS[id].ro}, ${WORDS[id].en}`, known: true }));
-  for (const id of new Set([...known, ...seen])) { const w = WORDS[id]; if (!w) continue; for (const ja of [w.ja, ...(w.alias || [])]) keep.push({ ja, gl: `${w.ro}, ${w.en}`, known: true }); }
+  // {id} words in an overheard line are sharp and glossed only once he's been taught them (typed, learned or
+  // offered); seeing a word glossed somewhere (the train announcement's 本社) doesn't teach it
+  text = text.replace(/\{(\w+)\}/g, (_, id) => (WORDS[id] ? WORDS[id].ja : id));
+  const keep = [];
+  for (const id of known) { const w = WORDS[id]; if (!w) continue; for (const ja of [w.ja, ...(w.alias || [])]) keep.push({ ja, gl: `${w.ro}, ${w.en}`, known: true }); }
   // `clear` entries are readable for this line only: plain text, not styled as known, never added to what he knows
   for (const c of clear || []) keep.push(typeof c === 'string' ? { ja: c } : { ja: c.ja, gl: [c.ro, c.en].filter(Boolean).join(', ') });
   keep.sort((a, b) => b.ja.length - a.ja.length);
@@ -326,7 +328,7 @@ function heardHTML(text, clear = []) {
     // interjections and sounds (あっ, えっ, うん...) are never hidden: only real words he doesn't know are
     if (i === 0 || punct.test(text[i - 1])) {
       const it = INTERJ.find((w) => text.startsWith(w, i) && (i + w.length === text.length || punct.test(text[i + w.length])));
-      if (it) { out += `<span class="plain">${esc(it)}</span>${INTERJ_GLOSS[it] ? ` <span class="gl">(${esc(INTERJ_GLOSS[it])})</span>` : ''}`; i += it.length; continue; }
+      if (it) { out += `<span class="plain">${esc(it)}</span>`; i += it.length; continue; }
     }
     const k = keep.find((w) => text.startsWith(w.ja, i));
     if (k) { out += `<span class="${k.known ? 'jp clear' : 'plain'}">${esc(k.ja)}</span>${k.gl ? ` <span class="gl">(${esc(k.gl)})</span>` : ''}`; i += k.ja.length; continue; }

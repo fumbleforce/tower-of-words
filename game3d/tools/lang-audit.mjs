@@ -6,8 +6,8 @@
 // the interjections the gibberish filter leaves readable), labels and names, signs and props drawn in the 3D
 // scenes, and the UI. It also lists where each word is taught and how often it comes back afterwards.
 //
-// Taught = typed ({ do: 'type' }), `learn`, `offer`, or shown glossed as {id} (in any line, overheard included).
-// That is the same rule the engine uses (lang.js `known` and `seen`).
+// Taught = typed ({ do: 'type' }), `learn` or `offer`. A glossed {id} in a line is explained on the spot but
+// doesn't teach the word, and an overheard {id} stays gibberish until it's taught. Same rule as the engine (lang.js `known`).
 //
 // Levels: ERROR = readable Japanese he can't read and nothing explains it, or a broken word id. WARN = readable
 // Japanese outside the taught set that is glossed on the spot (a `clear` entry or a hand gloss), or a taught word
@@ -73,6 +73,7 @@ const wordOf = (s) => (FORMS.find(([ja]) => ja === s) || [])[1];
 // ---------------------------------------------------------------- the walk
 const teach = new Map();   // word -> [{ how, where, main }]
 const uses = new Map();    // word -> Set(where)
+const glossed = new Set(); // words shown glossed in a line: explained, so raw text of them later is fine, but not known
 const sayTargets = new Map(); // word -> Set(place:target)
 let MAINLINE = true;
 function taught(word, how, where, st) {
@@ -92,20 +93,20 @@ function checkLine(text, st, where, owner = 'story', kind = 'line') {
     const id = m[1];
     if (!WORDS[id]) { flag('ERROR', owner, where, `{${id}} is not a word in lang.js (shows as raw "${id}")`, text); continue; }
     if (kind === 'choice') { flag('ERROR', owner, where, `{${id}} in a choice button isn't rendered (buttons don't gloss); it shows as "{${id}}"`, text); continue; }
-    if (st.has(id)) used(id, where); else taught(id, 'glossed', where, st);
+    if (st.has(id)) used(id, where); else { st.add('~' + id); glossed.add(id); }   // explained here, not taught
   }
   const bare = text.replace(/\{\w+\}/g, ' ');
   for (const m of bare.matchAll(JP)) {
     const run = m[0], after = bare.slice(m.index + run.length);
     const id = wordOf(run);
-    if (id && st.has(id)) { used(id, where); flag('INFO', owner, where, `taught word ${run} written raw, without its gloss (use {${id}})`, text); continue; }
+    if (id && (st.has(id) || st.has('~' + id))) { if (st.has(id)) used(id, where); flag('INFO', owner, where, `${st.has(id) ? 'taught' : 'glossed earlier:'} word ${run} written raw, without its gloss (use {${id}})`, text); continue; }
     if (id) { flag('ERROR', owner, where, `${run} (${id}) appears before it's taught, raw`, text); continue; }
     if (INTERJ.includes(run) || /^[あえおうんーっ]+$/.test(run)) { flag(SOUNDS.has(run) ? 'INFO' : 'WARN', owner, where, `interjection ${run} shown readable in an English line`, text); continue; }
     if (/^\s*\(\s*[a-zA-Zāīūēō]/.test(after)) { flag('WARN', owner, where, `${run} hand-glossed in the text, outside the taught set`, text); continue; }
     flag('ERROR', owner, where, `readable Japanese ${run} that hasn't been taught and isn't glossed`, text);
   }
 }
-// an overheard line (heardHTML): {id} and known words sharp, `clear` readable, sounds readable, the rest gibberish
+// an overheard line (heardHTML): taught words sharp, `clear` readable, sounds readable, the rest gibberish
 const SPANS = fs.existsSync(path.join(root, 'audio/spans.json')) ? JSON.parse(rd('audio/spans.json')) : {};
 const { heardKey } = await imp('tools/heardkey.mjs');
 function checkHeard(s, st, where) {
@@ -114,7 +115,7 @@ function checkHeard(s, st, where) {
   for (const m of text.matchAll(/\{(\w+)\}/g)) {
     const id = m[1];
     if (!WORDS[id]) { flag('ERROR', 'story', where, `{${id}} is not a word in lang.js`, text); continue; }
-    if (st.has(id)) used(id, where); else taught(id, 'glossed (overheard)', where, st);
+    if (st.has(id)) used(id, where); else flag('INFO', 'story', where, `{${id}} isn't taught yet here, so it shows as gibberish`, text);
   }
   text = text.replace(/\{(\w+)\}/g, (_, id) => (WORDS[id] ? WORDS[id].ja : id));
   const keep = [];
@@ -141,7 +142,7 @@ function checkHeard(s, st, where) {
     i++;
   }
   // listening: a word he knows should come through clear in the muffled voice (audio/spans.json, from tools/voices.py)
-  for (const m of (s.text || '').matchAll(/\{(\w+)\}/g)) if (WORDS[m[1]]) sharp.add(m[1]);
+  for (const m of (s.text || '').matchAll(/\{(\w+)\}/g)) if (WORDS[m[1]] && st.has(m[1])) sharp.add(m[1]);
   if (!fs.existsSync(path.join(root, 'audio', key + '.mp3'))) { flag('INFO', 'builder', where, `no voice clip ${key}.mp3 yet (run tools/voices.py)`, s.text); return; }
   for (const id of sharp) if (!(SPANS[key] || []).some(([, , w]) => w === id)) flag('WARN', 'builder', where, `voice: ${WORDS[id].ja} is sharp on screen but stays muffled in the clip (no span in audio/spans.json)`, s.text);
 }
@@ -308,6 +309,8 @@ for (const place of ['train', 'gate', 'office', 'transitions']) {
 // ---------------------------------------------------------------- the 3D scenes and the UI
 const everTaught = new Set(teach.keys());
 const alwaysTaught = new Set([...everTaught].filter((w) => endStates.every((s) => s.has(w))));
+// signs and props: a word taught, or shown glossed in a line, on every route is explained by the time he sees it
+const alwaysMet = new Set([...everTaught, ...glossed].filter((w) => endStates.every((s) => s.has(w) || s.has('~' + w))));
 const OWN = (f) => (/^js\/(places|scenes|train\/(car|world|hull|kit)|props)/.test(f) ? 'world' : /^js\/(cast|mio|avatar|train\/people)/.test(f) ? 'characters' : /^(js\/(ui|end|menu|settings)\.js|css\/|index\.html)/.test(f) ? 'shell' : 'builder');
 const files = [];
 const walkDir = (d) => { for (const e of fs.readdirSync(path.join(root, d), { withFileTypes: true })) { const p = path.posix.join(d, e.name); if (e.isDirectory()) walkDir(p); else if (/\.(js|css|html)$/.test(e.name)) files.push(p); } };
@@ -330,7 +333,7 @@ for (const f of files) {
       const run = m[0], id = wordOf(run) || wordOf(run.replace(/[ビル室]+$/, ''));
       const where = `${f}:${n + 1}`;
       const base = FORMS.find(([ja]) => run.startsWith(ja) && run !== ja);
-      if (id && alwaysTaught.has(id) && run === WORDS[id].ja) flag('INFO', OWN(f), where, `shows taught word ${run} (${id})${gloss ? ' with English beside it' : ', no gloss (fine: he knows it by then)'}`);
+      if (id && alwaysMet.has(id) && run === WORDS[id].ja) flag('INFO', OWN(f), where, `shows ${alwaysTaught.has(id) ? 'taught' : 'glossed'} word ${run} (${id})${gloss ? ' with English beside it' : ', no gloss (fine: he knows it by then)'}`);
       else if (gloss) flag('INFO', OWN(f), where, `${run} has English or romaji beside it`, l);
       else if (base && alwaysTaught.has(base[1])) flag('WARN', OWN(f), where, `${run}: starts with taught ${base[0]} but the rest (${run.slice(base[0].length)}) isn't taught or glossed`, l);
       else flag('ERROR', OWN(f), where, `readable Japanese ${run} with no English beside it, never taught`, l);
