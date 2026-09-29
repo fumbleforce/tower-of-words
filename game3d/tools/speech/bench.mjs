@@ -17,7 +17,7 @@ mkdirSync(join(here, 'results'), { recursive: true });
 const rawPath = join(here, 'results', label + '.raw.json');
 
 // only one headless browser at a time across all agents (GUIDE, Process): /tmp/claude-1000/browser.lock
-const LOCK = '/tmp/claude-1000/browser.lock', ME = 'voice-input';
+const LOCK = '/tmp/claude-1000/browser.lock.' + process.pid, ME = 'voice-input';
 async function takeBrowserLock() {
   for (;;) {
     try { mkdirSync(LOCK); writeFileSync(join(LOCK, 'owner'), `${ME} ${new Date().toISOString()}\n`); return; }

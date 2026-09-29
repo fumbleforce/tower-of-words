@@ -21,7 +21,7 @@ if (!todo.length) { console.log('3D thumbnails: all current'); process.exit(0); 
 // rooms first, so each room is built once and its props reuse it
 todo.sort((a, b) => (a.view.type === 'room' ? 0 : 1) - (b.view.type === 'room' ? 0 : 1) || String(a.view.room).localeCompare(String(b.view.room)));
 
-const LOCK = '/tmp/claude-1000/browser.lock', ME = 'asset-thumbs';
+const LOCK = '/tmp/claude-1000/browser.lock.' + process.pid, ME = 'asset-thumbs';
 for (let tries = 0; ; tries++) {
   try { fs.mkdirSync(LOCK); fs.writeFileSync(LOCK + '/owner', ME + ' ' + new Date().toISOString()); break; }
   catch { if (tries % 12 === 0) console.log('waiting for the browser lock, held by', (() => { try { return fs.readFileSync(LOCK + '/owner', 'utf8'); } catch { return '?'; } })()); await new Promise((r) => setTimeout(r, 5000)); }
