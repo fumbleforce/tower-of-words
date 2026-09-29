@@ -2,17 +2,42 @@
  "title": "Game facts docs",
  "date": "2026-09-29",
  "by": "docs agent (Claude)",
- "status": "open",
+ "status": "decided",
  "question": "Should we keep what the game is in one set of docs under docs/game/, one file per area, updated in the same commit as every game change and checked against the game by a script?",
  "multi": false,
  "options": [
-  {"id": "adopt", "label": "adopt: as proposed", "note": "Write the other area files one at a time, add the check to the fast test and push script, point the bible at docs/game, then move the old docs."},
-  {"id": "adopt-changes", "label": "adopt-changes: adopt with changes", "note": "Say what to change in the comment."},
-  {"id": "rethink", "label": "rethink", "note": "Say what's wrong with the approach in the comment."}
+  {
+   "id": "adopt",
+   "label": "adopt: as proposed",
+   "note": "Write the other area files one at a time, add the check to the fast test and push script, point the bible at docs/game, then move the old docs."
+  },
+  {
+   "id": "adopt-changes",
+   "label": "adopt-changes: adopt with changes",
+   "note": "Say what to change in the comment."
+  },
+  {
+   "id": "rethink",
+   "label": "rethink",
+   "note": "Say what's wrong with the approach in the comment."
+  }
  ],
  "links": [
-  {"label": "The proposal (a few minutes to read)", "href": "bible/#doc/docs/game-facts-proposal.md"},
-  {"label": "The sample: docs/game/cast.md", "href": "bible/#doc/docs/game/cast.md"},
-  {"label": "The check for the cast: tools/facts/check.mjs", "href": "bible/#src/tools/facts/check.mjs"}
- ]
+  {
+   "label": "The proposal (a few minutes to read)",
+   "href": "bible/#doc/docs/game-facts-proposal.md"
+  },
+  {
+   "label": "The sample: docs/game/cast.md",
+   "href": "bible/#doc/docs/game/cast.md"
+  },
+  {
+   "label": "The check for the cast: tools/facts/check.mjs",
+   "href": "bible/#src/tools/facts/check.mjs"
+  }
+ ],
+ "decided": [
+  "adopt-changes"
+ ],
+ "decision": "Adopted with his change: people and places described as facts (routines, schedules), the story kept as one file per storyline in docs/game/stories/, no linear walkthrough."
 }
