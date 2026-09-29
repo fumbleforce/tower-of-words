@@ -992,3 +992,17 @@ body.phone .hchip { padding: 0 7px 0 6px; }
 body.phone #talk.typing { left: 10px; right: 10px; bottom: 10px; padding: 14px 14px 16px; }
 /* 26: taught words never break across lines */
 .jp[data-w], .tp-jp, .cmd .jp { white-space: nowrap; }
+
+/* QA 12: side goals sit under the main goal, smaller */
+#goal2 { position: absolute; left: 16px; top: calc(14px + 48px * var(--ui, 1)); z-index: 2; pointer-events: none; padding: 5px 10px; border-radius: var(--chip-r); background: rgba(22, 25, 32, .72); border: 1px solid var(--chip-edge); color: var(--ink-dim); font-size: calc(13px * var(--ui, 1)); }
+#goal2[hidden] { display: none; }
+body.phone #goal2 { left: 10px; top: 104px; }
+
+/* QA 30: the end screen: the scene fades out first; the footer never covers the list on phone; the day-2 ticket */
+body.ending canvas, body.ended canvas { filter: brightness(.18) saturate(.6); transition: filter .7s ease; }
+#end { background: rgba(14, 17, 23, .94); }
+body.phone #end footer { position: static; background: none; }
+#end .ticket { margin-top: 30px; padding: 16px 18px; border-radius: 12px; background: #eef1f5; color: #1f2430; border-left: 6px solid var(--accent); max-width: 460px; }
+#end .ticket .tno { margin: 0 0 4px; font: 700 12px/1 var(--font); letter-spacing: .08em; text-transform: uppercase; color: #5a6475; }
+#end .ticket .ttl { margin: 0 0 8px; font: 700 19px/1.3 var(--font); }
+#end .ticket .tl { margin: 2px 0; font-size: 15px; color: #3b4453; }

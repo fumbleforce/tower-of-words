@@ -95,7 +95,8 @@ function setComposer(place) {
   // highlighted slightly); right after the render pass, off at low quality
   const [w, h] = size();
   outline = new OutlinePass(new THREE.Vector2(w, h), place.scene, place.camera);
-  outline.visibleEdgeColor.set('#bff1ea'); outline.hiddenEdgeColor.set('#bff1ea');
+  // hidden edges black (the pass adds them): no outline showing through walls (QA round 1)
+  outline.visibleEdgeColor.set('#bff1ea'); outline.hiddenEdgeColor.set('#000000');
   outline.edgeStrength = 2.2; outline.edgeThickness = 1.0; outline.edgeGlow = 0; outline.pulsePeriod = 0;
   composer.insertPass(outline, 1);
   applyQuality();
@@ -128,12 +129,30 @@ function objsOf(m) {
   const t = P.things && P.things[m.id];
   if (t && t.outline) return [].concat(t.outline()).filter(Boolean);
   if (t && t.obj) return [t.obj];
+  if (t && t.anchor && !/person/.test(t.kind || '')) return meshesNear(m.id, t);
   return [];
+}
+// a thing with no obj of its own: the small meshes around its anchor (cached per place and thing), so outlines and
+// the kotodama shimmer land on the copier, the kettle, the vending machine... (QA round 1: no visible payoff)
+const nearCache = new Map();
+function meshesNear(id, t) {
+  const P = game.place, key = P.name + ':' + id;
+  if (nearCache.has(key)) return nearCache.get(key);
+  const a = t.anchor(new THREE.Vector3()), box = new THREE.Box3(), c = new THREE.Vector3(), sz = new THREE.Vector3(), out = [];
+  P.space.updateMatrixWorld(true);
+  P.space.traverse((o) => {
+    if (!o.isMesh || !o.visible || o.isSkinnedMesh) return;
+    box.setFromObject(o); box.getCenter(c); box.getSize(sz);
+    if (sz.x > 1.6 || sz.z > 1.6 || sz.y > 2.2) return;                 // walls, floors, counters
+    if (Math.hypot(c.x - a.x, c.z - a.z) < 0.55 && c.y < a.y + 0.3) out.push(o);
+  });
+  nearCache.set(key, out); return out;
 }
 game.objsOf = objsOf;
 const hoverRay = new THREE.Raycaster();
 canvas.addEventListener('pointermove', (e) => {
   if (e.pointerType === 'touch' || !game.place || document.body.classList.contains('phone')) return;
+  if (titleUp()) { game.hover = null; canvas.style.cursor = ''; return; }
   const r = canvas.getBoundingClientRect();
   hoverRay.setFromCamera(new THREE.Vector2(((e.clientX - r.left) / r.width) * 2 - 1, -((e.clientY - r.top) / r.height) * 2 + 1), game.place.camera);
   let best = null, bd = 1e9;
@@ -144,8 +163,11 @@ canvas.addEventListener('pointermove', (e) => {
   game.hover = best; canvas.style.cursor = best ? 'pointer' : '';
 });
 let outlineKey = '';
+// the title screen is up (no outline, no hover)
+const titleUp = () => { const t = document.getElementById('title'); return !!(t && !t.hidden && t.offsetParent !== null); };
 function updateOutline() {
   if (!outline || !outline.enabled) return;
+  if (titleUp()) { if (outlineKey !== 'title') { outlineKey = 'title'; outline.selectedObjects = []; } return; }
   const sel = [...new Set([game.near, !document.body.classList.contains('phone') && game.hover].filter(Boolean))];
   const key = sel.map((m) => m.id).join(',') + (game.busy ? '|b' : '');
   if (key === outlineKey) return; outlineKey = key;
@@ -311,7 +333,8 @@ function posOf(to) {
   console.warn('unknown spot', to); return null;
 }
 game.posOf = posOf;
-H.goal = ({ text }) => ui.goal(text);
+// { do: 'goal', text } sets the main goal; { do: 'goal', text, side: true } a side goal under it ('' clears either)
+H.goal = ({ text, side }) => (side ? ui.sideGoal(text) : ui.goal(text));
 H.hint = ({ text, what }) => { if (what === 'say') ui.introSay(text); else ui.hint(text, 5000); };
 H.wait = ({ ms }) => game.wait(ms);
 H.sound = ({ name }) => sfx(name);
@@ -405,7 +428,7 @@ H.phone = async (s) => {
   if (rig.phone) await rig.phone(s.state);
 };
 // { do: 'kotodama', target: 'doors' }: the effect on its own, on a place's named target (place.kotodamaTargets)
-H.kotodama = async ({ target }) => { const t = game.place.kotodamaTargets?.(target) || []; await game.kotodama(t); };
+H.kotodama = async ({ target }) => { let t = game.place.kotodamaTargets?.(target) || []; if (!t.length) t = objsOf({ id: target }); await game.kotodama(t); };
 H.voice = ({ key }) => voice(key);
 H.walk = async ({ who, to, wait = true, speed }) => {
   const p = posOf(to); if (!p) return;
@@ -460,10 +483,19 @@ H.emote = ({ who, kind, ms = 1900, id }) => {
     v.y += 1.55 * (game.place.charScale || 1); v.project(game.place.camera);
     const W = canvas.clientWidth, Hh = canvas.clientHeight, bw = el.offsetWidth || 64, bh = el.offsetHeight || 64;
     let x = ((v.x + 1) / 2) * W, y = ((1 - v.y) / 2) * Hh - Math.min(10, dt * 0.012);
+    // someone off screen: no bubble pinned to the edge pointing at nothing (QA round 1)
+    const off = v.z > 1 || v.x < -1.05 || v.x > 1.05 || v.y < -1.05 || v.y > 1.05;
+    el.style.visibility = off ? 'hidden' : '';
     // the bubble's bottom sits at y; keep it inside the screen, and under the head if the top is too close
     const below = y - bh - 12 < 8; el.classList.toggle('below', below);
     if (below) y += bh + 40;
     x = Math.max(bw / 2 + 8, Math.min(W - bw / 2 - 8, x)); y = Math.max(bh + 8, Math.min(Hh - 8, y));
+    // keep clear of the HUD and the goal chip: drop below them if the bubble would sit on one
+    for (const id of ['hud', 'goal', 'goal2']) {
+      const r = document.getElementById(id); if (!r || r.hidden || !r.offsetParent) continue;
+      const q = r.getBoundingClientRect();
+      if (x + bw / 2 > q.left && x - bw / 2 < q.right && y > q.top && y - bh < q.bottom) y = q.bottom + bh + 6;
+    }
     el.style.transform = `translate(${x}px, ${y}px)`;
     el.style.opacity = dt < 120 ? String(dt / 120) : dt > ms - 400 ? String(Math.max(0, (ms - dt) / 400)) : '1';
     requestAnimationFrame(f);
