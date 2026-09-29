@@ -2,7 +2,7 @@
  "title": "Eric: anime portrait, round 3 (a09 poses, a13 colours)",
  "date": "2026-09-29",
  "by": "art agent (Eric anime 3)",
- "status": "open",
+ "status": "superseded",
  "multi": true,
  "question": "Which a09 poses and which a13 colour do you want for Eric?",
  "media": [
@@ -168,5 +168,6 @@
    "id": "none",
    "label": "None of these (say why in the comment)"
   }
- ]
+ ],
+ "decision": "p3 and p6 (eric-p3-909, eric-p6-1909); hair one even colour, no shaved sides. Round 4: eric-portrait-anime-4"
 }
