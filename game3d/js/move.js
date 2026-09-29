@@ -494,6 +494,8 @@ export function personStep(game, rig, ox, oz, nx, nz, dt) {
 export function walkRig(game, rigOrObj, to, { speed = 1.25, route = true, avoid = true, brakeTo = 0, settle = true } = {}) {
   const rig = rigOrObj && rigOrObj.root ? rigOrObj : rigOf(game, rigOrObj);
   const obj = rig ? rig.root : rigOrObj;
+  const walkToken = obj.userData.walkTok = (obj.userData.walkTok || 0) + 1;
+  const parent = obj.parent;
   const P = game.place, nav = P && obj.parent === P.space ? P.nav : null;
   const player = game.player && obj === game.player.root;
   const self = (b) => b.root === obj;
@@ -530,6 +532,11 @@ export function walkRig(game, rigOrObj, to, { speed = 1.25, route = true, avoid 
       res();
     };
     const tick = () => {
+      if (obj.userData.walkTok !== walkToken) { res(); return; }
+      if (obj.parent !== parent || game.place !== P) {
+        if (rig) { rig._walk = false; rig._noAvoid = false; }
+        res(); return;
+      }
       const now = performance.now(); let dt = Math.min(0.05, (now - last) / 1000) * (game.timeScale || 1); last = now;
       if (game.paused) dt = 0;
       if (!obj.parent && dt > 0) { done(); return; }

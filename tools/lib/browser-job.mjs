@@ -89,7 +89,10 @@ export async function withBrowserJob(name, run, {
     return await Promise.race([deadline, cancelled, Promise.resolve().then(() => run(browser))]);
   } finally {
     clearTimeout(timer); clearTimeout(pollTimer);
-    const closeLimit = setTimeout(() => { console.error(`${name}: browser close timed out`); process.exit(124); }, 5000);
+    // Software GL sometimes needs more than five seconds to release a large room.
+    // Keep shutdown bounded, including it in the five-minute job ceiling.
+    const closeMs = Math.max(1, Math.min(15000, 300000 - (Date.now() - started)));
+    const closeLimit = setTimeout(() => { console.error(`${name}: browser close timed out`); process.exit(124); }, closeMs);
     try {
       if (browser) await browser.close();
       safeToRelease = true;

@@ -233,7 +233,8 @@ export function chibi(o) {
 
 // Poses
 export function sit(r) {
-  if (r.meshy) { r.seated = true; r.sitHere ? r.sitHere() : r.setState('sit'); return; }
+  r.seated = true;
+  if (r.meshy) { r.sitHere ? r.sitHere() : r.setState('sit'); return; }
   r.root.position.y = SEAT_Y - (HIP - 0.075) * r.root.scale.y + 0.012;
   for (const l of r.legs) l.rotation.x = -1.5;
   for (const k of r.knees) k.rotation.x = 1.35;

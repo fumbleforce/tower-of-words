@@ -221,6 +221,7 @@ Bond point sources, for `source`: `greet`, `talk`, `gift`, `need`, `ticket`, `he
 **Hooks.**
 - `bond` `who`, `add`, `source`, `why`: adds points. `{ do: 'bond', who: 'mori', source: 'ticket', why: 'fixed his copier' }`. Without `source`, the node's entry in `reasons` (or day1.js) names it, else `scene`.
 - `bondStep` `who`, `to` (3, 4 or 5): the scene that step waits on has played. Same as setting its gate flag.
+  Custom gate names from earlier places are saved with bonds, so Continue retains them. Loading another slot replaces those overrides; old saves without them use the standing cast defaults until the current story is absorbed.
 - `remember` `who`, `id`, `text`: something Eric did that they'll remember. Shows in People as "They remember: ...". Test it with the flag `rem_<who>_<id>`.
 - `fact` `who`, `id`, `text`, `like`: something Eric has learned about them, for People; `like: 'coffee'` also shows that taste as noticed.
 - `relate` `a`, `b`, `kind` (`likes`, `owes`, `rivals`, `none`): changes how a feels about b.

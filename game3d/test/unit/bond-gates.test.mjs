@@ -37,7 +37,31 @@ test('importing facts data does not run the command or print a report', () => {
   assert.equal(result.stdout, '');
 });
 
-
+test('Continue retains earlier story gate overrides and slot loads discard stale overrides', () => {
+  const first = new Bonds({ cast });
+  first.merge({ mio: { gates: { 3: 'train_trust', 5: false } }, mori: { gates: { 3: 'gate_trust' } } });
+  const snapshot = first.toJSON();
+  assert.notEqual(snapshot.gates.mio, first.cast.mio.gates);
+  const saved = JSON.parse(JSON.stringify(snapshot));
+  first.merge({ mio: { gates: { 3: 'changed_after_save' } } });
+  assert.equal(saved.gates.mio[3], 'train_trust');
+  const continued = new Bonds({ cast });
+  assert.equal(continued.load(saved), true);
+  assert.notEqual(continued.cast.mio.gates, saved.gates.mio);
+  continued.merge({ mio: { gates: { 4: 'office_close' } } });
+  assert.equal(continued.gate('mio', 3), 'train_trust');
+  assert.equal(continued.gate('mio', 4), 'office_close');
+  assert.equal(continued.gate('mio', 5), 'bond5_mio');
+  assert.equal(continued.gate('mori', 3), 'gate_trust');
+  assert.equal(saved.gates.mio[4], 'cast_close');
+  continued.load({ v: 1, day: 1, p: {}, rel: {} });
+  assert.equal(continued.gate('mio', 3), 'cast_trust');
+  assert.equal(continued.gate('mio', 4), 'cast_close');
+  assert.equal(continued.gate('mori', 3), 'bond3_mori');
+  continued.merge({ mio: { gates: { 3: 'another_slot' } } });
+  assert.equal(continued.load(null), false);
+  assert.equal(continued.gate('mio', 3), 'cast_trust');
+});
 
 test('transition gates use the departing story for walk/ride and destination for arrive', async () => {
   const mods = Object.fromEntries(['train', 'gate', 'office'].map(place => [place,

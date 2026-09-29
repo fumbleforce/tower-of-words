@@ -2,6 +2,7 @@ import { eventId } from '../narrative/events.js';
 import { flagKeys } from '../narrative/engine-flags.js';
 const ENGINE_KEYS = flagKeys('game3d/js/places/train.js');
 import { PLACE_DETAILS } from './catalog.js';
+import { snapshotPeople, restorePeople, snapshotObject, restoreObject } from './saved-people.js';
 // Place 1, the train. The car, its passengers and its motion come from side/train (copied into js/train/
 // unchanged); this file only recolours it to the muted palette (colours and light only), adds Mio as the
 // player, the company station with its platforms, the doors and the walk out to the covered walkway.
@@ -73,7 +74,7 @@ export async function trainPlace(game) {
   const blobs = {};
   for (const p of list) {
     car.root.add(p.root);
-    const seated = p.root.position.y > 0.01;
+    const seated = p.seated;
     const b = blob(0.5, seated ? 0.3 : 0.4);
     b.position.set(p.root.position.x, 0.004, p.root.position.z + (seated ? Math.sign(-p.root.position.z) * 0.26 : 0));
     car.root.add(b); p.blob = b;
@@ -114,7 +115,7 @@ export async function trainPlace(game) {
   const cupSt = { want: 0, k: 0 };
   // Mio's bag of food from her mother, on the free seat beside her (the folder and cup were Rei's; Mio has the seat now)
   folder.visible = false; cup.visible = false;
-  const foodBag = new THREE.Group(); let bagWobble = false;
+  const foodBag = new THREE.Group(); let bagWobble = false, bagMotion = null;
   { const b = rbox(0.24, 0.2, 0.14, '#c9b48d', { r: 0.03 }); const band = rbox(0.245, 0.04, 0.145, '#b8573f', { y: 0.12, r: 0.01 }); const h1 = new THREE.Mesh(new THREE.TorusGeometry(0.06, 0.01, 5, 10, Math.PI), mat('#8a6c4a')); h1.position.y = 0.2; const lid = rbox(0.1, 0.05, 0.09, '#e8e2d0', { y: 0.2, x: 0.05, r: 0.015 }); foodBag.add(b, band, h1, lid); }
   foodBag.position.set(1.62, SEAT_Y, -(LZ - 0.26)); car.root.add(foodBag);
 
@@ -381,6 +382,7 @@ export async function trainPlace(game) {
   // the shot for the doors closing on the sleeping man: the left door and Hamada (far bench, x -2.55)
   const DOOR_SHOT = [-2.85, 0.62];
   function setDoors(k) {
+    if (st.departing) return;
     // the leaves slide into the wall pocket; once they're mostly in, they're hidden (the low cut wall can't cover them)
     for (const d of doorLeaves) { const dx = Math.sign(d.x0) * DOOR_X; d.m.position.x = d.x0 + (d.x0 < dx - 0.1 ? -1 : 1) * k * (DOOR_W / 2 - 0.02); d.m.visible = false; }
     for (const d of myLeaves) {
@@ -441,6 +443,19 @@ export async function trainPlace(game) {
   let simT = 0;
   const _camDir = new THREE.Vector3();
   const CLOSE_LO = +(new URLSearchParams(location.search).get('closeLo') || 42), CLOSE_HI = +(new URLSearchParams(location.search).get('closeHi') || 48);   // camera pitch (deg) where the car closes
+  function departureMovers() {
+    const stay = new Set([game.player.root, game.mioNpc.root, kitty, kb]);
+    for (const r of Object.values(people)) if (r && r.root && r.root.position.z > LZ + T) { stay.add(r.root); if (r.blob) stay.add(r.blob); }
+    // the shadow proxy (roof and full walls for the sun) goes too, hidden: it shows in the AO pass once it moves
+    if (car.proxy) { car.proxy.visible = false; stay.add(car.proxy); }
+    return car.root.children.filter((o) => !stay.has(o));   // the closed overlay is a child of the car, so it leaves with it
+  }
+  // Stable factory objects; shared actors are restored through people/player snapshots.
+  const actorObjects = new Set([game.player.root, game.mioNpc.root, kb,
+    ...Object.values(people).flatMap(person => [person.root, person.blob])]);
+  const trainObjects = car.root.children.filter(object => !actorObjects.has(object));
+  const factoryActions = Object.fromEntries(Object.entries(people).map(([id, person]) => [id, person.act]));
+
   const P = {
     // colour grade (js/post.js): muted like the lobby, a warm key, the sea kept from going cyan
     grade: { exposure: 1.0, temp: 0.03, sat: 0.9, contrast: 1.05, shadowTint: [-0.004, 0.0, 0.014], highTint: [0.018, 0.008, -0.01], vignette: 0.24, bloom: 0.3, bloomThreshold: 0.9, focusBand: 0.28 },
@@ -458,7 +473,7 @@ export async function trainPlace(game) {
     },
     walkPerson(id, [x, z], { speed } = {}) {
       const r = people[id]; if (!r || !r.hips) return Promise.resolve();
-      if (r.seated !== false && r.root.position.y > 0.01) standUp(r);
+      if (r.seated) standUp(r);
       return walkPerson(r, route(nav, r.root.position, [x, z]), { speed: speed || 1.2, blobM: r.blob });
     },
     async sitPerson(id, seatId) {
@@ -565,7 +580,7 @@ export async function trainPlace(game) {
         const perDoor = { l: 0, r: 0 };
         const walks = leaving.map(([id, r]) => { const side = r.root.position.x < 0 ? 'l' : 'r'; return [id, r, perDoor[side]++]; }).map(([id, r, k]) => (async () => {
           await game.wait(250 + k * 1500 + (r.root.position.x < 0 ? 0 : 400));
-          if (r.root.position.y > 0.01) standUp(r);
+          if (r.seated) standUp(r);
           r.act = null;
           const dx = r.root.position.x < 0 ? -DOOR_X : DOOR_X;
           await walkPerson(r, [...route(nav, r.root.position, [dx, LZ - 0.4]), [dx, LZ + 1.0], [dx + 1.2, LZ + 1.45], [7.6, LZ + 1.5], [8.4, LZ + 1.9]], { speed: 1.35, blobM: r.blob });   // along the platform clear of the sign posts
@@ -576,11 +591,7 @@ export async function trainPlace(game) {
       // the empty car pulls out and away; people on the platform (Eric, Mio, whoever got off) stay where they are
       depart: async () => {
         st.leaving = true;
-        const stay = new Set([game.player.root, game.mioNpc.root, kitty, kb]);
-        for (const r of Object.values(people)) if (r && r.root && r.root.position.z > LZ + T) { stay.add(r.root); if (r.blob) stay.add(r.blob); }
-        // the shadow proxy (roof and full walls for the sun) goes too, hidden: it shows in the AO pass once it moves
-        if (car.proxy) { car.proxy.visible = false; stay.add(car.proxy); }
-        const movers = car.root.children.filter((o) => !stay.has(o));   // the closed overlay is a child of the car, so it leaves with it
+        const movers = departureMovers();
         const x0 = movers.map((o) => o.position.x), n0 = neighbours.map((n) => n.pivot.position.x), b0 = neighbours.map((n) => n.bellows.position.x);
         sfx('brake'); st.departing = true;
         await game.tween(7, (k) => {
@@ -594,12 +605,15 @@ export async function trainPlace(game) {
       },
       wake: ({ who = 'kuroda' }) => { const r = people[who]; if (!r || !r.hips) return; r.act = null; r.head.rotation.set(0.1, 0, 0); },
       bag: async ({ state }) => {
-        const p0 = foodBag.position.clone(); bagWobble = false; foodBag.rotation.x = 0;
+        const start = bagMotion?.state === state ? bagMotion.position : foodBag.position.toArray();
+        bagMotion = { state, position: start };
+        const p0 = foodBag.position.clone().fromArray(start); foodBag.position.copy(p0);
+        bagWobble = false; foodBag.rotation.x = 0;
         // teeter: slides to the front edge of the free seat and wobbles there until it's caught or knocked off
         if (state === 'teeter') {
           sfx('clack');
           await game.tween(0.6, (k) => { foodBag.position.set(p0.x, SEAT_Y, p0.z + 0.2 * k); foodBag.rotation.z = -0.15 * k; });
-          bagWobble = true; return;
+          bagWobble = true; bagMotion = null; return;
         }
         if (state === 'slide') {
           sfx('clack');
@@ -609,6 +623,7 @@ export async function trainPlace(game) {
         } else if (state === 'dropped') {
           sfx('tap'); await game.tween(0.3, (k) => { foodBag.position.y = p0.y * (1 - k); foodBag.rotation.z = -1.2 - 0.37 * k; });
         }
+        bagMotion = null;
       },
       cup: ({ state }) => {
         cupSt.state = state;
@@ -616,6 +631,104 @@ export async function trainPlace(game) {
         if (state === 'safe') { cupSt.want = 0; cup.rotation.set(0, 0, 0); if (rei.root.visible) { cup.position.set(0.08, 0.14, 0.18); rei.torso.add(cup); } else { cup.position.set(2.32, SEAT_Y + 0.02, -(LZ - 0.3)); } }
       },
       catTo: async ({ to }) => { const p = game.posOf(to); if (!p) return; await walkRig(game, kitty, p, { speed: 1.0 }); kitty.position.y = 0; },
+    },
+    snapshotState() {
+      return { arrived: st.arrived, departed: !!st.departed, door: st.doorWant,
+        doors: { value: st.door, target: st.doorWant, slide: st.slide ? { ...st.slide } : null,
+          hold: !!st.hold, holdAt: st.holdAt, frozen: !!st.frozen, chimeT: st.chimeT },
+        departure: { leaving: !!st.leaving, departing: !!st.departing, closedK: st.closedK },
+        geometry: trainObjects.map(snapshotObject),
+        neighbours: neighbours.map(n => ({ pivot: snapshotObject(n.pivot), bellows: snapshotObject(n.bellows) })),
+        station: snapshotObject(station),
+        props: { folder: snapshotObject(folder), laptop: snapshotObject(laptop), kittyShadow: snapshotObject(kb),
+          bags: bagObjs.map(bag => ({ ...snapshotObject(bag), shadow: snapshotObject(bag.userData.blob) })) },
+        motion: { mode: st.mode, v: st.v, dist: st.dist, stopAt: st.stopAt, stopX: st.stopX, decel: st.decel },
+        player: snapshotPeople({ eric: game.player }),
+        cup: { ...cupSt, ...snapshotObject(cup), withRei: cup.parent === rei.torso },
+        people: Object.fromEntries(Object.entries(snapshotPeople(people)).map(([id, person]) => [id, {
+          ...person,
+          acting: !!people[id].act, blobPosition: people[id].blob?.position.toArray() }])),
+        bagPosition: foodBag.position.toArray(), bagRotation: foodBag.rotation.toArray(), bagWobble,
+        bagMotion: bagMotion ? structuredClone(bagMotion) : null };
+    },
+    restoreState(saved) {
+      const f = saved.flags || {}, state = saved.world || {};
+      if (state.motion) {
+        Object.assign(st, state.motion);
+        station.visible = st.mode === 'brake';
+      }
+      if (state.arrived !== undefined) st.arrived = state.arrived;
+      if (state.arrived ?? f.arrived) {
+        station.visible = true; st.mode = 'stopped'; st.v = 0; st.stopX = st.dist; st.arrived = true;
+        station.position.x = 0; st.door = st.doorWant = state.door ?? 1; setDoors(st.door);
+        if (st.door > 0.3) nav.unblock('doors');
+      }
+      if (state.bagPosition) foodBag.position.fromArray(state.bagPosition);
+      if (state.bagRotation) foodBag.rotation.fromArray(state.bagRotation);
+      bagWobble = !!state.bagWobble;
+      bagMotion = state.bagMotion ? structuredClone(state.bagMotion) : null;
+      if (state.cup) {
+        Object.assign(cupSt, { state: state.cup.state, want: state.cup.want, k: state.cup.k });
+        (state.cup.withRei ? rei.torso : car.root).add(cup);
+        if (state.cup.visible !== undefined) cup.visible = state.cup.visible;
+        cup.position.fromArray(state.cup.position); cup.rotation.fromArray(state.cup.rotation);
+      }
+      if (!saved.world && f.alighted) {
+        for (const r of list) if (r !== kuroda) { r.root.visible = false; if (r.blob) r.blob.visible = false; }
+        const mio = game.mioNpc;
+        mio.setState('idle'); mio.seated = false; mio.root.position.set(-2.2, 0, 2.25);
+        kitty.position.set(-3, 0, 2.2); kb.position.set(-3, 0.004, 2.2);
+      }
+      if (state.geometry) {
+        trainObjects.forEach((object, i) => restoreObject(object, state.geometry[i]));
+        neighbours.forEach((n, i) => { restoreObject(n.pivot, state.neighbours?.[i]?.pivot); restoreObject(n.bellows, state.neighbours?.[i]?.bellows); });
+        st.departed = !!state.departed;
+        Object.assign(st, state.departure || { leaving: false, departing: false });
+        restoreObject(station, state.station);
+      } else if (state.departed ?? f.held_doors) {
+        const alreadyDeparted = st.departed;
+        st.leaving = st.departing = st.departed = true;
+        for (const obj of departureMovers()) { if (!alreadyDeparted) obj.position.x -= 34; if (!obj.isLight) obj.visible = false; }
+        for (const n of neighbours) {
+          if (!alreadyDeparted) { n.pivot.position.x -= 34; n.bellows.position.x -= 34; }
+          n.pivot.visible = false; n.bellows.visible = false;
+        }
+      }
+      if (state.doors) {
+        Object.assign(st, { door: state.doors.value, doorWant: state.doors.target, slide: state.doors.slide ? { ...state.doors.slide } : null,
+          hold: state.doors.hold, holdAt: state.doors.holdAt, frozen: state.doors.frozen, chimeT: state.doors.chimeT });
+        setDoors(st.door);
+        nav.unblock('doors');
+        if (st.door <= 0.3) nav.blockTagged('doors', -LX, LX + 8, LZ - 0.02, LZ + T + 0.06);
+      }
+      if (state.props) {
+        restoreObject(folder, state.props.folder); restoreObject(laptop, state.props.laptop); restoreObject(kb, state.props.kittyShadow);
+        bagObjs.forEach((bag, i) => { restoreObject(bag, state.props.bags?.[i]); restoreObject(bag.userData.blob, state.props.bags?.[i]?.shadow); });
+      }
+      restorePeople(people, state.people);
+      for (const [id, q] of Object.entries(state.people || {})) {
+        const r = people[id]; if (!r?.root) continue;
+        if (!q.pose && !q.seated && r.hips) standUp(r);
+        if (q.acting !== undefined) r.act = q.acting ? factoryActions[id] : null;
+        r.setState?.(q.seated ? 'sit' : 'idle'); r.seated = !!q.seated;
+        r.root.visible = q.visible; r.root.position.fromArray(q.position); r.root.rotation.fromArray(q.rotation);
+        if (r.blob) {
+          r.blob.visible = q.visible;
+          if (q.blobPosition) r.blob.position.fromArray(q.blobPosition);
+          else if (r.blob.parent !== r.root) r.blob.position.set(q.position[0], 0.004, q.position[2]);
+        }
+      }
+      if ((!saved.world && f.on_platform) || st.departed) {
+        game.player.root.position.set(spots.platform[0], 0, spots.platform[1]); game.walker.sync?.();
+        cam.snap?.(game.player.root.position);
+      }
+      if (saved.runner?.execution && state.player) {
+        game.walker.stop();
+        restorePeople({ eric: game.player }, state.player);
+        game.walker.sync?.(); game.walker.facing = game.player.root.rotation.y;
+        cam.snap?.(game.player.root.position);
+      }
+
     },
     onEnter: async () => {},
     // Mio (the Meshy model) sits where the laptop woman sat, laptop on her knees
