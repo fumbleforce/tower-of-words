@@ -36,16 +36,13 @@ export const COMMANDS = ['matte', 'akete', 'kite', 'ugoite', 'irete', 'dashite',
 export const PHRASES = ['ohayo', 'yoroshiku', 'sumimasen'];
 export const SAYABLE = [...PHRASES, ...COMMANDS];
 
-// Interjections the gibberish filter leaves readable (ui.js INTERJ) that are real words, not just sounds.
-// Glossed where they appear so nothing readable goes unexplained (the language audit checks this).
-export const INTERJ_GLOSS = { 'はい': 'hai, yes', 'うん': 'un, yeah', 'ええ': 'ee, yes', 'まあ': 'maa, well', 'ほら': 'hora, look' };
-
+// the words Eric has been taught in play (typed, `learn` or `offer`); nothing else counts as known
 export const known = new Set();
 export function learn(id) { const isNew = !known.has(id); known.add(id); return isNew; }
 
 const esc = (t) => t.replace(/&/g, '&amp;').replace(/</g, '&lt;');
 
-// words Eric has met in a glossed line; he recognises them inside overheard Japanese
+// words Eric has met in a glossed line (kept in the save only: meeting a word doesn't make it known)
 export const seen = new Set();
 export function wordHTML(id) {
   const w = WORDS[id]; seen.add(id);
