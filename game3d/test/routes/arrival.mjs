@@ -95,7 +95,6 @@ export default [
     expect: {
       nodes: ['hamada_stuck', 'noop', 'way_social', 'mime_menu', 'pt_case', 'pt_man', 'guard_knows', 'mime_cat', 'mime_squeeze', 'mime_lift'],
       flags: { gate_through_way: true, gate_magic: false, guard_cool: true, pt_case: true, pt_man: true, pt_cat: true, m_squeeze: true, hamada_friend: true, gateOpen: true },
-      known: ['sumimasen'],
     },
   },
   {
@@ -107,7 +106,6 @@ export default [
     expect: {
       nodes: ['way_social', 'pt_man', 'pt_case', 'guard_knows', 'mime_lift'],
       flags: { gate_through_way: true, gate_magic: false, guard_cool: false, pt_man: true, pt_case: true, hamada_friend: true, gateOpen: true },
-      known: ['sumimasen'],
     },
   },
 ];

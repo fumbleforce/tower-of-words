@@ -38,7 +38,13 @@ async function installDriver(page, route, resume = false) {
     const g = window.__game;
     const { ui, setMuted } = await import(new URL('js/ui.js', location.href));
     const { cond } = await import(new URL('js/narrative/state.js', location.href));
-    const state = window.__branch = { nodes: [], choices: [], errors: [], queue: [...choices], actionDone: true };
+    const state = window.__branch = { nodes: [], lines: [], actions: [], choices: [], errors: [], queue: [...choices], actionDone: true };
+    const say = ui.say;
+    ui.say = function (...args) {
+      const pending = say.apply(this, args);
+      state.lines.push(document.querySelector('#talk .line').textContent);
+      return pending;
+    };
     setMuted(true); ui.auto = true;
     const previous = g.onNode;
     g.onNode = (node, phase) => {
@@ -90,8 +96,10 @@ async function settled(page, place) {
   assert.deepEqual(errors, []);
 }
 
-async function action(page, step) {
-  await page.evaluate(async step => {
+async function action(page, step, place) {
+  const before = await page.evaluate(() => ({ nodes: window.__branch.nodes.length, lines: window.__branch.lines.length }));
+  if (step.type === 'give') await page.locator('#sayMenu').waitFor({ state: 'hidden', timeout: 5000 });
+  const gift = await page.evaluate(async step => {
     const g = window.__game, state = window.__branch;
     const { ui } = await import(new URL('js/ui.js', location.href));
     const target = g.markers.list.find(marker => marker.id === step.target);
@@ -107,11 +115,27 @@ async function action(page, step) {
       if (index < 0) throw new Error('Missing gift: ' + step.item);
       g.sayTarget = target;
       ui.onGive().then(() => { state.actionDone = true; }, e => state.errors.push(e.message));
-      const button = document.querySelectorAll('#sayMenu .list button')[index];
-      if (!button) throw new Error('Gift menu did not expose ' + step.item);
-      button.click();
+      return { index, target: target.label };
     } else throw new Error('Unknown route action: ' + step.type);
   }, step);
+  if (gift) {
+    await page.locator('#sayMenu').waitFor({ state: 'visible', timeout: 5000 });
+    assert.equal(await page.locator('#sayMenu .head').textContent(), `Give to ${gift.target}`);
+    await page.locator('#sayMenu .list button').nth(gift.index).click();
+  }
+  await settled(page, place);
+  const response = await page.evaluate(before => ({
+    nodes: window.__branch.nodes.slice(before.nodes), lines: window.__branch.lines.slice(before.lines),
+  }), before);
+  assert.ok(response.nodes.length || response.lines.length, `${step.type}:${step.target} produced no response`);
+  if (step.line) assert.ok(response.lines.includes(step.line), `${step.type}:${step.target} missing line ${JSON.stringify(step.line)}; saw ${JSON.stringify(response.lines)}`);
+  await page.evaluate(receipt => window.__branch.actions.push(receipt), { ...step, ...response });
+}
+
+function expectNodes(actual, expected, label) {
+  let next = 0;
+  for (const node of actual) if (node === expected[next]) next++;
+  assert.equal(next, expected.length, `${label}: missing ordered node ${expected[next]}; saw ${actual.join(', ')}`);
 }
 
 export async function runRoute(browser, route, { base, viewport }) {
@@ -119,6 +143,8 @@ export async function runRoute(browser, route, { base, viewport }) {
   let opened, closing = false;
   const blocked = [], priorNodes = [], priorChoices = [];
   try {
+    for (const word of route.expect.known || []) assert.ok(!(route.seed.known || []).includes(word),
+      `Expected learned word ${word} is already in seed.known`);
     const saved = seedSave(route.seed);
     opened = await openGame(browser, { mode: 'title', viewport, url: `${base}/index.html?q=0`,
       beforeNavigate: async (page, context) => {
@@ -152,7 +178,7 @@ export async function runRoute(browser, route, { base, viewport }) {
       assert.deepEqual(after.inv, checkpoint.inv, 'Continue must preserve inventory');
       assert.equal(after.yen, checkpoint.yen, 'Continue must not spend twice');
     } else await settled(page, route.seed.place);
-    for (const step of route.actions || []) { await action(page, step); await settled(page, route.seed.place); }
+    for (const step of route.actions || []) await action(page, step, route.seed.place);
     if (route.expect.ended) {
       await page.locator('#end.in .again').waitFor({ state: 'visible', timeout: 5000 });
       assert.equal(await page.locator('#end h2').textContent(), 'Day one');
@@ -166,18 +192,19 @@ export async function runRoute(browser, route, { base, viewport }) {
       return { ...window.__branch, flags: { ...flags }, known: [...known], inv: [...g.sim.inv], yen: g.sim.yen,
         period: g.sim.period, ended: !!window.__ended, recovery: g.runner.recoveryError };
     });
-    state.nodes.unshift(...priorNodes); state.choices.unshift(...priorChoices);
+    expectNodes(priorNodes, route.expect.beforeReloadNodes || [], 'Before reload');
     assert.deepEqual([...opened.errors, ...blocked, ...state.errors], []);
     assert.ok(!state.recovery, state.recovery);
     assert.deepEqual(state.queue, [], 'Route left choices unexercised');
-    for (const node of route.expect.nodes || []) assert.ok(state.nodes.includes(node), `Missing node ${node}; saw ${state.nodes.join(', ')}`);
+    expectNodes(state.nodes, route.expect.nodes || [], route.resumeAt ? 'After reload' : 'Route');
     for (const [key, value] of Object.entries(route.expect.flags || {})) {
       if (value === false) assert.ok(!state.flags[key], `Expected ${key} falsy, got ${state.flags[key]}`);
       else assert.equal(state.flags[key], value, `Flag ${key}`);
     }
     for (const word of route.expect.known || []) assert.ok(state.known.includes(word), 'Missing learned word ' + word);
     for (const key of ['inv', 'yen', 'period', 'ended']) if (key in route.expect) assert.deepEqual(state[key], route.expect[key], key);
-    return { id: route.id, pass: true, seconds: (Date.now() - started) / 1000, choices: state.choices, nodes: state.nodes };
+    return { id: route.id, pass: true, seconds: (Date.now() - started) / 1000, choices: [...priorChoices, ...state.choices], nodes: state.nodes, actions: state.actions,
+      ...(route.resumeAt ? { beforeReload: { nodes: priorNodes, choices: priorChoices } } : {}) };
   } catch (error) {
     let state;
     try { state = await opened?.page.evaluate(() => ({ node: window.__game?.runner.currentNode, trace: window.__branch, goal: window.__game?.ui.goalText })); } catch {}
