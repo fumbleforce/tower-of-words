@@ -5,7 +5,7 @@ Anything Jørgen needs to pick or judge goes here, not into a chat message. Each
 ## Adding an item
 
 1. Pick an id: lower case, digits and hyphens, unique (`kenji-concept`, `style-rough-2`). A new round is a new id, not an edit of the old one; mark the old one `superseded`.
-2. Put the candidates anywhere in the repo (usually next to the work, e.g. `game3d/assets/portrait-candidates/`). Paths in review.json are relative to the repo root. Show every attempt, including the ones you'd reject (GUIDE, Show every attempt).
+2. Put the candidates anywhere in the repo (usually next to the work, e.g. `game3d/assets/portrait-candidates/`). Paths in review.json are relative to the repo root. Show every attempt, including the ones you'd reject (GUIDE, Show every attempt). Animations and 3D models go up as a live viewer he can play and rotate, linked under `links`, not as stills or frame sheets (Jørgen, 2026-09-29: "i need to be able to see the live animation, not pictures of animation").
 3. Write `reviews/<id>/review.json`:
 
 ```json
