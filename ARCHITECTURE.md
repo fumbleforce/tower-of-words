@@ -26,6 +26,9 @@ implementation evidence is in [notes/refactor-progress.md](notes/refactor-progre
   supplies dialogue methods to the existing UI object, preserving its input state
   and public methods. `ui/dialogue-text.js` owns overheard text and reveal timing;
   `ui/dom.js` supplies their small DOM helpers.
+- `game3d/js/narrative/hooks/` owns global hook registration by responsibility:
+  targets, movement and saved staging, presentation, gestures, kotodama effects,
+  and progression. Main injects the game and rendering/travel dependencies.
 - `tools/lib/` owns reusable tooling support. Browser admission, deadlines and
   cleanup belong in `browser-job.mjs`; game startup belongs in
   `game3d/test/support/open-game.mjs`. Scenario drivers own their actions and checks.

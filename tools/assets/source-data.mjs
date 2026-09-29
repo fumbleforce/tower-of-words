@@ -35,7 +35,7 @@ export function assetSourceData(read) {
   const words = table('game3d/js/lang.js', 'WORDS');
   const wordIcons = table('game3d/js/lang.js', 'ICON');
   const music = table('game3d/js/main.js', 'MUSIC');
-  const emotes = table('game3d/js/main.js', 'EMOTE_SVG');
+  const emotes = table('game3d/js/narrative/hooks/presentation.js', 'EMOTE_SVG');
   const beds = table('game3d/js/ambience.js', 'BEDS');
   const events = table('game3d/js/ambience.js', 'EVENTS');
   const sfx = table('game3d/js/sfx.js', 'K');
@@ -56,7 +56,7 @@ export function assetSourceData(read) {
   }));
   const strings = new Set(), sfxCalls = new Set(), sceneCalls = {};
   for (const file of assetSourceFiles) visitSource(ast(file), (node, ancestors) => {
-    const presentationFile = /^game3d\/js\/[^/]+\.js$/.test(file) || /^game3d\/js\/(ui|audio)\//.test(file);
+    const presentationFile = /^game3d\/js\/[^/]+\.js$/.test(file) || /^game3d\/js\/(ui|audio|narrative\/hooks)\//.test(file);
     const parent = ancestors.at(-1);
     const propertyKey = parent?.type === 'Property' && parent.key === node && !parent.computed;
     if (presentationFile && !propertyKey && node.type === 'Literal' && typeof node.value === 'string') strings.add(node.value);

@@ -1,8 +1,12 @@
 // Named engine writes, consumed by runtime key builders and structural checks.
 export const ENGINE_WRITES = {
-  'game3d/js/main.js': {
+  'game3d/js/narrative/hooks/movement.js': {
+    'exact': [],
+    'prefix': ['shown_'],
+  },
+  'game3d/js/narrative/hooks/progression.js': {
     'exact': ['cant_buy'],
-    'prefix': ['shown_', 'typed_', 'bought_'],
+    'prefix': ['typed_', 'bought_'],
   },
   'game3d/js/runner.js': {
     'exact': ['place'],
