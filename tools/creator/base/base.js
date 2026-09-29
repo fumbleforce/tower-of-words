@@ -7,7 +7,7 @@
 //   const lib = await loadLibrary();
 //   const ch = await dressed(lib, 'eric', { base: 'eric-base', layers: ['hair', 'top', 'bottom', 'shoes', 'stubble'] });
 import * as THREE from 'three';
-import { ROOT, BONES, buildCharacter, partGeometry, partMaterial } from '../recipe.js';
+import { ROOT, buildCharacter, partGeometry, partMaterial } from '../recipe.js';
 import { disposeCharacter } from '../dispose.js';
 
 const cache = {};
@@ -34,8 +34,13 @@ export function baseMesh(lib, ch, b) {
   const g = new THREE.BufferGeometry();
   g.setAttribute('position', new THREE.BufferAttribute(new Float32Array(d.pos), 3));
   g.setAttribute('uv', new THREE.BufferAttribute(new Float32Array(d.uv), 2));
-  g.setAttribute('color', new THREE.BufferAttribute(new Float32Array(n * 3).fill(1), 3));
-  g.setAttribute('useTex', new THREE.BufferAttribute(new Float32Array(n).fill(1), 1));
+  for (const [field, count] of [['col', n * 3], ['useTex', n]]) {
+    if (d[field] !== undefined && (!Array.isArray(d[field]) || d[field].length !== count || !d[field].every(Number.isFinite))) {
+      g.dispose(); throw new Error(`${d.id}: malformed ${field}`);
+    }
+  }
+  g.setAttribute('color', new THREE.BufferAttribute(d.col ? new Float32Array(d.col) : new Float32Array(n * 3).fill(1), 3));
+  g.setAttribute('useTex', new THREE.BufferAttribute(d.useTex ? new Float32Array(d.useTex) : new Float32Array(n).fill(1), 1));
   g.setAttribute('skinIndex', new THREE.Uint16BufferAttribute(d.si, 4));
   g.setAttribute('skinWeight', new THREE.BufferAttribute(new Float32Array(d.sw), 4));
   const smooth = Array.isArray(d.normal) && d.normal.length === d.pos.length;
@@ -55,8 +60,23 @@ export function baseMesh(lib, ch, b) {
 // a layer: triangles of the body's own source, pushed out along their normals by `lift` (stubble sits on the skin)
 export function layerMesh(lib, ch, source, id, tris, key, lift = 0, fitted = null) {
   const part = { id, source, slot: 'hair', key, tris };
-  const g = partGeometry(lib, part, lib.src[ch.recipe.body]);
-  if (fitted) {
+  if (fitted?.source && fitted.lift !== undefined) {
+    if (!Number.isFinite(fitted.lift) || fitted.lift < 0) throw new Error(`${id}: invalid source layer lift`);
+    lift = fitted.lift;
+  }
+  const custom = fitted?.geometry;
+  const g = custom ? new THREE.BufferGeometry() : partGeometry(lib, part, lib.src[ch.recipe.body]);
+  if (custom) {
+    const count = custom.pos?.length / 3;
+    if (!Number.isInteger(count) || count < 3 || count % 3) throw new Error(`${id}: invalid garment vertex count`);
+    for (const [field, attribute, width] of [['pos', 'position', 3], ['normal', 'normal', 3], ['uv', 'uv', 2], ['si', 'skinIndex', 4], ['sw', 'skinWeight', 4], ['col', 'color', 3], ['useTex', 'useTex', 1]]) {
+      if (!Array.isArray(custom[field]) || custom[field].length !== count * width || !custom[field].every(Number.isFinite)) {
+        g.dispose(); throw new Error(`${id}: invalid garment ${field}`);
+      }
+      g.setAttribute(attribute, field === 'si' ? new THREE.Uint16BufferAttribute(custom[field], width) : new THREE.Float32BufferAttribute(custom[field], width));
+    }
+    g.computeBoundingSphere();
+  } else if (fitted && !fitted.source) {
     const count = g.attributes.position.count;
     for (const [field, width] of [['pos', 3], ['normal', 3], ['si', 4], ['sw', 4]]) {
       if (!Array.isArray(fitted[field]) || fitted[field].length !== count * width || !fitted[field].every(Number.isFinite)) {
@@ -104,7 +124,7 @@ export async function dressed(lib, sid, { base = sid + '-base', layers = [], hei
     for (const k of layers) {
       if (!L[k]) continue;
       const f = fitted.layers?.[k];
-      if (!f || JSON.stringify(f.tris) !== JSON.stringify(L[k].tris)) throw new Error(`${fit}: ${k} triangle order differs`);
+      if (!f || (!f.geometry && JSON.stringify(f.tris) !== JSON.stringify(L[k].tris))) throw new Error(`${fit}: ${k} triangle order differs`);
     }
   }
   const ch = await buildCharacter(lib, { body: sid, parts: {}, height });

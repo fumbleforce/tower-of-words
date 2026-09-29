@@ -12,7 +12,7 @@ per slot, so taking a slot away left an open hole where it had been.
 
 ## Current candidate pipeline
 
-The latest dressed comparison is [creator-base-4](http://127.0.0.1:8771/bible/#review/creator-base-4), with a live viewer at `compare.html?round=4`. It follows Jørgen's v15-flat choice with one simpler hip contour and the source hair/clothes. Original positions and the separate fit3 trial both remain unfinished; [round notes](../../../notes/creator-comparisons.md#dressed-round-4) record the visible defects and checks. Earlier candidates below remain reproducible.
+The rejected dressed comparison is [creator-base-4](http://127.0.0.1:8771/bible/#review/creator-base-4), with a live viewer at `compare.html?round=4`. It follows Jørgen's v15-flat choice with one simpler hip contour and the source hair/clothes. Original positions and the separate fit3 trial both remain unfinished; [round notes](../../../notes/creator-comparisons.md#dressed-round-4) record the visible defects and checks. Earlier candidates below remain reproducible.
 
 `build_clean_base.py` constructs a connected ring mesh on the original 24-bone skeleton. Each v14 body has
 398 welded vertices and 792 triangles, smooth normals, authored body dimensions and projected source eyes.
@@ -94,8 +94,7 @@ shape differences. Each model renders into its own depth-tested target. At each 
 weighted by opacity
 and coverage, with their combined opacity capped at 1. Equal sliders give equal weight where both surfaces
 cover the pixel. Transparency cannot reveal a model’s own occluded surfaces. Switch a model off or use wireframe
-to inspect those. Rendering happens only when a control or viewport changes. This bind-pose view does not
-verify animated garment clearance.
+to inspect those. Bind pose renders when a control changes. Idle and walk use one shared clip and time for both models; Play, Pause and the time slider let you inspect matching poses. The viewer alone does not prove continuous garment clearance.
 
 ### Local candidate files
 
@@ -117,3 +116,13 @@ This writes `src-{mio,eric}.json`, then `clean-{mio,eric}-v16.json` and their PN
 “Original positions” clothing setting; fit3 additionally requires the existing local
 `clean-{mio,eric}-v16-fit3-layers.json` trial exports. A future candidate needs its own JSON and the texture
 named by its `tex` field in `art/parts/`. Generation recreates the rejected baseline; it does not repair it.
+
+### Source geometry reconstruction
+
+Use `tools/creator/base/export.html?precision=full` with the existing export runner to write `art/parts/base/src-mio-exact.json` and `src-eric-exact.json`. The default export still rounds coordinates and weights; the full-precision files retain the live source buffers for exact face and hand comparisons.
+
+`build_source_base.py mio <new-version> --body-base art/parts/base/clean-mio-v16.json --source-data art/parts/base/src-mio-exact.json --original-clothes --source-weights --bridge-gaps --lining --join-hands` builds a source-derived review candidate. Run it with a Python environment containing numpy and trimesh; repeat with Eric's files. The head core and hands retain their source coordinates, UVs and weights. The hidden clean body is fitted inside the source, with source garment weights transferred to it. The hidden arm rings follow the actual source joints and wrist profile, and their boundaries join the original hand contours after removing only the concealed wrist caps. Original clothes are retained with a small lift and a body-following lining. The generator refuses to overwrite a base version.
+
+These candidates consist of separate overlapping closed pieces. A zero boundary-edge count does not establish one connected manifold or clearance in every pose. `art/parts/base/shots/source-body-fit/attempts.json` retains the local iterations and their QA notes. They have not been approved for the game.
+
+The current review is [creator-base-5](http://127.0.0.1:8771/bible/#review/creator-base-5). The local candidate is `source15`, loaded with `overlay.html?body=mio&version=source15&review=creator-base-5` (or `body=eric`). Its fitted layers are `clean-<id>-source15-fit3-layers.json`. Exact retained-source position, UV and skin-weight comparisons, generation commands, sampled-walk coverage and the remaining neck/hair rendering issues are recorded in `art/parts/base/shots/source-body-fit/source15-proof.json`. All generated JSON and captures stay local until asset approval.

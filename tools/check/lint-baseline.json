@@ -213,12 +213,6 @@
       "context": "57bd599463d9ff7bd84f8c1a79b0aaa8f38e4bc184bd5865ad9dde5005626996"
     },
     {
-      "file": "tools/creator/base/base.js",
-      "ruleId": "no-unused-vars",
-      "message": "'BONES' is defined but never used.",
-      "context": "4a81a6c345d433178d959ea62e5479929ae10c979747af95ee4e3b939f92298e"
-    },
-    {
       "file": "tools/day1_playtest.mjs",
       "ruleId": "no-unused-vars",
       "message": "'devices' is assigned a value but never used.",

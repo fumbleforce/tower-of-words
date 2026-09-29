@@ -8,15 +8,16 @@
 // fixes applied, cut labels) to art/parts/base/src-<id>.json, for the Blender base-body build (build_base.py).
 import { loadLibrary, BONES } from '../recipe.js';
 const lib = await loadLibrary();
-const r = (a, k = 5) => Array.from(a, (x) => +x.toFixed(k));
+const full = new URLSearchParams(location.search).get('precision') === 'full';
+const r = (a, k = 5) => Array.from(a, (x) => full ? x : +x.toFixed(k));
 window.__files = {};
 for (const [id, s] of Object.entries(lib.src)) {
   const P = {}, B = {};
-  for (const b of BONES) { P[b] = s.P[b].toArray().map((x) => +x.toFixed(6)); B[b] = s.B[b].toArray().map((x) => +x.toFixed(6)); }
+  for (const b of BONES) { P[b] = r(s.P[b].toArray(), 6); B[b] = r(s.B[b].toArray(), 6); }
   const out = { id, bones: BONES, parent: s.parent, P, B, height: s.height, T: s.T,
     pos: r(s.pos), uv: r(s.uv), col: r(s.col, 4), useTex: Array.from(s.useTex), si: Array.from(s.si), sw: r(s.sw, 4),
     slot: s.slotOf, faceRGB: s.faceRGB, tex: s.meta.tex, look: s.meta.look || null, flat: !!s.meta.flat };
-  window.__files[`art/parts/base/src-${id}.json`] = JSON.stringify(out);
+  window.__files[`art/parts/base/src-${id}${full ? '-exact' : ''}.json`] = JSON.stringify(out);
 }
 window.__out = Object.keys(window.__files).join(', ');
 window.__done = true;
