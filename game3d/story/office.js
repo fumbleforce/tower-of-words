@@ -179,8 +179,8 @@ export default {
       { do: 'meet', who: 'kenji' },
       { do: 'face', who: 'kenji', to: 'eric' },
       { say: 'kenji', face: 'grin', emo: 'bright', text: 'あ！新しい人！', overheard: true },
-      { say: 'kenji', face: 'grin', emo: 'excited', text: "Eric-san? I am Kenji! I am new also, two months. So now I am not the newest. Yes!" },
-      { say: 'kenji', face: 'sheepish', emo: 'sheepish', text: "Ah, sorry, sorry. Your chair... I borrow it. My chair is... broken. Pshh." },
+      { say: 'kenji', face: 'grin', emo: 'excited', text: "Eric-san? I am Kenji! I am new also, two months. So now I am not the newest." },
+      { say: 'kenji', face: 'sheepish', emo: 'sheepish', text: "Ah, sorry, sorry. Your chair... I borrowed it. Mine is broken." },
       { do: 'gesture', who: 'kenji', kind: 'point' },
       { do: 'face', who: 'kenji', to: 'machine_door' },
       { say: 'kenji', face: 'grin', emo: 'bright', text: "I bring it back for you! It's in machine room, with the cat. Norway has the big forest cats, right? I see on YouTube, they are so big, like..." },
@@ -593,13 +593,13 @@ export default {
 
     // ------------------------------------------------------------------ things to poke
     tama: ['> She opens one eye, and closes it again.'],
-    tama_ohayo: ['> A slow blink.'],
+    tama_ohayo: [{ do: 'emote', who: 'tama', kind: 'heart' }],
     desk_look: ['> Your name card, in katakana. Someone has written ERIC under it in pen, just in case.'],
     irete_kettle: [{ do: 'kettle', state: 'pour' }, '> The pot pours you a cup of tea.'],
     inout_board: ['> Four names in Japanese, and one new magnet in capitals: ERIC.'],
     covered: ["> There's no dust on the name card in front of it."],
-    stairs: ['> In the dust on the steps, a line of small paw prints.'],
-    ugoite_coffee: [{ do: 'coffee' }, '> Someone taped an OUT OF ORDER sign on it this morning.'],
+    stairs: ['> The stairs up. A line of small paw prints goes up them in the dust.'],
+    ugoite_coffee: [{ do: 'coffee' }, '> It gurgles, then goes quiet again.'],
     matte_clock: [
       { do: 'clockStop', ms: 3000 },
       { do: 'look', who: 'mori', at: 'clock' },
