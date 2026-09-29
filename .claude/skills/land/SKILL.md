@@ -9,9 +9,10 @@ Each writing agent works in its own git worktree on its own branch, and one scri
 
 ## Start
 
-- Claude Code agents: the Agent tool's `isolation: "worktree"` makes `.claude/worktrees/<name>` on a new branch from local main (`worktree.baseRef: head` in .claude/settings.json), with node_modules linked and .env copied. First thing in it, run `tools/worktree.sh setup`: it links the git-ignored asset files (Meshy originals, music, and after the asset move every binary) from the main checkout. It's safe to run twice.
+- Claude Code agents: the Agent tool's `isolation: "worktree"` makes `.claude/worktrees/<name>` on a new branch `worktree-<name>` from local main (`worktree.baseRef: head` in .claude/settings.json), with node_modules linked and .env copied. First thing in it, run `tools/worktree.sh setup`: it links the git-ignored asset files (Meshy originals, music, and after the asset move every binary) from the main checkout. It's safe to run twice.
 - Codex, or by hand: `tools/worktree.sh new <name>` makes `.claude/worktrees/<name>` on branch `wt/<name>` from main and runs setup.
 - The asset links point at the main checkout's files. To change an asset, delete its link and write a new file; never write through the link.
+- Claude Code's Read tool may refuse a link that points outside the worktree; read the main checkout's path instead. Node, Python and the review server follow the links.
 - Headless browser runs from a worktree go through the review server: `BASE=.claude/worktrees/<name>/game3d node game3d/tools/fast.mjs 390 844`.
 
 ## Land
@@ -22,7 +23,7 @@ Each writing agent works in its own git worktree on its own branch, and one scri
    - takes the land lock (`/tmp/claude-1000/land.lock`; it waits while another land runs),
    - refuses if the worktree has uncommitted or untracked files,
    - rebases the branch on main (a conflicting rebase is aborted and refused),
-   - checks the rebased commit: a valid Facts line on every new commit and `npm run check` on that commit's own tree in a throwaway copy (tools/check/commit-cpu.mjs, about 15 s),
+   - checks the rebased commit: a valid Facts line on every new commit and `npm run check` on that commit's own tree in a throwaway copy (the commit's own tools/check/commit-cpu.mjs, about 15 s),
    - fast-forwards main in the main checkout (waiting while a commit there holds the index), and if main moved during the checks, rebases and checks again, up to three rounds,
    - removes the worktree and deletes the branch. `--keep` leaves them.
 
