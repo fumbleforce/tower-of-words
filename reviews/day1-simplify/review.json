@@ -2,7 +2,7 @@
   "title": "Day 1: fewer repeated steps",
   "date": "2026-09-29",
   "by": "Codex writing team",
-  "status": "open",
+  "status": "superseded",
   "question": "Which parts of this revised simplification should we apply?",
   "multi": true,
   "options": [
@@ -29,6 +29,10 @@
   ],
   "links": [
     {
+      "label": "Choose the remaining edits in context",
+      "href": "reviews/day1-frames/"
+    },
+    {
       "label": "Before / after overview",
       "href": "bible/#doc/reviews/day1-simplify/proposal.md"
     },
@@ -44,5 +48,9 @@
       "label": "Office",
       "href": "bible/#doc/reviews/day1-simplify/office.md"
     }
-  ]
+  ],
+  "decided": [
+    "train"
+  ],
+  "decision": "Train: family and Mori-bow merges, delete #7 and cut #9; keep the personal phrasing, flavour, tiny bow and #8. Applied in d64b4b4. Gate, lift and office move to day1-frames for contextual decisions."
 }
