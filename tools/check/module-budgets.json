@@ -15,13 +15,6 @@
       "review": "C-0071",
       "reason": "Existing mixed character factories, appearance data and rig setup. Split factory families during the later character/module boundary review; avoid splitting coupled rig construction merely to hit a line target."
     },
-    "game3d/js/engine.js": {
-      "lines": 441,
-      "bytes": 16004,
-      "owner": "codex-tui",
-      "review": "C-0071",
-      "reason": "Existing renderer, navigation primitives and scene setup; split by responsibility in the approved later stages."
-    },
     "game3d/js/look/detail.js": {
       "lines": 670,
       "bytes": 26877,
@@ -49,13 +42,6 @@
       "owner": "codex-tui",
       "review": "C-0071",
       "reason": "Existing procedural character and animation implementation; changes require character review."
-    },
-    "game3d/js/move.js": {
-      "lines": 1461,
-      "bytes": 59272,
-      "owner": "codex-tui",
-      "review": "C-0071",
-      "reason": "Existing movement, crowd and pathfinding implementation; stage 5 extraction is planned."
     },
     "game3d/js/perf/batch.js": {
       "lines": 1133,

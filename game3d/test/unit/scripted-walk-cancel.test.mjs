@@ -4,7 +4,7 @@ import { readFileSync } from 'node:fs';
 import { parse } from 'espree';
 import { test } from 'node:test';
 
-const source = readFileSync(new URL('../../js/move.js', import.meta.url), 'utf8');
+const source = readFileSync(new URL('../../js/movement/scripted.js', import.meta.url), 'utf8');
 const ast = parse(source, { ecmaVersion: 'latest', sourceType: 'module', range: true });
 const node = ast.body.find(n => n.type === 'ExportNamedDeclaration' && n.declaration?.id?.name === 'walkRig').declaration;
 function fixture() {

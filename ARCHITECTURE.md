@@ -34,6 +34,10 @@ implementation evidence is in [notes/refactor-progress.md](notes/refactor-progre
 - `game3d/js/places/lifecycle.js` owns preparation, entry, travel and opening
   dispatch. Main injects place factories and rendering/marker callbacks and keeps
   boot/Continue orchestration. Save fields and transition ordering stay unchanged.
+- `game3d/js/move.js` preserves the movement API while `movement/` separates
+  navigation, crowd collision, player walking, scripted walking, targeting, path
+  previews and diagnostics. Crowd owns the one shared pass-through map. Numeric
+  navigation is independent of the renderer; engine re-exports `Nav`.
 - `tools/lib/` owns reusable tooling support. Browser admission, deadlines and
   cleanup belong in `browser-job.mjs`; game startup belongs in
   `game3d/test/support/open-game.mjs`. Scenario drivers own their actions and checks.
@@ -88,10 +92,12 @@ make an extraction pass. Review the responsibility and update the evidence first
 ## Change evidence
 
 Refactors preserve saves, ordering, content and behavior. Each boundary gets
-characterization tests, CPU checks and the relevant fast routes. Comparable
-traces keep route, viewport, quality, seed, initial storage and assets fixed and
-record source hashes. Keep failed captures and investigate differences; do not
-drop physical or ordered state merely to obtain an equal comparison.
+CPU checks and one normal fast run per viewport. Strict trace comparisons cover
+dialogue, place lifecycle and navigation; focused regression checks address real
+failures or uncovered risks. Comparable traces keep route, viewport, quality, seed,
+initial storage and assets fixed and record source hashes. Keep failed captures
+and investigate differences; do not drop physical or ordered state merely to
+obtain an equal comparison.
 
 Cross-team review and game-fact trailers follow the collaboration protocol and
 GUIDE. Install the local hooks with `sh tools/check/install-hooks.sh`; the old
