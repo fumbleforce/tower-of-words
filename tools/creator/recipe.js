@@ -12,6 +12,7 @@
 import * as THREE from 'three';
 import { GLTFLoader } from '../../game3d/vendor/loaders/GLTFLoader.js';
 import { plainFace, reshapeJaw } from './mio-prep.js';
+import { retargetRotationValues } from './retarget.js';
 
 export const ROOT = new URL('../../art/parts/', import.meta.url).href;
 export const SLOTS = ['hair', 'head', 'top', 'bottom', 'shoes', 'hands'];
@@ -323,6 +324,8 @@ export async function clipsFor(lib, H) {
       if (prop === 'quaternion') {
         const t = tr.clone();
         if (node === 'Hips') { const q = new THREE.Quaternion(); for (let i = 0; i < t.values.length; i += 4) { q.fromArray(t.values, i).premultiply(armQ).toArray(t.values, i); } }
+        // Candidate-only until the creator comparison has been reviewed.
+        if (lib.retargetRest === true) t.values = retargetRotationValues(t.values, node, H, ref);
         tracks.push(t);
       } else if (prop === 'position' && node === 'Hips') {
         const vals = tr.values.slice(), v = new THREE.Vector3();
