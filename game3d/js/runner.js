@@ -55,7 +55,7 @@ export function cond(expr) {
 }
 
 // hooks that keep the current line on screen (they belong to it)
-const KEEP_TALK = new Set(['type', 'expression', 'face', 'emote', 'voice', 'sound', 'hint', 'goal', 'learn', 'bond', 'meet', 'set']);
+const KEEP_TALK = new Set(['type', 'expression', 'face', 'emote', 'voice', 'sound', 'hint', 'goal', 'learn', 'bond', 'meet', 'set', 'remember', 'fact', 'bondStep', 'relate']);
 export class Runner {
   constructor(game) { this.game = game; this.story = null; this.place = null; this.onceDone = new Set(); }
 
@@ -91,6 +91,7 @@ export class Runner {
   has(key) { return !!this.resolve(key, { peek: true }); }
   // run a trigger inside a beat (locks walking); returns true if something ran
   trigger(key, { beat = true } = {}) {
+    this.game.onTrigger?.(key);
     const node = this.resolve(key);
     if (!node) return false;
     const m = /^talk:(.+)$/.exec(key);
@@ -105,7 +106,9 @@ export class Runner {
     (this.trace = this.trace || []).push(node); if (this.trace.length > 20) this.trace.shift();
     const steps = this.story.nodes[node];
     if (!steps) { console.warn('missing node', node); return; }
+    this.game.onNode?.(node, 'start');
     await this.steps(steps);
+    this.game.onNode?.(node, 'end');
   }
   // returns 'go' when a jump happened, 'end' to stop
   async steps(list) {

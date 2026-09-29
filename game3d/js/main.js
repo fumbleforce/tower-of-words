@@ -24,7 +24,7 @@ import { lobbyPlace } from './places/lobby.js';
 import { officePlace } from './places/office.js';
 import { showEnd } from './end.js';
 import * as trips from './trips.js';
-import { PERIODS as PERIOD_ORDER, sim, ITEMS, setPeriod, applySchedule, stepAmbient, bond, meet, noteTeacher, absorb, buy, take, peopleHTML, save, loadSave, restore, clearSave } from './sim.js';
+import { installSim, PERIODS as PERIOD_ORDER, sim, ITEMS, setPeriod, applySchedule, stepAmbient, bond, meet, noteTeacher, absorb, buy, take, peopleHTML, save, loadSave, restore, clearSave } from './sim.js';
 
 const CAP = Q.has('cap');
 const TEST = Q.get('test') === 'fast';
@@ -280,6 +280,8 @@ async function give() {
 }
 ui.onGive = give;
 game.sim = sim;
+// a small moment when a bond steps up (sim.js fires amakawa:bondstep); meeting someone (0 to 1) stays quiet
+window.addEventListener('amakawa:bondstep', (e) => { const d = e.detail || {}; if (!d.to || d.to <= 1 || d.to < d.from) return; const nm = (sim.people[d.who] && sim.people[d.who].name) || d.who; ui.toast?.(`${nm}: ${d.name || 'closer'}`, 3000); sfx('word'); });
 game.learned = (kind) => learned(game, kind);
 
 // ---------- input ----------
@@ -588,7 +590,6 @@ H.type = async ({ word, prompt, from }) => {
 H.period = ({ to }) => { setPeriod(to, game); if (to === 'evening') playMusic('night'); };
 // a story can change the loop: { hook: 'music', name: 'calm' | 'office' | 'lively' | 'night' | null }
 H.music = ({ name }) => playMusic(name || null);
-H.bond = ({ who, add = 1 }) => { bond(game, who, add); };
 H.meet = ({ who }) => { meet(game, who); ui.refreshPeople(sim.met.size); };
 H.buy = ({ item }) => { if (buy(game, item)) flags['bought_' + item] = true; else flags['cant_buy'] = true; };
 H.take = ({ item }) => take(item);
@@ -767,6 +768,7 @@ game.step = step;
 // ---------- boot ----------
 async function boot() {
   game.runner = new Runner(game);
+  installSim(game);   // bonds: bond, bondStep, remember, fact, relate hooks (js/bonds/)
   if (Q.has('slift')) setSitLift(+Q.get('slift'));
   // Eric: Jørgen's Meshy model; the code-built chibi is the fallback (?eric=chibi, or if loading fails)
   game.player = Q.get('eric') === 'chibi' ? makeAvatar() : await loadEric().catch((e) => { console.warn('Meshy Eric failed, using the chibi', e); return makeAvatar(); });
