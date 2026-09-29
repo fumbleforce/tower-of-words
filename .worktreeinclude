@@ -1,0 +1,3 @@
+# Copied by Claude Code into each new agent worktree (gitignore syntax; only git-ignored files are copied).
+# Big folders are symlinked instead: node_modules by .claude/settings.json, assets by tools/worktree.sh setup.
+.env
