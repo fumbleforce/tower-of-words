@@ -51,6 +51,7 @@
     <div id="slots"></div>
     <details id="fit-controls"></details>
     <div class="recipe-actions"><button id="save-recipe" disabled>Save recipe</button><button id="load-recipe" disabled>Load recipe</button></div>
+    <div class="recipe-actions"><button id="export-glb" disabled>Export GLB</button></div>
     <input id="recipe-file" type="file" accept=".json,application/json" hidden>
     <p id="recipe-status" role="status" aria-live="polite"></p>
     <details><summary>Recipe JSON</summary><textarea id="recipe" spellcheck="false" aria-label="Recipe JSON"></textarea>
@@ -134,6 +135,24 @@ function syncRecipeControls() {
 }
 const fileStatus = document.getElementById('recipe-status');
 const fileInput = document.getElementById('recipe-file');
+let exporting = false;
+document.getElementById('export-glb').onclick = async () => {
+  if (exporting) return;
+  exporting = true;
+  const button = document.getElementById('export-glb'); button.disabled = true;
+  const snapshot = structuredClone(ch.recipe);
+  snapshot.colours = structuredClone(recipe.colours);
+  fileStatus.textContent = 'Exporting character…';
+  try {
+    const { exportCharacterGLB } = await import('./export-glb.js');
+    const data = await exportCharacterGLB(lib, snapshot);
+    const url = URL.createObjectURL(new Blob([data], {type: 'model/gltf-binary'}));
+    const link = document.createElement('a'); link.href = url; link.download = snapshot.body + '-character.glb';
+    document.body.append(link); link.click(); link.remove(); setTimeout(() => URL.revokeObjectURL(url), 1000);
+    fileStatus.textContent = 'GLB exported with Idle and Walk. Lighting depends on the viewer.';
+  } catch (error) { fileStatus.textContent = 'Could not export GLB: ' + error.message; }
+  finally { exporting = false; button.disabled = !ch; }
+};
 function replaceRecipe(next) { for (const key of Object.keys(recipe)) delete recipe[key]; Object.assign(recipe, next); }
 async function applyRecipeText(text) {
   const next = parseRecipe(text, lib), previous = structuredClone(recipe);
@@ -203,6 +222,7 @@ async function rebuild() {
     if (my === busy) {
       fitControls.setDisabled(!ch);
       document.querySelectorAll('.recipe-actions button').forEach(button => { button.disabled = !ch; });
+      document.getElementById('export-glb').disabled = !ch || exporting;
     }
   }
 }

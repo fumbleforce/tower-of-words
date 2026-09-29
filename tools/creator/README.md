@@ -13,7 +13,15 @@ Use **Save recipe** to download the current body, six parts, colours, height and
 
 Files use `{ "format": "amakawa-creator", "version": 1, "recipe": { ... } }`. Plain recipes from the old Copy button and `?recipe=` links also load. Recipes refer to the local parts library; they contain selections, not meshes or textures. Missing parts, parts in the wrong slot and unsupported file versions are reported without replacing the current character. Invalid URL recipes show the default character and an error message.
 
-Height must be 0.1–3; optional fit scales 0.05–5 and three-axis offsets −3–3. Colours use six-digit hex values. The file limit is 64 KB. A combined GLB export remains separate work.
+Height must be 0.1–3; optional fit scales 0.05–5 and three-axis offsets −3–3. Colours use six-digit hex values. The recipe file limit is 64 KB.
+
+## Export a model
+
+**Export GLB** downloads the assembled character with embedded textures, the shared skeleton, skin weights, current fitting and height. It includes Idle and Walk: Idle holds the same 0.4-second pose as this creator, and Walk stays in place. The export uses a snapshot of the shown character, so editing during export does not change the file being built.
+
+The source shader's saturation, colour multiplier and selective tints are baked into textures and palette vertex colours. Eye and trim colours follow the same tint thresholds as the preview. Texture and palette triangles use separate material groups. Materials are rough, nonmetallic PBR; lighting differs from the creator's Lambert shader, and baked colours are limited to the standard 0–1 range. The original meshes and textures stay untouched. Export includes the original cut-part experiment's existing gaps and fit limitations.
+
+The file also carries the recipe in its root node's `extras.amakawa` metadata. Use **Save recipe** when you want to edit the selections again here; **Load recipe** accepts JSON, not GLB. A GLB is for external viewers and modelling tools. Creating one does not approve a candidate for use in the game.
 
 ## Adjust a part
 
@@ -44,6 +52,7 @@ A part generated on its own (say, just a jacket) isn't supported yet. It would h
 
 - `run.mjs <page> [png] [w h]`: headless run. It takes /tmp/claude-1000/browser.lock and writes any files the page hands back.
 - `mio-prep.js`: Mio's face and jaw fixes, copied from game3d/js/mio.js.
+- `node tools/creator/check-export.mjs`: downloads and reloads a GLB on desktop and phone, checks embedded textures, triangle counts, palette colour ranges and sampled Idle/Walk bone transforms, and captures source/export comparisons in `art/parts/shots/glb-export/`. Requires the local server on 8771; uses the shared browser/GPU policy. Captures show the creator on the left and the reloaded GLB on the right.
 
 ## What the first test showed (2026-09-29)
 
@@ -52,7 +61,7 @@ Sheet: art/parts/shots/sheet.png. Review item: reviews/creator-parts.
 - Works: Mio and Eric rebuilt from their own six parts match the game's models in the bind pose. Both bodies walk on Eric's API clips through the shared skeleton, including Mio, who never had those clips. Clothes swaps (Eric's jacket on Mio, Mio's hoodie and trousers on Eric, Eric's trousers and shoes on Mio) hold together in idle and walk. The seams at the waist and ankles hardly show, because both models are similar chibis. Tints work per slot and leave eyes, soles, trim and teal streaks alone.
 - Weak: swapping hair or heads. Meshy models have no scalp under the hair, and Mio's face skin runs up under her bangs. With Eric's hair on Mio, a few of his fringe spikes cut across her cheek and a pale strip of her nape shows at the back. Mio's hair on Eric sits well. The fit is automatic (whole-head depth, chin aligned), so each pair of heads would need a look, and maybe a nudge.
 - Animation: nothing broke that wasn't already broken. Meshy's idle clip twists and bends over after a second or two (the game holds one frame of it, and so does the creator). Skin weights carry over with the parts, so a swapped sleeve bends with the arm.
-- Not done: exporting a combined GLB and parts made on their own in Meshy.
+- Not done: parts made on their own in Meshy.
 
 ## Base bodies (2026-09-29)
 
