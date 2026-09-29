@@ -38,6 +38,12 @@ export async function checkCommitCpu(cwd, commit, { timeoutMs = 300000, signal, 
   await withGitSnapshot(cwd, tree, async ({ directory, env }) => {
     const options = () => ({ cwd: directory, env: { ...env, PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: '1' },
       timeoutMs: deadline - Date.now(), signal, stdio });
+    // Binaries aren't in git after the asset move: copy in the commit's locked files, as pre-commit does.
+    const locked = await import('./locked-assets.mjs').catch(error => {
+      if (error.code === 'ERR_MODULE_NOT_FOUND') return null;
+      throw error;
+    });
+    locked?.materializeLockedAssets(cwd, directory);
     await boundedCommand('npm', ['ci', '--ignore-scripts', '--include=dev', '--no-audit', '--no-fund', '--prefer-offline'], options());
     await boundedCommand('npm', ['run', '--ignore-scripts', 'check'], options());
   }, { timeoutMs: Math.min(timeoutMs, 60000), signal });
