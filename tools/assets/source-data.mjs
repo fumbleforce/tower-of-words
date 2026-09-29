@@ -1,0 +1,109 @@
+// Read asset metadata without loading renderers or starting audio/model requests.
+import fs from 'node:fs';
+import { parseSource, visitSource, sourceBindings, staticValue, propertyName } from '../lib/source-data.mjs';
+import { STORY_FILES } from '../../game3d/js/places/definitions.js';
+
+const root = new URL('../../', import.meta.url);
+export const assetSourceFiles = fs.readdirSync(new URL('game3d/js/', root), { recursive: true })
+  .filter(file => file.endsWith('.js')).map(file => 'game3d/js/' + file).sort();
+
+function inlineIcons(ast, file) {
+  const icons = [];
+  visitSource(ast, (node, ancestors) => {
+    const value = node.type === 'Literal' && typeof node.value === 'string' ? node.value
+      : node.type === 'TemplateElement' ? node.value.cooked : null;
+    if (!value) return;
+    for (const match of value.matchAll(/<svg viewBox="0 0 (\d+) (\d+)"[^>]*>(.*?)<\/svg>/gs)) {
+      const before = value.slice(0, match.index);
+      const attribute = [...before.matchAll(/(?:aria-label|id)="([^"]+)"/g)].at(-1)?.[1];
+      const element = ancestors.toReversed().find(parent => parent.type === 'CallExpression' && parent.callee.name === 'el');
+      const declaration = ancestors.toReversed().find(parent => parent.type === 'VariableDeclarator');
+      const label = attribute || element?.arguments[1]?.value || declaration?.id.name || 'Icon';
+      icons.push({ file, label, width: match[1], height: match[2], body: match[3] });
+    }
+  });
+  return icons;
+}
+
+export function assetSourceData(read) {
+  const asts = new Map();
+  const ast = file => {
+    if (!asts.has(file)) asts.set(file, parseSource(read(file)));
+    return asts.get(file);
+  };
+  const table = (file, name) => staticValue(sourceBindings(ast(file), [name])[name].init);
+  const words = table('game3d/js/lang.js', 'WORDS');
+  const wordIcons = table('game3d/js/lang.js', 'ICON');
+  const music = table('game3d/js/main.js', 'MUSIC');
+  const emotes = table('game3d/js/main.js', 'EMOTE_SVG');
+  const beds = table('game3d/js/ambience.js', 'BEDS');
+  const events = table('game3d/js/ambience.js', 'EVENTS');
+  const sfx = table('game3d/js/sfx.js', 'K');
+  const cast3d = table('game3d/js/cast.js', 'CAST3D_ON');
+  const stylesNode = sourceBindings(ast('game3d/js/style/index.js'), ['STYLES']).STYLES.init;
+  const styles = Object.fromEntries(stylesNode.properties.map(property => {
+    const fields = Object.fromEntries(property.value.properties.map(field => [field.key.name ?? field.key.value, field.value]));
+    return [property.key.value ?? property.key.name, { name: staticValue(fields.name), note: staticValue(fields.note) }];
+  }));
+
+  const peopleNode = sourceBindings(ast('game3d/js/cast.js'), ['PEOPLE']).PEOPLE.init;
+  const people = Object.fromEntries(peopleNode.properties.map(property => {
+    const body = property.value.body;
+    const comments = ast('game3d/js/cast.js').comments
+      .filter(comment => comment.range[0] > body.range[0] && comment.range[1] < body.range[1])
+      .map(comment => comment.value.trim());
+    return [property.key.name ?? property.key.value, { comments, used: [] }];
+  }));
+  const strings = new Set(), sfxCalls = new Set(), sceneCalls = {};
+  for (const file of assetSourceFiles) visitSource(ast(file), (node, ancestors) => {
+    const topLevelFile = /^game3d\/js\/[^/]+\.js$/.test(file);
+    const parent = ancestors.at(-1);
+    const propertyKey = parent?.type === 'Property' && parent.key === node && !parent.computed;
+    if (topLevelFile && !propertyKey && node.type === 'Literal' && typeof node.value === 'string') strings.add(node.value);
+    if (topLevelFile && node.type === 'TemplateLiteral' && !node.expressions.length) strings.add(staticValue(node));
+    if (node.type !== 'CallExpression') return;
+    if (topLevelFile && node.callee.name === 'sfx' && typeof node.arguments[0]?.value === 'string')
+      sfxCalls.add(node.arguments[0].value);
+    if (!/^game3d\/js\/(places|scenes)\//.test(file)) return;
+    const place = file.split('/').at(-1).replace('.js', '').replace(/^lobby$/, 'gate');
+    if (node.callee.type === 'Identifier') {
+      const places = sceneCalls[node.callee.name] ||= [];
+      if (!places.includes(place)) places.push(place);
+    }
+    if (node.callee.object?.name !== 'PEOPLE') return;
+    const id = propertyName(node.callee);
+    if (!people[id]) throw new Error(`${file}: unknown PEOPLE factory ${id}`);
+    if (!people[id].used.includes(place)) people[id].used.push(place);
+  });
+  for (const person of Object.values(people)) person.used.sort();
+  for (const places of Object.values(sceneCalls)) places.sort();
+  const exportedFunctions = Object.fromEntries(assetSourceFiles.map(file => [file, ast(file).body
+    .filter(node => node.type === 'ExportNamedDeclaration' && node.declaration?.type === 'FunctionDeclaration')
+    .map(node => node.declaration.id.name)]));
+
+  const stories = {};
+  for (const name of STORY_FILES) {
+    const story = staticValue(ast(`game3d/story/${name}.js`).body.find(node => node.type === 'ExportDefaultDeclaration')?.declaration);
+    const speakers = {}, texts = [];
+    const walk = value => {
+      if (typeof value === 'string') {
+        texts.push(value);
+        const speaker = /^(\w+): /.exec(value)?.[1];
+        if (speaker) speakers[speaker] = (speakers[speaker] || 0) + 1;
+      } else if (value && typeof value === 'object') {
+        if (typeof value.say === 'string') speakers[value.say] = (speakers[value.say] || 0) + 1;
+        Object.values(value).forEach(walk);
+      }
+    };
+    walk(story);
+    const names = Object.fromEntries(Object.entries({ ...story.speakers, ...story.people })
+      .filter(([, person]) => person.name).map(([id, person]) => [id, person.name]));
+    stories[name] = { speakers, texts, names };
+  }
+  const icons = ['ui', 'menu', 'engine', 'speech'].flatMap(name => {
+    const file = `game3d/js/${name}.js`;
+    return inlineIcons(ast(file), file);
+  });
+  return { words, wordIcons, music, emotes, beds, events, sfx, cast3d, styles, people, stories,
+    icons, sceneCalls, exportedFunctions, strings: [...strings].sort(), sfxCalls: [...sfxCalls].sort() };
+}

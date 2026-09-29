@@ -29,6 +29,17 @@ import sys
 import time
 from datetime import datetime
 
+from runtime_data import load_runtime_data, register_runtime_assets
+
+# Exercise the exact declaration/preview reads without scanning directories or writing assets.json.
+RUNTIME = load_runtime_data()
+if '--runtime-data' in sys.argv:
+    registered = {'portraits': {}, 'props': [], 'source': RUNTIME['source']}
+    register_runtime_assets(RUNTIME, lambda **entry: registered['props'].append(entry),
+                            lambda who, face: registered['portraits'].setdefault(who, []).append(face))
+    print(json.dumps(registered, ensure_ascii=False))
+    sys.exit(0)
+
 import yaml
 
 T0 = time.time()
@@ -108,64 +119,15 @@ def quote(path, phrase, limit=320):
     return None
 
 
-# ------------------------------------------------------------------ JS source helpers
-def js_object_body(src, name):
-    """Text of `const NAME = { ... }` (or [ ... ]) in a JS source, braces balanced, strings skipped."""
-    m = re.search(r'(?:export\s+)?const\s+' + re.escape(name) + r'\s*=\s*', src)
-    if not m:
-        return None
-    i = m.end()
-    open_, close = src[i], {'{': '}', '[': ']'}.get(src[i])
-    if not close:
-        return None
-    depth, j, q = 0, i, None
-    while j < len(src):
-        c = src[j]
-        if q:
-            if c == '\\':
-                j += 1
-            elif c == q:
-                q = None
-        elif c == '/' and src[j + 1:j + 2] == '/':
-            j = src.find('\n', j)            # a line comment (its apostrophes aren't quotes)
-            if j < 0:
-                return None
-            continue
-        elif c in '\'"`':
-            q = c
-        elif c == open_:
-            depth += 1
-        elif c == close:
-            depth -= 1
-            if depth == 0:
-                return src[i:j + 1]
-        j += 1
-    return None
-
-
-def words():
-    src = read('game3d/js/lang.js')
-    out = {}
-    for m in re.finditer(r"^\s*([a-z_]+): \{ ja: '([^']+)'(.*)$", src, re.M):
-        ro = re.search(r"ro: '([^']+)'", m.group(3))
-        en = re.search(r"en: '([^']*)'", m.group(3))
-        out[m.group(1)] = {'ja': m.group(2), 'ro': ro.group(1) if ro else m.group(1), 'en': en.group(1) if en else ''}
-    return out
-
-
-WORDS = words()
-STORY = {p: read(f'game3d/story/{p}.js') for p in ['train', 'gate', 'office', 'transitions']}
-STORY_RESOLVED = {p: re.sub(r'\{([a-z_]+)\}', lambda m: WORDS.get(m.group(1), {}).get('ja', m.group(1)), s) for p, s in STORY.items()}
+WORDS = RUNTIME['source']['words']
+STORY_DATA = RUNTIME['source']['stories']
+STORY_RESOLVED = {p: re.sub(r'\{([a-z_]+)\}', lambda m: WORDS.get(m.group(1), {}).get('ja', m.group(1)),
+                          '\n'.join(story['texts'])) for p, story in STORY_DATA.items()}
 
 
 def speaker_places(who):
-    """Places where `who` speaks, with line counts, from the story files."""
-    out = {}
-    for p, s in STORY.items():
-        n = len(re.findall(r"['\"`]" + re.escape(who) + r": ", s)) + len(re.findall(r"say: '" + re.escape(who) + r"'", s))
-        if n:
-            out[p] = n
-    return out
+    """Places where `who` speaks, with line counts, from parsed story data."""
+    return {place: story['speakers'][who] for place, story in STORY_DATA.items() if who in story['speakers']}
 
 
 def place_of(p):
@@ -179,9 +141,9 @@ GAME_OF = {c['id']: c.get('game') or c['id'] for c in FACTS.get('characters', []
 NAMES = {}
 for c in FACTS.get('characters', []):
     NAMES[GAME_OF[c['id']]] = c.get('name')
-for p in STORY.values():
-    for m in re.finditer(r"^\s+([a-z0-9_]+): \{ name: '([^']+)'", p, re.M):
-        NAMES.setdefault(m.group(1), m.group(2))
+for story in STORY_DATA.values():
+    for who, name in story['names'].items():
+        NAMES.setdefault(who, name)
 NAMES.update({'ann': 'Station announcer', 'gatev': 'Gate voice', 'sales1': 'Sales (1)', 'sales2': 'Sales (2)',
               'commuter': 'Commuter', 'worker': 'Office workers', 'tama': 'Tama (cat)', 'briefcaseMan': 'Man with a briefcase',
               'yui': 'Yui', 'sota': 'Sota', 'music': 'Girl with headphones', 'reader': 'Man with a book',
@@ -308,9 +270,8 @@ for rid, r in sorted(REVIEWS.items(), key=lambda kv: kv[1].get('date', ''), reve
                 st, f"Context sheet in review {rid} ({r.get('status')})", source=r.get('title', ''), review=rid, view=img_view(im),
                 tags=['sheet'])
 
-# 2. the faces the game shows (ui.js PORTRAITS), with their status from docs/game/art-and-sound.md "Portraits"
+# 2. the faces the game shows (ui/portrait-data.js PORTRAITS), with their status from docs/game/art-and-sound.md "Portraits"
 #    (Id | Status: Approved / Under review / Provisional). A face cast.md "Portraits" marks "(to build)" stays provisional.
-ui_src = read('game3d/js/ui.js')
 ART_DOC = 'docs/game/art-and-sound.md'
 CAST_DOC = 'docs/game/cast.md'
 
@@ -340,9 +301,7 @@ for (cells, lineno) in md_table(ART_DOC, 'Portraits'):
     FMT[who] = {'status': st, 'line': text, 'lineno': lineno}
 TO_BUILD = {cells[0]: {f.replace('(to build)', '').strip() for f in cells[1].split(',') if 'to build' in f}
             for cells, _ in md_table(CAST_DOC, 'Portraits') if len(cells) > 1}
-portraits_body = js_object_body(ui_src, 'PORTRAITS') or ''
-game_faces = {m.group(1): re.findall(r"'([a-z]+)'", m.group(2)) for m in re.finditer(r"([a-z]+): \[([^\]]*)\]", portraits_body)}
-for who, faces in game_faces.items():
+def add_game_portrait(who, face):
     f = FMT.get(who)
     bid = next((b for b, g in GAME_OF.items() if g == who), who)
     if f:
@@ -351,21 +310,23 @@ for who, faces in game_faces.items():
         ps = (BIBLE.get(bid) or {}).get('portrait_status')
         st = FACT_STATUS.get(ps, 'provisional')
         why = {'path': 'bible/facts.yaml', 'text': f"portrait_status: {ps} ({bid})"}
-    for face in faces:
-        p = f'game3d/assets/portraits/{who}-{face}.webp'
-        if not exists(p):
-            continue
-        fst, fwhy = st, why
-        if face in TO_BUILD.get(who, ()):
-            fst, fwhy = 'provisional', {'path': CAST_DOC, 'text': f"{who}: the {face} face is marked (to build)"}
-        src = f"Cut-out ({'rembg ISNet anime'}), face box in ui.js FACE"
-        if f:
-            src = f"{f['line'].rstrip('.')}. " + src
-        master = (BIBLE.get(bid) or {}).get('images') or []
-        if master:
-            src += f"; master {master[0][0]}"
-        add(f'portrait/{who}-{face}', 'portrait', f"{NAMES.get(who, who)}: {face}", [p], fst, fwhy, source=src, who=who,
-            used=portrait_used(who), view=img_view(p), tags=['in game'])
+    p = f'game3d/assets/portraits/{who}-{face}.webp'
+    if not exists(p):
+        return
+    fst, fwhy = st, why
+    if face in TO_BUILD.get(who, ()):
+        fst, fwhy = 'provisional', {'path': CAST_DOC, 'text': f"{who}: the {face} face is marked (to build)"}
+    src = f"Cut-out ({'rembg ISNet anime'}), face box in ui.js FACE"
+    if f:
+        src = f"{f['line'].rstrip('.')}. " + src
+    master = (BIBLE.get(bid) or {}).get('images') or []
+    if master:
+        src += f"; master {master[0][0]}"
+    add(f'portrait/{who}-{face}', 'portrait', f"{NAMES.get(who, who)}: {face}", [p], fst, fwhy, source=src, who=who,
+        used=portrait_used(who), view=img_view(p), tags=['in game'])
+
+
+register_runtime_assets(RUNTIME, add, add_game_portrait)
 
 # the in-game faces that also appear in a review get that review linked
 for rid, r in REVIEWS.items():
@@ -447,8 +408,7 @@ for p, who, desc, st in [('tools/characters/ref/eric-chibi-ref.png', 'eric', "J�
             quote('GUIDE.md', 'Chibi style references for 3D characters') or 'GUIDE.md', source=desc, who=who, view=img_view(p), tags=['chibi', '3D reference'])
 
 # ------------------------------------------------------------------ 3D models and animations
-CAST_SRC = read('game3d/js/cast.js')
-cast3d_on = re.findall(r"'([a-z]+)'", (re.search(r'CAST3D_ON\s*=\s*\[([^\]]*)\]', CAST_SRC) or [None, ''])[1] or '')
+cast3d_on = RUNTIME['source']['cast3d']
 meshy_q = quote('GUIDE.md', '3D character workflow (Jørgen, 2026-09-28')
 eric_model = (BIBLE.get('mc') or {}).get('model') or {}
 mio_model = (BIBLE.get('mio') or {}).get('model') or {}
@@ -482,12 +442,9 @@ for p in ls('legacy/side/flat/meshy', r'\.glb$') + ls('legacy/side/hd2d/figures/
         source='Meshy parts round 14b' if 'flat' in p else 'HD-2D figure test', who='mio', view={'type': 'glb', 'src': p})
 
 # code-built chibis (cast.js PEOPLE, avatar.js buildEric, train/people.js passengers and the cat)
-people_body = js_object_body(CAST_SRC, 'PEOPLE') or ''
-code_files = {f: read(f) for f in ls('game3d/js/places', r'\.js$') + ls('game3d/js/scenes', r'\.js$')}
 fmt_gone = quote('docs/game/cast.md', 'Left from before the B2 team was settled')
-for m in re.finditer(r'^  ([a-zA-Z]+): \((?:i = 0)?\) => \{\n((?:    .*\n)*?)    (?:const r|return)', people_body, re.M):
-    pid, comment = m.group(1), re.findall(r'//\s*(.*)', m.group(2))
-    used = sorted({place_of(os.path.splitext(os.path.basename(f))[0]) for f, s in code_files.items() if f'PEOPLE.{pid}(' in s})
+for pid, person in RUNTIME['source']['people'].items():
+    comment, used = person['comments'], person['used']
     if pid == 'worker':
         for i in range(7):
             add(f'model/chibi-worker-{i}', 'model', f'Office worker {i}', ['game3d/js/cast.js'], 'provisional',
@@ -558,19 +515,6 @@ anim('chibi-sit', None, 'Chibi sit and breathe (code)', ['game3d/js/train/people
      'train/people.js sit() and cast.js idle(): bent legs, hands in the lap, a slow breath', ['Seated passengers and office workers'], {'type': 'chibi', 'fn': 'kenji', 'play': 'sit'})
 
 # ------------------------------------------------------------------ rooms and props
-CONST = {'lobby': {'BZ': -0.55, 'Z': 4.5, 'X': 6.3}, 'office': {'CN': 0.2, 'CS': 2.4, 'Z0': -6.4}, 'train': {'LZ': 1.2, 'LX': 4.0, 'DOOR_X': 3.25}}
-
-
-def num(expr, consts):
-    expr = expr.strip()
-    if not re.fullmatch(r'[\sA-Z0-9_.+\-*/()]+', expr):
-        return None
-    try:
-        return float(eval(expr, {'__builtins__': {}}, consts))
-    except Exception:
-        return None
-
-
 rounds = sorted([d for d in ls('game3d/shots') if re.search(r'/round-\d+$', d)], key=lambda d: int(d.rsplit('-', 1)[1]))
 latest = rounds[-1] if rounds else None
 ROOMS = [
@@ -589,43 +533,15 @@ for rid, name, place, shot, view, src in ROOMS:
         source=src, place=place, used=[f'Place: {PLACES[place]}'], view=view or ({'type': 'image', 'src': sp} if sp else {}),
         thumb_from=sp if not view else None, note=f'Latest critic shot: {sp}' if sp else None, tags=['in game'])
 
-for f, pl, room in [('game3d/js/places/office.js', 'office', 'office'), ('game3d/js/places/lobby.js', 'gate', 'lobby'), ('game3d/js/places/train.js', 'train', 'train')]:
-    src = read(f)
-    consts = CONST['train' if room == 'train' else room]
-    for m in re.finditer(r"^\s+([a-z_0-9]+): \{ label: '([^']+)'(?:, verb: '[^']+')?, kind: '([^']+)', anchor: (v3|carPt)\(([^()]*(?:\([^()]*\))?[^()]*)\)", src, re.M):
-        tid, label, tkind, fn, args = m.groups()
-        if 'person' in tkind:
-            continue
-        parts = [a for a in re.split(r',\s*', args)]
-        anchor = [num(a, consts) for a in parts] if len(parts) == 3 else [None]
-        line = src[m.start():src.find('\n', m.end())]
-        am = re.search(r'\.\.\.at\(([^()]*)\)', line)
-        spot = None
-        if am:
-            sp = [num(a, consts) for a in am.group(1).split(',')]
-            if len(sp) >= 2 and None not in sp[:2]:
-                spot = sp[:2]
-        ok = None not in anchor and not (room == 'train' and abs(anchor[2]) > 1.5)   # the platform is outside the car model
-        view = {'type': 'room', 'room': room, 'anchor': anchor, 'spot': spot, 'small': 'small' in tkind} if ok else {'type': 'room', 'room': room}
-        add(f'prop/{pl}/{tid}', 'prop', label, [f], 'provisional', 'A named thing in the game (built in code); props are judged with their room',
-            source=f"{os.path.basename(f)} things.{tid}; geometry in {'scenes/' + room + '.js' if room != 'train' else 'train/car.js'}", place=pl,
-            used=[f"{PLACES[pl]}: tap target '{label}'" + (' (no marker)' if 'noMarker: true' in line else '')], view=view, tags=['in game', tkind])
-    # things whose anchor follows an object (a moving bag, the sign): list them without a close-up
-    for m in re.finditer(r"^\s+([a-z_0-9]+): \{ label: '([^']+)'(?:, verb: '[^']+')?, kind: '(thing[^']*)', anchor: \(", src, re.M):
-        tid, label, tkind = m.groups()
-        add(f'prop/{pl}/{tid}', 'prop', label, [f], 'provisional', 'A named thing in the game (built in code)', source=f"{os.path.basename(f)} things.{tid}",
-            place=pl, used=[f"{PLACES[pl]}: tap target '{label}'"], view={'type': 'room', 'room': room}, tags=['in game', tkind])
-
 # the reusable prop kit (props.js and friends): builders any place can call
 KIT = [('plant', 'Potted plant', 'props.js'), ('bench', 'Bench', 'props.js'), ('wallLamp', 'Wall lamp', 'props.js'), ('lampPost', 'Lamp post', 'props.js'),
        ('door', 'Door', 'props.js'), ('officeChair', 'Office chair', 'props.js'), ('monitor', 'Monitor', 'props.js'), ('desk', 'Desk with clutter', 'props.js'),
        ('filingCabinet', 'Filing cabinet', 'props.js'), ('shelf', 'Shelf with boxes', 'props.js'), ('pinboard', 'Pinboard', 'props.js'), ('clock', 'Wall clock', 'props.js'),
        ('briefcase', 'Briefcase', 'cast.js'), ('mug', 'Mug', 'cast.js'), ('phone', 'Phone', 'train/people.js'), ('book', 'Book', 'train/people.js')]
 for fn, label, mod in KIT:
-    src = read(f'game3d/js/{mod}')
-    if not re.search(r'export function ' + fn + r'\(', src):
+    if fn not in RUNTIME['source']['exportedFunctions'][f'game3d/js/{mod}']:
         continue
-    users = sorted({place_of(os.path.splitext(os.path.basename(f))[0]) for f, s in code_files.items() if re.search(r'\b' + fn + r'\(', s)})
+    users = RUNTIME['source']['sceneCalls'].get(fn, [])
     add(f'prop/kit/{fn}', 'prop', f'{label} (kit)', [f'game3d/js/{mod}'], 'provisional', 'Reusable builder in the game code; never put to Jørgen on its own',
         source=f'{mod} {fn}()', used=[f"Built in {', '.join(PLACES.get(u, u) for u in users)}"] if users else [], view={'type': 'kit', 'fn': fn}, tags=['kit', 'code-built'])
 
@@ -637,7 +553,7 @@ except Exception:
     pass
 MAN = {x['key']: x for x in manifest}
 VOICE_OK = {'mio': quote('GUIDE.md', 'Mio: voice A from legacy/proto2/voice-mio'), 'eric': quote('GUIDE.md', 'Eric uses voice design eric-2 with no accent')}
-js_all = '\n'.join(read(f) for f in ls('game3d/js', r'\.js$'))
+runtime_strings = set(RUNTIME['source']['strings'])
 
 
 def line_place(text):
@@ -678,7 +594,7 @@ for p in ls('game3d/audio', r'\.mp3$'):
             view={'type': 'audio', 'src': p}, text=m['text'], tags=['overheard'] if m.get('overheard') else None)
     else:
         who = key.split('-')[0]
-        ref = re.search(r"'" + re.escape(key) + r"'", js_all)
+        ref = key in runtime_strings
         add(f'voice/{key}', 'voice', key, [p], 'provisional' if ref else 'legacy',
             'Referenced by the game code' if ref else 'Not in game3d/audio/manifest.json and not referenced: an older take (edge-tts, game3d/tools/voices.py)',
             source='edge-tts (game3d/tools/voices.py LINES)', who=who if who in NAMES else None, used=['game3d/js'] if ref else [],
@@ -709,10 +625,8 @@ for p in ls('tools/voice-refs', r'\.(wav|mp3)$'):
 
 # music: the approved copies and the game's copies are the same files
 MUSIC_PLACE = {}
-mm = re.search(r'const MUSIC = \{([^}]*)\}', read('game3d/js/main.js'))
-if mm:
-    for k, v in re.findall(r"(\w+): '(\w+)'", mm.group(1)):
-        MUSIC_PLACE.setdefault(v, []).append(k)
+for place, track in RUNTIME['source']['music'].items():
+    MUSIC_PLACE.setdefault(track, []).append(place)
 tracks = {os.path.basename(x[0]): x for x in (FACTS.get('audio') or {}).get('tracks', [])}
 for p in ls('art/approved/music', r'\.mp3$') + ls('game3d/audio/music', r'\.mp3$'):
     name = os.path.splitext(os.path.basename(p))[0]
@@ -732,8 +646,7 @@ try:
     picks = json.load(open('tools/feel/picks.json'))
 except Exception:
     pass
-amb_src = read('game3d/js/ambience.js')
-beds = dict(re.findall(r"(\w+): '(bed_\w+)'", (re.search(r'const BEDS = \{([^}]*)\}', amb_src) or [None, ''])[1] or ''))
+beds = RUNTIME['source']['beds']
 for p in ls('game3d/audio/amb', r'\.mp3$'):
     name = os.path.splitext(os.path.basename(p))[0]
     places = [k for k, v in beds.items() if v == name]
@@ -741,16 +654,15 @@ for p in ls('game3d/audio/amb', r'\.mp3$'):
     add(f'ambience/{name}', 'ambience', name.replace('bed_', '').title() + ' bed', [p], 'provisional', 'Made by the feel agent; not reviewed by ear yet',
         source=(f'Stable Audio 3 take {pk[0]} (tools/feel/sa3_gen.py), levelled and looped by tools/feel/build_audio.py' if pk else 'tools/feel/build_audio.py'),
         place=next((pl for pl in places if pl in PLACES), None), used=[f'Looping bed in {pl}' for pl in places], view={'type': 'audio', 'src': p})
-sfx_src = read('game3d/js/sfx.js')
 kmap = {}
-for k, files in re.findall(r"^\s+(\w+): \{ f: \[([^\]]*)\]", sfx_src, re.M):
-    for f in re.findall(r"'([\w-]+)'", files):
-        kmap.setdefault(f, []).append(k)
+for kind, spec in RUNTIME['source']['sfx'].items():
+    for file in spec['f']:
+        kmap.setdefault(file, []).append(kind)
 for p in ls('game3d/audio/sfx', r'\.mp3$'):
     name = os.path.splitext(os.path.basename(p))[0]
     kinds = kmap.get(name, [])
-    calls = sorted({k for k in kinds if re.search(r"sfx\(['\"]" + k + r"['\"]", js_all)})
-    events = [pl for pl, body in re.findall(r"(\w+): \[((?:[^\[\]]|\[[^\]]*\])*)\]", amb_src) if f"f: '{name}'" in body]
+    calls = sorted(k for k in kinds if k in RUNTIME['source']['sfxCalls'])
+    events = [place for place, entries in RUNTIME['source']['events'].items() if any(event['f'] == name for event in entries)]
     used = ([f"sfx('{k}')" for k in calls] + [f'Ambience one-shot in {pl}' for pl in events]) or [f"Kind '{k}' in sfx.js" for k in kinds]
     pk = picks.get(name)
     add(f'sfx/{name}', 'sfx', name.replace('_', ' '), [p], 'provisional', 'Made by the feel agent; not reviewed by ear yet',
@@ -758,51 +670,39 @@ for p in ls('game3d/audio/sfx', r'\.mp3$'):
         used=used, view={'type': 'audio', 'src': p})
 
 # ------------------------------------------------------------------ UI icons (inline SVG in the game code)
-lang_src = read('game3d/js/lang.js')
-icon_body = js_object_body(lang_src, 'ICON') or ''
-for k, svg in re.findall(r"^\s+(\w+): '([^']*)'", icon_body, re.M):
+for k, svg in RUNTIME['source']['wordIcons'].items():
     w = WORDS.get(k, {})
     add(f'icon/word-{k}', 'icon', f"{w.get('ro', k)} {w.get('ja', '')}".strip(), ['game3d/js/lang.js'], 'provisional',
         'In the game; not reviewed as an icon set', source='Hand-drawn 24×24 line icon (lang.js ICON)',
         used=[f"Say menu and word chips for {w.get('ro', k)} ({w.get('en', '')})"], svg=f'<svg viewBox="0 0 24 24">{svg}</svg>', tags=['word'])
-emote_body = js_object_body(read('game3d/js/main.js'), 'EMOTE_SVG') or ''
-for k, svg in re.findall(r"^\s*'?([\w♪…]+)'?: '([^']*)'", emote_body, re.M):
+for k, svg in RUNTIME['source']['emotes'].items():
     add(f'icon/emote-{k}', 'icon', f'Emote: {k}', ['game3d/js/main.js'], 'provisional',
         quote('GUIDE.md', 'Over-head icons and labels (Jørgen)') or 'In the game', source='main.js EMOTE_SVG', used=['Over-head emote bubble (story hook `emote`)'],
         svg=f'<svg viewBox="0 0 24 24">{svg}</svg>', tags=['emote'])
-for f in ['game3d/js/ui.js', 'game3d/js/menu.js', 'game3d/js/engine.js', 'game3d/js/speech.js']:
-    src = read(f)
-    for m in re.finditer(r'<svg viewBox="0 0 (\d+) (\d+)"[^>]*>(.*?)</svg>', src):
-        before = src[max(0, m.start() - 200):m.start()]
-        before = before[before.rfind('\n') + 1:] if '\n' in before[-120:] else before
-        lab = (re.findall(r'aria-label="([^"]+)"', before) or re.findall(r'id="(\w+)"', before)
-               or re.findall(r"el\('\w+', '([\w ]+)'", before) or re.findall(r"const ([A-Za-z_]{3,})\s*=", before))
-        label = {'hchip icon': 'Pause menu (cog)', 'goalarrow': 'Goal arrow', 'MIC_SVG': 'Microphone', 'paw': 'Pet (paw)'}.get(lab[-1] if lab else '', lab[-1] if lab else 'Icon')
-        if label == 'icon':
-            label = 'Talk' if 'l-4 3.5' in m.group(3) else 'Use'
-        body = m.group(3)
-        if '${' in body:
-            continue
-        h = hashlib.sha1(body.encode()).hexdigest()[:6]
-        label = {'28b857': 'Close (cross)', '0ff963': 'Hear the word again', 'f4e55c': 'Use'}.get(h, label)
-        where = f'{os.path.basename(f)}: {label}'
-        dup = next((e for e in A.values() if e['kind'] == 'icon' and e['id'].endswith('-' + h)), None)
-        if dup:                               # the same drawing used in several places (the close cross)
-            if where not in dup['used']:
-                dup['used'].append(where)
-            if f not in dup['paths']:
-                dup['paths'].append(f)
-            continue
-        add(f"icon/{re.sub(r'[^a-z0-9]+', '-', label.lower()).strip('-')}-{h}", 'icon', label,
-            [f], 'provisional', 'In the game; not reviewed as an icon set', source=f'Inline SVG in {os.path.basename(f)}',
-            used=[where], svg=f'<svg viewBox="0 0 {m.group(1)} {m.group(2)}">{body}</svg>', tags=['hud'])
+for icon in RUNTIME['source']['icons']:
+    f, body = icon['file'], icon['body']
+    label = {'hchip icon': 'Pause menu (cog)', 'goalarrow': 'Goal arrow', 'MIC_SVG': 'Microphone', 'paw': 'Pet (paw)'}.get(icon['label'], icon['label'])
+    if label == 'icon':
+        label = 'Talk' if 'l-4 3.5' in body else 'Use'
+    h = hashlib.sha1(body.encode()).hexdigest()[:6]
+    label = {'28b857': 'Close (cross)', '0ff963': 'Hear the word again', 'f4e55c': 'Use'}.get(h, label)
+    where = f'{os.path.basename(f)}: {label}'
+    dup = next((e for e in A.values() if e['kind'] == 'icon' and e['id'].endswith('-' + h)), None)
+    if dup:                               # the same drawing used in several places (the close cross)
+        if where not in dup['used']:
+            dup['used'].append(where)
+        if f not in dup['paths']:
+            dup['paths'].append(f)
+        continue
+    add(f"icon/{re.sub(r'[^a-z0-9]+', '-', label.lower()).strip('-')}-{h}", 'icon', label,
+        [f], 'provisional', 'In the game; not reviewed as an icon set', source=f'Inline SVG in {os.path.basename(f)}',
+        used=[where], svg=f'<svg viewBox="0 0 {icon['width']} {icon['height']}">{body}</svg>', tags=['hud'])
 
 # ------------------------------------------------------------------ style presets
-style_src = read('game3d/js/style/index.js')
 rough = REVIEWS.get('style-rough') or {}
 rough_fb = (rough.get('feedback') or {}).get('comment', '')
-for m in re.finditer(r"\n  (\d+): \{\n    name: '([^']+)',\n    note: '([^']+)'", style_src):
-    n, name, note = m.groups()
+for n, style in RUNTIME['source']['styles'].items():
+    name, note = style['name'], style['note']
     shot = f'game3d/design/style/rough/style-{n}.jpg'
     in_rough = exists(shot) and any(o['id'] == n for o in rough.get('options', []))
     st, why = ('candidate', 'A look from the style study, added after the rough round; not put to Jørgen yet')

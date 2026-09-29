@@ -6,6 +6,8 @@
 //   Points stop at the threshold of the first step whose scene hasn't played, so nobody can be ground past it.
 //   Neglect never lowers a bond.
 
+import { bondGate } from './gates.js';
+
 export const STEPS = [
   { n: 0, name: 'Stranger' },
   { n: 1, name: 'Known' },
@@ -72,7 +74,7 @@ export class Bonds {
   setDay(day) { this.day = day; for (const q of Object.values(this.p)) this.roll(q); }
 
   // ---------- steps ----------
-  gate(id, n) { return (this.cast[id] && this.cast[id].gates && this.cast[id].gates[n]) || `bond${n}_${id}`; }
+  gate(id, n) { return bondGate(id, n, this.cast[id]?.gates); }
   // the most points they can hold now: the threshold of the first step whose scene hasn't played
   cap(id) {
     for (const s of STEPS) if (s.scene && !this.flag(this.gate(id, s.n))) return s.pts;

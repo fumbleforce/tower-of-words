@@ -11,9 +11,11 @@
 // they're listed as pending and don't fail the check; once the game matches, the check asks for the mark to go.
 // Exit code 1 and a list of differences on drift; "facts check: ok" otherwise.
 // Only facts that the game itself can confirm are checked. Prose (ages, motives, routines) isn't.
+import { DEFAULT_SPEAKERS, PORTRAITS, ITEMS, PLACE_DETAILS, SHARED_THINGS, isEngineFlag } from '../../game3d/js/narrative/contracts.js';
+import { storyBondGate } from '../../game3d/js/bonds/gates.js';
 import fs from 'node:fs';
 import path from 'node:path';
-import { pathToFileURL } from 'node:url';
+import { pathToFileURL, fileURLToPath } from 'node:url';
 
 const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname), '../..');
 const G = (p) => path.join(ROOT, 'game3d', p);
@@ -64,57 +66,29 @@ const same = (a, b) => JSON.stringify([...a].sort()) === JSON.stringify([...b].s
 const val = (c) => (NONE.test((c || '').trim()) ? '' : (c || '').trim());
 
 // ------------------------------------------------------------------ reading the game
-// Story files are plain data modules, so they're imported. The engine's tables (default speakers, portraits,
-// things, spots and zones in each place) are pulled out of the source the way game3d/tools/story-check.mjs does.
+// Story files and engine tables (speakers, portraits, items and place registrations) are imported as data.
 const STORY = { train: 'train', gate: 'gate', lift: 'transitions', office: 'office' };   // place -> story file
-const PLACE_JS = { train: 'places/train.js', gate: 'places/lobby.js', office: 'places/office.js' };
+export async function readGame(load = file => import(pathToFileURL(G(file)).href)) {
+  const defaults = DEFAULT_SPEAKERS, portraits = PORTRAITS, items = ITEMS;
+  const { CAST } = await load('js/bonds/cast.js');
+  const { WORDS } = await load('js/lang.js');
 
-function objectLiteral(src, start) {
-  const i = src.indexOf(start);
-  if (i < 0) return null;
-  let d = 0; const j = src.indexOf('{', i);
-  for (let k = j; k < src.length; k++) { if (src[k] === '{') d++; if (src[k] === '}' && !--d) return new Function(`return (${src.slice(j, k + 1)});`)(); }
-  return null;
-}
-function block(src, start) {   // the source text of `start {...}`, braces balanced
-  const i = src.indexOf(start); if (i < 0) return '';
-  let d = 0; const j = src.indexOf('{', i);
-  for (let k = j; k < src.length; k++) { if (src[k] === '{') d++; if (src[k] === '}' && !--d) return src.slice(j + 1, k); }
-  return '';
-}
-// top-level keys of an object literal's source (skips anything nested in brackets)
-function topKeys(body) {
-  const out = []; let d = 0, tok = '';
-  for (let k = 0; k < body.length; k++) {
-    const c = body[k];
-    if ('{[('.includes(c)) d++; else if ('}])'.includes(c)) d--;
-    if (d === 0 && c === ':') { const m = /(\w+)\s*$/.exec(tok); if (m) out.push(m[1]); tok = ''; continue; }
-    if (d === 0 && c === ',') tok = ''; else if (d === 0) tok += c;
-  }
-  return out;
-}
-
-async function readGame() {
-  const runner = read(G('js/runner.js'));
-  const defaults = objectLiteral(runner, 'const DEFAULT_SPEAKERS = {');
-  const portraits = objectLiteral(read(G('js/ui.js')), 'export const PORTRAITS = {');
-  const items = objectLiteral(read(G('js/sim.js')), 'export const ITEMS = {');
-  const { CAST } = await import(pathToFileURL(G('js/bonds/cast.js')).href);
-  const { WORDS } = await import(pathToFileURL(G('js/lang.js')).href);
-
-  // what stands in each place: things (with their engine label and kind), spots and zones
-  const places = {};
-  for (const [place, file] of Object.entries(PLACE_JS)) {
-    const src = read(G('js/' + file));
-    const things = {};
-    for (const m of block(src, 'const things = {').matchAll(/^\s+(\w+): \{ label: (?:'([^']*)'|"([^"]*)"),(?: verb: '[^']*',)? kind: '([^']*)'/gm)) things[m[1]] = { label: m[2] ?? m[3], kind: m[4] };
-    places[place] = { things, spots: topKeys(block(src, 'const spots = {')), seats: topKeys(block(src, 'const seats = {')), zones: topKeys(block(src, 'const zones = {')) };
-  }
-  // main.js adds Mio to every place
-  for (const m of read(G('js/main.js')).matchAll(/place\.things\.(\w+) = place\.things\.\1 \|\| \{ label: '([^']+)', kind: '([^']+)'/g)) for (const P of Object.values(places)) P.things[m[1]] ||= { label: m[2], kind: m[3] };
+  // Labels come from the same declarations spread into the actual factories.
+  const places = Object.fromEntries(Object.entries(PLACE_DETAILS).map(([id, details]) => {
+    const things = { ...details.things };
+    for (const [key, shared] of Object.entries(SHARED_THINGS)) things[key] ||= shared;
+    return [id, {
+      things: Object.fromEntries(Object.entries(things).map(([key, { label, kind }]) => [key, { label, kind }])),
+      spots: details.spots, seats: details.seats, zones: details.zones,
+    }];
+  }));
 
   const stories = {}, takes = {}, nodes = {}, flagsSet = new Set();
-  const lineSpeakers = (steps, out = new Set(), types = []) => {
+  for (const [place, file] of Object.entries(STORY)) stories[place] = (await load(`story/${file}.js`)).default;
+  const order = Object.keys(STORY).filter(place => STORY[place] !== 'transitions');
+  const storiesThrough = Object.fromEntries(order.map((place, i) =>
+    [place, order.slice(0, i + 1).map(id => stories[id])]));
+  const lineSpeakers = (steps, out = new Set(), types = [], gateStories = []) => {
     if (!Array.isArray(steps)) return { out, types };
     for (const s of steps) {
       if (typeof s === 'string') { const m = /^(\w+): /.exec(s); if (m) out.add(m[1]); continue; }
@@ -123,14 +97,14 @@ async function readGame() {
       if (s.do === 'type') types.push({ word: s.word, from: s.from || '' });
       if (s.set) for (const k of typeof s.set === 'string' ? [s.set] : Object.keys(s.set)) flagsSet.add(k);
       if (typeof s.inc === 'string') flagsSet.add(s.inc);
-      for (const k of ['then', 'else', 'lines']) lineSpeakers(s[k], out, types);
-      if (s.choice) for (const o of s.choice) { if (o.set) for (const k of typeof o.set === 'string' ? [o.set] : Object.keys(o.set)) flagsSet.add(k); lineSpeakers(o.then, out, types); }
+      if (s.do === 'bondStep' && s.who && s.to) flagsSet.add(storyBondGate(CAST, gateStories, s.who, s.to));
+      for (const k of ['then', 'else', 'lines']) lineSpeakers(s[k], out, types, gateStories);
+      if (s.choice) for (const o of s.choice) { if (o.set) for (const k of typeof o.set === 'string' ? [o.set] : Object.keys(o.set)) flagsSet.add(k); lineSpeakers(o.then, out, types, gateStories); }
     }
     return { out, types };
   };
   for (const [place, file] of Object.entries(STORY)) {
-    const st = (await import(pathToFileURL(G(`story/${file}.js`)).href)).default;
-    stories[place] = st;
+    const st = stories[place];
     const ids = new Set();
     const walk = (steps) => {
       if (!Array.isArray(steps)) return;
@@ -144,14 +118,14 @@ async function readGame() {
     };
     // every node of the file, with who speaks in it and the words it teaches
     const N = (nodes[file + '.js'] = {});
-    for (const [n, steps] of Object.entries(st.nodes || {})) { walk(steps); const r = lineSpeakers(steps); N[n] = { speakers: r.out, types: r.types }; }
-    for (const a of st.ambient || []) { walk(a.lines); const r = lineSpeakers(a.lines); N['ambient:' + a.id] = { speakers: r.out, types: r.types }; if (a.set) flagsSet.add(a.set); }
-    if (file === 'transitions') for (const [slot, v] of Object.entries(st)) if (v && typeof v === 'object' && slot !== 'speakers') for (const part of ['walk', 'ride', 'arrive']) if (Array.isArray(v[part]) && v[part].length) { walk(v[part]); const r = lineSpeakers(v[part]); N[`${slot}.${part}`] = { speakers: r.out, types: r.types }; }
+    for (const [n, steps] of Object.entries(st.nodes || {})) { walk(steps); const r = lineSpeakers(steps, undefined, undefined, storiesThrough[place]); N[n] = { speakers: r.out, types: r.types }; }
+    for (const a of st.ambient || []) { walk(a.lines); const r = lineSpeakers(a.lines, undefined, undefined, storiesThrough[place]); N['ambient:' + a.id] = { speakers: r.out, types: r.types }; if (a.set) flagsSet.add(a.set); }
+    if (file === 'transitions') for (const [slot, v] of Object.entries(st)) if (v && typeof v === 'object' && slot !== 'speakers') for (const part of ['walk', 'ride', 'arrive']) if (Array.isArray(v[part]) && v[part].length) { walk(v[part]); const [from, to] = slot.split('_to_'); const r = lineSpeakers(v[part], undefined, undefined, storiesThrough[part === 'arrive' ? to : from]); N[`${slot}.${part}`] = { speakers: r.out, types: r.types }; }
     for (const key of Object.keys(st.on || {})) { const m = /^(?:talk|near|say:\w+|give:[\w*]+):(\w+)$/.exec(key); if (m) ids.add(m[1]); }
     takes[place] = ids;
   }
   // built-in flags the engine sets (story/FORMAT.md)
-  const builtIn = /^(know_|typed_|talked_|met_|rem_|fact_|bond_|step_|bondready_|rel_|register_|gave_|gift_|bought_|practice_|voiced_)|^(place|period|day|cant_buy|gift_reaction)$/;
+  const builtIn = { test: isEngineFlag };
 
   // a person is anyone the engine can name or show; objects (doors, the copier) drop out here
   const personIn = (place) => Object.entries((places[place] || {}).things || {}).filter(([, t]) => /person/.test(t.kind)).map(([k]) => k);
@@ -333,7 +307,7 @@ function checkSystems(game) {
   for (const r of rows) {
     const it = id(r.Id); seen.add(it);
     const g = game.items[it];
-    if (!g) { bad(file, `item \`${it}\` isn't in game3d/js/sim.js ITEMS`); continue; }
+    if (!g) { bad(file, `item \`${it}\` isn't in game3d/js/gameplay/items.js ITEMS`); continue; }
     if (val(r.Name) !== g.name) bad(file, `\`${it}\` is called "${g.name}" in the game, "${val(r.Name)}" in the doc`);
     if (+val(r.Price).replace(/[^\d]/g, '') !== g.price) bad(file, `\`${it}\` costs ¥${g.price} in the game, ${val(r.Price)} in the doc`);
   }
@@ -391,6 +365,7 @@ function checkStories(game) {
 }
 
 // ------------------------------------------------------------------ run
+if (process.argv[1] === fileURLToPath(import.meta.url)) {
 const game = await readGame();
 if (DUMP) {
   console.log('People:', [...game.people].join(', '));
@@ -415,3 +390,4 @@ for (const [area, fn] of [['cast', checkCast], ['places', checkPlaces], ['words'
 if (pending.length) { console.log(`\nPending (decided, not done yet):`); for (const p of pending) console.log('  ' + p); }
 if (problems) { console.log(`\nfacts check: FAILED, ${problems} difference(s) between docs/game/ and the game`); process.exit(1); }
 console.log(`\nfacts check: ok${pending.length ? ` (${pending.length} pending)` : ''}`);
+}

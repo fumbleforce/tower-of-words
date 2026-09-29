@@ -1,0 +1,180 @@
+[
+  {
+    "id_": "prop/gate/bowl",
+    "kind": "prop",
+    "name": "Tama's bowl",
+    "paths": [
+      "game3d/js/places/lobby.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code); props are judged with their room",
+    "source": "lobby.js things.bowl; geometry in scenes/lobby.js",
+    "place": "gate",
+    "used": [
+      "Lobby and gate: tap target 'Tama's bowl' (no marker)"
+    ],
+    "view": {
+      "type": "room",
+      "room": "lobby",
+      "anchor": [
+        3.2,
+        0.3,
+        0.010000000000000009
+      ],
+      "spot": [
+        3.2,
+        0.55
+      ],
+      "small": true
+    },
+    "tags": [
+      "in game",
+      "thing small"
+    ]
+  },
+  {
+    "id_": "prop/office/chief_desk",
+    "kind": "prop",
+    "name": "Mr. Mori's desk",
+    "paths": [
+      "game3d/js/places/office.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code); props are judged with their room",
+    "source": "office.js things.chief_desk; geometry in scenes/office.js",
+    "place": "office",
+    "used": [
+      "B2 office: tap target 'Mr. Mori's desk' (no marker)"
+    ],
+    "view": {
+      "type": "room",
+      "room": "office",
+      "anchor": [
+        1.55,
+        0.8,
+        -3.36
+      ],
+      "spot": [
+        2.3,
+        -2.55
+      ],
+      "small": true
+    },
+    "tags": [
+      "in game",
+      "thing small"
+    ]
+  },
+  {
+    "id_": "prop/office/covered",
+    "kind": "prop",
+    "name": "Covered desk",
+    "paths": [
+      "game3d/js/places/office.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code); props are judged with their room",
+    "source": "office.js things.covered; geometry in scenes/office.js",
+    "place": "office",
+    "used": [
+      "B2 office: tap target 'Covered desk'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "office"
+    },
+    "tags": [
+      "in game",
+      "thing small"
+    ]
+  },
+  {
+    "id_": "prop/office/covered_monitor",
+    "kind": "prop",
+    "name": "Covered monitor",
+    "paths": [
+      "game3d/js/places/office.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code); props are judged with their room",
+    "source": "office.js things.covered_monitor; geometry in scenes/office.js",
+    "place": "office",
+    "used": [
+      "B2 office: tap target 'Covered monitor'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "office"
+    },
+    "tags": [
+      "in game",
+      "thing small"
+    ]
+  },
+  {
+    "id_": "prop/office/toilet_f",
+    "kind": "prop",
+    "name": "Women's toilet",
+    "paths": [
+      "game3d/js/places/office.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code); props are judged with their room",
+    "source": "office.js things.toilet_f; geometry in scenes/office.js",
+    "place": "office",
+    "used": [
+      "B2 office: tap target 'Women's toilet'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "office",
+      "anchor": [
+        5.2,
+        1.0,
+        2.4
+      ],
+      "spot": [
+        5.2,
+        1.85
+      ],
+      "small": true
+    },
+    "tags": [
+      "in game",
+      "thing small"
+    ]
+  },
+  {
+    "id_": "prop/office/toilet_m",
+    "kind": "prop",
+    "name": "Men's toilet",
+    "paths": [
+      "game3d/js/places/office.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code); props are judged with their room",
+    "source": "office.js things.toilet_m; geometry in scenes/office.js",
+    "place": "office",
+    "used": [
+      "B2 office: tap target 'Men's toilet'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "office",
+      "anchor": [
+        2.6,
+        1.0,
+        2.4
+      ],
+      "spot": [
+        2.6,
+        1.85
+      ],
+      "small": true
+    },
+    "tags": [
+      "in game",
+      "thing small"
+    ]
+  }
+]

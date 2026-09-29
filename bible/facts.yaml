@@ -1,0 +1,785 @@
+# Hand-kept facts for the world bible: only what has no other source in the repo.
+#
+# Everything else is read live by the bible page (bible/live.js) from the files that own it:
+#   GUIDE.md                        how we work and Jørgen's feedback (quoted, never copied here)
+#   docs/game/                      what the game is: people (cast.md), places, storylines (stories/), words,
+#                                   which portraits are approved (art-and-sound.md); quoted, never copied here
+#   game3d/story/*.js, VOICE.md     the cast in play, their lines, the words and commands they teach
+#   game3d/js/lang.js               every Japanese word in the game
+#   game3d/js/ui.js, game3d/assets/portraits/   the portraits and expressions the game shows
+#   game3d/js/cast.js               which 3D models load
+#   art/approved/README.md          approved art
+#   notes/RELATIONSHIPS.md, notes/ISLAND.md, notes/walkthrough/   design, not approved
+#   game3d/build.json and the pushed build on GitHub Pages
+#   tools/voice-refs/               voice reference clips
+#
+# A fact is [text, status, source]. Status: approved (Jørgen decided it), review (decided once, now being
+# looked at again), draft (written or proposed by an agent, or not picked), rejected, legacy (from an
+# earlier version of the game: the VN, the Godot island slice, the MVP, pixel art; kept for history).
+# A source is a repo path; "path ~ phrase" finds the line with that phrase, so the link survives edits.
+# {q: "path ~ phrase", s: status} is a live quote: the page shows the sentence from that file itself.
+
+characters:
+
+  # ------------------------------------------------------------------ in the game (day 1)
+  - id: mc
+    name: Eric
+    game: eric                       # speaker id in game3d/story/*.js, ui.js PORTRAITS/FACE and assets/portraits/
+    story_name: Eric                 # bold name in VOICE.md
+    group: B2 IT support
+    approved_art: mc                 # art/approved/<folder>/ lines in art/approved/README.md
+    voice_prefix: [eric, player]
+    walkthrough: null
+    portrait_status: review
+    portrait_note: ["Under review (Jørgen, 2026-09-28, relayed by the main agent): the old gallery portraits \"look more in line with the rest than our current MC, which is quite a different style.\" The game keeps using eric-v2-734 for now; the old style may come back through a new art round, so the older portraits below are kept, not retired.", review, "docs/game/art-and-sound.md ~ eric-v2-734 (seed 734 v2) was approved"]
+    decisions:
+      - {q: "docs/game/cast.md ~ Speaks English, and barely any Japanese", s: approved}
+      - {q: "docs/game/setting.md ~ Eric is a Western IT support engineer from Norway #2", s: approved}
+      - {q: "docs/game/art-and-sound.md ~ eric-v2-734 (seed 734 v2) was approved", s: review}
+      - {q: "art/PROMPTS.md ~ Red rim light (2026-09-28, Eric's portrait)", s: approved}
+      - {q: "docs/game/art-and-sound.md ~ Eric: voice design eric-2 with no accent", s: approved}
+      - {q: "art/SOUND.md ~ Eric uses voice design eric-2 with no accent", s: approved}
+      - {q: "GUIDE.md ~ 3D character workflow (Jørgen, 2026-09-28; worked first try for Eric)", s: approved}
+    images:
+      - [art/approved/mc/eric-v2-734.webp, "eric-v2-734, the portrait the game's cut-outs come from", review]
+      - [art/approved/mc/mc-it-guy-after.webp, "M-02-it-guy-601, the first approved portrait (eyes closed, red rim light). Replaced on 2026-09-28, now back under review for its style", review]
+      - [legacy/proto2/gallery/M-02-it-guy-601.webp, "M-02-it-guy-601 as picked on the chooser", review]
+      - [legacy/proto2/gallery/A-mc-neutral.webp, "A-mc gallery set: neutral (a younger, earlier main character)", review]
+      - [legacy/proto2/gallery/A-mc-smile.webp, "A-mc gallery set: smile", review]
+      - [legacy/proto2/gallery/A-mc-nervous.webp, "A-mc gallery set: nervous", review]
+      - [legacy/proto2/gallery/A-mc-magic.webp, "A-mc gallery set: magic", review]
+    model: {dir: art/approved/mc/meshy, preview: art/approved/mc/meshy/preview.png, status: approved, src: "GUIDE.md ~ 3D character workflow", note: "Meshy task 01a0e731-1faf-70a7-98e4-c0f2d163c246. The game loads its own copy from game3d/assets/eric-meshy/. Approved (Jørgen, 2026-09-28: \"of course we need Mio and Eric's Meshy models\")."}
+    facts:
+      - ["Portrait eric-v2-734 (Jørgen, 2026-09-28: \"734 is best\"): the M-02-it-guy-601 design with his eyes open and without the red rim light. RDBT, seed 734.", review, "game3d/assets/portrait-candidates/eric-sheet-v2.png"]
+      - ["Tired face: tired-v3 seed 811 (Jørgen: \"811 looks pretty tired, like -_-\"). Face-only repaint of 734 with weary half-lidded eyes and a flat mouth.", approved, "game3d/assets/portrait-candidates/eric-tired-v3.png"]
+      - ["His age isn't written in any current file. The old approved portrait prompt said 34; tools/production.py said 29.", draft, "tools/production.py ~ 29-year-old Nordic man"]
+    history:
+      - ["Chooser, main character options 01 to 10 (M-02 picked)", legacy/proto2/gallery/index.html, legacy]
+      - ["Headroom fix of M-02-it-guy-601", legacy/proto2/cast-fixed/index.html, legacy]
+      - ["Portrait remake with open eyes, round 1 (731 to 734)", game3d/assets/portrait-candidates/eric-sheet.png, rejected]
+      - ["Portrait remake v2, no red rim light (734 picked)", game3d/assets/portrait-candidates/eric-sheet-v2.png, review]
+      - ["Tired face v3 (811 picked)", game3d/assets/portrait-candidates/eric-tired-v3.png, approved]
+      - ["Natural poses (neck, coffee)", game3d/assets/portrait-candidates/eric-poses-sheet.png, rejected]
+    rejected:
+      - ["The first open-eyed picks 731 and 734 (red rim light), and the v2 tired face: \"happy and drunk\".", rejected, game3d/assets/portrait-candidates/eric-sheet.png]
+      - ["Natural-pose portraits (neck, coffee): \"sides shaved too close and too dark, the top reads like a furry hat\".", rejected, "docs/game/art-and-sound.md ~ The natural-pose portraits (neck, coffee) were rejected"]
+      - ["A Nordic accent on his voice: \"not any better, just drop it, English accent instead\".", rejected, "art/SOUND.md ~ just drop it, English accent instead"]
+      - ["The other nine main-character options on the chooser.", rejected, "legacy/notes/GUIDE-history.md ~ main character = option 02"]
+    legacy:
+      - ["VN era: \"the tired Scandinavian IT guy\", a new foreign hire in Planning 7 with a secret magic; the MVP called him エリック.", legacy, "legacy/notes/GUIDE-history.md ~ the tired Scandinavian IT guy"]
+      - ["VN era: \"keep him replaceable\" in the sprite and image pipeline.", legacy, "legacy/notes/GUIDE-history.md ~ Main character (2026-09-25)"]
+
+  - id: mio
+    name: Mio
+    game: mio
+    story_name: Mio
+    group: B2 IT support
+    approved_art: mio
+    voice_prefix: [mio]
+    walkthrough: notes/walkthrough/mio.md
+    portrait_status: approved
+    decisions:
+      - {q: "docs/game/cast.md ~ On the train she's a little reluctant #2", s: approved}
+      - {q: "docs/game/cast.md ~ Hair dark green bordering on black #1", s: approved}
+      - {q: "docs/game/cast.md ~ 3D: Jørgen's Meshy model; game colours #1", s: approved}
+      - {q: "docs/game/cast.md ~ Eyes light tan, not brown #1", s: approved}
+      - {q: "GUIDE.md ~ What works (Jørgen, 2026-09-28", s: approved}
+      - {q: "GUIDE.md ~ Mio: voice A from legacy/proto2/voice-mio", s: approved}
+      - {q: "GUIDE.md ~ Low-poly Mio paused", s: approved}
+    images:
+      - [art/approved/mio/mio-after.webp, "gallery B-mio (RDBT) with headroom, the portrait her game cut-outs come from", approved]
+      - [game3d/assets/portrait-candidates/mio-expressions-v3-sheet.png, "Expression sheet v3 (the six faces in the game)", approved]
+    model: {dir: art/approved/mio/meshy, preview: art/approved/mio/meshy/base-clean.png, status: approved, src: "docs/game/art-and-sound.md ~ Eric and Mio are Meshy models", note: "Meshy Neon Bun Guardian biped: six animation GLBs, base-clean.png and base-clean.json. The game loads its own copy. Only colour tweaks allowed."}
+    facts:
+      - ["Portrait details: light tan eyes (about #dbcdb6) and thin taupe-grey glasses frames (about #574b49). Face repaints keep her original frames pixel for pixel and colour-match the irises (tools/portrait_candidates.py).", approved, "art/approved/mio/mio-after.webp"]
+    history:
+      - ["Art production gallery (B-mio)", legacy/proto2/gallery/index.html, legacy]
+      - ["Headroom fix", legacy/proto2/cast-fixed/index.html, legacy]
+      - ["Mio's voice, all lines in voice A", legacy/proto2/voice-mio/index.html, approved]
+      - ["Expression sheet v1", game3d/assets/portrait-candidates/mio-expressions-sheet.png, rejected]
+      - ["Expression sheet v3", game3d/assets/portrait-candidates/mio-expressions-v3-sheet.png, approved]
+      - ["Pixel Mio: Claude by hand, Retro Diffusion, PixelLab", legacy/proto2/pixel-compare/index.html, legacy]
+      - ["Low-poly Mio by hand, rounds 1 to 14b (paused)", legacy/side/flat/index.html, legacy]
+    rejected:
+      - ["The charcoal hoodie in the game colours: \"the hoodie is sampled from the portrait too\".", rejected, "docs/game/cast.md ~ 3D: Jørgen's Meshy model; game colours"]
+      - ["Shrinking or recolouring a generated mesh (TRELLIS and similar): \"simplifying an inherently broken model is a stupid way to go about it.\"", rejected, "GUIDE.md ~ simplifying an inherently broken model"]
+      - ["Low-poly Mio round 9: \"a lot worse… triangles facing inward giving her a bunch of dents, totally not usable\".", rejected, "legacy/notes/GUIDE-history.md ~ Round 9 verdict"]
+      - ["Claude's hand-coded pixel Mio: \"looks like a big helmet, face barely there\".", rejected, "legacy/notes/GUIDE-history.md ~ Claude's hand-coded pixel Mio was rejected"]
+      - ["Retro Diffusion's 48 px Mio: \"looks very shit, her eyes are awful\".", rejected, "legacy/notes/GUIDE-history.md ~ Retro Diffusion's 48 px Mio"]
+      - ["The first casting voice (mio-3): its lines sometimes drifted male.", rejected, "GUIDE.md ~ The original casting clip (mio-3) is retired"]
+    legacy:
+      - ["Game3d's first brief had Mio as the player; she has been an NPC since Eric became the player.", legacy, legacy/side/flat/index.html]
+      - ["VN and mini-stories: Planning 7's programmer, hates keigo, scared of the closure; a polite request to her gets 「……なんで敬語？」.", legacy, "notes/mini-stories.md ~ she hates keigo"]
+      - ["Pixel sprite (48 px, PixelLab i02) and the low-poly hand-built rounds.", legacy, "legacy/notes/GUIDE-history.md ~ i02-nosleepy-48"]
+
+  - id: mori
+    name: Mr. Mori
+    game: mori
+    story_name: Mr. Mori
+    group: B2 IT support
+    voice_prefix: [mori]
+    walkthrough: notes/walkthrough/mori.md
+    portrait_status: draft
+    portrait_note: ["Provisional: seed 713 (neutral, smile, flustered) is the art agent's pick, used until Jørgen approves or replaces it.", draft, "TODO.md ~ Portraits in use provisionally"]
+    decisions:
+      - {q: "docs/game/cast.md ~ The B2 team is Eric, Mio, Mori and Kenji #1", s: approved}
+    images:
+      - [game3d/assets/portrait-candidates/mori-sheet.png, "Portrait candidates (713 in use)", draft]
+      - [game3d/assets/characters/mori/base.webp, "3D test through the Meshy workflow: the chibi picture it started from", draft]
+    model3d: {id: mori, dir: game3d/assets/characters/mori, note: "Meshy test (commit b01e6b0). Loads only with ?cast3d=mori until approved."}
+    history:
+      - ["Portrait candidates", game3d/assets/portrait-candidates/mori-sheet.png, draft]
+
+  - id: kenji
+    name: Kenji
+    game: kenji
+    story_name: Kenji
+    group: B2 IT support
+    voice_prefix: [kenji]
+    portrait_status: rejected
+    portrait_note: ["Not approved (Jørgen, 2026-09-28: \"Kenji's portrait and profile is not approved\"). The game shows seed 711 as a stand-in; new concept art is coming.", rejected, "docs/game/art-and-sound.md ~ Provisional (seed 711"]
+    decisions:
+      - {q: "docs/game/cast.md ~ Look: about 21, inexperienced", s: approved}
+    images:
+      - [game3d/assets/portrait-candidates/kenji-sheet.png, "Portrait candidates (711, not approved)", rejected]
+    rejected:
+      - ["The 711 portrait and the old profile (29, a different job).", rejected, "docs/game/art-and-sound.md ~ Provisional (seed 711"]
+
+  - id: emi
+    name: Emi
+    game: emi
+    story_name: Emi
+    group: B2 IT support
+    approved_art: emi
+    voice_prefix: [emi]
+    portrait_status: approved
+    decisions:
+      - {q: "docs/game/cast.md ~ On day 1 she is upstairs at head office all day #1", s: approved}
+      - {q: "docs/game/cast.md ~ A cast member like any other", s: approved}
+      - {q: "art/PROMPTS.md ~ Emi: the approved round-3 RDBT seed 41 design", s: approved}
+    images:
+      - [art/approved/emi/emi-after.webp, "Round-3 RDBT seed 41 with headroom, the portrait her game cut-out comes from", approved]
+    facts:
+      - ["Hair colour: 'auburn' drew wine-red under firework light and 'light copper-brown' drew caramel; the approved colour is between.", draft, "tools/imagegen/seed.py ~ the approved colour is between"]
+    history:
+      - ["Emi redesign, round 3 (seed 41 picked)", legacy/proto2/emi2/index.html, approved]
+      - ["Sayaka became Emi (cast revisions)", legacy/proto2/cast-mappa2/index.html, legacy]
+      - ["Headroom fix", legacy/proto2/cast-fixed/index.html, legacy]
+    rejected:
+      - ["The Nova versions on the redesign page, and seed 42.", rejected, legacy/proto2/emi2/index.html]
+    legacy:
+      - ["VN era: leads Planning 7 and hands out the copier job (「……もう？」). The MVP called the team Systems Support 7.", legacy, "legacy/notes/GUIDE-history.md ~ First task from Emi"]
+      - ["Round-3 expression set and the island-slice dialogue sprites.", legacy, legacy/proto2/emi2/index.html]
+
+  - id: hamada
+    name: Mr. Hamada
+    game: kuroda
+    story_name: Mr. Hamada
+    group: Accounts
+    portrait_status: draft
+    portrait_note: ["Provisional: seed 721 (neutral, sleepy, panicked). GUIDE has \"Hamada is fine\", said about the character as he is; FORMAT.md still lists his faces as provisional.", draft, "docs/game/cast.md ~ Look: chibi figure in code, and provisional portraits"]
+    decisions:
+      - {q: "docs/game/cast.md ~ Look: chibi figure in code, and provisional portraits #2", s: approved}
+    images:
+      - [game3d/assets/portrait-candidates/hamada-sheet.png, "Portrait candidates (721 in use)", draft]
+    facts:
+      - ["His speaker id in the story files is kuroda (an older name); the game shows him as Mr. Hamada.", approved, "docs/game/cast.md ~ The id `kuroda` is Mr. Hamada"]
+
+  - id: ishibashi
+    name: Mr. Ishibashi
+    game: guard
+    story_name: Mr. Ishibashi
+    group: Security
+    approved_art: ishibashi
+    voice_prefix: [ishibashi]
+    portrait_status: approved
+    portrait_note: ["The neutral face is a cut-out of the approved ishibashi-b-201. The stern and amused faces are new repaints, provisional until Jørgen picks.", draft, "TODO.md ~ guard = Ishibashi with new expressions"]
+    decisions:
+      - {q: "legacy/notes/GUIDE-history.md ~ Ishibashi = ishibashi-b-201 #1", s: approved}
+    images:
+      - [art/approved/ishibashi/ishibashi-after.webp, "ishibashi-b-201 with headroom", approved]
+      - [game3d/assets/portrait-candidates/guard-sheet.png, "Expression candidates", draft]
+    history:
+      - ["Decisions, round 2 (ishibashi-b-201)", legacy/proto2/decide2/index.html, approved]
+      - ["Headroom fix", legacy/proto2/cast-fixed/index.html, legacy]
+    rejected:
+      - ["ishibashi-a (tall, heavy-set) and ishibashi-c (crew cut, scar).", rejected, legacy/proto2/decide2/index.html]
+    legacy:
+      - ["VN and MVP: gruff and strict, 「日本語で。」 to anything he doesn't understand; voice and text only in the narrow slice.", legacy, "legacy/mvp/DESIGN.md ~ Gruff, strict about rules"]
+
+  - id: aoi
+    name: Aoi
+    game: aoi
+    group: Intern
+    approved_art: aoi
+    voice_prefix: [aoi]
+    portrait_status: approved
+    decisions:
+      - {q: "legacy/notes/GUIDE-history.md ~ Rei, Mio, Aoi and Kaori = the RDBT versions", s: approved}
+      - {q: "art/PROMPTS.md ~ Aoi: slim with small breasts #1", s: approved}
+    images:
+      - [art/approved/aoi/aoi-after.webp, "gallery B-aoi (RDBT) with headroom", approved]
+    facts:
+      - ["Age unsettled: 23 in mini-stories.md, 22 in tools/production.py, 24 in the image dashboard preset.", draft, "notes/mini-stories.md ~ Aoi's age"]
+    history:
+      - ["Art production gallery (B-aoi)", legacy/proto2/gallery/index.html, legacy]
+      - ["Image models round 3 (first appears as the intern)", legacy/proto2/models3/index.html, legacy]
+      - ["Headroom fix", legacy/proto2/cast-fixed/index.html, legacy]
+    legacy:
+      - ["Mini-stories: a graduate intern rotating through departments, his source of katakana.", legacy, "notes/mini-stories.md ~ graduate intern rotating"]
+
+  - id: kuro
+    name: Kuro
+    game: kuro
+    group: Reception
+    approved_art: kuro
+    voice_prefix: [kuro]
+    portrait_status: approved
+    decisions:
+      - {q: "legacy/notes/GUIDE-history.md ~ The receptionist is named Kuro #1", s: approved}
+      - {q: "art/PROMPTS.md ~ Kuro's glasses (Jørgen, 2026-09-27)", s: approved}
+    images:
+      - [art/approved/kuro/kuro-after.webp, "A-luna-s101 with headroom", approved]
+    history:
+      - ["Art production gallery (A-luna-s101)", legacy/proto2/gallery/index.html, legacy]
+      - ["Headroom fix", legacy/proto2/cast-fixed/index.html, legacy]
+    rejected:
+      - ["Her s102 look (the white vampire).", rejected, "legacy/notes/GUIDE-history.md ~ her s102 look (white vampire) is rejected"]
+      - ["Luna was her first name.", rejected, "legacy/notes/GUIDE-history.md ~ The receptionist is named Kuro"]
+    legacy:
+      - ["Mini-stories: 27, night reception, bored, a talking kiosk trialled to replace her; she learns the secret.", legacy, "notes/mini-stories.md ~ Kuro (玖路"]
+
+  # ------------------------------------------------------------------ designed, not in day 1
+  - id: rei
+    name: Rei
+    group: Sales
+    approved_art: rei
+    voice_prefix: [rei]
+    portrait: art/approved/rei/rei-after.webp
+    pick: gallery B-rei (RDBT)
+    prompt_id: rei-cold
+    decisions:
+      - {q: "legacy/notes/GUIDE-history.md ~ Rei, Mio, Aoi and Kaori = the RDBT versions", s: approved}
+      - {q: "art/PROMPTS.md ~ Rei: silver ponytail #1", s: approved}
+    facts:
+      - ["Long silver-grey hair in a sleek high ponytail, steel-grey eyes, sharp eyeliner, gold hoop earrings, tailored white suit over a black shirt, gold lapel pin.", approved, "tools/production.py ~ 'rei': ('1girl'"]
+      - ["The reward preset dresses her in a light grey blazer over a black top.", draft, "tools/imagegen/seed.py ~ a light grey blazer over a black top"]
+    history:
+      - ["Art production gallery (B-rei)", legacy/proto2/gallery/index.html, legacy]
+      - ["Headroom fix", legacy/proto2/cast-fixed/index.html, legacy]
+      - ["Earlier cast rounds (MAPPA style)", legacy/proto2/cast-mappa/index.html, rejected]
+    legacy:
+      - ["VN: 黒田レイ in Sales on 3F; the second, riskier spell; meeting her on the train was proposed, never approved.", legacy, "legacy/notes/GUIDE-history.md ~ meeting Rei on the train is proposed"]
+      - ["Island slice: rides the lift with him every morning; only rei-cold of her expressions matched her design.", legacy, "notes/island-slice-plan.md ~ only rei-cold matches her design"]
+
+  - id: kaori
+    name: Kaori
+    group: Canteen
+    approved_art: kaori
+    portrait: art/approved/kaori/kaori-after.webp
+    pick: gallery B-kaori (RDBT)
+    prompt_id: kaori-smile
+    decisions:
+      - {q: "art/PROMPTS.md ~ Kaori: tall, slender #1", s: approved}
+    facts:
+      - ["Tall, short grey-streaked hair, white chef jacket with rolled sleeves, faded tattoo on her forearm, towel over her shoulder.", approved, "tools/production.py ~ 'kaori': ('1girl'"]
+    history:
+      - ["Art production gallery (B-kaori)", legacy/proto2/gallery/index.html, legacy]
+      - ["Headroom fix", legacy/proto2/cast-fixed/index.html, legacy]
+    legacy:
+      - ["Mini-stories: 44, runs the canteen kitchen, was with Kiyoko twenty years ago.", legacy, "notes/mini-stories.md ~ Kaori (44)"]
+
+  - id: yuzuki
+    name: Yuzuki
+    group: PR
+    approved_art: yuzuki
+    portrait: art/approved/yuzuki/yuzuki-e-after.webp
+    pick: yuzuki-e-201
+    prompt_id: yuzuki-e-201
+    decisions:
+      - {q: "legacy/notes/GUIDE-history.md ~ Yuzuki = yuzuki-e-201", s: approved}
+      - {q: "art/PROMPTS.md ~ Yuzuki: lean with medium breasts #1", s: approved}
+    facts:
+      - ["Long honey-blonde hair in a low loose ponytail over her left shoulder, a small mole on her chin, mustard-yellow corduroy blazer over a white turtleneck, silver hoop earrings.", approved, "legacy/proto2/decide2/index.html"]
+    history:
+      - ["Decisions, round 2 (yuzuki-e-201)", legacy/proto2/decide2/index.html, approved]
+    rejected:
+      - ["yuzuki-a and yuzuki-b; yuzuki-c kept only as the base.", rejected, "legacy/notes/GUIDE-history.md ~ Yuzuki = yuzuki-c-202 base"]
+
+  - id: tsubasa
+    name: Tsubasa
+    group: General Affairs
+    approved_art: tsubasa
+    portrait: art/approved/tsubasa/tsubasa-face-e85-11.webp
+    pick: new-tsubasa-208, face A (e85-11), tsubasa-facing-23
+    prompt_id: new-tsubasa-208
+    decisions:
+      - {q: "legacy/notes/GUIDE-history.md ~ Approved: tsubasa-facing-23", s: approved}
+      - {q: "legacy/notes/GUIDE-history.md ~ Tsubasa keeps the blue hair clips #1", s: approved}
+    images:
+      - [art/approved/tsubasa/lfl-tsubasa-facing-1.webp, "tsubasa-facing-23 (facing the viewer)", approved]
+    history:
+      - ["Decisions, round 2 (new-tsubasa-208)", legacy/proto2/decide2/index.html, approved]
+      - ["Face redo and like-for-like test", legacy/proto2/cast-fixed/index.html, approved]
+    rejected:
+      - ["Her first face (long profile jutting forward, heavy contour shading): off-style.", rejected, "legacy/notes/GUIDE-history.md ~ Tsubasa's face is off-style"]
+
+  - id: kanae
+    name: Kanae
+    group: PR
+    approved_art: kanae
+    portrait: art/approved/kanae/kanae-after.webp
+    pick: new-kanae-212
+    prompt_id: new-kanae-212
+    decisions:
+      - {q: "legacy/notes/GUIDE-history.md ~ Kanae (new-kanae-212", s: approved}
+    facts:
+      - ["Bleached yellow-blonde wolf cut, small silver nose stud, oversized safety-orange work jacket over a grey hoodie, long black pleated skirt, film camera.", approved, "legacy/proto2/decide2/index.html"]
+    history:
+      - ["Decisions, round 2 (new-kanae-212)", legacy/proto2/decide2/index.html, approved]
+
+  - id: sumi
+    name: Sumi
+    group: General Affairs
+    approved_art: sumi
+    portrait: art/approved/sumi/sumi-after.webp
+    pick: new-sumi-201
+    prompt_id: new-sumi-201
+    decisions:
+      - {q: "legacy/notes/GUIDE-history.md ~ Sumi (new-sumi-201", s: approved}
+      - {q: "art/PROMPTS.md ~ Sumi: petite with medium breasts #1", s: approved}
+    facts:
+      - ["Dark-brown hair in two short low pigtails, straight-cut bangs, tomato-red knitted vest over a cream shirt, wide brown-grey trousers, ink on her fingers, a big brush.", approved, "legacy/proto2/decide2/index.html"]
+    history:
+      - ["Decisions, round 2 (new-sumi-201)", legacy/proto2/decide2/index.html, approved]
+
+  - id: saki
+    name: Saki
+    group: Legal
+    approved_art: saki
+    portrait: art/approved/saki/saki-after.webp
+    pick: saki-a-201
+    prompt_id: saki-a-201
+    decisions:
+      - {q: "legacy/notes/GUIDE-history.md ~ Saki = saki-a-201 #1", s: approved}
+    facts:
+      - ["Glossy jet-black chin-length bob with a severe straight fringe, a beauty mark under her left eye, dark red eyes, burgundy three-piece trouser suit.", approved, "tools/decide2.py ~ 'saki-a'"]
+    history:
+      - ["Decisions, round 2 (saki-a-201)", legacy/proto2/decide2/index.html, approved]
+    rejected:
+      - ["saki-b (long chestnut braid, green dress), and the first platinum-blonde Saki.", rejected, legacy/proto2/decide2/index.html]
+
+  - id: nanami
+    name: Nanami
+    group: Security
+    approved_art: nanami
+    portrait: art/approved/nanami/nanami-g-after.webp
+    pick: nanami-g-204
+    prompt_id: nanami-g-204
+    decisions:
+      - {q: "legacy/notes/GUIDE-history.md ~ Nanami = nanami-g-204 (ID-card desk clerk)", s: approved}
+    facts:
+      - ["Mocha-brown hair in a neat low bun with a pencil through it; the old office uniform, a dusty-pink waistcoat and skirt over a white blouse.", approved, "legacy/proto2/decide2/index.html"]
+    history:
+      - ["Decisions, round 2 (g-204 picked, f-201 liked)", legacy/proto2/decide2/index.html, approved]
+    rejected:
+      - ["The security-officer versions (nanami-a, b, c).", rejected, legacy/proto2/decide2/index.html]
+
+  - id: kiyoko
+    name: Kiyoko
+    group: Executive floors
+    approved_art: kiyoko
+    portrait: art/approved/kiyoko/kiyoko-camel-after.webp
+    pick: kiyoko-camel-201 (face from A-kiyoko-s101)
+    prompt_id: kiyoko-camel-201
+    decisions:
+      - {q: "legacy/notes/GUIDE-history.md ~ Kiyoko = kiyoko-camel-201", s: approved}
+      - {q: "art/PROMPTS.md ~ Kiyoko's age wording", s: approved}
+    history:
+      - ["Decisions, round 2 (kiyoko-camel-201)", legacy/proto2/decide2/index.html, approved]
+    rejected:
+      - ["kiyoko-plum, kiyoko-green, kiyoko-ivory and kiyoko-teal outfits; A-kiyoko-s102.", rejected, legacy/proto2/decide2/index.html]
+      - ["Round 28's Kiyoko: \"WAY older… 90s, witch… creepy\".", rejected, "art/PROMPTS.md ~ Kiyoko's age wording"]
+
+  - id: goro
+    name: Goro
+    group: Rooftop garden
+    approved_art: goro
+    voice_prefix: [goro]
+    portrait: art/approved/goro/goro-after.webp
+    pick: goro-a-202
+    prompt_id: goro-a-202
+    decisions:
+      - {q: "legacy/notes/GUIDE-history.md ~ Goro = goro-a-202 #1", s: approved}
+      - {q: "docs/game/cast.md ~ Goro is a late-game character", s: approved}
+    facts:
+      - ["61, a gentle retired engineer who keeps the rooftop garden. Thick round glasses, short white hair, beige cardigan, gardening gloves, a potted tomato plant.", approved, "tools/decide2.py ~ 'goro-a'"]
+    history:
+      - ["Decisions, round 2 (goro-a-202)", legacy/proto2/decide2/index.html, approved]
+    rejected:
+      - ["goro-b (balding, olive apron).", rejected, legacy/proto2/decide2/index.html]
+
+  - id: jun
+    name: Jun
+    group: Payroll and the bar
+    approved_art: jun
+    voice_prefix: [jun]
+    portrait: art/approved/jun/jun-after.webp
+    pick: jun-a-202
+    prompt_id: jun-a-202
+    decisions:
+      - {q: "legacy/notes/GUIDE-history.md ~ Jun = jun-a-202 #1", s: approved}
+    facts:
+      - ["38, runs the company bar in the evenings and works in payroll by day. Neat short black hair, rectangular glasses, white shirt with rolled sleeves, dark-green apron.", approved, "tools/decide2.py ~ 'jun-a'"]
+    history:
+      - ["Decisions, round 2 (jun-a-202)", legacy/proto2/decide2/index.html, approved]
+    rejected:
+      - ["jun-b (former jazz drummer) and jun-c (a woman bartender).", rejected, legacy/proto2/decide2/index.html]
+
+  - id: cctv
+    name: Night CCTV operator (idea)
+    group: Security
+    idea: true
+    approved_art: cctv
+    portrait: art/approved/cctv/nanami-f-after.webp
+    pick: nanami-f-201
+    decisions:
+      - {q: "legacy/notes/GUIDE-history.md ~ nanami-f-201 becomes a new character idea #2", s: approved}
+
+removed:
+  - ["Goro is off day 1: \"Goro is a late-game character (not on day 1)\".", approved, "docs/game/cast.md ~ Goro is a late-game character"]
+  - ["Oguri and Dr. Ren are removed.", rejected, "legacy/notes/GUIDE-history.md ~ Oguri and Dr. Ren are removed"]
+  - ["Fumiko and Chihiro rejected.", rejected, "legacy/notes/GUIDE-history.md ~ Fumiko and Chihiro rejected"]
+  - ["Rejected as lame or repeated: the knitting tough guy, the crazy female engineer with a metal arm.", rejected, "GUIDE.md ~ the knitting tough guy"]
+  - ["Older cast names from the first game: Sayaka (became Emi), Hana, Daigo, Tomi-san.", legacy, "legacy/proto2/audition/index.html ~ Sayaka Makabe"]
+  - ["Yui, Sota, Nao and Hiro, the first office extras in game3d, were cut.", legacy, "docs/game/cast.md ~ Left from before the B2 team was settled"]
+
+cast_rules:
+  - {q: "GUIDE.md ~ The cast stays (Jørgen #2", s: approved}
+  - {q: "GUIDE.md ~ Cast palette", s: approved}
+  - {q: "art/PROMPTS.md ~ Build lines (Jørgen, 2026-09-27", s: approved}
+  - {q: "GUIDE.md ~ Expression sets must keep everything", s: approved}
+  - {q: "art/PROMPTS.md ~ Portrait framing (2026-09-25)", s: approved}
+  - {q: "GUIDE.md ~ Don't repeat ideas", s: approved}
+  - {q: "GUIDE.md ~ Characters have their own concerns", s: approved}
+  - {q: "docs/game/setting.md ~ All characters are adults #1", s: approved}
+
+# ---------------------------------------------------------------------------------------------
+# Places in the game are read live from docs/game/places.md ("## Monorail (`train`)" and so on), the reference
+# images in game3d/ref/ and the latest critic round in game3d/shots/. This list only ties them together by id.
+places:
+  - {id: train, ref: game3d/ref/1-train-arrival.png, shot: train.png, quotes: ["legacy/notes/GUIDE-history.md ~ Train scene (Jørgen, 2026-09-27)"]}
+  - {id: gate, ref: game3d/ref/2-security-gate-muted.png, shot: gate.png, quotes: ["docs/game/art-and-sound.md ~ Palette: game3d/ref/2-security-gate-muted.png", "docs/game/stories/gate-morning.md ~ Jørgen asked for the gate to be a real situation #1"]}
+  - {id: office, ref: game3d/ref/3-office.png, shot: office.png, quotes: ["docs/game/controls-and-ui.md ~ The player character is always in view"]}
+
+# The painted backgrounds from the VN era. Legacy: the world is flat-shaded 3D now.
+locations:
+  - id: plaza
+    name: Station plaza and monorail
+    image: art/approved/plaza/monorail-bay-ref2.png
+    pick: monorail-bay-ref2 (Jørgen's own image)
+    facts:
+      - ["Exterior master for the VN opening: Jørgen's monorail-bay-ref2.png (\"just use this so we can get somewhere\").", legacy, "art/PROMPTS.md ~ monorail-bay-ref2.png"]
+    pages: [legacy/proto2/monorail/index.html, legacy/proto2/locations1/index.html, legacy/proto2/opening/shots.html]
+  - id: gate-painting
+    name: Main gate and lobby
+    image: art/approved/gate/gate-lobby-2103.webp
+    pick: gate-lobby-2103
+    facts:
+      - ["Pick: gate-lobby-2103, full-height glass security doors, a guard podium on the left.", legacy, "legacy/notes/GUIDE-history.md ~ gate = gate-lobby-2103"]
+    pages: [legacy/proto2/locations1/index.html, legacy/mvp/index.html]
+  - id: office-painting
+    name: Planning 7, basement office
+    image: art/approved/office/office-reverse-5202-fix-a.webp
+    pick: office-reverse-5202-fix-a
+    facts:
+      - ["Pick: office-reverse-5202 (\"really gets the dingy vibe\"), minus the window beside the exit door.", legacy, "legacy/notes/GUIDE-history.md ~ Basement office = office-reverse-5202"]
+      - ["Its 90s–00s office look still stands for the 3D office.", approved, "legacy/notes/GUIDE-history.md ~ Office look (Jørgen, 2026-09-26)"]
+    pages: [legacy/proto2/locations2/index.html, legacy/side/hd2d/index.html]
+  - id: copyroom
+    name: Copy room
+    image: art/approved/copyroom/copyroom-copier-4203.webp
+    pick: copyroom-copier-4203
+    facts:
+      - ["Pick: copyroom-copier-4203. In the VN the magic was introduced here, alone.", legacy, "legacy/notes/GUIDE-history.md ~ copy room = copyroom-copier-4203"]
+    pages: [legacy/proto2/locations1/index.html]
+  - id: dorm
+    name: Dorm room 203
+    image: art/approved/dorm/dorm-worst-c.webp
+    pick: dorm-worst-c
+    facts:
+      - ["The worst room on the island, facing a concrete wall; the VN day ended here.", legacy, "legacy/notes/GUIDE-history.md ~ he gets the worst room"]
+    pages: [legacy/proto2/locations2/index.html]
+  - id: sales
+    name: Sales floor (never picked)
+    image: legacy/proto2/locations1/sales-rdbt-s9-nophones-colorguide0.8-8408.webp
+    pick: none
+    facts:
+      - ["Sales passed only with the Blender blockout as line control; nothing was picked.", legacy, "art/PROMPTS.md ~ Sales passed with the blockout"]
+    pages: [legacy/proto2/locations1/index.html]
+
+places_mentioned:
+  - ["Districts, machines and the first ten places after B2 are in the island design doc (not approved).", draft, "notes/ISLAND.md ~ ## The districts"]
+
+# ---------------------------------------------------------------------------------------------
+story:
+  # The current storylines are read live from docs/game/stories/. These are the older ones, shown under Legacy.
+  legacy:
+    - ["The VN approach was dropped (2026-09-26): \"too hard to get right\".", legacy, "legacy/notes/GUIDE-history.md ~ the visual-novel approach is dropped"]
+    - ["VN day 1: monorail, gate, basement office, copy room, office, Sales, evening, dorm room.", legacy, "legacy/notes/GUIDE-history.md ~ Day-1 flow (2026-09-25)"]
+    - ["VN premise: Planning 7 on the closure list, Sales wants its budget, a secret magic nobody may see.", legacy, "legacy/notes/GUIDE-history.md ~ Only the main character knows about it"]
+    - ["The MVP: one scene at the main gate with phrase cards (legacy/mvp/).", legacy, "legacy/notes/GUIDE-history.md ~ MVP of a new design"]
+    - ["The Godot island slice: \"atrocious\"; replaced by three.js.", legacy, "legacy/notes/GUIDE-history.md ~ the Godot 2D build is"]
+    - ["Three directions for a 2D top-down RPG (a year on the island, a stamp rally, the izakaya).", legacy, "notes/directions.md ~ Waiting on his pick"]
+    - ["The anime opening player (method C, beat-synced cels).", legacy, "legacy/notes/GUIDE-history.md ~ approach C wins"]
+  legacy_docs:
+    - {title: "Mini stories and jobs (Planning 7 era)", doc: notes/mini-stories.md}
+    - {title: "Train opening script (VN)", doc: notes/train-opening-script.md}
+    - {title: "Opening proposal", doc: notes/day1-opening-proposal.md}
+    - {title: "Three directions", doc: notes/directions.md}
+    - {title: "Island slice plan", doc: notes/island-slice-plan.md}
+    - {title: "Island slice storyboard", doc: legacy/island/content/storyboard.md}
+    - {title: "Decisions taken while Jørgen was away (island slice)", doc: legacy/island/DECISIONS.md}
+    - {title: "MVP design", doc: legacy/mvp/DESIGN.md}
+    - {title: "Map design (pixel era)", doc: notes/map-design.md}
+    - {title: "Day-1 design (VN)", doc: notes/day1-design.md}
+
+# ---------------------------------------------------------------------------------------------
+rules:
+  # GUIDE sentences the bible quotes on the Rules page, grouped. The text is read live from GUIDE.md.
+  - group: What the game is now
+    quotes:
+      - "GUIDE.md ~ Game first, learning light"
+      - "GUIDE.md ~ Scope (Jørgen, 2026-09-28)"
+      - "docs/game/setting.md ~ Eric is a Western IT support engineer from Norway #2"
+      - "docs/game/systems.md ~ Jørgen (2026-09-28): a day clock with periods"
+      - "GUIDE.md ~ Character arcs are to be designed in full RPG-walkthrough detail"
+  - group: Language on screen
+    quotes:
+      - "docs/game/words.md ~ Only words taught in play count as known"
+      - "docs/game/systems.md ~ Lines Eric can't follow are shown"
+      - "docs/game/controls-and-ui.md ~ Every control is introduced the first time"
+  - group: Story and dialogue
+    quotes:
+      - "GUIDE.md ~ NO EXPOSITION IN PANELS"
+      - "GUIDE.md ~ No narration of what the player can see"
+      - "GUIDE.md ~ Story and screen must match"
+      - "GUIDE.md ~ Big moments must read on their own"
+      - "GUIDE.md ~ Stage in steps a slow reader can follow"
+  - group: Look and UI
+    quotes:
+      - "GUIDE.md ~ World style (Jørgen, 2026-09-27)"
+      - "docs/game/art-and-sound.md ~ Environment style is open #1"
+      - "docs/game/controls-and-ui.md ~ Direction 1, \"faded\""
+      - "GUIDE.md ~ No text on timers, ever"
+      - "docs/game/controls-and-ui.md ~ The over-head icons and labels are being redesigned"
+      - "GUIDE.md ~ Avoid default AI aesthetics"
+  - group: How we work
+    quotes:
+      - "GUIDE.md ~ Jørgen approves every asset"
+      - "GUIDE.md ~ Show every attempt"
+      - "GUIDE.md ~ Validate each fix in isolation"
+      - "GUIDE.md ~ Relay feedback as given"
+      - "GUIDE.md ~ Every build announcement to Jørgen names the build id"
+
+legacy_rules:
+  - ["Difficulty rules from playtest 5 (English carries the text, recall, fading support). Still in GUIDE, but \"Game first, learning light\" overrides them where they conflict.", legacy, "legacy/notes/GUIDE-history.md ~ Difficulty (Jørgen, 2026-09-26"]
+  - ["Reverse language learning, tap for readings, the VN backlog and reply-option rules.", legacy, "legacy/notes/GUIDE-history.md ~ Reverse language learning"]
+  - ["Ranks from 新入社員 to 部長 opening floors and districts; ten departments with their jobs.", legacy, "notes/mini-stories.md ~ Rank follows a real Japanese ladder"]
+  - ["Kotodama as a secret spell with a verb-form ladder (動け, 出せ, 十枚出せ …); commands only as spell outcomes.", legacy, "legacy/notes/GUIDE-history.md ~ Commands (動け etc.) only as spell outcomes"]
+  - ["Relationship stages from mini-stories (colleague, friend, close, romance). notes/RELATIONSHIPS.md replaces them.", legacy, "notes/mini-stories.md ~ The stages are the ones"]
+  - ["48 px pixel sprites (PixelLab i02 recipe), Stardew-size tests, the RPG Maker scale.", legacy, "legacy/notes/GUIDE-history.md ~ Character sprite style"]
+  - ["Godot 4.7 as the engine.", legacy, "legacy/notes/GUIDE-history.md ~ The choice is Godot 4.7"]
+  - ["HD-2D rooms as the world.", legacy, "docs/game/art-and-sound.md ~ The detailed HD-2D rooms and tile pixel art are out"]
+
+# ---------------------------------------------------------------------------------------------
+art:
+  models:
+    - ["RDBT Anima: the house model for portraits and rewards.", approved, "art/PROMPTS.md ~ RDBT Anima is the main model"]
+    - ["One Obsession: open scenery and logic in hard scenes. JANIMA: style and groups.", approved, "art/PROMPTS.md ~ One Obsession: logic in hard scenes"]
+    - ["Settings: Euler A, 30 steps, CFG 5; 1216×832 for scenes, 896×1152 for portraits.", approved, "art/PROMPTS.md ~ Euler A, 30 steps, CFG 5, 1216×832"]
+    - ["Video: Wan 2.2 I2V 14B with lightx2v; the 5B is unusable.", approved, "art/PROMPTS.md ~ Wan 2.2 14B (lightx2v) is pretty good"]
+  quotes:
+    - "GUIDE.md ~ 3D character workflow (Jørgen, 2026-09-28"
+    - "GUIDE.md ~ Meshy parts (Jørgen, 2026-09-27, round 14)"
+    - "docs/game/art-and-sound.md ~ cut-outs use the refined matting"
+    - "art/PROMPTS.md ~ Reward quality (Jørgen, 2026-09-27)"
+    - "GUIDE.md ~ Every image and video prompt starts with the shot-staging skill"
+    - "GUIDE.md ~ The main prompt rule"
+    - "GUIDE.md ~ Don't overcorrect"
+    - "GUIDE.md ~ Perspective is not an anatomy fault"
+    - "GUIDE.md ~ Consistent characters (Jørgen, 2026-09-27)"
+  donts:
+    - ["No paper, cardboard, cut-out or pop-up styles, in any form.", rejected, "GUIDE.md ~ Never mention or propose paper"]
+    - ["No brown, gold or serif; no glows or eyebrow labels.", rejected, "GUIDE.md ~ Avoid default AI aesthetics"]
+    - ["Painted backgrounds with depth parallax as the world, and a cutaway-building overview.", rejected, "docs/game/art-and-sound.md ~ painted backgrounds with depth parallax"]
+    - ["Shrinking or recolouring generated meshes (TRELLIS etc.) for characters.", rejected, "GUIDE.md ~ Shrinking or recolouring a generated mesh"]
+    - ["Training LoRAs.", rejected, "GUIDE.md ~ we don't want to train models"]
+    - ["Jørgen's own images as img2img sources or edited into assets.", rejected, "GUIDE.md ~ Jørgen's own images (art/refs"]
+    - ["Tinted lenses on Kuro.", rejected, "art/PROMPTS.md ~ Tinted lenses are off-model"]
+    - ["Footsteps.", rejected, "docs/game/art-and-sound.md ~ No footsteps"]
+    - ["Ceiling light fixtures in the top-down scenes (keep their light).", rejected, "docs/game/controls-and-ui.md ~ Ceiling light fixtures are not shown"]
+
+# ---------------------------------------------------------------------------------------------
+audio:
+  music:
+    - ["Background music is Lyria only: one loop per mood, crossfading into itself. Each place has its own loop.", approved, "art/SOUND.md ~ Music: the game uses Lyria only"]
+    - ["Opening theme: 'Mastered: softer'.", legacy, "art/SOUND.md ~ Opening theme = \"Mastered: softer\""]
+  tracks:
+    - [art/approved/music/office.mp3, "Office loop (Lyria)", approved]
+    - [art/approved/music/calm.mp3, "Calm loop (Lyria)", approved]
+    - [art/approved/music/lively.mp3, "Lively loop (Lyria)", approved]
+    - [art/approved/music/night.mp3, "Night loop (Lyria)", approved]
+    - [art/approved/music/opening.mp3, "Opening theme (VN era)", legacy]
+    - [art/approved/music/opening-tv.mp3, "Opening, TV edit (VN era)", legacy]
+  quotes:
+    - "GUIDE.md ~ Local first (Jørgen, 2026-09-28)"
+    - "art/SOUND.md ~ Accents (2026-09-28, Eric)"
+    - "GUIDE.md ~ Mio: voice A from legacy/proto2/voice-mio"
+    - "GUIDE.md ~ Per-character loudness is normalised"
+
+# ---------------------------------------------------------------------------------------------
+# Review pages. Status: open (waiting on Jørgen), decided, legacy (an older version of the game).
+# Pages under legacy/ are always shown in the Legacy group, whatever the status.
+reviews:
+  game3d/design/mock-1.html: ["Dialogue overlay direction 1, Stage light.", decided, "Picked: direction 1 \"faded\", with a more solid grey band on phone."]
+  game3d/design/mock-2.html: ["Dialogue overlay direction 2, Pinned card.", decided, "Not picked."]
+  game3d/design/mock-3.html: ["Dialogue overlay direction 3, Flat-shaded slab.", decided, "Not picked."]
+  game3d/assets/portrait-candidates/eric-sheet-v2.png: ["Eric's portrait remake v2 (seeds 731 to 734, no red rim light).", open, "734 was picked; the MC's style is under review again."]
+  game3d/assets/portrait-candidates/eric-tired-v3.png: ["Eric's tired face v3.", decided, "811 picked."]
+  game3d/assets/portrait-candidates/eric-poses-sheet.png: ["Eric in natural poses.", decided, "Rejected (sides shaved too close, a furry-hat top)."]
+  game3d/assets/portrait-candidates/mio-expressions-v3-sheet.png: ["Mio's six expressions, v3.", decided, "Approved; in the game."]
+  game3d/assets/portrait-candidates/mori-sheet.png: ["Mr. Mori portrait candidates.", open, "713 in use provisionally."]
+  game3d/assets/portrait-candidates/kenji-sheet.png: ["Kenji portrait candidates.", decided, "711 not approved; new concept art is coming."]
+  game3d/assets/portrait-candidates/hamada-sheet.png: ["Mr. Hamada portrait candidates.", open, "721 in use provisionally."]
+  game3d/assets/portrait-candidates/guard-sheet.png: ["Mr. Ishibashi's new expressions.", open, "Stern and amused in use provisionally."]
+  game3d/REVIEW.md: ["The critic log for the three places (scores per round, shots).", open, "No place has reached 8 yet."]
+  art/company/local2/index.html: ["Round-2 local model comparison, including the onsen image that is the bar for rewards.", decided, "The 'spicy' row set the reward bar."]
+  art/concept/index.html: ["Concept batch 1 (the erased-language idea, golems).", legacy, "Golems and the old concept were rejected."]
+  legacy/proto2/audition/index.html: ["Cast and voices, round 2 of the first game's cast.", legacy, ""]
+  legacy/proto2/cast3/index.html: ["Cast version 3.", legacy, ""]
+  legacy/proto2/cast-final/index.html: ["FLUX 2 Pro cast candidates.", legacy, ""]
+  legacy/proto2/cast-mappa/index.html: ["Cast in MAPPA style.", legacy, ""]
+  legacy/proto2/cast-mappa2/index.html: ["Cast revisions: Sayaka becomes Emi.", legacy, ""]
+  legacy/proto2/cast-mappa3/index.html: ["More cast options.", legacy, ""]
+  legacy/proto2/cast-mappa4/index.html: ["Wilder cast options and a revised Nanami.", legacy, ""]
+  legacy/proto2/cast-fixed/index.html: ["Headroom fix for every approved portrait; Tsubasa's face redo.", decided, "All approved."]
+  legacy/proto2/consistency/index.html: ["Character consistency test: Kuro and Saki, nine training-free methods.", decided, "No LoRA training (GUIDE)."]
+  legacy/proto2/decide/index.html: ["Decisions round 1 (chooser).", decided, "Picks in GUIDE."]
+  legacy/proto2/decide2/index.html: ["Decisions round 2: Goro, Jun, Ishibashi, Saki, Yuzuki, Kiyoko, Nanami, new women.", decided, "Picks in GUIDE."]
+  legacy/proto2/emi2/index.html: ["Emi redesign from a written brief.", decided, "Round 3 RDBT seed 41."]
+  legacy/proto2/figures/viewer.html: ["Image-to-3D figure viewer.", decided, "Generated meshes are out for characters."]
+  legacy/proto2/gallery/index.html: ["Art production gallery: cast expressions (B-*), new characters (A-*), main character options (M-*).", decided, "Cast picks in GUIDE; the MC gallery style is under review again."]
+  legacy/proto2/island-audio/index.html: ["Island slice audio placeholders.", legacy, "Never picked."]
+  legacy/proto2/island-cast/index.html: ["Island slice dialogue sprites and scene paintings.", legacy, "Never picked."]
+  legacy/proto2/island-pixel/index.html: ["Island pixel art round 1.", legacy, "Pixel art is out."]
+  legacy/proto2/llm/index.html: ["Local LLMs playing Emi in casual Japanese.", legacy, "Orion 26B-A4B picked."]
+  legacy/proto2/local/index.html: ["First local model test.", decided, "Led to the Anima family."]
+  legacy/proto2/local2/index.html: ["Local models round 2.", decided, ""]
+  legacy/proto2/local3/index.html: ["Local models round 3.", decided, ""]
+  legacy/proto2/local4/index.html: ["Loose against structured prompts on Anima.", decided, ""]
+  legacy/proto2/local5/index.html: ["Anima variants and NetaYume Lumina.", decided, ""]
+  legacy/proto2/local6/index.html: ["Round 6: seven harder scenes, four Anima models.", decided, ""]
+  legacy/proto2/locations1/index.html: ["VN locations round 3: gate and copy room.", legacy, "Painted backgrounds are not the world any more."]
+  legacy/proto2/locations2/index.html: ["VN locations round 2: basement office and dorm.", legacy, ""]
+  legacy/proto2/mechanics/index.html: ["Standalone learning mechanic prototypes.", legacy, "The VN they fed is dropped."]
+  legacy/proto2/mechanics/forge/index.html: ["Mechanic prototype: spell forge.", legacy, ""]
+  legacy/proto2/mechanics/keys/index.html: ["Mechanic prototype: word keys.", legacy, ""]
+  legacy/proto2/mechanics/listen/index.html: ["Mechanic prototype: listen and act.", legacy, ""]
+  legacy/proto2/mechanics/reader/index.html: ["Mechanic prototype: adaptive reader.", legacy, ""]
+  legacy/proto2/mechanics/register/index.html: ["Mechanic prototype: casual or polite.", legacy, ""]
+  legacy/proto2/mechanics/shop/index.html: ["Mechanic prototype: katakana shelf.", legacy, ""]
+  legacy/proto2/models/index.html: ["Six cloud image models.", legacy, ""]
+  legacy/proto2/models2/index.html: ["Four models, four anime styles.", legacy, ""]
+  legacy/proto2/models3/index.html: ["Image models rounds 3 and 4 (FLUX family).", legacy, ""]
+  legacy/proto2/monorail/index.html: ["Our own monorail masters from short prompts.", legacy, ""]
+  legacy/proto2/music/index.html: ["Local music with YuE2 against Lyria.", decided, "Lyria for loops."]
+  legacy/proto2/opening/index.html: ["The anime opening player.", legacy, ""]
+  legacy/proto2/opening/shots.html: ["Opening shot masters (method C).", legacy, ""]
+  legacy/proto2/pixel-compare/index.html: ["Pixel art comparisons.", legacy, ""]
+  legacy/proto2/promptlab/index.html: ["Prompt lab: scenery from local models.", decided, "The Local playbook in art/PROMPTS.md."]
+  legacy/proto2/refine/index.html: ["Anima composes, WAI-Mature repaints.", decided, ""]
+  legacy/proto2/reward/index.html: ["Reward scenes on three cloud models.", legacy, ""]
+  legacy/proto2/rmbg/index.html: ["Local background removal methods.", decided, "rembg ISNet anime; BiRefNet-HR refined matting since."]
+  legacy/proto2/styles/index.html: ["Pick an art style.", legacy, ""]
+  legacy/proto2/tts/index.html: ["Local voice models against Replicate voices.", decided, "IndexTTS unusable."]
+  legacy/proto2/ui/index.html: ["Three UI directions for the VN.", legacy, ""]
+  legacy/proto2/ui/mock.html: ["UI mockup (VN).", legacy, ""]
+  legacy/proto2/video/index.html: ["Local video round 1.", decided, "Rejected as very bad."]
+  legacy/proto2/video2/index.html: ["Video round 2 and the living-portrait puppet demo.", decided, "Wan 2.2 14B with lightx2v."]
+  legacy/proto2/voice-mio/index.html: ["Mio's voice A on all 35 lines.", decided, "Voice A chosen."]
+  legacy/proto2/voices-local/index.html: ["Local voices test (Irodori, Sarashina, CosyVoice3, Qwen3).", decided, "Local Qwen3-TTS clones are the default (Local first)."]
+  legacy/side/flat/index.html: ["Low-poly Mio by hand, rounds 1 to 14b.", legacy, "Paused; the Meshy model replaced it."]
+  legacy/side/flat/view.html: ["Low-poly Mio, single viewer.", legacy, ""]
+  legacy/side/flat/meshview.html: ["Meshy raw view.", legacy, ""]
+  legacy/side/flat/meshy.html: ["Meshy Mio view.", legacy, ""]
+  legacy/side/flat/neon.html: ["Neon Bun Guardian (the Meshy Mio model).", legacy, "The model is in the game now."]
+  legacy/side/flat-codex/index.html: ["A second hand-built low-poly Mio study.", legacy, ""]
+  legacy/side/hd2d/index.html: ["The three.js HD-2D room (\"mindblowing\").", legacy, "The world moved to flat-shaded 3D."]
+  legacy/side/hd2d/figures.html: ["Figure test in the HD-2D room.", legacy, ""]
+  legacy/side/train/index.html: ["Monorail, day one: the first top-down train scene.", legacy, "Reused as place 1 of game3d."]
+  legacy/mvp/index.html: ["The MVP: one scene at the main gate.", legacy, "Superseded by game3d."]
+  legacy/island/web/index.html: ["The island slice web build (Godot, frozen).", legacy, "\"atrocious\""]
+  "http://127.0.0.1:8772/": ["The image gen dashboard (tools/imagegen/run.sh first).", open, "His tool for tuning presets."]
+
+# ---------------------------------------------------------------------------------------------
+# Open questions. The page also reads "## Open questions for Jørgen" from notes/RELATIONSHIPS.md live and
+# closes any of them listed under `closes` below.
+questions:
+  open:
+    - ["Eric's portrait style: the current 734 portrait is \"quite a different style\" from the rest of the cast, and the old gallery style may come back through a new art round.", "docs/game/art-and-sound.md ~ eric-v2-734 (seed 734 v2) was approved", mc]
+    - ["Mori's 3D look: a Meshy test exists, and it loads only with ?cast3d=mori until he approves it.", "game3d/js/cast.js ~ While a model waits for Jørgen's approval", mori]
+    - ["Kenji's look: new concept art is coming (about 21, inexperienced, eager, easily distracted; varied, creative looks).", "docs/game/cast.md ~ Look: about 21, inexperienced", kenji]
+    - ["The portraits in use provisionally: Mori 713, Hamada 721 and Ishibashi's stern and amused faces. Confirm or pick others.", "TODO.md ~ Portraits in use provisionally", null]
+    - ["The environment style study: several attempts at the polish and vibe of the generated anime art, for Jørgen to judge.", "docs/game/art-and-sound.md ~ A style study aims at the polish", null]
+    - ["Whether the bible goes public. It has never been committed.", "TODO.md ~ The bible (bible/) has never been committed", null]
+    - ["The walkthrough's scope: Mio and Mori have full walkthroughs; GUIDE asks for arcs in full walkthrough detail, and also not to write ahead of the intro day.", "GUIDE.md ~ Character arcs are to be designed in full RPG-walkthrough detail", null]
+    - ["When to start fading the English translations.", "docs/game/setting.md ~ When to fade the English is decided later", null]
+    - ["Over-head icons and labels are being redesigned.", "docs/game/controls-and-ui.md ~ The over-head icons and labels are being redesigned", null]
+    - ["Aoi's age (22, 23 or 24 in different files).", "notes/mini-stories.md ~ Aoi's age", aoi]
+    - ["Eric's age isn't in any current file (34 in the old portrait prompt, 29 in tools/production.py).", "tools/production.py ~ 29-year-old Nordic man", mc]
+  conflicts:
+    - ["Kiyoko's image dashboard preset uses an older age wording and the negative that GUIDE says makes her about 30.", "tools/imagegen/seed.py ~ faint smile lines", kiyoko]
+    - ["Yuzuki's build: 'lean with medium breasts' (GUIDE), 'lean athletic build' (dashboard preset).", "tools/imagegen/seed.py ~ lean athletic build with medium breasts", yuzuki]
+    - ["Rei's outfit: white suit (approved portrait) against a light grey blazer (dashboard preset).", "tools/imagegen/seed.py ~ a light grey blazer over a black top", rei]
+  closes:
+    # a phrase from a RELATIONSHIPS.md question, and the GUIDE line that answers it
+    - ["Is Emi at head office", "docs/game/cast.md ~ On day 1 she is upstairs at head office all day #1"]
+  closed:
+    - ["Who the player is.", "docs/game/cast.md ~ The player. From Norway. #1"]
+    - ["Upgrade or replace the old machines?", "docs/game/setting.md ~ It is not an upgrade or replacement job #1"]
+    - ["The department's name (Planning 7 or Systems Support 7).", "docs/game/setting.md ~ IT support sits on B2 #1"]
+    - ["Who is on the B2 team.", "docs/game/cast.md ~ The B2 team is Eric, Mio, Mori and Kenji #1"]
+    - ["How hard the language should be (the Difficulty rules against the VN-era reverse learning).", "GUIDE.md ~ Game first, learning light #2"]
+    - ["World style: HD-2D rooms or flat-shaded 3D.", "docs/game/art-and-sound.md ~ Flat-shaded, simple 3D is \"the only valid option\" #1"]
+    - ["The character look in the 3D rooms.", "GUIDE.md ~ 3D character workflow (Jørgen, 2026-09-28; worked first try for Eric)"]
+    - ["Low-poly Mio round 10.", "GUIDE.md ~ Low-poly Mio paused #1"]
+    - ["Local voices waiting for his ears.", "GUIDE.md ~ Local first (Jørgen, 2026-09-28) #1"]
+    - ["Eric's accent.", "art/SOUND.md ~ just drop it, English accent instead #1"]
+    - ["The company name.", "docs/game/setting.md ~ The company is called Amakawa for now #1"]
+    - ["Goro on day 1.", "docs/game/cast.md ~ Goro is a late-game character"]
+    - ["Mio's colours, hair and eyes.", "docs/game/cast.md ~ Hair dark green bordering on black #1"]
+    - ["The security gate revamp: a real situation with friction and life, not badge-and-walk.", "docs/game/stories/gate-morning.md ~ Jørgen asked for the gate to be a real situation #1"]
+    - ["The dialogue overlay direction.", "docs/game/controls-and-ui.md ~ Direction 1, \"faded\" #1"]
+  legacy:
+    - ["Where he first meets Rei: on the train, in the lift or at the gate.", "legacy/notes/GUIDE-history.md ~ meeting Rei on the train is proposed"]
+    - ["Station name: アマカワ本社前 against 天川シティ中央駅.", "legacy/island/DECISIONS.md ~ Station name"]
+    - ["Floors: Sales on 5F and the copy room on B2, against 3F and B1 in the old game.", "legacy/game/data/script.js ~ 営業部"]
+    - ["Magic on people: a spell on Rei in Sales against 'magic can't touch people directly'.", "notes/mini-stories.md ~ Magic can't touch people directly"]
+    - ["Sprite size: 48 px against Stardew's 16×32.", "legacy/notes/GUIDE-history.md ~ he's leaning to Stardew's size"]
+    - ["Jun's old in-game sprite is the older design.", "tools/production.py ~ Jun, a 40-year-old bartender"]
+    - ["The island slice plan's decisions (budget, LimeZu, PixelLab, phone).", "notes/island-slice-plan.md ~ Decisions needed from Jørgen"]
+    - ["The island storyboard's ten questions (default answers in DECISIONS.md).", "legacy/island/DECISIONS.md ~ Decisions to review"]
+    - ["Which of the three 2D directions.", "notes/directions.md ~ Waiting on his pick"]
+    - ["The pixel walk method.", "legacy/island/DECISIONS.md ~ How the pixel characters walk (not picked yet)"]
+    - ["Monorail final-approach window and Sales backgrounds.", "legacy/proto2/locations1/index.html"]
+    - ["The karaoke song v2 takes.", "legacy/island/DECISIONS.md ~ The four takes"]
+    - ["Two coffee makers in the B2 painting.", "notes/map-design.md ~ Paint it out of the painting"]
+    - ["The Rei expression set (only rei-cold matches).", "notes/island-slice-plan.md ~ only rei-cold matches her design"]
+    - ["Redo the bartender's cutout; redraw the VN day-1 backgrounds.", "legacy/notes/GUIDE-history.md ~ Redraw the day-1 location backgrounds"]
+    - ["The one free-typing moment with the local AI on day 1.", "legacy/notes/GUIDE-history.md ~ One free-typing moment"]
+    - ["The night CCTV operator's name, gender and look.", "legacy/notes/GUIDE-history.md ~ nanami-f-201 becomes a new character idea"]
+    - ["Kiyoko as a romance option (mini-stories). RELATIONSHIPS.md has her as friendship only.", "notes/mini-stories.md ~ Is Kiyoko a romance option"]
+    - ["Kanae leaving in spring on one path (mini-stories).", "notes/mini-stories.md ~ Kanae's thread ends"]
+    - ["Should anyone learn the secret (mini-stories, Kuro).", "notes/mini-stories.md ~ Kuro learns the secret"]
+    - ["Low-poly Mio round 10 and the train scene's hair colour (TODO).", "TODO.md ~ should the player follow the reference"]

@@ -1,3 +1,11 @@
+import { flagKeys } from './narrative/engine-flags.js';
+import { GLOBAL_HOOKS } from './narrative/hooks.js';
+import { eventTrigger } from './narrative/events.js';
+import { giveItem } from './gameplay/gifts.js';
+const ENGINE_KEYS = flagKeys('game3d/js/main.js');
+import { PLACE_FILES, NEXT } from './places/definitions.js';
+import { assertRegistered, assertPlaceRegistered } from './narrative/registration.js';
+import { PLACE_DETAILS, SHARED_THINGS } from './places/catalog.js';
 // Day one: train, lobby, office. One renderer, one Mio, three places joined by continuous trips.
 import * as THREE from 'three';
 import { createRenderer, Walker, Markers, Q, blob } from './engine.js';
@@ -40,7 +48,7 @@ ui.build();
 if (CAP) document.body.classList.add('cap');
 
 const PLACES = { train: trainPlace, gate: lobbyPlace, office: officePlace };
-const NEXT = { train: 'gate', gate: 'office' };
+assertRegistered(Object.keys(PLACE_FILES), PLACES, 'place factories');
 
 // ---------- shared game state ----------
 export const game = {
@@ -295,10 +303,8 @@ async function give() {
   const target = game.sayTarget;
   const item = await ui.giveMenu(target.label, sim.inv, ITEMS);
   if (!item) return;
-  const keys = [`give:${item}:${target.id}`, `give:*:${target.id}`];
-  const k = keys.find((x) => game.runner.has(x));
   // a refusal (keep: true on the trigger entry, e.g. a second gift) runs its lines but leaves the item in the bag
-  if (k) { if (!game.runner.entry(k, { peek: true }).keep) { take(item); flags['gave_' + item + '_' + target.id] = true; } game.runner.trigger(k); return; }
+  if (giveItem({ runner: game.runner, flags, take }, item, target.id)) return;
   game.beat(() => ui.say(null, `${target.label} doesn't seem to want the ${ITEMS[item].name.toLowerCase()}. You keep it.`));
 }
 ui.onGive = give;
@@ -532,8 +538,8 @@ H.emote = ({ who, kind, ms = 1900, id }) => {
   };
   f();
 };
-H.show = ({ id }) => { const r = game.place.people[id]; const o = r?.root || game.place.things[id]?.obj; if (o) o.visible = true; if (r?.blob) r.blob.visible = true; flags['shown_' + id] = true; };
-H.hide = ({ id }) => { const r = game.place.people[id]; const o = r?.root || game.place.things[id]?.obj; if (o) o.visible = false; if (r?.blob) r.blob.visible = false; flags['shown_' + id] = false; };
+H.show = ({ id }) => { const r = game.place.people[id]; const o = r?.root || game.place.things[id]?.obj; if (o) o.visible = true; if (r?.blob) r.blob.visible = true; flags[ENGINE_KEYS.shown + id] = true; };
+H.hide = ({ id }) => { const r = game.place.people[id]; const o = r?.root || game.place.things[id]?.obj; if (o) o.visible = false; if (r?.blob) r.blob.visible = false; flags[ENGINE_KEYS.shown + id] = false; };
 // the lift's floor indicator: counts one floor at a time to the target
 const FLOORS = ['B2', 'B1', '1', '2', '3', '4', '5'];
 H.floor = async ({ to }) => {
@@ -612,14 +618,14 @@ H.type = async ({ word, prompt, from }) => {
   await ui.typePrompt(word, pr);
   const spoken = voice(WORDS[word].voice || '');
   game.runner.learnCmd(word);
-  flags['typed_' + word] = true;
+  flags[ENGINE_KEYS.typed + word] = true;
   await voiceThenBeat(spoken, 350);
 };
 H.period = ({ to }) => { setPeriod(to, game); if (to === 'evening') playMusic('night'); };
 // a story can change the loop: { hook: 'music', name: 'calm' | 'office' | 'lively' | 'night' | null }
 H.music = ({ name }) => playMusic(name || null);
 H.meet = ({ who }) => { meet(game, who); ui.refreshPeople(sim.met.size); };
-H.buy = ({ item }) => { if (buy(game, item)) flags['bought_' + item] = true; else flags['cant_buy'] = true; };
+H.buy = ({ item }) => { if (buy(game, item)) flags[ENGINE_KEYS.bought + item] = true; else flags[ENGINE_KEYS.cant_buy] = true; };
 H.take = ({ item }) => take(item);
 H.save = () => save(game);
 H.next = () => { game.after = () => travel(NEXT[game.place.name]); };
@@ -630,6 +636,7 @@ async function prepare(name) {
   if (!game.prepared[name]) game.prepared[name] = (async () => {
     const story = await game.runner.load(name);
     const place = await PLACES[name](game, story);
+    assertPlaceRegistered(place, name, PLACE_DETAILS[name]);
     place.name = name;
     attachLift(game, place);   // walk-in lift (places/lift.js)
     applyLook(place, game);    // surface patterns, baked light (look/index.js); materials patched in place
@@ -647,7 +654,7 @@ async function enter(name) {
   place.space.add(game.mioNpc.root); game.mioNpc.root.visible = false; game.mioNpc.root.scale.setScalar(place.charScale || 1); game.mioNpc.setState('idle');
   place.people.mio = game.mioNpc;
   const mr = game.mioNpc.root;
-  place.things.mio = place.things.mio || { label: 'Mio', kind: 'person', anchor: (v) => { mr.getWorldPosition(v); v.y += 1.12 * (place.charScale || 1); return v; },
+  place.things.mio = place.things.mio || { ...SHARED_THINGS.mio, anchor: (v) => { mr.getWorldPosition(v); v.y += 1.12 * (place.charScale || 1); return v; },
     spot: () => { const r = mr.rotation.y; return [mr.position.x + Math.sin(r) * 0.6, mr.position.z + Math.cos(r) * 0.6]; }, face: () => [mr.position.x, mr.position.z], enabled: () => mr.visible };
   game.mioNpc.seated = false; game.mioNpc.root.position.y = 0;
   if (place.spots.mio_start) game.mioNpc.root.position.set(place.spots.mio_start[0], 0, place.spots.mio_start[1]);
@@ -696,7 +703,7 @@ async function travel(name) {
   game.busy = false; game.walker.locked = false;
   game.player.scripted = false;
   if (NEXT[name]) setTimeout(() => prepare(NEXT[name]), 1500);
-  if (game.runner.has('event:start')) game.runner.trigger('event:start');
+  if (game.runner.has(eventTrigger(name, 'start'))) game.runner.trigger(eventTrigger(name, 'start'));
   else if (game.story.start) game.beat(() => game.runner.run(game.story.start));
 }
 game.travel = travel;
@@ -808,6 +815,7 @@ game.step = step;
 async function boot() {
   game.runner = new Runner(game);
   installSim(game);   // bonds: bond, bondStep, remember, fact, relate hooks (js/bonds/)
+  assertRegistered(GLOBAL_HOOKS, game.hooks, 'global hooks');
   if (Q.has('slift')) setSitLift(+Q.get('slift'));
   // Eric: Jørgen's Meshy model; the code-built chibi is the fallback (?eric=chibi, or if loading fails)
   game.player = Q.get('eric') === 'chibi' ? makeAvatar() : await loadEric().catch((e) => { console.warn('Meshy Eric failed, using the chibi', e); return makeAvatar(); });
@@ -839,7 +847,7 @@ async function boot() {
     } else clearSave();
   }
   await game.place.onEnter?.();
-  if (game.runner.has('event:start')) game.runner.trigger('event:start');
+  if (game.runner.has(eventTrigger(start, 'start'))) game.runner.trigger(eventTrigger(start, 'start'));
   else if (game.story.start) game.beat(() => game.runner.run(game.story.start));
   if (NEXT[start]) setTimeout(() => prepare(NEXT[start]), 1500);
 }

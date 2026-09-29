@@ -1,3 +1,5 @@
+import { PORTRAITS } from './ui/portrait-data.js';
+export { PORTRAITS } from './ui/portrait-data.js';
 // HTML overlay: goal, words, the train's LED board, the talk panel with reply chips, fades and the end card.
 import { lineHTML, WORDS, COMMANDS, PHRASES, known, cmdHTML, iconHTML, baseHTML, FORM_NOTE } from './lang.js';
 import { settings, onSettings, CPS } from './settings.js';
@@ -212,16 +214,7 @@ export function isMuted() { return muted; }
 export function unlockAudio() { ac(); }
 
 // ---------- VN portraits ----------
-// Approved art only: cut-outs of the bible portraits (bible/facts.yaml `portrait:`, proto2/cast-fixed/*-after.webp).
-// One neutral face each for now; expressions will be face repaints of the same portrait. Faces a story asks for that
-// don't exist yet fall back to neutral. People without approved art get a name plate only.
-// Provisional (the art agent's picks, not approved yet): Eric seed 734 v2, Mori 713, Kenji 711, Hamada (speaker kuroda) 721,
-// the guard Ishibashi. See story/FORMAT.md.
-export const PORTRAITS = { mio: ['neutral', 'smile', 'deadpan', 'surprised', 'embarrassed', 'tired', 'phone'], aoi: ['neutral'], kuro: ['neutral'],
-  eric: ['neutral', 'surprised', 'tired'], mori: ['neutral', 'smile', 'flustered'], kenji: ['neutral', 'grin', 'sheepish'],
-  kuroda: ['neutral', 'sleepy', 'panicked'], guard: ['neutral', 'stern', 'amused'], emi: ['neutral'] };
-// Mio's new faces are still being made: they are listed so they switch in by name when the files land; until then
-// a missing file falls back to neutral (the img's error handler below).
+// Available expressions are declared in ui/portrait-data.js; missing files fall back to neutral.
 // Each cut-out's face box (imgutils detect_faces on the neutral image, image pixels [x0, y0, x1, y1]) and image size.
 // All expressions of a person share the framing. Every portrait is placed from this: the same face height on screen,
 // the chin at the same height, the body cut at the waist.
