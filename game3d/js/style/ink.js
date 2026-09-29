@@ -14,7 +14,10 @@ function idFor(m) {
   // same colour and texture = same id, so parts of one colour don't get lines between them
   const key = (m.color ? m.color.getHexString() : 'x') + (m.map ? m.map.uuid : '') + (m.vertexColors ? 'v' : '');
   let h = 2166136261;
-  for (let i = 0; i < key.length; i++) { h ^= key.charCodeAt(i); h = Math.imul(h, 16777619); }
+  for (let i = 0; i < key.length; i++) {
+    h ^= key.charCodeAt(i);
+    h = Math.imul(h, 16777619);
+  }
   return (8 + ((h >>> 0) % 240)) / 255;
 }
 const charCache = new WeakMap();
@@ -23,7 +26,14 @@ function gmat(m, ch) {
   const cache = ch ? charCache : idCache;
   let g = cache.get(m);
   if (!g) {
-    g = new THREE.MeshNormalMaterial({ flatShading: !!m.flatShading, side: m.side, transparent: true, blending: THREE.NoBlending, depthWrite: true, depthTest: true });
+    g = new THREE.MeshNormalMaterial({
+      flatShading: !!m.flatShading,
+      side: m.side,
+      transparent: true,
+      blending: THREE.NoBlending,
+      depthWrite: true,
+      depthTest: true,
+    });
     g.opacity = ch ? 1 : (m.userData.inkId ?? idFor(m));
     cache.set(m, g);
   }
@@ -43,35 +53,65 @@ function inkable(o) {
 export class GBufferPass extends Pass {
   constructor(scene, camera) {
     super();
-    this.scene = scene; this.camera = camera; this.needsSwap = false;
+    this.scene = scene;
+    this.camera = camera;
+    this.needsSwap = false;
     this.depthTexture = new THREE.DepthTexture(4, 4);
-    this.depthTexture.format = THREE.DepthStencilFormat; this.depthTexture.type = THREE.UnsignedInt248Type;
-    this.rt = new THREE.WebGLRenderTarget(4, 4, { minFilter: THREE.NearestFilter, magFilter: THREE.NearestFilter, depthTexture: this.depthTexture });
-    this._hidden = []; this._swapped = [];
+    this.depthTexture.format = THREE.DepthStencilFormat;
+    this.depthTexture.type = THREE.UnsignedInt248Type;
+    this.rt = new THREE.WebGLRenderTarget(4, 4, {
+      minFilter: THREE.NearestFilter,
+      magFilter: THREE.NearestFilter,
+      depthTexture: this.depthTexture,
+    });
+    this._hidden = [];
+    this._swapped = [];
   }
-  get texture() { return this.rt.texture; }
-  setSize(w, h) { this.rt.setSize(w, h); }
+  get texture() {
+    return this.rt.texture;
+  }
+  setSize(w, h) {
+    this.rt.setSize(w, h);
+  }
   render(renderer) {
-    const hidden = this._hidden, swapped = this._swapped;
-    hidden.length = 0; swapped.length = 0;
+    const hidden = this._hidden,
+      swapped = this._swapped;
+    hidden.length = 0;
+    swapped.length = 0;
     this.scene.traverseVisible((o) => {
       if (o === this.scene) return;
-      if (!inkable(o)) { if (o.visible) { o.visible = false; hidden.push(o); } return; }
+      if (!inkable(o)) {
+        if (o.visible) {
+          o.visible = false;
+          hidden.push(o);
+        }
+        return;
+      }
       if (!o.isMesh) return;
       swapped.push(o, o.material);
       const ch = !!o.isSkinnedMesh;
       o.material = Array.isArray(o.material) ? o.material.map((m) => gmat(m, ch)) : gmat(o.material, ch);
     });
-    const bg = this.scene.background, oldClear = renderer.getClearColor(new THREE.Color()), oldA = renderer.getClearAlpha(), oldAuto = renderer.autoClear;
+    const bg = this.scene.background,
+      oldClear = renderer.getClearColor(new THREE.Color()),
+      oldA = renderer.getClearAlpha(),
+      oldAuto = renderer.autoClear;
     this.scene.background = null;
     renderer.setRenderTarget(this.rt);
-    renderer.setClearColor(0x7f7fff, 0); renderer.autoClear = false; renderer.clear();
+    renderer.setClearColor(0x7f7fff, 0);
+    renderer.autoClear = false;
+    renderer.clear();
     renderer.render(this.scene, this.camera);
-    this.scene.background = bg; renderer.setClearColor(oldClear, oldA); renderer.autoClear = oldAuto;
+    this.scene.background = bg;
+    renderer.setClearColor(oldClear, oldA);
+    renderer.autoClear = oldAuto;
     for (const o of hidden) o.visible = true;
     for (let i = 0; i < swapped.length; i += 2) swapped[i].material = swapped[i + 1];
   }
-  dispose() { this.rt.dispose(); this.depthTexture.dispose(); }
+  dispose() {
+    this.rt.dispose();
+    this.depthTexture.dispose();
+  }
 }
 
 // ---------- the ink pass ----------
@@ -130,32 +170,59 @@ void main(){
 export class InkPass extends Pass {
   constructor(gbuf, camera) {
     super();
-    this.gbuf = gbuf; this.camera = camera;
+    this.gbuf = gbuf;
+    this.camera = camera;
     this.mat = new THREE.ShaderMaterial({
       uniforms: {
-        tDiffuse: { value: null }, tNormal: { value: gbuf.texture }, tDepth: { value: gbuf.depthTexture },
-        uTexel: { value: new THREE.Vector2() }, uNear: { value: 0.5 }, uFar: { value: 200 }, uPR: { value: 1 },
-        uSil: { value: 1.5 }, uSilChar: { value: 2.2 }, uCrease: { value: 1 }, uSilT: { value: 0.02 }, uCreaseT: { value: 0.25 }, uIdOn: { value: 1 },
-        uStrength: { value: 1 }, uNearRef: { value: 18 }, uTone: { value: 0.3 }, uWobble: { value: 0 },
+        tDiffuse: { value: null },
+        tNormal: { value: gbuf.texture },
+        tDepth: { value: gbuf.depthTexture },
+        uTexel: { value: new THREE.Vector2() },
+        uNear: { value: 0.5 },
+        uFar: { value: 200 },
+        uPR: { value: 1 },
+        uSil: { value: 1.5 },
+        uSilChar: { value: 2.2 },
+        uCrease: { value: 1 },
+        uSilT: { value: 0.02 },
+        uCreaseT: { value: 0.25 },
+        uIdOn: { value: 1 },
+        uStrength: { value: 1 },
+        uNearRef: { value: 18 },
+        uTone: { value: 0.3 },
+        uWobble: { value: 0 },
         uInk: { value: new THREE.Color(0.012, 0.014, 0.03) },
       },
-      vertexShader: VERT, fragmentShader: FRAG, depthTest: false, depthWrite: false,
+      vertexShader: VERT,
+      fragmentShader: FRAG,
+      depthTest: false,
+      depthWrite: false,
     });
     this.quad = new FullScreenQuad(this.mat);
   }
   set(p) {
     const u = this.mat.uniforms;
-    for (const [k, v] of Object.entries(p)) { if (!u[k]) continue; if (u[k].value && u[k].value.isColor) u[k].value.setRGB(...v); else u[k].value = v; }
+    for (const [k, v] of Object.entries(p)) {
+      if (!u[k]) continue;
+      if (u[k].value && u[k].value.isColor) u[k].value.setRGB(...v);
+      else u[k].value = v;
+    }
   }
-  setSize(w, h) { this.mat.uniforms.uTexel.value.set(1 / w, 1 / h); }
+  setSize(w, h) {
+    this.mat.uniforms.uTexel.value.set(1 / w, 1 / h);
+  }
   render(renderer, writeBuffer, readBuffer) {
     const u = this.mat.uniforms;
     u.tDiffuse.value = readBuffer.texture;
-    u.uNear.value = this.camera.near; u.uFar.value = this.camera.far;
+    u.uNear.value = this.camera.near;
+    u.uFar.value = this.camera.far;
     // line width follows the frame's height (a 900 px tall frame = 1), so a QHD screen or a phone gets the same look
     u.uPR.value = Math.min(3, Math.max(0.8, 1 / u.uTexel.value.y / 900));
     renderer.setRenderTarget(this.renderToScreen ? null : writeBuffer);
     this.quad.render(renderer);
   }
-  dispose() { this.mat.dispose(); this.quad.dispose(); }
+  dispose() {
+    this.mat.dispose();
+    this.quad.dispose();
+  }
 }

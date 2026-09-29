@@ -8,19 +8,19 @@
 import * as THREE from 'three';
 
 export const U = {
-  uSStep: { value: 1.0 },          // band width in stops (1 = each band twice as bright as the one below)
-  uSSoft: { value: 1.0 },          // band edge softness in pixels
-  uSKeep: { value: 0.12 },         // how much of the smooth gradient survives inside a band (1 = no global bands)
-  uSHard: { value: 1.0 },          // per light: hard terminator and hard cast-shadow edges (0 = as lit today)
-  uSTerm: { value: 0.05 },         // where the terminator sits (N.L)
-  uSPool: { value: 0.0 },          // point-lamp pools as flat discs instead of smooth falloff
-  uSShadow: { value: new THREE.Color(0.55, 0.62, 0.95) },  // multiplier in the shadow band (linear)
-  uSTint: { value: 0.6 },          // how strongly the shadow band takes it
-  uSDark: { value: new THREE.Vector2(0.3, 0.85) },         // light factor where the tint is full .. gone
-  uSHatch: { value: 0 },           // hatching strength in shadow
-  uSHatchScale: { value: 14 },     // lines per metre
-  uSBrush: { value: 0 },           // brushed variation on surfaces
-  uSRim: { value: 0 },             // rim light strength
+  uSStep: { value: 1.0 }, // band width in stops (1 = each band twice as bright as the one below)
+  uSSoft: { value: 1.0 }, // band edge softness in pixels
+  uSKeep: { value: 0.12 }, // how much of the smooth gradient survives inside a band (1 = no global bands)
+  uSHard: { value: 1.0 }, // per light: hard terminator and hard cast-shadow edges (0 = as lit today)
+  uSTerm: { value: 0.05 }, // where the terminator sits (N.L)
+  uSPool: { value: 0.0 }, // point-lamp pools as flat discs instead of smooth falloff
+  uSShadow: { value: new THREE.Color(0.55, 0.62, 0.95) }, // multiplier in the shadow band (linear)
+  uSTint: { value: 0.6 }, // how strongly the shadow band takes it
+  uSDark: { value: new THREE.Vector2(0.3, 0.85) }, // light factor where the tint is full .. gone
+  uSHatch: { value: 0 }, // hatching strength in shadow
+  uSHatchScale: { value: 14 }, // lines per metre
+  uSBrush: { value: 0 }, // brushed variation on surfaces
+  uSRim: { value: 0 }, // rim light strength
   uSRimCol: { value: new THREE.Color(0.85, 0.92, 1.0) },
 };
 
@@ -61,7 +61,10 @@ void sToonPoint(inout IncidentLight L, vec3 lc){
 function lightsChunk() {
   let c = THREE.ShaderChunk.lights_fragment_begin;
   c = c.replace(/\? (get\w*Shadow\(.*?\)) : 1\.0;/g, '? sHardS( $1 ) : 1.0;');
-  c = c.replace(/getPointLightInfo\( pointLight, geometryPosition, directLight \);/, '$& sToonPoint( directLight, pointLight.color );');
+  c = c.replace(
+    /getPointLightInfo\( pointLight, geometryPosition, directLight \);/,
+    '$& sToonPoint( directLight, pointLight.color );',
+  );
   c = c.replace(/RE_Direct\( directLight,/g, 'sToonLight( directLight, geometryNormal ); RE_Direct( directLight,');
   return c;
 }
@@ -110,15 +113,19 @@ export function patchMaterial(m) {
   patched.add(m);
   if (!(m.isMeshStandardMaterial || m.isMeshLambertMaterial || m.isMeshPhongMaterial)) return;
   if (m.userData.noStyle) return;
-  const prev = m.onBeforeCompile, prevKey = m.customProgramCacheKey.call(m);
+  const prev = m.onBeforeCompile,
+    prevKey = m.customProgramCacheKey.call(m);
   m.onBeforeCompile = function (sh, r) {
     if (prev) prev.call(this, sh, r);
     Object.assign(sh.uniforms, U);
-    sh.vertexShader = VERT_PARS + sh.vertexShader.replace('#include <project_vertex>', '#include <project_vertex>\n' + VERT_MAIN);
-    sh.fragmentShader = FRAG_PARS + sh.fragmentShader
-      .replace('#include <lights_pars_begin>', '#include <lights_pars_begin>\n' + FRAG_LIGHTS)
-      .replace('#include <lights_fragment_begin>', lightsChunk())
-      .replace('#include <opaque_fragment>', FRAG_MAIN + '#include <opaque_fragment>');
+    sh.vertexShader =
+      VERT_PARS + sh.vertexShader.replace('#include <project_vertex>', '#include <project_vertex>\n' + VERT_MAIN);
+    sh.fragmentShader =
+      FRAG_PARS +
+      sh.fragmentShader
+        .replace('#include <lights_pars_begin>', '#include <lights_pars_begin>\n' + FRAG_LIGHTS)
+        .replace('#include <lights_fragment_begin>', lightsChunk())
+        .replace('#include <opaque_fragment>', FRAG_MAIN + '#include <opaque_fragment>');
   };
   m.customProgramCacheKey = () => prevKey + '|toon2';
   m.needsUpdate = true;
@@ -128,13 +135,15 @@ export function patchMaterial(m) {
 export function patchScene(scene) {
   scene.traverse((o) => {
     if (!o.isMesh) return;
-    if (Array.isArray(o.material)) o.material.forEach(patchMaterial); else patchMaterial(o.material);
+    if (Array.isArray(o.material)) o.material.forEach(patchMaterial);
+    else patchMaterial(o.material);
   });
 }
 
 export function setToon(p) {
   for (const [k, v] of Object.entries(p)) {
-    const u = U[k]; if (!u) continue;
+    const u = U[k];
+    if (!u) continue;
     if (u.value && u.value.isColor) u.value.setRGB(...v);
     else if (u.value && u.value.isVector2) u.value.set(...v);
     else u.value = v;

@@ -26,7 +26,10 @@ export async function offerCmd(who, line, id, { voiceKey } = {}) {
   if (learn(id)) {
     sfx('word');
     ui.refreshWords();
-    ui.toast(`New command: <span class="jp">${WORDS[id].ja}</span> <span class="gl">${WORDS[id].ro}, ${WORDS[id].en}</span>`, 3200);
+    ui.toast(
+      `New command: <span class="jp">${WORDS[id].ja}</span> <span class="gl">${WORDS[id].ro}, ${WORDS[id].en}</span>`,
+      3200,
+    );
   }
   await new Promise((r) => setTimeout(r, 500));
 }
@@ -36,14 +39,32 @@ export function defaultReaction(item, id) {
   const n = item.label;
   const person = /person/.test(item.kind || '');
   const P = {
-    matte: [`${n} waits politely for the rest of the sentence. There isn't one.`, `${n} freezes for a second. "...Yes?"`],
+    matte: [
+      `${n} waits politely for the rest of the sentence. There isn't one.`,
+      `${n} freezes for a second. "...Yes?"`,
+    ],
     akete: [`${n} looks at you. "Open... what, exactly?"`, `${n} opens their mouth to answer, then closes it again.`],
-    kite: [`${n} takes one step toward you. "Yes? Something wrong?"`, `${n} leans over. You didn't actually need anything.`],
-    ugoite: [`${n} shuffles a little to the side. "Sorry, was I in the way?"`, `${n} stretches, as if that's what you meant.`],
+    kite: [
+      `${n} takes one step toward you. "Yes? Something wrong?"`,
+      `${n} leans over. You didn't actually need anything.`,
+    ],
+    ugoite: [
+      `${n} shuffles a little to the side. "Sorry, was I in the way?"`,
+      `${n} stretches, as if that's what you meant.`,
+    ],
     ohayo: [`${n} nods back. "Ohayō gozaimasu."`, `${n} bows a little and says it back.`],
-    yoroshiku: [`${n} looks surprised, then bows. "Yoroshiku onegaishimasu."`, `${n} returns the bow, a little deeper than yours.`],
-    sumimasen: [`${n} waits, eyebrows up, for whatever comes next.`, `${n} looks where you're pointing, then back at you.`],
-    irete: [`${n} glances at the kettle, then at you. "Is that a hint?"`, `${n} looks around for a cup that isn't there.`],
+    yoroshiku: [
+      `${n} looks surprised, then bows. "Yoroshiku onegaishimasu."`,
+      `${n} returns the bow, a little deeper than yours.`,
+    ],
+    sumimasen: [
+      `${n} waits, eyebrows up, for whatever comes next.`,
+      `${n} looks where you're pointing, then back at you.`,
+    ],
+    irete: [
+      `${n} glances at the kettle, then at you. "Is that a hint?"`,
+      `${n} looks around for a cup that isn't there.`,
+    ],
     dashite: [`${n} pats their pockets. "I don't have anything. Sorry."`, `${n} holds out an empty hand, unsure.`],
     tomatte: [`${n} stops, mid-thought. "...What did I do?"`, `${n} freezes, then laughs. "Was I doing something?"`],
   };
@@ -70,36 +91,79 @@ export function walkPerson(rig, pts, { speed = 1.2, blobM } = {}) {
     // the last point on someone ("walk to Eric"): stop at a talking distance in front of them instead
     if (pts.length && window.__game) pts = [...pts.slice(0, -1), standOff(window.__game, rig, pts[pts.length - 1])];
     const path = pts.map(([x, z]) => new THREE.Vector3(x, 0, z));
-    rig._blk = 0; rig._hold = 0; rig._press = 0; rig._detour = false; rig._blocker = null;   // nothing left over from an earlier walk
-    let ph = 0, age = 0, plen = 0;
-    { let q = rig.root.position; for (const v of path) { plen += Math.hypot(v.x - q.x, v.z - q.z); q = v; } }
-    const limit = plen / Math.max(0.3, speed) * 3 + 6;   // a hard cap: whatever happens, the walk ends (soft collision)
+    rig._blk = 0;
+    rig._hold = 0;
+    rig._press = 0;
+    rig._detour = false;
+    rig._blocker = null; // nothing left over from an earlier walk
+    let ph = 0,
+      age = 0,
+      plen = 0;
+    {
+      let q = rig.root.position;
+      for (const v of path) {
+        plen += Math.hypot(v.x - q.x, v.z - q.z);
+        q = v;
+      }
+    }
+    const limit = (plen / Math.max(0.3, speed)) * 3 + 6; // a hard cap: whatever happens, the walk ends (soft collision)
     rig._walk = (dt) => {
       if ((age += dt) > limit) path.length = 0;
-      const p = rig.root.position, t = path[0];
-      if (!t) { walkPose(rig, 0, 0); rig.hips.position.y = HIP; rig._walk = null; res(); return; }
+      const p = rig.root.position,
+        t = path[0];
+      if (!t) {
+        walkPose(rig, 0, 0);
+        rig.hips.position.y = HIP;
+        rig._walk = null;
+        res();
+        return;
+      }
       const d = Math.hypot(t.x - p.x, t.z - p.z);
       // arrived; or the last leg is held up by someone standing on the spot: stop here, next to them (move.js personStep)
       const onSpot = rig._blocker && Math.hypot(rig._blocker.x - t.x, rig._blocker.z - t.z) < rig._blocker.r + 0.35;
-      if (d < 0.05 || (path.length === 1 && onSpot && (rig._blk || 0) > 1.2 && d < 1.2) || (rig._blk || 0) > 4) { path.shift(); rig._blk = 0; rig._detour = false; rig._blocker = null; return; }
+      if (d < 0.05 || (path.length === 1 && onSpot && (rig._blk || 0) > 1.2 && d < 1.2) || (rig._blk || 0) > 4) {
+        path.shift();
+        rig._blk = 0;
+        rig._detour = false;
+        rig._blocker = null;
+        return;
+      }
       // held up by someone standing in the way for a moment: go round them (one detour per leg)
       if ((rig._blk || 0) > 0.6 && rig._blocker && !rig._blocker.rig._walk && !rig._detour && window.__game) {
         const w = detourPoint(window.__game, rig, rig._blocker, [t.x, t.z]);
-        if (w) { path.unshift(new THREE.Vector3(w[0], 0, w[1])); rig._detour = true; rig._blk = 0; return; }
+        if (w) {
+          path.unshift(new THREE.Vector3(w[0], 0, w[1]));
+          rig._detour = true;
+          rig._blk = 0;
+          return;
+        }
       }
       const s = Math.min(d, speed * dt);
       // people keep their distance: hold back behind someone, slide round them (move.js personStep)
-      const [qx, qz] = personStep(window.__game, rig, p.x, p.z, p.x + (t.x - p.x) / d * s, p.z + (t.z - p.z) / d * s, dt);
-      p.x = qx; p.z = qz;
+      const [qx, qz] = personStep(
+        window.__game,
+        rig,
+        p.x,
+        p.z,
+        p.x + ((t.x - p.x) / d) * s,
+        p.z + ((t.z - p.z) / d) * s,
+        dt,
+      );
+      p.x = qx;
+      p.z = qz;
       const want = Math.atan2(t.x - p.x, t.z - p.z);
-      let a = want - rig.root.rotation.y; a = Math.atan2(Math.sin(a), Math.cos(a));
+      let a = want - rig.root.rotation.y;
+      a = Math.atan2(Math.sin(a), Math.cos(a));
       rig.root.rotation.y += a * Math.min(1, dt * 10);
-      ph += dt * 9.5; walkPose(rig, ph, 1);
+      ph += dt * 9.5;
+      walkPose(rig, ph, 1);
       if (blobM) blobM.position.set(p.x, 0.004, p.z);
     };
   });
 }
-export function stepPeople(list, dt) { for (const r of list) if (r && r._walk) r._walk(dt); }
+export function stepPeople(list, dt) {
+  for (const r of list) if (r && r._walk) r._walk(dt);
+}
 
 // turn a rig's head toward a point, smoothly
 export function lookAt(rig, x, z, k = 1) {

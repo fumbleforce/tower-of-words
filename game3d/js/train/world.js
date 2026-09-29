@@ -3,18 +3,18 @@
 import * as THREE from 'three';
 import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.js';
 
-export const SEA_Y = -17;        // sea level, far below the car floor (y = 0)
-export const BEAM_TOP = -0.62;   // top of the straddle beam
-export const SPEED = 9;         // world units per second
-export const PILLAR_GAP = 19;    // distance between pillars
-export const BEAM2_Z = -7.5;     // the parallel line for trains going the other way
-const NP = 7;                    // pillars kept alive around the train
+export const SEA_Y = -17; // sea level, far below the car floor (y = 0)
+export const BEAM_TOP = -0.62; // top of the straddle beam
+export const SPEED = 9; // world units per second
+export const PILLAR_GAP = 19; // distance between pillars
+export const BEAM2_Z = -7.5; // the parallel line for trains going the other way
+const NP = 7; // pillars kept alive around the train
 
 // Direction the sea shader throws shadows along (toward the sun). It is steeper than the key light
 // so the pillar and train shadows land on the water that the camera can actually see.
 export const SEA_SHADOW_DIR = new THREE.Vector3(-0.36, 1.0, 0.62).normalize();
 
-const SEA_VERT = /* glsl */`
+const SEA_VERT = /* glsl */ `
 varying vec3 vW;
 void main(){
   vec4 w = modelMatrix * vec4(position, 1.0);
@@ -22,7 +22,7 @@ void main(){
   gl_Position = projectionMatrix * viewMatrix * w;
 }`;
 
-const SEA_FRAG = /* glsl */`
+const SEA_FRAG = /* glsl */ `
 precision highp float;
 varying vec3 vW;
 uniform float uTime, uScroll, uSeaY, uBeamY, uCarHalfZ, uPillarTop, uQuality, uBeam2Z, uBlur;
@@ -156,14 +156,27 @@ export function buildWorld(scene, { sunDir }) {
   const sea = new THREE.Mesh(
     new THREE.PlaneGeometry(420, 420, 1, 1),
     new THREE.ShaderMaterial({
-      vertexShader: SEA_VERT, fragmentShader: SEA_FRAG,
+      vertexShader: SEA_VERT,
+      fragmentShader: SEA_FRAG,
       uniforms: {
-        uTime: { value: 0 }, uScroll: { value: 0 }, uSeaY: { value: SEA_Y }, uBeamY: { value: BEAM_TOP },
-        uCarHalfZ: { value: 1.3 }, uBeam2Z: { value: BEAM2_Z }, uBlur: { value: 0.14 }, uPillarTop: { value: BEAM_TOP - 0.6 }, uQuality: { value: 1 },
-        uShadowDir: { value: SEA_SHADOW_DIR.clone() }, uSunDir: { value: sunDir.clone() }, uCamPos: { value: new THREE.Vector3() },
+        uTime: { value: 0 },
+        uScroll: { value: 0 },
+        uSeaY: { value: SEA_Y },
+        uBeamY: { value: BEAM_TOP },
+        uCarHalfZ: { value: 1.3 },
+        uBeam2Z: { value: BEAM2_Z },
+        uBlur: { value: 0.14 },
+        uPillarTop: { value: BEAM_TOP - 0.6 },
+        uQuality: { value: 1 },
+        uShadowDir: { value: SEA_SHADOW_DIR.clone() },
+        uSunDir: { value: sunDir.clone() },
+        uCamPos: { value: new THREE.Vector3() },
         uPillarX: { value: new Array(NP).fill(0) },
-        uDeep: { value: lin('#0c4478') }, uMid: { value: lin('#17639c') }, uShallow: { value: lin('#4796c4') },
-        uFoam: { value: lin('#f2f9ff') }, uShadow: { value: lin('#3a5f9a') },
+        uDeep: { value: lin('#0c4478') },
+        uMid: { value: lin('#17639c') },
+        uShallow: { value: lin('#4796c4') },
+        uFoam: { value: lin('#f2f9ff') },
+        uShadow: { value: lin('#3a5f9a') },
       },
     }),
   );
@@ -180,12 +193,15 @@ export function buildWorld(scene, { sunDir }) {
   beam.receiveShadow = true;
   root.add(beam);
   // the parallel guideway for trains going the other way, further off
-  const beam2 = beam.clone(); beam2.position.z = BEAM2_Z; root.add(beam2);
+  const beam2 = beam.clone();
+  beam2.position.z = BEAM2_Z;
+  root.add(beam2);
 
   const joints = new THREE.Group();
   root.add(joints);
   const jointGeo = new THREE.BoxGeometry(0.05, 0.92, 0.64);
-  const JN = 16, JGAP = 9.5;
+  const JN = 16,
+    JGAP = 9.5;
   for (let i = 0; i < JN; i++) {
     const j = new THREE.Mesh(jointGeo, concreteDark);
     j.position.set(0, BEAM_TOP - 0.45, 0);
@@ -206,8 +222,16 @@ export function buildWorld(scene, { sunDir }) {
     cap.position.y = BEAM_TOP - 0.9 - 0.2;
     const foot = new THREE.Mesh(footGeo, concreteDark);
     foot.position.y = SEA_Y + 0.1;
-    for (const m of [col, cap, foot]) { m.castShadow = false; m.receiveShadow = false; g.add(m); }
-    for (const m of [col, cap, foot]) { const c2 = m.clone(); c2.position.z = BEAM2_Z; g.add(c2); }
+    for (const m of [col, cap, foot]) {
+      m.castShadow = false;
+      m.receiveShadow = false;
+      g.add(m);
+    }
+    for (const m of [col, cap, foot]) {
+      const c2 = m.clone();
+      c2.position.z = BEAM2_Z;
+      g.add(c2);
+    }
     root.add(g);
     pillars.push(g);
   }
@@ -222,7 +246,7 @@ export function buildWorld(scene, { sunDir }) {
     for (let i = 0; i < NP; i++) {
       // pillar world x, wrapping around the train
       let x = i * PILLAR_GAP - (scroll % span);
-      x = ((x % span) + span) % span - span / 2 + 4;
+      x = (((x % span) + span) % span) - span / 2 + 4;
       pillars[i].position.x = x;
       u.uPillarX.value[i] = x;
     }
@@ -230,7 +254,7 @@ export function buildWorld(scene, { sunDir }) {
     joints.children.forEach((j, idx) => {
       const i = idx;
       let x = i * JGAP - (scroll % jspan);
-      j.position.x = ((x % jspan) + jspan) % jspan - jspan / 2;
+      j.position.x = (((x % jspan) + jspan) % jspan) - jspan / 2;
     });
   }
 
@@ -241,5 +265,13 @@ export function buildWorld(scene, { sunDir }) {
     return m;
   }
 
-  return { root, sea, update, pillarNear, setQuality: (q) => { u.uQuality.value = q ? 1 : 0.6; } };
+  return {
+    root,
+    sea,
+    update,
+    pillarNear,
+    setQuality: (q) => {
+      u.uQuality.value = q ? 1 : 0.6;
+    },
+  };
 }

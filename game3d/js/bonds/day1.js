@@ -17,21 +17,33 @@ export const MOMENTS = {
       fact: [['mio', 'mum', 'Stays at her mum’s on the mainland. Her mum packs too much food.']],
     },
     platform: {
-      remember: [['mio', 'held_doors', 'You held the train doors with 待って.'], ['kuroda', 'held_doors', 'The train doors waited for him after you said 待って.']],
+      remember: [
+        ['mio', 'held_doors', 'You held the train doors with 待って.'],
+        ['kuroda', 'held_doors', 'The train doors waited for him after you said 待って.'],
+      ],
     },
     mio_tests: { fact: [['mio', 'her_list', 'Anything reported broken goes on her list.']] },
   },
   gate: {
     ohayo_guard: { remember: [['guard', 'greeted', 'You said good morning before trying the gate.']] },
     yoroshiku_guard: { remember: [['guard', 'greeted', 'You greeted him before trying the gate.']] },
-    card_red: { if: '!greeted_guard', remember: [['guard', 'no_greeting', 'You went for the gate without a good morning.']] },
+    card_red: {
+      if: '!greeted_guard',
+      remember: [['guard', 'no_greeting', 'You went for the gate without a good morning.']],
+    },
     word_say: {
-      remember: [['kuroda', 'akete', 'You said 開けて with him, and the gate flew open.'], ['guard', 'gate_burst', 'The gate burst open when you spoke to it.']],
+      remember: [
+        ['kuroda', 'akete', 'You said 開けて with him, and the gate flew open.'],
+        ['guard', 'gate_burst', 'The gate burst open when you spoke to it.'],
+      ],
       bond: [['kuroda', 'help', 1, 'got him through the jammed gate']],
     },
     mime_cat: { remember: [['guard', 'pointed_cat', 'You pointed at the cat he says isn’t there.']] },
     mime_lift: {
-      remember: [['kuroda', 'mime', 'You got the guard to see the briefcase problem.'], ['guard', 'laughed', 'You made him laugh with the briefcase mime.', '!guard_cool']],
+      remember: [
+        ['kuroda', 'mime', 'You got the guard to see the briefcase problem.'],
+        ['guard', 'laughed', 'You made him laugh with the briefcase mime.', '!guard_cool'],
+      ],
     },
   },
   office: {
@@ -45,7 +57,10 @@ export const MOMENTS = {
     yoroshiku_kenji: { bond: [['kenji', 'greet', 1, 'greeted him']] },
     ohayo_mio: { fact: [['mio', 'too_polite', 'Finds おはようございます too polite from you.']] },
     kenji_first: { fact: [['kenji', 'chair', 'Borrowed your chair because his broke.']] },
-    kenji_again: { if: 'chair_back && !kenji_talked', remember: [['kenji', 'chair_back', 'You got your chair back from the machine room without a fuss.']] },
+    kenji_again: {
+      if: 'chair_back && !kenji_talked',
+      remember: [['kenji', 'chair_back', 'You got your chair back from the machine room without a fuss.']],
+    },
     kenji_small: { remember: [['kenji', 'practise', 'You told him your Japanese is worse than his English.']] },
     kenji_pat: { remember: [['kenji', 'patted_chair', 'You patted the chair. He patted his desk.']] },
     akete_machine: { remember: [['mio', 'machine_door', 'You opened the machine room door without a card.']] },
@@ -55,8 +70,13 @@ export const MOMENTS = {
 
     // ---------- lunch, the one choice
     mio_lunch_end: { remember: [['mio', 'lunch', 'You had lunch with her in the machine room.']] },
-    mio_b2: { fact: [['mio', 'why_b2', 'Works in B2 so she doesn’t have to bow all day. Looks after the old machines.']] },
-    mio_doors: { remember: [['mio', 'asked_doors', 'You asked her about the doors.']], fact: [['mio', 'sensor', 'Told the station the doors were the sensor.']] },
+    mio_b2: {
+      fact: [['mio', 'why_b2', 'Works in B2 so she doesn’t have to bow all day. Looks after the old machines.']],
+    },
+    mio_doors: {
+      remember: [['mio', 'asked_doors', 'You asked her about the doors.']],
+      fact: [['mio', 'sensor', 'Told the station the doors were the sensor.']],
+    },
     mio_quiet: { remember: [['mio', 'quiet_lunch', 'You ate with her and didn’t talk.']] },
     mio_bond: { remember: [['mio', 'rack', 'You stopped the rack alarm with 止まって when she asked.']] },
     mori_cups: { remember: [['mori', 'lunch', 'You had lunch with him in the kitchenette.']] },
@@ -80,13 +100,16 @@ export const MOMENTS = {
     gift_mori_cornsoup: { remember: [['mori', 'cornsoup', 'You brought him his corn soup.']] },
     gift_mori_other: { remember: [['mori', 'gift', 'You brought him a drink.']] },
     gift_kenji_melon: {
-      remember: [['kenji', 'melon', 'You brought him a melon soda. He says he owes you.']], notice: [['kenji', 'melon']],
+      remember: [['kenji', 'melon', 'You brought him a melon soda. He says he owes you.']],
+      notice: [['kenji', 'melon']],
       bond: [['kenji', 'gift', 1, 'melon soda']],
     },
     gift_kenji_other: { remember: [['kenji', 'gift', 'You brought him a drink he didn’t open.']] },
 
     // ---------- evening
-    emi_drops_in: { fact: [['emi', 'ten_years', 'Told head office B2 can keep every machine running for ten more years.']] },
+    emi_drops_in: {
+      fact: [['emi', 'ten_years', 'Told head office B2 can keep every machine running for ten more years.']],
+    },
   },
 };
 
@@ -122,7 +145,7 @@ export const EXPECT = {
     kenji: { step: 1, pts: 1 },
     guard: { step: 1, pts: 1, remembers: ['greeted', 'gate_burst'] },
     kuroda: { pts: 1, remembers: ['held_doors', 'akete'] },
-    },
+  },
   // the magic way, with lunch in the kitchenette
   'magic+mori': {
     mio: { step: 1, pts: 1, remembers: ['held_doors', 'copier'] },
@@ -130,7 +153,7 @@ export const EXPECT = {
     kenji: { step: 1, pts: 1 },
     guard: { step: 1, pts: 1, remembers: ['greeted', 'gate_burst'] },
     kuroda: { pts: 1, remembers: ['held_doors', 'akete'] },
-    },
+  },
   social: {
     mio: { step: 1, pts: 3, remembers: ['held_doors', 'lunch', 'rack', 'copier'] },
     mori: { step: 1, pts: 2, remembers: ['ohayo', 'copier'] },

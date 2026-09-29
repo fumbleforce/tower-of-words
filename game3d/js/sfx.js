@@ -6,12 +6,19 @@
 import { audioBus, isMuted } from './ui.js';
 
 let C = null;
-const bufs = {};          // file -> AudioBuffer | Promise
-const live = {};          // kind -> gain node of the last play (so it can be cut short)
-const lastAt = {};        // kind -> time of the last play (cooldowns)
+const bufs = {}; // file -> AudioBuffer | Promise
+const live = {}; // kind -> gain node of the last play (so it can be cut short)
+const lastAt = {}; // kind -> time of the last play (cooldowns)
 // audio can only start after a tap or a key; until then nothing here creates the context
 let unlocked = false;
-for (const ev of ['pointerdown', 'keydown', 'touchstart']) window.addEventListener(ev, () => { unlocked = true; }, { capture: true, once: true });
+for (const ev of ['pointerdown', 'keydown', 'touchstart'])
+  window.addEventListener(
+    ev,
+    () => {
+      unlocked = true;
+    },
+    { capture: true, once: true },
+  );
 
 // kind -> files (variants), random spread in playback rate and gain (dB), minimum gap between plays (s)
 const K = {
@@ -43,61 +50,115 @@ const K = {
 // 'door' means different doors in different places; until the places name them, pick by place
 const DOOR_BY_PLACE = { train: 'traindoor', gate: 'glassdoor' };
 let placeName = '';
-export function setPlace(name) { placeName = name || ''; }
+export function setPlace(name) {
+  placeName = name || '';
+}
 
 export function ctx() {
   if (!unlocked && !C) return null;
-  if (!C) { const b = audioBus('sfx'); C = b ? b.context : null; if (C) preloadAll(); }
+  if (!C) {
+    const b = audioBus('sfx');
+    C = b ? b.context : null;
+    if (C) preloadAll();
+  }
   return C;
 }
 // the context if audio is unlocked and running (never creates one before a tap)
-export function running() { const c = unlocked ? ctx() : null; return c && c.state === 'running' ? c : null; }
-export function bus(name = 'sfx') { return audioBus(name); }
+export function running() {
+  const c = unlocked ? ctx() : null;
+  return c && c.state === 'running' ? c : null;
+}
+export function bus(name = 'sfx') {
+  return audioBus(name);
+}
 export { isMuted };
 
 const url = (f) => new URL(`../audio/sfx/${f}.mp3?v=${encodeURIComponent(window.BUILD || '')}`, import.meta.url).href;
 export function load(f) {
   if (!bufs[f]) {
-    bufs[f] = fetch(url(f)).then((r) => { if (!r.ok) throw new Error(f); return r.arrayBuffer(); })
+    bufs[f] = fetch(url(f))
+      .then((r) => {
+        if (!r.ok) throw new Error(f);
+        return r.arrayBuffer();
+      })
       .then((a) => new Promise((ok, no) => C.decodeAudioData(a, ok, no)))
-      .then((b) => (bufs[f] = b)).catch(() => (bufs[f] = null));
+      .then((b) => (bufs[f] = b))
+      .catch(() => (bufs[f] = null));
   }
   return bufs[f];
 }
-function preloadAll() { const all = new Set(Object.values(K).flatMap((k) => k.f)); for (const f of all) load(f); }
+function preloadAll() {
+  const all = new Set(Object.values(K).flatMap((k) => k.f));
+  for (const f of all) load(f);
+}
 
 // Play a kind. opts: { gain (linear, default 1), rate, at (seconds from now), pan (-1..1) }.
 // Returns { stop(ms) } (a no-op if nothing played).
 export function sfx(kind, opts = {}) {
   const none = { stop() {} };
   if (isMuted()) return none;
-  const c = ctx(); if (!c) return none;
+  const c = ctx();
+  if (!c) return none;
   if (kind === 'door' && DOOR_BY_PLACE[placeName]) kind = DOOR_BY_PLACE[placeName];
-  const k = K[kind]; if (!k) { return none; }
+  const k = K[kind];
+  if (!k) {
+    return none;
+  }
   const now = c.currentTime;
   if (k.gap && lastAt[kind] && now - lastAt[kind] < k.gap) return none;
   lastAt[kind] = now;
   const f = k.f[Math.floor(Math.random() * k.f.length)];
   const b = bufs[f];
-  if (!b || b instanceof Promise) { load(f); return none; }
-  const src = c.createBufferSource(); src.buffer = b;
+  if (!b || b instanceof Promise) {
+    load(f);
+    return none;
+  }
+  const src = c.createBufferSource();
+  src.buffer = b;
   const spread = (r) => (r ? (Math.random() * 2 - 1) * r : 0);
   src.playbackRate.value = (opts.rate || 1) * (1 + spread(k.rate));
-  const g = c.createGain(); g.gain.value = (opts.gain ?? 1) * Math.pow(10, spread(k.db) / 20);
+  const g = c.createGain();
+  g.gain.value = (opts.gain ?? 1) * Math.pow(10, spread(k.db) / 20);
   let node = src.connect(g);
-  if (opts.pan && c.createStereoPanner) { const p = c.createStereoPanner(); p.pan.value = Math.max(-1, Math.min(1, opts.pan)); node = node.connect(p); }
+  if (opts.pan && c.createStereoPanner) {
+    const p = c.createStereoPanner();
+    p.pan.value = Math.max(-1, Math.min(1, opts.pan));
+    node = node.connect(p);
+  }
   node.connect(audioBus('sfx'));
   const at = now + (opts.at || 0);
   src.start(at);
   live[kind] = g;
-  if (kind === 'kotodama') { for (const f of dipHooks) f(0.25, 0.08, 1.4, 1.2); }   // the world goes quiet while the word takes hold
-  const stop = (ms = 40) => { const t = c.currentTime; g.gain.cancelScheduledValues(t); g.gain.setValueAtTime(g.gain.value, t); g.gain.linearRampToValueAtTime(0, t + ms / 1000); try { src.stop(t + ms / 1000 + 0.02); } catch { /* */ } };
+  if (kind === 'kotodama') {
+    for (const f of dipHooks) f(0.25, 0.08, 1.4, 1.2);
+  } // the world goes quiet while the word takes hold
+  const stop = (ms = 40) => {
+    const t = c.currentTime;
+    g.gain.cancelScheduledValues(t);
+    g.gain.setValueAtTime(g.gain.value, t);
+    g.gain.linearRampToValueAtTime(0, t + ms / 1000);
+    try {
+      src.stop(t + ms / 1000 + 0.02);
+    } catch {
+      /* */
+    }
+  };
   return { stop };
 }
 // cut a kind short (the door chime stops mid-note when a kotodama freezes the doors)
-export function stopSfx(kind, ms = 40) { const g = live[kind]; if (!g || !C) return; delete live[kind]; const t = C.currentTime; g.gain.cancelScheduledValues(t); g.gain.setValueAtTime(g.gain.value, t); g.gain.linearRampToValueAtTime(0, t + ms / 1000); }
+export function stopSfx(kind, ms = 40) {
+  const g = live[kind];
+  if (!g || !C) return;
+  delete live[kind];
+  const t = C.currentTime;
+  g.gain.cancelScheduledValues(t);
+  g.gain.setValueAtTime(g.gain.value, t);
+  g.gain.linearRampToValueAtTime(0, t + ms / 1000);
+}
 
 // ---------- dips ----------
 // Things that should go quiet for a moment (ambience, and music if the shell registers it) register here.
 const dipHooks = new Set();
-export function onDip(fn) { dipHooks.add(fn); }
+export function onDip(fn) {
+  dipHooks.add(fn);
+}

@@ -6,7 +6,7 @@
 const Q = new URLSearchParams(location.search);
 const plain = Q.has('plainlook');
 export const LOOK = {
-  surf: Q.has('surf') ? Q.get('surf') !== '0' : plain ? false : null,   // null: follow the setting
+  surf: Q.has('surf') ? Q.get('surf') !== '0' : plain ? false : null, // null: follow the setting
   bake: Q.has('bake') ? Q.get('bake') : plain ? '0' : 'soft',
   detail: Q.has('detail') ? Q.get('detail') !== '0' : !plain,
 };

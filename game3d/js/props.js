@@ -15,19 +15,42 @@ let _kind = 0;
 
 // Muted palette from game3d/ref/2-security-gate-muted.png
 export const PAL = {
-  floor: '#a4a2a7', floorSeam: '#918f95', floorDark: '#99979c',
-  wall: '#6b7180', wallTop: '#a3a9b3', wallInner: '#6c7280', skirting: '#454a54', trim: '#565c67',
-  door: '#474d57', doorFrame: '#666c77', doorWin: '#9fb1c2',
-  bench: '#454956', benchBack: '#4a4e5b', benchFrame: '#858b96',
-  metal: '#9aa0aa', dark: '#3e434d', charcoal: '#2f333b',
-  glass: '#b9cbd6', planter: '#c7c3bb', soil: '#4b3f38',
+  floor: '#a4a2a7',
+  floorSeam: '#918f95',
+  floorDark: '#99979c',
+  wall: '#6b7180',
+  wallTop: '#a3a9b3',
+  wallInner: '#6c7280',
+  skirting: '#454a54',
+  trim: '#565c67',
+  door: '#474d57',
+  doorFrame: '#666c77',
+  doorWin: '#9fb1c2',
+  bench: '#454956',
+  benchBack: '#4a4e5b',
+  benchFrame: '#858b96',
+  metal: '#9aa0aa',
+  dark: '#3e434d',
+  charcoal: '#2f333b',
+  glass: '#b9cbd6',
+  planter: '#c7c3bb',
+  soil: '#4b3f38',
   leaf: ['#4d6b47', '#577650', '#43603f', '#5f7d57', '#4a6645'],
-  lamp: '#ffe2b8', lampEm: '#ffcf8a',
-  desk: '#d5d6d3', deskTop: '#d8d9d5', deskLeg: '#8b919b', drawer: '#8e949e',
-  chair: '#3a4254', chairDark: '#2c3242',
-  screen: '#9cc3e8', monitor: '#2e323a',
-  paper: '#f2f0ea', box: '#b99a73', boxDark: '#a3865f',
-  tileWhite: '#d8dadb', tileBlue: '#8fa0b3',
+  lamp: '#ffe2b8',
+  lampEm: '#ffcf8a',
+  desk: '#d5d6d3',
+  deskTop: '#d8d9d5',
+  deskLeg: '#8b919b',
+  drawer: '#8e949e',
+  chair: '#3a4254',
+  chairDark: '#2c3242',
+  screen: '#9cc3e8',
+  monitor: '#2e323a',
+  paper: '#f2f0ea',
+  box: '#b99a73',
+  boxDark: '#a3865f',
+  tileWhite: '#d8dadb',
+  tileBlue: '#8fa0b3',
 };
 
 const mats = new Map();
@@ -36,30 +59,47 @@ export function mat(color, opts = {}) {
   if (!mats.has(key)) mats.set(key, new THREE.MeshStandardMaterial({ color, roughness: 0.8, metalness: 0, ...opts }));
   return mats.get(key);
 }
-export function emissive(color, glow, k = 1.6) { return mat(color, { emissive: new THREE.Color(glow), emissiveIntensity: k }); }
+export function emissive(color, glow, k = 1.6) {
+  return mat(color, { emissive: new THREE.Color(glow), emissiveIntensity: k });
+}
 
-export function sh(m, cast = true, recv = true) { m.castShadow = cast; m.receiveShadow = recv; return m; }
+export function sh(m, cast = true, recv = true) {
+  m.castShadow = cast;
+  m.receiveShadow = recv;
+  return m;
+}
 
 // rounded box sitting on y0 (bottom), centred on x/z
 export function rbox(w, h, d, color, { x = 0, y = 0, z = 0, r = 0.03, seg = 2, m, cast = true, recv = true } = {}) {
-  const mesh = new THREE.Mesh(new RoundedBoxGeometry(w, h, d, seg, Math.min(r, w / 2 - 0.001, h / 2 - 0.001, d / 2 - 0.001)), m || mat(color));
+  const mesh = new THREE.Mesh(
+    new RoundedBoxGeometry(w, h, d, seg, Math.min(r, w / 2 - 0.001, h / 2 - 0.001, d / 2 - 0.001)),
+    m || mat(color),
+  );
   mesh.position.set(x, y + h / 2, z);
   return sh(mesh, cast, recv);
 }
 
 // ---------- text on a plate (signs, posters, name cards) ----------
 export function textTexture(draw, w = 512, h = 256) {
-  const c = document.createElement('canvas'); c.width = w; c.height = h;
+  const c = document.createElement('canvas');
+  c.width = w;
+  c.height = h;
   const g = c.getContext('2d');
   draw(g, w, h);
-  const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; t.anisotropy = 4;
+  const t = new THREE.CanvasTexture(c);
+  t.colorSpace = THREE.SRGBColorSpace;
+  t.anisotropy = 4;
   return t;
 }
 export const JP_FONT = '"Zen Kaku Gothic New", "Noto Sans CJK JP", "Noto Sans JP", sans-serif';
 
 export function plane(w, h, tex, { emissiveK = 0 } = {}) {
   const m = new THREE.MeshStandardMaterial({ map: tex, roughness: 0.75 });
-  if (emissiveK) { m.emissive = new THREE.Color('#ffffff'); m.emissiveMap = tex; m.emissiveIntensity = emissiveK; }
+  if (emissiveK) {
+    m.emissive = new THREE.Color('#ffffff');
+    m.emissiveMap = tex;
+    m.emissiveIntensity = emissiveK;
+  }
   const p = new THREE.Mesh(new THREE.PlaneGeometry(w, h), m);
   p.receiveShadow = true;
   return p;
@@ -74,26 +114,46 @@ export function plainPlant({ size = 1, seed = 1, pot = PAL.planter, tall = 1 } =
   const s = size;
   g.add(rbox(0.36 * s, 0.34 * s, 0.36 * s, pot, { r: 0.03 }));
   g.add(rbox(0.3 * s, 0.02, 0.3 * s, PAL.soil, { y: 0.335 * s, r: 0.005, cast: false }));
-  const leaves = new THREE.Group(); leaves.position.y = 0.34 * s; g.add(leaves);
+  const leaves = new THREE.Group();
+  leaves.position.y = 0.34 * s;
+  g.add(leaves);
   let r = seed * 9301 + 49297;
-  const rnd = () => { r = (r * 9301 + 49297) % 233280; return r / 233280; };
+  const rnd = () => {
+    r = (r * 9301 + 49297) % 233280;
+    return r / 233280;
+  };
   const n = 11;
   for (let i = 0; i < n; i++) {
     const a = (i / n) * Math.PI * 2 + rnd() * 0.4;
-    const up = i < 3 ? 0.9 : 0.35 + rnd() * 0.35;          // a few stand up in the middle
+    const up = i < 3 ? 0.9 : 0.35 + rnd() * 0.35; // a few stand up in the middle
     const L = (0.26 + rnd() * 0.12) * s * (i < 3 ? 1.1 * tall : 1);
     const dir = V(Math.cos(a) * Math.cos(up), Math.sin(up) * tall, Math.sin(a) * Math.cos(up)).normalize();
     const side = V(-Math.sin(a), 0, Math.cos(a)).multiplyScalar(0.055 * s);
     const base = V(Math.cos(a) * 0.03, 0.02, Math.sin(a) * 0.03);
-    const mid = base.clone().addScaledVector(dir, L * 0.5).add(V(0, 0.03 * s, 0));
+    const mid = base
+      .clone()
+      .addScaledVector(dir, L * 0.5)
+      .add(V(0, 0.03 * s, 0));
     const tip = base.clone().addScaledVector(dir, L);
     tip.y -= (1 - Math.sin(up)) * 0.05 * s;
     const th = V(0, 0.012, 0);
-    const pts = [base.clone().add(side.clone().multiplyScalar(0.3)), base.clone().sub(side.clone().multiplyScalar(0.3)),
-      mid.clone().add(side), mid.clone().sub(side), mid.clone().add(side).add(th), mid.clone().sub(side).add(th), tip, tip.clone().add(th)];
+    const pts = [
+      base.clone().add(side.clone().multiplyScalar(0.3)),
+      base.clone().sub(side.clone().multiplyScalar(0.3)),
+      mid.clone().add(side),
+      mid.clone().sub(side),
+      mid.clone().add(side).add(th),
+      mid.clone().sub(side).add(th),
+      tip,
+      tip.clone().add(th),
+    ];
     const col = PAL.leaf[(i + seed) % PAL.leaf.length];
-    const m = new THREE.Mesh(hull(pts, col, { grad: 0.25, name: 'leaf' }).build(), mat('#ffffff', { vertexColors: true, roughness: 0.85 }));
-    sh(m); leaves.add(m);
+    const m = new THREE.Mesh(
+      hull(pts, col, { grad: 0.25, name: 'leaf' }).build(),
+      mat('#ffffff', { vertexColors: true, roughness: 0.85 }),
+    );
+    sh(m);
+    leaves.add(m);
   }
   g.userData.leaves = leaves;
   return g;
@@ -130,7 +190,10 @@ export function lampPost() {
   const g = new THREE.Group();
   g.add(rbox(0.2, 0.36, 0.2, PAL.dark, { r: 0.02 }));
   g.add(rbox(0.22, 0.04, 0.22, PAL.dark, { y: 0.36, r: 0.01 }));
-  const top = new THREE.Mesh(new THREE.PlaneGeometry(0.16, 0.16), emissive(PAL.lamp, PAL.lampEm, 2.4)); top.rotation.x = -Math.PI / 2; top.position.y = 0.401; g.add(top);
+  const top = new THREE.Mesh(new THREE.PlaneGeometry(0.16, 0.16), emissive(PAL.lamp, PAL.lampEm, 2.4));
+  top.rotation.x = -Math.PI / 2;
+  top.position.y = 0.401;
+  g.add(top);
   return g;
 }
 
@@ -139,12 +202,29 @@ export const door = (w, h, o) => (LOOK.detail ? D.door(w, h, o) : plainDoor(w, h
 export function plainDoor(w = 0.8, h = 1.25, { double = false, windows = true } = {}) {
   const g = new THREE.Group();
   g.add(rbox(w + 0.12, h + 0.06, 0.06, PAL.doorFrame, { r: 0.02 }));
-  const leaves = double ? 2 : 1, lw = (w - 0.02) / leaves;
+  const leaves = double ? 2 : 1,
+    lw = (w - 0.02) / leaves;
   for (let i = 0; i < leaves; i++) {
     const x = -w / 2 + lw * (i + 0.5) + 0.01;
     g.add(rbox(lw - 0.02, h - 0.02, 0.07, PAL.door, { x, z: 0.01, r: 0.02 }));
-    if (windows) g.add(rbox(0.08, 0.34, 0.075, null, { x: x + (double ? (i ? -1 : 1) * lw * 0.22 : lw * 0.3), y: h * 0.52, z: 0.012, r: 0.02, m: mat(PAL.doorWin, { roughness: 0.3 }) }));
-    g.add(rbox(0.025, 0.12, 0.04, PAL.metal, { x: x + (double ? (i ? -1 : 1) * lw * 0.4 : -lw * 0.38), y: h * 0.45, z: 0.06, r: 0.01 }));
+    if (windows)
+      g.add(
+        rbox(0.08, 0.34, 0.075, null, {
+          x: x + (double ? (i ? -1 : 1) * lw * 0.22 : lw * 0.3),
+          y: h * 0.52,
+          z: 0.012,
+          r: 0.02,
+          m: mat(PAL.doorWin, { roughness: 0.3 }),
+        }),
+      );
+    g.add(
+      rbox(0.025, 0.12, 0.04, PAL.metal, {
+        x: x + (double ? (i ? -1 : 1) * lw * 0.4 : -lw * 0.38),
+        y: h * 0.45,
+        z: 0.06,
+        r: 0.01,
+      }),
+    );
   }
   return g;
 }
@@ -159,27 +239,43 @@ export function plainWall(axis, a, b, c, h, t, { holes = [], color = PAL.wall, t
   const len = b - a;
   // split into rectangles around the holes
   const xs = [0, len];
-  for (const [f, tt] of holes) { xs.push(f - a, tt - a); }
+  for (const [f, tt] of holes) {
+    xs.push(f - a, tt - a);
+  }
   const cuts = [...new Set(xs)].sort((p, q) => p - q);
   for (let i = 0; i < cuts.length - 1; i++) {
-    const u0 = cuts[i], u1 = cuts[i + 1], mid = (u0 + u1) / 2 + a;
+    const u0 = cuts[i],
+      u1 = cuts[i + 1],
+      mid = (u0 + u1) / 2 + a;
     const hole = holes.find(([f, tt]) => mid > f && mid < tt);
     if (!hole) segs.push([u0, u1, 0, h]);
-    else { if (hole[2] > 0.001) segs.push([u0, u1, 0, hole[2]]); if (hole[3] < h - 0.001) segs.push([u0, u1, hole[3], h]); }
+    else {
+      if (hole[2] > 0.001) segs.push([u0, u1, 0, hole[2]]);
+      if (hole[3] < h - 0.001) segs.push([u0, u1, hole[3], h]);
+    }
   }
-  const wm = mat(color), tm = mat(top);
+  const wm = mat(color),
+    tm = mat(top);
   for (const [u0, u1, y0, y1] of segs) {
-    const L = u1 - u0, cU = a + (u0 + u1) / 2;
+    const L = u1 - u0,
+      cU = a + (u0 + u1) / 2;
     const geo = new THREE.BoxGeometry(axis === 'x' ? L : t, y1 - y0, axis === 'x' ? t : L);
     const mesh = new THREE.Mesh(geo, wm);
     mesh.position.set(axis === 'x' ? cU : c, (y0 + y1) / 2, axis === 'x' ? c : cU);
     g.add(sh(mesh));
     if (y0 < 0.001 && y1 > 0.3) {
-      const sk = new THREE.Mesh(new THREE.BoxGeometry(axis === 'x' ? L : t + 0.012, 0.1, axis === 'x' ? t + 0.012 : L), mat(PAL.skirting));
-      sk.position.set(mesh.position.x, 0.05, mesh.position.z); g.add(sh(sk, false, true));
+      const sk = new THREE.Mesh(
+        new THREE.BoxGeometry(axis === 'x' ? L : t + 0.012, 0.1, axis === 'x' ? t + 0.012 : L),
+        mat(PAL.skirting),
+      );
+      sk.position.set(mesh.position.x, 0.05, mesh.position.z);
+      g.add(sh(sk, false, true));
     }
     if (y1 >= h - 0.001) {
-      const cap = new THREE.Mesh(new THREE.BoxGeometry(axis === 'x' ? L + 0.001 : t + 0.02, 0.03, axis === 'x' ? t + 0.02 : L + 0.001), tm);
+      const cap = new THREE.Mesh(
+        new THREE.BoxGeometry(axis === 'x' ? L + 0.001 : t + 0.02, 0.03, axis === 'x' ? t + 0.02 : L + 0.001),
+        tm,
+      );
       cap.position.set(mesh.position.x, h + 0.015, mesh.position.z);
       g.add(sh(cap, false, true));
     }
@@ -188,28 +284,51 @@ export function plainWall(axis, a, b, c, h, t, { holes = [], color = PAL.wall, t
 }
 
 // ---------- floor with tile seams ----------
-export function tileFloor(x0, x1, z0, z1, tile = 1.2, { color = PAL.floor, seam = PAL.floorSeam, y = 0, seamW = 0.035, bands } = {}) {
+export function tileFloor(
+  x0,
+  x1,
+  z0,
+  z1,
+  tile = 1.2,
+  { color = PAL.floor, seam = PAL.floorSeam, y = 0, seamW = 0.035, bands } = {},
+) {
   const g = new THREE.Group();
-  const f = new THREE.Mesh(new THREE.BoxGeometry(x1 - x0, 0.1, z1 - z0), mat(color, { roughness: 0.3, metalness: 0.04 }));
-  f.position.set((x0 + x1) / 2, y - 0.05, (z0 + z1) / 2); f.receiveShadow = true; f.name = 'floor';
-  f.userData.surf = 'tile'; f.userData.tile = [x0, z0, tile];   // the procedural look lines its tiles up with the seams
+  const f = new THREE.Mesh(
+    new THREE.BoxGeometry(x1 - x0, 0.1, z1 - z0),
+    mat(color, { roughness: 0.3, metalness: 0.04 }),
+  );
+  f.position.set((x0 + x1) / 2, y - 0.05, (z0 + z1) / 2);
+  f.receiveShadow = true;
+  f.name = 'floor';
+  f.userData.surf = 'tile';
+  f.userData.tile = [x0, z0, tile]; // the procedural look lines its tiles up with the seams
   g.add(f);
   const sm = mat(seam, { roughness: 0.7 });
-  sm.userData.noInk = true;   // the style study's ink pass leaves seams as colour only (else each seam gets two lines)
+  sm.userData.noInk = true; // the style study's ink pass leaves seams as colour only (else each seam gets two lines)
   const lines = [];
   for (let x = x0 + tile; x < x1 - 0.01; x += tile) lines.push(['z', x]);
   for (let z = z0 + tile; z < z1 - 0.01; z += tile) lines.push(['x', z]);
   for (const [ax, v] of lines) {
-    const m = new THREE.Mesh(new THREE.BoxGeometry(ax === 'x' ? x1 - x0 : seamW, 0.004, ax === 'x' ? seamW : z1 - z0), sm);
+    const m = new THREE.Mesh(
+      new THREE.BoxGeometry(ax === 'x' ? x1 - x0 : seamW, 0.004, ax === 'x' ? seamW : z1 - z0),
+      sm,
+    );
     m.position.set(ax === 'x' ? (x0 + x1) / 2 : v, y + 0.002, ax === 'x' ? v : (z0 + z1) / 2);
-    m.receiveShadow = true; m.userData.surf = 'grout'; m.userData.tile = [x0, z0, tile];
+    m.receiveShadow = true;
+    m.userData.surf = 'grout';
+    m.userData.tile = [x0, z0, tile];
     g.add(m);
   }
   // wide darker bands like the stone inlays in the lobby reference
   for (const [ax, v, w] of bands || []) {
-    const m = new THREE.Mesh(new THREE.BoxGeometry(ax === 'x' ? x1 - x0 : w, 0.004, ax === 'x' ? w : z1 - z0), mat(PAL.floorDark, { roughness: 0.6 }));
+    const m = new THREE.Mesh(
+      new THREE.BoxGeometry(ax === 'x' ? x1 - x0 : w, 0.004, ax === 'x' ? w : z1 - z0),
+      mat(PAL.floorDark, { roughness: 0.6 }),
+    );
     m.position.set(ax === 'x' ? (x0 + x1) / 2 : v, y + 0.003, ax === 'x' ? v : (z0 + z1) / 2);
-    m.receiveShadow = true; m.userData.surf = 'stone'; g.add(m);
+    m.receiveShadow = true;
+    m.userData.surf = 'stone';
+    g.add(m);
   }
   return g;
 }
@@ -221,7 +340,9 @@ export function shadowProxy(parts) {
   const m = new THREE.MeshBasicMaterial({ color: '#000', colorWrite: false, depthWrite: false });
   for (const [w, h, d, x, y, z] of parts) {
     const b = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), m);
-    b.position.set(x, y, z); b.castShadow = true; b.receiveShadow = false;
+    b.position.set(x, y, z);
+    b.castShadow = true;
+    b.receiveShadow = false;
     g.add(b);
   }
   g.name = 'proxy';
@@ -245,8 +366,12 @@ export function plainMonitor({ on = true, kind } = {}) {
   g.add(rbox(0.18, 0.02, 0.12, PAL.monitor, { r: 0.008 }));
   g.add(rbox(0.04, 0.12, 0.03, PAL.monitor, { y: 0.02, r: 0.01 }));
   g.add(rbox(0.46, 0.3, 0.035, PAL.monitor, { y: 0.1, r: 0.015 }));
-  const s = new THREE.Mesh(new THREE.PlaneGeometry(0.41, 0.25), on ? liveScreens.add(screenMat(kind || KINDS[_kind++ % KINDS.length], 0.75)) : mat('#3a4150'));
-  s.position.set(0, 0.25, 0.019); g.add(s);
+  const s = new THREE.Mesh(
+    new THREE.PlaneGeometry(0.41, 0.25),
+    on ? liveScreens.add(screenMat(kind || KINDS[_kind++ % KINDS.length], 0.75)) : mat('#3a4150'),
+  );
+  s.position.set(0, 0.25, 0.019);
+  g.add(s);
   return g;
 }
 // desk facing +z (the sitter sits on the +z side)
@@ -258,16 +383,31 @@ export function plainDesk({ w = 1.4, d = 0.72, mon = true, clutter = 1, seed = 1
   // drawer pedestals both sides
   for (const sx of [-1, 1]) {
     g.add(rbox(0.34, H - 0.05, d - 0.06, PAL.drawer, { x: sx * (w / 2 - 0.19), r: 0.015 }));
-    for (let k = 0; k < 3; k++) g.add(rbox(0.26, 0.012, 0.01, PAL.trim, { x: sx * (w / 2 - 0.19), y: 0.08 + k * 0.1, z: (d - 0.06) / 2 + 0.003, r: 0.004, cast: false }));
+    for (let k = 0; k < 3; k++)
+      g.add(
+        rbox(0.26, 0.012, 0.01, PAL.trim, {
+          x: sx * (w / 2 - 0.19),
+          y: 0.08 + k * 0.1,
+          z: (d - 0.06) / 2 + 0.003,
+          r: 0.004,
+          cast: false,
+        }),
+      );
   }
   g.add(rbox(w - 0.72, 0.2, 0.03, PAL.drawer, { y: 0.16, z: -d / 2 + 0.05, r: 0.01 }));
-  if (mon) { const m = plainMonitor(); m.position.set(0, H, -d * 0.2); g.add(m); }
+  if (mon) {
+    const m = plainMonitor();
+    m.position.set(0, H, -d * 0.2);
+    g.add(m);
+  }
   g.add(rbox(0.36, 0.02, 0.12, '#cfd1d4', { y: H, z: d * 0.12, r: 0.008 }));
   if (clutter) {
     // a paper tray, a pen cup, a binder or two
     g.add(rbox(0.2, 0.05, 0.26, PAL.dark, { x: -w * 0.36, y: H, z: -0.05, r: 0.01 }));
     g.add(rbox(0.19, 0.03, 0.25, PAL.paper, { x: -w * 0.36, y: H + 0.03, z: -0.05, r: 0.004 }));
-    const cup = new THREE.Mesh(new THREE.CylinderGeometry(0.035, 0.03, 0.08, 10), mat('#4a5b78')); cup.position.set(w * 0.33, H + 0.04, -0.12); g.add(sh(cup));
+    const cup = new THREE.Mesh(new THREE.CylinderGeometry(0.035, 0.03, 0.08, 10), mat('#4a5b78'));
+    cup.position.set(w * 0.33, H + 0.04, -0.12);
+    g.add(sh(cup));
     const bcol = ['#4a6490', '#6a7a8c', '#3d4d6b'][seed % 3];
     g.add(rbox(0.05, 0.22, 0.2, bcol, { x: w * 0.42, y: H, z: -0.2, r: 0.01 }));
     g.add(rbox(0.05, 0.22, 0.2, '#5b6f86', { x: w * 0.42 - 0.055, y: H, z: -0.2, r: 0.01 }));
@@ -285,54 +425,109 @@ export function plainFilingCabinet(drawers = 3, color = '#8a909a') {
   }
   return g;
 }
-export const shelf = (w, h, d, o = {}) => (LOOK.detail ? D.shelf(w, h, d, { fill: 'box', ...o }) : plainShelf(w, h, d, o));
+export const shelf = (w, h, d, o = {}) =>
+  LOOK.detail ? D.shelf(w, h, d, { fill: 'box', ...o }) : plainShelf(w, h, d, o);
 export function plainShelf(w = 0.9, h = 1.1, d = 0.36, { fill = 'box', seed = 1 } = {}) {
   const g = new THREE.Group();
   for (const sx of [-1, 1]) g.add(rbox(0.04, h, d, PAL.metal, { x: sx * (w / 2 - 0.02), r: 0.01 }));
   const levels = 4;
   let r = seed;
-  const rnd = () => { r = (r * 16807) % 2147483647; return r / 2147483647; };
+  const rnd = () => {
+    r = (r * 16807) % 2147483647;
+    return r / 2147483647;
+  };
   for (let i = 0; i < levels; i++) {
-    const y = 0.06 + i * (h - 0.1) / (levels - 1);
+    const y = 0.06 + (i * (h - 0.1)) / (levels - 1);
     g.add(rbox(w - 0.02, 0.025, d, '#a3a9b2', { y, r: 0.008 }));
     if (i === levels - 1) continue;
     const gap = (h - 0.1) / (levels - 1) - 0.05;
     if (fill === 'box') {
       let x = -w / 2 + 0.08;
       while (x < w / 2 - 0.2) {
-        const bw = 0.22 + rnd() * 0.1, bh = Math.min(gap, 0.16 + rnd() * 0.08);
-        if (rnd() > 0.2) g.add(rbox(bw, bh, d * 0.8, rnd() > 0.5 ? PAL.box : PAL.boxDark, { x: x + bw / 2, y: y + 0.013, r: 0.01 }));
+        const bw = 0.22 + rnd() * 0.1,
+          bh = Math.min(gap, 0.16 + rnd() * 0.08);
+        if (rnd() > 0.2)
+          g.add(rbox(bw, bh, d * 0.8, rnd() > 0.5 ? PAL.box : PAL.boxDark, { x: x + bw / 2, y: y + 0.013, r: 0.01 }));
         x += bw + 0.04;
       }
     } else if (fill === 'paper') {
-      for (let k = 0; k < 3; k++) g.add(rbox(w * 0.26, 0.05 + rnd() * 0.04, d * 0.75, PAL.paper, { x: -w * 0.3 + k * w * 0.3, y: y + 0.013, r: 0.006 }));
+      for (let k = 0; k < 3; k++)
+        g.add(
+          rbox(w * 0.26, 0.05 + rnd() * 0.04, d * 0.75, PAL.paper, {
+            x: -w * 0.3 + k * w * 0.3,
+            y: y + 0.013,
+            r: 0.006,
+          }),
+        );
     } else if (fill === 'binders') {
       let x = -w / 2 + 0.06;
       const cols = ['#4a6490', '#6a7a8c', '#3d4d6b', '#7f8ea3', '#56657e'];
-      while (x < w / 2 - 0.08) { g.add(rbox(0.05, gap * 0.85, d * 0.7, cols[(rnd() * 5) | 0], { x: x + 0.025, y: y + 0.013, r: 0.008 })); x += 0.055; }
+      while (x < w / 2 - 0.08) {
+        g.add(rbox(0.05, gap * 0.85, d * 0.7, cols[(rnd() * 5) | 0], { x: x + 0.025, y: y + 0.013, r: 0.008 }));
+        x += 0.055;
+      }
     }
   }
   return g;
 }
 export function pinboard(w = 0.7, h = 0.45) {
-  const tex = textTexture((g, W, H) => {
-    g.fillStyle = '#9b8a72'; g.fillRect(0, 0, W, H);
-    const cols = ['#f1efe9', '#e8e2d2', '#dfe6ee', '#f1efe9'];
-    for (let i = 0; i < 5; i++) { g.fillStyle = cols[i % 4]; const x = 30 + i * 90 + (i % 2) * 10, y = 30 + (i % 3) * 50; g.fillRect(x, y, 80, 110); g.fillStyle = '#b8bcc4'; for (let k = 0; k < 5; k++) g.fillRect(x + 10, y + 20 + k * 16, 58 - (k % 2) * 14, 5); }
-  }, 512, 320);
+  const tex = textTexture(
+    (g, W, H) => {
+      g.fillStyle = '#9b8a72';
+      g.fillRect(0, 0, W, H);
+      const cols = ['#f1efe9', '#e8e2d2', '#dfe6ee', '#f1efe9'];
+      for (let i = 0; i < 5; i++) {
+        g.fillStyle = cols[i % 4];
+        const x = 30 + i * 90 + (i % 2) * 10,
+          y = 30 + (i % 3) * 50;
+        g.fillRect(x, y, 80, 110);
+        g.fillStyle = '#b8bcc4';
+        for (let k = 0; k < 5; k++) g.fillRect(x + 10, y + 20 + k * 16, 58 - (k % 2) * 14, 5);
+      }
+    },
+    512,
+    320,
+  );
   const g = new THREE.Group();
   g.add(rbox(w + 0.05, h + 0.05, 0.03, '#6e6255', { r: 0.01, cast: false }));
-  const p = plane(w, h, tex); p.position.set(0, h / 2 + 0.025, 0.017); g.add(p);
+  const p = plane(w, h, tex);
+  p.position.set(0, h / 2 + 0.025, 0.017);
+  g.add(p);
   return g;
 }
 export function clock() {
-  const tex = textTexture((g, W, H) => {
-    g.fillStyle = '#f4f3ef'; g.beginPath(); g.arc(W / 2, H / 2, W / 2 - 4, 0, Math.PI * 2); g.fill();
-    g.strokeStyle = '#2c3038'; g.lineWidth = 10; g.stroke();
-    g.fillStyle = '#2c3038'; for (let i = 0; i < 12; i++) { const a = i / 12 * Math.PI * 2; g.fillRect(W / 2 + Math.cos(a) * 95 - 4, H / 2 + Math.sin(a) * 95 - 4, 8, 8); }
-    g.lineCap = 'round'; g.lineWidth = 10; g.beginPath(); g.moveTo(W / 2, H / 2); g.lineTo(W / 2 + 40, H / 2 - 50); g.stroke();
-    g.lineWidth = 7; g.beginPath(); g.moveTo(W / 2, H / 2); g.lineTo(W / 2 - 5, H / 2 - 85); g.stroke();
-  }, 256, 256);
-  const m = new THREE.Mesh(new THREE.CircleGeometry(0.16, 24), new THREE.MeshStandardMaterial({ map: tex, roughness: 0.6 }));
+  const tex = textTexture(
+    (g, W, H) => {
+      g.fillStyle = '#f4f3ef';
+      g.beginPath();
+      g.arc(W / 2, H / 2, W / 2 - 4, 0, Math.PI * 2);
+      g.fill();
+      g.strokeStyle = '#2c3038';
+      g.lineWidth = 10;
+      g.stroke();
+      g.fillStyle = '#2c3038';
+      for (let i = 0; i < 12; i++) {
+        const a = (i / 12) * Math.PI * 2;
+        g.fillRect(W / 2 + Math.cos(a) * 95 - 4, H / 2 + Math.sin(a) * 95 - 4, 8, 8);
+      }
+      g.lineCap = 'round';
+      g.lineWidth = 10;
+      g.beginPath();
+      g.moveTo(W / 2, H / 2);
+      g.lineTo(W / 2 + 40, H / 2 - 50);
+      g.stroke();
+      g.lineWidth = 7;
+      g.beginPath();
+      g.moveTo(W / 2, H / 2);
+      g.lineTo(W / 2 - 5, H / 2 - 85);
+      g.stroke();
+    },
+    256,
+    256,
+  );
+  const m = new THREE.Mesh(
+    new THREE.CircleGeometry(0.16, 24),
+    new THREE.MeshStandardMaterial({ map: tex, roughness: 0.6 }),
+  );
   return m;
 }

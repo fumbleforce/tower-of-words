@@ -24,7 +24,8 @@ export const needsPractice = (id) => practiced(id) < masteryNeeded();
 
 // one more success. how: 'typed' | 'voice'. Returns { count, mastered } (mastered is true on the try that crosses the bar)
 export function notePractice(id, how = 'typed') {
-  const before = practiced(id), count = before + 1;
+  const before = practiced(id),
+    count = before + 1;
   flags[ENGINE_KEYS.practice + id] = count;
   if (how === 'voice') flags[ENGINE_KEYS.voiced + id] = true;
   return { count, mastered: before < masteryNeeded() && count >= masteryNeeded() };
@@ -32,10 +33,12 @@ export function notePractice(id, how = 'typed') {
 
 // the progress marks for the Words panel and the Say menu: filled dots for each try, then a small "by heart"
 export function pipsHTML(id) {
-  const n = masteryNeeded(), c = Math.min(practiced(id), n);
+  const n = masteryNeeded(),
+    c = Math.min(practiced(id), n);
   if (!n) return '';
   if (c >= n) return '<span class="mp done" title="You can pick it straight from the Say menu now">by heart</span>';
-  let dots = ''; for (let i = 0; i < n; i++) dots += `<i class="${i < c ? 'on' : ''}"></i>`;
+  let dots = '';
+  for (let i = 0; i < n; i++) dots += `<i class="${i < c ? 'on' : ''}"></i>`;
   return `<span class="mp" role="img" aria-label="Said or typed ${c} of ${n} times">${dots}</span>`;
 }
 

@@ -6,5 +6,5 @@ export function bondGate(id, step, ...overrides) {
 }
 
 export function storyBondGate(cast, stories, id, step) {
-  return bondGate(id, step, cast[id]?.gates, ...stories.map(story => story.gates?.[id]));
+  return bondGate(id, step, cast[id]?.gates, ...stories.map((story) => story.gates?.[id]));
 }
