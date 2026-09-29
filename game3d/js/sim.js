@@ -10,8 +10,8 @@ import { Bonds, STEPS, dateOf, safeKey } from './bonds/model.js';
 import { CAST, WORD_REGISTER } from './bonds/cast.js';
 import { MOMENTS, REASONS, EXPECT } from './bonds/day1.js';
 
-export const PERIODS = ['commute', 'morning', 'lunch', 'afternoon', 'evening'];
-export const PERIOD_NAMES = { commute: 'Morning commute', morning: 'Morning at work', lunch: 'Lunch', afternoon: 'Afternoon', evening: 'After work' };
+export const PERIODS = ['early', 'morning', 'lunch', 'afternoon', 'evening'];
+export const PERIOD_NAMES = { early: 'Early morning', morning: 'Morning at work', lunch: 'Lunch', afternoon: 'Afternoon', evening: 'After work' };
 export const ITEMS = {
   coffee: { name: 'Canned coffee', price: 120 },
   tea: { name: 'Royal milk tea', price: 130 },
@@ -21,7 +21,7 @@ export const ITEMS = {
 export { STEPS };
 
 export const sim = {
-  day: 1, date: 'Thu 1 Oct', period: 'commute', bonds: {}, inv: [], taught: {}, met: new Set(), yen: 1000,
+  day: 1, date: 'Thu 1 Oct', period: 'early', bonds: {}, inv: [], taught: {}, met: new Set(), yen: 1000,
   people: {},       // id -> { name, about, color } merged from the story files
   thresholds: {},   // id -> [{ at: step, node, if }] from the story's `bondStep` / `bonds`
   firedBonds: new Set(),
@@ -70,11 +70,11 @@ export function setPeriod(p, game) {
   applySchedule(game);
   save(game);
 }
-// a new day (later days): the date moves on, daily caps reset, the commute starts
+// a new day (later days): the date moves on, daily caps reset, the day starts early
 export function newDay(game) {
   sim.day++; sim.date = dateOf(sim.day); flags.day = sim.day;
   bonds.setDay(sim.day);
-  setPeriod('commute', game);
+  setPeriod('early', game);
 }
 
 // ---------- schedules: story `schedule: { who: { period: { at, sit, face, hide } } }` ----------
@@ -332,7 +332,7 @@ export function loadSave() {
   try { const d = JSON.parse(localStorage.getItem(KEY) || 'null'); return d && d.v === 1 ? d : null; } catch { return null; }
 }
 export function restore(game, d) {
-  Object.assign(sim, { day: d.day, period: d.period, bonds: d.bonds || {}, inv: d.inv || [], taught: d.taught || {}, yen: d.yen ?? 1000 });
+  Object.assign(sim, { day: d.day, period: d.period === 'commute' ? 'early' : d.period, bonds: d.bonds || {}, inv: d.inv || [], taught: d.taught || {}, yen: d.yen ?? 1000 });
   sim.date = dateOf(sim.day || 1);
   sim.met = new Set(d.met || []);
   Object.assign(flags, d.flags || {});

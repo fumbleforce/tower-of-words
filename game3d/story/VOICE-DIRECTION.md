@@ -53,7 +53,7 @@ Every voiced line in the story files carries an `emo` tag, for example `{ say: '
 | puzzled | Confused, a rising "huh". | 1.0 | Kenji's あれ？ at the fan, Mio about Mori's cups |
 | polite | Formal Japanese politeness, even and careful. | 0.95 | The guard, Mori, the receptionist |
 | stern | Firm and unsmiling. | 0.95 | The guard: "猫はいません。" |
-| curt | Short, clipped, busy. | 1.05 | The guard on hold, a commuter's すみません |
+| curt | Short, clipped, busy. | 1.05 | The guard on hold, an office worker's すみません |
 | pleading | Begging softly, like coaxing an animal. | 0.9 | Hamada to the gate: お願い、開けて…いい子だから |
 | panicked | Breathless, high, fast. | 1.15 | Hamada waking up and bursting in |
 | shout | Raised voice across a distance, not screaming. | 1.05 | Mio's 待って at the doors, calling across the office |

@@ -22,7 +22,7 @@ How to say one: the Say button (bottom right, or F) lists the commands you know.
 - Mio (you): new hire, headphones, quiet. The narration is short and in the second person.
 - Aoi: sales, second year, pink hair, talks fast. Rides the same train. The station cat ignores her every single morning and it hurts.
 - Tama: a calico cat who rides the monorail to the head office every day, because the guard feeds her.
-- Mr. Kuroda: accounts. Asleep on every train, late through every gate. Polite, a bit hopeless.
+- Mr. Kuroda: accounts. Falls asleep on trains, late through every gate. Polite, a bit hopeless.
 - Mr. Ishibashi: the guard. Strict, dry, secretly soft on the cat. His flap gate is older than some staff and he's embarrassed by it.
 - Emi: Mio's team lead. Warm, fast, a list-maker. Wants the new hire settled before Mr. Mori's 10:00 meeting.
 - Mr. Mori: section chief. Four words at a time. Has one rule for new people: don't touch the copier.

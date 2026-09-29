@@ -47,8 +47,8 @@ export function endHTML(game, { photos = {}, outro, ticket } = {}) {
 
 export async function showEnd(game) {
   const S = game.story || {};
-  const outro = S.outro || 'Tomorrow: the 8:40, front car.';
-  const ticket = S.ticket || { no: 'Repair request #2', title: 'Monorail doors: sensor check', lines: ['Raised by: Amakawa Station', 'Handed to: Eric (from Mio, B2)', 'Tomorrow, the 8:40, front car.'] };
+  const outro = S.outro || 'Tomorrow morning: the station, the door sensor.';
+  const ticket = S.ticket || { no: 'Repair request #2', title: 'Monorail doors: sensor check', lines: ['Raised by: Amakawa Station', 'Handed to: Eric (from Mio, B2)', 'Tomorrow morning, at the station.'] };
   document.body.classList.add('ended');
   // the scene fades out first, then the card comes in (QA round 1: the card faded in over live play)
   document.body.classList.add('ending');

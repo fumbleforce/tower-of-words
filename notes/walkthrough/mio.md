@@ -22,7 +22,7 @@ Sample lines, for the voice:
 
 | Period | Mon, Tue, Fri | Wednesday | Thursday |
 |---|---|---|---|
-| Commute | Covered walkway from dorm tower A, headphones on, 8:50 | Same | **The monorail from the mainland** with her mother's pickles, on the far bench of the 8:30 |
+| Early morning | Covered walkway from dorm tower A, headphones on, 8:50 | Same | **The monorail from the mainland** with her mother's pickles, on the far bench of the 8:30 |
 | Morning | Her B2 desk (south row, next to Emi's) | Same | Same, very tired |
 | Lunch | Machine room floor by rack 3, konbini onigiri | Same | Same |
 | Afternoon | Desk. The day build runs 14:00 to about 16:30. | Leaves at 17:30 for the monorail to her mother's | Desk |

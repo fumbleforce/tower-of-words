@@ -225,7 +225,7 @@ export default {
       { say: 'mio', emo: 'amused', face: 'smile', text: "{ohayo}. Mm, okay, not bad." },
       { do: 'face', who: 'mio', to: 'tama' },
       { do: 'cam', on: 'tama', zoom: 1.4 },
-      { say: 'mio', emo: 'amused', text: "Try the cat, over there. She rides this train every morning, she won't judge you." },
+      { say: 'mio', emo: 'amused', text: "Try the cat, over there. She kind of lives on this train, she won't judge you." },
       { set: 'cat_task' },
       { do: 'goal', text: 'Say good morning to the cat.' },
       { do: 'hint', what: 'say', text: 'Tap Say, then pick the word.' },
@@ -247,7 +247,7 @@ export default {
       // "that guy": the camera goes over to the sleeping man for this line, then back to Mio
       { do: 'cam', on: 'kuroda', zoom: 1.6 },
       { do: 'emote', who: 'kuroda', kind: 'zzz' },
-      { say: 'mio', emo: 'casual', text: "She's more awake than that guy, anyway. He's on this train every morning too, asleep the whole way, and like once a month he misses our stop and ends up back on the mainland." },
+      { say: 'mio', emo: 'casual', text: "She's more awake than that guy, anyway. He's from the island too, Accounts I think. Every time he comes back from the mainland he sleeps the whole way, and one day he's going to miss our stop and go right back." },
       { do: 'face', who: 'mio', to: 'eric' },
       { do: 'cam', on: 'mio', zoom: 1.6 },
       { say: 'mio', emo: 'casual', face: 'neutral', text: "Anyway, when you meet someone new, it's {yoroshiku}. Like “nice to meet you”, but more like “please be nice to me”." },
@@ -312,7 +312,7 @@ export default {
       { say: 'mio', face: 'surprised', emo: 'surprised', text: "Ah... wait. The sleeping guy, he's still in there." },
       // 3. the announcement: the train goes back
       { say: 'ann', overheard: true, emo: 'announcer', text: 'この電車は、折り返し本土行きとなります。' },
-      { say: 'mio', face: 'tired', emo: 'tired', text: "And now it goes back to the mainland. So today is the once a month, I guess." },
+      { say: 'mio', face: 'tired', emo: 'tired', text: "And now it goes back to the mainland. So today is the day, I guess." },
       // 4. the doors close in steps
       { do: 'chime' },
       { do: 'doorsClose', to: 0.7, ms: 1200 },

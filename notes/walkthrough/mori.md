@@ -22,7 +22,7 @@ Sample lines (Japanese, with English shown):
 
 | Period | Mon to Fri |
 |---|---|
-| Commute | Walks from family tower C along the sea wall, in at 7:40, always first |
+| Early morning | Walks from family tower C along the sea wall, in at 7:40, always first |
 | Morning | 7:45 newspaper at his desk. **8:15, the copier round:** side panel open, paper checked, drum wiped, panel shut, a bow, 動いて. |
 | Lunch | Kitchenette, with the bento Setsuko makes |
 | Afternoon | His desk. **15:00, tea in the kitchenette.** |
