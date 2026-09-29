@@ -1,48 +1,72 @@
 {
-  "title": "Relaxed arms and stronger breathing",
-  "date": "2026-09-29",
-  "by": "Codex",
-  "status": "open",
-  "question": "Does this idle have enough movement, with the arms relaxed?",
-  "multi": false,
-  "links": [
-    {
-      "label": "Play the new idle beside the previous attempt",
-      "href": "tools/creator/idle-compare.html?round=3"
-    },
-    {
-      "label": "Compare Eric",
-      "href": "tools/creator/idle-compare.html?round=3&body=eric"
-    },
-    {
-      "label": "Previous round and your feedback",
-      "href": "bible/#review/creator-idle-neutral-2"
-    },
-    {
-      "label": "Motion settings and measured joint movement",
-      "href": "art/parts/candidates/idle-neutral-3.json"
-    }
-  ],
-  "options": [
-    {
-      "id": "relaxed-3",
-      "label": "relaxed-3: use this idle",
-      "image": "art/parts/candidates/idle-review-3/mio-front-inhale.png",
-      "images": [
-        "art/parts/candidates/idle-review-3/mio-front-exhale.png",
-        "art/parts/candidates/idle-review-3/mio-side.png",
-        "art/parts/candidates/idle-review-3/eric-front-inhale.png",
-        "art/parts/candidates/idle-review-3/eric-front-exhale.png",
-        "art/parts/candidates/idle-review-3/eric-side.png"
-      ],
-      "note": "Judge the motion in the live viewer. Arms hang close to the sides; chest movement and sway are larger. The previous loop plays on the left. Source and frozen idles are also available for comparison."
-    },
-    {
-      "id": "revise-3",
-      "label": "revise-3: adjust it further",
-      "image": "art/parts/candidates/idle-review-3/phone.png",
-      "note": "Leave a comment about the arm pose or motion. This is a candidate; choosing it is separate from judging the dressed base."
-    }
-  ],
-  "media": []
+ "title": "Relaxed arms and stronger breathing",
+ "date": "2026-09-29",
+ "by": "Codex",
+ "status": "decided",
+ "question": "Does this idle have enough movement, with the arms relaxed?",
+ "multi": false,
+ "links": [
+  {
+   "label": "Play the new idle beside the previous attempt",
+   "href": "tools/creator/idle-compare.html?round=3"
+  },
+  {
+   "label": "Compare Eric",
+   "href": "tools/creator/idle-compare.html?round=3&body=eric"
+  },
+  {
+   "label": "Previous round and your feedback",
+   "href": "bible/#review/creator-idle-neutral-2"
+  },
+  {
+   "label": "Motion settings and measured joint movement",
+   "href": "art/parts/candidates/idle-neutral-3.json"
+  }
+ ],
+ "options": [
+  {
+   "id": "relaxed-3",
+   "label": "relaxed-3: use this idle",
+   "note": "Judge the motion in the live viewer. Arms hang close to the sides; chest movement and sway are larger. The previous loop plays on the left. Source and frozen idles are also available for comparison."
+  },
+  {
+   "id": "revise-3",
+   "label": "revise-3: adjust it further",
+   "note": "Leave a comment about the arm pose or motion. This is a candidate; choosing it is separate from judging the dressed base."
+  }
+ ],
+ "media": [
+  {
+   "image": "art/candidates/idle-review-3/mio-front-inhale.png",
+   "caption": "Motion comparison screenshot: mio front inhale"
+  },
+  {
+   "image": "art/candidates/idle-review-3/mio-front-exhale.png",
+   "caption": "Motion comparison screenshot: mio front exhale"
+  },
+  {
+   "image": "art/candidates/idle-review-3/mio-side.png",
+   "caption": "Motion comparison screenshot: mio side"
+  },
+  {
+   "image": "art/candidates/idle-review-3/eric-front-inhale.png",
+   "caption": "Motion comparison screenshot: eric front inhale"
+  },
+  {
+   "image": "art/candidates/idle-review-3/eric-front-exhale.png",
+   "caption": "Motion comparison screenshot: eric front exhale"
+  },
+  {
+   "image": "art/candidates/idle-review-3/eric-side.png",
+   "caption": "Motion comparison screenshot: eric side"
+  },
+  {
+   "image": "art/candidates/idle-review-3/phone.png",
+   "caption": "Motion comparison screenshot: phone"
+  }
+ ],
+ "decided": [
+  "relaxed-3"
+ ],
+ "decision": "relaxed-3: 'looks good'"
 }

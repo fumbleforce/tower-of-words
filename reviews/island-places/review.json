@@ -1,0 +1,96 @@
+{
+ "title": "Places on the island",
+ "date": "2026-09-29",
+ "by": "main agent",
+ "status": "decided",
+ "multi": true,
+ "question": "Which of these should the island have? The onsen and beach are already going on the map. Tick any; they go into the next map rounds.",
+ "options": [
+  {
+   "id": "shotengai",
+   "label": "Shotengai: covered shopping street (konbini, bakery, drugstore, 100-yen shop)"
+  },
+  {
+   "id": "food-after-hours",
+   "label": "After-hours food: ramen stand, standing soba, yakitori izakaya under the tracks, a snack bar"
+  },
+  {
+   "id": "sento-laundry",
+   "label": "Sento and coin laundry by the dorms"
+  },
+  {
+   "id": "clinic",
+   "label": "Company clinic and the health-check building"
+  },
+  {
+   "id": "koban-post",
+   "label": "Post office, ATM corner and a tiny police box"
+  },
+  {
+   "id": "shrine",
+   "label": "Small company shrine on a headland (ties in with kotodama)"
+  },
+  {
+   "id": "undokai",
+   "label": "Sports field for undokai, morning radio exercises on the plaza"
+  },
+  {
+   "id": "museum",
+   "label": "Company history hall and the founder's statue"
+  },
+  {
+   "id": "training",
+   "label": "New-employee training centre"
+  },
+  {
+   "id": "old-industry",
+   "label": "Old buildings: disused factory, old power plant, early-90s server hall"
+  },
+  {
+   "id": "karaoke-arcade",
+   "label": "Karaoke box and a small game centre"
+  },
+  {
+   "id": "footbath",
+   "label": "Footbath by the station (onsen already added)"
+  },
+  {
+   "id": "pier",
+   "label": "Fishing pier by the beach (beach already added)"
+  },
+  {
+   "id": "viewpoint",
+   "label": "Viewpoint park looking back at the mainland"
+  },
+  {
+   "id": "sakura-matsuri",
+   "label": "Cherry-tree path and a summer matsuri stage"
+  },
+  {
+   "id": "harbour",
+   "label": "Harbour: ferry and supply dock"
+  },
+  {
+   "id": "utilities",
+   "label": "Water tower, desalination plant, power station, incinerator (IT ticket spots)"
+  },
+  {
+   "id": "housing-tiers",
+   "label": "Housing tiers: singles' dorms, family housing, executives' hill"
+  }
+ ],
+ "decided": [
+  "shotengai",
+  "food-after-hours",
+  "sento-laundry",
+  "clinic",
+  "shrine",
+  "museum",
+  "old-industry",
+  "karaoke-arcade",
+  "viewpoint",
+  "sakura-matsuri",
+  "harbour"
+ ],
+ "decision": "Picked: shotengai (konbini+100-yen+drugstore combined), ramen+izakaya, sento+laundry, one clinic, shrine, history hall, old-industry section, karaoke+game centre, viewpoint, sakura+matsuri, harbour. Undokai on the existing field; training inside an office; utilities hidden; uniform housing with some luxury. No koban/post, no footbath. Recorded in docs/game/setting.md."
+}
