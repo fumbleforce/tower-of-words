@@ -309,76 +309,13 @@ function entrance() {
   return g;
 }
 
-function liftDoor(x, z) {
-  // a real opening in the back wall with a lit car behind it; the leaves slide into the wall's thickness
+function stationExit(x, z) {
   const g = new THREE.Group();
-  const fm = mat('#4c515b');
-  g.add(rbox(1.44, 0.1, 0.06, null, { y: 1.44, z: 0.02, r: 0.02, m: fm }));
-  for (const s of [-1, 1]) g.add(rbox(0.1, 1.44, 0.06, null, { x: s * 0.67, z: 0.02, r: 0.02, m: fm }));
-  g.add(rbox(1.3, 0.012, 0.1, '#6d737d', { y: 0.001, z: 0.0, r: 0.003, cast: false })); // sill
-  const back = emissive('#d8cfbf', '#f3dfb8', 0.32),
-    side = emissive('#a9a79f', '#e8d4b0', 0.16);
-  const car = new THREE.Group();
-  car.position.z = -0.42; // shallow, so it stays hidden behind the tall wall from the camera
-  car.add(rbox(1.2, 0.012, 0.6, '#9a9890', { r: 0.004, cast: false }));
-  car.add(rbox(1.2, 1.1, 0.05, null, { z: -0.3, r: 0.01, m: back }));
-  for (const s of [-1, 1]) {
-    car.add(rbox(0.05, 1.1, 0.6, null, { x: s * 0.6, r: 0.01, m: side }));
-    car.add(rbox(0.04, 0.04, 0.45, '#c9cdd2', { x: s * 0.55, y: 0.5, r: 0.015, cast: false }));
-  }
-  car.add(rbox(0.12, 0.26, 0.02, '#8d939d', { x: 0.5, y: 0.5, z: -0.27, r: 0.01, cast: false }));
-  for (let i = 0; i < 3; i++) {
-    const b = new THREE.Mesh(new THREE.CircleGeometry(0.018, 10), emissive('#ffe2b8', '#ffc680', 1.2));
-    b.position.set(0.5, 0.42 + i * 0.06, -0.259);
-    car.add(b);
-  }
-  g.add(car);
-  const leaves = [-1, 1].map((s) => {
-    const l = rbox(0.6, 1.36, 0.05, null, {
-      x: s * 0.31,
-      z: -0.06,
-      r: 0.01,
-      m: mat('#8e949d', { roughness: 0.5, metalness: 0.2 }),
-    });
-    l.add(rbox(0.012, 1.3, 0.052, '#5d636d', { x: -s * 0.3, y: -0.65, r: 0.003, cast: false }));
-    g.add(l);
-    return l;
-  });
-  const ind = rbox(0.36, 0.12, 0.03, '#1d2027', { y: 1.52, z: 0.05, r: 0.01, cast: false });
-  g.add(ind);
-  const litTex = textTexture(
-    (c, W, H) => {
-      c.fillStyle = '#1d2027';
-      c.fillRect(0, 0, W, H);
-      c.fillStyle = '#ffb566';
-      c.font = '700 44px sans-serif';
-      c.textAlign = 'center';
-      c.textBaseline = 'middle';
-      c.fillText('1  \u25B2', W / 2, H / 2 + 2);
-    },
-    128,
-    56,
-  );
-  const lit = new THREE.Mesh(new THREE.PlaneGeometry(0.3, 0.11), new THREE.MeshBasicMaterial({ map: litTex }));
-  lit.position.set(0, 1.52, 0.067);
-  g.add(lit);
-  g.add(rbox(0.08, 0.16, 0.02, '#8d939d', { x: 0.82, y: 0.62, z: 0.05, r: 0.01, cast: false }));
-  {
-    const cb = new THREE.Mesh(new THREE.CircleGeometry(0.022, 12), emissive('#ffe2b8', '#ffc680', 1.4));
-    cb.position.set(0.82, 0.66, 0.062);
-    g.add(cb);
-  }
-  g.position.set(x, 0, z + 0.02);
-  const L = { g, k: 0, want: 0, x, leaves, t: null };
-  // eased in game time (follows the time scale), so the doors are open by the time the lift's walk-in starts
-  L.update = (t) => {
-    const dt = L.t == null ? 1 / 60 : Math.min(0.1, Math.max(0, t - L.t));
-    L.t = t;
-    L.k += (L.want - L.k) * Math.min(1, dt * 5);
-    leaves[0].position.x = -0.31 - L.k * 0.6;
-    leaves[1].position.x = 0.31 + L.k * 0.6;
-  };
-  return L;
+  for (const side of [-1, 1]) g.add(rbox(0.08, 1.44, 0.16, '#4c515b', { x: side * 0.64 }));
+  g.add(rbox(1.36, 0.1, 0.16, '#4c515b', { y: 1.44 }));
+  g.add(rbox(1.24, 0.016, 1.5, '#8a9397', { z: -0.65, cast: false }));
+  g.position.set(x, 0, z);
+  return { g, k: 1, want: 1, leaves: [], update() {} };
 }
 function noticeScreen() {
   const notices = [
@@ -551,11 +488,10 @@ export function buildLobby() {
       holes: [
         [3.5, 4.4, 0, 1.35],
         [-1.62, -0.38, 0, 1.4],
-        [0.38, 1.62, 0, 1.4],
       ],
     }),
   );
-  const lifts = [-1.0, 1.0].map((x) => liftDoor(x, -Z));
+  const lifts = [stationExit(-1, -Z)];
   lifts.forEach((l) => root.add(l.g));
   {
     const d = door(0.9, 1.35);
@@ -597,7 +533,7 @@ export function buildLobby() {
     l.position.set(x, 1.0, -Z + 0.01);
     root.add(l);
   }
-  const sg = sign('本社', 'HONSHA');
+  const sg = sign('本社', 'STATION');
   sg.position.set(0, 1.68, -Z + 0.03);
   root.add(sg);
   // wall clock over the guard's side of the gate (the guard points at it: registration opens at nine)

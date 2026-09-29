@@ -11,7 +11,7 @@ The head office lobby before nine. Mr. Ishibashi, the guard, is strict about a p
 1. Eric comes in through the glass doors. The guard says おはようございます to people coming in for work, and they say it back, so Eric sees how it's done. Goal: say good morning to the guard.
 2. Talking to him in English gets nothing; he doesn't look up. おはようございます (or よろしくおねがいします, which amuses him) gets a greeting and a bow back, and he points Eric to the card reader.
 3. The card is red. The gate's voice asks him to see staff. The guard beckons him over: it's a new card, registration starts at nine (politely, with an apology, if Eric greeted him first; sternly if not). He holds up nine fingers and points at the bench. Eric: "Right, Mio did say nine." Eric waits on the bench, and the jam starts.
-4. Once through, the lift. Taking it ends the lobby ([places.md](../places.md), Getting between places).
+4. Once through, the station exit. Eric crosses the forecourt to the separate head-office lift ([places.md](../places.md), Getting between places).
 
 ## Choices and flags
 
@@ -21,7 +21,7 @@ Skipping the greeting doesn't block anything; it changes the guard's tone and wh
 |---|---|---|
 | `greeted_guard` | Greeted him | His tone at the reader and in the mime |
 | `guard_asked` | The card was red once | The reader, the guard |
-| `gate_through` | Walked past the gate | The lift |
+| `gate_through` | Walked past the gate | The station exit |
 
 ## Words taught
 
@@ -31,4 +31,5 @@ None.
 
 | File | Nodes |
 |---|---|
+| `forecourt.js` | `outside`, `head_office`, `to_b2` |
 | `gate.js` | `lobby_in`, `guard_look`, `ohayo_guard`, `yoroshiku_guard`, `guard_points_reader`, `greet_again_guard`, `card_red`, `card_red_again`, `guard_again`, `bench`, `past_gate`, `to_lift` |

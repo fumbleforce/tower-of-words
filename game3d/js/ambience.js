@@ -190,6 +190,7 @@ function scene(game) {
     return { train: 0.3 + 0.7 * speed, station: doors * (st.arrived ? 1 : 0.4) };
   }
   if (name === 'gate') return { gate: 1 };
+  if (name === 'forecourt') return { station: 0.6 };
   if (name === 'office') return { office: game.sim && game.sim.period === 'evening' ? 0.7 : 1 };
   return {};
 }

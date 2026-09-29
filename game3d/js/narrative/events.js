@@ -14,6 +14,7 @@ export const PLACE_EVENTS = {
     arch_blocked: { id: 'arch_blocked', source: 'compatibility' },
     gate_opened: { id: 'gate_opened', source: 'compatibility' },
   },
+  forecourt: { start: { id: 'start', source: 'engine' } },
   office: {
     start: { id: 'start', source: 'engine' },
     sat_down: { id: 'sat_down', source: 'place', hook: 'sitDown' },

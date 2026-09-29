@@ -272,24 +272,6 @@
           "kind": "thing small"
         }
       },
-      "people": [
-        "kuroda",
-        "aoi",
-        "reader",
-        "rei",
-        "music",
-        "stander",
-        "bun",
-        "youth",
-        "tama"
-      ],
-      "seats": [
-        "seat_aoi",
-        "seat_far_r",
-        "seat_near_l",
-        "seat_near_r",
-        "seat_mio"
-      ],
       "spots": [
         "aisle",
         "door_l",
@@ -302,9 +284,27 @@
         "plat_l2",
         "plat_hamada"
       ],
+      "seats": [
+        "seat_aoi",
+        "seat_far_r",
+        "seat_near_l",
+        "seat_near_r",
+        "seat_mio"
+      ],
       "zones": [
         "door_zone",
         "free_seat"
+      ],
+      "people": [
+        "kuroda",
+        "aoi",
+        "reader",
+        "rei",
+        "music",
+        "stander",
+        "bun",
+        "youth",
+        "tama"
       ],
       "hooks": [
         "announce",
@@ -397,7 +397,7 @@
           "kind": "thing small"
         },
         "lift": {
-          "label": "Lift",
+          "label": "Station exit",
           "kind": "thing"
         },
         "entrance": {
@@ -413,14 +413,6 @@
           "kind": "thing small"
         }
       },
-      "people": [
-        "guard",
-        "kuroda",
-        "aoi",
-        "kuro",
-        "rei",
-        "tama"
-      ],
       "spots": [
         "entrance_in",
         "bench_l",
@@ -441,6 +433,14 @@
         "past_gate",
         "lift_front"
       ],
+      "people": [
+        "guard",
+        "kuroda",
+        "aoi",
+        "kuro",
+        "rei",
+        "tama"
+      ],
       "hooks": [
         "reader",
         "gate",
@@ -451,6 +451,36 @@
         "rush",
         "catTo",
         "newsletter",
+        "liftOpen",
+        "liftClose"
+      ]
+    },
+    "forecourt": {
+      "things": {
+        "station_exit": {
+          "label": "Station",
+          "kind": "thing"
+        },
+        "office_entrance": {
+          "label": "Head office",
+          "kind": "thing"
+        },
+        "lift": {
+          "label": "Lift to B2",
+          "kind": "thing"
+        }
+      },
+      "spots": [
+        "station_exit",
+        "office_entrance",
+        "lift_front"
+      ],
+      "seats": [],
+      "zones": [
+        "lift_front"
+      ],
+      "people": [],
+      "hooks": [
         "liftOpen",
         "liftClose"
       ]
@@ -639,14 +669,6 @@
           "kind": "thing small"
         }
       },
-      "people": [
-        "emi",
-        "kenji",
-        "mori",
-        "aoi",
-        "rei",
-        "tama"
-      ],
       "spots": [
         "lift_out",
         "mori_greet",
@@ -673,6 +695,14 @@
         "toilets",
         "machine_room",
         "corridor"
+      ],
+      "people": [
+        "emi",
+        "kenji",
+        "mori",
+        "aoi",
+        "rei",
+        "tama"
       ],
       "hooks": [
         "copier",

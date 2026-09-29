@@ -2,7 +2,8 @@
 export const PLACE_FILES = {
   train: 'game3d/js/places/train.js',
   gate: 'game3d/js/places/lobby.js',
+  forecourt: 'game3d/js/places/forecourt.js',
   office: 'game3d/js/places/office.js',
 };
-export const NEXT = { train: 'gate', gate: 'office' };
-export const STORY_FILES = ['train', 'gate', 'office', 'transitions'];
+export const NEXT = { train: 'gate', gate: 'forecourt', forecourt: 'office' };
+export const STORY_FILES = ['train', 'gate', 'forecourt', 'office', 'transitions'];

@@ -1,128 +1,7 @@
+import { TRAIN_DETAILS } from './catalog-train.js';
 // Labels and registration IDs shared by place factories and structural checks.
 export const PLACE_DETAILS = {
-  'train': {
-    'things': {
-      'aoi': {
-        'label': 'Aoi',
-        'kind': 'person',
-      },
-      'kuroda': {
-        'label': 'Sleeping man',
-        'kind': 'person',
-      },
-      'reader': {
-        'label': 'Man with a book',
-        'kind': 'person small',
-      },
-      'music': {
-        'label': 'Girl with headphones',
-        'kind': 'person small',
-      },
-      'rei': {
-        'label': 'Woman with a laptop',
-        'kind': 'person',
-      },
-      'cup': {
-        'label': 'Coffee',
-        'kind': 'thing small',
-      },
-      'bun': {
-        'label': 'Woman with a bun',
-        'kind': 'person small',
-      },
-      'youth': {
-        'label': 'Young man',
-        'kind': 'person small',
-      },
-      'tama': {
-        'label': 'Cat',
-        'verb': 'Pet',
-        'kind': 'person small',
-      },
-      'doors': {
-        'label': 'Doors',
-        'kind': 'thing',
-      },
-      'door_l': {
-        'label': 'Doors',
-        'kind': 'thing',
-      },
-      'door_r': {
-        'label': 'Doors',
-        'kind': 'thing',
-      },
-      'plant': {
-        'label': 'Plant',
-        'kind': 'thing small',
-      },
-      'bags': {
-        'label': 'Bags',
-        'kind': 'thing small',
-      },
-      'rack': {
-        'label': 'Luggage rack',
-        'kind': 'thing small',
-      },
-      'straps': {
-        'label': 'Straps',
-        'kind': 'thing small',
-      },
-      'window': {
-        'label': 'Window',
-        'kind': 'thing small',
-      },
-      'poster': {
-        'label': 'Poster',
-        'kind': 'thing small',
-      },
-      'sign': {
-        'label': 'Station sign',
-        'kind': 'thing small',
-      },
-      'foodbag': {
-        'label': 'Her lunch bag',
-        'verb': 'Catch',
-        'kind': 'thing small',
-      },
-      'stander': {
-        'label': 'Man with a bag',
-        'kind': 'person small',
-      },
-      'platform': {
-        'label': 'Platform',
-        'kind': 'thing small',
-      },
-    },
-    'spots': [
-      'aisle',
-      'door_l',
-      'door_r',
-      'by_aoi',
-      'by_kuroda',
-      'platform',
-      'walkway',
-      'plat_l',
-      'plat_l2',
-      'plat_hamada',
-    ],
-    'seats': ['seat_aoi', 'seat_far_r', 'seat_near_l', 'seat_near_r', 'seat_mio'],
-    'zones': ['door_zone', 'free_seat'],
-    'people': ['kuroda', 'aoi', 'reader', 'rei', 'music', 'stander', 'bun', 'youth', 'tama'],
-    'hooks': [
-      'announce',
-      'arrive',
-      'doorsOpen',
-      'doorsClose',
-      'chime',
-      'doorsHold',
-      'alight',
-      'depart',
-      'wake',
-      'bag',
-      'cup',
-      'catTo',
-    ],
-  },
+  train: TRAIN_DETAILS,
   'gate': {
     'things': {
       'guard': {
@@ -199,7 +78,7 @@ export const PLACE_DETAILS = {
         'kind': 'thing small',
       },
       'lift': {
-        'label': 'Lift',
+        'label': 'Station exit',
         'kind': 'thing',
       },
       'entrance': {
@@ -242,6 +121,18 @@ export const PLACE_DETAILS = {
       'liftOpen',
       'liftClose',
     ],
+  },
+  forecourt: {
+    things: {
+      station_exit: { label: 'Station', kind: 'thing' },
+      office_entrance: { label: 'Head office', kind: 'thing' },
+      lift: { label: 'Lift to B2', kind: 'thing' },
+    },
+    spots: ['station_exit', 'office_entrance', 'lift_front'],
+    seats: [],
+    zones: ['lift_front'],
+    people: [],
+    hooks: ['liftOpen', 'liftClose'],
   },
   'office': {
     'things': {

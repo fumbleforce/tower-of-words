@@ -64,33 +64,35 @@ test('Continue retains earlier story gate overrides and slot loads discard stale
 });
 
 test('transition gates use the departing story for walk/ride and destination for arrive', async () => {
-  const mods = Object.fromEntries(['train', 'gate', 'office'].map(place => [place,
+  const mods = Object.fromEntries(['train', 'gate', 'forecourt', 'office'].map(place => [place,
     { gates: { mio: { 3: `${place}_trust` } }, nodes: {} }]));
   const step = [{ if: 'ready', then: [{ do: 'bondStep', who: 'mio', to: 3 }] }];
-  mods.transitions = Object.fromEntries(['train_to_gate', 'gate_to_office'].map(slot =>
+  mods.transitions = Object.fromEntries(['train_to_gate', 'gate_to_forecourt', 'forecourt_to_office'].map(slot =>
     [slot, { walk: step, ride: step, arrive: step }]));
   const graph = buildGraph({ mods, cast });
   for (const [slot, expected] of Object.entries({
     train_to_gate: ['train_trust', 'train_trust', 'gate_trust'],
-    gate_to_office: ['gate_trust', 'gate_trust', 'office_trust'],
+    gate_to_forecourt: ['gate_trust', 'gate_trust', 'forecourt_trust'],
+    forecourt_to_office: ['forecourt_trust', 'forecourt_trust', 'office_trust'],
   })) assert.deepEqual(graph.nodes.get(`transitions:${slot}`).sets.map(set => set.flag), expected);
   const facts = await readGame(async file => {
     if (file === 'js/bonds/cast.js') return { CAST: cast };
     if (file === 'js/lang.js') return { WORDS: {} };
     return { default: mods[/^story\/(\w+)\.js$/.exec(file)[1]] };
   });
-  assert.deepEqual([...facts.flagsSet].sort(), ['gate_trust', 'office_trust', 'train_trust']);
+  assert.deepEqual([...facts.flagsSet].sort(), ['forecourt_trust', 'gate_trust', 'office_trust', 'train_trust']);
 });
 
 test('story map and facts record the same custom and default gate writes as the game', async () => {
-  const mods = Object.fromEntries(['train', 'gate', 'office'].map((place, i) => [place, {
-    ...stories[i], start: 'unlock', nodes: { unlock: [3, 4, 5].map(to => ({ do: 'bondStep', who: 'mio', to })) },
+  const mods = Object.fromEntries(['train', 'gate', 'forecourt', 'office'].map((place, i) => [place, {
+    ...[stories[0], stories[1], {}, stories[2]][i], start: 'unlock', nodes: { unlock: [3, 4, 5].map(to => ({ do: 'bondStep', who: 'mio', to })) },
   }]));
   mods.transitions = {};
   const graph = buildGraph({ mods, cast });
   const expected = {
     train: ['train_trust', 'cast_close', 'bond5_mio'],
     gate: ['train_trust', 'cast_close', 'gate_partner'],
+    forecourt: ['train_trust', 'cast_close', 'gate_partner'],
     office: ['bond3_mio', 'cast_close', 'gate_partner'],
   };
   for (const [place, flags] of Object.entries(expected))

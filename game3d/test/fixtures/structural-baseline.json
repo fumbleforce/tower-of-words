@@ -2,7 +2,8 @@
   "engine": {
     "next": {
       "train": "gate",
-      "gate": "office"
+      "gate": "forecourt",
+      "forecourt": "office"
     },
     "exact": {
       "cant_buy": [
@@ -37,9 +38,6 @@
       ]
     },
     "prefix": {
-      "gave_": [
-        "game3d/js/main.js"
-      ],
       "shown_": [
         "game3d/js/main.js"
       ],
@@ -84,20 +82,25 @@
       ],
       "voiced_": [
         "game3d/js/mastery.js"
+      ],
+      "gave_": [
+        "game3d/js/main.js"
       ]
     },
     "placeFile": {
       "train": "game3d/js/places/train.js",
       "gate": "game3d/js/places/lobby.js",
+      "forecourt": "game3d/js/places/forecourt.js",
       "office": "game3d/js/places/office.js"
     },
     "events": {
       "train": {
         "approach": "arrive",
-        "chime": "chime",
-        "arrived": null
+        "arrived": null,
+        "chime": "chime"
       },
       "gate": {},
+      "forecourt": {},
       "office": {
         "sat_down": "sitDown"
       }
@@ -222,6 +225,7 @@
   "places": [
     "train",
     "gate",
+    "forecourt",
     "office"
   ],
   "nodes": [
@@ -328,6 +332,9 @@
     "gate:tama_sumimasen",
     "gate:signin",
     "gate:poster",
+    "forecourt:outside",
+    "forecourt:head_office",
+    "forecourt:to_b2",
     "office:noop",
     "office:office_in",
     "office:mori_wait",
@@ -412,7 +419,8 @@
     "office:tomatte_fan",
     "office:~kenji_mori",
     "transitions:train_to_gate",
-    "transitions:gate_to_office"
+    "transitions:gate_to_forecourt",
+    "transitions:forecourt_to_office"
   ],
   "edges": [
     {
@@ -780,12 +788,24 @@
     },
     {
       "from": "gate:to_lift",
-      "to": "transitions:gate_to_office",
+      "to": "transitions:gate_to_forecourt",
       "kind": "next",
       "labels": []
     },
     {
-      "from": "transitions:gate_to_office",
+      "from": "transitions:gate_to_forecourt",
+      "to": "forecourt:outside",
+      "kind": "next",
+      "labels": []
+    },
+    {
+      "from": "forecourt:to_b2",
+      "to": "transitions:forecourt_to_office",
+      "kind": "next",
+      "labels": []
+    },
+    {
+      "from": "transitions:forecourt_to_office",
       "to": "office:office_in",
       "kind": "next",
       "labels": []

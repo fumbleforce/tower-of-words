@@ -21,6 +21,6 @@ export function assetRuntimeData(read = file => fs.readFileSync(new URL('../../'
       props.push({ place, file, room: file.split('/').at(-1).replace('.js', ''), id, ...metadata, ...geometry });
     }
   }
-  return { portraits: PORTRAITS, props, source: assetSourceData(read) };
+  return { places: Object.keys(PLACE_FILES), portraits: PORTRAITS, props, source: assetSourceData(read) };
 }
 if (process.argv[1] === fileURLToPath(import.meta.url)) console.log(JSON.stringify(assetRuntimeData()));

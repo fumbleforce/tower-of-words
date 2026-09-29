@@ -168,7 +168,7 @@ export async function lobbyPlace(game) {
         c.path = [
           [c.side * 0.2, BZ + 0.2],
           [c.side * 0.1, BZ - 0.8],
-          [c.side * 1.0, -Z + 0.55],
+          [-1.0, -Z + 0.55],
         ];
       }
       return;
@@ -189,7 +189,7 @@ export async function lobbyPlace(game) {
       return;
     }
     if (c.stage === 'through') {
-      if (c.path.length === 1) w.lifts[c.side > 0 ? 1 : 0].want = 1;
+      if (c.path.length === 1) w.lifts[0].want = 1;
       if (moveTo(...c.path[0])) {
         c.path.shift();
         if (!c.path.length) {
@@ -200,10 +200,10 @@ export async function lobbyPlace(game) {
       return;
     }
     if (c.stage === 'enter') {
-      if (moveTo(c.side * 1.0, -Z - 0.45, 1.0)) {
+      if (moveTo(-1.0, -Z - 0.65, 1.0)) {
         r.root.visible = false;
         c.b.visible = false;
-        w.lifts[c.side > 0 ? 1 : 0].want = 0;
+        w.lifts[0].want = 0;
         c.stage = 'wait';
         c.t = -4 - Math.random() * 5;
       }
@@ -521,7 +521,7 @@ export async function lobbyPlace(game) {
         w.manBlob.position.set(0.93, 0.004, BZ + 0.6);
       }
       restorePeople(people, state.people);
-      if (saved.runner?.execution && state.player) {
+      if (state.player) {
         game.walker.stop();
         restorePeople({ eric: game.player }, state.player);
         game.walker.sync?.();
@@ -698,7 +698,7 @@ export async function lobbyPlace(game) {
       },
       liftOpen: () => {
         w.lifts[0].want = 1;
-        sfx('lift');
+        sfx('door');
       },
       liftClose: () => {
         w.lifts[0].want = 0;
@@ -784,55 +784,14 @@ export async function lobbyPlace(game) {
       cam.release();
       if (aoiWalk) await aoiWalk;
     },
-    // leaving: into a lift, doors close, the floor indicator counts up with the ride's lines
-    async tripOut(g, slot) {
-      const mio = g.player;
-      const L = w.lifts[0];
+    // The old lift marker now names the station's outdoor exit; keep its id for saves.
+    async tripOut(g) {
       await g.walkTo(-1.0, -Z + 0.6);
+      g.player.scripted = true;
       g.walker.locked = true;
-      L.want = 1;
-      sfx('lift');
-      await g.wait(700);
-      mio.scripted = true;
-      mio.setState('walk');
-      cam.closeOn([-1.0, -Z + 0.2], 2.3);
-      await glide(g, mio.root, [-1.0, -Z - 0.12], 1.0);
-      mio.root.rotation.y = 0;
-      mio.setState('idle');
-      for (const id of withList(slot)) {
-        const r = people[id];
-        if (!r) continue;
-        if (r.meshy) {
-          r.setState('walk');
-          await glide(g, r.root, [-0.8, -Z + 0.4], 1.2);
-          r.setState('idle');
-          r.root.visible = false;
-          continue;
-        }
-        if (r.hips) {
-          await P.walkPerson(id, [-0.8, -Z + 0.4]);
-          r.root.visible = false;
-          if (blobs[id]) blobs[id].visible = false;
-        }
-      }
-      await g.wait(300);
-      L.want = 0;
-      sfx('door');
-      await g.wait(700);
-      mio.root.visible = false;
-      await g.wait(200);
-      g.liftFloor = '1';
-      ui.lift('1');
-      await g.wait(900);
-      const ride = slot.ride || [];
-      const drives = ride.some((s) => s && s.do === 'floor');
-      if (ride.length) {
-        await g.runner.steps(ride);
-        ui.closeTalk();
-      }
-      if (!drives || g.liftFloor !== 'B2') await g.hooks.floor({ to: 'B2' });
-      sfx('lift');
-      await g.wait(600);
+      cam.closeOn([-1, -Z], 1.7);
+      await glide(g, g.player.root, [-1, -Z - 0.65], 1.1);
+      g.player.setState('idle');
     },
   };
   // Aoi isn't in today's gate story: she stays on the right bench, hidden, unless the story shows her
