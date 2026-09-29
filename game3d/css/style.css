@@ -1095,3 +1095,8 @@ body.phone #top > #goal #hint { font-size: 14px; }
 #actMenu .act.next .ct { margin-left: auto; padding-left: 14px; color: var(--ink-dim); font-weight: 500; font-size: 13px; }
 body.phone #actMenu .act { min-height: 46px; padding: 0 16px; font-size: 16px; }
 body.phone #actMenu .hd { padding: 7px 16px; }
+/* Words panel: the dictionary word under a word met in a form (-te, -masu), and the one-line note on the ending */
+#cmdsPanel li.wrow .bf { color: var(--ink-dim); font-size: 12px; opacity: .85; }
+#cmdsPanel li.wrow .bf .bj { font-size: 13px; }
+#cmdsPanel li.fnote { display: block; border: 0; padding: 4px 2px 8px; color: var(--ink-dim); font-size: 12.5px; line-height: 1.4; }
+#cmdsPanel .card { max-height: calc(100dvh - 32px); overflow-y: auto; overscroll-behavior: contain; }

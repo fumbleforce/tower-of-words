@@ -1,5 +1,5 @@
 // HTML overlay: goal, words, the train's LED board, the talk panel with reply chips, fades and the end card.
-import { lineHTML, WORDS, COMMANDS, PHRASES, known, cmdHTML, iconHTML } from './lang.js';
+import { lineHTML, WORDS, COMMANDS, PHRASES, known, cmdHTML, iconHTML, baseHTML, FORM_NOTE } from './lang.js';
 import { settings, onSettings, CPS } from './settings.js';
 import { mountVoice, VOICE_CSS } from './speech.js';
 import { notePractice, needsPractice, pipsHTML, MASTERY_CSS } from './mastery.js';
