@@ -23,7 +23,13 @@ export function materializeLockedAssets(cwd, directory, { env = process.env } = 
   const files = JSON.parse(fs.readFileSync(lockFile, 'utf8')).files;
   const common = execFileSync('git', ['rev-parse', '--path-format=absolute', '--git-common-dir'],
     { cwd, env, encoding: 'utf8', timeout: 10000 }).trim();
-  const sources = [...new Set([cwd, path.dirname(common)])];
+  // Worktree assets are symlinks into the main checkout, so a source may resolve there, but never outside
+  // both checkouts, into .git or into a private/ folder (a link could otherwise pull in any file).
+  const sources = [...new Set([cwd, path.dirname(common)])], roots = sources.map(root => fs.realpathSync(root));
+  const allowed = real => roots.some(root => {
+    const rel = path.relative(root, real), parts = rel.split(path.sep);
+    return rel && !path.isAbsolute(rel) && parts[0] !== '..' && !parts.includes('private') && !parts.includes('.git');
+  });
   const failures = [];
   let copied = 0;
   for (const [file, entry] of Object.entries(files)) {
@@ -33,11 +39,14 @@ export function materializeLockedAssets(cwd, directory, { env = process.env } = 
     if (fs.existsSync(path.join(directory, file))) continue; // still tracked in this tree
     let found = false;
     for (const root of sources) {
-      const source = path.join(root, file);
-      if (!fs.statSync(source, { throwIfNoEntry: false })?.isFile() || sha256(source) !== entry.sha256) continue;
+      let real;
+      try { real = fs.realpathSync(path.join(root, file)); } catch { continue; }
+      if (!allowed(real)) throw new Error(`Locked asset ${file} resolves outside the checkouts or into an excluded folder: ${real}`);
+      if (!fs.statSync(real).isFile() || sha256(real) !== entry.sha256) continue;
       const target = path.join(directory, file);
       fs.mkdirSync(path.dirname(target), { recursive: true });
-      fs.copyFileSync(source, target, fs.constants.COPYFILE_EXCL);
+      fs.copyFileSync(real, target, fs.constants.COPYFILE_EXCL);
+      assert.equal(sha256(target), entry.sha256, `Locked asset ${file} changed while it was copied`);
       found = true; copied++;
       break;
     }
@@ -49,8 +58,14 @@ export function materializeLockedAssets(cwd, directory, { env = process.env } = 
 }
 
 // Refuse a commit while a used asset is not in the lock file or changed without a push (no network).
+// The sync check reads the working lock file, so it must be the one being committed.
 export function checkAssetSync(cwd, { env = process.env } = {}) {
-  if (!fs.existsSync(path.join(cwd, LOCK))) return;
+  const working = fs.existsSync(path.join(cwd, LOCK)) ? fs.readFileSync(path.join(cwd, LOCK), 'utf8') : null;
+  let staged = null;
+  try { staged = execFileSync('git', ['show', `:${LOCK}`], { cwd, env, encoding: 'utf8', timeout: 10000, stdio: ['ignore', 'pipe', 'ignore'] }); }
+  catch { /* not in the index */ }
+  if (working !== staged) throw new Error(`asset sync: ${LOCK} differs from the staged copy; stage it (git add ${LOCK}) or restore it`);
+  if (working === null) return;
   try {
     execFileSync('python3', ['tools/assets/sync.py', 'check', '--offline'],
       { cwd, env, encoding: 'utf8', timeout: 120000, stdio: ['ignore', 'pipe', 'pipe'] });
