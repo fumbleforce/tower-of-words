@@ -152,12 +152,14 @@ export default {
       { inc: 'mio_warm' },
       { say: 'mio', emo: 'flustered', name: 'Woman with a laptop', text: 'Ah, sorry, sorry. Thank you.' },
       { say: 'mio', emo: 'sheepish', name: 'Woman with a laptop', text: "It's pickles. My mother thinks island has no food, so... every time I visit." },
+      { set: 'heard_mum' },
       { go: 'sit' },
     ],
     dropped: [
       { unset: 'bag_wobble' },
       { do: 'bag', state: 'dropped' },
       { say: 'mio', emo: 'dry', name: 'Woman with a laptop', text: "...Okay. I think nothing broke. It's my mother's pickles." },
+      { set: 'heard_mum' },
       { go: 'sit' },
     ],
     sit: [
@@ -175,7 +177,8 @@ export default {
       { set: 'mio_named' },
       { choice: [
         { text: '“I\'m Eric.”', go: 'its_eric' },
-        { text: '“Were you visiting your mum?”', go: 'family' },
+        // only once she has mentioned her mother (catching or dropping the bag); not when she caught it herself
+        { text: '“Were you visiting your mum?”', go: 'family', if: 'heard_mum' },
         { text: 'Just nod', go: 'leave_it' },
       ] },
     ],

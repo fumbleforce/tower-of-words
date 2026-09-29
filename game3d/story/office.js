@@ -62,7 +62,8 @@ export default {
       { if: 'afternoon_on && !evening_on', node: 'work_afternoon' },
       'desk_look',
     ],
-    'talk:vending': 'vending',
+    // while the first can is stuck the machine takes no new order: 動いて gets the one already paid for
+    'talk:vending': [{ if: 'vend_stuck', node: 'vend_still_stuck' }, 'vending'],
     'talk:tama': 'tama',
     'talk:inout_board': 'inout_board',
     'talk:covered': 'covered',
@@ -90,12 +91,12 @@ export default {
     'say:tomatte:fan': 'tomatte_fan',
 
     // the gift moment
-    'give:coffee:mio': [{ if: 'gifted_mio', node: 'gift_again' }, 'gift_mio_coffee'],
-    'give:*:mio': [{ if: 'gifted_mio', node: 'gift_again' }, 'gift_mio_other'],
-    'give:cornsoup:mori': [{ if: 'gifted_mori', node: 'gift_again' }, 'gift_mori_cornsoup'],
-    'give:*:mori': [{ if: 'gifted_mori', node: 'gift_again' }, 'gift_mori_other'],
-    'give:melon:kenji': [{ if: 'gifted_kenji', node: 'gift_again' }, 'gift_kenji_melon'],
-    'give:*:kenji': [{ if: 'gifted_kenji', node: 'gift_again' }, 'gift_kenji_other'],
+    'give:coffee:mio': [{ if: 'gifted_mio', node: 'gift_again', keep: true }, 'gift_mio_coffee'],
+    'give:*:mio': [{ if: 'gifted_mio', node: 'gift_again', keep: true }, 'gift_mio_other'],
+    'give:cornsoup:mori': [{ if: 'gifted_mori', node: 'gift_again', keep: true }, 'gift_mori_cornsoup'],
+    'give:*:mori': [{ if: 'gifted_mori', node: 'gift_again', keep: true }, 'gift_mori_other'],
+    'give:melon:kenji': [{ if: 'gifted_kenji', node: 'gift_again', keep: true }, 'gift_kenji_melon'],
+    'give:*:kenji': [{ if: 'gifted_kenji', node: 'gift_again', keep: true }, 'gift_kenji_other'],
   },
 
   show: { mori: '!greeted_mori', mio: '(chair_back && !got_ticket) || (copier_done && !ticket_closed) || evening_on' },
@@ -481,6 +482,7 @@ export default {
       { do: 'goal', side: true, text: '' },
     ],
     vend_ugoite_idle: [{ do: 'sound', name: 'beep' }],
+    vend_still_stuck: [{ do: 'sound', name: 'no' }, "> Your drink still hasn't come out."],
 
     gift_mio_coffee: [
       { set: 'gifted_mio' }, { do: 'bond', who: 'mio', add: 1 },
