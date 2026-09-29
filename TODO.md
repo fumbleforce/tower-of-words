@@ -2,20 +2,8 @@
 
 Read GUIDE.md first, then notes/PRODUCTION.md. The game is game3d/ (day 1: train, gate, B2 office). Decisions for Jørgen go to the bible's Review section (reviews/), not chat.
 
-## In progress (agents, 2026-09-29 night)
-- Builder (integrator, only one who pushes via game3d/tools/push.sh): next push with the player-paced train opening (story 03a2188, notes/ONBOARDING.md), lunch-bag catch, flush train doors and hinge-edge server door (world 56bd762), shell dialogue/first-screen fixes, new voices.
-- Shell: controls-first onboarding (controls, then talking, then goal), whole dialogue area clickable, no hover flicker, "Press Space or click this area to continue", play icon on clickable words, hover/target highlight.
-- Feel: facing and twisting, characters overlapping (Eric and Mio heap at arrival), stuck on each other, click targets.
-- Bible: review queue (reviews/<id>/review.json, feedback.json, tools/review_server.py, tools/review.py) and live sources (bible/live.js).
-- Style: painted-cel round 2 at full resolution; doubled floor tile grids.
-- Lift: the lift as a walk-in room, camera on Eric for the ride.
-- Art: Kenji round 2 (21, at work in work clothes, hobbies only as small details, varied height/build/face, not generic); Eric's portrait in the original style (open eyes, no red rim); Mio looking at her phone (dialogue portrait).
-- Voice input: speak words into the mic instead of typing; a word is typed or said 3 times before it's click-only in the Say menu.
-- Creator: experiment splitting Mio and Eric into parts on one skeleton (small scope).
-
-## Waiting on Jørgen (Review section)
-- Style study pick (leaning painted cel), Kenji concept round 2, Mori's 3D look (local chibi or his ChatGPT pictures; references in tools/characters/ref/), whether bible/ goes public in git.
-- Walkthrough: Mio and Mori written (notes/walkthrough/); the other six wait for his notes.
+## Pick up here
+See notes/HANDOFF.md (2026-09-29): what's done, what's broken (phone lift softlock, perf), what waits on Jørgen in Review, and the push block.
 
 ## Parked ideas
 - Procedural content (Jørgen, 2026-09-28: "keep it idea for now"): fixed cast, main arc and location cards stay authored; an LLM director writes daily storylets in the game3d/story format that the engine validates, with per-character memory, generated gossip, notes and emails, pre-rendered picture pools and a room generator for repeated office floors. Run it first as an overnight writers' room with critic filtering and his stars, live later. Blocked until ONE stable, full, fun day exists, so we know which elements to build on. First test when unblocked: a fully generated day 2 using the same places.

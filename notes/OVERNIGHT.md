@@ -74,3 +74,8 @@ Make day 1 (train → gate → B2 office) the best it can be at production quali
 - 06:16: estimated weekly usage now: 17.9%
 - 06:19: heartbeat: 51 commits unpushed; the builder's bonds run passed desktop magic, asked it to commit and retry the push; 1 overlap left (eric/tama on the train) for feel; perf holds the browser lock; 3 agents running (feel, perf, characters).
 - 06:20: push blocked a 3rd time (needs Jørgen's allow click); writing the morning report now; remaining agents keep going.
+- 06:46: estimated weekly usage now: 18.0%
+- 07:16: estimated weekly usage now: 18.1%
+- 07:22: feel: 0 overlaps, 0 spins (cd66389); builder switching the movement check back to failing.
+- 07:46: estimated weekly usage now: 18.3%
+- 08:05: wind-down requested by Jørgen; crons cancelled; agents told to finish and stop; handoff in notes/HANDOFF.md.
