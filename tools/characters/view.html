@@ -22,6 +22,7 @@ if (q.has('ppos')) setPhone({ pos: q.get('ppos').split(',').map(Number) });
 if (q.has('prot')) setPhone({ rot: q.get('prot').split(',').map((v) => +v * Math.PI / 180) });
 if (q.has('pt')) setPhone({ t: +q.get('pt') }); if (q.has('lift')) setPhone({ lift: +q.get('lift') }); if (q.has('lift2')) setPhone({ lift2: +q.get('lift2') }); if (q.has('nohead')) setPhone({ only: /Spine|Shoulder|Arm|Hand$/ });
 const who = q.get('who') || 'mio';
+if (q.has('idleT')) window.__idleT = +q.get('idleT');
 async function loadGlb(src, height) {
   const { GLTFLoader } = await import('../../game3d/vendor/loaders/GLTFLoader.js');
   const g = await new GLTFLoader().loadAsync(src);

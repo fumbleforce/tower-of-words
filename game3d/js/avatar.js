@@ -148,12 +148,15 @@ export async function loadMeshy(id, { height = 1.2, dir = CDIR + id + '/' } = {}
   const root = new THREE.Group(), holder = new THREE.Group();
   holder.scale.setScalar(height / H); holder.add(model); root.add(holder);
   const mixer = new THREE.AnimationMixer(model);
-  const actions = { walk: mixer.clipAction(walk.animations[0]), run: mixer.clipAction(run.animations[0]), idle: mixer.clipAction(idle.animations[0]), sit: mixer.clipAction(sitG.animations[0]) };
+  // idle: Meshy's Idle clip stands wide with bent knees (QA round 1: by the bench it read as a bad half-sit), so like
+  // Mio the idle is the walk clip held on its calmest frame (feet together, upright). ?idleclip=1 shows the old one.
+  const idleSrc = typeof location !== 'undefined' && /[?&]idleclip=1/.test(location.search) ? idle.animations[0] : walk.animations[0].clone();
+  const actions = { walk: mixer.clipAction(walk.animations[0]), run: mixer.clipAction(run.animations[0]), idle: mixer.clipAction(idleSrc), sit: mixer.clipAction(sitG.animations[0]) };
   let hips = null; model.traverse((o) => { if (!hips && o.isBone && /hips/i.test(o.name)) hips = o; });
   const hipRest = hips.position.clone();
   const pose = { bow: 0 };
   let spine = null, spine2 = null; model.traverse((o) => { if (o.isBone && /spine$/i.test(o.name.replace(/[^a-z0-9]/gi, ''))) spine = o; if (o.isBone && /spine0?1$/i.test(o.name.replace(/[^a-z0-9]/gi, ''))) spine2 = o; });
-  const SIT_T = calmSitTime(model, mixer, actions.sit), IDLE_T = calmIdleTime(model, mixer, actions.idle);
+  const SIT_T = calmSitTime(model, mixer, actions.sit), IDLE_T = typeof window !== 'undefined' && window.__idleT != null ? window.__idleT : calmIdleTime(model, mixer, actions.idle);
   const layers = poseLayer(model);
   const ph = addPhone({ model, root, height, layers, json: phoneJson, bones: API_PHONE_BONES });
   const gact = {};

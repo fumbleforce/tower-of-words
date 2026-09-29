@@ -264,9 +264,41 @@ export function book() {
   return g;
 }
 
-// ---------- the cat (calico loaf) ----------
-// Faces +z. A loaf body, a round head with two ears, closed happy eyes, a tail curled along the side.
-export function cat() {
+// ---------- the cat (calico) ----------
+// Faces +z. Asleep and curled up (QA round 1: the flat loaf with its head stuck out read as a dead cat): a round
+// body, the head tucked down on its front paws at the front left, the tail wrapped round the front to the head.
+// The head and tail are groups (userData.head / tail) so places can nod the head and sway the tail a little.
+// cat({ curl: false }) is the old sitting loaf.
+export function cat({ curl = true } = {}) {
+  if (!curl) return catLoaf();
+  const g = new THREE.Group();
+  const W = '#fbf7f0', O = '#e59a52', K = '#4a3e3a';
+  const patch = (c) => (c.x > 0.03 && c.z < 0.04 && c.y > 0.06 ? O : c.x < -0.05 && c.z < -0.02 && c.y > 0.05 ? K : undefined);
+  g.add(mesh(hull(icoPoints(V(0.01, 0.07, -0.01), [0.15, 0.075, 0.13], 0.02, 13), W, { grad: 0.18, name: 'catbody', colorOf: patch })));
+  // front paws under the chin
+  for (const x of [-0.1, -0.04]) g.add(mesh(hull(icoPoints(V(x, 0.02, 0.1), [0.028, 0.02, 0.035], 0, 5), W, { grad: 0.05, name: 'paw' })));
+  const head = new THREE.Group(); head.position.set(-0.07, 0.1, 0.07); g.add(head);
+  const hk = new THREE.Group(); hk.rotation.set(0.1, 0.35, 0.3); head.add(hk);   // resting on its side a little, turned out
+  hk.add(mesh(hull(icoPoints(V(0, 0.01, 0), [0.088, 0.072, 0.078], 0.02, 12), W, { grad: 0.12, name: 'cathead', colorOf: (c) => (c.x > 0.02 && c.y > 0.03 ? O : c.x < -0.03 && c.y > 0.035 ? K : undefined) })));
+  for (const s2 of [-1, 1]) {
+    hk.add(mesh(hull([[s2 * 0.032, 0.055, -0.028], [s2 * 0.032, 0.055, 0.026], [s2 * 0.078, 0.05, 0.0], [s2 * 0.062, 0.115, -0.005], [s2 * 0.055, 0.065, 0.012]], s2 > 0 ? O : K, { grad: 0.05, name: 'ear' })));
+    const e = (dx, dy) => V(s2 * 0.034 + dx, dy + 0.004, 0.076 - Math.abs(s2 * 0.034 + dx) * 0.25);
+    hk.add(mesh(beamHull(e(-0.015, 0.0), e(0, -0.007), 0.007, 0.008, K, V(0, 0, 1))), mesh(beamHull(e(0, -0.007), e(0.015, 0.0), 0.007, 0.008, K, V(0, 0, 1))));
+  }
+  hk.add(mesh(hull(icoPoints(V(0, -0.018, 0.075), [0.011, 0.008, 0.006], 0, 3), '#e59a9a', { grad: 0, name: 'nose' })));
+  // the tail lies along the body's outline, from the back right round the right side to the front, ending under
+  // the chin. Its group pivots on the body's centre, so a small sway slides it round the body instead of off it.
+  const tail = new THREE.Group(); tail.position.set(0.01, 0, -0.01); g.add(tail);
+  const at = (deg, rr = 1) => { const t = deg * Math.PI / 180; return V(Math.sin(t) * 0.168 * rr, 0.03, Math.cos(t) * 0.148 * rr); };
+  const path = [at(150), at(115), at(80), at(45), at(12, 0.98)];
+  for (let i = 0; i < path.length - 2; i++) tail.add(mesh(beamHull(path[i], path[i + 1], 0.036 - i * 0.002, 0.034 - i * 0.002, O)));
+  const tip = new THREE.Group(); tail.add(tip);
+  tip.add(mesh(beamHull(path[path.length - 2], path[path.length - 1], 0.03, 0.026, K)));
+  g.userData = { head, tail, tip };
+  return g;
+}
+// the old sitting loaf
+function catLoaf() {
   const g = new THREE.Group();
   const W = '#fbf7f0', O = '#e59a52', K = '#4a3e3a';
   const patch = (c) => (c.x > 0.04 && c.z < 0.03 && c.y > 0.05 ? O : c.x < -0.07 && c.z < -0.0 && c.y > 0.06 ? K : undefined);
