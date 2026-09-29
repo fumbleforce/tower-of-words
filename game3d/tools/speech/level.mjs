@@ -12,7 +12,7 @@ import { fileURLToPath } from 'node:url';
 const here = dirname(fileURLToPath(import.meta.url)), root = join(here, '../../..');
 const label = process.argv[2] || 'now';
 const plan = JSON.parse(readFileSync(join(here, 'level/plan.json'), 'utf8'));
-const LOCK = '/tmp/claude-1000/browser.lock', ME = 'voice-level';
+const LOCK = '/tmp/claude-1000/browser.lock.' + process.pid, ME = 'voice-level';
 async function takeLock() {
   for (;;) {
     try { mkdirSync(LOCK); writeFileSync(join(LOCK, 'owner'), `${ME} ${new Date().toISOString()}\n`); return; }

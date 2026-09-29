@@ -3,7 +3,7 @@
 // Takes the browser lock (GUIDE, Process) and gives it back when the browser exits.
 import { chromium } from '/home/jorgen/ai/opening/node_modules/playwright/index.mjs';
 import fs from 'node:fs';
-const LOCK = '/tmp/claude-1000/browser.lock', ME = 'creator';
+const LOCK = '/tmp/claude-1000/browser.lock.' + process.pid, ME = 'creator';
 const [url, out, w = 1400, h = 900] = process.argv.slice(2);
 for (let i = 0; ; i++) {
   try { fs.mkdirSync(LOCK); fs.writeFileSync(LOCK + '/owner', ME); break; } catch (e) {

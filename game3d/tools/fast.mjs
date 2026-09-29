@@ -35,7 +35,7 @@ const [W = '1366', H = '860', S = '180'] = process.argv.slice(2);
 let gl = process.env.GL === 'gpu' ? ['--use-angle=vulkan', '--enable-features=Vulkan', '--ignore-gpu-blocklist', '--enable-gpu'] : ['--use-angle=swiftshader', '--enable-unsafe-swiftshader'];
 gl.push('--autoplay-policy=no-user-gesture-required');
 // one headless browser at a time across all agents (GUIDE, Process): take /tmp/claude-1000/browser.lock, wait if held
-const LOCK = '/tmp/claude-1000/browser.lock', ME = process.env.LOCK_NAME || 'fast-test';
+const LOCK = '/tmp/claude-1000/browser.lock.' + process.pid, ME = process.env.LOCK_NAME || 'fast-test';
 for (let tries = 0; ; tries++) {
   try { fs.mkdirSync(LOCK); fs.writeFileSync(LOCK + '/owner', ME + ' ' + new Date().toISOString()); break; }
   catch { if (tries % 12 === 0) console.log('waiting for the browser lock, held by', (() => { try { return fs.readFileSync(LOCK + '/owner', 'utf8'); } catch { return '?'; } })()); await new Promise((r) => setTimeout(r, 5000)); }

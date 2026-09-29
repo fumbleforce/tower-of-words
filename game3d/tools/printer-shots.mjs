@@ -14,7 +14,7 @@ const G = path.resolve(path.dirname(new URL(import.meta.url).pathname), '..');
 const out = path.join(G, 'shots/printer', `${W}x${H}${process.env.RACE ? '-race' : ''}`);
 fs.rmSync(out, { recursive: true, force: true }); fs.mkdirSync(out, { recursive: true });
 
-const LOCK = '/tmp/claude-1000/browser.lock', ME = 'printer-shots';
+const LOCK = '/tmp/claude-1000/browser.lock.' + process.pid, ME = 'printer-shots';
 for (let i = 0; ; i++) {
   try { fs.mkdirSync(LOCK); fs.writeFileSync(LOCK + '/owner', ME + ' ' + new Date().toISOString()); break; }
   catch { if (i % 12 === 0) console.log('waiting for the browser lock'); await new Promise((r) => setTimeout(r, 5000)); }

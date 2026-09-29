@@ -10,7 +10,7 @@ import { fileURLToPath } from 'node:url';
 const here = dirname(fileURLToPath(import.meta.url)), root = join(here, '../../..'), out = join(root, 'game3d/shots/voice');
 mkdirSync(out, { recursive: true });
 const STATES = ['idle', 'asking', 'loading', 'listening', 'thinking', 'hit', 'miss', 'miss2', 'other', 'quiet', 'blocked', 'saymenu', 'words'];
-const LOCK = '/tmp/claude-1000/browser.lock', ME = 'voice-input';
+const LOCK = '/tmp/claude-1000/browser.lock.' + process.pid, ME = 'voice-input';
 for (;;) { try { mkdirSync(LOCK); writeFileSync(join(LOCK, 'owner'), `${ME} ${new Date().toISOString()}\n`); break; } catch { await new Promise((r) => setTimeout(r, 15000)); } }
 const drop = () => { try { if (readFileSync(join(LOCK, 'owner'), 'utf8').startsWith(ME)) rmSync(LOCK, { recursive: true }); } catch { /* */ } };
 const port = +(process.env.PORT || 18784);

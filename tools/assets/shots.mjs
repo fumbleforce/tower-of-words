@@ -10,7 +10,7 @@ import path from 'node:path';
 const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname), '../..');
 const OUT = path.join(ROOT, 'tools/assets/shots');
 fs.mkdirSync(OUT, { recursive: true });
-const LOCK = '/tmp/claude-1000/browser.lock', ME = 'asset-shots';
+const LOCK = '/tmp/claude-1000/browser.lock.' + process.pid, ME = 'asset-shots';
 for (let tries = 0; ; tries++) {
   try { fs.mkdirSync(LOCK); fs.writeFileSync(LOCK + '/owner', ME + ' ' + new Date().toISOString()); break; }
   catch { if (tries % 12 === 0) console.log('waiting for the browser lock'); await new Promise((r) => setTimeout(r, 5000)); }
