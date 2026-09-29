@@ -467,7 +467,7 @@ export default {
       { set: 'vend_stuck' },
       { do: 'sound', name: 'no' },
       '> Your coin goes in. Nothing comes out.',
-      { do: 'goal', text: 'The vending machine is stuck.' },
+      { do: 'goal', side: true, text: 'The vending machine is stuck.' },
     ],
     vend_ugoite: [
       { unset: 'vend_stuck' },
@@ -478,7 +478,7 @@ export default {
       { if: 'vend_want == 3', then: [{ do: 'buy', item: 'melon' }] },
       { if: 'vend_want == 4', then: [{ do: 'buy', item: 'cornsoup' }] },
       { say: 'eric', emo: 'dry', text: 'Thanks.' },
-      { if: 'afternoon_on', then: [{ do: 'goal', text: 'Get someone a drink, or get back to work at your desk.' }], else: [{ do: 'goal', text: '' }] },
+      { do: 'goal', side: true, text: '' },
     ],
     vend_ugoite_idle: [{ do: 'sound', name: 'beep' }],
 
