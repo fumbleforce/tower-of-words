@@ -96,9 +96,9 @@ class Mesh:
         self.normal=np.array([unit(n) for n in normals])
 
 def make(sid,variant):
-    supported_variants={f'v{number}':number for number in range(1,15)}
+    supported_variants={f'v{number}':number for number in range(1,16)}
     if variant not in supported_variants:
-        raise ValueError(f'Unknown clean-base variant {variant!r}; expected v1 through v14')
+        raise ValueError(f'Unknown clean-base variant {variant!r}; expected v1 through v15')
     if sid not in ('eric','mio'):
         raise ValueError(f'Unknown clean-base source {sid!r}; expected eric or mio')
     revision=supported_variants[variant]
@@ -184,6 +184,12 @@ def make(sid,variant):
                 back_profile=[-.055,-.090,-.130,-.158,-.176,-.177,-.150,-.108]
             profiles=[(y,rx,front,back) for (y,rx,front,_),back in zip(profiles,back_profile)]
             hs=[(y,rx,(front-back)/2) for y,rx,front,back in profiles]
+    if revision>=15:
+        # Retain jaw, widest face, brow and crown contours. Remove the two
+        # intermediate rounding bands so larger planes connect those landmarks.
+        keep=[0,1,3,4,6,7]
+        hs=[hs[i] for i in keep]
+        if profiles: profiles=[profiles[i] for i in keep]
     last=rings[-1]
     head_ids=set(last)
     for ring_index,(y,rx,rz) in enumerate(hs):
@@ -322,8 +328,9 @@ def make(sid,variant):
     for f in m.f:
         centroid=np.mean([m.v[i] for i in f],axis=0)
         front=all(i in head_ids for i in f) and centroid[2]>.045
+        face_normal=unit(np.cross(m.v[f[1]]-m.v[f[0]],m.v[f[2]]-m.v[f[0]]))
         for i in f:
-            p=m.v[i];out['pos'].extend(np.round(p,6).tolist());out['normal'].extend(np.round(m.normal[i],6).tolist())
+            p=m.v[i];out['pos'].extend(np.round(p,6).tolist());out['normal'].extend(np.round(face_normal if revision>=15 else m.normal[i],6).tolist())
             out['uv'].extend([(p[0]-xlo)/(xhi-xlo),(yhi-p[1])/(yhi-ylo)] if front else [.01,.01])
             ws=sorted(m.w[i].items(),key=lambda x:-x[1]); total=sum(v for _,v in ws)
             out['si'].extend([S['bones'].index(b) for b,_ in ws]+[0]*(4-len(ws)))
@@ -337,6 +344,7 @@ def make(sid,variant):
     out.update(id=name,source=sid,tex=f'base/{name}.png',skin=skin.tolist(),T=len(m.f),stubble=stubble,
         construction={'method':'authored connected edge loops','vertices':len(m.v),'triangles':len(m.f),'sourceSha256':hashlib.sha256(srcpath.read_bytes()).hexdigest(),'generator':'tools/creator/base/build_clean_base.py','variant':variant},
         check={'boundary':0,'nonmanifold':0,'pieces':1})
+    if revision>=15: out['shading']='flat'
     (OUT/f'{name}.json').write_text(json.dumps(out,separators=(',',':')))
     print(name,len(m.v),'vertices',len(m.f),'triangles',flush=True)
 

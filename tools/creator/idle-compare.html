@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Live idle comparison · Chibi creator</title>
+  <script type="importmap">{"imports":{"three":"/game3d/vendor/three/three.module.js","three/addons/":"/game3d/vendor/"}}</script>
+  <style>
+    :root{color-scheme:light;--ink:#253045;--muted:#596579;--line:#c9d1db;--paper:#fafbf9;--accent:#235868}
+    *{box-sizing:border-box}[hidden]{display:none!important}body{margin:0;background:#e9ecf1;color:var(--ink);font:16px/1.45 system-ui,sans-serif}
+    main{display:grid;grid-template-columns:minmax(0,1fr) 300px;min-height:100dvh}a{color:var(--accent)}
+    #stage{position:relative;min-height:480px;height:100dvh;overflow:hidden}#stage canvas{position:absolute;inset:0;width:100%;height:100%;display:block;touch-action:none}
+    .views{position:absolute;inset:0;display:grid;grid-template-columns:1fr 1fr;pointer-events:none}.view{display:flex;flex-direction:column;min-width:0}
+    .view+.view{border-left:1px solid var(--line)}.view header{padding:20px 18px 8px;min-height:110px;background:#e9ecf1e8}.viewport{flex:1;min-height:0}
+    h2{font-size:19px;margin:0 0 5px}.view p{font-size:14px;margin:0;color:var(--muted)}
+    aside{background:var(--paper);border-left:1px solid var(--line);padding:24px;max-height:100dvh;overflow:auto}h1{font-size:24px;line-height:1.2;margin:20px 0 10px}
+    p{font-size:14px;color:var(--muted)}fieldset{border:0;padding:0;margin:22px 0}legend,label{display:block;font-weight:600;margin-bottom:8px}
+    select,button{font:inherit;color:inherit;background:white;border:1px solid var(--line);border-radius:6px;min-height:44px;padding:8px 12px}select{width:100%}
+    button{cursor:pointer}button:hover{background:#e8f0f1}button[aria-pressed=true]{background:#dcebef;border-color:var(--accent)}button:disabled{cursor:default;opacity:.6}
+    button:focus-visible,select:focus-visible,input:focus-visible,a:focus-visible,canvas:focus-visible{outline:3px solid var(--accent);outline-offset:-3px}
+    .row{display:flex;gap:8px;flex-wrap:wrap}.row button{flex:1}#play{width:100%;margin-bottom:8px}input[type=range]{width:100%;min-height:44px;accent-color:var(--accent)}
+    #status{min-height:1.5em}#status[data-error=true]{color:#923c31}.note{border-top:1px solid var(--line);padding-top:12px}
+    @media(max-width:800px){main{grid-template-columns:1fr}#stage{height:56dvh;min-height:390px}aside{max-height:none;border:0;border-top:1px solid var(--line);padding:20px}.view header{padding:14px 10px 6px;min-height:100px}h2{font-size:16px}.view p{font-size:12px}fieldset{margin:18px 0}}
+  </style>
+</head>
+<body>
+<main>
+  <section id="stage" aria-label="Live original and candidate animation comparison">
+    <div class="views">
+      <article class="view"><header><h2 id="original-title">Original idle</h2><p id="original-caption">Full source clip, playing.</p></header><div id="original-view" class="viewport"></div></article>
+      <article class="view"><header><h2>Neutral idle candidate</h2><p id="candidate-caption">Four-second breathing loop.</p></header><div id="candidate-view" class="viewport"></div></article>
+    </div>
+  </section>
+  <aside>
+    <a href="/bible/#review/creator-idle-neutral-2">← Back to review</a>
+    <h1>Live idle comparison</h1>
+    <p>Same character, light and camera on both sides. Drag either side to turn both views.</p>
+    <p id="status" role="status" aria-live="polite">Loading the characters…</p><button id="retry" hidden>Retry loading</button>
+    <fieldset><legend>Character</legend><select id="body" aria-label="Character"><option value="mio">Mio</option><option value="eric">Eric</option></select></fieldset>
+    <fieldset><legend>Original on the left</legend><select id="baseline" aria-label="Original idle playback"><option value="source">Full original clip</option><option value="held">Current creator: held at 0.4 s</option></select></fieldset>
+    <fieldset><legend>Animation</legend><button id="play">Pause animation</button><div class="row"><button id="walk" aria-pressed="false">Idle → walk</button><button id="idle" aria-pressed="true">Walk → idle</button></div><p>Both sides change together with a 0.2-second fade.</p><button id="restart">Restart current motion</button></fieldset>
+    <fieldset><legend>View</legend><div class="row"><button id="front">Front</button><button id="side">Side</button><button id="back">Back</button></div><label for="zoom">Zoom</label><input id="zoom" type="range" min="1.8" max="5.5" step=".1" value="3.2"><p>Scroll or use the slider to zoom. Focus the view and use arrow keys to turn; + / − zoom.</p></fieldset>
+    <p class="note">Candidate only. The game and source models are unchanged. The current creator holds the original idle still; select that option to compare its frozen pose.</p>
+    <details><summary>Comparison settings</summary><p>Both sides use the existing creator retargeting, with host-rest correction off. Walking feet may cross the floor. No model fitting or body changes are included.</p></details>
+  </aside>
+</main>
+<script type="module" src="./idle-compare.js"></script>
+</body>
+</html>
