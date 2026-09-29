@@ -1,5 +1,5 @@
 {
-"generated":"2026-09-29T02:58:31+02:00",
+"generated":"2026-09-29T02:58:43+02:00",
 "kinds":{
 "portrait":"Portraits and expressions",
 "model":"3D models",
@@ -114,7 +114,7 @@
 "kind":{
 "portrait":109,
 "model":43,
-"animation":19,
+"animation":28,
 "prop":79,
 "room":12,
 "voice":404,
@@ -126,7 +126,7 @@
 "style":92
 },
 "status":{
-"approved":185,
+"approved":194,
 "provisional":295,
 "candidate":42,
 "legacy":276,
@@ -147,6 +147,7 @@
 "legacy":13
 },
 "animation":{
+"approved":9,
 "provisional":8,
 "candidate":2,
 "rejected":9
@@ -4152,6 +4153,278 @@
 "code-built"
 ],
 "thumb3d":"tools/assets/thumbs/3d-model-chibi-old-player.webp"
+},
+{
+"id":"animation/eric-idle",
+"kind":"animation",
+"name":"Eric: idle",
+"who":"eric",
+"place":null,
+"paths":[
+"game3d/assets/eric/idle.glb"
+],
+"status":"approved",
+"status_from":{
+"path":"art/approved/README.md",
+"text":"Eric's Meshy model with the idle, walk, run, sit and to-sit animation GLBs (approved with the model)"
+},
+"source":"Meshy animation library on the auto-rigged model",
+"used":[
+"Player idle state (avatar.js loadMeshy)"
+],
+"review":null,
+"view":{
+"type":"meshy",
+"id":"eric",
+"height":1.2,
+"play":"idle"
+},
+"thumb":"tools/assets/thumbs/3d-animation-eric-idle.webp",
+"tags":[
+"3D"
+],
+"thumb3d":"tools/assets/thumbs/3d-animation-eric-idle.webp"
+},
+{
+"id":"animation/eric-run",
+"kind":"animation",
+"name":"Eric: run",
+"who":"eric",
+"place":null,
+"paths":[
+"game3d/assets/eric/run.glb"
+],
+"status":"approved",
+"status_from":{
+"path":"art/approved/README.md",
+"text":"Eric's Meshy model with the idle, walk, run, sit and to-sit animation GLBs (approved with the model)"
+},
+"source":"Meshy animation library on the auto-rigged model",
+"used":[
+"Player run state (avatar.js loadMeshy)"
+],
+"review":null,
+"view":{
+"type":"meshy",
+"id":"eric",
+"height":1.2,
+"play":"run"
+},
+"thumb":"tools/assets/thumbs/3d-animation-eric-run.webp",
+"tags":[
+"3D"
+],
+"thumb3d":"tools/assets/thumbs/3d-animation-eric-run.webp"
+},
+{
+"id":"animation/eric-sit",
+"kind":"animation",
+"name":"Eric: sit",
+"who":"eric",
+"place":null,
+"paths":[
+"game3d/assets/eric/sit.glb"
+],
+"status":"approved",
+"status_from":{
+"path":"art/approved/README.md",
+"text":"Eric's Meshy model with the idle, walk, run, sit and to-sit animation GLBs (approved with the model)"
+},
+"source":"Meshy animation library on the auto-rigged model",
+"used":[
+"Player sit state (avatar.js loadMeshy)"
+],
+"review":null,
+"view":{
+"type":"meshy",
+"id":"eric",
+"height":1.2,
+"play":"sit"
+},
+"thumb":"tools/assets/thumbs/3d-animation-eric-sit.webp",
+"tags":[
+"3D"
+],
+"thumb3d":"tools/assets/thumbs/3d-animation-eric-sit.webp"
+},
+{
+"id":"animation/eric-tosit",
+"kind":"animation",
+"name":"Eric: to-sit",
+"who":"eric",
+"place":null,
+"paths":[
+"game3d/assets/eric-meshy/eric-tosit.glb"
+],
+"status":"approved",
+"status_from":{
+"text":"Came with the approved model"
+},
+"source":"Meshy animation library",
+"used":[
+"Not loaded by the game (the sit clip is held on one frame)"
+],
+"review":null,
+"view":{
+"type":"glb",
+"src":"game3d/assets/eric-meshy/eric-tosit.glb"
+},
+"thumb":"tools/assets/thumbs/3d-animation-eric-tosit.webp",
+"tags":[
+"3D"
+],
+"thumb3d":"tools/assets/thumbs/3d-animation-eric-tosit.webp"
+},
+{
+"id":"animation/eric-walk",
+"kind":"animation",
+"name":"Eric: walk",
+"who":"eric",
+"place":null,
+"paths":[
+"game3d/assets/eric/walk.glb"
+],
+"status":"approved",
+"status_from":{
+"path":"art/approved/README.md",
+"text":"Eric's Meshy model with the idle, walk, run, sit and to-sit animation GLBs (approved with the model)"
+},
+"source":"Meshy animation library on the auto-rigged model",
+"used":[
+"Player walk state (avatar.js loadMeshy)"
+],
+"review":null,
+"view":{
+"type":"meshy",
+"id":"eric",
+"height":1.2,
+"play":"walk"
+},
+"thumb":"tools/assets/thumbs/3d-animation-eric-walk.webp",
+"tags":[
+"3D"
+],
+"thumb3d":"tools/assets/thumbs/3d-animation-eric-walk.webp"
+},
+{
+"id":"animation/mio-run",
+"kind":"animation",
+"name":"Mio: run",
+"who":"mio",
+"place":null,
+"paths":[
+"game3d/assets/mio/run.glb"
+],
+"status":"approved",
+"status_from":{
+"path":"bible/facts.yaml",
+"text":"Meshy Neon Bun Guardian biped: six animation GLBs, base-clean.png and base-clean.json. The game loads its own copy. Only colour tweaks allowed."
+},
+"source":"Meshy animation library (Neon Bun Guardian biped)",
+"used":[
+"Mio run state (mio.js loadMio)"
+],
+"review":null,
+"view":{
+"type":"mio",
+"height":1.12,
+"play":"run"
+},
+"thumb":"tools/assets/thumbs/3d-animation-mio-run.webp",
+"tags":[
+"3D"
+],
+"thumb3d":"tools/assets/thumbs/3d-animation-mio-run.webp"
+},
+{
+"id":"animation/mio-sit",
+"kind":"animation",
+"name":"Mio: sit",
+"who":"mio",
+"place":null,
+"paths":[
+"game3d/assets/mio/sit.glb"
+],
+"status":"approved",
+"status_from":{
+"path":"bible/facts.yaml",
+"text":"Meshy Neon Bun Guardian biped: six animation GLBs, base-clean.png and base-clean.json. The game loads its own copy. Only colour tweaks allowed."
+},
+"source":"Meshy animation library (Neon Bun Guardian biped)",
+"used":[
+"Mio sit state (mio.js loadMio)"
+],
+"review":null,
+"view":{
+"type":"mio",
+"height":1.12,
+"play":"sit"
+},
+"thumb":"tools/assets/thumbs/3d-animation-mio-sit.webp",
+"tags":[
+"3D"
+],
+"thumb3d":"tools/assets/thumbs/3d-animation-mio-sit.webp"
+},
+{
+"id":"animation/mio-tosit",
+"kind":"animation",
+"name":"Mio: tosit",
+"who":"mio",
+"place":null,
+"paths":[
+"game3d/assets/mio/tosit.glb"
+],
+"status":"approved",
+"status_from":{
+"path":"bible/facts.yaml",
+"text":"Meshy Neon Bun Guardian biped: six animation GLBs, base-clean.png and base-clean.json. The game loads its own copy. Only colour tweaks allowed."
+},
+"source":"Meshy animation library (Neon Bun Guardian biped)",
+"used":[
+"Sitting down (mio.js)"
+],
+"review":null,
+"view":{
+"type":"mio",
+"height":1.12,
+"play":"sit"
+},
+"thumb":"tools/assets/thumbs/3d-animation-mio-tosit.webp",
+"tags":[
+"3D"
+],
+"thumb3d":"tools/assets/thumbs/3d-animation-mio-tosit.webp"
+},
+{
+"id":"animation/mio-walk",
+"kind":"animation",
+"name":"Mio: walk",
+"who":"mio",
+"place":null,
+"paths":[
+"game3d/assets/mio/walk.glb"
+],
+"status":"approved",
+"status_from":{
+"path":"bible/facts.yaml",
+"text":"Meshy Neon Bun Guardian biped: six animation GLBs, base-clean.png and base-clean.json. The game loads its own copy. Only colour tweaks allowed."
+},
+"source":"Meshy animation library (Neon Bun Guardian biped)",
+"used":[
+"Mio walk state (mio.js loadMio)"
+],
+"review":null,
+"view":{
+"type":"mio",
+"height":1.12,
+"play":"walk"
+},
+"thumb":"tools/assets/thumbs/3d-animation-mio-walk.webp",
+"tags":[
+"3D"
+],
+"thumb3d":"tools/assets/thumbs/3d-animation-mio-walk.webp"
 },
 {
 "id":"animation/eric-bow",
