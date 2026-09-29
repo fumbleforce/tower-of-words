@@ -4,7 +4,7 @@ Every usable asset in the repo, with its status, in one list (`assets.json`) and
 
 - `scan.py` writes `assets.json` and makes the image and audio thumbnails (cached in `thumbs/`, remade only when the source file changes). `./start` runs it, so the page is current whenever the server starts. `--check` also checks that every listed file exists.
 - `render3d.mjs` renders the 3D thumbnails (Meshy models, animations, code-built chibis, the prop kit, rooms and the props in them) with the game's own code in one headless run. It takes the browser lock, uses software GL (no GPU lock), and only redraws thumbnails that are missing or older than the files the entry lists. Run it after a model, a place or the cast code changes: `node tools/assets/render3d.mjs`.
-- `sync.py` syncs the used assets with Cloudflare R2 (`status`, `push`, `pull`, `check`), `sync.json` says which files are used, and `hooks/pre-commit` (installed by `install-hook.sh`) keeps binaries out of git. The layout and the plan are in notes/asset-storage-proposal.md.
+- `sync.py` syncs the used assets with Cloudflare R2 (`status`, `push`, `pull`, `check`), `sync.json` says which files are used, and the commit hook (tools/check/hooks, installed by `sh tools/assets/install-hook.sh`) keeps binaries out of git and refuses a used asset that isn't pushed. On a new machine: `npm ci`, the R2 lines in .env, then `python3 tools/assets/sync.py pull`. The layout and the plan are in notes/asset-storage-proposal.md.
 - `viewer.js` builds a 3D asset from its `view` and shows it on a turntable. The gallery and `render.html` (the thumbnail page) both use it.
 
 ## Statuses

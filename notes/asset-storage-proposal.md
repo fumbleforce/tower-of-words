@@ -6,8 +6,10 @@ Decided in review asset-storage (Jørgen, 2026-09-29): "let us actually go with 
 
 Where this stands:
 
-- Stage 1 is done: the layout (section 4), the sync tool (section 5), the pre-commit hook (section 6), the setup steps (section 7) and the stage 2 plan (section 8). Nothing has moved, the hook isn't installed and there's no bucket yet.
-- Stage 2 waits for two things: the edit freeze on game code has to end, and the R2 credentials have to be in .env.
+- Stage 1 is done: the layout (section 4), the sync tool (section 5), the pre-commit hook (section 6), the setup steps (section 7) and the stage 2 plan (section 8).
+- Stage 2 is done on local main (2026-09-29), except the Pages switch: moves M1 to M4, the first push (1,631 used files, 1,613 blobs, 155 MB in R2), and every binary untracked. HEAD's tree went from 983 MB in 7,235 files to 19 MB in 1,046; `.git` stays at 1.1 GB (history not rewritten). The commit hook is tools/check/hooks (tools/check/locked-assets.mjs copies the locked files into the check snapshot and runs `sync.py check --offline`). A fresh clone passed `sync.py pull`, `sync.py check`, `npm run check`, both fast runs and the bible check.
+- Left: `sh game3d/tools/deploy-pages.sh --push`, then Jørgen switches Pages to gh-pages (step 5), before main is pushed. Until then GitHub Pages serves main, which after the push has no images.
+- Another machine: clone, `npm ci`, put the four R2 lines in .env (section 7), then `python3 tools/assets/sync.py pull`. Reviews decided only on this machine can make approved candidates look unused there; committing reviews/ (section 10) fixes that.
 
 ## 1. What we have now (measured 2026-09-29)
 
