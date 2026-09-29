@@ -3,7 +3,7 @@
   "date": "2026-09-29",
   "by": "Codex",
   "status": "not-ready",
-  "question": "Which passenger encounters would you like in the train?",
+  "question": "Which passenger encounters would you like? Proposed Japanese lines include English subtitles.",
   "multi": true,
   "options": [
     {
@@ -13,8 +13,8 @@
     },
     {
       "id": "train-bun",
-      "label": "train-bun: A snack from the mainland",
-      "note": "She shares something she brought back because she is tired of the company snacks."
+      "label": "train-bun: She brought back too much",
+      "note": "Help her close an overfilled shopping bag before she returns to island life."
     },
     {
       "id": "train-youth",
@@ -23,7 +23,7 @@
     },
     {
       "id": "train-music",
-      "label": "train-music: He is listening to his own practice",
+      "label": "train-music: She is listening to her own practice",
       "note": "The headphones belong to someone trying to get a guitar part right."
     },
     {
