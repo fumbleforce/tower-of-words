@@ -5,7 +5,7 @@ import { makePost } from './post.js';
 import { attachLift } from './places/lift.js';
 import { needsPractice } from './mastery.js';
 import { OutlinePass } from 'three/addons/postprocessing/OutlinePass.js';
-import { SmoothWalker, walkRig, faceRig, approachSpot, pickPerson, standOut, bodies } from './move.js';
+import { SmoothWalker, walkRig, faceRig, approachSpot, pickPerson, standOut, bodies, softSeparate } from './move.js';
 import * as ambience from './ambience.js';
 import { setPlace as sfxPlace } from './sfx.js';
 import { learned } from './feel.js';
@@ -720,6 +720,7 @@ function step(dt) {
   if (game.mioNpc.root.visible) game.mioNpc.update(dt, 1.25);
   stepTweens(dt);
   place.update(dt, game.t);
+  softSeparate(game, dt);   // people overlapping are pushed apart gently (move.js, soft collision)
   place.cam?.update?.(dt, mio.root.position);
   // nearest usable thing, the Say target, and near/zone triggers
   let near = null, nd = 0.95, st = null, sd = 2.2;

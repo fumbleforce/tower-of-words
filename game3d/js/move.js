@@ -79,14 +79,14 @@ function reachableNear(nav, sx, sz, tx, tz) {
 }
 // a free spot near (x, z) that no one else stands on (for NPC destinations and approach points)
 function clearOf(list, x, z, rad) { return list.every((b) => Math.hypot(b.x - x, b.z - z) >= b.r + rad); }
-function freeNear(nav, list, x, z, rad) {
-  if ((!nav || nav.free(x, z, nav.R + 0.02)) && clearOf(list, x, z, rad)) return [x, z];
+function freeNear(nav, list, x, z, rad, ok = null) {
+  if ((!nav || nav.free(x, z, nav.R + 0.02)) && clearOf(list, x, z, rad) && (!ok || ok(x, z))) return [x, z];
   for (let ring = 1; ring <= 6; ring++) {
     const d = ring * 0.14; let best = null, bd = 1e9;
     for (let i = 0; i < 12; i++) {
       const a = (i / 12) * Math.PI * 2, cx = x + Math.cos(a) * d, cz = z + Math.sin(a) * d;
       if (nav && !nav.free(cx, cz, nav.R + 0.02)) continue;
-      if (!clearOf(list, cx, cz, rad)) continue;
+      if (!clearOf(list, cx, cz, rad) || (ok && !ok(cx, cz))) continue;
       const k = Math.hypot(cx - x, cz - z); if (k < bd) { bd = k; best = [cx, cz]; }
     }
     if (best) return best;
@@ -94,22 +94,108 @@ function freeNear(nav, list, x, z, rad) {
   return [x, z];
 }
 
-// One step that doesn't walk into someone: the part of the step toward them is dropped (so someone already too close
-// can still move away or round them), the step stops at the edge of their circle, and a head-on meeting sidesteps to
-// the right (both keep right, so two people meeting in a corridor pass).
-function slideStep(ox, oz, nx, nz, b, rr, fx, fz, step) {
+// ---------- soft collision between people ----------
+// People are soft to each other (Jørgen, 2026-09-29: "models push gently at each other without locking up in tight
+// spaces"). A walker can lean into a standing person by up to GIVE of the two radii (at half speed), softSeparate()
+// then pushes the two apart every frame like a spring with a capped speed (never into a wall), and someone who keeps
+// pressing into the same person with no headway for PRESS seconds slips past them (the pair is let through until they
+// are apart again). Seated people, the cat and people in fixed choreography (glide, avoid: false) stay hard. Walls and
+// props are never soft: every push goes through nav.collide.
+const GIVE = 0.4;          // how far a walker may lean into a standing person (share of the two radii)
+const PUSH_K = 9;          // spring rate of the push apart (1/s)
+const PUSH_MAX = 0.9;      // push speed cap (place units / s, times the character scale)
+const PRESS = 0.7;         // s of pressing into the same person without headway before the walker slips past
+const passing = new Map(); // pair key -> game time the pass-through ends
+const pairKey = (a, b) => (a.uuid < b.uuid ? a.uuid + '|' + b.uuid : b.uuid + '|' + a.uuid);
+export const isPassing = (a, b) => passing.has(pairKey(a, b));
+function letPass(game, a, b) {
+  const k = pairKey(a, b); if (passing.has(k)) return;
+  passing.set(k, ((game && game.t) || 0) + 4);
+  const C = window.__moveCheck; if (C) { C.passes = (C.passes || 0) + 1; if (C.notes && C.notes.length < 40) C.notes.push(`pass-through at t=${((game && game.t) || 0).toFixed(1)}`); }
+}
+const isHard = (b) => b.seated || b.id === 'tama' || !!(b.rig && b.rig._noAvoid);
+// who gives way in a push: 0 = doesn't move (seated, fixed choreography); the player gives less than people standing
+function pushWeight(game, b) {
+  if (b.seated || (b.rig && b.rig._noAvoid) || b.id === 'tama') return 0;
+  if (game.player && b.root === game.player.root) return game.player.scripted ? 0.5 : 0.35;
+  return b.rig && b.rig._walk ? 0.6 : 1;
+}
+// pressing into someone: count the time without headway, and let the walker through after PRESS seconds
+function press(game, holder, me, other, moved, step, dt, limit = PRESS) {
+  if (!other || other.seated || other.id === 'tama' || step < 1e-5 || moved > step * 0.35) { holder._press = Math.max(0, (holder._press || 0) - dt * 2); return; }
+  holder._press = (holder._press || 0) + dt;
+  if (holder._press > limit) { holder._press = 0; letPass(game, me, other.root); }
+}
+
+// One step that doesn't walk hard into someone: a head-on meeting sidesteps to the right (both keep right, so two
+// people meeting in a corridor pass), and the part of the step toward them is halved and stops at GIVE into their
+// circle (for someone hard, at the edge). Someone already closer than that can still move away or round them;
+// softSeparate() does the pushing apart.
+function slideStep(ox, oz, nx, nz, b, rr, fx, fz, step, hard = true) {
   if (Math.hypot(nx - b.x, nz - b.z) >= rr) return [nx, nz];
   const o = Math.hypot(ox - b.x, oz - b.z) || 1e-4, ux = (ox - b.x) / o, uz = (oz - b.z) / o;
   let mx = nx - ox, mz = nz - oz;
-  // head-on: sidestep to the right first (both keep right, so two people meeting in a corridor pass)
   if (-(ux * fx + uz * fz) > 0.7) { mx += -fz * step * 0.9; mz += fx * step * 0.9; }
-  // then never any motion toward them
-  const rad = mx * ux + mz * uz; if (rad < 0) { mx -= rad * ux; mz -= rad * uz; }
+  const inner = hard ? rr : rr * (1 - GIVE);
+  const rad = mx * ux + mz * uz;
+  if (rad < 0) { const keep = o > inner ? 0.5 : 0; mx -= rad * (1 - keep) * ux; mz -= rad * (1 - keep) * uz; }
   let x = ox + mx, z = oz + mz;
   const e = Math.hypot(x - b.x, z - b.z) || 1e-4;
-  if (o >= rr) { if (e < rr) { x = b.x + ((x - b.x) / e) * rr; z = b.z + ((z - b.z) / e) * rr; } }
-  else { const push = Math.min(rr - e, step * 0.6); x += ((x - b.x) / e) * push; z += ((z - b.z) / e) * push; }   // already too close: ease apart
+  if (o >= inner && e < inner) { x = b.x + ((x - b.x) / e) * inner; z = b.z + ((z - b.z) / e) * inner; }
+  if (hard && o < rr) { const push = Math.min(rr - e, step * 0.6); x += ((x - b.x) / e) * push; z += ((z - b.z) / e) * push; }   // too close to someone hard: ease apart
   return [x, z];
+}
+
+// Every frame (main.js step): overlapping people are pushed apart, spring-like, capped in speed, weighted by who
+// gives way, never through a wall or off the walk grid. Pairs that are passing through each other are left alone
+// until they're apart.
+export function softSeparate(game, dt) {
+  const P = game && game.place; if (!P || !P.space || !(dt > 0)) return;
+  const nav = P.nav, K = P.charScale || 1, t = game.t || 0;
+  const list = bodies(game).filter((b) => b.root.parent === P.space);
+  const move = (b, dx, dz) => {
+    const p = b.root.position, ox = p.x, oz = p.z;
+    let [x, z] = [ox + dx, oz + dz];
+    if (nav) {
+      if (!nav.free(ox, oz)) { if (!nav.free(x, z)) return 0; }   // already in a wall's margin: only moves that get out
+      else [x, z] = nav.collide(x, z, ox, oz);
+    }
+    p.x = x; p.z = z;
+    const bl = b.rig && b.rig.blob; if (bl && bl.parent && bl.parent !== b.root) { bl.position.x += x - ox; bl.position.z += z - oz; }
+    if (game.player && b.root === game.player.root && game.walker && game.walker._pos) game.walker._pos = [p.x, p.z];
+    b.x += x - ox; b.z += z - oz;
+    return Math.hypot(x - ox, z - oz) / (Math.hypot(dx, dz) || 1);
+  };
+  for (let i = 0; i < list.length; i++) for (let j = i + 1; j < list.length; j++) {
+    const A = list[i], B = list[j], rr = A.r + B.r;
+    let dx = B.x - A.x, dz = B.z - A.z; const d = Math.hypot(dx, dz);
+    const k = pairKey(A.root, B.root);
+    if (passing.has(k)) { if (d >= rr + 0.02 || t > passing.get(k)) passing.delete(k); continue; }
+    if (d >= rr) continue;
+    const wa = pushWeight(game, A), wb = pushWeight(game, B); if (wa + wb === 0) continue;
+    if (d < 1e-4) { dx = Math.cos(i + j); dz = Math.sin(i + j); } else { dx /= d; dz /= d; }
+    const amt = Math.min((rr - d) * (1 - Math.exp(-PUSH_K * dt)), PUSH_MAX * K * dt);
+    const sa = (amt * wa) / (wa + wb), sb = amt - sa;
+    // whatever one side can't take (a wall behind them) goes to the other
+    const fa = sa > 0 ? move(A, -dx * sa, -dz * sa) : 0, fb = sb > 0 ? move(B, dx * sb, dz * sb) : 0;
+    const left = sa * (1 - fa) + sb * (1 - fb);
+    if (left > 1e-5) { if (wb > 0 && fb > 0.5) move(B, dx * left, dz * left); else if (wa > 0 && fa > 0.5) move(A, -dx * left, -dz * left); }
+  }
+  for (const [k, end] of passing) if (t > end + 1) passing.delete(k);
+  // arm's length: someone standing still too close to Eric while he stands or sits still (placed by a scene, stopped
+  // behind his chair) steps back slowly to SPACE. Not while either is walking, and not in the lift cab.
+  const pl = game.player, w = game.walker, e = pl && list.find((b) => b.root === pl.root);
+  const still = e && !(pl.scripted && pl._walk) && !(w && (w.moving || w.path || (w.keys && w.keys.size)));
+  if (still && !inCab()) {
+    const D = SPACE * K;
+    for (const b of list) {
+      if (b === e || b.id === 'tama' || pushWeight(game, b) === 0 || b.rig._walk || passing.has(pairKey(b.root, e.root))) continue;
+      const dx = b.x - e.x, dz = b.z - e.z, d = Math.hypot(dx, dz);
+      if (d >= D || d < 1e-4) continue;
+      const amt = Math.min((D - d) * (1 - Math.exp(-3 * dt)), 0.35 * K * dt);
+      move(b, (dx / d) * amt, (dz / d) * amt);
+    }
+  }
 }
 // a route that goes round the people standing in the way (they're blocked on the walk grid just for this search)
 function pathAround(nav, from, to, list, myR) {
@@ -258,11 +344,14 @@ export class SmoothWalker extends Walker {
       const tl = Math.hypot(this.vx, this.vz) || 1, fx = this.vx / tl, fz = this.vz / tl;
       let blockedBy = null;
       for (const o of others) {
-        const [sx, sz] = slideStep(ox, oz, nx, nz, o, o.r + R, fx, fz, step);
+        if (isPassing(this.body, o.root)) continue;
+        const [sx, sz] = slideStep(ox, oz, nx, nz, o, o.r + R, fx, fz, step, isHard(o));
         if (sx === nx && sz === nz) continue;
         blockedBy = o;
-        if (this.nav.free(sx, sz)) { nx = sx; nz = sz; } else { nx = ox; nz = oz; }
+        [nx, nz] = this.nav.collide(sx, sz, ox, oz);
       }
+      // pressing into someone with no headway (a doorway, a corner): slip past them after a moment
+      if (keys || this.path) press(window.__game, this, this.body, blockedBy, Math.hypot(nx - ox, nz - oz), step, dt);
       // held up by someone on a tapped route for a moment: plan round them
       this.blockT = blockedBy && this.path ? (this.blockT || 0) + dt : 0;
       if (this.blockT > 0.4 && this.path) {
@@ -306,7 +395,7 @@ export function detourPoint(game, rig, b, [tx, tz]) {
   let best = null, bs = 1e9;
   for (const side of [1, -1]) for (const k of [1.0, 1.35, 1.7]) {
     const off = (b.r + me) * k + 0.05, cx = b.x - fz * off * side, cz = b.z + fx * off * side;
-    if (P.nav && !P.nav.free(cx, cz, P.nav.R)) continue;
+    if (P.nav && (!P.nav.free(cx, cz, P.nav.R) || !P.nav.clear([p.x, p.z], [cx, cz]))) continue;   // and a straight way there
     if (!clearOf(others, cx, cz, me)) continue;
     const cost = Math.hypot(cx - p.x, cz - p.z) + Math.hypot(tx - cx, tz - cz) + (side < 0 ? 0.05 : 0);
     if (cost < bs) { bs = cost; best = [cx, cz]; }
@@ -316,15 +405,45 @@ export function detourPoint(game, rig, b, [tx, tz]) {
 
 // A walk whose end is someone's own position ("walk to Eric") stops at a talking distance in front of them, on the
 // walker's side, instead of on top of them. Other ends are returned as they are.
+// Any other end within arm's length of Eric (a spot behind his chair while he sits there) moves to the nearest free
+// floor at arm's length (SPACE), not more than 0.9 away (Jørgen, 2026-09-29: "models just constantly being too close to
+// each other"). Not in the lift cab, whose spots are set by the ride.
 export function standOff(game, rig, [x, z]) {
   const P = game && game.place; if (!P || !P.space) return [x, z];
   const K = P.charScale || 1, from = rig.root.position;
-  const on = bodies(game).find((b) => b.root !== rig.root && Math.hypot(b.x - x, b.z - z) < b.r);
-  if (!on) return [x, z];
-  const d = Math.hypot(from.x - on.x, from.z - on.z) || 1, D = TALK * K;
-  let tx = on.x + ((from.x - on.x) / d) * D, tz = on.z + ((from.z - on.z) / d) * D;
-  if (P.nav && !P.nav.free(tx, tz, P.nav.R + 0.02)) [tx, tz] = freeNear(P.nav, bodies(game).filter((b) => b.root !== rig.root), tx, tz, BODY * K);
+  const others = bodies(game).filter((b) => b.root !== rig.root);
+  const on = others.find((b) => Math.hypot(b.x - x, b.z - z) < b.r);
+  let tx = x, tz = z;
+  if (on) {
+    const d = Math.hypot(from.x - on.x, from.z - on.z) || 1, D = TALK * K;
+    tx = on.x + ((from.x - on.x) / d) * D; tz = on.z + ((from.z - on.z) / d) * D;
+    if (P.nav && !P.nav.free(tx, tz, P.nav.R + 0.02)) [tx, tz] = freeNear(P.nav, others, tx, tz, BODY * K);
+  }
+  const ok = spaceFrom(game, rig.root);
+  if (ok && !ok(tx, tz)) {
+    const q = freeNear(P.nav, others.filter((b) => b.id !== 'tama'), tx, tz, BODY * K, ok);
+    if (ok(q[0], q[1]) && Math.hypot(q[0] - tx, q[1] - tz) < 0.9) [tx, tz] = q;
+  }
   return [tx, tz];
+}
+// arm's length from Eric for someone else stopping near him: a test (x, z) -> ok, or null when it doesn't apply
+const SPACE = 0.58;        // centre to centre, times the character scale (TALK is 0.66)
+const inCab = () => !!(window.__lift && window.__lift.ride && window.__lift.ride.on);
+function spaceFrom(game, self) {
+  const P = game && game.place, pl = game && game.player;
+  if (!P || !P.space || !pl || !pl.root || self === pl.root || !pl.root.visible || pl.root.parent !== P.space || inCab()) return null;
+  const e = bodies(game).find((b) => b.root === pl.root); if (!e) return null;
+  const K = P.charScale || 1, D = SPACE * K;
+  // and, while he sits, not right between him and the camera, where she'd cover him on screen (Mio behind his chair
+  // at the end of the day stood an arm's length away but hid him from the top-down camera)
+  let cx = 0, cz = 0;
+  if (P.camera && e.seated) { const c = P.camera.getWorldPosition(new THREE.Vector3()); P.space.worldToLocal(c); const l = Math.hypot(c.x - e.x, c.z - e.z) || 1; cx = (c.x - e.x) / l; cz = (c.z - e.z) / l; }
+  return (x, z) => {
+    const dx = x - e.x, dz = z - e.z;
+    if (Math.hypot(dx, dz) < D) return false;
+    const along = dx * cx + dz * cz, lat = Math.abs(dx * cz - dz * cx);
+    return !(along > -0.1 * K && along < 1.0 * K && lat < 0.5 * K);
+  };
 }
 
 // One step of a scripted walk by the chibi cast (story.js walkPerson): hold back for a moment when someone is right
@@ -338,7 +457,7 @@ export function personStep(game, rig, ox, oz, nx, nz, dt) {
   // someone right ahead, or another walker converging on the same spot (the one with the lower id gives way, so two
   // never wait for each other)
   const ahead = list.find((b) => {
-    if (b.seated) return false;
+    if (b.seated || isPassing(rig.root, b.root)) return false;
     const rx = b.x - ox, rz = b.z - oz, bd = Math.hypot(rx, rz) || 1e-4, c = (rx * fx + rz * fz) / bd;
     if (bd >= b.r + me + 0.15) return false;
     return c > 0.55 || (c > 0 && b.rig._walk && rig.root.id < b.root.id);
@@ -346,16 +465,21 @@ export function personStep(game, rig, ox, oz, nx, nz, dt) {
   if (ahead) rig._blocker = ahead;
   // the player in the way for half a second: he steps aside
   if (ahead && game.player && ahead.root === game.player.root && (rig._hold || 0) > 0.5 && game.walker && game.walker.makeRoom && !game.player.seated && !game.player.scripted) game.walker.makeRoom(fx, fz, ahead.r + me + 0.12);
-  // behind someone who's walking too: queue (up to 3 s); behind someone standing: wait a moment, then go round
-  if (ahead && (rig._hold || 0) < (ahead.rig._walk ? 3.0 : 0.8)) { rig._hold = (rig._hold || 0) + dt; rig._blk = (rig._blk || 0) + dt; return [ox, oz]; }
-  if (!ahead) rig._hold = 0;
-  let x = nx, z = nz;
+  // behind someone who's walking too: queue (up to 2 s); behind someone standing: slow down and go round them
+  if (ahead && ahead.rig._walk && (rig._hold || 0) < 2.0) { rig._hold = (rig._hold || 0) + dt; rig._blk = (rig._blk || 0) + dt; return [ox, oz]; }
+  if (ahead) { rig._hold = (rig._hold || 0) + dt; nx = ox + (nx - ox) * 0.45; nz = oz + (nz - oz) * 0.45; } else rig._hold = 0;
+  let x = nx, z = nz, by = null;
   for (const b of list) {
-    const [sx, sz] = slideStep(ox, oz, x, z, b, b.r + me, fx, fz, step);
+    if (isPassing(rig.root, b.root)) continue;
+    const [sx, sz] = slideStep(ox, oz, x, z, b, b.r + me, fx, fz, step, isHard(b));
     if (sx === x && sz === z) continue;
-    rig._blocker = b;
-    if (!P.nav || P.nav.free(sx, sz)) { x = sx; z = sz; } else { x = ox; z = oz; }
+    rig._blocker = by = b;
+    if (P.nav) [x, z] = P.nav.collide(sx, sz, ox, oz); else { x = sx; z = sz; }
   }
+  // never into a wall's margin from open floor (a sidestep or a detour leg cutting a corner)
+  if (P.nav && !P.nav.free(x, z) && P.nav.free(ox, oz)) [x, z] = P.nav.collide(x, z, ox, oz);
+  // no headway against someone (a doorway, a corner): slip past rather than stall the walk
+  press(game, rig, rig.root, by, Math.hypot(x - ox, z - oz), step, dt, 1.0);
   // held up or turned aside by people this step: walkPerson goes round, ends a last leg early when someone stands on
   // the spot, and gives up a leg that stays blocked for 4 s (never walking through anyone, never hanging a scene)
   rig._blk = x !== nx || z !== nz ? (rig._blk || 0) + dt : 0;
@@ -376,7 +500,7 @@ export function walkRig(game, rigOrObj, to, { speed = 1.25, route = true, avoid 
   let [tx, tz] = avoid && game.place ? standOff(game, rig || { root: obj }, to) : to;
   const people = () => (avoid ? bodies(game).filter((b) => !self(b)) : []);
   // the destination: free floor, and not on top of someone
-  if (nav && avoid) [tx, tz] = freeNear(nav, people().filter((b) => b.id !== 'tama'), tx, tz, BODY * (obj.scale.x || 1));
+  if (nav && avoid) [tx, tz] = freeNear(nav, people().filter((b) => b.id !== 'tama'), tx, tz, BODY * (obj.scale.x || 1), spaceFrom(game, obj));
   let path = null;
   if (route && nav) {
     path = nav.path(obj.position.x, obj.position.z, tx, tz);
@@ -390,7 +514,8 @@ export function walkRig(game, rigOrObj, to, { speed = 1.25, route = true, avoid 
     }
   }
   if (!path || !path.length) path = [[tx, tz]];
-  if (rig) rig._walk = true;
+  if (rig) { rig._walk = true; rig._noAvoid = !avoid; }
+  const pst = {};   // pressing-into-someone time (soft collision)
   let v = 0, yaw = obj.rotation.y, stall = 0, wait = 0, waited = 0, age = 0, blockT = 0;
   let plen = 0; { let q = [obj.position.x, obj.position.z]; for (const w of path) { plen += Math.hypot(w[0] - q[0], w[1] - q[1]); q = w; } }
   const limit = plen / Math.max(0.3, speed) * 3 + 6;   // a hard cap: whatever happens, the walk ends
@@ -400,7 +525,7 @@ export function walkRig(game, rigOrObj, to, { speed = 1.25, route = true, avoid 
     const done = () => {
       // end clear of everyone (someone may have stopped where she was heading): a small settling step if needed
       if (avoid && nav) { const q = obj.position, list = people().filter((b) => b.id !== 'tama'); if (!clearOf(list, q.x, q.z, BODY * sc)) { const [fx, fz] = freeNear(nav, list, q.x, q.z, BODY * sc); if (Math.hypot(fx - q.x, fz - q.z) < 0.35) { q.x = fx; q.z = fz; } } }
-      if (rig) { rig._walk = false; if (settle && !rig.seated) { rig.setGait?.(null); rig.setState?.('idle'); } }
+      if (rig) { rig._walk = false; rig._noAvoid = false; if (settle && !rig.seated) { rig.setGait?.(null); rig.setState?.('idle'); } }
       if (player && game.walker) game.walker.sync?.();
       res();
     };
@@ -418,11 +543,13 @@ export function walkRig(game, rigOrObj, to, { speed = 1.25, route = true, avoid 
       yaw = turnToward(yaw, head, dt);
       let want = speed * THREE.MathUtils.clamp((Math.cos(angDiff(head, yaw)) + 0.35) / 1.35, v > 0.4 ? 0.3 : 0.12, 1);
       want = Math.min(want, Math.sqrt(2 * BRAKE * 0.6 * remain) + Math.max(0.15, brakeTo * speed));
-      // someone right in front: wait a moment (the player first of all), then step round
+      // someone right in front: behind someone walking, wait a moment (a queue); someone standing, slow down and go
+      // round (sidestep, slide, push gently), and the player steps aside if he can
       if (avoid && dt > 0) {
-        const ahead = people().find((b) => { const bx = b.x - p.x, bz = b.z - p.z, bd = Math.hypot(bx, bz); return bd < b.r + BODY * sc + 0.25 && (bx * dx + bz * dz) / (bd * d || 1) > 0.5; });
-        if (ahead && waited < 0.9) { want = 0; waited += dt; wait = 1; } else { wait = 0; if (!ahead) waited = 0; }
-        if (ahead && waited > 0.5 && game.player && ahead.root === game.player.root && game.walker?.makeRoom && !game.player.seated && !game.player.scripted) game.walker.makeRoom(dx / (d || 1), dz / (d || 1), ahead.r + BODY * sc + 0.12);
+        const ahead = people().find((b) => { const bx = b.x - p.x, bz = b.z - p.z, bd = Math.hypot(bx, bz); return bd < b.r + BODY * sc + 0.25 && (bx * dx + bz * dz) / (bd * d || 1) > 0.5 && !isPassing(obj, b.root); });
+        if (ahead && ahead.rig._walk && waited < 0.9) { want = 0; waited += dt; wait = 1; }
+        else { wait = 0; if (ahead) { want = Math.min(want, speed * 0.45); waited += dt; } else waited = 0; }
+        if (ahead && waited > 0.4 && game.player && ahead.root === game.player.root && game.walker?.makeRoom && !game.player.seated && !game.player.scripted) game.walker.makeRoom(dx / (d || 1), dz / (d || 1), ahead.r + BODY * sc + 0.12);
       }
       v += THREE.MathUtils.clamp(want - v, -(want > v ? ACCEL : BRAKE) * dt, (want > v ? ACCEL : BRAKE) * dt);
       const step = Math.min(v * dt, remain);
@@ -433,10 +560,11 @@ export function walkRig(game, rigOrObj, to, { speed = 1.25, route = true, avoid 
       if (avoid) {
         const fx = Math.sin(yaw), fz = Math.cos(yaw), list = people();
         for (const b of list) {
-          const [sx, sz] = slideStep(p.x, p.z, nx, nz, b, b.r + BODY * sc, fx, fz, step);
+          if (isPassing(obj, b.root)) continue;
+          const [sx, sz] = slideStep(p.x, p.z, nx, nz, b, b.r + BODY * sc, fx, fz, step, isHard(b));
           if (sx === nx && sz === nz) continue;
           blockedBy = b;
-          if (!nav || nav.free(sx, sz)) { nx = sx; nz = sz; } else { nx = p.x; nz = p.z; }
+          if (nav) [nx, nz] = nav.collide(sx, sz, p.x, p.z); else { nx = sx; nz = sz; }
         }
         // held up by someone for a moment: plan a way round everyone standing
         blockT = blockedBy && !wait ? blockT + dt : 0;
@@ -445,13 +573,8 @@ export function walkRig(game, rigOrObj, to, { speed = 1.25, route = true, avoid 
           const alt = pathAround(nav, [p.x, p.z], [tx, tz], list.filter((b) => !b.seated), BODY * sc);
           if (alt) { path = alt; path[path.length - 1] = [tx, tz]; }
         }
-      }
-      // someone walking into her while she waits (a scripted walk that doesn't steer): give way, ease apart
-      if (avoid && dt > 0) for (const b of people()) {
-        const rr = b.r + BODY * sc, ex = nx - b.x, ez = nz - b.z, e = Math.hypot(ex, ez) || 1e-4;
-        if (e >= rr) continue;
-        const push = Math.min(rr - e, speed * 0.8 * dt), qx = nx + (ex / e) * push, qz = nz + (ez / e) * push;
-        if (!nav || nav.free(qx, qz)) { nx = qx; nz = qz; }
+        // still no headway against them (a doorway, a corner): slip past rather than stall the walk
+        if (!wait) press(game, pst, obj, blockedBy, Math.hypot(nx - p.x, nz - p.z), Math.max(step, 0.2 * speed * dt), dt, 1.0);
       }
       const moved = Math.hypot(nx - p.x, nz - p.z);
       p.x = nx; p.z = nz; obj.rotation.y = yaw;
@@ -674,7 +797,8 @@ const easeOut = (k) => 1 - (1 - k) ** 3;
 
 // ---------- the movement check (fast test) ----------
 // startMoveCheck(game): samples every game step (it rides on the player's update) and records to window.__moveCheck:
-//   overlap  two characters (not both seated) closer than their two radii (less 0.03) for more than 0.4 s of game time
+//   overlap  two characters (not both seated) closer than their two radii (less 0.03) for more than 2.5 s, or deeper
+//            than the soft lean (GIVE) for more than 0.4 s (pairs passing through each other in a tight spot are exempt)
 //   spin     the player turning faster than 3 rad/s while standing still and not taking turning steps, for > 0.25 s
 // fast.mjs fails the build on any overlap or spin.
 export function startMoveCheck(game) {
@@ -691,10 +815,15 @@ export function startMoveCheck(game) {
     for (let i = 0; i < list.length; i++) for (let j = i + 1; j < list.length; j++) {
       const A = list[i], B = list[j], d = Math.hypot(A.x - B.x, A.z - B.z);
       if (A.seated && B.seated) continue;
+      // soft collision: a lean into someone standing is fine for a moment (2.5 s), deeper than the lean for 0.4 s is
+      // an overlap; two people passing through each other in a tight spot are let through
+      if (isPassing(A.root, B.root)) continue;
+      const soft = !isHard(A) && !isHard(B), deep = d < (A.r + B.r) * (soft ? 1 - GIVE : 1) - 0.03;
       if (d >= A.r + B.r - 0.03) continue;
       const k = A.id + '|' + B.id; seen.add(k);
       const t = (near.get(k) || 0) + dt; near.set(k, t);
-      if (t > 0.4 && t - dt <= 0.4 && C.overlaps.length < 50) {
+      const lim = deep ? 0.4 : 2.5;
+      if (t > lim && t - dt <= lim && C.overlaps.length < 50) {
         const tag = (b) => `${b.id} [${b.x.toFixed(2)}, ${b.z.toFixed(2)}]${b.rig._walk ? ' walking' : ''}${b.rig.scripted ? ' scripted' : ''}${b.rig.state ? ' ' + b.rig.state : ''}`;
         const last = (window.__test && window.__test.log && window.__test.log.slice(-1)[0]) || '';
         C.overlaps.push(`${game.place.name}: ${A.id} and ${B.id} ${d.toFixed(2)} apart at t=${(game.t || 0).toFixed(1)}${game.busy ? ' (scene)' : ''}; ${tag(A)}; ${tag(B)}; last step: ${last}`);
