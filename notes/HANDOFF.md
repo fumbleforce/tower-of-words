@@ -75,7 +75,13 @@ Read GUIDE.md first. The game is game3d/ (day 1: train, gate and lobby, lift, B2
      - `?nobatch` turns the pass off
    - Details are in notes/PERF.md.
 3. **QA round 1** (notes/QA-ROUND-1.md): about 20 of 31 items are fixed. Still open: 24 (props for the empty middle of the lobby and the copy room), 25 (one taught form per word), 31 (perf), and whatever round 2 finds. Nothing has been re-scored since the fixes.
-4. **The feel agent's human-pace checks** (human.mjs at 390 and 1366) of the movement fixes haven't run.
+4. **Movement checks at human pace:**
+   - human.mjs at 1366 passes on cd66389, with no GAVE UP.
+   - At 390, the driver kept hitting the reader next to Mio. That's fixed in 87e4919, but the rerun at 390 hasn't been done.
+   - Known issues:
+     - step-aside can shift Eric up to about 1.4 m in a crowd
+     - QA 9: "Sit down" has no seat marked (story/world)
+     - the lift exit crossing is fixed in 29ae650; recheck it
 5. **bench_r's seat point** sits between two cushions (world data).
 
 ## Waiting on Jørgen (bible, Review)
