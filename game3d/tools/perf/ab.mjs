@@ -4,8 +4,8 @@
 //   - frame rate and p95 over a few seconds of play, off and on (CPU throttled 4x)
 //   - pixel diffs of the play camera, off and on, at the start and again after some play (game paused for the
 //     shot, so nothing moves between the two)
-// main.js is served with the one-line hook (notes/production-requests.md) so the pass runs where it will in the
-// build: right after the place is built. --nohook serves main.js as it is and calls the pass after load instead.
+// places/lifecycle.js is served with the one-line hook (notes/production-requests.md) so the pass runs where it will in the
+// build: right after the place is built. --nohook serves places/lifecycle.js as it is and calls the pass after load instead.
 //   node game3d/tools/perf/ab.mjs [train,gate,office] [--q 1] [--secs 6] [--play 12] [--cpu 4] [--out dir] [--test]
 // Take /tmp/claude-1000/browser.lock first (sh game3d/tools/with-browser-lock.sh perf node ...). GL=gpu renders on
 // the GPU (GPU lock too). Writes <out>/<place>-{off,on,diff}-<n>.png and <out>/ab.json.
@@ -29,10 +29,10 @@ const gl = GPU ? ['--use-angle=vulkan', '--enable-features=Vulkan', '--ignore-gp
 const b = await chromium.launch({ headless: true, args: [...gl, '--autoplay-policy=no-user-gesture-required'] });
 
 // the hook as requested of the builder: after `place.name = name;` in prepare()
-const HOOK_LINE = "place.name = name; (await import('./perf/batch.js')).optimizePlace(place, { game });";
+const HOOK_LINE = "place.name = name; (await import('../perf/batch.js')).optimizePlace(place, { game });";
 async function withHook(route) {
   const r = await route.fetch(); let body = await r.text();
-  if (!body.includes('place.name = name;')) throw new Error('hook point not found in main.js');
+  if (!body.includes('place.name = name;')) throw new Error('hook point not found in places/lifecycle.js');
   body = body.replace('place.name = name;', HOOK_LINE);
   await route.fulfill({ response: r, body });
 }
@@ -62,7 +62,7 @@ async function diff(a, c, file) {
 const res = { gl: GPU ? 'gpu' : 'swiftshader', q: QUAL, cpu: CPU, hook: HOOK, places: {} };
 for (const place of places) {
   const ctx = await b.newContext({ viewport: { width: 393, height: 851 }, deviceScaleFactor: 2.75, isMobile: true, hasTouch: true });
-  if (HOOK) await ctx.route('**/js/main.js*', withHook);
+  if (HOOK) await ctx.route('**/js/places/lifecycle.js*', withHook);
   const p = await ctx.newPage();
   const errs = []; p.on('pageerror', (e) => errs.push(e.message)); p.on('console', (m) => { if (/perf batch/.test(m.text()) || m.type() === 'error' && !/404/.test(m.text())) errs.push(m.text()); });
   const cdp = await ctx.newCDPSession(p);

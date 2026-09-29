@@ -1,21 +1,16 @@
+import { createPlaceLifecycle } from './places/lifecycle.js';
 import { GLOBAL_HOOKS } from './narrative/hooks.js';
-import { eventTrigger } from './narrative/events.js';
 import { installInteractions } from './gameplay/interactions.js';
 import { PLACE_FILES, NEXT } from './places/definitions.js';
-import { assertRegistered, assertPlaceRegistered } from './narrative/registration.js';
-import { PLACE_DETAILS, SHARED_THINGS } from './places/catalog.js';
-import { cancelSavedWalk } from './places/saved-people.js';
+import { assertRegistered } from './narrative/registration.js';
 import { needsLegacyOpening } from './narrative/legacy-opening.js';
 // Day one: train, lobby, office. One renderer, one Mio, three places joined by continuous trips.
 import * as THREE from 'three';
 import { createRenderer, Markers, Q, blob } from './engine.js';
 import { makePost } from './post.js';
-import { attachLift } from './places/lift.js';
-import { applyLook } from './look/index.js';
 import { OutlinePass } from 'three/addons/postprocessing/OutlinePass.js';
-import { SmoothWalker, pickPerson, bodies, softSeparate } from './move.js';
+import { pickPerson, bodies, softSeparate } from './move.js';
 import * as ambience from './ambience.js';
-import { setPlace as sfxPlace } from './sfx.js';
 import { loadMio } from './mio.js';
 import { makeAvatar, loadEric, setSitLift } from './avatar.js';
 import { createTargets } from './narrative/hooks/targets.js';
@@ -25,28 +20,14 @@ import { installPresentationHooks } from './narrative/hooks/presentation.js';
 import { installGesturesHooks } from './narrative/hooks/gestures.js';
 import { installKotodamaHooks } from './narrative/hooks/kotodama.js';
 import { installProgressionHooks } from './narrative/hooks/progression.js';
-import { ui, unlockAudio, sfx, playMusic } from './ui.js';
-// background loop per place (audio/music); after work it switches to the night loop
-const MUSIC = { train: 'calm', gate: 'lively', office: 'office' };
+import { ui, unlockAudio, sfx } from './ui.js';
 import { known, SAYABLE } from './lang.js';
 import { Runner, flags } from './runner.js';
 import { trainPlace } from './places/train.js';
 import { lobbyPlace } from './places/lobby.js';
 import { officePlace } from './places/office.js';
 import { showEnd } from './end.js';
-import * as trips from './trips.js';
-import {
-  installSim,
-  PERIODS as PERIOD_ORDER,
-  sim,
-  applySchedule,
-  stepAmbient,
-  absorb,
-  save,
-  loadSave,
-  restore,
-  clearSave,
-} from './sim.js';
+import { installSim, sim, stepAmbient, save, loadSave, restore, clearSave } from './sim.js';
 
 const CAP = Q.has('cap');
 const TEST = Q.get('test') === 'fast';
@@ -489,6 +470,18 @@ window.addEventListener('keyup', (e) => game.walker && game.walker.keys.delete(e
 window.addEventListener('blur', () => game.walker && game.walker.keys.clear());
 
 // ---------- hooks that work in every place ----------
+const nearSet = new Set(),
+  zoneSet = new Set();
+const { prepare, enter, travel, startScene } = createPlaceLifecycle(game, {
+  PLACES,
+  setComposer,
+  resize,
+  buildMarkers,
+  nearSet,
+  zoneSet,
+  snapshot,
+  crossfade,
+});
 const targets = createTargets(game);
 game.posOf = targets.posOf;
 installMovementHooks(game, targets);
@@ -498,132 +491,6 @@ installKotodamaHooks(game, { renderer, objsOf });
 installProgressionHooks(game, { travel });
 
 // ---------- entering places ----------
-async function prepare(name) {
-  if (!game.prepared[name])
-    game.prepared[name] = (async () => {
-      const story = await game.runner.load(name);
-      const place = await PLACES[name](game, story);
-      assertPlaceRegistered(place, name, PLACE_DETAILS[name]);
-      place.name = name;
-      attachLift(game, place); // walk-in lift (places/lift.js)
-      applyLook(place, game); // surface patterns, baked light (look/index.js); materials patched in place
-      return { place, story };
-    })();
-  return game.prepared[name];
-}
-async function enter(name, { persist = true, resuming = false } = {}) {
-  const { place, story } = await prepare(name);
-  if (game.place && game.place.leave) game.place.leave();
-  cancelSavedWalk(game.player);
-  cancelSavedWalk(game.mioNpc);
-  game.hold = null;
-  game.place = place;
-  game.story = story;
-  document.body.dataset.place = name;
-  game.runner.use(place, story);
-  if (!resuming) game.pendingStart = name;
-  place.space.add(game.player.root);
-  place.space.add(game.mioNpc.root);
-  game.mioNpc.root.visible = false;
-  game.mioNpc.root.scale.setScalar(place.charScale || 1);
-  game.mioNpc.setState('idle');
-  place.people.mio = game.mioNpc;
-  const mr = game.mioNpc.root;
-  place.things.mio = place.things.mio || {
-    ...SHARED_THINGS.mio,
-    anchor: (v) => {
-      mr.getWorldPosition(v);
-      v.y += 1.12 * (place.charScale || 1);
-      return v;
-    },
-    spot: () => {
-      const r = mr.rotation.y;
-      return [mr.position.x + Math.sin(r) * 0.6, mr.position.z + Math.cos(r) * 0.6];
-    },
-    face: () => [mr.position.x, mr.position.z],
-    enabled: () => mr.visible,
-  };
-  game.mioNpc.seated = false;
-  game.mioNpc.root.position.y = 0;
-  if (place.spots.mio_start) game.mioNpc.root.position.set(place.spots.mio_start[0], 0, place.spots.mio_start[1]);
-  place.placeMio?.(game.mioNpc);
-  game.player.root.scale.setScalar(place.charScale || 1);
-  game.player.seated = false;
-  game.player.scripted = false;
-  game.player.setState('idle');
-  game.player.root.visible = true;
-  game.walker = new SmoothWalker(game.player.root, place.nav, { speed: 1.3 });
-  sfxPlace(name);
-  game.walker.facing = place.startFacing ?? Math.PI;
-  game.player.root.rotation.y = game.walker.facing;
-  const [sx, sz] = place.start;
-  game.player.root.position.set(sx, place.floorY ?? 0, sz);
-  setComposer(place);
-  resize();
-  place.cam?.snap?.(game.player.root.position);
-  absorb(story);
-  if (!resuming && place.defaultPeriod && PERIOD_ORDER.indexOf(sim.period) < PERIOD_ORDER.indexOf(place.defaultPeriod))
-    sim.period = place.defaultPeriod;
-  applySchedule(game, { instant: true });
-  ui.clock(
-    sim.date,
-    {
-      early: 'Early morning',
-      morning: 'Morning at work',
-      lunch: 'Lunch',
-      afternoon: 'Afternoon',
-      evening: 'After work',
-    }[sim.period],
-  );
-  playMusic(sim.period === 'evening' ? 'night' : place.music || MUSIC[name] || 'calm');
-  buildMarkers(place);
-  ui.goal('');
-  if (persist) save(game);
-  nearSet.clear();
-  zoneSet.clear();
-  return place;
-}
-
-// The trip between places: the old place plays its leaving move while the next one is ready (it was built
-// in the background), then a soft crossfade from the last frame into the next place, where its arriving
-// move plays. No black screens.
-async function travel(name, { arriving = false, fromName } = {}) {
-  const from = arriving ? { name: fromName } : game.place;
-  game.transition = { from: from.name, to: name, phase: arriving ? 'arriving' : 'leaving' };
-  save(game);
-  game.busy = true;
-  game.walker.locked = true;
-  document.body.classList.add('busy', 'trip');
-  const ready = prepare(name);
-  document.body.classList.add('loading');
-  const tr = await game.runner.load('transitions');
-  const slot = (tr && tr[`${from.name}_to_${name}`]) || {};
-  if (!arriving) await trips.leave(game, from, slot);
-  await ready;
-  document.body.classList.remove('loading');
-  if (!arriving) {
-    const snap = snapshot();
-    game.transition.phase = 'arriving';
-    await enter(name);
-    crossfade(snap);
-  }
-  await trips.arrive(game, game.place, slot);
-  document.body.classList.remove('busy', 'trip');
-  game.busy = false;
-  game.walker.locked = false;
-  game.player.scripted = false;
-  if (NEXT[name]) setTimeout(() => prepare(NEXT[name]), 1500);
-  game.transition = null;
-  startScene(name);
-}
-game.travel = travel;
-
-function startScene(name) {
-  game.pendingStart = null;
-  if (game.runner.has(eventTrigger(name, 'start'))) game.runner.trigger(eventTrigger(name, 'start'));
-  else if (game.story.start) game.beat(() => game.runner.run(game.story.start));
-  else save(game);
-}
 function snapshot() {
   render();
   try {
@@ -653,8 +520,6 @@ function crossfade(url) {
 // ---------- loop ----------
 let lastT = performance.now();
 let frames = 0;
-const nearSet = new Set(),
-  zoneSet = new Set();
 // stills and frame sequences (?cap): advance game time exactly, independent of how slow the renderer is
 if (CAP)
   window.__advance = (sec) => {

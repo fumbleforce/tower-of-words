@@ -22,8 +22,8 @@ const gl = GPU ? ['--use-angle=vulkan', '--enable-features=Vulkan', '--ignore-gp
 const b = await chromium.launch({ headless: true, args: [...gl, '--autoplay-policy=no-user-gesture-required'] });
 const phone = +W < 640;
 const ctx = await b.newContext({ viewport: { width: +W, height: +H }, deviceScaleFactor: phone ? 2.75 : 1, isMobile: phone, hasTouch: phone });
-await ctx.route('**/js/main.js*', async (route) => {
-  const r = await route.fetch(); const body = (await r.text()).replace('place.name = name;', "place.name = name; (await import('./perf/batch.js')).optimizePlace(place, { game });");
+await ctx.route('**/js/places/lifecycle.js*', async (route) => {
+  const r = await route.fetch(); const body = (await r.text()).replace('place.name = name;', "place.name = name; (await import('../perf/batch.js')).optimizePlace(place, { game });");
   await route.fulfill({ response: r, body });
 });
 const p = await ctx.newPage();

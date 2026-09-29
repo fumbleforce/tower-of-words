@@ -634,7 +634,7 @@ for p in ls('art/approved/music', r'\.mp3$') + ls('game3d/audio/music', r'\.mp3$
     paths = [x for x in [f'art/approved/music/{name}.mp3', f'game3d/audio/music/{name}.mp3'] if exists(x)]
     used = [f'Background loop in {PLACES.get(pl, pl)}' for pl in MUSIC_PLACE.get(name, [])]
     if name == 'night':
-        used.append('After work (main.js switches to the night loop)')
+        used.append('After work (places/lifecycle.js switches to the night loop)')
     add(f'music/{name}', 'music', (t[1] if t else name), paths, FACT_STATUS.get(t[2], 'approved') if t else 'provisional',
         quote('GUIDE.md', 'Music: the game uses Lyria only') if name not in ('opening', 'opening-tv') else quote('GUIDE.md', 'Opening theme = "Mastered: softer"'),
         source='Lyria loop, crossfading into itself' if name not in ('opening', 'opening-tv') else 'YuE2 (CC BY-NC 4.0); TV edit by tools/opening/tv_edit.py',

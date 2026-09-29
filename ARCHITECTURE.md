@@ -31,6 +31,9 @@ implementation evidence is in [notes/refactor-progress.md](notes/refactor-progre
   and progression. Main injects the game and rendering/travel dependencies.
 - `game3d/js/gameplay/interactions.js` installs marker availability, use/talk,
   Say practice and gifting against the shared game. Main retains input routing.
+- `game3d/js/places/lifecycle.js` owns preparation, entry, travel and opening
+  dispatch. Main injects place factories and rendering/marker callbacks and keeps
+  boot/Continue orchestration. Save fields and transition ordering stay unchanged.
 - `tools/lib/` owns reusable tooling support. Browser admission, deadlines and
   cleanup belong in `browser-job.mjs`; game startup belongs in
   `game3d/test/support/open-game.mjs`. Scenario drivers own their actions and checks.

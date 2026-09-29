@@ -7,7 +7,7 @@ const VAL = new Set(['--q', '--extra']);
 const place = argv.find((a, i) => !a.startsWith('--') && !VAL.has(argv[i - 1])) || 'office';
 const b = await chromium.launch({ headless: true, args: ['--use-angle=swiftshader', '--enable-unsafe-swiftshader'] });
 const ctx = await b.newContext({ viewport: { width: 393, height: 851 }, deviceScaleFactor: 2.75, isMobile: true, hasTouch: true });
-if (!argv.includes('--nohook')) await ctx.route('**/js/main.js*', async (route) => { const r = await route.fetch(); const body = (await r.text()).replace('place.name = name;', "place.name = name; (await import('./perf/batch.js')).optimizePlace(place, { game });"); await route.fulfill({ response: r, body }); });
+if (!argv.includes('--nohook')) await ctx.route('**/js/places/lifecycle.js*', async (route) => { const r = await route.fetch(); const body = (await r.text()).replace('place.name = name;', "place.name = name; (await import('../perf/batch.js')).optimizePlace(place, { game });"); await route.fulfill({ response: r, body }); });
 const p = await ctx.newPage();
 p.on('pageerror', (e) => console.log('pageerror', e.message));
 await p.goto(`http://127.0.0.1:8771/game3d/index.html?q=${arg('q', '1')}&place=${place}&skip${arg('extra', '')}`);

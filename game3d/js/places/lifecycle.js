@@ -1,0 +1,152 @@
+import { assertPlaceRegistered } from '../narrative/registration.js';
+import { eventTrigger } from '../narrative/events.js';
+import { PLACE_DETAILS, SHARED_THINGS } from './catalog.js';
+import { NEXT } from './definitions.js';
+import { cancelSavedWalk } from './saved-people.js';
+import { attachLift } from './lift.js';
+import { applyLook } from '../look/index.js';
+import { SmoothWalker } from '../move.js';
+import { setPlace as sfxPlace } from '../sfx.js';
+import { playMusic } from '../ui.js';
+import { sim, PERIODS as PERIOD_ORDER, absorb, applySchedule, save } from '../sim.js';
+import * as trips from '../trips.js';
+
+const MUSIC = { train: 'calm', gate: 'lively', office: 'office' };
+
+export function createPlaceLifecycle(
+  game,
+  { PLACES, setComposer, resize, buildMarkers, nearSet, zoneSet, snapshot, crossfade },
+) {
+  const ui = game.ui;
+  async function prepare(name) {
+    if (!game.prepared[name])
+      game.prepared[name] = (async () => {
+        const story = await game.runner.load(name);
+        const place = await PLACES[name](game, story);
+        assertPlaceRegistered(place, name, PLACE_DETAILS[name]);
+        place.name = name;
+        attachLift(game, place); // walk-in lift (places/lift.js)
+        applyLook(place, game); // surface patterns, baked light (look/index.js); materials patched in place
+        return { place, story };
+      })();
+    return game.prepared[name];
+  }
+  async function enter(name, { persist = true, resuming = false } = {}) {
+    const { place, story } = await prepare(name);
+    if (game.place && game.place.leave) game.place.leave();
+    cancelSavedWalk(game.player);
+    cancelSavedWalk(game.mioNpc);
+    game.hold = null;
+    game.place = place;
+    game.story = story;
+    document.body.dataset.place = name;
+    game.runner.use(place, story);
+    if (!resuming) game.pendingStart = name;
+    place.space.add(game.player.root);
+    place.space.add(game.mioNpc.root);
+    game.mioNpc.root.visible = false;
+    game.mioNpc.root.scale.setScalar(place.charScale || 1);
+    game.mioNpc.setState('idle');
+    place.people.mio = game.mioNpc;
+    const mr = game.mioNpc.root;
+    place.things.mio = place.things.mio || {
+      ...SHARED_THINGS.mio,
+      anchor: (v) => {
+        mr.getWorldPosition(v);
+        v.y += 1.12 * (place.charScale || 1);
+        return v;
+      },
+      spot: () => {
+        const r = mr.rotation.y;
+        return [mr.position.x + Math.sin(r) * 0.6, mr.position.z + Math.cos(r) * 0.6];
+      },
+      face: () => [mr.position.x, mr.position.z],
+      enabled: () => mr.visible,
+    };
+    game.mioNpc.seated = false;
+    game.mioNpc.root.position.y = 0;
+    if (place.spots.mio_start) game.mioNpc.root.position.set(place.spots.mio_start[0], 0, place.spots.mio_start[1]);
+    place.placeMio?.(game.mioNpc);
+    game.player.root.scale.setScalar(place.charScale || 1);
+    game.player.seated = false;
+    game.player.scripted = false;
+    game.player.setState('idle');
+    game.player.root.visible = true;
+    game.walker = new SmoothWalker(game.player.root, place.nav, { speed: 1.3 });
+    sfxPlace(name);
+    game.walker.facing = place.startFacing ?? Math.PI;
+    game.player.root.rotation.y = game.walker.facing;
+    const [sx, sz] = place.start;
+    game.player.root.position.set(sx, place.floorY ?? 0, sz);
+    setComposer(place);
+    resize();
+    place.cam?.snap?.(game.player.root.position);
+    absorb(story);
+    if (
+      !resuming &&
+      place.defaultPeriod &&
+      PERIOD_ORDER.indexOf(sim.period) < PERIOD_ORDER.indexOf(place.defaultPeriod)
+    )
+      sim.period = place.defaultPeriod;
+    applySchedule(game, { instant: true });
+    ui.clock(
+      sim.date,
+      {
+        early: 'Early morning',
+        morning: 'Morning at work',
+        lunch: 'Lunch',
+        afternoon: 'Afternoon',
+        evening: 'After work',
+      }[sim.period],
+    );
+    playMusic(sim.period === 'evening' ? 'night' : place.music || MUSIC[name] || 'calm');
+    buildMarkers(place);
+    ui.goal('');
+    if (persist) save(game);
+    nearSet.clear();
+    zoneSet.clear();
+    return place;
+  }
+
+  // The trip between places: the old place plays its leaving move while the next one is ready (it was built
+  // in the background), then a soft crossfade from the last frame into the next place, where its arriving
+  // move plays. No black screens.
+  async function travel(name, { arriving = false, fromName } = {}) {
+    const from = arriving ? { name: fromName } : game.place;
+    game.transition = { from: from.name, to: name, phase: arriving ? 'arriving' : 'leaving' };
+    save(game);
+    game.busy = true;
+    game.walker.locked = true;
+    document.body.classList.add('busy', 'trip');
+    const ready = prepare(name);
+    document.body.classList.add('loading');
+    const tr = await game.runner.load('transitions');
+    const slot = (tr && tr[`${from.name}_to_${name}`]) || {};
+    if (!arriving) await trips.leave(game, from, slot);
+    await ready;
+    document.body.classList.remove('loading');
+    if (!arriving) {
+      const snap = snapshot();
+      game.transition.phase = 'arriving';
+      await enter(name);
+      crossfade(snap);
+    }
+    await trips.arrive(game, game.place, slot);
+    document.body.classList.remove('busy', 'trip');
+    game.busy = false;
+    game.walker.locked = false;
+    game.player.scripted = false;
+    if (NEXT[name]) setTimeout(() => prepare(NEXT[name]), 1500);
+    game.transition = null;
+    startScene(name);
+  }
+  game.travel = travel;
+
+  function startScene(name) {
+    game.pendingStart = null;
+    if (game.runner.has(eventTrigger(name, 'start'))) game.runner.trigger(eventTrigger(name, 'start'));
+    else if (game.story.start) game.beat(() => game.runner.run(game.story.start));
+    else save(game);
+  }
+  return { prepare, enter, travel, startScene };
+}
