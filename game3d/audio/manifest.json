@@ -450,6 +450,26 @@
   "emo": "dry"
  },
  {
+  "key": "ln-m6bdio",
+  "speaker": "eric",
+  "text": "A what?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "tired"
+ },
+ {
+  "key": "ln-wzoz15",
+  "speaker": "mio",
+  "text": "Mm, like that. Don't worry, it's not mean, it's like saying “the new guy”. Only, you stay new guy for, um, maybe ten years.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "teasing"
+ },
+ {
   "key": "ln-1en4jir",
   "speaker": "mio",
   "text": "I'm Mio. I'm also B2, so... same team, I guess.",
@@ -606,9 +626,9 @@
   "emo": "amused"
  },
  {
-  "key": "ln-11m7ob5",
+  "key": "ln-hviim",
   "speaker": "mio",
-  "text": "Try the cat, over there. She rides this train every morning, she won't judge you.",
+  "text": "Try the cat, over there. She kind of lives on this train, she won't judge you.",
   "lang": "en",
   "overheard": false,
   "words": [],
@@ -646,9 +666,9 @@
   "emo": "amused"
  },
  {
-  "key": "ln-z7qqlo",
+  "key": "ln-nitaq3",
   "speaker": "mio",
-  "text": "She's more awake than that guy, anyway. He's on this train every morning too, asleep the whole way, and like once a month he misses our stop and ends up back on the mainland.",
+  "text": "She's more awake than that guy, anyway. He's from the island too, Accounts I think. Every time he comes back from the mainland he sleeps the whole way, and one day he's going to miss our stop and go right back.",
   "lang": "en",
   "overheard": false,
   "words": [],
@@ -837,9 +857,9 @@
   "emo": "announcer"
  },
  {
-  "key": "ln-jb1f1x",
+  "key": "ln-pqwnjz",
   "speaker": "mio",
-  "text": "And now it goes back to the mainland. So today is the once a month, I guess.",
+  "text": "And now it goes back to the mainland. So today is the day, I guess.",
   "lang": "en",
   "overheard": false,
   "words": [],
@@ -2437,9 +2457,9 @@
   "emo": "dry"
  },
  {
-  "key": "ln-16463ao",
+  "key": "ln-1do9axl",
   "speaker": "mio",
-  "text": "Take the 8:40 tomorrow, okay? I'm in the front car. I want to see how you, um... fix a sensor.",
+  "text": "Tomorrow morning you go down to the station, okay? I'll come too. I want to see how you, um... fix a sensor.",
   "lang": "en",
   "overheard": false,
   "words": [],
@@ -2447,9 +2467,9 @@
   "emo": "teasing"
  },
  {
-  "key": "ln-15xvgtf",
+  "key": "ln-16sqrb5",
   "speaker": "mio",
-  "text": "It's the 8:40, tomorrow. And if anybody asks, it was the sensor. Don't sleep through it, 外人.",
+  "text": "It's the station, tomorrow morning. And if anybody asks, it was the sensor. Don't sleep through it, 外人.",
   "lang": "en",
   "overheard": false,
   "words": [
