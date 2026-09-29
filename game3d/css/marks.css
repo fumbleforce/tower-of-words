@@ -1,0 +1,52 @@
+/* ---------- what can be used: a dot on every usable thing, a pointer on the one in reach ----------
+   Jørgen, 2026-09-29: the floor ring on the target in reach was "brutally ugly and overlaps the whole screen", and
+   with only that ring "it should be EASY to see what can be interacted with". So every usable person and thing on
+   screen carries a small dot just over its head (engine.js Markers puts .mark on the anchor), and the one in reach
+   turns it into a small teal pointer, with the 3D outline on its body and the action beside it (ui.placeSay).
+   No labels here: names and verbs live in the action beside the target. Loaded after style.css, so it overrides the
+   old pin rules. */
+#marks { visibility: visible; }
+body.busy #marks, body.trip #marks, body.at-title #marks { display: none; }
+#marks .mark .tag, #marks .mark .stem, #marks .mark::before, #marks .mark .pin svg { display: none; }
+#marks .mark.offscreen { visibility: hidden; }
+
+/* the dot: pale, with a dark edge so it reads on the pale floors and the navy seats alike */
+#marks .mark .pin, #marks .mark.thing .pin, #marks .mark.goal .pin,
+#marks .mark.below .pin, #marks .mark.thing.below .pin {
+  left: -6px; top: -22px; width: 12px; height: 12px; border-radius: 50%; box-sizing: border-box;
+  background: #eaf8f5; border: 2.5px solid rgba(14, 20, 30, .78);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, .3); animation: none; transform: none; clip-path: none;
+  transition: transform .16s ease, background .16s, opacity .16s;
+}
+#marks .mark .pin::after { display: none; }
+#marks .mark.small .pin { opacity: .9; }
+/* the other dots stay at full strength while one thing is in reach (style.css faded them to .45) */
+body:has(.mark.near) #marks .mark:not(.near) { opacity: 1; }
+
+/* the goal: the same dot in the accent colour (its floor ring and edge arrow do the rest, menu.js) */
+#marks .mark.goal .pin { background: var(--accent, #6fd0c6); border-color: rgba(10, 36, 34, .75); }
+
+/* under the mouse: the dot grows a little and takes the accent (the model gets the 3D outline, main.js) */
+#marks .mark.hover:not(.near) .pin { transform: scale(1.35); background: #bff1ea; }
+
+/* in reach: the dot becomes a small pointer aimed at the target, bobbing a little */
+#marks .mark.near .pin, #marks .mark.near.goal .pin, #marks .mark.near.below .pin {
+  left: -9px; top: -25px; width: 18px; height: 13px; border: 0; border-radius: 0;
+  background: #bff1ea; box-shadow: none;
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  filter: drop-shadow(0 0 0 rgba(0,0,0,0));
+  animation: markbob 1.4s ease-in-out infinite;
+}
+/* the pointer's dark edge: a slightly larger dark triangle behind it */
+#marks .mark.near::after {
+  content: ""; position: absolute; left: -11.5px; top: -27px; width: 23px; height: 17px;
+  background: rgba(14, 20, 30, .7); clip-path: polygon(0 0, 100% 0, 50% 100%);
+  animation: markbob 1.4s ease-in-out infinite; z-index: -1;
+}
+@keyframes markbob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-3px); } }
+body.reduce-motion #marks .mark.near .pin, body.reduce-motion #marks .mark.near::after { animation: none; }
+
+/* phones: a touch bigger */
+body.phone #marks .mark .pin { left: -7px; width: 14px; height: 14px; }
+body.phone #marks .mark.near .pin { left: -9px; width: 18px; height: 13px; }
+body.phone #marks .mark.near::after { left: -11px; width: 22px; height: 16px; }

@@ -97,8 +97,10 @@ function setComposer(place) {
   outline = new OutlinePass(new THREE.Vector2(w, h), place.scene, place.camera);
   // hidden edges black (the pass adds them): no outline showing through walls (QA round 1)
   outline.visibleEdgeColor.set('#bff1ea'); outline.hiddenEdgeColor.set('#000000');
-  outline.edgeStrength = 2.2; outline.edgeThickness = 1.0; outline.edgeGlow = 0; outline.pulsePeriod = 0;
-  composer.insertPass(outline, 1);
+  outline.edgeStrength = 5.0; outline.edgeThickness = 1.0;   // was 2.2: too faint to see on hover (Jørgen: "i want the MODEL ITSELF to get an outline") outline.edgeGlow = 0; outline.pulsePeriod = 0;
+  // after the place's beforeAO pass: the train's shadow proxy (a roof) hides there, and seen by the outline's depth
+  // mask it made every target count as behind a wall, so the train showed no outline at all
+  composer.insertPass(outline, place.beforeAO ? 2 : 1);
   applyQuality();
 }
 function applyQuality() {
@@ -155,13 +157,20 @@ canvas.addEventListener('pointermove', (e) => {
   if (titleUp()) { game.hover = null; canvas.style.cursor = ''; return; }
   const r = canvas.getBoundingClientRect();
   hoverRay.setFromCamera(new THREE.Vector2(((e.clientX - r.left) / r.width) * 2 - 1, -((e.clientY - r.top) / r.height) * 2 + 1), game.place.camera);
+  const best = modelAt(hoverRay);
+  if (game.hover !== best) { if (game.hover && game.hover.el) game.hover.el.classList.remove('hover'); if (best && best.el) best.el.classList.add('hover'); }
+  game.hover = best; canvas.style.cursor = best ? 'pointer' : '';
+});
+// the usable thing whose model is under the ray: the nearest hit wins, so the cat on the seat beats the seat, the
+// floor and whoever stands behind it (Jørgen: "I end up sitting on the cat"). Hover and click both use this.
+function modelAt(ray) {
   let best = null, bd = 1e9;
   for (const m of game.markers.list) {
     if (!m.enabled()) continue;
-    for (const o of objsOf(m)) { const hit = hoverRay.intersectObject(o, true)[0]; if (hit && hit.distance < bd) { bd = hit.distance; best = m; } }
+    for (const o of objsOf(m)) { const hit = ray.intersectObject(o, true)[0]; if (hit && hit.distance < bd) { bd = hit.distance; best = m; } }
   }
-  game.hover = best; canvas.style.cursor = best ? 'pointer' : '';
-});
+  return best;
+}
 let outlineKey = '';
 // the title screen is up (no outline, no hover)
 const titleUp = () => { const t = document.getElementById('title'); return !!(t && !t.hidden && t.offsetParent !== null); };
@@ -291,6 +300,9 @@ function ndc(e) { const r = canvas.getBoundingClientRect(); return new THREE.Vec
 canvas.addEventListener('pointerdown', (e) => {
   unlockAudio();
   if (game.busy || !game.place) return;
+  // what the cursor is visibly on first (the model itself), then the looser person and marker picks around it
+  raycaster.setFromCamera(ndc(e), game.place.camera);
+  const hitM = modelAt(raycaster); if (hitM) { use(hitM); return; }
   const who = pickPerson(game, e.clientX, e.clientY, canvas); if (who) { use(who); return; }
   const [w, h] = [canvas.clientWidth, canvas.clientHeight];
   let best = null, bd = 44;

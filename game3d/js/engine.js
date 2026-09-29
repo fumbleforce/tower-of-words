@@ -251,12 +251,8 @@ export class Markers {
   clear() { for (const m of this.list) m.el.remove(); this.list = []; }
   update(camera, canvas, playerPos, near) {
     const w = canvas.clientWidth, h = canvas.clientHeight, v = new THREE.Vector3();
-    // only the two nearest non-goal markers show, so a crowded room isn't covered in dots
-    const dist = (m) => { const s = m.spot ? m.spot() : null; return s && playerPos ? Math.hypot(playerPos.x - s[0], playerPos.z - s[1]) : 99; };
-    // nearby markers show (people and things alike, the nearest four within reach); things a word he knows works on
-    // show from a little further, so an object you can talk to never looks dead next to a person
-    const live = (m) => (typeof m.enabled === 'function' ? m.enabled() : m.enabled) && !(m.goal && m.goal());
-    const shown = new Set(this.list.filter(live).map((m) => [m, dist(m)]).filter(([m, d]) => d < (m.wordable && m.wordable() ? 3.4 : 2.6)).sort((a, b) => a[1] - b[1]).slice(0, 4).map(([m]) => m));
+    // every usable thing on screen shows its small dot (Jørgen, 2026-09-29: "it should be EASY to see what can be
+    // interacted with"); the one in reach gets the stronger state (css/marks.css)
     for (const m of this.list) {
       const on = m.enabled && (typeof m.enabled !== 'function' || m.enabled());
       const vis = typeof m.enabled === 'function' ? m.enabled() : m.enabled;
@@ -277,10 +273,6 @@ export class Markers {
       m.el.classList.toggle('near', near === m);
       const isGoal = !!(m.goal && m.goal());
       m.el.classList.toggle('goal', isGoal);
-      // only nearby things and the current goal show a marker, so the room isn't covered in dots
-      const s = m.spot ? m.spot() : null;
-      const far = !isGoal && !shown.has(m); void s;
-      m.el.classList.toggle('far', !!far);
       void on;
     }
   }
