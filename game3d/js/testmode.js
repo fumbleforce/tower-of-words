@@ -3,6 +3,7 @@
 // whatever answers to them, the way a curious player would. window.__test reports progress and errors.
 import { ui, setMuted } from './ui.js';
 import { known, SAYABLE } from './lang.js';
+import { flags } from './runner.js';
 
 export function start(game) {
   setMuted(true);
@@ -16,7 +17,7 @@ export function start(game) {
   T.route = route;
   let lastPlace = '', idle = 0, busyFor = 0;
   setInterval(() => {
-    if (window.__ended) { T.done = true; return; }
+    if (window.__ended) { if (!T.practice) T.errors.push('the Say practice prompt was never passed'); T.done = true; return; }
     const p = game.place; if (!p || !game.walker) return;
     if (p.name !== lastPlace) { lastPlace = p.name; T.places.push(p.name); tried.clear(); idle = 0; }
     if (game.player.seated && game.walker.path) game.walker.stop();
@@ -34,7 +35,8 @@ export function start(game) {
       if (tried.has(key) || !game.runner.has(key)) continue;
       if (route === 'social' && w === 'akete') continue;
       tried.add(key); T.log.push(p.name + ' ' + key);
-      const fire = () => { game.found.add(key); game.runner.trigger(key); };
+      // words go through the same path as the Say menu, practice prompt included (ui.auto types the word)
+      const fire = () => { if (game.busy) return; const before = +(flags['practice_' + w] || 0); game.sayWord(w, m).then(() => { if ((+(flags['practice_' + w] || 0)) > before) T.practice = (T.practice || 0) + 1; }); };
       if (game.player.seated) fire(); else { const s = m.spot(); game.walker.goTo(s[0], s[1], fire); }
       return;
     }

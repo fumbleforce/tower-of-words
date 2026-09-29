@@ -53,6 +53,7 @@ await p.waitForFunction(() => window.__test && window.__test.done, null, { timeo
 const r = await p.evaluate(() => ({ ...window.__test, ended: !!window.__ended, place: window.__game.place && window.__game.place.name, goal: window.__game.ui.goalText, voices: window.__voiceLog, heard: window.__test.heard }));
 await p.screenshot({ path: `/tmp/claude-1000/fast-${W}x${H}.png` });
 console.log(r.ended && !errs.length && !r.errors.length ? 'PASS' : 'FAIL', `${W}x${H}`, `${((Date.now() - t0) / 1000).toFixed(0)} s`, 'route:', r.route, 'places:', r.places.join(' > '), 'at:', r.place, '| goal:', r.goal);
+console.log('practice prompts passed via Say:', r.practice || 0);
 console.log('voices:', JSON.stringify(r.voices), r.voices && r.voices.overlaps ? 'OVERLAP' : 'one at a time');
 for (const h of (r.heard || []).filter((h) => /sumimasen|すみません/.test(h.text))) console.log('heard:', h.key, h.text, '| known', h.known.join(','), '| tokens', h.tokens.join(' '), h.garbledKnown.length ? 'GARBLED ' + h.garbledKnown : 'clear');
 console.log('last steps:', r.log.slice(-8).join(' | '));
