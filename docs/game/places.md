@@ -74,7 +74,7 @@ The monorail has one period, early morning.
 | `music` | Near bench, cap and headphones, nodding. | – |
 | `bun` | Near bench, left, seen from behind. | – |
 | `youth` | Near bench, right, seen from behind. | – |
-| `stander` | Standing by the far right corner with a bag. | – |
+| `stander` | Hidden following the rejected silhouette. | – |
 | `tama` | Far bench, washing. | – |
 | `rei` | Hidden (her seat is Mio's now). | – |
 
@@ -89,7 +89,9 @@ The monorail has one period, early morning.
 | `bun`, `youth`, `music`, `stander` | Talk to them after the first time | A line or an emote each. |
 | `ohayo_bun`, `ohayo_youth`, `ohayo_music`, `ohayo_stander` | Greet them | Each answers in their own way. |
 
-The man with a bag (`stander`) has no talk or greeting trigger, so `stander` and `ohayo_stander` never play.
+The man with a bag (`stander`) is hidden following the silhouette rejection, and has no talk or greeting trigger, so `stander` and `ohayo_stander` never play. The six scenery nodes above exist in the script but are disabled by the current marker rules; the passengers are reachable.
+
+Planned passenger revisions, awaiting [train-discoveries-1](../../reviews/train-discoveries-1/review.json): give Aoi a brief awkward exchange when she realises Eric is assigned to the basement she has just dismissed; let the woman with the bun share a mainland snack; show the young man's pride in his first goal despite his team's loss; let the headphone wearer admit he is listening to his own guitar practice; let the reader show the mismatch between his Excel book and the company's old software; and show Hamada silencing a reminder without waking properly. Each moment starts with one interaction, including on first contact before the seat hint. They are optional, need no menu or quiz, and add no later quest. Mio's conversation and Tama's existing moments stay as they are. Exact proposed passages and their visual staging live only in the review; no new dialogue, prop or voice is built yet.
 
 ## Head office lobby (`gate`)
 

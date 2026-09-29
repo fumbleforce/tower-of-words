@@ -1,0 +1,568 @@
+{
+  "sections": [
+    {
+      "title": "People on the train",
+      "changes": [
+        {
+          "id": "train-aoi",
+          "kind": "replace",
+          "title": "Aoi realises where Eric will work",
+          "summary": "Her complaint about the basement lands awkwardly when Eric introduces himself.",
+          "titles": [
+            "Current encounter",
+            "Proposed encounter"
+          ],
+          "before": [
+            {
+              "kind": "action",
+              "text": "You speak to this passenger while the train is crossing the bay."
+            },
+            {
+              "kind": "action",
+              "text": "If nobody has pointed out the free seat yet:"
+            },
+            {
+              "kind": "say",
+              "text": "あ、ごめん、ちょっと待って。",
+              "speaker": "aoi"
+            },
+            {
+              "kind": "action",
+              "text": "The passenger nods at the empty seat. The goal becomes “Sit down.”"
+            },
+            {
+              "kind": "action",
+              "text": "Otherwise:"
+            },
+            {
+              "kind": "say",
+              "text": "だから今日、配属が決まるの！どこでもいいけど、地下はいや。",
+              "speaker": "aoi"
+            },
+            {
+              "kind": "action",
+              "text": "You can keep exploring the carriage."
+            }
+          ],
+          "after": [
+            {
+              "kind": "action",
+              "text": "You speak to this passenger while the train is crossing the bay."
+            },
+            {
+              "kind": "say",
+              "text": "うん、今日決まる。地下だけはやだな。",
+              "speaker": "aoi"
+            },
+            {
+              "kind": "action",
+              "text": "She notices you waiting and cups a hand over the phone."
+            },
+            {
+              "kind": "say",
+              "text": "あ、あなたも新人？",
+              "speaker": "aoi"
+            },
+            {
+              "kind": "say",
+              "text": "I'm in IT, on B2.",
+              "speaker": "eric"
+            },
+            {
+              "kind": "say",
+              "text": "あっ。……ごめん。",
+              "speaker": "aoi"
+            },
+            {
+              "kind": "say",
+              "text": "Is that bad?",
+              "speaker": "eric"
+            },
+            {
+              "kind": "say",
+              "text": "ううん！窓が好きなだけ。",
+              "speaker": "aoi"
+            },
+            {
+              "kind": "action",
+              "text": "She gives a small apologetic bow before returning to her call."
+            },
+            {
+              "kind": "action",
+              "text": "If nobody has pointed out the free seat yet: the passenger nods toward it. The goal becomes “Sit down.”"
+            },
+            {
+              "kind": "action",
+              "text": "You can keep exploring the carriage. Sitting beside Mio starts her conversation."
+            }
+          ],
+          "staging": "Keep the phone call and seated position. Add the hand-over-phone gesture and small bow. Aoi recognises “IT” and “B2”; Eric responds to her apology and face, not to Japanese he has not learned. The viewer supplies Japanese readings and English meanings; implementation must preserve the setting.md requirement that English is available."
+        },
+        {
+          "id": "train-bun",
+          "kind": "replace",
+          "title": "A snack from the mainland",
+          "summary": "She shares something she brought back because she is tired of the company snacks.",
+          "titles": [
+            "Current encounter",
+            "Proposed encounter"
+          ],
+          "before": [
+            {
+              "kind": "action",
+              "text": "You speak to this passenger while the train is crossing the bay."
+            },
+            {
+              "kind": "action",
+              "text": "If nobody has pointed out the free seat yet:"
+            },
+            {
+              "kind": "say",
+              "text": "あ、そこ、空いてますよ。",
+              "speaker": "bun"
+            },
+            {
+              "kind": "action",
+              "text": "The passenger nods at the empty seat. The goal becomes “Sit down.”"
+            },
+            {
+              "kind": "action",
+              "text": "Otherwise:"
+            },
+            {
+              "kind": "say",
+              "text": "いい天気ですね。",
+              "speaker": "bun"
+            },
+            {
+              "kind": "action",
+              "text": "You can keep exploring the carriage."
+            }
+          ],
+          "after": [
+            {
+              "kind": "action",
+              "text": "You speak to this passenger while the train is crossing the bay."
+            },
+            {
+              "kind": "action",
+              "text": "She opens her bag, then offers you a small wrapped cake."
+            },
+            {
+              "kind": "say",
+              "text": "よかったら、どうぞ。駅で二つ買っちゃって。",
+              "speaker": "bun"
+            },
+            {
+              "kind": "say",
+              "text": "For me? Thank you.",
+              "speaker": "eric"
+            },
+            {
+              "kind": "say",
+              "text": "会社のお菓子、もう飽きちゃって。",
+              "speaker": "bun"
+            },
+            {
+              "kind": "action",
+              "text": "She opens the other cake for herself."
+            },
+            {
+              "kind": "say",
+              "text": "I haven't had breakfast. This is very welcome.",
+              "speaker": "eric"
+            },
+            {
+              "kind": "action",
+              "text": "If nobody has pointed out the free seat yet: the passenger nods toward it. The goal becomes “Sit down.”"
+            },
+            {
+              "kind": "action",
+              "text": "You can keep exploring the carriage. Sitting beside Mio starts her conversation."
+            }
+          ],
+          "staging": "Show two small wrapped cakes and stage the offer/acceptance. This is a tiny shared snack, not an inventory reward or food system. The station means the mainland station she has just come from. Do not attach an extra choice or fetch task."
+        },
+        {
+          "id": "train-youth",
+          "kind": "replace",
+          "title": "The goal he keeps looking at",
+          "summary": "He is pleased with his first goal even though his team lost badly.",
+          "titles": [
+            "Current encounter",
+            "Proposed encounter"
+          ],
+          "before": [
+            {
+              "kind": "action",
+              "text": "You speak to this passenger while the train is crossing the bay."
+            },
+            {
+              "kind": "action",
+              "text": "If nobody has pointed out the free seat yet:"
+            },
+            {
+              "kind": "say",
+              "text": "え？あ、あそこ、どうぞ。",
+              "speaker": "youth"
+            },
+            {
+              "kind": "action",
+              "text": "The passenger nods at the empty seat. The goal becomes “Sit down.”"
+            },
+            {
+              "kind": "action",
+              "text": "Otherwise:"
+            },
+            {
+              "kind": "say",
+              "text": "…ん？",
+              "speaker": "youth"
+            },
+            {
+              "kind": "action",
+              "text": "A question-mark emote appears over him."
+            },
+            {
+              "kind": "action",
+              "text": "You can keep exploring the carriage."
+            }
+          ],
+          "after": [
+            {
+              "kind": "action",
+              "text": "You speak to this passenger while the train is crossing the bay."
+            },
+            {
+              "kind": "action",
+              "text": "He turns his phone toward you: a photo of him celebrating on a football pitch, beside the score “IT 1–6 ACCOUNTS”."
+            },
+            {
+              "kind": "say",
+              "text": "昨日の試合。やっと一点取れた。",
+              "speaker": "youth"
+            },
+            {
+              "kind": "say",
+              "text": "That's you in the photo?",
+              "speaker": "eric"
+            },
+            {
+              "kind": "action",
+              "text": "He nods and zooms in on himself."
+            },
+            {
+              "kind": "say",
+              "text": "初めて決めたんだ。",
+              "speaker": "youth"
+            },
+            {
+              "kind": "say",
+              "text": "I'm starting in IT today. I'll try not to make the score any worse.",
+              "speaker": "eric"
+            },
+            {
+              "kind": "action",
+              "text": "If nobody has pointed out the free seat yet: the passenger nods toward it. The goal becomes “Sit down.”"
+            },
+            {
+              "kind": "action",
+              "text": "You can keep exploring the carriage. Sitting beside Mio starts her conversation."
+            }
+          ],
+          "staging": "The phone image must actually show him, the pitch and the readable score. Proposes an informal company football match yesterday, not a new event to attend or a sports minigame. His department is IT outside the already-established B2 team; do not add him to that team. Eric sees the English team label and the score."
+        },
+        {
+          "id": "train-music",
+          "kind": "replace",
+          "title": "He is listening to his own practice",
+          "summary": "The headphones belong to someone trying to get a guitar part right.",
+          "titles": [
+            "Current encounter",
+            "Proposed encounter"
+          ],
+          "before": [
+            {
+              "kind": "action",
+              "text": "You speak to this passenger while the train is crossing the bay."
+            },
+            {
+              "kind": "action",
+              "text": "If nobody has pointed out the free seat yet:"
+            },
+            {
+              "kind": "say",
+              "text": "え？…あっち、空いてる。",
+              "speaker": "music"
+            },
+            {
+              "kind": "action",
+              "text": "The passenger nods at the empty seat. The goal becomes “Sit down.”"
+            },
+            {
+              "kind": "action",
+              "text": "Otherwise:"
+            },
+            {
+              "kind": "action",
+              "text": "A music-note emote appears over him."
+            },
+            {
+              "kind": "action",
+              "text": "You can keep exploring the carriage."
+            }
+          ],
+          "after": [
+            {
+              "kind": "action",
+              "text": "You speak to this passenger while the train is crossing the bay."
+            },
+            {
+              "kind": "action",
+              "text": "He lifts one headphone. You hear a few uneven guitar notes."
+            },
+            {
+              "kind": "say",
+              "text": "あ、ごめん。音、漏れてた？",
+              "speaker": "music"
+            },
+            {
+              "kind": "say",
+              "text": "Only a little.",
+              "speaker": "eric"
+            },
+            {
+              "kind": "say",
+              "text": "昨日、自分で録ったんだ。まだ下手だけど。",
+              "speaker": "music"
+            },
+            {
+              "kind": "action",
+              "text": "He shows the recording on his phone and rewinds the same few seconds."
+            },
+            {
+              "kind": "say",
+              "text": "Oh, that's you playing.",
+              "speaker": "eric"
+            },
+            {
+              "kind": "action",
+              "text": "He nods, a little embarrassed, and puts the headphone back."
+            },
+            {
+              "kind": "action",
+              "text": "If nobody has pointed out the free seat yet: the passenger nods toward it. The goal becomes “Sit down.”"
+            },
+            {
+              "kind": "action",
+              "text": "You can keep exploring the carriage. Sitting beside Mio starts her conversation."
+            }
+          ],
+          "staging": "Stage the headphone lift and a short recognisable guitar practice loop; the phone shows an audio recording, not a streaming service. No new music lesson, band storyline or invitation. Audio is a candidate after the passage is picked, not generated in this review."
+        },
+        {
+          "id": "train-reader",
+          "kind": "replace",
+          "title": "The book and the work computer",
+          "summary": "His new Excel book does not match the old version he has to use at work.",
+          "titles": [
+            "Current encounter",
+            "Proposed encounter"
+          ],
+          "before": [
+            {
+              "kind": "action",
+              "text": "You inspect the passenger while the train is crossing the bay."
+            },
+            {
+              "kind": "narration",
+              "text": "The book is called \"Excel for People Who Hate Excel\"."
+            },
+            {
+              "kind": "action",
+              "text": "You can keep exploring the carriage."
+            }
+          ],
+          "after": [
+            {
+              "kind": "action",
+              "text": "You speak to this passenger while the train is crossing the bay."
+            },
+            {
+              "kind": "narration",
+              "text": "The book is called \"Excel for People Who Hate Excel\"."
+            },
+            {
+              "kind": "action",
+              "text": "He takes a printed spreadsheet screenshot from between its pages and holds it beside a picture in the book. The printout shows a Windows 95 taskbar."
+            },
+            {
+              "kind": "say",
+              "text": "会社のは古くて、同じボタンがないんだよ。",
+              "speaker": "reader"
+            },
+            {
+              "kind": "say",
+              "text": "Windows 95?",
+              "speaker": "eric"
+            },
+            {
+              "kind": "say",
+              "text": "うん。会社の。",
+              "speaker": "reader"
+            },
+            {
+              "kind": "action",
+              "text": "He taps the Amakawa name at the top of the printout, then goes back to comparing the two pages."
+            },
+            {
+              "kind": "say",
+              "text": "I think I'm going to need an older book.",
+              "speaker": "eric"
+            },
+            {
+              "kind": "action",
+              "text": "You can keep exploring the carriage."
+            }
+          ],
+          "staging": "Keep the existing book title, supply a readable close view of the two different interfaces and Amakawa printout. This is an IT support concern in the existing old-systems setting; no new support ticket. Eric can read the product and company names without understanding the full Japanese sentence."
+        },
+        {
+          "id": "train-hamada",
+          "kind": "replace",
+          "title": "Hamada silences his reminder",
+          "summary": "His reminder is working; he has learned to dismiss it in his sleep.",
+          "titles": [
+            "Current encounter",
+            "Proposed encounter"
+          ],
+          "before": [
+            {
+              "kind": "action",
+              "text": "You inspect the passenger while the train is crossing the bay."
+            },
+            {
+              "kind": "narration",
+              "text": "A sticky note on his briefcase says \"12F 9:00!!\""
+            },
+            {
+              "kind": "action",
+              "text": "You can keep exploring the carriage."
+            }
+          ],
+          "after": [
+            {
+              "kind": "action",
+              "text": "You speak to this passenger while the train is crossing the bay."
+            },
+            {
+              "kind": "narration",
+              "text": "A sticky note on his briefcase says \"12F 9:00!!\""
+            },
+            {
+              "kind": "action",
+              "text": "His phone buzzes against the briefcase. Without opening his eyes, he taps it silent."
+            },
+            {
+              "kind": "say",
+              "text": "Excuse me. Was that your alarm?",
+              "speaker": "eric"
+            },
+            {
+              "kind": "action",
+              "text": "He gives a sleepy nod, then settles back against the window."
+            },
+            {
+              "kind": "say",
+              "text": "All right. I'll leave you to it.",
+              "speaker": "eric"
+            },
+            {
+              "kind": "action",
+              "text": "You can keep exploring the carriage."
+            }
+          ],
+          "staging": "Keep Hamada asleep for the existing arrival/rescue beat. Stage the phone buzz, hand movement and half-awake nod; do not display an invented current time or advance the clock. No extra wake-up branch."
+        }
+      ]
+    }
+  ],
+  "translations": {
+    "あ、ごめん、ちょっと待って。": [
+      "A, gomen, chotto matte.",
+      "Oh, sorry, hang on a moment."
+    ],
+    "あ、そこ、空いてますよ。": [
+      "A, soko, aitemasu yo.",
+      "Oh, that seat is free."
+    ],
+    "え？あ、あそこ、どうぞ。": [
+      "E? A, asoko, dōzo.",
+      "Huh? Oh, over there. Go ahead."
+    ],
+    "え？…あっち、空いてる。": [
+      "E? ... Acchi, aiteru.",
+      "Huh? ... There’s a seat over there."
+    ],
+    "だから今日、配属が決まるの！どこでもいいけど、地下はいや。": [
+      "Dakara kyō, haizoku ga kimaru no! Doko demo ii kedo, chika wa iya.",
+      "I told you, they decide my assignment today! Anywhere is fine, but I don’t want the basement."
+    ],
+    "いい天気ですね。": [
+      "Ii tenki desu ne.",
+      "Lovely weather, isn’t it?"
+    ],
+    "…ん？": [
+      "... N?",
+      "... Hmm?"
+    ],
+    "うん、今日決まる。地下だけはやだな。": [
+      "Un, kyō kimaru. Chika dake wa yada na.",
+      "Yes, they decide today. I just don’t want the basement."
+    ],
+    "あ、あなたも新人？": [
+      "A, anata mo shinjin?",
+      "Oh, are you new too?"
+    ],
+    "あっ。……ごめん。": [
+      "A. ... Gomen.",
+      "Oh. ... Sorry."
+    ],
+    "ううん！窓が好きなだけ。": [
+      "Uun! Mado ga suki na dake.",
+      "No! I just like having windows."
+    ],
+    "よかったら、どうぞ。駅で二つ買っちゃって。": [
+      "Yokattara, dōzo. Eki de futatsu kacchatte.",
+      "Have one, if you like. I ended up buying two at the station."
+    ],
+    "会社のお菓子、もう飽きちゃって。": [
+      "Kaisha no okashi, mō akichatte.",
+      "I’ve got tired of the company’s snacks."
+    ],
+    "昨日の試合。やっと一点取れた。": [
+      "Kinō no shiai. Yatto itten toreta.",
+      "This was yesterday’s match. I finally managed to score."
+    ],
+    "初めて決めたんだ。": [
+      "Hajimete kimetan da.",
+      "It was my first goal."
+    ],
+    "あ、ごめん。音、漏れてた？": [
+      "A, gomen. Oto, moreteta?",
+      "Oh, sorry. Could you hear that?"
+    ],
+    "昨日、自分で録ったんだ。まだ下手だけど。": [
+      "Kinō, jibun de tottan da. Mada heta da kedo.",
+      "I recorded it myself yesterday. I’m still pretty bad, though."
+    ],
+    "会社のは古くて、同じボタンがないんだよ。": [
+      "Kaisha no wa furukute, onaji botan ga nai n da yo.",
+      "The version at work is old. It doesn’t have the same buttons."
+    ],
+    "うん。会社の。": [
+      "Un. Kaisha no.",
+      "Yes, that’s the one at work."
+    ]
+  }
+}
