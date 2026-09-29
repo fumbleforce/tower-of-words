@@ -125,20 +125,23 @@ const endingRoutes = [
 
 export default [
   {
-    id: 'office-door-two-knocks',
-    description: 'Mio opens the machine room after the second knock without door magic.',
-    seed: seed('morning', { ...morning }),
-    choices: [],
-    actions: [use('machine_door'), use('machine_door')],
-    expect: { nodes: ['machine_door', 'mio_opens'], flags: { knocked: true, machine_open: true, door_magic: false } },
-  },
-  {
-    id: 'office-door-akete-after-knock',
-    description: 'Use akete during the pause after the first knock, before Mio opens the door.',
+    id: 'office-door-knock',
+    description: 'One knock: Mio comes and opens the machine room and Eric walks in; akete to the open door says so.',
     seed: seed('morning', { ...morning }, { known: ['akete'] }),
     choices: [],
     actions: [use('machine_door'), { type: 'say', word: 'akete', target: 'machine_door' }],
-    expect: { nodes: ['machine_door', 'akete_machine'], flags: { knocked: true, machine_open: true, door_magic: true } },
+    expect: {
+      nodes: ['machine_door', 'mio_opens', 'machine_walk_in', 'akete_open_door'],
+      flags: { knocked: true, machine_open: true, door_magic: false },
+    },
+  },
+  {
+    id: 'office-door-akete',
+    description: 'Open the machine room with akete before knocking; Eric walks in.',
+    seed: seed('morning', { ...morning }, { known: ['akete'] }),
+    choices: [],
+    actions: [{ type: 'say', word: 'akete', target: 'machine_door' }],
+    expect: { nodes: ['akete_machine', 'machine_walk_in'], flags: { knocked: false, machine_open: true, door_magic: true } },
   },
   ...[
     ['small', '“Mine\'s worse. My Japanese, I mean.”', true],

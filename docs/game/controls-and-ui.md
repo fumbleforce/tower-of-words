@@ -14,10 +14,12 @@ Elsewhere: the rules every screen has to meet (no timers, one menu per target, s
 | Say a word | Q (can be rebound in Settings) | The Say button |
 | Say it into the microphone | Hold V, or the mic button at the prompt | The mic button |
 | Move the story on | Click anywhere on the dialogue area, Space or Enter | Tap the dialogue area |
-| Give a drink | The Give button, next to someone | The same |
+| Give a drink | The Give button next to someone, or tap the drink in the Bag | The same |
 | Pause, or close a panel | Esc, or the menu button top right | The menu button |
 | Send feedback (local builds only) | F8, or the note button top right | The note button |
 | Performance numbers on or off | F3, or Settings | Settings |
+
+A click on something he can use walks him there and uses it. If a scene starts on the way (he walks into a room with its own moment), he carries on to it and uses it when the scene ends.
 
 Clicking while the story is busy (a walk, a door) shows that the game is waiting and hurries the scripted move along. Every attempt does something visible.
 
@@ -53,14 +55,14 @@ Every control is introduced the first time it's needed, and ambient people never
 - The speaker's portrait stands beside the box (desktop: large on the left; phone: smaller, above the box, and moved in from the side when needed so the whole picture stays on screen). Eric's shows smaller on the right on his lines, and the listener dims. Narration has no portrait. The faces are in [cast.md](cast.md).
 - The name plate and role sit above the text. Japanese words show with reading and English; taught words can be clicked to hear them.
 - The whole dialogue area moves the story on, including the empty space below the text; "Click to continue" shows for the first few lines. Eric's spoken lines finish before anyone replies (Jørgen, playtest).
-- Choices: the buttons name their object ("Point at the briefcase"). Learning a word is typing it, not clicking a choice.
+- Choices: the buttons name their object ("Point at the briefcase"). Learning a word is typing it, not clicking a choice. On the phone the buttons come up dimmed and take taps only after a moment, so a tap meant for the line before doesn't pick one.
 - Mio's texts show as phone messages on their own dark card.
 - Scroll up or PageUp for the backlog (to build in game3d; it was in the VN).
 
 ## Panels and screens
 
 - People: everyone Eric has met, with their bond step, what they remember and what he has learned about them ([systems.md](systems.md)).
-- Bag: his yen and the drinks he's carrying.
+- Bag: his yen and the drinks he's carrying. With someone in reach, tapping a drink gives it to them; otherwise the panel says to walk up to someone.
 - Words: the words he can say, each with its dictionary form and practice dots, and a note on the -te form ([words.md](words.md)).
 - Title: the train seen from outside at dawn; on Start the camera flies into the car. Continue when there's a save.
 - Pause (Esc): settings, the three save slots (save and Load), back to title. What loading restores: systems.md, Saving.
@@ -68,7 +70,7 @@ Every control is introduced the first time it's needed, and ambient people never
 - Performance numbers (F3 or the Settings switch; kept between visits): a small dark box top right, under the menu button, with the frame rate, average frame time, 1% low, draw calls, triangles, geometries and textures in memory, the JS heap (Chrome only), the place and the graphics tier. It sits under the menus and takes no clicks. How to read the numbers: notes/PERF.md.
 - Feedback (F8 or the note button; Jørgen, 2026-09-29: "just a modal with text field and send, that also takes a screenshot there and then"): a small window with a text field, a thumbnail of the screenshot and Send. The game pauses behind it and no key reaches the game while it's open. The screenshot of the world and the HUD is taken before the window shows. Send saves the text, the screenshot and where the game is (build, place, period, story node, goal, the line on screen, player position, viewport) through tools/review_server.py to notes/feedback-game/<time>/, logs the text in notes/feedback-log/, and says "Sent" with a button back to the game. Ctrl+Enter sends and Esc closes; an unsent text is kept for next time. If the server doesn't answer within 10 seconds the window says so and the player can send again; closing it while it sends gives up on the send, so a stalled server never leaves the game paused. The screenshot shows what is typed in a text field, such as a romaji answer half typed, and the context lists it too. Only on a local address where the server answers; tests and captures leave it out unless the URL has ?feedback.
 - A loading chip between places, if a place takes a moment to build.
-- The end of the day: the places (a frame of each from play), the people met and the words he can use; the story's closing line; back to the title. No quiz and no score.
+- The end of the day: the places (a frame of each from play), the people met and the words he can use; the story's closing line; back to the title, after everything else (it never covers the list). No quiz and no score.
 - The build id shows in a corner (game3d/build.json).
 
 ## Camera

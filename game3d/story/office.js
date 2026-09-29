@@ -53,7 +53,7 @@ export default {
       { if: 'lunch_mio && afternoon_on && !mio_echo', node: 'mio_tomatte_echo' },
       'mio_busy',
     ],
-    'talk:machine_door': [{ if: '!kenji_intro', node: 'kenji_first' }, { if: '!machine_open && knocked', node: 'mio_opens' }, { if: '!machine_open', node: 'machine_door' }, 'noop'],
+    'talk:machine_door': [{ if: '!kenji_intro', node: 'kenji_first' }, { if: '!machine_open && knocked', node: 'mio_opens' }, { if: '!machine_open', node: 'machine_door' }, 'machine_walk_in'],
     'zone:machine_room': { if: 'machine_open', node: 'machine_in', once: true },
     'talk:my_chair': [{ if: '!chair_back && found_chair', node: 'chair_push' }, 'noop'],
     'talk:copier': [{ if: 'got_ticket && !copier_done', node: 'copier' }, 'copier_look'],
@@ -83,7 +83,7 @@ export default {
     'say:ohayo:tama': 'tama_ohayo',
 
     // commands
-    'say:akete:machine_door': [{ if: '!machine_open', node: 'akete_machine' }, 'noop'],
+    'say:akete:machine_door': [{ if: '!machine_open', node: 'akete_machine' }, 'akete_open_door'],
     'say:ugoite:copier': [{ if: 'got_ticket && !copier_done', node: 'copier' }, 'ugoite_copier_again'],
     'say:ugoite:vending': [{ if: 'vend_stuck', node: 'vend_ugoite' }, 'vend_ugoite_idle'],
     'say:ugoite:coffee_machine': { node: 'ugoite_coffee', once: true },
@@ -100,7 +100,8 @@ export default {
     'give:*:kenji': [{ if: 'gifted_kenji', node: 'gift_again', keep: true }, 'gift_kenji_other'],
   },
 
-  show: { mori: '!greeted_mori', mio: '(chair_back && !got_ticket) || (copier_done && !ticket_closed) || evening_on' },
+  // afternoon: both can be talked to and given a drink (cold playtest 2026-09-30: the soup for Mori had no way to him)
+  show: { mori: '!greeted_mori || afternoon_on', mio: '(chair_back && !got_ticket) || (copier_done && !ticket_closed) || afternoon_on' },
   goal: {
     mio: '(chair_back && !got_ticket) || (copier_done && !ticket_closed)',
     mori: '!greeted_mori',
@@ -228,15 +229,23 @@ export default {
     greet_again_kenji: [{ do: 'emote', who: 'kenji', kind: '♪' }],
     sumimasen_kenji: [{ say: 'kenji', emo: 'curious', text: 'え、何？大丈夫？', overheard: true }, { do: 'emote', who: 'kenji', kind: '?' }],
 
+    // one knock: she comes to the door, opens it, and he goes in (cold playtest 2026-09-30: she said she was coming
+    // and never came, and nothing showed the way in)
     machine_door: [
       { say: 'mio', emo: 'shout', text: "Mm, one minute!" },
       { set: 'knocked' },
+      { call: 'mio_opens' },
     ],
     mio_opens: [
+      { do: 'walk', who: 'mio', to: [4.45, -0.55] }, // just inside the door, clear of its leaf
       { do: 'machineDoor', state: 'open' },
       { say: 'mio', emo: 'hurried', text: "Okay, okay, I'm coming... Come in, but don't touch anything, okay? Especially the cables." },
       { set: 'machine_open' },
+      { do: 'walk', who: 'mio', to: 'racks', wait: false },
+      { call: 'machine_walk_in' },
     ],
+    machine_walk_in: [{ do: 'walk', who: 'eric', to: [5.0, -1.2] }], // a few steps into the machine room
+    akete_open_door: ['> The door is already open.'],
     akete_machine: [
       { do: 'machineDoor', state: 'open' },
       { do: 'kotodama', target: 'machine_door' },
@@ -244,6 +253,7 @@ export default {
       { say: 'mio', face: 'deadpan', emo: 'deadpan', text: "...That door has a card reader, you know." },
       { set: 'machine_open' },
       { set: 'door_magic' },
+      { call: 'machine_walk_in' },
     ],
     machine_in: [
       { set: 'found_chair' },

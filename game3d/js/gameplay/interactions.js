@@ -55,6 +55,20 @@ export function installInteractions(game) {
     }
   }
   game.use = (item) => use(item);
+  // a scene that starts while he walks to something he clicked (a zone he crossed, a queued event) stops that walk: he
+  // carries on to it and uses it once the scenes are over (cold playtest 2026-09-30: Mio needed an extra E)
+  let cutUse = null;
+  const beat = game.beat;
+  game.beat = async function (fn) {
+    if (this.busy || this.runner?.recoveryError) return beat.call(this, fn);
+    if (this.walker.arrive?.use) cutUse = this.walker.arrive.use;
+    const place = this.place;
+    await beat.call(this, fn);
+    if (!cutUse || this.busy) return; // a queued scene carries it on
+    const u = cutUse;
+    cutUse = null;
+    if (this.place === place && !this.walker.path && this.markers.list.includes(u) && u.enabled()) use(u);
+  };
   // get Eric out of his seat (a tap on the floor or on something out of reach does this)
   function standUp() {
     const pl = game.player;
@@ -94,6 +108,7 @@ export function installInteractions(game) {
     // while Eric is saying a word (its practice prompt, his voice, the answer) a tap on anything else is ignored, so
     // the word is never lost to a new talk; saying is cleared in sayWord's finally, so this can't stick
     if (!item || game.busy || game.saying) return;
+    cutUse = null;
     if (held() && item.id !== game.hold) {
       holdNudge();
       return;
@@ -104,6 +119,7 @@ export function installInteractions(game) {
       if (item.face) game.walker.faceTo(...item.face());
       talk(item);
     };
+    go.use = item; // the beat wrapper above sends him on to it if a scene cuts this walk
     const sp = approachSpot(game, item) || (item.spot ? item.spot() : null);
     // seated: he talks from his seat to what's within reach; for anything further he stands up and walks over
     if (game.player.seated) {
@@ -194,18 +210,40 @@ export function installInteractions(game) {
   game.sayWord = sayWord;
   ui.peopleHTML = peopleHTML;
   ui.items = ITEMS;
-  async function give() {
+  // the person in reach who can be given something (the Give button and the bag both use it)
+  function giveTarget() {
+    const t = game.sayTarget;
+    return t && game.place.people[t.id] && /person/.test(t.kind || '') ? t : null;
+  }
+  async function give(picked) {
     if (game.busy || !sim.inv.length || !game.sayTarget) return;
     const target = game.sayTarget;
-    const item = await ui.giveMenu(target.label, sim.inv, ITEMS);
-    if (!item) return;
+    const item = picked || (await ui.giveMenu(target.label, sim.inv, ITEMS));
+    if (!item || !sim.inv.includes(item)) return;
     // a refusal (keep: true on the trigger entry, e.g. a second gift) runs its lines but leaves the item in the bag
     if (giveItem({ runner: game.runner, flags, take }, item, target.id)) return;
     game.beat(() =>
       ui.say(null, `${target.label} doesn't seem to want the ${ITEMS[item].name.toLowerCase()}. You keep it.`),
     );
   }
-  ui.onGive = give;
+  ui.onGive = () => give();
+  // the Bag: a click on a drink gives it to the person in reach (cold playtest 2026-09-30: nothing in it could be clicked)
+  const bag = globalThis.document?.getElementById('bagPanel');
+  const note = bag?.querySelector('.yen').insertAdjacentElement('afterend', document.createElement('p'));
+  if (note) note.className = 'to';
+  globalThis.document?.getElementById('bagBtn')?.addEventListener('click', () => {
+    const to = !game.busy && giveTarget();
+    const verb = document.body.classList.contains('phone') ? 'Tap' : 'Click';
+    note.textContent = to ? `${verb} a drink to give it to ${to.label}.` : 'Walk up to someone to give them something.';
+    bag.classList.toggle('can-give', !!to);
+  });
+  bag?.querySelector('ul').addEventListener('click', (e) => {
+    const li = e.target.closest('li');
+    const item = li && sim.inv[[...li.parentNode.children].indexOf(li)];
+    if (!item || !bag.classList.contains('can-give') || !giveTarget()) return;
+    bag.hidden = true;
+    give(item);
+  });
   game.sim = sim;
   // a small moment when a bond steps up (sim.js fires amakawa:bondstep); meeting someone (0 to 1) stays quiet
   window.addEventListener('amakawa:bondstep', (e) => {

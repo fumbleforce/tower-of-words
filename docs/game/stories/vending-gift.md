@@ -8,7 +8,7 @@ The afternoon's small social move: buy a drink at the B2 vending machine and giv
 
 ## Beats
 
-1. After lunch Mio mentions that Mori drinks corn soup, from a can, every afternoon. A hint says to buy a drink by the lift and press Give next to someone ([systems.md](../systems.md), Gifts).
+1. After lunch Mio mentions that Mori drinks corn soup, from a can, every afternoon. A hint says to buy a drink by the lift and press Give next to someone ([systems.md](../systems.md), Gifts). All afternoon Mio (at Emi's desk) and Mori (at his desk) can be talked to and given a drink.
 2. The first coin goes in and nothing comes out; a side goal says the machine is stuck, and it takes no new order. 動いて shakes the drink loose (Eric: "Thanks."). After that it works normally.
 3. Giving:
    - Mio and a black coffee: "Oh, black. Nice, thank you." She drinks half without looking away from her screen. Anything else is "a bit sweet for me".

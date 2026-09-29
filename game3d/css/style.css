@@ -229,6 +229,8 @@ body.phone #talk.in { animation: riseP .22s ease; }
 @keyframes riseP { from { transform: translateY(10px); opacity: 0; } }
 body.phone #talk .line { font-size: 18px; }
 body.phone .chip { flex: 1 1 100%; justify-content: flex-start; }
+body.phone #talk .chips .chip { transition: opacity .2s; }
+body.phone #talk .chips.arming .chip { opacity: .45; }
 body.phone #board { top: 58px; }
 body.phone #board .led { font-size: 16px; white-space: normal; max-width: calc(100vw - 32px); text-align: center; }
 body.phone #hint { white-space: normal; text-align: center; width: max-content; max-width: calc(100vw - 32px); bottom: 56px; }
@@ -268,6 +270,10 @@ body.phone #end ul.w { grid-template-columns: 1fr; }
 #peoplePanel .none { color: var(--ink-dim); }
 #bagPanel .yen { color: var(--ink-dim); margin: 0 0 8px; }
 #bagPanel li { padding: 8px 0; border-top: 1px solid rgba(255,255,255,.06); }
+#bagPanel.can-give li { display: flex; justify-content: space-between; align-items: center; cursor: pointer; }
+#bagPanel.can-give li::after { content: "Give"; color: var(--accent); font-weight: 700; font-size: 14px; }
+#bagPanel.can-give li:hover { color: var(--accent); }
+#bagPanel .to { margin: 0 0 8px; font-size: 14px; color: var(--ink-dim); }
 #giveBtn { position: absolute; right: 100px; bottom: 66px; display: flex; flex-direction: column; align-items: center; justify-content: center; width: 60px; height: 60px; border-radius: 50%; border: 2px solid rgba(255, 201, 168, .5); background: #2e2622; color: var(--ink); cursor: pointer; }
 #giveBtn[hidden] { display: none; }
 #giveBtn .t { font-weight: 700; font-size: 14px; color: var(--jp); }
@@ -396,6 +402,10 @@ body.phone #sayTip { left: 50%; right: auto; top: 96px; bottom: auto; }
 #sayMenu .list { gap: 6px; }
 #sayMenu { width: min(320px, calc(100vw - 32px)); padding: 12px; background: rgba(22, 25, 32, .96); }
 #sayMenu .list { max-height: min(60vh, 420px); overflow: auto; }
+/* desktop: tall enough for every word he has on day 1, up to under the HUD (cold playtest 2026-09-30: at 1366 x 860
+   the 7th word sat hidden under "Never mind", and よろしくおねがいします was cut short) */
+body:not(.phone) #sayMenu { width: min(360px, calc(100vw - 32px)); }
+body:not(.phone) #sayMenu .list { max-height: calc((100vh - 230px) / var(--ui, 1)); }
 #cmdsPanel li { grid-template-columns: 26px auto 1fr; align-items: center; }
 #cmdsPanel li .wi { grid-row: span 2; }
 #cmdsPanel li .jp { font-size: 19px; }
@@ -811,10 +821,11 @@ body.phone #toast { top: auto; bottom: calc(96px + env(safe-area-inset-bottom));
 #loadchip .lt { color: var(--ink-dim); font-weight: 500; }
 body.loadwait canvas#c { filter: brightness(.7) saturate(.85); transition: filter .4s; }
 
-/* end of day: a solid ground, the button always in view, gutters on the phone */
+/* end of day: a solid ground, gutters on the phone. The footer sits after the content, never over it (cold playtest
+   2026-09-30: the sticky footer hid the commands and the repair request) */
 #end { background: #10141e; padding-bottom: 0; }
 #end .card { padding-bottom: 0; }
-#end footer { position: sticky; bottom: 0; margin-top: 28px; padding: 18px 0 22px; background: linear-gradient(to top, #10141e 70%, rgba(16, 20, 30, 0)); }
+#end footer { position: static; margin-top: 28px; padding: 18px 0 22px; background: none; }
 #end .people li { grid-template-columns: 48px 1fr; padding: 6px 0; }
 #end .people { grid-template-columns: 1fr 1fr; column-gap: 20px; }
 #end .face { width: 48px; height: 48px; }
@@ -973,7 +984,6 @@ body.phone #goal2 { left: 10px; top: 104px; }
 /* QA 30: the end screen: the scene fades out first; the footer never covers the list on phone; the day-2 ticket */
 body.ending canvas, body.ended canvas { filter: brightness(.18) saturate(.6); transition: filter .7s ease; }
 #end { background: rgba(14, 17, 23, .94); }
-body.phone #end footer { position: static; background: none; }
 #end .ticket { margin-top: 30px; padding: 16px 18px; border-radius: 12px; background: #eef1f5; color: #1f2430; border-left: 6px solid var(--accent); max-width: 460px; }
 #end .ticket .tno { margin: 0 0 4px; font: 700 12px/1 var(--font); letter-spacing: .08em; text-transform: uppercase; color: #5a6475; }
 #end .ticket .ttl { margin: 0 0 8px; font: 700 19px/1.3 var(--font); }

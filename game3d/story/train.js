@@ -117,7 +117,8 @@ export default {
     ],
     bun: [{ say: 'bun', overheard: true, emo: 'polite', text: 'いい天気ですね。' }],
     youth: [{ say: 'youth', overheard: true, emo: 'casual', text: '…ん？' }, { do: 'emote', who: 'youth', kind: '?' }],
-    music: [{ do: 'emote', who: 'music', kind: '♪' }],
+    // the ♪ alone read as no answer at all (cold playtest 2026-09-30)
+    music: [{ do: 'emote', who: 'music', kind: '♪' }, "> Her music is too loud. She doesn't hear you."],
     stander: [{ do: 'emote', who: 'stander', kind: '…' }],
     ohayo_bun: [{ say: 'bun', overheard: true, emo: 'warm', text: 'はい、{ohayo}。' }],
     ohayo_youth: [{ say: 'youth', overheard: true, emo: 'casual', text: 'あ、ども。' }],
