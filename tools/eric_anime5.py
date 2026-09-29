@@ -13,7 +13,7 @@ front light; body turned slightly, face to the viewer; hands empty and relaxed, 
 
 Usage: ~/ai/sd/venv/bin/python tools/eric_anime5.py [ids]   (needs the GPU lock with owner eric-anime5 and ComfyUI on :8188)
        ~/ai/sd/venv/bin/python tools/eric_anime5.py sheet
-Raw PNGs: art/production/PC/eric-anime5/ (gitignored); webp copies for review: game3d/assets/portrait-candidates/eric-anime5/"""
+Raw PNGs: art/production/PC/eric-anime5/ (gitignored); webp copies for review: art/candidates/portraits/eric-anime5/"""
 import sys, os, json
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from PIL import Image, ImageDraw, ImageFont
@@ -24,7 +24,7 @@ from eric_anime4 import HAIR, NEG2
 
 OWNER = 'eric-anime5'
 RAW = os.path.join(OUT, 'PC', 'eric-anime5')
-WEB = os.path.join(ROOT, 'game3d', 'assets', 'portrait-candidates', 'eric-anime5')
+WEB = os.path.join(ROOT, 'art', 'candidates', 'portraits', 'eric-anime5')
 LOG = os.path.join(WEB, 'log.json')
 POSES = {
     'r1': 'standing relaxed with his arms at his sides, slight three-quarter turn, looking at the viewer',
@@ -87,7 +87,7 @@ def sheet():
             x, y = c * tw, r * (th + 40)
             S.paste(Image.open(path).convert('RGB').resize((tw, th), Image.LANCZOS), (x, y))
             d.text((x + 8, y + th + 8), f'{name}  red {pct:.2f}%', fill=(20, 20, 20), font=font)
-    S.save(os.path.join(ROOT, 'game3d', 'assets', 'portrait-candidates', 'eric-anime5-sheet.png'))
+    S.save(os.path.join(ROOT, 'art', 'candidates', 'portraits', 'eric-anime5-sheet.png'))
 
 
 if __name__ == '__main__':

@@ -2,7 +2,7 @@
 so each clip file is a few hundred KB instead of 4.5 MB. Mesh, skin and animation data are copied unchanged.
 Usage: python3 game3d/tools/slim_glb.py"""
 import json, struct, os
-SRC = 'legacy/side/flat/meshy2/Meshy_AI_Neon_Bun_Guardian_biped/Meshy_AI_Neon_Bun_Guardian_biped_Animation_{}_withSkin.glb'
+SRC = 'art/approved/mio/meshy/Meshy_AI_Neon_Bun_Guardian_biped_Animation_{}_withSkin.glb'
 OUT = 'game3d/assets/mio/{}.glb'
 import sys
 CLIPS = {'Walking': 'walk', 'Running': 'run', 'Chair_Sit_Idle_F': 'sit', 'Step_to_Sit_Transition': 'tosit'}

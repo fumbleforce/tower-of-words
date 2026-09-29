@@ -7,7 +7,7 @@ To post a review item, write `reviews/<id>/review.json` as in Adding an item bel
 ## Adding an item
 
 1. Pick an id: lower case, digits and hyphens, unique (`kenji-concept`, `style-rough-2`). A new round is a new id, not an edit of the old one; mark the old one `superseded`.
-2. Put the candidates anywhere in the repo (usually next to the work, e.g. `game3d/assets/portrait-candidates/`). Paths in review.json are relative to the repo root. Show every attempt, including the ones you'd reject (GUIDE, Show every attempt). Animations and 3D models go up as a live viewer he can play and rotate, linked under `links`, not as stills or frame sheets (Jørgen, 2026-09-29: "i need to be able to see the live animation, not pictures of animation").
+2. Put the candidates anywhere in the repo (usually next to the work, e.g. `art/candidates/portraits/`). Paths in review.json are relative to the repo root. Show every attempt, including the ones you'd reject (GUIDE, Show every attempt). Animations and 3D models go up as a live viewer he can play and rotate, linked under `links`, not as stills or frame sheets (Jørgen, 2026-09-29: "i need to be able to see the live animation, not pictures of animation").
 3. Write `reviews/<id>/review.json`:
 
 ```json
@@ -19,7 +19,7 @@ To post a review item, write `reviews/<id>/review.json` as in Adding an item bel
  "question": "Which direction is Kenji? One plain question, the way you'd ask it out loud.",
  "multi": true,
  "media": [
-  {"image": "game3d/assets/portrait-candidates/kenji-concept-sheet.png", "caption": "The whole round"},
+  {"image": "art/candidates/portraits/kenji-concept-sheet.png", "caption": "The whole round"},
   {"audio": "tools/voice-refs/eric-voice.wav", "caption": "Optional"}
  ],
  "options": [

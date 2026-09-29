@@ -1,6 +1,6 @@
 {
  "p3h1-909": {
-  "file": "game3d/assets/portrait-candidates/eric-anime4/eric-p3h1-909.webp",
+  "file": "art/candidates/portraits/eric-anime4/eric-p3h1-909.webp",
   "what": "p3 with the hair words \"dark-blond hair, same colour all over, tied in a short ponytail at the back\"",
   "model": "rdbtAnima",
   "seed": 909,
@@ -10,7 +10,7 @@
   "red_rim_pct": 0.19
  },
  "p3h1-2909": {
-  "file": "game3d/assets/portrait-candidates/eric-anime4/eric-p3h1-2909.webp",
+  "file": "art/candidates/portraits/eric-anime4/eric-p3h1-2909.webp",
   "what": "p3 with the hair words \"dark-blond hair, same colour all over, tied in a short ponytail at the back\"",
   "model": "rdbtAnima",
   "seed": 2909,
@@ -20,7 +20,7 @@
   "red_rim_pct": 0.6
  },
  "p3h1-3909": {
-  "file": "game3d/assets/portrait-candidates/eric-anime4/eric-p3h1-3909.webp",
+  "file": "art/candidates/portraits/eric-anime4/eric-p3h1-3909.webp",
   "what": "p3 with the hair words \"dark-blond hair, same colour all over, tied in a short ponytail at the back\"",
   "model": "rdbtAnima",
   "seed": 3909,
@@ -30,7 +30,7 @@
   "red_rim_pct": 0.38
  },
  "p3h2-909": {
-  "file": "game3d/assets/portrait-candidates/eric-anime4/eric-p3h2-909.webp",
+  "file": "art/candidates/portraits/eric-anime4/eric-p3h2-909.webp",
   "what": "p3h1 plus the negative \"undercut, shaved sides, two-tone hair\"",
   "model": "rdbtAnima",
   "seed": 909,
@@ -40,7 +40,7 @@
   "red_rim_pct": 0.07
  },
  "p3h2-2909": {
-  "file": "game3d/assets/portrait-candidates/eric-anime4/eric-p3h2-2909.webp",
+  "file": "art/candidates/portraits/eric-anime4/eric-p3h2-2909.webp",
   "what": "p3h1 plus the negative \"undercut, shaved sides, two-tone hair\"",
   "model": "rdbtAnima",
   "seed": 2909,
@@ -50,7 +50,7 @@
   "red_rim_pct": 0.2
  },
  "p3h2-3909": {
-  "file": "game3d/assets/portrait-candidates/eric-anime4/eric-p3h2-3909.webp",
+  "file": "art/candidates/portraits/eric-anime4/eric-p3h2-3909.webp",
   "what": "p3h1 plus the negative \"undercut, shaved sides, two-tone hair\"",
   "model": "rdbtAnima",
   "seed": 3909,
@@ -60,7 +60,7 @@
   "red_rim_pct": 0.77
  },
  "p6h1-1909": {
-  "file": "game3d/assets/portrait-candidates/eric-anime4/eric-p6h1-1909.webp",
+  "file": "art/candidates/portraits/eric-anime4/eric-p6h1-1909.webp",
   "what": "p6 with the hair words \"dark-blond hair, same colour all over, tied in a short ponytail at the back\"",
   "model": "rdbtAnima",
   "seed": 1909,
@@ -70,7 +70,7 @@
   "red_rim_pct": 0.01
  },
  "p6h1-2909": {
-  "file": "game3d/assets/portrait-candidates/eric-anime4/eric-p6h1-2909.webp",
+  "file": "art/candidates/portraits/eric-anime4/eric-p6h1-2909.webp",
   "what": "p6 with the hair words \"dark-blond hair, same colour all over, tied in a short ponytail at the back\"",
   "model": "rdbtAnima",
   "seed": 2909,
@@ -80,7 +80,7 @@
   "red_rim_pct": 0.02
  },
  "p6h1-3909": {
-  "file": "game3d/assets/portrait-candidates/eric-anime4/eric-p6h1-3909.webp",
+  "file": "art/candidates/portraits/eric-anime4/eric-p6h1-3909.webp",
   "what": "p6 with the hair words \"dark-blond hair, same colour all over, tied in a short ponytail at the back\"",
   "model": "rdbtAnima",
   "seed": 3909,
@@ -90,7 +90,7 @@
   "red_rim_pct": 0.09
  },
  "p6h2-1909": {
-  "file": "game3d/assets/portrait-candidates/eric-anime4/eric-p6h2-1909.webp",
+  "file": "art/candidates/portraits/eric-anime4/eric-p6h2-1909.webp",
   "what": "p6h1 plus the negative \"undercut, shaved sides, two-tone hair\"",
   "model": "rdbtAnima",
   "seed": 1909,
@@ -100,7 +100,7 @@
   "red_rim_pct": 0.31
  },
  "p6h2-2909": {
-  "file": "game3d/assets/portrait-candidates/eric-anime4/eric-p6h2-2909.webp",
+  "file": "art/candidates/portraits/eric-anime4/eric-p6h2-2909.webp",
   "what": "p6h1 plus the negative \"undercut, shaved sides, two-tone hair\"",
   "model": "rdbtAnima",
   "seed": 2909,
@@ -110,7 +110,7 @@
   "red_rim_pct": 0.0
  },
  "p6h2-3909": {
-  "file": "game3d/assets/portrait-candidates/eric-anime4/eric-p6h2-3909.webp",
+  "file": "art/candidates/portraits/eric-anime4/eric-p6h2-3909.webp",
   "what": "p6h1 plus the negative \"undercut, shaved sides, two-tone hair\"",
   "model": "rdbtAnima",
   "seed": 3909,
@@ -120,7 +120,7 @@
   "red_rim_pct": 0.03
  },
  "p3m45-4909": {
-  "file": "game3d/assets/portrait-candidates/eric-anime4/eric-p3m45-4909.webp",
+  "file": "art/candidates/portraits/eric-anime4/eric-p3m45-4909.webp",
   "what": "p3 from round 3 with only the side hair repainted (mask, denoise 0.45, Anima LLLite inpainting) using the h2 words",
   "model": "rdbtAnima",
   "seed": 4909,
@@ -132,7 +132,7 @@
   "mask": "art/production/PC/eric-anime4/mask-p3.png"
  },
  "p3m45-5909": {
-  "file": "game3d/assets/portrait-candidates/eric-anime4/eric-p3m45-5909.webp",
+  "file": "art/candidates/portraits/eric-anime4/eric-p3m45-5909.webp",
   "what": "p3 from round 3 with only the side hair repainted (mask, denoise 0.45, Anima LLLite inpainting) using the h2 words",
   "model": "rdbtAnima",
   "seed": 5909,
@@ -144,7 +144,7 @@
   "mask": "art/production/PC/eric-anime4/mask-p3.png"
  },
  "p6m45-4909": {
-  "file": "game3d/assets/portrait-candidates/eric-anime4/eric-p6m45-4909.webp",
+  "file": "art/candidates/portraits/eric-anime4/eric-p6m45-4909.webp",
   "what": "p6 from round 3 with only the side hair repainted (mask, denoise 0.45, Anima LLLite inpainting) using the h2 words",
   "model": "rdbtAnima",
   "seed": 4909,
@@ -156,7 +156,7 @@
   "mask": "art/production/PC/eric-anime4/mask-p6.png"
  },
  "p6m45-5909": {
-  "file": "game3d/assets/portrait-candidates/eric-anime4/eric-p6m45-5909.webp",
+  "file": "art/candidates/portraits/eric-anime4/eric-p6m45-5909.webp",
   "what": "p6 from round 3 with only the side hair repainted (mask, denoise 0.45, Anima LLLite inpainting) using the h2 words",
   "model": "rdbtAnima",
   "seed": 5909,
@@ -168,7 +168,7 @@
   "mask": "art/production/PC/eric-anime4/mask-p6.png"
  },
  "p3m60-4909": {
-  "file": "game3d/assets/portrait-candidates/eric-anime4/eric-p3m60-4909.webp",
+  "file": "art/candidates/portraits/eric-anime4/eric-p3m60-4909.webp",
   "what": "p3 from round 3 with only the side hair repainted (mask, denoise 0.6, Anima LLLite inpainting) using the h2 words",
   "model": "rdbtAnima",
   "seed": 4909,
@@ -180,7 +180,7 @@
   "mask": "art/production/PC/eric-anime4/mask-p3.png"
  },
  "p3m60-5909": {
-  "file": "game3d/assets/portrait-candidates/eric-anime4/eric-p3m60-5909.webp",
+  "file": "art/candidates/portraits/eric-anime4/eric-p3m60-5909.webp",
   "what": "p3 from round 3 with only the side hair repainted (mask, denoise 0.6, Anima LLLite inpainting) using the h2 words",
   "model": "rdbtAnima",
   "seed": 5909,
@@ -192,7 +192,7 @@
   "mask": "art/production/PC/eric-anime4/mask-p3.png"
  },
  "p6m60-4909": {
-  "file": "game3d/assets/portrait-candidates/eric-anime4/eric-p6m60-4909.webp",
+  "file": "art/candidates/portraits/eric-anime4/eric-p6m60-4909.webp",
   "what": "p6 from round 3 with only the side hair repainted (mask, denoise 0.6, Anima LLLite inpainting) using the h2 words",
   "model": "rdbtAnima",
   "seed": 4909,
@@ -204,7 +204,7 @@
   "mask": "art/production/PC/eric-anime4/mask-p6.png"
  },
  "p6m60-5909": {
-  "file": "game3d/assets/portrait-candidates/eric-anime4/eric-p6m60-5909.webp",
+  "file": "art/candidates/portraits/eric-anime4/eric-p6m60-5909.webp",
   "what": "p6 from round 3 with only the side hair repainted (mask, denoise 0.6, Anima LLLite inpainting) using the h2 words",
   "model": "rdbtAnima",
   "seed": 5909,
@@ -216,7 +216,7 @@
   "mask": "art/production/PC/eric-anime4/mask-p6.png"
  },
  "p3m75-4909": {
-  "file": "game3d/assets/portrait-candidates/eric-anime4/eric-p3m75-4909.webp",
+  "file": "art/candidates/portraits/eric-anime4/eric-p3m75-4909.webp",
   "what": "p3 from round 3 with only the side hair repainted (mask, denoise 0.75, Anima LLLite inpainting) using the h2 words",
   "model": "rdbtAnima",
   "seed": 4909,
@@ -228,7 +228,7 @@
   "mask": "art/production/PC/eric-anime4/mask-p3.png"
  },
  "p3m75-5909": {
-  "file": "game3d/assets/portrait-candidates/eric-anime4/eric-p3m75-5909.webp",
+  "file": "art/candidates/portraits/eric-anime4/eric-p3m75-5909.webp",
   "what": "p3 from round 3 with only the side hair repainted (mask, denoise 0.75, Anima LLLite inpainting) using the h2 words",
   "model": "rdbtAnima",
   "seed": 5909,
@@ -240,7 +240,7 @@
   "mask": "art/production/PC/eric-anime4/mask-p3.png"
  },
  "p6m75-4909": {
-  "file": "game3d/assets/portrait-candidates/eric-anime4/eric-p6m75-4909.webp",
+  "file": "art/candidates/portraits/eric-anime4/eric-p6m75-4909.webp",
   "what": "p6 from round 3 with only the side hair repainted (mask, denoise 0.75, Anima LLLite inpainting) using the h2 words",
   "model": "rdbtAnima",
   "seed": 4909,
@@ -252,7 +252,7 @@
   "mask": "art/production/PC/eric-anime4/mask-p6.png"
  },
  "p6m75-5909": {
-  "file": "game3d/assets/portrait-candidates/eric-anime4/eric-p6m75-5909.webp",
+  "file": "art/candidates/portraits/eric-anime4/eric-p6m75-5909.webp",
   "what": "p6 from round 3 with only the side hair repainted (mask, denoise 0.75, Anima LLLite inpainting) using the h2 words",
   "model": "rdbtAnima",
   "seed": 5909,
@@ -264,7 +264,7 @@
   "mask": "art/production/PC/eric-anime4/mask-p6.png"
  },
  "p3m60n-4909": {
-  "file": "game3d/assets/portrait-candidates/eric-anime4/eric-p3m60n-4909.webp",
+  "file": "art/candidates/portraits/eric-anime4/eric-p3m60n-4909.webp",
   "what": "p3 from round 3 with only the side hair repainted (mask, denoise 0.6, no inpainting patch) using the h2 words",
   "model": "rdbtAnima",
   "seed": 4909,
@@ -276,7 +276,7 @@
   "mask": "art/production/PC/eric-anime4/mask-p3.png"
  },
  "p3m60n-5909": {
-  "file": "game3d/assets/portrait-candidates/eric-anime4/eric-p3m60n-5909.webp",
+  "file": "art/candidates/portraits/eric-anime4/eric-p3m60n-5909.webp",
   "what": "p3 from round 3 with only the side hair repainted (mask, denoise 0.6, no inpainting patch) using the h2 words",
   "model": "rdbtAnima",
   "seed": 5909,
@@ -288,7 +288,7 @@
   "mask": "art/production/PC/eric-anime4/mask-p3.png"
  },
  "p6m60n-4909": {
-  "file": "game3d/assets/portrait-candidates/eric-anime4/eric-p6m60n-4909.webp",
+  "file": "art/candidates/portraits/eric-anime4/eric-p6m60n-4909.webp",
   "what": "p6 from round 3 with only the side hair repainted (mask, denoise 0.6, no inpainting patch) using the h2 words",
   "model": "rdbtAnima",
   "seed": 4909,
@@ -300,7 +300,7 @@
   "mask": "art/production/PC/eric-anime4/mask-p6.png"
  },
  "p6m60n-5909": {
-  "file": "game3d/assets/portrait-candidates/eric-anime4/eric-p6m60n-5909.webp",
+  "file": "art/candidates/portraits/eric-anime4/eric-p6m60n-5909.webp",
   "what": "p6 from round 3 with only the side hair repainted (mask, denoise 0.6, no inpainting patch) using the h2 words",
   "model": "rdbtAnima",
   "seed": 5909,

@@ -1,6 +1,6 @@
 {
  "r1-909": {
-  "file": "game3d/assets/portrait-candidates/eric-anime5/eric-r1-909.webp",
+  "file": "art/candidates/portraits/eric-anime5/eric-r1-909.webp",
   "what": "round 4 h2 with the pose words \"standing relaxed with his arms at his sides, slight three-quarter turn, looking at the viewer\"",
   "model": "rdbtAnima",
   "seed": 909,
@@ -10,7 +10,7 @@
   "red_rim_pct": 0.01
  },
  "r1-3909": {
-  "file": "game3d/assets/portrait-candidates/eric-anime5/eric-r1-3909.webp",
+  "file": "art/candidates/portraits/eric-anime5/eric-r1-3909.webp",
   "what": "round 4 h2 with the pose words \"standing relaxed with his arms at his sides, slight three-quarter turn, looking at the viewer\"",
   "model": "rdbtAnima",
   "seed": 3909,
@@ -20,7 +20,7 @@
   "red_rim_pct": 0.26
  },
  "r1-5909": {
-  "file": "game3d/assets/portrait-candidates/eric-anime5/eric-r1-5909.webp",
+  "file": "art/candidates/portraits/eric-anime5/eric-r1-5909.webp",
   "what": "round 4 h2 with the pose words \"standing relaxed with his arms at his sides, slight three-quarter turn, looking at the viewer\"",
   "model": "rdbtAnima",
   "seed": 5909,
@@ -30,7 +30,7 @@
   "red_rim_pct": 0.08
  },
  "r1-6909": {
-  "file": "game3d/assets/portrait-candidates/eric-anime5/eric-r1-6909.webp",
+  "file": "art/candidates/portraits/eric-anime5/eric-r1-6909.webp",
   "what": "round 4 h2 with the pose words \"standing relaxed with his arms at his sides, slight three-quarter turn, looking at the viewer\"",
   "model": "rdbtAnima",
   "seed": 6909,
@@ -40,7 +40,7 @@
   "red_rim_pct": 0.01
  },
  "r1-7909": {
-  "file": "game3d/assets/portrait-candidates/eric-anime5/eric-r1-7909.webp",
+  "file": "art/candidates/portraits/eric-anime5/eric-r1-7909.webp",
   "what": "round 4 h2 with the pose words \"standing relaxed with his arms at his sides, slight three-quarter turn, looking at the viewer\"",
   "model": "rdbtAnima",
   "seed": 7909,
@@ -50,7 +50,7 @@
   "red_rim_pct": 0.14
  },
  "r1-8909": {
-  "file": "game3d/assets/portrait-candidates/eric-anime5/eric-r1-8909.webp",
+  "file": "art/candidates/portraits/eric-anime5/eric-r1-8909.webp",
   "what": "round 4 h2 with the pose words \"standing relaxed with his arms at his sides, slight three-quarter turn, looking at the viewer\"",
   "model": "rdbtAnima",
   "seed": 8909,
@@ -60,7 +60,7 @@
   "red_rim_pct": 0.18
  },
  "r2-909": {
-  "file": "game3d/assets/portrait-candidates/eric-anime5/eric-r2-909.webp",
+  "file": "art/candidates/portraits/eric-anime5/eric-r2-909.webp",
   "what": "round 4 h2 with the pose words \"standing relaxed with one hand in his trouser pocket, slight three-quarter turn, looking at the viewer\"",
   "model": "rdbtAnima",
   "seed": 909,
@@ -70,7 +70,7 @@
   "red_rim_pct": 0.0
  },
  "r2-3909": {
-  "file": "game3d/assets/portrait-candidates/eric-anime5/eric-r2-3909.webp",
+  "file": "art/candidates/portraits/eric-anime5/eric-r2-3909.webp",
   "what": "round 4 h2 with the pose words \"standing relaxed with one hand in his trouser pocket, slight three-quarter turn, looking at the viewer\"",
   "model": "rdbtAnima",
   "seed": 3909,
@@ -80,7 +80,7 @@
   "red_rim_pct": 0.01
  },
  "r2-5909": {
-  "file": "game3d/assets/portrait-candidates/eric-anime5/eric-r2-5909.webp",
+  "file": "art/candidates/portraits/eric-anime5/eric-r2-5909.webp",
   "what": "round 4 h2 with the pose words \"standing relaxed with one hand in his trouser pocket, slight three-quarter turn, looking at the viewer\"",
   "model": "rdbtAnima",
   "seed": 5909,
@@ -90,7 +90,7 @@
   "red_rim_pct": 0.06
  },
  "r2-6909": {
-  "file": "game3d/assets/portrait-candidates/eric-anime5/eric-r2-6909.webp",
+  "file": "art/candidates/portraits/eric-anime5/eric-r2-6909.webp",
   "what": "round 4 h2 with the pose words \"standing relaxed with one hand in his trouser pocket, slight three-quarter turn, looking at the viewer\"",
   "model": "rdbtAnima",
   "seed": 6909,
@@ -100,7 +100,7 @@
   "red_rim_pct": 0.31
  },
  "r2-7909": {
-  "file": "game3d/assets/portrait-candidates/eric-anime5/eric-r2-7909.webp",
+  "file": "art/candidates/portraits/eric-anime5/eric-r2-7909.webp",
   "what": "round 4 h2 with the pose words \"standing relaxed with one hand in his trouser pocket, slight three-quarter turn, looking at the viewer\"",
   "model": "rdbtAnima",
   "seed": 7909,
@@ -110,7 +110,7 @@
   "red_rim_pct": 0.38
  },
  "r2-8909": {
-  "file": "game3d/assets/portrait-candidates/eric-anime5/eric-r2-8909.webp",
+  "file": "art/candidates/portraits/eric-anime5/eric-r2-8909.webp",
   "what": "round 4 h2 with the pose words \"standing relaxed with one hand in his trouser pocket, slight three-quarter turn, looking at the viewer\"",
   "model": "rdbtAnima",
   "seed": 8909,
@@ -120,7 +120,7 @@
   "red_rim_pct": 0.44
  },
  "r3-909": {
-  "file": "game3d/assets/portrait-candidates/eric-anime5/eric-r3-909.webp",
+  "file": "art/candidates/portraits/eric-anime5/eric-r3-909.webp",
   "what": "round 4 h2 with the pose words \"arms relaxed at his sides, slight three-quarter turn, looking at the viewer\"",
   "model": "rdbtAnima",
   "seed": 909,
@@ -130,7 +130,7 @@
   "red_rim_pct": 0.14
  },
  "r3-3909": {
-  "file": "game3d/assets/portrait-candidates/eric-anime5/eric-r3-3909.webp",
+  "file": "art/candidates/portraits/eric-anime5/eric-r3-3909.webp",
   "what": "round 4 h2 with the pose words \"arms relaxed at his sides, slight three-quarter turn, looking at the viewer\"",
   "model": "rdbtAnima",
   "seed": 3909,
@@ -140,7 +140,7 @@
   "red_rim_pct": 0.04
  },
  "r3-5909": {
-  "file": "game3d/assets/portrait-candidates/eric-anime5/eric-r3-5909.webp",
+  "file": "art/candidates/portraits/eric-anime5/eric-r3-5909.webp",
   "what": "round 4 h2 with the pose words \"arms relaxed at his sides, slight three-quarter turn, looking at the viewer\"",
   "model": "rdbtAnima",
   "seed": 5909,
@@ -150,7 +150,7 @@
   "red_rim_pct": 0.05
  },
  "r3-6909": {
-  "file": "game3d/assets/portrait-candidates/eric-anime5/eric-r3-6909.webp",
+  "file": "art/candidates/portraits/eric-anime5/eric-r3-6909.webp",
   "what": "round 4 h2 with the pose words \"arms relaxed at his sides, slight three-quarter turn, looking at the viewer\"",
   "model": "rdbtAnima",
   "seed": 6909,
@@ -160,7 +160,7 @@
   "red_rim_pct": 0.01
  },
  "r3-7909": {
-  "file": "game3d/assets/portrait-candidates/eric-anime5/eric-r3-7909.webp",
+  "file": "art/candidates/portraits/eric-anime5/eric-r3-7909.webp",
   "what": "round 4 h2 with the pose words \"arms relaxed at his sides, slight three-quarter turn, looking at the viewer\"",
   "model": "rdbtAnima",
   "seed": 7909,
@@ -170,7 +170,7 @@
   "red_rim_pct": 0.03
  },
  "r3-8909": {
-  "file": "game3d/assets/portrait-candidates/eric-anime5/eric-r3-8909.webp",
+  "file": "art/candidates/portraits/eric-anime5/eric-r3-8909.webp",
   "what": "round 4 h2 with the pose words \"arms relaxed at his sides, slight three-quarter turn, looking at the viewer\"",
   "model": "rdbtAnima",
   "seed": 8909,
@@ -180,7 +180,7 @@
   "red_rim_pct": 0.0
  },
  "r4-909": {
-  "file": "game3d/assets/portrait-candidates/eric-anime5/eric-r4-909.webp",
+  "file": "art/candidates/portraits/eric-anime5/eric-r4-909.webp",
   "what": "round 4 h2 with the pose words \"one hand in his pocket, slight three-quarter turn, looking at the viewer\"",
   "model": "rdbtAnima",
   "seed": 909,
@@ -190,7 +190,7 @@
   "red_rim_pct": 0.08
  },
  "r4-3909": {
-  "file": "game3d/assets/portrait-candidates/eric-anime5/eric-r4-3909.webp",
+  "file": "art/candidates/portraits/eric-anime5/eric-r4-3909.webp",
   "what": "round 4 h2 with the pose words \"one hand in his pocket, slight three-quarter turn, looking at the viewer\"",
   "model": "rdbtAnima",
   "seed": 3909,
@@ -200,7 +200,7 @@
   "red_rim_pct": 0.03
  },
  "r4-5909": {
-  "file": "game3d/assets/portrait-candidates/eric-anime5/eric-r4-5909.webp",
+  "file": "art/candidates/portraits/eric-anime5/eric-r4-5909.webp",
   "what": "round 4 h2 with the pose words \"one hand in his pocket, slight three-quarter turn, looking at the viewer\"",
   "model": "rdbtAnima",
   "seed": 5909,
@@ -210,7 +210,7 @@
   "red_rim_pct": 0.0
  },
  "r4-6909": {
-  "file": "game3d/assets/portrait-candidates/eric-anime5/eric-r4-6909.webp",
+  "file": "art/candidates/portraits/eric-anime5/eric-r4-6909.webp",
   "what": "round 4 h2 with the pose words \"one hand in his pocket, slight three-quarter turn, looking at the viewer\"",
   "model": "rdbtAnima",
   "seed": 6909,
@@ -220,7 +220,7 @@
   "red_rim_pct": 0.02
  },
  "r4-7909": {
-  "file": "game3d/assets/portrait-candidates/eric-anime5/eric-r4-7909.webp",
+  "file": "art/candidates/portraits/eric-anime5/eric-r4-7909.webp",
   "what": "round 4 h2 with the pose words \"one hand in his pocket, slight three-quarter turn, looking at the viewer\"",
   "model": "rdbtAnima",
   "seed": 7909,
@@ -230,7 +230,7 @@
   "red_rim_pct": 0.14
  },
  "r4-8909": {
-  "file": "game3d/assets/portrait-candidates/eric-anime5/eric-r4-8909.webp",
+  "file": "art/candidates/portraits/eric-anime5/eric-r4-8909.webp",
   "what": "round 4 h2 with the pose words \"one hand in his pocket, slight three-quarter turn, looking at the viewer\"",
   "model": "rdbtAnima",
   "seed": 8909,

@@ -412,12 +412,12 @@ cast3d_on = RUNTIME['source']['cast3d']
 meshy_q = quote('GUIDE.md', '3D character workflow (Jørgen, 2026-09-28')
 eric_model = (BIBLE.get('mc') or {}).get('model') or {}
 mio_model = (BIBLE.get('mio') or {}).get('model') or {}
-add('model/eric-meshy', 'model', 'Eric (Meshy)', ls('game3d/assets/eric') + ls('art/approved/mc/meshy', r'\.(glb|json|png)$') + ls('game3d/assets/eric-meshy', r'\.(glb|json|png)$'),
+add('model/eric-meshy', 'model', 'Eric (Meshy)', ls('game3d/assets/eric') + ls('art/approved/mc/meshy', r'\.(glb|json|png)$'),
     FACT_STATUS.get(eric_model.get('status'), 'approved'), {'path': 'bible/facts.yaml', 'text': eric_model.get('note', '')},
     source='Meshy image-to-3D from ' + 'tools/characters/ref/eric-chibi-ref.png' + ', auto-rigged, ~1050 polygons (' + (eric_model.get('note', '').split('.')[0]) + '). The game loads game3d/assets/eric/ (slimmed by game3d/tools/slim_glb.py) with base.webp as a matte Lambert texture.',
     who='eric', used=['The player, in every place (main.js loadEric; ?eric=chibi falls back to the code-built chibi)'],
     view={'type': 'meshy', 'id': 'eric', 'height': 1.2}, tags=['in game', 'rigged'])
-add('model/mio-meshy', 'model', 'Mio (Meshy)', ls('game3d/assets/mio') + ls('art/approved/mio/meshy') + ls('legacy/side/flat/meshy2/Meshy_AI_Neon_Bun_Guardian_biped'),
+add('model/mio-meshy', 'model', 'Mio (Meshy)', ls('game3d/assets/mio') + ls('art/approved/mio/meshy'),
     FACT_STATUS.get(mio_model.get('status'), 'approved'), {'path': 'bible/facts.yaml', 'text': mio_model.get('note', '')},
     source="Jørgen's Meshy model (Neon Bun Guardian biped); only colour tweaks in the game (mio.js MIO_COLOURS)", who='mio',
     used=['Mio, in every place (mio.js loadMio)'], view={'type': 'mio', 'height': 1.12}, tags=['in game', 'rigged'])
@@ -483,8 +483,8 @@ eric_ok = FACT_STATUS.get(eric_model.get('status'), 'approved')
 for clip in ['idle', 'walk', 'run', 'sit']:
     anim(f'eric-{clip}', 'eric', f'Eric: {clip}', [f'game3d/assets/eric/{clip}.glb'], eric_ok, {'path': 'art/approved/README.md', 'text': "Eric's Meshy model with the idle, walk, run, sit and to-sit animation GLBs (approved with the model)"},
          'Meshy animation library on the auto-rigged model', [f'Player {clip} state (avatar.js loadMeshy)'], {'type': 'meshy', 'id': 'eric', 'height': 1.2, 'play': clip})
-anim('eric-tosit', 'eric', 'Eric: to-sit', ['game3d/assets/eric-meshy/eric-tosit.glb'], eric_ok, 'Came with the approved model', 'Meshy animation library',
-     ['Not loaded by the game (the sit clip is held on one frame)'], {'type': 'glb', 'src': 'game3d/assets/eric-meshy/eric-tosit.glb'})
+anim('eric-tosit', 'eric', 'Eric: to-sit', ['art/approved/mc/meshy/eric-tosit.glb'], eric_ok, 'Came with the approved model', 'Meshy animation library',
+     ['Not loaded by the game (the sit clip is held on one frame)'], {'type': 'glb', 'src': 'art/approved/mc/meshy/eric-tosit.glb'})
 for who, st, why in [('eric', 'provisional', 'Retargeted gesture clips; in the game, never reviewed on their own'),
                      ('mori', 'rejected', f"Mori's model is parked (review mori-3d: {mori_r.get('decision', '')})"),
                      ('mio', 'provisional', 'Retargeted phone pose; in the game, never reviewed on its own')]:

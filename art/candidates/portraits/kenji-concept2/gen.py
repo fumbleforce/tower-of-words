@@ -3,7 +3,7 @@ generic looking". Here he is always in work clothes; a hobby shows at most as on
 build, face and hair. Same recipe as the approved cast (tools/production.py: RDBT Anima, quality tags, safe, 896x1152,
 Euler A 30 steps CFG 5) with the rim-light negative, plus youthful-face and light-build wording because RDBT ages men up.
 
-Usage: ~/ai/sd/venv/bin/python game3d/assets/portrait-candidates/kenji-concept2/gen.py [name ...]
+Usage: ~/ai/sd/venv/bin/python art/candidates/portraits/kenji-concept2/gen.py [name ...]
 Raw PNGs: art/production/PC/kenji3/ (gitignored); webp copies and prompts.json in this folder."""
 import sys, os, json
 HERE = os.path.dirname(os.path.abspath(__file__))

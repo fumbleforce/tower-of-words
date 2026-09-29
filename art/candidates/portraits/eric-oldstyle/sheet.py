@@ -4,7 +4,7 @@ import sys, os, json, glob
 from PIL import Image, ImageDraw, ImageFont
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.abspath(os.path.join(HERE, '..', '..', '..', '..'))
-OUT = os.path.join(ROOT, 'game3d', 'assets', 'portrait-candidates', 'eric-oldstyle-sheet.png')
+OUT = os.path.join(ROOT, 'art', 'candidates', 'portraits', 'eric-oldstyle-sheet.png')
 WORK = os.environ.get('WORK', '/tmp/claude-1000/eric-oldstyle')
 picks = json.loads(sys.argv[1])
 NOTE = [
@@ -46,7 +46,7 @@ def row(title, note, cells):
 
 
 P = 'game3d/assets/portraits/'
-C = 'game3d/assets/portrait-candidates/eric-oldstyle/'
+C = 'art/candidates/portraits/eric-oldstyle/'
 rows = [
     row('1. Old set (gallery M-02-it-guy-601, approved as mc-it-guy-after)',
         'The old approved portrait, its gallery sibling 602, and the eyes-open frame made for the opening (art/opening/eyes). Eyes shut and a red rim light in the approved one.',

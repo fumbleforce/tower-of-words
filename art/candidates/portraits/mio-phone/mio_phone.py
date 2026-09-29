@@ -14,7 +14,7 @@ from PIL import Image, ImageDraw, ImageFilter, ImageChops
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 RAW = os.path.join(HERE, 'phone')
-OUTDIR = os.path.join(REPO, 'game3d/assets/portrait-candidates/mio-phone')
+OUTDIR = os.path.join(REPO, 'art/candidates/portraits/mio-phone')
 SRC = os.path.join(REPO, 'art/production/RF/mio.png')
 OWNER = 'mio-phone-agent'
 W, H = 1008, 1296

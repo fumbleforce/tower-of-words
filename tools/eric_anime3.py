@@ -14,7 +14,7 @@ soft even front light, nothing else in frame; a09 family looks at the viewer, a1
 
 Usage: ~/ai/sd/venv/bin/python tools/eric_anime3.py [ids]   (needs the GPU lock with owner eric-anime3 and ComfyUI on :8188)
        ~/ai/sd/venv/bin/python tools/eric_anime3.py sheet
-Raw PNGs: art/production/PC/eric-anime3/ (gitignored); webp copies for review: game3d/assets/portrait-candidates/eric-anime3/"""
+Raw PNGs: art/production/PC/eric-anime3/ (gitignored); webp copies for review: art/candidates/portraits/eric-anime3/"""
 import sys, os, json
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import numpy as np
@@ -25,8 +25,8 @@ from redrim import red_rim
 OWNER = 'eric-anime3'
 RAW = os.path.join(OUT, 'PC', 'eric-anime3')
 RAW2 = os.path.join(OUT, 'PC', 'eric-anime2')
-WEB = os.path.join(ROOT, 'game3d', 'assets', 'portrait-candidates', 'eric-anime3')
-WEB2 = os.path.join(ROOT, 'game3d', 'assets', 'portrait-candidates', 'eric-anime2')
+WEB = os.path.join(ROOT, 'art', 'candidates', 'portraits', 'eric-anime3')
+WEB2 = os.path.join(ROOT, 'art', 'candidates', 'portraits', 'eric-anime2')
 LOG = os.path.join(WEB, 'log.json')
 NEG = N + ', fat, obese, plump, closed eyes, (rim light, red rim light, red outline, backlighting:1.4)'
 BASE = 'a Scandinavian man in his early thirties, fair pale skin, blue eyes, company lanyard'
@@ -161,7 +161,7 @@ def sheet():
         x, y = (i % cols) * tw, (i // cols) * (th + 40)
         S.paste(Image.open(path).convert('RGB').resize((tw, th), Image.LANCZOS), (x, y))
         d.text((x + 8, y + th + 8), f'{name.replace("eric-", "")}  red {pct:.2f}%', fill=(20, 20, 20), font=font)
-    S.save(os.path.join(ROOT, 'game3d', 'assets', 'portrait-candidates', 'eric-anime3-sheet.png'))
+    S.save(os.path.join(ROOT, 'art', 'candidates', 'portraits', 'eric-anime3-sheet.png'))
 
 
 if __name__ == '__main__':

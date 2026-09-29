@@ -6,7 +6,7 @@ one phrase of c's prompt, so the seed keeps the face, build and shirt as close a
   step 1 (x-*): the expression phrase only ("big grin with a gap between his front teeth").
   step 2 (h-*): the hair phrase only, on top of the expression picked in step 1 (XPICK).
 
-Usage: ~/ai/sd/venv/bin/python game3d/assets/portrait-candidates/kenji-concept3/gen.py [name ...]
+Usage: ~/ai/sd/venv/bin/python art/candidates/portraits/kenji-concept3/gen.py [name ...]
 Raw PNGs: art/production/PC/kenji4/ (gitignored); webp copies and prompts.json in this folder."""
 import sys, os, json, importlib.util
 HERE = os.path.dirname(os.path.abspath(__file__))

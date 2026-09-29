@@ -1,6 +1,6 @@
 {
  "x1-913": {
-  "file": "game3d/assets/portrait-candidates/eric-anime3/eric-x1-913.webp",
+  "file": "art/candidates/portraits/eric-anime3/eric-x1-913.webp",
   "what": "a13 in pixels, hair ashier (less yellow)",
   "source": "art/production/PC/eric-anime2/eric-a13-913.png",
   "recolour": {
@@ -12,7 +12,7 @@
   "red_rim_pct": 0.0
  },
  "x2-913": {
-  "file": "game3d/assets/portrait-candidates/eric-anime3/eric-x2-913.webp",
+  "file": "art/candidates/portraits/eric-anime3/eric-x2-913.webp",
   "what": "a13 in pixels, hair warmer golden blond",
   "source": "art/production/PC/eric-anime2/eric-a13-913.png",
   "recolour": {
@@ -24,7 +24,7 @@
   "red_rim_pct": 0.0
  },
  "x3-913": {
-  "file": "game3d/assets/portrait-candidates/eric-anime3/eric-x3-913.webp",
+  "file": "art/candidates/portraits/eric-anime3/eric-x3-913.webp",
   "what": "a13 in pixels, hair light brown",
   "source": "art/production/PC/eric-anime2/eric-a13-913.png",
   "recolour": {
@@ -36,7 +36,7 @@
   "red_rim_pct": 0.0
  },
  "x4-913": {
-  "file": "game3d/assets/portrait-candidates/eric-anime3/eric-x4-913.webp",
+  "file": "art/candidates/portraits/eric-anime3/eric-x4-913.webp",
   "what": "a13 in pixels, 30% less saturated",
   "source": "art/production/PC/eric-anime2/eric-a13-913.png",
   "recolour": {
@@ -46,7 +46,7 @@
   "red_rim_pct": 0.0
  },
  "x5-913": {
-  "file": "game3d/assets/portrait-candidates/eric-anime3/eric-x5-913.webp",
+  "file": "art/candidates/portraits/eric-anime3/eric-x5-913.webp",
   "what": "a13 in pixels, 30% more saturated",
   "source": "art/production/PC/eric-anime2/eric-a13-913.png",
   "recolour": {
@@ -56,7 +56,7 @@
   "red_rim_pct": 0.29
  },
  "a09w-909": {
-  "file": "game3d/assets/portrait-candidates/eric-anime3/eric-a09w-909.webp",
+  "file": "art/candidates/portraits/eric-anime3/eric-a09w-909.webp",
   "what": "a09 again, weighted negative only",
   "model": "rdbtAnima",
   "seed": 909,
@@ -66,7 +66,7 @@
   "red_rim_pct": 0.53
  },
  "p1-909": {
-  "file": "game3d/assets/portrait-candidates/eric-anime3/eric-p1-909.webp",
+  "file": "art/candidates/portraits/eric-anime3/eric-p1-909.webp",
   "what": "a09, pose: pushing his glasses up with one finger",
   "model": "rdbtAnima",
   "seed": 909,
@@ -76,7 +76,7 @@
   "red_rim_pct": 0.11
  },
  "p1-1909": {
-  "file": "game3d/assets/portrait-candidates/eric-anime3/eric-p1-1909.webp",
+  "file": "art/candidates/portraits/eric-anime3/eric-p1-1909.webp",
   "what": "a09, pose: pushing his glasses up with one finger",
   "model": "rdbtAnima",
   "seed": 1909,
@@ -86,7 +86,7 @@
   "red_rim_pct": 0.43
  },
  "p2-909": {
-  "file": "game3d/assets/portrait-candidates/eric-anime3/eric-p2-909.webp",
+  "file": "art/candidates/portraits/eric-anime3/eric-p2-909.webp",
   "what": "a09, pose: arms crossed",
   "model": "rdbtAnima",
   "seed": 909,
@@ -96,7 +96,7 @@
   "red_rim_pct": 0.12
  },
  "p2-1909": {
-  "file": "game3d/assets/portrait-candidates/eric-anime3/eric-p2-1909.webp",
+  "file": "art/candidates/portraits/eric-anime3/eric-p2-1909.webp",
   "what": "a09, pose: arms crossed",
   "model": "rdbtAnima",
   "seed": 1909,
@@ -106,7 +106,7 @@
   "red_rim_pct": 0.24
  },
  "p3-909": {
-  "file": "game3d/assets/portrait-candidates/eric-anime3/eric-p3-909.webp",
+  "file": "art/candidates/portraits/eric-anime3/eric-p3-909.webp",
   "what": "a09, pose: holding a paper coffee cup in one hand",
   "model": "rdbtAnima",
   "seed": 909,
@@ -116,7 +116,7 @@
   "red_rim_pct": 0.05
  },
  "p3-1909": {
-  "file": "game3d/assets/portrait-candidates/eric-anime3/eric-p3-1909.webp",
+  "file": "art/candidates/portraits/eric-anime3/eric-p3-1909.webp",
   "what": "a09, pose: holding a paper coffee cup in one hand",
   "model": "rdbtAnima",
   "seed": 1909,
@@ -126,7 +126,7 @@
   "red_rim_pct": 0.08
  },
  "p4-909": {
-  "file": "game3d/assets/portrait-candidates/eric-anime3/eric-p4-909.webp",
+  "file": "art/candidates/portraits/eric-anime3/eric-p4-909.webp",
   "what": "a09, pose: leaning forward toward the viewer",
   "model": "rdbtAnima",
   "seed": 909,
@@ -136,7 +136,7 @@
   "red_rim_pct": 0.32
  },
  "p4-1909": {
-  "file": "game3d/assets/portrait-candidates/eric-anime3/eric-p4-1909.webp",
+  "file": "art/candidates/portraits/eric-anime3/eric-p4-1909.webp",
   "what": "a09, pose: leaning forward toward the viewer",
   "model": "rdbtAnima",
   "seed": 1909,
@@ -146,7 +146,7 @@
   "red_rim_pct": 0.05
  },
  "p5-909": {
-  "file": "game3d/assets/portrait-candidates/eric-anime3/eric-p5-909.webp",
+  "file": "art/candidates/portraits/eric-anime3/eric-p5-909.webp",
   "what": "a09, pose: hands in his blazer pockets",
   "model": "rdbtAnima",
   "seed": 909,
@@ -156,7 +156,7 @@
   "red_rim_pct": 0.09
  },
  "p5-1909": {
-  "file": "game3d/assets/portrait-candidates/eric-anime3/eric-p5-1909.webp",
+  "file": "art/candidates/portraits/eric-anime3/eric-p5-1909.webp",
   "what": "a09, pose: hands in his blazer pockets",
   "model": "rdbtAnima",
   "seed": 1909,
@@ -166,7 +166,7 @@
   "red_rim_pct": 0.08
  },
  "p6-909": {
-  "file": "game3d/assets/portrait-candidates/eric-anime3/eric-p6-909.webp",
+  "file": "art/candidates/portraits/eric-anime3/eric-p6-909.webp",
   "what": "a09, pose: rubbing the back of his neck with one hand",
   "model": "rdbtAnima",
   "seed": 909,
@@ -176,7 +176,7 @@
   "red_rim_pct": 0.05
  },
  "p6-1909": {
-  "file": "game3d/assets/portrait-candidates/eric-anime3/eric-p6-1909.webp",
+  "file": "art/candidates/portraits/eric-anime3/eric-p6-1909.webp",
   "what": "a09, pose: rubbing the back of his neck with one hand",
   "model": "rdbtAnima",
   "seed": 1909,
@@ -186,7 +186,7 @@
   "red_rim_pct": 0.04
  },
  "a13w-913": {
-  "file": "game3d/assets/portrait-candidates/eric-anime3/eric-a13w-913.webp",
+  "file": "art/candidates/portraits/eric-anime3/eric-a13w-913.webp",
   "what": "a13 again, weighted negative only",
   "model": "rdbtAnima",
   "seed": 913,
@@ -196,7 +196,7 @@
   "red_rim_pct": 0.0
  },
  "c1-913": {
-  "file": "game3d/assets/portrait-candidates/eric-anime3/eric-c1-913.webp",
+  "file": "art/candidates/portraits/eric-anime3/eric-c1-913.webp",
   "what": "a13, hair and goatee: ash-blond",
   "model": "rdbtAnima",
   "seed": 913,
@@ -206,7 +206,7 @@
   "red_rim_pct": 0.43
  },
  "c2-913": {
-  "file": "game3d/assets/portrait-candidates/eric-anime3/eric-c2-913.webp",
+  "file": "art/candidates/portraits/eric-anime3/eric-c2-913.webp",
   "what": "a13, hair and goatee: warm golden-blond",
   "model": "rdbtAnima",
   "seed": 913,
@@ -216,7 +216,7 @@
   "red_rim_pct": 2.82
  },
  "c3-913": {
-  "file": "game3d/assets/portrait-candidates/eric-anime3/eric-c3-913.webp",
+  "file": "art/candidates/portraits/eric-anime3/eric-c3-913.webp",
   "what": "a13, hair and goatee: light brown",
   "model": "rdbtAnima",
   "seed": 913,
@@ -226,7 +226,7 @@
   "red_rim_pct": 0.58
  },
  "c4-913": {
-  "file": "game3d/assets/portrait-candidates/eric-anime3/eric-c4-913.webp",
+  "file": "art/candidates/portraits/eric-anime3/eric-c4-913.webp",
   "what": "a13, added (muted desaturated colors:1.2)",
   "model": "rdbtAnima",
   "seed": 913,
@@ -236,7 +236,7 @@
   "red_rim_pct": 1.06
  },
  "c5-913": {
-  "file": "game3d/assets/portrait-candidates/eric-anime3/eric-c5-913.webp",
+  "file": "art/candidates/portraits/eric-anime3/eric-c5-913.webp",
   "what": "a13, added (vivid saturated colors:1.2)",
   "model": "rdbtAnima",
   "seed": 913,

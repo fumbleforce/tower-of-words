@@ -7,7 +7,7 @@
  "question": "Which one is Mio's portrait while she reads the server alert?",
  "media": [
   {
-   "image": "game3d/assets/portrait-candidates/mio-phone-2-sheet.webp",
+   "image": "art/candidates/portraits/mio-phone-2-sheet.webp",
    "caption": "Approved portrait, then all 18 renders in the order they were made (red = rejected by me). Each is a whole new picture from a prompt; none is painted over her standard portrait. Her glasses come out silver-grey in all of them; the approved frames are taupe-grey."
   }
  ],
@@ -15,148 +15,148 @@
   {
    "id": "ipa7a-1001",
    "label": "mio-phone2-ipa7a-1001",
-   "image": "game3d/assets/portrait-candidates/mio-phone-2/mio-phone2-ipa7a-1001-cut.webp",
+   "image": "art/candidates/portraits/mio-phone-2/mio-phone2-ipa7a-1001-cut.webp",
    "images": [
-    "game3d/assets/portrait-candidates/mio-phone-2/mio-phone2-ipa7a-1001.webp"
+    "art/candidates/portraits/mio-phone-2/mio-phone2-ipa7a-1001.webp"
    ],
    "note": "IP-Adapter 0.7."
   },
   {
    "id": "ipa7a-1002",
    "label": "mio-phone2-ipa7a-1002",
-   "image": "game3d/assets/portrait-candidates/mio-phone-2/mio-phone2-ipa7a-1002-cut.webp",
+   "image": "art/candidates/portraits/mio-phone-2/mio-phone2-ipa7a-1002-cut.webp",
    "images": [
-    "game3d/assets/portrait-candidates/mio-phone-2/mio-phone2-ipa7a-1002.webp"
+    "art/candidates/portraits/mio-phone-2/mio-phone2-ipa7a-1002.webp"
    ],
    "note": "IP-Adapter 0.7."
   },
   {
    "id": "ipa7a-1010",
    "label": "mio-phone2-ipa7a-1010",
-   "image": "game3d/assets/portrait-candidates/mio-phone-2/mio-phone2-ipa7a-1010-cut.webp",
+   "image": "art/candidates/portraits/mio-phone-2/mio-phone2-ipa7a-1010-cut.webp",
    "images": [
-    "game3d/assets/portrait-candidates/mio-phone-2/mio-phone2-ipa7a-1010.webp"
+    "art/candidates/portraits/mio-phone-2/mio-phone2-ipa7a-1010.webp"
    ],
    "note": "IP-Adapter 0.7."
   },
   {
    "id": "ipa7a-1011",
    "label": "mio-phone2-ipa7a-1011",
-   "image": "game3d/assets/portrait-candidates/mio-phone-2/mio-phone2-ipa7a-1011-cut.webp",
+   "image": "art/candidates/portraits/mio-phone-2/mio-phone2-ipa7a-1011-cut.webp",
    "images": [
-    "game3d/assets/portrait-candidates/mio-phone-2/mio-phone2-ipa7a-1011.webp"
+    "art/candidates/portraits/mio-phone-2/mio-phone2-ipa7a-1011.webp"
    ],
    "note": "IP-Adapter 0.7."
   },
   {
    "id": "ipa7a-1012",
    "label": "mio-phone2-ipa7a-1012",
-   "image": "game3d/assets/portrait-candidates/mio-phone-2/mio-phone2-ipa7a-1012-cut.webp",
+   "image": "art/candidates/portraits/mio-phone-2/mio-phone2-ipa7a-1012-cut.webp",
    "images": [
-    "game3d/assets/portrait-candidates/mio-phone-2/mio-phone2-ipa7a-1012.webp"
+    "art/candidates/portraits/mio-phone-2/mio-phone2-ipa7a-1012.webp"
    ],
    "note": "IP-Adapter 0.7."
   },
   {
    "id": "ipa7b-1007",
    "label": "mio-phone2-ipa7b-1007",
-   "image": "game3d/assets/portrait-candidates/mio-phone-2/mio-phone2-ipa7b-1007-cut.webp",
+   "image": "art/candidates/portraits/mio-phone-2/mio-phone2-ipa7b-1007-cut.webp",
    "images": [
-    "game3d/assets/portrait-candidates/mio-phone-2/mio-phone2-ipa7b-1007.webp"
+    "art/candidates/portraits/mio-phone-2/mio-phone2-ipa7b-1007.webp"
    ],
    "note": "IP-Adapter 0.7, back of phone to viewer. Phone held off to her left, both hands."
   },
   {
    "id": "ipa7b-1008",
    "label": "mio-phone2-ipa7b-1008",
-   "image": "game3d/assets/portrait-candidates/mio-phone-2/mio-phone2-ipa7b-1008-cut.webp",
+   "image": "art/candidates/portraits/mio-phone-2/mio-phone2-ipa7b-1008-cut.webp",
    "images": [
-    "game3d/assets/portrait-candidates/mio-phone-2/mio-phone2-ipa7b-1008.webp"
+    "art/candidates/portraits/mio-phone-2/mio-phone2-ipa7b-1008.webp"
    ],
    "note": "IP-Adapter 0.7, back of phone to viewer. Phone held off to her left, both hands."
   },
   {
    "id": "ipaa-1001",
    "label": "mio-phone2-ipaa-1001",
-   "image": "game3d/assets/portrait-candidates/mio-phone-2/mio-phone2-ipaa-1001-cut.webp",
+   "image": "art/candidates/portraits/mio-phone-2/mio-phone2-ipaa-1001-cut.webp",
    "images": [
-    "game3d/assets/portrait-candidates/mio-phone-2/mio-phone2-ipaa-1001.webp"
+    "art/candidates/portraits/mio-phone-2/mio-phone2-ipaa-1001.webp"
    ],
    "note": "IP-Adapter 0.5."
   },
   {
    "id": "ipaa-1002",
    "label": "mio-phone2-ipaa-1002",
-   "image": "game3d/assets/portrait-candidates/mio-phone-2/mio-phone2-ipaa-1002-cut.webp",
+   "image": "art/candidates/portraits/mio-phone-2/mio-phone2-ipaa-1002-cut.webp",
    "images": [
-    "game3d/assets/portrait-candidates/mio-phone-2/mio-phone2-ipaa-1002.webp"
+    "art/candidates/portraits/mio-phone-2/mio-phone2-ipaa-1002.webp"
    ],
    "note": "IP-Adapter 0.5."
   },
   {
    "id": "ipaa-1003",
    "label": "mio-phone2-ipaa-1003",
-   "image": "game3d/assets/portrait-candidates/mio-phone-2/mio-phone2-ipaa-1003-cut.webp",
+   "image": "art/candidates/portraits/mio-phone-2/mio-phone2-ipaa-1003-cut.webp",
    "images": [
-    "game3d/assets/portrait-candidates/mio-phone-2/mio-phone2-ipaa-1003.webp"
+    "art/candidates/portraits/mio-phone-2/mio-phone2-ipaa-1003.webp"
    ],
    "note": "IP-Adapter 0.5."
   },
   {
    "id": "ipab-1004",
    "label": "mio-phone2-ipab-1004",
-   "image": "game3d/assets/portrait-candidates/mio-phone-2/mio-phone2-ipab-1004-cut.webp",
+   "image": "art/candidates/portraits/mio-phone-2/mio-phone2-ipab-1004-cut.webp",
    "images": [
-    "game3d/assets/portrait-candidates/mio-phone-2/mio-phone2-ipab-1004.webp"
+    "art/candidates/portraits/mio-phone-2/mio-phone2-ipab-1004.webp"
    ],
    "note": "IP-Adapter 0.5, back of phone to viewer."
   },
   {
    "id": "ipab-1005",
    "label": "mio-phone2-ipab-1005",
-   "image": "game3d/assets/portrait-candidates/mio-phone-2/mio-phone2-ipab-1005-cut.webp",
+   "image": "art/candidates/portraits/mio-phone-2/mio-phone2-ipab-1005-cut.webp",
    "images": [
-    "game3d/assets/portrait-candidates/mio-phone-2/mio-phone2-ipab-1005.webp"
+    "art/candidates/portraits/mio-phone-2/mio-phone2-ipab-1005.webp"
    ],
    "note": "IP-Adapter 0.5, back of phone to viewer."
   },
   {
    "id": "ipab-1006",
    "label": "mio-phone2-ipab-1006",
-   "image": "game3d/assets/portrait-candidates/mio-phone-2/mio-phone2-ipab-1006-cut.webp",
+   "image": "art/candidates/portraits/mio-phone-2/mio-phone2-ipab-1006-cut.webp",
    "images": [
-    "game3d/assets/portrait-candidates/mio-phone-2/mio-phone2-ipab-1006.webp"
+    "art/candidates/portraits/mio-phone-2/mio-phone2-ipab-1006.webp"
    ],
    "note": "IP-Adapter 0.5, back of phone to viewer."
   },
   {
    "id": "ipa7a-1003",
    "label": "mio-phone2-ipa7a-1003",
-   "image": "game3d/assets/portrait-candidates/mio-phone-2/mio-phone2-ipa7a-1003.webp",
+   "image": "art/candidates/portraits/mio-phone-2/mio-phone2-ipa7a-1003.webp",
    "note": "IP-Adapter 0.7. Rejected by me: fingers of one hand fuse into the phone edge."
   },
   {
    "id": "ipa7b-1009",
    "label": "mio-phone2-ipa7b-1009",
-   "image": "game3d/assets/portrait-candidates/mio-phone-2/mio-phone2-ipa7b-1009.webp",
+   "image": "art/candidates/portraits/mio-phone-2/mio-phone2-ipa7b-1009.webp",
    "note": "IP-Adapter 0.7, back of phone to viewer. Rejected by me: only one hand shows."
   },
   {
    "id": "txta-1001",
    "label": "mio-phone2-txta-1001",
-   "image": "game3d/assets/portrait-candidates/mio-phone-2/mio-phone2-txta-1001.webp",
+   "image": "art/candidates/portraits/mio-phone-2/mio-phone2-txta-1001.webp",
    "note": "text only. Rejected by me: off-model (bun on top, beige background)."
   },
   {
    "id": "txta-1002",
    "label": "mio-phone2-txta-1002",
-   "image": "game3d/assets/portrait-candidates/mio-phone-2/mio-phone2-txta-1002.webp",
+   "image": "art/candidates/portraits/mio-phone-2/mio-phone2-txta-1002.webp",
    "note": "text only. Rejected by me: off-model (bun on top, lime streaks)."
   },
   {
    "id": "txta-1003",
    "label": "mio-phone2-txta-1003",
-   "image": "game3d/assets/portrait-candidates/mio-phone-2/mio-phone2-txta-1003.webp",
+   "image": "art/candidates/portraits/mio-phone-2/mio-phone2-txta-1003.webp",
    "note": "text only. Rejected by me: off-model (bun on top, lime streaks, glow)."
   },
   {

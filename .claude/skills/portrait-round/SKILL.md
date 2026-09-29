@@ -16,7 +16,7 @@ The art rules live in GUIDE.md (Art) and art/PROMPTS.md. This skill is the order
 ## Render
 
 4. Take the GPU lock (GUIDE: GPU lock). Check nvidia-smi.
-5. Write the round's gen.py next to its candidates in game3d/assets/portrait-candidates/<round>/, on tools/comfy.py and tools/production.py, keeping one seed set so the change is the only difference. Examples: kenji-concept3/gen.py (one phrase swapped per option), eric-expressions-1 (face-only repaint). Raw PNGs go to art/production/ (git-ignored); webp copies and a prompts.json log go in the round folder.
+5. Write the round's gen.py next to its candidates in art/candidates/portraits/<round>/, on tools/comfy.py and tools/production.py, keeping one seed set so the change is the only difference. Examples: kenji-concept3/gen.py (one phrase swapped per option), eric-expressions-1 (face-only repaint). Raw PNGs go to art/production/ (git-ignored); webp copies and a prompts.json log go in the round folder.
 6. Release the lock when the renders are done: free ComfyUI's VRAM (POST http://127.0.0.1:8188/free with `{"unload_models": true, "free_memory": true}`), then remove the lock only if the owner file has your name.
 
 ## Check each render
@@ -34,5 +34,5 @@ A single image-QA command (tools/imgqa.py) is proposed but not built (tool pendi
 
 ## Sheet and review
 
-12. Make a contact sheet of every attempt in order, labelled, beside the approved portrait at the same scale. There is no shared sheet tool yet (tool pending); copy the pattern of game3d/assets/portrait-candidates/mio-phone-3/sheet.py into the round folder.
+12. Make a contact sheet of every attempt in order, labelled, beside the approved portrait at the same scale. There is no shared sheet tool yet (tool pending); copy the pattern of art/candidates/portraits/mio-phone-3/sheet.py into the round folder.
 13. Post the round with the post-review-item skill: the sheet as `media`, each attempt as an option with prompt, seed and red-rim number in its note.

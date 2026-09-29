@@ -31,7 +31,7 @@ REV=$(git rev-parse --short HEAD)
 # 1. the committed game3d tree, then prune everything the game doesn't load
 git archive HEAD game3d | tar -x -C "$STAGE"
 G="$STAGE/game3d"
-rm -rf "$G/tools" "$G/design" "$G/ref" "$G/shots" "$G/assets/portrait-candidates" "$G/js/shell-qa.js"
+rm -rf "$G/tools" "$G/design" "$G/ref" "$G/shots" "$G/js/shell-qa.js"
 find "$G" -name '*.md' -delete
 # assets: keep only the folders the code loads from (assets/<folder>/ written in js/), drop loose files
 USED=$(grep -rhoE "assets/[A-Za-z0-9_-]+/" "$G/js" | sort -u | sed 's#assets/##; s#/##')
