@@ -1,39 +1,43 @@
 {
-  "title": "Island map: company town buildings",
-  "date": "2026-09-29",
-  "by": "Codex",
-  "status": "open",
-  "question": "Does island-03 give the buildings the right look, or what should change?",
-  "multi": false,
-  "options": [
-    {
-      "id": "island-03",
-      "label": "island-03",
-      "image": "art/candidates/island-map-3/07-overview.png",
-      "images": [
-        "art/candidates/island-map-3/08-west.png",
-        "art/candidates/island-map-3/09-east.png"
-      ],
-      "note": "Attached pool changing/shower block, divided onsen, two shop rows around a covered walking street, connected apartments and practical service yards. Corrected coastal access and a visible izakaya frontage. All nine attempts are in the labelled viewer. This remains a planning reference; interior circulation and additional island-place picks still need design. Open points: the pool block looks like offices; the south shop row faces the promenade and has gaps; the red onsen entrance route is unclear; the town still looks clean and cosy."
-    },
-    {
-      "id": "revise-buildings",
-      "label": "revise-buildings",
-      "note": "Keep the layout as a draft. Tell us which buildings or connections still need work."
-    }
-  ],
-  "links": [
-    {
-      "label": "Labelled maps, zoom and every attempt",
-      "href": "reviews/island-map-3/"
-    },
-    {
-      "label": "Previous round",
-      "href": "reviews/island-map-2/"
-    },
-    {
-      "label": "Layout brief and staging",
-      "href": "bible/#doc/art/candidates/island-map-3/brief.md"
-    }
-  ]
+ "title": "Island map: company town buildings",
+ "date": "2026-09-29",
+ "by": "Codex",
+ "status": "decided",
+ "question": "Does island-03 give the buildings the right look, or what should change?",
+ "multi": false,
+ "options": [
+  {
+   "id": "island-03",
+   "label": "island-03",
+   "image": "art/candidates/island-map-3/07-overview.png",
+   "images": [
+    "art/candidates/island-map-3/08-west.png",
+    "art/candidates/island-map-3/09-east.png"
+   ],
+   "note": "Attached pool changing/shower block, divided onsen, two shop rows around a covered walking street, connected apartments and practical service yards. Corrected coastal access and a visible izakaya frontage. All nine attempts are in the labelled viewer. This remains a planning reference; interior circulation and additional island-place picks still need design. Open points: the pool block looks like offices; the south shop row faces the promenade and has gaps; the red onsen entrance route is unclear; the town still looks clean and cosy."
+  },
+  {
+   "id": "revise-buildings",
+   "label": "revise-buildings",
+   "note": "Keep the layout as a draft. Tell us which buildings or connections still need work."
+  }
+ ],
+ "links": [
+  {
+   "label": "Labelled maps, zoom and every attempt",
+   "href": "reviews/island-map-3/"
+  },
+  {
+   "label": "Previous round",
+   "href": "reviews/island-map-2/"
+  },
+  {
+   "label": "Layout brief and staging",
+   "href": "bible/#doc/art/candidates/island-map-3/brief.md"
+  }
+ ],
+ "decided": [
+  "island-03"
+ ],
+ "decision": "island-03 picked. Round 4: add docks; no cars, bikes only; bigger sports yard for large events; add a park; bigger island overall; plus the island-places picks."
 }
