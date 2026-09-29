@@ -216,6 +216,10 @@ async function say() {
   const target = game.sayTarget;
   const id = await ui.sayMenu(target ? target.label : null);
   if (!id) return;
+  await sayWord(id, target);
+}
+// saying a chosen word to a target, as the Say menu does (the fast test drives words through this too)
+async function sayWord(id, target) {
   // until a word has been typed or said a few times, Say asks for it again (Jørgen: not just clicking it)
   if (needsPractice(id)) { const ok = await ui.typePrompt(id, { who: null, text: target ? `Say it to ${target.label}.` : 'Say it.' }, { cancel: true }); ui.closeTalk(); if (!ok) return; }
   const key = target ? `say:${id}:${target.id}` : null;
@@ -232,6 +236,7 @@ async function say() {
   });
 }
 ui.onSay = say;
+game.sayWord = sayWord;
 ui.peopleHTML = peopleHTML; ui.items = ITEMS;
 async function give() {
   if (game.busy || !sim.inv.length || !game.sayTarget) return;
