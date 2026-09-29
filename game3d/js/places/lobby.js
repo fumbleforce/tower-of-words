@@ -242,10 +242,10 @@ export async function lobbyPlace(game) {
       liftOpen: () => { w.lifts[0].want = 1; sfx('lift'); },
       liftClose: () => { w.lifts[0].want = 0; },
     },
-    capState(s) {
-      if (s === 'aoi') { sit(w.aoi); armsLap(w.aoi); w.aoi.root.position.set(3.6, 0.07 * K, 1.15); w.aoi.root.rotation.y = 0; w.aoiBlob.position.set(3.6, 0.004, 1.4); w.aoi.seated = true; }
     // the lift's landing doors here (places/lift.js hides them while the wall is cut away and waits on k)
     liftLanding: { leaves: w.lifts[0].leaves, k: () => w.lifts[0].k },
+    capState(s) {
+      if (s === 'aoi') { sit(w.aoi); armsLap(w.aoi); w.aoi.root.position.set(3.6, 0.07 * K, 1.15); w.aoi.root.rotation.y = 0; w.aoiBlob.position.set(3.6, 0.004, 1.4); w.aoi.seated = true; }
       if (s === 'open') setGate('open');
       if (s === 'jam') { w.man.root.visible = true; w.manBlob.visible = true; w.man.root.position.set(0.93, 0, BZ + 0.6); w.man.root.rotation.y = Math.PI; w.manBlob.position.set(0.93, 0.004, BZ + 0.6); setGate('jam'); }
     },

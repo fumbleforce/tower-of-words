@@ -232,6 +232,8 @@ export async function officePlace(game) {
       liftClose: () => { st.liftWant = 0; },
       sitDown: async () => { await sitMio(); game.event('sat_down'); },
     },
+    // the lift's landing doors here (places/lift.js hides them while the wall is cut away and waits on k)
+    liftLanding: { leaves: w.leaves, k: () => st.liftK },
     capState(s) {
       if (s.startsWith('mdoor')) { st.mdoor = st.mdoorWant = +s.slice(5); }   // QA stills of the door's swing
       if (s === 'open') st.liftWant = 1;
@@ -296,5 +298,3 @@ export async function officePlace(game) {
   return P;
 }
 export const MIO_SEAT_Y = 0.0, MIO_SEAT_DZ = 0.0;
-    // the lift's landing doors here (places/lift.js hides them while the wall is cut away and waits on k)
-    liftLanding: { leaves: w.leaves, k: () => st.liftK },
