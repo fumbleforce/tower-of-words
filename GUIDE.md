@@ -225,6 +225,7 @@ Game first, learning light (docs/game/setting.md) overrides these where they con
 
 ## Process
 - Fast tests (Jørgen, 2026-09-28: "it should be speedrunning, modifying run speed and such, we can't spend HOURS on tests"). Play-through QA runs in a fast test mode (time scale up, instant text, auto-advance, scripted route), so a full day takes about a minute. Long real-time runs are only for a final human-speed check, and only if asked. Tests run in parallel in the background, capped at 5 minutes, and never hold up pushing a build to him ("just push already").
+- Feedback log (2026-09-29): every message Jørgen types to Claude Code is saved word for word in notes/feedback-log/ (how it works and how to turn it off: notes/feedback-log/README.md). Quote from it when briefing agents.
 - Relay feedback as given (Jørgen, 2026-09-28: "STOP overcorrections like this when I give feedback"). Pass his words on as the brief, pointing at the source he means; don't add intensifiers or your own reading ("but clearly green"), which make the next attempt overshoot.
 
 - The main thread coordinates and never blocks on waiting; long work goes to background subagents with clear file ownership: the builder owns legacy/game/; the art agents own art/ and add images to legacy/game/img; the content writer owns content/.
