@@ -3,18 +3,18 @@
 Read GUIDE.md first, then notes/PRODUCTION.md. The game is game3d/ (day 1: train, gate, B2 office). Decisions for Jørgen go to the bible's Review section (reviews/), not chat.
 
 ## Pick up here
-See notes/HANDOFF.md (2026-09-29): what's done, what's broken (phone lift softlock, perf), what waits on Jørgen in Review, and the push block.
+Read [creator-next](notes/creator-next.md) for Codex’s current creator work and `python3 tools/review.py list` for current decisions. [HANDOFF](notes/HANDOFF.md) records the morning state; its pending reviews and tooling status predate the work listed below. New assignments and ownership are in collab/PROTOCOL.md and the team inboxes.
 
 ## Bugs
-- Idle animation (Jørgen, 2026-09-29): characters stay twisted about 90° to the left while idling. Seen on the dark-hair, cyan-accent character (hoodie, cargo pants) on the grey model-viewer disc.
+- Creator idle: the reported leftward twist has candidate fixes; the latest relaxed-arm/breathing comparison is [creator-idle-neutral-3](reviews/creator-idle-neutral-3/review.json). Integration awaits that pick. Current state and remaining acceptance work: [creator-next](notes/creator-next.md).
 
 ## Open (2026-09-29, evening)
 - Eric portrait framing: at 2560x1440 the straight cut on his right shoulder shows at the image edge, and on phone his image runs past the right screen edge. Re-cut on a wider canvas (art round).
-- In progress: asset storage stage 2 (R2), in-game feedback window, performance metrics, worktree per agent + land script (tools/worktree.sh, tools/land.sh landed), image QA after renders.
-- Waiting on Jørgen in Review: creator-base-4, creator-idle-neutral-3.
+- Waiting on Jørgen in Review: creator-base-4, creator-idle-neutral-3, day1-simplify, island-map-2, island-places and office-perf. Use `python3 tools/review.py show <id>` for current answers.
+- After the layout pick: apartment-building interior candidates for Eric’s dorm (C-0091). After the day1-simplify picks: apply selected story edits, then hand changed voice lines to Claude’s voice pipeline.
 - Deferred by choice: advanced commit hooks (review receipts, HEAD boot check, gitleaks). Rejected: nightly QA, stuck-point telemetry.
 
-Done today, for the record (git log has details): interaction pins back, outline skips shadows, selection ring removed, pins tappable, full-height train doors, two-step lunchbox scene, clicks blocked during Eric's word, Eric's face box, voice pipeline in tools/voice + gaijin clip, GPU slots for tests, refactor stages 0-5, Continue fix, facts docs, GUIDE diet, agent types and skills, feedback log hooks.
+Done today, for the record (git log has details): interaction pins back, outline skips shadows, selection ring removed, pins tappable, full-height train doors, two-step lunchbox scene, clicks blocked during Eric's word, Eric's face box, voice pipeline in tools/voice + gaijin clip, GPU slots for tests, refactor stages 0-5, Continue fix, facts docs, GUIDE diet, agent types and skills, feedback log hooks, worktrees/land, performance overlay (`52144e9`), local in-game feedback (`4c87ff9`), portrait image QA (`5143d35`), day-1 simplification proposal with cold-reader corrections (`519c4c9`), and island-map-2 candidates (`e93d901`).
 
 ## Parked ideas
 - Procedural content (Jørgen, 2026-09-28: "keep it idea for now"): fixed cast, main arc and location cards stay authored; an LLM director writes daily storylets in the game3d/story format that the engine validates, with per-character memory, generated gossip, notes and emails, pre-rendered picture pools and a room generator for repeated office floors. Run it first as an overnight writers' room with critic filtering and his stars, live later. Blocked until ONE stable, full, fun day exists, so we know which elements to build on. First test when unblocked: a fully generated day 2 using the same places.
@@ -25,12 +25,11 @@ Done today, for the record (git log has details): interaction pins back, outline
 - New sounds from the feel agent (game3d/audio/sfx, audio/amb; picks in tools/feel/picks.json): ambience beds per place, UI and learned-word chimes, the kotodama sound. The lobby bed may have footstep-like noise. Listen when possible.
 - Portraits in use provisionally: Mori 713, Kenji 711, Hamada 721, guard = Ishibashi with new expressions (sheets in art/candidates/portraits/). Confirm or pick others.
 
-## Deferred: asset storage (Jørgen, 2026-09-28)
-- Cloudflare R2 chosen (Jørgen, 2026-09-29; replaces the earlier Supabase plan): only used assets go to R2, the local machine keeps WIP and rejected files, the repo stays lean with every binary in git-ignored folders. Design and sync tool: notes/asset-storage-proposal.md. Needs Jørgen: an R2 bucket and a scoped API token in .env.
-- Until then art/approved/{mio,mc}/meshy/ and art/approved/music/ are git-ignored, local only (back them up).
-- Slim the source: one rigged mesh + base colour + animation-only clips per character (drop duplicate meshes and unused normal/roughness/metallic maps); move game3d/shots and portrait-candidates out of git.
-- Deploy the game from an orphan gh-pages branch replaced on each push, so builds don't grow history.
-- The bible (bible/) has never been committed; decide whether it goes public.
+## Asset storage and publishing
+- R2 stage 2 and the binary removal are complete locally. Current evidence, fresh-clone checks and remaining Pages work: [asset-storage-proposal](notes/asset-storage-proposal.md). The bucket/token setup is complete; do not request it again.
+- Pages deployment and source switching remain with the publishing owner. Do not push main before that handoff is complete.
+- Further source slimming (shared meshes and animation-only clips) remains a separate task; moving assets to R2 does not complete it.
+- Bible source is tracked. Some local Review decisions remain uncommitted; see the storage proposal’s section 10 before reconciling them. Do not stage another agent’s decisions or feedback.
 
 ## Legacy (VN, Godot, low-poly and island-slice era; kept for reference, not current)
 ### Later (parked by Jørgen, 2026-09-27: "nitpick, a todo for later")
