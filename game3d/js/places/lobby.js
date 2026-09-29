@@ -21,7 +21,7 @@ export const withList = (slot) =>
   (slot.with || []).filter((e) => typeof e === 'string' || cond(e.if)).map((e) => (typeof e === 'string' ? e : e.who));
 
 // walk an object in a straight line, ignoring the walk grid (scripted moves)
-import { glide, walkRig } from '../move.js';
+import { glide, walkRig, queueStep } from '../move.js';
 export { glide }; // smooth start, turn and stop; never touches the player's facing
 
 export async function lobbyPlace(game) {
@@ -98,11 +98,8 @@ export async function lobbyPlace(game) {
       return;
     }
     const moveTo = (tx, tz, sp = 1.25) => {
-      const d = Math.hypot(tx - p.x, tz - p.z);
-      if (d < 0.04) return true;
-      const s = Math.min(d, sp * dt);
-      p.x += ((tx - p.x) / d) * s;
-      p.z += ((tz - p.z) / d) * s;
+      const k = queueStep(game, r, tx, tz, sp, dt);
+      if (k !== 1) return k === 0 || !!walkPose(r, 0, 0);
       r.root.rotation.y = Math.atan2(tx - p.x, tz - p.z);
       c.ph += dt * 9.5;
       walkPose(r, c.ph, 1);
@@ -455,6 +452,7 @@ export async function lobbyPlace(game) {
       focusBand: 0.3,
     },
     _commuters: commuters,
+    crowd: commuters.map((c) => Object.assign(c.r, { blob: c.b })),
     scene: w.scene,
     camera: cam.camera,
     cam,

@@ -3,7 +3,7 @@ import * as THREE from 'three';
 import { ui, voice, sfx } from './ui.js';
 import { WORDS, learn, cmdHTML, lineHTML } from './lang.js';
 import { walkPose, HIP } from './cast.js';
-import { personStep, standOff, detourPoint } from './move.js';
+import { personStep, standOff, detourPoint, freeNear } from './move.js';
 
 export const WHO = {
   aoi: { name: 'Aoi', color: '#e79fb0' },
@@ -90,6 +90,12 @@ export function walkPerson(rig, pts, { speed = 1.2, blobM } = {}) {
   return new Promise((res) => {
     // the last point on someone ("walk to Eric"): stop at a talking distance in front of them instead
     if (pts.length && window.__game) pts = [...pts.slice(0, -1), standOff(window.__game, rig, pts[pts.length - 1])];
+    // and a last point in the furniture (a spot a little into a wall or a counter): the free floor nearest to it
+    const nav = window.__game?.place?.nav;
+    if (pts.length && nav && rig.root.parent === window.__game.place.space) {
+      const [x, z] = pts[pts.length - 1];
+      if (!nav.free(x, z)) pts = [...pts.slice(0, -1), freeNear(nav, [], x, z, 0)];
+    }
     const path = pts.map(([x, z]) => new THREE.Vector3(x, 0, z));
     rig._blk = 0;
     rig._hold = 0;

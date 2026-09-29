@@ -27,7 +27,14 @@ export function turnToward(cur, target, dt, rate = TURN) {
 }
 
 // ---------- who is where ----------
-const _v = new THREE.Vector3();
+const _v = new THREE.Vector3(),
+  _f = new THREE.Vector3(),
+  _q = new THREE.Quaternion(),
+  _q2 = new THREE.Quaternion();
+
+const KNEES = 0.15; // how far in front of a seated person's hips their circle sits (their knees), times the scale
+
+const CAT = 0.18; // the cat's radius: room for her whole body, so nobody stands on her
 
 // every visible person in the place, in the place's walk-grid space: { id, rig, root, x, z, r, seated }
 export function bodies(game) {
@@ -48,19 +55,32 @@ export function bodies(game) {
       _v.x += r.sitOff.x;
       _v.z += r.sitOff.z;
     }
+    // someone seated takes up the floor in front of the seat too, where their knees and feet are: their circle sits
+    // KNEES forward of the hips, so nobody stands in their lap
+    if (seated) {
+      const f = _f
+        .set(0, 0, 1)
+        .applyQuaternion(r.root.getWorldQuaternion(_q))
+        .applyQuaternion(P.space.getWorldQuaternion(_q2).invert()); // the way they face, in the place's space
+      f.y = 0;
+      const fl = f.length() || 1;
+      _v.x += (f.x / fl) * KNEES * K;
+      _v.z += (f.z / fl) * KNEES * K;
+    }
     out.push({
       id,
       rig: r,
       root: r.root,
       x: _v.x,
       z: _v.z,
-      r: (id === 'tama' ? 0.12 : seated ? BODY * 0.8 : BODY) * K,
+      r: (id === 'tama' ? CAT : seated ? BODY * 0.8 : BODY) * K,
       seated,
     });
   };
   add('eric', game.player);
   add('mio', game.mioNpc);
   for (const [id, r] of Object.entries(P.people || {})) add(id, r);
+  (P.crowd || []).forEach((r, i) => add('crowd' + i, r)); // passers-by (the lobby's commuters)
   return out;
 }
 

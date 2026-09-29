@@ -1,7 +1,7 @@
 import { rigOf, bodies, BODY, CORNER, turnToward, angDiff, BRAKE, ACCEL, TURN } from './shared.js';
 import { standOff } from './targets.js';
 import { freeNear, reachableNear, clearOf, pathAround } from './navigation.js';
-import { spaceFrom, isPassing, slideStep, isHard, press } from './crowd.js';
+import { spaceFrom, isPassing, slideStep, isHard, press, followSpeed } from './crowd.js';
 import * as THREE from 'three';
 
 // ---------- scripted moves ----------
@@ -26,15 +26,7 @@ export function walkRig(
   let [tx, tz] = avoid && game.place ? standOff(game, rig || { root: obj }, to) : to;
   const people = () => (avoid ? bodies(game).filter((b) => !self(b)) : []);
   // the destination: free floor, and not on top of someone
-  if (nav && avoid)
-    [tx, tz] = freeNear(
-      nav,
-      people().filter((b) => b.id !== 'tama'),
-      tx,
-      tz,
-      BODY * (obj.scale.x || 1),
-      spaceFrom(game, obj),
-    );
+  if (nav && avoid) [tx, tz] = freeNear(nav, people(), tx, tz, BODY * (obj.scale.x || 1), spaceFrom(game, obj));
   let path = null;
   if (route && nav) {
     path = nav.path(obj.position.x, obj.position.z, tx, tz);
@@ -154,7 +146,14 @@ export function walkRig(
             bd = Math.hypot(bx, bz);
           return bd < b.r + BODY * sc + 0.25 && (bx * dx + bz * dz) / (bd * d || 1) > 0.5 && !isPassing(obj, b.root);
         });
-        if (ahead && ahead.rig._walk && waited < 0.9) {
+        // walking the same way: follow at their pace, a small gap behind (never lean into someone walking away)
+        const gap = ahead ? Math.hypot(ahead.x - p.x, ahead.z - p.z) - ahead.r - BODY * sc : 0,
+          lead = ahead ? followSpeed(ahead, dx / (d || 1), dz / (d || 1), gap) : null;
+        if (lead !== null) {
+          want = Math.min(want, lead);
+          waited = 0;
+          wait = 1;
+        } else if (ahead && ahead.rig._walk && waited < 0.9) {
           want = 0;
           waited += dt;
           wait = 1;
@@ -246,6 +245,24 @@ export function walkRig(
   });
 }
 
+// Someone seated turns in the seat, round their hips (Mio's root is off her hips, so turning the root swung her out
+// of the seat into the aisle), and only so far either way from how the seat faces: they don't sit sideways across
+// the seat, legs in their neighbour.
+const SEAT_TURN = 0.6; // rad
+function seatTurn(rig, x, z) {
+  const obj = rig.root,
+    p = obj.position,
+    off = rig.sitOff;
+  const hx = p.x + (off ? off.x : 0),
+    hz = p.z + (off ? off.z : 0);
+  let s = obj.userData.seat;
+  if (!s || Math.hypot(s.x - hx, s.z - hz) > 0.02) s = obj.userData.seat = { x: hx, z: hz, yaw: obj.rotation.y };
+  const yaw = s.yaw + THREE.MathUtils.clamp(angDiff(Math.atan2(x - hx, z - hz), s.yaw), -SEAT_TURN, SEAT_TURN);
+  // sitAt(hips x, seat top, hips z, facing) puts the hips back where they were
+  if (off && rig.sitAt) rig.sitAt(hx, p.y + off.y - 0.07 * obj.scale.x, hz, yaw);
+  else obj.rotation.y = yaw;
+}
+
 // Turn someone to face a spot, smoothly (the story's face step; it used to snap). A big turn takes small steps.
 export function faceRig(game, rigOrObj, [x, z]) {
   const rig = rigOrObj && rigOrObj.root ? rigOrObj : rigOf(game, rigOrObj);
@@ -256,7 +273,7 @@ export function faceRig(game, rigOrObj, [x, z]) {
   }
   const target = Math.atan2(x - obj.position.x, z - obj.position.z);
   if (rig && rig.seated) {
-    obj.rotation.y = target;
+    seatTurn(rig, x, z);
     return Promise.resolve();
   }
   const token = (obj.userData.faceTok = (obj.userData.faceTok || 0) + 1);
@@ -324,6 +341,35 @@ export async function standOut(game, rigOrObj, dz, { speed = 0.8 } = {}) {
 
 // The trips' straight moves (through doors, into lifts): no routing and no people-avoidance (the choreography is
 // fixed), but the same smooth start, turn and stop, and keeps a little speed at the end so chained moves flow.
-export function glide(g, obj, to, speed) {
-  return walkRig(g, obj, to, { speed, route: false, avoid: false, brakeTo: 0.45, settle: false });
+// avoid: true for a move across open floor among other people (along the platform, behind Mio and round the cat):
+// still straight, but it follows whoever walks ahead and goes round whoever stands in the way.
+export function glide(g, obj, to, speed, avoid = false) {
+  return walkRig(g, obj, to, { speed, route: false, avoid, brakeTo: 0.45, settle: false });
+}
+
+// One step of a set route (the lobby's commuters) that doesn't walk into anyone: with someone right in front they wait
+// (a queue at the reader) for up to 2 s, then carry on and softSeparate eases them round. Returns 0 when there, 1
+// after a step, 2 while waiting.
+export function queueStep(game, rig, tx, tz, speed, dt) {
+  const p = rig.root.position,
+    d = Math.hypot(tx - p.x, tz - p.z);
+  rig._walk = d >= 0.04;
+  if (!rig._walk) return 0;
+  const fx = (tx - p.x) / d,
+    fz = (tz - p.z) / d,
+    list = bodies(game),
+    me = list.find((b) => b.root === rig.root);
+  const ahead = list.find((b) => {
+    if (!me || b === me || isPassing(rig.root, b.root)) return false;
+    const bx = b.x - me.x,
+      bz = b.z - me.z,
+      bd = Math.hypot(bx, bz) || 1e-4;
+    return bd < b.r + me.r + 0.08 && (bx * fx + bz * fz) / bd > 0.5;
+  });
+  rig._queue = ahead ? (rig._queue || 0) + dt : 0;
+  if (ahead && rig._queue < 2) return 2;
+  const s = Math.min(d, speed * dt);
+  p.x += fx * s;
+  p.z += fz * s;
+  return 1;
 }

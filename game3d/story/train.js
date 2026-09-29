@@ -298,7 +298,7 @@ export default {
       { do: 'walk', who: 'aoi', to: 'door_l', wait: false },
       { do: 'alight', except: ['kuroda'] },
       { do: 'hide', id: 'aoi' },
-      { do: 'catTo', to: [-3.0, 2.2] },
+      { do: 'catTo', to: [-3.0, 2.9] }, // out of the doorway's way, where Eric steps off
       { do: 'walk', who: 'mio', to: 'door_l', wait: true },
       { do: 'walk', who: 'mio', to: [-2.2, 2.25], wait: false },
       { set: 'alighted' },

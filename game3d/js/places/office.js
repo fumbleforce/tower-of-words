@@ -13,8 +13,7 @@ import { walkPerson, stepPeople, lookAt } from '../story.js';
 import { sit, armsLap, PEOPLE, idle } from '../cast.js';
 import { blob } from '../engine.js';
 import { flags } from '../narrative/state.js';
-import { glide } from './lobby.js';
-import { walkRig } from '../move.js';
+import { glide, walkRig, hopOff } from '../move.js';
 import { mat, rbox, PAL } from '../props.js';
 import { route } from './route.js';
 
@@ -621,7 +620,7 @@ export async function officePlace(game) {
     if (mio && mio.root.visible) {
       mio.setState('idle');
       mio.seated = false;
-      mio.root.position.set(dS0.seat[0], 0, dS0.seat[1]);
+      mio.root.position.set(dS0.seat[0], 0, dS0.seat[1] + 0.45);
     }
     const mo = w.mori;
     if (!mo.seated || Math.hypot(mo.root.position.x - 2.16, mo.root.position.z + 3.36) > 0.3) {
@@ -1109,6 +1108,7 @@ export async function officePlace(game) {
     r.root.position.z += 0.45;
   }
   function placeMioSeated() {
+    hopOff(game, w.tama, w.myChair);
     const m = game.player;
     m.sitAt(dS1.seat[0], 0.24, dS1.seat[1] + 0.02, Math.PI);
     if (game.walker) game.walker.facing = Math.PI;
@@ -1116,10 +1116,9 @@ export async function officePlace(game) {
   }
   async function sitMio() {
     if (game.player.seated) return;
-    if (Math.hypot(w.myChair.position.x - dS1.seat[0], w.myChair.position.z - dS1.seat[1]) > 0.1) {
+    if (Math.hypot(w.myChair.position.x - dS1.seat[0], w.myChair.position.z - dS1.seat[1]) > 0.1)
       await P.hooks.chairRoll({ to: 'my_seat' });
-    }
-    await game.walkTo(dS1.seat[0], dS1.seat[1] + 0.45);
+    await game.walkTo(...spots.my_seat);
     placeMioSeated();
     await game.wait(600);
   }

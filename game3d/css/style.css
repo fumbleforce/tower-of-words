@@ -866,6 +866,10 @@ body:has(.mark.near) .mark:not(.near):not(.goal) { opacity: .45; }
 
 /* dialogue: the whole screen is the click target while a line is up, with a clear continue marker */
 #talkHit { position: absolute; inset: 0; z-index: 1; cursor: default; }
+/* the HUD stays above the tap-to-continue layer (Words, People, Bag and sound work during a line), and the panels
+   above everything in the HUD, the goal arrow and the Say button included (the arrow covered "by heart" on phone) */
+#top { z-index: 2; }
+#cmdsPanel, .panel { z-index: 5; }
 #talkHit.go { cursor: pointer; }
 #talkHit.go:hover { background: linear-gradient(to top, rgba(111, 208, 198, .07), transparent 45%); }
 #talk.can-go { cursor: pointer; }

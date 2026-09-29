@@ -1476,8 +1476,8 @@ export async function trainPlace(game) {
         mio.setState('idle');
         mio.seated = false;
         mio.root.position.set(-2.2, 0, 2.25);
-        kitty.position.set(-3, 0, 2.2);
-        kb.position.set(-3, 0.004, 2.2);
+        kitty.position.set(-3, 0, 2.9);
+        kb.position.set(-3, 0.004, 2.9);
       }
       if (state.geometry) {
         trainObjects.forEach((object, i) => restoreObject(object, state.geometry[i]));
@@ -1647,9 +1647,9 @@ export async function trainPlace(game) {
       }
       cam.closeOn([p.x, LZ + 1.0], 1.35);
       const follow = setInterval(() => {
-        cam.close = { x: mio.root.position.x, z: LZ + 1.0, zoom: 1.35 };
+        cam.close = { x: p.x, z: LZ + 1.0, zoom: 1.35 };
       }, 50);
-      await glide(g, mio.root, [7.4, LZ + 1.5], 1.45);
+      await glide(g, mio.root, [7.4, LZ + 1.5], 1.45, true);
       clearInterval(follow);
       mio.setState('idle');
     },

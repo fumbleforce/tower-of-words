@@ -182,3 +182,16 @@ export function pickPerson(game, clientX, clientY, canvas) {
   }
   return best;
 }
+
+// Something sitting on a seat (the cat on Eric's chair, which "comes with it") hops down onto free floor beside it,
+// clear of everyone, before someone sits there and not onto her. Nothing when it isn't on that seat.
+export function hopOff(game, obj, seat) {
+  const P = game.place;
+  if (obj.parent !== seat) return;
+  const at = P.space.worldToLocal(seat.getWorldPosition(new THREE.Vector3()));
+  P.space.attach(obj);
+  obj.position.y = 0;
+  if (obj.userData.head) obj.userData.head.rotation.x = 0;
+  const others = bodies(game).filter((b) => b.root !== obj && b.root !== game.player.root);
+  [obj.position.x, obj.position.z] = freeNear(P.nav, others, at.x + 0.55, at.z + 0.3, 0.3 * (P.charScale || 1));
+}

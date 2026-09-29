@@ -52,20 +52,20 @@
     },
     "game3d/js/places/lift.js": {
       "lines": 1101,
-      "bytes": 40022,
+      "bytes": 40020,
       "owner": "codex-tui",
       "review": "C-0071",
       "reason": "Existing shared lift geometry, movement and dialogue staging; extract after behavior characterization."
     },
     "game3d/js/places/lobby.js": {
-      "lines": 809,
+      "lines": 807,
       "bytes": 27093,
       "owner": "codex-tui",
       "review": "C-0076",
       "reason": "Existing gate place geometry and interaction hooks; stage 5 room-builder review is planned."
     },
     "game3d/js/places/office.js": {
-      "lines": 1130,
+      "lines": 1129,
       "bytes": 40565,
       "owner": "codex-tui",
       "review": "C-0076",
@@ -73,7 +73,7 @@
     },
     "game3d/js/places/train.js": {
       "lines": 1673,
-      "bytes": 61062,
+      "bytes": 61052,
       "owner": "codex-tui",
       "review": "C-0076",
       "reason": "Existing train place geometry, animation and scene hooks; stage 5 room-builder review is planned."
