@@ -79,8 +79,8 @@
       "reason": "Existing office place geometry and interaction hooks; stage 5 room-builder review is planned."
     },
     "game3d/js/places/train.js": {
-      "lines": 1799,
-      "bytes": 66308,
+      "lines": 1746,
+      "bytes": 64686,
       "owner": "codex-tui",
       "review": "C-0076",
       "reason": "Existing train place geometry, animation and scene hooks; stage 5 room-builder review is planned."
