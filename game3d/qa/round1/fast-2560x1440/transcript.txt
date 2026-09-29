@@ -1,0 +1,207 @@
+train | Mio: Ugh, the Wi-Fi dies on the bridge every time... come on, come on.
+
+=== PLACE train
+train | (narration): The train lurches. The woman's lunch bag slides to the edge of the seat and wobbles there.
+train | Aoi: だから今日、配属が決まるの！どこでもいいけど、地下はいや。
+train | (narration): A sticky note on his briefcase says "12F 9:00!!"
+train | (narration): The book is called "Excel for People Who Hate Excel".
+train | Woman with a bun: いい天気ですね。
+train | Young man: …ん？
+train | (narration): She lets you scratch behind one ear, then goes back to watching the door.
+train | Woman with a laptop: ...Okay. I think nothing broke. It's my mother's pickles.
+train | Woman with a laptop: Eh... B2? You're going to B2?
+train | Eric: Yeah, IT support. I'm the contractor, it's my first day.
+train | Mio: Ahh, you're the support contract? Mori-san said a {gaijin} is coming to help with the old machines. Amakawa never replaces anything, so, um... some of them are older than me.
+train | Mio: I'm Mio. I'm also B2, so... same team, I guess.
+train | (narration):   [choices: “I'm Eric.” | “Were you visiting your mum?” | Just nod]
+train | Mio: Mm, I know. It's on your card.
+train | Mio: Ne... sorry. Where are you from?
+train | Eric: Norway.
+train | Mio: Norway... okay. And Japanese? You speak it, like, at all?
+train | (narration):   [choices: “ありがとう (arigatō, thanks). That's about it.” | “Not really.”]
+train | Mio: Okay, arigatō is good. You'll use that one a lot.
+train | Mio: You know it's all Amakawa people on the island, right? Nobody speaks English. Even at the supermarket.
+train | Mio: And Mori-san is going to be so polite with you, and you'll just stand there.
+train | Mio: えっと, okay. First one, {ohayo}. You say it to everybody in the morning. The guard at the gate is really strict about it.
+train | (narration): She lifts two fingers off her laptop in a lazy wave, and nods.
+train | Mio: {ohayo}...
+train | TYPE PROMPT: ohayo
+train | Mio: {ohayo}. Mm, okay, not bad.
+train | Mio: Try the cat, over there. She rides this train every morning, she won't judge you.
+train | (narration): She lets you scratch behind one ear, then goes back to watching the door.
+train | TYPE PROMPT: ohayo
+train | (narration): A slow blink.
+train | Mio: See? She's fine with it.
+train | TYPE PROMPT: ohayo
+train | (narration): He is fast asleep.
+train | Woman with a bun: はい、{ohayo}。
+train | Young man: あ、ども。
+train | Mio: She's more awake than that guy, anyway. He's on this train every morning too, asleep the whole way, and like once a month he misses our stop and ends up back on the mainland.
+train | Mio: Anyway, when you meet someone new, it's {yoroshiku}. Like “nice to meet you”, but more like “please be nice to me”.
+train | (narration): She dips her head about two centimetres. It is the smallest bow you have ever seen.
+train | Mio: {yoroshiku}...
+train | TYPE PROMPT: yoroshiku
+train | Mio: {yoroshiku}. Mm, good.
+train | Mio: With Mori-san, bow a little when you say it. He likes that.
+train | Announcement: {tsugiwa} {honsha}.
+train | Mio: Oh, this is us. Go stand by the doors, it gets crowded. I'll pack up.
+train | TYPE PROMPT: yoroshiku
+train | (narration): He is fast asleep.
+train | (narration): A sticky note on his briefcase says "12F 9:00!!"
+train | Mio: Ah, she's in the way... okay, one more. {sumimasen}. You use it for sorry too.
+train | Mio: You'll get lost today, everybody does. Just say it and point at things. Honestly it works for almost everything.
+train | (narration): She holds one hand up edge-on in front of her and makes a little chopping motion, cutting a path through an invisible crowd.
+train | Mio: {sumimasen}...
+train | TYPE PROMPT: sumimasen
+train | Aoi: あ、{sumimasen}！
+train | TYPE PROMPT: sumimasen
+train | (narration): He is fast asleep.
+train | Mio: Ah... wait. The sleeping guy, he's still in there.
+train | Announcement: この電車は、折り返し本土行きとなります。
+train | Mio: And now it goes back to the mainland. So today is the once a month, I guess.
+train | Mio: {matte}! Hey, {matte}!
+train | (narration): She holds up a flat palm at the doors, like stopping traffic.
+train | Mio: {matte}...
+train | TYPE PROMPT: matte
+train | Sleeping man: あっ！{sumimasen}、{sumimasen}！
+train | Mio: ...Doors don't do that. They stop for a bag or something, but yelling does nothing, I've tried like a hundred times.
+train | (narration):   [choices: “Did I do that?” | Say nothing]
+train | Mio: I don't know. I said it too and nothing happened, so...
+train | Mio: Um, don't tell anyone, okay? If somebody reports it broken, it goes on my list.
+train | TYPE PROMPT: matte
+train | (narration): She stops washing, one paw in the air, and stares at you. Then she carries on.
+train | Mio: あー, no, no... the server's down again. Sorry, I have to run.
+train | Mio: You can't even help, your card won't work until nine, I think. So talk to the guard.
+train | Mio: {ohayo} first, okay? Bye, {gaijin}.
+
+=== PLACE gate
+gate | Guard: {ohayo}。
+gate | Commuter: {ohayo}。
+gate | Eric: Hi. Um... good morning?
+gate | Guard: {ohayo}。
+gate | Guard: カードを、どうぞ。
+gate | The gate: カードを確認できません。係員にお声がけください。
+gate | Commuter: …{sumimasen}。
+gate | Guard: 新しいカードですね。申し訳ありません、登録は九時からです。
+gate | Eric: Right, Mio did say nine.
+gate | Guard: あちらで、お待ちください。
+gate | (narration): 8:52.
+gate | Man from the train: {sumimasen}、{sumimasen}、通ります！
+gate | The gate: 共連れを検知しました！
+gate | (narration): The little screen on the gate counts two people, him and his briefcase.
+gate | Man from the train: {akete}...
+gate | (narration): He mimes hauling two heavy doors apart, then pats the gate like a nervous horse.
+gate | Man from the train: {akete}...
+gate | Man from the train: お願い、{akete}…いい子だから…
+gate | Guard: はい、アマカワ{honsha}、正面ゲートです。…はい。待ちます。
+gate | Mio: the chat says the lobby gate is broken again. is that you?
+gate | Mio: if the guard ignores you say {sumimasen} and point at stuff. loud
+gate | Man from the train: あ…すみません、ゲートが…
+gate | (narration):   [choices: Say 開けて (akete, open) with him | Leave him to it]
+gate | TYPE PROMPT: akete
+gate | Man from the train: え？今の…？
+gate | Guard: …あ、もしもし。いえ…開きました。
+gate | Eric: The train doors, and now this...
+gate | TYPE PROMPT: yoroshiku
+gate | Receptionist: はい…？{yoroshiku}…
+gate | (narration): A slow blink.
+gate | Guard: 猫はいません。
+gate | TYPE PROMPT: sumimasen
+gate | TYPE PROMPT: matte
+gate | Guard: 猫はいません。
+gate | Receptionist: いらっしゃいませ。ご用件は？
+gate | Guard: 猫？何の猫ですか。
+gate | (narration): The first name in the visitor book today, in careful capitals, is TAMA.
+gate | (narration): Someone has pressed 5.
+gate | Man from Sales: 十時の会議、四番目の議題見た？
+gate | Woman from Sales: B2のやつでしょ。コンサルタントが来るって。
+gate | Man from Sales: え、今日から？
+gate | (narration): One of them glances at the card on your lanyard, and they stop talking.
+
+=== PLACE office
+office | Mr. Mori: {ohayo}。森と申します。ITサポートへ、ようこそ。
+office | (narration): He waits.
+office | Mr. Mori: はい、{ohayo}。
+office | Mr. Mori: どうぞ、こちらへ。
+office | Kenji: あ！新しい人！
+office | Kenji: Eric-san? I am Kenji! I am new also, two months. So now I am not the newest. Yes!
+office | Kenji: Ah, sorry, sorry. Your chair... I borrow it. My chair is... broken. Pshh.
+office | Kenji: I bring it back for you! It's in machine room, with the cat. Norway has the big forest cats, right? I see on YouTube, they are so big, like...
+office | Kenji: ...Ah, no. Mio-san says I can't go in machine room anymore. Sorry! You go?
+office | Mio: Mm, one minute!
+office | TYPE PROMPT: akete
+office | Mio: ...That door has a card reader, you know.
+office | Kenji: よろしく！
+office | Kenji: え、何？大丈夫？
+office | Mio: Ah, that's your chair? Sorry. She comes with it, I think.
+office | Mio: Oh, and come here a second. I have a job for you.
+office | Mio: Okay, your first repair request. I changed your screen to English, by the way.
+office | (narration): REPAIR REQUEST #1. Copier, B2 copy room. Eats paper. Opened 1 April 1996.
+office | Eric: Nineteen ninety-six?
+office | Mio: Yeah. Mori-san opened it when he was new here, I think. Nobody closes it, it's like... tradition. He can show you.
+office | Mio: 森さん、{gaijin}にコピー機お願い。
+office | Mr. Mori: 外国の方、ですよ。
+office | Mio: He says I should say gaikoku no kata. It's more polite. ...Anyway, go.
+office | Mr. Mori: また食べられました…
+office | Mr. Mori: {ugoite}.
+office | (narration): He rolls his hands over each other, slowly, like winding up an old engine.
+office | Mr. Mori: {ugoite}...
+office | TYPE PROMPT: ugoite
+office | Mr. Mori: …三十年。
+office | Mio: Ha, too polite. I'm not your boss. Just おはよう (ohayō) is fine.
+office | Mio: We did that already, on the train.
+office | Mio: Hm? What is it?
+office | TYPE PROMPT: ugoite
+office | TYPE PROMPT: ugoite
+office | (narration): Someone taped an OUT OF ORDER sign on it this morning.
+office | (narration): She opens one eye, and closes it again.
+office | (narration): There's no dust on the name card in front of it.
+office | (narration): Your name card, in katakana. Someone has written ERIC under it in pen, just in case.
+office | (narration): 130 yen each.  [choices: Canned coffee | Royal milk tea | Melon soda | Corn soup | Nothing]
+office | (narration): Your coin goes in. Nothing comes out.
+office | (narration): 130 yen each.  [choices: Canned coffee | Royal milk tea | Melon soda | Corn soup | Nothing]
+office | (narration): In the dust on the steps, a line of small paw prints.
+office | (narration): Four names in Japanese, and one new magnet in capitals: ERIC.
+office | Eric: The copier's fixed.
+office | Mio: Eh? The B2 copier? Three companies came to look at it, and they all said buy a new one.
+office | Eric: I asked it nicely.
+office | Mio: ...Asked it nicely. Like the doors, this morning?
+office | Mio: Okay. Okay, I'll close it. Um. It's lunch anyway.
+office | (narration): 12:10.
+office | Mio: I usually eat in the machine room. It's quiet, and nobody talks to me there.
+office | (narration): Who do you have lunch with?  [choices: Lunch with Mio, in the machine room | Lunch with Mori, in the kitchenette]
+office | Mio: You can sit on the floor, it's warm from the servers.
+office | (narration):   [choices: “Why B2?” | “The doors this morning...” | Eat, and say nothing]
+office | Mio: Upstairs you have to bow to everybody all day, it's so tiring. Down here it's just me and these guys.
+office | Mio: They're from the nineties. If I don't watch them, they just... die.
+office | Mio: And the company won't buy new ones, ever. So now they pay you to babysit them with me.
+office | Mio: No, no, not now...
+office | Mio: Wait. You try it. {tomatte}, it means stop. ...I want to see something.
+office | (narration): She holds her hand flat over the blinking rack, as if she could press the noise back down into it.
+office | Mio: {tomatte}...
+office | TYPE PROMPT: tomatte
+office | Mio: Huh. Okay.
+office | (narration): 14:00.
+office | Kenji: 朝、ゲートが勝手に開いたって。
+office | Mio: Oh, if you go to the vending machine, Mori-san drinks corn soup. From a can, yes. Every afternoon.
+office | (narration): 17:40.
+office | Emi: You must be Eric. Emi, I run this lot. Sorry I wasn't about, I've been upstairs since seven begging for money.
+office | Eric: How did it go?
+office | Emi: I got it. Well. I may have told them B2 can keep every machine on this island running for another ten years.
+office | Emi: With the right contractor, I said. So, welcome aboard. Tomorrow you and I should have a proper chat about what you can actually do.
+office | (narration): 18:05.
+office | Mio: Okay, I'm going home.
+office | Mio: Um. Eric.
+office | Mio: On the train you said {matte} and the doors just stopped. And Mori-san says {ugoite} to that copier every morning for thirty years, and today it works for you.
+office | Mio: And now everybody upstairs is talking about the lobby gate. That was {akete}, I guess?
+office | Mio: And the rack, {tomatte}. That one I asked you, so... that one is my fault.
+office | Mio: How are you doing that?
+office | (narration):   [choices: “I don't know.” | “I asked nicely.” | Say nothing]
+office | Mio: ...Yeah. Me neither.
+office | Mio: Ah... great. The station sent a repair request about the doors. I told them it's the sensor, so now they want B2 to check the sensor.
+office | Mio: It was supposed to go on my list. ...Okay, I'm putting it on yours.
+office | (narration): REPAIR REQUEST #2. Train doors, Honsha station. Assigned to: ERIC.
+office | Mio: You're the IT guy. You tell them it's the sensor.
+office | Mio: Take the 8:40 tomorrow, okay? I'm in the front car. I want to see how you, um... fix a sensor.
+office | TYPE PROMPT: tomatte
+office | Kenji: あれ？
