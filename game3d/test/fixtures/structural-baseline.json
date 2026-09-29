@@ -614,6 +614,13 @@
       "cond": ""
     },
     {
+      "from": "train:mio_tests",
+      "to": "train:mio_phone",
+      "kind": "go",
+      "labels": [],
+      "cond": ""
+    },
+    {
       "from": "train:mio_phone",
       "to": "transitions:train_to_gate",
       "kind": "next",

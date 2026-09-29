@@ -191,8 +191,7 @@ export default {
     ],
     family: [
       { inc: 'mio_warm' },
-      { say: 'mio', emo: 'casual', text: "Mm. I stayed at her place last night, on the mainland." },
-      { say: 'mio', emo: 'fond', face: 'tired', text: "She always packs too much. Like I'm moving to another country." },
+      { say: 'mio', emo: 'fond', face: 'tired', text: "Mm. I stayed at her place last night, on the mainland. She always packs too much, like I'm moving to another country." },
       { go: 'chat1_end' },
     ],
     leave_it: [
@@ -260,8 +259,7 @@ export default {
       '> She dips her head about two centimetres. It is the smallest bow you have ever seen.',
       { say: 'mio', emo: 'slow', slow: true, text: '{yoroshiku}...' },
       { do: 'type', word: 'yoroshiku', from: 'mio', prompt: 'mio: We just met, so... say it to me.' },
-      { say: 'mio', emo: 'casual', text: "{yoroshiku}. Mm, good." },
-      { say: 'mio', emo: 'casual', text: "With Mori-san, bow a little when you say it. He likes that." },
+      { say: 'mio', emo: 'casual', text: "{yoroshiku}. Mm, good. Bow a little with Mori-san, he likes that." },
       { if: 'mio_warm >= 2', then: [
         { say: 'mio', emo: 'embarrassed', face: 'embarrassed', text: "Here, take a pickle. My mother made, like, way too many." },
       ] },
@@ -291,7 +289,6 @@ export default {
       { do: 'face', who: 'mio', to: 'aoi' },
       { say: 'mio', emo: 'dry', text: "Ah, she's in the way... okay, one more. {sumimasen}. You use it for sorry too." },
       { say: 'mio', emo: 'casual', text: "You'll get lost today, everybody does. Just say it and point at things. Honestly it works for almost everything." },
-      '> She holds one hand up edge-on in front of her and makes a little chopping motion, cutting a path through an invisible crowd.',
       { say: 'mio', emo: 'slow', slow: true, text: '{sumimasen}...' },
       { do: 'type', word: 'sumimasen', from: 'mio', prompt: 'mio: Go on, say it to her.' },
       { do: 'face', who: 'aoi', to: 'eric' },
@@ -364,6 +361,8 @@ export default {
       // her phone goes, she looks, then reacts
       { do: 'phone', who: 'mio', state: 'buzz' },
       { set: 'phone_buzz' },
+      { wait: 600 },
+      { go: 'mio_phone' },
     ],
     mio_phone: [
       { do: 'phone', who: 'mio', state: 'look' },

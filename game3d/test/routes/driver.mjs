@@ -178,7 +178,7 @@ export async function runRoute(browser, route, { base, viewport }) {
       assert.deepEqual(after.inv, checkpoint.inv, 'Continue must preserve inventory');
       assert.equal(after.yen, checkpoint.yen, 'Continue must not spend twice');
     } else await settled(page, route.seed.place);
-    for (const step of route.actions || []) await action(page, step, route.seed.place);
+    for (const step of route.actions || []) await action(page, step, step.settleAt || route.seed.place);
     if (route.expect.ended) {
       await page.locator('#end.in .again').waitFor({ state: 'visible', timeout: 5000 });
       assert.equal(await page.locator('#end h2').textContent(), 'Day one');

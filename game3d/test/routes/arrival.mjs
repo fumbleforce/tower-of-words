@@ -60,10 +60,10 @@ export default [
     description: `Save Hamada at the train doors, then choose ${choice}.`,
     seed: platform(),
     choices: [choice],
-    actions: [{ type: 'use', target: 'door_l' }],
+    actions: [{ type: 'use', target: 'door_l', settleAt: 'gate' }],
     expect: {
-      nodes: ['platform', reaction, 'mio_tests'],
-      flags: { on_platform: true, held_doors: true, phone_buzz: true },
+      nodes: ['platform', reaction, 'mio_tests', 'mio_phone'],
+      flags: { on_platform: true, held_doors: true, phone_buzz: true, can_exit: true },
       known: ['matte'],
     },
   })),
