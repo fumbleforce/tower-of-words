@@ -1,0 +1,300 @@
+{
+  "owner": "codex-tui",
+  "review": "C-0071",
+  "entries": [
+    {
+      "file": "bible/app.js",
+      "ruleId": "no-unused-vars",
+      "message": "'RSTATUS' is assigned a value but never used.",
+      "context": "75a907fbed49862fb41345633ab08203b2361f2794215b112a3138f1b2b08778"
+    },
+    {
+      "file": "bible/story-graph.js",
+      "ruleId": "no-unused-vars",
+      "message": "'short' is assigned a value but never used.",
+      "context": "c1c2960f70a5d68db142b1dd931f29713fd441a42324d5722d751b9411df46b5"
+    },
+    {
+      "file": "bible/story-graph.js",
+      "ruleId": "no-unused-vars",
+      "message": "'inFlow' is assigned a value but never used.",
+      "context": "d6292e6d0cb915fdcc7f06a3603765494dfa9223fc7196ed2f82156ffd3ca4c6"
+    },
+    {
+      "file": "bible/story-graph.js",
+      "ruleId": "no-unused-vars",
+      "message": "'readFlags' is assigned a value but never used.",
+      "context": "6d040903d0b565e63f796553a7ecb140ebcd582bc94bc0577315b3a1582f4d14"
+    },
+    {
+      "file": "bible/story-graph.js",
+      "ruleId": "no-unused-vars",
+      "message": "'outs' is assigned a value but never used.",
+      "context": "2b85b808d5bcd7b3516cc96a4c11fd85f16c46aa5b479a51ccc6f04401d3c682"
+    },
+    {
+      "file": "game3d/js/cast.js",
+      "ruleId": "no-unused-vars",
+      "message": "'k' is assigned a value but never used.",
+      "context": "068ef6ea1f4b4258100a7628d8c274d20797e33631f537777402fddccd8ff870"
+    },
+    {
+      "file": "game3d/js/cast.js",
+      "ruleId": "no-unused-vars",
+      "message": "'guardCap' is defined but never used.",
+      "context": "3db0dacbf6bfccdecb09ecb783575fc68c083fc03aa287d6227d0ad45c023f17"
+    },
+    {
+      "file": "game3d/js/cast.js",
+      "ruleId": "no-unused-vars",
+      "message": "'rx' is assigned a value but never used.",
+      "context": "6740d5726a637cb3a0afcea3dfbc2c10bf3a9dbb7e3b12470e04bcea524a376a"
+    },
+    {
+      "file": "game3d/js/look/bake.js",
+      "ruleId": "no-unused-vars",
+      "message": "'Q' is assigned a value but never used.",
+      "context": "3c14ef032cd84d78c82426764db4b30123f9913008c49cca3d4a2326467f6e04"
+    },
+    {
+      "file": "game3d/js/main.js",
+      "ruleId": "no-unused-vars",
+      "message": "'Walker' is defined but never used.",
+      "context": "f2dfb1decb63c8f3d062b28f6ad775a3bd501d585209186766494650520629f6"
+    },
+    {
+      "file": "game3d/js/main.js",
+      "ruleId": "no-unused-vars",
+      "message": "'glide' is defined but never used.",
+      "context": "7c16ad9ccd0d12e244fcd2647f15a77bc84bafb8ef69e8ed7603929d484e74ee"
+    },
+    {
+      "file": "game3d/js/main.js",
+      "ruleId": "no-unused-vars",
+      "message": "'bond' is defined but never used.",
+      "context": "eac19af1eb706be8cfdb8ca00f9ea4adc9c1b0764dd6f6687d2bc1e5f7ac49e4"
+    },
+    {
+      "file": "game3d/js/main.js",
+      "ruleId": "no-unused-vars",
+      "message": "'noteTeacher' is defined but never used.",
+      "context": "64b586e75b7a21c380d1bbfbe2aff71cadd85db9e833bbb512fb74957f1c2b16"
+    },
+    {
+      "file": "game3d/js/mio.js",
+      "ruleId": "no-unused-vars",
+      "message": "'fwd' is assigned a value but never used.",
+      "context": "6293ce54703878347ab8f884882982121f77b3a8de03bec1a1887f3370d3ed31"
+    },
+    {
+      "file": "game3d/js/mio.js",
+      "ruleId": "no-unused-vars",
+      "message": "'q' is assigned a value but never used.",
+      "context": "3419cc3c6d857cd673b57a0eddde92a59d6adc3b102343856af75b7355410181"
+    },
+    {
+      "file": "game3d/js/mio.js",
+      "ruleId": "no-unused-vars",
+      "message": "'navyLum' is assigned a value but never used.",
+      "context": "30f8a22be21c40217e511076064e1bb82790c4218f9f11c1656968c4bad573fa"
+    },
+    {
+      "file": "game3d/js/perf/batch.js",
+      "ruleId": "no-unused-vars",
+      "message": "'id' is assigned a value but never used.",
+      "context": "9ba999bdf4be9f0d01b0bd091806f0be55cf99a64f166e03e48843ab29cc1f84"
+    },
+    {
+      "file": "game3d/js/perf/batch.js",
+      "ruleId": "no-unused-vars",
+      "message": "'shown' is assigned a value but never used.",
+      "context": "a4181e9bdc4da4fdda36d3cc740f7dd0f19a79d4b4a41dfadb1f8b68e486ded7"
+    },
+    {
+      "file": "game3d/js/places/lift.js",
+      "ruleId": "no-unused-vars",
+      "message": "'JP_FONT' is defined but never used.",
+      "context": "bcda265ce65c977362b188f41a35d6724f88e5e447d2171392f58cb673e3eecc"
+    },
+    {
+      "file": "game3d/js/places/lift.js",
+      "ruleId": "no-unused-vars",
+      "message": "'cam' is assigned a value but never used.",
+      "context": "c05785bf24a7a6ac8fdd684aaa81267feefd0fcd85e0093b761e200fffb086ff"
+    },
+    {
+      "file": "game3d/js/places/train.js",
+      "ruleId": "no-unused-vars",
+      "message": "'walkPose' is defined but never used.",
+      "context": "ad837287a91b7bac7993c596f75b0b3ccd051ebe73a87266bd274d3e76d07034"
+    },
+    {
+      "file": "game3d/js/places/train.js",
+      "ruleId": "no-unused-vars",
+      "message": "'HIP' is defined but never used.",
+      "context": "e120ce4a132810b89fec545582b860fd6514138986b34c05d9f044c39e9c5e11"
+    },
+    {
+      "file": "game3d/js/props.js",
+      "ruleId": "no-unused-vars",
+      "message": "'icoPoints' is defined but never used.",
+      "context": "9a17aed8247a2a6b607f188c0b9c37b5bec214808aaa5056e3510e470dee09dd"
+    },
+    {
+      "file": "game3d/js/scenes/lobby.js",
+      "ruleId": "no-unused-vars",
+      "message": "'walkPose' is defined but never used.",
+      "context": "d4fa9fc7de12bbcfba8bd73f356c9375edc7dc7fa744afd9f4f019b98cd2ef40"
+    },
+    {
+      "file": "game3d/js/scenes/lobby.js",
+      "ruleId": "no-unused-vars",
+      "message": "'HIP' is defined but never used.",
+      "context": "807e9e74e3564d0a0f7f77b9af90698bfa2d47d761a440274c92cf39101cb2e6"
+    },
+    {
+      "file": "game3d/js/scenes/office.js",
+      "ruleId": "no-unused-vars",
+      "message": "'RoundedBoxGeometry' is defined but never used.",
+      "context": "18b7d76fcb4544cfd3e3fa5ebd08f3de3ae33b4141fa9ed6074c1ba47acb2b31"
+    },
+    {
+      "file": "game3d/js/scenes/office.js",
+      "ruleId": "no-unused-vars",
+      "message": "'screenMat' is defined but never used.",
+      "context": "4e1afdae13498a2b31d98888a26d0cc8ec57957adf7f544b907b75296a3a7660"
+    },
+    {
+      "file": "game3d/js/scenes/office.js",
+      "ruleId": "no-unused-vars",
+      "message": "'kitchen' is defined but never used.",
+      "context": "7c328fc797f1ba57a581362bd8902e930ed9cd494c5ca8488f6a1920522d6bd9"
+    },
+    {
+      "file": "game3d/js/scenes/office.js",
+      "ruleId": "no-unused-vars",
+      "message": "'tableSet' is defined but never used.",
+      "context": "763c0f8d6d05e8834d26ed64d6bb33b78f4a15ab555ed7456a2ae6f5c27b91ee"
+    },
+    {
+      "file": "game3d/js/scenes/office.js",
+      "ruleId": "no-unused-vars",
+      "message": "'sink' is defined but never used.",
+      "context": "631c3dbe1a80ad9634b490945239cd8033f7d29c5047983dbbc8515689718bb7"
+    },
+    {
+      "file": "game3d/js/scenes/office.js",
+      "ruleId": "no-unused-vars",
+      "message": "'mirror' is defined but never used.",
+      "context": "195d592384f349388005b8b8813ae67d4993c208e722a202ae2a1b8f692de8fd"
+    },
+    {
+      "file": "game3d/js/scenes/office.js",
+      "ruleId": "no-unused-vars",
+      "message": "'coatRack' is defined but never used.",
+      "context": "a46d55e5a9ef23443a83c4e3893e7586aab5eb09ca36264164c091dc3bdb82a9"
+    },
+    {
+      "file": "game3d/js/scenes/office.js",
+      "ruleId": "no-unused-vars",
+      "message": "'k' is assigned a value but never used.",
+      "context": "adee94d6f9b72f8138577f30c3624b8e65b45b4c083b09fd222f2b70c459d415"
+    },
+    {
+      "file": "game3d/js/showcase/decals.js",
+      "ruleId": "no-unused-vars",
+      "message": "'ang' is assigned a value but never used.",
+      "context": "182c8795b7f0ec51708def4519ca3c69ee90573594de5d9c549a8cc7df9c9b0b"
+    },
+    {
+      "file": "game3d/js/ui.js",
+      "ruleId": "no-unused-vars",
+      "message": "'thump' is defined but never used.",
+      "context": "19fbbdcab88ec793b6b7a9e96c9df05b48ded8486a5467dbc611959066e276d5"
+    },
+    {
+      "file": "game3d/tools/fast.mjs",
+      "ruleId": "no-unused-vars",
+      "message": "'k' is assigned a value but never used.",
+      "context": "315282a72faac090bbdec4d7b36e7a9dcc5d3a4f38ef6bfc34b3e34e64b50c7b"
+    },
+    {
+      "file": "game3d/tools/perf/calls.mjs",
+      "ruleId": "no-unused-vars",
+      "message": "'id' is assigned a value but never used.",
+      "context": "2acba837db7885f190e5cf6ae91e77f290aec5fa446373927f5492b15a4847b4"
+    },
+    {
+      "file": "game3d/tools/perf/calls.mjs",
+      "ruleId": "no-unused-vars",
+      "message": "'cam' is assigned a value but never used.",
+      "context": "be47e48ad4f509b1a01d4269bb5ec6b8e9fff1526ae8dd18e6666abc1d2e7adf"
+    },
+    {
+      "file": "game3d/tools/play.mjs",
+      "ruleId": "no-unused-vars",
+      "message": "'known' is assigned a value but never used.",
+      "context": "157581145205b69baf4dc61c67bd37847f3af1687174d9aac4ff7ed9ccd80ea4"
+    },
+    {
+      "file": "game3d/tools/printer-shots.mjs",
+      "ruleId": "no-unused-vars",
+      "message": "'node' is assigned a value but never used.",
+      "context": "e7d529a114c2ebe180284f690ea5e5dc7c7185aab39eb22d652407e917160762"
+    },
+    {
+      "file": "game3d/tools/story-check.mjs",
+      "ruleId": "no-unused-vars",
+      "message": "'id' is assigned a value but never used.",
+      "context": "57bd599463d9ff7bd84f8c1a79b0aaa8f38e4bc184bd5865ad9dde5005626996"
+    },
+    {
+      "file": "game3d/tools/voice-manifest.mjs",
+      "ruleId": "no-unused-vars",
+      "message": "'id' is assigned a value but never used.",
+      "context": "0659a424f62d63813988ac5eb019d1ca0f8f581a1a6af0d7743c0fb2b986d8fd"
+    },
+    {
+      "file": "tools/creator/base/base.js",
+      "ruleId": "no-unused-vars",
+      "message": "'BONES' is defined but never used.",
+      "context": "4a81a6c345d433178d959ea62e5479929ae10c979747af95ee4e3b939f92298e"
+    },
+    {
+      "file": "tools/day1_playtest.mjs",
+      "ruleId": "no-unused-vars",
+      "message": "'devices' is assigned a value but never used.",
+      "context": "efc86065636eccde464b85803b86aa821e9ad35ab59edd2ab53d8c34dace793f"
+    },
+    {
+      "file": "tools/lang/extract_script.mjs",
+      "ruleId": "no-unused-vars",
+      "message": "'id' is assigned a value but never used.",
+      "context": "e7891eb00e6b0d3e163f69a8573b393e556775f09b0fe5205f18d097b7f5d532"
+    },
+    {
+      "file": "tools/slice_voices.mjs",
+      "ruleId": "no-unused-vars",
+      "message": "'R2' is assigned a value but never used.",
+      "context": "fdab2fe8b07921d20de5b8175a00dee1adfbbb4234a45aecfcc5f446e30bfe4d"
+    },
+    {
+      "file": "tools/slice_voices.mjs",
+      "ruleId": "no-unused-vars",
+      "message": "'RETRY_STYLE' is assigned a value but never used.",
+      "context": "453b7140d33e6be69566c0907ad9087c54ff3c0d7d843c6f2a8782614b631af4"
+    },
+    {
+      "file": "tools/slice_voices.mjs",
+      "ruleId": "no-unused-vars",
+      "message": "'walk2' is assigned a value but never used.",
+      "context": "08ccad57b8d60b52314cf6842a7825640717e3f580012c7288e0d1fe8b6d4d7f"
+    },
+    {
+      "file": "tools/tests/ruby-test.cjs",
+      "ruleId": "no-unused-vars",
+      "message": "'html' is assigned a value but never used.",
+      "context": "c3f05a0c8243e6aeac4afe2e4e4a1375f7ccbe77d3435530a600b7d1cd6539e5"
+    }
+  ]
+}
