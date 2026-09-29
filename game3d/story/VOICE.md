@@ -19,7 +19,9 @@ Read this before writing a line in train.js, gate.js, office.js or transitions.j
 
 ## Speakers
 
-**Mio** (25, programmer, B2). Learned English from work and the internet. Low energy in the morning, dry, doesn't want a conversation with a stranger but won't let a teammate walk in unprepared.
+Who each person is (age, job, what they speak) is in docs/game/cast.md. This sheet is how to write them.
+
+**Mio**. Low energy in the morning, dry, doesn't want a conversation with a stranger but won't let a teammate walk in unprepared.
 - Sentences: medium length and loose, joined with "so", "but", "like", "and then". She trails off with "..." when she loses interest in her own sentence.
 - Fillers: えっと, あー, "mm", "okay", "ne" once in a while. "Honestly" and "basically" from the internet.
 - Slips: drops an article now and then ("island has no food"), mixes "I am" and "I'm", uses "also" at the end ("tomorrow also"), "how to say".
@@ -29,15 +31,15 @@ Read this before writing a line in train.js, gate.js, office.js or transitions.j
 
 **Eric** (the player). Tired, polite, dry. Says little; his lines are short but whole sentences ("The copier's fixed." not "Fixed."). Choice texts are things he'd actually say.
 
-**Kenji** (21, the newest before Eric; two months in). Keen to help and easily distracted: he offers to do things he isn't allowed to, and wanders off mid-sentence onto whatever caught his eye (forest cats on YouTube). School English he's eager to practise, cheerful about how little of it there is. Speaks Japanese casually; his English is nouns and "is" with no articles, sound effects for what he can't say, and a laugh ("My chair is... broken. Pshh." / "Machine room. Chair. Cat. Sorry!"). Never Mio's loose fluency.
+**Kenji**. Keen to help and easily distracted: he offers to do things he isn't allowed to, and wanders off mid-sentence onto whatever caught his eye (forest cats on YouTube). School English he's eager to practise, cheerful about how little of it there is. Speaks Japanese casually; his English is nouns and "is" with no articles, sound effects for what he can't say, and a laugh ("My chair is... broken. Pshh." / "Machine room. Chair. Cat. Sorry!"). Never Mio's loose fluency.
 
-**Emi** (32, B2's team lead). Native British English, quick and complete sentences, talks like she's between two meetings. Brightness over worry: she says the good news first and the problem as an aside ("I got it. Well. I may have told them...").
+**Emi**. Quick and complete sentences, talks like she's between two meetings. Brightness over worry: she says the good news first and the problem as an aside ("I got it. Well. I may have told them...").
 
-**Mr. Mori** (58). Only polite Japanese. Warmth shows in what he does: bows, tea, making room that was already there.
+**Mr. Mori**. Only polite Japanese. Warmth shows in what he does: bows, tea, making room that was already there.
 
-**Mr. Ishibashi, the guard** (64). Polite, clipped Japanese. Speaks with his hands when he has to, precisely.
+**Mr. Ishibashi, the guard**. Polite, clipped Japanese. Speaks with his hands when he has to, precisely.
 
-**Mr. Hamada** (54). Japanese only, apologises constantly, talks to machines like animals.
+**Mr. Hamada**. Japanese only, apologises constantly, talks to machines like animals.
 
 **Narration**. Second person, a few words, only for what the scene can't show.
 

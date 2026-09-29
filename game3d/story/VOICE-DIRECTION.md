@@ -1,6 +1,6 @@
 # Voice direction for day one
 
-Every voiced line in the story files carries an `emo` tag, for example `{ say: 'mio', emo: 'dry', text: '...' }`. The builder regenerates the clips with it. This page says what each tag means and how to turn it into a TTS instruction. The voices themselves (who sounds like what) stay as in GUIDE.md, Voices and audio: Mio is voice A (low, slightly husky), Eric is the Nordic reference, speaking English.
+Every voiced line in the story files carries an `emo` tag, for example `{ say: 'mio', emo: 'dry', text: '...' }`. The builder regenerates the clips with it. This page says what each tag means and how to turn it into a TTS instruction. Which voice each person has is in docs/game/art-and-sound.md, Voices.
 
 ## Pipeline
 
@@ -15,7 +15,7 @@ Every voiced line in the story files carries an `emo` tag, for example `{ say: '
 | Speaker | Base line for the instruction | Default |
 |---|---|---|
 | mio | Young woman, low and slightly husky, unhurried, speaking English as a second language with a light Japanese accent. | dry |
-| eric | Tired man in his thirties, Norwegian accent, quiet and polite. | tired |
+| eric | Tired man in his thirties, quiet and polite, no accent. | tired |
 | mori | Man of about sixty, soft and formal Japanese, kind. | polite |
 | kenji | Young man of about twenty-one, eager and quick, casual Japanese; his English is halting, he laughs at it and gets carried away. | bright |
 | guard | Man in his sixties, clipped, correct Japanese, a security guard. | polite |
