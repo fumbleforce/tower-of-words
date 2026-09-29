@@ -1,0 +1,39 @@
+{
+  "title": "Island map: pool, shops and coast",
+  "date": "2026-09-29",
+  "by": "Codex",
+  "status": "open",
+  "question": "Does island-02 have the layout you want, or what should move?",
+  "multi": false,
+  "options": [
+    {
+      "id": "island-02",
+      "label": "island-02",
+      "image": "art/candidates/island-map-2/01-overview.png",
+      "images": [
+        "art/candidates/island-map-2/02-west.png",
+        "art/candidates/island-map-2/03-east.png"
+      ],
+      "note": "More offices, a shopping area, a pool, an onsen and a beach. Honsha station connects to head office; IT remains on B2. Open the labelled viewer for district views, location pins, full prompts and every attempt. Reviewers noted that the shop architecture reads more like a seaside village than a Japanese shopping street."
+    },
+    {
+      "id": "revise-layout",
+      "label": "revise-layout",
+      "note": "Keep this as a draft. Tell us which places or connections should change."
+    }
+  ],
+  "links": [
+    {
+      "label": "Labelled maps, zoom and every attempt",
+      "href": "reviews/island-map-2/"
+    },
+    {
+      "label": "Previous round",
+      "href": "reviews/island-map-1/"
+    },
+    {
+      "label": "Layout brief and staging",
+      "href": "bible/#doc/art/candidates/island-map-2/brief.md"
+    }
+  ]
+}

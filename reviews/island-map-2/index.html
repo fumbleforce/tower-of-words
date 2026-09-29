@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Island map 2 · Amakawa</title>
+<style>
+:root{color-scheme:light;--ink:#213137;--muted:#536b74;--paper:#f4f7f7;--line:#c8d6da;--accent:#126c70;--sea:#146294}*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.5 system-ui,sans-serif}main{max-width:1500px;margin:auto;padding:24px}a{color:var(--accent)}h1{font:700 clamp(26px,4vw,42px)/1.12 'Trebuchet MS',sans-serif;margin:20px 0 12px}h2{font-size:25px}h3{font-size:21px}.intro{max-width:80ch}.meta{font:13px/1.5 ui-monospace,monospace;color:var(--muted);white-space:pre-wrap;overflow-wrap:anywhere}.toolbar{display:flex;flex-wrap:wrap;gap:8px;margin:20px 0 12px}button,.button{font:inherit;border:1px solid var(--line);background:white;color:var(--ink);border-radius:5px;padding:10px 14px;cursor:pointer;text-decoration:none}button[aria-pressed=true]{background:var(--accent);color:white;border-color:var(--accent)}button:disabled{opacity:.45;cursor:default}button:focus-visible,a:focus-visible,summary:focus-visible{outline:3px solid #d74572;outline-offset:3px}.spacer{flex:1}.viewport{overflow:auto;max-height:82vh;border:1px solid var(--line);background:var(--sea)}.map{position:relative;width:100%;margin:0}.map>img{display:block;width:100%;height:auto}.pin{position:absolute;transform:translate(-50%,-50%);border:2px solid white;box-shadow:0 1px 5px #1238;border-radius:50%;padding:0;width:30px;height:30px;background:#123d4d;color:white;font:bold 15px system-ui;z-index:1}.pin[aria-pressed=true]{background:#ae3056;border-color:white}.north{position:absolute;right:12px;top:10px;border-radius:4px;color:white;background:#123d4dcc;padding:3px 9px;font-weight:700}.caption{color:var(--muted);margin:9px 0}.key{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;list-style:none;padding:0}.key button{width:100%;text-align:left;min-height:64px}.key small{display:block;color:var(--muted)}.key button[aria-pressed=true] small{color:white}.selected{min-height:2em;font-weight:600}details{border-top:1px solid var(--line);padding:18px 0}summary{cursor:pointer;font-size:21px;font-weight:650}article{margin:30px 0 50px}article img{display:block;width:100%;height:auto}.attempt-image{display:block;width:100%;padding:0;border:0;background:var(--sea)}.prompt{max-width:95ch;font-size:15px;white-space:pre-wrap}.links{display:flex;gap:18px;flex-wrap:wrap}footer{padding:25px 0;color:var(--muted)}dialog{width:min(1600px,96vw);max-height:96vh;padding:16px;border:1px solid var(--line);background:var(--paper);color:var(--ink)}dialog::backdrop{background:#102229d9}dialog img{display:block;max-width:100%;max-height:72vh;margin:auto;object-fit:contain}dialog h2{margin:0;font-size:21px}dialog .toolbar{margin-top:0;align-items:center}#load-error{color:#93314a}@media(max-width:650px){main{padding:16px}.toolbar{gap:6px}.toolbar button{padding:9px 10px}.spacer{display:none}.key{grid-template-columns:1fr}.pin{width:24px;height:24px;font-size:12px}.viewport{max-height:70vh}.north{font-size:12px;right:5px;top:5px}h1{margin-top:18px}dialog{padding:10px}}
+</style>
+</head>
+<body>
+<main>
+<div class="links"><a href="../../bible/#review/island-map-2">Pick or comment in Review</a><a href="../island-map-1/">Previous round</a></div>
+<h1>Island map 2</h1>
+<p class="intro">More offices, a shopping area and a pool by the gym, with an onsen and beach along the coast. Honsha station still connects to head office, with IT on B2. The overview and two district views show the proposed layout.</p>
+<h2>island-02</h2>
+<p id="load-error" role="status" hidden></p>
+<div class="toolbar" aria-label="Map views">
+<button data-view="overview" aria-pressed="true" disabled>Overview</button><button data-view="west" aria-pressed="false" disabled>West · arrival</button><button data-view="east" aria-pressed="false" disabled>East · campus</button><span class="spacer"></span><button id="zoom-out" aria-label="Zoom out" disabled>−</button><button id="zoom-reset">100%</button><button id="zoom-in" aria-label="Zoom in">+</button><button id="labels" aria-pressed="true">Location pins</button>
+</div>
+<div class="viewport" tabindex="0" aria-label="Map; scroll to pan when zoomed">
+<figure class="map"><img id="map-image" src="../../art/candidates/island-map-2/01-overview.png" alt="island-02 overview"><div id="pins"></div><span class="north">↑ N</span></figure>
+</div>
+<p id="caption" class="caption"></p><p id="selected" class="selected" aria-live="polite">Select a numbered place to find it on the map.</p><ul class="key" id="key"></ul>
+<p id="layout-note" class="intro">These images propose the geography. Apartment interiors follow the layout decision.</p>
+<div class="links"><a id="full-size" href="../../art/candidates/island-map-2/01-overview.png" target="_blank" rel="noopener">Open full-size image</a><a href="../../bible/#review/island-map-2">Choose or request changes</a><a href="../../bible/#doc/art/candidates/island-map-2/brief.md">Layout brief and staging</a></div>
+<details id="attempt-history"><summary>Every attempt, in generation order</summary><p>Open an image to compare attempts with the arrow keys. Each prompt and its settings are shown below.</p><div id="attempts"></div></details>
+<footer>No game map or approved place facts have changed.</footer>
+</main>
+<dialog id="lightbox" aria-labelledby="lightbox-title">
+<div class="toolbar"><h2 id="lightbox-title"></h2><span class="spacer"></span><button id="previous-attempt" aria-label="Previous attempt">←</button><button id="next-attempt" aria-label="Next attempt">→</button><button id="close-lightbox">Close</button></div>
+<img id="lightbox-image" alt=""><p id="lightbox-note" class="caption"></p><a id="lightbox-full" target="_blank" rel="noopener">Open full-size image</a>
+</dialog>
+<script>
+const root = '../../art/candidates/island-map-2/';
+const one = selector => document.querySelector(selector);
+const defaultSelection = 'Select a numbered place to find it on the map.';
+let views = {}, places = [], attempts = [], current = 'overview', zoom = 100, labels = true, selected = null, attemptIndex = 0;
+
+function select(id) {
+  selected = id;
+  one('#selected').textContent = `${id}. ${places[id - 1][0]} · ${places[id - 1][1]}`;
+  document.querySelectorAll('[data-place]').forEach(button => button.setAttribute('aria-pressed', String(+button.dataset.place === id)));
+}
+
+function render() {
+  const view = views[current];
+  if (!view) return;
+  if (selected !== null && !view.pins.some(pin => pin[0] === selected)) {
+    selected = null;
+    one('#selected').textContent = defaultSelection;
+  }
+  one('#map-image').src = root + view.file;
+  one('#map-image').alt = view.alt || view.title;
+  one('#full-size').href = root + view.file;
+  one('#caption').textContent = view.title + ' · Arrow keys switch views. Zoom in and scroll to inspect.';
+  document.querySelectorAll('[data-view]').forEach(button => {
+    button.disabled = !views[button.dataset.view];
+    button.setAttribute('aria-pressed', String(button.dataset.view === current));
+  });
+  one('#pins').replaceChildren();
+  one('#key').replaceChildren();
+  for (const [id, x, y] of view.pins) {
+    const [name, note] = places[id - 1];
+    const pin = document.createElement('button');
+    pin.className = 'pin';
+    pin.textContent = id;
+    pin.dataset.place = id;
+    pin.setAttribute('aria-label', `${id}. ${name}`);
+    pin.setAttribute('aria-pressed', String(selected === id));
+    pin.style.left = (x / view.width * 100) + '%';
+    pin.style.top = (y / view.height * 100) + '%';
+    pin.onclick = () => select(id);
+    one('#pins').append(pin);
+    const item = document.createElement('li'), button = document.createElement('button'), detail = document.createElement('small');
+    button.dataset.place = id;
+    button.setAttribute('aria-pressed', String(selected === id));
+    button.append(document.createTextNode(`${id}. ${name}`));
+    detail.textContent = note;
+    button.append(detail);
+    button.onclick = () => select(id);
+    item.append(button);
+    one('#key').append(item);
+  }
+  one('.viewport').scrollTo(0, 0);
+}
+
+function scale(value) {
+  zoom = Math.max(100, Math.min(250, value));
+  one('.map').style.width = zoom + '%';
+  one('#zoom-reset').textContent = zoom + '%';
+  one('#zoom-out').disabled = zoom === 100;
+  one('#zoom-in').disabled = zoom === 250;
+}
+
+function showAttempt(index) {
+  attemptIndex = (index + attempts.length) % attempts.length;
+  const attempt = attempts[attemptIndex];
+  one('#lightbox-title').textContent = attempt.id;
+  one('#lightbox-image').src = root + attempt.file;
+  one('#lightbox-image').alt = attempt.note || attempt.id;
+  one('#lightbox-note').textContent = attempt.note || '';
+  one('#lightbox-full').href = root + attempt.file;
+  if (!one('#lightbox').open) one('#lightbox').showModal();
+}
+
+function renderAttempts(data) {
+  attempts = data.attempts;
+  for (const [index, attempt] of attempts.entries()) {
+    const article = document.createElement('article');
+    article.id = 'attempt-' + attempt.id;
+    const title = document.createElement('h3'), prompt = document.createElement('p'), note = document.createElement('p'), metadata = document.createElement('pre');
+    title.textContent = attempt.id;
+    prompt.className = 'prompt';
+    prompt.textContent = attempt.prompt;
+    note.textContent = attempt.note || '';
+    metadata.className = 'meta';
+    const {id, file, prompt: fullPrompt, note: description, ...settings} = attempt;
+    metadata.textContent = JSON.stringify({date: data.date, tool: data.tool, settings: data.settings, ...settings}, null, 2);
+    const button = document.createElement('button'), image = document.createElement('img');
+    button.className = 'attempt-image';
+    button.setAttribute('aria-label', 'Enlarge ' + attempt.id);
+    button.onclick = () => showAttempt(index);
+    image.loading = 'lazy';
+    image.src = root + attempt.file;
+    image.alt = attempt.note || attempt.id;
+    button.append(image);
+    article.append(title, prompt, note, metadata, button);
+    one('#attempts').append(article);
+  }
+}
+
+async function readData(file) {
+  const response = await fetch(root + file);
+  if (!response.ok) throw new Error(`${file}: HTTP ${response.status}`);
+  return response.json();
+}
+function loadError(error) {
+  one('#load-error').hidden = false;
+  one('#load-error').textContent += `Could not load map details (${error.message}). `;
+}
+readData('views.json').then(data => {
+  places = data.places;
+  views = data.views;
+  if (data.note) one('#layout-note').textContent = data.note;
+  render();
+}).catch(loadError);
+readData('attempts.json').then(renderAttempts).catch(loadError);
+
+document.querySelectorAll('[data-view]').forEach(button => button.onclick = () => { current = button.dataset.view; render(); });
+one('#zoom-out').onclick = () => scale(zoom - 50);
+one('#zoom-in').onclick = () => scale(zoom + 50);
+one('#zoom-reset').onclick = () => scale(100);
+one('#labels').onclick = () => {
+  labels = !labels;
+  one('#pins').hidden = !labels;
+  one('#labels').setAttribute('aria-pressed', String(labels));
+};
+one('#previous-attempt').onclick = () => showAttempt(attemptIndex - 1);
+one('#next-attempt').onclick = () => showAttempt(attemptIndex + 1);
+one('#close-lightbox').onclick = () => one('#lightbox').close();
+document.addEventListener('keydown', event => {
+  if (!['ArrowLeft', 'ArrowRight'].includes(event.key)) return;
+  const delta = event.key === 'ArrowRight' ? 1 : -1;
+  if (one('#lightbox').open) {
+    event.preventDefault();
+    showAttempt(attemptIndex + delta);
+    return;
+  }
+  if (event.target.closest('button,a,input,textarea,summary') || zoom > 100) return;
+  const names = Object.keys(views);
+  if (!names.length) return;
+  event.preventDefault();
+  current = names[(names.indexOf(current) + delta + names.length) % names.length];
+  render();
+});
+scale(100);
+</script>
+</body>
+</html>

@@ -2,7 +2,7 @@
   "title": "Island campus: connected map views",
   "date": "2026-09-29",
   "by": "Codex",
-  "status": "open",
+  "status": "superseded",
   "question": "Which layout should we use: the leafy campus or the denser company town?",
   "multi": false,
   "options": [
@@ -40,6 +40,10 @@
     {
       "label": "Layout brief and staging",
       "href": "bible/#doc/art/candidates/island-map-1/brief.md"
+    },
+    {
+      "label": "Next round: pool, shopping and coast",
+      "href": "bible/#review/island-map-2"
     }
   ]
 }
