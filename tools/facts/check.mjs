@@ -225,6 +225,29 @@ function checkCast(game) {
   for (const p of Object.keys(game.portraits)) if (!faceIds.has(p)) bad(file, `the game has portraits for \`${p}\`, "Portraits" doesn't list them`);
 }
 
+// places.md trips: "Getting between places" lists one trip per line, "- `from` → `to`, how: text", between the
+// built places (their "## ... (`id`)" sections) and the planned ones ("- Name (`id`): text" under "Places decided but
+// not built"). The bible's places diagram reads these lines, so each must parse and name a known place.
+function checkTrips() {
+  const file = 'docs/game/places.md';
+  const md = read(path.join(DOCS, 'places.md'));
+  const built = new Set([...md.matchAll(/^## .+? \(`([a-z0-9_]+)`\)\s*$/gm)].map((m) => m[1]));
+  const unbuilt = section(md, (h) => h === 'Places decided but not built', 2, file) || '';
+  const planned = new Set([...unbuilt.matchAll(/^- .+? \(`([a-z0-9_]+)`\): /gm)].map((m) => m[1]));
+  const trips = section(md, (h) => h === 'Getting between places', 2, file);
+  if (trips == null) { bad(file, 'no "## Getting between places" section'); return; }
+  const reached = new Set();
+  for (const l of trips.split('\n').filter((x) => /^- /.test(x))) {
+    const m = /^- `([a-z0-9_]+)` → `([a-z0-9_]+)`, [^:]+: \S/.exec(l);
+    if (!m) { bad(file, `"Getting between places": not a trip line ("- \`from\` → \`to\`, how: text"): ${l.slice(0, 60)}`); continue; }
+    for (const end of [m[1], m[2]]) {
+      reached.add(end);
+      if (!built.has(end) && !planned.has(end)) bad(file, `"Getting between places": \`${end}\` is neither a built place nor in "Places decided but not built"`);
+    }
+  }
+  for (const place of Object.keys(STORY)) if (!reached.has(place)) bad(file, `"Getting between places": no trip to or from \`${place}\``);
+}
+
 // places.md: one "## <Name> (`<place>`)" section per place, with ### Things, Spots, Zones, Who's there when, Small moments
 const smallMoments = {};   // story file -> node ids claimed by places.md
 function checkPlaces(game) {
@@ -385,7 +408,7 @@ if (DUMP) {
   console.log('\nWords taught (type steps):'); for (const [sf, N] of Object.entries(game.nodes)) for (const [n, v] of Object.entries(N)) for (const t of v.types) console.log(`  ${t.word} from ${t.from} in ${sf} ${n}`);
   process.exit(0);
 }
-for (const [area, fn] of [['cast', checkCast], ['places', checkPlaces], ['words', checkWords], ['systems', checkSystems], ['stories', checkStories]]) {
+for (const [area, fn] of [['cast', checkCast], ['places', checkPlaces], ['trips', checkTrips], ['words', checkWords], ['systems', checkSystems], ['stories', checkStories]]) {
   try { fn(game); } catch (e) { bad(area, e.message); }
 }
 if (pending.length) { console.log(`\nPending (decided, not done yet):`); for (const p of pending) console.log('  ' + p); }

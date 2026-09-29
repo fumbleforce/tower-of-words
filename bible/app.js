@@ -200,7 +200,7 @@ function wordLabel(id) {
 
 // ------------------------------------------------------------------ pages
 const NAV = [
-  ['review', 'Review'], ['home', 'Home'], ['characters', 'Characters'], ['places', 'Places'], ['story', 'Stories'], ['story-map', 'Story map'],
+  ['review', 'Review'], ['home', 'Home'], ['characters', 'Characters'], ['places', 'Places'], ['place-map', 'Places diagram'], ['story', 'Stories'], ['story-map', 'Story map'],
   ['words', 'Words and commands'], ['rules', 'Rules and decisions'], ['art', 'Art and style'], ['audio', 'Audio'],
   ['reviews', 'Review pages'], ['questions', 'Open questions'], ['sources', 'Sources'],
 ];
@@ -421,7 +421,7 @@ function pagePlaces() {
           ${D0 && D0.quotes.length ? `<h3>Decisions</h3>${factRows(D0.quotes)}` : ''}
         </div></div></section>`;
     }).join('')}
-    ${between ? `<h2 id="p-between">Getting between places</h2><div class="md">${at(() => md(between))}</div>` : ''}
+    ${between ? `<h2 id="p-between">Getting between places</h2><p><a href="#place-map">Places diagram</a></p><div class="md">${at(() => md(between))}</div>` : ''}
     <h2 id="p-later">Decided, not built</h2>${unbuilt ? `<div class="md">${at(() => md(unbuilt))}</div>` : ''}${factRows(D.places_mentioned)}
     ${legacyBox('Painted backgrounds from the VN', `<p class="muted small">Picked for the visual novel. The world is flat-shaded 3D now, so none of these is used.</p>
       <div class="grid" style="grid-template-columns:repeat(auto-fill,minmax(240px,1fr))" data-lbg>${D.locations.map((l) => `
@@ -849,6 +849,12 @@ async function route() {
     case 'character': html = pageCharacter(arg); break;
     case 'places': html = pagePlaces(); break;
     case 'story': html = arg ? await pageStoryline(arg) : pageStory(); break;
+    case 'place-map': html = `<div class="page pmap" id="pmap"><h1>Places diagram</h1><p class="muted">Reading places.md…</p></div>`;
+      after = async () => {
+        const opts = { arg, here: HERE, liveTag, url, img, doc: L.files['docs/game/places.md'] || '', md: (t) => atBase('docs/game/places.md', () => md(t)), link: (p) => `<a href="#doc/${esc(p)}">${esc(p)}</a>` };
+        try { await (await import(new URL('places-map.js', HERE).href)).mount($('#pmap'), opts); } catch (e) { $('#pmap').innerHTML = `<h1>Places diagram</h1><p>The diagram didn't load: ${esc(e.message)}</p>`; }
+      };
+      break;
     case 'story-map': html = `<div class="page smap" id="smap"><h1>Story map</h1><p class="muted">Reading the story files…</p></div>`;
       after = async () => { try { await (await import(new URL('story-map.js', HERE).href)).mount($('#smap'), { ROOT, arg, here: HERE, liveTag }); } catch (e) { $('#smap').innerHTML = `<h1>Story map</h1><p>The map didn't load: ${esc(e.message)}</p>`; } };
       break;
