@@ -2,7 +2,7 @@
   "title": "The walk home and Eric’s dorm",
   "date": "2026-09-29",
   "by": "Codex and Claude",
-  "status": "not-ready",
+  "status": "open",
   "question": "Does this short walk and room layout work for day 1?",
   "multi": false,
   "options": [
@@ -14,12 +14,28 @@
         "art/candidates/dorm-route-1/02-room.png"
       ],
       "note": "Walk from head office around the fountain to a sheltered dorm entrance, then through a short passage to Eric’s room. Bed left, desk right, boxes beside the desk; the window faces a nearby concrete wall. These are layout concepts, with the muted exterior revised after review. The room view does not establish the exact distance to the wall."
+    },
+    {
+      "id": "dorm-b",
+      "label": "dorm-b: seaward promenade and courtyard entrance",
+      "image": "art/candidates/dorm-route-claude/01-layout.png",
+      "images": [
+        "art/candidates/dorm-route-claude/02-route.png",
+        "art/candidates/dorm-route-claude/03-walk.png",
+        "art/candidates/dorm-route-claude/04-dorm.png",
+        "art/candidates/dorm-route-claude/05-room.png"
+      ],
+      "note": "Walk from head office past the bike racks, along the seaward shop fronts and konbini, then through a courtyard to the dorm. About 56 game units (85 m), roughly 37 seconds of walking. Coin laundry and sento sit beside the dorm. Eric’s ground-floor room at the back of block A faces block B’s bare concrete wall, 2 m away; bed left, desk under the window, boxes by the bed. These are planning scenes rendered with the game’s own 3D modules, not a playable route. Eric obscures part of the desk and window in the room view; shop signs are still bright."
     }
   ],
   "links": [
     {
       "label": "Every render attempt and full prompt",
       "href": "bible/#doc/art/candidates/dorm-route-1/attempts.md"
+    },
+    {
+      "label": "dorm-b: every Claude render, staging and source settings",
+      "href": "bible/#doc/reviews/dorm-route-1/claude-attempts.md"
     },
     {
       "label": "Planned places and the continuous trip",
