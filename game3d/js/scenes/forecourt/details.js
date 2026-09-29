@@ -1,7 +1,7 @@
 // Small outdoor fittings. Shared prop materials and low-sided geometry keep the court inexpensive.
 import * as THREE from 'three';
 import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
-import { PAL, mat, rbox, sh, textTexture, plane } from '../../props.js';
+import { PAL, mat, rbox, sh, textTexture, plane, JP_FONT } from '../../props.js';
 
 export function boxes(parts, color) {
   const geometries = parts.map(([w, h, d, x, y, z]) => new THREE.BoxGeometry(w, h, d).translate(x, y + h / 2, z));
@@ -103,5 +103,51 @@ export function openDoor() {
   }
   group.add(rbox(1.8, 0.1, 0.18, PAL.doorFrame, { y: 1.7, seg: 1 }));
   group.add(rbox(1.65, 0.012, 0.22, PAL.metal, { y: 0.003, seg: 1, r: 0.003 }));
+  return group;
+}
+
+// A street tree: a thin trunk and two stacked low-poly crowns in the muted leaf greens.
+export function tree(seed = 0, height = 1) {
+  const group = new THREE.Group();
+  const trunk = new THREE.CylinderGeometry(0.05, 0.07, 0.9 * height, 6).translate(0, 0.45 * height, 0);
+  group.add(sh(new THREE.Mesh(trunk, mat('#5d5249'))));
+  for (const [i, y, r] of [
+    [0, 1.02, 0.5],
+    [1, 1.42, 0.36],
+  ]) {
+    const crown = sh(
+      new THREE.Mesh(new THREE.IcosahedronGeometry(r, 0), mat(PAL.leaf[(seed + i * 2) % PAL.leaf.length])),
+    );
+    crown.position.set(i * (seed % 2 ? 0.08 : -0.08), y * height, 0);
+    crown.rotation.set(seed * 0.7, seed * 1.3, 0);
+    group.add(crown);
+  }
+  return group;
+}
+
+// A low stone name sign, the kind that stands at a Japanese company's front door.
+export function monument(top, bottom, width = 1.3) {
+  const group = new THREE.Group();
+  group.add(rbox(width, 0.62, 0.22, '#565c66', { r: 0.02 }));
+  group.add(rbox(width + 0.08, 0.05, 0.3, '#7b818a', { r: 0.01 }));
+  const texture = textTexture(
+    (ctx, w, h) => {
+      ctx.fillStyle = '#565c66';
+      ctx.fillRect(0, 0, w, h);
+      ctx.fillStyle = '#e6e4de';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.font = '700 92px ' + JP_FONT;
+      ctx.fillText(top, w / 2, h * 0.38, w - 30);
+      ctx.globalAlpha = 0.75;
+      ctx.font = '600 40px sans-serif';
+      ctx.fillText(bottom, w / 2, h * 0.8, w - 30);
+    },
+    512,
+    256,
+  );
+  const face = plane(width - 0.12, 0.47, texture);
+  face.position.set(0, 0.33, 0.112);
+  group.add(face);
   return group;
 }
