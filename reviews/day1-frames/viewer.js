@@ -1,13 +1,12 @@
-import { lineHTML } from '../../game3d/js/lang.js';
+import { lineHTML, WORDS } from '../../game3d/js/lang.js';
 import { PORTRAITS } from '../../game3d/js/ui/portrait-data.js';
 const $ = s => document.querySelector(s);
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const id = 'day1-frames', draftKey = 'review-frames:' + id;
 const names = { eric:'Eric', mio:'Mio', miotext:'Mio · message', guard:'Ishibashi', kuroda:'Hamada', mori:'Mori', kenji:'Kenji', kuro:'Receptionist', gatev:'Gate', commuter:'Commuter', sales1:'Colleague', sales2:'Colleague', emi:'Emi' };
-let sections, all, section = 0, passage = 0, version = 'before', frame = 0;
+let sections, all, passage = 0, translations;
 let draft = { choices:{}, comments:{} }, revision = 0, saving = false;
-const current = () => sections[section].changes[passage];
-const frames = () => current()[version];
+const current = () => all[passage];
 const applyLabel = change => ({remove:'Remove this line',merge:'Use merged lines',flow:'Use shorter sequence',replace:'Use revised line'}[change.kind] || 'Use revision');
 function status(text) { $('#status').textContent = text; }
 function remember() {
@@ -22,43 +21,67 @@ function portrait(f) {
   const face = PORTRAITS[who].includes(f.face) ? f.face : 'neutral';
   return `<img src="../../game3d/assets/portraits/${who}-${face}.webp" alt="${esc(names[who] || who)}">`;
 }
-function content(f) {
-  return `<p class="frame-text">${lineHTML((f.text || '').replace(/^>\s*/,''))}</p>${f.options?.length ? `<ul class="choice-list">${f.options.map(o => `<li>${lineHTML(typeof o === 'string' ? o : o.text)}</li>`).join('')}</ul>` : ''}`;
+function textContent(text) {
+  const gloss = translations[text];
+  const line = gloss ? esc(text.replace(/\{(\w+)\}/g, (_, id) => WORDS[id]?.ja || id)) : lineHTML(text.replace(/^>\s*/,''));
+  return `<span class="wording">${line}</span>${gloss ? `<p class="reading">${esc(gloss[0])}</p><p class="translation">${esc(gloss[1])}</p>` : ''}`;
 }
-function renderFrame() {
-  const list=frames(); frame=Math.min(Math.max(frame,0),list.length-1);
-  const f=list[frame], img=portrait(f), label=names[f.speaker] || f.speaker || ({action:'Action',choice:'Your choice',prompt:'Your turn'}[f.kind] || 'Narration');
-  $('#frame').className = (img ? '' : 'no-portrait ') + (f.focus ? 'focus' : '');
-  $('#frame').innerHTML = `${img}<div><div class="speaker">${esc(label)}</div>${content(f)}<div class="frame-tag">${f.focus ? (version==='before' ? 'Passage under review' : 'Proposed change') : 'Context'}</div></div>`;
-  $('#frame-count').textContent = `${frame+1} / ${list.length}`;
-  $('#back-frame').disabled=frame===0; $('#next-frame').disabled=frame===list.length-1;
-  document.querySelectorAll('[data-version]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.version===version)));
-  $('#transcript').innerHTML=list.map(f=>`<li class="${f.focus?'focused':''}"><b>${esc(names[f.speaker] || f.speaker || ({action:'Action',choice:'Your choice',prompt:'Your turn'}[f.kind] || 'Narration'))}</b>${content(f)}</li>`).join('');
+function content(f) {
+  return `<div class="frame-text">${textContent(f.text || '')}</div>${f.options?.length ? `<ul class="choice-list">${f.options.map(o => `<li>${textContent(typeof o === 'string' ? o : o.text)}</li>`).join('')}</ul>` : ''}`;
+}
+// Match unchanged frames, then show each old/new span together in story order.
+function compare(before, after) {
+  const key = f => JSON.stringify([f.kind, f.speaker, f.text, f.options]);
+  const a = before.map(key), b = after.map(key);
+  const lengths = Array.from({length:a.length+1},()=>Array(b.length+1).fill(0));
+  for(let i=a.length-1;i>=0;i--) for(let j=b.length-1;j>=0;j--)
+    lengths[i][j] = a[i]===b[j] ? 1+lengths[i+1][j+1] : Math.max(lengths[i+1][j],lengths[i][j+1]);
+  const rows=[]; let i=0,j=0;
+  while(i<a.length || j<b.length) {
+    if(i<a.length && j<b.length && a[i]===b[j]) { rows.push({frame:before[i++],type:'context'}); j++; }
+    else if(i<a.length && (j===b.length || lengths[i+1][j]>=lengths[i][j+1])) rows.push({frame:before[i++],type:'removed'});
+    else rows.push({frame:after[j++],type:'added'});
+  }
+  return rows;
+}
+function renderPassage() {
+  const rows=compare(current().before,current().after);
+  $('#passage').innerHTML=rows.map(({frame:f,type},i)=>{
+    const img=portrait(f), label=names[f.speaker] || f.speaker || ({action:'Action',choice:'Your choice',prompt:'Your turn'}[f.kind] || 'Narration');
+    const tag=type==='removed' ? 'Remove' : type==='added' ? (current().kind==='merge' ? '→ Merged line' : '→ Proposed') : '';
+    const showTag=tag && (i===0 || rows[i-1].type!==type);
+    return `<article class="line ${f.kind} ${type} ${img?'':'no-portrait'}">${img}<div>${showTag?`<div class="change-label">${tag}</div>`:''}<div class="speaker">${esc(label)}</div>${content(f)}</div></article>`;
+  }).join('');
 }
 function renderDecision() {
   const choice=draft.choices[current().id];
   $('#keep').setAttribute('aria-pressed',String(choice==='keep'));
   $('#apply').setAttribute('aria-pressed',String(choice==='apply'));
   $('#apply').textContent=applyLabel(current());
-  $('#decision').textContent=choice==='keep'?'Keep original':choice==='apply'?applyLabel(current()):'Undecided';
-  $('#progress').textContent=`${all.filter(c=>draft.choices[c.id]).length} of ${all.length} passages decided`;
+  $('#decision').textContent=choice==='keep'?'✓ Keep original':choice==='apply'?'✓ Use revision':'Undecided';
+  const count=all.filter(c=>draft.choices[c.id]).length;
+  $('#progress').textContent=`${count} of ${all.length} decided`;
+  $('#passages').innerHTML=sections.map(s=>`<optgroup label="${esc(s.title)}">${s.changes.map(c=>`<option value="${all.indexOf(c)}" ${c===current()?'selected':''}>${draft.choices[c.id]?'✓':'○'} ${all.indexOf(c)+1}. ${esc(c.title)}</option>`).join('')}</optgroup>`).join('');
 }
 function render() {
-  $('#sections').innerHTML=sections.map((s,i)=>`<button data-section="${i}" aria-pressed="${i===section}">${esc(s.title)}</button>`).join('');
-  $('#passages').innerHTML=sections[section].changes.map((c,i)=>`<option value="${i}" ${i===passage?'selected':''}>${i+1}. ${esc(c.title)}</option>`).join('');
-  $('#position').textContent=`${sections[section].title} · ${passage+1} of ${sections[section].changes.length}`;
-  $('#title').textContent=current().title; $('#summary').textContent=current().summary;
+  const section=sections.find(s=>s.changes.includes(current()));
+  $('#position').textContent=`${section.title} · ${passage+1} of ${all.length}`;
+  $('#title').textContent=current().title;
+  $('#summary').textContent=current().summary.split(/(?<=\.) /)[0];
   $('#comment').value=draft.comments[current().id] || '';
-  $('#previous').disabled=section===0 && passage===0;
-  $('#next').disabled=section===sections.length-1 && passage===sections[section].changes.length-1;
-  renderFrame(); renderDecision();
+  $('#previous').disabled=passage===0;
+  $('#next').disabled=passage===all.length-1;
+  renderPassage(); renderDecision();
 }
-function select(s,p) { section=s; passage=p; frame=0; version='before'; render(); }
-function move(delta) {
-  let s=section,p=passage+delta;
-  if(p<0 && s>0){s--;p=sections[s].changes.length-1;}
-  if(p>=sections[s].changes.length && s<sections.length-1){s++;p=0;}
-  if(p>=0 && p<sections[s].changes.length)select(s,p);
+function select(index) { passage=index; render(); window.scrollTo(0,0); }
+function move(delta) { const next=passage+delta;if(next>=0 && next<all.length)select(next); }
+function decide(choice) {
+  draft.choices[current().id]=choice;remember();
+  for(let step=1;step<all.length;step++) {
+    const next=(passage+step)%all.length;
+    if(!draft.choices[all[next].id]) {select(next);return;}
+  }
+  status('All passages decided. Save decisions to send them.');
 }
 async function save() {
   if(saving)return;
@@ -77,23 +100,20 @@ async function save() {
 }
 async function init(){
   const response=await fetch('./frames.json');if(!response.ok)throw Error('Could not load passages');
-  ({sections}=await response.json()); all=sections.flatMap(s=>s.changes);
+  ({sections,translations={}}=await response.json()); all=sections.flatMap(s=>s.changes);
   if(!all.length || all.some(c=>!c.before?.length || !c.after?.length))throw Error('A passage is missing its context');
   let feedback=null;
   try {const r=await fetch('./feedback.json',{cache:'no-store'});if(r.ok)feedback=await r.json();}catch{}
   if(feedback){for(const c of all){if(feedback.picked?.includes(c.id))draft.choices[c.id]='apply';else if(feedback.options?.[c.id]?.reject)draft.choices[c.id]='keep'; draft.comments[c.id]=feedback.options?.[c.id]?.comment || '';}}
   let local=null;try{local=JSON.parse(localStorage.getItem(draftKey));}catch{}
   if(local?.choices && local?.comments && (!feedback?.sent || local.updated>Date.parse(feedback.sent))){draft=local;status('Restored your unsent draft.');}else status(feedback?'Loaded your saved decisions.':'No decisions saved yet.');
-  $('#sections').onclick=e=>{const b=e.target.closest('[data-section]');if(b)select(Number(b.dataset.section),0);};
-  $('#passages').onchange=e=>select(section,Number(e.target.value));
+  $('#passages').onchange=e=>select(Number(e.target.value));
   $('#previous').onclick=()=>move(-1);$('#next').onclick=()=>move(1);
-  $('#back-frame').onclick=()=>{frame--;renderFrame();};$('#next-frame').onclick=()=>{frame++;renderFrame();};
-  document.querySelectorAll('[data-version]').forEach(b=>b.onclick=()=>{version=b.dataset.version;frame=0;renderFrame();});
-  $('#keep').onclick=()=>{draft.choices[current().id]='keep';remember();};
-  $('#apply').onclick=()=>{draft.choices[current().id]='apply';remember();};
+  $('#keep').onclick=()=>decide('keep');
+  $('#apply').onclick=()=>decide('apply');
   $('#clear').onclick=()=>{delete draft.choices[current().id];remember();};
   $('#comment').oninput=e=>{draft.comments[current().id]=e.target.value;remember();};$('#save').onclick=save;
-  document.addEventListener('keydown',e=>{if(/INPUT|TEXTAREA|SELECT/.test(e.target.tagName))return;if(e.key==='ArrowRight' && frame<frames().length-1){frame++;renderFrame();e.preventDefault();}if(e.key==='ArrowLeft' && frame>0){frame--;renderFrame();e.preventDefault();}});
+  document.addEventListener('keydown',e=>{if(/INPUT|TEXTAREA|SELECT|BUTTON/.test(e.target.tagName))return;if(e.key==='ArrowRight'){move(1);e.preventDefault();}if(e.key==='ArrowLeft'){move(-1);e.preventDefault();}});
   render();window.__framesReady=true;
 }
 init().catch(e=>{status(e.message);$('#title').textContent='Review could not load';$('#save').disabled=true;});
