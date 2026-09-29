@@ -1,0 +1,12 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>Day 1 · read and choose</title><link rel="stylesheet" href="./style.css"></head>
+<body><header><a href="/bible/#review/day1-frames">Back to Review</a><h1>Read it in context</h1><p>Keep the original, or try the proposed cut or merge. Nothing changes in the game until you choose.</p></header>
+<main><nav id="sections" aria-label="Part of the day"></nav><div class="passage-nav"><button id="previous">← Previous passage</button><label class="sr" for="passages">Passage</label><select id="passages"></select><button id="next">Next passage →</button></div>
+<section aria-labelledby="title"><div class="heading"><span id="position"></span><span id="decision"></span></div><h2 id="title">Loading…</h2><p id="summary"></p>
+<div class="versions" aria-label="Compare versions"><button data-version="before" aria-pressed="true">Original</button><button data-version="after" aria-pressed="false">Proposed</button></div>
+<article id="frame" aria-live="polite"></article><div class="frame-nav"><button id="back-frame">← Previous frame</button><span id="frame-count"></span><button id="next-frame">Next frame →</button></div>
+<details id="context"><summary>See the whole passage</summary><ol id="transcript"></ol></details>
+<div class="decision-buttons"><button id="keep">Keep original</button><button id="apply">Use revision</button><button id="clear">Decide later</button></div>
+<label class="comment-label" for="comment">A note about this passage <span>(optional)</span></label><textarea id="comment" rows="2" placeholder="Keep this part, but…"></textarea></section>
+<footer><div><strong id="progress"></strong><p id="status" role="status">Loading saved decisions…</p></div><button id="save">Save decisions</button></footer>
+<p class="scope">Each comparison changes one passage; neighboring proposals still show the original lines. Dialogue and portraits come from the game. Action frames describe what happens between lines; they are not extra game dialogue. Use the arrows to read at your own pace.</p></main><script type="module" src="./viewer.js"></script></body></html>
