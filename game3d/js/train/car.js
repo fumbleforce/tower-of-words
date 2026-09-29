@@ -26,7 +26,21 @@ export const BENCHES = [
 // game3d: the doors moved in from 3.52 so the doorway sits wholly on the straight wall, clear of the rounded
 // corner piece (which the doorway used to cut into); the near benches end short of them
 export const DOOR_X = 3.25,
-  DOOR_W = 0.68;
+  DOOR_W = 0.68,
+  DOOR_SILL = 0.035,
+  DOOR_TOP = 1.22;
+// The platform-side doorways' clear openings: the one definition the walls, stripes, frames and leaves are all
+// built from, whatever the wall height in the current framing (Jørgen, 2026-09-29: "STOP having the frame from the
+// cart overlap the doors"). game3d/test/unit/train-doorways.test.mjs checks that nothing of the body enters them.
+export const DOORWAYS = [-DOOR_X, DOOR_X].map((x) => ({
+  x,
+  x0: x - DOOR_W / 2,
+  x1: x + DOOR_W / 2,
+  y0: DOOR_SILL,
+  y1: DOOR_TOP,
+}));
+// the wall is cut this much wider than each opening, more than the extrusion bevel (0.018) that grows into holes
+const DOOR_GAP = 0.025;
 export const NEAR_END = DOOR_X - DOOR_W / 2 - 0.08;
 
 export const COL = {
@@ -49,7 +63,7 @@ export const COL = {
 
 const mats = {};
 export function mat(name, color, opts = {}) {
-  if (!mats[name]) mats[name] = new THREE.MeshStandardMaterial({ color, roughness: 0.78, metalness: 0, ...opts });
+  if (!mats[name]) mats[name] = new THREE.MeshStandardMaterial({ name, color, roughness: 0.78, metalness: 0, ...opts });
   return mats[name];
 }
 
@@ -74,18 +88,31 @@ function rrectPath(path, x0, y0, x1, y1, r) {
 }
 
 // Wall profile along u (-len/2..len/2), v up, with its top sloping down to hA / hB at the ends.
-function wallShape(len, H, hA, hB, holes, slope = 0.7) {
+// doors [x0, y0, x1, y1]: a doorway that comes within 0.12 of the wall top is cut down from the top as a notch,
+// so a low (cut-away) wall stops either side of the door and never bridges it; lower ones are holes
+function wallShape(len, H, hA, hB, holes, slope = 0.7, doors = []) {
   const s = new THREE.Shape();
   const a = -len / 2,
     b = len / 2;
+  // the top edge, walked from b to a
+  let top = [[b, hB], ...(hB < H ? [[b - slope, H]] : []), hA < H ? [a + slope, H] : [a, H], [a, hA]];
+  const topAt = (x) => {
+    for (let i = 1; i < top.length; i++) {
+      const [xa, ya] = top[i - 1],
+        [xb, yb] = top[i];
+      if (x <= xa && x >= xb && xa > xb) return ya + ((yb - ya) * (xa - x)) / (xa - xb);
+    }
+    return H;
+  };
+  const cut = [];
+  for (const [x0, y0, x1, y1] of doors)
+    if (y1 > Math.min(topAt(x0), topAt(x1)) - 0.12) cut.push([x0, y0, x1, topAt(x0), topAt(x1)]);
+    else holes = [...holes, [x0, y0, x1, y1, 0.01]];
+  for (const [x0, y0, x1, t0, t1] of cut.sort((p, q) => q[2] - p[2]))
+    top = [...top.filter(([x]) => x > x1), [x1, t1], [x1, y0], [x0, y0], [x0, t0], ...top.filter(([x]) => x < x0)];
   s.moveTo(a, 0);
   s.lineTo(b, 0);
-  s.lineTo(b, hB);
-  if (hB < H) s.lineTo(b - slope, H);
-  if (hA < H) {
-    s.lineTo(a + slope, H);
-  } else s.lineTo(a, H);
-  s.lineTo(a, hA);
+  for (const p of top) s.lineTo(...p);
   s.lineTo(a, 0);
   for (const [x0, y0, x1, y1, r] of holes) s.holes.push(rrectPath(new THREE.Path(), x0, y0, x1, y1, r));
   return s;
@@ -196,9 +223,10 @@ function posterTexture(kind) {
 
 // ---------- the shell ----------
 // mode 'land': camera on the +z side, so the +z wall is cut low. 'port': camera at the -x end.
-// mode 'closed': every wall full height (the car seen from outside); `nearLeaves: false` leaves out the near-side
-// door leaves (the train place hangs its own sliding leaves there).
-function buildShell(mode, { nearLeaves = true } = {}) {
+// mode 'closed': every wall full height (the car seen from outside), with near-side door leaves unless
+// `nearLeaves: false`; the cut-away car has none (the train place hangs its own sliding leaves, train/doors.js).
+// Every doorway is cut to its full DOORWAYS opening in every mode.
+function buildShell(mode, { nearLeaves = mode === 'closed' } = {}) {
   const g = new THREE.Group();
   g.name = 'shell';
   const low = mode === 'land' ? { zp: 0.62, xn: HF } : mode === 'closed' ? { zp: HF, xn: HF } : { zp: HF, xn: 0.86 };
@@ -221,10 +249,8 @@ function buildShell(mode, { nearLeaves = true } = {}) {
     const holes = [];
     const wt = winTop(h);
     if (h > 0.8) for (const x of WIN.xs) holes.push([x - WIN.w / 2, winBot(h), x + WIN.w / 2, wt, 0.09]);
-    if (side > 0)
-      for (const dx of [-DOOR_X, DOOR_X])
-        holes.push([dx - DOOR_W / 2, 0.035, dx + DOOR_W / 2, Math.min(h - 0.1, 1.22), 0.06]);
-    const shape = wallShape(straightX, h, hA, hB, holes);
+    const doors = side > 0 ? DOORWAYS.map((d) => [d.x0 - DOOR_GAP, d.y0 - 0.02, d.x1 + DOOR_GAP, d.y1 + DOOR_GAP]) : [];
+    const shape = wallShape(straightX, h, hA, hB, holes, 0.7, doors);
     for (const [m, d0, d1] of [
       [inner, 0, 0.045],
       [shell, 0.045, T],
@@ -353,13 +379,14 @@ function buildShell(mode, { nearLeaves = true } = {}) {
   // near-side door leaves (sliding doors), with tall windows
   if (nearLeaves)
     for (const dx of [-DOOR_X, DOOR_X]) {
-      const h = Math.min(H.zp - 0.1, 1.22) - 0.035;
+      const h = DOOR_TOP - DOOR_SILL;
       for (const k of [-1, 1]) {
         const s = new THREE.Shape();
         rrectPath(s, 0, 0, DOOR_W / 2 - 0.01, h, 0.04);
         if (h > 0.7) s.holes.push(rrectPath(new THREE.Path(), 0.08, 0.5, DOOR_W / 2 - 0.09, h - 0.1, 0.05));
         const m = new THREE.Mesh(new THREE.ExtrudeGeometry(s, EXT(0.035, 0.01)), mat('door', COL.door));
-        m.position.set(dx + (k < 0 ? -DOOR_W / 2 + 0.005 : 0.005), 0.035, LZ + 0.03);
+        m.position.set(dx + (k < 0 ? -DOOR_W / 2 + 0.005 : 0.005), DOOR_SILL, LZ + 0.03);
+        m.userData.doorLeaf = true;
         g.add(shadowOn(m, false, true));
       }
     }

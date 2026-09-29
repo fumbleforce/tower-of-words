@@ -79,8 +79,8 @@
       "reason": "Existing office place geometry and interaction hooks; stage 5 room-builder review is planned."
     },
     "game3d/js/places/train.js": {
-      "lines": 1746,
-      "bytes": 64686,
+      "lines": 1673,
+      "bytes": 61062,
       "owner": "codex-tui",
       "review": "C-0076",
       "reason": "Existing train place geometry, animation and scene hooks; stage 5 room-builder review is planned."
@@ -156,8 +156,8 @@
       "reason": "Existing speech recognition model/worker lifecycle, microphone capture, result handling and UI feedback. A focused speech-service split must characterize cancellation and capture cleanup; matching already lives in speech-match.js."
     },
     "game3d/js/train/car.js": {
-      "lines": 985,
-      "bytes": 35107,
+      "lines": 1012,
+      "bytes": 36798,
       "owner": "codex-tui",
       "review": "C-0071",
       "reason": "Existing complete carriage geometry combines seating, doors, windows and structural surfaces. Stage 5 room-builder review will extract these geometry responsibilities with visual checks."

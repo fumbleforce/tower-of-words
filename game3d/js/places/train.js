@@ -18,7 +18,6 @@ import {
   LX,
   LZ,
   T,
-  HF,
   SEAT_Y,
   BENCH_D,
   BENCHES,
@@ -28,6 +27,7 @@ import {
   COL,
   mat as carMat,
 } from '../train/car.js';
+import { buildDoorSets, lampShut, lampOpen } from '../train/doors.js';
 import { buildPassengers, cat, walkPose, HIP, sit, armsHold } from '../train/people.js';
 import { PEOPLE } from '../cast.js';
 import { Nav, blob } from '../engine.js';
@@ -581,82 +581,15 @@ export async function trainPlace(game) {
     return !(cx > 0 && cz > 0 && Math.hypot(cx, cz) > 0.34 - 0.17);
   };
 
-  // doors: the near-side sliding leaves in the shell
-  let doorLeaves = [];
-  // the platform-side door sets, made to read from above (Jørgen: "the train has no door"): dark frame posts
-  // standing a little proud of the cut wall, a header with a lamp (amber shut, green open), a yellow edge
-  // stripe on each leaf and a yellow threshold on the floor.
-  // Leaves and frames are full height in both framings and never fade with the cut wall (Jørgen: "the doors are
-  // still half size when trying to leave the train wagon, then magically transform to full height as the train
-  // leaves"). They sit at the corners, clear of the seats, so the play camera still sees into the car.
-  const doorLamps = [],
-    myLeaves = [];
-  const lampShut = emissive('#ffcf8a', '#ffb24a', 1.8),
-    lampOpen = emissive('#b8f5c8', '#46d18a', 2.2);
-  const doorSets = new THREE.Group();
+  // the platform-side door sets (train/doors.js), built to the car's doorways
+  const { group: doorSets, leaves: myLeaves, lamps: doorLamps } = buildDoorSets();
   car.root.add(doorSets);
-  function buildDoors() {
-    doorSets.clear();
-    doorLamps.length = 0;
-    myLeaves.length = 0;
-    const fullTop = 1.22,
-      hH = fullTop - 0.04;
-    for (const dx of [-DOOR_X, DOOR_X]) {
-      const zo = LZ + T + 0.004; // just on the outer face of the wall, thin, so the leaves slide over it
-      for (const s of [-1, 1])
-        doorSets.add(rbox(0.07, HF, 0.012, '#2a2f38', { x: dx + s * (DOOR_W / 2 + 0.035), z: zo, r: 0.004 }));
-      const lamp = rbox(0.26, 0.05, 0.03, null, { x: dx, y: fullTop + 0.05, z: zo, r: 0.01, m: lampShut, cast: false });
-      doorSets.add(lamp);
-      doorLamps.push(lamp);
-      doorSets.add(
-        rbox(DOOR_W - 0.04, 0.004, 0.1, '#d8b447', { x: dx, y: 0.003, z: LZ - 0.07, r: 0.002, cast: false }),
-      );
-      // the leaves hang just outside the wall (outside-sliding doors) and both slide toward the middle of the car
-      // over the wall, the far one further, so nothing ever has to pass through the wall or the rounded corner
-      for (const s of [-1, 1]) {
-        const leaf = new THREE.Group();
-        leaf.add(rbox(DOOR_W / 2 - 0.004, hH, 0.03, '#56698a', { r: 0.01 }));
-        leaf.add(
-          rbox(0.03, hH - 0.02, 0.038, '#e0b83a', { x: -s * (DOOR_W / 4 - 0.02), y: 0.01, r: 0.008, cast: false }),
-        );
-        leaf.add(
-          rbox(DOOR_W / 2 - 0.1, Math.min(0.2, hH * 0.4), 0.036, null, {
-            y: Math.max(0.08, hH - 0.24),
-            r: 0.015,
-            m: emissive('#b9d3e6', '#9fc2dc', 0.35),
-          }),
-        );
-        const far = s * Math.sign(dx) > 0;
-        // plug doors: shut, the leaf sits in the opening flush with the body (Jørgen: they seemed to hover in
-        // front of it); opening, it steps out a hair, then slides along the outside of the wall
-        const zShut = LZ + T - 0.02,
-          zSlide = LZ + T + (far ? 0.052 : 0.024);
-        leaf.position.set(dx + (s * DOOR_W) / 4, 0.037, zShut);
-        doorSets.add(leaf);
-        myLeaves.push({ g: leaf, x0: leaf.position.x, s, far, zShut, zSlide });
-      }
-    }
-  }
-  buildDoors();
   function findDoors() {
     // Jørgen: no visible light fixtures in the car; the point lights stay
     const lm = carMat('lamp', COL.lamp);
     car.root.traverse((o) => {
       if (o.isMesh && o.material === lm) o.visible = false;
     });
-    doorLeaves = [];
-    const dm = carMat('door', COL.door);
-    car.root.traverse((o) => {
-      if (o.isMesh && o.material === dm && Math.abs(o.position.z - (LZ + 0.03)) < 0.002)
-        doorLeaves.push({ m: o, x0: o.position.x });
-    });
-    for (const d of doorLeaves)
-      if (!d.m.userData.stripe) {
-        const inner = d.x0 < Math.sign(d.x0) * DOOR_X - 0.1 ? DOOR_W / 2 - 0.03 : 0.02; // the edge where the leaves meet
-        const st = rbox(0.03, 0.44, 0.05, '#e0b83a', { x: inner, y: 0.02, z: 0.01, r: 0.01, cast: false });
-        d.m.add(st);
-        d.m.userData.stripe = st;
-      }
   }
   findDoors();
   const st = {
@@ -828,12 +761,6 @@ export async function trainPlace(game) {
   const DOOR_SHOT = [-2.85, 0.62];
   function setDoors(k) {
     if (st.departing) return;
-    // the leaves slide into the wall pocket; once they're mostly in, they're hidden (the low cut wall can't cover them)
-    for (const d of doorLeaves) {
-      const dx = Math.sign(d.x0) * DOOR_X;
-      d.m.position.x = d.x0 + (d.x0 < dx - 0.1 ? -1 : 1) * k * (DOOR_W / 2 - 0.02);
-      d.m.visible = false;
-    }
     for (const d of myLeaves) {
       const toC = -Math.sign(d.x0),
         out = THREE.MathUtils.smoothstep(k, 0, 0.16),
