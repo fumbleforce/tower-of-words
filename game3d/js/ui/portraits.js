@@ -9,8 +9,9 @@ import { $ } from './dom.js';
 export const FACE = {
   aoi: { W: 630, H: 810, f: [222, 196, 413, 389] },
   // Eric: x and chin from the detector ([112, 163, 348, 399]); the top kept 191 px above the chin, the old crop's face
-  // height, so he shows 25% bigger than the others, as approved (reviews/eric-portrait-final-3)
-  eric: { W: 597, H: 768, f: [112, 208, 348, 399] },
+  // height, so he shows 25% bigger than the others, as approved (reviews/eric-portrait-final-3). 648 wide so his left
+  // shoulder (image right) ends inside the picture (reviews/eric-canvas-1)
+  eric: { W: 648, H: 768, f: [112, 208, 348, 399] },
   guard: { W: 597, H: 768, f: [250, 162, 374, 300] },
   kenji: { W: 597, H: 768, f: [229, 169, 371, 330] },
   kuro: { W: 630, H: 809, f: [254, 325, 452, 525] },
