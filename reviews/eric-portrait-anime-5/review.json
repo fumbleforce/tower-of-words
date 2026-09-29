@@ -2,7 +2,7 @@
  "title": "Eric: anime portrait, round 5 (relaxed pose, nothing in his hands)",
  "date": "2026-09-29",
  "by": "art agent (Eric anime 5)",
- "status": "open",
+ "status": "decided",
  "multi": true,
  "question": "Which of these three is Eric?",
  "media": [
@@ -44,5 +44,9 @@
    "label": "All attempts (24 renders)",
    "href": "game3d/assets/portrait-candidates/eric-anime5-sheet.png"
   }
- ]
+ ],
+ "decided": [
+  "eric-r4-909"
+ ],
+ "decision": "r4-909, crop to match the others' height"
 }

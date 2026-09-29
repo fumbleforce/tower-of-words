@@ -34,7 +34,7 @@ The anime portraits beside the dialogue box. The faces each person has are in [c
 | `emi` | Approved: art/approved/emi/emi-after.webp. |
 | `aoi` | Approved: art/approved/aoi/aoi-after.webp. |
 | `kuro` | Approved: art/approved/kuro/kuro-after.webp. |
-| `eric` | Under review. eric-v2-734 (seed 734 v2) was approved on 2026-09-28 and tired-v3 seed 811 was his pick; then (2026-09-29) he asked for "the OLD, ANCIENT, first ones that looked like anime figure, rather than this graphic novel style. All the other characters are Japanese anime style except him." The game uses 734 until a new round is picked (reviews/eric-portrait-anime-3). The natural-pose portraits (neck, coffee) were rejected. |
+| `eric` | Neutral approved (2026-09-29): eric-r4-909 from reviews/eric-portrait-anime-5 (Jørgen: "perfect, just might need a crop to get to the same height as the other characters"). Cropped and scaled so his face box matches the one the game places him by (game3d/js/ui.js `FACE.eric`), cut out with BiRefNet-HR and tools/matte_refine.py, the glasses frame kept solid with `--opaque`. Height check: reviews/eric-portrait-final. Before this, eric-v2-734 (seed 734 v2) was approved on 2026-09-28; that old neutral is kept in art/production/eric-portrait-final/. His surprised and tired faces are still the old 734 style and need new faces from r4-909. The natural-pose portraits (neck, coffee) were rejected. |
 | `guard` | Provisional (the art agent's pick). |
 | `mori` | Provisional (seed 713). |
 | `kenji` | Provisional (seed 711, which Jørgen hasn't approved); new concept art is coming. |
