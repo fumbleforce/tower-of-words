@@ -29,7 +29,7 @@
   <div id="cmdsPanel" hidden><div class="card"><div class="head">Words you can say</div><p class="note">Use the Say button. It speaks to whoever or whatever is nearest.</p><ul></ul><button type="button" class="close">Close</button></div></div>
 </div>
 <script type="module">
-// ?state=idle|asking|loading|listening|thinking|hit|miss|miss2|other|quiet|blocked|saymenu|words  &phone=1  &word=matte  &mode=device|browser
+// ?state=idle|asking|loading|listening|thinking|hit|miss|miss2|other|quiet|blocked|typed|saymenu|words  &phone=1  &word=matte  &mode=device|browser|off  &cancel=1
 import { mountVoice } from '../../js/speech.js';
 import { WORDS, iconHTML, cmdHTML, lineHTML } from '../../js/lang.js';
 import { flags } from '../../js/runner.js';
@@ -66,12 +66,19 @@ if (st === 'saymenu' || st === 'words') {
   t.classList.add('typing', 'in');
   const toks = [...w.ro].map((ch) => (/\s|-/.test(ch) ? '<span class="sp"> </span>' : `<span class="lt">${ch}</span>`)).join('');
   t.querySelector('.line').innerHTML = `<div class="tp-prompt"><span class="tp-who" style="color:#6fd0c6">Mio</span> ${lineHTML('Say it to the door. Just the one word.')}</div>` +
-    `<div class="tp"><div class="tp-jp jp">${iconHTML(id, 'wi tp-ico')}${w.ja}</div><div class="tp-ro">${toks}</div><div class="tp-en">${w.en}</div>` +
-    `<input class="tp-in" type="text" autocomplete="off" placeholder="Type it in romaji" aria-label="Type ${w.ro}"><div class="tp-hint"></div></div>`;
+    `<div class="tp"><div class="tp-word">${iconHTML(id, 'wi tp-ico')}<div class="tp-jp jp">${w.ja}</div><div class="tp-ro">${toks}</div><div class="tp-en">${w.en}</div></div>` +
+    `<div class="tp-ans"><input class="tp-in" type="text" autocomplete="off" placeholder="Type it in romaji" aria-label="Type ${w.ro}"><div class="tp-hint"></div>${q.get('cancel') ? '<button type="button" class="tp-cancel">Never mind</button>' : ''}</div></div>`;
   const v = mountVoice(t.querySelector('.tp'), id, { phone, ro: w.ro, ja: w.ja });
   const demo = { miss: ['miss', { heardText: 'かて' }], miss2: ['miss', { heardText: 'かて', misses: 2 }], other: ['miss', { other: 'tomatte' }], quiet: ['miss', { quiet: true }] };
-  const [s, d] = demo[st] || [st, {}];
-  v.demo(s, d);
+  if (st === 'typed') {   // a wrong try at typing: the hint line shows the typing hint
+    const ans = t.querySelector('.tp-ans'); ans.dataset.last = 'type';
+    t.querySelector('.tp-in').value = w.ro.slice(0, 3) + 'x';
+    t.querySelector('.tp-hint').innerHTML = `Close. Next letter: <b>${w.ro[3]}</b>. Follow the letters under the word.`;
+    [...t.querySelectorAll('.tp-ro .lt')].forEach((l, i) => { l.classList.toggle('on', i < 3); l.classList.toggle('bad', i === 3); });
+  } else {
+    const [s, d] = demo[st] || [st, {}];
+    if (v.demo) v.demo(s, d);
+  }
 }
 window.ready = true;
 </script>
