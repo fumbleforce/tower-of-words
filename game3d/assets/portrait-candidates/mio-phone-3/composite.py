@@ -4,7 +4,7 @@
    pick: each lens rigidly (similarity transform that maps the approved eye onto the pick's eye, same face scale), the bridge
    stretched between them, since the pick faces the camera more squarely than the portrait.
 2. The pick's own silver frame is removed first (OpenCV Telea inpaint of its colour mask).
-3. Hair strands that cross the frame in the pick (the fringe tips) stay on top.
+3. Hair strands that cross the frame (her long lock over the right lens) stay on top; see hair_mask.
 Usage: composite.py <scale> <rot_deg> <out.png> [<mask_out.png>]"""
 import sys
 import numpy as np
@@ -23,6 +23,21 @@ PADS = [(447, 560), (500, 555)]                    # her clear nose pads (kept)
 LAST = {}
 APADS = [(420, 496, 12), (461, 491, 13)]           # the portrait's clear nose pads (x, y, r)
 PADS_TOO = False
+
+
+def hair_mask(img):
+    """Hair strands that hang in front of the frame, taken from the picture the frame goes onto.
+    Round 3 took every dark pixel (v < 60) of the original pick in two bands over the lens tops. Over the left lens that
+    caught the lower outline of her fringe and her upper lash line, which run along the frame's top bar, so the frame was
+    cut there and the face showed through ("transparent frame on the top of the left glass", every composite attempt).
+    A strand in front of the glasses crosses the frame; an outline or lash line runs along it. So only dark runs at
+    least 11 px tall count (vertical opening), and only in the band where her long lock crosses the right lens and hinge."""
+    T = np.asarray(img.convert('RGB') if hasattr(img, 'convert') else img)
+    dark = T.max(-1).astype(int) < 60
+    band = np.zeros_like(dark)
+    band[440:620, 560:640] = True   # the long lock in front of her face, over the right lens and hinge
+    tall = ndimage.binary_opening(dark, structure=np.ones((11, 1), bool))
+    return (tall & band).astype(np.float32)
 
 
 def build(scale=1.0, rot=None, ramp=(0.30, 0.46)):
@@ -71,17 +86,9 @@ def build(scale=1.0, rot=None, ramp=(0.30, 0.46)):
         old &= ~((xx0 - px) ** 2 + (yy0 - py) ** 2 < 11 ** 2)
     clean = cv2.inpaint(T, old.astype(np.uint8) * 255, 5, cv2.INPAINT_TELEA)
 
-    # hair on top: dark strands of the pick inside the fringe band above the eyes
-    v = T.max(-1).astype(int)
-    hair = (v < 60)
-    band = np.zeros_like(hair)
-    band[440:518, 430:600] = True   # fringe tips over the right lens top
-    band[440:533, 330:470] = True   # fringe tips over the left lens top
-    hair &= band & ~eyes
-    hair = ndimage.binary_opening(hair, iterations=1)
-    alpha = wm * (1 - hair.astype(np.float32))
+    alpha = wm * (1 - hair_mask(T))
     out = clean.astype(np.float32) * (1 - alpha[..., None]) + warped * alpha[..., None]
-    LAST.update(alpha=alpha, old=old, warped=warped)
+    LAST.update(alpha=alpha, old=old, warped=warped, wm=wm)
     return Image.fromarray(out.clip(0, 255).astype(np.uint8)), (np.maximum(wm, old.astype(np.float32)) > 0.05)
 
 
