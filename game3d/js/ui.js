@@ -409,9 +409,12 @@ export const ui = {
     this.root = r;
     r.innerHTML = `
       <div id="marks"></div>
-      <div id="goal2" hidden aria-live="polite"><span class="t"></span></div>
       <div id="top">
-        <button id="goal" type="button" hidden aria-label="Current goal"><span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 21V4"/><path d="M6 4.5h11l-2.5 4 2.5 4H6"/></svg></span><span class="t"></span><span class="hk" hidden aria-hidden="true">?</span></button>
+        <div id="goal" hidden>
+          <button class="gl" type="button" aria-label="Current goal"><span class="ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 21V4"/><path d="M6 4.5h11l-2.5 4 2.5 4H6"/></svg></span><span class="t"></span><span class="hk" hidden aria-hidden="true">?</span></button>
+          <div id="goal2" hidden aria-live="polite"><span class="t"></span></div>
+          <div id="hint" hidden role="status"><span class="hx"></span><button type="button" class="hclose" aria-label="Hide tip"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
+        </div>
         <div class="tr" id="hud">
           <div id="clock" class="hchip" hidden><span class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg></span><span class="d"></span><span class="p"></span></div>
           <button id="peopleBtn" class="hchip" type="button" hidden aria-label="People you've met"><span class="ic"><svg viewBox="0 0 24 24"><circle cx="9" cy="8.5" r="3.2"/><path d="M3.5 19c.6-3.3 2.8-5 5.5-5s4.9 1.7 5.5 5"/><circle cx="16.5" cy="9.5" r="2.6"/><path d="M15.5 14.2c2.4.1 4.3 1.6 4.9 4.8"/></svg></span><span class="lbl">People</span><span class="n">0</span></button>
@@ -439,9 +442,7 @@ export const ui = {
       <div id="actMenu" hidden role="group" aria-label="Actions"></div>
       <div id="talkHit" hidden aria-hidden="true"></div>
       <button id="sayBtn" type="button" hidden aria-label="Say a word"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5h14a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2h-7l-4 3.5V16H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z"/></svg><span class="t">Say</span><span class="key" aria-hidden="true">Q</span></button>
-      <div id="sayTip" hidden><b>Say</b> speaks a word you know to whoever or whatever is nearest. Try it when you're stuck.<button type="button">Got it</button></div>
       <div id="sayMenu" hidden><div class="head"></div><div class="list"></div><button type="button" class="cancel">Never mind</button></div>
-      <div id="hint" hidden role="status"><span class="hx"></span><button type="button" class="hclose" aria-label="Hide hint"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
       <div id="toast" hidden role="status"></div>
       <div id="caption" hidden><span class="nm"></span><span class="tx"></span></div>
       <div id="liftInd" hidden><span class="arrow">▲</span><span class="fl">1</span></div>
@@ -459,8 +460,10 @@ export const ui = {
     $('#sayMenu .cancel').onclick = () => { $('#sayMenu').hidden = true; this._sayRes && this._sayRes(null); };
     $('#muteBtn').onclick = (e) => { e.stopPropagation(); setMuted(!isMuted()); $('#muteBtn').classList.toggle('off', isMuted()); };
     // the hint stays until it's closed or the goal moves on; the goal chip brings it back
-    $('#hint .hclose').onclick = (e) => { e.stopPropagation(); this.hideHint(); };
-    $('#goal').onclick = (e) => { e.stopPropagation(); if (this._hintHTML) this.hint(this._hintHTML); else { const g = $('#goal'); g.classList.remove('pop'); void g.offsetWidth; g.classList.add('pop'); } };
+    // the tip line inside the goal box: its close button hides it (the Say tip for good); the goal line brings a
+    // closed story hint back
+    $('#hint .hclose').onclick = (e) => { e.stopPropagation(); if (this._sayTipHTML) this._sayTipOff?.(); else this.hideHint(); };
+    $('#goal .gl').onclick = (e) => { e.stopPropagation(); if (this._hintHTML) this.hint(this._hintHTML); else { const g = $('#goal'); g.classList.remove('pop'); void g.offsetWidth; g.classList.add('pop'); } };
     this.setSayKey(settings.keySay);
     onSettings((k, v) => { if (k === 'keySay') this.setSayKey(v); });
     // advancing the talk panel: tap anywhere on it, or Space/Enter
@@ -497,14 +500,29 @@ export const ui = {
     this._shownGoal = text || '';
     this.goalText = text || '';
     if (text !== was) { this._hintHTML = ''; this.hideHint(); }
-    if (!text) { g.hidden = true; return; }
-    g.hidden = false;
+    g.classList.toggle('nogoal', !text);
+    if (!text) { this._syncGoalBox(); return; }
     g.querySelector('.t').innerHTML = lineHTML(text, { count: false });
-    g.setAttribute('aria-label', 'Goal: ' + g.querySelector('.t').textContent);
+    g.querySelector('.gl').setAttribute('aria-label', 'Goal: ' + g.querySelector('.t').textContent);
+    this._syncGoalBox();
     if (text !== was) { g.classList.remove('pop'); void g.offsetWidth; g.classList.add('pop'); }
   },
   // a side goal: a second, smaller line under the main one (QA round 1: a side poke replaced the main goal)
-  sideGoal(text) { const g = $('#goal2'); if (!g) return; this.sideText = text || ''; if (!text) { g.hidden = true; return; } g.hidden = false; g.querySelector('.t').innerHTML = lineHTML(text, { count: false }); },
+  sideGoal(text) { const g = $('#goal2'); if (!g) return; this.sideText = text || ''; if (!text) { g.hidden = true; this._syncGoalBox(); return; } g.hidden = false; g.querySelector('.t').innerHTML = lineHTML(text, { count: false }); this._syncGoalBox(); },
+  // the goal box (top left) holds the goal line, a side goal and the current tip; it shows while any of them does
+  _syncGoalBox() {
+    const g = $('#goal'); if (!g) return;
+    const held = window.__onboard && window.__onboard.holdGoal && this._heldGoal;
+    const any = (!held && !!this._shownGoal) || !$('#goal2').hidden || !$('#hint').hidden;
+    g.hidden = !any;
+    this._placeToast();
+  },
+  // on desktop the notice sits under the goal box, which grows while a tip shows
+  _placeToast() {
+    const t = $('#toast'), g = $('#goal'); if (!t || document.body.classList.contains('phone')) return;
+    const z = +getComputedStyle(document.documentElement).getPropertyValue('--ui') || 1;
+    t.style.top = g && !g.hidden && g.offsetParent ? Math.round(g.getBoundingClientRect().bottom / z + 8) + 'px' : '';
+  },
   releaseGoal() { if (this._heldGoal) { const t = this._heldGoal; this._heldGoal = ''; this.goal(t); } },
   setSayKey(code) { const k = $('#sayBtn .key'); if (k) k.textContent = keyLabel(code || 'KeyQ'); },
   refreshWords() {
@@ -513,12 +531,12 @@ export const ui = {
     b.querySelector('.n').textContent = known.size;
   },
   showCmds() {
-    const row = (id) => { const w = WORDS[id]; return `<li class="wrow">${iconHTML(id)}<span class="cw"><span class="jp">${w.ja}</span><span class="rd">${w.ro} · ${w.en}</span></span>${pipsHTML(id)}</li>`; };
+    const row = (id) => { const w = WORDS[id]; return `<li class="wrow">${iconHTML(id)}<span class="cw"><span class="jp">${w.ja}</span><span class="rd">${w.ro} · ${w.en}</span>${baseHTML(id)}</span>${pipsHTML(id)}</li>`; };
     const ph = PHRASES.filter((id) => known.has(id)), cm = COMMANDS.filter((id) => known.has(id));
     // words he understands but doesn't say (外人 gaijin): no practice marks, they never go in the Say menu
     const wd = [...known].filter((id) => WORDS[id] && !PHRASES.includes(id) && !COMMANDS.includes(id));
     const wrow = (id) => { const w = WORDS[id]; return `<li class="wrow"><span class="cw"><span class="jp">${w.ja}</span><span class="rd">${w.ro} · ${w.en}</span></span></li>`; };
-    $('#cmdsPanel ul').innerHTML = (ph.length ? `<li class="sec">Phrases</li>${ph.map(row).join('')}` : '') + (cm.length ? `<li class="sec">Commands <span>(they make old machines listen)</span></li>${cm.map(row).join('')}` : '') + (wd.length ? `<li class="sec">Words</li>${wd.map(wrow).join('')}` : '');
+    $('#cmdsPanel ul').innerHTML = (ph.length ? `<li class="sec">Phrases</li>${ph.map(row).join('')}` : '') + (cm.length ? `<li class="sec">Commands <span>(they make old machines listen)</span></li><li class="fnote">${FORM_NOTE.te}</li>${cm.map(row).join('')}` : '') + (wd.length ? `<li class="sec">Words</li>${wd.map(wrow).join('')}` : '');
     $('#cmdsPanel').hidden = false;
   },
   // the Say menu: resolves with a command id or null
@@ -548,14 +566,13 @@ export const ui = {
   introSay() {
     // once per game (flag say_tip), worded for the input in use, closed by the first Say (QA round 1)
     const F = window.__game && window.__game.flagsRef; if (F && F.say_tip) return;
-    const tip = $('#sayTip'); if (!tip) return;
     const touch = document.body.classList.contains('phone') || matchMedia('(pointer: coarse)').matches;
     const key = keyLabel((settings && settings.keySay) || 'KeyQ');
-    tip.innerHTML = `<span>${touch ? 'Tap <b>Say</b> to say a word you know.' : `Press <b>${key}</b> to say a word you know.`}</span><button type="button">Got it</button>`;
-    this.sayIntro = true; tip.hidden = false;
-    const off = () => { tip.hidden = true; this.sayIntro = false; if (F) F.say_tip = true; };
+    this._sayTipHTML = touch ? 'Tap <b>Say</b> to say a word you know.' : `Press <span class="k">${key}</span> to say a word you know.`;
+    this.sayIntro = true; this._showTip();
+    // closing it (or the first Say) puts back the story hint it covered, if that was still open
+    const off = () => { this._sayTipHTML = ''; this.sayIntro = false; this._sayTipOff = null; if (F) F.say_tip = true; this._showTip(); };
     this._sayTipOff = off;
-    tip.querySelector('button').onclick = (e) => { e.stopPropagation(); off(); };
   },
 
   sayReady(on) { $('#sayBtn').classList.toggle('ready', !!on); },
@@ -584,13 +601,16 @@ export const ui = {
     const key = [target.id, verb, name, sayHere, cyc ? cyc.i + '/' + cyc.n : '', phone, settings.keySay, Math.min(uses, 5), ob.sayUsed ? 1 : 0].join('|');
     if (key !== this._actKey) {
       this._actKey = key;
-      const k = (c, cls = '') => (phone ? '' : `<span class="k${cls}">${c}</span>`);
-      // the verb word goes after two uses, the key cap after five (the name always stays)
-      const useFace = phone ? `<span class="vb">${verb}</span><span class="nm">${name}</span>`
-        : uses >= 5 ? `<span class="nm">${name}</span>` : uses >= 2 ? `${k('E')}<span class="nm">${name}</span>` : `${k('E')}<span class="vb">${verb}</span><span class="nm">${name}</span>`;
-      act.innerHTML = `<button type="button" class="act use">${useFace}</button>` +
-        (sayHere ? `<button type="button" class="act say${ob.sayUsed ? '' : ' first'}">${k(keyLabel(settings.keySay || 'KeyQ'))}<span class="vb">Say</span><span class="nm">a word</span></button>` : '') +
-        (cyc ? `<button type="button" class="act next">${k('Tab')}<span class="vb">Next</span><span class="nm">${cyc.i + 1} of ${cyc.n}</span></button>` : '');
+      // Jørgen: "the interaction box is also not very pretty". The name on top, then one row per action: a key cap
+      // and the action in one type style. The verb word goes after two uses and the key cap after five; then the
+      // name itself is the button (the name always stays). Phone rows have no key caps.
+      const k = (c) => (phone ? '' : `<span class="k">${c}</span>`);
+      const withVerb = phone || uses < 2 || !name;
+      const head = withVerb && name ? `<div class="hd">${name}</div>` : '';
+      const useFace = withVerb ? `${k('E')}<span class="lb">${verb}</span>` : `${uses < 5 ? k('E') : ''}<span class="lb">${name}</span>`;
+      act.innerHTML = head + `<button type="button" class="act use${withVerb ? '' : ' named'}">${useFace}</button>` +
+        (sayHere ? `<button type="button" class="act say${ob.sayUsed ? '' : ' first'}">${k(keyLabel(settings.keySay || 'KeyQ'))}<span class="lb">Say a word</span></button>` : '') +
+        (cyc ? `<button type="button" class="act next">${k('Tab')}<span class="lb">Next</span><span class="ct">${cyc.i + 1} of ${cyc.n}</span></button>` : '');
       act.querySelector('.use')?.addEventListener('click', (e) => { e.stopPropagation(); g.use(g.near || target); });
       act.querySelector('.say')?.addEventListener('click', (e) => { e.stopPropagation(); this.onSay && this.onSay(); });
       act.querySelector('.next')?.addEventListener('click', (e) => { e.stopPropagation(); this.cycleInfo?.next(); });
@@ -601,29 +621,45 @@ export const ui = {
     const px = ((v.x + 1) / 2) * innerWidth, py = ((1 - v.y) / 2) * innerHeight;
     const sc = phone ? 1 : (+getComputedStyle(document.documentElement).getPropertyValue('--ui') || 1);
     const W = innerWidth, H = innerHeight, aw = (act.offsetWidth || 180) * sc, ah = (act.offsetHeight || 50) * sc;
-    const gap = 30 * sc, flip = px + gap + aw > W - 8;
+    const gap = 22 * sc, flip = px + gap + aw > W - 8;
     let ax = flip ? px - gap - aw : px + gap, ay = py - ah / 2;
     ax = Math.max(8, Math.min(W - aw - 8, ax)); ay = Math.max((phone ? 60 : 64) * sc, Math.min(H - ah - 12, ay));
+    // never under the goal box (it grows with a tip): drop below it
+    const gb = $('#goal');
+    if (gb && !gb.hidden && gb.offsetParent) { const q = gb.getBoundingClientRect(); if (ax < q.right + 6 && ax + aw > q.left && ay < q.bottom + 6 && ay + ah > q.top) ay = q.bottom + 8; }
     act.style.transform = `translate(${Math.round(ax)}px, ${Math.round(ay)}px) scale(${sc})`;
     act.classList.toggle('flip', flip);
+    // the small pointer on the box's near side sits level with the target, wherever the box was clamped to
+    act.style.setProperty('--ny', Math.round(Math.max(14, Math.min(ah / sc - 14, (py - ay) / sc))) + 'px');
   },
   // No text leaves on a timer (Jørgen: "completely inaccessible"). A hint stays until the player closes it or the
   // goal moves on (the ms argument is ignored); the goal chip shows it again.
+  // Tips live in the goal box, as a second line under the goal (Jørgen: one place for goal and tips). One tip at a
+  // time: the Say tip while it's up, else the story hint.
   hint(html) {
-    const h = $('#hint');
     if (!html) { this.hideHint(); return; }
     // onboarding: the first screen has one line only (the controls); story hints wait until talking is taught
     if (window.__onboard && window.__onboard.holdHints) return;
-    this._hintHTML = html;
-    h.querySelector('.hx').innerHTML = html; h.hidden = false;
-    h.classList.remove('in'); void h.offsetWidth; h.classList.add('in');
-    $('#goal .hk').hidden = true;
+    this._hintHTML = html; this._hintOpen = true;
+    this._showTip();
   },
-  hideHint() { const h = $('#hint'); if (h) h.hidden = true; const k = $('#goal .hk'); if (k) k.hidden = !this._hintHTML; },
+  hideHint() { this._hintOpen = false; this._showTip(); },
+  _showTip() {
+    const h = $('#hint'); if (!h) return;
+    const html = this._sayTipHTML || (this._hintOpen && this._hintHTML) || '';
+    const was = h.hidden ? '' : h.dataset.tip || '';
+    h.hidden = !html;
+    if (html && html !== was) { h.querySelector('.hx').innerHTML = html; h.classList.remove('in'); void h.offsetWidth; h.classList.add('in'); }
+    h.dataset.tip = html;
+    h.querySelector('.hclose').setAttribute('aria-label', this._sayTipHTML ? 'Got it' : 'Hide tip');
+    const k = $('#goal .hk'); if (k) k.hidden = !(this._hintHTML && !html);
+    this._syncGoalBox();
+  },
   // A notice (a new word, something picked up) stays until the player's next action after it has been up a moment:
   // a tap, a click or a key anywhere. Nothing is swallowed; the action does what it would anyway.
   toast(html) {
     const t = $('#toast'); t.innerHTML = html; t.hidden = false; t.classList.remove('in'); void t.offsetWidth; t.classList.add('in');
+    this._placeToast();
     const id = (this._toastId = (this._toastId || 0) + 1);
     const arm = () => {
       const off = (e) => { if (e.type === 'keydown' && /^(Shift|Control|Alt|Meta)/.test(e.key)) return; removeEventListener('pointerdown', off, true); removeEventListener('keydown', off, true); if (this._toastId === id) t.hidden = true; };
