@@ -1,0 +1,39 @@
+{
+ "title": "Creator base bodies, round 1",
+ "date": "2026-09-29",
+ "by": "creator base agent",
+ "status": "open",
+ "question": "Mio and Eric undressed to closed skin-only bodies, with hair, stubble and clothes as separate layers on top. Which attempt is closest, and should the next round keep generating the body or build one clean base body by hand to these proportions?",
+ "multi": true,
+ "media": [
+  {"image": "art/parts/base/shots/a7/1-bases.png", "caption": "Latest (a7): both bases, skin only. Each is one closed shell of 2,600 triangles: no open edges, one piece (checked by Codex's validator on the exported files). The face and eyes are Mio's and Eric's own; the head, neck, body, arms, legs and feet are new."},
+  {"image": "art/parts/base/shots/a7/2-closeups.png", "caption": "a7 close up: top and back of the head, face, neck, hands. No holes where the hair, stubble, hood or sleeves were."},
+  {"image": "art/parts/base/shots/a7/3-hair.png", "caption": "a7: each character's own hair as a separate piece on the base head. Eric's stubble is its own layer now, sitting 2.5 mm off a skin chin, so removing it leaves skin, not a hole."},
+  {"image": "art/parts/base/shots/a7/4-dressed.png", "caption": "a7 dressed again: the original (left of each pair) and the base with its hair, clothes and stubble layers on (right)."},
+  {"image": "art/parts/base/shots/a7/5-walk.png", "caption": "a7 walking, undressed and dressed, camera turning round. Same rig and walk clip as the creator."},
+  {"image": "art/parts/base/shots/a7/walk-mio-bare.webp", "caption": "a7 walk loop, Mio's base"},
+  {"image": "art/parts/base/shots/a7/walk-mio-full.webp", "caption": "a7 walk loop, Mio dressed"},
+  {"image": "art/parts/base/shots/a7/walk-eric-bare.webp", "caption": "a7 walk loop, Eric's base"},
+  {"image": "art/parts/base/shots/a7/walk-eric-full.webp", "caption": "a7 walk loop, Eric dressed"},
+  {"image": "art/parts/base/shots/a7/6-game.png", "caption": "a7 at the game camera (office angle, 51 degrees down, about the phone distance), walking"},
+  {"image": "art/parts/base/shots/a7/game-bare.webp", "caption": "a7 game camera loop, bases"},
+  {"image": "art/parts/base/shots/a7/game-full.webp", "caption": "a7 game camera loop, dressed"},
+  {"image": "art/parts/base/shots/poke-b4/4b-poke.png", "caption": "Check: the base drawn red, to find skin showing through the clothes (before the push fix, base4). Faces and hands are meant to be red."},
+  {"image": "art/parts/base/shots/poke-b9/4b-poke.png", "caption": "Same check for a7 (base9). Mio: clean. Eric: small slivers of skin still show at the jacket shoulders."}
+ ],
+ "options": [
+  {"id": "base-a7", "label": "base-a7: pushed under the clothes", "image": "art/parts/base/shots/a7/1-bases.png", "images": ["art/parts/base/shots/a7/2-closeups.png", "art/parts/base/shots/a7/4-dressed.png", "art/parts/base/shots/a7/5-walk.png"], "note": "Least skin showing through the clothes. Bodies are thin and lumpy where they were pushed in; Eric's forehead has a ridge where the face meets the skull."},
+  {"id": "base-a8", "label": "base-a8: a7 smoothed", "image": "art/parts/base/shots/a8/1-bases.png", "images": ["art/parts/base/shots/a8/2-closeups.png"], "note": "Smoother surfaces, but thinner still and the feet shrink to points. Not dressed or walked."},
+  {"id": "base-a6", "label": "base-a6: before the push", "image": "art/parts/base/shots/a6/1-bases.png", "images": ["art/parts/base/shots/a6/2-closeups.png", "art/parts/base/shots/a6/4-dressed.png", "art/parts/base/shots/a6/5-walk.png"], "note": "Fuller bodies, but skin shows through Eric's jacket at the shoulders; Mio's forehead has a band."},
+  {"id": "base-a5", "label": "base-a5", "image": "art/parts/base/shots/a5/1-bases.png", "images": ["art/parts/base/shots/a5/2-closeups.png", "art/parts/base/shots/a5/4-dressed.png", "art/parts/base/shots/a5/5-walk.png"], "note": "Skull follows a smoothed hair line; lip at Eric's hairline."},
+  {"id": "base-a4", "label": "base-a4", "image": "art/parts/base/shots/a4/1-bases.png", "images": ["art/parts/base/shots/a4/2-closeups.png", "art/parts/base/shots/a4/4-dressed.png", "art/parts/base/shots/a4/5-walk.png", "art/parts/base/shots/a4/6-game.png"], "note": "First fully working set (spikes fixed). Game camera here was the far desktop distance."},
+  {"id": "base-a3", "label": "base-a3 (broken)", "image": "art/parts/base/shots/a3/1-bases.png", "images": ["art/parts/base/shots/a3/2-closeups.png"], "note": "A strip of Eric's hand stretched above his head: wrong skin weights from a solidify bug."},
+  {"id": "base-a2", "label": "base-a2 (broken)", "image": "art/parts/base/shots/a2/1-bases.png", "images": ["art/parts/base/shots/a2/2-closeups.png"], "note": "Same bug, and hair colour baked onto Mio's scalp. The very first render (heads with a face mask on a small skull) was overwritten before I kept it."},
+  {"id": "next-hand-built", "label": "next-hand-built: build one clean base by hand", "note": "Next round: one hand-built low-poly chibi body in Blender (planes, not generated blobs) at Mio's and Eric's proportions, their own faces kept, and clothes refitted to it."},
+  {"id": "next-generated", "label": "next-generated: keep generating", "note": "Next round: keep this generator and work on the body shapes, the forehead and Eric's shoulders."}
+ ],
+ "links": [
+  {"label": "How it works", "href": "tools/creator/base/README.md"},
+  {"label": "Previous round", "href": "bible/#review/creator-parts"}
+ ]
+}

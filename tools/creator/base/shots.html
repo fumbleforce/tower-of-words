@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>Base body shots</title>
+<script type="importmap">{"imports":{"three":"/game3d/vendor/three/three.module.js","three/addons/":"/game3d/vendor/"}}</script>
+<style>body{margin:0;background:#eef0f3;font:13px system-ui}</style>
+</head><body>
+<script type="module">
+// Review shots for the base bodies: node tools/creator/base/run.mjs "tools/creator/base/shots.html?v=1" art/parts/base/shots/v1
+// ?v=<tag> picks the base files (<id>-base<tag>.json; "1" -> mio-base1). Every image comes back as a PNG; walk
+// strips also come back frame by frame for an animated WebP.
+import * as THREE from 'three';
+import { loadLibrary, buildCharacter } from '../recipe.js';
+import { dressed } from './base.js';
+
+const Q = new URLSearchParams(location.search), TAG = Q.get('v') || '', ONLY = Q.get('only');
+const lib = await loadLibrary();
+const renderer = new THREE.WebGLRenderer({ antialias: true, preserveDrawingBuffer: true });
+renderer.outputColorSpace = THREE.SRGBColorSpace; renderer.shadowMap.enabled = true;
+window.__files = {}; window.__bin = {};
+const PR = 2;
+
+function scene(floor = false) {
+  const s = new THREE.Scene(); s.background = new THREE.Color('#e9ecf1');
+  s.add(new THREE.HemisphereLight(0xffffff, 0x9aa3b5, 2.0));
+  const d = new THREE.DirectionalLight(0xffffff, 1.6); d.position.set(1.2, 2.5, 2.2); s.add(d);
+  if (floor) {
+    const f = new THREE.Mesh(new THREE.PlaneGeometry(40, 40), new THREE.MeshLambertMaterial({ color: '#d7dbe2' }));
+    f.rotation.x = -Math.PI / 2; f.receiveShadow = true; s.add(f);
+    d.castShadow = true; d.shadow.mapSize.set(2048, 2048); d.shadow.camera.left = -3; d.shadow.camera.right = 3; d.shadow.camera.top = 3; d.shadow.camera.bottom = -3;
+    d.position.set(2, 6, 3); d.target.position.set(0, 0, 0); s.add(d.target);
+  }
+  return s;
+}
+// camera on a sphere round `tgt`: yaw (0 = in front), elev (degrees), distance
+function view(objs, { yaw = 0, elev = 4, dist = 3.2, tgt = [0, 0.5, 0], fov = 22, w = 260, h = 340, floor = false } = {}) {
+  renderer.setPixelRatio(PR); renderer.setSize(w, h);
+  const s = scene(floor); for (const o of objs) s.add(o);
+  const cam = new THREE.PerspectiveCamera(fov, w / h, 0.01, 200);
+  const e = THREE.MathUtils.degToRad(elev), t = new THREE.Vector3(...tgt);
+  cam.position.set(t.x + Math.sin(yaw) * Math.cos(e) * dist, t.y + Math.sin(e) * dist, t.z + Math.cos(yaw) * Math.cos(e) * dist);
+  cam.lookAt(t); renderer.render(s, cam);
+  for (const o of objs) s.remove(o);
+  const c = document.createElement('canvas'); c.width = w * PR; c.height = h * PR; c.getContext('2d').drawImage(renderer.domElement, 0, 0);
+  return c;
+}
+// a sheet: rows of [canvas, caption]; a title on top
+function sheet(name, title, rows) {
+  const pad = 12 * PR, capH = 20 * PR, titleH = 34 * PR;
+  const W = Math.max(...rows.map((r) => r.reduce((s, [c]) => s + c.width + pad, pad)));
+  const H = titleH + rows.reduce((s, r) => s + Math.max(...r.map(([c]) => c.height)) + capH + pad, pad);
+  const cv = document.createElement('canvas'); cv.width = W; cv.height = H;
+  const x = cv.getContext('2d'); x.fillStyle = '#f6f7f9'; x.fillRect(0, 0, W, H);
+  x.fillStyle = '#1d2230'; x.font = `600 ${16 * PR}px system-ui`; x.fillText(title, pad, 24 * PR);
+  let y = titleH;
+  for (const r of rows) {
+    let xx = pad; const rh = Math.max(...r.map(([c]) => c.height));
+    for (const [c, cap] of r) {
+      x.drawImage(c, xx, y); x.fillStyle = '#4a5263'; x.font = `${12 * PR}px system-ui`; x.fillText(cap || '', xx + 2, y + rh + 15 * PR);
+      xx += c.width + pad;
+    }
+    y += rh + capH + pad;
+  }
+  window.__bin[name + '.png'] = cv.toDataURL('image/png');
+}
+function pose(ch, clip, t) {
+  ch.mixer.stopAllAction(); ch.cur = null;
+  if (!clip) { ch.skeleton.pose(); ch.root.updateMatrixWorld(true); return; }
+  ch.play(clip, 0); if (clip !== 'idle') ch.actions[clip].time = t; ch.mixer.update(0); ch.update(0); ch.root.updateMatrixWorld(true);
+}
+const walkT = (ch, f) => f * ch.actions.walk.getClip().duration;
+const bone = (ch, b) => { ch.root.updateMatrixWorld(true); return ch.bones[b].getWorldPosition(new THREE.Vector3()).toArray(); };
+
+const IDS = ['mio', 'eric'], NAME = { mio: 'Mio', eric: 'Eric' };
+const ALL = { mio: ['hair', 'top', 'bottom', 'shoes'], eric: ['hair', 'top', 'bottom', 'shoes', 'stubble'] };
+const C = {};
+for (const id of IDS) {
+  const base = id + '-base' + TAG;
+  C[id] = {
+    bare: await dressed(lib, id, { base }),
+    hair: await dressed(lib, id, { base, layers: ['hair', ...(id === 'eric' ? ['stubble'] : [])] }),
+    full: await dressed(lib, id, { base, layers: ALL[id] }),
+    orig: await buildCharacter(lib, { body: id, parts: Object.fromEntries(['hair', 'head', 'top', 'bottom', 'shoes', 'hands'].map((s) => [s, `${id}-${s}`])), height: 1 }),
+  };
+}
+// ?poke=1: the base drawn flat red, so any skin that shows through a layer stands out
+if (Q.get('poke')) for (const id of IDS) for (const k of ['bare', 'hair', 'full']) { const m = C[id][k].meshes.body.material; m.map = null; m.color.set('#ff0000'); m.onBeforeCompile = () => {}; m.needsUpdate = true; }
+const turns = [[0, 'front'], [0.8, 'three-quarter'], [Math.PI / 2, 'side'], [Math.PI, 'back']];
+
+// 1. the base bodies, undressed
+if (!ONLY || ONLY === 'bare') {
+  const rows = [];
+  for (const id of IDS) {
+    const ch = C[id].bare; pose(ch, 'idle', 0);
+    rows.push(turns.map(([y, n]) => [view([ch.root], { yaw: y }), `${NAME[id]} base, ${n}`]));
+  }
+  sheet('1-bases', 'Base bodies: skin only, one closed shell (idle pose)', rows);
+  // the head from above and behind, the neck, the hands: where the old cut left holes
+  const rows2 = [];
+  for (const id of IDS) {
+    const ch = C[id].bare; pose(ch, 'idle', 0);
+    const hd = bone(ch, 'Head'), nk = bone(ch, 'neck'), hl = bone(ch, 'LeftHand');
+    rows2.push([
+      [view([ch.root], { yaw: 0.3, elev: 70, dist: 1.4, tgt: [hd[0], hd[1] + 0.12, hd[2]], w: 260, h: 220 }), `${NAME[id]}: top of the head`],
+      [view([ch.root], { yaw: 2.6, elev: 15, dist: 1.4, tgt: [hd[0], hd[1] + 0.1, hd[2]], w: 260, h: 220 }), 'back of the head'],
+      [view([ch.root], { yaw: 0.5, elev: 5, dist: 1.1, tgt: [hd[0], hd[1] + 0.08, hd[2]], w: 260, h: 220 }), 'face'],
+      [view([ch.root], { yaw: 0.9, elev: 10, dist: 1.0, tgt: nk, w: 260, h: 220 }), 'neck and shoulders'],
+      [view([ch.root], { yaw: 0.35, elev: 15, dist: 0.9, tgt: hl, w: 260, h: 220 }), 'hand and wrist'],
+    ]);
+  }
+  sheet('2-closeups', 'Base bodies close up: top and back of the head, face, neck, hands', rows2);
+}
+
+// 2. hair on the base head
+if (!ONLY || ONLY === 'hair') {
+  const rows = [];
+  for (const id of IDS) {
+    const ch = C[id].hair; pose(ch, 'idle', 0);
+    const hd = bone(ch, 'Head');
+    rows.push([...turns.map(([y, n]) => [view([ch.root], { yaw: y, dist: 1.6, tgt: [hd[0], hd[1] + 0.12, hd[2]], w: 240, h: 240 }), `${NAME[id]} hair${id === 'eric' ? ' and stubble' : ''}, ${n}`]),
+      [view([ch.root], { yaw: 0.4, elev: 60, dist: 1.6, tgt: [hd[0], hd[1] + 0.12, hd[2]], w: 240, h: 240 }), 'from above']]);
+  }
+  sheet('3-hair', 'Hair as its own piece on the base head (Eric: stubble as its own layer too)', rows);
+}
+
+// 3. dressed again, next to the original
+if (!ONLY || ONLY === 'dressed') {
+  const rows = [];
+  for (const id of IDS) {
+    const f = C[id].full, o = C[id].orig; pose(f, 'idle', 0); pose(o, 'idle', 0);
+    const r = [];
+    for (const [y, n] of [[0, 'front'], [0.8, 'three-quarter'], [Math.PI, 'back']]) {
+      r.push([view([o.root], { yaw: y }), `${NAME[id]} original, ${n}`]);
+      r.push([view([f.root], { yaw: y }), `base + layers, ${n}`]);
+    }
+    rows.push(r);
+  }
+  if (Q.get('poke')) {
+    const r2 = [];
+    for (const id of IDS) {
+      const f = C[id].full;
+      r2.push([[null, 'bind'], ...[0, 0.25, 0.5, 0.75].map((x) => [x, 'walk ' + x * 100 + '%'])].flatMap(([x, n]) => {
+        if (x === null) pose(f, null); else pose(f, 'walk', walkT(f, x));
+        return [[view([f.root], { yaw: 0.6, w: 200, h: 280 }), `${NAME[id]} ${n}, front`], [view([f.root], { yaw: 3.6, w: 200, h: 280 }), 'back']];
+      }));
+    }
+    for (const id of IDS) {
+      const f = C[id].full; pose(f, null); const nk = bone(f, 'neck');
+      r2.push([0.3, 1.2, 2.2, 3.1, 4.2, 5.2].map((y) => [view([f.root], { yaw: y, elev: 25, dist: 1.3, tgt: nk, w: 240, h: 200 }), `${NAME[id]} shoulders, bind, turn ${y}`]));
+    }
+    // the same close-ups with the base hidden and with only the top layer, to tell holes in a layer from skin through it
+    for (const id of IDS) {
+      const f = C[id].full; pose(f, null); const nk = bone(f, 'neck');
+      f.meshes.body.visible = false;
+      r2.push([0.3, 3.1, 4.2].map((y) => [view([f.root], { yaw: y, elev: 25, dist: 1.3, tgt: nk, w: 240, h: 200 }), `${NAME[id]} no base, turn ${y}`]));
+      const vis = {}; for (const [k, m] of Object.entries(f.meshes)) { vis[k] = m.visible; m.visible = k === 'top'; }
+      r2[r2.length - 1].push(...[0.3, 3.1, 4.2].map((y) => [view([f.root], { yaw: y, elev: 25, dist: 1.3, tgt: nk, w: 240, h: 200 }), `${NAME[id]} top layer only, turn ${y}`]));
+      for (const [k, m] of Object.entries(f.meshes)) m.visible = vis[k];
+      f.meshes.body.visible = true;
+    }
+    sheet('4b-poke', 'Skin showing through (base drawn red): bind pose and walking', r2);
+  }
+  sheet('4-dressed', 'Dressed again: the original (left of each pair) and the base body with its layers on (right)', rows);
+}
+
+// 4. walking, close turnaround, and 5. the game camera
+const frames = (name, fn, n = 12) => { const out = []; for (let i = 0; i < n; i++) out.push(fn(i / n)); window.__bin[name] = out.map((c) => c.toDataURL('image/png')); };
+if (!ONLY || ONLY === 'walk') {
+  const rows = [];
+  for (const id of IDS) for (const k of ['bare', 'full']) {
+    const ch = C[id][k];
+    rows.push([0, 0.17, 0.33, 0.5, 0.67, 0.83].map((f, i) => { pose(ch, 'walk', walkT(ch, f)); return [view([ch.root], { yaw: [0.9, 1.6, 2.4, 3.6, 4.6, 5.5][i], w: 200, h: 300 }), `${NAME[id]} ${k === 'bare' ? 'base' : 'dressed'}, walk ${Math.round(f * 100)}%`]; }));
+  }
+  sheet('5-walk', 'Walking (Eric\'s walk clip on the shared skeleton), camera turning round', rows);
+  for (const id of IDS) for (const k of ['bare', 'full']) {
+    const ch = C[id][k];
+    frames(`walk-${id}-${k}`, (f) => { pose(ch, 'walk', walkT(ch, f)); return view([ch.root], { yaw: 0.9 + f * Math.PI * 2, w: 260, h: 340 }); }, 24);
+  }
+}
+if (!ONLY || ONLY === 'game') {
+  // the office camera (places/office.js: elev 51, fov 24), characters 1.2 tall, at about the game's distance
+  const G = { elev: 51, fov: 24, dist: 9, w: 520, h: 360, floor: true };   // about the phone view, where the camera follows the player
+  const group = (k, f) => {
+    const out = [];
+    IDS.forEach((id, i) => {
+      const ch = C[id][k]; ch.root.scale.setScalar(1.2); ch.root.position.set(i ? 0.55 : -0.55, 0, 0); ch.root.rotation.y = 0.6;
+      pose(ch, 'walk', walkT(ch, f)); out.push(ch.root);
+    });
+    return out;
+  };
+  const reset = () => IDS.forEach((id) => ['bare', 'full'].forEach((k) => { const r = C[id][k].root; r.scale.setScalar(1); r.position.set(0, 0, 0); r.rotation.y = 0; }));
+  const rows = [];
+  for (const k of ['bare', 'full']) rows.push([0, 0.25, 0.5].map((f) => [view(group(k, f), { ...G, tgt: [0, 0.6, 0] }), `${k === 'bare' ? 'Bases' : 'Dressed'}, walk ${Math.round(f * 100)}%, game camera`]));
+  sheet('6-game', 'At the game camera (office angle, 51 degrees down), walking', rows);
+  for (const k of ['bare', 'full']) frames(`game-${k}`, (f) => view(group(k, f), { ...G, tgt: [0, 0.6, 0] }), 16);
+  reset();
+}
+window.__out = 'images: ' + Object.keys(window.__bin).join(', ');
+window.__done = true;
+</script></body></html>
