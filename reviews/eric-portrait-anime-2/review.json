@@ -2,7 +2,7 @@
  "title": "Eric: anime-style portrait, round 2",
  "date": "2026-09-29",
  "by": "art agent (Eric anime 2)",
- "status": "open",
+ "status": "superseded",
  "multi": true,
  "question": "Which of these faces is Eric in the same anime style as the cast? Pick any you like; the pick becomes the base for his expressions.",
  "media": [
@@ -190,5 +190,6 @@
    "id": "none",
    "label": "None of these (say why in the comment)"
   }
- ]
+ ],
+ "decision": "a09-909: try a few poses; a13-913: try a couple of variations on his saturation, hair color (round eric-portrait-anime-3)"
 }
