@@ -238,7 +238,7 @@ def add(id_, kind, name, paths, status, status_from, source='', who=None, place=
     if not paths and not svg and not view:
         return None
     for p in paths:
-        if claims(p) and p in BY_PATH and BY_PATH[p] != id_:
+        if claims(p) and p in BY_PATH and BY_PATH[p] != id_ and kind != 'animation':   # a clip GLB is also part of its model
             return None                      # someone stronger already claimed this file
     if id_ in A:
         return None
