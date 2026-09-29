@@ -79,3 +79,4 @@ Make day 1 (train → gate → B2 office) the best it can be at production quali
 - 07:22: feel: 0 overlaps, 0 spins (cd66389); builder switching the movement check back to failing.
 - 07:46: estimated weekly usage now: 18.3%
 - 08:05: wind-down requested by Jørgen; crons cancelled; agents told to finish and stop; handoff in notes/HANDOFF.md.
+- 08:08: all agents stopped. HEAD passes (phone 64 s on GPU; cd66389 passed all three). Seat-the-player backed out (caused the phone lift softlock). Handoff final.

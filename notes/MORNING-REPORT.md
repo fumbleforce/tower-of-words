@@ -17,6 +17,7 @@ Until then you can play the new build locally: run `./start`, then open http://1
   - The train isn't on rails any more: you start each Mio conversation yourself, and the train pulls in when you walk to the doors.
   - The whole dialogue area is clickable, with "Press Space or click this area to continue", no flicker, and play buttons on taught words.
 - **Movement** (from your playtest):
+  - Update: 0 overlaps and 0 spins at the final check.
   - No more spinning or twisting.
   - People step round each other, and Eric stops in front of people instead of on them.
   - Taps pick the right person.
