@@ -18,11 +18,18 @@ const game = () => window.__game;
 const ICON =
   '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h11M4 10.5h8M4 15h5"/><path d="M12.5 20v-2.7l6.4-6.4a1.9 1.9 0 0 1 2.7 2.7l-6.4 6.4z"/></svg>';
 const X_ICON = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>';
-const PLACES = { train: 'Monorail', gate: 'Head office lobby', office: 'IT support, B2' };
+const SEND_TIMEOUT = 10000; // a server that never answers must not keep the window (and the paused game) stuck
+const TEXT_FIELD = /^(text|search|email|url|tel|number)$/;
+const PLACES = {
+  train: 'Monorail',
+  gate: 'Head office lobby',
+  office: 'IT support, B2',
+};
 
 let available = false,
   isOpen = false,
   busy = false,
+  sending = null, // the AbortController of the send in flight
   sent = false,
   wasPaused = false,
   draft = '',
@@ -60,11 +67,34 @@ async function gather() {
     goal: g?.ui?.goalText || '',
     line:
       talk && !talk.hidden
-        ? { who: $('.who', talk)?.textContent.trim() || '', text: $('.line', talk)?.textContent.trim() || '' }
+        ? {
+            who: $('.who', talk)?.textContent.trim() || '',
+            text: $('.line', talk)?.textContent.trim() || '',
+          }
         : null,
+    // what the player has typed and not yet sent (the romaji practice answer), which a screenshot alone can lose
+    typed: [...document.querySelectorAll('input, textarea')]
+      .filter(
+        (el) =>
+          !layer?.contains(el) &&
+          el.value &&
+          el.getClientRects().length &&
+          (el.tagName === 'TEXTAREA' || TEXT_FIELD.test(el.type)),
+      )
+      .map((el) => ({
+        field: el.getAttribute('aria-label') || el.placeholder || el.className,
+        value: el.value,
+      })),
     near: g?.near?.label || g?.near?.id || '',
     busy: !!g?.busy,
-    player: p ? { x: round(p.x), y: round(p.y), z: round(p.z), heading: round(g.player.root.rotation.y) } : null,
+    player: p
+      ? {
+          x: round(p.x),
+          y: round(p.y),
+          z: round(p.z),
+          heading: round(g.player.root.rotation.y),
+        }
+      : null,
     viewport: {
       width: innerWidth,
       height: innerHeight,
@@ -145,7 +175,8 @@ async function open() {
 }
 
 function close() {
-  if (!isOpen || busy) return;
+  if (!isOpen) return;
+  sending?.abort('closed'); // closing while it sends gives up on the send; the text stays as the draft
   isOpen = false;
   if (layer && !layer.hidden) {
     const ta = $('textarea', layer);
@@ -181,6 +212,9 @@ async function send() {
   busy = true;
   btn.disabled = true;
   status('Sending…');
+  const ac = new AbortController();
+  sending = ac;
+  const timer = setTimeout(() => ac.abort('timeout'), SEND_TIMEOUT);
   try {
     const data = shot
       ? await new Promise((res, rej) => {
@@ -194,8 +228,10 @@ async function send() {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ text, shot: data, context: ctx }),
+      signal: ac.signal,
     });
     const j = await r.json().catch(() => ({}));
+    if (ac.signal.aborted) throw new Error('aborted');
     if (!r.ok || !j.ok) throw new Error(j.error || `the server answered ${r.status}`);
     sent = true;
     draft = '';
@@ -203,8 +239,16 @@ async function send() {
     btn.textContent = 'Back to the game';
     status(`Sent. Saved in ${j.folder}/`, 'ok');
   } catch (err) {
-    status(`Not sent (${err.message}). Is ./start running?`, 'bad');
+    draft = ta.value; // kept for the next try, here or after closing
+    if (ac.signal.reason === 'timeout')
+      status(
+        `Not sent: the server didn't answer in ${SEND_TIMEOUT / 1000} s. Send again, or close and try later.`,
+        'bad',
+      );
+    else if (ac.signal.reason !== 'closed') status(`Not sent (${err.message}). Is ./start running?`, 'bad');
   } finally {
+    clearTimeout(timer);
+    if (sending === ac) sending = null;
     busy = false;
     btn.disabled = false;
     if (sent) btn.focus();
@@ -284,4 +328,10 @@ async function probe() {
   addButton();
 }
 probe();
-window.__feedback = { open, close, send, isOpen: () => isOpen, available: () => available };
+window.__feedback = {
+  open,
+  close,
+  send,
+  isOpen: () => isOpen,
+  available: () => available,
+};
