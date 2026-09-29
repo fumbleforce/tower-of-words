@@ -24,7 +24,7 @@
     },
     "game3d/js/main.js": {
       "lines": 785,
-      "bytes": 27044,
+      "bytes": 26971,
       "owner": "codex-tui",
       "review": "C-0080",
       "reason": "Composition, boot/Continue, input, rendering and frame loop remain after stage 4 hooks, interactions and place lifecycle extraction."
