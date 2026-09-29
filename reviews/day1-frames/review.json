@@ -2,8 +2,8 @@
   "title": "Day 1: read and choose",
   "date": "2026-09-29",
   "by": "Codex",
-  "status": "open",
-  "question": "Read each passage in the frame viewer, then keep the original or use the proposed change.",
+  "status": "not-ready",
+  "question": "Compare the two complete versions of each passage, then choose the one you want.",
   "multi": true,
   "options": [
     {
@@ -154,7 +154,7 @@
   ],
   "links": [
     {
-      "label": "Open frame-by-frame review",
+      "label": "Compare complete passages",
       "href": "reviews/day1-frames/"
     },
     {
