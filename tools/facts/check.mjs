@@ -68,7 +68,7 @@ const val = (c) => (NONE.test((c || '').trim()) ? '' : (c || '').trim());
 
 // ------------------------------------------------------------------ reading the game
 // Story files and engine tables (speakers, portraits, items and place registrations) are imported as data.
-const STORY = { train: 'train', gate: 'gate', forecourt: 'forecourt', lift: 'transitions', office: 'office' };   // place -> story file
+const STORY = { train: 'train', gate: 'gate', forecourt: 'forecourt', lift: 'transitions', office: 'office', dorms: 'dorms' };   // place -> story file
 export async function readGame(load = file => import(pathToFileURL(G(file)).href)) {
   const defaults = DEFAULT_SPEAKERS, portraits = PORTRAITS, items = ITEMS;
   const { CAST } = await load('js/bonds/cast.js');

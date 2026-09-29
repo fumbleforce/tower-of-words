@@ -41,7 +41,7 @@ The id `kuroda` is Mr. Hamada. The id is older than the name and stays so the vo
 
 - The player. From Norway. Age not decided (old prompts said 34 or 29).
 - Work: IT support on B2, on a support contract to keep Amakawa's ancient systems running ([setting.md](setting.md)). Repair requests will take him all over the island.
-- Home: moving to the island on day 1; his things were sent ahead. A company dorm room, the worst one, facing a concrete wall a couple of metres away (decided for the VN version, 2026-09-25; to build).
+- Home: moving to the island on day 1; his things were sent ahead. A company dorm room, the worst one, facing a concrete wall a couple of metres away (decided for the VN version, 2026-09-25; built as `dorms`, [places.md](places.md)).
 - Speaks English, and barely any Japanese: "arigatō" is about it. He can greet everyone from day 1 and learns greetings and simple phrases quickly; more Japanese opens up the other people (Jørgen, 2026-09-28). Tired, polite and dry.
 - Kotodama works for him and nobody else ([setting.md](setting.md)).
 

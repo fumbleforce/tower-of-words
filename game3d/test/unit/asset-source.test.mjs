@@ -34,6 +34,7 @@ test('asset source data includes the actual words, cast, music, sounds and style
     gate: { guard: 23, commuter: 2, eric: 4, gatev: 6, kuroda: 11, miotext: 2, kuro: 3 },
     forecourt: {},
     office: { kenji: 18, mori: 18, mio: 50, eric: 5, emi: 3 },
+    dorms: { eric: 3 },
     transitions: { sales1: 2, sales2: 1 },
   });
   assert.equal(data.icons.length, 17);

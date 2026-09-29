@@ -91,7 +91,8 @@
       "train": "game3d/js/places/train.js",
       "gate": "game3d/js/places/lobby.js",
       "forecourt": "game3d/js/places/forecourt.js",
-      "office": "game3d/js/places/office.js"
+      "office": "game3d/js/places/office.js",
+      "dorms": "game3d/js/places/dorms.js"
     },
     "events": {
       "train": {
@@ -103,7 +104,8 @@
       "forecourt": {},
       "office": {
         "sat_down": "sitDown"
-      }
+      },
+      "dorms": {}
     },
     "speakers": {
       "eric": {
@@ -226,7 +228,8 @@
     "train",
     "gate",
     "forecourt",
-    "office"
+    "office",
+    "dorms"
   ],
   "nodes": [
     "train:intro",
@@ -418,6 +421,9 @@
     "office:matte_clock",
     "office:tomatte_fan",
     "office:~kenji_mori",
+    "dorms:window",
+    "dorms:boxes",
+    "dorms:bed",
     "transitions:train_to_gate",
     "transitions:gate_to_forecourt",
     "transitions:forecourt_to_office"
