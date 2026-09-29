@@ -58,6 +58,13 @@ function guardCap(r) {
   badge.position.set(0, c + ry * 0.62, rz + 0.1); r.headK.add(badge);
 }
 
+// a thick moustache on the upper lip (the guard's portrait)
+function moustache(r, col) {
+  const { rx, ry, rz, c } = HEAD, ms = [];
+  for (let i = 0; i <= 6; i++) { const x = -0.075 + i * 0.025; const z = Math.sqrt(Math.max(0, 1 - (x / rx) ** 2 - (0.1 / ry) ** 2)) * rz; ms.push(V(x, c - 0.085 - Math.abs(x) * 0.35, z + 0.006), V(x, c - 0.115 - Math.abs(x) * 0.45, z + 0.014)); }
+  r.headK.add(mesh(hull(ms, col, { grad: 0.05, name: 'moustache' })));
+}
+
 // small lanyard card on the chest
 function lanyard(r, col = '#3e7fa6') {
   const card = new THREE.Mesh(new RoundedBoxGeometry(0.07, 0.09, 0.012, 1, 0.006), new THREE.MeshStandardMaterial({ color: '#eef0f2', roughness: 0.6 }));
@@ -94,8 +101,9 @@ export const PEOPLE = {
     return r;
   },
   guard: () => {
-    const r = chibi({ headK: HK, skin: SKINS[1], top: '#3e4556', sleeve: '#3e4556', bottom: '#2e3342', shirt: '#b3bccb', tie: '#1d2436', hair: '#2a2723', hairOpts: { front: 0.02, side: -0.1, seed: 5 }, shoes: '#1f2128', sole: '#1f2128' });
-    guardCap(r);
+    // matched to his portrait: white hair, white moustache, navy-blue uniform, no cap
+    const r = chibi({ headK: HK, skin: SKINS[1], top: '#2c4470', sleeve: '#2c4470', bottom: '#243553', shirt: '#b3bccb', tie: '#1d2436', hair: '#e7e3dc', hairOpts: { front: 0.02, side: -0.1, seed: 5 }, shoes: '#1f2128', sole: '#1f2128' });
+    moustache(r, '#eeebe5');
     return r;
   },
   briefcaseMan: () => {
@@ -118,7 +126,8 @@ export const PEOPLE = {
   },
   kuroda: () => {
     // the sleeper from the train, awake now
-    const r = chibi({ headK: HK, skin: SKINS[1], top: '#2f3a55', bottom: '#2c354d', shirt: '#eef1f5', tie: '#8a3b46', hair: '#5a3e2f', hairOpts: { messy: 0.08, front: 0.065, vfringe: 0.03, seed: 4 }, shoes: '#2a2524', sole: '#2a2524' });
+    // portrait: black slicked-back hair, navy pinstripe suit
+    const r = chibi({ headK: HK, skin: SKINS[2], top: '#2a3450', bottom: '#27304a', shirt: '#eef1f5', tie: '#2a3a5c', hair: '#1c1d22', hairOpts: { messy: 0.08, front: 0.065, vfringe: 0.03, seed: 4 }, shoes: '#2a2524', sole: '#2a2524' });
     const b = briefcase(); b.position.y = -0.25; r.arms[0].add(b);
     return r;
   },
@@ -128,14 +137,16 @@ export const PEOPLE = {
     return r;
   },
   kenji: () => {
-    const r = chibi({ headK: HK, skin: SKINS[2], top: '#eef0f3', sleeve: '#eef0f3', bottom: '#30364a', shirt: null, hair: '#231f1f', hairOpts: { messy: 0.11, front: 0.06, vfringe: 0.03, seed: 41, tufts: [[0.09, 0.27, 0.0], [-0.08, 0.27, -0.03], [0.0, 0.29, -0.09]] }, shoes: '#2a2524', sole: '#2a2524' });
+    // portrait: light blue shirt, black messy hair
+    const r = chibi({ headK: HK, skin: SKINS[2], top: '#bcd5e3', sleeve: '#bcd5e3', bottom: '#30364a', shirt: null, hair: '#1c1d22', hairOpts: { messy: 0.11, front: 0.06, vfringe: 0.03, seed: 41, tufts: [[0.09, 0.27, 0.0], [-0.08, 0.27, -0.03], [0.0, 0.29, -0.09]] }, shoes: '#2a2524', sole: '#2a2524' });
     r.torso.add(mesh(hull([[-0.015, TORSO_H - 0.005, 0.088], [0.015, TORSO_H - 0.005, 0.088], [0.02, TORSO_H - 0.11, 0.088], [0, TORSO_H - 0.13, 0.09], [-0.02, TORSO_H - 0.11, 0.088], [0, TORSO_H - 0.06, 0.1]], '#35507c', { grad: 0, name: 'tie' })));
     lanyard(r);
     return r;
   },
   mori: () => {
     const m3 = meshy3('mori'); if (m3) return m3;
-    const r = chibi({ headK: HK, skin: SKINS[1], top: '#2b3040', sleeve: '#2b3040', bottom: '#262b39', shirt: '#e8ebef', tie: '#7a2f3a', hair: '#a2a6ad', glasses: '#2a2c31', hairOpts: { front: 0.075, side: -0.04, seed: 3 }, shoes: '#1d1d1f', sole: '#1d1d1f' });
+    // portrait: grey hair, no glasses, brown-grey suit, navy tie
+    const r = chibi({ headK: HK, skin: SKINS[2], top: '#433a39', sleeve: '#433a39', bottom: '#2f2a2b', shirt: '#e8ebef', tie: '#1f2a44', hair: '#a8abb0', hairOpts: { front: 0.075, side: -0.04, seed: 3 }, shoes: '#1d1d1f', sole: '#1d1d1f' });
     return r;
   },
   yui: () => {
