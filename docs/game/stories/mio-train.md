@@ -11,9 +11,9 @@ Eric's arrival on the island. He finds a seat next to a woman with a laptop, who
 1. The game opens in the car with nothing but the walking line ([controls-and-ui.md](../controls-and-ui.md)). Mio mutters at the Wi-Fi when he comes near, the first English in the car.
 2. The first passenger he talks to answers in Japanese and nods at the free seat, which gives the first goal: sit down. After three passengers the nod goes to the woman with the laptop.
 3. At the seat, two steps: the camera frames her lunchbox and the choice says "Her lunchbox is about to fall off the seat." He chooses to catch it, let it fall, or let her catch it. Mio gives one reply, then he sits automatically and their conversation continues. Catching it flusters her; catching or dropping it gets her talking about her mother's pickles. The player never needs to click the box (Jørgen, 2026-09-29).
-4. Sitting, she sees B2 on his card: he's the support contractor Mori told them about. She calls him 外人 and he types it. She says her name.
+4. Sitting, she sees B2 on his card: he's the support contractor Mori told them about. She calls him 外人 and he types it. She says her name. If he asks about her mum, she answers in one line: she stayed on the mainland, and her mother packs as if she's moving abroad.
 5. Talking to her again starts the lesson: where he's from (Norway), how much Japanese he has. おはようございます: he types it, then says it to the cat with the Say button (his first use of Say).
-6. Back to her: she points out the sleeping man ("one day he's going to miss our stop"), and teaches よろしくおねがいします with the smallest bow he's ever seen. If she's warmed to him twice, she offers a pickle. The announcement: つぎは本社.
+6. Back to her: she points out the sleeping man ("one day he's going to miss our stop"), and teaches よろしくおねがいします with the smallest bow he's ever seen. After he types it, her praise and advice to bow with Mori share one line. If she's warmed to him twice, she offers a pickle. The announcement: つぎは本社.
 7. She sends him to the doors. At the station すみません gets Aoi out of the aisle ("honestly it works for almost everything"). Everyone gets off. What happens on the platform is [`sleeping-man`](sleeping-man.md) and [`mio-notices`](mio-notices.md).
 
 ## Choices and flags
