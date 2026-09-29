@@ -23,6 +23,11 @@
   .swatches { grid-column: 2 / 4; display: flex; gap: 5px; flex-wrap: wrap; }
   .swatches button { width: 26px; height: 26px; padding: 0; border-radius: 50%; }
   .swatches button[aria-pressed="true"] { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .recipe-actions { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
+  .recipe-actions button { min-height: 44px; }
+  .panel button:disabled { opacity: .55; cursor: default; }
+  #recipe-status { min-height: 1.4em; color: var(--mute); }
+  details { margin-top: 12px; }
   textarea { width: 100%; height: 130px; font: 12px/1.35 ui-monospace, monospace; border: 1px solid var(--line); border-radius: 6px; background: var(--bg); color: var(--ink); padding: 8px; margin-top: 8px; }
   .note { color: var(--mute); font-size: 12px; margin-top: 10px; }
   #status { position: absolute; top: 16px; left: 16px; color: var(--mute); }
@@ -40,8 +45,11 @@
     <h1>Character creator</h1>
     <div class="slot"><label for="body">Body</label><select id="body"></select><span></span></div>
     <div id="slots"></div>
-    <textarea id="recipe" spellcheck="false" aria-label="Recipe JSON"></textarea>
-    <button id="copy">Copy recipe</button>
+    <div class="recipe-actions"><button id="save-recipe" disabled>Save recipe</button><button id="load-recipe" disabled>Load recipe</button></div>
+    <input id="recipe-file" type="file" accept=".json,application/json" hidden>
+    <p id="recipe-status" role="status" aria-live="polite"></p>
+    <details><summary>Recipe JSON</summary><textarea id="recipe" spellcheck="false" aria-label="Recipe JSON"></textarea>
+    <div class="recipe-actions"><button id="apply-recipe" disabled>Apply JSON</button><button id="copy" disabled>Copy JSON</button></div></details>
     <p class="note">Experiment. Parts cut from Mio and Eric, on one skeleton. The body sets the proportions; parts from the other model are stretched to fit it.</p>
   </div>
 </div>
@@ -49,6 +57,7 @@
 import * as THREE from 'three';
 import { loadLibrary, buildCharacter, setColours, SLOTS, SKIN_TONES } from './recipe.js';
 import { disposeCharacter } from './dispose.js';
+import { parseRecipe, recipeFile, MAX_RECIPE_BYTES } from './recipe-file.js';
 
 const view = document.getElementById('view');
 const renderer = new THREE.WebGLRenderer({ antialias: true });
@@ -69,7 +78,11 @@ const bySlot = {}; for (const p of lib.parts) (bySlot[p.slot] = bySlot[p.slot] |
 const recipe = { body: 'mio', parts: {}, colours: {}, height: 1.1 };
 for (const s of SLOTS) recipe.parts[s] = `mio-${s}`;
 const params = new URLSearchParams(location.search);
-if (params.get('recipe')) Object.assign(recipe, JSON.parse(params.get('recipe')));
+let initialRecipeError = '';
+if (params.get('recipe')) {
+  try { Object.assign(recipe, parseRecipe(params.get('recipe'), lib)); }
+  catch (error) { initialRecipeError = 'Could not load URL recipe: ' + error.message; }
+}
 
 const bodySel = document.getElementById('body');
 bodySel.innerHTML = Object.keys(lib.sources).map((k) => `<option value="${k}">${k[0].toUpperCase() + k.slice(1)}</option>`).join('');
@@ -102,11 +115,56 @@ for (const s of SLOTS) {
   }
 }
 function showRecipe() { document.getElementById('recipe').value = JSON.stringify(recipe, null, 1); }
-document.getElementById('copy').onclick = () => navigator.clipboard && navigator.clipboard.writeText(document.getElementById('recipe').value);
+function syncRecipeControls() {
+  bodySel.value = recipe.body;
+  for (const slot of SLOTS) {
+    document.getElementById('s-' + slot).value = recipe.parts[slot];
+    const colour = document.getElementById('c-' + slot);
+    if (colour) colour.value = recipe.colours?.[slot] || '#' + lib.byId[recipe.parts[slot]].key.map(x => x.toString(16).padStart(2, '0')).join('');
+  }
+  document.querySelectorAll('.swatches button').forEach(button => button.setAttribute('aria-pressed', String((button.dataset.tone || '') === (recipe.colours?.skin || ''))));
+}
+const fileStatus = document.getElementById('recipe-status');
+const fileInput = document.getElementById('recipe-file');
+function replaceRecipe(next) { for (const key of Object.keys(recipe)) delete recipe[key]; Object.assign(recipe, next); }
+async function applyRecipeText(text) {
+  const next = parseRecipe(text, lib), previous = structuredClone(recipe);
+  replaceRecipe(next);
+  fileStatus.textContent = 'Loading recipe…';
+  const result = await rebuild();
+  if (result === false) {
+    replaceRecipe(previous); if (ch) setColours(ch, recipe.colours); syncRecipeControls(); showRecipe();
+    fileStatus.textContent = 'Could not build this recipe. Your previous character is still shown.';
+  } else if (result === true) fileStatus.textContent = 'Recipe loaded.';
+}
+document.getElementById('apply-recipe').onclick = async () => {
+  try { await applyRecipeText(document.getElementById('recipe').value); }
+  catch (error) { fileStatus.textContent = error.message; }
+};
+document.getElementById('load-recipe').onclick = () => fileInput.click();
+fileInput.onchange = async () => {
+  const file = fileInput.files[0]; if (!file) return;
+  try {
+    if (file.size > MAX_RECIPE_BYTES) throw new Error('Recipe must be smaller than 64 KB.');
+    await applyRecipeText(await file.text());
+  } catch (error) { fileStatus.textContent = error.message; }
+  finally { fileInput.value = ''; }
+};
+document.getElementById('save-recipe').onclick = () => {
+  const url = URL.createObjectURL(new Blob([recipeFile(recipe)], {type: 'application/json'}));
+  const link = document.createElement('a'); link.href = url; link.download = recipe.body + '-recipe.json';
+  document.body.append(link); link.click(); link.remove(); setTimeout(() => URL.revokeObjectURL(url), 1000);
+  fileStatus.textContent = 'Recipe saved. Load this file to restore your character.';
+};
+document.getElementById('copy').onclick = async () => {
+  try { await navigator.clipboard.writeText(document.getElementById('recipe').value); fileStatus.textContent = 'Recipe copied.'; }
+  catch { fileStatus.textContent = 'Copy was unavailable. Select the JSON text and copy it manually.'; }
+};
 
 let ch = null, anim = 'idle', spin = false, busy = 0;
 async function rebuild() {
   const my = ++busy;
+  document.querySelectorAll('.recipe-actions button').forEach(button => { button.disabled = true; });
   const status = document.getElementById('status'); status.textContent = 'Updating character…';
   try {
     const next = await buildCharacter(lib, structuredClone(recipe));
@@ -116,7 +174,8 @@ async function rebuild() {
     disposeCharacter(ch);
     ch = next; scene.add(ch.root); ch.play(anim, 0);
     status.textContent = '';
-    showRecipe();
+    syncRecipeControls(); showRecipe();
+    return true;
   } catch (error) {
     if (my === busy) {
       if (ch) {
@@ -127,7 +186,11 @@ async function rebuild() {
         showRecipe();
       }
       status.textContent = 'Could not update character: ' + error.message;
+      syncRecipeControls();
+      return false;
     }
+  } finally {
+    if (my === busy) document.querySelectorAll('.recipe-actions button').forEach(button => { button.disabled = !ch; });
   }
 }
 document.querySelectorAll('[data-anim]').forEach((b) => b.onclick = () => {
@@ -141,6 +204,7 @@ addEventListener('pointerup', () => { drag = null; });
 addEventListener('pointermove', (e) => { if (drag !== null) { yaw += (e.clientX - drag) * 0.01; drag = e.clientX; } });
 
 resize(); await rebuild();
+if (initialRecipeError) fileStatus.textContent = initialRecipeError + ' Default character shown.';
 const clock = new THREE.Clock();
 renderer.setAnimationLoop(() => {
   const dt = Math.min(clock.getDelta(), 0.05);
