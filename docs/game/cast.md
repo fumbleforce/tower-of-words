@@ -1,6 +1,6 @@
 # Cast
 
-Every person in the game, as a person: who they are, their job, where they live and work, their routine, who they know, how they talk and what's approved about their look. Last checked against the game on 2026-09-29.
+Every person and their id: the Everyone table, then one section per person with age, work, home, routine, who they know, how they talk and their approved look (hair, eyes, 3D colours). Then the names shown on screen, what each person likes (for gifts), which portrait faces each has, and people in the code but in no storyline. Last checked against the game on 2026-09-29.
 
 Elsewhere: which storylines each person is in is in each storyline's Cast line ([stories/](stories/)); where the game puts people at each time of day is in [places.md](places.md); how to write their lines is in game3d/story/VOICE.md, and their voice settings in game3d/story/VOICE-DIRECTION.md; art history and candidates are in the bible. Ideas for later days (notes/walkthrough/) aren't facts until Jørgen decides them.
 
@@ -47,7 +47,7 @@ The id `kuroda` is Mr. Hamada. The id is older than the name and stays so the vo
 
 ### Mio (`mio`)
 
-- 25. B2's programmer. Of the people Eric works beside, the only one with English (loose, learned from work and the internet).
+- Age 25. B2's programmer. Of the people Eric works beside, the only one with English (loose, learned from work and the internet).
 - Home: on the island. Her mother lives on the mainland; Mio stays over sometimes and comes back on the monorail with a bag of her mother's pickles ("My mother thinks island has no food").
 - Routine: looks after B2's old servers in the machine room, where she also eats lunch because "it's quiet, and nobody talks to me there". Hates bowing; that's why she's on B2. Anything reported broken goes on her list.
 - Dry, low on energy, busy. Doesn't love strangers and keeps them at a distance, but won't let a teammate walk in unprepared and embarrass B2. On the train she's a little reluctant but gets Eric up to speed (Jørgen). She calls him 外人 consistently, the way you'd say "the new guy"; Mori corrects her to 外国の方.
@@ -56,15 +56,15 @@ The id `kuroda` is Mr. Hamada. The id is older than the name and stays so the vo
 
 ### Mr. Mori (`mori`)
 
-- 58. Used to be a manager; now on the B2 team. Formal and kind.
-- Routine: makes the tea; has corn soup from a can every afternoon. Opened the B2 copier's repair request on 1 April 1996, when he was new, and has said 動いて to it every morning since. Went to the Lillehammer Olympics in 1994 and does the ski jump with his hands.
+- Age 58. Used to be a manager; now on the B2 team. Formal and kind.
+- Routine: makes the tea; has corn soup from a can every afternoon. Opened the B2 copier's repair request when he was new ([stories/copier.md](stories/copier.md)) and has said 動いて to it every morning since. Went to the Lillehammer Olympics in 1994 and does the ski jump with his hands.
 - Speaks polite Japanese only. His warmth shows in what he does: bows, tea, making room.
 - Knows: Mio (likes her; corrects her 外人 gently, the only time he interrupts).
 - Look: chibi figure in code. His Meshy model (loads with `?cast3d=mori`) is parked (Jørgen, 2026-09-29, review mori-3d: "none of these").
 
 ### Kenji (`kenji`)
 
-- 21. Two months on the team, the newest before Eric. Keen to help and easily distracted.
+- Age 21. Two months on the team, the newest before Eric. Keen to help and easily distracted.
 - Routine: lives on melon soda. His chair broke, so he borrowed Eric's and left it in the machine room.
 - Speaks casual Japanese, and a little school English he likes to practise.
 - Knows: Mori (likes him), Mio (owes her).
@@ -72,7 +72,7 @@ The id `kuroda` is Mr. Hamada. The id is older than the name and stays so the vo
 
 ### Emi (`emi`)
 
-- 32. B2's team lead. Native British English.
+- Age 32. B2's team lead. Native British English.
 - On day 1 she is upstairs at head office all day, arguing for B2's parts budget, and comes down at 17:40 ([`emi-budget`](stories/emi-budget.md)).
 - Quick and complete sentences; says the good news first and the problem as an aside.
 - A cast member like any other, with no special restrictions: romance and rewards apply to her as to the rest (Jørgen, 2026-09-27).
@@ -80,14 +80,14 @@ The id `kuroda` is Mr. Hamada. The id is older than the name and stays so the vo
 
 ### Mr. Ishibashi (`guard`)
 
-- 64. The security guard at the head office gate. Strict and fair.
+- Age 64. The security guard at the head office gate. Strict and fair.
 - Routine: at his desk by the gate every morning, greeting people with おはようございます. Feeds a cat that, he says, is not there.
 - Speaks polite, clipped Japanese and no English. Speaks with his hands when he has to, precisely.
 - Look: approved portrait art/approved/ishibashi/ishibashi-after.webp.
 
 ### Mr. Hamada (`kuroda`)
 
-- 54. Accounts, 12th floor.
+- Age 54. Accounts, 12th floor.
 - Lives on the island. Falls asleep on the monorail every time he comes back from the mainland, and is late through every gate. Apologises constantly and talks to machines like animals.
 - Speaks Japanese only.
 - Knows: the guard (owes him; the guard gets him through every morning).

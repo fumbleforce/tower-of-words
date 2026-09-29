@@ -1,21 +1,16 @@
 # Working guide: Amakawa
 
-How we work, and the rules Jørgen has set. Every agent reads this before starting. What the game is (setting, cast, places, storylines, words, systems, UI, art and sound) is in docs/game/; start at docs/game/README.md, read the files for your area, and never contradict them. When this file and an older doc disagree, this file wins; on what the game is, docs/game/ wins.
+How we work, and the rules Jørgen has set. Every agent reads this before starting. What the game is (setting, cast, places, storylines, words, systems, UI, art and sound) is in docs/game/; read the files for your area and never contradict them. docs/game/README.md maps where every kind of fact lives, game or not: start there when you look something up. When this file and an older doc disagree, this file wins; on what the game is, docs/game/ wins.
 
 Rules that belong to one area live with that area, and this file points to them. Old rules and verdicts that no longer apply (the VN, Godot, the island slice, pixel sprites, low-poly Mio) are in legacy/notes/GUIDE-history.md, word for word. Don't follow them.
 
 ## Index
 
-- [Who it's for](#who-its-for): Jørgen's Japanese level, how he plays, what he likes.
-- [Working with Jørgen](#working-with-jørgen): scope (day 1 only), reviews and approvals, relaying his feedback, links, privacy, budget.
-- [Writing](#writing): plain writing, dialogue, story craft, originality, how much Japanese a screen can hold.
-- [Visual design](#visual-design): game UI rules (no timers, first screen, layouts), the world style, review pages.
-- [Art](#art): image prompts, reference images, 3D characters, rewards. Details in art/PROMPTS.md.
-- [Voices and audio](#voices-and-audio): local voices, Mio's pitch guard. Methods in art/SOUND.md.
-- [Process](#process): agents, QA gates, facts in the same commit, definition of done.
-- [Engineering](#engineering): review server, GPU and browser locks, fast tests, the bible, the asset library, repo layout.
+[Who it's for](#who-its-for) · [Working with Jørgen](#working-with-jørgen) · [Writing](#writing) · [Visual design](#visual-design) · [Art](#art) · [Voices and audio](#voices-and-audio) · [Process](#process) · [Engineering](#engineering). Each section opens with a line on what it holds.
 
 ## Who it's for
+
+Jørgen's Japanese level (early intermediate, weak katakana), when and where he plays, what games he likes, and that the game adapts to any player's level.
 
 - Jørgen: early intermediate Japanese (courses in 2015; hiragana mostly fine, katakana weak, spotty grammar). Goals: follow anime dialogue and hold conversations in Japan.
 - He plays 10 to 15 minutes at a time: on the train on his phone (3 days a week, patchy internet), and at home on the desktop.
@@ -25,11 +20,13 @@ Rules that belong to one area live with that area, and this file points to them.
 
 ## Working with Jørgen
 
+Scope is day 1 only. Anything he picks or judges becomes a Review item; he approves every asset and sees every attempt. Also here: relaying his words as given, left and right on a character, links only (never open things on his screen), publishing and private content, and the Replicate and Meshy budgets.
+
 - Scope (Jørgen, 2026-09-28): "stop going overboard with generating speech and plots 10 steps ahead before we have the intro day nailed." Build only what the intro day plays: one stable, full, fun day before anything else. No future arcs, later-day plots, extra variants or systems for later; procedural content is parked in TODO.md.
 - Production pass (Jørgen, 2026-09-28): agents take day 1 to production grade in parallel. Ownership, rules and the quality bar are in notes/PRODUCTION.md; every agent reads it.
 - Overnight goal (Jørgen, 2026-09-29): notes/OVERNIGHT.md.
 - Character arcs are to be designed in full RPG-walkthrough detail (notes/walkthrough/). They stay ideas until he decides them.
-- Reviews go in the bible (Jørgen, 2026-09-28: "your changes happen too quickly, why are you not adding things to the review pages in the bible and allowing me to pick and comment on things there"). Every candidate set or choice becomes an item in reviews/<id>/review.json; his answers land in reviews/<id>/feedback.json (read them with tools/review.py). Chat gets a one-line pointer. Don't pile up changes faster than he can review them.
+- Reviews go in the bible (Jørgen, 2026-09-28: "your changes happen too quickly, why are you not adding things to the review pages in the bible and allowing me to pick and comment on things there"). Every candidate set or choice becomes a Review item, reviews/<id>/review.json (how to post one: reviews/README.md); his answers land in reviews/<id>/feedback.json (read them with tools/review.py). Chat gets a one-line pointer. Don't pile up changes faster than he can review them.
 - Jørgen approves every asset (2026-09-25): no image, sprite, background, shot or voice goes into a build until he has picked it on a review page. Agents render candidates, check them, post them, and stop.
 - Show every attempt (Jørgen, 2026-09-26: "do show me the in progress images you are correcting also as I dont trust your judgement on this"). Every render of a round goes on the review page in order, rejected ones included, with prompt and settings.
 - Decide before producing: settle style, model and cast with small comparison sets first. No bulk production until he has approved them. "Keep the GPU busy" means exploration toward a decision.
@@ -47,6 +44,8 @@ Rules that belong to one area live with that area, and this file points to them.
 - Keep this guide updated whenever Jørgen gives feedback: one line, in the section it belongs to, said once.
 
 ## Writing
+
+Plain writing (humanizer), how dialogue must sound (spoken, no AI voice, no exposition panels, no narrating what the player can see), story craft, originality, and the learning rules (short lines, one new thing at a time, no unlearned kanji in UI chrome).
 
 ### Plain writing
 
@@ -97,6 +96,8 @@ Game first, learning light (docs/game/setting.md) overrides these where they con
 
 ## Visual design
 
+No text on timers, the first screen (controls only), a goal line that stays, separate phone and desktop layouts, no brown, gold or serif, the flat-shaded 3D world (never paper or cut-out), and how review pages lay out options.
+
 - No text on timers, ever (Jørgen, 2026-09-28: "stop doing timers like this it is completely inaccessible for anyone"). Hints, notes and goals stay until the player acts and can be re-read. No real-time timers while text is on screen.
 - The player always has a reachable next goal, told through people and a goal line that stays (the fast test checks this).
 - First screen (Jørgen, 2026-09-28: "too many instructions at once immediately as I begin the game... I thought you QA-ed this"). Order: "start off with JUST controls, NO goals, no other clutter. THEN teach how to talk to people", then the first goal. Never force the player into the story ("don't force the player into the story right away, you are stuck from then on"): they can explore, and they start the story beats.
@@ -111,6 +112,8 @@ Game first, learning light (docs/game/setting.md) overrides these where they con
 - Review pages: every option has its unique id as the card heading (e.g. sales-8301) so he can name his pick; large responsive grids (images at least about 480 to 520 px, not 2 per row), a lightbox with arrow keys, and the full prompt under each title.
 
 ## Art
+
+Every image prompt starts from a shot-staging note and shows only what is visible; one change per fix; his reference images are never assets; cast palette; no LoRA training; Meshy models; low-poly Mio paused; and, under Rewards, the reward scene rules (spice, quality tags, model, anatomy and limit tests, privacy).
 
 Prompt rules, models, settings, cast prompt lines, reward prompts, composition control, 3D characters and video are in art/PROMPTS.md. Portrait style blocks: art/STYLE.md.
 
@@ -133,12 +136,14 @@ Prompt rules, models, settings, cast prompt lines, reward prompts, composition c
 - Reward scenes (Jørgen, 2026-09-26): make them whenever the GPU is idle, with "real creativity", and with direct spice ("I am all for direct spice on all levels"): revealing outfits, bath and onsen scenes, suggestive poses and angles, compromising situations that come out of play (a command taken literally that traps, soaks or overheats someone).
 - More spice, wider choice (Jørgen, 2026-09-27: "these are within bounds, so you should focus on doing more like that"). Many varied pictures in the round-2 onsen style, and leave the style alone. Ordinary scenes can be sexy too (cleavage, curvy poses, tight or skimpy clothes). Also fine: nudity hidden by angle, hair, steam or limbs; colleagues kissing, women with each other included (don't assume anyone's orientation); love affairs in interesting places.
 - Every Anima-family prompt starts with the quality tags, then the rating, then the content; a content example from him never removes them (the 2026-09-27 flat-rewards lesson, art/PROMPTS.md "Reward quality").
-- Model (2026-09-27, after round 27): RDBT only for these. No Nova versions and no style variants of one concept; spend renders on new, varied concepts.
+- Model (2026-09-27, after round 27): RDBT only for reward scenes. No Nova versions and no style variants of one concept; spend renders on new, varied concepts.
 - Perspective is not an anatomy fault (Jørgen, 2026-09-27: "it is the camera perspective, it's not off"). Low and overhead angles, foreshortening, hips above the head and upside-down top views are valid. Reject for anatomy only for real errors: extra or missing limbs, fused fingers, a joint bending the wrong way. Critics get the same rule.
 - Limit test (Jørgen, 2026-09-27: "nipple detection is oversensitive"). Reject for the limits only when a nipple, an areola or genitals are clearly drawn and visible. Highlights, water rings, shading, folds and show-through that only hints at shape don't count, and "could be read as" is no reason. Critics get the same test.
 - Rewards and privacy (Jørgen, 2026-09-26): sexy pictures, progression, relationships and the job are all rewards. Everything spicy stays private (island/private/rewards/) until he picks, never on a public page or in the public repo; discreet mode is on by default on the phone.
 
 ## Voices and audio
+
+Local models first, game voices are local Qwen3-TTS clones, Mio's voice source and the pitch guard against male drift, and loudness per character.
 
 Methods, tests and music findings are in art/SOUND.md; which voices and tracks are approved is in docs/game/art-and-sound.md.
 
@@ -147,6 +152,8 @@ Methods, tests and music findings are in art/SOUND.md; which voices and tracks a
 - Per-character loudness is normalised; the player voice is quieter.
 
 ## Process
+
+One home per fact, one task per agent, the main thread never waits, validate fixes in isolation, storyboard the opening, the cold-player and visual QA gates, facts in the same commit (the `Facts:` line), and the definition of done.
 
 - Say each fact once (Jørgen, 2026-09-29: "stop putting info multiple places, even in the same document, it creates drift"). One home per fact; elsewhere link to it or say nothing. Don't copy GUIDE rules into other docs.
 - One focused task per agent (Jørgen, 2026-09-28): different kinds of work go to separate, fresh agents.
@@ -168,6 +175,8 @@ Methods, tests and music findings are in art/SOUND.md; which voices and tracks a
 
 ## Engineering
 
+The review server port, the GPU lock, headless browser runs, the image gen dashboard, ComfyUI workflows, the fast test, where screenshots go, the world bible, the asset library, and where things live in the repo.
+
 - Local review server (2026-09-27): port 8000 here is another project's Docker container. The repo is served at http://127.0.0.1:8771/ (`python3 -m http.server 8771 --bind 127.0.0.1` from the repo root, or ./start).
 - GPU lock: one GPU job at a time. Acquire with `mkdir /tmp/claude-1000/gpu.lock` (fails if held), write your name to /tmp/claude-1000/gpu.lock/owner, and release with `rm -r /tmp/claude-1000/gpu.lock` after stopping ComfyUI or your model server. Check nvidia-smi first, and free ComfyUI's VRAM before LLM or TTS jobs. If it's held, wait and retry every few minutes. A batch runner checks the owner file before every job and stops if its name is gone. Remove the lock only when the owner file has your name (`grep -q <your name> owner && rm -r ...`), never "to clean up" a lock that looks stale (twice on 2026-09-26 an agent removed another agent's lock).
 - Headless browser runs (Jørgen, 2026-09-29): run in parallel, each with its own /tmp/claude-1000/browser.lock.<pid>. Hold off only while the machine is busy (load average above 24 on its 32 cores); prefer GPU rendering (GL=gpu) when the GPU lock is free.
@@ -175,7 +184,8 @@ Methods, tests and music findings are in art/SOUND.md; which voices and tracks a
 - Save every ComfyUI workflow we use as a loadable API JSON in tools/workflows/ and ~/ai/workflows/, so he can open it. Keep original PNGs; they embed their workflow.
 - Agents share the scratchpad, so use unique file names.
 - Fast tests (Jørgen, 2026-09-28: "it should be speedrunning, modifying run speed and such, we can't spend HOURS on tests"). Play-through QA runs in fast test mode, so a full day takes about a minute. Real-time runs only for a final human-speed check, and only if asked. Tests run in the background, capped at 5 minutes, and never hold up pushing a build ("just push already").
-- game3d QA is programmatic (Jørgen, 2026-09-28: "max 5 min test, this should be programmatic"): `node game3d/tools/fast.mjs 390 844` and `... 1366 860` play the whole day in test mode (?test=fast) and print PASS or FAIL with any page errors. Run them after every change; `node game3d/tools/story-check.mjs` checks the story files against the engine.
+- game3d QA is programmatic (Jørgen, 2026-09-28: "max 5 min test, this should be programmatic"). The fast test: `node game3d/tools/fast.mjs 390 844` and `... 1366 860` play the whole day in test mode (?test=fast) and print PASS or FAIL with any page errors. Run them after every change; `node game3d/tools/story-check.mjs` checks the story files against the engine.
+- Screenshots: game captures go in game3d/shots/<job>/, one folder per run where the tool makes one (game3d/shots/fast/<time>-<pid>/). fast/ and words-menu/ are git-ignored; the other folders are still committed until the asset move (notes/asset-storage-proposal.md) makes them local only. Scratch images go in your scratchpad.
 - World bible (2026-09-27): the approved cast, places, story, rules, reviews and open questions at http://127.0.0.1:8771/bible/. It reads most facts live from their sources (bible/live.js); bible/facts.yaml keeps history, rejections and questions, each with status and source. After a decision changes, update facts.yaml if needed, rerun `python3 tools/bible/build.py`, then `node tools/bible/check.mjs`. The private bible (island/private/bible/, git-ignored) is never linked from the public one.
 - Asset library (2026-09-29): tools/assets/ lists every asset with status, source and use (http://127.0.0.1:8771/tools/assets/, rebuilt by ./start). Run tools/assets/render3d.mjs after model or place changes.
 - Repo hygiene (2026-09-28): active work lives in game3d/, bible/, art/, tools/, docs/ and notes/. legacy/ is reference only; nothing in it is active or approved. Approved art is in art/approved/<bible id>/ (listed in art/approved/README.md); anything not in the bible is not approved. His reference images are in art/refs/ and voice clone clips in tools/voice-refs/, never inside a review folder.

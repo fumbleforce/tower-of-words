@@ -2,6 +2,8 @@
 
 Anything Jørgen needs to pick or judge goes here, not into a chat message. Each item is one folder, `reviews/<id>/`, and shows up in the bible under Review (http://127.0.0.1:8771/bible/#review), with the open count in the nav. He picks options, stars or rejects them, comments on each and on the whole, and presses Send. The page saves his answer to `reviews/<id>/feedback.json`.
 
+To post a review item, write `reviews/<id>/review.json` as in Adding an item below (or use the post-review-item skill). To see which review items are open and what he answered, run `python3 tools/review.py list` (Reading his answers).
+
 ## Adding an item
 
 1. Pick an id: lower case, digits and hyphens, unique (`kenji-concept`, `style-rough-2`). A new round is a new id, not an edit of the old one; mark the old one `superseded`.
