@@ -17,8 +17,10 @@ import composite  # noqa: E402
 from portrait_candidates import mio_frame_mask  # noqa: E402
 from geom import APPR  # noqa: E402
 
-R3 = os.path.join(REPO, 'art/production/mio-phone-3')
-R4 = os.path.join(REPO, 'art/production/mio-phone-4')
+# before and after rounds: check_frame.py [before after], default mio-phone-3 mio-phone-4
+_r = sys.argv[1:3] if len(sys.argv) > 2 else ['mio-phone-3', 'mio-phone-4']
+R3 = os.path.join(REPO, 'art/production', _r[0])
+R4 = os.path.join(REPO, 'art/production', _r[1])
 CANVAS = (1008, 1296)
 
 
@@ -77,7 +79,7 @@ if __name__ == '__main__':
     wm, warped = frame_ref()
     names = ['mio-phone3-exact-3401-v2', 'mio-phone3-blendk20-3501-exact-3401-v2', 'mio-phone3-blendk25-3501-exact-3401-v2',
              'mio-phone3-exact-3403-v2', 'mio-phone3-blendk20-3501-exact-3403-v2']
-    print('frame drawn: share of frame-like core pixels, and gaps (cross-sections with no frame), round 3 -> round 4')
+    print('frame drawn: share of frame-like core pixels, and gaps (cross-sections with no frame), before -> after (left/right = as seen in the image)')
     for n in names:
         r3 = os.path.join(R3, n + '.png')
         r4 = os.path.join(R4, n + '.png')
@@ -103,7 +105,7 @@ if __name__ == '__main__':
     import glob
     print('approved portrait cut-outs, worst frame segment: before (art/production/mio-phone-4/portraits-before) -> now')
     for p in sorted(glob.glob(REPO + '/game3d/assets/portraits/mio-*.webp')) + [REPO + '/game3d/assets/portraits-v2/mio-neutral.webp']:
-        b = os.path.join(R4, 'portraits-before', os.path.basename(os.path.dirname(p)) + '-' + os.path.basename(p))
+        b = os.path.join(REPO, 'art/production/mio-phone-4/portraits-before', os.path.basename(os.path.dirname(p)) + '-' + os.path.basename(p))
         worst = []
         for q in (b, p):
             rows = alpha_report(q, am, composite.EA) if os.path.exists(q) else []

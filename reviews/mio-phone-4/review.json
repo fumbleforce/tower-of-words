@@ -2,7 +2,7 @@
  "title": "Mio looking at her phone, round 4 (left lens frame made solid)",
  "date": "2026-09-29",
  "by": "art agent (Mio phone 4)",
- "status": "open",
+ "status": "superseded",
  "multi": false,
  "question": "Is the frame solid all the way round now?",
  "media": [
@@ -78,5 +78,6 @@
    "label": "Round 3",
    "href": "bible/#review/mio-phone-3"
   }
- ]
+ ],
+ "decision": "left means HER left (the lens on the image's right); none of round 4 fixed it. Round 5: mio-phone-5"
 }
