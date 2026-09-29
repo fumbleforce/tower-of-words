@@ -1,12 +1,12 @@
 # Office day-one simplification proposal
 
-Proposal only. No story source, assets, or committed files changed.
+Proposal only. The review documents are committed; no story source or assets have changed. Revised after Claude’s C-0092 cold read.
 
 Frozen source: `/home/jorgen/repo/japanese/.claude/worktrees/codex-day1-simplify/game3d/story/office.js`, commit `52144e90d7873882d8f3111451c364bed9a41e7b`, SHA-256 `9a5b66b4f6d1cb90104ec7cd2a0e6d474d5eca0a181317ac99c77efc02bb6210`. All node indices below are zero-based indices in that source, before deletions.
 
 Read: GUIDE, collab protocol/inbox C-0090, VOICE.md, dialogue/story-sense/humanizer/cliche-transcendence skills, and docs/game/stories/{b2-welcome,copier,lunch,tama,mio-notices,vending-gift,emi-budget}. The skill output is this assigned file.
 
-The main avoidable stops are knocking twice on one door and clicking Mio again immediately after she speaks about the chair. Keep the cat riding the chair, Kenji's forest-cat distraction, the two lunch partners, their conversational choices, both lessons and their consequences. The proposed cuts also remove repeated ticket information and move three gesture explanations into their existing typing prompts. Ordinary pronunciation, slow pronunciation and the player's submission remain separate learning beats.
+The chair conversation now leads straight to Mio’s request. The proposed automatic door opening is withdrawn: the pause after her first reply gives players time to try akete. Both knocks and the command route remain as authored. Keep the cat riding the chair, Kenji's forest-cat distraction, the two lunch partners, their conversational choices, both lessons and their consequences. The first request card and Eric’s reaction to its age stay, as does the closing assignment card. The remaining cuts remove a repeated sensor instruction and move three gesture explanations into their existing typing prompts. Ordinary pronunciation, slow pronunciation and the player's submission remain separate learning beats.
 
 ## Counting convention
 
@@ -20,10 +20,10 @@ For literal manual inputs, Talk/Use/E is one activation. An external Say normall
 |---|---:|---:|---:|---|
 | Mori welcome: `office_in` + `yoroshiku_mori` or `ohayo_mori` + `lead_in`, 120–158 | 4 → 3 | 0 | 0 | One Say to Mori; unchanged. Two selectors + conditional 0–1 practice submission. `mori_wait` is optional, not required. |
 | Kenji introduction, `kenji_first`, 181–195 | 5 → 4 | 0 | 0 | One Talk to Kenji, desk or machine door; unchanged. |
-| Machine room, knock route: `machine_door` + `mio_opens`, 231–239 | 2 → 2 | 0 | 0 | Two door activations → one. Second knock disappears; Mio's response continues into opening. |
+| Machine room, knock route: `machine_door` + `mio_opens`, 231–239 | 2 → 2 | 0 | 0 | Two door activations → two. Keep the pause after “one minute” so akete remains an option. |
 | Machine room, command route: `akete_machine`, 240–247 | 1 → 1 | 0 | 0 | One Say akete; unchanged, with two selectors and 0–1 practice submission. |
 | Enter room: `machine_in`, 248–250 | 0 → 0 | 0 | 0 | Automatic zone, zero. |
-| Chair and first request: `chair_push` + `ticket`, 251–273 | 9 → 6 | 0 | 0 | Use chair, then Talk to Mio → Use chair only. Request follows the cat line. |
+| Chair and first request: `chair_push` + `ticket`, 251–273 | 9 → 8 | 0 | 0 | Use chair, then Talk to Mio → Use chair only. Request follows the cat line. |
 | Copier lesson and repair: `copier`, 288–324 | 5 → 4 | 0 | 1 | Walking into copy-room zone starts it; no further object interaction required. Manual Talk/Say is an alternative trigger, not an extra required action. |
 | Report repair: `ticket_done`, 327–336 | 5 → 4 | 0 | 0 | One Talk to Mio; unchanged. It starts lunch automatically. |
 | Choose lunch partner: `lunch_start`, 339–349 | 2 → 2 | 1 | 0 | Already in scene; zero. |
@@ -34,7 +34,7 @@ For literal manual inputs, Talk/Use/E is one activation. An external Say normall
 | Desk, Emi visit and evening transition: `work_afternoon` + `emi_drops_in`, 538–566 | 6 → 6 | 0 | 0 | One Use desk; unchanged. Emi's four lines carry her introduction, own goal and dangerous promise. |
 | Mio's evening question: `ending`, 569–585 | `5 + G` → `4 + G` | 1 | 0 | Normally automatic after Emi. No extra Talk to Mio required. One lunch-specific line in either branch. |
 | Answer to Mio: `end_dunno` / `end_nicely` / `end_quiet`, 586–588 | 1 / 1 / 0 → unchanged | 0 | 0 | Zero; the preceding choice already paid for the answer. |
-| Next repair request: `end_ticket`, 590–608 | 5 → 3 | 0 | 0 | Zero. Last line still varies with lunch/warmth; day ends automatically. |
+| Next repair request: `end_ticket`, 590–608 | 5 → 4 | 0 | 0 | Zero. Last line still varies with lunch/warmth; day ends automatically. |
 
 H and G are conditions, not extra choices in the office. Mutually exclusive lunch branches are not added together.
 
@@ -44,16 +44,16 @@ These examples start at office entry, include the welcome and required chair/cop
 
 | Route | A before → after | C before/after | T before/after | External E before → after |
 |---|---:|---:|---:|---:|
-| Social gate / lunch Mio / eat quietly / evening silence | 60 → 49 | 3 | 2, plus Mori Say practice 0–1 | 8 → 6 |
-| Social gate / lunch Mio / ask about doors / evening silence | 61 → 50 | 3 | 2, plus Mori Say practice 0–1 | 8 → 6 |
-| Social gate / lunch Mio / ask why B2 / evening silence | 62 → 51 | 3 | 2, plus Mori Say practice 0–1 | 8 → 6 |
-| Social gate / lunch Mori / landing or pour / evening silence | 61 → 50 | 3 | 2, plus Mori Say practice 0–1 | 8 → 6 |
+| Social gate / lunch Mio / eat quietly / evening silence | 60 → 52 | 3 | 2, plus Mori Say practice 0–1 | 8 → 7 |
+| Social gate / lunch Mio / ask about doors / evening silence | 61 → 53 | 3 | 2, plus Mori Say practice 0–1 | 8 → 7 |
+| Social gate / lunch Mio / ask why B2 / evening silence | 62 → 54 | 3 | 2, plus Mori Say practice 0–1 | 8 → 7 |
+| Social gate / lunch Mori / landing or pour / evening silence | 61 → 53 | 3 | 2, plus Mori Say practice 0–1 | 8 → 7 |
 
-Adjust any row: final verbal answer adds 1 A. For different gate flags, apply `3(H−1) + 2G` A relative to these social-route examples: switching to the magic gate route H=0,G=1 removes 1 A overall (the cracker delivery is replaced by afternoon gossip and an evening observation). Choosing akete at the machine door removes 1 A and changes the door's two Uses to one Say before, or its one Use to one Say after; that Say adds its own two selectors and 0–1 practice submission. Only use combinations the preceding train/gate route actually permits.
+Adjust any row: final verbal answer adds 1 A. For different gate flags, apply `3(H−1) + 2G` A relative to these social-route examples: switching to the magic gate route H=0,G=1 removes 1 A overall (the cracker delivery is replaced by afternoon gossip and an evening observation). Using akete before the first knock removes 1 A and replaces two Uses with one Say in both versions; Say needs two selectors and 0–1 practice submission. Knocking once, hearing Mio, then using akete instead of knocking again keeps the knock-route A total and replaces only its second Use with Say. The pause and both triggers remain unchanged. Only use combinations the preceding train/gate route actually permits.
 
-External E sequence, before: Say Mori; Talk Kenji; knock; knock again; Use chair; Talk Mio for request; Talk Mio after copier; Use desk. After: Say Mori; Talk Kenji; knock; Use chair; Talk Mio after copier; Use desk. Seven → five are re-interactions after the initial Say; E counts eight → six total activations. Copier/lunch changes happen inside those scenes.
+External E sequence, before: Say Mori; Talk Kenji; knock; knock again; Use chair; Talk Mio for request; Talk Mio after copier; Use desk. After: Say Mori; Talk Kenji; knock; knock again; Use chair; Talk Mio after copier; Use desk. Seven → six are re-interactions after the initial Say; E counts eight → seven total activations. Copier/lunch changes happen inside those scenes.
 
-For the first example, literal minimum dialogue/choice/word/action inputs are 60 A + 3 C + 2 T + 7 Talk/Use + 2 Say selectors + 0–1 practice = **74–75 → 61–62**. This is a route example, not a universal office click count.
+For the first example, literal minimum dialogue/choice/word/action inputs are 60 A + 3 C + 2 T + 7 Talk/Use + 2 Say selectors + 0–1 practice = **74–75 → 65–66**. This is a route example, not a universal office click count.
 
 ## Exact proposed changes
 
@@ -67,26 +67,26 @@ All unlisted source entries remain unchanged, including Japanese lines, flags, b
    - Delete `kenji_first[6]`, line 189: `Ah, sorry, sorry. Your chair... I borrowed it. Mine is broken.`
    - Keep `[9]` forest cats/YouTube and `[10]` Mio's ban unchanged. They explain why he cannot solve his own mess and give him a life beyond the tutorial.
 
-3. `machine_door`, lines 231–234: after existing `[1] { set: 'knocked' }`, append `{ go: 'mio_opens' }`. Keep both existing spoken lines verbatim. This removes the second door click without adding a new delay, timer or prompt. Keep `mio_opens` and its trigger fallback for existing state and saves. `machine_open` is still set by `mio_opens`; the akete route retains `door_magic`.
+3. **Withdrawn: automatic door opening.** Keep `machine_door`, `mio_opens`, `akete_machine` and their triggers unchanged. Mio still says `Mm, one minute!`, then control returns to the player. A second knock gets her to open the door; a player who learned akete at the gate can use Say on the closed door instead, including after the first knock. Keep the command’s `door_magic` flag and Mio’s card-reader response. This costs the existing second interaction and preserves the opportunity to try the word.
 
 4. `chair_push[3]`, line 255: delete `Oh, and come here a second. I have a job for you.`
    - Replace `chair_push[4]`, line 256, `{ do: 'goal', text: 'Talk to Mio.' }` with `{ go: 'ticket' }`.
    - Keep `[2]` verbatim: `Ah, that's your chair? Sorry. She comes with it, I think.`
    - The current `chairRoll` hook rolls the chair, not Eric, so this does not require a new automatic walk back to Mio. They are already conversing in the machine room. Keep `ticket`'s Talk trigger as recovery/fallback; `got_ticket` still guards it.
 
-5. `ticket[2]`, line 263: merge the request detail into Mio's first line, retaining its tags:
+5. `ticket[2]`, line 263: bridge the chair joke into her request, retaining its tags:
    - Old: `Okay, your first repair request. I changed your screen to English, by the way.`
-   - New: `I put your screen in English. Your first repair request is the B2 copier. It eats paper, and the request's been open since 1 April 1996.`
-   - Delete `ticket[3]`, line 264: `> REPAIR REQUEST #1. Copier, B2 copy room. Eats paper. Opened 1 April 1996.`
-   - Delete `ticket[4]`, line 265: `Nineteen ninety-six?`
-   - Change `ticket[6]`, line 267, from `Yeah. Mori-san opened it when he was new here, I think. Nobody closes it, it's like... tradition. He can show you.` to `Mori-san opened it when he was new here, I think. Nobody closes it, it's like... tradition. He can show you.`
-   - Keep the screen language fact, request identity/date, Mori's history, the gaijin correction, his walk and the copy-room goal. The date still sets up his thirty-year whisper.
+   - New: `Oh, and... I put your screen in English. Here, your first repair request.`
+   - Keep `ticket[3]`, line 264: `> REPAIR REQUEST #1. Copier, B2 copy room. Eats paper. Opened 1 April 1996.`
+   - Keep `ticket[4]`, line 265: `Nineteen ninety-six?`
+   - Keep `ticket[6]`, line 267: `Yeah. Mori-san opened it when he was new here, I think. Nobody closes it, it's like... tradition. He can show you.`
+   - Keep the gaijin correction, Mori’s walk and the copy-room goal. The player reads the date, Eric reacts, and Mio answers him. This keeps the age setup for Mori’s thirty-year whisper and all seven request advances.
 
 6. `copier[13]`, line 305: delete standalone `> He rolls his hands over each other, slowly, like winding up an old engine.`
    - Move the useful gesture into `copier[15].prompt`, line 307: replace `> Mori looks at you, then at the copier.` with `> Mori rolls his hands like an engine turning. Try saying it to the copier.`
    - Keep normal `{ugoite}.`, slow `{ugoite}...`, type word/from, failed attempt, kotodama, successful print, thirty years, secrecy gesture and all completion state. The prompt stays on screen until the player submits; the gesture meaning no longer costs an extra advance.
 
-7. `ticket_done[5]`, line 333: replace `...Asked it nicely. Like the doors, this morning?` with `Like the doors this morning? ...Okay, I'll close it. It's lunch anyway.`
+7. `ticket_done[5]`, line 333: replace `...Asked it nicely. Like the doors, this morning?` with `...Asked it nicely. Like the doors this morning? Okay, I'll close it. It's lunch anyway.`
    - Delete `ticket_done[6]`, line 334: `Okay. Okay, I'll close it. Um. It's lunch anyway.`
    - Keep Eric's `I asked it nicely.`, the three failed contractors and the lunch transition. No new claim about Mio knowing how the power works.
 
@@ -103,12 +103,10 @@ All unlisted source entries remain unchanged, including Japanese lines, flags, b
     - In `ending[4].else[0]`, same line, replace `Hey, {gaijin}.` with `Okay, I'm going home. Hey, {gaijin}.`
     - Preserve the conditional `lunch_mio`, each existing face/emo tag, the full word/effect recollection, all three player answers and each response. Saying his name is still the lunch payoff.
 
-11. `end_ticket[4]`, line 595: merge the request identity and assignment into her existing line:
-    - Old: `It was supposed to go on my list. ...Okay, I'm putting it on yours.`
-    - New: `The Honsha station doors are repair request two. It was supposed to go on my list. ...Okay, I'm putting it on yours.`
-    - Delete `end_ticket[7]`, line 598: `> REPAIR REQUEST #2. Train doors, Honsha station. Assigned to: ERIC.`
-    - Delete `end_ticket[8]`, line 599: `You're the IT guy. You tell them it's the sensor.`
-    - Keep `[3]` explaining why her sensor excuse generated the request, the phone hooks/beep, both `[9]` goodbyes, save and end. Warm goodbye still offers to accompany him; cool goodbye still tells him to say sensor. This preserves the responsibility handoff without reading the same assignment twice.
+11. `end_ticket[8]`, line 599: delete only `You're the IT guy. You tell them it's the sensor.`
+    - Keep `end_ticket[4]`, line 595: `It was supposed to go on my list. ...Okay, I'm putting it on yours.`
+    - Keep `end_ticket[7]`, line 598: `> REPAIR REQUEST #2. Train doors, Honsha station. Assigned to: ERIC.`
+    - Keep `[3]` explaining why her sensor excuse generated the request, the phone hooks/beep, both `[9]` goodbyes, save and end. The assignment card is the closing gag and echoes request one. The cool goodbye already repeats the sensor instruction; the warm goodbye still offers to accompany him. This cuts one advance, from five to four.
 
 ## Optional scenes: retained, not added to required totals
 
@@ -137,7 +135,7 @@ Some optional entries may currently be difficult to reach because `show` hides M
 
 All seven relevant story documents still have their core events: formal welcome, chair-cat joke, copier's age, genuine lunch agency, alarm experiment or seven cups, optional drink preferences, Emi's independent budget fight, Mio's accumulating suspicion and the repair request assigned to Eric. Japanese normal/slow teaching lines are unchanged. The three new prompt narrations name the relevant machine and visible gesture directly. Typed lesson count stays two on either lunch route, plus mastery-dependent external Say practice.
 
-No new subplot, future-day scene, model action, hook, UI feature or automatic optional activity is proposed. Existing flags/bonds/remembered choices are retained. Follow-on fact edits after acceptance belong in b2-welcome (one knock and request continuation), copier (request presentation), lunch (gesture prompt wording) and mio-notices (merged goodbye/request presentation), without changing the story facts elsewhere. Changed voice clips would be needed for Kenji's merged introduction, Mio's two ticket lines, repair report, conditional goodbye and new request assignment; prompt narration changes need no character voice.
+No new subplot, future-day scene, model action, hook, UI feature or automatic optional activity is proposed. Existing flags/bonds/remembered choices are retained. Follow-on fact edits after acceptance belong in b2-welcome (request continuation; door routes unchanged), copier (request presentation), lunch (gesture prompt wording) and mio-notices (merged goodbye/request presentation), without changing the story facts elsewhere. Changed voice clips would be needed for Kenji's merged introduction, Mio's request introduction, repair report and conditional goodbye; prompt narration changes need no character voice.
 
 The small-scale diagnosis is pacing: repeated acknowledgement/input boundaries. Avoid turning Mio into a generic quest dispenser by stripping her workload/sensor excuse; avoid turning Mori into a silent teaching prop by cutting cups/Lillehammer; avoid turning Kenji into directions-only dialogue by cutting the cat detour. Their independent motives are retained.
 
@@ -166,12 +164,12 @@ Each row below counts only that node's own entries, including conditional branch
 | `yoroshiku_kenji` | 1/0/0 | 1/0/0 | Unchanged |
 | `greet_again_kenji` | 0/0/0 | 0/0/0 | Unchanged |
 | `sumimasen_kenji` | 1/0/0 | 1/0/0 | Unchanged |
-| `machine_door` | 1/0/0 | 1/0/0 | Same text; chains to opening |
+| `machine_door` | 1/0/0 | 1/0/0 | Unchanged; returns control |
 | `mio_opens` | 1/0/0 | 1/0/0 | Unchanged |
 | `akete_machine` | 1/0/0 | 1/0/0 | Unchanged |
 | `machine_in` | 0/0/0 | 0/0/0 | Unchanged |
 | `chair_push` | 2/0/0 | 1/0/0 | Proposed change |
-| `ticket` | 7/0/0 | 5/0/0 | Proposed change |
+| `ticket` | 7/0/0 | 7/0/0 | Proposed change |
 | `mio_busy` | 1/0/0 | 1/0/0 | Unchanged |
 | `mio_tomatte_echo` | 2/0/0 | 2/0/0 | Unchanged |
 | `copier` | 5/0/1 | 4/0/1 | Proposed change |
@@ -213,7 +211,7 @@ Each row below counts only that node's own entries, including conditional branch
 | `end_dunno` | 1/0/0 | 1/0/0 | Unchanged |
 | `end_nicely` | 1/0/0 | 1/0/0 | Unchanged |
 | `end_quiet` | 0/0/0 | 0/0/0 | Unchanged |
-| `end_ticket` | 5/0/0 | 3/0/0 | Proposed change |
+| `end_ticket` | 5/0/0 | 4/0/0 | Proposed change |
 | `ohayo_mio` | 1/0/0 | 1/0/0 | Unchanged |
 | `yoroshiku_mio` | 1/0/0 | 1/0/0 | Unchanged |
 | `sumimasen_mio` | 1/0/0 | 1/0/0 | Unchanged |

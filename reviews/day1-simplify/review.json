@@ -3,7 +3,7 @@
   "date": "2026-09-29",
   "by": "Codex writing team",
   "status": "open",
-  "question": "Which parts of this simplification should we apply?",
+  "question": "Which parts of this revised simplification should we apply?",
   "multi": true,
   "options": [
     {
@@ -14,7 +14,7 @@
     {
       "id": "gate",
       "label": "gate",
-      "note": "Show the useful briefcase mime immediately. Keep both solutions, typed akete and optional cat/squeeze jokes. Shorten repeated explanations. [Scene counts and exact lines](#doc/reviews/day1-simplify/gate.md)."
+      "note": "Show the useful briefcase mime immediately. Mio’s hint now says “show him”, and Hamada’s choice names the problem. Keep both solutions, typed akete and optional jokes. [Scene counts and exact lines](#doc/reviews/day1-simplify/gate.md)."
     },
     {
       "id": "lift",
@@ -24,7 +24,7 @@
     {
       "id": "office",
       "label": "office",
-      "note": "One knock opens Mio’s door; the chair conversation leads straight into her request. Shorten repeated ticket and gesture text; keep both lunches, typing and cup payoff. [Scene counts and exact lines](#doc/reviews/day1-simplify/office.md)."
+      "note": "Revised after the cold read: keep the door pause for akete, both request cards and Eric’s 1996 reaction. The chair conversation leads straight into Mio’s request; other repeated lines and gesture advances are cut. [Scene counts and exact lines](#doc/reviews/day1-simplify/office.md)."
     }
   ],
   "links": [

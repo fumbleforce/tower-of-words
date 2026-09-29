@@ -106,7 +106,7 @@ Before, two advances:
 
 After, one line at the first location; delete the second:
 
-> It's all Amakawa people on the island, and nobody speaks English. Mori-san will be so polite with you, and you'll just stand there.
+> It's all Amakawa people on the island, right? Nobody speaks English. And Mori-san will be so polite with you, and you'll just stand there.
 
 Keep `say: 'mio'`, use `emo: 'amused', face: 'smile'`. This retains the company island, English problem and her concern about embarrassing the team. The supermarket aside does not need another beat.
 
@@ -154,7 +154,7 @@ Aoi is already staged in the way and moves after the exchange. This gesture is n
 
 Keep Mio's shouted 待って, the doors continuing to close despite it, her slow pronunciation, Eric's typed attempt and the kotodama hold. “Wait” appears in the word gloss and typing UI. This deletion removes one confirmation without weakening the contrast between Mio's failed attempt and Eric's effect.
 
-### 9. Append `{ go: 'mio_phone' }` after `mio_tests[2]`
+### 9. Continue to the phone after a short buzz beat
 
 No line is changed. Current tail:
 
@@ -168,10 +168,11 @@ Proposed tail:
 ```js
 { do: 'phone', who: 'mio', state: 'buzz' },
 { set: 'phone_buzz' },
+{ wait: 600 },
 { go: 'mio_phone' },
 ```
 
-The phone interrupt belongs to the conversation already in progress. Mio can check it after the player advances her secrecy line. Keep the `phone_buzz` flag and existing talk fallback for save compatibility. Her reply lines remain player-paced. This removes exactly one required external re-interaction, with no extra narration or automatic text advance.
+The phone interrupt belongs to the conversation already in progress. After the player advances her secrecy line, allow 600 ms for the phone buzz to read before Mio looks at it. This is an animation beat; no text disappears on a timer. Keep the `phone_buzz` flag and existing talk fallback for save compatibility. Her reply lines remain player-paced. This removes exactly one required external re-interaction, with no extra narration or automatic text advance.
 
 ## Why these scenes stay longer than two inputs
 
