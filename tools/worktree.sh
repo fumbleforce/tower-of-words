@@ -10,8 +10,8 @@
 #
 # setup links, never copies, from the main checkout:
 #   - node_modules (the folder) and .env
-#   - every git-ignored file under the asset roots in tools/assets/sync.json (Meshy originals, music, and after the
-#     asset move every binary), one symlink per file, so git sees them as ignored whatever the rules are.
+#   - every file under the asset roots in tools/assets/sync.json that main doesn't track and this worktree's
+#     .gitignore ignores (Meshy originals, music, and since the asset move every binary), one symlink per file.
 # The links are read-only in spirit: to change an asset in a worktree, delete its link first and write a new file;
 # tools/land.sh then keeps the worktree and lists the new file instead of deleting it.
 set -euo pipefail
@@ -45,14 +45,16 @@ setup() {
     mapfile -t roots < <(python3 -c 'import json,sys; print("\n".join(json.load(open(sys.argv[1]))["roots"]))' "$wt/tools/assets/sync.json")
   fi
   roots+=(art/approved/mio/meshy/ art/approved/mc/meshy/ art/approved/music/)
+  # Candidates: files main doesn't track under the roots. Linked: the ones this worktree's own rules ignore, so a
+  # link never shows up as a new file to commit (main's working .gitignore may differ from this branch's).
   local files=0 rel
   while IFS= read -r -d '' rel; do
-    case "/$rel/" in */private/*) continue ;; esac
-    case "$rel" in *__pycache__*|*.pyc) continue ;; esac
     files=$((files + 1))
     link "$rel"
-  done < <(git -C "$main" ls-files -z --others --ignored --exclude-standard -- "${roots[@]}")
-  echo "worktree setup: $wt; $linked new links ($files ignored asset files in main's asset roots)"
+  done < <(git -C "$main" ls-files -z --others -- "${roots[@]}" \
+             | grep -z -v -e '/private/' -e '^private/' -e '__pycache__' -e '\.pyc$' \
+             | git -C "$wt" check-ignore -z --no-index --stdin)
+  echo "worktree setup: $wt; $linked new links ($files untracked asset files in main that this worktree ignores)"
 }
 
 new() {
