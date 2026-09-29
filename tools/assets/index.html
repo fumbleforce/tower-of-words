@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Asset library</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script type="importmap">{ "imports": { "three": "../../game3d/vendor/three/three.module.js", "three/addons/": "../../game3d/vendor/" } }</script>
+<link rel="stylesheet" href="gallery.css">
+</head>
+<body>
+<header class="top">
+  <a class="home" href="../../" title="Back to the hub">Amakawa</a>
+  <h1>Asset library</h1>
+  <label class="search"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg>
+    <input id="q" type="search" placeholder="Search names, ids, files, lines" autocomplete="off" spellcheck="false"></label>
+  <button id="filtersBtn" class="filters-btn" type="button" aria-controls="side" aria-expanded="false">Filters <span id="fcount"></span></button>
+</header>
+<div class="layout">
+  <aside id="side" class="side" aria-label="Filters">
+    <div class="side-head"><b>Filters</b><button type="button" id="clear" class="link">Clear all</button><button type="button" id="closeSide" class="x" aria-label="Close filters"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
+    <section><h2>Status</h2><div id="fStatus" class="opts"></div></section>
+    <section><h2>Kind</h2><div id="fKind" class="opts"></div></section>
+    <section><h2>Character</h2><select id="fWho"><option value="">Everyone</option></select></section>
+    <section><h2>Place</h2><select id="fPlace"><option value="">Every place</option></select></section>
+    <p class="gen" id="gen"></p>
+    <button type="button" class="done" id="doneSide">Show results</button>
+  </aside>
+  <main>
+    <div class="bar"><span id="count"></span><span class="grow"></span>
+      <label class="sort">Sort <select id="sort"><option value="kind">Kind</option><option value="status">Status</option><option value="name">Name</option><option value="who">Character</option></select></label></div>
+    <div id="grid" class="grid" role="list"></div>
+    <div id="more" class="more"></div>
+    <p id="empty" class="empty" hidden>Nothing matches. Clear a filter or change the search.</p>
+  </main>
+</div>
+
+<div id="detail" class="detail" hidden role="dialog" aria-modal="true" aria-labelledby="dName">
+  <div class="dbox">
+    <div class="dpreview" id="dPreview"></div>
+    <div class="dinfo">
+      <div class="dtop">
+        <button type="button" class="nav" id="dPrev" aria-label="Previous asset"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button>
+        <button type="button" class="nav" id="dNext" aria-label="Next asset"><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></button>
+        <span class="grow"></span>
+        <button type="button" class="x" id="dClose" aria-label="Close"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+      </div>
+      <h2 id="dName"></h2>
+      <p class="did" id="dId"></p>
+      <div id="dBody"></div>
+    </div>
+  </div>
+</div>
+<script type="module" src="gallery.js"></script>
+</body>
+</html>
