@@ -18,6 +18,16 @@ if [[ -f tools/bible/build.py ]]; then
   fi
 fi
 
+# The asset library (tools/assets/): re-scan the repo so the gallery lists every asset with its current status.
+# Image and audio thumbnails are cached, so this is quick after the first run.
+if [[ -f tools/assets/scan.py ]]; then
+  if out=$(python3 tools/assets/scan.py 2>&1); then
+    echo "Assets rescanned: ${out%%;*}."
+  else
+    echo "Asset scan failed (the gallery still shows the last scan):"; tail -3 <<<"$out"
+  fi
+fi
+
 start_server() {
   nohup python3 tools/review_server.py "$PORT" >/tmp/amakawa-server.log 2>&1 &
   for _ in 1 2 3 4 5 6 7 8 9 10; do
@@ -47,6 +57,7 @@ echo "  Hub:    ${URL}   (a menu of links)"
 echo "  Game:   ${URL}game3d/"
 echo "  Review: ${URL}bible/#review   (things waiting for your pick)"
 echo "  Bible:  ${URL}bible/"
+echo "  Assets: ${URL}tools/assets/   (every model, portrait, sound and prop, with its status)"
 echo "  Notes:  ${URL}hub/notes.html"
 echo
 echo "Stop it with: pkill -f 'review_server.py ${PORT}'"
