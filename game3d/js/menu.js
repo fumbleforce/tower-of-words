@@ -15,6 +15,7 @@ import { settings, setSetting, onSettings, qualityTier } from './settings.js';
 import { sim, PERIOD_NAMES, save as simSave } from './sim.js';
 import { startOnboarding, resetOnboarding } from './onboard.js';
 import { browserSpeechAvailable, prepareVoice } from './speech.js';
+import { PLACE_NAMES } from './places/definitions.js';
 
 const Q = new URLSearchParams(location.search);
 const TEST = Q.get('test') === 'fast',
@@ -28,7 +29,6 @@ const el = (tag, cls, html) => {
   return e;
 };
 const game = () => window.__game;
-export const PLACE_NAMES = { train: 'Monorail', gate: 'Head office lobby', office: 'IT support, B2' };
 const SAVE_KEY = 'amakawa-day1-save',
   AUTO_META = 'amakawa-auto-meta',
   SLOT = (i) => `amakawa-slot-${i}`,

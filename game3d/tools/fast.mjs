@@ -27,7 +27,7 @@ import { ensureBuild } from '../../tools/lib/build-stamp.mjs';
     if (typeof v === 'string') { if (/\\|&quot;|&amp;|&#\d+;/.test(v)) bad.push(`${where}: ${v.slice(0, 90)}`); return; }
     if (Array.isArray(v)) v.forEach((x, i) => scan(x, where)); else if (v && typeof v === 'object') for (const [k, x] of Object.entries(v)) scan(x, where);
   };
-  for (const n of ['train', 'gate', 'forecourt', 'office', 'transitions']) {
+  for (const n of ['train', 'gate', 'forecourt', 'plaza', 'office', 'transitions']) {
     const f = path.join(G, 'story', n + '.js'); if (!fs.existsSync(f)) continue;
     scan((await import(pathToFileURL(f).href + '?' + Date.now())).default, n);
   }

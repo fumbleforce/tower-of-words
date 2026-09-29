@@ -138,6 +138,7 @@ async function room(view) {
   if (view.room === 'office') { w = (await mod('scenes/office.js')).buildOffice(); scene = w.scene; }
   else if (view.room === 'lobby') { w = (await mod('scenes/lobby.js')).buildLobby(); scene = w.scene; }
   else if (view.room === 'forecourt') { w = (await mod('scenes/forecourt.js')).buildForecourt(); scene = w.scene; }
+  else if (view.room === 'plaza') { w = (await mod('scenes/plaza.js')).buildPlaza(); scene = w.scene; }
   else if (view.room === 'dorms') { w = (await mod('scenes/dorms.js')).buildDorms(); scene = w.scene; }
   else if (view.room === 'train') {
     const car = (await mod('train/car.js')).buildCar('land');

@@ -4,10 +4,9 @@ import { createPlaceLifecycle } from './places/lifecycle.js';
 import { GLOBAL_HOOKS } from './narrative/hooks.js';
 import { installInteractions } from './gameplay/interactions.js';
 import { outlineMeshes } from './gameplay/highlight.js';
-import { PLACE_FILES, NEXT } from './places/definitions.js';
+import { PLACE_FILES, NEXT, canTravel } from './places/definitions.js';
 import { assertRegistered } from './narrative/registration.js';
 import { needsLegacyOpening } from './narrative/legacy-opening.js';
-// Day one: train, lobby, office. One renderer, one Mio, three places joined by continuous trips.
 import * as THREE from 'three';
 import { createRenderer, Markers, Q, blob } from './engine.js';
 import { makePost } from './post.js';
@@ -30,6 +29,7 @@ import { Runner, flags } from './runner.js';
 import { trainPlace } from './places/train.js';
 import { lobbyPlace } from './places/lobby.js';
 import { forecourtPlace } from './places/forecourt.js';
+import { plazaPlace as plaza } from './places/plaza.js';
 import { officePlace } from './places/office.js';
 import { dormsPlace as dorms } from './places/dorms.js';
 import { showEnd } from './end.js';
@@ -54,7 +54,7 @@ let quality = tierNow();
 ui.build();
 if (CAP) document.body.classList.add('cap');
 
-const PLACES = { train: trainPlace, gate: lobbyPlace, forecourt: forecourtPlace, office: officePlace, dorms };
+const PLACES = { train: trainPlace, gate: lobbyPlace, forecourt: forecourtPlace, plaza, office: officePlace, dorms };
 assertRegistered(Object.keys(PLACE_FILES), PLACES, 'place factories');
 
 // ---------- shared game state ----------
@@ -744,7 +744,7 @@ async function boot() {
       if (saved.ended) {
         showEnd(game);
         save(game);
-      } else if (transition && NEXT[transition.from] === transition.to && PLACES[transition.to]) {
+      } else if (transition && canTravel(transition.from, transition.to) && PLACES[transition.to]) {
         await travel(transition.to, { arriving: saved.place === transition.to, fromName: transition.from });
       } else if (saved.runner?.execution || saved.runner?.queued?.length)
         await game.beat(async () => {

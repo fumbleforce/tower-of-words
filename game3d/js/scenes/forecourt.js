@@ -7,6 +7,7 @@ import { Nav } from '../movement/navigation.js';
 import { PAL, mat, rbox, wall, tileFloor, bench, lampPost } from '../props.js';
 import { lightPool } from '../places/life.js';
 import { boxes, planter, bicycle, openDoor, tree, monument } from './forecourt/details.js';
+import { outdoorLight, groundPatches, blocks, farTrees, paving } from './town.js';
 
 const DOOR_X = -1.5, // the station exit, in the station's north wall at z = STATION_Z
   STATION_Z = 2.65,
@@ -186,10 +187,44 @@ function court(root, nav) {
     nav.block(x - 0.14, x + 0.14, z - 0.14, z + 0.14);
     root.add(lightPool(x, z, 0.55, { k: 0.22 }));
   }
-  // east, the lane on toward the plaza (a later chunk) runs between the hedge and the planting
+  // east, the lane on to the fountain plaza runs between the hedge and the planting
   const hedge = planter(3.2);
   hedge.position.set(5.3, 0, FRONT_Z - 0.1);
   root.add(hedge);
+  root.add(paving(7, 12, -1.0, 0.3, 0.75, { color: '#98948f', seam: '#8a8681', y: 0.004 }));
+}
+
+// the town beyond the court: the road south of the station, grass by the platform, the lane on east toward the
+// fountain plaza, and plain blocks around (the map's neighbours of head office), never walkable
+function town(root) {
+  groundPatches(root, [
+    [-12, 12, 5.3, 6.5, '#5b5e63'],
+    [-12, -7.2, -12, 5.3, '#5f6d58'],
+    [7, 12, 0.3, 1.2, '#5f6d58'],
+    [7, 12, -2.2, -1.0, '#5f6d58'],
+    [1.2, 12, STATION_Z, 5.3, '#5f6d58'],
+  ]);
+  blocks(root, [
+    { x: -4.6, z: -7.4, w: 4.2, d: 3.4, h: 4.8, wall: 1 },
+    { x: -9.2, z: -4.6, w: 3.2, d: 4.2, h: 3.2, wall: 2, east: true },
+    { x: 7.4, z: -6.2, w: 3.6, d: 3.4, h: 5.6, wall: 3, west: true },
+    { x: 10.8, z: -3.6, w: 2.8, d: 2.4, h: 2.6, wall: 1 },
+    { x: 10.9, z: 3.9, w: 3.2, d: 2.0, h: 1.2, wall: 3 },
+    { x: -2.5, z: 8.2, w: 9, d: 2.6, h: 1.2, wall: 3 },
+    { x: 6.6, z: 8.0, w: 5, d: 2.4, h: 1.4, wall: 0 },
+  ]);
+  farTrees(root, [
+    [-8.2, 0.5, 1.1],
+    [-8.6, 3.2, 0.9],
+    [7.8, -1.6, 0.9],
+    [9.6, -1.7, 1.1],
+    [8.4, 0.8, 0.8],
+    [11.2, 0.8, 1.0],
+    [-1.8, -5.3, 0.9],
+    [3.2, 3.9, 0.9],
+    [5.4, 4.3, 1.0],
+    [7.6, 3.6, 0.85],
+  ]);
 }
 
 export function buildForecourt() {
@@ -197,26 +232,14 @@ export function buildForecourt() {
     scene = new THREE.Scene();
   scene.background = new THREE.Color(ROOF);
   scene.add(root);
-  // the security room's light, outdoors: cool sky, a warm low morning sun from the east
-  scene.add(new THREE.HemisphereLight('#b7c1d2', '#6a625c', 1.7));
-  const sun = new THREE.DirectionalLight('#ffc990', 3.2);
-  sun.position.copy(new THREE.Vector3(0.8, 0.52, -0.3).normalize().multiplyScalar(30));
-  sun.castShadow = true;
-  sun.shadow.mapSize.set(2048, 2048);
-  Object.assign(sun.shadow.camera, { left: -12, right: 12, top: 12, bottom: -12, near: 5, far: 70 });
-  sun.shadow.bias = -0.0006;
-  sun.shadow.normalBias = 0.03;
-  sun.shadow.radius = 4;
-  scene.add(sun, sun.target);
-  const fill = new THREE.DirectionalLight('#dfe7ff', 0.6);
-  fill.position.set(0.3, 1, 0.9);
-  scene.add(fill);
+  const sun = outdoorLight(scene);
 
   const nav = new Nav(-4.7, 6.2, BACK_Z + 0.1, STATION_Z - 0.05, 0.1);
   ground(root);
   station(root);
   headOffice(root);
   court(root, nav);
+  town(root);
   const [x0, x1] = ANNEX;
   // the head office: everything north of its front line except its own lobby
   nav.block(-4.7, x0 + 0.1, BACK_Z, FRONT_Z + 0.1);
@@ -235,7 +258,9 @@ export function buildForecourt() {
     start: [DOOR_X, STATION_Z - 0.75],
     officeEntrance: [HO_X, FRONT_Z + 0.45],
     liftOut: [...FORECOURT_LIFT_SITE.out],
-    plazaExit: [6.0, -0.4],
+    plazaLane: [6.0, -0.4], // the east lane on to the fountain plaza; Eric leaves and comes back along it
+    plazaIn: [5.3, -0.4], // where he stops coming back, clear of the lane's trigger
+    plazaEdge: [7.3, -0.4],
     liftSite: {
       ...FORECOURT_LIFT_SITE,
       hole: [...FORECOURT_LIFT_SITE.hole],

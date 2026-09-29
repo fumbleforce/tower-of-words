@@ -66,6 +66,7 @@ test('Continue retains earlier story gate overrides and slot loads discard stale
 test('transition gates use the departing story for walk/ride and destination for arrive', async () => {
   const mods = Object.fromEntries(['train', 'gate', 'forecourt', 'office'].map(place => [place,
     { gates: { mio: { 3: `${place}_trust` } }, nodes: {} }]));
+  mods.plaza = { nodes: {} };
   const step = [{ if: 'ready', then: [{ do: 'bondStep', who: 'mio', to: 3 }] }];
   mods.transitions = Object.fromEntries(['train_to_gate', 'gate_to_forecourt', 'forecourt_to_office'].map(slot =>
     [slot, { walk: step, ride: step, arrive: step }]));
@@ -90,6 +91,7 @@ test('story map and facts record the same custom and default gate writes as the 
   }]));
   mods.transitions = {};
   mods.dorms = { nodes: {} };
+  mods.plaza = { nodes: {} };
   const graph = buildGraph({ mods, cast });
   const expected = {
     train: ['train_trust', 'cast_close', 'bond5_mio'],

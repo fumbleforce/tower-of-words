@@ -115,6 +115,29 @@
     ]
   },
   {
+    "id_": "prop/forecourt/plaza_lane",
+    "kind": "prop",
+    "name": "To the plaza",
+    "paths": [
+      "game3d/js/places/forecourt.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "forecourt.js things.plaza_lane",
+    "place": "forecourt",
+    "used": [
+      "Forecourt: tap target 'To the plaza'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "forecourt"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
     "id_": "prop/forecourt/station_exit",
     "kind": "prop",
     "name": "Station",
@@ -268,7 +291,7 @@
       "room": "office",
       "anchor": [
         5.2,
-        1,
+        1.0,
         2.4
       ],
       "spot": [
@@ -301,7 +324,7 @@
       "room": "office",
       "anchor": [
         2.6,
-        1,
+        1.0,
         2.4
       ],
       "spot": [
@@ -313,6 +336,75 @@
     "tags": [
       "in game",
       "thing small"
+    ]
+  },
+  {
+    "id_": "prop/plaza/dorm_lane",
+    "kind": "prop",
+    "name": "To the dorms",
+    "paths": [
+      "game3d/js/places/plaza.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "plaza.js things.dorm_lane",
+    "place": "plaza",
+    "used": [
+      "Fountain plaza: tap target 'To the dorms'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "plaza"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/plaza/fountain",
+    "kind": "prop",
+    "name": "Fountain",
+    "paths": [
+      "game3d/js/places/plaza.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "plaza.js things.fountain",
+    "place": "plaza",
+    "used": [
+      "Fountain plaza: tap target 'Fountain'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "plaza"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/plaza/office_lane",
+    "kind": "prop",
+    "name": "To head office",
+    "paths": [
+      "game3d/js/places/plaza.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "plaza.js things.office_lane",
+    "place": "plaza",
+    "used": [
+      "Fountain plaza: tap target 'To head office'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "plaza"
+    },
+    "tags": [
+      "in game",
+      "thing"
     ]
   }
 ]

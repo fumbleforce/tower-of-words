@@ -521,6 +521,7 @@ ROOMS = [
     ('platform', 'Honsha platform', 'train', 'platform.png', None, 'places/train.js (the arrival)'),
     ('gate', 'Station security room', 'gate', 'gate.png', {'type': 'room', 'room': 'lobby'}, 'game3d/js/scenes/lobby.js buildLobby() and places/lobby.js'),
     ('forecourt', 'Forecourt', 'forecourt', 'forecourt.png', {'type': 'room', 'room': 'forecourt'}, 'game3d/js/scenes/forecourt.js buildForecourt() and places/forecourt.js'),
+    ('plaza', 'Fountain plaza', 'plaza', 'plaza.png', {'type': 'room', 'room': 'plaza'}, 'game3d/js/scenes/plaza.js buildPlaza() and places/plaza.js'),
     ('lift', 'Lift car', 'lift', 'lift.png', None, 'game3d/js/places/lift.js attachLift()'),
     ('office', 'B2 IT support floor', 'office', 'office.png', {'type': 'room', 'room': 'office'}, 'game3d/js/scenes/office.js buildOffice() and places/office.js'),
     ('dorms', "Eric's dorm room", 'dorms', 'dorms.png', {'type': 'room', 'room': 'dorms'}, 'game3d/js/scenes/dorms.js buildDorms() and places/dorms.js'),

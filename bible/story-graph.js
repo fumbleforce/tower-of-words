@@ -195,6 +195,7 @@ export function buildGraph({ mods, files = {}, errors = [], cast = CAST }) {
         node.hooks.add(d);
         if (d === 'type' && s.word) { teach(node, s.word, 'type', here); node.sets.push({ flag: 'typed_' + s.word, how: 'type', cond: here }); }
         if (d === 'next') node.exit = 'next';
+        if (d === 'trip' && s.to) node.trips.push(s.to);
         if (d === 'end') node.exit = 'end';
         if (d === 'period' && s.to) { node.periods.push(s.to); node.sets.push({ flag: 'period', how: 'period', value: s.to, cond: here }); }
         if (d === 'meet' && s.who) node.sets.push({ flag: 'met_' + s.who, how: 'meet', cond: here });
@@ -212,7 +213,7 @@ export function buildGraph({ mods, files = {}, errors = [], cast = CAST }) {
   }
   const newNode = (id, place, name, steps, extra = {}) => {
     const n = { id, place, name, steps, entries: [], lines: 0, first: null, speakers: new Set(), sets: [], reads: [], jumps: [], choices: [],
-      teaches: [], hooks: new Set(), periods: [], goals: [], exit: null, problems: [], ...extra };
+      teaches: [], hooks: new Set(), periods: [], goals: [], exit: null, trips: [], problems: [], ...extra };
     G.nodes.set(id, n);
     return n;
   };
@@ -304,6 +305,13 @@ export function buildGraph({ mods, files = {}, errors = [], cast = CAST }) {
       if (tn) { edge(n.id, tn.id, 'next'); const s = startOf(to); if (s && G.nodes.has(s)) edge(tn.id, s, 'next'); }
       else { const s = startOf(to); if (s && G.nodes.has(s)) edge(n.id, s, 'next'); }
     }
+  }
+  // side trips (do: 'trip') lead to the other place's start node
+  for (const n of G.nodes.values()) for (const to of n.trips) {
+    const P = G.places.find((x) => x.id === to);
+    const s = P && P.start ? `${to}:${P.start}` : null;
+    if (s && G.nodes.has(s)) edge(n.id, s, 'trip');
+    else n.problems.push(`does trip to ${to}, which has no story start`);
   }
   // a place hook that fires a story event (arrive -> event:approach) leads to that event's trigger
   for (const n of G.nodes.values()) {

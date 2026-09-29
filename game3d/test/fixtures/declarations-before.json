@@ -468,22 +468,82 @@
         "lift": {
           "label": "Lift to B2",
           "kind": "thing"
+        },
+        "plaza_lane": {
+          "label": "To the plaza",
+          "kind": "thing",
+          "verb": "Go"
         }
       },
       "spots": [
         "station_exit",
         "office_entrance",
-        "lift_front"
+        "lift_front",
+        "plaza_lane"
       ],
       "seats": [],
       "zones": [
-        "lift_front"
+        "lift_front",
+        "plaza_lane"
       ],
       "people": [],
       "hooks": [
         "liftOpen",
         "liftClose"
       ]
+    },
+    "dorms": {
+      "things": {
+        "window": {
+          "label": "Window",
+          "kind": "thing"
+        },
+        "boxes": {
+          "label": "Boxes",
+          "kind": "thing"
+        },
+        "bed": {
+          "label": "Bed",
+          "kind": "thing"
+        }
+      },
+      "spots": [
+        "room_entry",
+        "window_front"
+      ],
+      "seats": [],
+      "zones": [],
+      "people": [],
+      "hooks": []
+    },
+    "plaza": {
+      "things": {
+        "office_lane": {
+          "label": "To head office",
+          "kind": "thing",
+          "verb": "Go"
+        },
+        "fountain": {
+          "label": "Fountain",
+          "kind": "thing"
+        },
+        "dorm_lane": {
+          "label": "To the dorms",
+          "kind": "thing"
+        }
+      },
+      "spots": [
+        "office_entry",
+        "fountain_edge",
+        "dorm_exit"
+      ],
+      "seats": [],
+      "zones": [
+        "office_lane",
+        "dorm_exit"
+      ],
+      "people": [],
+      "hooks": []
     },
     "office": {
       "things": {
@@ -721,30 +781,6 @@
         "lunchSit",
         "lunchOver"
       ]
-    },
-    "dorms": {
-      "things": {
-        "window": {
-          "label": "Window",
-          "kind": "thing"
-        },
-        "boxes": {
-          "label": "Boxes",
-          "kind": "thing"
-        },
-        "bed": {
-          "label": "Bed",
-          "kind": "thing"
-        }
-      },
-      "spots": [
-        "room_entry",
-        "window_front"
-      ],
-      "seats": [],
-      "zones": [],
-      "people": [],
-      "hooks": []
     }
   }
 }

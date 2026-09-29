@@ -4,6 +4,7 @@
 import { ui, FACE, PORTRAITS } from './ui.js';
 import { WORDS, COMMANDS, PHRASES, known, iconHTML } from './lang.js';
 import { sim, PERIOD_NAMES } from './sim.js';
+import { PLACE_NAMES } from './places/definitions.js';
 
 const esc = (s) =>
   String(s ?? '')
@@ -11,7 +12,6 @@ const esc = (s) =>
     .replace(/</g, '&lt;')
     .replace(/"/g, '&quot;');
 const ORDER = ['train', 'gate', 'office'];
-const PLACE_NAMES = { train: 'Monorail', gate: 'Head office lobby', office: 'IT support, B2' };
 
 // a round crop of a portrait's face, from its face box
 function faceHTML(id, color, name, size = 56) {

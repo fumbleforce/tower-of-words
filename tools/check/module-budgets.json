@@ -24,14 +24,14 @@
     },
     "game3d/js/main.js": {
       "lines": 774,
-      "bytes": 26949,
+      "bytes": 26928,
       "owner": "codex-tui",
       "review": "C-0110 / X-0193: one office batch integration line; 2026-09-30 one import line for the dorms place factory; existing responsibility unchanged",
       "reason": "Composition, boot/Continue, input, rendering and frame loop remain after stage 4 hooks, interactions and place lifecycle extraction."
     },
     "game3d/js/menu.js": {
       "lines": 1277,
-      "bytes": 44607,
+      "bytes": 44559,
       "owner": "codex-tui",
       "review": "C-0089",
       "reason": "Existing action menus and target selection; stage 4 interaction extraction is planned."
