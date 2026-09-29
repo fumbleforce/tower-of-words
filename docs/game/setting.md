@@ -1,6 +1,6 @@
 # Setting
 
-The world the game is set in, Eric's job, kotodama, what kind of game this is, and what the story never does. The people are in [cast.md](cast.md), the places in [places.md](places.md), the storylines in [stories/](stories/).
+Amakawa is a company island reached by monorail; everyone lives on it, so nobody commutes. Eric is a Norwegian IT support engineer on B2 keeping the company's ancient systems running, and under kotodama the island's old machines obey spoken Japanese commands, but only from him. Also here: what kind of game this is (game first, learning light) and what the story never does. The people are in [cast.md](cast.md), the places in [places.md](places.md), the storylines in [stories/](stories/).
 
 ## The island
 

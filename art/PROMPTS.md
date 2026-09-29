@@ -1,6 +1,6 @@
 # Prompt guide (Anima / Nova Anime AM)
 
-Patterns collected from strong community prompts and our own tests. Anima reads plain sentences and tags together; order matters (earlier = stronger).
+The main image model is RDBT Anima in local ComfyUI, with One Obsession for open scenery. Anima reads plain sentences and tags together, and earlier words weigh more. Here: Jørgen's reference prompts, the local playbook (which model, settings, the prompt template, composition control, known failures), faces, camera, palette, the negative prompt base, Mio's glasses, Eric's portrait, and the rules moved from GUIDE (cast prompt lines, portraits and cutouts, reward prompts, the Blender blockout, the ChatGPT-then-Meshy 3D workflow, video). Patterns come from strong community prompts and our own tests.
 
 
 ## Reference prompt (Jørgen, 2026-09-25): monorail over the bay

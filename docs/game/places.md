@@ -1,6 +1,6 @@
 # Places
 
-Every place in the game: what's there, who is there at each time of day, the small things you can poke, and how you get from one to the next. Last checked against the game on 2026-09-29.
+Day 1 has four places: the monorail (`train`), the head office lobby with the gate (`gate`), the lift (`lift`) and IT support on B2 (`office`). For each: its things and their labels, spots, seats, zones, who is there in each period, and its small moments; also places decided but not built, and how you get between places. Last checked against the game on 2026-09-29.
 
 Elsewhere: the island as a whole is in [setting.md](setting.md); the people in [cast.md](cast.md); what happens in a place as part of a storyline is in [stories/](stories/); how places look (palette, light, style) in [art-and-sound.md](art-and-sound.md). The hooks a story can call in each place (doors, the gate, the copier) are in game3d/story/FORMAT.md.
 

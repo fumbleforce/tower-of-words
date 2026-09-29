@@ -1,6 +1,6 @@
 # Systems
 
-How the game's systems work for the player: the clock, schedules, bonds, memory, gifts, typing and practising words, overheard Japanese, kotodama effects and saving. Last checked against the game on 2026-09-29.
+Day 1 is Thursday 1 October in five periods, and only the story moves the clock. Also here: schedules, ambient moments, bond steps, memory, gifts and their prices, typing a word and word practice, saying words to things, overheard Japanese, what a kotodama looks and sounds like, and saving (three slots and an autosave). Last checked against the game on 2026-09-29.
 
 Elsewhere: the controls and screens for these are in [controls-and-ui.md](controls-and-ui.md); the words in [words.md](words.md); each person's tastes, register and relations in [cast.md](cast.md); the data keys a story file uses for all of this in game3d/story/FORMAT.md ("Sim data").
 

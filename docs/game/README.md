@@ -1,17 +1,61 @@
-# The game, as it is
+# Where every fact lives
 
-These files say what the game is today, plus what Jørgen has decided that isn't built yet. Read the files for your area instead of reading the code. How we work, the quality bar and his feedback on process stay in [GUIDE.md](../../GUIDE.md).
+The game's facts are in this folder, one home per fact: setting, cast, places, storylines, words, systems, controls and UI, art and sound. How we work is in GUIDE.md, who leads and who owns the code right now in collab/PROTOCOL.md, open decisions in reviews/ (`python3 tools/review.py list`), and queued work in TODO.md. The map below says which file holds each kind of fact; look there first, or search those files with `rg -n -i`.
 
-| File | What it holds |
+The inboxes (collab/to-codex.md, collab/to-claude.md) and dated notes record messages and work. When one of them settles a fact, move the fact to its home below and link to it from there.
+
+## Map
+
+### The game (this folder)
+
+| Kind of fact | Home |
 |---|---|
-| [setting.md](setting.md) | The island and the company, Eric's job, kotodama, what kind of game this is, and what the story never does. |
-| [cast.md](cast.md) | Every person: who they are, job, home, routine, who they know, what they like, how they speak, their approved look. |
-| [places.md](places.md) | Every place: what's there, who is there at each time of day, the small things you can poke, and how you get from one place to the next. |
-| [stories/](stories/) | One file per storyline: premise, cast, beats, choices and flags, words taught, and what is built. |
-| [words.md](words.md) | Every Japanese word the game knows: reading, meaning, kind, and how a word becomes known. |
-| [systems.md](systems.md) | The clock, schedules, bonds, memory, gifts, word practice, overheard Japanese, kotodama effects, saving. |
-| [controls-and-ui.md](controls-and-ui.md) | Controls, the HUD, the action prompt, the dialogue box, menus, phone and desktop, and when each control is taught. |
-| [art-and-sound.md](art-and-sound.md) | The look of the world and the people, which portraits, models and voices are approved, music and sound. Pointers to the decisions. |
+| The island, the company, Eric's job, kotodama, the commute (there is none), what kind of game this is, what the story never does | [setting.md](setting.md) |
+| A person: age, job, home, routine, who they know, how they talk, approved look (hair, eyes, outfit), names on screen | [cast.md](cast.md) |
+| A place: things, spots, seats, zones, who is there when, small moments; getting from one place to the next | [places.md](places.md) |
+| A storyline: premise, cast, beats, choices and flags, words taught, nodes, what is built | [stories/](stories/), one file each, listed under [Storylines](#storylines) |
+| Every Japanese word (reading, meaning, kind), the words day 1 teaches, when a word counts as known | [words.md](words.md) |
+| The clock, schedules, bonds, memory, gifts and prices, typing and word practice, overheard Japanese, kotodama effects, saving | [systems.md](systems.md) |
+| Controls, when each control is taught, the HUD, the dialogue box, menus and panels, camera, phone and desktop layouts, the build id | [controls-and-ui.md](controls-and-ui.md) |
+| The world's look, approved portraits and models, approved voices, music and sound | [art-and-sound.md](art-and-sound.md) |
+
+### How we work
+
+| Kind of fact | Home |
+|---|---|
+| Jørgen's rules: scope (day 1 only), reviews and approvals, relaying his feedback, left and right on a character, privacy, the Replicate and Meshy budgets | [GUIDE.md](../../GUIDE.md), Working with Jørgen |
+| Writing, dialogue, story craft, learning rules | GUIDE.md, Writing |
+| UI rules (timers, first screen, layouts), the world style, review page layout | GUIDE.md, Visual design |
+| Image prompt rules, reference images, 3D characters, reward scenes | GUIDE.md, Art |
+| Voices: local models, Mio's pitch guard | GUIDE.md, Voices and audio |
+| Process: one task per agent, QA gates, the commit message `Facts:` line, the definition of done | GUIDE.md, Process |
+| Review server port, GPU lock, browser lock, the fast test, where screenshots go, the world bible, the asset library, repo layout | GUIDE.md, Engineering |
+| Who leads what (story writing, engine, UI, 3D, language), who owns the code right now (the code freeze), how to message Codex, claiming files | [collab/PROTOCOL.md](../../collab/PROTOCOL.md) |
+| Production pass: which agent owns which files, the production bar | [notes/PRODUCTION.md](../../notes/PRODUCTION.md) |
+| The visual critic's scoring bar | [notes/VISUAL_QA.md](../../notes/VISUAL_QA.md) |
+| Jørgen's own words, every message, verbatim | [notes/feedback-log/](../../notes/feedback-log/) |
+| Where work stands today: what's done, what's broken, what waits on Jørgen | [notes/HANDOFF.md](../../notes/HANDOFF.md) |
+| Queued work, bugs, what waits for the end of the code freeze, parked ideas | [TODO.md](../../TODO.md) |
+
+### Decisions and approvals
+
+| Kind of fact | Home |
+|---|---|
+| Which review items are open, and what Jørgen picked or said on any of them | `python3 tools/review.py list` (open first), then `python3 tools/review.py show <id>` |
+| How to post a review item | [reviews/README.md](../../reviews/README.md) (or the post-review-item skill) |
+| Approved art files, per bible id | [art/approved/README.md](../../art/approved/README.md) |
+| History, rejected options and open questions | bible/facts.yaml, shown in the world bible at http://127.0.0.1:8771/bible/ |
+
+### Art, sound and story files
+
+| Kind of fact | Home |
+|---|---|
+| Image and video prompts: models, settings, cast prompt lines, reward prompts, composition control, the Meshy 3D workflow | [art/PROMPTS.md](../../art/PROMPTS.md) |
+| Portrait style blocks | [art/STYLE.md](../../art/STYLE.md) |
+| Voice, TTS and music methods and tests | [art/SOUND.md](../../art/SOUND.md) |
+| How a story file is written: nodes, hooks, sim data, `{word}` marks | [game3d/story/FORMAT.md](../../game3d/story/FORMAT.md) |
+| How each character talks on the page, and their voice settings | [game3d/story/VOICE.md](../../game3d/story/VOICE.md), [VOICE-DIRECTION.md](../../game3d/story/VOICE-DIRECTION.md) |
+| What is private and where it goes | [island/PRIVATE.md](../../island/PRIVATE.md) |
 
 ## Storylines
 
@@ -51,7 +95,7 @@ Ideas for later days don't go here. They stay in notes/ until Jørgen decides on
 - Lists go in tables whose first column is the id the game uses, so people and `tools/facts/check.mjs` read the same table.
 - A decision that isn't in the game yet is marked "(to build)"; something decided gone but still in the code, "(to remove)". The commit that builds or removes it deletes the mark.
 - When a fact came from Jørgen, it carries his words or the date: "(Jørgen, 2026-09-28)".
-- Every commit that changes what the game is updates its file here in the same commit, and says so in its message: `Facts: docs/game/<file>` or `Facts: none` (GUIDE, Process).
+- Every commit that changes what the game is updates its file here in the same commit, with the `Facts:` line in its message (GUIDE, Process, "Facts in the same commit").
 
 ## The check
 

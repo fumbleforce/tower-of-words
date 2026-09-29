@@ -1,6 +1,6 @@
 # Controls and UI
 
-The controls, the HUD, the action prompt, the dialogue box, menus and panels, the phone and desktop layouts, and when each control is taught. Last checked against the game on 2026-09-29.
+The controls on desktop and phone (walk, use, Next, Say with Q, the mic, Give, pause) and when each is first taught; the HUD (goal box, clock, counts, markers, the Say button); the dialogue box; the panels and screens (title, pause and save slots, settings, day end, the build id); the camera; and how the phone and desktop layouts differ. Last checked against the game on 2026-09-29.
 
 Elsewhere: the rules every screen has to meet (no timers, one menu per target, separate phone and desktop layouts, the design language) are in GUIDE, Visual design (with "First screen"). What the systems behind the panels do is in [systems.md](systems.md).
 

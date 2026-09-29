@@ -1,6 +1,6 @@
 # Words
 
-Every Japanese word the game knows, and the rules for how a word is shown and when it counts as known. Last checked against the game on 2026-09-29.
+Every Japanese word the game knows (id, Japanese, reading, meaning, kind), the nine words day 1 teaches, how a word is shown, and when it counts as known. Last checked against the game on 2026-09-29.
 
 Elsewhere: which storyline teaches a word, and who teaches it, is in that storyline's "Words taught" table ([stories/](stories/); `node tools/facts/check.mjs --game` prints them all in one list). How the Say menu, typing and word practice work is in [systems.md](systems.md) and [controls-and-ui.md](controls-and-ui.md). How to write a word into a line (`{id}`) is in game3d/story/FORMAT.md.
 
@@ -26,9 +26,18 @@ Checked against game3d/js/lang.js. Kind: a `phrase` is a greeting Eric can say t
 | `otsukare` | お疲れさまです | otsukaresama desu | the everyday hello at work | word |
 | `kotodama` | 言霊 | kotodama | words with power in them | word |
 
-`kite`, `dashite`, `otsukare` and `kotodama` are in the game's list but no storyline uses them yet. `honsha` and `tsugiwa` appear, glossed, in the train announcement and the guard's phone call; they're never taught.
-
 Verbs are met in their -te form, the form for asking someone to do something. The Words panel shows each with its dictionary form (待って matte is the -te form of 待つ matsu) and a short note on what -te does (Jørgen: "it is never explained in the word menu what the -te ending is").
+
+## Taught on day 1
+
+Day 1 teaches nine words, in the order a player meets them. Who teaches each, and in which node, is in the storyline's "Words taught" table.
+
+1. `gaijin`, `ohayo`, `yoroshiku`, `sumimasen`: Mio on the monorail ([mio-train](stories/mio-train.md)).
+2. `matte` from Mio on the platform, `akete` from Mr. Hamada at the stuck gate ([sleeping-man](stories/sleeping-man.md)).
+3. `ugoite`: Mori at the copier ([copier](stories/copier.md)).
+4. `tomatte` or `irete`: one of the two, from whoever Eric has lunch with ([lunch](stories/lunch.md)).
+
+`kite`, `dashite`, `otsukare` and `kotodama` are in the game's list but no storyline uses them yet. `honsha` and `tsugiwa` appear, glossed, in the train announcement and the guard's phone call; they're never taught.
 
 ## How a word is shown
 

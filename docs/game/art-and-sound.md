@@ -1,6 +1,6 @@
 # Art and sound
 
-How the world and the people look and sound in the game, and which art and voices are approved. Pointers to the decisions; prompts and methods are in art/PROMPTS.md and art/SOUND.md. Last checked on 2026-09-29.
+The world is flat-shaded simple 3D with surface patterns, soft baked light and small modelled detail; Eric and Mio are Meshy models, everyone else is a chibi built in code. Also here: each portrait's status (approved or provisional), the approved voices (local Qwen3-TTS clones), and music and sound per place. Prompts and methods are in art/PROMPTS.md and art/SOUND.md. Last checked on 2026-09-29.
 
 Elsewhere: every approved file is listed in art/approved/README.md, and the bible (http://127.0.0.1:8771/bible/) has each person's art history and candidates. Each person's approved look in words is in [cast.md](cast.md).
 
