@@ -45,7 +45,7 @@ export function baseMesh(lib, ch, b) {
   const S = lib.src[d.source];
   const skinKey = d.skin.map((x) => Math.round(255 * (x <= 0.0031308 ? x * 12.92 : 1.055 * x ** (1 / 2.4) - 0.055)));
   const m = partMaterial(S, { slot: 'head', key: skinKey });
-  m.map = tex; m.flatShading = !smooth; m.needsUpdate = true;
+  m.map = tex; m.flatShading = d.shading === 'flat' || !smooth; m.needsUpdate = true;
   const mesh = new THREE.SkinnedMesh(g, m);
   mesh.name = d.id; mesh.frustumCulled = false; mesh.castShadow = true; mesh.receiveShadow = true;
   mesh.bind(ch.skeleton, new THREE.Matrix4());

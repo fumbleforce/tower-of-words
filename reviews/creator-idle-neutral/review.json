@@ -1,0 +1,44 @@
+{
+  "title": "Creator neutral idle",
+  "date": "2026-09-29",
+  "by": "Codex",
+  "status": "superseded",
+  "question": "Use this forward-facing neutral idle for the creator characters?",
+  "multi": false,
+  "media": [
+    {
+      "image": "art/parts/candidates/idle-review/eric.png",
+      "caption": "Eric: held source pose, candidate front/side/back, source motion, candidate motion, and walk transitions. Same model and fixed camera."
+    },
+    {
+      "image": "art/parts/candidates/idle-review/mio.png",
+      "caption": "Mio on the same rig: identical comparison. Hair, clothing and face are unchanged."
+    }
+  ],
+  "options": [
+    {
+      "id": "neutral-v1",
+      "label": "neutral-v1: forward-facing with gentle breathing",
+      "image": "art/parts/candidates/idle-review/eric.png",
+      "images": [
+        "art/parts/candidates/idle-review/mio.png"
+      ],
+      "note": "Four-second loop; pelvis/head yaw stays at zero in source measurements, legs remain planted. The arms rest a little away from the clothes. Sampled transition frames show no large turn; final motion feel is still yours to judge."
+    },
+    {
+      "id": "keep-held",
+      "label": "keep-held: retain the existing frozen pose",
+      "note": "The first frame in each sheet shows the current held 0.4-second source idle. The full source clip turns and bends; it is currently frozen in the creator."
+    }
+  ],
+  "links": [
+    {
+      "label": "Full-resolution comparison page",
+      "href": "tools/creator/idle-review.html"
+    },
+    {
+      "label": "Measurements and provenance",
+      "href": "bible/#doc/notes/creator-animation-audit.md"
+    }
+  ]
+}

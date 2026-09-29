@@ -1,0 +1,52 @@
+{
+  "title": "Smooth chibi bases — work in progress",
+  "date": "2026-09-29",
+  "by": "Codex",
+  "status": "superseded",
+  "question": "Are these base-body proportions a direction you want to keep?",
+  "multi": false,
+  "media": [
+    {
+      "image": "art/parts/base/shots/clean-v14-rest/1-bases.png",
+      "caption": "v14: closed skin bodies, 398 vertices / 792 triangles each. Shape feedback only; layers and floor contact remain unfinished."
+    },
+    {
+      "image": "art/parts/base/shots/clean-v14-rest/2-closeups.png",
+      "caption": "Head, face, shoulder and hand close-ups."
+    }
+  ],
+  "options": [
+    {
+      "id": "keep-direction",
+      "label": "Keep developing these proportions",
+      "image": "art/parts/base/shots/clean-v14-rest/1-bases.png",
+      "note": "Keep the base direction while fixing the remaining layer fit and animation contact. This is not approval to replace the game assets."
+    },
+    {
+      "id": "adjust-shape",
+      "label": "Change the base shape",
+      "image": "art/parts/base/shots/clean-v14-rest/2-closeups.png",
+      "note": "Comment on the head, torso, shoulders or limbs to change. All earlier attempts are linked below."
+    },
+    {
+      "id": "reject-direction",
+      "label": "Try a different base direction",
+      "image": "art/parts/base/shots/clean-v14-rest/1-bases.png",
+      "note": "The original models remain in the game."
+    }
+  ],
+  "links": [
+    {
+      "label": "Rotate, zoom, and toggle layers",
+      "href": "tools/creator/base/preview.html?v=v14"
+    },
+    {
+      "label": "Every captured attempt and walk loop",
+      "href": "reviews/creator-base-2/attempts.html"
+    },
+    {
+      "label": "Animation checks and known limits",
+      "href": "notes/clean-base-deformation.md"
+    }
+  ]
+}
