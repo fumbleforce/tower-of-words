@@ -338,6 +338,7 @@ canvas.addEventListener('pointermove', (e) => {
 // the usable thing whose model is under the ray: the nearest hit wins, so the cat on the seat beats the seat, the
 // floor and whoever stands behind it (Jørgen: "I end up sitting on the cat"). Hover and click both use this.
 function modelAt(ray) {
+  ray.layers.enable(31); // Original interactive meshes remain pickable when batched.
   let best = null,
     bd = 1e9;
   for (const m of game.markers.list) {
