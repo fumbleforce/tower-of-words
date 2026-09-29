@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta name="robots" content="noindex, nofollow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dorm route diorama (option dorm-route-claude)</title>
+<script type="importmap">{ "imports": { "three": "/game3d/vendor/three/three.module.js", "three/addons/": "/game3d/vendor/" } }</script>
+<style>
+html, body { margin: 0; height: 100%; background: #1d222c; overflow: hidden; }
+canvas { display: block; width: 100vw; height: 100vh; }
+.err { position: fixed; inset: auto 16px 16px; color: #ffb4a8; white-space: pre-wrap; font: 13px monospace; }
+</style>
+</head>
+<body>
+<!-- ?shot=layout|route|walk|dorm|court|room  (see ../attempts.json for each shot's staging) -->
+<canvas id="c"></canvas>
+<script type="module" src="./diorama.js"></script>
+</body>
+</html>

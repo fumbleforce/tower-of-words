@@ -1,0 +1,36 @@
+{
+  "method": "three.js diorama built from game3d's own modules (props.js, look/ surface patterns and soft bake, post.js grade, RoomCam, Eric's Meshy model). Not an image model. scene/diorama.js, shots via shoot.mjs.",
+  "staging": {
+    "route/walk": "Beat: Eric walks home after work, day 1, about 18:10, blue hour. Camera: the game's play camera, elevation 56 degrees, facing north, fov 24; route frames the whole walk, walk is the game's zoom on the promenade. In front: shop fronts facing south, the promenade, the rail and sea at the bottom. Behind the camera: open sea. Light: cool sky light, the last warm light low from the west, shop and lamp light. Checks: fronts face the camera, no cars, every lamp on the ground, Eric on the path.",
+    "dorm": "Same camera swung 0.45 rad west so the entrance on block A's west face shows. In front: courtyard, dorm door, coin laundry and sento on the promenade, izakaya and bike shelter.",
+    "room": "Camera inside the room at the door corner, 1.55 units up, 58 degree lens, looking at the window. No cutaway: the walls behind the camera are simply out of view. Eric stands by the bed facing the window (his back to us). Through the window: block B's concrete wall, 1.3 units (2 m) away, with form tie holes. Light: the ceiling lamp, evening.",
+    "layout": "Orthographic, straight down, north up, daylight for legibility; labels and the route drawn by label.py from the plan's own coordinates."
+  },
+  "attempts": [
+    {"file": "attempts/01-route.png", "note": "First build, walk through the covered lane. Rejected: the south row hides the lane, izakaya shows its back, too dark and purple, bottom third empty."},
+    {"file": "attempts/02-route.png", "note": "South row one storey, izakaya turned to face south, brighter sky light, game elevation 56. Lane still mostly hidden; sea covered by the ground slab."},
+    {"file": "attempts/03-route.png", "note": "Lane widened to 4.2 units, ground slab stops at the seawall, roof clutter added."},
+    {"file": "attempts/04-walk.png", "note": "Game zoom on the lane: nearly all roofs. This is why the walk moved to the promenade."},
+    {"file": "attempts/04-dorm.png", "note": "First dorm view (old layout, fronts facing west)."},
+    {"file": "attempts/04-court.png", "note": "Looking down into the 2 m court. Rejected: reads as roofs, dropped."},
+    {"file": "attempts/04-room.png", "note": "First room view (old lamp and box positions)."},
+    {"file": "attempts/04-layout.png", "note": "First top-down."},
+    {"file": "attempts/05-route.png", "note": "Walk moved to the promenade; south row has seaward fronts; laundry and sento face the promenade; beach and park strip added."},
+    {"file": "attempts/05-walk.png", "note": "Game zoom on the promenade. Konbini front blown out; paving read as marble."},
+    {"file": "attempts/06-walk.png", "note": "Konbini glow lowered, promenade tiles, parked bikes, stand sign, awning."},
+    {"file": "attempts/06-route.png", "note": "Same changes, wide."},
+    {"file": "attempts/06-dorm.png", "note": "Camera swung west to show the dorm door."},
+    {"file": "attempts/06-room.png", "note": "Eric too close to the camera; boxes out of frame; lamp blown out."},
+    {"file": "attempts/06-court.png", "note": "Court view again. Rejected, dropped."},
+    {"file": "attempts/06-layout.png", "note": "Roof units scattered off the roofs (negative seed bug)."},
+    {"file": "attempts/07-room.png", "note": "Eric moved to the window, boxes at the bed's foot, lamp dimmer."},
+    {"file": "attempts/07-layout.png", "note": "Seed fixed, tighter framing."},
+    {"file": "attempts/07-layout-labelled.png", "note": "First labels; some overlapped or were cut off."},
+    {"file": "attempts/08-layout-raw.png", "note": "Final layout render before labels (2x)."},
+    {"file": "01-layout.png", "note": "Final, labelled."},
+    {"file": "02-route.png", "note": "Final, 2x."},
+    {"file": "03-walk.png", "note": "Final, 2x."},
+    {"file": "04-dorm.png", "note": "Final, 2x."},
+    {"file": "05-room.png", "note": "Final, 2x."}
+  ]
+}
