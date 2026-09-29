@@ -13,6 +13,7 @@
 // Only facts that the game itself can confirm are checked. Prose (ages, motives, routines) isn't.
 import { DEFAULT_SPEAKERS, PORTRAITS, ITEMS, PLACE_DETAILS, SHARED_THINGS, isEngineFlag } from '../../game3d/js/narrative/contracts.js';
 import { storyBondGate } from '../../game3d/js/bonds/gates.js';
+import { PLACE_FILES } from '../../game3d/js/places/definitions.js';
 import fs from 'node:fs';
 import path from 'node:path';
 import { pathToFileURL, fileURLToPath } from 'node:url';
@@ -249,7 +250,7 @@ function checkPlaces(game) {
     for (const r of th) {
       const t = id(r.Id); docThings.add(t);
       const g = P.things[t];
-      if (!g || /person/.test(g.kind)) { if (PENDING.test(r.Id + r['What it is'])) later(file, `${place}: \`${t}\` (to build)`); else bad(file, `${place}: \`${t}\` is in "Things" but not in game3d/js/${PLACE_JS[place]}`); continue; }
+      if (!g || /person/.test(g.kind)) { if (PENDING.test(r.Id + r['What it is'])) later(file, `${place}: \`${t}\` (to build)`); else bad(file, `${place}: \`${t}\` is in "Things" but not in ${PLACE_FILES[place]}`); continue; }
       const lab = game.label(place, t);
       if (val(r.Label) !== lab) bad(file, `${place}: \`${t}\` is labelled "${lab}" in the game, "${val(r.Label)}" in the doc`);
     }
