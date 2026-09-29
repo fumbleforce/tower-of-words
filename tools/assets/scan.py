@@ -9,7 +9,7 @@ Statuses: approved (Jørgen picked it), provisional (in the game but not approve
 review), candidate (waiting in an open review or a candidates folder), legacy (from an earlier version of the game),
 rejected (not picked, or turned down). Where they come from, strongest first:
   reviews/*/review.json + feedback.json   decided picks, open rounds, superseded rounds
-  game3d/story/FORMAT.md "Portraits"      the faces the game shows, approved or PROVISIONAL
+  docs/game/art-and-sound.md "Portraits"  the faces the game shows: approved, provisional or under review
   art/approved/README.md                  approved art per bible id
   bible/facts.yaml                        images, models, tracks, history with their statuses
   GUIDE.md                                quoted decisions (voices, music, video, styles)
@@ -100,6 +100,8 @@ def quote(path, phrase, limit=320):
                     break
                 start = m.end()
             s = re.sub(r'^\s*(?:[-*]|\d+\.)\s+', '', l[start:]).strip()
+            if s.startswith('|'):            # a table row: its cells as one line
+                s = ' · '.join(c.strip() for c in s.strip('|').split('|') if c.strip())
             if len(s) > limit:
                 s = s[:limit].rsplit(' ', 1)[0] + ' …'
             return {'path': path, 'line': i + 1, 'text': s}
@@ -259,7 +261,7 @@ def add(id_, kind, name, paths, status, status_from, source='', who=None, place=
 
 
 def claims(p):
-    """Media files belong to one entry; code and docs (cast.js, FORMAT.md) can back many."""
+    """Media files belong to one entry; code and docs (cast.js, art-and-sound.md) can back many."""
     return bool(re.search(r'\.(webp|png|jpe?g|glb|mp3|wav)$', p)) or (p.endswith('.json') and p.startswith('game3d/assets/'))
 
 
@@ -291,7 +293,7 @@ for rid, r in sorted(REVIEWS.items(), key=lambda kv: kv[1].get('date', ''), reve
                 source=o.get('note') or r.get('title', ''), who=who, review=rid, view={'type': 'audio', 'src': aud})
         for k, im in enumerate(imgs):
             if not exists(im) or im.startswith('game3d/assets/portraits/'):
-                continue                     # in-game faces get their status from FORMAT.md (step 2), with this review linked
+                continue                     # in-game faces get their status from art-and-sound.md (step 2), with this review linked
             kind = 'portrait'
             base = os.path.splitext(os.path.basename(im))[0]
             add(f"{kind}/{base if len(base) > 8 else rid + '-' + base}", kind, f"{label}" + (f" ({k + 1})" if k else ''), [im], st, why,
@@ -306,30 +308,45 @@ for rid, r in sorted(REVIEWS.items(), key=lambda kv: kv[1].get('date', ''), reve
                 st, f"Context sheet in review {rid} ({r.get('status')})", source=r.get('title', ''), review=rid, view=img_view(im),
                 tags=['sheet'])
 
-# 2. the faces the game shows (ui.js PORTRAITS), with FORMAT.md's approved / PROVISIONAL split
+# 2. the faces the game shows (ui.js PORTRAITS), with their status from docs/game/art-and-sound.md "Portraits"
+#    (Id | Status: Approved / Under review / Provisional). A face cast.md "Portraits" marks "(to build)" stays provisional.
 ui_src = read('game3d/js/ui.js')
-fmt = read('game3d/story/FORMAT.md')
-fmt_sec = fmt.split('## Portraits', 1)[1].split('\n## ', 1)[0] if '## Portraits' in fmt else ''
+ART_DOC = 'docs/game/art-and-sound.md'
+CAST_DOC = 'docs/game/cast.md'
+
+
+def md_table(path, heading):
+    """Rows of the first table under '## heading' in path, as (cells, line number); backticks stripped from the id."""
+    lines = read(path).split('\n')
+    try:
+        k = next(i for i, l in enumerate(lines) if l.strip() == f'## {heading}')
+    except StopIteration:
+        return []
+    rows = []
+    for i in range(k + 1, len(lines)):
+        l = lines[i].strip()
+        if l.startswith('## '):
+            break
+        if l.startswith('|') and not re.match(r'^\|[\s:|-]+\|?$', l):
+            cells = [c.strip() for c in l.strip('|').split('|')]
+            rows.append(([cells[0].replace('`', '')] + cells[1:], i + 1))
+    return rows[1:]   # drop the header row
+
+
 FMT = {}
-prov = False
-for l in fmt_sec.split('\n'):
-    if 'PROVISIONAL' in l:
-        prov = True
-        continue
-    m = re.match(r'^\s*-\s*`([a-z]+)`(?:\s*\([^)]*\))?(?:,\s*`([a-z]+)`)?\s*:(.*)$', l)
-    if not m:
-        continue
-    if not l.startswith('  '):
-        prov = False
-    for w in filter(None, [m.group(1), m.group(2)]):
-        FMT.setdefault(w, {'status': 'provisional' if prov else 'approved', 'line': l.strip()[2:], 'lineno': fmt.split('\n').index(l) + 1})
+for (cells, lineno) in md_table(ART_DOC, 'Portraits'):
+    who, text = cells[0], cells[1] if len(cells) > 1 else ''
+    st = 'approved' if re.match(r'approved', text, re.I) else 'provisional'
+    FMT[who] = {'status': st, 'line': text, 'lineno': lineno}
+TO_BUILD = {cells[0]: {f.replace('(to build)', '').strip() for f in cells[1].split(',') if 'to build' in f}
+            for cells, _ in md_table(CAST_DOC, 'Portraits') if len(cells) > 1}
 portraits_body = js_object_body(ui_src, 'PORTRAITS') or ''
 game_faces = {m.group(1): re.findall(r"'([a-z]+)'", m.group(2)) for m in re.finditer(r"([a-z]+): \[([^\]]*)\]", portraits_body)}
 for who, faces in game_faces.items():
     f = FMT.get(who)
     bid = next((b for b, g in GAME_OF.items() if g == who), who)
     if f:
-        st, why = f['status'], {'path': 'game3d/story/FORMAT.md', 'line': f['lineno'], 'text': ('PROVISIONAL: ' if f['status'] == 'provisional' else '') + f['line']}
+        st, why = f['status'], {'path': ART_DOC, 'line': f['lineno'], 'text': f['line']}
     else:
         ps = (BIBLE.get(bid) or {}).get('portrait_status')
         st = FACT_STATUS.get(ps, 'provisional')
@@ -338,13 +355,16 @@ for who, faces in game_faces.items():
         p = f'game3d/assets/portraits/{who}-{face}.webp'
         if not exists(p):
             continue
+        fst, fwhy = st, why
+        if face in TO_BUILD.get(who, ()):
+            fst, fwhy = 'provisional', {'path': CAST_DOC, 'text': f"{who}: the {face} face is marked (to build)"}
         src = f"Cut-out ({'rembg ISNet anime'}), face box in ui.js FACE"
         if f:
             src = f"{f['line'].rstrip('.')}. " + src
         master = (BIBLE.get(bid) or {}).get('images') or []
         if master:
             src += f"; master {master[0][0]}"
-        add(f'portrait/{who}-{face}', 'portrait', f"{NAMES.get(who, who)}: {face}", [p], st, why, source=src, who=who,
+        add(f'portrait/{who}-{face}', 'portrait', f"{NAMES.get(who, who)}: {face}", [p], fst, fwhy, source=src, who=who,
             used=portrait_used(who), view=img_view(p), tags=['in game'])
 
 # the in-game faces that also appear in a review get that review linked
@@ -464,7 +484,7 @@ for p in ls('legacy/side/flat/meshy', r'\.glb$') + ls('legacy/side/hd2d/figures/
 # code-built chibis (cast.js PEOPLE, avatar.js buildEric, train/people.js passengers and the cat)
 people_body = js_object_body(CAST_SRC, 'PEOPLE') or ''
 code_files = {f: read(f) for f in ls('game3d/js/places', r'\.js$') + ls('game3d/js/scenes', r'\.js$')}
-fmt_gone = quote('game3d/story/FORMAT.md', '`yui`, `sota`, `nao`, `hiro` are gone')
+fmt_gone = quote('docs/game/cast.md', 'Left from before the B2 team was settled')
 for m in re.finditer(r'^  ([a-zA-Z]+): \((?:i = 0)?\) => \{\n((?:    .*\n)*?)    (?:const r|return)', people_body, re.M):
     pid, comment = m.group(1), re.findall(r'//\s*(.*)', m.group(2))
     used = sorted({place_of(os.path.splitext(os.path.basename(f))[0]) for f, s in code_files.items() if f'PEOPLE.{pid}(' in s})
