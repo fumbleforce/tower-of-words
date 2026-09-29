@@ -37,6 +37,17 @@ export class Nav {
     if (this.extra && !this.extra(x, z)) return false;
     return true;
   }
+  // how far (x, z) is from the nearest blocker or edge of the grid (0 inside one)
+  clearance(x, z) {
+    let c = Math.min(x - this.x0, this.x1 - x, z - this.z0, this.z1 - z);
+    for (const [a, b, e, d] of this.rects) {
+      const dx = Math.max(a - x, 0, x - b),
+        dz = Math.max(e - z, 0, z - d);
+      c = Math.min(c, Math.hypot(dx, dz));
+    }
+    if (this.extra && !this.extra(x, z)) c = Math.min(c, 0);
+    return Math.max(0, c);
+  }
   build() {
     const g = new Uint8Array(this.nx * this.nz);
     for (let i = 0; i < this.nx; i++)
@@ -164,11 +175,19 @@ export class Nav {
     return true;
   }
   // push a circle out of the blockers and back inside the bounds
+  // (someone already inside the margin, put there by a scene, can always move out: any step that gets them further
+  // from the furniture is allowed, so nobody is ever stuck in it)
   collide(x, z, ox, oz) {
     if (this.free(x, z)) return [x, z];
     // try sliding along each axis
     if (this.free(x, oz)) return [x, oz];
     if (this.free(ox, z)) return [ox, z];
+    if (!this.free(ox, oz)) {
+      const c0 = this.clearance(ox, oz);
+      if (this.clearance(x, z) > c0) return [x, z];
+      if (this.clearance(x, oz) > c0) return [x, oz];
+      if (this.clearance(ox, z) > c0) return [ox, z];
+    }
     return [ox, oz];
   }
 }

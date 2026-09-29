@@ -23,6 +23,8 @@ A click on something he can use walks him there and uses it. If a scene starts o
 
 Clicking while the story is busy (a walk, a door) shows that the game is waiting and hurries the scripted move along. Every attempt does something visible.
 
+People are soft to each other and never stand inside each other or the furniture (Jørgen: "we need much better soft collision so models push gently at each other without locking up in tight spaces"). Someone walking behind another person follows at their pace instead of walking into them, and a walk goes round whoever stands in the way. People lean in and push apart gently, and slip past in a spot too tight to share. A seated person's knees and feet count as taken floor. Nobody stands on the cat, and she hops off Eric's chair before he sits. Someone left standing with a shoulder in a desk or a machine steps clear. In the lift, everyone stands inside the car's walls. The fast test fails when any of these happen.
+
 While Eric is saying a word (its practice prompt, his voice, the answer), clicks and taps on people, things and markers, and E, are ignored, so the word isn't lost to a new talk. They work again as soon as the word is done or the prompt is cancelled.
 
 ## When each control is taught
@@ -54,12 +56,14 @@ Every control is introduced the first time it's needed, and ambient people never
 - Direction 1, "faded" (Stage light, game3d/design/DIALOGUE-OVERLAY.md), approved by Jørgen, with a more solid grey band at the bottom on phone so the portraits' cut edge sits on solid colour.
 - The speaker's portrait stands beside the box (desktop: large on the left; phone: smaller, above the box, and moved in from the side when needed so the whole picture stays on screen). Eric's shows smaller on the right on his lines, and the listener dims. Narration has no portrait. The faces are in [cast.md](cast.md).
 - The name plate and role sit above the text. Japanese words show with reading and English; taught words can be clicked to hear them.
-- The whole dialogue area moves the story on, including the empty space below the text; "Click to continue" shows for the first few lines. Eric's spoken lines finish before anyone replies (Jørgen, playtest).
+- The whole dialogue area moves the story on, including the empty space below the text; "Click to continue" shows for the first few lines. The HUD buttons (Words, People, Bag, sound, the menu) stay usable while a line is up, and tapping them doesn't move the story on. Eric's spoken lines finish before anyone replies (Jørgen, playtest).
 - Choices: the buttons name their object ("Point at the briefcase"). Learning a word is typing it, not clicking a choice. On the phone the buttons come up dimmed and take taps only after a moment, so a tap meant for the line before doesn't pick one.
 - Mio's texts show as phone messages on their own dark card.
 - Scroll up or PageUp for the backlog (to build in game3d; it was in the VN).
 
 ## Panels and screens
+
+Panels open above everything in the HUD, the goal arrow and the Say button included.
 
 - People: everyone Eric has met, with their bond step, what they remember and what he has learned about them ([systems.md](systems.md)).
 - Bag: his yen and the drinks he's carrying. With someone in reach, tapping a drink gives it to them; otherwise the panel says to walk up to someone.

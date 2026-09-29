@@ -33,6 +33,51 @@ function letPass(game, a, b) {
   }
 }
 
+// Following someone who walks the same way: match their pace a small gap behind them instead of leaning into them.
+// softSeparate() keeps everyone's speed from frame to frame; followSpeed() is the speed to walk at behind someone
+// (b, a bodies() entry) when they are moving away along (fx, fz), or null when they aren't (stopped, coming closer).
+const FOLLOW_GAP = 0.08; // space kept between the two circles while following (place units)
+
+const vel = new WeakMap(); // root -> { x, z, vx, vz }
+
+function trackVelocity(list, dt) {
+  for (const b of list) {
+    const v = vel.get(b.root);
+    if (!v) {
+      vel.set(b.root, { x: b.x, z: b.z, vx: 0, vz: 0 });
+      continue;
+    }
+    const k = 1 - Math.exp(-dt * 10);
+    v.vx += ((b.x - v.x) / dt - v.vx) * k;
+    v.vz += ((b.z - v.z) / dt - v.vz) * k;
+    v.x = b.x;
+    v.z = b.z;
+  }
+}
+
+export function followSpeed(b, fx, fz, gap) {
+  const v = vel.get(b.root);
+  if (!v || !(b.rig && b.rig._walk)) return null;
+  const along = v.vx * fx + v.vz * fz;
+  if (along < 0.15) return null;
+  return Math.max(0, along + (gap - FOLLOW_GAP) * 3);
+}
+
+// where each person was first seen in a place: people who never left it were put there on purpose
+export const CLEAR = 0.85; // the room a standing person keeps from the furniture (share of their radius)
+
+const home = new WeakMap();
+
+export function awayFromHome(P, b) {
+  const h = home.get(b.root);
+  if (!h || h.place !== P) {
+    home.set(b.root, { place: P, x: b.x, z: b.z });
+    return false;
+  }
+  if (h.away) return true;
+  return (h.away = Math.hypot(b.x - h.x, b.z - h.z) > 0.05);
+}
+
 export const isHard = (b) => b.seated || b.id === 'tama' || !!(b.rig && b.rig._noAvoid);
 
 // who gives way in a push: 0 = doesn't move (seated, fixed choreography); the player gives less than people standing
@@ -102,17 +147,13 @@ export function softSeparate(game, dt) {
     K = P.charScale || 1,
     t = game.t || 0;
   const list = bodies(game).filter((b) => b.root.parent === P.space);
+  trackVelocity(list, dt);
   const move = (b, dx, dz) => {
     const p = b.root.position,
       ox = p.x,
       oz = p.z;
     let [x, z] = [ox + dx, oz + dz];
-    if (nav) {
-      if (!nav.free(ox, oz)) {
-        if (!nav.free(x, z)) return 0;
-      } // already in a wall's margin: only moves that get out
-      else [x, z] = nav.collide(x, z, ox, oz);
-    }
+    if (nav) [x, z] = nav.collide(x, z, ox, oz); // (already in a wall's margin: only moves that get out)
     p.x = x;
     p.z = z;
     const bl = b.rig && b.rig.blob;
@@ -162,6 +203,38 @@ export function softSeparate(game, dt) {
       }
     }
   for (const [k, end] of passing) if (t > end + 1) passing.delete(k);
+  // out of the furniture: someone standing still with their shoulders in a desk, a machine or a door frame (the walk
+  // grid lets a walker's centre come to nav.R of it, less than a body, so doorways stay passable) eases out to a
+  // body's width from it. Not people still on the spot they started on (staff placed behind a counter), not seated
+  // people, the cat, glides or the lift ride.
+  const pl0 = game.player,
+    w0 = game.walker,
+    moving0 = !!(w0 && (w0.moving || w0.path || (w0.keys && w0.keys.size)));
+  if (nav && nav.clearance && !inCab())
+    for (const b of list) {
+      if (b.seated || b.id === 'tama' || b.rig._noAvoid || b.rig._walk || !awayFromHome(P, b)) continue;
+      if (pl0 && b.root === pl0.root && (moving0 || (pl0.scripted && pl0._walk))) continue;
+      const want = b.r * CLEAR,
+        c = nav.clearance(b.x, b.z);
+      if (c >= want) continue;
+      let bx = 0,
+        bz = 0,
+        bc = c;
+      for (let i = 0; i < 8; i++) {
+        const a = (i / 8) * Math.PI * 2,
+          x = b.x + Math.cos(a) * 0.05,
+          z = b.z + Math.sin(a) * 0.05,
+          cc = nav.clearance(x, z);
+        if (cc > bc) {
+          bc = cc;
+          bx = Math.cos(a);
+          bz = Math.sin(a);
+        }
+      }
+      if (bc <= c) continue;
+      const amt = Math.min(want - c, 0.35 * K * dt);
+      move(b, bx * amt, bz * amt);
+    }
   // arm's length: someone standing still too close to Eric while he stands or sits still (placed by a scene, stopped
   // behind his chair) steps back slowly to SPACE. Not while either is walking, and not in the lift cab.
   const pl = game.player,
@@ -269,13 +342,20 @@ export function personStep(game, rig, ox, oz, nx, nz, dt) {
     !game.player.scripted
   )
     game.walker.makeRoom(fx, fz, ahead.r + me + 0.12);
-  // behind someone who's walking too: queue (up to 2 s); behind someone standing: slow down and go round them
-  if (ahead && ahead.rig._walk && (rig._hold || 0) < 2.0) {
+  // behind someone walking the same way: follow at their pace, a small gap behind
+  const lead = ahead ? followSpeed(ahead, fx, fz, Math.hypot(ahead.x - ox, ahead.z - oz) - ahead.r - me) : null;
+  if (lead !== null) {
+    rig._hold = 0;
+    const s = Math.min(step, lead * dt) / step;
+    nx = ox + (nx - ox) * s;
+    nz = oz + (nz - oz) * s;
+  } else if (ahead && ahead.rig._walk && (rig._hold || 0) < 2.0) {
+    // behind someone who's walking but not getting away: queue (up to 2 s); behind someone standing: slow down and
+    // go round them
     rig._hold = (rig._hold || 0) + dt;
     rig._blk = (rig._blk || 0) + dt;
     return [ox, oz];
-  }
-  if (ahead) {
+  } else if (ahead) {
     rig._hold = (rig._hold || 0) + dt;
     nx = ox + (nx - ox) * 0.45;
     nz = oz + (nz - oz) * 0.45;

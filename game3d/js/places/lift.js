@@ -59,11 +59,11 @@ const DARK_BG = new THREE.Color('#14171d'),
 // where people stand in the car (x, z in car space), all facing the doors
 const SLOTS = {
   eric: [0, -0.42],
-  sales1: [-0.47, -1.3],
-  sales2: [0.47, -1.33],
-  with0: [0.47, -0.8],
-  with1: [-0.47, -0.8],
-  aside: [-0.49, -0.5],
+  sales1: [-0.4, -1.3],
+  sales2: [0.4, -1.33],
+  with0: [0.4, -0.84],
+  with1: [-0.4, -0.84],
+  aside: [-0.42, -0.5],
 };
 // the way out at another floor (car space): both along the right, well clear of him in the front left corner
 // the second one sets off only once the first is out on the landing and turning away (not on a timer: at test

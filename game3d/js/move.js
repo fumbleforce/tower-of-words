@@ -18,7 +18,8 @@
 export { turnToward, bodies } from './movement/shared.js';
 export { isPassing, softSeparate, personStep } from './movement/crowd.js';
 export { SmoothWalker } from './movement/walker.js';
-export { walkRig, faceRig, standOut, glide } from './movement/scripted.js';
-export { detourPoint, standOff, approachSpot, pickPerson } from './movement/targets.js';
+export { walkRig, faceRig, standOut, glide, queueStep } from './movement/scripted.js';
+export { detourPoint, standOff, approachSpot, pickPerson, hopOff } from './movement/targets.js';
+export { freeNear } from './movement/navigation.js';
 export { PathPreview } from './movement/preview.js';
 export { startMoveCheck } from './movement/checks.js';
