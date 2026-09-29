@@ -1,0 +1,562 @@
+{
+  "status": "source15 is an unapproved review candidate; earlier attempts retained",
+  "attempts": [
+    {
+      "version": "source1",
+      "note": "Whole source-shell diagnostic; retains clothing-shaped bare body and original holes.",
+      "files": [
+        {
+          "path": "art/parts/base/clean-eric-source1.json",
+          "sha256": "31d2d4a5c4b54da993b4397ab2d4a30f985a86076c1256bfda9989152636506f"
+        },
+        {
+          "path": "art/parts/base/clean-eric-source10-fit3-layers.json",
+          "sha256": "c47941045dc55fc19aba1a67fdeab90823f9d5271008fb609733acfa195cd12f"
+        },
+        {
+          "path": "art/parts/base/clean-eric-source10.json",
+          "sha256": "2aa3a9dc390a68f4aa028d55ac7f3f45a57ed03c50864684a010c4f2b170f93e"
+        },
+        {
+          "path": "art/parts/base/clean-eric-source11-fit3-layers.json",
+          "sha256": "e71f3e6bd63aa441b7e2120787819c4640c2d2e03da92a96401ecae23a8152e1"
+        },
+        {
+          "path": "art/parts/base/clean-eric-source11.json",
+          "sha256": "02fb58e969d8b1e3f9603b8b2243b466e3745f7dd978cb9db5dea2264210c974"
+        },
+        {
+          "path": "art/parts/base/clean-eric-source12-fit3-layers.json",
+          "sha256": "0f4b0345e841850a4ba7192d5c03614ee171ba3dd19f379401cae394ff68c17d"
+        },
+        {
+          "path": "art/parts/base/clean-eric-source12.json",
+          "sha256": "8f7602855c89fa42779bf807691722274bdaf5f0120ff5dd88c3b9e1ead93ee0"
+        },
+        {
+          "path": "art/parts/base/clean-eric-source13-fit3-layers.json",
+          "sha256": "b271cce03447b088d0a8b00fe121513e516b6a486fa96c8716d4766684b639c8"
+        },
+        {
+          "path": "art/parts/base/clean-eric-source13.json",
+          "sha256": "8a61f1032710eab12ce4de499e6ff3114edbb03d396582ba84b1a30cba8ca1d7"
+        },
+        {
+          "path": "art/parts/base/clean-eric-source14-fit3-layers.json",
+          "sha256": "d498f4c7d367e9cb2559bf8be6499863a8c1053b5c7a54e91c73fb52cce7ad00"
+        },
+        {
+          "path": "art/parts/base/clean-eric-source14.json",
+          "sha256": "0d46ee51f0c7e5a8cd2b6ef662691d539bb8057e0deb96a398ca2e8ca38540a3"
+        },
+        {
+          "path": "art/parts/base/clean-eric-source15-fit3-layers.json",
+          "sha256": "90f4b8077b40de50a2dd3ad8387d5523a6778d9f05828d6a3b04f3ae77000173"
+        },
+        {
+          "path": "art/parts/base/clean-eric-source15.json",
+          "sha256": "d6fb1667f304124a86becd9567b60e63a77adfc2473cd388325075cd42ba10c4"
+        },
+        {
+          "path": "art/parts/base/clean-mio-source1.json",
+          "sha256": "f679e8d76d60f7089e0731a5c07ca796dc36aaac8a750479b9fc8026f4f077de"
+        },
+        {
+          "path": "art/parts/base/clean-mio-source10-fit3-layers.json",
+          "sha256": "9910b94452c336164a136b735b5eaacb72f140a743a941490695d83e6c5ccf71"
+        },
+        {
+          "path": "art/parts/base/clean-mio-source10.json",
+          "sha256": "529f08caeb7af94c215a958b6c0d6e18a46def929837ba2d07df6f9e9396cb48"
+        },
+        {
+          "path": "art/parts/base/clean-mio-source11-fit3-layers.json",
+          "sha256": "0c9775c3b65165e69863c02dc3885d0636a06caad36fef948095bf17765dd39f"
+        },
+        {
+          "path": "art/parts/base/clean-mio-source11.json",
+          "sha256": "9a55a4462194063bba5e5129e3720a4bb1c89041d0b9fecdb747fcf315b0a4bc"
+        },
+        {
+          "path": "art/parts/base/clean-mio-source12-fit3-layers.json",
+          "sha256": "8fe0ab0e234edf419b1fcade59e602039c64ad2701f05ef0361c639cee74585a"
+        },
+        {
+          "path": "art/parts/base/clean-mio-source12.json",
+          "sha256": "ecfe1134aaf0f585f06392749ff79ce269b1fb87ae89022047f44b3fe6a02ef6"
+        },
+        {
+          "path": "art/parts/base/clean-mio-source13-fit3-layers.json",
+          "sha256": "5ce23f1f438a6061946ef1cca9530261288e829d8682b57452b8ffad0c5b08e7"
+        },
+        {
+          "path": "art/parts/base/clean-mio-source13.json",
+          "sha256": "aea3e04b20aed51c360d1e6f8f339a52df93c0e275927a8f15ef3e4750887afe"
+        },
+        {
+          "path": "art/parts/base/clean-mio-source14-fit3-layers.json",
+          "sha256": "a99294816fd9fbf1b6f3a27a6448dc2a85f8464bc9a83ed816bfbf62686a78a1"
+        },
+        {
+          "path": "art/parts/base/clean-mio-source14.json",
+          "sha256": "dd888e825f1c5f2fd2cd6c39ac9a7fe3d88ecab32c4a962bc146038d70c5a35c"
+        },
+        {
+          "path": "art/parts/base/clean-mio-source15-fit3-layers.json",
+          "sha256": "665129188d580c5aca33d3aca57046c709a183b7f4f856f9b25e604669674200"
+        },
+        {
+          "path": "art/parts/base/clean-mio-source15.json",
+          "sha256": "08e74eaf184f4ed9f9d85255d6e795651b8ea792f3d48514d3420202dafdff66"
+        }
+      ],
+      "screens": [
+        "art/parts/base/shots/source-body-fit/source1-eric-bare.png",
+        "art/parts/base/shots/source-body-fit/source1-eric-dressed.png",
+        "art/parts/base/shots/source-body-fit/source1-mio-bare.png",
+        "art/parts/base/shots/source-body-fit/source1-mio-dressed.png"
+      ]
+    },
+    {
+      "version": "source2",
+      "note": "Real head core plus clean body; original sleeves do not fit.",
+      "files": [
+        {
+          "path": "art/parts/base/clean-eric-source2.json",
+          "sha256": "6f5156b13148d40b314870bfd3646533dad9802f25f3e245e903a84204313dc8"
+        },
+        {
+          "path": "art/parts/base/clean-mio-source2.json",
+          "sha256": "f95234d36d371c4d13de1ef5d0a74452a1368e1ace805b3c03d5d67ebbbcf7cd"
+        }
+      ],
+      "screens": [
+        "art/parts/base/shots/source-body-fit/source2-eric-bare.png",
+        "art/parts/base/shots/source-body-fit/source2-eric-dressed.png",
+        "art/parts/base/shots/source-body-fit/source2-mio-bare.png",
+        "art/parts/base/shots/source-body-fit/source2-mio-dressed.png"
+      ]
+    },
+    {
+      "version": "source3",
+      "note": "Capped head/body with plain garment shells; rejected internally because outfit design is lost.",
+      "files": [
+        {
+          "path": "art/parts/base/clean-eric-source3-fit3-layers.json",
+          "sha256": "4ec981a76135c50d728b700288d7b329296ede2db4ced666df274fe30717d5de"
+        },
+        {
+          "path": "art/parts/base/clean-eric-source3.json",
+          "sha256": "dcf725c118e9a17cbc9e0b2bf14756eb47697f6abe2dfed26d2b3a7a455dfe57"
+        },
+        {
+          "path": "art/parts/base/clean-mio-source3-fit3-layers.json",
+          "sha256": "87a06d94f551352e14efbacdc90e985214d963306f7d5b34a66fe5cc1f90886f"
+        },
+        {
+          "path": "art/parts/base/clean-mio-source3.json",
+          "sha256": "3ffe269657fe236324bbc86d0aa167fe54d10529b08e16dd674903403eae7495"
+        }
+      ],
+      "screens": [
+        "art/parts/base/shots/source-body-fit/source3-eric-bare.png",
+        "art/parts/base/shots/source-body-fit/source3-eric-dressed.png",
+        "art/parts/base/shots/source-body-fit/source3-mio-bare.png",
+        "art/parts/base/shots/source-body-fit/source3-mio-dressed.png"
+      ]
+    },
+    {
+      "version": "source4",
+      "note": "Interrupted plain-shell fitting; only Mio base exists, no fit or render.",
+      "files": [
+        {
+          "path": "art/parts/base/clean-mio-source4.json",
+          "sha256": "44ffeb8c8b1cccd1b04f2f4225f64208d9e6d8249cc89f5fbe001809ea731cec"
+        }
+      ],
+      "screens": []
+    },
+    {
+      "version": "source5",
+      "note": "Original clothes and hands restored; hidden body projected inward. No render; wrist cap weight issue found.",
+      "files": [
+        {
+          "path": "art/parts/base/clean-eric-source5-fit3-layers.json",
+          "sha256": "05ed0305a1afc654e284d9e32ed6e709cf3ee0f8a36d4a96a22139344e451cb6"
+        },
+        {
+          "path": "art/parts/base/clean-eric-source5.json",
+          "sha256": "d9c52fccd5859244dc0865b7d825abae52ae795f344e5b72a84589770703d21c"
+        },
+        {
+          "path": "art/parts/base/clean-mio-source5-fit3-layers.json",
+          "sha256": "cdea658b17d6b76ff2eff71d05cd29472de998eb695ae1fffa4b2597c0c87a62"
+        },
+        {
+          "path": "art/parts/base/clean-mio-source5.json",
+          "sha256": "07ba38e0cb87e2bd53b0a2cb41b1f0602428f6d3f882e14868b902dee8fb64cd"
+        }
+      ],
+      "screens": []
+    },
+    {
+      "version": "source6",
+      "note": "Wrist cap weights corrected. Original source exports rounded; dense bind envelope audit fails.",
+      "files": [
+        {
+          "path": "art/parts/base/clean-eric-source6-fit3-layers.json",
+          "sha256": "602426f65e45ad42a33f806c5233fa82c7fa74e16859e57ea3b831d1ebccd2d5"
+        },
+        {
+          "path": "art/parts/base/clean-eric-source6.json",
+          "sha256": "9e9b15ef0476de447d3b232144ab8321b6556fbda1934f4eb8bd982c11df6ac3"
+        },
+        {
+          "path": "art/parts/base/clean-mio-source6-fit3-layers.json",
+          "sha256": "57048b9b7f58a7cc78d61635eab52df320f69b00f07d877be058fb6746067bc4"
+        },
+        {
+          "path": "art/parts/base/clean-mio-source6.json",
+          "sha256": "c75ecb907a8915df1bb58685c4a591acf6f34b64b92f65360cddaf0b98e832ae"
+        }
+      ],
+      "screens": [
+        "art/parts/base/shots/source-body-fit/source6-eric-back.png",
+        "art/parts/base/shots/source-body-fit/source6-eric-bare.png",
+        "art/parts/base/shots/source-body-fit/source6-eric-dressed.png",
+        "art/parts/base/shots/source-body-fit/source6-eric-phone.png",
+        "art/parts/base/shots/source-body-fit/source6-eric-side.png",
+        "art/parts/base/shots/source-body-fit/source6-eric-top.png",
+        "art/parts/base/shots/source-body-fit/source6-mio-back.png",
+        "art/parts/base/shots/source-body-fit/source6-mio-bare.png",
+        "art/parts/base/shots/source-body-fit/source6-mio-dressed.png",
+        "art/parts/base/shots/source-body-fit/source6-mio-phone.png",
+        "art/parts/base/shots/source-body-fit/source6-mio-side.png",
+        "art/parts/base/shots/source-body-fit/source6-mio-top.png"
+      ]
+    },
+    {
+      "version": "source7",
+      "note": "Full-precision source baseline. Live source geometry equality is exactly zero in three sampled walking poses.",
+      "files": [
+        {
+          "path": "art/parts/base/clean-eric-source7-fit3-layers.json",
+          "sha256": "d42112ad6c322b954392cfcac29c7361a51fbe9185030061f6d13abff43146cc"
+        },
+        {
+          "path": "art/parts/base/clean-eric-source7.json",
+          "sha256": "3fe4fad8770ae80ad469286335fb77cb36e879c8793ee127a1d0a1c048677ff2"
+        },
+        {
+          "path": "art/parts/base/clean-mio-source7-fit3-layers.json",
+          "sha256": "f83a3bff6640d4fe12bc27166c835bd0559291b84a3558d5ec5b6ed65106f349"
+        },
+        {
+          "path": "art/parts/base/clean-mio-source7.json",
+          "sha256": "bb3a4e7c4dccb7e2eb078f79a0d7cf94a575a312a5a035d71442f5681f22085f"
+        }
+      ],
+      "screens": [
+        "art/parts/base/shots/source-body-fit/source7-eric-back.png",
+        "art/parts/base/shots/source-body-fit/source7-eric-bare.png",
+        "art/parts/base/shots/source-body-fit/source7-eric-dressed.png",
+        "art/parts/base/shots/source-body-fit/source7-eric-phone.png",
+        "art/parts/base/shots/source-body-fit/source7-eric-side.png",
+        "art/parts/base/shots/source-body-fit/source7-eric-top.png",
+        "art/parts/base/shots/source-body-fit/source7-mio-back.png",
+        "art/parts/base/shots/source-body-fit/source7-mio-bare.png",
+        "art/parts/base/shots/source-body-fit/source7-mio-dressed.png",
+        "art/parts/base/shots/source-body-fit/source7-mio-phone.png",
+        "art/parts/base/shots/source-body-fit/source7-mio-side.png",
+        "art/parts/base/shots/source-body-fit/source7-mio-top.png"
+      ]
+    },
+    {
+      "version": "source8",
+      "note": "Small outfit join patches. Visible Mio knee/ankle skin remains in walking poses.",
+      "files": [
+        {
+          "path": "art/parts/base/clean-eric-source8-fit3-layers.json",
+          "sha256": "f7625fb98d2c2429807687f96ce64ba28105633e24a4b3c3849bfe499f8ce02a"
+        },
+        {
+          "path": "art/parts/base/clean-eric-source8.json",
+          "sha256": "f06a0cbf7456c7ac9543c143330ffe221af25b946d7373ece6c4a5d0a5ca866e"
+        },
+        {
+          "path": "art/parts/base/clean-mio-source8-fit3-layers.json",
+          "sha256": "a58e7f26bc95b3bb2eea2adeced0b002d247058e6cf5fb2da39c62308a4ed72e"
+        },
+        {
+          "path": "art/parts/base/clean-mio-source8.json",
+          "sha256": "219fc82b26d6b051adfbcc3565f07bb0083a62c67097bd753ec141be6d16bd48"
+        }
+      ],
+      "screens": [
+        "art/parts/base/shots/source-body-fit/source8-eric-back.png",
+        "art/parts/base/shots/source-body-fit/source8-eric-bare.png",
+        "art/parts/base/shots/source-body-fit/source8-eric-dressed.png",
+        "art/parts/base/shots/source-body-fit/source8-eric-phone.png",
+        "art/parts/base/shots/source-body-fit/source8-eric-side.png",
+        "art/parts/base/shots/source-body-fit/source8-eric-top.png",
+        "art/parts/base/shots/source-body-fit/source8-eric-walk-0.1-back.png",
+        "art/parts/base/shots/source-body-fit/source8-eric-walk-0.1-front.png",
+        "art/parts/base/shots/source-body-fit/source8-eric-walk-0.4-back.png",
+        "art/parts/base/shots/source-body-fit/source8-eric-walk-0.4-front.png",
+        "art/parts/base/shots/source-body-fit/source8-eric-walk-0.8-back.png",
+        "art/parts/base/shots/source-body-fit/source8-eric-walk-0.8-front.png",
+        "art/parts/base/shots/source-body-fit/source8-mio-back.png",
+        "art/parts/base/shots/source-body-fit/source8-mio-bare.png",
+        "art/parts/base/shots/source-body-fit/source8-mio-dressed.png",
+        "art/parts/base/shots/source-body-fit/source8-mio-phone.png",
+        "art/parts/base/shots/source-body-fit/source8-mio-side.png",
+        "art/parts/base/shots/source-body-fit/source8-mio-top.png",
+        "art/parts/base/shots/source-body-fit/source8-mio-walk-0.1-back.png",
+        "art/parts/base/shots/source-body-fit/source8-mio-walk-0.1-front.png",
+        "art/parts/base/shots/source-body-fit/source8-mio-walk-0.4-back.png",
+        "art/parts/base/shots/source-body-fit/source8-mio-walk-0.4-front.png",
+        "art/parts/base/shots/source-body-fit/source8-mio-walk-0.8-back.png",
+        "art/parts/base/shots/source-body-fit/source8-mio-walk-0.8-front.png"
+      ]
+    },
+    {
+      "version": "source9",
+      "note": "Transferred source garment weights to hidden body. Mio walking knee skin still visible.",
+      "files": [
+        {
+          "path": "art/parts/base/clean-eric-source9-fit3-layers.json",
+          "sha256": "0e478462c2b20b5cf1edcc079d44acee0c6b44547a02504aa245a260fb8130fb"
+        },
+        {
+          "path": "art/parts/base/clean-eric-source9.json",
+          "sha256": "87ef4c3e160c6a534b6cae30f22b162392a00320b12c69d5b43f54bc0a921cb0"
+        },
+        {
+          "path": "art/parts/base/clean-mio-source9-fit3-layers.json",
+          "sha256": "9693fedb65f8778b5f6dc298a82279566678a7c461f535dae8fcb311508719a7"
+        },
+        {
+          "path": "art/parts/base/clean-mio-source9.json",
+          "sha256": "c9a3478a987f1fc30f0b3edef1f4aca625a47b92bc4cb087b07ec2d276b5b13f"
+        }
+      ],
+      "screens": [
+        "art/parts/base/shots/source-body-fit/source9-eric-walk-0.1-back.png",
+        "art/parts/base/shots/source-body-fit/source9-eric-walk-0.1-front.png",
+        "art/parts/base/shots/source-body-fit/source9-eric-walk-0.4-back.png",
+        "art/parts/base/shots/source-body-fit/source9-eric-walk-0.4-front.png",
+        "art/parts/base/shots/source-body-fit/source9-eric-walk-0.8-back.png",
+        "art/parts/base/shots/source-body-fit/source9-eric-walk-0.8-front.png",
+        "art/parts/base/shots/source-body-fit/source9-mio-walk-0.1-back.png",
+        "art/parts/base/shots/source-body-fit/source9-mio-walk-0.1-front.png",
+        "art/parts/base/shots/source-body-fit/source9-mio-walk-0.4-back.png",
+        "art/parts/base/shots/source-body-fit/source9-mio-walk-0.4-front.png",
+        "art/parts/base/shots/source-body-fit/source9-mio-walk-0.8-back.png",
+        "art/parts/base/shots/source-body-fit/source9-mio-walk-0.8-front.png"
+      ]
+    },
+    {
+      "version": "source10",
+      "note": "Full garment lining and small outer garment lift. Visible knee and back skin patches are covered in the sampled walk poses; still separate overlapping base pieces.",
+      "files": [
+        {
+          "path": "art/parts/base/clean-eric-source10-fit3-layers.json",
+          "sha256": "c47941045dc55fc19aba1a67fdeab90823f9d5271008fb609733acfa195cd12f"
+        },
+        {
+          "path": "art/parts/base/clean-eric-source10.json",
+          "sha256": "2aa3a9dc390a68f4aa028d55ac7f3f45a57ed03c50864684a010c4f2b170f93e"
+        },
+        {
+          "path": "art/parts/base/clean-mio-source10-fit3-layers.json",
+          "sha256": "9910b94452c336164a136b735b5eaacb72f140a743a941490695d83e6c5ccf71"
+        },
+        {
+          "path": "art/parts/base/clean-mio-source10.json",
+          "sha256": "529f08caeb7af94c215a958b6c0d6e18a46def929837ba2d07df6f9e9396cb48"
+        }
+      ],
+      "screens": [
+        "art/parts/base/shots/source-body-fit/source10-eric-bare.png",
+        "art/parts/base/shots/source-body-fit/source10-eric-diagnostic-walk-0.4-back.png",
+        "art/parts/base/shots/source-body-fit/source10-eric-diagnostic-walk-0.4-front.png",
+        "art/parts/base/shots/source-body-fit/source10-eric-dressed.png",
+        "art/parts/base/shots/source-body-fit/source10-eric-original-back.png",
+        "art/parts/base/shots/source-body-fit/source10-eric-original-front.png",
+        "art/parts/base/shots/source-body-fit/source10-eric-walk-0.1-back.png",
+        "art/parts/base/shots/source-body-fit/source10-eric-walk-0.1-front.png",
+        "art/parts/base/shots/source-body-fit/source10-eric-walk-0.4-back.png",
+        "art/parts/base/shots/source-body-fit/source10-eric-walk-0.4-front.png",
+        "art/parts/base/shots/source-body-fit/source10-eric-walk-0.8-back.png",
+        "art/parts/base/shots/source-body-fit/source10-eric-walk-0.8-front.png",
+        "art/parts/base/shots/source-body-fit/source10-mio-bare.png",
+        "art/parts/base/shots/source-body-fit/source10-mio-diagnostic-walk-0.4-back.png",
+        "art/parts/base/shots/source-body-fit/source10-mio-diagnostic-walk-0.4-front.png",
+        "art/parts/base/shots/source-body-fit/source10-mio-dressed.png",
+        "art/parts/base/shots/source-body-fit/source10-mio-original-back.png",
+        "art/parts/base/shots/source-body-fit/source10-mio-original-front.png",
+        "art/parts/base/shots/source-body-fit/source10-mio-walk-0.1-back.png",
+        "art/parts/base/shots/source-body-fit/source10-mio-walk-0.1-front.png",
+        "art/parts/base/shots/source-body-fit/source10-mio-walk-0.4-back.png",
+        "art/parts/base/shots/source-body-fit/source10-mio-walk-0.4-front.png",
+        "art/parts/base/shots/source-body-fit/source10-mio-walk-0.8-back.png",
+        "art/parts/base/shots/source-body-fit/source10-mio-walk-0.8-front.png"
+      ]
+    },
+    {
+      "version": "source11",
+      "note": "First wrist bridge attempt; the old zigzag forearm cut left boundary edges. Not rendered.",
+      "files": [
+        {
+          "path": "art/parts/base/clean-eric-source11-fit3-layers.json",
+          "sha256": "e71f3e6bd63aa441b7e2120787819c4640c2d2e03da92a96401ecae23a8152e1"
+        },
+        {
+          "path": "art/parts/base/clean-eric-source11.json",
+          "sha256": "02fb58e969d8b1e3f9603b8b2243b466e3745f7dd978cb9db5dea2264210c974"
+        },
+        {
+          "path": "art/parts/base/clean-mio-source11-fit3-layers.json",
+          "sha256": "0c9775c3b65165e69863c02dc3885d0636a06caad36fef948095bf17765dd39f"
+        },
+        {
+          "path": "art/parts/base/clean-mio-source11.json",
+          "sha256": "9a55a4462194063bba5e5129e3720a4bb1c89041d0b9fecdb747fcf315b0a4bc"
+        }
+      ],
+      "screens": []
+    },
+    {
+      "version": "source12",
+      "note": "Regular six-corner forearm cut; Eric closes, Mio still has eight boundary edges. Not rendered.",
+      "files": [
+        {
+          "path": "art/parts/base/clean-eric-source12-fit3-layers.json",
+          "sha256": "0f4b0345e841850a4ba7192d5c03614ee171ba3dd19f379401cae394ff68c17d"
+        },
+        {
+          "path": "art/parts/base/clean-eric-source12.json",
+          "sha256": "8f7602855c89fa42779bf807691722274bdaf5f0120ff5dd88c3b9e1ead93ee0"
+        },
+        {
+          "path": "art/parts/base/clean-mio-source12-fit3-layers.json",
+          "sha256": "8fe0ab0e234edf419b1fcade59e602039c64ad2701f05ef0361c639cee74585a"
+        },
+        {
+          "path": "art/parts/base/clean-mio-source12.json",
+          "sha256": "ecfe1134aaf0f585f06392749ff79ce269b1fb87ae89022047f44b3fe6a02ef6"
+        }
+      ],
+      "screens": []
+    },
+    {
+      "version": "source13",
+      "note": "Actual boundary cycles now close both wrist joins. Bare render retains pinched elbow transition and cuff paint.",
+      "files": [
+        {
+          "path": "art/parts/base/clean-eric-source13-fit3-layers.json",
+          "sha256": "b271cce03447b088d0a8b00fe121513e516b6a486fa96c8716d4766684b639c8"
+        },
+        {
+          "path": "art/parts/base/clean-eric-source13.json",
+          "sha256": "8a61f1032710eab12ce4de499e6ff3114edbb03d396582ba84b1a30cba8ca1d7"
+        },
+        {
+          "path": "art/parts/base/clean-mio-source13-fit3-layers.json",
+          "sha256": "5ce23f1f438a6061946ef1cca9530261288e829d8682b57452b8ffad0c5b08e7"
+        },
+        {
+          "path": "art/parts/base/clean-mio-source13.json",
+          "sha256": "aea3e04b20aed51c360d1e6f8f339a52df93c0e275927a8f15ef3e4750887afe"
+        }
+      ],
+      "screens": [
+        "art/parts/base/shots/source-body-fit/source13-eric-bare.png",
+        "art/parts/base/shots/source-body-fit/source13-eric-dressed.png",
+        "art/parts/base/shots/source-body-fit/source13-eric-original-back.png",
+        "art/parts/base/shots/source-body-fit/source13-eric-original-front.png",
+        "art/parts/base/shots/source-body-fit/source13-mio-bare.png",
+        "art/parts/base/shots/source-body-fit/source13-mio-dressed.png",
+        "art/parts/base/shots/source-body-fit/source13-mio-original-back.png",
+        "art/parts/base/shots/source-body-fit/source13-mio-original-front.png"
+      ]
+    },
+    {
+      "version": "source14",
+      "note": "Wrist-adjacent cuff paint cleared and elbow ring rebuilt. Bare render exposes abrupt transition into prior collapsed upper-arm rings.",
+      "files": [
+        {
+          "path": "art/parts/base/clean-eric-source14-fit3-layers.json",
+          "sha256": "d498f4c7d367e9cb2559bf8be6499863a8c1053b5c7a54e91c73fb52cce7ad00"
+        },
+        {
+          "path": "art/parts/base/clean-eric-source14.json",
+          "sha256": "0d46ee51f0c7e5a8cd2b6ef662691d539bb8057e0deb96a398ca2e8ca38540a3"
+        },
+        {
+          "path": "art/parts/base/clean-mio-source14-fit3-layers.json",
+          "sha256": "a99294816fd9fbf1b6f3a27a6448dc2a85f8464bc9a83ed816bfbf62686a78a1"
+        },
+        {
+          "path": "art/parts/base/clean-mio-source14.json",
+          "sha256": "dd888e825f1c5f2fd2cd6c39ac9a7fe3d88ecab32c4a962bc146038d70c5a35c"
+        }
+      ],
+      "screens": [
+        "art/parts/base/shots/source-body-fit/source14-eric-bare.png",
+        "art/parts/base/shots/source-body-fit/source14-eric-dressed.png",
+        "art/parts/base/shots/source-body-fit/source14-eric-original-back.png",
+        "art/parts/base/shots/source-body-fit/source14-eric-original-front.png",
+        "art/parts/base/shots/source-body-fit/source14-mio-bare.png",
+        "art/parts/base/shots/source-body-fit/source14-mio-dressed.png",
+        "art/parts/base/shots/source-body-fit/source14-mio-original-back.png",
+        "art/parts/base/shots/source-body-fit/source14-mio-original-front.png"
+      ]
+    },
+    {
+      "version": "source15",
+      "note": "Hidden arm taper rebuilt from original source wrist profile and joint centers. Independent bare wrist review passes 8/10; dressed sampled walk frames retain clothing coverage. Minor Mio neck flare and Eric hair seam pixels remain.",
+      "files": [
+        {
+          "path": "art/parts/base/clean-eric-source15-fit3-layers.json",
+          "sha256": "90f4b8077b40de50a2dd3ad8387d5523a6778d9f05828d6a3b04f3ae77000173"
+        },
+        {
+          "path": "art/parts/base/clean-eric-source15.json",
+          "sha256": "d6fb1667f304124a86becd9567b60e63a77adfc2473cd388325075cd42ba10c4"
+        },
+        {
+          "path": "art/parts/base/clean-mio-source15-fit3-layers.json",
+          "sha256": "665129188d580c5aca33d3aca57046c709a183b7f4f856f9b25e604669674200"
+        },
+        {
+          "path": "art/parts/base/clean-mio-source15.json",
+          "sha256": "08e74eaf184f4ed9f9d85255d6e795651b8ea792f3d48514d3420202dafdff66"
+        }
+      ],
+      "screens": [
+        "art/parts/base/shots/source-body-fit/source15-eric-bare.png",
+        "art/parts/base/shots/source-body-fit/source15-eric-dressed.png",
+        "art/parts/base/shots/source-body-fit/source15-eric-original-back.png",
+        "art/parts/base/shots/source-body-fit/source15-eric-original-front.png",
+        "art/parts/base/shots/source-body-fit/source15-eric-walk-0.1-back.png",
+        "art/parts/base/shots/source-body-fit/source15-eric-walk-0.1-front.png",
+        "art/parts/base/shots/source-body-fit/source15-eric-walk-0.4-back.png",
+        "art/parts/base/shots/source-body-fit/source15-eric-walk-0.4-front.png",
+        "art/parts/base/shots/source-body-fit/source15-eric-walk-0.8-back.png",
+        "art/parts/base/shots/source-body-fit/source15-eric-walk-0.8-front.png",
+        "art/parts/base/shots/source-body-fit/source15-mio-bare.png",
+        "art/parts/base/shots/source-body-fit/source15-mio-dressed.png",
+        "art/parts/base/shots/source-body-fit/source15-mio-original-back.png",
+        "art/parts/base/shots/source-body-fit/source15-mio-original-front.png",
+        "art/parts/base/shots/source-body-fit/source15-mio-walk-0.1-back.png",
+        "art/parts/base/shots/source-body-fit/source15-mio-walk-0.1-front.png",
+        "art/parts/base/shots/source-body-fit/source15-mio-walk-0.4-back.png",
+        "art/parts/base/shots/source-body-fit/source15-mio-walk-0.4-front.png",
+        "art/parts/base/shots/source-body-fit/source15-mio-walk-0.8-back.png",
+        "art/parts/base/shots/source-body-fit/source15-mio-walk-0.8-front.png"
+      ]
+    }
+  ],
+  "finalVersion": "source15"
+}

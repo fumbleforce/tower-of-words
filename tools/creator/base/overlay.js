@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import { loadLibrary, buildCharacter } from '../recipe.js';
+import { loadLibrary, buildCharacter, clipsFor } from '../recipe.js';
 import { dressed, layerMesh } from './base.js';
 import { disposeCharacter } from '../dispose.js';
 
@@ -7,9 +7,13 @@ import { disposeCharacter } from '../dispose.js';
 // particular, never normalize their separate bounding boxes to make them fit.
 const $ = id => document.getElementById(id);
 const params = new URLSearchParams(location.search);
+if (/^[a-z0-9-]+$/.test(params.get('review') || '')) $('review-link').href = '/bible/#review/' + params.get('review');
 if (['mio', 'eric'].includes(params.get('body'))) $('body').value = params.get('body');
 $('version').value = params.get('version') || 'v16';
-if (params.get('fit') === 'fit3') $('fit').value = 'fit3';
+if (params.get('fit') === 'fit3' || (!params.has('fit') && /^source\d+$/.test($('version').value))) $('fit').value = 'fit3';
+if (['neutral', 'walk'].includes(params.get('motion'))) $('motion').value = params.get('motion');
+if (params.get('colours') === 'original') $('colours').value = 'original';
+if (params.get('source') === '0') { $('show-source').checked = false; $('candidate-opacity').value = '1'; }
 const state = window.__creatorOverlay = { ready: false };
 const host = $('viewport');
 const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
@@ -40,7 +44,9 @@ const compositeMaterial = new THREE.ShaderMaterial({
 });
 const quad = new THREE.Mesh(new THREE.PlaneGeometry(2, 2), compositeMaterial); composite.add(quad);
 let library, original, candidate, request = 0, dead = false, pendingFrame = false;
-let yaw = 0, elevation = 0;
+let yaw = 0, elevation = 0, playing = false, lastFrame = null;
+let motionActions = [], motionTime = 0, duration = 0;
+const posedVertex = new THREE.Vector3();
 const centre = new THREE.Vector3(0, .5, 0);
 const originalMaterials = new Map();
 function disposeModel(model) {
@@ -52,11 +58,16 @@ function disposeModel(model) {
   }
   disposeCharacter(model);
 }
-function render() {
+function render(now) {
   pendingFrame = false;
+  if (playing && state.ready) {
+    if (lastFrame !== null) motionTime = (motionTime + Math.min((now - lastFrame) / 1000, .1)) % duration;
+    lastFrame = now; applyTime();
+  }
   if (dead) return;
   const aspect = host.clientWidth / host.clientHeight;
   const face = $('focus').value === 'face';
+  if (face && state.ready) updateFaceBox();
   if (face && state.faceBox) state.faceBox.getCenter(centre);
   else centre.set(0, .5, 0);
   const size = state.faceBox?.getSize(new THREE.Vector3());
@@ -73,8 +84,53 @@ function render() {
     $(name + '-value').textContent = Math.round(opacity * 100) + '%';
   }
   renderer.setRenderTarget(null); renderer.render(composite, camera);
+  if (playing && state.ready) invalidate();
 }
 function invalidate() { if (!dead && !pendingFrame) { pendingFrame = true; requestAnimationFrame(render); } }
+function updateFaceBox() {
+  const mesh = original.meshes.original;
+  state.faceBox.makeEmpty();
+  for (const triangle of state.faceTriangles) for (let k = 0; k < 3; k++) {
+    mesh.getVertexPosition(triangle * 3 + k, posedVertex).applyMatrix4(mesh.matrixWorld);
+    state.faceBox.expandByPoint(posedVertex);
+  }
+}
+function playback(active) {
+  playing = active && duration > 0 && state.ready;
+  lastFrame = null;
+  $('play').textContent = playing ? 'Pause' : 'Play';
+  $('play').setAttribute('aria-pressed', String(playing));
+  state.playing = playing;
+  invalidate();
+}
+function applyTime() {
+  for (let i = 0; i < motionActions.length; i++) {
+    const model = [original, candidate][i], action = motionActions[i];
+    action.time = motionTime;
+    model.mixer.update(0);
+    model.root.updateMatrixWorld(true); model.skeleton.update();
+  }
+  $('time').value = motionTime;
+  $('time-value').textContent = `${motionTime.toFixed(3)} / ${duration.toFixed(3)} s`;
+  Object.assign(state, { motion: $('motion').value, time: motionTime, duration });
+}
+function pose() {
+  playback(false); motionActions = []; motionTime = 0; duration = 0;
+  if (!state.ready) return;
+  const clip = state.clips[$('motion').value];
+  for (const model of [original, candidate]) {
+    model.bindPose();
+    if (clip) {
+      const action = model.mixer.clipAction(clip);
+      action.reset().setEffectiveWeight(1).play(); action.paused = true;
+      motionActions.push(action);
+    }
+    model.root.updateMatrixWorld(true); model.skeleton.update();
+  }
+  duration = clip?.duration || 0;
+  $('time').max = duration; $('time').disabled = $('play').disabled = !duration;
+  applyTime(); invalidate();
+}
 function resize() {
   renderer.setSize(host.clientWidth, host.clientHeight, false);
   const size = renderer.getDrawingBufferSize(new THREE.Vector2());
@@ -102,12 +158,13 @@ function layers() {
 }
 async function load() {
   const token = ++request, body = $('body').value, version = $('version').value.trim(), fit = $('fit').value;
-  state.ready = false; state.error = null; window.__done = false; window.__err = null;
+  playback(false); state.ready = false; state.error = null; window.__done = false; window.__err = null;
   $('status').textContent = 'Loading models…';
   let nextOriginal, nextCandidate;
   try {
     if (!/^[a-zA-Z0-9-]+$/.test(version)) throw new Error('Use a version name such as v16.');
     library ||= await loadLibrary();
+    library.retargetRest = true; library.anims.neutral = 'candidates/idle-neutral.glb';
     const baseId = `clean-${body}-${version}`;
     const results = await Promise.allSettled([
       buildCharacter(library, { body, parts: {}, height: 1 }),
@@ -117,6 +174,7 @@ async function load() {
     if (results[1].status === 'fulfilled') nextCandidate = results[1].value;
     const failure = results.find(result => result.status === 'rejected'); if (failure) throw failure.reason;
     const source = library.src[body];
+    const clips = await clipsFor(library, source);
     const mesh = layerMesh(library, nextOriginal, body, 'complete-original-source', Array.from({ length: source.T }, (_, index) => index), [255, 255, 255]);
     nextOriginal.rig.add(mesh); nextOriginal.meshes.original = mesh;
     nextOriginal.bindPose(); nextCandidate.bindPose();
@@ -128,7 +186,9 @@ async function load() {
     original.root.updateMatrixWorld(true); candidate.root.updateMatrixWorld(true);
     const faceBox = new THREE.Box3();
     for (const triangle of library.byId[body + '-head'].tris) for (let k = 0; k < 3; k++) faceBox.expandByPoint(new THREE.Vector3().fromArray(source.pos, (triangle * 3 + k) * 3));
-    Object.assign(state, { ready: true, body, version, fit, original, candidate, camera, faceBox, sourcePositions: source.pos });
+    Object.assign(state, { ready: true, body, version, fit, original, candidate, camera, faceBox, faceTriangles: library.byId[body + '-head'].tris, clips, sourcePositions: source.pos });
+    $('fit').options[1].textContent = /^source\d+$/.test(version) ? 'Source fitted layers' : 'fit3, rejected trial';
+    $('version-note').textContent = /^source\d+$/.test(version) ? 'Source-derived body candidate; its fitted layers belong to this version.' : 'v16 is the rejected baseline. Enter a later exported version to inspect it.';
     $('stubble-label').hidden = !candidate.meshes.stubble;
     $('candidate-label').textContent = `Magenta: ${version}${version === 'v16' ? ', rejected' : ', candidate'}`;
     const sourceBox = new THREE.Box3().setFromBufferAttribute(mesh.geometry.attributes.position);
@@ -139,14 +199,17 @@ async function load() {
     const format = values => values.map(value => value.toFixed(4)).join(', ');
     $('alignment').textContent = 'Shared source bind coordinates; no per-model scale or offset. Bounds below come from actual vertex positions.';
     $('bounds').textContent = `Coordinates: x, y, z. Full source includes hair and clothes. Bare base includes hidden scalp/body.\nSource min [${format(state.bounds.source.min)}], max [${format(state.bounds.source.max)}]\nBase min [${format(state.bounds.base.min)}], max [${format(state.bounds.base.max)}]\nBase minus source min [${format(state.bounds.delta.min)}], max [${format(state.bounds.delta.max)}]\nThese extents expose scale/offset differences. Matching extents would not prove matching faces or garment clearance.`;
-    $('status').textContent = `${body === 'mio' ? 'Mio' : 'Eric'} source + ${baseId}${fit ? ', ' + fit : ', original clothing positions'}.`;
-    surfaces(); layers(); window.__done = true;
+    $('status').textContent = `${body === 'mio' ? 'Mio' : 'Eric'} source + ${baseId}${fit ? (/^source\d+$/.test(version) ? ', source fitted layers' : ', rejected ' + fit + ' trial') : ', original clothing positions'}.`;
+    surfaces(); layers(); pose(); if (params.get('play') === '1') playback(true); window.__done = true;
   } catch (error) {
     if (nextOriginal !== original) disposeModel(nextOriginal);
     if (nextCandidate !== candidate) disposeModel(nextCandidate);
     if (token === request) { state.error = error.message; $('status').textContent = 'Could not load: ' + error.message + '. Candidate exports are local only; see Candidate files below.'; window.__err = error.message; }
   }
 }
+$('motion').onchange = pose;
+$('play').onclick = () => playback(!playing);
+$('time').oninput = () => { playback(false); motionTime = Number($('time').value); applyTime(); invalidate(); };
 $('load').onclick = load; $('body').onchange = load; $('fit').onchange = load;
 $('version').addEventListener('keydown', event => { if (event.key === 'Enter') load(); });
 for (const id of ['show-source', 'show-candidate', 'source-opacity', 'candidate-opacity', 'focus', 'zoom']) $(id).oninput = invalidate;

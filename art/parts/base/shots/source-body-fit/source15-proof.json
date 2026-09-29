@@ -1,0 +1,154 @@
+{
+  "version": "source15",
+  "generatorSha256": "49789a3515004c879581af5941aab5eea17e4b80487c18b419bed5cfcc0f68e2",
+  "knownRenderingNits": [
+    "Mio: a pale triangular flare at the neck opening from overlapping hidden neck geometry.",
+    "Eric: fine seam pixels in the hair layer and flatter face shading than the original."
+  ],
+  "limits": [
+    "Base has overlapping closed components; it is not a single connected manifold.",
+    "Walk coverage inspection samples three times from front and back, not every animation pose."
+  ],
+  "characters": {
+    "mio": {
+      "retainedSourceTriangles": 348,
+      "removedHiddenHandCaps": [
+        574,
+        897,
+        899,
+        1106,
+        1107,
+        1108,
+        1109,
+        1110,
+        1111,
+        847,
+        867,
+        1059,
+        1077,
+        1078,
+        1079,
+        1080,
+        1081,
+        1082
+      ],
+      "wristJoins": [
+        {
+          "side": "Right",
+          "handBoundaryVertices": 9,
+          "forearmBoundaryVertices": 6
+        },
+        {
+          "side": "Left",
+          "handBoundaryVertices": 9,
+          "forearmBoundaryVertices": 6
+        }
+      ],
+      "source": {
+        "pos": {
+          "exact": true,
+          "maxDelta": 0.0
+        },
+        "uv": {
+          "exact": true,
+          "maxDelta": 0.0
+        },
+        "si": {
+          "exact": true,
+          "maxDelta": 0.0
+        },
+        "sw": {
+          "exact": true,
+          "maxDelta": 0.0
+        }
+      },
+      "topology": {
+        "boundary": 0,
+        "nonmanifold": 0,
+        "pieces": 5,
+        "sourcePositionMaxDelta": 0.0
+      },
+      "visualCheck": {
+        "bareWristCritic": 8,
+        "walkSeconds": [
+          0.1,
+          0.4,
+          0.8
+        ],
+        "views": [
+          "front",
+          "back"
+        ],
+        "result": "No skin patches seen through torso, trousers or shoes in the twelve sampled dressed frames."
+      },
+      "command": "OPENBLAS_NUM_THREADS=1 /home/jorgen/ai/flat-venv/bin/python tools/creator/base/build_source_base.py mio source15 --original-clothes --bridge-gaps --source-weights --lining --join-hands --source-data art/parts/base/src-mio-exact.json --body-base art/parts/base/clean-mio-v16.json"
+    },
+    "eric": {
+      "retainedSourceTriangles": 268,
+      "removedHiddenHandCaps": [
+        1106,
+        1107,
+        1108,
+        1109,
+        1110,
+        1111,
+        1090,
+        1091,
+        1092,
+        1093,
+        1094,
+        1095
+      ],
+      "wristJoins": [
+        {
+          "side": "Left",
+          "handBoundaryVertices": 6,
+          "forearmBoundaryVertices": 6
+        },
+        {
+          "side": "Right",
+          "handBoundaryVertices": 6,
+          "forearmBoundaryVertices": 6
+        }
+      ],
+      "source": {
+        "pos": {
+          "exact": true,
+          "maxDelta": 0.0
+        },
+        "uv": {
+          "exact": true,
+          "maxDelta": 0.0
+        },
+        "si": {
+          "exact": true,
+          "maxDelta": 0.0
+        },
+        "sw": {
+          "exact": true,
+          "maxDelta": 0.0
+        }
+      },
+      "topology": {
+        "boundary": 0,
+        "nonmanifold": 0,
+        "pieces": 2,
+        "sourcePositionMaxDelta": 0.0
+      },
+      "visualCheck": {
+        "bareWristCritic": 8,
+        "walkSeconds": [
+          0.1,
+          0.4,
+          0.8
+        ],
+        "views": [
+          "front",
+          "back"
+        ],
+        "result": "No skin patches seen through torso, trousers or shoes in the twelve sampled dressed frames."
+      },
+      "command": "OPENBLAS_NUM_THREADS=1 /home/jorgen/ai/flat-venv/bin/python tools/creator/base/build_source_base.py eric source15 --original-clothes --bridge-gaps --source-weights --lining --join-hands --source-data art/parts/base/src-eric-exact.json --body-base art/parts/base/clean-eric-v16.json"
+    }
+  }
+}
