@@ -1,0 +1,45 @@
+{
+  "title": "Island campus: connected map views",
+  "date": "2026-09-29",
+  "by": "Codex",
+  "status": "open",
+  "question": "Which layout should we use: the leafy campus or the denser company town?",
+  "multi": false,
+  "options": [
+    {
+      "id": "town-06",
+      "label": "town-06",
+      "image": "art/candidates/island-map-1/06-dense-overview.png",
+      "images": [
+        "art/candidates/island-map-1/07-dense-west.png",
+        "art/candidates/island-map-1/08-dense-east.png"
+      ],
+      "note": "More workplaces and tighter, taller dorms, keeping the station/HQ connection and shared square. The narrow rear gap is a candidate location for Eric’s wall-facing room; precise scale is unmeasured. IT remains on B2 below head office. Open the labelled viewer for all three views and full prompts."
+    },
+    {
+      "id": "campus-03",
+      "label": "campus-03",
+      "image": "art/candidates/island-map-1/03-overview-monorail.png",
+      "images": [
+        "art/candidates/island-map-1/04-west.png",
+        "art/candidates/island-map-1/05-east.png"
+      ],
+      "note": "Earlier leafy set, preserved for comparison. Claude scored it 7/10: coherent style and connections, but small-campus scale and spacious housing. The current denser alternative addresses those concerns. Full prompts and every attempt are in the viewer."
+    },
+    {
+      "id": "revise-layout",
+      "label": "revise-layout",
+      "note": "Keep this as a draft. Tell us which places or connections should move."
+    }
+  ],
+  "links": [
+    {
+      "label": "Labelled maps, zoom and every attempt",
+      "href": "reviews/island-map-1/"
+    },
+    {
+      "label": "Layout brief and staging",
+      "href": "bible/#doc/art/candidates/island-map-1/brief.md"
+    }
+  ]
+}
