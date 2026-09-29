@@ -496,19 +496,9 @@
   "emo": "deadpan"
  },
  {
-  "key": "ln-1ycddwa",
+  "key": "ln-zhdyny",
   "speaker": "mio",
-  "text": "Mm. I stayed at her place last night, on the mainland.",
-  "lang": "en",
-  "overheard": false,
-  "words": [],
-  "clear": [],
-  "emo": "casual"
- },
- {
-  "key": "ln-4iwfo",
-  "speaker": "mio",
-  "text": "She always packs too much. Like I'm moving to another country.",
+  "text": "Mm. I stayed at her place last night, on the mainland. She always packs too much, like I'm moving to another country.",
   "lang": "en",
   "overheard": false,
   "words": [],
@@ -713,9 +703,9 @@
   "slow": true
  },
  {
-  "key": "ln-1xfjxb0",
+  "key": "ln-dmvjy7",
   "speaker": "mio",
-  "text": "よろしくおねがいします. Mm, good.",
+  "text": "よろしくおねがいします. Mm, good. Bow a little with Mori-san, he likes that.",
   "lang": "en",
   "overheard": false,
   "words": [
@@ -724,16 +714,6 @@
     "よろしくおねがいします"
    ]
   ],
-  "clear": [],
-  "emo": "casual"
- },
- {
-  "key": "ln-6wd5ry",
-  "speaker": "mio",
-  "text": "With Mori-san, bow a little when you say it. He likes that.",
-  "lang": "en",
-  "overheard": false,
-  "words": [],
   "clear": [],
   "emo": "casual"
  },
