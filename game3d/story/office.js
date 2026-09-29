@@ -577,9 +577,9 @@ export default {
       '> REPAIR REQUEST #2. Train doors, Honsha station. Assigned to: ERIC.',
       { say: 'mio', face: 'deadpan', emo: 'dry', text: "You're the IT guy. You tell them it's the sensor." },
       { if: 'lunch_mio || mio_warm >= 2', then: [
-        { say: 'mio', face: 'smile', emo: 'teasing', text: "Take the 8:40 tomorrow, okay? I'm in the front car. I want to see how you, um... fix a sensor." },
+        { say: 'mio', face: 'smile', emo: 'teasing', text: "Tomorrow morning you go down to the station, okay? I'll come too. I want to see how you, um... fix a sensor." },
       ], else: [
-        { say: 'mio', face: 'deadpan', emo: 'dry', text: "It's the 8:40, tomorrow. And if anybody asks, it was the sensor. Don't sleep through it, {gaijin}." },
+        { say: 'mio', face: 'deadpan', emo: 'dry', text: "It's the station, tomorrow morning. And if anybody asks, it was the sensor. Don't sleep through it, {gaijin}." },
       ] },
       { do: 'walk', who: 'mio', to: 'lift_out', wait: false },
       { do: 'save' },

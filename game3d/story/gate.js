@@ -8,13 +8,13 @@ export default {
     kuroda: { name: 'Man from the train' },
     kuro: { name: 'Receptionist' },
     gatev: { name: 'The gate' },
-    commuter: { name: 'Commuter' },
+    commuter: { name: 'Office worker' },
     miotext: { name: 'Mio', role: 'message', color: '#5fc6bf', phone: true },
   },
 
   people: {
     guard: { name: 'The guard', about: 'Strict, fair, no English. Feeds a cat he says is not there.', color: '#8ea2c8' },
-    kuroda: { name: 'Mr. Hamada', about: 'Accounts, 12th floor. Asleep on every train, late through every gate.', color: '#b3a58f' },
+    kuroda: { name: 'Mr. Hamada', about: 'Accounts, 12th floor. Falls asleep on trains, late through every gate.', color: '#b3a58f' },
   },
 
   schedule: {

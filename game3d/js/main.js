@@ -636,7 +636,7 @@ async function enter(name) {
   absorb(story);
   if (place.defaultPeriod && PERIOD_ORDER.indexOf(sim.period) < PERIOD_ORDER.indexOf(place.defaultPeriod)) sim.period = place.defaultPeriod;
   applySchedule(game, { instant: true });
-  ui.clock(sim.date, { commute: 'Morning commute', morning: 'Morning at work', lunch: 'Lunch', afternoon: 'Afternoon', evening: 'After work' }[sim.period]);
+  ui.clock(sim.date, { early: 'Early morning', morning: 'Morning at work', lunch: 'Lunch', afternoon: 'Afternoon', evening: 'After work' }[sim.period]);
   playMusic(sim.period === 'evening' ? 'night' : (place.music || MUSIC[name] || 'calm'));
   buildMarkers(place);
   ui.goal('');

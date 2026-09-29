@@ -154,7 +154,7 @@ People:
 - `kuroda`: comes in late through the entrance when the story runs `{ do: 'enter', who: 'kuroda' }`.
 - `kuro`: the receptionist, behind the visitor counter on the left (-4.3, 0.1).
 - `tama`: the cat, by the guard desk (3.45, -0.15), eating.
-- Commuters walk in, tap through the gate and take the lifts on their own (not tappable). `{ do: 'rush', on: true/false }` turns the morning rush up or down.
+- Office workers walk in, tap through the gate and take the lifts on their own (not tappable). `{ do: 'rush', on: true/false }` turns the morning rush up or down.
 
 Objects: `reader_l`, `reader_r`, `gate` (the arch and flaps), `desk` (guard desk), `counter` (visitor counter), `signin` (visitor book on the counter), `lostfound` (lost-and-found shelf by the counter), `screen` (notice screen on the back wall), `kiosk` (coffee vending machine, front right), `bench_l`, `bench_r`, `poster_l`, `poster_r`, `lift` (the lift bank), `entrance`, `plant`, `bowl` (Tama's).
 
@@ -170,7 +170,7 @@ Place hooks:
 - `cardOk`: Mio's card now works; her next tap turns the reader green and opens the gate.
 - `enter` `who`: someone walks in through the entrance.
 - `typing` `who`, `ms`: typing animation (the guard at his computer). (Renamed from `type`, which is now the typing prompt below.)
-- `rush` `on`: commuters on or off.
+- `rush` `on`: office workers on or off.
 - `liftOpen` / `liftClose`: one of the lifts opens.
 
 ### Office (`office`)
@@ -209,7 +209,7 @@ Place hooks (the unlock effects):
 
 - Words: `ohayo`, `yoroshiku`, `otsukare`, `kotodama`. Speakers: `rei`, `kanae`, `sales1`, `sales2`, `gatev`, `reitext` (shown as a text message on its own dark card).
 - Train: `rei` has a body on the far bench at x 2.1 with a laptop; `music` is gone. Her folder and a lidded coffee (`cup`) are on `seat_far_r`; sitting Mio there moves them. Hook `cup` `state: 'tip'|'safe'` (`safe` puts it upright in Rei's hand). Bags sit on `seat_aoi`, `seat_near_l` and `seat_near_r` (sitting there moves the bag). `hide` also hides the person's floor shadow.
-- Gate: `rei` has a body (walks in with Mio when she's in `with`). `aoi` starts seated on `bench_r` behind an upside-down newsletter (hook `newsletter` `state: 'down'|'up'`). `catTo` works (crossing the barrier flashes the gate red). One commuter carries a cake box. `with` entries can be conditional: `with: [{ who: 'aoi', if: 'aoi_with' }]`.
+- Gate: `rei` has a body (walks in with Mio when she's in `with`). `aoi` starts seated on `bench_r` behind an upside-down newsletter (hook `newsletter` `state: 'down'|'up'`). `catTo` works (crossing the barrier flashes the gate red). One office worker carries a cake box. `with` entries can be conditional: `with: [{ who: 'aoi', if: 'aoi_with' }]`.
 - Lift: the ride starts at 1. Put `{ do: 'floor', to: '5' }` steps in `ride` to move the counter one floor at a time (`B2`, `B1`, `1` ... `5`), and `{ do: 'liftDoors', state: 'open'|'closed' }` for the doors' sound. If the ride doesn't end on B2, the engine finishes the count to B2. The office is on B2 (plates B2 and 企画室７).
 - Office: `yui`, `sota`, `nao`, `hiro` are gone. `aoi` has a hidden body at the lift (`show`, then `walk` from `lift_out`). Three desks have cloth over their monitors: ids `covered` (north middle) and `covered_monitor` (south right). New ids `box_crowns`, `cups`, `nameplate`. `my_chair` starts in the machine room with `tama` asleep on it; `chairRoll` carries her along; `catTo` lifts her off and walks her (spots or ids, e.g. `catTo` `to: 'my_desk'`). `mori` can `walk` anywhere (people route through doors and the corridor on their own).
 
@@ -296,7 +296,7 @@ export default {
 - `fact` `who`, `id`, `text`, `like`: something Eric has learned about them, for People; `like: 'coffee'` also shows that taste as noticed.
 - `relate` `a`, `b`, `kind` (`likes`, `owes`, `rivals`, `none`): changes how a feels about b.
 - `meet` `who`: adds them to People (step 1); talking to a person does this too.
-- `period` `to: 'commute'|'morning'|'lunch'|'afternoon'|'evening'` (the HUD shows "Thu 1 Oct · Morning at work"; only the story moves it), `buy` `item` (`coffee`, `tea`, `melon`, `cornsoup`; ¥1000 to start; sets `bought_<item>`, or `cant_buy`), `take` `item`, `save`.
+- `period` `to: 'early'|'morning'|'lunch'|'afternoon'|'evening'` (the HUD shows "Thu 1 Oct · Morning at work"; only the story moves it), `buy` `item` (`coffee`, `tea`, `melon`, `cornsoup`; ¥1000 to start; sets `bought_<item>`, or `cant_buy`), `take` `item`, `save`.
 
 **Flags for conditions.** `bond_<who>` (points), `step_<who>`, `bondready_<who>` (the step whose scene is due, else 0), `met_<who>`, `rem_<who>_<id>`, `fact_<who>_<id>`, `rel_<a>_<b>` (`'likes'`...), `register_<who>` (`'right'` or `'wrong'`: the register of the last word Eric said to them), and after a gift `gave_<item>_<who>`, `gift_<who>` and `gift_reaction` (`'need'`, `'like'`, `'neutral'`, `'dislike'`), set before the `give:` node runs. So one trigger can answer any gift: `'give:*:mio': [{ if: "gift_mio == 'like'", node: 'mio_likes_it' }, 'mio_polite_thanks']`.
 

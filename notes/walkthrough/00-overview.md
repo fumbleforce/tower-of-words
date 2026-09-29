@@ -10,7 +10,7 @@ Files:
 
 - Eric is a support engineer on a six-month contract (1 October 2026 to 31 March 2027), hired to keep the island's ancient systems running because the company won't replace anything that still works. The old machines answer to his voice. Nobody explains why, and nobody investigates.
 - Day 1 is Thursday 1 October (game3d/story/STORY.md). Emi is at head office in Tokyo that day, arguing for a parts budget for the old machines (Jørgen, 2026-09-28), and comes back on Monday 5 October.
-- A day has six periods: commute, morning, lunch, afternoon, evening, night. A day of play is 10 to 15 minutes.
+- A day has six periods: early morning, morning, lunch, afternoon, evening, night. A day of play is 10 to 15 minutes.
 - Bond steps are 0 Stranger, 1 Known, 2 Friendly (6 points), 3 Trusted (14 points plus the turn scene), 4 Close (24 points plus the payoff scene), 5 Partner or friend (the romance beat, before the end of February). A person gains at most 3 points a day. Point sources are in RELATIONSHIPS.md.
 - Dated events happen on their dates whatever your bonds are. Your bond decides your part in them.
 - English is always shown. Nothing asks you to recall a word. "Words taught" in a requirement means you've been taught them in play, from anyone.
@@ -157,7 +157,7 @@ The island has about forty old machines. These are the ones the full arcs use. E
 
 ## Who's where on a weekday (quick reference)
 
-| | Commute | Morning | Lunch | Afternoon | Evening | Night |
+| | Early morning | Morning | Lunch | Afternoon | Evening | Night |
 |---|---|---|---|---|---|---|
 | Mio | Walkway from dorm A; the train on Thursdays | Her B2 desk | Machine room floor, by rack 3 | Desk; day build 14:00 to 16:30 | Night build 19:00 to 21:00 (Mon, Tue, Fri) | Dorm laundry at 2:00 on Tuesdays and Fridays |
 | Mori | Sea wall walk, in at 7:40 | 8:15 copier round, then the chief's desk | Kitchenette | Desk; tea at 15:00 | Leaves at 17:30 exactly | Home |

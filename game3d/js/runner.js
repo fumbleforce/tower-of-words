@@ -29,7 +29,7 @@ const DEFAULT_SPEAKERS = {
   bun: { name: 'Woman with a bun', color: '#a8b0bf' },
   youth: { name: 'Young man', color: '#a8b0bf' },
   stander: { name: 'Man by the door', color: '#a8b0bf' },
-  commuter: { name: 'Commuter', color: '#a8b0bf' },
+  commuter: { name: 'Office worker', color: '#a8b0bf' },
   rei: { name: 'Rei', role: 'Sales', color: '#c9ced8' },
   kanae: { name: 'Kanae', color: '#f0a060' },
   sales1: { name: 'Man from Sales', color: '#a8b0bf' },
