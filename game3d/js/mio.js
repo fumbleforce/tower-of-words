@@ -202,6 +202,34 @@ export function calmSitTime(model, mixer, action) {
   return best;
 }
 
+// Gait (feel agent): walk and run blended by ground speed, so the feet move at the speed the body does.
+// setGait(v): v is the ground speed in the rig's own units / s (null: off, the walk plays at update's speed argument).
+// Walk and run play on one shared phase that advances with the distance covered: cycle length is the blend of the
+// two clips' strides; the run weight eases in between walkV and runV. Measured on the clips (tools/feel stride
+// probe): Eric walk 0.44 / run 1.1 units per s at time scale 1, run's left foot 0.03 of a cycle later; Mio 0.47 / 0.77, 0.04.
+export function makeGait(actions, { walkV, runV, runOff = 0 }) {
+  const W = actions.walk, R = actions.run, WD = W.getClip().duration, RD = R.getClip().duration;
+  let v = null, phase = 0, runW = 0, runOn = false;
+  return {
+    set(x) { v = x == null ? null : Math.max(0, x); },
+    // call before mixer.update; `state` is the rig's current state
+    step(dt, state, speedArg) {
+      if (state === 'walk' && v !== null) {
+        const w = THREE.MathUtils.smoothstep(v, walkV * 1.25, runV * 0.9);
+        runW += (w - runW) * Math.min(1, dt * 6);
+        const cyc = (1 - runW) * walkV * WD + runW * runV * RD;
+        phase = (phase + (dt * v) / Math.max(1e-3, cyc)) % 1;
+        if (!runOn) { R.reset(); R.setEffectiveWeight(1); R.play(); runOn = true; }
+        W.timeScale = 0; R.timeScale = 0; W.time = phase * WD; R.time = ((phase + runOff) % 1) * RD;
+        W.weight = 1 - runW; R.weight = runW;
+        return;
+      }
+      W.timeScale = speedArg; W.weight = 1;
+      if (runOn) { runOn = false; runW = 0; R.fadeOut(0.2); }
+    },
+  };
+}
+
 // Meshy's Idle clip steps and twists (Jørgen: "turn and twist like crazy"), so it's held on one frame. Pick the
 // calmest: feet close together, head upright over the hips, hips facing forward.
 export function calmIdleTime(model, mixer, action) {
@@ -221,7 +249,8 @@ export function calmIdleTime(model, mixer, action) {
     for (const v of [a, b, c, e]) model.worldToLocal(v);
     const lean = Math.hypot(a.x - b.x, a.z - b.z) / H, feet = Math.hypot(c.x - e.x, c.z - e.z) / H;
     const yaw = turn(lu, ru) + turn(la, ra);
-    const sc = lean * 2 + feet + yaw * 0.5;
+    // yaw weighs heavily: a held frame with the hips turned reads as the body twisted against the way he faces
+    const sc = lean * 2 + feet + yaw * 2.5;
     if (sc < bestS) { bestS = sc; best = t; }
   }
   action.stop();
@@ -456,9 +485,11 @@ export async function loadMio({ height = 1.12, colours = MIO_COLOURS } = {}) {
   actions.idle = mixer.clipAction(idleClip);
   actions.idle.timeScale = HELD;
   let cur = null, curName = '';
+  let sitO = null;   // how far sitAt moved the root off the hips; given back when she stands, so she stands where she sat
   function setState(name) {
     if (name === curName) return;
     const prev = cur;
+    if (curName === 'sit' && name !== 'sit' && sitO) { root.position.x += sitO.x; root.position.z += sitO.z; sitO = null; }
     curName = name;
     const a = actions[name];
     a.reset(); a.setEffectiveWeight(1);
@@ -475,9 +506,10 @@ export async function loadMio({ height = 1.12, colours = MIO_COLOURS } = {}) {
   const bones = []; model.traverse((o) => { if (o.isBone) bones.push([o, o.position.clone(), o.quaternion.clone()]); });
   const snapBones = () => { for (const b of bones) { b[1].copy(b[0].position); b[2].copy(b[0].quaternion); } };
   const restoreBones = () => { for (const b of bones) { b[0].position.copy(b[1]); b[0].quaternion.copy(b[2]); } };
+  const gait = makeGait(actions, { walkV: 0.47, runV: 0.77, runOff: 0.04 });
   function update(dt, speed = 1) {
     t += dt;
-    actions.walk.timeScale = speed;
+    gait.step(dt, curName, speed);
     // the held idle/sit frames don't rewrite the hips every frame, so the breath has to be taken back off first,
     // or it piles up (that was her floating and her feet jiggling)
     restoreBones();
@@ -505,7 +537,7 @@ export async function loadMio({ height = 1.12, colours = MIO_COLOURS } = {}) {
     const o = sitHip.clone().multiplyScalar(k).applyAxisAngle(new THREE.Vector3(0, 1, 0), ry);
     root.position.set(x - o.x, seatTop + 0.07 * k - o.y, z - o.z);
     root.rotation.y = ry;
-    setState('sit');
+    setState('sit'); sitO = o.clone();
   }
-  return { root, model, mixer, setState, update, sitAt, sitHip, pose, layers, phone: ph.hook, placePhone: ph.place, get state() { return curName; }, H, height };
+  return { root, model, mixer, setState, update, setGait: gait.set, sitAt, sitHip, pose, layers, phone: ph.hook, placePhone: ph.place, get state() { return curName; }, H, height };
 }
