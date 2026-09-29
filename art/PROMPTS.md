@@ -140,3 +140,8 @@ Jørgen: "glasses are the main issue with Mio, they keep changing to different s
 - Second best, when the frame must be redrawn: the diptych repaint (the portrait's head beside hers, glasses band masked, eyes kept, LLLite inpainting-v2 at 0.8). It gets the shape and colour close, but it's a new drawing of the frame, and the lens shape varies by seed.
 - Always keep her eyes out of the mask. Every repaint that covered them changed her irises (green, glints).
 - Check each result beside the portrait at the same scale (mio-phone-3/sheet.py) and sample the frame colour. It should be close to the portrait's (median about 90, 79, 76).
+
+## Eric (mc) portrait
+- Hair (Jørgen, 2026-09-29: the sides must not come out darker, shorter or shaved-looking; "describe the desired hair simply, dont overcorrect"): `dark-blond hair, same colour all over, tied in a short ponytail at the back`, plus `undercut, shaved sides, two-tone hair` in the negative, unweighted. With both, about half the seeds give one even colour (round eric-portrait-anime-4: p6h2-1909, p3h2-2909); the words alone did it on one seed of six. Check every render for a darker band above the ear.
+- Repainting only the side hair of a finished render doesn't fix it: masked img2img at denoise 0.45 to 0.75, with or without the LLLite inpainting patch, redraws the same dark side. Change the words and re-render.
+- Keep the weighted red-rim negative `(rim light, red rim light, red outline, backlighting:1.4)` and measure with tools/redrim.py.
