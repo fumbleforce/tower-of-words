@@ -1,0 +1,48 @@
+{
+  "title": "Day 1: fewer repeated steps",
+  "date": "2026-09-29",
+  "by": "Codex writing team",
+  "status": "open",
+  "question": "Which parts of this simplification should we apply?",
+  "multi": true,
+  "options": [
+    {
+      "id": "train",
+      "label": "train",
+      "note": "Keep the two-step lunchbox, lessons and rescue. Remove repeated narration, merge three replies and let Mio answer her buzzing phone during the conversation. [Scene counts and exact lines](#doc/reviews/day1-simplify/train.md)."
+    },
+    {
+      "id": "gate",
+      "label": "gate",
+      "note": "Show the useful briefcase mime immediately. Keep both solutions, typed akete and optional cat/squeeze jokes. Shorten repeated explanations. [Scene counts and exact lines](#doc/reviews/day1-simplify/gate.md)."
+    },
+    {
+      "id": "lift",
+      "label": "lift",
+      "note": "Five advances become three. Keep the B2 gossip and the moment they notice Eric’s card. [Exact lift edits, below gate proposal](#doc/reviews/day1-simplify/gate.md)."
+    },
+    {
+      "id": "office",
+      "label": "office",
+      "note": "One knock opens Mio’s door; the chair conversation leads straight into her request. Shorten repeated ticket and gesture text; keep both lunches, typing and cup payoff. [Scene counts and exact lines](#doc/reviews/day1-simplify/office.md)."
+    }
+  ],
+  "links": [
+    {
+      "label": "Before / after overview",
+      "href": "bible/#doc/reviews/day1-simplify/proposal.md"
+    },
+    {
+      "label": "Train",
+      "href": "bible/#doc/reviews/day1-simplify/train.md"
+    },
+    {
+      "label": "Gate and lift",
+      "href": "bible/#doc/reviews/day1-simplify/gate.md"
+    },
+    {
+      "label": "Office",
+      "href": "bible/#doc/reviews/day1-simplify/office.md"
+    }
+  ]
+}
