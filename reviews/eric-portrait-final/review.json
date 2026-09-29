@@ -2,7 +2,7 @@
  "title": "Eric's dialogue portrait: height check",
  "date": "2026-09-29",
  "by": "art agent (Eric portrait final)",
- "status": "open",
+ "status": "decided",
  "multi": false,
  "question": "Is Eric the right height next to Mio and Emi now?",
  "media": [
@@ -29,5 +29,9 @@
    ],
    "note": "r4-909 cropped, not redrawn: his face is the same height as everyone's and his chin sits level with theirs. Hair top to chin on screen at 2560x1440: Eric 179 px, Mori 179, Kenji 183, Emi 192, Mio 211 (her bun). Already in the game as eric-neutral.webp."
   }
- ]
+ ],
+ "decided": [
+  "eric-final-r4-909"
+ ],
+ "decision": "10% bigger, same chin height"
 }
