@@ -1,8 +1,11 @@
 {
-"id": "0929-0028-82c1b24",
+"id": "0929-0245-3f6a50e",
 "files": [
 "js/ambience.js",
 "js/avatar.js",
+"js/bonds/cast.js",
+"js/bonds/day1.js",
+"js/bonds/model.js",
 "js/cam.js",
 "js/cast.js",
 "js/end.js",
