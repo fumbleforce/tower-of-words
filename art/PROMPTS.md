@@ -139,6 +139,7 @@ Jørgen: "glasses are the main issue with Mio, they keep changing to different s
   3. Blend lightly: a masked img2img over the glasses band at denoise 0.2, eyes left out. 0.3 already makes the frame thicker and glossier.
 - Second best, when the frame must be redrawn: the diptych repaint (the portrait's head beside hers, glasses band masked, eyes kept, LLLite inpainting-v2 at 0.8). It gets the shape and colour close, but it's a new drawing of the frame, and the lens shape varies by seed.
 - Always keep her eyes out of the mask. Every repaint that covered them changed her irises (green, glints).
+- Keep the whole frame solid (Jørgen, mio-phone-3: "transparent frame on the top of the left glass"). Only hair that crosses the frame goes in front of it, never the fringe outline or lash line that runs along the top bar (composite.py `hair_mask`); the blend leaves the frame's core out of its mask; and the cut-out gets the frame as `--opaque` in tools/matte_refine.py, because the matte took the thin frame over the background for background (her approved game portraits had that hole under the left lens too, fixed 2026-09-29).
 - Check each result beside the portrait at the same scale (mio-phone-3/sheet.py) and sample the frame colour. It should be close to the portrait's (median about 90, 79, 76).
 
 ## Eric (mc) portrait

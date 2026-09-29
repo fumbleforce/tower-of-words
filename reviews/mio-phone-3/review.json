@@ -2,7 +2,7 @@
  "title": "Mio looking at her phone, round 3 (ipa7a-1001 with her own glasses)",
  "date": "2026-09-29",
  "by": "art agent (Mio phone 3)",
- "status": "open",
+ "status": "superseded",
  "multi": false,
  "question": "Which one has her glasses right?",
  "media": [
@@ -273,5 +273,6 @@
    "label": "Round 2",
    "href": "bible/#review/mio-phone-2"
   }
- ]
+ ],
+ "decision": "pick blendk20-3501-exact-3401-v2 direction, fix transparent top of left frame (round 4: mio-phone-4)"
 }

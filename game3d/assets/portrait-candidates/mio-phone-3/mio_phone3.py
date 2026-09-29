@@ -71,7 +71,7 @@ def parts():
     """The composite and its masks, cached as arrays."""
     if not hasattr(parts, 'c'):
         img, _ = composite.build(1.0, None)
-        parts.c = dict(comp=img, alpha=composite.LAST['alpha'], old=composite.LAST['old'], warped=composite.LAST['warped'])
+        parts.c = dict(comp=img, alpha=composite.LAST['alpha'], wm=composite.LAST['wm'], old=composite.LAST['old'], warped=composite.LAST['warped'])
     return parts.c
 
 
@@ -118,8 +118,9 @@ def inpaint(src, mask, prompt, seed, denoise, ipa=None, lllite=True, name='x'):
 
 
 def paste_frame(img):
+    """The portrait's frame pixels on top of img; hair strands of img itself that cross the frame stay in front."""
     p = parts()
-    a = p['alpha'][..., None]
+    a = (p['wm'] * (1 - composite.hair_mask(img)))[..., None]
     out = np.asarray(img.convert('RGB')).astype(np.float32) * (1 - a) + p['warped'] * a
     return Image.fromarray(out.clip(0, 255).astype(np.uint8))
 
@@ -153,17 +154,21 @@ def band_mask(grow=6):
     return m.astype(np.float32)
 
 
-def job_blend(d, seed, src, keep_eyes=False):
+def job_blend(d, seed, src, keep_eyes=False, keep_frame=False):
     name = f'mio-phone3-blend{"k" if keep_eyes else ""}{int(round(d * 100))}-{seed}-{src.replace("mio-phone3-", "")}'
     base = Image.open(os.path.join(RAW, src + '.png'))
     m = band_mask(4)
     if keep_eyes:  # her eyes stay as they are
         for x0, y0, x1, y1 in EYES:
             m[y0 + 2:y1 - 1, x0 + 2:x1 - 2] = 0
+    if keep_frame:  # round 4: the frame's core stays the portrait's pixels; only its edges and the face around it blend.
+        # At 0.2 the img2img still redrew the thin top bar of the left lens with her fringe's pink shadow streaks across it.
+        m[ndimage.binary_erosion(parts()['wm'] > 0.5, iterations=1)] = 0
     img, prompt = inpaint(base, m, f'{Q}, {FACE}, {GLASSES}', seed, d, lllite=False, name=name)
     save(img, name)
     log({'name': name, 'method': f'{src}, then a light masked img2img over the glasses band (RDBT, denoise {d}, no inpainting patch); '
-         'nothing pasted back' + ('; her eyes left out of the mask' if keep_eyes else ''), 'prompt': prompt, 'negative': NEG, 'seed': seed, 'denoise': d})
+         'nothing pasted back' + ('; her eyes left out of the mask' if keep_eyes else '')
+         + ('; the frame\'s core left out of the mask (it stays the portrait\'s pixels)' if keep_frame else ''), 'prompt': prompt, 'negative': NEG, 'seed': seed, 'denoise': d})
 
 
 def job_ipa(seed, denoise=0.8, st=0.7):
@@ -274,6 +279,15 @@ def job_exact(seed, denoise=0.9, v=1):
          'negative': neg, 'seed': seed, 'denoise': denoise})
 
 
+def job_repaste(name, bare_dir=None):
+    """Round 4: the frame put again on a saved bare face (<name>-bare.png, from bare_dir) with the fixed hair mask; no GPU."""
+    composite.PADS_TOO = name.endswith('-v2')
+    parts.__dict__.pop('c', None)
+    save(paste_frame(Image.open(os.path.join(bare_dir or RAW, name + '-bare.png'))), name)
+    log({'name': name, 'method': 'the saved bare face of round 3, then the approved frame pixels warped on (composite.py) with '
+         'the fixed hair mask (round 4: the top bar of the left lens is no longer cut)'})
+
+
 def job_clean2(seed, denoise=0.85):
     p = parts()
     m = ndimage.binary_dilation(p['old'], iterations=3) & ~(p['alpha'] > 0.6)
@@ -281,15 +295,21 @@ def job_clean2(seed, denoise=0.85):
 
 
 def cut(names):
-    """As in round 2: BiRefNet-HR matting, then tools/matte_refine.py, then 597x768 like the game portraits."""
+    """As in round 2: BiRefNet-HR matting, then tools/matte_refine.py, then 597x768 like the game portraits.
+    Round 4: the transplanted frame (composite wm) goes to matte_refine as --opaque, so the matte can't make the frame
+    see-through where the left lens overhangs the background (it did on every round-3 cut and on her approved portraits)."""
     tmp = os.path.join(RAW, 'cut')
     os.makedirs(tmp, exist_ok=True)
+    composite.PADS_TOO = True
+    parts.__dict__.pop('c', None)
+    fmask = os.path.join(tmp, 'frame-mask.png')
+    Image.fromarray((parts()['wm'].clip(0, 1) * 255).astype('uint8')).save(fmask)
     srcs = [os.path.join(RAW, n + '.png') for n in names]
     subprocess.run(['python3', os.path.join(REPO, 'tools/rmbg_local.py'), '--method', 'birefnet-hr-matting', *srcs, '--out', tmp], check=True)
     for n in names:
         ref = os.path.join(tmp, n + '-refined.png')
         subprocess.run([os.path.expanduser('~/ai/rmbg/rembg/bin/python'), os.path.join(REPO, 'tools/matte_refine.py'),
-                        os.path.join(RAW, n + '.png'), os.path.join(tmp, n + '.png'), ref], check=True)
+                        os.path.join(RAW, n + '.png'), os.path.join(tmp, n + '.png'), ref, '--opaque', fmask], check=True)
         Image.open(ref).resize((597, 768), Image.LANCZOS).save(os.path.join(HERE, n + '-cut.webp'), quality=92)
         print('cut', n, flush=True)
 
@@ -311,6 +331,8 @@ if __name__ == '__main__':
             job_ipa(int(a[0]))
         elif k == 'exact':
             job_exact(int(a[0]), v=int(a[1]) if len(a) > 1 else 1)
+        elif k == 'repaste':
+            job_repaste(a[0])
         elif k == 'dipk':
             job_dipk(int(a[0]))
         elif k == 'clean2':
