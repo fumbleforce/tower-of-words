@@ -1,0 +1,129 @@
+{
+  "date": "2026-09-29",
+  "tool": "Built-in image_gen",
+  "settings": {
+    "mode": "edit",
+    "transparent_background": false,
+    "seed": "not exposed",
+    "model_identifier": "not exposed"
+  },
+  "attempts": [
+    {
+      "id": "01",
+      "file": "01-overview.png",
+      "kind": "overview",
+      "reference": "art/candidates/island-map-2/01-overview.png",
+      "note": "Five requested company-town revisions on the retained layout.",
+      "prompt": "Edit this flat-shaded 3D isometric island map, keeping its camera, coastline, monorail station, bridge to the tall headquarters, office district, central fountain, blue-roof canteen, gymnasium, university and southwest beach in the same positions. Make the company town less idyllic: muted concrete and asphalt, lightly weathered walls, practical service yards and fewer ornamental trees. Attach a clearly connected rectangular changing-and-shower building directly to the north end of the outdoor pool, with a door onto its deck. At the eastern headland replace the single onsen pool with two separate outdoor baths enclosed by tall privacy walls, divided continuously through the bathhouse, with separate entrances marked by blue and red noren curtains. Replace the scattered colorful cottage shops south of the fountain with one continuous covered Japanese shopping street: joined two-storey commercial buildings, a long translucent arcade roof, sober faded signs and a visible entrance at each end. Join the southeast apartment towers into tightly clustered connected blocks with shared access corridors, narrow courtyards and bicycle sheds. Preserve the original map's readable low-poly geometry and daylight; no labels or added text outside building signs.",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "original": "/home/jorgen/.codex/generated_images/01a0ec11-5467-7f12-8cb3-978cf1b7bbe0/exec-fcb7cdfd-cd90-4e95-be17-f341cc9380e7.png"
+    },
+    {
+      "id": "02",
+      "file": "02-west.png",
+      "kind": "west district",
+      "reference": "art/candidates/island-map-3/01-overview.png",
+      "note": "Same western district enlarged; facade details may vary.",
+      "prompt": "From this exact island map, make a closer flat-shaded 3D isometric view of its western district, preserving the same camera direction and every building's position and design. Frame the monorail station and its supported western approach on the left, tall headquarters with station skybridge above center, clustered office buildings across the back, the blue-roof canteen and fountain on the right, the continuous glass-roof shopping arcade across the foreground and southwest beach below it. Crop away the eastern housing, university, sports area and onsen. Keep the linked commercial buildings, muted weathered concrete, service yards and exact roof shapes from the reference. This is a magnified district of the same map, not a redesigned island; no labels or map border.",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "original": "/home/jorgen/.codex/generated_images/01a0ec11-5467-7f12-8cb3-978cf1b7bbe0/exec-f921a2a3-07c6-4475-9ea7-c61da4caa4c9.png"
+    },
+    {
+      "id": "03",
+      "file": "03-east.png",
+      "kind": "east district",
+      "reference": "art/candidates/island-map-3/01-overview.png",
+      "note": "Same eastern district enlarged; pools, divisions and housing visible.",
+      "prompt": "From this exact island map make a magnified flat-shaded 3D isometric view of its eastern district, preserving the same camera direction, all building positions and designs. Frame the fountain and blue-roof canteen at the left edge, green-roof gym and outdoor pool with its directly attached north shower/changing block across the back, sports court and three-wing university in the middle, connected apartment blocks and narrow service courts in the foreground, and the walled two-part onsen on the rocky headland at upper right. Clearly retain the two separate baths, continuous privacy divider and blue and red entrance curtains. The station and tall headquarters are outside this crop. Keep the muted lightly weathered concrete, connected apartment corridors, bicycle shelters and low-poly daylight look. This is a closer view of the same map, not a new arrangement; no labels or border.",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "original": "/home/jorgen/.codex/generated_images/01a0ec11-5467-7f12-8cb3-978cf1b7bbe0/exec-2f7f7012-a505-43f2-a7fb-a9e3c654e221.png"
+    },
+    {
+      "id": "04",
+      "file": "04-access.png",
+      "kind": "overview correction",
+      "reference": "art/candidates/island-map-3/01-overview.png",
+      "note": "Southeast access corrected into a continuous supported coastal path with a landing.",
+      "prompt": "Edit only the southeast seawall access in this image. The stairs below the apartment blocks currently end on boulders: give their foot a flat concrete landing and join it to the nearby corner platform with a continuous narrow concrete coastal footpath, supported against the seawall above the high-water rocks and protected by a simple railing. Leave the rest of the island, buildings, beach, camera, colors and lighting unchanged.",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "original": "/home/jorgen/.codex/generated_images/01a0ec11-5467-7f12-8cb3-978cf1b7bbe0/exec-4d61e45d-7bed-4f85-8e35-e2335569b711.png"
+    },
+    {
+      "id": "05",
+      "file": "05-bar.png",
+      "kind": "overview correction",
+      "reference": "art/candidates/island-map-3/04-access.png",
+      "note": "Izakaya frontage added: sign, lanterns and noren.",
+      "prompt": "Edit only the shop at the right-hand end of the southern shopping row, the one with the red-and-white striped awning just left of the apartment blocks. Make its frontage visibly a modest Japanese izakaya: replace that striped awning with a dark indigo split noren over the doorway, hang two red paper lanterns beside it, and give it a restrained dark timber sign with the clear characters \u5c45\u9152\u5c4b. Keep its building footprint and surrounding arcade roof unchanged. Preserve every other building, path, coastal landing, bath, tree, camera and light exactly.",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "original": "/home/jorgen/.codex/generated_images/01a0ec11-5467-7f12-8cb3-978cf1b7bbe0/exec-411353b0-34a8-436c-b69b-58c70e84350c.png"
+    },
+    {
+      "id": "06",
+      "file": "06-arcade-attempt.png",
+      "kind": "overview correction",
+      "reference": "art/candidates/island-map-3/05-bar.png",
+      "note": "Rejected correction: canopy still reads as sitting on shop roofs.",
+      "prompt": "Correct only the shopping arcade in the southern foreground of this map. It currently has a glass vault sitting on top of shop buildings. Rebuild that same shopping strip as an actual covered pedestrian street: two parallel rows of low two-storey shops face inward across one clear pedestrian passage, and a single translucent canopy spans the gap BETWEEN the two shop rows at their eaves. Make the western and eastern open tunnel mouths visible so the walking surface under the roof is unmistakable. Keep the small izakaya with indigo noren, red lanterns and \u5c45\u9152\u5c4b sign visible at the east entrance near the apartments. Keep the strip in its existing footprint south of the fountain. Preserve all other buildings, the repaired coastal footpath, beach, sports area, baths, camera and daylight unchanged.",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "original": "/home/jorgen/.codex/generated_images/01a0ec11-5467-7f12-8cb3-978cf1b7bbe0/exec-2097b4b5-a505-480f-a64a-0a8ef943f294.png"
+    },
+    {
+      "id": "07",
+      "file": "07-overview.png",
+      "kind": "overview correction",
+      "reference": "art/candidates/island-map-3/06-arcade-attempt.png",
+      "note": "Two flat-roof rows flank a covered central walking street; east entrance and izakaya visible.",
+      "prompt": "Change ONLY the southern shopping strip into a physically correct Japanese shotengai. Remove the current barrel-glass roofs that lie on top of the storefront buildings. Build TWO clearly separate PARALLEL rows of low flat-roof shops, one on the inland edge and one on the seaward edge, with a broad walking alley BETWEEN them. Add one narrow translucent roof suspended over that central alley, LOWER than the flat shop roofs, with its front end OPEN so the paving inside and inward-facing doors on BOTH sides are visible. Keep a short uncovered entry courtyard at the right end in front of the indigo-curtained \u5c45\u9152\u5c4b izakaya; its red lanterns remain. The front shop row has plain solid flat roofs, never glass on top of buildings. Preserve the whole strip's location, surrounding square, offices, apartments, coastal path, baths, pool, camera and lighting.",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "original": "/home/jorgen/.codex/generated_images/01a0ec11-5467-7f12-8cb3-978cf1b7bbe0/exec-90b30c72-f5fd-4f63-ae3b-63ac4316d54b.png"
+    },
+    {
+      "id": "08",
+      "file": "08-west.png",
+      "kind": "west district",
+      "reference": "art/candidates/island-map-3/07-overview.png",
+      "note": "Corrected district derived from overview07.",
+      "prompt": "From this exact island map, make a closer flat-shaded 3D isometric view of its western district, preserving the same camera direction and every building's position and design. Frame the monorail station and its supported western approach on the left, tall headquarters with station skybridge above center, clustered office buildings across the back, the blue-roof canteen and fountain on the right, the two opposing flat-roof shop rows with a lower translucent roof covering their central pedestrian alley across the foreground and southwest beach below it. Retain the izakaya's timber sign, indigo curtains and red lanterns at the east arcade entrance. The repaired lower coastal footpath stays. Crop away the eastern housing, university, sports area and onsen. Keep the linked commercial buildings, muted weathered concrete, service yards and exact roof shapes from the reference. This is a magnified district of the same map, not a redesigned island; no labels or map border.",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "original": "/home/jorgen/.codex/generated_images/01a0ec11-5467-7f12-8cb3-978cf1b7bbe0/exec-ed30c974-90b2-4558-a782-011698c3f985.png"
+    },
+    {
+      "id": "09",
+      "file": "09-east.png",
+      "kind": "east district",
+      "reference": "art/candidates/island-map-3/07-overview.png",
+      "note": "Corrected district derived from overview07.",
+      "prompt": "From this exact island map make a magnified flat-shaded 3D isometric view of its eastern district, preserving the same camera direction, all building positions and designs. Frame the fountain and blue-roof canteen at the left edge, green-roof gym and outdoor pool with its directly attached north shower/changing block across the back, sports court and three-wing university in the middle, connected apartment blocks and narrow service courts in the foreground, and the walled two-part onsen on the rocky headland at upper right. Clearly retain the two separate baths, continuous privacy divider and blue and red entrance curtains. The station and tall headquarters are outside this crop. Keep the east end of the corrected two-row shotengai and its canopy over the central walking alley at the lower-left edge, with the indigo-curtained izakaya visible. Keep the muted lightly weathered concrete, connected apartment corridors, bicycle shelters and low-poly daylight look. This is a closer view of the same map, not a new arrangement; no labels or border.",
+      "dimensions": [
+        1536,
+        1024
+      ],
+      "original": "/home/jorgen/.codex/generated_images/01a0ec11-5467-7f12-8cb3-978cf1b7bbe0/exec-d8cbd9ca-e824-4e1d-b9bb-191ce217cae7.png"
+    }
+  ]
+}
