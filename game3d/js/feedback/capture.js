@@ -2,6 +2,8 @@
 // The canvas keeps its picture only until the frame is shown, so it is copied in an animation frame queued after
 // main.js's own (as menu.js's thumbnails are). The HUD is plain DOM: every visible box, border, text run, image
 // and icon is read in that same frame and drawn onto the copy (box shadows, gradients and blur are left out).
+// Text fields aren't text nodes, so what is typed in them (the romaji practice answer) is drawn from their value,
+// or their placeholder when empty.
 // capture(skip) resolves to { blob, w, h } (a PNG) or null; `skip` is an element left out (the window itself).
 const $ = (s, r = document) => r.querySelector(s);
 let layer = null;
@@ -72,6 +74,8 @@ function collect() {
     if (shown && (tag === 'img' || tag === 'canvas') && (el.width || el.naturalWidth))
       ops.push({ t: 'img', img: el, r, a, fit: cs.objectFit });
     else if (shown && tag === 'svg') ops.push({ t: 'svg', src: svgSource(el, r), r, a });
+    else if (shown && (tag === 'textarea' || (tag === 'input' && TEXT_FIELD.test(el.type))))
+      field(el, cs, r, z, a, ops);
     if (tag !== 'svg' && tag !== 'img')
       for (const n of el.childNodes) {
         if (n.nodeType === 1) walk(n, a);
@@ -85,6 +89,69 @@ function collect() {
   return ops;
 }
 
+// A text field's visible text: its value (or placeholder) laid out in the content box, clipped to the field.
+const TEXT_FIELD = /^(text|search|email|url|tel|number)$/;
+let meter = null;
+function field(el, cs, r, z, a, ops) {
+  const empty = !el.value,
+    s = empty ? el.placeholder : el.value;
+  if (!s) return;
+  const tcs = empty ? getComputedStyle(el, '::placeholder') : cs;
+  const n = (k) => parseFloat(cs[k]) * z || 0;
+  const L = r.left + n('borderLeftWidth'),
+    R = r.right - n('borderRightWidth'),
+    T = r.top + n('borderTopWidth'),
+    B = r.bottom - n('borderBottomWidth');
+  const l = L + n('paddingLeft'),
+    rt = R - n('paddingRight'),
+    t = T + n('paddingTop'),
+    b = B - n('paddingBottom');
+  const size = parseFloat(tcs.fontSize) * z;
+  const font = `${tcs.fontStyle} ${tcs.fontWeight} ${size}px ${tcs.fontFamily}`;
+  const ls = (parseFloat(tcs.letterSpacing) || 0) * z;
+  meter ||= document.createElement('canvas').getContext('2d');
+  meter.font = font;
+  meter.letterSpacing = `${ls}px`;
+  const width = (str) => meter.measureText(str).width;
+  // an input is one line, centred; a textarea wraps at spaces inside its width and scrolls
+  const lines = [];
+  if (el.tagName === 'INPUT') lines.push(s);
+  else
+    for (const para of s.split('\n')) {
+      let cur = '';
+      for (const w of para.split(/(?<=\s)/)) {
+        if (cur && width(cur + w) > rt - l) {
+          lines.push(cur);
+          cur = w;
+        } else cur += w;
+      }
+      lines.push(cur);
+    }
+  const lh = cs.lineHeight === 'normal' ? size * 1.2 : parseFloat(cs.lineHeight) * z;
+  ops.push({ t: 'clip', r: { left: L, top: T, width: R - L, height: B - T } });
+  lines.forEach((line, i) => {
+    const w = width(line),
+      align = cs.textAlign;
+    const x =
+      align === 'center' ? (l + rt - w) / 2 : align === 'right' || align === 'end' ? rt - w : l - el.scrollLeft * z;
+    const y = el.tagName === 'INPUT' ? (t + b) / 2 : t + lh / 2 + i * lh - el.scrollTop * z;
+    if (line.trim())
+      ops.push({
+        t: 'text',
+        s: line,
+        x,
+        y,
+        w,
+        font,
+        color: tcs.color,
+        ls,
+        shadow: null,
+        a,
+      });
+  });
+  ops.push({ t: 'unclip' });
+}
+
 function insetClip(cp, r, z) {
   const m = /^inset\(([^)]*)\)/.exec(cp || '');
   if (!m) return null;
@@ -95,7 +162,12 @@ function insetClip(cp, r, z) {
   const [t, rt = t, b = t, l = rt] = v.map((x, i) =>
     x.endsWith('%') ? (parseFloat(x) / 100) * (i % 2 ? r.width : r.height) : parseFloat(x) * z || 0,
   );
-  return { left: r.left + l, top: r.top + t, width: r.width - l - rt, height: r.height - t - b };
+  return {
+    left: r.left + l,
+    top: r.top + t,
+    width: r.width - l - rt,
+    height: r.height - t - b,
+  };
 }
 
 function box(cs, r, z, a, ops) {
