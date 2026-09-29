@@ -1,0 +1,272 @@
+{
+ "s1-d60-1": {
+  "expression": "surprised",
+  "words": "surprised, eyes wide open, eyebrows raised, mouth slightly open",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, male focus, a Scandinavian man in his early thirties, fair pale skin, blue eyes, (facial hair, dark-blond stubble:1.3), (silver rectangular glasses:1.2), surprised, eyes wide open, eyebrows raised, mouth slightly open, close-up of his face, plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, fat, obese, plump, (rim light, red rim light, red outline, backlighting:1.4), blush, closed eyes, smile",
+  "seed": 1,
+  "denoise": 0.6,
+  "method": "RDBT Anima masked img2img (DifferentialDiffusion) on a 260 px crop of the approved source upscaled to 1024, pasted back through the face polygon (3 px feather); glasses frame pixels pasted back from the neutral",
+  "settings": "euler_ancestral normal, 30 steps, CFG 5"
+ },
+ "s1-d60-2": {
+  "expression": "surprised",
+  "words": "surprised, eyes wide open, eyebrows raised, mouth slightly open",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, male focus, a Scandinavian man in his early thirties, fair pale skin, blue eyes, (facial hair, dark-blond stubble:1.3), (silver rectangular glasses:1.2), surprised, eyes wide open, eyebrows raised, mouth slightly open, close-up of his face, plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, fat, obese, plump, (rim light, red rim light, red outline, backlighting:1.4), blush, closed eyes, smile",
+  "seed": 2,
+  "denoise": 0.6,
+  "method": "RDBT Anima masked img2img (DifferentialDiffusion) on a 260 px crop of the approved source upscaled to 1024, pasted back through the face polygon (3 px feather); glasses frame pixels pasted back from the neutral",
+  "settings": "euler_ancestral normal, 30 steps, CFG 5"
+ },
+ "s1-d60-3": {
+  "expression": "surprised",
+  "words": "surprised, eyes wide open, eyebrows raised, mouth slightly open",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, male focus, a Scandinavian man in his early thirties, fair pale skin, blue eyes, (facial hair, dark-blond stubble:1.3), (silver rectangular glasses:1.2), surprised, eyes wide open, eyebrows raised, mouth slightly open, close-up of his face, plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, fat, obese, plump, (rim light, red rim light, red outline, backlighting:1.4), blush, closed eyes, smile",
+  "seed": 3,
+  "denoise": 0.6,
+  "method": "RDBT Anima masked img2img (DifferentialDiffusion) on a 260 px crop of the approved source upscaled to 1024, pasted back through the face polygon (3 px feather); glasses frame pixels pasted back from the neutral",
+  "settings": "euler_ancestral normal, 30 steps, CFG 5"
+ },
+ "s1-d75-1": {
+  "expression": "surprised",
+  "words": "surprised, eyes wide open, eyebrows raised, mouth slightly open",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, male focus, a Scandinavian man in his early thirties, fair pale skin, blue eyes, (facial hair, dark-blond stubble:1.3), (silver rectangular glasses:1.2), surprised, eyes wide open, eyebrows raised, mouth slightly open, close-up of his face, plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, fat, obese, plump, (rim light, red rim light, red outline, backlighting:1.4), blush, closed eyes, smile",
+  "seed": 1,
+  "denoise": 0.75,
+  "method": "RDBT Anima masked img2img (DifferentialDiffusion) on a 260 px crop of the approved source upscaled to 1024, pasted back through the face polygon (3 px feather); glasses frame pixels pasted back from the neutral",
+  "settings": "euler_ancestral normal, 30 steps, CFG 5"
+ },
+ "s1-d75-2": {
+  "expression": "surprised",
+  "words": "surprised, eyes wide open, eyebrows raised, mouth slightly open",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, male focus, a Scandinavian man in his early thirties, fair pale skin, blue eyes, (facial hair, dark-blond stubble:1.3), (silver rectangular glasses:1.2), surprised, eyes wide open, eyebrows raised, mouth slightly open, close-up of his face, plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, fat, obese, plump, (rim light, red rim light, red outline, backlighting:1.4), blush, closed eyes, smile",
+  "seed": 2,
+  "denoise": 0.75,
+  "method": "RDBT Anima masked img2img (DifferentialDiffusion) on a 260 px crop of the approved source upscaled to 1024, pasted back through the face polygon (3 px feather); glasses frame pixels pasted back from the neutral",
+  "settings": "euler_ancestral normal, 30 steps, CFG 5"
+ },
+ "s1-d75-3": {
+  "expression": "surprised",
+  "words": "surprised, eyes wide open, eyebrows raised, mouth slightly open",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, male focus, a Scandinavian man in his early thirties, fair pale skin, blue eyes, (facial hair, dark-blond stubble:1.3), (silver rectangular glasses:1.2), surprised, eyes wide open, eyebrows raised, mouth slightly open, close-up of his face, plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, fat, obese, plump, (rim light, red rim light, red outline, backlighting:1.4), blush, closed eyes, smile",
+  "seed": 3,
+  "denoise": 0.75,
+  "method": "RDBT Anima masked img2img (DifferentialDiffusion) on a 260 px crop of the approved source upscaled to 1024, pasted back through the face polygon (3 px feather); glasses frame pixels pasted back from the neutral",
+  "settings": "euler_ancestral normal, 30 steps, CFG 5"
+ },
+ "t1-d60-1": {
+  "expression": "tired",
+  "words": "tired, weary, heavy-lidded eyes, mouth closed, no smile",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, male focus, a Scandinavian man in his early thirties, fair pale skin, blue eyes, (facial hair, dark-blond stubble:1.3), (silver rectangular glasses:1.2), tired, weary, heavy-lidded eyes, mouth closed, no smile, close-up of his face, plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, fat, obese, plump, (rim light, red rim light, red outline, backlighting:1.4), blush, smile, grin, flushed cheeks",
+  "seed": 1,
+  "denoise": 0.6,
+  "method": "RDBT Anima masked img2img (DifferentialDiffusion) on a 260 px crop of the approved source upscaled to 1024, pasted back through the face polygon (3 px feather); glasses frame pixels pasted back from the neutral",
+  "settings": "euler_ancestral normal, 30 steps, CFG 5"
+ },
+ "t1-d60-2": {
+  "expression": "tired",
+  "words": "tired, weary, heavy-lidded eyes, mouth closed, no smile",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, male focus, a Scandinavian man in his early thirties, fair pale skin, blue eyes, (facial hair, dark-blond stubble:1.3), (silver rectangular glasses:1.2), tired, weary, heavy-lidded eyes, mouth closed, no smile, close-up of his face, plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, fat, obese, plump, (rim light, red rim light, red outline, backlighting:1.4), blush, smile, grin, flushed cheeks",
+  "seed": 2,
+  "denoise": 0.6,
+  "method": "RDBT Anima masked img2img (DifferentialDiffusion) on a 260 px crop of the approved source upscaled to 1024, pasted back through the face polygon (3 px feather); glasses frame pixels pasted back from the neutral",
+  "settings": "euler_ancestral normal, 30 steps, CFG 5"
+ },
+ "t1-d60-3": {
+  "expression": "tired",
+  "words": "tired, weary, heavy-lidded eyes, mouth closed, no smile",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, male focus, a Scandinavian man in his early thirties, fair pale skin, blue eyes, (facial hair, dark-blond stubble:1.3), (silver rectangular glasses:1.2), tired, weary, heavy-lidded eyes, mouth closed, no smile, close-up of his face, plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, fat, obese, plump, (rim light, red rim light, red outline, backlighting:1.4), blush, smile, grin, flushed cheeks",
+  "seed": 3,
+  "denoise": 0.6,
+  "method": "RDBT Anima masked img2img (DifferentialDiffusion) on a 260 px crop of the approved source upscaled to 1024, pasted back through the face polygon (3 px feather); glasses frame pixels pasted back from the neutral",
+  "settings": "euler_ancestral normal, 30 steps, CFG 5"
+ },
+ "t1-d75-1": {
+  "expression": "tired",
+  "words": "tired, weary, heavy-lidded eyes, mouth closed, no smile",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, male focus, a Scandinavian man in his early thirties, fair pale skin, blue eyes, (facial hair, dark-blond stubble:1.3), (silver rectangular glasses:1.2), tired, weary, heavy-lidded eyes, mouth closed, no smile, close-up of his face, plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, fat, obese, plump, (rim light, red rim light, red outline, backlighting:1.4), blush, smile, grin, flushed cheeks",
+  "seed": 1,
+  "denoise": 0.75,
+  "method": "RDBT Anima masked img2img (DifferentialDiffusion) on a 260 px crop of the approved source upscaled to 1024, pasted back through the face polygon (3 px feather); glasses frame pixels pasted back from the neutral",
+  "settings": "euler_ancestral normal, 30 steps, CFG 5"
+ },
+ "t1-d75-2": {
+  "expression": "tired",
+  "words": "tired, weary, heavy-lidded eyes, mouth closed, no smile",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, male focus, a Scandinavian man in his early thirties, fair pale skin, blue eyes, (facial hair, dark-blond stubble:1.3), (silver rectangular glasses:1.2), tired, weary, heavy-lidded eyes, mouth closed, no smile, close-up of his face, plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, fat, obese, plump, (rim light, red rim light, red outline, backlighting:1.4), blush, smile, grin, flushed cheeks",
+  "seed": 2,
+  "denoise": 0.75,
+  "method": "RDBT Anima masked img2img (DifferentialDiffusion) on a 260 px crop of the approved source upscaled to 1024, pasted back through the face polygon (3 px feather); glasses frame pixels pasted back from the neutral",
+  "settings": "euler_ancestral normal, 30 steps, CFG 5"
+ },
+ "t1-d75-3": {
+  "expression": "tired",
+  "words": "tired, weary, heavy-lidded eyes, mouth closed, no smile",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, male focus, a Scandinavian man in his early thirties, fair pale skin, blue eyes, (facial hair, dark-blond stubble:1.3), (silver rectangular glasses:1.2), tired, weary, heavy-lidded eyes, mouth closed, no smile, close-up of his face, plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, fat, obese, plump, (rim light, red rim light, red outline, backlighting:1.4), blush, smile, grin, flushed cheeks",
+  "seed": 3,
+  "denoise": 0.75,
+  "method": "RDBT Anima masked img2img (DifferentialDiffusion) on a 260 px crop of the approved source upscaled to 1024, pasted back through the face polygon (3 px feather); glasses frame pixels pasted back from the neutral",
+  "settings": "euler_ancestral normal, 30 steps, CFG 5"
+ },
+ "t2-d75-1": {
+  "expression": "tired",
+  "words": "tired, weary, half-closed eyes, dark circles under his eyes, eyebrows slightly lowered, mouth closed",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, male focus, a Scandinavian man in his early thirties, fair pale skin, blue eyes, (facial hair, dark-blond stubble:1.3), (silver rectangular glasses:1.2), tired, weary, half-closed eyes, dark circles under his eyes, eyebrows slightly lowered, mouth closed, close-up of his face, plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, fat, obese, plump, (rim light, red rim light, red outline, backlighting:1.4), blush, smile, grin, flushed cheeks",
+  "seed": 1,
+  "denoise": 0.75,
+  "method": "RDBT Anima masked img2img (DifferentialDiffusion) on a 260 px crop of the approved source upscaled to 1024, pasted back through the face polygon (3 px feather); glasses frame pixels pasted back from the neutral",
+  "settings": "euler_ancestral normal, 30 steps, CFG 5"
+ },
+ "t2-d75-2": {
+  "expression": "tired",
+  "words": "tired, weary, half-closed eyes, dark circles under his eyes, eyebrows slightly lowered, mouth closed",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, male focus, a Scandinavian man in his early thirties, fair pale skin, blue eyes, (facial hair, dark-blond stubble:1.3), (silver rectangular glasses:1.2), tired, weary, half-closed eyes, dark circles under his eyes, eyebrows slightly lowered, mouth closed, close-up of his face, plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, fat, obese, plump, (rim light, red rim light, red outline, backlighting:1.4), blush, smile, grin, flushed cheeks",
+  "seed": 2,
+  "denoise": 0.75,
+  "method": "RDBT Anima masked img2img (DifferentialDiffusion) on a 260 px crop of the approved source upscaled to 1024, pasted back through the face polygon (3 px feather); glasses frame pixels pasted back from the neutral",
+  "settings": "euler_ancestral normal, 30 steps, CFG 5"
+ },
+ "t2-d75-3": {
+  "expression": "tired",
+  "words": "tired, weary, half-closed eyes, dark circles under his eyes, eyebrows slightly lowered, mouth closed",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, male focus, a Scandinavian man in his early thirties, fair pale skin, blue eyes, (facial hair, dark-blond stubble:1.3), (silver rectangular glasses:1.2), tired, weary, half-closed eyes, dark circles under his eyes, eyebrows slightly lowered, mouth closed, close-up of his face, plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, fat, obese, plump, (rim light, red rim light, red outline, backlighting:1.4), blush, smile, grin, flushed cheeks",
+  "seed": 3,
+  "denoise": 0.75,
+  "method": "RDBT Anima masked img2img (DifferentialDiffusion) on a 260 px crop of the approved source upscaled to 1024, pasted back through the face polygon (3 px feather); glasses frame pixels pasted back from the neutral",
+  "settings": "euler_ancestral normal, 30 steps, CFG 5"
+ },
+ "s2-d60-1": {
+  "expression": "surprised",
+  "words": "surprised, eyes wide open, eyebrows raised, mouth slightly open",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, male focus, a Scandinavian man in his early thirties, fair pale skin, blue eyes, (facial hair, dark-blond stubble:1.3), (silver rectangular glasses:1.2), surprised, eyes wide open, eyebrows raised, mouth slightly open, close-up of his face, plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, fat, obese, plump, (rim light, red rim light, red outline, backlighting:1.4), blush, closed eyes, smile, frown, furrowed brow, angry",
+  "seed": 1,
+  "denoise": 0.6,
+  "method": "RDBT Anima masked img2img (DifferentialDiffusion) on a 260 px crop of the approved source upscaled to 1024, pasted back through the face polygon (3 px feather); glasses frame pixels pasted back from the neutral",
+  "settings": "euler_ancestral normal, 30 steps, CFG 5"
+ },
+ "s2-d60-2": {
+  "expression": "surprised",
+  "words": "surprised, eyes wide open, eyebrows raised, mouth slightly open",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, male focus, a Scandinavian man in his early thirties, fair pale skin, blue eyes, (facial hair, dark-blond stubble:1.3), (silver rectangular glasses:1.2), surprised, eyes wide open, eyebrows raised, mouth slightly open, close-up of his face, plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, fat, obese, plump, (rim light, red rim light, red outline, backlighting:1.4), blush, closed eyes, smile, frown, furrowed brow, angry",
+  "seed": 2,
+  "denoise": 0.6,
+  "method": "RDBT Anima masked img2img (DifferentialDiffusion) on a 260 px crop of the approved source upscaled to 1024, pasted back through the face polygon (3 px feather); glasses frame pixels pasted back from the neutral",
+  "settings": "euler_ancestral normal, 30 steps, CFG 5"
+ },
+ "s2-d60-3": {
+  "expression": "surprised",
+  "words": "surprised, eyes wide open, eyebrows raised, mouth slightly open",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, male focus, a Scandinavian man in his early thirties, fair pale skin, blue eyes, (facial hair, dark-blond stubble:1.3), (silver rectangular glasses:1.2), surprised, eyes wide open, eyebrows raised, mouth slightly open, close-up of his face, plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, fat, obese, plump, (rim light, red rim light, red outline, backlighting:1.4), blush, closed eyes, smile, frown, furrowed brow, angry",
+  "seed": 3,
+  "denoise": 0.6,
+  "method": "RDBT Anima masked img2img (DifferentialDiffusion) on a 260 px crop of the approved source upscaled to 1024, pasted back through the face polygon (3 px feather); glasses frame pixels pasted back from the neutral",
+  "settings": "euler_ancestral normal, 30 steps, CFG 5"
+ },
+ "s2-d70-1": {
+  "expression": "surprised",
+  "words": "surprised, eyes wide open, eyebrows raised, mouth slightly open",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, male focus, a Scandinavian man in his early thirties, fair pale skin, blue eyes, (facial hair, dark-blond stubble:1.3), (silver rectangular glasses:1.2), surprised, eyes wide open, eyebrows raised, mouth slightly open, close-up of his face, plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, fat, obese, plump, (rim light, red rim light, red outline, backlighting:1.4), blush, closed eyes, smile, frown, furrowed brow, angry",
+  "seed": 1,
+  "denoise": 0.7,
+  "method": "RDBT Anima masked img2img (DifferentialDiffusion) on a 260 px crop of the approved source upscaled to 1024, pasted back through the face polygon (3 px feather); glasses frame pixels pasted back from the neutral",
+  "settings": "euler_ancestral normal, 30 steps, CFG 5"
+ },
+ "s2-d70-2": {
+  "expression": "surprised",
+  "words": "surprised, eyes wide open, eyebrows raised, mouth slightly open",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, male focus, a Scandinavian man in his early thirties, fair pale skin, blue eyes, (facial hair, dark-blond stubble:1.3), (silver rectangular glasses:1.2), surprised, eyes wide open, eyebrows raised, mouth slightly open, close-up of his face, plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, fat, obese, plump, (rim light, red rim light, red outline, backlighting:1.4), blush, closed eyes, smile, frown, furrowed brow, angry",
+  "seed": 2,
+  "denoise": 0.7,
+  "method": "RDBT Anima masked img2img (DifferentialDiffusion) on a 260 px crop of the approved source upscaled to 1024, pasted back through the face polygon (3 px feather); glasses frame pixels pasted back from the neutral",
+  "settings": "euler_ancestral normal, 30 steps, CFG 5"
+ },
+ "s2-d70-3": {
+  "expression": "surprised",
+  "words": "surprised, eyes wide open, eyebrows raised, mouth slightly open",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, male focus, a Scandinavian man in his early thirties, fair pale skin, blue eyes, (facial hair, dark-blond stubble:1.3), (silver rectangular glasses:1.2), surprised, eyes wide open, eyebrows raised, mouth slightly open, close-up of his face, plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, fat, obese, plump, (rim light, red rim light, red outline, backlighting:1.4), blush, closed eyes, smile, frown, furrowed brow, angry",
+  "seed": 3,
+  "denoise": 0.7,
+  "method": "RDBT Anima masked img2img (DifferentialDiffusion) on a 260 px crop of the approved source upscaled to 1024, pasted back through the face polygon (3 px feather); glasses frame pixels pasted back from the neutral",
+  "settings": "euler_ancestral normal, 30 steps, CFG 5"
+ },
+ "t3-d65-1": {
+  "expression": "tired",
+  "words": "tired, weary, heavy-lidded eyes, mouth closed, no smile",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, male focus, a Scandinavian man in his early thirties, fair pale skin, blue eyes, (facial hair, dark-blond stubble:1.3), (silver rectangular glasses:1.2), tired, weary, heavy-lidded eyes, mouth closed, no smile, close-up of his face, plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, fat, obese, plump, (rim light, red rim light, red outline, backlighting:1.4), blush, smile, grin, flushed cheeks, frown, furrowed brow, angry",
+  "seed": 1,
+  "denoise": 0.65,
+  "method": "RDBT Anima masked img2img (DifferentialDiffusion) on a 260 px crop of the approved source upscaled to 1024, pasted back through the face polygon (3 px feather); glasses frame pixels pasted back from the neutral",
+  "settings": "euler_ancestral normal, 30 steps, CFG 5"
+ },
+ "t3-d65-2": {
+  "expression": "tired",
+  "words": "tired, weary, heavy-lidded eyes, mouth closed, no smile",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, male focus, a Scandinavian man in his early thirties, fair pale skin, blue eyes, (facial hair, dark-blond stubble:1.3), (silver rectangular glasses:1.2), tired, weary, heavy-lidded eyes, mouth closed, no smile, close-up of his face, plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, fat, obese, plump, (rim light, red rim light, red outline, backlighting:1.4), blush, smile, grin, flushed cheeks, frown, furrowed brow, angry",
+  "seed": 2,
+  "denoise": 0.65,
+  "method": "RDBT Anima masked img2img (DifferentialDiffusion) on a 260 px crop of the approved source upscaled to 1024, pasted back through the face polygon (3 px feather); glasses frame pixels pasted back from the neutral",
+  "settings": "euler_ancestral normal, 30 steps, CFG 5"
+ },
+ "t3-d65-3": {
+  "expression": "tired",
+  "words": "tired, weary, heavy-lidded eyes, mouth closed, no smile",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, male focus, a Scandinavian man in his early thirties, fair pale skin, blue eyes, (facial hair, dark-blond stubble:1.3), (silver rectangular glasses:1.2), tired, weary, heavy-lidded eyes, mouth closed, no smile, close-up of his face, plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, fat, obese, plump, (rim light, red rim light, red outline, backlighting:1.4), blush, smile, grin, flushed cheeks, frown, furrowed brow, angry",
+  "seed": 3,
+  "denoise": 0.65,
+  "method": "RDBT Anima masked img2img (DifferentialDiffusion) on a 260 px crop of the approved source upscaled to 1024, pasted back through the face polygon (3 px feather); glasses frame pixels pasted back from the neutral",
+  "settings": "euler_ancestral normal, 30 steps, CFG 5"
+ },
+ "t3-d75-1": {
+  "expression": "tired",
+  "words": "tired, weary, heavy-lidded eyes, mouth closed, no smile",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, male focus, a Scandinavian man in his early thirties, fair pale skin, blue eyes, (facial hair, dark-blond stubble:1.3), (silver rectangular glasses:1.2), tired, weary, heavy-lidded eyes, mouth closed, no smile, close-up of his face, plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, fat, obese, plump, (rim light, red rim light, red outline, backlighting:1.4), blush, smile, grin, flushed cheeks, frown, furrowed brow, angry",
+  "seed": 1,
+  "denoise": 0.75,
+  "method": "RDBT Anima masked img2img (DifferentialDiffusion) on a 260 px crop of the approved source upscaled to 1024, pasted back through the face polygon (3 px feather); glasses frame pixels pasted back from the neutral",
+  "settings": "euler_ancestral normal, 30 steps, CFG 5"
+ },
+ "t3-d75-2": {
+  "expression": "tired",
+  "words": "tired, weary, heavy-lidded eyes, mouth closed, no smile",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, male focus, a Scandinavian man in his early thirties, fair pale skin, blue eyes, (facial hair, dark-blond stubble:1.3), (silver rectangular glasses:1.2), tired, weary, heavy-lidded eyes, mouth closed, no smile, close-up of his face, plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, fat, obese, plump, (rim light, red rim light, red outline, backlighting:1.4), blush, smile, grin, flushed cheeks, frown, furrowed brow, angry",
+  "seed": 2,
+  "denoise": 0.75,
+  "method": "RDBT Anima masked img2img (DifferentialDiffusion) on a 260 px crop of the approved source upscaled to 1024, pasted back through the face polygon (3 px feather); glasses frame pixels pasted back from the neutral",
+  "settings": "euler_ancestral normal, 30 steps, CFG 5"
+ },
+ "t3-d75-3": {
+  "expression": "tired",
+  "words": "tired, weary, heavy-lidded eyes, mouth closed, no smile",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, male focus, a Scandinavian man in his early thirties, fair pale skin, blue eyes, (facial hair, dark-blond stubble:1.3), (silver rectangular glasses:1.2), tired, weary, heavy-lidded eyes, mouth closed, no smile, close-up of his face, plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, fat, obese, plump, (rim light, red rim light, red outline, backlighting:1.4), blush, smile, grin, flushed cheeks, frown, furrowed brow, angry",
+  "seed": 3,
+  "denoise": 0.75,
+  "method": "RDBT Anima masked img2img (DifferentialDiffusion) on a 260 px crop of the approved source upscaled to 1024, pasted back through the face polygon (3 px feather); glasses frame pixels pasted back from the neutral",
+  "settings": "euler_ancestral normal, 30 steps, CFG 5"
+ }
+}
