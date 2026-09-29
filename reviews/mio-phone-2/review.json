@@ -2,7 +2,7 @@
  "title": "Mio looking at her phone, round 2 (full new renders)",
  "date": "2026-09-29",
  "by": "art agent (Mio phone 2)",
- "status": "open",
+ "status": "superseded",
  "multi": false,
  "question": "Which one is Mio's portrait while she reads the server alert?",
  "media": [
@@ -169,5 +169,9 @@
    "label": "Round 1 (rejected)",
    "href": "bible/#review/mio-phone"
   }
+ ],
+ "decision": "ipa7a-1001, fix the glasses (they must match her approved portrait's); round 3 is mio-phone-3",
+ "decided": [
+  "ipa7a-1001"
  ]
 }

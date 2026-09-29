@@ -1,0 +1,214 @@
+[
+ {
+  "name": "mio-phone3-comp",
+  "method": "CPU composite (composite.py): approved frame warped lens by lens onto ipa7a-1001, old frame removed with OpenCV Telea inpainting; no diffusion"
+ },
+ {
+  "name": "mio-phone3-clean-3101",
+  "method": "comp, then the old frame's leftovers repainted (RDBT + LLLite inpainting-v2, denoise 0.75), approved frame pixels pasted back on top",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1girl, solo, Mio, a 25-year-old woman, close-up of her face looking down, messy black hair with a blunt fringe, light tan eyes, tired, small frown, plain light grey background, soft even studio light, glasses with thick taupe-grey frames, rounded rectangular lenses, clear lenses",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, text, watermark, signature, 3d, realistic, photorealistic, render, child, loli, western cartoon, comic book, flat vector, thick outlines, poster art, pop art, rim light, red rim light, backlighting, sunglasses, tinted eyewear, silver frames",
+  "seed": 3101,
+  "denoise": 0.75
+ },
+ {
+  "name": "mio-phone3-clean-3102",
+  "method": "comp, then the old frame's leftovers repainted (RDBT + LLLite inpainting-v2, denoise 0.75), approved frame pixels pasted back on top",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1girl, solo, Mio, a 25-year-old woman, close-up of her face looking down, messy black hair with a blunt fringe, light tan eyes, tired, small frown, plain light grey background, soft even studio light, glasses with thick taupe-grey frames, rounded rectangular lenses, clear lenses",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, text, watermark, signature, 3d, realistic, photorealistic, render, child, loli, western cartoon, comic book, flat vector, thick outlines, poster art, pop art, rim light, red rim light, backlighting, sunglasses, tinted eyewear, silver frames",
+  "seed": 3102,
+  "denoise": 0.75
+ },
+ {
+  "name": "mio-phone3-clean-3103",
+  "method": "comp, then the old frame's leftovers repainted (RDBT + LLLite inpainting-v2, denoise 0.75), approved frame pixels pasted back on top",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1girl, solo, Mio, a 25-year-old woman, close-up of her face looking down, messy black hair with a blunt fringe, light tan eyes, tired, small frown, plain light grey background, soft even studio light, glasses with thick taupe-grey frames, rounded rectangular lenses, clear lenses",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, text, watermark, signature, 3d, realistic, photorealistic, render, child, loli, western cartoon, comic book, flat vector, thick outlines, poster art, pop art, rim light, red rim light, backlighting, sunglasses, tinted eyewear, silver frames",
+  "seed": 3103,
+  "denoise": 0.75
+ },
+ {
+  "name": "mio-phone3-ipa-3201",
+  "method": "diffusion only: glasses band of ipa7a-1001 repainted (RDBT + LLLite inpainting-v2, denoise 0.8) with the Anima IP-Adapter 0.7 on the approved portrait",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1girl, solo, Mio, a 25-year-old woman, close-up of her face looking down, messy black hair with a blunt fringe, light tan eyes, tired, small frown, plain light grey background, soft even studio light, glasses with thick taupe-grey frames, rounded rectangular lenses, clear lenses",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, text, watermark, signature, 3d, realistic, photorealistic, render, child, loli, western cartoon, comic book, flat vector, thick outlines, poster art, pop art, rim light, red rim light, backlighting, sunglasses, tinted eyewear, silver frames",
+  "seed": 3201,
+  "denoise": 0.8
+ },
+ {
+  "name": "mio-phone3-ipa-3202",
+  "method": "diffusion only: glasses band of ipa7a-1001 repainted (RDBT + LLLite inpainting-v2, denoise 0.8) with the Anima IP-Adapter 0.7 on the approved portrait",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1girl, solo, Mio, a 25-year-old woman, close-up of her face looking down, messy black hair with a blunt fringe, light tan eyes, tired, small frown, plain light grey background, soft even studio light, glasses with thick taupe-grey frames, rounded rectangular lenses, clear lenses",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, text, watermark, signature, 3d, realistic, photorealistic, render, child, loli, western cartoon, comic book, flat vector, thick outlines, poster art, pop art, rim light, red rim light, backlighting, sunglasses, tinted eyewear, silver frames",
+  "seed": 3202,
+  "denoise": 0.8
+ },
+ {
+  "name": "mio-phone3-dip-3301",
+  "method": "diffusion only: diptych repaint, approved head left, her head right, glasses band masked (RDBT + LLLite inpainting-v2, denoise 0.8)",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 2girls, two close-up pictures side by side of the same woman wearing the same glasses with thick taupe-grey frames, rounded rectangular lenses, clear lenses, black hair with a blunt fringe, light tan eyes, plain light grey background",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, text, watermark, signature, 3d, realistic, photorealistic, render, child, loli, western cartoon, comic book, flat vector, thick outlines, poster art, pop art, rim light, red rim light, backlighting, sunglasses, tinted eyewear, silver frames",
+  "seed": 3301,
+  "denoise": 0.8
+ },
+ {
+  "name": "mio-phone3-dip-3302",
+  "method": "diffusion only: diptych repaint, approved head left, her head right, glasses band masked (RDBT + LLLite inpainting-v2, denoise 0.8)",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 2girls, two close-up pictures side by side of the same woman wearing the same glasses with thick taupe-grey frames, rounded rectangular lenses, clear lenses, black hair with a blunt fringe, light tan eyes, plain light grey background",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, text, watermark, signature, 3d, realistic, photorealistic, render, child, loli, western cartoon, comic book, flat vector, thick outlines, poster art, pop art, rim light, red rim light, backlighting, sunglasses, tinted eyewear, silver frames",
+  "seed": 3302,
+  "denoise": 0.8
+ },
+ {
+  "name": "mio-phone3-clean2-3111",
+  "method": "comp, then the old frame's leftovers repainted by the diptych (approved head left, composite right; RDBT + LLLite inpainting-v2, denoise 0.85), approved frame pixels pasted back on top",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 2girls, two close-up pictures side by side of the same woman wearing the same glasses with thick taupe-grey frames, rounded rectangular lenses, clear lenses, black hair with a blunt fringe, light tan eyes, plain light grey background",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, text, watermark, signature, 3d, realistic, photorealistic, render, child, loli, western cartoon, comic book, flat vector, thick outlines, poster art, pop art, rim light, red rim light, backlighting, sunglasses, tinted eyewear, silver frames",
+  "seed": 3111,
+  "denoise": 0.85
+ },
+ {
+  "name": "mio-phone3-clean2-3112",
+  "method": "comp, then the old frame's leftovers repainted by the diptych (approved head left, composite right; RDBT + LLLite inpainting-v2, denoise 0.85), approved frame pixels pasted back on top",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 2girls, two close-up pictures side by side of the same woman wearing the same glasses with thick taupe-grey frames, rounded rectangular lenses, clear lenses, black hair with a blunt fringe, light tan eyes, plain light grey background",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, text, watermark, signature, 3d, realistic, photorealistic, render, child, loli, western cartoon, comic book, flat vector, thick outlines, poster art, pop art, rim light, red rim light, backlighting, sunglasses, tinted eyewear, silver frames",
+  "seed": 3112,
+  "denoise": 0.85
+ },
+ {
+  "name": "mio-phone3-clean2-3113",
+  "method": "comp, then the old frame's leftovers repainted by the diptych (approved head left, composite right; RDBT + LLLite inpainting-v2, denoise 0.85), approved frame pixels pasted back on top",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 2girls, two close-up pictures side by side of the same woman wearing the same glasses with thick taupe-grey frames, rounded rectangular lenses, clear lenses, black hair with a blunt fringe, light tan eyes, plain light grey background",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, text, watermark, signature, 3d, realistic, photorealistic, render, child, loli, western cartoon, comic book, flat vector, thick outlines, poster art, pop art, rim light, red rim light, backlighting, sunglasses, tinted eyewear, silver frames",
+  "seed": 3113,
+  "denoise": 0.85
+ },
+ {
+  "name": "mio-phone3-dipk-3301",
+  "method": "diffusion only: diptych repaint, approved head left, her head right, glasses band masked except her eyes (RDBT + LLLite inpainting-v2, denoise 0.8)",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 2girls, two close-up pictures side by side of the same woman wearing the same glasses with thick taupe-grey frames, rounded rectangular lenses, clear lenses, black hair with a blunt fringe, light tan eyes, plain light grey background",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, text, watermark, signature, 3d, realistic, photorealistic, render, child, loli, western cartoon, comic book, flat vector, thick outlines, poster art, pop art, rim light, red rim light, backlighting, sunglasses, tinted eyewear, silver frames",
+  "seed": 3301,
+  "denoise": 0.8
+ },
+ {
+  "name": "mio-phone3-dipk-3302",
+  "method": "diffusion only: diptych repaint, approved head left, her head right, glasses band masked except her eyes (RDBT + LLLite inpainting-v2, denoise 0.8)",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 2girls, two close-up pictures side by side of the same woman wearing the same glasses with thick taupe-grey frames, rounded rectangular lenses, clear lenses, black hair with a blunt fringe, light tan eyes, plain light grey background",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, text, watermark, signature, 3d, realistic, photorealistic, render, child, loli, western cartoon, comic book, flat vector, thick outlines, poster art, pop art, rim light, red rim light, backlighting, sunglasses, tinted eyewear, silver frames",
+  "seed": 3302,
+  "denoise": 0.8
+ },
+ {
+  "name": "mio-phone3-dipk-3303",
+  "method": "diffusion only: diptych repaint, approved head left, her head right, glasses band masked except her eyes (RDBT + LLLite inpainting-v2, denoise 0.8)",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 2girls, two close-up pictures side by side of the same woman wearing the same glasses with thick taupe-grey frames, rounded rectangular lenses, clear lenses, black hair with a blunt fringe, light tan eyes, plain light grey background",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, text, watermark, signature, 3d, realistic, photorealistic, render, child, loli, western cartoon, comic book, flat vector, thick outlines, poster art, pop art, rim light, red rim light, backlighting, sunglasses, tinted eyewear, silver frames",
+  "seed": 3303,
+  "denoise": 0.8
+ },
+ {
+  "name": "mio-phone3-dipk-3304",
+  "method": "diffusion only: diptych repaint, approved head left, her head right, glasses band masked except her eyes (RDBT + LLLite inpainting-v2, denoise 0.8)",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 2girls, two close-up pictures side by side of the same woman wearing the same glasses with thick taupe-grey frames, rounded rectangular lenses, clear lenses, black hair with a blunt fringe, light tan eyes, plain light grey background",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, text, watermark, signature, 3d, realistic, photorealistic, render, child, loli, western cartoon, comic book, flat vector, thick outlines, poster art, pop art, rim light, red rim light, backlighting, sunglasses, tinted eyewear, silver frames",
+  "seed": 3304,
+  "denoise": 0.8
+ },
+ {
+  "name": "mio-phone3-exact-3401",
+  "method": "glasses band (minus her eyes and nose pads) repainted without glasses (RDBT + LLLite inpainting-v2, denoise 0.9), then the approved frame pixels warped on (composite.py)",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1girl, solo, Mio, a 25-year-old woman, close-up of her face looking down, messy black hair with a blunt fringe, light tan eyes, tired, small frown, plain light grey background, soft even studio light, no glasses",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, text, watermark, signature, 3d, realistic, photorealistic, render, child, loli, western cartoon, comic book, flat vector, thick outlines, poster art, pop art, rim light, red rim light, backlighting, sunglasses, tinted eyewear, glasses, eyewear, frames",
+  "seed": 3401,
+  "denoise": 0.9
+ },
+ {
+  "name": "mio-phone3-exact-3402",
+  "method": "glasses band (minus her eyes and nose pads) repainted without glasses (RDBT + LLLite inpainting-v2, denoise 0.9), then the approved frame pixels warped on (composite.py)",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1girl, solo, Mio, a 25-year-old woman, close-up of her face looking down, messy black hair with a blunt fringe, light tan eyes, tired, small frown, plain light grey background, soft even studio light, no glasses",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, text, watermark, signature, 3d, realistic, photorealistic, render, child, loli, western cartoon, comic book, flat vector, thick outlines, poster art, pop art, rim light, red rim light, backlighting, sunglasses, tinted eyewear, glasses, eyewear, frames",
+  "seed": 3402,
+  "denoise": 0.9
+ },
+ {
+  "name": "mio-phone3-exact-3403",
+  "method": "glasses band (minus her eyes and nose pads) repainted without glasses (RDBT + LLLite inpainting-v2, denoise 0.9), then the approved frame pixels warped on (composite.py)",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1girl, solo, Mio, a 25-year-old woman, close-up of her face looking down, messy black hair with a blunt fringe, light tan eyes, tired, small frown, plain light grey background, soft even studio light, no glasses",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, text, watermark, signature, 3d, realistic, photorealistic, render, child, loli, western cartoon, comic book, flat vector, thick outlines, poster art, pop art, rim light, red rim light, backlighting, sunglasses, tinted eyewear, glasses, eyewear, frames",
+  "seed": 3403,
+  "denoise": 0.9
+ },
+ {
+  "name": "mio-phone3-exact-3401-v2",
+  "method": "glasses band (minus her eyes and nose pads) repainted without glasses (RDBT + LLLite inpainting-v2, denoise 0.9), then the approved frame pixels warped on (composite.py)",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1girl, solo, Mio, a 25-year-old woman, close-up of her face looking down, messy black hair with a blunt fringe, light tan eyes, tired, small frown, plain light grey background, soft even studio light, no glasses",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, text, watermark, signature, 3d, realistic, photorealistic, render, child, loli, western cartoon, comic book, flat vector, thick outlines, poster art, pop art, rim light, red rim light, backlighting, sunglasses, tinted eyewear, glasses, eyewear, frames",
+  "seed": 3401,
+  "denoise": 0.9
+ },
+ {
+  "name": "mio-phone3-exact-3403-v2",
+  "method": "glasses band (minus her eyes and nose pads) repainted without glasses (RDBT + LLLite inpainting-v2, denoise 0.9), then the approved frame pixels warped on (composite.py)",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1girl, solo, Mio, a 25-year-old woman, close-up of her face looking down, messy black hair with a blunt fringe, light tan eyes, tired, small frown, plain light grey background, soft even studio light, no glasses",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, text, watermark, signature, 3d, realistic, photorealistic, render, child, loli, western cartoon, comic book, flat vector, thick outlines, poster art, pop art, rim light, red rim light, backlighting, sunglasses, tinted eyewear, glasses, eyewear, frames",
+  "seed": 3403,
+  "denoise": 0.9
+ },
+ {
+  "name": "mio-phone3-exact-3404-v2",
+  "method": "glasses band (minus her eyes and nose pads) repainted without glasses (RDBT + LLLite inpainting-v2, denoise 0.9), then the approved frame pixels warped on (composite.py)",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1girl, solo, Mio, a 25-year-old woman, close-up of her face looking down, messy black hair with a blunt fringe, light tan eyes, tired, small frown, plain light grey background, soft even studio light, no glasses",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, text, watermark, signature, 3d, realistic, photorealistic, render, child, loli, western cartoon, comic book, flat vector, thick outlines, poster art, pop art, rim light, red rim light, backlighting, sunglasses, tinted eyewear, glasses, eyewear, frames",
+  "seed": 3404,
+  "denoise": 0.9
+ },
+ {
+  "name": "mio-phone3-blend20-3501-exact-3401-v2",
+  "method": "mio-phone3-exact-3401-v2, then a light masked img2img over the glasses band (RDBT, denoise 0.2, no inpainting patch); nothing pasted back",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1girl, solo, Mio, a 25-year-old woman, close-up of her face looking down, messy black hair with a blunt fringe, light tan eyes, tired, small frown, plain light grey background, soft even studio light, glasses with thick taupe-grey frames, rounded rectangular lenses, clear lenses",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, text, watermark, signature, 3d, realistic, photorealistic, render, child, loli, western cartoon, comic book, flat vector, thick outlines, poster art, pop art, rim light, red rim light, backlighting, sunglasses, tinted eyewear, silver frames",
+  "seed": 3501,
+  "denoise": 0.2
+ },
+ {
+  "name": "mio-phone3-blend20-3501-exact-3403-v2",
+  "method": "mio-phone3-exact-3403-v2, then a light masked img2img over the glasses band (RDBT, denoise 0.2, no inpainting patch); nothing pasted back",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1girl, solo, Mio, a 25-year-old woman, close-up of her face looking down, messy black hair with a blunt fringe, light tan eyes, tired, small frown, plain light grey background, soft even studio light, glasses with thick taupe-grey frames, rounded rectangular lenses, clear lenses",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, text, watermark, signature, 3d, realistic, photorealistic, render, child, loli, western cartoon, comic book, flat vector, thick outlines, poster art, pop art, rim light, red rim light, backlighting, sunglasses, tinted eyewear, silver frames",
+  "seed": 3501,
+  "denoise": 0.2
+ },
+ {
+  "name": "mio-phone3-blend30-3501-exact-3401-v2",
+  "method": "mio-phone3-exact-3401-v2, then a light masked img2img over the glasses band (RDBT, denoise 0.3, no inpainting patch); nothing pasted back",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1girl, solo, Mio, a 25-year-old woman, close-up of her face looking down, messy black hair with a blunt fringe, light tan eyes, tired, small frown, plain light grey background, soft even studio light, glasses with thick taupe-grey frames, rounded rectangular lenses, clear lenses",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, text, watermark, signature, 3d, realistic, photorealistic, render, child, loli, western cartoon, comic book, flat vector, thick outlines, poster art, pop art, rim light, red rim light, backlighting, sunglasses, tinted eyewear, silver frames",
+  "seed": 3501,
+  "denoise": 0.3
+ },
+ {
+  "name": "mio-phone3-blend30-3501-exact-3403-v2",
+  "method": "mio-phone3-exact-3403-v2, then a light masked img2img over the glasses band (RDBT, denoise 0.3, no inpainting patch); nothing pasted back",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1girl, solo, Mio, a 25-year-old woman, close-up of her face looking down, messy black hair with a blunt fringe, light tan eyes, tired, small frown, plain light grey background, soft even studio light, glasses with thick taupe-grey frames, rounded rectangular lenses, clear lenses",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, text, watermark, signature, 3d, realistic, photorealistic, render, child, loli, western cartoon, comic book, flat vector, thick outlines, poster art, pop art, rim light, red rim light, backlighting, sunglasses, tinted eyewear, silver frames",
+  "seed": 3501,
+  "denoise": 0.3
+ },
+ {
+  "name": "mio-phone3-blendk20-3501-exact-3401-v2",
+  "method": "mio-phone3-exact-3401-v2, then a light masked img2img over the glasses band (RDBT, denoise 0.2, no inpainting patch); nothing pasted back; her eyes left out of the mask",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1girl, solo, Mio, a 25-year-old woman, close-up of her face looking down, messy black hair with a blunt fringe, light tan eyes, tired, small frown, plain light grey background, soft even studio light, glasses with thick taupe-grey frames, rounded rectangular lenses, clear lenses",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, text, watermark, signature, 3d, realistic, photorealistic, render, child, loli, western cartoon, comic book, flat vector, thick outlines, poster art, pop art, rim light, red rim light, backlighting, sunglasses, tinted eyewear, silver frames",
+  "seed": 3501,
+  "denoise": 0.2
+ },
+ {
+  "name": "mio-phone3-blendk25-3501-exact-3401-v2",
+  "method": "mio-phone3-exact-3401-v2, then a light masked img2img over the glasses band (RDBT, denoise 0.25, no inpainting patch); nothing pasted back; her eyes left out of the mask",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1girl, solo, Mio, a 25-year-old woman, close-up of her face looking down, messy black hair with a blunt fringe, light tan eyes, tired, small frown, plain light grey background, soft even studio light, glasses with thick taupe-grey frames, rounded rectangular lenses, clear lenses",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, text, watermark, signature, 3d, realistic, photorealistic, render, child, loli, western cartoon, comic book, flat vector, thick outlines, poster art, pop art, rim light, red rim light, backlighting, sunglasses, tinted eyewear, silver frames",
+  "seed": 3501,
+  "denoise": 0.25
+ }
+]

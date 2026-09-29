@@ -127,3 +127,16 @@ Droplets on skin, a ribbon around one wrist, nail colour, an anklet: one or two 
 
 ## Settings
 Euler A, 30 steps, CFG 5; around 1040×1568 for portrait scenes, 1216×832 for wide scenes.
+
+## Mio's glasses (tested 2026-09-29, reviews/mio-phone-3)
+
+Jørgen: "glasses are the main issue with Mio, they keep changing to different shapes." Her glasses are the ones in art/approved/mio/mio-after.webp: taupe-grey frames (about #5a4f4c), medium thickness, rounded-rectangle lenses that reach from the lash line to mid-cheek, a small hinge block with a rivet dot, clear nose pads.
+
+- Words and the IP-Adapter don't hold them. Every round-2 render came out with thin silver rectangles, and repainting the glasses band with the IP-Adapter at 0.7 plus "thick taupe-grey frames" gave black or green frames and green eyes.
+- What reliably keeps them is to put her own frame on the picture, then take it no further than a light blend (game3d/assets/portrait-candidates/mio-phone-3/mio_phone3.py, job `exact` then `blend` with her eyes kept):
+  1. Take the glasses off: repaint the glasses band without glasses (RDBT + LLLite inpainting-v2, denoise 0.9, "no glasses", `glasses, eyewear, frames` in the negative), with her eyes left out of the mask.
+  2. Put the portrait's frame on: cut the frame out of the portrait by colour (tools/portrait_candidates.py `mio_frame_mask`, leaving out the navy hair pixels) and warp it onto the new face (composite.py). Each lens moves rigidly with its eye at the same face scale, and only the bridge stretches when the head is turned differently. Take the portrait's nose pads along.
+  3. Blend lightly: a masked img2img over the glasses band at denoise 0.2, eyes left out. 0.3 already makes the frame thicker and glossier.
+- Second best, when the frame must be redrawn: the diptych repaint (the portrait's head beside hers, glasses band masked, eyes kept, LLLite inpainting-v2 at 0.8). It gets the shape and colour close, but it's a new drawing of the frame, and the lens shape varies by seed.
+- Always keep her eyes out of the mask. Every repaint that covered them changed her irises (green, glints).
+- Check each result beside the portrait at the same scale (mio-phone-3/sheet.py) and sample the frame colour. It should be close to the portrait's (median about 90, 79, 76).
