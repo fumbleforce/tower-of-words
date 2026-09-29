@@ -50,7 +50,7 @@ A part generated on its own (say, just a jacket) isn't supported yet. It would h
 
 ## Tools
 
-- `run.mjs <page> [png] [w h]`: headless run. It takes /tmp/claude-1000/browser.lock and writes any files the page hands back.
+- `run.mjs <page> [png] [w h]`: headless run through the shared browser/GPU lifecycle, bounded to five minutes including shutdown. It writes files returned by a successfully completed page; page errors and timeouts exit with failure. Software rendering requires `GL=soft`.
 - `mio-prep.js`: Mio's face and jaw fixes, copied from game3d/js/mio.js.
 - `node tools/creator/check-export.mjs`: downloads and reloads a GLB on desktop and phone, checks embedded textures, triangle counts, palette colour ranges and sampled Idle/Walk bone transforms, and captures source/export comparisons in `art/parts/shots/glb-export/`. Requires the local server on 8771; uses the shared browser/GPU policy. Captures show the creator on the left and the reloaded GLB on the right.
 
