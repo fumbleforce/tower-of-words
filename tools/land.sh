@@ -117,7 +117,9 @@ Rebase it yourself in $wt (resolve only your own files), then land again."
     say "$branch has nothing that main doesn't have"; landed="$base"; break
   fi
   say "checking $count commit(s) on main $(g rev-parse --short "$base"): $(g log --format=%s -1 "$commit")"
-  (cd "$main" && node "$main/tools/check/commit-cpu.mjs" "$commit" --since "$base") > "$LAND_LOG" 2>&1 \
+  # The checker is the rebased commit's own (the worktree is exactly that commit), so it's the one main will have.
+  checker="$wt/tools/check/commit-cpu.mjs"; [[ -f "$checker" ]] || checker="$main/tools/check/commit-cpu.mjs"
+  (cd "$main" && node "$checker" "$commit" --since "$base") > "$LAND_LOG" 2>&1 \
     || { tail -40 "$LAND_LOG" >&2; refuse "the commit checks failed on $(g rev-parse --short "$commit") (full log: $LAND_LOG); main is unchanged"; }
   grep -E '^(commit messages|commit CPU):' "$LAND_LOG" | sed 's/^/land: /'
   if fast_forward; then landed="$commit"; break; fi
