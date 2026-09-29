@@ -1,0 +1,68 @@
+#!/usr/bin/env python3
+"""Refuse commits that add binary files (outside commit_allow in tools/assets/sync.json), private paths, or text
+files over max_text_kb; once tools/assets/assets.lock.json exists, also refuse while a used asset is not pushed. Used binaries go to R2 with tools/assets/sync.py push; git keeps tools/assets/assets.lock.json.
+Installed by tools/assets/install-hook.sh. Don't bypass it with --no-verify."""
+import fnmatch
+import json
+import os
+import subprocess
+import sys
+
+root = subprocess.run(['git', 'rev-parse', '--show-toplevel'], capture_output=True, text=True).stdout.strip()
+conf = json.load(open(os.path.join(root, 'tools', 'assets', 'sync.json'), encoding='utf-8'))
+ext = {'.' + e.lower() for e in conf['binary_ext']}
+allow = conf.get('commit_allow', [])
+cap = conf.get('max_text_kb', 2048) * 1024
+
+
+def git(*args, inp=None):
+    return subprocess.run(['git', *args], cwd=root, input=inp, capture_output=True, text=True).stdout
+
+
+def allowed(p):
+    return any(p.startswith(a) if a.endswith('/') else fnmatch.fnmatch(p, a) for a in allow)
+
+
+out = git('diff', '--cached', '--numstat', '--no-renames', '--diff-filter=ACM', '-z')
+staged = {}
+for rec in out.split('\0'):
+    if rec.count('\t') >= 2:
+        a, d, p = rec.split('\t', 2)
+        staged[p] = a == '-' and d == '-'          # git's own binary detection
+if not staged:
+    sys.exit(0)
+sizes = {}
+for p, line in zip(staged, git('cat-file', '--batch-check', inp=''.join(f':{p}\n' for p in staged)).splitlines()):
+    parts = line.split()
+    sizes[p] = int(parts[2]) if len(parts) == 3 and parts[1] == 'blob' else 0
+
+bad = []
+for p, is_bin in sorted(staged.items()):
+    if 'private' in p.split('/')[:-1]:
+        bad.append((p, 'private path'))
+    elif allowed(p):
+        continue
+    elif is_bin or os.path.splitext(p)[1].lower() in ext:
+        bad.append((p, f'binary, {sizes[p] / 1024:.0f} KB'))
+    elif sizes[p] > cap:
+        bad.append((p, f'{sizes[p] / 2**20:.1f} MB of text, over {cap // 1024} KB'))
+if bad:
+    print('pre-commit: git keeps code and text only. Refused:', file=sys.stderr)
+    for p, why in bad[:30]:
+        print(f'  {p}  ({why})', file=sys.stderr)
+    if len(bad) > 30:
+        print(f'  ... {len(bad) - 30} more', file=sys.stderr)
+    print('Unstage them (git restore --staged <path>). A used asset belongs under a root in tools/assets/sync.json:\n'
+          'run python3 tools/assets/sync.py push and commit tools/assets/assets.lock.json. Everything else stays local.\n'
+          'See notes/asset-storage-proposal.md.', file=sys.stderr)
+    sys.exit(1)
+
+# once the lock file exists: every used asset on this disk must be pushed (check --offline skips the R2 listing)
+if os.path.exists(os.path.join(root, 'tools', 'assets', 'assets.lock.json')):
+    r = subprocess.run([sys.executable, os.path.join(root, 'tools', 'assets', 'sync.py'), 'check', '--offline'],
+                       cwd=root, capture_output=True, text=True)
+    if r.returncode:
+        print(r.stdout + r.stderr, file=sys.stderr)
+        print('pre-commit: used assets are not pushed. Run python3 tools/assets/sync.py push and stage '
+              'tools/assets/assets.lock.json.', file=sys.stderr)
+        sys.exit(1)

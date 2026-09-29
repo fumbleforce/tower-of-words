@@ -2,7 +2,12 @@
 
 Jørgen, in review bible-in-git (2026-09-29): "propose ideas on how to store and sync the assets outside the repo so we dont bloat it with GBs of heavy files."
 
-Nothing has been changed yet: no gitignore edits, no history rewrite, no accounts. The pick is in the review item asset-storage.
+Decided in review asset-storage (Jørgen, 2026-09-29): "let us actually go with Cloudflare for storage, and only move in used assets to cloudflare, and keep local machine as a location for WIP, rejected etc. we should try keeping the repo as lean as we possibly can, moving all resources into gitignored areas and uploading what a different machine would need."
+
+Where this stands:
+
+- Stage 1 is done: the layout (section 4), the sync tool (section 5), the pre-commit hook (section 6), the setup steps (section 7) and the stage 2 plan (section 8). Nothing has moved, the hook isn't installed and there's no bucket yet.
+- Stage 2 waits for two things: the edit freeze on game code has to end, and the R2 credentials have to be in .env.
 
 ## 1. What we have now (measured 2026-09-29)
 
@@ -58,58 +63,20 @@ The phone build loads about 24 MB: the four asset folders the code reads (charac
 
 So committing the bible and reviews as text adds under 1 MB. The heavy part is the media they point to, and that is the same question as everything else below.
 
-## 2. How the setup changes the choice
 
-- One person, one Linux desktop with the GPU. There is no second machine to sync to, so what we need is mostly (a) a small git repo, (b) not losing files, and (c) knowing which version of an asset a commit used.
-- Agents write assets all day. Whatever we pick has to work without anyone remembering a manual step, and it has to stop agents from committing binaries by accident.
+## 2. What the choice had to handle
+
+- One person and one Linux desktop with the GPU, but another machine (a laptop, a cloud agent) should be able to clone the repo and get what it needs.
+- Agents write assets all day. The setup has to work without anyone remembering a manual step, and it has to stop agents from committing binaries by accident.
 - The phone plays the GitHub Pages build and needs only the 24 MB of runtime files.
-- The bible, the asset library and the review pages run locally on 127.0.0.1:8771 and read files by their repo paths. If heavy files stay at the same paths on disk, none of those pages need changes.
-- The reward pictures must never be public. The repo is public, so private files can't go in git in any form. That includes git LFS, and it includes their file names in a manifest.
+- The bible, the asset library and the review pages run locally on 127.0.0.1:8771 and read files by their repo paths. Files that stay at the same paths on disk need no page changes.
+- The reward pictures must never be public. The repo is public, so private files can't go in git in any form, and their names can't go in a manifest either.
 
-## 3. The options
+## 3. The options that were compared
 
-All four keep the files where they are on disk, at the same paths, and stop git from tracking them. They differ in where the second copy lives and how versions are kept.
+Four options went to the review: A, Supabase Storage with a manifest in git; B, Git LFS; C, Cloudflare R2 or Backblaze B2 with a manifest; D, the local disk with an encrypted nightly backup. All four kept files at their paths on disk and stopped git from tracking them.
 
-### A. Supabase Storage with a manifest in git (the plan from 2026-09-28)
-
-- How it works: a bucket in a new project "amakawa" (eu-north-1). Files are stored under their SHA-256 (`blobs/ab/abcdef….webp`), so a changed file never overwrites the old one. A manifest in git (`assets.lock.json`: path, sha256, size) says which version belongs to which path. `tools/assets/sync.mjs push` uploads anything new and updates the manifest, and `pull` downloads whatever is missing locally. Supabase exposes an S3 API, so the script can use the S3 protocol and later move to another provider by changing a config.
-- Cost: storage is free within the plan's 100 GB (shared with the org's other projects), so $0 at 10 GB and at 50 GB. The org already has two active projects (reserview, myntbase), and the $10 compute credit covers only one, so a third project adds about $10 a month. Putting the bucket in an existing project would avoid that, but it mixes keys with an unrelated app.
-- Agents: they write files as today. The commit step runs `sync push` and commits the manifest. A pre-commit hook refuses binaries outside the game's runtime folders, so an agent that stages a picture by mistake gets an error at commit time.
-- Game and bible: unchanged. The game keeps its 24 MB of runtime files in git (or deploy-pages.sh adds them to the gh-pages build). The bible reads from disk, and a fresh clone runs `sync pull` once.
-- Private files: a second, private bucket. Files are encrypted on the desktop before upload (rclone crypt), and the private manifest lives in island/private/, which is already ignored. Supabase never sees the pictures in the clear, and the public repo never sees their names.
-- History and versions: every version stays in the bucket until a manual `gc`. Git history of the manifest shows what changed when. Supabase itself has no versioning, which is why the paths are content hashes.
-- Keys: use Supabase's S3 access keys, which only reach Storage, not the service role key, which can also read and write the database.
-- Setup: about half a day. That covers the project, two buckets, keys in .env, the sync script with its manifest, the pre-commit hook, and a first upload of about 8 GB.
-
-### B. Git LFS on GitHub
-
-- How it works: `git lfs track "*.png"` and so on. Git keeps small pointer files, and GitHub keeps the content.
-- Cost: 10 GiB storage and 10 GiB download a month are free. Past that GitHub bills per GiB (about $0.07 a GiB a month for storage and about $0.09 a GiB downloaded; check the pricing calculator). About $0 at 10 GB, and about $3 a month at 50 GB plus downloads. One fresh clone of 50 GB costs about $4 in bandwidth.
-- Agents: the least new tooling. `git add` and `git commit` work as now once the patterns are set.
-- Game and bible: the bible works from disk. Pages built from a branch serves the pointer files, not the images, so anything the game loads has to stay out of LFS, or Pages has to move to a GitHub Actions build.
-- Private files: not possible. LFS files in a public repo are public.
-- History and versions: every version of every file is kept and billed forever. You can't delete an LFS object from GitHub without deleting the whole repo. Screenshots committed through LFS would still cost storage every month.
-- Setup: an hour for new files. Moving the existing 983 MB into LFS means rewriting all history (`git lfs migrate`), with the risks in section 4.
-
-### C. Cloudflare R2 or Backblaze B2 with rclone
-
-- How it works: the same manifest and sync script as A, pointed at R2 or B2 instead of Supabase. rclone does the transfers.
-- Cost: R2 is $0.015 a GB a month with the first 10 GB free and no download fees, so $0 at 10 GB and $0.60 a month at 50 GB. B2 is $6 a TB a month with free download up to three times what you store, so $0.06 at 10 GB and $0.30 at 50 GB.
-- Agents, game, bible, private files: as in A. rclone crypt for the private bucket.
-- History and versions: as in A (content-hash paths). B2 can also keep old versions of overwritten files by itself.
-- Setup: as in A, plus a new account and a card with Cloudflare or Backblaze.
-
-### D. Heavy files stay on the local disk, with an encrypted backup
-
-- How it works: heavy folders are git-ignored and stay where they are. restic takes an encrypted snapshot of the whole repo folder (including ignored files and island/private) every night to B2 or R2, and keeps daily and weekly versions. Optionally the same manifest of paths and checksums in git, so a commit still records which asset versions it used.
-- Cost: $0 for the disk. The backup is under $1 a month at 50 GB on B2 or R2.
-- Agents: nothing to run. The pre-commit hook still refuses binaries.
-- Game and bible: unchanged, because everything is on this disk.
-- Private files: in the encrypted backup with everything else. The provider only sees encrypted chunks.
-- History and versions: restic snapshots, which you restore by date, not by commit. A clone on any other machine (a laptop, a cloud agent) has no assets until you restore a snapshot.
-- Setup: about an hour. The second 1.9 TB NVMe (nvme1n1, not mounted now) could hold a local copy as well, if it's free to use.
-
-### Summary
+Summary as it went to the review:
 
 | | A. Supabase | B. Git LFS | C. R2 / B2 | D. Local + backup |
 |---|---|---|---|---|
@@ -121,27 +88,102 @@ All four keep the files where they are on disk, at the same paths, and stop git 
 | New accounts | none (org exists) | none | Cloudflare or Backblaze | Backblaze or Cloudflare |
 | Setup | half a day | an hour, plus a history rewrite for old files | half a day | an hour |
 
-## 4. Recommendation
+B was ruled out because LFS files in a public repo are public and can never be deleted. Jørgen picked C, on R2, with one change to the proposal: only used assets go up. WIP, candidates and rejected files stay on this machine. R2 costs $0.015 a GB a month after the first 10 GB, with no download fees, so the used set (148 MB today) is free.
 
-A, Supabase, as planned. It was already chosen and paid for, the org needs no new account, the 100 GB included covers well over a year at the measured rate, and the S3 API means we can move to R2 later by changing one config if the $10 a month for a third project isn't worth it. The content-hash layout gives us versions without relying on the provider, and the private bucket is encrypted before upload.
+## 4. Layout: used and local
 
-If $10 a month for this is not worth it, C on R2 is the same design for under $1 a month.
+Git keeps code, text and one lock file, `tools/assets/assets.lock.json`, which lists every used asset's path, size, sha256 and content type. After stage 2 no binary file is tracked anywhere: .gitignore ignores the binary extensions across the whole repo, so every folder counts as a git-ignored area for images, audio, video and models. Files stay at their paths on disk. Whether a file is used depends on where it is, and on the asset library.
 
-B is ruled out by the reward pictures and by never being able to delete anything. D is the simplest and cheapest, but it leaves assets tied to this one machine.
+Used (synced to R2; another machine gets these with `pull`). These are the roots in `tools/assets/sync.json`:
 
-## 5. What stops being committed
+| Root | What | Needed by |
+|---|---|---|
+| game3d/assets/ | models, textures, portraits the game loads | the game, the Pages build |
+| game3d/audio/ | voice lines, music, ambience, sfx | the game |
+| game3d/fonts/ | the two woff2 fonts | the game |
+| art/approved/ | approved masters per bible id, the Meshy originals and the approved music | the bible, the asset library, future edits |
+| art/refs/ | Jørgen's reference images | image tools |
+| bible/shots/ | pictures the bible shows | the bible |
+| tools/voice-refs/ | voice clone clips | TTS tools |
+| tools/assets/thumbs/ | the asset library's thumbnails (the 3D ones need a browser run to remake) | the asset library page |
 
-When the chosen option is in place:
+On top of the roots, any file that the asset library (`tools/assets/scan.py`) marks approved or provisional is used, wherever it is. Today that covers 26 files outside the roots: 9 in portrait-candidates, the 5 round-9 world-look shots in game3d/shots/round-9, game3d/design/style/rough/style-0.jpg, legacy/proto2/gallery/M-02-it-guy-601.webp, 4 chibi refs in tools/characters/ref, and 6 Mio Meshy files in legacy/side/flat/meshy2 that are copies of art/approved/mio/meshy. So a picked file is backed up even if nobody moves it.
 
-- game3d/shots/: screenshots are output, not source. They get ignored and stay local, and a cleanup deletes ones older than 14 days. A screenshot that a review, doc or bible page links to goes through the sync like any other asset. game3d/qa/ is already ignored.
-- game3d/assets/portrait-candidates/ and every other candidate folder (art/parts/candidates, the contact sheets): these go through the sync, and git keeps the manifest entry.
-- art/company, legacy/proto2 and the other legacy media: through the sync, since they're reference only.
-- Meshy originals, .blend files, music masters, art/production: through the sync (they are ignored today and have no backup).
-- Stays in git: code, story, docs, JSON, the bible and reviews text, and the approved files the game loads at runtime (about 24 MB now). A pre-commit hook checks this list, so a new runtime folder has to be added on purpose.
+Excluded from the roots: game3d/assets/portrait-candidates/, game3d/assets/portraits-v2/ and portraits-v2-sheet.png (all move out in stage 2), and *.blend1.
 
-The Pages switch to the gh-pages branch (game3d/tools/deploy-pages.sh, already written and waiting on a GitHub setting) should go with this. Right now Pages publishes the whole main branch, which is near Pages' 1 GB limit.
+Measured today, 1,358 files and 214 MB are used. R2 stores each file once by content, and copies such as eric-meshy share a blob, so that comes to 1,326 blobs and 148 MB.
 
-## 6. The history we already have
+Local only (git-ignored, never uploaded) is every other binary: game3d/shots and game3d/qa (screenshots), portrait and other candidates, art/parts, art/company, art/production, art/opening, art/figures, art/puppet, art/pixel, art/island, game3d/design, tools/lang/raw, and all of legacy/. They stay where they are, so the local pages that point at them keep working. Moving them into one new "work" folder would break those pages and links, so they don't move; the .gitignore rule already makes their folders git-ignored for binaries.
+
+Private is never uploaded, whatever the config says: any path with a `private/` folder in it (island/private/, the rewards, the private bible), plus the `never` patterns in sync.json. `sync.py` refuses these paths in code, the hook refuses to commit them, and `check` fails if one ever shows up in the lock file. They have no off-machine copy. If that matters later, an encrypted restic backup of island/private (option D) is an hour's work.
+
+## 5. The sync tool: tools/assets/sync.py
+
+This is one Python file that uses only the standard library, plus PyYAML for the asset library scan. It talks to R2 over its S3 API and signs requests with SigV4 itself, so a fresh machine doesn't need boto3, the AWS SDK or rclone. It gets the used set by walking the roots and importing scan.py's entries. It doesn't copy scan.py's logic, and it doesn't write assets.json. R2 stores each file under `blobs/<first 2 of sha256>/<sha256>`, so a changed file becomes a new blob and old versions stay until someone deletes them. Hashes are cached in `.git/assets-sync-cache.json` by size and mtime.
+
+| Command | What it does |
+|---|---|
+| `python3 tools/assets/sync.py status [--remote] [--all]` | Drift: used files not in the lock file, files changed since it, lock entries missing here, entries no longer used, used files outside the roots. With `--remote` it also lists lock entries whose blob isn't in R2. |
+| `python3 tools/assets/sync.py push [--dry-run] [--prune]` | Uploads every used file whose blob isn't in R2 (8 at a time, with the sha256 as the payload hash so R2 checks it), then rewrites the lock file. It drops entries for files that are no longer used. Entries for files missing on this disk are kept unless you pass `--prune`, so a half-pulled machine can't wipe the lock. It refuses to run if the asset library scan fails. |
+| `python3 tools/assets/sync.py pull [PATH ...] [--force] [--dry-run]` | Fetches lock entries that are missing here or differ, checks each sha256 and writes atomically. Pass PATHs to fetch only those, e.g. `pull game3d` for just the game. It doesn't overwrite a file changed here unless you pass `--force`. |
+| `python3 tools/assets/sync.py check [--offline]` | Exits 1 if a used file isn't in the lock file, a used file changed without a push, a private path is in the lock file, the library scan failed, or (unless `--offline`) a lock entry's blob is missing from R2. Files missing here are only noted. |
+
+Tested against a local S3 server (SeaweedFS with signature checking on). A wrong secret was refused. The full push (1,326 blobs, 148 MB) finished in about a second, and `check` came back OK. A pull into an empty folder fetched all 1,358 files and every one matched its sha256. Pulling only game3d/audio worked, a local change was kept until `--force`, and `check` caught a blob deleted from the bucket, which `push` then re-uploaded. The test lock file was removed afterwards. The first real push is part of stage 2.
+
+## 6. The pre-commit hook
+
+`tools/assets/hooks/pre-commit`, installed with `sh tools/assets/install-hook.sh`, which sets `core.hooksPath`, so it covers every worktree. It refuses a commit that adds or changes:
+
+- a binary file, by extension (sync.json's `binary_ext`) or by git's own binary detection, unless the file matches `commit_allow` in sync.json. The allow-list is empty: the only small binaries in code folders were the two fonts, and they're synced like everything else;
+- a path with a `private/` folder in it;
+- a text file over 2 MB (`max_text_kb`; the biggest tracked text file today is three.core.js at 1.4 MB).
+
+Once the lock file exists, the hook also runs `sync.py check --offline` (under a second) and refuses the commit while a used asset isn't pushed, so nobody has to remember to push.
+
+It isn't installed yet. Right now agents still commit screenshots and candidates, and the hook would block them during the freeze. It gets installed in stage 2, step 7.
+
+## 7. Setup (Jørgen)
+
+1. In the Cloudflare dashboard, open R2 Object Storage (it asks for a payment method once, even on the free tier). Create a bucket named `amakawa-assets`, with location Automatic and public access off.
+2. Go to R2 > Manage API tokens > Create API token. Set the permission to Object Read & Write, choose "Apply to specific buckets only", pick `amakawa-assets`, and set no expiry. Copy the Access Key ID and the Secret Access Key, because the secret is shown only once. The Account ID is on the R2 overview page.
+3. Add four lines to `.env` in the repo (it's git-ignored):
+
+   ```
+   R2_ACCOUNT_ID=...
+   R2_ACCESS_KEY_ID=...
+   R2_SECRET_ACCESS_KEY=...
+   R2_BUCKET=amakawa-assets
+   ```
+
+4. Check it with `python3 tools/assets/sync.py status --remote`. It should end with `R2: 0 blobs`.
+
+## 8. Stage 2 plan
+
+It starts when the main agent says the freeze is over and step 4 of the setup works. Moves go from → to:
+
+| # | From | To | Files | Paths to update |
+|---|---|---|---|---|
+| M1 | game3d/assets/portrait-candidates/ | art/candidates/portraits/ (local) | 562 (547 tracked), 109 MB | reviews/*/review.json (9 items) and reviews/README.md, bible/facts.yaml (22 mentions), art/PROMPTS.md, TODO.md, tools/portrait_candidates.py, tools/eric_anime2.py, tools/eric_anime3.py, tools/eric_anime4.py, the gen scripts and logs inside the folder. Drop the special case in game3d/tools/deploy-pages.sh and the exclude in sync.json. Its 9 approved or provisional files stay synced at the new path through the library. |
+| M2 | game3d/assets/portraits-v2/ and portraits-v2-sheet.png | art/candidates/portraits-v2/ (local) | 20, 9 MB | none live (only old logs in tools/characters/out/mori, left as history); drop the two excludes in sync.json |
+| M3 | game3d/assets/eric-meshy/ | 14 files are byte-identical to art/approved/mc/meshy/ and get deleted; check-anim.png, check-side.png and check.html move to art/approved/mc/meshy/ | 17, 37 MB | tools/assets/scan.py, bible/facts.yaml, art/approved/README.md, docs/game/art-and-sound.md |
+| M4 | legacy/side/flat/meshy2/Meshy_AI_Neon_Bun_Guardian_biped/ (6 GLBs, not tracked) | nothing moves on disk; references point at the identical art/approved/mio/meshy/ copies | 0 | tools/assets/scan.py, bible/facts.yaml, art/approved/README.md, game3d/tools/slim_glb.py, GUIDE.md (one mention) |
+
+That's four moves covering 599 files. After them, only the library picks listed in section 4 sit outside a root, and they can stay where they are.
+
+The order:
+
+1. Preconditions: the freeze is over, no agent is running, pending work is committed (about 45 modified files today), and `status --remote` answers.
+2. scan.py keeps git-ignored paths and drops only private ones. Today it drops ignored files "since the page must work from a clone", and once every binary is ignored that would empty the library. Update the matching line in tools/assets/README.md. This has to happen before step 6.
+3. Moves M1 to M4 with their path changes. Then run `python3 tools/assets/scan.py --check`, `python3 tools/bible/build.py && node tools/bible/check.mjs`, and both fast runs (`node game3d/tools/fast.mjs 390 844` and `... 1366 860`).
+4. First upload: `sync.py push`, then `sync.py check`. Commit the lock file.
+5. Pages: change game3d/tools/deploy-pages.sh to take the runtime binaries from disk (the lock file's game3d/ entries, sha-checked) instead of `git archive`, and run it with `--push`. Jørgen switches Pages to the gh-pages branch (Settings > Pages > Source: Deploy from a branch, gh-pages, root). Check the phone build. This has to come before step 6, because Pages serves main today and main is about to lose its images.
+6. Untrack: add the binary block to .gitignore (sync.json's `binary_ext` in lower and upper case, plus `__pycache__/`), remove the old "Large approved binaries live outside git" block, then run `git rm -r --cached` on every tracked binary. That's 5,792 files and 857 MB today, and they stay on disk. Commit it as one commit.
+7. `sh tools/assets/install-hook.sh`, and add the GUIDE Process rule: never commit binaries; a used asset goes under a root in tools/assets/sync.json (or gets approved in the library), then `sync.py push`, and the lock file is committed with the change; everything else stays local.
+8. Fresh-clone test: clone into a temp folder, run `sync.py pull` and `sync.py check`, then a fast run and the bible check from there.
+
+## 9. The history we already have
+
+Decided: left as it is (option 1 below). Stage 2 stops new binaries and rewrites nothing.
 
 Stopping new binaries freezes `.git` at about 1 GB. There are three ways to handle what's already there:
 
@@ -156,6 +198,6 @@ Stopping new binaries freezes `.git` at about 1 GB. There are three ways to hand
 
 If we rewrite, do it once, in a quiet moment, after the bucket is verified, and keep a `git clone --mirror` of the old repo on disk.
 
-## 7. The bible and reviews in git
+## 10. The bible and reviews in git
 
 Once heavy files go through the sync, yes: commit bible/ (without bible/shots, which goes through the sync) and reviews/ to this repo. Together that's under 1 MB of text, and 21 review files are tracked already. It does make his review comments (feedback.json) and the bible's story and cast notes public, as the game source already is. The private bible stays in island/private/bible/, which is ignored. This replaces the question in bible-in-git.

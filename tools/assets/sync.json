@@ -1,0 +1,37 @@
+{
+  "about": "What tools/assets/sync.py uploads to R2 and what the pre-commit hook refuses. The layout and the reasons are in notes/asset-storage-proposal.md.",
+  "roots": [
+    "game3d/assets/",
+    "game3d/audio/",
+    "game3d/fonts/",
+    "art/approved/",
+    "art/refs/",
+    "bible/shots/",
+    "tools/voice-refs/",
+    "tools/assets/thumbs/"
+  ],
+  "exclude": [
+    "game3d/assets/portrait-candidates/",
+    "game3d/assets/portraits-v2/",
+    "game3d/assets/portraits-v2-sheet.png",
+    "*.blend1"
+  ],
+  "library_statuses": ["approved", "provisional"],
+  "never": [
+    "island/private/",
+    "*/private/*",
+    "private/*",
+    "*reward*"
+  ],
+  "binary_ext": [
+    "webp", "png", "jpg", "jpeg", "gif", "avif", "bmp", "tif", "tiff", "psd", "kra", "exr", "hdr",
+    "mp3", "wav", "ogg", "opus", "flac", "m4a", "aac",
+    "mp4", "webm", "mov", "mkv", "avi",
+    "glb", "gltf", "fbx", "obj", "blend", "blend1", "vrm", "ktx2", "basis",
+    "woff", "woff2", "ttf", "otf",
+    "zip", "7z", "gz", "tar", "pdf",
+    "safetensors", "ckpt", "pt", "pth", "onnx", "bin", "npy", "npz", "pkl", "pyc"
+  ],
+  "commit_allow": [],
+  "max_text_kb": 2048
+}
