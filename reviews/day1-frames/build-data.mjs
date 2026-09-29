@@ -747,7 +747,132 @@ O(
   "office.md O11; end_ticket[8]",
 );
 
+// Review-only reading aids; the source dialogue stays unchanged.
+const translations = {
+  "カードを、どうぞ。": [
+    "Kādo o, dōzo.",
+    "Your card, please."
+  ],
+  "はい、{yoroshiku}。": [
+    "Hai, yoroshiku onegaishimasu.",
+    "Yes, nice to meet you."
+  ],
+  "{ohayo}。カードを、どうぞ。": [
+    "Ohayō gozaimasu. Kādo o, dōzo.",
+    "Good morning. Your card, please."
+  ],
+  "はい、{yoroshiku}。カードを、どうぞ。": [
+    "Hai, yoroshiku onegaishimasu. Kādo o, dōzo.",
+    "Yes, nice to meet you. Your card, please."
+  ],
+  "カードを確認できません。係員にお声がけください。": [
+    "Kādo o kakunin dekimasen. Kakariin ni okoegake kudasai.",
+    "Unable to verify your card. Please speak to a member of staff."
+  ],
+  "新しいカードですね。申し訳ありません、登録は九時からです。": [
+    "Atarashii kādo desu ne. Mōshiwake arimasen, tōroku wa kuji kara desu.",
+    "It's a new card, I see. I'm sorry; registration starts at nine."
+  ],
+  "あちらで、お待ちください。": [
+    "Achira de, omachi kudasai.",
+    "Please wait over there."
+  ],
+  "{sumimasen}、{sumimasen}、通ります！": [
+    "Sumimasen, sumimasen, tōrimasu!",
+    "Excuse me, excuse me, coming through!"
+  ],
+  "共連れを検知しました！": [
+    "Tomozure o kenchi shimashita!",
+    "Tailgating detected!"
+  ],
+  "お願い、{akete}…いい子だから…": [
+    "Onegai, akete… ii ko dakara…",
+    "Please, open… be good, won't you…"
+  ],
+  "はい、アマカワ{honsha}、正面ゲートです。…はい。待ちます。": [
+    "Hai, Amakawa honsha, shōmen gēto desu. …Hai. Machimasu.",
+    "Yes, Amakawa head office, main gate. …Yes. I'll wait."
+  ],
+  "あ…すみません、ゲートが…": [
+    "A… sumimasen, gēto ga…",
+    "Ah… excuse me, the gate…"
+  ],
+  "Say 開けて (akete, open) with him": [
+    "Akete.",
+    "Open."
+  ],
+  "え？今の…？": [
+    "E? Ima no…?",
+    "Huh? What was that just now…?"
+  ],
+  "…あ、もしもし。いえ…開きました。": [
+    "…A, moshi moshi. Ie… akimashita.",
+    "…Ah, hello. No… it opened."
+  ],
+  "はい？": [
+    "Hai?",
+    "Yes?"
+  ],
+  "はい、わかってます。二人だと思ってるんです。": [
+    "Hai, wakattemasu. Futari da to omotterun desu.",
+    "Yes, I know. It thinks there are two people."
+  ],
+  "浜田さん！かばん、頭の上！": [
+    "Hamada-san! Kaban, atama no ue!",
+    "Mr. Hamada! Your bag, above your head!"
+  ],
+  "…無理ですね。": [
+    "…Muri desu ne.",
+    "…That won't work, will it."
+  ],
+  "ははっ。": [
+    "Haha.",
+    "Ha ha."
+  ],
+  "ありがとうございます！本当に、{sumimasen}…": [
+    "Arigatō gozaimasu! Hontō ni, sumimasen…",
+    "Thank you! I'm really sorry…"
+  ],
+  "どうぞ、どうぞ。": [
+    "Dōzo, dōzo.",
+    "Go ahead, go ahead."
+  ],
+  "猫はいません。": [
+    "Neko wa imasen.",
+    "There is no cat."
+  ],
+  "十時の会議、四番目の議題見た？": [
+    "Jūji no kaigi, yonbanme no gidai mita?",
+    "Did you see the fourth item on the agenda for the ten o'clock meeting?"
+  ],
+  "B2のやつでしょ。コンサルタントが来るって。": [
+    "Bī tsū no yatsu desho. Konsarutanto ga kuru tte.",
+    "The B2 thing, right? I hear a consultant's coming."
+  ],
+  "え、今日から？": [
+    "E, kyō kara?",
+    "Huh, starting today?"
+  ],
+  "{ohayo}。森と申します。ITサポートへ、ようこそ。": [
+    "Ohayō gozaimasu. Mori to mōshimasu. Ai tī sapōto e, yōkoso.",
+    "Good morning. My name is Mori. Welcome to IT support."
+  ],
+  "こちらこそ、{yoroshiku}。": [
+    "Kochira koso, yoroshiku onegaishimasu.",
+    "Likewise, nice to meet you."
+  ],
+  "あ！新しい人！": [
+    "A! Atarashii hito!",
+    "Ah! The new person!"
+  ],
+  "…三十年。": [
+    "…Sanjūnen.",
+    "…Thirty years."
+  ]
+};
+
 const data = {
+  translations,
   baseline: {
     commit: "52144e90d7873882d8f3111451c364bed9a41e7b",
     sha256: hashes,
@@ -759,6 +884,14 @@ const data = {
     { id: "office", title: "First day in B2", changes: officeChanges },
   ],
 };
+for (const section of data.sections) for (const change of section.changes) {
+  for (const frame of [...change.before, ...change.after]) {
+    const texts = [frame.text, ...(frame.options || []).map(o => typeof o === "string" ? o : o.text)];
+    for (const text of texts) if (/[ぁ-ヿ㐀-鿿]/u.test(text) && !translations[text]) {
+      throw new Error(`Missing review reading/translation: ${text}`);
+    }
+  }
+}
 writeFileSync(
   new URL("frames.json", import.meta.url),
   `${JSON.stringify(data, null, 2)}\n`,
