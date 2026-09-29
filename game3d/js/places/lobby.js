@@ -89,9 +89,9 @@ export async function lobbyPlace(game) {
         c.stage = 'in';
         r.root.visible = true;
         c.b.visible = true;
-        p.set(c.side * (0.3 + Math.random() * 0.45), 0, Z + 1.6);
+        p.set(c.side * (0.6 + Math.random() * 0.25), 0, Z + 1.6);
         c.path = [
-          [c.side * (0.45 + Math.random() * 0.35), Z - 0.9],
+          [c.side * (0.62 + Math.random() * 0.22), Z - 0.9],
           [c.side * 0.93, BZ + 0.55],
         ];
       } // in through the open doorway (|x| < 1.1), never the glass

@@ -82,7 +82,8 @@ export const isHard = (b) => b.seated || b.id === 'tama' || !!(b.rig && b.rig._n
 
 // who gives way in a push: 0 = doesn't move (seated, fixed choreography); the player gives less than people standing
 function pushWeight(game, b) {
-  if (b.seated || (b.rig && b.rig._noAvoid) || b.id === 'tama') return 0;
+  if (b.seated || (b.rig && b.rig._noAvoid)) return 0;
+  if (b.id === 'tama') return 0.2; // she gives a little (hops aside when someone is pinned against a seat)
   if (game.player && b.root === game.player.root) return game.player.scripted ? 0.5 : 0.35;
   return b.rig && b.rig._walk ? 0.6 : 1;
 }
@@ -214,6 +215,7 @@ export function softSeparate(game, dt) {
     for (const b of list) {
       if (b.seated || b.id === 'tama' || b.rig._noAvoid || b.rig._walk || !awayFromHome(P, b)) continue;
       if (pl0 && b.root === pl0.root && (moving0 || (pl0.scripted && pl0._walk))) continue;
+      if (b.x < nav.x0 || b.x > nav.x1 || b.z < nav.z0 || b.z > nav.z1) continue; // parked off the grid
       const want = b.r * CLEAR,
         c = nav.clearance(b.x, b.z);
       if (c >= want) continue;
