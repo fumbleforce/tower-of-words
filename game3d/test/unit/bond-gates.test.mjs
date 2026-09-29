@@ -70,6 +70,7 @@ test('transition gates use the departing story for walk/ride and destination for
   const step = [{ if: 'ready', then: [{ do: 'bondStep', who: 'mio', to: 3 }] }];
   mods.transitions = Object.fromEntries(['train_to_gate', 'gate_to_forecourt', 'forecourt_to_office'].map(slot =>
     [slot, { walk: step, ride: step, arrive: step }]));
+  mods.dorm_court = { nodes: {} };
   mods.dorms = { nodes: {} };
   const graph = buildGraph({ mods, cast });
   for (const [slot, expected] of Object.entries({
@@ -90,6 +91,7 @@ test('story map and facts record the same custom and default gate writes as the 
     ...[stories[0], stories[1], {}, stories[2]][i], start: 'unlock', nodes: { unlock: [3, 4, 5].map(to => ({ do: 'bondStep', who: 'mio', to })) },
   }]));
   mods.transitions = {};
+  mods.dorm_court = { nodes: {} };
   mods.dorms = { nodes: {} };
   mods.plaza = { nodes: {} };
   const graph = buildGraph({ mods, cast });

@@ -1,6 +1,6 @@
 # Places
 
-Day 1 has six places: the monorail (`train`), Honsha station’s security room with the gate (`gate`), the station forecourt and head-office entrance (`forecourt`), the fountain plaza east of it (`plaza`, a side trip), the lift (`lift`) and IT support on B2 (`office`). Eric's dorm room (`dorms`) is built but not on the route yet. For each: its things and their labels, spots, seats, zones, who is there in each period, and its small moments; also places decided but not built, and how you get between places. Forecourt route added on 2026-09-30, the plaza the same day.
+Day 1 has six places: the monorail (`train`), Honsha station’s security room with the gate (`gate`), the station forecourt and head-office entrance (`forecourt`), the fountain plaza east of it (`plaza`, a side trip), the lift (`lift`) and IT support on B2 (`office`). The dorm courtyard (`dorm_court`) and Eric's dorm room (`dorms`) are built and joined by a trip, but the day doesn't reach them yet. For each: its things and their labels, spots, seats, zones, who is there in each period, and its small moments; also places decided but not built, and how you get between places. Forecourt route added on 2026-09-30, the plaza and the dorm courtyard the same day.
 
 Elsewhere: the island as a whole is in [setting.md](setting.md); the people in [cast.md](cast.md); what happens in a place as part of a storyline is in [stories/](stories/); how places look (palette, light, style) in [art-and-sound.md](art-and-sound.md). The hooks a story can call in each place (doors, the gate, the copier) are in game3d/story/FORMAT.md.
 
@@ -10,9 +10,7 @@ The tables are checked by `node tools/facts/check.mjs`: things and their labels,
 
 The company city has dorms, a canteen, shops, a bar and a university ([setting.md](setting.md)); only the places in the list below are planned, and only the `##` sections further down are built. One line per planned place: name, id, what it is.
 
-The picked full-island layout is [island-map-4](../../reviews/island-map-4/review.json). Only the day-1 route is to be built, one chunk at a time, using the game's existing palette rather than the map's saturated colours. The following chunks replace the earlier single outdoor `path` proposal.
-
-- Dorm courtyard (`dorm_court`): the small entrance court on the west side of the map's eastern apartment cluster. Things: the dorm entry, bicycle shelter, mailboxes and planting; proposed spots: `plaza_entry`, `dorm_entry`. Laundry and sento can be background frontages. The courtyard leads through a short shared passage to Eric's room; no apartment district simulation.
+The picked full-island layout is [island-map-4](../../reviews/island-map-4/review.json). Only the day-1 route is to be built, one chunk at a time, using the game's existing palette rather than the map's saturated colours. The plaza and dorm courtyard chunks replaced the earlier single outdoor `path` proposal. No other place is planned yet.
 
 ## Getting between places
 
@@ -27,7 +25,7 @@ There are no cuts to black (Jørgen, 2026-09-28: "elegant, continuous transition
 - `forecourt` → `plaza`, walk: Eric walks east off the court along the lane between the hedge and the planting. The camera closes in on him at the lane's end and crossfades to the same close framing of him stepping onto the plaza's lane from the west, then lets go.
 - `plaza` → `forecourt`, walk: the same walk the other way, west along the lane back onto the court beside the planting.
 - `plaza` → `dorm_court`, walk: planned continuation east along the fountain's near edge into the west-facing dorm entrance court. The shop roofs stay south of the route.
-- `dorm_court` → `dorms`, walk: planned entry through the sheltered dorm door and short passage into Eric's room, arriving at his front door (`room_entry`). Camera movement and near-wall removal reveal the interior without a black cut.
+- `dorm_court` → `dorms`, walk: Eric walks in through the dorm's hall doors, past the mailboxes and into the passage at the back as the camera comes in close, then crossfades to him stepping in through his own front door to `room_entry`.
 
 The dialogue slots for each trip are in game3d/story/transitions.js (format: FORMAT.md, Transitions).
 
@@ -337,11 +335,50 @@ The story moves the clock ([systems.md](systems.md)): morning when Eric arrives,
 | `tomatte_fan` | 止まって to the fan | It stops; Kenji: あれ？ |
 | `noop` | – | An empty node for choices and triggers that do nothing. |
 
+## Dorm courtyard (`dorm_court`)
+
+The small entrance court of Eric's dorm, from the dorm cluster in the south-east of island-map-4 (Jørgen, 2026-09-30: "less saturated, uses our existing style. Focus on the area we need, not the whole island at once. Break the outdoor locations into chunks you navigate between"). The camera looks north, as in the forecourt. Eric comes in on the lane from the plaza along the west edge. At the back stands a plain four-storey concrete dorm block with balcony rails and a few lit windows. In front of it is its one-storey entrance hall, the glass front cut low like the indoor near walls, with open doors. Inside, a bank of 24 steel mailboxes and a notice board hang on the back wall, with the passage to the rooms beside them. A low stone by the door reads 社員寮 STAFF DORM. West of the hall is the coin laundry's lit shopfront (コインランドリー COIN LAUNDRY, washers behind the glass). East is the sento's low front, with a dark tiled eave, a navy ゆ BATH noren over its lit door and its chimney behind. Both are frontages only. The bicycle shelter, five bikes under a pale see-through roof, stands on the near west side. There are planters either side of the hall doors, a long bed with two trees on the east edge, and two lit bollards. Two more dorm blocks stand in the distance. Evening light: a cool dusk sky, the last of the sun low from the west, and warm light from the hall and the laundry.
+
+Walking into the hall doors, or using them, starts the trip to Eric's room. The trip in from the plaza is still to build; until then the courtyard loads directly with `?place=dorm_court`.
+
+### Things
+
+| Id | Label | What it is |
+|---|---|---|
+| `dorm_entry` | Dorm entrance | The hall's glass doors. |
+
+### Spots
+
+`plaza_entry`, `dorm_entry`
+
+### Seats
+
+None.
+
+### Zones
+
+`dorm_entry` (in the hall doorway)
+
+### Who's there when
+
+Played in the evening, after work. Nobody else is here.
+
+| Id | Usually | Schedule |
+|---|---|---|
+| `mio` | Not here. | – |
+
+### Small moments
+
+| Nodes | When | What happens |
+|---|---|---|
+| `arrive` | Arrive | The goal points to the dorm entrance. |
+| `go_in` | Reach or use the hall doors | Eric walks in to his room (the trip to `dorms`). |
+
 ## Eric's dorm room (`dorms`)
 
 The worst room in the dorm ([cast.md](cast.md)), built from the room view in [dorm-route-1](../../reviews/dorm-route-1/review.json) (2026-09-30). The camera looks north. At the back is the room itself, about 3 by 4 metres: a single bed along the left wall (grey frame, navy cover), a grey steel desk and chair on the right, and his two shipped boxes, taped shut, by the desk. A clear aisle runs from the doorway to the one window, straight ahead, which looks onto a bare concrete wall about two metres outside. In front of the room is the entry strip: the front door with a small genkan, a kitchenette on the left (sink, one hob ring, a small fridge under the counter, a kettle) and the unit bath on the right behind its closed door. The room's front wall, the strip's near wall and the bath's walls are cut low for the camera. The light is a dim cool evening, with the warm light of the ceiling lamp over the middle of the room; the fitting itself is on the ceiling the camera looks through, so it isn't drawn.
 
-It isn't on the day's route yet: the trip in from the dorm courtyard is planned (Getting between places), and until then it is loaded directly with `?place=dorms`. Nobody else is here.
+Eric arrives from the dorm courtyard (Getting between places); it also loads directly with `?place=dorms`. Nobody else is here.
 
 ### Things
 

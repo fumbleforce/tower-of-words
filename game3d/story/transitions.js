@@ -13,6 +13,8 @@ export default {
 
   gate_to_forecourt: { walk: [], arrive: [], with: [] },
 
+  dorm_court_to_dorms: { walk: [], arrive: [], with: [] },
+
   forecourt_to_office: {
     ride: [
       { do: 'liftDoors', state: 'closed' },

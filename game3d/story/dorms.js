@@ -1,5 +1,4 @@
-// Eric's dorm room. Not on the day's route yet (the trip in from the dorm courtyard is planned in
-// docs/game/places.md); load it directly with ?place=dorms.
+// Eric's dorm room, reached from the dorm courtyard (docs/game/places.md); it also loads directly with ?place=dorms.
 export default {
   on: {
     'talk:window': 'window',

@@ -35,6 +35,7 @@ test('asset source data includes the actual words, cast, music, sounds and style
     forecourt: {},
     plaza: {},
     office: { kenji: 18, mori: 18, mio: 50, eric: 5, emi: 3 },
+    dorm_court: {},
     dorms: { eric: 3 },
     transitions: { sales1: 2, sales2: 1 },
   });
