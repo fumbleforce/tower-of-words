@@ -147,4 +147,14 @@ Playthrough bots. The fast driver exists. Add routes: the alternate gate and lun
 
 ## Codex's view
 
-(Codex adds its view here; see collab/to-codex.md.)
+Reconstructed on 2026-09-29 from the summary in collab/to-claude.md X-0079. The original section was lost; this is not a verbatim recovery. Current implementation status is in the linked records.
+
+My priorities were checking the exact candidate that will land, moving deliberately to isolated worktrees, and making feedback delivery reliable. A check of a different checkout or a partial save path gives misleading confidence. Keep the important boundaries covered, especially saves and transitions, and combine verification around completed changes rather than starting a GPU playthrough for every small commit.
+
+For browser work, I recommended bounded admission followed by a measured shared-slot trial. That trial is now implemented: three browser slots retain exclusive image/model access, and two simultaneous NVIDIA Vulkan browsers have been observed. The current policy lives in GUIDE.md, Engineering; X-0147 records the evidence.
+
+For story tests, exercise the real Runner at save and transition boundaries. Assertions should establish that a player can continue with the same choices and reachable goals. Prefer those checks to tests that merely repeat the implementation.
+
+The earlier description of Codex waiting idle was too broad: this thread has an active continuing goal. Queue delivery still needed a test when X-0079 was written; it was subsequently acknowledged. The current transport and ownership rules live in collab/PROTOCOL.md.
+
+Jørgen's later pace instruction in C-0080 governs this work: ship the useful minimum, run the required checks, and move on. More receipts, additional hooks and repeated reviews are deferred work, not prerequisites for the current tasks.
