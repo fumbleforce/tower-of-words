@@ -4,10 +4,11 @@ import { disposeCharacter } from './dispose.js';
 
 const $ = id => document.getElementById(id);
 const params = new URLSearchParams(location.search);
+const round3 = params.get('round') === '3';
 const view = { yaw: 0, elevation: .08, distance: 3.2 };
 const state = window.__comparison = {
   ready: false, loading: true, body: params.get('body') === 'eric' ? 'eric' : 'mio',
-  baseline: params.get('baseline') === 'held' ? 'held' : 'source', motion: 'idle',
+  baseline: params.get('baseline') === 'held' ? 'held' : round3 ? 'previous' : 'source', motion: 'idle',
   paused: matchMedia('(prefers-reduced-motion: reduce)').matches,
   currentAction: {}, characters: null, view, retargetRest: false, error: null,
 };
@@ -15,7 +16,10 @@ const events = new AbortController();
 let lib, renderer, observer, generation = 0, dead = false, failedBody, drag, last = performance.now();
 const panels = {};
 $('body').value = state.body;
+$('previous-idle').hidden = !round3;
 $('baseline').value = state.baseline;
+$('review-link').href = `/bible/#review/creator-idle-neutral-${round3 ? '3' : '2'}`;
+$('candidate-title').textContent = round3 ? 'Relaxed idle candidate' : 'Neutral idle candidate';
 
 function status(message, error = false) {
   $('status').textContent = message;
@@ -23,15 +27,19 @@ function status(message, error = false) {
 }
 
 function describe() {
-  $('original-title').textContent = state.baseline === 'held' ? 'Current held idle' : 'Original idle';
+  $('original-title').textContent = state.baseline === 'previous' ? 'Previous neutral idle'
+    : state.baseline === 'held' ? 'Current held idle' : 'Original idle';
   $('original-caption').textContent = state.motion === 'walk' ? 'Walking with the original walk clip.'
+    : state.baseline === 'previous' ? 'Earlier breathing loop, with arms held outward.'
     : state.baseline === 'held' ? 'Frozen at 0.4 seconds, as in the creator.' : 'Full source clip, including its turns.';
-  $('candidate-caption').textContent = state.motion === 'walk' ? 'Walking with the same walk clip.' : 'Four-second breathing loop.';
+  $('candidate-caption').textContent = state.motion === 'walk' ? 'Walking with the same walk clip.'
+    : round3 ? 'Lowered arms, stronger breathing and sway.' : 'Four-second breathing loop.';
   $('play').textContent = state.paused ? 'Play animation' : 'Pause animation';
   $('walk').setAttribute('aria-pressed', String(state.motion === 'walk'));
   $('idle').setAttribute('aria-pressed', String(state.motion === 'idle'));
   state.currentAction = {
-    original: state.motion === 'walk' ? 'walk' : state.baseline === 'held' ? 'idle' : 'source',
+    original: state.motion === 'walk' ? 'walk' : state.baseline === 'previous' ? 'previous'
+      : state.baseline === 'held' ? 'idle' : 'source',
     candidate: state.motion === 'walk' ? 'walk' : 'neutral',
   };
 }
@@ -188,7 +196,8 @@ async function initialise() {
       }
       // The alias plays the original file without play('idle')'s 0.4-second hold.
       lib.anims.source = lib.anims.idle;
-      lib.anims.neutral = 'candidates/idle-neutral.glb';
+      lib.anims.previous = 'candidates/idle-neutral.glb';
+      lib.anims.neutral = `candidates/idle-neutral${round3 ? '-3' : ''}.glb`;
       lib.retargetRest = false;
     }
     if (!dead) await rebuild();
