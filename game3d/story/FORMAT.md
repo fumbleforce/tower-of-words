@@ -114,6 +114,7 @@ Any id in docs/game/cast.md "Everyone" can speak. Add names or roles under `spea
 | `type` | `word`, `prompt` (optional line shown above it), `from` | The typing prompt for a new word (docs/game/systems.md, Typing a word). On success Eric says it, it becomes known, and flag `typed_<word>` is set. Use it where a word is taught, in place of a "say it" button: `{ do: 'type', word: 'yoroshiku', from: 'mio', prompt: 'mio: Say it. Like this.' }` |
 | `kotodama` | `target` | The kotodama effect on a place's named target (docs/game/systems.md). The place does the rest; ask for new targets in REQUESTS.md. |
 | `next` | | Starts the transition to the next place (see Transitions). |
+| `trip` | `to` | Walks Eric to a neighbouring outdoor chunk (a side trip off the day's line: `forecourt` and `plaza`, both ways; places/definitions.js TRIPS). The same watched walk and crossfade as `next`, with no transition slot; the place's start node runs on arrival. |
 | `end` | | The end of the day (office only). |
 
 Sim hooks (`period`, `bond`, `bondStep`, `remember`, `fact`, `relate`, `meet`, `buy`, `take`, `save`) are under Sim data.

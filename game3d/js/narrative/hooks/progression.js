@@ -1,7 +1,7 @@
 import { WORDS } from '../../lang.js';
 import { voice, voiceThenBeat, playMusic } from '../../ui.js';
 import { sim, setPeriod, meet, buy, take, save } from '../../sim.js';
-import { NEXT } from '../../places/definitions.js';
+import { NEXT, canTravel } from '../../places/definitions.js';
 import { showEnd } from '../../end.js';
 import { flags } from '../state.js';
 import { flagKeys } from '../engine-flags.js';
@@ -52,6 +52,16 @@ export function installProgressionHooks(game, { travel }) {
   H.next = () => {
     game.transition = { from: game.place.name, to: NEXT[game.place.name], phase: 'leaving' };
     game.after = () => travel(game.transition.to);
+  };
+  // a side trip to a neighbouring chunk ({ do: 'trip', to: 'plaza' }), the same watched walk as next
+  H.trip = ({ to }) => {
+    const from = game.place.name;
+    if (!canTravel(from, to)) {
+      console.warn('trip: no way from', from, 'to', to);
+      return;
+    }
+    game.transition = { from, to, phase: 'leaving' };
+    game.after = () => travel(to);
   };
   H.end = () => {
     game.ended = true;

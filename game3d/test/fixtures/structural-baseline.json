@@ -91,6 +91,7 @@
       "train": "game3d/js/places/train.js",
       "gate": "game3d/js/places/lobby.js",
       "forecourt": "game3d/js/places/forecourt.js",
+      "plaza": "game3d/js/places/plaza.js",
       "office": "game3d/js/places/office.js",
       "dorms": "game3d/js/places/dorms.js"
     },
@@ -105,7 +106,8 @@
       "office": {
         "sat_down": "sitDown"
       },
-      "dorms": {}
+      "dorms": {},
+      "plaza": {}
     },
     "speakers": {
       "eric": {
@@ -229,6 +231,7 @@
     "gate",
     "forecourt",
     "office",
+    "plaza",
     "dorms"
   ],
   "nodes": [
@@ -338,6 +341,7 @@
     "forecourt:outside",
     "forecourt:head_office",
     "forecourt:to_b2",
+    "forecourt:to_plaza",
     "office:noop",
     "office:office_in",
     "office:mori_wait",
@@ -421,6 +425,10 @@
     "office:matte_clock",
     "office:tomatte_fan",
     "office:~kenji_mori",
+    "plaza:arrive",
+    "plaza:fountain",
+    "plaza:dorms_later",
+    "plaza:to_forecourt",
     "dorms:window",
     "dorms:boxes",
     "dorms:bed",
@@ -1156,6 +1164,18 @@
       "kind": "go",
       "labels": [],
       "cond": ""
+    },
+    {
+      "from": "forecourt:to_plaza",
+      "to": "plaza:arrive",
+      "kind": "trip",
+      "labels": []
+    },
+    {
+      "from": "plaza:to_forecourt",
+      "to": "forecourt:outside",
+      "kind": "trip",
+      "labels": []
     },
     {
       "from": "train:seat",

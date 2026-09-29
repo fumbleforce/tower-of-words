@@ -143,6 +143,7 @@ export function createPlaceLifecycle(
     startScene(name);
   }
   game.travel = travel;
+  game.prepare = prepare; // a place can build a side-trip neighbour ahead, as the player heads for it
 
   function startScene(name) {
     game.pendingStart = null;

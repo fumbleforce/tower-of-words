@@ -2,6 +2,7 @@ import * as THREE from 'three';
 import { buildForecourt } from '../scenes/forecourt.js';
 import { RoomCam } from '../cam.js';
 import { K } from '../scenes/office.js';
+import { walkOut, walkIn } from './edge-walk.js';
 import { glide } from '../move.js';
 import { PLACE_DETAILS } from './catalog.js';
 import { snapshotPeople, restorePeople } from './saved-people.js';
@@ -14,6 +15,7 @@ export function forecourtPlace(game) {
     station_exit: w.start,
     office_entrance: w.officeEntrance,
     lift_front: w.liftOut,
+    plaza_lane: w.plazaLane,
   };
   const things = {
     station_exit: {
@@ -34,6 +36,12 @@ export function forecourtPlace(game) {
       anchor: (v) => v.set(w.liftSite.x, 1.6, w.liftSite.zFront),
       spot: () => w.liftOut,
       face: () => [w.liftSite.x, w.liftSite.zBack],
+    },
+    plaza_lane: {
+      ...PLACE_DETAILS.forecourt.things.plaza_lane,
+      anchor: (v) => v.set(w.plazaLane[0] + 0.5, 1.1, w.plazaLane[1]),
+      spot: () => w.plazaLane,
+      face: () => w.plazaEdge,
     },
   };
   const P = {
@@ -66,6 +74,7 @@ export function forecourtPlace(game) {
     people: {},
     zones: {
       lift_front: (x, z) => Math.hypot(x - w.liftOut[0], z - w.liftOut[1]) < 0.42,
+      plaza_lane: (x, z) => x > w.plazaLane[0] - 0.1 && Math.abs(z - w.plazaLane[1]) < 0.9,
     },
     hooks: {
       liftOpen: () => w.setLiftOpen(1),
@@ -85,7 +94,7 @@ export function forecourtPlace(game) {
             new THREE.Vector3(w.doorX, 0, w.stationExit[1] - 0.2),
           ],
           new THREE.Vector3(0.45, 0, -0.6),
-          { follow: true, clamp: [0.2, 0.7, -0.6, 0.0], limY: 0.96 },
+          { follow: true, clamp: [0.2, 1.8, -0.6, 0.0], limY: 0.96 },
         );
       else
         cam.fit(
@@ -97,7 +106,7 @@ export function forecourtPlace(game) {
             new THREE.Vector3(0, 1.2, 2.4),
           ],
           new THREE.Vector3(0, 0, 0),
-          { follow: true, clamp: [-1.0, 1.4, -1.9, 0.6], lead: -1.6 },
+          { follow: true, clamp: [-1.0, 4.4, -1.9, 0.6], lead: -1.6 },
         );
     },
     pick(rc) {
@@ -106,6 +115,8 @@ export function forecourtPlace(game) {
     },
     update(dt, t) {
       w.update(t, dt);
+      // heading east toward the lane: build the plaza now, so the walk there needs no loading pause
+      if (game.player.root.position.x > 2.5 && !game.prepared.plaza) game.prepare?.('plaza');
     },
     snapshotState() {
       return {
@@ -120,6 +131,13 @@ export function forecourtPlace(game) {
         cam.snap(game.player.root.position);
       }
       w.setLiftOpen(saved.world?.landing > 0.5 ? 1 : 0);
+    },
+    // the walks to and from the fountain plaza (trips.js picks these by the other place's name)
+    tripOutTo: {
+      plaza: (g) => walkOut(g, cam, w.plazaLane, w.plazaEdge),
+    },
+    tripInFrom: {
+      plaza: (g) => walkIn(g, cam, w.plazaEdge, w.plazaIn, -Math.PI / 2),
     },
     async tripIn(g) {
       const eric = g.player;

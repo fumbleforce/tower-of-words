@@ -31,6 +31,7 @@ export const GLOBAL_HOOKS = [
   'take',
   'save',
   'next',
+  'trip',
   'end',
   'bond',
   'bondStep',

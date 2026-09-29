@@ -1,6 +1,6 @@
 # Places
 
-Day 1 has five places: the monorail (`train`), Honsha station’s security room with the gate (`gate`), the station forecourt and head-office entrance (`forecourt`), the lift (`lift`) and IT support on B2 (`office`). Eric's dorm room (`dorms`) is built but not on the route yet. For each: its things and their labels, spots, seats, zones, who is there in each period, and its small moments; also places decided but not built, and how you get between places. Forecourt route added on 2026-09-30.
+Day 1 has six places: the monorail (`train`), Honsha station’s security room with the gate (`gate`), the station forecourt and head-office entrance (`forecourt`), the fountain plaza east of it (`plaza`, a side trip), the lift (`lift`) and IT support on B2 (`office`). Eric's dorm room (`dorms`) is built but not on the route yet. For each: its things and their labels, spots, seats, zones, who is there in each period, and its small moments; also places decided but not built, and how you get between places. Forecourt route added on 2026-09-30, the plaza the same day.
 
 Elsewhere: the island as a whole is in [setting.md](setting.md); the people in [cast.md](cast.md); what happens in a place as part of a storyline is in [stories/](stories/); how places look (palette, light, style) in [art-and-sound.md](art-and-sound.md). The hooks a story can call in each place (doors, the gate, the copier) are in game3d/story/FORMAT.md.
 
@@ -12,7 +12,6 @@ The company city has dorms, a canteen, shops, a bar and a university ([setting.m
 
 The picked full-island layout is [island-map-4](../../reviews/island-map-4/review.json). Only the day-1 route is to be built, one chunk at a time, using the game's existing palette rather than the map's saturated colours. The following chunks replace the earlier single outdoor `path` proposal.
 
-- Fountain plaza (`plaza`): the next walkable chunk east of the office forecourt. A direct pedestrian lane follows the near edge of the central fountain toward the dorms. Things: fountain, benches and a planted verge; proposed spots: `office_entry`, `fountain_edge`, `dorm_exit`. Covered shop roofs and fronts remain south of the route, with the canteen behind the fountain. Their interiors are not part of day 1.
 - Dorm courtyard (`dorm_court`): the small entrance court on the west side of the map's eastern apartment cluster. Things: the dorm entry, bicycle shelter, mailboxes and planting; proposed spots: `plaza_entry`, `dorm_entry`. Laundry and sento can be background frontages. The courtyard leads through a short shared passage to Eric's room; no apartment district simulation.
 
 ## Getting between places
@@ -25,8 +24,9 @@ There are no cuts to black (Jørgen, 2026-09-28: "elegant, continuous transition
 - `lift` → `office`, lift: the camera stays inside the car for the whole ride. The floor display counts from 1; someone has pressed 5, where the two from Sales get out; then down to B2. The doors open on the B2 lift landing.
 - `office` → `lift`, walk: planned return from B2 into the existing lift after work, keeping Eric visible through its doors.
 - `lift` → `forecourt`, lift then walk: planned return to head office floor 1; Eric walks through its entrance lobby and out into the same forecourt.
-- `forecourt` → `plaza`, walk: planned eastward walk from the tower forecourt onto the fountain-side lane. Stitch the two small chunks at the shared path edge while the camera follows Eric.
-- `plaza` → `dorm_court`, walk: planned continuation along the fountain's near edge into the west-facing dorm entrance court. The shop roofs stay south of the route.
+- `forecourt` → `plaza`, walk: Eric walks east off the court along the lane between the hedge and the planting. The camera closes in on him at the lane's end and crossfades to the same close framing of him stepping onto the plaza's lane from the west, then lets go.
+- `plaza` → `forecourt`, walk: the same walk the other way, west along the lane back onto the court beside the planting.
+- `plaza` → `dorm_court`, walk: planned continuation east along the fountain's near edge into the west-facing dorm entrance court. The shop roofs stay south of the route.
 - `dorm_court` → `dorms`, walk: planned entry through the sheltered dorm door and short passage into Eric's room, arriving at his front door (`room_entry`). Camera movement and near-wall removal reveal the interior without a black cut.
 
 The dialogue slots for each trip are in game3d/story/transitions.js (format: FORMAT.md, Transitions).
@@ -163,7 +163,7 @@ The lobby is played in the early morning, before nine.
 
 The first outdoor chunk of the picked island-map-4 layout (Jørgen, 2026-09-29). The camera looks north, as in the security room. The station's north wall runs along the bottom, cut low like the indoor near walls, with its open doors; the blue platform roof runs along the west edge. The head office stands up and to the right: a glass-fronted ground floor, its front wall also cut low, with the tower rising behind it. Inside is a small lobby with two wall lamps, a plant and the lift to B2 in the back wall. There is no second security gate. The court between the two doors is about five metres of stone paving with a worn line along the walk. Bicycle racks and a bench stand on the west side, a planted bed with two trees on the east, and two lit bollards along the way. By the head office door stands a low stone sign reading 本社 HEAD OFFICE. A hedge on the east edge marks the lane on toward the plaza. The palette and the warm, low morning sun are the security room's.
 
-Eric walks out of the station, crosses the court under player control, and walks into the lift. The return trip and onward path to the fountain plaza are still to build.
+Eric walks out of the station, crosses the court under player control, and walks into the lift. He can also walk east along the lane to the fountain plaza and back at any time before the lift. Beyond the court the town goes on as plain background: the road south of the station, grass by the platform, and low-poly building blocks with window rows around head office. The return trip from B2 is still to build.
 
 ### Things
 
@@ -172,10 +172,11 @@ Eric walks out of the station, crosses the court under player control, and walks
 | `station_exit` | Station | The station's island-side doorway, behind Eric as he enters the court. |
 | `office_entrance` | Head office | The separate head-office entrance and short lift lobby. |
 | `lift` | Lift to B2 | The lift inside head office. |
+| `plaza_lane` | To the plaza | The east end of the lane between the hedge and the planting. |
 
 ### Spots
 
-`station_exit`, `office_entrance`, `lift_front`
+`station_exit`, `office_entrance`, `lift_front`, `plaza_lane`
 
 ### Seats
 
@@ -183,7 +184,7 @@ None.
 
 ### Zones
 
-`lift_front`
+`lift_front`, `plaza_lane` (the lane's east end: walking into it starts the walk to the plaza)
 
 ### Who's there when
 
@@ -200,6 +201,50 @@ Nobody lives here in this first outdoor chunk. The two from Sales appear inside 
 | `outside` | Arrive from the station | The goal points to the head-office lift. |
 | `head_office` | Use the head-office entrance | The goal points inside to the B2 lift. |
 | `to_b2` | Reach or use the lift | Eric boards the existing watched lift ride. |
+| `to_plaza` | Reach or use the east lane | Eric walks on to the fountain plaza. |
+
+## Fountain plaza (`plaza`)
+
+The second outdoor chunk of island-map-4, east of the forecourt, in the forecourt's palette, light and camera (looking north). A stone lane crosses the frame west to east along the near edge of a round plaza: in from the forecourt on the left, on toward the dorms on the right. North of the lane, the fountain (a round stone basin with a water-filled bowl on a column) stands in a ring of lighter paving, with a bench either side facing it and two lit bollards where the ring meets the lane. Corner beds with trees close the plaza off to either side, and the canteen, with the map's blue roof muted to the platform roof's blue-grey and three umbrellas over its terrace, stands behind. South of the lane runs a grass verge with low shrub beds (kept low so they never hide Eric), a pavement, then the shop row: seven single-storey units seen as roofs, muted awnings over their lane side and three rooftop signs (パン, くすり, カフェ). Their interiors are not part of day 1. Plain blocks stand around, among them the head office tower back to the west and the first dorm block to the east, where the lane goes on.
+
+On day 1 the plaza is a side trip with no story beat: the goal points back to the head-office lift. The east end of the lane is the planned edge toward the dorm courtyard.
+
+### Things
+
+| Id | Label | What it is |
+|---|---|---|
+| `office_lane` | To head office | The lane's west end, back to the forecourt. |
+| `fountain` | Fountain | The fountain in the middle of the plaza. |
+| `dorm_lane` | To the dorms | The lane's east end, toward the dorms (planned). |
+
+### Spots
+
+`office_entry`, `fountain_edge`, `dorm_exit`
+
+### Seats
+
+None.
+
+### Zones
+
+`office_lane` (the lane's west end), `dorm_exit` (the lane's east end)
+
+### Who's there when
+
+Nobody lives here yet.
+
+| Id | Usually | Schedule |
+|---|---|---|
+| `mio` | Hidden (she ran ahead to a server). | – |
+
+### Small moments
+
+| Nodes | When | What happens |
+|---|---|---|
+| `arrive` | Arrive from the forecourt | The goal points back west to the head-office lift. |
+| `fountain` | Talk to the fountain | A sign on the rim asks people not to throw coins; the bottom is covered in coins. |
+| `dorms_later` | Use or walk into the lane's east end | The dorms are further down this lane, for after work. |
+| `to_forecourt` | Use or walk into the lane's west end | Eric walks back to the forecourt. |
 
 ## The lift (`lift`)
 
