@@ -6,7 +6,7 @@
 #
 # Claude Code's Agent tool makes its own worktrees (isolation: "worktree"; .claude/settings.json sets the base to
 # local HEAD and symlinks node_modules, .worktreeinclude copies .env). Run `setup` in those too: it's idempotent.
-# Codex and hand-made worktrees use `new`.
+# Codex and hand-made worktrees use `new`. Either way, land the branch with tools/land.sh.
 #
 # setup links, never copies, from the main checkout:
 #   - node_modules (the folder) and .env
