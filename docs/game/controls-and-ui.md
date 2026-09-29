@@ -50,7 +50,7 @@ Every control is introduced the first time it's needed, and ambient people never
 ## The dialogue box
 
 - Direction 1, "faded" (Stage light, game3d/design/DIALOGUE-OVERLAY.md), approved by Jørgen, with a more solid grey band at the bottom on phone so the portraits' cut edge sits on solid colour.
-- The speaker's portrait stands beside the box (desktop: large on the left; phone: smaller, above the box). Eric's shows smaller on the right on his lines, and the listener dims. Narration has no portrait. The faces are in [cast.md](cast.md).
+- The speaker's portrait stands beside the box (desktop: large on the left; phone: smaller, above the box, and moved in from the side when needed so the whole picture stays on screen). Eric's shows smaller on the right on his lines, and the listener dims. Narration has no portrait. The faces are in [cast.md](cast.md).
 - The name plate and role sit above the text. Japanese words show with reading and English; taught words can be clicked to hear them.
 - The whole dialogue area moves the story on, including the empty space below the text; "Click to continue" shows for the first few lines. Eric's spoken lines finish before anyone replies (Jørgen, playtest).
 - Choices: the buttons name their object ("Point at the briefcase"). Learning a word is typing it, not clicking a choice.

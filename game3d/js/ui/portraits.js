@@ -127,9 +127,12 @@ export function layoutStage() {
       top = chin - d.f[3] * s;
     const left = el.classList.contains('left');
     const fx = phone ? vw * (left ? 0.2 : 0.8) : vw * (left ? 0.16 : 0.86);
+    // phone: slide the picture in so all of it stays on screen (Eric's 648-wide image ran 48 px past the right edge at
+    // 390 wide); the face size stays the same
+    const x = phone ? Math.max(0, Math.min(vw - d.W * s, fx - cx * s)) : fx - cx * s;
     el.style.width = d.W * s + 'px';
     el.style.height = d.H * s + 'px';
-    el.style.left = fx - cx * s + 'px';
+    el.style.left = x + 'px';
     el.style.top = top + 'px';
     // how far above the cut the image itself ends (Eric's cut-out is shorter); that bottom edge is faded out
     el.style.setProperty('--short', Math.max(0, base - (top + d.H * s)) + 'px');
