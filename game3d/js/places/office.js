@@ -296,3 +296,5 @@ export async function officePlace(game) {
   return P;
 }
 export const MIO_SEAT_Y = 0.0, MIO_SEAT_DZ = 0.0;
+    // the lift's landing doors here (places/lift.js hides them while the wall is cut away and waits on k)
+    liftLanding: { leaves: w.leaves, k: () => st.liftK },

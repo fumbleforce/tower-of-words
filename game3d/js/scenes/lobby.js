@@ -144,8 +144,9 @@ function liftDoor(x, z) {
   g.add(rbox(0.08, 0.16, 0.02, '#8d939d', { x: 0.82, y: 0.62, z: 0.05, r: 0.01, cast: false }));
   { const cb = new THREE.Mesh(new THREE.CircleGeometry(0.022, 12), emissive('#ffe2b8', '#ffc680', 1.4)); cb.position.set(0.82, 0.66, 0.062); g.add(cb); }
   g.position.set(x, 0, z + 0.02);
-  const L = { g, k: 0, want: 0, x };
-  L.update = () => { L.k += (L.want - L.k) * 0.08; leaves[0].position.x = -0.31 - L.k * 0.6; leaves[1].position.x = 0.31 + L.k * 0.6; };
+  const L = { g, k: 0, want: 0, x, leaves, t: null };
+  // eased in game time (follows the time scale), so the doors are open by the time the lift's walk-in starts
+  L.update = (t) => { const dt = L.t == null ? 1 / 60 : Math.min(0.1, Math.max(0, t - L.t)); L.t = t; L.k += (L.want - L.k) * Math.min(1, dt * 5); leaves[0].position.x = -0.31 - L.k * 0.6; leaves[1].position.x = 0.31 + L.k * 0.6; };
   return L;
 }
 function noticeScreen() {

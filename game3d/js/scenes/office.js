@@ -213,7 +213,7 @@ function counter(len) {
 function stairs() {
   const g = new THREE.Group();
   for (let i = 0; i < 7; i++) g.add(rbox(1.1, 0.12 * (i + 1), 0.34, i % 2 ? '#9ca1a8' : '#a6abb2', { z: -i * 0.34, r: 0.01 }));
-  for (let i = 0; i < 5; i++) g.add(rbox(1.1, 0.02, 0.3, '#6e747e', { y: -0.001, z: 0.9 + i * 0.0, r: 0.005, cast: false }));
+  g.add(rbox(1.1, 0.02, 0.3, '#6e747e', { y: -0.001, z: 0.9, r: 0.005, cast: false }));   // the landing plate (was five copies in the same spot)
   return g;
 }
 function table2() {
@@ -409,7 +409,7 @@ export function buildOffice() {
   const liftDoor = new THREE.Group();
   const leaves = [];
   for (const s of [-1, 1]) { const l = rbox(0.5, 1.22, 0.05, null, { x: s * 0.255, z: 0.02, r: 0.01, m: mat('#a2a8b0', { roughness: 0.5, metalness: 0.2 }) }); l.add(rbox(0.012, 1.16, 0.052, '#5d636d', { x: -s * 0.245, y: -0.58, r: 0.003, cast: false })); liftDoor.add(l); leaves.push(l); }
-  liftDoor.position.set(-5.45, 0, -3.4 + T / 2 + 0.01); root.add(liftDoor);
+  liftDoor.position.set(-5.45, 0, -3.42); root.add(liftDoor);   // leaves in the wall's thickness: they slide into the wall, not across the jambs
   root.add(rbox(0.36, 0.12, 0.03, '#1d2027', { x: -5.45, y: 1.31, z: -3.4 + T / 2 + 0.02, r: 0.01, cast: false }));
   root.add(rbox(0.07, 0.13, 0.03, '#b9bec6', { x: -4.8, y: 0.62, z: -3.4 + T / 2 + 0.02, r: 0.01 }));
   const vm = vending(true); vm.scale.setScalar(0.82); vm.position.set(-4.62, 0, -2.3); root.add(vm);   // facing the room, clear of the lift jamb
@@ -437,7 +437,8 @@ export function buildOffice() {
     root.add(lightPool(-5.45, -3.0, 0.6, { k: 0.3, sx: 1.2, sz: 0.9, color: '#ffe2b8', y: 0.014 }));
     const cb = new THREE.Mesh(new THREE.CircleGeometry(0.022, 12), emissive('#ffe2b8', '#ffc680', 1.4)); cb.position.set(-4.8, 0.66, -3.4 + T / 2 + 0.036); root.add(cb); }
     const cl = new THREE.PointLight('#ffe2b8', 0.9, 1.6, 1.8); cl.position.set(-5.45, 1.1, -3.95); scene.add(cl); }
-  root.add(rbox(2.6, 0.05, 1.0, '#b2b5b8', { x: -5.6, y: -0.02, z: -4.1, r: 0.01, cast: false }));
+  // the floor behind the lift lobby wall, under the stairwell only (it used to run on under the lift car and poke up through its floor)
+  root.add(rbox(0.66, 0.05, 1.0, '#b2b5b8', { x: -6.57, y: -0.02, z: -4.1, r: 0.01, cast: false }));
 
   // ---- main office ----
   const iob = inOutBoard(); iob.position.set(-1.6, 0.62, Z0 + T / 2 + 0.01); root.add(iob);
