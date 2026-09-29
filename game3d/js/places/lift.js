@@ -39,12 +39,14 @@ const DW = 1.0, DH = 1.34;                     // door opening
 const ZF = -0.09, ZB = ZF - D;                 // inside faces of the front and back walls
 const CUT = 0.5;                               // the front wall's height while he's inside (cutaway)
 const RIDE_ELEV = 50;                          // camera elevation for the ride, the same in both places
-const DARK = 0.08;                             // how much of a place's own light stays on during the ride
-const DARK_BG = new THREE.Color('#14171d');
+const DARK = 0.4;                              // how much of a place's own light stays on during the ride (dimmed, not black: QA round 1)
+const DARK_BG = new THREE.Color('#14171d'), BG_K = 0.45;   // the background goes this far toward DARK_BG
 // where people stand in the car (x, z in car space), all facing the doors
 const SLOTS = { eric: [0, -0.42], sales1: [-0.47, -1.3], sales2: [0.47, -1.33], with0: [0.47, -0.8], with1: [-0.47, -0.8], aside: [-0.49, -0.5] };
 // the way out at another floor (car space): along the right, then the left one behind; he steps aside for them
-const EXITS = { sales2: { delay: 0, pts: [[0.3, -0.95], [0.28, -0.1], [0.28, 0.5], [1.5, 0.55]] }, sales1: { delay: 1000, pts: [[-0.12, -1.05], [0.04, -0.6], [0.04, -0.1], [0.0, 0.5], [-1.5, 0.55]] } };
+// the second one sets off only once the first is out on the landing and turning away (not on a timer: at test
+// speed a timer let them bunch up)
+const EXITS = { sales2: { pts: [[0.3, -0.95], [0.28, -0.1], [0.28, 0.5], [2.3, 0.6]] }, sales1: { after: 'sales2', pts: [[-0.12, -1.05], [0.04, -0.6], [0.04, -0.1], [0.0, 0.5], [-2.3, 0.6]] } };
 // the two from Sales who ride up to 5 (they're in the car when it arrives at 1)
 const RIDERS = [{ id: 'sales1', worker: 9, off: '5' }, { id: 'sales2', worker: 1, off: '5' }];   // grey-haired man in a light jacket; woman with long brown hair
 
@@ -243,6 +245,8 @@ export function attachLift(game, place) {
   place.space.traverse((o) => {
     if (!o.isGroup || o === car.g) return;
     const p = o.getWorldPosition(new THREE.Vector3());
+    // the neighbour lift's stand-in car pokes out of the wall at QHD: it goes too
+    if (place.name === 'gate' && Math.abs(p.x - 1.0) < 0.02 && Math.abs(o.position.z + 0.42) < 0.01) o.visible = false;
     if (place.name === 'gate' && Math.abs(p.x - site.x) < 0.02 && Math.abs(p.z - (site.zBack - 0.42 + 0.18)) < 0.05 && Math.abs(o.position.z + 0.42) < 0.01) o.visible = false;
     if (place.name === 'office' && Math.abs(p.x - site.x) < 0.02 && Math.abs(p.z + 3.975) < 0.03) o.visible = false;
     // the office stairwell runs into the car's left side: narrow it to x -6.75..-6.25
@@ -302,11 +306,11 @@ function loop(game) {
       c.leaves[0].position.x = -DW / 4 - c.k * (DW / 2 + 0.02); c.leaves[1].position.x = DW / 4 + c.k * (DW / 2 + 0.02);
       c.land += (c.landWant - c.land) * Math.min(1, dt * 5);
       c.landing.visible = c.land > 0.01; c.landLamp.intensity = 2.2 * c.land; c.spill.material.opacity = c.land;
-      for (const rd of L.riders) { const r = rd.r; if (r._walk) { r._walk(dt); r.blob.position.set(r.root.position.x, 0.004, r.root.position.z); } else if (r.root.visible) idle(r, t + (rd.worker % 5)); }
+      for (const rd of L.riders) { const r = rd.r; if (!r._walk && r.root.visible && rd.turn != null) r.root.rotation.y += (rd.turn - r.root.rotation.y) * Math.min(1, dt * 5); if (r._walk) { r._walk(dt); r.blob.position.set(r.root.position.x, 0.004, r.root.position.z); } else if (r.root.visible) idle(r, t + (rd.worker % 5)); }
       // the displays follow the engine's floor count (hooks.floor in main.js)
       const f = game.liftFloor || L.site.floor;
-      if (f !== ride.floor) { ride.dir = FLOORS.indexOf(f) < FLOORS.indexOf(ride.floor) ? 'down' : 'up'; ride.floor = f; ride.movedAt = now; }
-      const moving = now - (ride.movedAt || 0) < 1100 && ride.on;
+      if (f !== ride.floor) { if (!ride.moving) ride.dir = FLOORS.indexOf(f) < FLOORS.indexOf(ride.floor) ? 'down' : 'up'; ride.floor = f; ride.movedAt = now; }
+      const moving = ride.on && (ride.moving || now - (ride.movedAt || 0) < 900);
       const key = f + ride.dir + moving + [...ride.lit].join();
       if (key !== shown) { shown = key; c.backInd.userData.draw(f, ride.dir, moving); c.cop.userData.draw(f, ride.dir, moving, ride.lit); }
     }
@@ -323,7 +327,7 @@ function setDark(L, k) {
   // the additive light pools on the floors (life.js) are painted light: they dim with the rest
   if (!L.pools) { L.pools = []; sc.traverse((o) => { if (o.isMesh && o.material && o.material.blending === THREE.AdditiveBlending && !isOurs(L, o)) L.pools.push([o.material, o.material.opacity]); }); }
   for (const [m, a] of L.pools) m.opacity = a * lerp(1, DARK, k);
-  if (L.bg) sc.background = L.bg.clone().lerp(DARK_BG, k);
+  if (L.bg) sc.background = L.bg.clone().lerp(DARK_BG, k * BG_K);
   L.dark = k;
 }
 function isOurs(L, o) { let q = o; while (q) { if (q === L.car.g) return true; q = q.parent; } return false; }
@@ -365,7 +369,7 @@ function turnTo(game, root, ry, secs = 0.35) {
 }
 function placeRider(L, rd, key) {
   const r = rd.r, [x, z] = slotW(L, key || rd.id);
-  r.root.position.set(x, 0, z); r.root.rotation.y = 0; r.root.visible = true; r.blob.visible = true; r.blob.position.set(x, 0.004, z);
+  rd.turn = null; r.root.position.set(x, 0, z); r.root.rotation.y = 0; r.root.visible = true; r.blob.visible = true; r.blob.position.set(x, 0.004, z);
 }
 
 // doors: the engine's liftDoors hook comes here while a ride is on (the car doors, the landing at other floors,
@@ -378,6 +382,30 @@ function hookDoors(game) {
     const L = cars.get(game.place);
     if (!L || !ride.on) return orig && orig(a);
     return doors(game, L, a.state);
+  };
+  // the floor count: the arrow follows where the car is heading (▼ on the way down to B2), set before the first step
+  const origFloor = game.hooks.floor;
+  game.hooks.floor = async (a) => {
+    if (ride.on && a && a.to != null) {
+      const i = FLOORS.indexOf(game.liftFloor || '1'), j = FLOORS.indexOf(String(a.to));
+      if (j >= 0 && j !== i) { ride.dir = j < i ? 'down' : 'up'; ride.moving = true; }
+    }
+    try { return await origFloor(a); } finally { ride.moving = false; }
+  };
+  // who's talking: the other rider turns to the speaker, and the speaker half turns to the listener
+  const say = game.ui.say.bind(game.ui);
+  game.ui.say = (speaker, text, o = {}) => {
+    const L = cars.get(game.place);
+    if (L && ride.on) {
+      const me = L.riders.find((rd) => rd.id === o.whoId && ride.aboard.has(rd.id));
+      for (const rd of L.riders) {
+        if (!ride.aboard.has(rd.id) || rd.r._walk) continue;
+        const other = L.riders.find((q) => q !== rd && ride.aboard.has(q.id));
+        if (me && rd === me && other) { rd.r.lookTarget = [other.r.root.position.x, other.r.root.position.z]; rd.turn = rd.id === 'sales1' ? 0.45 : -0.45; }
+        else if (me) { rd.r.lookTarget = [me.r.root.position.x, me.r.root.position.z]; rd.turn = rd.id === 'sales1' ? 0.3 : -0.3; }
+      }
+    }
+    return say(speaker, text, o);
   };
 }
 async function doors(game, L, state) {
@@ -394,11 +422,16 @@ async function doors(game, L, state) {
     // he steps aside to the front left corner so they can get by
     const eric = game.player;
     if (off.length) { eric.scripted = true; eric.setState('walk'); await glide(game, eric.root, slotW(L, 'aside'), 0.9); eric.setState('idle'); turnTo(game, eric.root, 0.5); }
-    const walks = off.map((rd) => {
-      const r = rd.r, e = EXITS[rd.id] || EXITS.sales2; r.lookTarget = null;
+    const out = {};   // id -> resolves when that one is out past the doors
+    const walks = [];
+    for (const rd of [...off].sort((a, b) => (EXITS[a.id]?.after ? 1 : 0) - (EXITS[b.id]?.after ? 1 : 0))) {
+      const r = rd.r, e = EXITS[rd.id] || EXITS.sales2; r.lookTarget = null; rd.turn = null;
       const pts = e.pts.map(([x, z]) => [L.site.x + x, L.site.zBack + z]);
-      return game.wait(e.delay).then(() => walkPerson(r, pts, { speed: 1.1 }));
-    });
+      const go = (e.after && out[e.after]) || Promise.resolve();
+      const w = go.then(() => walkPerson(r, pts.slice(0, 3), { speed: 1.1 }));
+      out[rd.id] = w;
+      walks.push(w.then(() => walkPerson(r, pts.slice(3), { speed: 1.1 })));
+    }
     L.leaving = Promise.all(walks).then(() => { for (const rd of off) ride.aboard.delete(rd.id); });
     await game.wait(900);
     return;
