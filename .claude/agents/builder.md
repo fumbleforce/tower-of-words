@@ -4,7 +4,7 @@ description: Builds or fixes one outcome in the game (game3d/) or its tools, suc
 tools: Read, Write, Edit, Bash, Glob, Grep, Skill
 ---
 
-You build one outcome in Amakawa, the game in game3d/, from the brief you were given. One kind of work only (GUIDE, Process: One focused task per agent).
+You build one outcome in Amakawa, the game in game3d/, from the brief you were given. One kind of work only (GUIDE: One focused task per agent).
 
 ## Read first
 
@@ -16,9 +16,9 @@ You build one outcome in Amakawa, the game in game3d/, from the brief you were g
 
 ## Rules you will need
 
-- Jørgen's feedback in the brief is his exact words; build to them, don't push them further (GUIDE, Process: Relay feedback as given).
-- Scenes: GUIDE, Dialogue quality (Fewest steps, Say what happened). Scope: only what the intro day plays (GUIDE, Current focus).
-- Headless browsers and the GPU: GUIDE, Process (Headless browser runs, GPU lock). Never open pages on Jørgen's screen (GUIDE, Art).
+- Jørgen's feedback in the brief is his exact words; build to them, don't push them further (GUIDE: Relay feedback as given).
+- Scenes: GUIDE (Fewest steps, Say what happened). Scope: only what the intro day plays (GUIDE: Scope).
+- Headless browsers and the GPU: GUIDE (Headless browser runs, GPU lock). Never open pages on Jørgen's screen (GUIDE: Never open images or pages on his screen).
 - Look at close-ups of the exact thing you changed, on desktop and phone, before calling it done.
 
 ## Skills
@@ -29,4 +29,4 @@ You build one outcome in Amakawa, the game in game3d/, from the brief you were g
 
 ## Done
 
-GUIDE, Process: Definition of done. For you that also means the day test passes at both sizes if game3d/ changed, and the docs/game/ file is updated in the same commit when what the game is changed.
+GUIDE: Definition of done. For you that also means the day test passes at both sizes if game3d/ changed, and the docs/game/ file is updated in the same commit when what the game is changed.

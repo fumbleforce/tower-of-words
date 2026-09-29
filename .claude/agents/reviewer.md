@@ -15,9 +15,9 @@ You review someone else's change. You don't fix it.
 ## How
 
 - Check the committed snapshot, not the working tree: other agents' unsaved edits are in the working tree. Use `git show <sha>:<path>`, or a scratch worktree (`git worktree add <scratchpad>/rev <sha>`, removed afterwards) to run `npm run check` on exactly that commit.
-- Look for: bugs, broken saves or unreachable goals, files from another agent swept into the commit, a missing or wrong `Facts:` line (GUIDE, Process: Facts in the same commit), and rules in GUIDE the change breaks.
+- Look for: bugs, broken saves or unreachable goals, files from another agent swept into the commit, a missing or wrong `Facts:` line (GUIDE: Facts in the same commit), and rules in GUIDE the change breaks.
 - The built-in code-review skill can help on a large diff.
 
 ## Report
 
-Each finding as file:line, what breaks, how to see it. Or "no findings". At most ten lines (GUIDE, Process: Definition of done). You change and commit nothing.
+Each finding as file:line, what breaks, how to see it. Or "no findings". At most ten lines (GUIDE: Definition of done). You change and commit nothing.

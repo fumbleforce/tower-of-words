@@ -13,11 +13,11 @@ That script doesn't exist yet (tool pending; it waits for the code freeze to end
 
 The main checkout still has other agents' unsaved work in it, so main is advanced there with a fast-forward merge, which updates only the files the branch changed and refuses if that would overwrite someone's unsaved edit. Never reset, stash or check out in the main checkout.
 
-1. In the task worktree: commit your work (GUIDE, Process: Definition of done).
+1. In the task worktree: commit your work (GUIDE: Definition of done).
 2. `git rebase main`. Resolve conflicts in your own files only; if a conflict is in another agent's file, stop and report it.
 3. In the worktree, on the rebased commit: `npm run check`, and if game3d/ changed, the day test (fast-qa skill).
 4. Take the land lock: `mkdir /tmp/claude-1000/land.lock` and write your name to its `owner` file. If it's held, wait and retry; never delete someone else's.
 5. In the main checkout: `git merge --ff-only <branch>`. If main moved since step 2 it refuses: release the lock and go back to step 2. If it refuses because of unsaved changes in the main checkout, stop and report which files; they belong to another agent.
 6. Release the lock (`rm -r` only if the owner file has your name), remove the worktree and delete the branch.
 
-No push to GitHub unless Jørgen asked (GUIDE, Process: Definition of done).
+No push to GitHub unless Jørgen asked (GUIDE: Definition of done).
