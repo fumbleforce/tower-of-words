@@ -56,53 +56,51 @@
             },
             {
               "kind": "action",
-              "text": "She notices you waiting and cups a hand over the phone."
+              "text": "She notices your new staff card and cups a hand over the phone."
             },
             {
               "kind": "say",
-              "text": "あ、あなたも新人？",
-              "speaker": "aoi"
-            },
-            {
-              "kind": "say",
-              "text": "I'm in IT, on B2.",
-              "speaker": "eric"
-            },
-            {
-              "kind": "say",
-              "text": "あっ。……ごめん。",
-              "speaker": "aoi"
-            },
-            {
-              "kind": "say",
-              "text": "Is that bad?",
-              "speaker": "eric"
-            },
-            {
-              "kind": "say",
-              "text": "ううん！窓が好きなだけ。",
+              "text": "もしかして、新人さん？",
               "speaker": "aoi"
             },
             {
               "kind": "action",
-              "text": "She gives a small apologetic bow before returning to her call."
+              "text": "You show her the card. She reads the B2 assignment on it."
+            },
+            {
+              "kind": "say",
+              "text": "B2？あっ。……ごめん。",
+              "speaker": "aoi"
             },
             {
               "kind": "action",
-              "text": "If nobody has pointed out the free seat yet: the passenger nods toward it. The goal becomes “Sit down.”"
+              "text": "You look from her face to the card."
+            },
+            {
+              "kind": "say",
+              "text": "ううん、窓が好きなだけ。",
+              "speaker": "aoi"
+            },
+            {
+              "kind": "action",
+              "text": "She gives a small apologetic bow. If nobody has pointed out the free seat yet, she nods toward it in the same gesture; the goal becomes “Sit down.”"
+            },
+            {
+              "kind": "action",
+              "text": "She returns to her call."
             },
             {
               "kind": "action",
               "text": "You can keep exploring the carriage. Sitting beside Mio starts her conversation."
             }
           ],
-          "staging": "Keep the phone call and seated position. Add the hand-over-phone gesture and small bow. Aoi recognises “IT” and “B2”; Eric responds to her apology and face, not to Japanese he has not learned. The viewer supplies Japanese readings and English meanings; implementation must preserve the setting.md requirement that English is available."
+          "staging": "Aoi looks at Eric’s existing staff card and reads its B2 assignment; Eric has no fluent answer to her Japanese. Keep her seated phone call. Combine her bow and conditional seat hint. The basement discomfort sets up Mio’s later reaction; do not change or repeat Mio’s explanation here."
         },
         {
           "id": "train-bun",
           "kind": "replace",
-          "title": "A snack from the mainland",
-          "summary": "She shares something she brought back because she is tired of the company snacks.",
+          "title": "She brought back too much",
+          "summary": "Help her close an overfilled shopping bag before she returns to island life.",
           "titles": [
             "Current encounter",
             "Proposed encounter"
@@ -146,31 +144,25 @@
             },
             {
               "kind": "action",
-              "text": "She opens her bag, then offers you a small wrapped cake."
+              "text": "She is trying to zip her shopping bag shut. She looks up and points to the bulging top."
             },
             {
               "kind": "say",
-              "text": "よかったら、どうぞ。駅で二つ買っちゃって。",
-              "speaker": "bun"
-            },
-            {
-              "kind": "say",
-              "text": "For me? Thank you.",
-              "speaker": "eric"
-            },
-            {
-              "kind": "say",
-              "text": "会社のお菓子、もう飽きちゃって。",
+              "text": "ちょっと、ここ押さえてくれる？",
               "speaker": "bun"
             },
             {
               "kind": "action",
-              "text": "She opens the other cake for herself."
+              "text": "You hold the top down while she closes the zip."
             },
             {
               "kind": "say",
-              "text": "I haven't had breakfast. This is very welcome.",
-              "speaker": "eric"
+              "text": "ありがとう。島に戻る前って、つい買いすぎちゃって。",
+              "speaker": "bun"
+            },
+            {
+              "kind": "action",
+              "text": "She pats the closed bag with relief."
             },
             {
               "kind": "action",
@@ -181,7 +173,7 @@
               "text": "You can keep exploring the carriage. Sitting beside Mio starts her conversation."
             }
           ],
-          "staging": "Show two small wrapped cakes and stage the offer/acceptance. This is a tiny shared snack, not an inventory reward or food system. The station means the mainland station she has just come from. Do not attach an extra choice or fetch task."
+          "staging": "Turn the seated woman toward Eric and frame her bag. Her point, Eric’s hand and the closing zip carry the request without Japanese comprehension. One automatic small help beat, no drag puzzle, menu or inventory. She is returning from mainland shopping; this does not establish a daily commute or remove the island shops. No food gift competes with Mio’s pickle."
         },
         {
           "id": "train-youth",
@@ -235,31 +227,21 @@
             },
             {
               "kind": "action",
-              "text": "He turns his phone toward you: a photo of him celebrating on a football pitch, beside the score “IT 1–6 ACCOUNTS”."
+              "text": "He turns toward you and holds out his phone. A football photo fills the view: he is celebrating beside a scoreboard showing 1–6."
             },
             {
               "kind": "say",
-              "text": "昨日の試合。やっと一点取れた。",
+              "text": "負けたけど、初めてゴール決めたんだ。",
               "speaker": "youth"
             },
             {
               "kind": "say",
-              "text": "That's you in the photo?",
+              "text": "That's you?",
               "speaker": "eric"
             },
             {
               "kind": "action",
-              "text": "He nods and zooms in on himself."
-            },
-            {
-              "kind": "say",
-              "text": "初めて決めたんだ。",
-              "speaker": "youth"
-            },
-            {
-              "kind": "say",
-              "text": "I'm starting in IT today. I'll try not to make the score any worse.",
-              "speaker": "eric"
+              "text": "He nods, grinning, and points to himself in the photo."
             },
             {
               "kind": "action",
@@ -270,12 +252,12 @@
               "text": "You can keep exploring the carriage. Sitting beside Mio starts her conversation."
             }
           ],
-          "staging": "The phone image must actually show him, the pitch and the readable score. Proposes an informal company football match yesterday, not a new event to attend or a sports minigame. His department is IT outside the already-established B2 team; do not add him to that team. Eric sees the English team label and the score."
+          "staging": "One turn and phone presentation. Frame the photo and number-only score so both read on a phone. No named department, match date or invitation; no new football activity. Japanese subtitles supply the first-goal detail, while the grin and losing score make his pride visible to Eric."
         },
         {
           "id": "train-music",
           "kind": "replace",
-          "title": "He is listening to his own practice",
+          "title": "She is listening to her own practice",
           "summary": "The headphones belong to someone trying to get a guitar part right.",
           "titles": [
             "Current encounter",
@@ -319,7 +301,7 @@
             },
             {
               "kind": "action",
-              "text": "He lifts one headphone. You hear a few uneven guitar notes."
+              "text": "She lifts one headphone. You hear a few uneven guitar notes."
             },
             {
               "kind": "say",
@@ -332,22 +314,17 @@
               "speaker": "eric"
             },
             {
+              "kind": "action",
+              "text": "She turns her phone toward you. It shows a video of her playing the same guitar passage."
+            },
+            {
               "kind": "say",
-              "text": "昨日、自分で録ったんだ。まだ下手だけど。",
+              "text": "自分で録ったの。まだ下手だけど。",
               "speaker": "music"
             },
             {
               "kind": "action",
-              "text": "He shows the recording on his phone and rewinds the same few seconds."
-            },
-            {
-              "kind": "say",
-              "text": "Oh, that's you playing.",
-              "speaker": "eric"
-            },
-            {
-              "kind": "action",
-              "text": "He nods, a little embarrassed, and puts the headphone back."
+              "text": "She gives an embarrassed smile and puts the headphone back."
             },
             {
               "kind": "action",
@@ -358,7 +335,7 @@
               "text": "You can keep exploring the carriage. Sitting beside Mio starts her conversation."
             }
           ],
-          "staging": "Stage the headphone lift and a short recognisable guitar practice loop; the phone shows an audio recording, not a streaming service. No new music lesson, band storyline or invitation. Audio is a candidate after the passage is picked, not generated in this review."
+          "staging": "Use the Girl with headphones from cast.md. Show a simple identifiable video of her playing, and use a short guitar practice phrase. No rewind or new music activity. Eric infers her question from the headphone lift and audible sound. New visual/audio assets follow only after the passage pick."
         },
         {
           "id": "train-reader",
@@ -394,7 +371,7 @@
             },
             {
               "kind": "action",
-              "text": "He takes a printed spreadsheet screenshot from between its pages and holds it beside a picture in the book. The printout shows a Windows 95 taskbar."
+              "text": "He holds a printout beside the book. Its large grey software window looks much older than the one in the book; “Windows 95” is readable at the top."
             },
             {
               "kind": "say",
@@ -413,19 +390,14 @@
             },
             {
               "kind": "action",
-              "text": "He taps the Amakawa name at the top of the printout, then goes back to comparing the two pages."
-            },
-            {
-              "kind": "say",
-              "text": "I think I'm going to need an older book.",
-              "speaker": "eric"
+              "text": "He sighs and goes back to comparing the two pages."
             },
             {
               "kind": "action",
-              "text": "You can keep exploring the carriage."
+              "text": "You can keep exploring the carriage. Sitting beside Mio starts her conversation."
             }
           ],
-          "staging": "Keep the existing book title, supply a readable close view of the two different interfaces and Amakawa printout. This is an IT support concern in the existing old-systems setting; no new support ticket. Eric can read the product and company names without understanding the full Japanese sentence."
+          "staging": "Show the existing book beside one printout in one held pose. Use a large old grey interface and readable “Windows 95”, not a tiny taskbar or extra company-name tap. His immediate problem is the mismatch; Mio’s later line still explains why the whole company keeps its old systems. No new ticket."
         },
         {
           "id": "train-hamada",
@@ -453,7 +425,7 @@
           "after": [
             {
               "kind": "action",
-              "text": "You speak to this passenger while the train is crossing the bay."
+              "text": "You inspect the sleeping man while the train is crossing the bay."
             },
             {
               "kind": "narration",
@@ -461,28 +433,23 @@
             },
             {
               "kind": "action",
-              "text": "His phone buzzes against the briefcase. Without opening his eyes, he taps it silent."
+              "text": "His phone buzzes with the same 12F 9:00 reminder. Eyes still closed, he taps it silent."
             },
             {
               "kind": "say",
-              "text": "Excuse me. Was that your alarm?",
-              "speaker": "eric"
+              "text": "すみません……あと五分。",
+              "speaker": "kuroda"
             },
             {
               "kind": "action",
-              "text": "He gives a sleepy nod, then settles back against the window."
-            },
-            {
-              "kind": "say",
-              "text": "All right. I'll leave you to it.",
-              "speaker": "eric"
+              "text": "He settles back against the window without waking."
             },
             {
               "kind": "action",
-              "text": "You can keep exploring the carriage."
+              "text": "You can keep exploring the carriage. Sitting beside Mio starts her conversation."
             }
           ],
-          "staging": "Keep Hamada asleep for the existing arrival/rescue beat. Stage the phone buzz, hand movement and half-awake nod; do not display an invented current time or advance the clock. No extra wake-up branch."
+          "staging": "Keep Hamada asleep for the later rescue; greeting/asleep still returns the zzz. His mumble apologises to the reminder as he dismisses it. The phone repeats the appointment, not the current time. One buzz/tap motion; no new wake-up choice or Eric closing line."
         }
       ]
     }
@@ -520,41 +487,9 @@
       "Un, kyō kimaru. Chika dake wa yada na.",
       "Yes, they decide today. I just don’t want the basement."
     ],
-    "あ、あなたも新人？": [
-      "A, anata mo shinjin?",
-      "Oh, are you new too?"
-    ],
-    "あっ。……ごめん。": [
-      "A. ... Gomen.",
-      "Oh. ... Sorry."
-    ],
-    "ううん！窓が好きなだけ。": [
-      "Uun! Mado ga suki na dake.",
-      "No! I just like having windows."
-    ],
-    "よかったら、どうぞ。駅で二つ買っちゃって。": [
-      "Yokattara, dōzo. Eki de futatsu kacchatte.",
-      "Have one, if you like. I ended up buying two at the station."
-    ],
-    "会社のお菓子、もう飽きちゃって。": [
-      "Kaisha no okashi, mō akichatte.",
-      "I’ve got tired of the company’s snacks."
-    ],
-    "昨日の試合。やっと一点取れた。": [
-      "Kinō no shiai. Yatto itten toreta.",
-      "This was yesterday’s match. I finally managed to score."
-    ],
-    "初めて決めたんだ。": [
-      "Hajimete kimetan da.",
-      "It was my first goal."
-    ],
     "あ、ごめん。音、漏れてた？": [
       "A, gomen. Oto, moreteta?",
       "Oh, sorry. Could you hear that?"
-    ],
-    "昨日、自分で録ったんだ。まだ下手だけど。": [
-      "Kinō, jibun de tottan da. Mada heta da kedo.",
-      "I recorded it myself yesterday. I’m still pretty bad, though."
     ],
     "会社のは古くて、同じボタンがないんだよ。": [
       "Kaisha no wa furukute, onaji botan ga nai n da yo.",
@@ -563,6 +498,39 @@
     "うん。会社の。": [
       "Un. Kaisha no.",
       "Yes, that’s the one at work."
+    ],
+    "もしかして、新人さん？": [
+      "Moshikashite, shinjin-san?",
+      "Are you new here, by any chance?"
+    ],
+    "B2？あっ。……ごめん。": [
+      "B2? A. ... Gomen.",
+      "B2? Oh. ... Sorry."
+    ],
+    "ううん、窓が好きなだけ。": [
+      "Uun, mado ga suki na dake.",
+      "No, I just like having windows."
+    ],
+    "ちょっと、ここ押さえてくれる？": [
+      "Chotto, koko osaete kureru?",
+      "Could you hold this bit down for me?"
+    ],
+    "ありがとう。島に戻る前って、つい買いすぎちゃって。": [
+      "Arigatō. Shima ni modoru mae tte, tsui kaisugichatte.",
+      "Thank you. I always buy too much before going back to the island."
+    ],
+    "負けたけど、初めてゴール決めたんだ。": [
+      "Maketa kedo, hajimete gōru kimetan da.",
+      "We lost, but I scored my first goal."
+    ],
+    "自分で録ったの。まだ下手だけど。": [
+      "Jibun de totta no. Mada heta da kedo.",
+      "I recorded it myself. I’m still pretty bad, though."
+    ],
+    "すみません……あと五分。": [
+      "Sumimasen... ato gofun.",
+      "Sorry... five more minutes."
     ]
-  }
+  },
+  "presentation": "The proposed passenger lines have English subtitles, including unfamiliar Japanese. Eric still understands only familiar words and gestures; the subtitles are for the player."
 }

@@ -4,38 +4,43 @@ C-0130, corrected by C-0133: the people are reachable, but their replies are dul
 
 Story-sense diagnosis: the carriage has people but too little life outside the main conversation. Dialogue diagnosis: the optional lines mostly do one job, acknowledge the click. Give the person a concern already under way, then let Eric briefly enter it.
 
-Defaults avoided: every passenger teaching vocabulary, a mysterious stranger, a corporate history speech, universal sarcasm, a future quest hidden in every prop, and everyone knowing Eric's job before he speaks. The guitarist is occupied with his own practice; the player can see the footballer's pride without being invited to a new minigame. Short speech and gestures carry the encounters.
+Defaults avoided: every passenger teaching vocabulary, a mysterious stranger, a corporate history speech, universal sarcasm, a future quest hidden in every prop, and everyone knowing Eric's job before he speaks. The guitarist is occupied with her own practice; the player can see the footballer's pride without being invited to a new minigame. Short speech and gestures carry the encounters.
 
 The first four current cards include both existing paths: a shared seat-goal flag makes only the first passenger give the seat hint; the others already use their ordinary lines. Each proposed encounter works on that first click and retains the seat hint when needed. No extra “talk again” step. Generic greetings, Mio and Tama remain unchanged.
 
-Japanese readings and English meanings are shown in the review. setting.md says English is always available, overriding older learning restrictions. The current game's overheard text can still hide these meanings; the implementation needs to resolve that presentation before these encounters can count as discoverable content. Eric's replies must follow recognisable words or gestures, rather than assume fluent comprehension. No forced word lesson is proposed.
+The proposed Japanese passenger lines have English subtitles, including unfamiliar Japanese, following setting.md. This is part of the proposed encounter, not an unresolved question: these lines must not use the current overheard blur/muffled-audio presentation. Eric still has limited Japanese and follows gestures or familiar words. The review adds romaji as a reading aid. No forced word lesson is proposed.
 
 ## Staging after a pick
 
 ### train-aoi
 
-Keep the phone call and seated position. Add the hand-over-phone gesture and small bow. Aoi recognises “IT” and “B2”; Eric responds to her apology and face, not to Japanese he has not learned. The viewer supplies Japanese readings and English meanings; implementation must preserve the setting.md requirement that English is available.
+Aoi looks at Eric’s existing staff card and reads its B2 assignment; Eric has no fluent answer to her Japanese. Keep her seated phone call. Combine her bow and conditional seat hint. The basement discomfort sets up Mio’s later reaction; do not change or repeat Mio’s explanation here.
 
 ### train-bun
 
-Show two small wrapped cakes and stage the offer/acceptance. This is a tiny shared snack, not an inventory reward or food system. The station means the mainland station she has just come from. Do not attach an extra choice or fetch task.
+Turn the seated woman toward Eric and frame her bag. Her point, Eric’s hand and the closing zip carry the request without Japanese comprehension. One automatic small help beat, no drag puzzle, menu or inventory. She is returning from mainland shopping; this does not establish a daily commute or remove the island shops. No food gift competes with Mio’s pickle.
 
 ### train-youth
 
-The phone image must actually show him, the pitch and the readable score. Proposes an informal company football match yesterday, not a new event to attend or a sports minigame. His department is IT outside the already-established B2 team; do not add him to that team. Eric sees the English team label and the score.
+One turn and phone presentation. Frame the photo and number-only score so both read on a phone. No named department, match date or invitation; no new football activity. Japanese subtitles supply the first-goal detail, while the grin and losing score make his pride visible to Eric.
 
 ### train-music
 
-Stage the headphone lift and a short recognisable guitar practice loop; the phone shows an audio recording, not a streaming service. No new music lesson, band storyline or invitation. Audio is a candidate after the passage is picked, not generated in this review.
+Use the Girl with headphones from cast.md. Show a simple identifiable video of her playing, and use a short guitar practice phrase. No rewind or new music activity. Eric infers her question from the headphone lift and audible sound. New visual/audio assets follow only after the passage pick.
 
 ### train-reader
 
-Keep the existing book title, supply a readable close view of the two different interfaces and Amakawa printout. This is an IT support concern in the existing old-systems setting; no new support ticket. Eric can read the product and company names without understanding the full Japanese sentence.
+Show the existing book beside one printout in one held pose. Use a large old grey interface and readable “Windows 95”, not a tiny taskbar or extra company-name tap. His immediate problem is the mismatch; Mio’s later line still explains why the whole company keeps its old systems. No new ticket.
 
 ### train-hamada
 
-Keep Hamada asleep for the existing arrival/rescue beat. Stage the phone buzz, hand movement and half-awake nod; do not display an invented current time or advance the clock. No extra wake-up branch.
+Keep Hamada asleep for the later rescue; greeting/asleep still returns the zzz. His mumble apologises to the reminder as he dismisses it. The phone repeats the appointment, not the current time. One buzz/tap motion; no new wake-up choice or Eric closing line.
+
 
 ## Scenery audit
 
 The existing six scenery nodes are disabled through marker filtering. This is separate from the passenger-content complaint and is not part of this proposed implementation. The stander was deliberately removed, so his unused nodes stay unused. No scenery replacement or marker work is proposed here.
+
+## Cold-read changes
+
+C-0136: English subtitles are now an explicit part of the proposal. Fixed the headphone wearer's gender; removed the invented second IT team and later-match hint; replaced the duplicate food offer with help closing a shopping bag; cut Eric's closing quips; simplified the phone/printout gestures; gave Hamada a sleepy apology. Aoi reads Eric's card rather than answering fluent English. Her discomfort and the reader's printout are small optional setups for Mio's fuller explanation, whose script is unchanged. No repeated “yesterday” detail.
