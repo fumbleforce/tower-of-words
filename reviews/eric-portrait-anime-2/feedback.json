@@ -1,0 +1,47 @@
+{
+ "sent": "2026-09-29T10:26:10+0200",
+ "picked": [
+  "eric-a09-909",
+  "eric-a13-913"
+ ],
+ "options": {
+  "eric-a09-909": {
+   "star": true,
+   "reject": false,
+   "comment": "try a few poses"
+  },
+  "eric-a13-913": {
+   "star": false,
+   "reject": false,
+   "comment": "try a couple of variations on his saturation, hair color"
+  },
+  "eric-a14-914": {
+   "star": false,
+   "reject": true,
+   "comment": ""
+  },
+  "eric-j15-915": {
+   "star": false,
+   "reject": true,
+   "comment": ""
+  },
+  "eric-j16-916": {
+   "star": false,
+   "reject": true,
+   "comment": ""
+  },
+  "eric-a06r-906": {
+   "star": false,
+   "reject": true,
+   "comment": ""
+  },
+  "eric-a07r-907": {
+   "star": false,
+   "reject": true,
+   "comment": ""
+  }
+ },
+ "comment": "",
+ "read": true,
+ "history": []
+}
