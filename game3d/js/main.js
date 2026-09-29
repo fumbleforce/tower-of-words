@@ -61,10 +61,12 @@ export const game = {
     if (this.player.seated) { this.player.seated = false; this.player.setState('idle'); this.player.root.position.y = 0; }
     return new Promise((res) => {
       const w = this.walker, was = w.locked; w.locked = false;
-      let done = false, still = 0; const p = this.player.root.position, last = p.clone();
+      let done = false, still = 0, watch = null; const p = this.player.root.position, last = p.clone();
       const finish = () => { if (done) return; done = true; clearInterval(watch); w.locked = was; res(); };
+      // watch is declared before goTo: goTo calls finish at once when there is no path (already there)
       w.goTo(x, z, finish);
-      const watch = setInterval(() => {
+      if (done) return;
+      watch = setInterval(() => {
         if (this.paused) return;
         if (p.distanceTo(last) < 0.002) still++; else still = 0;
         last.copy(p);
@@ -220,8 +222,18 @@ function standUp() {
   pl.seated = false; pl.setState('idle');
 }
 game.standUp = standUp;
+// a story hold ({ do: 'hold', who: 'mori' }): he stays with that person until the story lets go. Walking and taps on
+// anything else do nothing but get a small bow from them; that person and the Say menu still work. Only once he knows
+// a word that person answers to, so a hold can never shut him in (Jørgen: left Mori standing and got stuck in the office)
+function held() { const h = game.hold; return !!(h && !game.busy && game.place && game.place.people[h] && SAYABLE.some((w) => known.has(w) && game.runner.has(`say:${w}:${h}`))); }
+function holdNudge() {
+  if (game._holdBow) return;
+  game._holdBow = true; game.walker.stop();
+  Promise.resolve(H.bow({ who: game.hold })).finally(() => { game._holdBow = false; });
+}
 function use(item) {
   if (!item || game.busy) return;
+  if (held() && item.id !== game.hold) { holdNudge(); return; }
   const go = () => { if (game.busy) return; if (item.face) game.walker.faceTo(...item.face()); talk(item); };
   const sp = approachSpot(game, item) || (item.spot ? item.spot() : null);
   // seated: he talks from his seat to what's within reach; for anything further he stands up and walks over
@@ -318,6 +330,7 @@ canvas.addEventListener('pointerdown', (e) => {
   if (best) { use(best); return; }
   raycaster.setFromCamera(ndc(e), game.place.camera);
   const p = game.place.pick(raycaster);
+  if (held()) { holdNudge(); return; }
   if (p) standUp();
   game.walker.tapRay(raycaster, game.place);
 });
@@ -352,6 +365,7 @@ game.posOf = posOf;
 H.goal = ({ text, side }) => (side ? ui.sideGoal(text) : ui.goal(text));
 H.hint = ({ text, what }) => { if (what === 'say') ui.introSay(text); else ui.hint(text, 5000); };
 H.wait = ({ ms }) => game.wait(ms);
+H.hold = ({ who }) => { game.hold = who || null; };
 H.sound = ({ name }) => sfx(name);
 
 // ---------- kotodama: the look of a word taking hold ----------
@@ -624,6 +638,7 @@ async function prepare(name) {
 async function enter(name) {
   const { place, story } = await prepare(name);
   if (game.place && game.place.leave) game.place.leave();
+  game.hold = null;
   game.place = place; game.story = story; document.body.dataset.place = name;
   game.runner.use(place, story);
   place.space.add(game.player.root);
@@ -714,6 +729,7 @@ function step(dt) {
   const place = game.place; if (!place) return;
   const mio = game.player;
   let moving = false;
+  if (held() && game.walker.keys.size) { game.walker.keys.clear(); holdNudge(); }
   if (game.walker && !mio.seated && !mio.scripted) moving = game.walker.update(dt, place.camera);
   if (!mio.seated && !mio.scripted) { mio.setState(moving ? 'walk' : 'idle'); mio.setGait?.(game.walker.gait ? game.walker.gait.v : null); } else mio.setGait?.(null);
   mio.update(dt, 1.25);

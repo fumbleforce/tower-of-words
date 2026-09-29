@@ -117,6 +117,7 @@ export default {
 
     // ================================================================== MORNING
     office_in: [
+      { do: 'hold', who: 'mori' },   // he stays with Mori until lead_in lets go
       { do: 'period', to: 'morning' },
       { do: 'cam', on: 'mori', zoom: 1.6 },
       { say: 'mori', face: 'smile', emo: 'polite', text: '{ohayo}。森と申します。ITサポートへ、ようこそ。', overheard: true, clear: ['IT'] },
@@ -151,6 +152,7 @@ export default {
       { do: 'face', who: 'mori', to: 'office_door' },
       { say: 'mori', emo: 'polite', text: 'どうぞ、こちらへ。', overheard: true },
       { do: 'walk', who: 'mori', to: 'chief_desk', wait: false },
+      { do: 'hold' },
       { do: 'goal', text: 'Meet the man at the desks.' },
     ],
     greet_again_mori: [{ do: 'bow', who: 'mori' }],

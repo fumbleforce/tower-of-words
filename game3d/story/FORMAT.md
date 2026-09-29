@@ -104,6 +104,7 @@ A trigger value is a node name, `{ node, if, once }`, or a list of these; the fi
 | `voice` | `key` | Plays game3d/audio/<key>.mp3. |
 | `emote` | `who`, `kind`: `!`, `?`, `…`, `♪`, `heart`, `sweat` | A small bubble over a head. |
 | `show` / `hide` | `id` | Shows or hides a person or object. |
+| `hold` | `who` (a person), or nothing to let go | Keeps Eric with that person until the story lets go: walking and taps on anything else only get a small bow from them; that person and Say still work. Only holds once he knows a word that person answers to. |
 | `bow` | `who` (anyone, `eric` too), `depth: 'small'|'deep'` | A bow, shown. |
 | `gesture` | `who`, `kind: 'nine'|'point'|'shrug'|'finger'|'skijump'` | Arm moves for the chibi cast: nine fingers up (with a 9 bubble), point, shrug, finger to the lips, Mori's ski jump. |
 | `type` | `word`, `prompt` (optional line shown above it) | The typing prompt for a new word: shows the Japanese, the romaji letter by letter and the English, and Eric types the romaji (forgiving: case, spaces, hyphens, long vowels ō = ou = oo = o). Letters light up as they're typed; a wrong Enter shows the next letter, and after three tries the whole romaji. Works with the phone keyboard. On success Eric says it (voiced), it becomes a known word (it stays sharp in overheard lines from then on) and flag `typed_<word>` is set. Use it where a word is taught, in place of a "say it" button. Any word id works: `{ do: 'type', word: 'yoroshiku', prompt: 'mio: Say it. Like this.' }` |
