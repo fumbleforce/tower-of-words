@@ -11,7 +11,8 @@ const rd = (p) => fs.readFileSync(path.join(root, p), 'utf8');
 const SAYABLE = ['ohayo', 'yoroshiku', 'sumimasen', 'matte', 'akete', 'kite', 'ugoite', 'irete', 'dashite', 'tomatte'];
 const words = [...rd('js/lang.js').matchAll(/^\s+(\w+): \{ ja:/gm)].map((m) => m[1]);
 const speakers = [...rd('js/runner.js').matchAll(/^\s+(\w+): \{ name:/gm)].map((m) => m[1]);
-const globalHooks = [...rd('js/main.js').matchAll(/^H\.(\w+) =/gm)].map((m) => m[1]);
+// global hooks: main.js's H.x, plus the ones sim.js registers (bond, bondStep, remember, fact, relate)
+const globalHooks = [...rd('js/main.js').matchAll(/^H\.(\w+) =/gm), ...rd('js/sim.js').matchAll(/H\.(\w+) =/g), ...rd('js/sim.js').matchAll(/hooks\.(\w+) =/g)].map((m) => m[1]).concat(['bond', 'bondStep', 'remember', 'fact', 'relate']);
 function placeInfo(file) {
   const s = rd(file);
   const block = (name) => { const i = s.indexOf(`const ${name} = {`); if (i < 0) return ''; let d = 0, j = s.indexOf('{', i); for (let k = j; k < s.length; k++) { if (s[k] === '{') d++; if (s[k] === '}') { d--; if (!d) return s.slice(j, k); } } return ''; };

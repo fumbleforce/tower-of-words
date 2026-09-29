@@ -50,10 +50,11 @@ p.on('console', (m) => { if (m.type() === 'error' && !/404/.test(m.text())) errs
 const t0 = Date.now();
 await p.goto(`http://127.0.0.1:8771/${process.env.BASE || 'game3d'}/index.html?test=fast&q=0${process.env.ROUTE ? '&route=' + process.env.ROUTE : ''}${process.env.Q || ''}`); await p.waitForFunction(() => window.__game, null, { timeout: 60000 });
 await p.waitForFunction(() => window.__test && window.__test.done, null, { timeout: +S * 1000 }).catch(() => {});
-const r = await p.evaluate(() => ({ ...window.__test, ended: !!window.__ended, place: window.__game.place && window.__game.place.name, goal: window.__game.ui.goalText, voices: window.__voiceLog, heard: window.__test.heard, move: window.__moveCheck }));
+const r = await p.evaluate(() => ({ ...window.__test, ended: !!window.__ended, place: window.__game.place && window.__game.place.name, goal: window.__game.ui.goalText, voices: window.__voiceLog, heard: window.__test.heard, move: window.__moveCheck, bonds: window.__test.bonds, bondRoute: window.__test.bondRoute }));
 await p.screenshot({ path: `/tmp/claude-1000/fast-${W}x${H}.png` });
 console.log(r.ended && !errs.length && !r.errors.length ? 'PASS' : 'FAIL', `${W}x${H}`, `${((Date.now() - t0) / 1000).toFixed(0)} s`, 'route:', r.route, 'places:', r.places.join(' > '), 'at:', r.place, '| goal:', r.goal);
 console.log('practice prompts passed via Say:', r.practice || 0);
+if (r.bondRoute || r.bonds) console.log('bonds:', r.bondRoute || '', JSON.stringify(r.bonds || {}).slice(0, 400));
 const mv = r.move || {}; const ov = (mv.overlaps || []).length ?? mv.overlaps, sp = (mv.spins || []).length ?? mv.spins;
 console.log(`movement: ${mv.steps || 0} steps, ${ov || 0} overlaps, ${sp || 0} spins`); for (const l of [...(mv.overlaps || []), ...(mv.spins || [])].slice(0, 8)) console.log('  ', typeof l === 'string' ? l : JSON.stringify(l));
 // MOVE_WARN=1: overlaps and spins warn instead of failing (while the feel agent fixes the scripted walks)

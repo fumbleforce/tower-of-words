@@ -26,8 +26,14 @@ export function start(game) {
     busyFor = 0;
     const list = game.markers.list.filter((m) => m.enabled());
     const goals = list.filter((m) => m.goal());
+    // social route: at the jam, say すみません to the guard (the way a player takes the social way), not the goal
+    // marker (talking to Hamada first leads to 開けて), as js/bonds/day1-check.mjs does
+    if (route === 'social' && game.runner.has('say:sumimasen:guard') && !tried.has('social-way')) {
+      const g = list.find((m) => m.id === 'guard');
+      if (g) { tried.add('social-way'); T.log.push(p.name + ' social: say:sumimasen:guard'); const s = g.spot(); game.walker.goTo(s[0], s[1], () => game.sayWord('sumimasen', g)); return; }
+    }
     // 1. a goal: walk up and use it
-    for (const g of goals) { const k = 'use:' + g.id + ':' + (idle >> 4); if (!tried.has(k)) { tried.add(k); T.log.push(p.name + ' ' + k); game.use(g); return; } }
+    for (const g of goals) { if (route === 'social' && g.id === 'kuroda' && game.runner.has('say:sumimasen:guard')) continue; const k = 'use:' + g.id + ':' + (idle >> 4); if (!tried.has(k)) { tried.add(k); T.log.push(p.name + ' ' + k); game.use(g); return; } }
     // 2. a word that something here answers to, goals first
     const order = [...goals, ...list.filter((m) => !goals.includes(m))];
     for (const m of order) for (const w of SAYABLE) {
