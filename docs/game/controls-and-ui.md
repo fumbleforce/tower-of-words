@@ -58,7 +58,7 @@ Every control is introduced the first time it's needed, and ambient people never
 - Bag: his yen and the drinks he's carrying.
 - Words: the words he can say, each with its dictionary form and practice dots, and a note on the -te form ([words.md](words.md)).
 - Title: the train seen from outside at dawn; on Start the camera flies into the car. Continue when there's a save.
-- Pause (Esc): settings, three save slots with thumbnails, load, back to title.
+- Pause (Esc): settings, the three save slots (save and Load), back to title. What loading restores: systems.md, Saving.
 - Settings: text speed (default fast), auto-advance (off), volumes for master, music, voices and ambience, voices on or off, graphics tier (auto), surface detail, interface size, reduce motion, the Say key, voice input (device, browser or off), and how many tries a word needs before it's a click (3).
 - A loading chip between places, if a place takes a moment to build.
 - The end of the day: the places (a frame of each from play), the people met and the words he can use; the story's closing line; back to the title. No quiz and no score.
