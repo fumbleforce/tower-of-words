@@ -18,6 +18,32 @@ export const WORDS = {
   gaijin: { ja: '外人', ro: 'gaijin', en: 'foreigner' },
   kotodama: { ja: '言霊', ro: 'kotodama', en: 'words with power in them' },
 };
+// Verbs are met in a form, not as the dictionary word: 待って matte is the -te form of 待つ matsu.
+// The Words panel shows the form as met plus this line, so nobody takes matte for the base word.
+export const BASE = {
+  matte: { form: 'te', ja: '待つ', ro: 'matsu', en: 'to wait' },
+  akete: { form: 'te', ja: '開ける', ro: 'akeru', en: 'to open' },
+  kite: { form: 'te', ja: '来る', ro: 'kuru', en: 'to come' },
+  ugoite: { form: 'te', ja: '動く', ro: 'ugoku', en: 'to move, to run' },
+  irete: { form: 'te', ja: '入れる', ro: 'ireru', en: 'to put in, to make (tea)' },
+  dashite: { form: 'te', ja: '出す', ro: 'dasu', en: 'to put out, to hand over' },
+  tomatte: { form: 'te', ja: '止まる', ro: 'tomaru', en: 'to stop' },
+  ohayo: { form: 'set', note: 'A fixed greeting. Gozaimasu makes it polite; with friends, just ohayō.' },
+  yoroshiku: { form: 'masu', lead: 'onegaishimasu: ', ja: 'お願いする', ro: 'onegai suru', en: 'to ask a favour' },
+  sumimasen: { form: 'set', note: 'A fixed phrase. The -masen ending is the polite way to say "not".' },
+};
+const FORM_NAME = { te: '-te form', masu: 'polite -masu form' };
+// what each ending does, in a line (shown once above the words that use it)
+export const FORM_NOTE = {
+  te: 'These words end in -te, the form you use to ask someone to do something. Matte on its own means "wait!", and matte kudasai means "please wait". The same ending also links two actions in one sentence.',
+};
+// the small line under a word in the Words panel: which form it is and its dictionary word
+export function baseHTML(id) {
+  const b = BASE[id]; if (!b) return '';
+  if (b.note) return `<span class="bf">${b.note}</span>`;
+  return `<span class="bf">${b.lead || ''}${FORM_NAME[b.form]} of <span class="bj">${b.ja}</span> ${b.ro}, ${b.en}</span>`;
+}
+
 // line icons (24 x 24, stroked in the HUD style) for the words he can say
 const ICON = {
   ohayo: '<path d="M3 18h18"/><path d="M7 18a5 5 0 0 1 10 0"/><path d="M12 7v2.5M6.3 10.3l1.6 1.6M17.7 10.3l-1.6 1.6M3.5 14.5h2M18.5 14.5h2"/>',
