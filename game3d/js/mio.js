@@ -4,15 +4,12 @@
 // colours are remapped per region (hair, hoodie, trousers, shoes) so she reads at game scale and sits in the
 // muted office palette. Nothing is moved, reshaped or removed for that.
 import * as THREE from 'three';
+import { loadRelaxedIdle } from './relaxed-idle.js';
 import { GLTFLoader } from '../vendor/loaders/GLTFLoader.js';
 
 const DIR = new URL('../assets/mio/', import.meta.url).href;
 export const V = () => '?v=' + encodeURIComponent(window.BUILD || '');
 const HELD = 1e-6;
-export let IDLE_T = 0.0; // set from the page for testing
-export function setIdleT(v) {
-  IDLE_T = v;
-}
 
 // Region colours (sRGB). The model's navy shades differ only slightly; each face keeps its shade relative
 // to the mean navy, so the planes still read.
@@ -384,78 +381,6 @@ export function makeGait(actions, { walkV, runV, runOff = 0 }) {
   };
 }
 
-// Meshy's Idle clip steps and twists (Jørgen: "turn and twist like crazy"), so it's held on one frame. Pick the
-// calmest: feet close together, head upright over the hips, hips facing forward.
-export function calmIdleTime(model, mixer, action) {
-  const find = (re) => {
-    let h = null;
-    model.traverse((o) => {
-      if (!h && o.isBone && re.test(o.name.replace(/[^a-z]/gi, ''))) h = o;
-    });
-    return h;
-  };
-  const head = find(/head$/i),
-    hips = find(/hips$/i),
-    lf = find(/leftfoot$/i),
-    rf = find(/rightfoot$/i);
-  const lu = find(/leftupleg$/i),
-    ru = find(/rightupleg$/i),
-    la = find(/leftarm$/i),
-    ra = find(/rightarm$/i);
-  if (!head || !hips || !lf || !rf || !lu || !ru || !la || !ra) return 0;
-  const P = (bone) => {
-    const v = new THREE.Vector3();
-    bone.getWorldPosition(v);
-    return model.worldToLocal(v);
-  };
-  const turn = (l, r) => {
-    const L = P(l),
-      R = P(r);
-    return Math.abs(Math.atan2(L.z - R.z, L.x - R.x));
-  }; // 0 when facing +z
-  const d = action.getClip().duration,
-    a = new THREE.Vector3(),
-    b = new THREE.Vector3(),
-    c = new THREE.Vector3(),
-    e = new THREE.Vector3(),
-    fwd = new THREE.Vector3(),
-    q = new THREE.Quaternion();
-  action.reset().play();
-  action.setEffectiveWeight(1);
-  const H = (() => {
-    action.time = 0;
-    mixer.update(0);
-    model.updateMatrixWorld(true);
-    head.getWorldPosition(a);
-    model.worldToLocal(a);
-    return Math.max(a.y, 1e-3);
-  })();
-  let best = 0,
-    bestS = Infinity;
-  for (let i = 0; i < 40; i++) {
-    const t = (i / 40) * d;
-    action.time = t;
-    mixer.update(0);
-    model.updateMatrixWorld(true);
-    head.getWorldPosition(a);
-    hips.getWorldPosition(b);
-    lf.getWorldPosition(c);
-    rf.getWorldPosition(e);
-    for (const v of [a, b, c, e]) model.worldToLocal(v);
-    const lean = Math.hypot(a.x - b.x, a.z - b.z) / H,
-      feet = Math.hypot(c.x - e.x, c.z - e.z) / H;
-    const yaw = turn(lu, ru) + turn(la, ra);
-    // yaw weighs heavily: a held frame with the hips turned reads as the body twisted against the way he faces
-    const sc = lean * 2 + feet + yaw * 2.5;
-    if (sc < bestS) {
-      bestS = sc;
-      best = t;
-    }
-  }
-  action.stop();
-  return best;
-}
-
 // Foot fix from neon.html: the walk rolls her feet onto their outer edges; undo it after the mixer poses.
 const DEG = Math.PI / 180;
 function makeFootFix(model, skinned) {
@@ -510,10 +435,12 @@ function makeFootFix(model, skinned) {
     f.bone.quaternion.copy(_qp.invert().multiply(_qr.multiply(_qw.copy(f.world))));
     f.bone.updateMatrixWorld(true);
   }
-  return function fixFeet() {
+  const before = new THREE.Quaternion();
+  return function fixFeet(weight = 1) {
     model.updateMatrixWorld(true);
     model.getWorldQuaternion(_qm);
     for (const f of feet) {
+      before.copy(f.bone.quaternion);
       f.world = f.bone.getWorldQuaternion(f.world || new THREE.Quaternion());
       const inv = soleRoll(f);
       const w = 1 - THREE.MathUtils.smoothstep(inv, 28 * DEG, 45 * DEG);
@@ -523,6 +450,8 @@ function makeFootFix(model, skinned) {
         roll = THREE.MathUtils.clamp(roll + soleRoll(f) * 1.3 * w, 0, FOOT_ROLL);
         turnFoot(f, roll, FOOT_YAW * w);
       }
+      f.bone.quaternion.copy(before.slerp(f.bone.quaternion, weight));
+      f.bone.updateMatrixWorld(true);
     }
   };
 }
@@ -697,12 +626,13 @@ export function addPhone({ model, root, height, layers, json, bones }) {
 export async function loadMio({ height = 1.12, colours = MIO_COLOURS } = {}) {
   const loader = new GLTFLoader();
   const load = (u) => new Promise((ok, no) => loader.load(u, ok, undefined, no));
-  const [walk, run, sit, data, tex] = await Promise.all([
+  const [walk, run, sit, data, tex, idleClip] = await Promise.all([
     load(DIR + 'walk.glb' + V()),
     load(DIR + 'run.glb' + V()),
     load(DIR + 'sit.glb' + V()),
     fetch(DIR + 'base-clean.json' + V()).then((r) => r.json()),
     new THREE.TextureLoader().loadAsync(DIR + 'base-clean.webp' + V()),
+    loadRelaxedIdle('mio', V()),
   ]);
   const phoneJson = await fetch(CDIR + 'mio/phone.json' + V())
     .then((r) => (r.ok ? r.json() : null))
@@ -816,11 +746,7 @@ export async function loadMio({ height = 1.12, colours = MIO_COLOURS } = {}) {
   });
   const layers = poseLayer(model);
   const ph = addPhone({ model, root, height, layers, json: phoneJson, bones: MIXAMO_PHONE_BONES });
-  // idle: the walk clip held still at a frame with the feet together, plus a small breath
-  const idleClip = clips.walk.clone();
-  idleClip.name = 'idle';
   actions.idle = mixer.clipAction(idleClip);
-  actions.idle.timeScale = HELD;
   let cur = null,
     curName = '';
   let sitO = null; // how far sitAt moved the root off the hips; given back when she stands, so she stands where she sat
@@ -836,10 +762,6 @@ export async function loadMio({ height = 1.12, colours = MIO_COLOURS } = {}) {
     const a = actions[name];
     a.reset();
     a.setEffectiveWeight(1);
-    if (name === 'idle') {
-      a.time = IDLE_T;
-      a.timeScale = HELD;
-    }
     if (name === 'sit') {
       a.time = sitT();
       a.timeScale = HELD;
@@ -870,6 +792,7 @@ export async function loadMio({ height = 1.12, colours = MIO_COLOURS } = {}) {
     }
   };
   const gait = makeGait(actions, { walkV: 0.47, runV: 0.77, runOff: 0.04 });
+  const activeWeight = (action) => (action.isScheduled() ? action.getEffectiveWeight() : 0);
   function update(dt, speed = 1) {
     t += dt;
     gait.step(dt, curName, speed);
@@ -882,11 +805,12 @@ export async function loadMio({ height = 1.12, colours = MIO_COLOURS } = {}) {
       hips.position.x = hipRest.x;
       hips.position.z = hipRest.z;
     }
-    if (curName === 'idle' || curName === 'sit') {
+    if (curName === 'sit') {
       breath = Math.sin(t * 2.0) * 0.004;
       hips.position.y += breath;
     }
-    if (curName !== 'sit') fixFeet();
+    const footWeight = Math.min(1, activeWeight(actions.walk) + activeWeight(actions.run));
+    if (curName !== 'sit' && footWeight > 0) fixFeet(footWeight);
     if (pose.bow) {
       spine.rotateX(pose.bow * 0.6);
       spine2 && spine2.rotateX(pose.bow * 0.4);

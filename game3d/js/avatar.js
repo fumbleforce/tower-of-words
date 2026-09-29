@@ -237,7 +237,8 @@ export function makeAvatar() {
 // used with a Lambert material (as for Mio). Colour tweak only: the texture is pulled a little toward the muted
 // palette (slightly less saturated, a touch cooler). The mesh, face and body are untouched.
 import { GLTFLoader } from '../vendor/loaders/GLTFLoader.js';
-import { calmSitTime, calmIdleTime, V as ver, poseLayer, addPhone, API_PHONE_BONES, CDIR, makeGait } from './mio.js';
+import { calmSitTime, V as ver, poseLayer, addPhone, API_PHONE_BONES, CDIR, makeGait } from './mio.js';
+import { loadRelaxedIdle, fitSharedIdle } from './relaxed-idle.js';
 const EDIR = new URL('../assets/eric/', import.meta.url).href;
 export const loadEric = (o = {}) => loadMeshy('eric', { dir: EDIR, height: 1.2, ...o });
 // one-shot gesture clips from Meshy's library (bow, wave, shrug, nod), retargeted onto each rig as JSON
@@ -254,7 +255,7 @@ export async function loadMeshy(id, { height = 1.2, dir = CDIR + id + '/' } = {}
   const [walk, run, idle, sitG, tex, phoneJson, ...gj] = await Promise.all([
     load(dir + 'walk.glb' + ver()),
     load(dir + 'run.glb' + ver()),
-    load(dir + 'idle.glb' + ver()),
+    loadRelaxedIdle('eric', ver()),
     load(dir + 'sit.glb' + ver()),
     new THREE.TextureLoader().loadAsync(dir + 'base.webp' + ver()),
     json(CDIR + id + '/phone.json'),
@@ -292,12 +293,7 @@ export async function loadMeshy(id, { height = 1.2, dir = CDIR + id + '/' } = {}
   holder.add(model);
   root.add(holder);
   const mixer = new THREE.AnimationMixer(model);
-  // idle: Meshy's Idle clip stands wide with bent knees (QA round 1: by the bench it read as a bad half-sit), so like
-  // Mio the idle is the walk clip held on its calmest frame (feet together, upright). ?idleclip=1 shows the old one.
-  const idleSrc =
-    typeof location !== 'undefined' && /[?&]idleclip=1/.test(location.search)
-      ? idle.animations[0]
-      : walk.animations[0].clone();
+  const idleSrc = id === 'eric' ? idle : fitSharedIdle(idle, model);
   const actions = {
     walk: mixer.clipAction(walk.animations[0]),
     run: mixer.clipAction(run.animations[0]),
@@ -316,11 +312,7 @@ export async function loadMeshy(id, { height = 1.2, dir = CDIR + id + '/' } = {}
     if (o.isBone && /spine$/i.test(o.name.replace(/[^a-z0-9]/gi, ''))) spine = o;
     if (o.isBone && /spine0?1$/i.test(o.name.replace(/[^a-z0-9]/gi, ''))) spine2 = o;
   });
-  const SIT_T = calmSitTime(model, mixer, actions.sit),
-    IDLE_T =
-      typeof window !== 'undefined' && window.__idleT != null
-        ? window.__idleT
-        : calmIdleTime(model, mixer, actions.idle);
+  const SIT_T = calmSitTime(model, mixer, actions.sit);
   const layers = poseLayer(model);
   const ph = addPhone({ model, root, height, layers, json: phoneJson, bones: API_PHONE_BONES });
   const gact = {};
@@ -354,11 +346,6 @@ export async function loadMeshy(id, { height = 1.2, dir = CDIR + id + '/' } = {}
     a.setEffectiveWeight(1);
     if (name === 'sit') {
       a.time = SIT_T;
-      a.timeScale = 0;
-    }
-    // Meshy's idle clip swings his hips round by up to half a turn (Jørgen: "turn and twist like crazy"); hold its first frame
-    if (name === 'idle') {
-      a.time = IDLE_T;
       a.timeScale = 0;
     }
     a.fadeIn(cur ? 0.2 : 0).play();
@@ -411,9 +398,8 @@ export async function loadMeshy(id, { height = 1.2, dir = CDIR + id + '/' } = {}
       gesturing.a.fadeOut(0.35);
       if (cur) {
         cur.reset();
-        if (curName === 'idle' || curName === 'sit') cur.timeScale = 0;
+        cur.timeScale = curName === 'sit' ? 0 : 1;
         if (curName === 'sit') cur.time = SIT_T;
-        if (curName === 'idle') cur.time = IDLE_T;
         cur.fadeIn(0.35).play();
       }
       const g = gesturing;
@@ -427,7 +413,7 @@ export async function loadMeshy(id, { height = 1.2, dir = CDIR + id + '/' } = {}
       hips.position.x = hipRest.x;
       hips.position.z = hipRest.z;
     }
-    if (curName === 'sit' || curName === 'idle') {
+    if (curName === 'sit') {
       breath = Math.sin(bt * 2.0) * 0.004;
       hips.position.y += breath;
     }
