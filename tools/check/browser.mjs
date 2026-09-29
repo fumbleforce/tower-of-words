@@ -11,6 +11,7 @@ const jobs = {
   checkpoints: ['tools/check/checkpoint-browser.mjs'],
   transitions: ['tools/check/transition-browser.mjs'],
   recovery: ['tools/check/recovery-browser.mjs'],
+  typing: ['tools/check/typing-browser.mjs'],
   'staging-platform': ['tools/check/staging-browser.mjs', 'platform'],
   'staging-arrival': ['tools/check/staging-browser.mjs', 'arrival'],
 };
