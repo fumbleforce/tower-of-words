@@ -241,8 +241,12 @@ export default {
       { do: 'cam', on: 'mio', zoom: 1.6 },
       { do: 'goal', text: '' },
       { do: 'face', who: 'mio', to: 'kuroda' },
+      // "that guy": the camera goes over to the sleeping man for this line, then back to Mio
+      { do: 'cam', on: 'kuroda', zoom: 1.6 },
       { do: 'emote', who: 'kuroda', kind: 'zzz' },
       { say: 'mio', emo: 'casual', text: "She's more awake than that guy, anyway. He's on this train every morning too, asleep the whole way, and like once a month he misses our stop and ends up back on the mainland." },
+      { do: 'face', who: 'mio', to: 'eric' },
+      { do: 'cam', on: 'mio', zoom: 1.6 },
       { say: 'mio', emo: 'casual', face: 'neutral', text: "Anyway, when you meet someone new, it's {yoroshiku}. Like “nice to meet you”, but more like “please be nice to me”." },
       '> She dips her head about two centimetres. It is the smallest bow you have ever seen.',
       { say: 'mio', emo: 'slow', slow: true, text: '{yoroshiku}...' },
