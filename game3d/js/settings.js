@@ -30,6 +30,7 @@ export const DEFAULTS = {
   voiceKey: 'KeyV', // hold-to-talk key
   voiceModel: 'auto', // 'auto' | 'base' | 'moon' | 'tiny' (testing only, no UI)
   masteryUses: 3, // how many times a word is typed or said before Say sends it with one click
+  perfOverlay: false, // the performance numbers overlay (F3; js/perf/metrics.js)
 };
 // characters per second for each text speed (0 = all at once)
 export const CPS = { slow: 28, normal: 55, fast: 110, instant: 0 };

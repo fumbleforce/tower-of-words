@@ -75,9 +75,10 @@ for (const place of places) {
   const frame = () => p.evaluate(() => new Promise((ok) => requestAnimationFrame(() => requestAnimationFrame(() => requestAnimationFrame(ok)))));
   const count = () => p.evaluate(async () => {
     // exactly one frame: reset in a callback that runs after this tick's render, read after the next one
-    const r = window.__game.renderer; r.info.autoReset = false;
+    // __perfHold: the game's own recorder (js/perf/metrics.js, on with --test) keeps off the counters meanwhile
+    const r = window.__game.renderer; window.__perfHold = true; r.info.autoReset = false;
     await new Promise((x) => requestAnimationFrame(() => { r.info.reset(); requestAnimationFrame(x); }));
-    const o = { calls: r.info.render.calls, tris: r.info.render.triangles }; r.info.autoReset = true;
+    const o = { calls: r.info.render.calls, tris: r.info.render.triangles }; r.info.autoReset = true; window.__perfHold = false;
     let meshes = 0; window.__game.place.scene.traverseVisible((m) => { if ((m.isMesh || m.isLine || m.isPoints) && m.layers.mask) meshes++; }); o.meshes = meshes; return o;
   });
   const grab = () => p.evaluate(() => new Promise((ok) => requestAnimationFrame(() => { const c = window.__game.renderer.domElement; ok(c.toDataURL('image/png').split(',')[1]); })));

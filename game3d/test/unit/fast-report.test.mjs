@@ -20,7 +20,7 @@ async function report({ lateError, lifecycleError, deferred = false } = {}) {
     screenshot: async () => { if (lateError) pageErrors.push(lateError); },
   };
   await vm.runInNewContext(`(async () => { ${reporting} })()`, {
-    process, Date, URL, path, fileURLToPath, fastResult,
+    process, Date, URL, path, fileURLToPath, fastResult, writePerf: () => [],
     fs: { mkdirSync() {}, writeFileSync: (file, data) => writes.push(JSON.parse(data)) },
     console: { log: (...args) => logs.push(args.join(' ')) },
     openGame: async () => ({ page, errors: pageErrors }),

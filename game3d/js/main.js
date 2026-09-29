@@ -9,6 +9,7 @@ import { needsLegacyOpening } from './narrative/legacy-opening.js';
 import * as THREE from 'three';
 import { createRenderer, Markers, Q, blob } from './engine.js';
 import { makePost } from './post.js';
+import { installMetrics } from './perf/metrics.js';
 import { OutlinePass } from 'three/addons/postprocessing/OutlinePass.js';
 import { pickPerson, bodies, softSeparate } from './move.js';
 import * as ambience from './ambience.js';
@@ -376,6 +377,7 @@ function updateOutline() {
 game.skip = () => {
   if (game.busy) game.setHurry(true);
 };
+installMetrics(game, () => quality); // F3 overlay and the fast test's per-place numbers
 game.setQuality = (q) => {
   quality = q;
   applyQuality();

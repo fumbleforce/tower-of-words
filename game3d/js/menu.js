@@ -448,6 +448,7 @@ function buildSettings() {
         <div class="row"><span class="lbl" id="l-mu">Before a word is one click<small>Times you type or say it first</small></span><div class="seg" role="radiogroup" aria-labelledby="l-mu" data-key="masteryUses"></div></div>
         <div class="row"><span class="lbl" id="l-ks">Say key<small class="kmsg">Talk is E, Space or Enter</small></span><button type="button" class="keybind" data-key="keySay" aria-labelledby="l-ks"></button></div>
         <div class="row"><span class="lbl" id="l-rm">Reduce motion<small>Less camera sway and fewer moving parts in menus</small></span><button type="button" class="sw" role="switch" data-key="reduceMotion" aria-labelledby="l-rm"><i></i></button></div>
+        <div class="row"><span class="lbl" id="l-pf">Performance numbers<small>Frame rate and draw calls in a corner (F3)</small></span><button type="button" class="sw" role="switch" data-key="perfOverlay" aria-labelledby="l-pf"><i></i></button></div>
       </div>
       <footer><button type="button" class="done" data-close>Done</button></footer>
     </section>`,

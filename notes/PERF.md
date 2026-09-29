@@ -132,3 +132,52 @@ scan is deferred, so the perf tools' hook after `place.name = name;` still sees 
 place and adds a per-vertex `aBake` attribute; batch.js folds `aBake` into its vertex colours and copies the shader
 patch onto its batch materials (clone() drops onBeforeCompile). Numbers: game3d/shots/style-in-game/ and review
 style-in-game.
+
+## Performance metrics (2026-09-29): overlay, fast-test numbers, budgets
+
+Jørgen asked for performance metrics in place of player-stuck telemetry (review productivity-review). Code:
+js/perf/metrics.js (overlay and recorder), game3d/test/support/perf-report.mjs (perf.json, summary, warnings),
+game3d/tools/perf/budgets.json (the baseline). The overlay itself is described in docs/game/controls-and-ui.md.
+
+- **Overlay** (F3 or Settings > Performance numbers): fps and average frame time over the last 600 frames, the
+  1% low (the frame time only 1% of those frames exceed, shown as fps; red under 30), draw calls and triangles of
+  one whole frame (every pass: shadow, AO, outline, main), geometries and textures in GPU memory, the JS heap
+  (Chrome only), the place and the tier. Numbers refresh twice a second.
+- **Recorder**: on with `?test=` or `?perf`. Every frame's time goes into a preallocated array per place; draw calls
+  and triangles are sampled every 10th frame (`renderer.info` reset and held for exactly one frame). No per-frame
+  allocations. `window.__perfReport()` returns per place: frames, median, 1% low (p99) and worst frame time,
+  median and max draw calls and triangles.
+- **Fast test**: `node game3d/tools/fast.mjs` writes `perf.json` in its artifact folder and prints one line:
+  `perf (desktop, gpu, q0; median/worst frame, median calls and tris): train 16.7/483.3 ms, 779 calls, 146k tris | ...`
+  Then `PERF WARN <place> <number> is N% over the baseline` for every number more than 20% over budgets.json. A
+  warning never fails the run.
+- **Reading the warnings**: draw calls and triangles are compared on any GL (they don't depend on it). Frame times
+  (median and 1% low) are compared only with a baseline taken on the same GL: `gpu` when the fast test got the GPU
+  lock, `software` (SwiftShader, about 10x slower) otherwise. The worst frame is in perf.json and the summary but not
+  budgeted: it is one frame (usually the next place building in the background) and swings from run to run. Under
+  vsync the GPU median sits at 16.7 ms, so the 1% low is the frame-time number that moves. The fast test runs at
+  q0 (low tier); the baseline is for q0 and a run at another tier is not compared.
+- **Which warnings to trust**: draw calls and triangles repeat to within 1% between runs, so a warning on them is a
+  real change. Frame times depend on what else is using the machine: tests now share the GPU in slots
+  (tools/lib/browser-job.mjs), and with another test on the GPU the office's median went 16.7 to 33.2 ms and 1% lows
+  doubled on an unchanged build. Treat a frame-time warning as real only when it repeats on a quiet machine
+  (`cat /proc/loadavg`, nvidia-smi) or in `tools/perf/ab.mjs`.
+- **Tools that read renderer.info themselves** set `window.__perfHold = true` while they sample and restore
+  `autoReset = true` after (tools/perf/ab.mjs does), so the recorder doesn't reset their counters.
+- **New baseline**: after a change that is meant to move the numbers, `PERF_BASELINE=1 node game3d/tools/fast.mjs
+  1366 860` and `... 390 844` rewrite that layout's entry for the GL the run got. Only a passing run writes it.
+  Commit budgets.json with the change and say why in the message.
+
+Baseline (build 0929-1848-b196ef5, fast test, q0, GL=gpu; draw-call pass in js/perf/batch.js still not wired):
+
+| place | desktop calls | desktop tris | phone calls | phone tris | median ms | 1% low ms | worst ms (desktop / phone) |
+|---|--:|--:|--:|--:|--:|--:|--:|
+| train  |   779 | 146k |   648 | 133k | 16.7 | 16.8 | 483 / 500 |
+| gate   | 1,246 | 152k |   833 | 107k | 16.7 | 16.8 | 467 / 650 |
+| office | 4,130 | 525k | 2,714 | 345k | 16.7 | 33.4 | 283 / 267 |
+
+The office is far over the 250-call phone budget above: 2,714 calls a frame on the phone at the low tier (4,130 on
+desktop). Earlier on 2026-09-29, before the world look (js/look/) went in, the same measure at 393x851 was 1,305
+(Draw-call pass, low tier). Worst frames of 270 to 650 ms in every place are the
+background builds of the next place. No software-GL baseline yet: the software desktop run on this build stopped on
+the train at `use:door_l:1` (the hang Codex reported in X-0132), so it could not set one.
