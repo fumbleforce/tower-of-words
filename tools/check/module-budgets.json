@@ -65,8 +65,8 @@
       "reason": "Existing gate place geometry and interaction hooks; stage 5 room-builder review is planned."
     },
     "game3d/js/places/office.js": {
-      "lines": 1115,
-      "bytes": 40457,
+      "lines": 1109,
+      "bytes": 40452,
       "owner": "codex-tui",
       "review": "C-0076; 2026-09-30 preparation slices (yield points, notes/PERF.md); C-0166 named sounds per door and machine",
       "reason": "Existing office place geometry and interaction hooks; stage 5 room-builder review is planned."
@@ -108,7 +108,7 @@
     },
     "game3d/js/scenes/office.js": {
       "lines": 2115,
-      "bytes": 72551,
+      "bytes": 72532,
       "owner": "codex-tui",
       "review": "C-0110 / X-0193: preserve cup-tray, counter and sink overlap order; existing responsibility unchanged; 2026-09-30 preparation slices (yield points, notes/PERF.md)",
       "reason": "Existing office geometry composition; preserve the room while extracting responsibilities later."
@@ -170,8 +170,8 @@
       "reason": "Existing passenger mesh factories, per-seat placement and idle motion share rig conventions. Stage 5 crowd and room-builder review will separate appearance construction from placement and motion."
     },
     "game3d/js/ui.js": {
-      "lines": 891,
-      "bytes": 36257,
+      "lines": 889,
+      "bytes": 36158,
       "owner": "codex-tui",
       "review": "C-0080; C-0166 named sounds per door and machine, Words chip pop and voice placeholder",
       "reason": "Remaining HUD construction, action menus and word practice; dialogue, portraits and audio are extracted."

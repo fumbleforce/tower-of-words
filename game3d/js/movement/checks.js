@@ -9,7 +9,9 @@ import { isPassing, isHard, GIVE, awayFromHome } from './crowd.js';
 //            their radius) for more than 1.5 s; people still on the spot they started on (staff behind a counter) are
 //            left out, and so are walkers on the way (a doorway is narrower than two bodies), glides (fixed
 //            choreography) and the lift ride
-//   spin     the player turning faster than 3 rad/s while standing still and not taking turning steps, for > 0.25 s
+//   spin     the player turning faster than 3 rad/s while standing still and not taking turning steps, for > 0.25 s;
+//            or anyone else (not seated) turning more than 1.5 full turns one way, or 3 back and forth, within 3 s
+//            (Jørgen, 2026-09-30: "Mio was spinning around 20 times in place before she continued the conversation")
 // fast.mjs fails the build on any overlap or spin.
 export function startMoveCheck(game) {
   const C = (window.__moveCheck = { overlaps: [], spins: [], steps: 0, notes: [] });
@@ -57,6 +59,7 @@ export function startMoveCheck(game) {
       }
     for (const k of [...near.keys()]) if (!seen.has(k)) near.delete(k);
     furniture(game, C, dt, list);
+    npcSpin(game, C, dt, list);
     const o = pl.root,
       w = game.walker;
     if (lastYaw !== null && !pl.seated && lastPos) {
@@ -72,6 +75,43 @@ export function startMoveCheck(game) {
     lastPos = [o.position.x, o.position.z];
   };
   return C;
+}
+
+// how much each person (not Eric) has turned over the last SPIN_WINDOW game seconds: a spin is round and round one
+// way (net), or a heading flipping back and forth for twice that (total)
+const SPIN_WINDOW = 3,
+  SPIN_MAX = 1.5 * 2 * Math.PI;
+const spinOf = new Map();
+function npcSpin(game, C, dt, list) {
+  const now = game.t || 0,
+    seen = new Set();
+  for (const b of list) {
+    if (b.seated || (game.player && b.root === game.player.root)) continue;
+    seen.add(b.root);
+    const yaw = b.root.rotation.y;
+    let s = spinOf.get(b.root);
+    if (!s) spinOf.set(b.root, (s = { yaw, turns: [], sum: 0, net: 0, flagged: false }));
+    const d = angDiff(yaw, s.yaw);
+    s.yaw = yaw;
+    s.turns.push([now, d]);
+    s.sum += Math.abs(d);
+    s.net += d;
+    while (s.turns.length && s.turns[0][0] < now - SPIN_WINDOW) {
+      const [, o] = s.turns.shift();
+      s.sum -= Math.abs(o);
+      s.net -= o;
+    }
+    const bad = Math.abs(s.net) > SPIN_MAX || s.sum > 2 * SPIN_MAX;
+    if (bad && !s.flagged && C.spins.length < 50) {
+      s.flagged = true;
+      const turns = (a) => (a / (2 * Math.PI)).toFixed(1);
+      C.spins.push(
+        `${game.place.name}: ${b.id} turned ${turns(s.sum)} full turns (net ${turns(s.net)}) within ${SPIN_WINDOW} s at [${b.x.toFixed(2)}, ${b.z.toFixed(2)}] t=${now.toFixed(1)}${game.busy ? ' (scene)' : ''}${b.rig._walk ? ' walking' : ''}`,
+      );
+    }
+    if (!bad) s.flagged = false;
+  }
+  for (const k of [...spinOf.keys()]) if (!seen.has(k)) spinOf.delete(k);
 }
 
 const FURN = 0.7;

@@ -229,6 +229,7 @@ export const PLACE_DETAILS = {
       'my_chair': {
         'label': 'Your chair',
         'kind': 'thing',
+        'verb': 'Push to your desk',
       },
       'lift': {
         'label': 'Lift',

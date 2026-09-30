@@ -60,7 +60,7 @@ Controls: WASD or click/tap the floor to walk, E to use or talk to whatever is i
 
 **Beat 1. Free walk (about 0:05 to 0:40, as long as the player wants).** The car moves. Passengers sit as they are: the sleeping man, Aoi on her phone, the man with a book, the girl with headphones, the woman with a bun, the young man, the cat on the seat, and Mio by the window with her laptop and the pickle bag.
 - On screen: nothing, until the player comes within reach of something.
-- First time anything is in reach: a small ring on that one target, its short label ("Man with a book") and a key cap reading "E Look" for a thing or "E Talk" for a person, next to the target and not in a floating menu. It stays until the player presses E or walks out of reach. After two uses the verb word goes and only the key cap stays.
+- First time anything is in reach: a small ring on that one target, its short label ("Man with a book") and a key cap reading "E Look" for a thing or "E Talk" for a person, next to the target and not in a floating menu. It stays until the player presses E or walks out of reach. The action word always stays; the key cap goes after five uses (docs/game/controls-and-ui.md).
 - Things (window, poster, straps, rack, plant, cup) answer with one short line. Straps: Eric grabs one as the car sways. Poster: katakana he can't read, and one thought from him. People answer as described in beat 2.
 - Not shown yet: goal, and anything about the story.
 

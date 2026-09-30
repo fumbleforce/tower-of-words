@@ -306,7 +306,7 @@ The second basement of head office: IT support. One compact floor, close to squa
 | `fan` | Fan | A desk fan. |
 | `boxes` | Boxes | Cardboard boxes. |
 | `my_desk` | Your desk | South row, middle. Name card エリック, with ERIC written under it in pen. |
-| `my_chair` | Your chair | Starts in the machine room with Tama asleep on it. |
+| `my_chair` | Your chair | Starts in the machine room with Tama asleep on it. Its action, "Push to your desk", is what sends it home: Eric pushes it through the corridor to his desk with Tama riding. |
 | `chief_desk` | Mr. Mori's desk | The section chief's desk at the head of the island. |
 | `nameplate` | Nameplate | Face down on Mori's desk. |
 | `covered` | A covered desk | North row, middle: a dust sheet over the monitor, and no dust on the name card. |

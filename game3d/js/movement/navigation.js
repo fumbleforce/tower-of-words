@@ -272,3 +272,12 @@ export function pathAround(nav, from, to, list, myR) {
   nav.unblock('_people');
   return path && path.length ? path : null;
 }
+
+// A walk getting nowhere stops where it is (Jørgen, 2026-09-30: "Mio was spinning around 20 times in place"): no
+// nearer the end for a second close to it (2.5 s anywhere), or a full turn without getting nearer.
+export function stuck(prog, remain, dt, wait, turn) {
+  if (remain < prog.best - 0.02) Object.assign(prog, { best: remain, noGain: 0, spun: 0 });
+  else if (!wait) prog.noGain += dt;
+  prog.spun += Math.abs(turn);
+  return (prog.noGain > 1 && remain < 0.6) || prog.noGain > 2.5 || prog.spun > 2 * Math.PI;
+}

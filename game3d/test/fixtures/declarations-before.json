@@ -707,7 +707,8 @@
         },
         "my_chair": {
           "label": "Your chair",
-          "kind": "thing"
+          "kind": "thing",
+          "verb": "Push to your desk"
         },
         "lift": {
           "label": "Lift",

@@ -3,7 +3,7 @@
 import { PEOPLE, walkPose, HIP } from '../cast.js';
 import { blob } from '../engine.js';
 import { rbox } from '../props.js';
-import { queueStep } from '../move.js';
+import { queueStep, turnToward } from '../move.js';
 import { K } from '../scenes/office.js';
 
 // w: the built room; st: the gate's state (rush, gateOpen, jam, leaving); readerFlash and openFor: the gate's readers
@@ -45,7 +45,10 @@ export function lobbyCommuters(game, w, st, { readerFlash, openFor }) {
     const moveTo = (tx, tz, sp = 1.25) => {
       const k = queueStep(game, r, tx, tz, sp, dt);
       if (k !== 1) return k === 0 || !!walkPose(r, 0, 0);
-      r.root.rotation.y = Math.atan2(tx - p.x, tz - p.z);
+      // a smooth turn, and none in the last few centimetres, where a nudge from a neighbour flipped the heading
+      // back and forth every step (the fast test's spin check caught commuters spinning at the gate)
+      if (Math.hypot(tx - p.x, tz - p.z) > 0.15)
+        r.root.rotation.y = turnToward(r.root.rotation.y, Math.atan2(tx - p.x, tz - p.z), dt);
       c.ph += dt * 9.5;
       walkPose(r, c.ph, 1);
       c.b.position.set(p.x, 0.004, p.z);

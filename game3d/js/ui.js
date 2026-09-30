@@ -472,17 +472,15 @@ export const ui = {
     if (key !== this._actKey) {
       this._actKey = key;
       // Jørgen: "the interaction box is also not very pretty". The name on top, then one row per action: a key cap
-      // and the action in one type style. The verb word goes after two uses and the key cap after five; then the
-      // name itself is the button (the name always stays). Phone rows have no key caps.
+      // and the action in one type style. The action row always names its action (Jørgen, 2026-09-30, on a box that
+      // had dropped it and showed only the name: "interaction windows but no actions"); the key cap goes after five
+      // uses. Phone rows have no key caps.
       const k = (c) => (phone ? '' : `<span class="k">${c}</span>`);
-      const withVerb = phone || uses < 2 || !name;
-      const head = (withVerb || !canUse) && name ? `<div class="hd">${name}</div>` : '';
-      const useFace = withVerb
-        ? `${k('E')}<span class="lb">${verb}</span>`
-        : `${uses < 5 ? k('E') : ''}<span class="lb">${name}</span>`;
+      const head = name ? `<div class="hd">${name}</div>` : '';
+      const useFace = `${uses < 5 ? k('E') : ''}<span class="lb">${verb}</span>`;
       act.innerHTML =
         head +
-        (canUse ? `<button type="button" class="act use${withVerb ? '' : ' named'}">${useFace}</button>` : '') +
+        (canUse ? `<button type="button" class="act use">${useFace}</button>` : '') +
         (sayHere
           ? `<button type="button" class="act say${ob.sayUsed ? '' : ' first'}">${k(keyLabel(settings.keySay || 'KeyQ'))}<span class="lb">Say a word</span></button>`
           : '') +
