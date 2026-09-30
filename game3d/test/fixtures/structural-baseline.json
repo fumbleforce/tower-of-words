@@ -464,6 +464,14 @@
     },
     {
       "from": "train:first_bun",
+      "to": "train:bun",
+      "kind": "call",
+      "labels": [],
+      "cond": "",
+      "call": true
+    },
+    {
+      "from": "train:first_bun",
       "to": "train:nod_seat",
       "kind": "call",
       "labels": [],
@@ -472,7 +480,23 @@
     },
     {
       "from": "train:first_youth",
+      "to": "train:youth",
+      "kind": "call",
+      "labels": [],
+      "cond": "",
+      "call": true
+    },
+    {
+      "from": "train:first_youth",
       "to": "train:nod_seat",
+      "kind": "call",
+      "labels": [],
+      "cond": "",
+      "call": true
+    },
+    {
+      "from": "train:first_music",
+      "to": "train:music",
       "kind": "call",
       "labels": [],
       "cond": "",
@@ -1631,6 +1655,9 @@
   "flags": [
     "passengers",
     "seat_goal",
+    "train_bun_seen",
+    "train_youth_seen",
+    "train_music_seen",
     "bag_wobble",
     "mio_warm",
     "heard_mum",
@@ -1657,6 +1684,8 @@
     "held_doors",
     "phone_buzz",
     "can_exit",
+    "train_hamada_seen",
+    "train_reader_seen",
     "greeted_guard",
     "guard_asked",
     "jammed",

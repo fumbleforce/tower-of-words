@@ -90,17 +90,17 @@ export default {
       { call: 'nod_seat' },
     ],
     first_bun: [
-      { say: 'bun', overheard: true, emo: 'polite', text: 'あ、そこ、空いてますよ。' },
+      { call: 'bun' },
       { do: 'gesture', who: 'bun', kind: 'point', to: 'seat_far_r' },
       { call: 'nod_seat' },
     ],
     first_youth: [
-      { say: 'youth', overheard: true, emo: 'casual', text: 'え？あ、あそこ、どうぞ。' },
+      { call: 'youth' },
       { do: 'gesture', who: 'youth', kind: 'point', to: 'seat_far_r' },
       { call: 'nod_seat' },
     ],
     first_music: [
-      { say: 'music', overheard: true, emo: 'low', text: 'え？…あっち、空いてる。' },
+      { call: 'music' },
       { do: 'gesture', who: 'music', kind: 'point', to: 'seat_far_r' },
       { call: 'nod_seat' },
     ],
@@ -114,10 +114,50 @@ export default {
       { set: 'seat_goal' },
       { do: 'goal', text: 'Sit by the lunchbox.', at: 'seat_far_r' },
     ],
-    bun: [{ say: 'bun', overheard: true, emo: 'polite', text: 'いい天気ですね。' }],
-    youth: [{ say: 'youth', overheard: true, emo: 'casual', text: '…ん？' }, { do: 'emote', who: 'youth', kind: '?' }],
-    // the ♪ alone read as no answer at all (cold playtest 2026-09-30)
-    music: [{ do: 'emote', who: 'music', kind: '♪' }, "> Her music is too loud. She doesn't hear you."],
+    bun: [
+      { if: "train_bun_seen", then: [
+        { do: "emote", who: "bun", kind: "heart" },
+      ], else: [
+        { do: "cam", on: "bun", zoom: 1.7 },
+        { do: "shopBag", state: "ask" },
+        { do: "shopBag", state: "close" },
+        { say: "bun", emo: "warm", text: "ありがとう。", en: "Thank you." },
+        { do: "cam", back: true },
+        { set: "train_bun_seen" },
+      ] },
+    ],
+    youth: [
+      { if: "train_youth_seen", then: [
+        { do: "emote", who: "youth", kind: "heart" },
+      ], else: [
+        { do: "cam", on: "youth", zoom: 1.7 },
+        { do: "phone", who: "youth", state: "show" },
+        { say: "youth", emo: "proud", text: "負けたけど、初めてゴール決めたんだ。", en: "We lost, but I scored my first goal." },
+        { do: "gesture", who: "eric", kind: "point", to: "youth" },
+        { say: "eric", emo: "curious", text: "That's you?" },
+        { do: "phone", who: "youth", state: "point" },
+        { do: "gesture", who: "youth", kind: "nod", to: "eric" },
+        { do: "phone", who: "youth", state: "away" },
+        { do: "cam", back: true },
+        { set: "train_youth_seen" },
+      ] },
+    ],
+    music: [
+      { if: "train_music_seen", then: [
+        { do: "emote", who: "music", kind: "♪" },
+      ], else: [
+        { do: "cam", on: "music", zoom: 1.7 },
+        { do: "headphones", who: "music", state: "lift" },
+        { say: "music", emo: "apologetic", text: "あ、ごめん。音、漏れてた？", en: "Oh, sorry. Could you hear that?" },
+        { say: "eric", emo: "gentle", text: "Only a little." },
+        { do: "phone", who: "music", state: "show" },
+        { say: "music", emo: "shy", text: "自分で録ったの。まだ下手だけど。", en: "I recorded it myself. I’m still pretty bad, though." },
+        { do: "phone", who: "music", state: "away" },
+        { do: "headphones", who: "music", state: "on" },
+        { do: "cam", back: true },
+        { set: "train_music_seen" },
+      ] },
+    ],
     stander: [{ do: 'emote', who: 'stander', kind: '…' }],
     ohayo_bun: [{ say: 'bun', overheard: true, emo: 'warm', text: 'はい、{ohayo}。' }],
     ohayo_youth: [{ say: 'youth', overheard: true, emo: 'casual', text: 'あ、ども。' }],
@@ -388,10 +428,36 @@ export default {
     ohayo_reader: ['> He nods, still reading.'],
     asleep: [{ do: 'emote', who: 'kuroda', kind: 'zzz' }],
     matte_tama: ['> She stops washing, one paw in the air, and stares at you. Then she carries on.'],
-    hamada: ['> A sticky note on his briefcase says "12F 9:00!!"'],
+    hamada: [
+      { if: "train_hamada_seen", then: [
+        { do: "emote", who: "kuroda", kind: "zzz" },
+      ], else: [
+        { do: "cam", on: "kuroda", zoom: 1.7 },
+        "> A sticky note on his briefcase says \"12F 9:00!!\"",
+        { do: "phone", who: "kuroda", state: "buzz" },
+        { do: "phone", who: "kuroda", state: "tap" },
+        { say: "kuroda", emo: "sleepy", text: "すみません……あと五分。", en: "Sorry... five more minutes." },
+        { do: "cam", back: true },
+        { set: "train_hamada_seen" },
+      ] },
+    ],
     phone_girl: [
       { say: 'aoi', emo: 'bright', text: 'だから今日、配属が決まるの！どこでもいいけど、地下はいや。', overheard: true },
     ],
-    reader: ['> The book is called "Excel for People Who Hate Excel".'],
+    reader: [
+      { if: "train_reader_seen", then: [
+        { do: "emote", who: "reader", kind: "…" },
+      ], else: [
+        { do: "cam", on: "reader", zoom: 1.7 },
+        "> The book is called \"Excel for People Who Hate Excel\".",
+        { do: "printout", state: "show" },
+        { say: "reader", emo: "weary", text: "会社のは古くて、同じボタンがないんだよ。", en: "The version at work is old. It doesn’t have the same buttons." },
+        { say: "eric", emo: "surprised", text: "Windows 95?" },
+        { say: "reader", emo: "dry", text: "うん。会社の。", en: "Yes, that’s the one at work." },
+        { do: "printout", state: "away" },
+        { do: "cam", back: true },
+        { set: "train_reader_seen" },
+      ] },
+    ],
   },
 };

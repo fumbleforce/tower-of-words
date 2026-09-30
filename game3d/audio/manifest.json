@@ -287,36 +287,6 @@
   "emo": "bright"
  },
  {
-  "key": "oh-fob4e4",
-  "speaker": "bun",
-  "text": "あ、そこ、空いてますよ。",
-  "lang": "ja",
-  "overheard": true,
-  "words": [],
-  "clear": [],
-  "emo": "polite"
- },
- {
-  "key": "oh-1uv3627",
-  "speaker": "youth",
-  "text": "え？あ、あそこ、どうぞ。",
-  "lang": "ja",
-  "overheard": true,
-  "words": [],
-  "clear": [],
-  "emo": "casual"
- },
- {
-  "key": "oh-1902qmc",
-  "speaker": "music",
-  "text": "え？…あっち、空いてる。",
-  "lang": "ja",
-  "overheard": true,
-  "words": [],
-  "clear": [],
-  "emo": "low"
- },
- {
   "key": "oh-1p65yct",
   "speaker": "stander",
   "text": "…あそこ。",
@@ -327,24 +297,64 @@
   "emo": "low"
  },
  {
-  "key": "oh-fqmmkq",
+  "key": "ln-18140tk",
   "speaker": "bun",
-  "text": "いい天気ですね。",
+  "text": "ありがとう。",
   "lang": "ja",
-  "overheard": true,
+  "overheard": false,
   "words": [],
   "clear": [],
-  "emo": "polite"
+  "emo": "warm"
  },
  {
-  "key": "oh-322d0v",
+  "key": "ln-t6y7ml",
   "speaker": "youth",
-  "text": "…ん？",
+  "text": "負けたけど、初めてゴール決めたんだ。",
   "lang": "ja",
-  "overheard": true,
+  "overheard": false,
   "words": [],
   "clear": [],
-  "emo": "casual"
+  "emo": "proud"
+ },
+ {
+  "key": "ln-1iogb45",
+  "speaker": "eric",
+  "text": "That's you?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "ln-k8txd4",
+  "speaker": "music",
+  "text": "あ、ごめん。音、漏れてた？",
+  "lang": "ja",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "apologetic"
+ },
+ {
+  "key": "ln-n9q8j7",
+  "speaker": "eric",
+  "text": "Only a little.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "gentle"
+ },
+ {
+  "key": "ln-1hdwfkl",
+  "speaker": "music",
+  "text": "自分で録ったの。まだ下手だけど。",
+  "lang": "ja",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "shy"
  },
  {
   "key": "oh-1c4p8ez",
@@ -999,6 +1009,21 @@
   "emo": "hurried"
  },
  {
+  "key": "ln-181z3kl",
+  "speaker": "kuroda",
+  "text": "すみません……あと五分。",
+  "lang": "ja",
+  "overheard": false,
+  "words": [
+   [
+    "sumimasen",
+    "すみません"
+   ]
+  ],
+  "clear": [],
+  "emo": "sleepy"
+ },
+ {
   "key": "oh-1wyzao6",
   "speaker": "aoi",
   "text": "だから今日、配属が決まるの！どこでもいいけど、地下はいや。",
@@ -1007,6 +1032,36 @@
   "words": [],
   "clear": [],
   "emo": "bright"
+ },
+ {
+  "key": "ln-1azsw7e",
+  "speaker": "reader",
+  "text": "会社のは古くて、同じボタンがないんだよ。",
+  "lang": "ja",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "weary"
+ },
+ {
+  "key": "ln-1f3apoo",
+  "speaker": "eric",
+  "text": "Windows 95?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "surprised"
+ },
+ {
+  "key": "ln-157cif7",
+  "speaker": "reader",
+  "text": "うん。会社の。",
+  "lang": "ja",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "dry"
  },
  {
   "key": "oh-19g18x",

@@ -1,0 +1,109 @@
+{
+  "status": "pending",
+  "request": "C-0193/C-0206; X-0320",
+  "issue": 6,
+  "pipeline": "sh tools/voice/run.sh",
+  "clips": [
+    {
+      "key": "ln-18140tk",
+      "speaker": "bun",
+      "text": "ありがとう。",
+      "authoredText": "ありがとう。",
+      "emo": "warm",
+      "overheard": false,
+      "source": "train:bun",
+      "lang": "ja"
+    },
+    {
+      "key": "ln-t6y7ml",
+      "speaker": "youth",
+      "text": "負けたけど、初めてゴール決めたんだ。",
+      "authoredText": "負けたけど、初めてゴール決めたんだ。",
+      "emo": "proud",
+      "overheard": false,
+      "source": "train:youth",
+      "lang": "ja"
+    },
+    {
+      "key": "ln-1iogb45",
+      "speaker": "eric",
+      "text": "That's you?",
+      "authoredText": "That's you?",
+      "emo": "curious",
+      "overheard": false,
+      "source": "train:youth",
+      "lang": "en"
+    },
+    {
+      "key": "ln-k8txd4",
+      "speaker": "music",
+      "text": "あ、ごめん。音、漏れてた？",
+      "authoredText": "あ、ごめん。音、漏れてた？",
+      "emo": "apologetic",
+      "overheard": false,
+      "source": "train:music",
+      "lang": "ja"
+    },
+    {
+      "key": "ln-n9q8j7",
+      "speaker": "eric",
+      "text": "Only a little.",
+      "authoredText": "Only a little.",
+      "emo": "gentle",
+      "overheard": false,
+      "source": "train:music",
+      "lang": "en"
+    },
+    {
+      "key": "ln-1hdwfkl",
+      "speaker": "music",
+      "text": "自分で録ったの。まだ下手だけど。",
+      "authoredText": "自分で録ったの。まだ下手だけど。",
+      "emo": "shy",
+      "overheard": false,
+      "source": "train:music",
+      "lang": "ja"
+    },
+    {
+      "key": "ln-1azsw7e",
+      "speaker": "reader",
+      "text": "会社のは古くて、同じボタンがないんだよ。",
+      "authoredText": "会社のは古くて、同じボタンがないんだよ。",
+      "emo": "weary",
+      "overheard": false,
+      "source": "train:reader",
+      "lang": "ja"
+    },
+    {
+      "key": "ln-1f3apoo",
+      "speaker": "eric",
+      "text": "Windows 95?",
+      "authoredText": "Windows 95?",
+      "emo": "surprised",
+      "overheard": false,
+      "source": "train:reader",
+      "lang": "en"
+    },
+    {
+      "key": "ln-157cif7",
+      "speaker": "reader",
+      "text": "うん。会社の。",
+      "authoredText": "うん。会社の。",
+      "emo": "dry",
+      "overheard": false,
+      "source": "train:reader",
+      "lang": "ja"
+    },
+    {
+      "key": "ln-181z3kl",
+      "speaker": "kuroda",
+      "text": "すみません……あと五分。",
+      "authoredText": "すみません……あと五分。",
+      "emo": "sleepy",
+      "overheard": false,
+      "source": "train:hamada",
+      "lang": "ja"
+    }
+  ],
+  "note": "Japanese lines use en subtitles and clear ln-key Japanese audio, not overheard. Text and keys are final; use the existing mapped passenger voices. Aoi and greetings remain unchanged."
+}

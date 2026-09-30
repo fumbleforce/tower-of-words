@@ -66,6 +66,7 @@ The game is not one walkthrough. After day 1 it won't be linear at all, so the s
 | Id | Storyline | Status |
 |---|---|---|
 | [`mio-train`](stories/mio-train.md) | Mio on the monorail: a seat, her bag, 外人, and the greetings lesson. | built |
+| [`train-discoveries`](stories/train-discoveries.md) | Optional encounters with the train passengers. | built |
 | [`sleeping-man`](stories/sleeping-man.md) | Mr. Hamada: asleep on the train, stuck in the gate, grateful by the afternoon. | built |
 | [`gate-morning`](stories/gate-morning.md) | The guard, a proper good morning, and a card that won't work until nine. | built |
 | [`emi-budget`](stories/emi-budget.md) | Emi upstairs all day fighting for B2's parts budget, and what she promised. | built |
