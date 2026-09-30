@@ -2,7 +2,7 @@
  "title": "Portrait style consistency: the B2 team in one picture",
  "date": "2026-09-30",
  "by": "claude-agent:group-portrait",
- "status": "open",
+ "status": "decided",
  "multi": true,
  "question": "Keep standalone portraits, or move to group-generated ones (or a hybrid)?",
  "media": [
@@ -233,5 +233,8 @@
    "note": "Hires of bce70s0-1003: scaled 1.5x (Lanczos) to 2496x1344 and repainted at denoise 0.35 with a's prompt, seed 1003. Then cut out (BiRefNet-HR on the whole picture, split halfway between faces) and framed on 597x768 with each face on Kenji's face box (x 221-384, y 167-335). Every face was scaled down (0.71 to 0.93), none blown up."
   }
  ],
- "links": []
+ "links": [],
+ "decision": "Jørgen in chat, 2026-09-30: the original Mio and Kuro are his favourites; align the world's portrait style around those two (he expects it to be tough). Milden Mio's stylization a little. Make Kenji look less like a Miyazaki character.",
+ "decided_at": "2026-09-30T16:04:39+0200",
+ "issue": 79
 }

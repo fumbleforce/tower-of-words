@@ -1,165 +1,168 @@
 {
-  "title": "Day 1: read and choose",
-  "date": "2026-09-29",
-  "by": "Codex",
-  "status": "open",
-  "question": "Compare the two complete versions of each passage, then choose the one you want.",
-  "multi": true,
-  "options": [
-    {
-      "id": "g01",
-      "label": "Greeting and card request",
-      "note": "Combine the guard’s reply and card request. Both greetings still work, with the same bows and pointing."
-    },
-    {
-      "id": "g04",
-      "label": "A commuter apologises",
-      "note": "Remove the commuter’s extra apology after your card is refused. The guard still beckons you over. This shows his reply if you greeted him."
-    },
-    {
-      "id": "g05",
-      "label": "The guard points to the bench",
-      "note": "Remove his separate waiting instruction. He still shows nine, points at the bench, and you go over to it."
-    },
-    {
-      "id": "g06",
-      "label": "The exact time on the bench",
-      "note": "Remove the separate 8:52 text. Your card still becomes valid at nine."
-    },
-    {
-      "id": "g07",
-      "label": "The gate’s fault announcement",
-      "note": "Remove the machine’s Japanese fault message. The red gate and the explanation of its count remain."
-    },
-    {
-      "id": "g08",
-      "label": "Explain why he is stuck",
-      "note": "Name the counting error and its result in the same line."
-    },
-    {
-      "id": "g09",
-      "label": "Hamada repeats “open”",
-      "note": "Keep one slow “open” and the meaning cue. Remove his two further attempts. You still type the word if you help him."
-    },
-    {
-      "id": "g10",
-      "label": "Hamada’s gesture",
-      "note": "Shorten the description of his attempt to open the gate."
-    },
-    {
-      "id": "g11",
-      "label": "Mio’s phone messages",
-      "note": "Combine her two messages. Keep her suspicion and point you toward the guard."
-    },
-    {
-      "id": "g12",
-      "label": "Talk to the stuck man",
-      "note": "Replace his repeated explanation with a prompt on the choice. Helping him and leaving him alone remain available."
-    },
-    {
-      "id": "g13",
-      "label": "Your word opens the gate",
-      "note": "Add a direct line about the gate opening at your word; remove the guard’s second phone exchange. Eric still connects it to the train."
-    },
-    {
-      "id": "g14",
-      "label": "Show the guard how to free the man",
-      "note": "Offer the useful mime immediately. Remove the two pointing choices, his explanation of the count, and the repeated description after you choose to lift. The squeeze and cat detours remain."
-    },
-    {
-      "id": "g16",
-      "label": "Try squeezing through",
-      "note": "Name the briefcase in the optional failed mime."
-    },
-    {
-      "id": "g18",
-      "label": "The guard laughs",
-      "note": "If you greeted him, remove his separate laugh after he understands your mime. His warmer permission at the end remains."
-    },
-    {
-      "id": "g19",
-      "label": "Eric thanks the guard",
-      "note": "Remove Eric’s final thanks. Hamada’s thanks, bow and the guard’s permission stay. This shows the warmer permission after greeting him."
-    },
-    {
-      "id": "g20",
-      "label": "Ask Tama to wait",
-      "note": "Name Tama in the description of her stopping at the bowl."
-    },
-    {
-      "id": "g21",
-      "label": "The visitor book",
-      "note": "Shorten the line that reveals Tama signed in first."
-    },
-    {
-      "id": "l01",
-      "label": "Someone pressed five",
-      "note": "Remove the floor-button narration. The lift still stops at five before B2."
-    },
-    {
-      "id": "l02",
-      "label": "Sales reacts to the newcomer",
-      "note": "Remove the man’s extra question. The meeting gossip and their reaction to your card stay."
-    },
-    {
-      "id": "l03",
-      "label": "They notice your card",
-      "note": "Shorten the line about why the conversation stops."
-    },
-    {
-      "id": "o01",
-      "label": "Mori waits for a greeting",
-      "note": "Remove “He waits.” Mori still bows and the greeting control remains."
-    },
-    {
-      "id": "o02",
-      "label": "Kenji introduces himself",
-      "note": "Merge his introduction and chair apology. Keep the forest-cat detour and Mio’s ban."
-    },
-    {
-      "id": "o04",
-      "label": "From the cat chair to your first request",
-      "note": "Let Mio give you the request while you are already talking. Remove the invitation and extra Talk action, and bridge into the request. Keep the 1996 card and Eric’s reaction."
-    },
-    {
-      "id": "o06",
-      "label": "Mori’s copier gesture",
-      "note": "Move the gesture description into the typing prompt. Keep both pronunciations and your submission."
-    },
-    {
-      "id": "o07",
-      "label": "Tell Mio the copier is fixed",
-      "note": "Merge her reply and move into lunch. Keep her echo of “asked it nicely” and the connection to the train doors."
-    },
-    {
-      "id": "o08",
-      "label": "Mio’s rack-alarm gesture",
-      "note": "At lunch with Mio, move the flat-palm description into the typing prompt. Both pronunciations and the result remain. Her warmer reply is shown here; her cooler reply also stays."
-    },
-    {
-      "id": "o09",
-      "label": "Mori’s pouring gesture",
-      "note": "At lunch with Mori, move his pouring mime into the typing prompt. Keep the seven cups and his response to them."
-    },
-    {
-      "id": "o10",
-      "label": "Mio’s evening opening",
-      "note": "Merge her goodbye and the way she addresses you. She still uses your name if you ate together."
-    },
-    {
-      "id": "o11",
-      "label": "The sensor excuse, again",
-      "note": "Remove Mio’s repeated instruction after the new request card. Keep the card and both goodbyes."
-    }
-  ],
-  "links": [
-    {
-      "label": "Compare complete passages",
-      "href": "reviews/day1-frames/"
-    },
-    {
-      "label": "Earlier train decision",
-      "href": "bible/#review/day1-simplify"
-    }
-  ]
+ "title": "Day 1: read and choose",
+ "date": "2026-09-29",
+ "by": "Codex",
+ "status": "decided",
+ "question": "Compare the two complete versions of each passage, then choose the one you want.",
+ "multi": true,
+ "options": [
+  {
+   "id": "g01",
+   "label": "Greeting and card request",
+   "note": "Combine the guard’s reply and card request. Both greetings still work, with the same bows and pointing."
+  },
+  {
+   "id": "g04",
+   "label": "A commuter apologises",
+   "note": "Remove the commuter’s extra apology after your card is refused. The guard still beckons you over. This shows his reply if you greeted him."
+  },
+  {
+   "id": "g05",
+   "label": "The guard points to the bench",
+   "note": "Remove his separate waiting instruction. He still shows nine, points at the bench, and you go over to it."
+  },
+  {
+   "id": "g06",
+   "label": "The exact time on the bench",
+   "note": "Remove the separate 8:52 text. Your card still becomes valid at nine."
+  },
+  {
+   "id": "g07",
+   "label": "The gate’s fault announcement",
+   "note": "Remove the machine’s Japanese fault message. The red gate and the explanation of its count remain."
+  },
+  {
+   "id": "g08",
+   "label": "Explain why he is stuck",
+   "note": "Name the counting error and its result in the same line."
+  },
+  {
+   "id": "g09",
+   "label": "Hamada repeats “open”",
+   "note": "Keep one slow “open” and the meaning cue. Remove his two further attempts. You still type the word if you help him."
+  },
+  {
+   "id": "g10",
+   "label": "Hamada’s gesture",
+   "note": "Shorten the description of his attempt to open the gate."
+  },
+  {
+   "id": "g11",
+   "label": "Mio’s phone messages",
+   "note": "Combine her two messages. Keep her suspicion and point you toward the guard."
+  },
+  {
+   "id": "g12",
+   "label": "Talk to the stuck man",
+   "note": "Replace his repeated explanation with a prompt on the choice. Helping him and leaving him alone remain available."
+  },
+  {
+   "id": "g13",
+   "label": "Your word opens the gate",
+   "note": "Add a direct line about the gate opening at your word; remove the guard’s second phone exchange. Eric still connects it to the train."
+  },
+  {
+   "id": "g14",
+   "label": "Show the guard how to free the man",
+   "note": "Offer the useful mime immediately. Remove the two pointing choices, his explanation of the count, and the repeated description after you choose to lift. The squeeze and cat detours remain."
+  },
+  {
+   "id": "g16",
+   "label": "Try squeezing through",
+   "note": "Name the briefcase in the optional failed mime."
+  },
+  {
+   "id": "g18",
+   "label": "The guard laughs",
+   "note": "If you greeted him, remove his separate laugh after he understands your mime. His warmer permission at the end remains."
+  },
+  {
+   "id": "g19",
+   "label": "Eric thanks the guard",
+   "note": "Remove Eric’s final thanks. Hamada’s thanks, bow and the guard’s permission stay. This shows the warmer permission after greeting him."
+  },
+  {
+   "id": "g20",
+   "label": "Ask Tama to wait",
+   "note": "Name Tama in the description of her stopping at the bowl."
+  },
+  {
+   "id": "g21",
+   "label": "The visitor book",
+   "note": "Shorten the line that reveals Tama signed in first."
+  },
+  {
+   "id": "l01",
+   "label": "Someone pressed five",
+   "note": "Remove the floor-button narration. The lift still stops at five before B2."
+  },
+  {
+   "id": "l02",
+   "label": "Sales reacts to the newcomer",
+   "note": "Remove the man’s extra question. The meeting gossip and their reaction to your card stay."
+  },
+  {
+   "id": "l03",
+   "label": "They notice your card",
+   "note": "Shorten the line about why the conversation stops."
+  },
+  {
+   "id": "o01",
+   "label": "Mori waits for a greeting",
+   "note": "Remove “He waits.” Mori still bows and the greeting control remains."
+  },
+  {
+   "id": "o02",
+   "label": "Kenji introduces himself",
+   "note": "Merge his introduction and chair apology. Keep the forest-cat detour and Mio’s ban."
+  },
+  {
+   "id": "o04",
+   "label": "From the cat chair to your first request",
+   "note": "Let Mio give you the request while you are already talking. Remove the invitation and extra Talk action, and bridge into the request. Keep the 1996 card and Eric’s reaction."
+  },
+  {
+   "id": "o06",
+   "label": "Mori’s copier gesture",
+   "note": "Move the gesture description into the typing prompt. Keep both pronunciations and your submission."
+  },
+  {
+   "id": "o07",
+   "label": "Tell Mio the copier is fixed",
+   "note": "Merge her reply and move into lunch. Keep her echo of “asked it nicely” and the connection to the train doors."
+  },
+  {
+   "id": "o08",
+   "label": "Mio’s rack-alarm gesture",
+   "note": "At lunch with Mio, move the flat-palm description into the typing prompt. Both pronunciations and the result remain. Her warmer reply is shown here; her cooler reply also stays."
+  },
+  {
+   "id": "o09",
+   "label": "Mori’s pouring gesture",
+   "note": "At lunch with Mori, move his pouring mime into the typing prompt. Keep the seven cups and his response to them."
+  },
+  {
+   "id": "o10",
+   "label": "Mio’s evening opening",
+   "note": "Merge her goodbye and the way she addresses you. She still uses your name if you ate together."
+  },
+  {
+   "id": "o11",
+   "label": "The sensor excuse, again",
+   "note": "Remove Mio’s repeated instruction after the new request card. Keep the card and both goodbyes."
+  }
+ ],
+ "links": [
+  {
+   "label": "Compare complete passages",
+   "href": "reviews/day1-frames/"
+  },
+  {
+   "label": "Earlier train decision",
+   "href": "bible/#review/day1-simplify"
+  }
+ ],
+ "decision": "Jørgen in chat 2026-09-30 agreed to Claude's reading of his train choices. Apply as proposed: g01 g05 g08 g09 g10 g11 g12 g14 g16 g20 g21 l01 l03 o01 o02 o04 o06 o07 o08 o09 o10 o11. Keep original: g04 g06 g07 g18 g19 l02. g13: remove the guard's second phone exchange but do NOT add the new line. Gist: merges fine; keep flavour, context-giving and charming lines and small gestures; keep direct personal phrasing; cut narration of what's visible and extra steps; no more text early.",
+ "decided_at": "2026-09-30T18:58:40+0200",
+ "issue": 4
 }
