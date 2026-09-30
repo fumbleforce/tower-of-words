@@ -367,7 +367,7 @@ export default {
     ],
     mio_phone: [
       { do: 'phone', who: 'mio', state: 'look' },
-      { say: 'mio', face: 'tired', emo: 'groan', text: "あー, no, no... the server's down again. Sorry, I have to run." },
+      { say: 'mio', face: 'phone', emo: 'groan', text: "あー, no, no... the server's down again. Sorry, I have to run." },
       { do: 'phone', who: 'mio', state: 'away' },
       { say: 'mio', emo: 'hurried', text: "You can't even help, your card won't work until nine, I think. So talk to the guard." },
       { if: 'mio_warm >= 2', then: [
