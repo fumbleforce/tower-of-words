@@ -13,7 +13,7 @@ export const FACE = {
   // shoulder (image right) ends inside the picture (reviews/eric-canvas-1)
   eric: { W: 648, H: 768, f: [112, 208, 348, 399] },
   guard: { W: 597, H: 768, f: [250, 162, 374, 300] },
-  kenji: { W: 597, H: 768, f: [229, 169, 371, 330] },
+  kenji: { W: 597, H: 768, f: [221, 167, 384, 335] },
   kuro: { W: 630, H: 809, f: [254, 325, 452, 525] },
   kuroda: { W: 597, H: 768, f: [240, 154, 364, 313] },
   mio: { W: 597, H: 768, f: [192, 214, 361, 383] },
