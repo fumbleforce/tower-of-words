@@ -39,5 +39,6 @@
  "decided": [
   "adopt-changes"
  ],
- "decision": "Adopted with his change: people and places described as facts (routines, schedules), the story kept as one file per storyline in docs/game/stories/, no linear walkthrough."
+ "decision": "Adopted with his change: people and places described as facts (routines, schedules), the story kept as one file per storyline in docs/game/stories/, no linear walkthrough.",
+ "issue": 30
 }

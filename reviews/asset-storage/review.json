@@ -33,5 +33,6 @@
    "href": "bible/#doc/notes/asset-storage-proposal.md"
   }
  ],
- "decision": "Cloudflare R2 for used assets only; local machine keeps WIP and rejected; repo as lean as possible, all resources in git-ignored areas, upload what another machine needs (Jørgen, 11:44)"
+ "decision": "Cloudflare R2 for used assets only; local machine keeps WIP and rejected; repo as lean as possible, all resources in git-ignored areas, upload what another machine needs (Jørgen, 11:44)",
+ "issue": 20
 }

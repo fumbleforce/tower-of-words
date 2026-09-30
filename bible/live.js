@@ -8,6 +8,7 @@ import { STORY_FILES } from '../game3d/js/places/definitions.js';
 export const SOURCES = [
   ['reviews/', 'The review queue: each item\'s review.json and Jørgen\'s feedback.json'],
   ['showcase/', 'The Showcase log: each entry\'s entry.json and Jørgen\'s feedback.json'],
+  ['https://github.com/fumbleforce/tower-of-words/issues?q=label%3Awork', 'The work tracker: GitHub issues labelled work, read through tools/review_server.py'],
   ['GUIDE.md', 'Rules and decisions: every quote on these pages'],
   ['game3d/story/train.js', 'Who speaks on the train, their lines, the words taught there'],
   ['game3d/story/gate.js', 'Who speaks at the gate, their lines, the words taught there'],
@@ -71,6 +72,16 @@ export async function loadLive(ROOT, snapshot, extraFiles = []) {
   };
   L.reloadReviews = async () => { L.reviews = await loadItems('reviews', 'review.json'); return L.reviews; };
   L.reloadShowcase = async () => { L.showcase = await loadItems('showcase', 'entry.json'); return L.showcase; };
+  // the work tracker's GitHub issues and the stale list, from tools/review_server.py (GET /api/work, 60 s cache).
+  // Without that server (a plain static host) L.work stays null and the Work page links to GitHub instead.
+  L.reloadWork = async () => {
+    try {
+      const r = await fetch(abs('api/work'), { cache: 'no-cache' });
+      const j = r.ok ? await r.json() : { error: `the server said ${r.status}` };
+      L.work = j.items || null; L.workStale = j.stale || []; L.workError = j.error || null;
+    } catch (e) { L.work = null; L.workStale = []; L.workError = e.message; }
+    return L.work;
+  };
 
   const mods = {};
   const tasks = [

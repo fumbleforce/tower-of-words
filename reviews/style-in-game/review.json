@@ -96,5 +96,6 @@
   "bake-soft",
   "detail"
  ],
- "decision": "all three approved: surfaces 'looks good', bake-soft 'good', detail 'great'"
+ "decision": "all three approved: surfaces 'looks good', bake-soft 'good', detail 'great'",
+ "issue": 46
 }

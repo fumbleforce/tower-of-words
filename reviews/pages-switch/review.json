@@ -17,5 +17,6 @@
    "note": "Main stays unpushed until you say so."
   }
  ],
- "decision": "Jørgen in chat: 'push dont care about existing page' (no gh-pages switch)"
+ "decision": "Jørgen in chat: 'push dont care about existing page' (no gh-pages switch)",
+ "issue": 40
 }

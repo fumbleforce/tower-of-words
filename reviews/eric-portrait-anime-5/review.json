@@ -48,5 +48,6 @@
  "decided": [
   "eric-r4-909"
  ],
- "decision": "r4-909, crop to match the others' height"
+ "decision": "r4-909, crop to match the others' height",
+ "issue": 24
 }

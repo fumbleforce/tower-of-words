@@ -25,5 +25,6 @@
  "decided": [
   "done"
  ],
- "decision": "Keys in .env; sync.py status --remote connects (R2: 0 blobs), 2026-09-29"
+ "decision": "Keys in .env; sync.py status --remote connects (R2: 0 blobs), 2026-09-29",
+ "issue": 42
 }

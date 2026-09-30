@@ -21,5 +21,6 @@
   "mori-hold",
   "walkto"
  ],
- "decision": "both: mori-hold, walkto"
+ "decision": "both: mori-hold, walkto",
+ "issue": 36
 }

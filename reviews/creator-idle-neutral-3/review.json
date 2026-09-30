@@ -68,5 +68,6 @@
  "decided": [
   "relaxed-3"
  ],
- "decision": "relaxed-3: 'looks good'"
+ "decision": "relaxed-3: 'looks good'",
+ "issue": 3
 }

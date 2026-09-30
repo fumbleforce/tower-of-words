@@ -2,12 +2,16 @@
 # After a commit that touches game3d/, check in the background that the commit boots (tools/check/head-boot.mjs,
 # about 15 s). The result goes to <git dir>/head-boot/latest.txt and <git dir>/head-boot/<short id>.txt; the
 # commit itself is never held up or undone. Skipped during a rebase or cherry-pick (tools/land.sh runs the check
-# on what it lands) and with HEAD_BOOT=0.
+# on what it lands) and with HEAD_BOOT=0. Before that, any stuck or out-of-sync work (tools/work.py stale) is
+# printed as a warning.
 [ "${HEAD_BOOT:-1}" = 0 ] && exit 0
 hooks=$(cd "$(dirname "$0")" && pwd)  # the checker next to this hook, so it exists even in an older worktree
 for state in rebase-merge rebase-apply CHERRY_PICK_HEAD; do
   [ -e "$(git rev-parse --git-path "$state")" ] && exit 0
 done
+# The work tracker's sync check (tools/work.py stale: GitHub issues against Review decisions), as a warning only.
+top=$(git rev-parse --show-toplevel)
+[ -f "$top/tools/work.py" ] && (cd "$top" && timeout 20 python3 tools/work.py stale --brief 2>/dev/null | sed 's/^/post-commit: /')
 commit=$(git rev-parse HEAD)
 git diff-tree --quiet --no-commit-id --root -r "$commit" -- game3d/ 2>/dev/null && exit 0  # game3d/ unchanged
 cd "$(git rev-parse --show-toplevel)"

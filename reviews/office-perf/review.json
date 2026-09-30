@@ -25,5 +25,6 @@
  "decided": [
   "lighter-phone"
  ],
- "decision": "Fix now, lighter look on phone allowed; low priority but should be done"
+ "decision": "Fix now, lighter look on phone allowed; low priority but should be done",
+ "issue": 11
 }
