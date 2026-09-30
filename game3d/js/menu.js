@@ -232,6 +232,12 @@ function releaseTitleCamera(ms = 1600) {
   }
   const start = performance.now();
   return new Promise((res) => {
+    // Continue into another place stops this camera's updates before the flight ends: finish on time anyway, or
+    // the UI stays hidden under title-leaving (the day's summary never showed after a Continue in the dorms)
+    const late = setTimeout(() => {
+      done();
+      res();
+    }, ms + 400);
     cam.update = function (dt, p) {
       camera.fov = orig.fov;
       orig.update.call(this, dt, p); // where the game camera wants to be now
@@ -245,6 +251,7 @@ function releaseTitleCamera(ms = 1600) {
       camera.updateProjectionMatrix();
       camera.updateMatrixWorld();
       if (k >= 1) {
+        clearTimeout(late);
         done();
         res();
       }

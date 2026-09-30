@@ -2,11 +2,13 @@ import * as THREE from 'three';
 import { buildDormCourt } from '../scenes/dorm-court.js';
 import { RoomCam } from '../cam.js';
 import { K } from '../scenes/office.js';
+import { EVENING_GRADE } from '../scenes/town.js';
+import { walkIn } from './edge-walk.js';
 import { glide } from '../move.js';
 import { PLACE_DETAILS } from './catalog.js';
 import { snapshotPeople, restorePeople } from './saved-people.js';
 
-// The dorm courtyard. The trip in from the plaza is planned (places.md); until then it loads with ?place=dorm_court.
+// The dorm courtyard, on the walk home after work; it also loads with ?place=dorm_court.
 // The trip out is the watched walk through the hall doors and the passage into Eric's room (dorms).
 export function dormCourtPlace(game) {
   const w = buildDormCourt();
@@ -34,19 +36,7 @@ export function dormCourtPlace(game) {
     startFacing: Math.PI / 2, // east, into the court from the plaza lane
     defaultPeriod: 'evening',
     music: 'night',
-    grade: {
-      exposure: 1.0,
-      temp: 0.0,
-      sat: 0.76,
-      contrast: 1.04,
-      lift: [0.012, 0.012, 0.02],
-      shadowTint: [-0.01, 0, 0.024],
-      highTint: [0.022, 0.01, -0.014],
-      vignette: 0.22,
-      bloom: 0.3,
-      bloomThreshold: 0.8,
-      focusBand: 0.3,
-    },
+    grade: EVENING_GRADE,
     things,
     spots,
     seats: {},
@@ -95,18 +85,8 @@ export function dormCourtPlace(game) {
         cam.snap(game.player.root.position);
       }
     },
-    async tripIn(g) {
-      // planned: arriving along the lane from the plaza
-      const eric = g.player;
-      eric.scripted = true;
-      eric.root.position.set(w.westEdge[0], 0, w.westEdge[1]);
-      eric.root.rotation.y = Math.PI / 2;
-      cam.snap(eric.root.position);
-      await glide(g, eric.root, w.start, 1.1);
-      eric.setState('idle');
-      eric.scripted = false;
-      g.walker.sync();
-    },
+    // in along the lane from the plaza, on the same close framing the plaza let go of (places/edge-walk.js)
+    tripIn: (g) => walkIn(g, cam, w.westEdge, w.start, Math.PI / 2),
     async tripOut(g) {
       // in through the hall doors, past the mailboxes and into the passage to the rooms, the camera coming in close
       await g.walkTo(w.dormEntry[0], w.dormEntry[1]);

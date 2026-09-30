@@ -599,9 +599,11 @@ export function attachLift(game, place) {
   // the car is in the place from the start; its lid hides it in the lobby
   if (place.name === 'forecourt') {
     place.tripOut = (g, slot) => rideOut(g, L, slot);
+    place.tripInFrom = { ...place.tripInFrom, office: (g) => rideHome(g, L) };
   }
   if (place.name === 'office') {
     place.tripIn = (g, slot) => rideIn(g, L, slot);
+    place.tripOutTo = { ...place.tripOutTo, forecourt: (g) => rideUp(g, L) };
   }
   if (!looping) {
     looping = true;
@@ -1071,6 +1073,109 @@ async function walkOut(g, L, id, i) {
     await glide(g, r.root, to, 1.1);
     r.setState('idle');
   } else if (r.hips) await walkPerson(r, [[L.site.x, L.site.zFront + 0.15], to], { speed: 1.1 });
+}
+
+// ---------- after work, the other way: B2 up to 1, and out into the forecourt ----------
+// the same car and the same shot as the morning ride, with nobody else aboard; the floors count up B1, 1
+async function rideUp(g, L) {
+  const eric = g.player,
+    P = L.place;
+  g.busyTrip = true;
+  await g.walkTo(L.site.out[0], L.site.out[1]);
+  g.walker.locked = true;
+  eric.scripted = true;
+  Object.assign(ride, { on: true, lit: new Set(), dir: 'up', pendingOpen: false, aboard: new Set(), with: [] });
+  ride.floor = g.liftFloor = L.site.floor;
+  for (const rd of L.riders) {
+    rd.r.root.visible = false;
+    rd.r.blob.visible = false;
+  }
+  P.hooks.liftOpen && P.hooks.liftOpen();
+  L.car.want = 1;
+  shootRide(L);
+  elevTo(g, L, RIDE_ELEV, 1.4);
+  await g.wait(700);
+  await doorsOpen(g, L);
+  eric.setState('walk');
+  await glide(g, eric.root, [L.site.x, L.site.zFront + 0.05], 1.05);
+  const settle = Promise.all([
+    anim(g, 0.7, (k) => setCut(L, lerp(L.site.wallH + 0.25, CUT, k))),
+    anim(g, 1.1, (k) => setDark(L, k)),
+  ]);
+  await glide(g, eric.root, slotW(L, 'eric'), 1.0);
+  eric.setState('idle');
+  await turnTo(g, eric.root, 0);
+  await g.wait(250);
+  sfx('tap');
+  ride.lit.add('1');
+  await settle;
+  await g.wait(350);
+  P.hooks.liftClose && P.hooks.liftClose();
+  sfx('door');
+  L.car.want = 0;
+  await g.wait(1300);
+  await g.hooks.floor({ to: '1' });
+  await g.wait(450);
+}
+// floor 1: the car in the dark as the office left it, then the lights, the doors, and out onto the court
+async function rideHome(g, L) {
+  const eric = g.player,
+    P = L.place,
+    cam = L.cam;
+  eric.scripted = true;
+  g.busyTrip = true;
+  const fresh = !ride.on; // Continue from a save made during the ride
+  ride.on = true;
+  ride.floor = g.liftFloor = L.site.floor;
+  ride.lit.delete(L.site.floor);
+  for (const rd of L.riders) {
+    rd.r.root.visible = false;
+    rd.r.blob.visible = false;
+  }
+  setDark(L, 1);
+  setCut(L, CUT);
+  setCap(L, 0);
+  L.car.want = L.car.k = 0;
+  L.car.landWant = L.car.land = 0;
+  const [ex, ez] = slotW(L, 'eric');
+  eric.root.position.set(ex, 0, ez);
+  eric.root.rotation.y = 0;
+  eric.setState('idle');
+  g.walker.facing = 0;
+  shootRide(L, { snap: true });
+  await g.wait(fresh ? 300 : 1400);
+  sfx('lift');
+  await anim(g, 0.9, (k) => setDark(L, 1 - k));
+  P.hooks.liftOpen && P.hooks.liftOpen();
+  L.car.want = 1;
+  await g.wait(650);
+  await doorsOpen(g, L);
+  cam.release();
+  elevTo(g, L, THREE.MathUtils.radToDeg(L.elev0), 1.4);
+  eric.setState('walk');
+  await glide(g, eric.root, [L.site.x, L.site.zFront + 0.15], 1.1);
+  const rise = anim(g, 0.6, (k) => {
+    setCut(L, lerp(CUT, L.site.wallH + 0.25, k));
+    setCap(L, k);
+  });
+  await glide(g, eric.root, L.site.out, 1.1);
+  eric.setState('idle');
+  eric.scripted = false;
+  await rise;
+  setCut(L, 999);
+  await g.wait(300);
+  P.hooks.liftClose && P.hooks.liftClose();
+  L.car.want = 0;
+  ride.on = false;
+  g.busyTrip = false;
+}
+// a place built in daylight and lit for the evening later: forget the lights the ride dimmed from, so the next
+// ride dims (and restores) the evening ones
+export function relightLift(place) {
+  const L = cars.get(place);
+  if (!L || !L.base) return;
+  setDark(L, 0);
+  L.base = null;
 }
 
 // ---------- stills for checking (?cap&place=gate&st=...) through window.__lift.state ----------

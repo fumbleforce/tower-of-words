@@ -242,6 +242,7 @@ export function buildPlaza() {
     officeEdge: [-7.3, LZ], // where the lane leaves the frame toward the forecourt
     officeIn: [-5.4, LZ], // where he stops coming in, clear of the lane's trigger
     dormExit: [5.4, LZ],
+    dormEdge: [7.3, LZ], // where the lane leaves the frame toward the dorm courtyard
     fountainEdge: [FX, FZ + BASIN + 0.5],
     fountain: [FX, FZ],
     edgeX: EDGE_X,

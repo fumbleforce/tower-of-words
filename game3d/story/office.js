@@ -1,5 +1,5 @@
 // Place 3: IT support on B2. Mori, Kenji, Mio, the copier repair, the lunch choice, one gift, and Mio's question.
-// The day ends on a new repair request with Eric's name on it. See STORY.md and VOICE.md.
+// The work day ends on a new repair request with Eric's name on it; then he takes the lift up and walks home. See STORY.md and VOICE.md.
 export default {
   speakers: {
     eric: { name: 'Eric', role: 'you' },
@@ -21,7 +21,7 @@ export default {
     aoi: { '*': { hide: true } },
     rei: { '*': { hide: true } },
     // morning: inside the machine room, behind its shut door (the door scene shouts through it), not in the corridor
-    mio: { morning: { at: 'racks' }, lunch: { at: 'racks' }, afternoon: { at: 'emi_seat' }, evening: { at: 'my_desk' } },
+    mio: { morning: { at: 'racks' }, lunch: { at: 'racks' }, afternoon: { at: 'emi_seat' }, evening: { at: 'my_desk', if: '!going_home' } },
     mori: { lunch: { at: 'kitchen_table' }, afternoon: { at: 'chief_desk' }, evening: { hide: true } },
     kenji: { evening: { hide: true } },
   },
@@ -69,6 +69,7 @@ export default {
     'talk:inout_board': 'inout_board',
     'talk:covered': 'covered',
     'talk:stairs': 'stairs',
+    'talk:lift': { if: 'going_home', node: 'go_home' },
 
     // greetings
     'say:ohayo:mori': [{ if: '!greeted_mori', node: 'ohayo_mori' }, 'greet_again_mori'],
@@ -111,6 +112,7 @@ export default {
     copier: 'got_ticket && !copier_done',
     vending: 'vend_stuck',
     my_desk: 'afternoon_on && !evening_on',
+    lift: 'going_home',
   },
   labels: { my_chair: 'Your chair', my_desk: 'Your desk', vending: 'Vending machine', covered: 'A covered desk' },
 
@@ -612,10 +614,16 @@ export default {
       ], else: [
         { say: 'mio', face: 'deadpan', emo: 'dry', text: "It's the station, tomorrow morning. And if anybody asks, it was the sensor. Don't sleep through it, {gaijin}." },
       ] },
-      { do: 'walk', who: 'mio', to: 'lift_out', wait: false },
+      { do: 'liftOpen' },
+      { do: 'walk', who: 'mio', to: 'lift_out', wait: true },
+      { do: 'hide', id: 'mio' },
+      { do: 'liftClose' },
+      { set: 'going_home' },
+      { do: 'goal', text: 'Take the lift up and walk home to the dorms.' },
       { do: 'save' },
-      { do: 'end' },
     ],
+    // after work: up to the forecourt, and on home (the day ends in his room, story dorms.js)
+    go_home: [{ do: 'trip', to: 'forecourt' }],
 
     // ------------------------------------------------------------------ greetings to Mio
     ohayo_mio: [{ say: 'mio', face: 'smile', emo: 'amused', text: "Ha, too polite. I'm not your boss. Just おはよう (ohayō) is fine." }],

@@ -415,6 +415,7 @@
     "office:end_nicely",
     "office:end_quiet",
     "office:end_ticket",
+    "office:go_home",
     "office:ohayo_mio",
     "office:yoroshiku_mio",
     "office:sumimasen_mio",
@@ -433,8 +434,10 @@
     "plaza:fountain",
     "plaza:dorms_later",
     "plaza:to_forecourt",
+    "plaza:to_dorms",
     "dorm_court:arrive",
     "dorm_court:go_in",
+    "dorms:home",
     "dorms:window",
     "dorms:boxes",
     "dorms:bed",
@@ -1179,14 +1182,32 @@
       "labels": []
     },
     {
+      "from": "transitions:dorm_court_to_dorms",
+      "to": "dorms:home",
+      "kind": "next",
+      "labels": []
+    },
+    {
       "from": "forecourt:to_plaza",
       "to": "plaza:arrive",
       "kind": "trip",
       "labels": []
     },
     {
+      "from": "office:go_home",
+      "to": "forecourt:outside",
+      "kind": "trip",
+      "labels": []
+    },
+    {
       "from": "plaza:to_forecourt",
       "to": "forecourt:outside",
+      "kind": "trip",
+      "labels": []
+    },
+    {
+      "from": "plaza:to_dorms",
+      "to": "dorm_court:arrive",
       "kind": "trip",
       "labels": []
     },
@@ -1685,6 +1706,7 @@
     "gifted_mori",
     "gifted_kenji",
     "evening_on",
-    "met_emi"
+    "met_emi",
+    "going_home"
   ]
 }

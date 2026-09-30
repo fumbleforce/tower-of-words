@@ -4,6 +4,8 @@ import { RoomCam } from '../cam.js';
 import { K } from '../scenes/office.js';
 import { walkOut, walkIn } from './edge-walk.js';
 import { glide } from '../move.js';
+import { eveningLight, EVENING_GRADE } from '../scenes/town.js';
+import { relightLift } from './lift.js';
 import { PLACE_DETAILS } from './catalog.js';
 import { snapshotPeople, restorePeople } from './saved-people.js';
 
@@ -117,6 +119,12 @@ export function forecourtPlace(game) {
       w.update(t, dt);
       // heading east toward the lane: build the plaza now, so the walk there needs no loading pause
       if (game.player.root.position.x > 2.5 && !game.prepared.plaza) game.prepare?.('plaza');
+    },
+    onPeriod(period) {
+      if (period !== 'evening' || P.grade === EVENING_GRADE) return;
+      relightLift(P);
+      eveningLight(w.scene);
+      P.grade = EVENING_GRADE;
     },
     snapshotState() {
       return {

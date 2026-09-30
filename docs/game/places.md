@@ -1,6 +1,6 @@
 # Places
 
-Day 1 has six places: the monorail (`train`), Honsha station’s security room with the gate (`gate`), the station forecourt and head-office entrance (`forecourt`), the fountain plaza east of it (`plaza`, a side trip), the lift (`lift`) and IT support on B2 (`office`). The dorm courtyard (`dorm_court`) and Eric's dorm room (`dorms`) are built and joined by a trip, but the day doesn't reach them yet. For each: its things and their labels, spots, seats, zones, who is there in each period, and its small moments; also places decided but not built, and how you get between places. Forecourt route added on 2026-09-30, the plaza and the dorm courtyard the same day.
+Day 1 has eight places: the monorail (`train`), Honsha station’s security room with the gate (`gate`), the station forecourt and head-office entrance (`forecourt`), the fountain plaza east of it (`plaza`, a side trip in the morning), the lift (`lift`), IT support on B2 (`office`), and on the walk home after work the dorm courtyard (`dorm_court`) and Eric's dorm room (`dorms`), where the day ends. For each: its things and their labels, spots, seats, zones, who is there in each period, and its small moments; also places decided but not built, and how you get between places. Forecourt route added on 2026-09-30, the plaza, the dorm courtyard and the walk home the same day.
 
 Elsewhere: the island as a whole is in [setting.md](setting.md); the people in [cast.md](cast.md); what happens in a place as part of a storyline is in [stories/](stories/); how places look (palette, light, style) in [art-and-sound.md](art-and-sound.md). The hooks a story can call in each place (doors, the gate, the copier) are in game3d/story/FORMAT.md.
 
@@ -20,11 +20,11 @@ There are no cuts to black (Jørgen, 2026-09-28: "elegant, continuous transition
 - `gate` → `forecourt`, walk: Eric walks north out of the security room's back exit. The camera stays close and keeps its angle, then crossfades to him stepping out of the station's north door onto the court.
 - `forecourt` → `lift`, walk: a short crossing north-east to the head office door, through its small lobby, and into the lift.
 - `lift` → `office`, lift: the camera stays inside the car for the whole ride. The floor display counts from 1; someone has pressed 5, where the two from Sales get out; then down to B2. The doors open on the B2 lift landing.
-- `office` → `lift`, walk: planned return from B2 into the existing lift after work, keeping Eric visible through its doors.
-- `lift` → `forecourt`, lift then walk: planned return to head office floor 1; Eric walks through its entrance lobby and out into the same forecourt.
+- `office` → `lift`, walk: after work, Eric walks from B2 into the same lift, the camera easing in on the car as in the morning; the near wall drops and the lights outside go down. He rides alone.
+- `lift` → `forecourt`, lift then walk: the floor display counts B2, B1, 1; the same shot of the car crossfades to head office's floor 1, the lights come up, the doors open and he walks out into the lobby by the forecourt, the wall rising behind him.
 - `forecourt` → `plaza`, walk: Eric walks east off the court along the lane between the hedge and the planting. The camera closes in on him at the lane's end and crossfades to the same close framing of him stepping onto the plaza's lane from the west, then lets go.
 - `plaza` → `forecourt`, walk: the same walk the other way, west along the lane back onto the court beside the planting.
-- `plaza` → `dorm_court`, walk: planned continuation east along the fountain's near edge into the west-facing dorm entrance court. The shop roofs stay south of the route.
+- `plaza` → `dorm_court`, walk: after work only. Eric walks east off the plaza along the lane; the camera closes in on him at the lane's end and crossfades to the same close framing of him stepping into the dorm courtyard from the west, then lets go.
 - `dorm_court` → `dorms`, walk: Eric walks in through the dorm's hall doors, past the mailboxes and into the passage at the back as the camera comes in close, then crossfades to him stepping in through his own front door to `room_entry`.
 
 The dialogue slots for each trip are in game3d/story/transitions.js (format: FORMAT.md, Transitions).
@@ -161,7 +161,9 @@ The lobby is played in the early morning, before nine.
 
 The first outdoor chunk of the picked island-map-4 layout (Jørgen, 2026-09-29). The camera looks north, as in the security room. The station's north wall runs along the bottom, cut low like the indoor near walls, with its open doors; the blue platform roof runs along the west edge. The head office stands up and to the right: a glass-fronted ground floor, its front wall also cut low, with the tower rising behind it. Inside is a small lobby with two wall lamps, a plant and the lift to B2 in the back wall. There is no second security gate. The court between the two doors is about five metres of stone paving with a worn line along the walk. Bicycle racks and a bench stand on the west side, a planted bed with two trees on the east, and two lit bollards along the way. By the head office door stands a low stone sign reading 本社 HEAD OFFICE. A hedge on the east edge marks the lane on toward the plaza. The palette and the warm, low morning sun are the security room's.
 
-Eric walks out of the station, crosses the court under player control, and walks into the lift. He can also walk east along the lane to the fountain plaza and back at any time before the lift. Beyond the court the town goes on as plain background: the road south of the station, grass by the platform, and low-poly building blocks with window rows around head office. The return trip from B2 is still to build.
+Eric walks out of the station, crosses the court under player control, and walks into the lift. He can also walk east along the lane to the fountain plaza and back at any time before the lift. Beyond the court the town goes on as plain background: the road south of the station, grass by the platform, and low-poly building blocks with window rows around head office.
+
+After work he comes up in the same lift and walks home east along the lane. The forecourt and the plaza then take the dorm courtyard's dusk light, and the head-office door and lift have no marker.
 
 ### Things
 
@@ -196,7 +198,7 @@ Nobody lives here in this first outdoor chunk. The two from Sales appear inside 
 
 | Nodes | When | What happens |
 |---|---|---|
-| `outside` | Arrive from the station | The goal points to the head-office lift. |
+| `outside` | Arrive from the station, or up from B2 after work | The goal points to the head-office lift; after work, east along the lane to the dorms. |
 | `head_office` | Use the head-office entrance | The goal points inside to the B2 lift. |
 | `to_b2` | Reach or use the lift | Eric boards the existing watched lift ride. |
 | `to_plaza` | Reach or use the east lane | Eric walks on to the fountain plaza. |
@@ -205,7 +207,7 @@ Nobody lives here in this first outdoor chunk. The two from Sales appear inside 
 
 The second outdoor chunk of island-map-4, east of the forecourt, in the forecourt's palette, light and camera (looking north). A stone lane crosses the frame west to east along the near edge of a round plaza: in from the forecourt on the left, on toward the dorms on the right. North of the lane, the fountain (a round stone basin with a water-filled bowl on a column) stands in a ring of lighter paving, with a bench either side facing it and two lit bollards where the ring meets the lane. Corner beds with trees close the plaza off to either side, and the canteen, with the map's blue roof muted to the platform roof's blue-grey and three umbrellas over its terrace, stands behind. South of the lane runs a grass verge with low shrub beds (kept low so they never hide Eric), a pavement, then the shop row: seven single-storey units seen as roofs, muted awnings over their lane side and three rooftop signs (パン, くすり, カフェ). Their interiors are not part of day 1. Plain blocks stand around, among them the head office tower back to the west and the first dorm block to the east, where the lane goes on.
 
-On day 1 the plaza is a side trip with no story beat: the goal points back to the head-office lift. The east end of the lane is the planned edge toward the dorm courtyard.
+In the morning the plaza is a side trip with no story beat: the goal points back to the head-office lift. After work it is on the walk home, and the east end of the lane goes on to the dorm courtyard.
 
 ### Things
 
@@ -213,7 +215,7 @@ On day 1 the plaza is a side trip with no story beat: the goal points back to th
 |---|---|---|
 | `office_lane` | To head office | The lane's west end, back to the forecourt. |
 | `fountain` | Fountain | The fountain in the middle of the plaza. |
-| `dorm_lane` | To the dorms | The lane's east end, toward the dorms (planned). |
+| `dorm_lane` | To the dorms | The lane's east end, toward the dorms. |
 
 ### Spots
 
@@ -239,9 +241,10 @@ Nobody lives here yet.
 
 | Nodes | When | What happens |
 |---|---|---|
-| `arrive` | Arrive from the forecourt | The goal points back west to the head-office lift. |
+| `arrive` | Arrive from the forecourt | The goal points back west to the head-office lift; after work, east to the dorms. |
 | `fountain` | Talk to the fountain | A sign on the rim asks people not to throw coins; the bottom is covered in coins. |
-| `dorms_later` | Use or walk into the lane's east end | The dorms are further down this lane, for after work. |
+| `dorms_later` | Use or walk into the lane's east end, before work is over | The dorms are further down this lane, for after work. |
+| `to_dorms` | Use or walk into the lane's east end, after work | Eric walks on to the dorm courtyard. |
 | `to_forecourt` | Use or walk into the lane's west end | Eric walks back to the forecourt. |
 
 ## The lift (`lift`)
@@ -314,7 +317,7 @@ The story moves the clock ([systems.md](systems.md)): morning when Eric arrives,
 
 | Id | Usually | Schedule |
 |---|---|---|
-| `mio` | In the machine room in the morning and at lunch; at her desk in the afternoon; Eric's desk in the evening. | morning `racks`, lunch `racks`, afternoon `emi_seat`, evening `my_desk` |
+| `mio` | In the machine room in the morning and at lunch; at her desk in the afternoon; Eric's desk in the evening, until she leaves by the lift. | morning `racks`, lunch `racks`, afternoon `emi_seat`, evening `my_desk` |
 | `mori` | Waits at the lift landing to greet Eric, then at his desk; the kitchenette table at lunch; gone home in the evening. | lunch `kitchen_table`, afternoon `chief_desk`, evening hidden |
 | `kenji` | His desk, north row, left; gone home in the evening. | evening hidden |
 | `emi` | Upstairs all day; comes down at 17:40 for a few minutes. | hidden all day |
@@ -339,7 +342,7 @@ The story moves the clock ([systems.md](systems.md)): morning when Eric arrives,
 
 The small entrance court of Eric's dorm, from the dorm cluster in the south-east of island-map-4 (Jørgen, 2026-09-30: "less saturated, uses our existing style. Focus on the area we need, not the whole island at once. Break the outdoor locations into chunks you navigate between"). The camera looks north, as in the forecourt. Eric comes in on the lane from the plaza along the west edge. At the back stands a plain four-storey concrete dorm block with balcony rails and a few lit windows. In front of it is its one-storey entrance hall, the glass front cut low like the indoor near walls, with open doors. Inside, a bank of 24 steel mailboxes and a notice board hang on the back wall, with the passage to the rooms beside them. A low stone by the door reads 社員寮 STAFF DORM. West of the hall is the coin laundry's lit shopfront (コインランドリー COIN LAUNDRY, washers behind the glass). East is the sento's low front, with a dark tiled eave, a navy ゆ BATH noren over its lit door and its chimney behind. Both are frontages only. The bicycle shelter, five bikes under a pale see-through roof, stands on the near west side. There are planters either side of the hall doors, a long bed with two trees on the east edge, and two lit bollards. Two more dorm blocks stand in the distance. Evening light: a cool dusk sky, the last of the sun low from the west, and warm light from the hall and the laundry.
 
-Walking into the hall doors, or using them, starts the trip to Eric's room. The trip in from the plaza is still to build; until then the courtyard loads directly with `?place=dorm_court`.
+Eric arrives along the lane from the plaza on the walk home. Walking into the hall doors, or using them, starts the trip to Eric's room. The courtyard also loads directly with `?place=dorm_court`.
 
 ### Things
 
@@ -412,4 +415,5 @@ Played in the evening, after work.
 
 | Nodes | When | What happens |
 |---|---|---|
+| `home` | Arrive on the walk home | A moment in the room, then the day saves and ends ([`mio-notices`](stories/mio-notices.md)). |
 | `window`, `boxes`, `bed` | Talk to them | One plain line each from Eric; stand-ins until Codex writes them. |
