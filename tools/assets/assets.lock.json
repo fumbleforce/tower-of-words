@@ -127,7 +127,7 @@
   "art/parts/base/shots/creator-base-3/eric-v15-flat-studio-final.png": {"size": 195214, "sha256": "e28d8c19004e0a56437e03e1ec9c6e8c83a234a8dd37bff5d9f1e5305dc351aa", "type": "image/png"},
   "art/parts/base/shots/creator-base-3/mio-v15-flat-office-final.png": {"size": 248554, "sha256": "2cfb1b7d2e5aa2f4a6b413f5cead32a2c8581c2fa06ccd0189bb265e34686240", "type": "image/png"},
   "art/parts/blender/eric.glb": {"size": 488992, "sha256": "d22226d3f4a42c180addbd7981e339527223b06ba7f62004aeb69a52231b856d", "type": "model/gltf-binary"},
-  "art/parts/blender/mio.glb": {"size": 797076, "sha256": "22212ccd905732bb0e38c7cfcfafd4bcd76ba35ffce16ba8058b3fab445ba38b", "type": "model/gltf-binary"},
+  "art/parts/blender/mio.glb": {"size": 776888, "sha256": "5d8baba796ca25100575abb9168c7167c93a9d06d3cb7f53d5627c2de2053362", "type": "model/gltf-binary"},
   "art/refs/monorail-bay-ref.webp": {"size": 433430, "sha256": "7cf959ba498f82795a3f83542437f9d9ee69d09d8d205bc4f4ba8bfc362f7c06", "type": "image/webp"},
   "art/refs/monorail-bay-ref3.png": {"size": 2259414, "sha256": "84382aa8657036880cefb9e7db60724a74f2c03e764d2ad5856a0f343461bd8e", "type": "image/png"},
   "art/refs/monorail-interior-ref.webp": {"size": 262648, "sha256": "ff14470056beb9de72f23692347e8e65e1b6299cdf02cb54faa178c94a737bca", "type": "image/webp"},
