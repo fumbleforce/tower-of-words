@@ -105,19 +105,26 @@ const giftRoutes = [
   },
 ]);
 
+// after Mio's evening scene: up by lift, east through the plaza, into the dorm and his room, where the day ends
+const walkHome = [
+  { ...use('lift'), settleAt: 'forecourt' },
+  { ...use('plaza_lane'), settleAt: 'plaza' },
+  { ...use('dorm_lane'), settleAt: 'dorm_court' },
+  { ...use('dorm_entry'), settleAt: 'dorms' },
+];
 const endingRoutes = [
   ['dunno', '“I don\'t know.”', { lunch_mio: true }, ['tomatte']],
   ['nicely', '“I asked nicely.”', { lunch_mori: true, gate_magic: true }, ['irete', 'akete']],
   ['quiet', 'Say nothing', { lunch_mori: true, mio_warm: 2 }, ['irete']],
 ].map(([id, reply, flags, known]) => ({
   id: `office-ending-${id}`,
-  description: `Continue before finishing work and answer Mio with ${reply}`,
+  description: `Continue before finishing work, answer Mio with ${reply}, and walk home`,
   seed: seed('afternoon', { ...afternoon, ...flags }, { known: ['matte', 'ugoite', ...known] }),
   choices: [reply],
-  actions: [use('my_desk')],
+  actions: [use('my_desk'), ...walkHome],
   expect: {
-    nodes: ['work_afternoon', 'emi_drops_in', 'ending', `end_${id}`, 'end_ticket'],
-    flags: { evening_on: true },
+    nodes: ['work_afternoon', 'emi_drops_in', 'ending', `end_${id}`, 'end_ticket', 'go_home', 'outside', 'to_plaza', 'arrive', 'to_dorms', 'arrive', 'go_in', 'home'],
+    flags: { evening_on: true, going_home: true },
     period: 'evening',
     ended: true,
   },

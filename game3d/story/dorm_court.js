@@ -1,5 +1,5 @@
-// The dorm courtyard after work. The trip in from the plaza is planned (docs/game/places.md); load it directly
-// with ?place=dorm_court. Walking into the hall doors, or using them, starts the watched walk to Eric's room.
+// The dorm courtyard after work, reached along the lane from the plaza (docs/game/places.md); it also loads
+// directly with ?place=dorm_court. Walking into the hall doors, or using them, starts the watched walk to Eric's room.
 export default {
   start: 'arrive',
   on: {

@@ -411,7 +411,9 @@ export function buildGraph({ mods, files = {}, errors = [], cast = CAST }) {
   for (const P of G.places) {
     const exits = P.nodes.map((id) => G.nodes.get(id)).filter((n) => n.exit && n.reachable);
     P.exits = exits.map((n) => n.id);
-    if (!exits.length) D.deadEnds.push({ node: P.start ? `${P.id}:${P.start}` : P.id, why: `no reachable node in ${P.id} moves on (next) or ends the day (end)` });
+    // a trip to a neighbouring place (do: 'trip') moves on too: the walk home leaves B2 that way
+    const moves = exits.length || P.nodes.some((id) => G.nodes.get(id).reachable && G.nodes.get(id).trips.length);
+    if (!moves) D.deadEnds.push({ node: P.start ? `${P.id}:${P.start}` : P.id, why: `no reachable node in ${P.id} moves on (next or trip) or ends the day (end)` });
     if (P.next && !exits.some((n) => n.exit === 'next')) D.deadEnds.push({ node: P.id, why: `places/definitions.js says ${P.id} leads to ${P.next}, but no reachable node runs next` });
   }
   D.badConds = G.places.flatMap((P) => P.checks.filter((c) => c.bad).map((c) => ({ place: P.id, where: c.where, cond: c.cond, why: c.bad })));

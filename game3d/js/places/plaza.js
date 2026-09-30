@@ -2,11 +2,14 @@ import * as THREE from 'three';
 import { buildPlaza } from '../scenes/plaza.js';
 import { RoomCam } from '../cam.js';
 import { K } from '../scenes/office.js';
+import { eveningLight, EVENING_GRADE } from '../scenes/town.js';
+import { sim } from '../sim.js';
 import { PLACE_DETAILS } from './catalog.js';
 import { snapshotPeople, restorePeople } from './saved-people.js';
 import { walkOut, walkIn } from './edge-walk.js';
 
-// The fountain plaza: a side trip east of the forecourt on day 1, with the lane on toward the dorms (planned).
+// The fountain plaza: a side trip east of the forecourt in the morning, and on the walk home after work, with the
+// lane on east to the dorm courtyard.
 export function plazaPlace(game) {
   const w = buildPlaza();
   const cam = new RoomCam(w.camera); // the forecourt's camera, so the walk between them keeps its angle
@@ -103,7 +106,16 @@ export function plazaPlace(game) {
       const point = new THREE.Vector3();
       return rc.ray.intersectPlane(floor, point) ? point : null;
     },
-    update() {},
+    update() {
+      // heading east after work: build the dorm courtyard now, so the walk there needs no loading pause
+      if (sim.period === 'evening' && game.player.root.position.x > 2.5 && !game.prepared.dorm_court)
+        game.prepare?.('dorm_court');
+    },
+    onPeriod(period) {
+      if (period !== 'evening' || P.grade === EVENING_GRADE) return;
+      eveningLight(w.scene);
+      P.grade = EVENING_GRADE;
+    },
     snapshotState() {
       return { player: snapshotPeople({ eric: game.player }) };
     },
@@ -115,6 +127,7 @@ export function plazaPlace(game) {
     },
     tripOutTo: {
       forecourt: (g) => walkOut(g, cam, [-w.edgeX + 0.3, w.officeIn[1]], w.officeEdge),
+      dorm_court: (g) => walkOut(g, cam, [w.edgeX - 0.3, w.dormExit[1]], w.dormEdge),
     },
     tripInFrom: {
       forecourt: (g) => walkIn(g, cam, w.officeEdge, w.officeIn, Math.PI / 2),

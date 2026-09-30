@@ -19,7 +19,8 @@ export const PLACE_NAMES = {
   dorms: "Eric's room",
 };
 export const NEXT = { train: 'gate', gate: 'forecourt', forecourt: 'office', dorm_court: 'dorms' };
-// Side trips off the day's line: walks between outdoor chunks, both ways, played by the story's `trip` step.
-export const TRIPS = { forecourt: ['plaza'], plaza: ['forecourt'] };
+// The other moves, played by the story's `trip` step: the walks between outdoor chunks, and the way home after work
+// (B2 up to the forecourt by lift, then east through the plaza to the dorm courtyard).
+export const TRIPS = { forecourt: ['plaza'], plaza: ['forecourt', 'dorm_court'], office: ['forecourt'] };
 export const canTravel = (from, to) => NEXT[from] === to || !!TRIPS[from]?.includes(to);
 export const STORY_FILES = ['train', 'gate', 'forecourt', 'plaza', 'office', 'dorm_court', 'dorms', 'transitions'];

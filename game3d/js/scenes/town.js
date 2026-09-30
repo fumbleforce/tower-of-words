@@ -116,6 +116,38 @@ export function paving(x0, x1, z0, z1, tile, { color = '#8e8a86', seam = '#7f7b7
   return g;
 }
 
+// after work: the dorm courtyard's dusk (scenes/dorm-court.js) on a chunk built with outdoorLight, so the walk
+// home is in one light: a cooler, dimmer sky and the last of the sun low from the west
+export const EVENING_GRADE = {
+  exposure: 1.0,
+  temp: 0.0,
+  sat: 0.76,
+  contrast: 1.04,
+  lift: [0.012, 0.012, 0.02],
+  shadowTint: [-0.01, 0, 0.024],
+  highTint: [0.022, 0.01, -0.014],
+  vignette: 0.22,
+  bloom: 0.3,
+  bloomThreshold: 0.8,
+  focusBand: 0.3,
+};
+export function eveningLight(scene) {
+  scene.traverse((o) => {
+    if (o.isHemisphereLight) {
+      o.color.set('#a8b2c6');
+      o.groundColor.set('#55525a');
+      o.intensity = 1.5;
+    } else if (o.isDirectionalLight && o.castShadow) {
+      o.color.set('#ffbe8c');
+      o.intensity = 1.7;
+      o.position.copy(new THREE.Vector3(-0.85, 0.42, 0.25).normalize().multiplyScalar(30));
+    } else if (o.isDirectionalLight) {
+      o.color.set('#d6e0ff');
+      o.intensity = 0.5;
+    }
+  });
+}
+
 // the security room's light, outdoors: cool sky, a warm low morning sun from the east, a soft fill from the camera
 export function outdoorLight(scene) {
   scene.add(new THREE.HemisphereLight('#b7c1d2', '#6a625c', 1.7));

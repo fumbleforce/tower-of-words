@@ -30,8 +30,8 @@
       "reason": "Composition, boot/Continue, input, rendering and frame loop remain after stage 4 hooks, interactions and place lifecycle extraction."
     },
     "game3d/js/menu.js": {
-      "lines": 1277,
-      "bytes": 44559,
+      "lines": 1284,
+      "bytes": 44891,
       "owner": "codex-tui",
       "review": "C-0089",
       "reason": "Existing action menus and target selection; stage 4 interaction extraction is planned."
@@ -51,8 +51,8 @@
       "reason": "Existing batching and geometry optimization utilities; preserve rendering behavior during this pass."
     },
     "game3d/js/places/lift.js": {
-      "lines": 1101,
-      "bytes": 40020,
+      "lines": 1206,
+      "bytes": 43400,
       "owner": "codex-tui",
       "review": "C-0071",
       "reason": "Existing shared lift geometry, movement and dialogue staging; extract after behavior characterization."

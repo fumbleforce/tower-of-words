@@ -80,6 +80,7 @@ export function createPlaceLifecycle(
     game.player.root.rotation.y = game.walker.facing;
     const [sx, sz] = place.start;
     game.player.root.position.set(sx, place.floorY ?? 0, sz);
+    place.onPeriod?.(sim.period); // a chunk built in the morning, entered after work, takes the evening light
     setComposer(place);
     resize();
     place.cam?.snap?.(game.player.root.position);

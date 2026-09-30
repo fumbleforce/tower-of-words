@@ -13,7 +13,8 @@ Mio is there when the train doors stop for Eric, and she keeps count through the
 3. On B2, if he opens the machine room door with 開けて: "...That door has a card reader, you know." ([`b2-welcome`](b2-welcome.md))
 4. When he closes the copier request: "Asked it nicely. Like the doors, this morning?" ([`copier`](copier.md)) At lunch in the machine room she tells him she told the station it was the sensor ([`lunch`](lunch.md)).
 5. 18:05, after Emi has gone. Mio comes to his desk: she's going home. "Um. Eric." if they had lunch, otherwise "Hey, 外人." She lists it: 待って and the doors; Mori's 動いて for thirty years, and today it works for Eric; if the gate burst open, "everybody upstairs is talking about the lobby gate"; the rack and 止まって ("that one is my fault") if they ate together; or Mori's seven clean cups if he ate with Mori. "How are you doing that?" Eric: "I don't know" ("...Yeah. Me neither."), "I asked nicely" ("Mm. Very funny."), or nothing.
-6. Her phone: the station sent a repair request about the doors. She told them it's the sensor, so now they want B2 to check the sensor. It was supposed to go on her list; she puts it on his. "REPAIR REQUEST #2. Train doors, Honsha station. Assigned to: ERIC." "You're the IT guy. You tell them it's the sensor." If they're closer she'll come along tomorrow morning ("I want to see how you, um... fix a sensor"); otherwise "Don't sleep through it, 外人." She leaves, the game saves, and the day ends.
+6. Her phone: the station sent a repair request about the doors. She told them it's the sensor, so now they want B2 to check the sensor. It was supposed to go on her list; she puts it on his. "REPAIR REQUEST #2. Train doors, Honsha station. Assigned to: ERIC." "You're the IT guy. You tell them it's the sensor." If they're closer she'll come along tomorrow morning ("I want to see how you, um... fix a sensor"); otherwise "Don't sleep through it, 外人." She leaves by the lift, the game saves, and the goal points home.
+7. The walk home, with no new lines: Eric takes the lift up to the forecourt, walks east through the plaza to the dorm courtyard and in to his room ([places.md](../places.md), Getting between places). A moment after he steps into the room, the game saves and the day ends.
 
 ## Choices and flags
 
@@ -27,6 +28,7 @@ The choices here change only her answers. What she lists depends on flags from t
 | `gate_magic` | The gate burst open ([`sleeping-man`](sleeping-man.md)) | Her list |
 | `lunch_mio`, `lunch_mori` | The lunch choice | Her list, her last line |
 | `mio_warm` | ([`mio-train`](mio-train.md)) | Her goodbye, her last line |
+| `going_home` | She has left for home | The B2 lift, the forecourt, the plaza's east lane, the room (the day ends) |
 
 ## Words taught
 
@@ -37,4 +39,4 @@ None.
 | File | Nodes |
 |---|---|
 | `train.js` | `platform`, `did_i`, `did_quiet`, `mio_tests`, `mio_phone`, `mio_after` |
-| `office.js` | `akete_machine`, `ticket_done`, `mio_doors`, `ending`, `end_dunno`, `end_nicely`, `end_quiet`, `end_ticket` |
+| `office.js` | `akete_machine`, `ticket_done`, `mio_doors`, `ending`, `end_dunno`, `end_nicely`, `end_quiet`, `end_ticket`, `go_home` |
