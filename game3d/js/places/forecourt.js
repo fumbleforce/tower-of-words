@@ -208,6 +208,7 @@ export async function forecourtPlace(game) {
       w.headOffice.onPeriod(period);
       w.station.onPeriod(period);
       w.sky?.onPeriod(period);
+      w.lightsOn();
       P.grade = EVENING_GRADE;
     },
     snapshotState() {

@@ -3,11 +3,11 @@
 import { PAL, mat, textTexture, plane, JP_FONT } from '../../props.js';
 import { lightPool } from '../../places/life.js';
 import { monument } from '../forecourt/details.js';
-import { GF, T, TOP, LU, LN, DOOR_U, DOOR_W, parts, hash } from './frame.js';
+import { GF, T, TOP, LU, LN, DOOR_U, DOOR_W, parts, hash, bayLines } from './frame.js';
 
 // the upper floors: curtain wall with floor bands on every face, pale fins on the two faces the camera sees
 // (south and east), the roof with its parapet and plant; plus the lobby's glass front above the sill
-export function upper(glass, lit, frame) {
+export function upper(glass, lit, frame, lobby) {
   const { W, D, storeys, fh } = T;
   const F = storeys - 1;
   // faces: [start u, start n, direction along (du, dn), length, outward (ou, on), fins?]
@@ -53,8 +53,8 @@ export function upper(glass, lit, frame) {
     [0.18, posts[0]],
     [posts[1], LU],
   ]) {
-    glass.box(u0, u1, 0.5, 2.12, 0.04, 0.1);
-    for (let u = u0 + 1.2; u < u1 - 0.3; u += 1.2) frame.box(u - 0.03, u + 0.03, 0.5, 2.12, 0.0, 0.12);
+    lobby.box(u0, u1, 0.5, 2.12, 0.04, 0.1);
+    for (const u of bayLines(W)) if (u > u0 + 0.2 && u < u1 - 0.2) frame.box(u - 0.03, u + 0.03, 0.5, 2.12, 0.0, 0.12);
   }
   frame.box(0, LU, 2.12, GF, -0.02, 0.14);
   for (const u of posts) frame.box(u - 0.05, u + 0.05, 0, 2.12, -0.02, 0.14);
@@ -83,21 +83,39 @@ export function ground(g, frame) {
     let p = a0;
     for (const [a, b] of wins) {
       box(p, a, SUNK, GF);
-      box(a, b, SUNK, 0.55);
-      box(a, b, 2.05, GF);
-      if (s === 'u') glassP.box(a, b, 0.55, 2.05, at - 0.02, at + 0.04);
-      else glassP.box(at - 0.04, at + 0.02, 0.55, 2.05, a, b);
+      box(a, b, SUNK, 0.5);
+      box(a, b, 2.12, GF);
+      if (s === 'u') glassP.box(a, b, 0.5, 2.12, at - 0.02, at + 0.04);
+      else glassP.box(at - 0.04, at + 0.02, 0.5, 2.12, a, b);
       p = b;
     }
     box(p, a1, 0, GF);
   };
-  const bays = (a0, a1) => {
-    const n = Math.floor((a1 - a0) / 1.2),
-      w = (a1 - a0) / n;
-    return Array.from({ length: n }, (_, i) => [a0 + i * w + 0.15, a0 + (i + 1) * w - 0.15]);
+  // a window in every whole bay of the curtain wall above, between the piers
+  const bays = (L, a0, a1) => {
+    const lines = bayLines(L),
+      out = [];
+    for (let i = 0; i + 1 < lines.length; i++)
+      if (lines[i] >= a0 - 1e-6 && lines[i + 1] <= a1 + 1e-6) out.push([lines[i] + 0.16, lines[i + 1] - 0.16]);
+    return out;
   };
-  windowed('u', LU, W, 0, bays(LU + 0.2, W - 0.2)); // south face, east of the lobby
-  windowed('n', wt, D - wt, W, bays(0.4, D - 0.4)); // east face, between the south and north faces
+  windowed('u', LU, W, 0, bays(W, LU, W)); // south face, east of the lobby
+  windowed('n', wt, D - wt, W, bays(D, 0, D)); // east face, between the south and north faces
+  // the plinth: a stone pier under every fin of the two faces the camera sees, the full height of the ground
+  // floor, so the grid above comes down to the ground (the entrance bay is double: no pier over the door)
+  // (in front of the lobby they fade with its glass, so they never stand in the way of the room)
+  const pierP = parts();
+  for (const u of bayLines(W))
+    if (u < DOOR_U - DOOR_W / 2 - 0.2 || u > DOOR_U + DOOR_W / 2 + 0.2) {
+      pierP.box(u - 0.11, u + 0.11, SUNK, u < LU ? 0.5 : GF, -0.12, 0.02);
+      if (u < LU) frame.box(u - 0.11, u + 0.11, 0.5, GF, -0.12, 0.02);
+    }
+  for (const n of bayLines(D)) pierP.box(W - 0.02, W + 0.12, SUNK, GF, Math.max(0, n - 0.11), Math.min(D, n + 0.11));
+  // the service block's ceiling, where the building is cut when the floors above fade: a pale cap over everything
+  // but the lobby, so the rooms next door stay closed
+  const capP = parts();
+  capP.box(LU, W, GF - 0.02, GF, 0.02, D - 0.02);
+  capP.box(0.02, LU, GF - 0.02, GF, LN, D - 0.02);
   wallP.box(0, W, SUNK, GF, D - wt, D); // north face
   wallP.box(0, wt, SUNK, GF, 0, D - wt); // west face (the lobby's west wall)
   wallP.box(LU, LU + wt, 0, GF, wt, D - wt); // the lobby's east wall, between the south and north faces
@@ -138,6 +156,10 @@ export function ground(g, frame) {
     if (name === 'ho:floor') m.castShadow = false;
     g.add(m);
   }
+  g.add(pierP.mesh(mat('#aaaba8'))); // unnamed: they merge with the rest
+  const cap = capP.mesh(mat('#a3a9b3', { roughness: 0.8 }));
+  cap.castShadow = false;
+  g.add(cap);
   const gfGlass = glassP.mesh(mat('#8c9dad', { roughness: 0.45, metalness: 0.05 }), 'ho:gfGlass');
   gfGlass.castShadow = false;
   g.add(gfGlass);
@@ -164,9 +186,31 @@ export function ground(g, frame) {
   sign.name = 'ho:name';
   g.add(sign);
   // under the canopy, a pool of light at the door; the name stone beside it
-  g.add(lightPool(DOOR_U, 1.0, 1.1, { k: 0.26, sx: 1.4 }));
+  g.add(lightPool(DOOR_U, 1.0, 1.1, { k: 0.14, sx: 1.4 }));
   const stone = monument('本社', 'HEAD OFFICE');
-  stone.position.set(DOOR_U + 3.1, 0, 1.2);
+  stone.position.set(DOOR_U + 4.35, 0, 1.2);
   g.add(stone);
-  return [fascia, sign];
+  // the company's name in brushed steel letters standing on the canopy's front edge
+  const letters = textTexture(
+    (ctx, w, h) => {
+      ctx.clearRect(0, 0, w, h);
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'alphabetic';
+      ctx.font = '700 116px sans-serif';
+      ctx.letterSpacing = '18px';
+      ctx.fillStyle = '#2e333a';
+      ctx.fillText('AMAKAWA', w / 2 + 5, h - 9);
+      ctx.fillStyle = '#e4e6e8';
+      ctx.fillText('AMAKAWA', w / 2, h - 14);
+    },
+    1024,
+    128,
+  );
+  const name2 = plane(3.4, 0.42, letters);
+  name2.material.transparent = true;
+  name2.material.alphaTest = 0.4;
+  name2.position.set(DOOR_U, GF + 0.72, 0.11); // on the first floor's glass, over the canopy
+  name2.name = 'ho:letters';
+  g.add(name2);
+  return [fascia, sign, name2];
 }

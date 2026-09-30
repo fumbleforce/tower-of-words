@@ -7,7 +7,7 @@
 // office. On a phone the camera looks east past it from the door (places/forecourt.js), so it stays whole there and
 // the platform shed's roof fades instead.
 import * as THREE from 'three';
-import { PAL, mat, textTexture, plane, JP_FONT } from '../props.js';
+import { PAL, mat, rbox, emissive, bench, plant, textTexture, plane, JP_FONT } from '../props.js';
 import { lightPool } from '../places/life.js';
 import { addOccluder, updateOccluders } from './occluders.js';
 import { BUILDINGS, footprint, toLocal } from './island-layout.js';
@@ -113,50 +113,78 @@ function stationSign() {
   return s;
 }
 
-// What shows of the security room when the station is cut low: the gate line (glass runs, readers, the scanner arch,
-// the guard's desk), the plants along the back wall and the two benches, where lobby.js has them, in plain shapes.
+// What shows of the security room when the station is cut low: its furniture where lobby.js has it, modelled
+// enough to read from above (the gate line with the scanner arch and its readers, the guard's desk with its
+// monitor, the visitor counter, the coffee kiosk, benches, plants), in the security room's own colours. The
+// full room with its people is scenes/lobby.js; nothing here moves.
 function interior(root) {
-  const rx = (x) => CX + x,
-    rz = (z) => ZN + 4.5 + z,
-    BZ = rz(-0.55);
-  const posts = [],
-    rails = [],
-    panes = [],
-    dark = [],
-    pots = [];
+  const g = new THREE.Group();
+  g.position.set(CX, 0, ZN + 4.5); // the security room's own frame (its x and z)
+  root.add(g);
+  const BZ = -0.55;
+  const add = (...m) => g.add(...m);
+  // the gate line: glass runs on posts either side, card readers, the scanner arch between them
   for (const [a, b] of [
     [-5.95, -1.2],
     [3.25, 5.95],
   ]) {
     const n = Math.max(1, Math.round((b - a) / 1.3));
-    for (let i = 0; i <= n; i++) posts.push([0.1, 0.62, 0.1, rx(a + ((b - a) * i) / n), 0, BZ]);
-    rails.push([b - a, 0.04, 0.08, rx((a + b) / 2), 0.58, BZ]);
-    panes.push([b - a, 0.5, 0.03, rx((a + b) / 2), 0.06, BZ]);
+    for (let i = 0; i <= n; i++) add(rbox(0.1, 0.62, 0.1, '#6b717c', { x: a + ((b - a) * i) / n, z: BZ, r: 0.02 }));
+    add(rbox(b - a, 0.04, 0.08, '#7c828d', { x: (a + b) / 2, y: 0.58, z: BZ, r: 0.015 }));
+    add(rbox(b - a, 0.46, 0.03, '#a9bccb', { x: (a + b) / 2, y: 0.08, z: BZ, r: 0.005, cast: false }));
+    add(rbox(b - a, 0.02, 0.03, '#d6e2ea', { x: (a + b) / 2, y: 0.55, z: BZ + 0.012, r: 0.005, cast: false }));
   }
-  for (const x of [-0.93, 0.93]) dark.push([0.22, 0.95, 0.22, rx(x), 0, BZ]);
-  dark.push([0.12, 1.5, 0.3, rx(-0.5), 0, BZ], [0.12, 1.5, 0.3, rx(0.5), 0, BZ], [1.12, 0.14, 0.3, rx(0), 1.5, BZ]);
-  dark.push([1.2, 0.72, 0.6, rx(2.2), 0, BZ]);
+  for (const x of [-0.93, 0.93]) {
+    add(rbox(0.2, 0.86, 0.3, '#8b919c', { x, z: BZ, r: 0.03 }));
+    add(rbox(0.16, 0.02, 0.2, '#5b7ea8', { x, y: 0.86, z: BZ, r: 0.006, cast: false })); // the IC pad
+  }
+  const W = 1.4,
+    H = 1.57;
+  const blue = emissive('#9fd4ff', '#6ab8ff', 1.5);
+  for (const s of [-1, 1]) {
+    add(rbox(0.17, H, 0.32, '#8b919c', { x: s * (W / 2), z: BZ, r: 0.03 }));
+    add(rbox(0.03, H * 0.62, 0.05, null, { x: s * (W / 2 - 0.1), y: H * 0.22, z: BZ, r: 0.012, m: blue, cast: false }));
+    add(rbox(0.5, 0.03, 0.04, '#9aa0aa', { x: s * 0.33, y: 0.66, z: BZ, r: 0.01 })); // the glass flaps' edges
+    add(rbox(0.5, 0.42, 0.03, '#b7c8d4', { x: s * 0.33, y: 0.24, z: BZ, r: 0.01, cast: false }));
+  }
+  add(rbox(W + 0.17, 0.22, 0.36, '#7d838e', { y: H, z: BZ, r: 0.04 }));
+  add(rbox(0.5, 0.04, 0.05, null, { y: H - 0.05, z: BZ + 0.16, r: 0.015, m: blue, cast: false }));
+  // the guard's desk in the barrier line, his monitor and chair behind it
+  const desk = (x, z, w, d, top) => {
+    add(rbox(w, 0.52, d, '#8c929c', { x, z, r: 0.03 }));
+    add(rbox(w + 0.06, 0.05, d + 0.06, top, { x, y: 0.52, z, r: 0.02 }));
+    add(rbox(w, 0.06, 0.01, '#5b7ea8', { x, y: 0.25, z: z + d / 2 + 0.005, r: 0.004, cast: false }));
+  };
+  desk(2.2, BZ, 1.9, 0.62, '#b9bdc3');
+  add(rbox(0.46, 0.3, 0.04, PAL.monitor, { x: 2.4, y: 0.63, z: BZ + 0.05, r: 0.015 }));
+  add(rbox(0.4, 0.3, 0.4, '#2c3242', { x: 2.35, z: BZ - 0.62, r: 0.04 }));
+  // the visitor counter with its book, the lost-property shelf, the coffee kiosk
+  desk(-4.2, 0.75, 1.9, 0.5, '#bfc3c8');
+  add(rbox(0.34, 0.03, 0.24, PAL.paper, { x: -3.75, y: 0.57, z: 0.83, r: 0.005 }));
+  add(rbox(0.3, 0.2, 0.03, PAL.monitor, { x: -4.7, y: 0.58, z: 0.67, r: 0.01 }));
+  add(rbox(0.5, 0.95, 0.34, '#8a909a', { x: -5.7, z: 0.55, r: 0.02 }));
+  for (const y of [0.3, 0.62]) add(rbox(0.44, 0.03, 0.3, '#a3a9b2', { x: -5.7, y, z: 0.57, r: 0.005 }));
+  add(rbox(0.6, 1.25, 0.8, '#4a4f59', { x: 5.45, z: 3.0, r: 0.03 }));
+  const warm = emissive('#f1d8b8', '#e8b27a', 0.7);
+  add(rbox(0.02, 0.5, 0.6, null, { x: 5.14, y: 0.62, z: 3.0, r: 0.01, m: warm, cast: false }));
+  // benches either side, plants along the back wall
   for (const [x, z] of [
     [-3.9, 2.55],
     [3.95, 1.3],
-  ])
-    dark.push([2.1, 0.42, 0.5, rx(x), 0, rz(z)]);
-  const leaves = [];
-  for (const [x, z] of [
-    [-5.7, -3.9],
-    [-2.95, -3.95],
-    [2.95, -3.95],
-    [5.7, -3.9],
   ]) {
-    pots.push([0.34, 0.36, 0.34, rx(x), 0, rz(z)]);
-    leaves.push(new THREE.IcosahedronGeometry(0.34, 0).translate(rx(x), 0.72, rz(z)));
+    const b = bench(2.1);
+    b.position.set(x, 0, z);
+    add(b);
   }
-  root.add(boxes(posts, '#6b717c'), boxes(rails, '#7c828d'), boxes(panes, '#9fb6c6'), boxes(dark, '#454956'));
-  root.add(boxes(pots, '#6c7280'));
-  for (const g of leaves) {
-    const m = new THREE.Mesh(g, mat(PAL.leaf[1]));
-    m.castShadow = true;
-    root.add(m);
+  for (const [x, z, seed] of [
+    [-5.7, -3.9, 3],
+    [-2.95, -3.95, 5],
+    [2.95, -3.95, 7],
+    [5.7, -3.9, 9],
+  ]) {
+    const pl = plant({ size: 1.1, seed });
+    pl.position.set(x, 0, z);
+    add(pl);
   }
 }
 
@@ -172,6 +200,14 @@ function block(root) {
   wallRun(low, 'x', X0, X1, ZS - T / 2, 0, LOW, [[FRONT[0], FRONT[1], 0, 2]]);
   for (const x of [X0 + T / 2, X1 - T / 2]) wallRun(low, 'z', ZN + T, ZS - T, x, 0, LOW);
   root.add(boxes(low, PAL.wall));
+  // the cut: a pale cap on every low wall's top, as on every cut wall in the office
+  const tops = low.filter((b) => Math.abs(b[4] + b[1] - LOW) < 1e-3);
+  root.add(
+    boxes(
+      tops.map(([w, , d, x, , z]) => [w + 0.01, 0.014, d + 0.01, x, LOW, z]),
+      PAL.wallTop,
+    ),
+  );
   root.add(boxes([[0.86, LOW, 0.06, STAFF_X, 0, ZN + 0.02]], PAL.door));
   root.add(
     paving(X0 + T, X1 - T, ZN + T, ZS - T, 1.25, {

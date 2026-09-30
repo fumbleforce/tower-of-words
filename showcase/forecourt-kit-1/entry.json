@@ -1,0 +1,45 @@
+{
+  "title": "Station forecourt redesigned, with a shared outdoor kit",
+  "date": "2026-09-30",
+  "by": "claude-agent:forecourt-kit",
+  "caption": "The forecourt rebuilt on a new outdoor kit (patterned paving with borders, kerbs, a family of trees and shrubs, lamps and benches laid on lines). Before on the left of each pair, after on the right. The plaza and the dorm courtyard can use the same kit next.",
+  "sections": [
+    {
+      "title": "Arriving out of the station",
+      "caption": "One walk from the station door to the head office door: dark granite with a pale border and the yellow guide line. The station's cut shows the gate room's arch, readers, desks and benches.",
+      "images": [
+        { "id": "before-arrive-desk", "image": "bible/shots/showcase/forecourt-kit-1/before-arrive-desk.webp", "caption": "Before, desktop" },
+        { "id": "after-arrive-desk", "image": "bible/shots/showcase/forecourt-kit-1/after-arrive-desk.webp", "caption": "After, desktop" },
+        { "id": "before-arrive-phone", "image": "bible/shots/showcase/forecourt-kit-1/before-arrive-phone.webp", "caption": "Before, phone" },
+        { "id": "after-arrive-phone", "image": "bible/shots/showcase/forecourt-kit-1/after-arrive-phone.webp", "caption": "After, phone" },
+        { "id": "before-arrive-eve-desk", "image": "bible/shots/showcase/forecourt-kit-1/before-arrive-eve-desk.webp", "caption": "Before, evening" },
+        { "id": "after-arrive-eve-desk", "image": "bible/shots/showcase/forecourt-kit-1/after-arrive-eve-desk.webp", "caption": "After, evening: the lamps light up" }
+      ]
+    },
+    {
+      "title": "Head office door and lobby",
+      "caption": "Pines either side of the door, stone piers under every fin, AMAKAWA over the canopy. In the lobby the lift shafts are capped and the room next door is closed.",
+      "images": [
+        { "id": "before-door-desk", "image": "bible/shots/showcase/forecourt-kit-1/before-door-desk.webp", "caption": "Before" },
+        { "id": "after-door-desk", "image": "bible/shots/showcase/forecourt-kit-1/after-door-desk.webp", "caption": "After" },
+        { "id": "before-lobby-desk", "image": "bible/shots/showcase/forecourt-kit-1/before-lobby-desk.webp", "caption": "Lobby before" },
+        { "id": "after-lobby-desk", "image": "bible/shots/showcase/forecourt-kit-1/after-lobby-desk.webp", "caption": "Lobby after" },
+        { "id": "after-lobby-phone", "image": "bible/shots/showcase/forecourt-kit-1/after-lobby-phone.webp", "caption": "Lobby after, phone" }
+      ]
+    },
+    {
+      "title": "The lane to the plaza",
+      "caption": "Brick between pale borders, a zelkova avenue set back so it never hides Eric, bench bays, a sign to the plaza and dorms, gateposts where the grounds end.",
+      "images": [
+        { "id": "before-lane-desk", "image": "bible/shots/showcase/forecourt-kit-1/before-lane-desk.webp", "caption": "Before" },
+        { "id": "after-lane-desk", "image": "bible/shots/showcase/forecourt-kit-1/after-lane-desk.webp", "caption": "After" },
+        { "id": "before-laneend-desk", "image": "bible/shots/showcase/forecourt-kit-1/before-laneend-desk.webp", "caption": "Lane end before" },
+        { "id": "after-laneend-desk", "image": "bible/shots/showcase/forecourt-kit-1/after-laneend-desk.webp", "caption": "Lane end after" },
+        { "id": "before-lane-eve-desk", "image": "bible/shots/showcase/forecourt-kit-1/before-lane-eve-desk.webp", "caption": "Evening before" },
+        { "id": "after-lane-eve-desk", "image": "bible/shots/showcase/forecourt-kit-1/after-lane-eve-desk.webp", "caption": "Evening after" },
+        { "id": "after-lane-phone", "image": "bible/shots/showcase/forecourt-kit-1/after-lane-phone.webp", "caption": "After, phone" }
+      ]
+    }
+  ],
+  "links": [{ "label": "Play it", "href": "game3d/" }]
+}
