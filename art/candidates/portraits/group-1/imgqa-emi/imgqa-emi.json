@@ -1,0 +1,304 @@
+{
+ "character": "emi",
+ "ref": "game3d/assets/portraits/emi-neutral.webp",
+ "face_box_game": [
+  597,
+  768,
+  [
+   203,
+   159,
+   395,
+   349
+  ]
+ ],
+ "ref_face_detected": [
+  203,
+  160,
+  395,
+  349
+ ],
+ "thresholds": {
+  "redrim": [
+   0.02,
+   0.08
+  ],
+  "glasses_cover": [
+   0.87,
+   0.85
+  ],
+  "glasses_worst": [
+   0.7,
+   0.5
+  ],
+  "glasses_dE": [
+   8,
+   15
+  ],
+  "matte_frame": [
+   0.05,
+   0.12
+  ],
+  "matte_holes": [
+   0,
+   3
+  ],
+  "headroom": [
+   0.03,
+   0.01
+  ],
+  "zoom": [
+   0.04,
+   9
+  ],
+  "top": [
+   0.01,
+   9
+  ],
+  "eyes": [
+   0.06,
+   0.12
+  ],
+  "ccip": [
+   0.05,
+   0.09
+  ]
+ },
+ "images": [
+  {
+   "path": "art/candidates/portraits/group-1/group1-hr1001-emi.webp",
+   "kind": "render",
+   "size": [
+    597,
+    768
+   ],
+   "face": [
+    227,
+    174,
+    381,
+    333
+   ],
+   "eyes": [
+    [
+     263.5,
+     243.5
+    ],
+    [
+     334.5,
+     232.0
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for emi"
+   },
+   "framing": {
+    "headroom": 0.111,
+    "zoom": 1.189,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 54,
+    "hair_top_ref": 57,
+    "crop": [
+     52.5,
+     39.4,
+     554.7,
+     685.5
+    ],
+    "eyes": 0.016,
+    "tilt": 4.0,
+    "status": "warn"
+   },
+   "drift": {
+    "status": "warn",
+    "ccip": 0.061,
+    "ssim": 0.233
+   },
+   "status": "warn"
+  },
+  {
+   "path": "art/candidates/portraits/group-1/group1-hr1001-emi-cut.webp",
+   "kind": "cut-out",
+   "size": [
+    597,
+    768
+   ],
+   "face": [
+    227,
+    174,
+    381,
+    333
+   ],
+   "eyes": [
+    [
+     263.5,
+     243.5
+    ],
+    [
+     334.5,
+     232.0
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for emi"
+   },
+   "matte": {
+    "source": "art/candidates/portraits/group-1/group1-hr1001-emi.webp",
+    "holes": 0,
+    "holes_px": 0,
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.111,
+    "zoom": 1.189,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 54,
+    "hair_top_ref": 57,
+    "crop": [
+     52.5,
+     39.4,
+     554.7,
+     685.5
+    ],
+    "eyes": 0.016,
+    "tilt": 4.0,
+    "status": "warn"
+   },
+   "drift": {
+    "status": "warn",
+    "ccip": 0.06,
+    "ssim": 0.234
+   },
+   "status": "warn"
+  },
+  {
+   "path": "art/candidates/portraits/group-1/group1-hr1003-emi.webp",
+   "kind": "render",
+   "size": [
+    597,
+    768
+   ],
+   "face": [
+    224,
+    173,
+    381,
+    332
+   ],
+   "eyes": [
+    [
+     262.5,
+     244.0
+    ],
+    [
+     333.5,
+     231.0
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0002
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for emi"
+   },
+   "framing": {
+    "headroom": 0.121,
+    "zoom": 1.189,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 64,
+    "hair_top_ref": 57,
+    "crop": [
+     51.0,
+     38.4,
+     553.2,
+     684.5
+    ],
+    "eyes": 0.021,
+    "tilt": 2.8,
+    "status": "warn"
+   },
+   "drift": {
+    "status": "fail",
+    "ccip": 0.109,
+    "ssim": 0.193
+   },
+   "status": "fail"
+  },
+  {
+   "path": "art/candidates/portraits/group-1/group1-hr1003-emi-cut.webp",
+   "kind": "cut-out",
+   "size": [
+    597,
+    768
+   ],
+   "face": [
+    223,
+    172,
+    381,
+    332
+   ],
+   "eyes": [
+    [
+     262.5,
+     244.5
+    ],
+    [
+     333.5,
+     231.0
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0058
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for emi"
+   },
+   "matte": {
+    "source": "art/candidates/portraits/group-1/group1-hr1003-emi.webp",
+    "holes": 0,
+    "holes_px": 0,
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.121,
+    "zoom": 1.181,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 66,
+    "hair_top_ref": 57,
+    "crop": [
+     48.9,
+     36.6,
+     554.3,
+     686.7
+    ],
+    "eyes": 0.026,
+    "tilt": 2.4,
+    "status": "warn"
+   },
+   "drift": {
+    "status": "fail",
+    "ccip": 0.11,
+    "ssim": 0.198
+   },
+   "status": "fail"
+  }
+ ]
+}

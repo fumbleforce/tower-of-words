@@ -1,0 +1,304 @@
+{
+ "character": "kenji",
+ "ref": "game3d/assets/portraits/kenji-neutral.webp",
+ "face_box_game": [
+  597,
+  768,
+  [
+   221,
+   167,
+   384,
+   335
+  ]
+ ],
+ "ref_face_detected": [
+  218,
+  167,
+  384,
+  335
+ ],
+ "thresholds": {
+  "redrim": [
+   0.02,
+   0.08
+  ],
+  "glasses_cover": [
+   0.87,
+   0.85
+  ],
+  "glasses_worst": [
+   0.7,
+   0.5
+  ],
+  "glasses_dE": [
+   8,
+   15
+  ],
+  "matte_frame": [
+   0.05,
+   0.12
+  ],
+  "matte_holes": [
+   0,
+   3
+  ],
+  "headroom": [
+   0.03,
+   0.01
+  ],
+  "zoom": [
+   0.04,
+   9
+  ],
+  "top": [
+   0.01,
+   9
+  ],
+  "eyes": [
+   0.06,
+   0.12
+  ],
+  "ccip": [
+   0.05,
+   0.09
+  ]
+ },
+ "images": [
+  {
+   "path": "art/candidates/portraits/group-1/group1-hr1001-kenji.webp",
+   "kind": "render",
+   "size": [
+    597,
+    768
+   ],
+   "face": [
+    214,
+    162,
+    388,
+    333
+   ],
+   "eyes": [
+    [
+     260.5,
+     221.0
+    ],
+    [
+     326.5,
+     219.5
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.007
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kenji"
+   },
+   "framing": {
+    "headroom": 0.085,
+    "zoom": 0.982,
+    "top": 0.01,
+    "bottom_short": 0.007,
+    "hair_top_game": 71,
+    "hair_top_ref": 92,
+    "crop": [
+     -5.4,
+     -8.0,
+     602.3,
+     773.7
+    ],
+    "eyes": -0.022,
+    "tilt": 9.7,
+    "status": "warn"
+   },
+   "drift": {
+    "status": "warn",
+    "ccip": 0.068,
+    "ssim": 0.272
+   },
+   "status": "warn"
+  },
+  {
+   "path": "art/candidates/portraits/group-1/group1-hr1001-kenji-cut.webp",
+   "kind": "cut-out",
+   "size": [
+    597,
+    768
+   ],
+   "face": [
+    214,
+    162,
+    388,
+    333
+   ],
+   "eyes": [
+    [
+     260.5,
+     221.0
+    ],
+    [
+     326.5,
+     219.5
+    ]
+   ],
+   "redrim": {
+    "status": "warn",
+    "value": 0.0212
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kenji"
+   },
+   "matte": {
+    "source": "art/candidates/portraits/group-1/group1-hr1001-kenji.webp",
+    "holes": 0,
+    "holes_px": 0,
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.085,
+    "zoom": 0.982,
+    "top": 0.01,
+    "bottom_short": 0.007,
+    "hair_top_game": 71,
+    "hair_top_ref": 92,
+    "crop": [
+     -5.4,
+     -8.0,
+     602.3,
+     773.7
+    ],
+    "eyes": -0.022,
+    "tilt": 9.7,
+    "status": "warn"
+   },
+   "drift": {
+    "status": "warn",
+    "ccip": 0.071,
+    "ssim": 0.282
+   },
+   "status": "warn"
+  },
+  {
+   "path": "art/candidates/portraits/group-1/group1-hr1003-kenji.webp",
+   "kind": "render",
+   "size": [
+    597,
+    768
+   ],
+   "face": [
+    218,
+    169,
+    382,
+    333
+   ],
+   "eyes": [
+    [
+     259.5,
+     234.5
+    ],
+    [
+     323.0,
+     230.0
+    ]
+   ],
+   "redrim": {
+    "status": "warn",
+    "value": 0.0235
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kenji"
+   },
+   "framing": {
+    "headroom": 0.121,
+    "zoom": 1.024,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 89,
+    "hair_top_ref": 92,
+    "crop": [
+     6.2,
+     6.0,
+     589.0,
+     755.7
+    ],
+    "eyes": 0.023,
+    "tilt": 7.0,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "fail",
+    "ccip": 0.09,
+    "ssim": 0.281
+   },
+   "status": "fail"
+  },
+  {
+   "path": "art/candidates/portraits/group-1/group1-hr1003-kenji-cut.webp",
+   "kind": "cut-out",
+   "size": [
+    597,
+    768
+   ],
+   "face": [
+    218,
+    168,
+    382,
+    333
+   ],
+   "eyes": [
+    [
+     259.5,
+     234.5
+    ],
+    [
+     323.0,
+     230.0
+    ]
+   ],
+   "redrim": {
+    "status": "warn",
+    "value": 0.0413
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kenji"
+   },
+   "matte": {
+    "source": "art/candidates/portraits/group-1/group1-hr1003-kenji.webp",
+    "holes": 0,
+    "holes_px": 0,
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.121,
+    "zoom": 1.018,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 90,
+    "hair_top_ref": 92,
+    "crop": [
+     4.4,
+     4.0,
+     590.7,
+     758.3
+    ],
+    "eyes": 0.026,
+    "tilt": 7.0,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "fail",
+    "ccip": 0.095,
+    "ssim": 0.293
+   },
+   "status": "fail"
+  }
+ ]
+}
