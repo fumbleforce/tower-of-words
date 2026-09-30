@@ -5,7 +5,8 @@ import { spaceFrom, isPassing, slideStep, isHard, press, followSpeed } from './c
 import * as THREE from 'three';
 
 // ---------- scripted moves ----------
-// walkRig(game, rig, [x, z], { speed, route = true, avoid = true, brakeTo = 0 }): walk someone to a spot. Routed over
+// walkRig(game, rig, [x, z], { speed, route = true, avoid = true, brakeTo = 0, run = false }): walk someone to a spot
+// (a brisk walk when fast; the run clip only with run: true). Routed over
 // the place's walk grid (never through desks), the end moved off anyone standing there, smooth turns, gait for the
 // feet, waits for or steps round people in the way, and settles into idle at the end. Resolves on arrival, or after
 // a stall (it never hangs a scene). Works on a bare Object3D too (the cat), without the animation parts.
@@ -13,7 +14,7 @@ export function walkRig(
   game,
   rigOrObj,
   to,
-  { speed = 1.25, route = true, avoid = true, brakeTo = 0, settle = true } = {},
+  { speed = 1.25, route = true, avoid = true, brakeTo = 0, settle = true, run = false } = {},
 ) {
   const rig = rigOrObj && rigOrObj.root ? rigOrObj : rigOf(game, rigOrObj);
   const obj = rig ? rig.root : rigOrObj;
@@ -221,7 +222,7 @@ export function walkRig(
         if (rig) {
           const walking = moved / dt > 0.05 || Math.abs(angDiff(head, yaw)) > 0.5;
           rig.setState?.(walking ? 'walk' : 'idle');
-          rig.setGait?.(walking ? Math.max(moved / dt, 0.3) / sc : null);
+          rig.setGait?.(walking ? Math.max(moved / dt, 0.3) / sc : null, { run });
         }
       }
       return false;

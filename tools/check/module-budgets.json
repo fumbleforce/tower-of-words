@@ -3,7 +3,7 @@
   "exceptions": {
     "game3d/js/avatar.js": {
       "lines": 474,
-      "bytes": 15220,
+      "bytes": 15177,
       "owner": "codex-tui",
       "review": "C-0071",
       "reason": "Existing avatar loading, rig mapping and animation playback; keep the ceiling until the character pipeline split."
@@ -37,8 +37,8 @@
       "reason": "Existing action menus and target selection; stage 4 interaction extraction is planned."
     },
     "game3d/js/mio.js": {
-      "lines": 870,
-      "bytes": 31261,
+      "lines": 821,
+      "bytes": 29528,
       "owner": "codex-tui",
       "review": "C-0071",
       "reason": "Existing procedural character and animation implementation; changes require character review."
