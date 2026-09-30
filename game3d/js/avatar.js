@@ -237,7 +237,8 @@ export function makeAvatar() {
 // used with a Lambert material (as for Mio). Colour tweak only: the texture is pulled a little toward the muted
 // palette (slightly less saturated, a touch cooler). The mesh, face and body are untouched.
 import { GLTFLoader } from '../vendor/loaders/GLTFLoader.js';
-import { calmSitTime, V as ver, poseLayer, addPhone, API_PHONE_BONES, CDIR, makeGait } from './mio.js';
+import { makeGait } from './movement/gait.js';
+import { calmSitTime, V as ver, poseLayer, addPhone, API_PHONE_BONES, CDIR } from './mio.js';
 import { loadRelaxedIdle } from './relaxed-idle.js';
 const EDIR = new URL('../assets/eric/', import.meta.url).href;
 export const loadEric = (o = {}) => loadMeshy('eric', { dir: EDIR, height: 1.2, ...o });
@@ -385,8 +386,7 @@ export async function loadMeshy(id, { height = 1.2, dir = CDIR + id + '/' } = {}
       gesturing = { a: g, ok, out: false };
     });
   }
-  // Eric's measured strides; other API-rigged cast use the same until measured (their clips come from the same library)
-  const gait = makeGait(actions, { walkV: 0.44, runV: 1.1, runOff: 0.03 });
+  const gait = makeGait(actions, { walkV: 0.44, runV: 1.1, runOff: 0.03 }); // Eric's strides, used for all API cast
   function update(dt, speed = 1) {
     gait.step(dt, curName, speed);
     restoreBones();

@@ -9,7 +9,7 @@ const ENGINE_KEYS = flagKeys('game3d/js/narrative/hooks/movement.js');
 export function installMovementHooks(game, { rigOf, posOf, aimOf, isPlayer }) {
   const H = game.hooks;
   const ui = game.ui;
-  H.walk = async ({ who, to, wait = true, speed }) => {
+  H.walk = async ({ who, to, wait = true, speed, run }) => {
     const p = posOf(to);
     if (!p) return;
     const r = isPlayer(who) ? game.player : rigOf(who);
@@ -18,7 +18,7 @@ export function installMovementHooks(game, { rigOf, posOf, aimOf, isPlayer }) {
     const place = game.place;
     const pr = beginSavedWalk(
       r,
-      { to: [...p], ...(speed ? { speed } : {}) },
+      { to: [...p], ...(speed ? { speed } : {}), ...(run ? { run } : {}) },
       () => {
         if (isPlayer(who)) return game.walkTo(p[0], p[1]);
         if (r.meshy) {
@@ -28,9 +28,9 @@ export function installMovementHooks(game, { rigOf, posOf, aimOf, isPlayer }) {
             r.root.position.z += r.root.position.z < 0 ? 0.45 : -0.45;
           }
           r.seated = false;
-          return walkRig(game, r, p, { speed: speed || 1.0 });
+          return walkRig(game, r, p, { speed: speed || 1.0, run });
         }
-        return place.walkPerson(who, p, { speed });
+        return place.walkPerson(who, p, { speed, run });
       },
       () => {
         if (game.place === place) save(game);
