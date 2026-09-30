@@ -213,7 +213,9 @@ export function* skylineSteps(
     return Array.isArray(r) ? r : [r.x, r.z];
   };
   const q = tier ?? tierNow();
-  const W = walk ? rectPoly(walk) : chunk.walk ? rectPoly(chunk.walk) : null;
+  // CHUNKS walk rectangles are [x0, x1, z0, z1]
+  const cw = chunk.walk && { x0: chunk.walk[0], x1: chunk.walk[1], z0: chunk.walk[2], z1: chunk.walk[3] };
+  const W = walk ? rectPoly(walk) : cw ? rectPoly(cw) : null;
   const [wx0, wx1, , wz1] = W ? bbox(W) : [-6, 6, -6, 3];
   const cx = (wx0 + wx1) / 2,
     cz = W ? (bbox(W)[2] + wz1) / 2 : 0;

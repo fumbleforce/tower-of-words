@@ -1,16 +1,22 @@
-// The dorm courtyard, an outdoor chunk of island-map-4 (the dorm cluster in the south-east). The camera looks north,
-// as in the forecourt. Eric comes in from the plaza lane on the west edge. At the back, a plain concrete dorm block:
-// its glass-fronted entrance hall is a one-storey front, cut low like every near wall, with the mailboxes on its back
-// wall and the passage to the rooms beside them; the block's floors rise behind. West of it the coin laundry's lit
-// front, east of it the sento's; both are background frontages. The bicycle shelter is on the near west side,
-// planting along the hall and the east edge. Evening: a cool dusk sky, the last warm sun low from the west, and the
-// warm light from the hall and the laundry. Most parts are merged per colour to keep the draw calls low.
+// The dorm courtyard, an outdoor chunk of island-map-4: the open entrance court on the west side of the dorm cluster.
+// The camera looks at Eric's block (island east; the chunk is turned 90° in scenes/island-layout.js). Eric comes in
+// from the plaza lane on the west edge of the frame. At the back, Eric's five-storey block (dorm-court/block.js)
+// runs past both edges of the frame, balconies all along it, and returns forward on the east side. In front of it,
+// its glass-fronted entrance hall is a one-storey front, cut low like every near wall, with the mailboxes on its
+// back wall and the passage to the rooms beside them. West of it the coin laundry's lit front, east of it the
+// sento's with its chimney; both are frontages. Bikes: a shelter on the near east side and an open rack on the near
+// west. The rest of the cluster and the town around come from the island layout (scenes/skyline.js). Evening: a
+// dim dusk sky, the last warm sun low, lit windows, the hall and the laundry. Merged per colour for the draw calls.
 import * as THREE from 'three';
 import { Nav } from '../movement/navigation.js';
-import { PAL, mat, rbox, wall, tileFloor, lampPost } from '../props.js';
+import { PAL, rbox, wall, tileFloor, lampPost } from '../props.js';
 import { lightPool } from '../places/life.js';
 import { boxes, planter, bicycle, openDoor, tree, monument } from './forecourt/details.js';
 import { laundry, sento } from './dorm-court/frontages.js';
+import { ericBlock } from './dorm-court/block.js';
+import { buildSkyline } from './skyline.js';
+import * as layout from './island-layout.js';
+import { eveningLight } from './town.js';
 import { mergeStatic } from './merge-static.js';
 
 const HALL = [-1.1, 2.5], // the entrance hall: x range
@@ -22,17 +28,14 @@ const HALL = [-1.1, 2.5], // the entrance hall: x range
   NEAR = 2.5, // the court's near edge
   WEST = -5.2,
   EAST = 5.4;
-const CONCRETE = '#8f9194',
-  CONCRETE_DARK = '#7b7e83',
-  SKY = '#4b5260';
+const SKY = '#2b3342';
 const roofMat = new THREE.MeshBasicMaterial({ color: '#555a63', toneMapped: false });
 
 function ground(root) {
-  root.add(rbox(44, 0.1, 40, '#63666b', { y: -0.12, z: -4, seg: 1, r: 0.01, cast: false }));
   // the court's pale concrete pavers, and the lane in from the plaza along the west edge
   root.add(tileFloor(WEST - 3, EAST, -1.9, NEAR, 0.9, { color: '#8a8886', seam: '#7c7a78', seamW: 0.02 }));
   root.add(
-    tileFloor(WEST - 3, DOOR_X + 0.6, 0.1, 0.9, 0.75, { color: '#94918d', seam: '#86837f', seamW: 0.02, y: 0.004 }),
+    tileFloor(WEST - 8, DOOR_X + 0.6, 0.1, 0.9, 0.75, { color: '#94918d', seam: '#86837f', seamW: 0.02, y: 0.004 }),
   );
   root.add(
     tileFloor(DOOR_X - 0.6, DOOR_X + 0.6, FRONT_Z, 0.1, 0.75, {
@@ -44,6 +47,12 @@ function ground(root) {
   );
   // a kerb and grass strip along the near edge
   root.add(rbox(EAST - WEST + 6, 0.06, 0.9, '#58654f', { x: 0, z: NEAR + 0.45, seg: 1, r: 0.01, cast: false }));
+  // grass either side of the lane where it leaves the court for the plaza, under a few trees
+  for (const [z0, z1] of [
+    [-4.3, 0.1],
+    [0.9, NEAR + 0.9],
+  ])
+    root.add(rbox(5, 0.05, z1 - z0, '#58654f', { x: WEST - 5.5, z: (z0 + z1) / 2, seg: 1, r: 0.01, cast: false }));
 }
 
 // the entrance hall: cut-low glass front with open doors, side and back walls full height, mailboxes, the passage
@@ -128,39 +137,20 @@ function hall(root, nav) {
   nav.block(WEST, EAST, BACK_Z - 1.3, BACK_Z + 0.1);
 }
 
-// the dorm block: plain concrete, four floors of windows and balcony rails over the hall; unlit windows mostly
-function block(root) {
-  const x0 = -3.6,
-    x1 = 4.4,
-    top = 9.6;
-  root.add(rbox(x1 - x0, top, 3.8, CONCRETE, { x: (x0 + x1) / 2, z: BLOCK_Z - 1.9, seg: 1, r: 0.03 }));
-  const dark = [],
-    lit = [],
-    rails = [],
-    slabs = [];
-  for (let f = 0; f < 4; f++) {
-    const y = 2.6 + f * 1.75;
-    slabs.push([x1 - x0 + 0.1, 0.1, 0.5, (x0 + x1) / 2, y - 0.1, BLOCK_Z + 0.25]);
-    rails.push([x1 - x0 + 0.1, 0.5, 0.05, (x0 + x1) / 2, y, BLOCK_Z + 0.48]);
-    for (let c = 0; c < 7; c++) {
-      const x = x0 + 0.6 + c * 1.14;
-      ((c * 3 + f * 5) % 7 < 2 ? lit : dark).push([0.72, 1.0, 0.03, x, y + 0.1, BLOCK_Z + 0.01]);
-    }
+// bikes: a shelter with a pale see-through roof on the near east side, and an open rack on the near west, clear of
+// the lane where Eric comes in (the shelter's roof would hide him there)
+const BIKES = ['#5f6f7d', '#7a6570', '#6b7466', '#8a8e95', '#55606e', '#6d7a86', '#7d7468'];
+function bikeRow(root, x0, n, z, colour0 = 0) {
+  for (let i = 0; i < n; i++) {
+    const bike = bicycle(BIKES[(colour0 + i) % BIKES.length]);
+    bike.rotation.y = Math.PI / 2 + (i % 2 ? 0.05 : -0.04);
+    bike.position.set(x0 + i * 0.62, 0, z);
+    root.add(bike);
   }
-  root.add(boxes(dark, '#4e5864'), boxes(slabs, CONCRETE_DARK), boxes(rails, '#a8adb3'));
-  const warm = boxes(lit, '#e8c89a');
-  warm.material = mat('#e8c89a', { emissive: new THREE.Color('#ffc98a'), emissiveIntensity: 0.9 });
-  root.add(warm);
-  // roof edge and a water tank
-  root.add(
-    rbox(x1 - x0 + 0.1, 0.2, 3.9, CONCRETE_DARK, { x: (x0 + x1) / 2, y: top, z: BLOCK_Z - 1.9, seg: 1, r: 0.02 }),
-  );
 }
-
-// the bicycle shelter on the near west side: steel posts, a pale see-through roof, a full row of bikes
-function shelter(root, nav) {
-  const x0 = -4.8,
-    x1 = -1.6,
+function bikes(root, nav) {
+  const x0 = 1.0,
+    x1 = 3.75,
     z0 = 1.35,
     z1 = 2.35;
   const posts = [];
@@ -183,14 +173,20 @@ function shelter(root, nav) {
   roof.position.set((x0 + x1) / 2, 1.22, (z0 + z1) / 2);
   roof.rotation.x = -0.2;
   root.add(roof);
-  const colors = ['#5f6f7d', '#7a6570', '#6b7466', '#8a8e95', '#55606e'];
-  for (let i = 0; i < 5; i++) {
-    const bike = bicycle(colors[i]);
-    bike.rotation.y = Math.PI / 2;
-    bike.position.set(x0 + 0.4 + i * 0.62, 0, (z0 + z1) / 2 + 0.05);
-    root.add(bike);
-  }
+  bikeRow(root, x0 + 0.4, 4, (z0 + z1) / 2 + 0.05);
   nav.block(x0, x1, z0 - 0.1, NEAR);
+  // the open rack: a low steel hoop per bike
+  const rx = -3.75,
+    rz = 1.95,
+    hoops = [];
+  for (let i = 0; i < 4; i++) {
+    const x = rx + i * 0.62;
+    hoops.push([0.04, 0.55, 0.04, x - 0.2, 0, rz - 0.12], [0.04, 0.55, 0.04, x + 0.2, 0, rz - 0.12]);
+    hoops.push([0.44, 0.04, 0.04, x, 0.53, rz - 0.12]);
+  }
+  root.add(boxes(hoops, '#8b939c'));
+  bikeRow(root, rx, 4, rz, 3);
+  nav.block(rx - 0.45, rx + 3 * 0.62 + 0.45, rz - 0.4, NEAR);
 }
 
 function planting(root, nav) {
@@ -215,6 +211,10 @@ function planting(root, nav) {
     [-5.35, 2.2, 1.05],
     [-5.6, -1.4, 1.2],
     [3.2, -3.7, 1.0],
+    [-7.2, -1.6, 1.15],
+    [-8.4, 2.0, 1.0],
+    [-9.9, -1.0, 1.25],
+    [-10.6, 1.9, 0.95],
   ].entries()) {
     const t = tree(i + 1, h);
     t.position.set(x, 0, z);
@@ -236,24 +236,14 @@ function planting(root, nav) {
   }
 }
 
-// cheap distant massing so the court never sits in a void: two more dorm blocks and a row of low roofs
-function massing(root) {
-  // south of the court: the footpath along the sea wall, behind a long low hedge
+// the near edge: the footpath past the court, behind a long low hedge
+function nearEdge(root) {
   root.add(
-    tileFloor(WEST - 3, EAST + 3, NEAR + 0.9, NEAR + 3, 0.9, { color: '#7f7d7b', seam: '#72706e', seamW: 0.02 }),
+    tileFloor(WEST - 8, EAST + 3, NEAR + 0.9, NEAR + 3, 0.9, { color: '#7f7d7b', seam: '#72706e', seamW: 0.02 }),
   );
   const hedge = planter(11.5);
   hedge.position.set(0.1, 0, NEAR + 1.35);
   root.add(hedge);
-  root.add(rbox(4.2, 11, 4, '#878a8f', { x: 8.2, z: -6.5, seg: 1, r: 0.03 }));
-  root.add(rbox(4.6, 8.4, 4, '#83868b', { x: -7.8, z: -6.8, seg: 1, r: 0.03 }));
-  const dark = [];
-  for (let f = 0; f < 5; f++)
-    for (let c = 0; c < 3; c++) {
-      dark.push([0.62, 0.8, 0.03, 6.9 + c * 1.3, 2.4 + f * 1.7, -4.49]);
-      if (f < 4) dark.push([0.62, 0.8, 0.03, -9.3 + c * 1.4, 2.4 + f * 1.7, -4.79]);
-    }
-  root.add(boxes(dark, '#4e5864'));
 }
 
 export function buildDormCourt() {
@@ -261,10 +251,9 @@ export function buildDormCourt() {
     scene = new THREE.Scene();
   scene.background = new THREE.Color(SKY);
   scene.add(root);
-  // evening, after work: a cool dusk sky, the last of the sun low from the west, warm light from the doors
-  scene.add(new THREE.HemisphereLight('#a8b2c6', '#55525a', 1.5));
-  const sun = new THREE.DirectionalLight('#ffbe8c', 1.7);
-  sun.position.copy(new THREE.Vector3(-0.85, 0.42, 0.25).normalize().multiplyScalar(30));
+  // evening, after work (scenes/town.js eveningLight, the same light as the rest of the walk home)
+  scene.add(new THREE.HemisphereLight());
+  const sun = new THREE.DirectionalLight();
   sun.castShadow = true;
   sun.shadow.mapSize.set(2048, 2048);
   Object.assign(sun.shadow.camera, { left: -12, right: 12, top: 12, bottom: -12, near: 5, far: 70 });
@@ -272,25 +261,29 @@ export function buildDormCourt() {
   sun.shadow.normalBias = 0.03;
   sun.shadow.radius = 4;
   scene.add(sun, sun.target);
-  const fill = new THREE.DirectionalLight('#d6e0ff', 0.5);
+  const fill = new THREE.DirectionalLight();
   fill.position.set(0.3, 1, 0.9);
   scene.add(fill);
+  eveningLight(scene);
 
   const nav = new Nav(WEST + 0.1, EAST - 0.2, BACK_Z - 1.2, NEAR - 0.05, 0.1);
   ground(root);
   hall(root, nav);
-  block(root);
+  ericBlock(root, { hall: HALL });
   laundry(root, nav, { west: WEST, roofMat });
   sento(root, nav, { east: EAST, roofMat });
-  shelter(root, nav);
+  bikes(root, nav);
   planting(root, nav);
-  massing(root);
+  nearEdge(root);
   mergeStatic(root);
+  // the rest of the dorm cluster and the town around, from the island layout; Eric's block is built above
+  const sky = buildSkyline(root, 'dorm_court', { layout, evening: true, skip: ['dorm_1'] });
   return {
     root,
     scene,
     sun,
     nav,
+    sky,
     start: [WEST + 0.6, 0.5],
     plazaEntry: [WEST + 0.6, 0.5],
     westEdge: [WEST - 0.6, 0.5],

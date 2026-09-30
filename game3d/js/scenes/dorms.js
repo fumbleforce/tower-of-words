@@ -94,25 +94,33 @@ function window_(root) {
   );
   glass.position.set(cx, (y0 + y1) / 2, z);
   root.add(glass);
-  // outside: a narrow concrete gap, then the wall, taller than the dorm, panel seams and a little staining
-  // (lit as if open to the sky: the dorm's own shadow would turn the whole view black)
+  // outside: a narrow gap down to the ground floors below (the room is upstairs), then the neighbouring block's
+  // bare wall (dorm_1e in scenes/island-layout.js), panel seams and a drain pipe. The camera looks down through the
+  // window, so the wall goes on well below the floor; it takes the dusk sky's light (it faces the open gap, and
+  // the dorm's own shadow would turn the whole view black), so it reads through the glass.
+  const DROP = 4.2;
   root.add(
-    rbox(X1 - X0 + 0.2, 0.06, BACK - OUT + 0.2, '#7a7d80', {
-      y: -0.08,
+    rbox(X1 - X0 + 0.2, 0.06, BACK - OUT + 0.2, '#4c5058', {
+      y: -DROP,
       z: (OUT + BACK) / 2 - 0.1,
       seg: 1,
       r: 0.005,
       recv: false,
     }),
   );
-  const wallMat = mat(CONCRETE, { roughness: 0.95 });
+  const wallMat = mat(CONCRETE, { roughness: 0.95, emissive: new THREE.Color('#8e9bb4'), emissiveIntensity: 0.32 });
+  // above the floor it is wider than the room; below, only as wide as the room, which hides it but for the window
+  const W = X1 - X0 + 0.2;
   root.add(rbox(4.4, 3.4, 0.3, null, { z: OUT - 0.15, seg: 1, r: 0.01, m: wallMat, recv: false }));
+  root.add(rbox(W, DROP, 0.3, null, { y: -DROP, z: OUT - 0.15, seg: 1, r: 0.01, m: wallMat, recv: false }));
   const seams = [];
-  for (const x of [-1.5, -0.6, 0.3, 1.2]) seams.push([0.018, 3.4, 0.01, x, 0, OUT + 0.003]);
-  for (const y of [1.9]) seams.push([4.4, 0.018, 0.01, 0, y, OUT + 0.003]);
+  for (const x of [-1.5, 1.2]) seams.push([0.018, 3.4, 0.01, x, 0, OUT + 0.003]);
+  for (const x of [-0.6, 0.3]) seams.push([0.018, 3.4 + DROP, 0.01, x, -DROP, OUT + 0.003]);
+  seams.push([4.4, 0.018, 0.01, 0, 1.9, OUT + 0.003]);
+  for (const y of [0.05, -1.8]) seams.push([W, 0.018, 0.01, 0, y, OUT + 0.003]);
   root.add(boxes(seams, '#7b7e80'));
   // a drain pipe down the wall, seen through the window
-  root.add(boxes([[0.06, 3.4, 0.06, 0.2, 0, OUT + 0.05]], '#6c7073'));
+  root.add(boxes([[0.06, 3.4 + DROP, 0.06, 0.2, -DROP, OUT + 0.05]], '#6c7073'));
 }
 
 function bed(root, nav) {

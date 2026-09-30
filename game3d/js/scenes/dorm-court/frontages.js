@@ -138,8 +138,12 @@ export function sento(root, nav, { east, roofMat }) {
   noren.position.set(dx, 1.2, z + 0.08);
   root.add(noren);
   root.add(lightPool(dx, z + 0.6, 0.7, { k: 0.22 }));
-  // the chimney
-  root.add(rbox(0.36, 6.4, 0.36, '#8c8e91', { x: x1 - 0.8, z: z - 2.1, seg: 1, r: 0.02 }));
-  root.add(rbox(0.42, 0.14, 0.42, '#5c6068', { x: x1 - 0.8, y: 6.4, z: z - 2.1, seg: 1, r: 0.02 }));
+  // the chimney, in the gap between the bath house and the dorm, standing above the dorm's roof
+  root.add(rbox(0.4, 11.4, 0.4, '#8c8e91', { x: x1 - 0.8, z: z - 2.0, seg: 1, r: 0.02 }));
+  const bands = [
+    [0.46, 0.16, 0.46, x1 - 0.8, 11.4, z - 2.0],
+    [0.44, 0.08, 0.44, x1 - 0.8, 9.6, z - 2.0],
+  ];
+  root.add(boxes(bands, '#5c6068'));
   nav.block(x0, east, z - 1.6, z + 0.35);
 }

@@ -44,14 +44,14 @@ export function dormCourtPlace(game) {
     zones: { dorm_entry: (x, z) => Math.abs(x - w.door[0]) < 0.8 && z < w.door[1] + 0.25 },
     hooks: {},
     fit(aspect) {
-      // desktop: the whole court, lane to sento, with the hall and the block's lower floors; phone: follow him
+      // desktop: the whole court, lane to sento, with the hall and the block's first floors; phone: follow him
       if (aspect >= 1)
         cam.fit(
           aspect,
           [
             new THREE.Vector3(b.west, 0, 0.5),
             new THREE.Vector3(b.east, 0, 0.5),
-            new THREE.Vector3(0.5, 2.4, b.back - 1.4),
+            new THREE.Vector3(0.5, 4.4, b.back - 1.4),
             new THREE.Vector3(0.5, 0, b.near),
           ],
           new THREE.Vector3(0.1, 0, -1.7),

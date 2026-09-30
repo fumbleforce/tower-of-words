@@ -13,7 +13,7 @@ export const LANDMARKS = [
   { id: 'fountain', label: 'Fountain', chunk: 'plaza', at: [0, -2.7], ref: [715, 612], anchor: true },
   { id: 'canteen', label: 'Canteen', chunk: 'plaza', at: [0, -8.7], ref: [736, 534] },
   { id: 'shops', label: 'Shop row', chunk: 'plaza', at: [0, 3.4], ref: [715, 705] },
-  { id: 'dorm_door', label: 'Dorm entrance', chunk: 'dorm_court', at: [0.5, -1.2], ref: [985, 700], anchor: true },
+  { id: 'dorm_door', label: 'Dorm entrance', chunk: 'dorm_court', at: [0.5, -1.2], ref: [955, 705], anchor: true },
   { id: 'dorm_block', label: 'Dorm block', chunk: 'dorm_court', at: [0.4, -6.2], ref: [1009, 694] },
 ];
 // the lane ends the walks crossfade between: [from chunk, its edge, to chunk, its edge]

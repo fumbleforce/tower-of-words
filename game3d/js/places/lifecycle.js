@@ -14,7 +14,6 @@ import { playMusic } from '../ui.js';
 import { sim, PERIODS as PERIOD_ORDER, absorb, applySchedule, save } from '../sim.js';
 import * as trips from '../trips.js';
 
-const DEV_SKYLINE = new URLSearchParams(location.search).has('skyline');
 const MUSIC = { train: 'calm', gate: 'lively', office: 'office' };
 
 export function createPlaceLifecycle(
@@ -31,7 +30,6 @@ export function createPlaceLifecycle(
         const place = await PLACES[name](game, story);
         assertPlaceRegistered(place, name, PLACE_DETAILS[name]);
         place.name = name;
-        if (DEV_SKYLINE) await (await import('../scenes/skyline-proof.js')).skylineProof(place, game); // dev only
         await nextFrame();
         attachLift(game, place); // walk-in lift (places/lift.js)
         await nextFrame();
