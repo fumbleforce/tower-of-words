@@ -8,6 +8,7 @@ import { walkIn } from './edge-walk.js';
 import { glide } from '../move.js';
 import { PLACE_DETAILS } from './catalog.js';
 import { snapshotPeople, restorePeople } from './saved-people.js';
+import { dormBath } from './dorm-bath.js';
 
 // The dorm courtyard, on the walk home after work; it also loads with ?place=dorm_court.
 // The trip out is the watched walk through the hall doors and the passage into Eric's room (dorms).
@@ -15,7 +16,8 @@ export async function dormCourtPlace(game) {
   const w = await sliced(dormCourtSteps()); // in slices between frames: it's built while the plaza is played
   const cam = new RoomCam(w.camera);
   const floor = new THREE.Plane(new THREE.Vector3(0, 1, 0), 0);
-  const spots = { plaza_entry: w.plazaEntry, dorm_entry: w.dormEntry };
+  const bath = dormBath(game); // the sento's humming after work, and the `bath` discovery
+  const spots = { plaza_entry: w.plazaEntry, dorm_entry: w.dormEntry, bath: bath.spot };
   const things = {
     dorm_entry: {
       ...PLACE_DETAILS.dorm_court.things.dorm_entry,
@@ -23,6 +25,12 @@ export async function dormCourtPlace(game) {
       spot: () => w.dormEntry,
       keep: 1.4, // the hall doors stay clear of the goal's edge arrow (ui/goal-arrow.js)
       face: () => w.door,
+    },
+    bath: {
+      ...PLACE_DETAILS.dorm_court.things.bath,
+      anchor: (v) => bath.anchor(v),
+      spot: () => bath.spot,
+      face: bath.face,
     },
   };
   const b = w.bounds;
@@ -44,7 +52,7 @@ export async function dormCourtPlace(game) {
     seats: {},
     people: {},
     zones: { dorm_entry: (x, z) => Math.abs(x - w.door[0]) < 0.8 && z < w.door[1] + 0.25 },
-    hooks: {},
+    hooks: { bathSong: bath.bathSong },
     fit(aspect) {
       // desktop: the whole court, lane to sento, with the hall and the block's first floors; phone: follow him
       if (aspect >= 1)
@@ -76,7 +84,12 @@ export async function dormCourtPlace(game) {
       const point = new THREE.Vector3();
       return rc.ray.intersectPlane(floor, point) ? point : null;
     },
-    update() {},
+    update(dt) {
+      bath.update(dt);
+    },
+    leave() {
+      bath.leave();
+    },
     snapshotState() {
       return { player: snapshotPeople({ eric: game.player }) };
     },

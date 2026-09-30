@@ -46,6 +46,9 @@ const K = {
   copier: { f: ['copier_run'], gap: 0.5 },
   kettle: { f: ['kettle_pour'], gap: 0.5 },
   vending: { f: ['vending'], gap: 0.3 },
+  // the dorm courtyard's bath (places/dorm-bath.js): a man humming inside, and another finishing his tune
+  bath_first: { f: ['bath_first'] },
+  bath_answer: { f: ['bath_answer'] },
 };
 
 export function ctx() {
@@ -86,8 +89,9 @@ function preloadAll() {
   for (const f of all) load(f);
 }
 
-// Play a kind. opts: { gain (linear, default 1), rate, at (seconds from now), pan (-1..1) }.
-// Returns { stop(ms) } (a no-op if nothing played).
+// Play a kind. opts: { gain (linear, default 1), rate, at (seconds from now), pan (-1..1), offset (seconds into the
+// file) }. Returns { stop(ms), gain, panner } (gain and panner are the live nodes, for a sound that moves; a no-op
+// { stop } if nothing played).
 export function sfx(kind, opts = {}) {
   const none = { stop() {} };
   if (isMuted()) return none;
@@ -112,15 +116,16 @@ export function sfx(kind, opts = {}) {
   src.playbackRate.value = (opts.rate || 1) * (1 + spread(k.rate));
   const g = c.createGain();
   g.gain.value = (opts.gain ?? 1) * Math.pow(10, spread(k.db) / 20);
-  let node = src.connect(g);
-  if (opts.pan && c.createStereoPanner) {
-    const p = c.createStereoPanner();
+  let node = src.connect(g),
+    p = null;
+  if (opts.pan !== undefined && c.createStereoPanner) {
+    p = c.createStereoPanner();
     p.pan.value = Math.max(-1, Math.min(1, opts.pan));
     node = node.connect(p);
   }
   node.connect(audioBus('sfx'));
   const at = now + (opts.at || 0);
-  src.start(at);
+  src.start(at, opts.offset || 0);
   live[kind] = g;
   if (kind === 'kotodama') {
     for (const f of dipHooks) f(0.25, 0.08, 1.4, 1.2);
@@ -136,7 +141,12 @@ export function sfx(kind, opts = {}) {
       /* */
     }
   };
-  return { stop };
+  return { stop, gain: g, panner: p };
+}
+// how long a kind's (first) file lasts, in seconds, once it has loaded; 0 before that
+export function duration(kind) {
+  const b = K[kind] && bufs[K[kind].f[0]];
+  return b && !(b instanceof Promise) ? b.duration : 0;
 }
 // cut a kind short (the door chime stops mid-note when a kotodama freezes the doors)
 export function stopSfx(kind, ms = 40) {

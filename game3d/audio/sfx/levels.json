@@ -328,5 +328,25 @@
   "seconds": 7.8,
   "kb": 108,
   "source": "Stable Audio 3 Medium, local (printer-5493, 0-7.8 s)"
+ },
+ "bath_first": {
+  "target_lufs": -31,
+  "measure": "momentary max",
+  "encoded_integrated": -35.4,
+  "encoded_momentary_max": -31.5,
+  "peak_dbfs": -25.6,
+  "seconds": 6.83,
+  "kb": 94,
+  "source": "synthesised (tools/feel/hum.py)"
+ },
+ "bath_answer": {
+  "target_lufs": -29,
+  "measure": "momentary max",
+  "encoded_integrated": -34.8,
+  "encoded_momentary_max": -29.4,
+  "peak_dbfs": -22.2,
+  "seconds": 5.09,
+  "kb": 70,
+  "source": "synthesised (tools/feel/hum.py)"
  }
 }

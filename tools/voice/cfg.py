@@ -64,10 +64,12 @@ def speakers():
     sp['commuter'] = sp['sales1']
     # train passengers: borrowed voices, none of them recurring cast
     sp['bun'] = sp['sales2']; sp['youth'] = sp['sales1']; sp['music'] = sp['kuro']; sp['stander'] = sp['reader']
+    # the canteen worker closing the plaza terrace after work (evening discovery): a borrowed voice, not Kuro's
+    sp['canteen_worker'] = sp['sales2']
     return sp
 
 
-FEMALE = {'mio', 'aoi', 'sales2', 'kuro', 'gatev', 'conductor', 'ann', 'emi', 'bun', 'music'}
+FEMALE = {'mio', 'aoi', 'sales2', 'kuro', 'gatev', 'conductor', 'ann', 'emi', 'bun', 'music', 'canteen_worker'}
 MALE = {'eric', 'guard', 'kuroda', 'sales1', 'mori', 'kenji', 'reader', 'commuter', 'youth', 'stander'}
 LUFS = {'eric': -23.0, 'gatev': -20.0, 'conductor': -20.0, 'ann': -20.0}  # Eric quieter, recorded voices a little under the cast
 LUFS_DEFAULT = -18.0

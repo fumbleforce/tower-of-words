@@ -1,5 +1,5 @@
 """Level and encode game3d's effects and ambience beds.
-Sources: tools/feel/synth.py output (~/ai/feel-audio/synth/*.wav) and picked Stable Audio takes (~/ai/feel-audio/raw/, PICKS below).
+Sources: tools/feel/synth.py and hum.py output (~/ai/feel-audio/synth/*.wav) and picked Stable Audio takes (~/ai/feel-audio/raw/, PICKS below).
 Every file is levelled to the loudness it should have in the game (TARGET, LUFS), so the engine plays them at gain 1:
   beds: integrated loudness; one-shots: the loudest 400 ms window (momentary max), which is fair to short sounds.
 Beds get a 3 s equal-power crossfade from their end into their start, so they loop without a seam even as a plain loop.
@@ -27,6 +27,9 @@ TARGET = {
     'chime': -27, 'lift': -28, 'beep': -30, 'clack-1': -31, 'clack-2': -31, 'clack-3': -31,
     'door': -29, 'doorslow': -30, 'train_doors': -28, 'glass_doors': -29, 'lift_doors': -29, 'brake': -29,
     'flap_open': -30, 'copier_run': -30, 'kettle_pour': -31, 'vending': -29,
+    # the dorm courtyard's bath: hummed inside, heard through the curtain (tools/feel/hum.py); the place scales the
+    # first one down with distance
+    'bath_first': -31, 'bath_answer': -29,
     # distant one-shots scattered over the beds
     'printer': -39, 'phone_far': -40, 'typing': -40,
     # beds (under the music: -34.5)
@@ -75,7 +78,7 @@ def load(name):
     else:
         p = f'{SYN}/{name}.wav'
         if not os.path.exists(p): return None, None, None
-        y, sr = sf.read(p, always_2d=True); src = 'synthesised (tools/feel/synth.py)'
+        y, sr = sf.read(p, always_2d=True); src = 'synthesised (tools/feel/hum.py)' if name.startswith('bath_') else 'synthesised (tools/feel/synth.py)'
     if y.shape[1] == 1: y = np.repeat(y, 2, 1)
     if sr != SR: y = librosa.resample(y.T, orig_sr=sr, target_sr=SR).T; sr = SR
     return y, sr, src
