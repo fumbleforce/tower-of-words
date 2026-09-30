@@ -2,7 +2,8 @@
 """Sync the used assets with Cloudflare R2. Git keeps code, text and tools/assets/assets.lock.json; R2 keeps the files.
 
 Used = every binary file under a root in tools/assets/sync.json (minus its excludes), plus every file the asset
-library (tools/assets/scan.py) marks approved or provisional, wherever it lives. Everything else binary is local
+library (tools/assets/scan.py) marks approved or provisional, wherever it lives, plus the files named in the `data`
+list of each file under `lists` in sync.json (any type: the public creator's bodies are JSON). Everything else binary is local
 (WIP, candidates, rejected, screenshots, production, legacy). Anything private (island/private, any private/ folder)
 is never uploaded, whatever the config says.
 
@@ -89,8 +90,14 @@ def library():
 
 
 def used_files():
-    """{path: 'root' | 'library'} for used files on this disk, and a list of problems met on the way."""
+    """{path: 'root' | 'list' | 'library'} for used files on this disk, and a list of problems met on the way."""
     used, problems = {}, []
+    for lst in CONF.get('lists', []):
+        for p in json.load(open(os.path.join(ROOT, lst), encoding='utf-8'))['data']:
+            if is_private(p):
+                problems.append(f'{lst}: {p} is private and is never uploaded')
+            elif os.path.isfile(os.path.join(ROOT, p)):
+                used[p] = 'list'
     for r in CONF['roots']:
         base = os.path.join(ROOT, r)
         for dp, dns, fns in os.walk(base):

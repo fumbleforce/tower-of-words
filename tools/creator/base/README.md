@@ -10,12 +10,14 @@ Jørgen on creator-base-5: "getting close. texture bleed onto the body models cu
 
 `dress.html` is the live creator: Mio's or Eric's body, hair, eyes, top, bottom and shoes, colours and skin tone, idle (the approved relaxed idle, `../approved-idle.js`) or walk, turning, and the original model beside it. The look is kept in the URL, so a link reopens it. `?zones=1` colours the body by the zone the clothes use (a debugging aid).
 
+It is also online at https://fumbleforce.github.io/tower-of-words/creator/ (game3d/tools/deploy-pages.sh). `public.json` lists every file it loads outside game3d/; its `data` files (the source16 bodies, the sources, the clips) are in R2 and the lock file. A new file the creator loads goes in that list, then `python3 tools/assets/sync.py push`.
+
 - `repair_source_base.py <body> source15 source16` makes the base: its own copy of the texture where every texel the base uses outside the face window (eyes, lashes, brows, blush) is skin, so hair painted on the original head is gone; a closed neck plug where the neck stopped short of the head (Eric); piece names per triangle; the face layout (eye boxes) for the eye styles. It copies the fitted original clothes (`-fit3-layers`) to the new id. Run it with the Python that has numpy and Pillow (`~/ai/flat-venv/bin/python`).
 - `wardrobe.js`: clothes and hair made from the base itself, so every piece fits both bodies. Clothes are the body's own surface cut by planes (hem, neckline, sleeve and trouser ends), pushed out and keeping the body's skin weights; skirts are flared rings on the hips that partly follow the thighs. Hair is a low-poly cap shrink-wrapped round the head with a style's hairline, fringe points, bob fall, spikes or ponytail, on the Head bone. A bob folds Mio's separate ears in under it.
 - `eyes.js`: Original keeps the painted eyes and can recolour the iris; Round, Sharp and Sleepy erase the painted eye inside its box and draw a new one from a canvas, in any iris colour.
 - "Mio's" and "Eric's" hair and clothes are their original layers and fit only their own body. Eric's stubble layer also holds some of his side hair, so it shows only with his own hair.
 
-Known limits: sleeve and trouser ends are open tubes; a swinging hand can pass through a skirt; the drawn eyes are flat decals, so they don't follow the painted eye's shading. Candidate JSON and PNG stay local like earlier rounds.
+Known limits: sleeve and trouser ends are open tubes; a swinging hand can pass through a skirt; the drawn eyes are flat decals, so they don't follow the painted eye's shading. Earlier candidates' JSON and PNG stay local.
 
 ## Why the first cut left gaps
 
