@@ -6,12 +6,12 @@
  "images": [
   {
    "id": "lineup",
-   "image": "art/candidates/portraits/cast-faces-1/lineup.webp",
+   "image": "bible/shots/showcase/cast-faces-1/lineup.webp",
    "caption": "The cast as the game places them, Mio and Kuro at the ends"
   },
   {
    "id": "faces",
-   "image": "art/candidates/portraits/cast-faces-1/faces-installed.webp",
+   "image": "bible/shots/showcase/cast-faces-1/faces-installed.webp",
    "caption": "Every face each person has now"
   }
  ],
