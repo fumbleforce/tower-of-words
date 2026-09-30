@@ -65,6 +65,40 @@ export function parts() {
     },
   };
 }
+// The cut over the lobby: while Eric is in the lobby or the lift, only the part of the tower between him and the
+// camera fades: the lobby's glass front and canopy and the three storeys over the lobby, from the south face back
+// to the lobby's back wall and east to the first bay line past the lobby's east wall. The floors above that, and the
+// rest of the tower, stay, so the lobby reads as a room open to the camera at the foot of a standing tower (the
+// camera's 46 degrees see nothing of the storeys above the cut from the lobby floor). [u0, u1, y0, y1, n0, n1]
+export const NU = bayLines(T.W).find((u) => u >= LU - 1e-6),
+  NT = GF + 3 * T.fh;
+export const NOTCH = [-2, NU, 0.45, NT, -2.2, LN];
+// a box collector that sends each box's part inside `region` to `fade` and the rest to `stay` (split along u, then
+// y, then n), so a floor band or a fin running across the cut's edge is cut exactly there
+export function splitParts(fade, stay, region = NOTCH) {
+  const [a0, a1, b0, b1, c0, c1] = region;
+  return {
+    box(u0, u1, y0, y1, n0, n1) {
+      if (u1 <= a0 || u0 >= a1 || y1 <= b0 || y0 >= b1 || n1 <= c0 || n0 >= c1) return stay.box(u0, u1, y0, y1, n0, n1);
+      const [U0, U1, Y0, Y1, N0, N1] = [
+        Math.max(u0, a0),
+        Math.min(u1, a1),
+        Math.max(y0, b0),
+        Math.min(y1, b1),
+        Math.max(n0, c0),
+        Math.min(n1, c1),
+      ];
+      if (U0 > u0) stay.box(u0, U0, y0, y1, n0, n1);
+      if (U1 < u1) stay.box(U1, u1, y0, y1, n0, n1);
+      if (Y0 > y0) stay.box(U0, U1, y0, Y0, n0, n1);
+      if (Y1 < y1) stay.box(U0, U1, Y1, y1, n0, n1);
+      if (N0 > n0) stay.box(U0, U1, Y0, Y1, n0, N0);
+      if (N1 < n1) stay.box(U0, U1, Y0, Y1, N1, n1);
+      fade.box(U0, U1, Y0, Y1, N0, N1);
+    },
+  };
+}
+
 export const hash = (s) => {
   let h = 2166136261;
   for (let i = 0; i < s.length; i++) h = Math.imul(h ^ s.charCodeAt(i), 16777619);

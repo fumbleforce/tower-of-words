@@ -8,7 +8,8 @@ import { Parts, along, pair } from '../outdoor/parts.js';
 import { paver, GRANITE } from '../outdoor/paving.js';
 import { kerb, kerbRect, wallRect } from '../outdoor/edges.js';
 import { keyaki, sakura, pine, maple, ginkgo, cluster, hedge, grass, bed, treePit, LEAF } from '../outdoor/planting.js';
-import { lamps, bench, bins, bollard } from '../outdoor/furniture.js';
+import { lamps, bench, bins, bollard, STEEL } from '../outdoor/furniture.js';
+import { textTexture, plane, JP_FONT } from '../../props.js';
 import { bikeRow } from './details.js';
 import * as P from './plan.js';
 
@@ -52,7 +53,11 @@ function paving(root) {
 function edges(p) {
   kerbRect(p, P.COURT, { sides: 'w' });
   kerb(p, [X0, HZ], [5.95, HZ], { off: -0.08 }); // the court's north edge, west of the service lane
-  kerbRect(p, P.SERVICE, { sides: 'we' });
+  kerbRect(p, P.SERVICE, { sides: 'wen' });
+  // the service way: bollards across its mouth, so it reads as staff-only, and a hedge across its end
+  for (const x of along([P.SERVICE[0], 0], [P.SERVICE[1], 0], { count: 3, inset: 0.5 }).map((q) => q.x))
+    bollard(p, x, HZ - 0.35);
+  hedge(p, [P.SERVICE[0] + 0.1, P.TN - 0.4], [P.SERVICE[1] - 0.1, P.TN - 0.4], { w: 0.5, h: 0.6, seed: 12 });
   kerbRect(p, BIKES, { sides: 's' });
   kerb(p, [LE, P.LANE[3]], [LE, ZN], { off: -0.08 }); // the court's east edge south of the lane
 }
@@ -170,6 +175,43 @@ function lights(set, p, block) {
   lamps(set, p, pts, { kind: 'post' });
 }
 
+// the way-finding sign where the walk turns east out of the station: a post and a dark board facing the station
+// door, head office and the plaza with the dorms both ahead to the right
+function wayfinding(root, p, block) {
+  const [x, z] = [LEG.a[0] - 0.45, LEG.b[2] - 0.25];
+  const tex = textTexture(
+    (ctx, w, h) => {
+      ctx.fillStyle = '#2a2f38';
+      ctx.fillRect(0, 0, w, h);
+      ctx.fillStyle = '#e9c74a';
+      ctx.fillRect(0, 0, w, 12);
+      ctx.textBaseline = 'middle';
+      const row = (y, jp, en) => {
+        ctx.fillStyle = '#e9ecf0';
+        ctx.font = '700 60px ' + JP_FONT;
+        ctx.fillText(jp, 28, y);
+        const jw = ctx.measureText(jp).width;
+        ctx.fillStyle = '#b8c0cc';
+        ctx.font = '600 40px sans-serif';
+        ctx.fillText(en, 52 + jw, y + 3);
+        ctx.fillStyle = '#e9ecf0';
+        ctx.font = '700 60px sans-serif';
+        ctx.fillText('→', w - 90, y);
+      };
+      row(h * 0.34, '本社', 'Head office');
+      row(h * 0.74, '噴水広場', 'Plaza · Dorms');
+    },
+    640,
+    256,
+  );
+  p.box(STEEL.dark, 0.08, 1.2, 0.08, x, 0, z);
+  p.box(STEEL.dark, 1.02, 0.52, 0.06, x, 0.98, z);
+  const face = plane(0.96, 0.46, tex, { emissiveK: 0.2 });
+  face.position.set(x, 1.24, z + 0.035);
+  root.add(face);
+  block(x - 0.2, x + 0.2, z - 0.2, z + 0.2);
+}
+
 export function buildCourt(root, nav, set) {
   const block = (x0, x1, z0, z1) => nav.block(x0, x1, z0, z1);
   paving(root);
@@ -181,5 +223,6 @@ export function buildCourt(root, nav, set) {
   bikes(root, p, block);
   garden(p, block);
   lights(set, p, block);
+  wayfinding(root, p, block);
   p.build(root);
 }

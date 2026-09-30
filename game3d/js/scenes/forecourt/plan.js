@@ -18,7 +18,8 @@ export const X0 = STATION.x0, // the station's west face: the court's west edge
   HZ = T.o[1], // the tower's south face: the court's north edge
   HO_X = at(DOOR_U, 0)[0], // the head office door
   LE = at(LU, 0)[0], // the lobby's east wall: the court's east edge
-  TE = T.o[0] + T.W; // the tower's east face
+  TE = T.o[0] + T.W, // the tower's east face
+  TN = T.o[1] - T.D; // its north face
 
 export const COURT = [X0, LE, HZ, ZN];
 // the main walk: its axis, width and border; the three legs' outer rectangles
@@ -38,7 +39,8 @@ export const FIELDS = [
   [LEG.c[1], LE, HZ, ZN], // east of it
   [LEG.a[1], LEG.c[1], LEG.b[3], ZN], // south of it, east of the station door
 ];
-export const SERVICE = [5.95, T.o[0], -16, HZ]; // the service lane north between the wing and the tower
+export const SERVICE = [5.95, T.o[0], TN, HZ]; // the service way north between the wing and the tower, to
+// the tower's service door near its north-west corner; it ends on the tower's north face line
 export const BIKES = [SE, HO_X + 1.95, ZN, 10.6];
 export const GARDEN = [BIKES[1], LE, ZN, 10.6]; // the raised garden east of the bike court
 export const NORTH_BED = [X0 + 0.3, 5.5, HZ + 0.05, HZ + 1.15]; // the raised bed along the court's north edge

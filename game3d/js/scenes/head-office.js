@@ -5,8 +5,9 @@
 // part), a back office and a closed service block. The lift core stands against the lobby's back wall, facing the
 // door: the B2 car (the lift site below, its lid the dark of the core's shafts), a closed second car for 6F-10F and
 // the stair door, with the floor directory beside them.
-// Everything above the ground floor, and the lobby's glass front above its sill, is one occluder (scenes/occluders.js):
-// it fades while Eric is inside the lobby or the lift and comes back when he walks out.
+// The lobby's glass front, the canopy and the three storeys over the lobby (head-office/frame.js NOTCH) are one
+// occluder (scenes/occluders.js): they fade while Eric is inside the lobby or the lift and come back when he walks
+// out. The rest of the tower stands, so the lobby shows as a room cut into the foot of the tower.
 import * as THREE from 'three';
 import { mat } from '../props.js';
 import { mergeStatic } from './merge-static.js';
@@ -15,7 +16,23 @@ import { addOccluder, updateOccluders } from './occluders.js';
 import { PEOPLE } from '../cast.js';
 import { blob } from '../engine.js';
 import { K } from './office.js';
-import { T, at, inT, GF, LU, LN, DOOR, DOOR_U, DOOR_W, OUT, CZ, CORE, TOP, parts } from './head-office/frame.js';
+import {
+  T,
+  at,
+  inT,
+  GF,
+  LU,
+  LN,
+  DOOR,
+  DOOR_U,
+  DOOR_W,
+  OUT,
+  CZ,
+  CORE,
+  TOP,
+  parts,
+  splitParts,
+} from './head-office/frame.js';
 import { upper, ground } from './head-office/tower.js';
 import { furniture, FURNITURE, RECEPTION, core, liftLanding } from './head-office/lobby.js';
 
@@ -28,7 +45,7 @@ export const FORECOURT_LIFT_SITE = {
   floor: '1',
   out: [OUT[0], CZ + 0.85],
   cap: true,
-  capColor: '#7f848b', // the lid over the car: the core's cut top (scenes/head-office/lobby.js core)
+  capColor: '#575c65', // the lid over the car (unlit): toned to sit with the core's lit cut top at both times of day
   shaft: true,
 };
 
@@ -49,32 +66,46 @@ export function* headOfficeSteps(root, nav) {
   g.add(inner);
   mergeStatic(inner);
   yield;
-  // the upper floors, the lobby's glass front and the canopy: one occluder in five meshes
-  const glassP = parts(),
-    litP = parts(),
-    frameP = parts(),
+  // the tower's shell in two sets: what fades while Eric is in the lobby (the lobby's glass front, the canopy and the
+  // storeys over the lobby, frame.js NOTCH) and what stays; each set one mesh per material
+  const P = () => ({ fade: parts(), stay: parts() });
+  const glassP = P(),
+    litP = P(),
+    frameP = P(),
     lobbyP = parts();
-  upper(glassP, litP, frameP, lobbyP);
+  const split = (q) => splitParts(q.fade, q.stay);
+  const frameS = split(frameP);
+  upper(split(glassP), split(litP), frameS, splitParts(lobbyP, lobbyP));
   yield;
-  const front = ground(g, frameP);
+  const front = ground(g, frameS);
   yield;
-  const glassM = () => mat('#8c9dad', { roughness: 0.45, metalness: 0.05 });
-  const glass = glassP.mesh(glassM(), 'ho:glass');
-  const lit = litP.mesh(glassM(), 'ho:glassLit');
-  const frame = frameP.mesh(mat('#b3b9c0'), 'ho:frame');
+  const glassM = mat('#8c9dad', { roughness: 0.45, metalness: 0.05 }),
+    litM = glassM.clone(), // its own: the lit bays glow after work
+    frameM = mat('#b3b9c0');
+  const fading = [
+    glassP.fade.mesh(glassM, 'ho:glass'),
+    litP.fade.mesh(litM, 'ho:glassLit'),
+    frameP.fade.mesh(frameM, 'ho:frame'),
+  ];
+  const standing = [
+    glassP.stay.mesh(glassM, 'ho:glassStay'),
+    litP.stay.mesh(litM, 'ho:glassLitStay'),
+    frameP.stay.mesh(frameM, 'ho:frameStay'),
+  ];
   // the lobby's glass front: lit from inside, warm, a little more after dark
   const lobbyGlass = lobbyP.mesh(
     new THREE.MeshStandardMaterial({ color: '#95a3ad', roughness: 0.4, emissive: '#ffd6a0', emissiveIntensity: 0.07 }),
     'ho:lobbyGlass',
   );
-  for (const m of [glass, lit, frame, lobbyGlass]) {
+  for (const m of [...fading, ...standing, lobbyGlass]) {
+    if (!m) continue;
     m.userData.noBatch = true;
     g.add(m);
   }
   g.traverse((o) => o.isMesh && (o.userData.liftKeep = true));
   const occ = { occluders: [] };
   for (const m of front) m.userData.noBatch = true;
-  addOccluder(occ, [glass, lit, frame, lobbyGlass, ...front], inLobby, {
+  addOccluder(occ, [...fading, lobbyGlass, ...front].filter(Boolean), inLobby, {
     name: 'ho:upper',
   });
   core(root);
@@ -126,11 +157,13 @@ export function* headOfficeSteps(root, nav) {
     // after work, about a third of the bays are lit
     onPeriod(period) {
       if (period !== 'evening') return;
-      const m = lit.material;
-      m.color.set('#cdb48f');
-      m.emissive = new THREE.Color('#ffc98a');
-      m.emissiveIntensity = 0.5;
-      m.needsUpdate = true;
+      for (const m of [litM, fading[1]?.material]) {
+        if (!m) continue;
+        m.color.set('#cdb48f');
+        m.emissive = new THREE.Color('#ffc98a');
+        m.emissiveIntensity = 0.5;
+        m.needsUpdate = true;
+      }
       lobbyGlass.material.emissiveIntensity = 0.55;
     },
   };
