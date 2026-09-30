@@ -90,22 +90,30 @@ export function farTrees(root, items, colors = ['#4d6b47', '#43603f']) {
   crowns.forEach((geos, i) => add(geos, colors[i]));
 }
 
-// stone paving with its seams as one mesh (tileFloor in props.js makes a mesh per seam line, too many outdoors)
-export function paving(x0, x1, z0, z1, tile, { color = '#8e8a86', seam = '#7f7b77', y = 0 } = {}) {
+// several rectangles [x0, x1, z0, z1] of stone paving on one tile grid (from the first one's corner): one floor mesh
+// and one seam mesh for all of them, so an L-shaped court and its lanes cost two draw calls
+export function pavingRects(rects, tile, { color = '#8e8a86', seam = '#7f7b77', y = 0 } = {}) {
   const g = new THREE.Group();
+  const [ox, , oz] = rects[0];
   const floor = new THREE.Mesh(
-    new THREE.BoxGeometry(x1 - x0, 0.1, z1 - z0),
+    mergeGeometries(
+      rects.map(([x0, x1, z0, z1]) =>
+        new THREE.BoxGeometry(x1 - x0, 0.1, z1 - z0).translate((x0 + x1) / 2, y - 0.05, (z0 + z1) / 2),
+      ),
+    ),
     mat(color, { roughness: 0.3, metalness: 0.04 }),
   );
-  floor.position.set((x0 + x1) / 2, y - 0.05, (z0 + z1) / 2);
   floor.receiveShadow = true;
   floor.name = 'floor';
   floor.userData.surf = 'tile';
-  floor.userData.tile = [x0, z0, tile];
+  floor.userData.tile = [ox, oz, tile];
   g.add(floor);
   const parts = [];
-  for (let x = x0 + tile; x < x1 - 0.01; x += tile) parts.push([0.02, 0.004, z1 - z0, x, y, (z0 + z1) / 2]);
-  for (let z = z0 + tile; z < z1 - 0.01; z += tile) parts.push([x1 - x0, 0.004, 0.02, (x0 + x1) / 2, y, z]);
+  const first = (a, o) => o + Math.ceil((a - o) / tile + 1e-6) * tile; // the first grid line past a
+  for (const [x0, x1, z0, z1] of rects) {
+    for (let x = first(x0, ox); x < x1 - 0.01; x += tile) parts.push([0.02, 0.004, z1 - z0, x, y, (z0 + z1) / 2]);
+    for (let z = first(z0, oz); z < z1 - 0.01; z += tile) parts.push([x1 - x0, 0.004, 0.02, (x0 + x1) / 2, y, z]);
+  }
   if (parts.length) {
     const seams = mat(seam, { roughness: 0.7 });
     seams.userData.noInk = true;
@@ -115,6 +123,9 @@ export function paving(x0, x1, z0, z1, tile, { color = '#8e8a86', seam = '#7f7b7
   }
   return g;
 }
+
+// stone paving with its seams as one mesh (tileFloor in props.js makes a mesh per seam line, too many outdoors)
+export const paving = (x0, x1, z0, z1, tile, opts) => pavingRects([[x0, x1, z0, z1]], tile, opts);
 
 // after work: dusk on a chunk built with outdoorLight (and the dorm courtyard's own lights), so the walk home is in
 // one light: a dim blue sky, the last of the sun low and orange from the west, lamps and windows glowing

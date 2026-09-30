@@ -1,26 +1,20 @@
 // The platform shed along the west coast of the station forecourt, the monorail beam arriving on piers, and the
 // covered walkway from the shed's stairs to the station's glass front (scenes/station-exterior.js builds the station
-// and calls buildShed).
+// and calls buildShed). All of it on the town's grid, like the station; only the beam curves, out on the approach.
 import * as THREE from 'three';
+import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
 import { mat } from '../props.js';
-import { BUILDINGS, footprint, toLocal } from './island-layout.js';
+import { BUILDINGS, PATHS, toLocal } from './island-layout.js';
 import { boxes } from './forecourt/details.js';
-import { paving } from './town.js';
+import { pavingRects } from './town.js';
 
-// The shed's centre line from the layout's platform_shed (the middles of its two short ends), moved west so its
-// roof clears the station's north-west corner (the traced outline overlaps it; notes/map-gaps.md H7, H8), and
-// 7.2 wide instead of the drawn 9, so the court keeps its west edge.
+// The shed from the layout's platform_shed: a rectangle on the grid, running north-south west of the station, its
+// centre line down the middle of the traced roof; 7.2 wide under the traced 8, so its eaves stay inside the outline.
 const SHED = (() => {
-  const P = footprint(BUILDINGS.find((b) => b.id === 'platform_shed')).map(([x, z]) => toLocal('forecourt', x, z));
-  const mid = (a, b) => [(a[0] + b[0]) / 2, (a[1] + b[1]) / 2];
-  const N = mid(P[0], P[1]),
-    S = mid(P[2], P[3]);
-  return {
-    c: [(N[0] + S[0]) / 2 - 1.3, (N[1] + S[1]) / 2],
-    yaw: Math.atan2(S[0] - N[0], S[1] - N[1]), // the group's +z points south-south-west, down the shed
-    L: Math.hypot(N[0] - S[0], N[1] - S[1]),
-    half: 3.6,
-  };
+  const [x0, z0, x1, z1] = BUILDINGS.find((b) => b.id === 'platform_shed').rect;
+  const [wx, nz] = toLocal('forecourt', x0, z0),
+    [ex, sz] = toLocal('forecourt', x1, z1);
+  return { c: [(wx + ex) / 2, (nz + sz) / 2], L: sz - nz, half: 3.6 };
 })();
 const DECK = 2.5, // platform level (the monorail car's floor)
   BEAM_TOP = 2.0,
@@ -28,19 +22,23 @@ const DECK = 2.5, // platform level (the monorail car's floor)
 
 function shed(root) {
   const g = new THREE.Group();
-  g.position.set(SHED.c[0], 0, SHED.c[1]);
-  g.rotation.y = SHED.yaw;
+  g.position.set(SHED.c[0], 0, SHED.c[1]); // the group's +z points south, down the shed
   root.add(g);
   const L = SHED.L,
     beams = [],
     piers = [],
     deck = [],
     steel = [];
-  // two track beams either side of the island platform, running on 6 past the south end toward the approach
-  for (const u of [-2.2, 2.2]) {
-    beams.push([0.8, 0.9, L + 6, u, BEAM_TOP - 0.9, 3]);
-    for (let v = -L / 2 + 2; v < L / 2 + 6; v += 6) piers.push([0.55, BEAM_TOP - 0.9, 0.55, u, 0, v]);
+  // two track beams either side of the island platform; the west one runs on 6 past the south end into the
+  // approach, the east one ends at the shed's end on a buffer, so the walkway south of the shed passes under nothing
+  for (const [u, run] of [
+    [-2.2, 6],
+    [2.2, 0.4],
+  ]) {
+    beams.push([0.8, 0.9, L + run, u, BEAM_TOP - 0.9, run / 2]);
+    for (let v = -L / 2 + 2; v < L / 2 + run; v += 6) piers.push([0.55, BEAM_TOP - 0.9, 0.55, u, 0, v]);
   }
+  steel.push([0.9, 0.35, 0.3, 2.2, BEAM_TOP, L / 2 + 0.25]); // the buffer
   // the island platform on columns, its edge lines, and the roof columns and ribs down its middle
   deck.push([1.9, 0.3, L - 2, 0, DECK - 0.3, 0]);
   for (let v = -L / 2 + 2; v < L / 2 - 1; v += 5) {
@@ -68,39 +66,62 @@ function shed(root) {
   return { foot: w(0, L / 2 + 2.6), beamEnd: w(-2.2, L / 2 + 6), roof };
 }
 
-// the monorail beam arriving from the west on piers (the layout's beam path) to the end of the shed's west beam
+// the monorail beam arriving on piers along the layout's beam path: straight south out of the shed's west track,
+// then a steady curve to the west-south-west in short straight pieces along a smooth line (one curved beam, not
+// two straight ones meeting at an angle)
 function approach(root, beamEnd) {
-  const [ax, az] = toLocal('forecourt', -44.8, 7.7);
-  const len = Math.hypot(beamEnd.x - ax, beamEnd.z - az);
-  const g = new THREE.Group();
-  g.position.set(ax, 0, az);
-  g.rotation.y = Math.atan2(beamEnd.x - ax, beamEnd.z - az);
-  root.add(g);
-  const piers = [];
-  for (let v = 3; v < len; v += 6) piers.push([0.55, BEAM_TOP - 0.9, 0.55, 0, 0, v]);
-  g.add(boxes([[0.8, 0.9, len, 0, BEAM_TOP - 0.9, len / 2]], '#9aa0a6'), boxes(piers, '#8a8f96'));
+  const line = PATHS.find((p) => p.id === 'beam').line.map(([x, z]) => toLocal('forecourt', x, z));
+  // from the west beam's end on along the path (its points south of the end, nearest first)
+  const pts = [[beamEnd.x, beamEnd.z], ...line.reverse().filter(([, z]) => z > beamEnd.z + 0.5)];
+  const curve = new THREE.CatmullRomCurve3(
+    pts.map(([x, z]) => new THREE.Vector3(x, 0, z)),
+    false,
+    'centripetal',
+  );
+  const n = Math.ceil(curve.getLength() / 1.5),
+    P = curve.getSpacedPoints(n),
+    beam = [],
+    piers = [];
+  for (let i = 0; i < n; i++) {
+    const [a, b] = [P[i], P[i + 1]],
+      len = a.distanceTo(b);
+    beam.push(
+      new THREE.BoxGeometry(0.8, 0.9, len + 0.04)
+        .rotateY(Math.atan2(b.x - a.x, b.z - a.z))
+        .translate((a.x + b.x) / 2, BEAM_TOP - 0.45, (a.z + b.z) / 2),
+    );
+    if (i % 4 === 2)
+      piers.push(new THREE.BoxGeometry(0.55, BEAM_TOP - 0.9, 0.55).translate(a.x, (BEAM_TOP - 0.9) / 2, a.z));
+  }
+  for (const [list, color] of [
+    [beam, '#9aa0a6'],
+    [piers, '#8a8f96'],
+  ]) {
+    const m = new THREE.Mesh(mergeGeometries(list), mat(color));
+    list.forEach((g) => g.dispose());
+    m.castShadow = m.receiveShadow = true;
+    root.add(m);
+  }
 }
 
-// the covered walkway from the stair foot, south of the station, to its glass front
+// the covered walkway from the stair foot: east along the shed's south end, then north to the station's glass front
 function walkway(root, foot, { x0: X0, x1: X1, zS: ZS }) {
-  const CX = (X0 + X1) / 2;
-  const z = ZS + 1.4,
-    xa = Math.min(foot.x, X0 - 1),
-    xb = CX;
-  const posts = [],
+  const CX = (X0 + X1) / 2,
+    z = foot.z, // the east run's middle line
+    posts = [],
     roofs = [];
-  const run = (x0, x1, z0, z1) => roofs.push([x1 - x0 + 0.3, 0.08, z1 - z0 + 0.3, (x0 + x1) / 2, 2.2, (z0 + z1) / 2]);
-  run(xa, xb, z - 0.9, z + 0.9);
-  run(xb - 1.2, xb + 1.2, ZS, z - 0.9);
-  if (foot.z > z + 0.9) run(foot.x - 0.9, foot.x + 0.9, z + 0.9, foot.z);
-  for (let x = xa; x <= xb; x += 2.5) posts.push([0.08, 2.2, 0.08, x, 0, z - 0.85], [0.08, 2.2, 0.08, x, 0, z + 0.85]);
+  const run = (x0, x1, z0, z1) => roofs.push([x1 - x0, 0.08, z1 - z0, (x0 + x1) / 2, 2.2, (z0 + z1) / 2]);
+  run(foot.x - 0.9, CX + 1.2, z - 0.9, z + 0.9);
+  run(CX - 1.2, CX + 1.2, ZS, z - 0.9);
+  for (let x = foot.x + 1.6; x < CX - 1.2; x += 2.5)
+    posts.push([0.08, 2.2, 0.08, x, 0, z - 0.85], [0.08, 2.2, 0.08, x, 0, z + 0.85]);
+  for (let zz = ZS + 1.2; zz < z - 0.9; zz += 2.5)
+    posts.push([0.08, 2.2, 0.08, CX - 1.15, 0, zz], [0.08, 2.2, 0.08, CX + 1.15, 0, zz]);
+  posts.push([0.08, 2.2, 0.08, CX + 1.15, 0, z + 0.85], [0.08, 2.2, 0.08, CX - 1.15, 0, z + 0.85]);
   root.add(boxes(roofs, '#56697d'), boxes(posts, '#6f7782'));
-  root.add(
-    paving(xa - 0.2, xb + 1.2, z - 0.9, z + 0.9, 0.9, {
-      color: '#8e8a86',
-      seam: '#7f7b77',
-    }),
-  );
+  const stone = { color: '#8e8a86', seam: '#7f7b77' };
+  const walk = [foot.x - 0.9, CX + 1.2, z - 0.9, z + 0.9];
+  root.add(pavingRects([walk, [CX - 1.2, CX + 1.2, ZS, z - 0.9]], 0.9, stone));
 }
 
 // the shed, the beam and the walkway round `station` (its outline { x0, x1, zN, zS }); returns the shed's roof

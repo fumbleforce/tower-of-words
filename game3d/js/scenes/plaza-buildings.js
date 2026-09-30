@@ -183,3 +183,16 @@ export function shopStreet(root, { a, dir, depth, u0, u1, storeyH, signs = [] })
   }
   return { glass, n };
 }
+
+// the clinic's green cross on the middle of its south face; rect: the clinic's footprint in the plaza's frame
+// [x0, z0, x1, z1], b: its layout row (storeys, floorH)
+export function clinicCross(root, [x0, , x1, z1], b) {
+  const x = (x0 + x1) / 2,
+    y = b.storeys * b.floorH - 1.1;
+  const parts = [
+    new THREE.BoxGeometry(1.0, 0.3, 0.08).translate(x, y, z1 + 0.05),
+    new THREE.BoxGeometry(0.3, 1.0, 0.08).translate(x, y, z1 + 0.05),
+  ];
+  const green = mat('#5d8a6c', { emissive: new THREE.Color('#3f6b4d'), emissiveIntensity: 0.3 });
+  root.add(merged(parts, green, { cast: false }));
+}

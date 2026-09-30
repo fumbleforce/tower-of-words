@@ -1,13 +1,17 @@
 // The island in one shared frame: where each built place (chunk) sits, and the buildings, paths, green and coast
 // around the day-1 route, traced from the picked island map (reviews/island-map-4,
-// art/candidates/island-map-4/01-overview.png). Pure data plus helpers: chunk builders cut their background from
-// BUILDINGS, and the island map's compare view (js/map/, ?mapcompare=1) draws all of it over the reference.
-// The chunk table's home is docs/game/places.md ("Where the places sit on the island"); CHUNKS follows it and
-// `node tools/facts/check.mjs` compares the two. The gaps between this layout and the built places are listed in
-// notes/map-gaps.md.
+// art/candidates/island-map-4/01-overview.png) and its straight-down version (art/island/island-map-4-topdown.png,
+// footprints in art/candidates/island-map-4-topdown/buildings.json). Pure data plus helpers: chunk builders cut their
+// background from BUILDINGS, and the island map's compare view (js/map/, ?mapcompare=1) draws all of it over the
+// reference. The chunk table's home is docs/game/places.md ("Where the places sit on the island"); CHUNKS follows it
+// and `node tools/facts/check.mjs` compares the two. The gaps between this layout and the built places are listed
+// in notes/map-gaps.md.
 //
-// Frame: 1 unit = UNIT metres. x runs east, z runs south; north is the reference's up once its ground is
-// rectified (REF). Origin: the head office's entrance door as the reference draws it.
+// Frame: 1 unit = UNIT metres. x runs east, z runs south, and the axes run along the town's street grid: the map
+// draws the grid (the station, the platform shed, the head office, the shop street) turned about 23° clockwise from
+// its own up, so the frame is turned with it (REF.turn) and every building on the grid is a plain rectangle, square
+// to the game's cameras. "North" in the game and in these notes is the grid's north. Origin: the head office's
+// entrance door as the reference draws it.
 
 export const UNIT = 1.5;
 
@@ -15,7 +19,8 @@ export const UNIT = 1.5;
 // ground plane to the island frame. horizon (image row), focal (px) and centre (image column) come from the ground
 // squash, measured on the fountain's round ring (0.72 at row 612) and the football pitch (0.54 at row 165); k
 // sets the scale so the station, as drawn, is as long as the gate room (12.6 units); x0 and d0 put the origin on
-// the head office door (505, 571). D is the ground distance north of the camera line.
+// the head office door (505, 571). D is the ground distance north of the camera line. turn: the grid's angle, in
+// degrees clockwise from the picture's up; the flattened ground is turned back by it.
 export const REF = {
   image: '/art/candidates/island-map-4/01-overview.png',
   size: [1536, 1024],
@@ -25,15 +30,34 @@ export const REF = {
   k: 746579,
   x0: 45.26,
   d0: 427.35,
+  turn: 23,
 };
+// The straight-down reference (art/candidates/island-map-4-topdown/frame.json): pixel (i, j) is the point
+// (x0 + (i + 0.5) / ppu, z0 + (j + 0.5) / ppu) in the picture's own frame, before REF.turn (its up is the picture's
+// up). Git-ignored, served from the main checkout; backed up under bible/shots/showcase/island-topdown-1/.
+export const TOPDOWN = {
+  image: '/art/island/island-map-4-topdown.png',
+  x0: -120,
+  z0: -215,
+  ppu: 6,
+};
+
+const TURN = (REF.turn * Math.PI) / 180;
+// the picture's own frame (up = the picture's up) to the island frame, and back
+export const fromPicture = (x, z) => [
+  x * Math.cos(TURN) + z * Math.sin(TURN),
+  -x * Math.sin(TURN) + z * Math.cos(TURN),
+];
+export const toPicture = (x, z) => [x * Math.cos(TURN) - z * Math.sin(TURN), x * Math.sin(TURN) + z * Math.cos(TURN)];
 // image pixel -> island point, and back
 export function fromImage(u, v, R = REF) {
   const D = R.k / (v - R.horizon);
-  return [R.x0 + ((u - R.centre) * D) / R.focal, R.d0 - D];
+  return fromPicture(R.x0 + ((u - R.centre) * D) / R.focal, R.d0 - D);
 }
 export function toImage(x, z, R = REF) {
-  const D = R.d0 - z;
-  return [R.centre + (R.focal * (x - R.x0)) / D, R.horizon + R.k / D];
+  const [px, pz] = toPicture(x, z);
+  const D = R.d0 - pz;
+  return [R.centre + (R.focal * (px - R.x0)) / D, R.horizon + R.k / D];
 }
 
 // Each built place: at = the island point of its local (0, 0); turn = clockwise degrees on the map (local north to
@@ -42,25 +66,25 @@ export function toImage(x, z, R = REF) {
 // anchor = what pins it to the reference.
 export const CHUNKS = {
   gate: {
-    at: [-15.14, 0],
+    at: [-14.45, 6.5],
     turn: 0,
     scale: 1,
     level: 0,
     walk: [-6.3, 6.3, -4.5, 4.5],
     view: [-6.5, 6.5, -4.6, 5.0],
-    anchor: 'the room centred on the station building as drawn',
+    anchor: 'the room centred on the station building’s footprint',
   },
   forecourt: {
-    at: [-14.64, -7.15],
+    at: [-13.95, -0.65],
     turn: 0,
     scale: 1,
     level: 0,
-    walk: [-4.9, 23.4, -3.6, 10.6],
-    view: [-12, 31, -12, 14],
+    walk: [-6.6, 35, -9.8, 10.6],
+    view: [-12, 31, -14, 14],
     anchor: 'the gate room (its exit is the station door at local (-1.5, 2.65))',
   },
   office: {
-    at: [7.45, -4.99],
+    at: [3.75, -5.01],
     turn: 0,
     scale: 1,
     level: -2,
@@ -69,7 +93,7 @@ export const CHUNKS = {
     anchor: 'its lift under the forecourt lift',
   },
   plaza: {
-    at: [36.35, 12.5],
+    at: [37.29, -2.48],
     turn: 0,
     scale: 1,
     level: 0,
@@ -78,7 +102,7 @@ export const CHUNKS = {
     anchor: 'the fountain on the fountain as drawn',
   },
   dorm_court: {
-    at: [74, 30],
+    at: [79.84, -1.3],
     turn: 90,
     scale: 1,
     level: 0,
@@ -87,7 +111,7 @@ export const CHUNKS = {
     anchor: 'the open entrance court west of the dorm blocks as drawn, looking east at Eric’s block',
   },
   dorms: {
-    at: [79.4, 31.75],
+    at: [85.49, -1.79],
     turn: 90,
     scale: 1,
     level: 1,
@@ -96,8 +120,8 @@ export const CHUNKS = {
     anchor: 'in the dorm courtyard’s block, above the passage',
   },
   train: {
-    at: [-20.84, -13.12],
-    turn: 112,
+    at: [-28.6, -3.9],
+    turn: 90,
     scale: 1.18,
     level: 1,
     walk: [-17, 17, -1.2, 4.6],
@@ -106,43 +130,30 @@ export const CHUNKS = {
   },
 };
 
-// Buildings around the route, from the reference: its roof outlines moved down by the drawn wall height onto the
-// ground, then through REF. Each row: id, kind, storeys, floorH (units a storey), wall (an index into TOWN.walls,
-// scenes/town.js), roof colour, windows ('office' | 'flat' | 'dorm' | 'shop'), and the footprint: four numbers are
-// a rect [x0, z0, x1, z1] square to the frame, more are a poly's corners x, z, ... clockwise from the north-west.
-// Storeys come from the drawn window rows. Traced by eye, so a unit or two out.
+// Buildings around the route: each traced building's footprint (buildings.json: its roof in the picture moved down
+// by its drawn height, then through REF), squared onto the grid: its middle kept, each side's length on the grid
+// axis nearest it. Storeys from the drawn height. Each row: id, kind, storeys, floorH (units a storey), wall (an
+// index into TOWN.walls, scenes/town.js), roof colour, windows ('office' | 'flat' | 'dorm' | 'shop'), and the
+// footprint: four numbers are a rect [x0, z0, x1, z1], more are a poly's corners x, z, ... clockwise from the
+// north-west. The route's own buildings are set by hand (the station on the gate room, the tower, the shop street
+// as one street, Eric's block and its neighbour on the dorm court's frame); see DETAILS. Traced by eye, and the
+// map's own angles are loose (its town is drawn between 0° and 25° off its grid), so a unit or two out.
 const ROOF = '#5d636c',
   DORM_ROOF = '#555a63',
   SHOP_ROOF = '#7a7f87',
   BLUE_ROOF = '#56697d';
 const ROWS = [
-  ['station', 'station', 2, 1.9, 1, ROOF, 'flat', [-21.44, -4.5, -8.84, 4.5]],
-  ['platform_shed', 'shed', 1, 2.4, 2, BLUE_ROOF, 'flat', [-16.2, -36.9, -9.4, -29.6, -25.7, 10, -32.2, 3.9]],
-  ['head_office', 'tower', 12, 2, 0, ROOF, 'office', [1.6, -13.4, 15.3, -7.5, 10.8, -0.2, -2.7, -6]],
-  ['head_office_wing', 'office', 4, 2, 1, ROOF, 'office', [-11.9, -28.2, -3.2, -22.7]],
-  ['office_w1', 'office', 2, 2, 2, ROOF, 'office', [-16.6, -60.6, -4, -51.2]],
-  ['office_n1', 'office', 3, 2, 0, ROOF, 'office', [-16.1, -75.1, -1.5, -66.8]],
-  ['office_n2', 'office', 3, 2, 3, ROOF, 'office', [1.2, -78.8, 10.7, -70.4]],
-  ['office_n3', 'office', 4, 2, 1, ROOF, 'office', [13.2, -66.1, 24.8, -55.6]],
-  ['office_n4', 'office', 4, 2, 0, ROOF, 'office', [27.4, -58.1, 37.9, -49.7]],
-  ['office_n5', 'office', 4, 2, 2, ROOF, 'office', [41.7, -65.1, 54.3, -55.6]],
-  ['office_n6', 'office', 3, 2, 3, ROOF, 'office', [38.3, -51.2, 48.3, -43.7]],
-  ['office_n7', 'office', 4, 2, 1, ROOF, 'office', [26, -40.7, 38.5, -31.2]],
-  ['garage', 'low', 1, 2, 3, ROOF, 'flat', [12.4, -51.8, 22, -48.2]],
-  ['office_e1', 'office', 3, 2, 0, ROOF, 'office', [16.6, -12.8, 25.4, -6]],
-  ['canteen', 'canteen', 2, 2.1, 1, BLUE_ROOF, 'flat', [28, -14.4, 51.3, -4.2]],
-  ['clinic', 'clinic', 3, 2, 0, ROOF, 'office', [36, -25.7, 48.2, -19.4]],
-  ['gym', 'gym', 2, 2, 1, '#6f7d72', 'flat', [55.4, -54, 79.6, -27.6]],
-  ['block_e1', 'office', 3, 2, 2, ROOF, 'flat', [57.3, 8.6, 66.9, 14.9]],
-  ['block_e2', 'office', 3, 2, 3, ROOF, 'flat', [68.6, -14.2, 76.5, -7.2]],
-  ['block_e3', 'office', 3, 2, 0, ROOF, 'flat', [73.3, -1.5, 79, 7.5]],
-  ['shops_north', 'shop', 2, 1.45, 2, SHOP_ROOF, 'shop', [-8.69, 11.96, 57.15, 43.65, 55.63, 46.8, -10.21, 15.11]],
-  ['arcade', 'arcade', 1, 2.9, 1, '#9aa4ad', 'flat', [-10.21, 15.11, 55.63, 46.8, 54.11, 49.96, -11.73, 18.27]],
-  ['shops_south', 'shop', 2, 1.45, 3, SHOP_ROOF, 'shop', [-11.73, 18.27, 54.11, 49.96, 52.59, 53.11, -13.25, 21.42]],
-  ['shop_e1', 'shop', 2, 1.45, 0, SHOP_ROOF, 'shop', [52.8, 27.7, 60.8, 31.5]],
-  ['shop_e2', 'shop', 2, 1.45, 2, SHOP_ROOF, 'shop', [63, 31.9, 70.1, 37.7]],
-  ['shop_e3', 'shop', 2, 1.45, 1, SHOP_ROOF, 'shop', [52.6, 38.7, 61.1, 44.1]],
-  ['izakaya', 'shop', 2, 1.45, 3, SHOP_ROOF, 'shop', [61.3, 40.7, 69.5, 48]],
+  ['station', 'station', 2, 1.9, 1, ROOF, 'flat', [-20.75, 2, -8.15, 11]],
+  ['platform_shed', 'shed', 1, 2.4, 2, BLUE_ROOF, 'flat', [-32.6, -24.4, -24.6, 14]],
+  ['head_office', 'tower', 12, 2, 0, ROOF, 'office', [-4.9, -13.85, 11.5, -4.25]],
+  ['head_office_wing', 'office', 5, 2, 1, ROOF, 'office', [-14, -11.9, -8.2, -7.3]],
+  ['canteen', 'canteen', 2, 2.1, 1, BLUE_ROOF, 'flat', [22.2, -27.6, 44.9, -19.3]],
+  ['clinic', 'clinic', 3, 2, 0, ROOF, 'office', [25.4, -38.8, 36.1, -32.8]],
+  ['shops_north', 'shop', 2, 1.45, 2, SHOP_ROOF, 'shop', [-4, 13.4, 64, 17.9]],
+  ['arcade', 'arcade', 1, 2.9, 1, '#9aa4ad', 'flat', [-4, 17.9, 64, 22.4]],
+  ['shops_south', 'shop', 2, 1.45, 3, SHOP_ROOF, 'shop', [-4, 22.4, 64, 26.9]],
+  ['izakaya', 'shop', 3, 1.6, 3, SHOP_ROOF, 'shop', [68.8, 14.8, 72.3, 20.3]],
+  ['ramen', 'shop', 3, 1.6, 0, SHOP_ROOF, 'shop', [73.4, 13, 81.3, 18.4]],
   [
     'dorm_1',
     'dorm',
@@ -151,36 +162,83 @@ const ROWS = [
     1,
     DORM_ROOF,
     'dorm',
-    [78.3, 19.5, 82.1, 19.5, 82.1, 39.4, 73, 39.4, 73, 35.9, 78.3, 35.9],
+    [84.14, -11.8, 87.94, -11.8, 87.94, 8.1, 78.84, 8.1, 78.84, 4.6, 84.14, 4.6],
   ],
-  ['dorm_1e', 'dorm', 6, 1.75, 1, DORM_ROOF, 'dorm', [89.4, 27, 92, 29.8, 83.5, 34.7, 83.5, 30.3]],
-  ['dorm_2', 'dorm', 7, 1.75, 1, DORM_ROOF, 'dorm', [83.6, 44.9, 86.9, 49.9, 80.2, 53.1, 77, 48]],
-  ['dorm_3', 'dorm', 6, 1.75, 0, DORM_ROOF, 'dorm', [103.7, 37.1, 111.2, 45.7, 105.8, 48.6, 98.2, 39.7]],
-  ['dorm_4', 'dorm', 6, 1.75, 2, DORM_ROOF, 'dorm', [114.4, 29.8, 120.5, 37.1, 115.3, 39.7, 109.3, 31.9]],
-  ['dorm_5', 'dorm', 5, 1.75, 1, DORM_ROOF, 'dorm', [80.2, -4, 88.4, 15.6]],
-  ['dorm_6', 'dorm', 5, 1.75, 0, DORM_ROOF, 'dorm', [115.2, -3.2, 123.2, 15.1]],
-  ['housing_n', 'dorm', 4, 1.75, 3, DORM_ROOF, 'dorm', [90.6, -14.4, 114.7, -6.7]],
-  ['sento_laundry', 'low', 1, 2, 3, DORM_ROOF, 'shop', [70.8, 45.7, 76.5, 49.9]],
+  ['dorm_1e', 'dorm', 7, 1.75, 1, DORM_ROOF, 'dorm', [89.44, -7.8, 94.2, 7.1]],
+  ['sento_laundry', 'low', 1, 2, 3, DORM_ROOF, 'shop', [83.6, 13.1, 89.3, 17.3]],
+  ['nw_old', 'low', 4, 2, 3, ROOF, 'flat', [-96, -118.6, -85.4, -109.8]],
+  ['chimney', 'low', 8, 2, 1, ROOF, 'flat', [-82, -123.3, -79, -118.1]],
+  ['factory', 'low', 3, 2, 0, ROOF, 'flat', [-76.7, -128.8, -52.4, -114.5]],
+  ['works_shed', 'low', 2, 2, 1, ROOF, 'flat', [-79.4, -111.9, -70.7, -106.2]],
+  ['works_orange', 'low', 2, 2, 1, ROOF, 'flat', [-94.4, -100.7, -84.6, -95.3]],
+  ['works_blue', 'low', 1, 2, 1, ROOF, 'flat', [-75.4, -101.8, -64.5, -97.6]],
+  ['works_kiosk', 'low', 1, 2, 2, ROOF, 'flat', [-62.4, -113.8, -56.9, -107.5]],
+  ['dock_shed', 'low', 2, 2, 0, ROOF, 'flat', [-84.2, -68, -74.4, -64.3]],
+  ['dock_hut', 'low', 1, 2, 1, ROOF, 'flat', [-80.4, -79.2, -75.2, -76.2]],
+  ['n1', 'office', 3, 2, 3, ROOF, 'office', [-60.1, -142.9, -38.7, -129.4]],
+  ['n2', 'office', 4, 2, 0, ROOF, 'office', [-33, -144.1, -23.1, -129.4]],
+  ['n3', 'office', 4, 2, 1, ROOF, 'office', [-22.6, -144.8, -12.9, -133]],
+  ['n4', 'office', 6, 2, 2, ROOF, 'office', [-35.2, -107.1, -11.6, -99.8]],
+  ['w2', 'office', 3, 2, 1, ROOF, 'office', [-45.8, -97.9, -35.4, -93.7]],
+  ['n_coast', 'office', 1, 2, 3, ROOF, 'flat', [-16.9, -181.8, -12.6, -178.5]],
+  ['w1', 'office', 4, 2, 0, ROOF, 'office', [-40.7, -61.4, -27.6, -56.2]],
+  ['w3', 'office', 3, 2, 2, ROOF, 'office', [-34, -45.2, -24.3, -41.4]],
+  ['m1', 'office', 4, 2, 2, ROOF, 'office', [-23.9, -69.3, -16.8, -64.9]],
+  ['m2', 'office', 5, 2, 3, ROOF, 'office', [-10.1, -63.3, 0.3, -59.2]],
+  ['m3', 'office', 4, 2, 0, ROOF, 'office', [6, -62.5, 14.9, -58.7]],
+  ['m4', 'office', 5, 2, 1, ROOF, 'office', [17, -74.2, 26.9, -69.4]],
+  ['m5', 'office', 3, 2, 2, ROOF, 'office', [17.3, -62.6, 26, -59.1]],
+  ['m6', 'office', 5, 2, 3, ROOF, 'office', [13.6, -45, 23.2, -39.1]],
+  ['b_h', 'office', 2, 2, 1, ROOF, 'office', [-7.1, -51.8, 2.5, -50]],
+  ['office_e1', 'office', 4, 2, 0, ROOF, 'office', [12.8, -18.3, 20.1, -14.9]],
+  ['gym', 'gym', 3, 2, 1, '#6f7d72', 'flat', [37.4, -76.2, 56.7, -50.9]],
+  ['pool_hall', 'office', 2, 2, 2, ROOF, 'flat', [59.4, -94, 73.1, -87.1]],
+  ['court_hall', 'office', 1, 2, 1, ROOF, 'flat', [75.6, -91.2, 85.8, -84.9]],
+  ['stage', 'office', 3, 2, 0, ROOF, 'flat', [53.9, -127.5, 66.1, -123.8]],
+  ['history_hall', 'office', 2, 2, 2, ROOF, 'flat', [81.4, -162.1, 101.6, -149.2]],
+  ['statue', 'office', 4, 2, 2, ROOF, 'flat', [106, -153.9, 108.1, -150.9]],
+  ['onsen_pav', 'office', 1, 2, 1, ROOF, 'flat', [122.1, -116.1, 130.1, -109]],
+  ['onsen_main', 'office', 2, 2, 3, ROOF, 'flat', [117.6, -96.2, 128.6, -88.2]],
+  ['block_e2', 'office', 4, 2, 0, ROOF, 'flat', [59.2, -38.5, 66.5, -35.2]],
+  ['r3', 'office', 3, 2, 1, ROOF, 'flat', [72.9, -44.8, 78.3, -41.4]],
+  ['housing_n', 'dorm', 4, 1.75, 2, DORM_ROOF, 'dorm', [78.7, -53.2, 102.5, -46.5]],
+  ['dorm_5', 'dorm', 3, 1.75, 3, DORM_ROOF, 'dorm', [76.5, -37.2, 83.6, -18.4]],
+  ['block_e3', 'office', 3, 2, 0, ROOF, 'flat', [69.8, -29.2, 75, -18]],
+  ['block_e1', 'office', 2, 2, 1, ROOF, 'flat', [56.7, -18.4, 65.6, -11.8]],
+  ['dorm_6', 'dorm', 4, 1.75, 2, DORM_ROOF, 'dorm', [108.4, -50.7, 114.9, -32.8]],
+  ['dorm_2', 'dorm', 7, 1.75, 2, DORM_ROOF, 'dorm', [91.4, 12, 99.4, 18.3]],
+  ['dorm_entry', 'dorm', 3, 1.75, 3, DORM_ROOF, 'dorm', [97.2, -13.3, 101.3, -9.4]],
+  ['dorm_gallery', 'dorm', 2, 1.75, 1, DORM_ROOF, 'dorm', [96.8, -2.9, 105, 2.1]],
+  ['dorm_3', 'dorm', 9, 1.75, 3, DORM_ROOF, 'dorm', [109, 0.7, 119.5, 6.5]],
+  ['dorm_4', 'dorm', 9, 1.75, 0, DORM_ROOF, 'dorm', [116.3, -9.2, 125.4, -3.1]],
+  ['dorm_annex', 'dorm', 1, 1.75, 3, DORM_ROOF, 'dorm', [125.4, -7.5, 128.1, -3.6]],
+  ['r8', 'office', 2, 2, 2, ROOF, 'flat', [66.9, 2.8, 69.7, 6.2]],
+  ['r9', 'office', 2, 2, 3, ROOF, 'flat', [70.2, 2.6, 73.4, 4.9]],
+  ['m_e1', 'office', 2, 2, 2, ROOF, 'flat', [60, 3, 66.6, 7.3]],
+  ['m_e2', 'office', 1, 2, 3, ROOF, 'flat', [55.4, 6.5, 59.4, 8.3]],
 ];
 const DETAILS = {
   station:
-    'Honsha station and its security room: the gate room’s footprint. The reference draws it about 12 by 3, turned 23°.',
-  platform_shed: 'The monorail platforms under one long curved blue-grey roof; the beam enters its south end.',
+    'Honsha station and its security room: the gate room’s footprint, centred on the station as traced (12.4 by 6.5); the gate room is deeper.',
+  platform_shed:
+    'The monorail platforms under one long curved blue-grey roof, on the grid; the beam comes into its south end.',
   head_office:
-    'The tallest building: blue-grey curtain wall, pale fins, rooftop plant. Drawn turned 23°; entrance on the south face near the south-west corner.',
-  head_office_wing: 'The lower wing north-west of the tower.',
-  office_e1: 'East of the tower, on the lane toward the fountain.',
+    'The tallest building: blue-grey curtain wall, pale fins, rooftop plant; entrance on the south face near the south-west corner.',
+  head_office_wing: 'The lower wing west of the tower, across a service lane.',
+  office_e1: 'North-east of the tower, behind the trees on the lane toward the fountain.',
   canteen:
     'The company canteen: two storeys, blue-grey roof with plant, umbrella terrace on its south side facing the fountain.',
   clinic: 'The clinic (green cross).',
   gym: 'The gym’s arched roof (green on the reference, muted); the pool and courts east of it.',
-  shops_north: 'The north row: about eight units, awnings to the arcade, bilingual rooftop signs.',
-  arcade: 'The arcade roof over the lane between the rows.',
+  shops_north:
+    'The north row: awnings to the arcade, bilingual rooftop signs, backs to the lane. One street on the grid.',
+  arcade: 'The arcade roof over the walk between the rows.',
   shops_south: 'The south row, its back to the promenade and the sea.',
-  shop_e3: 'Ramen and izakaya at the east end of the shop street, by the lane into the dorm court.',
+  izakaya: 'Izakaya at the east end of the shop street, by the way into the dorm court.',
+  ramen: 'Ramen next to the izakaya.',
   dorm_1:
-    'Eric’s block, five storeys: its long west face on the dorm entrance court, returning west at its south end (built by the dorm_court chunk).',
-  dorm_1e: 'The long block east of Eric’s, turned about 30°; its west end is the wall outside Eric’s window.',
+    'Eric’s block, five storeys: its long west face on the dorm entrance court, returning west at its south end (built by the dorm_court chunk, square to it). The map draws the dorm blocks turned 25 to 40° off the grid; here they are on it.',
+  dorm_1e: 'The block east of Eric’s, parallel to it; its west face is the wall outside Eric’s window, 1.3 out.',
   housing_n: 'The more generous block on the cluster’s quieter north edge.',
   sento_laundry:
     'Sento and coin laundry sharing one frontage at the dorm approach (placed by the brief; too small to read on the reference).',
@@ -199,41 +257,48 @@ export const BUILDINGS = ROWS.map(([id, kind, storeys, floorH, wall, roof, windo
 }));
 
 // Walking surfaces. line: a centre line (x, z, ...) and width w; rect: [x0, z0, x1, z1]; circle: [x, z, r].
+// Every line runs along the grid and turns at right angles; a turn is a square of paving as wide as the line.
 // No roads, no cars.
 export const PATHS = [
   {
     id: 'court',
     kind: 'court',
-    rect: [-8.8, -5, 0, 4],
-    detail: 'The open station forecourt between the station and the head office.',
+    rect: [-20.75, -4.25, 5, 2],
+    detail: 'The open station forecourt between the station’s north door and the head office’s south door.',
+  },
+  {
+    id: 'bike_court',
+    kind: 'court',
+    rect: [-8.15, 2, 0.25, 9.95],
+    detail: 'The bike court east of the station.',
   },
   {
     id: 'route_home',
     kind: 'lane',
     w: 3,
-    line: pairs([0, 0, 16.7, 4.6, 26.4, 12.8, 36.6, 19.6, 50.5, 22.5, 63.4, 25.1, 73.5, 22.5, 73.8, 30]),
+    line: pairs([-1.7, -2.75, 21, -2.75, 21, 4.5, 52, 4.5, 52, -7.6, 79.35, -7.6, 79.35, -1.3]),
     detail:
-      'Head office door, along the fountain plaza’s south edge, east-south-east, then south into the dorm entrance court.',
+      'From the head office door (the lane’s north edge), east along the tower’s south face, a jog south past the trees, along the fountain plaza’s south edge, north past the canteen’s east side, and east into the dorm entrance court from its north.',
   },
   {
     id: 'fountain_plaza',
     kind: 'plaza',
-    circle: [36.35, 9.8, 11.5],
+    circle: [37.29, -5.18, 11.5],
     detail: 'The round paved plaza; the basin is about 8.6 across on the reference.',
   },
   {
     id: 'promenade',
     kind: 'promenade',
     w: 4,
-    line: pairs([-26.1, 22.9, 13.9, 52.4, 44.1, 58.9, 79.4, 62.5, 109.4, 58.9]),
-    detail: 'The seafront promenade behind the shops and the dorms.',
+    line: pairs([-15.1, 31.3, 33.3, 42.8, 63.6, 37, 97.5, 26.5, 123.7, 11.5]),
+    detail: 'The seafront promenade behind the shops and the dorms; it follows the sea wall.',
   },
   {
     id: 'beam',
     kind: 'beam',
     w: 2,
-    line: pairs([-83.9, 9.8, -44.8, 7.7, -28.9, 7]),
-    detail: 'The monorail beam, raised on piers, into the shed’s south end.',
+    line: pairs([-73.4, 41.8, -45, 31.5, -37, 28.5, -32.5, 25.5, -30.8, 22, -30.8, 14]),
+    detail: 'The monorail beam, raised on piers, curving in from the west-south-west into the shed’s south end.',
   },
 ];
 
@@ -241,22 +306,26 @@ export const PATHS = [
 export const GREEN = [
   {
     id: 'tower_trees',
-    rect: [13, -4, 26, 3],
+    rect: [12.5, -13, 24, -3.5],
     detail: 'Trees and beds between the tower and the plaza, south of office_e1.',
   },
   {
     id: 'lane_verge',
-    poly: pairs([0, 3, 26.4, 15.3, 36.6, 22.1, 36.6, 24, -4, 10]),
+    poly: pairs([5, -1.25, 19.5, -1.25, 19.5, 6, 53.5, 6, 53.5, 13.4, -4, 13.4, -4, 11, 5, 11]),
     detail: 'The verge between the lane and the shop street’s back.',
   },
-  { id: 'dorm_inner_court', rect: [88, 32, 100, 44], detail: 'The planted inner court between the dorm blocks.' },
+  {
+    id: 'dorm_inner_court',
+    rect: [95, 2.6, 108.5, 11.5],
+    detail: 'The planted inner court between the dorm blocks.',
+  },
 ];
 
 // The coastline on the route's side of the island, land north-east of the line (sea south and west).
 export const COAST = {
   line: pairs([
-    -39.4, -52.5, -42.6, -29, -45.5, -7.7, -44.6, 7.7, -40.9, 18.5, -29, 33.6, -20.5, 45.7, -3.8, 56.1, 17.7, 63.3,
-    38.3, 65.1, 64.3, 68.6, 89.9, 72, 112, 68.6, 125, 55.2, 136.1, 29.4, 138.7, 7,
+    -56.8, -32.9, -50.5, -10, -44.9, 10.7, -38, 24.5, -30.4, 33, -13.6, 42.3, -1, 50.1, 18.4, 53.1, 41, 51.4, 60.7, 45,
+    86, 38, 110.9, 31.1, 129.9, 19.4, 136.6, 2, 136.8, -26.1, 130.4, -47.8,
   ]),
   detail: 'Rocks and a sea wall, with the sand beach south of the shop street’s west end.',
 };

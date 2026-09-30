@@ -37,6 +37,7 @@ Rules for every task:
 ## 1. One shared island frame
 
 - 1 unit = 1.5 m. x runs east, z runs south, every chunk's camera looks north (yaw 0). Island north = the reference image's "up" after ground-plane rectification. Origin = the head office entrance door.
+- Superseded 2026-09-30 (grid-frame): the frame is turned onto the town grid, so "north" is the grid's north (island-layout.js REF.turn; notes/map-gaps.md F2).
 - Data file `game3d/js/scenes/island-layout.js` (pure data plus helpers): `UNIT`; `CHUNKS` (island origin of each chunk's local (0,0) and its walk rectangle); `BUILDINGS` [{id, kind, rect or poly, storeys, floorH, wall, roof, windows: 'office'|'flat'|'dorm'|'shop', detail}]; `PATHS`, `GREEN`, `COAST`; `toLocal(chunk, x, z)`.
 - Fit positions to the reference by a homography on 6 control points in 01-overview.png (1536x1024, approximate): beam landfall (330,585), station centre (410,555), head office tower base centre (545,545), fountain centre (715,612), shop row west and east ends (395,640) and (830,780), dorm court entrance (985,700).
 - Starting estimates (±30%; the overlay decides): station door → HO door about 10 east, 7 north; HO door → fountain about 50 east-southeast; fountain → dorm court about 85 east-southeast.

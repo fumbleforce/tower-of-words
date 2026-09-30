@@ -80,7 +80,7 @@ export async function forecourtPlace(game) {
   const TURN = [8.2, 12.6],
     north = { yaw: 0, elev: cam.elev, dist: 0, lead: -1.6 },
     east = {
-      yaw: -Math.PI / 2,
+      yaw: -1.2, // up the court toward the head office door, east-north-east
       elev: THREE.MathUtils.degToRad(EAST.elev),
       zoom: EAST.zoom,
       lead: EAST.lead,
@@ -152,7 +152,7 @@ export async function forecourtPlace(game) {
     liftSite: w.liftSite,
     liftLanding: w.liftLanding,
     fit(aspect) {
-      // desktop: the station door and the head office door in one frame, then along east into the lobby
+      // desktop: the station door and the head office door in one frame, then north into the lobby or east up the lane
       const k = turn;
       phone = false;
       setTurn(0);
@@ -160,13 +160,13 @@ export async function forecourtPlace(game) {
         cam.fit(
           aspect,
           [
-            new THREE.Vector3(-4.7, 0, 0),
-            new THREE.Vector3(5.6, 0, 0),
-            new THREE.Vector3(0.45, 3.2, -5.6),
+            new THREE.Vector3(-5.9, 0, 0.6),
+            new THREE.Vector3(4.4, 0, 0.6),
+            new THREE.Vector3(-0.75, 3.2, -6.8),
             new THREE.Vector3(w.doorX, 0, w.stationExit[1] - 0.2),
           ],
-          new THREE.Vector3(6.4, 0, -0.6),
-          { follow: true, clamp: [6.4, 17.2, -1.2, 4.5], limY: 0.96 },
+          new THREE.Vector3(5.2, 0, -1.2),
+          { follow: true, clamp: [5.2, 26, -6.2, 3.5], limY: 0.96 },
         );
         return;
       }
@@ -181,7 +181,7 @@ export async function forecourtPlace(game) {
           new THREE.Vector3(0, 1.2, 2.4),
         ],
         new THREE.Vector3(0, 0, 0),
-        { follow: true, clamp: [-1.0, 21.2, -2.6, 8.0], lead: -1.6 },
+        { follow: true, clamp: [-1.0, 30, -8.4, 8.0], lead: -1.6 },
       );
       phone = true;
       north.dist = cam.fitDist;
@@ -199,7 +199,7 @@ export async function forecourtPlace(game) {
       idle(w.kuro, t);
       // heading for the lane (not for head office): build the plaza now, so the walk there needs no loading pause
       const e = game.player.root.position;
-      if (e.x > 16.5 && e.z > 4.2 && !game.prepared.plaza) game.prepare?.('plaza');
+      if (e.x > 20 && e.z > w.hoDoor[1] && !game.prepared.plaza) game.prepare?.('plaza');
     },
     onPeriod(period) {
       if (period !== 'evening' || P.grade === EVENING_GRADE) return;
