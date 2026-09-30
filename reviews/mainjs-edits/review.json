@@ -1,0 +1,25 @@
+{
+ "title": "Two fixes blocked in main.js",
+ "date": "2026-09-29",
+ "by": "main agent",
+ "status": "decided",
+ "multi": true,
+ "question": "The safety check blocked edits to game3d/js/main.js (the game's core loop, shared by many agents). Both fixes below need it. Allow them?",
+ "options": [
+  {
+   "id": "mori-hold",
+   "label": "Lock movement during Mori's greeting",
+   "note": "Your request: finish Mori's sequence in one go. Movement is held from his greeting until the lead-in ends; talking to him and the Say menu still work, and he bows if you try to walk. It only holds once you know a word, so you can never be shut in. Without it the phone test walked off and the day went on with Mori left standing."
+  },
+  {
+   "id": "walkto",
+   "label": "Fix a possible softlock in walking",
+   "note": "Found by the Mori agent: when a walk ends at once (already at the target), the code crashes ('watch' used before it exists), so the lift trip to B2 can fail. One-line fix: declare it earlier."
+  }
+ ],
+ "decided": [
+  "mori-hold",
+  "walkto"
+ ],
+ "decision": "both: mori-hold, walkto"
+}

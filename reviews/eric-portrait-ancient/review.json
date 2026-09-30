@@ -1,0 +1,42 @@
+{
+ "title": "Eric: the ancient anime-style set",
+ "date": "2026-09-29",
+ "by": "main agent",
+ "status": "superseded",
+ "multi": false,
+ "question": "Is this the old set you mean (A-mc from the first gallery)? If so: use it as it is, or keep its anime style but give him Eric's approved beard and glasses?",
+ "media": [
+  {
+   "image": "legacy/proto2/gallery/A-mc-neutral.webp",
+   "caption": "A-mc neutral"
+  },
+  {
+   "image": "legacy/proto2/gallery/A-mc-smile.webp",
+   "caption": "A-mc smile"
+  }
+ ],
+ "options": [
+  {
+   "id": "as-is",
+   "label": "This set, as it is",
+   "image": "legacy/proto2/gallery/A-mc-neutral.webp",
+   "images": [
+    "legacy/proto2/gallery/A-mc-smile.webp",
+    "legacy/proto2/gallery/A-mc-nervous.webp",
+    "legacy/proto2/gallery/A-mc-magic.webp",
+    "legacy/proto2/gallery/A-mc-s101.webp",
+    "legacy/proto2/gallery/A-mc-s102.webp"
+   ]
+  },
+  {
+   "id": "style-plus-eric",
+   "label": "This anime style, with Eric's beard and glasses added",
+   "image": "legacy/proto2/gallery/A-mc-s101.webp"
+  },
+  {
+   "id": "not-these",
+   "label": "Not these (say which ones in the comment)"
+  }
+ ],
+ "decision": "Not these: no beard or glasses, the same face each time, red outline everywhere. Try again with varied tries (round eric-portrait-anime-2)"
+}

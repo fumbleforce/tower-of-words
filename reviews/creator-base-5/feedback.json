@@ -1,0 +1,8 @@
+{
+ "sent": "2026-09-29T23:49:43+0200",
+ "picked": [],
+ "options": {},
+ "comment": "getting close. texture bleed onto the body models currently, some hair color is smearing onto the body. Eric's head is not attached to the body without clothes. Try making a small assortment of other clothes and hair to demonstrate customizability and reusability, so we will be able to create other new characters going forward. Also need eyes customizable. seem to be using the extremely still idle anim instead of the more natural one we developed?",
+ "read": true,
+ "history": []
+}
