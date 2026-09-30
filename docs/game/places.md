@@ -22,8 +22,8 @@ There are no cuts to black (Jørgen, 2026-09-28: "elegant, continuous transition
 - `lift` → `office`, lift: the camera stays inside the car for the whole ride. The floor display counts from 1; someone has pressed 5, where the two from Sales get out; then down to B2. The doors open on the B2 lift landing.
 - `office` → `lift`, walk: after work, Eric walks from B2 into the same lift, the camera easing in on the car as in the morning; the near wall drops and the lights outside go down. He rides alone.
 - `lift` → `forecourt`, lift then walk: the floor display counts B2, B1, 1; the same shot of the car crossfades to head office's floor 1, the lights come up, the doors open and he walks out into the lobby, the wall rising behind him; the tower comes back over the lobby as he walks out of the door.
-- `forecourt` → `plaza`, walk: Eric walks east off the court along the lane between the hedge and the planting. The camera closes in on him at the lane's end and crossfades to the same close framing of him walking east along the plaza's lane just south-west of the fountain, so the fountain is in view as the camera lets go.
-- `plaza` → `forecourt`, walk: the same walk the other way, west along the lane back onto the court beside the planting.
+- `forecourt` → `plaza`, walk: Eric walks east-south-east off the court along the lane by the tower's south face. The camera closes in on him at the lane's end and crossfades to the same close framing of him walking east along the plaza's lane just south-west of the fountain, so the fountain is in view as the camera lets go.
+- `plaza` → `forecourt`, walk: the same walk the other way, west-north-west along the lane back toward the head office door.
 - `plaza` → `dorm_court`, walk: after work only. Eric walks east off the plaza along the lane; the camera closes in on him at the lane's end and crossfades to the same close framing of him stepping into the dorm courtyard from the west, then lets go.
 - `dorm_court` → `dorms`, walk: Eric walks in through the dorm's hall doors, past the mailboxes and into the passage at the back as the camera comes in close, then crossfades to him stepping in through his own front door to `room_entry`.
 
@@ -175,11 +175,11 @@ The lobby is played in the early morning, before nine.
 
 ## Station forecourt and head office entrance (`forecourt`)
 
-The first outdoor chunk of the picked island-map-4 layout (Jørgen, 2026-09-29). The camera looks north, as in the security room. The station's north wall runs along the bottom left, cut low like the indoor near walls, with its open doors; the blue platform roof runs along the west edge. The court is about five metres of stone paving with a worn line along the walk; bicycle racks and a bench on its west side, a planted bed with two trees on the east, and two lit bollards. A hedge on the court's east edge marks the lane on toward the plaza. The palette and the warm, low morning sun are the security room's.
+The first outdoor chunk of the picked island-map-4 layout (Jørgen, 2026-09-29), placed from the island layout (2026-09-30). The camera looks north, as in the security room. Honsha station stands at the bottom left: a two-storey flat-roofed block over the security room's footprint, with a parapet, plant and condenser units on the roof and 本社駅 HONSHA STATION on a sign along its roof's south edge. Its north wall has the open exit under a small canopy and the staff door beside it; the east and west walls have the security room's tall windows, the south front its glass entrance; a row of windows runs round the upper storey. While Eric is just outside the north door, the station above the cut-low wall height fades out, so he is never hidden and the security room's gate line, plants and benches show through; it stands whole again as he walks east. The platform shed runs north-north-east past the station's west side: a long curved blue-grey roof over an island platform on columns, with the monorail's two beams on piers either side, the beam arriving from the west at its south end, and stairs down to a covered walkway that runs along the station's south side to its glass front. The court is stone paving with a worn line from door to door: a strip along the station's north side as far as the head office, and a bike court east of the station with two long rows of parked bikes in racks, a bench against the station's east wall and a bed of shrubs on its south edge. A short rack of bikes stands by the station's north-west corner, a bench against its north wall, two planted beds with trees along the court's north edge, and four tall lamps with pools of light. Beyond the court to the north: a row of trees, a path with two benches, lawns with trees and a path up to the tower's lower wing. The palette and the warm, low morning sun are the security room's. No roads or cars.
 
 Head office stands east of the station, where the island layout puts it (Jørgen, 2026-09-30, on the old one: "a standalone elevator with literally nothing over it"). It is the island's tallest building: twelve storeys of blue-grey curtain wall with floor bands and pale fins, a parapet and roof plant, turned about 23° like the map's town grid. The entrance is in the south face near the south-west corner, under a cantilevered canopy with 本社 HEAD OFFICE on its fascia; the low stone name sign stands beside it. Inside is the lobby: the reception counter with Kuro behind it to the left of the door (受付 RECEPTION on its front), the lift core at the back with the B2 car (B2 - 5F), a second car's closed doors (6F - 10F) and the stair door (階段 STAIRS), the floor directory beside them (only "5F Sales" and "B2 IT Support" can be read), two sofas round a low table, plants and an umbrella stand. The lift core stands square to the camera, so the ride is filmed straight on. There is no second security gate. While Eric is in the lobby or the lift, everything above the ground floor, the glass front and the canopy fade out, so the lobby and the ride can be seen; they come back as he walks out of the door.
 
-Eric walks out of the station, crosses the court under player control, and walks into the lift. He can also walk east along the lane to the fountain plaza and back at any time before the lift. Beyond the court the town goes on as plain background: the road south of the station, grass by the platform, a few low-poly blocks with window rows, and further out the island layout's buildings (the tower's wing, the offices north, the canteen) on the island's ground and sea.
+The lane to the fountain plaza leaves east-south-east along the tower's south face, paved, between a low bed on the tower side and a hedge with trees on the verge beyond it. Eric walks out of the station, crosses the court under player control, and walks into the lift. He can also walk east along the lane to the fountain plaza and back at any time before the lift. Further out the island layout's buildings (the tower's wing, the offices north, the canteen) stand on the island's ground and sea. Around the lobby the ground floor is rooms, so it reads when the floors above fade: a back office east of the lobby with two rows of desks and cabinets, windows in the ground floor's south and east walls.
 
 At the end of the B2 conversation the camera releases its close-up before Mio leaves, so Eric can see and reach the lift. After work he comes up in the same lift and walks home east along the lane. The forecourt and the plaza then take the dorm courtyard's dusk light, and the head-office door and lift have no marker.
 
@@ -190,7 +190,7 @@ At the end of the B2 conversation the camera releases its close-up before Mio le
 | `station_exit` | Station | The station's island-side doorway, behind Eric as he enters the court. |
 | `office_entrance` | Head office | The head office's entrance under its canopy. |
 | `lift` | Lift to B2 | The B2 car in the lobby's lift core. |
-| `plaza_lane` | To the plaza | The east end of the lane between the hedge and the planting. |
+| `plaza_lane` | To the plaza | The east end of the lane along the tower's south face. |
 
 ### Spots
 
@@ -202,7 +202,7 @@ None.
 
 ### Zones
 
-`lift_front`, `plaza_lane` (the lane's east end: walking into it starts the walk to the plaza)
+`lift_front`, `plaza_lane` (the lane's east end along the tower's south face: walking into it starts the walk to the plaza)
 
 ### Who's there when
 

@@ -52,10 +52,23 @@ export function forecourtPlace(game) {
     },
     plaza_lane: {
       ...PLACE_DETAILS.forecourt.things.plaza_lane,
-      anchor: (v) => v.set(w.plazaLane[0] + 0.5, 1.1, w.plazaLane[1]),
+      anchor: (v) => v.set((w.plazaLane[0] + w.plazaEdge[0]) / 2, 1.1, (w.plazaLane[1] + w.plazaEdge[1]) / 2),
       spot: () => w.plazaLane,
       face: () => w.plazaEdge,
     },
+  };
+  // an old save can hold a spot that is now a wall, a bike rack or the station (the court was rebuilt 2026-09-30):
+  // move him to the nearest free ground, or to the station door when there is none nearby
+  const snapToWalk = (p) => {
+    const nav = w.nav,
+      s = w.liftSite;
+    if (nav.free(p.x, p.z)) return;
+    if (Math.abs(p.x - s.x) < 0.8 && p.z < s.zFront + 0.2 && p.z > s.zBack - 2.4) return; // in the lift car
+    if (!nav.grid) nav.build();
+    const [i, k] = nav.cellOf(p.x, p.z);
+    const c = nav.nearestFree(i, k);
+    const [x, z] = c ? [nav.x0 + (c[0] + 0.5) * nav.cell, nav.z0 + (c[1] + 0.5) * nav.cell] : w.start;
+    p.set(x, p.y, z);
   };
   const P = {
     scene: w.scene,
@@ -87,7 +100,11 @@ export function forecourtPlace(game) {
     people: { kuro: w.kuro },
     zones: {
       lift_front: (x, z) => Math.hypot(x - w.liftOut[0], z - w.liftOut[1]) < 0.42,
-      plaza_lane: (x, z) => x > w.plazaLane[0] - 0.1 && Math.abs(z - w.plazaLane[1]) < 0.9,
+      plaza_lane: (x, z) => {
+        const l = w.laneAt(x, z),
+          l0 = w.laneAt(...w.plazaLane);
+        return l.u > l0.u - 0.1 && Math.abs(l.off) < 1.2;
+      },
     },
     hooks: {
       liftOpen: () => w.setLiftOpen(1),
@@ -108,7 +125,7 @@ export function forecourtPlace(game) {
             new THREE.Vector3(w.doorX, 0, w.stationExit[1] - 0.2),
           ],
           new THREE.Vector3(6.4, 0, -0.6),
-          { follow: true, clamp: [6.4, 17.2, -1.2, 0.0], limY: 0.96 },
+          { follow: true, clamp: [6.4, 17.2, -1.2, 4.5], limY: 0.96 },
         );
       else
         cam.fit(
@@ -120,7 +137,7 @@ export function forecourtPlace(game) {
             new THREE.Vector3(0, 1.2, 2.4),
           ],
           new THREE.Vector3(0, 0, 0),
-          { follow: true, clamp: [-1.0, 18.6, -2.6, 0.9], lead: -1.6 },
+          { follow: true, clamp: [-1.0, 21.2, -2.6, 8.0], lead: -1.6 },
         );
     },
     pick(rc) {
@@ -130,16 +147,18 @@ export function forecourtPlace(game) {
     update(dt, t) {
       w.update(t, dt);
       w.headOffice.update(game.player.root.position, dt);
+      w.station.update(game.player.root.position, dt);
       idle(w.kuro, t);
       // heading for the lane (not for head office): build the plaza now, so the walk there needs no loading pause
       const e = game.player.root.position;
-      if (e.x > 2.5 && e.x < 10 && e.z < 0.9 && !game.prepared.plaza) game.prepare?.('plaza');
+      if (e.x > 16.5 && e.z > 4.2 && !game.prepared.plaza) game.prepare?.('plaza');
     },
     onPeriod(period) {
       if (period !== 'evening' || P.grade === EVENING_GRADE) return;
       relightLift(P);
       eveningLight(w.scene);
       w.headOffice.onPeriod(period);
+      w.station.onPeriod(period);
       w.sky?.onPeriod(period);
       P.grade = EVENING_GRADE;
     },
@@ -152,6 +171,7 @@ export function forecourtPlace(game) {
     restoreState(saved) {
       if (saved.world?.player) {
         restorePeople({ eric: game.player }, saved.world.player);
+        snapToWalk(game.player.root.position);
         game.walker.sync();
         cam.snap(game.player.root.position);
       }
@@ -162,7 +182,7 @@ export function forecourtPlace(game) {
       plaza: (g) => walkOut(g, cam, w.plazaLane, w.plazaEdge),
     },
     tripInFrom: {
-      plaza: (g) => walkIn(g, cam, w.plazaEdge, w.plazaIn, -Math.PI / 2),
+      plaza: (g) => walkIn(g, cam, w.plazaEdge, w.plazaIn, w.laneFacing),
     },
     async tripIn(g) {
       const eric = g.player;

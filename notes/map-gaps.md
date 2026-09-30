@@ -16,15 +16,15 @@ To see them: `?map=1` then M (or `?mapcompare=1`), "Compare with island-map-4", 
 - H1. Closed 2026-09-30 (map upgrade task C): the lift stands in the lobby of a real head office (scenes/head-office.js), its lid in the lift core's top colour; no background-coloured roof is left.
 - H2. Closed 2026-09-30 (task C): the tower is built from the layout's head_office (14.8 by 8.6, 12 storeys, turned 23°; 0.1 off the map), and the skyline draws head_office_wing from the layout.
 - H3. Mostly closed 2026-09-30 (task C): head office is east of the station. The tower is 0.1 off; the door is 4.6 off, because the map draws the door about 4.5 south of the traced south face and the door is built in that face.
-- H4. Open (task D): the walk now reaches east to the head office, but the court itself is still where the map has the platform shed.
+- H4. Closed 2026-09-30 (map upgrade task D): the court is the paving between the station and the head office door, its bike court east of the station where the layout's court is (built x 5.8..12.8, z 2.65..10.6 local; the layout's court 5.8..14.6, 2.2..11.2); the shed stands west of it.
 - H5. The station exit faces north because the gate room stays as built (gate-location); the map brief has it facing east toward the head office. Open question in the upgrade plan.
-- H6. The station outside is only a 0.45-high wall from forecourt x -7 to 1.2. The gate room reaches x 5.8, so the east half of the station is drawn as grass, and the room's second back-wall door has nothing outside it. The map's station is a separate two-storey flat-roofed block with a parapet and canopy.
-- H7. The map draws the station about 12 by 3, turned 23°; the gate room is 12.6 by 9 and can't change, so the station's massing has to be deeper than drawn.
-- H8. The platform roof is a free-standing half-cylinder 13 long, over the court's west edge. The map's shed is about 43 long, turned 22° (north-north-east), with the platforms under it and the beam on piers into its south end; the built roof's middle is 2.8 off the map's, but there is no beam, no piers and no platform under it.
-- H9. The train's covered walkway ends at (-27.9, -5.3), west of the station; the gate room's glass entrance is on its south face (-15.1, 4.5). Nothing joins them.
-- H10. A road runs south of the station (forecourt town(), TOWN.road). The map has no roads or cars there; the shop street's west end and the promenade start south-east of the station.
-- H11. The court has two bikes and one rack; the map shows rows of bikes on both sides of the court.
-- H12. Partly closed 2026-09-30 (task C): the forecourt now draws the layout's neighbours (buildSkyline); six of the old arbitrary boxes remain inside the frame until the court redo (task D).
+- H6. Closed 2026-09-30 (task D): the station is a two-storey flat-roofed block over the whole gate room (scenes/station-exterior.js), with parapet, roof plant, the exit canopy, the staff door, the room's side windows and glass front; above the cut-low height it fades only while Eric is just outside its north door.
+- H7. Accepted (task D): the station is built on the gate room's footprint, 12.6 by 9 and square to north, deeper than the map's 12 by 3 turned 23°, because the room can't change.
+- H8. Closed 2026-09-30 (task D): the shed is built on the layout's centre line, 43 long and turned 22°, with an island platform on columns and two beams on piers, the beam arriving from the west at its south end. It is 1.3 west of the traced line and 7.2 wide instead of 9, so its roof clears the station's north-west corner (the traced outline overlaps the station).
+- H9. Closed 2026-09-30 (task D): stairs at the platform's south end come down to a covered walkway that runs along the station's south side to its glass front.
+- H10. Closed 2026-09-30 (task D): no road; grass and the walkway south of the station.
+- H11. Closed 2026-09-30 (task D): two rows of ten racks (fifteen bikes) in the bike court, a short rack of three by the station's north-west corner.
+- H12. Closed 2026-09-30 (tasks C and D): the forecourt's background is the layout's neighbours (buildSkyline) on the layout's ground; the old boxes and slab are gone.
 - H13. Closed 2026-09-30 (task C): Kuro works the head office lobby reception; places.md and cast.md follow. Her lines are still the station ones until Codex rewrites them.
 
 ## IT support, B2 (`office`)

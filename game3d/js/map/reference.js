@@ -9,7 +9,7 @@ export const LANDMARKS = [
   { id: 'station', label: 'Station', chunk: 'gate', at: [0, 0], ref: [417, 571], anchor: true },
   { id: 'ho_door', label: 'Head office door', chunk: 'forecourt', at: [15.34, 2.65], ref: [505, 571] },
   { id: 'tower', label: 'Head office tower', chunk: 'forecourt', at: [20.89, 0.38], ref: [545, 544] },
-  { id: 'shed', label: 'Platform roof', chunk: 'forecourt', at: [-5.9, -2.5], ref: [392, 522] },
+  { id: 'shed', label: 'Platform roof', chunk: 'forecourt', at: [-7.5, -6.0], ref: [392, 522] },
   { id: 'fountain', label: 'Fountain', chunk: 'plaza', at: [0, -2.7], ref: [715, 612], anchor: true },
   { id: 'canteen', label: 'Canteen', chunk: 'plaza', at: [3.3, -21.8], ref: [736, 534] },
   { id: 'shops', label: 'Shop row', chunk: 'plaza', at: [0.45, 21.4], ref: [715, 705] },
