@@ -29,7 +29,7 @@ const PRESETS = {
 };
 
 const params = new URLSearchParams(location.search);
-const VERSION = params.get('v') || 'source17';   // ?v= loads an earlier base for comparison
+const VERSION = params.get('v') || 'source18';   // ?v= loads an earlier base for comparison
 const state = { ...DEFAULT };
 for (const key of Object.keys(DEFAULT)) if (params.has(key)) state[key] = params.get(key);
 const view = window.__creator = { ready: false, state };
@@ -47,7 +47,8 @@ const scene = new THREE.Scene();
 scene.background = new THREE.Color('#dde4ea');
 scene.add(new THREE.HemisphereLight(0xffffff, 0x8d98a3, 1.9));
 const sun = new THREE.DirectionalLight(0xffffff, 2.1); sun.position.set(1.5, 3, 2.5); sun.castShadow = true;
-sun.shadow.mapSize.set(1024, 1024); Object.assign(sun.shadow.camera, { left: -1.5, right: 1.5, top: 1.5, bottom: -1.5 });
+sun.shadow.mapSize.set(1024, 1024); sun.shadow.normalBias = 0.012; sun.shadow.bias = -0.0004;   // no shadow stripes on the parts' own faces
+Object.assign(sun.shadow.camera, { left: -1.5, right: 1.5, top: 1.5, bottom: -1.5 });
 scene.add(sun);
 const floor = new THREE.Mesh(new THREE.CircleGeometry(1.4, 48), new THREE.MeshLambertMaterial({ color: '#c9d2da' }));
 floor.rotation.x = -Math.PI / 2; floor.receiveShadow = true; scene.add(floor);
@@ -74,6 +75,16 @@ function removeExtra(slot) {
   const mesh = extra[slot]; if (!mesh) return;
   mesh.removeFromParent(); mesh.geometry.dispose(); mesh.material.dispose(); delete extra[slot];
 }
+// every foot corner of the body squeezed onto its foot's middle, so the foot has no area left
+function hideFeet(pos, d, J) {
+  const feet = { '-1': [], 1: [] };
+  for (let i = 0; i < d.T * 3; i++) if (d.pieces[Math.floor(i / 3)] === 'body' && classify(d, i, J).zone === 'foot') feet[Math.sign(d.pos[i * 3]) || 1].push(i);
+  for (const list of Object.values(feet)) {
+    if (!list.length) continue;
+    const mid = [0, 1, 2].map((a) => list.reduce((s, i) => s + d.pos[i * 3 + a], 0) / list.length);
+    for (const i of list) pos.set(mid, i * 3);
+  }
+}
 function apply() {
   if (!ch) return;
   const d = ch.base.d, J = library.src[state.body].P;
@@ -82,7 +93,10 @@ function apply() {
   if (ch.meshes.hair) { ch.meshes.hair.visible = state.hair === 'own'; tint(ch.meshes.hair, state.hair === 'own' ? state.hairColour : ''); }
   // made hair folds Mio's big ears in, so they don't stick out through it
   const bodyPos = ch.meshes.body.geometry.attributes.position;
-  bodyPos.array.set(HAIR[state.hair] ? tuckedEars(d) : d.pos); bodyPos.needsUpdate = true;
+  const shape = HAIR[state.hair] ? tuckedEars(d) : Float32Array.from(d.pos);
+  // the base's feet stand closer together than the original shoes, so under those shoes they fold away
+  if (state.shoes === 'own' && ch.meshes.shoes) hideFeet(shape, d, J);
+  bodyPos.array.set(shape); bodyPos.needsUpdate = true;
   if (HAIR[state.hair]) {
     extra.hair = wardrobeMesh(ch, hairGeometry(d, state.hair, { main: state.hairColour || '#4a3325', accent: state.hairAccent || null }), 'hair-' + state.hair, true);
     ch.rig.add(extra.hair);

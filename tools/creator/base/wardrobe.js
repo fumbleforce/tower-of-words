@@ -1,6 +1,7 @@
 // Clothes made from the base body itself, so every piece fits both bodies (creator-base-5: "a small assortment of
 // other clothes and hair"; creator-base-6: "Hair and clothes need more character, like the original ones, and fit
-// the anime theme. New ones are too plain, simple.").
+// the anime theme. New ones are too plain, simple."; creator-base-7: "Clothes need more work to look as well crafted
+// as the existing ones, get some volume to them.").
 //
 // A garment is a list of pieces. A piece is part of the body's surface cut out by functions of the position (hems,
 // necklines, sleeve and trouser ends, the edge of a collar or pocket), pushed out along the body's normals and
@@ -35,17 +36,18 @@ export function classify(d, i, J) {
   const p = new THREE.Vector3().fromArray(d.pos, i * 3);
   const side = sideOf(p.x, J);
   const arm = segment(p, J[side + 'Arm'], J[side + 'Hand']);
-  const armLength = J[side + 'Arm'].distanceTo(J[side + 'Hand']);
+  // the bases' forearms run on past the wrist joint (to s = 1.07 of shoulder to wrist), so a long sleeve can reach the hand
+  const WRIST = 1.06;
   const outside = Math.abs(p.x - J.Hips.x) > Math.abs(J[side + 'Arm'].x - J.Hips.x) * 0.75;
   let best = 0;
   for (let k = 1; k < 4; k++) if (d.sw[i * 4 + k] > d.sw[i * 4 + best]) best = k;
   const bone = BONES[d.si[i * 4 + best]];
   if (bone === side + 'Hand') return { zone: 'hand', p };
-  if (bone === side + 'ForeArm') return arm.s > 1 - 0.01 / armLength ? { zone: 'hand', p } : { zone: 'arm', s: arm.s, p };
+  if (bone === side + 'ForeArm') return arm.s > WRIST ? { zone: 'hand', p } : { zone: 'arm', s: arm.s, p };
   // near the arm and weighted to it; the waist beside a hanging hand is near the arm too, but weighted to the spine
   const armish = /Arm|Shoulder|Hand/.test(bone);
   if (outside && armish && arm.s > -0.05 && arm.dist < 0.06) {
-    if (arm.s > 1 - 0.01 / armLength) return { zone: 'hand', p };
+    if (arm.s > WRIST) return { zone: 'hand', p };
     return { zone: 'arm', s: arm.s, p };
   }
   if (outside && armish && arm.s > 0.9 && arm.dist < 0.09) return { zone: 'hand', p };
@@ -102,10 +104,13 @@ const legCentre = (J, p) => { const side = sideOf(p.x, J); return lerp(J[side + 
 const shade = (f) => ['main', f];
 export const CLOTHES = {
   hoodie: {
-    slot: 'top', label: 'Hoodie', main: '#8a93a3',
+    slot: 'top', label: 'Hoodie', main: '#8a93a3', loose: { torso: [0.008, 0.03], arm: [0.01, 0.032], folds: 0.004 },
     pieces: (J) => [
-      { zones: ['torso', 'neck', 'arm', 'leg'], keep: [hemAt(J, -0.32), neckline(J, { lift: 0.004 }), sleeveAt(J, 0.9)], offset: 0.014, colour: 'main',
-        regions: [{ f: elbowFold(J), colour: shade(0.78) }, { f: (p) => 0.022 - hemAt(J, -0.32)(p), colour: shade(0.82) }, { f: (p, z) => 0.03 - sleeveAt(J, 0.9)(p, z), colour: shade(0.82) }], lip: shade(0.7) },
+      { zones: ['torso', 'neck', 'arm', 'leg'], keep: [hemAt(J, -0.32), neckline(J, { lift: 0.004 }), sleeveAt(J, 1.02)], offset: 0.014, colour: 'main',
+        regions: [{ f: elbowFold(J), colour: shade(0.78) }, { f: (p) => 0.022 - hemAt(J, -0.32)(p), colour: shade(0.82) }, { f: (p, z) => 0.03 - sleeveAt(J, 1.02)(p, z), colour: shade(0.82) }], lip: shade(0.7) },
+      // ribbed cuffs and hem band, standing proud of the body of the hoodie so its edges read
+      { zones: ['arm'], keep: [sleeveAt(J, 1.02), (p, z) => 0.03 - sleeveAt(J, 1.02)(p, z)], offset: 0.02, colour: shade(0.84), lip: shade(0.68) },
+      { zones: ['torso', 'leg'], keep: [hemAt(J, -0.32), (p) => 0.028 - hemAt(J, -0.32)(p)], offset: 0.02, colour: shade(0.84), lip: shade(0.68) },
       // kangaroo pocket
       { zones: ['torso', 'leg'], keep: [front(J, 0.03), within(J.Hips.x, 0.075), hemAt(J, -0.12), (p) => lerp(J.Hips.y, J.Spine02.y, 0.45) - p.y - 0.8 * Math.abs(p.x - J.Hips.x)],
         offset: 0.02, colour: shade(0.93), lip: shade(0.72) },
@@ -116,7 +121,7 @@ export const CLOTHES = {
     },
   },
   sailor: {
-    slot: 'top', label: 'Sailor blouse', main: WHITE,
+    slot: 'top', label: 'Sailor blouse', main: WHITE, loose: { torso: [0.004, 0.02], arm: [0.008, 0.022] },
     pieces: (J) => {
       const collarBack = J.Spine.y - 0.035, vBottom = lerp(J.Spine02.y, J.Spine.y, 0.45);
       const vLine = (p) => vBottom + 1.25 * Math.abs(p.x - J.neck.x);
@@ -135,10 +140,10 @@ export const CLOTHES = {
     extras: (put, J) => { const vBottom = lerp(J.Spine02.y, J.Spine.y, 0.45); put.bow(J.neck.x, vBottom + 0.004, RED, 0.034); },
   },
   shirt: {
-    slot: 'top', label: 'Shirt and tie', main: WHITE, accent: NAVY,
+    slot: 'top', label: 'Shirt and tie', main: WHITE, accent: NAVY, loose: { torso: [0.004, 0.014], arm: [0.005, 0.016] },
     pieces: (J) => [
-      { zones: ['torso', 'neck', 'arm', 'leg'], keep: [hemAt(J, -0.3), neckline(J, { lift: 0.006 }), sleeveAt(J, 0.9)], offset: 0.011, colour: 'main',
-        regions: [{ f: (p, z) => 0.022 - sleeveAt(J, 0.9)(p, z), colour: shade(0.92) }, { f: (p) => Math.min(front(J, 0.02)(p), 0.005 - Math.abs(p.x - J.neck.x)), colour: shade(0.9) }], lip: shade(0.8) },
+      { zones: ['torso', 'neck', 'arm', 'leg'], keep: [hemAt(J, -0.3), neckline(J, { lift: 0.006 }), sleeveAt(J, 1.02)], offset: 0.011, colour: 'main',
+        regions: [{ f: (p, z) => 0.022 - sleeveAt(J, 1.02)(p, z), colour: shade(0.92) }, { f: (p) => Math.min(front(J, 0.02)(p), 0.005 - Math.abs(p.x - J.neck.x)), colour: shade(0.9) }], lip: shade(0.8) },
     ],
     extras: (put, J, colours) => {
       put.collar(J, 'shirt', 'main');
@@ -146,16 +151,16 @@ export const CLOTHES = {
     },
   },
   blazer: {
-    slot: 'top', label: 'Blazer', main: NAVY, accent: RED,
+    slot: 'top', label: 'Blazer', main: NAVY, accent: RED, loose: { torso: [0.006, 0.018], arm: [0.007, 0.016] },
     pieces: (J) => {
       const vBottom = lerp(J.Spine02.y, J.Spine.y, 0.1), v = J.neck.y - vBottom, vw = 0.1;
       const vEdge = (p) => neckline(J, { v, vWidth: vw })(p);
       return [
         // the shirt showing in the V
         { zones: ['torso', 'neck'], keep: [neckline(J, { lift: 0.006 }), front(J, 0.0), (p) => 0.012 - vEdge(p)], offset: 0.011, colour: WHITE, lip: null },
-        { zones: ['torso', 'neck', 'arm', 'leg'], keep: [hemAt(J, -0.55), vEdge, sleeveAt(J, 0.9)], offset: 0.022, colour: 'main',
+        { zones: ['torso', 'neck', 'arm', 'leg'], keep: [hemAt(J, -0.55), vEdge, sleeveAt(J, 1.02)], offset: 0.022, colour: 'main',
           regions: [{ f: (p) => Math.min(front(J, 0.02)(p), 0.004 - Math.abs(p.x - J.Hips.x - 0.006)), colour: shade(0.72) },
-            { f: (p, z) => 0.02 - sleeveAt(J, 0.9)(p, z), colour: shade(0.9) }], lip: shade(0.6) },
+            { f: (p, z) => 0.02 - sleeveAt(J, 1.02)(p, z), colour: shade(0.9) }], lip: shade(0.6) },
         // lapels: a raised band along the V
         { zones: ['torso', 'neck'], keep: [vEdge, (p) => 0.026 - vEdge(p), front(J, 0.0), (p) => p.y - vBottom + 0.01], offset: 0.027, colour: shade(0.82), lip: shade(0.6) },
         // pocket flaps
@@ -169,7 +174,7 @@ export const CLOTHES = {
     },
   },
   tee: {
-    slot: 'top', label: 'Ringer tee', main: '#d9dde3', accent: '#3a6ea5',
+    slot: 'top', label: 'Ringer tee', main: '#d9dde3', accent: '#3a6ea5', loose: { torso: [0.004, 0.016], arm: [0.008, 0.02] },
     pieces: (J, colours) => [
       { zones: ['torso', 'neck', 'arm', 'leg'], keep: [hemAt(J, -0.22), neckline(J, { scoop: 0.01 }), sleeveAt(J, 0.44)], offset: 0.011, colour: 'main',
         regions: [{ f: (p, z) => 0.016 - sleeveAt(J, 0.44)(p, z), colour: colours.accent },
@@ -179,7 +184,7 @@ export const CLOTHES = {
     extras: (put, J, colours) => put.rib(J, colours.accent),
   },
   trousers: {
-    slot: 'bottom', label: 'Slim trousers', main: '#2b2f3a',
+    slot: 'bottom', label: 'Trousers', main: '#2b2f3a', loose: { torso: [0, 0.004], leg: [0.006, 0.02], inner: 0.35, folds: 0.006 },
     pieces: (J) => [
       { zones: ['torso', 'leg', 'foot'], keep: [waistAt(J, 0.08), legAt(J, 0.95)], offset: 0.009, colour: 'main',
         regions: [{ f: (p) => Math.min(front(J, 0.01)(p), 0.0025 - Math.abs(p.x - legCentre(J, p)), p.y > J.LeftUpLeg.y - 0.03 ? -1 : 1), colour: shade(0.72) },
@@ -193,7 +198,7 @@ export const CLOTHES = {
     extras: (put, J) => put.buckle(J.Hips.x, lerp(J.Hips.y, J.Spine02.y, 0.025), METAL),
   },
   cargo: {
-    slot: 'bottom', label: 'Cargo shorts', main: '#6f7a5a',
+    slot: 'bottom', label: 'Cargo shorts', main: '#6f7a5a', loose: { torso: [0, 0.004], leg: [0.012, 0.03], inner: 0.4 },
     pieces: (J) => [
       { zones: ['torso', 'leg'], keep: [waistAt(J, 0.08), legAt(J, 0.42)], offset: 0.01, colour: 'main', lip: shade(0.7) },
       // turned-up cuffs
@@ -214,12 +219,14 @@ export const CLOTHES = {
     extras: (put, J) => put.skirt(J, { length: 0.56, pleats: 28, pleated: true, flare: 1.3, stripes: [[0.12, WHITE], [0.22, WHITE]] }),
   },
   sneakers: {
-    slot: 'shoes', label: 'Sneakers', main: '#3a6ea5',
+    slot: 'shoes', label: 'Sneakers', main: '#3a6ea5', loose: { foot: 0.008, leg: [0.008, 0.008] },
     pieces: (J) => [
       { zones: ['leg', 'foot'], keep: [(p) => -legAt(J, 0.93)(p)], offset: 0.012, colour: 'main',
         regions: [{ f: (p) => 0.016 - p.y, colour: SOLE }, { f: (p) => Math.min(0.03 - p.y, p.z - lerp(J.LeftFoot.z, J.LeftToeBase.z, 0.9)), colour: SOLE },
           { f: (p) => Math.min(p.y - 0.034, 0.011 - Math.abs(p.x - lerp(J[sideOf(p.x, J) + 'Foot'].x, J[sideOf(p.x, J) + 'ToeBase'].x, 0.5)), p.z - J[sideOf(p.x, J) + 'Foot'].z), colour: WHITE },
           { f: (p) => legAt(J, 0.93)(p) + 0.012, colour: shade(0.7) }], lip: shade(0.6) },
+      // a thick sole standing out round the foot
+      { zones: ['foot'], keep: [(p) => 0.018 - p.y], offset: 0.019, colour: SOLE, lip: shade(0.5) },
     ],
   },
   loafers: {
@@ -230,11 +237,12 @@ export const CLOTHES = {
     ],
   },
   boots: {
-    slot: 'shoes', label: 'Boots', main: '#4a4f5c',
+    slot: 'shoes', label: 'Boots', main: '#4a4f5c', loose: { foot: 0.006, leg: [0.008, 0.008] },
     pieces: (J) => [
       { zones: ['leg', 'foot'], keep: [(p) => -legAt(J, 0.6)(p)], offset: 0.013, colour: 'main',
         regions: [{ f: (p) => 0.02 - p.y, colour: INK }, { f: (p) => Math.min(p.y - 0.04, 0.008 - Math.abs(p.x - legCentre(J, p)), p.z - J[sideOf(p.x, J) + 'Foot'].z), colour: shade(0.65) }], lip: shade(0.6) },
       { zones: ['leg'], keep: [(p) => -legAt(J, 0.6)(p), (p) => legAt(J, 0.6)(p) + 0.035], offset: 0.02, colour: shade(0.85), lip: shade(0.6) },
+      { zones: ['foot'], keep: [(p) => 0.02 - p.y], offset: 0.019, colour: INK, lip: INK },
     ],
   },
 };
@@ -252,8 +260,12 @@ function blendWeights(a, b, t) {
   return { si: top.map(([bone]) => bone), sw: top.map(([, x]) => x / total) };
 }
 // a corner remembers which cut made it (edge), so the cut's edge can get a lip
+// A corner between corners of two zones takes the first in ZONE_ORDER, the same from either side, so the two
+// triangles sharing an edge push a cut corner off the body by the same amount (no cracks).
+const ZONE_ORDER = ['torso', 'neck', 'leg', 'arm', 'foot', 'hand'];
+const zoneBetween = (a, b) => (a === b ? a : ZONE_ORDER.find((z) => z === a || z === b));
 function lerpCorner(a, b, t, edge) {
-  return { p: a.p.clone().lerp(b.p, t), n: a.n.clone().lerp(b.n, t).normalize(), ...blendWeights(a, b, t), edge };
+  return { p: a.p.clone().lerp(b.p, t), n: a.n.clone().lerp(b.n, t).normalize(), ...blendWeights(a, b, t), edge, zone: zoneBetween(a.zone, b.zone) };
 }
 // Sutherland-Hodgman against one function, cutting where it crosses 0
 function clip(poly, f, edge = null) {
@@ -289,23 +301,60 @@ function output() {
   return out;
 }
 
-// the body's surface as corners and triangles, ready to cut: zone per triangle, pushed-out normals
+// the body's surface as corners and triangles, ready to cut: zone per triangle, pushed-out normals. Each body
+// triangle is split in four, so a loose garment can flare and fold smoothly away from the body.
 function bodyTriangles(d, J) {
   const list = [];
   for (let t = 0; t < d.T; t++) {
     if (d.pieces[t] !== 'body') continue;
     const zones = [0, 1, 2].map((k) => classify(d, t * 3 + k, J).zone);
     const zone = zones[1] === zones[2] ? zones[1] : zones[0];
-    list.push({ zone, zones, corners: [0, 1, 2].map((k) => {
+    const c = [0, 1, 2].map((k) => {
       const i = t * 3 + k, p = new THREE.Vector3().fromArray(d.pos, i * 3);
-      return { p, n: outward(p, new THREE.Vector3().fromArray(d.normal, i * 3), zones[k], J), si: d.si.slice(i * 4, i * 4 + 4), sw: d.sw.slice(i * 4, i * 4 + 4), edge: null };
-    }) });
+      return { p, n: outward(p, new THREE.Vector3().fromArray(d.normal, i * 3), zones[k], J), si: d.si.slice(i * 4, i * 4 + 4), sw: d.sw.slice(i * 4, i * 4 + 4), edge: null, zone: zones[k] };
+    });
+    const m = [[0, 1], [1, 2], [2, 0]].map(([a, b]) => lerpCorner(c[a], c[b], 0.5, null));
+    for (const cs of [[c[0], m[0], m[2]], [m[0], c[1], m[1]], [m[2], m[1], c[2]], [m[0], m[1], m[2]]]) list.push({ zone, zones, corners: cs });
   }
   return list;
 }
 
-function addPiece(out, tris, piece, colourOf) {
-  const lipIn = -0.002;
+// How far a garment stands off the body at a corner: the piece's offset plus its looseness, so it hangs off the body
+// like the originals' clothes instead of hugging it. loose: { arm: [at the shoulder, at the wrist], leg: [at the hip,
+// at the ankle], torso: [at the chest, at the hips], inner: share of the leg looseness kept on the inside of the legs
+// (so trouser legs don't meet), foot: on the feet (chunky shoes), folds: height of soft ridges near the sleeve and
+// trouser ends }.
+function standOff(piece, J) {
+  const L = piece.loose || {};
+  return (v, zone) => {
+    const p = v.p;
+    let extra = 0;
+    if (zone === 'arm' && L.arm) {
+      const side = sideOf(p.x, J), a = J[side + 'Arm'], axis = J[side + 'Hand'].clone().sub(a);
+      const s = clamp01(p.clone().sub(a).dot(axis) / axis.lengthSq());
+      extra = lerp(L.arm[0], L.arm[1], s);
+      if (L.folds) {   // soft rings bunched round the forearm
+        const around = Math.atan2(v.n.y, v.n.z);
+        extra += L.folds * clamp01((s - 0.45) / 0.3) * (0.5 + 0.5 * Math.cos(around * 3 + s * 9));
+      }
+    } else if (zone === 'leg' && L.leg) {
+      const side = sideOf(p.x, J), s = clamp01((J[side + 'UpLeg'].y - p.y) / (J[side + 'UpLeg'].y - J[side + 'Foot'].y));
+      const inward = clamp01(-v.n.x * Math.sign(J[side + 'UpLeg'].x - J.Hips.x));
+      extra = lerp(L.leg[0], L.leg[1], s) * (1 - (1 - (L.inner ?? 0.4)) * inward);
+      if (L.folds) {   // folds stacking above the hem, on the front and sides
+        const around = Math.atan2(v.n.x, v.n.z);
+        extra += L.folds * clamp01((s - 0.55) / 0.3) * (0.5 + 0.5 * Math.cos(around * 2 + s * 14)) * (1 - inward);
+      }
+    } else if ((zone === 'torso' || zone === 'leg') && L.torso) {
+      const u = clamp01((J.Spine02.y - p.y) / (J.Spine02.y - J.Hips.y));
+      extra = lerp(L.torso[0], L.torso[1], u);
+    } else if (zone === 'foot' && L.foot) extra = L.foot;
+    return piece.offset + extra;
+  };
+}
+
+function addPiece(out, tris, piece, colourOf, J) {
+  const lipIn = -0.002, off = standOff(piece, J);
   for (const T of tris) {
     if (!piece.zones.includes(T.zone) || T.zones.includes('hand') || (piece.zones.includes('foot') ? false : T.zones.includes('foot') && T.zone !== 'leg')) continue;
     let poly = T.corners;
@@ -326,7 +375,7 @@ function addPiece(out, tris, piece, colourOf) {
     for (const q of rest) parts.push([q, piece.colour]);
     for (const [q, role] of parts) {
       const c = colourOf(role);
-      for (let k = 1; k + 1 < q.length; k++) for (const v of [q[0], q[k], q[k + 1]]) out.corner(v.p.clone().addScaledVector(v.n, piece.offset), v.n, v.si, v.sw, c);
+      for (let k = 1; k + 1 < q.length; k++) for (const v of [q[0], q[k], q[k + 1]]) out.corner(v.p.clone().addScaledVector(v.n, off(v, v.zone)), v.n, v.si, v.sw, c);
     }
     // lips: every edge of the cut outline turned in to the skin, so the garment is closed there
     if (piece.lip === null) continue;
@@ -334,7 +383,7 @@ function addPiece(out, tris, piece, colourOf) {
     for (let k = 0; k < poly.length; k++) {
       const a = poly[k], b = poly[(k + 1) % poly.length];
       if (a.edge === null || a.edge !== b.edge) continue;
-      const ao = a.p.clone().addScaledVector(a.n, piece.offset), bo = b.p.clone().addScaledVector(b.n, piece.offset);
+      const ao = a.p.clone().addScaledVector(a.n, off(a, a.zone)), bo = b.p.clone().addScaledVector(b.n, off(b, b.zone));
       const ai = a.p.clone().addScaledVector(a.n, lipIn), bi = b.p.clone().addScaledVector(b.n, lipIn);
       const n = a.n.clone().add(b.n).normalize();
       for (const [v, s] of [[ao, a], [bo, b], [bi, b], [ao, a], [bi, b], [ai, a]]) out.corner(v, n, s.si, s.sw, c);
@@ -344,7 +393,9 @@ function addPiece(out, tris, piece, colourOf) {
 
 // ---------- accessories ----------
 
-function accessories(d, J, out, colourOf, tris) {
+function accessories(d, J, out, colourOf, tris, loose = {}) {
+  // how far a loose top stands off the torso at a height, so what sits on it sits on the cloth, not the skin
+  const torsoLoose = (y) => (loose.torso ? lerp(loose.torso[0], loose.torso[1], clamp01((J.Spine02.y - y) / (J.Spine02.y - J.Hips.y))) : 0);
   // the nearest body corner's weights, for a point placed on the body
   const weightsAt = (p) => {
     let best = 0, dist = Infinity;
@@ -368,7 +419,7 @@ function accessories(d, J, out, colourOf, tris) {
       const z = l1 * a.z + l2 * b.z + l3 * c.z;
       if (best === null || z * sign > best * sign) best = z;
     }
-    return best ?? J.Spine.z + sign * 0.06;
+    return (best ?? J.Spine.z + sign * 0.06) + sign * torsoLoose(y);
   };
   // w: one set of weights for every corner, or a list with one per corner
   const tri = (a, b, c, colour, w) => {
@@ -443,7 +494,7 @@ function accessories(d, J, out, colourOf, tris) {
         const o = V(J.neck.x, y0 - 0.01 * clamp01(dirH.z), J.neck.z);
         let r = 0.03;
         for (const T of tris) for (const v of T.corners) if (Math.abs(v.p.y - o.y) < 0.012 && (v.p.x - o.x) * dirH.x + (v.p.z - o.z) * dirH.z > 0 && Math.abs((v.p.x - o.x) * dirH.z - (v.p.z - o.z) * dirH.x) < 0.02) r = Math.max(r, (v.p.x - o.x) * dirH.x + (v.p.z - o.z) * dirH.z);
-        ring.push(o.clone().addScaledVector(dirH, r + 0.012));
+        ring.push(o.clone().addScaledVector(dirH, r + 0.012 + torsoLoose(o.y)));
       }
       for (let k = 0; k < n; k++) {
         const a = ring[k], b = ring[(k + 1) % n], w = weightsAt(a);
@@ -468,10 +519,10 @@ function accessories(d, J, out, colourOf, tris) {
         const along = (v.p.x - base.x) * dirH.x + (v.p.z - base.z) * dirH.z, across = Math.abs((v.p.x - base.x) * dirH.z - (v.p.z - base.z) * dirH.x);
         if (along > 0 && across < 0.02) r = Math.max(r, along);
       }
-      const root = base.clone().addScaledVector(dirH, r + 0.01);
+      const root = base.clone().addScaledVector(dirH, r + 0.01 + torsoLoose(base.y));
       if (kind === 'hood') {
         // a thick fold lying on the upper back, thin at the front
-        const h = 0.01 + 0.05 * backness, out = 0.012 + 0.03 * backness;
+        const h = 0.016 + 0.075 * backness, out = 0.018 + 0.05 * backness;
         const top = root.clone().add(V(0, h * 0.5, 0)).addScaledVector(dirH, out * 0.6);
         const fold = root.clone().add(V(0, -h * 0.9, 0)).addScaledVector(dirH, out);
         rows.push([root, top, fold, root.clone().add(V(0, -h * 1.1, 0)).addScaledVector(dirH, out * 0.3)]);
@@ -555,8 +606,9 @@ export function clothesGeometry(d, J, id, colour) {
     return new THREE.Color(role);
   };
   const out = output(), tris = bodyTriangles(d, J);
-  for (const piece of spec.pieces(J, colours)) addPiece(out, tris, piece, colourOf);
-  if (spec.extras) spec.extras(accessories(d, J, out, colourOf, tris), J, colours);
+  // every piece of a garment hangs the same way (loose), so a pocket or cuff stays on top of the piece under it
+  for (const piece of spec.pieces(J, colours)) addPiece(out, tris, { loose: spec.loose, ...piece }, colourOf, J);
+  if (spec.extras) spec.extras(accessories(d, J, out, colourOf, tris, spec.loose), J, colours);
   return out;
 }
 

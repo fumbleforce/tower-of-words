@@ -1,0 +1,80 @@
+{
+ "title": "Creator: straight legs, chunky hair, clothes with volume",
+ "date": "2026-09-30",
+ "by": "Claude (claude-agent:creator8)",
+ "status": "open",
+ "question": "Do the legs, the hair and the clothes look right now next to Mio's and Eric's originals?",
+ "multi": false,
+ "media": [
+  {
+   "image": "art/parts/base/shots/creator-base-8/1-legs-mio.webp",
+   "caption": "Legs, Mio. Last round the legs ran from the crotch out to the original skeleton's ankles, which sit well outside the hips, so from the front they made an upside-down V (the bow-legged look). Now each leg is an upright column: the inside edge is one vertical line with a small gap between the legs, and the feet stand under the hips. Rows: last round bare, now bare, now in trousers, the original. Front, three-quarter and side, standing and walking."
+  },
+  {
+   "image": "art/parts/base/shots/creator-base-8/1-legs-eric.webp",
+   "caption": "Legs, Eric, the same way."
+  },
+  {
+   "image": "art/parts/base/shots/creator-base-8/2-hair-mio.webp",
+   "caption": "Hair on Mio's body. First row: her own hair. Then each style last round and now. The thin spiky strands are gone: every style is now a rounded low-poly shell standing well off the skull plus a handful of broad, thick clumps with big facets, a fringe of three to five broad locks in uneven lengths, chunky faceted cones for tails and big faceted balls for buns (like her buns). Front, three-quarter, side, back, and three-quarter walking."
+  },
+  {
+   "image": "art/parts/base/shots/creator-base-8/2-hair-eric.webp",
+   "caption": "Hair on Eric's body, the same way. Spiky is now broad clumps sweeping up and back off the crown, closer to his own hair."
+  },
+  {
+   "image": "art/parts/base/shots/creator-base-8/3-clothes-mio.webp",
+   "caption": "Clothes on Mio's body. First row: her own clothes. Then each top last round and now (with trousers or the pleated skirt, and sneakers). The clothes now stand off the body: sleeves widen towards the cuff, tops hang out from the chest towards the hem, trouser legs are straight and wider at the ankle (less on the inside, so the legs don't meet), with soft folds above the trouser hem and on the hoodie's forearms. The hoodie has raised ribbed cuffs and hem band and a bigger hood; long sleeves now reach the hands. Sneakers are chunkier with a thick sole."
+  },
+  {
+   "image": "art/parts/base/shots/creator-base-8/3-clothes-eric.webp",
+   "caption": "Clothes on Eric's body, the same way."
+  },
+  {
+   "image": "art/parts/base/shots/creator-base-8/4-looks.webp",
+   "caption": "The six example looks from the creator, last round and now, under the two originals."
+  }
+ ],
+ "options": [
+  {
+   "id": "base-ok",
+   "label": "base-ok",
+   "note": "Good enough to build new characters on. Legs: upright columns with a small gap, feet under the hips, in idle and walk (base source18, made by tools/creator/base/column_legs.py from source17). Hair: all seven styles rebuilt from a shell and a few broad clumps. Clothes: every top and bottom now has looseness (sleeves, body, trouser legs), raised bands on the hoodie, bigger hood, chunkier shoes. The eyes are unchanged. Also fixed: long sleeves stopped short of the hands (the bases' forearms run past the wrist joint); the fine stripes on made hair and clothes were shadow artefacts in the viewer's light and are gone; under Mio's and Eric's own shoes the base's feet fold away (they stand closer together now than the original shoes)."
+  },
+  {
+   "id": "needs-work",
+   "label": "needs-work",
+   "note": "Tell me what to fix first. What I can still see: the made clothes are still simpler than the originals (no zip or big cargo pockets on the trousers, and Mio's hoodie has more oversized bulk than the made one); in a walk the legs cross a little in front view, which comes from the walk clip (the originals do it too, hidden by baggy trousers); at the far end of a stride the forward thigh still grazes the pleated skirt's hem; the made hair shows the flat shading of big facets like Mio's, which on Eric's smooth-shaded body reads a little harder than his own hair; the hands are still the originals' blocky hands."
+  }
+ ],
+ "links": [
+  {
+   "label": "The live creator (drag to turn it, Idle or Walk, Original puts the game model beside it)",
+   "href": "tools/creator/base/dress.html"
+  },
+  {
+   "label": "The same creator online, for your phone",
+   "href": "https://fumbleforce.github.io/tower-of-words/creator/"
+  },
+  {
+   "label": "Example: school look on Mio's body",
+   "href": "tools/creator/base/dress.html?hair=twintails&hairColour=%23d9b56a&eyes=upturned&iris=%233f8f5a&top=sailor&bottom=pleated&shoes=loafers"
+  },
+  {
+   "label": "Example: hoodie look on Eric's body",
+   "href": "tools/creator/base/dress.html?body=eric&hair=short&hairColour=%234a3325&eyes=wide&iris=%233f8f5a&top=hoodie&topColour=%232f6b4f&bottom=cargo&shoes=sneakers&shoesColour=%23b3473d"
+  },
+  {
+   "label": "Example: spiky hair and blazer on Eric's body",
+   "href": "tools/creator/base/dress.html?body=eric&hair=spiky&hairColour=%231d1f2b&hairAccent=%23b3473d&facial=none&eyes=mio&iris=%23c08a2e&top=blazer&bottom=trousers&shoes=boots&skin=%23d9a47f"
+  },
+  {
+   "label": "The creator's bodies from last round (the legs before), for comparing",
+   "href": "tools/creator/base/dress.html?v=source17"
+  },
+  {
+   "label": "Previous round and your feedback",
+   "href": "bible/#review/creator-base-7"
+  }
+ ]
+}
