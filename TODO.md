@@ -12,7 +12,7 @@ Read [creator-next](notes/creator-next.md) for Codex’s current creator work an
 - Eric portrait framing: at 2560x1440 the straight cut on his right shoulder shows at the image edge, and on phone his image runs past the right screen edge. Re-cut on a wider canvas (art round).
 - Waiting on Jørgen in Review: creator-base-4 and day1-frames. Decided since: creator-idle-neutral-3 (relaxed-3), day1-simplify (train edits applied in d64b4b4, the rest moved to day1-frames), island-places, office-perf, and island-map-4 over island-map-2 (map upgrade, notes/map-upgrade-plan.md). Use `python3 tools/review.py show <id>` for current answers.
 - After the layout pick: apartment-building interior candidates for Eric’s dorm (C-0091). After the day1-frames picks: apply selected story edits, then hand changed voice lines to Claude’s voice pipeline.
-- Deferred by choice: advanced commit hooks (review receipts, HEAD boot check, gitleaks). Rejected: nightly QA, stuck-point telemetry.
+- Rejected: nightly QA, stuck-point telemetry.
 
 Done today, for the record (git log has details): interaction pins back, outline skips shadows, selection ring removed, pins tappable, full-height train doors, two-step lunchbox scene, clicks blocked during Eric's word, Eric's face box, voice pipeline in tools/voice + gaijin clip, GPU slots for tests, refactor stages 0-5, Continue fix, facts docs, GUIDE diet, agent types and skills, feedback log hooks, worktrees/land, performance overlay (`52144e9`), local in-game feedback (`4c87ff9`), portrait image QA (`5143d35`), day-1 simplification proposal with cold-reader corrections (`519c4c9`), and island-map-2 candidates (`e93d901`).
 

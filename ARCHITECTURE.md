@@ -109,6 +109,6 @@ It never stashes or replaces shared working files. Commit-msg requires one
 of the staged change. Attribution trailers may follow it.
 
 Run `node tools/check/pre-commit.mjs` for the same check outside Git. Hooks are
-locally bypassable. Receipt enforcement, committed-HEAD browser checks, pre-push
-secret scanning and asset-lock/live-disk synchronization are deferred under
-C-0080 so the runtime extractions can proceed.
+locally bypassable. The boot check after commit and land and the secret scan
+before push are in GUIDE (Engineering, Commit gate). Receipt enforcement and
+asset-lock/live-disk synchronization are deferred under C-0080.
