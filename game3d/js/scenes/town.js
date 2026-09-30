@@ -116,34 +116,34 @@ export function paving(x0, x1, z0, z1, tile, { color = '#8e8a86', seam = '#7f7b7
   return g;
 }
 
-// after work: the dorm courtyard's dusk (scenes/dorm-court.js) on a chunk built with outdoorLight, so the walk
-// home is in one light: a cooler, dimmer sky and the last of the sun low from the west
+// after work: dusk on a chunk built with outdoorLight (and the dorm courtyard's own lights), so the walk home is in
+// one light: a dim blue sky, the last of the sun low and orange from the west, lamps and windows glowing
 export const EVENING_GRADE = {
-  exposure: 1.0,
-  temp: 0.0,
-  sat: 0.76,
-  contrast: 1.04,
-  lift: [0.012, 0.012, 0.02],
-  shadowTint: [-0.01, 0, 0.024],
-  highTint: [0.022, 0.01, -0.014],
-  vignette: 0.22,
-  bloom: 0.3,
-  bloomThreshold: 0.8,
+  exposure: 0.98,
+  temp: -0.02,
+  sat: 0.78,
+  contrast: 1.06,
+  lift: [0.008, 0.01, 0.026],
+  shadowTint: [-0.016, 0, 0.036],
+  highTint: [0.03, 0.012, -0.016],
+  vignette: 0.3,
+  bloom: 0.42,
+  bloomThreshold: 0.72,
   focusBand: 0.3,
 };
 export function eveningLight(scene) {
   scene.traverse((o) => {
     if (o.isHemisphereLight) {
-      o.color.set('#a8b2c6');
-      o.groundColor.set('#55525a');
-      o.intensity = 1.5;
+      o.color.set('#8d9bb8');
+      o.groundColor.set('#454850');
+      o.intensity = 1.2;
     } else if (o.isDirectionalLight && o.castShadow) {
-      o.color.set('#ffbe8c');
-      o.intensity = 1.7;
-      o.position.copy(new THREE.Vector3(-0.85, 0.42, 0.25).normalize().multiplyScalar(30));
+      o.color.set('#ffa56e');
+      o.intensity = 1.45;
+      o.position.copy(new THREE.Vector3(-0.85, 0.34, 0.25).normalize().multiplyScalar(30));
     } else if (o.isDirectionalLight) {
-      o.color.set('#d6e0ff');
-      o.intensity = 0.5;
+      o.color.set('#b4c2ee');
+      o.intensity = 0.4;
     }
   });
 }
