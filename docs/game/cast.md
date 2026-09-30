@@ -95,7 +95,7 @@ The id `kuroda` is Mr. Hamada. The id is older than the name and stays so the vo
 
 ### Kuro (`kuro`)
 
-- The receptionist in the head office lobby. Her name is written 玖路 and reads like 黒, black. Polite Japanese.
+- The receptionist in the head office lobby, behind the reception counter by the door (moved there from the station's visitor counter; Jørgen, 2026-09-30: "Then kuro should be there rather than at security"). Her name is written 玖路 and reads like 黒, black. Polite Japanese.
 - Look: approved portrait art/approved/kuro/kuro-after.webp. Clear-lensed glasses, never tinted.
 
 ### Aoi (`aoi`)

@@ -510,7 +510,7 @@ export function attachLift(game, place) {
   hookDoors(game);
   const car = buildCar(site);
   place.space.add(car.g);
-  // the place's own stand-in car behind the doors goes (the world agent is asked to remove it; until then, hide it)
+  // the place's own stand-in car behind the doors is hidden
   place.space.traverse((o) => {
     if (!o.isGroup || o === car.g) return;
     const p = o.getWorldPosition(new THREE.Vector3());
@@ -535,7 +535,7 @@ export function attachLift(game, place) {
   for (const r of Object.values(place.people || {})) r && r.root && r.root.traverse((o) => people.add(o));
   place.space.updateMatrixWorld(true);
   place.space.traverse((o) => {
-    if (!o.isMesh || people.has(o)) return;
+    if (!o.isMesh || people.has(o) || o.userData.liftKeep) return;
     let q = o;
     while (q) {
       if (q === car.g) return;

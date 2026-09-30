@@ -1,7 +1,15 @@
 // The short walk from station security into the separate head-office building; after work, the way home starts here.
 export default {
+  speakers: {
+    kuro: { name: 'Receptionist' },
+  },
   start: 'outside',
   on: {
+    // Kuro at the lobby reception (moved from the station's visitor counter; her lines are still the station ones,
+    // a rewrite for the lobby is asked of Codex in collab/to-codex.md)
+    'talk:kuro': 'kuro',
+    'say:ohayo:kuro': 'ohayo_kuro',
+    'say:yoroshiku:kuro': 'yoroshiku_kuro',
     'talk:office_entrance': { if: '!going_home', node: 'head_office' },
     'talk:lift': { if: '!going_home', node: 'to_b2' },
     'zone:lift_front': { if: '!going_home', node: 'to_b2', once: true },
@@ -10,6 +18,7 @@ export default {
   },
   show: { office_entrance: '!going_home', lift: '!going_home' },
   goal: { lift: '!going_home', plaza_lane: 'going_home' },
+  labels: { kuro: 'Receptionist' },
   nodes: {
     outside: [
       { if: 'going_home', then: [{ do: 'goal', text: 'Head home: walk east along the lane to the dorms.' }],
@@ -18,5 +27,18 @@ export default {
     head_office: [{ do: 'goal', text: 'Take the lift inside head office down to B2.' }],
     to_b2: [{ do: 'next' }],
     to_plaza: [{ do: 'trip', to: 'plaza' }],
+    kuro: [
+      { say: 'kuro', overheard: true, emo: 'polite', text: 'いらっしゃいませ。ご用件は？' },
+      { do: 'gesture', who: 'kuro', kind: 'point' },
+      { do: 'face', who: 'kuro', to: 'lift' },
+    ],
+    ohayo_kuro: [
+      { say: 'kuro', overheard: true, emo: 'polite', text: '…{ohayo}。' },
+      { do: 'bow', who: 'kuro' },
+    ],
+    yoroshiku_kuro: [
+      { say: 'kuro', overheard: true, emo: 'puzzled', text: 'はい…？{yoroshiku}…' },
+      { do: 'emote', who: 'kuro', kind: '?' },
+    ],
   },
 };

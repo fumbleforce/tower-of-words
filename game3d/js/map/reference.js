@@ -7,8 +7,8 @@ import { REF, fromImage, toImage, toIsland, CHUNKS } from '../scenes/island-layo
 // a chunk is pinned, so they read 0; the rest are the gaps.
 export const LANDMARKS = [
   { id: 'station', label: 'Station', chunk: 'gate', at: [0, 0], ref: [417, 571], anchor: true },
-  { id: 'ho_door', label: 'Head office door', chunk: 'forecourt', at: [1.6, -1.3], ref: [505, 571] },
-  { id: 'tower', label: 'Head office tower', chunk: 'forecourt', at: [1.6, -7.4], ref: [545, 544] },
+  { id: 'ho_door', label: 'Head office door', chunk: 'forecourt', at: [15.34, 2.65], ref: [505, 571] },
+  { id: 'tower', label: 'Head office tower', chunk: 'forecourt', at: [20.89, 0.38], ref: [545, 544] },
   { id: 'shed', label: 'Platform roof', chunk: 'forecourt', at: [-5.9, -2.5], ref: [392, 522] },
   { id: 'fountain', label: 'Fountain', chunk: 'plaza', at: [0, -2.7], ref: [715, 612], anchor: true },
   { id: 'canteen', label: 'Canteen', chunk: 'plaza', at: [0, -8.7], ref: [736, 534] },

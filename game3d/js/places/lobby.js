@@ -46,7 +46,6 @@ export async function lobbyPlace(game) {
     guard: w.guard,
     kuroda: w.man,
     aoi: w.aoi,
-    kuro: w.kuro,
     rei,
     tama: { root: w.tama, head: w.tama.userData.head },
   };
@@ -186,7 +185,6 @@ export async function lobbyPlace(game) {
       face: () => [w.aoi.root.position.x, w.aoi.root.position.z],
       enabled: () => w.aoi.root.visible && !w.aoi._walk,
     },
-    kuro: { ...PLACE_DETAILS.gate.things.kuro, anchor: rigAnchor(w.kuro), ...at(-4.2, 1.4, -4.2, 0.18) },
     tama: {
       ...PLACE_DETAILS.gate.things.tama,
       anchor: v3(3.45, 0.55, BZ + 0.42),

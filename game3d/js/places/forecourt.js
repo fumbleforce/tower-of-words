@@ -8,6 +8,7 @@ import { eveningLight, EVENING_GRADE } from '../scenes/town.js';
 import { relightLift } from './lift.js';
 import { PLACE_DETAILS } from './catalog.js';
 import { snapshotPeople, restorePeople } from './saved-people.js';
+import { idle } from '../cast.js';
 
 export function forecourtPlace(game) {
   const w = buildForecourt();
@@ -38,6 +39,16 @@ export function forecourtPlace(game) {
       anchor: (v) => v.set(w.liftSite.x, 1.6, w.liftSite.zFront),
       spot: () => w.liftOut,
       face: () => [w.liftSite.x, w.liftSite.zBack],
+    },
+    kuro: {
+      ...PLACE_DETAILS.forecourt.things.kuro,
+      anchor: (v) => {
+        w.kuro.root.getWorldPosition(v);
+        v.y += 1.25;
+        return v;
+      },
+      spot: () => w.headOffice.receptionFront,
+      face: () => w.headOffice.kuroAt,
     },
     plaza_lane: {
       ...PLACE_DETAILS.forecourt.things.plaza_lane,
@@ -73,7 +84,7 @@ export function forecourtPlace(game) {
     things,
     spots,
     seats: {},
-    people: {},
+    people: { kuro: w.kuro },
     zones: {
       lift_front: (x, z) => Math.hypot(x - w.liftOut[0], z - w.liftOut[1]) < 0.42,
       plaza_lane: (x, z) => x > w.plazaLane[0] - 0.1 && Math.abs(z - w.plazaLane[1]) < 0.9,
@@ -85,18 +96,19 @@ export function forecourtPlace(game) {
     liftSite: w.liftSite,
     liftLanding: w.liftLanding,
     fit(aspect) {
-      // desktop: the whole short crossing, station door to lift, in one still frame; phone: follow him
+      // desktop: the station door and the head office door in one frame, then along east into the lobby; phone:
+      // follow him (the camera leans toward the goal, so the tower comes into view on the way)
       if (aspect >= 1)
         cam.fit(
           aspect,
           [
             new THREE.Vector3(-4.7, 0, 0),
             new THREE.Vector3(5.6, 0, 0),
-            new THREE.Vector3(w.liftSite.x, 3.2, w.towerZ),
+            new THREE.Vector3(0.45, 3.2, -5.6),
             new THREE.Vector3(w.doorX, 0, w.stationExit[1] - 0.2),
           ],
-          new THREE.Vector3(0.45, 0, -0.6),
-          { follow: true, clamp: [0.2, 1.8, -0.6, 0.0], limY: 0.96 },
+          new THREE.Vector3(6.4, 0, -0.6),
+          { follow: true, clamp: [6.4, 17.2, -1.2, 0.0], limY: 0.96 },
         );
       else
         cam.fit(
@@ -108,7 +120,7 @@ export function forecourtPlace(game) {
             new THREE.Vector3(0, 1.2, 2.4),
           ],
           new THREE.Vector3(0, 0, 0),
-          { follow: true, clamp: [-1.0, 4.4, -1.9, 0.6], lead: -1.6 },
+          { follow: true, clamp: [-1.0, 18.6, -2.6, 0.9], lead: -1.6 },
         );
     },
     pick(rc) {
@@ -117,13 +129,18 @@ export function forecourtPlace(game) {
     },
     update(dt, t) {
       w.update(t, dt);
-      // heading east toward the lane: build the plaza now, so the walk there needs no loading pause
-      if (game.player.root.position.x > 2.5 && !game.prepared.plaza) game.prepare?.('plaza');
+      w.headOffice.update(game.player.root.position, dt);
+      idle(w.kuro, t);
+      // heading for the lane (not for head office): build the plaza now, so the walk there needs no loading pause
+      const e = game.player.root.position;
+      if (e.x > 2.5 && e.x < 10 && e.z < 0.9 && !game.prepared.plaza) game.prepare?.('plaza');
     },
     onPeriod(period) {
       if (period !== 'evening' || P.grade === EVENING_GRADE) return;
       relightLift(P);
       eveningLight(w.scene);
+      w.headOffice.onPeriod(period);
+      w.sky?.onPeriod(period);
       P.grade = EVENING_GRADE;
     },
     snapshotState() {
