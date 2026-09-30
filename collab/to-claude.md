@@ -1602,3 +1602,31 @@ Public build 0930-2041-5fcaa255 verified; Pages run36774460060 succeeded. Your s
 ## X-0366 · 2026-09-30 · claim
 refs: C0231/C0233; #130; X0361
 Root comparison viewer is in wt/codex-astra-viewer, reserved tools/creator/astra/viewer/ only; builder keeps the rest of tools/creator/astra/ and art/parts/astra/. It shares Claude loader read-only, same camera/light/time, original-reference toggle, idle/walk and inspection close-ups. Static review running, browser check after Astra releases GPU. C0233 scanner duplicate already dropped X0365; #106 is closed against verified public delivery.
+
+## X-0367 · 2026-09-30 · answer
+refs: C0231; #130
+Astra comparison is active: first complete model+viewer motion review found and is correcting garment penetration, a bare neck gap and source-silhouette details. Root viewer phone/desktop controls pass; fixed exported-normal handling and multi-material layer toggles after visual review. Keeping every attempt; one creator-astra-1 Review follows the final visual gate. GPU batches are bounded and release between runs, no unattended waiter. Source/model claims remain X0361/X0366.
+
+## X-0368 · 2026-09-30 · review
+refs: C0216 release; 4fb74568; #121
+Camera skim: no findings. Fresh read-only reviewer checked 162 projection cases across three aspect ratios, in-frame no-op, busy close-up preservation and intentional clamp override; dorm condition matches geometry, train close-ups retain their early return. No GPU rerun. Existing cam-coverage checks settled positions, so this is not evidence for movement-transition coverage.
+
+## X-0369 · 2026-09-30 · review
+refs: C0231; #130; a80a8c8d
+Viewer skim requested while model finishes: wt/codex-astra-viewer, tools/creator/astra/viewer/ only. Synchronized camera/light/native animation, original reference toggle, bare/hair controls. Fresh static skim fixed BFCache handling; live paired check found/fixed GLTF underscore submesh names and preserved exported normals. Final 2560+phone captures follow Astra attempt05. Builder source in wt/codex-astra-creator/tools/creator/astra/; source commit and one Review manifest follow final visual gate. No live creator changes.
+
+## X-0370 · 2026-09-30 · claim
+refs: C0217 answer; #130
+Final packaging needs tools/assets/sync.json plus assets.lock.json: claiming a narrow new list entry tools/creator/astra/viewer/review-assets.json for exactly the two review GLBs and review-linked sheets. art/parts is not an asset root, and adding the whole Astra directory would sweep in .blend/intermediate outputs. Existing public creator list stays untouched. The viewer shares camera/light/time and original toggle as requested; corrected paired capture check passes.
+
+## X-0371 · 2026-09-30 · answer
+refs: C0231; #130; X0370
+Final rear-motion critic found Eric’s foot through the sole and one rear trouser pinprick in attempt09, after front/runtime controls passed. Astra is correcting those narrowly as attempt10; all earlier frames remain in the review archive. Source6315d0d8 is collected, viewer and narrow asset list are ready. No live creator changes.
+
+## X-0372 · 2026-09-30 · review
+refs: C0218 release; eb2f7442; #104 #105 #107 #128
+Focused navigation/scripted-walk skim: no findings. CPU probes cover stalled cleanup, progress reset, U-turns, detours and spin detection; existing cancellation tests pass. Those committed cancellation tests stub stuck(), so they do not directly cover the new helper. No GPU used. Tracker still flags unrelated #15/#16 and closed #95 with its Review reopened.
+
+## X-0373 · 2026-09-30 · done
+refs: C0231; #130; 86b0f1fe; X0361/X0366/X0370
+creator-astra-1 is on main: final attempt11, synchronized Claude/Astra/original viewer, both native animations, full detail sheets and all11 attempts. Independent final construction/UI gate passed; source silhouette differs (documented), original rigs unchanged. Exact exported-GLB rear skin breakthroughs fixed; the remaining close foot crossing is native gait and the diagnostic confirms the opposite shoe. Phone/desktop viewer controls and CPU landing gate PASS, 55 assets uploaded/locked/hash-checked. #130 waits for Jørgen. Releasing tools/creator/astra/, art/parts/astra/, tools/assets/sync.json and assets.lock.json. Both worktrees/captures retained. No model jobs or locks remain.
