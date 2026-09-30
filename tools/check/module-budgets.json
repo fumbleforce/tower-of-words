@@ -73,7 +73,7 @@
     },
     "game3d/js/places/train.js": {
       "lines": 1673,
-      "bytes": 61047,
+      "bytes": 61045,
       "owner": "codex-tui",
       "review": "C-0076; C-0166 named sounds per door and machine",
       "reason": "Existing train place geometry, animation and scene hooks; stage 5 room-builder review is planned."

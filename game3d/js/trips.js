@@ -26,10 +26,24 @@ function fadeGone(game) {
   });
 }
 
+// an arriving move that ends by pulling the camera back out (the security room's walk-in) finishes that pull before
+// the first line, so the speaker is in the shot when he speaks (1x check, work #9)
+function camSettled(game, place) {
+  return new Promise((res) => {
+    const t0 = performance.now();
+    const tick = () => {
+      if (!place.cam?.releasing || performance.now() - t0 > 2500) res();
+      else setTimeout(tick, 60);
+    };
+    tick();
+  });
+}
+
 export async function arrive(game, place, slot) {
   const tripIn = place.tripInFrom?.[game.transition?.from] || place.tripIn;
   if (tripIn) await tripIn(game, slot);
   await fadeGone(game);
+  await camSettled(game, place);
   if (slot.arrive && slot.arrive.length) {
     game.busy = true;
     await game.runner.steps(slot.arrive);
