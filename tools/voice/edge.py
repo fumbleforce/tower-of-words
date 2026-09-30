@@ -21,6 +21,8 @@ async def main():
             tmp = f'{tmpd}/{f["key"]}.mp3'
             await edge_tts.Communicate(f['text'], v, rate=rate, pitch=pitch).save(tmp)
             lu = LUFS.get(f['speaker'], LUFS_DEFAULT)
+            if os.path.islink(f'{AUD}/{f["key"]}.mp3'):  # a worktree's link to the main checkout's file: never write through it
+                os.remove(f'{AUD}/{f["key"]}.mp3')
             subprocess.run(['ffmpeg', '-v', 'error', '-y', '-i', tmp, '-af', f'silenceremove=start_periods=1:start_threshold=-45dB,loudnorm=I={lu}:TP=-1.5',
                             '-ac', '1', '-ar', '24000', '-c:a', 'libmp3lame', '-b:a', '48k', f'{AUD}/{f["key"]}.mp3'], check=True)
             done[f['key']] = {'text': f['text'], 'voice': v}

@@ -1,12 +1,15 @@
 """Clone takes with Qwen3-TTS 1.7B Base, batched per speaker and language: <work>/raw/<key>/<tag><seed>.wav + .json.
-Usage: gen_takes.py <seeds, comma separated> [keys, comma separated] [--lang Auto] [--alt]
+Japanese is always read in Japanese, Eric's too; an English line with Japanese in it gets one take per part
+(<work>/raw/<key>~<n>/, cfg.units()), which export.py joins (splice.py).
+Usage: gen_takes.py <seeds, comma separated> [keys, comma separated] [--lang Auto] [--alt] [--xvec]
   no keys: every manifest line with no exported clip for its current text (cfg.missing())
-  --alt: read the text in alt_text.json instead (take tag 'a'); --lang: force the TTS language (tag 'u'); TAG=x sets the tag
+  --alt: read the text in alt_text.json instead (take tag 'a'); --lang: force the TTS language (tag 'u');
+  --xvec: clone the timbre only, not the reference's way of speaking (tag 'x', also Eric's Japanese); TAG=x sets the tag
 Takes already on disk are skipped. Checks the GPU lock (cfg.LOCK, owner cfg.ME) before every batch and stops if it is gone.
 Run with the Qwen venv: ~/ai/tts/qwen/venv/bin/python (run.sh does)."""
 import json, os, sys, time
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from cfg import RAW, ALT, load, manifest, missing, speakers, lock_ok, spoken
+from cfg import RAW, ALT, XVEC_JA, load, units, missing, speakers, lock_ok, spoken
 
 QWEN = os.environ.get('QWEN_MODEL', os.path.expanduser('~/ai/tts/qwen/Qwen3-TTS-12Hz-1.7B-Base'))
 seeds = [int(x) for x in sys.argv[1].split(',')]
@@ -14,15 +17,29 @@ arg = sys.argv[2] if len(sys.argv) > 2 and not sys.argv[2].startswith('--') else
 keys = set(arg.split(',')) if arg else set(missing())
 use_alt = '--alt' in sys.argv
 lang_over = sys.argv[sys.argv.index('--lang') + 1] if '--lang' in sys.argv else None
-tag = os.environ.get('TAG', 'a' if use_alt else ('u' if lang_over else 's'))
+use_xvec = '--xvec' in sys.argv
+TAG = os.environ.get('TAG', 'a' if use_alt else ('u' if lang_over else None))
+
+
+def xvec(sp, lang):
+    """Clone the timbre only (the speaker embedding), not the reference's way of speaking: with --xvec, and always for
+    Japanese from a clone whose reference speaks English (cfg.XVEC_JA: Eric), which otherwise reads it with an English
+    accent ("tomato" for 止まって)."""
+    return use_xvec or (lang == 'Japanese' and sp in XVEC_JA)
+
+
+def tag(sp, lang):
+    return TAG or ('x' if xvec(sp, lang) else 's')
+
+
 alt = load(ALT, {})
 SP = speakers()
 BS = int(os.environ.get('BS', 4))
 todo = {}
-for e in manifest():
-    if e['key'] not in keys or (use_alt and e['key'] not in alt):
+for e in units(keys):
+    if use_alt and (e['key'] not in alt or e.get('part')):
         continue
-    lang = lang_over or ('English' if e['lang'] == 'en' or e['speaker'] == 'eric' else 'Japanese')
+    lang = lang_over or ('English' if e['lang'] == 'en' else 'Japanese')
     todo.setdefault((e['speaker'], lang), []).append(e)
 print('lines', sum(len(v) for v in todo.values()), flush=True)
 if not todo:
@@ -37,7 +54,7 @@ m = Qwen3TTSModel.from_pretrained(QWEN, device_map='cuda:0', dtype=torch.bfloat1
 for (sp, lang), es in todo.items():
     ref, ref_text, label = SP[sp]
     for seed in seeds:
-        tk = f'{tag}{seed}'
+        tk = f'{tag(sp, lang)}{seed}'
         need = [e for e in es if not os.path.exists(f'{RAW}/{e["key"]}/{tk}.wav')]
         for i in range(0, len(need), BS):
             b = need[i:i + BS]
@@ -47,7 +64,7 @@ for (sp, lang), es in todo.items():
             torch.manual_seed(seed)
             t = time.time()
             wavs, sr = m.generate_voice_clone(text=texts, language=[lang] * len(b), ref_audio=[ref] * len(b), ref_text=[ref_text] * len(b),
-                                              max_new_tokens=int(12 * (4 + max(len(x) for x in texts) * (0.25 if lang == 'Japanese' else 0.1))))
+                                              x_vector_only_mode=xvec(sp, lang), max_new_tokens=int(12 * (4 + max(len(x) for x in texts) * (0.25 if lang == 'Japanese' else 0.1))))
             for e, w, text in zip(b, wavs, texts):
                 d = f'{RAW}/{e["key"]}'
                 os.makedirs(d, exist_ok=True)
