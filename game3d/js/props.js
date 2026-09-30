@@ -1,7 +1,7 @@
 // Props and room parts for the lobby and the office, built the same way as the train car: one matte
 // material per colour, rounded boxes and a few convex hulls, no textures (signs and posters aside).
 import * as THREE from 'three';
-import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.js';
+import { roundedBox } from './perf/rounded-box.js';
 import { hull, icoPoints } from './train/hull.js';
 import { V } from './train/kit.js';
 import { screenMat, Screens } from './places/life.js';
@@ -72,7 +72,7 @@ export function sh(m, cast = true, recv = true) {
 // rounded box sitting on y0 (bottom), centred on x/z
 export function rbox(w, h, d, color, { x = 0, y = 0, z = 0, r = 0.03, seg = 2, m, cast = true, recv = true } = {}) {
   const mesh = new THREE.Mesh(
-    new RoundedBoxGeometry(w, h, d, seg, Math.min(r, w / 2 - 0.001, h / 2 - 0.001, d / 2 - 0.001)),
+    roundedBox(w, h, d, seg, Math.min(r, w / 2 - 0.001, h / 2 - 0.001, d / 2 - 0.001)),
     m || mat(color),
   );
   mesh.position.set(x, y + h / 2, z);

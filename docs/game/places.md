@@ -155,7 +155,7 @@ The gate stays in this room, as Jørgen picked in [gate-location](../../reviews/
 
 ### Who's there when
 
-The lobby is played in the early morning, before nine.
+The security room is played in the early morning, before nine.
 
 | Id | Usually | Schedule |
 |---|---|---|

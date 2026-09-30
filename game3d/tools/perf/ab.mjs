@@ -5,7 +5,7 @@
 //   - pixel diffs of the play camera, off and on, at the start and again after some play (game paused for the
 //     shot, so nothing moves between the two)
 // places/lifecycle.js is served with the one-line hook (notes/production-requests.md) so the pass runs where it will in the
-// build: right after the place is built. --nohook serves places/lifecycle.js as it is and calls the pass after load instead.
+// build: right after the look. --nohook serves places/lifecycle.js as it is and calls the pass after load instead.
 //   node game3d/tools/perf/ab.mjs [train,gate,office] [--q 1] [--secs 6] [--play 12] [--cpu 4] [--out dir] [--test]
 // Take /tmp/claude-1000/browser.lock first (sh game3d/tools/with-browser-lock.sh perf node ...). GL=gpu renders on
 // the GPU (GPU lock too). Writes <out>/<place>-{off,on,diff}-<n>.png and <out>/ab.json.
@@ -25,15 +25,18 @@ fs.mkdirSync(OUT, { recursive: true });
 const HOOK = !flag('nohook');
 const extra = arg('extra', '');
 const GPU = process.env.GL === 'gpu';
+const BASE = process.env.BASE || 'game3d'; // a worktree's game3d, as the review server sees it
 const gl = GPU ? ['--use-angle=vulkan', '--enable-features=Vulkan', '--ignore-gpu-blocklist', '--enable-gpu', '--disable-gpu-vsync', '--disable-frame-rate-limit'] : ['--use-angle=swiftshader', '--enable-unsafe-swiftshader'];
 const b = await chromium.launch({ headless: true, args: [...gl, '--autoplay-policy=no-user-gesture-required'] });
 
 // the hook as requested of the builder: after `place.name = name;` in prepare()
-const HOOK_LINE = "place.name = name; (await import('../perf/batch.js')).optimizePlace(place, { game });";
+// right after the look, where the lifecycle runs the pass for the places in BATCHED (a no-op for those)
+const HOOK_AT = 'await sliced(lookSteps(place, game));';
+const HOOK_LINE = HOOK_AT + " (await import('../perf/batch.js')).optimizePlace(place, { game });";
 async function withHook(route) {
   const r = await route.fetch(); let body = await r.text();
-  if (!body.includes('place.name = name;')) throw new Error('hook point not found in places/lifecycle.js');
-  body = body.replace('place.name = name;', HOOK_LINE);
+  if (!body.includes(HOOK_AT)) throw new Error('hook point not found in places/lifecycle.js');
+  body = body.replace(HOOK_AT, HOOK_LINE);
   await route.fulfill({ response: r, body });
 }
 
@@ -67,10 +70,10 @@ for (const place of places) {
   const errs = []; p.on('pageerror', (e) => errs.push(e.message)); p.on('console', (m) => { if (/perf batch/.test(m.text()) || m.type() === 'error' && !/404/.test(m.text())) errs.push(m.text()); });
   const cdp = await ctx.newCDPSession(p);
   const t0 = Date.now();
-  await p.goto(`http://127.0.0.1:8771/game3d/index.html?q=${QUAL}&place=${place}&skip${flag('test') ? '&test=fast' : ''}${extra}`);
+  await p.goto(`http://127.0.0.1:8771/${BASE}/index.html?q=${QUAL}&place=${place}&skip${flag('test') ? '&test=fast' : ''}${extra}`);
   await p.waitForFunction(() => window.__game && window.__game.place && window.__done, null, { timeout: 180000 });
   const loadMs = Date.now() - t0;
-  if (!HOOK) await p.evaluate(async () => { const m = await import('/game3d/js/perf/batch.js'); m.optimizePlace(window.__game.place, { game: window.__game }); });
+  if (!HOOK) await p.evaluate(async (base) => { const m = await import(`/${base}/js/perf/batch.js`); m.optimizePlace(window.__game.place, { game: window.__game }); }, BASE);
   await p.waitForTimeout(3000);
   const frame = () => p.evaluate(() => new Promise((ok) => requestAnimationFrame(() => requestAnimationFrame(() => requestAnimationFrame(ok)))));
   const count = () => p.evaluate(async () => {

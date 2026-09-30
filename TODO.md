@@ -6,12 +6,12 @@ Read GUIDE.md first, then notes/PRODUCTION.md. The game is game3d/ (day 1: train
 Read [creator-next](notes/creator-next.md) for Codex’s current creator work and `python3 tools/review.py list` for current decisions. [HANDOFF](notes/HANDOFF.md) records the morning state; its pending reviews and tooling status predate the work listed below. New assignments and ownership are in collab/PROTOCOL.md and the team inboxes.
 
 ## Bugs
-- Creator idle: the reported leftward twist has candidate fixes; the latest relaxed-arm/breathing comparison is [creator-idle-neutral-3](reviews/creator-idle-neutral-3/review.json). Integration awaits that pick. Current state and remaining acceptance work: [creator-next](notes/creator-next.md).
+- Creator idle: the reported leftward twist has candidate fixes; the latest relaxed-arm/breathing comparison is [creator-idle-neutral-3](reviews/creator-idle-neutral-3/review.json). Jørgen picked relaxed-3 ("looks good"); integration is next. Current state and remaining acceptance work: [creator-next](notes/creator-next.md).
 
 ## Open (2026-09-29, evening)
 - Eric portrait framing: at 2560x1440 the straight cut on his right shoulder shows at the image edge, and on phone his image runs past the right screen edge. Re-cut on a wider canvas (art round).
-- Waiting on Jørgen in Review: creator-base-4, creator-idle-neutral-3, day1-simplify, island-map-2, island-places and office-perf. Use `python3 tools/review.py show <id>` for current answers.
-- After the layout pick: apartment-building interior candidates for Eric’s dorm (C-0091). After the day1-simplify picks: apply selected story edits, then hand changed voice lines to Claude’s voice pipeline.
+- Waiting on Jørgen in Review: creator-base-4 and day1-frames. Decided since: creator-idle-neutral-3 (relaxed-3), day1-simplify (train edits applied in d64b4b4, the rest moved to day1-frames), island-places, office-perf, and island-map-4 over island-map-2 (map upgrade, notes/map-upgrade-plan.md). Use `python3 tools/review.py show <id>` for current answers.
+- After the layout pick: apartment-building interior candidates for Eric’s dorm (C-0091). After the day1-frames picks: apply selected story edits, then hand changed voice lines to Claude’s voice pipeline.
 - Deferred by choice: advanced commit hooks (review receipts, HEAD boot check, gitleaks). Rejected: nightly QA, stuck-point telemetry.
 
 Done today, for the record (git log has details): interaction pins back, outline skips shadows, selection ring removed, pins tappable, full-height train doors, two-step lunchbox scene, clicks blocked during Eric's word, Eric's face box, voice pipeline in tools/voice + gaijin clip, GPU slots for tests, refactor stages 0-5, Continue fix, facts docs, GUIDE diet, agent types and skills, feedback log hooks, worktrees/land, performance overlay (`52144e9`), local in-game feedback (`4c87ff9`), portrait image QA (`5143d35`), day-1 simplification proposal with cold-reader corrections (`519c4c9`), and island-map-2 candidates (`e93d901`).
