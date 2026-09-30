@@ -15,8 +15,9 @@ export async function walkOut(g, cam, lane, edge) {
   g.player.setState('idle');
 }
 
-// arriving: he starts at the edge, facing in, and walks onto the lane; then the camera lets go
-export async function walkIn(g, cam, edge, lane, facing) {
+// arriving: he starts at the edge, facing in, and walks onto the lane; then the camera lets go (unless the place
+// walks him on further first: release false)
+export async function walkIn(g, cam, edge, lane, facing, { release = true } = {}) {
   const eric = g.player;
   eric.scripted = true;
   eric.root.position.set(edge[0], 0, edge[1]);
@@ -24,6 +25,7 @@ export async function walkIn(g, cam, edge, lane, facing) {
   cam.closeOn(edge, ZOOM);
   cam.snap(eric.root.position);
   await glide(g, eric.root, lane, 1.1);
+  if (!release) return;
   eric.setState('idle');
   eric.scripted = false;
   g.walker.sync();

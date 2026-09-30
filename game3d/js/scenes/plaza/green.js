@@ -10,9 +10,10 @@
 //   the lawns beyond: groups of mixed trees with shrubs on low mounds
 import * as THREE from 'three';
 import { rng } from '../outdoor/parts.js';
-import { kerb, lowWall, KERB } from '../outdoor/edges.js';
+import { lowWall, KERB } from '../outdoor/edges.js';
+import { verge } from '../outdoor/lane.js';
 import { arcBox } from '../outdoor/round.js';
-import { keyaki, sakura, maple, ginkgo, pine, cluster, hedge, grass, bed, mound, LEAF } from '../outdoor/planting.js';
+import { keyaki, sakura, maple, ginkgo, pine, cluster, grass, bed, mound, LEAF } from '../outdoor/planting.js';
 import * as P from './plan.js';
 
 const { F, R, BAND, ARCS, LANE, LINK, AVENUE, TERRACE, TERRACE_S, polar, rad } = P;
@@ -82,49 +83,6 @@ function ring(p) {
       if (k === 0 && Math.round(d) % 2) grass(p, x, z, { seed: Math.round(d), h: 0.45 });
       else cosmos(p, x, z, Math.round(d * 10 + k + q() * 5));
     }
-}
-
-// a verge along a straight lane edge from a to b ([x, z], axis-aligned), on `side` ('n', 's', 'e', 'w': away from
-// the lane): a kerb on the lane's edge, a bed of ground cover 1.1 deep with a low hedge at its back and a kerb
-// behind it, gaps in the kerb and hedge for bench bays ([from, to] along the edge), and the avenue's trees, each in
-// a ring of mulch, 2.1 from the edge at the given positions along it
-function verge(p, a, b, side, { bays = [], trees = [], seed = 1 } = {}) {
-  const alongX = Math.abs(b[0] - a[0]) > Math.abs(b[1] - a[1]);
-  const sgn = side === 's' || side === 'e' ? 1 : -1;
-  const at = (t, o) => (alongX ? [t, a[1] + sgn * o] : [a[0] + sgn * o, t]);
-  const [t0, t1] = alongX ? [Math.min(a[0], b[0]), Math.max(a[0], b[0])] : [Math.min(a[1], b[1]), Math.max(a[1], b[1])];
-  const line = (o) => [at(t0, o), at(t1, o)];
-  kerb(p, ...line(0), { off: sgn * 0.08, gaps: bays });
-  kerb(p, ...line(1.1), { off: -sgn * 0.08 });
-  const cuts = [t0, ...bays.flat(), t1];
-  for (let i = 0; i + 1 < cuts.length; i += 2) {
-    const [s0, s1] = [cuts[i], cuts[i + 1]];
-    if (s1 - s0 < 0.4) continue;
-    const [p0, p1] = [at(s0 + 0.1, 0.12), at(s1 - 0.1, 1.1 - 0.12)];
-    bed(p, [Math.min(p0[0], p1[0]), Math.max(p0[0], p1[0]), Math.min(p0[1], p1[1]), Math.max(p0[1], p1[1])], {
-      y: 0.06,
-    });
-    hedge(p, at(s0 + 0.15, 1.1 - 0.36), at(s1 - 0.15, 1.1 - 0.36), {
-      w: 0.4,
-      h: 0.42,
-      seed: seed + i,
-    });
-  }
-  for (const [s0, s1] of bays) {
-    const [p0, p1] = [at(s0, 0.9), at(s1, 1.1 - 0.12)];
-    bed(p, [Math.min(p0[0], p1[0]), Math.max(p0[0], p1[0]), Math.min(p0[1], p1[1]), Math.max(p0[1], p1[1])], {
-      y: 0.06,
-      cover: false,
-    });
-  }
-  trees.forEach((t, i) => {
-    const [x, z] = at(t, 2.1);
-    keyaki(p, x, z, 1.0 + ((i + seed) % 3) * 0.04, seed * 7 + i);
-    p.geo(LEAF.mulch, new THREE.CylinderGeometry(0.55, 0.6, 0.03, 12).translate(x, 0.0, z), {
-      cast: false,
-      surf: 'soil',
-    });
-  });
 }
 
 // both sides of both lanes, from the edge of the view in to just short of the ring bed, the same on each side

@@ -14,12 +14,13 @@ import * as P from './plan.js';
 
 const ROOF_Y = [2.12, 1.96]; // the roof's back (the wall side, east) and front (the court side) edges
 
-// the shelter: three posts on the wall side, a beam out from each to the front, frosted panels between, a fascia
+// the shelter: posts on the wall side (the last one past the return's corner), a beam out from each to the front,
+// frosted panels between, a fascia
 export function shelter(root, p, set, block) {
   const [x0, x1, z0, z1] = P.SHELTER;
   const xb = x1 - 0.08,
     xf = x0 + 0.02;
-  const posts = [z0 + 0.08, (z0 + z1) / 2, z1 - 0.08];
+  const posts = [z0 + 0.08, (2 * z0 + z1) / 3, (z0 + 2 * z1) / 3, z1 - 0.08];
   const run = xb - xf,
     fall = ROOF_Y[0] - ROOF_Y[1],
     tilt = Math.atan2(fall, run),
@@ -47,17 +48,17 @@ export function shelter(root, p, set, block) {
     panel.renderOrder = 2;
     root.add(panel);
   }
-  // the rack along the wall: six places, five bikes in them, noses out to the aisle
+  // the rack along the wall: six places, five bikes in them, noses out to the aisle, all well under the roof
   const n = 6,
-    step = 0.4,
-    rz = z1 - (z1 - z0 - step * (n - 1)) / 2;
+    [r0, r1] = P.RACK,
+    step = (r1 - r0) / (n - 1);
   const row = bikeRow(n, { step, gaps: [3], seed: 2 });
-  row.rotation.y = Math.PI / 2; // places run north from rz, the rack on the wall side
-  row.position.set(x1 - 0.75, 0, rz);
+  row.rotation.y = Math.PI / 2; // places run north from the rack's south end, the rack on the wall side
+  row.position.set(x1 - 0.75, 0, r1);
   root.add(row);
   // the painted bays on the brick, one line between each pair of places
   for (let i = 0; i <= n; i++)
-    p.box('#c3c5c1', 1.2, 0.004, 0.03, x1 - 0.7, 0.008, rz + step / 2 - i * step, { cast: false });
+    p.box('#c3c5c1', 1.2, 0.004, 0.03, x1 - 0.7, 0.008, r1 + step / 2 - i * step, { cast: false });
   // the lit strip under the roof, over the aisle side
   set.glowParts.push(
     new THREE.BoxGeometry(0.08, 0.04, z1 - z0 - 0.5).translate(xf + 0.35, ROOF_Y[1] - 0.03, (z0 + z1) / 2),

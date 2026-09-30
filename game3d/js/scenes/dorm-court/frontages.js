@@ -5,25 +5,32 @@ import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
 import { PAL, mat, rbox, sh, textTexture, plane, JP_FONT } from '../../props.js';
 import { lightPool } from '../../places/life.js';
 import { Parts } from '../outdoor/parts.js';
+import { flatRoof, tiledRoof } from './roofs.js';
 
 // boxes [w, h, d, x, y (bottom), z] of one colour into a Parts collector
 const put = (p, list, color) => list.forEach(([w, h, d, x, y, z]) => p.box(color, w, h, d, x, y, z));
 
 // the coin laundry: a one-storey lit shopfront west of the hall, washers seen through the glass; its west end is
 // blank wall, with the two drinks machines in front of it (dorm-court/fittings.js)
-export function laundry(root, nav, { x0, x1, z, west, roofMat }) {
+export function laundry(root, nav, { x0, x1, z, west, back }) {
   const p = new Parts();
   const wx0 = -3.85,
     wx1 = -2.15,
     wc = (wx0 + wx1) / 2,
     ww = wx1 - wx0;
   p.box('#a3a6a9', x1 - x0, 2.1, 0.8, (x0 + x1) / 2, 0, z - 0.4);
-  root.add(rbox(x1 - x0 + 0.1, 0.12, 2.4, null, { x: (x0 + x1) / 2, y: 2.1, z: z - 1.2, seg: 1, r: 0.01, m: roofMat }));
-  roofTop(p, x0, x1, z, [
-    [x0 + 1.0, z - 1.2],
-    [x0 + 1.85, z - 1.25],
-    [x1 - 1.1, z - 1.7],
-  ]);
+  // its flat roof back to the block, the parapet on the court side and the west end, the plant on it
+  flatRoof(p, [x0, x1 + 0.05, back, z + 0.05], 2.24, {
+    edges: 'sw',
+    units: [
+      [x0 + 1.0, z - 1.25],
+      [x0 + 1.85, z - 1.3],
+      [x1 - 1.1, z - 1.75],
+    ],
+    vents: [[x0 + 3.0, z - 1.0]],
+  });
+  // a shallow steel canopy over the shopfront, under the sign
+  p.box('#4a4f58', x1 - x0 - 0.5, 0.05, 0.42, (x0 + x1) / 2 + 0.55, 1.56, z + 0.21);
   // the lit room behind the window: a pale back wall, a row of washers under a row of dryers, round doors
   root.add(
     rbox(ww - 0.1, 1.3, 0.03, null, {
@@ -88,38 +95,28 @@ export function laundry(root, nav, { x0, x1, z, west, roofMat }) {
   p.build(root);
 }
 
-// a flat roof's clean edge (a pale coping on its front) and the air-conditioner units standing on it, each with its
-// fan grille facing the court
-function roofTop(p, x0, x1, z, units, y = 2.22) {
-  p.box('#9a9fa6', x1 - x0 + 0.12, 0.1, 0.14, (x0 + x1) / 2, y - 0.08, z - 0.03);
-  put(
-    p,
-    units.map(([x, uz]) => [0.72, 0.52, 0.32, x, y, uz]),
-    '#c6c9c7',
-  );
-  put(
-    p,
-    units.map(([x, uz]) => [0.36, 0.36, 0.02, x - 0.12, y + 0.08, uz + 0.17]),
-    '#6f747b',
-  );
-}
-
-// the sento: a low front with a dark tiled eave, the navy ゆ noren over its door, and its chimney behind
-export function sento(root, nav, { east, roofMat }) {
+// the sento: a low front under a tiled gable roof, the navy ゆ noren over its door, and its chimney behind
+export function sento(root, nav, { east, back }) {
   const p = new Parts();
   const x0 = 2.9,
     x1 = east + 0.4,
     z = -1.5;
   p.box('#c9c6bf', x1 - x0, 1.9, 1.6, (x0 + x1) / 2, 0, z - 0.8);
-  // the eave: a shallow dark tiled slope along the front
-  const eave = rbox(x1 - x0 + 0.3, 0.12, 0.7, '#3d434c', { x: (x0 + x1) / 2, y: 1.9, z: z + 0.05, seg: 1, r: 0.02 });
-  eave.rotation.x = 0.35;
-  root.add(eave);
-  root.add(
-    rbox(x1 - x0 + 0.1, 0.12, 2.2, null, { x: (x0 + x1) / 2, y: 2.05, z: z - 1.4, seg: 1, r: 0.01, m: roofMat }),
-  );
-  p.box('#c6c9c7', 0.72, 0.52, 0.32, x0 + 0.9, 2.17, z - 1.6);
-  p.box('#6f747b', 0.36, 0.36, 0.02, x0 + 0.78, 2.25, z - 1.43);
+  // its roof: grey kawara on a gable, the ridge along the front, the eaves out over the posts; behind it the low
+  // flat roof of the boiler room, where the chimney stands
+  tiledRoof(p, {
+    x0: x0 - 0.2,
+    x1: x1 - 0.06,
+    zf: z + 0.4,
+    zb: z - 1.9,
+    eave: 1.92,
+    ridge: 2.6,
+    walls: [x0, x1 - 0.1],
+    wallZ: [z - 1.6, z],
+    wallTop: 1.9,
+  });
+  p.box('#c9c6bf', x1 - x0 - 0.3, 1.6, z - 1.6 - back, (x0 + x1) / 2 + 0.15, 0, (back + z - 1.6) / 2);
+  flatRoof(p, [x0 + 0.1, x1 - 0.05, back, z - 1.6], 1.72, { edges: 'nsw', units: [[x0 + 0.9, back + 0.35]] });
   // timber posts and lattice in a grey-blue stain, a lit doorway with the noren over it
   const dx = x0 + 0.95;
   put(

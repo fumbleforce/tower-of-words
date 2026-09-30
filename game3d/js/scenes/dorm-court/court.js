@@ -1,51 +1,63 @@
 // The dorm courtyard's ground and planting (scenes/dorm-court.js), built from its plan (dorm-court/plan.js) with the
-// outdoor kit (scenes/outdoor/): pale square pavers round one walk from the lane to the bike shelter (dark granite
+// outdoor kit (scenes/outdoor/): pale square pavers round one walk from the garden to the bike shelter (dark granite
 // in running bond with a pale soldier border), with legs up to the hall doors, between two kerbed beds, and to the
-// sento door; brick under the shelter; a raised bed with a low wall along the front, a cherry beside the bench,
-// shrubs and grasses of mixed heights; a bed of zelkovas and shrubs west of the laundry; the street pavement past
-// the front. Tall lamps on the walk's north side, bollard lights on the south. Blocks what can't be walked.
+// sento door, and the gate link down to the street on the door leg's axis; brick under the shelter. Round the court
+// on the west and south, raised beds with a low wall: the garden west of the laundry, and the front bed, opened only
+// for the gate. Past the front, the street: the lane home in the plaza's brick, with a verge and an avenue on its far
+// side. A tall lamp by the drinks machines and one where the walk ends in the garden; lanterns on the gate piers, a
+// stone lantern in the front bed, bollard lights along its wall. Blocks what can't be walked.
 import * as THREE from 'three';
-import { Parts } from '../outdoor/parts.js';
+import { Parts, pools } from '../outdoor/parts.js';
 import { paver, GRANITE } from '../outdoor/paving.js';
-import { kerbRect, wallRect } from '../outdoor/edges.js';
+import { kerb, kerbRect, lowWall, wallRect } from '../outdoor/edges.js';
+import { laneField, verge } from '../outdoor/lane.js';
 import { keyaki, sakura, maple, cluster, hedge, grass, bed, mound, LEAF } from '../outdoor/planting.js';
 import { lamps, bench, bins } from '../outdoor/furniture.js';
 import { monument } from '../forecourt/details.js';
 import * as P from './plan.js';
 
-const { WALK, DOOR_LEG, BW, LAUNDRY, SENTO, RETURN_X, RETURN_Z, SHELTER, SOUTH_BED: SB, STREET, WEST_BED: WB } = P;
+const { WALK, DOOR_LEG, LINK, GATE, BW, LAUNDRY, SENTO, RETURN_X, RETURN_Z, SHELTER, SOUTH_BED: SB, STREET } = P;
 const [W0, W1, WZ0, WZ1] = WALK;
 const [L0, L1] = DOOR_LEG;
 const [S0, S1] = P.SENTO_LEG;
+const BED_Y = 0.33; // the raised beds' soil, just under their walls' coping
+const STRAW = '#aaa983'; // the grasses in October, pale enough to read at dusk
+const PALE_LEAF = '#6f8a62';
+const MOSS = '#586f4b'; // moss under the groups on the gravel // a lighter evergreen (pieris, a variegated box) among the darker ones
 
 function paving(root) {
   const pv = paver();
-  // the walk: dark granite, courses along it, the door leg's courses turned toward the doors
+  // the walk: dark granite, courses along it; the legs' and the link's courses turned along them
   const dark = { tones: GRANITE.dark, vary: 0.07, origin: [P.DOOR_X, P.AZ], module: [0.6, 0.3] };
-  pv.field([W0, W1 - BW, WZ0 + BW, WZ1 - BW], { ...dark, pattern: 'bond' });
+  pv.field([W0 + BW, W1 - BW, WZ0 + BW, WZ1 - BW], { ...dark, pattern: 'bond' });
   pv.field([L0 + BW, L1 - BW, DOOR_LEG[2], WZ0 + BW], { ...dark, pattern: 'bondZ', seed: 3 });
   pv.field([S0 + BW, S1 - BW, P.SENTO_LEG[2], WZ0 + BW], { ...dark, pattern: 'bondZ', seed: 4 });
-  // its border, round the outline; open at the two doors, at the shelter and where the lane comes in off the frame
+  pv.field([L0 + BW, L1 - BW, WZ1 - BW, LINK[3]], { ...dark, pattern: 'bondZ', seed: 6 });
+  // its border, round the outline; open at the two doors, at the gate and at the shelter
   const e = { module: [0.15, BW], tones: GRANITE.edge, vary: 0.04, seed: 5, h: 0.008 };
   const eZ = { ...e, module: [BW, 0.15] };
   pv.field([W0, L0 + BW, WZ0, WZ0 + BW], e); // north side, up to the door leg
   pv.field([L1 - BW, S0 + BW, WZ0, WZ0 + BW], e); // on between the legs
-  for (const [x0, x1, top] of [
-    [L0, L1, DOOR_LEG[2]],
-    [S0, S1, P.SENTO_LEG[2]],
+  for (const [x0, x1, z0, z1] of [
+    [L0, L1, DOOR_LEG[2], WZ0],
+    [S0, S1, P.SENTO_LEG[2], WZ0],
+    [L0, L1, WZ1, LINK[3]],
   ]) {
-    pv.field([x0, x0 + BW, top, WZ0], eZ); // each leg's sides
-    pv.field([x1 - BW, x1, top, WZ0], eZ);
+    pv.field([x0, x0 + BW, z0, z1], eZ); // the legs' and the link's sides
+    pv.field([x1 - BW, x1, z0, z1], eZ);
   }
-  pv.field([W0, W1, WZ1 - BW, WZ1], e); // south side
-  // the aprons: pale square pavers from the fronts to the walk and on to the south bed
+  pv.field([W0, W0 + BW, WZ0 + BW, WZ1 - BW], eZ); // across the walk's west end, at the garden
+  pv.field([W0, L0 + BW, WZ1 - BW, WZ1], e); // south side, either side of the link
+  pv.field([L1 - BW, W1, WZ1 - BW, WZ1], e);
+  // the aprons: pale square pavers from the fronts to the walk and on to the front bed
   const pale = { pattern: 'grid', module: [0.6, 0.6], tones: GRANITE.pale, origin: [P.DOOR_X, P.AZ], vary: 0.07 };
-  pv.field([LAUNDRY.x0, L0, LAUNDRY.z, WZ0], pale);
+  pv.field([W0, L0, LAUNDRY.z, WZ0], pale);
   pv.field([L1, S0, SENTO.z, WZ0], pale);
   pv.field([S1, RETURN_X, SENTO.z, SHELTER[2]], pale);
   pv.field([S1, RETURN_X, SHELTER[3], SB[2]], pale);
   pv.field([RETURN_X, SB[1], RETURN_Z, SB[2]], pale);
-  pv.field([W0, S1, WZ1, SB[2]], pale);
+  pv.field([W0, L0, WZ1, SB[2]], pale);
+  pv.field([L1, S1, WZ1, SB[2]], pale);
   // under the shelter: brick in herringbone, the bays painted on it (dorm-court/fittings.js)
   pv.field([SHELTER[0], SHELTER[1], SHELTER[2], SHELTER[3]], {
     pattern: 'herringbone',
@@ -54,20 +66,13 @@ function paving(root) {
     vary: 0.08,
     origin: [SHELTER[0], SHELTER[2]],
   });
-  // the street past the front: brick in running bond behind a pale kerb band
-  pv.field([STREET[0], STREET[1], STREET[2] + 0.25, STREET[3]], {
-    pattern: 'bond',
-    module: [0.5, 0.25],
-    tones: GRANITE.brick,
-    vary: 0.08,
-    origin: [0, STREET[2]],
-  });
-  pv.border(STREET, { w: 0.25, sides: 'n' });
+  // the street past the front: the lane home, the same brick and borders as in the plaza
+  laneField(pv, STREET, { origin: [P.DOOR_X, STREET[2]] });
   pv.build(root);
 }
 
-// a sasanqua: a clipped evergreen dome with pink flowers open on it (they bloom in October)
-function bloom(p, x, z, r, y, seed = 1) {
+// a sasanqua: a clipped evergreen dome with flowers open on it (they bloom in October), pink or white
+function bloom(p, x, z, r, y, seed = 1, colors = ['#c98d98', '#e3b7bd']) {
   mound(p, x, z, r, LEAF.deep, { y, squash: 0.72 });
   for (let i = 0; i < 9; i++) {
     const a = seed * 1.7 + i * 2.4,
@@ -75,89 +80,177 @@ function bloom(p, x, z, r, y, seed = 1) {
     const fx = x + Math.cos(a) * r * k * 0.95,
       fz = z + Math.sin(a) * r * k * 0.8;
     const fy = y + r * 0.72 * 0.72 + Math.sqrt(Math.max(0, 1 - k * k)) * r * 0.45;
-    p.geo(i % 3 ? '#c98d98' : '#e3b7bd', new THREE.DodecahedronGeometry(0.05, 0).translate(fx, fy, fz), {
-      cast: false,
+    p.geo(colors[i % 3 ? 0 : 1], new THREE.DodecahedronGeometry(0.05, 0).translate(fx, fy, fz), { cast: false });
+  }
+}
+const WHITE = ['#eceee8', '#d9ddd6'];
+
+// clipped balls in three sizes, touching, as a Japanese garden groups them (tamamono): never in a row
+function balls(p, x, z, { s = 1, y = BED_Y, seed = 1, tones = [LEAF.mid, PALE_LEAF, LEAF.fresh] } = {}) {
+  const k = seed % 2 ? 1 : -1;
+  mound(p, x, z, 0.36 * s, tones[seed % 3], { y, squash: 0.7 });
+  mound(p, x + k * 0.42 * s, z + 0.12 * s, 0.26 * s, tones[(seed + 1) % 3], { y, squash: 0.72 });
+  mound(p, x - k * 0.3 * s, z + 0.28 * s, 0.18 * s, tones[(seed + 2) % 3], { y, squash: 0.75 });
+}
+
+// a drift of grass tufts along the bed, a little staggered
+function drift(p, x0, x1, z, { n = 3, h = 0.62, seed = 1, color = STRAW } = {}) {
+  for (let i = 0; i < n; i++) {
+    const x = x0 + ((x1 - x0) * (i + 0.5)) / n;
+    grass(p, x, z + ((i * 7 + seed) % 3) * 0.1 - 0.1, {
+      h: h * (0.85 + ((i + seed) % 3) * 0.1),
+      seed: seed + i,
+      color,
     });
   }
 }
 
-// the raised bed along the front: a seat-height wall on the court side, the street kerb behind. At the back, short
-// runs of clipped hedge in three heights, broken by the small trees (a cherry beside the bench, two maples, a
-// zelkova out west); in front, azalea mounds, sasanquas in flower and grasses in groups, never evenly spaced
-function southBed(p) {
-  wallRect(p, SB, { sides: 'n' });
-  kerbRect(p, SB, { sides: 's' });
-  const y = 0.33,
-    zb = SB[3] - 0.3;
-  bed(p, [SB[0], SB[1], SB[2] + 0.22, SB[3] - 0.05], { y });
-  for (const [x0, x1, h, seed] of [
-    [SB[0], -10.8, 0.5, 1],
-    [-9.0, -5.4, 0.6, 2],
-    [-1.9, -0.2, 0.46, 3],
-    [2.2, 6.6, 0.56, 4],
-    [8.6, SB[1], 0.5, 5],
-  ])
-    hedge(p, [x0, zb], [x1, zb], { w: 0.4, h, y, seed });
-  sakura(p, -4.3, SB[3] - 0.55, 0.7, 3);
-  maple(p, 1.0, SB[3] - 0.5, 0.74, 2);
-  maple(p, 7.6, SB[3] - 0.5, 0.8, 5);
-  keyaki(p, -9.9, SB[3] - 0.45, 0.8, 6);
-  const zf = SB[2] + 0.5;
-  for (const [x, n, r, seed] of [
-    [-12.4, 4, 0.36, 1],
-    [-7.8, 3, 0.3, 2],
-    [-2.6, 3, 0.3, 4],
-    [3.3, 3, 0.32, 5],
-    [5.9, 4, 0.36, 8],
-    [9.8, 3, 0.32, 9],
-  ])
-    cluster(p, x, zf + (seed % 3) * 0.1, { n, r, spread: 0.25 + r, seed, y });
-  for (const [x, r, seed] of [
-    [-6.1, 0.34, 1],
-    [-0.9, 0.3, 2],
-    [4.6, 0.28, 3],
-    [8.4, 0.32, 4],
-  ])
-    bloom(p, x, zf + 0.15, r, y, seed);
-  for (const [x, s, h] of [
-    [-8.8, 1, 0.46],
-    [-5.3, 2, 0.52],
-    [-3.3, 3, 0.4],
-    [0.1, 4, 0.46],
-    [2.3, 5, 0.42],
-    [6.8, 7, 0.44],
-  ])
-    grass(p, x, SB[2] + 0.42 + (s % 2) * 0.14, { h, seed: s, color: '#7d8a62' });
+// the front bed's ground: pale gravel raked in lines along the bed, over its soil, so the bed reads at dusk
+function gravel(p, [x0, x1, z0, z1]) {
+  p.box(LEAF.mulch, x1 - x0, 0.04, z1 - z0, (x0 + x1) / 2, BED_Y - 0.04, (z0 + z1) / 2, { cast: false, surf: 'soil' });
+  p.box('#a4a6a3', x1 - x0, 0.02, z1 - z0, (x0 + x1) / 2, BED_Y, (z0 + z1) / 2, { cast: false });
+  for (let z = z0 + 0.12; z < z1 - 0.06; z += 0.16)
+    p.box('#939591', x1 - x0 - 0.04, 0.006, 0.025, (x0 + x1) / 2, BED_Y + 0.02, z, { cast: false });
+}
+// a low island of moss under a group of plants, on the gravel
+function moss(p, x, z, rx, rz) {
+  p.geo(MOSS, new THREE.CylinderGeometry(1, 1, 0.05, 12).scale(rx, 1, rz).translate(x, BED_Y + 0.035, z), {
+    cast: false,
+  });
 }
 
-// the street past the front: the gutter's concrete lids along the kerb, a steel grate every few metres
-function street(p) {
-  const z = STREET[2] + 0.4;
-  for (let x = STREET[0] + 0.25, i = 0; x < STREET[1]; x += 0.5, i++) {
-    if (i % 8 === 3) {
-      p.box('#5a5f67', 0.46, 0.008, 0.3, x, 0.004, z, { cast: false });
-      for (let k = -2; k <= 2; k++) p.box('#7a7f87', 0.03, 0.012, 0.26, x + k * 0.08, 0.004, z, { cast: false });
-    } else p.box(i % 2 ? '#9b9994' : '#a19f9a', 0.47, 0.01, 0.3, x, 0.004, z, { cast: false });
+// a clipped podocarpus (inumaki) column, the tree Japanese gates are flanked with: a short trunk, a tall narrow
+// clipped shape in three tiers
+function column(p, x, z) {
+  p.geo(LEAF.bark, new THREE.CylinderGeometry(0.05, 0.06, 0.3, 5).translate(x, BED_Y + 0.15, z));
+  [
+    [0.3, 0.55, 0.24],
+    [0.62, 0.95, 0.2],
+    [0.95, 1.3, 0.13],
+  ].forEach(([y0, y1, r], i) =>
+    p.geo(
+      i % 2 ? LEAF.pine : '#44604f',
+      new THREE.CylinderGeometry(r * 0.8, r, y1 - y0, 7).translate(x, BED_Y + (y0 + y1) / 2, z),
+    ),
+  );
+  p.geo('#44604f', new THREE.SphereGeometry(0.12, 7, 4).scale(1, 0.8, 1).translate(x, BED_Y + 1.33, z));
+}
+
+// the stone lantern (oki-doro) in the front bed: a foot, a short post, the lit fire box, a wide roof and its knob
+function stoneLantern(p, set, x, z, y) {
+  const stone = '#9a9a94';
+  p.geo(stone, new THREE.CylinderGeometry(0.2, 0.24, 0.1, 6).translate(x, y + 0.05, z));
+  p.geo(stone, new THREE.CylinderGeometry(0.08, 0.1, 0.26, 6).translate(x, y + 0.23, z));
+  p.geo(stone, new THREE.CylinderGeometry(0.17, 0.12, 0.06, 6).translate(x, y + 0.39, z));
+  // the fire box: stone corners round a lit core
+  set.glowParts.push(new THREE.BoxGeometry(0.17, 0.18, 0.17).translate(x, y + 0.51, z));
+  for (const [dx, dz] of [
+    [-1, -1],
+    [1, -1],
+    [-1, 1],
+    [1, 1],
+  ])
+    p.box(stone, 0.05, 0.2, 0.05, x + dx * 0.1, y + 0.42, z + dz * 0.1);
+  p.geo('#85867f', new THREE.CylinderGeometry(0.05, 0.23, 0.14, 6).translate(x, y + 0.67, z));
+  p.geo('#85867f', new THREE.SphereGeometry(0.055, 6, 4).translate(x, y + 0.77, z));
+}
+
+// the gate: the bed's walls turn in at the opening; a stone pier at each side with a lantern on it, a clipped column
+// (podocarpus) beside each and a sweep of clipped azalea running out from it, the same both sides
+function gate(p, set, block) {
+  const [z0, z1] = [SB[2], SB[3]];
+  const zc = (z0 + z1) / 2;
+  for (const x of GATE) lowWall(p, [x, z0], [x, z1], { off: x === GATE[0] ? -0.11 : 0.11 });
+  for (const [i, x] of P.PIERS.entries()) {
+    const out = i ? 1 : -1;
+    p.box('#8b8d90', 0.46, 1.05, 0.46, x, 0, zc, { surf: 'concrete' });
+    p.box('#b0b1b0', 0.56, 0.08, 0.56, x, 1.05, zc, { surf: 'concrete' });
+    column(p, x + out * 0.72, zc + 0.05);
+    // a sweep of clipped azalea running out from the column, each dome a little lower (okarikomi)
+    [0.34, 0.27, 0.21].forEach((r, k) =>
+      mound(p, x + out * (1.25 + k * 0.42), z1 - 0.38 + (k % 2) * 0.08, r, k % 2 ? PALE_LEAF : LEAF.fresh, {
+        y: BED_Y,
+        squash: 0.66,
+      }),
+    );
+    moss(p, x + out * 1.1, zc, 0.95, 0.4);
+    block(x - 0.3, x + 0.3, z0, z1);
   }
+  lamps(
+    set,
+    p,
+    P.PIERS.map((x) => [x, zc]),
+    { kind: 'lantern', y: 1.13, pool: 0.95, poolShift: [0, -0.7] },
+  );
 }
 
-// north of the lane, west of the laundry: two zelkovas and a maple over shrubs, a hedge against the block
-function westBed(p, block) {
-  wallRect(p, WB, { sides: 's' });
-  kerbRect(p, WB, { sides: 'e' });
-  const y = 0.33;
-  bed(p, [WB[0], WB[1] - 0.16, WB[2], WB[3] - 0.22], { y });
-  hedge(p, [WB[0], WB[2] + 0.35], [WB[1] - 0.2, WB[2] + 0.35], { w: 0.45, h: 0.6, y, seed: 8 });
+// the front bed, walled both sides, from the garden to past the frame's east edge, open only at the gate: pale
+// raked gravel with planted groups on moss, gravel between them. West of the gate: the stone lantern in hakone
+// grass behind the bench, a maple over clipped balls and a white sasanqua; east of it, past the bay: maples, grass,
+// clipped balls, a sasanqua and a cherry out of the frame. Low at the front, taller at the back, so the court stays
+// in view from the camera.
+function frontBed(p, set, block) {
+  wallRect(p, SB, { sides: 'n', gaps: { n: [GATE] } });
+  wallRect(p, [P.GARDEN[0], SB[1], SB[2], SB[3]], { sides: 's', gaps: { s: [GATE] } }); // on along the garden
+  const [z0, z1] = [SB[2], SB[3]];
+  const zf = z0 + 0.4,
+    zb = z1 - 0.35;
+  gravel(p, [SB[0] - 0.22, GATE[0] - 0.2, z0 + 0.2, z1 - 0.2]);
+  gravel(p, [GATE[1] + 0.2, SB[1], z0 + 0.2, z1 - 0.2]);
+  for (const [x, rx] of [
+    [-5.0, 0.95],
+    [5.2, 0.7],
+    [7.9, 0.8],
+    [9.8, 0.9],
+    [12.6, 0.9],
+    [14.8, 0.7],
+  ])
+    moss(p, x, (z0 + z1) / 2 + 0.05, rx, 0.4);
+  // west of the gate (the pier's column and azaleas are the gate's)
+  stoneLantern(p, set, -3.55, zb - 0.05, BED_Y);
+  drift(p, -3.95, -2.75, zf + 0.05, { n: 3, seed: 2 });
+  maple(p, -5.0, zb - 0.25, 0.72, 3);
+  balls(p, -5.3, zf + 0.02, { s: 0.7, seed: 1, tones: [PALE_LEAF, LEAF.fresh, LEAF.mid] });
+  bloom(p, -4.45, zf + 0.05, 0.26, BED_Y, 2, WHITE);
+  // east of the gate, past the bay and on out of the frame
+  maple(p, 5.0, zb - 0.25, 0.78, 2);
+  drift(p, 5.6, 6.9, zf, { n: 3, seed: 5 });
+  balls(p, 7.6, zb - 0.1, { s: 0.85, seed: 3 });
+  bloom(p, 8.6, zf + 0.1, 0.3, BED_Y, 4, WHITE);
+  maple(p, 9.8, zb - 0.25, 0.8, 5);
+  drift(p, 10.4, 12, zf, { n: 3, seed: 7 });
+  balls(p, 13, zb - 0.1, { s: 0.85, seed: 5 });
+  sakura(p, 14.8, zb - 0.25, 0.7, 6);
+  // pools of the bed's own lights on its planting (the ones on the ground sit under the raised soil)
+  const zm = (z0 + z1) / 2; // kept inside the bed: a pool past its wall would hang over the street
+  const lit = [[-3.55, zm, 0.5], ...P.PIERS.map((x, i) => [x + (i ? 0.55 : -0.55), zm, 0.5])]; // piers: bed side
+  const mesh = pools(lit, 1, { k: 0.16, y: BED_Y + 0.08 });
+  mesh.userData.set(0.24);
+  set.bedPools = mesh;
+}
+
+// the garden west of the laundry, walled on the court side like the front bed: two zelkovas and a maple over
+// shrubs, a hedge against the block, the tall lamp where the walk ends
+function garden(p, block) {
+  const G = P.GARDEN;
+  lowWall(p, [G[1], LAUNDRY.z], [G[1], SB[2]], { off: -0.11 });
+  kerbRect(p, [G[0], G[1], G[2], LAUNDRY.z], { sides: 'e' });
+  bed(p, [G[0], G[1] - 0.22, G[2], G[3] - 0.05], { y: BED_Y });
+  hedge(p, [G[0], G[2] + 0.35], [G[1] - 0.2, G[2] + 0.35], { w: 0.45, h: 0.6, y: BED_Y, seed: 8 });
   keyaki(p, -9.2, -2.6, 1.0, 4);
   keyaki(p, -12.6, -1.9, 1.08, 7);
-  maple(p, -7.4, -2.1, 0.85, 1);
-  cluster(p, -8.3, -3.2, { n: 4, r: 0.36, seed: 3, y });
-  cluster(p, -6.45, -1.05, { n: 3, r: 0.3, seed: 6, y });
-  bloom(p, -6.55, -2.9, 0.34, y, 5);
-  grass(p, -6.4, -1.95, { seed: 4, color: '#7d8a62' });
-  cluster(p, -11.0, -1.0, { n: 4, r: 0.34, seed: 2, y });
-  grass(p, -8.4, -0.8, { seed: 7 });
-  block(WB[0], WB[1] + 0.05, WB[2], WB[3] + 0.05);
+  keyaki(p, -9.6, 1.9, 1.02, 9);
+  maple(p, -7.3, -2.2, 0.85, 1);
+  cluster(p, -8.3, -3.2, { n: 4, r: 0.36, seed: 3, y: BED_Y });
+  balls(p, -6.75, -0.75, { s: 0.85, seed: 6 });
+  balls(p, -6.8, 1.6, { s: 0.8, seed: 2 });
+  bloom(p, -7.6, 0.4, 0.34, BED_Y, 5);
+  grass(p, -6.5, -1.6, { seed: 4, color: STRAW });
+  drift(p, -8.3, -7.4, 2.4, { n: 2, seed: 8 });
+  cluster(p, -11.0, -0.4, { n: 4, r: 0.34, seed: 2, y: BED_Y });
+  maple(p, -11.8, 2.3, 0.8, 7);
+  grass(p, -8.4, -0.9, { seed: 7 });
+  block(G[0], G[1] + 0.05, G[2], G[3]);
 }
 
 // the beds either side of the door leg, kerbed and low so the hall behind stays in view: azaleas and grasses; the
@@ -169,8 +262,8 @@ function doorBeds(root, p, block) {
     block(r[0], r[1], r[2] - 0.1, r[3] + 0.05);
     const cx = (r[0] + r[1]) / 2;
     mound(p, cx - 0.12, r[2] + 0.3, 0.3, i ? LEAF.fresh : LEAF.mid, { y: 0.08 });
-    mound(p, cx + 0.2, r[2] + 0.45, 0.22, i ? LEAF.mid : LEAF.fresh, { y: 0.08 });
-    grass(p, i ? r[1] - 0.3 : r[0] + 0.3, r[3] - 0.3, { h: 0.35, seed: 3 + i * 3 });
+    mound(p, cx + 0.2, r[2] + 0.45, 0.22, i ? LEAF.mid : PALE_LEAF, { y: 0.08 });
+    grass(p, i ? r[1] - 0.3 : r[0] + 0.3, r[3] - 0.3, { h: 0.35, seed: 3 + i * 3, color: STRAW });
   }
   const [x, z] = P.STONE;
   const stone = monument('社員寮', 'STAFF DORM', 0.85);
@@ -179,28 +272,37 @@ function doorBeds(root, p, block) {
   block(x - 0.5, x + 0.5, z - 0.2, z + 0.2);
 }
 
-// the south bed's bay in the south-east corner, walled like it: low shrubs only, so nothing stands between the camera
-// and the court
+// the front bed's bay in the south-east corner, walled like it: low shrubs only, so nothing stands between the
+// camera and the court
 function seBed(p, block) {
-  const r = P.SE_BED,
-    y = 0.33;
+  const r = P.SE_BED;
   wallRect(p, [r[0], r[1], r[2], SB[2] + 0.22], { sides: 'nwe' });
-  bed(p, [r[0] + 0.2, r[1] - 0.2, r[2] + 0.2, SB[2] + 0.3], { y });
-  cluster(p, r[0] + 0.6, r[2] + 0.55, { n: 4, r: 0.32, spread: 0.5, seed: 12, y });
-  bloom(p, r[1] - 0.6, r[2] + 0.5, 0.3, y, 6);
-  grass(p, (r[0] + r[1]) / 2 + 0.1, r[2] + 0.75, { h: 0.42, seed: 9, color: '#7d8a62' });
+  gravel(p, [r[0] + 0.2, r[1] - 0.2, r[2] + 0.2, SB[2] + 0.3]);
+  moss(p, r[0] + 0.75, r[2] + 0.55, 0.55, 0.32);
+  balls(p, r[0] + 0.7, r[2] + 0.45, { s: 0.7, seed: 7, tones: [PALE_LEAF, LEAF.fresh, LEAF.mid] });
+  drift(p, r[1] - 1.0, r[1] - 0.35, r[2] + 0.55, { n: 2, seed: 9 });
   block(r[0], r[1], r[2], P.NEAR + 0.2);
 }
 
-// the bench beside the cherry, backed on the south bed's wall and facing the court; the sorted bins beside it
+// the street's far side: a verge with a low hedge and the zelkova avenue, as along the lane in the plaza; where the
+// small building across the street comes up to it, just the kerb
+function farSide(p) {
+  const z = STREET[3];
+  verge(p, [STREET[0], z], [3.6, z], 's', { trees: [-13.5, -9.5], seed: 11 }); // none in front of the gate: from the
+  // camera they would stand over the lane where he walks in
+  kerb(p, [3.6, z], [6.5, z], { off: 0.08 });
+  verge(p, [6.5, z], [STREET[1], z], 's', { trees: [10.5, 14.5], seed: 13 });
+}
+
+// the bench beside the cherry, backed on the front bed's wall and facing the court; the sorted bins beside it
 function seats(p, block) {
   const [x, z] = P.BENCH;
   bench(p, x, z, Math.PI, { len: 1.6 });
-  bins(p, x + 1.25, z + 0.1, Math.PI);
-  block(x - 0.85, x + 1.55, z - 0.35, P.NEAR + 0.2);
+  bins(p, x - 1.3, z + 0.1, Math.PI);
+  block(x - 1.65, x + 0.85, z - 0.35, P.NEAR + 0.2);
 }
 
-// the bollard lights along the south bed's wall: a short stone post with the lamps' lantern on top
+// the bollard lights along the front bed's wall: a short stone post with the lamps' lantern on top
 function bollards(set, p, block) {
   for (const [x, z] of P.BOLLARDS) {
     p.geo('#6d7078', new THREE.CylinderGeometry(0.07, 0.08, 0.5, 8).translate(x, 0.25, z));
@@ -213,9 +315,10 @@ export function buildCourt(root, nav, set) {
   const block = (x0, x1, z0, z1) => nav.block(x0, x1, z0, z1);
   paving(root);
   const p = new Parts();
-  southBed(p);
-  street(p);
-  westBed(p, block);
+  frontBed(p, set, block);
+  gate(p, set, block);
+  farSide(p);
+  garden(p, block);
   doorBeds(root, p, block);
   seBed(p, block);
   seats(p, block);
@@ -223,4 +326,7 @@ export function buildCourt(root, nav, set) {
   for (const [x, z] of P.LAMPS) block(x - 0.14, x + 0.14, z - 0.14, z + 0.14);
   lamps(set, p, P.LAMPS, { kind: 'post', pool: 1.05 });
   p.build(root);
+  root.add(set.bedPools);
+  // the gate is open, but the court ends there on day 1: he came in that way
+  block(GATE[0], GATE[1], SB[2], SB[3] + 0.1);
 }
