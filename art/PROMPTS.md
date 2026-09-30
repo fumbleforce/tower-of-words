@@ -103,6 +103,17 @@ interior view inside the monorail train, window showing sea and sky. 2 seats vis
 
 ## Camera and composition
 - Shot size and angle in photography terms: `medium full shot`, `intimate high three-quarter close view`, `low angle over the table`, `extreme dutch angle`.
+## House portrait style: Mio and Kuro (Jørgen, 2026-09-30)
+
+"the original Mio and Kuro are my favorites so if we can try to align the world around those." The anchors are art/approved/mio/mio-after.webp and art/approved/kuro/kuro-after.webp. Both are RDBT with the short gallery prompt (`<quality tags>, safe, 1girl, solo, <name>, <age>: <hair, glasses, clothes>, <expression>, waist-up portrait facing the viewer at a slight angle, plain light grey background, soft even studio light`) and no style words. What they share, looked at and measured against the rest of the cast:
+- Line: solid black ink. A thick outer contour, fine inner lines on the face and folds, hair drawn as black masses with a few sharp, angular highlight shapes.
+- Shading: hard two-tone cel shading with no gradients or airbrush. Dark clothes are mostly large flat near-black shadow shapes: 37% (Mio) and 43% (Kuro) of the figure is near black, against 8 to 24% for Kenji, Mori, Emi, Eric and Aoi.
+- Colour: few colours, cool and muted, black first, one accent hue (Mio's green, Kuro's blue), and a pale cool grey or mint background. Skin is pale and nearly flat, with a light pink or lavender shadow and a small blush patch.
+- Eyes: narrow almond eyes, half-lidded, with a heavy black upper lash line, small irises in pale muted colours and one small highlight. No big round sparkling eyes.
+- Face: narrow and adult, with a pointed chin, a nose that is only a small shadow, a small mouth, a long neck and a head that is small against the shoulders. Three-quarter view with a slight head tilt.
+- Off: Kuro's anchor has a thin red outline down her left side (image right). Never copy that (red-rim negative, "Eric (mc) portrait").
+- Tried in reviews/style-align-1: img2img at 0.6 from a portrait with its own prompt gives the cast one line weight, pale cool skin and a cool palette. None of these brought over the black ink shapes: the anchor beside the character on one canvas (in-context repaint), the IP-Adapter fed an anchor (only her background came through), and "high contrast, deep black shadows".
+
 - Place things in thirds and weight what the model tends to drop: `(face sharp in upper-right third:1.5)`, `(enlarged foreground knee and thigh:1.35)`.
 - Name the line that holds the image together: `face-knee diagonal`, `joined torsos forming a circular silhouette`.
 - A framing element: `stone pillar cropping one edge`.

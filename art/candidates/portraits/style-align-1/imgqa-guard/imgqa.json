@@ -1,0 +1,292 @@
+{
+ "character": "guard",
+ "ref": "game3d/assets/portraits/guard-neutral.webp",
+ "face_box_game": [
+  597,
+  768,
+  [
+   250,
+   162,
+   374,
+   300
+  ]
+ ],
+ "ref_face_detected": [
+  250,
+  162,
+  374,
+  300
+ ],
+ "thresholds": {
+  "redrim": [
+   0.02,
+   0.08
+  ],
+  "glasses_cover": [
+   0.87,
+   0.85
+  ],
+  "glasses_worst": [
+   0.7,
+   0.5
+  ],
+  "glasses_dE": [
+   8,
+   15
+  ],
+  "matte_frame": [
+   0.05,
+   0.12
+  ],
+  "matte_holes": [
+   0,
+   3
+  ],
+  "headroom": [
+   0.03,
+   0.01
+  ],
+  "zoom": [
+   0.04,
+   9
+  ],
+  "top": [
+   0.01,
+   9
+  ],
+  "eyes": [
+   0.06,
+   0.12
+  ],
+  "ccip": [
+   0.05,
+   0.09
+  ]
+ },
+ "images": [
+  {
+   "path": "art/candidates/portraits/style-align-1/guard-base-2001.webp",
+   "kind": "render",
+   "size": [
+    597,
+    768
+   ],
+   "face": [
+    223,
+    174,
+    372,
+    329
+   ],
+   "eyes": [
+    [
+     276.5,
+     212.0
+    ],
+    [
+     336.5,
+     223.5
+    ]
+   ],
+   "redrim": {
+    "status": "warn",
+    "value": 0.0315
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for guard"
+   },
+   "framing": {
+    "headroom": 0.135,
+    "zoom": 0.89,
+    "top": 0.009,
+    "bottom_short": 0.1,
+    "hair_top_game": 99,
+    "hair_top_ref": 111,
+    "crop": [
+     -52.9,
+     -8.0,
+     617.6,
+     854.7
+    ],
+    "eyes": -0.026,
+    "tilt": 0.7,
+    "status": "warn"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.026,
+    "ssim": 0.329
+   },
+   "status": "warn"
+  },
+  {
+   "path": "art/candidates/portraits/style-align-1/guard-base-2002.webp",
+   "kind": "render",
+   "size": [
+    597,
+    768
+   ],
+   "face": [
+    226,
+    170,
+    375,
+    332
+   ],
+   "eyes": [
+    [
+     276.5,
+     213.0
+    ],
+    [
+     341.0,
+     224.5
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.004
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for guard"
+   },
+   "framing": {
+    "headroom": 0.134,
+    "zoom": 0.852,
+    "top": 0.022,
+    "bottom_short": 0.126,
+    "hair_top_game": 104,
+    "hair_top_ref": 111,
+    "crop": [
+     -65.8,
+     -20.2,
+     635.1,
+     881.4
+    ],
+    "eyes": -0.007,
+    "tilt": 0.0,
+    "status": "warn"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.045,
+    "ssim": 0.392
+   },
+   "status": "warn"
+  },
+  {
+   "path": "art/candidates/portraits/style-align-1/guard-ink-2001.webp",
+   "kind": "render",
+   "size": [
+    597,
+    768
+   ],
+   "face": [
+    224,
+    170,
+    371,
+    329
+   ],
+   "eyes": [
+    [
+     276.0,
+     212.0
+    ],
+    [
+     336.5,
+     223.5
+    ]
+   ],
+   "redrim": {
+    "status": "warn",
+    "value": 0.0279
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for guard"
+   },
+   "framing": {
+    "headroom": 0.135,
+    "zoom": 0.868,
+    "top": 0.019,
+    "bottom_short": 0.113,
+    "hair_top_game": 104,
+    "hair_top_ref": 111,
+    "crop": [
+     -62.0,
+     -16.7,
+     625.9,
+     868.2
+    ],
+    "eyes": -0.008,
+    "tilt": 0.7,
+    "status": "warn"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.029,
+    "ssim": 0.359
+   },
+   "status": "warn"
+  },
+  {
+   "path": "art/candidates/portraits/style-align-1/guard-ink-2002.webp",
+   "kind": "render",
+   "size": [
+    597,
+    768
+   ],
+   "face": [
+    225,
+    169,
+    376,
+    332
+   ],
+   "eyes": [
+    [
+     277.0,
+     213.0
+    ],
+    [
+     342.0,
+     224.5
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0027
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for guard"
+   },
+   "framing": {
+    "headroom": 0.134,
+    "zoom": 0.847,
+    "top": 0.025,
+    "bottom_short": 0.129,
+    "hair_top_game": 106,
+    "hair_top_ref": 111,
+    "crop": [
+     -68.0,
+     -22.3,
+     637.1,
+     884.8
+    ],
+    "eyes": -0.003,
+    "tilt": -0.1,
+    "status": "warn"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.049,
+    "ssim": 0.411
+   },
+   "status": "warn"
+  }
+ ]
+}

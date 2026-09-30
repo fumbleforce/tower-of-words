@@ -1,0 +1,404 @@
+{
+ "character": "emi",
+ "ref": "game3d/assets/portraits/emi-neutral.webp",
+ "face_box_game": [
+  597,
+  768,
+  [
+   203,
+   159,
+   395,
+   349
+  ]
+ ],
+ "ref_face_detected": [
+  203,
+  160,
+  395,
+  349
+ ],
+ "thresholds": {
+  "redrim": [
+   0.02,
+   0.08
+  ],
+  "glasses_cover": [
+   0.87,
+   0.85
+  ],
+  "glasses_worst": [
+   0.7,
+   0.5
+  ],
+  "glasses_dE": [
+   8,
+   15
+  ],
+  "matte_frame": [
+   0.05,
+   0.12
+  ],
+  "matte_holes": [
+   0,
+   3
+  ],
+  "headroom": [
+   0.03,
+   0.01
+  ],
+  "zoom": [
+   0.04,
+   9
+  ],
+  "top": [
+   0.01,
+   9
+  ],
+  "eyes": [
+   0.06,
+   0.12
+  ],
+  "ccip": [
+   0.05,
+   0.09
+  ]
+ },
+ "images": [
+  {
+   "path": "art/candidates/portraits/style-align-1/emi-base-2001.webp",
+   "kind": "render",
+   "size": [
+    597,
+    768
+   ],
+   "face": [
+    207,
+    159,
+    393,
+    349
+   ],
+   "eyes": [
+    [
+     252.0,
+     243.0
+    ],
+    [
+     340.5,
+     226.0
+    ]
+   ],
+   "redrim": {
+    "status": "warn",
+    "value": 0.0681
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for emi"
+   },
+   "framing": {
+    "headroom": 0.068,
+    "zoom": 0.995,
+    "top": 0.002,
+    "bottom_short": 0.003,
+    "hair_top_game": 53,
+    "hair_top_ref": 57,
+    "crop": [
+     -0.6,
+     -1.8,
+     599.6,
+     770.2
+    ],
+    "eyes": 0.012,
+    "tilt": 2.3,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.019,
+    "ssim": 0.391
+   },
+   "status": "warn"
+  },
+  {
+   "path": "art/candidates/portraits/style-align-1/emi-base-2002.webp",
+   "kind": "render",
+   "size": [
+    597,
+    768
+   ],
+   "face": [
+    205,
+    160,
+    391,
+    346
+   ],
+   "eyes": [
+    [
+     251.0,
+     242.5
+    ],
+    [
+     338.5,
+     223.0
+    ]
+   ],
+   "redrim": {
+    "status": "warn",
+    "value": 0.0286
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for emi"
+   },
+   "framing": {
+    "headroom": 0.078,
+    "zoom": 1.016,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 58,
+    "hair_top_ref": 57,
+    "crop": [
+     3.7,
+     2.5,
+     591.3,
+     758.3
+    ],
+    "eyes": 0.006,
+    "tilt": 0.6,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.018,
+    "ssim": 0.338
+   },
+   "status": "warn"
+  },
+  {
+   "path": "art/candidates/portraits/style-align-1/emi-ink-2001.webp",
+   "kind": "render",
+   "size": [
+    597,
+    768
+   ],
+   "face": [
+    207,
+    159,
+    394,
+    349
+   ],
+   "eyes": [
+    [
+     252.5,
+     243.0
+    ],
+    [
+     340.5,
+     226.5
+    ]
+   ],
+   "redrim": {
+    "status": "warn",
+    "value": 0.0596
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for emi"
+   },
+   "framing": {
+    "headroom": 0.068,
+    "zoom": 0.995,
+    "top": 0.002,
+    "bottom_short": 0.003,
+    "hair_top_game": 53,
+    "hair_top_ref": 57,
+    "crop": [
+     -0.1,
+     -1.8,
+     600.1,
+     770.2
+    ],
+    "eyes": 0.014,
+    "tilt": 2.6,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.018,
+    "ssim": 0.379
+   },
+   "status": "warn"
+  },
+  {
+   "path": "art/candidates/portraits/style-align-1/emi-ink-2002.webp",
+   "kind": "render",
+   "size": [
+    597,
+    768
+   ],
+   "face": [
+    205,
+    160,
+    392,
+    347
+   ],
+   "eyes": [
+    [
+     251.5,
+     242.5
+    ],
+    [
+     338.5,
+     223.0
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0192
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for emi"
+   },
+   "framing": {
+    "headroom": 0.077,
+    "zoom": 1.011,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 57,
+    "hair_top_ref": 57,
+    "crop": [
+     2.7,
+     1.7,
+     593.3,
+     761.6
+    ],
+    "eyes": 0.004,
+    "tilt": 0.6,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.016,
+    "ssim": 0.387
+   },
+   "status": "pass"
+  },
+  {
+   "path": "art/candidates/portraits/style-align-1/emi-ink75-2001.webp",
+   "kind": "render",
+   "size": [
+    597,
+    768
+   ],
+   "face": [
+    206,
+    155,
+    393,
+    348
+   ],
+   "eyes": [
+    [
+     250.5,
+     242.0
+    ],
+    [
+     337.5,
+     224.5
+    ]
+   ],
+   "redrim": {
+    "status": "fail",
+    "value": 0.1147
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for emi"
+   },
+   "framing": {
+    "headroom": 0.062,
+    "zoom": 0.979,
+    "top": 0.011,
+    "bottom_short": 0.01,
+    "hair_top_game": 55,
+    "hair_top_ref": 57,
+    "crop": [
+     -5.8,
+     -8.4,
+     603.8,
+     775.9
+    ],
+    "eyes": 0.021,
+    "tilt": 1.8,
+    "status": "warn"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.016,
+    "ssim": 0.345
+   },
+   "status": "fail"
+  },
+  {
+   "path": "art/candidates/portraits/style-align-1/emi-ink75-2002.webp",
+   "kind": "render",
+   "size": [
+    597,
+    768
+   ],
+   "face": [
+    206,
+    159,
+    388,
+    341
+   ],
+   "eyes": [
+    [
+     250.5,
+     240.0
+    ],
+    [
+     334.0,
+     220.5
+    ]
+   ],
+   "redrim": {
+    "status": "warn",
+    "value": 0.051
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for emi"
+   },
+   "framing": {
+    "headroom": 0.079,
+    "zoom": 1.038,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 58,
+    "hair_top_ref": 57,
+    "crop": [
+     9.1,
+     4.9,
+     584.0,
+     744.5
+    ],
+    "eyes": 0.007,
+    "tilt": 0.0,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.015,
+    "ssim": 0.375
+   },
+   "status": "warn"
+  }
+ ]
+}

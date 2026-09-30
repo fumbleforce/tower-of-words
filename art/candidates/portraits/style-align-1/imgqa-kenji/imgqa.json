@@ -1,0 +1,1412 @@
+{
+ "character": "kenji",
+ "ref": "game3d/assets/portraits/kenji-neutral.webp",
+ "face_box_game": [
+  597,
+  768,
+  [
+   221,
+   167,
+   384,
+   335
+  ]
+ ],
+ "ref_face_detected": [
+  218,
+  167,
+  384,
+  335
+ ],
+ "thresholds": {
+  "redrim": [
+   0.02,
+   0.08
+  ],
+  "glasses_cover": [
+   0.87,
+   0.85
+  ],
+  "glasses_worst": [
+   0.7,
+   0.5
+  ],
+  "glasses_dE": [
+   8,
+   15
+  ],
+  "matte_frame": [
+   0.05,
+   0.12
+  ],
+  "matte_holes": [
+   0,
+   3
+  ],
+  "headroom": [
+   0.03,
+   0.01
+  ],
+  "zoom": [
+   0.04,
+   9
+  ],
+  "top": [
+   0.01,
+   9
+  ],
+  "eyes": [
+   0.06,
+   0.12
+  ],
+  "ccip": [
+   0.05,
+   0.09
+  ]
+ },
+ "images": [
+  {
+   "path": "art/candidates/portraits/style-align-1/kenji-i2i55-2001.webp",
+   "kind": "render",
+   "size": [
+    597,
+    768
+   ],
+   "face": [
+    219,
+    168,
+    381,
+    332
+   ],
+   "eyes": [
+    [
+     261.0,
+     232.0
+    ],
+    [
+     319.0,
+     221.0
+    ]
+   ],
+   "redrim": {
+    "status": "warn",
+    "value": 0.0218
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kenji"
+   },
+   "framing": {
+    "headroom": 0.112,
+    "zoom": 1.024,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 83,
+    "hair_top_ref": 92,
+    "crop": [
+     6.2,
+     5.0,
+     589.0,
+     754.7
+    ],
+    "eyes": -0.006,
+    "tilt": 0.3,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.015,
+    "ssim": 0.513
+   },
+   "status": "warn"
+  },
+  {
+   "path": "art/candidates/portraits/style-align-1/kenji-i2i70-2001.webp",
+   "kind": "render",
+   "size": [
+    597,
+    768
+   ],
+   "face": [
+    220,
+    170,
+    381,
+    335
+   ],
+   "eyes": [
+    [
+     261.0,
+     233.5
+    ],
+    [
+     320.0,
+     223.0
+    ]
+   ],
+   "redrim": {
+    "status": "warn",
+    "value": 0.0338
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kenji"
+   },
+   "framing": {
+    "headroom": 0.111,
+    "zoom": 1.018,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 80,
+    "hair_top_ref": 92,
+    "crop": [
+     4.9,
+     6.0,
+     591.2,
+     760.3
+    ],
+    "eyes": -0.01,
+    "tilt": 0.9,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.019,
+    "ssim": 0.495
+   },
+   "status": "warn"
+  },
+  {
+   "path": "art/candidates/portraits/style-align-1/kenji-stykuro70-2001.webp",
+   "kind": "render",
+   "size": [
+    597,
+    768
+   ],
+   "face": [
+    220,
+    166,
+    385,
+    337
+   ],
+   "eyes": [
+    [
+     259.5,
+     236.0
+    ],
+    [
+     325.0,
+     218.5
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0194
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kenji"
+   },
+   "framing": {
+    "headroom": 0.109,
+    "zoom": 0.982,
+    "top": 0.005,
+    "bottom_short": 0.012,
+    "hair_top_game": 86,
+    "hair_top_ref": 92,
+    "crop": [
+     -3.9,
+     -4.0,
+     603.8,
+     777.7
+    ],
+    "eyes": -0.005,
+    "tilt": -3.9,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "warn",
+    "ccip": 0.054,
+    "ssim": 0.304
+   },
+   "status": "warn"
+  },
+  {
+   "path": "art/candidates/portraits/style-align-1/kenji-stymio70-2001.webp",
+   "kind": "render",
+   "size": [
+    597,
+    768
+   ],
+   "face": [
+    219,
+    166,
+    385,
+    335
+   ],
+   "eyes": [
+    [
+     259.0,
+     235.0
+    ],
+    [
+     324.5,
+     219.0
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0104
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kenji"
+   },
+   "framing": {
+    "headroom": 0.117,
+    "zoom": 0.994,
+    "top": 0.003,
+    "bottom_short": 0.003,
+    "hair_top_game": 91,
+    "hair_top_ref": 92,
+    "crop": [
+     -0.8,
+     -2.0,
+     599.8,
+     770.6
+    ],
+    "eyes": -0.002,
+    "tilt": -2.7,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.043,
+    "ssim": 0.347
+   },
+   "status": "pass"
+  },
+  {
+   "path": "art/candidates/portraits/style-align-1/kenji-ipakuro70-2001.webp",
+   "kind": "render",
+   "size": [
+    597,
+    768
+   ],
+   "face": [
+    222,
+    171,
+    382,
+    335
+   ],
+   "eyes": [
+    [
+     262.5,
+     232.5
+    ],
+    [
+     321.0,
+     224.0
+    ]
+   ],
+   "redrim": {
+    "status": "warn",
+    "value": 0.0253
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kenji"
+   },
+   "framing": {
+    "headroom": 0.115,
+    "zoom": 1.024,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 81,
+    "hair_top_ref": 92,
+    "crop": [
+     8.2,
+     8.0,
+     591.0,
+     757.7
+    ],
+    "eyes": -0.014,
+    "tilt": 2.8,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.032,
+    "ssim": 0.489
+   },
+   "status": "warn"
+  },
+  {
+   "path": "art/candidates/portraits/style-align-1/kenji-i2i55-2002.webp",
+   "kind": "render",
+   "size": [
+    597,
+    768
+   ],
+   "face": [
+    217,
+    165,
+    384,
+    333
+   ],
+   "eyes": [
+    [
+     260.0,
+     233.5
+    ],
+    [
+     324.0,
+     222.5
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.014
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kenji"
+   },
+   "framing": {
+    "headroom": 0.116,
+    "zoom": 1.0,
+    "top": 0.003,
+    "bottom_short": 0.0,
+    "hair_top_game": 91,
+    "hair_top_ref": 92,
+    "crop": [
+     -0.5,
+     -2.0,
+     596.5,
+     766.0
+    ],
+    "eyes": 0.012,
+    "tilt": 1.3,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.02,
+    "ssim": 0.495
+   },
+   "status": "pass"
+  },
+  {
+   "path": "art/candidates/portraits/style-align-1/kenji-i2i70-2002.webp",
+   "kind": "render",
+   "size": [
+    597,
+    768
+   ],
+   "face": [
+    220,
+    168,
+    385,
+    333
+   ],
+   "eyes": [
+    [
+     260.0,
+     233.5
+    ],
+    [
+     325.0,
+     222.5
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0096
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kenji"
+   },
+   "framing": {
+    "headroom": 0.107,
+    "zoom": 1.018,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 79,
+    "hair_top_ref": 92,
+    "crop": [
+     6.9,
+     4.0,
+     593.2,
+     758.3
+    ],
+    "eyes": 0.001,
+    "tilt": 1.4,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.021,
+    "ssim": 0.479
+   },
+   "status": "pass"
+  },
+  {
+   "path": "art/candidates/portraits/style-align-1/kenji-stykuro70-2002.webp",
+   "kind": "render",
+   "size": [
+    597,
+    768
+   ],
+   "face": [
+    224,
+    169,
+    389,
+    334
+   ],
+   "eyes": [
+    [
+     264.5,
+     237.5
+    ],
+    [
+     328.5,
+     225.5
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.002
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kenji"
+   },
+   "framing": {
+    "headroom": 0.1,
+    "zoom": 1.018,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 73,
+    "hair_top_ref": 92,
+    "crop": [
+     10.9,
+     5.0,
+     597.2,
+     759.3
+    ],
+    "eyes": 0.016,
+    "tilt": 0.4,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.035,
+    "ssim": 0.359
+   },
+   "status": "pass"
+  },
+  {
+   "path": "art/candidates/portraits/style-align-1/kenji-stymio70-2002.webp",
+   "kind": "render",
+   "size": [
+    597,
+    768
+   ],
+   "face": [
+    222,
+    163,
+    389,
+    334
+   ],
+   "eyes": [
+    [
+     262.5,
+     236.0
+    ],
+    [
+     327.5,
+     225.5
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0058
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kenji"
+   },
+   "framing": {
+    "headroom": 0.1,
+    "zoom": 0.982,
+    "top": 0.009,
+    "bottom_short": 0.009,
+    "hair_top_game": 82,
+    "hair_top_ref": 92,
+    "crop": [
+     -0.9,
+     -7.0,
+     606.8,
+     774.7
+    ],
+    "eyes": 0.033,
+    "tilt": 1.9,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.049,
+    "ssim": 0.365
+   },
+   "status": "pass"
+  },
+  {
+   "path": "art/candidates/portraits/style-align-1/kenji-ipakuro70-2002.webp",
+   "kind": "render",
+   "size": [
+    597,
+    768
+   ],
+   "face": [
+    218,
+    170,
+    384,
+    333
+   ],
+   "eyes": [
+    [
+     259.5,
+     234.0
+    ],
+    [
+     324.0,
+     222.0
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0148
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kenji"
+   },
+   "framing": {
+    "headroom": 0.104,
+    "zoom": 1.031,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 74,
+    "hair_top_ref": 92,
+    "crop": [
+     9.0,
+     8.0,
+     588.2,
+     753.1
+    ],
+    "eyes": -0.007,
+    "tilt": 0.5,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.037,
+    "ssim": 0.45
+   },
+   "status": "pass"
+  },
+  {
+   "path": "art/candidates/portraits/style-align-1/kenji-n60-2001.webp",
+   "kind": "render",
+   "size": [
+    597,
+    768
+   ],
+   "face": [
+    220,
+    168,
+    381,
+    334
+   ],
+   "eyes": [
+    [
+     261.0,
+     233.5
+    ],
+    [
+     320.0,
+     223.5
+    ]
+   ],
+   "redrim": {
+    "status": "warn",
+    "value": 0.0227
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kenji"
+   },
+   "framing": {
+    "headroom": 0.108,
+    "zoom": 1.012,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 80,
+    "hair_top_ref": 92,
+    "crop": [
+     3.1,
+     3.0,
+     593.0,
+     761.8
+    ],
+    "eyes": 0.001,
+    "tilt": 1.4,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.011,
+    "ssim": 0.525
+   },
+   "status": "warn"
+  },
+  {
+   "path": "art/candidates/portraits/style-align-1/kenji-n60e-2001.webp",
+   "kind": "render",
+   "size": [
+    597,
+    768
+   ],
+   "face": [
+    216,
+    167,
+    385,
+    333
+   ],
+   "eyes": [
+    [
+     258.5,
+     234.0
+    ],
+    [
+     323.0,
+     225.0
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0158
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kenji"
+   },
+   "framing": {
+    "headroom": 0.109,
+    "zoom": 1.012,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 82,
+    "hair_top_ref": 92,
+    "crop": [
+     3.1,
+     2.0,
+     593.0,
+     760.8
+    ],
+    "eyes": 0.013,
+    "tilt": 3.1,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.041,
+    "ssim": 0.512
+   },
+   "status": "pass"
+  },
+  {
+   "path": "art/candidates/portraits/style-align-1/kenji-n60ek-2001.webp",
+   "kind": "render",
+   "size": [
+    597,
+    768
+   ],
+   "face": [
+    214,
+    164,
+    387,
+    336
+   ],
+   "eyes": [
+    [
+     256.0,
+     234.0
+    ],
+    [
+     323.0,
+     216.5
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0181
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kenji"
+   },
+   "framing": {
+    "headroom": 0.115,
+    "zoom": 0.977,
+    "top": 0.009,
+    "bottom_short": 0.014,
+    "hair_top_game": 92,
+    "hair_top_ref": 92,
+    "crop": [
+     -7.7,
+     -7.0,
+     603.5,
+     779.3
+    ],
+    "eyes": -0.007,
+    "tilt": -3.6,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "warn",
+    "ccip": 0.056,
+    "ssim": 0.33
+   },
+   "status": "warn"
+  },
+  {
+   "path": "art/candidates/portraits/style-align-1/kenji-n60-2002.webp",
+   "kind": "render",
+   "size": [
+    597,
+    768
+   ],
+   "face": [
+    219,
+    166,
+    386,
+    333
+   ],
+   "eyes": [
+    [
+     259.5,
+     233.5
+    ],
+    [
+     324.5,
+     223.0
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0147
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kenji"
+   },
+   "framing": {
+    "headroom": 0.113,
+    "zoom": 1.006,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 87,
+    "hair_top_ref": 92,
+    "crop": [
+     3.3,
+     -0.0,
+     596.7,
+     763.4
+    ],
+    "eyes": 0.01,
+    "tilt": 1.9,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.025,
+    "ssim": 0.469
+   },
+   "status": "pass"
+  },
+  {
+   "path": "art/candidates/portraits/style-align-1/kenji-n60e-2002.webp",
+   "kind": "render",
+   "size": [
+    597,
+    768
+   ],
+   "face": [
+    215,
+    163,
+    385,
+    333
+   ],
+   "eyes": [
+    [
+     255.5,
+     236.0
+    ],
+    [
+     324.0,
+     223.5
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0076
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kenji"
+   },
+   "framing": {
+    "headroom": 0.115,
+    "zoom": 0.988,
+    "top": 0.008,
+    "bottom_short": 0.004,
+    "hair_top_game": 92,
+    "hair_top_ref": 92,
+    "crop": [
+     -4.6,
+     -6.0,
+     599.5,
+     771.2
+    ],
+    "eyes": 0.03,
+    "tilt": 0.7,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "warn",
+    "ccip": 0.069,
+    "ssim": 0.424
+   },
+   "status": "warn"
+  },
+  {
+   "path": "art/candidates/portraits/style-align-1/kenji-n60ek-2002.webp",
+   "kind": "render",
+   "size": [
+    597,
+    768
+   ],
+   "face": [
+    219,
+    168,
+    389,
+    334
+   ],
+   "eyes": [
+    [
+     261.5,
+     239.5
+    ],
+    [
+     328.0,
+     227.0
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0005
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kenji"
+   },
+   "framing": {
+    "headroom": 0.112,
+    "zoom": 1.012,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 84,
+    "hair_top_ref": 92,
+    "crop": [
+     6.6,
+     3.0,
+     596.5,
+     761.8
+    ],
+    "eyes": 0.03,
+    "tilt": 0.4,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "warn",
+    "ccip": 0.053,
+    "ssim": 0.35
+   },
+   "status": "warn"
+  },
+  {
+   "path": "art/candidates/portraits/style-align-1/kenji-n60l-2001.webp",
+   "kind": "render",
+   "size": [
+    597,
+    768
+   ],
+   "face": [
+    217,
+    168,
+    383,
+    334
+   ],
+   "eyes": [
+    [
+     258.5,
+     236.0
+    ],
+    [
+     323.0,
+     226.5
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0199
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kenji"
+   },
+   "framing": {
+    "headroom": 0.108,
+    "zoom": 1.012,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 80,
+    "hair_top_ref": 92,
+    "crop": [
+     2.6,
+     3.0,
+     592.5,
+     761.8
+    ],
+    "eyes": 0.018,
+    "tilt": 2.7,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.014,
+    "ssim": 0.504
+   },
+   "status": "pass"
+  },
+  {
+   "path": "art/candidates/portraits/style-align-1/kenji-n60l-2002.webp",
+   "kind": "render",
+   "size": [
+    597,
+    768
+   ],
+   "face": [
+    218,
+    166,
+    385,
+    333
+   ],
+   "eyes": [
+    [
+     259.5,
+     233.5
+    ],
+    [
+     324.5,
+     223.5
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0158
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kenji"
+   },
+   "framing": {
+    "headroom": 0.115,
+    "zoom": 1.006,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 88,
+    "hair_top_ref": 92,
+    "crop": [
+     2.3,
+     -0.0,
+     595.7,
+     763.4
+    ],
+    "eyes": 0.011,
+    "tilt": 2.3,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.025,
+    "ssim": 0.502
+   },
+   "status": "pass"
+  },
+  {
+   "path": "art/candidates/portraits/style-align-1/kenji-base-2001.webp",
+   "kind": "render",
+   "size": [
+    597,
+    768
+   ],
+   "face": [
+    220,
+    168,
+    381,
+    333
+   ],
+   "eyes": [
+    [
+     261.0,
+     233.5
+    ],
+    [
+     320.0,
+     224.0
+    ]
+   ],
+   "redrim": {
+    "status": "warn",
+    "value": 0.0219
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kenji"
+   },
+   "framing": {
+    "headroom": 0.111,
+    "zoom": 1.018,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 82,
+    "hair_top_ref": 92,
+    "crop": [
+     4.9,
+     4.0,
+     591.2,
+     758.3
+    ],
+    "eyes": 0.005,
+    "tilt": 1.9,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.015,
+    "ssim": 0.469
+   },
+   "status": "warn"
+  },
+  {
+   "path": "art/candidates/portraits/style-align-1/kenji-base-2002.webp",
+   "kind": "render",
+   "size": [
+    597,
+    768
+   ],
+   "face": [
+    218,
+    165,
+    386,
+    332
+   ],
+   "eyes": [
+    [
+     260.0,
+     234.5
+    ],
+    [
+     324.5,
+     223.5
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0174
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kenji"
+   },
+   "framing": {
+    "headroom": 0.115,
+    "zoom": 1.006,
+    "top": 0.001,
+    "bottom_short": 0.0,
+    "hair_top_game": 89,
+    "hair_top_ref": 92,
+    "crop": [
+     2.8,
+     -1.0,
+     596.2,
+     762.4
+    ],
+    "eyes": 0.02,
+    "tilt": 1.4,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.031,
+    "ssim": 0.452
+   },
+   "status": "pass"
+  },
+  {
+   "path": "art/candidates/portraits/style-align-1/kenji-ink-2001.webp",
+   "kind": "render",
+   "size": [
+    597,
+    768
+   ],
+   "face": [
+    220,
+    167,
+    381,
+    333
+   ],
+   "eyes": [
+    [
+     261.0,
+     233.5
+    ],
+    [
+     320.0,
+     223.5
+    ]
+   ],
+   "redrim": {
+    "status": "warn",
+    "value": 0.0209
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kenji"
+   },
+   "framing": {
+    "headroom": 0.109,
+    "zoom": 1.012,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 82,
+    "hair_top_ref": 92,
+    "crop": [
+     3.1,
+     2.0,
+     593.0,
+     760.8
+    ],
+    "eyes": 0.007,
+    "tilt": 1.4,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.014,
+    "ssim": 0.491
+   },
+   "status": "warn"
+  },
+  {
+   "path": "art/candidates/portraits/style-align-1/kenji-ink-2002.webp",
+   "kind": "render",
+   "size": [
+    597,
+    768
+   ],
+   "face": [
+    218,
+    164,
+    386,
+    332
+   ],
+   "eyes": [
+    [
+     260.5,
+     234.0
+    ],
+    [
+     324.5,
+     224.5
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0157
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kenji"
+   },
+   "framing": {
+    "headroom": 0.12,
+    "zoom": 1.0,
+    "top": 0.004,
+    "bottom_short": 0.0,
+    "hair_top_game": 95,
+    "hair_top_ref": 92,
+    "crop": [
+     1.0,
+     -3.0,
+     598.0,
+     765.0
+    ],
+    "eyes": 0.025,
+    "tilt": 2.6,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.027,
+    "ssim": 0.411
+   },
+   "status": "pass"
+  },
+  {
+   "path": "art/candidates/portraits/style-align-1/kenji-ink75-2001.webp",
+   "kind": "render",
+   "size": [
+    597,
+    768
+   ],
+   "face": [
+    220,
+    170,
+    383,
+    338
+   ],
+   "eyes": [
+    [
+     262.0,
+     237.5
+    ],
+    [
+     321.5,
+     227.5
+    ]
+   ],
+   "redrim": {
+    "status": "warn",
+    "value": 0.0404
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kenji"
+   },
+   "framing": {
+    "headroom": 0.115,
+    "zoom": 1.0,
+    "top": 0.0,
+    "bottom_short": 0.004,
+    "hair_top_game": 85,
+    "hair_top_ref": 92,
+    "crop": [
+     0.5,
+     3.0,
+     597.5,
+     771.0
+    ],
+    "eyes": 0.009,
+    "tilt": 1.5,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.017,
+    "ssim": 0.489
+   },
+   "status": "warn"
+  },
+  {
+   "path": "art/candidates/portraits/style-align-1/kenji-ink75-2002.webp",
+   "kind": "render",
+   "size": [
+    597,
+    768
+   ],
+   "face": [
+    218,
+    165,
+    387,
+    333
+   ],
+   "eyes": [
+    [
+     260.5,
+     235.0
+    ],
+    [
+     325.0,
+     224.5
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0169
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kenji"
+   },
+   "framing": {
+    "headroom": 0.108,
+    "zoom": 1.0,
+    "top": 0.003,
+    "bottom_short": 0.0,
+    "hair_top_game": 85,
+    "hair_top_ref": 92,
+    "crop": [
+     1.5,
+     -2.0,
+     598.5,
+     766.0
+    ],
+    "eyes": 0.022,
+    "tilt": 1.8,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.028,
+    "ssim": 0.399
+   },
+   "status": "pass"
+  }
+ ]
+}
