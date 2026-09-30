@@ -1,5 +1,5 @@
 {
-  "status": "pending",
+  "status": "complete",
   "request": "C-0208; X-0325",
   "issue": 110,
   "pipeline": "sh tools/voice/run.sh",
@@ -15,5 +15,5 @@
       "lang": "en"
     }
   ],
-  "note": "Replace only the first mio_b2 clip. The next two server lines are unchanged."
+  "note": "Completed and shipped in 3011a9ff. Replaced only the first mio_b2 clip; the next two server lines are unchanged."
 }
