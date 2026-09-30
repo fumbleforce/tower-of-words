@@ -38,6 +38,10 @@ This runs the named day-1 branch set at phone size, from short saved fixtures th
 
 Use `node game3d/tools/fast-routes.mjs --list` to list routes or append route IDs to rerun a failing subset. A subset prints partial coverage and does not claim the whole set passed. `BASE=.claude/worktrees/<name>/game3d npm run check:routes` tests a worktree. `WIDTH=1366 HEIGHT=860` selects desktop. The result JSON includes chosen options, visited nodes and failure state; its path is printed after the table. Details and fixture limits: game3d/test/routes/README.md.
 
+## Before landing a change to the evening discoveries
+
+The day test's route skips all five of them. When their stories, hooks, props or saved state change, also run `node game3d/tools/evening-check.mjs 390 844` and `... 1366 860`. When and how: notes/PERF.md, "Evening delivery: coverage and draw calls".
+
 ## Reading a FAIL
 
 - `FAIL build checks`: a missing clip (NO CLIP; the voice-clips skill) or escape leftovers in story text (ESCAPE), found before the browser starts.

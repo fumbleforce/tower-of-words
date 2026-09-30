@@ -8,66 +8,66 @@
     "quality": 0,
     "places": {
       "train": {
-        "calls": 232,
-        "tris": 158357,
+        "calls": 230,
+        "tris": 159185,
         "gpu": {
           "medianMs": 16.7,
           "p99Ms": 16.8,
-          "build": "0930-1236-d11eeec"
+          "build": "0930-1823-d329dc3a"
         }
       },
       "gate": {
-        "calls": 265,
-        "tris": 137000,
+        "calls": 272,
+        "tris": 137461,
         "gpu": {
           "medianMs": 16.7,
           "p99Ms": 16.8,
-          "build": "0930-1236-d11eeec"
+          "build": "0930-1823-d329dc3a"
         }
       },
       "office": {
-        "calls": 450,
-        "tris": 529693,
+        "calls": 390,
+        "tris": 525665,
         "gpu": {
           "medianMs": 16.7,
           "p99Ms": 16.8,
-          "build": "0930-1236-d11eeec"
+          "build": "0930-1823-d329dc3a"
         }
       },
       "forecourt": {
-        "calls": 166,
-        "tris": 225000,
+        "calls": 167,
+        "tris": 227139,
         "gpu": {
           "medianMs": 16.7,
           "p99Ms": 16.8,
-          "build": "0930-1236-d11eeec"
+          "build": "0930-1823-d329dc3a"
         }
       },
       "plaza": {
-        "calls": 49,
-        "tris": 134599,
+        "calls": 60,
+        "tris": 129743,
         "gpu": {
           "medianMs": 16.7,
           "p99Ms": 16.8,
-          "build": "0930-1236-d11eeec"
+          "build": "0930-1823-d329dc3a"
         }
       },
       "dorm_court": {
-        "calls": 51,
-        "tris": 61877,
-        "gpu": {
-          "medianMs": 16.7,
-          "p99Ms": 100.1,
-          "build": "0930-1236-d11eeec"
-        }
-      },
-      "dorms": {
-        "calls": 79,
-        "tris": 55871,
+        "calls": 59,
+        "tris": 68423,
         "gpu": {
           "medianMs": 16.7,
           "p99Ms": 16.8,
-          "build": "0930-1236-d11eeec"
+          "build": "0930-1823-d329dc3a"
+        }
+      },
+      "dorms": {
+        "calls": 83,
+        "tris": 59511,
+        "gpu": {
+          "medianMs": 16.7,
+          "p99Ms": 16.7,
+          "build": "0930-1823-d329dc3a"
         }
       }
     }
@@ -80,66 +80,66 @@
     "quality": 0,
     "places": {
       "train": {
-        "calls": 183,
-        "tris": 132843,
+        "calls": 179,
+        "tris": 133087,
         "gpu": {
           "medianMs": 16.7,
           "p99Ms": 16.8,
-          "build": "0930-1236-d11eeec"
+          "build": "0930-1823-d329dc3a"
         }
       },
       "gate": {
-        "calls": 178,
-        "tris": 122000,
+        "calls": 173,
+        "tris": 124747,
         "gpu": {
           "medianMs": 16.7,
           "p99Ms": 16.8,
-          "build": "0930-1236-d11eeec"
+          "build": "0930-1823-d329dc3a"
         }
       },
       "office": {
-        "calls": 217,
-        "tris": 265191,
+        "calls": 189,
+        "tris": 280989,
         "gpu": {
           "medianMs": 16.7,
           "p99Ms": 16.8,
-          "build": "0930-1236-d11eeec"
+          "build": "0930-1823-d329dc3a"
         }
       },
       "forecourt": {
-        "calls": 131,
-        "tris": 198000,
+        "calls": 147,
+        "tris": 197867,
         "gpu": {
           "medianMs": 16.7,
           "p99Ms": 16.8,
-          "build": "0930-1236-d11eeec"
+          "build": "0930-1823-d329dc3a"
         }
       },
       "plaza": {
-        "calls": 43,
-        "tris": 131115,
+        "calls": 49,
+        "tris": 120887,
         "gpu": {
           "medianMs": 16.7,
           "p99Ms": 16.8,
-          "build": "0930-1236-d11eeec"
+          "build": "0930-1823-d329dc3a"
         }
       },
       "dorm_court": {
-        "calls": 40,
-        "tris": 61831,
+        "calls": 46,
+        "tris": 68377,
         "gpu": {
           "medianMs": 16.7,
           "p99Ms": 16.8,
-          "build": "0930-1236-d11eeec"
+          "build": "0930-1823-d329dc3a"
         }
       },
       "dorms": {
-        "calls": 69,
-        "tris": 55847,
+        "calls": 74,
+        "tris": 59509,
         "gpu": {
           "medianMs": 16.7,
           "p99Ms": 16.8,
-          "build": "0930-1236-d11eeec"
+          "build": "0930-1823-d329dc3a"
         }
       }
     }
@@ -152,66 +152,66 @@
     "quality": 1,
     "places": {
       "train": {
-        "calls": 253,
-        "tris": 196324,
+        "calls": 244,
+        "tris": 196792,
         "gpu": {
           "medianMs": 16.7,
           "p99Ms": 16.8,
-          "build": "0930-1236-d11eeec"
+          "build": "0930-1823-d329dc3a"
         }
       },
       "gate": {
-        "calls": 193,
-        "tris": 124454,
+        "calls": 181,
+        "tris": 127710,
         "gpu": {
           "medianMs": 16.7,
           "p99Ms": 16.8,
-          "build": "0930-1236-d11eeec"
+          "build": "0930-1823-d329dc3a"
         }
       },
       "forecourt": {
-        "calls": 128,
-        "tris": 147402,
+        "calls": 158,
+        "tris": 198174,
         "gpu": {
           "medianMs": 16.7,
           "p99Ms": 16.8,
-          "build": "0930-1236-d11eeec"
+          "build": "0930-1823-d329dc3a"
         }
       },
       "office": {
-        "calls": 240,
-        "tris": 291158,
+        "calls": 196,
+        "tris": 281006,
         "gpu": {
           "medianMs": 16.7,
           "p99Ms": 16.8,
-          "build": "0930-1236-d11eeec"
+          "build": "0930-1823-d329dc3a"
         }
       },
       "plaza": {
-        "calls": 50,
-        "tris": 133378,
+        "calls": 56,
+        "tris": 123152,
         "gpu": {
           "medianMs": 16.7,
           "p99Ms": 16.8,
-          "build": "0930-1236-d11eeec"
+          "build": "0930-1823-d329dc3a"
         }
       },
       "dorm_court": {
-        "calls": 45,
-        "tris": 56342,
+        "calls": 54,
+        "tris": 70298,
         "gpu": {
           "medianMs": 16.7,
           "p99Ms": 16.8,
-          "build": "0930-1236-d11eeec"
+          "build": "0930-1823-d329dc3a"
         }
       },
       "dorms": {
-        "calls": 70,
-        "tris": 55860,
+        "calls": 81,
+        "tris": 59516,
         "gpu": {
           "medianMs": 16.7,
           "p99Ms": 16.8,
-          "build": "0930-1236-d11eeec"
+          "build": "0930-1823-d329dc3a"
         }
       }
     }

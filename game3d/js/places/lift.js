@@ -561,6 +561,13 @@ export function attachLift(game, place) {
     const r = PEOPLE.worker(d.worker);
     r.root.scale.multiplyScalar(K);
     r.root.visible = false;
+    // At the forecourt the car stands under the head office's upper floors, where the sun never reaches: their sun
+    // shadow can't show (0 pixels changed with it off, notes/PERF.md), and drawing it was about 44 draws a frame of
+    // the ride's first seconds, the forecourt's busiest. Their blob shadows stay.
+    if (place.name === 'forecourt')
+      r.root.traverse((o) => {
+        if (o.isMesh) o.castShadow = false;
+      });
     const b = blob(0.5, 0.35);
     b.visible = false;
     r.blob = b;

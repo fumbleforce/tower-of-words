@@ -40,6 +40,11 @@ function placeRec() {
     tris: new Float32Array(CAP / SAMPLE),
     m: 0,
     worst: 0,
+    visits: 0,
+    since: 0, // when this visit to the place began (ms)
+    // the busiest sampled frame: its calls, ms into its visit, which visit, Eric's x and z, and whether a trip
+    // (walk out, crossfade) was on screen, so a peak can be told from a transition
+    peak: { calls: 0, ms: 0, visit: 0, x: 0, z: 0, trip: false },
   };
 }
 
@@ -66,6 +71,7 @@ export function installMetrics(game, qualityNow = () => null) {
   let calls = 0,
     tris = 0;
 
+  let lastPlace = null;
   let last = 0,
     frame = 0,
     armed = false,
@@ -93,6 +99,11 @@ export function installMetrics(game, qualityNow = () => null) {
     const name = game.place && game.place.name;
     let rec = null;
     if (recording && name) rec = recs[name] || (recs[name] = placeRec());
+    if (rec && game.place !== lastPlace) {
+      lastPlace = game.place;
+      rec.visits++;
+      rec.since = now;
+    }
     if (real) {
       ring[ringAt] = dt;
       ringAt = (ringAt + 1) % WINDOW;
@@ -115,6 +126,16 @@ export function installMetrics(game, qualityNow = () => null) {
         if (rec && rec.m < rec.calls.length) {
           rec.calls[rec.m] = calls;
           rec.tris[rec.m++] = tris;
+          if (calls > rec.peak.calls) {
+            const pk = rec.peak,
+              e = game.player && game.player.root.position;
+            pk.calls = calls;
+            pk.ms = Math.round(now - rec.since);
+            pk.visit = rec.visits;
+            pk.x = e ? round1(e.x) : 0;
+            pk.z = e ? round1(e.z) : 0;
+            pk.trip = document.body.classList.contains('trip');
+          }
         }
       }
     } else if (frame % SAMPLE === 0 && info.autoReset) {
@@ -201,6 +222,7 @@ export function installMetrics(game, qualityNow = () => null) {
         samples: r.m,
         calls: Math.round(quantile(r.calls, r.m, 0.5)),
         callsMax: Math.round(quantile(r.calls, r.m, 1)),
+        callsMaxAt: { ...r.peak },
         tris: Math.round(quantile(r.tris, r.m, 0.5)),
         trisMax: Math.round(quantile(r.tris, r.m, 1)),
       };

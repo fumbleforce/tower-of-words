@@ -49,6 +49,48 @@ Keep the old baselines and their warnings. The medians are under 200; the foreco
 does not timestamp peak samples, so a transition or preparation explanation remains unproven. Claude owns
 attributing and reducing that peak; changing the baseline cannot establish compliance with the phone limit.
 
+### Where the evening's draws went, and the fixes (issues #93, #94)
+
+Measured with `day-calls.mjs --every 100 --trips --who <id>` against the build before the dorm floor and the
+discoveries (496e82d), phone q0. What the new staging added: the two movable bikes by the forecourt rack were
+about 20 meshes each and cast shadows (35 shadow draws wherever the rack is in the shadow map); 203's mailbox flap
+was a box with six materials (6 draws); the plaza's canteen worker and the dorm hall's new geometry add a few more.
+The forecourt's 241 peak was not new staging: it is the lift ride's first seconds (the two Sales riders, 43 draws
+and 44 shadow draws, unmerged because they idle), and a second peak (about 207) on entering from the gate is Kuroda:
+his torso starts breathing on entry (cast.js `idle()`), the draw-call pass lets his 27 parts go, and merges them
+again under the torso about a second later.
+
+- Each movable bike is merged per material when it's built (places/fallen-bikes.js; its front wheel stays apart to
+  turn): 35 → 11 shadow draws. The flap is one box with two groups (scenes/dorm-court/hall.js): 6 → 2.
+- The draw-call pass batches every person's parts under their torso from the start (perf/batch.js), so nobody
+  comes apart on entry: Kuroda 54 → 6 draws in the forecourt's first second.
+- The forecourt's lift riders cast no sun shadow (places/lift.js): the car there is under the head office's upper
+  floors. Paired shots with it on and off at arrival and during the ride (phone q0 and q1, desktop): no pixel of the
+  3D view changed. Their blob shadows stay; the office's riders are untouched.
+- Look: `ab.mjs` pass off/on for forecourt, dorm_court and office is the same as on main (forecourt 0.06% of pixels
+  over 8/255, the same planter pool as before); close-ups of the bikes and the flap (open and shut) at 390x844 and
+  1366x860 match main.
+- The fast test prints `perf peaks` per place: the busiest sampled frame's calls, which visit, seconds after entry,
+  Eric's position and whether a trip was on screen (js/perf/metrics.js, in perf.json as `callsMaxAt`).
+
+Fast test after (GL=gpu), median / sampled peak calls; the baselines in budgets.json were rewritten from these runs
+(`PERF_BASELINE=1`; reason: the evening staging, less what the fixes above took back; the desktop office and forecourt
+1% lows stay at 16.8 ms, as that run's 50 ms were one-off frames):
+
+| place | phone q0 before | phone q0 after | phone q1 (default) after | desktop q0 after |
+|---|--:|--:|--:|--:|
+| forecourt  | 175 / 241 | 147 / 167 | 158 / 181 | 167 / 226 |
+| plaza      |  58 / 72  |  49 / 60  |  56 / 67  |  60 / 62  |
+| dorm_court |  50 / 78  |  46 / 47  |  54 / 94  |  59 / 96  |
+| dorms      |  74 / 76  |  74 / 76  |  81 / 126 |  83 / 107 |
+
+Every outdoor place and the dorms are under 200 at the phone default, median and peak. Other places in the same
+runs, phone q1 median: train 244 (the first place, see Phone default quality), gate 181, office 196 (240 before).
+Preparation (`hitch.mjs`, 390x844, CPU 4x, q0): plaza → dorm_court longest task 73 ms, dorm_court → dorms 98 ms,
+the same as before the dorm floor (69 and 89 ms on 496e82d); at 1366x860 none over 50. The one long step is the dorm
+courtyard's `buildCourt` (about 60 ms at CPU 4x in one step of `dormCourtSteps`) and the dorms' builder, which isn't
+sliced; both older than this delivery.
+
 ## Results, 2026-09-28 (GL=gpu, q=1)
 
 ```

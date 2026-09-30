@@ -86,8 +86,13 @@ export function optimizePlace(place, opt = {}) {
   const excluded = () => {
     const ex = new Set(),
       bd = new Set();
-    for (const r of Object.values(place.people || {})) if (r && r.root) (BOUNDS ? bd : ex).add(r.root);
-    for (const [id, t] of Object.entries(place.things || {})) {
+    for (const r of Object.values(place.people || {})) {
+      if (r && r.root) (BOUNDS ? bd : ex).add(r.root);
+      // a person's torso breathes every frame once the place is played (cast.js idle()): batch under it from the
+      // start, or the parts on it draw one by one for the first second after every entry, until the pass sees it move
+      if (r && r.torso && r.torso.isObject3D) movers.add(r.torso);
+    }
+    for (const t of Object.values(place.things || {})) {
       if (!t) continue;
       if (t.obj && t.obj.isObject3D) (BOUNDS ? bd : ex).add(t.obj);
       if (typeof t.outline === 'function') {
