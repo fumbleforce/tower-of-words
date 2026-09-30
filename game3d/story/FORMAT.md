@@ -172,6 +172,14 @@ Events: `start`, `sat_down`.
 - `lunchSit` `with: 'mio'|'mori'`: Eric and the partner sit down to lunch (machine room floor, or the kitchenette table). `lunchOver`: lunch packed away, everyone back on the floor.
 - `catTo` `to`: lifts Tama off the chair and walks her (a spot or an id).
 
+### Dorm courtyard (`dorm_court`)
+
+- `mailbox203` `state: 'open'|'close'`: mailbox 203 in the hall. Open: the camera comes in close on it, the flap swings open on the folded bakery flyer inside (the flyer stays in the box after). Close: the flap shuts and the camera lets go. Both finish their motion before the story goes on; a save keeps the flap and the flyer. The `mailboxes` pin shows only while the story has a `talk:mailboxes` trigger.
+
+### Eric's floor (`dorms`)
+
+- `enterRoom`: Eric goes in at his door: his front drops, the door opens, he steps over the genkan into the room and the view widens to the flat.
+
 ## Portraits
 
 The speaker's portrait shows beside the text box ([docs/game/controls-and-ui.md](../../docs/game/controls-and-ui.md)). The faces each person has are listed in docs/game/cast.md, Portraits. Set one on a line with the long form `{ say: 'mori', face: 'smile', text: '...' }` (it stays until changed or the scene ends: every triggered scene starts everyone on neutral), or with `{ do: 'expression', who: 'guard', face: 'stern' }`. A face that person doesn't have falls back to neutral. The `emote` hook also picks a face when that person has a fitting one: `?` suspicious/stern, `!` panicked/surprised, `♪`/`heart` smile/grin/amused, `sweat` flustered/sheepish/panicked, `zzz` sleepy/tired, `…` tired.

@@ -1,14 +1,20 @@
-// The dorm courtyard after work, reached along the lane from the plaza (docs/game/places.md); it also loads
-// directly with ?place=dorm_court. Walking into the hall doors, or using them, starts the watched walk to Eric's room.
+// The dorm courtyard, reached along the lane from the plaza (docs/game/places.md); it also loads directly with
+// ?place=dorm_court. Eric walks in through the hall doors himself; the passage at the back of the hall (walking into
+// it, or using it) starts the trip up the stairs to his floor.
 export default {
   start: 'arrive',
   on: {
-    'talk:dorm_entry': 'go_in',
-    'zone:dorm_entry': { node: 'go_in', once: true },
+    'talk:dorm_entry': 'hall',
+    'zone:hall': { node: 'hall', once: true },
+    'talk:stairs': 'go_up',
+    'zone:passage': { node: 'go_up', once: true },
   },
-  goal: { dorm_entry: true },
   nodes: {
-    arrive: [{ do: 'goal', text: 'Go in through the dorm entrance to your room.' }],
-    go_in: [{ do: 'next' }],
+    arrive: [
+      { do: 'goal', text: 'Go in through the dorm entrance. Your room is 203.', at: 'dorm_entry' },
+      { set: 'dorm_room_known' },
+    ],
+    hall: [{ do: 'goal', text: 'Room 203 is on 2F. The stairs are through the back.', at: 'stairs' }],
+    go_up: [{ do: 'next' }],
   },
 };

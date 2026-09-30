@@ -1,8 +1,10 @@
-// Eric's dorm room: the worst one, its window facing the next block's bare end wall a couple of metres out
-// (docs/game/places.md). The camera looks north, down into the flat with its ceiling cut away: the tatami room at
-// the back (desk and lamp, bed, closet, a table with his dinner, his boxes from home), the entry strip in front
-// (kitchenette, unit bath, genkan), then the open corridor with the neighbours' doors. The plan is in
-// scenes/dorms/layout.js; the parts in scenes/dorms/. Evening only: dim cool dusk, the room's own warm lights.
+// Eric's floor, 2F of his dorm block, and his room: the worst one, its window facing the next block's bare end wall a
+// couple of metres out (docs/game/places.md). The camera looks north, down onto the floor with its ceiling cut away:
+// the open corridor from the stairs at its east end (dorms/stairs.js) past the neighbours' doors to his, and behind
+// it the flats cut open, his in the middle: the tatami room at the back (desk and lamp, bed, closet, a table with
+// his dinner, his boxes from home), the entry strip in front (kitchenette, unit bath, genkan). Over the corridor's
+// parapet, the roofs on the court below (dorms/below.js). The plan is in scenes/dorms/layout.js; the parts in
+// scenes/dorms/. Evening only: dim cool dusk, the room's own warm lights, the cool corridor and stair lights.
 import * as THREE from 'three';
 import { Nav } from '../movement/navigation.js';
 import { lightPool } from '../places/life.js';
@@ -22,8 +24,15 @@ import {
   COUNTER_X,
   BATH_X,
   GENKAN_Z,
+  CORR,
+  RETURN,
+  STAIR,
+  LANDING,
 } from './dorms/layout.js';
 import { floors, walls, building, window_, outside } from './dorms/building.js';
+import { tallFront } from './dorms/doors.js';
+import { stairs } from './dorms/stairs.js';
+import { below } from './dorms/below.js';
 import * as F from './dorms/furniture.js';
 import { kitchenette, bath, genkan, slidingDoor } from './dorms/entry.js';
 
@@ -90,12 +99,24 @@ export function buildDorms() {
   scene.background = new THREE.Color(BG);
   scene.add(root);
   const kit = new Kit();
-  const nav = new Nav(X0 + 0.08, X1 - 0.08, BACK + 0.1, NEAR - 0.1, 0.05);
+  // the walk: the flat, the corridor in front of it from a little past his door to the landing, and the landing
+  const WX0 = X0 - 0.5,
+    nav = new Nav(WX0, STAIR.east - 0.12, BACK + 0.1, STAIR.top - 0.08, 0.05);
+  nav.block(WX0, X0 + 0.08, BACK, CORR[0] + 0.1); // left of the flat
+  nav.block(X1 - 0.08, RETURN + 0.08, BACK, CORR[0] + 0.1); // right of it, to the return
+  nav.block(RETURN, STAIR.east, BACK, STAIR.back + 0.12); // behind the landing
+  nav.block(X0 - 0.2, X1 + 0.2, NEAR - 0.1, CORR[0] + 0.12); // his front wall and door: in only on the way in
+  nav.block(WX0, RETURN + 0.06, CORR[1] - 0.12, STAIR.top); // the parapet
+  nav.block(STAIR.east - 0.3, STAIR.east, 1.3, 1.7); // the fire hose cabinet
 
   floors(kit, root);
   walls(root);
   const door = building(kit, root);
   root.add(door);
+  const front = tallFront();
+  root.add(front);
+  stairs(kit, root);
+  below(root);
   // the three things Eric looks at get their own groups, for their outlines
   const obj = { window: new THREE.Group(), bed: new THREE.Group(), boxes: new THREE.Group() };
   const own = { window: new Kit(), bed: new Kit(), boxes: new Kit() };
@@ -127,9 +148,15 @@ export function buildDorms() {
     nav,
     start: entry,
     roomEntry: entry,
-    // the trip in: along the corridor from the right, to the doorstep, then in
-    corridor: [(DOOR[0] + DOOR[1]) / 2 + 0.75, 0, NEAR + T + 0.36],
+    // the trip in: up the last flight from the half landing onto the landing, then left into the corridor
+    stairFoot: [LANDING[0], STAIR.half[0] + 0.3],
+    stairTop: [LANDING[0], STAIR.top - 0.35],
+    landing: LANDING,
+    corridorIn: [RETURN - 0.4, (CORR[0] + CORR[1]) / 2 - 0.05],
+    // his door from the corridor, the doorstep, then in
+    atDoor: [(DOOR[0] + DOOR[1]) / 2 + 0.2, NEAR + T + 0.36],
     doorstep: [(DOOR[0] + DOOR[1]) / 2, NEAR + T + 0.3],
+    front, // his front wall and door full height, as the corridor sees them; dropped as he goes in
     windowFront: [win[0], BACK + 0.45],
     window: win,
     windowY: WIN[3], // the look marker over the frame's head, clear of the view out
@@ -138,7 +165,7 @@ export function buildDorms() {
     arrive: { at: [(DOOR[0] + DOOR[1]) / 2, 0.2], zoom: 1.2 },
     obj,
     door, // the front door's leaf: rotation.y below 0 swings it out onto the corridor
-    bounds: { x0: X0, x1: X1, back: BACK, near: NEAR, out: OUT, h: H },
+    bounds: { x0: X0, x1: X1, back: BACK, near: NEAR, out: OUT, h: H, corr: CORR, east: STAIR.east, stairs: STAIR },
     camera: { elev: 50, fov: 24 },
     update() {},
   };

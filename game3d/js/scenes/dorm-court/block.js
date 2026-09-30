@@ -1,31 +1,40 @@
 // Eric's dorm block behind the courtyard (scenes/dorm-court.js), `dorm_1` in the island layout: five storeys of
 // plain concrete, its long face on the court running past both edges of the frame, and at its east end a return
-// that comes forward along the court's east side. Balconies all along the court face, one per room, with
-// dividers, a few air-conditioner units and laundry poles; a few rooms are lit. Merged per colour by the court's
-// mergeStatic; the lit windows are one emissive mesh.
+// that comes forward along the court's east side. Along the long face, one open corridor a floor (2F to 5F): the
+// slab out from the face and a low concrete parapet, and behind it the flats' front doors (six a floor, the same
+// flats and doors as the dorms scene, so 203's door is almost above the hall doors), each with its light, meter box
+// and kitchen window, some lit. The corridors run into the return, where the stairs are, behind a tall stair window
+// on its west face. The return's front keeps balconies. Merged per colour by the court's mergeStatic; the lit
+// windows are one emissive mesh, the corridor lights another.
 import * as THREE from 'three';
 import { mat, rbox } from '../../props.js';
 import { boxes } from '../forecourt/details.js';
 import { Parts } from '../outdoor/parts.js';
+import { PITCH, DOOR } from '../dorms/layout.js';
+import { DORMS, STOREY, STAIR_WINDOW, RETURN_X, RETURN_Z } from './plan.js';
 
 export const BLOCK = {
   x0: -10.5, // the long face's west end, well past the frame
   x1: 9.4, // the return's east side, past the frame
   z: -4.3, // the long face (the court side)
-  back: -8.1,
-  rx: 5.9, // the return's west face, on the court's east side
-  rz: 1.0, // the return's front
-  ground: 2.45, // the ground floor, clear of the laundry's and the sento's roofs
-  floor: 1.75, // each floor above it
+  back: -8.45, // the flats' back walls (the dorms scene): 1.15 short of dorm_1e
+  corridor: 0.55, // how far the open corridors stand out from the long face
+  rx: RETURN_X, // the return's west face, on the court's east side
+  rz: RETURN_Z, // the return's front
+  ground: DORMS.y, // the ground floor's height (2F's floor), clear of the laundry's and the sento's roofs
+  floor: STOREY, // each floor above it
   floors: 4, // floors above the ground floor: five storeys in all
 };
 const CONCRETE = '#9a9ea3',
   CONCRETE_DARK = '#85898e',
-  PANEL = '#b3bac1', // balcony fronts
+  PANEL = '#b3bac1', // balcony fronts, corridor parapets
   GLASS = '#46505c',
   FRAME = '#5d636c',
   LIT = '#e8c89a',
   LIT_GLOW = '#ffc98a',
+  STEEL = '#5a6a80', // front doors, as in the dorms scene
+  COOL = '#8f99a7', // the corridor and stair lights
+  COOL_GLOW = '#b8c3d4',
   CLOTHES = ['#d9dcd8', '#8fa2b4', '#b7b2a8', '#4f5f74', '#c7cdd2'];
 // which rooms have their lights on, and which have washing out: fixed, so the frame never changes between visits
 const lit = (f, c) => (c * 7 + f * 3) % 9 < 3;
@@ -62,6 +71,52 @@ function balconies(parts, f, y, { x0, x1, bays, z, dir = 1, openings }) {
   }
 }
 
+// the flats along one floor's corridor, numbered from the stairs (east): 201, 202, 203 (Eric's), 205, 206, 207.
+// k is a flat's place from 203 (+1 is 202), so a flat's middle is DORMS.x + k * PITCH, as in the dorms scene
+const FLATS = [2, 1, 0, -1, -2, -3];
+const kitchenLit = (f, k) => (f === 0 ? k === 1 || k === -2 : lit(f + 1, k + 3)); // 2F: 202 home, 206 lamp on
+
+// one floor's open corridor on the long face at height y (its floor): slab, parapet with its cap, the doors behind
+function corridor(parts, f, y, { x0, x1, z, D }) {
+  const len = x1 - x0,
+    cx = (x0 + x1) / 2;
+  parts.slab.push([len, 0.14, D, cx, y - 0.14, z + D / 2]);
+  parts.drip.push([len, 0.02, 0.02, cx, y - 0.16, z + D + 0.002]);
+  parts.panel.push([len, 0.6, 0.09, cx, y - 0.05, z + D - 0.045]);
+  parts.rail.push([len + 0.02, 0.035, 0.13, cx, y + 0.55, z + D - 0.045]);
+  const zf = z + 0.012;
+  for (const k of FLATS) {
+    const c = DORMS.x + k * PITCH + (DOOR[0] + DOOR[1]) / 2;
+    parts.frame.push(
+      [0.04, 1.3, 0.04, c - 0.3, y, zf],
+      [0.04, 1.3, 0.04, c + 0.3, y, zf],
+      [0.64, 0.05, 0.04, c, y + 1.28, zf],
+    );
+    parts.door.push([0.56, 1.26, 0.02, c, y + 0.01, zf]);
+    parts.plate.push([0.16, 0.07, 0.01, c, y + 1.38, zf]);
+    parts.cool.push([0.14, 0.07, 0.05, c + 0.36, y + 1.4, zf + 0.02]);
+    parts.meter.push([0.15, 0.22, 0.05, c + 0.52, y + 0.9, zf + 0.02]);
+    const wx = c - 0.62;
+    (kitchenLit(f, k) ? parts.lit : parts.frost).push([0.3, 0.36, 0.01, wx, y + 0.72, zf]);
+    parts.grille.push([0.36, 0.02, 0.02, wx, y + 0.7, zf + 0.03], [0.36, 0.02, 0.02, wx, y + 1.1, zf + 0.03]);
+    for (let i = 0; i < 5; i++) parts.grille.push([0.012, 0.42, 0.012, wx - 0.14 + i * 0.07, y + 0.69, zf + 0.035]);
+  }
+  // where the corridor runs into the return: the lit way through to the stairs
+  parts.cool.push([0.02, 1.3, D - 0.12, x1 - 0.015, y, z + D / 2 - 0.02]);
+}
+
+// the stair window on the return's west face, one a floor: the flight up to the half landing behind it, lit
+function stairWindow(parts, y, x, [z0, z1]) {
+  parts.cool.push([0.02, 1.2, z1 - z0, x - 0.012, y + 0.3, (z0 + z1) / 2]);
+  parts.frame.push(
+    [0.05, 0.05, z1 - z0 + 0.08, x - 0.02, y + 0.26, (z0 + z1) / 2],
+    [0.05, 0.05, z1 - z0 + 0.08, x - 0.02, y + 1.5, (z0 + z1) / 2],
+    [0.05, 1.2, 0.04, x - 0.02, y + 0.3, (z0 + z1) / 2],
+  );
+  // the half landing's edge across the glass, and a flight's stringer on it
+  parts.slab.push([0.03, 0.1, z1 - z0 - 0.04, x - 0.02, y + 0.84, (z0 + z1) / 2]);
+}
+
 // a row of plain windows on a flat face along x (the ground floor, the return's front)
 function windowsX(parts, y, x0, x1, n, z, h = 0.9, f = 0) {
   const step = (x1 - x0) / n;
@@ -81,7 +136,7 @@ function windowsZ(parts, y, z0, z1, n, x, h = 0.9, f = 0) {
   }
 }
 
-export function ericBlock(root, { hall: [hx0, hx1] }) {
+export function ericBlock(root) {
   const B = BLOCK,
     top = B.ground + B.floors * B.floor;
   const parts = {
@@ -96,6 +151,13 @@ export function ericBlock(root, { hall: [hx0, hx1] }) {
     pole: [],
     cloth: CLOTHES.map(() => []),
     trim: [],
+    drip: [],
+    door: [],
+    plate: [],
+    meter: [],
+    frost: [],
+    grille: [],
+    cool: [],
   };
   // the two volumes: the long block and its return
   root.add(
@@ -114,17 +176,17 @@ export function ericBlock(root, { hall: [hx0, hx1] }) {
       r: 0.03,
     }),
   );
-  // the long face: ten rooms a floor, each with its balcony
+  // the long face: an open corridor a floor, the flats' doors behind it
   for (let f = 0; f < B.floors; f++) {
     const y = B.ground + f * B.floor;
-    balconies(parts, f, y, { x0: B.x0, x1: B.rx, bays: 10, z: B.z });
-    // the floor band between storeys
-    parts.trim.push([B.rx - B.x0, 0.1, 0.04, (B.x0 + B.rx) / 2, y - 0.25, B.z + 0.01]);
+    corridor(parts, f, y, { x0: B.x0, x1: B.rx, z: B.z, D: B.corridor });
   }
-  // the return: its west face on the court (a stair window and two rooms' windows a floor), its front with balconies
+  // the return: its west face on the court (the stair window by the corner, then a room's window a floor), its
+  // front with balconies
   for (let f = 0; f < B.floors; f++) {
     const y = B.ground + f * B.floor;
-    windowsZ(parts, y + 0.2, B.z + 0.3, B.rz - 0.2, 3, B.rx - 0.01, 1.05, f);
+    stairWindow(parts, y, B.rx, STAIR_WINDOW);
+    windowsZ(parts, y + 0.2, -0.9, B.rz - 0.2, 1, B.rx - 0.01, 1.05, f);
     balconies(parts, f + 4, y, {
       x0: B.rx,
       x1: B.x1,
@@ -170,11 +232,15 @@ export function ericBlock(root, { hall: [hx0, hx1] }) {
   put(parts.ac, '#c9cbc8');
   put(parts.pole, '#9aa1a8');
   put(parts.trim, '#a1a5aa');
+  put(parts.drip, '#5b6068');
+  put(parts.door, STEEL);
+  put(parts.plate, '#d8dadc');
+  put(parts.meter, '#b4b8bc');
+  put(parts.frost, '#8f9aa4');
+  put(parts.grille, '#4a515c');
   put(tank, '#9fa4a9');
   put(legs, FRAME);
   parts.cloth.forEach((list, i) => put(list, CLOTHES[i]));
-  // the hall's roof edge meets the block: a band over the hall at the ground floor's head
-  put([[hx1 - hx0 + 0.4, 0.14, 0.12, (hx0 + hx1) / 2, B.ground - 0.08, B.z + 0.06]], CONCRETE_DARK);
   P.build(root);
   const warm = boxes(parts.lit, LIT);
   warm.material = mat(LIT, {
@@ -183,5 +249,9 @@ export function ericBlock(root, { hall: [hx0, hx1] }) {
   });
   warm.castShadow = false;
   root.add(warm);
+  const cool = boxes(parts.cool, COOL);
+  cool.material = mat(COOL, { emissive: new THREE.Color(COOL_GLOW), emissiveIntensity: 0.3 });
+  cool.castShadow = false;
+  root.add(cool);
   return { top };
 }

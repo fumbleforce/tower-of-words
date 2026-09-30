@@ -15,6 +15,8 @@
 //   the street: the lane, 3 wide, grey brick between pale borders; a verge on its far side
 //   the bike shelter: on the east side against the block's return, its roof out over the whole rack (tall things on
 //   the south side would stand between the camera and Eric, so the south side keeps to beds, benches and bollards)
+import { CHUNKS } from '../island-layout.js';
+
 export const HALL = [-1.1, 2.5], // the entrance hall: x range
   FRONT_Z = -1.2, // its glass front (cut low), with the doors
   BACK_Z = -2.9, // its back wall (full height): mailboxes and the passage
@@ -30,6 +32,9 @@ export const LAUNDRY = { x0: -5.9, x1: -1.2, z: -1.9 };
 export const SENTO = { x0: 2.9, z: -1.5 };
 export const RETURN_X = 5.9; // the block's return: its west face, on the court's east side
 export const RETURN_Z = 1.0; // its front
+export const STOREY = 1.75; // the block's floor-to-floor height
+// the stair window on the return's west face (z range): along the flights, which start where the corridors end
+export const STAIR_WINDOW = [-3.55, -1.5];
 
 // the walk: its axis, width and soldier border
 export const AZ = 0.5,
@@ -75,4 +80,15 @@ export const BOLLARDS = [
   [-5.1, 2.55],
   [-1.3, 2.55],
 ];
+// Eric's floor (the dorms scene) in the court's frame: where the dorms scene's origin sits (both chunks are turned
+// the same way, so only shifted; from their places in the island layout) and the height of its floor, 2F
+export const DORMS = {
+  x: CHUNKS.dorms.at[1] - CHUNKS.dorm_court.at[1],
+  z: CHUNKS.dorm_court.at[0] - CHUNKS.dorms.at[0],
+  y: 2.45,
+};
+// the hall: the mailbox bank's middle on the back wall, and the manager's window beside the passage (x range)
+export const MAIL_X = -0.22,
+  MANAGER = [0.66, 1.16];
+export const POOL_Y = 0.02; // light pools on the paving sit above its stones (0.006-0.008), or the two fight for depth
 export const inRect = (x, z, [x0, x1, z0, z1]) => x > x0 && x < x1 && z > z0 && z < z1;

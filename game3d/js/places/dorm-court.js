@@ -5,32 +5,61 @@ import { RoomCam } from '../cam.js';
 import { K } from '../scenes/office.js';
 import { EVENING_GRADE } from '../scenes/town.js';
 import { walkIn } from './edge-walk.js';
+import { dormBath } from './dorm-bath.js';
 import { glide } from '../move.js';
 import { PLACE_DETAILS } from './catalog.js';
 import { snapshotPeople, restorePeople } from './saved-people.js';
-import { dormBath } from './dorm-bath.js';
 
 // The dorm courtyard, on the walk home after work; it also loads with ?place=dorm_court.
-// The trip out is the watched walk through the hall doors and the passage into Eric's room (dorms).
+// Eric walks in through the hall doors himself; the trip out starts at the passage at the back of the hall and
+// goes up the stairs to his floor (dorms).
+const FLAP_OPEN = -1.9, // mailbox 203's flap swung open
+  MAIL_ZOOM = 6; // the camera close on it, the number, the tape and the flyer readable on a phone
 export async function dormCourtPlace(game) {
   const w = await sliced(dormCourtSteps()); // in slices between frames: it's built while the plaza is played
   const cam = new RoomCam(w.camera);
   const floor = new THREE.Plane(new THREE.Vector3(0, 1, 0), 0);
-  const bath = dormBath(game); // the sento's humming after work, and the `bath` discovery
-  const spots = { plaza_entry: w.plazaEntry, dorm_entry: w.dormEntry, bath: bath.spot };
+  const bath = dormBath(game);
+  const spots = {
+    plaza_entry: w.plazaEntry,
+    dorm_entry: w.dormEntry,
+    hall: w.hall,
+    passage: w.passage,
+    bath: bath.spot,
+  };
+  const mb = w.mailbox,
+    mbState = { seen: false, open: false }; // the flyer found; the flap open (an inspection on screen)
+  const inHall = (x, z) => x > w.bounds.hall[0] && x < w.bounds.hall[1] && z < w.door[1] - 0.2;
   const things = {
-    dorm_entry: {
-      ...PLACE_DETAILS.dorm_court.things.dorm_entry,
-      anchor: (v) => v.set(w.door[0], 1.3, w.door[1]),
-      spot: () => w.dormEntry,
-      keep: 1.4, // the hall doors stay clear of the goal's edge arrow (ui/goal-arrow.js)
-      face: () => w.door,
-    },
     bath: {
       ...PLACE_DETAILS.dorm_court.things.bath,
       anchor: (v) => bath.anchor(v),
       spot: () => bath.spot,
       face: bath.face,
+    },
+    // using the doors walks him in through them
+    dorm_entry: {
+      ...PLACE_DETAILS.dorm_court.things.dorm_entry,
+      anchor: (v) => v.set(w.door[0], 1.3, w.door[1]),
+      spot: () => w.hall,
+      keep: 1.4, // the hall doors stay clear of the goal's edge arrow (ui/goal-arrow.js)
+      face: () => w.passageMouth,
+      enabled: () => !inHall(game.player.root.position.x, game.player.root.position.z),
+    },
+    stairs: {
+      ...PLACE_DETAILS.dorm_court.things.stairs,
+      anchor: (v) => v.set(w.passageMouth[0], 1.2, w.passageMouth[1]),
+      spot: () => w.passage,
+      keep: 0.8,
+      face: () => w.passageIn,
+    },
+    // Eric's mailbox; its pin shows once the story gives it something to do (talk:mailboxes)
+    mailboxes: {
+      ...PLACE_DETAILS.dorm_court.things.mailboxes,
+      anchor: (v) => v.set(mb.at[0], mb.y + 0.28, mb.at[1]),
+      spot: () => [mb.at[0] + 0.5, mb.at[1] + 0.34], // beside it, so he doesn't stand between the camera and the box
+      face: () => mb.at,
+      enabled: () => game.runner.has('talk:mailboxes'),
     },
   };
   const b = w.bounds;
@@ -51,8 +80,27 @@ export async function dormCourtPlace(game) {
     spots,
     seats: {},
     people: {},
-    zones: { dorm_entry: (x, z) => Math.abs(x - w.door[0]) < 0.8 && z < w.door[1] + 0.25 },
-    hooks: { bathSong: bath.bathSong },
+    zones: {
+      hall: inHall,
+      passage: (x, z) => Math.abs(x - w.passage[0]) < 0.5 && z < w.passage[1] + 0.1,
+    },
+    hooks: {
+      bathSong: bath.bathSong,
+      // mailbox 203 open (the camera close on it, the flap swung open on the flyer inside) or closed again
+      async mailbox203({ state }) {
+        const open = state === 'open';
+        mbState.open = open;
+        if (open) {
+          mbState.seen = true;
+          mb.flyer.visible = true;
+          cam.closeOn(mb.at, MAIL_ZOOM, mb.y - 0.03);
+        }
+        const from = mb.flap.rotation.y,
+          to = open ? FLAP_OPEN : 0;
+        await game.tween(0.45, (k) => (mb.flap.rotation.y = from + (to - from) * (1 - (1 - k) * (1 - k))));
+        if (!open) cam.release();
+      },
+    },
     fit(aspect) {
       // desktop: the whole court, lane to sento, with the hall and the block's first floors; phone: follow him
       if (aspect >= 1)
@@ -91,9 +139,16 @@ export async function dormCourtPlace(game) {
       bath.leave();
     },
     snapshotState() {
-      return { player: snapshotPeople({ eric: game.player }) };
+      return { player: snapshotPeople({ eric: game.player }), mailbox: { ...mbState } };
     },
     restoreState(saved) {
+      const m = saved.world?.mailbox;
+      if (m) {
+        Object.assign(mbState, m);
+        mb.flyer.visible = !!m.seen;
+        mb.flap.rotation.y = m.open ? FLAP_OPEN : 0;
+        if (m.open) cam.closeOn(mb.at, MAIL_ZOOM, mb.y - 0.03);
+      }
       if (saved.world?.player) {
         restorePeople({ eric: game.player }, saved.world.player);
         game.walker.sync();
@@ -114,15 +169,12 @@ export async function dormCourtPlace(game) {
       cam.release();
     },
     async tripOut(g) {
-      // in through the hall doors, past the mailboxes and into the passage to the rooms, the camera coming in close
-      await g.walkTo(w.dormEntry[0], w.dormEntry[1]);
+      // from the passage's mouth into the passage, the camera coming in close; the stairs are the crossfade
       const eric = g.player;
       eric.scripted = true;
       g.walker.locked = true;
-      cam.closeOn(w.door, 1.4);
-      await glide(g, eric.root, [w.door[0], w.door[1] - 0.45], 1.1);
-      await glide(g, eric.root, w.hallMid, 1.1);
-      cam.closeOn(w.passage, 1.7);
+      cam.closeOn(w.passageMouth, 1.7);
+      await glide(g, eric.root, w.passage, 1.1);
       await glide(g, eric.root, w.passageIn, 1.1);
       eric.setState('idle');
     },

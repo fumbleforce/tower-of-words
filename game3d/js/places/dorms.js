@@ -1,28 +1,45 @@
 import * as THREE from 'three';
 import { buildDorms } from '../scenes/dorms.js';
+import { stairY } from '../scenes/dorms/stairs.js';
 import { RoomCam } from '../cam.js';
 import { K } from '../scenes/office.js';
 import { glide } from '../move.js';
 import { PLACE_DETAILS } from './catalog.js';
 import { snapshotPeople, restorePeople } from './saved-people.js';
 
-// Eric's dorm room. The trip in from the dorm courtyard (dorm-court.js) ends with him stepping in through his
-// front door; the room also loads directly with ?place=dorms.
+// Eric's floor and his room. The trip in from the dorm courtyard (dorm-court.js) brings him up the last flight onto
+// the 2F landing; he walks the corridor to his door himself, and going in (the enterRoom hook, from the story) drops
+// his front wall, opens the door and takes him over the genkan into the room, the view widening to the whole flat.
+// It also loads directly with ?place=dorms, on the landing.
 export function dormsPlace(game) {
   const w = buildDorms();
   const cam = new RoomCam(w.camera);
   const floor = new THREE.Plane(new THREE.Vector3(0, 1, 0), 0);
+  const b = w.bounds;
+  // inside: he's in the flat (the room's view, its things); entering: the walk in is playing
+  const st = { inside: false, entering: false };
+  const inRoom = () => st.inside;
   const spots = {
+    landing: w.landing,
+    door_203: w.atDoor,
     room_entry: w.roomEntry,
     window_front: w.windowFront,
   };
   const things = {
+    door_203: {
+      ...PLACE_DETAILS.dorms.things.door_203,
+      anchor: (v) => v.set((w.doorstep[0] + w.atDoor[0]) / 2 - 0.1, 1.55, b.near + 0.12),
+      spot: () => w.atDoor,
+      face: () => [w.doorstep[0], b.near],
+      enabled: () => !st.inside && !st.entering,
+    },
     window: {
       ...PLACE_DETAILS.dorms.things.window,
       anchor: (v) => v.set(w.window[0], w.windowY, w.window[1]),
       spot: () => w.windowFront,
       face: () => w.window,
       outline: () => w.obj.window,
+      enabled: inRoom,
     },
     boxes: {
       ...PLACE_DETAILS.dorms.things.boxes,
@@ -30,6 +47,7 @@ export function dormsPlace(game) {
       spot: () => w.boxes.spot,
       face: () => [w.boxes.x, w.boxes.z],
       outline: () => w.obj.boxes,
+      enabled: inRoom,
     },
     bed: {
       ...PLACE_DETAILS.dorms.things.bed,
@@ -37,9 +55,67 @@ export function dormsPlace(game) {
       spot: () => w.bed.spot,
       face: () => [w.bed.x, w.bed.z],
       outline: () => w.obj.bed,
+      enabled: inRoom,
     },
   };
-  const b = w.bounds;
+
+  // the corridor's view: over the court, down onto the corridor, the flats behind it and the stairs; on a desktop
+  // the whole way from the landing to his door in one frame, on a phone following him along it
+  function corridorFit(aspect) {
+    const [c0, c1] = b.corr;
+    if (aspect >= 1)
+      cam.fit(
+        aspect,
+        [
+          new THREE.Vector3(-1.4, 0, c1),
+          new THREE.Vector3(b.east + 0.2, 0, c1),
+          new THREE.Vector3(3.3, b.h, b.back - 0.1),
+          new THREE.Vector3(3.3, -0.5, b.stairs.half[0]),
+        ],
+        new THREE.Vector3(3.3, 0, (c0 + c1) / 2 - 0.4),
+        { follow: true, clamp: [3.0, 3.6, 1.2, 1.6], limY: 0.92 },
+      );
+    else
+      cam.fit(
+        aspect,
+        [
+          new THREE.Vector3(-1.5, 0, c1),
+          new THREE.Vector3(1.5, 0, c1),
+          new THREE.Vector3(0, b.h, b.back + 0.6),
+          new THREE.Vector3(0, 0, b.stairs.half[1]),
+        ],
+        new THREE.Vector3(0, 0, (c0 + c1) / 2 - 0.3),
+        { follow: true, clamp: [-0.2, b.east - 1.2, 0.8, 1.4], lead: -0.6 },
+      );
+  }
+  // the room's view: the whole flat in one still frame, window wall to front door
+  function roomFit(aspect) {
+    cam.fit(
+      aspect,
+      [
+        new THREE.Vector3(b.x0, 0, b.near),
+        new THREE.Vector3(b.x1, 0, b.near),
+        new THREE.Vector3(b.x0, b.h, b.back),
+        new THREE.Vector3(b.x1, b.h, b.back),
+      ],
+      new THREE.Vector3(0, 0.3, (b.back + b.near) / 2 - 0.25), // a little room above for the wall outside
+      { limX: aspect >= 1 ? 0.9 : 0.96, limY: 0.9 },
+    );
+  }
+  // a new framing eased into from the current one (fit() places the camera at once)
+  function refit() {
+    const t = cam.target.clone(),
+      d = cam.dist;
+    P.fit(cam.camera.aspect);
+    cam.target.copy(t);
+    cam.dist = d;
+    cam.place();
+  }
+  function setInside() {
+    st.inside = true;
+    w.front.visible = false;
+  }
+
   const P = {
     scene: w.scene,
     camera: cam.camera,
@@ -48,8 +124,8 @@ export function dormsPlace(game) {
     nav: w.nav,
     sun: w.sun,
     charScale: K,
-    start: w.start,
-    startFacing: Math.PI,
+    start: w.landing,
+    startFacing: -Math.PI / 2, // along the corridor toward his door
     defaultPeriod: 'evening',
     music: 'night',
     grade: {
@@ -69,27 +145,55 @@ export function dormsPlace(game) {
     spots,
     seats: {},
     people: {},
-    zones: {},
-    hooks: {},
+    zones: {
+      door_203: (x, z) => !st.inside && Math.abs(x - w.doorstep[0]) < 0.4 && z > b.corr[0] && z < b.corr[0] + 0.45,
+    },
+    hooks: {
+      // in at his door: the front drops, the door swings open, over the genkan to the room, the door shuts
+      async enterRoom() {
+        if (st.inside || st.entering) return;
+        st.entering = true;
+        const g = game,
+          eric = g.player;
+        g.walker.stop?.();
+        g.walker.locked = true;
+        eric.scripted = true;
+        await glide(g, eric.root, w.doorstep, 1.1);
+        st.inside = true;
+        refit();
+        cam.closeOn(w.arrive.at, w.arrive.zoom);
+        await g.tween(0.4, (k) => (w.front.scale.y = Math.max(0.001, 1 - k * k)));
+        w.front.visible = false;
+        await g.tween(0.35, (k) => (w.door.rotation.y = -1.5 * k));
+        await glide(g, eric.root, w.roomEntry, 1.2);
+        g.tween(0.45, (k) => (w.door.rotation.y = -1.5 * (1 - k * k)));
+        eric.setState('idle');
+        eric.scripted = false;
+        g.walker.sync();
+        g.walker.locked = false;
+        st.entering = false;
+        cam.release();
+      },
+    },
     fit(aspect) {
-      // the whole flat in one still frame, window wall to front door
-      cam.fit(
-        aspect,
-        [
-          new THREE.Vector3(b.x0, 0, b.near),
-          new THREE.Vector3(b.x1, 0, b.near),
-          new THREE.Vector3(b.x0, b.h, b.back),
-          new THREE.Vector3(b.x1, b.h, b.back),
-        ],
-        new THREE.Vector3(0, 0.3, (b.back + b.near) / 2 - 0.25), // a little room above for the wall outside
-        { limX: aspect >= 1 ? 0.9 : 0.96, limY: 0.9 },
-      );
+      if (st.inside) roomFit(aspect);
+      else corridorFit(aspect);
     },
     pick(rc) {
       const point = new THREE.Vector3();
       return rc.ray.intersectPlane(floor, point) ? point : null;
     },
-    update() {},
+    update() {
+      const p = game.player?.root.position;
+      if (!p) return;
+      // on the stairs (the trip up) his feet follow the flight; anywhere else the floor is level
+      p.y = p.x > w.stairFoot[0] - 0.5 && p.z > b.stairs.top ? stairY(p.z) : 0;
+      // in the flat without the walk in (a saved game, a still): the room's view
+      if (!st.inside && !st.entering && p.z < b.near - 0.05) {
+        setInside();
+        P.fit(cam.camera.aspect);
+      }
+    },
     snapshotState() {
       return { player: snapshotPeople({ eric: game.player }) };
     },
@@ -101,23 +205,21 @@ export function dormsPlace(game) {
       }
     },
     async tripIn(g) {
-      // in along the corridor from the stairs, to his door, then through it, over the genkan, to the doorway of the
-      // room. He comes from the side, so the first frame shows the open door, the genkan and his shoes clear of him
+      // up the last flight from the half landing onto the landing, the camera close; then it pulls back along the
+      // corridor as he turns into it, and lets go
       const eric = g.player;
       eric.scripted = true;
-      eric.root.position.set(...w.corridor);
-      eric.root.rotation.y = -Math.PI / 2;
-      // framed on the doorstep, a little closer than the still frame, then out to the whole flat as he walks in
-      cam.closeOn(w.arrive.at, w.arrive.zoom);
+      eric.root.position.set(w.stairFoot[0], stairY(w.stairFoot[1]), w.stairFoot[1]);
+      eric.root.rotation.y = Math.PI;
+      cam.closeOn(w.stairTop, 1.7);
       cam.snap(eric.root.position);
-      w.door.rotation.y = -1.5; // the front door open onto the corridor
-      await glide(g, eric.root, w.doorstep, 1.2);
-      await glide(g, eric.root, w.roomEntry, 1.2);
-      g.tween(0.45, (k) => (w.door.rotation.y = -1.5 * (1 - k * k)));
+      await glide(g, eric.root, w.stairTop, 1.0);
+      await glide(g, eric.root, w.landing, 1.1);
+      cam.release();
+      await glide(g, eric.root, w.corridorIn, 1.2);
       eric.setState('idle');
       eric.scripted = false;
       g.walker.sync();
-      cam.release();
     },
   };
   return P;
