@@ -125,6 +125,8 @@ Droplets on skin, a ribbon around one wrist, nail colour, an anklet: one or two 
 ## Negative prompt base
 `worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, lowres, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, child, loli`
 
+Base portraits never hold props (Jørgen, 2026-09-30, on Kenji's screwdriver: "base portraits should NEVER have props, props are only for specific states and actions"). A prop goes in only when the picture is of that state or action. On every base portrait, add `holding, holding object, tool, screwdriver, pen, pencil, cup, phone, papers, book` to the negative.
+
 ## Settings
 Euler A, 30 steps, CFG 5; around 1040×1568 for portrait scenes, 1216×832 for wide scenes.
 
