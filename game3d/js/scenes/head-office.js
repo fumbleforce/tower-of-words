@@ -1,9 +1,10 @@
 // Head office at the forecourt: the tower, its canopied entrance and the lobby with the lifts and Kuro's reception.
 // Size and place come from the island layout (island-layout.js BUILDINGS head_office): a curtain-wall tower of twelve
-// storeys, turned about 23° like the map's town grid, east of the station. Its ground floor is the lobby (south-west
-// part) and a closed service block. The lift core stands square to the camera inside the turned lobby, because the
-// lift ride (places/lift.js) films the car straight on: the B2 car (the lift site below, its lid the dark of the
-// core's shafts), a closed second car for 6F-10F and the stair door, with the floor directory beside them.
+// storeys north-east of the station, on the town's grid like the station, the court and the lobby inside it, so every
+// wall, the core and the furniture share one set of axes with the camera. Its ground floor is the lobby (south-west
+// part), a back office and a closed service block. The lift core stands against the lobby's back wall, facing the
+// door: the B2 car (the lift site below, its lid the dark of the core's shafts), a closed second car for 6F-10F and
+// the stair door, with the floor directory beside them.
 // Everything above the ground floor, and the lobby's glass front above its sill, is one occluder (scenes/occluders.js):
 // it fades while Eric is inside the lobby or the lift and comes back when he walks out.
 import * as THREE from 'three';
@@ -42,7 +43,6 @@ export const buildHeadOffice = (root, nav) => drain(headOfficeSteps(root, nav));
 export function* headOfficeSteps(root, nav) {
   const g = new THREE.Group(); // the tower's frame
   g.position.set(T.o[0], 0, T.o[1]);
-  g.rotation.y = -T.a;
   root.add(g);
   const inner = new THREE.Group();
   furniture(inner);
@@ -68,7 +68,9 @@ export function* headOfficeSteps(root, nav) {
   g.traverse((o) => o.isMesh && (o.userData.liftKeep = true));
   const occ = { occluders: [] };
   for (const m of front) m.userData.noBatch = true;
-  addOccluder(occ, [glass, lit, frame, ...front], inLobby, { name: 'ho:upper' });
+  addOccluder(occ, [glass, lit, frame, ...front], inLobby, {
+    name: 'ho:upper',
+  });
   core(root);
   const landing = liftLanding(root);
   yield;
@@ -77,7 +79,6 @@ export function* headOfficeSteps(root, nav) {
   kuro.root.scale.multiplyScalar(K);
   const [kx, kz] = at(RECEPTION[0], RECEPTION[1] + 0.65);
   kuro.root.position.set(kx, 0, kz);
-  kuro.root.rotation.y = -T.a;
   root.add(kuro.root);
   const kb = blob(0.55, 0.35);
   kb.position.set(kx, 0.02, kz);
@@ -92,7 +93,7 @@ export function* headOfficeSteps(root, nav) {
     const [u, n] = inT(x, z);
     if (FURNITURE.some((r) => inRect(u, n, r))) return false;
     if (u < -R || u > T.W + R || n < -R || n > T.D + R) return true;
-    if (n < 0.3 && u > DOOR_U - DOOR_W / 2 + R && u < DOOR_U + DOOR_W / 2 - R) return true;
+    if (n < 0.5 && u > DOOR_U - DOOR_W / 2 + R && u < DOOR_U + DOOR_W / 2 - R) return true; // the door, into the lobby
     return u > 0.18 + R && u < LU - R && n > 0.16 + R && n < LN - R;
   };
   nav.block(CORE[0], CORE[1], CORE[2], CORE[3]);

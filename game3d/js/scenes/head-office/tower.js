@@ -1,5 +1,5 @@
 // The head office's shell (scenes/head-office.js): the upper floors' curtain wall, fins, bands, roof and plant, the
-// lobby's glass front and the canopy, and the ground floor that stays when they fade (service block, sill, floor, apron).
+// lobby's glass front and the canopy, and the ground floor that stays when they fade (service block, sill, floors).
 import { PAL, mat, textTexture, plane, JP_FONT } from '../../props.js';
 import { lightPool } from '../../places/life.js';
 import { monument } from '../forecourt/details.js';
@@ -50,7 +50,7 @@ export function upper(glass, lit, frame) {
   // the lobby's glass front above the sill, its mullions, the transom and the door posts
   const posts = [DOOR_U - DOOR_W / 2, DOOR_U + DOOR_W / 2];
   for (const [u0, u1] of [
-    [0.1, posts[0]],
+    [0.18, posts[0]],
     [posts[1], LU],
   ]) {
     glass.box(u0, u1, 0.5, 2.12, 0.04, 0.1);
@@ -61,29 +61,29 @@ export function upper(glass, lit, frame) {
 }
 
 // the ground floor that stays: the service block (its faces are the lobby's east and back walls), the lobby's west
-// wall and sill, the floor and the apron; the canopy goes in `frame` and, with its fascia and the name (returned),
-// fades with the upper floors
+// wall and sill, and the floors; the court's paving (scenes/forecourt.js) runs up to the walls. The canopy goes in
+// `frame` and, with its fascia and the name (returned), fades with the upper floors
 export function ground(g, frame) {
   const { W, D } = T;
   const wallP = parts(),
     sillP = parts(),
     floorP = parts(),
-    apronP = parts(),
     fasciaP = parts();
   // the ground floor round the lobby is rooms, not a solid block, so it reads when the floors above fade: the
   // outer walls with windows on the two faces the camera sees, the lobby's east and back walls, floors, and a
   // back office east of the lobby with its desks
   const glassP = parts(),
     deskP = parts();
-  const wt = 0.18;
+  const wt = 0.18,
+    SUNK = -0.12; // the outer walls start under the paving, so their shadows meet the ground with no lit seam
   // a wall along u (s = 'u', at n) or along n (s = 'n', at u), windows [a, b] along it from 0.55 to 2.05
   const windowed = (s, a0, a1, at, wins) => {
     const box = (p0, p1, y0, y1) =>
       s === 'u' ? wallP.box(p0, p1, y0, y1, at, at + wt) : wallP.box(at - wt, at, y0, y1, p0, p1);
     let p = a0;
     for (const [a, b] of wins) {
-      box(p, a, 0, GF);
-      box(a, b, 0, 0.55);
+      box(p, a, SUNK, GF);
+      box(a, b, SUNK, 0.55);
       box(a, b, 2.05, GF);
       if (s === 'u') glassP.box(a, b, 0.55, 2.05, at - 0.02, at + 0.04);
       else glassP.box(at - 0.04, at + 0.02, 0.55, 2.05, a, b);
@@ -97,11 +97,11 @@ export function ground(g, frame) {
     return Array.from({ length: n }, (_, i) => [a0 + i * w + 0.15, a0 + (i + 1) * w - 0.15]);
   };
   windowed('u', LU, W, 0, bays(LU + 0.2, W - 0.2)); // south face, east of the lobby
-  windowed('n', 0, D, W, bays(0.2, D - 0.2)); // east face
-  wallP.box(0, W, 0, GF, D - wt, D); // north face
-  wallP.box(0, wt, 0, GF, 0, D); // west face (the lobby's west wall)
-  wallP.box(LU, LU + wt, 0, GF, 0, D); // the lobby's east wall
-  wallP.box(0, LU, 0, GF, LN, LN + wt); // the lobby's back wall
+  windowed('n', wt, D - wt, W, bays(0.4, D - 0.4)); // east face, between the south and north faces
+  wallP.box(0, W, SUNK, GF, D - wt, D); // north face
+  wallP.box(0, wt, SUNK, GF, 0, D - wt); // west face (the lobby's west wall)
+  wallP.box(LU, LU + wt, 0, GF, wt, D - wt); // the lobby's east wall, between the south and north faces
+  wallP.box(wt, LU, 0, GF, LN, LN + wt); // the lobby's back wall, between its west and east walls
   floorP.box(LU, W, -0.04, 0.012, 0, D);
   floorP.box(0, LU, -0.04, 0.012, LN, D);
   // the back office: two rows of desks with their chairs, cabinets along the north wall
@@ -111,67 +111,31 @@ export function ground(g, frame) {
       sillP.box(u - 0.2, u + 0.2, 0, 0.45, n + 0.55, n + 0.95);
     }
   for (let u = LU + 0.4; u < W - 0.5; u += 0.9) sillP.box(u, u + 0.8, 0, 1.3, D - 0.62, D - wt);
-  sillP.box(0, DOOR_U - DOOR_W / 2, 0, 0.5, 0, 0.16);
-  sillP.box(DOOR_U + DOOR_W / 2, LU, 0, 0.5, 0, 0.16);
+  sillP.box(wt, DOOR_U - DOOR_W / 2, SUNK, 0.5, 0, 0.16);
+  sillP.box(DOOR_U + DOOR_W / 2, LU, SUNK, 0.5, 0, 0.16); // the south face's wall starts at LU
   floorP.box(0.18, LU, -0.04, 0.012, 0.16, LN);
   floorP.box(DOOR_U - DOOR_W / 2, DOOR_U + DOOR_W / 2, -0.04, 0.012, -0.02, 0.2);
-  // the plinth: the tower stands on its own paved apron, turned with it and a hair above the court, tiled on the
-  // tower's grid and edged with a dark stone band, so the square court meets it along one straight edge. The lane
-  // to the plaza (scenes/forecourt.js) runs along its south edge, and the worn line from the station comes up it to
-  // the door.
-  const PL = [-1, W + 1, -2.2, D + 1], // u0, u1, n0, n1
-    BAND = 0.28,
-    TILE = 0.9;
-  const Y = 0.011; // its top: over the court's worn line, under the lobby floor
-  apronP.box(PL[0], PL[1], -0.06, Y, PL[2], 0);
-  apronP.box(PL[0], PL[1], -0.06, Y, D, PL[3]);
-  apronP.box(PL[0], 0, -0.06, Y, 0, D);
-  apronP.box(W, PL[1], -0.06, Y, 0, D);
-  sillP.box(PL[0], PL[1], Y, Y + 0.005, PL[2], PL[2] + BAND);
-  sillP.box(PL[0], PL[1], Y, Y + 0.005, PL[3] - BAND, PL[3]);
-  sillP.box(PL[0], PL[0] + BAND, Y, Y + 0.005, PL[2], PL[3]);
-  sillP.box(PL[1] - BAND, PL[1], Y, Y + 0.005, PL[2], PL[3]);
-  // the seams, outside the tower's footprint only (inside it is the lobby floor and the service block)
-  const seamP = parts(),
-    wornP = parts();
-  const [a0, a1, b0, b1] = [PL[0] + BAND, PL[1] - BAND, PL[2] + BAND, PL[3] - BAND];
-  for (let u = PL[0] + TILE; u < a1 - 0.05; u += TILE) {
-    const runs =
-      u > 0 && u < W
-        ? [
-            [b0, 0],
-            [D, b1],
-          ]
-        : [[b0, b1]];
-    for (const [s, e] of runs) seamP.box(u - 0.01, u + 0.01, Y, Y + 0.003, s, e);
-  }
-  for (let n = PL[2] + TILE; n < b1 - 0.05; n += TILE) {
-    const runs =
-      n > 0 && n < D
-        ? [
-            [a0, 0],
-            [W, a1],
-          ]
-        : [[a0, a1]];
-    for (const [s, e] of runs) seamP.box(s, e, Y, Y + 0.003, n - 0.01, n + 0.01);
-  }
-  // the worn line: it arrives from the station along the court and turns at the band to run up to the door
-  wornP.box(PL[0] + BAND, DOOR_U + DOOR_W / 2, Y, Y + 0.0035, -1.2, -0.36);
+  // a dark stone base course round the outside, 0.12 proud of the walls (broken for the door), where the walls meet
+  // the court's paving
+  const B = 0.12,
+    BH = 0.16;
+  sillP.box(-B, DOOR_U - DOOR_W / 2, SUNK, BH, -B, 0);
+  sillP.box(DOOR_U + DOOR_W / 2, W + B, SUNK, BH, -B, 0);
+  sillP.box(-B, W + B, SUNK, BH, D, D + B);
+  sillP.box(-B, 0, SUNK, BH, 0, D);
+  sillP.box(W, W + B, SUNK, BH, 0, D);
   // the canopy: cantilevered over the door, a dark fascia on its front edge carrying the name
   const [c0, c1] = [DOOR_U - 2.0, DOOR_U + 2.0];
-  frame.box(c0, c1, 2.36, 2.5, -1.7, 0);
+  frame.box(c0, c1, 2.4, 2.5, -1.7, -0.02); // on the transom's top, in front of it
   fasciaP.box(c0 - 0.02, c1 + 0.02, 2.06, 2.56, -1.78, -1.66);
   for (const [p, color, name] of [
     [wallP, '#8f949b', 'ho:service'],
     [sillP, '#5b616b', 'ho:sill'],
     [floorP, PAL.floor, 'ho:floor'],
-    [apronP, '#8e8a86', 'ho:apron'],
     [deskP, '#b9bdc2', 'ho:desks'],
-    [seamP, '#7f7b77', 'ho:apronSeams'],
-    [wornP, '#98948f', 'ho:apronWorn'],
   ]) {
     const m = p.mesh(mat(color, name === 'ho:floor' ? { roughness: 0.35, metalness: 0.04 } : {}), name);
-    if (['ho:floor', 'ho:apron', 'ho:apronSeams', 'ho:apronWorn'].includes(name)) m.castShadow = false;
+    if (name === 'ho:floor') m.castShadow = false;
     g.add(m);
   }
   const gfGlass = glassP.mesh(mat('#8c9dad', { roughness: 0.45, metalness: 0.05 }), 'ho:gfGlass');

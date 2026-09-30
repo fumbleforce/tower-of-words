@@ -14,8 +14,8 @@ import * as LAYOUT from './island-layout.js';
 import { skylineSteps } from './skyline.js';
 import { drain } from '../perf/slice.js';
 import { mergeStaticSteps } from './merge-static.js';
-import { fountain, lamps, benches, terrace, laneDetails, bin, groves, merged } from './plaza-details.js';
-import { canteen, shopStreet } from './plaza-buildings.js';
+import { fountain, lamps, benches, terrace, laneDetails, laneSurface, bin, groves, merged } from './plaza-details.js';
+import { canteen, shopStreet, clinicCross } from './plaza-buildings.js';
 
 const CHUNK = 'plaza';
 const local = ([x, z]) => LAYOUT.toLocal(CHUNK, x, z);
@@ -28,59 +28,44 @@ const [PCX, PCZ, R] = path('fountain_plaza').circle;
 const F = local([PCX, PCZ]);
 const BASIN = 4.3; // the map's basin, 8.6 across
 const RING = 7.2; // the lighter paving round the basin
-// the lane: route_home through the chunk, smoothed, 3 wide
+// the lane: route_home through the chunk, 3 wide, on the grid. It runs straight east along the plaza's south edge
+// (LZ) between two corners where it turns north at right angles: at WX back toward head office (whose lane runs
+// on west at WZ) and at EX toward the dorms (on east at EZ). Each turn is a square of lane paving.
 const HALF = path('route_home').w / 2;
-const LANE = (() => {
+const [LZ, WX, WZ, EX, EZ] = (() => {
   const pts = path('route_home').line.map(local);
-  const curve = new THREE.CatmullRomCurve3(
-    pts.map(([x, z]) => new THREE.Vector3(x, 0, z)),
-    false,
-    'centripetal',
-  );
-  return curve.getSpacedPoints(90).map((v) => [v.x, v.z]);
+  // the east-west piece that passes south of the fountain, and its neighbours
+  const i = pts.findIndex((p, k) => k + 1 < pts.length && p[0] < F[0] && pts[k + 1][0] > F[0] && p[1] > F[1]);
+  const r = (v) => Math.round(v * 100) / 100;
+  return [r(pts[i][1]), r(pts[i][0]), r(pts[i - 1][1]), r(pts[i + 1][0]), r(pts[i + 2][1])];
 })();
-// the lane's centre z at x (it runs west to east through the chunk)
-export function laneZ(x) {
-  for (let i = 0; i + 1 < LANE.length; i++) {
-    const [a, b] = [LANE[i], LANE[i + 1]];
-    if (x >= a[0] && x <= b[0]) return a[1] + ((x - a[0]) / (b[0] - a[0])) * (b[1] - a[1]);
-  }
-  return LANE[x < LANE[0][0] ? 0 : LANE.length - 1][1];
-}
-const lanePoint = (x) => [x, laneZ(x)];
-// the lane's heading at x as a facing angle (0 = south, PI/2 = east)
-const laneFace = (x) => Math.atan2(1, laneZ(x + 0.5) - laneZ(x - 0.5));
-function laneDist(x, z) {
-  let d = Infinity;
-  for (let i = 0; i + 1 < LANE.length; i++) {
-    const [a, b] = [LANE[i], LANE[i + 1]];
-    if (Math.max(a[0], b[0]) < x - 4 || Math.min(a[0], b[0]) > x + 4) continue;
-    const dx = b[0] - a[0],
-      dz = b[1] - a[1],
-      t = Math.max(0, Math.min(1, ((x - a[0]) * dx + (z - a[1]) * dz) / (dx * dx + dz * dz)));
-    d = Math.min(d, Math.hypot(x - a[0] - t * dx, z - a[1] - t * dz));
-  }
-  return d;
-}
+const LANE_RECTS = [
+  [WX - HALF, EX + HALF, LZ - HALF, LZ + HALF], // along the plaza
+  [WX - HALF, WX + HALF, WZ - HALF, LZ - HALF], // the west corner and the lane north from it
+  [-40, WX - HALF, WZ - HALF, WZ + HALF], // on west, toward head office
+  [EX - HALF, EX + HALF, EZ - HALF, LZ - HALF], // the east corner and the lane north from it
+  [EX + HALF, 40, EZ - HALF, EZ + HALF], // on east, toward the dorms
+];
+// the lane's middle line along the plaza, sampled west to east (verge, kerbs and drains follow it)
+const LANE = Array.from({ length: 91 }, (_, i) => [-30 + (i * 60) / 90, LZ]);
+// the lane's centre z at x along the plaza
+export const laneZ = () => LZ;
+const lanePoint = (x) => [x, LZ];
+// the lane's heading as a facing angle (0 = south, PI/2 = east)
+const laneFace = () => Math.PI / 2;
+const inRect = (x, z, [x0, x1, z0, z1], m = 0) => x > x0 + m && x < x1 - m && z > z0 + m && z < z1 - m;
+const onLane = (x, z) => LANE_RECTS.some((r) => inRect(x, z, r, 0.25));
 
 // the canteen and the shop street, from the layout
-const CANTEEN = (() => {
-  const [x0, z0] = local(building('canteen').rect.slice(0, 2)),
-    [x1, z1] = local(building('canteen').rect.slice(2));
-  return [x0, z0, x1, z1];
-})();
-const SHOPS = (() => {
-  const [nw, ne, , sw] = building('shops_north').poly.map(local);
-  const L = Math.hypot(ne[0] - nw[0], ne[1] - nw[1]);
-  return {
-    a: nw,
-    dir: [(ne[0] - nw[0]) / L, (ne[1] - nw[1]) / L],
-    depth: Math.hypot(sw[0] - nw[0], sw[1] - nw[1]),
-    length: L,
-  };
-})();
-// the shops' north face (their backs, toward the lane) at x
-const shopsZ = (x) => SHOPS.a[1] + ((x - SHOPS.a[0]) / SHOPS.dir[0]) * SHOPS.dir[1];
+const CANTEEN = [...local(building('canteen').rect.slice(0, 2)), ...local(building('canteen').rect.slice(2))];
+const SHOPS = ((r) => ({
+  a: local(r),
+  dir: [1, 0],
+  depth: r[3] - r[1],
+  length: r[2] - r[0],
+}))(building('shops_north').rect);
+// the shops' north face (their backs, toward the lane)
+const shopsZ = () => SHOPS.a[1];
 
 // walkable: the plaza disc, the lane, the canteen terrace; never the basin
 const TERRACE = [CANTEEN[0] + 0.6, CANTEEN[2] - 0.6, CANTEEN[3] + 0.35, CANTEEN[3] + 4.2];
@@ -97,19 +82,6 @@ function flatMesh(geo, color, opts = {}) {
   m.receiveShadow = true;
   return m;
 }
-// a line beside the lane's centre, o to the south (negative: north), between x0 and x1
-function offsetLine(o, x0 = -40, x1 = 40) {
-  const pts = LANE.filter(([x]) => x >= x0 && x <= x1);
-  return pts.map(([x, z], i) => {
-    const p = pts[Math.max(0, i - 1)],
-      q = pts[Math.min(pts.length - 1, i + 1)],
-      L = Math.hypot(q[0] - p[0], q[1] - p[1]);
-    return [x - ((q[1] - p[1]) / L) * o, z + ((q[0] - p[0]) / L) * o];
-  });
-}
-// the lane's outline, from a north of its centre line to b south of it
-const strip = (a, b, x0, x1) => [...offsetLine(-a, x0, x1), ...offsetLine(b, x0, x1).reverse()];
-
 function ground(root) {
   // the town's paving under everything near; the plaza, the lane, the verge and the terrace on top
   root.add(
@@ -119,27 +91,40 @@ function ground(root) {
       y: 0,
     }),
   );
-  // the verge: from the lane's south kerb to the shops' backs, and a footpath along the backs
+  // the verge: from the lane's south kerb to the shops' backs, ending at the lane's east corner (past it stand the
+  // small blocks on the way to the dorms), with a kerb along its east end; a footpath along the shops' backs
   const west = -30,
-    east = 30;
-  const south = offsetLine(HALF + 0.2, west, east);
+    east = EX + HALF;
+  const south = [west, east].map((x) => [x, LZ + HALF + 0.1]); // from under the kerb, over the plaza disc's rim
   const back = [
-    [east, shopsZ(east) - 1.7],
-    [west, shopsZ(west) - 1.7],
+    [east, shopsZ() - 1.7],
+    [west, shopsZ() - 1.7],
   ];
   root.add(
-    flatMesh(shape([...south, ...back], 0.012), TOWN.grass, {
+    flatMesh(shape([...south, ...back], 0.029), TOWN.grass, {
       roughness: 0.95,
     }),
+  );
+  root.add(
+    merged(
+      [
+        new THREE.BoxGeometry(0.14, 0.1, shopsZ() - 1.7 - LZ - HALF).translate(
+          east + 0.07,
+          0.03,
+          (shopsZ() - 1.7 + LZ + HALF) / 2,
+        ),
+      ],
+      mat('#9a9993'),
+    ),
   );
   root.add(
     flatMesh(
       shape(
         [
-          [west, shopsZ(west) - 1.7],
-          [east, shopsZ(east) - 1.7],
-          [east, shopsZ(east) + 0.05],
-          [west, shopsZ(west) + 0.05],
+          [west, shopsZ() - 1.7],
+          [30, shopsZ() - 1.7],
+          [30, shopsZ() + 0.05],
+          [west, shopsZ() + 0.05],
         ],
         0.014,
       ),
@@ -185,8 +170,29 @@ function ground(root) {
     rad(230),
   ).translate(F[0], 0, F[1]);
   root.add(merged([kerb2], mat('#9a9993')));
-  // the lane over it all
-  root.add(flatMesh(shape(strip(HALF, HALF), 0.032), '#83817d', { roughness: 0.5 }));
+  // the lane over it all (plaza-details.js laneSurface): straight pieces on the grid, squares where two meet, a
+  // stone band round its outline; its south edge along the plaza has the kerb instead (laneDetails)
+  laneSurface(root, LANE_RECTS, [
+    [-40, WZ - HALF],
+    [WX + HALF, WZ - HALF],
+    [WX + HALF, LZ - HALF],
+    [EX - HALF, LZ - HALF],
+    [EX - HALF, EZ - HALF],
+    [40, EZ - HALF],
+    [40, EZ + HALF],
+    [EX + HALF, EZ + HALF],
+    [EX + HALF, LZ + HALF],
+    [WX - HALF, LZ + HALF],
+    [WX - HALF, WZ + HALF],
+    [-40, WZ + HALF],
+  ]);
+  // the verge's kerb west of the lane's straight
+  const kerbW = new THREE.BoxGeometry(WX - HALF + 30, 0.1, 0.14).translate(
+    (WX - HALF - 30) / 2,
+    0.03,
+    LZ + HALF + 0.06,
+  );
+  root.add(merged([kerbW], mat('#9a9993')));
 }
 
 // planted beds with a tree round the plaza's outer ring, at angles from the fountain (0 = east, 90 = south)
@@ -210,7 +216,7 @@ function beds(root, nav) {
 // the verge south of the lane: low shrub beds near the kerb, a row of trees further back (the occlusion rule: a
 // tree 2.3 high stands at least 2.4 from the lane's edge), and bikes by the shops' back doors
 function verge(root) {
-  for (let x = -27; x <= 27; x += 6.5) {
+  for (let x = -27; x <= EX - 1.4; x += 6.5) {
     const [px, pz] = lanePoint(x),
       f = laneFace(x);
     const bed = planter(2.4);
@@ -218,7 +224,7 @@ function verge(root) {
     bed.rotation.y = f - Math.PI / 2;
     root.add(bed);
   }
-  for (let x = -26; x <= 28; x += 3.4) {
+  for (let x = -26; x <= EX - 0.2; x += 3.4) {
     const row = Math.round((x + 26) / 3.4) % 2;
     const z = laneZ(x) + HALF + 2.7 + row * 2.6;
     if (z > shopsZ(x) - 2.2) continue;
@@ -239,34 +245,13 @@ function verge(root) {
 // grass beds with trees on the paving round the plaza (the map's trees between the plaza and its neighbours):
 // [x, z, radius, trees]
 const GROVES = [
-  [16.5, -3.5, 2.6, 3],
+  [20, -1, 1.8, 2],
   [18.5, -11.5, 2.4, 2],
-  [15.0, 3.8, 1.8, 2],
   [-15.5, -6.5, 2.4, 3],
-  [-15.0, -14.0, 2.0, 2],
-  [-17.5, 1.5, 1.8, 1],
+  [-19, -12, 2.0, 2],
+  [-21, 4.5, 1.8, 1],
   [21.5, 3.0, 2.0, 2],
 ];
-// the clinic's green cross, on the south face of the layout's clinic (north of the canteen)
-function clinicCross(root) {
-  const [x0, , x1, z1] = [...local(building('clinic').rect.slice(0, 2)), ...local(building('clinic').rect.slice(2))];
-  const x = (x0 + x1) / 2,
-    y = building('clinic').storeys * building('clinic').floorH - 1.1;
-  root.add(
-    merged(
-      [
-        new THREE.BoxGeometry(1.0, 0.3, 0.08).translate(x, y, z1 + 0.05),
-        new THREE.BoxGeometry(0.3, 1.0, 0.08).translate(x, y, z1 + 0.05),
-      ],
-      mat('#5d8a6c', {
-        emissive: new THREE.Color('#3f6b4d'),
-        emissiveIntensity: 0.3,
-      }),
-      { cast: false },
-    ),
-  );
-}
-
 // buildPlaza() builds it at once; plazaSteps() yields between parts, for building in slices (js/perf/slice.js)
 export const buildPlaza = () => drain(plazaSteps());
 export function* plazaSteps() {
@@ -292,14 +277,18 @@ export function* plazaSteps() {
   nav.extra = (x, z) => {
     const r = Math.hypot(x - F[0], z - F[1]);
     if (r < BASIN + 0.3) return false;
-    return r < R - 0.3 || inTerrace(x, z) || laneDist(x, z) < HALF - 0.25;
+    return r < R - 0.3 || inTerrace(x, z) || onLane(x, z);
   };
 
   ground(root);
   yield;
   const water = fountain(root, F[0], F[1], BASIN);
   yield;
-  laneDetails(root, LANE, HALF);
+  laneDetails(
+    root,
+    LANE.filter(([x]) => x > WX - HALF && x < EX + HALF),
+    HALF,
+  );
   yield;
   benches(
     root,
@@ -321,7 +310,12 @@ export function* plazaSteps() {
   for (const [x, z] of lampPts) nav.block(x - 0.16, x + 0.16, z - 0.16, z + 0.16);
   const lit = lamps(root, lampPts);
   yield;
-  terrace(root, nav, [-5.4, -1.8, 1.8, 5.4, 9.0, 12.6], CANTEEN[3] + 1.9);
+  terrace(
+    root,
+    nav,
+    [0, 1, 2, 3, 4, 5].map((i) => (CANTEEN[0] + CANTEEN[2]) / 2 + (i - 2.5) * 3.5), // clear of the corner beds' trees
+    CANTEEN[3] + 1.9,
+  );
   yield;
   const hall = canteen(root, CANTEEN, building('canteen').floorH);
   yield;
@@ -355,7 +349,11 @@ export function* plazaSteps() {
     ],
   });
   yield;
-  clinicCross(root);
+  clinicCross(
+    root,
+    [...local(building('clinic').rect.slice(0, 2)), ...local(building('clinic').rect.slice(2))],
+    building('clinic'),
+  );
   const sky = yield* skylineSteps(root, CHUNK, {
     layout: LAYOUT,
     skip: ['canteen', 'shops_north', 'arcade', 'shops_south'],

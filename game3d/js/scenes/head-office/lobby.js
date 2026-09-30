@@ -2,6 +2,7 @@
 // tower's frame; the lift core square to the camera with the B2 car's doorway, the second car, the stair door, the
 // directory and the sign strip; and the lift's landing doors.
 import * as THREE from 'three';
+import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
 import { PAL, mat, rbox, plant, textTexture, plane, JP_FONT, wallLamp } from '../../props.js';
 import { lightPool } from '../../places/life.js';
 import { mergeStatic } from '../merge-static.js';
@@ -203,13 +204,16 @@ export function core(root) {
   span(st[0] - 0.04, st[1] + 0.04, 1.55, 1.6, zf - 0.02, zf + 0.03, mat(PAL.doorFrame));
   mergeStatic(g);
   g.traverse((o) => o.isMesh && (o.userData.liftKeep = true));
-  // the B2 car's doorway: jambs and lintel, cut down with the wall while Eric rides (named: never merged)
-  for (const [a, b, y0] of [
+  // the B2 car's doorway: jambs and lintel in one mesh, cut down with the wall while Eric rides (named: never merged)
+  const jambs = [
     [X - 0.8, X - 0.62, 0],
     [X + 0.62, X + 0.8, 0],
     [X - 0.62, X + 0.62, 1.45],
-  ])
-    span(a, b, y0, H, zf - 0.18, zf).name = 'ho:liftWall';
+  ].map(([a, b, y0]) => new THREE.BoxGeometry(b - a, H - y0, 0.18).translate((a + b) / 2, (y0 + H) / 2, zf - 0.09));
+  const doorway = new THREE.Mesh(mergeGeometries(jambs), clad);
+  doorway.name = 'ho:liftWall';
+  doorway.castShadow = doorway.receiveShadow = true;
+  g.add(doorway);
   span(X - 1.42, W0, H + 0.006, H + 0.02, zf - 0.18, zf, mat('#a3a9b3', { roughness: 0.8 })).name = 'ho:liftWallCap';
   // over the B2 shaft, on the lid: the lift's machine on two steel beams across the shaft, and its ropes' sheave
   // (not kept: like the cap, they go with the wall while the car is in view during the ride)
@@ -292,8 +296,8 @@ export function core(root) {
   board.position.set(x1 - 0.95, 0.35 + 0.6, zf + 0.012);
   root.add(board);
   // Kuro's lobby light: warm, from over the core
-  const light = new THREE.PointLight('#ffd8a8', 2.2, 6.5, 1.6);
-  light.position.set(X + 0.6, 2.0, zf + 1.6);
+  const light = new THREE.PointLight('#ffd8a8', 2.2, 4.4, 1.6); // short: it never reaches past the lobby's west wall
+  light.position.set(X + 1.4, 2.0, zf + 1.6);
   root.add(light);
 }
 

@@ -282,6 +282,23 @@ export function terrace(root, nav, xs, z) {
   root.add(merged(canopies, mat('#d4d0c7', { roughness: 0.9 })));
 }
 
+// The lane's surface: its rectangles [x0, x1, z0, z1] in one mesh, and a darker stone band along its outline (a
+// closed loop of corners on the grid), skipping the edge from corner 8 (the kerbed one) and the two far ends (5, 11).
+export function laneSurface(root, rects, outline) {
+  const flat = (x0, x1, z0, z1, y) =>
+    new THREE.PlaneGeometry(x1 - x0, z1 - z0).rotateX(-Math.PI / 2).translate((x0 + x1) / 2, y, (z0 + z1) / 2);
+  const surface = rects.map(([x0, x1, z0, z1]) => flat(x0, x1, z0, z1, 0.032));
+  root.add(merged(surface, mat('#83817d', { roughness: 0.5 }), { cast: false }));
+  const bands = [],
+    w = 0.07;
+  outline.forEach(([ax, az], i) => {
+    if (i === 5 || i === 8 || i === 11) return;
+    const [bx, bz] = outline[(i + 1) % outline.length];
+    bands.push(flat(Math.min(ax, bx) - w, Math.max(ax, bx) + w, Math.min(az, bz) - w, Math.max(az, bz) + w, 0.034));
+  });
+  root.add(merged(bands, mat('#6f6d69', { roughness: 0.6 }), { cast: false }));
+}
+
 // Low kerbs on the lane's south edge and a few drain grates, along the lane's centre line (sampled points).
 export function laneDetails(root, line, half) {
   const kerbs = [],

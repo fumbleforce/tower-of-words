@@ -34,14 +34,22 @@ function circlePts([x, z, r], n = 40) {
 function ribbon(line, w) {
   const left = [],
     right = [];
-  line.forEach((p, i) => {
-    const a = line[Math.max(0, i - 1)],
-      b = line[Math.min(line.length - 1, i + 1)];
+  // the unit normal of the piece from a to b
+  const normal = (a, b) => {
     const dx = b[0] - a[0],
       dz = b[1] - a[1],
       l = Math.hypot(dx, dz) || 1;
-    const nx = (-dz / l) * (w / 2),
-      nz = (dx / l) * (w / 2);
+    return [-dz / l, dx / l];
+  };
+  line.forEach((p, i) => {
+    // mitred: a right-angle turn gets a square corner
+    const n1 = normal(line[Math.max(0, i - 1)], i ? p : line[1]),
+      n2 = normal(i < line.length - 1 ? p : line[i - 1], line[Math.min(line.length - 1, i + 1)]);
+    const m = [n1[0] + n2[0], n1[1] + n2[1]],
+      ml = Math.hypot(...m) || 1,
+      k = w / 2 / Math.max(0.2, (m[0] * n1[0] + m[1] * n1[1]) / ml);
+    const nx = (m[0] / ml) * k,
+      nz = (m[1] / ml) * k;
     left.push([p[0] + nx, p[1] + nz]);
     right.unshift([p[0] - nx, p[1] - nz]);
   });

@@ -2,7 +2,7 @@
 // layout (scenes/island-layout.js) puts it, with Eric. "Compare" (?mapcompare=1): the same drawings over the
 // picked island map, rectified to the island frame (or "As drawn", on the original image), with the layout's
 // buildings, paths and walk rectangles, a slider for how strongly the built places show, and landmark pairs.
-import { CHUNKS, REF, toIsland, toImage } from '../scenes/island-layout.js';
+import { CHUNKS, REF, TOPDOWN, toIsland, toImage } from '../scenes/island-layout.js';
 import { renderAll } from './render.js';
 import { rectify, localAffine, landmarkGaps, seamGaps } from './reference.js';
 import { drawLayout, tag } from './layers.js';
@@ -32,7 +32,14 @@ const OUTLINE = '#7fd1d6',
 const OPTS = ['layout', 'drawn', 'basement', 'backdrop'];
 
 export function createMapScreen(game) {
-  const S = { view: 'map', opacity: 0.75, layout: false, drawn: false, basement: false, backdrop: false };
+  const S = {
+    view: 'map',
+    opacity: 0.75,
+    layout: false,
+    drawn: false,
+    basement: false,
+    backdrop: false,
+  };
   Object.assign(S, { whole: false, zoom: 1, pan: [0, 0], renders: null });
   const gaps = landmarkGaps(),
     seams = seamGaps();
@@ -67,7 +74,12 @@ export function createMapScreen(game) {
     root.addEventListener('click', (e) => {
       const b = e.target.closest('button');
       if (!b) return;
-      if (b.dataset.view) show({ view: b.dataset.view, layout: b.dataset.view === 'compare', focus: null });
+      if (b.dataset.view)
+        show({
+          view: b.dataset.view,
+          layout: b.dataset.view === 'compare',
+          focus: null,
+        });
       if (b.dataset.act === 'close') close();
       if (b.dataset.act === 'in' || b.dataset.act === 'out') zoomBy(b.dataset.act === 'in' ? 1.5 : 1 / 1.5);
       if (b.dataset.act === 'route' || b.dataset.act === 'whole')
@@ -99,12 +111,20 @@ export function createMapScreen(game) {
     canvas.addEventListener('pointerup', () => (drag = null));
     window.addEventListener('resize', () => isOpen() && draw());
     refImage = new Image();
+    let flat = false; // the straight-down picture is in: it wins over the oblique one
     refImage.onload = () => {
-      rectified = rectify(refImage);
+      if (!flat) rectified = rectify(refImage);
       if (isOpen()) draw();
     };
     refImage.onerror = () => ((refFailed = true), isOpen() && draw());
     refImage.src = REF.image;
+    const top = new Image();
+    top.onload = () => {
+      flat = true;
+      rectified = rectify(top, 4, true);
+      if (isOpen()) draw();
+    };
+    top.src = TOPDOWN.image;
   }
 
   const isOpen = () => !!root && root.classList.contains('open');
@@ -339,7 +359,7 @@ export function createMapScreen(game) {
       (refFailed ? `Reference image not found at ${REF.image} (served from the main checkout)\n` : '') +
       (S.drawn
         ? 'On the reference as drawn. '
-        : 'The reference rectified onto the island frame (tall buildings lean north). ') +
+        : 'The reference straight down on the island frame (roofs on their footprints; without it, the picture rectified, tall buildings leaning north). ') +
       'Pink: layout buildings. White: paths. Red: walk rectangles. Ring: the thing on island-map-4; dot: as built. ' +
       'Units apart (1 unit = 1.5 m):\n' +
       worst.map((g) => `${g.label} ${g.units.toFixed(1)}`).join(' · ') +
