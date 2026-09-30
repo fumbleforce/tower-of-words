@@ -126,8 +126,8 @@ is made of).
 
 ## World look (js/look/, 2026-09-29)
 
-`applyLook(place, game)` runs in main.js prepare() after attachLift and before the draw-call pass's first scan (that
-scan is deferred, so the perf tools' hook after `place.name = name;` still sees the look). It patches materials in
+The look runs in places/lifecycle.js prepare() after attachLift and before the draw-call pass's first scan, in slices
+(`lookSteps`, see Preparation hitches below; `applyLook` is the same work at once, for tools and the showcase). It patches materials in
 place and adds a per-vertex `aBake` attribute; batch.js folds `aBake` into its vertex colours and copies the shader
 patch onto its batch materials (clone() drops onBeforeCompile). Numbers: game3d/shots/style-in-game/ and review
 style-in-game.
@@ -190,3 +190,41 @@ Paired paused q0 views, same page with the pass off/on: phone 2,295→560 draw c
 Full-day GPU fast runs passed phone (70s) and desktop (69s). Office median calls were801 and1,268 respectively; geometry was421k and530k triangles. Phone triangles exceed the previous345k baseline by22%, because larger merged bounds cull less finely. The first desktop run recorded a train Eric/Mio overlap at use:tama; the retry passed. Evidence: game3d/shots/office-batching/.
 
 This does not meet the250-call phone target. Lower phone detail and preparation hitches remain open: the observed worst frame was133ms in office on phone,200ms on desktop, with larger hitches in train/gate. No budget is loosened here.
+
+## Preparation hitches (2026-09-30): js/perf/slice.js
+
+The next place is built while the player walks in the current one (NEXT after arrival, the outdoor chunks as Eric
+heads for them). Building the office (scenes/office.js, about 230 ms) and its look (look/index.js and bake.js, about 260 ms) ran
+as one main-thread task, so the forecourt froze for about half a second. Now the builders and the look are
+generators that `yield` between steps (a room, a desk, a person, a mesh, 2,048 vertices of the bake), and
+`sliced()` runs them in 8 ms slices, one slice a frame. While the player is waiting (the loading chip, or nothing on
+screen yet) the slices are 40 ms and run back to back. `buildOffice()`, `buildLobby()` and `applyLook()` still run
+everything at once for tools. The draw-call pass's first scan is a job that yields every 64 meshes, and its
+coplanar check looks up boxes by height instead of testing every pair (4 ms instead of 26 ms in the office).
+`?slice=0` runs it all in one task, the old way.
+
+Look unchanged: with uuids and Math.random made deterministic, every mesh's baked light, surface pattern, vertex
+colour, visibility and layer hash the same with `?slice=0`, with slices, and on the build before
+(office, gate, forecourt, plaza, both sizes).
+
+Measured with `node game3d/tools/perf/hitch.mjs <w> <h> <from:to> ...` (opens `from` with its own preload off, then
+prepares `to` while it records frames and long tasks; `CPU=4` slows the CPU like perf.mjs's phone; JSON in
+game3d/shots/perf/before-hitch-*.json and after-hitch-*.json). GL=gpu, q=1, build 9397590 before:
+
+| trip | size | longest task before | after | 1% low before | after |
+|---|---|--:|--:|--:|--:|
+| forecourt → office (preload for the lift ride down) | 1366x860 | 487 ms | none over 50 | 20 fps | 59.5 fps |
+| forecourt → office | 390x844 | 494 ms | none | 15 fps | 59.5 fps |
+| forecourt → office | 390x844, CPU 4x | 1,827 ms | 55 ms | 5 fps | 20 fps |
+| gate → forecourt (outdoor) | 1366x860 | 51 ms | none | 59.5 fps | 59.5 fps |
+| gate → forecourt | 390x844 | none | none | 59.5 fps | 59.5 fps |
+| gate → forecourt | 390x844, CPU 4x | 172 ms | 53 ms | 30 fps | 20 fps |
+| forecourt → plaza | both | none | none | 59.5 fps | 59.5 fps |
+| train → gate | 1366x860 | 96 ms | none | 30 fps | 59.5 fps |
+
+The office preload takes longer in wall time (about 0.5 s became 0.9 s; 3.4 s at CPU 4x) since it works 8 ms a
+frame, which is well inside the forecourt walk. The 1% low over a few seconds is one or two frames, so it moves a lot
+between runs; the longest task is the steady number. Left over at CPU 4x: attachLift (about 50 ms), one office step
+with a canvas text texture (48 ms) and the outdoor chunk builders (forecourt, plaza, dorm_court, dorms), which are
+small and not yet split. The worst frames the fast test prints (train 233 ms, office 217 ms) are not preparation
+(this tool sees no task over 50 ms there); they come from entering a place, probably shader compiles (not checked).

@@ -4,7 +4,8 @@ import { PLACE_DETAILS, SHARED_THINGS } from './catalog.js';
 import { NEXT } from './definitions.js';
 import { cancelSavedWalk } from './saved-people.js';
 import { attachLift } from './lift.js';
-import { applyLook } from '../look/index.js';
+import { lookSteps } from '../look/index.js';
+import { sliced, setUrgent, nextFrame } from '../perf/slice.js';
 import { optimizePlace } from '../perf/batch.js';
 import { SmoothWalker } from '../move.js';
 import { setPlace as sfxPlace } from '../sfx.js';
@@ -19,6 +20,8 @@ export function createPlaceLifecycle(
   { PLACES, setComposer, resize, buildMarkers, nearSet, zoneSet, snapshot, crossfade },
 ) {
   const ui = game.ui;
+  // preparation runs a slice a frame while a place is being played, flat out while the player waits for it
+  setUrgent(() => !game.place || document.body.classList.contains('loading'));
   async function prepare(name) {
     if (!game.prepared[name])
       game.prepared[name] = (async () => {
@@ -26,8 +29,12 @@ export function createPlaceLifecycle(
         const place = await PLACES[name](game, story);
         assertPlaceRegistered(place, name, PLACE_DETAILS[name]);
         place.name = name;
+        await nextFrame();
         attachLift(game, place); // walk-in lift (places/lift.js)
-        applyLook(place, game); // surface patterns, baked light (look/index.js); materials patched in place
+        await nextFrame();
+        // surface patterns, baked light (look/index.js); materials patched in place, in slices between frames so the
+        // place being played doesn't stall (js/perf/slice.js)
+        await sliced(lookSteps(place, game));
         if (name === 'office') optimizePlace(place, { game });
         return { place, story };
       })();

@@ -3,14 +3,15 @@
 //      Settings > Graphics > Surface detail
 //   4  vertex colour and baked light, a softer version (look/bake.js)
 //   8  small modelled detail in the props (look/detail.js, through props.js)
-// applyLook(place, game) runs once per place, after it's built (main.js prepare(), before the draw-call pass scans
-// it). It patches materials in place and adds a vertex attribute; no material or mesh is swapped, so the places'
+// applyLook(place, game) runs once per place, after it's built (places/lifecycle.js prepare(), before the draw-call
+// pass scans it); prepare runs lookSteps, the same work in slices between frames (js/perf/slice.js). It patches materials in place and adds a vertex attribute; no material or mesh is swapped, so the places'
 // own code (fades, lift clipping, colour changes) and js/perf/batch.js work as before.
 // Flags for comparison shots: ?plainlook, ?surf=0|1, ?bake=0|soft|hard, ?detail=0 (look/flags.js).
 import * as THREE from 'three';
 import { LOOK } from './flags.js';
 import { patchMaterial, setSurface, setProcedural, setDetail, takes, PROC } from './procedural.js';
-import { bakeLight, SOFT, HARD } from './bake.js';
+import { bakeLightSteps, SOFT, HARD } from './bake.js';
+import { drain, busyTime } from '../perf/slice.js';
 import { PAL } from '../props.js';
 import { settings, onSettings, qualityTier } from '../settings.js';
 
@@ -115,8 +116,14 @@ function eligible(o) {
 // place: { scene, space, people, sun, floorY } (a game place), or { scene } with options for the showcase room.
 // opt: surf (bool, default the flag/setting; false leaves the surface patterns out), bake ('soft' | 'hard' | '0'),
 //      exclude (roots to leave alone), warmAt, floorGrad (bakeLight), tier
-export function applyLook(place, game = null, opt = {}) {
-  const t0 = performance.now();
+export const applyLook = (place, game = null, opt = {}) => drain(lookSteps(place, game, opt));
+// the look's cost in place.look.ms is its working time, not the waits between slices
+export function* lookSteps(place, game = null, opt = {}) {
+  const { value: look, ms } = yield* busyTime(lookWork(place, game, opt));
+  if (look) look.ms = Math.round(ms);
+  return look;
+}
+function* lookWork(place, game, opt) {
   if (LOOK.surf === false && LOOK.bake === '0' && opt.surf == null && opt.bake == null) return null; // ?plainlook: the look before
   const scene = place.scene,
     top = place.space || scene;
@@ -142,6 +149,7 @@ export function applyLook(place, game = null, opt = {}) {
     surf.set(o, surfOf(o));
     if (seenGeo.has(o.geometry)) o.geometry = o.geometry.clone();
     seenGeo.add(o.geometry);
+    yield;
   }
   const mats = new Set(list.map((o) => o.material));
 
@@ -163,7 +171,7 @@ export function applyLook(place, game = null, opt = {}) {
             .sub(sun.target ? sun.target.position : new THREE.Vector3())
             .normalize()
         : null;
-    bk = bakeLight(meshes, {
+    bk = yield* bakeLightSteps(meshes, {
       strength: bakeMode === 'hard' ? HARD : SOFT,
       floorY: place.floorY || 0,
       warmAt: opt.warmAt,
@@ -178,10 +186,10 @@ export function applyLook(place, game = null, opt = {}) {
   for (const o of list) {
     if (doSurf) setSurface(o.geometry, surf.get(o), o.userData.tile);
     o.userData.lookDone = true;
+    yield;
   }
   let n = 0;
   for (const m of mats) if (patchMaterial(m)) n++;
-  const ms = performance.now() - t0;
-  place.look = { meshes: list.length, materials: mats.size, patched: n, bake: bk, ms: Math.round(ms) };
+  place.look = { meshes: list.length, materials: mats.size, patched: n, bake: bk, ms: 0 };
   return place.look;
 }

@@ -25,6 +25,7 @@ import { cat } from '../train/people.js';
 import { blob, Nav } from '../engine.js';
 import { K } from './office.js';
 import { lightPool, dust, clockHands, groundShadows } from '../places/life.js';
+import { drain } from '../perf/slice.js';
 
 const X = 6.3,
   Z = 4.5,
@@ -428,12 +429,16 @@ function sign(text, sub) {
   return grp;
 }
 
-export function buildLobby() {
+// buildLobby() builds it all at once; lobbySteps() is the same as a generator that yields between parts, so the game
+// can build it in slices while the train is played (places/lifecycle.js, js/perf/slice.js)
+export const buildLobby = () => drain(lobbySteps());
+export function* lobbySteps() {
   const root = new THREE.Group();
   const scene = new THREE.Scene();
   scene.background = new THREE.Color('#454a53');
   scene.add(root);
 
+  yield;
   // light: cool dim room, warm low sun through the right-hand windows, warm wall lamps
   const SUN_DIR = new THREE.Vector3(0.86, 0.3, -0.42).normalize();
   scene.add(new THREE.HemisphereLight('#b7c1d2', '#6a625c', 1.55));
@@ -453,12 +458,14 @@ export function buildLobby() {
     const p = new THREE.PointLight('#ffc27e', 2.2, 3.6, 1.8);
     p.position.set(x, 1.05, -4.1);
     scene.add(p);
+    yield;
   }
   for (const z of [-3.4, -0.4, 2.0])
     for (const s of [-1, 1]) {
       const p = new THREE.PointLight('#ffd3a0', 1.2, 3.0, 1.8);
       p.position.set(s * 5.9, 0.9, z);
       scene.add(p);
+      yield;
     }
   {
     const p = new THREE.PointLight('#ffc27e', 0.9, 4, 1.8);
@@ -466,6 +473,7 @@ export function buildLobby() {
     scene.add(p);
   }
 
+  yield;
   // floor, with the darker stone bands of the reference
   root.add(
     tileFloor(-X, X, -Z, Z, 1.25, {
@@ -479,9 +487,11 @@ export function buildLobby() {
       ],
     }),
   );
+  yield;
   // outside strip beyond the entrance
   root.add(tileFloor(-X - 1, X + 1, Z, Z + 2.2, 1.25, { color: '#8e8a86', seam: '#7b7774' }));
 
+  yield;
   // back wall with lifts, doors, posters, lamps and a sign
   root.add(
     wall('x', -X - 0.15, X + 0.15, -Z - 0.08, WH, 0.16, {
@@ -532,10 +542,12 @@ export function buildLobby() {
     const l = wallLamp(0.72, 0.14);
     l.position.set(x, 1.0, -Z + 0.01);
     root.add(l);
+    yield;
   }
   const sg = sign('本社', 'STATION');
   sg.position.set(0, 1.68, -Z + 0.03);
   root.add(sg);
+  yield;
   // wall clock over the guard's side of the gate (the guard points at it: registration opens at nine)
   const clockFace = (hi) =>
     textTexture(
@@ -620,6 +632,7 @@ export function buildLobby() {
     faceM.needsUpdate = true;
   };
 
+  yield;
   // side walls with tall warm windows
   const winHoles = [
     [-3.4, -2.2, 0.3, 1.6],
@@ -634,7 +647,9 @@ export function buildLobby() {
       pane.rotation.y = (-s * Math.PI) / 2;
       root.add(pane);
     }
+    yield;
   }
+  yield;
   // front wall: low, with the glass entrance in the middle
   root.add(wall('x', -X - 0.15, -2.4, Z + 0.06, 0.5, 0.16));
   root.add(wall('x', 2.4, X + 0.15, Z + 0.06, 0.5, 0.16));
@@ -653,26 +668,31 @@ export function buildLobby() {
     const lp = lampPost();
     lp.position.set(x, 0, Z + 0.5);
     root.add(lp);
+    yield;
   }
 
+  yield;
   // shadow proxy: tall walls with the same window slits and a roof, only for the sun
   const PH = 3.4;
   const proxyParts = [
     [2 * X + 0.4, 0.2, 2 * Z + 0.4, 0, PH, 0],
     [2 * X + 0.4, PH, 0.2, 0, PH / 2, -Z - 0.1],
   ];
+  yield;
   // right wall: solid between tall window slits
   const slits = winHoles.map(([a, b]) => [a + 0.1, b - 0.1]); // the sun comes through the windows you can see
   let zc = -Z;
   for (const [a, b] of slits) {
     if (a > zc) proxyParts.push([0.2, PH, a - zc, X + 0.1, PH / 2, (zc + a) / 2]);
     zc = b;
+    yield;
   }
   proxyParts.push([0.2, PH, Z - zc, X + 0.1, PH / 2, (zc + Z) / 2]);
   proxyParts.push([0.2, 0.3, 2 * Z, X + 0.1, 0.15, 0]); // sill
   const proxy = shadowProxy(proxyParts);
   root.add(proxy);
 
+  yield;
   // plants
   const plants = [
     [-5.7, -3.9],
@@ -692,6 +712,7 @@ export function buildLobby() {
     root.add(p);
   });
 
+  yield;
   // barrier: glass panels on steel posts, readers either side of the arch, guard desk on the right
   const BZ = -0.55;
   const glassM = new THREE.MeshStandardMaterial({
@@ -731,9 +752,11 @@ export function buildLobby() {
   const dk = guardDesk();
   dk.position.set(2.2, 0, BZ);
   root.add(dk);
+  yield;
   // guard's chair behind the desk
   root.add(rbox(0.4, 0.3, 0.4, '#2c3242', { x: 2.35, z: BZ - 0.62, r: 0.04 }));
 
+  yield;
   // visitor counter on the public side, left of the gate, with the receptionist behind it
   const counter = new THREE.Group();
   counter.add(
@@ -775,6 +798,7 @@ export function buildLobby() {
     root.add(p);
   }
   const lost = new THREE.Group();
+  yield;
   // open shelves (sides, back, three boards) so the umbrellas, a scarf, a lunch bag and a phone charger show
   lost.add(rbox(0.9, 0.95, 0.04, '#8a909a', { z: -0.16, r: 0.01 }));
   for (const sx of [-1, 1]) lost.add(rbox(0.04, 0.95, 0.36, '#9aa0a9', { x: sx * 0.43, r: 0.01 }));
@@ -846,6 +870,7 @@ export function buildLobby() {
   kiosk.position.set(5.45, 0, 3.0);
   kiosk.rotation.y = -Math.PI / 2;
   root.add(kiosk);
+  yield;
   // benches
   const b1 = bench(2.1);
   b1.position.set(-3.9, 0, 2.55);
@@ -867,6 +892,7 @@ export function buildLobby() {
     root.add(b);
   }
 
+  yield;
   // P2: the doorway lit so people coming in aren't silhouettes; a waste bin by the coffee machine, a welcome stand
   root.add(lightPool(0, Z - 0.4, 1.1, { k: 0.3, sx: 1.4 }));
   {
@@ -903,6 +929,7 @@ export function buildLobby() {
     root.add(st2);
   }
 
+  yield;
   // a cleaning cart parked by the right bench
   {
     const cc = new THREE.Group();
@@ -929,6 +956,7 @@ export function buildLobby() {
     root.add(cc);
   }
 
+  yield;
   // a bike rack on the plaza outside
   {
     const br = new THREE.Group();
@@ -941,7 +969,9 @@ export function buildLobby() {
     br.position.set(-4.2, 0, Z + 1.2);
     root.add(br);
   }
+  yield;
   groundShadows(root, { skip: new Set([proxy]), opacity: 0.6 });
+  yield;
   // life: warm pools under the lamps, dust turning in the sun shafts, a second hand on the clock
   for (const x of [-5.3, -2.9, 2.9, 5.3]) root.add(lightPool(x, -Z + 0.45, 0.9, { k: 0.3, sx: 0.9, sz: 1.2 }));
   for (const z of [-3.4, -0.4, 2.0])
@@ -956,6 +986,7 @@ export function buildLobby() {
   sec.position.set(2.9, 1.42, -Z + 0.072);
   root.add(sec);
 
+  yield;
   // people
   const up = (r) => {
     r.root.scale.multiplyScalar(K);
@@ -1007,6 +1038,7 @@ export function buildLobby() {
   const aoiBlob = blob(0.55, 0.38);
   root.add(aoiBlob);
 
+  yield;
   // walk grid
   const nav = new Nav(-X, X, -Z, Z + 1.5, 0.1);
   nav.block(-X - 1, X + 1, Z + 0.02, Z + 0.3); // front wall (gap made below)

@@ -31,6 +31,7 @@ import { cat } from '../train/people.js';
 import { blob, Nav } from '../engine.js';
 import { lightPool, steam, dust, clockHands, screenMat, groundShadows } from '../places/life.js';
 import { liveScreens } from '../props.js';
+import { drain } from '../perf/slice.js';
 
 export const K = 1.18; // people scale in the office and lobby
 const WH = 1.45,
@@ -630,12 +631,16 @@ function stall(w = 0.9, d = 1.0) {
   return g;
 }
 
-export function buildOffice() {
+// buildOffice() builds it all at once; officeSteps() is the same as a generator that yields between rooms, so the
+// game can build it in slices while another place is played (places/lifecycle.js, js/perf/slice.js)
+export const buildOffice = () => drain(officeSteps());
+export function* officeSteps() {
   const root = new THREE.Group();
   const scene = new THREE.Scene();
   scene.background = new THREE.Color('#33373f');
   scene.add(root);
 
+  yield;
   // light: a dim cool floor lit by warm ceiling lamps; one soft key from high above for shadows
   scene.add(new THREE.HemisphereLight('#aab4c6', '#5a5552', 0.95));
   const sun = new THREE.DirectionalLight('#ffe6c4', 1.5);
@@ -670,6 +675,7 @@ export function buildOffice() {
     scene.add(p);
   }
 
+  yield;
   // ---- floors ----
   // room floors sit at y 0.006, above the base floor's seams (their tops are at 0.004), so each room shows only
   // its own tile grid (at 0.003 the base grid poked through and every room had two grids)
@@ -680,10 +686,12 @@ export function buildOffice() {
   root.add(tileFloor(-7, -2.2, CS, Z1, 1.0, { color: '#979a9e', seam: '#898c90', y: 0.006 })); // copy room sheet vinyl
   root.add(tileFloor(-2.2, 1.8, CS, Z1, 1.0, { color: '#92969c', seam: '#83878d', y: 0.006 })); // kitchenette
 
+  yield;
   // ---- walls ----
   const W = (...a) => root.add(wall(...a));
   const LO = 0.7,
     MID = 0.95;
+  yield;
   // outer
   W('x', X0 - T / 2, X1 + T / 2, Z0 - T / 2, WH, T);
   W('z', Z0, CS, X0 - T / 2, WH, T);
@@ -692,6 +700,7 @@ export function buildOffice() {
   W('z', CN, CS, X1 + T / 2, WH, T, { holes: [[0.6, 1.9, 0, 1.3]] });
   W('z', CS, Z1, X1 + T / 2, MID, T);
   W('x', X0 - T / 2, X1 + T / 2, Z1 + T / 2, 0.32, T);
+  yield;
   // top row
   W('x', X0, -4.2, -3.4, WH, T, {
     holes: [
@@ -709,6 +718,7 @@ export function buildOffice() {
       [6.2, 6.8, 0, 0.0001],
     ],
   });
+  yield;
   // bottom row
   W('x', X0, X1, CS, LO, T, {
     holes: [
@@ -722,10 +732,12 @@ export function buildOffice() {
   W('z', CS, Z1, 1.8, MID, T);
   W('z', CS, Z1, 4.4, MID, T);
 
+  yield;
   // doors and plates on the corridor's north face (seen from the camera)
   const sd = door(0.6, 1.25, { windows: true });
   sd.position.set(-6.45, 0, -3.4 + T / 2);
   root.add(sd);
+  yield;
   // machine-room door: the frame stays in the wall; the leaf hangs on a hinge at its right edge (the handle is on
   // the left) and swings into the machine room (Jørgen: it "slides in a strange way rather than swinging open")
   // the pivot is the hinge line itself: the leaf's right edge, on the room side of the wall, so that edge stays put
@@ -765,6 +777,7 @@ export function buildOffice() {
   addPlate('機械室', 5.95, 1.0, CN + T / 2 + 0.005, { w: 0.56, h: 0.2, sub: 'MACHINE ROOM' });
   addPlate('階段', -6.45, 1.34, -3.4 + T / 2 + 0.005, { w: 0.4, h: 0.18, sub: 'STAIRS' });
   addPlate('B2', -4.55, 1.05, -3.4 + T / 2 + 0.005, { w: 0.3, h: 0.3, bg: '#3b414c', fg: '#e9ecf0' });
+  yield;
   // plates for the bottom rooms stand on the low wall tops, tilted up toward the camera
   for (const [t, x, sub] of [
     ['コピー室', -3.1, 'COPY ROOM'],
@@ -786,6 +799,7 @@ export function buildOffice() {
     p.rotation.x = -0.5;
     root.add(p);
   }
+  yield;
   // corridor dressing: noticeboard, extinguisher, hydrant, distribution board, notices
   const nb = pinboard(0.9, 0.46);
   nb.position.set(-3.0, 0.72, CN + T / 2 + 0.01);
@@ -798,11 +812,13 @@ export function buildOffice() {
   root.add(lampR);
   root.add(rbox(0.4, 0.44, 0.06, '#9aa0a8', { x: 3.7, y: 0.8, z: CN + T / 2 + 0.03, r: 0.01 }));
   addPlate('', -1.9, 0.62, CN + T / 2 + 0.006, { w: 0.18, h: 0.24, bg: '#f2f0ea' });
+  yield;
   // corridor lamps
   for (const x of [-5.6, -2.6, 0.9, 4.0]) {
     const l = ceilingLamp(0.7);
     l.position.set(x, 1.3, CN + T / 2 + 0.02);
     root.add(l);
+    yield;
   }
   const trolley = new THREE.Group();
   trolley.add(
@@ -812,6 +828,7 @@ export function buildOffice() {
   );
   trolley.position.set(6.3, 0, 2.05);
   root.add(trolley);
+  yield;
   // corridor dressing: plants at the ends, a folded 清掃中 sign, bins, a pipe chair stack
   {
     const p = plant({ size: 0.95, seed: 14 });
@@ -838,6 +855,7 @@ export function buildOffice() {
   for (let i = 0; i < 3; i++)
     root.add(rbox(0.4, 0.05, 0.36, '#6d747e', { x: -2.4, y: 0.02 + i * 0.05, z: 2.05, r: 0.01 }));
 
+  yield;
   // ---- lift lobby ----
   const liftDoor = new THREE.Group();
   const leaves = [];
@@ -851,6 +869,7 @@ export function buildOffice() {
     l.add(rbox(0.012, 1.16, 0.052, '#5d636d', { x: -s * 0.245, y: -0.58, r: 0.003, cast: false }));
     liftDoor.add(l);
     leaves.push(l);
+    yield;
   }
   liftDoor.position.set(-5.45, 0, -3.42);
   root.add(liftDoor); // leaves in the wall's thickness: they slide into the wall, not across the jambs
@@ -875,10 +894,12 @@ export function buildOffice() {
     l.position.set(-6.6, 1.3, -3.4 + T / 2 + 0.02);
     root.add(l);
   }
+  yield;
   // stairwell behind the lobby
   const stw = stairs();
   stw.position.set(-6.42, 0, -4.0);
   root.add(stw);
+  yield;
   // the lift car behind the doors: a lit cabin in its shaft, seen from above like every other room
   {
     const cab = new THREE.Group();
@@ -913,9 +934,11 @@ export function buildOffice() {
     cl.position.set(-5.45, 1.1, -3.95);
     scene.add(cl);
   }
+  yield;
   // the floor behind the lift lobby wall, under the stairwell only (it used to run on under the lift car and poke up through its floor)
   root.add(rbox(0.66, 0.05, 1.0, '#b2b5b8', { x: -6.57, y: -0.02, z: -4.1, r: 0.01, cast: false }));
 
+  yield;
   // ---- main office ----
   const iob = inOutBoard();
   iob.position.set(-1.6, 0.62, Z0 + T / 2 + 0.01);
@@ -945,6 +968,7 @@ export function buildOffice() {
     const gc = glassCabinet();
     gc.position.set(x, 0, Z0 + T / 2 + 0.22);
     root.add(gc);
+    yield;
   }
   const wc = waterCooler();
   wc.position.set(-3.85, 0, -4.9);
@@ -975,13 +999,16 @@ export function buildOffice() {
     root.add(p);
   }
   root.add(rbox(0.34, 0.27, 0.34, PAL.box, { x: 2.3, z: -0.35, r: 0.02 }));
+  yield;
   // filing row and plant along the office's left wall
   for (let i = 0; i < 3; i++) {
     const f = filingCabinet(3, '#858b95');
     f.rotation.y = Math.PI / 2;
     f.position.set(-3.95, 0, -1.9 - i * 0.48 + 0.0);
     root.add(f);
+    yield;
   }
+  yield;
   // a bench in the corridor, by the office door
   {
     const bc = bench(1.4, { seats: 2 });
@@ -989,6 +1016,7 @@ export function buildOffice() {
     root.add(bc);
   }
 
+  yield;
   // a small meeting table below the island, for the morning huddle
   {
     const mt = new THREE.Group();
@@ -1009,6 +1037,7 @@ export function buildOffice() {
 
   const dN = (i) => desks.find((d) => d.row === 'n' && d.i === i),
     dS = (i) => desks.find((d) => d.row === 's' && d.i === i);
+  yield;
   // desk island: two rows of three, back to back; the section chief's desk across the head
   const DX = [-2.0, -0.8, 0.4],
     ZN = -3.72,
@@ -1028,7 +1057,9 @@ export function buildOffice() {
       c.rotation.y = face > 0 ? Math.PI : 0;
       if (!(row === 's' && i === 1)) root.add(c);
       desks.push({ x: DX[i], z, face, chair: c, seat: [DX[i], z + face * 0.5], row, i });
+      yield;
     }
+  yield;
   // the section chief's desk at the head of the island, facing along it
   const chief = desk({ w: 1.2, d: 0.72, seed: 7 });
   chief.rotation.y = -Math.PI / 2;
@@ -1038,8 +1069,10 @@ export function buildOffice() {
   chiefChair.rotation.y = -Math.PI / 2;
   chiefChair.position.set(2.2, 0, -3.36);
   root.add(chiefChair);
+  yield;
   // the empty desk in the north row carries boxes and a dead monitor
   root.add(rbox(0.4, 0.3, 0.34, PAL.box, { x: DX[2] + 0.25, y: 0.42, z: ZN - 0.05, r: 0.02 }));
+  yield;
   // the team has shrunk: three desks have their monitors under a cloth
   const cloth = (d) => {
     // a pale dust sheet thrown over the monitor: the screen's shape under it, the hem spread on the desk
@@ -1056,6 +1089,7 @@ export function buildOffice() {
     return g;
   };
   const covers = [cloth(dN(1)), cloth(dN(2)), cloth(dS(2))];
+  yield;
   // the 2019 party box on the cabinets, a tray of seven cups in the kitchenette, a nameplate face down on the chief's desk
   root.add(rbox(0.42, 0.22, 0.3, PAL.box, { x: -3.5, y: 1.2, z: Z0 + 0.3, r: 0.02 }));
   const tray = new THREE.Group();
@@ -1066,6 +1100,7 @@ export function buildOffice() {
     cu.position.set(-0.17 + (i % 4) * 0.11, 0.05, i < 4 ? -0.06 : 0.06);
     cu.scale.setScalar(0.8);
     tray.add(cu);
+    yield;
   }
   tray.position.set(0.4, 0.5, CS + T / 2 + 0.34);
   root.add(tray);
@@ -1085,16 +1120,19 @@ export function buildOffice() {
   myChair.add(tama);
   tama.userData.head.rotation.x = 0.35;
 
+  yield;
   // ---- machine room ----
   for (let i = 0; i < 4; i++) {
     const r = rack();
     r.position.set(4.1 + i * 0.72, 0, Z0 + 0.5);
     root.add(r);
+    yield;
   }
   for (let i = 0; i < 3; i++) {
     const r = rack();
     r.position.set(4.4 + i * 0.72, 0, -3.3);
     root.add(r);
+    yield;
   }
   const ac = acUnit();
   ac.position.set(5.9, 1.05, Z0 + T / 2 + 0.1);
@@ -1116,6 +1154,7 @@ export function buildOffice() {
       rbox(x1 - x0, 0.04, 0.08, '#5a5f68', { x: (x0 + x1) / 2, y: 0.01, z: (z0 + z1) / 2, r: 0.015, cast: false }),
     );
 
+  yield;
   // ---- copy room ----
   const cp = copier();
   cp.position.set(-2.95, 0, CS + T / 2 + 0.36);
@@ -1176,6 +1215,7 @@ export function buildOffice() {
     s4.position.set(-2.45, 0, 5.4);
     root.add(s4);
   }
+  yield;
   // ---- kitchenette (給湯室) ----
   const ct = counter(1.5);
   ct.userData.noBatch = true; // Its top overlaps the tray and sink plate.
@@ -1231,6 +1271,7 @@ export function buildOffice() {
     root.add(sh(kt2));
     root.add(rbox(0.3, 0.12, 0.2, '#e8e4da', { x: -1.85, y: 0.5, z: 5.1, r: 0.01 }));
   }
+  yield;
   // a low sideboard against the front wall with the team's cups and a tea tin
   {
     const sb = new THREE.Group();
@@ -1256,11 +1297,9 @@ export function buildOffice() {
     root.add(p);
   }
 
+  yield;
   // ---- toilets: men's and women's ----
-  for (const [x0, k] of [
-    [1.8, 'm'],
-    [4.4, 'f'],
-  ]) {
+  for (const x0 of [1.8, 4.4]) {
     for (let i = 0; i < 2; i++) {
       const s = stall(0.9, 1.0);
       s.rotation.y = Math.PI;
@@ -1270,6 +1309,7 @@ export function buildOffice() {
     // (the urinals and the changing shelf stood in the doorways and read as blobs: removed, Jørgen 2026-09-28)
   }
 
+  yield;
   // ---- people ----
   const scaleUp = (r) => {
     r.root.scale.multiplyScalar(K);
@@ -1288,12 +1328,15 @@ export function buildOffice() {
   const kenji = scaleUp(PEOPLE.kenji());
   seatAt(kenji, dN(0), 0);
   root.add(kenji.root);
+  yield;
   const nao = scaleUp(PEOPLE.worker(1));
   seatAt(nao, dN(1), 0);
   root.add(nao.root);
+  yield;
   const hiro = scaleUp(PEOPLE.worker(2));
   seatAt(hiro, dS(2), Math.PI);
   root.add(hiro.root);
+  yield;
   const mori = scaleUp(PEOPLE.mori());
   sit(mori);
   mori.root.position.set(2.16, mori.root.position.y + 0.03 * K, -3.36);
@@ -1301,10 +1344,12 @@ export function buildOffice() {
   armsHold(mori, -1.2, 0.35);
   mori.seated = true;
   root.add(mori.root);
+  yield;
   const emi = scaleUp(PEOPLE.emi());
   emi.root.position.set(-5.3, 0, -1.35);
   emi.root.rotation.y = Math.PI;
   root.add(emi.root);
+  yield;
   const emiBlob = blob(0.55, 0.38);
   emiBlob.position.set(-5.3, 0.004, -1.35);
   root.add(emiBlob);
@@ -1312,10 +1357,12 @@ export function buildOffice() {
   yui.root.position.set(-2.95, 0, 3.55);
   yui.root.rotation.y = Math.PI;
   root.add(yui.root);
+  yield;
   const sota = scaleUp(PEOPLE.sota());
   sota.root.position.set(1.05, 0, 3.5);
   sota.root.rotation.y = Math.PI;
   root.add(sota.root);
+  yield;
   const sm2 = mug('#c96a5a');
   sm2.position.set(0, -0.26, 0.02);
   sota.arms[1].add(sm2);
@@ -1324,12 +1371,15 @@ export function buildOffice() {
     const b = blob(0.6, 0.3);
     b.position.set(x, 0.004, z);
     root.add(b);
+    yield;
   }
 
+  yield;
   // ================= dressing and life (world agent, production pass) =================
   const life = { steam: [], dust: [], pools: new THREE.Group() };
   root.add(life.pools);
   const pool = (x, z, r, o) => life.pools.add(lightPool(x, z, r, { y: 0.02, ...o }));
+  yield;
   // warm pools under every hidden ceiling lamp, and long soft streaks where the fittings shine in the floor
   for (const [x, z, k] of [
     [-2.2, -3.4, 1.5],
@@ -1352,10 +1402,12 @@ export function buildOffice() {
   for (const x of [-5.6, -2.6, 0.9, 4.0]) {
     pool(x, 1.2, 0.95, { k: 0.3, sx: 1.6, sz: 0.9 });
     pool(x, 1.35, 0.35, { k: 0.2, sx: 0.6, sz: 2.2, color: '#fff0d8' });
+    yield;
   }
   pool(-4.62, -1.8, 0.6, { k: 0.2, color: '#8fb8ff' }); // vending glow on the floor
   pool(X1 - 0.35, 1.25, 0.55, { k: 0.18, color: '#7fe0a4' }); // the exit sign
 
+  yield;
   // ---- main office ----
   // carpet tiles under the island, two greys in a checker, so the work area reads as its own zone
   {
@@ -1380,12 +1432,15 @@ export function buildOffice() {
     cg.position.set((x0 + x1) / 2, 0.006, (z0 + z1) / 2);
     root.add(cg);
   }
+  yield;
   // under the desks: bins, a bag, cable boxes
   for (const d of desks) {
     const b = rbox(0.16, 0.2, 0.16, '#5b6474', { x: d.x + 0.36, z: d.z - d.face * 0.05, r: 0.02 });
     root.add(b);
+    yield;
   }
   root.add(rbox(0.26, 0.2, 0.12, '#3d4556', { x: DX[0] - 0.3, z: ZN + 0.55, r: 0.04 }));
+  yield;
   // printer on a stand against the machine-room wall, with a tray of printouts
   {
     const pr = new THREE.Group();
@@ -1404,19 +1459,23 @@ export function buildOffice() {
     p.position.set(3.05, 0, -1.95);
     root.add(p);
   }
+  yield;
   // desk lamps on the chief's desk and a stack of trays
   root.add(
     rbox(0.28, 0.12, 0.2, '#5b6474', { x: 1.5, y: 0.42, z: -3.85, r: 0.01 }),
     rbox(0.26, 0.02, 0.18, PAL.paper, { x: 1.5, y: 0.54, z: -3.85, r: 0.004 }),
   );
+  yield;
   // the wall clock gets real hands (8:55 when the day starts here, moving with the game clock)
   const officeHands = clockHands(0.15);
   officeHands.position.set(-1.6, 1.3, Z0 + T / 2 + 0.03);
   root.add(officeHands);
   secHand.visible = false;
+  yield;
   // cable tray along the island's spine
   root.add(rbox(3.5, 0.03, 0.08, '#5a606b', { x: -0.8, y: 0.01, z: (ZN + ZS) / 2, r: 0.01, cast: false }));
 
+  yield;
   // ---- lift lobby ----
   {
     const it = textTexture(
@@ -1447,6 +1506,7 @@ export function buildOffice() {
     root.add(bin2);
   }
 
+  yield;
   // ---- corridor ----
   // a muted guide line down the corridor floor and a runner mat at the office door
   root.add(rbox(X1 - X0 - 0.4, 0.004, 0.06, '#7d858f', { x: 0, y: 0.004, z: 1.72, r: 0.002, cast: false }));
@@ -1456,6 +1516,7 @@ export function buildOffice() {
     m.receiveShadow = true;
     root.add(m);
   }
+  yield;
   // AED box (green light), a drinking fountain, a tall plant by the fire exit
   {
     const a = new THREE.Group();
@@ -1483,6 +1544,7 @@ export function buildOffice() {
     p.position.set(-6.65, 0, 2.05);
     root.add(p);
   }
+  yield;
   // recycling row by the kitchenette door: burnable, cans, paper (colour only)
   for (const [x, c] of [
     [-1.55, '#4f6f9a'],
@@ -1495,6 +1557,7 @@ export function buildOffice() {
     );
   }
 
+  yield;
   // ---- copy room ----
   {
     const m = new THREE.Mesh(new THREE.BoxGeometry(0.9, 0.012, 0.5), mat('#454c5a', { roughness: 0.95 }));
@@ -1502,6 +1565,7 @@ export function buildOffice() {
     m.receiveShadow = true;
     root.add(m);
   }
+  yield;
   // shredder, a pallet of paper reams, a paper box stack by the copier, a cutter and stapler on the table
   {
     const s2 = new THREE.Group();
@@ -1552,6 +1616,7 @@ export function buildOffice() {
     p.position.set(-2.6, 0, 6.05);
     root.add(p);
   }
+  yield;
   // a paper trolley parked by the shelves
   {
     const tr = new THREE.Group();
@@ -1572,6 +1637,7 @@ export function buildOffice() {
     tr.position.set(-6.25, 0, 4.2);
     root.add(tr);
   }
+  yield;
   // ---- kitchenette ----
   {
     const rug = new THREE.Mesh(new THREE.BoxGeometry(1.5, 0.012, 1.6), mat('#56607a', { roughness: 0.95 }));
@@ -1584,12 +1650,14 @@ export function buildOffice() {
       rbox(0.26, 0.04, 0.26, PAL.chair, { x, y: 0.26, z: 4.05, r: 0.02 }),
       rbox(0.03, 0.26, 0.03, PAL.deskLeg, { x, z: 4.05, r: 0.01 }),
     );
+    yield;
   }
   {
     const k = new THREE.Mesh(new THREE.CylinderGeometry(0.04, 0.05, 0.03, 10), mat('#e9e6df'));
     k.position.set(-1.0, 0.44, 4.5);
     root.add(k);
   }
+  yield;
   // kettle and coffee machine steam; a cleaning rota on the partition
   {
     const s1 = steam({ n: 6, rise: 0.5, size: 0.11, opacity: 0.3 });
@@ -1632,6 +1700,7 @@ export function buildOffice() {
     root.add(d);
     life.dust.push(d);
   }
+  yield;
   // ---- toilets ----
   for (const x0 of [1.8, 4.4]) {
     // hand dryer and paper towels over the sink, a mat, a small plant on the sink shelf
@@ -1640,6 +1709,7 @@ export function buildOffice() {
       p.position.set(x0 + 2.33, 0.48, 3.55);
       root.add(p);
     }
+    yield;
   }
   {
     const mb = new THREE.Group();
@@ -1651,6 +1721,7 @@ export function buildOffice() {
     mb.position.set(4.8, 0, 4.85);
     root.add(mb);
   }
+  yield;
   // ---- machine room ----
   // an UPS, cable bundles, a step ladder
   root.add(rbox(0.5, 0.7, 0.6, '#4a505b', { x: 6.55, z: -3.3, r: 0.02 }));
@@ -1669,6 +1740,7 @@ export function buildOffice() {
     c.rotation.z = Math.PI / 2;
     c.position.set(5.3, 0.03, -2.2 + i * 0.05);
     root.add(sh(c));
+    yield;
   }
   {
     const lad = new THREE.Group();
@@ -1683,6 +1755,7 @@ export function buildOffice() {
     root.add(lad);
   }
 
+  yield;
   // ---- P2: fuller toilets, office lower third, machine room light, corridor sconces, contact shadows ----
   for (const x0 of [1.8, 4.4]) {
     // a vanity with two basins and a mirror strip along the right wall (replaces the lone sink visually)
@@ -1706,6 +1779,7 @@ export function buildOffice() {
       pb.position.set(x0 + 2.3, 0.15, 4.5);
       root.add(sh(pb));
     } // pedal bin
+    yield;
   }
   {
     const ws = new THREE.Group();
@@ -1714,6 +1788,7 @@ export function buildOffice() {
     ws.position.set(3.0, 0, 4.9);
     root.add(ws);
   } // wet-floor sign
+  yield;
   // office: low binder cabinets along the corridor wall, a whiteboard on a stand, mugs on the desks
   for (const d of desks) {
     const m2 = mug(
@@ -1721,7 +1796,9 @@ export function buildOffice() {
     );
     m2.position.set(d.x - 0.3, 0.42, d.z + d.face * 0.12);
     root.add(m2);
+    yield;
   }
+  yield;
   // machine room: cool fill, a raised-floor grid, lit rack fronts, LEDs that blink
   {
     const cf = new THREE.PointLight('#9fc4ff', 1.6, 4.5, 1.6);
@@ -1744,6 +1821,7 @@ export function buildOffice() {
   });
   life.leds = leds;
 
+  yield;
   // a waist-high divider shelf behind the island's south row: binders facing the island, plants and trays on top
   {
     const dv = shelf(1.4, 0.56, 0.34, { fill: 'binders', seed: 13 });
@@ -1763,6 +1841,7 @@ export function buildOffice() {
       rbox(0.28, 0.03, 0.22, PAL.paper, { x: -1.28, y: 0.64, z: -1.35, r: 0.004 }),
     );
   }
+  yield;
   // tall steel storage by the machine-room wall instead of loose boxes, with the boxes on top
   for (const z of [-1.55, -0.95]) {
     const sc = new THREE.Group();
@@ -1774,14 +1853,17 @@ export function buildOffice() {
     sc.rotation.y = -Math.PI / 2;
     sc.position.set(3.05, 0, z);
     root.add(sc);
+    yield;
   }
   root.add(rbox(0.4, 0.26, 0.34, PAL.box, { x: 3.05, y: 1.1, z: -1.5, r: 0.02 }));
+  yield;
   // the office doorway gets a frame so it reads as a door, not a hole
   {
     const fm = mat(PAL.doorFrame);
     for (const x of [-0.8, 0.3]) root.add(rbox(0.08, 1.3, T + 0.04, null, { x, z: CN, m: fm, r: 0.01 }));
     root.add(rbox(1.18, 0.08, T + 0.04, null, { x: -0.25, y: 1.26, z: CN, m: fm, r: 0.01 }));
   }
+  yield;
   // machine room: a tape shelf where the floor fan was, LED glow on the floor in front of the racks
   {
     const ts = shelf(0.9, 1.0, 0.36, { fill: 'binders', seed: 41 });
@@ -1792,6 +1874,7 @@ export function buildOffice() {
   for (let i = 0; i < 4; i++) pool(4.1 + i * 0.72, Z0 + 0.98, 0.34, { k: 0.22, color: '#6fe0b0', sx: 0.9, sz: 0.6 });
   for (let i = 0; i < 3; i++) pool(4.4 + i * 0.72, -2.83, 0.34, { k: 0.22, color: '#6fe0b0', sx: 0.9, sz: 0.6 });
   root.add(rbox(3.0, 0.03, 0.12, '#5a606b', { x: 5.2, y: 1.34, z: -4.4, r: 0.01, cast: false })); // cable ladder between the rack rows
+  yield;
   // corridor, right half: a second bench under a noticeboard, and warm pools
   {
     const bc2 = bench(1.2, { seats: 2 });
@@ -1799,6 +1882,7 @@ export function buildOffice() {
     root.add(bc2);
   }
 
+  yield;
   // copy room, lower half: supply cabinets along the front wall, a pinboard on the partition, taped cartons
   for (const x of [-3.9, -3.3]) {
     const sc = new THREE.Group();
@@ -1810,6 +1894,7 @@ export function buildOffice() {
     sc.add(rbox(0.3, 0.1, 0.24, '#e7e3d8', { x: -0.1, y: 0.74, r: 0.01 }));
     sc.position.set(x, 0, 6.1);
     root.add(sc);
+    yield;
   }
   {
     const pb = pinboard(0.7, 0.36);
@@ -1829,12 +1914,14 @@ export function buildOffice() {
   pool(-0.8, 4.7, 0.9, { k: 0.26 });
   pool(4.1, 3.55, 0.7, { k: 0.2, sx: 0.8, sz: 1.5 });
   pool(6.7, 3.55, 0.7, { k: 0.2, sx: 0.8, sz: 1.5 });
+  yield;
   // corridor: warm sconces washing the north wall, and a pictogram safety poster
   for (const x of [-3.75, 0.8, 3.2]) {
     const l = wallLamp(0.36, 0.1);
     l.position.set(x, 0.9, CN + T / 2 + 0.01);
     root.add(l);
     pool(x, CN + 0.55, 0.7, { k: 0.26, sx: 1.1, sz: 0.8 });
+    yield;
   }
   {
     const pt = textTexture(
@@ -1868,10 +1955,12 @@ export function buildOffice() {
   }
   life.hands = officeHands;
 
+  yield;
   groundShadows(root, {
     skip: new Set([kenji.root, nao.root, hiro.root, mori.root, emi.root, yui.root, sota.root, life.pools]),
   });
 
+  yield;
   // ---- walk grid ----
   const nav = new Nav(X0, X1, Z0, Z1, 0.1);
   const B = (x0, x1, z0, z1) => nav.block(x0, x1, z0, z1);
@@ -1924,6 +2013,7 @@ export function buildOffice() {
     );
   B(1.15, 1.95, -4.0, -2.75);
   B(1.95, 2.45, -3.6, -3.1); // chief's desk and chair
+  yield;
   // machine room: racks, fan, cart; the door keeps it shut until it opens
   B(3.7, 6.9, Z0, Z0 + 0.9);
   B(4.0, 6.5, -3.7, -2.9);
@@ -1949,6 +2039,7 @@ export function buildOffice() {
     B(x0 + 0.1, x0 + 2.55, 5.3, Z1);
     B(x0 + 2.15, x0 + 2.55, 3.15, 3.65);
     B(x0 + 2.2, x0 + 2.5, 3.85, 4.15);
+    yield;
   }
   B(-4.55, -4.05, 1.85, CS);
   B(2.95, 3.45, 1.85, CS);
@@ -1963,6 +2054,7 @@ export function buildOffice() {
   B(-4.2, -3.7, -3.1, -1.6);
   B(-2.7, -1.1, 0.35, 0.9);
   nav.blockTagged('emi', -5.5, -5.1, -1.55, -1.15);
+  yield;
   // production dressing
   B(2.7, 3.3, -2.7, -2.1);
   B(2.85, 3.25, -2.15, -1.75); // printer, plant
@@ -1984,6 +2076,7 @@ export function buildOffice() {
   for (const x0 of [1.8, 4.4]) {
     B(x0 + 2.05, x0 + 2.55, 2.85, 4.25);
     B(x0 + 2.15, x0 + 2.45, 4.35, 4.65);
+    yield;
   }
   B(2.85, 3.15, 4.8, 5.0);
   B(2.8, 4.1, 0.35, 0.9);

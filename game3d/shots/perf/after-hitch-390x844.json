@@ -1,0 +1,83 @@
+[
+  {
+    "size": "390x844",
+    "trip": "forecourt->office",
+    "prepMs": 883,
+    "longest": 0,
+    "longTasks": 0,
+    "worstFrame": 17,
+    "p99": 16.8,
+    "low1": 59.5,
+    "median": 16.7,
+    "frames": 202,
+    "slow": 0,
+    "slowAt": [],
+    "prepEnd": 883,
+    "look": {
+      "meshes": 2430,
+      "materials": 217,
+      "patched": 217,
+      "bake": {
+        "meshes": 2428,
+        "verts": 943822,
+        "occluders": 1925
+      },
+      "ms": 269
+    },
+    "errors": []
+  },
+  {
+    "size": "390x844",
+    "trip": "gate->forecourt",
+    "prepMs": 72,
+    "longest": 0,
+    "longTasks": 0,
+    "worstFrame": 17,
+    "p99": 16.8,
+    "low1": 59.5,
+    "median": 16.7,
+    "frames": 153,
+    "slow": 0,
+    "slowAt": [],
+    "prepEnd": 72,
+    "look": {
+      "meshes": 226,
+      "materials": 62,
+      "patched": 62,
+      "bake": {
+        "meshes": 226,
+        "verts": 87882,
+        "occluders": 205
+      },
+      "ms": 20
+    },
+    "errors": []
+  },
+  {
+    "size": "390x844",
+    "trip": "forecourt->plaza",
+    "prepMs": 59,
+    "longest": 0,
+    "longTasks": 0,
+    "worstFrame": 17,
+    "p99": 16.8,
+    "low1": 59.5,
+    "median": 16.7,
+    "frames": 153,
+    "slow": 0,
+    "slowAt": [],
+    "prepEnd": 59,
+    "look": {
+      "meshes": 107,
+      "materials": 48,
+      "patched": 48,
+      "bake": {
+        "meshes": 107,
+        "verts": 41467,
+        "occluders": 91
+      },
+      "ms": 12
+    },
+    "errors": []
+  }
+]
