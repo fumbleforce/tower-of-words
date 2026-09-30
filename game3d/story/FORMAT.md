@@ -95,7 +95,7 @@ Any id in docs/game/cast.md "Everyone" can speak. Add names or roles under `spea
 
 | Hook | Args | Does |
 |---|---|---|
-| `goal` | `text`, `at` (optional spot or id), `side: true` | Sets the goal line top left (`text: ''` clears it). `side: true` sets the small side line under it instead. |
+| `goal` | `text`, `at` (optional seat, spot, id or `[x, z]`), `side: true` | Sets the goal line top left (`text: ''` clears it). `at` puts the goal's teal pin there until the next goal (a thing or person with a pin just becomes the goal; a seat gets a "Free seat" pin, and tapping it walks Eric to the floor in front of it). `side: true` sets the small side line under it instead. |
 | `hint` | `text`, `what: 'say'` (optional) | A tip, shown as the second line of the goal box until closed or the goal moves on. `what: 'say'` points at the Say button. |
 | `walk` | `who`, `to` (a spot id, a person or object id, or `[x, z]`), `wait: true/false`, optional `speed` (units a second; Mio's default is 1.0) | A person walks there. People route through doors and corridors on their own. |
 | `face` | `who`, `to` (id or `[x, z]`) | Turns someone toward a person, spot or object. |
@@ -109,7 +109,7 @@ Any id in docs/game/cast.md "Everyone" can speak. Add names or roles under `spea
 | `show` / `hide` | `id` | Shows or hides a person or object (and a person's floor shadow). |
 | `hold` | `who` (a person), or nothing to let go | Keeps Eric with that person until the story lets go: walking and taps on anything else only get a small bow from them; that person and Say still work. Only holds once he knows a word that person answers to. |
 | `bow` | `who` (anyone, `eric` too), `depth: 'small'|'deep'` | A bow, shown. |
-| `gesture` | `who`, `kind`: `nine`, `point`, `shrug`, `finger`, `skijump`; `to` | Arm moves for the chibi cast: nine fingers up (with a 9 bubble), point, shrug, finger to the lips, Mori's ski jump. `point` does nothing on Mio. Other kinds the story files use (`beckon`, `lift`, `squeeze`, `highfive`, `fistbump`) do nothing yet; ask in REQUESTS.md. |
+| `gesture` | `who`, `kind`: `nine`, `point`, `shrug`, `finger`, `skijump`, `beckon`, `lift`, `squeeze`, `highfive`, `fistbump`; `to` | Arm moves. Chibi cast: nine fingers up (with a 9 bubble), point, shrug, finger to the lips, Mori's ski jump, beckon, lift (both arms over the head; Hamada's briefcase goes up with his hand), high five, fist bump. Eric and Mio: point (turning to `to` first), lift (arms up in a wide V, an invisible case over the head), squeeze (a quarter turn sideways, chest back, arms up), plus their clips (bow, wave, shrug, nod). |
 | `phone` | `who`, `state`: `buzz`, `look`, `away` (Mio, Eric); `on`, `off` (the guard) | A phone: Mio's buzzes with a bubble until she looks; the guard's handset at his ear with faint hold music. |
 | `type` | `word`, `prompt` (optional line shown above it), `from` | The typing prompt for a new word (docs/game/systems.md, Typing a word). On success Eric says it, it becomes known, and flag `typed_<word>` is set. Use it where a word is taught, in place of a "say it" button: `{ do: 'type', word: 'yoroshiku', from: 'mio', prompt: 'mio: Say it. Like this.' }` |
 | `kotodama` | `target` | The kotodama effect on a place's named target (docs/game/systems.md). The place does the rest; ask for new targets in REQUESTS.md. |
@@ -141,7 +141,7 @@ Events: `start`, `approach` (the train starts slowing, when the story runs `{ do
 Events: `start`, `card_red` (a card reader tapped before it works), `card_ok`, `arch_blocked` (walking into the closed gate), `gate_opened`.
 
 - `reader` `side: 'l'|'r'`, `state: 'red'|'green'|'idle'`: the reader's light and beep.
-- `gate` `state: 'open'|'closed'|'jam'|'slam'`: the flaps (`jam` rattles and the count screen shows 2 in red; `slam` bursts open and bounces).
+- `gate` `state: 'open'|'closed'|'jam'|'slam'`: the flaps (`jam` rattles and the count screen shows a person, a briefcase and a red 2; `slam` bursts open and bounces).
 - `cardOk`: Eric's card now works; his next tap turns the reader green and opens the gate.
 - `enter` `who`: someone walks in through the entrance.
 - `typing` `who`, `ms`: typing animation (the guard at his computer).
@@ -159,7 +159,7 @@ In `transitions.js` `gate_to_office.ride`: `{ do: 'floor', to: '5' }` moves the 
 Events: `start`, `sat_down`.
 
 - `copier` `state: 'jam'|'run'|'wild'|'idle'`: `run` prints a neat stack, `wild` sprays paper.
-- `chairRoll` `to`: Eric's chair rolls itself to a spot (carrying Tama if she's on it).
+- `chairRoll` `to`: Eric pushes his chair to a spot, walking behind it (carrying Tama if she's on it).
 - `coffee`: the coffee machine brews.
 - `kettle` `state: 'pour'`: the pot pours, with steam.
 - `rackAlarm` `state: 'on'|'off'`: a blinking light and beeps on the racks.

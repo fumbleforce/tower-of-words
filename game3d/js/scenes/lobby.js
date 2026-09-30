@@ -26,6 +26,7 @@ import { blob, Nav } from '../engine.js';
 import { K } from './office.js';
 import { lightPool, dust, clockHands, groundShadows } from '../places/life.js';
 import { drain } from '../perf/slice.js';
+import { countTex } from './gate-count.js';
 
 const X = 6.3,
   Z = 4.5,
@@ -207,41 +208,6 @@ function arch() {
   };
   return g;
 }
-// the count screen's face: one or two little people and the number, in the gate's own light colours
-function countTex(col, n) {
-  return textTexture(
-    (g, W, H) => {
-      g.fillStyle = '#15181d';
-      g.fillRect(0, 0, W, H);
-      g.fillStyle = col;
-      const person = (x) => {
-        g.beginPath();
-        g.arc(x, 44, 17, 0, Math.PI * 2);
-        g.fill();
-        g.beginPath();
-        g.moveTo(x - 26, 118);
-        g.quadraticCurveTo(x - 26, 68, x, 68);
-        g.quadraticCurveTo(x + 26, 68, x + 26, 118);
-        g.fill();
-      };
-      if (n === 2) {
-        person(52);
-        person(112);
-      } else person(82);
-      g.font = '700 104px ' + JP_FONT;
-      g.textAlign = 'center';
-      g.textBaseline = 'middle';
-      g.fillText(String(n), 196, 76);
-      if (n === 2) {
-        g.fillRect(0, 0, W, 6);
-        g.fillRect(0, H - 6, W, 6);
-      }
-    },
-    256,
-    140,
-  );
-}
-
 function guardDesk() {
   const g = new THREE.Group();
   g.add(rbox(1.9, 0.5, 0.62, '#8c929c', { r: 0.03 }));

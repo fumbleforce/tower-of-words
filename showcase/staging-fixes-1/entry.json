@@ -1,0 +1,59 @@
+{
+ "title": "Unfinished staging: the bench, the gate screen, the chair, Mio's desk, the seat goal",
+ "date": "2026-09-30",
+ "by": "claude-agent:unfinished-staging",
+ "caption": "Staging requests the audit found unfinished, now on screen. No lines changed. Before is main as it was, after is this change, same camera.",
+ "sections": [
+  {
+   "title": "Eric sits on the gate bench",
+   "caption": "\"Wait on the bench until nine\": before, Eric stood in front of the bench; now he sits on it, and stands back up onto the floor in front of it when Hamada arrives.",
+   "images": [
+    {"id": "bench-desk-before", "image": "bible/shots/showcase/staging-fixes-1/bench-desk-before.webp", "caption": "Before, desktop"},
+    {"id": "bench-desk-after", "image": "bible/shots/showcase/staging-fixes-1/bench-desk-after.webp", "caption": "After, desktop"},
+    {"id": "bench-phone-after", "image": "bible/shots/showcase/staging-fixes-1/bench-phone-after.webp", "caption": "After, phone"}
+   ]
+  },
+  {
+   "title": "The gate's count screen",
+   "caption": "When Hamada jams the gate, the screen shows a person and a briefcase and a red 2 (before: two people), and the camera moves in on it while the gate's voice and the narration line play, then back.",
+   "images": [
+    {"id": "screen-desk-before", "image": "bible/shots/showcase/staging-fixes-1/screen-desk-before.webp", "caption": "Before, desktop"},
+    {"id": "screen-desk-after", "image": "bible/shots/showcase/staging-fixes-1/screen-desk-after.webp", "caption": "After, desktop"},
+    {"id": "screen-phone-after", "image": "bible/shots/showcase/staging-fixes-1/screen-phone-after.webp", "caption": "After, phone, the close camera step"}
+   ]
+  },
+  {
+   "title": "Eric pushes his chair back",
+   "caption": "Before, the chair rolled and spun to his desk by itself while Eric stayed in the machine room. Now he walks behind it and pushes it there, Tama riding on it.",
+   "images": [
+    {"id": "chair-desk-before", "image": "bible/shots/showcase/staging-fixes-1/chair-desk-before.webp", "caption": "Before: the chair is gone, Eric is still in the machine room"},
+    {"id": "chair-desk-after", "image": "bible/shots/showcase/staging-fixes-1/chair-desk-after.webp", "caption": "After: Eric pushing it along the corridor"}
+   ]
+  },
+  {
+   "title": "Mio in the afternoon",
+   "caption": "Before, she stood beside her chair; now she sits at her desk. In the evening she stands beside Eric's desk (a new spot) instead of right behind his chair.",
+   "images": [
+    {"id": "mio-afternoon-desk-before", "image": "bible/shots/showcase/staging-fixes-1/mio-afternoon-desk-before.webp", "caption": "Before"},
+    {"id": "mio-afternoon-desk-after", "image": "bible/shots/showcase/staging-fixes-1/mio-afternoon-desk-after.webp", "caption": "After"}
+   ]
+  },
+  {
+   "title": "\"Sit by the lunchbox\" marks the seat",
+   "caption": "The goal now puts the teal goal pin over the free seat by Mio (nothing drawn on the floor); tapping it walks Eric there.",
+   "images": [
+    {"id": "seat-goal-desk-before", "image": "bible/shots/showcase/staging-fixes-1/seat-goal-desk-before.webp", "caption": "Before"},
+    {"id": "seat-goal-desk-after", "image": "bible/shots/showcase/staging-fixes-1/seat-goal-desk-after.webp", "caption": "After"}
+   ]
+  },
+  {
+   "title": "Gestures and labels",
+   "caption": "Gestures that did nothing now move: Eric's point, lift and squeeze, the guard's beckon and lift, Hamada's lift (his briefcase goes up with his hand), Kenji's high five and fist bump. From the high camera they are small. The woman on her phone on the train is labelled \"Woman on her phone\" instead of Aoi, since nobody names her.",
+   "images": [
+    {"id": "hamada-lift-close-after", "image": "bible/shots/showcase/staging-fixes-1/hamada-lift-close-after.webp", "caption": "Hamada lifting his briefcase, close crop"},
+    {"id": "aoi-label-phone-after", "image": "bible/shots/showcase/staging-fixes-1/aoi-label-phone-after.webp", "caption": "Train, phone: Eric next to her (her label is in the pin's tag)"}
+   ]
+  }
+ ],
+ "links": [{"label": "Play it", "href": "game3d/"}]
+}

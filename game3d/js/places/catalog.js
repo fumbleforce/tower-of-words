@@ -362,6 +362,7 @@ export const PLACE_DETAILS = {
       'corridor_w',
       'corridor_e',
       'machine_front',
+      'mio_by_desk',
       'kenji_desk',
     ],
     'seats': ['my_seat', 'emi_seat', 'mio_seat'],

@@ -321,7 +321,7 @@ The second basement of head office: IT support. One compact floor, close to squa
 
 ### Spots
 
-`lift_out`, `mori_greet`, `lobby`, `office_door`, `my_seat`, `emi_seat`, `copier_front`, `coffee_front`, `corridor_w`, `corridor_e`, `machine_front`, `kenji_desk`
+`lift_out`, `mori_greet`, `lobby`, `office_door`, `my_seat`, `emi_seat`, `copier_front`, `coffee_front`, `corridor_w`, `corridor_e`, `machine_front`, `mio_by_desk`, `kenji_desk`
 
 ### Seats
 
@@ -337,7 +337,7 @@ The story moves the clock ([systems.md](systems.md)): morning when Eric arrives,
 
 | Id | Usually | Schedule |
 |---|---|---|
-| `mio` | In the machine room in the morning and at lunch; at her desk in the afternoon; Eric's desk in the evening, until she leaves by the lift. | morning `racks`, lunch `racks`, afternoon `emi_seat`, evening `my_desk` |
+| `mio` | In the machine room in the morning and at lunch; sitting at her desk in the afternoon; standing beside Eric's desk in the evening, until she leaves by the lift. | morning `racks`, lunch `racks`, afternoon sits `mio_seat`, evening `mio_by_desk` |
 | `mori` | Waits at the lift landing to greet Eric, then at his desk; the kitchenette table at lunch; gone home in the evening. | lunch `kitchen_table`, afternoon `chief_desk`, evening hidden |
 | `kenji` | His desk, north row, left; gone home in the evening. | evening hidden |
 | `emi` | Upstairs all day; comes down at 17:40 for a few minutes. | hidden all day |

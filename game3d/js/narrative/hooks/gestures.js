@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import { MESHY_KINDS, CHIBI_KINDS, meshyGesture, chibiGesture } from './rig-gestures.js';
 
 export function installGesturesHooks(game, { whoRig }) {
   const H = game.hooks;
@@ -40,7 +41,7 @@ export function installGesturesHooks(game, { whoRig }) {
       r.torso.rotation.x = x0;
     }
   };
-  H.gesture = async ({ who, kind }) => {
+  H.gesture = async ({ who, kind, to }) => {
     const r = whoRig(who);
     // Meshy rigs play their own library clips (wave, shrug, nod, bow); others fall through (point, nine... do their
     // emote and camera parts only on them)
@@ -52,6 +53,8 @@ export function installGesturesHooks(game, { whoRig }) {
       game.place.clock?.userData.highlight(false);
       return;
     }
+    if (r && r.meshy && MESHY_KINDS.has(kind))
+      return meshyGesture(game, r, kind, { to, face: to ? () => H.face({ who, to }) : null });
     if (!r || !r.arms || r.meshy) return;
     const save = r.arms.map((a) => a.rotation.clone()),
       hy = r.hips.position.y,
@@ -84,7 +87,8 @@ export function installGesturesHooks(game, { whoRig }) {
         if (prev) cam.close = prev;
         else cam.release?.();
       }
-    } else if (kind === 'point') {
+    } else if (CHIBI_KINDS.has(kind)) await chibiGesture(game, r, kind, save);
+    else if (kind === 'point') {
       await game.tween(1.2, (k) => {
         r.arms[1].rotation.x = save[1].x + (-1.5 - save[1].x) * bell(k);
       });

@@ -132,7 +132,7 @@ The name plate is the name above their lines; the label is the name over them in
 | `guard` | Guard | Guard | The guard |
 | `kuroda` | Man from the train | Man from the train | Mr. Hamada |
 | `kuro` | Receptionist | Receptionist | none |
-| `aoi` | Aoi | Aoi | none |
+| `aoi` | Aoi | Woman on her phone | none |
 | `tama` | none | Cat | none |
 | `bun` | Woman with a bun | Woman with a bun | none |
 | `youth` | Young man | Young man | none |

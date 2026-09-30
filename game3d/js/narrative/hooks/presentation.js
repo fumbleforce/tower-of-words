@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import { sfx, voice, setFace, faceForEmote } from '../../ui.js';
+import { goalAt } from './goal-at.js';
 const EMOTE_SVG = {
   heart:
     '<path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z" fill="#e0607a" stroke="#b8405a"/>',
@@ -11,11 +12,17 @@ const EMOTE_SVG = {
 };
 const FLOORS = ['B2', 'B1', '1', '2', '3', '4', '5'];
 
-export function installPresentationHooks(game, { rigOf, isPlayer, canvas, TS }) {
+export function installPresentationHooks(game, { rigOf, isPlayer, posOf, canvas, TS }) {
   const H = game.hooks;
   const ui = game.ui;
-  // { do: 'goal', text } sets the main goal; { do: 'goal', text, side: true } a side goal under it ('' clears either)
-  H.goal = ({ text, side }) => (side ? ui.sideGoal(text) : ui.goal(text));
+  // { do: 'goal', text } sets the main goal; { do: 'goal', text, side: true } a side goal under it ('' clears either);
+  // `at` on a main goal puts the goal's pin there (goal-at.js), gone with the next main goal
+  const pinAt = goalAt(game, posOf);
+  H.goal = ({ text, side, at }) => {
+    if (side) return ui.sideGoal(text);
+    pinAt(text ? at : null);
+    return ui.goal(text);
+  };
   H.hint = ({ text, what }) => {
     if (what === 'say') ui.introSay(text);
     else ui.hint(text, 5000);

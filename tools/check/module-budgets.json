@@ -65,8 +65,8 @@
       "reason": "Existing gate place geometry and interaction hooks; stage 5 room-builder review is planned."
     },
     "game3d/js/places/office.js": {
-      "lines": 1131,
-      "bytes": 40726,
+      "lines": 1115,
+      "bytes": 40457,
       "owner": "codex-tui",
       "review": "C-0076; 2026-09-30 preparation slices (yield points, notes/PERF.md); C-0166 named sounds per door and machine",
       "reason": "Existing office place geometry and interaction hooks; stage 5 room-builder review is planned."
@@ -100,15 +100,15 @@
       "reason": "Narrative execution, checkpoint replay and dialogue/audio dispatch remain after stage 2c; stage 3 reviews the presentation/audio boundary."
     },
     "game3d/js/scenes/lobby.js": {
-      "lines": 1096,
-      "bytes": 34999,
+      "lines": 1062,
+      "bytes": 34136,
       "owner": "codex-tui",
       "review": "C-0071; 2026-09-30 preparation slices (yield points, notes/PERF.md)",
       "reason": "Existing lobby geometry composition; preserve the room while extracting responsibilities later."
     },
     "game3d/js/scenes/office.js": {
       "lines": 2126,
-      "bytes": 72828,
+      "bytes": 72819,
       "owner": "codex-tui",
       "review": "C-0110 / X-0193: preserve cup-tray, counter and sink overlap order; existing responsibility unchanged; 2026-09-30 preparation slices (yield points, notes/PERF.md)",
       "reason": "Existing office geometry composition; preserve the room while extracting responsibilities later."
