@@ -1,0 +1,19 @@
+{
+ "x0": -120.0,
+ "z0": -215.0,
+ "x1": 195.0,
+ "z1": 95.0,
+ "ppu": 6,
+ "width": 1890,
+ "height": 1860,
+ "ref": {
+  "horizon": -1176.0,
+  "focal": 2483.3,
+  "centre": 768.0,
+  "k": 746579.0,
+  "x0": 45.26,
+  "d0": 427.35,
+  "unit": 1.5
+ },
+ "note": "pixel (i, j) centre = island point (x0 + (i + 0.5) / ppu, z0 + (j + 0.5) / ppu); x east, z south, north up"
+}

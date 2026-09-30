@@ -1,0 +1,170 @@
+{
+ "U": {
+  "class_type": "UNETLoader",
+  "inputs": {
+   "unet_name": "flux-2-klein-4b-fp8.safetensors",
+   "weight_dtype": "default"
+  }
+ },
+ "C": {
+  "class_type": "CLIPLoader",
+  "inputs": {
+   "clip_name": "qwen_3_4b.safetensors",
+   "type": "flux2"
+  }
+ },
+ "V": {
+  "class_type": "VAELoader",
+  "inputs": {
+   "vae_name": "flux2-vae.safetensors"
+  }
+ },
+ "T": {
+  "class_type": "CLIPTextEncode",
+  "inputs": {
+   "text": "Straight top-down view, looking straight down from directly above, of a small island town in a simple faceted 3D illustration style. Grey flat rooftops, paved paths, round tree canopies, a running track, a pool, blue sea around a rocky coast. No shadows, no text.",
+   "clip": [
+    "C",
+    0
+   ]
+  }
+ },
+ "L": {
+  "class_type": "LoadImage",
+  "inputs": {
+   "image": "u0.png"
+  }
+ },
+ "E": {
+  "class_type": "VAEEncode",
+  "inputs": {
+   "pixels": [
+    "L",
+    0
+   ],
+   "vae": [
+    "V",
+    0
+   ]
+  }
+ },
+ "W": {
+  "class_type": "GetImageSize",
+  "inputs": {
+   "image": [
+    "L",
+    0
+   ]
+  }
+ },
+ "S": {
+  "class_type": "Flux2Scheduler",
+  "inputs": {
+   "steps": 8,
+   "width": [
+    "W",
+    0
+   ],
+   "height": [
+    "W",
+    1
+   ]
+  }
+ },
+ "K": {
+  "class_type": "KSamplerSelect",
+  "inputs": {
+   "sampler_name": "euler"
+  }
+ },
+ "R": {
+  "class_type": "RandomNoise",
+  "inputs": {
+   "noise_seed": 7
+  }
+ },
+ "D": {
+  "class_type": "VAEDecode",
+  "inputs": {
+   "samples": [
+    "X",
+    0
+   ],
+   "vae": [
+    "V",
+    0
+   ]
+  }
+ },
+ "O": {
+  "class_type": "SaveImage",
+  "inputs": {
+   "images": [
+    "D",
+    0
+   ],
+   "filename_prefix": "island-topdown/klein"
+  }
+ },
+ "RL": {
+  "class_type": "ReferenceLatent",
+  "inputs": {
+   "conditioning": [
+    "T",
+    0
+   ],
+   "latent": [
+    "E",
+    0
+   ]
+  }
+ },
+ "G": {
+  "class_type": "BasicGuider",
+  "inputs": {
+   "model": [
+    "U",
+    0
+   ],
+   "conditioning": [
+    "RL",
+    0
+   ]
+  }
+ },
+ "SP": {
+  "class_type": "SplitSigmasDenoise",
+  "inputs": {
+   "sigmas": [
+    "S",
+    0
+   ],
+   "denoise": 0.25
+  }
+ },
+ "X": {
+  "class_type": "SamplerCustomAdvanced",
+  "inputs": {
+   "noise": [
+    "R",
+    0
+   ],
+   "guider": [
+    "G",
+    0
+   ],
+   "sampler": [
+    "K",
+    0
+   ],
+   "sigmas": [
+    "SP",
+    1
+   ],
+   "latent_image": [
+    "E",
+    0
+   ]
+  }
+ }
+}
