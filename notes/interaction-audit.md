@@ -121,7 +121,7 @@ Counted by game3d/tools/pin-count.mjs (pins drawn: shown, on screen, not crowded
 | `cups` | Cups | nothing of its own | always | close only, once he knows a word (Say gets the stock reply) | nothing of its own |
 | `nameplate` | Nameplate | nothing of its own | goal only | goal only | no marker |
 | `my_desk` | Your desk | talk [!kenji_intro]: [walk] / [meet] / [face]; talk [afternoon_on && !evening_on]: [sitDown] / > 17:40. / [period]; talk: > Your name card, in katakana. Someone has written ERIC under it in pen, just in case. | always | always | story and charm (ERIC in pen) |
-| `my_chair` | Your chair | talk [!chair_back && found_chair]: [chairRoll] / [walk] / [face]; talk: (nothing) | always | while a talk entry holds, else none | story (chair push; claude-agent:chair-actions owns it) |
+| `my_chair` | Your chair | talk [!chair_back && found_chair]: [chairRoll] / [walk] / [face]; talk: (nothing) | always | while a talk entry holds, else close once a word is known (Say only, #128) | story (chair push; claude-agent:chair-actions owns it) |
 | `lift` | Lift | talk [going_home]: [trip] | always | while a talk entry holds, else none | the way home after work |
 | `vending` | Vending machine | talk [vend_stuck]: [sound] / > Your drink still hasn't come out.; talk: [choice]; words: ugoite | always | always | the drinks (gifts) |
 | `bench` | Bench | nothing of its own | goal only | goal only | no marker |
@@ -186,3 +186,22 @@ Counted by game3d/tools/pin-count.mjs (pins drawn: shown, on screen, not crowded
 | `boxes` | Boxes | talk: eric: I can't remember which one I put the clean shirts in. | always | always | Eric's line (charm) |
 | `bed` | Bed | talk: eric: If I lie down now, I'm not getting up again. | always | always | Eric's line (charm) |
 | `mio` | Mio | a person | always | always, Talk (idle line or a nod when nothing else holds) | people are always interactable |
+
+## Menus with nothing in them (issue #128, 2026-09-30)
+
+The rule, now checked: a thing can be picked only while its menu has a row that does something now (docs/game/controls-and-ui.md, Markers). Two gaps were left after the sorting above:
+
+- A talk entry that falls back to an empty node (office `my_chair` → `noop` before the chair is found or once it's back; `copier` → `copier_look` outside the ticket scene) counted as a use, so the menu showed an E row ("Look") that only opened the Say menu, with no Say row. It is no use now: those two show Say only, with the copier's own ugoite joke or the stock reply.
+- Before Say is first used (the train, until the cat), a word made a thing pickable although the menu hides Say there. Words count only once Say has been taught.
+
+The talk entries that hold only at some times (Hamada, the train doors, the lunch bag, the lifts, the garden bench, the bicycle, the bath, the mailbox, the canteen table) already gave no E row outside those times; they become Say-only things close by, or nothing before a word is known.
+
+Checks: game3d/tools/menu-day-check.mjs plays the fast day and, at every moment no scene runs, fails on a pickable thing with no row that does something or an E row that does nothing (the rule lives in game3d/test/support/menu-effects.mjs). say-menu-check.mjs runs the same test per place with every word known; it had been listing things before the markers' 400 ms cache caught up with the words, so it missed the close-only things (office: 10 things checked before, 25 now).
+
+| Check | Before | After |
+|---|---|---|
+| menu-day-check, whole day, 1366 x 860 | FAIL: office `copier` and `my_chair`, E row that does nothing (4 faults) | PASS, 0 faults |
+| menu-day-check, whole day, 390 x 844 | (not run) | PASS, 0 faults |
+| say-menu-check, every place, every word | FAIL: office `copier` E row does nothing | PASS |
+
+Reach (issue #129): reach-check.mjs failed on the train `platform` and the gate's `worker_a` and `worker_b` (the guard and the office things had already been fixed). All three are behind a walk-grid block the story lifts: the platform once the train doors open, the two workers once the gate opens (before that Eric talks to them across it). They carry `reachAfter: 'doors'` / `'gate'`, and the check tests them with that block lifted: PASS, every thing and person reachable.

@@ -83,9 +83,10 @@ export const PLACE_DETAILS = {
         'label': "Tama's bowl",
         'kind': 'thing small',
       },
-      // background office workers (lobby.js extras): talked to through their idle: lines only
-      'worker_a': { 'label': 'Office worker', 'kind': 'person' },
-      'worker_b': { 'label': 'Office worker', 'kind': 'person' },
+      // background office workers (lobby.js extras): talked to through their idle: lines only; the two past the gate
+      // are talked to across it until it opens (reachAfter: reach-check.mjs lifts that walk-grid block for them)
+      'worker_a': { 'label': 'Office worker', 'kind': 'person', 'reachAfter': 'gate' },
+      'worker_b': { 'label': 'Office worker', 'kind': 'person', 'reachAfter': 'gate' },
       'commuter_1': { 'label': 'Office worker', 'kind': 'person' },
       'commuter_2': { 'label': 'Office worker', 'kind': 'person' },
       'commuter_3': { 'label': 'Office worker', 'kind': 'person' },

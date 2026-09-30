@@ -1,6 +1,7 @@
 // Checks that Eric can walk up to everything he can select: in each place (morning, and after work where the place
 // has an evening), from where he arrives, the walk grid must reach every enabled thing's approach spot, and come
-// within reach of every person. Prints a FAIL line for each one he can't get to, and PASS at the end if none.
+// within reach of every person (a thing marked `reachAfter` once that walk-grid block is lifted). Prints a FAIL line
+// for each one he can't get to, and PASS at the end if none.
 //   node game3d/tools/reach-check.mjs            (PLACES=plaza,dorm_court to limit; BASE=<worktree>/game3d)
 import { withBrowserJob } from '../../tools/lib/browser-job.mjs';
 
@@ -31,7 +32,13 @@ await withBrowserJob('reach-check', async (browser) => {
           [sx, sz] = P.start,
           out = [];
         const V = g.player.root.position.clone();
-        for (const [id, t] of Object.entries(P.things)) {
+        // things marked `reachAfter: <walk-grid tag>` are reached once the story lifts that block (the train's doors,
+        // the gate) and talked to across it before: checked last, with those blocks lifted (issue #129)
+        const later = Object.entries(P.things).filter(([, t]) => t.reachAfter);
+        const things = [...Object.entries(P.things).filter(([, t]) => !t.reachAfter), ...later];
+        const first = things.length - later.length;
+        for (const [i, [id, t]] of things.entries()) {
+          if (i === first) for (const [, u] of later) nav.unblock(u.reachAfter);
           if (id === 'mio') continue;
           if (typeof t.enabled === 'function' && !t.enabled()) continue;
           const person = /person/.test(t.kind || '');
@@ -46,13 +53,13 @@ await withBrowserJob('reach-check', async (browser) => {
           }
           const r = reachableNear(nav, sx, sz, target[0], target[1]);
           const d = r ? Math.hypot(r[0] - target[0], r[1] - target[1]) : 1e9;
-          out.push({ id, d: +d.toFixed(2), need, target: target.map((v) => +v.toFixed(2)) });
+          out.push({ id, d: +d.toFixed(2), need, target: target.map((v) => +v.toFixed(2)), after: t.reachAfter });
         }
         return out;
       }, eve);
       for (const r of res) {
         checked++;
-        if (r.d > r.need) fails.push(`FAIL ${place}${eve ? ' (after work)' : ''}: ${r.id} at ${r.target} is ${r.d} from where he can get (needs ${r.need})`);
+        if (r.d > r.need) fails.push(`FAIL ${place}${eve ? ' (after work)' : ''}: ${r.id} at ${r.target} is ${r.d} from where he can get (needs ${r.need})${r.after ? ` with the ${r.after} open` : ''}`);
       }
       await page.close();
     }

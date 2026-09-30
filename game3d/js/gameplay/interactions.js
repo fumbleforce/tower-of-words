@@ -59,25 +59,30 @@ export function installInteractions(game) {
       // (Jørgen, 2026-09-30: "a hundred 'interactive' things in this room with symbols that dont really do anything
       // interesting"; notes/interaction-audit.md)
       if (!isPerson(game, item)) {
-        const talks = () => {
-          if (t.act || t.look) return true;
-          const n = game.runner.resolve('talk:' + id, { peek: true });
-          return !!n && (game.story.nodes?.[n]?.length ?? 1) > 0;
-        };
-        const other = () => SAYABLE.some((w) => known.has(w)) || game.runner.has('near:' + id);
+        const talks = () => talksNow(item);
+        // Say is in its menu only once Say has been taught (the first time it shows only at the goal, onboard.js)
+        const other = () => sayOpen() && SAYABLE.some((w) => known.has(w));
         // cached for a moment like wordable: the markers, the targets and the clicks ask every frame
         const does = () => {
           const now = performance.now();
           if (!item._da || now - item._da > 400) {
             item._da = now;
-            item._dv = quiet ? (item.wordable() ? 'near' : '') : talks() ? t.pin || 'always' : other() ? 'near' : '';
+            item._dv = quiet
+              ? item.wordable() && sayOpen()
+                ? 'near'
+                : ''
+              : talks()
+                ? t.pin || 'always'
+                : other()
+                  ? 'near'
+                  : '';
           }
           return item._dv;
         };
         item.enabled = () => thingOn(id, t) && (item.goal() || !!does());
         item.nearOnly = () => !item.goal() && does() === 'near';
         // its only use right now is a word (the fan once he knows tomatte, the fridge): using it opens the Say menu
-        item.sayOnly = () => does() === 'near' && !talks() && SAYABLE.some((w) => known.has(w));
+        item.sayOnly = () => does() === 'near' && !talks() && other();
       }
       game.markers.add(item);
     }
@@ -188,10 +193,21 @@ export function installInteractions(game) {
     if (look) game.beat(() => ui.say(null, typeof look === 'function' ? look() : look));
     else if (person) idleTalk(game, item.id);
   }
-  // what E does on a target now: talk to a person, the story's talk: trigger, or the thing's own act or look line
-  function canUse(item) {
-    return !!(isPerson(game, item) || game.runner.has('talk:' + item.id) || item.act || item.look);
+  // what E does on a target now: talk to a person, the story's talk: trigger, or the thing's own act or look line.
+  // A talk: entry that falls back to an empty node (the chair's `noop`, the copier's look) is nothing to use: the
+  // menu got an E row that did nothing there (issue #128; game3d/tools/menu-day-check.mjs checks every moment)
+  function talksNow(item) {
+    if (item.act || item.look) return true;
+    const n = game.runner.resolve('talk:' + item.id, { peek: true });
+    return !!n && (game.story.nodes?.[n]?.length ?? 1) > 0;
   }
+  function canUse(item) {
+    return !!(isPerson(game, item) || talksNow(item));
+  }
+  const sayOpen = () => {
+    const ob = globalThis.__onboard;
+    return !ob || !ob.active || ob.sayUsed;
+  };
   // Say goes in a target's action menu when a word Eric knows does something there now: a say: trigger for it (or
   // for anything), or, on a thing with nothing else to do, its answer to any word (Jørgen: "right now you just see
   // 'Fridge' with no attached action even though you CAN say something to it")
