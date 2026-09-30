@@ -82,7 +82,7 @@ function corridor(parts, f, y, { x0, x1, z, D }) {
     cx = (x0 + x1) / 2;
   parts.slab.push([len, 0.14, D, cx, y - 0.14, z + D / 2]);
   parts.drip.push([len, 0.02, 0.02, cx, y - 0.16, z + D + 0.002]);
-  parts.panel.push([len, 0.6, 0.09, cx, y - 0.05, z + D - 0.045]);
+  parts.panel.push([len, 0.6, 0.09, cx, y - 0.05, z + D - 0.041]); // proud of the slab's edge, which it overlaps
   parts.rail.push([len + 0.02, 0.035, 0.13, cx, y + 0.55, z + D - 0.045]);
   const zf = z + 0.012;
   for (const k of FLATS) {

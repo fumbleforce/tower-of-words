@@ -3,10 +3,11 @@
 import * as THREE from 'three';
 import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
 import { textTexture } from '../../props.js';
+import { DECAL } from '../../look/decal.js';
 
 const CELL = 128;
 
-// list: [text, x, y (middle), z, w, h] each, facing +z (the camera)
+// list: [text, x, y (middle), z, w, h] each, facing +z (the camera); z a few millimetres off the wall's face
 export function plates(list) {
   const texts = [...new Set(list.map(([t]) => t))];
   const tex = textTexture(
@@ -35,7 +36,10 @@ export function plates(list) {
     for (let k = 0; k < uv.count; k++) uv.setX(k, (i + uv.getX(k)) / texts.length);
     return g;
   });
-  const mesh = new THREE.Mesh(mergeGeometries(geos), new THREE.MeshStandardMaterial({ map: tex, roughness: 0.55 }));
+  const mesh = new THREE.Mesh(
+    mergeGeometries(geos),
+    new THREE.MeshStandardMaterial({ map: tex, roughness: 0.55, ...DECAL }),
+  );
   mesh.receiveShadow = true;
   geos.forEach((g) => g.dispose());
   return mesh;

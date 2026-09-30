@@ -24,7 +24,7 @@ import { lightPool } from './life.js';
 import { glide, withList } from './lobby.js';
 import { K } from '../scenes/office.js';
 import { clipLiftMaterial, isolateLiftMaterials } from './lift-materials.js';
-import { setDark, setAway } from './lift-light.js';
+import { setDark, setAway, forgetLight } from './lift-light.js';
 import { indicatorMat, copMat } from './lift-displays.js';
 
 // ---------- where the lift is in each place ----------
@@ -1075,9 +1075,7 @@ async function rideHome(g, L) {
 // ride dims (and restores) the evening ones
 export function relightLift(place) {
   const L = cars.get(place);
-  if (!L || !L.base) return;
-  setDark(L, 0);
-  L.base = null;
+  if (L) forgetLight(L);
 }
 
 // ---------- stills for checking (?cap&place=gate&st=...) through window.__lift.state ----------

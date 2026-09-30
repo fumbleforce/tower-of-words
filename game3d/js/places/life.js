@@ -2,6 +2,7 @@
 // drifting in window light, steam from a kettle, screens that flicker and scroll, and clock hands that move.
 // Everything here is cheap (a few draw calls each) so it stays on in the low quality tier.
 import * as THREE from 'three';
+import { DECAL } from '../look/decal.js';
 
 // ---------- light pools: a soft additive disc on the floor ----------
 let _poolTex;
@@ -32,6 +33,7 @@ export function lightPool(x, z, r = 1.1, { color = '#ffcf94', k = 0.32, sx = 1, 
       blending: THREE.AdditiveBlending,
       depthWrite: false,
       toneMapped: true,
+      ...DECAL,
     }),
   );
   m.rotation.x = -Math.PI / 2;

@@ -105,7 +105,7 @@ export function bath(kit, root, nav) {
     seg: 2,
     surf: 'ceramic',
   });
-  kit.box('#9fb6c6', X1 - BATH_X - 0.2, 0.02, 0.32, bx + 0.01, 0.28, z0 + 0.25, { r: 0.02, cast: false });
+  kit.box('#9fb6c6', X1 - BATH_X - 0.2, 0.02, 0.32, bx + 0.01, 0.285, z0 + 0.25, { r: 0.02, cast: false }); // water, just over the tub's rim
   kit.box('#e3e3de', 0.14, 0.05, 0.12, X1 - 0.09, 0.32, z0 + 0.58, {
     r: 0.02,
     surf: 'ceramic',

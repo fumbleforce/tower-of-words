@@ -135,7 +135,7 @@ export function building(kit, root) {
     [e, RETURN],
   ]) {
     kit.box(C.cut, b - a, H + 0.035, zf - (BACK - T), (a + b) / 2, 0, (zf + BACK - T) / 2, { cast: false });
-    kit.box(C.wallTop, 0.03, 0.035, zf - (BACK - T), a < 0 ? b - 0.015 : a + 0.015, H, (zf + BACK - T) / 2, {
+    kit.box(C.wallTop, 0.03, 0.04, zf - (BACK - T), a < 0 ? b - 0.015 : a + 0.015, H, (zf + BACK - T) / 2, {
       cast: false,
     });
   }
@@ -144,7 +144,7 @@ export function building(kit, root) {
     [X1 + T, RETURN],
   ]) {
     kit.box(C.facade, b - a, H, 0.012, (a + b) / 2, 0, zf + 0.006, { surf: 'plaster', cast: false });
-    kit.box(C.wallTop, b - a, 0.035, T + 0.03, (a + b) / 2, H, zf - T / 2 + 0.015, { cast: false });
+    kit.box(C.wallTop, b - a, 0.04, T + 0.03, (a + b) / 2, H, zf - T / 2 + 0.015, { cast: false }); // over the cut block's top, H + 0.035
   }
   // the corridor: concrete, a gutter along the parapet, the parapet cut low like the flat's front wall
   const z0 = zf,
@@ -170,7 +170,7 @@ export function building(kit, root) {
     plates(
       Object.entries(NUMBER)
         .filter(([k]) => +k)
-        .map(([k, n]) => [n, DOOR_C + k * PITCH, 1.43, zf + 0.012, 0.24, 0.12]),
+        .map(([k, n]) => [n, DOOR_C + k * PITCH, 1.43, zf + 0.017, 0.24, 0.12]), // the facade's face: zf + 0.012
     ),
   );
   // a corridor light on the wall by every door, and the pools they throw
@@ -201,7 +201,7 @@ export function window_(kit, own, obj) {
     cx = (a + b) / 2,
     zi = BACK;
   own.boxes(C.alu, [
-    [b - a + 0.08, 0.05, 0.13, cx, y0 - 0.05, z],
+    [b - a + 0.08, 0.056, 0.13, cx, y0 - 0.05, z], // its top just over the wall's sill in the hole (y0)
     [b - a + 0.08, 0.05, 0.13, cx, y1, z],
     [0.05, y1 - y0, 0.13, a - 0.015, y0, z],
     [0.05, y1 - y0, 0.13, b + 0.015, y0, z],

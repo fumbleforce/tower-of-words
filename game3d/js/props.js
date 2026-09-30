@@ -6,6 +6,7 @@ import { hull, icoPoints } from './train/hull.js';
 import { V } from './train/kit.js';
 import { screenMat, Screens } from './places/life.js';
 import { LOOK } from './look/flags.js';
+import { DECAL } from './look/decal.js';
 import * as D from './look/detail.js';
 
 // every lit monitor built here flickers and scrolls; the active place calls liveScreens.update(t)
@@ -94,15 +95,13 @@ export function textTexture(draw, w = 512, h = 256) {
 export const JP_FONT = '"Zen Kaku Gothic New", "Noto Sans CJK JP", "Noto Sans JP", sans-serif';
 
 export function plane(w, h, tex, { emissiveK = 0 } = {}) {
-  const m = new THREE.MeshStandardMaterial({ map: tex, roughness: 0.75 });
+  const m = new THREE.MeshStandardMaterial({ map: tex, roughness: 0.75, ...DECAL }); // signs: on walls
   if (emissiveK) {
     m.emissive = new THREE.Color('#ffffff');
     m.emissiveMap = tex;
     m.emissiveIntensity = emissiveK;
   }
-  const p = new THREE.Mesh(new THREE.PlaneGeometry(w, h), m);
-  p.receiveShadow = true;
-  return p;
+  return sh(new THREE.Mesh(new THREE.PlaneGeometry(w, h), m), false);
 }
 
 // ---------- plants: square planter and a crown of leaf blades (like the references) ----------

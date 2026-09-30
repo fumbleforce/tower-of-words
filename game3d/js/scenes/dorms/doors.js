@@ -20,8 +20,9 @@ export function corridorLight(kit, c, zf) {
 }
 
 // Eric's front seen from the corridor: the wall full height over the cut-low one, his door shut, its fittings like
-// the neighbours' (dark: he isn't home) and its number. It drops away as he goes in (places/dorms.js), to the
-// cut-low front the room is seen through.
+// the neighbours' (dark: he isn't home) and its number. His door's leaf is its own group, hinged on its left edge
+// (userData.leaf): going in (places/dorms.js) it swings out onto the corridor, he steps through, and the tall front
+// fades out to the cut-low one the room is seen through.
 export function tallFront() {
   const kit = new Kit(),
     zf = NEAR + T,
@@ -31,30 +32,40 @@ export function tallFront() {
   kit.box(C.facade, X1 + T - d1, H - FRONT_LOW, T, (d1 + X1 + T) / 2, FRONT_LOW, z, { surf: 'plaster' });
   kit.box(C.facade, d1 - d0, H - 1.3, T, DOOR_C, 1.3, z, { surf: 'plaster' });
   kit.box(C.wallTop, X1 - X0 + 2 * T, 0.035, T + 0.03, 0, H, z, { cast: false });
-  neighbourDoor(kit, DOOR_C, zf, 0);
+  const leafKit = new Kit();
+  neighbourDoor(kit, DOOR_C, zf, 0, leafKit);
   corridorLight(kit, DOOR_C, zf);
   const g = kit.flush(new THREE.Group());
-  g.add(plates([['203', DOOR_C, 1.43, zf + 0.012, 0.24, 0.12]]));
+  g.add(plates([['203', DOOR_C, 1.43, zf + 0.017, 0.24, 0.12]]));
+  const hinge = new THREE.Group(),
+    hx = DOOR_C - 0.28,
+    hz = zf + 0.025;
+  hinge.position.set(hx, 0, hz);
+  hinge.add(leafKit.flush(new THREE.Group()).translateX(-hx).translateZ(-hz));
+  g.add(hinge);
+  g.userData.leaf = hinge;
   return g;
 }
 
-export function neighbourDoor(kit, c, zf, k) {
+// leaf: where the door's leaf and its fittings go (Eric's own swings open)
+export function neighbourDoor(kit, c, zf, k, leaf = kit) {
   const z = zf + 0.02;
   kit.boxes(C.frame, [
     [0.04, 1.3, 0.05, c - 0.3, 0, z],
     [0.04, 1.3, 0.05, c + 0.3, 0, z],
     [0.64, 0.05, 0.05, c, 1.28, z],
   ]);
-  kit.box(C.steel, 0.56, 1.26, 0.03, c, 0.01, z + 0.005, { surf: 'door' });
-  kit.box('#c9cdd2', 0.1, 0.025, 0.04, c + 0.2, 0.62, z + 0.03, {
+  leaf.box(C.steel, 0.56, 1.26, 0.03, c, 0.01, z + 0.005, { surf: 'door' });
+  leaf.box('#c9cdd2', 0.1, 0.025, 0.04, c + 0.2, 0.62, z + 0.03, {
     r: 0.008,
     cast: false,
   });
-  kit.box('#2f333b', 0.16, 0.035, 0.01, c, 0.82, z + 0.022, { cast: false });
+  leaf.box('#2f333b', 0.16, 0.035, 0.01, c, 0.82, z + 0.022, { cast: false });
   // the kitchen window beside the door, frosted, behind a grille; lit where someone's home (neighbours.js)
   const wx = c - 0.62;
   const lit = k === 1 || k === -2;
-  kit.box(lit ? '#f0dcb4' : '#aeb8c0', 0.3, 0.36, 0.01, wx, 0.72, zf + 0.006, {
+  kit.box(lit ? '#f0dcb4' : '#aeb8c0', 0.3, 0.36, 0.01, wx, 0.72, zf + 0.017, {
+    // out of the facade's skin
     cast: false,
     opts: lit ? { emissive: '#ffcf8a', emissiveIntensity: 0.55 } : {},
   });

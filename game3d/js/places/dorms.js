@@ -4,6 +4,7 @@ import { stairY } from '../scenes/dorms/stairs.js';
 import { RoomCam } from '../cam.js';
 import { K } from '../scenes/office.js';
 import { glide } from '../move.js';
+import { sfx } from '../ui.js';
 import { PLACE_DETAILS } from './catalog.js';
 import { snapshotPeople, restorePeople } from './saved-people.js';
 
@@ -111,6 +112,16 @@ export function dormsPlace(game) {
     cam.dist = d;
     cam.place();
   }
+  // the tall front goes see-through and then away, over secs after a wait (its own materials: dorms.js)
+  async function fadeFront(front, secs, wait) {
+    await game.wait(wait * 1000);
+    const ms = [];
+    front.traverse((o) => o.isMesh && ms.push(o.material));
+    for (const m of ms) m.transparent = true;
+    await game.tween(secs, (k) => ms.forEach((m) => (m.opacity = 1 - k)));
+    front.visible = false;
+    for (const m of ms) ((m.opacity = 1), (m.transparent = false));
+  }
   function setInside() {
     st.inside = true;
     w.front.visible = false;
@@ -158,15 +169,21 @@ export function dormsPlace(game) {
         g.walker.stop?.();
         g.walker.locked = true;
         eric.scripted = true;
-        await glide(g, eric.root, w.doorstep, 1.1);
+        // beside the door, clear of the leaf; it swings out onto the corridor (Jørgen: "the whole wall collapses down
+        // and the door doesnt even open"), he steps through, and only then does the tall front fade to the cut-low one
+        await glide(g, eric.root, w.beside, 0.6);
+        g.walker.faceTo?.(w.doorstep[0], b.near);
+        sfx('door');
+        await g.tween(0.5, (k) => (w.frontLeaf.rotation.y = w.door.rotation.y = -1.4 * k * (2 - k)));
+        await glide(g, eric.root, w.doorstep, 0.5);
         st.inside = true;
         refit();
         cam.closeOn(w.arrive.at, w.arrive.zoom);
-        await g.tween(0.4, (k) => (w.front.scale.y = Math.max(0.001, 1 - k * k)));
-        w.front.visible = false;
-        await g.tween(0.35, (k) => (w.door.rotation.y = -1.5 * k));
+        const fade = fadeFront(w.front, 0.7, 0.25);
         await glide(g, eric.root, w.roomEntry, 1.2);
-        g.tween(0.45, (k) => (w.door.rotation.y = -1.5 * (1 - k * k)));
+        await fade;
+        sfx('door');
+        g.tween(0.45, (k) => (w.door.rotation.y = -1.4 * (1 - k * k)));
         eric.setState('idle');
         eric.scripted = false;
         g.walker.sync();
