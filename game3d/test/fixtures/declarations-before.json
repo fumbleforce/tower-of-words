@@ -182,7 +182,7 @@
     "train": {
       "things": {
         "aoi": {
-          "label": "Aoi",
+          "label": "Woman on her phone",
           "kind": "person"
         },
         "kuroda": {
@@ -760,6 +760,7 @@
         "corridor_w",
         "corridor_e",
         "machine_front",
+        "mio_by_desk",
         "kenji_desk"
       ],
       "seats": [

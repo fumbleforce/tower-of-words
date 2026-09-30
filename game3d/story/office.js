@@ -21,7 +21,7 @@ export default {
     aoi: { '*': { hide: true } },
     rei: { '*': { hide: true } },
     // morning: inside the machine room, behind its shut door (the door scene shouts through it), not in the corridor
-    mio: { morning: { at: 'racks' }, lunch: { at: 'racks' }, afternoon: { at: 'emi_seat' }, evening: { at: 'my_desk', if: '!going_home' } },
+    mio: { morning: { at: 'racks' }, lunch: { at: 'racks', if: 'machine_open' }, afternoon: { sit: 'mio_seat' }, evening: { at: 'mio_by_desk', if: '!going_home' } },
     mori: { lunch: { at: 'kitchen_table' }, afternoon: { at: 'chief_desk' }, evening: { hide: true } },
     kenji: { evening: { hide: true } },
   },
@@ -554,7 +554,7 @@ export default {
       { do: 'period', to: 'evening' },
       { set: 'evening_on' },
       '> 18:05.',
-      { do: 'walk', who: 'mio', to: 'my_seat', wait: false },
+      { do: 'walk', who: 'mio', to: 'mio_by_desk', wait: false },
       { wait: 1500 },
       { do: 'face', who: 'mio', to: 'eric' },
       { go: 'ending' },

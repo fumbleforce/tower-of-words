@@ -14,6 +14,7 @@ export function installMovementHooks(game, { rigOf, posOf, isPlayer }) {
     if (!p) return;
     const r = isPlayer(who) ? game.player : rigOf(who);
     if (!r) return;
+    if (isPlayer(who) && r.seatOut) game.standUp?.();
     const place = game.place;
     const pr = beginSavedWalk(
       r,
@@ -94,7 +95,22 @@ export function installMovementHooks(game, { rigOf, posOf, isPlayer }) {
     const p = posOf(at);
     if (r && p) r.lookTarget = p;
   };
+  // Eric on a bench outside the train and office (those two seat him themselves, with their props): he walks to the
+  // spot in front of the seat, sits over the seat point, and later steps back out to free floor (seatOut), so his
+  // next walk never starts inside the bench
+  const seatsPlayer = () => !['train', 'office'].includes(game.place.name);
   H.sit = async ({ who, at }) => {
+    if (isPlayer(who) && seatsPlayer()) {
+      const s = game.place.seats[at];
+      if (!s || !game.player.sitAt) return;
+      const out = [s.x, s.z + (s.ry ? -0.5 : 0.5)];
+      await H.walk({ who, to: out });
+      game.player.sitAt(s.x, s.top, s.z, s.ry || 0);
+      game.player.seated = true;
+      game.player.seatOut = out;
+      if (game.walker) game.walker.facing = s.ry || 0;
+      return;
+    }
     const r = rigOf(who);
     if (r && r.meshy) {
       const s = game.place.seats[at];
@@ -108,6 +124,13 @@ export function installMovementHooks(game, { rigOf, posOf, isPlayer }) {
     await game.place.sitPerson?.(isPlayer(who) ? 'eric' : who, at);
   };
   H.stand = async ({ who }) => {
+    const pl = game.player;
+    if (isPlayer(who) && pl.seatOut) {
+      const dz = pl.seatOut[1] - pl.root.position.z;
+      pl.seatOut = null;
+      await standOut(game, pl, dz);
+      return;
+    }
     const r = rigOf(who);
     // Meshy rigs (Mio, and Eric when it's him) stand by leaving the sit pose and stepping off the bench
     if (r && r.meshy && !isPlayer(who)) {

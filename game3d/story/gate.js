@@ -167,8 +167,10 @@ export default {
       { do: 'reader', side: 'r', state: 'green' },
       { do: 'gate', state: 'jam' },
       { do: 'emote', who: 'kuroda', kind: 'sweat' },
+      { do: 'cam', on: 'gate', zoom: 2.5 }, // close on the arch's count screen: a person, a briefcase, a red 2
       { say: 'gatev', overheard: true, emo: 'machine', text: '共連れを検知しました！' },
       '> The little screen on the gate counts two people, him and his briefcase.',
+      { do: 'cam', on: 'before_gate', zoom: 1.3 },
       { do: 'face', who: 'kuroda', to: 'gate' },
       { say: 'kuroda', face: 'panicked', emo: 'pleading', text: '{akete}...' },
       '> He mimes hauling two heavy doors apart, then pats the gate like a nervous horse.',

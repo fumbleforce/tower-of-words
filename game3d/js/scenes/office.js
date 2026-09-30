@@ -479,9 +479,9 @@ function coatRack() {
   g.add(rbox(0.3, 0.55, 0.12, '#8a7d6c', { y: 0.55, z: 0.06, r: 0.05 }));
   return g;
 }
-// a Japanese stand fan (senpuki): round weighted base, telescopic pole, a motor pod, and a head tipped up so the
+// a stand fan (senpuki): round base, telescopic pole, a motor pod, and a head tipped up so the
 // high camera sees the face: a wire guard (rings and spokes, front and back) around four pitched pale-blue blades
-// with gaps between them. userData.head yaws (the oscillation), userData.rotor spins about its local z; both are
+// with gaps. userData.head yaws (the oscillation), userData.rotor spins about its local z; both are
 // noBatch, the base and pole can batch.
 function standFan() {
   const g = new THREE.Group();
@@ -2111,7 +2111,7 @@ export function* officeSteps() {
     for (let i = 0; i < life.leds.length; i++) life.leds[i].visible = Math.sin(t * (3 + (i % 5)) + i * 1.7) > -0.6;
     for (const r of [kenji, nao, hiro, mori, yui, sota]) idle(r, t);
     if (!emi._walk) idle(emi, t);
-    kenji.arms[1].rotation.x = -1.2 + Math.max(0, Math.sin(t * 6)) * 0.06;
+    if (!kenji.gesturing) kenji.arms[1].rotation.x = -1.2 + Math.max(0, Math.sin(t * 6)) * 0.06;
     nao.arms[0].rotation.x = -1.2 + Math.max(0, Math.sin(t * 5 + 1)) * 0.06;
     mori.head.rotation.x = -0.1 + Math.sin(t * 0.4) * 0.03;
     yui.arms[0].rotation.x = -0.8 + Math.sin(t * 1.3) * 0.2;

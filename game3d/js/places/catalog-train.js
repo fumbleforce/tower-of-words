@@ -1,7 +1,7 @@
 export const TRAIN_DETAILS = {
   'things': {
     'aoi': {
-      'label': 'Aoi',
+      'label': 'Woman on her phone',
       'kind': 'person',
     },
     'kuroda': {

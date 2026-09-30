@@ -17,6 +17,7 @@ import { flags } from '../narrative/state.js';
 import { glide, walkRig, hopOff } from '../move.js';
 import { mat, rbox, PAL } from '../props.js';
 import { route } from './route.js';
+import { chairPusher } from './office-chair.js';
 
 export async function officePlace(game) {
   const w = await sliced(officeSteps()); // in slices between frames: it's built while the forecourt is played
@@ -34,9 +35,9 @@ export async function officePlace(game) {
     coffee: 0,
     paper: [],
     cans: [],
-    chairTo: null,
   };
   const initialChair = snapshotObject(w.myChair);
+  const pusher = chairPusher(game, w.myChair);
   const aoi = PEOPLE.aoi();
   aoi.root.scale.multiplyScalar(K);
   aoi.root.visible = false;
@@ -114,6 +115,7 @@ export async function officePlace(game) {
     corridor_w: [-3.5, 1.3],
     corridor_e: [5.8, 1.3],
     machine_front: [5.1, 1.3],
+    mio_by_desk: [-0.2, -2.1],
     kenji_desk: [-2.9, -4.3],
   };
   const seats = {
@@ -731,8 +733,6 @@ export async function officePlace(game) {
         w.nav.unblock('mdoor');
         w.nav.blockTagged('mdoorLeaf', 5.22, 5.62, CN - 0.8, CN - 0.02);
       } else w.nav.blockTagged('mdoor', 4.7, 5.5, CN - 0.2, CN + 0.12);
-      st.chairTo = null;
-      st.chairDone = null;
       w.nav.unblock('chair');
       restoreObject(w.myChair, state.chair || initialChair);
       if (state.chairHome ?? (f.chairHome || f.chair_back)) {
@@ -828,6 +828,15 @@ export async function officePlace(game) {
       r.seated = true;
       if (blobs[id]) blobs[id].position.set(s.x, 0.004, s.z);
     },
+    // a schedule's `sit` on a Continue (sim.js applySchedule, instant): Mio's rig straight into the seat
+    placeSeated(id, seatId) {
+      const r = id === 'mio' ? game.mioNpc : people[id],
+        s = seats[seatId];
+      if (!r?.meshy || !s) return;
+      r.root.visible = true;
+      r.sitAt(s.x, s.top, s.z, s.ry || 0);
+      r.seated = true;
+    },
     async standPerson(id) {
       if (id === 'eric' || id === 'player') {
         game.player.seated = false;
@@ -880,25 +889,7 @@ export async function officePlace(game) {
         if (j !== jamSheet.visible) showJam(j);
       }
       stepPaper(dt);
-      // the chair rolling to its spot
-      if (st.chairTo) {
-        const c = w.myChair.position,
-          [x, z] = st.chairTo[0],
-          d = Math.hypot(x - c.x, z - c.z);
-        if (d < 0.04) {
-          st.chairTo.shift();
-          if (!st.chairTo.length) {
-            st.chairTo = null;
-            w.myChair.rotation.y = Math.PI;
-            if (st.chairDone) st.chairDone();
-          }
-        } else {
-          const s = Math.min(d, 2.2 * dt);
-          c.x += ((x - c.x) / d) * s;
-          c.z += ((z - c.z) / d) * s;
-          w.myChair.rotation.y += dt * 8;
-        }
-      }
+      pusher.step(dt); // the chair Eric is pushing back to his desk (office-chair.js)
       const p = game.player.root.position;
       for (const r of Object.values(people)) {
         if (r._walk || !r.hips) continue;
@@ -940,19 +931,12 @@ export async function officePlace(game) {
         w.tama.userData.head.rotation.x = 0;
         await walkRig(game, w.tama, p, { speed: 1.1 });
       },
-      chairRoll: ({ to = 'my_seat' }) =>
-        new Promise((res) => {
-          w.nav.unblock('chair');
-          const [x, z] = to === 'my_seat' ? dS1.seat : game.posOf(to);
-          const c = w.myChair.position;
-          const path = routeTo(c, [x, z]);
-          st.chairTo = path;
-          st.chairDone = () => {
-            flags[ENGINE_KEYS.chairHome] = to === 'my_seat';
-            res();
-          };
-          sfx('door');
-        }),
+      chairRoll: async ({ to = 'my_seat' }) => {
+        w.nav.unblock('chair');
+        sfx('door');
+        await pusher.roll(routeTo(w.myChair.position, to === 'my_seat' ? dS1.seat : game.posOf(to)), Math.PI);
+        flags[ENGINE_KEYS.chairHome] = to === 'my_seat';
+      },
       coffee: async () => {
         sfx('ok');
         st.coffee = 1;
