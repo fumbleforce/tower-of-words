@@ -53,6 +53,8 @@ html, body { margin: 0; height: 100%; background: #0e121c; }
   const s = document.createElement('script'); s.type = 'module'; s.src = './js/main.js' + v; document.body.appendChild(s);
   // the shell (title, settings, pause, saves, loading): its own module, so a fault there never stops the game
   const m = document.createElement('script'); m.type = 'module'; m.src = './js/menu.js' + v; document.body.appendChild(m);
+  // the island map, a dev tool for now: only with ?map=1 or ?mapcompare=1 (js/map/index.js)
+  if (/[?&]map/.test(location.search)) { const mp = document.createElement('script'); mp.type = 'module'; mp.src = './js/map/index.js' + v; document.body.appendChild(mp); }
   // tests and captures don't want the loader; and it never outlives a game that started without the shell
   if (/[?&](cap|test=)/.test(location.search)) document.getElementById('boot').remove();
   const bootWatch = setInterval(() => { const g = window.__game, b = document.getElementById('boot'); if (!b) return clearInterval(bootWatch); if (g && g.place && !window.__shellBooted && performance.now() > 15000) { b.classList.add('gone'); clearInterval(bootWatch); } }, 500);
