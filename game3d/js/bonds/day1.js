@@ -158,7 +158,7 @@ export const EXPECT = {
     mio: { step: 1, pts: 3, remembers: ['held_doors', 'lunch', 'rack', 'copier'] },
     mori: { step: 1, pts: 2, remembers: ['ohayo', 'copier'] },
     kenji: { step: 1, pts: 1 },
-    guard: { step: 1, pts: 2, remembers: ['greeted', 'pointed_cat', 'laughed'] },
+    guard: { step: 1, pts: 2, remembers: ['greeted', 'laughed'] },
     kuroda: { step: 1, pts: 1, remembers: ['held_doors', 'mime'] },
   },
 };
