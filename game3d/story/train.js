@@ -376,7 +376,7 @@ export default {
         { say: 'mio', emo: 'dry', text: '{ohayo} first, okay? Bye, {gaijin}.' },
       ] },
       { set: 'can_exit' },
-      { do: 'walk', who: 'mio', to: 'walkway', wait: false },
+      { do: 'walk', who: 'mio', to: 'walkway', wait: false, speed: 1.6 }, // she hurries: ahead of Eric's walk out (1.45), never passed
       { do: 'cam', back: true },
       { do: 'next' },
     ],

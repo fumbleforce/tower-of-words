@@ -6,6 +6,12 @@ export const BRAKE = 7.5; // m/s² when stopping (keys released, or the end of a
 
 export const TURN = 9; // rad/s at most
 
+// the game loop's clock, which scripted walks keep to: a frame covers at most FRAME_MAX s of real time (times the time
+// scale), in steps of at most STEP_MAX game seconds. Keep equal to the two numbers in main.js frame().
+export const FRAME_MAX = 0.1;
+
+export const STEP_MAX = 0.05;
+
 export const CORNER = 0.32; // start turning toward the next waypoint this far before a corner
 
 export const BODY = 0.24; // a person's radius (place units, times the character scale): two people stand about a body apart

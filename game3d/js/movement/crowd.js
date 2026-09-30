@@ -56,8 +56,12 @@ function trackVelocity(list, dt) {
 }
 
 export function followSpeed(b, fx, fz, gap) {
-  const v = vel.get(b.root);
-  if (!v || !(b.rig && b.rig._walk)) return null;
+  if (!(b.rig && b.rig._walk)) return null;
+  // a scripted walk (walkRig) moves once a frame, between the loop's steps, so the sampled velocity reads it as a jump
+  // and then standing still; it gives its own pace instead
+  const w = b.root.userData.walkVel,
+    v = w ? { vx: w[0], vz: w[1] } : vel.get(b.root);
+  if (!v) return null;
   const along = v.vx * fx + v.vz * fz;
   if (along < 0.15) return null;
   return Math.max(0, along + (gap - FOLLOW_GAP) * 3);

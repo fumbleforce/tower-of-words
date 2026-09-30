@@ -97,7 +97,7 @@ Any id in docs/game/cast.md "Everyone" can speak. Add names or roles under `spea
 |---|---|---|
 | `goal` | `text`, `at` (optional spot or id), `side: true` | Sets the goal line top left (`text: ''` clears it). `side: true` sets the small side line under it instead. |
 | `hint` | `text`, `what: 'say'` (optional) | A tip, shown as the second line of the goal box until closed or the goal moves on. `what: 'say'` points at the Say button. |
-| `walk` | `who`, `to` (a spot id, a person or object id, or `[x, z]`), `wait: true/false` | A person walks there. People route through doors and corridors on their own. |
+| `walk` | `who`, `to` (a spot id, a person or object id, or `[x, z]`), `wait: true/false`, optional `speed` (units a second; Mio's default is 1.0) | A person walks there. People route through doors and corridors on their own. |
 | `face` | `who`, `to` (id or `[x, z]`) | Turns someone toward a person, spot or object. |
 | `sit` / `stand` | `who`, `at` (seat id) | Sits someone down (Eric included) or stands them up. |
 | `look` | `who`, `at` | Head turn only. |
