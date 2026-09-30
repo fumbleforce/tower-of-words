@@ -14,10 +14,11 @@ import { lightPool } from '../places/life.js';
 import { boxes, planter, bicycle, openDoor, tree, monument } from './forecourt/details.js';
 import { laundry, sento } from './dorm-court/frontages.js';
 import { ericBlock } from './dorm-court/block.js';
-import { buildSkyline } from './skyline.js';
+import { skylineSteps } from './skyline.js';
+import { drain } from '../perf/slice.js';
 import * as layout from './island-layout.js';
 import { eveningLight } from './town.js';
-import { mergeStatic } from './merge-static.js';
+import { mergeStaticSteps } from './merge-static.js';
 
 const HALL = [-1.1, 2.5], // the entrance hall: x range
   FRONT_Z = -1.2, // its glass front (cut low), with the doors
@@ -246,7 +247,10 @@ function nearEdge(root) {
   root.add(hedge);
 }
 
-export function buildDormCourt() {
+// buildDormCourt() builds it all at once; dormCourtSteps() is the same as a generator that yields between parts, so
+// the game can build it in slices while the plaza is played (js/perf/slice.js)
+export const buildDormCourt = () => drain(dormCourtSteps());
+export function* dormCourtSteps() {
   const root = new THREE.Group(),
     scene = new THREE.Scene();
   scene.background = new THREE.Color(SKY);
@@ -268,16 +272,23 @@ export function buildDormCourt() {
 
   const nav = new Nav(WEST + 0.1, EAST - 0.2, BACK_Z - 1.2, NEAR - 0.05, 0.1);
   ground(root);
+  yield;
   hall(root, nav);
+  yield;
   ericBlock(root, { hall: HALL });
+  yield;
   laundry(root, nav, { west: WEST, roofMat });
+  yield;
   sento(root, nav, { east: EAST, roofMat });
+  yield;
   bikes(root, nav);
+  yield;
   planting(root, nav);
   nearEdge(root);
-  mergeStatic(root);
+  yield;
+  yield* mergeStaticSteps(root);
   // the rest of the dorm cluster and the town around, from the island layout; Eric's block is built above
-  const sky = buildSkyline(root, 'dorm_court', { layout, evening: true, skip: ['dorm_1'] });
+  const sky = yield* skylineSteps(root, 'dorm_court', { layout, evening: true, skip: ['dorm_1'] });
   return {
     root,
     scene,

@@ -4,10 +4,14 @@
 // Call it once at the end of a scene builder, before anything looks meshes up.
 import * as THREE from 'three';
 import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
+import { drain } from '../perf/slice.js';
 
 const KEEP = ['position', 'normal', 'uv'];
 
-export function mergeStatic(root) {
+export const mergeStatic = (root) => drain(mergeStaticSteps(root));
+
+// the same, yielding after each merged set (for builders that run in slices, js/perf/slice.js)
+export function* mergeStaticSteps(root) {
   root.updateMatrixWorld(true);
   const toLocal = new THREE.Matrix4().copy(root.matrixWorld).invert();
   const sets = new Map();
@@ -34,6 +38,7 @@ export function mergeStatic(root) {
     parts.forEach((g) => g.dispose());
     for (const o of meshes) o.parent.remove(o);
     root.add(merged);
+    yield;
   }
   // groups left empty by the merge
   const empty = [];

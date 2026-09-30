@@ -1,5 +1,6 @@
 import * as THREE from 'three';
-import { buildDormCourt } from '../scenes/dorm-court.js';
+import { dormCourtSteps } from '../scenes/dorm-court.js';
+import { sliced } from '../perf/slice.js';
 import { RoomCam } from '../cam.js';
 import { K } from '../scenes/office.js';
 import { EVENING_GRADE } from '../scenes/town.js';
@@ -10,8 +11,8 @@ import { snapshotPeople, restorePeople } from './saved-people.js';
 
 // The dorm courtyard, on the walk home after work; it also loads with ?place=dorm_court.
 // The trip out is the watched walk through the hall doors and the passage into Eric's room (dorms).
-export function dormCourtPlace(game) {
-  const w = buildDormCourt();
+export async function dormCourtPlace(game) {
+  const w = await sliced(dormCourtSteps()); // in slices between frames: it's built while the plaza is played
   const cam = new RoomCam(w.camera);
   const floor = new THREE.Plane(new THREE.Vector3(0, 1, 0), 0);
   const spots = { plaza_entry: w.plazaEntry, dorm_entry: w.dormEntry };

@@ -1,5 +1,6 @@
 import * as THREE from 'three';
-import { buildPlaza } from '../scenes/plaza.js';
+import { plazaSteps } from '../scenes/plaza.js';
+import { sliced } from '../perf/slice.js';
 import { RoomCam } from '../cam.js';
 import { K } from '../scenes/office.js';
 import { eveningLight, EVENING_GRADE } from '../scenes/town.js';
@@ -10,8 +11,8 @@ import { walkOut, walkIn } from './edge-walk.js';
 
 // The fountain plaza: a side trip east of the forecourt in the morning, and on the walk home after work, with the
 // lane on east to the dorm courtyard.
-export function plazaPlace(game) {
-  const w = buildPlaza();
+export async function plazaPlace(game) {
+  const w = await sliced(plazaSteps()); // in slices between frames: it's built while the forecourt is played
   const cam = new RoomCam(w.camera); // the forecourt's camera, so the walk between them keeps its angle
   const floor = new THREE.Plane(new THREE.Vector3(0, 1, 0), 0);
   const spots = {

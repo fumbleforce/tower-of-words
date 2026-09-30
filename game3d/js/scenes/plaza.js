@@ -11,8 +11,9 @@ import { mat, bench } from '../props.js';
 import { planter, tree, bicycle } from './forecourt/details.js';
 import { outdoorLight, paving, TOWN } from './town.js';
 import * as LAYOUT from './island-layout.js';
-import { buildSkyline } from './skyline.js';
-import { mergeStatic } from './merge-static.js';
+import { skylineSteps } from './skyline.js';
+import { drain } from '../perf/slice.js';
+import { mergeStaticSteps } from './merge-static.js';
 import { fountain, lamps, benches, terrace, laneDetails, bin, groves, merged } from './plaza-details.js';
 import { canteen, shopStreet } from './plaza-buildings.js';
 
@@ -266,7 +267,9 @@ function clinicCross(root) {
   );
 }
 
-export function buildPlaza() {
+// buildPlaza() builds it at once; plazaSteps() yields between parts, for building in slices (js/perf/slice.js)
+export const buildPlaza = () => drain(plazaSteps());
+export function* plazaSteps() {
   const root = new THREE.Group(),
     scene = new THREE.Scene();
   scene.background = new THREE.Color(TOWN.roof);
@@ -293,8 +296,11 @@ export function buildPlaza() {
   };
 
   ground(root);
+  yield;
   const water = fountain(root, F[0], F[1], BASIN);
+  yield;
   laneDetails(root, LANE, HALF);
+  yield;
   benches(
     root,
     nav,
@@ -306,6 +312,7 @@ export function buildPlaza() {
   );
   bin(root, nav, F[0] + 6.2, F[1] + 2.4);
   beds(root, nav);
+  yield;
   // lamps: four round the plaza's north side, three along the lane's north edge
   const lampPts = [
     ...[205, 248, 292, 335].map((deg) => [F[0] + Math.cos(rad(deg)) * 10.7, F[1] + Math.sin(rad(deg)) * 10.7]),
@@ -313,8 +320,11 @@ export function buildPlaza() {
   ];
   for (const [x, z] of lampPts) nav.block(x - 0.16, x + 0.16, z - 0.16, z + 0.16);
   const lit = lamps(root, lampPts);
+  yield;
   terrace(root, nav, [-5.4, -1.8, 1.8, 5.4, 9.0, 12.6], CANTEEN[3] + 1.9);
+  yield;
   const hall = canteen(root, CANTEEN, building('canteen').floorH);
+  yield;
   // the corner beds either side of the terrace, between the canteen and the plaza
   for (const [x, z] of [
     [CANTEEN[0] + 0.6, CANTEEN[3] + 3.6],
@@ -330,6 +340,7 @@ export function buildPlaza() {
   }
   verge(root);
   groves(root, GROVES);
+  yield;
   const street = shopStreet(root, {
     a: SHOPS.a,
     dir: SHOPS.dir,
@@ -343,12 +354,13 @@ export function buildPlaza() {
       [8, 'パン', 'BAKERY', '#5d5a72'],
     ],
   });
+  yield;
   clinicCross(root);
-  const sky = buildSkyline(root, CHUNK, {
+  const sky = yield* skylineSteps(root, CHUNK, {
     layout: LAYOUT,
     skip: ['canteen', 'shops_north', 'arcade', 'shops_south'],
   });
-  mergeStatic(root);
+  yield* mergeStaticSteps(root);
 
   // the points the place uses; the lane's ends are where the walks to the forecourt and the dorms start
   const arriveIn = lanePoint(0.4);

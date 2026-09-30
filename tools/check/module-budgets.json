@@ -87,7 +87,7 @@
     },
     "game3d/js/props.js": {
       "lines": 533,
-      "bytes": 19265,
+      "bytes": 19221,
       "owner": "codex-tui",
       "review": "C-0071",
       "reason": "Existing primitive prop and material builders; coordinate the look/detail cycle split with visual work."

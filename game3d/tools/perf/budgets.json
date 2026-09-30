@@ -8,30 +8,66 @@
     "quality": 0,
     "places": {
       "train": {
-        "calls": 779,
-        "tris": 145745,
+        "calls": 851,
+        "tris": 144221,
         "gpu": {
           "medianMs": 16.7,
           "p99Ms": 16.8,
-          "build": "0929-1848-b196ef5"
+          "build": "0930-0748-d2c8515"
         }
       },
       "gate": {
-        "calls": 1246,
-        "tris": 152425,
+        "calls": 1157,
+        "tris": 133235,
         "gpu": {
           "medianMs": 16.7,
           "p99Ms": 16.8,
-          "build": "0929-1848-b196ef5"
+          "build": "0930-0748-d2c8515"
         }
       },
       "office": {
-        "calls": 4130,
-        "tris": 524805,
+        "calls": 918,
+        "tris": 536163,
         "gpu": {
           "medianMs": 16.7,
-          "p99Ms": 33.4,
-          "build": "0929-1848-b196ef5"
+          "p99Ms": 16.8,
+          "build": "0930-0748-d2c8515"
+        }
+      },
+      "forecourt": {
+        "calls": 230,
+        "tris": 115550,
+        "gpu": {
+          "medianMs": 16.7,
+          "p99Ms": 16.8,
+          "build": "0930-0748-d2c8515"
+        }
+      },
+      "plaza": {
+        "calls": 105,
+        "tris": 106018,
+        "gpu": {
+          "medianMs": 16.7,
+          "p99Ms": 16.8,
+          "build": "0930-0748-d2c8515"
+        }
+      },
+      "dorm_court": {
+        "calls": 161,
+        "tris": 48534,
+        "gpu": {
+          "medianMs": 16.7,
+          "p99Ms": 16.8,
+          "build": "0930-0748-d2c8515"
+        }
+      },
+      "dorms": {
+        "calls": 149,
+        "tris": 18761,
+        "gpu": {
+          "medianMs": 16.7,
+          "p99Ms": 16.8,
+          "build": "0930-0748-d2c8515"
         }
       }
     }
@@ -44,30 +80,66 @@
     "quality": 0,
     "places": {
       "train": {
-        "calls": 648,
-        "tris": 132993,
+        "calls": 680,
+        "tris": 132757,
         "gpu": {
           "medianMs": 16.7,
           "p99Ms": 16.8,
-          "build": "0929-1848-b196ef5"
+          "build": "0930-0748-d2c8515"
         }
       },
       "gate": {
-        "calls": 833,
-        "tris": 107383,
+        "calls": 731,
+        "tris": 92067,
         "gpu": {
           "medianMs": 16.7,
-          "p99Ms": 16.8,
-          "build": "0929-1848-b196ef5"
+          "p99Ms": 50,
+          "build": "0930-0748-d2c8515"
         }
       },
       "office": {
-        "calls": 2714,
-        "tris": 345397,
+        "calls": 590,
+        "tris": 435841,
+        "gpu": {
+          "medianMs": 16.7,
+          "p99Ms": 49.9,
+          "build": "0930-0748-d2c8515"
+        }
+      },
+      "forecourt": {
+        "calls": 175,
+        "tris": 83040,
         "gpu": {
           "medianMs": 16.7,
           "p99Ms": 33.4,
-          "build": "0929-1848-b196ef5"
+          "build": "0930-0748-d2c8515"
+        }
+      },
+      "plaza": {
+        "calls": 103,
+        "tris": 102978,
+        "gpu": {
+          "medianMs": 16.7,
+          "p99Ms": 16.8,
+          "build": "0930-0748-d2c8515"
+        }
+      },
+      "dorm_court": {
+        "calls": 148,
+        "tris": 46976,
+        "gpu": {
+          "medianMs": 16.7,
+          "p99Ms": 16.8,
+          "build": "0930-0748-d2c8515"
+        }
+      },
+      "dorms": {
+        "calls": 149,
+        "tris": 18761,
+        "gpu": {
+          "medianMs": 16.7,
+          "p99Ms": 16.8,
+          "build": "0930-0748-d2c8515"
         }
       }
     }

@@ -66,7 +66,7 @@ Why: Pages from main means every build's binaries stay in main's history forever
 ## Draw-call pass (perf agent, 2026-09-29): js/perf/batch.js
 
 One generic pass per place, no place files touched: `optimizePlace(place, { game })` right after a place is built.
-The office runs this pass after `applyLook` in places/lifecycle.js. Train and gate still use their original rendering. `?nobatch` disables the pass. Model picking includes the original geometry on layer31. The cup tray, counter and sink plate keep their original draw order because their top surfaces overlap.
+The office, the forecourt, the plaza and the dorm courtyard run this pass after the look in places/lifecycle.js (`BATCHED`). Train, gate and Eric's room still use their original rendering. `?nobatch` disables the pass. Model picking includes the original geometry on layer31. The cup tray, counter and sink plate keep their original draw order because their top surfaces overlap.
 
 What it does:
 - Merges static meshes into one mesh per look: materials that differ only in colour share one material with the
@@ -167,19 +167,26 @@ game3d/tools/perf/budgets.json (the baseline). The overlay itself is described i
   1366 860` and `... 390 844` rewrite that layout's entry for the GL the run got. Only a passing run writes it.
   Commit budgets.json with the change and say why in the message.
 
-Baseline (build 0929-1848-b196ef5, fast test, q0, GL=gpu; draw-call pass in js/perf/batch.js still not wired):
+Baseline (build 0930-0748, d2c8515 plus map upgrade task G; fast test, q0, GL=gpu; draw-call pass on the office,
+forecourt, plaza and dorm courtyard). Median frame 16.7 ms everywhere (vsync).
 
-| place | desktop calls | desktop tris | phone calls | phone tris | median ms | 1% low ms | worst ms (desktop / phone) |
-|---|--:|--:|--:|--:|--:|--:|--:|
-| train  |   779 | 146k |   648 | 133k | 16.7 | 16.8 | 483 / 500 |
-| gate   | 1,246 | 152k |   833 | 107k | 16.7 | 16.8 | 467 / 650 |
-| office | 4,130 | 525k | 2,714 | 345k | 16.7 | 33.4 | 283 / 267 |
+| place | desktop calls | desktop tris | phone calls | phone tris | 1% low ms (desktop / phone) |
+|---|--:|--:|--:|--:|--:|
+| train      |   851 | 144k | 680 | 133k | 16.8 / 16.8 |
+| gate       | 1,157 | 133k | 731 |  92k | 16.8 / 50 |
+| forecourt  |   230 | 116k | 175 |  83k | 16.8 / 33.4 |
+| office     |   918 | 536k | 590 | 436k | 16.8 / 49.9 |
+| plaza      |   105 | 106k | 103 | 103k | 16.8 / 16.8 |
+| dorm_court |   161 |  49k | 148 |  47k | 16.8 / 16.8 |
+| dorms      |   149 |  19k | 149 |  19k | 16.8 / 16.8 |
 
-The office is far over the 250-call phone budget above: 2,714 calls a frame on the phone at the low tier (4,130 on
-desktop). Earlier on 2026-09-29, before the world look (js/look/) went in, the same measure at 393x851 was 1,305
-(Draw-call pass, low tier). Worst frames of 270 to 650 ms in every place are the
-background builds of the next place. No software-GL baseline yet: the software desktop run on this build stopped on
-the train at `use:door_l:1` (the hang Codex reported in X-0132), so it could not set one.
+The four walk-home places are inside the map plan's target (200 calls and 120k triangles at q0 on the phone). Train,
+gate and office are still over the 250-call phone budget above, and the office over 300k triangles.
+Office triangles re-baselined (2026-09-30): the "office triangles 26% over the baseline" warning every day test
+printed since 6c15d84 (Codex, office batching) is the batching pass itself, whose larger merged groups cull less
+finely (Office integration below: 345k to 421k then, 436k now on the phone); calls fell from 2,714 to 590.
+The previous baseline (0929-1848-b196ef5, office unbatched) had train 779/648, gate 1,246/833, office 4,130/2,714
+calls (desktop/phone).
 
 ## Office integration (C-0110, 2026-09-29)
 
@@ -225,8 +232,8 @@ game3d/shots/perf/before-hitch-*.json and after-hitch-*.json). GL=gpu, q=1, buil
 The office preload takes longer in wall time (about 0.5 s became 0.9 s; 3.4 s at CPU 4x) since it works 8 ms a
 frame, which is well inside the forecourt walk. The 1% low over a few seconds is one or two frames, so it moves a lot
 between runs; the longest task is the steady number. Left over at CPU 4x: attachLift (about 50 ms), one office step
-with a canvas text texture (48 ms) and the outdoor chunk builders (forecourt, plaza, dorm_court, dorms), which are
-small and not yet split. The worst frames the fast test printed on entering a place were shader compiles: see Entry
+with a canvas text texture (48 ms) and the forecourt's builder (plaza and dorm_court are split since
+2026-09-30, see Walk-home chunks below). The worst frames the fast test printed on entering a place were shader compiles: see Entry
 hitches below.
 
 ## Entry hitches: shader warm-up (2026-09-30): js/perf/warm.js
@@ -262,3 +269,30 @@ build clipping variants (it never sets the clipping state), so they compile on f
 up to 16 ms; three has no public way to upload geometry ahead); and the crossfade snapshot (`canvas.toDataURL`,
 25 to 45 ms, in the last frame of the old place).
 
+## Walk-home chunks (map upgrade task G, 2026-09-30)
+
+Preparing the outdoor chunks while the player walks the one before (`hitch.mjs` in preparation mode, 390x844, CPU 4x,
+q0, GL=gpu; before is d2c8515):
+
+| trip (the place being played → the one built) | longest task before | after | 1% low before | after |
+|---|--:|--:|--:|--:|
+| forecourt → plaza | 215 ms | none over 50 | 59.5 fps | 59.5 fps |
+| plaza → dorm_court | 113 ms | none | 59.5 fps | 59.5 fps |
+| office → forecourt (for the lift up) | 248 ms | 162 ms | 15 fps | 15 fps |
+| gate → forecourt | 254 ms | 177 ms | 12 fps | 15 fps |
+
+- Rounded boxes (`rbox` in props.js) are made once per size and copied (js/perf/rounded-box.js): three's
+  RoundedBoxGeometry works out every vertex and uv again, and `clone()` on one rebuilds a default box first. This
+  halved every chunk builder at CPU 4x (plaza 186 → 95 ms, dorm courtyard 101 → 50, forecourt 236 → 120). The copies
+  hold the same numbers, each mesh its own arrays.
+- The plaza and dorm courtyard builders are generators (`plazaSteps`, `dormCourtSteps`, with `skylineSteps` and
+  `mergeStaticSteps`) run by `sliced()`; the longest step is 11 ms at CPU 4x.
+- Left: the forecourt's builder is still one task (about 120 ms at CPU 4x, 47 of it the head office). Splitting it
+  needs `forecourtSteps()` in scenes/forecourt.js and `await sliced(...)` in places/forecourt.js, which another task
+  had open.
+- The draw-call pass now runs on the plaza and dorm courtyard too. It changes little there: their builders already
+  merge per material (mergeStatic), so paired q0 views at 393x851 went plaza 102 → 102 calls, dorm courtyard 140 → 139,
+  with no pixel difference (`ab.mjs`, whose hook now runs the pass after the look, as the lifecycle does; it ran it
+  before the look, which patched the batches' shaders twice).
+- `node game3d/tools/perf/builder-profile.mjs <module> <export> [args] [--gen]` profiles one builder at CPU 4x: the
+  functions with the most time and, for a generator, its longest step.
