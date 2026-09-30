@@ -7,7 +7,7 @@
 //   BIBLE_BASE=http://127.0.0.1:8779/ node tools/bible/check.mjs    (a worktree served on another port)
 //
 // Showcase entries (showcase/<id>/entry.json) are checked too: each renders, every image path resolves and image
-// ids are unique within the entry.
+// ids are unique within the entry. The Work page (GitHub issues through the server) must render.
 //
 // --public-only checks the public site without accessing private sources.
 import { withBrowserJob } from '../lib/browser-job.mjs';
@@ -75,7 +75,7 @@ for (const site of SITES) {
     ...data.characters.map(c => 'character/' + c.id),
     'search/mio', 'search/copier', 'story/lunch', 'doc/docs/game/cast.md', 'doc/docs/game/stories/mio-train.md', 'doc/notes/RELATIONSHIPS.md', 'doc/notes/mini-stories.md', 'src/GUIDE.md:42',
     ...data.story.legacy_docs.map(d => 'doc/' + d.path),
-    'review', 'doc/reviews/README.md', 'showcase', 'doc/showcase/README.md',
+    'review', 'doc/reviews/README.md', 'showcase', 'doc/showcase/README.md', 'work',
     ...(await folderIds('reviews')).map(id => 'review/' + id), ...showcaseIds.map(id => 'showcase/' + id)];
   if (site.priv) routes.push('rewards');
   const page = await context.newPage();
@@ -90,7 +90,10 @@ for (const site of SITES) {
     }
     await page.evaluate(() => { if (document.body) document.body.dataset.ready = '0'; });
     await page.goto(BASE + site.path + '#' + r);
-    await page.waitForFunction(() => document.body.dataset.ready === '1' && !document.querySelector('#main').textContent.includes('Loading'), null, { timeout: 20000 });
+    try {
+      // index.html's placeholder is exactly "Loading…"; pages may quote the word (an issue can)
+      await page.waitForFunction(() => document.body.dataset.ready === '1' && document.querySelector('#main').textContent.trim() !== 'Loading…', null, { timeout: 20000 });
+    } catch (err) { bad.push(`${currentRoute}: the page did not finish loading in 20 s`); continue; }
     await page.waitForTimeout(150);
     // open every collapsed Legacy box so its links are checked too
     await page.evaluate(() => document.querySelectorAll('details').forEach(d => { d.open = true; }));

@@ -403,6 +403,29 @@ a.rrow:hover { text-decoration: none; border-color: var(--accent); }
 .ropt.flagged { border-color: var(--new); }
 .pill.mono { font-family: var(--mono); }
 
+/* ---- work tracker (bible/work.js): one card per item, stuck ones first with a red edge ---- */
+.wlist { display: grid; gap: 10px; }
+.witem { background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); padding: 12px 14px; min-width: 0; }
+.witem.stale { border-color: var(--no); box-shadow: inset 4px 0 0 var(--no); }
+.whead { display: flex; justify-content: space-between; align-items: baseline; gap: 6px 14px; flex-wrap: wrap; }
+.wtitle { font-size: 15.5px; font-weight: 600; min-width: 0; overflow-wrap: anywhere; }
+a.wtitle { color: var(--ink); } a.wtitle:hover { color: var(--accent); }
+.wmeta { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
+.wmeta .pill { font-size: 12px; padding: 0 8px; line-height: 18px; }
+.wnext { margin: 6px 0 2px; font-size: 14px; max-width: 80ch; }
+.wrefs { margin: 4px 0 0; overflow-wrap: anywhere; }
+.page.work .ok { margin: 8px 0 0; }
+.wstale { color: var(--no); }
+.wclosed { margin-top: 22px; }
+.st.stale { background: var(--no); color: var(--panel); white-space: normal; }
+.st.running { background: var(--accent-soft); color: var(--accent); }
+.st.blocked { background: var(--no-bg); color: var(--no); }
+.st.waiting-jorgen { background: var(--accent); color: var(--panel); }
+.st.todo, .st.parked { background: var(--draft-bg); color: var(--draft); }
+.st.done { background: var(--ok-bg); color: var(--ok); }
+.st.dropped { background: var(--legacy-bg); color: var(--legacy); }
+.nav small.badge.stuck { background: var(--no); }
+
 /* Stories (docs/game/stories/) and places from docs/game/places.md */
 .stories { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr)); gap: 14px; margin: 18px 0 8px; }
 .story-card { background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); padding: 14px 16px 12px; display: flex; flex-direction: column; gap: 6px; min-width: 0; }

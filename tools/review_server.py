@@ -6,7 +6,11 @@
 POST /api/review/<id> with a JSON body saves Jørgen's feedback for one review item to reviews/<id>/feedback.json
 (<id> must be a folder in reviews/ holding a review.json). POST /api/showcase/<id> does the same for a Showcase
 entry: showcase/<id>/feedback.json, next to its entry.json (format: showcase/README.md). Each save keeps the earlier
-sends in `history`, so nothing he wrote is lost.
+sends in `history`, so nothing he wrote is lost. When the review is decided and has a follow-up issue, the issue gets
+a comment (and is reopened if closed) in the background, through tools/work.py.
+
+GET /api/work answers the work tracker's GitHub issues and the stale list (tools/work.py, 60 s cache) for the
+bible's Work section.
 
 POST /api/feedback saves feedback sent from the game's feedback window (game3d/js/feedback.js): a new folder
 notes/feedback-game/<time>/ with text.md, shot.png (git-ignored) and context.json, plus an entry in the day's
@@ -26,6 +30,17 @@ import threading
 import time
 from functools import partial
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import work  # noqa: E402  tools/work.py, the work tracker (GitHub issues)
+
+
+def review_changed(rid):
+    """New feedback on a decided review with an issue: tell the issue. Runs in a thread; a failure only logs."""
+    try:
+        work.review_feedback(rid)
+    except BaseException as e:  # work.guard exits with SystemExit on refused text
+        print(f'work: could not update the issue for review {rid}: {e}', file=sys.stderr, flush=True)
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 REVIEWS = os.path.join(ROOT, 'reviews')
@@ -139,6 +154,12 @@ class Handler(SimpleHTTPRequestHandler):
         if self.path.split('?')[0] == '/api/feedback':
             return self._json(200 if self._local() else 403, {'ok': self._local()})
         path = self.path.split('?')[0]
+        if path == '/api/work':
+            try:
+                all_items = work.items()
+                return self._json(200, {'items': all_items, 'stale': work.stale(all_items=all_items), 'repo': work.REPO_URL})
+            except Exception as e:
+                return self._json(200, {'items': None, 'stale': [], 'repo': work.REPO_URL, 'error': str(e)[:300]})
         if path == '/game3d/build.json' or path.endswith('/game3d/build.json'):
             stamp_build(path)
         return super().do_GET()
@@ -205,6 +226,8 @@ class Handler(SimpleHTTPRequestHandler):
         with open(tmp, 'w', encoding='utf-8') as f:
             json.dump(out, f, ensure_ascii=False, indent=1)
         os.replace(tmp, path)
+        if kind == 'review':
+            threading.Thread(target=review_changed, args=(rid,), daemon=True).start()
         return self._json(200, {'ok': True, 'sent': entry['sent']})
 
     def end_headers(self):

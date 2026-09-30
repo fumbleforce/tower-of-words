@@ -1,10 +1,12 @@
 #!/usr/bin/env python3
 """Read Jørgen's Review and Showcase feedback from the terminal.
 
-    python3 tools/review.py list              every item and showcase entry: status, new feedback, title
+    python3 tools/review.py list              every item and showcase entry: status, new feedback, title; then the
+                                              stuck work from tools/work.py stale
     python3 tools/review.py show <id>         the item or entry and all his feedback
     python3 tools/review.py mark-read <id>    mark the latest feedback as read (it stops showing as "new")
-    python3 tools/review.py set-status <id> open|decided|superseded [--decision "text"]   (Review items only)
+    python3 tools/review.py set-status <id> open|decided|superseded [--decision "text"]   (Review items only;
+                                              decided opens the follow-up GitHub issue, or comments on the one it has)
 
 <id> is looked up in reviews/, then showcase/; `showcase/<id>` picks the showcase entry. Review items live in
 reviews/<id>/review.json (how to add one: reviews/README.md); showcase entries in showcase/<id>/entry.json
@@ -18,6 +20,8 @@ import sys
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 REVIEWS = os.path.join(ROOT, 'reviews')
 SHOWCASE = os.path.join(ROOT, 'showcase')
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import work  # noqa: E402  tools/work.py: the work tracker (GitHub issues)
 
 
 def load(rid, name, base=REVIEWS):
@@ -100,6 +104,12 @@ def cmd_list():
     for rid, e, fb in sorted(showcase_items(), key=lambda x: x[1].get('date', ''), reverse=True):
         new = 'NEW ' if fb and not fb.get('read') else '    '
         print(f"{'showcase':10} {new}{rid:28} {e.get('title', '')}" + (f"  [{showcase_counts(fb)}]" if fb else ''))
+    try:
+        stuck = work.stale_lines()
+    except Exception as e:  # offline or gh not logged in: say so, never fail the list
+        stuck = [f'(work tracker not checked: {e})']
+    if stuck:
+        print('\n' + '\n'.join(stuck))
 
 
 def show_fb(r, fb, indent=''):
@@ -165,6 +175,8 @@ def cmd_show(rid):
     print(r.get('question', ''))
     if r.get('decision'):
         print(f"decision: {r['decision']}")
+    if r.get('issue'):
+        print(f"follow-up: {work.REPO_URL}/issues/{r['issue']}")
     for o in r.get('options', []):
         print(f"  {o.get('id')}: {o.get('label', '')}  {o.get('image') or o.get('audio') or ''}")
     print(f"page: http://127.0.0.1:8771/bible/#review/{rid}")
@@ -200,8 +212,16 @@ def cmd_set_status(rid, status, decision=None):
         r['decided'] = fb['picked']  # his latest picks become the decision
     if decision:
         r['decision'] = decision
+    if status == 'decided':
+        r['decided_at'] = work.stamp()
     save(rid, 'review.json', r)
     print(f'{rid}: {status}')
+    if status == 'decided':
+        issue, new = work.followup_for(rid, r)
+        r['issue'] = int(issue['id'])
+        save(rid, 'review.json', r)
+        print(f"{'opened' if new else 'updated'} issue #{issue['id']} {issue['url']}. Whoever acts on it: "
+              f"python3 tools/work.py set {issue['id']} --state running --owner <you>")
 
 
 def main(a):

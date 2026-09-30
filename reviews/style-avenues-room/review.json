@@ -99,5 +99,6 @@
   "4",
   "8"
  ],
- "decision": "2 as a toggle (Settings > Graphics > Surface detail) on all models, props included; 4 in a softer version; 8 as in the showcase. In the game: review style-in-game."
+ "decision": "2 as a toggle (Settings > Graphics > Surface detail) on all models, props included; 4 in a softer version; 8 as in the showcase. In the game: review style-in-game.",
+ "issue": 45
 }

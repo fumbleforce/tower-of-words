@@ -30,5 +30,6 @@
  "decided": [
   "station"
  ],
- "decision": "Gate at the station: the current gate room already reads as the station's security room; keep it as-is, but from there you go outside and walk to head office."
+ "decision": "Gate at the station: the current gate room already reads as the station's security room; keep it as-is, but from there you go outside and walk to head office.",
+ "issue": 31
 }

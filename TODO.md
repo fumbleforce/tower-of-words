@@ -1,35 +1,11 @@
-# Outstanding work (as of 2026-09-29)
+# Outstanding work
 
 Read GUIDE.md first, then notes/PRODUCTION.md. The game is game3d/ (day 1: train, gate, B2 office). Decisions for Jørgen go to the bible's Review section (reviews/), not chat.
 
-## Pick up here
-Read [creator-next](notes/creator-next.md) for Codex’s current creator work and `python3 tools/review.py list` for current decisions. [HANDOFF](notes/HANDOFF.md) records the morning state; its pending reviews and tooling status predate the work listed below. New assignments and ownership are in collab/PROTOCOL.md and the team inboxes.
-
-## Bugs
-- Creator idle: the reported leftward twist has candidate fixes; the latest relaxed-arm/breathing comparison is [creator-idle-neutral-3](reviews/creator-idle-neutral-3/review.json). Jørgen picked relaxed-3 ("looks good"); integration is next. Current state and remaining acceptance work: [creator-next](notes/creator-next.md).
-
-## Open (2026-09-29, evening)
-- Eric portrait framing: at 2560x1440 the straight cut on his right shoulder shows at the image edge, and on phone his image runs past the right screen edge. Re-cut on a wider canvas (art round).
-- Waiting on Jørgen in Review: creator-base-4 and day1-frames. Decided since: creator-idle-neutral-3 (relaxed-3), day1-simplify (train edits applied in d64b4b4, the rest moved to day1-frames), island-places, office-perf, and island-map-4 over island-map-2 (map upgrade, notes/map-upgrade-plan.md). Use `python3 tools/review.py show <id>` for current answers.
-- After the layout pick: apartment-building interior candidates for Eric’s dorm (C-0091). After the day1-frames picks: apply selected story edits, then hand changed voice lines to Claude’s voice pipeline.
-- Rejected: nightly QA, stuck-point telemetry.
-
-Done today, for the record (git log has details): interaction pins back, outline skips shadows, selection ring removed, pins tappable, full-height train doors, two-step lunchbox scene, clicks blocked during Eric's word, Eric's face box, voice pipeline in tools/voice + gaijin clip, GPU slots for tests, refactor stages 0-5, Continue fix, facts docs, GUIDE diet, agent types and skills, feedback log hooks, worktrees/land, performance overlay (`52144e9`), local in-game feedback (`4c87ff9`), portrait image QA (`5143d35`), day-1 simplification proposal with cold-reader corrections (`519c4c9`), and island-map-2 candidates (`e93d901`).
+Everything being worked on, waiting or stuck (tasks, requests, decision follow-ups, checks for Jørgen, parked work) is a GitHub issue labelled work (https://github.com/fumbleforce/tower-of-words/issues?q=label%3Awork): `python3 tools/work.py list`, `python3 tools/work.py stale`, and the bible's Work section. This file only keeps Jørgen's parked ideas and the legacy record. The lists that used to be here are in git at 9391af4.
 
 ## Parked ideas
 - Procedural content (Jørgen, 2026-09-28: "keep it idea for now"): fixed cast, main arc and location cards stay authored; an LLM director writes daily storylets in the game3d/story format that the engine validates, with per-character memory, generated gossip, notes and emails, pre-rendered picture pools and a room generator for repeated office floors. Run it first as an overnight writers' room with critic filtering and his stars, live later. Blocked until ONE stable, full, fun day exists, so we know which elements to build on. First test when unblocked: a fully generated day 2 using the same places.
-
-## Deferred checks for Jørgen (he can't listen on his current computer, 2026-09-28)
-- Eric's voice: decided (eric-2, English, no accent).
-- Overheard audio: known words clear, the rest heavily muffled; never checked by ear.
-- New sounds from the feel agent (game3d/audio/sfx, audio/amb; picks in tools/feel/picks.json): ambience beds per place, UI and learned-word chimes, the kotodama sound. The lobby bed may have footstep-like noise. Listen when possible.
-- Portraits in use provisionally: Mori 713, Kenji 711, Hamada 721, guard = Ishibashi with new expressions (sheets in art/candidates/portraits/). Confirm or pick others.
-
-## Asset storage and publishing
-- R2 stage 2 and the binary removal are complete locally. Current evidence, fresh-clone checks and remaining Pages work: [asset-storage-proposal](notes/asset-storage-proposal.md). The bucket/token setup is complete; do not request it again.
-- Pages deployment and source switching remain with the publishing owner. Do not push main before that handoff is complete.
-- Further source slimming (shared meshes and animation-only clips) remains a separate task; moving assets to R2 does not complete it.
-- Bible source is tracked. Some local Review decisions remain uncommitted; see the storage proposal’s section 10 before reconciling them. Do not stage another agent’s decisions or feedback.
 
 ## Legacy (VN, Godot, low-poly and island-slice era; kept for reference, not current)
 ### Later (parked by Jørgen, 2026-09-27: "nitpick, a todo for later")

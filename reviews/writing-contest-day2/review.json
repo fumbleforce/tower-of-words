@@ -30,5 +30,6 @@
  "decided": [
   "B"
  ],
- "decision": "B (Codex) leads creative writing. B: clearer scenes, but too verbose, too many steps and detours. A (Claude): tries too hard to be funny, unclear situation. A welcome party at the end of the day is a good idea."
+ "decision": "B (Codex) leads creative writing. B: clearer scenes, but too verbose, too many steps and detours. A (Claude): tries too hard to be funny, unclear situation. A welcome party at the end of the day is a good idea.",
+ "issue": 14
 }

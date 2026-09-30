@@ -35,5 +35,6 @@
  "decided": [
   "first-stages"
  ],
- "decision": "stages 0 to 2c; the refactor runs alone, nobody else edits the code meanwhile"
+ "decision": "stages 0 to 2c; the refactor runs alone, nobody else edits the code meanwhile",
+ "issue": 19
 }

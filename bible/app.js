@@ -4,12 +4,13 @@
 //  - Static (bible/data.json, from tools/bible/build.py): the hand-kept facts in bible/facts.yaml, review pages
 //    (needs git), prompts, and island/private/bible/private.json on the private page.
 // Review (reviews/) and Showcase (showcase/) are read live too, and Jørgen's answers are saved through tools/review_server.py.
+// Work (bible/work.js) lists the work tracker's GitHub issues, read through the server's /api/work.
 // Paths in the data are relative to the repo root. Plain JS, no build step; ./start serves the repo.
 const ROOT = window.BIBLE_ROOT || '../';
 const PRIVATE_URL = window.BIBLE_PRIVATE || null;
 const DATA_URL = window.BIBLE_DATA || 'data.json';
 const HERE = document.currentScript ? document.currentScript.src : location.href;
-let D = null, P = null, L = null, LIVE = null, INDEX = null;
+let D = null, P = null, L = null, LIVE = null, INDEX = null, WORK = null;
 
 const $ = (s, el = document) => el.querySelector(s);
 const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
@@ -201,7 +202,7 @@ function wordLabel(id) {
 
 // ------------------------------------------------------------------ pages
 const NAV = [
-  ['review', 'Review'], ['showcase', 'Showcase'], ['home', 'Home'], ['characters', 'Characters'], ['places', 'Places'], ['place-map', 'Places diagram'], ['story', 'Stories'], ['story-map', 'Story map'],
+  ['review', 'Review'], ['showcase', 'Showcase'], ['work', 'Work'], ['home', 'Home'], ['characters', 'Characters'], ['places', 'Places'], ['place-map', 'Places diagram'], ['story', 'Stories'], ['story-map', 'Story map'],
   ['words', 'Words and commands'], ['rules', 'Rules and decisions'], ['art', 'Art and style'], ['audio', 'Audio'],
   ['reviews', 'Review pages'], ['questions', 'Open questions'], ['sources', 'Sources'],
 ];
@@ -222,6 +223,7 @@ function pageHome() {
   const tiles = [
     ['review', 'Review', `${openReviews().length} waiting for your pick${(L.reviews || []).filter(unread).length ? `, ${(L.reviews || []).filter(unread).length} answered` : ''}`, openReviews().length],
     ['showcase', 'Showcase', 'Finished work to look at; flag or comment on anything', (L.showcase || []).length],
+    ['work', 'Work', `What is being worked on, waiting or stuck (GitHub issues)${(L.workStale || []).length ? `; ${L.workStale.length} stuck` : ''}`, (L.work || []).filter((i) => i.open).length],
     ['characters', 'Characters', `${cast.length} in the game today, ${D.characters.length - cast.length} designed for later`, D.characters.length],
     ['places', 'Places', 'Every place in the game, live from docs/game/places.md', L.places.length],
     ['story', 'Stories', `The storylines in docs/game/stories/, ${L.stories.filter((st) => /^built/.test(st.status)).length} built; design docs marked as not approved`, L.stories.length],
@@ -739,7 +741,7 @@ function pageReviewItem(id) {
   return `<div class="page review" data-review="${esc(r.id)}"><div class="crumbs"><a href="#review">Review</a> /</div>
     <h1>${esc(r.title)}</h1>
     <div class="pill-row">${chip(st === 'superseded' ? 'legacy' : st)}<span class="pill">${esc(r.date || '')}</span><span class="pill">by ${esc(r.by || '')}</span><span class="pill">${multi ? 'pick one or more' : 'pick one'}</span></div>
-    ${st === 'decided' ? `<div class="rdecision"><b>Decided: ${esc(pickedText(r))}</b>${r.decision ? `<div>${inline(r.decision)}</div>` : ''}</div>` : ''}
+    ${st === 'decided' ? `<div class="rdecision"><b>Decided: ${esc(pickedText(r))}</b>${r.decision ? `<div>${inline(r.decision)}</div>` : ''}${r.issue ? `<div class="small">The work on it: <a href="${esc(WORK.issueUrl(r.issue))}">issue #${esc(r.issue)}</a></div>` : ''}</div>` : ''}
     <p class="rq">${inline(r.question || '')}</p>
     ${(r.media || []).length ? `<div class="rmedia" data-lbg>${r.media.map((m) => media(m)).join('')}</div>` : ''}
     ${(r.links || []).length ? `<p class="small">${r.links.map((l) => `<a href="${esc(/^https?:|^#/.test(l.href) ? l.href : ROOT + l.href)}">${esc(l.label)}</a>`).join(' · ')}</p>` : ''}
@@ -915,11 +917,13 @@ async function route() {
   const arg = rest.join('/');
   if (head === 'review' && L.reloadReviews) await L.reloadReviews();
   if (head === 'showcase' && L.reloadShowcase) await L.reloadShowcase();
+  if (head === 'work' && L.reloadWork) await L.reloadWork();
   let html, after = null;
   switch (head) {
     case 'home': html = pageHome(); break;
     case 'review': html = arg ? pageReviewItem(arg) : pageReviewQueue(); break;
     case 'showcase': html = pageShowcase(arg); break;
+    case 'work': html = WORK.pageWork(L, { esc, inline }); break;
     case 'characters': html = pageCharacters(); break;
     case 'character': html = pageCharacter(arg); break;
     case 'places': html = pagePlaces(); break;
@@ -949,7 +953,7 @@ async function route() {
   $('#main').innerHTML = html;
   if (after) await after();
   const navKey = { character: 'characters', doc: 'story', src: '' }[head] ?? head;
-  if (head === 'review' || head === 'showcase') renderNav();
+  if (head === 'review' || head === 'showcase' || head === 'work') renderNav();
   document.querySelectorAll('.nav li a').forEach((a) => a.classList.toggle('on', a.dataset.r === navKey || a.dataset.r === h));
   $('.nav').classList.remove('open');
   if (head !== 'search') { const s = $('#q'); if (document.activeElement !== s) s.value = ''; }
@@ -959,10 +963,11 @@ async function route() {
 }
 
 function renderNav() {
+  const stuck = (L.workStale || []).length;
   const n = { review: openReviews().length, showcase: (L.showcase || []).length, characters: D.characters.length, reviews: D.reviews.filter((r) => r.group === 'current').length, questions: openQuestions().length, words: Object.keys(L.words).length };
   const items = NAV.concat(P ? [['rewards', 'Reward pictures']] : []);
   const newFb = (L.reviews || []).filter(unread).length;
-  $('#navlist').innerHTML = items.map(([r, t]) => `<li${r === 'review' ? ' class="navreview"' : ''}><a href="#${r}" data-r="${r}">${esc(t)}${r === 'review' ? `<small class="${n.review ? 'badge' : ''}" title="${n.review} open${newFb ? `, ${newFb} answered but not read yet` : ''}">${n.review}</small>` : n[r] ? `<small>${n[r]}</small>` : ''}</a></li>`).join('');
+  $('#navlist').innerHTML = items.map(([r, t]) => `<li${r === 'review' ? ' class="navreview"' : ''}><a href="#${r}" data-r="${r}">${esc(t)}${r === 'review' ? `<small class="${n.review ? 'badge' : ''}" title="${n.review} open${newFb ? `, ${newFb} answered but not read yet` : ''}">${n.review}</small>` : r === 'work' ? (stuck ? `<small class="badge stuck" title="${stuck} stuck">${stuck}</small>` : '') : n[r] ? `<small>${n[r]}</small>` : ''}</a></li>`).join('');
   const now = D.characters.filter(inGame), later = D.characters.filter((c) => !inGame(c));
   const li = (c) => `<li class="sub"><a href="#character/${c.id}" data-r="character/${c.id}">${esc(c.name.replace(' (idea)', ''))}</a></li>`;
   $('#cast').innerHTML = `<li class="navhead">In the game</li>${now.map(li).join('')}<li class="navhead">Later</li>${later.map(li).join('')}`;
@@ -974,7 +979,7 @@ async function init() {
     PRIVATE_URL ? fetch(PRIVATE_URL, { cache: 'no-cache' }).then((r) => r.ok ? r.json() : null).catch(() => null) : null,
   ]);
   D = d; P = p;
-  LIVE = await import(new URL('live.js', HERE).href);
+  [LIVE, WORK] = await Promise.all([import(new URL('live.js', HERE).href), import(new URL('work.js', HERE).href)]);
   // every file a quote points at, so quotes can be read synchronously while rendering
   const quoted = new Set();
   JSON.stringify(D).replace(/"q":true,"s":"[a-z]+","src":\{"path":"([^"]+)"/g, (m, path) => quoted.add(path));
@@ -983,6 +988,7 @@ async function init() {
   L = await LIVE.loadLive(ROOT, D.snapshot, [...quoted].filter((x) => !/^https?:/.test(x)));
   if (P) document.querySelector('.brand span').innerHTML = '<span class="priv">private</span>';
   renderNav();
+  L.reloadWork().then(renderNav);  // GitHub issues can take a second; the nav's stuck count follows when they arrive
   let timer;
   $('#q').addEventListener('input', (e) => {
     clearTimeout(timer);

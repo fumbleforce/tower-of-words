@@ -43,6 +43,7 @@ To post a review item, write `reviews/<id>/review.json` as in Adding an item bel
 | `links` | no | Pages to open (a game URL with flags, a review page). |
 | `decided` | when decided | The option ids that won. |
 | `decision` | when decided | One line: what was decided, in his words where possible. |
+| `decided_at`, `issue` | set by review.py | When it was decided, and the GitHub issue that holds the work on it (tools/work.py). |
 
 4. Check it shows: open http://127.0.0.1:8771/bible/#review/<id>. Every image and audio path must resolve (`node tools/bible/check.mjs` checks them).
 5. Tell the main agent the id. Don't paste the candidates into chat.
@@ -63,4 +64,4 @@ python3 tools/review.py set-status <id> decided --decision "b, with the city-pop
  "comment": "overall comment", "read": false, "history": [ earlier sends ]}
 ```
 
-When he has decided, set the item's `status` to `decided` with `decided` and `decision`, move the approved files where they belong (art/approved/, the game), and update GUIDE.md and bible/facts.yaml as usual.
+When he has decided, set the item's `status` to `decided` with `decided` and `decision` through `review.py set-status` (it opens the follow-up GitHub issue and stores its number), move the approved files where they belong (art/approved/, the game), and update GUIDE.md and bible/facts.yaml as usual.

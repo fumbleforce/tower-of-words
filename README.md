@@ -1,6 +1,6 @@
 # Amakawa
 
-A 3D RPG about a Western IT engineer at a giant Japanese company, where Japanese words become commands that work on the world. Read GUIDE.md before working here; TODO.md has what's outstanding.
+A 3D RPG about a Western IT engineer at a giant Japanese company, where Japanese words become commands that work on the world. Read GUIDE.md before working here; the work tracker (GitHub issues labelled work, `python3 tools/work.py`) has what's outstanding.
 
 ## Active
 
@@ -10,7 +10,7 @@ A 3D RPG about a Western IT engineer at a giant Japanese company, where Japanese
 - `art/`: prompt guides (`PROMPTS.md`, `STYLE.md`), Jørgen's reference images (`art/refs/`) and work in progress.
 - `tools/`: image, voice and build tools. `tools/imagegen/run.sh` starts the image gen dashboard, `tools/island_audio/` is the voice pipeline, `tools/voice-refs/` has the voice clone clips.
 - `notes/`: design docs (story, maps, research).
-- `GUIDE.md`, `TODO.md`.
+- `GUIDE.md`, `TODO.md` (parked ideas), `tools/work.py` (the work tracker, GitHub issues).
 
 ## Legacy
 

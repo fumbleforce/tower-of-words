@@ -4,7 +4,7 @@ Jørgen asked to take the day-1 build in game3d/ from "student project" to produ
 
 ## Who owns what
 
-Only edit files you own. If you need a change in someone else's files, write it in `notes/production-requests.md` (one line: date, from, to, what, why) and message the main agent.
+Only edit files you own. If you need a change in someone else's files, open a request issue (`python3 tools/work.py add ... --kind request`) and message the main agent.
 
 | Agent | Owns | Must not touch |
 |---|---|---|

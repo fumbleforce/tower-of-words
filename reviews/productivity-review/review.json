@@ -85,5 +85,6 @@
   "telemetry",
   "image-qa"
  ],
- "decision": "yes: worktrees, commit-gate, feedback-log, agent-defs, project-skills, gpu-slots, codex-wake, guide-diet, image-qa; telemetry replaced by performance metrics + an in-game feedback window (text + automatic screenshot); nightly-qa rejected; story-props needs explaining"
+ "decision": "yes: worktrees, commit-gate, feedback-log, agent-defs, project-skills, gpu-slots, codex-wake, guide-diet, image-qa; telemetry replaced by performance metrics + an in-game feedback window (text + automatic screenshot); nightly-qa rejected; story-props needs explaining",
+ "issue": 17
 }

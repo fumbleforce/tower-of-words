@@ -25,5 +25,6 @@
  "decided": [
   "push-now"
  ],
- "decision": "Push now, and push regularly from now on."
+ "decision": "Push now, and push regularly from now on.",
+ "issue": 41
 }

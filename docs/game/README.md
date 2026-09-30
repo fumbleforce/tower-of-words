@@ -36,7 +36,8 @@ The inboxes (collab/to-codex.md, collab/to-claude.md) and dated notes record mes
 | The visual critic's scoring bar | [notes/VISUAL_QA.md](../../notes/VISUAL_QA.md) |
 | Jørgen's own words, every message, verbatim | [notes/feedback-log/](../../notes/feedback-log/) |
 | Where work stands today: what's done, what's broken, what waits on Jørgen | [notes/HANDOFF.md](../../notes/HANDOFF.md) |
-| Queued work, bugs, what waits for the end of the code freeze, parked ideas | [TODO.md](../../TODO.md) |
+| What is being worked on, waiting or stuck: tasks, requests, decision follow-ups, bugs | [GitHub issues labelled work](https://github.com/fumbleforce/tower-of-words/issues?q=label%3Awork) (`python3 tools/work.py`, the bible's Work section) |
+| Parked ideas | [TODO.md](../../TODO.md) |
 
 ### Decisions and approvals
 
