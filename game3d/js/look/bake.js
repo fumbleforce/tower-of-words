@@ -14,6 +14,7 @@
 // Runtime cost: one multiply per pixel in the same materials (patchMaterial(m, { bake: true })); the work is at load.
 // The result is a per-vertex attribute, aBake (1 minus the colour); the caller patches the meshes' materials.
 import * as THREE from 'three';
+import { drain } from '../perf/slice.js';
 
 export const HARD = { ao: 1, aoMax: 0.6, feet: 0.3, warm: 0.9, tint: 1, step: 0.12 };
 export const SOFT = { ao: 0.5, aoMax: 0.25, feet: 0.12, warm: 0.4, tint: 0.7, step: 0.3 };
@@ -55,7 +56,9 @@ function subdivide(mesh, step, floor) {
 //   warmAt    a point (a window) whose facing faces get warmer; or warmDir, a direction toward the light (the sun)
 //   floorGrad { z0, z1 }: the floor shades from z0 (lit) to z1 (showcase room)
 //   owner(m)  the object a mesh belongs to (its own parts occlude it less), and repeat(ob) true for repeated props
-export function bakeLight(meshes, o = {}) {
+export const bakeLight = (meshes, o = {}) => drain(bakeLightSteps(meshes, o));
+// the same as a generator that yields between steps (look/index.js runs it in slices, js/perf/slice.js)
+export function* bakeLightSteps(meshes, o = {}) {
   const S = { ...SOFT, ...(o.strength || {}) };
   const isFloor = o.isFloor || (() => false),
     isShell = o.isShell || (() => false);
@@ -68,7 +71,11 @@ export function bakeLight(meshes, o = {}) {
     if (seen.has(m.geometry)) m.geometry = m.geometry.clone();
     seen.add(m.geometry);
   }
-  for (const m of meshes) if (isFloor(m) || isShell(m)) subdivide(m, S.step, isFloor(m));
+  for (const m of meshes)
+    if (isFloor(m) || isShell(m)) {
+      subdivide(m, S.step, isFloor(m));
+      yield;
+    }
   for (const m of meshes) m.updateMatrixWorld();
 
   // occluders in a grid of cells on x/z; floors don't occlude (they're handled as the ground below). Past REACH an
@@ -80,6 +87,7 @@ export function bakeLight(meshes, o = {}) {
   const key = (i, k) => (i + 4096) * 8192 + (k + 4096);
   for (const m of meshes) {
     if (isFloor(m)) continue;
+    yield;
     if (!m.geometry.boundingBox) m.geometry.computeBoundingBox();
     const b = m.geometry.boundingBox.clone().applyMatrix4(m.matrixWorld);
     const s = new THREE.Vector3();
@@ -138,7 +146,6 @@ export function bakeLight(meshes, o = {}) {
     cool = new THREE.Color(0.93, 0.96, 1.04);
   const P = new THREE.Vector3(),
     Nn = new THREE.Vector3(),
-    Q = new THREE.Vector3(),
     D = new THREE.Vector3(),
     nm = new THREE.Matrix3();
   const warmDir = o.warmDir ? o.warmDir.clone().normalize() : null;
@@ -178,7 +185,9 @@ export function bakeLight(meshes, o = {}) {
       }
     }
     memo.clear();
+    yield;
     for (let i = 0; i < n; i++) {
+      if ((i & 2047) === 2047) yield;
       P.fromBufferAttribute(pos, i).applyMatrix4(m.matrixWorld);
       Nn.fromBufferAttribute(nor, i).applyMatrix3(nm).normalize();
       // vertices bunch up at rounded corners: one answer per 4 cm and normal direction, per mesh

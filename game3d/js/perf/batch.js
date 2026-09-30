@@ -23,6 +23,7 @@
 // colours (exactly the same shading: the shader multiplies the same numbers). Everything else is grouped by
 // identical material settings.
 import * as THREE from 'three';
+import { drain } from './slice.js';
 
 const OBR = THREE.Object3D.prototype.onBeforeRender,
   OAR = THREE.Object3D.prototype.onAfterRender;
@@ -437,6 +438,7 @@ export function optimizePlace(place, opt = {}) {
   // would z-fight, so both stay on their own.
   let coplanar = new Set();
   function findCoplanar() {
+    const t0 = performance.now();
     const EPS = 2e-4,
       boxes = [],
       flats = [];
@@ -451,26 +453,40 @@ export function optimizePlace(place, opt = {}) {
           break;
         }
     });
+    // boxes by the height of their top face on each axis, in cells of EPS: a candidate's top is within 2 EPS of the
+    // plane (a flat one's bottom within EPS, so its top within 2 EPS), so the five cells around the plane hold them all
+    const cells = [new Map(), new Map(), new Map()];
+    if (flats.length)
+      for (const e of boxes)
+        for (let a = 0; a < 3; a++) {
+          const k = Math.floor(e[1].max.getComponent(a) / EPS);
+          let c = cells[a].get(k);
+          if (!c) cells[a].set(k, (c = []));
+          c.push(e);
+        }
     const out = new Set();
     for (const [f, fb, a] of flats) {
       const pl = fb.min.getComponent(a),
         u = (a + 1) % 3,
-        v = (a + 2) % 3;
-      for (const [g, gb] of boxes) {
-        if (g === f) continue;
-        // g's top face is in the plane (f lies on it), or g is flat in the same plane too; things merely standing on
-        // a flat floor (their bottom in the plane, facing down) don't count
-        const gFlat = gb.max.getComponent(a) - gb.min.getComponent(a) < EPS;
-        if (Math.abs(gb.max.getComponent(a) - pl) > EPS && !(gFlat && Math.abs(gb.min.getComponent(a) - pl) <= EPS))
-          continue;
-        if (gb.max.getComponent(u) < fb.min.getComponent(u) || gb.min.getComponent(u) > fb.max.getComponent(u))
-          continue;
-        if (gb.max.getComponent(v) < fb.min.getComponent(v) || gb.min.getComponent(v) > fb.max.getComponent(v))
-          continue;
-        out.add(f);
-        out.add(g);
-      }
+        v = (a + 2) % 3,
+        k0 = Math.floor(pl / EPS);
+      for (let k = k0 - 2; k <= k0 + 2; k++)
+        for (const [g, gb] of cells[a].get(k) || []) {
+          if (g === f) continue;
+          // g's top face is in the plane (f lies on it), or g is flat in the same plane too; things merely standing on
+          // a flat floor (their bottom in the plane, facing down) don't count
+          const gFlat = gb.max.getComponent(a) - gb.min.getComponent(a) < EPS;
+          if (Math.abs(gb.max.getComponent(a) - pl) > EPS && !(gFlat && Math.abs(gb.min.getComponent(a) - pl) <= EPS))
+            continue;
+          if (gb.max.getComponent(u) < fb.min.getComponent(u) || gb.min.getComponent(u) > fb.max.getComponent(u))
+            continue;
+          if (gb.max.getComponent(v) < fb.min.getComponent(v) || gb.min.getComponent(v) > fb.max.getComponent(v))
+            continue;
+          out.add(f);
+          out.add(g);
+        }
     }
+    stats.coplanarMs = performance.now() - t0;
     coplanar = out;
   }
 
@@ -479,9 +495,13 @@ export function optimizePlace(place, opt = {}) {
     _inv = new THREE.Matrix4(),
     _v = new THREE.Vector3(),
     _s = new THREE.Sphere();
+  // scan() runs it at once; the first scan of a place runs as scanSteps, a job that yields every few dozen meshes
   function scan(now = performance.now(), all = false) {
+    drain(scanSteps(now, all));
+  }
+  function* scanSteps(now, all) {
     stats.scans++;
-    const t0 = performance.now();
+    let t0 = performance.now();
     scene.updateMatrixWorld();
     findShadowFrustums();
     const ex = excluded();
@@ -506,7 +526,13 @@ export function optimizePlace(place, opt = {}) {
     }
     const stack = [scene],
       seen = new Set();
+    let n = 0;
     while (stack.length) {
+      if ((++n & 63) === 0) {
+        stats.scanMs = (stats.scanMs || 0) + performance.now() - t0;
+        yield;
+        t0 = performance.now();
+      }
       const o = stack.pop();
       if (ex.has(o) || o.isBone || o.userData.perfBatch || o.userData.noBatch || coplanar.has(o)) continue;
       if (!o.visible) continue; // hidden subtrees wait until they show
@@ -699,15 +725,20 @@ export function optimizePlace(place, opt = {}) {
   const jobs = [];
   const BUDGET = +(Q.get('pbudget') || opt.budget || 6);
   let pumping = false;
+  // a job is a function, or a function returning a generator (a long job: it stays first in the queue and runs a step
+  // at a time until it's done)
   function pump() {
     if (dead) return;
     const t0 = performance.now();
     while (jobs.length && performance.now() - t0 < BUDGET) {
-      const j = jobs.shift(),
+      const j = jobs[0],
         tj = performance.now();
       try {
-        j();
+        const r = typeof j === 'function' ? j() : j.next();
+        if (r && typeof r.next === 'function') jobs[0] = r;
+        else if (typeof j === 'function' || r.done) jobs.splice(jobs.indexOf(j), 1);
       } catch (e) {
+        jobs.splice(jobs.indexOf(j), 1);
         console.warn('perf batch job', e);
       }
       stats.maxJobMs = Math.max(stats.maxJobMs || 0, performance.now() - tj);
@@ -1127,7 +1158,7 @@ export function optimizePlace(place, opt = {}) {
   }
 
   // the first pass runs right after the place is built, off the critical path (it yields between slices)
-  jobs.push(() => scan(performance.now(), true));
+  jobs.push(() => scanSteps(performance.now(), true));
   kick();
   return perf;
 }

@@ -6,7 +6,8 @@ import { snapshotPeople, restorePeople, snapshotObject, restoreObject } from './
 // Place 2, the lobby and security gate, as the engine side: things, spots, zones, hooks, commuters and trips.
 // Every word said here comes from game3d/story/gate.js (placeholder: story/placeholder/gate.js).
 import * as THREE from 'three';
-import { buildLobby } from '../scenes/lobby.js';
+import { lobbySteps } from '../scenes/lobby.js';
+import { sliced } from '../perf/slice.js';
 import { K } from '../scenes/office.js';
 import { RoomCam } from '../cam.js';
 import { ui, sfx } from '../ui.js';
@@ -25,7 +26,7 @@ import { glide, walkRig, queueStep } from '../move.js';
 export { glide }; // smooth start, turn and stop; never touches the player's facing
 
 export async function lobbyPlace(game) {
-  const w = buildLobby();
+  const w = await sliced(lobbySteps()); // in slices between frames: it's built while the train is played
   const { BZ, X, Z } = w;
   const cam = new RoomCam({ elev: 46, fov: 24 });
   const floor = new THREE.Plane(new THREE.Vector3(0, 1, 0), 0);

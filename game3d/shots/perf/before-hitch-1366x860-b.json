@@ -1,0 +1,98 @@
+[
+  {
+    "size": "1366x860",
+    "trip": "gate->forecourt",
+    "prepMs": 54,
+    "longest": 51,
+    "longTasks": 1,
+    "worstFrame": 50,
+    "p99": 16.8,
+    "low1": 59.5,
+    "median": 16.7,
+    "frames": 150,
+    "look": {
+      "meshes": 226,
+      "materials": 62,
+      "patched": 62,
+      "bake": {
+        "meshes": 226,
+        "verts": 87882,
+        "occluders": 205
+      },
+      "ms": 18
+    },
+    "errors": []
+  },
+  {
+    "size": "1366x860",
+    "trip": "plaza->dorm_court",
+    "prepMs": 52,
+    "longest": 0,
+    "longTasks": 0,
+    "worstFrame": 50,
+    "p99": 16.8,
+    "low1": 59.5,
+    "median": 16.7,
+    "frames": 151,
+    "look": {
+      "meshes": 60,
+      "materials": 58,
+      "patched": 58,
+      "bake": {
+        "meshes": 60,
+        "verts": 50628,
+        "occluders": 45
+      },
+      "ms": 12
+    },
+    "errors": []
+  },
+  {
+    "size": "1366x860",
+    "trip": "dorm_court->dorms",
+    "prepMs": 25,
+    "longest": 0,
+    "longTasks": 0,
+    "worstFrame": 17,
+    "p99": 16.8,
+    "low1": 59.5,
+    "median": 16.7,
+    "frames": 150,
+    "look": {
+      "meshes": 95,
+      "materials": 37,
+      "patched": 37,
+      "bake": {
+        "meshes": 95,
+        "verts": 29001,
+        "occluders": 83
+      },
+      "ms": 14
+    },
+    "errors": []
+  },
+  {
+    "size": "1366x860",
+    "trip": "train->gate",
+    "prepMs": 96,
+    "longest": 96,
+    "longTasks": 1,
+    "worstFrame": 83,
+    "p99": 33.3,
+    "low1": 30,
+    "median": 16.7,
+    "frames": 150,
+    "look": {
+      "meshes": 504,
+      "materials": 71,
+      "patched": 71,
+      "bake": {
+        "meshes": 503,
+        "verts": 183182,
+        "occluders": 390
+      },
+      "ms": 37
+    },
+    "errors": []
+  }
+]

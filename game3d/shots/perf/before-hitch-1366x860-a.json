@@ -1,0 +1,50 @@
+[
+  {
+    "size": "1366x860",
+    "trip": "forecourt->office",
+    "prepMs": 491,
+    "longest": 487,
+    "longTasks": 2,
+    "worstFrame": 483,
+    "p99": 50.1,
+    "low1": 20,
+    "median": 16.7,
+    "frames": 149,
+    "look": {
+      "meshes": 2430,
+      "materials": 217,
+      "patched": 217,
+      "bake": {
+        "meshes": 2428,
+        "verts": 943822,
+        "occluders": 1925
+      },
+      "ms": 260
+    },
+    "errors": []
+  },
+  {
+    "size": "1366x860",
+    "trip": "forecourt->plaza",
+    "prepMs": 25,
+    "longest": 0,
+    "longTasks": 0,
+    "worstFrame": 17,
+    "p99": 16.8,
+    "low1": 59.5,
+    "median": 16.7,
+    "frames": 150,
+    "look": {
+      "meshes": 107,
+      "materials": 48,
+      "patched": 48,
+      "bake": {
+        "meshes": 107,
+        "verts": 41467,
+        "occluders": 91
+      },
+      "ms": 8
+    },
+    "errors": []
+  }
+]

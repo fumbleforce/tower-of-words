@@ -1,0 +1,82 @@
+[
+  {
+    "size": "390x844 cpu4x",
+    "trip": "forecourt->office",
+    "prepMs": 1831,
+    "longest": 1827,
+    "longTasks": 2,
+    "worstFrame": 1833,
+    "p99": 200,
+    "low1": 5,
+    "median": 16.7,
+    "frames": 138,
+    "slow": 3,
+    "slowAt": [
+      [
+        10,
+        1833
+      ],
+      [
+        1843,
+        200
+      ],
+      [
+        2060,
+        33
+      ]
+    ],
+    "prepEnd": 1831,
+    "look": {
+      "meshes": 2430,
+      "materials": 217,
+      "patched": 217,
+      "bake": {
+        "meshes": 2428,
+        "verts": 943822,
+        "occluders": 1925
+      },
+      "ms": 995
+    },
+    "errors": []
+  },
+  {
+    "size": "390x844 cpu4x",
+    "trip": "gate->forecourt",
+    "prepMs": 177,
+    "longest": 172,
+    "longTasks": 1,
+    "worstFrame": 183,
+    "p99": 33.4,
+    "low1": 29.9,
+    "median": 16.7,
+    "frames": 148,
+    "slow": 3,
+    "slowAt": [
+      [
+        7,
+        183
+      ],
+      [
+        307,
+        33
+      ],
+      [
+        357,
+        33
+      ]
+    ],
+    "prepEnd": 177,
+    "look": {
+      "meshes": 226,
+      "materials": 62,
+      "patched": 62,
+      "bake": {
+        "meshes": 226,
+        "verts": 87882,
+        "occluders": 205
+      },
+      "ms": 69
+    },
+    "errors": []
+  }
+]

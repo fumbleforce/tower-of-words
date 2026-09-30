@@ -1,0 +1,83 @@
+[
+  {
+    "size": "1366x860",
+    "trip": "forecourt->office",
+    "prepMs": 898,
+    "longest": 0,
+    "longTasks": 0,
+    "worstFrame": 17,
+    "p99": 16.8,
+    "low1": 59.5,
+    "median": 16.7,
+    "frames": 203,
+    "slow": 0,
+    "slowAt": [],
+    "prepEnd": 898,
+    "look": {
+      "meshes": 2430,
+      "materials": 217,
+      "patched": 217,
+      "bake": {
+        "meshes": 2428,
+        "verts": 943822,
+        "occluders": 1925
+      },
+      "ms": 265
+    },
+    "errors": []
+  },
+  {
+    "size": "1366x860",
+    "trip": "gate->forecourt",
+    "prepMs": 77,
+    "longest": 0,
+    "longTasks": 0,
+    "worstFrame": 17,
+    "p99": 16.8,
+    "low1": 59.5,
+    "median": 16.7,
+    "frames": 154,
+    "slow": 0,
+    "slowAt": [],
+    "prepEnd": 77,
+    "look": {
+      "meshes": 226,
+      "materials": 62,
+      "patched": 62,
+      "bake": {
+        "meshes": 226,
+        "verts": 87882,
+        "occluders": 205
+      },
+      "ms": 23
+    },
+    "errors": []
+  },
+  {
+    "size": "1366x860",
+    "trip": "forecourt->plaza",
+    "prepMs": 52,
+    "longest": 0,
+    "longTasks": 0,
+    "worstFrame": 17,
+    "p99": 16.8,
+    "low1": 59.5,
+    "median": 16.7,
+    "frames": 152,
+    "slow": 0,
+    "slowAt": [],
+    "prepEnd": 52,
+    "look": {
+      "meshes": 107,
+      "materials": 48,
+      "patched": 48,
+      "bake": {
+        "meshes": 107,
+        "verts": 41467,
+        "occluders": 91
+      },
+      "ms": 12
+    },
+    "errors": []
+  }
+]

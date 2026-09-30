@@ -6,7 +6,8 @@ import { snapshotPeople, restorePeople, snapshotObject, restoreObject } from './
 // Place 3, the office floor, as the engine side: things, spots, zones, the command effects and the arrival by lift.
 // Every word said here comes from game3d/story/office.js (placeholder: story/placeholder/office.js).
 import * as THREE from 'three';
-import { buildOffice, K, CN, CS } from '../scenes/office.js';
+import { officeSteps, K, CN, CS } from '../scenes/office.js';
+import { sliced } from '../perf/slice.js';
 import { RoomCam } from '../cam.js';
 import { ui, sfx } from '../ui.js';
 import { walkPerson, stepPeople, lookAt } from '../story.js';
@@ -18,7 +19,7 @@ import { mat, rbox, PAL } from '../props.js';
 import { route } from './route.js';
 
 export async function officePlace(game) {
-  const w = buildOffice();
+  const w = await sliced(officeSteps()); // in slices between frames: it's built while the forecourt is played
   const cam = new RoomCam({ elev: 51, fov: 24 });
   const floor = new THREE.Plane(new THREE.Vector3(0, 1, 0), 0);
   const st = {

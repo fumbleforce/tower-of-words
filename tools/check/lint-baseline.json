@@ -51,12 +51,6 @@
       "context": "6740d5726a637cb3a0afcea3dfbc2c10bf3a9dbb7e3b12470e04bcea524a376a"
     },
     {
-      "file": "game3d/js/look/bake.js",
-      "ruleId": "no-unused-vars",
-      "message": "'Q' is assigned a value but never used.",
-      "context": "3c14ef032cd84d78c82426764db4b30123f9913008c49cca3d4a2326467f6e04"
-    },
-    {
       "file": "game3d/js/mio.js",
       "ruleId": "no-unused-vars",
       "message": "'navyLum' is assigned a value but never used.",
@@ -157,12 +151,6 @@
       "ruleId": "no-unused-vars",
       "message": "'coatRack' is defined but never used.",
       "context": "a46d55e5a9ef23443a83c4e3893e7586aab5eb09ca36264164c091dc3bdb82a9"
-    },
-    {
-      "file": "game3d/js/scenes/office.js",
-      "ruleId": "no-unused-vars",
-      "message": "'k' is assigned a value but never used.",
-      "context": "adee94d6f9b72f8138577f30c3624b8e65b45b4c083b09fd222f2b70c459d415"
     },
     {
       "file": "game3d/js/showcase/decals.js",
