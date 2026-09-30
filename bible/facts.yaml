@@ -136,14 +136,18 @@ characters:
     story_name: Kenji
     group: B2 IT support
     voice_prefix: [kenji]
-    portrait_status: rejected
-    portrait_note: ["Not approved (Jørgen, 2026-09-28: \"Kenji's portrait and profile is not approved\"). The game shows seed 711 as a stand-in; new concept art is coming.", rejected, "docs/game/art-and-sound.md ~ Provisional (seed 711"]
+    approved_art: kenji
+    portrait_status: approved
     decisions:
       - {q: "docs/game/cast.md ~ Look: about 21, inexperienced", s: approved}
+      - {q: "docs/game/cast.md ~ Approved portrait: h4, bedhead", s: approved}
     images:
+      - [art/approved/kenji/kenji-nk-d80-1.webp, "Neutral (nk-d80-1), a face-only repaint of concept h4 (reviews/kenji-expressions-1)", approved]
+      - [art/approved/kenji/kenji-g0-h4.webp, "Grin: concept h4 itself (g0-h4)", approved]
+      - [art/approved/kenji/kenji-s3k-d80-1.webp, "Sheepish (s3k-d80-1)", approved]
       - [art/candidates/portraits/kenji-sheet.png, "Portrait candidates (711, not approved)", rejected]
     rejected:
-      - ["The 711 portrait and the old profile (29, a different job).", rejected, "docs/game/art-and-sound.md ~ Provisional (seed 711"]
+      - ["The 711 portrait and the old profile (29, a different job): \"Kenji's portrait and profile is not approved\" (Jørgen, 2026-09-28).", rejected, "docs/game/art-and-sound.md ~ The 711 stand-in is gone"]
 
   - id: emi
     name: Emi
@@ -650,7 +654,7 @@ reviews:
   art/candidates/portraits/eric-poses-sheet.png: ["Eric in natural poses.", decided, "Rejected (sides shaved too close, a furry-hat top)."]
   art/candidates/portraits/mio-expressions-v3-sheet.png: ["Mio's six expressions, v3.", decided, "Approved; in the game."]
   art/candidates/portraits/mori-sheet.png: ["Mr. Mori portrait candidates.", open, "713 in use provisionally."]
-  art/candidates/portraits/kenji-sheet.png: ["Kenji portrait candidates.", decided, "711 not approved; new concept art is coming."]
+  art/candidates/portraits/kenji-sheet.png: ["Kenji portrait candidates.", decided, "711 not approved; replaced by concept h4 and its faces (reviews/kenji-expressions-1)."]
   art/candidates/portraits/hamada-sheet.png: ["Mr. Hamada portrait candidates.", open, "721 in use provisionally."]
   art/candidates/portraits/guard-sheet.png: ["Mr. Ishibashi's new expressions.", open, "Stern and amused in use provisionally."]
   game3d/REVIEW.md: ["The critic log for the three places (scores per round, shots).", open, "No place has reached 8 yet."]
@@ -729,7 +733,6 @@ questions:
   open:
     - ["Eric's portrait style: the current 734 portrait is \"quite a different style\" from the rest of the cast, and the old gallery style may come back through a new art round.", "docs/game/art-and-sound.md ~ eric-v2-734 (seed 734 v2) was approved", mc]
     - ["Mori's 3D look: a Meshy test exists, and it loads only with ?cast3d=mori until he approves it.", "game3d/js/cast.js ~ While a model waits for Jørgen's approval", mori]
-    - ["Kenji's look: new concept art is coming (about 21, inexperienced, eager, easily distracted; varied, creative looks).", "docs/game/cast.md ~ Look: about 21, inexperienced", kenji]
     - ["The portraits in use provisionally: Mori 713, Hamada 721 and Ishibashi's stern and amused faces. Confirm or pick others.", "TODO.md ~ Portraits in use provisionally", null]
     - ["The environment style study: several attempts at the polish and vibe of the generated anime art, for Jørgen to judge.", "docs/game/art-and-sound.md ~ A style study aims at the polish", null]
     - ["Whether the bible goes public. It has never been committed.", "TODO.md ~ The bible (bible/) has never been committed", null]
