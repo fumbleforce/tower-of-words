@@ -5,8 +5,7 @@ export default {
   },
   start: 'outside',
   on: {
-    // Kuro at the lobby reception (moved from the station's visitor counter; her lines are still the station ones,
-    // a rewrite for the lobby is asked of Codex in collab/to-codex.md)
+    // Kuro greets arrivals at reception and people heading home after work.
     'talk:kuro': 'kuro',
     'say:ohayo:kuro': 'ohayo_kuro',
     'say:yoroshiku:kuro': 'yoroshiku_kuro',
@@ -28,17 +27,30 @@ export default {
     to_b2: [{ do: 'next' }],
     to_plaza: [{ do: 'trip', to: 'plaza' }],
     kuro: [
-      { say: 'kuro', overheard: true, emo: 'polite', text: 'いらっしゃいませ。ご用件は？' },
-      { do: 'gesture', who: 'kuro', kind: 'point' },
-      { do: 'face', who: 'kuro', to: 'lift' },
+      { do: 'face', who: 'kuro', to: 'eric' },
+      { if: 'going_home', then: [
+        { say: 'kuro', overheard: true, emo: 'polite', text: 'お疲れさまです。' },
+        { do: 'bow', who: 'kuro' },
+      ], else: [
+        { say: 'kuro', overheard: true, emo: 'polite', text: '{ohayo}。どうぞ。' },
+        { do: 'face', who: 'kuro', to: 'lift' },
+        { do: 'gesture', who: 'kuro', kind: 'point' },
+        { do: 'face', who: 'kuro', to: 'eric' },
+      ] },
     ],
     ohayo_kuro: [
-      { say: 'kuro', overheard: true, emo: 'polite', text: '…{ohayo}。' },
+      { do: 'face', who: 'kuro', to: 'eric' },
+      { if: 'going_home', then: [
+        { say: 'kuro', overheard: true, emo: 'polite', text: 'お疲れさまです。' },
+      ], else: [
+        { say: 'kuro', overheard: true, emo: 'polite', text: 'あ、{ohayo}。' },
+      ] },
       { do: 'bow', who: 'kuro' },
     ],
     yoroshiku_kuro: [
-      { say: 'kuro', overheard: true, emo: 'puzzled', text: 'はい…？{yoroshiku}…' },
-      { do: 'emote', who: 'kuro', kind: '?' },
+      { do: 'face', who: 'kuro', to: 'eric' },
+      { say: 'kuro', overheard: true, emo: 'polite', text: 'こちらこそ。{yoroshiku}。' },
+      { do: 'bow', who: 'kuro' },
     ],
   },
 };

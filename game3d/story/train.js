@@ -203,7 +203,7 @@ export default {
     chat1_end: [
       { set: 'chat1' },
       { do: 'cam', back: true },
-      { do: 'goal', text: 'Talk to Mio again when you like.' },
+      { do: 'goal', text: 'Talk to Mio again.' },
     ],
 
     // ------------------------------------------------------------------ the lesson (the player comes back for it)
@@ -244,7 +244,7 @@ export default {
       { do: 'emote', who: 'tama', kind: 'heart' },
       { say: 'mio', emo: 'amused', face: 'smile', text: "See? She's fine with it." },
       { set: 'cat_done' },
-      { do: 'goal', text: 'Talk to Mio when you like.' },
+      { do: 'goal', text: 'Talk to Mio.' },
     ],
     lesson3: [
       { do: 'cam', on: 'mio', zoom: 1.6 },

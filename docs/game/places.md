@@ -221,7 +221,7 @@ Kuro works the head office reception all day. The two from Sales appear inside t
 | `head_office` | Use the head-office entrance | The goal points inside to the B2 lift. |
 | `to_b2` | Reach or use the lift | Eric boards the existing watched lift ride. |
 | `to_plaza` | Reach or use the east lane | Eric walks on to the fountain plaza. |
-| `kuro`, `ohayo_kuro`, `yoroshiku_kuro` | Talk to Kuro, or greet her | いらっしゃいませ and a point toward the lift; a polite answer; a puzzled one to よろしく. Her station lines for now; lines written for the lobby are asked of Codex. |
+| `kuro`, `ohayo_kuro`, `yoroshiku_kuro` | Talk to Kuro, or greet her | A polite morning welcome and a point toward the lifts; after work, お疲れさまです and a bow. She returns おはよう in the morning and よろしく politely at either time. |
 
 ## Fountain plaza (`plaza`)
 
@@ -354,7 +354,7 @@ The story moves the clock ([systems.md](systems.md)): morning when Eric arrives,
 | `covered` | Talk to it | No dust on the name card in front of it. |
 | `irete_kettle` | 入れて to the kettle | It pours Eric a cup of tea. |
 | `ugoite_coffee` | 動いて to the coffee machine (once) | It gurgles, then goes quiet. |
-| `matte_clock` | 待って to the clock | The second hand stops; Mori looks up. |
+| `matte_clock` | 待って to the clock | The second hand stops; Mori looks up and quietly asks 「あれ、止まりました？」 (“Oh, did it stop?”). |
 | `tomatte_fan` | 止まって to the fan | It stops; Kenji: あれ？ |
 | `noop` | – | An empty node for choices and triggers that do nothing. |
 

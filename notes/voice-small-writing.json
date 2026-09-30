@@ -1,0 +1,58 @@
+{
+  "status": "pending",
+  "request": "C-0157 / C-0164",
+  "pipeline": "sh tools/voice/run.sh",
+  "note": "Include forecourt in voice-manifest scanning first. Keys are derived by the normal heardKey function; no explicit voice overrides or clips generated in this writing pass.",
+  "clips": [
+    {
+      "key": "oh-1244oau",
+      "speaker": "kuro",
+      "text": "お疲れさまです。",
+      "authoredText": "お疲れさまです。",
+      "lang": "ja",
+      "overheard": true,
+      "emo": "polite",
+      "source": "forecourt:ohayo_kuro"
+    },
+    {
+      "key": "oh-nvf9du",
+      "speaker": "kuro",
+      "text": "おはようございます。どうぞ。",
+      "authoredText": "{ohayo}。どうぞ。",
+      "lang": "ja",
+      "overheard": true,
+      "emo": "polite",
+      "source": "forecourt:kuro"
+    },
+    {
+      "key": "oh-1tdi6z6",
+      "speaker": "kuro",
+      "text": "あ、おはようございます。",
+      "authoredText": "あ、{ohayo}。",
+      "lang": "ja",
+      "overheard": true,
+      "emo": "polite",
+      "source": "forecourt:ohayo_kuro"
+    },
+    {
+      "key": "oh-1ybstld",
+      "speaker": "kuro",
+      "text": "こちらこそ。よろしくおねがいします。",
+      "authoredText": "こちらこそ。{yoroshiku}。",
+      "lang": "ja",
+      "overheard": true,
+      "emo": "polite",
+      "source": "forecourt:yoroshiku_kuro"
+    },
+    {
+      "key": "oh-1cqcyyd",
+      "speaker": "mori",
+      "text": "あれ、止まりました？",
+      "authoredText": "あれ、止まりました？",
+      "lang": "ja",
+      "overheard": true,
+      "emo": "puzzled",
+      "source": "office:matte_clock"
+    }
+  ]
+}

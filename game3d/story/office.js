@@ -644,7 +644,7 @@ export default {
       { do: 'clockStop', ms: 3000 },
       { do: 'look', who: 'mori', at: 'clock' },
       { do: 'emote', who: 'mori', kind: '?' },
-      '> The second hand stops, then carries on.',
+      { say: 'mori', overheard: true, emo: 'puzzled', text: 'あれ、止まりました？' },
     ],
     tomatte_fan: [
       { do: 'fan', state: 'off' },
