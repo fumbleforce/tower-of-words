@@ -83,7 +83,7 @@ export default {
     // no goal and no text at load: the shell shows the controls line; the first goal comes from a passenger
     intro: [],
 
-    // the first passenger he talks to answers in Japanese and nods at the free seat
+    // the first passenger he talks to answers in Japanese and nods at the seat with the lunchbox
     first_aoi: [
       { say: 'aoi', overheard: true, emo: 'bright', text: 'あ、ごめん、ちょっと待って。' },
       { call: 'nod_seat' },
@@ -110,10 +110,10 @@ export default {
         { do: 'emote', who: 'mio', kind: '…' },
         '> A nod toward the woman with the laptop.',
       ], else: [
-        '> A nod at the empty seat.',
+        '> A nod at the seat with the lunchbox.',
       ] },
       { set: 'seat_goal' },
-      { do: 'goal', text: 'Sit down.', at: 'seat_far_r' },
+      { do: 'goal', text: 'Sit by the lunchbox.', at: 'seat_far_r' },
     ],
     bun: [{ say: 'bun', overheard: true, emo: 'polite', text: 'いい天気ですね。' }],
     youth: [{ say: 'youth', overheard: true, emo: 'casual', text: '…ん？' }, { do: 'emote', who: 'youth', kind: '?' }],

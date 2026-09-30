@@ -40,8 +40,8 @@ One car of the monorail, crossing the bay from the mainland to Honsha station. T
 | `doors` | Doors | Both door pairs, while they're open. |
 | `door_l` | Doors | The left door pair. |
 | `door_r` | Doors | The right door pair. |
-| `foodbag` | Her lunch bag | Mio's bag of her mother's pickles, on the free seat beside her. Can be caught when it slides. |
-| `cup` | Coffee | A lidded coffee on the free seat, hidden (left from when the seat was Rei's). |
+| `foodbag` | Her lunch bag | Mio's bag of her mother's pickles, on the seat beside her. Can be caught when it slides. |
+| `cup` | Coffee | A lidded coffee on the seat beside Mio, hidden (left from when the seat was Rei's). |
 | `bags` | Bags | Bags on every seat but one. |
 | `rack` | Luggage rack | Suitcases, all with the same Amakawa luggage tag. |
 | `straps` | Straps | Hanging straps. |
@@ -57,11 +57,11 @@ One car of the monorail, crossing the bay from the mainland to Honsha station. T
 
 ### Seats
 
-`seat_aoi`, `seat_far_r` (the free seat next to Mio), `seat_near_l`, `seat_near_r`, `seat_mio`
+`seat_aoi`, `seat_far_r` (the seat next to Mio), `seat_near_l`, `seat_near_r`, `seat_mio`
 
 ### Zones
 
-`door_zone` (either door, while open), `free_seat` (standing at the free seat)
+`door_zone` (either door, while open), `free_seat` (standing at the seat beside Mio)
 
 ### Who's there when
 
@@ -69,7 +69,7 @@ The monorail has one period, early morning.
 
 | Id | Usually | Schedule |
 |---|---|---|
-| `mio` | Far bench, right, with her laptop, the free seat beside her. | – |
+| `mio` | Far bench, right, with her laptop and lunchbox on the seat beside her. | – |
 | `aoi` | Far bench, left, on the phone. | – |
 | `kuroda` | Far bench, far left, asleep. | – |
 | `reader` | Far bench, reading. | – |
@@ -93,7 +93,9 @@ The monorail has one period, early morning.
 
 The man with a bag (`stander`) is hidden following the silhouette rejection, and has no talk or greeting trigger, so `stander` and `ohayo_stander` never play. The six scenery nodes above exist in the script but are disabled by the current marker rules; the passengers are reachable.
 
-Planned passenger revisions, awaiting [train-discoveries-1](../../reviews/train-discoveries-1/review.json): give Aoi a brief awkward exchange when she realises Eric is assigned to the basement she has just dismissed; let the woman with the bun enlist Eric to close an overfilled shopping bag; show the young man's pride in his first goal despite his team's loss; let the girl with headphones show her own guitar practice; let the reader show the mismatch between his Excel book and the company's old software; and show Hamada silencing a reminder without waking properly. Each moment starts with one interaction, including on first contact before the seat hint. They are optional, need no menu or quiz, and add no later quest. Proposed passenger speech has English subtitles for the player, including unfamiliar Japanese; Eric still follows familiar words and gestures. Mio's conversation and Tama's existing moments stay as they are. Exact proposed passages and their visual staging live only in the review; no new dialogue, prop or voice is built yet.
+Aoi keeps her original encounter; Jørgen rejected its proposed replacement.
+
+Planned passenger revisions, awaiting [train-discoveries-1](../../reviews/train-discoveries-1/review.json): let the woman with the bun enlist Eric to close an overfilled shopping bag; show the young man's pride in his first goal despite his team's loss; let the girl with headphones show her own guitar practice; let the reader show the mismatch between his Excel book and the company's old software; and show Hamada silencing a reminder without waking properly. Each moment starts with one interaction, including on first contact before the seat hint. They are optional, need no menu or quiz, and add no later quest. Proposed passenger speech has English subtitles for the player, including unfamiliar Japanese; Eric still follows familiar words and gestures. Mio's conversation and Tama's existing moments stay as they are. Exact proposed passages and their visual staging live only in the review; no new dialogue, prop or voice is built yet.
 
 ## Honsha station security room (`gate`)
 

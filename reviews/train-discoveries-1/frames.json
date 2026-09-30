@@ -7,7 +7,7 @@
           "id": "train-aoi",
           "kind": "replace",
           "title": "Aoi realises where Eric will work",
-          "summary": "Her complaint about the basement lands awkwardly when Eric introduces himself.",
+          "summary": "Original kept. Jørgen rejected the proposed encounter; both versions remain here for reference.",
           "titles": [
             "Current encounter",
             "Proposed encounter"
@@ -19,7 +19,7 @@
             },
             {
               "kind": "action",
-              "text": "If nobody has pointed out the free seat yet:"
+              "text": "If nobody has pointed out the seat beside Mio yet:"
             },
             {
               "kind": "say",
@@ -28,7 +28,7 @@
             },
             {
               "kind": "action",
-              "text": "The passenger nods at the empty seat. The goal becomes “Sit down.”"
+              "text": "The passenger nods at the seat with the lunchbox. The goal becomes “Sit by the lunchbox.”"
             },
             {
               "kind": "action",
@@ -83,7 +83,7 @@
             },
             {
               "kind": "action",
-              "text": "She gives a small apologetic bow. If nobody has pointed out the free seat yet, she nods toward it in the same gesture; the goal becomes “Sit down.”"
+              "text": "She gives a small apologetic bow. If nobody has pointed out the seat beside Mio yet, she nods toward it in the same gesture; the goal becomes “Sit by the lunchbox.”"
             },
             {
               "kind": "action",
@@ -100,7 +100,7 @@
           "id": "train-bun",
           "kind": "replace",
           "title": "She brought back too much",
-          "summary": "Help her close an overfilled shopping bag before she returns to island life.",
+          "summary": "Help her close an overfilled shopping bag. A short visual discovery with one thank-you; still undecided.",
           "titles": [
             "Current encounter",
             "Proposed encounter"
@@ -112,7 +112,7 @@
             },
             {
               "kind": "action",
-              "text": "If nobody has pointed out the free seat yet:"
+              "text": "If nobody has pointed out the seat beside Mio yet:"
             },
             {
               "kind": "say",
@@ -121,7 +121,7 @@
             },
             {
               "kind": "action",
-              "text": "The passenger nods at the empty seat. The goal becomes “Sit down.”"
+              "text": "The passenger nods at the seat with the lunchbox. The goal becomes “Sit by the lunchbox.”"
             },
             {
               "kind": "action",
@@ -144,36 +144,27 @@
             },
             {
               "kind": "action",
-              "text": "She is trying to zip her shopping bag shut. She looks up and points to the bulging top."
+              "text": "Her shopping bag will not zip shut. She points to the bulging top and looks up at you."
+            },
+            {
+              "kind": "action",
+              "text": "You press it down; she pulls the zip closed and pats the bag with relief."
             },
             {
               "kind": "say",
-              "text": "ちょっと、ここ押さえてくれる？",
+              "text": "ありがとう。",
               "speaker": "bun"
             },
             {
               "kind": "action",
-              "text": "You hold the top down while she closes the zip."
-            },
-            {
-              "kind": "say",
-              "text": "ありがとう。島に戻る前って、つい買いすぎちゃって。",
-              "speaker": "bun"
-            },
-            {
-              "kind": "action",
-              "text": "She pats the closed bag with relief."
-            },
-            {
-              "kind": "action",
-              "text": "If nobody has pointed out the free seat yet: the passenger nods toward it. The goal becomes “Sit down.”"
+              "text": "If nobody has pointed out the seat beside Mio yet: the passenger nods toward it. The goal becomes “Sit by the lunchbox.”"
             },
             {
               "kind": "action",
               "text": "You can keep exploring the carriage. Sitting beside Mio starts her conversation."
             }
           ],
-          "staging": "Turn the seated woman toward Eric and frame her bag. Her point, Eric’s hand and the closing zip carry the request without Japanese comprehension. One automatic small help beat, no drag puzzle, menu or inventory. She is returning from mainland shopping; this does not establish a daily commute or remove the island shops. No food gift competes with Mio’s pickle."
+          "staging": "One click, one short bag-closing motion and one thank-you. She points; Eric presses the bulging top while she closes the zip. Show the help through movement, with no narration, extra dialogue, drag puzzle, menu or inventory. Keep the usual seat hint when needed. She is returning from mainland shopping; no food gift competes with Mio’s pickle."
         },
         {
           "id": "train-youth",
@@ -191,7 +182,7 @@
             },
             {
               "kind": "action",
-              "text": "If nobody has pointed out the free seat yet:"
+              "text": "If nobody has pointed out the seat beside Mio yet:"
             },
             {
               "kind": "say",
@@ -200,7 +191,7 @@
             },
             {
               "kind": "action",
-              "text": "The passenger nods at the empty seat. The goal becomes “Sit down.”"
+              "text": "The passenger nods at the seat with the lunchbox. The goal becomes “Sit by the lunchbox.”"
             },
             {
               "kind": "action",
@@ -245,7 +236,7 @@
             },
             {
               "kind": "action",
-              "text": "If nobody has pointed out the free seat yet: the passenger nods toward it. The goal becomes “Sit down.”"
+              "text": "If nobody has pointed out the seat beside Mio yet: the passenger nods toward it. The goal becomes “Sit by the lunchbox.”"
             },
             {
               "kind": "action",
@@ -270,7 +261,7 @@
             },
             {
               "kind": "action",
-              "text": "If nobody has pointed out the free seat yet:"
+              "text": "If nobody has pointed out the seat beside Mio yet:"
             },
             {
               "kind": "say",
@@ -279,7 +270,7 @@
             },
             {
               "kind": "action",
-              "text": "The passenger nods at the empty seat. The goal becomes “Sit down.”"
+              "text": "The passenger nods at the seat with the lunchbox. The goal becomes “Sit by the lunchbox.”"
             },
             {
               "kind": "action",
@@ -328,7 +319,7 @@
             },
             {
               "kind": "action",
-              "text": "If nobody has pointed out the free seat yet: the passenger nods toward it. The goal becomes “Sit down.”"
+              "text": "If nobody has pointed out the seat beside Mio yet: the passenger nods toward it. The goal becomes “Sit by the lunchbox.”"
             },
             {
               "kind": "action",
@@ -511,14 +502,6 @@
       "Uun, mado ga suki na dake.",
       "No, I just like having windows."
     ],
-    "ちょっと、ここ押さえてくれる？": [
-      "Chotto, koko osaete kureru?",
-      "Could you hold this bit down for me?"
-    ],
-    "ありがとう。島に戻る前って、つい買いすぎちゃって。": [
-      "Arigatō. Shima ni modoru mae tte, tsui kaisugichatte.",
-      "Thank you. I always buy too much before going back to the island."
-    ],
     "負けたけど、初めてゴール決めたんだ。": [
       "Maketa kedo, hajimete gōru kimetan da.",
       "We lost, but I scored my first goal."
@@ -530,6 +513,10 @@
     "すみません……あと五分。": [
       "Sumimasen... ato gofun.",
       "Sorry... five more minutes."
+    ],
+    "ありがとう。": [
+      "Arigatō.",
+      "Thank you."
     ]
   },
   "presentation": "The proposed passenger lines have English subtitles, including unfamiliar Japanese. Eric still understands only familiar words and gestures; the subtitles are for the player."
