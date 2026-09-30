@@ -4,8 +4,8 @@
 //
 // Hooks it expects from main.js (see notes/production-requests.md):
 //   game.paused       menu.js sets it while the pause menu is open; the loop should skip step() while it's true
-//   body.loading      main.js sets it while travel() waits for the next place to finish building
-// Without them the pause menu still stops sound, input and text, and the loading chip falls back to a timer.
+//   body.loading      places/lifecycle.js sets it while travel(), its walk out done, waits for the next place to finish building
+// Without them the pause menu still stops sound, input and text, and the loading chip never shows.
 //
 // QA: ?shell=title|settings|pause|save|load|loading|end opens that screen on its own (with made-up save data),
 // for screenshots of each screen in isolation (game3d/tools/shell-shots.mjs).
@@ -968,8 +968,7 @@ function addPauseChip() {
 // ---------- loading between places ----------
 // The trips between places are continuous (a walk out, a crossfade, a walk in). If the next place is still being
 // built when the walk out ends, a small chip says so over the held frame, in the HUD's style, instead of a black
-// screen. main.js marks that wait with body.loading; without it, a trip that sits on one place for a long time
-// shows the chip too.
+// screen. Only that wait (body.loading, places/lifecycle.js) shows it; never a watched walk.
 function buildLoadChip() {
   let c = $('#loadchip');
   if (c) return c;
@@ -979,8 +978,7 @@ function buildLoadChip() {
     '<span class="track" aria-hidden="true"><i></i></span><span class="lt">Loading</span><span class="dest"></span>',
   );
   c.update = () => {
-    const next = { train: 'gate', gate: 'office' }[document.body.dataset.place];
-    const d = PLACE_NAMES[next];
+    const d = PLACE_NAMES[window.__game?.transition?.to];
     c.querySelector('.dest').textContent = d || '';
     c.querySelector('.lt').textContent = d ? 'On the way to' : 'Loading';
   };
@@ -990,23 +988,12 @@ function buildLoadChip() {
   document.body.appendChild(c);
   return c;
 }
-let tripSince = 0,
-  tripPlace = '',
-  loadTimer = 0;
+let loadTimer = 0;
 function watchLoading() {
   const c = buildLoadChip();
   const check = () => {
-    const b = document.body,
-      now = performance.now();
-    const trip = b.classList.contains('trip'),
-      place = b.dataset.place || '';
-    if (trip && (!tripSince || place !== tripPlace)) {
-      tripSince = now;
-      tripPlace = place;
-    }
-    if (!trip) tripSince = 0;
-    const want =
-      b.classList.contains('loading') || (trip && tripSince && now - tripSince > 6000 && place === tripPlace);
+    const b = document.body;
+    const want = b.classList.contains('loading');
     if (want && c.hidden && !loadTimer)
       loadTimer = setTimeout(() => {
         loadTimer = 0;
@@ -1188,9 +1175,23 @@ window.addEventListener(
 );
 
 // ---------- photos of the day, for the end screen ----------
-// one frame of each place, taken a few seconds in, when nobody is mid-sentence
+// one frame of each place, a few seconds in when nobody is mid-sentence; else as the trip out starts, or (the room
+// the day ends in) just before the summary (end.js calls shell.photoNow)
 let placeSince = 0,
   placeName = '';
+async function photo(n) {
+  const shot = await grab(560, 1.5);
+  if (shot && !shell.photos[n]) shell.photos[n] = { src: shot, period: sim.period };
+  try {
+    sessionStorage.setItem('amakawa-photos', JSON.stringify(shell.photos));
+  } catch {
+    /* */
+  }
+}
+shell.photoNow = async () => {
+  const g = game();
+  if (g && g.place && !TEST && !CAP && !SHELL && !shell.photos[g.place.name]) await photo(g.place.name);
+};
 setInterval(async () => {
   const g = game();
   if (
@@ -1210,22 +1211,10 @@ setInterval(async () => {
     placeSince = now;
     return;
   }
-  if (
-    shell.photos[n] ||
-    now - placeSince < 3500 ||
-    g.busy ||
-    ui.talking ||
-    document.body.classList.contains('trip') ||
-    isPaused
-  )
-    return;
-  const shot = await grab(560, 1.5);
-  if (shot) shell.photos[n] = { src: shot, period: sim.period };
-  try {
-    sessionStorage.setItem('amakawa-photos', JSON.stringify(shell.photos));
-  } catch {
-    /* */
-  }
+  if (shell.photos[n] || isPaused) return;
+  const leaving = document.body.classList.contains('trip') && g.transition?.phase === 'leaving';
+  if (!leaving && (now - placeSince < 3500 || g.busy || ui.talking || document.body.classList.contains('trip'))) return;
+  await photo(n);
 }, 1000);
 try {
   Object.assign(shell.photos, JSON.parse(sessionStorage.getItem('amakawa-photos') || '{}'));

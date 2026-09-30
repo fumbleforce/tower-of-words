@@ -11,7 +11,6 @@ const esc = (s) =>
     .replace(/&/g, '&amp;')
     .replace(/</g, '&lt;')
     .replace(/"/g, '&quot;');
-const ORDER = ['train', 'gate', 'office'];
 
 // a round crop of a portrait's face, from its face box
 function faceHTML(id, color, name, size = 56) {
@@ -35,7 +34,10 @@ function ticketHTML(t) {
   return `<section class="ticket" aria-label="Repair request"><p class="tno">${esc(t.no || 'Repair request')}</p><p class="ttl">${esc(t.title || '')}</p>${(t.lines || []).map((l) => `<p class="tl">${esc(l)}</p>`).join('')}</section>`;
 }
 export function endHTML(game, { photos = {}, outro, ticket } = {}) {
-  const shots = ORDER.filter((p) => photos[p])
+  // every place Eric was in, in the order he got there (menu.js adds each place's photo on the first visit)
+  const where = Object.keys(photos).filter((p) => PLACE_NAMES[p]);
+  const cols = where.length === 4 || where.length >= 7 ? 4 : 3;
+  const shots = where
     .map(
       (p) =>
         `<figure class="shot"><img alt="" src="${photos[p].src}"><figcaption><b>${PLACE_NAMES[p]}</b><span>${esc(PERIOD_NAMES[photos[p].period] || '')}</span></figcaption></figure>`,
@@ -59,7 +61,7 @@ export function endHTML(game, { photos = {}, outro, ticket } = {}) {
     cm = COMMANDS.filter((id) => known.has(id));
   return `<div class="card">
     <header class="dayhead"><h2>Day one</h2><p class="when">${esc(sim.date)} · ${esc(PERIOD_NAMES[sim.period] || 'After work')}</p></header>
-    ${shots ? `<section class="today"><h3>Today</h3><div class="shots">${shots}</div></section>` : ''}
+    ${shots ? `<section class="today"><h3>Today</h3><div class="shots" style="--cols:${cols}">${shots}</div></section>` : ''}
     <div class="cols">
       ${people ? `<section class="met"><h3>People you met</h3><ul class="people">${people}</ul></section>` : ''}
       ${ph.length || cm.length ? `<section class="words"><h3>Words you can use</h3>${ph.length ? `<ul class="wl">${ph.map(word).join('')}</ul>` : ''}${cm.length ? `<p class="sub2">Commands</p><ul class="wl cmds">${cm.map(word).join('')}</ul>` : ''}</section>` : ''}
@@ -77,6 +79,7 @@ export async function showEnd(game) {
     title: 'Monorail doors: sensor check',
     lines: ['Raised by: Amakawa Station', 'Handed to: Eric (from Mio, B2)', 'Tomorrow morning, at the station.'],
   };
+  if (window.__shell?.photoNow) await window.__shell.photoNow(); // the room the day ends in
   document.body.classList.add('ended');
   // the scene fades out first, then the card comes in (QA round 1: the card faded in over live play)
   document.body.classList.add('ending');

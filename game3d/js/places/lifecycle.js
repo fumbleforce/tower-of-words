@@ -121,13 +121,18 @@ export function createPlaceLifecycle(
     game.busy = true;
     game.walker.locked = true;
     document.body.classList.add('busy', 'trip');
-    const ready = prepare(name);
-    document.body.classList.add('loading');
+    let built = false;
+    const ready = prepare(name).then((r) => ((built = true), r));
     const tr = await game.runner.load('transitions');
     const slot = (tr && tr[`${from.name}_to_${name}`]) || {};
     if (!arriving) await trips.leave(game, from, slot);
-    await ready;
-    document.body.classList.remove('loading');
+    // body.loading (the chip, and a dimmed frame) only when the player is actually held up: the leaving walk is
+    // over and the next place is still being built. A place built ahead (the lift, the outdoor chunks) never shows it.
+    if (!built) {
+      document.body.classList.add('loading');
+      await ready;
+      document.body.classList.remove('loading');
+    }
     if (!arriving) {
       const snap = snapshot();
       game.transition.phase = 'arriving';
