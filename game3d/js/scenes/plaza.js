@@ -10,6 +10,7 @@ import { PAL, mat, rbox, bench, lampPost, textTexture, plane, JP_FONT } from '..
 import { lightPool } from '../places/life.js';
 import { boxes, planter, tree } from './forecourt/details.js';
 import { outdoorLight, groundPatches, blocks, farTrees, paving, TOWN } from './town.js';
+import { fountain, laneDetails } from './plaza-details.js';
 
 const LANE = [-0.2, 1.0], // the lane's z range; the fountain ring touches its north edge
   LZ = 0.4,
@@ -46,36 +47,6 @@ function ground(root) {
     [-14, 14, SHOPS_Z + 1.6, SHOPS_Z + 2.8, '#85878a'],
     [-14, 14, SHOPS_Z + 2.8, 16, '#50667a'],
   ]);
-}
-
-function fountain(root) {
-  const g = new THREE.Group();
-  g.position.set(FX, 0, FZ);
-  const stone = mat('#9a9690', { roughness: 0.6 }),
-    water = mat('#7894a3', {
-      roughness: 0.12,
-      metalness: 0.1,
-      emissive: new THREE.Color('#2c4452'),
-      emissiveIntensity: 0.5,
-    });
-  const rim = new THREE.Mesh(new THREE.CylinderGeometry(BASIN, BASIN + 0.05, 0.36, 28), stone);
-  rim.position.y = 0.18;
-  const pool = new THREE.Mesh(new THREE.CylinderGeometry(BASIN - 0.12, BASIN - 0.12, 0.02, 28), water);
-  pool.position.y = 0.3;
-  const column = new THREE.Mesh(new THREE.CylinderGeometry(0.16, 0.26, 0.8, 10), stone);
-  column.position.y = 0.4;
-  const bowl = new THREE.Mesh(new THREE.CylinderGeometry(0.62, 0.32, 0.16, 18), stone);
-  bowl.position.y = 0.86;
-  const top = new THREE.Mesh(new THREE.CylinderGeometry(0.5, 0.5, 0.02, 18), water);
-  top.position.y = 0.935;
-  const spout = new THREE.Mesh(new THREE.CylinderGeometry(0.05, 0.09, 0.34, 8), stone);
-  spout.position.y = 1.08;
-  for (const m of [rim, pool, column, bowl, top, spout]) {
-    m.castShadow = m !== pool && m !== top;
-    m.receiveShadow = true;
-    g.add(m);
-  }
-  root.add(g);
 }
 
 function seating(root, nav) {
@@ -229,7 +200,8 @@ export function buildPlaza() {
   nav.block(4.2, EDGE_X, -5.4, LANE[0]);
   nav.extra = (x, z) => Math.hypot(x - FX, z - FZ) > BASIN + 0.25;
   ground(root);
-  fountain(root);
+  fountain(root, FX, FZ, BASIN);
+  laneDetails(root, nav);
   seating(root, nav);
   planting(root);
   shops(root);

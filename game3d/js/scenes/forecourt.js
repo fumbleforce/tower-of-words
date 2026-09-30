@@ -4,7 +4,7 @@
 // behind. The blue platform roof runs along the west edge. Palette and light are the security room's.
 import * as THREE from 'three';
 import { Nav } from '../movement/navigation.js';
-import { PAL, mat, rbox, wall, tileFloor, bench, lampPost } from '../props.js';
+import { PAL, mat, rbox, wall, bench, lampPost } from '../props.js';
 import { lightPool } from '../places/life.js';
 import { boxes, planter, bicycle, openDoor, tree, monument } from './forecourt/details.js';
 import { outdoorLight, groundPatches, blocks, farTrees, paving } from './town.js';
@@ -35,12 +35,12 @@ export const FORECOURT_LIFT_SITE = {
 function ground(root) {
   // island paving all round, the forecourt's lighter stone, and the station floor beyond its cut wall
   root.add(rbox(40, 0.1, 40, '#6d6f73', { y: -0.12, z: -4, seg: 1, r: 0.01, cast: false }));
-  root.add(tileFloor(-4.7, 7, FRONT_Z, STATION_Z, 0.9, { color: '#8e8a86', seam: '#7f7b77', seamW: 0.02 }));
+  root.add(paving(-4.7, 7, FRONT_Z, STATION_Z, 0.9, { color: '#8e8a86', seam: '#7f7b77' }));
   // the worn line people walk, door to door
-  root.add(tileFloor(-2.2, 2.3, -0.3, 0.45, 0.75, { color: '#98948f', seam: '#8a8681', seamW: 0.02, y: 0.004 }));
-  root.add(tileFloor(-2.2, -0.8, 0.45, STATION_Z, 0.75, { color: '#98948f', seam: '#8a8681', seamW: 0.02, y: 0.004 }));
-  root.add(tileFloor(0.9, 2.3, FRONT_Z, -0.3, 0.75, { color: '#98948f', seam: '#8a8681', seamW: 0.02, y: 0.004 }));
-  root.add(tileFloor(-7, 1.2, STATION_Z, 5.2, 1.25));
+  root.add(paving(-2.2, 2.3, -0.3, 0.45, 0.75, { color: '#98948f', seam: '#8a8681', y: 0.004 }));
+  root.add(paving(-2.2, -0.8, 0.45, STATION_Z, 0.75, { color: '#98948f', seam: '#8a8681', y: 0.004 }));
+  root.add(paving(0.9, 2.3, FRONT_Z, -0.3, 0.75, { color: '#98948f', seam: '#8a8681', y: 0.004 }));
+  root.add(paving(-7, 1.2, STATION_Z, 5.2, 1.25, { color: PAL.floor, seam: PAL.floorSeam }));
   // a kerb and grass verge to the west, under the platform roof's edge
   root.add(rbox(1.3, 0.06, 12, '#5f6d58', { x: -5.45, z: STATION_Z - 6, seg: 1, r: 0.01, cast: false }));
 }
@@ -75,7 +75,7 @@ function station(root) {
 
 function headOffice(root) {
   const [x0, x1] = ANNEX;
-  root.add(tileFloor(x0, x1, BACK_Z, FRONT_Z, 0.9, { color: PAL.floor, seam: PAL.floorSeam }));
+  root.add(paving(x0, x1, BACK_Z, FRONT_Z, 0.9, { color: PAL.floor, seam: PAL.floorSeam }));
   // glass front, cut low like every near wall, with the doors open in the middle
   root.add(wall('x', x0 - 0.09, x1 + 0.09, FRONT_Z, 0.5, 0.18, { holes: [[HO_X - 0.85, HO_X + 0.85, 0, 1]] }));
   const door = openDoor();

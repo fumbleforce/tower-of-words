@@ -163,7 +163,7 @@ The first outdoor chunk of the picked island-map-4 layout (Jørgen, 2026-09-29).
 
 Eric walks out of the station, crosses the court under player control, and walks into the lift. He can also walk east along the lane to the fountain plaza and back at any time before the lift. Beyond the court the town goes on as plain background: the road south of the station, grass by the platform, and low-poly building blocks with window rows around head office.
 
-After work he comes up in the same lift and walks home east along the lane. The forecourt and the plaza then take the dorm courtyard's dusk light, and the head-office door and lift have no marker.
+At the end of the B2 conversation the camera releases its close-up before Mio leaves, so Eric can see and reach the lift. After work he comes up in the same lift and walks home east along the lane. The forecourt and the plaza then take the dorm courtyard's dusk light, and the head-office door and lift have no marker.
 
 ### Things
 
@@ -205,7 +205,7 @@ Nobody lives here in this first outdoor chunk. The two from Sales appear inside 
 
 ## Fountain plaza (`plaza`)
 
-The second outdoor chunk of island-map-4, east of the forecourt, in the forecourt's palette, light and camera (looking north). A stone lane crosses the frame west to east along the near edge of a round plaza: in from the forecourt on the left, on toward the dorms on the right. North of the lane, the fountain (a round stone basin with a water-filled bowl on a column) stands in a ring of lighter paving, with a bench either side facing it and two lit bollards where the ring meets the lane. Corner beds with trees close the plaza off to either side, and the canteen, with the map's blue roof muted to the platform roof's blue-grey and three umbrellas over its terrace, stands behind. South of the lane runs a grass verge with low shrub beds (kept low so they never hide Eric), a pavement, then the shop row: seven single-storey units seen as roofs, muted awnings over their lane side and three rooftop signs (パン, くすり, カフェ). Their interiors are not part of day 1. Plain blocks stand around, among them the head office tower back to the west and the first dorm block to the east, where the lane goes on.
+The second outdoor chunk of island-map-4, east of the forecourt, in the forecourt's palette, light and camera (looking north). A stone lane crosses the frame west to east along the near edge of a round plaza: in from the forecourt on the left, on toward the dorms on the right. North of the lane, the fountain (a low, open stone basin with visible water, a smaller bowl on a column and two narrow spills) stands in a ring of lighter paving, with a bench either side facing it and two lit bollards where the ring meets the lane. Coins lie under the basin water despite the small bilingual no-coins sign on its rim. Low kerbs, drain grates and a few repaired paving slabs break up the lane edges; a small bin stands beside the east bench. Corner beds with trees close the plaza off to either side, and the canteen, with the map's blue roof muted to the platform roof's blue-grey and three umbrellas over its terrace, stands behind. South of the lane runs a grass verge with low shrub beds (kept low so they never hide Eric), a pavement, then the shop row: seven single-storey units seen as roofs, muted awnings over their lane side and three rooftop signs (パン, くすり, カフェ). Their interiors are not part of day 1. Plain blocks stand around, among them the head office tower back to the west and the first dorm block to the east, where the lane goes on.
 
 In the morning the plaza is a side trip with no story beat: the goal points back to the head-office lift. After work it is on the walk home, and the east end of the lane goes on to the dorm courtyard.
 
@@ -416,4 +416,4 @@ Played in the evening, after work.
 | Nodes | When | What happens |
 |---|---|---|
 | `home` | Arrive on the walk home | A moment in the room, then the day saves and ends ([`mio-notices`](stories/mio-notices.md)). |
-| `window`, `boxes`, `bed` | Talk to them | One plain line each from Eric; stand-ins until Codex writes them. |
+| `window`, `boxes`, `bed` | Talk to them | Eric comments on the blocked sky, finding his clean shirts and being too tired to get up again. |
