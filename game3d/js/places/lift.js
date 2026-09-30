@@ -5,8 +5,9 @@
 // How a ride goes: Eric walks up, the landing doors and the car doors open, the camera eases in on the car and he
 // walks inside. As he crosses the threshold, the wall in front of the car drops to a low cut (the cutaway the
 // office's near walls use) and the lights outside go down, so the car reads as a lit room with everyone in it.
-// The ride's story steps run with the floor counting on the car's displays; at 5 the doors open onto a lit
-// landing and the Sales pair walk out. At B2 the game changes place: both places show this same car in the dark
+// The car comes up from B1 to meet him (display over the doors, a ding) with the Sales pair aboard. Once it leaves
+// the floor, the place outside goes dark and away (lift-light.js; Jørgen: "The elevator has visibly not moved
+// anywhere before it opens"). The floor counts on the car's displays; at 5 the Sales pair walk out onto a landing. At B2 the game changes place: both places show this same car in the dark
 // from the same camera, so the crossfade between them is invisible. On B2 the lights come up, the doors open, he
 // walks out, the wall rises again behind him and the camera eases back to the floor.
 //
@@ -23,6 +24,8 @@ import { lightPool } from './life.js';
 import { glide, withList } from './lobby.js';
 import { K } from '../scenes/office.js';
 import { clipLiftMaterial, isolateLiftMaterials } from './lift-materials.js';
+import { setDark, setAway } from './lift-light.js';
+import { indicatorMat, copMat } from './lift-displays.js';
 
 // ---------- where the lift is in each place ----------
 // x: the door's centre; zBack: the back face of the wall the doors are in (the car starts here); zFront: just in
@@ -53,9 +56,6 @@ const ZF = -0.09,
 const SILL_Z = 0.125; // the car floor's front edge, where the landing's sill starts
 const CUT = 0.5; // the front wall's height while he's inside (cutaway)
 const RIDE_ELEV = 50; // camera elevation for the ride, the same in both places
-const DARK = 0.4; // how much of a place's own light stays on during the ride (dimmed, not black: QA round 1)
-const DARK_BG = new THREE.Color('#14171d'),
-  BG_K = 0.45; // the background goes this far toward DARK_BG
 // where people stand in the car (x, z in car space), all facing the doors
 const SLOTS = {
   eric: [0, -0.42],
@@ -139,104 +139,6 @@ function clipBox(site, cut) {
   planes[2].constant = -x1;
   planes[3].constant = site.zBack + ZF - T - 0.02;
   planes[4].constant = -(site.zFront + 0.02);
-}
-// ---------- displays ----------
-function drawIndicator(g, W2, H2, floor, dir, moving) {
-  g.fillStyle = '#16181d';
-  g.fillRect(0, 0, W2, H2);
-  g.fillStyle = '#ffb45e';
-  g.textBaseline = 'middle';
-  g.textAlign = 'center';
-  g.font = `700 ${Math.round(H2 * 0.62)}px sans-serif`;
-  g.fillText(floor, W2 * 0.62, H2 / 2 + 2);
-  g.globalAlpha = moving ? 1 : 0.28;
-  g.font = `700 ${Math.round(H2 * 0.42)}px sans-serif`;
-  g.fillText(dir === 'down' ? '▼' : '▲', W2 * 0.24, H2 / 2 + 2);
-  g.globalAlpha = 1;
-}
-function indicatorMat() {
-  const c = document.createElement('canvas');
-  c.width = 192;
-  c.height = 80;
-  const tex = new THREE.CanvasTexture(c);
-  tex.colorSpace = THREE.SRGBColorSpace;
-  const m = new THREE.MeshBasicMaterial({ map: tex, toneMapped: false });
-  m.userData.draw = (floor, dir, moving) => {
-    drawIndicator(c.getContext('2d'), c.width, c.height, floor, dir, moving);
-    tex.needsUpdate = true;
-  };
-  m.userData.draw('1', 'up', false);
-  return m;
-}
-// the button panel: a floor readout at the top, then the floor buttons and open/close; pressed ones lit
-const COP_BTNS = [
-  ['5', '4'],
-  ['3', '2'],
-  ['1', 'B1'],
-  ['B2', ''],
-];
-function copMat() {
-  const c = document.createElement('canvas');
-  c.width = 128;
-  c.height = 384;
-  const tex = new THREE.CanvasTexture(c);
-  tex.colorSpace = THREE.SRGBColorSpace;
-  const m = new THREE.MeshStandardMaterial({
-    map: tex,
-    roughness: 0.4,
-    metalness: 0.3,
-    emissive: new THREE.Color('#ffffff'),
-    emissiveMap: tex,
-    emissiveIntensity: 0.35,
-  });
-  m.userData.draw = (floor, dir, moving, lit) => {
-    const g = c.getContext('2d');
-    g.fillStyle = '#9aa0a8';
-    g.fillRect(0, 0, 128, 384);
-    g.fillStyle = '#8a9098';
-    g.fillRect(6, 6, 116, 372);
-    // readout
-    g.save();
-    g.translate(14, 16);
-    drawIndicator(g, 100, 46, floor, dir, moving);
-    g.restore();
-    COP_BTNS.forEach((row, i) =>
-      row.forEach((lab, j) => {
-        if (!lab) return;
-        const x = 38 + j * 52,
-          y = 104 + i * 58,
-          on = lit.has(lab);
-        g.beginPath();
-        g.arc(x, y, 19, 0, Math.PI * 2);
-        g.fillStyle = on ? '#3a2a18' : '#5d636c';
-        g.fill();
-        g.lineWidth = 4;
-        g.strokeStyle = on ? '#ffb45e' : '#c3c8cf';
-        g.stroke();
-        g.fillStyle = on ? '#ffcf8f' : '#eef0f3';
-        g.font = '700 17px sans-serif';
-        g.textAlign = 'center';
-        g.textBaseline = 'middle';
-        g.fillText(lab, x, y + 1);
-      }),
-    );
-    // open and close
-    for (const [x, s] of [
-      [38, '◀|▶'],
-      [90, '▶|◀'],
-    ]) {
-      g.beginPath();
-      g.arc(x, 342, 19, 0, Math.PI * 2);
-      g.fillStyle = '#5d636c';
-      g.fill();
-      g.fillStyle = '#eef0f3';
-      g.font = '700 11px sans-serif';
-      g.fillText(s, x, 343);
-    }
-    tex.needsUpdate = true;
-  };
-  m.userData.draw('1', 'up', false, new Set());
-  return m;
 }
 let _mirrorTex = null;
 function mirrorMat() {
@@ -411,14 +313,15 @@ function buildCar(site) {
   g.add(fill);
   const pool = lightPool(0, zc, 0.62, { color: '#fff0d8', k: 0.22, sx: 1.05, sz: 1.05, y: 0.026 });
   g.add(pool);
-  // a landing outside, for stops on other floors: lit floor in front of the doors (only while the doors are open there)
+  // a landing outside, for stops on other floors: lit floor in front of the doors (only while the doors are open
+  // there), wide enough for the Sales pair to walk out along it both ways (EXITS) before the dark takes them
   const landing = new THREE.Group();
   const carpet = new THREE.Mesh(
-    new THREE.PlaneGeometry(1.9, 1.15),
+    new THREE.PlaneGeometry(5.4, 1.15),
     new THREE.MeshStandardMaterial({ color: '#7d8698', roughness: 0.95, polygonOffset: true, polygonOffsetFactor: -2 }),
   );
   carpet.rotation.x = -Math.PI / 2;
-  carpet.position.set(0, 0.012, site.zFront - site.zBack + 0.62);
+  carpet.position.set(0, 0.03, site.zFront - site.zBack + 0.62); // over the lobby's runner and guide line
   carpet.receiveShadow = true;
   landing.add(carpet);
   const spill = lightPool(0, site.zFront - site.zBack + 0.5, 0.8, {
@@ -426,7 +329,7 @@ function buildCar(site) {
     k: 0.3,
     sx: 1.2,
     sz: 1.0,
-    y: 0.016,
+    y: 0.034,
   });
   landing.add(spill);
   const landLamp = new THREE.PointLight('#ffe2bd', 0, 3.0, 1.6);
@@ -434,6 +337,17 @@ function buildCar(site) {
   g.add(landLamp); // not in `landing`: a light coming and going changes every shader's light count (a mid-ride recompile)
   landing.visible = false;
   g.add(landing);
+  // at a landing with a tall wall (the lobby), a floor display over the landing doors: it counts the car in
+  let hallInd = null;
+  if (site.wallH > 1.8) {
+    hallInd = indicatorMat();
+    const hz = site.zFront - site.zBack;
+    g.add(box(0.36, 0.14, 0.02, M('#23262c'), 0, 1.6, hz - 0.01, 0.01, false));
+    const p = new THREE.Mesh(new THREE.PlaneGeometry(0.32, 0.11), hallInd);
+    p.position.set(0, 1.67, hz + 0.012);
+    g.add(p);
+    hallInd.userData.meshes = [p, g.children[g.children.length - 2]];
+  }
   // the lid: in the lobby the car sits behind a tall wall; from the lobby's own camera nothing of it should show
   // above the wall, so a lid in the room's background colour covers it until the ride begins
   let cap = null;
@@ -456,6 +370,7 @@ function buildCar(site) {
     leaves,
     front,
     backInd,
+    hallInd,
     cop,
     lamp,
     pool,
@@ -585,6 +500,9 @@ export function attachLift(game, place) {
     cam: place.cam,
     elev0: place.cam ? place.cam.elev : 0,
     dark: 0,
+    away: 0,
+    // the car and its shaft in car space (x from the door's centre, z from the landing wall's back), for setAway
+    box: { half: W / 2 + T + 0.08, back: ZB - T - 0.05, front: SILL_Z + 0.05, top: H, landing: 1.2 },
     cut: 999,
     cap: 1,
     base: null,
@@ -646,6 +564,9 @@ function loop(game) {
       }
       // the displays follow the engine's floor count (hooks.floor in main.js)
       const f = game.liftFloor || L.site.floor;
+      // away once the car leaves this floor, also while it passes back through; a ride stopping here brings it back
+      const up = ride.on && !ride.calling && f !== L.site.floor;
+      if (up || L.away) setAway(L, up ? Math.min(1, L.away + dt / 0.6) : L.away);
       if (f !== ride.floor) {
         if (!ride.moving) ride.dir = FLOORS.indexOf(f) < FLOORS.indexOf(ride.floor) ? 'down' : 'up';
         ride.floor = f;
@@ -656,6 +577,7 @@ function loop(game) {
       if (key !== shown) {
         shown = key;
         c.backInd.userData.draw(f, ride.dir, moving);
+        c.hallInd?.userData.draw(f, ride.dir, moving);
         c.cop.userData.draw(f, ride.dir, moving, ride.lit);
       }
     }
@@ -664,37 +586,6 @@ function loop(game) {
   tick();
 }
 
-// light and background: k 0 = the place as built, 1 = the ride's dim
-function setDark(L, k) {
-  const sc = L.place.scene;
-  if (!L.base) {
-    L.base = [];
-    sc.traverse((o) => {
-      if (o.isLight && !isOurs(L, o)) L.base.push([o, o.intensity]);
-    });
-    L.bg = sc.background ? sc.background.clone() : null;
-  }
-  for (const [o, i] of L.base) o.intensity = i * lerp(1, DARK, k);
-  // the additive light pools on the floors (life.js) are painted light: they dim with the rest
-  if (!L.pools) {
-    L.pools = [];
-    sc.traverse((o) => {
-      if (o.isMesh && o.material && o.material.blending === THREE.AdditiveBlending && !isOurs(L, o))
-        L.pools.push([o.material, o.material.opacity]);
-    });
-  }
-  for (const [m, a] of L.pools) m.opacity = a * lerp(1, DARK, k);
-  if (L.bg) sc.background = L.bg.clone().lerp(DARK_BG, k * BG_K);
-  L.dark = k;
-}
-function isOurs(L, o) {
-  let q = o;
-  while (q) {
-    if (q === L.car.g) return true;
-    q = q.parent;
-  }
-  return false;
-}
 function setCut(L, h) {
   const prev = L.cut;
   L.cut = h;
@@ -704,6 +595,7 @@ function setCut(L, h) {
   // stacked plates; at other floors the car has left this landing anyway). They're open whenever the cut starts.
   const land = L.place.liftLanding;
   if (land) for (const o of land.leaves) o.visible = h >= L.site.wallH;
+  for (const o of L.car.hallInd?.userData.meshes || []) o.visible = h >= L.site.wallH;
   // signs half over the car go as the wall starts down and come back as it starts up
   const down = h < prev ? h < L.site.wallH : h <= CUT + 0.01;
   for (const o of L.hide) {
@@ -914,21 +806,32 @@ async function rideOut(g, L, slot) {
   await g.walkTo(L.site.out[0], L.site.out[1]);
   g.walker.locked = true;
   eric.scripted = true;
-  // the car arrives at 1 with the two from Sales already in it (they came up from the car park)
+  // the car comes up to 1 with the two from Sales already in it (they came up from the car park): the display over
+  // the doors shows it on its way from B1, a ding as it arrives, then the doors
+  setAway(L, 0);
   ride.on = true;
+  ride.calling = true; // the car is on its way to him: the lobby stays
   ride.lit = new Set(['5']);
-  ride.floor = g.liftFloor = L.site.floor;
+  ride.floor = g.liftFloor = 'B1';
   ride.dir = 'up';
+  ride.moving = true;
   ride.pendingOpen = false;
   ride.aboard = new Set(RIDERS.map((d) => d.id));
   for (const rd of L.riders) placeRider(L, rd);
   L.riders[0].r.lookTarget = slotW(L, 'sales2');
   L.riders[1].r.lookTarget = slotW(L, 'sales1');
-  P.hooks.liftOpen && P.hooks.liftOpen();
-  L.car.want = 1;
   shootRide(L);
   elevTo(g, L, RIDE_ELEV, 1.4);
-  await g.wait(700);
+  await g.wait(1100);
+  g.liftFloor = L.site.floor;
+  ride.moving = false;
+  ride.calling = false;
+  sfx('lift');
+  await g.wait(300);
+  sfx('liftdoor');
+  P.hooks.liftOpen && P.hooks.liftOpen();
+  L.car.want = 1;
+  await g.wait(400);
   await doorsOpen(g, L);
   eric.setState('walk');
   await glide(g, eric.root, [L.site.x, L.site.zFront + 0.05], 1.05);
@@ -999,6 +902,7 @@ async function rideIn(g, L, slot) {
   eric.scripted = true;
   g.busyTrip = true;
   const fresh = !ride.on; // Continue from a save: no ride before this; start in the car at B2
+  setAway(L, 0);
   ride.on = true;
   ride.floor = g.liftFloor = 'B2';
   ride.lit.delete('B2');
@@ -1080,6 +984,7 @@ async function rideUp(g, L) {
   await g.walkTo(L.site.out[0], L.site.out[1]);
   g.walker.locked = true;
   eric.scripted = true;
+  setAway(L, 0);
   Object.assign(ride, { on: true, lit: new Set(), dir: 'up', pendingOpen: false, aboard: new Set(), with: [] });
   ride.floor = g.liftFloor = L.site.floor;
   for (const rd of L.riders) {
@@ -1123,6 +1028,7 @@ async function rideHome(g, L) {
   const fresh = !ride.on; // Continue from a save made during the ride
   ride.on = true;
   ride.floor = g.liftFloor = L.site.floor;
+  setAway(L, 0); // the morning's ride left this place dark and away
   ride.lit.delete(L.site.floor);
   for (const rd of L.riders) {
     rd.r.root.visible = false;

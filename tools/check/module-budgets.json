@@ -51,10 +51,10 @@
       "reason": "Existing batching and geometry optimization utilities; preserve rendering behavior during this pass."
     },
     "game3d/js/places/lift.js": {
-      "lines": 1202,
-      "bytes": 43330,
+      "lines": 1108,
+      "bytes": 41291,
       "owner": "codex-tui",
-      "review": "C-0071; 2026-09-30 landing lamp kept in the light count (notes/PERF.md); 2026-09-30 forecourt riders cast no sun shadow (notes/PERF.md, evening draw calls)",
+      "review": "C-0071; 2026-09-30 landing lamp kept in the light count (notes/PERF.md); 2026-09-30 forecourt riders cast no sun shadow (notes/PERF.md, evening draw calls); 2026-09-30 displays and ride light split out (lift-displays.js, lift-light.js; issue #102)",
       "reason": "Existing shared lift geometry, movement and dialogue staging; extract after behavior characterization."
     },
     "game3d/js/places/lobby.js": {

@@ -41,9 +41,11 @@ export async function forecourtPlace(game) {
     office_entrance: {
       ...PLACE_DETAILS.forecourt.things.office_entrance,
       anchor: (v) => v.set(w.officeEntrance[0], 1.3, w.officeEntrance[1]),
-      spot: () => w.officeEntrance,
+      // the head office marker takes him in through the doors and on to the lift, where the ride starts
+      // (Jørgen: "clicking the head office marker just takes me in front of it"); the lobby has nothing else he needs
+      spot: () => w.liftOut,
       keep: 1.6, // the doors and canopy stay clear of the goal's edge arrow (ui/goal-arrow.js)
-      face: () => w.liftOut,
+      face: () => [w.liftSite.x, w.liftSite.zBack],
     },
     lift: {
       ...PLACE_DETAILS.forecourt.things.lift,
