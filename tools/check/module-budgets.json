@@ -93,8 +93,8 @@
       "reason": "Existing primitive prop and material builders; coordinate the look/detail cycle split with visual work."
     },
     "game3d/js/runner.js": {
-      "lines": 473,
-      "bytes": 17882,
+      "lines": 480,
+      "bytes": 17923,
       "owner": "codex-tui",
       "review": "C-0076; 2026-09-30 one line passing a subtitled line's English (`en`) to the dialogue (issue #89)",
       "reason": "Narrative execution, checkpoint replay and dialogue/audio dispatch remain after stage 2c; stage 3 reviews the presentation/audio boundary."

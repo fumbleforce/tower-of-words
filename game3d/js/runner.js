@@ -353,7 +353,14 @@ export class Runner {
     }
     if (voiceKey && s.overheard && !audioKeys.has(voiceKey)) voiceKey = null;
     this.game.setHurry?.(false);
-    const shown = ui.say(sp, text, { voiceKey, overheard: !!s.overheard, clear: s.clear, whoId: who, face: s.face, en: s.en });
+    const shown = ui.say(sp, text, {
+      voiceKey,
+      overheard: !!s.overheard,
+      clear: s.clear,
+      whoId: who,
+      face: s.face,
+      en: s.en,
+    });
     if (s.overheard && window.__test) recordHeard(text, voiceKey);
     await shown;
     return null;
