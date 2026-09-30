@@ -1,0 +1,292 @@
+{
+ "character": "aoi",
+ "ref": "game3d/assets/portraits/aoi-neutral.webp",
+ "face_box_game": [
+  630,
+  810,
+  [
+   222,
+   196,
+   413,
+   389
+  ]
+ ],
+ "ref_face_detected": [
+  222,
+  196,
+  413,
+  389
+ ],
+ "thresholds": {
+  "redrim": [
+   0.02,
+   0.08
+  ],
+  "glasses_cover": [
+   0.87,
+   0.85
+  ],
+  "glasses_worst": [
+   0.7,
+   0.5
+  ],
+  "glasses_dE": [
+   8,
+   15
+  ],
+  "matte_frame": [
+   0.05,
+   0.12
+  ],
+  "matte_holes": [
+   0,
+   3
+  ],
+  "headroom": [
+   0.03,
+   0.01
+  ],
+  "zoom": [
+   0.04,
+   9
+  ],
+  "top": [
+   0.01,
+   9
+  ],
+  "eyes": [
+   0.06,
+   0.12
+  ],
+  "ccip": [
+   0.05,
+   0.09
+  ]
+ },
+ "images": [
+  {
+   "path": "art/candidates/portraits/style-align-1/aoi-base-2001.webp",
+   "kind": "render",
+   "size": [
+    630,
+    810
+   ],
+   "face": [
+    222,
+    193,
+    411,
+    387
+   ],
+   "eyes": [
+    [
+     268.5,
+     291.0
+    ],
+    [
+     356.0,
+     261.0
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0079
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for aoi"
+   },
+   "framing": {
+    "headroom": 0.1,
+    "zoom": 0.995,
+    "top": 0.005,
+    "bottom_short": 0.0,
+    "hair_top_game": 84,
+    "hair_top_ref": 89,
+    "crop": [
+     -2.6,
+     -4.0,
+     630.6,
+     810.2
+    ],
+    "eyes": 0.007,
+    "tilt": 2.1,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.027,
+    "ssim": 0.261
+   },
+   "status": "pass"
+  },
+  {
+   "path": "art/candidates/portraits/style-align-1/aoi-base-2002.webp",
+   "kind": "render",
+   "size": [
+    630,
+    810
+   ],
+   "face": [
+    221,
+    200,
+    408,
+    387
+   ],
+   "eyes": [
+    [
+     268.0,
+     293.0
+    ],
+    [
+     349.5,
+     266.0
+    ]
+   ],
+   "redrim": {
+    "status": "warn",
+    "value": 0.0233
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for aoi"
+   },
+   "framing": {
+    "headroom": 0.104,
+    "zoom": 1.032,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 76,
+    "hair_top_ref": 89,
+    "crop": [
+     6.9,
+     10.1,
+     617.3,
+     794.9
+    ],
+    "eyes": 0.004,
+    "tilt": 2.7,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.027,
+    "ssim": 0.265
+   },
+   "status": "warn"
+  },
+  {
+   "path": "art/candidates/portraits/style-align-1/aoi-ink-2001.webp",
+   "kind": "render",
+   "size": [
+    630,
+    810
+   ],
+   "face": [
+    223,
+    192,
+    411,
+    387
+   ],
+   "eyes": [
+    [
+     268.5,
+     290.5
+    ],
+    [
+     355.0,
+     261.5
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0059
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for aoi"
+   },
+   "framing": {
+    "headroom": 0.1,
+    "zoom": 0.99,
+    "top": 0.007,
+    "bottom_short": 0.003,
+    "hair_top_game": 86,
+    "hair_top_ref": 89,
+    "crop": [
+     -3.8,
+     -6.0,
+     632.7,
+     812.4
+    ],
+    "eyes": 0.01,
+    "tilt": 2.5,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.032,
+    "ssim": 0.283
+   },
+   "status": "pass"
+  },
+  {
+   "path": "art/candidates/portraits/style-align-1/aoi-ink-2002.webp",
+   "kind": "render",
+   "size": [
+    630,
+    810
+   ],
+   "face": [
+    221,
+    201,
+    410,
+    388
+   ],
+   "eyes": [
+    [
+     268.0,
+     293.0
+    ],
+    [
+     349.5,
+     267.5
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.014
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for aoi"
+   },
+   "framing": {
+    "headroom": 0.098,
+    "zoom": 1.032,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 70,
+    "hair_top_ref": 89,
+    "crop": [
+     7.9,
+     11.1,
+     618.3,
+     795.9
+    ],
+    "eyes": 0.003,
+    "tilt": 3.6,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.027,
+    "ssim": 0.24
+   },
+   "status": "pass"
+  }
+ ]
+}

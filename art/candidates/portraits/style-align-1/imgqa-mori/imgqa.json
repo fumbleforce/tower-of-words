@@ -1,0 +1,404 @@
+{
+ "character": "mori",
+ "ref": "game3d/assets/portraits/mori-neutral.webp",
+ "face_box_game": [
+  597,
+  768,
+  [
+   234,
+   171,
+   372,
+   339
+  ]
+ ],
+ "ref_face_detected": [
+  234,
+  171,
+  372,
+  339
+ ],
+ "thresholds": {
+  "redrim": [
+   0.02,
+   0.08
+  ],
+  "glasses_cover": [
+   0.87,
+   0.85
+  ],
+  "glasses_worst": [
+   0.7,
+   0.5
+  ],
+  "glasses_dE": [
+   8,
+   15
+  ],
+  "matte_frame": [
+   0.05,
+   0.12
+  ],
+  "matte_holes": [
+   0,
+   3
+  ],
+  "headroom": [
+   0.03,
+   0.01
+  ],
+  "zoom": [
+   0.04,
+   9
+  ],
+  "top": [
+   0.01,
+   9
+  ],
+  "eyes": [
+   0.06,
+   0.12
+  ],
+  "ccip": [
+   0.05,
+   0.09
+  ]
+ },
+ "images": [
+  {
+   "path": "art/candidates/portraits/style-align-1/mori-base-2001.webp",
+   "kind": "render",
+   "size": [
+    597,
+    768
+   ],
+   "face": [
+    230,
+    160,
+    370,
+    332
+   ],
+   "eyes": [
+    [
+     271.0,
+     226.0
+    ],
+    [
+     330.5,
+     226.0
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0002
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for mori"
+   },
+   "framing": {
+    "headroom": 0.117,
+    "zoom": 0.977,
+    "top": 0.019,
+    "bottom_short": 0.004,
+    "hair_top_game": 102,
+    "hair_top_ref": 97,
+    "crop": [
+     -10.2,
+     -15.1,
+     601.0,
+     771.2
+    ],
+    "eyes": 0.015,
+    "tilt": 0.0,
+    "status": "warn"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.031,
+    "ssim": 0.314
+   },
+   "status": "warn"
+  },
+  {
+   "path": "art/candidates/portraits/style-align-1/mori-base-2002.webp",
+   "kind": "render",
+   "size": [
+    597,
+    768
+   ],
+   "face": [
+    229,
+    168,
+    371,
+    333
+   ],
+   "eyes": [
+    [
+     271.0,
+     228.0
+    ],
+    [
+     331.5,
+     228.0
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0001
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for mori"
+   },
+   "framing": {
+    "headroom": 0.117,
+    "zoom": 1.018,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 91,
+    "hair_top_ref": 97,
+    "crop": [
+     2.4,
+     0.1,
+     588.8,
+     754.3
+    ],
+    "eyes": -0.005,
+    "tilt": 0.0,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.03,
+    "ssim": 0.285
+   },
+   "status": "pass"
+  },
+  {
+   "path": "art/candidates/portraits/style-align-1/mori-ink-2001.webp",
+   "kind": "render",
+   "size": [
+    597,
+    768
+   ],
+   "face": [
+    230,
+    163,
+    370,
+    333
+   ],
+   "eyes": [
+    [
+     270.5,
+     226.5
+    ],
+    [
+     331.0,
+     226.5
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0003
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for mori"
+   },
+   "framing": {
+    "headroom": 0.116,
+    "zoom": 0.988,
+    "top": 0.013,
+    "bottom_short": 0.0,
+    "hair_top_game": 97,
+    "hair_top_ref": 97,
+    "crop": [
+     -6.6,
+     -10.0,
+     597.5,
+     767.1
+    ],
+    "eyes": 0.004,
+    "tilt": 0.0,
+    "status": "warn"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.036,
+    "ssim": 0.365
+   },
+   "status": "warn"
+  },
+  {
+   "path": "art/candidates/portraits/style-align-1/mori-ink-2002.webp",
+   "kind": "render",
+   "size": [
+    597,
+    768
+   ],
+   "face": [
+    229,
+    167,
+    372,
+    333
+   ],
+   "eyes": [
+    [
+     269.5,
+     228.0
+    ],
+    [
+     332.5,
+     228.5
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0001
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for mori"
+   },
+   "framing": {
+    "headroom": 0.117,
+    "zoom": 1.012,
+    "top": 0.003,
+    "bottom_short": 0.0,
+    "hair_top_game": 93,
+    "hair_top_ref": 97,
+    "crop": [
+     1.1,
+     -2.0,
+     591.0,
+     756.9
+    ],
+    "eyes": -0.0,
+    "tilt": 0.5,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.045,
+    "ssim": 0.31
+   },
+   "status": "pass"
+  },
+  {
+   "path": "art/candidates/portraits/style-align-1/mori-ink75-2001.webp",
+   "kind": "render",
+   "size": [
+    597,
+    768
+   ],
+   "face": [
+    230,
+    158,
+    372,
+    329
+   ],
+   "eyes": [
+    [
+     271.5,
+     216.0
+    ],
+    [
+     332.0,
+     217.5
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.002
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for mori"
+   },
+   "framing": {
+    "headroom": 0.107,
+    "zoom": 0.982,
+    "top": 0.021,
+    "bottom_short": 0.0,
+    "hair_top_game": 96,
+    "hair_top_ref": 97,
+    "crop": [
+     -7.4,
+     -16.1,
+     600.2,
+     765.7
+    ],
+    "eyes": -0.025,
+    "tilt": 1.4,
+    "status": "warn"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.033,
+    "ssim": 0.322
+   },
+   "status": "warn"
+  },
+  {
+   "path": "art/candidates/portraits/style-align-1/mori-ink75-2002.webp",
+   "kind": "render",
+   "size": [
+    597,
+    768
+   ],
+   "face": [
+    228,
+    170,
+    371,
+    334
+   ],
+   "eyes": [
+    [
+     268.5,
+     228.5
+    ],
+    [
+     331.5,
+     228.5
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for mori"
+   },
+   "framing": {
+    "headroom": 0.107,
+    "zoom": 1.024,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 80,
+    "hair_top_ref": 97,
+    "crop": [
+     3.7,
+     3.1,
+     586.5,
+     752.8
+    ],
+    "eyes": -0.012,
+    "tilt": 0.0,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.024,
+    "ssim": 0.247
+   },
+   "status": "pass"
+  }
+ ]
+}

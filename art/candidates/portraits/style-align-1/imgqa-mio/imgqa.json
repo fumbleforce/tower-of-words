@@ -1,0 +1,482 @@
+{
+ "character": "mio",
+ "ref": "game3d/assets/portraits/mio-neutral.webp",
+ "face_box_game": [
+  597,
+  768,
+  [
+   192,
+   214,
+   361,
+   383
+  ]
+ ],
+ "ref_face_detected": [
+  192,
+  214,
+  361,
+  383
+ ],
+ "thresholds": {
+  "redrim": [
+   0.02,
+   0.08
+  ],
+  "glasses_cover": [
+   0.87,
+   0.85
+  ],
+  "glasses_worst": [
+   0.7,
+   0.5
+  ],
+  "glasses_dE": [
+   8,
+   15
+  ],
+  "matte_frame": [
+   0.05,
+   0.12
+  ],
+  "matte_holes": [
+   0,
+   3
+  ],
+  "headroom": [
+   0.03,
+   0.01
+  ],
+  "zoom": [
+   0.04,
+   9
+  ],
+  "top": [
+   0.01,
+   9
+  ],
+  "eyes": [
+   0.06,
+   0.12
+  ],
+  "ccip": [
+   0.05,
+   0.09
+  ]
+ },
+ "images": [
+  {
+   "path": "art/candidates/portraits/style-align-1/mio-m35-2001.webp",
+   "kind": "render",
+   "size": [
+    597,
+    768
+   ],
+   "face": [
+    193,
+    214,
+    363,
+    381
+   ],
+   "eyes": [
+    [
+     230.5,
+     288.5
+    ],
+    [
+     304.5,
+     271.5
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0
+   },
+   "glasses": {
+    "status": "pass",
+    "cover": 0.993,
+    "worst": 0.972,
+    "worst_part": "her right lens bottom",
+    "dE": 0.5,
+    "parts": {
+     "her right lens top": 1.0,
+     "her right lens bottom": 0.972,
+     "her right lens outer": 0.972,
+     "her right lens inner": 1.0,
+     "her left lens top": 1.0,
+     "her left lens bottom": 1.0,
+     "her left lens outer": 1.0,
+     "her left lens inner": 1.0
+    },
+    "flipped": false
+   },
+   "framing": {
+    "headroom": 0.125,
+    "zoom": 1.012,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 94,
+    "hair_top_ref": 96,
+    "crop": [
+     4.8,
+     2.5,
+     594.7,
+     761.4
+    ],
+    "eyes": 0.003,
+    "tilt": -0.4,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.013,
+    "ssim": 0.387
+   },
+   "status": "pass"
+  },
+  {
+   "path": "art/candidates/portraits/style-align-1/mio-m45-2001.webp",
+   "kind": "render",
+   "size": [
+    597,
+    768
+   ],
+   "face": [
+    193,
+    212,
+    362,
+    382
+   ],
+   "eyes": [
+    [
+     230.5,
+     287.5
+    ],
+    [
+     304.5,
+     272.0
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0009
+   },
+   "glasses": {
+    "status": "pass",
+    "cover": 0.997,
+    "worst": 0.988,
+    "worst_part": "her right lens outer",
+    "dE": 0.3,
+    "parts": {
+     "her right lens top": 1.0,
+     "her right lens bottom": 0.991,
+     "her right lens outer": 0.988,
+     "her right lens inner": 1.0,
+     "her left lens top": 1.0,
+     "her left lens bottom": 1.0,
+     "her left lens outer": 1.0,
+     "her left lens inner": 1.0
+    },
+    "flipped": false
+   },
+   "framing": {
+    "headroom": 0.124,
+    "zoom": 0.994,
+    "top": 0.004,
+    "bottom_short": 0.002,
+    "hair_top_game": 97,
+    "hair_top_ref": 96,
+    "crop": [
+     -0.6,
+     -3.3,
+     599.9,
+     769.3
+    ],
+    "eyes": 0.007,
+    "tilt": 0.7,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.026,
+    "ssim": 0.432
+   },
+   "status": "pass"
+  },
+  {
+   "path": "art/candidates/portraits/style-align-1/mio-m45s-2001.webp",
+   "kind": "render",
+   "size": [
+    597,
+    768
+   ],
+   "face": [
+    193,
+    212,
+    362,
+    382
+   ],
+   "eyes": [
+    [
+     230.5,
+     288.0
+    ],
+    [
+     304.5,
+     272.0
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0011
+   },
+   "glasses": {
+    "status": "pass",
+    "cover": 0.997,
+    "worst": 0.988,
+    "worst_part": "her right lens outer",
+    "dE": 0.3,
+    "parts": {
+     "her right lens top": 1.0,
+     "her right lens bottom": 0.991,
+     "her right lens outer": 0.988,
+     "her right lens inner": 1.0,
+     "her left lens top": 1.0,
+     "her left lens bottom": 1.0,
+     "her left lens outer": 1.0,
+     "her left lens inner": 1.0
+    },
+    "flipped": false
+   },
+   "framing": {
+    "headroom": 0.125,
+    "zoom": 0.994,
+    "top": 0.004,
+    "bottom_short": 0.002,
+    "hair_top_game": 98,
+    "hair_top_ref": 96,
+    "crop": [
+     -0.6,
+     -3.3,
+     599.9,
+     769.3
+    ],
+    "eyes": 0.008,
+    "tilt": 0.3,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.027,
+    "ssim": 0.432
+   },
+   "status": "pass"
+  },
+  {
+   "path": "art/candidates/portraits/style-align-1/mio-m35-2002.webp",
+   "kind": "render",
+   "size": [
+    597,
+    768
+   ],
+   "face": [
+    192,
+    215,
+    362,
+    382
+   ],
+   "eyes": [
+    [
+     230.0,
+     287.5
+    ],
+    [
+     304.5,
+     271.5
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0
+   },
+   "glasses": {
+    "status": "pass",
+    "cover": 0.999,
+    "worst": 0.981,
+    "worst_part": "her right lens bottom",
+    "dE": 0.4,
+    "parts": {
+     "her right lens top": 1.0,
+     "her right lens bottom": 0.981,
+     "her right lens outer": 1.0,
+     "her right lens inner": 1.0,
+     "her left lens top": 1.0,
+     "her left lens bottom": 1.0,
+     "her left lens outer": 1.0,
+     "her left lens inner": 1.0
+    },
+    "flipped": false
+   },
+   "framing": {
+    "headroom": 0.126,
+    "zoom": 1.012,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 94,
+    "hair_top_ref": 96,
+    "crop": [
+     3.8,
+     3.5,
+     593.7,
+     762.4
+    ],
+    "eyes": -0.006,
+    "tilt": 0.4,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.015,
+    "ssim": 0.543
+   },
+   "status": "pass"
+  },
+  {
+   "path": "art/candidates/portraits/style-align-1/mio-m45-2002.webp",
+   "kind": "render",
+   "size": [
+    597,
+    768
+   ],
+   "face": [
+    193,
+    214,
+    362,
+    383
+   ],
+   "eyes": [
+    [
+     230.0,
+     287.5
+    ],
+    [
+     304.5,
+     271.5
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0
+   },
+   "glasses": {
+    "status": "pass",
+    "cover": 1.0,
+    "worst": 1.0,
+    "worst_part": "her right lens top",
+    "dE": 0.8,
+    "parts": {
+     "her right lens top": 1.0,
+     "her right lens bottom": 1.0,
+     "her right lens outer": 1.0,
+     "her right lens inner": 1.0,
+     "her left lens top": 1.0,
+     "her left lens bottom": 1.0,
+     "her left lens outer": 1.0,
+     "her left lens inner": 1.0
+    },
+    "flipped": false
+   },
+   "framing": {
+    "headroom": 0.122,
+    "zoom": 1.0,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 94,
+    "hair_top_ref": 96,
+    "crop": [
+     1.0,
+     0.0,
+     598.0,
+     768.0
+    ],
+    "eyes": -0.004,
+    "tilt": 0.4,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.025,
+    "ssim": 0.538
+   },
+   "status": "pass"
+  },
+  {
+   "path": "art/candidates/portraits/style-align-1/mio-m45s-2002.webp",
+   "kind": "render",
+   "size": [
+    597,
+    768
+   ],
+   "face": [
+    192,
+    214,
+    362,
+    383
+   ],
+   "eyes": [
+    [
+     230.0,
+     287.5
+    ],
+    [
+     304.5,
+     271.5
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0
+   },
+   "glasses": {
+    "status": "pass",
+    "cover": 1.0,
+    "worst": 1.0,
+    "worst_part": "her right lens top",
+    "dE": 0.6,
+    "parts": {
+     "her right lens top": 1.0,
+     "her right lens bottom": 1.0,
+     "her right lens outer": 1.0,
+     "her right lens inner": 1.0,
+     "her left lens top": 1.0,
+     "her left lens bottom": 1.0,
+     "her left lens outer": 1.0,
+     "her left lens inner": 1.0
+    },
+    "flipped": false
+   },
+   "framing": {
+    "headroom": 0.125,
+    "zoom": 1.0,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 96,
+    "hair_top_ref": 96,
+    "crop": [
+     0.5,
+     0.0,
+     597.5,
+     768.0
+    ],
+    "eyes": -0.004,
+    "tilt": 0.4,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.023,
+    "ssim": 0.535
+   },
+   "status": "pass"
+  }
+ ]
+}

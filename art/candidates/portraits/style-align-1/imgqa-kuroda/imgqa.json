@@ -1,0 +1,292 @@
+{
+ "character": "kuroda",
+ "ref": "game3d/assets/portraits/kuroda-neutral.webp",
+ "face_box_game": [
+  597,
+  768,
+  [
+   240,
+   154,
+   364,
+   313
+  ]
+ ],
+ "ref_face_detected": [
+  240,
+  154,
+  364,
+  313
+ ],
+ "thresholds": {
+  "redrim": [
+   0.02,
+   0.08
+  ],
+  "glasses_cover": [
+   0.87,
+   0.85
+  ],
+  "glasses_worst": [
+   0.7,
+   0.5
+  ],
+  "glasses_dE": [
+   8,
+   15
+  ],
+  "matte_frame": [
+   0.05,
+   0.12
+  ],
+  "matte_holes": [
+   0,
+   3
+  ],
+  "headroom": [
+   0.03,
+   0.01
+  ],
+  "zoom": [
+   0.04,
+   9
+  ],
+  "top": [
+   0.01,
+   9
+  ],
+  "eyes": [
+   0.06,
+   0.12
+  ],
+  "ccip": [
+   0.05,
+   0.09
+  ]
+ },
+ "images": [
+  {
+   "path": "art/candidates/portraits/style-align-1/kuroda-base-2001.webp",
+   "kind": "render",
+   "size": [
+    597,
+    768
+   ],
+   "face": [
+    234,
+    170,
+    363,
+    330
+   ],
+   "eyes": [
+    [
+     271.0,
+     226.0
+    ],
+    [
+     325.5,
+     224.0
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0009
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kuroda"
+   },
+   "framing": {
+    "headroom": 0.152,
+    "zoom": 0.994,
+    "top": 0.0,
+    "bottom_short": 0.026,
+    "hair_top_game": 101,
+    "hair_top_ref": 107,
+    "crop": [
+     -5.4,
+     15.0,
+     595.4,
+     787.9
+    ],
+    "eyes": 0.026,
+    "tilt": -1.0,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.044,
+    "ssim": 0.448
+   },
+   "status": "pass"
+  },
+  {
+   "path": "art/candidates/portraits/style-align-1/kuroda-base-2002.webp",
+   "kind": "render",
+   "size": [
+    597,
+    768
+   ],
+   "face": [
+    235,
+    165,
+    365,
+    333
+   ],
+   "eyes": [
+    [
+     271.5,
+     226.0
+    ],
+    [
+     328.0,
+     224.5
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kuroda"
+   },
+   "framing": {
+    "headroom": 0.148,
+    "zoom": 0.946,
+    "top": 0.0,
+    "bottom_short": 0.056,
+    "hair_top_game": 105,
+    "hair_top_ref": 107,
+    "crop": [
+     -19.1,
+     2.3,
+     611.7,
+     813.8
+    ],
+    "eyes": 0.041,
+    "tilt": -0.4,
+    "status": "warn"
+   },
+   "drift": {
+    "status": "warn",
+    "ccip": 0.071,
+    "ssim": 0.352
+   },
+   "status": "warn"
+  },
+  {
+   "path": "art/candidates/portraits/style-align-1/kuroda-ink-2001.webp",
+   "kind": "render",
+   "size": [
+    597,
+    768
+   ],
+   "face": [
+    234,
+    176,
+    363,
+    329
+   ],
+   "eyes": [
+    [
+     271.0,
+     226.0
+    ],
+    [
+     325.5,
+     223.5
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0007
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kuroda"
+   },
+   "framing": {
+    "headroom": 0.154,
+    "zoom": 1.039,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 93,
+    "hair_top_ref": 107,
+    "crop": [
+     7.9,
+     27.8,
+     582.4,
+     766.8
+    ],
+    "eyes": 0.001,
+    "tilt": -1.5,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.023,
+    "ssim": 0.33
+   },
+   "status": "pass"
+  },
+  {
+   "path": "art/candidates/portraits/style-align-1/kuroda-ink-2002.webp",
+   "kind": "render",
+   "size": [
+    597,
+    768
+   ],
+   "face": [
+    235,
+    166,
+    365,
+    333
+   ],
+   "eyes": [
+    [
+     271.0,
+     226.0
+    ],
+    [
+     328.0,
+     224.5
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kuroda"
+   },
+   "framing": {
+    "headroom": 0.137,
+    "zoom": 0.952,
+    "top": 0.0,
+    "bottom_short": 0.053,
+    "hair_top_game": 95,
+    "hair_top_ref": 107,
+    "crop": [
+     -17.2,
+     4.3,
+     609.8,
+     810.9
+    ],
+    "eyes": 0.037,
+    "tilt": -0.4,
+    "status": "warn"
+   },
+   "drift": {
+    "status": "warn",
+    "ccip": 0.062,
+    "ssim": 0.363
+   },
+   "status": "warn"
+  }
+ ]
+}

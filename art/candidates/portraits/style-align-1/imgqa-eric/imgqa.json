@@ -1,0 +1,482 @@
+{
+ "character": "eric",
+ "ref": "game3d/assets/portraits/eric-neutral.webp",
+ "face_box_game": [
+  648,
+  768,
+  [
+   112,
+   208,
+   348,
+   399
+  ]
+ ],
+ "ref_face_detected": [
+  114,
+  162,
+  355,
+  403
+ ],
+ "thresholds": {
+  "redrim": [
+   0.02,
+   0.08
+  ],
+  "glasses_cover": [
+   0.87,
+   0.85
+  ],
+  "glasses_worst": [
+   0.7,
+   0.5
+  ],
+  "glasses_dE": [
+   8,
+   15
+  ],
+  "matte_frame": [
+   0.05,
+   0.12
+  ],
+  "matte_holes": [
+   0,
+   3
+  ],
+  "headroom": [
+   0.03,
+   0.01
+  ],
+  "zoom": [
+   0.04,
+   9
+  ],
+  "top": [
+   0.01,
+   9
+  ],
+  "eyes": [
+   0.06,
+   0.12
+  ],
+  "ccip": [
+   0.05,
+   0.09
+  ]
+ },
+ "images": [
+  {
+   "path": "art/candidates/portraits/style-align-1/eric-base-2001.webp",
+   "kind": "render",
+   "size": [
+    648,
+    768
+   ],
+   "face": [
+    116,
+    171,
+    342,
+    395
+   ],
+   "eyes": [
+    [
+     166.0,
+     249.0
+    ],
+    [
+     243.0,
+     228.5
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0
+   },
+   "glasses": {
+    "status": "fail",
+    "cover": 1.0,
+    "worst": 1.0,
+    "worst_part": "her right lens top",
+    "dE": 38.3,
+    "parts": {
+     "her right lens top": 1.0,
+     "her right lens bottom": 1.0,
+     "her right lens outer": 1.0,
+     "her right lens inner": 1.0,
+     "her left lens top": 1.0,
+     "her left lens bottom": 1.0,
+     "her left lens outer": 1.0,
+     "her left lens inner": 1.0
+    },
+    "flipped": false
+   },
+   "framing": {
+    "headroom": 0.066,
+    "zoom": 1.076,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 32,
+    "hair_top_ref": 57,
+    "crop": [
+     11.0,
+     20.4,
+     613.3,
+     734.3
+    ],
+    "eyes": -0.015,
+    "tilt": -0.1,
+    "status": "warn"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.01,
+    "ssim": 0.311
+   },
+   "status": "fail"
+  },
+  {
+   "path": "art/candidates/portraits/style-align-1/eric-base-2002.webp",
+   "kind": "render",
+   "size": [
+    648,
+    768
+   ],
+   "face": [
+    117,
+    169,
+    342,
+    392
+   ],
+   "eyes": [
+    [
+     166.0,
+     249.5
+    ],
+    [
+     244.5,
+     228.5
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0
+   },
+   "glasses": {
+    "status": "fail",
+    "cover": 1.0,
+    "worst": 1.0,
+    "worst_part": "her right lens top",
+    "dE": 39.1,
+    "parts": {
+     "her right lens top": 1.0,
+     "her right lens bottom": 1.0,
+     "her right lens outer": 1.0,
+     "her right lens inner": 1.0,
+     "her left lens top": 1.0,
+     "her left lens bottom": 1.0,
+     "her left lens outer": 1.0,
+     "her left lens inner": 1.0
+    },
+    "flipped": false
+   },
+   "framing": {
+    "headroom": 0.065,
+    "zoom": 1.081,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 33,
+    "hair_top_ref": 57,
+    "crop": [
+     12.5,
+     19.1,
+     612.1,
+     729.7
+    ],
+    "eyes": -0.004,
+    "tilt": -0.2,
+    "status": "warn"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.011,
+    "ssim": 0.306
+   },
+   "status": "fail"
+  },
+  {
+   "path": "art/candidates/portraits/style-align-1/eric-ink-2001.webp",
+   "kind": "render",
+   "size": [
+    648,
+    768
+   ],
+   "face": [
+    117,
+    171,
+    341,
+    395
+   ],
+   "eyes": [
+    [
+     166.0,
+     248.5
+    ],
+    [
+     243.0,
+     229.0
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0
+   },
+   "glasses": {
+    "status": "fail",
+    "cover": 1.0,
+    "worst": 1.0,
+    "worst_part": "her right lens top",
+    "dE": 38.6,
+    "parts": {
+     "her right lens top": 1.0,
+     "her right lens bottom": 1.0,
+     "her right lens outer": 1.0,
+     "her right lens inner": 1.0,
+     "her left lens top": 1.0,
+     "her left lens bottom": 1.0,
+     "her left lens outer": 1.0,
+     "her left lens inner": 1.0
+    },
+    "flipped": false
+   },
+   "framing": {
+    "headroom": 0.066,
+    "zoom": 1.076,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 32,
+    "hair_top_ref": 57,
+    "crop": [
+     11.0,
+     20.4,
+     613.3,
+     734.3
+    ],
+    "eyes": -0.015,
+    "tilt": 0.6,
+    "status": "warn"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.012,
+    "ssim": 0.297
+   },
+   "status": "fail"
+  },
+  {
+   "path": "art/candidates/portraits/style-align-1/eric-ink-2002.webp",
+   "kind": "render",
+   "size": [
+    648,
+    768
+   ],
+   "face": [
+    115,
+    168,
+    345,
+    393
+   ],
+   "eyes": [
+    [
+     166.0,
+     249.0
+    ],
+    [
+     244.5,
+     228.5
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0
+   },
+   "glasses": {
+    "status": "fail",
+    "cover": 1.0,
+    "worst": 1.0,
+    "worst_part": "her right lens top",
+    "dE": 39.1,
+    "parts": {
+     "her right lens top": 1.0,
+     "her right lens bottom": 1.0,
+     "her right lens outer": 1.0,
+     "her right lens inner": 1.0,
+     "her left lens top": 1.0,
+     "her left lens bottom": 1.0,
+     "her left lens outer": 1.0,
+     "her left lens inner": 1.0
+    },
+    "flipped": false
+   },
+   "framing": {
+    "headroom": 0.066,
+    "zoom": 1.071,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 36,
+    "hair_top_ref": 57,
+    "crop": [
+     11.1,
+     16.8,
+     616.0,
+     733.8
+    ],
+    "eyes": -0.003,
+    "tilt": 0.2,
+    "status": "warn"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.011,
+    "ssim": 0.342
+   },
+   "status": "fail"
+  },
+  {
+   "path": "art/candidates/portraits/style-align-1/eric-ink75-2001.webp",
+   "kind": "render",
+   "size": [
+    648,
+    768
+   ],
+   "face": [
+    123,
+    163,
+    345,
+    395
+   ],
+   "eyes": [
+    [
+     167.0,
+     246.0
+    ],
+    [
+     242.5,
+     229.5
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0
+   },
+   "glasses": {
+    "status": "fail",
+    "cover": 1.0,
+    "worst": 1.0,
+    "worst_part": "her right lens top",
+    "dE": 36.1,
+    "parts": {
+     "her right lens top": 1.0,
+     "her right lens bottom": 1.0,
+     "her right lens outer": 1.0,
+     "her right lens inner": 1.0,
+     "her left lens top": 1.0,
+     "her left lens bottom": 1.0,
+     "her left lens outer": 1.0,
+     "her left lens inner": 1.0
+    },
+    "flipped": false
+   },
+   "framing": {
+    "headroom": 0.066,
+    "zoom": 1.039,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 45,
+    "hair_top_ref": 57,
+    "crop": [
+     8.3,
+     7.0,
+     632.1,
+     746.4
+    ],
+    "eyes": 0.005,
+    "tilt": 2.5,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.044,
+    "ssim": 0.416
+   },
+   "status": "fail"
+  },
+  {
+   "path": "art/candidates/portraits/style-align-1/eric-ink75-2002.webp",
+   "kind": "render",
+   "size": [
+    648,
+    768
+   ],
+   "face": [
+    119,
+    160,
+    349,
+    392
+   ],
+   "eyes": [
+    [
+     170.5,
+     251.5
+    ],
+    [
+     250.0,
+     227.0
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0001
+   },
+   "glasses": {
+    "status": "fail",
+    "cover": 1.0,
+    "worst": 1.0,
+    "worst_part": "her right lens top",
+    "dE": 40.6,
+    "parts": {
+     "her right lens top": 1.0,
+     "her right lens bottom": 1.0,
+     "her right lens outer": 1.0,
+     "her right lens inner": 1.0,
+     "her left lens top": 1.0,
+     "her left lens bottom": 1.0,
+     "her left lens outer": 1.0,
+     "her left lens inner": 1.0
+    },
+    "flipped": false
+   },
+   "framing": {
+    "headroom": 0.055,
+    "zoom": 1.039,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 39,
+    "hair_top_ref": 57,
+    "crop": [
+     8.3,
+     4.0,
+     632.1,
+     743.4
+    ],
+    "eyes": 0.024,
+    "tilt": -2.3,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "warn",
+    "ccip": 0.065,
+    "ssim": 0.275
+   },
+   "status": "fail"
+  }
+ ]
+}
