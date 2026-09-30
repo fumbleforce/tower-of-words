@@ -167,18 +167,18 @@ game3d/tools/perf/budgets.json (the baseline). The overlay itself is described i
   1366 860` and `... 390 844` rewrite that layout's entry for the GL the run got. Only a passing run writes it.
   Commit budgets.json with the change and say why in the message.
 
-Baseline (build 0930-1137 on ee2d125 plus the phone draw-call work below; fast test, q0, GL=gpu; draw-call pass on
-every place but Eric's room). Median frame 16.7 ms everywhere (vsync), 1% low 16.8 ms everywhere (the desktop plaza
-read 133 ms once with two tests on the GPU and was set back to 16.8).
+Baseline (fa26043, the forecourt on the outdoor kit, plus the phone draw-call work below; fast test, q0, GL=gpu;
+draw-call pass on every place but Eric's room). Median frame 16.7 ms everywhere (vsync), 1% low 16.8 ms everywhere
+(the desktop dorm courtyard read 150 ms once with two tests on the GPU and was set back to 16.8).
 
 | place | desktop calls | desktop tris | phone calls | phone tris |
 |---|--:|--:|--:|--:|
-| train      | 246 | 158k | 222 | 144k |
-| gate       | 260 | 136k | 187 | 122k |
-| forecourt  | 146 | 117k | 125 | 104k |
+| train      | 230 | 158k | 230 | 144k |
+| gate       | 245 | 136k | 187 | 123k |
+| forecourt  | 142 | 163k | 118 | 135k |
 | office     | 450 | 530k | 216 | 264k |
-| plaza      |  55 | 103k |  50 | 103k |
-| dorm_court |  54 |  49k |  44 |  48k |
+| plaza      |  54 |  95k |  48 |  92k |
+| dorm_court |  54 |  48k |  44 |  48k |
 | dorms      | 149 |  19k | 149 |  19k |
 
 Every place is inside the phone budget (250 calls, 300k triangles). The previous baselines: 0930-0748 (d2c8515) had
@@ -188,8 +188,8 @@ train 851/680, gate 1,157/731, office 918/590 calls (desktop/phone), office 436k
 ## Phone draw calls (2026-09-30, review office-perf)
 
 Jørgen: "Fix now, lighter look on phone allowed; low priority but should be done". Phone q0 in the fast test, before
-(d2c8515) → after: train 680 → 222 calls, gate 731 → 187, office 590 → 216; triangles 133k → 144k, 92k → 122k,
-436k → 264k. Desktop keeps its look and got the same batching: train 851 → 246, gate 1,157 → 260, office 918 → 450.
+(d2c8515) → after: train 680 → 230 calls, gate 731 → 187, office 590 → 216; triangles 133k → 144k, 92k → 123k,
+436k → 264k. Desktop keeps its look and got the same batching: train 851 → 230, gate 1,157 → 245, office 918 → 450.
 Stills before/after at both sizes (phone: train and gate unchanged, the office's furniture without sun shadows; desktop
 unchanged; close-ups of the straps and the rack lights): game3d/shots/phone-perf/.
 
