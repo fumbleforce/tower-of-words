@@ -1,4 +1,4 @@
-import { rigOf, bodies, BODY, CORNER, turnToward, angDiff, BRAKE, ACCEL, TURN } from './shared.js';
+import { rigOf, bodies, BODY, CORNER, turnToward, angDiff, BRAKE, ACCEL, TURN, FRAME_MAX, STEP_MAX } from './shared.js';
 import { standOff } from './targets.js';
 import { freeNear, reachableNear, clearOf, pathAround } from './navigation.js';
 import { spaceFrom, isPassing, slideStep, isHard, press, followSpeed } from './crowd.js';
@@ -18,6 +18,7 @@ export function walkRig(
   const rig = rigOrObj && rigOrObj.root ? rigOrObj : rigOf(game, rigOrObj);
   const obj = rig ? rig.root : rigOrObj;
   const walkToken = (obj.userData.walkTok = (obj.userData.walkTok || 0) + 1);
+  obj.userData.walkVel = null;
   const parent = obj.parent;
   const P = game.place,
     nav = P && obj.parent === P.space ? P.nav : null;
@@ -69,6 +70,7 @@ export function walkRig(
   return new Promise((res) => {
     let last = performance.now();
     const done = () => {
+      obj.userData.walkVel = null;
       // end clear of everyone (someone may have stopped where she was heading): a small settling step if needed
       if (avoid && nav) {
         const q = obj.position,
@@ -92,27 +94,8 @@ export function walkRig(
       if (player && game.walker) game.walker.sync?.();
       res();
     };
-    const tick = () => {
-      if (obj.userData.walkTok !== walkToken) {
-        res();
-        return;
-      }
-      if (obj.parent !== parent || game.place !== P) {
-        if (rig) {
-          rig._walk = false;
-          rig._noAvoid = false;
-        }
-        res();
-        return;
-      }
-      const now = performance.now();
-      let dt = Math.min(0.05, (now - last) / 1000) * (game.timeScale || 1);
-      last = now;
-      if (game.paused) dt = 0;
-      if (!obj.parent && dt > 0) {
-        done();
-        return;
-      }
+    // one step of the walk (dt game seconds); true when it has ended
+    const advance = (dt) => {
       const p = obj.position;
       while (
         path.length > 1 &&
@@ -132,7 +115,7 @@ export function walkRig(
         p.z = tz;
         if (settle) obj.rotation.y = yaw;
         done();
-        return;
+        return true;
       }
       const head = Math.atan2(dx, dz);
       yaw = turnToward(yaw, head, dt);
@@ -223,6 +206,7 @@ export function walkRig(
           press(game, pst, obj, blockedBy, Math.hypot(nx - p.x, nz - p.z), Math.max(step, 0.2 * speed * dt), dt, 1.0);
       }
       const moved = Math.hypot(nx - p.x, nz - p.z);
+      if (dt > 0) obj.userData.walkVel = [(nx - p.x) / dt, (nz - p.z) / dt]; // the pace a follower matches (followSpeed)
       p.x = nx;
       p.z = nz;
       obj.rotation.y = yaw;
@@ -232,7 +216,7 @@ export function walkRig(
         stall = moved < 0.0015 && !wait ? stall + dt : 0;
         if (stall > 1.5 || age > limit) {
           done();
-          return;
+          return true;
         } // stuck behind something: end where it is rather than hang the scene
         if (rig) {
           const walking = moved / dt > 0.05 || Math.abs(angDiff(head, yaw)) > 0.5;
@@ -240,6 +224,37 @@ export function walkRig(
           rig.setGait?.(walking ? Math.max(moved / dt, 0.3) / sc : null);
         }
       }
+      return false;
+    };
+    const tick = () => {
+      if (obj.userData.walkTok !== walkToken) {
+        res();
+        return;
+      }
+      if (obj.parent !== parent || game.place !== P) {
+        obj.userData.walkVel = null;
+        if (rig) {
+          rig._walk = false;
+          rig._noAvoid = false;
+        }
+        res();
+        return;
+      }
+      // the game loop's clock (main.js frame): as much game time as a frame covers, in steps no longer than the loop's,
+      // so a walk keeps pace with everyone else and its following and avoiding stay steady on a slow frame
+      const now = performance.now();
+      const dt = game.paused ? 0 : Math.min(FRAME_MAX, (now - last) / 1000) * (game.timeScale || 1);
+      last = now;
+      if (!obj.parent && dt > 0) {
+        done();
+        return;
+      }
+      let left = dt;
+      do {
+        const s = Math.min(STEP_MAX, left);
+        left -= s;
+        if (advance(s)) return;
+      } while (left > 1e-6);
       requestAnimationFrame(tick);
     };
     tick();
