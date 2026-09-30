@@ -3,9 +3,19 @@
 // rows of two-storey shops facing each other under one arcade roof. Everything is merged per material; the lit
 // glass is its own material so the evening can turn it on.
 import * as THREE from 'three';
+import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
 import { PAL, mat, textTexture, plane, JP_FONT } from '../props.js';
 import { TOWN } from './town.js';
-import { merged } from './plaza-details.js';
+import { Parts } from './outdoor/parts.js';
+
+// parts merged into one mesh of one material (the parts are disposed)
+export function merged(parts, material, { cast = true } = {}) {
+  const mesh = new THREE.Mesh(mergeGeometries(parts), material);
+  parts.forEach((part) => part.dispose());
+  mesh.castShadow = cast;
+  mesh.receiveShadow = true;
+  return mesh;
+}
 
 const box = (w, h, d, x, y, z) => new THREE.BoxGeometry(w, h, d).translate(x, y + h / 2, z);
 
@@ -40,9 +50,11 @@ function signBoard(text, en, w, h, color) {
 }
 
 // The canteen: rect [x0, z0, x1, z1] in the chunk's frame, two storeys of floorH. Its south face (toward the
-// fountain) is glazed on the ground floor with the doors in the middle, a window band above, a fascia sign; a
-// blue-grey roof with a parapet and plant.
-export function canteen(root, [x0, z0, x1, z1], floorH) {
+// fountain) is glazed on the ground floor with the doors in the bay at doorX (on the fountain's axis) under a
+// canopy with the sign, striped canvas awnings over the other bays, a window band above; a blue-grey roof with a
+// parapet and plant.
+export const AWNING = { canvas: '#3f6f77', stripe: '#e3e0d7' };
+export function canteen(root, [x0, z0, x1, z1], floorH, doorX = (x0 + x1) / 2) {
   const w = x1 - x0,
     d = z1 - z0,
     cx = (x0 + x1) / 2,
@@ -76,9 +88,31 @@ export function canteen(root, [x0, z0, x1, z1], floorH) {
     box(0.18, 0.36, d, x0 - 0.01, H, cz),
     box(0.18, 0.36, d, x1 + 0.01, H, cz),
   );
-  // the doors: a wider bay with a canopy
-  const dx = cx;
+  // the doors: a canopy over their bay, and the doors' middle frame
+  const dx = doorX;
   frames.push(box(2.2, 0.08, 1.1, dx, 1.95, S + 0.55), box(0.06, 1.8, 0.06, dx, 0.18, S + 0.05));
+  // the awnings: a sloping canvas over each other bay, in stripes, with a straight valance at the front
+  const cloth = new Parts();
+  for (let i = 0; i < bays; i++) {
+    const bx = x0 + bw * (i + 0.5);
+    if (Math.abs(bx - dx) < bw / 2) continue;
+    const n = 7,
+      sw = (bw - 0.3) / n,
+      out = 0.95,
+      slope = 0.32;
+    for (let k = 0; k < n; k++) {
+      const color = k % 2 ? AWNING.stripe : AWNING.canvas;
+      const sx = bx - (bw - 0.3) / 2 + sw * (k + 0.5);
+      cloth.geo(
+        color,
+        new THREE.BoxGeometry(sw, 0.03, out)
+          .rotateX(slope)
+          .translate(sx, 2.02 - (Math.sin(slope) * out) / 2, S + (Math.cos(slope) * out) / 2 + 0.04),
+      );
+      cloth.box(color, sw, 0.16, 0.02, sx, 2.02 - Math.sin(slope) * out - 0.16, S + Math.cos(slope) * out + 0.04);
+    }
+  }
+  cloth.build(root);
   // roof plant: three condenser boxes, a duct, a small stair housing
   for (const [px, pz, pw, pd, ph] of [
     [x0 + w * 0.2, cz - 1.2, 2.2, 1.4, 0.8],

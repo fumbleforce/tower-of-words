@@ -1,0 +1,73 @@
+{
+  "title": "Fountain plaza redesigned on the outdoor kit",
+  "date": "2026-09-30",
+  "by": "claude-agent:plaza-kit",
+  "caption": "The plaza rebuilt with the forecourt's kit. The circle is paved in rings with a border and stops cleanly at the lane. The lane carries on from the forecourt's, planting and the canteen terrace frame the plaza, and the water moves. Before on the left of each pair, after on the right.",
+  "sections": [
+    {
+      "title": "The plan",
+      "caption": "Seen from straight above. The lane wraps round the plaza on three sides, with a short link straight into it at each turn. A ring bed with cherries runs round the north half, corner gardens sit either side of the open south edge, and the terrace is to the north.",
+      "images": [{ "id": "after-plan", "image": "bible/shots/showcase/plaza-kit-1/after-plan.webp", "caption": "After, top-down" }]
+    },
+    {
+      "title": "Arriving from the forecourt",
+      "caption": "The same brick, pale borders, hedge, zelkova avenue and lamps as the forecourt's lane. The plaza's edge meets the lane's border in a straight line.",
+      "images": [
+        { "id": "after-forecourt-lane", "image": "bible/shots/showcase/plaza-kit-1/after-fc-desk.webp", "caption": "The forecourt's lane, for comparison" },
+        { "id": "before-arrive-desk", "image": "bible/shots/showcase/plaza-kit-1/before-pl1-desk.webp", "caption": "Before" },
+        { "id": "after-arrive-desk", "image": "bible/shots/showcase/plaza-kit-1/after-pl1-desk.webp", "caption": "After" },
+        { "id": "before-arrive-phone", "image": "bible/shots/showcase/plaza-kit-1/before-pl1-phone.webp", "caption": "Before, phone" },
+        { "id": "after-arrive-phone", "image": "bible/shots/showcase/plaza-kit-1/after-pl1-phone.webp", "caption": "After, phone" }
+      ]
+    },
+    {
+      "title": "The fountain",
+      "caption": "Glints drift over the water, the curtains fall and ripples spread (stills only show one moment). The coin sign is now set into the rim's face, off to the side so Eric doesn't stand in front of it. Pigeons by the rim.",
+      "images": [
+        { "id": "before-fountain-desk", "image": "bible/shots/showcase/plaza-kit-1/before-pl3-desk.webp", "caption": "Before" },
+        { "id": "after-fountain-desk", "image": "bible/shots/showcase/plaza-kit-1/after-pl3-desk.webp", "caption": "After" },
+        { "id": "before-fountain-phone", "image": "bible/shots/showcase/plaza-kit-1/before-pl3-phone.webp", "caption": "Before, phone" },
+        { "id": "after-fountain-phone", "image": "bible/shots/showcase/plaza-kit-1/after-pl3-phone.webp", "caption": "After, phone" },
+        { "id": "before-sign", "image": "bible/shots/showcase/plaza-kit-1/before-closeup-sign-desk.webp", "caption": "Coin sign before (the rim cut through it)" },
+        { "id": "after-sign", "image": "bible/shots/showcase/plaza-kit-1/after-closeup-sign-desk.webp", "caption": "Coin sign after" }
+      ]
+    },
+    {
+      "title": "Where the lane turns",
+      "caption": "Before, a square slab sat under the circle and a kerb ended in mid-air. Now the lane's west and east turns hold corner gardens (cosmos, grasses, cherries), and a link carries straight on into the plaza.",
+      "images": [
+        { "id": "before-west-desk", "image": "bible/shots/showcase/plaza-kit-1/before-pl2-desk.webp", "caption": "West end before" },
+        { "id": "after-west-desk", "image": "bible/shots/showcase/plaza-kit-1/after-pl2-desk.webp", "caption": "West end after" },
+        { "id": "after-join", "image": "bible/shots/showcase/plaza-kit-1/after-closeup-join-desk.webp", "caption": "The west corner garden, close" },
+        { "id": "before-east-desk", "image": "bible/shots/showcase/plaza-kit-1/before-pl4-desk.webp", "caption": "East end before" },
+        { "id": "after-east-desk", "image": "bible/shots/showcase/plaza-kit-1/after-pl4-desk.webp", "caption": "East end after" }
+      ]
+    },
+    {
+      "title": "The canteen side",
+      "caption": "The canteen now has striped awnings, and its doors sit on the fountain's axis. The terrace has teal and pale umbrellas, a seat-height wall and planted ends. Benches come in pairs with a tree behind each and a lamp between.",
+      "images": [
+        { "id": "before-canteen-desk", "image": "bible/shots/showcase/plaza-kit-1/before-pl5-desk.webp", "caption": "Before" },
+        { "id": "after-canteen-desk", "image": "bible/shots/showcase/plaza-kit-1/after-pl5-desk.webp", "caption": "After" },
+        { "id": "before-canteen-phone", "image": "bible/shots/showcase/plaza-kit-1/before-pl5-phone.webp", "caption": "Before, phone" },
+        { "id": "after-canteen-phone", "image": "bible/shots/showcase/plaza-kit-1/after-pl5-phone.webp", "caption": "After, phone" },
+        { "id": "after-benches-desk", "image": "bible/shots/showcase/plaza-kit-1/after-pl6-desk.webp", "caption": "North-east benches, after" }
+      ]
+    },
+    {
+      "title": "Evening",
+      "caption": "The lamps still light up with pools of light, now along the lane, round the plaza's edge and by the canteen doors. The basin glows from under the water, so the coins keep their shine.",
+      "images": [
+        { "id": "before-arrive-eve", "image": "bible/shots/showcase/plaza-kit-1/before-pl1e-desk.webp", "caption": "Before" },
+        { "id": "after-arrive-eve", "image": "bible/shots/showcase/plaza-kit-1/after-pl1e-desk.webp", "caption": "After" },
+        { "id": "before-fountain-eve", "image": "bible/shots/showcase/plaza-kit-1/before-pl3e-desk.webp", "caption": "Fountain before" },
+        { "id": "after-fountain-eve", "image": "bible/shots/showcase/plaza-kit-1/after-pl3e-desk.webp", "caption": "Fountain after" },
+        { "id": "before-fountain-eve-phone", "image": "bible/shots/showcase/plaza-kit-1/before-pl3e-phone.webp", "caption": "Fountain before, phone" },
+        { "id": "after-fountain-eve-phone", "image": "bible/shots/showcase/plaza-kit-1/after-pl3e-phone.webp", "caption": "Fountain after, phone" },
+        { "id": "before-canteen-eve", "image": "bible/shots/showcase/plaza-kit-1/before-pl5e-desk.webp", "caption": "Canteen before" },
+        { "id": "after-canteen-eve", "image": "bible/shots/showcase/plaza-kit-1/after-pl5e-desk.webp", "caption": "Canteen after" }
+      ]
+    }
+  ],
+  "links": [{ "label": "Play it", "href": "game3d/" }]
+}

@@ -2,8 +2,9 @@
 // into a Parts collector (outdoor/parts.js) so a whole row costs one mesh per colour. Place them with along()
 // and pair() from outdoor/parts.js: lamps at an even pitch on an edge, benches under trees facing the space,
 // bins beside benches, bollards across an opening.
-//   const lights = lightSet(); lamps(lights, p, points, { kind })   lamps; lights.build(root) makes every lit part
-//                                           and every light pool of a place one mesh each; .evening() turns them up
+//   const lights = lightSet(); lamps(lights, p, points, { kind })   lamps; lights.build(root, { poolY }) makes every
+//                                           lit part and every light pool of a place one mesh each (the pools poolY
+//                                           over the ground, if the paving is raised); .evening() turns them up
 //   bench(p, x, z, facing, { len, back })   slatted, on two stone legs; facing: the way a sitter looks (radians)
 //   bins(p, x, z, facing)                   the sorted pair (cans and bottles, burnables) every Japanese street has
 //   bollard(p, x, z)                        stone, with a steel cap
@@ -35,12 +36,12 @@ export function lightSet() {
   return {
     glowParts,
     lit,
-    build(root) {
+    build(root, { poolY } = {}) {
       const glow = glowMat();
       const glowMesh = new THREE.Mesh(mergeFlat(glowParts.map((g) => (g.index ? g.toNonIndexed() : g))), glow);
       glowMesh.castShadow = false;
       root.add(glowMesh);
-      const poolMesh = pools(lit, 1, { k: 0.16 });
+      const poolMesh = pools(lit, 1, { k: 0.16, y: poolY });
       root.add(poolMesh);
       return {
         evening() {

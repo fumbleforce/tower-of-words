@@ -101,13 +101,13 @@ export const pair = (c, gap, axis = 'x') =>
 
 // ---------- light ----------
 // light pools on the ground under a set of lamps, in one mesh (one draw call however many lamps). Returns the mesh;
-// set(k) changes their strength (the evening turns them up).
-export function pools(points, r = 0.9, { k = 0.2, color = '#ffcf94' } = {}) {
+// set(k) changes their strength (the evening turns them up). y: their height, just over the paving they light.
+export function pools(points, r = 0.9, { k = 0.2, color = '#ffcf94', y = 0.007 } = {}) {
   const base = lightPool(0, 0, r, { k, color });
   const quads = points.map(([x, z, s = 1]) => {
     const g = new THREE.PlaneGeometry(2 * r * s, 2 * r * s);
     g.rotateX(-Math.PI / 2);
-    return g.translate(x, 0.007, z);
+    return g.translate(x, y, z);
   });
   base.geometry.dispose();
   base.geometry = mergeGeometries(quads);
