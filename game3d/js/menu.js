@@ -16,6 +16,7 @@ import { sim, PERIOD_NAMES, save as simSave } from './sim.js';
 import { startOnboarding, resetOnboarding } from './onboard.js';
 import { browserSpeechAvailable, prepareVoice } from './speech.js';
 import { PLACE_NAMES } from './places/definitions.js';
+import { installGoalArrow } from './ui/goal-arrow.js';
 
 const Q = new URLSearchParams(location.search);
 const TEST = Q.get('test') === 'fast',
@@ -1018,85 +1019,6 @@ function watchLoading() {
   setInterval(check, 500);
 }
 
-// ---------- the goal when it's off screen: an arrow on the screen edge ----------
-// The goal's pin is clamped to the screen by the markers; when the goal itself is off screen, the pin hides and a
-// teal arrow at the edge points to it, with the goal's name. Hidden in conversations and trips, like the pins.
-function goalArrow() {
-  const a = el(
-    'button',
-    'goalarrow',
-    '<span class="ar" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h13M13 6l6 6-6 6"/></svg></span><span class="gn"></span>',
-  );
-  a.type = 'button';
-  a.hidden = true;
-  a.id = 'goalArrow';
-  $('#ui').appendChild(a);
-  let target = null;
-  a.onclick = (e) => {
-    e.stopPropagation();
-    if (target) game().use(target);
-  };
-  const v = new THREE.Vector3();
-  const loop = () => {
-    requestAnimationFrame(loop);
-    const g = game();
-    if (!g || !g.place || !g.markers) {
-      a.hidden = true;
-      return;
-    }
-    const b = document.body;
-    const goals = g.markers.list.filter((m) => {
-      try {
-        return m.enabled() && m.goal && m.goal();
-      } catch {
-        return false;
-      }
-    });
-    let show = false;
-    for (const m of goals) {
-      m.anchor(v);
-      v.project(g.place.camera);
-      const behind = v.z > 1;
-      const W = innerWidth,
-        H = innerHeight;
-      let x = ((v.x + 1) / 2) * W,
-        y = ((1 - v.y) / 2) * H;
-      if (behind) {
-        x = W - x;
-        y = H - y;
-      }
-      const off = behind || x < 8 || x > W - 8 || y < 30 || y > H - 8;
-      m.el.classList.toggle('offscreen', off);
-      if (!off || show) continue;
-      show = true;
-      target = m;
-      // the arrow sits where the goal would be, pulled in to the screen edge, and points out toward it
-      const edge = 34,
-        topM = phone() ? 150 : 90,
-        botM = phone() ? 110 : 70;
-      const ax = Math.max(edge, Math.min(W - edge, x)),
-        ay = Math.max(topM, Math.min(H - botM, y));
-      a.style.transform = `translate(${Math.round(ax)}px, ${Math.round(ay)}px)`;
-      a.querySelector('.ar').style.transform = `rotate(${Math.atan2(y - ay, x - ax)}rad)`;
-      a.classList.toggle('lefty', ax > W / 2);
-      const nm = m.label || '';
-      if (a.querySelector('.gn').textContent !== nm) a.querySelector('.gn').textContent = nm;
-      a.setAttribute('aria-label', `Goal: ${nm}, off screen. Walk there`);
-    }
-    a.hidden =
-      !show ||
-      b.classList.contains('busy') ||
-      b.classList.contains('trip') ||
-      b.classList.contains('at-title') ||
-      isPaused;
-    // no floor ring under the goal or the target in reach (Jørgen: "brutally ugly and overlaps the whole screen", and
-    // "the ring comes around any character that you are currently selecting / interacting with"): the pin and the
-    // model's outline (gameplay/highlight.js) show them instead
-    if (window.__onboard && window.__onboard.active) a.hidden = true;
-  };
-  loop();
-}
-
 // ---------- the current target, and cycling through things in reach ----------
 // main.js picks the nearest thing as the target every frame, and holds a chosen one (game.targetLock) while it's
 // usable and within 1.7 m. When several are close (the gate: guard, gate, cat, sign-in sheet), Tab (or Next in the
@@ -1226,7 +1148,7 @@ function whenReady(fn) {
 whenReady(() => {
   addPauseChip();
   watchLoading();
-  goalArrow();
+  installGoalArrow({ game, phone, paused: () => isPaused, root: $('#ui') });
   targetCycling();
   startOnboarding(game());
   const t = $('#title');
