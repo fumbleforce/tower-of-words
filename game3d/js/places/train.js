@@ -37,7 +37,7 @@ import { walkPerson, stepPeople, lookAt } from '../story.js';
 import { rbox, mat, emissive, textTexture, plane, JP_FONT, plant as propPlant } from '../props.js';
 import { glide, withList } from './lobby.js';
 import { standOut, walkRig } from '../move.js';
-import { damp, goalSpot, pulled, widenTo } from '../cam.js';
+import { damp, goalSpot, keepEric, pulled, widenTo } from '../cam.js';
 import { flags } from '../narrative/state.js';
 import { dust, lightPool } from './life.js';
 import { route } from './route.js';
@@ -607,7 +607,7 @@ export async function trainPlace(game) {
     arrived: false,
   };
 
-  // ---- camera: side/train's framing (whole car on a wide screen, along a phone screen) ----
+  // ---- camera: the whole car on a wide screen, along it on a phone ----
   const camera = new THREE.PerspectiveCamera(20, 16 / 9, 1, 160);
   const cam = {
     camera,
@@ -631,8 +631,8 @@ export async function trainPlace(game) {
     release() {
       this.close = null;
     },
-    // follows Eric out of the car too (feel agent, QA round 1: the phone camera lost him on the platform), leans toward
-    // the current goal on a phone, and moves on the same critically damped springs as the other places (cam.js damp)
+    // follows Eric out of the car too (QA round 1: the phone lost him on the platform), keeps him in view, leans to the
+    // goal on a phone, and moves on the critically damped springs of the other places (cam.js damp, keepEric)
     vel: [0, 0, 0, 0],
     smooth: 0.32,
     wanted(p) {
@@ -649,11 +649,11 @@ export async function trainPlace(game) {
         t.x = clamp(x, -1.7, out ? 8.2 : 2.6);
         if (p.z > LZ) t.z = this.base.z + Math.min(2.4, (p.z - LZ) * 0.9);
       } else if (out && (Math.abs(p.x) > 4.0 || p.z > LZ + 1.0)) {
-        // wide screen, off along the platform: shift to keep him in
+        // wide screen, off along the platform: shift
         t.x = clamp(p.x * 0.85, -3.5, 6.5);
         t.z = this.base.z + clamp((p.z - LZ - 0.8) * 0.8, 0, 2.0);
       }
-      return [t, this.fitDist];
+      return [keepEric(this, t, p), this.fitDist];
     },
     update(dt, p) {
       if (dt <= 0) return;

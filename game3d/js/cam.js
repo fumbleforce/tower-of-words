@@ -69,6 +69,101 @@ export function pulled(c, p) {
   return pullBack(...c.shot, c.dir, c.camera.fov, c.pull);
 }
 
+// Keep Eric in view (docs/game/controls-and-ui.md, Camera: the player is always in view). A shot whose clamp, fixed
+// framing or held close-up would leave any of his body outside the frame is moved along the ground, as little as it
+// takes, until his whole body is inside KEEP of the screen. Where he is already in, the shot is untouched, so every
+// place's own framing stands. game3d/tools/cam-coverage.mjs checks it over every place's walk grid.
+const KEEP = 0.92; // of the half-screen, each way (about 4 % in from every edge)
+const _kc = new THREE.PerspectiveCamera(),
+  _kv = new THREE.Vector3(),
+  _kr = new THREE.Vector3(),
+  _kf = new THREE.Vector3();
+// t: the shot's target (moved in place), d its distance, dir the unit vector from target to camera, feet: his feet in
+// world space, [r, h]: his reach round his feet and his height (bodyOf, scaled). Returns t.
+export function keepInView(camera, dir, t, d, feet, [r, h]) {
+  _kc.fov = camera.fov;
+  _kc.aspect = camera.aspect;
+  _kc.near = camera.near;
+  _kc.far = camera.far;
+  _kc.updateProjectionMatrix();
+  const tanH = Math.tan(THREE.MathUtils.degToRad(camera.fov / 2)),
+    elev = Math.max(0.2, Math.asin(THREE.MathUtils.clamp(dir.y, -1, 1)));
+  _kf.set(-dir.x, 0, -dir.z).normalize(); // along the ground, up the screen
+  for (let it = 0; it < 6; it++) {
+    _kc.position.copy(t).addScaledVector(dir, d);
+    _kc.lookAt(t);
+    _kc.updateMatrixWorld();
+    _kr.setFromMatrixColumn(_kc.matrixWorld, 0).setY(0).normalize(); // screen right, along the ground
+    let x0 = Infinity,
+      x1 = -Infinity,
+      y0 = Infinity,
+      y1 = -Infinity;
+    for (const y of [0, h])
+      for (const [a, b] of [
+        [r, 0],
+        [-r, 0],
+        [0, r],
+        [0, -r],
+      ]) {
+        _kv.copy(feet).addScaledVector(_kr, a).addScaledVector(_kf, b);
+        _kv.y += y;
+        _kv.project(_kc);
+        x0 = Math.min(x0, _kv.x);
+        x1 = Math.max(x1, _kv.x);
+        y0 = Math.min(y0, _kv.y);
+        y1 = Math.max(y1, _kv.y);
+      }
+    // how far the frame has to move, in half-screens (0 when he fits)
+    const sx = x1 > KEEP ? x1 - KEEP : x0 < -KEEP ? x0 + KEEP : 0,
+      sy = y1 > KEEP ? y1 - KEEP : y0 < -KEEP ? y0 + KEEP : 0;
+    if (Math.abs(sx) < 1e-4 && Math.abs(sy) < 1e-4) break;
+    t.addScaledVector(_kr, sx * d * tanH * camera.aspect);
+    t.addScaledVector(_kf, (sy * d * tanH) / Math.sin(elev));
+  }
+  return t;
+}
+// his reach round his feet and his height at scale 1, from his rig's meshes (not the ground shadow), measured once
+const bodies = new WeakMap();
+function bodyOf(root) {
+  if (bodies.has(root)) return bodies.get(root);
+  root.updateMatrixWorld(true);
+  const inv = root.matrixWorld.clone().invert(),
+    box = new THREE.Box3(),
+    v = new THREE.Vector3();
+  root.traverse((o) => {
+    if (!o.isMesh || !o.visible || !o.geometry) return;
+    if (o.isSkinnedMesh)
+      o.computeBoundingBox(); // follows the bones; the geometry's box is the bind pose
+    else if (!o.geometry.boundingBox) o.geometry.computeBoundingBox();
+    const bb = o.isSkinnedMesh ? o.boundingBox : o.geometry.boundingBox;
+    if (bb.max.y - bb.min.y < 0.03) return; // the blob shadow
+    for (let i = 0; i < 8; i++)
+      box.expandByPoint(
+        v
+          .set(i & 1 ? bb.max.x : bb.min.x, i & 2 ? bb.max.y : bb.min.y, i & 4 ? bb.max.z : bb.min.z)
+          .applyMatrix4(o.matrixWorld)
+          .applyMatrix4(inv),
+      );
+  });
+  const m = box.isEmpty() ? [0.3, 1.2] : [Math.max(-box.min.x, box.max.x, -box.min.z, box.max.z), box.max.y];
+  bodies.set(root, m);
+  return m;
+}
+// his feet in world space and his body ([r, h], scaled), while he is in play (null in the showcase and before he exists)
+export function ericNow(space, p) {
+  const pl = window.__game?.player;
+  if (!pl || !p || !pl.root.visible) return null;
+  const w = p.isVector3 && space ? space.localToWorld(p.clone()) : p.clone(),
+    s = pl.root.scale.y || 1;
+  return [w, bodyOf(pl.root).map((x) => x * s)];
+}
+
+// a camera's shot target t moved to keep him in view (c: a camera with camera, dir, fitDist and maybe space)
+export function keepEric(c, t, p, d = c.fitDist) {
+  const e = ericNow(c.space, p);
+  return e ? keepInView(c.camera, c.dir, t, d, ...e) : t;
+}
+
 export function goalSpot(game = window.__game) {
   if (!game || !game.markers || game.busy) return null;
   for (const m of game.markers.list) {
@@ -178,10 +273,19 @@ export class RoomCam {
     this.nudgeT = 0;
     this.nudgeDur = secs;
   }
+  // the shot for this frame, moved to keep him in view (keepInView) unless a story shot has the game busy
   wanted(p) {
-    if (this.close) return [this.close.target, this.fitDist / this.close.zoom];
-    if (!this.follow || !p) return [this.base, this.fitDist];
-    const w = p.isVector3 && this.space ? this.space.localToWorld(p.clone()) : p;
+    const e = ericNow(this.space, p);
+    if (this.close) {
+      const d = this.fitDist / this.close.zoom;
+      if (!e || window.__game.busy) return [this.close.target, d];
+      return [keepInView(this.camera, this.dir, this.want.copy(this.close.target), d, ...e), d];
+    }
+    if (!this.follow || !p) {
+      if (!e) return [this.base, this.fitDist];
+      return [keepInView(this.camera, this.dir, this.want.copy(this.base), this.fitDist, ...e), this.fitDist];
+    }
+    const w = e ? e[0] : p.isVector3 && this.space ? this.space.localToWorld(p.clone()) : p;
     // lean toward the current goal (a third of the way, at most GOAL_LEAN), so what the game points at is on screen
     const gs = goalSpot(),
       gl = this.goalLean;
@@ -211,6 +315,7 @@ export class RoomCam {
       this.want.x = THREE.MathUtils.clamp(this.want.x, this.clamp[0], this.clamp[1]);
       this.want.z = THREE.MathUtils.clamp(this.want.z, this.clamp[2], this.clamp[3]);
     }
+    if (e) keepInView(this.camera, this.dir, this.want, this.fitDist, ...e);
     return [this.want, this.fitDist];
   }
   // player velocity, smoothed, for the look-ahead (only while following)

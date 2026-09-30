@@ -205,8 +205,9 @@ export function dormsPlace(game) {
       if (!p) return;
       // on the stairs (the trip up) his feet follow the flight; anywhere else the floor is level
       p.y = p.x > w.stairFoot[0] - 0.5 && p.z > b.stairs.top ? stairY(p.z) : 0;
-      // in the flat without the walk in (a saved game, a still): the room's view
-      if (!st.inside && !st.entering && p.z < b.near - 0.05) {
+      // in the flat without the walk in (a saved game, a still): the room's view (not on the stair landing, which
+      // runs back past the flat's front wall further east)
+      if (!st.inside && !st.entering && p.z < b.near - 0.05 && p.x < b.x1 + 0.2) {
         setInside();
         P.fit(cam.camera.aspect);
       }
