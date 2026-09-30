@@ -22,18 +22,21 @@ export function dormsPlace(game) {
       anchor: (v) => v.set(w.window[0], w.windowY, w.window[1]),
       spot: () => w.windowFront,
       face: () => w.window,
+      outline: () => w.obj.window,
     },
     boxes: {
       ...PLACE_DETAILS.dorms.things.boxes,
       anchor: (v) => v.set(w.boxes.x, 0.5, w.boxes.z),
-      spot: () => [0.3, w.boxes.z],
+      spot: () => w.boxes.spot,
       face: () => [w.boxes.x, w.boxes.z],
+      outline: () => w.obj.boxes,
     },
     bed: {
       ...PLACE_DETAILS.dorms.things.bed,
       anchor: (v) => v.set(w.bed.x, 0.5, w.bed.z),
-      spot: () => [-0.2, w.bed.z],
+      spot: () => w.bed.spot,
       face: () => [w.bed.x, w.bed.z],
+      outline: () => w.obj.bed,
     },
   };
   const b = w.bounds;
@@ -103,9 +106,12 @@ export function dormsPlace(game) {
       eric.scripted = true;
       eric.root.position.set(w.frontDoor[0], 0, w.frontDoor[1] + 0.5);
       eric.root.rotation.y = Math.PI;
-      cam.closeOn(w.frontDoor, 1.5);
+      // framed on the doorstep, a little closer than the still frame, then out to the whole flat as he walks in
+      cam.closeOn(w.arrive.at, w.arrive.zoom);
       cam.snap(eric.root.position);
-      await glide(g, eric.root, w.roomEntry, 1.0);
+      w.door.rotation.y = -1.5; // the front door open onto the corridor
+      await glide(g, eric.root, w.roomEntry, 1.2);
+      g.tween(0.45, (k) => (w.door.rotation.y = -1.5 * (1 - k * k)));
       eric.setState('idle');
       eric.scripted = false;
       g.walker.sync();

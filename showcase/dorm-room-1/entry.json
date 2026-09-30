@@ -1,0 +1,41 @@
+{
+ "title": "Eric's room furnished as a real company-dorm room",
+ "date": "2026-09-30",
+ "by": "claude-agent:dorm-room",
+ "caption": "Eric's room was a bare box in a navy void (critique score 4/10). It is now a small company-dorm 1K: six tatami, a desk with its lamp on, the bed with the duvet thrown back and his work bag on it, an oshiire closet, a folding table with his konbini dinner, his boxes from home (one open), and an air conditioner and curtains at the window. In front are the kitchenette, the unit bath and a genkan with his shoes. The building is cut round the flat at the same height, with the corridor and the neighbours' doors outside. Evening only; the same spots before and after. Issue #75.",
+ "sections": [
+  {
+   "title": "The room from the doorway",
+   "caption": "Before: empty grey tile, a light pool with nothing above it, box furniture, and Eric's hair in front of everything. After: the room is full but the aisle to the window is clear. The desk lamp and the kitchen hood light make the warm pools, and Eric stands just inside the doorway.",
+   "images": [
+    {"id": "room-desk-before", "image": "bible/shots/showcase/dorm-room-1/room-desk-before.webp", "caption": "Before, desktop"},
+    {"id": "room-desk-after", "image": "bible/shots/showcase/dorm-room-1/room-desk-after.webp", "caption": "After, desktop"},
+    {"id": "room-phone-before", "image": "bible/shots/showcase/dorm-room-1/room-phone-before.webp", "caption": "Before, phone"},
+    {"id": "room-phone-after", "image": "bible/shots/showcase/dorm-room-1/room-phone-after.webp", "caption": "After, phone"}
+   ]
+  },
+  {
+   "title": "At the window",
+   "caption": "The window still looks straight onto the next block's bare concrete wall. A lamp on that wall lights it, and the only thing to see is the small lit bathroom window of the flat opposite.",
+   "images": [
+    {"id": "window-desk-before", "image": "bible/shots/showcase/dorm-room-1/window-desk-before.webp", "caption": "Before, desktop"},
+    {"id": "window-desk-after", "image": "bible/shots/showcase/dorm-room-1/window-desk-after.webp", "caption": "After, desktop"},
+    {"id": "window-phone-before", "image": "bible/shots/showcase/dorm-room-1/window-phone-before.webp", "caption": "Before, phone"},
+    {"id": "window-phone-after", "image": "bible/shots/showcase/dorm-room-1/window-phone-after.webp", "caption": "After, phone"}
+   ]
+  },
+  {
+   "title": "Coming home",
+   "caption": "The trip in from the courtyard: the front door swings open onto the corridor, Eric steps over the genkan into the room, the door shuts behind him, and the camera eases out from the doorstep to the whole flat.",
+   "images": [
+    {"id": "arrive-1-desk", "image": "bible/shots/showcase/dorm-room-1/arrive-1-desk.webp", "caption": "On the doorstep, desktop"},
+    {"id": "arrive-2-desk", "image": "bible/shots/showcase/dorm-room-1/arrive-2-desk.webp", "caption": "Stepping in, desktop"},
+    {"id": "arrive-3-desk", "image": "bible/shots/showcase/dorm-room-1/arrive-3-desk.webp", "caption": "In the room, desktop"},
+    {"id": "arrive-1-phone", "image": "bible/shots/showcase/dorm-room-1/arrive-1-phone.webp", "caption": "On the doorstep, phone"},
+    {"id": "arrive-2-phone", "image": "bible/shots/showcase/dorm-room-1/arrive-2-phone.webp", "caption": "Stepping in, phone"},
+    {"id": "arrive-3-phone", "image": "bible/shots/showcase/dorm-room-1/arrive-3-phone.webp", "caption": "In the room, phone"}
+   ]
+  }
+ ],
+ "links": [{"label": "Play it (loads the room directly)", "href": "game3d/?place=dorms"}]
+}

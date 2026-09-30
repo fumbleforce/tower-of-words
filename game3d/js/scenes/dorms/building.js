@@ -1,0 +1,347 @@
+// The flat's shell and what is round it: tatami in the room, plank vinyl in the entry strip, the genkan, the walls
+// (cut at the ceiling, the front ones low), the building cut away round the flat, the corridor outside the front
+// door with the neighbours' doors, the window with its curtains and air conditioner, and the next block's bare end
+// wall outside it.
+import * as THREE from 'three';
+import { wall, tileFloor, mat } from '../../props.js';
+import { lightPool } from '../../places/life.js';
+import * as L from './layout.js';
+import { Kit } from './kit.js';
+
+const {
+  X0,
+  X1,
+  BACK,
+  PART,
+  NEAR,
+  H,
+  LOW,
+  FRONT_LOW,
+  T,
+  OUT,
+  BATH_X,
+  COUNTER_X,
+  CORRIDOR,
+  PITCH,
+  WIN,
+  DOOR,
+  DOORWAY,
+  C,
+} = L;
+
+// six mats in the classic 6-jo layout (no four corners meet): [u0, u1, v0, v1] on a 1.5 x 2 mat-length grid
+const MATS = [
+  [0, 1, 0, 0.5],
+  [1, 1.5, 0, 1],
+  [0, 0.5, 0.5, 1.5],
+  [0.5, 1, 0.5, 1.5],
+  [1, 1.5, 1, 2],
+  [0, 1, 1.5, 2],
+];
+
+export function floors(kit, root) {
+  const ux = (X1 - X0) / 1.5,
+    vz = (PART - BACK) / 2;
+  MATS.forEach(([u0, u1, v0, v1], i) => {
+    const x0 = X0 + u0 * ux,
+      x1 = X0 + u1 * ux,
+      z0 = BACK + v0 * vz,
+      z1 = BACK + v1 * vz;
+    const w = x1 - x0 - 0.008,
+      d = z1 - z0 - 0.008,
+      cx = (x0 + x1) / 2,
+      cz = (z0 + z1) / 2;
+    kit.box(C.tatami[i % 3], w, 0.03, d, cx, -0.03, cz, {
+      r: 0.006,
+      surf: 'fabric',
+      cast: false,
+    });
+    // the cloth border along both long edges
+    const along = w > d;
+    for (const s of [-1, 1])
+      if (along)
+        kit.box(C.heri, w, 0.032, 0.03, cx, -0.03, cz + s * (d / 2 - 0.015), {
+          surf: 'fabric',
+          cast: false,
+        });
+      else
+        kit.box(C.heri, 0.03, 0.032, d, cx + s * (w / 2 - 0.015), -0.03, cz, {
+          surf: 'fabric',
+          cast: false,
+        });
+  });
+  // the entry strip: grey plank vinyl, the genkan a step down by the front door
+  const g0 = COUNTER_X,
+    g1 = BATH_X - 0.04,
+    gz = L.GENKAN_Z;
+  const planks = (x0, x1, z0, z1) => {
+    kit.box(C.plank, x1 - x0, 0.03, z1 - z0, (x0 + x1) / 2, -0.03, (z0 + z1) / 2, { surf: 'laminate', cast: false });
+    for (let x = x0 + 0.13; x < x1 - 0.05; x += 0.13)
+      kit.box(C.plankSeam, 0.006, 0.002, z1 - z0, x, 0, (z0 + z1) / 2, {
+        cast: false,
+      });
+  };
+  planks(X0, X1, PART, gz);
+  planks(X0, g0, gz, NEAR);
+  planks(g1, X1, gz, NEAR);
+  root.add(
+    tileFloor(g0, g1, gz, NEAR + 0.05, 0.16, {
+      color: C.genkan,
+      seam: '#565b64',
+      seamW: 0.008,
+      y: -0.045,
+    }),
+  );
+  // the step's edge (the kamachi): a slightly lighter board facing the door
+  kit.box(C.step, g1 - g0, 0.05, 0.035, (g0 + g1) / 2, -0.045, gz + 0.012, {
+    r: 0.004,
+    surf: 'laminate',
+    cast: false,
+  });
+}
+
+export function walls(root) {
+  const o = { color: C.wall, top: C.wallTop };
+  root.add(wall('x', X0 - T, X1 + T, BACK - T / 2, H, T, { ...o, holes: [WIN] }));
+  for (const x of [X0 - T / 2, X1 + T / 2]) root.add(wall('z', BACK - T, NEAR + T, x, H, T, o));
+  root.add(
+    wall('x', X0, X1, PART, LOW, 0.08, {
+      ...o,
+      holes: [[DOORWAY[0], DOORWAY[1], 0, 1]],
+    }),
+  );
+  root.add(
+    wall('x', X0 - T, X1 + T, NEAR + T / 2, FRONT_LOW, T, {
+      ...o,
+      holes: [[DOOR[0], DOOR[1], 0, 1]],
+    }),
+  );
+}
+
+// the rest of the floor, cut at the same height: dark blocks either side, their corridor face lit
+export function building(kit) {
+  const W = 7,
+    zf = NEAR + T;
+  for (const [a, b] of [
+    [-W, X0 - T],
+    [X1 + T, W],
+  ]) {
+    kit.box(C.cut, b - a, H + 0.035, zf - (BACK - T), (a + b) / 2, 0, (zf + BACK - T) / 2, { cast: false });
+    kit.box(C.facade, b - a, H, 0.012, (a + b) / 2, 0, zf + 0.006, {
+      surf: 'plaster',
+      cast: false,
+    });
+    kit.box(C.wallTop, b - a, 0.035, 0.03, (a + b) / 2, H, zf, { cast: false });
+  }
+  // the neighbours' walls where the cut goes through them, fainter than Eric's: the flats in a row
+  const y = H + 0.035,
+    lines = [];
+  for (const s of [-1, 1]) {
+    const a = s < 0 ? -W : X1 + T,
+      b = s < 0 ? X0 - T : W;
+    lines.push([b - a, 0.004, T, (a + b) / 2, y, BACK - T / 2], [b - a, 0.004, 0.06, (a + b) / 2, y, PART]);
+    for (let k = 0; k < 3; k++) {
+      const x = s < 0 ? X0 - T - k * PITCH - T / 2 : X1 + T + k * PITCH + T / 2;
+      if (k > 0) lines.push([T, 0.004, zf - BACK, x, y, (zf + BACK - T) / 2]);
+      const bx = s < 0 ? x - (X1 - BATH_X) - T / 2 : x + (BATH_X - X0) + T / 2;
+      if (Math.abs(bx) < W) lines.push([0.06, 0.004, NEAR - PART, bx, y, (NEAR + PART) / 2]);
+    }
+  }
+  kit.boxes('#555c67', lines, { cast: false });
+  // the corridor: concrete, a gutter along the parapet, the parapet cut low like the flat's front wall
+  const z0 = zf,
+    z1 = zf + CORRIDOR;
+  kit.box('#737880', 2 * W, 0.2, CORRIDOR, 0, -0.22, (z0 + z1) / 2, {
+    surf: 'concrete',
+    cast: false,
+  });
+  kit.box('#4f545b', 2 * W, 0.004, 0.07, 0, -0.02, z1 - 0.05, { cast: false });
+  kit.box('#8b939e', 2 * W, 0.36, 0.1, 0, -0.03, z1 + 0.05, {
+    surf: 'concrete',
+  });
+  kit.box(C.wallTop, 2 * W + 0.02, 0.03, 0.12, 0, 0.33, z1 + 0.05, {
+    cast: false,
+  });
+  // the neighbours' front doors, a flat's width apart
+  for (const k of [-2, -1, 1, 2]) neighbourDoor(kit, DOOR[0] + (DOOR[1] - DOOR[0]) / 2 + k * PITCH, zf, k);
+  // two corridor lights on the wall either side of Eric's door
+  for (const x of [X0 - T - 0.32, X1 + T + 0.32]) {
+    kit.box('#d9dcdf', 0.16, 0.1, 0.06, x, 1.28, zf + 0.03, {
+      r: 0.02,
+      cast: false,
+    });
+  }
+  // Eric's own front door, cut low with the wall, and its frame. The leaf is its own group, hinged on its left
+  // edge, so the trip in can swing it open onto the corridor and shut it behind him (places/dorms.js)
+  const [d0, d1] = DOOR;
+  kit.boxes(C.frame, [
+    [0.035, FRONT_LOW, T + 0.02, d0 + 0.0175, 0, NEAR + T / 2],
+    [0.035, FRONT_LOW, T + 0.02, d1 - 0.0175, 0, NEAR + T / 2],
+  ]);
+  const leaf = new Kit(),
+    w = d1 - d0 - 0.04;
+  leaf.box(C.steel, w, FRONT_LOW - 0.02, 0.045, w / 2, 0, 0, { surf: 'door' });
+  leaf.box('#c9cdd2', 0.09, 0.022, 0.03, w - 0.08, FRONT_LOW - 0.08, -0.04, { r: 0.008, cast: false });
+  const door = leaf.flush(new THREE.Group());
+  door.position.set(d0 + 0.02, 0, NEAR + T / 2);
+  return door;
+}
+
+function neighbourDoor(kit, c, zf, k) {
+  const z = zf + 0.02;
+  kit.boxes(C.frame, [
+    [0.04, 1.3, 0.05, c - 0.3, 0, z],
+    [0.04, 1.3, 0.05, c + 0.3, 0, z],
+    [0.64, 0.05, 0.05, c, 1.28, z],
+  ]);
+  kit.box(C.steel, 0.56, 1.26, 0.03, c, 0.01, z + 0.005, { surf: 'door' });
+  kit.box('#c9cdd2', 0.1, 0.025, 0.04, c + 0.2, 0.62, z + 0.03, {
+    r: 0.008,
+    cast: false,
+  });
+  kit.box('#2f333b', 0.16, 0.035, 0.01, c, 0.82, z + 0.022, { cast: false });
+  kit.box('#d8dadc', 0.13, 0.055, 0.01, c, 1.36, zf + 0.006, { cast: false });
+  // the kitchen window beside the door, frosted, behind a grille; the one on the right is lit (someone's home)
+  const wx = c - 0.62;
+  const lit = k === 1;
+  kit.box(lit ? '#f0dcb4' : '#aeb8c0', 0.3, 0.36, 0.01, wx, 0.72, zf + 0.006, {
+    cast: false,
+    opts: lit ? { emissive: '#ffcf8a', emissiveIntensity: 0.55 } : {},
+  });
+  const bars = [[0.36, 0.02, 0.02, wx, 0.7, zf + 0.04]];
+  for (let i = 0; i < 5; i++) bars.push([0.012, 0.42, 0.012, wx - 0.14 + i * 0.07, 0.69, zf + 0.045]);
+  bars.push([0.36, 0.02, 0.02, wx, 1.1, zf + 0.04]);
+  kit.boxes(C.alu, bars, { cast: false });
+  // the meter box, and something at the door: an umbrella or a pot plant
+  kit.box('#b4b8bc', 0.15, 0.22, 0.06, c + 0.52, 0.9, zf + 0.03, {
+    r: 0.01,
+    cast: false,
+  });
+  if (k === 1)
+    kit.cyl('#3d4d6b', 0.012, 0.035, 0.62, c + 0.36, 0, zf + 0.08, {
+      rz: -0.12,
+      seg: 6,
+    });
+  if (k === -1) {
+    kit.cyl('#b3aea5', 0.07, 0.055, 0.12, c - 0.38, 0, zf + 0.12, { seg: 10 });
+    kit.cyl('#4d6b47', 0.02, 0.09, 0.16, c - 0.38, 0.12, zf + 0.12, { seg: 7 });
+  }
+}
+
+// the window: aluminium frame and glass, curtains drawn back, the air conditioner over it
+// own: the window's own kit (its frame and sill, the thing Eric looks at); obj: the group it goes into
+export function window_(kit, own, obj) {
+  const [a, b, y0, y1] = WIN,
+    z = BACK - T / 2,
+    cx = (a + b) / 2,
+    zi = BACK;
+  own.boxes(C.alu, [
+    [b - a + 0.08, 0.05, 0.13, cx, y0 - 0.05, z],
+    [b - a + 0.08, 0.05, 0.13, cx, y1, z],
+    [0.05, y1 - y0, 0.13, a - 0.015, y0, z],
+    [0.05, y1 - y0, 0.13, b + 0.015, y0, z],
+    [0.04, y1 - y0, 0.08, cx + 0.02, y0, z - 0.02],
+  ]);
+  own.box('#c3c6ca', b - a + 0.16, 0.025, 0.1, cx, y0 - 0.035, zi + 0.04, {
+    r: 0.006,
+    surf: 'laminate',
+  });
+  const glass = new THREE.Mesh(
+    new THREE.PlaneGeometry(b - a, y1 - y0),
+    new THREE.MeshStandardMaterial({
+      color: '#b9cbd6',
+      transparent: true,
+      opacity: 0.14,
+      roughness: 0.1,
+    }),
+  );
+  glass.position.set(cx, (y0 + y1) / 2, z);
+  obj.add(glass);
+  // curtain rail and the two curtains, gathered into folds either side
+  const top = 1.29;
+  kit.box('#c9cdd2', b - a + 0.56, 0.025, 0.04, cx, top, zi + 0.07, {
+    cast: false,
+  });
+  for (const [x0, dir] of [
+    [a - 0.25, 1],
+    [b + 0.25, -1],
+  ])
+    for (let i = 0; i < 5; i++) {
+      const x = x0 + dir * (0.025 + i * 0.052);
+      kit.box(i % 2 ? '#56657e' : '#5e6d87', 0.058, top - 0.43, 0.035, x, 0.43, zi + 0.075 + (i % 2) * 0.022, {
+        r: 0.012,
+        surf: 'fabric',
+      });
+    }
+  // the air conditioner, high on the wall: a white box, its louvre, a green standby light
+  const ac = cx + 0.02;
+  kit.box(C.white, 0.64, 0.19, 0.17, ac, 1.325, zi + 0.085, {
+    r: 0.03,
+    seg: 2,
+    surf: 'plastic',
+  });
+  kit.box('#b8bbbe', 0.56, 0.02, 0.01, ac, 1.36, zi + 0.172, { cast: false });
+  kit.box('#8fe39a', 0.018, 0.012, 0.005, ac + 0.26, 1.43, zi + 0.17, {
+    cast: false,
+    opts: { emissive: '#6dff84', emissiveIntensity: 1.2 },
+  });
+}
+
+// outside: the gap between the blocks, and the next block's end wall about two metres off, lit by the dusk sky and
+// a lamp on it; straight across from the window, a small lit bathroom window of the flat opposite
+export function outside(root, kit) {
+  const DROP = 4.2,
+    W = 16,
+    face = OUT + 0.003;
+  kit.box('#3c4048', W, 0.06, BACK - OUT + 0.4, 0, -DROP, (OUT + BACK) / 2, {
+    cast: false,
+  });
+  const wallMat = mat(C.concrete, {
+    roughness: 0.95,
+    emissive: new THREE.Color('#8e9bb4'),
+    emissiveIntensity: 0.3,
+  });
+  const slab = new THREE.Mesh(new THREE.BoxGeometry(W, 12, 0.3), wallMat);
+  slab.position.set(0, 6 - DROP, OUT - 0.15);
+  slab.userData.surf = 'concrete';
+  root.add(slab);
+  // precast panel joints, floor lines, a drain pipe with its brackets, a vent
+  const seams = [];
+  for (let x = -7.5; x <= 7.5; x += 1.5) seams.push([0.018, 12, 0.01, x, -DROP, face]);
+  for (let y = -DROP + 0.4; y < 8; y += 1.7) seams.push([W, 0.03, 0.012, 0, y, face]);
+  kit.boxes('#80847f', seams, { cast: false });
+  kit.box('#6c7073', 0.07, 12, 0.07, 1.35, -DROP, OUT + 0.05, { cast: false });
+  for (let y = -DROP + 1; y < 8; y += 1.7) kit.box('#5a5e62', 0.12, 0.03, 0.08, 1.35, y, OUT + 0.04, { cast: false });
+  kit.box('#7f8388', 0.22, 0.14, 0.06, -1.9, 1.95, OUT + 0.03, { cast: false });
+  // the window opposite: frosted, warm, a flat on the floor below; the lamp above it
+  const wx = (WIN[0] + WIN[1]) / 2,
+    wy = -0.62;
+  kit.box('#f2dfbc', 0.3, 0.24, 0.02, wx, wy, face, {
+    cast: false,
+    opts: { emissive: '#ffcf8a', emissiveIntensity: 0.9 },
+  });
+  kit.boxes(C.alu, [
+    [0.34, 0.025, 0.04, wx, wy - 0.02, face + 0.01],
+    [0.34, 0.025, 0.04, wx, wy + 0.24, face + 0.01],
+  ]);
+  kit.box('#e9e4d6', 0.1, 0.07, 0.07, wx - 0.45, wy + 0.42, face + 0.03, {
+    r: 0.02,
+    cast: false,
+    opts: { emissive: '#ffe2b0', emissiveIntensity: 1.4 },
+  });
+  const glow = lightPool(wx - 0.3, face + 0.02, 0.8, {
+    color: '#ffd7a0',
+    k: 0.3,
+  });
+  glow.rotation.x = 0;
+  glow.position.y = wy + 0.2;
+  root.add(glow);
+  const up = lightPool(-0.6, face + 0.02, 1.4, {
+    color: '#ffd7a0',
+    k: 0.16,
+    sx: 1.4,
+  });
+  up.rotation.x = 0;
+  up.position.y = 1.2;
+  root.add(up);
+}
