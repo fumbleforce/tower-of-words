@@ -11,7 +11,7 @@ import * as THREE from 'three';
 import { createRenderer, Markers, Q, blob } from './engine.js';
 import { makePost } from './post.js';
 import { installMetrics } from './perf/metrics.js';
-import { OutlinePass } from 'three/addons/postprocessing/OutlinePass.js';
+import { OutlinePass } from './perf/outline.js';
 import { pickPerson, bodies, softSeparate } from './move.js';
 import * as ambience from './ambience.js';
 import { loadMio } from './mio.js';

@@ -29,6 +29,14 @@ test('a different quality tier is not compared', () => {
   assert.equal(w.length, 1);
   assert.match(w[0], /not compared/);
 });
+test('a tier above 0 has its own baseline under <layout>-q<tier>', () => {
+  const q1 = report(2000, 16.7, 'gpu', 1);
+  const budgets = baselineFrom(q1, baselineFrom(report(1000, 16.7), {}, 'b1'), 'b1');
+  assert.equal(budgets['desktop-q1'].places.office.calls, 2000);
+  assert.equal(budgets.desktop.places.office.calls, 1000);
+  assert.deepEqual(perfWarnings(q1, budgets), []);
+  assert.equal(perfWarnings(report(2600, 16.7, 'gpu', 1), budgets).length, 1);
+});
 test('summary line lists every place', () => {
   assert.match(perfSummary(report(1000, 16.7)), /office 16\.7\/90 ms, 1000 calls, 400k tris/);
   assert.match(perfSummary(null), /no numbers/);

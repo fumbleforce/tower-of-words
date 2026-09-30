@@ -1,11 +1,13 @@
 // The fast test's performance numbers: writes perf.json to the run's folder, prints one summary line, and warns
 // (never fails) when a place is more than the tolerance over its baseline in game3d/tools/perf/budgets.json.
-// PERF_BASELINE=1 makes a passing run's numbers the baseline for its layout (desktop or phone) and GL (gpu or software).
+// PERF_BASELINE=1 makes a passing run's numbers the baseline for its layout (desktop or phone), quality tier and GL
+// (gpu or software). Tier 0 baselines are under the layout's name, others under `<layout>-q<tier>` (phone-q1).
 // How to read it: notes/PERF.md, "Performance metrics".
 import fs from 'node:fs';
 import path from 'node:path';
 
 export const BUDGETS = new URL('../../tools/perf/budgets.json', import.meta.url);
+export const budgetKey = (report) => (report.quality ? `${report.layout}-q${report.quality}` : report.layout);
 const K = n => n >= 10000 ? `${Math.round(n / 1000)}k` : String(n);
 
 // Numbers over their baseline by more than the tolerance. Draw calls and triangles are compared for every GL;
@@ -13,8 +15,12 @@ const K = n => n >= 10000 ? `${Math.round(n / 1000)}k` : String(n);
 export function perfWarnings(report, budgets) {
   const warnings = [];
   const tol = budgets?.tolerance ?? 0.2;
-  const layout = budgets?.[report?.layout];
-  if (!report || !layout) return warnings;
+  if (!report) return warnings;
+  const layout = budgets?.[budgetKey(report)];
+  if (!layout) {
+    if (report.quality && budgets?.[report.layout]) warnings.push(`no baseline for ${budgetKey(report)}; not compared`);
+    return warnings;
+  }
   if (layout.quality != null && report.quality != null && layout.quality !== report.quality) {
     warnings.push(`baseline is for quality ${layout.quality}, this run is ${report.quality}; not compared`);
     return warnings;
@@ -46,7 +52,8 @@ export function perfSummary(report) {
 
 export function baselineFrom(report, budgets = {}, build = '') {
   const out = { tolerance: 0.2, ...budgets };
-  const layout = out[report.layout] = { ...(out[report.layout] || {}) };
+  const key = budgetKey(report);
+  const layout = out[key] = { ...(out[key] || {}) };
   layout.viewport = report.viewport;
   layout.quality = report.quality;
   layout.places = { ...(layout.places || {}) };
@@ -67,7 +74,7 @@ export function writePerf(output, report, { build = '', pass = true, baseline = 
   if (baseline && !pass) lines.push('perf: the run failed, so the baseline was not changed');
   else if (report && baseline && Object.keys(report.places || {}).length) {
     fs.writeFileSync(BUDGETS, JSON.stringify(baselineFrom(report, budgets || {}, build), null, 2) + '\n');
-    lines.push(`perf: baseline for ${report.layout} (${report.gl}) written to game3d/tools/perf/budgets.json`);
+    lines.push(`perf: baseline for ${budgetKey(report)} (${report.gl}) written to game3d/tools/perf/budgets.json`);
   } else for (const w of perfWarnings(report, budgets)) lines.push('PERF WARN ' + w);
   for (const line of lines) console.log(line);
   return lines;
