@@ -23,11 +23,11 @@
     "art/parts/src/eric/tex.webp",
     "art/parts/src/mio/mesh.glb",
     "art/parts/src/mio/tex.webp",
-    "art/parts/base/clean-eric-source17.json",
+    "art/parts/base/clean-eric-source18.json",
     "art/parts/base/clean-eric-source16.png",
-    "art/parts/base/clean-eric-source17-fit3-layers.json",
-    "art/parts/base/clean-mio-source17.json",
+    "art/parts/base/clean-eric-source18-fit3-layers.json",
+    "art/parts/base/clean-mio-source18.json",
     "art/parts/base/clean-mio-source16.png",
-    "art/parts/base/clean-mio-source17-fit3-layers.json"
+    "art/parts/base/clean-mio-source18-fit3-layers.json"
   ]
 }

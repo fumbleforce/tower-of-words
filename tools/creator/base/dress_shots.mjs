@@ -25,7 +25,7 @@ await withBrowserJob('creator-dress-shots', async (browser) => {
   for (const shot of shots) {
     await page.evaluate(async (s) => {
       const v = globalThis.__creator;
-      await v.set({ body: 'mio', hair: 'own', hairColour: '', eyes: 'original', iris: '', top: 'own', topColour: '', bottom: 'own', bottomColour: '', shoes: 'own', shoesColour: '', skin: '', ...s.look });
+      await v.set({ body: 'mio', hair: 'own', hairColour: '', hairAccent: '', facial: 'own', eyes: 'original', iris: '', top: 'own', topColour: '', bottom: 'own', bottomColour: '', shoes: 'own', shoesColour: '', skin: '', ...s.look });
       const beside = globalThis.document.getElementById('beside');
       if ((beside.getAttribute('aria-pressed') === 'true') !== !!s.beside) beside.click();
       await new Promise((r) => setTimeout(r, 50));
