@@ -614,6 +614,7 @@ export default {
       ], else: [
         { say: 'mio', face: 'deadpan', emo: 'dry', text: "It's the station, tomorrow morning. And if anybody asks, it was the sensor. Don't sleep through it, {gaijin}." },
       ] },
+      { do: 'cam', back: true },
       { do: 'liftOpen' },
       { do: 'walk', who: 'mio', to: 'lift_out', wait: true },
       { do: 'hide', id: 'mio' },
