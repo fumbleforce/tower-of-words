@@ -1,11 +1,12 @@
 // The fountain plaza's furniture (scenes/plaza.js), with the outdoor kit (scenes/outdoor/), placed on the plan's
 // lines (plaza/plan.js):
-//   lamps: the forecourt lane's post lamps along the lane's south edge at every other gap between the avenue's
-//   trees, a pair where the plaza meets the lane, a pair at the mouth of each link, one between each pair of benches
+//   lamps: the forecourt lane's post lamps along each lane's south edge at every other gap between the avenue's
+//   trees; a pair in the ring bed either side of each opening (the two lanes and the canteen link); one between
+//   each pair of benches
 //   benches: two pairs just inside the border ring on the north-west and north-east, facing the fountain, each with
-//   a cherry (or a maple) behind it and a lamp between; two in bays in the lane's south verge, facing the plaza
+//   a cherry (or a maple) behind it and a lamp between; the sorted bins beside the first
 //   the canteen terrace: tables with four chairs under umbrellas in the canteen's teal and a pale canvas
-//   the sorted bins by a bay bench, and bikes in a rack along the shops' backs
+//   bikes in a rack along the shops' backs
 import * as THREE from 'three';
 import { PAL, mat } from '../../props.js';
 import { lamps, bench, bins } from '../outdoor/furniture.js';
@@ -14,36 +15,31 @@ import { merged, AWNING } from '../plaza-buildings.js';
 import { BENCH_ANGLES, RING_LAMPS } from './green.js';
 import * as P from './plan.js';
 
-const { F, R, BORDER, LANE, LANE_N, LINKS, BAYS, AVENUE, CANTEEN, SHOPS_Z, polar } = P;
+const { F, R, BORDER, LANE, LINK, LZ, HALF, AVENUE, CANTEEN, SHOPS_Z, polar } = P;
 
-// the lamps: [x, z, where the light falls: [dx, dz] from the foot]. The lane's lamps light the lane, the plaza's
+// the lamps: [x, z, where the light falls: [dx, dz] from the foot]. The lanes' lamps light the lane, the plaza's
 // light the paving inside its border.
 export function lampPoints() {
-  const s = LANE.s;
   const out = [];
-  for (let i = 0; i + 1 < AVENUE.length; i += 2) out.push([(AVENUE[i] + AVENUE[i + 1]) / 2, s[3] + 0.35, [0, -0.9]]);
+  const zs = LANE.w[3] + 0.35;
+  for (let i = 0; i + 1 < AVENUE.length; i += 2) {
+    const d = (AVENUE[i] + AVENUE[i + 1]) / 2;
+    out.push([F[0] - d, zs, [0, -0.9]], [F[0] + d, zs, [0, -0.9]]);
+  }
   const rr = R + 0.38;
   const inward = ([x, z], d) => {
     const L = Math.hypot(x - F[0], z - F[1]);
     return [x, z, [((F[0] - x) / L) * d, ((F[1] - z) / L) * d]];
   };
-  const zc = LANE_N - 0.5;
-  for (const side of [1, -1]) {
-    const a = Math.asin((zc - F[1]) / rr);
-    out.push(inward(polar(side > 0 ? a : Math.PI - a, rr), 1.1));
+  // either side of each opening, in the ring bed, half a unit clear of the path's edge
+  const off = HALF + 0.5;
+  for (const dz of [-off, off]) {
+    const a = Math.asin((LZ + dz - F[1]) / rr);
+    out.push(inward(polar(a, rr), 1.1), inward(polar(Math.PI - a, rr), 1.1));
   }
+  const cx = (LINK[0] + LINK[1]) / 2;
+  for (const dx of [-off, off]) out.push(inward(polar(2 * Math.PI - Math.acos((cx + dx - F[0]) / rr), rr), 1.1));
   for (const a of RING_LAMPS) out.push(inward(polar(a, rr), 1.1));
-  // a pair on the border ring either side of the axis from the canteen's doors to the fountain
-  const rn = R - BORDER / 2;
-  for (const sx of [-1.8, 1.8]) out.push(inward([F[0] + sx, F[1] - Math.sqrt(rn * rn - sx * sx)], 0.8));
-  // either side of each link's mouth, lighting the link
-  for (const [x, z, dz] of [
-    [LINKS.w[0] + 0.6, LINKS.w[2] - 0.5, 1],
-    [LINKS.w[0] + 0.6, LINKS.w[3] + 0.5, -1],
-    [LINKS.e[1] - 0.6, LINKS.e[2] - 0.5, 1],
-    [LINKS.e[1] - 0.6, LINKS.e[3] + 0.5, -1],
-  ])
-    out.push([x, z, [0, dz * 0.8]]);
   return out;
 }
 
@@ -56,14 +52,16 @@ export function buildLamps(set, p, nav) {
 
 export function buildBenches(p, nav) {
   const r = R - BORDER - 0.55;
+  const facing = (a) => Math.atan2(-Math.cos(a), -Math.sin(a)); // toward the fountain
   for (const a of BENCH_ANGLES) {
     const [x, z] = polar(a, r);
-    bench(p, x, z, Math.atan2(-Math.cos(a), -Math.sin(a)), { len: 1.6 });
+    bench(p, x, z, facing(a), { len: 1.6 });
     nav.block(x - 0.75, x + 0.75, z - 0.75, z + 0.75);
   }
-  const z = LANE.s[3] + 0.55;
-  for (const x of BAYS) bench(p, x, z, Math.PI, { len: 1.6 });
-  bins(p, BAYS[0] + 0.78, z, Math.PI);
+  const a = BENCH_ANGLES[0] - 0.13;
+  const [x, z] = polar(a, r);
+  bins(p, x, z, facing(a));
+  nav.block(x - 0.35, x + 0.35, z - 0.35, z + 0.35);
 }
 
 // the terrace: round tables with four chairs, each under an eight-sided umbrella, clear of the doors
