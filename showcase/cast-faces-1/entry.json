@@ -1,0 +1,112 @@
+{
+ "title": "The new cast portraits in the game",
+ "date": "2026-09-30",
+ "by": "claude-agent:portrait-install",
+ "caption": "Your style-align-1 and npc-base-1 picks are in the game with their full sets of faces: Eric, Kenji, Emi, Aoi and the guard redrawn toward Mio and Kuro, Mori and Hamada in their own style without props. Mio is untouched. Every attempt and my face picks: Review cast-faces-1.",
+ "images": [
+  {
+   "id": "lineup",
+   "image": "art/candidates/portraits/cast-faces-1/lineup.webp",
+   "caption": "The cast as the game places them, Mio and Kuro at the ends"
+  },
+  {
+   "id": "faces",
+   "image": "art/candidates/portraits/cast-faces-1/faces-installed.webp",
+   "caption": "Every face each person has now"
+  }
+ ],
+ "sections": [
+  {
+   "title": "Desktop 1366x860",
+   "caption": "Each person's first line in the day (fast test mode), Eric listening on the right.",
+   "images": [
+    {
+     "id": "desk-kenji",
+     "image": "bible/shots/showcase/cast-faces-1/1366x860-kenji.webp",
+     "caption": "Kenji"
+    },
+    {
+     "id": "desk-mori",
+     "image": "bible/shots/showcase/cast-faces-1/1366x860-mori.webp",
+     "caption": "Mr. Mori"
+    },
+    {
+     "id": "desk-guard",
+     "image": "bible/shots/showcase/cast-faces-1/1366x860-guard.webp",
+     "caption": "Ishibashi, the guard"
+    },
+    {
+     "id": "desk-kuroda",
+     "image": "bible/shots/showcase/cast-faces-1/1366x860-kuroda.webp",
+     "caption": "Mr. Hamada"
+    },
+    {
+     "id": "desk-emi",
+     "image": "bible/shots/showcase/cast-faces-1/1366x860-emi.webp",
+     "caption": "Emi"
+    },
+    {
+     "id": "desk-aoi",
+     "image": "bible/shots/showcase/cast-faces-1/1366x860-aoi.webp",
+     "caption": "Aoi"
+    },
+    {
+     "id": "desk-eric",
+     "image": "bible/shots/showcase/cast-faces-1/1366x860-eric.webp",
+     "caption": "Eric and Mio"
+    }
+   ]
+  },
+  {
+   "title": "Phone 390x844",
+   "caption": "The same lines on a phone.",
+   "images": [
+    {
+     "id": "phone-kenji",
+     "image": "bible/shots/showcase/cast-faces-1/390x844-kenji.webp",
+     "caption": "Kenji"
+    },
+    {
+     "id": "phone-mori",
+     "image": "bible/shots/showcase/cast-faces-1/390x844-mori.webp",
+     "caption": "Mr. Mori"
+    },
+    {
+     "id": "phone-guard",
+     "image": "bible/shots/showcase/cast-faces-1/390x844-guard.webp",
+     "caption": "Ishibashi, the guard"
+    },
+    {
+     "id": "phone-kuroda",
+     "image": "bible/shots/showcase/cast-faces-1/390x844-kuroda.webp",
+     "caption": "Mr. Hamada"
+    },
+    {
+     "id": "phone-emi",
+     "image": "bible/shots/showcase/cast-faces-1/390x844-emi.webp",
+     "caption": "Emi"
+    },
+    {
+     "id": "phone-aoi",
+     "image": "bible/shots/showcase/cast-faces-1/390x844-aoi.webp",
+     "caption": "Aoi"
+    },
+    {
+     "id": "phone-eric",
+     "image": "bible/shots/showcase/cast-faces-1/390x844-eric.webp",
+     "caption": "Eric and Mio"
+    }
+   ]
+  }
+ ],
+ "links": [
+  {
+   "label": "Every attempt",
+   "href": "bible/#review/cast-faces-1"
+  },
+  {
+   "label": "Play it",
+   "href": "game3d/"
+  }
+ ]
+}

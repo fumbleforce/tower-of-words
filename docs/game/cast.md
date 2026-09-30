@@ -45,6 +45,7 @@ The id `kuroda` is Mr. Hamada. The id is older than the name and stays so the vo
 - Home: moving to the island on day 1; his things were sent ahead. A company dorm room, the worst one, facing a concrete wall a couple of metres away (decided for the VN version, 2026-09-25): room 203 on 2F (built as `dorms`, [places.md](places.md)).
 - Speaks English, and barely any Japanese: "arigatō" is about it. He can greet everyone from day 1 and learns greetings and simple phrases quickly; more Japanese opens up the other people (Jørgen, 2026-09-28). Tired, polite and dry.
 - Kotodama works for him and nobody else ([setting.md](setting.md)).
+- Look: approved portrait eric-ink-2001 (reviews/style-align-1): dark-blond hair in a short ponytail, stubble, silver rectangular glasses, grey hoodie under a navy blazer. Copies in art/approved/mc/.
 
 ### Mio (`mio`)
 
@@ -61,7 +62,7 @@ The id `kuroda` is Mr. Hamada. The id is older than the name and stays so the vo
 - Routine: makes the tea; has corn soup from a can every afternoon. Opened the B2 copier's repair request when he was new ([stories/copier.md](stories/copier.md)) and has said 動いて to it every morning since. Went to the Lillehammer Olympics in 1994 and does the ski jump with his hands.
 - Speaks polite Japanese only. His warmth shows in what he does: bows, tea, making room.
 - Knows: Mio (likes her; corrects her 外人 gently, the only time he interrupts).
-- Look: chibi figure in code. His Meshy model (loads with `?cast3d=mori`) is parked (Jørgen, 2026-09-29, review mori-3d: "none of these").
+- Look: approved portrait mori-new-713 (reviews/npc-base-1): neatly combed grey hair, dark grey suit, navy tie, empty hands. Copies in art/approved/mori/. In the 3D world a chibi figure in code; his Meshy model (loads with `?cast3d=mori`) is parked (Jørgen, 2026-09-29, review mori-3d: "none of these").
 
 ### Kenji (`kenji`)
 
@@ -69,7 +70,7 @@ The id `kuroda` is Mr. Hamada. The id is older than the name and stays so the vo
 - Routine: lives on melon soda. His chair broke, so he borrowed Eric's and left it in the machine room.
 - Speaks casual Japanese, and a little school English he likes to practise.
 - Knows: Mori (likes him), Mio (owes her).
-- Look: about 21, inexperienced, eager, easily distracted; varied looks but grounded, a junior IT support guy in work clothes (Jørgen, 2026-09-28). Approved portrait: h4, bedhead with an open smile (reviews/kenji-concept-3). Round 1 (hobby costumes) was rejected as "way out of whacko land... he is at work".
+- Look: about 21, inexperienced, eager, easily distracted; varied looks but grounded, a junior IT support guy in work clothes (Jørgen, 2026-09-28). Approved portrait: h4, bedhead with an open smile (reviews/kenji-concept-3), redrawn toward Mio and Kuro as kenji-ink-2001 (reviews/style-align-1): soft pudgy build, white short-sleeved shirt, dark tie, empty hands. Round 1 (hobby costumes) was rejected as "way out of whacko land... he is at work".
 
 ### Emi (`emi`)
 
@@ -77,14 +78,14 @@ The id `kuroda` is Mr. Hamada. The id is older than the name and stays so the vo
 - On day 1 she is upstairs at head office all day, arguing for B2's parts budget, and comes down at 17:40 ([`emi-budget`](stories/emi-budget.md)).
 - Quick and complete sentences; says the good news first and the problem as an aside.
 - A cast member like any other, with no special restrictions: romance and rewards apply to her as to the rest (Jørgen, 2026-09-27).
-- Look: approved portrait art/approved/emi/emi-after.webp (round 3 RDBT seed 41: auburn bob, clear tortoiseshell glasses, curvy, blazer and pencil skirt).
+- Look: approved portrait emi-base-2001 (reviews/style-align-1), redrawn from round 3 RDBT seed 41 (art/approved/emi/emi-after.webp): reddish auburn bob, tortoiseshell glasses, curvy, charcoal blazer over a cream blouse.
 
 ### Mr. Ishibashi (`guard`)
 
 - Age 64. The security guard at the head office gate. Strict and fair.
 - Routine: at his desk by the gate every morning, greeting people with おはようございます. Feeds a cat that, he says, is not there.
 - Speaks polite, clipped Japanese and no English. Speaks with his hands when he has to, precisely.
-- Look: approved portrait art/approved/ishibashi/ishibashi-after.webp.
+- Look: approved portrait guard-ink-2001 (reviews/style-align-1): bald, thin white moustache, glasses, navy security uniform, empty hands. His name plate, shoulder patch and collar pin carry no letters.
 
 ### Mr. Hamada (`kuroda`)
 
@@ -92,7 +93,7 @@ The id `kuroda` is Mr. Hamada. The id is older than the name and stays so the vo
 - Lives on the island. Falls asleep on the monorail every time he comes back from the mainland, and is late through every gate. Apologises constantly and talks to machines like animals.
 - Speaks Japanese only.
 - Knows: the guard (owes him; the guard gets him through every morning).
-- Look: chibi figure in code, and provisional portraits. "Hamada is fine" (Jørgen).
+- Look: approved portrait hamada-new-743 (reviews/npc-base-1): thin, tired face, black hair going grey at the temples, navy suit, hands in his pockets. In the 3D world a chibi figure in code. "Hamada is fine" (Jørgen).
 
 ### Kuro (`kuro`)
 
@@ -102,7 +103,7 @@ The id `kuroda` is Mr. Hamada. The id is older than the name and stays so the vo
 ### Aoi (`aoi`)
 
 - A new hire. Her assignment is decided today (day 1), and she's telling someone on the phone it can be anywhere but the basement. Japanese only.
-- Look: approved portrait art/approved/aoi/aoi-after.webp.
+- Look: approved portrait aoi-base-2001 (reviews/style-align-1), redrawn from gallery B-aoi (art/approved/aoi/aoi-after.webp): pink bob with dark roots, winking grin, green varsity jacket with a pink star patch.
 
 ### Rei (`rei`)
 

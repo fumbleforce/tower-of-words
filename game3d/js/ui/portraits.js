@@ -7,18 +7,18 @@ import { $ } from './dom.js';
 // All expressions of a person share the framing. Every portrait is placed from this: the same face height on screen,
 // the chin at the same height, the body cut at the waist.
 export const FACE = {
-  aoi: { W: 630, H: 810, f: [222, 196, 413, 389] },
-  // Eric: x and chin from the detector ([112, 163, 348, 399]); the top kept 191 px above the chin, the old crop's face
+  aoi: { W: 597, H: 768, f: [219, 167, 381, 336] },
+  // Eric: x and chin from the detector ([116, 171, 340, 394], eric-ink-2001 from reviews/style-align-1); the top kept 191 px above the chin, the old crop's face
   // height, so he shows 25% bigger than the others, as approved (reviews/eric-portrait-final-3). 648 wide so his left
   // shoulder (image right) ends inside the picture (reviews/eric-canvas-1)
-  eric: { W: 648, H: 768, f: [112, 208, 348, 399] },
-  guard: { W: 597, H: 768, f: [250, 162, 374, 300] },
-  kenji: { W: 597, H: 768, f: [221, 167, 384, 335] },
+  eric: { W: 648, H: 768, f: [116, 203, 340, 394] },
+  guard: { W: 597, H: 768, f: [222, 167, 378, 334] },
+  kenji: { W: 597, H: 768, f: [219, 166, 383, 335] },
   kuro: { W: 630, H: 809, f: [254, 325, 452, 525] },
-  kuroda: { W: 597, H: 768, f: [240, 154, 364, 313] },
+  kuroda: { W: 597, H: 768, f: [237, 167, 362, 338] },
   mio: { W: 597, H: 768, f: [192, 214, 361, 383] },
-  emi: { W: 597, H: 768, f: [203, 159, 395, 349] },
-  mori: { W: 597, H: 768, f: [234, 171, 372, 339] },
+  emi: { W: 597, H: 768, f: [217, 168, 383, 337] },
+  mori: { W: 597, H: 768, f: [228, 171, 371, 334] },
 };
 const EMOTE_FACE = {
   '?': ['suspicious', 'deadpan', 'stern'],

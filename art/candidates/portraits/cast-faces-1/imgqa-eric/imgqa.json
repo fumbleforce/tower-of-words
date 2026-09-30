@@ -1,0 +1,684 @@
+{
+ "character": "eric",
+ "ref": "game3d/assets/portraits/eric-neutral.webp",
+ "face_box_game": [
+  648,
+  768,
+  [
+   116,
+   203,
+   340,
+   394
+  ]
+ ],
+ "ref_face_detected": [
+  117,
+  172,
+  341,
+  395
+ ],
+ "thresholds": {
+  "redrim": [
+   0.02,
+   0.08
+  ],
+  "glasses_cover": [
+   0.87,
+   0.85
+  ],
+  "glasses_worst": [
+   0.7,
+   0.5
+  ],
+  "glasses_dE": [
+   8,
+   15
+  ],
+  "matte_frame": [
+   0.05,
+   0.12
+  ],
+  "matte_holes": [
+   0,
+   3
+  ],
+  "headroom": [
+   0.03,
+   0.01
+  ],
+  "zoom": [
+   0.04,
+   9
+  ],
+  "top": [
+   0.01,
+   9
+  ],
+  "eyes": [
+   0.06,
+   0.12
+  ],
+  "ccip": [
+   0.05,
+   0.09
+  ]
+ },
+ "images": [
+  {
+   "path": "art/candidates/portraits/cast-faces-1/eric-eric-surprised-d70-1.webp",
+   "kind": "cut-out",
+   "size": [
+    648,
+    768
+   ],
+   "face": [
+    116,
+    172,
+    333,
+    396
+   ],
+   "eyes": [
+    [
+     167.0,
+     247.0
+    ],
+    [
+     244.0,
+     229.0
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0
+   },
+   "glasses": {
+    "status": "pass",
+    "cover": 1.0,
+    "worst": 0.996,
+    "worst_part": "her right lens inner",
+    "dE": 0.5,
+    "parts": {
+     "her right lens top": 1.0,
+     "her right lens bottom": 1.0,
+     "her right lens outer": 1.0,
+     "her right lens inner": 0.996,
+     "her left lens top": 1.0,
+     "her left lens bottom": 1.0,
+     "her left lens outer": 1.0,
+     "her left lens inner": 1.0
+    },
+    "flipped": false
+   },
+   "matte": {
+    "holes": 3,
+    "holes_px": 678,
+    "note": "no source render found: holes include gaps between hair strands, not graded",
+    "frame": 0.0,
+    "frame_part": "her right lens top",
+    "frame_min_alpha": 252,
+    "frame_parts": {
+     "her right lens top": 0.0,
+     "her right lens bottom": 0.0,
+     "her right lens outer": 0.0,
+     "her right lens inner": 0.0,
+     "her left lens top": 0.0,
+     "her left lens bottom": 0.0,
+     "her left lens outer": 0.0,
+     "her left lens inner": 0.0
+    },
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.066,
+    "zoom": 0.996,
+    "top": 0.001,
+    "bottom_short": 0.003,
+    "hair_top_game": 51,
+    "hair_top_ref": 51,
+    "crop": [
+     -5.5,
+     -0.8,
+     645.4,
+     770.7
+    ],
+    "eyes": -0.006,
+    "tilt": 1.3,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.005,
+    "ssim": 0.391
+   },
+   "status": "pass"
+  },
+  {
+   "path": "art/candidates/portraits/cast-faces-1/eric-eric-surprised-d70-2.webp",
+   "kind": "cut-out",
+   "size": [
+    648,
+    768
+   ],
+   "face": [
+    120,
+    171,
+    340,
+    398
+   ],
+   "eyes": [
+    [
+     166.5,
+     247.5
+    ],
+    [
+     244.0,
+     229.5
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0
+   },
+   "glasses": {
+    "status": "pass",
+    "cover": 1.0,
+    "worst": 1.0,
+    "worst_part": "her right lens top",
+    "dE": 0.5,
+    "parts": {
+     "her right lens top": 1.0,
+     "her right lens bottom": 1.0,
+     "her right lens outer": 1.0,
+     "her right lens inner": 1.0,
+     "her left lens top": 1.0,
+     "her left lens bottom": 1.0,
+     "her left lens outer": 1.0,
+     "her left lens inner": 1.0
+    },
+    "flipped": false
+   },
+   "matte": {
+    "holes": 3,
+    "holes_px": 678,
+    "note": "no source render found: holes include gaps between hair strands, not graded",
+    "frame": 0.0,
+    "frame_part": "her right lens top",
+    "frame_min_alpha": 252,
+    "frame_parts": {
+     "her right lens top": 0.0,
+     "her right lens bottom": 0.0,
+     "her right lens outer": 0.0,
+     "her right lens inner": 0.0,
+     "her left lens top": 0.0,
+     "her left lens bottom": 0.0,
+     "her left lens outer": 0.0,
+     "her left lens inner": 0.0
+    },
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.066,
+    "zoom": 0.982,
+    "top": 0.005,
+    "bottom_short": 0.012,
+    "hair_top_game": 54,
+    "hair_top_ref": 51,
+    "crop": [
+     -3.1,
+     -4.1,
+     656.5,
+     777.7
+    ],
+    "eyes": -0.003,
+    "tilt": 1.4,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.004,
+    "ssim": 0.622
+   },
+   "status": "pass"
+  },
+  {
+   "path": "art/candidates/portraits/cast-faces-1/eric-eric-surprised-d70-3.webp",
+   "kind": "cut-out",
+   "size": [
+    648,
+    768
+   ],
+   "face": [
+    118,
+    171,
+    342,
+    397
+   ],
+   "eyes": [
+    [
+     166.5,
+     247.5
+    ],
+    [
+     243.5,
+     228.5
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0
+   },
+   "glasses": {
+    "status": "pass",
+    "cover": 1.0,
+    "worst": 1.0,
+    "worst_part": "her right lens top",
+    "dE": 0.5,
+    "parts": {
+     "her right lens top": 1.0,
+     "her right lens bottom": 1.0,
+     "her right lens outer": 1.0,
+     "her right lens inner": 1.0,
+     "her left lens top": 1.0,
+     "her left lens bottom": 1.0,
+     "her left lens outer": 1.0,
+     "her left lens inner": 1.0
+    },
+    "flipped": false
+   },
+   "matte": {
+    "holes": 3,
+    "holes_px": 678,
+    "note": "no source render found: holes include gaps between hair strands, not graded",
+    "frame": 0.0,
+    "frame_part": "her right lens top",
+    "frame_min_alpha": 252,
+    "frame_parts": {
+     "her right lens top": 0.0,
+     "her right lens bottom": 0.0,
+     "her right lens outer": 0.0,
+     "her right lens inner": 0.0,
+     "her left lens top": 0.0,
+     "her left lens bottom": 0.0,
+     "her left lens outer": 0.0,
+     "her left lens inner": 0.0
+    },
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.066,
+    "zoom": 0.987,
+    "top": 0.004,
+    "bottom_short": 0.009,
+    "hair_top_game": 53,
+    "hair_top_ref": 51,
+    "crop": [
+     -2.1,
+     -3.3,
+     654.6,
+     775.0
+    ],
+    "eyes": -0.004,
+    "tilt": 0.6,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.003,
+    "ssim": 0.689
+   },
+   "status": "pass"
+  },
+  {
+   "path": "art/candidates/portraits/cast-faces-1/eric-eric-tired-d65-1.webp",
+   "kind": "cut-out",
+   "size": [
+    648,
+    768
+   ],
+   "face": [
+    116,
+    168,
+    345,
+    394
+   ],
+   "eyes": [
+    [
+     166.0,
+     247.5
+    ],
+    [
+     241.5,
+     228.5
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0
+   },
+   "glasses": {
+    "status": "pass",
+    "cover": 1.0,
+    "worst": 1.0,
+    "worst_part": "her right lens top",
+    "dE": 0.6,
+    "parts": {
+     "her right lens top": 1.0,
+     "her right lens bottom": 1.0,
+     "her right lens outer": 1.0,
+     "her right lens inner": 1.0,
+     "her left lens top": 1.0,
+     "her left lens bottom": 1.0,
+     "her left lens outer": 1.0,
+     "her left lens inner": 1.0
+    },
+    "flipped": false
+   },
+   "matte": {
+    "holes": 3,
+    "holes_px": 678,
+    "note": "no source render found: holes include gaps between hair strands, not graded",
+    "frame": 0.0,
+    "frame_part": "her right lens top",
+    "frame_min_alpha": 252,
+    "frame_parts": {
+     "her right lens top": 0.0,
+     "her right lens bottom": 0.0,
+     "her right lens outer": 0.0,
+     "her right lens inner": 0.0,
+     "her left lens top": 0.0,
+     "her left lens bottom": 0.0,
+     "her left lens outer": 0.0,
+     "her left lens inner": 0.0
+    },
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.066,
+    "zoom": 0.987,
+    "top": 0.008,
+    "bottom_short": 0.005,
+    "hair_top_game": 56,
+    "hair_top_ref": 51,
+    "crop": [
+     -1.6,
+     -6.3,
+     655.1,
+     772.0
+    ],
+    "eyes": 0.009,
+    "tilt": 0.3,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.004,
+    "ssim": 0.463
+   },
+   "status": "pass"
+  },
+  {
+   "path": "art/candidates/portraits/cast-faces-1/eric-eric-tired-d65-2.webp",
+   "kind": "cut-out",
+   "size": [
+    648,
+    768
+   ],
+   "face": [
+    118,
+    169,
+    344,
+    397
+   ],
+   "eyes": [
+    [
+     166.5,
+     246.5
+    ],
+    [
+     241.0,
+     227.5
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0
+   },
+   "glasses": {
+    "status": "pass",
+    "cover": 1.0,
+    "worst": 0.992,
+    "worst_part": "her right lens bottom",
+    "dE": 0.3,
+    "parts": {
+     "her right lens top": 1.0,
+     "her right lens bottom": 0.992,
+     "her right lens outer": 1.0,
+     "her right lens inner": 1.0,
+     "her left lens top": 1.0,
+     "her left lens bottom": 1.0,
+     "her left lens outer": 1.0,
+     "her left lens inner": 1.0
+    },
+    "flipped": false
+   },
+   "matte": {
+    "holes": 3,
+    "holes_px": 678,
+    "note": "no source render found: holes include gaps between hair strands, not graded",
+    "frame": 0.0,
+    "frame_part": "her right lens top",
+    "frame_min_alpha": 251,
+    "frame_parts": {
+     "her right lens top": 0.0,
+     "her right lens bottom": 0.0,
+     "her right lens outer": 0.0,
+     "her right lens inner": 0.0,
+     "her left lens top": 0.0,
+     "her left lens bottom": 0.0,
+     "her left lens outer": 0.0,
+     "her left lens inner": 0.0
+    },
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.066,
+    "zoom": 0.978,
+    "top": 0.009,
+    "bottom_short": 0.013,
+    "hair_top_game": 56,
+    "hair_top_ref": 51,
+    "crop": [
+     -3.1,
+     -6.9,
+     659.4,
+     778.4
+    ],
+    "eyes": -0.002,
+    "tilt": 0.2,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.005,
+    "ssim": 0.499
+   },
+   "status": "pass"
+  },
+  {
+   "path": "art/candidates/portraits/cast-faces-1/eric-eric-tired-d65-3.webp",
+   "kind": "cut-out",
+   "size": [
+    648,
+    768
+   ],
+   "face": [
+    118,
+    169,
+    344,
+    396
+   ],
+   "eyes": [
+    [
+     167.0,
+     247.5
+    ],
+    [
+     241.0,
+     229.0
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0
+   },
+   "glasses": {
+    "status": "pass",
+    "cover": 1.0,
+    "worst": 0.997,
+    "worst_part": "her left lens inner",
+    "dE": 0.4,
+    "parts": {
+     "her right lens top": 1.0,
+     "her right lens bottom": 1.0,
+     "her right lens outer": 1.0,
+     "her right lens inner": 1.0,
+     "her left lens top": 1.0,
+     "her left lens bottom": 1.0,
+     "her left lens outer": 1.0,
+     "her left lens inner": 0.997
+    },
+    "flipped": false
+   },
+   "matte": {
+    "holes": 3,
+    "holes_px": 678,
+    "note": "no source render found: holes include gaps between hair strands, not graded",
+    "frame": 0.0,
+    "frame_part": "her right lens top",
+    "frame_min_alpha": 252,
+    "frame_parts": {
+     "her right lens top": 0.0,
+     "her right lens bottom": 0.0,
+     "her right lens outer": 0.0,
+     "her right lens inner": 0.0,
+     "her left lens top": 0.0,
+     "her left lens bottom": 0.0,
+     "her left lens outer": 0.0,
+     "her left lens inner": 0.0
+    },
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.066,
+    "zoom": 0.982,
+    "top": 0.008,
+    "bottom_short": 0.01,
+    "hair_top_game": 56,
+    "hair_top_ref": 51,
+    "crop": [
+     -2.1,
+     -6.1,
+     657.5,
+     775.7
+    ],
+    "eyes": 0.005,
+    "tilt": 0.4,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.002,
+    "ssim": 0.506
+   },
+   "status": "pass"
+  },
+  {
+   "path": "art/candidates/portraits/cast-faces-1/eric-neutral.webp",
+   "kind": "cut-out",
+   "size": [
+    648,
+    768
+   ],
+   "face": [
+    117,
+    172,
+    341,
+    395
+   ],
+   "eyes": [
+    [
+     166.0,
+     249.0
+    ],
+    [
+     243.5,
+     229.0
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0
+   },
+   "glasses": {
+    "status": "pass",
+    "cover": 1.0,
+    "worst": 1.0,
+    "worst_part": "her right lens top",
+    "dE": 0.0,
+    "parts": {
+     "her right lens top": 1.0,
+     "her right lens bottom": 1.0,
+     "her right lens outer": 1.0,
+     "her right lens inner": 1.0,
+     "her left lens top": 1.0,
+     "her left lens bottom": 1.0,
+     "her left lens outer": 1.0,
+     "her left lens inner": 1.0
+    },
+    "flipped": false
+   },
+   "matte": {
+    "holes": 3,
+    "holes_px": 678,
+    "note": "no source render found: holes include gaps between hair strands, not graded",
+    "frame": 0.0,
+    "frame_part": "her right lens top",
+    "frame_min_alpha": 252,
+    "frame_parts": {
+     "her right lens top": 0.0,
+     "her right lens bottom": 0.0,
+     "her right lens outer": 0.0,
+     "her right lens inner": 0.0,
+     "her left lens top": 0.0,
+     "her left lens bottom": 0.0,
+     "her left lens outer": 0.0,
+     "her left lens inner": 0.0
+    },
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.066,
+    "zoom": 1.0,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 51,
+    "hair_top_ref": 51,
+    "crop": [
+     0.0,
+     0.0,
+     648.0,
+     768.0
+    ],
+    "eyes": 0.0,
+    "tilt": 0.0,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.0,
+    "ssim": 1.0
+   },
+   "status": "pass"
+  }
+ ]
+}
