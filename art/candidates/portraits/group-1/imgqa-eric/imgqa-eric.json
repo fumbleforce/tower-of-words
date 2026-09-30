@@ -1,0 +1,382 @@
+{
+ "character": "eric",
+ "ref": "game3d/assets/portraits/eric-neutral.webp",
+ "face_box_game": [
+  648,
+  768,
+  [
+   112,
+   208,
+   348,
+   399
+  ]
+ ],
+ "ref_face_detected": [
+  114,
+  162,
+  355,
+  403
+ ],
+ "thresholds": {
+  "redrim": [
+   0.02,
+   0.08
+  ],
+  "glasses_cover": [
+   0.87,
+   0.85
+  ],
+  "glasses_worst": [
+   0.7,
+   0.5
+  ],
+  "glasses_dE": [
+   8,
+   15
+  ],
+  "matte_frame": [
+   0.05,
+   0.12
+  ],
+  "matte_holes": [
+   0,
+   3
+  ],
+  "headroom": [
+   0.03,
+   0.01
+  ],
+  "zoom": [
+   0.04,
+   9
+  ],
+  "top": [
+   0.01,
+   9
+  ],
+  "eyes": [
+   0.06,
+   0.12
+  ],
+  "ccip": [
+   0.05,
+   0.09
+  ]
+ },
+ "images": [
+  {
+   "path": "art/candidates/portraits/group-1/group1-hr1001-eric.webp",
+   "kind": "render",
+   "size": [
+    597,
+    768
+   ],
+   "face": [
+    215,
+    167,
+    376,
+    332
+   ],
+   "eyes": [
+    [
+     250.5,
+     233.0
+    ],
+    [
+     295.5,
+     219.5
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0
+   },
+   "glasses": {
+    "status": "fail",
+    "cover": 1.0,
+    "worst": 1.0,
+    "worst_part": "her right lens top",
+    "dE": 22.9,
+    "parts": {
+     "her right lens top": 1.0,
+     "her right lens bottom": 1.0,
+     "her right lens outer": 1.0,
+     "her right lens inner": 1.0,
+     "her left lens top": 1.0,
+     "her left lens bottom": 1.0,
+     "her left lens outer": 1.0,
+     "her left lens inner": 1.0
+    },
+    "flipped": false
+   },
+   "framing": {
+    "headroom": 0.133,
+    "zoom": 1.461,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 67,
+    "hair_top_ref": 57,
+    "crop": [
+     135.0,
+     56.1,
+     578.6,
+     581.9
+    ],
+    "eyes": 0.042,
+    "tilt": -1.9,
+    "status": "warn"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.025,
+    "ssim": 0.288
+   },
+   "status": "fail"
+  },
+  {
+   "path": "art/candidates/portraits/group-1/group1-hr1001-eric-cut.webp",
+   "kind": "cut-out",
+   "size": [
+    597,
+    768
+   ],
+   "face": [
+    215,
+    167,
+    376,
+    332
+   ],
+   "eyes": [
+    [
+     250.5,
+     233.0
+    ],
+    [
+     295.5,
+     219.5
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0
+   },
+   "glasses": {
+    "status": "fail",
+    "cover": 1.0,
+    "worst": 1.0,
+    "worst_part": "her right lens top",
+    "dE": 19.4,
+    "parts": {
+     "her right lens top": 1.0,
+     "her right lens bottom": 1.0,
+     "her right lens outer": 1.0,
+     "her right lens inner": 1.0,
+     "her left lens top": 1.0,
+     "her left lens bottom": 1.0,
+     "her left lens outer": 1.0,
+     "her left lens inner": 1.0
+    },
+    "flipped": false
+   },
+   "matte": {
+    "source": "art/candidates/portraits/group-1/group1-hr1001-eric.webp",
+    "holes": 0,
+    "holes_px": 11,
+    "frame": 0.98,
+    "frame_part": "her right lens outer",
+    "frame_min_alpha": 0,
+    "frame_parts": {
+     "her right lens top": 0.118,
+     "her right lens bottom": 0.742,
+     "her right lens outer": 0.98,
+     "her right lens inner": 0.0,
+     "her left lens top": 0.0,
+     "her left lens bottom": 0.0,
+     "her left lens outer": 0.0,
+     "her left lens inner": 0.0
+    },
+    "status": "fail"
+   },
+   "framing": {
+    "headroom": 0.133,
+    "zoom": 1.461,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 67,
+    "hair_top_ref": 57,
+    "crop": [
+     135.0,
+     56.1,
+     578.6,
+     581.9
+    ],
+    "eyes": 0.042,
+    "tilt": -1.9,
+    "status": "warn"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.021,
+    "ssim": 0.308
+   },
+   "status": "fail"
+  },
+  {
+   "path": "art/candidates/portraits/group-1/group1-hr1003-eric.webp",
+   "kind": "render",
+   "size": [
+    597,
+    768
+   ],
+   "face": [
+    215,
+    165,
+    376,
+    333
+   ],
+   "eyes": [
+    [
+     249.5,
+     230.0
+    ],
+    [
+     298.5,
+     218.5
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0
+   },
+   "glasses": {
+    "status": "fail",
+    "cover": 1.0,
+    "worst": 1.0,
+    "worst_part": "her right lens top",
+    "dE": 17.3,
+    "parts": {
+     "her right lens top": 1.0,
+     "her right lens bottom": 1.0,
+     "her right lens outer": 1.0,
+     "her right lens inner": 1.0,
+     "her left lens top": 1.0,
+     "her left lens bottom": 1.0,
+     "her left lens outer": 1.0,
+     "her left lens inner": 1.0
+    },
+    "flipped": false
+   },
+   "framing": {
+    "headroom": 0.125,
+    "zoom": 1.435,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 63,
+    "hair_top_ref": 57,
+    "crop": [
+     132.0,
+     52.1,
+     583.7,
+     587.4
+    ],
+    "eyes": 0.035,
+    "tilt": 1.6,
+    "status": "warn"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.034,
+    "ssim": 0.302
+   },
+   "status": "fail"
+  },
+  {
+   "path": "art/candidates/portraits/group-1/group1-hr1003-eric-cut.webp",
+   "kind": "cut-out",
+   "size": [
+    597,
+    768
+   ],
+   "face": [
+    216,
+    165,
+    376,
+    333
+   ],
+   "eyes": [
+    [
+     249.5,
+     229.5
+    ],
+    [
+     298.0,
+     218.0
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0
+   },
+   "glasses": {
+    "status": "pass",
+    "cover": 1.0,
+    "worst": 1.0,
+    "worst_part": "her right lens top",
+    "dE": 3.6,
+    "parts": {
+     "her right lens top": 1.0,
+     "her right lens bottom": 1.0,
+     "her right lens outer": 1.0,
+     "her right lens inner": 1.0,
+     "her left lens top": 1.0,
+     "her left lens bottom": 1.0,
+     "her left lens outer": 1.0,
+     "her left lens inner": 1.0
+    },
+    "flipped": false
+   },
+   "matte": {
+    "source": "art/candidates/portraits/group-1/group1-hr1003-eric.webp",
+    "holes": 0,
+    "holes_px": 26,
+    "frame": 1.0,
+    "frame_part": "her right lens outer",
+    "frame_min_alpha": 0,
+    "frame_parts": {
+     "her right lens top": 0.137,
+     "her right lens bottom": 0.828,
+     "her right lens outer": 1.0,
+     "her right lens inner": 0.0,
+     "her left lens top": 0.0,
+     "her left lens bottom": 0.0,
+     "her left lens outer": 0.0,
+     "her left lens inner": 0.0
+    },
+    "status": "fail"
+   },
+   "framing": {
+    "headroom": 0.125,
+    "zoom": 1.435,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 63,
+    "hair_top_ref": 57,
+    "crop": [
+     132.5,
+     52.1,
+     584.2,
+     587.4
+    ],
+    "eyes": 0.032,
+    "tilt": 1.5,
+    "status": "warn"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.033,
+    "ssim": 0.332
+   },
+   "status": "fail"
+  }
+ ]
+}

@@ -1,0 +1,382 @@
+{
+ "character": "mio",
+ "ref": "game3d/assets/portraits/mio-neutral.webp",
+ "face_box_game": [
+  597,
+  768,
+  [
+   192,
+   214,
+   361,
+   383
+  ]
+ ],
+ "ref_face_detected": [
+  192,
+  214,
+  361,
+  383
+ ],
+ "thresholds": {
+  "redrim": [
+   0.02,
+   0.08
+  ],
+  "glasses_cover": [
+   0.87,
+   0.85
+  ],
+  "glasses_worst": [
+   0.7,
+   0.5
+  ],
+  "glasses_dE": [
+   8,
+   15
+  ],
+  "matte_frame": [
+   0.05,
+   0.12
+  ],
+  "matte_holes": [
+   0,
+   3
+  ],
+  "headroom": [
+   0.03,
+   0.01
+  ],
+  "zoom": [
+   0.04,
+   9
+  ],
+  "top": [
+   0.01,
+   9
+  ],
+  "eyes": [
+   0.06,
+   0.12
+  ],
+  "ccip": [
+   0.05,
+   0.09
+  ]
+ },
+ "images": [
+  {
+   "path": "art/candidates/portraits/group-1/group1-hr1001-mio.webp",
+   "kind": "render",
+   "size": [
+    597,
+    768
+   ],
+   "face": [
+    223,
+    169,
+    386,
+    335
+   ],
+   "eyes": [
+    [
+     259.5,
+     240.5
+    ],
+    [
+     329.0,
+     227.5
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0
+   },
+   "glasses": {
+    "status": "fail",
+    "cover": 0.965,
+    "worst": 0.929,
+    "worst_part": "her left lens outer",
+    "dE": 23.3,
+    "parts": {
+     "her right lens top": 0.981,
+     "her right lens bottom": 0.963,
+     "her right lens outer": 0.972,
+     "her right lens inner": 0.974,
+     "her left lens top": 1.0,
+     "her left lens bottom": 0.971,
+     "her left lens outer": 0.929,
+     "her left lens inner": 1.0
+    },
+    "flipped": false
+   },
+   "framing": {
+    "headroom": 0.076,
+    "zoom": 1.018,
+    "top": 0.055,
+    "bottom_short": 0.0,
+    "hair_top_game": 100,
+    "hair_top_ref": 96,
+    "crop": [
+     32.9,
+     -41.2,
+     619.3,
+     713.2
+    ],
+    "eyes": -0.0,
+    "tilt": 1.9,
+    "status": "warn"
+   },
+   "drift": {
+    "status": "fail",
+    "ccip": 0.111,
+    "ssim": 0.143
+   },
+   "status": "fail"
+  },
+  {
+   "path": "art/candidates/portraits/group-1/group1-hr1001-mio-cut.webp",
+   "kind": "cut-out",
+   "size": [
+    597,
+    768
+   ],
+   "face": [
+    223,
+    169,
+    386,
+    335
+   ],
+   "eyes": [
+    [
+     259.5,
+     240.5
+    ],
+    [
+     329.0,
+     228.0
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0
+   },
+   "glasses": {
+    "status": "fail",
+    "cover": 0.961,
+    "worst": 0.92,
+    "worst_part": "her left lens outer",
+    "dE": 22.4,
+    "parts": {
+     "her right lens top": 0.942,
+     "her right lens bottom": 1.0,
+     "her right lens outer": 0.948,
+     "her right lens inner": 0.996,
+     "her left lens top": 1.0,
+     "her left lens bottom": 0.963,
+     "her left lens outer": 0.92,
+     "her left lens inner": 0.989
+    },
+    "flipped": false
+   },
+   "matte": {
+    "source": "art/candidates/portraits/group-1/group1-hr1001-mio.webp",
+    "holes": 0,
+    "holes_px": 0,
+    "frame": 0.0,
+    "frame_part": "her right lens top",
+    "frame_min_alpha": 254,
+    "frame_parts": {
+     "her right lens top": 0.0,
+     "her right lens bottom": 0.0,
+     "her right lens outer": 0.0,
+     "her right lens inner": 0.0,
+     "her left lens top": 0.0,
+     "her left lens bottom": 0.0,
+     "her left lens outer": 0.0,
+     "her left lens inner": 0.0
+    },
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.076,
+    "zoom": 1.018,
+    "top": 0.055,
+    "bottom_short": 0.0,
+    "hair_top_game": 100,
+    "hair_top_ref": 96,
+    "crop": [
+     32.9,
+     -41.2,
+     619.3,
+     713.2
+    ],
+    "eyes": 0.001,
+    "tilt": 2.3,
+    "status": "warn"
+   },
+   "drift": {
+    "status": "fail",
+    "ccip": 0.112,
+    "ssim": 0.143
+   },
+   "status": "fail"
+  },
+  {
+   "path": "art/candidates/portraits/group-1/group1-hr1003-mio.webp",
+   "kind": "render",
+   "size": [
+    597,
+    768
+   ],
+   "face": [
+    222,
+    171,
+    384,
+    331
+   ],
+   "eyes": [
+    [
+     255.5,
+     239.0
+    ],
+    [
+     325.5,
+     223.5
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0
+   },
+   "glasses": {
+    "status": "pass",
+    "cover": 0.945,
+    "worst": 0.794,
+    "worst_part": "her right lens bottom",
+    "dE": 4.0,
+    "parts": {
+     "her right lens top": 1.0,
+     "her right lens bottom": 0.794,
+     "her right lens outer": 0.94,
+     "her right lens inner": 0.982,
+     "her left lens top": 0.986,
+     "her left lens bottom": 0.912,
+     "her left lens outer": 0.969,
+     "her left lens inner": 0.892
+    },
+    "flipped": false
+   },
+   "framing": {
+    "headroom": 0.09,
+    "zoom": 1.056,
+    "top": 0.043,
+    "bottom_short": 0.0,
+    "hair_top_game": 106,
+    "hair_top_ref": 96,
+    "crop": [
+     41.2,
+     -31.6,
+     606.4,
+     695.5
+    ],
+    "eyes": -0.015,
+    "tilt": 0.0,
+    "status": "warn"
+   },
+   "drift": {
+    "status": "fail",
+    "ccip": 0.134,
+    "ssim": 0.185
+   },
+   "status": "fail"
+  },
+  {
+   "path": "art/candidates/portraits/group-1/group1-hr1003-mio-cut.webp",
+   "kind": "cut-out",
+   "size": [
+    597,
+    768
+   ],
+   "face": [
+    222,
+    170,
+    384,
+    331
+   ],
+   "eyes": [
+    [
+     255.5,
+     239.0
+    ],
+    [
+     325.5,
+     223.5
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0
+   },
+   "glasses": {
+    "status": "fail",
+    "cover": 0.933,
+    "worst": 0.865,
+    "worst_part": "her right lens top",
+    "dE": 18.3,
+    "parts": {
+     "her right lens top": 0.865,
+     "her right lens bottom": 0.953,
+     "her right lens outer": 0.88,
+     "her right lens inner": 0.974,
+     "her left lens top": 1.0,
+     "her left lens bottom": 0.949,
+     "her left lens outer": 0.949,
+     "her left lens inner": 0.871
+    },
+    "flipped": false
+   },
+   "matte": {
+    "source": "art/candidates/portraits/group-1/group1-hr1003-mio.webp",
+    "holes": 0,
+    "holes_px": 2,
+    "frame": 0.0,
+    "frame_part": "her right lens top",
+    "frame_min_alpha": 254,
+    "frame_parts": {
+     "her right lens top": 0.0,
+     "her right lens bottom": 0.0,
+     "her right lens outer": 0.0,
+     "her right lens inner": 0.0,
+     "her left lens top": 0.0,
+     "her left lens bottom": 0.0,
+     "her left lens outer": 0.0,
+     "her left lens inner": 0.0
+    },
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.091,
+    "zoom": 1.05,
+    "top": 0.046,
+    "bottom_short": 0.0,
+    "hair_top_game": 109,
+    "hair_top_ref": 96,
+    "crop": [
+     39.6,
+     -33.9,
+     608.3,
+     697.8
+    ],
+    "eyes": -0.012,
+    "tilt": 0.0,
+    "status": "warn"
+   },
+   "drift": {
+    "status": "fail",
+    "ccip": 0.134,
+    "ssim": 0.191
+   },
+   "status": "fail"
+  }
+ ]
+}

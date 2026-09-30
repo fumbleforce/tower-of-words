@@ -1,0 +1,616 @@
+{
+ "a-1001": {
+  "model": "rdbtAnima",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 3boys, 2girls, group photo, from left to right: Eric, a Scandinavian man in his early thirties, fair pale skin, blue eyes, dark-blond hair, same colour all over, tied in a short ponytail at the back, (facial hair, dark-blond stubble:1.3), (silver rectangular glasses:1.2), grey hoodie under a navy blazer, company lanyard, faint smile; Mio, a 25-year-old woman, slim with soft curves, messy black hair with green underneath in a loose bun, bangs, light tan eyes, taupe-grey glasses with clear lenses, large headphones around her neck, oversized dark green hoodie, company lanyard, calm deadpan expression; Kenji, a 21-year-old young man with a youthful boyish face, short and pudgy with a round chubby face, thick eyebrows, messy black bedhead hair with a cowlick, a white short-sleeved work shirt with a dark tie, company lanyard with an ID card, friendly smile; Mr. Mori, a 58-year-old Japanese man, slim with an upright posture, neatly combed grey hair with a side parting, an older face with wrinkles around his eyes and mouth, dark grey suit with a navy tie, gentle polite smile; Emi, a 32-year-old British woman, fair skin, auburn shoulder-length bob with side-swept bangs, warm brown eyes, brown tortoiseshell glasses with clear lenses, soft rounded face, curvy, fitted charcoal blazer over a cream blouse, company lanyard, warm smile. All five stand side by side in a row facing the viewer, arms relaxed at their sides, empty hands. Eric and Mr. Mori are the tallest, Mio and Emi are a little shorter, Kenji is the shortest. waist-up group portrait, (every head inside the frame with empty space above the hair:1.2), behind them a Japanese office with desks and computers, soft even indoor light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, nude, nsfw, child, loli, fat, obese, (rim light, red rim light, red outline, backlighting:1.4), holding, holding object, tool, screwdriver, pen, pencil, cup, phone, papers, book, undercut, shaved sides, two-tone hair, extra person, merged bodies",
+  "seed": 1001,
+  "w": 1664,
+  "h": 896,
+  "steps": 30,
+  "cfg": 5,
+  "sampler": "euler_ancestral normal"
+ },
+ "b-1001": {
+  "model": "rdbtAnima",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 3boys, 2girls, group photo, from left to right: Eric, a Scandinavian man in his early thirties, fair pale skin, blue eyes, dark-blond hair, same colour all over, tied in a short ponytail at the back, (facial hair, dark-blond stubble:1.3), (silver rectangular glasses:1.2), grey hoodie under a navy blazer, company lanyard, faint smile; Mio, a 25-year-old woman, slim with soft curves, messy black hair with green underneath in a loose bun, bangs, light tan eyes, taupe-grey glasses with clear lenses, large headphones around her neck, oversized dark green hoodie, company lanyard, calm deadpan expression; Kenji, a 21-year-old young man with a youthful boyish face, short and pudgy with a round chubby face, thick eyebrows, messy black bedhead hair with a cowlick, a white short-sleeved work shirt with a dark tie, company lanyard with an ID card, friendly smile; Mr. Mori, a 58-year-old Japanese man, slim with an upright posture, neatly combed grey hair with a side parting, an older face with wrinkles around his eyes and mouth, dark grey suit with a navy tie, gentle polite smile; Emi, a 32-year-old British woman, fair skin, auburn shoulder-length bob with side-swept bangs, warm brown eyes, brown tortoiseshell glasses with clear lenses, soft rounded face, curvy, fitted charcoal blazer over a cream blouse, company lanyard, warm smile. All five stand side by side in a row facing the viewer, arms relaxed at their sides, empty hands. Eric and Mr. Mori are the tallest, Mio and Emi are a little shorter, Kenji is the shortest. waist-up group portrait, (every head inside the frame with empty space above the hair:1.2), behind them a Japanese office with desks and computers, soft even indoor light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, nude, nsfw, child, loli, fat, obese, (rim light, red rim light, red outline, backlighting:1.4), holding, holding object, tool, screwdriver, pen, pencil, cup, phone, papers, book, undercut, shaved sides, two-tone hair, extra person, merged bodies",
+  "seed": 1001,
+  "w": 1664,
+  "h": 896,
+  "steps": 30,
+  "cfg": 5,
+  "sampler": "euler_ancestral normal",
+  "regional": {
+   "regions": {
+    "eric": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, Eric, a Scandinavian man in his early thirties, fair pale skin, blue eyes, dark-blond hair, same colour all over, tied in a short ponytail at the back, (facial hair, dark-blond stubble:1.3), (silver rectangular glasses:1.2), grey hoodie under a navy blazer, company lanyard, faint smile, standing, facing the viewer, arms at sides, waist-up, office background",
+    "mio": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1girl, solo, Mio, a 25-year-old woman, slim with soft curves, messy black hair with green underneath in a loose bun, bangs, light tan eyes, taupe-grey glasses with clear lenses, large headphones around her neck, oversized dark green hoodie, company lanyard, calm deadpan expression, standing, facing the viewer, arms at sides, waist-up, office background",
+    "kenji": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, Kenji, a 21-year-old young man with a youthful boyish face, short and pudgy with a round chubby face, thick eyebrows, messy black bedhead hair with a cowlick, a white short-sleeved work shirt with a dark tie, company lanyard with an ID card, friendly smile, standing, facing the viewer, arms at sides, waist-up, office background",
+    "mori": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, Mr. Mori, a 58-year-old Japanese man, slim with an upright posture, neatly combed grey hair with a side parting, an older face with wrinkles around his eyes and mouth, dark grey suit with a navy tie, gentle polite smile, standing, facing the viewer, arms at sides, waist-up, office background",
+    "emi": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1girl, solo, Emi, a 32-year-old British woman, fair skin, auburn shoulder-length bob with side-swept bangs, warm brown eyes, brown tortoiseshell glasses with clear lenses, soft rounded face, curvy, fitted charcoal blazer over a cream blouse, company lanyard, warm smile, standing, facing the viewer, arms at sides, waist-up, office background"
+   },
+   "masks": "5 equal vertical strips",
+   "base_mode": "disabled",
+   "end_percent": 0.35,
+   "self_mask_strength": 0.2,
+   "cross_mask_strength": 1.0,
+   "base_ratio": 0.1,
+   "overlap_px": 0
+  }
+ },
+ "c-1001": {
+  "model": "rdbtAnima",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 3boys, 2girls, group photo, from left to right: Eric, a Scandinavian man in his early thirties, fair pale skin, blue eyes, dark-blond hair, same colour all over, tied in a short ponytail at the back, (facial hair, dark-blond stubble:1.3), (silver rectangular glasses:1.2), grey hoodie under a navy blazer, company lanyard, faint smile; Mio, a 25-year-old woman, slim with soft curves, messy black hair with green underneath in a loose bun, bangs, light tan eyes, taupe-grey glasses with clear lenses, large headphones around her neck, oversized dark green hoodie, company lanyard, calm deadpan expression; Kenji, a 21-year-old young man with a youthful boyish face, short and pudgy with a round chubby face, thick eyebrows, messy black bedhead hair with a cowlick, a white short-sleeved work shirt with a dark tie, company lanyard with an ID card, friendly smile; Mr. Mori, a 58-year-old Japanese man, slim with an upright posture, neatly combed grey hair with a side parting, an older face with wrinkles around his eyes and mouth, dark grey suit with a navy tie, gentle polite smile; Emi, a 32-year-old British woman, fair skin, auburn shoulder-length bob with side-swept bangs, warm brown eyes, brown tortoiseshell glasses with clear lenses, soft rounded face, curvy, fitted charcoal blazer over a cream blouse, company lanyard, warm smile. All five stand side by side in a row facing the viewer, arms relaxed at their sides, empty hands. Eric and Mr. Mori are the tallest, Mio and Emi are a little shorter, Kenji is the shortest. waist-up group portrait, (every head inside the frame with empty space above the hair:1.2), behind them a Japanese office with desks and computers, soft even indoor light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, nude, nsfw, child, loli, fat, obese, (rim light, red rim light, red outline, backlighting:1.4), holding, holding object, tool, screwdriver, pen, pencil, cup, phone, papers, book, undercut, shaved sides, two-tone hair, extra person, merged bodies",
+  "seed": 1001,
+  "w": 1664,
+  "h": 896,
+  "steps": 30,
+  "cfg": 5,
+  "sampler": "euler_ancestral normal",
+  "img2img": {
+   "init": "group1-collage.webp",
+   "denoise": 0.65
+  }
+ },
+ "a-1002": {
+  "model": "rdbtAnima",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 3boys, 2girls, group photo, from left to right: Eric, a Scandinavian man in his early thirties, fair pale skin, blue eyes, dark-blond hair, same colour all over, tied in a short ponytail at the back, (facial hair, dark-blond stubble:1.3), (silver rectangular glasses:1.2), grey hoodie under a navy blazer, company lanyard, faint smile; Mio, a 25-year-old woman, slim with soft curves, messy black hair with green underneath in a loose bun, bangs, light tan eyes, taupe-grey glasses with clear lenses, large headphones around her neck, oversized dark green hoodie, company lanyard, calm deadpan expression; Kenji, a 21-year-old young man with a youthful boyish face, short and pudgy with a round chubby face, thick eyebrows, messy black bedhead hair with a cowlick, a white short-sleeved work shirt with a dark tie, company lanyard with an ID card, friendly smile; Mr. Mori, a 58-year-old Japanese man, slim with an upright posture, neatly combed grey hair with a side parting, an older face with wrinkles around his eyes and mouth, dark grey suit with a navy tie, gentle polite smile; Emi, a 32-year-old British woman, fair skin, auburn shoulder-length bob with side-swept bangs, warm brown eyes, brown tortoiseshell glasses with clear lenses, soft rounded face, curvy, fitted charcoal blazer over a cream blouse, company lanyard, warm smile. All five stand side by side in a row facing the viewer, arms relaxed at their sides, empty hands. Eric and Mr. Mori are the tallest, Mio and Emi are a little shorter, Kenji is the shortest. waist-up group portrait, (every head inside the frame with empty space above the hair:1.2), behind them a Japanese office with desks and computers, soft even indoor light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, nude, nsfw, child, loli, fat, obese, (rim light, red rim light, red outline, backlighting:1.4), holding, holding object, tool, screwdriver, pen, pencil, cup, phone, papers, book, undercut, shaved sides, two-tone hair, extra person, merged bodies",
+  "seed": 1002,
+  "w": 1664,
+  "h": 896,
+  "steps": 30,
+  "cfg": 5,
+  "sampler": "euler_ancestral normal"
+ },
+ "b-1002": {
+  "model": "rdbtAnima",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 3boys, 2girls, group photo, from left to right: Eric, a Scandinavian man in his early thirties, fair pale skin, blue eyes, dark-blond hair, same colour all over, tied in a short ponytail at the back, (facial hair, dark-blond stubble:1.3), (silver rectangular glasses:1.2), grey hoodie under a navy blazer, company lanyard, faint smile; Mio, a 25-year-old woman, slim with soft curves, messy black hair with green underneath in a loose bun, bangs, light tan eyes, taupe-grey glasses with clear lenses, large headphones around her neck, oversized dark green hoodie, company lanyard, calm deadpan expression; Kenji, a 21-year-old young man with a youthful boyish face, short and pudgy with a round chubby face, thick eyebrows, messy black bedhead hair with a cowlick, a white short-sleeved work shirt with a dark tie, company lanyard with an ID card, friendly smile; Mr. Mori, a 58-year-old Japanese man, slim with an upright posture, neatly combed grey hair with a side parting, an older face with wrinkles around his eyes and mouth, dark grey suit with a navy tie, gentle polite smile; Emi, a 32-year-old British woman, fair skin, auburn shoulder-length bob with side-swept bangs, warm brown eyes, brown tortoiseshell glasses with clear lenses, soft rounded face, curvy, fitted charcoal blazer over a cream blouse, company lanyard, warm smile. All five stand side by side in a row facing the viewer, arms relaxed at their sides, empty hands. Eric and Mr. Mori are the tallest, Mio and Emi are a little shorter, Kenji is the shortest. waist-up group portrait, (every head inside the frame with empty space above the hair:1.2), behind them a Japanese office with desks and computers, soft even indoor light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, nude, nsfw, child, loli, fat, obese, (rim light, red rim light, red outline, backlighting:1.4), holding, holding object, tool, screwdriver, pen, pencil, cup, phone, papers, book, undercut, shaved sides, two-tone hair, extra person, merged bodies",
+  "seed": 1002,
+  "w": 1664,
+  "h": 896,
+  "steps": 30,
+  "cfg": 5,
+  "sampler": "euler_ancestral normal",
+  "regional": {
+   "regions": {
+    "eric": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, Eric, a Scandinavian man in his early thirties, fair pale skin, blue eyes, dark-blond hair, same colour all over, tied in a short ponytail at the back, (facial hair, dark-blond stubble:1.3), (silver rectangular glasses:1.2), grey hoodie under a navy blazer, company lanyard, faint smile, standing, facing the viewer, arms at sides, waist-up, office background",
+    "mio": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1girl, solo, Mio, a 25-year-old woman, slim with soft curves, messy black hair with green underneath in a loose bun, bangs, light tan eyes, taupe-grey glasses with clear lenses, large headphones around her neck, oversized dark green hoodie, company lanyard, calm deadpan expression, standing, facing the viewer, arms at sides, waist-up, office background",
+    "kenji": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, Kenji, a 21-year-old young man with a youthful boyish face, short and pudgy with a round chubby face, thick eyebrows, messy black bedhead hair with a cowlick, a white short-sleeved work shirt with a dark tie, company lanyard with an ID card, friendly smile, standing, facing the viewer, arms at sides, waist-up, office background",
+    "mori": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, Mr. Mori, a 58-year-old Japanese man, slim with an upright posture, neatly combed grey hair with a side parting, an older face with wrinkles around his eyes and mouth, dark grey suit with a navy tie, gentle polite smile, standing, facing the viewer, arms at sides, waist-up, office background",
+    "emi": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1girl, solo, Emi, a 32-year-old British woman, fair skin, auburn shoulder-length bob with side-swept bangs, warm brown eyes, brown tortoiseshell glasses with clear lenses, soft rounded face, curvy, fitted charcoal blazer over a cream blouse, company lanyard, warm smile, standing, facing the viewer, arms at sides, waist-up, office background"
+   },
+   "masks": "5 equal vertical strips",
+   "base_mode": "disabled",
+   "end_percent": 0.35,
+   "self_mask_strength": 0.2,
+   "cross_mask_strength": 1.0,
+   "base_ratio": 0.1,
+   "overlap_px": 0
+  }
+ },
+ "c-1002": {
+  "model": "rdbtAnima",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 3boys, 2girls, group photo, from left to right: Eric, a Scandinavian man in his early thirties, fair pale skin, blue eyes, dark-blond hair, same colour all over, tied in a short ponytail at the back, (facial hair, dark-blond stubble:1.3), (silver rectangular glasses:1.2), grey hoodie under a navy blazer, company lanyard, faint smile; Mio, a 25-year-old woman, slim with soft curves, messy black hair with green underneath in a loose bun, bangs, light tan eyes, taupe-grey glasses with clear lenses, large headphones around her neck, oversized dark green hoodie, company lanyard, calm deadpan expression; Kenji, a 21-year-old young man with a youthful boyish face, short and pudgy with a round chubby face, thick eyebrows, messy black bedhead hair with a cowlick, a white short-sleeved work shirt with a dark tie, company lanyard with an ID card, friendly smile; Mr. Mori, a 58-year-old Japanese man, slim with an upright posture, neatly combed grey hair with a side parting, an older face with wrinkles around his eyes and mouth, dark grey suit with a navy tie, gentle polite smile; Emi, a 32-year-old British woman, fair skin, auburn shoulder-length bob with side-swept bangs, warm brown eyes, brown tortoiseshell glasses with clear lenses, soft rounded face, curvy, fitted charcoal blazer over a cream blouse, company lanyard, warm smile. All five stand side by side in a row facing the viewer, arms relaxed at their sides, empty hands. Eric and Mr. Mori are the tallest, Mio and Emi are a little shorter, Kenji is the shortest. waist-up group portrait, (every head inside the frame with empty space above the hair:1.2), behind them a Japanese office with desks and computers, soft even indoor light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, nude, nsfw, child, loli, fat, obese, (rim light, red rim light, red outline, backlighting:1.4), holding, holding object, tool, screwdriver, pen, pencil, cup, phone, papers, book, undercut, shaved sides, two-tone hair, extra person, merged bodies",
+  "seed": 1002,
+  "w": 1664,
+  "h": 896,
+  "steps": 30,
+  "cfg": 5,
+  "sampler": "euler_ancestral normal",
+  "img2img": {
+   "init": "group1-collage.webp",
+   "denoise": 0.65
+  }
+ },
+ "a-1003": {
+  "model": "rdbtAnima",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 3boys, 2girls, group photo, from left to right: Eric, a Scandinavian man in his early thirties, fair pale skin, blue eyes, dark-blond hair, same colour all over, tied in a short ponytail at the back, (facial hair, dark-blond stubble:1.3), (silver rectangular glasses:1.2), grey hoodie under a navy blazer, company lanyard, faint smile; Mio, a 25-year-old woman, slim with soft curves, messy black hair with green underneath in a loose bun, bangs, light tan eyes, taupe-grey glasses with clear lenses, large headphones around her neck, oversized dark green hoodie, company lanyard, calm deadpan expression; Kenji, a 21-year-old young man with a youthful boyish face, short and pudgy with a round chubby face, thick eyebrows, messy black bedhead hair with a cowlick, a white short-sleeved work shirt with a dark tie, company lanyard with an ID card, friendly smile; Mr. Mori, a 58-year-old Japanese man, slim with an upright posture, neatly combed grey hair with a side parting, an older face with wrinkles around his eyes and mouth, dark grey suit with a navy tie, gentle polite smile; Emi, a 32-year-old British woman, fair skin, auburn shoulder-length bob with side-swept bangs, warm brown eyes, brown tortoiseshell glasses with clear lenses, soft rounded face, curvy, fitted charcoal blazer over a cream blouse, company lanyard, warm smile. All five stand side by side in a row facing the viewer, arms relaxed at their sides, empty hands. Eric and Mr. Mori are the tallest, Mio and Emi are a little shorter, Kenji is the shortest. waist-up group portrait, (every head inside the frame with empty space above the hair:1.2), behind them a Japanese office with desks and computers, soft even indoor light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, nude, nsfw, child, loli, fat, obese, (rim light, red rim light, red outline, backlighting:1.4), holding, holding object, tool, screwdriver, pen, pencil, cup, phone, papers, book, undercut, shaved sides, two-tone hair, extra person, merged bodies",
+  "seed": 1003,
+  "w": 1664,
+  "h": 896,
+  "steps": 30,
+  "cfg": 5,
+  "sampler": "euler_ancestral normal"
+ },
+ "b-1003": {
+  "model": "rdbtAnima",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 3boys, 2girls, group photo, from left to right: Eric, a Scandinavian man in his early thirties, fair pale skin, blue eyes, dark-blond hair, same colour all over, tied in a short ponytail at the back, (facial hair, dark-blond stubble:1.3), (silver rectangular glasses:1.2), grey hoodie under a navy blazer, company lanyard, faint smile; Mio, a 25-year-old woman, slim with soft curves, messy black hair with green underneath in a loose bun, bangs, light tan eyes, taupe-grey glasses with clear lenses, large headphones around her neck, oversized dark green hoodie, company lanyard, calm deadpan expression; Kenji, a 21-year-old young man with a youthful boyish face, short and pudgy with a round chubby face, thick eyebrows, messy black bedhead hair with a cowlick, a white short-sleeved work shirt with a dark tie, company lanyard with an ID card, friendly smile; Mr. Mori, a 58-year-old Japanese man, slim with an upright posture, neatly combed grey hair with a side parting, an older face with wrinkles around his eyes and mouth, dark grey suit with a navy tie, gentle polite smile; Emi, a 32-year-old British woman, fair skin, auburn shoulder-length bob with side-swept bangs, warm brown eyes, brown tortoiseshell glasses with clear lenses, soft rounded face, curvy, fitted charcoal blazer over a cream blouse, company lanyard, warm smile. All five stand side by side in a row facing the viewer, arms relaxed at their sides, empty hands. Eric and Mr. Mori are the tallest, Mio and Emi are a little shorter, Kenji is the shortest. waist-up group portrait, (every head inside the frame with empty space above the hair:1.2), behind them a Japanese office with desks and computers, soft even indoor light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, nude, nsfw, child, loli, fat, obese, (rim light, red rim light, red outline, backlighting:1.4), holding, holding object, tool, screwdriver, pen, pencil, cup, phone, papers, book, undercut, shaved sides, two-tone hair, extra person, merged bodies",
+  "seed": 1003,
+  "w": 1664,
+  "h": 896,
+  "steps": 30,
+  "cfg": 5,
+  "sampler": "euler_ancestral normal",
+  "regional": {
+   "regions": {
+    "eric": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, Eric, a Scandinavian man in his early thirties, fair pale skin, blue eyes, dark-blond hair, same colour all over, tied in a short ponytail at the back, (facial hair, dark-blond stubble:1.3), (silver rectangular glasses:1.2), grey hoodie under a navy blazer, company lanyard, faint smile, standing, facing the viewer, arms at sides, waist-up, office background",
+    "mio": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1girl, solo, Mio, a 25-year-old woman, slim with soft curves, messy black hair with green underneath in a loose bun, bangs, light tan eyes, taupe-grey glasses with clear lenses, large headphones around her neck, oversized dark green hoodie, company lanyard, calm deadpan expression, standing, facing the viewer, arms at sides, waist-up, office background",
+    "kenji": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, Kenji, a 21-year-old young man with a youthful boyish face, short and pudgy with a round chubby face, thick eyebrows, messy black bedhead hair with a cowlick, a white short-sleeved work shirt with a dark tie, company lanyard with an ID card, friendly smile, standing, facing the viewer, arms at sides, waist-up, office background",
+    "mori": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, Mr. Mori, a 58-year-old Japanese man, slim with an upright posture, neatly combed grey hair with a side parting, an older face with wrinkles around his eyes and mouth, dark grey suit with a navy tie, gentle polite smile, standing, facing the viewer, arms at sides, waist-up, office background",
+    "emi": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1girl, solo, Emi, a 32-year-old British woman, fair skin, auburn shoulder-length bob with side-swept bangs, warm brown eyes, brown tortoiseshell glasses with clear lenses, soft rounded face, curvy, fitted charcoal blazer over a cream blouse, company lanyard, warm smile, standing, facing the viewer, arms at sides, waist-up, office background"
+   },
+   "masks": "5 equal vertical strips",
+   "base_mode": "disabled",
+   "end_percent": 0.35,
+   "self_mask_strength": 0.2,
+   "cross_mask_strength": 1.0,
+   "base_ratio": 0.1,
+   "overlap_px": 0
+  }
+ },
+ "c-1003": {
+  "model": "rdbtAnima",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 3boys, 2girls, group photo, from left to right: Eric, a Scandinavian man in his early thirties, fair pale skin, blue eyes, dark-blond hair, same colour all over, tied in a short ponytail at the back, (facial hair, dark-blond stubble:1.3), (silver rectangular glasses:1.2), grey hoodie under a navy blazer, company lanyard, faint smile; Mio, a 25-year-old woman, slim with soft curves, messy black hair with green underneath in a loose bun, bangs, light tan eyes, taupe-grey glasses with clear lenses, large headphones around her neck, oversized dark green hoodie, company lanyard, calm deadpan expression; Kenji, a 21-year-old young man with a youthful boyish face, short and pudgy with a round chubby face, thick eyebrows, messy black bedhead hair with a cowlick, a white short-sleeved work shirt with a dark tie, company lanyard with an ID card, friendly smile; Mr. Mori, a 58-year-old Japanese man, slim with an upright posture, neatly combed grey hair with a side parting, an older face with wrinkles around his eyes and mouth, dark grey suit with a navy tie, gentle polite smile; Emi, a 32-year-old British woman, fair skin, auburn shoulder-length bob with side-swept bangs, warm brown eyes, brown tortoiseshell glasses with clear lenses, soft rounded face, curvy, fitted charcoal blazer over a cream blouse, company lanyard, warm smile. All five stand side by side in a row facing the viewer, arms relaxed at their sides, empty hands. Eric and Mr. Mori are the tallest, Mio and Emi are a little shorter, Kenji is the shortest. waist-up group portrait, (every head inside the frame with empty space above the hair:1.2), behind them a Japanese office with desks and computers, soft even indoor light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, nude, nsfw, child, loli, fat, obese, (rim light, red rim light, red outline, backlighting:1.4), holding, holding object, tool, screwdriver, pen, pencil, cup, phone, papers, book, undercut, shaved sides, two-tone hair, extra person, merged bodies",
+  "seed": 1003,
+  "w": 1664,
+  "h": 896,
+  "steps": 30,
+  "cfg": 5,
+  "sampler": "euler_ancestral normal",
+  "img2img": {
+   "init": "group1-collage.webp",
+   "denoise": 0.65
+  }
+ },
+ "a-1004": {
+  "model": "rdbtAnima",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 3boys, 2girls, group photo, from left to right: Eric, a Scandinavian man in his early thirties, fair pale skin, blue eyes, dark-blond hair, same colour all over, tied in a short ponytail at the back, (facial hair, dark-blond stubble:1.3), (silver rectangular glasses:1.2), grey hoodie under a navy blazer, company lanyard, faint smile; Mio, a 25-year-old woman, slim with soft curves, messy black hair with green underneath in a loose bun, bangs, light tan eyes, taupe-grey glasses with clear lenses, large headphones around her neck, oversized dark green hoodie, company lanyard, calm deadpan expression; Kenji, a 21-year-old young man with a youthful boyish face, short and pudgy with a round chubby face, thick eyebrows, messy black bedhead hair with a cowlick, a white short-sleeved work shirt with a dark tie, company lanyard with an ID card, friendly smile; Mr. Mori, a 58-year-old Japanese man, slim with an upright posture, neatly combed grey hair with a side parting, an older face with wrinkles around his eyes and mouth, dark grey suit with a navy tie, gentle polite smile; Emi, a 32-year-old British woman, fair skin, auburn shoulder-length bob with side-swept bangs, warm brown eyes, brown tortoiseshell glasses with clear lenses, soft rounded face, curvy, fitted charcoal blazer over a cream blouse, company lanyard, warm smile. All five stand side by side in a row facing the viewer, arms relaxed at their sides, empty hands. Eric and Mr. Mori are the tallest, Mio and Emi are a little shorter, Kenji is the shortest. waist-up group portrait, (every head inside the frame with empty space above the hair:1.2), behind them a Japanese office with desks and computers, soft even indoor light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, nude, nsfw, child, loli, fat, obese, (rim light, red rim light, red outline, backlighting:1.4), holding, holding object, tool, screwdriver, pen, pencil, cup, phone, papers, book, undercut, shaved sides, two-tone hair, extra person, merged bodies",
+  "seed": 1004,
+  "w": 1664,
+  "h": 896,
+  "steps": 30,
+  "cfg": 5,
+  "sampler": "euler_ancestral normal"
+ },
+ "b-1004": {
+  "model": "rdbtAnima",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 3boys, 2girls, group photo, from left to right: Eric, a Scandinavian man in his early thirties, fair pale skin, blue eyes, dark-blond hair, same colour all over, tied in a short ponytail at the back, (facial hair, dark-blond stubble:1.3), (silver rectangular glasses:1.2), grey hoodie under a navy blazer, company lanyard, faint smile; Mio, a 25-year-old woman, slim with soft curves, messy black hair with green underneath in a loose bun, bangs, light tan eyes, taupe-grey glasses with clear lenses, large headphones around her neck, oversized dark green hoodie, company lanyard, calm deadpan expression; Kenji, a 21-year-old young man with a youthful boyish face, short and pudgy with a round chubby face, thick eyebrows, messy black bedhead hair with a cowlick, a white short-sleeved work shirt with a dark tie, company lanyard with an ID card, friendly smile; Mr. Mori, a 58-year-old Japanese man, slim with an upright posture, neatly combed grey hair with a side parting, an older face with wrinkles around his eyes and mouth, dark grey suit with a navy tie, gentle polite smile; Emi, a 32-year-old British woman, fair skin, auburn shoulder-length bob with side-swept bangs, warm brown eyes, brown tortoiseshell glasses with clear lenses, soft rounded face, curvy, fitted charcoal blazer over a cream blouse, company lanyard, warm smile. All five stand side by side in a row facing the viewer, arms relaxed at their sides, empty hands. Eric and Mr. Mori are the tallest, Mio and Emi are a little shorter, Kenji is the shortest. waist-up group portrait, (every head inside the frame with empty space above the hair:1.2), behind them a Japanese office with desks and computers, soft even indoor light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, nude, nsfw, child, loli, fat, obese, (rim light, red rim light, red outline, backlighting:1.4), holding, holding object, tool, screwdriver, pen, pencil, cup, phone, papers, book, undercut, shaved sides, two-tone hair, extra person, merged bodies",
+  "seed": 1004,
+  "w": 1664,
+  "h": 896,
+  "steps": 30,
+  "cfg": 5,
+  "sampler": "euler_ancestral normal",
+  "regional": {
+   "regions": {
+    "eric": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, Eric, a Scandinavian man in his early thirties, fair pale skin, blue eyes, dark-blond hair, same colour all over, tied in a short ponytail at the back, (facial hair, dark-blond stubble:1.3), (silver rectangular glasses:1.2), grey hoodie under a navy blazer, company lanyard, faint smile, standing, facing the viewer, arms at sides, waist-up, office background",
+    "mio": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1girl, solo, Mio, a 25-year-old woman, slim with soft curves, messy black hair with green underneath in a loose bun, bangs, light tan eyes, taupe-grey glasses with clear lenses, large headphones around her neck, oversized dark green hoodie, company lanyard, calm deadpan expression, standing, facing the viewer, arms at sides, waist-up, office background",
+    "kenji": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, Kenji, a 21-year-old young man with a youthful boyish face, short and pudgy with a round chubby face, thick eyebrows, messy black bedhead hair with a cowlick, a white short-sleeved work shirt with a dark tie, company lanyard with an ID card, friendly smile, standing, facing the viewer, arms at sides, waist-up, office background",
+    "mori": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, Mr. Mori, a 58-year-old Japanese man, slim with an upright posture, neatly combed grey hair with a side parting, an older face with wrinkles around his eyes and mouth, dark grey suit with a navy tie, gentle polite smile, standing, facing the viewer, arms at sides, waist-up, office background",
+    "emi": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1girl, solo, Emi, a 32-year-old British woman, fair skin, auburn shoulder-length bob with side-swept bangs, warm brown eyes, brown tortoiseshell glasses with clear lenses, soft rounded face, curvy, fitted charcoal blazer over a cream blouse, company lanyard, warm smile, standing, facing the viewer, arms at sides, waist-up, office background"
+   },
+   "masks": "5 equal vertical strips",
+   "base_mode": "disabled",
+   "end_percent": 0.35,
+   "self_mask_strength": 0.2,
+   "cross_mask_strength": 1.0,
+   "base_ratio": 0.1,
+   "overlap_px": 0
+  }
+ },
+ "c-1004": {
+  "model": "rdbtAnima",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 3boys, 2girls, group photo, from left to right: Eric, a Scandinavian man in his early thirties, fair pale skin, blue eyes, dark-blond hair, same colour all over, tied in a short ponytail at the back, (facial hair, dark-blond stubble:1.3), (silver rectangular glasses:1.2), grey hoodie under a navy blazer, company lanyard, faint smile; Mio, a 25-year-old woman, slim with soft curves, messy black hair with green underneath in a loose bun, bangs, light tan eyes, taupe-grey glasses with clear lenses, large headphones around her neck, oversized dark green hoodie, company lanyard, calm deadpan expression; Kenji, a 21-year-old young man with a youthful boyish face, short and pudgy with a round chubby face, thick eyebrows, messy black bedhead hair with a cowlick, a white short-sleeved work shirt with a dark tie, company lanyard with an ID card, friendly smile; Mr. Mori, a 58-year-old Japanese man, slim with an upright posture, neatly combed grey hair with a side parting, an older face with wrinkles around his eyes and mouth, dark grey suit with a navy tie, gentle polite smile; Emi, a 32-year-old British woman, fair skin, auburn shoulder-length bob with side-swept bangs, warm brown eyes, brown tortoiseshell glasses with clear lenses, soft rounded face, curvy, fitted charcoal blazer over a cream blouse, company lanyard, warm smile. All five stand side by side in a row facing the viewer, arms relaxed at their sides, empty hands. Eric and Mr. Mori are the tallest, Mio and Emi are a little shorter, Kenji is the shortest. waist-up group portrait, (every head inside the frame with empty space above the hair:1.2), behind them a Japanese office with desks and computers, soft even indoor light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, nude, nsfw, child, loli, fat, obese, (rim light, red rim light, red outline, backlighting:1.4), holding, holding object, tool, screwdriver, pen, pencil, cup, phone, papers, book, undercut, shaved sides, two-tone hair, extra person, merged bodies",
+  "seed": 1004,
+  "w": 1664,
+  "h": 896,
+  "steps": 30,
+  "cfg": 5,
+  "sampler": "euler_ancestral normal",
+  "img2img": {
+   "init": "group1-collage.webp",
+   "denoise": 0.65
+  }
+ },
+ "bc-1001": {
+  "model": "rdbtAnima",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 3boys, 2girls, group photo, from left to right: Eric, a Scandinavian man in his early thirties, fair pale skin, blue eyes, dark-blond hair, same colour all over, tied in a short ponytail at the back, (facial hair, dark-blond stubble:1.3), (silver rectangular glasses:1.2), grey hoodie under a navy blazer, company lanyard, faint smile; Mio, a 25-year-old woman, slim with soft curves, messy black hair with green underneath in a loose bun, bangs, light tan eyes, taupe-grey glasses with clear lenses, large headphones around her neck, oversized dark green hoodie, company lanyard, calm deadpan expression; Kenji, a 21-year-old young man with a youthful boyish face, short and pudgy with a round chubby face, thick eyebrows, messy black bedhead hair with a cowlick, a white short-sleeved work shirt with a dark tie, company lanyard with an ID card, friendly smile; Mr. Mori, a 58-year-old Japanese man, slim with an upright posture, neatly combed grey hair with a side parting, an older face with wrinkles around his eyes and mouth, dark grey suit with a navy tie, gentle polite smile; Emi, a 32-year-old British woman, fair skin, auburn shoulder-length bob with side-swept bangs, warm brown eyes, brown tortoiseshell glasses with clear lenses, soft rounded face, curvy, fitted charcoal blazer over a cream blouse, company lanyard, warm smile. All five stand side by side in a row facing the viewer, arms relaxed at their sides, empty hands. Eric and Mr. Mori are the tallest, Mio and Emi are a little shorter, Kenji is the shortest. waist-up group portrait, (every head inside the frame with empty space above the hair:1.2), behind them a Japanese office with desks and computers, soft even indoor light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, nude, nsfw, child, loli, fat, obese, (rim light, red rim light, red outline, backlighting:1.4), holding, holding object, tool, screwdriver, pen, pencil, cup, phone, papers, book, undercut, shaved sides, two-tone hair, extra person, merged bodies",
+  "seed": 1001,
+  "w": 1664,
+  "h": 896,
+  "steps": 30,
+  "cfg": 5,
+  "sampler": "euler_ancestral normal",
+  "regional": {
+   "regions": {
+    "eric": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, Eric, a Scandinavian man in his early thirties, fair pale skin, blue eyes, dark-blond hair, same colour all over, tied in a short ponytail at the back, (facial hair, dark-blond stubble:1.3), (silver rectangular glasses:1.2), grey hoodie under a navy blazer, company lanyard, faint smile, standing, facing the viewer, arms at sides, waist-up, office background",
+    "mio": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1girl, solo, Mio, a 25-year-old woman, slim with soft curves, messy black hair with green underneath in a loose bun, bangs, light tan eyes, taupe-grey glasses with clear lenses, large headphones around her neck, oversized dark green hoodie, company lanyard, calm deadpan expression, standing, facing the viewer, arms at sides, waist-up, office background",
+    "kenji": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, Kenji, a 21-year-old young man with a youthful boyish face, short and pudgy with a round chubby face, thick eyebrows, messy black bedhead hair with a cowlick, a white short-sleeved work shirt with a dark tie, company lanyard with an ID card, friendly smile, standing, facing the viewer, arms at sides, waist-up, office background",
+    "mori": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, Mr. Mori, a 58-year-old Japanese man, slim with an upright posture, neatly combed grey hair with a side parting, an older face with wrinkles around his eyes and mouth, dark grey suit with a navy tie, gentle polite smile, standing, facing the viewer, arms at sides, waist-up, office background",
+    "emi": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1girl, solo, Emi, a 32-year-old British woman, fair skin, auburn shoulder-length bob with side-swept bangs, warm brown eyes, brown tortoiseshell glasses with clear lenses, soft rounded face, curvy, fitted charcoal blazer over a cream blouse, company lanyard, warm smile, standing, facing the viewer, arms at sides, waist-up, office background"
+   },
+   "masks": "5 equal vertical strips",
+   "base_mode": "disabled",
+   "end_percent": 0.35,
+   "self_mask_strength": 0.2,
+   "cross_mask_strength": 1.0,
+   "base_ratio": 0.1,
+   "overlap_px": 0
+  },
+  "img2img": {
+   "init": "group1-collage.webp",
+   "denoise": 0.65
+  }
+ },
+ "bc-1002": {
+  "model": "rdbtAnima",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 3boys, 2girls, group photo, from left to right: Eric, a Scandinavian man in his early thirties, fair pale skin, blue eyes, dark-blond hair, same colour all over, tied in a short ponytail at the back, (facial hair, dark-blond stubble:1.3), (silver rectangular glasses:1.2), grey hoodie under a navy blazer, company lanyard, faint smile; Mio, a 25-year-old woman, slim with soft curves, messy black hair with green underneath in a loose bun, bangs, light tan eyes, taupe-grey glasses with clear lenses, large headphones around her neck, oversized dark green hoodie, company lanyard, calm deadpan expression; Kenji, a 21-year-old young man with a youthful boyish face, short and pudgy with a round chubby face, thick eyebrows, messy black bedhead hair with a cowlick, a white short-sleeved work shirt with a dark tie, company lanyard with an ID card, friendly smile; Mr. Mori, a 58-year-old Japanese man, slim with an upright posture, neatly combed grey hair with a side parting, an older face with wrinkles around his eyes and mouth, dark grey suit with a navy tie, gentle polite smile; Emi, a 32-year-old British woman, fair skin, auburn shoulder-length bob with side-swept bangs, warm brown eyes, brown tortoiseshell glasses with clear lenses, soft rounded face, curvy, fitted charcoal blazer over a cream blouse, company lanyard, warm smile. All five stand side by side in a row facing the viewer, arms relaxed at their sides, empty hands. Eric and Mr. Mori are the tallest, Mio and Emi are a little shorter, Kenji is the shortest. waist-up group portrait, (every head inside the frame with empty space above the hair:1.2), behind them a Japanese office with desks and computers, soft even indoor light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, nude, nsfw, child, loli, fat, obese, (rim light, red rim light, red outline, backlighting:1.4), holding, holding object, tool, screwdriver, pen, pencil, cup, phone, papers, book, undercut, shaved sides, two-tone hair, extra person, merged bodies",
+  "seed": 1002,
+  "w": 1664,
+  "h": 896,
+  "steps": 30,
+  "cfg": 5,
+  "sampler": "euler_ancestral normal",
+  "regional": {
+   "regions": {
+    "eric": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, Eric, a Scandinavian man in his early thirties, fair pale skin, blue eyes, dark-blond hair, same colour all over, tied in a short ponytail at the back, (facial hair, dark-blond stubble:1.3), (silver rectangular glasses:1.2), grey hoodie under a navy blazer, company lanyard, faint smile, standing, facing the viewer, arms at sides, waist-up, office background",
+    "mio": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1girl, solo, Mio, a 25-year-old woman, slim with soft curves, messy black hair with green underneath in a loose bun, bangs, light tan eyes, taupe-grey glasses with clear lenses, large headphones around her neck, oversized dark green hoodie, company lanyard, calm deadpan expression, standing, facing the viewer, arms at sides, waist-up, office background",
+    "kenji": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, Kenji, a 21-year-old young man with a youthful boyish face, short and pudgy with a round chubby face, thick eyebrows, messy black bedhead hair with a cowlick, a white short-sleeved work shirt with a dark tie, company lanyard with an ID card, friendly smile, standing, facing the viewer, arms at sides, waist-up, office background",
+    "mori": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, Mr. Mori, a 58-year-old Japanese man, slim with an upright posture, neatly combed grey hair with a side parting, an older face with wrinkles around his eyes and mouth, dark grey suit with a navy tie, gentle polite smile, standing, facing the viewer, arms at sides, waist-up, office background",
+    "emi": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1girl, solo, Emi, a 32-year-old British woman, fair skin, auburn shoulder-length bob with side-swept bangs, warm brown eyes, brown tortoiseshell glasses with clear lenses, soft rounded face, curvy, fitted charcoal blazer over a cream blouse, company lanyard, warm smile, standing, facing the viewer, arms at sides, waist-up, office background"
+   },
+   "masks": "5 equal vertical strips",
+   "base_mode": "disabled",
+   "end_percent": 0.35,
+   "self_mask_strength": 0.2,
+   "cross_mask_strength": 1.0,
+   "base_ratio": 0.1,
+   "overlap_px": 0
+  },
+  "img2img": {
+   "init": "group1-collage.webp",
+   "denoise": 0.65
+  }
+ },
+ "bc-1003": {
+  "model": "rdbtAnima",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 3boys, 2girls, group photo, from left to right: Eric, a Scandinavian man in his early thirties, fair pale skin, blue eyes, dark-blond hair, same colour all over, tied in a short ponytail at the back, (facial hair, dark-blond stubble:1.3), (silver rectangular glasses:1.2), grey hoodie under a navy blazer, company lanyard, faint smile; Mio, a 25-year-old woman, slim with soft curves, messy black hair with green underneath in a loose bun, bangs, light tan eyes, taupe-grey glasses with clear lenses, large headphones around her neck, oversized dark green hoodie, company lanyard, calm deadpan expression; Kenji, a 21-year-old young man with a youthful boyish face, short and pudgy with a round chubby face, thick eyebrows, messy black bedhead hair with a cowlick, a white short-sleeved work shirt with a dark tie, company lanyard with an ID card, friendly smile; Mr. Mori, a 58-year-old Japanese man, slim with an upright posture, neatly combed grey hair with a side parting, an older face with wrinkles around his eyes and mouth, dark grey suit with a navy tie, gentle polite smile; Emi, a 32-year-old British woman, fair skin, auburn shoulder-length bob with side-swept bangs, warm brown eyes, brown tortoiseshell glasses with clear lenses, soft rounded face, curvy, fitted charcoal blazer over a cream blouse, company lanyard, warm smile. All five stand side by side in a row facing the viewer, arms relaxed at their sides, empty hands. Eric and Mr. Mori are the tallest, Mio and Emi are a little shorter, Kenji is the shortest. waist-up group portrait, (every head inside the frame with empty space above the hair:1.2), behind them a Japanese office with desks and computers, soft even indoor light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, nude, nsfw, child, loli, fat, obese, (rim light, red rim light, red outline, backlighting:1.4), holding, holding object, tool, screwdriver, pen, pencil, cup, phone, papers, book, undercut, shaved sides, two-tone hair, extra person, merged bodies",
+  "seed": 1003,
+  "w": 1664,
+  "h": 896,
+  "steps": 30,
+  "cfg": 5,
+  "sampler": "euler_ancestral normal",
+  "regional": {
+   "regions": {
+    "eric": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, Eric, a Scandinavian man in his early thirties, fair pale skin, blue eyes, dark-blond hair, same colour all over, tied in a short ponytail at the back, (facial hair, dark-blond stubble:1.3), (silver rectangular glasses:1.2), grey hoodie under a navy blazer, company lanyard, faint smile, standing, facing the viewer, arms at sides, waist-up, office background",
+    "mio": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1girl, solo, Mio, a 25-year-old woman, slim with soft curves, messy black hair with green underneath in a loose bun, bangs, light tan eyes, taupe-grey glasses with clear lenses, large headphones around her neck, oversized dark green hoodie, company lanyard, calm deadpan expression, standing, facing the viewer, arms at sides, waist-up, office background",
+    "kenji": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, Kenji, a 21-year-old young man with a youthful boyish face, short and pudgy with a round chubby face, thick eyebrows, messy black bedhead hair with a cowlick, a white short-sleeved work shirt with a dark tie, company lanyard with an ID card, friendly smile, standing, facing the viewer, arms at sides, waist-up, office background",
+    "mori": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, Mr. Mori, a 58-year-old Japanese man, slim with an upright posture, neatly combed grey hair with a side parting, an older face with wrinkles around his eyes and mouth, dark grey suit with a navy tie, gentle polite smile, standing, facing the viewer, arms at sides, waist-up, office background",
+    "emi": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1girl, solo, Emi, a 32-year-old British woman, fair skin, auburn shoulder-length bob with side-swept bangs, warm brown eyes, brown tortoiseshell glasses with clear lenses, soft rounded face, curvy, fitted charcoal blazer over a cream blouse, company lanyard, warm smile, standing, facing the viewer, arms at sides, waist-up, office background"
+   },
+   "masks": "5 equal vertical strips",
+   "base_mode": "disabled",
+   "end_percent": 0.35,
+   "self_mask_strength": 0.2,
+   "cross_mask_strength": 1.0,
+   "base_ratio": 0.1,
+   "overlap_px": 0
+  },
+  "img2img": {
+   "init": "group1-collage.webp",
+   "denoise": 0.65
+  }
+ },
+ "bc-1004": {
+  "model": "rdbtAnima",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 3boys, 2girls, group photo, from left to right: Eric, a Scandinavian man in his early thirties, fair pale skin, blue eyes, dark-blond hair, same colour all over, tied in a short ponytail at the back, (facial hair, dark-blond stubble:1.3), (silver rectangular glasses:1.2), grey hoodie under a navy blazer, company lanyard, faint smile; Mio, a 25-year-old woman, slim with soft curves, messy black hair with green underneath in a loose bun, bangs, light tan eyes, taupe-grey glasses with clear lenses, large headphones around her neck, oversized dark green hoodie, company lanyard, calm deadpan expression; Kenji, a 21-year-old young man with a youthful boyish face, short and pudgy with a round chubby face, thick eyebrows, messy black bedhead hair with a cowlick, a white short-sleeved work shirt with a dark tie, company lanyard with an ID card, friendly smile; Mr. Mori, a 58-year-old Japanese man, slim with an upright posture, neatly combed grey hair with a side parting, an older face with wrinkles around his eyes and mouth, dark grey suit with a navy tie, gentle polite smile; Emi, a 32-year-old British woman, fair skin, auburn shoulder-length bob with side-swept bangs, warm brown eyes, brown tortoiseshell glasses with clear lenses, soft rounded face, curvy, fitted charcoal blazer over a cream blouse, company lanyard, warm smile. All five stand side by side in a row facing the viewer, arms relaxed at their sides, empty hands. Eric and Mr. Mori are the tallest, Mio and Emi are a little shorter, Kenji is the shortest. waist-up group portrait, (every head inside the frame with empty space above the hair:1.2), behind them a Japanese office with desks and computers, soft even indoor light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, nude, nsfw, child, loli, fat, obese, (rim light, red rim light, red outline, backlighting:1.4), holding, holding object, tool, screwdriver, pen, pencil, cup, phone, papers, book, undercut, shaved sides, two-tone hair, extra person, merged bodies",
+  "seed": 1004,
+  "w": 1664,
+  "h": 896,
+  "steps": 30,
+  "cfg": 5,
+  "sampler": "euler_ancestral normal",
+  "regional": {
+   "regions": {
+    "eric": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, Eric, a Scandinavian man in his early thirties, fair pale skin, blue eyes, dark-blond hair, same colour all over, tied in a short ponytail at the back, (facial hair, dark-blond stubble:1.3), (silver rectangular glasses:1.2), grey hoodie under a navy blazer, company lanyard, faint smile, standing, facing the viewer, arms at sides, waist-up, office background",
+    "mio": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1girl, solo, Mio, a 25-year-old woman, slim with soft curves, messy black hair with green underneath in a loose bun, bangs, light tan eyes, taupe-grey glasses with clear lenses, large headphones around her neck, oversized dark green hoodie, company lanyard, calm deadpan expression, standing, facing the viewer, arms at sides, waist-up, office background",
+    "kenji": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, Kenji, a 21-year-old young man with a youthful boyish face, short and pudgy with a round chubby face, thick eyebrows, messy black bedhead hair with a cowlick, a white short-sleeved work shirt with a dark tie, company lanyard with an ID card, friendly smile, standing, facing the viewer, arms at sides, waist-up, office background",
+    "mori": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, Mr. Mori, a 58-year-old Japanese man, slim with an upright posture, neatly combed grey hair with a side parting, an older face with wrinkles around his eyes and mouth, dark grey suit with a navy tie, gentle polite smile, standing, facing the viewer, arms at sides, waist-up, office background",
+    "emi": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1girl, solo, Emi, a 32-year-old British woman, fair skin, auburn shoulder-length bob with side-swept bangs, warm brown eyes, brown tortoiseshell glasses with clear lenses, soft rounded face, curvy, fitted charcoal blazer over a cream blouse, company lanyard, warm smile, standing, facing the viewer, arms at sides, waist-up, office background"
+   },
+   "masks": "5 equal vertical strips",
+   "base_mode": "disabled",
+   "end_percent": 0.35,
+   "self_mask_strength": 0.2,
+   "cross_mask_strength": 1.0,
+   "base_ratio": 0.1,
+   "overlap_px": 0
+  },
+  "img2img": {
+   "init": "group1-collage.webp",
+   "denoise": 0.65
+  }
+ },
+ "bce70-1001": {
+  "model": "rdbtAnima",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 3boys, 2girls, group photo, from left to right: Eric, a Scandinavian man in his early thirties, fair pale skin, blue eyes, dark-blond hair, same colour all over, tied in a short ponytail at the back, (facial hair, dark-blond stubble:1.3), (silver rectangular glasses:1.2), grey hoodie under a navy blazer, company lanyard, faint smile; Mio, a 25-year-old woman, slim with soft curves, messy black hair with green underneath in a loose bun, bangs, light tan eyes, taupe-grey glasses with clear lenses, large headphones around her neck, oversized dark green hoodie, company lanyard, calm deadpan expression; Kenji, a 21-year-old young man with a youthful boyish face, short and pudgy with a round chubby face, thick eyebrows, messy black bedhead hair with a cowlick, a white short-sleeved work shirt with a dark tie, company lanyard with an ID card, friendly smile; Mr. Mori, a 58-year-old Japanese man, slim with an upright posture, neatly combed grey hair with a side parting, an older face with wrinkles around his eyes and mouth, dark grey suit with a navy tie, gentle polite smile; Emi, a 32-year-old British woman, fair skin, auburn shoulder-length bob with side-swept bangs, warm brown eyes, brown tortoiseshell glasses with clear lenses, soft rounded face, curvy, fitted charcoal blazer over a cream blouse, company lanyard, warm smile. All five stand side by side in a row facing the viewer, arms relaxed at their sides, empty hands. Eric and Mr. Mori are the tallest, Mio and Emi are a little shorter, Kenji is the shortest. waist-up group portrait, (every head inside the frame with empty space above the hair:1.2), behind them a Japanese office with desks and computers, soft even indoor light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, nude, nsfw, child, loli, fat, obese, (rim light, red rim light, red outline, backlighting:1.4), holding, holding object, tool, screwdriver, pen, pencil, cup, phone, papers, book, undercut, shaved sides, two-tone hair, extra person, merged bodies",
+  "seed": 1001,
+  "w": 1664,
+  "h": 896,
+  "steps": 30,
+  "cfg": 5,
+  "sampler": "euler_ancestral normal",
+  "regional": {
+   "regions": {
+    "eric": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, Eric, a Scandinavian man in his early thirties, fair pale skin, blue eyes, dark-blond hair, same colour all over, tied in a short ponytail at the back, (facial hair, dark-blond stubble:1.3), (silver rectangular glasses:1.2), grey hoodie under a navy blazer, company lanyard, faint smile, standing, facing the viewer, arms at sides, waist-up, office background",
+    "mio": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1girl, solo, Mio, a 25-year-old woman, slim with soft curves, messy black hair with green underneath in a loose bun, bangs, light tan eyes, taupe-grey glasses with clear lenses, large headphones around her neck, oversized dark green hoodie, company lanyard, calm deadpan expression, standing, facing the viewer, arms at sides, waist-up, office background",
+    "kenji": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, Kenji, a 21-year-old young man with a youthful boyish face, short and pudgy with a round chubby face, thick eyebrows, messy black bedhead hair with a cowlick, a white short-sleeved work shirt with a dark tie, company lanyard with an ID card, friendly smile, standing, facing the viewer, arms at sides, waist-up, office background",
+    "mori": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, Mr. Mori, a 58-year-old Japanese man, slim with an upright posture, neatly combed grey hair with a side parting, an older face with wrinkles around his eyes and mouth, dark grey suit with a navy tie, gentle polite smile, standing, facing the viewer, arms at sides, waist-up, office background",
+    "emi": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1girl, solo, Emi, a 32-year-old British woman, fair skin, auburn shoulder-length bob with side-swept bangs, warm brown eyes, brown tortoiseshell glasses with clear lenses, soft rounded face, curvy, fitted charcoal blazer over a cream blouse, company lanyard, warm smile, standing, facing the viewer, arms at sides, waist-up, office background"
+   },
+   "masks": "5 equal vertical strips",
+   "base_mode": "disabled",
+   "end_percent": 0.7,
+   "self_mask_strength": 0.2,
+   "cross_mask_strength": 1.0,
+   "base_ratio": 0.1,
+   "overlap_px": 0
+  },
+  "img2img": {
+   "init": "group1-collage.webp",
+   "denoise": 0.65
+  }
+ },
+ "bce70-1002": {
+  "model": "rdbtAnima",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 3boys, 2girls, group photo, from left to right: Eric, a Scandinavian man in his early thirties, fair pale skin, blue eyes, dark-blond hair, same colour all over, tied in a short ponytail at the back, (facial hair, dark-blond stubble:1.3), (silver rectangular glasses:1.2), grey hoodie under a navy blazer, company lanyard, faint smile; Mio, a 25-year-old woman, slim with soft curves, messy black hair with green underneath in a loose bun, bangs, light tan eyes, taupe-grey glasses with clear lenses, large headphones around her neck, oversized dark green hoodie, company lanyard, calm deadpan expression; Kenji, a 21-year-old young man with a youthful boyish face, short and pudgy with a round chubby face, thick eyebrows, messy black bedhead hair with a cowlick, a white short-sleeved work shirt with a dark tie, company lanyard with an ID card, friendly smile; Mr. Mori, a 58-year-old Japanese man, slim with an upright posture, neatly combed grey hair with a side parting, an older face with wrinkles around his eyes and mouth, dark grey suit with a navy tie, gentle polite smile; Emi, a 32-year-old British woman, fair skin, auburn shoulder-length bob with side-swept bangs, warm brown eyes, brown tortoiseshell glasses with clear lenses, soft rounded face, curvy, fitted charcoal blazer over a cream blouse, company lanyard, warm smile. All five stand side by side in a row facing the viewer, arms relaxed at their sides, empty hands. Eric and Mr. Mori are the tallest, Mio and Emi are a little shorter, Kenji is the shortest. waist-up group portrait, (every head inside the frame with empty space above the hair:1.2), behind them a Japanese office with desks and computers, soft even indoor light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, nude, nsfw, child, loli, fat, obese, (rim light, red rim light, red outline, backlighting:1.4), holding, holding object, tool, screwdriver, pen, pencil, cup, phone, papers, book, undercut, shaved sides, two-tone hair, extra person, merged bodies",
+  "seed": 1002,
+  "w": 1664,
+  "h": 896,
+  "steps": 30,
+  "cfg": 5,
+  "sampler": "euler_ancestral normal",
+  "regional": {
+   "regions": {
+    "eric": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, Eric, a Scandinavian man in his early thirties, fair pale skin, blue eyes, dark-blond hair, same colour all over, tied in a short ponytail at the back, (facial hair, dark-blond stubble:1.3), (silver rectangular glasses:1.2), grey hoodie under a navy blazer, company lanyard, faint smile, standing, facing the viewer, arms at sides, waist-up, office background",
+    "mio": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1girl, solo, Mio, a 25-year-old woman, slim with soft curves, messy black hair with green underneath in a loose bun, bangs, light tan eyes, taupe-grey glasses with clear lenses, large headphones around her neck, oversized dark green hoodie, company lanyard, calm deadpan expression, standing, facing the viewer, arms at sides, waist-up, office background",
+    "kenji": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, Kenji, a 21-year-old young man with a youthful boyish face, short and pudgy with a round chubby face, thick eyebrows, messy black bedhead hair with a cowlick, a white short-sleeved work shirt with a dark tie, company lanyard with an ID card, friendly smile, standing, facing the viewer, arms at sides, waist-up, office background",
+    "mori": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, Mr. Mori, a 58-year-old Japanese man, slim with an upright posture, neatly combed grey hair with a side parting, an older face with wrinkles around his eyes and mouth, dark grey suit with a navy tie, gentle polite smile, standing, facing the viewer, arms at sides, waist-up, office background",
+    "emi": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1girl, solo, Emi, a 32-year-old British woman, fair skin, auburn shoulder-length bob with side-swept bangs, warm brown eyes, brown tortoiseshell glasses with clear lenses, soft rounded face, curvy, fitted charcoal blazer over a cream blouse, company lanyard, warm smile, standing, facing the viewer, arms at sides, waist-up, office background"
+   },
+   "masks": "5 equal vertical strips",
+   "base_mode": "disabled",
+   "end_percent": 0.7,
+   "self_mask_strength": 0.2,
+   "cross_mask_strength": 1.0,
+   "base_ratio": 0.1,
+   "overlap_px": 0
+  },
+  "img2img": {
+   "init": "group1-collage.webp",
+   "denoise": 0.65
+  }
+ },
+ "bce70-1003": {
+  "model": "rdbtAnima",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 3boys, 2girls, group photo, from left to right: Eric, a Scandinavian man in his early thirties, fair pale skin, blue eyes, dark-blond hair, same colour all over, tied in a short ponytail at the back, (facial hair, dark-blond stubble:1.3), (silver rectangular glasses:1.2), grey hoodie under a navy blazer, company lanyard, faint smile; Mio, a 25-year-old woman, slim with soft curves, messy black hair with green underneath in a loose bun, bangs, light tan eyes, taupe-grey glasses with clear lenses, large headphones around her neck, oversized dark green hoodie, company lanyard, calm deadpan expression; Kenji, a 21-year-old young man with a youthful boyish face, short and pudgy with a round chubby face, thick eyebrows, messy black bedhead hair with a cowlick, a white short-sleeved work shirt with a dark tie, company lanyard with an ID card, friendly smile; Mr. Mori, a 58-year-old Japanese man, slim with an upright posture, neatly combed grey hair with a side parting, an older face with wrinkles around his eyes and mouth, dark grey suit with a navy tie, gentle polite smile; Emi, a 32-year-old British woman, fair skin, auburn shoulder-length bob with side-swept bangs, warm brown eyes, brown tortoiseshell glasses with clear lenses, soft rounded face, curvy, fitted charcoal blazer over a cream blouse, company lanyard, warm smile. All five stand side by side in a row facing the viewer, arms relaxed at their sides, empty hands. Eric and Mr. Mori are the tallest, Mio and Emi are a little shorter, Kenji is the shortest. waist-up group portrait, (every head inside the frame with empty space above the hair:1.2), behind them a Japanese office with desks and computers, soft even indoor light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, nude, nsfw, child, loli, fat, obese, (rim light, red rim light, red outline, backlighting:1.4), holding, holding object, tool, screwdriver, pen, pencil, cup, phone, papers, book, undercut, shaved sides, two-tone hair, extra person, merged bodies",
+  "seed": 1003,
+  "w": 1664,
+  "h": 896,
+  "steps": 30,
+  "cfg": 5,
+  "sampler": "euler_ancestral normal",
+  "regional": {
+   "regions": {
+    "eric": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, Eric, a Scandinavian man in his early thirties, fair pale skin, blue eyes, dark-blond hair, same colour all over, tied in a short ponytail at the back, (facial hair, dark-blond stubble:1.3), (silver rectangular glasses:1.2), grey hoodie under a navy blazer, company lanyard, faint smile, standing, facing the viewer, arms at sides, waist-up, office background",
+    "mio": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1girl, solo, Mio, a 25-year-old woman, slim with soft curves, messy black hair with green underneath in a loose bun, bangs, light tan eyes, taupe-grey glasses with clear lenses, large headphones around her neck, oversized dark green hoodie, company lanyard, calm deadpan expression, standing, facing the viewer, arms at sides, waist-up, office background",
+    "kenji": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, Kenji, a 21-year-old young man with a youthful boyish face, short and pudgy with a round chubby face, thick eyebrows, messy black bedhead hair with a cowlick, a white short-sleeved work shirt with a dark tie, company lanyard with an ID card, friendly smile, standing, facing the viewer, arms at sides, waist-up, office background",
+    "mori": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, Mr. Mori, a 58-year-old Japanese man, slim with an upright posture, neatly combed grey hair with a side parting, an older face with wrinkles around his eyes and mouth, dark grey suit with a navy tie, gentle polite smile, standing, facing the viewer, arms at sides, waist-up, office background",
+    "emi": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1girl, solo, Emi, a 32-year-old British woman, fair skin, auburn shoulder-length bob with side-swept bangs, warm brown eyes, brown tortoiseshell glasses with clear lenses, soft rounded face, curvy, fitted charcoal blazer over a cream blouse, company lanyard, warm smile, standing, facing the viewer, arms at sides, waist-up, office background"
+   },
+   "masks": "5 equal vertical strips",
+   "base_mode": "disabled",
+   "end_percent": 0.7,
+   "self_mask_strength": 0.2,
+   "cross_mask_strength": 1.0,
+   "base_ratio": 0.1,
+   "overlap_px": 0
+  },
+  "img2img": {
+   "init": "group1-collage.webp",
+   "denoise": 0.65
+  }
+ },
+ "bce70-1004": {
+  "model": "rdbtAnima",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 3boys, 2girls, group photo, from left to right: Eric, a Scandinavian man in his early thirties, fair pale skin, blue eyes, dark-blond hair, same colour all over, tied in a short ponytail at the back, (facial hair, dark-blond stubble:1.3), (silver rectangular glasses:1.2), grey hoodie under a navy blazer, company lanyard, faint smile; Mio, a 25-year-old woman, slim with soft curves, messy black hair with green underneath in a loose bun, bangs, light tan eyes, taupe-grey glasses with clear lenses, large headphones around her neck, oversized dark green hoodie, company lanyard, calm deadpan expression; Kenji, a 21-year-old young man with a youthful boyish face, short and pudgy with a round chubby face, thick eyebrows, messy black bedhead hair with a cowlick, a white short-sleeved work shirt with a dark tie, company lanyard with an ID card, friendly smile; Mr. Mori, a 58-year-old Japanese man, slim with an upright posture, neatly combed grey hair with a side parting, an older face with wrinkles around his eyes and mouth, dark grey suit with a navy tie, gentle polite smile; Emi, a 32-year-old British woman, fair skin, auburn shoulder-length bob with side-swept bangs, warm brown eyes, brown tortoiseshell glasses with clear lenses, soft rounded face, curvy, fitted charcoal blazer over a cream blouse, company lanyard, warm smile. All five stand side by side in a row facing the viewer, arms relaxed at their sides, empty hands. Eric and Mr. Mori are the tallest, Mio and Emi are a little shorter, Kenji is the shortest. waist-up group portrait, (every head inside the frame with empty space above the hair:1.2), behind them a Japanese office with desks and computers, soft even indoor light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, nude, nsfw, child, loli, fat, obese, (rim light, red rim light, red outline, backlighting:1.4), holding, holding object, tool, screwdriver, pen, pencil, cup, phone, papers, book, undercut, shaved sides, two-tone hair, extra person, merged bodies",
+  "seed": 1004,
+  "w": 1664,
+  "h": 896,
+  "steps": 30,
+  "cfg": 5,
+  "sampler": "euler_ancestral normal",
+  "regional": {
+   "regions": {
+    "eric": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, Eric, a Scandinavian man in his early thirties, fair pale skin, blue eyes, dark-blond hair, same colour all over, tied in a short ponytail at the back, (facial hair, dark-blond stubble:1.3), (silver rectangular glasses:1.2), grey hoodie under a navy blazer, company lanyard, faint smile, standing, facing the viewer, arms at sides, waist-up, office background",
+    "mio": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1girl, solo, Mio, a 25-year-old woman, slim with soft curves, messy black hair with green underneath in a loose bun, bangs, light tan eyes, taupe-grey glasses with clear lenses, large headphones around her neck, oversized dark green hoodie, company lanyard, calm deadpan expression, standing, facing the viewer, arms at sides, waist-up, office background",
+    "kenji": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, Kenji, a 21-year-old young man with a youthful boyish face, short and pudgy with a round chubby face, thick eyebrows, messy black bedhead hair with a cowlick, a white short-sleeved work shirt with a dark tie, company lanyard with an ID card, friendly smile, standing, facing the viewer, arms at sides, waist-up, office background",
+    "mori": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, Mr. Mori, a 58-year-old Japanese man, slim with an upright posture, neatly combed grey hair with a side parting, an older face with wrinkles around his eyes and mouth, dark grey suit with a navy tie, gentle polite smile, standing, facing the viewer, arms at sides, waist-up, office background",
+    "emi": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1girl, solo, Emi, a 32-year-old British woman, fair skin, auburn shoulder-length bob with side-swept bangs, warm brown eyes, brown tortoiseshell glasses with clear lenses, soft rounded face, curvy, fitted charcoal blazer over a cream blouse, company lanyard, warm smile, standing, facing the viewer, arms at sides, waist-up, office background"
+   },
+   "masks": "5 equal vertical strips",
+   "base_mode": "disabled",
+   "end_percent": 0.7,
+   "self_mask_strength": 0.2,
+   "cross_mask_strength": 1.0,
+   "base_ratio": 0.1,
+   "overlap_px": 0
+  },
+  "img2img": {
+   "init": "group1-collage.webp",
+   "denoise": 0.65
+  }
+ },
+ "bce70s0-1001": {
+  "model": "rdbtAnima",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 3boys, 2girls, group photo, from left to right: Eric, a Scandinavian man in his early thirties, fair pale skin, blue eyes, dark-blond hair, same colour all over, tied in a short ponytail at the back, (facial hair, dark-blond stubble:1.3), (silver rectangular glasses:1.2), grey hoodie under a navy blazer, company lanyard, faint smile; Mio, a 25-year-old woman, slim with soft curves, messy black hair with green underneath in a loose bun, bangs, light tan eyes, taupe-grey glasses with clear lenses, large headphones around her neck, oversized dark green hoodie, company lanyard, calm deadpan expression; Kenji, a 21-year-old young man with a youthful boyish face, short and pudgy with a round chubby face, thick eyebrows, messy black bedhead hair with a cowlick, a white short-sleeved work shirt with a dark tie, company lanyard with an ID card, friendly smile; Mr. Mori, a 58-year-old Japanese man, slim with an upright posture, neatly combed grey hair with a side parting, an older face with wrinkles around his eyes and mouth, dark grey suit with a navy tie, gentle polite smile; Emi, a 32-year-old British woman, fair skin, auburn shoulder-length bob with side-swept bangs, warm brown eyes, brown tortoiseshell glasses with clear lenses, soft rounded face, curvy, fitted charcoal blazer over a cream blouse, company lanyard, warm smile. All five stand side by side in a row facing the viewer, arms relaxed at their sides, empty hands. Eric and Mr. Mori are the tallest, Mio and Emi are a little shorter, Kenji is the shortest. waist-up group portrait, (every head inside the frame with empty space above the hair:1.2), behind them a Japanese office with desks and computers, soft even indoor light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, nude, nsfw, child, loli, fat, obese, (rim light, red rim light, red outline, backlighting:1.4), holding, holding object, tool, screwdriver, pen, pencil, cup, phone, papers, book, undercut, shaved sides, two-tone hair, extra person, merged bodies",
+  "seed": 1001,
+  "w": 1664,
+  "h": 896,
+  "steps": 30,
+  "cfg": 5,
+  "sampler": "euler_ancestral normal",
+  "regional": {
+   "regions": {
+    "eric": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, Eric, a Scandinavian man in his early thirties, fair pale skin, blue eyes, dark-blond hair, same colour all over, tied in a short ponytail at the back, (facial hair, dark-blond stubble:1.3), (silver rectangular glasses:1.2), grey hoodie under a navy blazer, company lanyard, faint smile, standing, facing the viewer, arms at sides, waist-up, office background",
+    "mio": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1girl, solo, Mio, a 25-year-old woman, slim with soft curves, messy black hair with green underneath in a loose bun, bangs, light tan eyes, taupe-grey glasses with clear lenses, large headphones around her neck, oversized dark green hoodie, company lanyard, calm deadpan expression, standing, facing the viewer, arms at sides, waist-up, office background",
+    "kenji": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, Kenji, a 21-year-old young man with a youthful boyish face, short and pudgy with a round chubby face, thick eyebrows, messy black bedhead hair with a cowlick, a white short-sleeved work shirt with a dark tie, company lanyard with an ID card, friendly smile, standing, facing the viewer, arms at sides, waist-up, office background",
+    "mori": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, Mr. Mori, a 58-year-old Japanese man, slim with an upright posture, neatly combed grey hair with a side parting, an older face with wrinkles around his eyes and mouth, dark grey suit with a navy tie, gentle polite smile, standing, facing the viewer, arms at sides, waist-up, office background",
+    "emi": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1girl, solo, Emi, a 32-year-old British woman, fair skin, auburn shoulder-length bob with side-swept bangs, warm brown eyes, brown tortoiseshell glasses with clear lenses, soft rounded face, curvy, fitted charcoal blazer over a cream blouse, company lanyard, warm smile, standing, facing the viewer, arms at sides, waist-up, office background"
+   },
+   "masks": "5 equal vertical strips",
+   "base_mode": "disabled",
+   "end_percent": 0.7,
+   "self_mask_strength": 0.0,
+   "cross_mask_strength": 1.0,
+   "base_ratio": 0.1,
+   "overlap_px": 0
+  },
+  "img2img": {
+   "init": "group1-collage.webp",
+   "denoise": 0.65
+  }
+ },
+ "bce70s0-1002": {
+  "model": "rdbtAnima",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 3boys, 2girls, group photo, from left to right: Eric, a Scandinavian man in his early thirties, fair pale skin, blue eyes, dark-blond hair, same colour all over, tied in a short ponytail at the back, (facial hair, dark-blond stubble:1.3), (silver rectangular glasses:1.2), grey hoodie under a navy blazer, company lanyard, faint smile; Mio, a 25-year-old woman, slim with soft curves, messy black hair with green underneath in a loose bun, bangs, light tan eyes, taupe-grey glasses with clear lenses, large headphones around her neck, oversized dark green hoodie, company lanyard, calm deadpan expression; Kenji, a 21-year-old young man with a youthful boyish face, short and pudgy with a round chubby face, thick eyebrows, messy black bedhead hair with a cowlick, a white short-sleeved work shirt with a dark tie, company lanyard with an ID card, friendly smile; Mr. Mori, a 58-year-old Japanese man, slim with an upright posture, neatly combed grey hair with a side parting, an older face with wrinkles around his eyes and mouth, dark grey suit with a navy tie, gentle polite smile; Emi, a 32-year-old British woman, fair skin, auburn shoulder-length bob with side-swept bangs, warm brown eyes, brown tortoiseshell glasses with clear lenses, soft rounded face, curvy, fitted charcoal blazer over a cream blouse, company lanyard, warm smile. All five stand side by side in a row facing the viewer, arms relaxed at their sides, empty hands. Eric and Mr. Mori are the tallest, Mio and Emi are a little shorter, Kenji is the shortest. waist-up group portrait, (every head inside the frame with empty space above the hair:1.2), behind them a Japanese office with desks and computers, soft even indoor light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, nude, nsfw, child, loli, fat, obese, (rim light, red rim light, red outline, backlighting:1.4), holding, holding object, tool, screwdriver, pen, pencil, cup, phone, papers, book, undercut, shaved sides, two-tone hair, extra person, merged bodies",
+  "seed": 1002,
+  "w": 1664,
+  "h": 896,
+  "steps": 30,
+  "cfg": 5,
+  "sampler": "euler_ancestral normal",
+  "regional": {
+   "regions": {
+    "eric": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, Eric, a Scandinavian man in his early thirties, fair pale skin, blue eyes, dark-blond hair, same colour all over, tied in a short ponytail at the back, (facial hair, dark-blond stubble:1.3), (silver rectangular glasses:1.2), grey hoodie under a navy blazer, company lanyard, faint smile, standing, facing the viewer, arms at sides, waist-up, office background",
+    "mio": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1girl, solo, Mio, a 25-year-old woman, slim with soft curves, messy black hair with green underneath in a loose bun, bangs, light tan eyes, taupe-grey glasses with clear lenses, large headphones around her neck, oversized dark green hoodie, company lanyard, calm deadpan expression, standing, facing the viewer, arms at sides, waist-up, office background",
+    "kenji": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, Kenji, a 21-year-old young man with a youthful boyish face, short and pudgy with a round chubby face, thick eyebrows, messy black bedhead hair with a cowlick, a white short-sleeved work shirt with a dark tie, company lanyard with an ID card, friendly smile, standing, facing the viewer, arms at sides, waist-up, office background",
+    "mori": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, Mr. Mori, a 58-year-old Japanese man, slim with an upright posture, neatly combed grey hair with a side parting, an older face with wrinkles around his eyes and mouth, dark grey suit with a navy tie, gentle polite smile, standing, facing the viewer, arms at sides, waist-up, office background",
+    "emi": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1girl, solo, Emi, a 32-year-old British woman, fair skin, auburn shoulder-length bob with side-swept bangs, warm brown eyes, brown tortoiseshell glasses with clear lenses, soft rounded face, curvy, fitted charcoal blazer over a cream blouse, company lanyard, warm smile, standing, facing the viewer, arms at sides, waist-up, office background"
+   },
+   "masks": "5 equal vertical strips",
+   "base_mode": "disabled",
+   "end_percent": 0.7,
+   "self_mask_strength": 0.0,
+   "cross_mask_strength": 1.0,
+   "base_ratio": 0.1,
+   "overlap_px": 0
+  },
+  "img2img": {
+   "init": "group1-collage.webp",
+   "denoise": 0.65
+  }
+ },
+ "bce70s0-1003": {
+  "model": "rdbtAnima",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 3boys, 2girls, group photo, from left to right: Eric, a Scandinavian man in his early thirties, fair pale skin, blue eyes, dark-blond hair, same colour all over, tied in a short ponytail at the back, (facial hair, dark-blond stubble:1.3), (silver rectangular glasses:1.2), grey hoodie under a navy blazer, company lanyard, faint smile; Mio, a 25-year-old woman, slim with soft curves, messy black hair with green underneath in a loose bun, bangs, light tan eyes, taupe-grey glasses with clear lenses, large headphones around her neck, oversized dark green hoodie, company lanyard, calm deadpan expression; Kenji, a 21-year-old young man with a youthful boyish face, short and pudgy with a round chubby face, thick eyebrows, messy black bedhead hair with a cowlick, a white short-sleeved work shirt with a dark tie, company lanyard with an ID card, friendly smile; Mr. Mori, a 58-year-old Japanese man, slim with an upright posture, neatly combed grey hair with a side parting, an older face with wrinkles around his eyes and mouth, dark grey suit with a navy tie, gentle polite smile; Emi, a 32-year-old British woman, fair skin, auburn shoulder-length bob with side-swept bangs, warm brown eyes, brown tortoiseshell glasses with clear lenses, soft rounded face, curvy, fitted charcoal blazer over a cream blouse, company lanyard, warm smile. All five stand side by side in a row facing the viewer, arms relaxed at their sides, empty hands. Eric and Mr. Mori are the tallest, Mio and Emi are a little shorter, Kenji is the shortest. waist-up group portrait, (every head inside the frame with empty space above the hair:1.2), behind them a Japanese office with desks and computers, soft even indoor light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, nude, nsfw, child, loli, fat, obese, (rim light, red rim light, red outline, backlighting:1.4), holding, holding object, tool, screwdriver, pen, pencil, cup, phone, papers, book, undercut, shaved sides, two-tone hair, extra person, merged bodies",
+  "seed": 1003,
+  "w": 1664,
+  "h": 896,
+  "steps": 30,
+  "cfg": 5,
+  "sampler": "euler_ancestral normal",
+  "regional": {
+   "regions": {
+    "eric": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, Eric, a Scandinavian man in his early thirties, fair pale skin, blue eyes, dark-blond hair, same colour all over, tied in a short ponytail at the back, (facial hair, dark-blond stubble:1.3), (silver rectangular glasses:1.2), grey hoodie under a navy blazer, company lanyard, faint smile, standing, facing the viewer, arms at sides, waist-up, office background",
+    "mio": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1girl, solo, Mio, a 25-year-old woman, slim with soft curves, messy black hair with green underneath in a loose bun, bangs, light tan eyes, taupe-grey glasses with clear lenses, large headphones around her neck, oversized dark green hoodie, company lanyard, calm deadpan expression, standing, facing the viewer, arms at sides, waist-up, office background",
+    "kenji": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, Kenji, a 21-year-old young man with a youthful boyish face, short and pudgy with a round chubby face, thick eyebrows, messy black bedhead hair with a cowlick, a white short-sleeved work shirt with a dark tie, company lanyard with an ID card, friendly smile, standing, facing the viewer, arms at sides, waist-up, office background",
+    "mori": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, Mr. Mori, a 58-year-old Japanese man, slim with an upright posture, neatly combed grey hair with a side parting, an older face with wrinkles around his eyes and mouth, dark grey suit with a navy tie, gentle polite smile, standing, facing the viewer, arms at sides, waist-up, office background",
+    "emi": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1girl, solo, Emi, a 32-year-old British woman, fair skin, auburn shoulder-length bob with side-swept bangs, warm brown eyes, brown tortoiseshell glasses with clear lenses, soft rounded face, curvy, fitted charcoal blazer over a cream blouse, company lanyard, warm smile, standing, facing the viewer, arms at sides, waist-up, office background"
+   },
+   "masks": "5 equal vertical strips",
+   "base_mode": "disabled",
+   "end_percent": 0.7,
+   "self_mask_strength": 0.0,
+   "cross_mask_strength": 1.0,
+   "base_ratio": 0.1,
+   "overlap_px": 0
+  },
+  "img2img": {
+   "init": "group1-collage.webp",
+   "denoise": 0.65
+  }
+ },
+ "bce70s0-1004": {
+  "model": "rdbtAnima",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 3boys, 2girls, group photo, from left to right: Eric, a Scandinavian man in his early thirties, fair pale skin, blue eyes, dark-blond hair, same colour all over, tied in a short ponytail at the back, (facial hair, dark-blond stubble:1.3), (silver rectangular glasses:1.2), grey hoodie under a navy blazer, company lanyard, faint smile; Mio, a 25-year-old woman, slim with soft curves, messy black hair with green underneath in a loose bun, bangs, light tan eyes, taupe-grey glasses with clear lenses, large headphones around her neck, oversized dark green hoodie, company lanyard, calm deadpan expression; Kenji, a 21-year-old young man with a youthful boyish face, short and pudgy with a round chubby face, thick eyebrows, messy black bedhead hair with a cowlick, a white short-sleeved work shirt with a dark tie, company lanyard with an ID card, friendly smile; Mr. Mori, a 58-year-old Japanese man, slim with an upright posture, neatly combed grey hair with a side parting, an older face with wrinkles around his eyes and mouth, dark grey suit with a navy tie, gentle polite smile; Emi, a 32-year-old British woman, fair skin, auburn shoulder-length bob with side-swept bangs, warm brown eyes, brown tortoiseshell glasses with clear lenses, soft rounded face, curvy, fitted charcoal blazer over a cream blouse, company lanyard, warm smile. All five stand side by side in a row facing the viewer, arms relaxed at their sides, empty hands. Eric and Mr. Mori are the tallest, Mio and Emi are a little shorter, Kenji is the shortest. waist-up group portrait, (every head inside the frame with empty space above the hair:1.2), behind them a Japanese office with desks and computers, soft even indoor light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, nude, nsfw, child, loli, fat, obese, (rim light, red rim light, red outline, backlighting:1.4), holding, holding object, tool, screwdriver, pen, pencil, cup, phone, papers, book, undercut, shaved sides, two-tone hair, extra person, merged bodies",
+  "seed": 1004,
+  "w": 1664,
+  "h": 896,
+  "steps": 30,
+  "cfg": 5,
+  "sampler": "euler_ancestral normal",
+  "regional": {
+   "regions": {
+    "eric": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, Eric, a Scandinavian man in his early thirties, fair pale skin, blue eyes, dark-blond hair, same colour all over, tied in a short ponytail at the back, (facial hair, dark-blond stubble:1.3), (silver rectangular glasses:1.2), grey hoodie under a navy blazer, company lanyard, faint smile, standing, facing the viewer, arms at sides, waist-up, office background",
+    "mio": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1girl, solo, Mio, a 25-year-old woman, slim with soft curves, messy black hair with green underneath in a loose bun, bangs, light tan eyes, taupe-grey glasses with clear lenses, large headphones around her neck, oversized dark green hoodie, company lanyard, calm deadpan expression, standing, facing the viewer, arms at sides, waist-up, office background",
+    "kenji": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, Kenji, a 21-year-old young man with a youthful boyish face, short and pudgy with a round chubby face, thick eyebrows, messy black bedhead hair with a cowlick, a white short-sleeved work shirt with a dark tie, company lanyard with an ID card, friendly smile, standing, facing the viewer, arms at sides, waist-up, office background",
+    "mori": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, Mr. Mori, a 58-year-old Japanese man, slim with an upright posture, neatly combed grey hair with a side parting, an older face with wrinkles around his eyes and mouth, dark grey suit with a navy tie, gentle polite smile, standing, facing the viewer, arms at sides, waist-up, office background",
+    "emi": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1girl, solo, Emi, a 32-year-old British woman, fair skin, auburn shoulder-length bob with side-swept bangs, warm brown eyes, brown tortoiseshell glasses with clear lenses, soft rounded face, curvy, fitted charcoal blazer over a cream blouse, company lanyard, warm smile, standing, facing the viewer, arms at sides, waist-up, office background"
+   },
+   "masks": "5 equal vertical strips",
+   "base_mode": "disabled",
+   "end_percent": 0.7,
+   "self_mask_strength": 0.0,
+   "cross_mask_strength": 1.0,
+   "base_ratio": 0.1,
+   "overlap_px": 0
+  },
+  "img2img": {
+   "init": "group1-collage.webp",
+   "denoise": 0.65
+  }
+ },
+ "hr-bce70s0-1001": {
+  "model": "rdbtAnima",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 3boys, 2girls, group photo, from left to right: Eric, a Scandinavian man in his early thirties, fair pale skin, blue eyes, dark-blond hair, same colour all over, tied in a short ponytail at the back, (facial hair, dark-blond stubble:1.3), (silver rectangular glasses:1.2), grey hoodie under a navy blazer, company lanyard, faint smile; Mio, a 25-year-old woman, slim with soft curves, messy black hair with green underneath in a loose bun, bangs, light tan eyes, taupe-grey glasses with clear lenses, large headphones around her neck, oversized dark green hoodie, company lanyard, calm deadpan expression; Kenji, a 21-year-old young man with a youthful boyish face, short and pudgy with a round chubby face, thick eyebrows, messy black bedhead hair with a cowlick, a white short-sleeved work shirt with a dark tie, company lanyard with an ID card, friendly smile; Mr. Mori, a 58-year-old Japanese man, slim with an upright posture, neatly combed grey hair with a side parting, an older face with wrinkles around his eyes and mouth, dark grey suit with a navy tie, gentle polite smile; Emi, a 32-year-old British woman, fair skin, auburn shoulder-length bob with side-swept bangs, warm brown eyes, brown tortoiseshell glasses with clear lenses, soft rounded face, curvy, fitted charcoal blazer over a cream blouse, company lanyard, warm smile. All five stand side by side in a row facing the viewer, arms relaxed at their sides, empty hands. Eric and Mr. Mori are the tallest, Mio and Emi are a little shorter, Kenji is the shortest. waist-up group portrait, (every head inside the frame with empty space above the hair:1.2), behind them a Japanese office with desks and computers, soft even indoor light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, nude, nsfw, child, loli, fat, obese, (rim light, red rim light, red outline, backlighting:1.4), holding, holding object, tool, screwdriver, pen, pencil, cup, phone, papers, book, undercut, shaved sides, two-tone hair, extra person, merged bodies",
+  "seed": 1001,
+  "w": 2496,
+  "h": 1344,
+  "steps": 30,
+  "cfg": 5,
+  "sampler": "euler_ancestral normal",
+  "img2img": {
+   "init": "group1-bce70s0-1001 scaled 1.5x (Lanczos)",
+   "denoise": 0.35
+  }
+ },
+ "hr-bce70s0-1003": {
+  "model": "rdbtAnima",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 3boys, 2girls, group photo, from left to right: Eric, a Scandinavian man in his early thirties, fair pale skin, blue eyes, dark-blond hair, same colour all over, tied in a short ponytail at the back, (facial hair, dark-blond stubble:1.3), (silver rectangular glasses:1.2), grey hoodie under a navy blazer, company lanyard, faint smile; Mio, a 25-year-old woman, slim with soft curves, messy black hair with green underneath in a loose bun, bangs, light tan eyes, taupe-grey glasses with clear lenses, large headphones around her neck, oversized dark green hoodie, company lanyard, calm deadpan expression; Kenji, a 21-year-old young man with a youthful boyish face, short and pudgy with a round chubby face, thick eyebrows, messy black bedhead hair with a cowlick, a white short-sleeved work shirt with a dark tie, company lanyard with an ID card, friendly smile; Mr. Mori, a 58-year-old Japanese man, slim with an upright posture, neatly combed grey hair with a side parting, an older face with wrinkles around his eyes and mouth, dark grey suit with a navy tie, gentle polite smile; Emi, a 32-year-old British woman, fair skin, auburn shoulder-length bob with side-swept bangs, warm brown eyes, brown tortoiseshell glasses with clear lenses, soft rounded face, curvy, fitted charcoal blazer over a cream blouse, company lanyard, warm smile. All five stand side by side in a row facing the viewer, arms relaxed at their sides, empty hands. Eric and Mr. Mori are the tallest, Mio and Emi are a little shorter, Kenji is the shortest. waist-up group portrait, (every head inside the frame with empty space above the hair:1.2), behind them a Japanese office with desks and computers, soft even indoor light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, nude, nsfw, child, loli, fat, obese, (rim light, red rim light, red outline, backlighting:1.4), holding, holding object, tool, screwdriver, pen, pencil, cup, phone, papers, book, undercut, shaved sides, two-tone hair, extra person, merged bodies",
+  "seed": 1003,
+  "w": 2496,
+  "h": 1344,
+  "steps": 30,
+  "cfg": 5,
+  "sampler": "euler_ancestral normal",
+  "img2img": {
+   "init": "group1-bce70s0-1003 scaled 1.5x (Lanczos)",
+   "denoise": 0.35
+  }
+ }
+}
