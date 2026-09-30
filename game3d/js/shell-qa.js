@@ -12,7 +12,7 @@ const until = async (f, ms = 30000) => {
 
 export async function run(mode, api) {
   const g = window.__game;
-  const pics = Q.get('pics'); // a folder with train.jpg, gate.jpg, office.jpg (frames of each place)
+  const pics = Q.get('pics'); // a folder with <place>.jpg frames (train.jpg, gate.jpg, forecourt.jpg, ...)
   const pic = (p) => (pics ? `${pics}/${p}.jpg` : null);
   const now = Date.now();
   if (mode === 'load' || mode === 'save') {
@@ -162,7 +162,11 @@ export async function run(mode, api) {
       for (const [p, per] of [
         ['train', 'early'],
         ['gate', 'morning'],
+        ['forecourt', 'morning'],
         ['office', 'afternoon'],
+        ['plaza', 'evening'],
+        ['dorm_court', 'evening'],
+        ['dorms', 'evening'],
       ])
         if (pic(p)) photos[p] = { src: pic(p), period: per };
       Object.assign(window.__shell.photos, photos);
