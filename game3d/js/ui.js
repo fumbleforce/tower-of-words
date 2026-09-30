@@ -432,13 +432,11 @@ export const ui = {
   sayReady(on) {
     $('#sayBtn').classList.toggle('ready', !!on);
   },
-  setSayTarget() {},
-  // the Say button sits beside whoever or whatever Eric can talk to, only when a word can be used there
   // The action menu (Jørgen's playtest: Talk and Say were separate popups that came and went on their own). One small
   // menu beside the current target: its verb on E (Talk, Look, Pet...) and Say on Q, stacked, both whenever both
   // apply; Next cycles through things in reach when several are close (menu.js). main.js calls this every frame
-  // with where the Say target is and whether a word does something there.
-  placeSay(x, y, show) {
+  // with whether a word does something at the target in reach. A thing with nothing to use has no E row.
+  placeSay(show) {
     $('#sayBtn').hidden = true;
     const act = $('#actMenu'),
       g = window.__game;
@@ -466,6 +464,7 @@ export const ui = {
     const isGoal = !!(target.goal && target.goal());
     // Say shows for this target when a word does something here; the first time only at the goal (the cat)
     const sayHere = show && st === target && (ob.sayUsed || !ob.active || isGoal);
+    const canUse = !g.canUse || g.canUse(target);
     const uses = ob.uses || 0;
     const cyc = !ob.active && this.cycleInfo && this.cycleInfo.n > 1 ? this.cycleInfo : null;
     const key = [
@@ -473,6 +472,7 @@ export const ui = {
       verb,
       name,
       sayHere,
+      canUse,
       cyc ? cyc.i + '/' + cyc.n : '',
       phone,
       settings.keySay,
@@ -486,13 +486,13 @@ export const ui = {
       // name itself is the button (the name always stays). Phone rows have no key caps.
       const k = (c) => (phone ? '' : `<span class="k">${c}</span>`);
       const withVerb = phone || uses < 2 || !name;
-      const head = withVerb && name ? `<div class="hd">${name}</div>` : '';
+      const head = (withVerb || !canUse) && name ? `<div class="hd">${name}</div>` : '';
       const useFace = withVerb
         ? `${k('E')}<span class="lb">${verb}</span>`
         : `${uses < 5 ? k('E') : ''}<span class="lb">${name}</span>`;
       act.innerHTML =
         head +
-        `<button type="button" class="act use${withVerb ? '' : ' named'}">${useFace}</button>` +
+        (canUse ? `<button type="button" class="act use${withVerb ? '' : ' named'}">${useFace}</button>` : '') +
         (sayHere
           ? `<button type="button" class="act say${ob.sayUsed ? '' : ' first'}">${k(keyLabel(settings.keySay || 'KeyQ'))}<span class="lb">Say a word</span></button>`
           : '') +

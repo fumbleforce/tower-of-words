@@ -614,6 +614,9 @@ function step(dt) {
     else near = lk;
   }
   game.near = near;
+  // the target in the action menu is the one Say speaks to, when a word does something there (the menu's Say row)
+  const nearSays = !!(near && !game.busy && game.saysSomething(near));
+  if (nearSays) st = near;
   game.sayTarget = st;
   updateOutline();
   // when a goal is waiting on a word he knows, the Say button lights up
@@ -624,22 +627,8 @@ function step(dt) {
       (m) => m.enabled() && m.goal() && SAYABLE.some((w) => known.has(w) && game.runner.has(`say:${w}:${m.id}`)),
     );
   ui.sayReady(waiting);
-  // Say beside the target: shown when a known word does something there (or while the Say tip is up)
-  let sayShow = false,
-    sx = 0,
-    sy = 0;
-  if (st && !game.busy && known.size) {
-    const any = SAYABLE.some(
-      (w) => known.has(w) && (game.runner.has(`say:${w}:${st.id}`) || game.runner.has(`say:${w}:*`)),
-    );
-    if (any || ui.sayIntro) {
-      const v = st.anchor(new THREE.Vector3()).project(place.camera);
-      sx = ((v.x + 1) / 2) * canvas.clientWidth;
-      sy = ((1 - v.y) / 2) * canvas.clientHeight;
-      sayShow = true;
-    }
-  }
-  ui.placeSay(sx, sy, sayShow);
+  // Say in the target's menu: when a known word does something there (or while the Say tip is up)
+  ui.placeSay(!!(st && st === near && !game.busy && known.size && (nearSays || ui.sayIntro)));
   const person = st && place.people[st.id] && /person/.test(st.kind || '');
   ui.setGiveTarget(person ? st.label : '', !!(person && sim.inv.length && !game.busy));
   stepAmbient(game);
