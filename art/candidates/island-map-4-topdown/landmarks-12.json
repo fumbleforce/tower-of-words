@@ -1,0 +1,274 @@
+[
+ {
+  "id": "station",
+  "label": "Station",
+  "px": [
+   629.1,
+   1290.0
+  ],
+  "island": [
+   -15.14,
+   0.0
+  ],
+  "dx": 0,
+  "dy": 0,
+  "metres": 0.0,
+  "corr": 0.98
+ },
+ {
+  "id": "ho_door",
+  "label": "Head office door",
+  "px": [
+   720.0,
+   1290.0
+  ],
+  "island": [
+   0.0,
+   0.0
+  ],
+  "dx": 0,
+  "dy": 0,
+  "metres": 0.0,
+  "corr": 1.0
+ },
+ {
+  "id": "tower",
+  "label": "Head office tower",
+  "px": [
+   757.7,
+   1249.8
+  ],
+  "island": [
+   6.28,
+   -6.71
+  ],
+  "dx": 0,
+  "dy": 0,
+  "metres": 0.0,
+  "corr": 1.0
+ },
+ {
+  "id": "shed",
+  "label": "Platform roof",
+  "px": [
+   598.1,
+   1255.8
+  ],
+  "island": [
+   -20.31,
+   -5.7
+  ],
+  "dx": -1,
+  "dy": -1,
+  "metres": 0.35,
+  "corr": 0.25
+ },
+ {
+  "id": "fountain",
+  "label": "Fountain",
+  "px": [
+   938.1,
+   1348.8
+  ],
+  "island": [
+   36.35,
+   9.8
+  ],
+  "dx": 0,
+  "dy": 0,
+  "metres": 0.0,
+  "corr": 1.0
+ },
+ {
+  "id": "canteen",
+  "label": "Canteen",
+  "px": [
+   958.0,
+   1249.8
+  ],
+  "island": [
+   39.67,
+   -6.71
+  ],
+  "dx": 0,
+  "dy": 0,
+  "metres": 0.0,
+  "corr": 1.0
+ },
+ {
+  "id": "shops",
+  "label": "Shop row",
+  "px": [
+   940.7,
+   1472.7
+  ],
+  "island": [
+   36.79,
+   30.44
+  ],
+  "dx": -13,
+  "dy": 1,
+  "metres": 3.26,
+  "corr": 0.19
+ },
+ {
+  "id": "dorm_door",
+  "label": "Dorm entrance",
+  "px": [
+   1170.9,
+   1472.7
+  ],
+  "island": [
+   75.15,
+   30.44
+  ],
+  "dx": 0,
+  "dy": 0,
+  "metres": 0.0,
+  "corr": 0.32
+ },
+ {
+  "id": "dorm_block",
+  "label": "Dorm block",
+  "px": [
+   1224.0,
+   1458.7
+  ],
+  "island": [
+   84.01,
+   28.11
+  ],
+  "dx": 28,
+  "dy": 1,
+  "metres": 7.0,
+  "corr": 0.16
+ },
+ {
+  "id": "pitch",
+  "label": "Pitch centre",
+  "px": [
+   1323.1,
+   521.2
+  ],
+  "island": [
+   100.51,
+   -128.14
+  ],
+  "dx": 0,
+  "dy": 0,
+  "metres": 0.0,
+  "corr": 1.0
+ },
+ {
+  "id": "pool",
+  "label": "Pool",
+  "px": [
+   1273.0,
+   1047.4
+  ],
+  "island": [
+   92.16,
+   -40.43
+  ],
+  "dx": 0,
+  "dy": 0,
+  "metres": 0.0,
+  "corr": 1.0
+ },
+ {
+  "id": "ferry_pier",
+  "label": "Ferry pier end",
+  "px": [
+   79.5,
+   708.4
+  ],
+  "island": [
+   -106.75,
+   -96.93
+  ],
+  "dx": 0,
+  "dy": 0,
+  "metres": 0.0,
+  "corr": 1.0
+ },
+ {
+  "id": "supply_pier",
+  "label": "Supply quay end",
+  "px": [
+   247.9,
+   899.3
+  ],
+  "island": [
+   -78.68,
+   -65.12
+  ],
+  "dx": 0,
+  "dy": 0,
+  "metres": 0.0,
+  "corr": 1.0
+ },
+ {
+  "id": "beach_stairs",
+  "label": "Beach stairs foot",
+  "px": [
+   884.5,
+   1637.6
+  ],
+  "island": [
+   27.41,
+   57.94
+  ],
+  "dx": 0,
+  "dy": 0,
+  "metres": 0.0,
+  "corr": 1.0
+ },
+ {
+  "id": "se_point",
+  "label": "South-east promenade corner",
+  "px": [
+   1385.1,
+   1701.5
+  ],
+  "island": [
+   110.85,
+   68.59
+  ],
+  "dx": 0,
+  "dy": 0,
+  "metres": 0.0,
+  "corr": 1.0
+ },
+ {
+  "id": "onsen",
+  "label": "Onsen gate",
+  "px": [
+   1642.5,
+   1212.9
+  ],
+  "island": [
+   153.75,
+   -12.85
+  ],
+  "dx": 0,
+  "dy": 0,
+  "metres": 0.0,
+  "corr": 1.0
+ },
+ {
+  "id": "hall",
+  "label": "History hall",
+  "px": [
+   1592.8,
+   656.8
+  ],
+  "island": [
+   145.47,
+   -105.54
+  ],
+  "dx": 0,
+  "dy": 0,
+  "metres": 0.0,
+  "corr": 1.0
+ }
+]

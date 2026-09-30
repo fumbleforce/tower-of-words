@@ -1,0 +1,180 @@
+{
+ "U": {
+  "class_type": "UNETLoader",
+  "inputs": {
+   "unet_name": "flux-2-klein-4b-fp8.safetensors",
+   "weight_dtype": "default"
+  }
+ },
+ "C": {
+  "class_type": "CLIPLoader",
+  "inputs": {
+   "clip_name": "qwen_3_4b.safetensors",
+   "type": "flux2"
+  }
+ },
+ "V": {
+  "class_type": "VAELoader",
+  "inputs": {
+   "vae_name": "flux2-vae.safetensors"
+  }
+ },
+ "T": {
+  "class_type": "CLIPTextEncode",
+  "inputs": {
+   "text": "A high oblique bird's-eye view of a small island town in a simple faceted 3D illustration style: a blue curved station roof, grey office walls with blue windows, pale apartment walls, paved paths and trees. No text, no labels.",
+   "clip": [
+    "C",
+    0
+   ]
+  }
+ },
+ "L": {
+  "class_type": "LoadImage",
+  "inputs": {
+   "image": "01-overview.png"
+  }
+ },
+ "E": {
+  "class_type": "VAEEncode",
+  "inputs": {
+   "pixels": [
+    "L",
+    0
+   ],
+   "vae": [
+    "V",
+    0
+   ]
+  }
+ },
+ "W": {
+  "class_type": "GetImageSize",
+  "inputs": {
+   "image": [
+    "L",
+    0
+   ]
+  }
+ },
+ "S": {
+  "class_type": "Flux2Scheduler",
+  "inputs": {
+   "steps": 4,
+   "width": [
+    "W",
+    0
+   ],
+   "height": [
+    "W",
+    1
+   ]
+  }
+ },
+ "K": {
+  "class_type": "KSamplerSelect",
+  "inputs": {
+   "sampler_name": "euler"
+  }
+ },
+ "R": {
+  "class_type": "RandomNoise",
+  "inputs": {
+   "noise_seed": 12
+  }
+ },
+ "D": {
+  "class_type": "VAEDecode",
+  "inputs": {
+   "samples": [
+    "X",
+    0
+   ],
+   "vae": [
+    "V",
+    0
+   ]
+  }
+ },
+ "O": {
+  "class_type": "SaveImage",
+  "inputs": {
+   "images": [
+    "D",
+    0
+   ],
+   "filename_prefix": "island-topdown/klein"
+  }
+ },
+ "RL": {
+  "class_type": "ReferenceLatent",
+  "inputs": {
+   "conditioning": [
+    "T",
+    0
+   ],
+   "latent": [
+    "E",
+    0
+   ]
+  }
+ },
+ "G": {
+  "class_type": "BasicGuider",
+  "inputs": {
+   "model": [
+    "U",
+    0
+   ],
+   "conditioning": [
+    "RL",
+    0
+   ]
+  }
+ },
+ "M": {
+  "class_type": "LoadImageMask",
+  "inputs": {
+   "image": "label-mask.png",
+   "channel": "red"
+  }
+ },
+ "N": {
+  "class_type": "SetLatentNoiseMask",
+  "inputs": {
+   "samples": [
+    "E",
+    0
+   ],
+   "mask": [
+    "M",
+    0
+   ]
+  }
+ },
+ "X": {
+  "class_type": "SamplerCustomAdvanced",
+  "inputs": {
+   "noise": [
+    "R",
+    0
+   ],
+   "guider": [
+    "G",
+    0
+   ],
+   "sampler": [
+    "K",
+    0
+   ],
+   "sigmas": [
+    "S",
+    0
+   ],
+   "latent_image": [
+    "N",
+    0
+   ]
+  }
+ }
+}
