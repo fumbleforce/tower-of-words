@@ -30,6 +30,7 @@ import { PEOPLE, sit, armsHold, idle, mug } from '../cast.js';
 import { cat } from '../train/people.js';
 import { blob, Nav } from '../engine.js';
 import { lightPool, steam, dust, clockHands, screenMat, groundShadows } from '../places/life.js';
+import { ledLights } from './office-leds.js';
 import { liveScreens } from '../props.js';
 import { drain } from '../perf/slice.js';
 
@@ -1792,19 +1793,7 @@ export function* officeSteps() {
   }
   pool(5.2, -3.6, 1.6, { k: 0.12, color: '#9fc4ff' });
   pool(5.3, -1.4, 1.1, { k: 0.1, color: '#9fc4ff' });
-  const leds = [];
-  root.traverse((o) => {
-    if (
-      o.isMesh &&
-      o.material &&
-      o.material.isMeshBasicMaterial &&
-      (o.material.color.getHexString() === '5fd38f' || o.material.color.getHexString() === 'ffb95a') &&
-      o.position.z > 0.3 &&
-      o.position.z < 0.4
-    )
-      leds.push(o);
-  });
-  life.leds = leds;
+  life.leds = ledLights(root);
 
   yield;
   // a waist-high divider shelf behind the island's south row: binders facing the island, plants and trays on top
@@ -2108,7 +2097,7 @@ export function* officeSteps() {
     for (const s2 of life.steam) s2.userData.update(t);
     for (const d of life.dust) d.userData.update(t);
     liveScreens.update(t);
-    for (let i = 0; i < life.leds.length; i++) life.leds[i].visible = Math.sin(t * (3 + (i % 5)) + i * 1.7) > -0.6;
+    for (let i = 0; i < life.leds.length; i++) life.leds.set(i, Math.sin(t * (3 + (i % 5)) + i * 1.7) > -0.6);
     for (const r of [kenji, nao, hiro, mori, yui, sota]) idle(r, t);
     if (!emi._walk) idle(emi, t);
     if (!kenji.gesturing) kenji.arms[1].rotation.x = -1.2 + Math.max(0, Math.sin(t * 6)) * 0.06;

@@ -10,7 +10,7 @@ const ctx = await b.newContext({ viewport: { width: 393, height: 851 }, deviceSc
 if (!argv.includes('--nohook')) await ctx.route('**/js/places/lifecycle.js*', async (route) => { const r = await route.fetch(); const body = (await r.text()).replace('place.name = name;', "place.name = name; (await import('../perf/batch.js')).optimizePlace(place, { game });"); await route.fulfill({ response: r, body }); });
 const p = await ctx.newPage();
 p.on('pageerror', (e) => console.log('pageerror', e.message));
-await p.goto(`http://127.0.0.1:8771/game3d/index.html?q=${arg('q', '1')}&place=${place}&skip${arg('extra', '')}`);
+await p.goto(`http://127.0.0.1:8771/${process.env.BASE || 'game3d'}/index.html?q=${arg('q', '1')}&place=${place}&skip${arg('extra', '')}`);
 await p.waitForFunction(() => window.__game && window.__game.place && window.__done, null, { timeout: 180000 });
 await p.waitForTimeout(8000);
 const r = await p.evaluate(async () => {

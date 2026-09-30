@@ -7,6 +7,7 @@ import { attachLift } from './lift.js';
 import { lookSteps } from '../look/index.js';
 import { sliced, setUrgent, nextFrame } from '../perf/slice.js';
 import { optimizePlace } from '../perf/batch.js';
+import { lightenForPhone, phoneBatch } from '../perf/phone.js';
 import { warmPlace } from '../perf/warm.js';
 import { SmoothWalker } from '../move.js';
 import { playMusic } from '../ui.js';
@@ -14,8 +15,8 @@ import { sim, PERIODS as PERIOD_ORDER, absorb, applySchedule, save } from '../si
 import * as trips from '../trips.js';
 
 const MUSIC = { train: 'calm', gate: 'lively', office: 'office' };
-// places the draw-call pass (js/perf/batch.js) runs on; train and gate keep their original rendering
-const BATCHED = new Set(['office', 'forecourt', 'plaza', 'dorm_court']);
+// places the draw-call pass (js/perf/batch.js) runs on (Eric's room is small enough without it)
+const BATCHED = new Set(['train', 'gate', 'office', 'forecourt', 'plaza', 'dorm_court']);
 
 export function createPlaceLifecycle(
   game,
@@ -37,7 +38,8 @@ export function createPlaceLifecycle(
         // surface patterns, baked light (look/index.js); materials patched in place, in slices between frames so the
         // place being played doesn't stall (js/perf/slice.js)
         await sliced(lookSteps(place, game));
-        if (BATCHED.has(name)) optimizePlace(place, { game });
+        lightenForPhone(place, name); // phones only: less detail where it barely shows (js/perf/phone.js)
+        if (BATCHED.has(name)) optimizePlace(place, { game, ...phoneBatch() });
         // shaders and textures ready before the first frame there, so entering doesn't stall (js/perf/warm.js)
         place.warm = await warmPlace(game.renderer, place, {
           extra: [game.player?.root, game.mioNpc?.root],

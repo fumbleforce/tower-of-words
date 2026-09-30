@@ -24,6 +24,8 @@
 // identical material settings.
 import * as THREE from 'three';
 import { drain } from './slice.js';
+import { split } from './batch-split.js';
+import { matKey, hasTex, plainData, matSnap, matSame, nodeSnap, nodeSame, srcSnap, srcSame } from './batch-snap.js';
 
 const OBR = THREE.Object3D.prototype.onBeforeRender,
   OAR = THREE.Object3D.prototype.onAfterRender;
@@ -35,232 +37,18 @@ const BAKE = new Set([
   'MeshBasicMaterial',
   'MeshToonMaterial',
 ]);
-const TEX = [
-  'map',
-  'alphaMap',
-  'aoMap',
-  'bumpMap',
-  'displacementMap',
-  'emissiveMap',
-  'envMap',
-  'lightMap',
-  'metalnessMap',
-  'normalMap',
-  'roughnessMap',
-  'specularMap',
-  'gradientMap',
-  'matcap',
-  'clearcoatMap',
-  'sheenColorMap',
-  'transmissionMap',
-  'iridescenceMap',
-  'anisotropyMap',
-  'specularColorMap',
-  'specularIntensityMap',
-  'thicknessMap',
-];
 // layers mask for a merged mesh: layer 31 only, so no camera (main, shadow, AO, outline) draws it, while a raycaster
 // with layer 31 enabled (main.js hover) still finds it
 const HIDDEN = 1 << 31;
 const STILL_MS = 2000;
+// meshes let go because a group above them moved (the train car starting to sway) are merged again under that group
+// after this long, with the scans that follow coming this often until they are: the train's short first minutes
+// otherwise ran mostly unmerged while each level of moving groups was found a scan a second
+const REGROUP_MS = 300;
 const Q = new URLSearchParams(location.search);
 // see-through meshes stay on their own: merging them changes the order they're drawn in against other see-through
 // things (tested: the lobby's lamp glow shifted by up to 64/255 in places). ?trans turns it on for experiments.
 const TRANS = Q.has('trans');
-
-const col = (c) => (c ? [c.r, c.g, c.b] : null);
-// everything about a material that changes its look, except the colour (baked into vertices when allowed)
-function matKey(m, withColor) {
-  const k = [
-    m.type,
-    m.side,
-    m.transparent,
-    m.opacity,
-    m.depthWrite,
-    m.depthTest,
-    m.colorWrite,
-    m.alphaTest,
-    m.blending,
-    m.fog,
-    m.toneMapped,
-    m.polygonOffset,
-    m.polygonOffsetFactor,
-    m.polygonOffsetUnits,
-    m.wireframe,
-    m.dithering,
-    m.flatShading,
-    m.vertexColors,
-    m.visible,
-    m.premultipliedAlpha,
-    m.alphaToCoverage,
-    m.forceSinglePass,
-    m.stencilWrite,
-    m.shadowSide,
-    col(m.emissive),
-    m.emissiveIntensity,
-    m.roughness,
-    m.metalness,
-    m.shininess,
-    col(m.specular),
-    m.reflectivity,
-    m.envMapIntensity,
-    m.lightMapIntensity,
-    m.aoMapIntensity,
-    m.bumpScale,
-    m.normalScale && [m.normalScale.x, m.normalScale.y],
-    m.displacementScale,
-    m.clearcoat,
-    m.clearcoatRoughness,
-    m.sheen,
-    m.transmission,
-    m.ior,
-    m.thickness,
-    m.iridescence,
-    m.anisotropy,
-    col(m.sheenColor),
-    col(m.attenuationColor),
-    m.combine,
-    m.refractionRatio,
-    m.clippingPlanes ? 'clip' : 0,
-    m.defines ? JSON.stringify(m.defines) : 0,
-    JSON.stringify(m.userData),
-  ];
-  for (const t of TEX) if (m[t]) k.push(t + ':' + m[t].uuid);
-  if (withColor) k.push(col(m.color));
-  return JSON.stringify(k);
-}
-const hasTex = (m) => TEX.some((t) => m[t]);
-// what the watch compares every frame (a change sends the mesh back to drawing itself); no allocations per frame
-function matSnap(m) {
-  const c = m.color,
-    e = m.emissive;
-  return {
-    cr: c ? c.r : 0,
-    cg: c ? c.g : 0,
-    cb: c ? c.b : 0,
-    er: e ? e.r : 0,
-    eg: e ? e.g : 0,
-    eb: e ? e.b : 0,
-    ei: m.emissiveIntensity,
-    op: m.opacity,
-    tr: m.transparent,
-    vi: m.visible,
-    si: m.side,
-    dw: m.depthWrite,
-    dt: m.depthTest,
-    cw: m.colorWrite,
-    cl: m.clippingPlanes ? m.clippingPlanes.length : -1,
-    map: m.map,
-    em: m.emissiveMap,
-    at: m.alphaTest,
-    ro: m.roughness,
-    me: m.metalness,
-    wf: m.wireframe,
-    bl: m.blending,
-  };
-}
-function matSame(m, s) {
-  const c = m.color,
-    e = m.emissive;
-  if (c && (c.r !== s.cr || c.g !== s.cg || c.b !== s.cb)) return false;
-  if (e && (e.r !== s.er || e.g !== s.eg || e.b !== s.eb)) return false;
-  return (
-    m.emissiveIntensity === s.ei &&
-    m.opacity === s.op &&
-    m.transparent === s.tr &&
-    m.visible === s.vi &&
-    m.side === s.si &&
-    m.depthWrite === s.dw &&
-    m.depthTest === s.dt &&
-    m.colorWrite === s.cw &&
-    (m.clippingPlanes ? m.clippingPlanes.length : -1) === s.cl &&
-    m.map === s.map &&
-    m.emissiveMap === s.em &&
-    m.alphaTest === s.at &&
-    m.roughness === s.ro &&
-    m.metalness === s.me &&
-    m.wireframe === s.wf &&
-    m.blending === s.bl
-  );
-}
-function nodeSnap(o) {
-  const p = o.position,
-    q = o.quaternion,
-    c = o.scale;
-  return {
-    px: p.x,
-    py: p.y,
-    pz: p.z,
-    qx: q.x,
-    qy: q.y,
-    qz: q.z,
-    qw: q.w,
-    sx: c.x,
-    sy: c.y,
-    sz: c.z,
-    v: o.visible,
-    par: o.parent,
-    au: o.matrixAutoUpdate,
-    me: o.matrixAutoUpdate ? null : o.matrix.elements.slice(),
-  };
-}
-function nodeSame(o, s) {
-  const p = o.position,
-    q = o.quaternion,
-    c = o.scale;
-  if (
-    p.x !== s.px ||
-    p.y !== s.py ||
-    p.z !== s.pz ||
-    q.x !== s.qx ||
-    q.y !== s.qy ||
-    q.z !== s.qz ||
-    q.w !== s.qw ||
-    c.x !== s.sx ||
-    c.y !== s.sy ||
-    c.z !== s.sz
-  )
-    return false;
-  if (o.visible !== s.v || o.parent !== s.par || o.matrixAutoUpdate !== s.au) return false;
-  if (s.me) {
-    const e = o.matrix.elements;
-    for (let i = 0; i < 16; i++) if (e[i] !== s.me[i]) return false;
-  }
-  return true;
-}
-function srcSnap(o) {
-  const g = o.geometry,
-    a = g.attributes;
-  return {
-    m: o.material,
-    g,
-    pv: a.position.version,
-    nv: a.normal ? a.normal.version : -1,
-    uv: a.uv ? a.uv.version : -1,
-    cv: a.color ? a.color.version : -1,
-    iv: g.index ? g.index.version : -1,
-    cs: o.castShadow,
-    rs: o.receiveShadow,
-    ro: o.renderOrder,
-    fc: o.frustumCulled,
-  };
-}
-function srcSame(o, s) {
-  const g = o.geometry;
-  if (o.material !== s.m || g !== s.g) return false;
-  const a = g.attributes;
-  return (
-    a.position.version === s.pv &&
-    (a.normal ? a.normal.version : -1) === s.nv &&
-    (a.uv ? a.uv.version : -1) === s.uv &&
-    (a.color ? a.color.version : -1) === s.cv &&
-    (g.index ? g.index.version : -1) === s.iv &&
-    o.castShadow === s.cs &&
-    o.receiveShadow === s.rs &&
-    o.renderOrder === s.ro &&
-    o.frustumCulled === s.fc
-  );
-}
 
 export function optimizePlace(place, opt = {}) {
   if (place.perf) return place.perf;
@@ -280,6 +68,7 @@ export function optimizePlace(place, opt = {}) {
   const watch = new Map(); // node -> { snap, n }   (nodes between a merged mesh and its batch, the mesh included)
   const mats = new Map(); // material -> { snap, n }
   const movers = new Set(); // groups seen moving: batches go under them
+  const matFlips = new WeakMap(); // mesh -> times its material changed while merged
   const live = new Set(); // meshes drawn by a batch right now
   let dead = false;
   const batches = new Set();
@@ -329,7 +118,7 @@ export function optimizePlace(place, opt = {}) {
     if (o.isInstancedMesh || o.isBatchedMesh) return 'instanced';
     if (o.userData.perfBatch) return 'batch';
     if (o.userData.noBatch) return 'noBatch';
-    if (o.name && !inBound(o)) return 'named';
+    if (o.name && !inBound(o) && !o.userData.stackable) return 'named';
     if (o.onBeforeRender !== OBR || o.onAfterRender !== OAR) return 'render callback';
     const m = o.material,
       g = o.geometry;
@@ -347,7 +136,9 @@ export function optimizePlace(place, opt = {}) {
     if (!m.colorWrite) return 'no colour write';
     if (m.clippingPlanes && m.clippingPlanes.length) return 'clipped';
     // anything drawn in the see-through pass (even at full opacity) is sorted per object against the others there
-    if (m.transparent && !TRANS) return 'see-through';
+    // (contact footprints, blob shadows and light pools, places/life.js and engine.js: among themselves they stack to
+    // the same pixels in any order, so they may merge with each other, their colours baked into vertex colours)
+    if (m.transparent && !TRANS && !o.userData.stackable) return 'see-through';
     if (g.morphAttributes && Object.keys(g.morphAttributes).length) return 'morph';
     if (g.attributes.tangent || g.attributes.skinIndex) return 'tangent/skin attr';
     if (g.attributes.position.itemSize !== 3) return 'position size';
@@ -381,12 +172,25 @@ export function optimizePlace(place, opt = {}) {
     return out;
   }
   // where a mesh sits relative to the group its batch would hang under (so a swaying train car still counts as still)
+  // From the local transforms of the nodes in between, not the world matrices: those are only as fresh as the last
+  // render or whatever called getWorldPosition since (which updates a node's parents, not its children), so between
+  // frames an anchor's could be newer than its meshes' and a mesh on the swaying train car never looked still.
+  function relMatrix(o, a, out) {
+    out.identity();
+    for (let n = o; n && n !== a; n = n.parent) {
+      if (n.matrixAutoUpdate) n.updateMatrix();
+      out.premultiply(n.matrix);
+    }
+    return out;
+  }
   const _rs = new THREE.Matrix4();
   function relSnap(o) {
     const a = anchorOf(o);
     if (!a) return '';
-    _rs.copy(a.matrixWorld).invert().multiply(o.matrixWorld);
-    let s = a.id + ':' + o.material.uuid + ':' + o.geometry.uuid;
+    relMatrix(o, a, _rs);
+    const m = o.material; // and how its material looks now: one still changing isn't still
+    let s = a.id + ':' + m.uuid + ':' + o.geometry.uuid + ':' + m.opacity + ':' + (m.color ? m.color.getHex() : '');
+    if (m.emissive) s += ':' + m.emissive.getHex() + ':' + m.emissiveIntensity;
     for (const v of _rs.elements) s += ',' + Math.round(v * 1e5);
     return s;
   }
@@ -408,6 +212,7 @@ export function optimizePlace(place, opt = {}) {
       m.alphaToCoverage
     );
   };
+  const soloCaster = (o) => o.castShadow && shadowable(o);
   const shadowSide = (m) =>
     m.shadowSide != null
       ? m.shadowSide
@@ -472,7 +277,7 @@ export function optimizePlace(place, opt = {}) {
         k0 = Math.floor(pl / EPS);
       for (let k = k0 - 2; k <= k0 + 2; k++)
         for (const [g, gb] of cells[a].get(k) || []) {
-          if (g === f) continue;
+          if (g === f || (f.userData.stackable && g.userData.stackable)) continue; // write no depth: no fight
           // g's top face is in the plane (f lies on it), or g is flat in the same plane too; things merely standing on
           // a flat floor (their bottom in the plane, facing down) don't count
           const gFlat = gb.max.getComponent(a) - gb.min.getComponent(a) < EPS;
@@ -492,7 +297,6 @@ export function optimizePlace(place, opt = {}) {
 
   // ---------- scan: find meshes to merge and build their batches ----------
   const _m = new THREE.Matrix4(),
-    _inv = new THREE.Matrix4(),
     _v = new THREE.Vector3(),
     _s = new THREE.Sphere();
   // scan() runs it at once; the first scan of a place runs as scanSteps, a job that yields every few dozen meshes
@@ -561,6 +365,7 @@ export function optimizePlace(place, opt = {}) {
           const anc = anchorOf(o),
             chain = [];
           for (let n = o; n && n !== anc; n = n.parent) chain.push([n, nodeSnap(n)]);
+          if (r && r.snap === '') regroup = true;
           info.set(o, {
             state: 'wait',
             since: r && r.snap === '' ? Math.min(r.since, now) : now,
@@ -576,7 +381,8 @@ export function optimizePlace(place, opt = {}) {
       const m = o.material,
         anchor = anchorOf(o);
       if (!anchor) continue;
-      const bake = bakeOK && !m.transparent && BAKE.has(m.type) && !Object.keys(m.userData).length && !m.clippingPlanes;
+      const bake =
+        bakeOK && (!m.transparent || o.userData.stackable) && BAKE.has(m.type) && plainData(m) && !m.clippingPlanes;
       const uv = hasTex(m) && !!o.geometry.attributes.uv;
       if (hasTex(m) && !o.geometry.attributes.uv) continue;
       const nrm = !!o.geometry.attributes.normal;
@@ -613,15 +419,17 @@ export function optimizePlace(place, opt = {}) {
     }
     // the merging itself is queued and done a few milliseconds at a time (see pump), so it never holds up a frame
     for (const gr0 of groups.values())
-      for (const list of split(gr0.list, gr0.mat.transparent ? Math.min(SPAN, 2) : SPAN, TRIS, where)) {
-        if (list.length < 2) continue;
+      for (const list of split(gr0.list, gr0.mat.transparent ? Math.min(SPAN, 2) : SPAN, TRIS, where, LIGHT)) {
+        // a mesh with nothing to merge with still casts its shadow through a shadow-only batch (the shadow pass draws
+        // depth only, so any material goes); it draws itself from a batch of one
+        if (list.length < 2 && !soloCaster(list[0])) continue;
         jobs.push(() => {
           // still where it was when grouped, and not merged or moving since
           const ok = list.filter(
             (o) =>
               o.parent && (!info.get(o) || info.get(o).state === 'wait') && eligible(o) && relSnap(o) === snaps.get(o),
           );
-          if (ok.length < 2) return;
+          if (ok.length < 2 && !(ok.length === 1 && soloCaster(ok[0]))) return;
           const gr = { ...gr0, list: ok };
           build(gr);
           const casters = ok.filter((o) => o.castShadow && shadowable(o));
@@ -632,7 +440,7 @@ export function optimizePlace(place, opt = {}) {
             bySide.get(sd).push(o);
           }
           for (const [side, l] of bySide)
-            for (const part of split(l, 1e9, STRIS, where))
+            for (const part of split(l, 1e9, STRIS, where, LIGHT))
               build({ anchor: gr.anchor, shadow: true, side, list: part });
         });
       }
@@ -640,37 +448,6 @@ export function optimizePlace(place, opt = {}) {
     // forget meshes that left the scene (a rebuilt shell) and weren't merged
     if (!all) for (const [o, r] of info) if (r.state !== 'batched' && !seen.has(o) && !o.parent) info.delete(o);
     stats.scanMs = (stats.scanMs || 0) + performance.now() - t0;
-  }
-
-  function split(list, span, tris, where) {
-    const out = [],
-      todo = [list];
-    while (todo.length) {
-      const l = todo.pop();
-      let t = 0;
-      const lo = [1e9, 1e9, 1e9],
-        hi = [-1e9, -1e9, -1e9];
-      for (const o of l) {
-        const w = where.get(o);
-        t += w.t;
-        const v = [w.x, w.y, w.z];
-        for (let i = 0; i < 3; i++) {
-          if (v[i] < lo[i]) lo[i] = v[i];
-          if (v[i] > hi[i]) hi[i] = v[i];
-        }
-      }
-      const ext = [hi[0] - lo[0], hi[1] - lo[1], hi[2] - lo[2]],
-        ax = ext[0] >= ext[1] && ext[0] >= ext[2] ? 'x' : ext[1] >= ext[2] ? 'y' : 'z';
-      // light groups merge whatever their spread (drawing them off screen costs next to nothing)
-      if (l.length < 2 || t <= LIGHT || (Math.max(...ext) <= span && t <= tris)) {
-        out.push(l);
-        continue;
-      }
-      const sorted = l.slice().sort((a, b) => where.get(a)[ax] - where.get(b)[ax]),
-        h = sorted.length >> 1;
-      todo.push(sorted.slice(0, h), sorted.slice(h));
-    }
-    return out;
   }
 
   // shadow-only batches are first made per visible batch (so the shadows never drop out for a frame), then merged
@@ -700,7 +477,7 @@ export function optimizePlace(place, opt = {}) {
       if (!anchor) continue;
       for (const b of list) b.fresh = false;
       // one job per new batch, and the old ones go only after the last is built
-      for (const part of split(srcs, 1e9, STRIS, where))
+      for (const part of split(srcs, 1e9, STRIS, where, LIGHT))
         jobs.push(() => {
           const ok = part.filter((o) => info.get(o) && info.get(o).state === 'batched');
           if (ok.length) build({ anchor, shadow: true, side, list: ok, merged: true });
@@ -760,7 +537,6 @@ export function optimizePlace(place, opt = {}) {
     const bake = !shadow && gr.bake,
       uv = !shadow && gr.uv,
       nrm = !shadow && gr.nrm;
-    _inv.copy(anchor.matrixWorld).invert();
     let nv = 0,
       ni = 0;
     for (const o of list) {
@@ -789,7 +565,7 @@ export function optimizePlace(place, opt = {}) {
         U = g.attributes.uv,
         C = g.attributes.color,
         AB = baked ? g.attributes.aBake : null;
-      _m.multiplyMatrices(_inv, o.matrixWorld);
+      relMatrix(o, anchor, _m);
       nm.getNormalMatrix(_m);
       const flip = _m.determinant() < 0;
       const n = P.count,
@@ -1005,7 +781,7 @@ export function optimizePlace(place, opt = {}) {
         ? { state: 'dynamic' }
         : ready
           ? { state: 'wait', since: -1e9, snap: relSnap(o) }
-          : { state: 'wait', since: performance.now() - (group ? STILL_MS - 500 : 0), snap: '' },
+          : { state: 'wait', since: performance.now() - (group ? STILL_MS - REGROUP_MS : 0), snap: '' },
     );
     stats.released++;
   }
@@ -1077,13 +853,22 @@ export function optimizePlace(place, opt = {}) {
         // a group moved or showed/hid: merge its meshes again under it once they're still
         movers.add(n);
         for (const s of srcs) release(s, false, false, true);
+        nextScan = Math.min(nextScan, performance.now() + REGROUP_MS);
       }
     }
     for (const o of live) {
       const r = info.get(o);
       if (!srcSame(o, r.snap)) release(o, true);
     }
-    for (const [m, w] of mats) if (!matSame(m, w.snap)) for (const s of [...w.srcs]) release(s, true);
+    // a material that changed (the lift ride dims the floor's light pools) draws itself, and merges again once it
+    // has held still; one that keeps changing (a third time) draws itself from then on
+    for (const [m, w] of mats)
+      if (!matSame(m, w.snap))
+        for (const s of [...w.srcs]) {
+          const n = (matFlips.get(s) || 0) + 1;
+          matFlips.set(s, n);
+          release(s, n >= 3);
+        }
     outlined();
     for (const idx of dirtyIdx) idx.needsUpdate = true;
     dirtyIdx.clear();
@@ -1091,6 +876,7 @@ export function optimizePlace(place, opt = {}) {
   }
 
   let fresh = true,
+    regroup = false,
     raf = 0,
     nextScan = performance.now() + STILL_MS;
   const tick = () => {
@@ -1105,7 +891,8 @@ export function optimizePlace(place, opt = {}) {
       check();
       const now = performance.now();
       if (now > nextScan && !jobs.length) {
-        nextScan = now + 1000;
+        nextScan = now + (regroup ? REGROUP_MS : 1000);
+        regroup = false;
         scan(now, false);
         kick();
       }

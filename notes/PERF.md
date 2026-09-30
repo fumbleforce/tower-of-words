@@ -66,7 +66,7 @@ Why: Pages from main means every build's binaries stay in main's history forever
 ## Draw-call pass (perf agent, 2026-09-29): js/perf/batch.js
 
 One generic pass per place, no place files touched: `optimizePlace(place, { game })` right after a place is built.
-The office, the forecourt, the plaza and the dorm courtyard run this pass after the look in places/lifecycle.js (`BATCHED`). Train, gate and Eric's room still use their original rendering. `?nobatch` disables the pass. Model picking includes the original geometry on layer31. The cup tray, counter and sink plate keep their original draw order because their top surfaces overlap.
+Every place but Eric's room runs this pass after the look in places/lifecycle.js (`BATCHED`; train and gate since 2026-09-30, see Phone draw calls below). `?nobatch` disables the pass. Model picking includes the original geometry on layer31. The cup tray, counter and sink plate keep their original draw order because their top surfaces overlap.
 
 What it does:
 - Merges static meshes into one mesh per look: materials that differ only in colour share one material with the
@@ -167,26 +167,71 @@ game3d/tools/perf/budgets.json (the baseline). The overlay itself is described i
   1366 860` and `... 390 844` rewrite that layout's entry for the GL the run got. Only a passing run writes it.
   Commit budgets.json with the change and say why in the message.
 
-Baseline (build 0930-0748, d2c8515 plus map upgrade task G; fast test, q0, GL=gpu; draw-call pass on the office,
-forecourt, plaza and dorm courtyard). Median frame 16.7 ms everywhere (vsync).
+Baseline (build 0930-1137 on ee2d125 plus the phone draw-call work below; fast test, q0, GL=gpu; draw-call pass on
+every place but Eric's room). Median frame 16.7 ms everywhere (vsync), 1% low 16.8 ms everywhere (the desktop plaza
+read 133 ms once with two tests on the GPU and was set back to 16.8).
 
-| place | desktop calls | desktop tris | phone calls | phone tris | 1% low ms (desktop / phone) |
-|---|--:|--:|--:|--:|--:|
-| train      |   851 | 144k | 680 | 133k | 16.8 / 16.8 |
-| gate       | 1,157 | 133k | 731 |  92k | 16.8 / 50 |
-| forecourt  |   230 | 116k | 175 |  83k | 16.8 / 33.4 |
-| office     |   918 | 536k | 590 | 436k | 16.8 / 49.9 |
-| plaza      |   105 | 106k | 103 | 103k | 16.8 / 16.8 |
-| dorm_court |   161 |  49k | 148 |  47k | 16.8 / 16.8 |
-| dorms      |   149 |  19k | 149 |  19k | 16.8 / 16.8 |
+| place | desktop calls | desktop tris | phone calls | phone tris |
+|---|--:|--:|--:|--:|
+| train      | 246 | 158k | 222 | 144k |
+| gate       | 260 | 136k | 187 | 122k |
+| forecourt  | 146 | 117k | 125 | 104k |
+| office     | 450 | 530k | 216 | 264k |
+| plaza      |  55 | 103k |  50 | 103k |
+| dorm_court |  54 |  49k |  44 |  48k |
+| dorms      | 149 |  19k | 149 |  19k |
 
-The four walk-home places are inside the map plan's target (200 calls and 120k triangles at q0 on the phone). Train,
-gate and office are still over the 250-call phone budget above, and the office over 300k triangles.
-Office triangles re-baselined (2026-09-30): the "office triangles 26% over the baseline" warning every day test
-printed since 6c15d84 (Codex, office batching) is the batching pass itself, whose larger merged groups cull less
-finely (Office integration below: 345k to 421k then, 436k now on the phone); calls fell from 2,714 to 590.
-The previous baseline (0929-1848-b196ef5, office unbatched) had train 779/648, gate 1,246/833, office 4,130/2,714
-calls (desktop/phone).
+Every place is inside the phone budget (250 calls, 300k triangles). The previous baselines: 0930-0748 (d2c8515) had
+train 851/680, gate 1,157/731, office 918/590 calls (desktop/phone), office 436k triangles on the phone;
+0929-1848-b196ef5 (office unbatched) had train 779/648, gate 1,246/833, office 4,130/2,714.
+
+## Phone draw calls (2026-09-30, review office-perf)
+
+Jørgen: "Fix now, lighter look on phone allowed; low priority but should be done". Phone q0 in the fast test, before
+(d2c8515) → after: train 680 → 222 calls, gate 731 → 187, office 590 → 216; triangles 133k → 144k, 92k → 122k,
+436k → 264k. Desktop keeps its look and got the same batching: train 851 → 246, gate 1,157 → 260, office 918 → 450.
+Stills before/after at both sizes (phone: train and gate unchanged, the office's furniture without sun shadows; desktop
+unchanged; close-ups of the straps and the rack lights): game3d/shots/phone-perf/.
+
+Why train and gate were unbatched: nothing on record. The pass came with a hook for every place (e1ef56a) and the
+office was switched on alone (6c15d84), then the outdoor chunks. Switched on, the train showed why it would have looked
+poor: the car sways, so every mesh in it was let go and merged again a level of moving groups at a time, a scan a
+second, while the fast test spends only about 6 s in the train. What changed:
+
+- js/perf/batch.js, all layouts, no change on screen (`ab.mjs`: under 0.04/255 mean, max 0.1% of pixels over 8/255):
+  - train and gate in `BATCHED` (places/lifecycle.js).
+  - Meshes let go because a group above them moved merge again after 0.3 s, with scans every 0.3 s until they have
+    (`REGROUP_MS`; it was 1.5 s and a scan a second).
+  - Materials the look patched (`userData.look`) have their colour baked into vertex colours like plain ones: the
+    patch works on `diffuseColor` after the vertex colours, so it's the same maths. They had been grouped per colour.
+  - A mesh with nothing to merge with still casts through a shadow-only batch (it draws itself from a batch of one).
+  - See-through meshes marked `userData.stackable` merge with each other: contact footprints and blob shadows (one
+    colour, normal blending) and the light pools (additive), which stack to the same pixels in any order. Against
+    other see-through things the order can change where a pool lies over a footprint: the gate's pair check
+    (`day.mjs`) shows 0.1% of pixels over 8/255 at the planter by the wall lamp, max 87/255; per-object sorting there
+    was camera-dependent before too.
+  - A merged mesh whose material changes (the lift ride dims the pools) merges again once the material holds still;
+    the third change leaves it drawing itself. It used to draw itself for good, and the pools did after every ride.
+  - The stillness check reads transforms from the local matrices (world matrices can be a frame apart).
+  - Helpers moved out: batch-snap.js (material keys and snapshots), batch-split.js (median cuts).
+- Instancing where things move every frame, all layouts: the train's hand straps (js/train/straps.js, two instanced
+  meshes placed from the swinging pivots, about 100 draws with shadows → 4) and the office's rack lights
+  (js/scenes/office-leds.js, blinking by scale, 45 → 2). The straps no longer get the look's baked light (instanced
+  meshes are skipped by look/index.js); they hang in the air, so it doesn't show.
+- Phone only (js/perf/phone.js, `isPhone()` from settings.js; `?fullphone` turns it off): batches up to 6 m and 12,000
+  triangles instead of 3 m and 6,000 (office 267 → 242 calls, 242k → 269k triangles), and in the office only people
+  cast sun shadows (the shadow pass had about 80 batches and 170k triangles; props keep their contact footprints and
+  baked light).
+- `node game3d/tools/perf/day-calls.mjs [w h] [--places ...]` plays the day and prints per place where the draws go
+  (pass, kind, and the objects outside a batch), the tool used for all of the above.
+
+Real phones default to q1 (medium), where GTAO's normal pass and the outline draw the scene again: about twice these
+numbers. Not changed here.
+
+Entry hitches (`hitch.mjs` entry mode, q0, GL=gpu, before → after): train → gate worst frame 33 → 33 ms at both sizes,
+gate → forecourt 17 → 17 (phone), 33 → 17 (desktop); no long task. The crossfade snapshot is now a canvas copy
+(places/crossfade.js) instead of a JPEG: 31 → 22 ms phone, 36 → 21 ms desktop for train → gate. The fast test's worst
+train frame (67 to 83 ms) is the first place's start, not an entry; the gate's (33 ms) came down from 100.
 
 ## Office integration (C-0110, 2026-09-29)
 
@@ -266,8 +311,8 @@ Worst frame of the entry (walk out, crossfade, 2 s in the new place), GL=gpu, be
 No long task over 57 ms is left on any entry. Frames are vsync-quantised (16.7 ms steps). Left: the lift cut-away's
 clipped materials (their shadow depth variant, about 19 ms at the office and forecourt): three's `compile()` can't
 build clipping variants (it never sets the clipping state), so they compile on first use; buffer uploads (bufferData,
-up to 16 ms; three has no public way to upload geometry ahead); and the crossfade snapshot (`canvas.toDataURL`,
-25 to 45 ms, in the last frame of the old place).
+up to 16 ms; three has no public way to upload geometry ahead); and the crossfade snapshot (25 to 45 ms as a JPEG,
+about 22 ms as a canvas copy since 2026-09-30, in the last frame of the old place).
 
 ## Walk-home chunks (map upgrade task G, 2026-09-30)
 

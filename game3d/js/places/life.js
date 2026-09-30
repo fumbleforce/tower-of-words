@@ -38,6 +38,7 @@ export function lightPool(x, z, r = 1.1, { color = '#ffcf94', k = 0.32, sx = 1, 
   m.position.set(x, y, z);
   m.renderOrder = 1;
   m.userData.noAO = true;
+  m.userData.stackable = true; // light adds up the same in any order: the draw-call pass may merge them (perf/batch.js)
   return m;
 }
 
@@ -340,6 +341,7 @@ export function groundShadows(root, { skip = new Set(), opacity = 0.5, y = 0.009
     m.position.set(ctr.x, y, ctr.z);
     m.renderOrder = 1;
     m.userData.noAO = true;
+    m.userData.stackable = true; // one colour and draw order: the draw-call pass may merge them (perf/batch.js)
     out.add(m);
   }
   root.add(out);
