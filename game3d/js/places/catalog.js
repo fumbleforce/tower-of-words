@@ -65,14 +65,8 @@ export const PLACE_DETAILS = {
         'label': 'Bench',
         'kind': 'thing small',
       },
-      'poster_l': {
-        'label': 'Poster',
-        'kind': 'thing small',
-      },
-      'poster_r': {
-        'label': 'Poster',
-        'kind': 'thing small',
-      },
+      'poster_l': { 'label': 'Poster', 'kind': 'thing small', 'pin': 'near' }, // a flat line: its pin only when close
+      'poster_r': { 'label': 'Poster', 'kind': 'thing small', 'pin': 'near' }, // a flat line: its pin only when close
       'lift': {
         'label': 'Station exit',
         'kind': 'thing',
@@ -89,6 +83,12 @@ export const PLACE_DETAILS = {
         'label': "Tama's bowl",
         'kind': 'thing small',
       },
+      // background office workers (lobby.js extras): talked to through their idle: lines only
+      'worker_a': { 'label': 'Office worker', 'kind': 'person' },
+      'worker_b': { 'label': 'Office worker', 'kind': 'person' },
+      'commuter_1': { 'label': 'Office worker', 'kind': 'person' },
+      'commuter_2': { 'label': 'Office worker', 'kind': 'person' },
+      'commuter_3': { 'label': 'Office worker', 'kind': 'person' },
     },
     'spots': [
       'entrance_in',
@@ -166,6 +166,7 @@ export const PLACE_DETAILS = {
       fountain: { label: 'Fountain', kind: 'thing' },
       dorm_lane: { label: 'To the dorms', kind: 'thing' },
       canteen_table: { label: 'Canteen table', kind: 'thing', verb: 'Sit' },
+      canteen_worker: { label: 'Canteen worker', kind: 'person' },
     },
     spots: ['office_entry', 'fountain_edge', 'dorm_exit'],
     seats: [],
@@ -248,10 +249,7 @@ export const PLACE_DETAILS = {
         'label': 'Office door',
         'kind': 'thing small',
       },
-      'inout_board': {
-        'label': 'In/out board',
-        'kind': 'thing small',
-      },
+      'inout_board': { 'label': 'In/out board', 'kind': 'thing small', 'pin': 'near' }, // a flat line: its pin only when close
       'clock': {
         'label': 'Clock',
         'kind': 'thing small',

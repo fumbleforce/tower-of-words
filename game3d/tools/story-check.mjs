@@ -68,6 +68,22 @@ for (const name of STORY_FILES) {
     for (const e of Array.isArray(v) ? v : [v]) { const t = typeof e === 'string' ? { node: e } : e; if (!nodes[t.node]) bad(file, `on ${key}: missing node ${t.node}`); if (t.if) checkCond(file, t.if); }
     const g = /^give:(\w+|\*):(\w+)$/.exec(key);
     if (g) { if (g[1] !== '*' && !Object.hasOwn(ITEMS, g[1])) bad(file, `on ${key}: unknown item`); if (P && !P.things.includes(g[2]) && g[2] !== 'mio') bad(file, `on ${key}: no person '${g[2]}' here`); continue; }
+    // idle:<person>: what they say when the story has nothing for them (FORMAT.md, Triggers). A person here, and a
+    // line or two that doesn't move the story on
+    const idle = /^idle:(\w+)$/.exec(key);
+    if (idle) {
+      const who = PLACE_DETAILS[name]?.things?.[idle[1]];
+      if (idle[1] !== 'mio' && !/person/.test(who?.kind || '')) bad(file, `on ${key}: no person '${idle[1]}' here`);
+      for (const e of Array.isArray(v) ? v : [v]) {
+        const n = typeof e === 'string' ? e : e.node;
+        const walk = (list) => { for (const s of list || []) if (s && typeof s === 'object') {
+          if (['goal', 'next', 'trip', 'end', 'hold', 'type', 'kotodama'].includes(s.do) || s.choice || s.offer || s.go) bad(file, `on ${key}: idle node ${n} moves the story on (${s.do || Object.keys(s)[0]}); idle lines only talk`);
+          walk(s.then); walk(s.else);
+        } };
+        walk(nodes[n]);
+      }
+      continue;
+    }
     const m = /^(talk|say|near|zone|event):(?:(\w+):)?(.+)$/.exec(key);
     if (!m) { bad(file, `odd trigger ${key}`); continue; }
     const [, kind, cmd, id] = m;

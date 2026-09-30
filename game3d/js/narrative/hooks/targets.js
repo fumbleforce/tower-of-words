@@ -1,15 +1,16 @@
 export const isPlayer = (id) => id === 'eric' || id === 'player';
 export function createTargets(game) {
   function rigOf(id) {
-    return isPlayer(id) ? null : game.place.people[id];
+    // `extras`: background people a place lets the story look at and gesture with, but not walk (lobby.js)
+    return isPlayer(id) ? null : game.place.people[id] || game.place.extras?.[id];
   }
   function posOf(to) {
     if (Array.isArray(to)) return to;
     const P = game.place;
     if (P.spots[to]) return P.spots[to];
     if (isPlayer(to)) return [game.player.root.position.x, game.player.root.position.z];
-    if (P.people[to]) {
-      const p = P.people[to].root.position;
+    if (P.people[to] || P.extras?.[to]) {
+      const p = (P.people[to] || P.extras[to]).root.position;
       return [p.x, p.z];
     }
     if (P.things[to]) {
