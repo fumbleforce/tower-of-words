@@ -15,8 +15,8 @@ import { sim, PERIODS as PERIOD_ORDER, absorb, applySchedule, save } from '../si
 import * as trips from '../trips.js';
 
 const MUSIC = { train: 'calm', gate: 'lively', office: 'office' };
-// places the draw-call pass (js/perf/batch.js) runs on (Eric's room is small enough without it)
-const BATCHED = new Set(['train', 'gate', 'office', 'forecourt', 'plaza', 'dorm_court']);
+// places the draw-call pass (js/perf/batch.js) runs on
+const BATCHED = new Set(['train', 'gate', 'office', 'forecourt', 'plaza', 'dorm_court', 'dorms']);
 
 export function createPlaceLifecycle(
   game,
