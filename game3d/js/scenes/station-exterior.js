@@ -12,6 +12,7 @@ import { lightPool } from '../places/life.js';
 import { addOccluder, updateOccluders } from './occluders.js';
 import { BUILDINGS, footprint, toLocal } from './island-layout.js';
 import { boxes } from './forecourt/details.js';
+import { POOL_Y } from './outdoor/parts.js';
 import { hall, hallFares, ROOM } from './station-hall.js';
 import { FARES } from './station-fittings.js';
 import { buildShed } from './station-shed.js';
@@ -169,7 +170,7 @@ function block(root) {
     ),
   );
   root.add(boxes([[0.86, LOW, 0.06, STAFF_X, 0, ZN + 0.02]], PAL.door));
-  root.add(lightPool(DOOR_X, ZN - 0.7, 0.9, { k: 0.28 }));
+  root.add(lightPool(DOOR_X, ZN - 0.7, 0.9, { k: 0.28, y: POOL_Y }));
   hall(root, CX, ZN + ROOM.Z);
   const fares = hallFares(root, CX, ZN + ROOM.Z);
   fares.position.z += T; // the room's back wall is inside the station's north wall here

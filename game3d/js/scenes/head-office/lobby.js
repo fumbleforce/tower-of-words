@@ -95,8 +95,8 @@ export function furniture(g) {
   }
   stand.position.set(DOOR_U + 1.15, 0, -0.5);
   g.add(stand);
-  // the entrance mat inside the door
-  g.add(rbox(1.5, 0.012, 1.0, '#3c4658', { x: DOOR_U, z: -0.75, r: 0.004, cast: false }));
+  // the entrance mat inside the door, standing proud of the floor (its top level with the floor's, 0.012, flickered)
+  g.add(rbox(1.5, 0.012, 1.0, '#3c4658', { x: DOOR_U, y: 0.006, z: -0.75, r: 0.004, cast: false }));
   // the floor: the court's walk carried in as a dark stone runner with pale edges from the door mat to the lifts,
   // the guide line from the door to the reception counter, and a rug under the sofas
   const flat = (w, d, u, n, color, y = 0.013) =>
@@ -109,7 +109,7 @@ export function furniture(g) {
     gn = RECEPTION[1] - 0.8;
   flat(0.3, gn + 0.15 - 0.3, DOOR_U, (0.3 + gn + 0.15) / 2, guide, 0.018);
   flat(DOOR_U + 0.15 - RECEPTION[0], 0.3, (RECEPTION[0] + DOOR_U + 0.15) / 2, gn, guide, 0.018);
-  flat(0.6, 0.6, RECEPTION[0], gn, guide, 0.019);
+  flat(0.6, 0.6, RECEPTION[0], gn, guide, 0.022); // over the line's end, clear of its top
   flat(2.9, 2.1, 7.88, 2.75, '#4f5a66', 0.011);
 }
 // the same pieces as walk-grid rectangles in (u, n), and the name stone outside

@@ -102,7 +102,10 @@ export const pair = (c, gap, axis = 'x') =>
 // ---------- light ----------
 // light pools on the ground under a set of lamps, in one mesh (one draw call however many lamps). Returns the mesh;
 // set(k) changes their strength (the evening turns them up). y: their height, just over the paving they light.
-export function pools(points, r = 0.9, { k = 0.2, color = '#ffcf94', y = 0.007 } = {}) {
+// POOL_Y: over the paving's highest parts (stones 0.006-0.008, tactile tiles 0.012, their ribs and dots 0.026). A pool
+// level with the stones fights them for depth, and flickers in stripes as the camera moves (issue #100).
+export const POOL_Y = 0.03;
+export function pools(points, r = 0.9, { k = 0.2, color = '#ffcf94', y = POOL_Y } = {}) {
   const base = lightPool(0, 0, r, { k, color });
   const quads = points.map(([x, z, s = 1]) => {
     const g = new THREE.PlaneGeometry(2 * r * s, 2 * r * s);

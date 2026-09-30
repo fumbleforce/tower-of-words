@@ -3,6 +3,7 @@
 import { PAL, mat, textTexture, plane, JP_FONT } from '../../props.js';
 import { lightPool } from '../../places/life.js';
 import { monument } from '../forecourt/details.js';
+import { POOL_Y } from '../outdoor/parts.js';
 import { GF, T, TOP, LU, LN, DOOR_U, DOOR_W, NU, NT, parts, hash, bayLines } from './frame.js';
 
 // the upper floors: curtain wall with floor bands on every face, pale fins on the two faces the camera sees
@@ -203,7 +204,7 @@ export function ground(g, frame) {
   sign.name = 'ho:name';
   g.add(sign);
   // under the canopy, a pool of light at the door; the name stone beside it
-  g.add(lightPool(DOOR_U, 1.0, 1.1, { k: 0.14, sx: 1.4 }));
+  g.add(lightPool(DOOR_U, 1.0, 1.1, { k: 0.14, sx: 1.4, y: POOL_Y }));
   const stone = monument('本社', 'HEAD OFFICE');
   stone.position.set(DOOR_U + 4.35, 0, 1.2);
   g.add(stone);
