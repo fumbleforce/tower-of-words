@@ -73,7 +73,7 @@
     },
     "game3d/js/places/train.js": {
       "lines": 1662,
-      "bytes": 60640,
+      "bytes": 60636,
       "owner": "codex-tui",
       "review": "C-0076; C-0166 named sounds per door and machine",
       "reason": "Existing train place geometry, animation and scene hooks; stage 5 room-builder review is planned."
@@ -93,7 +93,7 @@
       "reason": "Existing primitive prop and material builders; coordinate the look/detail cycle split with visual work."
     },
     "game3d/js/runner.js": {
-      "lines": 491,
+      "lines": 488,
       "bytes": 18553,
       "owner": "codex-tui",
       "review": "C-0076",

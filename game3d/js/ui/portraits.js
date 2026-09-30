@@ -135,7 +135,7 @@ export function layoutStage() {
   const F0 = phone ? Math.min(58, vh * 0.068) : Math.min(124, vh * 0.13);
   const cutK = phone ? 1.55 : 2.25; // chin to the cut, in face heights (the waist on desktop)
   const base = vh - band;
-  const keep = waiting(talk) ? avoidBoxes() : [];
+  const keep = promptWaiting(talk) ? avoidBoxes() : [];
   lastKeep = keep.length ? keep : null;
   const taken = [];
   // where a portrait goes at size k, and the box its body covers (about 1.4 face widths each side of the face, from
@@ -187,7 +187,7 @@ export function layoutStage() {
   if (lastKeep && !followRaf) followRaf = requestAnimationFrame(follow);
 }
 // a word to type or replies to pick are up and waiting for the player
-function waiting(talk) {
+export function promptWaiting(talk) {
   return (
     !!talk && !talk.hidden && (talk.classList.contains('typing') || !!talk.querySelector('.chips .chip:not(:disabled)'))
   );
@@ -196,7 +196,7 @@ function follow() {
   followRaf = 0;
   const S = $('#stage');
   if (!S || S.hidden || !lastKeep) return;
-  const keep = waiting($('#talk')) ? avoidBoxes() : [];
+  const keep = promptWaiting($('#talk')) ? avoidBoxes() : [];
   const moved =
     keep.length !== lastKeep.length ||
     keep.some((b, i) => ['x0', 'x1', 'y0', 'y1'].some((k) => Math.abs(b[k] - lastKeep[i][k]) > 2));

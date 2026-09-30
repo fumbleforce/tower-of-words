@@ -49,6 +49,26 @@ export function widenTo(camera, { x, z, zoom }, fitDist, keep) {
   return [t, (hi - lo) / 2 / k];
 }
 
+// While a prompt waits on the player, a camera can pull back about the top middle of the screen by a factor s (< 1)
+// so Eric and what he says the word to come up clear of the talk box (issue #80; narrative/hooks/prompt-view.js sets
+// cam.pull). Everything on screen stays on screen: the top edge holds and the rest moves up and shrinks.
+// t, d: the shot (target and distance); dir: unit vector from the target to the camera; fov in degrees.
+export function pullBack(t, d, dir, fov, s) {
+  if (!(s < 0.999)) return [t, d];
+  const e = Math.asin(THREE.MathUtils.clamp(dir.y, -1, 1)),
+    th = THREE.MathUtils.degToRad(fov) / 2;
+  // ground distance from the target to where the top edge of the screen meets its plane
+  const L = d * (Math.sin(e) / Math.tan(Math.max(0.05, e - th)) - Math.cos(e));
+  const g = new THREE.Vector3(-dir.x, 0, -dir.z).normalize();
+  return [t.clone().addScaledVector(g, L * (1 - 1 / s)), d / s];
+}
+
+// a camera's shot for this frame (c.wanted(p)), pulled back by c.pull; the shot before the pull is kept in c.shot
+export function pulled(c, p) {
+  c.shot = c.wanted(p);
+  return pullBack(...c.shot, c.dir, c.camera.fov, c.pull);
+}
+
 export function goalSpot(game = window.__game) {
   if (!game || !game.markers || game.busy) return null;
   for (const m of game.markers.list) {
@@ -85,6 +105,8 @@ export class RoomCam {
     this.smooth = FOLLOW;
     this.nudgeK = 0;
     this.goalLean = { x: 0, z: 0 };
+    this.pull = 1; // pullBack() factor while a prompt waits (prompt-view.js)
+    this.shot = null; // the shot before the pull
   }
   get dir() {
     return new THREE.Vector3(
@@ -226,7 +248,7 @@ export class RoomCam {
       this.pv.set(0, 0, 0);
       this.ahead.multiplyScalar(Math.exp(-dt / 0.4));
     }
-    const [t, d] = this.wanted(p);
+    const [t, d] = pulled(this, p);
     // back to the follow spring once a story move has arrived
     if (
       !this.close &&
