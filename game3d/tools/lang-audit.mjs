@@ -26,7 +26,7 @@ const rd = (p) => fs.readFileSync(path.join(root, p), 'utf8');
 const imp = async (p) => (await import(pathToFileURL(path.join(root, p)).href));
 const args = new Set(process.argv.slice(2));
 
-const { WORDS } = await imp('js/lang.js');
+const { WORDS, NAMES, HONORIFICS, nameAt } = await imp('js/lang.js');
 const uiSrc = rd('js/ui/dialogue-text.js');
 const { INTERJ, POOL, glossed: usesInterjectionGlosses } = heardTextData(uiSrc);
 // interjections that are only sounds; the rest of INTERJ (はい, うん, ええ, まあ, ほら, あの...) are words
@@ -108,6 +108,17 @@ function checkLine(text, st, where, owner = 'story', kind = 'line') {
     flag('ERROR', owner, where, `readable Japanese ${run} that hasn't been taught and isn't glossed`, text);
   }
 }
+// Names are never garbled (lang.js NAMES). A kanji or katakana run right before an honorific or と申します is a
+// name; if NAMES doesn't have it, the line would hide it, so that is an ERROR.
+const NOT_NAMES = new Set(['皆', '客', '嬢', '兄', '姉', '父', '母', '子']);
+function checkNames(text, where) {
+  const after = [...Object.keys(HONORIFICS), 'と申します', 'といいます', 'と言います'].join('|');
+  for (const m of text.matchAll(new RegExp(`([\\u3400-\\u9fff々]+|[\\u30a0-\\u30ff]+)(?=${after})`, 'g'))) {
+    const run = m[1];
+    if (NOT_NAMES.has(run) || NAMES.some((n) => n.ja === run)) continue;
+    flag('ERROR', 'language', where, `${run} looks like a name but isn't in lang.js NAMES, so the line would garble it`, text);
+  }
+}
 // an overheard line (heardHTML): taught words sharp, `clear` readable, sounds readable, the rest gibberish
 const SPANS = fs.existsSync(path.join(root, 'audio/spans.json')) ? JSON.parse(rd('audio/spans.json')) : {};
 const { heardKey } = await imp('tools/heardkey.mjs');
@@ -132,9 +143,12 @@ function checkHeard(s, st, where) {
     keep.push({ ja, clear: true });
   }
   keep.sort((a, b) => b.ja.length - a.ja.length);
+  checkNames(text, where);
   const punct = /[\s、。！？!?…「」ー]/;
   let i = 0;
   while (i < text.length) {
+    const nm = nameAt(text, i);
+    if (nm) { flag('INFO', 'story', where, `name ${nm.ja} readable as (${nm.gl})`, text); i += nm.ja.length; continue; }
     if (i === 0 || punct.test(text[i - 1])) {
       const it = INTERJ.find((w) => text.startsWith(w, i) && (i + w.length === text.length || punct.test(text[i + w.length])));
       if (it) { if (!SOUNDS.has(it) && !GLOSSED_INTERJ.has(it)) flag('WARN', 'shell', where, `the gibberish filter leaves the word ${it} readable with no gloss (INTERJ in ui.js; gloss it from lang.js INTERJ_GLOSS)`, text); i += it.length; continue; }

@@ -96,7 +96,13 @@ export async function lobbyPlace(game) {
     openTimer = Math.max(openTimer, sec);
   }
   function setGate(state) {
-    if (state === 'open') {
+    // slam: bursts open, bounces, stays open
+    if (state === 'slam') {
+      st.slam = 1;
+      st.flap = 1.3;
+      sfx('flap');
+    }
+    if (state === 'open' || state === 'slam') {
       st.jam = 0;
       st.gateOpen = true;
       st.flapWant = 1;
@@ -115,15 +121,6 @@ export async function lobbyPlace(game) {
       st.flapWant = 0;
       w.arch.userData.set('no');
       sfx('no');
-    }
-    if (state === 'slam') {
-      st.jam = 0;
-      st.slam = 1;
-      st.flap = 1.3;
-      st.flapWant = 1;
-      sfx('flap');
-      openTimer = 2.5;
-      w.arch.userData.set('ok');
     }
     // the head-count screen on the arch: 2 while jammed (it counted the briefcase), back to 1 once the gate moves
     w.arch.userData.count(state === 'jam' ? 'two' : state === 'closed' ? 'idle' : 'ok');

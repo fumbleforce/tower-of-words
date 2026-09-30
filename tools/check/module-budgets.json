@@ -58,8 +58,8 @@
       "reason": "Existing shared lift geometry, movement and dialogue staging; extract after behavior characterization."
     },
     "game3d/js/places/lobby.js": {
-      "lines": 669,
-      "bytes": 23167,
+      "lines": 666,
+      "bytes": 23136,
       "owner": "codex-tui",
       "review": "C-0076; 2026-09-30 preparation slices (yield points, notes/PERF.md); C-0166 named sounds per door and machine",
       "reason": "Existing gate place geometry and interaction hooks; stage 5 room-builder review is planned."
@@ -93,8 +93,8 @@
       "reason": "Existing primitive prop and material builders; coordinate the look/detail cycle split with visual work."
     },
     "game3d/js/runner.js": {
-      "lines": 488,
-      "bytes": 18553,
+      "lines": 473,
+      "bytes": 17872,
       "owner": "codex-tui",
       "review": "C-0076",
       "reason": "Narrative execution, checkpoint replay and dialogue/audio dispatch remain after stage 2c; stage 3 reviews the presentation/audio boundary."

@@ -40,6 +40,37 @@ export const WORDS = {
   gaijin: { ja: '外人', ro: 'gaijin', en: 'foreigner', voice: 'word-gaijin' },
   kotodama: { ja: '言霊', ro: 'kotodama', en: 'words with power in them' },
 };
+// People's names are never garbled (Jørgen, 2026-09-30: "his name should not be obscured"). In an overheard line
+// each one stays readable with the name in romaji after it, taught or not, with an honorific if one follows.
+// Every Japanese spelling of a name the day uses goes here; the language check fails on one that isn't.
+export const NAMES = [
+  { ja: '森', en: 'Mori' },
+  { ja: '浜田', en: 'Hamada' },
+  { ja: '石橋', en: 'Ishibashi' },
+  { ja: '玖路', en: 'Kuro' },
+  { ja: 'エリック', en: 'Eric' },
+  { ja: 'ミオ', en: 'Mio' },
+  { ja: 'ケンジ', en: 'Kenji' },
+  { ja: 'エミ', en: 'Emi' },
+  { ja: 'アオイ', en: 'Aoi' },
+  { ja: 'レイ', en: 'Rei' },
+  { ja: 'タマ', en: 'Tama' },
+];
+export const HONORIFICS = { さん: 'san', くん: 'kun', ちゃん: 'chan', 様: 'sama' };
+const KANJI = /[\u3400-\u9fff々]/,
+  KATA = /[\u30a0-\u30ff]/;
+// the name that starts at text[i] as a whole word (森 but not 森林, レイ but not キレイ), with its honorific
+export function nameAt(text, i) {
+  for (const n of NAMES) {
+    if (!text.startsWith(n.ja, i)) continue;
+    const script = KANJI.test(n.ja[0]) ? KANJI : KATA;
+    const end = i + n.ja.length;
+    if ((i > 0 && script.test(text[i - 1])) || (end < text.length && script.test(text[end]))) continue;
+    const h = Object.keys(HONORIFICS).find((k) => text.startsWith(k, end));
+    return { ja: n.ja + (h || ''), gl: n.en + (h ? `-${HONORIFICS[h]}` : '') };
+  }
+  return null;
+}
 // Verbs are met in a form, not as the dictionary word: 待って matte is the -te form of 待つ matsu.
 // The Words panel shows the form as met plus this line, so nobody takes matte for the base word.
 export const BASE = {
