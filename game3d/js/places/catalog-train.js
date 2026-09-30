@@ -89,6 +89,7 @@ export const TRAIN_DETAILS = {
     'platform': {
       'label': 'Platform',
       'kind': 'thing small',
+      'reachAfter': 'doors', // outside the car: reached once the doors open (reach-check.mjs)
     },
   },
   'spots': [

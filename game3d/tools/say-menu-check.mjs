@@ -1,8 +1,11 @@
 // Lists every selectable thing in each place and what its action menu shows (E row, Say row), with every word known.
 // Say shows where a word does something now: a say: trigger for it, or a thing with nothing else to use (issue #103).
+// Every selectable thing must have at least one action that does something right now, and an E row must do something
+// (issue #128; the rule is in test/support/menu-effects.mjs; menu-day-check.mjs checks it through the played day).
 //   node game3d/tools/say-menu-check.mjs [W H] [place...]   (shots of each menu in game3d/shots/say-menu/)
 import fs from 'node:fs';
 import { withBrowserJob } from '../../tools/lib/browser-job.mjs';
+import { menuEffects } from '../test/support/menu-effects.mjs';
 
 const args = process.argv.slice(2);
 const [W = '1366', H = '860'] = args.filter((a) => /^\d+$/.test(a));
@@ -33,16 +36,29 @@ await withBrowserJob('say-menu', async (b) => {
       await p.keyboard.press('Space');
       await p.waitForTimeout(400);
     }
-    const ids = await p.evaluate(async () => {
+    await p.evaluate(async () => {
       const { known, SAYABLE } = await import(new URL("js/lang.js", globalThis.location.href).href);
       for (const w of SAYABLE) known.add(w);
+    });
+    await p.waitForTimeout(600); // the markers cache what a thing does for 400 ms (interactions.js)
+    const ids = await p.evaluate(() => {
       return globalThis.__game.markers.list.filter((m) => m.enabled() && m.spot && m.spot()).map((m) => m.id);
     });
     return { p, ids };
   };
+  // no selectable thing without an action that does something (issue #128)
+  const effects = async (p, place) => {
+    const r = await p.evaluate(menuEffects);
+    console.log(`  ${r.out.length} selectable, ${r.out.filter((t) => t.faults.length).length} with a fault`);
+    for (const t of r.out.filter((t) => t.faults.length)) {
+      bad++;
+      console.log(`BAD ${place} ${t.id}: ${t.faults.join(', ')} (${t.fx.join(' ') || 'no effect'})`);
+    }
+  };
   for (const place of PLACES) {
     let { p, ids } = await open(place);
     console.log(`\n${place}`);
+    await effects(p, place);
     for (const id of ids) {
       const moved = await p.evaluate(
         (place) => globalThis.__game.place.name !== place || globalThis.__game.busy || globalThis.document.body.classList.contains('trip'),

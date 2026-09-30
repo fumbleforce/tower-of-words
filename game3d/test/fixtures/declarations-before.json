@@ -269,7 +269,8 @@
         },
         "platform": {
           "label": "Platform",
-          "kind": "thing small"
+          "kind": "thing small",
+          "reachAfter": "doors"
         }
       },
       "spots": [
@@ -416,11 +417,13 @@
         },
         "worker_a": {
           "label": "Office worker",
-          "kind": "person"
+          "kind": "person",
+          "reachAfter": "gate"
         },
         "worker_b": {
           "label": "Office worker",
-          "kind": "person"
+          "kind": "person",
+          "reachAfter": "gate"
         },
         "commuter_1": {
           "label": "Office worker",
