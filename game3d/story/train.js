@@ -149,7 +149,7 @@ export default {
         { do: "cam", on: "music", zoom: 1.7 },
         { do: "headphones", who: "music", state: "lift" },
         { say: "music", emo: "apologetic", text: "あ、ごめん。音、漏れてた？", en: "Oh, sorry. Could you hear that?" },
-        { say: "eric", emo: "gentle", text: "Only a little." },
+        { do: "gesture", who: "eric", kind: "nod" },
         { do: "phone", who: "music", state: "show" },
         { say: "music", emo: "shy", text: "自分で録ったの。まだ下手だけど。", en: "I recorded it myself. I’m still pretty bad, though." },
         { do: "phone", who: "music", state: "away" },

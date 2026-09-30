@@ -1,5 +1,5 @@
 {
-  "status": "pending",
+  "status": "complete",
   "request": "C-0193/C-0206/C-0209; X-0324",
   "issue": 6,
   "pipeline": "sh tools/voice/run.sh",
@@ -45,16 +45,6 @@
       "lang": "ja"
     },
     {
-      "key": "ln-n9q8j7",
-      "speaker": "eric",
-      "text": "Only a little.",
-      "authoredText": "Only a little.",
-      "emo": "gentle",
-      "overheard": false,
-      "source": "train:music",
-      "lang": "en"
-    },
-    {
       "key": "ln-1hdwfkl",
       "speaker": "music",
       "text": "自分で録ったの。まだ下手だけど。",
@@ -95,5 +85,8 @@
       "lang": "ja"
     }
   ],
-  "note": "Japanese lines use en subtitles and clear ln-key Japanese audio, not overheard. Text and keys are final; use the existing mapped passenger voices. Aoi and greetings remain unchanged."
+  "note": "Completed with local Qwen clones. Eight train clips plus the replacement Mio server line passed batch checks; C0230 supplies the corrected kana-input take for ln-1hdwfkl (export ASR とった, similarity 0.927, median f0 290 Hz). Japanese train lines use English subtitles and clear ln-key audio. The unused Eric reply and retired Mio clip are excluded.",
+  "pronunciation": {
+    "ln-1hdwfkl": "Generate with --alt: 自分でとったの。まだ下手だけど。 Original 録った was read as ろくった/売った in the first batch. This changes the TTS input spelling only."
+  }
 }
