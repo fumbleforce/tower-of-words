@@ -384,6 +384,9 @@ game.skip = () => {
   if (game.busy) game.setHurry(true);
 };
 installMetrics(game, () => quality); // F3 overlay and the fast test's per-place numbers
+// what the look passes draw the whole scene with while on (GTAO normals, outline depth and mask), for js/perf/warm.js
+const overrides = (p) => (p?.enabled ? p.normalMaterial || [p.depthMaterial, p.prepareMaskMaterial] : []);
+game.overrideMaterials = () => [post?.gtao, outline].flatMap(overrides);
 game.setQuality = (q) => {
   quality = q;
   applyQuality();
