@@ -62,8 +62,8 @@
         }
       },
       "dorms": {
-        "calls": 69,
-        "tris": 30441,
+        "calls": 79,
+        "tris": 55871,
         "gpu": {
           "medianMs": 16.7,
           "p99Ms": 16.8,
@@ -134,8 +134,8 @@
         }
       },
       "dorms": {
-        "calls": 63,
-        "tris": 30429,
+        "calls": 69,
+        "tris": 55847,
         "gpu": {
           "medianMs": 16.7,
           "p99Ms": 16.8,
@@ -207,7 +207,7 @@
       },
       "dorms": {
         "calls": 70,
-        "tris": 30436,
+        "tris": 55860,
         "gpu": {
           "medianMs": 16.7,
           "p99Ms": 16.8,
