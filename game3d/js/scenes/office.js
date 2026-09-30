@@ -831,15 +831,15 @@ export function* officeSteps() {
   trolley.position.set(6.3, 0, 2.05);
   root.add(trolley);
   yield;
-  // corridor dressing: plants at the ends, a folded 清掃中 sign, bins, a pipe chair stack
+  // corridor dressing: plants off the doors, a folded 清掃中 sign, bins
   {
     const p = plant({ size: 0.95, seed: 14 });
-    p.position.set(-4.3, 0, 2.05);
+    p.position.set(-4.85, 0, 2.05);
     root.add(p);
   }
   {
     const p = plant({ size: 0.95, seed: 15 });
-    p.position.set(3.2, 0, 2.05);
+    p.position.set(3.4, 0, 2.05);
     root.add(p);
   }
   {
@@ -2015,8 +2015,8 @@ export function* officeSteps() {
     B(x0 + 2.2, x0 + 2.5, 3.85, 4.15);
     yield;
   }
-  B(-4.55, -4.05, 1.85, CS);
-  B(2.95, 3.45, 1.85, CS);
+  B(-5.1, -4.6, 1.85, CS);
+  B(3.15, 3.65, 1.85, CS);
   B(1.45, 1.75, 1.85, 2.1);
   B(0.55, 1.12, 1.95, CS);
   B(-2.65, -2.15, 1.85, CS);

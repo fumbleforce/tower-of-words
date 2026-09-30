@@ -1117,7 +1117,6 @@ body.phone #top > #goal #hint { font-size: 14px; }
 #actMenu .act:hover { background: rgba(255, 255, 255, .07); }
 #actMenu .act .k { display: inline-grid; place-items: center; min-width: 26px; height: 24px; padding: 0 6px; border-radius: 6px; background: #2a323e; border: 1px solid rgba(255, 255, 255, .14); border-bottom-width: 2px; box-shadow: none; color: #e6faf7; font: 700 12px/1 var(--font); }
 #actMenu .act .lb { color: inherit; font: inherit; }
-#actMenu .act.named { font-weight: 700; }
 #actMenu .act.say.first { background: rgba(111, 208, 198, .12); box-shadow: none; }
 #actMenu .act.say.first .k { background: var(--accent); border-color: var(--accent); color: #0f2624; }
 #actMenu .act.next { min-height: 32px; color: var(--ink-dim); font-size: 14px; }

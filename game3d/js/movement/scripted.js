@@ -1,6 +1,6 @@
 import { rigOf, bodies, BODY, CORNER, turnToward, angDiff, BRAKE, ACCEL, TURN, FRAME_MAX, STEP_MAX } from './shared.js';
 import { standOff } from './targets.js';
-import { freeNear, reachableNear, clearOf, pathAround } from './navigation.js';
+import { freeNear, reachableNear, clearOf, pathAround, stuck } from './navigation.js';
 import { spaceFrom, isPassing, slideStep, isHard, press, followSpeed } from './crowd.js';
 import * as THREE from 'three';
 
@@ -58,6 +58,7 @@ export function walkRig(
     waited = 0,
     age = 0,
     blockT = 0;
+  const prog = { best: Infinity, noGain: 0, spun: 0 }; // getting nowhere: see `stuck` below
   let plen = 0;
   {
     let q = [obj.position.x, obj.position.z];
@@ -119,7 +120,12 @@ export function walkRig(
         return true;
       }
       const head = Math.atan2(dx, dz);
-      yaw = turnToward(yaw, head, dt);
+      const turned = turnToward(yaw, head, dt);
+      if (stuck(prog, remain, dt, wait, angDiff(turned, yaw))) {
+        done();
+        return true;
+      }
+      yaw = turned;
       let want = speed * THREE.MathUtils.clamp((Math.cos(angDiff(head, yaw)) + 0.35) / 1.35, v > 0.4 ? 0.3 : 0.12, 1);
       want = Math.min(want, Math.sqrt(2 * BRAKE * 0.6 * remain) + Math.max(0.15, brakeTo * speed));
       // someone right in front: behind someone walking, wait a moment (a queue); someone standing, slow down and go
@@ -200,6 +206,7 @@ export function walkRig(
           if (alt) {
             path = alt;
             path[path.length - 1] = [tx, tz];
+            prog.best = Infinity; // a new, longer way round: progress counts from here
           }
         }
         // still no headway against them (a doorway, a corner): slip past rather than stall the walk

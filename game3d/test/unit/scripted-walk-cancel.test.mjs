@@ -10,9 +10,9 @@ const node = ast.body.find(n => n.type === 'ExportNamedDeclaration' && n.declara
 function fixture() {
   const raf = [];
   const walk = new Function('requestAnimationFrame', 'THREE', 'turnToward', 'angDiff', 'BRAKE', 'ACCEL', 'FRAME_MAX',
-    'STEP_MAX', `return ${source.slice(...node.range)}`)(fn => raf.push(fn),
+    'STEP_MAX', 'stuck', `return ${source.slice(...node.range)}`)(fn => raf.push(fn),
     { MathUtils: { clamp: (n, lo, hi) => Math.max(lo, Math.min(hi, n)) } }, (_from, to) => to,
-    (a, b) => a - b, 3, 3, 0.1, 0.05);
+    (a, b) => a - b, 3, 3, 0.1, 0.05, () => false);
   const rig = { root: { userData: {}, parent: {}, position: { x: 0, z: 0 }, rotation: { y: 0 }, scale: { x: 1 } },
     states: [], setState(value) { this.state = value; this.states.push(value); } };
   return { walk, rig, raf, game: { place: {}, timeScale: 1 } };

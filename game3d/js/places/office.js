@@ -134,6 +134,8 @@ export async function officePlace(game) {
   const at = (x, z, fx, fz) => ({ spot: () => [x, z], face: () => [fx, fz] });
   const Z0 = w.Z0;
 
+  const shut = (o) => !st.mdoorWant && o.position.x > 3.4 && o.position.z < CN;
+  const cat = () => w.tama.getWorldPosition(new THREE.Vector3());
   const things = {
     emi: {
       ...PLACE_DETAILS.office.things.emi,
@@ -177,16 +179,9 @@ export async function officePlace(game) {
         v.y += 0.45;
         return v;
       },
-      spot: () => {
-        const v = new THREE.Vector3();
-        w.tama.getWorldPosition(v);
-        return [v.x, v.z + 0.6];
-      },
-      face: () => {
-        const v = new THREE.Vector3();
-        w.tama.getWorldPosition(v);
-        return [v.x, v.z];
-      },
+      spot: () => [cat().x, cat().z + 0.6],
+      face: () => [cat().x, cat().z],
+      enabled: () => !shut(w.tama.parent === w.root ? w.tama : w.myChair),
     },
     covered: {
       ...PLACE_DETAILS.office.things.covered,
@@ -225,7 +220,7 @@ export async function officePlace(game) {
       },
       spot: () => [w.myChair.position.x + 0.1, w.myChair.position.z + 0.55],
       face: () => [w.myChair.position.x, w.myChair.position.z],
-      enabled: () => !flags[ENGINE_KEYS.chairHome],
+      enabled: () => !flags[ENGINE_KEYS.chairHome] && !shut(w.myChair),
     },
     lift: { ...PLACE_DETAILS.office.things.lift, anchor: v3(-5.45, 1.5, -3.4), ...at(-5.45, -2.8, -5.45, -3.4) },
     vending: {
@@ -279,7 +274,7 @@ export async function officePlace(game) {
     boxes: {
       ...PLACE_DETAILS.office.things.boxes,
       anchor: v3(2.85, 0.6, -1.2),
-      ...at(2.3, -1.2, 2.85, -1.2),
+      ...at(1.8, -1.2, 2.85, -1.2),
       noMarker: true,
     },
     chief_desk: {
@@ -736,7 +731,6 @@ export async function officePlace(game) {
       w.nav.unblock('chair');
       restoreObject(w.myChair, state.chair || initialChair);
       if (state.chairHome ?? (f.chairHome || f.chair_back)) {
-        w.nav.unblock('chair');
         w.myChair.position.set(dS1.seat[0], w.myChair.position.y, dS1.seat[1]);
         w.myChair.rotation.y = Math.PI;
       } else w.nav.blockTagged('chair', 5.2, 5.8, -1.6, -1.0);
@@ -889,7 +883,7 @@ export async function officePlace(game) {
         if (j !== jamSheet.visible) showJam(j);
       }
       stepPaper(dt);
-      pusher.step(dt); // the chair Eric is pushing back to his desk (office-chair.js)
+      pusher.step(dt); // the chair push (office-chair.js)
       const p = game.player.root.position;
       for (const r of Object.values(people)) {
         if (r._walk || !r.hips) continue;

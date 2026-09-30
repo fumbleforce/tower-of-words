@@ -36,7 +36,7 @@ On the train (game3d/js/onboard.js, notes/ONBOARDING.md for the design):
 
 - At the start the screen shows only one line on walking ("W A S D or click the floor to walk" / "Tap the floor to walk"). It steps aside while a line or caption is up, goes once Eric has walked a few steps and never comes back.
 - No goal and no story hints until he has talked to a person. The first passenger he talks to points at the seat beside Mio, and that gives the first goal.
-- The action prompt drops its verb after two uses and its key cap after five.
+- The action prompt drops its key cap after five uses. Its action word (Talk, Look, Pet, Push to your desk...) always stays: a box with only the name read as having no action (Jørgen, 2026-09-30: "interaction windows but no actions").
 - Say first shows only at the goal target (the cat), after Mio teaches おはようございます; after one use it shows wherever a word works.
 - No Next, clock, People count or mute chip on the train.
 - Onboarding state is kept in the browser, so a reload doesn't teach it all again; Start on the title resets it.

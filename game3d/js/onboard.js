@@ -3,7 +3,7 @@
 //   - the controls line goes once Eric has walked a few steps (1.2 m), and never comes back; it steps aside while a
 //     line or caption is up
 //   - no goal and no story hints until he has used E on a person (ui.goal holds the story's goal until then)
-//   - the E prompt drops its verb after two uses and its key cap after five (ui.placeSay reads `uses`)
+//   - the E prompt drops its key cap after five uses; the action word always stays (ui.placeSay reads `uses`)
 //   - Say (Q) first shows only at the goal target (the cat); after one use it shows wherever a word works
 //   - no Tab/Next, clock, people count or mute chip on the train
 // State lives in localStorage so a reload on the train doesn't teach it all again; Start on the title resets it.
