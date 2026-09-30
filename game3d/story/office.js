@@ -373,7 +373,7 @@ export default {
       ] },
     ],
     mio_b2: [
-      { say: 'mio', face: 'tired', emo: 'tired', text: "Upstairs you have to bow to everybody all day, it's so tiring. Down here it's just me and these guys." },
+      { say: 'mio', face: 'tired', emo: 'tired', text: "Upstairs you have to bow to everybody all day, it's so tiring. Down here it's just me and the servers." },
       { say: 'mio', face: 'smile', emo: 'fond', text: "They're from the nineties. If I don't watch them, they just... die." },
       { say: 'mio', face: 'deadpan', emo: 'dry', text: "And the company won't buy new ones, ever. So now they pay you to babysit them with me." },
       { go: 'mio_lunch_end' },

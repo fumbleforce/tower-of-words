@@ -128,7 +128,7 @@ export default {
     ],
     youth: [
       { if: "train_youth_seen", then: [
-        { do: "emote", who: "youth", kind: "heart" },
+        { do: "gesture", who: "youth", kind: "nod", to: "eric" },
       ], else: [
         { do: "cam", on: "youth", zoom: 1.7 },
         { do: "phone", who: "youth", state: "show" },
@@ -433,10 +433,9 @@ export default {
         { do: "emote", who: "kuroda", kind: "zzz" },
       ], else: [
         { do: "cam", on: "kuroda", zoom: 1.7 },
-        "> A sticky note on his briefcase says \"12F 9:00!!\"",
         { do: "phone", who: "kuroda", state: "buzz" },
-        { do: "phone", who: "kuroda", state: "tap" },
         { say: "kuroda", emo: "sleepy", text: "すみません……あと五分。", en: "Sorry... five more minutes." },
+        { do: "phone", who: "kuroda", state: "tap" },
         { do: "cam", back: true },
         { set: "train_hamada_seen" },
       ] },
@@ -453,7 +452,7 @@ export default {
         { do: "printout", state: "show" },
         { say: "reader", emo: "weary", text: "会社のは古くて、同じボタンがないんだよ。", en: "The version at work is old. It doesn’t have the same buttons." },
         { say: "eric", emo: "surprised", text: "Windows 95?" },
-        { say: "reader", emo: "dry", text: "うん。会社の。", en: "Yes, that’s the one at work." },
+        { do: "gesture", who: "reader", kind: "nod", to: "eric" },
         { do: "printout", state: "away" },
         { do: "cam", back: true },
         { set: "train_reader_seen" },

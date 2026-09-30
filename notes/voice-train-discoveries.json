@@ -1,6 +1,6 @@
 {
   "status": "pending",
-  "request": "C-0193/C-0206; X-0320",
+  "request": "C-0193/C-0206/C-0209; X-0324",
   "issue": 6,
   "pipeline": "sh tools/voice/run.sh",
   "clips": [
@@ -83,16 +83,6 @@
       "overheard": false,
       "source": "train:reader",
       "lang": "en"
-    },
-    {
-      "key": "ln-157cif7",
-      "speaker": "reader",
-      "text": "うん。会社の。",
-      "authoredText": "うん。会社の。",
-      "emo": "dry",
-      "overheard": false,
-      "source": "train:reader",
-      "lang": "ja"
     },
     {
       "key": "ln-181z3kl",
