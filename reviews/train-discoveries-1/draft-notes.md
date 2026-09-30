@@ -1,6 +1,6 @@
 # Train encounters: draft notes
 
-C-0130, corrected by C-0133: the people are reachable, but their replies are dull. Six complete optional encounters are proposed. Claude cold-read passed and the review is open. No proposed encounter is implemented or voiced. The shared seat hint now names the lunchbox.
+C-0130, corrected by C-0133: the people are reachable, but their replies are dull. The final author decision is in [review.json](review.json), made under C-0193 after the saved player feedback and Claude cold read. Five revised encounters proceed; Aoi keeps the original. The proposed encounters are not implemented or voiced. The shared seat hint already names the lunchbox.
 
 Story-sense diagnosis: the carriage has people but too little life outside the main conversation. Dialogue diagnosis: the optional lines mostly do one job, acknowledge the click. Give the person a concern already under way, then let Eric briefly enter it.
 
@@ -10,7 +10,7 @@ The first four current cards include both existing paths: a shared seat-goal fla
 
 The proposed Japanese passenger lines have English subtitles, including unfamiliar Japanese, following setting.md. This is part of the proposed encounter, not an unresolved question: these lines must not use the current overheard blur/muffled-audio presentation. Eric still has limited Japanese and follows gestures or familiar words. The review adds romaji as a reading aid. No forced word lesson is proposed.
 
-## Staging after a pick
+## Staging for implementation
 
 ### train-aoi
 
@@ -47,6 +47,12 @@ The existing six scenery nodes are disabled through marker filtering. This is se
 
 C-0136: English subtitles are now an explicit part of the proposal. Fixed the headphone wearer's gender; removed the invented second IT team and later-match hint; replaced the duplicate food offer with help closing a shopping bag; cut Eric's closing quips; simplified the phone/printout gestures; gave Hamada a sleepy apology. Aoi reads Eric's card rather than answering fluent English. Her discomfort and the reader's printout are small optional setups for Mio's fuller explanation, whose script is unchanged. No repeated “yesterday” detail.
 
-## Partial feedback, 2026-09-30
+## Decision and implementation, 2026-09-30
 
-Aoi keeps her original encounter. Bun remains undecided after the seat-reference correction; the other four cards are unanswered. The review stays open. See [the saved feedback](feedback.json) for Jørgen’s full wording, including his request for discoveries without more early text. The shared hint now identifies the seat with the lunchbox, and the goal says “Sit by the lunchbox.” No extra line, click, spoken dialogue or voice was added. C-0146 also shortens the bun proposal to the bag-closing gesture and one thank-you. Its action descriptions are staging instructions, not added narration. It still needs a pick before any implementation.
+The [saved feedback](feedback.json) remains Jørgen's exact answer. The later author decision is recorded separately in [review.json](review.json); do not imply he personally picked the four previously unanswered cards. C-0193 removed the need for another player review. The shortened bun encounter and four remaining revised proposals proceed after a fresh Codex cold read of the latest complete frames and Claude's earlier findings. Aoi stays original.
+
+Read-only implementation check: the proposed staging is still missing. Existing generic `phone` handles Mio/Eric or a place hook, and the train has no such hook. Generic `headphones` is a no-op. The actual phone photo/video, book/printout, shopping-bag closure and reminder dismissal must be built. Do not replace these pictures with explanatory narration. English subtitles also need presentation support: `Runner.sayLine` and `ui.say` currently have no translated-line field; removing `overheard` alone would leave raw Japanese. Use the translation mapping already in frames.json as the source, keep original Japanese for voice generation, and do not grant new learned words for reading subtitles.
+
+Story integration should replace `bun`, `youth`, `music`, `reader` and `hamada`, with a seen flag per encounter and a quiet repeat response. `first_bun`, `first_youth` and `first_music` call their encounter, then retain the directed point to `seat_far_r` and `nod_seat`; they must not retain an extra old seat-direction line. Preserve `first_aoi`, `phone_girl`, `nod_seat`, Mio, Tama, all greeting responses, the later Hamada rescue and disabled scenery. In youth's moment, Eric points to the displayed photograph while asking his question so the response follows an understandable gesture.
+
+Work #6 tracks the build. Claude owns engine/staging/audio and Codex owns final text/steps. Evening discoveries #87 come first. Check each optional encounter in isolation on phone and desktop, including first-passenger path, repeat, muted audio and Continue, then verify the day still reaches its existing ending.

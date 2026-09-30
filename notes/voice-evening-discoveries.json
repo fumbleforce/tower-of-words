@@ -1,0 +1,43 @@
+{
+  "status": "pending",
+  "request": "C-0192/C-0193; X-0300",
+  "issue": 87,
+  "pipeline": "sh tools/voice/run.sh",
+  "clips": [
+    {
+      "key": "ln-1qad83b",
+      "speaker": "eric",
+      "text": "I was only going to sit down for a second.",
+      "authoredText": "I was only going to sit down for a second.",
+      "emo": "low",
+      "overheard": false,
+      "source": "forecourt:garden_bench",
+      "lang": "en"
+    },
+    {
+      "key": "evening-canteen-worker",
+      "speaker": "canteen_worker",
+      "text": "お疲れさまです。",
+      "authoredText": "お疲れさまです。",
+      "emo": "polite",
+      "overheard": true,
+      "source": "plaza:canteen_table",
+      "lang": "ja",
+      "note": "Unnamed adult canteen worker, ordinary polite leaving-work greeting. Distinct voice from Kuro. Story will use this explicit key after the clip exists."
+    }
+  ],
+  "reuse": [
+    "eric-sumimasen"
+  ],
+  "sounds": [
+    {
+      "id": "bath-first",
+      "description": "An unseen adult man hums the existing monorail door-chime melody, quietly and poorly, roomy bath echo. No lyrics."
+    },
+    {
+      "id": "bath-answer",
+      "description": "A different unseen adult man finishes the same tune, less in tune. No lyrics; do not replace with intelligible dialogue."
+    }
+  ],
+  "note": "No voice for narration or mailbox inspection. Sound asset ids are for the builder to finalize. Read notes/evening-discoveries-hooks.md."
+}
