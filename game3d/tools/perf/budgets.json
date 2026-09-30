@@ -17,8 +17,8 @@
         }
       },
       "gate": {
-        "calls": 250,
-        "tris": 135801,
+        "calls": 265,
+        "tris": 137000,
         "gpu": {
           "medianMs": 16.7,
           "p99Ms": 16.8,
@@ -35,8 +35,8 @@
         }
       },
       "forecourt": {
-        "calls": 157,
-        "tris": 195000,
+        "calls": 166,
+        "tris": 225000,
         "gpu": {
           "medianMs": 16.7,
           "p99Ms": 16.8,
@@ -89,8 +89,8 @@
         }
       },
       "gate": {
-        "calls": 168,
-        "tris": 111093,
+        "calls": 178,
+        "tris": 122000,
         "gpu": {
           "medianMs": 16.7,
           "p99Ms": 16.8,
@@ -107,8 +107,8 @@
         }
       },
       "forecourt": {
-        "calls": 129,
-        "tris": 176005,
+        "calls": 131,
+        "tris": 198000,
         "gpu": {
           "medianMs": 16.7,
           "p99Ms": 16.8,

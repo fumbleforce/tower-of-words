@@ -5,7 +5,8 @@
 // pine (a clipped black pine with cloud pads, for formal spots), ginkgo (a tall narrow cone), maple (small,
 // several stems, one or two turning). Under them: mound (a clipped azalea dome), cluster (mounds of mixed sizes
 // round a point), hedge (a clipped run, a little uneven), grass (an ornamental tuft), and beds: bed() lays the soil
-// or ground cover of a planted rectangle, treePit() a street tree's square stone surround and iron grate.
+// or ground cover of a planted rectangle, gravel() raked gravel, treePit() a street tree's square stone surround
+// and iron grate.
 import * as THREE from 'three';
 import { roundedBox } from '../../perf/rounded-box.js';
 import { rng } from './parts.js';
@@ -231,4 +232,11 @@ export function treePit(p, x, z, { s = 1.1, frame = '#8f9092', grate = '#3c4046'
       p.box('#565b62', 0.03, 0.016, 2 * q, x + d * q, 0, z, { cast: false });
     }
   }
+}
+// pale gravel raked in lines along x over its soil (a bed's ground, a garden court); y: its top
+export function gravel(p, [x0, x1, z0, z1], { y = 0 } = {}) {
+  p.box(LEAF.mulch, x1 - x0, 0.04, z1 - z0, (x0 + x1) / 2, y - 0.04, (z0 + z1) / 2, { cast: false, surf: 'soil' });
+  p.box('#a4a6a3', x1 - x0, 0.02, z1 - z0, (x0 + x1) / 2, y, (z0 + z1) / 2, { cast: false });
+  for (let z = z0 + 0.12; z < z1 - 0.06; z += 0.16)
+    p.box('#939591', x1 - x0 - 0.04, 0.006, 0.025, (x0 + x1) / 2, y + 0.02, z, { cast: false });
 }

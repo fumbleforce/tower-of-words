@@ -26,6 +26,7 @@ import { blob, Nav } from '../engine.js';
 import { K } from './office.js';
 import { lightPool, dust, clockHands, groundShadows } from '../places/life.js';
 import { drain } from '../perf/slice.js';
+import { exitFrame, exitSign, fareMachines, floorMarks, sign, EXIT_X, FARES } from './station-fittings.js';
 import { countTex } from './gate-count.js';
 
 const X = 6.3,
@@ -276,14 +277,7 @@ function entrance() {
   return g;
 }
 
-function stationExit(x, z) {
-  const g = new THREE.Group();
-  for (const side of [-1, 1]) g.add(rbox(0.08, 1.44, 0.16, '#4c515b', { x: side * 0.64 }));
-  g.add(rbox(1.36, 0.1, 0.16, '#4c515b', { y: 1.44 }));
-  g.add(rbox(1.24, 0.016, 1.5, '#8a9397', { z: -0.65, cast: false }));
-  g.position.set(x, 0, z);
-  return { g, k: 1, want: 1, leaves: [], update() {} };
-}
+const stationExit = (x, z) => ({ g: exitFrame(x, z), k: 1, want: 1, leaves: [], update() {} });
 function noticeScreen() {
   const notices = [
     ['本日のお知らせ', 'Fire drill: Thursday 14:00'],
@@ -373,28 +367,6 @@ function mat2(w, d, color) {
   return m;
 }
 
-function sign(text, sub) {
-  const tex = textTexture(
-    (g, W, H) => {
-      g.fillStyle = '#2a2f38';
-      g.fillRect(0, 0, W, H);
-      g.fillStyle = '#e9ecf0';
-      g.font = '700 120px ' + JP_FONT;
-      g.textBaseline = 'middle';
-      g.fillText(text, 36, H / 2 + 4);
-      g.fillStyle = '#9aa3b0';
-      g.font = '600 46px ' + JP_FONT;
-      g.fillText(sub, 300, H / 2 + 6);
-    },
-    640,
-    180,
-  );
-  const grp = new THREE.Group();
-  const p = plane(1.2, 0.34, tex, { emissiveK: 0.35 });
-  grp.add(p);
-  return grp;
-}
-
 // buildLobby() builds it all at once; lobbySteps() is the same as a generator that yields between parts, so the game
 // can build it in slices while the train is played (places/lifecycle.js, js/perf/slice.js)
 export const buildLobby = () => drain(lobbySteps());
@@ -422,7 +394,7 @@ export function* lobbySteps() {
   scene.add(fill);
   for (const x of [-5.3, -2.9, 2.9, 5.3]) {
     const p = new THREE.PointLight('#ffc27e', 2.2, 3.6, 1.8);
-    p.position.set(x, 1.05, -4.1);
+    p.position.set(x, 1.05, x === -2.9 ? -3.2 : -4.1); // clear of the fare machines
     scene.add(p);
     yield;
   }
@@ -467,8 +439,12 @@ export function* lobbySteps() {
       ],
     }),
   );
-  const lifts = [stationExit(-1, -Z)];
+  const lifts = [stationExit(EXIT_X, -Z)];
   lifts.forEach((l) => root.add(l.g));
+  const [es, fm] = [exitSign(), fareMachines()];
+  es.position.set(EXIT_X, 1.6, -Z + 0.02);
+  fm.position.set(FARES.x, 0, -Z);
+  root.add(es, fm);
   {
     const d = door(0.9, 1.35);
     d.position.set(3.95, 0, -Z);
@@ -504,7 +480,7 @@ export function* lobbySteps() {
     pp.position.set(3.95, 1.5, -Z + 0.03);
     root.add(pp);
   }
-  for (const x of [-5.3, -2.9, 2.9, 5.3]) {
+  for (const x of [-5.3, 2.9, 5.3]) {
     const l = wallLamp(0.72, 0.14);
     l.position.set(x, 1.0, -Z + 0.01);
     root.add(l);
@@ -662,7 +638,6 @@ export function* lobbySteps() {
   // plants
   const plants = [
     [-5.7, -3.9],
-    [-2.95, -3.95],
     [2.95, -3.95],
     [5.7, -3.9],
     [-5.75, -1.6],
@@ -681,6 +656,7 @@ export function* lobbySteps() {
   yield;
   // barrier: glass panels on steel posts, readers either side of the arch, guard desk on the right
   const BZ = -0.55;
+  root.add(floorMarks(Z, BZ));
   const glassM = new THREE.MeshStandardMaterial({
     color: '#9fbccf',
     roughness: 0.05,
@@ -1022,6 +998,7 @@ export function* lobbySteps() {
   nav.block(-5.2, -3.2, BZ, 1.05); // counter
   nav.block(-X, -5.2, 0.3, 0.8); // lost and found
   nav.block(5.05, X, 2.55, 3.45); // coffee machine
+  nav.block(FARES.x - 0.55, FARES.x + 0.55, -Z, -Z + FARES.d + 0.1);
   nav.block(-2.1, -1.7, 2.45, 2.8);
   nav.block(3.3, 4.6, 2.5, 3.1); // bins, welcome stand
 

@@ -12,7 +12,8 @@ import { lightPool } from '../places/life.js';
 import { addOccluder, updateOccluders } from './occluders.js';
 import { BUILDINGS, footprint, toLocal } from './island-layout.js';
 import { boxes } from './forecourt/details.js';
-import { hall } from './station-hall.js';
+import { hall, hallFares, ROOM } from './station-hall.js';
+import { FARES } from './station-fittings.js';
 import { buildShed } from './station-shed.js';
 
 // the station's outline in the forecourt's frame: the gate room's walls (lobby.js X 6.3, Z 4.5, centred on the
@@ -169,7 +170,9 @@ function block(root) {
   );
   root.add(boxes([[0.86, LOW, 0.06, STAFF_X, 0, ZN + 0.02]], PAL.door));
   root.add(lightPool(DOOR_X, ZN - 0.7, 0.9, { k: 0.28 }));
-  hall(root, CX, ZN + 4.5);
+  hall(root, CX, ZN + ROOM.Z);
+  const fares = hallFares(root, CX, ZN + ROOM.Z);
+  fares.position.z += T; // the room's back wall is inside the station's north wall here
 
   // what fades: walls above the cut, the upper storey, parapet, roof, the exit canopy, windows and the sign
   const wall = [],
@@ -268,32 +271,49 @@ function block(root) {
   // width), or he stands in the door. `view` is the direction toward the camera; the forecourt's usual one looks
   // north at 46 degrees, and on a phone the camera looks east along the court, past the station.
   const view = new THREE.Vector3(0, Math.sin(0.8), Math.cos(0.8));
-  const box = [
+  // the line from a point of Eric (his feet, or up to `tall` above them) toward the camera runs through the box
+  const through =
+    ([bx, by, bz], tall = 0) =>
+    (p) => {
+      let t0 = 0,
+        t1 = Infinity;
+      const o = [p.x, 0.05, p.z],
+        d = [view.x, view.y, view.z],
+        box = [bx, [by[0] - tall, by[1]], bz];
+      for (let i = 0; i < 3; i++) {
+        const [lo, hi] = box[i];
+        if (Math.abs(d[i]) < 1e-6) {
+          if (o[i] < lo || o[i] > hi) return false;
+          continue;
+        }
+        let a = (lo - o[i]) / d[i],
+          b = (hi - o[i]) / d[i];
+        if (a > b) [a, b] = [b, a];
+        t0 = Math.max(t0, a);
+        t1 = Math.min(t1, b);
+        if (t0 > t1) return false;
+      }
+      return true;
+    };
+  const hides = through([
     [X0 - 0.4, X1 + 0.4],
     [0, TOPH],
     [ZN - 0.3, ZS],
-  ];
-  const hides = (p) => {
-    let t0 = 0,
-      t1 = Infinity;
-    const o = [p.x, 0.05, p.z],
-      d = [view.x, view.y, view.z];
-    for (let i = 0; i < 3; i++) {
-      const [lo, hi] = box[i];
-      if (Math.abs(d[i]) < 1e-6) {
-        if (o[i] < lo || o[i] > hi) return false;
-        continue;
-      }
-      let a = (lo - o[i]) / d[i],
-        b = (hi - o[i]) / d[i];
-      if (a > b) [a, b] = [b, a];
-      t0 = Math.max(t0, a);
-      t1 = Math.min(t1, b);
-      if (t0 > t1) return false;
-    }
-    return true;
-  };
+  ]);
   addOccluder(occ, [...meshes, sign], hides, { name: 'station' });
+  // the fare machines stand against the cut north wall: they fade too while they would hide any of him
+  const fx = fares.position.x;
+  const faresHide = through(
+    [
+      [fx - FARES.w / 2 - 0.3, fx + FARES.w / 2 + 0.3],
+      [0, 1.95],
+      [ZN, ZN + T + FARES.d],
+    ],
+    1.3,
+  );
+  const fm = [];
+  fares.traverse((m) => m.isMesh && fm.push(m));
+  addOccluder(occ, fm, faresHide, { name: 'fares' });
   let last = null;
   return {
     occ,

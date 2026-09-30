@@ -54,4 +54,9 @@ export const GATE_X = 35.6; // the gateposts at the edge of head office's ground
 // the planted rhythm along the lane: trees every 4, the first 2 past the court
 export const LANE_TREES = [];
 for (let x = LE + 2.05; x < 52; x += 4) LANE_TREES.push(x);
+// the garden south of the lane (forecourt/gardens.js): stepping stones from a gap in the lane's hedge, between the
+// first two avenue trees, to a raked gravel court with a bench and a stone lantern; he can walk both
+export const PATH_X = LANE_TREES[0] + 2.2;
+export const GARDEN_PATH = [PATH_X - 0.4, PATH_X + 0.4, STRIP_S[2], STRIP_S[3] + 1.0];
+export const GARDEN_COURT = [PATH_X - 1.3, PATH_X + 2.1, STRIP_S[3] + 1.0, STRIP_S[3] + 3.0];
 export const inRect = (x, z, [x0, x1, z0, z1]) => x > x0 && x < x1 && z > z0 && z < z1;

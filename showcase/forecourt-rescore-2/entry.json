@@ -1,0 +1,56 @@
+{
+  "title": "Forecourt: the station hall, the lane gardens and the service yard",
+  "date": "2026-09-30",
+  "by": "claude-agent:forecourt-r3",
+  "caption": "The critic's three forecourt points from re-score 2: the station hall seen cut open read empty, the lane gardens were parallel strips, and a service path north of the court ended at a hedge. Before on the left of each pair, after on the right; the plan from above at the end.",
+  "sections": [
+    {
+      "title": "Out of the station",
+      "caption": "The security room now has a pair of ticket machines with the lit fare map over them by the exit, a yellow guide line from the entrance through the gate to the exit, a yellow exit arrow on the floor past the gate, and ceiling light on the floor. The dark mat inside the doorway is gone: a steel sill and the daylight through the exit instead. The room itself is laid out as before; the gate scene has the same fittings and a yellow 出口 EXIT sign over the exit.",
+      "images": [
+        { "id": "before-arrive-desk", "image": "bible/shots/showcase/forecourt-rescore-2/before-arrive-desk.webp", "caption": "Before" },
+        { "id": "after-arrive-desk", "image": "bible/shots/showcase/forecourt-rescore-2/after-arrive-desk.webp", "caption": "After" },
+        { "id": "after-hall-close", "image": "bible/shots/showcase/forecourt-rescore-2/after-hall-close.webp", "caption": "After, the hall close up" },
+        { "id": "before-arrive-eve-desk", "image": "bible/shots/showcase/forecourt-rescore-2/before-arrive-eve-desk.webp", "caption": "Before, evening" },
+        { "id": "after-arrive-eve-desk", "image": "bible/shots/showcase/forecourt-rescore-2/after-arrive-eve-desk.webp", "caption": "After, evening" },
+        { "id": "after-hall-close-eve", "image": "bible/shots/showcase/forecourt-rescore-2/after-hall-close-eve.webp", "caption": "After, the hall close up, evening" },
+        { "id": "before-arrive-phone", "image": "bible/shots/showcase/forecourt-rescore-2/before-arrive-phone.webp", "caption": "Before, phone" },
+        { "id": "after-arrive-phone", "image": "bible/shots/showcase/forecourt-rescore-2/after-arrive-phone.webp", "caption": "After, phone" }
+      ]
+    },
+    {
+      "title": "The same room in the gate scene",
+      "caption": "The exit sign over the door, the ticket machines between the notice screen and the exit, the guide line and the floor arrow.",
+      "images": [
+        { "id": "before-gate-wall", "image": "bible/shots/showcase/forecourt-rescore-2/before-gate-wall.webp", "caption": "Before" },
+        { "id": "after-gate-wall", "image": "bible/shots/showcase/forecourt-rescore-2/after-gate-wall.webp", "caption": "After" }
+      ]
+    },
+    {
+      "title": "The lane gardens",
+      "caption": "The strips are gone. The avenue's bed is planted in layers and its back edge steps in and out, and the gardens either side are drifts of different depths with a big cherry and a black pine standing free, maples and a ginkgo, rocks in threes and a hedge that steps in and out. A gap in the lane's hedge leads on stepping stones to a gravel court with a bench and a stone lantern; Eric can walk there.",
+      "images": [
+        { "id": "before-lane-desk", "image": "bible/shots/showcase/forecourt-rescore-2/before-lane-desk.webp", "caption": "Before" },
+        { "id": "after-lane-desk", "image": "bible/shots/showcase/forecourt-rescore-2/after-lane-desk.webp", "caption": "After" },
+        { "id": "before-laneend-desk", "image": "bible/shots/showcase/forecourt-rescore-2/before-laneend-desk.webp", "caption": "Lane end, before" },
+        { "id": "after-laneend-desk", "image": "bible/shots/showcase/forecourt-rescore-2/after-laneend-desk.webp", "caption": "Lane end, after" },
+        { "id": "before-laneend-eve-desk", "image": "bible/shots/showcase/forecourt-rescore-2/before-laneend-eve-desk.webp", "caption": "Lane end, evening, before" },
+        { "id": "after-laneend-eve-desk", "image": "bible/shots/showcase/forecourt-rescore-2/after-laneend-eve-desk.webp", "caption": "Lane end, evening, after" },
+        { "id": "before-laneend-phone", "image": "bible/shots/showcase/forecourt-rescore-2/before-laneend-phone.webp", "caption": "Phone, before" },
+        { "id": "after-laneend-phone", "image": "bible/shots/showcase/forecourt-rescore-2/after-laneend-phone.webp", "caption": "Phone, after" },
+        { "id": "after-garden-court-desk", "image": "bible/shots/showcase/forecourt-rescore-2/after-garden-court-desk.webp", "caption": "Eric in the garden court" },
+        { "id": "after-garden-court-phone", "image": "bible/shots/showcase/forecourt-rescore-2/after-garden-court-phone.webp", "caption": "The garden court, phone" }
+      ]
+    },
+    {
+      "title": "From above",
+      "caption": "The service path is now a service yard: a closed gate with a STAFF ONLY sign on the court's edge, roll cages and a delivery bike inside, and a roofed refuse store across its far end instead of the hedge. The gardens along the lane read as gardens from above too.",
+      "images": [
+        { "id": "before-plan", "image": "bible/shots/showcase/forecourt-rescore-2/before-plan.webp", "caption": "Before" },
+        { "id": "after-plan", "image": "bible/shots/showcase/forecourt-rescore-2/after-plan.webp", "caption": "After" },
+        { "id": "after-plan-eve", "image": "bible/shots/showcase/forecourt-rescore-2/after-plan-eve.webp", "caption": "After, evening" }
+      ]
+    }
+  ],
+  "links": [{ "label": "Play it", "href": "game3d/" }]
+}

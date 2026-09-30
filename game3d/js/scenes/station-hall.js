@@ -2,13 +2,15 @@
 // room's own floor with its dark stone bands, the gate line (glass runs on posts, the two card readers with their
 // blue pads, the scanner arch with its light strips, glass flaps and head-count screen), the guard's desk with his
 // monitor, phone, plant and chair and Tama's bowl beside it, the visitor counter with its book and the lost-property
-// shelf, the drinks machine, the two benches, the welcome stand, the cleaning cart, the ten plants where the room has
-// them, the mats at both doors and the warm light the wall lamps and the windows throw on the floor. Everything is
-// where lobby.js puts it, in the room's own frame and colours, so walking out of the room and looking back shows the
-// same room. The walls round it are the station's (the cut). Nothing here moves.
+// shelf, the drinks machine, the two benches, the welcome stand, the cleaning cart, the nine plants where the room
+// has them, the mat at the entrance, the station's fittings (station-fittings.js: the fare machines, the guide line,
+// the exit arrow, the sill across the exit) and the warm light the lamps, the windows and the exit throw on
+// the floor. Everything is where lobby.js puts it, in the room's own frame and colours, so walking out of the room
+// and looking back shows the same room. The walls round it are the station's (the cut). Nothing here moves.
 import * as THREE from 'three';
 import { PAL, rbox, emissive, bench, plant, tileFloor } from '../props.js';
 import { pools } from './outdoor/parts.js';
+import { fareMachines, floorMarks, EXIT_X, FARES } from './station-fittings.js';
 
 export const ROOM = { X: 6.3, Z: 4.5, BZ: -0.55 }; // the room's half width and depth, the barrier line (lobby.js)
 
@@ -34,9 +36,11 @@ export function hall(root, cx, cz) {
       ],
     }),
   );
-  // mats inside the entrance and at the exit
+  // the mat inside the entrance; a steel sill across the exit, lit from outside; the guide line and the exit
+  // arrow on the floor (station-fittings.js)
   add(rbox(2.2, 0.012, 1.2, '#3c4658', { z: Z - 0.75, r: 0.004, cast: false }));
-  add(rbox(1.9, 0.012, 1.0, '#3c4658', { x: -1, z: -Z + 0.6, r: 0.004, cast: false }));
+  add(rbox(1.36, 0.02, 0.12, '#b9bdc3', { x: EXIT_X, z: -Z + 0.06, r: 0.006, cast: false }));
+  add(floorMarks(Z, BZ));
 
   // the gate line: glass runs on posts either side, the card readers, the scanner arch between them
   for (const [a, b] of [
@@ -131,7 +135,6 @@ export function hall(root, cx, cz) {
   // and in the front corners
   [
     [-5.7, -3.9],
-    [-2.95, -3.95],
     [2.95, -3.95],
     [5.7, -3.9],
     [-5.75, -1.6],
@@ -148,13 +151,24 @@ export function hall(root, cx, cz) {
 
   // warm light on the floor: under the four lamps on the back wall, below each window, at the entrance
   const lit = [
-    ...[-5.3, -2.9, 2.9, 5.3].map((x) => [x, -Z + 0.45, 1.0]),
+    ...[-5.3, 2.9, 5.3].map((x) => [x, -Z + 0.45, 1.0]),
+    [FARES.x, -Z + 0.85, 0.8], // the fare map's glow
+    [EXIT_X, -Z + 0.7, 1.1], // daylight through the exit
+    ...[-3.2, 3.2].flatMap((x) => [-2.6, 2.4].map((z) => [x, z, 1.1])), // the ceiling lights over the room
     ...[-3.4, -0.4, 2.0].flatMap((z) => [
       [-(X - 0.45), z, 0.9],
       [X - 0.45, z, 0.9],
     ]),
     [0, Z - 0.4, 1.2],
   ];
-  add(pools(lit, 0.85, { k: 0.26, y: 0.012 }));
+  add(pools(lit, 0.85, { k: 0.38, y: 0.012 }));
   return g;
+}
+
+// the fare machines by the exit, on their own so the station can fade them when they would hide Eric
+export function hallFares(root, cx, cz) {
+  const f = fareMachines();
+  f.position.set(cx + FARES.x, 0, cz - ROOM.Z);
+  root.add(f);
+  return f;
 }
