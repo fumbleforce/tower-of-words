@@ -77,4 +77,4 @@ description = "voice clip ids"
 condition = "AND"
 regexTarget = "match"
 regexes = ['''key":\s*"[a-z]+(?:-[a-z0-9]{1,12}){1,6}"''']
-paths = ['''^game3d/audio/[^/]+\.json$''', '''^notes/voice-[^/]+\.json$''', '''^tools/voice/[^/]+\.json$''']
+paths = ['''(?:^|/)game3d/audio/[^/]+\.json$''', '''(?:^|/)notes/voice-[^/]+\.json$''', '''(?:^|/)tools/voice/[^/]+\.json$''']
