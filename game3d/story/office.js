@@ -261,6 +261,10 @@ export default {
     chair_push: [
       { do: 'chairRoll', to: 'my_seat' },
       { set: 'chair_back' },
+      { do: 'walk', who: 'mio', to: 'mio_by_desk' },
+      { do: 'face', who: 'mio', to: 'eric' },
+      { do: 'face', who: 'eric', to: 'mio' },
+      { do: 'cam', on: 'mio', zoom: 1.6 },
       { say: 'mio', face: 'deadpan', emo: 'dry', text: "Ah, that's your chair? Sorry. She comes with it, I think." },
       { go: 'ticket' },
     ],
@@ -278,6 +282,7 @@ export default {
       { say: 'mori', emo: 'warm', text: '外国の方、ですよ。', overheard: true, clear: [{ ja: '外国の方', ro: 'gaikoku no kata', en: 'person from abroad, polite' }] },
       { say: 'mio', face: 'embarrassed', emo: 'embarrassed', text: "He says I should say gaikoku no kata. It's more polite. ...Anyway, go." },
       { do: 'walk', who: 'mori', to: 'copier_front', wait: false },
+      { do: 'cam', back: true },
       { do: 'goal', text: 'Go to the copy room with Mr. Mori.' },
     ],
     mio_busy: [
