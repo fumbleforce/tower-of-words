@@ -510,18 +510,6 @@ export function attachLift(game, place) {
   hookDoors(game);
   const car = buildCar(site);
   place.space.add(car.g);
-  // the place's own stand-in car behind the doors is hidden
-  place.space.traverse((o) => {
-    if (!o.isGroup || o === car.g) return;
-    const p = o.getWorldPosition(new THREE.Vector3());
-    if (place.name === 'office' && Math.abs(p.x - site.x) < 0.02 && Math.abs(p.z + 3.975) < 0.03) o.visible = false;
-    // the office stairwell runs into the car's left side: narrow it to x -6.75..-6.25
-    if (place.name === 'office' && Math.abs(p.x + 6.42) < 0.02 && Math.abs(p.z + 4.0) < 0.02 && !o.userData.liftFit) {
-      o.userData.liftFit = true;
-      o.scale.x = 0.5 / 1.1;
-      o.position.x -= 0.08;
-    }
-  });
   // everything in front of the car that the cut takes down: the wall above the doors, the landing doors and frame
   clipBox(site, CUT);
   const bx = new THREE.Box3(),
@@ -839,6 +827,7 @@ async function doors(game, L, state) {
     if (c.want === 1) return;
     ride.lit.delete(f);
     sfx('lift');
+    sfx('liftdoor', { at: 0.3 });
     c.want = 1;
     if (f !== L.site.floor) c.landWant = 1;
     await game.wait(650);
@@ -879,7 +868,7 @@ async function doors(game, L, state) {
       await L.leaving;
       L.leaving = null;
     }
-    sfx('door');
+    sfx('liftdoor');
     c.want = 0;
     await game.wait(500);
     c.landWant = 0;
@@ -958,7 +947,7 @@ async function rideOut(g, L, slot) {
   await settle;
   await g.wait(350);
   P.hooks.liftClose && P.hooks.liftClose();
-  sfx('door');
+  sfx('liftdoor');
   L.car.want = 0;
   await g.wait(900);
   await g.wait(400);
@@ -1111,7 +1100,7 @@ async function rideUp(g, L) {
   await settle;
   await g.wait(350);
   P.hooks.liftClose && P.hooks.liftClose();
-  sfx('door');
+  sfx('liftdoor');
   L.car.want = 0;
   await g.wait(1300);
   await g.hooks.floor({ to: '1' });

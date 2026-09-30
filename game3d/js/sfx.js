@@ -47,12 +47,6 @@ const K = {
   kettle: { f: ['kettle_pour'], gap: 0.5 },
   vending: { f: ['vending'], gap: 0.3 },
 };
-// 'door' means different doors in different places; until the places name them, pick by place
-const DOOR_BY_PLACE = { train: 'traindoor', gate: 'glassdoor' };
-let placeName = '';
-export function setPlace(name) {
-  placeName = name || '';
-}
 
 export function ctx() {
   if (!unlocked && !C) return null;
@@ -99,7 +93,6 @@ export function sfx(kind, opts = {}) {
   if (isMuted()) return none;
   const c = ctx();
   if (!c) return none;
-  if (kind === 'door' && DOOR_BY_PLACE[placeName]) kind = DOOR_BY_PLACE[placeName];
   const k = K[kind];
   if (!k) {
     return none;

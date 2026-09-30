@@ -443,11 +443,12 @@ function counter(len) {
     );
   return g;
 }
-function stairs() {
+// narrow (0.5 m): the walk-in lift car (places/lift.js) sits right of it, so it runs x -6.75..-6.25
+function stairs(w = 0.5) {
   const g = new THREE.Group();
   for (let i = 0; i < 7; i++)
-    g.add(rbox(1.1, 0.12 * (i + 1), 0.34, i % 2 ? '#9ca1a8' : '#a6abb2', { z: -i * 0.34, r: 0.01 }));
-  g.add(rbox(1.1, 0.02, 0.3, '#6e747e', { y: -0.001, z: 0.9, r: 0.005, cast: false })); // the landing plate (was five copies in the same spot)
+    g.add(rbox(w, 0.12 * (i + 1), 0.34, i % 2 ? '#9ca1a8' : '#a6abb2', { z: -i * 0.34, r: 0.01 }));
+  g.add(rbox(w, 0.02, 0.3, '#6e747e', { y: -0.001, z: 0.9, r: 0.005, cast: false })); // the landing plate (was five copies in the same spot)
   return g;
 }
 function table2() {
@@ -897,27 +898,11 @@ export function* officeSteps() {
   yield;
   // stairwell behind the lobby
   const stw = stairs();
-  stw.position.set(-6.42, 0, -4.0);
+  stw.position.set(-6.5, 0, -4.0);
   root.add(stw);
   yield;
-  // the lift car behind the doors: a lit cabin in its shaft, seen from above like every other room
+  // the lift car behind the doors is places/lift.js's walk-in car
   {
-    const cab = new THREE.Group();
-    const cw = 0.92,
-      cd = 0.95,
-      ch = 1.3;
-    cab.add(rbox(cw + 0.16, 0.02, cd + 0.12, '#2a2e36', { y: -0.01, r: 0.005, cast: false })); // shaft floor edge
-    const inner = emissive('#b9bcbf', '#e8dcc4', 0.18),
-      sideM = emissive('#9a9ea4', '#e0d2b8', 0.1);
-    cab.add(rbox(cw, 0.012, cd, '#9a9890', { r: 0.004, cast: false })); // cabin floor
-    cab.add(rbox(cw, ch, 0.05, null, { z: -cd / 2, r: 0.01, m: inner })); // back wall
-    for (const sx of [-1, 1]) cab.add(rbox(0.05, ch, cd, null, { x: (sx * cw) / 2, r: 0.01, m: sideM }));
-    for (const sx of [-1, 1])
-      cab.add(rbox(0.04, 0.04, cd - 0.2, '#b9bdc3', { x: sx * (cw / 2 - 0.05), y: 0.5, r: 0.015, cast: false })); // handrails
-    cab.add(rbox(0.14, 0.34, 0.02, '#8d939d', { x: cw / 2 - 0.05, y: 0.55, z: cd / 2 - 0.2, r: 0.01, cast: false }));
-    for (const sx of [-1, 1]) cab.add(rbox(0.08, ch + 0.1, cd + 0.1, '#3a3f48', { x: sx * (cw / 2 + 0.08), r: 0.01 })); // shaft sides
-    cab.position.set(-5.45, 0, -3.4 - T / 2 - cd / 2 - 0.02);
-    root.add(cab);
     // the doorway in the wall face: jambs, a header, a sill, the floor indicator and a lit call button
     {
       const fm = mat('#4c515b');

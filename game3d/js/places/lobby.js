@@ -121,7 +121,7 @@ export async function lobbyPlace(game) {
       st.slam = 1;
       st.flap = 1.3;
       st.flapWant = 1;
-      sfx('door');
+      sfx('flap');
       openTimer = 2.5;
       w.arch.userData.set('ok');
     }
@@ -164,6 +164,7 @@ export async function lobbyPlace(game) {
         return;
       }
       readerFlash(i, 'green');
+      if (!st.gateOpen) sfx('flap');
       setGate('open');
       const n = game.runner.resolve(eventTrigger('gate', 'card_ok'));
       if (n) await game.runner.run(n);
@@ -482,7 +483,10 @@ export async function lobbyPlace(game) {
     },
     hooks: {
       reader: ({ side = 'r', state = 'green' }) => readerFlash(side === 'l' ? 0 : 1, state),
-      gate: ({ state }) => setGate(state),
+      gate: ({ state }) => {
+        if (state === 'open' && !st.gateOpen) sfx('flap');
+        setGate(state);
+      },
       cardOk: () => {
         st.cardOk = true;
         flags[ENGINE_KEYS.cardOk] = true;
@@ -497,7 +501,7 @@ export async function lobbyPlace(game) {
           blobs[who].visible = true;
           blobs[who].position.set(0.6, 0.004, Z + 1.6);
         }
-        sfx('door');
+        sfx('glassdoor');
         const pr = walkPerson(r, [[0.5, Z - 0.6], game.posOf(to)], { speed: 1.7, blobM: blobs[who] });
         if (wait) await pr;
       },
@@ -553,7 +557,7 @@ export async function lobbyPlace(game) {
       },
       liftOpen: () => {
         w.lifts[0].want = 1;
-        sfx('door');
+        sfx('liftdoor');
       },
       liftClose: () => {
         w.lifts[0].want = 0;
@@ -628,8 +632,7 @@ export async function lobbyPlace(game) {
       });
       cam.closeOn([0, Z], 1.7);
       cam.snap(mio.root.position);
-      sfx('door');
-      sfx('crowd');
+      sfx('glassdoor');
       mio.setState('walk');
       const aoiWalk = walkers.length ? Promise.all(walkers) : null;
       await glide(g, mio.root, [0, Z - 1.3], 1.3);

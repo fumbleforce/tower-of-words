@@ -67,7 +67,7 @@ Panels open above everything in the HUD, the goal arrow and the Say button inclu
 
 - People: everyone Eric has met, with their bond step, what they remember and what he has learned about them ([systems.md](systems.md)).
 - Bag: his yen and the drinks he's carrying. With someone in reach, tapping a drink gives it to them; otherwise the panel says to walk up to someone.
-- Words: the words he can say, each with its dictionary form and practice dots, and a note on the -te form ([words.md](words.md)).
+- Words: the words he can say, each with its dictionary form and practice dots, and a note on the -te form ([words.md](words.md)). When he learns a word, the Words chip pops once (it grows a little and settles in about a third of a second) and its border lights up in the accent teal and fades over a second; the count goes up with it.
 - Title: the train seen from outside at dawn; on Start the camera flies into the car. Continue when there's a save.
 - Pause (Esc): settings, the three save slots (save and Load), back to title. What loading restores: systems.md, Saving.
 - Settings: text speed (default fast), auto-advance (off), volumes for master, music, voices and ambience, voices on or off, graphics tier (auto), surface detail, interface size, reduce motion, the Say key, voice input (device, browser or off), how many tries a word needs before it's a click (3), and performance numbers (off).

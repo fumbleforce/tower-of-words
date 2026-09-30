@@ -72,7 +72,7 @@ Eric starts with ¥1000. On day 1 the only shop is the B2 vending machine. A dri
 
 ## Typing a word
 
-Where a word is taught, Eric types its romaji. The prompt shows the Japanese, the romaji letter by letter and the English. It forgives case, spaces, hyphens and long vowels (ō = ou = oo = o). Letters light up as they're typed; a wrong Enter shows the next letter, and after three tries the whole romaji. It works with the phone keyboard. On success Eric says the word (voiced) and it becomes known.
+Where a word is taught, Eric types its romaji. The prompt shows the Japanese, the romaji letter by letter and the English. It forgives case, spaces, hyphens and long vowels (ō = ou = oo = o). Letters light up as they're typed; a wrong Enter shows the next letter, and after three tries the whole romaji. It works with the phone keyboard. On success Eric says the word (voiced) and it becomes known. With voice input on, the empty answer box reads "Type it in romaji or say it"; with it off, "Type it in romaji".
 
 Voice input (Jørgen, 2026-09-28): he can say the word into the microphone instead, both at the prompt and when using it. It runs Whisper on the device by default (a one-time download of about 77 MB; nothing leaves the device), or the browser's recogniser, or off (Settings). The microphone is asked for only the first time he presses the mic.
 
@@ -90,7 +90,7 @@ Lines Eric can't follow are shown as soft, shifting stand-in characters, with on
 
 ## Kotodama effects
 
-When a command takes hold, the target shimmers at its edges, the lights dip and hum, a low tone plays, sounds that can be cut (the door chime) stop, and the text box clears. Then the machine does what it was told, literally. Targets on day 1: the train doors, the lobby gate, the machine room door, the copier, the server rack alarm, the kettle, the vending machine. Small reactions without the full effect: the clock, the fan, the coffee machine.
+When a command takes hold, the target shimmers at its edges, the command's Japanese (待って, 動いて) rises off it in faint light and fades, the lights dip and hum, a low tone plays, sounds that can be cut (the door chime) stop, and the text box clears. Then the machine does what it was told, literally. Targets on day 1: the train doors, the lobby gate, the machine room door, the copier, the server rack alarm, the kettle, the vending machine. Small reactions without the full effect: the clock, the fan, the coffee machine.
 
 ## Saving
 
