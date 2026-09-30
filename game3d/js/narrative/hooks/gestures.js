@@ -4,6 +4,8 @@ import {
   CHIBI_KINDS,
   CUE_KINDS,
   meshyGesture,
+  MESHY_SHORT,
+  meshyShort,
   chibiGesture,
   chibiCue,
   stepRigLayers,
@@ -52,9 +54,8 @@ export function installGesturesHooks(game, { whoRig, aimOf }) {
   };
   H.gesture = async ({ who, kind, to }) => {
     const r = whoRig(who);
-    // Meshy rigs play their own library clips (wave, shrug, nod, bow); others fall through (point, nine... do their
-    // emote and camera parts only on them)
-    if (r && r.gesture && r.gestures && r.gestures.includes(kind)) return r.gesture(kind);
+    // Meshy rigs: nod, bow, shrug, wave as short drawn moves of about a second (their library clips run 2 to 13 s)
+    if (r && r.meshy && MESHY_SHORT.has(kind)) return meshyShort(game, r, kind);
     if (r && r.meshy && kind === 'nine') {
       game.place.clock?.userData.highlight(true);
       H.emote({ who, kind: 'nine', ms: 3600 });
