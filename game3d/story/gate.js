@@ -97,7 +97,7 @@ export default {
       { set: 'greeted_guard' },
       { do: 'bond', who: 'guard', add: 1 },
       { do: 'face', who: 'guard', to: 'eric' },
-      { say: 'guard', overheard: true, emo: 'polite', text: '{ohayo}。' },
+      { say: 'guard', overheard: true, emo: 'polite', text: '{ohayo}。カードを、どうぞ。' },
       { do: 'bow', who: 'eric' },
       { do: 'bow', who: 'guard' },
       { call: 'guard_points_reader' },
@@ -106,14 +106,13 @@ export default {
       { set: 'greeted_guard' },
       { do: 'bond', who: 'guard', add: 1 },
       { do: 'face', who: 'guard', to: 'eric' },
-      { say: 'guard', face: 'amused', overheard: true, emo: 'amused', text: 'はい、{yoroshiku}。' },
+      { say: 'guard', face: 'amused', overheard: true, emo: 'amused', text: 'はい、{yoroshiku}。カードを、どうぞ。' },
       { do: 'bow', who: 'guard' },
       { call: 'guard_points_reader' },
     ],
     // he sends Eric to the card reader
     guard_points_reader: [
       { do: 'gesture', who: 'guard', kind: 'point' },
-      { say: 'guard', overheard: true, emo: 'polite', text: 'カードを、どうぞ。' },
       { do: 'goal', text: 'Tap your card on the reader.' },
     ],
     greet_again_guard: [{ do: 'bow', who: 'guard' }],
@@ -137,7 +136,6 @@ export default {
       { say: 'eric', emo: 'tired', text: "Right, Mio did say nine." },
       { do: 'gesture', who: 'guard', kind: 'point' },
       { do: 'face', who: 'guard', to: 'bench_r' },
-      { say: 'guard', overheard: true, emo: 'polite', text: 'あちらで、お待ちください。' },
       { do: 'cam', back: true },
       { do: 'goal', text: 'Wait on the bench until nine.' },
       { go: 'bench_wait' },
@@ -169,13 +167,11 @@ export default {
       { do: 'emote', who: 'kuroda', kind: 'sweat' },
       { do: 'cam', on: 'gate', zoom: 2.5 }, // close on the arch's count screen: a person, a briefcase, a red 2
       { say: 'gatev', overheard: true, emo: 'machine', text: '共連れを検知しました！' },
-      '> The little screen on the gate counts two people, him and his briefcase.',
+      "> The gate counts the man and his briefcase as two people. He's stuck.",
       { do: 'cam', on: 'before_gate', zoom: 1.3 },
       { do: 'face', who: 'kuroda', to: 'gate' },
-      { say: 'kuroda', face: 'panicked', emo: 'pleading', text: '{akete}...' },
-      '> He mimes hauling two heavy doors apart, then pats the gate like a nervous horse.',
-      { say: 'kuroda', emo: 'slow', slow: true, text: '{akete}...' },
-      { say: 'kuroda', face: 'panicked', overheard: true, emo: 'pleading', text: 'お願い、{akete}…いい子だから…' },
+      { say: 'kuroda', face: 'panicked', emo: 'slow', slow: true, text: '{akete}...' },
+      '> He mimes pulling the gate open.',
       // the guard calls the gate company and gets hold music
       { do: 'phone', who: 'guard', state: 'on' },
       { say: 'guard', face: 'stern', overheard: true, emo: 'stern', text: 'はい、アマカワ{honsha}、正面ゲートです。…はい。待ちます。' },
@@ -183,8 +179,7 @@ export default {
       { do: 'cam', back: true },
       { do: 'stand', who: 'eric' },
       // Mio, from B2, in place of a hint
-      { say: 'miotext', text: 'the chat says the lobby gate is broken again. is that you?' },
-      { say: 'miotext', text: 'if the guard ignores you say {sumimasen} and point at stuff. loud' },
+      { say: 'miotext', text: 'the lobby gate again? is that you? say {sumimasen} to the guard and show him' },
       { do: 'goal', text: 'The man is stuck. Help him, or get the guard.' },
     ],
 
@@ -192,12 +187,11 @@ export default {
     hamada_stuck: [
       { do: 'face', who: 'kuroda', to: 'eric' },
       { do: 'face', who: 'eric', to: 'kuroda' },
-      { say: 'kuroda', face: 'panicked', overheard: true, emo: 'pleading', text: 'あ…すみません、ゲートが…' },
       { do: 'face', who: 'kuroda', to: 'gate' },
       { choice: [
         { text: 'Say 開けて (akete, open) with him', go: 'word_type' },
         { text: 'Leave him to it', go: 'noop' },
-      ] },
+      ], prompt: "> He's still stuck in the gate." },
     ],
     word_type: [
       { do: 'type', word: 'akete', from: 'kuroda', prompt: 'kuroda: {akete}...' },
@@ -214,8 +208,6 @@ export default {
       { do: 'hide', id: 'kuroda' },
       { do: 'gate', state: 'open' },
       { do: 'face', who: 'guard', to: 'eric' },
-      // and the gate company picks up
-      { say: 'guard', face: 'stern', overheard: true, emo: 'deadpan', text: '…あ、もしもし。いえ…開きました。' },
       { do: 'phone', who: 'guard', state: 'off' },
       { say: 'eric', emo: 'whisper', text: "The train doors, and now this..." },
       { set: 'gate_magic' },
@@ -269,32 +261,10 @@ export default {
     ],
     mime_menu: [
       { choice: [
-        { text: 'Point at the briefcase', if: '!pt_case', go: 'pt_case' },
-        { text: 'Point at the man', if: '!pt_man', go: 'pt_man' },
+        { text: 'Mime lifting the briefcase over the gate', go: 'mime_lift' },
+        { text: 'Mime squeezing sideways through a gap', if: '!m_squeeze', go: 'mime_squeeze' },
         { text: 'Point at the cat under his desk', if: '!pt_cat', go: 'mime_cat' },
-        { text: 'Mime squeezing sideways through a gap', if: 'pt_case && pt_man && !m_squeeze', go: 'mime_squeeze' },
-        { text: 'Mime lifting something over your head', if: 'pt_case && pt_man', go: 'mime_lift' },
       ], prompt: "> You don't have the words for this." },
-    ],
-    pt_case: [
-      { set: 'pt_case' },
-      { do: 'gesture', who: 'eric', kind: 'point', to: 'kuroda' },
-      { do: 'look', who: 'guard', at: 'kuroda' },
-      { if: 'pt_man', then: [{ call: 'guard_knows' }] },
-      { go: 'mime_menu' },
-    ],
-    pt_man: [
-      { set: 'pt_man' },
-      { do: 'gesture', who: 'eric', kind: 'point', to: 'kuroda' },
-      { do: 'look', who: 'guard', at: 'kuroda' },
-      { do: 'face', who: 'kuroda', to: 'guard' },
-      { do: 'bow', who: 'kuroda' },
-      { if: 'pt_case', then: [{ call: 'guard_knows' }] },
-      { go: 'mime_menu' },
-    ],
-    guard_knows: [
-      { do: 'emote', who: 'guard', kind: '…' },
-      { say: 'guard', overheard: true, emo: 'polite', text: 'はい、わかってます。二人だと思ってるんです。' },
     ],
     mime_cat: [
       { set: 'pt_cat' },
@@ -306,14 +276,13 @@ export default {
     mime_squeeze: [
       { set: 'm_squeeze' },
       { do: 'gesture', who: 'eric', kind: 'squeeze' },
-      '> You turn sideways and suck your stomach in.',
+      '> You mime squeezing past the briefcase.',
       { do: 'look', who: 'guard', at: 'kuroda' },
       { say: 'guard', overheard: true, emo: 'dry', text: '…無理ですね。' },
       { go: 'mime_menu' },
     ],
     mime_lift: [
       { do: 'gesture', who: 'eric', kind: 'lift' },
-      '> You lift an invisible briefcase high over your head.',
       { do: 'emote', who: 'guard', kind: '!' },
       { if: 'guard_cool', then: [
         { do: 'expression', who: 'guard', face: 'stern' },
@@ -400,14 +369,14 @@ export default {
       { say: 'guard', face: 'stern', overheard: true, emo: 'stern', text: '猫はいません。' },
     ],
     tama_matte: [
-      '> She freezes with her head in the bowl.',
+      '> Tama freezes with her head in the bowl.',
       { say: 'guard', face: 'stern', overheard: true, emo: 'stern', text: '猫はいません。' },
     ],
     tama_sumimasen: [
       { do: 'catTo', to: 'desk_front' },
       { say: 'guard', face: 'stern', overheard: true, emo: 'stern', text: '猫はいません。' },
     ],
-    signin: ["> The first name in the visitor book today, in careful capitals, is TAMA."],
+    signin: ["> TAMA is the first name in today's visitor book."],
     poster: ["> PEOPLE. IDEAS. PROGRESS."],
   },
 };

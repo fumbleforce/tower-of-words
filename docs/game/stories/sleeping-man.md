@@ -10,17 +10,17 @@ Mr. Hamada from Accounts sleeps through every monorail ride back from the mainla
 
 1. On the train he's asleep on the far bench with a sticky note on his briefcase: "12F 9:00!!". Greetings don't wake him. Mio says he'll miss their stop one day ([`mio-train`](mio-train.md)).
 2. On the platform, after everyone is off, Eric and Mio see him still alone in the car. The announcement says the train goes back to the mainland. The doors close in steps; Mio yells 待って and nothing happens. She shows it with a flat palm, and Eric types it. The doors freeze with the kotodama effect. Hamada wakes, stumbles out, bows deeply, and the train leaves.
-3. At the gate at 8:52, while Eric waits on the bench ([`gate-morning`](gate-morning.md)), Hamada bursts in, taps through, and the gate jams: the count screen shows two people, him and his briefcase. He begs it, 開けて, miming two heavy doors, then pats it like a nervous horse. The guard calls the gate company and gets hold music. Mio texts Eric: "if the guard ignores you say すみません and point at stuff. loud".
+3. At the gate at 8:52, while Eric waits on the bench ([`gate-morning`](gate-morning.md)), Hamada bursts in, taps through, and the gate jams: the count screen shows two people, him and his briefcase. He says 開けて slowly once, then mimes pulling the gate open. The guard calls the gate company and gets hold music. Mio texts Eric: "the lobby gate again? is that you? say すみません to the guard and show him".
 4. Two ways through:
-   - His word: talk to Hamada and say 開けて with him (typed the first time). The gate bursts open; Hamada heads for the station exit; the gate company picks up just then ("いえ…開きました"); the guard stares at the gate, then at Eric, and points him to the station exit.
-   - The guard's way: すみません to the guard, then mime. Point at the briefcase and at the man (the guard: he knows, it thinks they're two), at the cat (猫はいません), mime squeezing through (無理ですね), then lift an invisible briefcase over your head. The guard laughs (unless Eric skipped his good morning), shouts 浜田さん！かばん、頭の上！, the gate opens, the gate company picks up ("もう大丈夫です"), Hamada thanks Eric deeply, and the guard waves him through before nine.
+   - His word: talk to Hamada and say 開けて with him (typed the first time). The gate bursts open; Hamada heads for the station exit; the guard ends his call, stares at the gate, then at Eric, and points him to the station exit.
+   - The guard's way: すみません to the guard, then mime. Lift an invisible briefcase over your head, or first point at the cat (猫はいません) or mime squeezing past the briefcase (無理ですね). The guard laughs (unless Eric skipped his good morning), shouts 浜田さん！かばん、頭の上！, the gate opens, the gate company picks up ("もう大丈夫です"), Hamada thanks Eric deeply, and the guard waves him through before nine.
 5. Wrong words during the jam get honest answers: 待って to Hamada ("待ってますけど…"), すみません to the gate (one at a time, please), 開けて to the guard (a puzzled look), a greeting to Hamada (a flustered one back).
 6. In the afternoon, if Eric took the guard's way, a box of rice crackers comes down from the twelfth floor: "TO B2 ERIC. THANK YOU. 12F HAMADA." Mori hands them round; even Mio takes one (in `lunch_end`, [`lunch`](lunch.md)).
 
 ## Choices and flags
 
-- At the jam: help him with his word, or leave him to it; or go to the guard. The two ways are exclusive and change who remembers what ([systems.md](../systems.md), Memory).
-- The mime menu: each option once; lifting the briefcase shows only after pointing at both the case and the man.
+- At the jam: a choice prompt says "He's still stuck in the gate." Help him with his word, leave him to it, or go to the guard. The two ways are exclusive and change who remembers what ([systems.md](../systems.md), Memory).
+- The mime menu offers lifting immediately. The cat and squeeze detours each work once.
 
 | Flag | Set when | Read by |
 |---|---|---|
@@ -29,7 +29,7 @@ Mr. Hamada from Accounts sleeps through every monorail ride back from the mainla
 | `gate_through_way` | Either way through started | The jam triggers |
 | `gate_magic` | The gate burst open to 開けて | The guard after, Kenji's gossip, Mio's evening list |
 | `guard_cool` | Went to the guard without having greeted him | The guard's mood in the mime |
-| `pt_case`, `pt_man`, `pt_cat`, `m_squeeze` | Mime options used | The mime menu |
+| `pt_cat`, `m_squeeze` | Mime options used | The mime menu |
 | `late_greet` | Greeted the guard during the jam | |
 | `hamada_friend` | The guard's way, Hamada thanked him | The crackers |
 
@@ -45,4 +45,4 @@ Mr. Hamada from Accounts sleeps through every monorail ride back from the mainla
 | File | Nodes |
 |---|---|
 | `train.js` | `hamada`, `asleep`, `platform`, `did_i`, `did_quiet` |
-| `gate.js` | `bench_wait`, `hamada_stuck`, `word_type`, `word_say`, `guard_after`, `guard_busy`, `jam_greet`, `way_social`, `mime_menu`, `pt_case`, `pt_man`, `guard_knows`, `mime_cat`, `mime_squeeze`, `mime_lift`, `sumi_hamada`, `greet_hamada`, `sumi_gate`, `matte_hamada`, `matte_gate`, `akete_guard` |
+| `gate.js` | `bench_wait`, `hamada_stuck`, `word_type`, `word_say`, `guard_after`, `guard_busy`, `jam_greet`, `way_social`, `mime_menu`, `mime_cat`, `mime_squeeze`, `mime_lift`, `sumi_hamada`, `greet_hamada`, `sumi_gate`, `matte_hamada`, `matte_gate`, `akete_guard` |
