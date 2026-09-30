@@ -107,7 +107,13 @@ function door(p, block) {
 }
 
 // the bike court: a hedge along its north side with one opening between bollards, racks in two rows with painted
-// bays, bikes of every kind in them
+// bays, bikes of every kind in them. Two bikes in the west row are left out here and built by the place, so they can
+// move (places/fallen-bikes.js): the one fallen into the aisle and its neighbour.
+export const BIKE_ROWS = [
+  { x: 7.6, z: 3.9, turn: -Math.PI / 2, gaps: [3, 7], seed: 0 },
+  { x: 10.9, z: 8.85, turn: Math.PI / 2, gaps: [1, 5, 8], seed: 3 },
+];
+export const LOOSE_BIKES = { row: BIKE_ROWS[0], step: 0.55, fallen: 5, leaning: 4 }; // 4: the pale grey one with a basket
 function bikes(root, p, block) {
   const gap = [8.65, 9.85];
   const z = ZN + 0.35;
@@ -120,18 +126,16 @@ function bikes(root, p, block) {
     block(x0, x1, ZN, ZN + 0.62);
   }
   for (const x of gap) bollard(p, x, z);
-  for (const [x, zz, turn, gaps, seed, fallen] of [
-    [7.6, 3.9, -Math.PI / 2, [3, 7], 0, 5],
-    [10.9, 8.85, Math.PI / 2, [1, 5, 8], 3, -1],
-  ]) {
-    const row = bikeRow(10, { gaps, seed, fallen });
-    row.rotation.y = turn;
-    row.position.set(x, 0, zz);
+  for (const r of BIKE_ROWS) {
+    const loose = r === LOOSE_BIKES.row ? [LOOSE_BIKES.fallen, LOOSE_BIKES.leaning] : [];
+    const row = bikeRow(10, { gaps: [...r.gaps, ...loose], seed: r.seed });
+    row.rotation.y = r.turn;
+    row.position.set(r.x, 0, r.z);
     root.add(row);
-    block(x - 0.5, x + 0.5, 3.6, 9.1);
-    if (fallen >= 0) block(x + 0.5, x + 1.0, zz + fallen * 0.55 - 0.5, zz + fallen * 0.55 + 0.5); // the fallen bike
+    block(r.x - 0.5, r.x + 0.5, 3.6, 9.1);
     // painted bays: a pale line between each pair of places, across the row
-    for (let i = 0; i <= 10; i++) p.box('#bfc2c0', 1.0, 0.004, 0.03, x, 0.008, 3.9 - 0.275 + i * 0.55, { cast: false });
+    for (let i = 0; i <= 10; i++)
+      p.box('#bfc2c0', 1.0, 0.004, 0.03, r.x, 0.008, 3.9 - 0.275 + i * 0.55, { cast: false });
   }
   // a bench on the station's east wall looking over the bikes
   bench(p, SE + 0.42, 6.4, Math.PI / 2, { len: 1.6 });

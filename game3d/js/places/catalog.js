@@ -125,12 +125,14 @@ export const PLACE_DETAILS = {
       lift: { label: 'Lift to B2', kind: 'thing' },
       kuro: { label: 'Receptionist', kind: 'person' },
       plaza_lane: { label: 'To the plaza', kind: 'thing', verb: 'Go' },
+      garden_bench: { label: 'Garden bench', kind: 'thing', verb: 'Sit' },
+      fallen_bicycle: { label: 'Bicycle', kind: 'thing', verb: 'Stand up' },
     },
     spots: ['station_exit', 'office_entrance', 'lift_front', 'plaza_lane'],
-    seats: [],
+    seats: ['garden_bench'],
     zones: ['lift_front', 'plaza_lane'],
-    people: ['kuro'],
-    hooks: ['liftOpen', 'liftClose'],
+    people: ['kuro', 'tama'],
+    hooks: ['liftOpen', 'liftClose', 'gardenCat', 'bicycle'],
   },
   dorm_court: {
     things: {
@@ -163,12 +165,13 @@ export const PLACE_DETAILS = {
       office_lane: { label: 'To head office', kind: 'thing', verb: 'Go' },
       fountain: { label: 'Fountain', kind: 'thing' },
       dorm_lane: { label: 'To the dorms', kind: 'thing' },
+      canteen_table: { label: 'Canteen table', kind: 'thing', verb: 'Sit' },
     },
     spots: ['office_entry', 'fountain_edge', 'dorm_exit'],
     seats: [],
     zones: ['office_lane', 'dorm_exit'],
-    people: [],
-    hooks: [],
+    people: ['canteen_worker'],
+    hooks: ['canteenChair'],
   },
   'office': {
     'things': {

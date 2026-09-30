@@ -30,8 +30,8 @@
       "reason": "Composition, boot/Continue, input, rendering and frame loop remain after stage 4 hooks, interactions and place lifecycle extraction."
     },
     "game3d/js/menu.js": {
-      "lines": 1188,
-      "bytes": 41938,
+      "lines": 1187,
+      "bytes": 41836,
       "owner": "codex-tui",
       "review": "C-0089",
       "reason": "Existing action menus and target selection; stage 4 interaction extraction is planned."

@@ -1,6 +1,6 @@
 # Evening discovery integration contract
 
-Work #87, X-0300. Writing and staging: [final draft](evening-discoveries-draft.md). Story patch is prepared, uncommitted, in `.claude/worktrees/codex-evening-discoveries/game3d/story/{forecourt,plaza,dorm_court}.js`. These names are proposed for the builder; agree or return replacements before integrating. No missing-hook version ships.
+Work #87, X-0300. Writing and staging: [final draft](evening-discoveries-draft.md). Implemented in `game3d/story/{forecourt,plaza,dorm_court}.js`; the table records the integrated interface.
 
 | Place | Thing/action | Required place hook and phases | Saved story state |
 | --- | --- | --- | --- |

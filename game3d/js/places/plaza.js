@@ -9,6 +9,7 @@ import { sim } from '../sim.js';
 import { PLACE_DETAILS } from './catalog.js';
 import { snapshotPeople, restorePeople } from './saved-people.js';
 import { walkOut, walkIn } from './edge-walk.js';
+import { canteenClosing } from './canteen-closing.js';
 
 // The fountain plaza: a side trip east of the forecourt in the morning, and on the walk home after work, with the
 // lane on east to the dorm courtyard.
@@ -16,6 +17,7 @@ export async function plazaPlace(game) {
   const w = await sliced(plazaSteps()); // in slices between frames: it's built while the forecourt is played
   const cam = new RoomCam(w.camera); // the forecourt's camera, so the walk between them keeps its angle
   const floor = new THREE.Plane(new THREE.Vector3(0, 1, 0), 0);
+  const canteen = canteenClosing(game, w.root, w.nav, w.chairs); // after work: the terrace closing
   const spots = {
     office_entry: w.arriveIn,
     fountain_edge: w.fountainEdge,
@@ -40,6 +42,13 @@ export async function plazaPlace(game) {
       anchor: (v) => v.set(w.dormExit[0], 1.1, w.dormExit[1]),
       spot: () => w.dormExit,
       face: () => w.dormEdge,
+    },
+    canteen_table: {
+      ...PLACE_DETAILS.plaza.things.canteen_table,
+      anchor: (v) => canteen.anchor(v),
+      spot: canteen.spot,
+      face: canteen.face,
+      obj: canteen.obj,
     },
   };
   const P = {
@@ -69,12 +78,12 @@ export async function plazaPlace(game) {
     things,
     spots,
     seats: {},
-    people: {},
+    people: { canteen_worker: canteen.person },
     zones: {
       office_lane: (x, z) => x < w.westX && z > w.laneZ(x) - 2.4,
       dorm_exit: (x, z) => x > w.eastX && z > w.laneZ(x) - 2.4,
     },
-    hooks: {},
+    hooks: { canteenChair: canteen.hooks.canteenChair },
     fit(aspect) {
       // both: the phone's camera distance (as in the forecourt and the dorm courtyard, so the walks between them
       // crossfade on the same close framing), following him over the plaza, a little ahead to the north
@@ -114,20 +123,23 @@ export async function plazaPlace(game) {
     },
     update(dt, t) {
       w.update(dt, t);
+      canteen.update(dt, t);
       // heading east after work: build the dorm courtyard now, so the walk there needs no loading pause
       if (sim.period === 'evening' && game.player.root.position.x > 2.5 && !game.prepared.dorm_court)
         game.prepare?.('dorm_court');
     },
     onPeriod(period) {
+      canteen.sync(); // on every entry: the terrace open, or closing after work
       if (period !== 'evening' || P.grade === EVENING_GRADE) return;
       eveningLight(w.scene);
       w.evening();
       P.grade = EVENING_GRADE;
     },
     snapshotState() {
-      return { player: snapshotPeople({ eric: game.player }) };
+      return { player: snapshotPeople({ eric: game.player }), canteen: canteen.snapshot() };
     },
     restoreState(saved) {
+      canteen.restore(saved.world?.canteen);
       if (!saved.world?.player) return;
       restorePeople({ eric: game.player }, saved.world.player);
       // a save from before the plaza was rebuilt at the map's scale can stand in the basin or a bed

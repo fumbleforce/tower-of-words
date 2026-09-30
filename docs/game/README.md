@@ -74,6 +74,7 @@ The game is not one walkthrough. After day 1 it won't be linear at all, so the s
 | [`lunch`](stories/lunch.md) | The day's one real choice: lunch with Mio or with Mori, and a word from each. | built |
 | [`vending-gift`](stories/vending-gift.md) | The stuck vending machine and one drink for someone. | built |
 | [`mio-notices`](stories/mio-notices.md) | Mio sees the doors, then more, and asks how. Repair request #2 lands on Eric. | built (day 1 part) |
+| [`evening-walk`](stories/evening-walk.md) | Optional encounters on the walk home. | built |
 | [`tama`](stories/tama.md) | Tama the calico cat, who goes where she likes and isn't there, says the guard. | built |
 
 ### Writing a storyline file

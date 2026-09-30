@@ -74,3 +74,21 @@ test('restoring a pose invalidates outstanding scripted movement and facing', ()
   assert.equal(mio.root.userData.walkTok, 5);
   assert.equal(mio.root.userData.faceTok, 8);
 });
+
+// A seated player resumes inside the bench. Ordinary movement needs the saved free-floor exit.
+test('Continue retains a seated player exit and clears it when loading a standing save', () => {
+  const eric = person();
+  eric.seated = true;
+  eric.seatOut = [3.2, 1.4];
+  eric.root.position.fromArray([3.2, 0.4, 0.9]);
+  const saved = JSON.parse(JSON.stringify(snapshotPeople({ eric })));
+  const restored = person();
+  restorePeople({ eric: restored }, saved);
+  assert.deepEqual(restored.seatOut, [3.2, 1.4]);
+  assert.equal(restored.seated, true);
+  restored.seatOut[0] = 99;
+  assert.deepEqual(saved.eric.seatOut, [3.2, 1.4]);
+  restorePeople({ eric: restored }, snapshotPeople({ eric: person() }));
+  assert.equal(restored.seatOut, null);
+  assert.equal(restored.seated, false);
+});

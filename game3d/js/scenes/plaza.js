@@ -71,7 +71,7 @@ export function* plazaSteps() {
   const uplit = buildLamps(lights, p, nav, root);
   buildBenches(p, nav);
   buildNoticeBoard(p, nav);
-  buildTerrace(root, nav);
+  const chairs = buildTerrace(root, nav);
   buildBikes(root, nav);
   buildLife(p);
   p.build(root);
@@ -127,6 +127,7 @@ export function* plazaSteps() {
     laneZ,
     laneHalf: HALF,
     camera: { elev: 46, fov: 24 },
+    chairs, // the terrace chairs, standing or stacked for closing (places/canteen-closing.js)
     update(dt, t) {
       water.update(t);
     },

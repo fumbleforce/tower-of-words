@@ -261,7 +261,7 @@ export default {
     chair_push: [
       { do: 'chairRoll', to: 'my_seat' },
       { set: 'chair_back' },
-      { do: 'walk', who: 'mio', to: 'mio_by_desk' },
+      { do: 'walk', who: 'mio', to: [0.75, -2.1] }, // beside Eric, clear of where the returned chair leaves him
       { do: 'face', who: 'mio', to: 'eric' },
       { do: 'face', who: 'eric', to: 'mio' },
       { do: 'cam', on: 'mio', zoom: 1.6 },

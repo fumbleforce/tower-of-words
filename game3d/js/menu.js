@@ -1090,13 +1090,12 @@ window.addEventListener(
 );
 
 // ---------- photos of the day, for the end screen ----------
-// one frame of each place, a few seconds in when nobody is mid-sentence; else as the trip out starts, or (the room
-// the day ends in) just before the summary (end.js calls shell.photoNow)
+// One quiet frame per place; end.js refreshes the final room after Eric walks in.
 let placeSince = 0,
   placeName = '';
-async function photo(n) {
+async function photo(n, replace = false) {
   const shot = await grab(560, 1.5);
-  if (shot && !shell.photos[n]) shell.photos[n] = { src: shot, period: sim.period };
+  if (shot && (replace || !shell.photos[n])) shell.photos[n] = { src: shot, period: sim.period };
   try {
     sessionStorage.setItem('amakawa-photos', JSON.stringify(shell.photos));
   } catch {
@@ -1105,7 +1104,7 @@ async function photo(n) {
 }
 shell.photoNow = async () => {
   const g = game();
-  if (g && g.place && !TEST && !CAP && !SHELL && !shell.photos[g.place.name]) await photo(g.place.name);
+  if (g && g.place && !TEST && !CAP && !SHELL) await photo(g.place.name, true);
 };
 setInterval(async () => {
   const g = game();

@@ -335,6 +335,8 @@
     "gate:tama_sumimasen",
     "gate:signin",
     "gate:poster",
+    "forecourt:garden_bench",
+    "forecourt:fallen_bicycle",
     "forecourt:outside",
     "forecourt:head_office",
     "forecourt:to_b2",
@@ -426,11 +428,14 @@
     "office:matte_clock",
     "office:tomatte_fan",
     "office:~kenji_mori",
+    "plaza:canteen_table",
     "plaza:arrive",
     "plaza:fountain",
     "plaza:dorms_later",
     "plaza:to_forecourt",
     "plaza:to_dorms",
+    "dorm_court:bath",
+    "dorm_court:mailboxes",
     "dorm_court:arrive",
     "dorm_court:hall",
     "dorm_court:go_up",
@@ -1368,6 +1373,24 @@
       "cross": false
     },
     {
+      "from": "office:end_ticket",
+      "to": "forecourt:garden_bench",
+      "kind": "unlock",
+      "labels": [
+        "going_home"
+      ],
+      "cross": true
+    },
+    {
+      "from": "office:end_ticket",
+      "to": "forecourt:fallen_bicycle",
+      "kind": "unlock",
+      "labels": [
+        "going_home"
+      ],
+      "cross": true
+    },
+    {
       "from": "train:lesson3",
       "to": "office:yoroshiku_mori",
       "kind": "unlock",
@@ -1582,6 +1605,24 @@
         "evening_on"
       ],
       "cross": false
+    },
+    {
+      "from": "office:end_ticket",
+      "to": "plaza:canteen_table",
+      "kind": "unlock",
+      "labels": [
+        "going_home"
+      ],
+      "cross": true
+    },
+    {
+      "from": "office:end_ticket",
+      "to": "dorm_court:bath",
+      "kind": "unlock",
+      "labels": [
+        "going_home"
+      ],
+      "cross": true
     }
   ],
   "flags": [
@@ -1627,6 +1668,9 @@
     "met_kuroda",
     "hamada_friend",
     "gate_through",
+    "evening_bench_seen",
+    "evening_bike_tipped",
+    "evening_bikes_upright",
     "period",
     "greeted_mori",
     "met_mori",
@@ -1672,6 +1716,8 @@
     "evening_on",
     "met_emi",
     "going_home",
+    "evening_canteen_helped",
+    "evening_bath_heard",
     "dorm_room_known",
     "home_203"
   ]

@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import { BIKES } from '../scenes/forecourt/plan.js';
 import { forecourtSteps } from '../scenes/forecourt.js';
 import { sliced } from '../perf/slice.js';
 import { RoomCam } from '../cam.js';
@@ -10,6 +11,8 @@ import { relightLift } from './lift.js';
 import { PLACE_DETAILS } from './catalog.js';
 import { snapshotPeople, restorePeople } from './saved-people.js';
 import { idle } from '../cast.js';
+import { gardenCat } from './garden-cat.js';
+import { fallenBikes } from './fallen-bikes.js';
 
 // the phone's view out of the station: looking east, lower, a little further out, Eric low in the frame
 const EAST = { elev: 33, zoom: 1.36, lead: -6.3 };
@@ -18,6 +21,9 @@ export async function forecourtPlace(game) {
   const w = await sliced(forecourtSteps()); // in slices between frames: it's built while the gate room is played
   const cam = new RoomCam(w.camera); // the security room's camera, so the crossfade out of it keeps its angle
   const floor = new THREE.Plane(new THREE.Vector3(0, 1, 0), 0);
+  // after work: Tama on the garden bench, and the fallen bicycle in the bike court
+  const garden = gardenCat(game, w.root),
+    bikes = fallenBikes(game, w.root, w.nav);
   const spots = {
     station_exit: w.start,
     office_entrance: w.officeEntrance,
@@ -61,6 +67,21 @@ export async function forecourtPlace(game) {
       anchor: (v) => v.set((w.plazaLane[0] + w.plazaEdge[0]) / 2, 1.1, (w.plazaLane[1] + w.plazaEdge[1]) / 2),
       spot: () => w.plazaLane,
       face: () => w.plazaEdge,
+    },
+    garden_bench: {
+      ...PLACE_DETAILS.forecourt.things.garden_bench,
+      anchor: (v) => garden.anchor(v),
+      spot: garden.spot,
+      face: garden.face,
+    },
+    fallen_bicycle: {
+      ...PLACE_DETAILS.forecourt.things.fallen_bicycle,
+      anchor: (v) => bikes.anchor(v), // on whichever bike is down
+      spot: bikes.spot,
+      face: bikes.face,
+      obj: bikes.obj,
+      outline: bikes.outline,
+      enabled: bikes.enabled,
     },
   };
   // an old save can hold a spot that is now a wall, a bike rack or the station (the court was rebuilt 2026-09-30):
@@ -107,7 +128,10 @@ export async function forecourtPlace(game) {
     const jump = !turnAt || Math.hypot(p.x - turnAt[0], p.z - turnAt[1]) > 0.8;
     turnAt = [p.x, p.z];
     if (!phone) return;
-    const want = 1 - THREE.MathUtils.smoothstep(p.x, TURN[0], TURN[1]);
+    // Look north in the bicycle court, keeping the station wall out of the phone's foreground.
+    const want =
+      (1 - THREE.MathUtils.smoothstep(p.x, TURN[0], TURN[1])) *
+      (1 - THREE.MathUtils.smoothstep(p.z, BIKES[2], BIKES[2] + 0.8));
     if (Math.abs(want - turn) < 1e-4) return; // settled: leave the camera alone (the lift ride sets its elevation)
     setTurn(jump ? want : turn + (want - turn) * (1 - Math.exp(-dt / 0.45)));
   };
@@ -137,8 +161,8 @@ export async function forecourtPlace(game) {
     },
     things,
     spots,
-    seats: {},
-    people: { kuro: w.kuro },
+    seats: { garden_bench: garden.seat },
+    people: { kuro: w.kuro, tama: garden.person },
     zones: {
       lift_front: (x, z) => Math.hypot(x - w.liftOut[0], z - w.liftOut[1]) < 0.42,
       plaza_lane: (x, z) => {
@@ -150,6 +174,8 @@ export async function forecourtPlace(game) {
     hooks: {
       liftOpen: () => w.setLiftOpen(1),
       liftClose: () => w.setLiftOpen(0),
+      gardenCat: garden.hooks.gardenCat,
+      bicycle: bikes.hooks.bicycle,
     },
     liftSite: w.liftSite,
     liftLanding: w.liftLanding,
@@ -199,11 +225,14 @@ export async function forecourtPlace(game) {
       steer(game.player.root.position, dt);
       w.station.update(game.player.root.position, dt, cam.dir);
       idle(w.kuro, t);
+      garden.update(t);
       // heading for the lane (not for head office): build the plaza now, so the walk there needs no loading pause
       const e = game.player.root.position;
       if (e.x > 20 && e.z > w.hoDoor[1] && !game.prepared.plaza) game.prepare?.('plaza');
     },
     onPeriod(period) {
+      garden.sync(); // on every entry: who is out after work, and what the story left moved
+      bikes.sync();
       if (period !== 'evening' || P.grade === EVENING_GRADE) return;
       relightLift(P);
       eveningLight(w.scene);
@@ -217,16 +246,22 @@ export async function forecourtPlace(game) {
       return {
         player: snapshotPeople({ eric: game.player }),
         landing: w.liftLanding.k(),
+        tama: garden.snapshot(),
+        bikes: bikes.snapshot(),
       };
     },
     restoreState(saved) {
       if (saved.world?.player) {
         restorePeople({ eric: game.player }, saved.world.player);
-        snapToWalk(game.player.root.position);
+        // on the garden bench (the only seat here): the next walk steps him off it, as the story's sit would
+        if (game.player.seated) game.player.seatOut = garden.seatOut();
+        else snapToWalk(game.player.root.position);
         game.walker.sync();
         cam.snap(game.player.root.position);
       }
       w.setLiftOpen(saved.world?.landing > 0.5 ? 1 : 0);
+      garden.restore(saved.world?.tama);
+      bikes.restore(saved.world?.bikes);
     },
     // the walks to and from the fountain plaza (trips.js picks these by the other place's name)
     tripOutTo: {
