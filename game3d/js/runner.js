@@ -6,6 +6,7 @@ import { DEFAULT_SPEAKERS } from './narrative/speakers.js';
 import { voiceThenBeat } from './ui.js';
 import { ui, voice, sfx, setFace, PORTRAITS } from './ui.js';
 import { WORDS, learn, known, cmdHTML, SAYABLE } from './lang.js';
+import { recordHeard } from './narrative/heard-record.js';
 
 import { flags, cond } from './narrative/state.js';
 export { flags, cond } from './narrative/state.js';
@@ -353,23 +354,7 @@ export class Runner {
     if (voiceKey && s.overheard && !audioKeys.has(voiceKey)) voiceKey = null;
     this.game.setHurry?.(false);
     const shown = ui.say(sp, text, { voiceKey, overheard: !!s.overheard, clear: s.clear, whoId: who, face: s.face });
-    // test mode: record what an overheard line rendered, so the fast test fails on a known word shown garbled
-    if (s.overheard && window.__test) {
-      const line = document.querySelector('#talk .line');
-      const garbled = [...line.querySelectorAll('.gx')].map((e) => e.dataset.c).join('');
-      const bad = [...known].filter((id) => {
-        const w = WORDS[id];
-        return w && [w.ja, ...(w.alias || [])].some((ja) => garbled.includes(ja));
-      });
-      (window.__test.heard ||= []).push({
-        key: voiceKey,
-        text,
-        known: [...known],
-        tokens: [...line.children].map((e) => `${e.className}:${e.textContent}`),
-        garbledKnown: bad,
-      });
-      if (bad.length) window.__test.errors.push(`known word shown garbled in "${text}": ${bad.join(', ')}`);
-    }
+    if (s.overheard && window.__test) recordHeard(text, voiceKey);
     await shown;
     return null;
   }

@@ -141,7 +141,7 @@ Events: `start`, `approach` (the train starts slowing, when the story runs `{ do
 Events: `start`, `card_red` (a card reader tapped before it works), `card_ok`, `arch_blocked` (walking into the closed gate), `gate_opened`.
 
 - `reader` `side: 'l'|'r'`, `state: 'red'|'green'|'idle'`: the reader's light and beep.
-- `gate` `state: 'open'|'closed'|'jam'|'slam'`: the flaps (`jam` rattles and the count screen shows a person, a briefcase and a red 2; `slam` bursts open and bounces).
+- `gate` `state: 'open'|'closed'|'jam'|'slam'`: the flaps (`jam` rattles and the count screen shows a person, a briefcase and a red 2; `slam` bursts open, bounces and stays open).
 - `cardOk`: Eric's card now works; his next tap turns the reader green and opens the gate.
 - `enter` `who`: someone walks in through the entrance.
 - `typing` `who`, `ms`: typing animation (the guard at his computer).

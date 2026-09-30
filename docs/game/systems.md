@@ -86,7 +86,7 @@ The Say menu speaks the chosen phrase or command to whoever or whatever is neare
 
 ## Overheard Japanese
 
-Lines Eric can't follow are shown as soft, shifting stand-in characters, with only the words he knows (and the loanwords a line makes clear) readable. Their voice plays muffled; the known words come out clear in it (Jørgen: known words clear in the voice, unknown speech much more sound-blurred; "the text blur is good as it is"). Sounds like あっ or えっ stay readable; real words like はい or うん blur until taught. The point is that Japanese beyond his level looks and sounds like gibberish on purpose.
+Lines Eric can't follow are shown as soft, shifting stand-in characters, with only the words he knows, people's names ([words.md](words.md)) and the loanwords a line makes clear readable. Their voice plays muffled; the known words come out clear in it (Jørgen: known words clear in the voice, unknown speech much more sound-blurred; "the text blur is good as it is"). Sounds like あっ or えっ stay readable; real words like はい or うん blur until taught. The point is that Japanese beyond his level looks and sounds like gibberish on purpose.
 
 ## Kotodama effects
 

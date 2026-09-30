@@ -1,9 +1,10 @@
-import { WORDS, known } from '../lang.js';
+import { WORDS, known, nameAt } from '../lang.js';
 import { paused } from '../audio/core.js';
 
 // ---------- overheard Japanese ----------
 // Eric can't follow it: every character he doesn't know becomes a softened, shifting stand-in glyph, and
 // the words he does know (his phrases and commands, plus the line's `clear` list) stay sharp and glossed.
+// People's names (lang.js NAMES) are always readable, with the name in romaji.
 // kana only: two stand-in glyphs side by side must never spell a real word (no kanji)
 const POOL =
   'あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやゆよらりるれろわをんがぎぐげござじずぜぞだでどばびぶべぼぱぴぷぺぽアイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモラリルレロワン';
@@ -55,6 +56,12 @@ export function heardHTML(text, clear = []) {
         i += it.length;
         continue;
       }
+    }
+    const nm = nameAt(text, i);
+    if (nm) {
+      out += `<span class="plain name">${esc(nm.ja)}</span> <span class="gl">(${esc(nm.gl)})</span>`;
+      i += nm.ja.length;
+      continue;
     }
     const k = keep.find((w) => text.startsWith(w.ja, i));
     if (k) {
