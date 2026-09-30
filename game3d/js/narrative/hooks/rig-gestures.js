@@ -84,6 +84,68 @@ export async function meshyGesture(game, r, kind, { to, face } = {}) {
   }
 }
 
+// Short everyday gestures on Meshy rigs (Eric, Mio, the 3D cast): nod, bow, shrug, wave, each about a second, drawn
+// the same way as above. Meshy's library clips for these are long (the nod clip is 13 s of talking with his hands, the
+// bow 7.7 s) and held the scene until they ended, so the story gestures don't use them. On the side axis a positive
+// turn tips the head and spine forward (and swings a hanging arm back).
+export const MESHY_SHORT = new Set(['nod', 'bow', 'shrug', 'wave']);
+function shortBones(r) {
+  if (r._sbones) return r._sbones;
+  const want = {
+    neck: /^(mixamorig)?neck$/i,
+    LeftShoulder: /^(mixamorig)?LeftShoulder$/,
+    RightShoulder: /^(mixamorig)?RightShoulder$/,
+  };
+  const found = {};
+  (r.model || r.root).traverse((o) => {
+    if (!o.isBone) return;
+    for (const [n, re] of Object.entries(want)) if (!found[n] && re.test(o.name)) found[n] = o;
+  });
+  return (r._sbones = { ...bonesOf(r), ...found });
+}
+export async function meshyShort(game, r, kind) {
+  const B = shortBones(r),
+    model = r.root;
+  if (kind === 'nod') {
+    // two dips of the chin, the first deeper, with a little of the upper back so it reads from behind him
+    await game.tween(0.9, (k) => {
+      const d = (1 - Math.cos(k * Math.PI * 4)) / 2,
+        a = (k < 0.5 ? 1 : 0.6) * d;
+      turn(model, B.Head, 'x', 0.38 * a);
+      turn(model, B.neck, 'x', 0.14 * a);
+      turn(model, B.Spine02, 'x', 0.06 * a);
+    });
+  } else if (kind === 'bow') {
+    // a small bow from the waist, head following
+    await game.tween(1.0, (k) => {
+      const b = bell(k);
+      turn(model, B.Spine, 'x', 0.3 * b);
+      turn(model, B.Spine01, 'x', 0.15 * b);
+      turn(model, B.Head, 'x', 0.2 * b);
+    });
+  } else if (kind === 'shrug') {
+    // shoulders up, forearms out to the sides with the palms up, head tipped a little
+    await game.tween(0.9, (k) => {
+      const b = bell(k);
+      turn(model, B.RightShoulder, 'z', -0.3 * b);
+      turn(model, B.LeftShoulder, 'z', 0.3 * b);
+      turn(model, B.RightForeArm, 'x', -1.3 * b);
+      turn(model, B.LeftForeArm, 'x', -1.3 * b);
+      turn(model, B.RightForeArm, 'y', -0.8 * b);
+      turn(model, B.LeftForeArm, 'y', 0.8 * b);
+      turn(model, B.Head, 'z', 0.12 * b);
+    });
+  } else if (kind === 'wave') {
+    // the right hand up beside his head, waving side to side twice
+    await game.tween(1.0, (k) => {
+      const b = bell(Math.min(1, k * 1.1)),
+        sw = Math.sin(k * Math.PI * 4) * b;
+      turn(model, B.RightArm, 'z', -2.5 * b);
+      turn(model, B.RightForeArm, 'z', 0.3 * b + 0.4 * sw);
+    });
+  }
+}
+
 // chibi rigs: arms[] swing forward on x (negative) and out on z; `save` holds their rotations to go back to
 // (r.gesturing tells a place's idle loop to leave the arms alone meanwhile: Kenji types at his desk every frame)
 export async function chibiGesture(game, r, kind, save) {
