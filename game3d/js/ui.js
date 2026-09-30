@@ -137,7 +137,6 @@ export const ui = {
       <div id="toast" hidden role="status"></div>
       <div id="caption" hidden><span class="nm"></span><span class="tx"></span></div>
       <div id="liftInd" hidden><span class="arrow">▲</span><span class="fl">1</span></div>
-      <img id="xfade" alt="" hidden>
       <div id="fade"><div class="title"></div><div class="sub"></div></div>
       <div id="end" hidden></div>
     `;

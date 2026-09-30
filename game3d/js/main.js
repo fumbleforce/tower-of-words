@@ -34,6 +34,7 @@ import { officePlace as office } from './places/office.js';
 import { dormCourtPlace as dorm_court } from './places/dorm-court.js';
 import { dormsPlace as dorms } from './places/dorms.js';
 import { showEnd } from './end.js';
+import { snapshot as snapshotOf, crossfade } from './places/crossfade.js';
 import { installSim, sim, stepAmbient, save, loadSave, restore, clearSave } from './sim.js';
 
 const CAP = Q.has('cap');
@@ -490,7 +491,7 @@ const { prepare, enter, travel, startScene } = createPlaceLifecycle(game, {
   buildMarkers,
   nearSet,
   zoneSet,
-  snapshot,
+  snapshot: () => snapshotOf(render, canvas),
   crossfade,
 });
 const targets = createTargets(game);
@@ -500,33 +501,6 @@ installPresentationHooks(game, { ...targets, canvas, TS });
 installGesturesHooks(game, targets);
 installKotodamaHooks(game, { renderer, objsOf });
 installProgressionHooks(game, { travel });
-
-// ---------- entering places ----------
-function snapshot() {
-  render();
-  try {
-    return canvas.toDataURL('image/jpeg', 0.9);
-  } catch {
-    return null;
-  }
-}
-function crossfade(url) {
-  if (!url) return;
-  const img = document.getElementById('xfade');
-  img.src = url;
-  img.classList.remove('go');
-  img.style.opacity = '1';
-  img.hidden = false;
-  requestAnimationFrame(() =>
-    requestAnimationFrame(() => {
-      img.classList.add('go');
-      img.style.opacity = '0';
-      setTimeout(() => {
-        img.hidden = true;
-      }, 1300);
-    }),
-  );
-}
 
 // ---------- loop ----------
 let lastT = performance.now();

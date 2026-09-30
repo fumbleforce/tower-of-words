@@ -5,6 +5,7 @@ import * as THREE from 'three';
 import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.js';
 import { hull, icoPoints } from './hull.js';
 import { V } from './kit.js';
+import { strapMeshes } from './straps.js';
 
 export const LX = 4.0; // inner half length
 export const LZ = 1.2; // inner half width
@@ -490,20 +491,10 @@ function rackAndRail(x0, x1, side, straps, rack) {
     g.add(pole([xe, 0.5, side * (LZ - BENCH_D - 0.02)], [xe, 0.5, side * LZ], 0.018, metal));
   }
   g.add(pole([x0 - 0.02, RAIL_Y, zr], [x1 + 0.02, RAIL_Y, zr], 0.021, metal));
-  // hand straps: grey band + triangular loop, on a pivot at the rail so they can swing
-  const bandGeo = new RoundedBoxGeometry(0.03, 0.14, 0.012, 1, 0.005);
-  const loopGeo = new THREE.TorusGeometry(0.055, 0.011, 5, 3);
-  const bandM = mat('strap', COL.strap),
-    loopM = mat('loop', COL.loop, { roughness: 0.45 });
+  // hand straps: a pivot at the rail so they can swing (train/straps.js draws them)
   for (let x = x0 + 0.24; x <= x1 - 0.2; x += 0.4) {
     const piv = new THREE.Group();
     piv.position.set(x, RAIL_Y, zr);
-    const band = new THREE.Mesh(bandGeo, bandM);
-    band.position.y = -0.08;
-    const loop = new THREE.Mesh(loopGeo, loopM);
-    loop.position.y = -0.2;
-    loop.rotation.z = Math.PI / 2; // apex up
-    piv.add(shadowOn(band), shadowOn(loop));
     g.add(piv);
     straps.push({ piv, ph: (straps.length * 2.39) % 6.28, a: 0, v: 0, b: 0, w: 0 });
   }
@@ -808,6 +799,7 @@ export function buildCar(mode = 'land', { furnished = true } = {}) {
       benchHolder.add(rackAndRail(x0, x1, -1, straps, md === 'land'));
       benchHolder.add(rackAndRail(Math.max(x0, -NEAR_END), Math.min(x1, NEAR_END), 1, straps, false));
     }
+    benchHolder.add(...strapMeshes(straps, mat('strap', COL.strap), mat('loop', COL.loop, { roughness: 0.45 })));
     // middle standing poles
     const metal = mat('metal', COL.metal, { roughness: 0.4, metalness: 0.25 });
     for (const z of [-0.5, 0.5]) benchHolder.add(pole([0, 0, z], [0, RAIL_Y, z], 0.022, metal));

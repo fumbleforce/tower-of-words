@@ -75,6 +75,7 @@ export function blob(size, opacity = 0.42, color = '#1d1a22') {
   m.renderOrder = 1;
   m.name = 'blob';
   m.userData.noOutline = true; // a shadow, not part of the model: the hover outline skips it (main.js)
+  m.userData.stackable = true; // one colour and draw order: the draw-call pass may merge them (perf/batch.js)
   return m;
 }
 

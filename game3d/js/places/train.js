@@ -28,6 +28,7 @@ import {
   mat as carMat,
 } from '../train/car.js';
 import { buildDoorSets, lampShut, lampOpen } from '../train/doors.js';
+import { swingStraps } from '../train/straps.js';
 import { buildPassengers, cat, walkPose, HIP, sit, armsHold } from '../train/people.js';
 import { PEOPLE } from '../cast.js';
 import { Nav, blob } from '../engine.js';
@@ -1116,19 +1117,7 @@ export async function trainPlace(game) {
         bump = (m.y - prevM.y) / Math.max(dt, 1e-3),
         rollVel = (m.roll - prevM.roll) / Math.max(dt, 1e-3);
       const brakeKick = st.mode === 'brake' ? -st.decel * 0.05 : 0;
-      for (const s of car.straps) {
-        const wv = 6.2 + (s.ph % 1.3),
-          zeta = 0.09;
-        s.v += (-(wv * wv) * (s.a - (-m.roll * 7 - latVel * 2.5 - rollVel * 0.6)) - 2 * zeta * wv * s.v) * dt;
-        s.a += s.v * dt;
-        s.w +=
-          (-(wv * wv) * (s.b - (-m.pitch * 6 + bump * 1.2 * (0.6 + 0.4 * Math.sin(s.ph)) + brakeKick)) -
-            2 * zeta * wv * s.w) *
-          dt;
-        s.b += s.w * dt;
-        s.piv.rotation.x = s.a + 0.03 * Math.sin(simT * 1.3 + s.ph);
-        s.piv.rotation.z = s.b;
-      }
+      swingStraps(car.straps, { m, latVel, bump, rollVel, brakeKick, simT, dt });
       for (const nd of car.nodders) {
         nd.obj.rotation.z = -m.roll * 4 * nd.k + Math.sin(simT * 1.7) * 0.015 * nd.k;
         nd.obj.rotation.x = bump * 0.5 * nd.k;

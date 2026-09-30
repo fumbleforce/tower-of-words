@@ -1,4 +1,4 @@
-// The whole day in test mode (?test=fast) with the perf pass hooked in, checking as it goes that merging changes
+// The whole day in test mode (?test=fast) with the perf pass on, checking as it goes that merging changes
 // nothing on screen: every few seconds the game is paused, one frame is grabbed with the pass off and one with it on,
 // and the two are compared. Catches a door, a lift or a trip that moves something the pass had merged.
 //   node game3d/tools/perf/day.mjs [w=393] [h=851] [seconds=300] [--every 4] [--q 1]      (browser lock)
@@ -22,17 +22,14 @@ const gl = GPU ? ['--use-angle=vulkan', '--enable-features=Vulkan', '--ignore-gp
 const b = await chromium.launch({ headless: true, args: [...gl, '--autoplay-policy=no-user-gesture-required'] });
 const phone = +W < 640;
 const ctx = await b.newContext({ viewport: { width: +W, height: +H }, deviceScaleFactor: phone ? 2.75 : 1, isMobile: phone, hasTouch: phone });
-await ctx.route('**/js/places/lifecycle.js*', async (route) => {
-  const r = await route.fetch(); const body = (await r.text()).replace('place.name = name;', "place.name = name; (await import('../perf/batch.js')).optimizePlace(place, { game });");
-  await route.fulfill({ response: r, body });
-});
+// the lifecycle runs the pass on every place but Eric's room (places/lifecycle.js BATCHED), after the look
 const p = await ctx.newPage();
 const errs = [];
 p.on('pageerror', (e) => errs.push(e.message));
 p.on('console', (m) => { if (m.type() === 'error' && !/404/.test(m.text())) errs.push(m.text()); });
 const cmp = await (await b.newContext()).newPage();
 const t0 = Date.now();
-await p.goto(`http://127.0.0.1:8771/game3d/index.html?test=fast&q=${QUAL}${arg('extra', '')}`);
+await p.goto(`http://127.0.0.1:8771/${process.env.BASE || 'game3d'}/index.html?test=fast&q=${QUAL}${arg('extra', '')}`);
 await p.waitForFunction(() => window.__game && window.__game.place, null, { timeout: 120000 });
 
 const grab = () => p.evaluate(() => new Promise((ok) => requestAnimationFrame(() => ok(window.__game.renderer.domElement.toDataURL('image/png').split(',')[1]))));

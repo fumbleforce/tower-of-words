@@ -88,6 +88,15 @@ await withBrowserJob('perf-hitch', async (browser) => {
         window.__gl.push([t, performance.now() - t, 'snapshot']);
         return r;
       };
+      // the snapshot as main.js takes it now: the WebGL canvas copied into the #xfade canvas
+      const C2D = window.CanvasRenderingContext2D;
+      const di = C2D.prototype.drawImage;
+      C2D.prototype.drawImage = function (src, ...a) {
+        const t = performance.now();
+        const r = di.call(this, src, ...a);
+        if (src instanceof HTMLCanvasElement) window.__gl.push([t, performance.now() - t, 'snapshot']);
+        return r;
+      };
     });
     await page.goto(`http://127.0.0.1:8771/${base}/index.html?place=${from}&skip&q=${process.env.Q ?? 1}${process.env.GLDETAIL ? "&gldetail" : ""}`);
     await page.waitForFunction(() => window.__game?.place && window.__game.walker, null, { timeout: 60000 });

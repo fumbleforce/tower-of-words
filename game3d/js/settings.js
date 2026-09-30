@@ -79,9 +79,10 @@ export function qualityTier() {
   if (settings.quality !== 'auto') return settings.quality;
   const r = window.__game && window.__game.renderer;
   if (r && r.userData && r.userData.software) return 'low';
-  const phone = document.body.classList.contains('phone') || Math.min(innerWidth, innerHeight) < 600;
-  return phone ? 'medium' : 'high';
+  return isPhone() ? 'medium' : 'high';
 }
+// the phone layout (body.phone) or a phone-sized screen: the tier above and the lighter phone places (perf/phone.js)
+export const isPhone = () => document.body.classList.contains('phone') || Math.min(innerWidth, innerHeight) < 600;
 window.__qualityTier = qualityTier;
 
 // The UI scales with the screen (Jørgen, QHD: "default interface size is probably too small"): 1 at 1366 x 860 CSS
