@@ -6,7 +6,7 @@ import { flags } from '../state.js';
 import { flagKeys } from '../engine-flags.js';
 const ENGINE_KEYS = flagKeys('game3d/js/narrative/hooks/movement.js');
 
-export function installMovementHooks(game, { rigOf, posOf, isPlayer }) {
+export function installMovementHooks(game, { rigOf, posOf, aimOf, isPlayer }) {
   const H = game.hooks;
   const ui = game.ui;
   H.walk = async ({ who, to, wait = true, speed }) => {
@@ -92,7 +92,7 @@ export function installMovementHooks(game, { rigOf, posOf, isPlayer }) {
   };
   H.look = ({ who, at }) => {
     const r = rigOf(who);
-    const p = posOf(at);
+    const p = aimOf(at);
     if (r && p) r.lookTarget = p;
   };
   // Eric on a bench outside the train and office (those two seat him themselves, with their props): he walks to the
