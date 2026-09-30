@@ -3,7 +3,7 @@
 import { PAL, mat, textTexture, plane, JP_FONT } from '../../props.js';
 import { lightPool } from '../../places/life.js';
 import { monument } from '../forecourt/details.js';
-import { GF, T, TOP, LU, LN, DOOR_U, DOOR_W, parts, hash, bayLines } from './frame.js';
+import { GF, T, TOP, LU, LN, DOOR_U, DOOR_W, NU, NT, parts, hash, bayLines } from './frame.js';
 
 // the upper floors: curtain wall with floor bands on every face, pale fins on the two faces the camera sees
 // (south and east), the roof with its parapet and plant; plus the lobby's glass front above the sill
@@ -47,6 +47,20 @@ export function upper(glass, lit, frame, lobby) {
     [11.8, 13.4, 5.6, 7.4, 0.8],
   ])
     frame.box(u0, u1, TOP, TOP + h, n0, n1);
+  // the cut's faces, where the tower stands on round the storeys that fade over the lobby (frame.js NOTCH): glazing
+  // set back from the cut line, a pale slab edge at every floor and mullions on the bay lines, like an inner facade;
+  // and the soffit of the first storey that stays
+  for (let k = 0; k <= 3; k++) {
+    const y = GF + k * fh,
+      y0 = k ? y - 0.12 : y;
+    frame.box(NU, NU + 0.16, y0, y + 0.22, 0, LN + 0.16);
+    frame.box(0, NU, y0, y + 0.22, LN, LN + 0.16);
+  }
+  glass.box(NU + 0.1, NU + 0.16, GF, NT, 0, LN + 0.1);
+  glass.box(0, NU + 0.1, GF, NT, LN + 0.1, LN + 0.16);
+  for (const n of [1.55, 3.1, 4.65]) frame.box(NU, NU + 0.14, GF, NT, n - 0.03, n + 0.03);
+  for (const u of bayLines(W)) if (u > 0.2 && u < NU - 0.2) frame.box(u - 0.03, u + 0.03, GF, NT, LN, LN + 0.14);
+  frame.box(0, NU, NT, NT + 0.12, 0, LN);
   // the lobby's glass front above the sill, its mullions, the transom and the door posts
   const posts = [DOOR_U - DOOR_W / 2, DOOR_U + DOOR_W / 2];
   for (const [u0, u1] of [
@@ -111,13 +125,16 @@ export function ground(g, frame) {
       if (u < LU) frame.box(u - 0.11, u + 0.11, 0.5, GF, -0.12, 0.02);
     }
   for (const n of bayLines(D)) pierP.box(W - 0.02, W + 0.12, SUNK, GF, Math.max(0, n - 0.11), Math.min(D, n + 0.11));
-  // the service block's ceiling, where the building is cut when the floors above fade: a pale cap over everything
-  // but the lobby, so the rooms next door stay closed
+  // the strip of the ground floor between the lobby's east wall and the cut's east face (frame.js NU): a pale cap
+  // over it, like every cut wall's top, so the room next door stays closed
   const capP = parts();
-  capP.box(LU, W, GF - 0.02, GF, 0.02, D - 0.02);
-  capP.box(0.02, LU, GF - 0.02, GF, LN, D - 0.02);
+  capP.box(LU, NU + 0.1, GF - 0.02, GF, 0.02, LN + 0.1);
   wallP.box(0, W, SUNK, GF, D - wt, D); // north face
   wallP.box(0, wt, SUNK, GF, 0, D - wt); // west face (the lobby's west wall)
+  // the service door at the north end of the west face, where the service way from the court ends, under a hood
+  const sd = D - 1.2;
+  sillP.box(-0.04, 0, 0, 2.0, sd - 0.7, sd + 0.7);
+  frame.box(-0.8, 0, 2.08, 2.16, sd - 0.95, sd + 0.95);
   wallP.box(LU, LU + wt, 0, GF, wt, D - wt); // the lobby's east wall, between the south and north faces
   wallP.box(wt, LU, 0, GF, LN, LN + wt); // the lobby's back wall, between its west and east walls
   floorP.box(LU, W, -0.04, 0.012, 0, D);

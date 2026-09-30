@@ -28,13 +28,14 @@ const { STATION, DOOR_X, X0, SE, ZN, HZ, HO_X, COURT, BIKES, GARDEN, LANE, LANE_
 const WALK = [X0 + 0.2, PL.LANE_WALK, HZ - 6.4, BIKES[3]];
 const lanePt = (x) => [x, LANE_Z];
 
-// beyond the court: lawns round the paving, a few trees near it in small groups (the lane's groves are in
+// beyond the court: lawns round the paving, a few trees near it in small groups (the lane's gardens are in
 // lane.js), and the layout's buildings further out (skyline)
 function* town(root) {
   const G = TOWN.grass;
   groundPatches(root, [
     [-14, X0, -16, 16, G], // west of the court and the station, under the platform shed
     [X0, SERVICE[0], -16, HZ, G], // north of the court, round the wing
+    [SERVICE[0], TE, -16, SERVICE[2], G], // north of the service way and the tower
     [TE, 60, -16, STRIP_N[2], G], // east of the tower, north of the lane
     [LANE[0], 60, STRIP_S[3], 16, G], // south of the lane
     [SE, GARDEN[1], BIKES[3], 16, G], // south of the bike court and the garden

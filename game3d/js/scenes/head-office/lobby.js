@@ -97,6 +97,20 @@ export function furniture(g) {
   g.add(stand);
   // the entrance mat inside the door
   g.add(rbox(1.5, 0.012, 1.0, '#3c4658', { x: DOOR_U, z: -0.75, r: 0.004, cast: false }));
+  // the floor: the court's walk carried in as a dark stone runner with pale edges from the door mat to the lifts,
+  // the guide line from the door to the reception counter, and a rug under the sofas
+  const flat = (w, d, u, n, color, y = 0.013) =>
+    g.add(rbox(w, 0.006, d, color, { x: u, y, z: -n, r: 0.002, cast: false }));
+  const [r0, r1] = [1.25, 3.95];
+  flat(1.7, r1 - r0, DOOR_U, (r0 + r1) / 2, '#4d535c');
+  for (const s of [-1, 1]) flat(0.12, r1 - r0, DOOR_U + s * 0.91, (r0 + r1) / 2, '#a9adb1');
+  // (to the counter's front, where a visitor stands, ending in a square of warning dots)
+  const guide = '#c9a93f',
+    gn = RECEPTION[1] - 0.8;
+  flat(0.3, gn + 0.15 - 0.3, DOOR_U, (0.3 + gn + 0.15) / 2, guide, 0.018);
+  flat(DOOR_U + 0.15 - RECEPTION[0], 0.3, (RECEPTION[0] + DOOR_U + 0.15) / 2, gn, guide, 0.018);
+  flat(0.6, 0.6, RECEPTION[0], gn, guide, 0.019);
+  flat(2.9, 2.1, 7.88, 2.75, '#4f5a66', 0.011);
 }
 // the same pieces as walk-grid rectangles in (u, n), and the name stone outside
 export const FURNITURE = [
@@ -219,7 +233,7 @@ export function core(root) {
   span(X - 1.42, W0, H + 0.006, H + 0.02, zf - 0.18, zf, mat('#a3a9b3', { roughness: 0.8 })).name = 'ho:liftWallCap';
   // the shafts east of the B2 car, the stairwell and the riser are closed at the cut by a solid top in the walls'
   // cap colour, so the core reads as one solid block from the lobby; the B2 shaft's lid is the lift's own (its
-  // cap in scenes/head-office.js FORECOURT_LIFT_SITE, the same colour), which clears while the car rides
+  // cap in scenes/head-office.js FORECOURT_LIFT_SITE, toned to match), which clears while the car rides
   span(W0 - 0.12, x1 - 0.18, H, H + 0.012, zi[0], zi[1], wallTop);
   root.add(g);
   // two warm lamps beside the B2 car, a pool of light in front of the lifts
