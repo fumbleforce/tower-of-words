@@ -36,7 +36,7 @@ import { walkPerson, stepPeople, lookAt } from '../story.js';
 import { rbox, mat, emissive, textTexture, plane, JP_FONT, plant as propPlant } from '../props.js';
 import { glide, withList } from './lobby.js';
 import { standOut, walkRig } from '../move.js';
-import { damp, goalSpot } from '../cam.js';
+import { damp, goalSpot, widenTo } from '../cam.js';
 import { flags } from '../narrative/state.js';
 import { dust, lightPool } from './life.js';
 import { route } from './route.js';
@@ -634,7 +634,7 @@ export async function trainPlace(game) {
     vel: [0, 0, 0, 0],
     smooth: 0.32,
     wanted(p) {
-      if (this.close) return [new THREE.Vector3(this.close.x, 0.45, this.close.z), this.fitDist / this.close.zoom];
+      if (this.close) return widenTo(camera, this.close, this.fitDist, this.follow && p?.z > LZ && p.z);
       const t = this.base.clone();
       if (!p) return [t, this.fitDist];
       const clamp = THREE.MathUtils.clamp,

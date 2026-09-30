@@ -35,6 +35,20 @@ const calm = () => !!(window.__settings && window.__settings.reduceMotion);
 
 // where the current goal is used (the first enabled marker the story marks as the goal), in the place's own space
 const GOAL_LEAN = 1.1;
+// The train's story shot ({x, z, zoom}; a phone's screen-horizontal axis is z), widened toward z `keep` when that is
+// off the side: the shot keeps its far edge, so the doors and Hamada stay in and Eric and Mio on the platform come into
+// frame through 待って and the departure (QA-1 #15: the phone lost Eric entirely; work #10).
+export function widenTo(camera, { x, z, zoom }, fitDist, keep) {
+  const t = new THREE.Vector3(x, 0.45, z),
+    d = fitDist / zoom;
+  if (keep === false || keep == null) return [t, d];
+  const k = Math.tan(THREE.MathUtils.degToRad(camera.fov / 2)) * camera.aspect,
+    lo = z - d * k,
+    hi = Math.max(z + d * k, keep + 0.75);
+  t.z = (lo + hi) / 2;
+  return [t, (hi - lo) / 2 / k];
+}
+
 export function goalSpot(game = window.__game) {
   if (!game || !game.markers || game.busy) return null;
   for (const m of game.markers.list) {
@@ -131,6 +145,10 @@ export class RoomCam {
   release() {
     if (this.close) this.smooth = RELEASE;
     this.close = null;
+  }
+  // still easing back out of a story shot (update() hands it back to the follow spring once it has arrived)
+  get releasing() {
+    return this.smooth === RELEASE;
   }
   // a small push-in and back (learned moments): k 0..1 of 5 % closer, over `secs`
   nudge(secs = 0.9) {
