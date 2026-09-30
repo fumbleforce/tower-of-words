@@ -12,7 +12,7 @@ import { blob } from '../engine.js';
 import { rbox } from '../props.js';
 import { K } from '../scenes/office.js';
 import { AWNING } from '../scenes/plaza-buildings.js';
-import { TERRACE_TABLES as T, chairAt, terraceChair, STACKED_Y } from '../scenes/plaza/furniture.js';
+import { TERRACE_TABLES as T, chairAt, chairBlock, terraceChair, STACKED_Y } from '../scenes/plaza/furniture.js';
 import { flags } from '../narrative/state.js';
 import { route } from './route.js';
 import { hold, lean } from './eric-hold.js';
@@ -83,6 +83,16 @@ export function canteenClosing(game, root, nav, chairs) {
     else stand(AT.table, face(AT.table, AT.eric));
     if (!carrying) put(theirs, chairAt(x, z, EAST, stacked));
     hold(game.player, 'reach', s === 'taken');
+    // the walk grid: the chairs standing round the tables in the day, none once they are up on the tables; the two
+    // loose ones only while they stand on the ground (not in the worker's hands)
+    nav.unblock('terrace-chairs');
+    const standing = !evening
+      ? [chairAt(x, z, SOUTH), chairAt(x, z, EAST)]
+      : s === 'open'
+        ? [chairAt(x, z, SOUTH)]
+        : [];
+    for (const b of [...(evening ? [] : chairs.blocks), ...standing.map(chairBlock)])
+      nav.blockTagged('terrace-chairs', ...b);
   }
 
   // a chair lifted, turned over and set upside down on the table (from wherever it is now)

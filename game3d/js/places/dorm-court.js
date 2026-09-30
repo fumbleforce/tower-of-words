@@ -8,6 +8,7 @@ import { walkIn } from './edge-walk.js';
 import { dormBath } from './dorm-bath.js';
 import { glide } from '../move.js';
 import { PLACE_DETAILS } from './catalog.js';
+import { found } from '../finds/index.js';
 import { snapshotPeople, restorePeople } from './saved-people.js';
 
 // The dorm courtyard, on the walk home after work; it also loads with ?place=dorm_court.
@@ -77,6 +78,7 @@ export async function dormCourtPlace(game) {
     music: 'night',
     grade: EVENING_GRADE,
     things,
+    findProps: { bakery_flyer: mb.flyer }, // what taking the flyer hides (finds/index.js)
     spots,
     seats: {},
     people: {},
@@ -92,7 +94,7 @@ export async function dormCourtPlace(game) {
         mbState.open = open;
         if (open) {
           mbState.seen = true;
-          mb.flyer.visible = true;
+          mb.flyer.visible = !found('bakery_flyer'); // once taken (the `find` hook) the box is empty
           cam.closeOn(mb.at, MAIL_ZOOM, mb.y - 0.03);
         }
         const from = mb.flap.rotation.y,
@@ -145,7 +147,7 @@ export async function dormCourtPlace(game) {
       const m = saved.world?.mailbox;
       if (m) {
         Object.assign(mbState, m);
-        mb.flyer.visible = !!m.seen;
+        mb.flyer.visible = !!m.seen && !found('bakery_flyer');
         mb.flap.rotation.y = m.open ? FLAP_OPEN : 0;
         if (m.open) cam.closeOn(mb.at, MAIL_ZOOM, mb.y - 0.03);
       }

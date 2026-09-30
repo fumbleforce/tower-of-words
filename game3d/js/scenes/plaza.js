@@ -21,7 +21,15 @@ import { lightSet } from './outdoor/furniture.js';
 import { canteen, shopStreet, clinicCross } from './plaza-buildings.js';
 import { buildGround } from './plaza/ground.js';
 import { buildGreen } from './plaza/green.js';
-import { buildLamps, buildBenches, buildNoticeBoard, buildTerrace, buildBikes, buildLife } from './plaza/furniture.js';
+import {
+  buildLamps,
+  buildBenches,
+  buildNoticeBoard,
+  buildTerrace,
+  buildBikes,
+  PIGEON_HOME,
+} from './plaza/furniture.js';
+import { pigeons } from './outdoor/pigeons.js';
 import { fountain } from './plaza/fountain.js';
 import * as P from './plaza/plan.js';
 
@@ -70,12 +78,12 @@ export function* plazaSteps() {
   yield;
   const uplit = buildLamps(lights, p, nav, root);
   buildBenches(p, nav);
-  buildNoticeBoard(p, nav);
+  const board = buildNoticeBoard(p, nav);
   const chairs = buildTerrace(root, nav);
   buildBikes(root, nav);
-  buildLife(p);
   p.build(root);
   const lit = lights.build(root, { poolY: 0.028 }); // over the circle's stones
+  const flock = pigeons(root, PIGEON_HOME, { n: 6 });
   yield;
   const hall = canteen(root, CANTEEN, building('canteen').floorH, DOOR_X);
   yield;
@@ -127,6 +135,8 @@ export function* plazaSteps() {
     laneZ,
     laneHalf: HALF,
     camera: { elev: 46, fov: 24 },
+    board, // the notice board: where it stands and its top
+    pigeons: flock, // the flock by the fountain; the place feeds it Eric's position
     chairs, // the terrace chairs, standing or stacked for closing (places/canteen-closing.js)
     update(dt, t) {
       water.update(t);

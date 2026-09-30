@@ -13,6 +13,7 @@ import { SmoothWalker } from '../move.js';
 import { playMusic } from '../ui.js';
 import { sim, PERIODS as PERIOD_ORDER, absorb, applySchedule, save } from '../sim.js';
 import * as trips from '../trips.js';
+import { installFinds, addFindSpots, syncFinds } from '../finds/index.js';
 
 const MUSIC = { train: 'calm', gate: 'lively', office: 'office' };
 // places the draw-call pass (js/perf/batch.js) runs on
@@ -23,6 +24,7 @@ export function createPlaceLifecycle(
   { PLACES, setComposer, resize, buildMarkers, nearSet, zoneSet, snapshot, crossfade },
 ) {
   const ui = game.ui;
+  installFinds(game); // the photos and papers Eric picks up (finds/index.js)
   // preparation runs a slice a frame while a place is being played, flat out while the player waits for it
   setUrgent(() => !game.place || document.body.classList.contains('loading'));
   async function prepare(name) {
@@ -40,6 +42,7 @@ export function createPlaceLifecycle(
         await sliced(lookSteps(place, game));
         lightenForPhone(place, name); // phones only: less detail where it barely shows (js/perf/phone.js)
         if (BATCHED.has(name)) optimizePlace(place, { game, ...phoneBatch() });
+        addFindSpots(game, place); // after the draw-call pass, so each print stays its own mesh to hide
         // shaders and textures ready before the first frame there, so entering doesn't stall (js/perf/warm.js)
         place.warm = await warmPlace(game.renderer, place, {
           extra: [game.player?.root, game.mioNpc?.root],
@@ -118,6 +121,7 @@ export function createPlaceLifecycle(
       }[sim.period],
     );
     playMusic(sim.period === 'evening' ? 'night' : place.music || MUSIC[name] || 'calm');
+    syncFinds(place); // prints already picked up stay gone, also after a load
     buildMarkers(place);
     ui.goal('');
     if (persist) save(game);

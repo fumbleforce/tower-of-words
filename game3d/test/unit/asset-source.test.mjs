@@ -39,7 +39,7 @@ test('asset source data includes the actual words, cast, music, sounds and style
     dorms: { eric: 3 },
     transitions: { sales1: 2, sales2: 1 },
   });
-  assert.equal(data.icons.length, 17);
+  assert.equal(data.icons.length, 18); // 18th: the Photos chip (ui/finds-view.js)
 });
 
 test('the full public scanner registers parsed metadata and preserves existing icon IDs', () => {

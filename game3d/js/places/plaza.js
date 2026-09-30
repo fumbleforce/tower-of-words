@@ -10,6 +10,7 @@ import { PLACE_DETAILS } from './catalog.js';
 import { snapshotPeople, restorePeople } from './saved-people.js';
 import { walkOut, walkIn } from './edge-walk.js';
 import { canteenClosing } from './canteen-closing.js';
+import { hasBoard, readBoard } from '../finds/index.js';
 
 // The fountain plaza: a side trip east of the forecourt in the morning, and on the walk home after work, with the
 // lane on east to the dorm courtyard.
@@ -65,6 +66,15 @@ export async function plazaPlace(game) {
       face: () => [canteen.person.root.position.x, canteen.person.root.position.z],
       enabled: () => canteen.person.root.visible && !canteen.person._walk,
     },
+    // the notice board: reading it holds its posts up close (ui/finds-view.js), posts from story/finds.js
+    noticeboard: {
+      ...PLACE_DETAILS.plaza.things.noticeboard,
+      anchor: (v) => v.set(w.board.at[0], w.board.top + 0.35, w.board.at[1]),
+      spot: () => [w.board.at[0], w.board.at[1] - 0.85],
+      face: () => w.board.at,
+      enabled: () => hasBoard('plaza_board'),
+      act: () => readBoard('plaza_board'),
+    },
   };
   const P = {
     scene: w.scene,
@@ -99,6 +109,7 @@ export async function plazaPlace(game) {
       dorm_exit: (x, z) => x > w.eastX && z > w.laneZ(x) - 2.4,
     },
     hooks: { canteenChair: canteen.hooks.canteenChair },
+    pigeons: w.pigeons, // the flock by the fountain (scenes/outdoor/pigeons.js), for checks
     fit(aspect) {
       // both: the phone's camera distance (as in the forecourt and the dorm courtyard, so the walks between them
       // crossfade on the same close framing), following him over the plaza, a little ahead to the north
@@ -138,6 +149,7 @@ export async function plazaPlace(game) {
     },
     update(dt, t) {
       w.update(dt, t);
+      w.pigeons.update(dt, t, game.player.root.position);
       canteen.update(dt, t);
       // heading east after work: build the dorm courtyard now, so the walk there needs no loading pause
       if (sim.period === 'evening' && game.player.root.position.x > 2.5 && !game.prepared.dorm_court)

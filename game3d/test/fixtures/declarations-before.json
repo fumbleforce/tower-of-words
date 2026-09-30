@@ -547,7 +547,8 @@
         },
         "mailboxes": {
           "label": "Mailbox 203",
-          "kind": "thing"
+          "kind": "thing",
+          "verb": "Take mail"
         }
       },
       "spots": [
@@ -625,6 +626,11 @@
         "canteen_worker": {
           "label": "Canteen worker",
           "kind": "person"
+        },
+        "noticeboard": {
+          "label": "Notice board",
+          "kind": "thing",
+          "verb": "Read"
         }
       },
       "spots": [

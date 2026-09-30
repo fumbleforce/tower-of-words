@@ -35,6 +35,7 @@ export const ENGINE_WRITES = {
 };
 
 ENGINE_WRITES['game3d/js/gameplay/gifts.js'] = { exact: [], prefix: ['gave_'] };
+ENGINE_WRITES['game3d/js/finds/index.js'] = { exact: [], prefix: ['found_'] };
 ENGINE_WRITES['game3d/js/ui.js'] = { exact: ['say_tip'], prefix: [] };
 
 export const KNOW_PREFIX = 'know_';
