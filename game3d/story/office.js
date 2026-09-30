@@ -41,7 +41,6 @@ export default {
   on: {
     'talk:mori': [
       { if: '!greeted_mori', node: 'mori_wait' },
-      { if: 'got_ticket && !copier_done', node: 'mori_copier_hint' },
       { if: 'lunch_mori && afternoon_on && !mori_echo', node: 'mori_irete_echo' },
       'mori_again',
     ],
@@ -51,6 +50,7 @@ export default {
       { if: '!got_ticket && chair_back', node: 'ticket' },
       { if: 'copier_done && !ticket_closed', node: 'ticket_done' },
       { if: 'lunch_mio && afternoon_on && !mio_echo', node: 'mio_tomatte_echo' },
+      { if: 'got_ticket && !copier_done', node: 'mio_copy_room' },
       'mio_busy',
     ],
     'talk:machine_door': [{ if: '!kenji_intro', node: 'kenji_first' }, { if: '!machine_open && knocked', node: 'mio_opens' }, { if: '!machine_open', node: 'machine_door' }, 'machine_walk_in'],
@@ -162,11 +162,6 @@ export default {
     sumimasen_mori: [
       { do: 'face', who: 'mori', to: 'eric' },
       { if: 'got_ticket && !copier_done', then: [{ do: 'gesture', who: 'mori', kind: 'point' }, { do: 'face', who: 'mori', to: 'copier' }], else: [{ do: 'emote', who: 'mori', kind: '?' }] },
-    ],
-    mori_copier_hint: [
-      { do: 'gesture', who: 'mori', kind: 'point' },
-      { do: 'face', who: 'mori', to: 'copier' },
-      { say: 'mori', face: 'flustered', emo: 'sheepish', text: 'コピー機は、あちらです。よく食べるんですよ。', overheard: true },
     ],
     mori_again: [{ do: 'face', who: 'mori', to: 'eric' }, { do: 'bow', who: 'mori' }],
     // after lunch with him, he tries the word on his own cup, and nothing happens
@@ -285,6 +280,7 @@ export default {
       { do: 'cam', back: true },
       { do: 'goal', text: 'Go to the copy room with Mr. Mori.' },
     ],
+    mio_copy_room: [{ say: 'mio', face: 'neutral', emo: 'casual', text: "Copy room is across the corridor. Mori-san went ahead... probably bowing to the copier again." }],
     mio_busy: [
       { if: 'afternoon_on', then: [{ say: 'mio', face: 'tired', emo: 'tired', text: "Now people from upstairs come down to use our copier. ...Sorry, I'm busy." }, { end: true }] },
       { say: 'mio', face: 'tired', emo: 'low', text: "Mm, sorry, I'm in the middle of something." },

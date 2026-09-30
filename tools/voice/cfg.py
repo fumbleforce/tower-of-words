@@ -66,11 +66,15 @@ def speakers():
     sp['bun'] = sp['sales2']; sp['youth'] = sp['sales1']; sp['music'] = sp['kuro']; sp['stander'] = sp['reader']
     # the canteen worker closing the plaza terrace after work (evening discovery): a borrowed voice, not Kuro's
     sp['canteen_worker'] = sp['sales2']
+    # Background people use the approved body-matched contextual Talk presets.
+    sp['worker_a'] = sp['sales2']; sp['worker_b'] = sp['reader']
+    sp['commuter_1'] = sp['sales1']; sp['commuter_2'] = sp['reader']; sp['commuter_3'] = sp['kenji']
     return sp
 
 
-FEMALE = {'mio', 'aoi', 'sales2', 'kuro', 'gatev', 'conductor', 'ann', 'emi', 'bun', 'music', 'canteen_worker'}
-MALE = {'eric', 'guard', 'kuroda', 'sales1', 'mori', 'kenji', 'reader', 'commuter', 'youth', 'stander'}
+FEMALE = {'mio', 'aoi', 'sales2', 'kuro', 'gatev', 'conductor', 'ann', 'emi', 'bun', 'music', 'canteen_worker', 'worker_a'}
+MALE = {'eric', 'guard', 'kuroda', 'sales1', 'mori', 'kenji', 'reader', 'commuter', 'youth', 'stander', 'worker_b',
+        'commuter_1', 'commuter_2', 'commuter_3'}
 LUFS = {'eric': -23.0, 'gatev': -20.0, 'conductor': -20.0, 'ann': -20.0}  # Eric quieter, recorded voices a little under the cast
 LUFS_DEFAULT = -18.0
 

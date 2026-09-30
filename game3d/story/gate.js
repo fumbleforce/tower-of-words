@@ -8,6 +8,11 @@ export default {
     kuroda: { name: 'Man from the train' },
     gatev: { name: 'The gate' },
     commuter: { name: 'Office worker' },
+    worker_a: { name: 'Office worker' },
+    worker_b: { name: 'Office worker' },
+    commuter_1: { name: 'Office worker' },
+    commuter_2: { name: 'Office worker' },
+    commuter_3: { name: 'Office worker' },
     miotext: { name: 'Mio', role: 'message', color: '#5fc6bf', phone: true },
   },
 
@@ -23,6 +28,11 @@ export default {
   start: 'lobby_in',
 
   on: {
+    'idle:worker_a': 'idle_worker_a',
+    'idle:worker_b': 'idle_worker_b',
+    'idle:commuter_1': { if: 'jammed && !gate_through_way', node: 'idle_commuter_1' },
+    'idle:commuter_2': { if: 'jammed && !gate_through_way', node: 'idle_commuter_2' },
+    'idle:commuter_3': { if: 'jammed && !gate_through_way', node: 'idle_commuter_3' },
     'event:card_red': [{ if: '!guard_asked', node: 'card_red' }, 'card_red_again'],
     'zone:past_gate': { node: 'past_gate', once: true },
     'zone:lift_front': { if: 'gate_through', node: 'to_lift', once: true },
@@ -77,6 +87,26 @@ export default {
   labels: { signin: 'Visitor book', guard: 'Guard', bench_r: 'Bench', kuroda: 'Man from the train' },
 
   nodes: {
+    idle_worker_a: [
+      { say: 'worker_a', voice: 'gate-worker-a-ohayo', overheard: true, emo: 'polite', text: '{ohayo}。' },
+      { do: 'bow', who: 'worker_a', depth: 'small' },
+    ],
+    idle_worker_b: [
+      { say: 'worker_b', voice: 'gate-worker-b-busy', overheard: true, emo: 'polite', text: 'あ、{sumimasen}、今ちょっと…' },
+      { do: 'bow', who: 'worker_b', depth: 'small' },
+    ],
+    idle_commuter_1: [
+      { do: 'look', who: 'commuter_1', at: 'gate' },
+      { say: 'commuter_1', voice: 'gate-commuter-1-wait', overheard: true, emo: 'low', text: 'ゲート、まだみたいですね…', clear: ['ゲート'] },
+    ],
+    idle_commuter_2: [
+      { do: 'look', who: 'commuter_2', at: 'gate' },
+      { say: 'commuter_2', voice: 'gate-commuter-2-wait', overheard: true, emo: 'low', text: 'ゲート、まだみたいですね…', clear: ['ゲート'] },
+    ],
+    idle_commuter_3: [
+      { do: 'look', who: 'commuter_3', at: 'gate' },
+      { say: 'commuter_3', voice: 'gate-commuter-3-wait', overheard: true, emo: 'low', text: 'ゲート、まだみたいですね…', clear: ['ゲート'] },
+    ],
     // ------------------------------------------------------------------ in the door: the guard greets people, so Eric sees how it's done
     lobby_in: [
       { do: 'goal', text: 'Say good morning to the guard.' },

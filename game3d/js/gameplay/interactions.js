@@ -190,7 +190,7 @@ export function installInteractions(game) {
   }
   // what E does on a target now: talk to a person, the story's talk: trigger, or the thing's own act or look line
   function canUse(item) {
-    return !!(game.place.people[item.id] || game.runner.has('talk:' + item.id) || item.act || item.look);
+    return !!(isPerson(game, item) || game.runner.has('talk:' + item.id) || item.act || item.look);
   }
   // Say goes in a target's action menu when a word Eric knows does something there now: a say: trigger for it (or
   // for anything), or, on a thing with nothing else to do, its answer to any word (Jørgen: "right now you just see

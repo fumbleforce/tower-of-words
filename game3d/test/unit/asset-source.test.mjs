@@ -31,10 +31,10 @@ test('asset source data includes the actual words, cast, music, sounds and style
   assert.ok(data.stories.office.speakers.mio > 0);
   assert.deepEqual(Object.fromEntries(Object.entries(data.stories).map(([place, story]) => [place, story.speakers])), {
     train: { mio: 50, aoi: 3, bun: 2, youth: 2, music: 2, stander: 2, eric: 6, ann: 2, kuroda: 2, reader: 1 },
-    gate: { guard: 19, commuter: 2, eric: 4, gatev: 6, kuroda: 8, miotext: 1 },
+    gate: { worker_a: 1, worker_b: 1, commuter_1: 1, commuter_2: 1, commuter_3: 1, guard: 19, commuter: 2, eric: 4, gatev: 6, kuroda: 8, miotext: 1 },
     forecourt: { eric: 1, kuro: 5 },
-    plaza: { eric: 1, canteen_worker: 1 },
-    office: { kenji: 17, mori: 19, mio: 45, eric: 5, emi: 3 },
+    plaza: { eric: 1, canteen_worker: 3 },
+    office: { kenji: 17, mori: 18, mio: 46, eric: 5, emi: 3 },
     dorm_court: {},
     dorms: { eric: 3 },
     transitions: { sales1: 2, sales2: 1 },
