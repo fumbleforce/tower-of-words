@@ -7,6 +7,7 @@ import { STORY_FILES } from '../game3d/js/places/definitions.js';
 
 export const SOURCES = [
   ['reviews/', 'The review queue: each item\'s review.json and Jørgen\'s feedback.json'],
+  ['showcase/', 'The Showcase log: each entry\'s entry.json and Jørgen\'s feedback.json'],
   ['GUIDE.md', 'Rules and decisions: every quote on these pages'],
   ['game3d/story/train.js', 'Who speaks on the train, their lines, the words taught there'],
   ['game3d/story/gate.js', 'Who speaks at the gate, their lines, the words taught there'],
@@ -61,13 +62,15 @@ export async function loadLive(ROOT, snapshot, extraFiles = []) {
     return (snapshot && snapshot[p]) || [];
   };
 
-  const loadReviews = async () => {
-    const dirs = (await listDir('reviews/')).filter((f) => /^[a-z0-9][a-z0-9-]*\/$/.test(f)).map((f) => f.slice(0, -1));
+  // reviews/<id>/review.json and showcase/<id>/entry.json, each with Jørgen's feedback.json; newest first
+  const loadItems = async (folder, file) => {
+    const dirs = (await listDir(folder + '/')).filter((f) => /^[a-z0-9][a-z0-9-]*\/$/.test(f)).map((f) => f.slice(0, -1));
     const get = async (p) => { try { const r = await fetch(abs(p), { cache: 'no-cache' }); return r.ok ? await r.json() : null; } catch (_) { return null; } };
-    const out = await Promise.all(dirs.map(async (id) => ({ id, ...(await get(`reviews/${id}/review.json`) || { broken: true }), feedback: await get(`reviews/${id}/feedback.json`) })));
+    const out = await Promise.all(dirs.map(async (id) => ({ id, ...(await get(`${folder}/${id}/${file}`) || { broken: true }), feedback: await get(`${folder}/${id}/feedback.json`) })));
     return out.filter((r) => !r.broken).sort((a, b) => String(b.date || '').localeCompare(String(a.date || '')) || a.id.localeCompare(b.id));
   };
-  L.reloadReviews = async () => { L.reviews = await loadReviews(); return L.reviews; };
+  L.reloadReviews = async () => { L.reviews = await loadItems('reviews', 'review.json'); return L.reviews; };
+  L.reloadShowcase = async () => { L.showcase = await loadItems('showcase', 'entry.json'); return L.showcase; };
 
   const mods = {};
   const tasks = [
@@ -94,7 +97,8 @@ export async function loadLive(ROOT, snapshot, extraFiles = []) {
     (async () => { L.voiceRefs = (await listDir('tools/voice-refs/')).filter((f) => /\.(wav|mp3)$/.test(f)); })(),
     (async () => { L.walkthroughs = (await listDir('notes/walkthrough/')).filter((f) => f.endsWith('.md')); })(),
     (async () => { L.shotDirs = (await listDir('game3d/shots/')).filter((f) => f.endsWith('/')); })(),
-    (async () => { L.reviews = await loadReviews(); })(),
+    L.reloadReviews(),
+    L.reloadShowcase(),
   ];
   await Promise.all(tasks);
 

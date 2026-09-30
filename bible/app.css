@@ -380,8 +380,8 @@ a.rrow:hover { text-decoration: none; border-color: var(--accent); }
 .rcom { width: 100%; font: inherit; font-size: 14px; border: 1px solid var(--line); border-radius: 8px; padding: 8px 10px; background: var(--bg); color: var(--ink); resize: vertical; }
 .rcom:focus { outline: 2px solid var(--accent); outline-offset: 0; }
 .rsend { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; margin: 14px 0 0; position: sticky; bottom: 0; background: var(--bg); padding: 10px 0; border-top: 1px solid var(--line); }
-#rsend { min-height: 46px; padding: 0 28px; border: 0; border-radius: 9px; background: var(--accent); color: var(--panel); font-weight: 700; font-size: 15px; cursor: pointer; }
-#rsend:disabled { opacity: .6; }
+.rsendbtn { min-height: 46px; padding: 0 28px; border: 0; border-radius: 9px; background: var(--accent); color: var(--panel); font-weight: 700; font-size: 15px; cursor: pointer; }
+.rsendbtn:disabled { opacity: .6; }
 .ok { color: var(--ok); } .err { color: var(--no); }
 @media (max-width: 860px) {
   .rrow { grid-template-columns: 72px minmax(0, 1fr); }
@@ -389,6 +389,19 @@ a.rrow:hover { text-decoration: none; border-color: var(--accent); }
   .rst { grid-column: 1 / -1; flex-direction: row; justify-content: flex-start; flex-wrap: wrap; }
 }
 .rmedia img { max-height: 78vh; object-fit: contain; }
+
+/* ---- showcase log: the review option cards with a flag instead of pick/star/reject ---- */
+.scentry { border-top: 1px solid var(--line); padding-top: 18px; margin-top: 26px; }
+.page.showcase > .crumbs + .scentry { border-top: 0; padding-top: 0; margin-top: 0; }
+.sctitle { margin: 0 0 6px; }
+.sctitle a { color: inherit; }
+.scsec { margin: 18px 0 6px; }
+.scsec > h3 { margin: 0 0 2px; }
+.scsec > p { margin: 0 0 10px; max-width: 70ch; }
+.scall { display: flex; flex-direction: column; gap: 8px; margin-top: 18px; max-width: 760px; }
+.racts .rflag[aria-pressed="true"] { background: var(--new-bg); color: var(--new); border-color: var(--new); font-weight: 600; }
+.ropt.flagged { border-color: var(--new); }
+.pill.mono { font-family: var(--mono); }
 
 /* Stories (docs/game/stories/) and places from docs/game/places.md */
 .stories { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr)); gap: 14px; margin: 18px 0 8px; }

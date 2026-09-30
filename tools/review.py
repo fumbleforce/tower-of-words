@@ -1,13 +1,15 @@
 #!/usr/bin/env python3
-"""Read Jørgen's review feedback from the terminal.
+"""Read Jørgen's Review and Showcase feedback from the terminal.
 
-    python3 tools/review.py list              every item: status, new feedback, title
-    python3 tools/review.py show <id>         the question, the options and all his feedback
+    python3 tools/review.py list              every item and showcase entry: status, new feedback, title
+    python3 tools/review.py show <id>         the item or entry and all his feedback
     python3 tools/review.py mark-read <id>    mark the latest feedback as read (it stops showing as "new")
-    python3 tools/review.py set-status <id> open|decided|superseded [--decision "text"]
+    python3 tools/review.py set-status <id> open|decided|superseded [--decision "text"]   (Review items only)
 
-Items live in reviews/<id>/review.json; his answers in reviews/<id>/feedback.json (written by the bible's Send
-button through tools/review_server.py). How to add an item: reviews/README.md.
+<id> is looked up in reviews/, then showcase/; `showcase/<id>` picks the showcase entry. Review items live in
+reviews/<id>/review.json (how to add one: reviews/README.md); showcase entries in showcase/<id>/entry.json
+(showcase/README.md). His answers are <folder>/<id>/feedback.json, written by the bible's Send button through
+tools/review_server.py.
 """
 import json
 import os
@@ -15,15 +17,16 @@ import sys
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 REVIEWS = os.path.join(ROOT, 'reviews')
+SHOWCASE = os.path.join(ROOT, 'showcase')
 
 
-def load(rid, name):
-    p = os.path.join(REVIEWS, rid, name)
+def load(rid, name, base=REVIEWS):
+    p = os.path.join(base, rid, name)
     return json.load(open(p, encoding='utf-8')) if os.path.exists(p) else None
 
 
-def save(rid, name, data):
-    p = os.path.join(REVIEWS, rid, name)
+def save(rid, name, data, base=REVIEWS):
+    p = os.path.join(base, rid, name)
     tmp = p + '.tmp'
     with open(tmp, 'w', encoding='utf-8') as f:
         json.dump(data, f, ensure_ascii=False, indent=1)
@@ -31,13 +34,52 @@ def save(rid, name, data):
     os.replace(tmp, p)
 
 
-def items():
+def _folder(base, marker):
     out = []
-    for rid in sorted(os.listdir(REVIEWS)):
-        r = load(rid, 'review.json') if os.path.isdir(os.path.join(REVIEWS, rid)) else None
+    for rid in sorted(os.listdir(base)) if os.path.isdir(base) else []:
+        r = load(rid, marker, base) if os.path.isdir(os.path.join(base, rid)) else None
         if r:
-            out.append((rid, r, load(rid, 'feedback.json')))
+            out.append((rid, r, load(rid, 'feedback.json', base)))
     return out
+
+
+def items():
+    """Review items: (id, review.json, feedback.json or None)."""
+    return _folder(REVIEWS, 'review.json')
+
+
+def showcase_items():
+    """Showcase entries: (id, entry.json, feedback.json or None)."""
+    return _folder(SHOWCASE, 'entry.json')
+
+
+def unread():
+    """Every answer nobody has read yet, from both folders: (kind, id, sent), kind 'review' or 'showcase'."""
+    return [(kind, rid, str(fb.get('sent', ''))) for kind, rows in (('review', items()), ('showcase', showcase_items()))
+            for rid, _r, fb in rows if fb and not fb.get('read')]
+
+
+def resolve(rid):
+    """'<id>', 'reviews/<id>' or 'showcase/<id>' -> (kind, id, folder). Looks in reviews/ first, then showcase/."""
+    rid = rid.strip('/')
+    if rid.startswith('showcase/'):
+        return 'showcase', rid.split('/', 1)[1], SHOWCASE
+    rid = rid.removeprefix('reviews/')
+    if not os.path.isfile(os.path.join(REVIEWS, rid, 'review.json')) and os.path.isfile(os.path.join(SHOWCASE, rid, 'entry.json')):
+        return 'showcase', rid, SHOWCASE
+    return 'review', rid, REVIEWS
+
+
+def showcase_images(e):
+    return list(e.get('images') or []) + [im for sec in e.get('sections') or [] for im in sec.get('images') or []]
+
+
+def showcase_counts(fb):
+    """'2 flagged, 3 comments' for one showcase answer (the entry itself counts like an image)."""
+    marks = [fb] + list((fb.get('items') or {}).values())
+    f = sum(1 for m in marks if m.get('flag'))
+    c = sum(1 for m in marks if str(m.get('comment', '')).strip())
+    return ', '.join(x for x in (f'{f} flagged' if f else '', f"{c} comment{'s' if c != 1 else ''}" if c else '') if x) or 'nothing marked'
 
 
 def label(r, key):
@@ -55,6 +97,9 @@ def cmd_list():
         new = 'NEW ' if fb and not fb.get('read') else '    '
         picked = ', '.join(fb.get('picked', [])) if fb else ''
         print(f"{r.get('status', 'open'):10} {new}{rid:28} {r.get('title', '')}" + (f"  [picked: {picked}]" if picked else ''))
+    for rid, e, fb in sorted(showcase_items(), key=lambda x: x[1].get('date', ''), reverse=True):
+        new = 'NEW ' if fb and not fb.get('read') else '    '
+        print(f"{'showcase':10} {new}{rid:28} {e.get('title', '')}" + (f"  [{showcase_counts(fb)}]" if fb else ''))
 
 
 def show_fb(r, fb, indent=''):
@@ -69,7 +114,50 @@ def show_fb(r, fb, indent=''):
         print(f"{indent}comment: {fb['comment']}")
 
 
+def image_label(e, key):
+    im = next((x for x in showcase_images(e) if x.get('id') == key), {})
+    return f"{key} ({im['caption']})" if im.get('caption') else key
+
+
+def marks(v):
+    return f"{'FLAGGED' if v.get('flag') else ''}{' · ' if v.get('flag') and v.get('comment') else ''}{v.get('comment', '')}"
+
+
+def show_showcase_fb(e, fb, indent=''):
+    print(f"{indent}sent {fb.get('sent')}{'' if fb.get('read') else '  (new)'}")
+    if fb.get('flag') or fb.get('comment'):
+        print(f"{indent}whole entry: {marks(fb)}")
+    for k, v in (fb.get('items') or {}).items():
+        if v.get('flag') or v.get('comment'):
+            print(f"{indent}  {image_label(e, k)}: {marks(v)}")
+
+
+def cmd_show_showcase(rid):
+    e, fb = load(rid, 'entry.json', SHOWCASE), load(rid, 'feedback.json', SHOWCASE)
+    if not e:
+        sys.exit(f'no showcase entry {rid}')
+    print(f"{e.get('title')}  [showcase]  {e.get('date', '')} by {e.get('by', '')}")
+    print(e.get('caption', ''))
+    commit = e.get('commit')
+    if commit:
+        print('commit: ' + (', '.join(commit) if isinstance(commit, list) else str(commit)))
+    for im in showcase_images(e):
+        print(f"  {im.get('id')}: {im.get('caption', '')}  {im.get('image', '')}")
+    print(f"page: http://127.0.0.1:8771/bible/#showcase/{rid}")
+    if not fb:
+        print('\nNo feedback yet.')
+        return
+    print('\nFeedback:')
+    show_showcase_fb(e, fb, '  ')
+    for h in reversed(fb.get('history', [])):
+        print('\n  earlier:')
+        show_showcase_fb(e, h, '    ')
+
+
 def cmd_show(rid):
+    kind, rid, _base = resolve(rid)
+    if kind == 'showcase':
+        return cmd_show_showcase(rid)
     r, fb = load(rid, 'review.json'), load(rid, 'feedback.json')
     if not r:
         sys.exit(f'no review item {rid}')
@@ -91,11 +179,12 @@ def cmd_show(rid):
 
 
 def cmd_mark_read(rid):
-    fb = load(rid, 'feedback.json')
+    _kind, rid, base = resolve(rid)
+    fb = load(rid, 'feedback.json', base)
     if not fb:
         sys.exit(f'no feedback for {rid}')
     fb['read'] = True
-    save(rid, 'feedback.json', fb)
+    save(rid, 'feedback.json', fb, base)
     print(f'{rid}: marked read')
 
 

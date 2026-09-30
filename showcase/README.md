@@ -1,0 +1,50 @@
+# Showcase
+
+The Showcase log in the world bible (http://127.0.0.1:8771/bible/#showcase) is where finished work Jørgen can see goes: a place built, a scene staged, a screen redone. He can flag anything and comment on an entry or on a single picture, but there is nothing to pick. Anything he has to decide goes to Review instead (reviews/README.md).
+
+## Adding an entry
+
+1. Make a folder `showcase/<id>/`. The id is lower case letters, digits and hyphens, for example `town-places-1`.
+2. Put images anywhere in the repo that the server can reach and that stays on this machine (game3d/shots/<job>/ for game captures). Don't commit binaries.
+3. Write `showcase/<id>/entry.json`:
+
+```json
+{
+  "title": "Town places, first pass",
+  "date": "2026-09-30",
+  "by": "claude-agent:town-places",
+  "caption": "One plain line: what is new and where to see it.",
+  "commit": "abc1234",
+  "sections": [
+    {"title": "Station forecourt", "caption": "One plain line.",
+     "images": [{"id": "forecourt-arrive-desk", "image": "game3d/shots/town/forecourt-desk.webp", "caption": "Arriving, desktop"}]}
+  ],
+  "links": [{"label": "Play it", "href": "game3d/"}]
+}
+```
+
+- `commit` is optional and may be a list of commits. `links` is optional; a relative `href` is from the repo root.
+- An entry without sections can use a top-level `images` list of the same image objects instead (or as well; those show first).
+- Image `id`s must be unique within the entry: his feedback is keyed by them.
+- Paths are relative to the repo root.
+
+4. Check it: `node tools/bible/check.mjs` renders every entry and fails on an image path that doesn't resolve or a repeated image id.
+
+Entries are listed newest first by `date`.
+
+## Reading his feedback
+
+He presses Send on an entry and the page saves `showcase/<id>/feedback.json` through tools/review_server.py (POST /api/showcase/<id>, local only). Earlier sends are kept in its `history`. Its shape:
+
+```json
+{"sent": "2026-09-30T12:00:00+0200", "flag": false, "comment": "about the whole entry",
+ "items": {"forecourt-arrive-desk": {"flag": true, "comment": "..."}}, "read": false, "history": [earlier sends]}
+```
+
+```
+python3 tools/review.py list                      # showcase rows too; NEW means nobody has read it
+python3 tools/review.py show <id>                 # the entry and his flags and comments (or showcase/<id>)
+python3 tools/review.py mark-read <id>            # after acting on it
+```
+
+The "New Review/Showcase answers" line at the start of a Claude turn (.claude/hooks/review_new.py) announces new feedback here too.

@@ -3,6 +3,7 @@
 //    portraits, GUIDE quotes, approved art, design notes, build ids. These can't go stale.
 //  - Static (bible/data.json, from tools/bible/build.py): the hand-kept facts in bible/facts.yaml, review pages
 //    (needs git), prompts, and island/private/bible/private.json on the private page.
+// Review (reviews/) and Showcase (showcase/) are read live too, and Jørgen's answers are saved through tools/review_server.py.
 // Paths in the data are relative to the repo root. Plain JS, no build step; ./start serves the repo.
 const ROOT = window.BIBLE_ROOT || '../';
 const PRIVATE_URL = window.BIBLE_PRIVATE || null;
@@ -200,7 +201,7 @@ function wordLabel(id) {
 
 // ------------------------------------------------------------------ pages
 const NAV = [
-  ['review', 'Review'], ['home', 'Home'], ['characters', 'Characters'], ['places', 'Places'], ['place-map', 'Places diagram'], ['story', 'Stories'], ['story-map', 'Story map'],
+  ['review', 'Review'], ['showcase', 'Showcase'], ['home', 'Home'], ['characters', 'Characters'], ['places', 'Places'], ['place-map', 'Places diagram'], ['story', 'Stories'], ['story-map', 'Story map'],
   ['words', 'Words and commands'], ['rules', 'Rules and decisions'], ['art', 'Art and style'], ['audio', 'Audio'],
   ['reviews', 'Review pages'], ['questions', 'Open questions'], ['sources', 'Sources'],
 ];
@@ -220,6 +221,7 @@ function pageHome() {
   const Q = D.questions;
   const tiles = [
     ['review', 'Review', `${openReviews().length} waiting for your pick${(L.reviews || []).filter(unread).length ? `, ${(L.reviews || []).filter(unread).length} answered` : ''}`, openReviews().length],
+    ['showcase', 'Showcase', 'Finished work to look at; flag or comment on anything', (L.showcase || []).length],
     ['characters', 'Characters', `${cast.length} in the game today, ${D.characters.length - cast.length} designed for later`, D.characters.length],
     ['places', 'Places', 'Every place in the game, live from docs/game/places.md', L.places.length],
     ['story', 'Stories', `The storylines in docs/game/stories/, ${L.stories.filter((st) => /^built/.test(st.status)).length} built; design docs marked as not approved`, L.stories.length],
@@ -641,16 +643,42 @@ function notFound() { return `<div class="page"><h1>Not found</h1><p><a href="#h
 const RSTATUS = { open: 'open', decided: 'decided', superseded: 'superseded' };
 const openReviews = () => (L.reviews || []).filter((r) => (r.status || 'open') === 'open');
 const unread = (r) => r.feedback && r.feedback.sent && !r.feedback.read;
-function draftKey(id) { return 'bible-review-draft-' + id; }
-function loadDraft(r) {
+// Both kinds of answer share the draft, send and status code; `kind` is 'review' or 'showcase'.
+const FOLDER = { review: 'reviews', showcase: 'showcase' };
+const FROM_SENT = {
+  review: (f) => ({ picked: [...(f.picked || [])], options: JSON.parse(JSON.stringify(f.options || {})), comment: f.comment || '' }),
+  showcase: (f) => ({ flag: !!f.flag, items: JSON.parse(JSON.stringify(f.items || {})), comment: f.comment || '' }),
+};
+function draftKey(kind, id) { return `bible-${kind}-draft-${id}`; }
+function loadDraft(kind, r) {
   let d = null;
-  try { d = JSON.parse(localStorage.getItem(draftKey(r.id)) || 'null'); } catch (_) { d = null; }
+  try { d = JSON.parse(localStorage.getItem(draftKey(kind, r.id)) || 'null'); } catch (_) { d = null; }
   if (d) return d;
   const f = r.feedback || {};
-  return { picked: [...(f.picked || [])], options: JSON.parse(JSON.stringify(f.options || {})), comment: f.comment || '', fromSent: !!f.sent };
+  return { ...FROM_SENT[kind](f), fromSent: !!f.sent };
 }
-function saveDraft(id, d) { try { localStorage.setItem(draftKey(id), JSON.stringify(d)); } catch (_) {} }
-function clearDraft(id) { try { localStorage.removeItem(draftKey(id)); } catch (_) {} }
+function saveDraft(kind, id, d) { try { localStorage.setItem(draftKey(kind, id), JSON.stringify(d)); } catch (_) {} }
+function clearDraft(kind, id) { try { localStorage.removeItem(draftKey(kind, id)); } catch (_) {} }
+const sentLine = (fb) => fb && fb.sent ? `Last sent ${esc(fb.sent.replace('T', ' ').slice(0, 16))}${fb.read ? ', read by the agents' : ', not read yet'}.` : 'Not sent yet.';
+function markChanged(box) { const st = box.querySelector('.rstate'); st.textContent = 'Changed, not sent yet.'; st.className = 'rstate muted small'; }
+// POST the answer to tools/review_server.py; `box` holds the Send button (.rsendbtn) and the status line (.rstate).
+async function sendAnswer(kind, id, d, box) {
+  const b = box.querySelector('.rsendbtn'), st = box.querySelector('.rstate');
+  b.disabled = true; st.textContent = 'Sending…';
+  try {
+    const res = await fetch(new URL(`api/${kind}/` + encodeURIComponent(id), new URL(ROOT, location.href)).href, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(d) });
+    const j = await res.json().catch(() => ({}));
+    if (!res.ok || !j.ok) throw new Error(j.error || `the server said ${res.status}`);
+    clearDraft(kind, id);
+    await (kind === 'review' ? L.reloadReviews() : L.reloadShowcase());
+    renderNav();
+    st.textContent = `Sent ${j.sent.replace('T', ' ').slice(0, 16)}. Saved to ${FOLDER[kind]}/${id}/feedback.json.`;
+    st.className = 'rstate ok small';
+  } catch (err) {
+    st.textContent = `Not sent: ${err.message}. Saving needs the server from ./start (tools/review_server.py). Your draft is kept in this browser.`;
+    st.className = 'rstate err small';
+  } finally { b.disabled = false; }
+}
 const media = (m, cap) => m.audio
   ? `<figure class="raudio"><audio controls preload="none" src="${esc(url(m.audio))}"></audio><figcaption>${esc(cap || m.caption || m.audio)}</figcaption></figure>`
   : m.image ? `<figure>${img(m.image, cap || m.caption || m.image)}${(cap || m.caption) ? `<figcaption>${inline(cap || m.caption)}</figcaption>` : ''}</figure>` : '';
@@ -688,7 +716,7 @@ function pageReviewQueue() {
 function pageReviewItem(id) {
   const r = (L.reviews || []).find((x) => x.id === id); if (!r) return notFound();
   const st = r.status || 'open';
-  const d = loadDraft(r);
+  const d = loadDraft('review', r);
   const multi = r.multi !== false;
   const fb = r.feedback;
   const opts = (r.options || []).map((o) => {
@@ -719,7 +747,7 @@ function pageReviewItem(id) {
     <div class="ropts" data-lbg>${opts}</div>
     <h2>Overall</h2>
     <textarea class="rcom overall" data-act="overall" rows="4" placeholder="Anything about the round as a whole" aria-label="Overall comment">${esc(d.comment || '')}</textarea>
-    <div class="rsend"><button type="button" id="rsend">Send</button><span id="rstate" class="muted small" aria-live="polite">${fb && fb.sent ? `Last sent ${esc(fb.sent.replace('T', ' ').slice(0, 16))}${fb.read ? ', read by the agents' : ', not read yet'}.` : 'Not sent yet.'}</span></div>
+    <div class="rsend"><button type="button" id="rsend" class="rsendbtn">Send</button><span class="rstate muted small" aria-live="polite">${sentLine(fb)}</span></div>
     ${fb && (fb.history || []).length ? legacyBox('Earlier sends', fb.history.slice().reverse().map((h) => `<div class="fact"><div class="t"><b>${esc((h.sent || '').replace('T', ' ').slice(0, 16))}</b> picked ${esc((h.picked || []).join(', ') || 'nothing')}${h.comment ? `<div class="muted">${esc(h.comment)}</div>` : ''}</div></div>`).join(''), fb.history.length) : ''}
   </div>`;
 }
@@ -754,30 +782,74 @@ function reviewClick(e) {
       el.classList.toggle('rejected', on);
       if (on) { el.classList.remove('picked'); const pk = el.querySelector('[data-act=pick]'); pk.setAttribute('aria-pressed', 'false'); pk.textContent = r.multi === false ? 'Pick this' : 'Pick'; }
     }
-    saveDraft(id, reviewDraftFromDom(page));
-    $('#rstate').textContent = 'Changed, not sent yet.';
+    saveDraft('review', id, reviewDraftFromDom(page));
+    markChanged(page);
     return true;
   }
-  if (e.target.id === 'rsend') { sendReview(page, r); return true; }
+  if (e.target.id === 'rsend') { sendAnswer('review', r.id, reviewDraftFromDom(page), page); return true; }
   return false;
 }
-async function sendReview(page, r) {
-  const d = reviewDraftFromDom(page);
-  const b = $('#rsend'), st = $('#rstate');
-  b.disabled = true; st.textContent = 'Sending…';
-  try {
-    const res = await fetch(new URL('api/review/' + encodeURIComponent(r.id), new URL(ROOT, location.href)).href, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(d) });
-    const j = await res.json().catch(() => ({}));
-    if (!res.ok || !j.ok) throw new Error(j.error || `the server said ${res.status}`);
-    clearDraft(r.id);
-    await L.reloadReviews();
-    renderNav();
-    st.textContent = `Sent ${j.sent.replace('T', ' ').slice(0, 16)}. Saved to reviews/${r.id}/feedback.json.`;
-    st.className = 'ok small';
-  } catch (err) {
-    st.textContent = `Not sent: ${err.message}. Saving needs the server from ./start (tools/review_server.py). Your draft is kept in this browser.`;
-    st.className = 'err small';
-  } finally { b.disabled = false; }
+
+// ------------------------------------------------------------------ showcase log
+// Finished visible work, newest first: showcase/<id>/entry.json (format: showcase/README.md). Jørgen can flag and
+// comment on an entry and on each image, and Send saves showcase/<id>/feedback.json. No picks: decisions go in Review.
+const showcaseSections = (e) => [...((e.images || []).length ? [{ images: e.images }] : []), ...(e.sections || [])];
+function showcaseImage(im, v) {
+  return `<div class="ropt scimg${v.flag ? ' flagged' : ''}" data-item="${esc(im.id)}">
+    <div class="rimg">${img(im.image, im.caption || im.id)}</div>
+    ${im.caption ? `<div class="rlab"><span>${inline(im.caption)}</span></div>` : ''}
+    <div class="racts"><button type="button" class="rflag" data-act="flag" aria-pressed="${!!v.flag}">${v.flag ? '⚑ Flagged' : '⚑ Flag'}</button></div>
+    <textarea class="rcom" data-act="comment" rows="2" placeholder="Comment on this picture" aria-label="Comment on ${esc(im.caption || im.id)}">${esc(v.comment || '')}</textarea>
+  </div>`;
+}
+function showcaseEntry(e, solo) {
+  const d = loadDraft('showcase', e), fb = e.feedback;
+  const H = solo ? 'h1' : 'h2';
+  const commits = [].concat(e.commit || []);
+  return `<article class="scentry" data-showcase="${esc(e.id)}" data-lbg>
+    <${H} class="sctitle">${solo ? esc(e.title) : `<a href="#showcase/${esc(e.id)}">${esc(e.title)}</a>`}</${H}>
+    <div class="pill-row"><span class="pill">${esc(e.date || '')}</span><span class="pill">by ${esc(e.by || '')}</span>${commits.map((c) => `<span class="pill mono" title="${esc(c)}">${esc(String(c).slice(0, 7))}</span>`).join('')}</div>
+    ${e.caption ? `<p class="rq">${inline(e.caption)}</p>` : ''}
+    ${(e.links || []).length ? `<p class="small">${e.links.map((l) => `<a href="${esc(/^https?:|^#/.test(l.href) ? l.href : ROOT + l.href)}">${esc(l.label)}</a>`).join(' · ')}</p>` : ''}
+    ${showcaseSections(e).map((sec) => `<section class="scsec">${sec.title ? `<h3>${esc(sec.title)}</h3>` : ''}${sec.caption ? `<p class="muted">${inline(sec.caption)}</p>` : ''}
+      <div class="ropts">${(sec.images || []).map((im) => showcaseImage(im, (d.items || {})[im.id] || {})).join('')}</div></section>`).join('')}
+    <div class="scall"><div class="racts"><button type="button" class="rflag" data-act="flag" aria-pressed="${!!d.flag}">${d.flag ? '⚑ Flagged' : '⚑ Flag the whole entry'}</button></div>
+      <textarea class="rcom overall" data-act="overall" rows="3" placeholder="Anything about ${esc(e.title)} as a whole" aria-label="Comment on the whole entry">${esc(d.comment || '')}</textarea></div>
+    <div class="rsend"><button type="button" class="rsendbtn" data-act="send">Send</button><span class="rstate muted small" aria-live="polite">${sentLine(fb)}</span></div>
+    ${fb && (fb.history || []).length ? legacyBox('Earlier sends', fb.history.slice().reverse().map((h) => `<div class="fact"><div class="t"><b>${esc((h.sent || '').replace('T', ' ').slice(0, 16))}</b>${h.flag ? ' flagged' : ''}${h.comment ? `<div class="muted">${esc(h.comment)}</div>` : ''}</div></div>`).join(''), fb.history.length) : ''}
+  </article>`;
+}
+function pageShowcase(id) {
+  const all = L.showcase || [];
+  if (id) {
+    const e = all.find((x) => x.id === id); if (!e) return notFound();
+    return `<div class="page showcase"><div class="crumbs"><a href="#showcase">Showcase</a> /</div>${showcaseEntry(e, true)}</div>`;
+  }
+  return `<div class="page showcase"><h1>Showcase</h1>
+    <p class="lede">Finished work you can see, newest first. Nothing here needs a pick; choices go to <a href="#review">Review</a>. Flag anything that looks wrong, comment on an entry or a single picture, and press that entry's Send. Your notes are saved in the repo (showcase/&lt;id&gt;/feedback.json) and the agents read them from there.</p>
+    ${all.map((e) => showcaseEntry(e, false)).join('') || '<p class="muted">Nothing here yet.</p>'}
+    <p class="muted small" style="margin-top:22px">How agents add entries: <a href="#doc/showcase/README.md">showcase/README.md</a>.</p></div>`;
+}
+function showcaseDraftFromDom(box) {
+  const pressed = (el) => el.querySelector('[data-act=flag]').getAttribute('aria-pressed') === 'true';
+  const d = { flag: pressed(box.querySelector('.scall')), comment: box.querySelector('[data-act=overall]').value, items: {} };
+  box.querySelectorAll('.scimg').forEach((el) => {
+    const flag = pressed(el), comment = el.querySelector('[data-act=comment]').value;
+    if (flag || comment) d.items[el.dataset.item] = { flag, comment };
+  });
+  return d;
+}
+function showcaseClick(e) {
+  const box = e.target.closest('.scentry'), btn = e.target.closest('button[data-act]');
+  if (!box || !btn) return false;
+  if (btn.dataset.act === 'send') { sendAnswer('showcase', box.dataset.showcase, showcaseDraftFromDom(box), box); return true; }
+  const on = btn.getAttribute('aria-pressed') !== 'true', card = btn.closest('.scimg');
+  btn.setAttribute('aria-pressed', String(on));
+  btn.textContent = on ? '⚑ Flagged' : card ? '⚑ Flag' : '⚑ Flag the whole entry';
+  if (card) card.classList.toggle('flagged', on);
+  saveDraft('showcase', box.dataset.showcase, showcaseDraftFromDom(box));
+  markChanged(box);
+  return true;
 }
 
 // ------------------------------------------------------------------ search
@@ -801,6 +873,7 @@ function buildIndex() {
   D.story.legacy.concat(D.legacy_rules).forEach((f) => add('Legacy', f.t, 'rules', 'Legacy'));
   add('Art and style', ft(D.art.models) + ft(D.art.quotes) + ft(D.art.donts), 'art', 'Art');
   add('Audio', ft(D.audio.music) + ft(D.audio.quotes), 'audio', 'Audio');
+  (L.showcase || []).forEach((e) => add(e.title, [e.caption, ...showcaseSections(e).flatMap((sec) => [sec.title, sec.caption, ...(sec.images || []).map((im) => im.caption)])].join(' '), `showcase/${e.id}`, 'Showcase'));
   D.reviews.forEach((r) => add(r.title, `${r.path} ${r.what} ${r.note} ${r.status} ${r.date}`, 'reviews', r.group === 'legacy' ? 'Review page (legacy)' : 'Review page'));
   const Q = D.questions;
   Q.open.concat(Q.conflicts).forEach((q) => add('Open question', q.t, 'questions', 'Question'));
@@ -841,10 +914,12 @@ async function route() {
   if (OLD[head]) { head = OLD[head]; rest = []; h = head; }
   const arg = rest.join('/');
   if (head === 'review' && L.reloadReviews) await L.reloadReviews();
+  if (head === 'showcase' && L.reloadShowcase) await L.reloadShowcase();
   let html, after = null;
   switch (head) {
     case 'home': html = pageHome(); break;
     case 'review': html = arg ? pageReviewItem(arg) : pageReviewQueue(); break;
+    case 'showcase': html = pageShowcase(arg); break;
     case 'characters': html = pageCharacters(); break;
     case 'character': html = pageCharacter(arg); break;
     case 'places': html = pagePlaces(); break;
@@ -874,7 +949,7 @@ async function route() {
   $('#main').innerHTML = html;
   if (after) await after();
   const navKey = { character: 'characters', doc: 'story', src: '' }[head] ?? head;
-  if (head === 'review') renderNav();
+  if (head === 'review' || head === 'showcase') renderNav();
   document.querySelectorAll('.nav li a').forEach((a) => a.classList.toggle('on', a.dataset.r === navKey || a.dataset.r === h));
   $('.nav').classList.remove('open');
   if (head !== 'search') { const s = $('#q'); if (document.activeElement !== s) s.value = ''; }
@@ -884,7 +959,7 @@ async function route() {
 }
 
 function renderNav() {
-  const n = { review: openReviews().length, characters: D.characters.length, reviews: D.reviews.filter((r) => r.group === 'current').length, questions: openQuestions().length, words: Object.keys(L.words).length };
+  const n = { review: openReviews().length, showcase: (L.showcase || []).length, characters: D.characters.length, reviews: D.reviews.filter((r) => r.group === 'current').length, questions: openQuestions().length, words: Object.keys(L.words).length };
   const items = NAV.concat(P ? [['rewards', 'Reward pictures']] : []);
   const newFb = (L.reviews || []).filter(unread).length;
   $('#navlist').innerHTML = items.map(([r, t]) => `<li${r === 'review' ? ' class="navreview"' : ''}><a href="#${r}" data-r="${r}">${esc(t)}${r === 'review' ? `<small class="${n.review ? 'badge' : ''}" title="${n.review} open${newFb ? `, ${newFb} answered but not read yet` : ''}">${n.review}</small>` : n[r] ? `<small>${n[r]}</small>` : ''}</a></li>`).join('');
@@ -933,11 +1008,13 @@ async function init() {
     if (e.key === '/') { e.preventDefault(); $('#q').focus(); }
   });
   document.addEventListener('input', (e) => {
-    const page = e.target.closest('.page.review');
-    if (page && e.target.matches('textarea')) { saveDraft(page.dataset.review, reviewDraftFromDom(page)); $('#rstate').textContent = 'Changed, not sent yet.'; $('#rstate').className = 'muted small'; }
+    if (!e.target.matches('textarea')) return;
+    const page = e.target.closest('.page.review'), box = e.target.closest('.scentry');
+    if (page) { saveDraft('review', page.dataset.review, reviewDraftFromDom(page)); markChanged(page); }
+    if (box) { saveDraft('showcase', box.dataset.showcase, showcaseDraftFromDom(box)); markChanged(box); }
   });
   document.addEventListener('click', (e) => {
-    if (reviewClick(e)) return;
+    if (reviewClick(e) || showcaseClick(e)) return;
     const im = e.target.closest('[data-lb]');
     if (im) { e.preventDefault(); openLB(im); return; }
     const j = e.target.closest('[data-jump]');

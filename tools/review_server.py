@@ -3,9 +3,10 @@
 
     python3 tools/review_server.py [port]       (./start runs it; default port 8771, bound to 127.0.0.1)
 
-POST /api/review/<id> with a JSON body saves Jørgen's feedback for one review item to reviews/<id>/feedback.json.
-<id> must be an existing folder in reviews/ holding a review.json. Each save keeps the earlier sends in `history`,
-so nothing he wrote is lost.
+POST /api/review/<id> with a JSON body saves Jørgen's feedback for one review item to reviews/<id>/feedback.json
+(<id> must be a folder in reviews/ holding a review.json). POST /api/showcase/<id> does the same for a Showcase
+entry: showcase/<id>/feedback.json, next to its entry.json (format: showcase/README.md). Each save keeps the earlier
+sends in `history`, so nothing he wrote is lost.
 
 POST /api/feedback saves feedback sent from the game's feedback window (game3d/js/feedback.js): a new folder
 notes/feedback-game/<time>/ with text.md, shot.png (git-ignored) and context.json, plus an entry in the day's
@@ -28,6 +29,7 @@ from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 REVIEWS = os.path.join(ROOT, 'reviews')
+SHOWCASE = os.path.join(ROOT, 'showcase')
 MAX_BODY = 256 * 1024
 FEEDBACK = os.path.join(ROOT, 'notes', 'feedback-game')
 FEEDBACK_LOG = os.path.join(ROOT, 'notes', 'feedback-log')
@@ -95,6 +97,31 @@ def save_game_feedback(data):
     return fid
 
 
+def review_answer(data):
+    """A Review answer: picks, star/reject/comment per option, an overall comment."""
+    return {
+        'picked': [str(x) for x in data.get('picked', [])][:50],
+        'options': {str(k): {'star': bool(v.get('star')), 'reject': bool(v.get('reject')), 'comment': str(v.get('comment', ''))[:5000]}
+                    for k, v in (data.get('options') or {}).items() if isinstance(v, dict)},
+        'comment': str(data.get('comment', ''))[:10000],
+    }
+
+
+def showcase_answer(data):
+    """A Showcase answer: a flag and a comment on the whole entry and on each image. No picks."""
+    items = data.get('items') if isinstance(data.get('items'), dict) else {}
+    return {
+        'flag': bool(data.get('flag')),
+        'comment': str(data.get('comment', ''))[:10000],
+        'items': {str(k)[:120]: {'flag': bool(v.get('flag')), 'comment': str(v.get('comment', ''))[:5000]}
+                  for k, v in list(items.items())[:200] if isinstance(v, dict)},
+    }
+
+
+# kind -> (folder, the file that must exist in <folder>/<id>/, normaliser)
+ANSWERS = {'review': (REVIEWS, 'review.json', review_answer), 'showcase': (SHOWCASE, 'entry.json', showcase_answer)}
+
+
 class Handler(SimpleHTTPRequestHandler):
     def _json(self, code, obj):
         body = json.dumps(obj, ensure_ascii=False).encode('utf-8')
@@ -136,15 +163,24 @@ class Handler(SimpleHTTPRequestHandler):
         return self._json(200, {'ok': True, 'folder': f'notes/feedback-game/{fid}'})
 
     def do_POST(self):
-        if self.path.split('?')[0] == '/api/feedback':
+        path = self.path.split('?')[0]
+        if path == '/api/feedback':
             return self._feedback()
-        m = re.fullmatch(r'/api/review/([a-z0-9][a-z0-9-]{0,79})', self.path.split('?')[0])
+        m = re.fullmatch(r'/api/(review|showcase)/([a-z0-9][a-z0-9-]{0,79})', path)
         if not m:
             return self._json(404, {'error': 'unknown endpoint'})
-        rid = m.group(1)
-        folder = os.path.join(REVIEWS, rid)
-        if not os.path.isfile(os.path.join(folder, 'review.json')):
-            return self._json(404, {'error': f'no review item {rid}'})
+        kind, rid = m.groups()
+        return self._save_answer(kind, rid)
+
+    def _save_answer(self, kind, rid):
+        """One POST /api/<kind>/<id>: read the JSON body, normalise it for its kind, keep the earlier send in
+        `history` and write <folder>/<id>/feedback.json atomically."""
+        if not self._local():
+            return self._json(403, {'error': 'local only'})
+        base, marker, normalise = ANSWERS[kind]
+        folder = os.path.join(base, rid)
+        if not os.path.isfile(os.path.join(folder, marker)):
+            return self._json(404, {'error': f'no {kind} item {rid}'})
         n = int(self.headers.get('Content-Length') or 0)
         if n <= 0 or n > MAX_BODY:
             return self._json(400, {'error': 'empty or too large'})
@@ -153,6 +189,7 @@ class Handler(SimpleHTTPRequestHandler):
             assert isinstance(data, dict)
         except Exception:
             return self._json(400, {'error': 'body must be a JSON object'})
+        entry = dict(sent=time.strftime('%Y-%m-%dT%H:%M:%S%z'), **normalise(data))
         path = os.path.join(folder, 'feedback.json')
         old = None
         if os.path.exists(path):
@@ -160,16 +197,9 @@ class Handler(SimpleHTTPRequestHandler):
                 old = json.load(open(path, encoding='utf-8'))
             except Exception:
                 old = None
-        entry = {
-            'sent': time.strftime('%Y-%m-%dT%H:%M:%S%z'),
-            'picked': [str(x) for x in data.get('picked', [])][:50],
-            'options': {str(k): {'star': bool(v.get('star')), 'reject': bool(v.get('reject')), 'comment': str(v.get('comment', ''))[:5000]}
-                        for k, v in (data.get('options') or {}).items() if isinstance(v, dict)},
-            'comment': str(data.get('comment', ''))[:10000],
-        }
         history = (old or {}).get('history', [])
         if old and old.get('sent'):
-            history.append({k: old[k] for k in ('sent', 'picked', 'options', 'comment', 'read') if k in old})
+            history.append({k: v for k, v in old.items() if k != 'history'})
         out = dict(entry, read=False, history=history)
         tmp = path + '.tmp'
         with open(tmp, 'w', encoding='utf-8') as f:
@@ -179,7 +209,7 @@ class Handler(SimpleHTTPRequestHandler):
 
     def end_headers(self):
         # feedback and review files change while the page is open
-        if '/reviews/' in self.path:
+        if '/reviews/' in self.path or '/showcase/' in self.path:
             self.send_header('Cache-Control', 'no-cache')
         super().end_headers()
 
@@ -187,7 +217,7 @@ class Handler(SimpleHTTPRequestHandler):
 def main():
     port = int(sys.argv[1]) if len(sys.argv) > 1 else int(os.environ.get('PORT', 8771))
     httpd = ThreadingHTTPServer(('127.0.0.1', port), partial(Handler, directory=ROOT))
-    print(f'Serving {ROOT} on http://127.0.0.1:{port}/ (reviews save to reviews/<id>/feedback.json)', flush=True)
+    print(f'Serving {ROOT} on http://127.0.0.1:{port}/ (reviews and showcase entries save to <folder>/<id>/feedback.json)', flush=True)
     try:
         httpd.serve_forever()
     except KeyboardInterrupt:

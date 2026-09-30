@@ -4,6 +4,10 @@
 // found any more, or if a page throws. Collapsed Legacy boxes are opened so their links are checked too.
 //
 //   node tools/bible/check.mjs            (needs the repo served on http://127.0.0.1:8771/)
+//   BIBLE_BASE=http://127.0.0.1:8779/ node tools/bible/check.mjs    (a worktree served on another port)
+//
+// Showcase entries (showcase/<id>/entry.json) are checked too: each renders, every image path resolves and image
+// ids are unique within the entry.
 //
 // --public-only checks the public site without accessing private sources.
 import { withBrowserJob } from '../lib/browser-job.mjs';
@@ -11,7 +15,7 @@ import { blockedSource, scopedFetch, scopedRoute } from './check-scope.mjs';
 
 const publicOnly = process.argv.includes('--public-only');
 
-const BASE = 'http://127.0.0.1:8771/';
+const BASE = process.env.BIBLE_BASE || 'http://127.0.0.1:8771/';
 const SITES = [
   { name: 'public', path: 'bible/', data: 'bible/data.json' },
   { name: 'private', path: 'island/private/bible/', data: 'bible/data.json', priv: 'island/private/bible/private.json' },
@@ -31,6 +35,23 @@ async function head(u) {
   } catch (e) { ok = false; }
   checked.set(u, ok);
   return ok;
+}
+
+const folderIds = async folder => [...(await (await read(BASE + folder + '/')).text()).matchAll(/href="([a-z0-9][a-z0-9-]*)\/"/g)].map(m => m[1]);
+const showcaseIds = await folderIds('showcase').catch(() => []);
+
+// every showcase entry: its images resolve and their ids are unique (the page and tools/review.py key feedback by id)
+for (const id of showcaseIds) {
+  let e;
+  try { e = await (await read(BASE + `showcase/${id}/entry.json`)).json(); } catch (err) { bad.push(`showcase/${id}/entry.json: ${err.message}`); continue; }
+  const images = [...(e.images || []), ...(e.sections || []).flatMap(sec => sec.images || [])];
+  const seen = new Set();
+  for (const im of images) {
+    if (!im.id || seen.has(im.id)) bad.push(`showcase/${id}: image id ${im.id ? `"${im.id}" used twice` : 'missing'}`);
+    seen.add(im.id);
+    if (!im.image || !(await head(new URL(im.image, BASE).href))) bad.push(`showcase/${id}: image ${im.image} does not resolve`);
+  }
+  for (const k of ['title', 'date', 'by', 'caption']) if (!e[k]) bad.push(`showcase/${id}: no ${k}`);
 }
 
 // the story map's loader must read every story file (bible/story-graph.js, tools/bible/story-map-check.mjs)
@@ -54,8 +75,8 @@ for (const site of SITES) {
     ...data.characters.map(c => 'character/' + c.id),
     'search/mio', 'search/copier', 'story/lunch', 'doc/docs/game/cast.md', 'doc/docs/game/stories/mio-train.md', 'doc/notes/RELATIONSHIPS.md', 'doc/notes/mini-stories.md', 'src/GUIDE.md:42',
     ...data.story.legacy_docs.map(d => 'doc/' + d.path),
-    'review', 'doc/reviews/README.md',
-    ...[...(await (await read(BASE + 'reviews/')).text()).matchAll(/href="([a-z0-9][a-z0-9-]*)\/"/g)].map(m => 'review/' + m[1])];
+    'review', 'doc/reviews/README.md', 'showcase', 'doc/showcase/README.md',
+    ...(await folderIds('reviews')).map(id => 'review/' + id), ...showcaseIds.map(id => 'showcase/' + id)];
   if (site.priv) routes.push('rewards');
   const page = await context.newPage();
   const errors = [];
