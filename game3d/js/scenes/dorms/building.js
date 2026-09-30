@@ -7,6 +7,7 @@ import { wall, tileFloor, mat } from '../../props.js';
 import { lightPool } from '../../places/life.js';
 import * as L from './layout.js';
 import { Kit } from './kit.js';
+import { neighbours, SPAN } from './neighbours.js';
 
 const {
   X0,
@@ -87,7 +88,7 @@ export function floors(kit, root) {
   root.add(
     tileFloor(g0, g1, gz, NEAR + 0.05, 0.16, {
       color: C.genkan,
-      seam: '#565b64',
+      seam: '#6a6f78',
       seamW: 0.008,
       y: -0.045,
     }),
@@ -118,36 +119,29 @@ export function walls(root) {
   );
 }
 
-// the rest of the floor, cut at the same height: dark blocks either side, their corridor face lit
-export function building(kit) {
+// the rest of the floor: the neighbours' flats either side, cut open like Eric's (neighbours.js), and past them
+// the building cut solid; the corridor face runs the whole way
+export function building(kit, root) {
   const W = 7,
-    zf = NEAR + T;
+    zf = NEAR + T,
+    e = X1 + T + SPAN * PITCH; // the outer face of the last opened flat
+  neighbours(kit, root);
+  for (const [a, b] of [
+    [-W, -e],
+    [e, W],
+  ]) {
+    kit.box(C.cut, b - a, H + 0.035, zf - (BACK - T), (a + b) / 2, 0, (zf + BACK - T) / 2, { cast: false });
+    kit.box(C.wallTop, 0.03, 0.035, zf - (BACK - T), a < 0 ? b - 0.015 : a + 0.015, H, (zf + BACK - T) / 2, {
+      cast: false,
+    });
+  }
   for (const [a, b] of [
     [-W, X0 - T],
     [X1 + T, W],
   ]) {
-    kit.box(C.cut, b - a, H + 0.035, zf - (BACK - T), (a + b) / 2, 0, (zf + BACK - T) / 2, { cast: false });
-    kit.box(C.facade, b - a, H, 0.012, (a + b) / 2, 0, zf + 0.006, {
-      surf: 'plaster',
-      cast: false,
-    });
-    kit.box(C.wallTop, b - a, 0.035, 0.03, (a + b) / 2, H, zf, { cast: false });
+    kit.box(C.facade, b - a, H, 0.012, (a + b) / 2, 0, zf + 0.006, { surf: 'plaster', cast: false });
+    kit.box(C.wallTop, b - a, 0.035, T + 0.03, (a + b) / 2, H, zf - T / 2 + 0.015, { cast: false });
   }
-  // the neighbours' walls where the cut goes through them, fainter than Eric's: the flats in a row
-  const y = H + 0.035,
-    lines = [];
-  for (const s of [-1, 1]) {
-    const a = s < 0 ? -W : X1 + T,
-      b = s < 0 ? X0 - T : W;
-    lines.push([b - a, 0.004, T, (a + b) / 2, y, BACK - T / 2], [b - a, 0.004, 0.06, (a + b) / 2, y, PART]);
-    for (let k = 0; k < 3; k++) {
-      const x = s < 0 ? X0 - T - k * PITCH - T / 2 : X1 + T + k * PITCH + T / 2;
-      if (k > 0) lines.push([T, 0.004, zf - BACK, x, y, (zf + BACK - T) / 2]);
-      const bx = s < 0 ? x - (X1 - BATH_X) - T / 2 : x + (BATH_X - X0) + T / 2;
-      if (Math.abs(bx) < W) lines.push([0.06, 0.004, NEAR - PART, bx, y, (NEAR + PART) / 2]);
-    }
-  }
-  kit.boxes('#555c67', lines, { cast: false });
   // the corridor: concrete, a gutter along the parapet, the parapet cut low like the flat's front wall
   const z0 = zf,
     z1 = zf + CORRIDOR;
@@ -201,9 +195,9 @@ function neighbourDoor(kit, c, zf, k) {
   });
   kit.box('#2f333b', 0.16, 0.035, 0.01, c, 0.82, z + 0.022, { cast: false });
   kit.box('#d8dadc', 0.13, 0.055, 0.01, c, 1.36, zf + 0.006, { cast: false });
-  // the kitchen window beside the door, frosted, behind a grille; the one on the right is lit (someone's home)
+  // the kitchen window beside the door, frosted, behind a grille; lit where someone's home (neighbours.js)
   const wx = c - 0.62;
-  const lit = k === 1;
+  const lit = k === 1 || k === -2;
   kit.box(lit ? '#f0dcb4' : '#aeb8c0', 0.3, 0.36, 0.01, wx, 0.72, zf + 0.006, {
     cast: false,
     opts: lit ? { emissive: '#ffcf8a', emissiveIntensity: 0.55 } : {},
@@ -225,7 +219,14 @@ function neighbourDoor(kit, c, zf, k) {
   if (k === -1) {
     kit.cyl('#b3aea5', 0.07, 0.055, 0.12, c - 0.38, 0, zf + 0.12, { seg: 10 });
     kit.cyl('#4d6b47', 0.02, 0.09, 0.16, c - 0.38, 0.12, zf + 0.12, { seg: 7 });
+    // they're out: a parcel left at the door, its slip on top
+    kit.box('#b09474', 0.26, 0.16, 0.2, c + 0.1, 0, zf + 0.16, { r: 0.008, ry: 0.15, surf: 'card' });
+    kit.box('#f2f0ea', 0.1, 0.004, 0.07, c + 0.12, 0.16, zf + 0.16, { ry: 0.15, cast: false });
   }
+  // home: sandals by the door
+  if (k === 1)
+    for (const dx of [-0.05, 0.05])
+      kit.box('#3d4d6b', 0.06, 0.025, 0.14, c - 0.2 + dx, 0, zf + 0.14, { r: 0.01, ry: 0.1 });
 }
 
 // the window: aluminium frame and glass, curtains drawn back, the air conditioner over it
@@ -299,7 +300,7 @@ export function outside(root, kit) {
   const wallMat = mat(C.concrete, {
     roughness: 0.95,
     emissive: new THREE.Color('#8e9bb4'),
-    emissiveIntensity: 0.3,
+    emissiveIntensity: 0.2,
   });
   const slab = new THREE.Mesh(new THREE.BoxGeometry(W, 12, 0.3), wallMat);
   slab.position.set(0, 6 - DROP, OUT - 0.15);
@@ -313,18 +314,46 @@ export function outside(root, kit) {
   kit.box('#6c7073', 0.07, 12, 0.07, 1.35, -DROP, OUT + 0.05, { cast: false });
   for (let y = -DROP + 1; y < 8; y += 1.7) kit.box('#5a5e62', 0.12, 0.03, 0.08, 1.35, y, OUT + 0.04, { cast: false });
   kit.box('#7f8388', 0.22, 0.14, 0.06, -1.9, 1.95, OUT + 0.03, { cast: false });
-  // the window opposite: frosted, warm, a flat on the floor below; the lamp above it
-  const wx = (WIN[0] + WIN[1]) / 2,
-    wy = -0.62;
-  kit.box('#f2dfbc', 0.3, 0.24, 0.02, wx, wy, face, {
+  // the window opposite, a floor down, where the play camera sees it through Eric's window: a bathroom's, lit,
+  // frosted, in two sliding panes. Behind the frosting the shapes of what's on its sill (shampoo, a bottle, a cup
+  // with toothbrushes) and the shower head on its rail; the bathroom's fan grille beside it. The lamp above.
+  const wx = (WIN[0] + WIN[1]) / 2 - 0.04,
+    wy = -0.5,
+    ww = 0.5,
+    wh = 0.4;
+  kit.box('#f6e6c8', ww, wh, 0.02, wx, wy, face, {
     cast: false,
-    opts: { emissive: '#ffcf8a', emissiveIntensity: 0.9 },
+    opts: { emissive: '#ffd89c', emissiveIntensity: 1.0 },
   });
   kit.boxes(C.alu, [
-    [0.34, 0.025, 0.04, wx, wy - 0.02, face + 0.01],
-    [0.34, 0.025, 0.04, wx, wy + 0.24, face + 0.01],
+    [ww + 0.06, 0.035, 0.05, wx, wy - 0.035, face + 0.01],
+    [ww + 0.06, 0.035, 0.05, wx, wy + wh, face + 0.01],
+    [0.035, wh, 0.05, wx - ww / 2 - 0.012, wy, face + 0.01],
+    [0.035, wh, 0.05, wx + ww / 2 + 0.012, wy, face + 0.01],
+    [0.03, wh, 0.045, wx + 0.02, wy, face + 0.012],
   ]);
-  kit.box('#e9e4d6', 0.1, 0.07, 0.07, wx - 0.45, wy + 0.42, face + 0.03, {
+  // the soft shapes behind the glass, warm-grey against the light
+  kit.boxes(
+    '#b89f86',
+    [
+      [0.05, 0.13, 0.004, wx - 0.17, wy, face + 0.012],
+      [0.045, 0.1, 0.004, wx - 0.11, wy, face + 0.012],
+      [0.035, 0.16, 0.004, wx - 0.06, wy, face + 0.012],
+      [0.05, 0.07, 0.004, wx + 0.12, wy, face + 0.012],
+      [0.012, 0.07, 0.004, wx + 0.11, wy + 0.07, face + 0.012],
+      [0.012, 0.08, 0.004, wx + 0.13, wy + 0.07, face + 0.012],
+      [0.014, 0.26, 0.004, wx + 0.18, wy + 0.1, face + 0.012],
+      [0.07, 0.035, 0.004, wx + 0.175, wy + 0.34, face + 0.012],
+    ],
+    { cast: false, opts: { emissive: '#8a6a4a', emissiveIntensity: 0.35 } },
+  );
+  kit.box('#8f949a', 0.16, 0.16, 0.03, wx + ww / 2 + 0.2, wy + 0.2, face + 0.015, { cast: false });
+  kit.boxes(
+    '#6c7076',
+    [0, 1, 2, 3].map((i) => [0.13, 0.012, 0.035, wx + ww / 2 + 0.2, wy + 0.23 + i * 0.03, face + 0.02]),
+    { cast: false },
+  );
+  kit.box('#e9e4d6', 0.1, 0.07, 0.07, wx - 0.45, wy + 0.52, face + 0.03, {
     r: 0.02,
     cast: false,
     opts: { emissive: '#ffe2b0', emissiveIntensity: 1.4 },
@@ -338,7 +367,7 @@ export function outside(root, kit) {
   root.add(glow);
   const up = lightPool(-0.6, face + 0.02, 1.4, {
     color: '#ffd7a0',
-    k: 0.16,
+    k: 0.1,
     sx: 1.4,
   });
   up.rotation.x = 0;

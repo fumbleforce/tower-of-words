@@ -7,7 +7,22 @@ import * as THREE from 'three';
 import { Nav } from '../movement/navigation.js';
 import { lightPool } from '../places/life.js';
 import { Kit } from './dorms/kit.js';
-import { X0, X1, BACK, PART, NEAR, H, OUT, T, CORRIDOR, WIN, DOOR } from './dorms/layout.js';
+import {
+  X0,
+  X1,
+  BACK,
+  PART,
+  NEAR,
+  H,
+  OUT,
+  T,
+  CORRIDOR,
+  WIN,
+  DOOR,
+  COUNTER_X,
+  BATH_X,
+  GENKAN_Z,
+} from './dorms/layout.js';
 import { floors, walls, building, window_, outside } from './dorms/building.js';
 import * as F from './dorms/furniture.js';
 import { kitchenette, bath, genkan, slidingDoor } from './dorms/entry.js';
@@ -47,6 +62,10 @@ function lights(scene, root, { lamp, desk, kitchen }) {
   const hood = new THREE.PointLight('#ffecd0', 0.7, 1.2, 1.6);
   hood.position.copy(kitchen).add(new THREE.Vector3(0.05, -0.1, 0));
   root.add(hood);
+  // the genkan's own small ceiling light, left on: a soft pool on the tiles and the shoes
+  root.add(
+    lightPool((COUNTER_X + BATH_X) / 2 - 0.02, (GENKAN_Z + NEAR) / 2, 0.5, { color: '#fff0dc', k: 0.4, y: -0.04 }),
+  );
   // the corridor lights, cool white, on the doorstep
   const corridor = new THREE.PointLight('#dfe7f5', 1.2, 2.6, 1.4);
   corridor.position.set((DOOR[0] + DOOR[1]) / 2, 1.3, NEAR + T + CORRIDOR / 2);
@@ -75,7 +94,7 @@ export function buildDorms() {
 
   floors(kit, root);
   walls(root);
-  const door = building(kit);
+  const door = building(kit, root);
   root.add(door);
   // the three things Eric looks at get their own groups, for their outlines
   const obj = { window: new THREE.Group(), bed: new THREE.Group(), boxes: new THREE.Group() };
@@ -108,10 +127,12 @@ export function buildDorms() {
     nav,
     start: entry,
     roomEntry: entry,
-    frontDoor: [(DOOR[0] + DOOR[1]) / 2, NEAR + 0.04],
+    // the trip in: along the corridor from the right, to the doorstep, then in
+    corridor: [(DOOR[0] + DOOR[1]) / 2 + 0.75, 0, NEAR + T + 0.36],
+    doorstep: [(DOOR[0] + DOOR[1]) / 2, NEAR + T + 0.3],
     windowFront: [win[0], BACK + 0.45],
     window: win,
-    windowY: (WIN[2] + WIN[3]) / 2,
+    windowY: WIN[3], // the look marker over the frame's head, clear of the view out
     bed: { ...bedAt, spot: [-0.2, bedAt.z - 0.12] },
     boxes: { ...boxAt, spot: [0.3, -1.12] },
     arrive: { at: [(DOOR[0] + DOOR[1]) / 2, 0.2], zoom: 1.2 },
