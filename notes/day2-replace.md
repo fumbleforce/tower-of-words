@@ -24,3 +24,6 @@ Also: day 2 introduces the canteen (Kaori), rooftop (Goro) and bar (Jun). That's
 Voice marks per day (day 1 has 5), hidden noise, per-person suspicion flags, the per-kanji text rendering and the player profile from the level check. The old day-2 script still uses a single `suspicion` number and `witnesses: 'auto'` with Aoi; those should move to the new model.
 
 Until the rewrite, day 2 can still be reached from day 1's summary, and it will feel repetitive.
+
+## Ideas Jørgen liked for day 2
+- A welcome party for Eric at the end of the day (writing-contest-day2, 2026-09-29): "a welcome party scenario at the end of the day is a good idea though, but the implementation is pretty bad from A, too many moving parts and confusion, and 7 people makes little sense." So: keep it small (the B2 team, not seven people), one clear situation, few moving parts. Codex leads the writing when day 2 starts.
