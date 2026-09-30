@@ -18,7 +18,7 @@ export function* mergeStaticSteps(root) {
   root.traverse((o) => {
     const m = o.material;
     if (!o.isMesh || Array.isArray(m) || m.transparent || m.map || o.name) return;
-    const key = `${m.uuid}|${o.castShadow}|${o.receiveShadow}|${!!o.geometry.attributes.color}`;
+    const key = `${m.uuid}|${o.castShadow}|${o.receiveShadow}|${!!o.geometry.attributes.color}|${o.userData.surf || ''}`;
     if (!sets.has(key)) sets.set(key, []);
     sets.get(key).push(o);
   });
@@ -35,6 +35,7 @@ export function* mergeStaticSteps(root) {
     const merged = new THREE.Mesh(mergeGeometries(parts), meshes[0].material);
     merged.castShadow = meshes[0].castShadow;
     merged.receiveShadow = meshes[0].receiveShadow;
+    if (meshes[0].userData.surf) merged.userData.surf = meshes[0].userData.surf; // what they're made of (look/)
     parts.forEach((g) => g.dispose());
     for (const o of meshes) o.parent.remove(o);
     root.add(merged);

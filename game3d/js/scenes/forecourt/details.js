@@ -49,7 +49,8 @@ function bar(a, b, radius, color) {
   return mesh;
 }
 
-export function bicycle(color) {
+// basket: a wire basket on the front (the everyday mamachari); child: a child seat on the rear rack
+export function bicycle(color, { basket = false, child = false } = {}) {
   const group = new THREE.Group();
   // The two triangular frame sections and a small rack distinguish parked bikes at game scale.
   for (const x of [-0.38, 0.38]) {
@@ -88,20 +89,41 @@ export function bicycle(color) {
     }),
   );
   group.add(rbox(0.3, 0.025, 0.14, PAL.metal, { x: -0.38, y: 0.56, r: 0.008, seg: 1 }));
+  if (basket) {
+    group.add(rbox(0.22, 0.15, 0.26, '#8d939b', { x: 0.42, y: 0.66, r: 0.01, seg: 1 }));
+    group.add(rbox(0.18, 0.02, 0.22, '#3e434d', { x: 0.42, y: 0.8, r: 0.005, seg: 1, cast: false })); // its open top
+  }
+  if (child) {
+    group.add(rbox(0.26, 0.12, 0.24, '#5d6f86', { x: -0.4, y: 0.58, r: 0.03, seg: 1 }));
+    group.add(rbox(0.06, 0.26, 0.24, '#5d6f86', { x: -0.53, y: 0.62, r: 0.03, seg: 1 }));
+  }
   group.rotation.x = -0.09;
   return group;
 }
 
 // A row of bikes parked side by side in a rack, along x from 0; each bike's length runs along z. `gaps` are empty
 // places. The parts merge by material when the scene is merged (scenes/merge-static.js).
-const BIKE_COLORS = ['#5f6f7d', '#7a6570', '#6c7a6a', '#8a8f96', '#4f5866', '#7d7466'];
-export function bikeRow(n, { step = 0.55, gaps = [], seed = 0 } = {}) {
+// `fallen`: the place of one bike that has tipped over into the aisle
+const BIKE_COLORS = ['#dcd9d2', '#5f6f7d', '#9aa3ab', '#3f4652', '#7a6570', '#6f8a9c', '#6c7a6a', '#d0ccc4', '#4f5866'];
+export function bikeRow(n, { step = 0.55, gaps = [], seed = 0, fallen = -1 } = {}) {
   const group = new THREE.Group();
   const rack = [[step * (n - 1) + 0.4, 0.05, 0.05, (step * (n - 1)) / 2, 0.02, 0.22]];
   for (let i = 0; i < n; i++) {
     rack.push([0.03, 0.42, 0.03, i * step, 0, 0.22], [0.03, 0.03, 0.34, i * step, 0.4, 0.08]);
     if (gaps.includes(i)) continue;
-    const bike = bicycle(BIKE_COLORS[(i * 5 + seed) % BIKE_COLORS.length]);
+    const k = i * 5 + seed;
+    const bike = bicycle(BIKE_COLORS[k % BIKE_COLORS.length], { basket: k % 3 !== 1, child: k % 7 === 3 });
+    if (i === fallen) {
+      // on its side in the aisle, turned a little across it
+      const lying = new THREE.Group();
+      bike.rotation.x = Math.PI / 2 - 0.08;
+      bike.position.set(0, 0.04, 0);
+      lying.add(bike);
+      lying.rotation.y = Math.PI / 2 + 0.5;
+      lying.position.set(i * step + 0.1, 0, -0.75);
+      group.add(lying);
+      continue;
+    }
     bike.rotation.y = Math.PI / 2 + (((i * 7 + seed) % 3) - 1) * 0.05;
     bike.position.set(i * step, 0, 0);
     group.add(bike);

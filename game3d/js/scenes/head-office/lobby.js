@@ -95,6 +95,8 @@ export function furniture(g) {
   }
   stand.position.set(DOOR_U + 1.15, 0, -0.5);
   g.add(stand);
+  // the entrance mat inside the door
+  g.add(rbox(1.5, 0.012, 1.0, '#3c4658', { x: DOOR_U, z: -0.75, r: 0.004, cast: false }));
 }
 // the same pieces as walk-grid rectangles in (u, n), and the name stone outside
 export const FURNITURE = [
@@ -104,7 +106,7 @@ export const FURNITURE = [
   [LU - 0.8, LU - 0.3, 0.37, 0.87],
   [LU - 0.8, LU - 0.3, LN - 0.8, LN - 0.3],
   [DOOR_U + 1.0, DOOR_U + 1.3, 0.35, 0.65],
-  [DOOR_U + 2.4, DOOR_U + 3.8, -1.35, -1.05], // name stone (outside)
+  [DOOR_U + 3.65, DOOR_U + 5.05, -1.35, -1.05], // name stone (outside)
 ];
 
 // the lift core, square to the camera: front wall with the B2 car's doorway (its middle pieces are named so the lift
@@ -134,9 +136,9 @@ export function core(root) {
   span(st[1], x1, 0, H, zf - 0.18, zf);
   // round the car: the west side and the back; east of it the second car's shaft, the stairwell and a service riser,
   // with walls between them. The tower above fades while Eric is in the lobby, so the core's top is where the
-  // building is cut: pale caps on every wall (like every cut wall in the office), the shafts dark below them, the
-  // stair's upper flight and the riser's ducts showing in the cut. The lift's lid covers the B2 car in the shafts'
-  // dark (CAP), and a separate cap runs over it on the front wall (it goes down with the wall during the ride).
+  // building is cut: pale caps on every wall (like every cut wall in the office) and a solid top over the shafts
+  // (below). The lift's lid covers the B2 car in the same colour, and a separate cap runs over it on the front wall
+  // (it goes down with the wall during the ride).
   const W0 = X + 1.42, // the B2 shaft's east wall, the second car's shaft, the stairwell, the riser
     C2 = [W0 + 0.14, W0 + 1.24],
     SW = [C2[1] + 0.14, C2[1] + 1.26],
@@ -215,23 +217,10 @@ export function core(root) {
   doorway.castShadow = doorway.receiveShadow = true;
   g.add(doorway);
   span(X - 1.42, W0, H + 0.006, H + 0.02, zf - 0.18, zf, mat('#a3a9b3', { roughness: 0.8 })).name = 'ho:liftWallCap';
-  // over the B2 shaft, on the lid: the lift's machine on two steel beams across the shaft, and its ropes' sheave
-  // (not kept: like the cap, they go with the wall while the car is in view during the ride)
-  const machine = new THREE.Group(),
-    steel = mat('#4b515b', { roughness: 0.6, metalness: 0.3 });
-  const piece = (a, b, y0, y1, z0, z1) =>
-    machine.add(
-      new THREE.Mesh(
-        new THREE.BoxGeometry(b - a, y1 - y0, z1 - z0).translate((a + b) / 2, (y0 + y1) / 2, (z0 + z1) / 2),
-        steel,
-      ),
-    );
-  for (const z of [zb + 0.55, zb + 1.35]) piece(X - 1.36, X + 1.36, H + 0.004, H + 0.07, z - 0.07, z + 0.07);
-  piece(X - 0.75, X + 0.15, H + 0.07, H + 0.36, zb + 0.5, zb + 1.4); // the machine
-  piece(X + 0.3, X + 0.75, H + 0.07, H + 0.2, zb + 0.75, zb + 1.15); // its controller
-  machine.children.forEach((m) => (m.castShadow = m.receiveShadow = true));
-  mergeStatic(machine);
-  g.add(machine);
+  // the shafts east of the B2 car, the stairwell and the riser are closed at the cut by a solid top in the walls'
+  // cap colour, so the core reads as one solid block from the lobby; the B2 shaft's lid is the lift's own (its
+  // cap in scenes/head-office.js FORECOURT_LIFT_SITE, the same colour), which clears while the car rides
+  span(W0 - 0.12, x1 - 0.18, H, H + 0.012, zi[0], zi[1], wallTop);
   root.add(g);
   // two warm lamps beside the B2 car, a pool of light in front of the lifts
   for (const s of [-1, 1]) {

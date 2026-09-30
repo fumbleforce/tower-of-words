@@ -15,7 +15,7 @@ import { addOccluder, updateOccluders } from './occluders.js';
 import { PEOPLE } from '../cast.js';
 import { blob } from '../engine.js';
 import { K } from './office.js';
-import { T, at, inT, GF, LU, LN, DOOR, DOOR_U, DOOR_W, OUT, CZ, CORE, CAP, TOP, parts } from './head-office/frame.js';
+import { T, at, inT, GF, LU, LN, DOOR, DOOR_U, DOOR_W, OUT, CZ, CORE, TOP, parts } from './head-office/frame.js';
 import { upper, ground } from './head-office/tower.js';
 import { furniture, FURNITURE, RECEPTION, core, liftLanding } from './head-office/lobby.js';
 
@@ -28,7 +28,7 @@ export const FORECOURT_LIFT_SITE = {
   floor: '1',
   out: [OUT[0], CZ + 0.85],
   cap: true,
-  capColor: CAP,
+  capColor: '#7f848b', // the lid over the car: the core's cut top (scenes/head-office/lobby.js core)
   shaft: true,
 };
 
@@ -52,8 +52,9 @@ export function* headOfficeSteps(root, nav) {
   // the upper floors, the lobby's glass front and the canopy: one occluder in five meshes
   const glassP = parts(),
     litP = parts(),
-    frameP = parts();
-  upper(glassP, litP, frameP);
+    frameP = parts(),
+    lobbyP = parts();
+  upper(glassP, litP, frameP, lobbyP);
   yield;
   const front = ground(g, frameP);
   yield;
@@ -61,14 +62,19 @@ export function* headOfficeSteps(root, nav) {
   const glass = glassP.mesh(glassM(), 'ho:glass');
   const lit = litP.mesh(glassM(), 'ho:glassLit');
   const frame = frameP.mesh(mat('#b3b9c0'), 'ho:frame');
-  for (const m of [glass, lit, frame]) {
+  // the lobby's glass front: lit from inside, warm, a little more after dark
+  const lobbyGlass = lobbyP.mesh(
+    new THREE.MeshStandardMaterial({ color: '#95a3ad', roughness: 0.4, emissive: '#ffd6a0', emissiveIntensity: 0.07 }),
+    'ho:lobbyGlass',
+  );
+  for (const m of [glass, lit, frame, lobbyGlass]) {
     m.userData.noBatch = true;
     g.add(m);
   }
   g.traverse((o) => o.isMesh && (o.userData.liftKeep = true));
   const occ = { occluders: [] };
   for (const m of front) m.userData.noBatch = true;
-  addOccluder(occ, [glass, lit, frame, ...front], inLobby, {
+  addOccluder(occ, [glass, lit, frame, lobbyGlass, ...front], inLobby, {
     name: 'ho:upper',
   });
   core(root);
@@ -125,6 +131,7 @@ export function* headOfficeSteps(root, nav) {
       m.emissive = new THREE.Color('#ffc98a');
       m.emissiveIntensity = 0.5;
       m.needsUpdate = true;
+      lobbyGlass.material.emissiveIntensity = 0.55;
     },
   };
 }

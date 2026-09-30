@@ -37,7 +37,12 @@ export const CZ = Math.round((OUT[1] - 0.85) * 100) / 100; // the core's front w
 export const CORE = [OUT[0] - 1.6, OUT[0] + 5.6, at(0, LN)[1], CZ + 0.09];
 export const CAR2_X = OUT[0] + 2.0,
   STAIR_X = OUT[0] + 3.3;
-export const CAP = '#262a31'; // the lift's lid over the car (unlit): the dark of the core's shafts in the cut
+// the curtain wall's bay lines along a face of length L (its fins stand on them); the ground floor's piers, glass
+// mullions and windows use the same lines, so the facade runs through from the plinth to the parapet
+export const bayLines = (L) => {
+  const n = Math.round(L / 1.48);
+  return Array.from({ length: n + 1 }, (_, i) => (L * i) / n);
+}; // the lift's lid over the car (unlit): the dark of the core's shafts in the cut
 
 // ---------- geometry in the tower's frame: boxes collected per material, merged into one mesh each ----------
 export function parts() {
