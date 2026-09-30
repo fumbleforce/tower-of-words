@@ -23,8 +23,8 @@
       "reason": "Existing detailed prop builders; preserve geometry until the visual owner reviews extraction."
     },
     "game3d/js/main.js": {
-      "lines": 753,
-      "bytes": 26902,
+      "lines": 742,
+      "bytes": 26718,
       "owner": "codex-tui",
       "review": "C-0110 / X-0193: one office batch integration line; 2026-09-30 one import line each for the dorms, plaza and dorm_court place factories; existing responsibility unchanged; 2026-09-30 game.overrideMaterials for the shader warm-up (notes/PERF.md); 2026-09-30 one step() line for the look/cue layers over the idles (C-0171)",
       "reason": "Composition, boot/Continue, input, rendering and frame loop remain after stage 4 hooks, interactions and place lifecycle extraction."
@@ -171,7 +171,7 @@
     },
     "game3d/js/ui.js": {
       "lines": 901,
-      "bytes": 36554,
+      "bytes": 36546,
       "owner": "codex-tui",
       "review": "C-0080; C-0166 named sounds per door and machine, Words chip pop and voice placeholder",
       "reason": "Remaining HUD construction, action menus and word practice; dialogue, portraits and audio are extracted."

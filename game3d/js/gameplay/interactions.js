@@ -156,6 +156,20 @@ export function installInteractions(game) {
     const look = item.look;
     if (look) game.beat(() => ui.say(null, typeof look === 'function' ? look() : look));
   }
+  // what E does on a target now: talk to a person, the story's talk: trigger, or the thing's own act or look line
+  function canUse(item) {
+    return !!(game.place.people[item.id] || game.runner.has('talk:' + item.id) || item.act || item.look);
+  }
+  // Say goes in a target's action menu when a word Eric knows does something there now: a say: trigger for it (or
+  // for anything), or, on a thing with nothing else to do, its answer to any word (Jørgen: "right now you just see
+  // 'Fridge' with no attached action even though you CAN say something to it")
+  function saysSomething(item) {
+    if (!item || !SAYABLE.some((w) => known.has(w))) return false;
+    const hook = (w) => game.runner.has(`say:${w}:${item.id}`) || game.runner.has(`say:${w}:*`);
+    return SAYABLE.some((w) => known.has(w) && hook(w)) || !canUse(item);
+  }
+  game.canUse = canUse;
+  game.saysSomething = saysSomething;
   async function say() {
     // one Say at a time: no reopening while the last word's reaction is still coming (QA round 1: menu under the dialogue, the cat line twice)
     if (game.busy || !SAYABLE.some((w) => known.has(w)) || game.saying) return;
