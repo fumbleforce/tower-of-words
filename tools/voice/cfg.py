@@ -56,7 +56,7 @@ def speakers():
         'kenji': ref('kenji-design'),
         'kuro': ref('kuro-design'),
         'reader': ref('goro-ref12'),
-        # Eric: English for everything he says (eric-2, no accent)
+        # Eric: the English voice eric-2 (no accent); his Japanese words are still read in Japanese (gen_takes.py)
         'eric': ref('eric-voice'),
         'emi': ref('emi-slice12'),
     }
@@ -75,6 +75,8 @@ def speakers():
 FEMALE = {'mio', 'aoi', 'sales2', 'kuro', 'gatev', 'conductor', 'ann', 'emi', 'bun', 'music', 'canteen_worker', 'worker_a'}
 MALE = {'eric', 'guard', 'kuroda', 'sales1', 'mori', 'kenji', 'reader', 'commuter', 'youth', 'stander', 'worker_b',
         'commuter_1', 'commuter_2', 'commuter_3'}
+# clones whose reference speaks English: their Japanese is made from the timbre alone (gen_takes.xvec)
+XVEC_JA = {'eric'}
 LUFS = {'eric': -23.0, 'gatev': -20.0, 'conductor': -20.0, 'ann': -20.0}  # Eric quieter, recorded voices a little under the cast
 LUFS_DEFAULT = -18.0
 
@@ -108,14 +110,60 @@ def spoken(t):
 
 
 def manifest():
-    """game3d/audio/manifest.json with 'said' (the written line, what the check compares against) and 'tts' (what is read)."""
-    m = json.load(open(f'{AUD}/manifest.json'))
+    """game3d/audio/manifest.json with 'said' (the written line, what the check compares against) and 'tts' (what is read).
+    An English line with Japanese in it also gets 'parts' (see parts())."""
+    m = json.load(open(os.environ.get('VOICE_MANIFEST', f'{AUD}/manifest.json')))  # VOICE_MANIFEST: another story's (a worktree's)
     for e in m:
         e['said'] = e['text']
         e['lang'] = e.get('lang') or 'ja'
         t = TTS_OVERRIDE.get(e['key'], e['said'])
         e['tts'] = tts_text(t) if e['lang'] == 'ja' else spoken(t.strip())
+        if e['lang'] == 'en':
+            ps = parts(t)
+            if any(lang == 'ja' for lang, _ in ps):
+                e['parts'] = ps
     return m
+
+
+# Japanese said inside an English line: voiced natively, as its own Japanese take spliced into the line (splice.py).
+# Romaji Japanese in English lines, spelled in kana for that take:
+RO2JA = {'arigatō': 'ありがとう'}
+_JA_RUN = re.compile('(' + '|'.join(RO2JA) + r'|[぀-ヿ㐀-鿿々][぀-ヿ㐀-鿿々ー〜]*)([!?！？.。,、…]*)', re.I)
+_JA_PUNCT = str.maketrans({'!': '！', '?': '？', '.': '。', ',': '、'})
+
+
+def parts(text):
+    """An English line cut at its Japanese: [('en', 'On the train you said'), ('ja', '待って'), ('en', 'and the doors...')].
+    Punctuation after a Japanese word stays with it (in Japanese form). Just [('en', text)] when there's no Japanese."""
+    out, i = [], 0
+    for m in _JA_RUN.finditer(text):
+        en = text[i:m.start()].strip()
+        if re.search(r'[A-Za-z0-9]', en):
+            out.append(('en', re.sub(r'^[,.;:!? ]+', '', en)))
+        ja = RO2JA.get(m.group(1).lower(), m.group(1))
+        p = m.group(2).replace('...', '…').translate(_JA_PUNCT)
+        out.append(('ja', ja + ('…' if '…' in p else p[:1])))
+        i = m.end()
+    en = text[i:].strip()
+    if re.search(r'[A-Za-z0-9]', en):
+        out.append(('en', re.sub(r'^[,.;:!? ]+', '', en)))
+    return out
+
+
+def units(keys=None):
+    """What the TTS makes and the check checks: every manifest line, except that a line with 'parts' is made part by part,
+    each as '<key>~<n>' with its own lang, 'said' and 'tts' and 'line' (the key of its line). keys: only these lines."""
+    out = []
+    for e in manifest():
+        if keys is not None and e['key'] not in keys:
+            continue
+        if 'parts' not in e:
+            out.append(e)
+            continue
+        for n, (lang, t) in enumerate(e['parts']):
+            out.append({'key': f"{e['key']}~{n}", 'line': e['key'], 'speaker': e['speaker'], 'lang': lang, 'said': t,
+                        'tts': tts_text(t) if lang == 'ja' else spoken(t), 'overheard': False, 'part': True})
+    return out
 
 
 def missing():

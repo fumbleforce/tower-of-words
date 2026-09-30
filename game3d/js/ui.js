@@ -74,16 +74,6 @@ function thump(c, out, t, v, hz) {
   o.stop(t + 0.25);
 }
 
-// slow clips for taught words (<voice>-slow), if the voice agent made them
-const slowClips = new Set();
-fetch(new URL('../audio/index.json?v=' + (window.BUILD || ''), import.meta.url))
-  .then((r) => (r.ok ? r.json() : []))
-  .then((l) =>
-    l.forEach((k) => {
-      if (/-slow$/.test(k)) slowClips.add(k);
-    }),
-  )
-  .catch(() => {});
 export function keyLabel(code) {
   return /^Key[A-Z]$/.test(code)
     ? code.slice(3)
@@ -844,15 +834,15 @@ export const ui = {
       setTimeout(() => inp.focus(), 60);
     });
   },
-  // play a taught word again (slowly if there's a slow clip), without moving the story on
+  // play a taught word again without moving the story on: Mio saying it slowly in Japanese (audio/word-<id>.mp3), never
+  // Eric's clip (Jørgen, 2026-09-30: "when I click on words during conversation, it should be mio saying it in japanese")
   sayWord(id, el) {
     const w = WORDS[id];
     if (!w || !w.voice) {
       sfx('tap');
       return;
     }
-    const slow = slowClips.has(w.voice + '-slow');
-    const p = voice(slow ? w.voice + '-slow' : w.voice, slow ? {} : { rate: 0.9 });
+    const p = voice('word-' + id);
     if (el) {
       el.classList.add('playing');
       p.then(() => el.classList.remove('playing'));
