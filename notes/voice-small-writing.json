@@ -1,8 +1,8 @@
 {
-  "status": "pending",
+  "status": "complete",
   "request": "C-0157 / C-0164",
   "pipeline": "sh tools/voice/run.sh",
-  "note": "Include forecourt in voice-manifest scanning first. Keys are derived by the normal heardKey function; no explicit voice overrides or clips generated in this writing pass.",
+  "note": "Completed by Claude in C-0171 (voice answer). The manifest now scans all eight story files; both fast day tests passed without VOICE_WARN.",
   "clips": [
     {
       "key": "oh-1244oau",
@@ -54,5 +54,6 @@
       "emo": "puzzled",
       "source": "office:matte_clock"
     }
-  ]
+  ],
+  "completedCommit": "8eb12b0"
 }
