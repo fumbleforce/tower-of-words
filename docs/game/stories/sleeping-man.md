@@ -4,7 +4,7 @@ Mr. Hamada from Accounts sleeps through every monorail ride back from the mainla
 
 ## Cast
 
-`kuroda`, `eric`, `mio`, `ann`, `guard`, `gatev`, `miotext`, `kuro`, `tama`
+`kuroda`, `eric`, `mio`, `ann`, `guard`, `gatev`, `miotext`, `tama`
 
 ## Beats
 
@@ -45,4 +45,4 @@ Mr. Hamada from Accounts sleeps through every monorail ride back from the mainla
 | File | Nodes |
 |---|---|
 | `train.js` | `hamada`, `asleep`, `platform`, `did_i`, `did_quiet` |
-| `gate.js` | `bench_wait`, `hamada_stuck`, `word_type`, `word_say`, `guard_after`, `guard_busy`, `jam_greet`, `way_social`, `mime_menu`, `pt_case`, `pt_man`, `guard_knows`, `mime_cat`, `mime_squeeze`, `mime_lift`, `sumi_hamada`, `greet_hamada`, `sumi_gate`, `sumi_kuro`, `matte_hamada`, `matte_gate`, `akete_guard` |
+| `gate.js` | `bench_wait`, `hamada_stuck`, `word_type`, `word_say`, `guard_after`, `guard_busy`, `jam_greet`, `way_social`, `mime_menu`, `pt_case`, `pt_man`, `guard_knows`, `mime_cat`, `mime_squeeze`, `mime_lift`, `sumi_hamada`, `greet_hamada`, `sumi_gate`, `matte_hamada`, `matte_gate`, `akete_guard` |

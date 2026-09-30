@@ -13,10 +13,10 @@ To see them: `?map=1` then M (or `?mapcompare=1`), "Compare with island-map-4", 
 
 ## Station forecourt and head office (`forecourt`)
 
-- H1. No head office building around the lift: the "building" is a 3.8 by 1.9 roofless box, 2.2 high, holding the lift. The flat roof beside the shaft is unlit and exactly the background colour (#5d636c), and so is the lift's lid, so from the play camera the lift stands in a hole with nothing over it.
-- H2. The tower is a 4.8 by 3.6 box, 9 high, 2.4 behind the lobby and mostly out of frame. The map's tower is about 15 by 8.5, 12 storeys, turned 23°, with a 4-storey wing north-west of it (head_office_wing).
-- H3. The head office sits north of the station in the game and east of it on the map: the built door is 15.5 off (at -13.0, -8.5 against 0, 0) and the built tower 20.9 off.
-- H4. The court is where the map has the platform shed: the forecourt's walk rectangle lies inside the shed's footprint, north of the station.
+- H1. Closed 2026-09-30 (map upgrade task C): the lift stands in the lobby of a real head office (scenes/head-office.js), its lid in the lift core's top colour; no background-coloured roof is left.
+- H2. Closed 2026-09-30 (task C): the tower is built from the layout's head_office (14.8 by 8.6, 12 storeys, turned 23°; 0.1 off the map), and the skyline draws head_office_wing from the layout.
+- H3. Mostly closed 2026-09-30 (task C): head office is east of the station. The tower is 0.1 off; the door is 4.6 off, because the map draws the door about 4.5 south of the traced south face and the door is built in that face.
+- H4. Open (task D): the walk now reaches east to the head office, but the court itself is still where the map has the platform shed.
 - H5. The station exit faces north because the gate room stays as built (gate-location); the map brief has it facing east toward the head office. Open question in the upgrade plan.
 - H6. The station outside is only a 0.45-high wall from forecourt x -7 to 1.2. The gate room reaches x 5.8, so the east half of the station is drawn as grass, and the room's second back-wall door has nothing outside it. The map's station is a separate two-storey flat-roofed block with a parapet and canopy.
 - H7. The map draws the station about 12 by 3, turned 23°; the gate room is 12.6 by 9 and can't change, so the station's massing has to be deeper than drawn.
@@ -24,8 +24,8 @@ To see them: `?map=1` then M (or `?mapcompare=1`), "Compare with island-map-4", 
 - H9. The train's covered walkway ends at (-27.9, -5.3), west of the station; the gate room's glass entrance is on its south face (-15.1, 4.5). Nothing joins them.
 - H10. A road runs south of the station (forecourt town(), TOWN.road). The map has no roads or cars there; the shop street's west end and the promenade start south-east of the station.
 - H11. The court has two bikes and one rack; the map shows rows of bikes on both sides of the court.
-- H12. Background blocks are seven arbitrary boxes (forecourt town()). The map's neighbours: office_e1 east of the tower on the lane, the tower's wing, office_w1 and the offices north.
-- H13. Kuro (the receptionist) moves from the gate room to the head office lobby reception (Jørgen, 2026-09-30: "Then kuro should be there rather than at security"). Not built yet; places.md gate and forecourt tables and cast.md change with it.
+- H12. Partly closed 2026-09-30 (task C): the forecourt now draws the layout's neighbours (buildSkyline); six of the old arbitrary boxes remain inside the frame until the court redo (task D).
+- H13. Closed 2026-09-30 (task C): Kuro works the head office lobby reception; places.md and cast.md follow. Her lines are still the station ones until Codex rewrites them.
 
 ## IT support, B2 (`office`)
 

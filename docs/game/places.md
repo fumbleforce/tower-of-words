@@ -18,10 +18,10 @@ There are no cuts to black (Jørgen, 2026-09-28: "elegant, continuous transition
 
 - `train` → `gate`, walk: Eric steps off onto the platform, follows the covered walkway and enters Honsha station's security room through its glass doors.
 - `gate` → `forecourt`, walk: Eric walks north out of the security room's back exit. The camera stays close and keeps its angle, then crossfades to him stepping out of the station's north door onto the court.
-- `forecourt` → `lift`, walk: a short crossing north-east to the head office door, through its small lobby, and into the lift.
+- `forecourt` → `lift`, walk: east along the station's north side and across to the head office door, through the lobby past the reception, and into the lift.
 - `lift` → `office`, lift: the camera stays inside the car for the whole ride. The floor display counts from 1; someone has pressed 5, where the two from Sales get out; then down to B2. The doors open on the B2 lift landing.
 - `office` → `lift`, walk: after work, Eric walks from B2 into the same lift, the camera easing in on the car as in the morning; the near wall drops and the lights outside go down. He rides alone.
-- `lift` → `forecourt`, lift then walk: the floor display counts B2, B1, 1; the same shot of the car crossfades to head office's floor 1, the lights come up, the doors open and he walks out into the lobby by the forecourt, the wall rising behind him.
+- `lift` → `forecourt`, lift then walk: the floor display counts B2, B1, 1; the same shot of the car crossfades to head office's floor 1, the lights come up, the doors open and he walks out into the lobby, the wall rising behind him; the tower comes back over the lobby as he walks out of the door.
 - `forecourt` → `plaza`, walk: Eric walks east off the court along the lane between the hedge and the planting. The camera closes in on him at the lane's end and crossfades to the same close framing of him stepping onto the plaza's lane from the west, then lets go.
 - `plaza` → `forecourt`, walk: the same walk the other way, west along the lane back onto the court beside the planting.
 - `plaza` → `dorm_court`, walk: after work only. Eric walks east off the plaza along the lane; the camera closes in on him at the lane's end and crossfades to the same close framing of him stepping into the dorm courtyard from the west, then lets go.
@@ -39,7 +39,7 @@ The buildings, paths, green and coast around the route, and the fit to the map, 
 |---|---|---|---|---|---|---|
 | `gate` | -15.14 | 0 | 0 | 1 | 0 | The room centred on the station building. |
 | `forecourt` | -14.64 | -7.15 | 0 | 1 | 0 | The gate room: its exit is the station door. |
-| `office` | -7.59 | -6.97 | 0 | 1 | -2 | Its lift under the forecourt's lift. |
+| `office` | 7.45 | -4.99 | 0 | 1 | -2 | Its lift under the forecourt's lift. |
 | `plaza` | 36.35 | 12.5 | 0 | 1 | 0 | Its fountain on the map's fountain. |
 | `dorm_court` | 79.53 | 30.59 | 0 | 1 | 0 | The hall door on the dorm cluster's west entrance court. |
 | `dorms` | 81.28 | 25.19 | 0 | 1 | 1 | In the courtyard's block, above the passage. |
@@ -115,7 +115,7 @@ Planned passenger revisions, awaiting [train-discoveries-1](../../reviews/train-
 
 ## Honsha station security room (`gate`)
 
-Honsha station's security room, in the muted palette ([art-and-sound.md](art-and-sound.md)). About 12.6 wide and 9 deep, glass entrance doors at the front. A security barrier runs across the middle with two card readers either side of a scanner arch with two glass flaps and a small head-count screen. The guard's desk sits in the barrier line on the right; the visitor counter with the visitor book and a lost-and-found shelf on the left; benches either side; posters and a notice screen on the back wall, beside the open exit to the forecourt. Office workers walk in, tap through and leave toward head office on their own (not tappable); their number follows the story (a jammed gate means a queue, waiting by the readers with their phones out). One of them carries a cake box.
+Honsha station's security room, in the muted palette ([art-and-sound.md](art-and-sound.md)). About 12.6 wide and 9 deep, glass entrance doors at the front. A security barrier runs across the middle with two card readers either side of a scanner arch with two glass flaps and a small head-count screen. The guard's desk sits in the barrier line on the right; the unstaffed visitor counter with the visitor book and a lost-and-found shelf on the left; benches either side; posters and a notice screen on the back wall, beside the open exit to the forecourt. Office workers walk in, tap through and leave toward head office on their own (not tappable); their number follows the story (a jammed gate means a queue, waiting by the readers with their phones out). One of them carries a cake box.
 
 The gate stays in this room, as Jørgen picked in [gate-location](../../reviews/gate-location/review.json). Its mechanism and layout stay as built. The former lift bank is now an open exit to the forecourt; the lift is inside the separate head office. The internal `lift`, `lift_front` and `to_lift` ids remain for saved-game compatibility.
 
@@ -127,7 +127,7 @@ The gate stays in this room, as Jørgen picked in [gate-location](../../reviews/
 | `reader_r` | Card reader | Right card reader. |
 | `gate` | Gate | The arch and its flaps. |
 | `desk` | Guard desk | The guard's desk. |
-| `counter` | Visitor counter | Kuro's counter. |
+| `counter` | Visitor counter | The visitor counter, with the visitor book on it. Nobody works it: Kuro is at the head office reception. |
 | `signin` | Visitor book | On the counter. |
 | `lostfound` | Lost and found | A shelf by the counter. |
 | `screen` | Notice screen | On the back wall. |
@@ -160,7 +160,6 @@ The lobby is played in the early morning, before nine.
 | Id | Usually | Schedule |
 |---|---|---|
 | `guard` | Behind his desk, greeting people coming in. | – |
-| `kuro` | Behind the visitor counter. | – |
 | `tama` | By the guard's desk, eating from her bowl. | – |
 | `kuroda` | Comes in late through the entrance at 8:52. | – |
 | `aoi` | Hidden. | hidden all day |
@@ -170,16 +169,17 @@ The lobby is played in the early morning, before nine.
 
 | Nodes | When | What happens |
 |---|---|---|
-| `kuro`, `ohayo_kuro`, `yoroshiku_kuro` | Talk to Kuro, or greet her | いらっしゃいませ and a point at the guard; a polite answer; a puzzled one to よろしく. |
 | `ohayo_gate`, `gate_talk` | Greet or talk to the gate | Its recorded voice asks for a card. |
 | `poster` | Talk to a poster | "PEOPLE. IDEAS. PROGRESS." |
 | `noop` | – | An empty node for choices that do nothing. |
 
 ## Station forecourt and head office entrance (`forecourt`)
 
-The first outdoor chunk of the picked island-map-4 layout (Jørgen, 2026-09-29). The camera looks north, as in the security room. The station's north wall runs along the bottom, cut low like the indoor near walls, with its open doors; the blue platform roof runs along the west edge. The head office stands up and to the right: a glass-fronted ground floor, its front wall also cut low, with the tower rising behind it. Inside is a small lobby with two wall lamps, a plant and the lift to B2 in the back wall. There is no second security gate. The court between the two doors is about five metres of stone paving with a worn line along the walk. Bicycle racks and a bench stand on the west side, a planted bed with two trees on the east, and two lit bollards along the way. By the head office door stands a low stone sign reading 本社 HEAD OFFICE. A hedge on the east edge marks the lane on toward the plaza. The palette and the warm, low morning sun are the security room's.
+The first outdoor chunk of the picked island-map-4 layout (Jørgen, 2026-09-29). The camera looks north, as in the security room. The station's north wall runs along the bottom left, cut low like the indoor near walls, with its open doors; the blue platform roof runs along the west edge. The court is about five metres of stone paving with a worn line along the walk; bicycle racks and a bench on its west side, a planted bed with two trees on the east, and two lit bollards. A hedge on the court's east edge marks the lane on toward the plaza. The palette and the warm, low morning sun are the security room's.
 
-Eric walks out of the station, crosses the court under player control, and walks into the lift. He can also walk east along the lane to the fountain plaza and back at any time before the lift. Beyond the court the town goes on as plain background: the road south of the station, grass by the platform, and low-poly building blocks with window rows around head office.
+Head office stands east of the station, where the island layout puts it (Jørgen, 2026-09-30, on the old one: "a standalone elevator with literally nothing over it"). It is the island's tallest building: twelve storeys of blue-grey curtain wall with floor bands and pale fins, a parapet and roof plant, turned about 23° like the map's town grid. The entrance is in the south face near the south-west corner, under a cantilevered canopy with 本社 HEAD OFFICE on its fascia; the low stone name sign stands beside it. Inside is the lobby: the reception counter with Kuro behind it to the left of the door (受付 RECEPTION on its front), the lift core at the back with the B2 car (B2 - 5F), a second car's closed doors (6F - 10F) and the stair door (階段 STAIRS), the floor directory beside them (only "5F Sales" and "B2 IT Support" can be read), two sofas round a low table, plants and an umbrella stand. The lift core stands square to the camera, so the ride is filmed straight on. There is no second security gate. While Eric is in the lobby or the lift, everything above the ground floor, the glass front and the canopy fade out, so the lobby and the ride can be seen; they come back as he walks out of the door.
+
+Eric walks out of the station, crosses the court under player control, and walks into the lift. He can also walk east along the lane to the fountain plaza and back at any time before the lift. Beyond the court the town goes on as plain background: the road south of the station, grass by the platform, a few low-poly blocks with window rows, and further out the island layout's buildings (the tower's wing, the offices north, the canteen) on the island's ground and sea.
 
 At the end of the B2 conversation the camera releases its close-up before Mio leaves, so Eric can see and reach the lift. After work he comes up in the same lift and walks home east along the lane. The forecourt and the plaza then take the dorm courtyard's dusk light, and the head-office door and lift have no marker.
 
@@ -188,8 +188,8 @@ At the end of the B2 conversation the camera releases its close-up before Mio le
 | Id | Label | What it is |
 |---|---|---|
 | `station_exit` | Station | The station's island-side doorway, behind Eric as he enters the court. |
-| `office_entrance` | Head office | The separate head-office entrance and short lift lobby. |
-| `lift` | Lift to B2 | The lift inside head office. |
+| `office_entrance` | Head office | The head office's entrance under its canopy. |
+| `lift` | Lift to B2 | The B2 car in the lobby's lift core. |
 | `plaza_lane` | To the plaza | The east end of the lane between the hedge and the planting. |
 
 ### Spots
@@ -206,10 +206,11 @@ None.
 
 ### Who's there when
 
-Nobody lives here in this first outdoor chunk. The two from Sales appear inside the lift during the ride.
+Kuro works the head office reception all day. The two from Sales appear inside the lift during the ride.
 
 | Id | Usually | Schedule |
 |---|---|---|
+| `kuro` | Behind the reception counter in the head office lobby, facing the door. | – |
 | `mio` | Hidden (she ran ahead to a server). | – |
 
 ### Small moments
@@ -220,6 +221,7 @@ Nobody lives here in this first outdoor chunk. The two from Sales appear inside 
 | `head_office` | Use the head-office entrance | The goal points inside to the B2 lift. |
 | `to_b2` | Reach or use the lift | Eric boards the existing watched lift ride. |
 | `to_plaza` | Reach or use the east lane | Eric walks on to the fountain plaza. |
+| `kuro`, `ohayo_kuro`, `yoroshiku_kuro` | Talk to Kuro, or greet her | いらっしゃいませ and a point toward the lift; a polite answer; a puzzled one to よろしく. Her station lines for now; lines written for the lobby are asked of Codex. |
 
 ## Fountain plaza (`plaza`)
 

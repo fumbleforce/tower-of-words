@@ -757,7 +757,8 @@ export function* lobbySteps() {
   root.add(rbox(0.4, 0.3, 0.4, '#2c3242', { x: 2.35, z: BZ - 0.62, r: 0.04 }));
 
   yield;
-  // visitor counter on the public side, left of the gate, with the receptionist behind it
+  // visitor counter on the public side, left of the gate, with the visitor book (the receptionist works in the
+  // head office lobby: scenes/head-office.js)
   const counter = new THREE.Group();
   counter.add(
     rbox(1.9, 0.52, 0.5, '#8c929c', { r: 0.03 }),
@@ -1024,14 +1025,6 @@ export function* lobbySteps() {
     tb.position.set(3.4, 0.004, BZ + 0.45);
     root.add(tb);
   }
-  const kuro = up(PEOPLE.kuro());
-  kuro.root.position.set(-4.2, 0, 0.18);
-  root.add(kuro.root);
-  {
-    const b = blob(0.55, 0.35);
-    b.position.set(-4.2, 0.004, 0.18);
-    root.add(b);
-  }
   const aoi = up(PEOPLE.aoi());
   aoi.root.position.set(1.0, 0, Z + 0.8);
   root.add(aoi.root);
@@ -1060,7 +1053,7 @@ export function* lobbySteps() {
   nav.block(2.85, 5.05, 1.0, 1.6);
   for (const x of [-2.85, 2.85]) nav.block(x - 0.15, x + 0.15, Z + 0.35, Z + 0.65);
   nav.block(3.1, 3.75, BZ + 0.2, BZ + 0.75); // the cat and her bowl
-  nav.block(-5.2, -3.2, BZ, 1.05); // counter and receptionist
+  nav.block(-5.2, -3.2, BZ, 1.05); // counter
   nav.block(-X, -5.2, 0.3, 0.8); // lost and found
   nav.block(5.05, X, 2.55, 3.45); // coffee machine
   nav.block(-2.1, -1.7, 2.45, 2.8);
@@ -1076,7 +1069,6 @@ export function* lobbySteps() {
     arch: ar,
     guard,
     man,
-    kuro,
     aoi,
     aoiBlob,
     manBlob,
@@ -1091,7 +1083,6 @@ export function* lobbySteps() {
     motes.userData.update(t);
     sec.userData.set(0, Math.floor(t));
     idle(guard, t);
-    idle(kuro, t);
     for (const l of lifts) l.update(t);
     scr.userData.update(t);
     guard.head.rotation.y = Math.sin(t * 0.3) * 0.25;

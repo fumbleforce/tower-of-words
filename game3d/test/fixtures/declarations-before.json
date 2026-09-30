@@ -335,10 +335,6 @@
           "label": "Aoi",
           "kind": "person"
         },
-        "kuro": {
-          "label": "Receptionist",
-          "kind": "person"
-        },
         "tama": {
           "label": "Tama",
           "verb": "Pet",
@@ -437,7 +433,6 @@
         "guard",
         "kuroda",
         "aoi",
-        "kuro",
         "rei",
         "tama"
       ],
@@ -469,6 +464,10 @@
           "label": "Lift to B2",
           "kind": "thing"
         },
+        "kuro": {
+          "label": "Receptionist",
+          "kind": "person"
+        },
         "plaza_lane": {
           "label": "To the plaza",
           "kind": "thing",
@@ -486,7 +485,9 @@
         "lift_front",
         "plaza_lane"
       ],
-      "people": [],
+      "people": [
+        "kuro"
+      ],
       "hooks": [
         "liftOpen",
         "liftClose"

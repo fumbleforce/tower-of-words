@@ -16,10 +16,6 @@ export const PLACE_DETAILS = {
         'label': 'Aoi',
         'kind': 'person',
       },
-      'kuro': {
-        'label': 'Receptionist',
-        'kind': 'person',
-      },
       'tama': {
         'label': 'Tama',
         'verb': 'Pet',
@@ -107,7 +103,7 @@ export const PLACE_DETAILS = {
     ],
     'seats': ['bench_r', 'bench_l'],
     'zones': ['arch', 'past_gate', 'lift_front'],
-    'people': ['guard', 'kuroda', 'aoi', 'kuro', 'rei', 'tama'],
+    'people': ['guard', 'kuroda', 'aoi', 'rei', 'tama'],
     'hooks': [
       'reader',
       'gate',
@@ -127,12 +123,13 @@ export const PLACE_DETAILS = {
       station_exit: { label: 'Station', kind: 'thing' },
       office_entrance: { label: 'Head office', kind: 'thing' },
       lift: { label: 'Lift to B2', kind: 'thing' },
+      kuro: { label: 'Receptionist', kind: 'person' },
       plaza_lane: { label: 'To the plaza', kind: 'thing', verb: 'Go' },
     },
     spots: ['station_exit', 'office_entrance', 'lift_front', 'plaza_lane'],
     seats: [],
     zones: ['lift_front', 'plaza_lane'],
-    people: [],
+    people: ['kuro'],
     hooks: ['liftOpen', 'liftClose'],
   },
   dorm_court: {

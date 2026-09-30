@@ -6,7 +6,6 @@ export default {
     eric: { name: 'Eric', role: 'you' },
     guard: { name: 'Guard' },
     kuroda: { name: 'Man from the train' },
-    kuro: { name: 'Receptionist' },
     gatev: { name: 'The gate' },
     commuter: { name: 'Office worker' },
     miotext: { name: 'Mio', role: 'message', color: '#5fc6bf', phone: true },
@@ -38,8 +37,7 @@ export default {
     'talk:bench_r': 'bench',
     'talk:kuroda': { if: 'jammed && !gate_through_way', node: 'hamada_stuck' },
     'talk:gate': [{ if: 'jammed && !gate_through_way', node: 'hamada_stuck' }, 'gate_talk'],
-    'talk:kuro': 'kuro',
-    'talk:counter': 'kuro',
+    'talk:counter': 'signin',
     'talk:tama': [{ node: 'tama', once: true }, 'tama_ohayo'],
     'talk:signin': 'signin',
     'talk:poster_l': 'poster',
@@ -48,8 +46,6 @@ export default {
     // greetings
     'say:ohayo:guard': [{ if: 'jammed && !gate_through_way', node: 'jam_greet' }, { if: '!greeted_guard', node: 'ohayo_guard' }, 'greet_again_guard'],
     'say:yoroshiku:guard': [{ if: 'jammed && !gate_through_way', node: 'jam_greet' }, { if: '!greeted_guard', node: 'yoroshiku_guard' }, 'greet_again_guard'],
-    'say:ohayo:kuro': 'ohayo_kuro',
-    'say:yoroshiku:kuro': 'yoroshiku_kuro',
     'say:ohayo:gate': 'ohayo_gate',
     'say:ohayo:kuroda': { if: 'jammed && !gate_through_way', node: 'greet_hamada' },
     'say:yoroshiku:kuroda': { if: 'jammed && !gate_through_way', node: 'greet_hamada' },
@@ -62,7 +58,6 @@ export default {
     'say:sumimasen:guard': { if: 'jammed && !gate_through_way', node: 'way_social' },
     'say:sumimasen:kuroda': { if: 'jammed && !gate_through_way', node: 'sumi_hamada' },
     'say:sumimasen:gate': { if: 'jammed && !gate_through_way', node: 'sumi_gate' },
-    'say:sumimasen:kuro': { if: 'jammed && !gate_through_way', node: 'sumi_kuro' },
     'say:matte:kuroda': { if: 'jammed && !gate_through_way', node: 'matte_hamada' },
     'say:matte:gate': { if: 'jammed && !gate_through_way', node: 'matte_gate' },
     'say:akete:guard': { if: 'jammed && !gate_through_way', node: 'akete_guard' },
@@ -79,7 +74,7 @@ export default {
     kuroda: 'jammed && !gate_through_way',
     lift: 'gate_through',
   },
-  labels: { kuro: 'Receptionist', signin: 'Visitor book', guard: 'Guard', bench_r: 'Bench', kuroda: 'Man from the train' },
+  labels: { signin: 'Visitor book', guard: 'Guard', bench_r: 'Bench', kuroda: 'Man from the train' },
 
   nodes: {
     // ------------------------------------------------------------------ in the door: the guard greets people, so Eric sees how it's done
@@ -364,11 +359,6 @@ export default {
       { do: 'face', who: 'kuroda', to: 'gate' },
     ],
     sumi_gate: [{ say: 'gatev', overheard: true, emo: 'machine', text: 'お一人ずつお通りください！' }],
-    sumi_kuro: [
-      { do: 'face', who: 'kuro', to: 'kuroda' },
-      { do: 'gesture', who: 'kuro', kind: 'point' },
-      { do: 'face', who: 'kuro', to: 'guard' },
-    ],
     matte_hamada: [
       { do: 'face', who: 'kuroda', to: 'eric' },
       { say: 'kuroda', face: 'panicked', overheard: true, emo: 'surprised', text: '待って…？待ってますけど…' },
@@ -394,19 +384,6 @@ export default {
     noop: [],
 
     // ------------------------------------------------------------------ things to poke
-    kuro: [
-      { say: 'kuro', overheard: true, emo: 'polite', text: 'いらっしゃいませ。ご用件は？' },
-      { do: 'gesture', who: 'kuro', kind: 'point' },
-      { do: 'face', who: 'kuro', to: 'guard' },
-    ],
-    ohayo_kuro: [
-      { say: 'kuro', overheard: true, emo: 'polite', text: '…{ohayo}。' },
-      { do: 'bow', who: 'kuro' },
-    ],
-    yoroshiku_kuro: [
-      { say: 'kuro', overheard: true, emo: 'puzzled', text: 'はい…？{yoroshiku}…' },
-      { do: 'emote', who: 'kuro', kind: '?' },
-    ],
     ohayo_gate: [
       { say: 'gatev', overheard: true, emo: 'machine', text: '{ohayo}！カードをタッチしてください！' },
       { do: 'reader', side: 'r', state: 'red' },

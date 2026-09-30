@@ -1,45 +1,30 @@
 // The station forecourt, the first outdoor chunk of island-map-4. The camera looks north, as in the station
-// security room: its exit is at the bottom (the station's north wall, cut low like every near wall), the head
-// office entrance at the top, up and to the right, with the lift in the back of its small lobby and the tower
-// behind. The blue platform roof runs along the west edge. Palette and light are the security room's.
+// security room: its exit is at the bottom left (the station's north wall, cut low like every near wall), and the
+// head office stands east of the station, where the island layout puts it (scenes/head-office.js). The blue
+// platform roof runs along the west edge. Palette and light are the security room's; the town around comes from
+// the island layout (scenes/skyline.js).
 import * as THREE from 'three';
 import { Nav } from '../movement/navigation.js';
 import { PAL, mat, rbox, wall, bench, lampPost } from '../props.js';
 import { lightPool } from '../places/life.js';
-import { boxes, planter, bicycle, openDoor, tree, monument } from './forecourt/details.js';
+import { boxes, planter, bicycle, openDoor, tree } from './forecourt/details.js';
 import { outdoorLight, groundPatches, blocks, farTrees, paving } from './town.js';
+import { buildHeadOffice } from './head-office.js';
+import { buildSkyline } from './skyline.js';
+import * as LAYOUT from './island-layout.js';
 
 const DOOR_X = -1.5, // the station exit, in the station's north wall at z = STATION_Z
   STATION_Z = 2.65,
-  HO_X = 1.6, // the head office door and the lift, one straight line
-  ANNEX = [-0.3, 3.5], // the head office's glass-fronted ground floor: x range
-  FRONT_Z = -1.3, // its front wall (cut low), with the doors
-  BACK_Z = -3.21, // its back wall (full height), with the lift
-  TOWER_Z = -5.6; // the tower's south face, behind the lift shaft
-const ROOF = '#5d636c';
-// the annex roof beside the shaft is unlit, like the lift's lid (drawn in the scene background) that covers the shaft
-const roofMat = new THREE.MeshBasicMaterial({ color: ROOF, toneMapped: false });
-
-export const FORECOURT_LIFT_SITE = {
-  x: HO_X,
-  zBack: BACK_Z - 0.09,
-  zFront: BACK_Z + 0.09,
-  hole: [HO_X - 0.62, HO_X + 0.62],
-  wallH: 2.2,
-  floor: '1',
-  out: [HO_X, BACK_Z + 0.85],
-  cap: true,
-  shaft: true,
-};
+  COURT_N = -1.3, // the court's north edge (the stone paving), with the hedge along the lane
+  WALK = [-4.7, 22.2, -3.6, 3.9]; // where Eric can walk: the court, the way east to head office, its lobby
 
 function ground(root) {
   // island paving all round, the forecourt's lighter stone, and the station floor beyond its cut wall
-  root.add(rbox(40, 0.1, 40, '#6d6f73', { y: -0.12, z: -4, seg: 1, r: 0.01, cast: false }));
-  root.add(paving(-4.7, 7, FRONT_Z, STATION_Z, 0.9, { color: '#8e8a86', seam: '#7f7b77' }));
+  root.add(rbox(64, 0.1, 40, '#6d6f73', { x: 8, y: -0.12, z: -4, seg: 1, r: 0.01, cast: false }));
+  root.add(paving(-4.7, 7, COURT_N, STATION_Z, 0.9, { color: '#8e8a86', seam: '#7f7b77' }));
   // the worn line people walk, door to door
   root.add(paving(-2.2, 2.3, -0.3, 0.45, 0.75, { color: '#98948f', seam: '#8a8681', y: 0.004 }));
   root.add(paving(-2.2, -0.8, 0.45, STATION_Z, 0.75, { color: '#98948f', seam: '#8a8681', y: 0.004 }));
-  root.add(paving(0.9, 2.3, FRONT_Z, -0.3, 0.75, { color: '#98948f', seam: '#8a8681', y: 0.004 }));
   root.add(paving(-7, 1.2, STATION_Z, 5.2, 1.25, { color: PAL.floor, seam: PAL.floorSeam }));
   // a kerb and grass verge to the west, under the platform roof's edge
   root.add(rbox(1.3, 0.06, 12, '#5f6d58', { x: -5.45, z: STATION_Z - 6, seg: 1, r: 0.01, cast: false }));
@@ -73,72 +58,7 @@ function station(root) {
   root.add(boxes(posts, '#6f7782'));
 }
 
-function headOffice(root) {
-  const [x0, x1] = ANNEX;
-  root.add(paving(x0, x1, BACK_Z, FRONT_Z, 0.9, { color: PAL.floor, seam: PAL.floorSeam }));
-  // glass front, cut low like every near wall, with the doors open in the middle
-  root.add(wall('x', x0 - 0.09, x1 + 0.09, FRONT_Z, 0.5, 0.18, { holes: [[HO_X - 0.85, HO_X + 0.85, 0, 1]] }));
-  const door = openDoor();
-  door.position.set(HO_X, 0, FRONT_Z);
-  door.scale.y = 0.29;
-  root.add(door);
-  for (const x of [x0, x1]) root.add(wall('z', BACK_Z - 0.09, FRONT_Z, x, 2.2, 0.18));
-  root.add(wall('x', x0 - 0.09, x1 + 0.09, BACK_Z, 2.2, 0.18, { holes: [[HO_X - 0.62, HO_X + 0.62, 0, 1.45]] }));
-  // a warm lobby: two wall lamps beside the lift and a pool of light on its floor
-  for (const s of [-1, 1]) {
-    const lamp = rbox(0.12, 0.5, 0.05, null, {
-      x: HO_X + s * 1.15,
-      y: 0.95,
-      z: BACK_Z + 0.12,
-      m: mat(PAL.lamp, { emissive: new THREE.Color(PAL.lampEm), emissiveIntensity: 2.2 }),
-      cast: false,
-    });
-    root.add(lamp);
-  }
-  const light = new THREE.PointLight('#ffd8a8', 2.0, 3.6, 1.8);
-  light.position.set(HO_X, 1.5, BACK_Z + 0.9);
-  root.add(light);
-  root.add(lightPool(HO_X, BACK_Z + 0.95, 1.0, { k: 0.3, sx: 1.4 }));
-  const plant = planter(0.7);
-  plant.position.set(x1 - 0.5, 0, BACK_Z + 0.45);
-  plant.rotation.y = Math.PI / 2;
-  root.add(plant);
-  // roof beside the shaft (the lift's lid covers the shaft itself), then the tower
-  const car = [HO_X - 1.42, HO_X + 1.42];
-  for (const [a, b] of [
-    [x0 - 0.1, car[0]],
-    [car[1], x1 + 0.1],
-  ])
-    if (b - a > 0.02)
-      root.add(
-        rbox(b - a, 0.12, BACK_Z - TOWER_Z, null, {
-          x: (a + b) / 2,
-          y: 2.2,
-          z: (BACK_Z + TOWER_Z) / 2,
-          seg: 1,
-          r: 0.01,
-          m: roofMat,
-        }),
-      );
-  root.add(rbox(4.6, 0.12, 0.2, null, { x: HO_X, y: 2.2, z: TOWER_Z + 0.1, seg: 1, r: 0.01, m: roofMat }));
-  const tx = [x0 - 0.5, x1 + 0.5];
-  root.add(rbox(tx[1] - tx[0], 9, 3.6, '#7b838d', { x: (tx[0] + tx[1]) / 2, z: TOWER_Z - 1.8, seg: 1, r: 0.03 }));
-  const windows = [],
-    bands = [];
-  for (let level = 0; level < 7; level++) {
-    const y = 2.5 + level * 0.95;
-    for (let col = 0; col < 5; col++) windows.push([0.68, 0.6, 0.03, tx[0] + 0.52 + col * 0.84, y, TOWER_Z + 0.01]);
-    bands.push([tx[1] - tx[0] + 0.06, 0.08, 0.06, (tx[0] + tx[1]) / 2, y + 0.72, TOWER_Z + 0.02]);
-  }
-  root.add(boxes(windows, '#4c5a68'), boxes(bands, '#a1a8b0'));
-}
-
 function court(root, nav) {
-  // the head office's name stone, by its door
-  const stone = monument('本社', 'HEAD OFFICE');
-  stone.position.set(3.6, 0, FRONT_Z + 0.55);
-  root.add(stone);
-  nav.block(2.9, 4.3, FRONT_Z + 0.35, FRONT_Z + 0.75);
   // bicycle parking in the north-west corner, off the walking line
   const racks = [];
   for (const z of [-0.8, -0.1, 0.6])
@@ -189,14 +109,15 @@ function court(root, nav) {
   }
   // east, the lane on to the fountain plaza runs between the hedge and the planting
   const hedge = planter(3.2);
-  hedge.position.set(5.3, 0, FRONT_Z - 0.1);
+  hedge.position.set(5.3, 0, COURT_N - 0.1);
+  nav.block(3.7, 6.9, COURT_N - 0.45, COURT_N + 0.25);
   root.add(hedge);
   root.add(paving(7, 12, -1.0, 0.3, 0.75, { color: '#98948f', seam: '#8a8681', y: 0.004 }));
 }
 
 // the town beyond the court: the road south of the station, grass by the platform, the lane on east toward the
-// fountain plaza, and plain blocks around (the map's neighbours of head office), never walkable
-function town(root) {
+// fountain plaza, and plain blocks around; the island layout's buildings beyond (skyline)
+function town(root, nav) {
   groundPatches(root, [
     [-12, 12, 5.3, 6.5, '#5b5e63'],
     [-12, -7.2, -12, 5.3, '#5f6d58'],
@@ -209,11 +130,11 @@ function town(root) {
     { x: -9.2, z: -4.6, w: 3.2, d: 4.2, h: 3.2, wall: 2, east: true },
     { x: 7.4, z: -6.2, w: 3.6, d: 3.4, h: 5.6, wall: 3, west: true },
     { x: 10.8, z: -3.6, w: 2.8, d: 2.4, h: 2.6, wall: 1 },
-    { x: 10.9, z: 3.9, w: 3.2, d: 2.0, h: 1.2, wall: 3 },
     { x: -2.5, z: 8.2, w: 9, d: 2.6, h: 1.2, wall: 3 },
     { x: 6.6, z: 8.0, w: 5, d: 2.4, h: 1.4, wall: 0 },
   ]);
-  farTrees(root, [
+  nav.block(9.4, 12.2, -4.8, -2.4);
+  const trees = [
     [-8.2, 0.5, 1.1],
     [-8.6, 3.2, 0.9],
     [7.8, -1.6, 0.9],
@@ -224,30 +145,27 @@ function town(root) {
     [3.2, 3.9, 0.9],
     [5.4, 4.3, 1.0],
     [7.6, 3.6, 0.85],
-  ]);
+  ];
+  farTrees(root, trees);
+  for (const [x, z] of trees) nav.block(x - 0.15, x + 0.15, z - 0.15, z + 0.15);
+  return buildSkyline(root, 'forecourt', { layout: LAYOUT, skip: ['head_office', 'station', 'platform_shed'] });
 }
 
 export function buildForecourt() {
   const root = new THREE.Group(),
     scene = new THREE.Scene();
-  scene.background = new THREE.Color(ROOF);
+  scene.background = new THREE.Color('#5d636c');
   scene.add(root);
   const sun = outdoorLight(scene);
 
-  const nav = new Nav(-4.7, 6.2, BACK_Z + 0.1, STATION_Z - 0.05, 0.1);
+  const nav = new Nav(...WALK, 0.1);
+  nav.block(WALK[0], 5.9, STATION_Z - 0.05, WALK[3]); // the station
   ground(root);
   station(root);
-  headOffice(root);
   court(root, nav);
-  town(root);
-  const [x0, x1] = ANNEX;
-  // the head office: everything north of its front line except its own lobby
-  nav.block(-4.7, x0 + 0.1, BACK_Z, FRONT_Z + 0.1);
-  nav.block(x1 - 0.1, 6.2, BACK_Z, FRONT_Z + 0.1);
-  nav.block(x0, HO_X - 0.8, FRONT_Z - 0.1, FRONT_Z + 0.1);
-  nav.block(HO_X + 0.8, x1, FRONT_Z - 0.1, FRONT_Z + 0.1);
-  nav.block(x1 - 0.85, x1, BACK_Z, BACK_Z + 0.75); // the lobby's plant
-  const lift = liftLanding(root);
+  const sky = town(root, nav);
+  const ho = buildHeadOffice(root, nav);
+  const lift = ho.landing;
   let previousTime = null;
   return {
     root,
@@ -256,23 +174,25 @@ export function buildForecourt() {
     nav,
     stationExit: [DOOR_X, STATION_Z + 0.35],
     start: [DOOR_X, STATION_Z - 0.75],
-    officeEntrance: [HO_X, FRONT_Z + 0.45],
-    liftOut: [...FORECOURT_LIFT_SITE.out],
+    officeEntrance: ho.entrance,
+    liftOut: [...ho.liftSite.out],
     plazaLane: [6.0, -0.4], // the east lane on to the fountain plaza; Eric leaves and comes back along it
     plazaIn: [5.3, -0.4], // where he stops coming back, clear of the lane's trigger
     plazaEdge: [7.3, -0.4],
     liftSite: {
-      ...FORECOURT_LIFT_SITE,
-      hole: [...FORECOURT_LIFT_SITE.hole],
-      out: [...FORECOURT_LIFT_SITE.out],
+      ...ho.liftSite,
+      hole: [...ho.liftSite.hole],
+      out: [...ho.liftSite.out],
     },
     liftLanding: { leaves: lift.leaves, k: () => lift.k },
     lift,
+    headOffice: ho,
+    sky,
+    kuro: ho.kuro,
     setLiftOpen(k) {
       lift.want = THREE.MathUtils.clamp(k, 0, 1);
     },
     camera: { elev: 46, fov: 24 },
-    towerZ: TOWER_Z,
     doorX: DOOR_X,
     update(t, dt) {
       const elapsed = dt ?? (previousTime == null ? 1 / 60 : t - previousTime);
@@ -280,25 +200,4 @@ export function buildForecourt() {
       lift.update(Math.min(0.1, Math.max(0, elapsed)));
     },
   };
-}
-
-function liftLanding(root) {
-  const group = new THREE.Group();
-  group.position.set(HO_X, 0, BACK_Z + 0.1);
-  root.add(group);
-  group.add(rbox(1.44, 0.1, 0.08, PAL.trim, { y: 1.44, seg: 1 }));
-  for (const s of [-1, 1]) group.add(rbox(0.1, 1.44, 0.08, PAL.trim, { x: s * 0.67, seg: 1 }));
-  group.add(rbox(1.28, 0.012, 0.24, PAL.metal, { y: 0.003, seg: 1, r: 0.003 }));
-  const leaves = [-1, 1].map((s) => {
-    const leaf = rbox(0.6, 1.36, 0.045, '#8e949d', { x: s * 0.31, z: -0.03, seg: 1 });
-    group.add(leaf);
-    return leaf;
-  });
-  group.add(rbox(0.08, 0.16, 0.025, PAL.metal, { x: 0.85, y: 0.6, seg: 1 }));
-  const landing = { leaves, k: 0, want: 0 };
-  landing.update = (dt) => {
-    landing.k += (landing.want - landing.k) * Math.min(1, dt * 5);
-    for (let i = 0; i < 2; i++) leaves[i].position.x = (i ? 1 : -1) * (0.31 + 0.6 * landing.k);
-  };
-  return landing;
 }
