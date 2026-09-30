@@ -147,7 +147,7 @@ const ROWS = [
   ['platform_shed', 'shed', 1, 2.4, 2, BLUE_ROOF, 'flat', [-32.6, -24.4, -24.6, 14]],
   ['head_office', 'tower', 12, 2, 0, ROOF, 'office', [-4.9, -13.85, 11.5, -4.25]],
   ['head_office_wing', 'office', 5, 2, 1, ROOF, 'office', [-14, -11.9, -8.2, -7.3]],
-  ['canteen', 'canteen', 2, 2.1, 1, BLUE_ROOF, 'flat', [22.2, -27.6, 44.9, -19.3]],
+  ['canteen', 'canteen', 2, 2.1, 1, BLUE_ROOF, 'flat', [22.535, -28.8, 45.235, -20.5]],
   ['clinic', 'clinic', 3, 2, 0, ROOF, 'office', [25.4, -38.8, 36.1, -32.8]],
   ['shops_north', 'shop', 2, 1.45, 2, SHOP_ROOF, 'shop', [-4, 13.4, 64, 17.9]],
   ['arcade', 'arcade', 1, 2.9, 1, '#9aa4ad', 'flat', [-4, 17.9, 64, 22.4]],
@@ -227,7 +227,7 @@ const DETAILS = {
   head_office_wing: 'The lower wing west of the tower, across a service lane.',
   office_e1: 'North-east of the tower, behind the trees on the lane toward the fountain.',
   canteen:
-    'The company canteen: two storeys, blue-grey roof with plant, umbrella terrace on its south side facing the fountain.',
+    'The company canteen: two storeys, blue-grey roof with plant, umbrella terrace on its south side facing the fountain; placed so its door bay is on the fountain’s north-south axis and the terrace ends short of the plaza.',
   clinic: 'The clinic (green cross).',
   gym: 'The gym’s arched roof (green on the reference, muted); the pool and courts east of it.',
   shops_north:
@@ -276,15 +276,16 @@ export const PATHS = [
     id: 'route_home',
     kind: 'lane',
     w: 3,
-    line: pairs([-1.7, -2.75, 21, -2.75, 21, 4.5, 52, 4.5, 52, -7.6, 79.35, -7.6, 79.35, -1.3]),
+    line: pairs([-1.7, -2.75, 64, -2.75, 64, -7.6, 79.35, -7.6, 79.35, -1.3]),
     detail:
-      'From the head office door (the lane’s north edge), east along the tower’s south face, a jog south past the trees, along the fountain plaza’s south edge, north past the canteen’s east side, and east into the dorm entrance court from its north.',
+      'From the head office door (the lane’s north edge), east along the tower’s south face and straight on through the fountain plaza (it meets the circle on the fountain’s east-west axis, in on the west, out on the east), on east past the plaza, a jog north beyond it, and east into the dorm entrance court from its north.',
   },
   {
     id: 'fountain_plaza',
     kind: 'plaza',
-    circle: [37.29, -5.18, 11.5],
-    detail: 'The round paved plaza; the basin is about 8.6 across on the reference.',
+    circle: [37.29, -2.75, 11.5],
+    detail:
+      'The round paved plaza; the basin is about 8.6 across on the reference. Its centre sits on the lane’s axis, 2.4 south of where the reference draws it, so the lane runs straight in and out and the canteen’s terrace stays clear of it.',
   },
   {
     id: 'promenade',
@@ -311,7 +312,7 @@ export const GREEN = [
   },
   {
     id: 'lane_verge',
-    poly: pairs([5, -1.25, 19.5, -1.25, 19.5, 6, 53.5, 6, 53.5, 13.4, -4, 13.4, -4, 11, 5, 11]),
+    poly: pairs([5, -1.25, 65.5, -1.25, 65.5, 13.4, -4, 13.4, -4, 11, 5, 11]),
     detail: 'The verge between the lane and the shop street’s back.',
   },
   {

@@ -1,14 +1,19 @@
 // The fountain plaza's plan (scenes/plaza.js): every zone from the island layout, in the chunk's frame (x east,
 // z south), so the paving, the kerbs, the beds and the lamps line up with each other and with the buildings.
 //
-//   the circle: the map's round plaza, 23 across round the fountain, paved in rings with a dark border ring. Its
-//   south edge is cut straight by the lane's north border: the plaza opens on to the lane there.
-//   the lane (route_home): 3 wide, a U round the plaza: in from the west (from head office) at WZ, south at WX,
-//   east along the plaza at LZ, north at EX, out east (to the dorms) at EZ. Where it turns, it also runs on straight
-//   into the plaza: two short links, west and east, that meet the circle's border ring.
-//   the ring bed: a planted band round the circle outside its border, cut open for the links and the terrace
-//   the terrace: in front of the canteen, between its glazed front and the circle's north arc
-//   the south verge: the lane's planted strip, an avenue, a lawn, and a footpath along the shop street's backs
+// Two axes cross at the fountain. East-west: the lane (route_home) comes in from head office on the west, meets the
+// circle on the axis, and leaves the circle on the same axis to the east, toward the dorms. North-south: the
+// canteen's door, a short link from its terrace to the circle, the fountain.
+//
+//   the circle: the map's round plaza, 23 across round the fountain, paved in rings with a dark border ring; the
+//   lanes and the link run in under its border ring, so it is whole, and they meet it square on
+//   the lanes: 3 wide, grey brick between pale borders, west and east of the circle on the axis
+//   the link: as wide as the lanes, in the same brick, from the terrace's south edge to the circle
+//   the ring bed: a planted band round the circle outside its border, opened only for the two lanes and the link
+//   the terrace: the canteen's own, from its glazed front to a seat-height wall, clear of the ring bed by a strip of
+//   lawn; the wall is open only where the link starts
+//   the lane verges: a kerbed bed with a low hedge along both sides of each lane, the zelkovas behind it
+//   the footpath along the shop street's backs, south of the lawn
 import * as LAYOUT from '../island-layout.js';
 
 const CHUNK = 'plaza';
@@ -25,27 +30,14 @@ export const R = RADIUS;
 export const BASIN = 4.3; // the map's basin, 8.6 across
 export const BORDER = 0.42; // the dark border ring, inside R
 
-// the lane: its centre lines from the layout
+// the lane: its axis is the route's first leg, from head office (the fountain sits on it)
 export const HALF = path('route_home').w / 2;
-export const [LZ, WX, WZ, EX, EZ] = (() => {
-  const pts = path('route_home').line.map(local);
-  const i = pts.findIndex((p, k) => k + 1 < pts.length && p[0] < F[0] && pts[k + 1][0] > F[0] && p[1] > F[1]);
-  return [r2(pts[i][1]), r2(pts[i][0]), r2(pts[i - 1][1]), r2(pts[i + 1][0]), r2(pts[i + 2][1])];
-})();
-export const LANE_N = LZ - HALF; // the lane's north edge along the plaza: where the circle is cut
+export const LZ = r2(local(path('route_home').line[0])[1]);
+const UNDER = Math.sqrt(R * R - HALF * HALF) - 1.0; // how far in the lanes and the link run, under the circle
 export const LANE = {
-  w: [-44, WX + HALF, WZ - HALF, WZ + HALF], // in from head office
-  wl: [WX - HALF, WX + HALF, WZ + HALF, LZ - HALF], // the west leg, down to the plaza
-  s: [WX - HALF, EX + HALF, LZ - HALF, LZ + HALF], // along the plaza (both corners)
-  el: [EX - HALF, EX + HALF, EZ + HALF, LZ - HALF], // the east leg
-  e: [EX - HALF, 44, EZ - HALF, EZ + HALF], // out to the dorms
+  w: [-44, F[0] - UNDER, LZ - HALF, LZ + HALF], // in from head office
+  e: [F[0] + UNDER, 44, LZ - HALF, LZ + HALF], // out toward the dorms
 };
-// the links straight on into the plaza, under the circle's edge
-export const LINKS = {
-  w: [WX + HALF, F[0] - R + 1, WZ - HALF, WZ + HALF],
-  e: [F[0] + R - 1, EX - HALF, EZ - HALF, EZ + HALF],
-};
-export const LANE_RECTS = [...Object.values(LANE), ...Object.values(LINKS)];
 
 // the canteen and the shop street
 const rectOf = (id) => {
@@ -57,7 +49,7 @@ export const SHOPS = ((r) => ({ a: local(r), dir: [1, 0], depth: r[3] - r[1], le
   building('shops_north').rect,
 );
 export const SHOPS_Z = SHOPS.a[1]; // the shops' backs, toward the lane
-// the canteen door, on the fountain's axis (the ground-floor bay nearest it)
+// the canteen door: the ground-floor bay nearest the fountain's axis (the layout puts one on it)
 export const DOOR_X = (() => {
   const [x0, , x1] = CANTEEN;
   const bays = Math.round((x1 - x0) / 2.3),
@@ -69,44 +61,33 @@ export const DOOR_X = (() => {
   }
   return best;
 })();
-// the terrace: from the canteen's front to a line across, the circle's north arc cutting into it
+// the terrace: from the canteen's front to its wall
 export const TERRACE = [CANTEEN[0] + 2.6, CANTEEN[2] - 0.2, CANTEEN[3], CANTEEN[3] + 4.2];
 export const TERRACE_S = TERRACE[3];
+// the link from the terrace to the circle, on the door's axis
+export const LINK = [DOOR_X - HALF, DOOR_X + HALF, TERRACE_S, F[1] - Math.sqrt(R * R - HALF * HALF) + 1.0];
+export const LANE_RECTS = [LANE.w, LANE.e, LINK];
 
 // the ring bed round the circle, outside its border: its width, and the arcs it runs over (radians from east
-// toward south). Openings: the lane (south, where the circle is cut), the two links, the terrace (north).
+// toward south). Openings: the lanes (east and west) and the link (north), each where its edges cross the circle.
 export const BAND = 1.35;
-const openingAt = ([, , z0, z1], side) => {
-  // the angles where the circle's edge crosses a link's two edges, on the west (-1) or east (1) side
-  const a = (z) => {
-    const s = (z - F[1]) / R;
-    return side > 0 ? Math.asin(s) : Math.PI - Math.asin(s);
-  };
-  return [a(z0), a(z1)].sort((p, q) => p - q);
-};
-const [LWa, LWb] = openingAt(LINKS.w, -1);
-const [LEa, LEb] = openingAt(LINKS.e, 1);
+const GAP = 0.02;
+const side = Math.asin(HALF / R); // half the angle a lane's width takes on the circle
+const north = (x) => 2 * Math.PI - Math.acos((x - F[0]) / R); // the angle on the north arc over x
 export const OPEN = {
-  south: [Math.asin((LANE_N - F[1]) / R), Math.PI - Math.asin((LANE_N - F[1]) / R)],
-  west: [LWa - 0.02, LWb + 0.02],
-  east: [LEa - 0.02 + Math.PI * 2, LEb + 0.02 + Math.PI * 2],
+  east: [-side - GAP, side + GAP],
+  west: [Math.PI - side - GAP, Math.PI + side + GAP],
+  north: [north(LINK[0]) - GAP, north(LINK[1]) + GAP],
 };
-// the bed's arcs, clockwise from the south-west: SW corner, NW (up to the terrace), NE (from the terrace), SE. The
-// north arcs end where the bed's outer edge reaches the terrace's south line.
-const TA = Math.asin((TERRACE_S - F[1]) / (R + BAND)); // negative: north of the centre
 export const ARCS = {
-  sw: [OPEN.south[1], OPEN.west[0]],
-  nw: [OPEN.west[1], Math.PI - TA],
-  ne: [Math.PI * 2 + TA, OPEN.east[0]],
-  se: [OPEN.east[1], OPEN.south[0] + Math.PI * 2],
+  s: [OPEN.east[1], OPEN.west[0]],
+  nw: [OPEN.west[1], OPEN.north[0]],
+  ne: [OPEN.north[1], OPEN.east[0] + 2 * Math.PI],
 };
 
-// the south verge: the lane's strip (a kerb, a bed of ground cover with a low hedge), then the avenue on the grass;
-// trees every 4 on the fountain's axis, bench bays opposite the plaza's corners
-export const STRIP = [LANE.s[0], LANE.s[1], LANE.s[3], LANE.s[3] + 1.1];
-export const AVENUE_Z = STRIP[3] + 1.0;
-export const AVENUE = [-14, -10, -6, -2, 2, 6, 10, 14].map((x) => x + F[0]);
-export const BAYS = [-8, 8].map((x) => x + F[0]);
+// the zelkovas along the lanes, every 4 from the ring bed out to the edge of the view; the lamps stand between
+// every other pair
+export const AVENUE = [0, 4, 8].map((d) => R + BAND + 3 + d);
 export const FOOTPATH = [-44, 44, SHOPS_Z - 1.7, SHOPS_Z];
 
 export const inRect = (x, z, [x0, x1, z0, z1], m = 0) => x > x0 + m && x < x1 - m && z > z0 + m && z < z1 - m;

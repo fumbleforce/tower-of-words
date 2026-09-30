@@ -88,7 +88,7 @@ export async function plazaPlace(game) {
           new THREE.Vector3(0, 0, 0),
           {
             follow: true,
-            clamp: [-5.5, 6.5, -11.5, 4.4],
+            clamp: [-8, 8, -11.5, 6.8],
             lead: -1.4,
             limY: 0.96,
           },
@@ -103,7 +103,7 @@ export async function plazaPlace(game) {
             new THREE.Vector3(0, 1.2, 2.4),
           ],
           new THREE.Vector3(0, 0, 0),
-          { follow: true, clamp: [-9.2, 10.8, -13.5, 6.4], lead: -3.4 },
+          { follow: true, clamp: [-12.5, 12.5, -14.5, 8.8], lead: -3.4 },
         );
     },
     pick(rc) {
