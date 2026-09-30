@@ -15,6 +15,8 @@ Usage:
   python3 tools/assets/sync.py push [--dry-run] [--prune]   upload new and changed used files, rewrite the lock file
   python3 tools/assets/sync.py pull [PATH ...] [--force]    fetch missing or changed files (optionally under PATHs)
   python3 tools/assets/sync.py check [--offline]            exit 1 if a used file is not in the lock file or not in R2
+  python3 tools/assets/sync.py check --offline --staged    the commit hook: an unpushed file fails only if the commit
+                                                            being made uses it (staged_refs says how)
 
 Credentials come from .env (or the environment): R2_ACCOUNT_ID, R2_ACCESS_KEY_ID, R2_SECRET_ACCESS_KEY, R2_BUCKET.
 R2_ENDPOINT and R2_REGION override the endpoint (for testing against another S3 server).
@@ -31,6 +33,7 @@ import io
 import json
 import mimetypes
 import os
+import re
 import subprocess
 import sys
 import tempfile
@@ -448,6 +451,31 @@ def cmd_pull(a):
         raise SystemExit(f'{len(failed)} downloads failed; run pull again')
 
 
+def staged_refs():
+    """What the commit being made uses, from the index: the text of its added or changed text files, and their folders.
+
+    A used file on disk that is unlocked, or changed since the lock, is the commit's problem only if the commit uses
+    it: its path or file name appears in that text as a whole name, or it sits in a folder the commit adds or changes
+    files in (a Showcase entry.json next to its images). Anything else is someone's work in progress in this checkout
+    (or linked from the main one), not this commit's business."""
+    listed = subprocess.run(['git', 'diff', '--cached', '--name-only', '-z', '--diff-filter=ACMR'], cwd=ROOT,
+                            capture_output=True, check=True).stdout.decode()
+    texts, dirs = [], set()
+    for name in filter(None, listed.split('\0')):
+        dirs.add(os.path.dirname(name))
+        blob = subprocess.run(['git', 'show', f':{name}'], cwd=ROOT, capture_output=True, check=True).stdout
+        if b'\0' not in blob[:1 << 16] and len(blob) <= CONF['max_text_kb'] * 1024:
+            texts.append(blob.decode('utf-8', 'replace'))
+    return '\n'.join(texts), dirs
+
+
+def used_by(p, refs):
+    text, dirs = refs
+    if os.path.dirname(p) in dirs:
+        return True
+    return re.search(r'(?<![\w.-])' + re.escape(os.path.basename(p)) + r'(?![\w-])', text) is not None
+
+
 def cmd_check(a):
     remote = None
     problems = []
@@ -457,15 +485,24 @@ def cmd_check(a):
         except (SystemExit, RuntimeError) as e:
             problems.append(f'cannot list R2: {e} (--offline skips the R2 check)')
     d = drift(remote)
+    new, changed, elsewhere = d['new'], d['changed'], []
+    if a.staged:  # the commit hook: judge what this commit uses, not every stray file in the checkout
+        refs = staged_refs()
+        elsewhere = [p for p in new + changed if not used_by(p, refs)]
+        new, changed = [p for p in new if p not in elsewhere], [p for p in changed if p not in elsewhere]
     problems += d['problems']
-    problems += [f'used, not in the lock file: {p}' for p in d['new']]
-    problems += [f'changed, not pushed: {p}' for p in d['changed']]
+    problems += [f'used, not in the lock file: {p}' for p in new]
+    problems += [f'changed, not pushed: {p}' for p in changed]
     problems += [f'private path in the lock file: {p}' for p in d['private']]
     problems += [f'in the lock file, not in R2: {p}' for p in d.get('unsent', [])]
     for p in d['missing'][:5]:
         print(f'note: missing here (pull fetches it): {p}')
     if len(d['missing']) > 5:
         print(f"note: {len(d['missing']) - 5} more missing here")
+    for p in elsewhere[:3]:
+        print(f'note: not pushed, but this commit does not use it: {p}')
+    if len(elsewhere) > 3:
+        print(f'note: {len(elsewhere) - 3} more not pushed that this commit does not use')
     for p in problems[:40]:
         print('FAIL', p)
     if len(problems) > 40:
@@ -492,6 +529,8 @@ def main():
     s.add_argument('--all', action='store_true')
     s = sub.add_parser('check', help='exit 1 if a used file is not in the lock file or not in R2')
     s.add_argument('--offline', action='store_true', help='skip the R2 listing')
+    s.add_argument('--staged', action='store_true',
+                   help='fail on an unpushed file only if the staged commit uses it (the commit hook)')
     a = ap.parse_args()
     {'status': cmd_status, 'push': cmd_push, 'pull': cmd_pull, 'check': cmd_check}[a.cmd](a)
 

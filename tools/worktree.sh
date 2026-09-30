@@ -10,8 +10,10 @@
 #
 # setup links, never copies, from the main checkout:
 #   - node_modules (the folder) and .env
-#   - every file under the asset roots in tools/assets/sync.json or in its lock file that main doesn't track and
-#     this worktree's .gitignore ignores (since the asset move, every binary), one symlink per file.
+#   - every file in this worktree's asset lock file (tools/assets/assets.lock.json) that it lacks, binary or not;
+#   - main's other untracked files under the asset roots (tools/assets/sync.json, plus the voice pipeline's) that
+#     this worktree's .gitignore ignores, except unpushed assets (used but not in the lock: another task's work in
+#     progress, which the commit check would count). One symlink per file.
 # The links are read-only in spirit: to change an asset in a worktree, delete its link first and write a new file;
 # tools/land.sh then keeps the worktree and lists the new file instead of deleting it.
 set -euo pipefail
@@ -46,21 +48,33 @@ setup() {
   fi
   # the voice pipeline's local models and reference transcripts (without them voice-clips falls back to edge-tts)
   roots+=(art/approved/mio/meshy/ art/approved/mc/meshy/ art/approved/music/ tools/island_audio/ tools/voice-refs/)
-  lock_paths() {  # every file in the asset lock file (used assets, some outside the roots)
-    [[ -f "$1/tools/assets/assets.lock.json" ]] || return 0
+  lock_paths() {  # every file in this worktree's lock file (used assets, some outside the roots, some JSON)
+    [[ -f "$wt/tools/assets/assets.lock.json" ]] || return 0
     python3 -c 'import json,sys; sys.stdout.write("".join(p + "\0" for p in json.load(open(sys.argv[1]))["files"]))' \
-      "$1/tools/assets/assets.lock.json"
+      "$wt/tools/assets/assets.lock.json"
   }
-  # Candidates: files main doesn't track under the roots, and the lock file's files. Linked: the ones this worktree's own rules ignore, so a
-  # link never shows up as a new file to commit (main's working .gitignore may differ from this branch's).
+  not_unpushed() {  # drop the files sync.py counts as used that this worktree's lock file doesn't have: someone's
+    # unpushed work in main (a Showcase round being shot), not this branch's, and the commit check would count them
+    [[ -f "$wt/tools/assets/sync.py" ]] || { cat; return 0; }
+    python3 -c 'import sys; sys.path.insert(0, sys.argv[1]); sys.dont_write_bytecode = True; import sync
+lock = sync.load_lock()
+for p in filter(None, sys.stdin.buffer.read().decode().split("\0")):
+    used = sync.matches(p, sync.CONF["roots"]) and sync.is_binary(p) and not sync.matches(p, sync.CONF["exclude"])
+    if p in lock or not used:
+        sys.stdout.write(p + "\0")' "$wt/tools/assets"
+  }
+  # Linked: every locked file this worktree lacks, whatever its type or this branch's .gitignore says; and main's
+  # other untracked files under the roots that this worktree ignores (so a link never shows up as a new file to
+  # commit) and that aren't unpushed assets. Links to locked files git doesn't ignore (the public creator's JSON) do
+  # show as untracked; tools/land.sh passes over links to main's same path.
   local files=0 rel
   while IFS= read -r -d '' rel; do
     files=$((files + 1))
     link "$rel"
-  done < <({ git -C "$main" ls-files -z --others -- "${roots[@]}"; lock_paths "$wt"; } \
-             | sort -z -u | grep -z -v -e '/private/' -e '^private/' -e '__pycache__' -e '\.pyc$' \
-             | git -C "$wt" check-ignore -z --no-index --stdin)
-  echo "worktree setup: $wt; $linked new links ($files untracked asset files in main that this worktree ignores)"
+  done < <({ lock_paths; git -C "$main" ls-files -z --others -- "${roots[@]}" \
+               | git -C "$wt" check-ignore -z --no-index --stdin | not_unpushed; } \
+             | sort -z -u | grep -z -v -e '/private/' -e '^private/' -e '__pycache__' -e '\.pyc$')
+  echo "worktree setup: $wt; $linked new links ($files candidates: the locked files, and main's other ignored files under the asset roots)"
 }
 
 new() {

@@ -140,7 +140,7 @@ Tested against a local S3 server (SeaweedFS with signature checking on). A wrong
 - a path with a `private/` folder in it;
 - a text file over 2 MB (`max_text_kb`; the biggest tracked text file today is three.core.js at 1.4 MB).
 
-Once the lock file exists, the hook also runs `sync.py check --offline` (under a second) and refuses the commit while a used asset isn't pushed, so nobody has to remember to push.
+Once the lock file exists, the hook also runs `sync.py check --offline --staged` (under a second) and refuses the commit while an asset it uses isn't pushed, so nobody has to remember to push. "Uses" means the file's name appears in a file the commit adds or changes, or the file sits in a folder the commit touches (a Showcase entry.json next to its images). Other unpushed files in the checkout, such as another task's Showcase round in progress, are only noted (issue #72).
 
 It isn't installed yet. Right now agents still commit screenshots and candidates, and the hook would block them during the freeze. It gets installed in stage 2, step 7.
 
