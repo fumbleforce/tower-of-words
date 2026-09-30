@@ -30,6 +30,12 @@ const EMOTE_FACE = {
   '…': ['tired', 'deadpan'],
 };
 const faceNow = {};
+// what the portraits keep clear of while a prompt waits: a function giving boxes on screen, Eric's first (set by the
+// game, narrative/hooks/presentation.js)
+let avoidBoxes = () => [];
+export function setPortraitAvoid(fn) {
+  avoidBoxes = fn;
+}
 let lastNpc = null;
 export function setFace(who, face) {
   faceNow[who] = face;
@@ -105,6 +111,17 @@ export function showPortraits(t, whoId, face) {
 }
 // Place each portrait from its face box: face height F on screen, chin at the same height for everyone, the body
 // cut at the waist by the bottom of the screen (desktop) or by the top of the solid band (phone).
+// While a prompt or choice waits on the player (a word to type, replies to pick), no portrait covers Eric (issue #76):
+// one that would goes to the other side, else shrinks, else fades out, and it comes back when the lines go on.
+const WAYS = [
+  { flip: false, k: 1 },
+  { flip: true, k: 1 },
+  { flip: false, k: 0.7 },
+  { flip: true, k: 0.7 },
+];
+const OFF = WAYS.length; // faded out
+let lastKeep = null,
+  followRaf = 0;
 export function layoutStage() {
   const S = $('#stage');
   if (!S || S.hidden) return;
@@ -115,21 +132,47 @@ export function layoutStage() {
   const band = phone ? Math.max(170, (talk.hidden ? 0 : talk.offsetHeight) + 18) : 0;
   S.style.setProperty('--band', band + 'px');
   // phone: a small bust docked to the side, cut on the solid band (QA round 1: a phone portrait covered 60% of the scene)
-  const F = phone ? Math.min(58, vh * 0.068) : Math.min(124, vh * 0.13);
+  const F0 = phone ? Math.min(58, vh * 0.068) : Math.min(124, vh * 0.13);
   const cutK = phone ? 1.55 : 2.25; // chin to the cut, in face heights (the waist on desktop)
   const base = vh - band;
-  for (const el of S.querySelectorAll('.por')) {
-    const d = FACE[el.dataset.who];
-    if (!d || el.hidden) continue;
-    const s = F / (d.f[3] - d.f[1]),
-      cx = (d.f[0] + d.f[2]) / 2;
-    const chin = base - cutK * F,
-      top = chin - d.f[3] * s;
-    const left = el.classList.contains('left');
+  const keep = waiting(talk) ? avoidBoxes() : [];
+  lastKeep = keep.length ? keep : null;
+  const taken = [];
+  // where a portrait goes at size k, and the box its body covers (about 1.4 face widths each side of the face, from
+  // the top of the hair, about half a face above the face box, down to the cut)
+  const place = (d, left, k) => {
+    const F = F0 * k,
+      s = F / (d.f[3] - d.f[1]),
+      cx = (d.f[0] + d.f[2]) / 2,
+      fw = (d.f[2] - d.f[0]) * s;
+    const top = base - cutK * F - d.f[3] * s;
     const fx = phone ? vw * (left ? 0.2 : 0.8) : vw * (left ? 0.16 : 0.86);
     // phone: slide the picture in so all of it stays on screen (Eric's 648-wide image ran 48 px past the right edge at
     // 390 wide); the face size stays the same
     const x = phone ? Math.max(0, Math.min(vw - d.W * s, fx - cx * s)) : fx - cx * s;
+    const mid = x + cx * s;
+    const body = { x0: mid - 1.4 * fw, x1: mid + 1.4 * fw, y0: top + Math.max(0, d.f[1] * s - F / 2), y1: base };
+    return { s, x, top, body };
+  };
+  const clear = (b) =>
+    ![...keep, ...taken].some((o) => b.x0 < o.x1 + 8 && b.x1 > o.x0 - 8 && b.y0 < o.y1 + 8 && b.y1 > o.y0 - 8);
+  for (const el of S.querySelectorAll('.por')) {
+    const d = FACE[el.dataset.who];
+    if (!d || el.hidden) continue;
+    const left = el.classList.contains('left');
+    const at = (w) => place(d, w.flip ? !left : left, w.k);
+    let way = 0;
+    if (lastKeep) {
+      // keep this prompt's way while it stays clear, so the picture doesn't jump about as the camera moves
+      const now = el._way ?? 0;
+      way = now < OFF && clear(at(WAYS[now]).body) ? now : WAYS.findIndex((w) => clear(at(w).body));
+      if (way < 0) way = OFF;
+    }
+    el._way = lastKeep ? way : undefined;
+    el.classList.toggle('aside', way === OFF);
+    const { s, x, top, body } = at(WAYS[way === OFF ? 0 : way]);
+    if (way !== OFF) taken.push(body);
+    el._body = way === OFF ? null : body; // for tools/prompt-shots.mjs
     el.style.width = d.W * s + 'px';
     el.style.height = d.H * s + 'px';
     el.style.left = x + 'px';
@@ -140,6 +183,25 @@ export function layoutStage() {
     // cut exactly at the base: the screen edge on desktop, the top of the solid band on phone
     el.style.clipPath = `inset(0 -40px ${Math.max(0, top + d.H * s - base)}px -40px)`;
   }
+  // Eric and the camera can move while the prompt waits: follow them until it's answered
+  if (lastKeep && !followRaf) followRaf = requestAnimationFrame(follow);
+}
+// a word to type or replies to pick are up and waiting for the player
+function waiting(talk) {
+  return (
+    !!talk && !talk.hidden && (talk.classList.contains('typing') || !!talk.querySelector('.chips .chip:not(:disabled)'))
+  );
+}
+function follow() {
+  followRaf = 0;
+  const S = $('#stage');
+  if (!S || S.hidden || !lastKeep) return;
+  const keep = waiting($('#talk')) ? avoidBoxes() : [];
+  const moved =
+    keep.length !== lastKeep.length ||
+    keep.some((b, i) => ['x0', 'x1', 'y0', 'y1'].some((k) => Math.abs(b[k] - lastKeep[i][k]) > 2));
+  if (moved) layoutStage();
+  else followRaf = requestAnimationFrame(follow);
 }
 addEventListener('resize', () => layoutStage());
 // the stage follows the talk panel: shown with it, hidden with it, re-laid out when its content changes (the phone
