@@ -58,6 +58,7 @@ Plain writing (humanizer), how dialogue must sound (spoken, no AI voice, no expo
 - NO EXPOSITION IN PANELS (Jørgen, 2026-09-28: "NO EXPOSITION IN JUST PANELS, EXPOSURE THROUGH DIALOGUE"). No title cards, no text-panel setup, no goal cards: who, where, why and what to do come out of what people say. UI text is limited to controls.
 - No narration of what the player can see (Jørgen, 2026-09-28: "Stop with the useless exposition when I can SEE this"). Narration only for what can't be seen and matters, in a few words.
 - Say what happened when it's easy to miss (Jørgen: "am I catching the train? ... few will even notice the lunch box"). Small key events get a short narration line and a camera frame, and narration names the thing and what is happening to it. Choices always name their object.
+- Train discoveries (Jørgen, 2026-09-30): "I dont want more text early on, but sometthing interesting to find."
 - Fewest steps (Jørgen, 2026-09-29: "dont overcomplicate scenes like this"). A scene gets the fewest steps that tell the moment, one action per beat, no extra clicks.
 - Stage in steps a slow reader can follow (Jørgen, 2026-09-28): set the situation up in a logical order, and frame the person who matters, not just the object.
 - Big moments must read on their own (Jørgen, 2026-09-28: "I have no idea what happened... It is extremely poor."). Set up every person and stake before the moment, show the stakes on screen, make the magic visibly and audibly unnatural, and never lean on backstory the player hasn't seen.

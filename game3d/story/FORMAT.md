@@ -133,8 +133,8 @@ Events: `start`, `approach` (the train starts slowing, when the story runs `{ do
 - `alight` `except`: everyone gets off but those listed. `depart`: the train leaves.
 - `wake` `who`: a sleeper jolts awake.
 - `catTo` `to`: Tama hops down and trots to a spot or person.
-- `bag` `state: 'teeter'|'slide'|'caught'|'dropped'`: Mio's bag on the free seat.
-- `cup` `state: 'tip'|'safe'`: the coffee on the free seat.
+- `bag` `state: 'teeter'|'slide'|'caught'|'dropped'`: Mio's bag on the seat beside her.
+- `cup` `state: 'tip'|'safe'`: the coffee on the seat beside Mio.
 
 ### Gate (`gate`)
 

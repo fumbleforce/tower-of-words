@@ -1,6 +1,6 @@
 # Train encounters: draft notes
 
-C-0130, corrected by C-0133: the people are reachable, but their replies are dull. Six complete optional encounters are proposed. Nothing is implemented or voiced. Claude cold-read comes before the review opens.
+C-0130, corrected by C-0133: the people are reachable, but their replies are dull. Six complete optional encounters are proposed. Claude cold-read passed and the review is open. No proposed encounter is implemented or voiced. The shared seat hint now names the lunchbox.
 
 Story-sense diagnosis: the carriage has people but too little life outside the main conversation. Dialogue diagnosis: the optional lines mostly do one job, acknowledge the click. Give the person a concern already under way, then let Eric briefly enter it.
 
@@ -14,11 +14,13 @@ The proposed Japanese passenger lines have English subtitles, including unfamili
 
 ### train-aoi
 
+Rejected on 2026-09-30; keep the original. The proposal below is retained for reference.
+
 Aoi looks at Eric’s existing staff card and reads its B2 assignment; Eric has no fluent answer to her Japanese. Keep her seated phone call. Combine her bow and conditional seat hint. The basement discomfort sets up Mio’s later reaction; do not change or repeat Mio’s explanation here.
 
 ### train-bun
 
-Turn the seated woman toward Eric and frame her bag. Her point, Eric’s hand and the closing zip carry the request without Japanese comprehension. One automatic small help beat, no drag puzzle, menu or inventory. She is returning from mainland shopping; this does not establish a daily commute or remove the island shops. No food gift competes with Mio’s pickle.
+One click, one short bag-closing motion and one thank-you. She points; Eric presses the bulging top while she closes the zip. Show the help through movement, with no narration, extra dialogue, drag puzzle, menu or inventory. Keep the usual seat hint when needed. She is returning from mainland shopping; no food gift competes with Mio’s pickle.
 
 ### train-youth
 
@@ -44,3 +46,7 @@ The existing six scenery nodes are disabled through marker filtering. This is se
 ## Cold-read changes
 
 C-0136: English subtitles are now an explicit part of the proposal. Fixed the headphone wearer's gender; removed the invented second IT team and later-match hint; replaced the duplicate food offer with help closing a shopping bag; cut Eric's closing quips; simplified the phone/printout gestures; gave Hamada a sleepy apology. Aoi reads Eric's card rather than answering fluent English. Her discomfort and the reader's printout are small optional setups for Mio's fuller explanation, whose script is unchanged. No repeated “yesterday” detail.
+
+## Partial feedback, 2026-09-30
+
+Aoi keeps her original encounter. Bun remains undecided after the seat-reference correction; the other four cards are unanswered. The review stays open. See [the saved feedback](feedback.json) for Jørgen’s full wording, including his request for discoveries without more early text. The shared hint now identifies the seat with the lunchbox, and the goal says “Sit by the lunchbox.” No extra line, click, spoken dialogue or voice was added. C-0146 also shortens the bun proposal to the bag-closing gesture and one thank-you. Its action descriptions are staging instructions, not added narration. It still needs a pick before any implementation.
