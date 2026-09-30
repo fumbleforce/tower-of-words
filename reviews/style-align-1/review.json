@@ -2,7 +2,7 @@
  "title": "Style alignment round 1: the cast re-drawn toward Mio and Kuro",
  "date": "2026-09-30",
  "by": "claude-agent:style-align",
- "status": "open",
+ "status": "decided",
  "question": "For each person, which one do you want, or keep the current portrait?",
  "multi": true,
  "media": [
@@ -490,5 +490,18 @@
    "label": "Earlier: group-portrait-1 (your decision that started this)",
    "href": "bible/#review/group-portrait-1"
   }
- ]
+ ],
+ "decided": [
+  "eric-ink-2001",
+  "kenji-ink-2001",
+  "keep-mori",
+  "emi-base-2001",
+  "keep-mio",
+  "aoi-base-2001",
+  "keep-kuroda",
+  "guard-ink-2001"
+ ],
+ "decision": "Eric eric-ink-2001, Kenji kenji-ink-2001, Emi emi-base-2001, Aoi aoi-base-2001, guard guard-ink-2001; keep current Mio, Mori, Hamada (Mori and Hamada take their npc-base-1 no-prop picks)",
+ "decided_at": "2026-09-30T18:52:30+0200",
+ "issue": 86
 }

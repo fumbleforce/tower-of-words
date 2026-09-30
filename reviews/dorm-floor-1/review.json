@@ -2,11 +2,14 @@
  "title": "Dorm building: the hall, the stairs and Eric's floor",
  "date": "2026-09-30",
  "by": "claude-agent:dorm-floor",
- "status": "open",
+ "status": "decided",
  "question": "Is this the right layout for the way from the courtyard to Eric's door, with an open-air or an indoor corridor?",
  "multi": false,
  "media": [
-  {"image": "art/candidates/dorm-floor-1/01-ground-floor.webp", "caption": "Ground floor, the same for both: in through the hall doors (walked), past the mailboxes to the passage, then the trip: along the ground-floor corridor and up the stairs in the corner by the return. G = where the goal line changes, C = camera, T = the crossfade. One open point, in the note: the next block runs behind 201 to 206, so every flat on the floor looks at its wall, not just 203."}
+  {
+   "image": "art/candidates/dorm-floor-1/01-ground-floor.webp",
+   "caption": "Ground floor, the same for both: in through the hall doors (walked), past the mailboxes to the passage, then the trip: along the ground-floor corridor and up the stairs in the corner by the return. G = where the goal line changes, C = camera, T = the crossfade. One open point, in the note: the next block runs behind 201 to 206, so every flat on the floor looks at its wall, not just 203."
+  }
  ],
  "options": [
   {
@@ -23,10 +26,27 @@
   }
  ],
  "links": [
-  {"label": "The plan in words (proposed places.md section, cameras, goal lines, what else changes)", "href": "bible/#doc/notes/dorm-floor-plan.md"},
-  {"label": "Dorm courtyard and Eric's room as built", "href": "bible/#doc/docs/game/places.md"},
-  {"label": "Look at the courtyard in the game", "href": "game3d/?place=dorm_court"},
-  {"label": "Look at the room in the game", "href": "game3d/?place=dorms"}
+  {
+   "label": "The plan in words (proposed places.md section, cameras, goal lines, what else changes)",
+   "href": "bible/#doc/notes/dorm-floor-plan.md"
+  },
+  {
+   "label": "Dorm courtyard and Eric's room as built",
+   "href": "bible/#doc/docs/game/places.md"
+  },
+  {
+   "label": "Look at the courtyard in the game",
+   "href": "game3d/?place=dorm_court"
+  },
+  {
+   "label": "Look at the room in the game",
+   "href": "game3d/?place=dorms"
+  }
  ],
- "issue": 85
+ "issue": 85,
+ "decided": [
+  "dorm-floor-a"
+ ],
+ "decision": "dorm-floor-a: open-air corridor",
+ "decided_at": "2026-09-30T18:52:19+0200"
 }

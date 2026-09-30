@@ -2,7 +2,7 @@
  "title": "Base portraits: Mr. Mori, Mr. Hamada, the guard (no props)",
  "date": "2026-09-30",
  "by": "claude-agent:npc-portraits",
- "status": "open",
+ "status": "decided",
  "multi": true,
  "question": "Which base portrait for Mr. Mori, for Mr. Hamada and for the guard? Pick one per person; their expressions come after your pick.",
  "media": [
@@ -248,5 +248,12 @@
    ],
    "note": "Short sleeves over dark green undersleeves: off his uniform. Reject. Method: repaint below the collar, kept to his figure; seed 6, denoise 1.0 over the source ishibashi.png. Red rim 2.2% (warn); face drift from the portrait in the game ccip 0.022. Full prompt and negative: prompts.json in the round folder."
   }
- ]
+ ],
+ "decided": [
+  "mori-new-713",
+  "hamada-new-743"
+ ],
+ "decision": "Mori: mori-new-713; Hamada: hamada-new-743 (guard picked in style-align-1)",
+ "decided_at": "2026-09-30T18:52:24+0200",
+ "issue": 7
 }
