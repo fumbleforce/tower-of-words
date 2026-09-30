@@ -569,6 +569,29 @@
     ]
   },
   {
+    "id_": "prop/plaza/noticeboard",
+    "kind": "prop",
+    "name": "Notice board",
+    "paths": [
+      "game3d/js/places/plaza.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "plaza.js things.noticeboard",
+    "place": "plaza",
+    "used": [
+      "Fountain plaza: tap target 'Notice board'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "plaza"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
     "id_": "prop/plaza/office_lane",
     "kind": "prop",
     "name": "To head office",

@@ -44,6 +44,7 @@ html, body { margin: 0; height: 100%; background: #0e121c; }
   const v = '?v=' + encodeURIComponent(b.id);
   const css = document.createElement('link'); css.rel = 'stylesheet'; css.href = 'css/style.css' + v; document.head.appendChild(css);
   const mk = document.createElement('link'); mk.rel = 'stylesheet'; mk.href = 'css/marks.css' + v; document.head.appendChild(mk);
+  const fd = document.createElement('link'); fd.rel = 'stylesheet'; fd.href = 'css/finds.css' + v; document.head.appendChild(fd);
   const imports = { three: './vendor/three/three.module.js', 'three/addons/': './vendor/' };
   for (const f of b.files) imports[new URL(f, location.href).href] = new URL(f + v, location.href).href;
   const map = document.createElement('script'); map.type = 'importmap'; map.textContent = JSON.stringify({ imports }); document.head.appendChild(map);

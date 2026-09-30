@@ -92,8 +92,25 @@ Lines Eric can't follow are shown as soft, shifting stand-in characters, with on
 
 When a command takes hold, the target shimmers at its edges, the command's Japanese (待って, 動いて) rises off it in faint light and fades, the lights dip and hum, a low tone plays, sounds that can be cut (the door chime) stop, and the text box clears. Then the machine does what it was told, literally. Targets on day 1: the train doors, the lobby gate, the machine room door, the copier, the server rack alarm, the kettle, the vending machine. Small reactions without the full effect: the clock, the fan, the coffee machine.
 
+## Finds
+
+Things Eric picks up and keeps on his phone (Jørgen, 2026-09-30: "how lame, a paper on the ground, and it is not a collectible photo?"). Day 1 has five photos, one in each of five places, lying on the floor off the main path, and one paper.
+
+| Id | Kind | Where |
+|---|---|---|
+| `photo_gate` | photo | Security room, behind the cleaning cart by the drinks machine |
+| `photo_forecourt` | photo | Forecourt, on the raked gravel court in the south garden, by the stone lantern |
+| `photo_plaza` | photo | Plaza, by the north-west benches |
+| `photo_office` | photo | B2 copy room floor, by the worktable |
+| `photo_dorm` | photo | Dorm courtyard, in front of the drinks machines |
+| `bakery_flyer` | paper | Mailbox 203 in the dorm hall, taken with Take mail |
+
+- A photo is a small print lying face up with a pin; Pick up walks Eric to it. The print disappears, the picture comes up close with its title and "Added to Photos · 2 of 5", and a tap closes it.
+- The Photos chip (top right, "Photos 2/5") appears with the first find. Its album shows the five frames in the day's order, the found ones as prints with their title and the rest as empty frames (no names, no hints), and under them the papers he has kept. Tapping one shows it up close again.
+- The pictures are stand-ins drawn in the game's flat look (game3d/js/finds/prints.js); titles, captions and the paper's text come from the story (game3d/story/finds.js). A found find is the flag `found_<id>`, so the save and Continue keep it.
+
 ## Saving
 
-The game saves by itself at every place change and at the end of the day: flags, bonds, memory, the period, the Bag, money, goals, the words and where they came from, which scenes have played, and the place. There are three save slots with thumbnails.
+The game saves by itself at every place change and at the end of the day: flags (the finds among them), bonds, memory, the period, the Bag, money, goals, the words and where they came from, which scenes have played, and the place. There are three save slots with thumbnails.
 
 Continuing a save (the title's Continue, or Load from a slot) resumes exactly where it was made: same place, period, flags, bonds, words, Bag and money; Eric appears at a safe spot in that place; the place's doors, gate and props are as they were; no scene that already played replays, and nothing resets to morning. Starting the game never overwrites a save before the player chooses (fixed 2026-09-29; the old build always sent Continue back to the train). If a save is made in the middle of a scene, only that scene restarts from its beginning: the room is put back as it was when the scene started, scenes it already finished stay finished, and purchases, relationship changes and typed lessons are kept. If a saved scene no longer matches the story (the story changed since the save) or a scene fails while loading, the game keeps the previous save untouched and shows a Return to title dialog instead of playing on; nothing in play can overwrite that save until the player chooses. The day ends when Eric gets home to his room after work ([`mio-notices`](stories/mio-notices.md)); its end shows the places, the people met and the words he can use now, with no quiz and no score.

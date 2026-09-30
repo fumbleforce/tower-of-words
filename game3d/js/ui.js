@@ -635,7 +635,7 @@ export const ui = {
     l.querySelector('.arrow').textContent = dir === 'down' ? '▼' : '▲';
   },
   menuClosed() {
-    return $('#sayMenu').hidden && $('#cmdsPanel').hidden && $('#peoplePanel').hidden && $('#bagPanel').hidden;
+    return $('#sayMenu').hidden && $('#cmdsPanel').hidden && !document.querySelector('.panel:not([hidden])');
   },
   clock(date, period) {
     const c = $('#clock');

@@ -128,6 +128,7 @@ export function buildNoticeBoard(p, nav) {
     }
   });
   nav.block(x - W / 2 - 0.2, x + W / 2 + 0.2, z - 0.3, z + 0.3);
+  return { at: [x, z], top: Y + H };
 }
 
 // the terrace: round tables with four chairs, each under an eight-sided umbrella, clear of the doors. After work the
@@ -164,6 +165,8 @@ export function chairAt(x, z, side, stacked = false) {
     r = stacked ? 0.38 / 0.72 : 1;
   return { x: x + dx * r, z: z + dz * r, yaw: Math.atan2(dx, dz), stacked };
 }
+// the floor a standing chair takes, for the walk grid
+export const chairBlock = (c) => [c.x - 0.2, c.x + 0.2, c.z - 0.2, c.z + 0.2];
 export function terraceChair() {
   const mesh = merged(chairParts(), CHAIR_MAT);
   const group = new THREE.Group();
@@ -174,6 +177,7 @@ export function buildTerrace(root, nav) {
   const { z, xs, shared, loose } = TERRACE_TABLES;
   const poles = [],
     tops = [],
+    blocks = [],
     chairs = [],
     stacked = [],
     canopies = [[], []];
@@ -186,14 +190,18 @@ export function buildTerrace(root, nav) {
     tops.push(new THREE.CylinderGeometry(0.5, 0.5, 0.04, 16).translate(x, 0.72, z));
     SIDES.forEach((_, side) => {
       if (i === shared && loose.includes(side)) return;
-      place(chairs, chairParts(), chairAt(x, z, side));
+      const c = chairAt(x, z, side);
+      place(chairs, chairParts(), c);
       place(stacked, flipped(), chairAt(x, z, side, true));
+      blocks.push(chairBlock(c));
     });
     canopies[i % 2].push(
       new THREE.ConeGeometry(1.25, 0.42, 8).translate(x, 2.28, z),
       new THREE.ConeGeometry(0.12, 0.14, 8).translate(x, 2.55, z),
     );
-    nav.block(x - 1.0, x + 1.0, z - 1.0, z + 1.0);
+    // the table and its pole; the chairs round it block only while they stand (places/canteen-closing.js: after
+    // work they are up on the tables, and he can step right up to the one left standing)
+    nav.block(x - 0.58, x + 0.58, z - 0.58, z + 0.58);
   });
   root.add(merged(poles, mat(PAL.metal)), merged(tops, mat('#d9d7d1')));
   // named, so the static merge leaves them whole: the evening swaps one for the other
@@ -205,7 +213,7 @@ export function buildTerrace(root, nav) {
   root.add(day, closed);
   root.add(merged(canopies[0], mat(AWNING.canvas, { roughness: 0.9 })));
   root.add(merged(canopies[1], mat(AWNING.stripe, { roughness: 0.9 })));
-  return { day, closed };
+  return { day, closed, blocks };
 }
 
 // bikes in a rack along the shops' backs, by their back doors; one left on its stand by the north-east benches
@@ -222,29 +230,5 @@ export function buildBikes(root, nav) {
   root.add(bike);
 }
 
-// what people leave: a few pigeons pecking by the fountain's south-west rim, a leaflet dropped near a bench
-export function buildLife(p) {
-  const [bx, bz] = [F[0] - 2.6, F[1] + 4.9];
-  [
-    [0, 0, 0.3],
-    [0.45, 0.2, 2.1],
-    [-0.3, 0.45, 4.0],
-    [0.7, -0.35, 1.2],
-    [-0.65, -0.1, 5.2],
-  ].forEach(([dx, dz, turn], i) => {
-    const x = bx + dx,
-      z = bz + dz,
-      c = Math.cos(turn),
-      s = Math.sin(turn);
-    const at = (u, y) => [x + u * s, y, z + u * c];
-    const body = new THREE.DodecahedronGeometry(0.1, 0).scale(0.85, 0.72, 1.45).rotateY(turn);
-    p.geo(i % 3 ? '#8e929c' : '#7d828d', body.translate(...at(0, 0.12)), { cast: false });
-    const peck = i % 2 ? -0.06 : 0; // some have their heads down
-    p.geo('#5e6472', new THREE.DodecahedronGeometry(0.055, 0).translate(...at(0.14, 0.2 + peck)), { cast: false });
-    p.geo('#565c69', new THREE.BoxGeometry(0.1, 0.02, 0.12).rotateY(turn).translate(...at(-0.16, 0.13)), {
-      cast: false,
-    });
-  });
-  const [lx, lz] = polar(BENCH_ANGLES[0] + 0.07, R - BORDER - 1.6);
-  p.geo('#e9e7e1', new THREE.BoxGeometry(0.21, 0.004, 0.3).rotateY(0.6).translate(lx, 0.02, lz), { cast: false });
-}
+// where the flock of pigeons (outdoor/pigeons.js) pecks: by the fountain's south-west rim
+export const PIGEON_HOME = [F[0] - 2.6, F[1] + 4.9];

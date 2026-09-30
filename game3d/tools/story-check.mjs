@@ -2,6 +2,7 @@ import { allowedConditionCharacters, compileCondition } from '../js/narrative/co
 import { WORDS, SAYABLE } from '../js/lang.js';
 import { DEFAULT_SPEAKERS, ITEMS, PLACE_DETAILS, STORY_FILES, GLOBAL_HOOKS, PLACE_EVENTS } from '../js/narrative/contracts.js';
 import { canTravel } from '../js/places/definitions.js';
+import { FINDS } from '../js/finds/spots.js';
 // Checks the story files against the engine: unknown speakers, words, hooks, ids, spots, missing nodes,
 // conditions that don't parse. node game3d/tools/story-check.mjs
 import fs from 'node:fs';
@@ -56,7 +57,8 @@ for (const name of STORY_FILES) {
       if (s.do) {
         if (!hookOk(s.do)) bad(file, `${where}: unknown hook ${s.do}`);
         if (s.do === 'trip' && !canTravel(name, s.to)) bad(file, `${where}: no trip from ${name} to '${s.to}' (places/definitions.js TRIPS)`);
-        for (const k of ['who', 'to', 'on', 'at', 'id']) if (s[k] !== undefined && typeof s[k] === 'string' && !idOk(s[k]) && !(s.do === 'floor') && !(s.do === 'period') && !(s.do === 'trip') && !(s.do === 'sit' && k === 'at')) bad(file, `${where}: ${s.do} ${k} '${s[k]}' is not a person, object or spot here`);
+        if (s.do === 'find' && !FINDS[s.id]) bad(file, `${where}: find '${s.id}' is not a find (js/finds/spots.js)`);
+        if (s.do !== 'find') for (const k of ['who', 'to', 'on', 'at', 'id']) if (s[k] !== undefined && typeof s[k] === 'string' && !idOk(s[k]) && !(s.do === 'floor') && !(s.do === 'period') && !(s.do === 'trip') && !(s.do === 'sit' && k === 'at')) bad(file, `${where}: ${s.do} ${k} '${s[k]}' is not a person, object or spot here`);
         if (s.do === 'sit' && P && s.at && !P.seats.includes(s.at)) bad(file, `${where}: no seat '${s.at}'`);
       }
     }

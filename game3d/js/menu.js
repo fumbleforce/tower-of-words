@@ -918,9 +918,8 @@ window.addEventListener(
         return;
       }
       if (!$('#sayMenu')?.hidden) return; // ui.js closes the Say menu
-      for (const id of ['#cmdsPanel', '#peoplePanel', '#bagPanel']) {
-        const pnl = $(id);
-        if (pnl && !pnl.hidden) {
+      for (const pnl of document.querySelectorAll('#cmdsPanel, .panel')) {
+        if (!pnl.hidden) {
           pnl.hidden = true;
           e.preventDefault();
           return;

@@ -30,8 +30,8 @@
       "reason": "Composition, boot/Continue, input, rendering and frame loop remain after stage 4 hooks, interactions and place lifecycle extraction."
     },
     "game3d/js/menu.js": {
-      "lines": 1187,
-      "bytes": 41836,
+      "lines": 1186,
+      "bytes": 41807,
       "owner": "codex-tui",
       "review": "C-0089",
       "reason": "Existing action menus and target selection; stage 4 interaction extraction is planned."
@@ -171,7 +171,7 @@
     },
     "game3d/js/ui.js": {
       "lines": 901,
-      "bytes": 36546,
+      "bytes": 36544,
       "owner": "codex-tui",
       "review": "C-0080; C-0166 named sounds per door and machine, Words chip pop and voice placeholder",
       "reason": "Remaining HUD construction, action menus and word practice; dialogue, portraits and audio are extracted."

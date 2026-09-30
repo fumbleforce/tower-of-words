@@ -5,13 +5,13 @@ export default {
   start: 'arrive',
   on: {
     'talk:bath': { if: 'going_home && !evening_bath_heard', node: 'bath' },
-    'talk:mailboxes': { if: 'going_home && dorm_room_known', node: 'mailboxes' },
+    'talk:mailboxes': { if: 'going_home && dorm_room_known && !found_bakery_flyer', node: 'mailboxes' },
     'talk:dorm_entry': 'hall',
     'zone:hall': { node: 'hall', once: true },
     'talk:stairs': 'go_up',
     'zone:passage': { node: 'go_up', once: true },
   },
-  show: { bath: 'going_home && !evening_bath_heard', mailboxes: 'going_home && dorm_room_known' },
+  show: { bath: 'going_home && !evening_bath_heard', mailboxes: 'going_home && dorm_room_known && !found_bakery_flyer' },
   nodes: {
     bath: [
       { do: 'face', who: 'eric', to: 'bath' },
@@ -22,6 +22,7 @@ export default {
     mailboxes: [
       { do: 'mailbox203', state: 'open' },
       '> エリック · erikku · Eric',
+      { do: 'find', id: 'bakery_flyer' },
       { do: 'mailbox203', state: 'close' },
     ],
     arrive: [

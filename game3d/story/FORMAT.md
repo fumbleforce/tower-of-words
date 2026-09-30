@@ -131,6 +131,7 @@ Any id in docs/game/cast.md "Everyone" can speak. Add names or roles under `spea
 | `next` | | Starts the transition to the next place (see Transitions). |
 | `trip` | `to` | Walks Eric to a neighbouring place off the day's line (`forecourt` and `plaza` both ways, and the way home: `office` to `forecourt`, `plaza` to `dorm_court`; places/definitions.js TRIPS). The same watched walk and crossfade as `next`, with no transition slot; the place's start node runs on arrival. |
 | `end` | | The end of the day (Eric's room, on the walk home). |
+| `find` | `id` | Eric takes a find (see Finds): it goes into his album, shows up close until tapped, and sets `found_<id>`. Nothing happens if he has it already. `{ do: 'find', id: 'bakery_flyer' }` |
 
 Sim hooks (`period`, `bond`, `bondStep`, `remember`, `fact`, `relate`, `meet`, `buy`, `take`, `save`) are under Sim data.
 
@@ -256,6 +257,23 @@ Bond point sources, for `source`: `greet`, `talk`, `gift`, `need`, `ticket`, `he
 **Flags for conditions.** `bond_<who>` (points), `step_<who>`, `bondready_<who>` (the step whose scene is due, else 0), `met_<who>`, `rem_<who>_<id>`, `fact_<who>_<id>`, `rel_<a>_<b>` (`'likes'`...), `register_<who>` (`'right'` or `'wrong'`: the register of the last word Eric said to them), and after a gift `gave_<item>_<who>`, `gift_<who>` and `gift_reaction` (`'need'`, `'like'`, `'neutral'`, `'dislike'`), set before the `give:` node runs. So one trigger can answer any gift: `'give:*:mio': [{ if: "gift_mio == 'like'", node: 'mio_likes_it' }, 'mio_polite_thanks']`. A refusal entry takes `keep: true` (`{ if: 'gifted_mio', node: 'gift_again', keep: true }`): its node runs, but the item stays in the bag and none of the gift flags are set.
 
 Words record who taught them (the speaker of the `offer` line, or `from:` on `offer`/`learn`/`type`), shown in People.
+
+## Finds (`finds.js`)
+
+Photos and papers Eric picks up and keeps (docs/game/systems.md, Finds, has the ids and where each lies). The engine places the photos, draws their pictures and handles picking them up; `game3d/story/finds.js` holds their words and the notice boards' posts:
+
+```js
+export default {
+  photos: { photo_plaza: { title: 'At the fountain', caption: '' } },   // title: a few words; caption: one optional short line
+  papers: { bakery_flyer: { title: 'Bakery welcome flyer', lines: [{ ja: '', en: 'Fresh bread every morning.' }] } },
+  boards: {
+    // 4 to 6 posts, in reading order; a board with no posts can't be read
+    plaza_board: [{ title: 'ポンプ (ponpu, pump)', en: 'One line.', color: 'yellow' }, { title: '', lines: [{ en: 'Post.' }, { en: 'Reply: ...' }] }],
+  },
+};
+```
+
+A post or paper line is `{ ja, en }`: `ja` optional, `en` always, so Japanese never shows without English. A post has `en` or `lines` (several), an optional `title`, and `color` (white, yellow, blue, pink, green). A photo with no entry shows the engine's plain title. Picking up sets `found_<id>`, usable in any condition (`'!found_bakery_flyer'`). A scene hands one over with the `find` hook.
 
 ## Transitions (`transitions.js`)
 
