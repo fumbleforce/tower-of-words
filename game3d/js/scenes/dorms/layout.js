@@ -31,8 +31,8 @@ export const C = {
   heri: '#2e3547',
   plank: '#81838a',
   plankSeam: '#72747b',
-  genkan: '#60656e',
-  step: '#646b77',
+  genkan: '#7c818a',
+  step: '#9a9ea5',
   steel: '#5a6a80', // the front doors
   frame: '#454b55',
   alu: '#4a515c',

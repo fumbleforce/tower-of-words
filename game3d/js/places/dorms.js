@@ -101,15 +101,17 @@ export function dormsPlace(game) {
       }
     },
     async tripIn(g) {
-      // in from the passage: through the front door, over the genkan, to the doorway of the room
+      // in along the corridor from the stairs, to his door, then through it, over the genkan, to the doorway of the
+      // room. He comes from the side, so the first frame shows the open door, the genkan and his shoes clear of him
       const eric = g.player;
       eric.scripted = true;
-      eric.root.position.set(w.frontDoor[0], 0, w.frontDoor[1] + 0.5);
-      eric.root.rotation.y = Math.PI;
+      eric.root.position.set(...w.corridor);
+      eric.root.rotation.y = -Math.PI / 2;
       // framed on the doorstep, a little closer than the still frame, then out to the whole flat as he walks in
       cam.closeOn(w.arrive.at, w.arrive.zoom);
       cam.snap(eric.root.position);
       w.door.rotation.y = -1.5; // the front door open onto the corridor
+      await glide(g, eric.root, w.doorstep, 1.2);
       await glide(g, eric.root, w.roomEntry, 1.2);
       g.tween(0.45, (k) => (w.door.rotation.y = -1.5 * (1 - k * k)));
       eric.setState('idle');

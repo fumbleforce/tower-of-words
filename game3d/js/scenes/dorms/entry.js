@@ -3,7 +3,7 @@
 // his shoes. The room's sliding door stands open in its track.
 import * as THREE from 'three';
 import { wall } from '../../props.js';
-import { X0, X1, PART, NEAR, LOW, BATH_X, COUNTER_X, DOORWAY, GENKAN_Z, C } from './layout.js';
+import { X0, X1, PART, NEAR, H, LOW, BATH_X, COUNTER_X, DOORWAY, GENKAN_Z, C } from './layout.js';
 
 export function kitchenette(kit, nav) {
   const x0 = X0 + 0.01,
@@ -60,12 +60,14 @@ export function kitchenette(kit, nav) {
     rz: 0.2,
     surf: 'ceramic',
   });
-  // the range hood over the ring, and the strip light under it
-  kit.box('#c9ccd0', 0.2, 0.06, 0.3, x0 + 0.1, 1.02, z0 + 0.6, {
-    r: 0.01,
-    surf: 'metal',
-  });
-  kit.box('#fff4e0', 0.1, 0.008, 0.2, x0 + 0.1, 1.015, z0 + 0.6, {
+  // on the wall: a steel splashback from the worktop up, and the range hood over the ring fixed to it, its duct
+  // boxed into the wall up to the cut (wall-coloured, capped like the walls); the strip light under the hood
+  kit.box('#b4b9bf', 0.012, 0.5, z1 - z0, X0 + 0.006, top, (z0 + z1) / 2, { surf: 'metal', cast: false });
+  kit.box('#c9ccd0', 0.24, 0.12, 0.34, x0 + 0.12, 1.0, z0 + 0.62, { r: 0.012, surf: 'metal' });
+  kit.box('#b4b9bf', 0.22, 0.02, 0.32, x0 + 0.12, 0.99, z0 + 0.62, { r: 0.006, surf: 'metal' });
+  kit.box(C.wall, 0.1, H - 1.12, 0.22, x0 + 0.04, 1.12, z0 + 0.62, { surf: 'plaster' });
+  kit.box(C.wallTop, 0.1, 0.035, 0.22, x0 + 0.04, H, z0 + 0.62, { cast: false });
+  kit.box('#fff4e0', 0.12, 0.008, 0.24, x0 + 0.12, 0.985, z0 + 0.62, {
     cast: false,
     opts: { emissive: '#ffe6c0', emissiveIntensity: 1.6 },
   });
