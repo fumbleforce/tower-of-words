@@ -56,6 +56,17 @@ export function start(game) {
         return;
       }
     }
+    // Greet Kenji before the machine-room walk: its entry zone can interrupt that walk, and the chair now
+    // continues straight into the repair request. Keep this bond-check action independent of an idle gap.
+    if (p.name === 'office' && flags.kenji_intro && !flags.greeted_kenji && known.has('ohayo')) {
+      const kenji = list.find((m) => m.id === 'kenji');
+      if (kenji) {
+        T.log.push('office say:ohayo:kenji');
+        const s = kenji.spot();
+        game.walker.goTo(s[0], s[1], () => game.sayWord('ohayo', kenji));
+        return;
+      }
+    }
     // 1. a goal: walk up and use it
     for (const g of goals) {
       if (route === 'social' && g.id === 'kuroda' && game.runner.has('say:sumimasen:guard')) continue;
