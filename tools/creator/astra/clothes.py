@@ -2,7 +2,7 @@
 import math
 from mathutils import Vector
 import common as C
-from shapes import chain_weights,smooth
+from shapes import chain_weights
 from mesh import Mesh,X,Y,Z,solidify
 from weights import upper_garment
 
@@ -102,6 +102,18 @@ def build(body,arm,H,J,body_obj,body_mesh):
         lr=[M.ring(p,r,r*1.04,10,lw(p)) for p,r in zip(points,radii)]
         boundary=[low[i] for i in ids]+[crotch];M.bridge(boundary,M.aligned(boundary,lr[0]),'outer')
         for i,(a,b) in enumerate(zip(lr,lr[1:])):M.bridge(a,b,'rib' if i==3 else 'outer')
+    # Seat lining follows the skin's hip-to-thigh bridge through the longest stride.
+    # This is closed fabric within the trousers, leaving the bare body intact.
+    copied={}
+    for poly,tag in zip(body_obj.data.polygons,body_mesh.tags):
+        if tag!='skin' or not (.255<poly.center.z/H<.345 and abs(poly.center.x/H)<.12):continue
+        ids=[]
+        for vi in poly.vertices:
+            if vi not in copied:
+                vertex=body_obj.data.vertices[vi]
+                copied[vi]=M.vertex(body_mesh.v[vi]+vertex.normal*.008,body_mesh.w[vi])
+            ids.append(copied[vi])
+        M.face(ids,'outer')
     pants=M.object(body+'-trousers',H,arm,body,{'outer':navy,'inner':navyin,'rib':navyin});solidify(pants,.004,H)
     # Raised cargo pockets: a shallow six-sided box with an overhanging flap, weighted to its thigh.
     P=Mesh()
@@ -117,20 +129,41 @@ def build(body,arm,H,J,body_obj,body_mesh):
     M=Mesh()
     for side,sx in [('Left',1),('Right',-1)]:
         ank=J[side+'Foot'];ax=sx*.056;ay=ank.y-.035
+        hip,knee,toe=[J[side+k] for k in ['UpLeg','Leg','Toe']]
+        chain=[(side+'UpLeg',hip),(side+'Leg',knee),(side+'Foot',ank),(side+'Toe',toe),(None,toe-Y*.08)]
+        foot_x=sx*(.055 if blue else .053)
+        stations=[ank.y+.022,ank.y,ank.y-.055,ank.y-.095]
+        foot_weights=[chain_weights(Vector((foot_x,y,.02)),chain,.022) for y in stations]
         def shoe_weight(y):
-            t=smooth(ank.y-.014,ank.y-.065,y)
-            return {side+'Foot':1-t,side+'Toe':t}
-        outline=[(-.035,.068),(-.044,.042),(-.047,-.042),(-.034,-.073),(0,-.080),(.034,-.073),(.047,-.042),(.044,.042),(.035,.068)]
+            if y>=stations[0]:return foot_weights[0]
+            if y<=stations[-1]:return foot_weights[-1]
+            for ya,yb,wa,wb in zip(stations,stations[1:],foot_weights,foot_weights[1:]):
+                if yb<=y<=ya:
+                    t=(ya-y)/(ya-yb)
+                    return {k:wa.get(k,0)*(1-t)+wb.get(k,0)*t for k in wa.keys()|wb.keys()}
+        # Cross-sections match the bare foot's bend stations. A sole ngon would
+        # interpolate weights across the whole shoe and expose skin during toe flex.
         rings=[]
-        for z,scale in [(.004,1),(.022,1.03),(.030,1),(.062,.83)]:
-            rings.append([M.vertex((ax+x*scale,ay+y*scale,z+(max(0,y)*.23 if z>.03 else 0)),shoe_weight(ay+y*scale)) for x,y in outline])
-        M.cap(rings[0],'sole')
-        for i,(a,b) in enumerate(zip(rings,rings[1:])):M.bridge(a,b,'sole' if i<2 else 'upper')
-        M.cap(rings[-1],'upper')
+        sections=[(ank.y+.040,.032,.066),(stations[0],.040,.078),(stations[1],.044,.068),(stations[2],.046,.054),(stations[3],.038,.048),(ank.y-.116,.027,.040)]
+        for y,width,top in sections:
+            bottom=-.007
+            section=[(-width*.75,bottom),(-width,bottom+.005),(-width,.027),(-width*.83,top),(width*.83,top),(width,.027),(width,bottom+.005),(width*.75,bottom)]
+            rings.append([M.vertex((ax+x,y,z),shoe_weight(y)) for x,z in section])
+        for a,b in zip(rings,rings[1:]):
+            for i in range(8):
+                M.face([a[i],a[(i+1)%8],b[(i+1)%8],b[i]],'upper' if i in [2,3,4] else 'sole')
+        for ring in [rings[0],rings[-1]]:
+            M.face([ring[i] for i in [0,1,2,5,6,7]],'sole')
+            M.face([ring[i] for i in [2,3,4,5]],'upper')
+        def roof(y):
+            for a,b in zip(sections,sections[1:]):
+                if b[0]<=y<=a[0]:
+                    t=(a[0]-y)/(a[0]-b[0]);return a[2]*(1-t)+b[2]*t
+            raise ValueError('Lace outside shoe roof')
         # two broad lace/vamp bars, lying on the sloped upper surface
         for yy in [-.013,.002]:
             bars=[]
-            for z in [.0645,.067]:
-                bars.append([M.vertex((ax+x,ay+yy+y,z),shoe_weight(ay+yy+y)) for x,y in [(-.024,-.004),(.024,-.004),(.024,.004),(-.024,.004)]])
+            for z in [.0005,.003]:
+                bars.append([M.vertex((ax+x,ay+yy+y,roof(ay+yy+y)+z),shoe_weight(ay+yy+y)) for x,y in [(-.024,-.004),(.024,-.004),(.024,.004),(-.024,.004)]])
             M.cap(bars[0],'accent');M.bridge(bars[0],bars[1],'accent');M.cap(bars[1],'accent')
     M.object(body+'-sneakers',H,arm,body,{'upper':shoe,'sole':sole,'accent':shoetop})
