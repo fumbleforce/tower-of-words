@@ -1,5 +1,6 @@
 // A still of every prompt and choice that waits on the player in the day (typed words and reply choices), with a
-// check that no dialogue portrait covers Eric while it waits (issue #76).
+// check that Eric, and the target of "Say it to ...", stay in view while it waits: no dialogue portrait over them
+// (issue #76), not under the talk box and not off the screen (issue #80).
 //   node game3d/tools/prompt-shots.mjs [w] [h]        (BASE=.claude/worktrees/<name>/game3d for a worktree)
 // The day plays itself (?test=fast). At each typePrompt/choose the page shows it as a player sees it (not the
 // auto-answer), waits for the camera to settle, measures Eric's box on screen against every visible portrait's box,
@@ -66,7 +67,16 @@ function inPage() {
           .map((x) => x.id || x.className)
           .join(','),
         hit,
-        ericUnderTalk: !!e && e.y1 > talk.top && e.x1 > talk.left && e.x0 < talk.right,
+        // Eric and the target in view: not under the talk box, not off the screen (issue #80)
+        hidden: keep
+          .map((b, i) => {
+            const who = i ? 'target' : 'Eric';
+            if (b.x1 > talk.left && b.x0 < talk.right && b.y1 > talk.top && b.y0 < talk.bottom)
+              return `${who} under the talk box`;
+            if (b.x0 < 0 || b.x1 > globalThis.innerWidth || b.y1 > globalThis.innerHeight) return `${who} off screen`;
+            return '';
+          })
+          .filter(Boolean),
       };
     };
     for (const k of ['typePrompt', 'choose']) {
@@ -152,14 +162,15 @@ fs.writeFileSync(path.join(out, 'report.json'), JSON.stringify(rows, null, 1));
 const box = (b) => (b ? `${b.x0.toFixed(0)}-${b.x1.toFixed(0)}x${b.y0.toFixed(0)}-${b.y1.toFixed(0)}` : '?');
 let bad = 0;
 for (const r of rows) {
-  if (r.hit.length) bad++;
+  const wrong = [...r.hit, ...r.hidden];
+  if (wrong.length) bad++;
   console.log(
-    `${r.file.padEnd(46)} ${r.hit.length ? 'COVERS: ' + r.hit.join(', ') : 'ok'}${r.ericUnderTalk ? ' (Eric under the talk box)' : ''}` +
+    `${r.file.padEnd(46)} ${wrong.length ? 'NOT CLEAR: ' + wrong.join(', ') : 'ok'}` +
       `  eric=${box(r.eric)} ${r.pors.map((p) => `${p.who}${p.side}=${box(p)} o${p.op}`).join(' ')}`,
   );
 }
 if (errors.length) console.log('page errors:', errors.slice(0, 5).join(' | '));
 console.log(
-  `${rows.length} prompts, ${bad} with a portrait over Eric or the target -> ${path.relative(path.dirname(G), out)}`,
+  `${rows.length} prompts, ${bad} with Eric or the target covered or out of view -> ${path.relative(path.dirname(G), out)}`,
 );
 process.exit(bad || errors.length ? 1 : 0);

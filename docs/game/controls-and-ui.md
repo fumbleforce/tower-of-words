@@ -25,7 +25,7 @@ Clicking while the story is busy (a walk, a door) shows that the game is waiting
 
 People are soft to each other and never stand inside each other or the furniture (Jørgen: "we need much better soft collision so models push gently at each other without locking up in tight spaces"). Someone walking behind another person follows at their pace instead of walking into them, and a walk goes round whoever stands in the way. People lean in and push apart gently, and slip past in a spot too tight to share. A seated person's knees and feet count as taken floor. Nobody stands on the cat, and she hops off Eric's chair before he sits. Someone left standing with a shoulder in a desk or a machine steps clear. In the lift, everyone stands inside the car's walls. The fast test fails when any of these happen.
 
-While Eric is saying a word (its practice prompt, his voice, the answer), clicks and taps on people, things and markers, and E, are ignored, so the word isn't lost to a new talk. They work again as soon as the word is done or the prompt is cancelled.
+While Eric is saying a word (its practice prompt, his voice, the answer), clicks and taps on people, things and markers, and E, are ignored, so the word isn't lost to a new talk. They work again as soon as the word is done or the prompt is cancelled. A scene that would start meanwhile (he walks into the doorway with the prompt still open) waits until the word is done (issue #81).
 
 ## When each control is taught
 
@@ -81,6 +81,7 @@ Panels open above everything in the HUD, the goal arrow and the Say button inclu
 
 - Top-down 3D, looking down at each place with its near walls cut away. Conversations zoom in on the person who matters, then back.
 - The player character is always in view (Jørgen: the lift ride showed only the outside of the lift during a long sequence).
+- While a word to type or replies to pick wait on the player, the camera pulls back a little, holding the top edge of the view, until Eric and the thing he's saying the word to are on screen and clear of the dialogue box; it eases back when the prompt is answered (issue #80; game3d/tools/prompt-shots.mjs checks every prompt of the day).
 - Ceiling light fixtures are not shown in the top-down scenes (they get in the way); their light stays (Jørgen).
 
 ## Phone and desktop

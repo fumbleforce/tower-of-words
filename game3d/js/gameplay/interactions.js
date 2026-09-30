@@ -171,6 +171,9 @@ export function installInteractions(game) {
       return await sayWord0(id, target);
     } finally {
       game.saying = false;
+      // a scene that came up while he was saying it (he walked up to the doors with the prompt open) runs now
+      // (runner.js trigger, issue #81); if the word started a scene of its own, that scene runs the queue when it ends
+      if (!game.busy && game.queue?.length) game.beat(game.queue.shift());
     }
   }
   async function sayWord0(id, target) {

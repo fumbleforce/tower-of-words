@@ -37,7 +37,7 @@ import { walkPerson, stepPeople, lookAt } from '../story.js';
 import { rbox, mat, emissive, textTexture, plane, JP_FONT, plant as propPlant } from '../props.js';
 import { glide, withList } from './lobby.js';
 import { standOut, walkRig } from '../move.js';
-import { damp, goalSpot, widenTo } from '../cam.js';
+import { damp, goalSpot, pulled, widenTo } from '../cam.js';
 import { flags } from '../narrative/state.js';
 import { dust, lightPool } from './life.js';
 import { route } from './route.js';
@@ -606,7 +606,7 @@ export async function trainPlace(game) {
     arrived: false,
   };
 
-  // ---- camera: side/train's framing (whole car on a wide screen, the car running up a phone screen) ----
+  // ---- camera: side/train's framing (whole car on a wide screen, along a phone screen) ----
   const camera = new THREE.PerspectiveCamera(20, 16 / 9, 1, 160);
   const cam = {
     camera,
@@ -656,7 +656,7 @@ export async function trainPlace(game) {
     },
     update(dt, p) {
       if (dt <= 0) return;
-      const [t, d] = this.wanted(p),
+      const [t, d] = pulled(this, p),
         s = this.close ? 0.7 : this.smooth;
       this.target.x = damp(this.target.x, t.x, this.vel, 0, s, dt);
       this.target.y = damp(this.target.y, t.y, this.vel, 1, s, dt);

@@ -1,7 +1,7 @@
 import * as THREE from 'three';
 import { sfx, voice, setFace, faceForEmote } from '../../ui.js';
 import { goalAt } from './goal-at.js';
-import { setPortraitAvoid } from '../../ui/portraits.js';
+import { installPromptView } from './prompt-view.js';
 const EMOTE_SVG = {
   heart:
     '<path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z" fill="#e0607a" stroke="#b8405a"/>',
@@ -129,40 +129,7 @@ export function installPresentationHooks(game, { rigOf, isPlayer, posOf, canvas,
     }
     sfx('lift');
   };
-  // What the dialogue portraits keep clear of while a prompt waits on the player (ui/portraits.js): Eric, and during
-  // "Say it to ..." the thing he says it to. Boxes in CSS px, a shoulder's width each side of the point from lo to hi
-  // metres above it.
-  const pr = new THREE.Vector3();
-  const screenBox = (p, lo, hi) => {
-    const cam = game.place.camera,
-      k = game.place.charScale || 1;
-    pr.setFromMatrixColumn(cam.matrixWorld, 0).multiplyScalar(0.32 * k);
-    const b = { x0: Infinity, x1: -Infinity, y0: Infinity, y1: -Infinity };
-    for (const s of [-1, 1])
-      for (const up of [lo * k, hi * k]) {
-        const v = p.clone().addScaledVector(pr, s);
-        v.y += up;
-        v.project(cam);
-        if (v.z > 1) return null;
-        const x = ((v.x + 1) / 2) * canvas.clientWidth,
-          y = ((1 - v.y) / 2) * canvas.clientHeight;
-        b.x0 = Math.min(b.x0, x);
-        b.x1 = Math.max(b.x1, x);
-        b.y0 = Math.min(b.y0, y);
-        b.y1 = Math.max(b.y1, y);
-      }
-    return b;
-  };
-  game.ericBox = () => {
-    const root = game.player?.root;
-    if (!game.place?.camera || !root || !root.visible) return null;
-    return screenBox(root.getWorldPosition(new THREE.Vector3()), 0, 1.25);
-  };
-  game.promptKeep = () => {
-    const st = game.saying && game.sayTarget;
-    return [game.ericBox(), st && st.anchor ? screenBox(st.anchor(new THREE.Vector3()), -1, 0) : null].filter(Boolean);
-  };
-  setPortraitAvoid(game.promptKeep);
+  installPromptView(game, { canvas });
   H.liftDoors = ({ state }) => {
     if (state === 'open') sfx('lift');
     sfx('liftdoor', { at: state === 'open' ? 0.3 : 0 });

@@ -104,13 +104,10 @@ export class Runner {
       for (const who in PORTRAITS) setFace(who, undefined);
       await this.run(node, { trigger: key });
     };
-    // an event that fires while a scene is running waits for it to end
-    if (beat && this.game.busy && /^(event|zone|near):/.test(key)) {
-      this.enqueue(node, key);
-      return true;
-    }
-    if (beat) this.game.beat(go);
-    else go();
+    // an event during a scene, or while Eric says a word (#81), waits for it to end
+    if (!beat) go();
+    else if ((this.game.busy || this.game.saying) && /^(event|zone|near):/.test(key)) this.enqueue(node, key);
+    else this.game.beat(go);
     return true;
   }
 
