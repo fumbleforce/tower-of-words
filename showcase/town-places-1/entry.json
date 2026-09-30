@@ -1,0 +1,171 @@
+{
+ "title": "The walk home: forecourt, plaza, dorm courtyard, room",
+ "date": "2026-09-30",
+ "by": "Claude",
+ "caption": "The four places built overnight, from the station to Eric's room, in the game camera with the interface hidden (build 0930-0524-38755d9).",
+ "commit": [
+  "c7f3d4f",
+  "1382043",
+  "7a6016c",
+  "7d63226",
+  "3bed266",
+  "9a5a525"
+ ],
+ "sections": [
+  {
+   "title": "Where they are",
+   "caption": "The route on the island map you picked (island-map-4): station forecourt, fountain plaza, dorm courtyard, Eric's room.",
+   "images": [
+    {
+     "id": "map-route",
+     "image": "bible/shots/showcase/town-places-1/map-route.webp",
+     "caption": "Route on island-map-4"
+    }
+   ]
+  },
+  {
+   "title": "Station forecourt (forecourt)",
+   "caption": "The court between the station's north door and the head office entrance, with bike racks, a bench, a planted bed and the 本社 sign. Eric crosses it to the lift in the morning and walks east along the lane after work.",
+   "images": [
+    {
+     "id": "forecourt-1-arrive-desk",
+     "image": "bible/shots/showcase/town-places-1/forecourt-1-arrive-desk.webp",
+     "caption": "Stepping out of the station, morning, desktop"
+    },
+    {
+     "id": "forecourt-1-arrive-phone",
+     "image": "bible/shots/showcase/town-places-1/forecourt-1-arrive-phone.webp",
+     "caption": "Stepping out of the station, morning, phone"
+    },
+    {
+     "id": "forecourt-2-office-desk",
+     "image": "bible/shots/showcase/town-places-1/forecourt-2-office-desk.webp",
+     "caption": "Head office door and the lift lobby, desktop"
+    },
+    {
+     "id": "forecourt-2-office-phone",
+     "image": "bible/shots/showcase/town-places-1/forecourt-2-office-phone.webp",
+     "caption": "Head office door and the lift lobby, phone"
+    },
+    {
+     "id": "forecourt-3-dusk-desk",
+     "image": "bible/shots/showcase/town-places-1/forecourt-3-dusk-desk.webp",
+     "caption": "After work, heading for the east lane, desktop"
+    },
+    {
+     "id": "forecourt-3-dusk-phone",
+     "image": "bible/shots/showcase/town-places-1/forecourt-3-dusk-phone.webp",
+     "caption": "After work, heading for the east lane, phone"
+    }
+   ]
+  },
+  {
+   "title": "Fountain plaza (plaza)",
+   "caption": "East of the forecourt: the fountain with its no-coins sign, two benches, the canteen terrace behind and the shop roofs in front. A side trip in the morning, on the way home after work.",
+   "images": [
+    {
+     "id": "plaza-1-arrive-desk",
+     "image": "bible/shots/showcase/town-places-1/plaza-1-arrive-desk.webp",
+     "caption": "Coming in from the forecourt, morning, desktop"
+    },
+    {
+     "id": "plaza-1-arrive-phone",
+     "image": "bible/shots/showcase/town-places-1/plaza-1-arrive-phone.webp",
+     "caption": "Coming in from the forecourt, morning, phone"
+    },
+    {
+     "id": "plaza-2-fountain-desk",
+     "image": "bible/shots/showcase/town-places-1/plaza-2-fountain-desk.webp",
+     "caption": "The fountain, desktop"
+    },
+    {
+     "id": "plaza-2-fountain-phone",
+     "image": "bible/shots/showcase/town-places-1/plaza-2-fountain-phone.webp",
+     "caption": "The fountain, phone"
+    },
+    {
+     "id": "plaza-3-dusk-desk",
+     "image": "bible/shots/showcase/town-places-1/plaza-3-dusk-desk.webp",
+     "caption": "After work, on the way to the dorms, desktop"
+    },
+    {
+     "id": "plaza-3-dusk-phone",
+     "image": "bible/shots/showcase/town-places-1/plaza-3-dusk-phone.webp",
+     "caption": "After work, on the way to the dorms, phone"
+    }
+   ]
+  },
+  {
+   "title": "Dorm courtyard (dorm_court)",
+   "caption": "Outside Eric's dorm at dusk: the entrance hall with its 24 mailboxes, the coin laundry on the left, the sento on the right and the bike shelter in front.",
+   "images": [
+    {
+     "id": "dormcourt-1-arrive-desk",
+     "image": "bible/shots/showcase/town-places-1/dormcourt-1-arrive-desk.webp",
+     "caption": "Arriving from the plaza lane, desktop"
+    },
+    {
+     "id": "dormcourt-1-arrive-phone",
+     "image": "bible/shots/showcase/town-places-1/dormcourt-1-arrive-phone.webp",
+     "caption": "Arriving from the plaza lane, phone"
+    },
+    {
+     "id": "dormcourt-2-hall-desk",
+     "image": "bible/shots/showcase/town-places-1/dormcourt-2-hall-desk.webp",
+     "caption": "The hall doors and mailboxes, desktop"
+    },
+    {
+     "id": "dormcourt-2-hall-phone",
+     "image": "bible/shots/showcase/town-places-1/dormcourt-2-hall-phone.webp",
+     "caption": "The hall doors and mailboxes, phone"
+    },
+    {
+     "id": "dormcourt-3-wide-desk",
+     "image": "bible/shots/showcase/town-places-1/dormcourt-3-wide-desk.webp",
+     "caption": "The whole courtyard, desktop"
+    },
+    {
+     "id": "dormcourt-3-wide-phone",
+     "image": "bible/shots/showcase/town-places-1/dormcourt-3-wide-phone.webp",
+     "caption": "The whole courtyard, phone"
+    }
+   ]
+  },
+  {
+   "title": "Eric's room (dorms)",
+   "caption": "His tiny room: bed, desk, two shipped boxes and one window onto a concrete wall, with the kitchenette and unit bath by the door. The day ends here.",
+   "images": [
+    {
+     "id": "room-1-arrive-desk",
+     "image": "bible/shots/showcase/town-places-1/room-1-arrive-desk.webp",
+     "caption": "Just in the door, desktop"
+    },
+    {
+     "id": "room-1-arrive-phone",
+     "image": "bible/shots/showcase/town-places-1/room-1-arrive-phone.webp",
+     "caption": "Just in the door, phone"
+    },
+    {
+     "id": "room-2-window-desk",
+     "image": "bible/shots/showcase/town-places-1/room-2-window-desk.webp",
+     "caption": "At the window, desktop"
+    },
+    {
+     "id": "room-2-window-phone",
+     "image": "bible/shots/showcase/town-places-1/room-2-window-phone.webp",
+     "caption": "At the window, phone"
+    },
+    {
+     "id": "room-3-wide-desk",
+     "image": "bible/shots/showcase/town-places-1/room-3-wide-desk.webp",
+     "caption": "The whole room, desktop"
+    },
+    {
+     "id": "room-3-wide-phone",
+     "image": "bible/shots/showcase/town-places-1/room-3-wide-phone.webp",
+     "caption": "The whole room, phone"
+    }
+   ]
+  }
+ ]
+}

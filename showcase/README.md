@@ -5,7 +5,7 @@ The Showcase log in the world bible (http://127.0.0.1:8771/bible/#showcase) is w
 ## Adding an entry
 
 1. Make a folder `showcase/<id>/`. The id is lower case letters, digits and hyphens, for example `town-places-1`.
-2. Put images anywhere in the repo that the server can reach and that stays on this machine (game3d/shots/<job>/ for game captures). Don't commit binaries.
+2. Put images anywhere in the repo that the server can reach and that stays on this machine (game3d/shots/<job>/ for game captures), or under bible/shots/showcase/<id>/ to have them backed up by `python3 tools/assets/sync.py push` (commit tools/assets/assets.lock.json with the entry). Don't commit binaries.
 3. Write `showcase/<id>/entry.json`:
 
 ```json
