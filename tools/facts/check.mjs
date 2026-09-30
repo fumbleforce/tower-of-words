@@ -14,6 +14,7 @@
 import { DEFAULT_SPEAKERS, PORTRAITS, ITEMS, PLACE_DETAILS, SHARED_THINGS, isEngineFlag } from '../../game3d/js/narrative/contracts.js';
 import { storyBondGate } from '../../game3d/js/bonds/gates.js';
 import { PLACE_FILES } from '../../game3d/js/places/definitions.js';
+import { CHUNKS } from '../../game3d/js/scenes/island-layout.js';
 import fs from 'node:fs';
 import path from 'node:path';
 import { pathToFileURL, fileURLToPath } from 'node:url';
@@ -248,6 +249,24 @@ function checkTrips() {
   for (const place of Object.keys(STORY)) if (!reached.has(place)) bad(file, `"Getting between places": no trip to or from \`${place}\``);
 }
 
+// places.md "Where the places sit on the island": one row per built place, matching CHUNKS in
+// game3d/js/scenes/island-layout.js (island point of its (0, 0), turn, scale, level)
+function checkIsland() {
+  const file = 'docs/game/places.md';
+  const rows = table(read(path.join(DOCS, 'places.md')), 'Where the places sit on the island', file);
+  const seen = new Set();
+  for (const r of rows) {
+    const place = id(r.Place), c = CHUNKS[place];
+    seen.add(place);
+    if (!c) { bad(file, `"Where the places sit on the island": \`${place}\` has no entry in island-layout.js CHUNKS`); continue; }
+    const want = { x: c.at[0], z: c.at[1], Turn: c.turn, Scale: c.scale, Level: c.level };
+    for (const [col, v] of Object.entries(want))
+      if (!(Math.abs(+r[col] - v) < 0.005)) bad(file, `"Where the places sit on the island": \`${place}\` ${col} is ${r[col]}, island-layout.js has ${v}`);
+  }
+  for (const place of Object.keys(CHUNKS)) if (!seen.has(place)) bad(file, `"Where the places sit on the island": no row for \`${place}\``);
+  for (const place of Object.keys(STORY)) if (place !== 'lift' && !CHUNKS[place]) bad(file, `"Where the places sit on the island": \`${place}\` is built but not placed`);
+}
+
 // places.md: one "## <Name> (`<place>`)" section per place, with ### Things, Spots, Zones, Who's there when, Small moments
 const smallMoments = {};   // story file -> node ids claimed by places.md
 function checkPlaces(game) {
@@ -408,7 +427,7 @@ if (DUMP) {
   console.log('\nWords taught (type steps):'); for (const [sf, N] of Object.entries(game.nodes)) for (const [n, v] of Object.entries(N)) for (const t of v.types) console.log(`  ${t.word} from ${t.from} in ${sf} ${n}`);
   process.exit(0);
 }
-for (const [area, fn] of [['cast', checkCast], ['places', checkPlaces], ['trips', checkTrips], ['words', checkWords], ['systems', checkSystems], ['stories', checkStories]]) {
+for (const [area, fn] of [['cast', checkCast], ['places', checkPlaces], ['trips', checkTrips], ['island', checkIsland], ['words', checkWords], ['systems', checkSystems], ['stories', checkStories]]) {
   try { fn(game); } catch (e) { bad(area, e.message); }
 }
 if (pending.length) { console.log(`\nPending (decided, not done yet):`); for (const p of pending) console.log('  ' + p); }

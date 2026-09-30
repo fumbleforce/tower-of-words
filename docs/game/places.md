@@ -29,6 +29,22 @@ There are no cuts to black (Jørgen, 2026-09-28: "elegant, continuous transition
 
 The dialogue slots for each trip are in game3d/story/transitions.js (format: FORMAT.md, Transitions).
 
+## Where the places sit on the island
+
+Every place has a spot in one island frame, fitted to [island-map-4](../../reviews/island-map-4/review.json) (2026-09-30). The frame: x runs east, z south, in game units; north is the map's up once its ground is flattened; the origin is the head office door as the map draws it. The table gives the island point of each place's own (0, 0), its clockwise turn on the map in degrees, its scale (the train is built at people scale 1, everything else at 1.18) and its level (0 ground, -2 underground, 1 upstairs or raised). The walks between outdoor places crossfade, so neighbouring places don't have to touch.
+
+The buildings, paths, green and coast around the route, and the fit to the map, are data in game3d/js/scenes/island-layout.js. The island map shows all of it (`?map=1`, key M; `?mapcompare=1` over the reference); the differences are listed in notes/map-gaps.md.
+
+| Place | x | z | Turn | Scale | Level | Pinned by |
+|---|---|---|---|---|---|---|
+| `gate` | -15.14 | 0 | 0 | 1 | 0 | The room centred on the station building. |
+| `forecourt` | -14.64 | -7.15 | 0 | 1 | 0 | The gate room: its exit is the station door. |
+| `office` | -7.59 | -6.97 | 0 | 1 | -2 | Its lift under the forecourt's lift. |
+| `plaza` | 36.35 | 12.5 | 0 | 1 | 0 | Its fountain on the map's fountain. |
+| `dorm_court` | 79.53 | 30.59 | 0 | 1 | 0 | The hall door on the dorm cluster's west entrance court. |
+| `dorms` | 81.28 | 25.19 | 0 | 1 | 1 | In the courtyard's block, above the passage. |
+| `train` | -20.84 | -13.12 | 112 | 1.18 | 1 | The car in the middle of the platform shed, its walkway end toward the station. |
+
 ## Monorail (`train`)
 
 One car of the monorail, crossing the bay from the mainland to Honsha station. The camera looks at it from the platform side, with the near wall cut away for the play camera only. The car is about 8 long and 2.4 wide, with benches along both sides, full-height sliding doors at the near-side corners (they stay full height in the cutaway too, so they never change size while Eric walks out or the car pulls away; Jørgen: "the doors are still half size when trying to leave the train wagon, then magically transform to full height as the train leaves"; they finish shutting before the car moves) and closed neighbour cars (Jørgen, on the title shot: "the doors are hobbit sized, and the carriage behind looks like it is some sort of pavilion"). Sea on both sides out of the windows. When it stops, the station sign and the platform are outside the doors. The train was built earlier (legacy/side/train/) and may be changed where needed.
