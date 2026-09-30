@@ -2,6 +2,7 @@ import * as THREE from 'three';
 import { loadLibrary, buildCharacter, clipsFor } from '../recipe.js';
 import { dressed, layerMesh } from './base.js';
 import { disposeCharacter } from '../dispose.js';
+import { approvedIdleFor } from '../approved-idle.js';
 
 // Both meshes stay in the loader's source-normalized bind coordinates. In
 // particular, never normalize their separate bounding boxes to make them fit.
@@ -11,7 +12,7 @@ if (/^[a-z0-9-]+$/.test(params.get('review') || '')) $('review-link').href = '/b
 if (['mio', 'eric'].includes(params.get('body'))) $('body').value = params.get('body');
 $('version').value = params.get('version') || 'v16';
 if (params.get('fit') === 'fit3' || (!params.has('fit') && /^source\d+$/.test($('version').value))) $('fit').value = 'fit3';
-if (['neutral', 'walk'].includes(params.get('motion'))) $('motion').value = params.get('motion');
+$('motion').value = ['bind', 'walk'].includes(params.get('motion')) ? params.get('motion') : 'neutral';
 if (params.get('colours') === 'original') $('colours').value = 'original';
 if (params.get('source') === '0') { $('show-source').checked = false; $('candidate-opacity').value = '1'; }
 const state = window.__creatorOverlay = { ready: false };
@@ -164,7 +165,7 @@ async function load() {
   try {
     if (!/^[a-zA-Z0-9-]+$/.test(version)) throw new Error('Use a version name such as v16.');
     library ||= await loadLibrary();
-    library.retargetRest = true; library.anims.neutral = 'candidates/idle-neutral.glb';
+    library.retargetRest = true;
     const baseId = `clean-${body}-${version}`;
     const results = await Promise.allSettled([
       buildCharacter(library, { body, parts: {}, height: 1 }),
@@ -175,6 +176,7 @@ async function load() {
     const failure = results.find(result => result.status === 'rejected'); if (failure) throw failure.reason;
     const source = library.src[body];
     const clips = await clipsFor(library, source);
+    clips.neutral = await approvedIdleFor(library, body);
     const mesh = layerMesh(library, nextOriginal, body, 'complete-original-source', Array.from({ length: source.T }, (_, index) => index), [255, 255, 255]);
     nextOriginal.rig.add(mesh); nextOriginal.meshes.original = mesh;
     nextOriginal.bindPose(); nextCandidate.bindPose();
@@ -200,14 +202,14 @@ async function load() {
     $('alignment').textContent = 'Shared source bind coordinates; no per-model scale or offset. Bounds below come from actual vertex positions.';
     $('bounds').textContent = `Coordinates: x, y, z. Full source includes hair and clothes. Bare base includes hidden scalp/body.\nSource min [${format(state.bounds.source.min)}], max [${format(state.bounds.source.max)}]\nBase min [${format(state.bounds.base.min)}], max [${format(state.bounds.base.max)}]\nBase minus source min [${format(state.bounds.delta.min)}], max [${format(state.bounds.delta.max)}]\nThese extents expose scale/offset differences. Matching extents would not prove matching faces or garment clearance.`;
     $('status').textContent = `${body === 'mio' ? 'Mio' : 'Eric'} source + ${baseId}${fit ? (/^source\d+$/.test(version) ? ', source fitted layers' : ', rejected ' + fit + ' trial') : ', original clothing positions'}.`;
-    surfaces(); layers(); pose(); if (params.get('play') === '1') playback(true); window.__done = true;
+    surfaces(); layers(); pose(); if (params.get('play') !== '0') playback(true); window.__done = true;
   } catch (error) {
     if (nextOriginal !== original) disposeModel(nextOriginal);
     if (nextCandidate !== candidate) disposeModel(nextCandidate);
     if (token === request) { state.error = error.message; $('status').textContent = 'Could not load: ' + error.message + '. Candidate exports are local only; see Candidate files below.'; window.__err = error.message; }
   }
 }
-$('motion').onchange = pose;
+$('motion').onchange = () => { pose(); playback(true); };
 $('play').onclick = () => playback(!playing);
 $('time').oninput = () => { playback(false); motionTime = Number($('time').value); applyTime(); invalidate(); };
 $('load').onclick = load; $('body').onchange = load; $('fit').onchange = load;
