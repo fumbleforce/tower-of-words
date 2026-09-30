@@ -2,7 +2,7 @@
  "title": "The new cast portraits in the game, with their faces",
  "date": "2026-09-30",
  "by": "claude-agent:portrait-install",
- "status": "open",
+ "status": "decided",
  "question": "These are now in the game: keep each face, or name another attempt (or say what is off)?",
  "multi": true,
  "media": [
@@ -412,5 +412,8 @@
    "label": "Showcase",
    "href": "bible/#showcase/cast-faces-1"
   }
- ]
+ ],
+ "decision": "Installed as picked by the art agent (face attempts chosen by Claude on Jørgen's instruction that routine picks are ours). Open defect to fix ourselves: Aoi's pale cream edge on her left side.",
+ "decided_at": "2026-09-30T20:22:34+0200",
+ "issue": 95
 }
