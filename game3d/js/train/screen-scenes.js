@@ -182,7 +182,9 @@ export function footballPhoto(renderer) {
 }
 
 // ---------- the practice video ----------
-// clone a chibi rig from people.js, with its parts found again in the copy (clone keeps the child order)
+// clone a chibi rig from people.js, with its parts found again in the copy (clone keeps the child order). The place's
+// draw-call pass (perf/batch.js) may have merged its parts into batch meshes under it and hidden the originals by
+// layer: the copy drops the batches and shows its own parts again, so each can still be left out.
 function cloneRig(r) {
   const saved = new Map();
   r.root.traverse((o) => {
@@ -196,9 +198,13 @@ function cloneRig(r) {
     map.set(a, b);
     a.children.forEach((c, i) => walk(c, b.children[i]));
   })(r.root, root);
-  root.traverse((o) => {
-    if (o.isMesh) o.userData.shared = true; // geometry and materials still belong to the passenger
-  });
+  for (const [o, c] of map) {
+    if (o.userData.perfBatch) c.removeFromParent();
+    else if (c.isMesh) {
+      c.layers.set(0);
+      c.userData.shared = true; // geometry and materials still belong to the passenger
+    }
+  }
   const pick = (o) => map.get(o);
   return {
     root,
