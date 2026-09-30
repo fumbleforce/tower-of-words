@@ -2,7 +2,7 @@
  "title": "Eric's surprised and tired faces",
  "date": "2026-09-29",
  "by": "art agent (Eric expressions)",
- "status": "open",
+ "status": "decided",
  "multi": true,
  "question": "Which surprised face and which tired face should Eric use?",
  "media": [
@@ -96,5 +96,10 @@
    "label": "Height and zoom",
    "href": "bible/#review/eric-portrait-final"
   }
- ]
+ ],
+ "decided": [
+  "s2-d70-1",
+  "t3-d65-1"
+ ],
+ "decision": "surprised s2-d70-1, tired t3-d65-1"
 }

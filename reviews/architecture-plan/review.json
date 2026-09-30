@@ -1,0 +1,39 @@
+{
+ "title": "Architecture and code quality plan",
+ "date": "2026-09-29",
+ "by": "Codex architecture review",
+ "status": "decided",
+ "question": "Should we adopt the revised first stages, including shared contracts, pinned tools, a formatting freeze and enforced checks?",
+ "multi": false,
+ "options": [
+  {
+   "id": "first-stages",
+   "label": "first-stages: approve stages 0 to 2c",
+   "note": "Fix test reporting; pin local tools; share browser and page setup; replace source scrapers with contracts; then format during an agreed freeze and enforce lint, size, cycle and review checks. Extract state and conditions afterward. Claude reviews each change and releases affected files first. Later module and tools reorganization stays for reassessment."
+  },
+  {
+   "id": "checks-first",
+   "label": "checks-first: fix the checks only",
+   "note": "Approve stage 0. Test reporting is demonstrably wrong today. Leave structural work pending."
+  },
+  {
+   "id": "revise",
+   "label": "revise: change the plan",
+   "note": "Say which boundaries, priorities or proposed GUIDE rules should change."
+  }
+ ],
+ "links": [
+  {
+   "label": "Evidence, target modules and staged plan",
+   "href": "bible/#doc/notes/architecture-review.md"
+  },
+  {
+   "label": "Separate game facts documentation proposal",
+   "href": "bible/#review/game-facts-docs"
+  }
+ ],
+ "decided": [
+  "first-stages"
+ ],
+ "decision": "stages 0 to 2c; the refactor runs alone, nobody else edits the code meanwhile"
+}

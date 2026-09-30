@@ -2,7 +2,7 @@
  "title": "Mio looking at her phone, round 5 (top of her left lens)",
  "date": "2026-09-29",
  "by": "art agent (Mio phone 5)",
- "status": "open",
+ "status": "decided",
  "multi": false,
  "question": "Is the top of her left lens solid now?",
  "media": [
@@ -78,5 +78,9 @@
    "label": "Round 4",
    "href": "bible/#review/mio-phone-4"
   }
- ]
+ ],
+ "decided": [
+  "blendk25-3501-exact-3401-v2"
+ ],
+ "decision": "blendk25-3501-exact-3401-v2: 'close enough... dont stress it'"
 }

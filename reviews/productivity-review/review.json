@@ -2,22 +2,88 @@
  "title": "Tools and process: what to set up next",
  "date": "2026-09-29",
  "by": "productivity review agent (Claude)",
- "status": "open",
+ "status": "decided",
  "question": "Which of these should we set up? Pick any number; the details, effort and trade-offs are in notes/productivity-review.md.",
  "multi": true,
- "links": [{"label": "The full review (notes/productivity-review.md)", "href": "bible/#doc/notes/productivity-review.md"}],
+ "links": [
+  {
+   "label": "The full review (notes/productivity-review.md)",
+   "href": "bible/#doc/notes/productivity-review.md"
+  }
+ ],
  "options": [
-  {"id": "worktrees", "label": "worktrees: each agent in its own worktree, one land script to merge", "note": "Stops agents sweeping each other's hunks and committing a broken HEAD (f324524). Half a day. Art, tools and docs agents can start now; game code after Codex's release."},
-  {"id": "commit-gate", "label": "commit-gate: check what is committed, not the working tree", "note": "Install the existing binary hook, a syntax check on the staged files, a background 'does HEAD boot' check after each commit, gitleaks before push. 2 to 3 hours. Now."},
-  {"id": "feedback-log", "label": "feedback-log: your messages logged word for word, new Review answers flagged at once", "note": "A hook appends what you type to notes/feedback-log/ and tells the main agent when Review has new feedback. 1 to 2 hours. Now."},
-  {"id": "agent-defs", "label": "agent-defs: fixed agent types with a definition of done and short reports", "note": "builder, art-round, cold-player, critic, story-reader, reviewer in .claude/agents. Less noise, fewer skipped steps. Half a day. Now."},
-  {"id": "project-skills", "label": "project-skills: recurring jobs as skills (post a review, portrait round, voice clips, fast QA, land)", "note": "Scripts move out of /tmp into tools/ (326 sit in scratchpads, including the voice pipeline). About a day, spread out. Now."},
-  {"id": "gpu-slots", "label": "gpu-slots: tests share the GPU, lighter rendering in test mode", "note": "Several browser tests on the GPU at once instead of software GL at 6 to 8 cores each. Half a day. Partly now (with Codex's OK), render changes after release."},
-  {"id": "codex-wake", "label": "codex-wake: Codex picks up asks without you prompting it", "note": "codex queue into its running session when to-codex.md gets an entry; headless codex exec allowed, in its own worktree. 1 to 2 hours. Needs your OK for the permission rule."},
-  {"id": "guide-diet", "label": "guide-diet: short GUIDE of rules in force, old eras archived, rules per folder", "note": "Art rules load only for art work, game rules only for game3d. Half a day. Now."},
-  {"id": "nightly-qa", "label": "nightly-qa: full local QA every night, one morning digest", "note": "All checks, both viewports, Continue and visual diffs; a Review item only if something broke. Half a day for the runner."},
-  {"id": "telemetry", "label": "telemetry: playtests record where players get stuck", "note": "Time per goal, lookups, wrong tries, idle spots, shown in the bible. About a day, after release."},
-  {"id": "story-props", "label": "story-props: random-walk tests through the real story engine", "note": "Every path reaches day end, a next goal always exists, save and load mid-walk. About a day, after release; best done by Codex."},
-  {"id": "image-qa", "label": "image-qa: one automatic check after every render (glasses, red rim, matte holes, headroom, face drift)", "note": "Flags go on the review card; you still see every attempt. About a day. Now."}
- ]
+  {
+   "id": "worktrees",
+   "label": "worktrees: each agent in its own worktree, one land script to merge",
+   "note": "Stops agents sweeping each other's hunks and committing a broken HEAD (f324524). Half a day. Art, tools and docs agents can start now; game code after Codex's release."
+  },
+  {
+   "id": "commit-gate",
+   "label": "commit-gate: check what is committed, not the working tree",
+   "note": "Install the existing binary hook, a syntax check on the staged files, a background 'does HEAD boot' check after each commit, gitleaks before push. 2 to 3 hours. Now."
+  },
+  {
+   "id": "feedback-log",
+   "label": "feedback-log: your messages logged word for word, new Review answers flagged at once",
+   "note": "A hook appends what you type to notes/feedback-log/ and tells the main agent when Review has new feedback. 1 to 2 hours. Now."
+  },
+  {
+   "id": "agent-defs",
+   "label": "agent-defs: fixed agent types with a definition of done and short reports",
+   "note": "builder, art-round, cold-player, critic, story-reader, reviewer in .claude/agents. Less noise, fewer skipped steps. Half a day. Now."
+  },
+  {
+   "id": "project-skills",
+   "label": "project-skills: recurring jobs as skills (post a review, portrait round, voice clips, fast QA, land)",
+   "note": "Scripts move out of /tmp into tools/ (326 sit in scratchpads, including the voice pipeline). About a day, spread out. Now."
+  },
+  {
+   "id": "gpu-slots",
+   "label": "gpu-slots: tests share the GPU, lighter rendering in test mode",
+   "note": "Several browser tests on the GPU at once instead of software GL at 6 to 8 cores each. Half a day. Partly now (with Codex's OK), render changes after release."
+  },
+  {
+   "id": "codex-wake",
+   "label": "codex-wake: Codex picks up asks without you prompting it",
+   "note": "codex queue into its running session when to-codex.md gets an entry; headless codex exec allowed, in its own worktree. 1 to 2 hours. Needs your OK for the permission rule."
+  },
+  {
+   "id": "guide-diet",
+   "label": "guide-diet: short GUIDE of rules in force, old eras archived, rules per folder",
+   "note": "Art rules load only for art work, game rules only for game3d. Half a day. Now."
+  },
+  {
+   "id": "nightly-qa",
+   "label": "nightly-qa: full local QA every night, one morning digest",
+   "note": "All checks, both viewports, Continue and visual diffs; a Review item only if something broke. Half a day for the runner."
+  },
+  {
+   "id": "telemetry",
+   "label": "telemetry: playtests record where players get stuck",
+   "note": "Time per goal, lookups, wrong tries, idle spots, shown in the bible. About a day, after release."
+  },
+  {
+   "id": "story-props",
+   "label": "story-props: random-walk tests through the real story engine",
+   "note": "Every path reaches day end, a next goal always exists, save and load mid-walk. About a day, after release; best done by Codex."
+  },
+  {
+   "id": "image-qa",
+   "label": "image-qa: one automatic check after every render (glasses, red rim, matte holes, headroom, face drift)",
+   "note": "Flags go on the review card; you still see every attempt. About a day. Now."
+  }
+ ],
+ "decided": [
+  "worktrees",
+  "commit-gate",
+  "feedback-log",
+  "agent-defs",
+  "project-skills",
+  "gpu-slots",
+  "codex-wake",
+  "guide-diet",
+  "telemetry",
+  "image-qa"
+ ],
+ "decision": "yes: worktrees, commit-gate, feedback-log, agent-defs, project-skills, gpu-slots, codex-wake, guide-diet, image-qa; telemetry replaced by performance metrics + an in-game feedback window (text + automatic screenshot); nightly-qa rejected; story-props needs explaining"
 }

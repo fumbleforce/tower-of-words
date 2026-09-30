@@ -1,62 +1,66 @@
 {
-  "title": "Angular chibi bases",
-  "date": "2026-09-29",
-  "by": "Codex",
-  "status": "open",
-  "question": "Which base should we continue fitting clothes to?",
-  "multi": false,
-  "links": [
-    {
-      "label": "Open the live base comparison",
-      "href": "tools/creator/base/compare.html"
-    },
-    {
-      "label": "Earlier attempts and feedback",
-      "href": "bible/#review/creator-base-2"
-    },
-    {
-      "label": "All earlier base renders",
-      "href": "reviews/creator-base-2/attempts.html"
-    },
-    {
-      "label": "First comparison captures (before scale correction)",
-      "href": "reviews/creator-base-3/attempts.html"
-    }
-  ],
-  "options": [
-    {
-      "id": "v15-flat",
-      "label": "v15-flat: fewer head planes",
-      "image": "art/parts/base/shots/creator-base-3/mio-v15-flat-office-final.png",
-      "images": [
-        "art/parts/base/shots/creator-base-3/eric-v15-flat-office-final.png",
-        "art/parts/base/shots/creator-base-3/eric-v15-flat-studio-final.png"
-      ],
-      "note": "744 triangles. Two head rounding bands removed; flat shading. Body shape, eyes and rig carried over from v14. View beside the current game model in the live comparison."
-    },
-    {
-      "id": "v14-flat",
-      "label": "v14-flat: shading change only",
-      "image": "art/parts/base/shots/creator-base-3/mio-v14-flat-office-final.png",
-      "images": [
-        "art/parts/base/shots/creator-base-3/eric-v14-flat-office-final.png"
-      ],
-      "note": "792 triangles. Same v14 geometry with flat shading, under the same office lights."
-    },
-    {
-      "id": "v14-smooth",
-      "label": "v14-smooth: earlier shading",
-      "image": "art/parts/base/shots/creator-base-3/mio-v14-smooth-office-final.png",
-      "images": [
-        "art/parts/base/shots/creator-base-3/eric-v14-smooth-office-final.png"
-      ],
-      "note": "Previous smooth normals, under the office lights. Included to separate the effect of lighting from shading."
-    }
-  ],
-  "media": [
-    {
-      "image": "art/parts/base/shots/creator-base-3/phone-final.png",
-      "caption": "Phone layout of the live comparison."
-    }
-  ]
+ "title": "Angular chibi bases",
+ "date": "2026-09-29",
+ "by": "Codex",
+ "status": "decided",
+ "question": "Which base should we continue fitting clothes to?",
+ "multi": false,
+ "links": [
+  {
+   "label": "Open the live base comparison",
+   "href": "tools/creator/base/compare.html"
+  },
+  {
+   "label": "Earlier attempts and feedback",
+   "href": "bible/#review/creator-base-2"
+  },
+  {
+   "label": "All earlier base renders",
+   "href": "reviews/creator-base-2/attempts.html"
+  },
+  {
+   "label": "First comparison captures (before scale correction)",
+   "href": "reviews/creator-base-3/attempts.html"
+  }
+ ],
+ "options": [
+  {
+   "id": "v15-flat",
+   "label": "v15-flat: fewer head planes",
+   "image": "art/parts/base/shots/creator-base-3/mio-v15-flat-office-final.png",
+   "images": [
+    "art/parts/base/shots/creator-base-3/eric-v15-flat-office-final.png",
+    "art/parts/base/shots/creator-base-3/eric-v15-flat-studio-final.png"
+   ],
+   "note": "744 triangles. Two head rounding bands removed; flat shading. Body shape, eyes and rig carried over from v14. View beside the current game model in the live comparison."
+  },
+  {
+   "id": "v14-flat",
+   "label": "v14-flat: shading change only",
+   "image": "art/parts/base/shots/creator-base-3/mio-v14-flat-office-final.png",
+   "images": [
+    "art/parts/base/shots/creator-base-3/eric-v14-flat-office-final.png"
+   ],
+   "note": "792 triangles. Same v14 geometry with flat shading, under the same office lights."
+  },
+  {
+   "id": "v14-smooth",
+   "label": "v14-smooth: earlier shading",
+   "image": "art/parts/base/shots/creator-base-3/mio-v14-smooth-office-final.png",
+   "images": [
+    "art/parts/base/shots/creator-base-3/eric-v14-smooth-office-final.png"
+   ],
+   "note": "Previous smooth normals, under the office lights. Included to separate the effect of lighting from shading."
+  }
+ ],
+ "media": [
+  {
+   "image": "art/parts/base/shots/creator-base-3/phone-final.png",
+   "caption": "Phone layout of the live comparison."
+  }
+ ],
+ "decided": [
+  "v15-flat"
+ ],
+ "decision": "v15-flat, simplify the body more (fat rolls), then dress it with clothes and hair to replicate Mio and Eric"
 }

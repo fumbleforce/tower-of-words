@@ -2,7 +2,7 @@
  "title": "Mr. Mori's 3D look",
  "date": "2026-09-28",
  "by": "characters agent",
- "status": "open",
+ "status": "decided",
  "multi": false,
  "question": "Mori's test model went through the Meshy workflow from a chibi picture made locally (FLUX.2 Klein) instead of ChatGPT. Keep that look, or redo the chibi pictures in ChatGPT like Eric's?",
  "media": [
@@ -31,5 +31,6 @@
    "label": "See him in the game (?cast3d=mori)",
    "href": "game3d/?cast3d=mori"
   }
- ]
+ ],
+ "decision": "None of these; he gets too many points (Jørgen uses ~1050); don't waste credits; Mori 3D parked"
 }
