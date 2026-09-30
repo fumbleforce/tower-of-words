@@ -3,7 +3,7 @@
 A test of whether Meshy characters can be cut into parts and the parts swapped between bodies and still animate. It starts from Mio and Eric. The game doesn't use any of it.
 
 Pages (served by ./start):
-- http://127.0.0.1:8771/tools/creator/base/dress.html: the creator on the closed base bodies (hair, eyes and clothes that fit both bodies). How it works: [base/README.md](base/README.md#live-creator-source16).
+- http://127.0.0.1:8771/tools/creator/base/dress.html: the creator on the closed base bodies (hair, eyes and clothes that fit both bodies). How it works: [base/README.md](base/README.md#live-creator-source17).
 - http://127.0.0.1:8771/tools/creator/: the original cut-part creator. Pick a body, a part for each slot and a colour for each slot, then watch it in idle or walk.
 - http://127.0.0.1:8771/tools/creator/sheet.html: the check sheet (rebuilds against the originals, mixed characters, seam close-ups). Add `?only=mix` to skip the rebuilds.
 - http://127.0.0.1:8771/tools/creator/cut.html: how each model is cut, coloured by slot.

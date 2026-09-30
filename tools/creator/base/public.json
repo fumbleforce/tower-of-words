@@ -7,6 +7,7 @@
     "tools/creator/base/base.js",
     "tools/creator/base/eyes.js",
     "tools/creator/base/wardrobe.js",
+    "tools/creator/base/hair.js",
     "tools/creator/approved-idle.js",
     "tools/creator/dispose.js",
     "tools/creator/mio-prep.js",
@@ -22,11 +23,11 @@
     "art/parts/src/eric/tex.webp",
     "art/parts/src/mio/mesh.glb",
     "art/parts/src/mio/tex.webp",
-    "art/parts/base/clean-eric-source16.json",
+    "art/parts/base/clean-eric-source17.json",
     "art/parts/base/clean-eric-source16.png",
-    "art/parts/base/clean-eric-source16-fit3-layers.json",
-    "art/parts/base/clean-mio-source16.json",
+    "art/parts/base/clean-eric-source17-fit3-layers.json",
+    "art/parts/base/clean-mio-source17.json",
     "art/parts/base/clean-mio-source16.png",
-    "art/parts/base/clean-mio-source16-fit3-layers.json"
+    "art/parts/base/clean-mio-source17-fit3-layers.json"
   ]
 }

@@ -45,16 +45,44 @@ export function baseMesh(lib, ch, b) {
   g.setAttribute('skinWeight', new THREE.BufferAttribute(new Float32Array(d.sw), 4));
   const smooth = Array.isArray(d.normal) && d.normal.length === d.pos.length;
   if (d.normal !== undefined && !smooth) { g.dispose(); throw new Error(`${d.id}: malformed vertex normals`); }
-  if (smooth) g.setAttribute('normal', new THREE.Float32BufferAttribute(d.normal, 3));
-  else g.computeVertexNormals();   // older exports are triangle soup with flat normals
   const S = lib.src[d.source];
+  if (smooth) g.setAttribute('normal', new THREE.Float32BufferAttribute(S.meta.flat ? d.normal : sourceNormals(d, S), 3));
+  else g.computeVertexNormals();   // older exports are triangle soup with flat normals
   const skinKey = d.skin.map((x) => Math.round(255 * (x <= 0.0031308 ? x * 12.92 : 1.055 * x ** (1 / 2.4) - 0.055)));
   const m = partMaterial(S, { slot: 'head', key: skinKey });
-  m.map = tex; m.flatShading = d.shading === 'flat' || !smooth; m.needsUpdate = true;
+  // shaded like the source: Mio's model is flat shaded, Eric's smooth (a flat-shaded base showed every facet of his face)
+  m.map = tex; m.flatShading = !smooth || !!S.meta.flat; m.needsUpdate = true;
   const mesh = new THREE.SkinnedMesh(g, m);
   mesh.name = d.id; mesh.frustumCulled = false; mesh.castShadow = true; mesh.receiveShadow = true;
   mesh.bind(ch.skeleton, new THREE.Matrix4());
   return mesh;
+}
+
+// Vertex normals for a smooth-shaded source. The head keeps the source's own coordinates, so each head corner takes
+// the source normal at the same position; the base's other corners (body, neck plug) are averaged over every
+// triangle that meets at their position, so the whole base reads as smooth as the source.
+function sourceNormals(d, S) {
+  const key = (a, i) => `${Math.round(a[i] * 1e4)},${Math.round(a[i + 1] * 1e4)},${Math.round(a[i + 2] * 1e4)}`;
+  const src = new Map();
+  for (let i = 0; i < S.n; i++) src.set(key(S.pos, i * 3), i);
+  const out = new Float32Array(d.pos.length), sum = new Map();
+  const a = new THREE.Vector3(), b = new THREE.Vector3(), c = new THREE.Vector3(), n = new THREE.Vector3();
+  for (let t = 0; t < d.T; t++) {
+    a.fromArray(d.pos, t * 9); b.fromArray(d.pos, t * 9 + 3); c.fromArray(d.pos, t * 9 + 6);
+    n.subVectors(c, b).cross(a.clone().sub(b));   // area-weighted face normal
+    for (let k = 0; k < 3; k++) {
+      const s = key(d.pos, t * 9 + k * 3);
+      const v = sum.get(s) || sum.set(s, new THREE.Vector3()).get(s);
+      v.add(n);
+    }
+  }
+  for (let i = 0; i < d.T * 3; i++) {
+    const s = key(d.pos, i * 3), j = d.pieces?.[Math.floor(i / 3)] === 'head' ? src.get(s) : undefined;
+    if (j !== undefined) n.fromArray(S.nrm, j * 3);
+    else n.copy(sum.get(s)).normalize();
+    n.toArray(out, i * 3);
+  }
+  return out;
 }
 
 // a layer: triangles of the body's own source, pushed out along their normals by `lift` (stubble sits on the skin)
@@ -111,6 +139,16 @@ export function layersOf(lib, sid, b) {
   return out;
 }
 
+// The stubble layer's triangles on the front of the jaw (below the mouth line, facing forward) and the rest.
+export function splitStubble(S, tris) {
+  const out = { stubble: [], sideburns: [] };
+  for (const t of tris) {
+    const y = (S.pos[t * 9 + 1] + S.pos[t * 9 + 4] + S.pos[t * 9 + 7]) / 3, z = (S.pos[t * 9 + 2] + S.pos[t * 9 + 5] + S.pos[t * 9 + 8]) / 3;
+    (z > 0.03 && y < 0.62 ? out.stubble : out.sideburns).push(t);
+  }
+  return out;
+}
+
 // A character on a base body with some of its source's layers on
 export async function dressed(lib, sid, { base = sid + '-base', layers = [], height = 1, fit = null } = {}) {
   const b = await loadBase(base);
@@ -132,8 +170,14 @@ export async function dressed(lib, sid, { base = sid + '-base', layers = [], hei
     const body = baseMesh(lib, ch, b); ch.rig.add(body); ch.meshes.body = body;
     for (const k of layers) {
       const l = L[k]; if (!l) continue;
-      const mesh = layerMesh(lib, ch, sid, `${sid}-${k}-layer`, l.tris, l.key, l.lift || 0, fitted?.layers[k]);
-      ch.rig.add(mesh); ch.meshes[k] = mesh;
+      // Eric's stubble layer also holds bits of his side hair (Codex's stubble diagnosis): the jaw part is the
+      // stubble, the rest (sideburns) goes with his own hair
+      const split = k === 'stubble' ? splitStubble(lib.src[sid], l.tris) : { [k]: l.tris };
+      for (const [name, tris] of Object.entries(split)) {
+        if (!tris.length) continue;
+        const mesh = layerMesh(lib, ch, sid, `${sid}-${name}-layer`, tris, l.key, l.lift || 0, fitted?.layers[k]);
+        ch.rig.add(mesh); ch.meshes[name] = mesh;
+      }
     }
     ch.base = b;
     return ch;

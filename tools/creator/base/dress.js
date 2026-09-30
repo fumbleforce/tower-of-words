@@ -2,30 +2,34 @@
 // State lives in the URL (?body=mio&hair=bob&...), so any look can be linked.
 import * as THREE from 'three';
 import { loadLibrary, buildCharacter, SKIN_TONES } from '../recipe.js';
-import { dressed, layerMesh } from './base.js';
+import { dressed, layerMesh, loadBase } from './base.js';
 import { disposeCharacter } from '../dispose.js';
 import { approvedIdleFor } from '../approved-idle.js';
-import { CLOTHES, HAIR, classify, clothesGeometry, hairGeometry, tuckedEars, wardrobeMesh } from './wardrobe.js';
-import { EYE_STYLES, IRIS, customEyes } from './eyes.js';
+import { CLOTHES, classify, clothesGeometry, wardrobeMesh } from './wardrobe.js';
+import { HAIR, hairGeometry, tuckedEars } from './hair.js';
+import { eyeStyles, IRIS, customEyes } from './eyes.js';
 
-const VERSION = 'source16';
 const $ = (id) => document.getElementById(id);
 const NAMES = { mio: 'Mio', eric: 'Eric' };
-const HAIR_COLOURS = ['#1d1f2b', '#4a3325', '#8a5a32', '#d9b56a', '#26405f', '#1f7d86', '#b85a6a', '#9aa0a8'];
-const CLOTH_COLOURS = ['#f2f0ea', '#2b2f3a', '#1f3552', '#3a6ea5', '#2f6b4f', '#b3473d', '#d9a441', '#7a6aa8', '#c9b79a'];
+const HAIR_COLOURS = ['#1d1f2b', '#2a2f4a', '#4a3325', '#8a5a32', '#d9b56a', '#26405f', '#1f7d86', '#b85a6a', '#9aa0a8', '#eeeae4'];
+const ACCENT_COLOURS = ['#1fb5c0', '#e07a9a', '#7a6aa8', '#d9b56a', '#b3473d', '#eeeae4'];
+const CLOTH_COLOURS = ['#f4f2ee', '#8a93a3', '#2b2f3a', '#1f2c4a', '#3a6ea5', '#2f6b4f', '#6f7a5a', '#b3473d', '#d9a441', '#7a6aa8', '#c9b79a'];
 const SLOTS = ['top', 'bottom', 'shoes'];
-const DEFAULT = { body: 'mio', hair: 'own', hairColour: '', eyes: 'original', iris: '', top: 'own', topColour: '', bottom: 'own',
-  bottomColour: '', shoes: 'own', shoesColour: '', skin: '' };
+const DEFAULT = { body: 'mio', hair: 'own', hairColour: '', hairAccent: '', facial: 'own', eyes: 'original', iris: '', top: 'own', topColour: '',
+  bottom: 'own', bottomColour: '', shoes: 'own', shoesColour: '', skin: '' };
 const PRESETS = {
   'Mio as she is': { body: 'mio' },
   'Eric as he is': { body: 'eric' },
-  'New on Mio\'s body': { body: 'mio', hair: 'bob', hairColour: '#8a5a32', eyes: 'round', iris: '#3f8f5a', top: 'tank', topColour: '#f2f0ea', bottom: 'skirt', bottomColour: '#1f3552', shoes: 'sneakers', shoesColour: '#b3473d' },
-  'New on Eric\'s body': { body: 'eric', hair: 'spiky', hairColour: '#1d1f2b', eyes: 'sharp', iris: '#c08a2e', top: 'tee', topColour: '#b3473d', bottom: 'shorts', bottomColour: '#c9b79a', shoes: 'sneakers', shoesColour: '#f2f0ea' },
-  'Ponytail, office': { body: 'mio', hair: 'ponytail', hairColour: '#1d1f2b', eyes: 'sleepy', iris: '#6b4a2e', top: 'shirt', topColour: '#f2f0ea', bottom: 'longskirt', bottomColour: '#2b2f3a', shoes: 'boots', shoesColour: '#2b2f3a', skin: '#e8bfa3' },
-  'Crop, jacket': { body: 'eric', hair: 'crop', hairColour: '#4a3325', eyes: 'round', iris: '#2f6fb0', top: 'jacket', topColour: '#2f6b4f', bottom: 'trousers', bottomColour: '#c9b79a', shoes: 'boots', shoesColour: '#4a3325', skin: '#d9a47f' },
+  'School, twin tails': { body: 'mio', hair: 'twintails', hairColour: '#d9b56a', eyes: 'upturned', iris: '#3f8f5a', top: 'sailor', bottom: 'pleated', shoes: 'loafers' },
+  'Office, long hair': { body: 'mio', hair: 'long', hairColour: '#1d1f2b', hairAccent: '#7a6aa8', eyes: 'narrow', iris: '#6b4a2e', top: 'shirt', bottom: 'pleated', bottomColour: '#2b2f3a', shoes: 'loafers', skin: '#e8bfa3' },
+  'Weekend, bob': { body: 'mio', hair: 'bob', hairColour: '#b85a6a', eyes: 'wide', top: 'tee', bottom: 'cargo', bottomColour: '#c9b79a', shoes: 'sneakers', shoesColour: '#b3473d' },
+  'Hoodie, messy hair': { body: 'eric', hair: 'short', hairColour: '#4a3325', eyes: 'wide', iris: '#3f8f5a', top: 'hoodie', topColour: '#2f6b4f', bottom: 'cargo', shoes: 'sneakers', shoesColour: '#b3473d' },
+  'Blazer, spiky': { body: 'eric', hair: 'spiky', hairColour: '#1d1f2b', hairAccent: '#b3473d', facial: 'none', eyes: 'mio', iris: '#c08a2e', top: 'blazer', bottom: 'trousers', shoes: 'boots', skin: '#d9a47f' },
+  'Ponytail, shirt': { body: 'eric', hair: 'ponytail', hairColour: '#9aa0a8', eyes: 'droopy', iris: '#5c6670', top: 'shirt', topColour: '#c9d6e8', bottom: 'trousers', bottomColour: '#c9b79a', shoes: 'loafers' },
 };
 
 const params = new URLSearchParams(location.search);
+const VERSION = params.get('v') || 'source17';   // ?v= loads an earlier base for comparison
 const state = { ...DEFAULT };
 for (const key of Object.keys(DEFAULT)) if (params.has(key)) state[key] = params.get(key);
 const view = window.__creator = { ready: false, state };
@@ -76,23 +80,30 @@ function apply() {
   // hair
   removeExtra('hair');
   if (ch.meshes.hair) { ch.meshes.hair.visible = state.hair === 'own'; tint(ch.meshes.hair, state.hair === 'own' ? state.hairColour : ''); }
+  // made hair folds Mio's big ears in, so they don't stick out through it
   const bodyPos = ch.meshes.body.geometry.attributes.position;
-  bodyPos.array.set(HAIR[state.hair]?.coversEars ? tuckedEars(d) : d.pos); bodyPos.needsUpdate = true;
-  if (HAIR[state.hair]) { extra.hair = wardrobeMesh(ch, hairGeometry(d, state.hair), state.hairColour || '#4a3325', 'hair-' + state.hair); ch.rig.add(extra.hair); }
-  // Eric's stubble layer also holds some of his side hair (Codex's stubble diagnosis), so it goes with his hair
-  if (ch.meshes.stubble) { ch.meshes.stubble.visible = state.hair === 'own'; tint(ch.meshes.stubble, state.hair === 'own' ? state.hairColour : ''); }
+  bodyPos.array.set(HAIR[state.hair] ? tuckedEars(d) : d.pos); bodyPos.needsUpdate = true;
+  if (HAIR[state.hair]) {
+    extra.hair = wardrobeMesh(ch, hairGeometry(d, state.hair, { main: state.hairColour || '#4a3325', accent: state.hairAccent || null }), 'hair-' + state.hair, true);
+    ch.rig.add(extra.hair);
+  }
+  // Eric's sideburns (part of his stubble layer) go with his own hair; his stubble is its own choice
+  if (ch.meshes.sideburns) { ch.meshes.sideburns.visible = state.hair === 'own'; tint(ch.meshes.sideburns, state.hair === 'own' ? state.hairColour : ''); }
+  if (ch.meshes.stubble) ch.meshes.stubble.visible = state.facial === 'own';
   // clothes
   for (const slot of SLOTS) {
     removeExtra(slot);
     const pick = state[slot], colour = state[slot + 'Colour'];
     if (ch.meshes[slot]) { ch.meshes[slot].visible = pick === 'own'; tint(ch.meshes[slot], pick === 'own' ? colour : ''); }
-    if (CLOTHES[pick]) { extra[slot] = wardrobeMesh(ch, clothesGeometry(d, J, pick), colour || '#3a6ea5', slot + '-' + pick); ch.rig.add(extra[slot]); }
+    if (CLOTHES[pick]) { extra[slot] = wardrobeMesh(ch, clothesGeometry(d, J, pick, colour), slot + '-' + pick, !!library.src[state.body].meta.flat); ch.rig.add(extra[slot]); }
   }
   if (params.get('zones') === '1') showZones(d, J);
   // skin and eyes
   tint(ch.meshes.body, state.skin);
-  eyes.set({ style: state.eyes, iris: state.iris || (state.eyes === 'original' ? null : '#2f6fb0') });
-  history.replaceState(null, '', '?' + new URLSearchParams(Object.fromEntries(Object.entries(state).filter(([k, v]) => v !== DEFAULT[k]))));
+  eyes.set({ style: state.eyes, iris: state.iris || null });
+  const query = new URLSearchParams(Object.fromEntries(Object.entries(state).filter(([k, v]) => v !== DEFAULT[k])));
+  if (params.has('v')) query.set('v', VERSION);
+  history.replaceState(null, '', '?' + query);
   render();
 }
 
@@ -118,11 +129,13 @@ async function load() {
     const baseId = `clean-${state.body}-${VERSION}`;
     const next = await dressed(library, state.body, { base: baseId, height: 1, layers: ['hair', 'top', 'bottom', 'shoes', 'stubble'], fit: `${baseId}-fit3-layers` });
     next.actions.neutral = next.mixer.clipAction(await approvedIdleFor(library, state.body));
+    // every body's painted eyes are on offer on every body
+    const others = Object.fromEntries(await Promise.all(Object.keys(NAMES).map(async (k) => [k, await loadBase(`clean-${k}-${VERSION}`)])));
     if (token !== request) { disposeCharacter(next); return; }
     for (const slot of Object.keys(extra)) removeExtra(slot);
     eyes?.dispose(); disposeCharacter(ch);
     ch = next; scene.add(ch.root);
-    eyes = customEyes(ch.meshes.body.material, ch.base.d);
+    eyes = customEyes(ch.meshes.body.material, ch.base.d, ch.base.tex.image, others);
     start(ch, motion);
     await setBeside($('beside').getAttribute('aria-pressed') === 'true');
     refreshControls(); apply();
@@ -179,9 +192,14 @@ function refreshControls() {
   const own = NAMES[state.body] + "'s";
   chips('body', Object.entries(NAMES).map(([k, n]) => [k, n + "'s body"]), 'body', () => { resetOwn(); load(); });
   swatches('skin', SKIN_TONES, 'skin');
-  chips('hair', [['own', own + ' hair'], ...Object.entries(HAIR).map(([k, h]) => [k, h.label]), ['none', 'None']], 'hair');
+  chips('hair', [['own', own + ' hair'], ...Object.entries(HAIR).map(([k, h]) => [k, h.label]), ['none', 'None']], 'hair', () => { afterPick(); apply(); });
   swatches('hair-colour', HAIR_COLOURS, 'hairColour');
-  chips('eyes', Object.entries(EYE_STYLES), 'eyes');
+  swatches('hair-accent', ACCENT_COLOURS, 'hairAccent');
+  afterPick();
+  $('facial-box').hidden = !ch?.meshes.stubble;
+  chips('facial', [['own', "Eric's stubble"], ['none', 'None']], 'facial');
+  if (!eyeStyles(state.body)[state.eyes]) state.eyes = 'original';
+  chips('eyes', Object.entries(eyeStyles(state.body)), 'eyes');
   swatches('iris', IRIS, 'iris');
   for (const slot of SLOTS) {
     chips(slot, [['own', own + ' ' + slot], ...Object.entries(CLOTHES).filter(([, c]) => c.slot === slot).map(([k, c]) => [k, c.label]), ['none', 'None']], slot);
@@ -189,6 +207,8 @@ function refreshControls() {
   }
 }
 function resetOwn() { for (const slot of ['hair', ...SLOTS]) if (state[slot] === 'own') state[slot + 'Colour'] = ''; }
+// the accent row only means something on made hair
+function afterPick() { $('hair-accent').hidden = $('hair-accent-note').hidden = !HAIR[state.hair]; }
 const presetBox = $('presets');
 for (const [name, preset] of Object.entries(PRESETS)) {
   const b = document.createElement('button'); b.textContent = name;
@@ -244,9 +264,12 @@ view.set = async (changes) => { const body = state.body; Object.assign(state, ch
 // for captures: hold one pose (name, time in seconds)
 view.pose = (name, time) => {
   motion = name; spin = false; frozen = true;
-  for (const c of [ch, original]) if (c) { start(c, name); c.cur.time = time; c.update(0); }
+  for (const c of [ch, original]) if (!c) continue;
+    else if (name === 'bind') { c.mixer.stopAllAction(); c.skeleton.pose(); c.cur = null; }
+    else { start(c, name); c.cur.time = time; c.update(0); }
 };
 view.camera = (y, p = 0.12, z = 1, face = false, at = null) => { yaw = y; pitch = p; zoom = z; faceView = face; focus = at; spin = false; };
 view.character = () => ch;
+view.eyes = () => eyes;
 addEventListener('pagehide', () => { request++; renderer.setAnimationLoop(null); eyes?.dispose(); disposeCharacter(ch); disposeCharacter(original); renderer.dispose(); });
 load();

@@ -1,63 +1,54 @@
-// Clothes and hair made from the base body itself, so every piece fits every base (creator-base-5: "a small
-// assortment of other clothes and hair to demonstrate customizability and reusability").
+// Clothes made from the base body itself, so every piece fits both bodies (creator-base-5: "a small assortment of
+// other clothes and hair"; creator-base-6: "Hair and clothes need more character, like the original ones, and fit
+// the anime theme. New ones are too plain, simple.").
 //
-// Clothes are shells of the base body: the body triangles of a region (torso down to a hem, arms to a sleeve
-// length, legs to a trouser length, feet) pushed out along their normals, keeping the body's skin weights, so they
-// move with the body in every pose. The skirt is a flared ring on the hips. Hair is a low-poly cap shrink-wrapped
-// round the base's head (ray cast from the head's centre), with a style shaping its hairline, length and tufts;
-// it rides the Head bone.
+// A garment is a list of pieces. A piece is part of the body's surface cut out by functions of the position (hems,
+// necklines, sleeve and trouser ends, the edge of a collar or pocket), pushed out along the body's normals and
+// keeping its skin weights, so it moves with the body in every pose. A piece laid over another with a bigger offset
+// is a collar, pocket, belt or cuff. Inside a piece, regions split the triangles exactly on a line to colour bands,
+// stripes, seams and placket lines. Where a piece is cut, a lip turns the edge in to the body, so a cuff or hem
+// is closed. Accessories (buttons, bows, ties, drawstrings, buckles, collars, skirts) are small meshes placed on
+// the body's surface, weighted like the body where they sit. Colours are baked into vertex colours: the garment's
+// main colour (the player's pick) and fixed trims.
 //
-//   const g = clothesGeometry(base.d, joints, 'tee');   // or hairGeometry(base.d, 'bob')
-//   const mesh = wardrobeMesh(ch, g, '#3a6ea5');
+//   const g = clothesGeometry(base.d, joints, 'sailor', '#f4f2ee');
+//   const mesh = wardrobeMesh(ch, g, 'top-sailor', flat);
 import * as THREE from 'three';
 import { BONES } from '../recipe.js';
 
 const B = Object.fromEntries(BONES.map((name, index) => [name, index]));
-
-// ---------- clothes ----------
-
-// sleeve: how far down the arm (0 shoulder joint, 1 wrist); straps: a sleeveless top's width (fraction of the
-// shoulder joints' spread); hem: top's lower edge between hips (0) and the lowest
-// spine joint (1); legs: trouser length (0 hip joint, 1 ankle). Offsets are in body heights.
-export const CLOTHES = {
-  shirt: { slot: 'top', label: 'Long-sleeve shirt', sleeve: 0.8, hem: -0.35, neck: 0.5, offset: 0.010 },
-  tee: { slot: 'top', label: 'T-shirt', sleeve: 0.42, hem: -0.25, neck: 0.35, offset: 0.010 },
-  tank: { slot: 'top', label: 'Sleeveless top', straps: 0.8, hem: -0.2, neck: 0.1, offset: 0.009 },
-  jacket: { slot: 'top', label: 'Jacket', sleeve: 0.82, hem: -0.7, neck: 0.7, offset: 0.016 },
-  trousers: { slot: 'bottom', label: 'Trousers', legs: 0.96, waist: 0.05, offset: 0.007 },
-  shorts: { slot: 'bottom', label: 'Shorts', legs: 0.4, waist: 0.05, offset: 0.007 },
-  skirt: { slot: 'bottom', label: 'Pleated skirt', skirt: 0.45, follow: 0.55, waist: 0.05, offset: 0.007 },
-  longskirt: { slot: 'bottom', label: 'Long skirt', skirt: 0.8, follow: 0.6, waist: 0.05, offset: 0.007 },
-  sneakers: { slot: 'shoes', label: 'Sneakers', ankle: 0.93, offset: 0.012, sole: 0.018 },
-  boots: { slot: 'shoes', label: 'Boots', ankle: 0.62, offset: 0.013, sole: 0.02 },
-};
-
 const lerp = (a, b, t) => a + (b - a) * t;
+const clamp01 = (x) => Math.min(1, Math.max(0, x));
+const WHITE = '#f4f2ee', NAVY = '#1f2c4a', INK = '#23252c', RED = '#b8343a', METAL = '#c9ccd2', SOLE = '#eeece6';
 
-// Where a corner of the body sits: zone (torso, neck, arm, hand, leg, foot) and how far down its limb it is.
-// Measured from the joints, not the skin weights: the source-derived bodies carry their weights over from the
-// original clothes (a hood, loose sleeves), so a chest corner can be weighted mostly to an arm or the head.
+// ---------- where a body corner is ----------
+
+// Zone (torso, neck, arm, hand, leg, foot) and how far down its limb, measured from the joints: the source-derived
+// bodies carry weights from the original clothes (a hood, loose sleeves), so a chest corner can be weighted mostly
+// to an arm or the head.
 const segment = (p, a, b) => {
   const ab = b.clone().sub(a), s = p.clone().sub(a).dot(ab) / ab.lengthSq();
   return { s, dist: p.distanceTo(a.clone().addScaledVector(ab, THREE.MathUtils.clamp(s, 0, 1))) };
 };
+const sideOf = (x, J) => (Math.sign(x - J.Hips.x) === Math.sign(J.LeftArm.x - J.Hips.x) ? 'Left' : 'Right');
 export function classify(d, i, J) {
   const p = new THREE.Vector3().fromArray(d.pos, i * 3);
-  const side = Math.sign(p.x - J.Hips.x) === Math.sign(J.LeftArm.x - J.Hips.x) ? 'Left' : 'Right';
+  const side = sideOf(p.x, J);
   const arm = segment(p, J[side + 'Arm'], J[side + 'Hand']);
   const armLength = J[side + 'Arm'].distanceTo(J[side + 'Hand']);
   const outside = Math.abs(p.x - J.Hips.x) > Math.abs(J[side + 'Arm'].x - J.Hips.x) * 0.75;
-  // The hands keep their source weights, so a corner weighted mostly to a hand or forearm is one.
   let best = 0;
   for (let k = 1; k < 4; k++) if (d.sw[i * 4 + k] > d.sw[i * 4 + best]) best = k;
   const bone = BONES[d.si[i * 4 + best]];
   if (bone === side + 'Hand') return { zone: 'hand', p };
   if (bone === side + 'ForeArm') return arm.s > 1 - 0.01 / armLength ? { zone: 'hand', p } : { zone: 'arm', s: arm.s, p };
-  if (outside && arm.s > -0.05 && arm.dist < 0.06) {
+  // near the arm and weighted to it; the waist beside a hanging hand is near the arm too, but weighted to the spine
+  const armish = /Arm|Shoulder|Hand/.test(bone);
+  if (outside && armish && arm.s > -0.05 && arm.dist < 0.06) {
     if (arm.s > 1 - 0.01 / armLength) return { zone: 'hand', p };
     return { zone: 'arm', s: arm.s, p };
   }
-  if (outside && arm.s > 0.9 && arm.dist < 0.09) return { zone: 'hand', p };
+  if (outside && armish && arm.s > 0.9 && arm.dist < 0.09) return { zone: 'hand', p };
   if (p.y > J.neck.y - 0.012) return { zone: 'neck', p };
   const crotch = J[side + 'UpLeg'].y - 0.03;
   if (p.y < crotch) {
@@ -67,34 +58,189 @@ export function classify(d, i, J) {
   return { zone: 'torso', p };
 }
 
-// A garment is the body cut by planes (hems, neckline, sleeve ends, trouser ends): each cut is a function of the
-// position that is positive on the covered side. Triangles are clipped exactly on the plane, so hems are straight.
-// Only triangles of the zones a garment can reach are used (never hands; tops never the feet).
-function cuts(spec, J, zone, side) {
-  const hemY = lerp(J.Hips.y, J.Spine02.y, spec.hem ?? 0), waistY = lerp(J.Hips.y, J.Spine02.y, spec.waist ?? 0);
-  const legY = (s) => lerp(J[side + 'UpLeg'].y, J[side + 'Foot'].y, s);
-  if (spec.slot === 'top') {
-    if (!['torso', 'neck', 'arm', 'leg'].includes(zone)) return null;
-    const neckY = lerp(J.Spine.y, J.neck.y, spec.neck), list = [(p) => p.y - hemY, (p) => neckY - p.y];
-    if (spec.straps) list.push((p) => Math.abs(J[side + 'Arm'].x - J.Hips.x) * spec.straps - Math.abs(p.x - J.Hips.x));
-    else if (zone === 'arm') {
-      const a = J[side + 'Arm'], axis = J[side + 'Hand'].clone().sub(a), length = axis.length();
-      axis.normalize();
-      list.push((p) => spec.sleeve * length - p.clone().sub(a).dot(axis));
-    }
-    return list;
-  }
-  if (spec.slot === 'bottom') {
-    if (!['torso', 'leg'].includes(zone)) return null;
-    const end = legY(spec.skirt ? 0.12 : spec.legs);
-    return [(p) => waistY - p.y, (p) => p.y - end];
-  }
-  if (!['leg', 'foot'].includes(zone)) return null;
-  const top = legY(spec.ankle);
-  return [(p) => top - p.y];
-}
+// ---------- cut functions (positive on the covered side) ----------
 
-// weights of a clipped corner: blend two corners' bone weights, keep the four strongest
+// A neckline: a scoop round the neck that only cuts near it, so the shoulders stay covered (Codex review X-0290:
+// a flat neckline left Eric's shoulder caps bare). v: how far the front drops at the middle (a V).
+const neckline = (J, { lift = 0, v = 0, vWidth = 0.06, scoop = 0.004 } = {}) => (p) => {
+  const horiz = Math.hypot(p.x - J.neck.x, p.z - J.neck.z), front = clamp01((p.z - J.neck.z) / 0.05);
+  const line = J.neck.y + lift - scoop * front - v * front * Math.max(0, 1 - Math.abs(p.x - J.neck.x) / vWidth) + 3 * Math.max(0, horiz - 0.05);
+  return line - p.y;
+};
+const hemAt = (J, s) => (p) => p.y - lerp(J.Hips.y, J.Spine02.y, s);   // s: 0 at the hips, 1 at the lowest spine joint
+const waistAt = (J, s) => (p) => lerp(J.Hips.y, J.Spine02.y, s) - p.y;
+// along the arm from the shoulder joint; s = 1 at the wrist. Only the arms are cut (zone: the triangle's zone), so the
+// waist beside a hanging hand stays covered.
+const sleeveAt = (J, s) => (p, zone) => {
+  if (zone && zone !== 'arm') return 1;
+  const side = sideOf(p.x, J), a = J[side + 'Arm'], axis = J[side + 'Hand'].clone().sub(a), len = axis.length();
+  return s * len - p.clone().sub(a).dot(axis.normalize());
+};
+const legAt = (J, s) => (p) => { const side = sideOf(p.x, J); return p.y - lerp(J[side + 'UpLeg'].y, J[side + 'Foot'].y, s); };
+const front = (J, z = 0) => (p) => p.z - (J.Spine.z + z);
+const back = (J, z = 0) => (p) => J.Spine.z + z - p.z;
+const within = (c, half) => (p) => half - Math.abs(p.x - c);
+// fold lines: thin darker creases across the front of the knee, bent down towards the outside
+const kneeFolds = (J) => (p, zone) => {
+  if (zone && zone !== 'leg') return -1;
+  const side = sideOf(p.x, J), knee = J[side + 'Leg'], across = Math.abs(p.x - knee.x);
+  if (p.z < knee.z - 0.01) return -1;
+  return Math.max(...[0.004, -0.014].map((dy) => 0.0018 - Math.abs(p.y - (knee.y + dy - 0.35 * across))));
+};
+// a crease round the inside of the elbow
+const elbowFold = (J) => (p, zone) => {
+  if (zone && zone !== 'arm') return -1;
+  const side = sideOf(p.x, J), e = J[side + 'ForeArm'];
+  return 0.0022 - Math.abs(Math.hypot(p.x - e.x, p.y - e.y, p.z - e.z) - 0.012);
+};
+const legCentre = (J, p) => { const side = sideOf(p.x, J); return lerp(J[side + 'UpLeg'].x, J[side + 'Foot'].x, 0.5); };
+
+// ---------- garments ----------
+// Each garment: slot, label, main colour, pieces(J) and optional extras(put, J). A piece: zones it may cover, keep
+// (cuts), offset from the skin, colour (a role), regions [{ f, colour }] (first match wins, f >= 0 inside), lip
+// (the colour of the turned-in edge, or null for none). Roles: 'main', a hex colour, or ['main', shade].
+const shade = (f) => ['main', f];
+export const CLOTHES = {
+  hoodie: {
+    slot: 'top', label: 'Hoodie', main: '#8a93a3',
+    pieces: (J) => [
+      { zones: ['torso', 'neck', 'arm', 'leg'], keep: [hemAt(J, -0.32), neckline(J, { lift: 0.004 }), sleeveAt(J, 0.9)], offset: 0.014, colour: 'main',
+        regions: [{ f: elbowFold(J), colour: shade(0.78) }, { f: (p) => 0.022 - hemAt(J, -0.32)(p), colour: shade(0.82) }, { f: (p, z) => 0.03 - sleeveAt(J, 0.9)(p, z), colour: shade(0.82) }], lip: shade(0.7) },
+      // kangaroo pocket
+      { zones: ['torso', 'leg'], keep: [front(J, 0.03), within(J.Hips.x, 0.075), hemAt(J, -0.12), (p) => lerp(J.Hips.y, J.Spine02.y, 0.45) - p.y - 0.8 * Math.abs(p.x - J.Hips.x)],
+        offset: 0.02, colour: shade(0.93), lip: shade(0.72) },
+    ],
+    extras: (put, J) => {
+      put.hood(J, 'main');
+      for (const s of [-1, 1]) put.cord(J.neck.x + s * 0.022, J.neck.y - 0.012, 0.075, WHITE, METAL);
+    },
+  },
+  sailor: {
+    slot: 'top', label: 'Sailor blouse', main: WHITE,
+    pieces: (J) => {
+      const collarBack = J.Spine.y - 0.035, vBottom = lerp(J.Spine02.y, J.Spine.y, 0.45);
+      const vLine = (p) => vBottom + 1.25 * Math.abs(p.x - J.neck.x);
+      const edge = (p) => (p.z < J.neck.z ? p.y - collarBack : p.y - vLine(p));   // the collar's outer edge (0 on the edge)
+      const vEdge = neckline(J, { v: J.neck.y - vBottom, vWidth: 0.08 });
+      return [
+        // the dickey filling the V
+        { zones: ['torso', 'neck'], keep: [neckline(J, { lift: 0.004 }), front(J, 0.0), (p) => 0.012 - vEdge(p)], offset: 0.01, colour: 'main', lip: null },
+        { zones: ['torso', 'neck', 'arm', 'leg'], keep: [hemAt(J, 0.05), neckline(J, { v: J.neck.y - vBottom, vWidth: 0.08 }), sleeveAt(J, 0.46)], offset: 0.012, colour: 'main',
+          regions: [{ f: (p, z) => 0.0025 - Math.abs(sleeveAt(J, 0.46)(p, z) - 0.011), colour: WHITE }, { f: (p, z) => 0.018 - sleeveAt(J, 0.46)(p, z), colour: NAVY }], lip: NAVY },
+        // the sailor collar: square at the back, down to the V at the front, with a white stripe near its edge
+        { zones: ['torso', 'neck', 'arm'], keep: [edge, neckline(J, { v: J.neck.y - vBottom, vWidth: 0.08 }), (p) => 0.13 - Math.abs(p.x - J.neck.x)],
+          offset: 0.018, colour: NAVY, regions: [{ f: (p) => 0.004 - Math.abs(edge(p) - 0.012), colour: WHITE }], lip: NAVY },
+      ];
+    },
+    extras: (put, J) => { const vBottom = lerp(J.Spine02.y, J.Spine.y, 0.45); put.bow(J.neck.x, vBottom + 0.004, RED, 0.034); },
+  },
+  shirt: {
+    slot: 'top', label: 'Shirt and tie', main: WHITE, accent: NAVY,
+    pieces: (J) => [
+      { zones: ['torso', 'neck', 'arm', 'leg'], keep: [hemAt(J, -0.3), neckline(J, { lift: 0.006 }), sleeveAt(J, 0.9)], offset: 0.011, colour: 'main',
+        regions: [{ f: (p, z) => 0.022 - sleeveAt(J, 0.9)(p, z), colour: shade(0.92) }, { f: (p) => Math.min(front(J, 0.02)(p), 0.005 - Math.abs(p.x - J.neck.x)), colour: shade(0.9) }], lip: shade(0.8) },
+    ],
+    extras: (put, J, colours) => {
+      put.collar(J, 'shirt', 'main');
+      put.tie(J, colours.accent || NAVY);
+    },
+  },
+  blazer: {
+    slot: 'top', label: 'Blazer', main: NAVY, accent: RED,
+    pieces: (J) => {
+      const vBottom = lerp(J.Spine02.y, J.Spine.y, 0.1), v = J.neck.y - vBottom, vw = 0.1;
+      const vEdge = (p) => neckline(J, { v, vWidth: vw })(p);
+      return [
+        // the shirt showing in the V
+        { zones: ['torso', 'neck'], keep: [neckline(J, { lift: 0.006 }), front(J, 0.0), (p) => 0.012 - vEdge(p)], offset: 0.011, colour: WHITE, lip: null },
+        { zones: ['torso', 'neck', 'arm', 'leg'], keep: [hemAt(J, -0.55), vEdge, sleeveAt(J, 0.9)], offset: 0.022, colour: 'main',
+          regions: [{ f: (p) => Math.min(front(J, 0.02)(p), 0.004 - Math.abs(p.x - J.Hips.x - 0.006)), colour: shade(0.72) },
+            { f: (p, z) => 0.02 - sleeveAt(J, 0.9)(p, z), colour: shade(0.9) }], lip: shade(0.6) },
+        // lapels: a raised band along the V
+        { zones: ['torso', 'neck'], keep: [vEdge, (p) => 0.026 - vEdge(p), front(J, 0.0), (p) => p.y - vBottom + 0.01], offset: 0.027, colour: shade(0.82), lip: shade(0.6) },
+        // pocket flaps
+        { zones: ['torso', 'leg'], keep: [front(J, 0.03), (p) => Math.abs(p.x - J.Hips.x) - 0.03, (p) => 0.075 - Math.abs(p.x - J.Hips.x), hemAt(J, -0.18), (p) => lerp(J.Hips.y, J.Spine02.y, -0.1) - p.y],
+          offset: 0.027, colour: shade(0.8), lip: shade(0.6) },
+      ];
+    },
+    extras: (put, J, colours) => {
+      put.tie(J, colours.accent || RED, 0.5);
+      for (const y of [lerp(J.Spine02.y, J.Spine.y, -0.05), lerp(J.Hips.y, J.Spine02.y, 0.45)]) put.button(J.Hips.x + 0.006, y, METAL, 0.008);
+    },
+  },
+  tee: {
+    slot: 'top', label: 'Ringer tee', main: '#d9dde3', accent: '#3a6ea5',
+    pieces: (J, colours) => [
+      { zones: ['torso', 'neck', 'arm', 'leg'], keep: [hemAt(J, -0.22), neckline(J, { scoop: 0.01 }), sleeveAt(J, 0.44)], offset: 0.011, colour: 'main',
+        regions: [{ f: (p, z) => 0.016 - sleeveAt(J, 0.44)(p, z), colour: colours.accent },
+          { f: (p) => 0.009 - Math.abs(p.y - lerp(J.Spine02.y, J.Spine.y, 0.55)), colour: colours.accent },
+          { f: (p) => 0.004 - Math.abs(p.y - lerp(J.Spine02.y, J.Spine.y, 0.3)), colour: colours.accent }], lip: colours.accent },
+    ],
+    extras: (put, J, colours) => put.rib(J, colours.accent),
+  },
+  trousers: {
+    slot: 'bottom', label: 'Slim trousers', main: '#2b2f3a',
+    pieces: (J) => [
+      { zones: ['torso', 'leg', 'foot'], keep: [waistAt(J, 0.08), legAt(J, 0.95)], offset: 0.009, colour: 'main',
+        regions: [{ f: (p) => Math.min(front(J, 0.01)(p), 0.0025 - Math.abs(p.x - legCentre(J, p)), p.y > J.LeftUpLeg.y - 0.03 ? -1 : 1), colour: shade(0.72) },
+          { f: (p) => 0.018 - legAt(J, 0.95)(p), colour: shade(0.86) }, { f: kneeFolds(J), colour: shade(0.78) }], lip: shade(0.7) },
+      // belt
+      { zones: ['torso'], keep: [waistAt(J, 0.1), (p) => p.y - lerp(J.Hips.y, J.Spine02.y, -0.05)], offset: 0.015, colour: INK, lip: INK },
+      // back pockets
+      { zones: ['torso', 'leg'], keep: [back(J, -0.02), (p) => Math.abs(p.x - J.Hips.x) - 0.018, (p) => 0.07 - Math.abs(p.x - J.Hips.x), (p) => lerp(J.Hips.y, J.Spine02.y, -0.12) - p.y, (p) => p.y - J.LeftUpLeg.y + 0.035],
+        offset: 0.013, colour: shade(0.9), lip: shade(0.7) },
+    ],
+    extras: (put, J) => put.buckle(J.Hips.x, lerp(J.Hips.y, J.Spine02.y, 0.025), METAL),
+  },
+  cargo: {
+    slot: 'bottom', label: 'Cargo shorts', main: '#6f7a5a',
+    pieces: (J) => [
+      { zones: ['torso', 'leg'], keep: [waistAt(J, 0.08), legAt(J, 0.42)], offset: 0.01, colour: 'main', lip: shade(0.7) },
+      // turned-up cuffs
+      { zones: ['leg'], keep: [(p) => 0.03 - legAt(J, 0.42)(p), legAt(J, 0.42)], offset: 0.016, colour: shade(0.88), lip: shade(0.7) },
+      // side pockets with flaps
+      { zones: ['leg'], keep: [(p) => Math.abs(p.x - J.Hips.x) - Math.abs(legCentre(J, p) - J.Hips.x) - 0.012, legAt(J, 0.33), (p) => -legAt(J, 0.12)(p)], offset: 0.017, colour: shade(0.93),
+        regions: [{ f: (p) => -legAt(J, 0.17)(p), colour: shade(0.78) }], lip: shade(0.68) },
+      { zones: ['torso'], keep: [waistAt(J, 0.1), (p) => p.y - lerp(J.Hips.y, J.Spine02.y, -0.05)], offset: 0.015, colour: INK, lip: INK },
+    ],
+    extras: (put, J) => put.buckle(J.Hips.x, lerp(J.Hips.y, J.Spine02.y, 0.025), METAL),
+  },
+  pleated: {
+    slot: 'bottom', label: 'Pleated skirt', main: NAVY,
+    pieces: (J) => [
+      { zones: ['torso', 'leg'], keep: [waistAt(J, 0.1), legAt(J, 0.1)], offset: 0.008, colour: 'main', lip: null },
+      { zones: ['torso'], keep: [waistAt(J, 0.12), (p) => p.y - lerp(J.Hips.y, J.Spine02.y, -0.02)], offset: 0.014, colour: shade(0.8), lip: shade(0.7) },
+    ],
+    extras: (put, J) => put.skirt(J, { length: 0.56, pleats: 28, pleated: true, flare: 1.3, stripes: [[0.12, WHITE], [0.22, WHITE]] }),
+  },
+  sneakers: {
+    slot: 'shoes', label: 'Sneakers', main: '#3a6ea5',
+    pieces: (J) => [
+      { zones: ['leg', 'foot'], keep: [(p) => -legAt(J, 0.93)(p)], offset: 0.012, colour: 'main',
+        regions: [{ f: (p) => 0.016 - p.y, colour: SOLE }, { f: (p) => Math.min(0.03 - p.y, p.z - lerp(J.LeftFoot.z, J.LeftToeBase.z, 0.9)), colour: SOLE },
+          { f: (p) => Math.min(p.y - 0.034, 0.011 - Math.abs(p.x - lerp(J[sideOf(p.x, J) + 'Foot'].x, J[sideOf(p.x, J) + 'ToeBase'].x, 0.5)), p.z - J[sideOf(p.x, J) + 'Foot'].z), colour: WHITE },
+          { f: (p) => legAt(J, 0.93)(p) + 0.012, colour: shade(0.7) }], lip: shade(0.6) },
+    ],
+  },
+  loafers: {
+    slot: 'shoes', label: 'Loafers', main: '#2b2f3a',
+    pieces: (J) => [
+      { zones: ['foot', 'leg'], keep: [(p) => lerp(J.LeftFoot.y, 0, 0.1) - p.y + 0.004], offset: 0.011, colour: 'main',
+        regions: [{ f: (p) => 0.012 - p.y, colour: '#3d4049' }, { f: (p) => Math.min(0.006 - Math.abs(p.z - lerp(J.LeftFoot.z, J.LeftToeBase.z, 0.45)), p.y - 0.02), colour: shade(0.7) }], lip: shade(0.55) },
+    ],
+  },
+  boots: {
+    slot: 'shoes', label: 'Boots', main: '#4a4f5c',
+    pieces: (J) => [
+      { zones: ['leg', 'foot'], keep: [(p) => -legAt(J, 0.6)(p)], offset: 0.013, colour: 'main',
+        regions: [{ f: (p) => 0.02 - p.y, colour: INK }, { f: (p) => Math.min(p.y - 0.04, 0.008 - Math.abs(p.x - legCentre(J, p)), p.z - J[sideOf(p.x, J) + 'Foot'].z), colour: shade(0.65) }], lip: shade(0.6) },
+      { zones: ['leg'], keep: [(p) => -legAt(J, 0.6)(p), (p) => legAt(J, 0.6)(p) + 0.035], offset: 0.02, colour: shade(0.85), lip: shade(0.6) },
+    ],
+  },
+};
+
+// ---------- building ----------
+
 function blendWeights(a, b, t) {
   const w = new Map();
   for (const [corner, f] of [[a, 1 - t], [b, t]]) for (let k = 0; k < 4; k++) {
@@ -105,25 +251,26 @@ function blendWeights(a, b, t) {
   while (top.length < 4) top.push([0, 0]);
   return { si: top.map(([bone]) => bone), sw: top.map(([, x]) => x / total) };
 }
-function lerpCorner(a, b, t) {
-  return { p: a.p.clone().lerp(b.p, t), n: a.n.clone().lerp(b.n, t).normalize(), ...blendWeights(a, b, t) };
+// a corner remembers which cut made it (edge), so the cut's edge can get a lip
+function lerpCorner(a, b, t, edge) {
+  return { p: a.p.clone().lerp(b.p, t), n: a.n.clone().lerp(b.n, t).normalize(), ...blendWeights(a, b, t), edge };
 }
-// Sutherland-Hodgman against one cut
-function clip(poly, f) {
+// Sutherland-Hodgman against one function, cutting where it crosses 0
+function clip(poly, f, edge = null) {
   const out = [];
   for (let k = 0; k < poly.length; k++) {
     const a = poly[k], b = poly[(k + 1) % poly.length], fa = f(a.p), fb = f(b.p);
     if (fa >= 0) out.push(a);
-    if ((fa >= 0) !== (fb >= 0)) out.push(lerpCorner(a, b, fa / (fa - fb)));
+    if ((fa >= 0) !== (fb >= 0)) out.push(lerpCorner(a, b, fa / (fa - fb), edge));
   }
   return out;
 }
 
-// Which way a garment corner is pushed off the body. On the limbs, straight out from the bone: the joined wrists
-// and ankles have normals that lean along the limb, which would push the cuff out into spikes.
+// Which way a garment corner is pushed off the body: on the limbs straight out from the bone (the joined wrists and
+// ankles have normals that lean along the limb, which would push a cuff out into spikes).
 function outward(p, n, zone, J) {
   if (zone !== 'arm' && zone !== 'leg') return n;
-  const side = Math.sign(p.x - J.Hips.x) === Math.sign(J.LeftArm.x - J.Hips.x) ? 'Left' : 'Right';
+  const side = sideOf(p.x, J);
   const chain = zone === 'arm' ? ['Arm', 'ForeArm', 'Hand'] : ['UpLeg', 'Leg', 'Foot'];
   let best = null;
   for (let k = 0; k < 2; k++) {
@@ -136,96 +283,286 @@ function outward(p, n, zone, J) {
   return radial.lengthSq() > 1e-6 ? radial.normalize() : n;
 }
 
-// The shell of the body a garment covers.
-export function clothesGeometry(d, J, id) {
-  const spec = CLOTHES[id];
-  if (!spec) throw new Error('No garment ' + id);
+function output() {
   const out = { pos: [], normal: [], si: [], sw: [], col: [] };
-  const sole = new THREE.Color('#f2f0ea').toArray();
+  out.corner = (p, n, si, sw, c) => { out.pos.push(p.x, p.y, p.z); out.normal.push(n.x, n.y, n.z); out.si.push(...si); out.sw.push(...sw); out.col.push(c.r, c.g, c.b); };
+  return out;
+}
+
+// the body's surface as corners and triangles, ready to cut: zone per triangle, pushed-out normals
+function bodyTriangles(d, J) {
+  const list = [];
   for (let t = 0; t < d.T; t++) {
     if (d.pieces[t] !== 'body') continue;
     const zones = [0, 1, 2].map((k) => classify(d, t * 3 + k, J).zone);
     const zone = zones[1] === zones[2] ? zones[1] : zones[0];
-    const cx = (d.pos[t * 9] + d.pos[t * 9 + 3] + d.pos[t * 9 + 6]) / 3;
-    const side = Math.sign(cx - J.Hips.x) === Math.sign(J.LeftArm.x - J.Hips.x) ? 'Left' : 'Right';
-    const list = cuts(spec, J, zone, side);
-    if (!list || (spec.slot === 'top' && zones.includes('hand'))) continue;
-    let poly = [0, 1, 2].map((k) => {
-      const i = t * 3 + k;
-      return { p: new THREE.Vector3().fromArray(d.pos, i * 3), n: outward(new THREE.Vector3().fromArray(d.pos, i * 3), new THREE.Vector3().fromArray(d.normal, i * 3), zones[k], J),
-        si: d.si.slice(i * 4, i * 4 + 4), sw: d.sw.slice(i * 4, i * 4 + 4) };
-    });
-    for (const f of list) { poly = clip(poly, f); if (poly.length < 3) break; }
+    list.push({ zone, zones, corners: [0, 1, 2].map((k) => {
+      const i = t * 3 + k, p = new THREE.Vector3().fromArray(d.pos, i * 3);
+      return { p, n: outward(p, new THREE.Vector3().fromArray(d.normal, i * 3), zones[k], J), si: d.si.slice(i * 4, i * 4 + 4), sw: d.sw.slice(i * 4, i * 4 + 4), edge: null };
+    }) });
+  }
+  return list;
+}
+
+function addPiece(out, tris, piece, colourOf) {
+  const lipIn = -0.002;
+  for (const T of tris) {
+    if (!piece.zones.includes(T.zone) || T.zones.includes('hand') || (piece.zones.includes('foot') ? false : T.zones.includes('foot') && T.zone !== 'leg')) continue;
+    let poly = T.corners;
+    piece.keep.forEach((f, k) => { if (poly.length >= 3) poly = clip(poly, (p) => f(p, T.zone), k); });
     if (poly.length < 3) continue;
-    // shoes: a pale sole below spec.sole
-    const parts = spec.sole ? [[clip(poly, (p) => spec.sole - p.y), sole], [clip(poly, (p) => p.y - spec.sole), null]] : [[poly, null]];
-    for (const [piece, colour] of parts) for (let k = 1; k + 1 < piece.length; k++) {
-      for (const c of [piece[0], piece[k], piece[k + 1]]) {
-        out.pos.push(...c.p.clone().addScaledVector(c.n, spec.offset).toArray()); out.normal.push(...c.n.toArray());
-        out.si.push(...c.si); out.sw.push(...c.sw); out.col.push(...(colour || [1, 1, 1]));
+    // colour regions: split exactly on each region's line, first match wins
+    let rest = [poly];
+    const parts = [];
+    for (const r of piece.regions || []) {
+      const next = [];
+      for (const q of rest) {
+        const inside = clip(q, (p) => r.f(p, T.zone)), outside = clip(q, (p) => -r.f(p, T.zone));
+        if (inside.length >= 3) parts.push([inside, r.colour]);
+        if (outside.length >= 3) next.push(outside);
       }
+      rest = next;
+    }
+    for (const q of rest) parts.push([q, piece.colour]);
+    for (const [q, role] of parts) {
+      const c = colourOf(role);
+      for (let k = 1; k + 1 < q.length; k++) for (const v of [q[0], q[k], q[k + 1]]) out.corner(v.p.clone().addScaledVector(v.n, piece.offset), v.n, v.si, v.sw, c);
+    }
+    // lips: every edge of the cut outline turned in to the skin, so the garment is closed there
+    if (piece.lip === null) continue;
+    const c = colourOf(piece.lip ?? piece.colour);
+    for (let k = 0; k < poly.length; k++) {
+      const a = poly[k], b = poly[(k + 1) % poly.length];
+      if (a.edge === null || a.edge !== b.edge) continue;
+      const ao = a.p.clone().addScaledVector(a.n, piece.offset), bo = b.p.clone().addScaledVector(b.n, piece.offset);
+      const ai = a.p.clone().addScaledVector(a.n, lipIn), bi = b.p.clone().addScaledVector(b.n, lipIn);
+      const n = a.n.clone().add(b.n).normalize();
+      for (const [v, s] of [[ao, a], [bo, b], [bi, b], [ao, a], [bi, b], [ai, a]]) out.corner(v, n, s.si, s.sw, c);
     }
   }
-  if (spec.skirt) appendSkirt(out, d, J, spec);
-  return finish(out);
 }
 
-// A flared ring skirt: waist and hip rings on the Hips bone; the hem also follows each thigh a little, and every
-// other hem vertex sits further out, for pleats.
-function appendSkirt(out, d, J, spec) {
-  const n = 16, waistY = lerp(J.Hips.y, J.Spine02.y, spec.waist) + 0.01;
-  const kneeY = lerp(J.LeftUpLeg.y, J.LeftFoot.y, spec.skirt);
-  const hipY = lerp(waistY, kneeY, 0.25);
-  const centre = new THREE.Vector2(J.Hips.x, J.Hips.z);
-  // body extent round the waist and hips (torso and thighs only)
-  const reach = (y0, y1) => {
-    const r = new Array(n).fill(0);
+// ---------- accessories ----------
+
+function accessories(d, J, out, colourOf, tris) {
+  // the nearest body corner's weights, for a point placed on the body
+  const weightsAt = (p) => {
+    let best = 0, dist = Infinity;
     for (let i = 0; i < d.T * 3; i++) {
-      const t = Math.floor(i / 3);
-      if (d.pieces[t] !== 'body') continue;
-      const y = d.pos[i * 3 + 1];
-      if (y < y0 || y > y1 || Math.abs(d.pos[i * 3] - J.Hips.x) > Math.abs(J.LeftArm.x - J.Hips.x) * 0.9 || !['torso', 'leg'].includes(classify(d, i, J).zone)) continue;
-      const x = d.pos[i * 3] - centre.x, z = d.pos[i * 3 + 2] - centre.y;
-      const a = Math.atan2(x, z), dist = Math.hypot(x, z);
+      if (d.pieces[Math.floor(i / 3)] !== 'body') continue;
+      const dx = d.pos[i * 3] - p.x, dy = d.pos[i * 3 + 1] - p.y, dz = d.pos[i * 3 + 2] - p.z, q = dx * dx + dy * dy + dz * dz;
+      if (q < dist) { dist = q; best = i; }
+    }
+    return { si: d.si.slice(best * 4, best * 4 + 4), sw: d.sw.slice(best * 4, best * 4 + 4) };
+  };
+  // the body's front surface at (x, y): the largest z of the body there (torso only)
+  const surfaceZ = (x, y, sign = 1) => {
+    let best = null;
+    for (const T of tris) {
+      if (T.zone !== 'torso' && T.zone !== 'neck') continue;
+      const [a, b, c] = T.corners.map((v) => v.p);
+      const den = (b.y - c.y) * (a.x - c.x) + (c.x - b.x) * (a.y - c.y);
+      if (Math.abs(den) < 1e-12) continue;
+      const l1 = ((b.y - c.y) * (x - c.x) + (c.x - b.x) * (y - c.y)) / den, l2 = ((c.y - a.y) * (x - c.x) + (a.x - c.x) * (y - c.y)) / den, l3 = 1 - l1 - l2;
+      if (l1 < -1e-6 || l2 < -1e-6 || l3 < -1e-6) continue;
+      const z = l1 * a.z + l2 * b.z + l3 * c.z;
+      if (best === null || z * sign > best * sign) best = z;
+    }
+    return best ?? J.Spine.z + sign * 0.06;
+  };
+  // w: one set of weights for every corner, or a list with one per corner
+  const tri = (a, b, c, colour, w) => {
+    const n = new THREE.Vector3().subVectors(b, a).cross(new THREE.Vector3().subVectors(c, a)).normalize(), col = colourOf(colour);
+    [a, b, c].forEach((v, k) => { const x = Array.isArray(w) ? w[k] : w; out.corner(v, n, x.si, x.sw, col); });
+  };
+  const quad = (a, b, c, e, colour, w) => {
+    if (!Array.isArray(w)) { tri(a, b, c, colour, w); tri(a, c, e, colour, w); return; }
+    tri(a, b, c, colour, [w[0], w[1], w[2]]); tri(a, c, e, colour, [w[0], w[2], w[3]]);
+  };
+  const V = (x, y, z) => new THREE.Vector3(x, y, z);
+  // a flat polygon disc facing +z with a rim, at (x, y) on the front
+  const disc = (x, y, z, r, colour, sides = 6, depth = 0.003) => {
+    const w = weightsAt(V(x, y, z)), ring = Array.from({ length: sides }, (_, k) => V(x + r * Math.cos(k * 2 * Math.PI / sides), y + r * Math.sin(k * 2 * Math.PI / sides), z));
+    const c = V(x, y, z + depth);
+    for (let k = 0; k < sides; k++) {
+      const a = ring[k], b = ring[(k + 1) % sides];
+      tri(a.clone().setZ(z + depth), b.clone().setZ(z + depth), c, colour, w);
+      quad(a, b, b.clone().setZ(z + depth), a.clone().setZ(z + depth), colour, w);
+    }
+  };
+  // a strip on the front of the body following its surface: points (x, y, half width) down the body
+  const strip = (rows, lift, colour, ridge = 0.35) => {
+    const pts = rows.map(([x, y, hw]) => ({ c: V(x, y, surfaceZ(x, y) + lift), hw }));
+    for (let i = 0; i + 1 < pts.length; i++) {
+      const a = pts[i], b = pts[i + 1], w = weightsAt(a.c);
+      const aL = a.c.clone().add(V(-a.hw, 0, 0)), aR = a.c.clone().add(V(a.hw, 0, 0)), aT = a.c.clone().add(V(0, 0, a.hw * ridge));
+      const bL = b.c.clone().add(V(-b.hw, 0, 0)), bR = b.c.clone().add(V(b.hw, 0, 0)), bT = b.c.clone().add(V(0, 0, b.hw * ridge));
+      quad(aL, bL, bT, aT, colour, w); quad(aT, bT, bR, aR, colour, w);
+    }
+  };
+  return {
+    button: (x, y, colour, r = 0.006) => disc(x, y, surfaceZ(x, y) + 0.02, r, colour),
+    buckle: (x, y, colour) => {
+      const z = surfaceZ(x, y) + 0.012, w = weightsAt(V(x, y, z));
+      const box = [[-0.016, -0.011], [0.016, -0.011], [0.016, 0.011], [-0.016, 0.011]].map(([dx, dy]) => V(x + dx, y + dy, z));
+      const top = box.map((v) => v.clone().setZ(z + 0.005));
+      quad(top[0], top[1], top[2], top[3], colour, w);
+      for (let k = 0; k < 4; k++) quad(box[k], box[(k + 1) % 4], top[(k + 1) % 4], top[k], colour, w);
+      quad(top[0].clone().lerp(top[2], 0.3).setZ(z + 0.0055), V(x + 0.006, y - 0.004, z + 0.0055), V(x + 0.006, y + 0.004, z + 0.0055), V(x - 0.006, y + 0.004, z + 0.0055), INK, w);
+    },
+    // a bow: two loops and two tails, at the point of a V
+    bow: (x, y, colour, size) => {
+      const z = surfaceZ(x, y) + 0.024, w = weightsAt(V(x, y, z)), s = size;
+      for (const sx of [-1, 1]) {
+        const knot = V(x + sx * s * 0.12, y, z + 0.006), outer = V(x + sx * s, y + s * 0.35, z), outerLow = V(x + sx * s * 0.95, y - s * 0.3, z);
+        tri(knot, outer, outerLow, colour, w); tri(knot, outerLow, V(x + sx * s * 0.6, y, z + 0.01), colour, w);
+        const tailTop = V(x + sx * s * 0.08, y - s * 0.1, z), tailEnd = V(x + sx * s * 0.45, y - s * 1.3, z - 0.004);
+        tri(tailTop, tailEnd, V(x + sx * s * 0.2, y - s * 1.25, z - 0.004), colour, w);
+      }
+      disc(x, y, z + 0.004, s * 0.2, colour, 5, 0.004);
+    },
+    // a necktie from the collar down the front: knot, then a blade that widens and ends in a point
+    tie: (J2, colour, length = 0.75) => {
+      const x = J2.neck.x, top = J2.neck.y - 0.012, bottom = lerp(top, J2.Hips.y, length);
+      const rows = [[x, top, 0.011], [x, top - 0.02, 0.007], [x, lerp(top, bottom, 0.35), 0.014], [x, lerp(top, bottom, 0.92), 0.018], [x, bottom, 0.001]];
+      strip(rows, 0.02, colour);
+    },
+    cord: (x, y, length, colour, tip) => {
+      const z = surfaceZ(x, y) + 0.02, w = weightsAt(V(x, y, z)), r = 0.0022;
+      const a = V(x, y, z), b = V(x + 0.004 * Math.sign(x - J.neck.x), y - length, z + 0.004);
+      const side = V(r, 0, 0), up = V(0, 0, r);
+      quad(a.clone().sub(side), b.clone().sub(side), b.clone().add(up), a.clone().add(up), colour, w);
+      quad(a.clone().add(up), b.clone().add(up), b.clone().add(side), a.clone().add(side), colour, w);
+      disc(b.x, b.y - 0.004, b.z, 0.004, tip, 5, 0.004);
+    },
+    // a ribbed neckband: a ring round the neckline
+    rib: (colour) => {
+      const n = 16, y0 = J.neck.y - 0.006, ring = [];
       for (let k = 0; k < n; k++) {
-        const diff = Math.abs(Math.atan2(Math.sin(a - k * 2 * Math.PI / n), Math.cos(a - k * 2 * Math.PI / n)));
-        if (diff < Math.PI / n * 1.5) r[k] = Math.max(r[k], dist * Math.cos(diff));
+        const a = k * 2 * Math.PI / n, dirH = V(Math.sin(a), 0, Math.cos(a));
+        const o = V(J.neck.x, y0 - 0.01 * clamp01(dirH.z), J.neck.z);
+        let r = 0.03;
+        for (const T of tris) for (const v of T.corners) if (Math.abs(v.p.y - o.y) < 0.012 && (v.p.x - o.x) * dirH.x + (v.p.z - o.z) * dirH.z > 0 && Math.abs((v.p.x - o.x) * dirH.z - (v.p.z - o.z) * dirH.x) < 0.02) r = Math.max(r, (v.p.x - o.x) * dirH.x + (v.p.z - o.z) * dirH.z);
+        ring.push(o.clone().addScaledVector(dirH, r + 0.012));
+      }
+      for (let k = 0; k < n; k++) {
+        const a = ring[k], b = ring[(k + 1) % n], w = weightsAt(a);
+        quad(a, b, b.clone().add(V(0, 0.008, 0)).lerp(V(J.neck.x, b.y + 0.008, J.neck.z), 0.08), a.clone().add(V(0, 0.008, 0)).lerp(V(J.neck.x, a.y + 0.008, J.neck.z), 0.08), colour, w);
+      }
+    },
+    // a collar standing up from the neckline and folding down over it; 'shirt' has points at the front,
+    // 'hood' is a hood lying folded at the back of the neck
+    collar: (J2, kind, colour) => ring(J2, kind, colour),
+    hood: (J2, colour) => ring(J2, 'hood', colour),
+    skirt: (J2, spec) => skirt(J2, spec),
+  };
+
+  function ring(J2, kind, colour) {
+    const n = 20, rows = [];
+    for (let k = 0; k < n; k++) {
+      const a = k * 2 * Math.PI / n, dirH = V(Math.sin(a), 0, Math.cos(a)), frontness = clamp01(dirH.z), backness = clamp01(-dirH.z);
+      const base = V(J2.neck.x, J2.neck.y - 0.004 - 0.006 * frontness, J2.neck.z);
+      let r = 0.028;
+      for (const T of tris) for (const v of T.corners) {
+        if (Math.abs(v.p.y - base.y) > 0.014) continue;
+        const along = (v.p.x - base.x) * dirH.x + (v.p.z - base.z) * dirH.z, across = Math.abs((v.p.x - base.x) * dirH.z - (v.p.z - base.z) * dirH.x);
+        if (along > 0 && across < 0.02) r = Math.max(r, along);
+      }
+      const root = base.clone().addScaledVector(dirH, r + 0.01);
+      if (kind === 'hood') {
+        // a thick fold lying on the upper back, thin at the front
+        const h = 0.01 + 0.05 * backness, out = 0.012 + 0.03 * backness;
+        const top = root.clone().add(V(0, h * 0.5, 0)).addScaledVector(dirH, out * 0.6);
+        const fold = root.clone().add(V(0, -h * 0.9, 0)).addScaledVector(dirH, out);
+        rows.push([root, top, fold, root.clone().add(V(0, -h * 1.1, 0)).addScaledVector(dirH, out * 0.3)]);
+      } else {
+        const stand = root.clone().add(V(0, 0.016, 0)), point = kind === 'shirt' ? 0.022 * Math.pow(frontness, 4) : 0;
+        const fold = stand.clone().addScaledVector(dirH, 0.012).add(V(0, -0.022 - point, 0)).add(V(-Math.sign(dirH.x) * point * 0.3, 0, 0));
+        rows.push([root, stand, fold]);
       }
     }
-    return r;
+    const open = kind === 'shirt' ? 0 : -1;   // the shirt collar opens at the front middle (between the last and first rows)
+    for (let k = 0; k < n; k++) {
+      if (k === n - 1 && open === 0) continue;
+      const A = rows[k], Bn = rows[(k + 1) % n], w = weightsAt(A[0]);
+      for (let j = 0; j + 1 < A.length; j++) quad(A[j], Bn[j], Bn[j + 1], A[j + 1], j === A.length - 2 && kind === 'hood' ? ['main', 0.8] : colour, w);
+    }
+  }
+
+  function skirt(J2, spec) {
+    const n = spec.pleats, waistY = lerp(J2.Hips.y, J2.Spine02.y, 0.1), kneeY = lerp(J2.LeftUpLeg.y, J2.LeftFoot.y, spec.length);
+    const hipY = lerp(waistY, J2.LeftUpLeg.y - 0.03, 0.6), C = V(J2.Hips.x, 0, J2.Hips.z);
+    const reach = (y0, y1, a) => {
+      let r = 0.03;
+      const dirH = V(Math.sin(a), 0, Math.cos(a));
+      for (const T of tris) {
+        if (T.zone !== 'torso' && T.zone !== 'leg') continue;
+        for (const v of T.corners) {
+          if (v.p.y < y0 || v.p.y > y1 || Math.abs(v.p.x - C.x) > Math.abs(J2.LeftArm.x - C.x) * 0.95) continue;
+          const along = (v.p.x - C.x) * dirH.x + (v.p.z - C.z) * dirH.z, across = Math.abs((v.p.x - C.x) * dirH.z - (v.p.z - C.z) * dirH.x);
+          if (along > 0 && across < along * Math.tan(Math.PI / 8)) r = Math.max(r, along);
+        }
+      }
+      return r;
+    };
+    const leftSign = Math.sign(J2.LeftUpLeg.x - J2.Hips.x) || 1;
+    // rings: waist, hips, hem
+    const levels = [waistY, hipY, kneeY], last = levels.length - 1;
+    const rings = levels.map((y, j) => Array.from({ length: n }, (_, k) => {
+      const a = k * 2 * Math.PI / n, dirH = V(Math.sin(a), 0, Math.cos(a));
+      const rWaist = reach(waistY - 0.02, waistY + 0.02, a), rHip = Math.max(rWaist, reach(hipY - 0.05, hipY + 0.02, a));
+      // knife pleats: every other hem corner further out; the sides flare less, so the hands swing clear
+      const sideSquash = 1 - (spec.squash ?? 0.36) * dirH.x * dirH.x;
+      // and the front and back a little more, so a thigh swinging forward stays inside
+      const hemR = (rHip + 0.02) * spec.flare * sideSquash * (1 + 0.45 * Math.max(0, dirH.z) ** 2) * (k % 2 && spec.pleated ? 1.07 : 1);
+      const r = j === 0 ? rWaist + 0.016 : j === 1 ? rHip + 0.018 - 0.006 * dirH.x * dirH.x : lerp(rHip + 0.018, hemR, (hipY - y) / (hipY - kneeY));
+      const p = C.clone().addScaledVector(dirH, r).setY(y);
+      // the hip ring follows the thighs a little, the hem a lot, each corner shared between the two thighs by how far
+      // it is to either side, so a thigh swinging forward in a walk carries the front of the skirt with it
+      const follow = (spec.follow || [0, 0.25, 0.85])[j], left = clamp01(0.5 + (p.x - C.x) * leftSign / 0.1);
+      return { p, w: { si: [B.Hips, B.LeftUpLeg, B.RightUpLeg, 0], sw: [1 - follow, follow * left, follow * (1 - left), 0] } };
+    }));
+    // hem stripes (height above the hem as a share of the pleated band): the band is cut into slices at each edge
+    const half = 0.035, colourAt = (u) => { for (const [h, c] of spec.stripes || []) if (Math.abs(u - h) < half) return c; return 'main'; };
+    for (let j = 0; j < last; j++) for (let k = 0; k < n; k++) {
+      const a = rings[j][k], b = rings[j][(k + 1) % n], c = rings[j + 1][k], e = rings[j + 1][(k + 1) % n];
+      if (j === 0) { quad(a.p, c.p, e.p, b.p, ['main', 0.96], [a.w, c.w, e.w, b.w]); continue; }
+      // the pleated band: cut into horizontal slices so stripes can run round it
+      const cuts = j < last - 1 ? [0, 1] : [0, ...(spec.stripes || []).flatMap(([h]) => [h - half, h + half]).map((h) => 1 - h).filter((t) => t > 0 && t < 1).sort((x, y) => x - y), 1];
+      for (let s = 0; s + 1 < cuts.length; s++) {
+        const t0 = cuts[s], t1 = cuts[s + 1], lv = (P, Q, t) => P.p.clone().lerp(Q.p, t);
+        const lw = (P, Q, t) => ({ si: P.w.si, sw: P.w.sw.map((x, i) => x + (Q.w.sw[i] - x) * t) });   // same bones on every ring
+        const mid = (t0 + t1) / 2, u = 1 - mid;
+        const tone = k % 2 || !spec.pleated ? 1 : 0.84;   // the pleats' two faces
+        const colour = j < last - 1 ? 'main' : colourAt(u);
+        const col = colour === 'main' ? ['main', tone] : colour;
+        quad(lv(a, c, t0), lv(a, c, t1), lv(b, e, t1), lv(b, e, t0), col, [lw(a, c, t0), lw(a, c, t1), lw(b, e, t1), lw(b, e, t0)]);
+      }
+    }
+  }
+}
+
+// ---------- the garment ----------
+
+export function clothesGeometry(d, J, id, colour) {
+  const spec = CLOTHES[id];
+  if (!spec) throw new Error('No garment ' + id);
+  const colours = { main: colour || spec.main, accent: spec.accent };
+  const mainColour = new THREE.Color(colours.main);
+  const colourOf = (role) => {
+    if (role === 'main' || role === undefined) return mainColour;
+    if (Array.isArray(role)) return (role[0] === 'main' ? mainColour : new THREE.Color(role[0])).clone().multiplyScalar(role[1]);
+    return new THREE.Color(role);
   };
-  const waistR = reach(waistY - 0.015, waistY + 0.015), hipR = reach(hipY - 0.04, hipY + 0.02);
-  const maxHip = Math.max(...hipR);
-  const leftSign = Math.sign(J.LeftUpLeg.x - J.Hips.x) || 1;
-  const rings = [
-    { y: waistY, r: (k) => waistR[k] + 0.012, w: () => [[B.Hips, 1]] },
-    { y: hipY, r: (k) => Math.max(hipR[k], waistR[k]) + 0.014, w: () => [[B.Hips, 1]] },
-    { y: kneeY, r: (k) => (Math.max(hipR[k], maxHip * 0.8) + 0.02) * (1.22 + spec.skirt * 0.3) * (k % 2 ? 1.06 : 1), w: (x) =>
-      Math.abs(x) < 0.02 ? [[B.Hips, 1]] : [[B.Hips, 1 - spec.follow], [B[(Math.sign(x) === leftSign ? 'Left' : 'Right') + 'UpLeg'], spec.follow]] },
-  ];
-  const ring = rings.map((R) => Array.from({ length: n }, (_, k) => {
-    const a = k * 2 * Math.PI / n, r = R.r(k);
-    const x = centre.x + Math.sin(a) * r, z = centre.y + Math.cos(a) * r;
-    return { p: [x, R.y, z], w: R.w(x - centre.x) };
-  }));
-  for (let j = 0; j < rings.length - 1; j++) for (let k = 0; k < n; k++) {
-    const a = ring[j][k], b = ring[j][(k + 1) % n], c = ring[j + 1][k], e = ring[j + 1][(k + 1) % n];
-    tri(out, a, c, e); tri(out, a, e, b);
-  }
+  const out = output(), tris = bodyTriangles(d, J);
+  for (const piece of spec.pieces(J, colours)) addPiece(out, tris, piece, colourOf);
+  if (spec.extras) spec.extras(accessories(d, J, out, colourOf, tris), J, colours);
+  return out;
 }
 
-function tri(out, ...corners) {
-  const [a, b, c] = corners.map((v) => new THREE.Vector3(...v.p));
-  const nrm = b.clone().sub(a).cross(c.clone().sub(a)).normalize();
-  for (const v of corners) {
-    out.pos.push(...v.p); out.normal.push(...nrm.toArray());
-    const w = v.w.slice(0, 4), total = w.reduce((s, [, x]) => s + x, 0);
-    for (let k = 0; k < 4; k++) { out.si.push(w[k] ? w[k][0] : 0); out.sw.push(w[k] ? w[k][1] / total : 0); }
-    out.col.push(...(v.c || [1, 1, 1]));
-  }
-}
+// ---------- mesh ----------
 
-function finish({ pos, normal, si, sw, col }) {
+export function finish({ pos, normal, si, sw, col }) {
   const g = new THREE.BufferGeometry();
   g.setAttribute('position', new THREE.Float32BufferAttribute(pos, 3));
   g.setAttribute('normal', new THREE.Float32BufferAttribute(normal, 3));
@@ -236,162 +573,10 @@ function finish({ pos, normal, si, sw, col }) {
   return g;
 }
 
-// ---------- hair ----------
-
-// Hairline: polar angle from the crown (degrees) by direction round the head (0 = the face). front: the fringe
-// over the forehead; side and back: how far down the sides and nape reach. tufts: the fringe's points.
-// fall: straight-hanging length below the head's widest ring (bob), in body heights. spikes: tufts over the crown.
-export const HAIR = {
-  crop: { label: 'Short crop', front: 70, side: 96, back: 118, tufts: 6, tuft: 8, thick: 0.012 },
-  bob: { label: 'Bob', front: 74, side: 96, back: 100, tufts: 7, tuft: 12, thick: 0.016, fall: 0.11, coversEars: true },
-  ponytail: { label: 'Ponytail', front: 72, side: 98, back: 112, tufts: 5, tuft: 9, thick: 0.013, tail: true },
-  spiky: { label: 'Spiky', front: 70, side: 98, back: 118, tufts: 7, tuft: 12, thick: 0.014, spikes: 0.045 },
-};
-
-// farthest hit of a ray from `o` along `dir` against triangles (flat array of 9 per triangle)
-function farthest(o, dir, tris) {
-  let best = 0;
-  const e1 = new THREE.Vector3(), e2 = new THREE.Vector3(), h = new THREE.Vector3(), s = new THREE.Vector3(), q = new THREE.Vector3();
-  const a = new THREE.Vector3(), b = new THREE.Vector3(), c = new THREE.Vector3();
-  for (let t = 0; t < tris.length; t += 9) {
-    a.fromArray(tris, t); b.fromArray(tris, t + 3); c.fromArray(tris, t + 6);
-    e1.subVectors(b, a); e2.subVectors(c, a); h.crossVectors(dir, e2);
-    const det = e1.dot(h);
-    if (Math.abs(det) < 1e-12) continue;
-    s.subVectors(o, a);
-    const u = s.dot(h) / det; if (u < -1e-6 || u > 1 + 1e-6) continue;
-    q.crossVectors(s, e1);
-    const v = dir.dot(q) / det; if (v < -1e-6 || u + v > 1 + 1e-6) continue;
-    const dist = e2.dot(q) / det;
-    if (dist > best) best = dist;
-  }
-  return best;
-}
-
-// Base positions with separate ear pieces (Mio's) folded in towards where they join the head, for hair that
-// covers the ears. The original hair hid them; without this a bob would have to stand out round them.
-export function tuckedEars(d, amount = 0.7) {
-  const pos = Float32Array.from(d.pos);
-  for (const sign of [-1, 1]) {
-    const corners = [];
-    for (let t = 0; t < d.T; t++) if (d.pieces[t] === 'ear' && Math.sign(d.pos[t * 9]) === sign) corners.push(t * 3, t * 3 + 1, t * 3 + 2);
-    if (!corners.length) continue;
-    const inner = [...corners].sort((a, b) => Math.abs(d.pos[a * 3]) - Math.abs(d.pos[b * 3])).slice(0, Math.max(3, corners.length / 5));
-    const root = [0, 1, 2].map((a) => inner.reduce((sum, i) => sum + d.pos[i * 3 + a], 0) / inner.length);
-    for (const i of corners) for (let a = 0; a < 3; a++) pos[i * 3 + a] = root[a] + (d.pos[i * 3 + a] - root[a]) * (1 - amount);
-  }
-  return pos;
-}
-
-export function hairGeometry(d, id) {
-  const S = HAIR[id];
-  if (!S) throw new Error('No hair style ' + id);
-  const head = [], ears = [], source = S.coversEars ? tuckedEars(d) : d.pos;
-  for (let t = 0; t < d.T; t++) {
-    const list = d.pieces[t] === 'head' ? head : d.pieces[t] === 'ear' ? ears : null;
-    if (list) for (let k = 0; k < 9; k++) list.push(source[t * 9 + k]);
-  }
-  const box = new THREE.Box3().setFromArray(head);
-  const C = box.getCenter(new THREE.Vector3());
-  C.y = lerp(box.min.y, box.max.y, 0.5);
-  const wrap = head.concat(ears), capWrap = S.coversEars ? wrap : head;   // short styles leave the ears out
-  const nLon = 20, nLat = 9;
-  const hairline = (phi) => {   // phi in radians, 0 = face
-    const a = Math.abs(Math.atan2(Math.sin(phi), Math.cos(phi))) * 180 / Math.PI;
-    const base = a < 40 ? S.front : a < 110 ? lerp(S.front, S.side, Math.min(1, (a - 40) / 30)) : lerp(S.side, S.back, (a - 110) / 70);
-    return base;
-  };
-  const out = { pos: [], normal: [], si: [], sw: [], col: [] };
-  const headW = [[B.Head, 1]];
-  const dir = (theta, phi) => new THREE.Vector3(Math.sin(theta) * Math.sin(phi), Math.cos(theta), Math.sin(theta) * Math.cos(phi));
-  const shade = (f) => { const v = 1 - 0.28 * f; return [v, v, v]; };
-  const grid = [];
-  for (let i = 0; i < nLon; i++) {
-    const phi = i * 2 * Math.PI / nLon, a = Math.abs(Math.atan2(Math.sin(phi), Math.cos(phi))) * 180 / Math.PI;
-    let edge = hairline(phi);
-    const front = a < 55;
-    if (front && S.tufts && i % 2 === 0) edge += S.tuft * (a < 40 ? 1 : 0.6);   // fringe points
-    const col = [];
-    for (let j = 0; j <= nLat; j++) {
-      const theta = (edge * Math.PI / 180) * j / nLat;
-      const dv = dir(theta, phi);
-      // the farthest of a few rays round this one, so no bump of the head between grid points pokes through
-      let r = farthest(C, dv, capWrap);
-      for (const [dt, dp] of [[0.08, 0], [-0.08, 0], [0, 0.12], [0, -0.12]]) r = Math.max(r, farthest(C, dir(Math.max(0, theta + dt), phi + dp), capWrap));
-      r += S.thick;
-      if (S.spikes && j >= 2 && j <= nLat - 2 && (i + j) % 3 === 0) r += S.spikes;
-      col.push({ p: C.clone().addScaledVector(dv, r).toArray(), w: headW, c: shade(j / nLat) });
-    }
-    // bob: hang straight down from the hairline ring outside the face, a little flared
-    if (S.fall && !front) {
-      const last = new THREE.Vector3(...col[nLat].p);
-      const out2 = last.clone().sub(C).setY(0).normalize();
-      const flare = Math.min(1, (a - 55) / 30);
-      const bottom = last.clone().addScaledVector(out2, 0.02 * flare);
-      bottom.y = Math.min(last.y, box.min.y + 0.03) - S.fall * flare * 0.35;
-      // hang clear of the ears and cheeks: at least as far out as anything of the head in this direction
-      let reach = 0;
-      for (let v = 0; v < wrap.length; v += 3) {
-        if (wrap[v + 1] > last.y + 0.01 || wrap[v + 1] < bottom.y) continue;
-        const x = wrap[v] - C.x, z = wrap[v + 2] - C.z, along2 = x * out2.x + z * out2.z;
-        if (along2 > 0 && Math.abs(x * out2.z - z * out2.x) < along2 * Math.tan(Math.PI / nLon * 1.5)) reach = Math.max(reach, along2);
-      }
-      for (const point of [last, bottom]) {
-        const r = Math.hypot(point.x - C.x, point.z - C.z), want = Math.max(r, reach + S.thick);
-        point.x = C.x + out2.x * want; point.z = C.z + out2.z * want;
-      }
-      bottom.addScaledVector(out2, 0.01 * flare);
-      col[nLat] = { ...col[nLat], p: last.toArray() };
-      col.push({ p: bottom.toArray(), w: headW, c: shade(1.2) });
-    } else col.push({ p: col[nLat].p, w: headW, c: shade(1) });
-    grid.push(col);
-  }
-  const rows = nLat + 1;
-  for (let i = 0; i < nLon; i++) {
-    const A = grid[i], Bc = grid[(i + 1) % nLon];
-    for (let j = 0; j < rows; j++) {
-      if (j === 0) { tri(out, A[0], A[1], Bc[1]); continue; }
-      tri(out, A[j], A[j + 1], Bc[j + 1]); tri(out, A[j], Bc[j + 1], Bc[j]);
-    }
-  }
-  // underside rim: the hairline edge turned in towards the head, so the hair has a visible thickness
-  for (let i = 0; i < nLon; i++) {
-    const A = grid[i][rows], Bc = grid[(i + 1) % nLon][rows];
-    const inA = { ...A, p: new THREE.Vector3(...A.p).lerp(C, 0.08).toArray(), c: shade(1.4) };
-    const inB = { ...Bc, p: new THREE.Vector3(...Bc.p).lerp(C, 0.08).toArray(), c: shade(1.4) };
-    tri(out, A, inA, inB); tri(out, A, inB, Bc);
-  }
-  if (S.tail) appendTail(out, C, box, wrap, headW, shade);
-  return finish(out);
-}
-
-// Ponytail: a tapered six-sided tail from the back of the head, with a band where it is tied.
-function appendTail(out, C, box, wrap, w, shade) {
-  const back = new THREE.Vector3(0, -0.12, -1).normalize();
-  const root = C.clone().addScaledVector(back, farthest(C, back, wrap) + 0.01);
-  const path = [
-    { at: root.clone().add(new THREE.Vector3(0, 0.015, 0.02)), r: 0.03, c: shade(0.4) },
-    { at: root.clone().add(new THREE.Vector3(0, -0.005, -0.02)), r: 0.036, c: [0.25, 0.25, 0.28] },   // band
-    { at: root.clone().add(new THREE.Vector3(0, -0.03, -0.035)), r: 0.05, c: shade(0.5) },
-    { at: root.clone().add(new THREE.Vector3(0, -0.1, -0.065)), r: 0.062, c: shade(0.7) },
-    { at: root.clone().add(new THREE.Vector3(0, -0.19, -0.055)), r: 0.042, c: shade(0.9) },
-    { at: root.clone().add(new THREE.Vector3(0, -0.25, -0.04)), r: 0, c: shade(1.1) },
-  ];
-  const n = 6, ring = path.map((P) => Array.from({ length: n }, (_, k) => {
-    const a = k * 2 * Math.PI / n;
-    return { p: P.at.clone().add(new THREE.Vector3(Math.cos(a) * P.r, 0, Math.sin(a) * P.r * 0.8)).toArray(), w, c: P.c };
-  }));
-  for (let j = 0; j < path.length - 1; j++) for (let k = 0; k < n; k++) {
-    const a = ring[j][k], b = ring[j][(k + 1) % n], c = ring[j + 1][k], e = ring[j + 1][(k + 1) % n];
-    tri(out, a, b, e); tri(out, a, e, c);
-  }
-}
-
-// ---------- mesh ----------
-
-export function wardrobeMesh(ch, geometry, colour, name) {
-  const m = new THREE.MeshLambertMaterial({ color: new THREE.Color(colour), vertexColors: true, flatShading: true, side: THREE.DoubleSide });
-  const mesh = new THREE.SkinnedMesh(geometry, m);
+// colours are in the vertex colours; flat: facets like the source (Mio's model is flat shaded, Eric's smooth)
+export function wardrobeMesh(ch, data, name, flat = true) {
+  const m = new THREE.MeshLambertMaterial({ vertexColors: true, flatShading: flat, side: THREE.DoubleSide });
+  const mesh = new THREE.SkinnedMesh(finish(data), m);
   mesh.name = name; mesh.frustumCulled = false; mesh.castShadow = true; mesh.receiveShadow = true;
   mesh.bind(ch.skeleton, new THREE.Matrix4());
   return mesh;
