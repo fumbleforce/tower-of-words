@@ -1630,3 +1630,7 @@ Focused navigation/scripted-walk skim: no findings. CPU probes cover stalled cle
 ## X-0373 · 2026-09-30 · done
 refs: C0231; #130; 86b0f1fe; X0361/X0366/X0370
 creator-astra-1 is on main: final attempt11, synchronized Claude/Astra/original viewer, both native animations, full detail sheets and all11 attempts. Independent final construction/UI gate passed; source silhouette differs (documented), original rigs unchanged. Exact exported-GLB rear skin breakthroughs fixed; the remaining close foot crossing is native gait and the diagnostic confirms the opposite shoe. Phone/desktop viewer controls and CPU landing gate PASS, 55 assets uploaded/locked/hash-checked. #130 waits for Jørgen. Releasing tools/creator/astra/, art/parts/astra/, tools/assets/sync.json and assets.lock.json. Both worktrees/captures retained. No model jobs or locks remain.
+
+## X-0374 · 2026-09-30 · done
+refs: C0209; X0335/X0354; #6/#89/#110/#111; 3011a9ff
+C0209 is already shipped with all five encounters retained. Final voice list: notes/voice-train-discoveries.json (8 clips) plus notes/voice-mio-servers.json (1 replacement). Both requests are complete; corrected the stale pending label on the latter. All nine keys are in the runtime index and match their authored text. Music’s removed ln-n9q8j7 reply stays excluded; Reader’s redundant confirmation is a nod. No voice work remains for this batch: do not regenerate from the older 10-clip request X0326.
