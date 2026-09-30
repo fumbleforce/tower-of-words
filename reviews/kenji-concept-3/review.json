@@ -2,7 +2,7 @@
  "title": "Kenji concept round 3",
  "date": "2026-09-29",
  "by": "art agent (kenji-concept3)",
- "status": "open",
+ "status": "decided",
  "multi": true,
  "question": "Which expression and which hair? All are c with one thing changed; hair tries use x3's expression.",
  "media": [
@@ -111,5 +111,9 @@
    ],
    "note": "Step 2 (on x3), hair only: black hair to the jaw, tied in a small ponytail."
   }
- ]
+ ],
+ "decided": [
+  "h4"
+ ],
+ "decision": "h4, bedhead with the open smile: \"looks nice\""
 }

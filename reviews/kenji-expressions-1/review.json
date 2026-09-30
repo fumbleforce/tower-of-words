@@ -1,0 +1,218 @@
+{
+ "title": "Kenji's three faces from h4",
+ "date": "2026-09-30",
+ "by": "art agent (kenji-expressions-1)",
+ "status": "open",
+ "multi": true,
+ "question": "Which neutral, which grin and which sheepish face should Kenji use in the game?",
+ "media": [
+  {
+   "image": "art/candidates/portraits/kenji-expressions-1/all-attempts-faces.webp",
+   "caption": "All 19 attempts in order, faces only, h4 first. Only the face was repainted (brows to chin, inside the jaw line); his hair, shirt, hands and everything else are h4's own pixels. Tries 2 and 3 used a lighter repaint (0.65) that kept h4's open mouth; tries 4 and 5 redrew his nose, so from try 6 on h4's nose is kept. Sheepish had level brows at first: s2 adds \"nervous\" and a sweat drop, s3 then weights the worried brows. Prompts and settings for each: prompts.json in the same folder."
+  },
+  {
+   "image": "art/candidates/portraits/kenji-expressions-1/all-attempts-framed.webp",
+   "caption": "The same 19, cut out and framed on the game canvas (597 x 768, his face the same size as Mio's and Mr. Mori's), on the dark game colour. The pen pot and books behind him are taken out. His left arm (image right) ends at the picture edge, where the render ends."
+  },
+  {
+   "image": "art/candidates/portraits/kenji-expressions-1/imgqa-sheet.webp",
+   "caption": "Image check sheet. It flags red rim at about 11% on every attempt, h4 included. Every flagged pixel is on his bare skin (arms, cheek, ear): the warm skin shading, not a red light. The outline is h4's in all of them."
+  },
+  {
+   "image": "game3d/assets/portraits/kenji-neutral.webp",
+   "caption": "What the game shows today (the provisional 711 portrait), for comparison."
+  }
+ ],
+ "options": [
+  {
+   "id": "g0-h4",
+   "label": "1. grin: g0-h4",
+   "image": "art/candidates/portraits/kenji-expressions-1/pair-g0-h4.webp",
+   "images": [
+    "art/candidates/portraits/kenji-expressions-1/face-g0-h4.webp",
+    "art/candidates/portraits/kenji-expressions-1/kenji-g0-h4.webp"
+   ],
+   "note": "h4 itself, unchanged: the open-mouthed smile you picked. No repaint. Checks: red rim 11.2% (his skin, see the check sheet above), face drift 0.000 (pass), cut-out pass."
+  },
+  {
+   "id": "n-d65-1",
+   "label": "2. neutral try: n-d65-1",
+   "image": "art/candidates/portraits/kenji-expressions-1/pair-n-d65-1.webp",
+   "images": [
+    "art/candidates/portraits/kenji-expressions-1/face-n-d65-1.webp",
+    "art/candidates/portraits/kenji-expressions-1/kenji-n-d65-1.webp"
+   ],
+   "note": "Mouth stayed open, so it reads as a grin, not neutral. Nose redrawn. Words: \"calm relaxed expression, mouth closed, soft eyebrows, looking at the viewer\"; denoise 0.65, seed 1. Checks: red rim 11.1% (his skin, see the check sheet above), face drift 0.001 (pass), cut-out pass."
+  },
+  {
+   "id": "s-d65-1",
+   "label": "3. sheepish try: s-d65-1",
+   "image": "art/candidates/portraits/kenji-expressions-1/pair-s-d65-1.webp",
+   "images": [
+    "art/candidates/portraits/kenji-expressions-1/face-s-d65-1.webp",
+    "art/candidates/portraits/kenji-expressions-1/kenji-s-d65-1.webp"
+   ],
+   "note": "Mouth stayed open, close to h4. Not sheepish. Words: \"sheepish apologetic smile, eyebrows tilted up in the middle, looking at the viewer\"; denoise 0.65, seed 1. Checks: red rim 11.2% (his skin, see the check sheet above), face drift 0.002 (pass), cut-out pass."
+  },
+  {
+   "id": "n-d80-1",
+   "label": "4. neutral: n-d80-1",
+   "image": "art/candidates/portraits/kenji-expressions-1/pair-n-d80-1.webp",
+   "images": [
+    "art/candidates/portraits/kenji-expressions-1/face-n-d80-1.webp",
+    "art/candidates/portraits/kenji-expressions-1/kenji-n-d80-1.webp"
+   ],
+   "note": "Mouth closed, small smile. The nose came out bigger and browner than h4's. Words: \"calm relaxed expression, mouth closed, soft eyebrows, looking at the viewer\"; denoise 0.8, seed 1. Checks: red rim 11.3% (his skin, see the check sheet above), face drift 0.004 (pass), cut-out pass."
+  },
+  {
+   "id": "s-d80-1",
+   "label": "5. sheepish try: s-d80-1",
+   "image": "art/candidates/portraits/kenji-expressions-1/pair-s-d80-1.webp",
+   "images": [
+    "art/candidates/portraits/kenji-expressions-1/face-s-d80-1.webp",
+    "art/candidates/portraits/kenji-expressions-1/kenji-s-d80-1.webp"
+   ],
+   "note": "Toothy smile with level brows: reads pleased, not sheepish. Nose redrawn. Words: \"sheepish apologetic smile, eyebrows tilted up in the middle, looking at the viewer\"; denoise 0.8, seed 1. Checks: red rim 11.3% (his skin, see the check sheet above), face drift 0.001 (pass), cut-out pass."
+  },
+  {
+   "id": "nk-d80-1",
+   "label": "6. neutral: nk-d80-1",
+   "image": "art/candidates/portraits/kenji-expressions-1/pair-nk-d80-1.webp",
+   "images": [
+    "art/candidates/portraits/kenji-expressions-1/face-nk-d80-1.webp",
+    "art/candidates/portraits/kenji-expressions-1/kenji-nk-d80-1.webp"
+   ],
+   "note": "Calm, mouth closed, faint smile. Words: \"calm relaxed expression, mouth closed, soft eyebrows, looking at the viewer\"; denoise 0.8, seed 1; h4's nose kept. Checks: red rim 11.3% (his skin, see the check sheet above), face drift 0.002 (pass), cut-out pass."
+  },
+  {
+   "id": "nk-d80-2",
+   "label": "7. neutral: nk-d80-2",
+   "image": "art/candidates/portraits/kenji-expressions-1/pair-nk-d80-2.webp",
+   "images": [
+    "art/candidates/portraits/kenji-expressions-1/face-nk-d80-2.webp",
+    "art/candidates/portraits/kenji-expressions-1/kenji-nk-d80-2.webp"
+   ],
+   "note": "Calm, mouth closed, slightly wider smile. Words: \"calm relaxed expression, mouth closed, soft eyebrows, looking at the viewer\"; denoise 0.8, seed 2; h4's nose kept. Checks: red rim 11.3% (his skin, see the check sheet above), face drift 0.005 (pass), cut-out pass."
+  },
+  {
+   "id": "nk-d80-3",
+   "label": "8. neutral: nk-d80-3",
+   "image": "art/candidates/portraits/kenji-expressions-1/pair-nk-d80-3.webp",
+   "images": [
+    "art/candidates/portraits/kenji-expressions-1/face-nk-d80-3.webp",
+    "art/candidates/portraits/kenji-expressions-1/kenji-nk-d80-3.webp"
+   ],
+   "note": "Calm closed smile. A stray tuft of hair drawn over his left eyebrow (image right). Words: \"calm relaxed expression, mouth closed, soft eyebrows, looking at the viewer\"; denoise 0.8, seed 3; h4's nose kept. Checks: red rim 11.3% (his skin, see the check sheet above), face drift 0.002 (pass), cut-out pass."
+  },
+  {
+   "id": "sk-d80-2",
+   "label": "9. sheepish try: sk-d80-2",
+   "image": "art/candidates/portraits/kenji-expressions-1/pair-sk-d80-2.webp",
+   "images": [
+    "art/candidates/portraits/kenji-expressions-1/face-sk-d80-2.webp",
+    "art/candidates/portraits/kenji-expressions-1/kenji-sk-d80-2.webp"
+   ],
+   "note": "Closed smile, brows level. Nose shading redrawn around the kept nose. Words: \"sheepish apologetic smile, eyebrows tilted up in the middle, looking at the viewer\"; denoise 0.8, seed 2; h4's nose kept. Checks: red rim 11.4% (his skin, see the check sheet above), face drift 0.004 (pass), cut-out pass."
+  },
+  {
+   "id": "sk-d80-3",
+   "label": "10. sheepish try: sk-d80-3",
+   "image": "art/candidates/portraits/kenji-expressions-1/pair-sk-d80-3.webp",
+   "images": [
+    "art/candidates/portraits/kenji-expressions-1/face-sk-d80-3.webp",
+    "art/candidates/portraits/kenji-expressions-1/kenji-sk-d80-3.webp"
+   ],
+   "note": "Small closed smile, brows level. Reads calm, not sheepish. Words: \"sheepish apologetic smile, eyebrows tilted up in the middle, looking at the viewer\"; denoise 0.8, seed 3; h4's nose kept. Checks: red rim 11.3% (his skin, see the check sheet above), face drift 0.003 (pass), cut-out pass."
+  },
+  {
+   "id": "s2k-d80-1",
+   "label": "11. sheepish: s2k-d80-1",
+   "image": "art/candidates/portraits/kenji-expressions-1/pair-s2k-d80-1.webp",
+   "images": [
+    "art/candidates/portraits/kenji-expressions-1/face-s2k-d80-1.webp",
+    "art/candidates/portraits/kenji-expressions-1/kenji-s2k-d80-1.webp"
+   ],
+   "note": "Toothy smile with a sweat drop on his cheek. Words: \"sheepish nervous smile, eyebrows tilted up in the middle, sweatdrop, looking at the viewer\"; denoise 0.8, seed 1; h4's nose kept. Checks: red rim 11.3% (his skin, see the check sheet above), face drift 0.002 (pass), cut-out pass."
+  },
+  {
+   "id": "s2k-d80-2",
+   "label": "12. sheepish: s2k-d80-2",
+   "image": "art/candidates/portraits/kenji-expressions-1/pair-s2k-d80-2.webp",
+   "images": [
+    "art/candidates/portraits/kenji-expressions-1/face-s2k-d80-2.webp",
+    "art/candidates/portraits/kenji-expressions-1/kenji-s2k-d80-2.webp"
+   ],
+   "note": "Closed smile, sweat drops on forehead and cheek. Words: \"sheepish nervous smile, eyebrows tilted up in the middle, sweatdrop, looking at the viewer\"; denoise 0.8, seed 2; h4's nose kept. Checks: red rim 11.3% (his skin, see the check sheet above), face drift 0.004 (pass), cut-out pass."
+  },
+  {
+   "id": "s2k-d80-3",
+   "label": "13. sheepish: s2k-d80-3",
+   "image": "art/candidates/portraits/kenji-expressions-1/pair-s2k-d80-3.webp",
+   "images": [
+    "art/candidates/portraits/kenji-expressions-1/face-s2k-d80-3.webp",
+    "art/candidates/portraits/kenji-expressions-1/kenji-s2k-d80-3.webp"
+   ],
+   "note": "Closed smile, a sweat drop on his cheek. Words: \"sheepish nervous smile, eyebrows tilted up in the middle, sweatdrop, looking at the viewer\"; denoise 0.8, seed 3; h4's nose kept. Checks: red rim 11.2% (his skin, see the check sheet above), face drift 0.004 (pass), cut-out pass."
+  },
+  {
+   "id": "gk-d70-1",
+   "label": "14. grin: gk-d70-1",
+   "image": "art/candidates/portraits/kenji-expressions-1/pair-gk-d70-1.webp",
+   "images": [
+    "art/candidates/portraits/kenji-expressions-1/face-gk-d70-1.webp",
+    "art/candidates/portraits/kenji-expressions-1/kenji-gk-d70-1.webp"
+   ],
+   "note": "Open grin with teeth; eyes a little rounder than h4's. Words: \"big happy grin showing his teeth, bright eyes, looking at the viewer\"; denoise 0.7, seed 1; h4's nose kept. Checks: red rim 11.3% (his skin, see the check sheet above), face drift 0.003 (pass), cut-out pass."
+  },
+  {
+   "id": "gk-d70-2",
+   "label": "15. grin: gk-d70-2",
+   "image": "art/candidates/portraits/kenji-expressions-1/pair-gk-d70-2.webp",
+   "images": [
+    "art/candidates/portraits/kenji-expressions-1/face-gk-d70-2.webp",
+    "art/candidates/portraits/kenji-expressions-1/kenji-gk-d70-2.webp"
+   ],
+   "note": "Grin with teeth, smaller mouth. Nose redrawn. Words: \"big happy grin showing his teeth, bright eyes, looking at the viewer\"; denoise 0.7, seed 2; h4's nose kept. Checks: red rim 11.2% (his skin, see the check sheet above), face drift 0.001 (pass), cut-out pass."
+  },
+  {
+   "id": "gk-d70-3",
+   "label": "16. grin: gk-d70-3",
+   "image": "art/candidates/portraits/kenji-expressions-1/pair-gk-d70-3.webp",
+   "images": [
+    "art/candidates/portraits/kenji-expressions-1/face-gk-d70-3.webp",
+    "art/candidates/portraits/kenji-expressions-1/kenji-gk-d70-3.webp"
+   ],
+   "note": "The widest grin. Words: \"big happy grin showing his teeth, bright eyes, looking at the viewer\"; denoise 0.7, seed 3; h4's nose kept. Checks: red rim 11.3% (his skin, see the check sheet above), face drift 0.005 (pass), cut-out pass."
+  },
+  {
+   "id": "s3k-d80-1",
+   "label": "17. sheepish: s3k-d80-1",
+   "image": "art/candidates/portraits/kenji-expressions-1/pair-s3k-d80-1.webp",
+   "images": [
+    "art/candidates/portraits/kenji-expressions-1/face-s3k-d80-1.webp",
+    "art/candidates/portraits/kenji-expressions-1/kenji-s3k-d80-1.webp"
+   ],
+   "note": "Nervous closed smile, brows a little worried, one sweat drop. Words: \"sheepish nervous smile, (worried eyebrows:1.3), sweatdrop, looking at the viewer\"; denoise 0.8, seed 1; h4's nose kept. Checks: red rim 11.4% (his skin, see the check sheet above), face drift 0.003 (pass), cut-out pass."
+  },
+  {
+   "id": "s3k-d80-2",
+   "label": "18. sheepish: s3k-d80-2",
+   "image": "art/candidates/portraits/kenji-expressions-1/pair-s3k-d80-2.webp",
+   "images": [
+    "art/candidates/portraits/kenji-expressions-1/face-s3k-d80-2.webp",
+    "art/candidates/portraits/kenji-expressions-1/kenji-s3k-d80-2.webp"
+   ],
+   "note": "Nervous closed smile, sweat drops on forehead and cheek. Words: \"sheepish nervous smile, (worried eyebrows:1.3), sweatdrop, looking at the viewer\"; denoise 0.8, seed 2; h4's nose kept. Checks: red rim 11.2% (his skin, see the check sheet above), face drift 0.004 (pass), cut-out pass."
+  },
+  {
+   "id": "s3k-d80-3",
+   "label": "19. sheepish: s3k-d80-3",
+   "image": "art/candidates/portraits/kenji-expressions-1/pair-s3k-d80-3.webp",
+   "images": [
+    "art/candidates/portraits/kenji-expressions-1/face-s3k-d80-3.webp",
+    "art/candidates/portraits/kenji-expressions-1/kenji-s3k-d80-3.webp"
+   ],
+   "note": "Nervous smile, two sweat drops. The same stray tuft over his left eyebrow (image right) as nk-d80-3. Words: \"sheepish nervous smile, (worried eyebrows:1.3), sweatdrop, looking at the viewer\"; denoise 0.8, seed 3; h4's nose kept. Checks: red rim 11.4% (his skin, see the check sheet above), face drift 0.003 (pass), cut-out pass."
+  }
+ ]
+}
