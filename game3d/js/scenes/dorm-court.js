@@ -19,6 +19,7 @@ import { ericBlock } from './dorm-court/block.js';
 import { buildCourt } from './dorm-court/court.js';
 import { shelter, vending, doorstep, garbage } from './dorm-court/fittings.js';
 import { Parts } from './outdoor/parts.js';
+import { flatRoof } from './dorm-court/roofs.js';
 import { lightSet } from './outdoor/furniture.js';
 import { skylineSteps } from './skyline.js';
 import { drain } from '../perf/slice.js';
@@ -29,8 +30,9 @@ import * as PL from './dorm-court/plan.js';
 
 const { HALL, FRONT_Z, BACK_Z, DOOR_X, PASS_X, BLOCK_Z, NEAR, WEST, EAST } = PL;
 const SKY = '#2b3342';
+const STREET_Z = (PL.STREET[2] + PL.STREET[3]) / 2; // the lane's middle
+const IN = [DOOR_X, NEAR - 0.45]; // just inside the gate, on the door axis
 const POOL_Y = 0.02; // light pools on the paving sit above its stones (0.006-0.008), or the two fight for depth
-const roofMat = new THREE.MeshBasicMaterial({ color: '#555a63', toneMapped: false });
 
 // the entrance hall: cut-low glass front with open doors, side and back walls full height, mailboxes, the passage
 function hall(root, nav) {
@@ -63,17 +65,14 @@ function hall(root, nav) {
     ),
   );
   root.add(lightPool(PASS_X, BACK_Z - 0.7, 0.55, { k: 0.3 }));
-  // the roof over the passage and beside it, unlit like the forecourt annex's
-  root.add(
-    rbox(x1 - x0 + 0.2, 0.12, BACK_Z - BLOCK_Z, null, {
-      x: (x0 + x1) / 2,
-      y: 2.2,
-      z: (BACK_Z + BLOCK_Z) / 2,
-      seg: 1,
-      r: 0.01,
-      m: roofMat,
-    }),
-  );
+  // the roof over the passage and beside it: flat, its parapet along the front, a unit and a vent on it
+  const roof = new Parts();
+  flatRoof(roof, [x0 - 0.1, x1 + 0.1, BLOCK_Z, BACK_Z + 0.09], 2.34, {
+    edges: 's',
+    units: [[x1 - 0.55, BACK_Z - 0.75]],
+    vents: [[x0 + 0.5, BACK_Z - 0.6]],
+  });
+  roof.build(root);
   // mailboxes: a grey steel bank of small doors on the back wall, west of the passage
   const mx = -0.05,
     parts = [];
@@ -143,15 +142,15 @@ export function* dormCourtSteps() {
   // under everything, out to the frame's edges and past them: the town's paving, the road past the street
   groundPatches(root, [
     [-40, 40, -40, PL.STREET[3], TOWN.paving],
-    [-40, 40, PL.STREET[3], 40, TOWN.road],
+    [-40, 40, PL.STREET[3], 40, TOWN.grass],
   ]);
   hall(root, nav);
   yield;
   ericBlock(root, { hall: HALL });
   yield;
-  laundry(root, nav, { ...PL.LAUNDRY, west: WEST, roofMat });
+  laundry(root, nav, { ...PL.LAUNDRY, west: WEST, back: BLOCK_Z });
   yield;
-  sento(root, nav, { east: EAST, roofMat });
+  sento(root, nav, { east: EAST, back: BLOCK_Z });
   yield;
   const lamps = lightSet(); // every lamp's lantern and pool, one mesh each
   buildCourt(root, nav, lamps);
@@ -173,9 +172,10 @@ export function* dormCourtSteps() {
     sun,
     nav,
     sky,
-    start: [WEST + 0.6, 0.5],
-    plazaEntry: [WEST + 0.6, 0.5],
-    westEdge: [WEST - 0.6, 0.5],
+    start: IN,
+    plazaEntry: IN,
+    streetEdge: [DOOR_X - 1.4, STREET_Z], // where the walk from the plaza hands over, on the lane
+    streetGate: [DOOR_X, STREET_Z], // on the lane, in front of the gate
     dormEntry: [DOOR_X, FRONT_Z + 0.5],
     door: [DOOR_X, FRONT_Z],
     hallMid: [PASS_X - 0.2, BACK_Z + 0.55],

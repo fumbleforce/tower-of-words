@@ -213,7 +213,7 @@ const ROWS = [
   ['dorm_4', 'dorm', 9, 1.75, 0, DORM_ROOF, 'dorm', [116.3, -9.2, 125.4, -3.1]],
   ['dorm_annex', 'dorm', 1, 1.75, 3, DORM_ROOF, 'dorm', [125.4, -7.5, 128.1, -3.6]],
   ['r8', 'office', 2, 2, 2, ROOF, 'flat', [66.9, 2.8, 69.7, 6.2]],
-  ['r9', 'office', 2, 2, 3, ROOF, 'flat', [70.2, 2.6, 73.4, 4.9]],
+  ['r9', 'office', 2, 2, 3, ROOF, 'flat', [70.2, 2.6, 72.9, 4.9]],
   ['m_e1', 'office', 2, 2, 2, ROOF, 'flat', [60, 3, 66.6, 7.3]],
   ['m_e2', 'office', 1, 2, 3, ROOF, 'flat', [55.4, 6.5, 59.4, 8.3]],
 ];
@@ -276,9 +276,9 @@ export const PATHS = [
     id: 'route_home',
     kind: 'lane',
     w: 3,
-    line: pairs([-1.7, -2.75, 64, -2.75, 64, -7.6, 79.35, -7.6, 79.35, -1.3]),
+    line: pairs([-1.7, -2.75, 64, -2.75, 64, -10, 74.54, -10, 74.54, -0.8, 79.34, -0.8]),
     detail:
-      'From the head office door (the lane’s north edge), east along the tower’s south face and straight on through the fountain plaza (it meets the circle on the fountain’s east-west axis, in on the west, out on the east), on east past the plaza, a jog north beyond it, and east into the dorm entrance court from its north.',
+      'From the head office door (the lane’s north edge), east along the tower’s south face and straight on through the fountain plaza (it meets the circle on the fountain’s east-west axis, in on the west, out on the east), on east past the plaza, a jog north beyond it, east to the dorms, then south as the street past the dorm entrance court, turning in through the court’s gate on the axis of the dorm’s hall doors.',
   },
   {
     id: 'fountain_plaza',

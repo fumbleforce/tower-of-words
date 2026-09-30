@@ -77,7 +77,7 @@ export const LANDMARKS = [
 // the lane ends the walks crossfade between: [from chunk, its edge, to chunk, its edge]
 export const SEAMS = [
   ['forecourt', [32.6, -2.1], 'plaza', [-12.2, 6.98]],
-  ['plaza', [12.8, 6.98], 'dorm_court', [-5.8, 0.5]],
+  ['plaza', [12.8, 6.98], 'dorm_court', [-0.9, 5.3]],
 ];
 
 export function landmarkGaps() {

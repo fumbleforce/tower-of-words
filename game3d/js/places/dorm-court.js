@@ -34,7 +34,7 @@ export async function dormCourtPlace(game) {
     sun: w.sun,
     charScale: K,
     start: w.start,
-    startFacing: Math.PI / 2, // east, into the court from the plaza lane
+    startFacing: Math.PI, // north, up the door axis from the gate
     defaultPeriod: 'evening',
     music: 'night',
     grade: EVENING_GRADE,
@@ -86,8 +86,19 @@ export async function dormCourtPlace(game) {
         cam.snap(game.player.root.position);
       }
     },
-    // in along the lane from the plaza, on the same close framing the plaza let go of (places/edge-walk.js)
-    tripIn: (g) => walkIn(g, cam, w.westEdge, w.start, Math.PI / 2),
+    // in along the lane from the plaza, on the same close framing the plaza let go of (places/edge-walk.js), then
+    // left through the gate and up the door axis into the court
+    async tripIn(g) {
+      await walkIn(g, cam, w.streetEdge, w.streetGate, Math.PI / 2, { release: false });
+      const eric = g.player;
+      eric.scripted = true;
+      cam.closeOn(w.start, 1.3);
+      await glide(g, eric.root, w.start, 1.4);
+      eric.setState('idle');
+      eric.scripted = false;
+      g.walker.sync();
+      cam.release();
+    },
     async tripOut(g) {
       // in through the hall doors, past the mailboxes and into the passage to the rooms, the camera coming in close
       await g.walkTo(w.dormEntry[0], w.dormEntry[1]);
