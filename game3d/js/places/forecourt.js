@@ -1,5 +1,6 @@
 import * as THREE from 'three';
-import { buildForecourt } from '../scenes/forecourt.js';
+import { forecourtSteps } from '../scenes/forecourt.js';
+import { sliced } from '../perf/slice.js';
 import { RoomCam } from '../cam.js';
 import { K } from '../scenes/office.js';
 import { walkOut, walkIn } from './edge-walk.js';
@@ -10,8 +11,11 @@ import { PLACE_DETAILS } from './catalog.js';
 import { snapshotPeople, restorePeople } from './saved-people.js';
 import { idle } from '../cast.js';
 
-export function forecourtPlace(game) {
-  const w = buildForecourt();
+// the phone's view out of the station: looking east, lower, a little further out, Eric low in the frame
+const EAST = { elev: 33, zoom: 1.36, lead: -6.3 };
+
+export async function forecourtPlace(game) {
+  const w = await sliced(forecourtSteps()); // in slices between frames: it's built while the gate room is played
   const cam = new RoomCam(w.camera); // the security room's camera, so the crossfade out of it keeps its angle
   const floor = new THREE.Plane(new THREE.Vector3(0, 1, 0), 0);
   const spots = {
@@ -70,6 +74,41 @@ export function forecourtPlace(game) {
     const [x, z] = c ? [nav.x0 + (c[0] + 0.5) * nav.cell, nav.z0 + (c[1] + 0.5) * nav.cell] : w.start;
     p.set(x, p.y, z);
   };
+  // The phone's turn: 1 looks east from the station door up the court at head office, 0 looks north as everywhere
+  // else. It eases between the two over the bike court (TURN, in x), so the view at the head office door, in the
+  // lobby and in the lift is the usual one; a jump (a trip, a restored save) snaps it.
+  const TURN = [8.2, 12.6],
+    north = { yaw: 0, elev: cam.elev, dist: 0, lead: -1.6 },
+    east = {
+      yaw: -Math.PI / 2,
+      elev: THREE.MathUtils.degToRad(EAST.elev),
+      zoom: EAST.zoom,
+      lead: EAST.lead,
+    };
+  let phone = false,
+    turn = 0,
+    turnAt = null;
+  const setTurn = (k) => {
+    turn = k;
+    if (!phone || !north.dist) {
+      if (cam.yaw) [cam.yaw, cam.elev] = [north.yaw, north.elev]; // back from a phone turn (the window was resized)
+      return;
+    }
+    const s = k * k * (3 - 2 * k),
+      L = THREE.MathUtils.lerp;
+    cam.yaw = L(north.yaw, east.yaw, s);
+    cam.elev = L(north.elev, east.elev, s);
+    cam.fitDist = north.dist * L(1, east.zoom, s);
+    cam.lead = L(north.lead, east.lead, s);
+  };
+  const steer = (p, dt) => {
+    const jump = !turnAt || Math.hypot(p.x - turnAt[0], p.z - turnAt[1]) > 0.8;
+    turnAt = [p.x, p.z];
+    if (!phone) return;
+    const want = 1 - THREE.MathUtils.smoothstep(p.x, TURN[0], TURN[1]);
+    if (Math.abs(want - turn) < 1e-4) return; // settled: leave the camera alone (the lift ride sets its elevation)
+    setTurn(jump ? want : turn + (want - turn) * (1 - Math.exp(-dt / 0.45)));
+  };
   const P = {
     scene: w.scene,
     camera: cam.camera,
@@ -113,9 +152,11 @@ export function forecourtPlace(game) {
     liftSite: w.liftSite,
     liftLanding: w.liftLanding,
     fit(aspect) {
-      // desktop: the station door and the head office door in one frame, then along east into the lobby; phone:
-      // follow him (the camera leans toward the goal, so the tower comes into view on the way)
-      if (aspect >= 1)
+      // desktop: the station door and the head office door in one frame, then along east into the lobby
+      const k = turn;
+      phone = false;
+      setTurn(0);
+      if (aspect >= 1) {
         cam.fit(
           aspect,
           [
@@ -127,18 +168,24 @@ export function forecourtPlace(game) {
           new THREE.Vector3(6.4, 0, -0.6),
           { follow: true, clamp: [6.4, 17.2, -1.2, 4.5], limY: 0.96 },
         );
-      else
-        cam.fit(
-          aspect,
-          [
-            new THREE.Vector3(-2.9, 0, 0),
-            new THREE.Vector3(2.9, 0, 0),
-            new THREE.Vector3(0, 0, -2.6),
-            new THREE.Vector3(0, 1.2, 2.4),
-          ],
-          new THREE.Vector3(0, 0, 0),
-          { follow: true, clamp: [-1.0, 21.2, -2.6, 8.0], lead: -1.6 },
-        );
+        return;
+      }
+      // phone: follow him, looking north near head office and in the lobby; out of the station the camera looks
+      // east up the court instead (setTurn), since a tall screen can't hold both doors looking north
+      cam.fit(
+        aspect,
+        [
+          new THREE.Vector3(-2.9, 0, 0),
+          new THREE.Vector3(2.9, 0, 0),
+          new THREE.Vector3(0, 0, -2.6),
+          new THREE.Vector3(0, 1.2, 2.4),
+        ],
+        new THREE.Vector3(0, 0, 0),
+        { follow: true, clamp: [-1.0, 21.2, -2.6, 8.0], lead: -1.6 },
+      );
+      phone = true;
+      north.dist = cam.fitDist;
+      setTurn(k);
     },
     pick(rc) {
       const point = new THREE.Vector3();
@@ -147,7 +194,8 @@ export function forecourtPlace(game) {
     update(dt, t) {
       w.update(t, dt);
       w.headOffice.update(game.player.root.position, dt);
-      w.station.update(game.player.root.position, dt);
+      steer(game.player.root.position, dt);
+      w.station.update(game.player.root.position, dt, cam.dir);
       idle(w.kuro, t);
       // heading for the lane (not for head office): build the plaza now, so the walk there needs no loading pause
       const e = game.player.root.position;
@@ -189,6 +237,9 @@ export function forecourtPlace(game) {
       eric.scripted = true;
       eric.root.position.set(w.stationExit[0], 0, w.stationExit[1]);
       eric.root.rotation.y = Math.PI; // north, as he left the security room
+      // on a phone the camera starts looking north like the security room's, and turns east as he steps out
+      turnAt = [eric.root.position.x, eric.root.position.z];
+      setTurn(0);
       cam.closeOn(w.stationExit, 1.7);
       cam.snap(eric.root.position);
       await glide(g, eric.root, w.start, 1.1);

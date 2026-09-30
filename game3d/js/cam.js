@@ -160,7 +160,13 @@ export class RoomCam {
       gl.x *= 0.95;
       gl.z *= 0.95;
     }
-    this.want.set(w.x + this.ahead.x + gl.x, this.base.y, w.z + this.ahead.z + gl.z + (this.lead || 0));
+    // lead: toward the camera (positive) or away from it along the ground, whichever way it looks
+    const lead = this.lead || 0;
+    this.want.set(
+      w.x + this.ahead.x + gl.x + Math.sin(this.yaw) * lead,
+      this.base.y,
+      w.z + this.ahead.z + gl.z + Math.cos(this.yaw) * lead,
+    );
     if (this.clamp) {
       this.want.x = THREE.MathUtils.clamp(this.want.x, this.clamp[0], this.clamp[1]);
       this.want.z = THREE.MathUtils.clamp(this.want.z, this.clamp[2], this.clamp[3]);

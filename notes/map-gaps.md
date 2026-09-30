@@ -13,12 +13,12 @@ To see them: `?map=1` then M (or `?mapcompare=1`), "Compare with island-map-4", 
 
 ## Station forecourt and head office (`forecourt`)
 
-- H1. Closed 2026-09-30 (map upgrade task C): the lift stands in the lobby of a real head office (scenes/head-office.js), its lid in the lift core's top colour; no background-coloured roof is left.
+- H1. Closed 2026-09-30 (map upgrade task C): the lift stands in the lobby of a real head office (scenes/head-office.js), its lid in the dark of the core's shafts where the core's top shows the cut; no background-coloured roof is left.
 - H2. Closed 2026-09-30 (task C): the tower is built from the layout's head_office (14.8 by 8.6, 12 storeys, turned 23°; 0.1 off the map), and the skyline draws head_office_wing from the layout.
 - H3. Mostly closed 2026-09-30 (task C; 4.6 off on the latest run): head office is east of the station. The tower is 0.1 off; the door is 4.6 off, because the map draws the door about 4.5 south of the traced south face and the door is built in that face.
 - H4. Closed 2026-09-30 (map upgrade task D): the court is the paving between the station and the head office door, its bike court east of the station where the layout's court is (built x 5.8..12.8, z 2.65..10.6 local; the layout's court 5.8..14.6, 2.2..11.2); the shed stands west of it.
 - H5. The station exit faces north because the gate room stays as built (gate-location); the map brief has it facing east toward the head office. Open question in the upgrade plan.
-- H6. Closed 2026-09-30 (task D): the station is a two-storey flat-roofed block over the whole gate room (scenes/station-exterior.js), with parapet, roof plant, the exit canopy, the staff door, the room's side windows and glass front; above the cut-low height it fades only while Eric is just outside its north door.
+- H6. Closed 2026-09-30 (task D): the station is a two-storey flat-roofed block over the whole gate room (scenes/station-exterior.js), with parapet, roof plant, the exit canopy, the staff door, the room's side windows and glass front; above the cut-low height it fades only while it stands between Eric and the camera (on a phone the camera looks east past it).
 - H7. Accepted (task D): the station is built on the gate room's footprint, 12.6 by 9 and square to north, deeper than the map's 12 by 3 turned 23°, because the room can't change.
 - H8. Closed 2026-09-30 (task D): the shed is built on the layout's centre line, 43 long and turned 22°, with an island platform on columns and two beams on piers, the beam arriving from the west at its south end. It is 1.3 west of the traced line and 7.2 wide instead of 9, so its roof clears the station's north-west corner (the traced outline overlaps the station).
 - H9. Closed 2026-09-30 (task D): stairs at the platform's south end come down to a covered walkway that runs along the station's south side to its glass front.

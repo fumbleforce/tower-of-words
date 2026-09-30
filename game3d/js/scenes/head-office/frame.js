@@ -41,7 +41,7 @@ export const CZ = Math.round((OUT[1] - 0.85) * 100) / 100; // the core's front w
 export const CORE = [OUT[0] - 1.6, OUT[0] + 5.6, CZ - 2.32, CZ + 0.09]; // x0, x1, z back, z front face
 export const CAR2_X = OUT[0] + 2.0,
   STAIR_X = OUT[0] + 3.3;
-export const CAP = '#949aa3'; // the core's top, and the lift's lid over the car (unlit, so they match)
+export const CAP = '#262a31'; // the lift's lid over the car (unlit): the dark of the core's shafts in the cut
 
 // ---------- geometry in the tower's frame: boxes collected per material, merged into one mesh each ----------
 export function parts() {

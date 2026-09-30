@@ -115,7 +115,48 @@ export function ground(g, frame) {
   sillP.box(DOOR_U + DOOR_W / 2, LU, 0, 0.5, 0, 0.16);
   floorP.box(0.18, LU, -0.04, 0.012, 0.16, LN);
   floorP.box(DOOR_U - DOOR_W / 2, DOOR_U + DOOR_W / 2, -0.04, 0.012, -0.02, 0.2);
-  apronP.box(-0.8, W + 0.8, -0.06, 0.004, -2.4, 0);
+  // the plinth: the tower stands on its own paved apron, turned with it and a hair above the court, tiled on the
+  // tower's grid and edged with a dark stone band, so the square court meets it along one straight edge. The lane
+  // to the plaza (scenes/forecourt.js) runs along its south edge, and the worn line from the station comes up it to
+  // the door.
+  const PL = [-1, W + 1, -2.2, D + 1], // u0, u1, n0, n1
+    BAND = 0.28,
+    TILE = 0.9;
+  const Y = 0.011; // its top: over the court's worn line, under the lobby floor
+  apronP.box(PL[0], PL[1], -0.06, Y, PL[2], 0);
+  apronP.box(PL[0], PL[1], -0.06, Y, D, PL[3]);
+  apronP.box(PL[0], 0, -0.06, Y, 0, D);
+  apronP.box(W, PL[1], -0.06, Y, 0, D);
+  sillP.box(PL[0], PL[1], Y, Y + 0.005, PL[2], PL[2] + BAND);
+  sillP.box(PL[0], PL[1], Y, Y + 0.005, PL[3] - BAND, PL[3]);
+  sillP.box(PL[0], PL[0] + BAND, Y, Y + 0.005, PL[2], PL[3]);
+  sillP.box(PL[1] - BAND, PL[1], Y, Y + 0.005, PL[2], PL[3]);
+  // the seams, outside the tower's footprint only (inside it is the lobby floor and the service block)
+  const seamP = parts(),
+    wornP = parts();
+  const [a0, a1, b0, b1] = [PL[0] + BAND, PL[1] - BAND, PL[2] + BAND, PL[3] - BAND];
+  for (let u = PL[0] + TILE; u < a1 - 0.05; u += TILE) {
+    const runs =
+      u > 0 && u < W
+        ? [
+            [b0, 0],
+            [D, b1],
+          ]
+        : [[b0, b1]];
+    for (const [s, e] of runs) seamP.box(u - 0.01, u + 0.01, Y, Y + 0.003, s, e);
+  }
+  for (let n = PL[2] + TILE; n < b1 - 0.05; n += TILE) {
+    const runs =
+      n > 0 && n < D
+        ? [
+            [a0, 0],
+            [W, a1],
+          ]
+        : [[a0, a1]];
+    for (const [s, e] of runs) seamP.box(s, e, Y, Y + 0.003, n - 0.01, n + 0.01);
+  }
+  // the worn line: it arrives from the station along the court and turns at the band to run up to the door
+  wornP.box(PL[0] + BAND, DOOR_U + DOOR_W / 2, Y, Y + 0.0035, -1.2, -0.36);
   // the canopy: cantilevered over the door, a dark fascia on its front edge carrying the name
   const [c0, c1] = [DOOR_U - 2.0, DOOR_U + 2.0];
   frame.box(c0, c1, 2.36, 2.5, -1.7, 0);
@@ -126,9 +167,11 @@ export function ground(g, frame) {
     [floorP, PAL.floor, 'ho:floor'],
     [apronP, '#8e8a86', 'ho:apron'],
     [deskP, '#b9bdc2', 'ho:desks'],
+    [seamP, '#7f7b77', 'ho:apronSeams'],
+    [wornP, '#98948f', 'ho:apronWorn'],
   ]) {
     const m = p.mesh(mat(color, name === 'ho:floor' ? { roughness: 0.35, metalness: 0.04 } : {}), name);
-    if (name === 'ho:floor' || name === 'ho:apron') m.castShadow = false;
+    if (['ho:floor', 'ho:apron', 'ho:apronSeams', 'ho:apronWorn'].includes(name)) m.castShadow = false;
     g.add(m);
   }
   const gfGlass = glassP.mesh(mat('#8c9dad', { roughness: 0.45, metalness: 0.05 }), 'ho:gfGlass');
