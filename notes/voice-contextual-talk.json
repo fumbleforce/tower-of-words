@@ -1,0 +1,138 @@
+{
+  "status": "complete",
+  "request": "C0218 / X0340; work #106",
+  "pipeline": "sh tools/voice/run.sh",
+  "note": "C0221 cold-read cleared. Seven local Qwen clips checked in game3d-voice-ctx/report.json; every selected take has zero phonetic transcription errors, with no fallback. Six overheard clips carry aligned known-word/clear spans. Preset aliases are in cfg.py; the existing evening-canteen-worker clip is reused. Retired Mori hint is excluded.",
+  "clips": [
+    {
+      "key": "gate-worker-a-ohayo",
+      "speaker": "worker_a",
+      "text": "おはようございます。",
+      "lang": "ja",
+      "overheard": true,
+      "words": [
+        [
+          "ohayo",
+          "おはようございます"
+        ]
+      ],
+      "clear": [],
+      "emo": "polite"
+    },
+    {
+      "key": "gate-worker-b-busy",
+      "speaker": "worker_b",
+      "text": "あ、すみません、今ちょっと…",
+      "lang": "ja",
+      "overheard": true,
+      "words": [
+        [
+          "sumimasen",
+          "すみません"
+        ]
+      ],
+      "clear": [],
+      "emo": "polite"
+    },
+    {
+      "key": "gate-commuter-1-wait",
+      "speaker": "commuter_1",
+      "text": "ゲート、まだみたいですね…",
+      "lang": "ja",
+      "overheard": true,
+      "words": [],
+      "clear": [
+        "ゲート"
+      ],
+      "emo": "low"
+    },
+    {
+      "key": "gate-commuter-2-wait",
+      "speaker": "commuter_2",
+      "text": "ゲート、まだみたいですね…",
+      "lang": "ja",
+      "overheard": true,
+      "words": [],
+      "clear": [
+        "ゲート"
+      ],
+      "emo": "low"
+    },
+    {
+      "key": "gate-commuter-3-wait",
+      "speaker": "commuter_3",
+      "text": "ゲート、まだみたいですね…",
+      "lang": "ja",
+      "overheard": true,
+      "words": [],
+      "clear": [
+        "ゲート"
+      ],
+      "emo": "low"
+    },
+    {
+      "key": "oh-6p8f6a",
+      "speaker": "canteen_worker",
+      "text": "すみません、今日はもう終わりなんです。",
+      "lang": "ja",
+      "overheard": true,
+      "words": [
+        [
+          "sumimasen",
+          "すみません"
+        ]
+      ],
+      "clear": [],
+      "emo": "polite"
+    },
+    {
+      "key": "ln-1rdnqdo",
+      "speaker": "mio",
+      "text": "Copy room is across the corridor. Mori-san went ahead... probably bowing to the copier again.",
+      "lang": "en",
+      "overheard": false,
+      "words": [],
+      "clear": [],
+      "emo": "casual"
+    }
+  ],
+  "retired": [
+    "oh-srx4r8"
+  ],
+  "speakerPresets": {
+    "worker_a": {
+      "preset": "sales2",
+      "voiceClass": "female",
+      "bodyVariant": 4
+    },
+    "worker_b": {
+      "preset": "reader",
+      "voiceClass": "male",
+      "bodyVariant": 2
+    },
+    "commuter_1": {
+      "preset": "sales1",
+      "voiceClass": "male",
+      "bodyVariant": 0
+    },
+    "commuter_2": {
+      "preset": "reader",
+      "voiceClass": "male",
+      "bodyVariant": 2
+    },
+    "commuter_3": {
+      "preset": "kenji",
+      "voiceClass": "male",
+      "bodyVariant": 5
+    },
+    "canteen_worker": {
+      "preset": "sales2",
+      "voiceClass": "female",
+      "bodyVariant": 25
+    },
+    "mio": {
+      "preset": "mio",
+      "voiceClass": "female"
+    }
+  }
+}

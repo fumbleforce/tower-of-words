@@ -1044,6 +1044,72 @@
   "emo": "surprised"
  },
  {
+  "key": "gate-worker-a-ohayo",
+  "speaker": "worker_a",
+  "text": "おはようございます。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [
+   [
+    "ohayo",
+    "おはようございます"
+   ]
+  ],
+  "clear": [],
+  "emo": "polite"
+ },
+ {
+  "key": "gate-worker-b-busy",
+  "speaker": "worker_b",
+  "text": "あ、すみません、今ちょっと…",
+  "lang": "ja",
+  "overheard": true,
+  "words": [
+   [
+    "sumimasen",
+    "すみません"
+   ]
+  ],
+  "clear": [],
+  "emo": "polite"
+ },
+ {
+  "key": "gate-commuter-1-wait",
+  "speaker": "commuter_1",
+  "text": "ゲート、まだみたいですね…",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [
+   "ゲート"
+  ],
+  "emo": "low"
+ },
+ {
+  "key": "gate-commuter-2-wait",
+  "speaker": "commuter_2",
+  "text": "ゲート、まだみたいですね…",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [
+   "ゲート"
+  ],
+  "emo": "low"
+ },
+ {
+  "key": "gate-commuter-3-wait",
+  "speaker": "commuter_3",
+  "text": "ゲート、まだみたいですね…",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [
+   "ゲート"
+  ],
+  "emo": "low"
+ },
+ {
   "key": "oh-19g18x",
   "speaker": "commuter",
   "text": "おはようございます。",
@@ -1501,6 +1567,21 @@
   "emo": "polite"
  },
  {
+  "key": "oh-6p8f6a",
+  "speaker": "canteen_worker",
+  "text": "すみません、今日はもう終わりなんです。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [
+   [
+    "sumimasen",
+    "すみません"
+   ]
+  ],
+  "clear": [],
+  "emo": "polite"
+ },
+ {
   "key": "evening-canteen-worker",
   "speaker": "canteen_worker",
   "text": "お疲れさまです。",
@@ -1556,16 +1637,6 @@
   "words": [],
   "clear": [],
   "emo": "polite"
- },
- {
-  "key": "oh-srx4r8",
-  "speaker": "mori",
-  "text": "コピー機は、あちらです。よく食べるんですよ。",
-  "lang": "ja",
-  "overheard": true,
-  "words": [],
-  "clear": [],
-  "emo": "sheepish"
  },
  {
   "key": "oh-ehjyjs",
@@ -1827,6 +1898,16 @@
   "words": [],
   "clear": [],
   "emo": "embarrassed"
+ },
+ {
+  "key": "ln-1rdnqdo",
+  "speaker": "mio",
+  "text": "Copy room is across the corridor. Mori-san went ahead... probably bowing to the copier again.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "casual"
  },
  {
   "key": "ln-3xy3nr",
