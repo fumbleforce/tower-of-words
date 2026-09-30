@@ -143,3 +143,6 @@ game3d/build.json.*.tmp
 
 # gitleaks, fetched by tools/check/secrets.sh
 /tools/bin/
+
+# the creator's Blender build outputs (tools/creator/blender/README.md); the GLBs are in the lock file
+/art/parts/blender/*.json
