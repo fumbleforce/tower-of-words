@@ -135,12 +135,13 @@ export const PLACE_DETAILS = {
   dorm_court: {
     things: {
       dorm_entry: { label: 'Dorm entrance', kind: 'thing' },
+      bath: { label: 'Bath', kind: 'thing', verb: 'Listen' },
     },
-    spots: ['plaza_entry', 'dorm_entry'],
+    spots: ['plaza_entry', 'dorm_entry', 'bath'],
     seats: [],
     zones: ['dorm_entry'],
     people: [],
-    hooks: [],
+    hooks: ['bathSong'],
   },
   dorms: {
     things: {
