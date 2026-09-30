@@ -1,0 +1,404 @@
+{
+ "character": "mori",
+ "ref": "game3d/assets/portraits/mori-neutral.webp",
+ "face_box_game": [
+  597,
+  768,
+  [
+   234,
+   171,
+   372,
+   339
+  ]
+ ],
+ "ref_face_detected": [
+  234,
+  171,
+  372,
+  339
+ ],
+ "thresholds": {
+  "redrim": [
+   0.02,
+   0.08
+  ],
+  "glasses_cover": [
+   0.87,
+   0.85
+  ],
+  "glasses_worst": [
+   0.7,
+   0.5
+  ],
+  "glasses_dE": [
+   8,
+   15
+  ],
+  "matte_frame": [
+   0.05,
+   0.12
+  ],
+  "matte_holes": [
+   0,
+   3
+  ],
+  "headroom": [
+   0.03,
+   0.01
+  ],
+  "zoom": [
+   0.04,
+   9
+  ],
+  "top": [
+   0.01,
+   9
+  ],
+  "eyes": [
+   0.06,
+   0.12
+  ],
+  "ccip": [
+   0.05,
+   0.09
+  ]
+ },
+ "images": [
+  {
+   "path": "art/production/PC/npc-base-1/mori-new-713.png",
+   "kind": "render",
+   "size": [
+    896,
+    1152
+   ],
+   "face": [
+    372,
+    114,
+    542,
+    309
+   ],
+   "eyes": [
+    [
+     419.0,
+     185.5
+    ],
+    [
+     490.0,
+     181.0
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0028
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for mori"
+   },
+   "framing": {
+    "headroom": 0.018,
+    "zoom": 1.292,
+    "top": 0.095,
+    "bottom_short": 0.0,
+    "hair_top_game": 90,
+    "hair_top_ref": 97,
+    "crop": [
+     105.3,
+     -84.5,
+     798.2,
+     806.9
+    ],
+    "eyes": -0.014,
+    "tilt": -3.6,
+    "status": "warn"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.021,
+    "ssim": 0.269
+   },
+   "status": "warn"
+  },
+  {
+   "path": "art/production/PC/npc-base-1/mori-new-741.png",
+   "kind": "render",
+   "size": [
+    896,
+    1152
+   ],
+   "face": [
+    376,
+    118,
+    529,
+    294
+   ],
+   "eyes": [
+    [
+     419.5,
+     180.5
+    ],
+    [
+     484.0,
+     177.5
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0042
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for mori"
+   },
+   "framing": {
+    "headroom": 0.03,
+    "zoom": 1.432,
+    "top": 0.076,
+    "bottom_short": 0.0,
+    "hair_top_game": 91,
+    "hair_top_ref": 97,
+    "crop": [
+     135.1,
+     -61.1,
+     760.5,
+     743.4
+    ],
+    "eyes": -0.022,
+    "tilt": -2.7,
+    "status": "warn"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.022,
+    "ssim": 0.266
+   },
+   "status": "warn"
+  },
+  {
+   "path": "art/production/PC/npc-base-1/mori-new-742.png",
+   "kind": "render",
+   "size": [
+    896,
+    1152
+   ],
+   "face": [
+    387,
+    124,
+    565,
+    327
+   ],
+   "eyes": [
+    [
+     439.5,
+     194.5
+    ],
+    [
+     513.5,
+     204.0
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0057
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for mori"
+   },
+   "framing": {
+    "headroom": 0.025,
+    "zoom": 1.241,
+    "top": 0.089,
+    "bottom_short": 0.0,
+    "hair_top_game": 92,
+    "hair_top_ref": 97,
+    "crop": [
+     109.9,
+     -82.6,
+     831.2,
+     845.4
+    ],
+    "eyes": 0.002,
+    "tilt": 7.3,
+    "status": "warn"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.026,
+    "ssim": 0.211
+   },
+   "status": "warn"
+  },
+  {
+   "path": "art/production/PC/npc-base-1/mori-new-743.png",
+   "kind": "render",
+   "size": [
+    896,
+    1152
+   ],
+   "face": [
+    400,
+    115,
+    565,
+    310
+   ],
+   "eyes": [
+    [
+     457.5,
+     179.5
+    ],
+    [
+     523.0,
+     188.5
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for mori"
+   },
+   "framing": {
+    "headroom": 0.034,
+    "zoom": 1.292,
+    "top": 0.094,
+    "bottom_short": 0.0,
+    "hair_top_game": 105,
+    "hair_top_ref": 97,
+    "crop": [
+     130.8,
+     -83.5,
+     823.8,
+     807.9
+    ],
+    "eyes": -0.015,
+    "tilt": 7.8,
+    "status": "warn"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.036,
+    "ssim": 0.206
+   },
+   "status": "warn"
+  },
+  {
+   "path": "art/production/PC/npc-base-1/mori-arm-1.png",
+   "kind": "render",
+   "size": [
+    896,
+    1152
+   ],
+   "face": [
+    341,
+    151,
+    569,
+    426
+   ],
+   "eyes": [
+    [
+     408.0,
+     248.5
+    ],
+    [
+     505.5,
+     249.0
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for mori"
+   },
+   "framing": {
+    "headroom": 0.017,
+    "zoom": 0.916,
+    "top": 0.103,
+    "bottom_short": 0.0,
+    "hair_top_game": 90,
+    "hair_top_ref": 97,
+    "crop": [
+     -41.0,
+     -128.9,
+     936.2,
+     1128.2
+    ],
+    "eyes": -0.014,
+    "tilt": 0.3,
+    "status": "warn"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.008,
+    "ssim": 0.48
+   },
+   "status": "warn"
+  },
+  {
+   "path": "art/production/PC/npc-base-1/mori-arm-2.png",
+   "kind": "render",
+   "size": [
+    896,
+    1152
+   ],
+   "face": [
+    341,
+    151,
+    569,
+    426
+   ],
+   "eyes": [
+    [
+     408.0,
+     248.5
+    ],
+    [
+     505.5,
+     249.0
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for mori"
+   },
+   "framing": {
+    "headroom": 0.017,
+    "zoom": 0.916,
+    "top": 0.103,
+    "bottom_short": 0.0,
+    "hair_top_game": 90,
+    "hair_top_ref": 97,
+    "crop": [
+     -41.0,
+     -128.9,
+     936.2,
+     1128.2
+    ],
+    "eyes": -0.014,
+    "tilt": 0.3,
+    "status": "warn"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.008,
+    "ssim": 0.48
+   },
+   "status": "warn"
+  }
+ ]
+}

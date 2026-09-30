@@ -1,0 +1,626 @@
+{
+ "mori-new-713": {
+  "who": "mori",
+  "job": "new",
+  "seed": 713,
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, Mr. Mori, a 58-year-old Japanese man, a former manager on an office IT team: slim with an upright posture, neatly combed grey hair with a side parting, an older face with wrinkles around his eyes and mouth, dark grey suit with a navy tie, arms relaxed at his sides, empty hands, gentle polite smile, head bowed slightly, waist-up portrait facing the viewer at a slight angle, (the whole head inside the frame with empty space above the hair:1.2), plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, fat, obese, plump, (rim light, red rim light, red outline, backlighting:1.4), holding, holding object, tool, screwdriver, pen, pencil, cup, phone, papers, book, briefcase, bag, clipboard",
+  "source": "art/production/PC/mori/mori-713.png",
+  "swapped": [
+   "holding a small cup of green tea in both hands",
+   "arms relaxed at his sides, empty hands"
+  ],
+  "settings": "rdbtAnima, euler_ancestral normal, 30 steps, CFG 5",
+  "method": "fresh render, 896x1152",
+  "face_box": [
+   372,
+   114,
+   542,
+   309
+  ],
+  "game_box": [
+   108.8,
+   -79.8,
+   801.7,
+   811.6
+  ]
+ },
+ "mori-new-741": {
+  "who": "mori",
+  "job": "new",
+  "seed": 741,
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, Mr. Mori, a 58-year-old Japanese man, a former manager on an office IT team: slim with an upright posture, neatly combed grey hair with a side parting, an older face with wrinkles around his eyes and mouth, dark grey suit with a navy tie, arms relaxed at his sides, empty hands, gentle polite smile, head bowed slightly, waist-up portrait facing the viewer at a slight angle, (the whole head inside the frame with empty space above the hair:1.2), plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, fat, obese, plump, (rim light, red rim light, red outline, backlighting:1.4), holding, holding object, tool, screwdriver, pen, pencil, cup, phone, papers, book, briefcase, bag, clipboard",
+  "source": "art/production/PC/mori/mori-713.png",
+  "swapped": [
+   "holding a small cup of green tea in both hands",
+   "arms relaxed at his sides, empty hands"
+  ],
+  "settings": "rdbtAnima, euler_ancestral normal, 30 steps, CFG 5",
+  "method": "fresh render, 896x1152",
+  "face_box": [
+   376,
+   118,
+   529,
+   294
+  ],
+  "game_box": [
+   138.2,
+   -57.0,
+   763.6,
+   747.6
+  ]
+ },
+ "mori-new-742": {
+  "who": "mori",
+  "job": "new",
+  "seed": 742,
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, Mr. Mori, a 58-year-old Japanese man, a former manager on an office IT team: slim with an upright posture, neatly combed grey hair with a side parting, an older face with wrinkles around his eyes and mouth, dark grey suit with a navy tie, arms relaxed at his sides, empty hands, gentle polite smile, head bowed slightly, waist-up portrait facing the viewer at a slight angle, (the whole head inside the frame with empty space above the hair:1.2), plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, fat, obese, plump, (rim light, red rim light, red outline, backlighting:1.4), holding, holding object, tool, screwdriver, pen, pencil, cup, phone, papers, book, briefcase, bag, clipboard",
+  "source": "art/production/PC/mori/mori-713.png",
+  "swapped": [
+   "holding a small cup of green tea in both hands",
+   "arms relaxed at his sides, empty hands"
+  ],
+  "settings": "rdbtAnima, euler_ancestral normal, 30 steps, CFG 5",
+  "method": "fresh render, 896x1152",
+  "face_box": [
+   387,
+   124,
+   565,
+   327
+  ],
+  "game_box": [
+   113.5,
+   -77.8,
+   834.9,
+   850.2
+  ]
+ },
+ "mori-new-743": {
+  "who": "mori",
+  "job": "new",
+  "seed": 743,
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, Mr. Mori, a 58-year-old Japanese man, a former manager on an office IT team: slim with an upright posture, neatly combed grey hair with a side parting, an older face with wrinkles around his eyes and mouth, dark grey suit with a navy tie, arms relaxed at his sides, empty hands, gentle polite smile, head bowed slightly, waist-up portrait facing the viewer at a slight angle, (the whole head inside the frame with empty space above the hair:1.2), plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, fat, obese, plump, (rim light, red rim light, red outline, backlighting:1.4), holding, holding object, tool, screwdriver, pen, pencil, cup, phone, papers, book, briefcase, bag, clipboard",
+  "source": "art/production/PC/mori/mori-713.png",
+  "swapped": [
+   "holding a small cup of green tea in both hands",
+   "arms relaxed at his sides, empty hands"
+  ],
+  "settings": "rdbtAnima, euler_ancestral normal, 30 steps, CFG 5",
+  "method": "fresh render, 896x1152",
+  "face_box": [
+   400,
+   115,
+   565,
+   310
+  ],
+  "game_box": [
+   134.3,
+   -78.8,
+   827.2,
+   812.6
+  ]
+ },
+ "hamada-new-721": {
+  "who": "hamada",
+  "job": "new",
+  "seed": 721,
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, Mr. Hamada, a 54-year-old Japanese salaryman from accounts: thin with narrow shoulders, a tired middle-aged face, a receding hairline, short black hair going grey at the temples, tired eyes with dark circles, a rumpled navy suit with a crooked tie, arms relaxed at his sides, empty hands, apologetic worried smile, waist-up portrait facing the viewer at a slight angle, (the whole head inside the frame with empty space above the hair:1.2), plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, fat, obese, plump, (rim light, red rim light, red outline, backlighting:1.4), holding, holding object, tool, screwdriver, pen, pencil, cup, phone, papers, book, briefcase, bag, clipboard",
+  "source": "art/production/PC/hamada/hamada-721.png",
+  "swapped": [
+   "clutching a worn black briefcase to his chest with both arms",
+   "arms relaxed at his sides, empty hands"
+  ],
+  "settings": "rdbtAnima, euler_ancestral normal, 30 steps, CFG 5",
+  "method": "fresh render, 896x1152",
+  "face_box": [
+   354,
+   110,
+   545,
+   356
+  ],
+  "game_box": [
+   10.2,
+   -134.5,
+   884.4,
+   990.0
+  ]
+ },
+ "hamada-new-741": {
+  "who": "hamada",
+  "job": "new",
+  "seed": 741,
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, Mr. Hamada, a 54-year-old Japanese salaryman from accounts: thin with narrow shoulders, a tired middle-aged face, a receding hairline, short black hair going grey at the temples, tired eyes with dark circles, a rumpled navy suit with a crooked tie, arms relaxed at his sides, empty hands, apologetic worried smile, waist-up portrait facing the viewer at a slight angle, (the whole head inside the frame with empty space above the hair:1.2), plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, fat, obese, plump, (rim light, red rim light, red outline, backlighting:1.4), holding, holding object, tool, screwdriver, pen, pencil, cup, phone, papers, book, briefcase, bag, clipboard",
+  "source": "art/production/PC/hamada/hamada-721.png",
+  "swapped": [
+   "clutching a worn black briefcase to his chest with both arms",
+   "arms relaxed at his sides, empty hands"
+  ],
+  "settings": "rdbtAnima, euler_ancestral normal, 30 steps, CFG 5",
+  "method": "fresh render, 896x1152",
+  "face_box": [
+   364,
+   123,
+   542,
+   349
+  ],
+  "game_box": [
+   49.4,
+   -101.7,
+   852.5,
+   931.5
+  ]
+ },
+ "hamada-new-742": {
+  "who": "hamada",
+  "job": "new",
+  "seed": 742,
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, Mr. Hamada, a 54-year-old Japanese salaryman from accounts: thin with narrow shoulders, a tired middle-aged face, a receding hairline, short black hair going grey at the temples, tired eyes with dark circles, a rumpled navy suit with a crooked tie, arms relaxed at his sides, empty hands, apologetic worried smile, waist-up portrait facing the viewer at a slight angle, (the whole head inside the frame with empty space above the hair:1.2), plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, fat, obese, plump, (rim light, red rim light, red outline, backlighting:1.4), holding, holding object, tool, screwdriver, pen, pencil, cup, phone, papers, book, briefcase, bag, clipboard",
+  "source": "art/production/PC/hamada/hamada-721.png",
+  "swapped": [
+   "clutching a worn black briefcase to his chest with both arms",
+   "arms relaxed at his sides, empty hands"
+  ],
+  "settings": "rdbtAnima, euler_ancestral normal, 30 steps, CFG 5",
+  "method": "fresh render, 896x1152",
+  "face_box": [
+   339,
+   101,
+   563,
+   396
+  ],
+  "game_box": [
+   -75.8,
+   -192.2,
+   972.5,
+   1156.3
+  ]
+ },
+ "hamada-new-743": {
+  "who": "hamada",
+  "job": "new",
+  "seed": 743,
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, Mr. Hamada, a 54-year-old Japanese salaryman from accounts: thin with narrow shoulders, a tired middle-aged face, a receding hairline, short black hair going grey at the temples, tired eyes with dark circles, a rumpled navy suit with a crooked tie, arms relaxed at his sides, empty hands, apologetic worried smile, waist-up portrait facing the viewer at a slight angle, (the whole head inside the frame with empty space above the hair:1.2), plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, fat, obese, plump, (rim light, red rim light, red outline, backlighting:1.4), holding, holding object, tool, screwdriver, pen, pencil, cup, phone, papers, book, briefcase, bag, clipboard",
+  "source": "art/production/PC/hamada/hamada-721.png",
+  "swapped": [
+   "clutching a worn black briefcase to his chest with both arms",
+   "arms relaxed at his sides, empty hands"
+  ],
+  "settings": "rdbtAnima, euler_ancestral normal, 30 steps, CFG 5",
+  "method": "fresh render, 896x1152",
+  "face_box": [
+   351,
+   107,
+   557,
+   382
+  ],
+  "game_box": [
+   -37.1,
+   -166.4,
+   940.2,
+   1090.8
+  ]
+ },
+ "mori-arm-1": {
+  "who": "mori",
+  "job": "arm",
+  "seed": 1,
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, Mr. Mori, a 58-year-old Japanese man, a former manager on an office IT team: slim with an upright posture, neatly combed grey hair with a side parting, an older face with wrinkles around his eyes and mouth, dark grey suit with a navy tie, arms relaxed at his sides, empty hands, gentle polite smile, head bowed slightly, waist-up portrait facing the viewer at a slight angle, (the whole head inside the frame with empty space above the hair:1.2), plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, fat, obese, plump, (rim light, red rim light, red outline, backlighting:1.4), holding, holding object, tool, screwdriver, pen, pencil, cup, phone, papers, book, briefcase, bag, clipboard",
+  "source": "art/production/PC/mori/mori-713.png",
+  "swapped": [
+   "holding a small cup of green tea in both hands",
+   "arms relaxed at his sides, empty hands"
+  ],
+  "settings": "rdbtAnima, euler_ancestral normal, 30 steps, CFG 5",
+  "method": "masked img2img at denoise 1.0 (DifferentialDiffusion, mask blur 12) below y 800 of the source, pasted back through the same line with an 8 px blur",
+  "face_box": [
+   341,
+   151,
+   569,
+   426
+  ],
+  "game_box": [
+   -36.1,
+   -122.4,
+   941.2,
+   1134.8
+  ]
+ },
+ "mori-arm-2": {
+  "who": "mori",
+  "job": "arm",
+  "seed": 2,
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, Mr. Mori, a 58-year-old Japanese man, a former manager on an office IT team: slim with an upright posture, neatly combed grey hair with a side parting, an older face with wrinkles around his eyes and mouth, dark grey suit with a navy tie, arms relaxed at his sides, empty hands, gentle polite smile, head bowed slightly, waist-up portrait facing the viewer at a slight angle, (the whole head inside the frame with empty space above the hair:1.2), plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, fat, obese, plump, (rim light, red rim light, red outline, backlighting:1.4), holding, holding object, tool, screwdriver, pen, pencil, cup, phone, papers, book, briefcase, bag, clipboard",
+  "source": "art/production/PC/mori/mori-713.png",
+  "swapped": [
+   "holding a small cup of green tea in both hands",
+   "arms relaxed at his sides, empty hands"
+  ],
+  "settings": "rdbtAnima, euler_ancestral normal, 30 steps, CFG 5",
+  "method": "masked img2img at denoise 1.0 (DifferentialDiffusion, mask blur 12) below y 800 of the source, pasted back through the same line with an 8 px blur",
+  "face_box": [
+   341,
+   151,
+   569,
+   426
+  ],
+  "game_box": [
+   -36.1,
+   -122.4,
+   941.2,
+   1134.8
+  ]
+ },
+ "hamada-arm-1": {
+  "who": "hamada",
+  "job": "arm",
+  "seed": 1,
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, Mr. Hamada, a 54-year-old Japanese salaryman from accounts: thin with narrow shoulders, a tired middle-aged face, a receding hairline, short black hair going grey at the temples, tired eyes with dark circles, a rumpled navy suit with a crooked tie, arms relaxed at his sides, empty hands, apologetic worried smile, waist-up portrait facing the viewer at a slight angle, (the whole head inside the frame with empty space above the hair:1.2), plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, fat, obese, plump, (rim light, red rim light, red outline, backlighting:1.4), holding, holding object, tool, screwdriver, pen, pencil, cup, phone, papers, book, briefcase, bag, clipboard",
+  "source": "art/production/PC/hamada/hamada-721.png",
+  "swapped": [
+   "clutching a worn black briefcase to his chest with both arms",
+   "arms relaxed at his sides, empty hands"
+  ],
+  "settings": "rdbtAnima, euler_ancestral normal, 30 steps, CFG 5",
+  "method": "masked img2img at denoise 1.0 (DifferentialDiffusion, mask blur 12) below y 520 of the source, pasted back through the same line with an 8 px blur",
+  "face_box": [
+   349,
+   111,
+   559,
+   386
+  ],
+  "game_box": [
+   -37.1,
+   -162.4,
+   940.2,
+   1094.8
+  ]
+ },
+ "hamada-arm-2": {
+  "who": "hamada",
+  "job": "arm",
+  "seed": 2,
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, Mr. Hamada, a 54-year-old Japanese salaryman from accounts: thin with narrow shoulders, a tired middle-aged face, a receding hairline, short black hair going grey at the temples, tired eyes with dark circles, a rumpled navy suit with a crooked tie, arms relaxed at his sides, empty hands, apologetic worried smile, waist-up portrait facing the viewer at a slight angle, (the whole head inside the frame with empty space above the hair:1.2), plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, fat, obese, plump, (rim light, red rim light, red outline, backlighting:1.4), holding, holding object, tool, screwdriver, pen, pencil, cup, phone, papers, book, briefcase, bag, clipboard",
+  "source": "art/production/PC/hamada/hamada-721.png",
+  "swapped": [
+   "clutching a worn black briefcase to his chest with both arms",
+   "arms relaxed at his sides, empty hands"
+  ],
+  "settings": "rdbtAnima, euler_ancestral normal, 30 steps, CFG 5",
+  "method": "masked img2img at denoise 1.0 (DifferentialDiffusion, mask blur 12) below y 520 of the source, pasted back through the same line with an 8 px blur",
+  "face_box": [
+   348,
+   111,
+   560,
+   385
+  ],
+  "game_box": [
+   -35.3,
+   -161.4,
+   938.4,
+   1091.2
+  ]
+ },
+ "guard-arm-1": {
+  "who": "guard",
+  "job": "arm",
+  "seed": 1,
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, Ishibashi, a 64-year-old company gate guard and retired police officer: small and wiry, completely bald head, a thin white moustache, reading glasses with clear lenses pushed up on his forehead, navy security uniform and white gloves, arms relaxed at his sides, empty hands, suspicious narrowed eyes, waist-up portrait facing the viewer at a slight angle, plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, (rim light, red rim light, red outline, backlighting:1.4), holding, holding object, tool, screwdriver, pen, pencil, cup, phone, papers, book, briefcase, bag, clipboard",
+  "source": "art/production/RF/ishibashi.png",
+  "swapped": [
+   "holding a clipboard with a visitor log in his right hand",
+   "arms relaxed at his sides, empty hands"
+  ],
+  "settings": "rdbtAnima, euler_ancestral normal, 30 steps, CFG 5",
+  "method": "masked img2img at denoise 1.0 (DifferentialDiffusion, mask blur 12) below y 610 of the source, pasted back through the same line with an 8 px blur",
+  "face_box": [
+   424,
+   274,
+   633,
+   507
+  ],
+  "game_box": [
+   112.4,
+   42.4,
+   940.4,
+   1107.5
+  ]
+ },
+ "guard-arm-2": {
+  "who": "guard",
+  "job": "arm",
+  "seed": 2,
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, Ishibashi, a 64-year-old company gate guard and retired police officer: small and wiry, completely bald head, a thin white moustache, reading glasses with clear lenses pushed up on his forehead, navy security uniform and white gloves, arms relaxed at his sides, empty hands, suspicious narrowed eyes, waist-up portrait facing the viewer at a slight angle, plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, (rim light, red rim light, red outline, backlighting:1.4), holding, holding object, tool, screwdriver, pen, pencil, cup, phone, papers, book, briefcase, bag, clipboard",
+  "source": "art/production/RF/ishibashi.png",
+  "swapped": [
+   "holding a clipboard with a visitor log in his right hand",
+   "arms relaxed at his sides, empty hands"
+  ],
+  "settings": "rdbtAnima, euler_ancestral normal, 30 steps, CFG 5",
+  "method": "masked img2img at denoise 1.0 (DifferentialDiffusion, mask blur 12) below y 610 of the source, pasted back through the same line with an 8 px blur",
+  "face_box": [
+   423,
+   274,
+   633,
+   506
+  ],
+  "game_box": [
+   113.7,
+   43.4,
+   938.1,
+   1104.0
+  ]
+ },
+ "guard-arm-3": {
+  "who": "guard",
+  "job": "arm",
+  "seed": 3,
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, Ishibashi, a 64-year-old company gate guard and retired police officer: small and wiry, completely bald head, a thin white moustache, reading glasses with clear lenses pushed up on his forehead, navy security uniform and white gloves, arms relaxed at his sides, empty hands, suspicious narrowed eyes, waist-up portrait facing the viewer at a slight angle, plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, (rim light, red rim light, red outline, backlighting:1.4), holding, holding object, tool, screwdriver, pen, pencil, cup, phone, papers, book, briefcase, bag, clipboard",
+  "source": "art/production/RF/ishibashi.png",
+  "swapped": [
+   "holding a clipboard with a visitor log in his right hand",
+   "arms relaxed at his sides, empty hands"
+  ],
+  "settings": "rdbtAnima, euler_ancestral normal, 30 steps, CFG 5",
+  "method": "masked img2img at denoise 1.0 (DifferentialDiffusion, mask blur 12) below y 610 of the source, pasted back through the same line with an 8 px blur",
+  "face_box": [
+   423,
+   274,
+   633,
+   507
+  ],
+  "game_box": [
+   111.9,
+   42.4,
+   939.9,
+   1107.5
+  ]
+ },
+ "guard-arm-4": {
+  "who": "guard",
+  "job": "arm",
+  "seed": 4,
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, Ishibashi, a 64-year-old company gate guard and retired police officer: small and wiry, completely bald head, a thin white moustache, reading glasses with clear lenses pushed up on his forehead, navy security uniform and white gloves, arms relaxed at his sides, empty hands, suspicious narrowed eyes, waist-up portrait facing the viewer at a slight angle, plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, (rim light, red rim light, red outline, backlighting:1.4), holding, holding object, tool, screwdriver, pen, pencil, cup, phone, papers, book, briefcase, bag, clipboard",
+  "source": "art/production/RF/ishibashi.png",
+  "swapped": [
+   "holding a clipboard with a visitor log in his right hand",
+   "arms relaxed at his sides, empty hands"
+  ],
+  "settings": "rdbtAnima, euler_ancestral normal, 30 steps, CFG 5",
+  "method": "masked img2img at denoise 1.0 (DifferentialDiffusion, mask blur 12) below y 610 of the source, pasted back through the same line with an 8 px blur",
+  "face_box": [
+   423,
+   275,
+   632,
+   505
+  ],
+  "game_box": [
+   116.8,
+   46.4,
+   934.1,
+   1097.8
+  ]
+ },
+ "guard-arm-5": {
+  "who": "guard",
+  "job": "arm",
+  "seed": 5,
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, Ishibashi, a 64-year-old company gate guard and retired police officer: small and wiry, completely bald head, a thin white moustache, reading glasses with clear lenses pushed up on his forehead, navy security uniform and white gloves, arms relaxed at his sides, empty hands, suspicious narrowed eyes, waist-up portrait facing the viewer at a slight angle, plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, (rim light, red rim light, red outline, backlighting:1.4), holding, holding object, tool, screwdriver, pen, pencil, cup, phone, papers, book, briefcase, bag, clipboard",
+  "source": "art/production/RF/ishibashi.png",
+  "swapped": [
+   "holding a clipboard with a visitor log in his right hand",
+   "arms relaxed at his sides, empty hands"
+  ],
+  "settings": "rdbtAnima, euler_ancestral normal, 30 steps, CFG 5",
+  "method": "masked img2img at denoise 1.0 (DifferentialDiffusion, mask blur 12) below y 610 of the source, pasted back through the same line with an 8 px blur",
+  "face_box": [
+   423,
+   274,
+   633,
+   506
+  ],
+  "game_box": [
+   113.7,
+   43.4,
+   938.1,
+   1104.0
+  ]
+ },
+ "guard-arm-6": {
+  "who": "guard",
+  "job": "arm",
+  "seed": 6,
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, Ishibashi, a 64-year-old company gate guard and retired police officer: small and wiry, completely bald head, a thin white moustache, reading glasses with clear lenses pushed up on his forehead, navy security uniform and white gloves, arms relaxed at his sides, empty hands, suspicious narrowed eyes, waist-up portrait facing the viewer at a slight angle, plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, (rim light, red rim light, red outline, backlighting:1.4), holding, holding object, tool, screwdriver, pen, pencil, cup, phone, papers, book, briefcase, bag, clipboard",
+  "source": "art/production/RF/ishibashi.png",
+  "swapped": [
+   "holding a clipboard with a visitor log in his right hand",
+   "arms relaxed at his sides, empty hands"
+  ],
+  "settings": "rdbtAnima, euler_ancestral normal, 30 steps, CFG 5",
+  "method": "masked img2img at denoise 1.0 (DifferentialDiffusion, mask blur 12) below y 610 of the source, pasted back through the same line with an 8 px blur",
+  "face_box": [
+   423,
+   274,
+   633,
+   507
+  ],
+  "game_box": [
+   111.9,
+   42.4,
+   939.9,
+   1107.5
+  ]
+ },
+ "guard-fig-1": {
+  "who": "guard",
+  "job": "fig",
+  "seed": 1,
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, Ishibashi, a 64-year-old company gate guard and retired police officer: small and wiry, completely bald head, a thin white moustache, reading glasses with clear lenses pushed up on his forehead, navy security uniform and white gloves, arms relaxed at his sides, empty hands, suspicious narrowed eyes, waist-up portrait facing the viewer at a slight angle, plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, (rim light, red rim light, red outline, backlighting:1.4), holding, holding object, tool, screwdriver, pen, pencil, cup, phone, papers, book, briefcase, bag, clipboard",
+  "source": "art/production/RF/ishibashi.png",
+  "swapped": [
+   "holding a clipboard with a visitor log in his right hand",
+   "arms relaxed at his sides, empty hands"
+  ],
+  "settings": "rdbtAnima, euler_ancestral normal, 30 steps, CFG 5",
+  "method": "masked img2img at denoise 1.0 (DifferentialDiffusion, mask blur 12) below y 610 of the source, pasted back through the same line with an 8 px blur, mask cut to the source figure grown by 50 px",
+  "face_box": [
+   423,
+   274,
+   633,
+   507
+  ],
+  "game_box": [
+   111.9,
+   42.4,
+   939.9,
+   1107.5
+  ]
+ },
+ "guard-fig-2": {
+  "who": "guard",
+  "job": "fig",
+  "seed": 2,
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, Ishibashi, a 64-year-old company gate guard and retired police officer: small and wiry, completely bald head, a thin white moustache, reading glasses with clear lenses pushed up on his forehead, navy security uniform and white gloves, arms relaxed at his sides, empty hands, suspicious narrowed eyes, waist-up portrait facing the viewer at a slight angle, plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, (rim light, red rim light, red outline, backlighting:1.4), holding, holding object, tool, screwdriver, pen, pencil, cup, phone, papers, book, briefcase, bag, clipboard",
+  "source": "art/production/RF/ishibashi.png",
+  "swapped": [
+   "holding a clipboard with a visitor log in his right hand",
+   "arms relaxed at his sides, empty hands"
+  ],
+  "settings": "rdbtAnima, euler_ancestral normal, 30 steps, CFG 5",
+  "method": "masked img2img at denoise 1.0 (DifferentialDiffusion, mask blur 12) below y 610 of the source, pasted back through the same line with an 8 px blur, mask cut to the source figure grown by 50 px",
+  "face_box": [
+   424,
+   274,
+   633,
+   506
+  ],
+  "game_box": [
+   114.2,
+   43.4,
+   938.6,
+   1104.0
+  ]
+ },
+ "guard-fig-3": {
+  "who": "guard",
+  "job": "fig",
+  "seed": 3,
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, Ishibashi, a 64-year-old company gate guard and retired police officer: small and wiry, completely bald head, a thin white moustache, reading glasses with clear lenses pushed up on his forehead, navy security uniform and white gloves, arms relaxed at his sides, empty hands, suspicious narrowed eyes, waist-up portrait facing the viewer at a slight angle, plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, (rim light, red rim light, red outline, backlighting:1.4), holding, holding object, tool, screwdriver, pen, pencil, cup, phone, papers, book, briefcase, bag, clipboard",
+  "source": "art/production/RF/ishibashi.png",
+  "swapped": [
+   "holding a clipboard with a visitor log in his right hand",
+   "arms relaxed at his sides, empty hands"
+  ],
+  "settings": "rdbtAnima, euler_ancestral normal, 30 steps, CFG 5",
+  "method": "masked img2img at denoise 1.0 (DifferentialDiffusion, mask blur 12) below y 610 of the source, pasted back through the same line with an 8 px blur, mask cut to the source figure grown by 50 px",
+  "face_box": [
+   424,
+   274,
+   633,
+   506
+  ],
+  "game_box": [
+   114.2,
+   43.4,
+   938.6,
+   1104.0
+  ]
+ },
+ "guard-fig-4": {
+  "who": "guard",
+  "job": "fig",
+  "seed": 4,
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, Ishibashi, a 64-year-old company gate guard and retired police officer: small and wiry, completely bald head, a thin white moustache, reading glasses with clear lenses pushed up on his forehead, navy security uniform and white gloves, arms relaxed at his sides, empty hands, suspicious narrowed eyes, waist-up portrait facing the viewer at a slight angle, plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, (rim light, red rim light, red outline, backlighting:1.4), holding, holding object, tool, screwdriver, pen, pencil, cup, phone, papers, book, briefcase, bag, clipboard",
+  "source": "art/production/RF/ishibashi.png",
+  "swapped": [
+   "holding a clipboard with a visitor log in his right hand",
+   "arms relaxed at his sides, empty hands"
+  ],
+  "settings": "rdbtAnima, euler_ancestral normal, 30 steps, CFG 5",
+  "method": "masked img2img at denoise 1.0 (DifferentialDiffusion, mask blur 12) below y 610 of the source, pasted back through the same line with an 8 px blur, mask cut to the source figure grown by 50 px",
+  "face_box": [
+   423,
+   274,
+   633,
+   506
+  ],
+  "game_box": [
+   113.7,
+   43.4,
+   938.1,
+   1104.0
+  ]
+ },
+ "guard-fig-5": {
+  "who": "guard",
+  "job": "fig",
+  "seed": 5,
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, Ishibashi, a 64-year-old company gate guard and retired police officer: small and wiry, completely bald head, a thin white moustache, reading glasses with clear lenses pushed up on his forehead, navy security uniform and white gloves, arms relaxed at his sides, empty hands, suspicious narrowed eyes, waist-up portrait facing the viewer at a slight angle, plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, (rim light, red rim light, red outline, backlighting:1.4), holding, holding object, tool, screwdriver, pen, pencil, cup, phone, papers, book, briefcase, bag, clipboard",
+  "source": "art/production/RF/ishibashi.png",
+  "swapped": [
+   "holding a clipboard with a visitor log in his right hand",
+   "arms relaxed at his sides, empty hands"
+  ],
+  "settings": "rdbtAnima, euler_ancestral normal, 30 steps, CFG 5",
+  "method": "masked img2img at denoise 1.0 (DifferentialDiffusion, mask blur 12) below y 610 of the source, pasted back through the same line with an 8 px blur, mask cut to the source figure grown by 50 px",
+  "face_box": [
+   424,
+   274,
+   633,
+   507
+  ],
+  "game_box": [
+   112.4,
+   42.4,
+   940.4,
+   1107.5
+  ]
+ },
+ "guard-fig-6": {
+  "who": "guard",
+  "job": "fig",
+  "seed": 6,
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, Ishibashi, a 64-year-old company gate guard and retired police officer: small and wiry, completely bald head, a thin white moustache, reading glasses with clear lenses pushed up on his forehead, navy security uniform and white gloves, arms relaxed at his sides, empty hands, suspicious narrowed eyes, waist-up portrait facing the viewer at a slight angle, plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, (rim light, red rim light, red outline, backlighting:1.4), holding, holding object, tool, screwdriver, pen, pencil, cup, phone, papers, book, briefcase, bag, clipboard",
+  "source": "art/production/RF/ishibashi.png",
+  "swapped": [
+   "holding a clipboard with a visitor log in his right hand",
+   "arms relaxed at his sides, empty hands"
+  ],
+  "settings": "rdbtAnima, euler_ancestral normal, 30 steps, CFG 5",
+  "method": "masked img2img at denoise 1.0 (DifferentialDiffusion, mask blur 12) below y 610 of the source, pasted back through the same line with an 8 px blur, mask cut to the source figure grown by 50 px",
+  "face_box": [
+   424,
+   274,
+   633,
+   508
+  ],
+  "game_box": [
+   110.6,
+   41.4,
+   942.2,
+   1111.1
+  ]
+ }
+}

@@ -1,0 +1,404 @@
+{
+ "character": "kuroda",
+ "ref": "game3d/assets/portraits/kuroda-neutral.webp",
+ "face_box_game": [
+  597,
+  768,
+  [
+   240,
+   154,
+   364,
+   313
+  ]
+ ],
+ "ref_face_detected": [
+  240,
+  154,
+  364,
+  313
+ ],
+ "thresholds": {
+  "redrim": [
+   0.02,
+   0.08
+  ],
+  "glasses_cover": [
+   0.87,
+   0.85
+  ],
+  "glasses_worst": [
+   0.7,
+   0.5
+  ],
+  "glasses_dE": [
+   8,
+   15
+  ],
+  "matte_frame": [
+   0.05,
+   0.12
+  ],
+  "matte_holes": [
+   0,
+   3
+  ],
+  "headroom": [
+   0.03,
+   0.01
+  ],
+  "zoom": [
+   0.04,
+   9
+  ],
+  "top": [
+   0.01,
+   9
+  ],
+  "eyes": [
+   0.06,
+   0.12
+  ],
+  "ccip": [
+   0.05,
+   0.09
+  ]
+ },
+ "images": [
+  {
+   "path": "art/production/PC/npc-base-1/hamada-new-721.png",
+   "kind": "render",
+   "size": [
+    896,
+    1152
+   ],
+   "face": [
+    354,
+    110,
+    545,
+    356
+   ],
+   "eyes": [
+    [
+     411.0,
+     196.5
+    ],
+    [
+     488.0,
+     195.0
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0015
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kuroda"
+   },
+   "framing": {
+    "headroom": 0.031,
+    "zoom": 0.97,
+    "top": 0.108,
+    "bottom_short": 0.0,
+    "hair_top_game": 106,
+    "hair_top_ref": 107,
+    "crop": [
+     -17.7,
+     -128.3,
+     905.9,
+     1060.0
+    ],
+    "eyes": 0.031,
+    "tilt": -0.0,
+    "status": "warn"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.049,
+    "ssim": 0.352
+   },
+   "status": "warn"
+  },
+  {
+   "path": "art/production/PC/npc-base-1/hamada-new-741.png",
+   "kind": "render",
+   "size": [
+    896,
+    1152
+   ],
+   "face": [
+    364,
+    123,
+    542,
+    349
+   ],
+   "eyes": [
+    [
+     418.5,
+     207.0
+    ],
+    [
+     488.0,
+     206.0
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0024
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kuroda"
+   },
+   "framing": {
+    "headroom": 0.043,
+    "zoom": 1.055,
+    "top": 0.088,
+    "bottom_short": 0.0,
+    "hair_top_game": 102,
+    "hair_top_ref": 107,
+    "crop": [
+     23.7,
+     -95.9,
+     872.3,
+     995.7
+    ],
+    "eyes": 0.052,
+    "tilt": 0.3,
+    "status": "warn"
+   },
+   "drift": {
+    "status": "warn",
+    "ccip": 0.051,
+    "ssim": 0.338
+   },
+   "status": "warn"
+  },
+  {
+   "path": "art/production/PC/npc-base-1/hamada-new-742.png",
+   "kind": "render",
+   "size": [
+    896,
+    1152
+   ],
+   "face": [
+    339,
+    101,
+    563,
+    396
+   ],
+   "eyes": [
+    [
+     407.0,
+     202.0
+    ],
+    [
+     499.5,
+     200.0
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kuroda"
+   },
+   "framing": {
+    "headroom": 0.014,
+    "zoom": 0.808,
+    "top": 0.13,
+    "bottom_short": 0.062,
+    "hair_top_game": 108,
+    "hair_top_ref": 107,
+    "crop": [
+     -109.3,
+     -184.7,
+     998.3,
+     1240.2
+    ],
+    "eyes": 0.021,
+    "tilt": -0.1,
+    "status": "warn"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.047,
+    "ssim": 0.347
+   },
+   "status": "warn"
+  },
+  {
+   "path": "art/production/PC/npc-base-1/hamada-new-743.png",
+   "kind": "render",
+   "size": [
+    896,
+    1152
+   ],
+   "face": [
+    351,
+    107,
+    557,
+    382
+   ],
+   "eyes": [
+    [
+     411.0,
+     207.0
+    ],
+    [
+     496.0,
+     205.0
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kuroda"
+   },
+   "framing": {
+    "headroom": 0.022,
+    "zoom": 0.867,
+    "top": 0.12,
+    "bottom_short": 0.013,
+    "hair_top_game": 106,
+    "hair_top_ref": 107,
+    "crop": [
+     -68.3,
+     -159.4,
+     964.2,
+     1168.9
+    ],
+    "eyes": 0.042,
+    "tilt": -0.2,
+    "status": "warn"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.032,
+    "ssim": 0.338
+   },
+   "status": "warn"
+  },
+  {
+   "path": "art/production/PC/npc-base-1/hamada-arm-1.png",
+   "kind": "render",
+   "size": [
+    896,
+    1152
+   ],
+   "face": [
+    349,
+    111,
+    559,
+    386
+   ],
+   "eyes": [
+    [
+     409.0,
+     200.5
+    ],
+    [
+     498.0,
+     199.0
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.005
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kuroda"
+   },
+   "framing": {
+    "headroom": 0.032,
+    "zoom": 0.867,
+    "top": 0.117,
+    "bottom_short": 0.016,
+    "hair_top_game": 111,
+    "hair_top_ref": 107,
+    "crop": [
+     -68.3,
+     -155.4,
+     964.2,
+     1172.9
+    ],
+    "eyes": 0.005,
+    "tilt": 0.1,
+    "status": "warn"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.008,
+    "ssim": 0.552
+   },
+   "status": "warn"
+  },
+  {
+   "path": "art/production/PC/npc-base-1/hamada-arm-2.png",
+   "kind": "render",
+   "size": [
+    896,
+    1152
+   ],
+   "face": [
+    348,
+    111,
+    560,
+    385
+   ],
+   "eyes": [
+    [
+     409.0,
+     200.5
+    ],
+    [
+     498.0,
+     199.0
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0039
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kuroda"
+   },
+   "framing": {
+    "headroom": 0.032,
+    "zoom": 0.87,
+    "top": 0.117,
+    "bottom_short": 0.013,
+    "hair_top_game": 111,
+    "hair_top_ref": 107,
+    "crop": [
+     -66.4,
+     -154.4,
+     962.4,
+     1169.1
+    ],
+    "eyes": 0.006,
+    "tilt": 0.1,
+    "status": "warn"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.008,
+    "ssim": 0.589
+   },
+   "status": "warn"
+  }
+ ]
+}
