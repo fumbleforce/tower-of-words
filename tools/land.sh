@@ -15,6 +15,9 @@
 # - Afterwards the worktree is removed and the branch deleted (--keep leaves both). If the worktree holds new real
 #   files under the asset roots (git-ignored, so not in the commit), it is kept and they are listed.
 # - The day test is not run here: if game3d/ changed it must already have passed in the worktree (fast-qa skill).
+#   What is run, once main has moved and only if game3d/ changed, is the boot check (tools/check/head-boot.mjs, a few
+#   seconds): the landed commit's title screen at both sizes. If it fails, land.sh says so loudly, exits 1 and keeps the
+#   worktree and branch; main keeps the landed commits (it moved in one fast-forward, never part-way).
 set -uo pipefail
 
 LOCK=/tmp/claude-1000/land.lock
@@ -129,6 +132,20 @@ done
 [[ "$landed" == "$base" ]] || say "main is now $(g rev-parse --short main) ($count commit(s) from $branch)"
 if g diff --quiet "$base" "$landed" -- game3d/; then :; else
   say "game3d/ changed: the day test at both sizes should already have passed in the worktree (fast-qa skill)"
+  # Does what main now holds boot? Main has already moved in one step, so a failure can't leave it half-landed; it
+  # stops the land loudly instead, keeping the worktree and branch for the fix.
+  booter="$wt/tools/check/head-boot.mjs"; [[ -f "$booter" ]] || booter="$main/tools/check/head-boot.mjs"
+  node "$booter" "$landed" --record > "$LAND_LOG.boot" 2>&1; boot=$?
+  sed 's/^/land: /' "$LAND_LOG.boot"
+  if (( boot == 75 )); then
+    say "WARNING: the boot check was deferred (machine or GPU busy), so main $(g rev-parse --short "$landed") is unchecked; run: node tools/check/head-boot.mjs $(g rev-parse --short "$landed")"
+  elif (( boot != 0 )); then
+    echo "land: ============================================================" >&2
+    echo "land: MAIN DOES NOT BOOT. $branch landed as $(g rev-parse --short "$landed") and the title screen fails (above)." >&2
+    echo "land: main holds the whole branch; fix it now in $wt (kept, with its branch) and land the fix." >&2
+    echo "land: ============================================================" >&2
+    exit 1
+  fi
 fi
 
 # ---------------------------------------------------------------- tidy up

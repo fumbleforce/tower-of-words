@@ -1,0 +1,70 @@
+# Secret-scan rules for tools/check/secrets.sh (pre-push hook and deploy-pages.sh), on top of gitleaks' defaults,
+# which already cover GitHub tokens, OpenAI and Anthropic keys, Cloudflare keys and private key blocks.
+title = "amakawa"
+
+[extend]
+useDefault = true
+
+[[rules]]
+id = "r2-access-key-id"
+description = "Cloudflare R2 (S3) access key id"
+regex = '''(?i)(?:r2|aws|s3)[_-]?access[_-]?key[_-]?id["']?\s*[:=]\s*["']?([a-f0-9]{32})\b'''
+keywords = ["access_key_id", "access-key-id", "accesskeyid"]
+
+[[rules]]
+id = "r2-secret-access-key"
+description = "Cloudflare R2 (S3) secret access key"
+regex = '''(?i)(?:r2|aws|s3)[_-]?secret[_-]?access[_-]?key["']?\s*[:=]\s*["']?([a-f0-9]{64})\b'''
+keywords = ["secret_access_key", "secret-access-key", "secretaccesskey"]
+
+[[rules]]
+id = "cloudflare-api-token"
+description = "Cloudflare or R2 API token"
+regex = '''(?i)(?:r2|cf|cloudflare)[_-]?(?:api[_-]?)?token["']?\s*[:=]\s*["']?([A-Za-z0-9_-]{40})\b'''
+keywords = ["token"]
+
+[[rules]]
+id = "civitai-api-key"
+description = "Civitai API key"
+regex = '''(?i)civitai[\w.-]{0,40}?(?:key|token)?["']?\s*[:=]\s*["']?([a-f0-9]{32})\b'''
+keywords = ["civitai"]
+
+[[rules]]
+id = "civitai-download-token"
+description = "Civitai key in a download URL"
+regex = '''civitai\.com/[^\s"']*[?&]token=([a-f0-9]{32})'''
+keywords = ["civitai"]
+
+[[rules]]
+id = "openrouter-api-key"
+description = "OpenRouter API key"
+regex = '''\b(sk-or-v1-[a-f0-9]{64})\b'''
+keywords = ["sk-or-v1-"]
+
+[[rules]]
+id = "replicate-api-token"
+description = "Replicate API token"
+regex = '''\b(r8_[A-Za-z0-9]{37})\b'''
+keywords = ["r8_"]
+
+[[rules]]
+id = "meshy-api-key"
+description = "Meshy API key"
+regex = '''\b(msy_[A-Za-z0-9]{24,})\b'''
+keywords = ["msy_"]
+
+[[rules]]
+id = "env-assignment"
+description = "A KEY=value line with a secret-looking value, as in a .env file"
+regex = '''(?m)^\s*(?:export\s+)?[A-Z][A-Z0-9_]*(?:KEY|TOKEN|SECRET|PASSWORD)[A-Z0-9_]*\s*=\s*["']?([A-Za-z0-9_+/=.-]{20,})["']?\s*$'''
+entropy = 3.5
+keywords = ["key", "token", "secret", "password"]
+
+[[rules]]
+id = "dotenv-file"
+description = "A .env file (only .env.example and .env.sample may be committed)"
+path = '''(?:^|/)\.env(?:\.[\w-]+)?$'''
+
+[allowlist]
+description = "Example env files and vendored third-party code (minified libraries trip the generic rule)"
+paths = ['''(?:^|/)\.env\.(?:example|sample)$''', '''(?:^|/)node_modules/''', '''(?:^|/)game3d/vendor/''']

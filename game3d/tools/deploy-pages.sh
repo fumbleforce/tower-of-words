@@ -68,11 +68,15 @@ for x in $EXTRA; do git archive HEAD "$x" | tar -x -C "$STAGE"; done
 touch "$STAGE/.nojekyll"
 [ -f "$STAGE/index.html" ] || printf '<!doctype html><meta charset="utf-8"><meta http-equiv="refresh" content="0; url=game3d/"><title>Amakawa</title><a href="game3d/">Amakawa</a>\n' > "$STAGE/index.html"
 
-# 3. what goes up
+# 3. no secrets in anything that goes up (tools/check/secrets.sh; the pre-push hook scans the commit again)
+bash "$ROOT/tools/check/secrets.sh" dir "$STAGE" >"$STAGE.scan" 2>&1 || { cat "$STAGE.scan" >&2; rm -f "$STAGE.scan"; echo "deploy: REFUSED: the secret scan of the site failed; nothing was pushed" >&2; exit 1; }
+tail -1 "$STAGE.scan"; rm -f "$STAGE.scan"
+
+# 4. what goes up
 echo "site from $REV: $(find "$STAGE" -type f | wc -l) files, $(du -sh "$STAGE" | cut -f1)"
 du -sh "$G"/* 2>/dev/null | sort -h | tail -8 | sed 's#'"$STAGE"'/##'
 
-# 4. one orphan commit of exactly that tree, built with a private index (the working tree and main are untouched)
+# 5. one orphan commit of exactly that tree, built with a private index (the working tree and main are untouched)
 export GIT_INDEX_FILE="$STAGE.idx"
 git --work-tree="$STAGE" add -A -f .
 TREE=$(git write-tree)
