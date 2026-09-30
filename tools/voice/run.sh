@@ -4,7 +4,7 @@
 #   2. take the GPU lock (waits while someone else holds it; GUIDE: GPU lock)
 #   3. three takes per line (gen_takes.py), checked (check_takes.py); up to two retry rounds with new seeds for lines
 #      with no passing take
-#   4. export the best passing take (export.py); edge-tts for lines still failing (edge.py)
+#   4. export the best passing take (export.py); edge-tts for lines still failing only with EDGE_FALLBACK=1 (edge.py), else exit 1
 #   5. re-time known words in new overheard clips (spans.py), release the lock, run voice-manifest --check
 # Usage: sh tools/voice/run.sh [--no-manifest] [--dry]   (--dry: list the lines that need a clip and stop)
 # Env: LOCK_ME (lock owner name, default game3d-voices), GAME3D_VOICE_WORK (takes and metrics, default ~/ai/game3d-voice),
@@ -55,8 +55,14 @@ for seeds in 404,505,606 707,808,909 1010,1111,1212; do
 done
 $BENCH_PY "$HERE/export.py" 2>&1 | grep -v -i warn | tee -a "$LOG"
 if grep -q '"fallback": \[\]' "$WORK/report.json"; then :; else
-  say "no local take passed for some lines; edge-tts fallback:"
-  $EDGE_PY "$HERE/edge.py" 2>&1 | tee -a "$LOG"
+  # edge-tts sounds nothing like the cast: only fall back when asked (EDGE_FALLBACK=1), otherwise stop loudly
+  if [ "${EDGE_FALLBACK:-0}" = 1 ]; then
+    say "no local take passed for some lines; edge-tts fallback (EDGE_FALLBACK=1):"
+    $EDGE_PY "$HERE/edge.py" 2>&1 | tee -a "$LOG"
+  else
+    say "FAIL: no local take passed for some lines (see $WORK/report.json); not using edge-tts. Fix the refs or rerun; EDGE_FALLBACK=1 to allow it."
+    exit 1
+  fi
 fi
 if [ "$OVERHEARD" = True ]; then
   DEV=cuda $BENCH_PY "$HERE/spans.py" 2>&1 | grep -E "^(found|MISSING)|Error|Traceback" | tee -a "$LOG"
