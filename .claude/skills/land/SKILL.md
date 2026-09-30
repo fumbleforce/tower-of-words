@@ -9,7 +9,7 @@ Each writing agent works in its own git worktree on its own branch, and one scri
 
 ## Start
 
-- Claude Code agents: the Agent tool's `isolation: "worktree"` makes `.claude/worktrees/<name>` on a new branch `worktree-<name>` from local main (`worktree.baseRef: head` in .claude/settings.json), with node_modules linked and .env copied. First thing in it, run `tools/worktree.sh setup`: it links the git-ignored asset files (Meshy originals, music, and after the asset move every binary) from the main checkout. It's safe to run twice.
+- Claude Code agents: the Agent tool's `isolation: "worktree"` makes `.claude/worktrees/<name>` on a new branch `worktree-<name>` from local main (`worktree.baseRef: head` in .claude/settings.json), with node_modules linked and .env copied. First thing in it, run `tools/worktree.sh setup`: it links every locked asset (tools/assets/assets.lock.json: the binaries and the creator's JSON) and the other git-ignored files under the asset roots (Meshy originals, music, voice models) from the main checkout, but never an unpushed asset there (another task's work in progress). It's safe to run twice. Links to locked files that git doesn't ignore show as untracked in `git status`; don't add them, land.sh passes over them.
 - Codex, or by hand: `tools/worktree.sh new <name>` makes `.claude/worktrees/<name>` on branch `wt/<name>` from main and runs setup.
 - The asset links point at the main checkout's files. To change an asset, delete its link and write a new file; never write through the link.
 - Claude Code's Read tool may refuse a link that points outside the worktree; read the main checkout's path instead. Node, Python and the review server follow the links.

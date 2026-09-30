@@ -80,7 +80,12 @@ if [[ -z "$wt" ]]; then
   wt="$temp_wt"
 fi
 # __pycache__ folders are rebuilt by any Python run (npm run check makes some) and never belong in a commit.
-dirty=$(git -C "$wt" status --porcelain --untracked-files=normal | grep -v '^?? \(.*/\)\{0,1\}__pycache__/$')
+# Nor are tools/worktree.sh's links to the main checkout's copy of a locked file git doesn't ignore (creator JSON).
+dirty=$(git -C "$wt" status --porcelain --untracked-files=all | grep -v '^?? \(.*/\)\{0,1\}__pycache__/' \
+  | while IFS= read -r line; do
+      rel=${line#?? }
+      [[ "$line" == '?? '* && -L "$wt/$rel" && "$(readlink "$wt/$rel")" == "$main/$rel" ]] || printf '%s\n' "$line"
+    done)
 [[ -z "$dirty" ]] || refuse "$wt has uncommitted or untracked changes; commit them (your own files only) or remove them:
 $dirty"
 [[ ! -d "$(git -C "$wt" rev-parse --git-path rebase-merge)" && ! -d "$(git -C "$wt" rev-parse --git-path rebase-apply)" ]] \

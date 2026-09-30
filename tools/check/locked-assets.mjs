@@ -57,7 +57,8 @@ export function materializeLockedAssets(cwd, directory, { env = process.env } = 
   return copied;
 }
 
-// Refuse a commit while a used asset is not in the lock file or changed without a push (no network).
+// Refuse a commit that uses an asset not in the lock file or changed without a push (no network). Unpushed files
+// the commit does not use (another task's work in progress) are only noted: sync.py check --staged.
 // The sync check reads the working lock file, so it must be the one being committed.
 export function checkAssetSync(cwd, { env = process.env } = {}) {
   const working = fs.existsSync(path.join(cwd, LOCK)) ? fs.readFileSync(path.join(cwd, LOCK), 'utf8') : null;
@@ -67,7 +68,7 @@ export function checkAssetSync(cwd, { env = process.env } = {}) {
   if (working !== staged) throw new Error(`asset sync: ${LOCK} differs from the staged copy; stage it (git add ${LOCK}) or restore it`);
   if (working === null) return;
   try {
-    execFileSync('python3', ['tools/assets/sync.py', 'check', '--offline'],
+    execFileSync('python3', ['tools/assets/sync.py', 'check', '--offline', '--staged'],
       { cwd, env, encoding: 'utf8', timeout: 120000, stdio: ['ignore', 'pipe', 'pipe'] });
   } catch (error) {
     const lines = `${error.stdout || ''}${error.stderr || ''}`.trim().split('\n');
