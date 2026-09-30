@@ -24,6 +24,7 @@ legacy/island/node_modules/
 game3d/shots/fast/
 game3d/shots/routes/
 game3d/shots/words-menu/
+game3d/shots/prompts/
 
 # No binary is tracked anywhere (notes/asset-storage-proposal.md). Used assets sync with R2 through
 # tools/assets/sync.py and its lock file; everything else binary stays on this machine. The list is
