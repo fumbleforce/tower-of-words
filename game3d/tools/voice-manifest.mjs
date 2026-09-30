@@ -8,6 +8,8 @@ import { pathToFileURL } from 'node:url';
 const root = path.resolve(path.dirname(new URL(import.meta.url).pathname), '..');
 const { WORDS } = await import(pathToFileURL(path.join(root, 'js/lang.js')).href);
 const { heardKey, lineKey } = await import(pathToFileURL(path.join(root, 'tools/heardkey.mjs')).href);
+// every story file the game loads (the same list story-check and lang-audit use), so a new place is voiced too
+const { STORY_FILES } = await import(pathToFileURL(path.join(root, 'js/places/definitions.js')).href);
 const out = new Map();
 const PHONE = new Set();
 const resolve = (t) => t.replace(/\{(\w+)\}/g, (_, id) => (WORDS[id] ? WORDS[id].ja : id));
@@ -39,7 +41,7 @@ function walk(list) {
 for (const [id, w] of Object.entries(WORDS)) if (w.voice) out.set('word-' + id, { key: 'word-' + id, speaker: 'mio', text: w.ja + '。', lang: 'ja', overheard: false, words: [[id, w.ja]], clear: [], emo: 'slow', slow: true });
 // and Eric saying it (eric-<word>), for the words he says; a word only heard (外人) replays Mio's word clip instead
 for (const [id, w] of Object.entries(WORDS)) if (w.voice && w.voice !== 'word-' + id) out.set(w.voice, { key: w.voice, speaker: 'eric', text: w.ja + '。', lang: 'ja', overheard: false, words: [], clear: [] });
-for (const n of ['train', 'gate', 'office', 'transitions']) {
+for (const n of STORY_FILES) {
   const f = path.join(root, 'story', n + '.js'); if (!fs.existsSync(f)) continue;
   const st = (await import(pathToFileURL(f).href + '?' + Date.now())).default;
   for (const [id, sp] of Object.entries(st.speakers || {})) if (sp && sp.phone) PHONE.add(id);
