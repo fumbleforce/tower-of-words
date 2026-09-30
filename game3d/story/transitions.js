@@ -23,6 +23,7 @@ export default {
       { say: 'sales1', emo: 'low', text: '十時の会議、四番目の議題見た？', overheard: true },
       { say: 'sales2', emo: 'casual', text: 'B2のやつでしょ。コンサルタントが来るって。', overheard: true, clear: ['B2', { ja: 'コンサルタント', ro: 'konsarutanto', en: 'consultant' }] },
       { say: 'sales1', emo: 'surprised', text: 'え、今日から？', overheard: true },
+      { do: 'look', who: 'sales1', at: 'eric' },
       '> One of them glances at the card on your lanyard, and they stop talking.',
       { do: 'floor', to: '5' },
       { do: 'liftDoors', state: 'open' },

@@ -83,35 +83,34 @@ export default {
     // no goal and no text at load: the shell shows the controls line; the first goal comes from a passenger
     intro: [],
 
-    // the first passenger he talks to answers in Japanese and nods at the seat with the lunchbox
+    // the first passenger he talks to answers in Japanese and points at the seat with the lunchbox
     first_aoi: [
       { say: 'aoi', overheard: true, emo: 'bright', text: 'あ、ごめん、ちょっと待って。' },
+      { do: 'gesture', who: 'aoi', kind: 'point', to: 'seat_far_r' },
       { call: 'nod_seat' },
     ],
     first_bun: [
       { say: 'bun', overheard: true, emo: 'polite', text: 'あ、そこ、空いてますよ。' },
+      { do: 'gesture', who: 'bun', kind: 'point', to: 'seat_far_r' },
       { call: 'nod_seat' },
     ],
     first_youth: [
       { say: 'youth', overheard: true, emo: 'casual', text: 'え？あ、あそこ、どうぞ。' },
+      { do: 'gesture', who: 'youth', kind: 'point', to: 'seat_far_r' },
       { call: 'nod_seat' },
     ],
     first_music: [
       { say: 'music', overheard: true, emo: 'low', text: 'え？…あっち、空いてる。' },
+      { do: 'gesture', who: 'music', kind: 'point', to: 'seat_far_r' },
       { call: 'nod_seat' },
     ],
     first_stander: [
       { say: 'stander', overheard: true, emo: 'low', text: '…あそこ。' },
+      { do: 'gesture', who: 'stander', kind: 'point', to: 'seat_far_r' },
       { call: 'nod_seat' },
     ],
     nod_seat: [
       { inc: 'passengers' },
-      { if: 'passengers >= 3 && !seat_goal', then: [
-        { do: 'emote', who: 'mio', kind: '…' },
-        '> A nod toward the woman with the laptop.',
-      ], else: [
-        '> A nod at the seat with the lunchbox.',
-      ] },
       { set: 'seat_goal' },
       { do: 'goal', text: 'Sit by the lunchbox.', at: 'seat_far_r' },
     ],
