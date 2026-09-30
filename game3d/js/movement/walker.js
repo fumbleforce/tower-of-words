@@ -5,6 +5,12 @@ import { clearOf, reachableNear, pathAround } from './navigation.js';
 import * as THREE from 'three';
 import { sfx } from '../sfx.js';
 import { isPassing, slideStep, isHard, press } from './crowd.js';
+import { heldRun, doubleTap } from './run-input.js';
+
+// running (Jørgen, 2026-09-30: "Shift button to run, and caps lock to toggle running"): the walker's speed times RUN
+// while Shift is held, Caps Lock is on (run-input.js) or the tapped route was a double tap. gait.run tells the avatar
+// to show the run clip (makeGait in mio.js); scripted walks never set it.
+export const RUN = 1.8;
 
 export class SmoothWalker extends Walker {
   constructor(body, nav, opts = {}) {
@@ -12,21 +18,24 @@ export class SmoothWalker extends Walker {
     this.v = 0; // current ground speed (place units / s)
     this.vx = 0;
     this.vz = 0; // current direction of travel
-    this.gait = { v: 0, k: 0 };
+    this.gait = { v: 0, k: 0, run: false };
     this.preview = new PathPreview();
     this.others = opts.others || (() => bodies(window.__game).filter((b) => b.root !== this.body));
     this._yaw = undefined;
     this._facing = undefined;
     this._pos = null;
+    this.runTo = false; // this tapped route is run (a double tap on the floor); ends with the route
   }
   stop() {
     super.stop();
     this.preview.clear();
     this.aside = null;
+    this.runTo = false;
   }
   goTo(x, z, arrive) {
     this.preview.clear();
     this.aside = null;
+    this.runTo = false;
     super.goTo(x, z, arrive);
   }
   // someone walking (dx, dz) is held up by him: step aside, off their line, even during a scene (people do)
@@ -128,6 +137,7 @@ export class SmoothWalker extends Walker {
     }
     this.path = path;
     this.arrive = null;
+    this.runTo = doubleTap(); // a double tap on the floor runs there (the phone's run; a double click too)
     const end = path[path.length - 1];
     const moved = Math.hypot(end[0] - p.x, end[1] - p.z) > 0.25; // tapped inside furniture: goes to the nearest free spot
     this.preview.show(space, [from.x, from.z], path, y, moved ? [p.x, p.z] : null);
@@ -219,13 +229,15 @@ export class SmoothWalker extends Walker {
         }
       }
     }
+    if (!this.path) this.runTo = false;
+    const run = (heldRun() && !this.locked) || (this.runTo && !keys);
     const len = Math.hypot(mx, mz);
     // wanted speed: full, less when the facing is far off (turn first, don't moonwalk), braking into the end of a path
     let want = 0;
     if (len > 1e-4) {
       mx /= len;
       mz /= len;
-      want = this.speed;
+      want = this.speed * (run ? RUN : 1);
       const ang = Math.abs(angDiff(Math.atan2(mx, mz), this.facing));
       want *= THREE.MathUtils.clamp((Math.cos(ang) + 0.35) / 1.35, this.v > 0.4 ? 0.35 : 0.12, 1);
       if (!keys && remain < Infinity) want = Math.min(want, Math.sqrt(2 * BRAKE * 0.6 * remain) + 0.15);
@@ -301,6 +313,7 @@ export class SmoothWalker extends Walker {
     const sc = this.body.scale.x || 1;
     this.gait.v = this.moving ? this.v / sc : this.turning ? 0.3 : 0;
     this.gait.k = this.moving ? this.v / this.speed : 0;
+    this.gait.run = run; // the avatar may show the run clip only while he runs (makeGait)
     this.preview.update(dt, p);
     this._yaw = this.body.rotation.y;
     this._facing = this.facing;

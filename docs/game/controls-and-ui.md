@@ -1,6 +1,6 @@
 # Controls and UI
 
-The controls on desktop and phone (walk, use, Next, Say with Q, the mic, Give, pause) and when each is first taught; the HUD (goal box, clock, counts, markers, the Say button); the dialogue box; the panels and screens (title, pause and save slots, settings, day end, the build id); the camera; and how the phone and desktop layouts differ. Last checked against the game on 2026-09-29.
+The controls on desktop and phone (walk, run, use, Next, Say with Q, the mic, Give, pause) and when each is first taught; the HUD (goal box, clock, counts, markers, the Say button); the dialogue box; the panels and screens (title, pause and save slots, settings, day end, the build id); the camera; and how the phone and desktop layouts differ. Last checked against the game on 2026-09-29.
 
 Elsewhere: the rules every screen has to meet (no timers, one menu per target, separate phone and desktop layouts, the design language) are in GUIDE, Visual design (with "First screen"). What the systems behind the panels do is in [systems.md](systems.md).
 
@@ -9,6 +9,7 @@ Elsewhere: the rules every screen has to meet (no timers, one menu per target, s
 | Action | Desktop | Phone |
 |---|---|---|
 | Walk | W A S D or the arrow keys, or click the floor | Tap the floor |
+| Run | Hold Shift while walking, or turn Caps Lock on to run all the time (Shift runs even with it off) | Double-tap the floor (that walk is run) |
 | Use or talk to the target | E, Space or Enter, or click it or its marker | Tap it or its marker |
 | Next target, when several are in reach | Tab (the Next row in the action prompt) | The Next row |
 | Say a word | Q (can be rebound in Settings) | The Say button |
@@ -18,6 +19,8 @@ Elsewhere: the rules every screen has to meet (no timers, one menu per target, s
 | Pause, or close a panel | Esc, or the menu button top right | The menu button |
 | Send feedback (local builds only) | F8, or the note button top right | The note button |
 | Performance numbers on or off | F3, or Settings | Settings |
+
+Running (Jørgen, 2026-09-30: "I'd like to have Shift button to run, and caps lock to toggle running") works for the keys, a click on the floor and a click on something to use. Caps Lock is read from the keyboard itself, so running is on exactly when its light is. While a text field has focus (a word to type, the feedback note), Shift and Caps Lock only change the text; a word typed with Caps Lock on still counts. When the field closes with Caps Lock still on, he runs again. On the phone a double tap on the floor runs that one walk; a double click does the same on desktop. Walks the story makes (trips, scenes) keep their own pace. The walking hint on the train doesn't mention running.
 
 A click on something he can use walks him there and uses it. If a scene starts on the way (he walks into a room with its own moment), he carries on to it and uses it when the scene ends.
 
