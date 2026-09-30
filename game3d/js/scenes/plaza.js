@@ -3,11 +3,12 @@
 // where) is plaza/plan.js: the round paved plaza (the map's, 23 across) with the fountain in the middle; the lane
 // from head office meets it on the fountain's east-west axis and leaves it on the same axis toward the dorms; a
 // planted ring with a ring of trees round the circle; north of it, on the fountain's north-south axis, the
-// canteen's door, its terrace and a short link from the terrace to the circle. Built with the shared outdoor kit (scenes/outdoor/): the ground in
-// plaza/ground.js, the planting and edges in plaza/green.js, lamps, benches and the terrace in plaza/furniture.js,
-// the fountain in plaza/fountain.js, the canteen and the shop street in plaza-buildings.js. Everything else comes
-// from the layout through buildSkyline. Palette and light are the forecourt's; after work the lamps, the canteen,
-// the shops and the town's windows light up.
+// canteen's door, its terrace and a short link from the terrace to the circle. Built with the shared outdoor kit
+// (scenes/outdoor/): the ground in plaza/ground.js, the planting and edges in plaza/green.js, lamps, benches, the
+// notice board and the terrace in plaza/furniture.js, the fountain in plaza/fountain.js, the canteen and the shop
+// street in plaza-buildings.js. Everything else comes from the layout through buildSkyline. Palette and light are the
+// forecourt's; after work the lamps, the lights round the basin, the canteen, the shops and the town's windows light
+// up.
 import * as THREE from 'three';
 import { Nav } from '../movement/navigation.js';
 import { outdoorLight, TOWN } from './town.js';
@@ -20,7 +21,7 @@ import { lightSet } from './outdoor/furniture.js';
 import { canteen, shopStreet, clinicCross } from './plaza-buildings.js';
 import { buildGround } from './plaza/ground.js';
 import { buildGreen } from './plaza/green.js';
-import { buildLamps, buildBenches, buildTerrace, buildBikes, buildLife } from './plaza/furniture.js';
+import { buildLamps, buildBenches, buildNoticeBoard, buildTerrace, buildBikes, buildLife } from './plaza/furniture.js';
 import { fountain } from './plaza/fountain.js';
 import * as P from './plaza/plan.js';
 
@@ -67,8 +68,9 @@ export function* plazaSteps() {
     lights = lightSet();
   buildGreen(p);
   yield;
-  buildLamps(lights, p, nav);
+  const uplit = buildLamps(lights, p, nav, root);
   buildBenches(p, nav);
+  buildNoticeBoard(p, nav);
   buildTerrace(root, nav);
   buildBikes(root, nav);
   buildLife(p);
@@ -130,6 +132,7 @@ export function* plazaSteps() {
     },
     evening() {
       lit.evening();
+      uplit();
       hall.glass.emissiveIntensity = 0.45;
       water.evening();
       street.glass.emissiveIntensity = 0.55;

@@ -1,0 +1,52 @@
+{
+  "title": "Fountain plaza: the south half furnished, the middle lit at night",
+  "date": "2026-09-30",
+  "by": "claude-agent:plaza-south",
+  "caption": "The critic's point on the plaza: all the furniture sat on the north edge, and at dusk only the rim was lit. The south half now mirrors the north: two pairs of benches facing the fountain, a tree behind each and a lamp between each pair, and on the north-south axis a notice board with a lamp either side, as the canteen link has on the north. Eight lights set flush round the basin light the middle after work. Layout, lanes, fountain, ring paving and canteen are unchanged.",
+  "sections": [
+    {
+      "title": "The plan",
+      "caption": "From straight above. The furniture is now symmetric about both axes, and nothing stands on the lane axis or the paths.",
+      "images": [
+        { "id": "before-plan", "image": "bible/shots/showcase/plaza-south-1/before-plan.webp", "caption": "Before: benches, bike and leaflet only on the north edge" },
+        { "id": "after-plan", "image": "bible/shots/showcase/plaza-south-1/after-plan.webp", "caption": "After, morning" },
+        { "id": "after-plan-eve", "image": "bible/shots/showcase/plaza-south-1/after-plan-eve.webp", "caption": "After, evening: the rim lamps reach further in, and the flush lights round the basin fill the middle" }
+      ]
+    },
+    {
+      "title": "By the fountain",
+      "caption": "Where Eric stands to look at the fountain. The flush lights are dark glass in the day and light up after work.",
+      "images": [
+        { "id": "before-fountain-desk", "image": "bible/shots/showcase/plaza-south-1/before-fountain-desk.webp", "caption": "Before" },
+        { "id": "after-fountain-desk", "image": "bible/shots/showcase/plaza-south-1/after-fountain-desk.webp", "caption": "After" },
+        { "id": "before-fountain-eve-desk", "image": "bible/shots/showcase/plaza-south-1/before-fountain-eve-desk.webp", "caption": "Before, evening" },
+        { "id": "after-fountain-eve-desk", "image": "bible/shots/showcase/plaza-south-1/after-fountain-eve-desk.webp", "caption": "After, evening" },
+        { "id": "before-fountain-eve-phone", "image": "bible/shots/showcase/plaza-south-1/before-fountain-eve-phone.webp", "caption": "Before, evening, phone" },
+        { "id": "after-fountain-eve-phone", "image": "bible/shots/showcase/plaza-south-1/after-fountain-eve-phone.webp", "caption": "After, evening, phone" }
+      ]
+    },
+    {
+      "title": "The south edge",
+      "caption": "Eric on the south side of the circle. The ring's south cherry gave way to low shrubs so the notice board stands clear, between its two lamps.",
+      "images": [
+        { "id": "before-south-desk", "image": "bible/shots/showcase/plaza-south-1/before-south-desk.webp", "caption": "Before" },
+        { "id": "after-south-desk", "image": "bible/shots/showcase/plaza-south-1/after-south-desk.webp", "caption": "After" },
+        { "id": "before-south-eve-desk", "image": "bible/shots/showcase/plaza-south-1/before-south-eve-desk.webp", "caption": "Before, evening" },
+        { "id": "after-south-eve-desk", "image": "bible/shots/showcase/plaza-south-1/after-south-eve-desk.webp", "caption": "After, evening" },
+        { "id": "after-south-phone", "image": "bible/shots/showcase/plaza-south-1/after-south-phone.webp", "caption": "After, phone" },
+        { "id": "after-south-eve-phone", "image": "bible/shots/showcase/plaza-south-1/after-south-eve-phone.webp", "caption": "After, evening, phone" }
+      ]
+    },
+    {
+      "title": "The canteen side and the east lane",
+      "caption": "The north half is as it was; at dusk the middle no longer goes dark.",
+      "images": [
+        { "id": "before-canteen-eve-desk", "image": "bible/shots/showcase/plaza-south-1/before-canteen-eve-desk.webp", "caption": "Before, evening" },
+        { "id": "after-canteen-eve-desk", "image": "bible/shots/showcase/plaza-south-1/after-canteen-eve-desk.webp", "caption": "After, evening" },
+        { "id": "before-east-desk", "image": "bible/shots/showcase/plaza-south-1/before-east-desk.webp", "caption": "Before, east of the fountain" },
+        { "id": "after-east-desk", "image": "bible/shots/showcase/plaza-south-1/after-east-desk.webp", "caption": "After: the south-east benches at the bottom right" }
+      ]
+    }
+  ],
+  "links": [{ "label": "Play it", "href": "game3d/?place=plaza" }]
+}
