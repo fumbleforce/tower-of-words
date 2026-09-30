@@ -130,38 +130,65 @@ export function buildNoticeBoard(p, nav) {
   nav.block(x - W / 2 - 0.2, x + W / 2 + 0.2, z - 0.3, z + 0.3);
 }
 
-// the terrace: round tables with four chairs, each under an eight-sided umbrella, clear of the doors
+// the terrace: round tables with four chairs, each under an eight-sided umbrella, clear of the doors. After work the
+// chairs stand upside down on the tables for closing, except two at the table nearest the link (`shared`), which
+// the place moves itself (places/canteen-closing.js): one upright at its south side, one in the canteen worker's hands.
+export const TERRACE_TABLES = {
+  z: CANTEEN[3] + 1.9,
+  xs: [-10.4, -7.1, -3.9, 3.3, 6.2].map((x) => x + F[0]),
+  top: 0.74, // the table top's upper face
+  shared: 3,
+  loose: [2, 0], // its south and east sides (SIDES)
+};
+const SIDES = [
+  [0.72, 0],
+  [-0.72, 0],
+  [0, 0.72],
+  [0, -0.72],
+];
+const CHAIR_MAT = mat('#59616c');
+// one terrace chair standing at the origin, its back toward +z
+function chairParts() {
+  return [
+    new THREE.BoxGeometry(0.34, 0.05, 0.34).translate(0, 0.44, 0),
+    new THREE.BoxGeometry(0.26, 0.42, 0.26).translate(0, 0.21, 0),
+    new THREE.BoxGeometry(0.34, 0.34, 0.04).translate(0, 0.63, 0.16),
+  ];
+}
+// the same chair upside down with its seat on a table top, back still toward +z
+export const STACKED_Y = TERRACE_TABLES.top + 0.465;
+const flipped = () => chairParts().map((g) => g.rotateZ(Math.PI).translate(0, STACKED_Y, 0));
+// where a chair goes at a table side: standing out at the side, back outward; stacked, back over the table's edge
+export function chairAt(x, z, side, stacked = false) {
+  const [dx, dz] = SIDES[side],
+    r = stacked ? 0.38 / 0.72 : 1;
+  return { x: x + dx * r, z: z + dz * r, yaw: Math.atan2(dx, dz), stacked };
+}
+export function terraceChair() {
+  const mesh = merged(chairParts(), CHAIR_MAT);
+  const group = new THREE.Group();
+  group.add(mesh);
+  return group;
+}
 export function buildTerrace(root, nav) {
-  const z = CANTEEN[3] + 1.9;
-  const xs = [-10.4, -7.1, -3.9, 3.3, 6.2].map((x) => x + F[0]);
+  const { z, xs, shared, loose } = TERRACE_TABLES;
   const poles = [],
     tops = [],
     chairs = [],
+    stacked = [],
     canopies = [[], []];
+  const place = (list, parts, c) => list.push(...parts.map((g) => g.rotateY(c.yaw).translate(c.x, 0, c.z)));
   xs.forEach((x, i) => {
     poles.push(
       new THREE.CylinderGeometry(0.035, 0.035, 2.3, 6).translate(x, 1.15, z),
       new THREE.CylinderGeometry(0.06, 0.2, 0.05, 8).translate(x, 0.025, z),
     );
     tops.push(new THREE.CylinderGeometry(0.5, 0.5, 0.04, 16).translate(x, 0.72, z));
-    for (const [dx, dz] of [
-      [0.72, 0],
-      [-0.72, 0],
-      [0, 0.72],
-      [0, -0.72],
-    ]) {
-      const cx = x + dx,
-        cz = z + dz;
-      chairs.push(
-        new THREE.BoxGeometry(0.34, 0.05, 0.34).translate(cx, 0.44, cz),
-        new THREE.BoxGeometry(0.26, 0.42, 0.26).translate(cx, 0.21, cz),
-        new THREE.BoxGeometry(dz ? 0.34 : 0.04, 0.34, dz ? 0.04 : 0.34).translate(
-          cx + Math.sign(dx) * 0.16,
-          0.63,
-          cz + Math.sign(dz) * 0.16,
-        ),
-      );
-    }
+    SIDES.forEach((_, side) => {
+      if (i === shared && loose.includes(side)) return;
+      place(chairs, chairParts(), chairAt(x, z, side));
+      place(stacked, flipped(), chairAt(x, z, side, true));
+    });
     canopies[i % 2].push(
       new THREE.ConeGeometry(1.25, 0.42, 8).translate(x, 2.28, z),
       new THREE.ConeGeometry(0.12, 0.14, 8).translate(x, 2.55, z),
@@ -169,9 +196,16 @@ export function buildTerrace(root, nav) {
     nav.block(x - 1.0, x + 1.0, z - 1.0, z + 1.0);
   });
   root.add(merged(poles, mat(PAL.metal)), merged(tops, mat('#d9d7d1')));
-  root.add(merged(chairs, mat('#59616c')));
+  // named, so the static merge leaves them whole: the evening swaps one for the other
+  const day = merged(chairs, CHAIR_MAT),
+    closed = merged(stacked, CHAIR_MAT);
+  day.name = 'terrace-chairs';
+  closed.name = 'terrace-chairs-stacked';
+  closed.visible = false;
+  root.add(day, closed);
   root.add(merged(canopies[0], mat(AWNING.canvas, { roughness: 0.9 })));
   root.add(merged(canopies[1], mat(AWNING.stripe, { roughness: 0.9 })));
+  return { day, closed };
 }
 
 // bikes in a rack along the shops' backs, by their back doors; one left on its stand by the north-east benches

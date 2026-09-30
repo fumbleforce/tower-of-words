@@ -44,10 +44,10 @@ Dorm courtyard, the existing sento frontage. The curtain hangs over the lit entr
 The first singer is audible nearby before selecting the entrance, after the player has enabled audio. Use the monorail door-chime melody, hummed rather than words. The visible entrance remains selectable with audio muted.
 
 1. The player selects **Bath**. Eric stops beside the curtain, facing the doorway. He does not lift it or look inside. The camera stays outside.
-2. The first voice stops. A second man finishes the little tune, worse. Eric smiles. One sound caption: "> Someone else finishes the song for him. He's worse."
+2. The first voice stops. A second man finishes the little tune, worse. One sound caption: "> Someone else finishes the song for him. He's worse."
 3. The caption stays until advance, then return control. Afterward, ordinary ambient singing continues; the one-off action is gone, with no repeated caption or punchline.
 
-Needs: a bath-entrance thing and standing spot, Eric's existing smile, and two short wordless vocal sounds from inside. No curtain animation or bath interior. The second sound finishes before the caption appears, so no timed joke or movement runs while the player reads. With audio muted, the caption carries the sound discovery. No singer portrait or new named character.
+Needs: a bath-entrance thing and standing spot, two short wordless vocal sounds from inside. No curtain animation or bath interior. The second sound finishes before the caption appears, so no timed joke or movement runs while the player reads. With audio muted, the caption carries the sound discovery. No singer portrait or new named character.
 
 ## 5. Mailbox 203
 

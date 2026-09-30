@@ -262,8 +262,14 @@
   "text": "すみません。",
   "lang": "ja",
   "overheard": false,
-  "words": [],
-  "clear": []
+  "words": [
+   [
+    "sumimasen",
+    "すみません"
+   ]
+  ],
+  "clear": [],
+  "emo": "polite"
  },
  {
   "key": "oh-gtvr5a",
@@ -1390,6 +1396,16 @@
   "emo": "stern"
  },
  {
+  "key": "ln-1qad83b",
+  "speaker": "eric",
+  "text": "I was only going to sit down for a second.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "low"
+ },
+ {
   "key": "oh-1244oau",
   "speaker": "kuro",
   "text": "お疲れさまです。",
@@ -1444,6 +1460,21 @@
    [
     "yoroshiku",
     "よろしくおねがいします"
+   ]
+  ],
+  "clear": [],
+  "emo": "polite"
+ },
+ {
+  "key": "evening-canteen-worker",
+  "speaker": "canteen_worker",
+  "text": "お疲れさまです。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [
+   [
+    "otsukare",
+    "お疲れさまです"
    ]
   ],
   "clear": [],

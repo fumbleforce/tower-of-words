@@ -59,6 +59,7 @@ export function snapshotPeople(people) {
         {
           ...snapshotObject(person.root),
           seated: !!person.seated,
+          ...(person.seatOut ? { seatOut: [...person.seatOut] } : {}),
           lookTarget: person.lookTarget ? [...person.lookTarget] : null,
           blob: person.blob ? snapshotObject(person.blob) : null,
           ...(person.savedWalk ? { walk: structuredClone(person.savedWalk) } : {}),
@@ -78,6 +79,7 @@ export function restorePeople(people, data = {}) {
     person.lookTarget = saved.lookTarget ? [...saved.lookTarget] : null;
     person.setState?.(saved.seated ? 'sit' : 'idle');
     person.seated = saved.seated;
+    person.seatOut = saved.seatOut ? [...saved.seatOut] : null;
     restoreObject(person.root, saved);
     if (person.blob) restoreObject(person.blob, saved.blob);
     for (const [name, object] of Object.entries(poseParts(person))) restoreObject(object, saved.pose?.[name]);

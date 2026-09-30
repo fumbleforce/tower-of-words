@@ -57,6 +57,7 @@ export function bicycle(color, { basket = false, child = false } = {}) {
     const wheel = sh(new THREE.Mesh(new THREE.TorusGeometry(0.25, 0.028, 4, 12), mat(PAL.charcoal)));
     wheel.position.set(x, 0.28, 0);
     group.add(wheel);
+    if (x > 0) group.userData.front = wheel; // spun about its axle (z) when the bike is wheeled
     group.add(bar([x - 0.22, 0.28, 0], [x + 0.22, 0.28, 0], 0.008, PAL.metal));
     group.add(bar([x, 0.06, 0], [x, 0.5, 0], 0.008, PAL.metal));
   }
@@ -105,26 +106,32 @@ export function bicycle(color, { basket = false, child = false } = {}) {
 // places. The parts merge by material when the scene is merged (scenes/merge-static.js).
 // `fallen`: the place of one bike that has tipped over into the aisle
 const BIKE_COLORS = ['#dcd9d2', '#5f6f7d', '#9aa3ab', '#3f4652', '#7a6570', '#6f8a9c', '#6c7a6a', '#d0ccc4', '#4f5866'];
+// the bike parked in place i of a row with this seed, and how it stands there (its turn about y, in the row's frame)
+export function rowBike(i, seed = 0) {
+  const k = i * 5 + seed;
+  return bicycle(BIKE_COLORS[k % BIKE_COLORS.length], { basket: k % 3 !== 1, child: k % 7 === 3 });
+}
+export const slotYaw = (i, seed = 0) => Math.PI / 2 + (((i * 7 + seed) % 3) - 1) * 0.05;
+// a fallen bike, in the row's frame: on its side in the aisle in front of its place, turned a little across it
+export const FALLEN = { dx: 0.1, z: -0.75, y: 0.04, yaw: Math.PI / 2 + 0.5, roll: Math.PI / 2 - 0.08 };
 export function bikeRow(n, { step = 0.55, gaps = [], seed = 0, fallen = -1 } = {}) {
   const group = new THREE.Group();
   const rack = [[step * (n - 1) + 0.4, 0.05, 0.05, (step * (n - 1)) / 2, 0.02, 0.22]];
   for (let i = 0; i < n; i++) {
     rack.push([0.03, 0.42, 0.03, i * step, 0, 0.22], [0.03, 0.03, 0.34, i * step, 0.4, 0.08]);
     if (gaps.includes(i)) continue;
-    const k = i * 5 + seed;
-    const bike = bicycle(BIKE_COLORS[k % BIKE_COLORS.length], { basket: k % 3 !== 1, child: k % 7 === 3 });
+    const bike = rowBike(i, seed);
     if (i === fallen) {
-      // on its side in the aisle, turned a little across it
       const lying = new THREE.Group();
-      bike.rotation.x = Math.PI / 2 - 0.08;
-      bike.position.set(0, 0.04, 0);
+      bike.rotation.x = FALLEN.roll;
+      bike.position.set(0, FALLEN.y, 0);
       lying.add(bike);
-      lying.rotation.y = Math.PI / 2 + 0.5;
-      lying.position.set(i * step + 0.1, 0, -0.75);
+      lying.rotation.y = FALLEN.yaw;
+      lying.position.set(i * step + FALLEN.dx, 0, FALLEN.z);
       group.add(lying);
       continue;
     }
-    bike.rotation.y = Math.PI / 2 + (((i * 7 + seed) % 3) - 1) * 0.05;
+    bike.rotation.y = slotYaw(i, seed);
     bike.position.set(i * step, 0, 0);
     group.add(bike);
   }

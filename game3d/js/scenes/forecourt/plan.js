@@ -59,4 +59,6 @@ for (let x = LE + 2.05; x < 52; x += 4) LANE_TREES.push(x);
 export const PATH_X = LANE_TREES[0] + 2.2;
 export const GARDEN_PATH = [PATH_X - 0.4, PATH_X + 0.4, STRIP_S[2], STRIP_S[3] + 1.0];
 export const GARDEN_COURT = [PATH_X - 1.3, PATH_X + 2.1, STRIP_S[3] + 1.0, STRIP_S[3] + 3.0];
+// its bench, on the court's north side looking south into the garden (seat top 0.34, as the outdoor kit's bench)
+export const GARDEN_BENCH = { x: GARDEN_COURT[1] - 1.0, z: GARDEN_COURT[2] + 0.45, len: 1.5, top: 0.34 };
 export const inRect = (x, z, [x0, x1, z0, z1]) => x > x0 && x < x1 && z > z0 && z < z1;

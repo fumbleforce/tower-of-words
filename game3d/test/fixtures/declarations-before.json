@@ -472,6 +472,16 @@
           "label": "To the plaza",
           "kind": "thing",
           "verb": "Go"
+        },
+        "garden_bench": {
+          "label": "Garden bench",
+          "kind": "thing",
+          "verb": "Sit"
+        },
+        "fallen_bicycle": {
+          "label": "Bicycle",
+          "kind": "thing",
+          "verb": "Stand up"
         }
       },
       "spots": [
@@ -480,17 +490,22 @@
         "lift_front",
         "plaza_lane"
       ],
-      "seats": [],
+      "seats": [
+        "garden_bench"
+      ],
       "zones": [
         "lift_front",
         "plaza_lane"
       ],
       "people": [
-        "kuro"
+        "kuro",
+        "tama"
       ],
       "hooks": [
         "liftOpen",
-        "liftClose"
+        "liftClose",
+        "gardenCat",
+        "bicycle"
       ]
     },
     "dorm_court": {
@@ -579,6 +594,11 @@
         "dorm_lane": {
           "label": "To the dorms",
           "kind": "thing"
+        },
+        "canteen_table": {
+          "label": "Canteen table",
+          "kind": "thing",
+          "verb": "Sit"
         }
       },
       "spots": [
@@ -591,8 +611,12 @@
         "office_lane",
         "dorm_exit"
       ],
-      "people": [],
-      "hooks": []
+      "people": [
+        "canteen_worker"
+      ],
+      "hooks": [
+        "canteenChair"
+      ]
     },
     "office": {
       "things": {

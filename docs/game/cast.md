@@ -21,6 +21,7 @@ The tables are checked against the game by `node tools/facts/check.mjs`. Ids in 
 | `aoi` | Aoi | A new hire. |
 | `rei` | Rei | Sales. Not met on day 1. |
 | `tama` | Tama | A calico cat. |
+| `canteen_worker` | Canteen worker | An unnamed adult who closes the canteen terrace after work. |
 | `bun` | Woman with a bun | A monorail passenger. |
 | `youth` | Young man | A monorail passenger. |
 | `music` | Girl with headphones | A monorail passenger. |
@@ -134,6 +135,7 @@ The name plate is the name above their lines; the label is the name over them in
 | `kuro` | Receptionist | Receptionist | none |
 | `aoi` | Aoi | Woman on her phone | none |
 | `tama` | none | Cat | none |
+| `canteen_worker` | Canteen worker | none | none |
 | `bun` | Woman with a bun | Woman with a bun | none |
 | `youth` | Young man | Young man | none |
 | `music` | Girl with headphones | Girl with headphones | none |

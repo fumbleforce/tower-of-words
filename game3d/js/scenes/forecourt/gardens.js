@@ -25,7 +25,7 @@ import { bench, stoneLantern } from '../outdoor/furniture.js';
 import { rng } from '../outdoor/parts.js';
 import * as P from './plan.js';
 
-const { STRIP_S: S, STRIP_N: N, LE, TE, GATE_X, PATH_X, GARDEN_PATH: GP, GARDEN_COURT: GC } = P;
+const { STRIP_S: S, STRIP_N: N, LE, TE, GATE_X, PATH_X, GARDEN_PATH: GP, GARDEN_COURT: GC, GARDEN_BENCH } = P;
 const X1 = GATE_X - 0.3; // the gardens end at the gateposts' line
 const STONE = ['#9d9c95', '#8f8e88', '#a6a49c'];
 const ROCK = ['#8a8983', '#7f7e79', '#94928b'];
@@ -87,9 +87,9 @@ function court(p, set, block) {
     });
   kerbRect(p, GC, { gaps: { n: [[GP[0], GP[1]]] } });
   gravel(p, [GC[0] + 0.16, GC[1] - 0.16, GC[2] + 0.16, GC[3] - 0.16], { y: 0.03 });
-  const bx = GC[1] - 1.0;
-  bench(p, bx, GC[2] + 0.45, 0, { len: 1.5 });
-  block(bx - 0.8, bx + 0.8, GC[2], GC[2] + 0.75);
+  const B = GARDEN_BENCH;
+  bench(p, B.x, B.z, 0, { len: B.len });
+  block(B.x - 0.8, B.x + 0.8, GC[2], GC[2] + 0.75);
   stoneLantern(p, set, GC[0] + 0.45, GC[3] - 0.5, 0.03);
   set.lit.push([GC[0] + 1.2, GC[3] - 0.9, 1.3]); // its light on the gravel after dark
   block(GC[0], GC[0] + 0.8, GC[3] - 0.9, GC[3]);
