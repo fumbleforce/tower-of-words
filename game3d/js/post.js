@@ -2,7 +2,7 @@
 // tone-maps, grades the colour per place, adds a light tilt-shift blur toward the top and bottom of the frame
 // and a soft vignette. Three quality tiers the shell can switch between:
 //   0 low     grade and vignette only (no AO, no bloom, no blur), pixel ratio 1
-//   1 medium  light AO, bloom from half resolution, a light tilt-shift, pixel ratio up to 1.5
+//   1 medium  light AO (not on phones), bloom from half resolution, a light tilt-shift, pixel ratio up to 1.5
 //   2 high    full AO, a deeper bloom chain, the full tilt-shift, pixel ratio up to 2
 // Each place may carry a `grade` object (see GRADE below); anything it leaves out keeps the default.
 //
@@ -16,6 +16,7 @@ import { Pass, FullScreenQuad } from 'three/addons/postprocessing/Pass.js';
 import { currentStyle, styleGrade, PALETTE } from './style/index.js';
 import { patchScene, setToon, U as TOON_U } from './style/toon.js';
 import { GBufferPass, InkPass } from './style/ink.js';
+import { phoneTier } from './perf/phone.js';
 
 // Neutral defaults. Values are in display space unless noted.
 export const GRADE = {
@@ -375,7 +376,7 @@ export function makePost(renderer, place, tier = 2) {
   let cur = tier;
   function setQuality(q) {
     cur = q in TIERS ? q : q ? 2 : 0;
-    const T = TIERS[cur];
+    const T = { ...TIERS[cur], ...phoneTier(cur) };
     gtao.enabled = !!T.ao;
     if (T.ao) {
       gtao.updateGtaoMaterial({ samples: T.aoSamples });

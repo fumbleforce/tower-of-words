@@ -155,7 +155,8 @@ game3d/tools/perf/budgets.json (the baseline). The overlay itself is described i
   lock, `software` (SwiftShader, about 10x slower) otherwise. The worst frame is in perf.json and the summary but not
   budgeted: it is one frame (usually the next place building in the background) and swings from run to run. Under
   vsync the GPU median sits at 16.7 ms, so the 1% low is the frame-time number that moves. The fast test runs at
-  q0 (low tier); the baseline is for q0 and a run at another tier is not compared.
+  q0 (low tier); `QUALITY=1 node game3d/tools/fast.mjs 390 844` runs it at medium, compared with its own baseline
+  (`phone-q1`). A tier without a baseline is not compared.
 - **Which warnings to trust**: draw calls and triangles repeat to within 1% between runs, so a warning on them is a
   real change. Frame times depend on what else is using the machine: tests now share the GPU in slots
   (tools/lib/browser-job.mjs), and with another test on the GPU the office's median went 16.7 to 33.2 ms and 1% lows
@@ -167,23 +168,25 @@ game3d/tools/perf/budgets.json (the baseline). The overlay itself is described i
   1366 860` and `... 390 844` rewrite that layout's entry for the GL the run got. Only a passing run writes it.
   Commit budgets.json with the change and say why in the message.
 
-Baseline (fa26043, the forecourt on the outdoor kit, plus the phone draw-call work below; fast test, q0, GL=gpu;
-draw-call pass on every place but Eric's room). Median frame 16.7 ms everywhere (vsync), 1% low 16.8 ms everywhere
-(the desktop dorm courtyard read 150 ms once with two tests on the GPU and was set back to 16.8).
+Baseline (issue #78 on 969067b, the dorm courtyard on the outdoor kit, plus the phone medium tier below; fast test,
+GL=gpu; draw-call pass on every place but Eric's room). Median frame 16.7 ms everywhere (vsync). Desktop and phone at
+q0, and phone at q1 (medium, what phones run by default; `QUALITY=1`, stored as `phone-q1` in budgets.json).
 
-| place | desktop calls | desktop tris | phone calls | phone tris |
-|---|--:|--:|--:|--:|
-| train      | 230 | 158k | 230 | 144k |
-| gate       | 245 | 136k | 187 | 123k |
-| forecourt  | 142 | 163k | 118 | 135k |
-| office     | 450 | 530k | 216 | 264k |
-| plaza      |  54 |  95k |  48 |  92k |
-| dorm_court |  54 |  48k |  44 |  48k |
-| dorms      | 149 |  19k | 149 |  19k |
+| place | desktop q0 calls | desktop q0 tris | phone q0 calls | phone q0 tris | phone q1 calls | phone q1 tris |
+|---|--:|--:|--:|--:|--:|--:|
+| train      | 232 | 158k | 183 | 133k | 253 | 196k |
+| gate       | 250 | 136k | 168 | 111k | 193 | 124k |
+| forecourt  | 142 | 158k | 122 | 147k | 128 | 147k |
+| office     | 450 | 530k | 217 | 265k | 240 | 291k |
+| plaza      |  49 | 135k |  43 | 131k |  50 | 133k |
+| dorm_court |  50 |  55k |  38 |  54k |  45 |  56k |
+| dorms      |  69 |  30k |  63 |  30k |  70 |  30k |
 
-Every place is inside the phone budget (250 calls, 300k triangles). The previous baselines: 0930-0748 (d2c8515) had
-train 851/680, gate 1,157/731, office 918/590 calls (desktop/phone), office 436k triangles on the phone;
-0929-1848-b196ef5 (office unbatched) had train 779/648, gate 1,246/833, office 4,130/2,714.
+Phone q0 and q1 are inside the phone budget (250 calls, 300k triangles) but for the train at q1, which reads 231 to
+253 between runs: the train is the first place, and the fast test spends its few seconds there while the draw-call pass
+is still merging (see "Phone default quality" below for its settled numbers). The previous baselines: fa26043 had
+train 230/230, gate 245/187, office 450/216 (desktop/phone q0); 0930-0748 (d2c8515) had train 851/680, gate
+1,157/731, office 918/590; 0929-1848-b196ef5 (office unbatched) had train 779/648, gate 1,246/833, office 4,130/2,714.
 
 ## Phone draw calls (2026-09-30, review office-perf)
 
@@ -225,8 +228,39 @@ second, while the fast test spends only about 6 s in the train. What changed:
 - `node game3d/tools/perf/day-calls.mjs [w h] [--places ...]` plays the day and prints per place where the draws go
   (pass, kind, and the objects outside a batch), the tool used for all of the above.
 
-Real phones default to q1 (medium), where GTAO's normal pass and the outline draw the scene again: about twice these
-numbers. Not changed here.
+### Phone default quality (2026-09-30, issue #78)
+
+Real phones run q1 (medium: Settings > Graphics "auto" picks it on a phone-sized screen), but the budget was measured
+at q0. At q1 the phone drew about twice as much: GTAO drew the whole scene again for its normals, and while anything is
+outlined (Eric near a target, about half the time) the outline drew it again for its depth. Phone medium now fits
+instead of phones dropping to low, which would lose the outline, bloom and tilt-shift. Desktop keeps its tiers.
+
+- Phone medium has no ambient occlusion (js/perf/phone.js `phoneTier`, read by post.js). Bloom, the tilt-shift, the
+  outline, the 1.5 pixel ratio and the 2048 shadow map stay. High on a phone keeps AO.
+- The outline's depth pass is cropped to the outlined thing (js/perf/outline.js, all layouts): only what lies in front
+  of the target on screen can hide it, so it draws through the render camera cut down to the target's rectangle
+  (setViewOffset) and everything else is frustum-culled; the mask pass looks up through the same camera. Same
+  outline (desktop close-up identical), depth pass 60 to 80 → about 16 to 35 draws in the office and train.
+- In the train on a phone the passengers and the cat cast no sun shadow (about 60 draws a frame); their blob shadows
+  stay, Eric and Mio still cast theirs.
+
+Phone 390x844, fast test median calls a frame (GL=gpu), before (065d595) → after:
+
+| place | q0 before | q0 after | q1 before | q1 after |
+|---|--:|--:|--:|--:|
+| train      | 222 | 183 | 480 | 231 to 253 |
+| gate       | 182 | 168 | 286 | 193 |
+| forecourt  | 118 | 122 | 200 | 128 |
+| office     | 216 | 217 | 451 | 240 |
+| plaza      |  43 |  43 |  89 |  50 |
+| dorm_court |  44 |  38 |  91 |  45 |
+| dorms      |  63 |  63 | 167 |  70 |
+
+(The dorm courtyard was rebuilt in between, 969067b.) Settled, at each place's start spot 8 s after loading
+(q1): train 431 → 213 with a passenger outlined, office 467 → 252 with the lift outlined (80 meshes; its outline alone
+is about 100 draws with the cropped depth pass), gate 190 → 108, forecourt 227 → 132. Stills before/after per place
+at 390x844 medium, desktop at high, and close-ups of the train seats and the outline: game3d/shots/phone-quality/.
+The look: slightly flatter corners and seat backs without AO, no passenger shadows on the train seats.
 
 Entry hitches (`hitch.mjs` entry mode, q0, GL=gpu, before → after): train → gate worst frame 33 → 33 ms at both sizes,
 gate → forecourt 17 → 17 (phone), 33 → 17 (desktop); no long task. The crossfade snapshot is now a canvas copy

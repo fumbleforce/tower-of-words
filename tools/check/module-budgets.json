@@ -24,7 +24,7 @@
     },
     "game3d/js/main.js": {
       "lines": 753,
-      "bytes": 26927,
+      "bytes": 26902,
       "owner": "codex-tui",
       "review": "C-0110 / X-0193: one office batch integration line; 2026-09-30 one import line each for the dorms, plaza and dorm_court place factories; existing responsibility unchanged; 2026-09-30 game.overrideMaterials for the shader warm-up (notes/PERF.md); 2026-09-30 one step() line for the look/cue layers over the idles (C-0171)",
       "reason": "Composition, boot/Continue, input, rendering and frame loop remain after stage 4 hooks, interactions and place lifecycle extraction."
@@ -79,10 +79,10 @@
       "reason": "Existing train place geometry, animation and scene hooks; stage 5 room-builder review is planned."
     },
     "game3d/js/post.js": {
-      "lines": 431,
-      "bytes": 16658,
+      "lines": 432,
+      "bytes": 16745,
       "owner": "codex-tui",
-      "review": "C-0071",
+      "review": "C-0071; 2026-09-30 issue #78: one import and one line for the phone medium tier (js/perf/phone.js)",
       "reason": "Existing post-processing pipeline and shader text; keep shader contents intact."
     },
     "game3d/js/props.js": {

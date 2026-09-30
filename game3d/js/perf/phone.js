@@ -18,6 +18,14 @@ const LIGHTER = {
     };
     skip(place.scene);
   },
+  // The passengers and the cat are drawn again for every shadow they cast (about 60 draws a frame, each one many small
+  // parts). Each has a blob shadow under them (places/train.js), which stays; Eric and Mio still cast theirs.
+  train: (place) => {
+    for (const p of Object.values(place.people || {}))
+      p?.root?.traverse((o) => {
+        if (o.isMesh) o.castShadow = false;
+      });
+  },
 };
 
 const on = () => isPhone() && !new URLSearchParams(location.search).has('fullphone');
@@ -26,6 +34,11 @@ const on = () => isPhone() && !new URLSearchParams(location.search).has('fullpho
 // culled; on a phone each draw costs more than the triangles, so 6 m and 12,000 (the office: 267 to 242 draws a
 // frame, 242k to 269k triangles, in the fast test). Nothing changes in how it looks.
 export const phoneBatch = () => (on() ? { span: 6, tris: 12000 } : {});
+
+// The medium tier on a phone (what 'auto' picks there, settings.js): no ambient occlusion. GTAO draws the whole scene
+// a second time for its normals, which about doubled the phone's draw calls at medium (office 218 to 448 a frame).
+// Bloom, the tilt-shift, the outline, the pixel ratio and the sharper shadows stay. High keeps it on phones too.
+export const phoneTier = (q) => (on() && q === 1 ? { ao: false } : {});
 
 export function lightenForPhone(place, name) {
   const f = LIGHTER[name];

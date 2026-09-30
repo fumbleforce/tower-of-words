@@ -1,4 +1,5 @@
 // Fast QA run: the whole day in test mode (?test=fast). node game3d/tools/fast.mjs [w] [h] [seconds]
+// Runs at quality tier 0; QUALITY=1 (or 2) runs the day at that tier, with its own perf baseline (phone-q1).
 // Prints PASS/FAIL, the places reached, the time taken and any page errors; saves the end screen.
 import { withBrowserJob } from '../../tools/lib/browser-job.mjs';
 import { fastResult } from '../test/support/fast-result.mjs';
@@ -49,7 +50,7 @@ try { build = ensureBuild().id; } catch (error) { console.log('build stamp faile
 try {
   if (![W, H, S].every(value => Number.isFinite(+value) && +value > 0)) throw new Error('Width, height and seconds must be positive numbers');
   await withBrowserJob('fast-test', async browser => {
-    const url = `http://127.0.0.1:8771/${process.env.BASE || 'game3d'}/index.html?test=fast&q=0${process.env.ROUTE ? '&route=' + encodeURIComponent(process.env.ROUTE) : ''}${process.env.Q || ''}`;
+    const url = `http://127.0.0.1:8771/${process.env.BASE || 'game3d'}/index.html?test=fast&q=${+process.env.QUALITY || 0}${process.env.ROUTE ? '&route=' + encodeURIComponent(process.env.ROUTE) : ''}${process.env.Q || ''}`;
     const game = await openGame(browser, { viewport: { width: +W, height: +H }, mode: 'fast', url });
     const { page } = game;
     pageErrors = game.errors;
