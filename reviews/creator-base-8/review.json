@@ -2,7 +2,7 @@
  "title": "Creator: straight legs, chunky hair, clothes with volume",
  "date": "2026-09-30",
  "by": "Claude (claude-agent:creator8)",
- "status": "open",
+ "status": "superseded",
  "question": "Do the legs, the hair and the clothes look right now next to Mio's and Eric's originals?",
  "multi": false,
  "media": [
@@ -76,5 +76,6 @@
    "label": "Previous round and your feedback",
    "href": "bible/#review/creator-base-7"
   }
- ]
+ ],
+ "decision": "Broken bodies (see chat 2026-09-30: neck, hood inside, double brows, stubble, clothes); hair alternatives look like tentacles. Superseded by the Blender rebuild (creator-blender-1)."
 }
