@@ -77,12 +77,15 @@ export async function meshyGesture(game, r, kind, { to, face } = {}) {
     await game.tween(1.7, (k) => {
       const b = bell(k),
         push = Math.max(0, Math.sin(k * Math.PI * 4 - Math.PI / 2)) * b;
-      turn(model, B.Spine, 'x', -0.42 * b - 0.08 * push);
-      for (const [arm, fore] of [
-        [B.RightArm, B.RightForeArm],
-        [B.LeftArm, B.LeftForeArm],
+      turn(model, B.Spine, 'x', 0.3 * b);
+      turn(model, B.Spine02, 'x', 1.2 * b + 0.06 * push);
+      turn(model, B.Head, 'x', -1.1 * b);
+      for (const [arm, fore, inward] of [
+        [B.RightArm, B.RightForeArm, 1],
+        [B.LeftArm, B.LeftForeArm, -1],
       ]) {
-        turn(model, arm, 'x', -1.2 * b - 0.15 * push);
+        turn(model, arm, 'x', -2 * b - 0.06 * push);
+        turn(model, arm, 'z', inward * 0.15 * b);
         turn(model, fore, 'x', -0.25 * b);
       }
     });

@@ -45,7 +45,7 @@ const SCENES = {
     cam('music'),
     { do: 'headphones', who: 'music', state: 'lift' },
     { say: 'music', text: 'あ、ごめん。音、漏れてた？', en: 'Oh, sorry. Could you hear that?' },
-    'eric: Only a little.',
+    { do: 'gesture', who: 'eric', kind: 'nod' },
     { do: 'phone', who: 'music', state: 'show' },
     { say: 'music', text: '自分で録ったの。まだ下手だけど。', en: "I recorded it myself. I’m still pretty bad, though." },
     { do: 'phone', who: 'music', state: 'away' },
@@ -74,7 +74,7 @@ const SCENES = {
 const HELD = {
   bun: [null],
   youth: ['youth', 'youth'],
-  music: [null, null, 'music'],
+  music: [null, 'music'],
   reader: [null, 'reader', 'reader'],
   kuroda: ['kuroda'],
 };

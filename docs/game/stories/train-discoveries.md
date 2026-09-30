@@ -10,7 +10,7 @@ Five optional encounters give the passengers something of their own to do before
 
 1. Talking to the bun-haired woman: she points at her overfilled shopping bag, Eric presses it down while she zips it, and she thanks him. The bag stays closed.
 2. Talking to the young man: he shows a football photograph and his first goal despite a 1–6 loss. Eric points and asks whether it is him; he points himself out in the photo and nods.
-3. Talking to the headphone wearer: she lifts one side of her headphones and asks whether the sound was leaking. Eric answers; she shows her own guitar practice video, then puts the phone away and headphone back.
+3. Talking to the headphone wearer: she lifts one side of her headphones and asks whether the sound was leaking. Eric nods; she shows her own guitar practice video, then puts the phone away and headphone back.
 4. Talking to the reader: the book title is shown, then its page beside his old Windows 95 printout. He explains the missing buttons; Eric recognises the version, and the reader nods.
 5. Talking to Hamada: His phone buzzes with the appointment reminder; he sleepily apologises while it is held on screen, then taps it silent when the player advances. He stays asleep for the later [rescue](sleeping-man.md).
 
