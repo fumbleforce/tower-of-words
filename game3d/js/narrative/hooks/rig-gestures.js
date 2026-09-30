@@ -130,3 +130,114 @@ async function chibiMove(game, r, kind, save) {
     });
   }
 }
+
+// ---------- look and cue layers, laid over whatever a chibi's idle wrote this frame ----------
+// Idles (the train passengers' act, Kenji's typing) set head and arm angles every frame, so a tween that runs before
+// them is wiped out. main.js step() calls stepRigLayers after place.update, so these write last:
+//   r.lookTarget ([x, z], the story `look` hook): the head turns toward it, and back when it's cleared.
+//   r._cue (chibiCue: a directed `nod` or `point` toward `to`): head and a little of the torso turn to it, the chin
+//   dips; for point the arm on that side swings out toward it too.
+// Each angle is blended from the frame's own base: what the idle wrote this frame, or, if nothing has touched it
+// since our last write, the base seen before. So the idle keeps going underneath and nothing stays bent afterwards.
+export const CUE_KINDS = new Set(['nod', 'point']);
+const _v = new THREE.Vector3(),
+  _q = new THREE.Quaternion(),
+  _qt = new THREE.Quaternion(),
+  _qb = new THREE.Quaternion(),
+  _e = new THREE.Euler(),
+  DOWN = new THREE.Vector3(0, -1, 0),
+  clamp = THREE.MathUtils.clamp;
+
+function baseOf(r, id, obj, prop) {
+  const S = (r._lay ||= {});
+  if (!S[id] || obj[prop] !== S[id].wrote) S[id] = { base: obj[prop], wrote: NaN, obj, prop };
+  return S[id].base;
+}
+function put(r, id, obj, prop, v, on) {
+  const s = r._lay[id];
+  if (on) obj[prop] = s.wrote = v;
+  else {
+    obj[prop] = s.base;
+    delete r._lay[id];
+  }
+}
+// the angle to [x, z] from the way the rig faces, in its root's frame (as story.js lookAt), -pi..pi
+function relYaw(r, p) {
+  const o = r.root.position,
+    a = Math.atan2(p[0] - o.x, p[1] - o.z) - r.root.rotation.y;
+  return Math.atan2(Math.sin(a), Math.cos(a));
+}
+// the arm swung out toward yaw `a` (root frame) at shoulder height, as a quaternion in the torso frame; at least
+// 0.6 rad out to its side, so the hand clears the big head when the camera is behind or above them (the head and
+// torso already face the target)
+function aimArm(r, a, side) {
+  const c = (side ? 1 : -1) * clamp(Math.abs(a), 0.6, 1.5);
+  _v.set(Math.sin(c), 0.05, Math.cos(c)).normalize();
+  r.root.getWorldQuaternion(_qt);
+  _v.applyQuaternion(_qt);
+  r.torso.getWorldQuaternion(_qt);
+  _v.applyQuaternion(_qt.invert());
+  return _q.setFromUnitVectors(DOWN, _v);
+}
+function stepRig(r, dt) {
+  // look: its weight and angle ease in and out
+  const on = !!r.lookTarget,
+    k = Math.min(1, dt * 6);
+  const L = on || r._look ? (r._look ||= { w: 0, a: 0 }) : null;
+  if (L) {
+    if (on) L.a += (clamp(relYaw(r, r.lookTarget), -1.1, 1.1) * 0.85 - L.a) * (L.w < 0.01 ? 1 : k);
+    L.w += ((on ? 1 : 0) - L.w) * k;
+    if (!on && L.w < 0.01) {
+      L.w = 0;
+      r._look = null;
+    }
+  }
+  const lw = L ? L.w : 0,
+    c = r._cue,
+    b = c && !c.done ? bell(c.k) : 0,
+    a = c && c.to ? clamp(relYaw(r, c.to), -1.6, 1.6) : 0;
+  const dip = !b
+    ? 0
+    : c.kind === 'nod'
+      ? Math.max(0, Math.sin(c.k * Math.PI * 3 - Math.PI * 0.6)) * 0.32 // the chin dips twice
+      : Math.max(0, Math.sin((c.k - 0.35) * Math.PI * 2.5)) * 0.15; // one small dip with the arm out
+  // head yaw: the look, then the cue on top; the torso takes a quarter of a cue's turn (the head rides on it)
+  let v = baseOf(r, 'hy', r.head.rotation, 'y');
+  v += ((L ? L.a : 0) - v) * lw;
+  v += (clamp(a * 0.75, -1.1, 1.1) - v) * b;
+  put(r, 'hy', r.head.rotation, 'y', v, lw > 0 || b > 0);
+  if (!c) return;
+  put(r, 'hx', r.head.rotation, 'x', baseOf(r, 'hx', r.head.rotation, 'x') + dip, b > 0);
+  put(r, 'ty', r.torso.rotation, 'y', baseOf(r, 'ty', r.torso.rotation, 'y') + a * 0.25 * b, b > 0);
+  if (c.kind === 'point' && r.arms) {
+    const R = r.arms[c.side].rotation,
+      ab = c.done ? 0 : bell(Math.min(1, c.k * 1.15));
+    _qb.setFromEuler(_e.set(baseOf(r, 'ax', R, 'x'), baseOf(r, 'ay', R, 'y'), baseOf(r, 'az', R, 'z'), R.order));
+    if (ab > 0) r.arms[c.side].quaternion.slerpQuaternions(_qb, aimArm(r, a, c.side), ab);
+    put(r, 'ax', R, 'x', R.x, ab > 0);
+    put(r, 'ay', R, 'y', R.y, ab > 0);
+    put(r, 'az', R, 'z', R.z, ab > 0);
+  }
+  if (c.done) r._cue = null;
+}
+// main.js step(): after the place's idles, over every chibi in the place
+export function stepRigLayers(people, dt) {
+  for (const r of Object.values(people || {}))
+    if (r && r.head && r.torso && r.root && !r.meshy && (r.lookTarget || r._look || r._cue)) stepRig(r, dt);
+}
+// a directed nod or point on a chibi, toward [x, z] (straight ahead without one); the layer above draws it
+export async function chibiCue(game, r, kind, to) {
+  const side = to && Math.sin(relYaw(r, to)) < 0 ? 0 : 1; // arms[1] sits at +x, the rig's left
+  // a cue cut short by the next one: put back what it bent (the look keeps the head's turn)
+  if (r._cue)
+    for (const [id, l] of Object.entries(r._lay || {}))
+      if (id !== 'hy') {
+        l.obj[l.prop] = l.base;
+        delete r._lay[id];
+      }
+  const c = (r._cue = { kind, to, side, k: 0 });
+  await game.tween(kind === 'nod' ? 1.3 : 1.7, (k) => {
+    c.k = k;
+  });
+  if (r._cue === c) c.done = true;
+}

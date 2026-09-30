@@ -1,7 +1,15 @@
 import * as THREE from 'three';
-import { MESHY_KINDS, CHIBI_KINDS, meshyGesture, chibiGesture } from './rig-gestures.js';
+import {
+  MESHY_KINDS,
+  CHIBI_KINDS,
+  CUE_KINDS,
+  meshyGesture,
+  chibiGesture,
+  chibiCue,
+  stepRigLayers,
+} from './rig-gestures.js';
 
-export function installGesturesHooks(game, { whoRig }) {
+export function installGesturesHooks(game, { whoRig, aimOf }) {
   const H = game.hooks;
   // ---------- small staged moves (bow, gestures, props), so beats are shown instead of narrated ----------
   const tweens = [];
@@ -19,6 +27,7 @@ export function installGesturesHooks(game, { whoRig }) {
     }
   }
   game.stepTweens = stepTweens;
+  game.stepRigLayers = (dt) => stepRigLayers(game.place?.people, dt);
   const bell = (k) => Math.sin(Math.PI * Math.min(1, k)) ** 0.7; // 0 -> 1 -> 0, holding at the top
   H.bow = async ({ who, depth = 'small' }) => {
     const r = whoRig(who);
@@ -56,6 +65,8 @@ export function installGesturesHooks(game, { whoRig }) {
     if (r && r.meshy && MESHY_KINDS.has(kind))
       return meshyGesture(game, r, kind, { to, face: to ? () => H.face({ who, to }) : null });
     if (!r || !r.arms || r.meshy) return;
+    // a directed nod or point (the train passengers' "that seat"): drawn over the rig's idle, see rig-gestures.js
+    if (CUE_KINDS.has(kind)) return chibiCue(game, r, kind, to ? aimOf(to) : null);
     const save = r.arms.map((a) => a.rotation.clone()),
       hy = r.hips.position.y,
       legs = r.legs.map((l) => l.rotation.x),
@@ -88,11 +99,7 @@ export function installGesturesHooks(game, { whoRig }) {
         else cam.release?.();
       }
     } else if (CHIBI_KINDS.has(kind)) await chibiGesture(game, r, kind, save);
-    else if (kind === 'point') {
-      await game.tween(1.2, (k) => {
-        r.arms[1].rotation.x = save[1].x + (-1.5 - save[1].x) * bell(k);
-      });
-    } else if (kind === 'skijump') {
+    else if (kind === 'skijump') {
       // crouch with arms back, slide, then spring up with arms forward, and land
       await game.tween(2.6, (k) => {
         const crouch = k < 0.55 ? Math.sin(((k / 0.55) * Math.PI) / 2) : Math.max(0, 1 - (k - 0.55) / 0.12);

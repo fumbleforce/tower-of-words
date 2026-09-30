@@ -1189,8 +1189,8 @@ export async function trainPlace(game) {
         cup.rotation.z = -cupSt.k * 0.5 + Math.sin(simT * 9) * 0.04 * cupSt.k;
       }
       const p = game.player.root.position;
-      if (aoi.lookTarget) lookAt(aoi, aoi.lookTarget[0], aoi.lookTarget[1], 1);
-      else if (!aoi.act && Math.hypot(p.x - aoi.root.position.x, p.z - aoi.root.position.z) < 2)
+      // a story look: rig-gestures.js
+      if (!aoi.lookTarget && !aoi.act && Math.hypot(p.x - aoi.root.position.x, p.z - aoi.root.position.z) < 2)
         lookAt(aoi, p.x, p.z, 0.8);
     },
     hooks: {

@@ -23,10 +23,10 @@
       "reason": "Existing detailed prop builders; preserve geometry until the visual owner reviews extraction."
     },
     "game3d/js/main.js": {
-      "lines": 778,
-      "bytes": 27307,
+      "lines": 779,
+      "bytes": 27384,
       "owner": "codex-tui",
-      "review": "C-0110 / X-0193: one office batch integration line; 2026-09-30 one import line each for the dorms, plaza and dorm_court place factories; existing responsibility unchanged; 2026-09-30 game.overrideMaterials for the shader warm-up (notes/PERF.md)",
+      "review": "C-0110 / X-0193: one office batch integration line; 2026-09-30 one import line each for the dorms, plaza and dorm_court place factories; existing responsibility unchanged; 2026-09-30 game.overrideMaterials for the shader warm-up (notes/PERF.md); 2026-09-30 one step() line for the look/cue layers over the idles (C-0171)",
       "reason": "Composition, boot/Continue, input, rendering and frame loop remain after stage 4 hooks, interactions and place lifecycle extraction."
     },
     "game3d/js/menu.js": {
@@ -73,7 +73,7 @@
     },
     "game3d/js/places/train.js": {
       "lines": 1673,
-      "bytes": 61074,
+      "bytes": 61047,
       "owner": "codex-tui",
       "review": "C-0076; C-0166 named sounds per door and machine",
       "reason": "Existing train place geometry, animation and scene hooks; stage 5 room-builder review is planned."

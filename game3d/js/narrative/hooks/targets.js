@@ -19,9 +19,18 @@ export function createTargets(game) {
     console.warn('unknown spot', to);
     return null;
   }
+  // where to look or point at: like posOf, but a seat is the seat itself and a thing is the thing (its face point),
+  // not the floor spot Eric walks to for it
+  function aimOf(to) {
+    const P = game.place;
+    const s = typeof to === 'string' && P.seats?.[to];
+    if (s) return [s.x, s.z];
+    const f = typeof to === 'string' && !P.spots[to] && !P.people[to] && P.things?.[to]?.face?.();
+    return f || posOf(to);
+  }
   function whoRig(who) {
     return isPlayer(who) ? game.player : rigOf(who);
   }
 
-  return { rigOf, posOf, whoRig, isPlayer };
+  return { rigOf, posOf, aimOf, whoRig, isPlayer };
 }

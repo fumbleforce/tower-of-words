@@ -576,6 +576,7 @@ function step(dt) {
   if (game.mioNpc.root.visible) game.mioNpc.update(dt, 1.25);
   game.stepTweens(dt);
   place.update(dt, game.t);
+  game.stepRigLayers(dt); // looks and cues over the idles (rig-gestures.js)
   softSeparate(game, dt); // people overlapping are pushed apart gently (move.js, soft collision)
   place.cam?.update?.(dt, mio.root.position);
   if (!game.saveEnabled) return;
