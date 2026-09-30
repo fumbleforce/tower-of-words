@@ -11,7 +11,8 @@
     "tools/assets/thumbs/"
   ],
   "lists": [
-    "tools/creator/base/public.json"
+    "tools/creator/base/public.json",
+    "tools/creator/astra/viewer/review-assets.json"
   ],
   "exclude": [
     "*.blend1"

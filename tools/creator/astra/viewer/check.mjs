@@ -8,10 +8,10 @@ import { withBrowserJob } from '../../../lib/browser-job.mjs';
 const out = process.argv[2] || 'game3d/shots/astra-comparison';
 fs.mkdirSync(out, { recursive: true });
 const base = (process.env.BASE || '').replace(/^\/+|\/+$/g, '');
-const url = `http://127.0.0.1:8771/${base ? base + '/' : ''}tools/creator/astra/viewer/index.html`;
+const url = `http://127.0.0.1:8771/${base ? base + '/' : ''}tools/creator/astra/viewer/index.html${process.env.ATTEMPT ? '?attempt=' + encodeURIComponent(process.env.ATTEMPT) : ''}`;
 const errors = [], results = [];
 await withBrowserJob('astra-comparison', async browser => {
-  for (const [width, height] of [[1366, 860], [390, 844]]) {
+  for (const [width, height] of [[2560, 1440], [390, 844]]) {
     const tag = `${width}x${height}`;
     const context = await browser.newContext({ viewport: { width, height }, isMobile: width < 700, hasTouch: width < 700 });
     const page = await context.newPage();
@@ -28,6 +28,14 @@ await withBrowserJob('astra-comparison', async browser => {
       await page.screenshot({ path: path.join(out, `${body}-idle-${tag}.png`), fullPage: true });
       await page.evaluate(() => { globalThis.__astraComparison.pose('walk', .3); globalThis.__astraComparison.camera(.7); });
       await page.screenshot({ path: path.join(out, `${body}-walk-${tag}.png`), fullPage: true });
+      if (width > 700) for (const time of [0, .6, .9]) {
+        await page.evaluate(time => globalThis.__astraComparison.pose('walk', time), time);
+        await page.locator('.views').screenshot({ path: path.join(out, `${body}-walk-${time}-${tag}.png`) });
+      }
+      if (width > 700) for (const time of [.3, .9]) {
+        await page.evaluate(time => { globalThis.__astraComparison.pose('walk', time); globalThis.__astraComparison.camera(Math.PI); }, time);
+        await page.locator('.views').screenshot({ path: path.join(out, `${body}-walk-back-${time}-${tag}.png`) });
+      }
       const times = await page.evaluate(() => globalThis.__astraComparison.characters.map(character => character.cur.time));
       assert(Math.abs(times[0] - times[1]) < .001, `${body}/${tag}: different animation phase`);
       await page.selectOption('#clothes', 'none'); await page.uncheck('#hair');
