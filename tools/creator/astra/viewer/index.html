@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>Astra and Claude · Chibi comparison</title>
+<script type="importmap">{"imports":{"three":"/game3d/vendor/three/three.module.js","three/addons/":"/game3d/vendor/"}}</script>
+<link rel="stylesheet" href="./viewer.css"></head><body>
+<header><a href="/bible/#review/creator-astra-1">Back to review</a><h1>Astra and Claude</h1><p>Turn either model to turn both. Compare their shape, clothes and movement.</p></header>
+<section class="controls" aria-label="Models and motion">
+<label>Character<select id="body"><option value="mio">Mio</option><option value="eric">Eric</option></select></label>
+<label>Left model<select id="reference"><option value="claude">Claude</option><option value="original">Original</option></select></label>
+<label>Clothes<select id="clothes"><option value="hoodie">Hoodie and trousers</option><option value="none">Bare body</option></select></label>
+<label class="check"><input id="hair" type="checkbox" checked>Hair</label>
+<label>Motion<select id="motion"><option value="neutral">Idle</option><option value="walk">Walk</option><option value="rest">Rest pose</option></select></label>
+<button id="pause" aria-pressed="false">Pause</button>
+<label class="timeline">Frame<input id="phase" type="range" min="0" max="1" step="0.005" value="0" aria-label="Animation position"></label>
+</section>
+<main><div class="views"><figure><figcaption><strong id="left-label">Claude</strong><span id="left-detail">Blender rebuild</span></figcaption><div class="viewport" id="left" tabindex="0" aria-label="Left model. Drag or use arrow keys to rotate."></div></figure><figure><figcaption><strong>Astra</strong><span>Independent model</span></figcaption><div class="viewport" id="right" tabindex="0" aria-label="Astra model. Drag or use arrow keys to rotate."></div></figure></div>
+<p id="status" role="status" aria-live="polite">Loading models…</p><button id="retry" hidden>Retry loading</button>
+<section class="controls cameras" aria-label="Camera controls"><div class="angles"><button data-angle="0">Front</button><button data-angle="45">Three-quarter</button><button data-angle="90">Side</button><button data-angle="180">Back</button></div>
+<label>Look at<select id="focus"><option value="whole">Whole model</option><option value="face">Face</option><option value="neck">Neck</option><option value="hood">Hood inside</option><option value="cuffs">Cuffs</option><option value="feet">Feet</option></select></label>
+<label>Zoom<input id="zoom" type="range" min="0.7" max="3" step="0.05" value="1"></label></section></main>
+<footer>Same light, camera and animation time. Both models keep their standing scale when clothes or hair are hidden.</footer>
+<script type="module" src="./viewer.js"></script></body></html>
