@@ -44,7 +44,8 @@ setup() {
   if [[ -f "$wt/tools/assets/sync.json" ]]; then
     mapfile -t roots < <(python3 -c 'import json,sys; print("\n".join(json.load(open(sys.argv[1]))["roots"]))' "$wt/tools/assets/sync.json")
   fi
-  roots+=(art/approved/mio/meshy/ art/approved/mc/meshy/ art/approved/music/)
+  # the voice pipeline's local models and reference transcripts (without them voice-clips falls back to edge-tts)
+  roots+=(art/approved/mio/meshy/ art/approved/mc/meshy/ art/approved/music/ tools/island_audio/ tools/voice-refs/)
   lock_paths() {  # every file in the asset lock file (used assets, some outside the roots)
     [[ -f "$1/tools/assets/assets.lock.json" ]] || return 0
     python3 -c 'import json,sys; sys.stdout.write("".join(p + "\0" for p in json.load(open(sys.argv[1]))["files"]))' \
