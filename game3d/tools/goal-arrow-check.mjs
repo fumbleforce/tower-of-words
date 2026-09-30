@@ -19,6 +19,8 @@ const CASES = [
   ['plaza', 'office_lane', false],
   ['plaza', 'dorm_lane', true],
   ['dorm_court', 'dorm_entry', true],
+  ['dorm_court', 'stairs', true],
+  ['dorms', 'door_203', true],
 ];
 const fails = [],
   errors = [];

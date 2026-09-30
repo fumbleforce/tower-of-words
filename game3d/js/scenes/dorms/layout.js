@@ -1,6 +1,8 @@
 // The plan of Eric's flat (docs/game/places.md, Eric's dorm room), in the room's own units (about 1.6 m each).
 // The camera looks north. The room is at the back (z BACK to PART), the entry strip in front (PART to NEAR), the
 // open-air corridor in front of that, and the next block's end wall behind the window, OUT.
+import * as PL from '../dorm-court/plan.js';
+
 export const X0 = -1.05, // side walls (inner faces)
   X1 = 1.05,
   BACK = -2.7, // the back wall, with the window
@@ -40,3 +42,24 @@ export const C = {
   navy: '#34406a',
   cushion: '#9a6468',
 };
+
+// Eric's floor, 2F, outside the flat: the open corridor from the far flats past 203 to its east end, where it runs
+// into the block's return and the stairs (docs/game/places.md, Dorm building). The return's west face, the stair
+// window and the storey height come from the dorm court's plan, turned into this frame (dorm-court/plan.js DORMS).
+export const CORR = [NEAR + T, NEAR + T + CORRIDOR]; // the corridor's z: the flats' front face to the parapet
+export const RETURN = PL.RETURN_X - PL.DORMS.x; // the return's west face, where the corridor ends
+export const STOREY = PL.STOREY;
+// the stair hall in the return: the flight up from the half landing along the west face (lane A, which Eric comes
+// up), the flight down to 1F beside it (lane B), the landing at the top, level with the corridor
+export const STAIR = {
+  a: [RETURN + 0.1, RETURN + 0.9], // lane A's x
+  b: [RETURN + 0.95, RETURN + 1.75], // lane B's x
+  east: RETURN + 1.85, // the stair hall's east wall
+  back: 0.35, // the landing's back wall, with the store's door and the 2F sign
+  top: 2.2, // where the flights meet the landing
+  tread: 0.25,
+  treads: 5, // below the landing; then the half landing, half a storey down
+  half: [2.2 + 5 * 0.25, 4.55], // the half landing's z
+  window: PL.STAIR_WINDOW.map((z) => z - PL.DORMS.z), // on the west face, along lane A
+};
+export const LANDING = [STAIR.a[0] + 0.45, 1.6]; // where Eric stands at the top of the stairs

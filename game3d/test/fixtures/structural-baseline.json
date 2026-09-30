@@ -432,7 +432,10 @@
     "plaza:to_forecourt",
     "plaza:to_dorms",
     "dorm_court:arrive",
-    "dorm_court:go_in",
+    "dorm_court:hall",
+    "dorm_court:go_up",
+    "dorms:landing",
+    "dorms:go_in",
     "dorms:home",
     "dorms:window",
     "dorms:boxes",
@@ -1131,16 +1134,24 @@
       "cond": ""
     },
     {
-      "from": "dorm_court:go_in",
+      "from": "dorm_court:go_up",
       "to": "transitions:dorm_court_to_dorms",
       "kind": "next",
       "labels": []
     },
     {
       "from": "transitions:dorm_court_to_dorms",
-      "to": "dorms:home",
+      "to": "dorms:landing",
       "kind": "next",
       "labels": []
+    },
+    {
+      "from": "dorms:go_in",
+      "to": "dorms:home",
+      "kind": "call",
+      "labels": [],
+      "cond": "",
+      "call": true
     },
     {
       "from": "forecourt:to_plaza",
@@ -1660,6 +1671,8 @@
     "gifted_kenji",
     "evening_on",
     "met_emi",
-    "going_home"
+    "going_home",
+    "dorm_room_known",
+    "home_203"
   ]
 }

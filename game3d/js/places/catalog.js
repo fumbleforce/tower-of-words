@@ -134,26 +134,29 @@ export const PLACE_DETAILS = {
   },
   dorm_court: {
     things: {
-      dorm_entry: { label: 'Dorm entrance', kind: 'thing' },
       bath: { label: 'Bath', kind: 'thing', verb: 'Listen' },
+      dorm_entry: { label: 'Dorm entrance', kind: 'thing' },
+      stairs: { label: 'To the stairs', kind: 'thing' },
+      mailboxes: { label: 'Mailbox 203', kind: 'thing' },
     },
-    spots: ['plaza_entry', 'dorm_entry', 'bath'],
+    spots: ['plaza_entry', 'dorm_entry', 'hall', 'passage', 'bath'],
     seats: [],
-    zones: ['dorm_entry'],
+    zones: ['hall', 'passage'],
     people: [],
-    hooks: ['bathSong'],
+    hooks: ['bathSong', 'mailbox203'],
   },
   dorms: {
     things: {
+      door_203: { label: 'Room 203', kind: 'thing' },
       window: { label: 'Window', kind: 'thing' },
       boxes: { label: 'Boxes', kind: 'thing' },
       bed: { label: 'Bed', kind: 'thing' },
     },
-    spots: ['room_entry', 'window_front'],
+    spots: ['landing', 'door_203', 'room_entry', 'window_front'],
     seats: [],
-    zones: [],
+    zones: ['door_203'],
     people: [],
-    hooks: [],
+    hooks: ['enterRoom'],
   },
   plaza: {
     things: {

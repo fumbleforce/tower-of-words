@@ -8,6 +8,8 @@ import { lightPool } from '../../places/life.js';
 import * as L from './layout.js';
 import { Kit } from './kit.js';
 import { neighbours, SPAN } from './neighbours.js';
+import { plates } from './plates.js';
+import { neighbourDoor, corridorLight, NUMBER, DOOR_C } from './doors.js';
 
 const {
   X0,
@@ -27,6 +29,7 @@ const {
   WIN,
   DOOR,
   DOORWAY,
+  RETURN,
   C,
 } = L;
 
@@ -120,7 +123,8 @@ export function walls(root) {
 }
 
 // the rest of the floor: the neighbours' flats either side, cut open like Eric's (neighbours.js), and past them
-// the building cut solid; the corridor face runs the whole way
+// the building cut solid, to the return's west face on the right (the stairs, stairs.js); the corridor face runs
+// the whole way, and the corridor with it, from past the frame on the left to the landing
 export function building(kit, root) {
   const W = 7,
     zf = NEAR + T,
@@ -128,7 +132,7 @@ export function building(kit, root) {
   neighbours(kit, root);
   for (const [a, b] of [
     [-W, -e],
-    [e, W],
+    [e, RETURN],
   ]) {
     kit.box(C.cut, b - a, H + 0.035, zf - (BACK - T), (a + b) / 2, 0, (zf + BACK - T) / 2, { cast: false });
     kit.box(C.wallTop, 0.03, 0.035, zf - (BACK - T), a < 0 ? b - 0.015 : a + 0.015, H, (zf + BACK - T) / 2, {
@@ -137,34 +141,42 @@ export function building(kit, root) {
   }
   for (const [a, b] of [
     [-W, X0 - T],
-    [X1 + T, W],
+    [X1 + T, RETURN],
   ]) {
     kit.box(C.facade, b - a, H, 0.012, (a + b) / 2, 0, zf + 0.006, { surf: 'plaster', cast: false });
     kit.box(C.wallTop, b - a, 0.035, T + 0.03, (a + b) / 2, H, zf - T / 2 + 0.015, { cast: false });
   }
   // the corridor: concrete, a gutter along the parapet, the parapet cut low like the flat's front wall
   const z0 = zf,
-    z1 = zf + CORRIDOR;
-  kit.box('#737880', 2 * W, 0.2, CORRIDOR, 0, -0.22, (z0 + z1) / 2, {
+    z1 = zf + CORRIDOR,
+    cx = (RETURN - W) / 2,
+    len = RETURN + W;
+  kit.box('#737880', len, 0.2, CORRIDOR, cx, -0.22, (z0 + z1) / 2, {
     surf: 'concrete',
     cast: false,
   });
-  kit.box('#4f545b', 2 * W, 0.004, 0.07, 0, -0.02, z1 - 0.05, { cast: false });
-  kit.box('#8b939e', 2 * W, 0.36, 0.1, 0, -0.03, z1 + 0.05, {
+  kit.box('#4f545b', len, 0.004, 0.07, cx, -0.02, z1 - 0.05, { cast: false });
+  kit.box('#8b939e', len, 0.36, 0.1, cx, -0.03, z1 + 0.05, {
     surf: 'concrete',
   });
-  kit.box(C.wallTop, 2 * W + 0.02, 0.03, 0.12, 0, 0.33, z1 + 0.05, {
+  kit.box(C.wallTop, len + 0.02, 0.03, 0.12, cx, 0.33, z1 + 0.05, {
     cast: false,
   });
-  // the neighbours' front doors, a flat's width apart
-  for (const k of [-2, -1, 1, 2]) neighbourDoor(kit, DOOR[0] + (DOOR[1] - DOOR[0]) / 2 + k * PITCH, zf, k);
-  // two corridor lights on the wall either side of Eric's door
-  for (const x of [X0 - T - 0.32, X1 + T + 0.32]) {
-    kit.box('#d9dcdf', 0.16, 0.1, 0.06, x, 1.28, zf + 0.03, {
-      r: 0.02,
-      cast: false,
-    });
-  }
+  // the slab's edge under the parapet, seen from above over the roofs below
+  kit.box('#5b6068', len, 0.22, 0.02, cx, -0.25, z1 + 0.105, { cast: false });
+  // the neighbours' front doors, a flat's width apart, and every door's number over it
+  for (const k of [-2, -1, 1, 2]) neighbourDoor(kit, DOOR_C + k * PITCH, zf, k);
+  root.add(
+    plates(
+      Object.entries(NUMBER)
+        .filter(([k]) => +k)
+        .map(([k, n]) => [n, DOOR_C + k * PITCH, 1.43, zf + 0.012, 0.24, 0.12]),
+    ),
+  );
+  // a corridor light on the wall by every door, and the pools they throw
+  for (const k of [-2, -1, 1, 2]) corridorLight(kit, DOOR_C + k * PITCH, zf);
+  for (const k of [1, 2])
+    root.add(lightPool(DOOR_C + k * PITCH, (z0 + z1) / 2, 0.7, { color: '#dfe7f5', k: 0.12, y: -0.015 }));
   // Eric's own front door, cut low with the wall, and its frame. The leaf is its own group, hinged on its left
   // edge, so the trip in can swing it open onto the corridor and shut it behind him (places/dorms.js)
   const [d0, d1] = DOOR;
@@ -179,54 +191,6 @@ export function building(kit, root) {
   const door = leaf.flush(new THREE.Group());
   door.position.set(d0 + 0.02, 0, NEAR + T / 2);
   return door;
-}
-
-function neighbourDoor(kit, c, zf, k) {
-  const z = zf + 0.02;
-  kit.boxes(C.frame, [
-    [0.04, 1.3, 0.05, c - 0.3, 0, z],
-    [0.04, 1.3, 0.05, c + 0.3, 0, z],
-    [0.64, 0.05, 0.05, c, 1.28, z],
-  ]);
-  kit.box(C.steel, 0.56, 1.26, 0.03, c, 0.01, z + 0.005, { surf: 'door' });
-  kit.box('#c9cdd2', 0.1, 0.025, 0.04, c + 0.2, 0.62, z + 0.03, {
-    r: 0.008,
-    cast: false,
-  });
-  kit.box('#2f333b', 0.16, 0.035, 0.01, c, 0.82, z + 0.022, { cast: false });
-  kit.box('#d8dadc', 0.13, 0.055, 0.01, c, 1.36, zf + 0.006, { cast: false });
-  // the kitchen window beside the door, frosted, behind a grille; lit where someone's home (neighbours.js)
-  const wx = c - 0.62;
-  const lit = k === 1 || k === -2;
-  kit.box(lit ? '#f0dcb4' : '#aeb8c0', 0.3, 0.36, 0.01, wx, 0.72, zf + 0.006, {
-    cast: false,
-    opts: lit ? { emissive: '#ffcf8a', emissiveIntensity: 0.55 } : {},
-  });
-  const bars = [[0.36, 0.02, 0.02, wx, 0.7, zf + 0.04]];
-  for (let i = 0; i < 5; i++) bars.push([0.012, 0.42, 0.012, wx - 0.14 + i * 0.07, 0.69, zf + 0.045]);
-  bars.push([0.36, 0.02, 0.02, wx, 1.1, zf + 0.04]);
-  kit.boxes(C.alu, bars, { cast: false });
-  // the meter box, and something at the door: an umbrella or a pot plant
-  kit.box('#b4b8bc', 0.15, 0.22, 0.06, c + 0.52, 0.9, zf + 0.03, {
-    r: 0.01,
-    cast: false,
-  });
-  if (k === 1)
-    kit.cyl('#3d4d6b', 0.012, 0.035, 0.62, c + 0.36, 0, zf + 0.08, {
-      rz: -0.12,
-      seg: 6,
-    });
-  if (k === -1) {
-    kit.cyl('#b3aea5', 0.07, 0.055, 0.12, c - 0.38, 0, zf + 0.12, { seg: 10 });
-    kit.cyl('#4d6b47', 0.02, 0.09, 0.16, c - 0.38, 0.12, zf + 0.12, { seg: 7 });
-    // they're out: a parcel left at the door, its slip on top
-    kit.box('#b09474', 0.26, 0.16, 0.2, c + 0.1, 0, zf + 0.16, { r: 0.008, ry: 0.15, surf: 'card' });
-    kit.box('#f2f0ea', 0.1, 0.004, 0.07, c + 0.12, 0.16, zf + 0.16, { ry: 0.15, cast: false });
-  }
-  // home: sandals by the door
-  if (k === 1)
-    for (const dx of [-0.05, 0.05])
-      kit.box('#3d4d6b', 0.06, 0.025, 0.14, c - 0.2 + dx, 0, zf + 0.14, { r: 0.01, ry: 0.1 });
 }
 
 // the window: aluminium frame and glass, curtains drawn back, the air conditioner over it

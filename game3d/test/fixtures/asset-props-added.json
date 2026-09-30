@@ -46,6 +46,52 @@
     ]
   },
   {
+    "id_": "prop/dorm_court/mailboxes",
+    "kind": "prop",
+    "name": "Mailbox 203",
+    "paths": [
+      "game3d/js/places/dorm-court.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "dorm-court.js things.mailboxes",
+    "place": "dorm_court",
+    "used": [
+      "Dorm courtyard: tap target 'Mailbox 203'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "dorm-court"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/dorm_court/stairs",
+    "kind": "prop",
+    "name": "To the stairs",
+    "paths": [
+      "game3d/js/places/dorm-court.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "dorm-court.js things.stairs",
+    "place": "dorm_court",
+    "used": [
+      "Dorm courtyard: tap target 'To the stairs'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "dorm-court"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
     "id_": "prop/dorms/bed",
     "kind": "prop",
     "name": "Bed",
@@ -81,6 +127,29 @@
     "place": "dorms",
     "used": [
       "Eric's dorm room: tap target 'Boxes'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "dorms"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/dorms/door_203",
+    "kind": "prop",
+    "name": "Room 203",
+    "paths": [
+      "game3d/js/places/dorms.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "dorms.js things.door_203",
+    "place": "dorms",
+    "used": [
+      "Eric's dorm room: tap target 'Room 203'"
     ],
     "view": {
       "type": "room",
@@ -337,7 +406,7 @@
       "room": "office",
       "anchor": [
         5.2,
-        1.0,
+        1,
         2.4
       ],
       "spot": [
@@ -370,7 +439,7 @@
       "room": "office",
       "anchor": [
         2.6,
-        1.0,
+        1,
         2.4
       ],
       "spot": [
