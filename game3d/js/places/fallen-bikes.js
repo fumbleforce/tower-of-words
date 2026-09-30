@@ -7,6 +7,7 @@
 import * as THREE from 'three';
 import { rowBike, slotYaw, FALLEN } from '../scenes/forecourt/details.js';
 import { rbox } from '../props.js';
+import { mergeStatic } from '../scenes/merge-static.js';
 import { SE } from '../scenes/forecourt/plan.js';
 import { LOOSE_BIKES } from '../scenes/forecourt/court.js';
 import { glide } from '../move.js';
@@ -32,6 +33,10 @@ export function fallenBikes(game, root, nav) {
     const holder = new THREE.Group(),
       bike = rowBike(i, row.seed);
     bike.rotation.set(0, 0, 0);
+    // One mesh per material like the bikes in the static rows (they merge with the scene), so each moving bike draws
+    // about 6 times instead of 20, twice over with its shadow; the front wheel stays apart (named) to turn.
+    if (bike.userData.front) bike.userData.front.name = 'evening:bike-wheel';
+    mergeStatic(bike);
     holder.add(bike);
     frame.add(holder);
     return { i, holder, bike, wheel: bike.userData.front };

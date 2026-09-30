@@ -69,10 +69,16 @@ function mailbox203(root) {
   const flap = new THREE.Group();
   flap.name = 'evening:mailbox-flap'; // stable names for QA (the evening discoveries' checks)
   flap.position.set(x - w / 2, y, z + 0.01);
-  const leaf = new THREE.Mesh(new THREE.BoxGeometry(w, h, 0.012), [
-    ...Array(4).fill(new THREE.MeshStandardMaterial({ color: '#a9aeb4', roughness: 0.6 })),
-    new THREE.MeshStandardMaterial({ map: face, roughness: 0.55 }),
+  // two draws, not six: the box's faces in the order +x -x +y -y -z +z, so the five plain ones are one group
+  const box = new THREE.BoxGeometry(w, h, 0.012),
+    idx = Array.from(box.index.array);
+  box.setIndex([...idx.slice(0, 24), ...idx.slice(30, 36), ...idx.slice(24, 30)]);
+  box.clearGroups();
+  box.addGroup(0, 30, 0);
+  box.addGroup(30, 6, 1);
+  const leaf = new THREE.Mesh(box, [
     new THREE.MeshStandardMaterial({ color: '#a9aeb4', roughness: 0.6 }),
+    new THREE.MeshStandardMaterial({ map: face, roughness: 0.55 }),
   ]);
   leaf.position.set(w / 2, h / 2, 0);
   flap.add(leaf);

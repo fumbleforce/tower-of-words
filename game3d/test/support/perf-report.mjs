@@ -47,7 +47,12 @@ export function perfSummary(report) {
   if (!report || !Object.keys(report.places || {}).length) return 'perf: no numbers (the recorder did not run)';
   const parts = Object.entries(report.places).map(([name, p]) =>
     `${name} ${p.medianMs}/${p.worstMs} ms, ${p.calls} calls, ${K(p.tris)} tris`);
-  return `perf (${report.layout}, ${report.gl}, q${report.quality}; median/worst frame, median calls and tris): ${parts.join(' | ')}`;
+  const peaks = Object.entries(report.places).filter(([, p]) => p.callsMaxAt).map(([name, p]) => {
+    const a = p.callsMaxAt;
+    return `${name} ${p.callsMax} (visit ${a.visit}, ${(a.ms / 1000).toFixed(1)} s in, Eric ${a.x},${a.z}${a.trip ? ', in a trip' : ''})`;
+  });
+  return `perf (${report.layout}, ${report.gl}, q${report.quality}; median/worst frame, median calls and tris): ${parts.join(' | ')}` +
+    (peaks.length ? `\nperf peaks (max sampled calls, when): ${peaks.join(' | ')}` : '');
 }
 
 export function baselineFrom(report, budgets = {}, build = '') {

@@ -59,12 +59,6 @@
     {
       "file": "game3d/js/perf/batch.js",
       "ruleId": "no-unused-vars",
-      "message": "'id' is assigned a value but never used.",
-      "context": "9ba999bdf4be9f0d01b0bd091806f0be55cf99a64f166e03e48843ab29cc1f84"
-    },
-    {
-      "file": "game3d/js/perf/batch.js",
-      "ruleId": "no-unused-vars",
       "message": "'shown' is assigned a value but never used.",
       "context": "a4181e9bdc4da4fdda36d3cc740f7dd0f19a79d4b4a41dfadb1f8b68e486ded7"
     },
