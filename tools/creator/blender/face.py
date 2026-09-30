@@ -39,7 +39,8 @@ FRAME = {'eric': (0.0, 0.66, 0.36), 'mio': (0.0, 0.63, 0.36)}
 # a textured head triangle is face (not hair) when at least this share of its texels is light (skin, eye white)
 LIGHT = {'eric': 0.04, 'mio': 0.3}
 # Mio's iris is pale tan (Jørgen, 2026-09-30); sRGB, from its shadowed top to its lit bottom
-TAN_DARK, TAN_LIGHT = np.array([0.60, 0.46, 0.31]), np.array([0.93, 0.84, 0.69])
+TAN_DARK, TAN_LIGHT = np.array([0.66, 0.51, 0.34]), np.array([0.93, 0.84, 0.69])
+LASH = np.array([0.24, 0.15, 0.1])
 SIZE = 1024
 # how far from skin a pixel must be to count as painted (start, ramp): eye whites are close to skin, so eyes key tight
 RAMP = {'eyes': (0.02, 0.06), 'brows': (0.03, 0.15), 'blush': (0.012, 0.06)}
@@ -221,10 +222,12 @@ def key(body, path, frame):
         sat = (mx - mn) / np.maximum(mx, 1e-4)
         lum = col @ np.array([0.2126, 0.7152, 0.0722])
         # the lashes (the darkest navy) stay as painted
-        iris = (kind_at == 'eyes') & (sat > 0.3) & (col[:, :, 2] > col[:, :, 0] + 0.08) & (alpha > 0) & (lum > 0.1)
-        t = np.clip((lum - 0.1) / 0.35, 0, 1)[:, :, None]
+        iris = (kind_at == 'eyes') & (sat > 0.3) & (col[:, :, 2] > col[:, :, 0] + 0.08) & (alpha > 0)
+        t = np.clip((lum - 0.4) / 0.3, 0, 1)[:, :, None]
         tan = TAN_DARK * (1 - t) + TAN_LIGHT * t
-        col = np.where(iris[:, :, None], tan, col)
+        # the dark navy of the lash line and the top of the iris becomes a dark brown, so the eye keeps its outline
+        dark = LASH * np.clip(lum / 0.4, 0.5, 1)[:, :, None]
+        col = np.where(iris[:, :, None], np.where((lum < 0.4)[:, :, None], dark, tan), col)
     out = save(f'{body}-face', np.dstack([col, alpha]))
     # the check picture: the capture with every box drawn on it
     dbg = np.dstack([rgb, np.ones(dist.shape)])

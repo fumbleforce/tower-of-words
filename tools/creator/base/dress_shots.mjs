@@ -9,14 +9,16 @@ import { withBrowserJob } from '../browser-job.mjs';
 
 const args = process.argv.slice(2);
 const opt = (name, fallback) => { const i = args.indexOf(name); return i < 0 ? fallback : args.splice(i, 2)[1]; };
+const phone = args.includes('--phone'); if (phone) args.splice(args.indexOf('--phone'), 1);
 const port = opt('--port', '8771'), query = opt('--query', ''), [w, h] = opt('--size', '900x900').split('x').map(Number);
 const [specFile, outDir] = args;
-if (!specFile || !outDir) throw new Error('Usage: node tools/creator/base/dress_shots.mjs <shots.json> <out dir> [--port N] [--size WxH] [--query v=source16]');
+if (!specFile || !outDir) throw new Error('Usage: node tools/creator/base/dress_shots.mjs <shots.json> <out dir> [--port N] [--size WxH] [--phone] [--query ...]');
 const shots = JSON.parse(fs.readFileSync(specFile, 'utf8'));
 fs.mkdirSync(outDir, { recursive: true });
 
 await withBrowserJob('creator-dress-shots', async (browser) => {
-  const page = await browser.newPage({ viewport: { width: w + 400, height: h } });
+  // --phone: the page at exactly WxH (the phone layout), with the whole page captured instead of only the canvas
+  const page = await browser.newPage({ viewport: { width: phone ? w : w + 400, height: h } });
   const errors = [];
   page.on('pageerror', (e) => errors.push(e.message));
   page.on('console', (m) => { if (m.type() === 'error') errors.push(m.text()); });
@@ -38,7 +40,8 @@ await withBrowserJob('creator-dress-shots', async (browser) => {
       v.camera(...(s.camera || [0, 0.12, 1, false, null]));
     }, shot);
     await page.waitForTimeout(120);
-    await page.locator('#viewport canvas').screenshot({ path: path.join(outDir, shot.name + '.png') });
+    if (phone) await page.screenshot({ path: path.join(outDir, shot.name + '.png') });
+    else await page.locator('#viewport canvas').screenshot({ path: path.join(outDir, shot.name + '.png') });
   }
   if (errors.length) throw new Error(errors.join(' | '));
 });
