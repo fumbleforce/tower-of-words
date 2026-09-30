@@ -4,30 +4,10 @@
   "code": [
     "tools/creator/base/dress.html",
     "tools/creator/base/dress.js",
-    "tools/creator/base/base.js",
-    "tools/creator/base/eyes.js",
-    "tools/creator/base/wardrobe.js",
-    "tools/creator/base/hair.js",
-    "tools/creator/approved-idle.js",
-    "tools/creator/dispose.js",
-    "tools/creator/mio-prep.js",
-    "tools/creator/recipe.js",
-    "tools/creator/retarget.js",
-    "art/parts/library.json",
-    "art/parts/src/mio/faces.json"
+    "tools/creator/base/model.js"
   ],
   "data": [
-    "art/parts/anim/idle.glb",
-    "art/parts/anim/walk.glb",
-    "art/parts/src/eric/mesh.glb",
-    "art/parts/src/eric/tex.webp",
-    "art/parts/src/mio/mesh.glb",
-    "art/parts/src/mio/tex.webp",
-    "art/parts/base/clean-eric-source18.json",
-    "art/parts/base/clean-eric-source16.png",
-    "art/parts/base/clean-eric-source18-fit3-layers.json",
-    "art/parts/base/clean-mio-source18.json",
-    "art/parts/base/clean-mio-source16.png",
-    "art/parts/base/clean-mio-source18-fit3-layers.json"
+    "art/parts/blender/eric.glb",
+    "art/parts/blender/mio.glb"
   ]
 }

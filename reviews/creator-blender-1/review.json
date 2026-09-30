@@ -1,0 +1,53 @@
+{
+ "title": "Creator rebuilt in Blender: simple bodies, their own hair, two outfits",
+ "date": "2026-09-30",
+ "by": "Claude (claude-agent:creator-blender)",
+ "status": "open",
+ "question": "Is this the right base to build the creator on: Blender-made bodies with one skin colour, their own hair, and clothes as separate pieces?",
+ "multi": false,
+ "media": [
+  {
+   "image": "art/parts/blender/review/eric-1-standing.webp",
+   "caption": "Eric. Rows: the original; the new body with his own hair and stubble; the hoodie and trousers; the shirt and skirt. Front, three-quarter, side, back. The body is new: a trunk, arms, legs, a mitten hand and a simple foot modelled from basic shapes in Blender on his original skeleton, in one flat skin colour. The only picture on it is the face: his painted eyes and one pair of brows, lifted off the original face and nothing else. Rendered in Blender (Cycles), same cameras for the original and the new model."
+  },
+  {
+   "image": "art/parts/blender/review/eric-2-walking.webp",
+   "caption": "Eric walking, frames 8 and 20 of the game's walk, the original first, then both outfits. The walk and the approved relaxed idle play on the new model unchanged, because it keeps the original skeleton exactly."
+  },
+  {
+   "image": "art/parts/blender/review/eric-3-closeups.webp",
+   "caption": "Eric close up. Face: the original, the new one, three-quarter, and the new head without hair (a smooth round head, one pair of brows). Neck: bare from the front and behind, then in the hoodie. The hood from above with the hair hidden, to show its inside. Hoodie cuff and shirt sleeve (closed edges with an inside), the shirt collar, the bare hand. Feet: bare, and the sneakers under trousers and with the skirt. The stubble is its own thin piece over the chin, so it can be switched off without a hole."
+  },
+  {
+   "image": "art/parts/blender/review/mio-1-standing.webp",
+   "caption": "Mio, the same four rows. Her own hair and ears; her eyes now pale tan."
+  },
+  {
+   "image": "art/parts/blender/review/mio-2-walking.webp",
+   "caption": "Mio walking, frames 8 and 20."
+  },
+  {
+   "image": "art/parts/blender/review/mio-3-closeups.webp",
+   "caption": "Mio close up, the same close-ups as Eric's."
+  }
+ ],
+ "options": [
+  {
+   "id": "base-ok",
+   "label": "base-ok",
+   "note": "Build on this. Next would be more hair styles and clothes made the same way in Blender, each checked against Mio's and Eric's originals before it goes up."
+  },
+  {
+   "id": "needs-work",
+   "label": "needs-work",
+   "note": "Tell me what to change first. What I can see myself: their own hair keeps the original's shape (taken off the original head as its own piece, given thickness and flat colours, no texture), so it is not newly modelled; the old made hair styles, eye styles and the other clothes are gone from the creator until they are rebuilt this way. Mio's eyes: the top of the iris and the lash line turned brownish with the tan, and she shows no brows (hers were always under the fringe). The clothes are plainer than the originals (no pockets on the trousers, plain sneakers). The body's parts overlap where they meet, one skin colour hides the join, but it is not one welded surface. These are CPU (Cycles) renders, not EEVEE: the GPU was busy with the voice batch."
+  }
+ ],
+ "links": [
+  {"label": "The live creator (drag to turn it, Idle or Walk, Original puts the game model beside it)", "href": "tools/creator/base/dress.html"},
+  {"label": "The same creator online, for your phone", "href": "https://fumbleforce.github.io/tower-of-words/creator/"},
+  {"label": "Eric in the shirt and skirt", "href": "tools/creator/base/dress.html?body=eric&outfit=shirt"},
+  {"label": "Bare bodies, no hair", "href": "tools/creator/base/dress.html?outfit=none&hair=none&stubble=none"},
+  {"label": "Previous round", "href": "bible/#review/creator-base-8"}
+ ]
+}

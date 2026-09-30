@@ -1,0 +1,16 @@
+[
+  {"name": "mio-hoodie-idle", "look": {"body": "mio", "outfit": "hoodie"}, "pose": ["neutral", 0.8], "camera": [0.3, 0.12, 1], "beside": true},
+  {"name": "mio-hoodie-walk", "look": {"body": "mio", "outfit": "hoodie"}, "pose": ["walk", 0.3], "camera": [0.8, 0.12, 1], "beside": true},
+  {"name": "mio-shirt-idle", "look": {"body": "mio", "outfit": "shirt"}, "pose": ["neutral", 0.8], "camera": [-0.4, 0.12, 1], "beside": false},
+  {"name": "mio-shirt-walk", "look": {"body": "mio", "outfit": "shirt"}, "pose": ["walk", 0.55], "camera": [1.4, 0.12, 1], "beside": false},
+  {"name": "mio-bare", "look": {"body": "mio", "outfit": "none", "hair": "none"}, "pose": ["neutral", 0.8], "camera": [0.4, 0.12, 1], "beside": false},
+  {"name": "mio-face", "look": {"body": "mio", "outfit": "hoodie"}, "pose": ["neutral", 0.8], "camera": [0.25, 0.1, 1, true], "beside": false},
+  {"name": "eric-hoodie-idle", "look": {"body": "eric", "outfit": "hoodie"}, "pose": ["neutral", 0.8], "camera": [0.3, 0.12, 1], "beside": true},
+  {"name": "eric-hoodie-walk", "look": {"body": "eric", "outfit": "hoodie"}, "pose": ["walk", 0.3], "camera": [0.8, 0.12, 1], "beside": true},
+  {"name": "eric-shirt-idle", "look": {"body": "eric", "outfit": "shirt", "bottomColour": "#2b2f3a"}, "pose": ["neutral", 0.8], "camera": [-0.4, 0.12, 1], "beside": false},
+  {"name": "eric-shirt-walk", "look": {"body": "eric", "outfit": "shirt", "bottomColour": "#2b2f3a"}, "pose": ["walk", 0.55], "camera": [1.4, 0.12, 1], "beside": false},
+  {"name": "eric-bare", "look": {"body": "eric", "outfit": "none", "hair": "none", "stubble": "none"}, "pose": ["neutral", 0.8], "camera": [0.4, 0.12, 1], "beside": false},
+  {"name": "eric-face", "look": {"body": "eric", "outfit": "hoodie"}, "pose": ["neutral", 0.8], "camera": [0.25, 0.1, 1, true], "beside": false},
+  {"name": "eric-hood-back", "look": {"body": "eric", "outfit": "hoodie"}, "pose": ["neutral", 0.8], "camera": [2.9, 0.6, 2.2, false, [0, 0.45, 0]], "beside": false},
+  {"name": "eric-neck", "look": {"body": "eric", "outfit": "hoodie"}, "pose": ["walk", 0.3], "camera": [0.6, 0.2, 3, false, [0, 0.5, 0]], "beside": false}
+]
