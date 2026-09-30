@@ -1,0 +1,235 @@
+{
+  "status": "pending",
+  "request": "C-0191",
+  "issue": 4,
+  "review": "day1-frames",
+  "pipeline": "sh tools/voice/run.sh",
+  "note": "Only new merged spoken lines need clips. Phone text and narration are not voiced. Retired lists keys no longer used in gate/office; confirm against the full manifest before deleting assets.",
+  "clips": [
+    {
+      "key": "oh-1xht2cv",
+      "speaker": "guard",
+      "text": "おはようございます。カードを、どうぞ。",
+      "authoredText": "{ohayo}。カードを、どうぞ。",
+      "overheard": true,
+      "emo": "polite",
+      "source": "gate:ohayo_guard",
+      "lang": "ja"
+    },
+    {
+      "key": "oh-199lxu",
+      "speaker": "guard",
+      "text": "はい、よろしくおねがいします。カードを、どうぞ。",
+      "authoredText": "はい、{yoroshiku}。カードを、どうぞ。",
+      "overheard": true,
+      "emo": "amused",
+      "source": "gate:yoroshiku_guard",
+      "lang": "ja"
+    },
+    {
+      "key": "ln-l5k9rg",
+      "speaker": "kenji",
+      "text": "Eric-san? I am Kenji! Two months here, so now I am not the newest. Ah, sorry, your chair... I borrowed it. Mine is broken.",
+      "authoredText": "Eric-san? I am Kenji! Two months here, so now I am not the newest. Ah, sorry, your chair... I borrowed it. Mine is broken.",
+      "overheard": false,
+      "emo": "excited",
+      "source": "office:kenji_first",
+      "lang": "en"
+    },
+    {
+      "key": "ln-1eyblp9",
+      "speaker": "mio",
+      "text": "Oh, and... I put your screen in English. Here, your first repair request.",
+      "authoredText": "Oh, and... I put your screen in English. Here, your first repair request.",
+      "overheard": false,
+      "emo": "casual",
+      "source": "office:ticket",
+      "lang": "en"
+    },
+    {
+      "key": "ln-kv3t2i",
+      "speaker": "mio",
+      "text": "...Asked it nicely. Like the doors this morning? Okay, I'll close it. It's lunch anyway.",
+      "authoredText": "...Asked it nicely. Like the doors this morning? Okay, I'll close it. It's lunch anyway.",
+      "overheard": false,
+      "emo": "deadpan",
+      "source": "office:ticket_done",
+      "lang": "en"
+    },
+    {
+      "key": "ln-2igph8",
+      "speaker": "mio",
+      "text": "Okay, I'm going home. Um... Eric?",
+      "authoredText": "Okay, I'm going home. Um... Eric?",
+      "overheard": false,
+      "emo": "hesitant",
+      "source": "office:ending",
+      "lang": "en"
+    },
+    {
+      "key": "ln-9wqnru",
+      "speaker": "mio",
+      "text": "Okay, I'm going home. Hey, 外人.",
+      "authoredText": "Okay, I'm going home. Hey, {gaijin}.",
+      "overheard": false,
+      "emo": "hesitant",
+      "source": "office:ending",
+      "lang": "en"
+    }
+  ],
+  "retired": [
+    {
+      "key": "oh-1j05rm4",
+      "speaker": "guard",
+      "text": "はい、よろしくおねがいします。",
+      "authoredText": "はい、{yoroshiku}。",
+      "overheard": true,
+      "emo": "amused",
+      "source": "gate:yoroshiku_guard"
+    },
+    {
+      "key": "oh-1gamfp7",
+      "speaker": "guard",
+      "text": "カードを、どうぞ。",
+      "authoredText": "カードを、どうぞ。",
+      "overheard": true,
+      "emo": "polite",
+      "source": "gate:guard_points_reader"
+    },
+    {
+      "key": "oh-1wqxvbv",
+      "speaker": "guard",
+      "text": "あちらで、お待ちください。",
+      "authoredText": "あちらで、お待ちください。",
+      "overheard": true,
+      "emo": "polite",
+      "source": "gate:card_red"
+    },
+    {
+      "key": "oh-10nz594",
+      "speaker": "kuroda",
+      "text": "お願い、開けて…いい子だから…",
+      "authoredText": "お願い、{akete}…いい子だから…",
+      "overheard": true,
+      "emo": "pleading",
+      "source": "gate:bench_wait"
+    },
+    {
+      "key": "oh-ekqqn0",
+      "speaker": "kuroda",
+      "text": "あ…すみません、ゲートが…",
+      "authoredText": "あ…すみません、ゲートが…",
+      "overheard": true,
+      "emo": "pleading",
+      "source": "gate:hamada_stuck"
+    },
+    {
+      "key": "oh-ki3dwa",
+      "speaker": "guard",
+      "text": "…あ、もしもし。いえ…開きました。",
+      "authoredText": "…あ、もしもし。いえ…開きました。",
+      "overheard": true,
+      "emo": "deadpan",
+      "source": "gate:word_say"
+    },
+    {
+      "key": "oh-lk0tl",
+      "speaker": "guard",
+      "text": "はい、わかってます。二人だと思ってるんです。",
+      "authoredText": "はい、わかってます。二人だと思ってるんです。",
+      "overheard": true,
+      "emo": "polite",
+      "source": "gate:guard_knows"
+    },
+    {
+      "key": "ln-hbadtk",
+      "speaker": "kenji",
+      "text": "Eric-san? I am Kenji! I am new also, two months. So now I am not the newest.",
+      "authoredText": "Eric-san? I am Kenji! I am new also, two months. So now I am not the newest.",
+      "overheard": false,
+      "emo": "excited",
+      "source": "office:kenji_first"
+    },
+    {
+      "key": "ln-jrnkwp",
+      "speaker": "kenji",
+      "text": "Ah, sorry, sorry. Your chair... I borrowed it. Mine is broken.",
+      "authoredText": "Ah, sorry, sorry. Your chair... I borrowed it. Mine is broken.",
+      "overheard": false,
+      "emo": "sheepish",
+      "source": "office:kenji_first"
+    },
+    {
+      "key": "ln-1k8iv68",
+      "speaker": "mio",
+      "text": "Oh, and come here a second. I have a job for you.",
+      "authoredText": "Oh, and come here a second. I have a job for you.",
+      "overheard": false,
+      "emo": "casual",
+      "source": "office:chair_push"
+    },
+    {
+      "key": "ln-1lo2rgb",
+      "speaker": "mio",
+      "text": "Okay, your first repair request. I changed your screen to English, by the way.",
+      "authoredText": "Okay, your first repair request. I changed your screen to English, by the way.",
+      "overheard": false,
+      "emo": "casual",
+      "source": "office:ticket"
+    },
+    {
+      "key": "ln-7i4z33",
+      "speaker": "mio",
+      "text": "...Asked it nicely. Like the doors, this morning?",
+      "authoredText": "...Asked it nicely. Like the doors, this morning?",
+      "overheard": false,
+      "emo": "deadpan",
+      "source": "office:ticket_done"
+    },
+    {
+      "key": "ln-wwro0f",
+      "speaker": "mio",
+      "text": "Okay. Okay, I'll close it. Um. It's lunch anyway.",
+      "authoredText": "Okay. Okay, I'll close it. Um. It's lunch anyway.",
+      "overheard": false,
+      "emo": "low",
+      "source": "office:ticket_done"
+    },
+    {
+      "key": "ln-139xjag",
+      "speaker": "mio",
+      "text": "Okay, I'm going home.",
+      "authoredText": "Okay, I'm going home.",
+      "overheard": false,
+      "emo": "tired",
+      "source": "office:ending"
+    },
+    {
+      "key": "ln-1nuypj",
+      "speaker": "mio",
+      "text": "Um. Eric.",
+      "authoredText": "Um. Eric.",
+      "overheard": false,
+      "emo": "hesitant",
+      "source": "office:ending"
+    },
+    {
+      "key": "ln-10hhlz4",
+      "speaker": "mio",
+      "text": "Hey, 外人.",
+      "authoredText": "Hey, {gaijin}.",
+      "overheard": false,
+      "emo": "hesitant",
+      "source": "office:ending"
+    },
+    {
+      "key": "ln-wz8s26",
+      "speaker": "mio",
+      "text": "You're the IT guy. You tell them it's the sensor.",
+      "authoredText": "You're the IT guy. You tell them it's the sensor.",
+      "overheard": false,
+      "emo": "dry",
+      "source": "office:end_ticket"
+    }
+  ]
+}

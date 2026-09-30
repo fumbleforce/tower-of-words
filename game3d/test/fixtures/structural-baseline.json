@@ -315,9 +315,6 @@
     "gate:jam_greet",
     "gate:way_social",
     "gate:mime_menu",
-    "gate:pt_case",
-    "gate:pt_man",
-    "gate:guard_knows",
     "gate:mime_cat",
     "gate:mime_squeeze",
     "gate:mime_lift",
@@ -722,21 +719,21 @@
     },
     {
       "from": "gate:mime_menu",
-      "to": "gate:pt_case",
+      "to": "gate:mime_lift",
       "kind": "choice",
       "labels": [
-        "Point at the briefcase"
+        "Mime lifting the briefcase over the gate"
       ],
-      "cond": "(!pt_case)"
+      "cond": ""
     },
     {
       "from": "gate:mime_menu",
-      "to": "gate:pt_man",
+      "to": "gate:mime_squeeze",
       "kind": "choice",
       "labels": [
-        "Point at the man"
+        "Mime squeezing sideways through a gap"
       ],
-      "cond": "(!pt_man)"
+      "cond": "(!m_squeeze)"
     },
     {
       "from": "gate:mime_menu",
@@ -746,54 +743,6 @@
         "Point at the cat under his desk"
       ],
       "cond": "(!pt_cat)"
-    },
-    {
-      "from": "gate:mime_menu",
-      "to": "gate:mime_squeeze",
-      "kind": "choice",
-      "labels": [
-        "Mime squeezing sideways through a gap"
-      ],
-      "cond": "(pt_case && pt_man && !m_squeeze)"
-    },
-    {
-      "from": "gate:mime_menu",
-      "to": "gate:mime_lift",
-      "kind": "choice",
-      "labels": [
-        "Mime lifting something over your head"
-      ],
-      "cond": "(pt_case && pt_man)"
-    },
-    {
-      "from": "gate:pt_case",
-      "to": "gate:guard_knows",
-      "kind": "call",
-      "labels": [],
-      "cond": "(pt_man)",
-      "call": true
-    },
-    {
-      "from": "gate:pt_case",
-      "to": "gate:mime_menu",
-      "kind": "go",
-      "labels": [],
-      "cond": ""
-    },
-    {
-      "from": "gate:pt_man",
-      "to": "gate:guard_knows",
-      "kind": "call",
-      "labels": [],
-      "cond": "(pt_case)",
-      "call": true
-    },
-    {
-      "from": "gate:pt_man",
-      "to": "gate:mime_menu",
-      "kind": "go",
-      "labels": [],
-      "cond": ""
     },
     {
       "from": "gate:mime_cat",
@@ -902,6 +851,13 @@
       "labels": [],
       "cond": "",
       "call": true
+    },
+    {
+      "from": "office:chair_push",
+      "to": "office:ticket",
+      "kind": "go",
+      "labels": [],
+      "cond": ""
     },
     {
       "from": "office:ticket_done",
@@ -1655,8 +1611,6 @@
     "gate_magic",
     "late_greet",
     "guard_cool",
-    "pt_case",
-    "pt_man",
     "pt_cat",
     "m_squeeze",
     "met_kuroda",
