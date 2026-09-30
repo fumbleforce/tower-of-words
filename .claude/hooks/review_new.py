@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
-"""UserPromptSubmit: if Review items have unread feedback, add one line of context: "New Review answers: <ids>".
+"""UserPromptSubmit: if Review items or Showcase entries have unread feedback, add one line of context:
+"New Review/Showcase answers: <ids>" (a showcase entry as showcase/<id>).
 
-Uses the same test as `python3 tools/review.py list` (feedback.json present and not marked read), imported
-rather than spawned. Each answer (item id + sent time) is announced once per session; the seen list lives in
+Uses review.unread() from tools/review.py (feedback.json present and not marked read, the same test as
+`python3 tools/review.py list`), imported rather than spawned. Each answer (item id + sent time) is announced once per session; the seen list lives in
 .git/claude-review-seen.json (untracked, shared by worktrees). Prints nothing when there is nothing new.
 """
 import json
@@ -20,7 +21,7 @@ def main():
     sys.path.insert(0, os.path.join(root, 'tools'))
     import review  # tools/review.py
 
-    new = [(rid, str(fb.get('sent', ''))) for rid, _r, fb in review.items() if fb and not fb.get('read')]
+    new = [(rid if kind == 'review' else f'showcase/{rid}', sent) for kind, rid, sent in review.unread()]
     if not new:
         return
     session = data.get('session_id', '?')
@@ -41,7 +42,7 @@ def main():
         os.replace(tmp, state_path)
     except Exception:
         pass
-    line = 'New Review answers: ' + ', '.join(rid for rid, _ in fresh)
+    line = 'New Review/Showcase answers: ' + ', '.join(rid for rid, _ in fresh)
     print(json.dumps({'hookSpecificOutput': {'hookEventName': 'UserPromptSubmit', 'additionalContext': line}}))
 
 
