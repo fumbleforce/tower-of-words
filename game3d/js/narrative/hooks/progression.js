@@ -26,6 +26,7 @@ export function installProgressionHooks(game, { travel }) {
       else pr = { who: null, text: prompt.replace(/^>\s*/, '') };
     }
     await ui.typePrompt(word, pr);
+    game.lastSaid = word; // the next kotodama shows it rising off what it caught
     const spoken = voice(WORDS[word].voice || '');
     complete(() => {
       game.runner.learnCmd(word);

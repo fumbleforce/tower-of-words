@@ -9,7 +9,6 @@ import { sliced, setUrgent, nextFrame } from '../perf/slice.js';
 import { optimizePlace } from '../perf/batch.js';
 import { warmPlace } from '../perf/warm.js';
 import { SmoothWalker } from '../move.js';
-import { setPlace as sfxPlace } from '../sfx.js';
 import { playMusic } from '../ui.js';
 import { sim, PERIODS as PERIOD_ORDER, absorb, applySchedule, save } from '../sim.js';
 import * as trips from '../trips.js';
@@ -90,7 +89,6 @@ export function createPlaceLifecycle(
     game.player.setState('idle');
     game.player.root.visible = true;
     game.walker = new SmoothWalker(game.player.root, place.nav, { speed: 1.3 });
-    sfxPlace(name);
     game.walker.facing = place.startFacing ?? Math.PI;
     game.player.root.rotation.y = game.walker.facing;
     const [sx, sz] = place.start;

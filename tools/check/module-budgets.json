@@ -30,8 +30,8 @@
       "reason": "Composition, boot/Continue, input, rendering and frame loop remain after stage 4 hooks, interactions and place lifecycle extraction."
     },
     "game3d/js/menu.js": {
-      "lines": 1273,
-      "bytes": 44875,
+      "lines": 1266,
+      "bytes": 44725,
       "owner": "codex-tui",
       "review": "C-0089",
       "reason": "Existing action menus and target selection; stage 4 interaction extraction is planned."
@@ -51,31 +51,31 @@
       "reason": "Existing batching and geometry optimization utilities; preserve rendering behavior during this pass."
     },
     "game3d/js/places/lift.js": {
-      "lines": 1206,
-      "bytes": 43463,
+      "lines": 1195,
+      "bytes": 42893,
       "owner": "codex-tui",
       "review": "C-0071; 2026-09-30 landing lamp kept in the light count (notes/PERF.md)",
       "reason": "Existing shared lift geometry, movement and dialogue staging; extract after behavior characterization."
     },
     "game3d/js/places/lobby.js": {
-      "lines": 666,
-      "bytes": 23058,
+      "lines": 669,
+      "bytes": 23167,
       "owner": "codex-tui",
-      "review": "C-0076; 2026-09-30 preparation slices (yield points, notes/PERF.md)",
+      "review": "C-0076; 2026-09-30 preparation slices (yield points, notes/PERF.md); C-0166 named sounds per door and machine",
       "reason": "Existing gate place geometry and interaction hooks; stage 5 room-builder review is planned."
     },
     "game3d/js/places/office.js": {
-      "lines": 1130,
-      "bytes": 40692,
+      "lines": 1131,
+      "bytes": 40726,
       "owner": "codex-tui",
-      "review": "C-0076; 2026-09-30 preparation slices (yield points, notes/PERF.md)",
+      "review": "C-0076; 2026-09-30 preparation slices (yield points, notes/PERF.md); C-0166 named sounds per door and machine",
       "reason": "Existing office place geometry and interaction hooks; stage 5 room-builder review is planned."
     },
     "game3d/js/places/train.js": {
       "lines": 1673,
-      "bytes": 61052,
+      "bytes": 61074,
       "owner": "codex-tui",
-      "review": "C-0076",
+      "review": "C-0076; C-0166 named sounds per door and machine",
       "reason": "Existing train place geometry, animation and scene hooks; stage 5 room-builder review is planned."
     },
     "game3d/js/post.js": {
@@ -107,8 +107,8 @@
       "reason": "Existing lobby geometry composition; preserve the room while extracting responsibilities later."
     },
     "game3d/js/scenes/office.js": {
-      "lines": 2141,
-      "bytes": 73840,
+      "lines": 2126,
+      "bytes": 72828,
       "owner": "codex-tui",
       "review": "C-0110 / X-0193: preserve cup-tray, counter and sink overlap order; existing responsibility unchanged; 2026-09-30 preparation slices (yield points, notes/PERF.md)",
       "reason": "Existing office geometry composition; preserve the room while extracting responsibilities later."
@@ -170,10 +170,10 @@
       "reason": "Existing passenger mesh factories, per-seat placement and idle motion share rig conventions. Stage 5 crowd and room-builder review will separate appearance construction from placement and motion."
     },
     "game3d/js/ui.js": {
-      "lines": 894,
-      "bytes": 36173,
+      "lines": 902,
+      "bytes": 36591,
       "owner": "codex-tui",
-      "review": "C-0080",
+      "review": "C-0080; C-0166 named sounds per door and machine, Words chip pop and voice placeholder",
       "reason": "Remaining HUD construction, action menus and word practice; dialogue, portraits and audio are extracted."
     }
   }

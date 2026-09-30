@@ -1211,7 +1211,7 @@ export async function trainPlace(game) {
         st.hold = false;
         st.slide = null;
         st.frozen = false;
-        sfx('door');
+        sfx('traindoor');
       },
       // { to, ms }: a slow, steady slide from where they are to `to` (1 open, 0 shut) over ms; without ms, the quick close
       doorsClose: ({ to = 0, ms } = {}) => {
@@ -1223,7 +1223,7 @@ export async function trainPlace(game) {
           sfx('doorslow');
         } else {
           st.slide = null;
-          sfx('door');
+          sfx('traindoor');
         } // the story frames the shot itself (Jørgen missed the man when it jumped to the door)
       },
       chime: () => {
@@ -1232,7 +1232,7 @@ export async function trainPlace(game) {
         game.event(eventId('train', 'chime'));
       },
       // kotodama: they freeze dead where they are, with the effect; otherwise they bounce back a little, as before
-      doorsHold: async ({ kotodama } = {}) => {
+      doorsHold: async ({ kotodama, word } = {}) => {
         st.slide = null;
         st.hold = true;
         st.chimeT = -1;
@@ -1242,7 +1242,7 @@ export async function trainPlace(game) {
           st.frozen = true;
           await game.kotodama(
             myLeaves.map((d) => d.g),
-            { pulse: myLeaves.filter((d) => d.x0 < 0).map((d) => d.g), focus: DOOR_SHOT, zoom: 1.45 },
+            { pulse: myLeaves.filter((d) => d.x0 < 0).map((d) => d.g), focus: DOOR_SHOT, zoom: 1.45, word },
           );
           return;
         } // framed on the door, so the moment isn't off camera (QA round 1) // the camera stays on the door until the story pulls back

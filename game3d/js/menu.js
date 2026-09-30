@@ -1098,10 +1098,10 @@ function goalArrow() {
 }
 
 // ---------- the current target, and cycling through things in reach ----------
-// main.js picks the nearest thing as the target every frame. When several are close (the gate: guard, gate, cat,
-// sign-in sheet), Tab (or Next in the action menu) steps through the ones in reach and holds that choice until
-// Eric walks away from it. Done by wrapping the markers' per-frame update, where main.js hands over its pick.
-// (A shim until main.js takes game.targetLock itself; see notes/production-requests.md.)
+// main.js picks the nearest thing as the target every frame, and holds a chosen one (game.targetLock) while it's
+// usable and within 1.7 m. When several are close (the gate: guard, gate, cat, sign-in sheet), Tab (or Next in the
+// action menu) steps through the ones in reach and sets that lock. The list of what's in reach is read from the
+// markers' per-frame update, where main.js hands over its pick.
 function targetCycling() {
   const g = game();
   const mk = g && g.markers;
@@ -1109,8 +1109,7 @@ function targetCycling() {
   mk._cycling = true;
   const orig = mk.update.bind(mk);
   const REACH = 1.1;
-  let lock = null,
-    lockPlace = null,
+  let lockPlace = null,
     list = [];
   const dist = (m, p) => {
     const s = m.spot ? m.spot() : null;
@@ -1119,7 +1118,7 @@ function targetCycling() {
   mk.update = (camera, canvas, mp, near) => {
     const G = game();
     if (G.place !== lockPlace) {
-      lock = null;
+      G.targetLock = null;
       lockPlace = G.place;
     }
     list = G.busy
@@ -1134,21 +1133,15 @@ function targetCycling() {
           })
           .sort((x, y) => dist(x, mp) - dist(y, mp));
     if (near && !list.includes(near)) list.unshift(near);
-    if (lock && (!list.includes(lock) || G.busy)) lock = null;
-    if (lock) {
-      near = lock;
-      G.near = lock;
-    }
     ui.cycleInfo = list.length > 1 && near ? { n: list.length, i: Math.max(0, list.indexOf(near)), next: cycle } : null;
     return orig(camera, canvas, mp, near);
   };
   function cycle() {
     const G = game();
     if (!list.length) return;
-    const cur = lock || G.near;
-    const i = list.indexOf(cur);
-    lock = list[(i + 1) % list.length];
-    G.near = lock;
+    const i = list.indexOf(G.targetLock || G.near);
+    G.targetLock = list[(i + 1) % list.length];
+    G.near = G.targetLock;
     sfx('tap');
   }
   shell.cycleTarget = cycle;

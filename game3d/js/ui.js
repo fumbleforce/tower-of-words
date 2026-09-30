@@ -2,7 +2,7 @@ export { PORTRAITS } from './ui/portrait-data.js';
 // HTML overlay: goal, words, the train's LED board, the talk panel with reply chips, fades and the end card.
 import { lineHTML, WORDS, COMMANDS, PHRASES, known, cmdHTML, iconHTML, baseHTML, FORM_NOTE } from './lang.js';
 import { settings, onSettings } from './settings.js';
-import { mountVoice, VOICE_CSS } from './speech.js';
+import { mountVoice, VOICE_CSS, voiceMode } from './speech.js';
 import { notePractice, needsPractice, pipsHTML, MASTERY_CSS } from './mastery.js';
 // the practice dots' css ships with mastery.js; the voice row injects its own
 {
@@ -322,9 +322,17 @@ export const ui = {
     if (k) k.textContent = keyLabel(code || 'KeyQ');
   },
   refreshWords() {
-    const b = $('#cmdsBtn');
+    const b = $('#cmdsBtn'),
+      was = this._wordsN;
+    this._wordsN = known.size;
     b.hidden = known.size === 0;
     b.querySelector('.n').textContent = known.size;
+    // a word was just learned: the chip pops once, its border lit in the accent (css #cmdsBtn.gain)
+    if (was !== undefined && known.size > was) {
+      b.classList.remove('gain');
+      void b.offsetWidth; // restarts the pop if it's still running
+      b.classList.add('gain');
+    }
   },
   showCmds() {
     const row = (id) => {
@@ -735,7 +743,7 @@ export const ui = {
           : '') +
         // two blocks: the word (icon, kana, romaji, meaning) and the answer (input, mic, one hint line, never mind)
         `<div class="tp"><div class="tp-word">${iconHTML(id, 'wi tp-ico')}<div class="tp-jp jp">${w.ja}</div><div class="tp-ro">${toks.map((k) => (k.sp ? '<span class="sp"> </span>' : `<span class="lt">${k.ch}</span>`)).join('')}</div><div class="tp-en">${w.en}</div></div>` +
-        `<div class="tp-ans"><input class="tp-in" type="text" inputmode="latin" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="Type it in romaji" aria-label="Type ${w.ro}"><div class="tp-hint"></div>${opts.cancel ? '<button type="button" class="tp-cancel">Never mind</button>' : ''}</div></div>`;
+        `<div class="tp-ans"><input class="tp-in" type="text" inputmode="latin" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="${voiceMode() === 'off' ? 'Type it in romaji' : 'Type it in romaji or say it'}" aria-label="Type ${w.ro}"><div class="tp-hint"></div>${opts.cancel ? '<button type="button" class="tp-cancel">Never mind</button>' : ''}</div></div>`;
       t.querySelector('.chips').innerHTML = '';
       t.querySelector('.more').hidden = true;
       t.classList.remove('in');

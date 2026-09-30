@@ -122,6 +122,7 @@ export function installPresentationHooks(game, { rigOf, isPlayer, canvas, TS }) 
     sfx('lift');
   };
   H.liftDoors = ({ state }) => {
-    sfx(state === 'open' ? 'lift' : 'door');
+    if (state === 'open') sfx('lift');
+    sfx('liftdoor', { at: state === 'open' ? 0.3 : 0 });
   };
 }

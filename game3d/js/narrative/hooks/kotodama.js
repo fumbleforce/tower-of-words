@@ -1,15 +1,26 @@
 import * as THREE from 'three';
 import { sfx, stopSfx } from '../../ui.js';
+import { WORDS } from '../../lang.js';
 
 export function installKotodamaHooks(game, { renderer, objsOf }) {
   const H = game.hooks;
   const ui = game.ui;
+  // the word Eric just said (the Say menu, a taught command) is the one a kotodama shows; typed words set it in H.type
+  const says = game.mioSays;
+  game.mioSays = function (id) {
+    this.lastSaid = id;
+    return says.call(this, id);
+  };
   // ---------- kotodama: the look of a word taking hold ----------
   // One reusable effect for every command that works: the closing chime (or any cuttable sound) stops mid-note,
   // a faint cold shimmer runs along the edges of whatever the word caught, the lights dip and hum for a moment,
   // and a low tone swells. The thing itself is frozen by whoever calls this (the place's hook).
   // targets: Object3Ds whose meshes get the shimmer. Resolves when the effect has settled (about 2.6 s).
-  game.kotodama = async (targets = [], { cut = ['chime'], focus, zoom = 1.25, pulse = targets } = {}) => {
+  // word: the command that did it (defaults to the word Eric just said); its Japanese rises off the target in faint
+  // light while the effect plays, then fades, so the kanji is tied to what it did.
+  game.kotodama = async (targets = [], { cut = ['chime'], focus, zoom = 1.25, pulse = targets, word } = {}) => {
+    const said = WORDS[word || game.lastSaid];
+    game.lastSaid = null;
     for (const k of cut) stopSfx(k);
     // clear the view: the text box and portraits sit over the bottom of the screen, where things like the doors are
     ui.closeTalk();
@@ -48,6 +59,21 @@ export function installKotodamaHooks(game, { renderer, objsOf }) {
         game.place.scene.add(ring);
         rings.push({ ring, rm, size, delay: i * 0.32 });
       }
+    }
+    // the word itself, rising off the top of what it caught. Drawn in the HUD layer, not the scene: the AO pass
+    // would darken a sprite (GTAOPass draws everything but points and lines into its normal buffer).
+    let rise = null;
+    if (said && pulse.length) {
+      const bb = new THREE.Box3();
+      for (const t of pulse) bb.expandByObject(t);
+      const el = document.createElement('div');
+      el.className = 'kword';
+      el.lang = 'ja';
+      el.textContent = said.ja;
+      document.body.appendChild(el);
+      const top = bb.getCenter(new THREE.Vector3());
+      top.y = bb.max.y;
+      rise = { el, top, v: new THREE.Vector3() };
     }
     const glowM = new THREE.MeshBasicMaterial({
       color: '#9fe6ff',
@@ -109,6 +135,15 @@ export function installKotodamaHooks(game, { renderer, objsOf }) {
       mat.opacity = vis * (0.85 + 0.15 * Math.sin(k * 40));
       dotM.opacity = vis;
       glowM.opacity = vis * (0.4 + 0.15 * Math.sin(k * 23));
+      if (rise) {
+        // in over the first fifth, drifting up the whole time, gone by the end
+        const cv = r.domElement.getBoundingClientRect(),
+          v = rise.v.copy(rise.top).project(game.place.camera);
+        const x = cv.left + ((v.x + 1) / 2) * cv.width,
+          y = cv.top + ((1 - v.y) / 2) * cv.height - (1 - Math.pow(1 - k, 2)) * 0.07 * cv.height;
+        rise.el.style.transform = `translate(${x.toFixed(1)}px, ${y.toFixed(1)}px) translate(-50%, -100%)`;
+        rise.el.style.opacity = (Math.min(1, k / 0.18) * Math.max(0, 1 - Math.max(0, k - 0.55) / 0.45)).toFixed(3);
+      }
       for (const q of rings) {
         const s = Math.max(0, Math.min(1, (k * 2.6 - q.delay) / 0.9));
         q.ring.quaternion.copy(game.place.camera.quaternion);
@@ -140,6 +175,7 @@ export function installKotodamaHooks(game, { renderer, objsOf }) {
       l.parent && l.parent.remove(l);
       if (!l.userData.shared) l.geometry.dispose();
     }
+    rise?.el.remove();
     mat.dispose();
     dotM.dispose();
     glowM.dispose();
@@ -149,10 +185,11 @@ export function installKotodamaHooks(game, { renderer, objsOf }) {
       q.rm.dispose();
     }
   };
-  // { do: 'kotodama', target: 'doors' }: the effect on its own, on a place's named target (place.kotodamaTargets)
-  H.kotodama = async ({ target }) => {
+  // { do: 'kotodama', target: 'doors', word: 'ugoite' }: the effect on its own, on a place's named target
+  // (place.kotodamaTargets); word defaults to the command Eric just said
+  H.kotodama = async ({ target, word }) => {
     let t = game.place.kotodamaTargets?.(target) || [];
     if (!t.length) t = objsOf({ id: target });
-    await game.kotodama(t);
+    await game.kotodama(t, { word });
   };
 }

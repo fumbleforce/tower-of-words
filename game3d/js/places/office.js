@@ -917,13 +917,14 @@ export async function officePlace(game) {
       copier: async ({ state }) => {
         st.copier = state;
         if (state === 'run') {
-          sfx('ok');
+          sfx('copier');
           spray(30, false);
           await game.wait(1800);
           st.copier = 'idle';
         }
         if (state === 'wild') {
           sfx('no');
+          sfx('copier');
           spray(40, true);
           await game.wait(1500);
           st.copier = 'idle';
@@ -960,7 +961,7 @@ export async function officePlace(game) {
       kettle: ({ state }) => {
         if (state === 'pour') {
           st.steam = 1.6;
-          sfx('ok');
+          sfx('kettle');
         }
       },
       rackAlarm: ({ state }) => {
@@ -978,8 +979,7 @@ export async function officePlace(game) {
         sfx('door');
       },
       vendingDrop: () => {
-        sfx('tap');
-        setTimeout(() => sfx('tap'), 180);
+        sfx('vending');
         vendingCan();
       },
       clockStop: ({ ms = 3000 }) => {
@@ -990,7 +990,7 @@ export async function officePlace(game) {
       },
       liftOpen: () => {
         st.liftWant = 1;
-        sfx('lift');
+        sfx('liftdoor');
       },
       liftClose: () => {
         st.liftWant = 0;
@@ -1033,6 +1033,7 @@ export async function officePlace(game) {
       await g.wait(600);
       st.liftWant = 1;
       sfx('lift');
+      sfx('liftdoor', { at: 0.3 });
       await g.wait(700);
       ui.lift(null);
       mio.setState('walk');
