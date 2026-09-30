@@ -122,7 +122,7 @@ export function ground(g, frame) {
   const pierP = parts();
   for (const u of bayLines(W))
     if (u < DOOR_U - DOOR_W / 2 - 0.2 || u > DOOR_U + DOOR_W / 2 + 0.2) {
-      pierP.box(u - 0.11, u + 0.11, SUNK, u < LU ? 0.5 : GF, -0.12, 0.02);
+      pierP.box(u - 0.11, u + 0.11, SUNK, u < LU ? 0.5 : GF, -0.126, 0.02); // proud of the base course's face (-0.12)
       if (u < LU) frame.box(u - 0.11, u + 0.11, 0.5, GF, -0.12, 0.02);
     }
   for (const n of bayLines(D)) pierP.box(W - 0.02, W + 0.12, SUNK, GF, Math.max(0, n - 0.11), Math.min(D, n + 0.11));

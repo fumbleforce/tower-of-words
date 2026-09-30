@@ -107,3 +107,12 @@ function isOurs(L, o) {
   }
   return false;
 }
+
+// a place built in daylight and lit for the evening later (relightLift in lift.js): put everything back as built
+// (the dim, and the dark a morning ride left it in), then forget it, so the next ride dims the evening's light
+export function forgetLight(L) {
+  if (!L.base) return;
+  setAway(L, 0);
+  setDark(L, 0);
+  L.base = null;
+}

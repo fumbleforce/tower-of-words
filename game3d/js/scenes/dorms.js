@@ -114,6 +114,8 @@ export function buildDorms() {
   const door = building(kit, root);
   root.add(door);
   const front = tallFront();
+  // its own materials: going in fades it out (places/dorms.js), and the cache's are every wall's
+  front.traverse((o) => o.isMesh && (o.material = o.material.clone()));
   root.add(front);
   stairs(kit, root);
   below(root);
@@ -156,7 +158,9 @@ export function buildDorms() {
     // his door from the corridor, the doorstep, then in
     atDoor: [(DOOR[0] + DOOR[1]) / 2 + 0.2, NEAR + T + 0.36],
     doorstep: [(DOOR[0] + DOOR[1]) / 2, NEAR + T + 0.3],
-    front, // his front wall and door full height, as the corridor sees them; dropped as he goes in
+    front, // his front wall and door full height, as the corridor sees them; faded out as he goes in
+    frontLeaf: front.userData.leaf, // its door's leaf: rotation.y below 0 swings it out onto the corridor
+    beside: [(DOOR[0] + DOOR[1]) / 2 + 0.44, NEAR + T + 0.3], // clear of the leaf as it swings out
     windowFront: [win[0], BACK + 0.45],
     window: win,
     windowY: WIN[3], // the look marker over the frame's head, clear of the view out

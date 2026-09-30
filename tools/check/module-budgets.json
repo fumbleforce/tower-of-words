@@ -51,8 +51,8 @@
       "reason": "Existing batching and geometry optimization utilities; preserve rendering behavior during this pass."
     },
     "game3d/js/places/lift.js": {
-      "lines": 1108,
-      "bytes": 41291,
+      "lines": 1106,
+      "bytes": 41266,
       "owner": "codex-tui",
       "review": "C-0071; 2026-09-30 landing lamp kept in the light count (notes/PERF.md); 2026-09-30 forecourt riders cast no sun shadow (notes/PERF.md, evening draw calls); 2026-09-30 displays and ride light split out (lift-displays.js, lift-light.js; issue #102)",
       "reason": "Existing shared lift geometry, movement and dialogue staging; extract after behavior characterization."
@@ -86,10 +86,10 @@
       "reason": "Existing post-processing pipeline and shader text; keep shader contents intact."
     },
     "game3d/js/props.js": {
-      "lines": 533,
-      "bytes": 19221,
+      "lines": 532,
+      "bytes": 19261,
       "owner": "codex-tui",
-      "review": "C-0071",
+      "review": "C-0071; 2026-09-30 signs take the shared decal depth offset (look/decal.js, issue #112)",
       "reason": "Existing primitive prop and material builders; coordinate the look/detail cycle split with visual work."
     },
     "game3d/js/runner.js": {
