@@ -2,8 +2,10 @@
 // footprint (island-layout.js BUILDINGS station; scenes/lobby.js inside), the platform shed along the west coast with
 // the monorail beam on piers, and the covered walkway from the shed to the station's glass front.
 // The camera looks north over the station at Eric on the court, so everything above the cut-low wall height is one
-// occluder (scenes/occluders.js): it fades while he is in the station's screen shadow (just outside its north door)
-// and stands whole again as he walks east, so the station is at the bottom left when he reaches the head office.
+// occluder (scenes/occluders.js): it fades while the station stands between him and the camera (just outside its
+// north door) and stands whole again as he walks east, so the station is at the bottom left when he reaches the head
+// office. On a phone the camera looks east past it from the door (places/forecourt.js), so it stays whole there and
+// the platform shed's roof fades instead.
 import * as THREE from 'three';
 import { PAL, mat, textTexture, plane, JP_FONT } from '../props.js';
 import { lightPool } from '../places/life.js';
@@ -11,6 +13,7 @@ import { addOccluder, updateOccluders } from './occluders.js';
 import { BUILDINGS, footprint, toLocal } from './island-layout.js';
 import { boxes } from './forecourt/details.js';
 import { paving } from './town.js';
+import { buildShed } from './station-shed.js';
 
 // the station's outline in the forecourt's frame: the gate room's walls (lobby.js X 6.3, Z 4.5, centred on the
 // forecourt's (-0.5, 7.15)); its north face is the court's south edge
@@ -62,24 +65,29 @@ function wallRun(out, axis, a0, a1, at, y0, y1, holes = []) {
   }
 }
 
-// window glass and frames on a face: `rects` [a, b, y0, y1] along the face at `at`, a hair outside it (`side` +1/-1)
-function glazing(glass, frame, axis, rects, at, side, { mull = 1.2 } = {}) {
+// window glass and frames on a face: `rects` [a, b, y0, y1] along the face at `at`, a hair outside it (`side` +1/-1).
+// With `trim`, each window also gets a pale surround standing out from the wall (a hood over it, jambs, a sill), so
+// it still reads as a window when the camera sees the face almost edge on (the side walls, from the court).
+function glazing(glass, frame, axis, rects, at, side, { mull = 1.2, trim = null } = {}) {
   const o = at + side * (T / 2 + 0.01);
+  // a box s0..s1 along the face, t0..t1 high, d0..d1 out from the glass
+  const put = (out, s0, s1, t0, t1, d0, d1) =>
+    axis === 'x'
+      ? out.push([s1 - s0, t1 - t0, d1 - d0, (s0 + s1) / 2, t0, o + (side * (d0 + d1)) / 2])
+      : out.push([d1 - d0, t1 - t0, s1 - s0, o + (side * (d0 + d1)) / 2, t0, (s0 + s1) / 2]);
   for (const [a, b, y0, y1] of rects) {
-    const h = y1 - y0,
-      w = b - a,
-      m = (a + b) / 2;
-    if (axis === 'x') glass.push([w, h, 0.03, m, y0, o]);
-    else glass.push([0.03, h, w, o, y0, m]);
+    const w = b - a;
+    put(glass, a, b, y0, y1, -0.015, 0.015);
     // frame: sill and head, and mullions every `mull`
-    const f = (s0, s1, t0, t1) =>
-      axis === 'x'
-        ? frame.push([s1 - s0, t1 - t0, 0.06, (s0 + s1) / 2, t0, o + side * 0.01])
-        : frame.push([0.06, t1 - t0, s1 - s0, o + side * 0.01, t0, (s0 + s1) / 2]);
+    const f = (s0, s1, t0, t1) => put(frame, s0, s1, t0, t1, -0.02, 0.04);
     f(a - 0.04, b + 0.04, y0 - 0.06, y0);
     f(a - 0.04, b + 0.04, y1, y1 + 0.05);
     const n = Math.max(1, Math.round(w / mull));
     for (let i = 0; i <= n; i++) f(a + (w * i) / n - 0.025, a + (w * i) / n + 0.025, y0, y1);
+    if (!trim) continue;
+    put(trim, a - 0.14, b + 0.14, y1 + 0.05, y1 + 0.16, 0, 0.36); // the hood
+    for (const s of [a - 0.14, b + 0.04]) put(trim, s, s + 0.1, y0 - 0.1, y1 + 0.05, 0, 0.3); // the jambs
+    put(trim, a - 0.14, b + 0.14, y0 - 0.16, y0 - 0.06, 0, 0.24); // the sill
   }
 }
 
@@ -165,7 +173,12 @@ function block(root) {
   for (const x of [X0 + T / 2, X1 - T / 2]) wallRun(low, 'z', ZN + T, ZS - T, x, 0, LOW);
   root.add(boxes(low, PAL.wall));
   root.add(boxes([[0.86, LOW, 0.06, STAFF_X, 0, ZN + 0.02]], PAL.door));
-  root.add(paving(X0 + T, X1 - T, ZN + T, ZS - T, 1.25, { color: PAL.floor, seam: PAL.floorSeam }));
+  root.add(
+    paving(X0 + T, X1 - T, ZN + T, ZS - T, 1.25, {
+      color: PAL.floor,
+      seam: PAL.floorSeam,
+    }),
+  );
   root.add(boxes([[1.9, 0.012, 1.0, DOOR_X, 0, ZN + 0.75]], '#3c4658'));
   root.add(lightPool(DOOR_X, ZN - 0.7, 0.9, { k: 0.28 }));
   interior(root);
@@ -174,7 +187,8 @@ function block(root) {
   const wall = [],
     glass = [],
     frame = [],
-    roof = [];
+    roof = [],
+    trim = [];
   const upperWin = (a0, a1) => {
     const out = [];
     const n = Math.max(1, Math.floor((a1 - a0 - 0.6) / 1.7));
@@ -195,7 +209,8 @@ function block(root) {
   const sUp = upperWin(X0, X1);
   const front = [[FRONT[0], FRONT[1], LOW, 1.75]];
   wallRun(wall, 'x', X0, X1, ZS - T / 2, LOW, H2, [...front, ...sUp]);
-  glazing(glass, frame, 'x', [...front, ...sUp], ZS - T / 2, 1);
+  glazing(glass, frame, 'x', front, ZS - T / 2, 1);
+  glazing(glass, frame, 'x', sUp, ZS - T / 2, 1, { trim });
   // east and west: the gate room's tall windows, and the upper row
   for (const [x, side] of [
     [X1 - T / 2, 1],
@@ -204,7 +219,7 @@ function block(root) {
     const up = upperWin(ZN, ZS);
     const g = sideGround.map(([a, b, y0, y1]) => [a, b, Math.max(LOW, y0), y1]);
     wallRun(wall, 'z', ZN, ZS, x, LOW, H2, [...g, ...up]);
-    glazing(glass, frame, 'z', [...g, ...up], x, side);
+    glazing(glass, frame, 'z', [...g, ...up], x, side, { trim });
   }
   // the floor band between the storeys, the parapet, the roof and its plant
   frame.push(
@@ -242,19 +257,52 @@ function block(root) {
     boxes(glass, '#8c9dad'),
     boxes(frame, '#5b616b'),
     boxes(roof, '#9aa0a6'), // the roof's walkway boards
+    boxes(trim, '#b3b9c0'), // the window surrounds
   ];
-  ['station:walls', 'station:glass', 'station:frame', 'station:roof'].forEach((n, i) => (meshes[i].name = n));
+  ['station:walls', 'station:glass', 'station:frame', 'station:roof', 'station:trim'].forEach(
+    (n, i) => (meshes[i].name = n),
+  );
   meshes[1].material = mat('#8c9dad', { roughness: 0.45, metalness: 0.05 });
   for (const m of meshes) root.add(m);
   root.add(sign);
   const occ = {};
-  const reach = 0.97 * TOPH;
-  // Eric in the station's screen shadow: north of it within the reach of its height, across its width, or in the door
-  const hides = (p) => p.x > X0 - 0.4 && p.x < X1 + 0.4 && p.z < ZN + 0.5 && p.z > ZN - reach - 0.3;
+  // Eric hidden by the station: the line from his feet up to the camera runs through the block (a margin for his
+  // width), or he stands in the door. `view` is the direction toward the camera; the forecourt's usual one looks
+  // north at 46 degrees, and on a phone the camera looks east along the court, past the station.
+  const view = new THREE.Vector3(0, Math.sin(0.8), Math.cos(0.8));
+  const box = [
+    [X0 - 0.4, X1 + 0.4],
+    [0, TOPH],
+    [ZN - 0.3, ZS],
+  ];
+  const hides = (p) => {
+    let t0 = 0,
+      t1 = Infinity;
+    const o = [p.x, 0.05, p.z],
+      d = [view.x, view.y, view.z];
+    for (let i = 0; i < 3; i++) {
+      const [lo, hi] = box[i];
+      if (Math.abs(d[i]) < 1e-6) {
+        if (o[i] < lo || o[i] > hi) return false;
+        continue;
+      }
+      let a = (lo - o[i]) / d[i],
+        b = (hi - o[i]) / d[i];
+      if (a > b) [a, b] = [b, a];
+      t0 = Math.max(t0, a);
+      t1 = Math.min(t1, b);
+      if (t0 > t1) return false;
+    }
+    return true;
+  };
   addOccluder(occ, [...meshes, sign], hides, { name: 'station' });
   let last = null;
   return {
-    update(pos, dt) {
+    occ,
+    view,
+    // pos: Eric; dir: toward the camera (RoomCam.dir), when it is not the usual one
+    update(pos, dt, dir) {
+      if (dir) view.copy(dir).normalize();
       const jump = !last || Math.hypot(pos.x - last[0], pos.z - last[1]) > 0.8;
       last = [pos.x, pos.z];
       updateOccluders(occ, pos, jump ? Infinity : dt);
@@ -271,102 +319,12 @@ function block(root) {
   };
 }
 
-// ---------- the platform shed, the beam and the walkway ----------
-// The shed's centre line from the layout's platform_shed (the middles of its two short ends), moved west so its
-// roof clears the station's north-west corner (the traced outline overlaps it; notes/map-gaps.md H7, H8), and
-// 7.2 wide instead of the drawn 9, so the court keeps its west edge.
-const SHED = (() => {
-  const P = footprint(BUILDINGS.find((b) => b.id === 'platform_shed')).map(([x, z]) => toLocal('forecourt', x, z));
-  const mid = (a, b) => [(a[0] + b[0]) / 2, (a[1] + b[1]) / 2];
-  const N = mid(P[0], P[1]),
-    S = mid(P[2], P[3]);
-  return {
-    c: [(N[0] + S[0]) / 2 - 1.3, (N[1] + S[1]) / 2],
-    yaw: Math.atan2(S[0] - N[0], S[1] - N[1]), // the group's +z points south-south-west, down the shed
-    L: Math.hypot(N[0] - S[0], N[1] - S[1]),
-    half: 3.6,
-  };
-})();
-const DECK = 2.5, // platform level (the monorail car's floor)
-  BEAM_TOP = 2.0,
-  EAVE = 4.3;
-
-function shed(root) {
-  const g = new THREE.Group();
-  g.position.set(SHED.c[0], 0, SHED.c[1]);
-  g.rotation.y = SHED.yaw;
-  root.add(g);
-  const L = SHED.L,
-    beams = [],
-    piers = [],
-    deck = [],
-    steel = [];
-  // two track beams either side of the island platform, running on 6 past the south end toward the approach
-  for (const u of [-2.2, 2.2]) {
-    beams.push([0.8, 0.9, L + 6, u, BEAM_TOP - 0.9, 3]);
-    for (let v = -L / 2 + 2; v < L / 2 + 6; v += 6) piers.push([0.55, BEAM_TOP - 0.9, 0.55, u, 0, v]);
-  }
-  // the island platform on columns, its edge lines, and the roof columns and ribs down its middle
-  deck.push([1.9, 0.3, L - 2, 0, DECK - 0.3, 0]);
-  for (let v = -L / 2 + 2; v < L / 2 - 1; v += 5) {
-    piers.push([0.4, DECK - 0.3, 0.4, 0, 0, v]);
-    steel.push([0.14, EAVE - DECK + 0.3, 0.14, 0, DECK, v], [SHED.half * 2 - 0.4, 0.1, 0.12, 0, EAVE, v]);
-  }
-  steel.push([0.06, 0.04, L - 2, -0.9, DECK, 0], [0.06, 0.04, L - 2, 0.9, DECK, 0]);
-  // stairs down from the platform's south end to the walkway
-  for (let i = 0; i < 10; i++) deck.push([1.3, DECK - i * 0.25, 0.32, 0, 0, L / 2 - 1 + 0.32 * (i + 0.5)]);
-  g.add(boxes(beams, '#9aa0a6'), boxes(piers, '#8a8f96'), boxes(deck, '#7d8288'), boxes(steel, '#6f7782'));
-  // the curved blue-grey roof, open at both ends
-  const roof = new THREE.Mesh(
-    new THREE.CylinderGeometry(SHED.half, SHED.half, L, 16, 1, true, -Math.PI / 2, Math.PI),
-    mat('#56697d', { side: THREE.DoubleSide }),
-  );
-  roof.rotation.x = -Math.PI / 2;
-  roof.scale.set(1, 1, 0.24);
-  roof.position.set(0, EAVE + 0.05, 0);
-  roof.castShadow = true;
-  roof.receiveShadow = true;
-  g.add(roof);
-  g.updateMatrixWorld(true);
-  // the stair foot and the west beam's end, in the forecourt's frame
-  const w = (u, v) => new THREE.Vector3(u, 0, v).applyMatrix4(g.matrixWorld);
-  return { foot: w(0, L / 2 + 2.6), beamEnd: w(-2.2, L / 2 + 6) };
-}
-
-// the monorail beam arriving from the west on piers (the layout's beam path) to the end of the shed's west beam
-function approach(root, beamEnd) {
-  const [ax, az] = toLocal('forecourt', -44.8, 7.7);
-  const len = Math.hypot(beamEnd.x - ax, beamEnd.z - az);
-  const g = new THREE.Group();
-  g.position.set(ax, 0, az);
-  g.rotation.y = Math.atan2(beamEnd.x - ax, beamEnd.z - az);
-  root.add(g);
-  const piers = [];
-  for (let v = 3; v < len; v += 6) piers.push([0.55, BEAM_TOP - 0.9, 0.55, 0, 0, v]);
-  g.add(boxes([[0.8, 0.9, len, 0, BEAM_TOP - 0.9, len / 2]], '#9aa0a6'), boxes(piers, '#8a8f96'));
-}
-
-// the covered walkway from the stair foot, south of the station, to its glass front
-function walkway(root, foot) {
-  const z = ZS + 1.4,
-    xa = Math.min(foot.x, X0 - 1),
-    xb = CX;
-  const posts = [],
-    roofs = [];
-  const run = (x0, x1, z0, z1) => roofs.push([x1 - x0 + 0.3, 0.08, z1 - z0 + 0.3, (x0 + x1) / 2, 2.2, (z0 + z1) / 2]);
-  run(xa, xb, z - 0.9, z + 0.9);
-  run(xb - 1.2, xb + 1.2, ZS, z - 0.9);
-  if (foot.z > z + 0.9) run(foot.x - 0.9, foot.x + 0.9, z + 0.9, foot.z);
-  for (let x = xa; x <= xb; x += 2.5) posts.push([0.08, 2.2, 0.08, x, 0, z - 0.85], [0.08, 2.2, 0.08, x, 0, z + 0.85]);
-  root.add(boxes(roofs, '#56697d'), boxes(posts, '#6f7782'));
-  root.add(paving(xa - 0.2, xb + 1.2, z - 0.9, z + 0.9, 0.9, { color: '#8e8a86', seam: '#7f7b77' }));
-}
-
-// the station, the shed, the beam and the walkway; returns the station's handle ({ update(pos, dt), onPeriod })
+// the station, the shed, the beam and the walkway; returns the station's handle ({ update(pos, dt, dir), onPeriod })
 export function buildStation(root) {
   const station = block(root);
-  const { foot, beamEnd } = shed(root);
-  approach(root, beamEnd);
-  walkway(root, foot);
+  // the shed's roof fades while the camera looks east over it (the phone's view out of the station)
+  const roof = buildShed(root, STATION);
+  roof.name = 'station:shedRoof';
+  addOccluder(station.occ, [roof], () => station.view.x < -0.5, { name: 'shed' });
   return station;
 }

@@ -2,13 +2,14 @@
 // Size and place come from the island layout (island-layout.js BUILDINGS head_office): a curtain-wall tower of twelve
 // storeys, turned about 23° like the map's town grid, east of the station. Its ground floor is the lobby (south-west
 // part) and a closed service block. The lift core stands square to the camera inside the turned lobby, because the
-// lift ride (places/lift.js) films the car straight on: the B2 car (the lift site below, its lid the core's top
-// colour), a closed second car for 6F-10F and the stair door, with the floor directory beside them.
+// lift ride (places/lift.js) films the car straight on: the B2 car (the lift site below, its lid the dark of the
+// core's shafts), a closed second car for 6F-10F and the stair door, with the floor directory beside them.
 // Everything above the ground floor, and the lobby's glass front above its sill, is one occluder (scenes/occluders.js):
 // it fades while Eric is inside the lobby or the lift and comes back when he walks out.
 import * as THREE from 'three';
 import { mat } from '../props.js';
 import { mergeStatic } from './merge-static.js';
+import { drain } from '../perf/slice.js';
 import { addOccluder, updateOccluders } from './occluders.js';
 import { PEOPLE } from '../cast.js';
 import { blob } from '../engine.js';
@@ -36,7 +37,9 @@ const inLobby = (p) => {
   return u > 0 && u < LU && n > 0.05 && n < LN + 0.4;
 };
 
-export function buildHeadOffice(root, nav) {
+// buildHeadOffice() builds it at once; headOfficeSteps() yields between parts (js/perf/slice.js)
+export const buildHeadOffice = (root, nav) => drain(headOfficeSteps(root, nav));
+export function* headOfficeSteps(root, nav) {
   const g = new THREE.Group(); // the tower's frame
   g.position.set(T.o[0], 0, T.o[1]);
   g.rotation.y = -T.a;
@@ -45,12 +48,15 @@ export function buildHeadOffice(root, nav) {
   furniture(inner);
   g.add(inner);
   mergeStatic(inner);
+  yield;
   // the upper floors, the lobby's glass front and the canopy: one occluder in five meshes
   const glassP = parts(),
     litP = parts(),
     frameP = parts();
   upper(glassP, litP, frameP);
+  yield;
   const front = ground(g, frameP);
+  yield;
   const glassM = () => mat('#8c9dad', { roughness: 0.45, metalness: 0.05 });
   const glass = glassP.mesh(glassM(), 'ho:glass');
   const lit = litP.mesh(glassM(), 'ho:glassLit');
@@ -65,6 +71,7 @@ export function buildHeadOffice(root, nav) {
   addOccluder(occ, [glass, lit, frame, ...front], inLobby, { name: 'ho:upper' });
   core(root);
   const landing = liftLanding(root);
+  yield;
   // Kuro behind the counter, facing the door
   const kuro = PEOPLE.kuro();
   kuro.root.scale.multiplyScalar(K);
