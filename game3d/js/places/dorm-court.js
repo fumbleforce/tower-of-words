@@ -21,6 +21,7 @@ export async function dormCourtPlace(game) {
       ...PLACE_DETAILS.dorm_court.things.dorm_entry,
       anchor: (v) => v.set(w.door[0], 1.3, w.door[1]),
       spot: () => w.dormEntry,
+      keep: 1.4, // the hall doors stay clear of the goal's edge arrow (ui/goal-arrow.js)
       face: () => w.door,
     },
   };

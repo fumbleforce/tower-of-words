@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import { plazaSteps } from '../scenes/plaza.js';
+import { BASIN } from '../scenes/plaza/plan.js';
 import { sliced } from '../perf/slice.js';
 import { RoomCam } from '../cam.js';
 import { K } from '../scenes/office.js';
@@ -31,6 +32,7 @@ export async function plazaPlace(game) {
       ...PLACE_DETAILS.plaza.things.fountain,
       anchor: (v) => v.set(w.fountain[0], 3.1, w.fountain[1]),
       spot: () => w.fountainEdge,
+      keep: BASIN + 0.3, // the whole basin stays clear of the goal's edge arrow (ui/goal-arrow.js)
       face: () => w.fountain,
     },
     dorm_lane: {

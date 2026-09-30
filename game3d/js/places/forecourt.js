@@ -36,12 +36,14 @@ export async function forecourtPlace(game) {
       ...PLACE_DETAILS.forecourt.things.office_entrance,
       anchor: (v) => v.set(w.officeEntrance[0], 1.3, w.officeEntrance[1]),
       spot: () => w.officeEntrance,
+      keep: 1.6, // the doors and canopy stay clear of the goal's edge arrow (ui/goal-arrow.js)
       face: () => w.liftOut,
     },
     lift: {
       ...PLACE_DETAILS.forecourt.things.lift,
       anchor: (v) => v.set(w.liftSite.x, 1.6, w.liftSite.zFront),
       spot: () => w.liftOut,
+      keep: 1,
       face: () => [w.liftSite.x, w.liftSite.zBack],
     },
     kuro: {
