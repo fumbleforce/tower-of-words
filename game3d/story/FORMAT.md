@@ -57,7 +57,7 @@ A node is a list of steps, run in order.
 |---|---|
 | `'mio: text'` | A line. The id before the first `: ` is the speaker; the name and role show above the text. |
 | `'> text'` | Narration (no speaker). Short, second person, only for what the scene can't show. |
-| `{ say: 'mio', text: '...', emo: 'dry', face: 'smile', voice: 'key' }` | The long form of a line: `emo` is the voice direction tag (VOICE-DIRECTION.md), `face` the portrait (see Portraits), `voice` a clip (game3d/audio/<voice>.mp3) when it isn't found by the line's text. `name` overrides the name for this line (`{ say: 'mio', name: 'Woman with a laptop', text }`). `slow: true` marks the slow repeat of a new word. `overheard` and `clear`: see Overheard Japanese. |
+| `{ say: 'mio', text: '...', emo: 'dry', face: 'smile', voice: 'key' }` | The long form of a line: `emo` is the voice direction tag (VOICE-DIRECTION.md), `face` the portrait (see Portraits), `voice` a clip (game3d/audio/<voice>.mp3) when it isn't found by the line's text. `name` overrides the name for this line (`{ say: 'mio', name: 'Woman with a laptop', text }`). `slow: true` marks the slow repeat of a new word. `overheard` and `clear`: see Overheard Japanese. `en`: see Subtitled Japanese. |
 | `{ choice: [ {...}, ... ], prompt: 'optional line shown above the buttons' }` | Reply buttons. Each option: `text` (what Eric says or does), and any of `go` (jump), `call` (run a node, then carry on after the choice), `set`, `if` (option only shows when true). |
 | `{ offer: 'matte', line: 'mio: Shout {matte}!' }` | Hands Eric a word: the line, then one big button with the Japanese, reading and English. When tapped he says it (voiced) and it's learned. Carries on after. `from:` names who taught it. |
 | `{ learn: 'kite' }` | Eric picks up a word without saying it. Shows the "New word" note. Takes `from:`. |
@@ -124,8 +124,8 @@ Any id in docs/game/cast.md "Everyone" can speak. Add names or roles under `spea
 | `show` / `hide` | `id` | Shows or hides a person or object (and a person's floor shadow). |
 | `hold` | `who` (a person), or nothing to let go | Keeps Eric with that person until the story lets go: walking and taps on anything else only get a small bow from them; that person and Say still work. Only holds once he knows a word that person answers to. |
 | `bow` | `who` (anyone, `eric` too), `depth: 'small'|'deep'` | A bow, shown. |
-| `gesture` | `who`, `kind`: `nine`, `nod`, `point`, `shrug`, `finger`, `skijump`, `beckon`, `lift`, `squeeze`, `highfive`, `fistbump`; `to` | Arm moves. Chibi cast: nine fingers up (with a 9 bubble); nod and point, aimed at `to` (a person, spot, seat, thing or `[x, z]`; straight ahead without it): the head and a little of the body turn to it, the chin dips, and for point the arm on that side swings out toward it, about 1.5 s, drawn over the person's idle so it shows on the train passengers too (`{ do: 'gesture', who: 'music', kind: 'point', to: 'seat_far_r' }`); shrug, finger to the lips, Mori's ski jump, beckon, lift (both arms over the head; Hamada's briefcase goes up with his hand), high five, fist bump. Eric and Mio: point (turning to `to` first), lift (arms up in a wide V, an invisible case over the head), squeeze (a quarter turn sideways, chest back, arms up), nod (the chin dips twice, 0.9 s), bow (a small bow, 1 s), shrug (shoulders up, hands out, 0.9 s), wave (right hand up by the head, 1 s); each returns when it's done, so the next line follows at once. |
-| `phone` | `who`, `state`: `buzz`, `look`, `away` (Mio, Eric); `on`, `off` (the guard) | A phone: Mio's buzzes with a bubble until she looks; the guard's handset at his ear with faint hold music. |
+| `gesture` | `who`, `kind`: `nine`, `nod`, `point`, `shrug`, `finger`, `skijump`, `beckon`, `lift`, `squeeze`, `highfive`, `fistbump`; `to` | Arm moves. Chibi cast: nine fingers up (with a 9 bubble); nod and point, aimed at `to` (a person, spot, seat, thing or `[x, z]`; straight ahead without it): the head and a little of the body turn to it, the chin dips, and for point the arm on that side swings out toward it, about 1.5 s, drawn over the person's idle so it shows on the train passengers too (`{ do: 'gesture', who: 'music', kind: 'point', to: 'seat_far_r' }`); shrug, finger to the lips, Mori's ski jump, beckon, lift (both arms over the head; Hamada's briefcase goes up with his hand), high five, fist bump. Eric and Mio: point (turning to `to` first), lift (arms up in a wide V, an invisible case over the head), squeeze (a quarter turn sideways, chest back, arms up), press (turning to `to`, leaning in, two pushes down with both hands on something low), nod (the chin dips twice, 0.9 s), bow (a small bow, 1 s), shrug (shoulders up, hands out, 0.9 s), wave (right hand up by the head, 1 s); each returns when it's done, so the next line follows at once. |
+| `phone` | `who`, `state`: `buzz`, `look`, `away` (Mio, Eric); `on`, `off` (the guard); the train passengers under Train | A phone: Mio's buzzes with a bubble until she looks; the guard's handset at his ear with faint hold music. |
 | `type` | `word`, `prompt` (optional line shown above it), `from` | The typing prompt for a new word (docs/game/systems.md, Typing a word). On success Eric says it, it becomes known, and flag `typed_<word>` is set. Use it where a word is taught, in place of a "say it" button: `{ do: 'type', word: 'yoroshiku', from: 'mio', prompt: 'mio: Say it. Like this.' }` |
 | `kotodama` | `target` | The kotodama effect on a place's named target (docs/game/systems.md). The place does the rest; ask for new targets in REQUESTS.md. |
 | `next` | | Starts the transition to the next place (see Transitions). |
@@ -151,6 +151,14 @@ Events: `start`, `approach` (the train starts slowing, when the story runs `{ do
 - `catTo` `to`: Tama hops down and trots to a spot or person.
 - `bag` `state: 'teeter'|'slide'|'caught'|'dropped'`: Mio's bag on the seat beside her.
 - `cup` `state: 'tip'|'safe'`: the coffee on the seat beside Mio.
+
+The passengers' own props. Each returns once its motion is done, and saves (Continue puts them back); what's held up also shows large on screen (the held view) until its `away`/`tap`. Put a `cam` on the person first on the near bench: they sit with their backs to the camera.
+- `phone` `who: 'youth'`, `state: 'show'|'point'|'away'`: he turns to Eric and holds out his phone; the held view shows the photo of his first goal (him arms up in his team's kit, the scoreboard reading 1 - 6). `point`: his other hand on the screen and a ring round him in the photo. `away` puts it back.
+- `phone` `who: 'music'`, `state: 'show'|'away'`: she turns her own phone to Eric; the held view plays the video of her practising the guitar, with its sound (about 6.6 s, then it stops on a play mark). `away` stops it.
+- `phone` `who: 'kuroda'`, `state: 'buzz'|'tap'`: buzz: his phone on the seat beside him lights up and buzzes with the 12F 9:00 reminder (held view: his lock screen); it keeps buzzing until `tap`, and the hook returns after about 2 s. tap: eyes shut, his hand taps it silent, the screen goes dark and the held view goes.
+- `headphones` `who: 'music'`, `state: 'lift'|'on'`: she lifts the cup on Eric's side and her guitar practice leaks out (returns after a few notes, about 2 s; muted, sooner); `on` puts it back and the sound stops.
+- `shopBag` `state: 'ask'|'close'`: the woman with the bun's overfull shopping bag on the floor by her feet. ask: she points at its bulging top and looks up at Eric. close: Eric steps up to it and presses it down (the `press` gesture) while she runs the zip shut, then she pats it. It stays shut.
+- `printout` `state: 'show'|'away'`: the reader holds a printout up beside his book; the held view shows a page of his Excel book and the printout ("Windows 95", an old grey window) side by side.
 
 ### Gate (`gate`)
 
@@ -199,6 +207,10 @@ Events: `start`, `sat_down`.
 ## Portraits
 
 The speaker's portrait shows beside the text box ([docs/game/controls-and-ui.md](../../docs/game/controls-and-ui.md)). The faces each person has are listed in docs/game/cast.md, Portraits. Set one on a line with the long form `{ say: 'mori', face: 'smile', text: '...' }` (it stays until changed or the scene ends: every triggered scene starts everyone on neutral), or with `{ do: 'expression', who: 'guard', face: 'stern' }`. A face that person doesn't have falls back to neutral. The `emote` hook also picks a face when that person has a fitting one: `?` suspicious/stern, `!` panicked/surprised, `♪`/`heart` smile/grin/amused, `sweat` flustered/sheepish/panicked, `zzz` sleepy/tired, `…` tired.
+
+## Subtitled Japanese
+
+`{ say: 'youth', text: '負けたけど、初めてゴール決めたんだ。', en: 'We lost, but I scored my first goal.' }`. For the moments the player should follow although Eric can't. The text is the Japanese (the voice clip is made from it, found by speaker and text like any line; not muffled); the screen shows the English, marked "in Japanese" by the name. The Japanese isn't shown and teaches nothing. Only the long form supports `en`; ambient lines take it too.
 
 ## Overheard Japanese
 

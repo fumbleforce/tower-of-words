@@ -15,7 +15,7 @@ export async function playAmbient(runner, lines, gap) {
       await hold(l);
     } else if (l.say) {
       const key = l.voice || (l.overheard ? heardKey(l.text) : lineKey(l.say, l.text));
-      ui.caption(runner.speaker(l.say), l.text, { overheard: !!l.overheard, clear: l.clear });
+      ui.caption(runner.speaker(l.say), l.text, { overheard: !!l.overheard, clear: l.clear, en: l.en });
       const spoken = audioKeys.has(key) ? voice(key, { muffle: !!l.overheard }) : null;
       await Promise.all([hold(l.text), window.__test ? null : spoken]);
     } else if (l.do) await runner.hook(l, null, '');

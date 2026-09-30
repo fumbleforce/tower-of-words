@@ -119,5 +119,9 @@ export const TRAIN_DETAILS = {
     'bag',
     'cup',
     'catTo',
+    'phone',
+    'headphones',
+    'shopBag',
+    'printout',
   ],
 };

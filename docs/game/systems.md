@@ -88,6 +88,10 @@ The Say menu speaks the chosen phrase or command to whoever or whatever is neare
 
 Lines Eric can't follow are shown as soft, shifting stand-in characters, with only the words he knows, people's names ([words.md](words.md)) and the loanwords a line makes clear readable. Their voice plays muffled; the known words come out clear in it (Jørgen: known words clear in the voice, unknown speech much more sound-blurred; "the text blur is good as it is"). Sounds like あっ or えっ stay readable; real words like はい or うん blur until taught. The point is that Japanese beyond his level looks and sounds like gibberish on purpose.
 
+## Subtitled Japanese
+
+Some Japanese is subtitled instead of overheard: its voice plays clear, in Japanese, and the English shows as the line, with "in Japanese" by the speaker's name. The Japanese itself isn't shown and nothing in it becomes known. For the small moments where the player should follow what someone says although Eric can't (the train passengers).
+
 ## Kotodama effects
 
 When a command takes hold, the target shimmers at its edges, the command's Japanese (待って, 動いて) rises off it in faint light and fades, the lights dip and hum, a low tone plays, sounds that can be cut (the door chime) stop, and the text box clears. Then the machine does what it was told, literally. Targets on day 1: the train doors, the lobby gate, the machine room door, the copier, the server rack alarm, the kettle, the vending machine. Small reactions without the full effect: the clock, the fan, the coffee machine.

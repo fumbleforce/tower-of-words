@@ -63,6 +63,8 @@ Every control is introduced the first time it's needed, and ambient people never
 - The whole dialogue area moves the story on, including the empty space below the text; "Click to continue" shows for the first few lines. The HUD buttons (Words, People, Bag, sound, the menu) stay usable while a line is up, and tapping them doesn't move the story on. Eric's spoken lines finish before anyone replies (Jørgen, playtest).
 - Choices: the buttons name their object ("Lift the briefcase over the gate"). Learning a word is typing it, not clicking a choice. On the phone the buttons come up dimmed and take taps only after a moment, so a tap meant for the line before doesn't pick one.
 - Mio's texts show as phone messages on their own dark card.
+- Something a person holds up for Eric to see (a phone's photo, video or reminder; pages side by side) shows large, top centre, in a phone frame or as sheets, clear of the text and portraits, while the lines about it are up. It never takes a tap.
+- Japanese spoken with an English subtitle ([systems.md](systems.md), Subtitled Japanese): the name plate says "in Japanese" and the line is the English.
 - Scroll up or PageUp for the backlog (to build in game3d; it was in the VN).
 
 ## Panels and screens

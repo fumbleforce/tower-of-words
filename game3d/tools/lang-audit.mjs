@@ -193,7 +193,8 @@ function speakerOf(str) { const i = str.indexOf(': '); return i > 0 && /^\w+$/.t
 function step(s, st, where) {
   if (typeof s === 'string') { checkLine(speakerOf(s)[1], st, where); return { cont: [st], stop: [] }; }
   if (s.say) {
-    if (s.overheard) checkHeard(s, st, where); else checkLine(s.text, st, where);
+    // `en`: Japanese spoken with an English subtitle; only the subtitle is shown, so only it is read here
+    if (s.overheard) checkHeard(s, st, where); else checkLine(s.en ?? s.text, st, where);
     if (s.name && isJP(s.name)) flag('ERROR', 'story', where, `speaker name ${s.name} in Japanese`);
     return { cont: [st], stop: [] };
   }

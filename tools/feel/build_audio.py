@@ -30,12 +30,16 @@ TARGET = {
     # the dorm courtyard's bath: hummed inside, heard through the curtain (tools/feel/hum.py); the place scales the
     # first one down with distance
     'bath_first': -31, 'bath_answer': -29,
+    # the train passengers (tools/feel/pluck.py): the guitar from a phone speaker or a lifted headphone, a bag's zip,
+    # a phone buzzing on a lap
+    'guitar_practice': -30, 'zip': -30, 'buzz': -31,
     # distant one-shots scattered over the beds
     'printer': -39, 'phone_far': -40, 'typing': -40,
     # beds (under the music: -34.5)
     'bed_train': -35, 'bed_station': -38, 'bed_lobby': -36, 'bed_office': -39, 'bed_lift': -36,
 }
 BEDS = {k for k in TARGET if k.startswith('bed_')}
+PLUCKED = {'guitar_practice', 'zip', 'buzz'}
 # picked Stable Audio takes: name -> (raw file stem, start s, end s or None). Filled in after listening to the
 # spectrograms and scores; anything not here comes from synth.py.
 PICKS = json.load(open(os.path.join(os.path.dirname(__file__), 'picks.json'))) if os.path.exists(os.path.join(os.path.dirname(__file__), 'picks.json')) else {}
@@ -78,7 +82,7 @@ def load(name):
     else:
         p = f'{SYN}/{name}.wav'
         if not os.path.exists(p): return None, None, None
-        y, sr = sf.read(p, always_2d=True); src = 'synthesised (tools/feel/hum.py)' if name.startswith('bath_') else 'synthesised (tools/feel/synth.py)'
+        y, sr = sf.read(p, always_2d=True); src = f"synthesised (tools/feel/{'hum' if name.startswith('bath_') else 'pluck' if name in PLUCKED else 'synth'}.py)"
     if y.shape[1] == 1: y = np.repeat(y, 2, 1)
     if sr != SR: y = librosa.resample(y.T, orig_sr=sr, target_sr=SR).T; sr = SR
     return y, sr, src

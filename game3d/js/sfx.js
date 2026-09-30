@@ -49,6 +49,11 @@ const K = {
   // the dorm courtyard's bath (places/dorm-bath.js): a man humming inside, and another finishing his tune
   bath_first: { f: ['bath_first'] },
   bath_answer: { f: ['bath_answer'] },
+  // the train passengers (train/discoveries.js; tools/feel/pluck.py): a phone buzzing (Mio's too), a bag's zip, and
+  // someone's guitar practice from a phone speaker or a lifted headphone
+  buzz: { f: ['buzz'], gap: 0.5 },
+  zip: { f: ['zip'], gap: 0.5 },
+  guitar: { f: ['guitar_practice'] },
 };
 
 export function ctx() {

@@ -318,7 +318,11 @@
         "wake",
         "bag",
         "cup",
-        "catTo"
+        "catTo",
+        "phone",
+        "headphones",
+        "shopBag",
+        "printout"
       ]
     },
     "gate": {

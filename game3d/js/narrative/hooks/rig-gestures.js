@@ -1,13 +1,14 @@
 // The gestures the gate and office mimes need, as simple readable poses (production-requests: "gestures the gate and
 // office use that no-op today"). hooks/gestures.js hands these kinds over.
 //   Meshy rigs (Eric, Mio): point (turned toward `to`), lift (an invisible case over his head), squeeze (sideways,
-//   stomach in). They are offsets on the arm and spine bones, laid over the idle clip every frame: game.tween runs
+//   stomach in), press (turned toward `to`, leaning in, both hands pushing down on something low in front: the train's
+//   overfull shopping bag). They are offsets on the arm and spine bones, laid over the idle clip every frame: game.tween runs
 //   after the player's and Mio's mixer update in main.js step(), so the clip underneath keeps breathing.
 //   Chibi rigs (the guard, Hamada, Kenji): beckon, lift (both arms overhead: Hamada's briefcase hangs from his left
 //   hand, so it goes up with it), highfive, fistbump.
 import * as THREE from 'three';
 
-export const MESHY_KINDS = new Set(['point', 'lift', 'squeeze']);
+export const MESHY_KINDS = new Set(['point', 'lift', 'squeeze', 'press']);
 export const CHIBI_KINDS = new Set(['beckon', 'lift', 'highfive', 'fistbump']);
 
 const bell = (k) => Math.sin(Math.PI * Math.min(1, k)) ** 0.7; // 0 -> 1 -> 0, holding at the top
@@ -66,6 +67,24 @@ export async function meshyGesture(game, r, kind, { to, face } = {}) {
       turn(model, B.LeftArm, 'x', -0.2 * b);
       turn(model, B.RightForeArm, 'z', 0.5 * b);
       turn(model, B.LeftForeArm, 'z', -0.5 * b);
+    });
+  } else if (kind === 'press') {
+    if (to && face) {
+      await face();
+      await game.wait(150);
+    }
+    // lean in, both hands forward and down, two pushes, back up
+    await game.tween(1.7, (k) => {
+      const b = bell(k),
+        push = Math.max(0, Math.sin(k * Math.PI * 4 - Math.PI / 2)) * b;
+      turn(model, B.Spine, 'x', -0.42 * b - 0.08 * push);
+      for (const [arm, fore] of [
+        [B.RightArm, B.RightForeArm],
+        [B.LeftArm, B.LeftForeArm],
+      ]) {
+        turn(model, arm, 'x', -1.2 * b - 0.15 * push);
+        turn(model, fore, 'x', -0.25 * b);
+      }
     });
   } else if (kind === 'squeeze') {
     // a quarter turn sideways, chest back and stomach in, arms up out of the way
