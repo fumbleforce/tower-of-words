@@ -73,7 +73,7 @@
     },
     "game3d/js/places/train.js": {
       "lines": 1673,
-      "bytes": 61197,
+      "bytes": 61184,
       "owner": "codex-tui",
       "review": "C-0076; C-0166 named sounds per door and machine; 2026-09-30 eleven wiring lines for the passengers' discovery props and hooks (train/discoveries.js, issue #89)",
       "reason": "Existing train place geometry, animation and scene hooks; stage 5 room-builder review is planned."
