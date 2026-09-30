@@ -2,7 +2,7 @@
  "title": "Kenji's three faces from h4",
  "date": "2026-09-30",
  "by": "art agent (kenji-expressions-1)",
- "status": "open",
+ "status": "decided",
  "multi": true,
  "question": "Which neutral, which grin and which sheepish face should Kenji use in the game?",
  "media": [
@@ -214,5 +214,11 @@
    ],
    "note": "Nervous smile, two sweat drops. The same stray tuft over his left eyebrow (image right) as nk-d80-3. Words: \"sheepish nervous smile, (worried eyebrows:1.3), sweatdrop, looking at the viewer\"; denoise 0.8, seed 3; h4's nose kept. Checks: red rim 11.4% (his skin, see the check sheet above), face drift 0.003 (pass), cut-out pass."
   }
- ]
+ ],
+ "decided": [
+  "g0-h4",
+  "nk-d80-1",
+  "s3k-d80-1"
+ ],
+ "decision": "Picked by Claude on Jørgen's say-so: grin g0-h4, neutral nk-d80-1, sheepish s3k-d80-1"
 }
