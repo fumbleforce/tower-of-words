@@ -11,7 +11,7 @@ The art rules live in GUIDE.md (Art) and art/PROMPTS.md. This skill is the order
 
 1. Read the brief's feedback as Jørgen wrote it, and the last round's item (`python3 tools/review.py show <id>`). Pick the ONE change this round makes (GUIDE: Don't overcorrect). Sides are hers: "her left (image right)" (GUIDE: Left and right on a character mean hers).
 2. Write the staging note with the shot-staging skill (~/.agents/skills/shot-staging/SKILL.md). It is for checking; it doesn't go into the prompt (GUIDE: Prompt style).
-3. Build the prompt from art/PROMPTS.md: the character's section (e.g. "Eric (mc) portrait", "Mio's glasses"), Structure, and Negative prompt base. Keep the quality tags (tools/production.py `Q`) and the build line from GUIDE (Build lines). Include the weighted red-rim negative from art/PROMPTS.md ("Eric (mc) portrait") on every portrait. Glasses: Mio's are fixed by the method in art/PROMPTS.md "Mio's glasses", not by words; Kuro's lenses are clear (GUIDE: Scope).
+3. Build the prompt from art/PROMPTS.md: the character's section (e.g. "Eric (mc) portrait", "Mio's glasses"), Structure, and Negative prompt base. Keep the quality tags (tools/production.py `Q`) and the build line from GUIDE (Build lines). Include the weighted red-rim negative from art/PROMPTS.md ("Eric (mc) portrait") on every portrait. Base portraits hold no props; the rule and the negative words are in art/PROMPTS.md "Negative prompt base". Glasses: Mio's are fixed by the method in art/PROMPTS.md "Mio's glasses", not by words; Kuro's lenses are clear (GUIDE: Scope).
 
 ## Render
 

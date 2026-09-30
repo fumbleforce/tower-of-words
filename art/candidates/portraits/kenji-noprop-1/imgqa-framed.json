@@ -1,0 +1,812 @@
+{
+ "character": "kenji",
+ "ref": "game3d/assets/portraits/kenji-neutral.webp",
+ "face_box_game": [
+  597,
+  768,
+  [
+   221,
+   167,
+   384,
+   335
+  ]
+ ],
+ "ref_face_detected": [
+  218,
+  167,
+  384,
+  335
+ ],
+ "thresholds": {
+  "redrim": [
+   0.02,
+   0.08
+  ],
+  "glasses_cover": [
+   0.87,
+   0.85
+  ],
+  "glasses_worst": [
+   0.7,
+   0.5
+  ],
+  "glasses_dE": [
+   8,
+   15
+  ],
+  "matte_frame": [
+   0.05,
+   0.12
+  ],
+  "matte_holes": [
+   0,
+   3
+  ],
+  "headroom": [
+   0.03,
+   0.01
+  ],
+  "zoom": [
+   0.04,
+   9
+  ],
+  "top": [
+   0.01,
+   9
+  ],
+  "eyes": [
+   0.06,
+   0.12
+  ],
+  "ccip": [
+   0.05,
+   0.09
+  ]
+ },
+ "images": [
+  {
+   "path": "art/candidates/portraits/kenji-noprop-1/kenji-a-d100-1.webp",
+   "kind": "cut-out",
+   "size": [
+    597,
+    768
+   ],
+   "face": [
+    218,
+    167,
+    384,
+    335
+   ],
+   "eyes": [
+    [
+     261.0,
+     234.0
+    ],
+    [
+     322.5,
+     222.0
+    ]
+   ],
+   "redrim": {
+    "status": "fail",
+    "value": 0.1532
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kenji"
+   },
+   "matte": {
+    "holes": 0,
+    "holes_px": 0,
+    "note": "no source render found: holes include gaps between hair strands, not graded",
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.12,
+    "zoom": 1.0,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 92,
+    "hair_top_ref": 92,
+    "crop": [
+     0.0,
+     0.0,
+     597.0,
+     768.0
+    ],
+    "eyes": 0.0,
+    "tilt": 0.0,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.0,
+    "ssim": 0.999
+   },
+   "status": "fail"
+  },
+  {
+   "path": "art/candidates/portraits/kenji-noprop-1/kenji-a-d100-2.webp",
+   "kind": "cut-out",
+   "size": [
+    597,
+    768
+   ],
+   "face": [
+    218,
+    167,
+    384,
+    335
+   ],
+   "eyes": [
+    [
+     261.0,
+     234.0
+    ],
+    [
+     322.5,
+     222.0
+    ]
+   ],
+   "redrim": {
+    "status": "fail",
+    "value": 0.1145
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kenji"
+   },
+   "matte": {
+    "holes": 0,
+    "holes_px": 0,
+    "note": "no source render found: holes include gaps between hair strands, not graded",
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.12,
+    "zoom": 1.0,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 92,
+    "hair_top_ref": 92,
+    "crop": [
+     0.0,
+     0.0,
+     597.0,
+     768.0
+    ],
+    "eyes": 0.0,
+    "tilt": 0.0,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.0,
+    "ssim": 0.999
+   },
+   "status": "fail"
+  },
+  {
+   "path": "art/candidates/portraits/kenji-noprop-1/kenji-a-d100-3.webp",
+   "kind": "cut-out",
+   "size": [
+    597,
+    768
+   ],
+   "face": [
+    218,
+    167,
+    384,
+    335
+   ],
+   "eyes": [
+    [
+     261.0,
+     234.0
+    ],
+    [
+     322.5,
+     222.0
+    ]
+   ],
+   "redrim": {
+    "status": "fail",
+    "value": 0.1149
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kenji"
+   },
+   "matte": {
+    "holes": 0,
+    "holes_px": 0,
+    "note": "no source render found: holes include gaps between hair strands, not graded",
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.12,
+    "zoom": 1.0,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 92,
+    "hair_top_ref": 92,
+    "crop": [
+     0.0,
+     0.0,
+     597.0,
+     768.0
+    ],
+    "eyes": 0.0,
+    "tilt": 0.0,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.0,
+    "ssim": 0.999
+   },
+   "status": "fail"
+  },
+  {
+   "path": "art/candidates/portraits/kenji-noprop-1/kenji-b-d80-1.webp",
+   "kind": "cut-out",
+   "size": [
+    597,
+    768
+   ],
+   "face": [
+    218,
+    167,
+    384,
+    335
+   ],
+   "eyes": [
+    [
+     261.0,
+     234.0
+    ],
+    [
+     322.5,
+     222.0
+    ]
+   ],
+   "redrim": {
+    "status": "fail",
+    "value": 0.0964
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kenji"
+   },
+   "matte": {
+    "holes": 0,
+    "holes_px": 0,
+    "note": "no source render found: holes include gaps between hair strands, not graded",
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.12,
+    "zoom": 1.0,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 92,
+    "hair_top_ref": 92,
+    "crop": [
+     0.0,
+     0.0,
+     597.0,
+     768.0
+    ],
+    "eyes": 0.0,
+    "tilt": 0.0,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.0,
+    "ssim": 1.0
+   },
+   "status": "fail"
+  },
+  {
+   "path": "art/candidates/portraits/kenji-noprop-1/kenji-b-d80-2.webp",
+   "kind": "cut-out",
+   "size": [
+    597,
+    768
+   ],
+   "face": [
+    218,
+    167,
+    384,
+    335
+   ],
+   "eyes": [
+    [
+     261.0,
+     234.0
+    ],
+    [
+     322.5,
+     222.0
+    ]
+   ],
+   "redrim": {
+    "status": "fail",
+    "value": 0.1017
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kenji"
+   },
+   "matte": {
+    "holes": 0,
+    "holes_px": 0,
+    "note": "no source render found: holes include gaps between hair strands, not graded",
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.12,
+    "zoom": 1.0,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 92,
+    "hair_top_ref": 92,
+    "crop": [
+     0.0,
+     0.0,
+     597.0,
+     768.0
+    ],
+    "eyes": 0.0,
+    "tilt": 0.0,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.0,
+    "ssim": 1.0
+   },
+   "status": "fail"
+  },
+  {
+   "path": "art/candidates/portraits/kenji-noprop-1/kenji-b-d80-3.webp",
+   "kind": "cut-out",
+   "size": [
+    597,
+    768
+   ],
+   "face": [
+    218,
+    167,
+    384,
+    335
+   ],
+   "eyes": [
+    [
+     261.0,
+     234.0
+    ],
+    [
+     322.5,
+     222.0
+    ]
+   ],
+   "redrim": {
+    "status": "fail",
+    "value": 0.1409
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kenji"
+   },
+   "matte": {
+    "holes": 0,
+    "holes_px": 6,
+    "note": "no source render found: holes include gaps between hair strands, not graded",
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.12,
+    "zoom": 1.0,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 92,
+    "hair_top_ref": 92,
+    "crop": [
+     0.0,
+     0.0,
+     597.0,
+     768.0
+    ],
+    "eyes": 0.0,
+    "tilt": 0.0,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.0,
+    "ssim": 0.999
+   },
+   "status": "fail"
+  },
+  {
+   "path": "art/candidates/portraits/kenji-noprop-1/kenji-a-d100-4.webp",
+   "kind": "cut-out",
+   "size": [
+    597,
+    768
+   ],
+   "face": [
+    218,
+    167,
+    384,
+    335
+   ],
+   "eyes": [
+    [
+     261.0,
+     234.0
+    ],
+    [
+     322.5,
+     222.0
+    ]
+   ],
+   "redrim": {
+    "status": "fail",
+    "value": 0.0969
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kenji"
+   },
+   "matte": {
+    "holes": 0,
+    "holes_px": 0,
+    "note": "no source render found: holes include gaps between hair strands, not graded",
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.12,
+    "zoom": 1.0,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 92,
+    "hair_top_ref": 92,
+    "crop": [
+     0.0,
+     0.0,
+     597.0,
+     768.0
+    ],
+    "eyes": 0.0,
+    "tilt": 0.0,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.0,
+    "ssim": 0.999
+   },
+   "status": "fail"
+  },
+  {
+   "path": "art/candidates/portraits/kenji-noprop-1/kenji-a-d100-5.webp",
+   "kind": "cut-out",
+   "size": [
+    597,
+    768
+   ],
+   "face": [
+    218,
+    167,
+    384,
+    335
+   ],
+   "eyes": [
+    [
+     261.0,
+     234.0
+    ],
+    [
+     322.5,
+     222.0
+    ]
+   ],
+   "redrim": {
+    "status": "fail",
+    "value": 0.1123
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kenji"
+   },
+   "matte": {
+    "holes": 0,
+    "holes_px": 0,
+    "note": "no source render found: holes include gaps between hair strands, not graded",
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.12,
+    "zoom": 1.0,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 92,
+    "hair_top_ref": 92,
+    "crop": [
+     0.0,
+     0.0,
+     597.0,
+     768.0
+    ],
+    "eyes": 0.0,
+    "tilt": 0.0,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.0,
+    "ssim": 1.0
+   },
+   "status": "fail"
+  },
+  {
+   "path": "art/candidates/portraits/kenji-noprop-1/kenji-a-d100-6.webp",
+   "kind": "cut-out",
+   "size": [
+    597,
+    768
+   ],
+   "face": [
+    218,
+    167,
+    384,
+    335
+   ],
+   "eyes": [
+    [
+     261.0,
+     234.0
+    ],
+    [
+     322.5,
+     222.0
+    ]
+   ],
+   "redrim": {
+    "status": "fail",
+    "value": 0.1388
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kenji"
+   },
+   "matte": {
+    "holes": 0,
+    "holes_px": 61,
+    "note": "no source render found: holes include gaps between hair strands, not graded",
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.12,
+    "zoom": 1.0,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 92,
+    "hair_top_ref": 92,
+    "crop": [
+     0.0,
+     0.0,
+     597.0,
+     768.0
+    ],
+    "eyes": 0.0,
+    "tilt": 0.0,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.0,
+    "ssim": 0.999
+   },
+   "status": "fail"
+  },
+  {
+   "path": "art/candidates/portraits/kenji-noprop-1/kenji-h-a-d100-5-d40-1.webp",
+   "kind": "cut-out",
+   "size": [
+    597,
+    768
+   ],
+   "face": [
+    218,
+    167,
+    384,
+    335
+   ],
+   "eyes": [
+    [
+     261.0,
+     234.0
+    ],
+    [
+     322.5,
+     222.0
+    ]
+   ],
+   "redrim": {
+    "status": "fail",
+    "value": 0.1135
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kenji"
+   },
+   "matte": {
+    "holes": 0,
+    "holes_px": 0,
+    "note": "no source render found: holes include gaps between hair strands, not graded",
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.12,
+    "zoom": 1.0,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 92,
+    "hair_top_ref": 92,
+    "crop": [
+     0.0,
+     0.0,
+     597.0,
+     768.0
+    ],
+    "eyes": 0.0,
+    "tilt": 0.0,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.0,
+    "ssim": 0.999
+   },
+   "status": "fail"
+  },
+  {
+   "path": "art/candidates/portraits/kenji-noprop-1/kenji-h-a-d100-5-d40-2.webp",
+   "kind": "cut-out",
+   "size": [
+    597,
+    768
+   ],
+   "face": [
+    218,
+    167,
+    384,
+    335
+   ],
+   "eyes": [
+    [
+     261.0,
+     234.0
+    ],
+    [
+     322.5,
+     222.0
+    ]
+   ],
+   "redrim": {
+    "status": "fail",
+    "value": 0.1139
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kenji"
+   },
+   "matte": {
+    "holes": 0,
+    "holes_px": 0,
+    "note": "no source render found: holes include gaps between hair strands, not graded",
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.12,
+    "zoom": 1.0,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 92,
+    "hair_top_ref": 92,
+    "crop": [
+     0.0,
+     0.0,
+     597.0,
+     768.0
+    ],
+    "eyes": 0.0,
+    "tilt": 0.0,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.0,
+    "ssim": 0.999
+   },
+   "status": "fail"
+  },
+  {
+   "path": "art/candidates/portraits/kenji-noprop-1/kenji-h-a-d100-5-d55-1.webp",
+   "kind": "cut-out",
+   "size": [
+    597,
+    768
+   ],
+   "face": [
+    218,
+    167,
+    384,
+    335
+   ],
+   "eyes": [
+    [
+     261.0,
+     234.0
+    ],
+    [
+     322.5,
+     222.0
+    ]
+   ],
+   "redrim": {
+    "status": "fail",
+    "value": 0.1116
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kenji"
+   },
+   "matte": {
+    "holes": 0,
+    "holes_px": 0,
+    "note": "no source render found: holes include gaps between hair strands, not graded",
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.12,
+    "zoom": 1.0,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 92,
+    "hair_top_ref": 92,
+    "crop": [
+     0.0,
+     0.0,
+     597.0,
+     768.0
+    ],
+    "eyes": 0.0,
+    "tilt": 0.0,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.0,
+    "ssim": 1.0
+   },
+   "status": "fail"
+  }
+ ]
+}

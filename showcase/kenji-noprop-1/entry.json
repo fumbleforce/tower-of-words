@@ -1,0 +1,101 @@
+{
+ "title": "Kenji without the screwdriver",
+ "date": "2026-09-30",
+ "by": "claude-agent:kenji-noprop",
+ "caption": "Jørgen: \"could you redo him without the skrewdriver ... base portraits should NEVER have props\". Only his right arm (image left) is repainted: it hangs empty at his side, the hand below the frame. Faces, hair, shirt, framing and FACE.kenji are unchanged, and all three faces share the same new arm. Installed in the game and art/approved/kenji/. The pocket snack and the sleeve sticky note are still on him (not in his hands; say if they should go too).",
+ "sections": [
+  {
+   "title": "Before and after",
+   "caption": "The three game portraits, before (top) and after (bottom), at game size on the dark game colour.",
+   "images": [
+    {
+     "id": "before-after",
+     "image": "bible/shots/showcase/kenji-noprop-1/before-after.webp",
+     "caption": "grin g0-h4, neutral nk-d80-1, sheepish s3k-d80-1"
+    }
+   ]
+  },
+  {
+   "title": "Every attempt, in order",
+   "caption": "RDBT Anima masked img2img at 896x1152 on h4 (euler_ancestral normal, 30 steps, CFG 5). Prompt: h4's own with \"holding a screwdriver up in his right hand\" swapped for \"his right arm hanging relaxed at his side, empty hand\"; negative: h4's plus \"holding, holding object, tool, screwdriver, pen, pencil, cup, phone, papers, book\". Full prompts: art/candidates/portraits/kenji-noprop-1/prompts.json. Each image: h4's arm on the left, the attempt on the right.",
+   "images": [
+    {
+     "id": "sheet-arm",
+     "image": "bible/shots/showcase/kenji-noprop-1/all-attempts-arm.webp",
+     "caption": "All 12 arm close-ups, h4 first"
+    },
+    {
+     "id": "sheet-framed",
+     "image": "bible/shots/showcase/kenji-noprop-1/all-attempts-framed.webp",
+     "caption": "All 12 framed as the game's neutral portrait, the current one first"
+    },
+    {
+     "id": "a-d100-1",
+     "image": "bible/shots/showcase/kenji-noprop-1/arm-a-d100-1.webp",
+     "caption": "1. a-d100-1: Plain repaint of the arm area, denoise 1.0, seed 1. Arm hangs, hand below the frame. The sleeve outline breaks where the repaint meets h4's sleeve. Red rim 1.9% on the render, 15.3% on the cut-out (the game portrait before this measured 11.3%: his skin, not a rim)."
+    },
+    {
+     "id": "a-d100-2",
+     "image": "bible/shots/showcase/kenji-noprop-1/arm-a-d100-2.webp",
+     "caption": "2. a-d100-2: Plain repaint of the arm area, denoise 1.0, seed 2. A diamond-shaped light patch on the forearm and a white spike on the sleeve. Red rim 2.2% on the render, 11.5% on the cut-out (the game portrait before this measured 11.3%: his skin, not a rim)."
+    },
+    {
+     "id": "a-d100-3",
+     "image": "bible/shots/showcase/kenji-noprop-1/arm-a-d100-3.webp",
+     "caption": "3. a-d100-3: Plain repaint of the arm area, denoise 1.0, seed 3. Arm hangs; the sleeve comes out heavier teal with a hard edge. Red rim 1.7% on the render, 11.5% on the cut-out (the game portrait before this measured 11.3%: his skin, not a rim)."
+    },
+    {
+     "id": "b-d80-1",
+     "image": "bible/shots/showcase/kenji-noprop-1/arm-b-d80-1.webp",
+     "caption": "4. b-d80-1: Arm area pre-filled (grey plus a flat hanging arm), denoise 0.8, seed 1. Grey smudge where the old sleeve edge was. Red rim 2.0% on the render, 9.6% on the cut-out (the game portrait before this measured 11.3%: his skin, not a rim)."
+    },
+    {
+     "id": "b-d80-2",
+     "image": "bible/shots/showcase/kenji-noprop-1/arm-b-d80-2.webp",
+     "caption": "5. b-d80-2: Arm area pre-filled (grey plus a flat hanging arm), denoise 0.8, seed 2. Hand resting on the desk edge; an orange smudge on the sleeve. Red rim 1.8% on the render, 10.2% on the cut-out (the game portrait before this measured 11.3%: his skin, not a rim)."
+    },
+    {
+     "id": "b-d80-3",
+     "image": "bible/shots/showcase/kenji-noprop-1/arm-b-d80-3.webp",
+     "caption": "6. b-d80-3: Arm area pre-filled (grey plus a flat hanging arm), denoise 0.8, seed 3. A black line sticking out of the sleeve. Red rim 2.1% on the render, 14.1% on the cut-out (the game portrait before this measured 11.3%: his skin, not a rim)."
+    },
+    {
+     "id": "a-d100-4",
+     "image": "bible/shots/showcase/kenji-noprop-1/arm-a-d100-4.webp",
+     "caption": "7. a-d100-4: Plain repaint of the arm area, denoise 1.0, seed 4. The diamond patch again, and a flap on the sleeve. Red rim 1.8% on the render, 9.7% on the cut-out (the game portrait before this measured 11.3%: his skin, not a rim)."
+    },
+    {
+     "id": "a-d100-5",
+     "image": "bible/shots/showcase/kenji-noprop-1/arm-a-d100-5.webp",
+     "caption": "8. a-d100-5: Plain repaint of the arm area, denoise 1.0, seed 5. Arm close to his side, hand below the frame; the sleeve outline has a small break at the seam. Red rim 2.0% on the render, 11.2% on the cut-out (the game portrait before this measured 11.3%: his skin, not a rim)."
+    },
+    {
+     "id": "a-d100-6",
+     "image": "bible/shots/showcase/kenji-noprop-1/arm-a-d100-6.webp",
+     "caption": "9. a-d100-6: Plain repaint of the arm area, denoise 1.0, seed 6. A large teal flap sticking out of the sleeve; the hand shows at the bottom. Red rim 2.1% on the render, 13.9% on the cut-out (the game portrait before this measured 11.3%: his skin, not a rim)."
+    },
+    {
+     "id": "h-a-d100-5-d40-1",
+     "image": "bible/shots/showcase/kenji-noprop-1/arm-h-a-d100-5-d40-1.webp",
+     "caption": "10. h-a-d100-5-d40-1: Seam band (16 px along the repaint edge) on a-d100-5, denoise 0.40, seed 1. a-d100-5 with the seam band repainted lightly: the sleeve outline joins up. Installed. Red rim 2.0% on the render, 11.3% on the cut-out (the game portrait before this measured 11.3%: his skin, not a rim)."
+    },
+    {
+     "id": "h-a-d100-5-d40-2",
+     "image": "bible/shots/showcase/kenji-noprop-1/arm-h-a-d100-5-d40-2.webp",
+     "caption": "11. h-a-d100-5-d40-2: Seam band (16 px along the repaint edge) on a-d100-5, denoise 0.40, seed 2. Same, another seed: a small hook at the top of the cuff. Red rim 2.0% on the render, 11.4% on the cut-out (the game portrait before this measured 11.3%: his skin, not a rim)."
+    },
+    {
+     "id": "h-a-d100-5-d55-1",
+     "image": "bible/shots/showcase/kenji-noprop-1/arm-h-a-d100-5-d55-1.webp",
+     "caption": "12. h-a-d100-5-d55-1: Seam band (16 px along the repaint edge) on a-d100-5, denoise 0.55, seed 1. Same at denoise 0.55: the band stays blurry. Red rim 2.0% on the render, 11.2% on the cut-out (the game portrait before this measured 11.3%: his skin, not a rim)."
+    }
+   ]
+  }
+ ],
+ "links": [
+  {
+   "label": "Play it",
+   "href": "game3d/"
+  }
+ ]
+}

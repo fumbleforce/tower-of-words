@@ -1,0 +1,140 @@
+{
+ "1": {
+  "class_type": "UNETLoader",
+  "inputs": {
+   "unet_name": "rdbtAnima.safetensors",
+   "weight_dtype": "default"
+  }
+ },
+ "2": {
+  "class_type": "CLIPLoader",
+  "inputs": {
+   "clip_name": "qwen_3_06b_base.safetensors",
+   "type": "stable_diffusion"
+  }
+ },
+ "3": {
+  "class_type": "VAELoader",
+  "inputs": {
+   "vae_name": "qwen_image_vae.safetensors"
+  }
+ },
+ "4": {
+  "class_type": "CLIPTextEncode",
+  "inputs": {
+   "text": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, adult, Kenji, a 21-year-old fresh graduate, a young adult man with a youthful boyish face, smooth young skin, big eyes, not handsome, plain ordinary looks, short and pudgy with a soft round tummy and a round chubby face, thick eyebrows, messy black bedhead hair flattened on one side with a cowlick sticking up at the back, a white short-sleeved work shirt with a dark tie tucked into the shirt between two buttons, at work in a Japanese office, the company lanyard with an ID card around his neck, a yellow sticky note stuck on his sleeve, a snack wrapper poking out of his breast pocket, his right arm hanging relaxed at his side, empty hand, cheerful open-mouthed smile, soft eyebrows, relaxed eyes, waist-up portrait facing the viewer at a slight angle, (the whole head inside the frame with empty space above the hair:1.2), plain light grey background, soft even studio light",
+   "clip": [
+    "2",
+    0
+   ]
+  }
+ },
+ "5": {
+  "class_type": "CLIPTextEncode",
+  "inputs": {
+   "text": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, nude, nsfw, child, loli, fat, obese, rim light, red rim light, backlighting, mature male, old man, middle-aged, stubble, facial hair, beard, moustache, square jaw, manly, handsome, bishounen, muscular, athletic, muscles, pectorals, abs, bodybuilder, broad shoulders, shota, glasses, headphones, hat, costume, tall, holding, holding object, tool, screwdriver, pen, pencil, cup, phone, papers, book",
+   "clip": [
+    "2",
+    0
+   ]
+  }
+ },
+ "10": {
+  "class_type": "LoadImage",
+  "inputs": {
+   "image": "src-h.png"
+  }
+ },
+ "11": {
+  "class_type": "VAEEncode",
+  "inputs": {
+   "pixels": [
+    "10",
+    0
+   ],
+   "vae": [
+    "3",
+    0
+   ]
+  }
+ },
+ "12": {
+  "class_type": "LoadImageMask",
+  "inputs": {
+   "image": "mask-h.png",
+   "channel": "red"
+  }
+ },
+ "14": {
+  "class_type": "DifferentialDiffusion",
+  "inputs": {
+   "model": [
+    "1",
+    0
+   ]
+  }
+ },
+ "13": {
+  "class_type": "SetLatentNoiseMask",
+  "inputs": {
+   "samples": [
+    "11",
+    0
+   ],
+   "mask": [
+    "12",
+    0
+   ]
+  }
+ },
+ "7": {
+  "class_type": "KSampler",
+  "inputs": {
+   "model": [
+    "14",
+    0
+   ],
+   "positive": [
+    "4",
+    0
+   ],
+   "negative": [
+    "5",
+    0
+   ],
+   "latent_image": [
+    "13",
+    0
+   ],
+   "seed": 1,
+   "steps": 30,
+   "cfg": 5,
+   "sampler_name": "euler_ancestral",
+   "scheduler": "normal",
+   "denoise": 0.55
+  }
+ },
+ "8": {
+  "class_type": "VAEDecode",
+  "inputs": {
+   "samples": [
+    "7",
+    0
+   ],
+   "vae": [
+    "3",
+    0
+   ]
+  }
+ },
+ "9": {
+  "class_type": "SaveImage",
+  "inputs": {
+   "images": [
+    "8",
+    0
+   ],
+   "filename_prefix": "pcface"
+  }
+ }
+}

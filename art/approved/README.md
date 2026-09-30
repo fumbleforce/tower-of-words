@@ -24,7 +24,7 @@ One folder per bible id. Each file here is a copy of one that bible/facts.yaml m
 - nanami/nanami-g-after.webp: Nanami, nanami-g-204 (ID-card desk clerk) with headroom. Bible: characters › nanami, portrait.
 - cctv/nanami-f-after.webp: the night CCTV operator idea, nanami-f-201 with headroom. An idea only: the bible says the character needs clearly different hair. Bible: characters › cctv, portrait.
 - kiyoko/kiyoko-camel-after.webp: Kiyoko, kiyoko-camel-201 (face from A-kiyoko-s101) with headroom. Bible: characters › kiyoko, portrait.
-- kenji/kenji-g0-h4.webp, kenji-nk-d80-1.webp, kenji-s3k-d80-1.webp: Kenji's grin (concept h4 itself), neutral and sheepish, framed 597x768 cut-outs from reviews/kenji-expressions-1; the game's kenji-grin, kenji-neutral and kenji-sheepish. Bible: characters › kenji, images.
+- kenji/kenji-g0-h4.webp, kenji-nk-d80-1.webp, kenji-s3k-d80-1.webp: Kenji's grin (concept h4 itself), neutral and sheepish, framed 597x768 cut-outs from reviews/kenji-expressions-1, screwdriver taken out in kenji-noprop-1; the game's kenji-grin, kenji-neutral and kenji-sheepish. Bible: characters › kenji, images.
 - kuro/kuro-after.webp: Kuro, A-luna-s101 with headroom. Bible: characters › kuro, portrait.
 - goro/goro-after.webp: Goro, goro-a-202 with headroom. Bible: characters › goro, portrait.
 - jun/jun-after.webp: Jun, jun-a-202 with headroom. Bible: characters › jun, portrait.
