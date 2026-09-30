@@ -73,8 +73,8 @@ export const CHUNKS = {
     turn: 0,
     scale: 1,
     level: 0,
-    walk: [-6.6, 6.6, -5.4, 1.0],
-    view: [-7.3, 7.3, -10.2, 5.4],
+    walk: [-11.8, 13.2, -16.4, 11.2],
+    view: [-22, 22, -28, 32],
     anchor: 'the fountain on the fountain as drawn',
   },
   dorm_court: {
