@@ -36,7 +36,7 @@ export function createPlaceLifecycle(
         // surface patterns, baked light (look/index.js); materials patched in place, in slices between frames so the
         // place being played doesn't stall (js/perf/slice.js)
         await sliced(lookSteps(place, game));
-        if (name === 'office') optimizePlace(place, { game });
+        if (name === 'office' || name === 'forecourt') optimizePlace(place, { game });
         // shaders and textures ready before the first frame there, so entering doesn't stall (js/perf/warm.js)
         place.warm = await warmPlace(game.renderer, place, {
           extra: [game.player?.root, game.mioNpc?.root],

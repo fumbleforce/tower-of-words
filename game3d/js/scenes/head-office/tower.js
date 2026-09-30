@@ -70,9 +70,47 @@ export function ground(g, frame) {
     floorP = parts(),
     apronP = parts(),
     fasciaP = parts();
-  wallP.box(LU, W, 0, GF, 0, D);
-  wallP.box(0, LU, 0, GF, LN, D);
-  wallP.box(0, 0.18, 0, GF, 0, LN);
+  // the ground floor round the lobby is rooms, not a solid block, so it reads when the floors above fade: the
+  // outer walls with windows on the two faces the camera sees, the lobby's east and back walls, floors, and a
+  // back office east of the lobby with its desks
+  const glassP = parts(),
+    deskP = parts();
+  const wt = 0.18;
+  // a wall along u (s = 'u', at n) or along n (s = 'n', at u), windows [a, b] along it from 0.55 to 2.05
+  const windowed = (s, a0, a1, at, wins) => {
+    const box = (p0, p1, y0, y1) =>
+      s === 'u' ? wallP.box(p0, p1, y0, y1, at, at + wt) : wallP.box(at - wt, at, y0, y1, p0, p1);
+    let p = a0;
+    for (const [a, b] of wins) {
+      box(p, a, 0, GF);
+      box(a, b, 0, 0.55);
+      box(a, b, 2.05, GF);
+      if (s === 'u') glassP.box(a, b, 0.55, 2.05, at - 0.02, at + 0.04);
+      else glassP.box(at - 0.04, at + 0.02, 0.55, 2.05, a, b);
+      p = b;
+    }
+    box(p, a1, 0, GF);
+  };
+  const bays = (a0, a1) => {
+    const n = Math.floor((a1 - a0) / 1.2),
+      w = (a1 - a0) / n;
+    return Array.from({ length: n }, (_, i) => [a0 + i * w + 0.15, a0 + (i + 1) * w - 0.15]);
+  };
+  windowed('u', LU, W, 0, bays(LU + 0.2, W - 0.2)); // south face, east of the lobby
+  windowed('n', 0, D, W, bays(0.2, D - 0.2)); // east face
+  wallP.box(0, W, 0, GF, D - wt, D); // north face
+  wallP.box(0, wt, 0, GF, 0, D); // west face (the lobby's west wall)
+  wallP.box(LU, LU + wt, 0, GF, 0, D); // the lobby's east wall
+  wallP.box(0, LU, 0, GF, LN, LN + wt); // the lobby's back wall
+  floorP.box(LU, W, -0.04, 0.012, 0, D);
+  floorP.box(0, LU, -0.04, 0.012, LN, D);
+  // the back office: two rows of desks with their chairs, cabinets along the north wall
+  for (const n of [2.0, 4.6])
+    for (let u = LU + 0.9; u < W - 1; u += 1.5) {
+      deskP.box(u - 0.6, u + 0.6, 0.68, 0.74, n - 0.35, n + 0.35);
+      sillP.box(u - 0.2, u + 0.2, 0, 0.45, n + 0.55, n + 0.95);
+    }
+  for (let u = LU + 0.4; u < W - 0.5; u += 0.9) sillP.box(u, u + 0.8, 0, 1.3, D - 0.62, D - wt);
   sillP.box(0, DOOR_U - DOOR_W / 2, 0, 0.5, 0, 0.16);
   sillP.box(DOOR_U + DOOR_W / 2, LU, 0, 0.5, 0, 0.16);
   floorP.box(0.18, LU, -0.04, 0.012, 0.16, LN);
@@ -87,11 +125,15 @@ export function ground(g, frame) {
     [sillP, '#5b616b', 'ho:sill'],
     [floorP, PAL.floor, 'ho:floor'],
     [apronP, '#8e8a86', 'ho:apron'],
+    [deskP, '#b9bdc2', 'ho:desks'],
   ]) {
     const m = p.mesh(mat(color, name === 'ho:floor' ? { roughness: 0.35, metalness: 0.04 } : {}), name);
     if (name === 'ho:floor' || name === 'ho:apron') m.castShadow = false;
     g.add(m);
   }
+  const gfGlass = glassP.mesh(mat('#8c9dad', { roughness: 0.45, metalness: 0.05 }), 'ho:gfGlass');
+  gfGlass.castShadow = false;
+  g.add(gfGlass);
   const fascia = fasciaP.mesh(mat('#3f4650'), 'ho:fascia');
   g.add(fascia);
   const name = textTexture(

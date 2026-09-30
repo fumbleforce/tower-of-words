@@ -55,8 +55,8 @@ export const CHUNKS = {
     turn: 0,
     scale: 1,
     level: 0,
-    walk: [-4.7, 22.2, -3.6, 3.9],
-    view: [-7.3, 31, -9.4, 8],
+    walk: [-4.9, 23.4, -3.6, 10.6],
+    view: [-12, 31, -12, 14],
     anchor: 'the gate room (its exit is the station door at local (-1.5, 2.65))',
   },
   office: {

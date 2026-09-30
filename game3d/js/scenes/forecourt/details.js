@@ -1,7 +1,7 @@
 // Small outdoor fittings. Shared prop materials and low-sided geometry keep the court inexpensive.
 import * as THREE from 'three';
 import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
-import { PAL, mat, rbox, sh, textTexture, plane, JP_FONT } from '../../props.js';
+import { PAL, mat, rbox, sh, textTexture, plane, JP_FONT, emissive } from '../../props.js';
 
 export function boxes(parts, color) {
   const geometries = parts.map(([w, h, d, x, y, z]) => new THREE.BoxGeometry(w, h, d).translate(x, y + h / 2, z));
@@ -89,6 +89,45 @@ export function bicycle(color) {
   );
   group.add(rbox(0.3, 0.025, 0.14, PAL.metal, { x: -0.38, y: 0.56, r: 0.008, seg: 1 }));
   group.rotation.x = -0.09;
+  return group;
+}
+
+// A row of bikes parked side by side in a rack, along x from 0; each bike's length runs along z. `gaps` are empty
+// places. The parts merge by material when the scene is merged (scenes/merge-static.js).
+const BIKE_COLORS = ['#5f6f7d', '#7a6570', '#6c7a6a', '#8a8f96', '#4f5866', '#7d7466'];
+export function bikeRow(n, { step = 0.55, gaps = [], seed = 0 } = {}) {
+  const group = new THREE.Group();
+  const rack = [[step * (n - 1) + 0.4, 0.05, 0.05, (step * (n - 1)) / 2, 0.02, 0.22]];
+  for (let i = 0; i < n; i++) {
+    rack.push([0.03, 0.42, 0.03, i * step, 0, 0.22], [0.03, 0.03, 0.34, i * step, 0.4, 0.08]);
+    if (gaps.includes(i)) continue;
+    const bike = bicycle(BIKE_COLORS[(i * 5 + seed) % BIKE_COLORS.length]);
+    bike.rotation.y = Math.PI / 2 + (((i * 7 + seed) % 3) - 1) * 0.05;
+    bike.position.set(i * step, 0, 0);
+    group.add(bike);
+  }
+  group.add(boxes(rack, PAL.metal));
+  return group;
+}
+
+// A tall street lamp: a slim post, a short arm and a lit head facing down.
+export function streetLamp() {
+  const group = new THREE.Group();
+  group.add(
+    boxes(
+      [
+        [0.07, 2.35, 0.07, 0, 0, 0],
+        [0.4, 0.05, 0.06, 0.17, 2.3, 0],
+        [0.16, 0.04, 0.16, 0, 0, 0],
+      ],
+      PAL.dark,
+    ),
+  );
+  group.add(rbox(0.34, 0.1, 0.2, PAL.dark, { x: 0.3, y: 2.22, r: 0.02, seg: 1 }));
+  const glow = new THREE.Mesh(new THREE.PlaneGeometry(0.28, 0.15), emissive(PAL.lamp, PAL.lampEm, 2.4));
+  glow.rotation.x = Math.PI / 2;
+  glow.position.set(0.3, 2.215, 0);
+  group.add(glow);
   return group;
 }
 
