@@ -1,0 +1,40 @@
+{
+  "title": "Dorm courtyard redesigned on the outdoor kit",
+  "date": "2026-09-30",
+  "by": "claude-agent:dorm-court-kit",
+  "caption": "The dorm courtyard rebuilt with the shared outdoor kit, in the evening it is played in. Before on the left of each pair, after on the right. The laundry, mailboxes, 社員寮 stone, ゆ noren and the washing on the balconies stay.",
+  "sections": [
+    {
+      "title": "Arriving from the plaza",
+      "caption": "One walk of dark granite with a pale border runs from the lane to the bike shelter, with legs up to the hall doors and the sento door. The two-tone lawn and the long hedge row are gone. A raised bed runs along the front in short hedge runs, with a cherry, maples, azaleas, sasanquas in flower and grasses. Two drinks machines light the laundry corner.",
+      "images": [
+        { "id": "before-arrive-desk", "image": "bible/shots/showcase/dorm-court-kit-1/before-arrive-desk.webp", "caption": "Before, desktop" },
+        { "id": "after-arrive-desk", "image": "bible/shots/showcase/dorm-court-kit-1/after-arrive-desk.webp", "caption": "After, desktop" },
+        { "id": "before-arrive-phone", "image": "bible/shots/showcase/dorm-court-kit-1/before-arrive-phone.webp", "caption": "Before, phone" },
+        { "id": "after-arrive-phone", "image": "bible/shots/showcase/dorm-court-kit-1/after-arrive-phone.webp", "caption": "After, phone: the tall lamps stand on the far side of the walk, so none stands between the camera and Eric" }
+      ]
+    },
+    {
+      "title": "The hall doors",
+      "caption": "The door leg runs between two low kerbed beds, with the 社員寮 stone on the paving by the sento. Bollard lights along the front bed, and the bench and bins beside the cherry.",
+      "images": [
+        { "id": "before-door-desk", "image": "bible/shots/showcase/dorm-court-kit-1/before-door-desk.webp", "caption": "Before" },
+        { "id": "after-door-desk", "image": "bible/shots/showcase/dorm-court-kit-1/after-door-desk.webp", "caption": "After" },
+        { "id": "before-door-phone", "image": "bible/shots/showcase/dorm-court-kit-1/before-door-phone.webp", "caption": "Before, phone" },
+        { "id": "after-door-phone", "image": "bible/shots/showcase/dorm-court-kit-1/after-door-phone.webp", "caption": "After, phone" },
+        { "id": "after-door-close", "image": "bible/shots/showcase/dorm-court-kit-1/after-door-close.webp", "caption": "Close-up: the door leg, its beds and the laundry" }
+      ]
+    },
+    {
+      "title": "Sento, bike shelter, garbage point",
+      "caption": "The shelter now stands against the block's return on the east side: frosted roof, steel posts, a lit strip, a rack with painted bays and the blue bike sign. On the south side it stood between the camera and Eric. The garbage cage sits by the street, with air-conditioner units at the foot of the return. The right-hand block is pale concrete under a higher, softer sun.",
+      "images": [
+        { "id": "after-sento-desk", "image": "bible/shots/showcase/dorm-court-kit-1/after-sento-desk.webp", "caption": "After, desktop" },
+        { "id": "after-sento-phone", "image": "bible/shots/showcase/dorm-court-kit-1/after-sento-phone.webp", "caption": "After, phone" },
+        { "id": "after-shelter-close", "image": "bible/shots/showcase/dorm-court-kit-1/after-shelter-close.webp", "caption": "Close-up: the shelter and the garbage cage" },
+        { "id": "after-machines-close", "image": "bible/shots/showcase/dorm-court-kit-1/after-machines-close.webp", "caption": "Close-up: the drinks machines, the lamp and the bench" }
+      ]
+    }
+  ],
+  "links": [{ "label": "Play it", "href": "game3d/?place=dorm_court" }]
+}

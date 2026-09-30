@@ -68,7 +68,7 @@ export async function dormCourtPlace(game) {
             new THREE.Vector3(0, 1.2, 2.4),
           ],
           new THREE.Vector3(0, 0, 0),
-          { follow: true, clamp: [-2.6, 2.6, -2.6, -1.3], lead: -1.6 },
+          { follow: true, clamp: [-2.6, 2.6, -2.6, -1.75], lead: -1.6 },
         );
     },
     pick(rc) {
