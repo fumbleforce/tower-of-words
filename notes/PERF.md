@@ -13,11 +13,41 @@ Profile (`game3d/tools/perf.mjs`): a 393 x 851 screen at DPR 2.75 (the game caps
 | Download to the title | 12 MB | mobile data |
 | Download for the whole day | 40 MB | |
 | Frame rate in play | 30 fps sustained, p95 frame under 50 ms | steady, no hitches when walking |
-| Draw calls per frame (all passes) | 250 | what mid-range mobile GPUs and drivers take at 30 fps |
+| Draw calls per frame (all passes) | under 200 | current phone limit (2026-09-30); report peaks as well as medians |
 | Triangles per frame | 300k | |
 | Long tasks (over 50 ms) | under 5 per 10 s of play | input stays responsive |
 
 Headless limits, read the numbers with them: with SwiftShader the frame rate is software rendering (a floor, far below a phone); with `GL=gpu` it is this machine's RTX 3080 (a ceiling). Draw calls, triangles, load time, download size and the CPU-throttled main thread are the numbers that carry over to a phone.
+
+## Evening delivery: coverage and draw calls (2026-09-30)
+
+Build `0930-1816-165fbd6`, runtime `17ee1a1`. The fast day route skips the optional evening discoveries.
+When their stories, hooks or saved state change, run `node game3d/tools/evening-check.mjs 390 844` and
+`node game3d/tools/evening-check.mjs 1366 860` before landing, alongside the full-day runs. Use the normal
+browser-job GPU admission. `BASE` selects a worktree; `PLACES` permits a focused rerun of a failed case.
+The tool checks actual interactions, repeat use and Continue. Voices are muted; its screenshots still need
+visual inspection. This is a release check, not an automatic step in `tools/land.sh`.
+
+This delivery ran those checks before landing. Passing cases are retained under `game3d/shots/evening/`:
+phone forecourt in `integration-phone/result.json`, plaza in `final-phone/result.json`, dorm courtyard in
+`dorm-phone/result.json`; desktop forecourt/plaza in `final-desktop/result.json`, dorm courtyard in
+`dorm-desktop/result.json`. The earlier combined reports also retain failed cases subsequently rerun;
+they are not all-pass reports. Claude C0201 separately passed the full day at both sizes with all voices.
+
+Final phone q0 GPU run (`.claude/worktrees/codex-evening-discoveries/game3d/shots/fast/2026-09-30T18-10-04-130Z-2226296/perf.json`):
+
+| Place | Earlier baseline median | Current median | Sampled maximum |
+|---|---:|---:|---:|
+| forecourt | 131 | 175 | 241 |
+| plaza | 43 | 58 | 72 |
+| dorm_court | 40 | 50 | 78 |
+
+The new interactions add movable props and characters that cannot all join the static batches; the dorm route
+also adds hall geometry. These explain additional rendering work, but no paired measurement yet attributes
+each added call. Median frame time was 16.7 ms in these areas on the desktop GPU, not measured phone hardware.
+Keep the old baselines and their warnings. The medians are under 200; the forecourt maximum is not. The recorder
+does not timestamp peak samples, so a transition or preparation explanation remains unproven. Claude owns
+attributing and reducing that peak; changing the baseline cannot establish compliance with the phone limit.
 
 ## Results, 2026-09-28 (GL=gpu, q=1)
 
