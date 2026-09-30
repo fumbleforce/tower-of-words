@@ -133,7 +133,7 @@ export function installGesturesHooks(game, { whoRig, aimOf }) {
     }
     r.arms.forEach((a, i) => a.rotation.copy(save[i]));
   };
-  // Mio's headphones: on (both cups on), half (one cup off), neck (round her neck)
-  // headphones: removed (Jørgen: no props on his models); kept as a no-op so old story steps don't break
-  H.headphones = () => {};
+  // headphones: a place's own (the girl with headphones on the train, train/discoveries.js); Mio's were removed
+  // (Jørgen: no props on his models), so for her, or in a place without any, it does nothing
+  H.headphones = (s) => (s.who === 'mio' ? undefined : game.place?.hooks?.headphones?.(s));
 }

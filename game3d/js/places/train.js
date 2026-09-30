@@ -41,6 +41,7 @@ import { damp, goalSpot, pulled, widenTo } from '../cam.js';
 import { flags } from '../narrative/state.js';
 import { dust, lightPool } from './life.js';
 import { route } from './route.js';
+import { trainDiscoveries } from '../train/discoveries.js';
 
 // Muted palette, after game3d/ref/2-security-gate-muted.png (Jørgen: "mute train too"): slate and charcoal,
 // dark navy seats, a calmer floor. Only colours; set before the car is built.
@@ -786,6 +787,8 @@ export async function trainPlace(game) {
     youth,
     tama: { root: kitty, head: kitty.userData.head },
   };
+  // what the passengers can show Eric: their phone and bag hooks (train/discoveries.js)
+  const finds = trainDiscoveries(game, { people, car: car.root, nav, SEAT_Y });
   const seats = {
     seat_aoi: { x: -1.25, z: -(LZ - 0.24), side: -1, bag: 1, top: SEAT_Y, ry: 0 },
     seat_far_r: { x: 1.58, z: -(LZ - 0.24), side: -1, props: true, top: SEAT_Y, ry: 0 },
@@ -1076,6 +1079,7 @@ export async function trainPlace(game) {
       if (r && r.hips) standUp(r);
     },
     update(dt, t) {
+      finds.update(dt);
       // cut-away for the steep play camera, the closed car for shallow shots from outside (the title) and while it
       // pulls out of the station
       {
@@ -1381,6 +1385,10 @@ export async function trainPlace(game) {
         await walkRig(game, kitty, p, { speed: 1.0 });
         kitty.position.y = 0;
       },
+      phone: finds.hooks.phone,
+      headphones: finds.hooks.headphones,
+      shopBag: finds.hooks.shopBag,
+      printout: finds.hooks.printout,
     },
     snapshotState() {
       return {
@@ -1423,6 +1431,7 @@ export async function trainPlace(game) {
         bagRotation: foodBag.rotation.toArray(),
         bagWobble,
         bagMotion: bagMotion ? structuredClone(bagMotion) : null,
+        finds: finds.snapshot(),
       };
     },
     restoreState(saved) {
@@ -1517,6 +1526,7 @@ export async function trainPlace(game) {
         });
       }
       restorePeople(people, state.people);
+      finds.restore(state.finds);
       for (const [id, q] of Object.entries(state.people || {})) {
         const r = people[id];
         if (!r?.root) continue;
@@ -1547,6 +1557,7 @@ export async function trainPlace(game) {
       }
     },
     onEnter: async () => {},
+    leave: () => finds.dispose(), // the passengers' sounds and pictures stop with the place
     // Mio (the Meshy model) sits where the laptop woman sat, laptop on her knees
     placeMio(m) {
       rei.root.visible = false;

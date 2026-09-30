@@ -1129,3 +1129,30 @@ body.phone #actMenu .hd { padding: 7px 16px; }
 #cmdsPanel li.wrow .bf .bj { font-size: 13px; }
 #cmdsPanel li.fnote { display: block; border: 0; padding: 4px 2px 8px; color: var(--ink-dim); font-size: 12.5px; line-height: 1.4; }
 #cmdsPanel .card { max-height: calc(100dvh - 32px); overflow-y: auto; overscroll-behavior: contain; }
+/* something held up for Eric (ui/held-view.js): a phone screen or sheets of paper, never taking taps */
+/* desktop: to the right of the person the camera frames; phone: across the top, above them */
+#held { position: absolute; right: 5%; top: 8%; z-index: 2; display: flex; align-items: center; justify-content: center; gap: 0; pointer-events: none; }
+#held[hidden] { display: none; }
+#held.in { animation: heldIn .28s cubic-bezier(.2, .8, .3, 1.1) both; }
+#held.out { animation: heldOut .2s ease-in both; }
+@keyframes heldIn { from { opacity: 0; translate: 0 26px; scale: .86; } }
+@keyframes heldOut { to { opacity: 0; translate: 0 18px; scale: .92; } }
+#held .hv { position: relative; rotate: var(--tilt, 0deg); filter: drop-shadow(0 10px 24px rgba(0, 0, 0, .5)); }
+#held .scr { position: relative; overflow: hidden; aspect-ratio: var(--ar); }
+#held .pic { display: block; width: 100%; height: 100%; }
+#held .phone { padding: 9px 13px; border-radius: 20px; background: #161a22; border: 1px solid rgba(255, 255, 255, .16); box-shadow: inset 0 0 0 2px #0b0d12; }
+#held .phone .scr { width: 380px; border-radius: 9px; }
+#held .phone.tall { padding: 12px 8px; border-radius: 24px; }
+#held .phone.tall .scr { width: 196px; border-radius: 12px; }
+#held .sheet .scr { width: 300px; border-radius: 2px; }
+#held .sheet + .sheet { margin-left: -26px; }
+#held .ring { position: absolute; width: 22%; aspect-ratio: 1; border-radius: 50%; border: 3px solid #fff; box-shadow: 0 0 0 2px rgba(0, 0, 0, .25), 0 0 14px rgba(255, 255, 255, .6); translate: -50% -50%; animation: heldRing 1.2s ease-in-out infinite; }
+@keyframes heldRing { 50% { scale: 1.12; opacity: .75; } }
+body:not(.phone) #held { zoom: var(--ui, 1); }
+body.phone #held { left: 50%; right: auto; top: calc(9% + env(safe-area-inset-top)); transform: translateX(-50%); }
+body.phone #held .phone .scr { width: min(290px, calc(100vw - 72px)); }
+body.phone #held .phone.tall .scr { width: 150px; }
+body.phone #held .sheet .scr { width: min(186px, calc(50vw - 8px)); }
+body.phone #held .sheet + .sheet { margin-left: -18px; }
+/* Japanese spoken with an English subtitle (runner `en`): the name row says it's in Japanese */
+#talk .subtag { color: var(--ink-dim); font-size: 13px; font-weight: 500; }

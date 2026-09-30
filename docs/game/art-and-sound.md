@@ -49,7 +49,7 @@ The anime portraits beside the dialogue box. The faces each person has are in [c
 - Game voices are local Qwen3-TTS clones of a reference clip per character (references in tools/voice-refs/; `sh tools/voice/run.sh` voices every line with no clip, reusing tools/island_audio/'s checks). Each line's delivery comes from its `emo` tag (game3d/story/VOICE-DIRECTION.md).
 - Mio: voice A (tools/voice-refs/mio-a.wav), low and slightly husky.
 - Eric: voice design eric-2 with no accent (tools/voice-refs/eric-voice.wav). The Nordic accent was dropped (Jørgen: "not any better, just drop it, English accent instead").
-- Japanese speakers speak Japanese; overheard lines play muffled ([systems.md](systems.md)).
+- Japanese speakers speak Japanese; overheard lines play muffled, subtitled ones clear ([systems.md](systems.md)).
 - Loudness is normalised per character; Eric's voice is quieter.
 
 ## Music and sound
@@ -58,5 +58,6 @@ The anime portraits beside the dialogue box. The faces each person has are in [c
 - Each place has an ambience bed with occasional one-shots under the music; a kotodama dips it.
 - Each door has its own sound: the train doors, the station's glass entrance doors, the lift doors (after the lift's ding when they open) and the gate's flaps. The copier running, the kettle pouring and a can dropping in the vending machine have theirs too. No crowd sound: the ambience bed carries the people.
 - Two men humming in the dorm courtyard's sento (the monorail's door chime, badly) are synthesised offline (tools/feel/hum.py), like the interface sounds.
+- A phone buzzing, a bag's zip and a clean electric guitar played by a learner, heard through a phone speaker or a lifted headphone, are synthesised the same way (tools/feel/pluck.py).
 - No footsteps (Jørgen).
 - The opening theme is "Mastered: softer" (art/approved/music/opening.mp3); game3d doesn't use it yet.

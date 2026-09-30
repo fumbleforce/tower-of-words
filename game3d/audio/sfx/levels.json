@@ -348,5 +348,35 @@
   "seconds": 5.09,
   "kb": 70,
   "source": "synthesised (tools/feel/hum.py)"
+ },
+ "guitar_practice": {
+  "target_lufs": -30,
+  "measure": "momentary max",
+  "encoded_integrated": -33.1,
+  "encoded_momentary_max": -30.7,
+  "peak_dbfs": -22.7,
+  "seconds": 6.63,
+  "kb": 91,
+  "source": "synthesised (tools/feel/pluck.py)"
+ },
+ "zip": {
+  "target_lufs": -30,
+  "measure": "momentary max",
+  "encoded_integrated": -31.4,
+  "encoded_momentary_max": -30.5,
+  "peak_dbfs": -14.0,
+  "seconds": 1.0,
+  "kb": 15,
+  "source": "synthesised (tools/feel/pluck.py)"
+ },
+ "buzz": {
+  "target_lufs": -31,
+  "measure": "momentary max",
+  "encoded_integrated": -32.2,
+  "encoded_momentary_max": -31.4,
+  "peak_dbfs": -28.5,
+  "seconds": 1.0,
+  "kb": 15,
+  "source": "synthesised (tools/feel/pluck.py)"
  }
 }
