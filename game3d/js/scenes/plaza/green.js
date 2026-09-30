@@ -20,13 +20,16 @@ const { F, R, BAND, ARCS, LANE, LINK, AVENUE, TERRACE, TERRACE_S, polar, rad } =
 // cosmos, the autumn flower of every Japanese park: pink, white and a deep rose
 const COSMOS = ['#d59aae', '#ece6e3', '#b86f8e', '#dcb3c6'];
 
-// the tree ring: a tree every 22.5° round the ring bed, none in the three openings (east, west, north), symmetric
-// about the canteen's axis. The benches stand in front of four of them (plaza/furniture.js), two each side of the
-// link, with a lamp between each pair; maples flank the link, cherries everywhere else.
+// the tree ring: a tree every 22.5° round the ring bed, none on the two axes (the three openings, and the notice
+// board on the south, with low shrubs behind it), symmetric about both. The benches stand in front of eight of them
+// (plaza/furniture.js), a pair in each quarter, with a lamp between each pair: north-west, north-east, then their
+// mirrors south-west and south-east; maples flank the link, cherries everywhere else.
 const PITCH = 22.5;
 const TREE_DEG = Array.from({ length: 16 }, (_, i) => i * PITCH).filter((d) => d % 90 !== 0 || d === 90);
-export const BENCH_ANGLES = [rad(202.5), rad(225), rad(315), rad(337.5)];
-export const RING_LAMPS = [rad(213.75), rad(326.25)];
+export const BENCH_ANGLES = [202.5, 225, 315, 337.5, 157.5, 135, 45, 22.5].map(rad);
+export const RING_LAMPS = [213.75, 326.25, 146.25, 33.75].map(rad);
+// the lamp pair either side of the notice board, as far off the axis as the pair either side of the link
+export const SOUTH_PAIR = [-(P.HALF + 0.5), P.HALF + 0.5];
 const MAPLES = [247.5, 292.5];
 
 // cosmos: a low mound of leaves with small flowers dotted over its top
@@ -71,14 +74,21 @@ function ring(p) {
   const mid = R + BAND * 0.42;
   TREE_DEG.forEach((d, i) => {
     const [x, z] = polar(rad(d), mid);
+    if (d === 90) return cluster(p, x, z, { n: 4, r: 0.34, spread: 0.6, seed: 9 }); // behind the notice board
     if (MAPLES.includes(d)) maple(p, x, z, 1.15, i + 3);
     else sakura(p, x, z, 0.95 + (i % 3) * 0.05, i + 11);
   });
   // along the south arc, facing the plaza: drifts of cosmos and grass tufts between the cherries, in front of the
   // hedge
   const q = rng(31);
+  // the south lamps stand in the bed: no flowers at their feet
+  const rr = R + 0.38;
+  const lampDeg = [...RING_LAMPS.filter((a) => a < Math.PI), ...SOUTH_PAIR.map((dx) => Math.acos(dx / rr))].map(
+    (a) => (a * 180) / Math.PI,
+  );
   for (let d = PITCH / 2; d < 180; d += PITCH)
     for (const k of [-1, 0, 1]) {
+      if (lampDeg.some((l) => Math.abs(d + k * 3.2 - l) < 2.6)) continue;
       const [x, z] = polar(rad(d + k * 3.2), R + 0.45);
       if (k === 0 && Math.round(d) % 2) grass(p, x, z, { seed: Math.round(d), h: 0.45 });
       else cosmos(p, x, z, Math.round(d * 10 + k + q() * 5));
