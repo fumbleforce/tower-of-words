@@ -1,0 +1,19 @@
+{
+  "status": "pending",
+  "request": "C-0208; X-0325",
+  "issue": 110,
+  "pipeline": "sh tools/voice/run.sh",
+  "clips": [
+    {
+      "key": "ln-1qenrl5",
+      "speaker": "mio",
+      "text": "Upstairs you have to bow to everybody all day, it's so tiring. Down here it's just me and the servers.",
+      "authoredText": "Upstairs you have to bow to everybody all day, it's so tiring. Down here it's just me and the servers.",
+      "emo": "tired",
+      "overheard": false,
+      "source": "office:mio_b2",
+      "lang": "en"
+    }
+  ],
+  "note": "Replace only the first mio_b2 clip. The next two server lines are unchanged."
+}
