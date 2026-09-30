@@ -1,0 +1,76 @@
+{
+ "title": "Station forecourt: the station building, the platform shed and the bike court",
+ "date": "2026-09-30",
+ "by": "claude-agent:station-court",
+ "caption": "The station forecourt rebuilt from island-map-4 (map upgrade task D). The station is now a two-storey building, the platform shed and monorail beam stand where the map draws them, and the court between the station and head office has rows of bikes. The road is gone. Same cameras before and after.",
+ "commit": "3a6e3e7",
+ "sections": [
+  {
+   "title": "Stepping out of the station (desktop)",
+   "caption": "While Eric stands just outside the north door, the station above knee height fades, so you can see him and, through it, the security room's gate line, plants and benches. The court's north edge has two planted beds with trees, and the ground beyond is a row of trees, a path with benches and lawns instead of bare ground.",
+   "images": [
+    {"id": "exit-desk-before", "image": "bible/shots/showcase/station-court-1/exit-desk-before.webp", "caption": "Before"},
+    {"id": "exit-desk-after", "image": "bible/shots/showcase/station-court-1/exit-desk-after.webp", "caption": "After"}
+   ]
+  },
+  {
+   "title": "Stepping out of the station (phone)",
+   "caption": "Same moment on a phone.",
+   "images": [
+    {"id": "exit-phone-before", "image": "bible/shots/showcase/station-court-1/exit-phone-before.webp", "caption": "Before"},
+    {"id": "exit-phone-after", "image": "bible/shots/showcase/station-court-1/exit-phone-after.webp", "caption": "After"}
+   ]
+  },
+  {
+   "title": "Walking across",
+   "caption": "Once Eric is east of the station it stands whole at the bottom left: two storeys, the security room's windows, plant and condensers on the roof, and 本社駅 HONSHA STATION along the roof edge. The bike court east of the station has two rows of racks with fifteen bikes, a bench against the station wall and four tall lamps.",
+   "images": [
+    {"id": "mid-desk-before", "image": "bible/shots/showcase/station-court-1/mid-desk-before.webp", "caption": "Before"},
+    {"id": "mid-desk-after", "image": "bible/shots/showcase/station-court-1/mid-desk-after.webp", "caption": "After"},
+    {"id": "bikes-desk-after", "image": "bible/shots/showcase/station-court-1/bikes-desk-after.webp", "caption": "After: in the bike court"}
+   ]
+  },
+  {
+   "title": "At the head office door",
+   "caption": "The station at the left edge behind him. The lane to the plaza now leaves along the tower's south face, between a low bed and a hedge with trees, instead of running into the tower's west wall. The ground floor east of the lobby has windows now.",
+   "images": [
+    {"id": "hodoor-desk-before", "image": "bible/shots/showcase/station-court-1/hodoor-desk-before.webp", "caption": "Before, desktop"},
+    {"id": "hodoor-desk-after", "image": "bible/shots/showcase/station-court-1/hodoor-desk-after.webp", "caption": "After, desktop"},
+    {"id": "hodoor-phone-before", "image": "bible/shots/showcase/station-court-1/hodoor-phone-before.webp", "caption": "Before, phone"},
+    {"id": "hodoor-phone-after", "image": "bible/shots/showcase/station-court-1/hodoor-phone-after.webp", "caption": "After, phone"},
+    {"id": "lane-desk-after", "image": "bible/shots/showcase/station-court-1/lane-desk-after.webp", "caption": "After: on the lane to the plaza"}
+   ]
+  },
+  {
+   "title": "Evening",
+   "caption": "After work, in the shared dusk light. The station's windows are lit.",
+   "images": [
+    {"id": "exit-eve-desk-before", "image": "bible/shots/showcase/station-court-1/exit-eve-desk-before.webp", "caption": "Before, at the station door"},
+    {"id": "exit-eve-desk-after", "image": "bible/shots/showcase/station-court-1/exit-eve-desk-after.webp", "caption": "After, at the station door"},
+    {"id": "hodoor-eve-desk-before", "image": "bible/shots/showcase/station-court-1/hodoor-eve-desk-before.webp", "caption": "Before, at the head office door"},
+    {"id": "hodoor-eve-desk-after", "image": "bible/shots/showcase/station-court-1/hodoor-eve-desk-after.webp", "caption": "After, at the head office door"}
+   ]
+  },
+  {
+   "title": "The head office lobby",
+   "caption": "When the tower fades over the lobby, the rest of the ground floor used to be one solid grey block. It is now rooms: a back office with desks and cabinets east of the lobby, windows in the outer walls, and the paving and lawns outside instead of bare ground. The lift core's top is unchanged.",
+   "images": [
+    {"id": "lobby-desk-before", "image": "bible/shots/showcase/station-court-1/lobby-desk-before.webp", "caption": "Before, desktop (from the head office showcase)"},
+    {"id": "lobby-desk-after", "image": "bible/shots/showcase/station-court-1/lobby-desk-after.webp", "caption": "After, desktop"},
+    {"id": "lobby-phone-before", "image": "bible/shots/showcase/station-court-1/lobby-phone-before.webp", "caption": "Before, phone"},
+    {"id": "lobby-phone-after", "image": "bible/shots/showcase/station-court-1/lobby-phone-after.webp", "caption": "After, phone"}
+   ]
+  },
+  {
+   "title": "Pulled back",
+   "caption": "A wider camera than the game uses. Left: the platform shed with its island platform and the two monorail beams on piers, and the covered walkway along the station's south side to its glass front. Middle: the station (cut low here, since Eric is at its door) and the bike court. Right: head office and the lane.",
+   "images": [
+    {"id": "wide-after", "image": "bible/shots/showcase/station-court-1/wide-after.webp", "caption": "Morning"},
+    {"id": "wide-eve-after", "image": "bible/shots/showcase/station-court-1/wide-eve-after.webp", "caption": "Evening"},
+    {"id": "map-top-after", "image": "bible/shots/showcase/station-court-1/map-top-after.webp", "caption": "From above, with the island layout (pink) and walk area (red)"},
+    {"id": "map-drawn-after", "image": "bible/shots/showcase/station-court-1/map-drawn-after.webp", "caption": "Over island-map-4 as drawn"}
+   ]
+  }
+ ],
+ "links": [{"label": "Play it", "href": "game3d/"}]
+}
