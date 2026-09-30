@@ -6,9 +6,11 @@ const ROOT = new URL('../../../../', import.meta.url).href;
 const loader = new GLTFLoader();
 const garments = /-(hoodie|hood|zip|trousers|pockets|sneakers)(?:[-_]|$)/;
 
-export async function loadAstra(body) {
+export async function loadAstra(body, attempt = '') {
+  if (attempt && !/^attempt-[0-9]+$/.test(attempt)) throw new Error('Invalid model attempt');
+  const folder = attempt ? attempt + '/' : '';
   const [gltf, walk, idle] = await Promise.all([
-    loader.loadAsync(`${ROOT}art/parts/astra/${body}.glb`),
+    loader.loadAsync(`${ROOT}art/parts/astra/${folder}${body}.glb`),
     loader.loadAsync(`${ROOT}game3d/assets/${body}/walk.glb`),
     loadRelaxedIdle(body),
   ]);

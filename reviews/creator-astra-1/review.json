@@ -1,0 +1,68 @@
+{
+  "title": "Astra vs Claude: chibi bases",
+  "date": "2026-09-30",
+  "by": "Astra models · Codex comparison",
+  "status": "open",
+  "question": "Which base should we build on for Mio and Eric?",
+  "multi": true,
+  "options": [
+    {
+      "id": "mio-claude",
+      "label": "mio-claude",
+      "image": "art/parts/blender/review/mio-1-standing.webp",
+      "images": [
+        "art/parts/blender/review/mio-3-closeups.webp",
+        "art/parts/blender/review/mio-2-walking.webp"
+      ],
+      "note": "Current Blender rebuild; its original reference is in the first row."
+    },
+    {
+      "id": "mio-astra",
+      "label": "mio-astra",
+      "image": "art/parts/astra/attempt-11/mio-standing.webp",
+      "images": [
+        "art/parts/astra/attempt-11/mio-details.webp",
+        "art/parts/astra/attempt-11/mio-motion.webp"
+      ],
+      "note": "Independent simplified base with its own hair and cargo outfit. Uses the original rig and approved idle/walk; collar, cuffs and hair silhouettes differ from the original. The approved idle lifts the toes slightly on both versions."
+    },
+    {
+      "id": "eric-claude",
+      "label": "eric-claude",
+      "image": "art/parts/blender/review/eric-1-standing.webp",
+      "images": [
+        "art/parts/blender/review/eric-3-closeups.webp",
+        "art/parts/blender/review/eric-2-walking.webp"
+      ],
+      "note": "Current Blender rebuild; its original reference is in the first row."
+    },
+    {
+      "id": "eric-astra",
+      "label": "eric-astra",
+      "image": "art/parts/astra/attempt-11/eric-standing.webp",
+      "images": [
+        "art/parts/astra/attempt-11/eric-details.webp",
+        "art/parts/astra/attempt-11/eric-motion.webp"
+      ],
+      "note": "Independent simplified base with its own hair and cargo outfit. Uses the original rig and approved idle/walk; collar, cuffs and hair silhouettes differ from the original. The approved idle lifts the toes slightly on both versions."
+    }
+  ],
+  "links": [
+    {
+      "label": "Compare live: rotate, Idle, Walk, bare body and close-ups",
+      "href": "tools/creator/astra/viewer/?attempt=attempt-11"
+    },
+    {
+      "label": "Eric in the live comparison",
+      "href": "tools/creator/astra/viewer/?body=eric&attempt=attempt-11"
+    },
+    {
+      "label": "Every attempt, including rejected versions",
+      "href": "reviews/creator-astra-1/attempts.html"
+    },
+    {
+      "label": "Claude’s original review",
+      "href": "bible/#review/creator-blender-1"
+    }
+  ]
+}

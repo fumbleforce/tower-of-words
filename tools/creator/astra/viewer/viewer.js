@@ -94,7 +94,7 @@ async function rebuild() {
   const original = $('reference').value === 'original';
   $('left-label').textContent = original ? 'Original' : 'Claude';
   $('left-detail').textContent = original ? 'Game model · original outfit' : 'Blender rebuild';
-  const results = await Promise.allSettled([original ? loadOriginal(body) : loadModel(body), loadAstra(body)]);
+  const results = await Promise.allSettled([original ? loadOriginal(body) : loadModel(body), loadAstra(body, new URLSearchParams(location.search).get('attempt') || '')]);
   if (dead || token !== generation) { for (const result of results) if (result.status === 'fulfilled') result.value.dispose(); return; }
   results.forEach((result, index) => { if (result.status === 'fulfilled') { state.characters[index] = result.value; panels[index].scene.add(result.value.root); } });
   dress(); pose();
