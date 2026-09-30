@@ -6,6 +6,7 @@
 import * as THREE from 'three';
 import { mat, rbox } from '../../props.js';
 import { boxes } from '../forecourt/details.js';
+import { Parts } from '../outdoor/parts.js';
 
 export const BLOCK = {
   x0: -10.5, // the long face's west end, well past the frame
@@ -18,8 +19,8 @@ export const BLOCK = {
   floor: 1.75, // each floor above it
   floors: 4, // floors above the ground floor: five storeys in all
 };
-const CONCRETE = '#8e9399',
-  CONCRETE_DARK = '#7b7e83',
+const CONCRETE = '#9a9ea3',
+  CONCRETE_DARK = '#85898e',
   PANEL = '#b3bac1', // balcony fronts
   GLASS = '#46505c',
   FRAME = '#5d636c',
@@ -133,11 +134,10 @@ export function ericBlock(root, { hall: [hx0, hx1] }) {
     });
     parts.trim.push([0.04, 0.1, B.rz - B.z, B.rx - 0.01, y - 0.25, (B.z + B.rz) / 2]);
   }
-  // the ground floor where it shows: west of the laundry, and the return's west face (its door and windows)
-  windowsX(parts, 0.7, B.x0, -5.2, 3, B.z + 0.01, 0.95, 1);
-  windowsZ(parts, 0.7, B.z + 0.3, B.rz - 1.4, 2, B.rx - 0.01, 0.95, 3);
-  parts.frame.push([0.06, 1.75, 0.9, B.rx - 0.02, 0, B.rz - 0.75]);
-  parts.glass.push([0.03, 1.65, 0.75, B.rx - 0.03, 0, B.rz - 0.75]);
+  // the ground floor where it shows: west of the laundry, the return's west face over its strip bed, its front
+  windowsX(parts, 0.7, B.x0, -6.0, 3, B.z + 0.01, 0.95, 1);
+  windowsZ(parts, 0.8, -1.3, B.rz - 0.1, 2, B.rx - 0.01, 0.9, 3);
+  windowsX(parts, 0.7, B.rx, B.x1, 3, B.rz + 0.01, 0.95, 2);
   // roof: a parapet, a water tank on legs, two plant boxes
   parts.trim.push(
     [B.rx - B.x0, 0.35, 0.18, (B.x0 + B.rx) / 2, top, B.z + 0.09],
@@ -158,13 +158,24 @@ export function ericBlock(root, { hall: [hx0, hx1] }) {
   ])
     legs.push([0.08, 0.45, 0.08, -3.2 + dx, top, -6.2 + dz]);
 
-  root.add(boxes(parts.slab, CONCRETE_DARK), boxes(parts.panel, PANEL), boxes(parts.rail, '#b8bdc2'));
-  root.add(boxes(parts.divider, '#9ea3a8'), boxes(parts.glass, GLASS), boxes(parts.frame, FRAME));
-  root.add(boxes(parts.ac, '#c9cbc8'), boxes(parts.pole, '#9aa1a8'), boxes(parts.trim, '#a1a5aa'));
-  root.add(boxes(tank, '#9fa4a9'), boxes(legs, FRAME));
-  parts.cloth.forEach((p, i) => p.length && root.add(boxes(p, CLOTHES[i])));
+  // every part of the face in one vertex-coloured mesh (outdoor/parts.js): one draw, not one per colour
+  const P = new Parts();
+  const put = (list, color) => list.forEach(([w, h, d, x, y, z]) => P.box(color, w, h, d, x, y, z));
+  put(parts.slab, CONCRETE_DARK);
+  put(parts.panel, PANEL);
+  put(parts.rail, '#b8bdc2');
+  put(parts.divider, '#9ea3a8');
+  put(parts.glass, GLASS);
+  put(parts.frame, FRAME);
+  put(parts.ac, '#c9cbc8');
+  put(parts.pole, '#9aa1a8');
+  put(parts.trim, '#a1a5aa');
+  put(tank, '#9fa4a9');
+  put(legs, FRAME);
+  parts.cloth.forEach((list, i) => put(list, CLOTHES[i]));
   // the hall's roof edge meets the block: a band over the hall at the ground floor's head
-  root.add(boxes([[hx1 - hx0 + 0.4, 0.14, 0.12, (hx0 + hx1) / 2, B.ground - 0.08, B.z + 0.06]], CONCRETE_DARK));
+  put([[hx1 - hx0 + 0.4, 0.14, 0.12, (hx0 + hx1) / 2, B.ground - 0.08, B.z + 0.06]], CONCRETE_DARK);
+  P.build(root);
   const warm = boxes(parts.lit, LIT);
   warm.material = mat(LIT, {
     emissive: new THREE.Color(LIT_GLOW),
