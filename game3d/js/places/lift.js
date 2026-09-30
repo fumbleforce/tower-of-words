@@ -724,7 +724,7 @@ function setCut(L, h) {
 function setCap(L, k) {
   const cap = L.car.cap;
   if (!cap) return;
-  if (L.place.scene.background) cap.material.color.copy(L.place.scene.background);
+  cap.material.color.set(L.site.capColor ?? L.place.scene.background ?? '#000');
   cap.material.opacity = k;
   cap.visible = k > 0.01;
   L.cap = k;

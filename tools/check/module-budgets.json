@@ -52,7 +52,7 @@
     },
     "game3d/js/places/lift.js": {
       "lines": 1206,
-      "bytes": 43498,
+      "bytes": 43496,
       "owner": "codex-tui",
       "review": "C-0071; 2026-09-30 landing lamp kept in the light count (notes/PERF.md)",
       "reason": "Existing shared lift geometry, movement and dialogue staging; extract after behavior characterization."
