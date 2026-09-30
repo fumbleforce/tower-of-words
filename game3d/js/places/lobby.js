@@ -12,17 +12,18 @@ import { K } from '../scenes/office.js';
 import { RoomCam } from '../cam.js';
 import { ui, sfx } from '../ui.js';
 import { walkPerson, stepPeople, lookAt } from '../story.js';
-import { PEOPLE, sit, armsLap, walkPose, HIP, idle } from '../cast.js';
+import { PEOPLE, sit, armsLap, idle } from '../cast.js';
 import { blob } from '../engine.js';
 import { flags, cond } from '../narrative/state.js';
 import { rbox } from '../props.js';
 import { route } from './route.js';
+import { lobbyCommuters } from './lobby-commuters.js';
 
 export const withList = (slot) =>
   (slot.with || []).filter((e) => typeof e === 'string' || cond(e.if)).map((e) => (typeof e === 'string' ? e : e.who));
 
 // walk an object in a straight line, ignoring the walk grid (scripted moves)
-import { glide, walkRig, queueStep } from '../move.js';
+import { glide, walkRig } from '../move.js';
 export { glide }; // smooth start, turn and stop; never touches the player's facing
 
 export async function lobbyPlace(game) {
@@ -63,150 +64,7 @@ export async function lobbyPlace(game) {
   w.man.root.visible = false;
   w.manBlob.visible = false;
 
-  // ---- commuters: walk in, tap a reader, pass the arch, take a lift ----
-  const commuters = [];
-  [0, 2, 5].forEach((k, i) => {
-    // a small crowd, so the story's people stand out
-    const r = PEOPLE.worker(k);
-    r.root.scale.multiplyScalar(K);
-    if (i === 2) {
-      const box = rbox(0.2, 0.12, 0.2, '#f4efe6', { y: -0.3, z: 0.05, r: 0.01 });
-      box.add(rbox(0.21, 0.02, 0.05, '#d9534f', { y: 0.11, r: 0.004 }));
-      r.arms[1].add(box);
-    }
-    w.root.add(r.root);
-    r.root.visible = false;
-    const b = blob(0.5, 0.35);
-    w.root.add(b);
-    b.visible = false;
-    commuters.push({ r, b, t: 1 - i * 3.5, side: i % 2 ? 1 : -1, stage: 'wait', ph: 0, qi: i });
-  });
-  function stepCommuter(c, dt) {
-    const r = c.r,
-      p = r.root.position;
-    c.t += dt;
-    if (c.stage === 'wait') {
-      if (c.t > 0 && st.rush && !game.busyTrip) {
-        c.stage = 'in';
-        r.root.visible = true;
-        c.b.visible = true;
-        p.set(c.side * (0.6 + Math.random() * 0.25), 0, Z + 1.6);
-        c.path = [
-          [c.side * (0.62 + Math.random() * 0.22), Z - 0.9],
-          [c.side * 0.93, BZ + 0.55],
-        ];
-      } // in through the open doorway (|x| < 1.1), never the glass
-      return;
-    }
-    const moveTo = (tx, tz, sp = 1.25) => {
-      const k = queueStep(game, r, tx, tz, sp, dt);
-      if (k !== 1) return k === 0 || !!walkPose(r, 0, 0);
-      r.root.rotation.y = Math.atan2(tx - p.x, tz - p.z);
-      c.ph += dt * 9.5;
-      walkPose(r, c.ph, 1);
-      c.b.position.set(p.x, 0.004, p.z);
-      return false;
-    };
-    if (c.stage === 'in') {
-      if (!st.gateOpen && c.path.length === 1) {
-        c.stage = 'toqueue';
-        c.path = [[-1.9 - c.qi * 0.55, BZ + 1.15 + (c.qi % 2) * 0.35]];
-      } else if (moveTo(...c.path[0])) {
-        c.path.shift();
-        if (!c.path.length) {
-          c.stage = 'tap';
-          c.t = 0;
-          walkPose(r, 0, 0);
-          r.hips.position.y = HIP;
-          r.arms[0].rotation.x = -1.2;
-        }
-      }
-      return;
-    }
-    if (c.stage === 'toqueue') {
-      if (moveTo(...c.path[0], 1.1)) {
-        c.stage = 'queue';
-        c.t = 0;
-        walkPose(r, 0, 0);
-        r.hips.position.y = HIP;
-        r.root.rotation.y = Math.PI * 0.9;
-      }
-      return;
-    }
-    if (c.stage === 'queue') {
-      // waiting: a phone out, a glance at the gate now and then, a sigh (shoulders drop)
-      r.arms[1].rotation.x = -1.25;
-      r.head.rotation.x = 0.35 - Math.max(0, Math.sin(c.t * 0.7 + c.qi)) * 0.35;
-      r.head.rotation.y = Math.sin(c.t * 0.4 + c.qi) * 0.4;
-      r.torso.position.y = 0.02 - Math.max(0, Math.sin(c.t * 0.9 + c.qi * 2) - 0.96) * 0.3;
-      if (st.gateOpen) {
-        r.arms[1].rotation.x = 0;
-        r.head.rotation.set(0, 0, 0);
-        r.torso.position.y = 0.02;
-        c.stage = 'in';
-        c.path = [[c.side * 0.93, BZ + 0.55]];
-      }
-      return;
-    }
-    if (c.stage === 'tap') {
-      if (st.jam) {
-        if (c.t > 1.5) {
-          r.arms[0].rotation.x = 0;
-          c.stage = 'back';
-        }
-        return;
-      }
-      if (c.t > 0.4 && c.t - dt <= 0.4) {
-        readerFlash(c.side > 0 ? 1 : 0, 'green', true);
-        openFor(1.6);
-      }
-      if (c.t > 0.7) {
-        r.arms[0].rotation.x = 0;
-        c.stage = 'through';
-        c.path = [
-          [c.side * 0.2, BZ + 0.2],
-          [c.side * 0.1, BZ - 0.8],
-          [-1.0, -Z + 0.55],
-        ];
-      }
-      return;
-    }
-    if (c.stage === 'back') {
-      if (moveTo(c.side * 1.6, BZ + 1.2)) {
-        c.stage = 'tapwait';
-        c.t = 0;
-        walkPose(r, 0, 0);
-      }
-      return;
-    }
-    if (c.stage === 'tapwait') {
-      if (!st.jam) {
-        c.stage = 'in';
-        c.path = [[c.side * 0.93, BZ + 0.5]];
-      }
-      return;
-    }
-    if (c.stage === 'through') {
-      if (c.path.length === 1) w.lifts[0].want = 1;
-      if (moveTo(...c.path[0])) {
-        c.path.shift();
-        if (!c.path.length) {
-          c.stage = 'enter';
-          c.t = 0;
-        }
-      }
-      return;
-    }
-    if (c.stage === 'enter') {
-      if (moveTo(-1.0, -Z - 0.65, 1.0)) {
-        r.root.visible = false;
-        c.b.visible = false;
-        w.lifts[0].want = 0;
-        c.stage = 'wait';
-        c.t = -4 - Math.random() * 5;
-      }
-    }
-  }
+  const { list: commuters, step: stepCommuters, clearDoor } = lobbyCommuters(game, w, st, { readerFlash, openFor });
 
   // background people who aren't going anywhere yet
   const extras = [];
@@ -588,7 +446,7 @@ export async function lobbyPlace(game) {
     update(dt, t) {
       w.update(t);
       stepPeople([w.aoi, w.man, w.guard, rei], dt);
-      for (const c of commuters) stepCommuter(c, dt);
+      stepCommuters(dt);
       for (const [i, r] of extras.entries()) {
         idle(r, t + i);
         r.head.rotation.y = Math.sin(t * 0.7 + i * 2) * 0.35;
@@ -727,6 +585,7 @@ export async function lobbyPlace(game) {
 
     // arriving from the platform walkway: in through the glass doors, the camera easing out from close
     async tripIn(g, slot) {
+      st.leaving = false;
       const mio = g.player;
       mio.scripted = true;
       mio.root.position.set(0, 0, Z + 1.7);
@@ -785,6 +644,7 @@ export async function lobbyPlace(game) {
     },
     // The old lift marker now names the station's outdoor exit; keep its id for saves.
     async tripOut(g) {
+      await clearDoor(g); // the commuters leave by this door too (lobby-commuters.js)
       await g.walkTo(-1.0, -Z + 0.6);
       g.player.scripted = true;
       g.walker.locked = true;
