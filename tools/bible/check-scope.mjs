@@ -29,7 +29,23 @@ export async function scopedFetch(url, { publicOnly = false, method = 'GET', fet
   return fetchImpl(url, { method, redirect: 'error', signal: AbortSignal.timeout(10000) });
 }
 
-export function scopedRoute({ publicOnly = false, onFailure, isClosing = () => false }) {
+// A few requests at a time, like a browser's own per-host limit: unbounded, one page that loads every review.json
+// sent hundreds of route.fetch calls at once and stalled the server (#97). With `cache` (a Map), a GET that already
+// answered 2xx in this run is served again from memory: the check visits ~100 routes that each reload every review
+// and showcase file, and those don't change while it runs.
+export function limiter(n) {
+  let active = 0;
+  const waiting = [];
+  return async task => {
+    if (active >= n) await new Promise(resolve => waiting.push(resolve));
+    active++;
+    try { return await task(); }
+    finally { active--; waiting.shift()?.(); }
+  };
+}
+
+export function scopedRoute({ publicOnly = false, onFailure, isClosing = () => false, limit = 8, cache = null }) {
+  const slot = limiter(limit);
   return async route => {
     const url = route.request().url();
     try {
@@ -37,8 +53,18 @@ export function scopedRoute({ publicOnly = false, onFailure, isClosing = () => f
         onFailure(`blocked out-of-scope request: ${url}`);
         return await route.abort('blockedbyclient');
       }
+      const method = route.request().method?.() || 'GET';
+      const hit = cache && method === 'GET' && cache.get(url);
+      if (hit) return await route.fulfill(await hit);
       // Playwright routes only the first hop. Do not fetch or fulfill redirects.
-      const response = await route.fetch({ maxRedirects: 0, timeout: 10000 });
+      const response = await slot(async () => {
+        const r = await route.fetch({ maxRedirects: 0, timeout: 10000 });
+        if (cache && method === 'GET' && r.status() >= 200 && r.status() < 300) {
+          const body = await r.body();
+          if (body.length <= 4 << 20) cache.set(url, Promise.resolve({ status: r.status(), headers: r.headers(), body }));
+        }
+        return r;
+      });
       if (response.status() >= 300 && response.status() < 400) {
         onFailure(`redirect refused by Bible source scope: ${url}`);
         return await route.abort('blockedbyclient');

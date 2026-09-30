@@ -66,7 +66,7 @@ await withBrowserJob('bible-check', async browser => {
 const context = await browser.newContext({ serviceWorkers: 'block' });
 let closing = false;
 let currentRoute = '';
-await context.route('**/*', scopedRoute({ publicOnly, isClosing: () => closing,
+await context.route('**/*', scopedRoute({ publicOnly, isClosing: () => closing, cache: new Map(),
   onFailure: message => bad.push(`${currentRoute}: ${message}`) }));
 try {
 for (const site of SITES) {

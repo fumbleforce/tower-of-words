@@ -50,6 +50,7 @@ FEEDBACK = os.path.join(ROOT, 'notes', 'feedback-game')
 FEEDBACK_LOG = os.path.join(ROOT, 'notes', 'feedback-log')
 MAX_FEEDBACK = 40 * 1024 * 1024  # a full-size PNG of a 4K screen, base64
 STAMP_LOCK = threading.Lock()
+WORK_LOCK = threading.Lock()  # one gh call at a time; the pages that wait then read work.py's 60 s cache
 
 
 def stamp_build(url_path):
@@ -156,8 +157,10 @@ class Handler(SimpleHTTPRequestHandler):
         path = self.path.split('?')[0]
         if path == '/api/work':
             try:
-                all_items = work.items()
-                return self._json(200, {'items': all_items, 'stale': work.stale(all_items=all_items), 'repo': work.REPO_URL})
+                with WORK_LOCK:
+                    all_items = work.items()
+                    stale = work.stale(all_items=all_items)
+                return self._json(200, {'items': all_items, 'stale': stale, 'repo': work.REPO_URL})
             except Exception as e:
                 return self._json(200, {'items': None, 'stale': [], 'repo': work.REPO_URL, 'error': str(e)[:300]})
         if path == '/game3d/build.json' or path.endswith('/game3d/build.json'):
@@ -237,9 +240,16 @@ class Handler(SimpleHTTPRequestHandler):
         super().end_headers()
 
 
+class Server(ThreadingHTTPServer):
+    # socketserver's default listen backlog is 5: a page that fetches every review.json at once (bible/live.js), or
+    # several headless browsers at the same time, overflowed it and dropped connections, which the client only
+    # retries after 1, 3, 7 s. The bible check timed out on that (#97).
+    request_queue_size = 256
+
+
 def main():
     port = int(sys.argv[1]) if len(sys.argv) > 1 else int(os.environ.get('PORT', 8771))
-    httpd = ThreadingHTTPServer(('127.0.0.1', port), partial(Handler, directory=ROOT))
+    httpd = Server(('127.0.0.1', port), partial(Handler, directory=ROOT))
     print(f'Serving {ROOT} on http://127.0.0.1:{port}/ (reviews and showcase entries save to <folder>/<id>/feedback.json)', flush=True)
     try:
         httpd.serve_forever()

@@ -2,13 +2,15 @@
 the same face height, chins on one line, cut 2.25 face heights below the chin), Mio and Kuro at the ends. Also every
 face each person has in the game now, one row per person.
 
-Run: ~/ai/rmbg/rembg/bin/python lineup.py   -> lineup.webp, faces-installed.webp here"""
+Run: ~/ai/rmbg/rembg/bin/python lineup.py   -> lineup.webp, faces-installed.webp in bible/shots/showcase/cast-faces-1/
+(a synced root, so Showcase cast-faces-1 still has them after this worktree is gone)"""
 import os, re
 from PIL import Image, ImageDraw, ImageFont
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 WT = os.path.abspath(os.path.join(HERE, '../../../..'))
 P = os.path.join(WT, 'game3d/assets/portraits')
+OUT = os.path.join(WT, 'bible/shots/showcase/cast-faces-1')
 DARK = (18, 20, 28)
 FONT = ImageFont.truetype('/usr/share/fonts/TTF/DejaVuSans.ttf', 20)
 ORDER = ['mio', 'eric', 'kenji', 'emi', 'aoi', 'guard', 'mori', 'kuroda', 'kuro']
@@ -47,7 +49,8 @@ def strip(items, table, col=290):
 
 def main():
     t = face_table()
-    strip([(w, 'neutral', NAME[w]) for w in ORDER], t).save(os.path.join(HERE, 'lineup.webp'), 'WEBP', quality=90)
+    os.makedirs(OUT, exist_ok=True)
+    strip([(w, 'neutral', NAME[w]) for w in ORDER], t).save(os.path.join(OUT, 'lineup.webp'), 'WEBP', quality=90)
     faces = {'eric': ['neutral', 'surprised', 'tired'], 'kenji': ['neutral', 'grin', 'sheepish'], 'guard': ['neutral', 'stern', 'amused'],
              'mori': ['neutral', 'smile', 'flustered'], 'kuroda': ['neutral', 'sleepy', 'panicked'], 'emi': ['neutral'], 'aoi': ['neutral']}
     rows = [strip([(w, f, f'{NAME[w]}: {f}') for f in fs] + [], t, col=300) for w, fs in faces.items()]
@@ -56,7 +59,7 @@ def main():
     for r in rows:
         sheet.paste(r, (0, y))
         y += r.height
-    sheet.save(os.path.join(HERE, 'faces-installed.webp'), 'WEBP', quality=88)
+    sheet.save(os.path.join(OUT, 'faces-installed.webp'), 'WEBP', quality=88)
 
 
 if __name__ == '__main__':
