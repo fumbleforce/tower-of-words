@@ -40,7 +40,7 @@
   {
    "id": "needs-work",
    "label": "needs-work",
-   "note": "Tell me what to change first. What I can see myself: their own hair keeps the original's shape (taken off the original head as its own piece, given thickness and flat colours, no texture), so it is not newly modelled; the old made hair styles, eye styles and the other clothes are gone from the creator until they are rebuilt this way. Mio's eyes: the top of the iris and the lash line turned brownish with the tan, and she shows no brows (hers were always under the fringe). The clothes are plainer than the originals (no pockets on the trousers, plain sneakers). The body's parts overlap where they meet, one skin colour hides the join, but it is not one welded surface. These are CPU (Cycles) renders, not EEVEE: the GPU was busy with the voice batch."
+   "note": "Tell me what to change first. What I can see myself: their own hair keeps the original's shape (taken off the original head as its own piece, given thickness and flat colours, no texture), so it is not newly modelled; the old made hair styles, eye styles and the other clothes are gone from the creator until they are rebuilt this way. Mio's eyes keep her painted design with the navy turned dark brown and the teal turned pale tan; she shows no brows (hers were always under the fringe). The clothes are plainer than the originals (no pockets on the trousers, plain sneakers). The body's parts overlap where they meet, one skin colour hides the join, but it is not one welded surface. These are CPU (Cycles) renders, not EEVEE: the GPU was busy with the voice batch."
   }
  ],
  "links": [
