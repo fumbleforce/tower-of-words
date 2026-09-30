@@ -58,8 +58,8 @@
       "reason": "Existing shared lift geometry, movement and dialogue staging; extract after behavior characterization."
     },
     "game3d/js/places/lobby.js": {
-      "lines": 808,
-      "bytes": 27216,
+      "lines": 668,
+      "bytes": 23182,
       "owner": "codex-tui",
       "review": "C-0076; 2026-09-30 preparation slices (yield points, notes/PERF.md)",
       "reason": "Existing gate place geometry and interaction hooks; stage 5 room-builder review is planned."
