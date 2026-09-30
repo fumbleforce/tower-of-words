@@ -11,6 +11,8 @@ import { keyaki, sakura, pine, maple, ginkgo, cluster, hedge, grass, bed, treePi
 import { lamps, bench, bins, bollard, STEEL } from '../outdoor/furniture.js';
 import { textTexture, plane, JP_FONT } from '../../props.js';
 import { bikeRow } from './details.js';
+import { serviceYard } from './service.js';
+import { drift } from './gardens.js';
 import * as P from './plan.js';
 
 const { X0, SE, ZN, HZ, HO_X, LE, AZ, BW, LEG, BIKES, GARDEN, NORTH_BED: NB, DOOR_X } = P;
@@ -53,11 +55,7 @@ function paving(root) {
 function edges(p) {
   kerbRect(p, P.COURT, { sides: 'w' });
   kerb(p, [X0, HZ], [5.95, HZ], { off: -0.08 }); // the court's north edge, west of the service lane
-  kerbRect(p, P.SERVICE, { sides: 'wen' });
-  // the service way: bollards across its mouth, so it reads as staff-only, and a hedge across its end
-  for (const x of along([P.SERVICE[0], 0], [P.SERVICE[1], 0], { count: 3, inset: 0.5 }).map((q) => q.x))
-    bollard(p, x, HZ - 0.35);
-  hedge(p, [P.SERVICE[0] + 0.1, P.TN - 0.4], [P.SERVICE[1] - 0.1, P.TN - 0.4], { w: 0.5, h: 0.6, seed: 12 });
+  kerbRect(p, P.SERVICE, { sides: 'wn' }); // the service yard (forecourt/service.js)
   kerbRect(p, BIKES, { sides: 's' });
   kerb(p, [LE, P.LANE[3]], [LE, ZN], { off: -0.08 }); // the court's east edge south of the lane
 }
@@ -159,6 +157,9 @@ function garden(p, block) {
     [16.9, 7.9, 3],
   ])
     grass(p, x, z, { seed: s });
+  // layered planting along its wall and its far edge (forecourt/gardens.js), as in the gardens along the lane
+  drift(p, [g[0] + 0.3, g[1] - 0.15, g[2] + 0.3, g[2] + 1.5], { back: 'n', seed: 21, y });
+  drift(p, [g[0] + 0.3, g[1] - 0.15, g[3] - 1.4, g[3] - 0.15], { seed: 22, y });
   block(g[0], g[1], g[2], g[3]);
 }
 
@@ -224,5 +225,6 @@ export function buildCourt(root, nav, set) {
   garden(p, block);
   lights(set, p, block);
   wayfinding(root, p, block);
+  serviceYard(root, p);
   p.build(root);
 }

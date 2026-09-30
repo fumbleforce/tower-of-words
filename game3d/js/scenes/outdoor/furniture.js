@@ -8,6 +8,7 @@
 //   bench(p, x, z, facing, { len, back })   slatted, on two stone legs; facing: the way a sitter looks (radians)
 //   bins(p, x, z, facing)                   the sorted pair (cans and bottles, burnables) every Japanese street has
 //   bollard(p, x, z)                        stone, with a steel cap
+//   stoneLantern(p, set, x, z, y)           a garden's stone lantern, its fire box lit with the lamps
 //   fingerSign(root, p, x, z, boards)       a post with pointing boards: [{ text, sub, dir: 1 | -1 }]
 import * as THREE from 'three';
 import { textTexture, plane, JP_FONT } from '../../props.js';
@@ -181,4 +182,24 @@ export function fingerSign(root, p, x, z, boards, { turn = 0 } = {}) {
     root.add(b);
     p.box(STEEL.dark, 0.94, 0.25, 0.035, bx, y - 0.125, bz, { ry: turn }); // the board itself, behind its face
   });
+}
+
+// the stone lantern (oki-doro) of a Japanese garden: a foot, a short post, the fire box (lit, in `set`), a wide roof
+// and its knob; y: what it stands on
+export function stoneLantern(p, set, x, z, y = 0) {
+  const stone = '#9a9a94';
+  p.geo(stone, new THREE.CylinderGeometry(0.2, 0.24, 0.1, 6).translate(x, y + 0.05, z));
+  p.geo(stone, new THREE.CylinderGeometry(0.08, 0.1, 0.26, 6).translate(x, y + 0.23, z));
+  p.geo(stone, new THREE.CylinderGeometry(0.17, 0.12, 0.06, 6).translate(x, y + 0.39, z));
+  // the fire box: stone corners round a lit core
+  set.glowParts.push(new THREE.BoxGeometry(0.17, 0.18, 0.17).translate(x, y + 0.51, z));
+  for (const [dx, dz] of [
+    [-1, -1],
+    [1, -1],
+    [-1, 1],
+    [1, 1],
+  ])
+    p.box(stone, 0.05, 0.2, 0.05, x + dx * 0.1, y + 0.42, z + dz * 0.1);
+  p.geo('#85867f', new THREE.CylinderGeometry(0.05, 0.23, 0.14, 6).translate(x, y + 0.67, z));
+  p.geo('#85867f', new THREE.SphereGeometry(0.055, 6, 4).translate(x, y + 0.77, z));
 }

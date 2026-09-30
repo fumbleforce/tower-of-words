@@ -73,10 +73,11 @@ export function* forecourtSteps() {
   const sun = outdoorLight(scene);
 
   const nav = new Nav(...WALK, 0.1);
-  // walkable: the court, the bike court and the lane; inside the tower the head office decides (its lobby)
+  // walkable: the court, the bike court, the lane and the garden's way in and gravel court; inside the tower the
+  // head office decides (its lobby)
   const tower = [T.o[0], T.o[0] + T.W, T.o[1] - T.D, T.o[1]];
-  const inRect = PL.inRect;
-  nav.extra = (x, z) => inRect(x, z, COURT) || inRect(x, z, BIKES) || inRect(x, z, LANE) || inRect(x, z, tower);
+  const walkable = [COURT, BIKES, LANE, PL.GARDEN_PATH, PL.GARDEN_COURT, tower];
+  nav.extra = (x, z) => walkable.some((r) => PL.inRect(x, z, r));
   // everything that never moves goes in one group, merged by material at the end
   const statics = new THREE.Group();
   root.add(statics);

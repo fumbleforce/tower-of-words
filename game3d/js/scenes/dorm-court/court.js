@@ -11,8 +11,8 @@ import { Parts, pools } from '../outdoor/parts.js';
 import { paver, GRANITE } from '../outdoor/paving.js';
 import { kerb, kerbRect, lowWall, wallRect } from '../outdoor/edges.js';
 import { laneField, verge } from '../outdoor/lane.js';
-import { keyaki, sakura, maple, cluster, hedge, grass, bed, mound, LEAF } from '../outdoor/planting.js';
-import { lamps, bench, bins } from '../outdoor/furniture.js';
+import { keyaki, sakura, maple, cluster, hedge, grass, bed, mound, gravel as rake, LEAF } from '../outdoor/planting.js';
+import { lamps, bench, bins, stoneLantern } from '../outdoor/furniture.js';
 import { monument } from '../forecourt/details.js';
 import * as P from './plan.js';
 
@@ -105,13 +105,6 @@ function drift(p, x0, x1, z, { n = 3, h = 0.62, seed = 1, color = STRAW } = {}) 
   }
 }
 
-// the front bed's ground: pale gravel raked in lines along the bed, over its soil, so the bed reads at dusk
-function gravel(p, [x0, x1, z0, z1]) {
-  p.box(LEAF.mulch, x1 - x0, 0.04, z1 - z0, (x0 + x1) / 2, BED_Y - 0.04, (z0 + z1) / 2, { cast: false, surf: 'soil' });
-  p.box('#a4a6a3', x1 - x0, 0.02, z1 - z0, (x0 + x1) / 2, BED_Y, (z0 + z1) / 2, { cast: false });
-  for (let z = z0 + 0.12; z < z1 - 0.06; z += 0.16)
-    p.box('#939591', x1 - x0 - 0.04, 0.006, 0.025, (x0 + x1) / 2, BED_Y + 0.02, z, { cast: false });
-}
 // a low island of moss under a group of plants, on the gravel
 function moss(p, x, z, rx, rz) {
   p.geo(MOSS, new THREE.CylinderGeometry(1, 1, 0.05, 12).scale(rx, 1, rz).translate(x, BED_Y + 0.035, z), {
@@ -134,25 +127,6 @@ function column(p, x, z) {
     ),
   );
   p.geo('#44604f', new THREE.SphereGeometry(0.12, 7, 4).scale(1, 0.8, 1).translate(x, BED_Y + 1.33, z));
-}
-
-// the stone lantern (oki-doro) in the front bed: a foot, a short post, the lit fire box, a wide roof and its knob
-function stoneLantern(p, set, x, z, y) {
-  const stone = '#9a9a94';
-  p.geo(stone, new THREE.CylinderGeometry(0.2, 0.24, 0.1, 6).translate(x, y + 0.05, z));
-  p.geo(stone, new THREE.CylinderGeometry(0.08, 0.1, 0.26, 6).translate(x, y + 0.23, z));
-  p.geo(stone, new THREE.CylinderGeometry(0.17, 0.12, 0.06, 6).translate(x, y + 0.39, z));
-  // the fire box: stone corners round a lit core
-  set.glowParts.push(new THREE.BoxGeometry(0.17, 0.18, 0.17).translate(x, y + 0.51, z));
-  for (const [dx, dz] of [
-    [-1, -1],
-    [1, -1],
-    [-1, 1],
-    [1, 1],
-  ])
-    p.box(stone, 0.05, 0.2, 0.05, x + dx * 0.1, y + 0.42, z + dz * 0.1);
-  p.geo('#85867f', new THREE.CylinderGeometry(0.05, 0.23, 0.14, 6).translate(x, y + 0.67, z));
-  p.geo('#85867f', new THREE.SphereGeometry(0.055, 6, 4).translate(x, y + 0.77, z));
 }
 
 // the gate: the bed's walls turn in at the opening; a stone pier at each side with a lantern on it, a clipped column
@@ -195,8 +169,8 @@ function frontBed(p, set, block) {
   const [z0, z1] = [SB[2], SB[3]];
   const zf = z0 + 0.4,
     zb = z1 - 0.35;
-  gravel(p, [SB[0] - 0.22, GATE[0] - 0.2, z0 + 0.2, z1 - 0.2]);
-  gravel(p, [GATE[1] + 0.2, SB[1], z0 + 0.2, z1 - 0.2]);
+  rake(p, [SB[0] - 0.22, GATE[0] - 0.2, z0 + 0.2, z1 - 0.2], { y: BED_Y });
+  rake(p, [GATE[1] + 0.2, SB[1], z0 + 0.2, z1 - 0.2], { y: BED_Y });
   for (const [x, rx] of [
     [-5.0, 0.95],
     [5.2, 0.7],
@@ -277,7 +251,7 @@ function doorBeds(root, p, block) {
 function seBed(p, block) {
   const r = P.SE_BED;
   wallRect(p, [r[0], r[1], r[2], SB[2] + 0.22], { sides: 'nwe' });
-  gravel(p, [r[0] + 0.2, r[1] - 0.2, r[2] + 0.2, SB[2] + 0.3]);
+  rake(p, [r[0] + 0.2, r[1] - 0.2, r[2] + 0.2, SB[2] + 0.3], { y: BED_Y });
   moss(p, r[0] + 0.75, r[2] + 0.55, 0.55, 0.32);
   balls(p, r[0] + 0.7, r[2] + 0.45, { s: 0.7, seed: 7, tones: [PALE_LEAF, LEAF.fresh, LEAF.mid] });
   drift(p, r[1] - 1.0, r[1] - 0.35, r[2] + 0.55, { n: 2, seed: 9 });
