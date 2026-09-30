@@ -386,11 +386,13 @@
         },
         "poster_l": {
           "label": "Poster",
-          "kind": "thing small"
+          "kind": "thing small",
+          "pin": "near"
         },
         "poster_r": {
           "label": "Poster",
-          "kind": "thing small"
+          "kind": "thing small",
+          "pin": "near"
         },
         "lift": {
           "label": "Station exit",
@@ -407,6 +409,26 @@
         "bowl": {
           "label": "Tama's bowl",
           "kind": "thing small"
+        },
+        "worker_a": {
+          "label": "Office worker",
+          "kind": "person"
+        },
+        "worker_b": {
+          "label": "Office worker",
+          "kind": "person"
+        },
+        "commuter_1": {
+          "label": "Office worker",
+          "kind": "person"
+        },
+        "commuter_2": {
+          "label": "Office worker",
+          "kind": "person"
+        },
+        "commuter_3": {
+          "label": "Office worker",
+          "kind": "person"
         }
       },
       "spots": [
@@ -599,6 +621,10 @@
           "label": "Canteen table",
           "kind": "thing",
           "verb": "Sit"
+        },
+        "canteen_worker": {
+          "label": "Canteen worker",
+          "kind": "person"
         }
       },
       "spots": [
@@ -695,7 +721,8 @@
         },
         "inout_board": {
           "label": "In/out board",
-          "kind": "thing small"
+          "kind": "thing small",
+          "pin": "near"
         },
         "clock": {
           "label": "Clock",

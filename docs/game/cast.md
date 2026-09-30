@@ -28,6 +28,11 @@ The tables are checked against the game by `node tools/facts/check.mjs`. Ids in 
 | `stander` | Man with a bag | A monorail passenger. |
 | `reader` | Man with a book | A monorail passenger. |
 | `commuter` | Office worker | People coming in through the gate for work. |
+| `worker_a` | Office worker | One of two office workers standing past the gate in the security room. |
+| `worker_b` | Office worker | The other one. |
+| `commuter_1` | Office worker | One of three commuters who walk in through the gate. |
+| `commuter_2` | Office worker | The second. |
+| `commuter_3` | Office worker | The third, carrying a cake box. |
 | `sales1` | Man from Sales | Rides the lift to the 5th floor. |
 | `sales2` | Woman from Sales | Rides the lift to the 5th floor. |
 | `ann` | Announcement | The monorail's announcer (voice only). |
@@ -136,13 +141,18 @@ The name plate is the name above their lines; the label is the name over them in
 | `kuro` | Receptionist | Receptionist | none |
 | `aoi` | Aoi | Woman on her phone | none |
 | `tama` | none | Cat | none |
-| `canteen_worker` | Canteen worker | none | none |
+| `canteen_worker` | Canteen worker | Canteen worker | none |
 | `bun` | Woman with a bun | Woman with a bun | none |
 | `youth` | Young man | Young man | none |
 | `music` | Girl with headphones | Girl with headphones | none |
 | `stander` | Man with a bag | Man with a bag | none |
 | `reader` | Man with a book | Man with a book | none |
 | `commuter` | Office worker | none | none |
+| `worker_a` | Office worker | Office worker | none |
+| `worker_b` | Office worker | Office worker | none |
+| `commuter_1` | Office worker | Office worker | none |
+| `commuter_2` | Office worker | Office worker | none |
+| `commuter_3` | Office worker | Office worker | none |
 | `sales1` | Man from Sales | none | none |
 | `sales2` | Woman from Sales | none | none |
 | `ann` | Announcement | none | none |

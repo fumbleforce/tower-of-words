@@ -575,7 +575,7 @@ function step(dt) {
     const b = /person/.test(m.kind || '') && who.get(m.id);
     const dr =
       b && b.root !== mio.root ? Math.min(d, Math.max(0, Math.hypot(mp.x - b.x, mp.z - b.z) - talkR) + 0.3) : d;
-    const dn = dr - (m.goal && m.goal() ? 0.3 : 0);
+    const dn = dr - (m.goal && m.goal() ? 0.3 : 0) + (m.nearOnly?.() ? 0.4 : 0); // close-only things lose close calls
     if (!game.busy && dn < nd + seatedReach) {
       nd = dn - seatedReach;
       near = m;

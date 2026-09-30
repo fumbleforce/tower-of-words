@@ -26,7 +26,7 @@ export default {
     'event:card_red': 'card_red',
   },
 
-  // optional: when a marker shows over a person or object, and when it is highlighted as the next goal
+  // optional: when a marker shows over an object (people always have theirs), and when it is highlighted as the next goal
   show: { kuroda: 'jammed' },
   goal: { reader_r: 'greeted_guard && !guard_asked' },
 
@@ -78,6 +78,7 @@ Conditions (`if`, `show`, `goal`, trigger `if`): flag names with `!`, `&&`, `||`
 | Key | When |
 |---|---|
 | `talk:<id>` | The player taps the person or object, or presses E/Space beside it. Eric walks up first. |
+| `idle:<person>` | Talking to a person when no `talk:<person>` entry holds right now (see Idle lines below). |
 | `say:<word>:<id>` | Eric says a phrase or command from the Say menu while that person or object is the nearest target. |
 | `say:<word>:*` | Fallback for that word anywhere in this place. With no match at all, the engine uses a small built-in reaction. |
 | `give:<item>:<id>`, `give:*:<id>` | Eric gives an item (the Give button, next to a person). See Sim data. |
@@ -86,6 +87,20 @@ Conditions (`if`, `show`, `goal`, trigger `if`): flag names with `!`, `&&`, `||`
 | `event:<name>` | Engine events (per place, below). |
 
 A trigger value is a node name, `{ node, if, once }`, or a list of these; the first one whose `if` holds runs. While a node runs, the player can't walk and the markers hide.
+
+### Idle lines (`idle:<person>`)
+
+Every person with a body can always be talked to (Jørgen, 2026-09-30: "All people should always be interactable, but dont necessarily need to say that much interesting"); `show` never hides a person. When no `talk:<person>` entry holds, the engine runs `idle:<person>` from the story file of the place they're in. It is a normal trigger: pick the moment with `if` on the goal's flags or on the period (`period == 'lunch'`), first match wins, and end the list with a plain node as that person's default. With nothing that holds, they turn to Eric and nod.
+
+```js
+'idle:mio': [
+  { if: 'got_ticket && !copier_done', node: 'idle_mio_copier' },
+  { if: "period == 'lunch'", node: 'idle_mio_lunch' },
+  'idle_mio',
+],
+```
+
+An idle node is a line or two, voiced like any other, and doesn't move the story on: no `goal`, `next`, `trip`, `end`, `hold`, `type`, `kotodama`, `choice`, `offer` or `go` (story-check refuses them). It may `set` a flag. Mio's go in each place's file; the people with a body in each place are in docs/game/places.md (Who's there when).
 
 ## Speakers
 

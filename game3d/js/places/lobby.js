@@ -18,6 +18,7 @@ import { flags, cond } from '../narrative/state.js';
 import { rbox } from '../props.js';
 import { route } from './route.js';
 import { lobbyCommuters } from './lobby-commuters.js';
+import { gateBackground } from './background-people.js';
 
 export const withList = (slot) =>
   (slot.with || []).filter((e) => typeof e === 'string' || cond(e.if)).map((e) => (typeof e === 'string' ? e : e.who));
@@ -167,6 +168,7 @@ export async function lobbyPlace(game) {
       if (n) await game.runner.run(n);
     })();
   }
+  const bg = gateBackground(extras, commuters); // background people to talk to too (#106)
   const things = {
     guard: { ...PLACE_DETAILS.gate.things.guard, anchor: rigAnchor(w.guard), ...at(2.1, BZ + 0.72, 2.35, BZ - 0.6) },
     kuroda: {
@@ -272,7 +274,13 @@ export async function lobbyPlace(game) {
       ...at(3.2, BZ + 1.1, 3.2, BZ + 0.56),
       noMarker: true,
     },
+    worker_a: { ...PLACE_DETAILS.gate.things.worker_a },
+    worker_b: { ...PLACE_DETAILS.gate.things.worker_b },
+    commuter_1: { ...PLACE_DETAILS.gate.things.commuter_1 },
+    commuter_2: { ...PLACE_DETAILS.gate.things.commuter_2 },
+    commuter_3: { ...PLACE_DETAILS.gate.things.commuter_3 },
   };
+  for (const id in bg.things) Object.assign(things[id], bg.things[id]);
 
   const zones = {
     arch: (x, z) => Math.abs(x) < 0.6 && z < BZ + 0.5 && z > BZ + 0.1 && !st.gateOpen,
@@ -320,6 +328,7 @@ export async function lobbyPlace(game) {
     startFacing: Math.PI,
     things,
     people,
+    extras: bg.rigs,
     spots,
     zones,
     seats,

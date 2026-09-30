@@ -164,6 +164,11 @@ The security room is played in the early morning, before nine.
 | `kuroda` | Comes in late through the entrance at 8:52. | – |
 | `aoi` | Hidden. | hidden all day |
 | `mio` | Hidden (she ran ahead to a server). | – |
+| `worker_a` | Standing past the gate on the left with `worker_b`, chatting. Can be talked to. | – |
+| `worker_b` | Standing past the gate on the left with `worker_a`. Can be talked to. | – |
+| `commuter_1` | Walks in, taps a reader and goes through. While the gate is jammed, waits in a queue; can be talked to only while standing there. | – |
+| `commuter_2` | The same as `commuter_1`. | – |
+| `commuter_3` | The same, carrying a cake box. | – |
 
 ### Small moments
 
@@ -260,6 +265,7 @@ Nobody lives here yet.
 | Id | Usually | Schedule |
 |---|---|---|
 | `mio` | Hidden (she ran ahead to a server). | – |
+| `canteen_worker` | After work only: carries the last chair over, then wipes down the next table east. Can be talked to whenever not walking; helping with the chair is the canteen table's. | – |
 
 ### Small moments
 

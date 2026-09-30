@@ -195,6 +195,7 @@ export class Walker {
 
 // ---------- screen markers for people and things ----------
 // A small DOM pin that follows a 3D point: a circle with a symbol on a short line down to the person or thing.
+const NEAR_PIN = 2.5; // m from Eric to the spot in front of it
 export class Markers {
   constructor(layer) {
     this.layer = layer;
@@ -261,6 +262,12 @@ export class Markers {
       // distance from Eric: full size within 3 m, down to 70% and a paler pin from 8 m on (scaled from its tip)
       const s = m.spot ? m.spot() : null;
       const d = s && playerPos ? Math.hypot(playerPos.x - s[0], playerPos.z - s[1]) : 0;
+      // a thing that only has a flat line or a word to it shows its pin once Eric is close (interactions.js nearOnly);
+      // it can still be clicked or picked with E from anywhere, like any other
+      if (m.nearOnly && near !== m && d > NEAR_PIN && m.nearOnly()) {
+        m.el.style.display = 'none';
+        continue;
+      }
       const k = near === m ? 0 : Math.max(0, Math.min(1, (d - 3) / 5));
       m.el.style.transform = `translate(${sx}px, ${sy}px) scale(${(1 - 0.3 * k).toFixed(3)})`;
       m.el.style.setProperty('--mo', (1 - 0.35 * k).toFixed(3));
@@ -275,7 +282,9 @@ export class Markers {
       m.el.classList.toggle('near', near === m);
       const isGoal = !!(m.goal && m.goal());
       m.el.classList.toggle('goal', isGoal);
-      shown.push({ m, sx, sy, d, rank: near === m ? -2 : isGoal ? -1 : d });
+      // a close-only pin never crowds out a full one (the covered monitor hid Mio's)
+      const rank = near === m ? -2 : isGoal ? -1 : d + (m.nearOnly && m.nearOnly() ? 100 : 0);
+      shown.push({ m, sx, sy, d, rank });
       void on;
     }
     // overlapping pins: the one in reach, then the goal, then the nearest wins; the others hide until there's room

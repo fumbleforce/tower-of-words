@@ -50,6 +50,21 @@ export async function plazaPlace(game) {
       face: canteen.face,
       obj: canteen.obj,
     },
+    // the worker closing the terrace after work, a person to talk to like anyone (#106); the chair is the table's
+    canteen_worker: {
+      ...PLACE_DETAILS.plaza.things.canteen_worker,
+      anchor: (v) => {
+        canteen.person.root.getWorldPosition(v);
+        v.y += 1.25;
+        return v;
+      },
+      spot: () => {
+        const r = canteen.person.root;
+        return [r.position.x + Math.sin(r.rotation.y) * 0.6, r.position.z + Math.cos(r.rotation.y) * 0.6];
+      },
+      face: () => [canteen.person.root.position.x, canteen.person.root.position.z],
+      enabled: () => canteen.person.root.visible && !canteen.person._walk,
+    },
   };
   const P = {
     scene: w.scene,

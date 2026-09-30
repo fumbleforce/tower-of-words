@@ -8,14 +8,16 @@ import { WORDS, known, SAYABLE } from '../lang.js';
 import { defaultReaction } from '../story.js';
 import { flags, cond } from '../narrative/state.js';
 import { sim, ITEMS, meet, take, peopleHTML } from '../sim.js';
+import { isPerson, idleTalk } from './idle-talk.js';
 
 export function installInteractions(game) {
   const ui = game.ui;
   function thingOn(id, t) {
     const person = game.place && game.place.people[id];
     if (person && person.root && !person.root.visible) return false;
+    // a person is always there to talk to: the story's `show` doesn't hide people (idle-talk.js)
     const s = game.story && game.story.show && game.story.show[id];
-    if (s !== undefined && !cond(s)) return false;
+    if (s !== undefined && !person && !cond(s)) return false;
     if (t.enabled !== undefined) return typeof t.enabled === 'function' ? t.enabled() : t.enabled;
     return true;
   }
@@ -50,7 +52,33 @@ export function installInteractions(game) {
           return item._wv;
         },
       };
-      if (quiet) item.enabled = () => thingOn(id, t) && item.goal();
+      // a thing whose talk is a flat line (`pin: 'near'` in the catalog), or whose only use is a word (its own say:
+      // trigger, or the stock reply any thing gives: Jørgen wanted Say on the fridge), shows its pin only when Eric
+      // is close; with nothing at all to do (no talk, act or look, no near: trigger, no word known yet) it has no pin
+      // and can't be picked. A "no marker" thing stays out unless it's the goal or one of its own words works on it
+      // (Jørgen, 2026-09-30: "a hundred 'interactive' things in this room with symbols that dont really do anything
+      // interesting"; notes/interaction-audit.md)
+      if (!isPerson(game, item)) {
+        const talks = () => {
+          if (t.act || t.look) return true;
+          const n = game.runner.resolve('talk:' + id, { peek: true });
+          return !!n && (game.story.nodes?.[n]?.length ?? 1) > 0;
+        };
+        const other = () => SAYABLE.some((w) => known.has(w)) || game.runner.has('near:' + id);
+        // cached for a moment like wordable: the markers, the targets and the clicks ask every frame
+        const does = () => {
+          const now = performance.now();
+          if (!item._da || now - item._da > 400) {
+            item._da = now;
+            item._dv = quiet ? (item.wordable() ? 'near' : '') : talks() ? t.pin || 'always' : other() ? 'near' : '';
+          }
+          return item._dv;
+        };
+        item.enabled = () => thingOn(id, t) && (item.goal() || !!does());
+        item.nearOnly = () => !item.goal() && does() === 'near';
+        // its only use right now is a word (the fan once he knows tomatte, the fridge): using it opens the Say menu
+        item.sayOnly = () => does() === 'near' && !talks() && SAYABLE.some((w) => known.has(w));
+      }
       game.markers.add(item);
     }
   }
@@ -144,6 +172,7 @@ export function installInteractions(game) {
     } else go();
   }
   function talk(item) {
+    const person = isPerson(game, item);
     if (game.place.people[item.id]) {
       meet(game, item.id);
       ui.refreshPeople(sim.met.size);
@@ -155,6 +184,8 @@ export function installInteractions(game) {
     }
     const look = item.look;
     if (look) game.beat(() => ui.say(null, typeof look === 'function' ? look() : look));
+    else if (person) idleTalk(game, item.id);
+    else if (item.sayOnly?.()) say();
   }
   // what E does on a target now: talk to a person, the story's talk: trigger, or the thing's own act or look line
   function canUse(item) {
