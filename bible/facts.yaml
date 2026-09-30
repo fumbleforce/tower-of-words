@@ -30,8 +30,8 @@ characters:
     approved_art: mc                 # art/approved/<folder>/ lines in art/approved/README.md
     voice_prefix: [eric, player]
     walkthrough: null
-    portrait_status: review
-    portrait_note: ["Under review (Jørgen, 2026-09-28, relayed by the main agent): the old gallery portraits \"look more in line with the rest than our current MC, which is quite a different style.\" The game keeps using eric-v2-734 for now; the old style may come back through a new art round, so the older portraits below are kept, not retired.", review, "docs/game/art-and-sound.md ~ eric-v2-734 (seed 734 v2) was approved"]
+    portrait_status: approved
+    portrait_note: ["Approved 2026-09-30: eric-ink-2001, r4-909 redrawn toward Mio and Kuro (reviews/style-align-1). Earlier portraits below are history.", approved, "docs/game/cast.md ~ Look: approved portrait eric-ink-2001"]
     decisions:
       - {q: "docs/game/cast.md ~ Speaks English, and barely any Japanese", s: approved}
       - {q: "docs/game/setting.md ~ Eric is a Western IT support engineer from Norway #2", s: approved}
@@ -41,6 +41,9 @@ characters:
       - {q: "art/SOUND.md ~ Eric uses voice design eric-2 with no accent", s: approved}
       - {q: "GUIDE.md ~ 3D character workflow (Jørgen, 2026-09-28; worked first try for Eric)", s: approved}
     images:
+      - [art/approved/mc/eric-eric-ink-2001-neutral.webp, "Eric: neutral (reviews/style-align-1 or npc-base-1 pick eric-ink-2001; faces from art/candidates/portraits/cast-faces-1)", approved]
+      - [art/approved/mc/eric-eric-ink-2001-surprised.webp, "Eric: surprised (reviews/style-align-1 or npc-base-1 pick eric-ink-2001; faces from art/candidates/portraits/cast-faces-1)", approved]
+      - [art/approved/mc/eric-eric-ink-2001-tired.webp, "Eric: tired (reviews/style-align-1 or npc-base-1 pick eric-ink-2001; faces from art/candidates/portraits/cast-faces-1)", approved]
       - [art/approved/mc/eric-v2-734.webp, "eric-v2-734, the portrait the game's cut-outs come from", review]
       - [art/approved/mc/mc-it-guy-after.webp, "M-02-it-guy-601, the first approved portrait (eyes closed, red rim light). Replaced on 2026-09-28, now back under review for its style", review]
       - [legacy/proto2/gallery/M-02-it-guy-601.webp, "M-02-it-guy-601 as picked on the chooser", review]
@@ -119,11 +122,15 @@ characters:
     group: B2 IT support
     voice_prefix: [mori]
     walkthrough: notes/walkthrough/mori.md
-    portrait_status: draft
-    portrait_note: ["Provisional: seed 713 (neutral, smile, flustered) is the art agent's pick, used until Jørgen approves or replaces it.", draft, "TODO.md ~ Portraits in use provisionally"]
+    approved_art: mori
+    portrait_status: approved
     decisions:
       - {q: "docs/game/cast.md ~ The B2 team is Eric, Mio, Mori and Kenji #1", s: approved}
+      - {q: "docs/game/cast.md ~ Look: approved portrait mori-new-713", s: approved}
     images:
+      - [art/approved/mori/mori-mori-new-713-neutral.webp, "Mr. Mori: neutral (reviews/style-align-1 or npc-base-1 pick mori-new-713; faces from art/candidates/portraits/cast-faces-1)", approved]
+      - [art/approved/mori/mori-mori-new-713-smile.webp, "Mr. Mori: smile (reviews/style-align-1 or npc-base-1 pick mori-new-713; faces from art/candidates/portraits/cast-faces-1)", approved]
+      - [art/approved/mori/mori-mori-new-713-flustered.webp, "Mr. Mori: flustered (reviews/style-align-1 or npc-base-1 pick mori-new-713; faces from art/candidates/portraits/cast-faces-1)", approved]
       - [art/candidates/portraits/mori-sheet.png, "Portrait candidates (713 in use)", draft]
       - [game3d/assets/characters/mori/base.webp, "3D test through the Meshy workflow: the chibi picture it started from", draft]
     model3d: {id: mori, dir: game3d/assets/characters/mori, note: "Meshy test (commit b01e6b0). Loads only with ?cast3d=mori until approved."}
@@ -142,9 +149,12 @@ characters:
       - {q: "docs/game/cast.md ~ Look: about 21, inexperienced", s: approved}
       - {q: "docs/game/cast.md ~ Approved portrait: h4, bedhead", s: approved}
     images:
-      - [art/approved/kenji/kenji-nk-d80-1.webp, "Neutral (nk-d80-1), a face-only repaint of concept h4 (reviews/kenji-expressions-1)", approved]
-      - [art/approved/kenji/kenji-g0-h4.webp, "Grin: concept h4 itself (g0-h4)", approved]
-      - [art/approved/kenji/kenji-s3k-d80-1.webp, "Sheepish (s3k-d80-1)", approved]
+      - [art/approved/kenji/kenji-kenji-ink-2001-neutral.webp, "Kenji: neutral (reviews/style-align-1 or npc-base-1 pick kenji-ink-2001; faces from art/candidates/portraits/cast-faces-1)", approved]
+      - [art/approved/kenji/kenji-kenji-ink-2001-grin.webp, "Kenji: grin (reviews/style-align-1 or npc-base-1 pick kenji-ink-2001; faces from art/candidates/portraits/cast-faces-1)", approved]
+      - [art/approved/kenji/kenji-kenji-ink-2001-sheepish.webp, "Kenji: sheepish (reviews/style-align-1 or npc-base-1 pick kenji-ink-2001; faces from art/candidates/portraits/cast-faces-1)", approved]
+      - [art/approved/kenji/kenji-nk-d80-1.webp, "Neutral (nk-d80-1), a face-only repaint of concept h4 (reviews/kenji-expressions-1); replaced 2026-09-30 by kenji-ink-2001", legacy]
+      - [art/approved/kenji/kenji-g0-h4.webp, "Grin: concept h4 itself (g0-h4); replaced 2026-09-30", legacy]
+      - [art/approved/kenji/kenji-s3k-d80-1.webp, "Sheepish (s3k-d80-1); replaced 2026-09-30", legacy]
       - [art/candidates/portraits/kenji-sheet.png, "Portrait candidates (711, not approved)", rejected]
     rejected:
       - ["The 711 portrait and the old profile (29, a different job): \"Kenji's portrait and profile is not approved\" (Jørgen, 2026-09-28).", rejected, "docs/game/art-and-sound.md ~ The 711 stand-in is gone"]
@@ -162,7 +172,8 @@ characters:
       - {q: "docs/game/cast.md ~ A cast member like any other", s: approved}
       - {q: "art/PROMPTS.md ~ Emi: the approved round-3 RDBT seed 41 design", s: approved}
     images:
-      - [art/approved/emi/emi-after.webp, "Round-3 RDBT seed 41 with headroom, the portrait her game cut-out comes from", approved]
+      - [art/approved/emi/emi-emi-base-2001-neutral.webp, "Emi: neutral (reviews/style-align-1 or npc-base-1 pick emi-base-2001; faces from art/candidates/portraits/cast-faces-1)", approved]
+      - [art/approved/emi/emi-after.webp, "Round-3 RDBT seed 41 with headroom, the design emi-base-2001 was redrawn from", approved]
     facts:
       - ["Hair colour: 'auburn' drew wine-red under firework light and 'light copper-brown' drew caramel; the approved colour is between.", draft, "tools/imagegen/seed.py ~ the approved colour is between"]
     history:
@@ -180,11 +191,14 @@ characters:
     game: kuroda
     story_name: Mr. Hamada
     group: Accounts
-    portrait_status: draft
-    portrait_note: ["Provisional: seed 721 (neutral, sleepy, panicked). GUIDE has \"Hamada is fine\", said about the character as he is; FORMAT.md still lists his faces as provisional.", draft, "docs/game/cast.md ~ Look: chibi figure in code, and provisional portraits"]
+    approved_art: hamada
+    portrait_status: approved
     decisions:
-      - {q: "docs/game/cast.md ~ Look: chibi figure in code, and provisional portraits #2", s: approved}
+      - {q: "docs/game/cast.md ~ Look: approved portrait hamada-new-743", s: approved}
     images:
+      - [art/approved/hamada/kuroda-hamada-new-743-neutral.webp, "Mr. Hamada: neutral (reviews/style-align-1 or npc-base-1 pick hamada-new-743; faces from art/candidates/portraits/cast-faces-1)", approved]
+      - [art/approved/hamada/kuroda-hamada-new-743-sleepy.webp, "Mr. Hamada: sleepy (reviews/style-align-1 or npc-base-1 pick hamada-new-743; faces from art/candidates/portraits/cast-faces-1)", approved]
+      - [art/approved/hamada/kuroda-hamada-new-743-panicked.webp, "Mr. Hamada: panicked (reviews/style-align-1 or npc-base-1 pick hamada-new-743; faces from art/candidates/portraits/cast-faces-1)", approved]
       - [art/candidates/portraits/hamada-sheet.png, "Portrait candidates (721 in use)", draft]
     facts:
       - ["His speaker id in the story files is kuroda (an older name); the game shows him as Mr. Hamada.", approved, "docs/game/cast.md ~ The id `kuroda` is Mr. Hamada"]
@@ -197,10 +211,13 @@ characters:
     approved_art: ishibashi
     voice_prefix: [ishibashi]
     portrait_status: approved
-    portrait_note: ["The neutral face is a cut-out of the approved ishibashi-b-201. The stern and amused faces are new repaints, provisional until Jørgen picks.", draft, "TODO.md ~ guard = Ishibashi with new expressions"]
+    portrait_note: ["Approved 2026-09-30: guard-ink-2001 (reviews/style-align-1), redrawn from the empty-handed npc-base-1 repaint of ishibashi-b-201; stern and amused are face-only repaints of it.", approved, "docs/game/cast.md ~ Look: approved portrait guard-ink-2001"]
     decisions:
       - {q: "legacy/notes/GUIDE-history.md ~ Ishibashi = ishibashi-b-201 #1", s: approved}
     images:
+      - [art/approved/ishibashi/guard-guard-ink-2001-neutral.webp, "Ishibashi: neutral (reviews/style-align-1 or npc-base-1 pick guard-ink-2001; faces from art/candidates/portraits/cast-faces-1)", approved]
+      - [art/approved/ishibashi/guard-guard-ink-2001-stern.webp, "Ishibashi: stern (reviews/style-align-1 or npc-base-1 pick guard-ink-2001; faces from art/candidates/portraits/cast-faces-1)", approved]
+      - [art/approved/ishibashi/guard-guard-ink-2001-amused.webp, "Ishibashi: amused (reviews/style-align-1 or npc-base-1 pick guard-ink-2001; faces from art/candidates/portraits/cast-faces-1)", approved]
       - [art/approved/ishibashi/ishibashi-after.webp, "ishibashi-b-201 with headroom", approved]
       - [art/candidates/portraits/guard-sheet.png, "Expression candidates", draft]
     history:
@@ -222,7 +239,8 @@ characters:
       - {q: "legacy/notes/GUIDE-history.md ~ Rei, Mio, Aoi and Kaori = the RDBT versions", s: approved}
       - {q: "art/PROMPTS.md ~ Aoi: slim with small breasts #1", s: approved}
     images:
-      - [art/approved/aoi/aoi-after.webp, "gallery B-aoi (RDBT) with headroom", approved]
+      - [art/approved/aoi/aoi-aoi-base-2001-neutral.webp, "Aoi: neutral (reviews/style-align-1 or npc-base-1 pick aoi-base-2001; faces from art/candidates/portraits/cast-faces-1)", approved]
+      - [art/approved/aoi/aoi-after.webp, "gallery B-aoi (RDBT) with headroom, the design aoi-base-2001 was redrawn from", approved]
     facts:
       - ["Age unsettled: 23 in mini-stories.md, 22 in tools/production.py, 24 in the image dashboard preset.", draft, "notes/mini-stories.md ~ Aoi's age"]
     history:
