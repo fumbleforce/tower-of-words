@@ -1,0 +1,502 @@
+{
+ "character": "mori",
+ "ref": "game3d/assets/portraits/mori-neutral.webp",
+ "face_box_game": [
+  597,
+  768,
+  [
+   228,
+   171,
+   371,
+   334
+  ]
+ ],
+ "ref_face_detected": [
+  228,
+  171,
+  370,
+  334
+ ],
+ "thresholds": {
+  "redrim": [
+   0.02,
+   0.08
+  ],
+  "glasses_cover": [
+   0.87,
+   0.85
+  ],
+  "glasses_worst": [
+   0.7,
+   0.5
+  ],
+  "glasses_dE": [
+   8,
+   15
+  ],
+  "matte_frame": [
+   0.05,
+   0.12
+  ],
+  "matte_holes": [
+   0,
+   3
+  ],
+  "headroom": [
+   0.03,
+   0.01
+  ],
+  "zoom": [
+   0.04,
+   9
+  ],
+  "top": [
+   0.01,
+   9
+  ],
+  "eyes": [
+   0.06,
+   0.12
+  ],
+  "ccip": [
+   0.05,
+   0.09
+  ]
+ },
+ "images": [
+  {
+   "path": "art/candidates/portraits/cast-faces-1/mori-mori-flustered-d70-1.webp",
+   "kind": "cut-out",
+   "size": [
+    597,
+    768
+   ],
+   "face": [
+    229,
+    173,
+    372,
+    327
+   ],
+   "eyes": [
+    [
+     270.0,
+     227.0
+    ],
+    [
+     330.0,
+     225.5
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0062
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for mori"
+   },
+   "matte": {
+    "holes": 0,
+    "holes_px": 0,
+    "note": "no source render found: holes include gaps between hair strands, not graded",
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.112,
+    "zoom": 1.058,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 78,
+    "hair_top_ref": 86,
+    "crop": [
+     18.0,
+     11.4,
+     582.0,
+     737.0
+    ],
+    "eyes": 0.011,
+    "tilt": 0.4,
+    "status": "warn"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.005,
+    "ssim": 0.269
+   },
+   "status": "warn"
+  },
+  {
+   "path": "art/candidates/portraits/cast-faces-1/mori-mori-flustered-d70-2.webp",
+   "kind": "cut-out",
+   "size": [
+    597,
+    768
+   ],
+   "face": [
+    229,
+    173,
+    370,
+    328
+   ],
+   "eyes": [
+    [
+     268.5,
+     227.5
+    ],
+    [
+     329.5,
+     225.5
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0055
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for mori"
+   },
+   "matte": {
+    "holes": 0,
+    "holes_px": 0,
+    "note": "no source render found: holes include gaps between hair strands, not graded",
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.112,
+    "zoom": 1.052,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 79,
+    "hair_top_ref": 86,
+    "crop": [
+     15.2,
+     10.4,
+     582.9,
+     740.7
+    ],
+    "eyes": 0.011,
+    "tilt": -0.0,
+    "status": "warn"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.01,
+    "ssim": 0.286
+   },
+   "status": "warn"
+  },
+  {
+   "path": "art/candidates/portraits/cast-faces-1/mori-mori-flustered-d70-3.webp",
+   "kind": "cut-out",
+   "size": [
+    597,
+    768
+   ],
+   "face": [
+    230,
+    173,
+    369,
+    328
+   ],
+   "eyes": [
+    [
+     268.0,
+     226.0
+    ],
+    [
+     329.0,
+     223.5
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0046
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for mori"
+   },
+   "matte": {
+    "holes": 0,
+    "holes_px": 0,
+    "note": "no source render found: holes include gaps between hair strands, not graded",
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.112,
+    "zoom": 1.052,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 79,
+    "hair_top_ref": 86,
+    "crop": [
+     15.2,
+     10.4,
+     582.9,
+     740.7
+    ],
+    "eyes": -0.0,
+    "tilt": -0.5,
+    "status": "warn"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.009,
+    "ssim": 0.268
+   },
+   "status": "warn"
+  },
+  {
+   "path": "art/candidates/portraits/cast-faces-1/mori-mori-smile-d70-1.webp",
+   "kind": "cut-out",
+   "size": [
+    597,
+    768
+   ],
+   "face": [
+    230,
+    174,
+    370,
+    328
+   ],
+   "eyes": [
+    [
+     270.5,
+     228.0
+    ],
+    [
+     330.5,
+     225.0
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0048
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for mori"
+   },
+   "matte": {
+    "holes": 0,
+    "holes_px": 0,
+    "note": "no source render found: holes include gaps between hair strands, not graded",
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.112,
+    "zoom": 1.058,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 77,
+    "hair_top_ref": 86,
+    "crop": [
+     17.5,
+     12.4,
+     581.5,
+     738.0
+    ],
+    "eyes": 0.007,
+    "tilt": -1.0,
+    "status": "warn"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.011,
+    "ssim": 0.263
+   },
+   "status": "warn"
+  },
+  {
+   "path": "art/candidates/portraits/cast-faces-1/mori-mori-smile-d70-2.webp",
+   "kind": "cut-out",
+   "size": [
+    597,
+    768
+   ],
+   "face": [
+    230,
+    171,
+    369,
+    332
+   ],
+   "eyes": [
+    [
+     268.5,
+     226.5
+    ],
+    [
+     330.0,
+     224.5
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0053
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for mori"
+   },
+   "matte": {
+    "holes": 0,
+    "holes_px": 0,
+    "note": "no source render found: holes include gaps between hair strands, not graded",
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.112,
+    "zoom": 1.012,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 84,
+    "hair_top_ref": 86,
+    "crop": [
+     4.2,
+     2.1,
+     593.8,
+     760.7
+    ],
+    "eyes": 0.004,
+    "tilt": 0.0,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.007,
+    "ssim": 0.688
+   },
+   "status": "pass"
+  },
+  {
+   "path": "art/candidates/portraits/cast-faces-1/mori-mori-smile-d70-3.webp",
+   "kind": "cut-out",
+   "size": [
+    597,
+    768
+   ],
+   "face": [
+    230,
+    174,
+    369,
+    328
+   ],
+   "eyes": [
+    [
+     269.0,
+     227.0
+    ],
+    [
+     328.5,
+     225.0
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0054
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for mori"
+   },
+   "matte": {
+    "holes": 0,
+    "holes_px": 0,
+    "note": "no source render found: holes include gaps between hair strands, not graded",
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.112,
+    "zoom": 1.058,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 77,
+    "hair_top_ref": 86,
+    "crop": [
+     17.0,
+     12.4,
+     581.0,
+     738.0
+    ],
+    "eyes": 0.003,
+    "tilt": -0.1,
+    "status": "warn"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.009,
+    "ssim": 0.252
+   },
+   "status": "warn"
+  },
+  {
+   "path": "art/candidates/portraits/cast-faces-1/mori-neutral.webp",
+   "kind": "cut-out",
+   "size": [
+    597,
+    768
+   ],
+   "face": [
+    228,
+    171,
+    370,
+    334
+   ],
+   "eyes": [
+    [
+     268.0,
+     226.5
+    ],
+    [
+     329.5,
+     224.5
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.005
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for mori"
+   },
+   "matte": {
+    "holes": 0,
+    "holes_px": 0,
+    "note": "no source render found: holes include gaps between hair strands, not graded",
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.112,
+    "zoom": 1.0,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 86,
+    "hair_top_ref": 86,
+    "crop": [
+     0.0,
+     0.0,
+     597.0,
+     768.0
+    ],
+    "eyes": 0.0,
+    "tilt": 0.0,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.0,
+    "ssim": 1.0
+   },
+   "status": "pass"
+  }
+ ]
+}

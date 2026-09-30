@@ -1,0 +1,502 @@
+{
+ "character": "kuroda",
+ "ref": "game3d/assets/portraits/kuroda-neutral.webp",
+ "face_box_game": [
+  597,
+  768,
+  [
+   237,
+   167,
+   362,
+   338
+  ]
+ ],
+ "ref_face_detected": [
+  237,
+  166,
+  361,
+  338
+ ],
+ "thresholds": {
+  "redrim": [
+   0.02,
+   0.08
+  ],
+  "glasses_cover": [
+   0.87,
+   0.85
+  ],
+  "glasses_worst": [
+   0.7,
+   0.5
+  ],
+  "glasses_dE": [
+   8,
+   15
+  ],
+  "matte_frame": [
+   0.05,
+   0.12
+  ],
+  "matte_holes": [
+   0,
+   3
+  ],
+  "headroom": [
+   0.03,
+   0.01
+  ],
+  "zoom": [
+   0.04,
+   9
+  ],
+  "top": [
+   0.01,
+   9
+  ],
+  "eyes": [
+   0.06,
+   0.12
+  ],
+  "ccip": [
+   0.05,
+   0.09
+  ]
+ },
+ "images": [
+  {
+   "path": "art/candidates/portraits/cast-faces-1/hamada-hamada-panicked-d70-1.webp",
+   "kind": "cut-out",
+   "size": [
+    597,
+    768
+   ],
+   "face": [
+    241,
+    171,
+    359,
+    340
+   ],
+   "eyes": [
+    [
+     274.0,
+     227.5
+    ],
+    [
+     325.0,
+     226.0
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0013
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kuroda"
+   },
+   "matte": {
+    "holes": 2,
+    "holes_px": 1947,
+    "note": "no source render found: holes include gaps between hair strands, not graded",
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.151,
+    "zoom": 1.018,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 110,
+    "hair_top_ref": 116,
+    "crop": [
+     6.2,
+     7.9,
+     592.8,
+     762.5
+    ],
+    "eyes": -0.026,
+    "tilt": -0.0,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.01,
+    "ssim": 0.504
+   },
+   "status": "pass"
+  },
+  {
+   "path": "art/candidates/portraits/cast-faces-1/hamada-hamada-panicked-d70-2.webp",
+   "kind": "cut-out",
+   "size": [
+    597,
+    768
+   ],
+   "face": [
+    242,
+    169,
+    360,
+    341
+   ],
+   "eyes": [
+    [
+     274.0,
+     226.5
+    ],
+    [
+     327.5,
+     225.0
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0018
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kuroda"
+   },
+   "matte": {
+    "holes": 2,
+    "holes_px": 1947,
+    "note": "no source render found: holes include gaps between hair strands, not graded",
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.151,
+    "zoom": 1.0,
+    "top": 0.0,
+    "bottom_short": 0.004,
+    "hair_top_game": 113,
+    "hair_top_ref": 116,
+    "crop": [
+     2.0,
+     3.0,
+     599.0,
+     771.0
+    ],
+    "eyes": -0.026,
+    "tilt": 0.1,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.012,
+    "ssim": 0.476
+   },
+   "status": "pass"
+  },
+  {
+   "path": "art/candidates/portraits/cast-faces-1/hamada-hamada-panicked-d70-3.webp",
+   "kind": "cut-out",
+   "size": [
+    597,
+    768
+   ],
+   "face": [
+    241,
+    168,
+    360,
+    340
+   ],
+   "eyes": [
+    [
+     274.0,
+     224.5
+    ],
+    [
+     325.5,
+     222.5
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0031
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kuroda"
+   },
+   "matte": {
+    "holes": 2,
+    "holes_px": 1947,
+    "note": "no source render found: holes include gaps between hair strands, not graded",
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.151,
+    "zoom": 1.0,
+    "top": 0.0,
+    "bottom_short": 0.003,
+    "hair_top_game": 114,
+    "hair_top_ref": 116,
+    "crop": [
+     1.5,
+     2.0,
+     598.5,
+     770.0
+    ],
+    "eyes": -0.033,
+    "tilt": -0.6,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.01,
+    "ssim": 0.526
+   },
+   "status": "pass"
+  },
+  {
+   "path": "art/candidates/portraits/cast-faces-1/hamada-hamada-sleepy-d70-1.webp",
+   "kind": "cut-out",
+   "size": [
+    597,
+    768
+   ],
+   "face": [
+    239,
+    166,
+    361,
+    342
+   ],
+   "eyes": [
+    [
+     273.5,
+     227.0
+    ],
+    [
+     326.0,
+     225.5
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0031
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kuroda"
+   },
+   "matte": {
+    "holes": 2,
+    "holes_px": 1947,
+    "note": "no source render found: holes include gaps between hair strands, not graded",
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.151,
+    "zoom": 0.977,
+    "top": 0.005,
+    "bottom_short": 0.018,
+    "hair_top_game": 117,
+    "hair_top_ref": 116,
+    "crop": [
+     -6.0,
+     -3.9,
+     604.9,
+     782.0
+    ],
+    "eyes": -0.014,
+    "tilt": 0.0,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.006,
+    "ssim": 0.613
+   },
+   "status": "pass"
+  },
+  {
+   "path": "art/candidates/portraits/cast-faces-1/hamada-hamada-sleepy-d70-2.webp",
+   "kind": "cut-out",
+   "size": [
+    597,
+    768
+   ],
+   "face": [
+    239,
+    164,
+    361,
+    341
+   ],
+   "eyes": [
+    [
+     274.5,
+     227.5
+    ],
+    [
+     326.5,
+     226.5
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0026
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kuroda"
+   },
+   "matte": {
+    "holes": 2,
+    "holes_px": 1947,
+    "note": "no source render found: holes include gaps between hair strands, not graded",
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.151,
+    "zoom": 0.972,
+    "top": 0.009,
+    "bottom_short": 0.02,
+    "hair_top_game": 119,
+    "hair_top_ref": 116,
+    "crop": [
+     -7.7,
+     -6.8,
+     606.7,
+     783.5
+    ],
+    "eyes": -0.0,
+    "tilt": 0.6,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.008,
+    "ssim": 0.572
+   },
+   "status": "pass"
+  },
+  {
+   "path": "art/candidates/portraits/cast-faces-1/hamada-hamada-sleepy-d70-3.webp",
+   "kind": "cut-out",
+   "size": [
+    597,
+    768
+   ],
+   "face": [
+    238,
+    167,
+    362,
+    341
+   ],
+   "eyes": [
+    [
+     273.5,
+     226.0
+    ],
+    [
+     326.0,
+     225.0
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0051
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kuroda"
+   },
+   "matte": {
+    "holes": 2,
+    "holes_px": 1947,
+    "note": "no source render found: holes include gaps between hair strands, not graded",
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.151,
+    "zoom": 0.989,
+    "top": 0.001,
+    "bottom_short": 0.01,
+    "hair_top_game": 115,
+    "hair_top_ref": 116,
+    "crop": [
+     -2.5,
+     -0.9,
+     601.5,
+     776.0
+    ],
+    "eyes": -0.02,
+    "tilt": 0.6,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.005,
+    "ssim": 0.61
+   },
+   "status": "pass"
+  },
+  {
+   "path": "art/candidates/portraits/cast-faces-1/hamada-neutral.webp",
+   "kind": "cut-out",
+   "size": [
+    597,
+    768
+   ],
+   "face": [
+    237,
+    166,
+    361,
+    338
+   ],
+   "eyes": [
+    [
+     273.5,
+     228.0
+    ],
+    [
+     325.0,
+     226.5
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0034
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for kuroda"
+   },
+   "matte": {
+    "holes": 2,
+    "holes_px": 1947,
+    "note": "no source render found: holes include gaps between hair strands, not graded",
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.151,
+    "zoom": 1.0,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 116,
+    "hair_top_ref": 116,
+    "crop": [
+     0.0,
+     0.0,
+     597.0,
+     768.0
+    ],
+    "eyes": 0.0,
+    "tilt": 0.0,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.0,
+    "ssim": 1.0
+   },
+   "status": "pass"
+  }
+ ]
+}

@@ -1,0 +1,1224 @@
+{
+ "fix-guard-plate-d75-1": {
+  "kind": "fix",
+  "who": "guard",
+  "source": "art/production/PC/style-align-1/guard-ink-2001.png",
+  "box": [
+   296,
+   616,
+   416,
+   652
+  ],
+  "crop": [
+   236,
+   514,
+   476,
+   754
+  ],
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, navy security uniform jacket, a small blank gold name plate on the chest pocket, plain metal bar",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, text, watermark, signature, 3d, realistic, photorealistic, render, nude, nsfw, child, loli, (rim light, red rim light, red outline, backlighting:1.4), text, letters, words, numbers, logo text, writing, english text, alphabet",
+  "seed": 1,
+  "denoise": 0.75,
+  "model": "rdbtAnima",
+  "settings": "euler_ancestral normal, 30 steps, CFG 5, DifferentialDiffusion, crop upscaled to 1024"
+ },
+ "fix-guard-plate-d75-2": {
+  "kind": "fix",
+  "who": "guard",
+  "source": "art/production/PC/style-align-1/guard-ink-2001.png",
+  "box": [
+   296,
+   616,
+   416,
+   652
+  ],
+  "crop": [
+   236,
+   514,
+   476,
+   754
+  ],
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, navy security uniform jacket, a small blank gold name plate on the chest pocket, plain metal bar",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, text, watermark, signature, 3d, realistic, photorealistic, render, nude, nsfw, child, loli, (rim light, red rim light, red outline, backlighting:1.4), text, letters, words, numbers, logo text, writing, english text, alphabet",
+  "seed": 2,
+  "denoise": 0.75,
+  "model": "rdbtAnima",
+  "settings": "euler_ancestral normal, 30 steps, CFG 5, DifferentialDiffusion, crop upscaled to 1024"
+ },
+ "fix-guard-plate-d75-3": {
+  "kind": "fix",
+  "who": "guard",
+  "source": "art/production/PC/style-align-1/guard-ink-2001.png",
+  "box": [
+   296,
+   616,
+   416,
+   652
+  ],
+  "crop": [
+   236,
+   514,
+   476,
+   754
+  ],
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, navy security uniform jacket, a small blank gold name plate on the chest pocket, plain metal bar",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, text, watermark, signature, 3d, realistic, photorealistic, render, nude, nsfw, child, loli, (rim light, red rim light, red outline, backlighting:1.4), text, letters, words, numbers, logo text, writing, english text, alphabet",
+  "seed": 3,
+  "denoise": 0.75,
+  "model": "rdbtAnima",
+  "settings": "euler_ancestral normal, 30 steps, CFG 5, DifferentialDiffusion, crop upscaled to 1024"
+ },
+ "fix-guard-patch-d75-1": {
+  "kind": "fix",
+  "who": "guard",
+  "source": "art/production/PC/style-align-1/guard-ink-2001.png",
+  "box": [
+   94,
+   606,
+   182,
+   726
+  ],
+  "crop": [
+   58,
+   586,
+   218,
+   746
+  ],
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, navy security uniform sleeve, a shoulder patch with a gold border and a simple winged emblem",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, text, watermark, signature, 3d, realistic, photorealistic, render, nude, nsfw, child, loli, (rim light, red rim light, red outline, backlighting:1.4), text, letters, words, numbers, logo text, writing, english text, alphabet",
+  "seed": 1,
+  "denoise": 0.75,
+  "model": "rdbtAnima",
+  "settings": "euler_ancestral normal, 30 steps, CFG 5, DifferentialDiffusion, crop upscaled to 1024"
+ },
+ "fix-guard-patch-d75-2": {
+  "kind": "fix",
+  "who": "guard",
+  "source": "art/production/PC/style-align-1/guard-ink-2001.png",
+  "box": [
+   94,
+   606,
+   182,
+   726
+  ],
+  "crop": [
+   58,
+   586,
+   218,
+   746
+  ],
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, navy security uniform sleeve, a shoulder patch with a gold border and a simple winged emblem",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, text, watermark, signature, 3d, realistic, photorealistic, render, nude, nsfw, child, loli, (rim light, red rim light, red outline, backlighting:1.4), text, letters, words, numbers, logo text, writing, english text, alphabet",
+  "seed": 2,
+  "denoise": 0.75,
+  "model": "rdbtAnima",
+  "settings": "euler_ancestral normal, 30 steps, CFG 5, DifferentialDiffusion, crop upscaled to 1024"
+ },
+ "fix-guard-patch-d75-3": {
+  "kind": "fix",
+  "who": "guard",
+  "source": "art/production/PC/style-align-1/guard-ink-2001.png",
+  "box": [
+   94,
+   606,
+   182,
+   726
+  ],
+  "crop": [
+   58,
+   586,
+   218,
+   746
+  ],
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, navy security uniform sleeve, a shoulder patch with a gold border and a simple winged emblem",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, text, watermark, signature, 3d, realistic, photorealistic, render, nude, nsfw, child, loli, (rim light, red rim light, red outline, backlighting:1.4), text, letters, words, numbers, logo text, writing, english text, alphabet",
+  "seed": 3,
+  "denoise": 0.75,
+  "model": "rdbtAnima",
+  "settings": "euler_ancestral normal, 30 steps, CFG 5, DifferentialDiffusion, crop upscaled to 1024"
+ },
+ "fix-guard-collar-d75-1": {
+  "kind": "fix",
+  "who": "guard",
+  "source": "art/production/PC/style-align-1/guard-ink-2001.png",
+  "box": [
+   310,
+   544,
+   362,
+   574
+  ],
+  "crop": [
+   276,
+   499,
+   396,
+   619
+  ],
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, navy security uniform collar, a small plain gold collar pin",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, text, watermark, signature, 3d, realistic, photorealistic, render, nude, nsfw, child, loli, (rim light, red rim light, red outline, backlighting:1.4), text, letters, words, numbers, logo text, writing, english text, alphabet",
+  "seed": 1,
+  "denoise": 0.75,
+  "model": "rdbtAnima",
+  "settings": "euler_ancestral normal, 30 steps, CFG 5, DifferentialDiffusion, crop upscaled to 1024"
+ },
+ "fix-guard-collar-d75-2": {
+  "kind": "fix",
+  "who": "guard",
+  "source": "art/production/PC/style-align-1/guard-ink-2001.png",
+  "box": [
+   310,
+   544,
+   362,
+   574
+  ],
+  "crop": [
+   276,
+   499,
+   396,
+   619
+  ],
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, navy security uniform collar, a small plain gold collar pin",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, text, watermark, signature, 3d, realistic, photorealistic, render, nude, nsfw, child, loli, (rim light, red rim light, red outline, backlighting:1.4), text, letters, words, numbers, logo text, writing, english text, alphabet",
+  "seed": 2,
+  "denoise": 0.75,
+  "model": "rdbtAnima",
+  "settings": "euler_ancestral normal, 30 steps, CFG 5, DifferentialDiffusion, crop upscaled to 1024"
+ },
+ "fix-aoi-patch-d75-1": {
+  "kind": "fix",
+  "who": "aoi",
+  "source": "art/production/PC/style-align-1/aoi-base-2001.png",
+  "box": [
+   512,
+   776,
+   646,
+   916
+  ],
+  "crop": [
+   459,
+   726,
+   699,
+   966
+  ],
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1girl, dark green varsity jacket, a small pink star patch on the chest",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, text, watermark, signature, 3d, realistic, photorealistic, render, nude, nsfw, child, loli, (rim light, red rim light, red outline, backlighting:1.4), text, letters, words, numbers, logo text, writing, english text, alphabet",
+  "seed": 1,
+  "denoise": 0.75,
+  "model": "rdbtAnima",
+  "settings": "euler_ancestral normal, 30 steps, CFG 5, DifferentialDiffusion, crop upscaled to 1024"
+ },
+ "fix-aoi-patch-d75-2": {
+  "kind": "fix",
+  "who": "aoi",
+  "source": "art/production/PC/style-align-1/aoi-base-2001.png",
+  "box": [
+   512,
+   776,
+   646,
+   916
+  ],
+  "crop": [
+   459,
+   726,
+   699,
+   966
+  ],
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1girl, dark green varsity jacket, a small pink star patch on the chest",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, text, watermark, signature, 3d, realistic, photorealistic, render, nude, nsfw, child, loli, (rim light, red rim light, red outline, backlighting:1.4), text, letters, words, numbers, logo text, writing, english text, alphabet",
+  "seed": 2,
+  "denoise": 0.75,
+  "model": "rdbtAnima",
+  "settings": "euler_ancestral normal, 30 steps, CFG 5, DifferentialDiffusion, crop upscaled to 1024"
+ },
+ "fix-aoi-patch-d75-3": {
+  "kind": "fix",
+  "who": "aoi",
+  "source": "art/production/PC/style-align-1/aoi-base-2001.png",
+  "box": [
+   512,
+   776,
+   646,
+   916
+  ],
+  "crop": [
+   459,
+   726,
+   699,
+   966
+  ],
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1girl, dark green varsity jacket, a small pink star patch on the chest",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, text, watermark, signature, 3d, realistic, photorealistic, render, nude, nsfw, child, loli, (rim light, red rim light, red outline, backlighting:1.4), text, letters, words, numbers, logo text, writing, english text, alphabet",
+  "seed": 3,
+  "denoise": 0.75,
+  "model": "rdbtAnima",
+  "settings": "euler_ancestral normal, 30 steps, CFG 5, DifferentialDiffusion, crop upscaled to 1024"
+ },
+ "eric-surprised-d70-1": {
+  "kind": "face",
+  "who": "eric",
+  "face": "surprised",
+  "words": "surprised, eyes wide open, eyebrows raised, mouth slightly open",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, male focus, a Scandinavian man in his early thirties, fair pale skin, blue eyes, (facial hair, dark-blond stubble:1.3), (silver rectangular glasses:1.2), high contrast, deep black shadows, surprised, eyes wide open, eyebrows raised, mouth slightly open, close-up of his face, plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, text, watermark, signature, 3d, realistic, photorealistic, render, nude, nsfw, child, loli, (rim light, red rim light, red outline, backlighting:1.4), chubby, fat, obese, plump, blush, closed eyes, smile, frown, furrowed brow, angry",
+  "seed": 1,
+  "denoise": 0.7,
+  "source": "art/production/PC/style-align-1/eric-ink-2001.png",
+  "crop": [
+   127,
+   207,
+   561,
+   641
+  ],
+  "oval": [
+   197,
+   297,
+   484,
+   588
+  ],
+  "model": "rdbtAnima",
+  "settings": "euler_ancestral normal, 30 steps, CFG 5, DifferentialDiffusion, face crop upscaled to 1024, 3 px feather"
+ },
+ "eric-surprised-d70-2": {
+  "kind": "face",
+  "who": "eric",
+  "face": "surprised",
+  "words": "surprised, eyes wide open, eyebrows raised, mouth slightly open",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, male focus, a Scandinavian man in his early thirties, fair pale skin, blue eyes, (facial hair, dark-blond stubble:1.3), (silver rectangular glasses:1.2), high contrast, deep black shadows, surprised, eyes wide open, eyebrows raised, mouth slightly open, close-up of his face, plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, text, watermark, signature, 3d, realistic, photorealistic, render, nude, nsfw, child, loli, (rim light, red rim light, red outline, backlighting:1.4), chubby, fat, obese, plump, blush, closed eyes, smile, frown, furrowed brow, angry",
+  "seed": 2,
+  "denoise": 0.7,
+  "source": "art/production/PC/style-align-1/eric-ink-2001.png",
+  "crop": [
+   127,
+   207,
+   561,
+   641
+  ],
+  "oval": [
+   197,
+   297,
+   484,
+   588
+  ],
+  "model": "rdbtAnima",
+  "settings": "euler_ancestral normal, 30 steps, CFG 5, DifferentialDiffusion, face crop upscaled to 1024, 3 px feather"
+ },
+ "eric-surprised-d70-3": {
+  "kind": "face",
+  "who": "eric",
+  "face": "surprised",
+  "words": "surprised, eyes wide open, eyebrows raised, mouth slightly open",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, male focus, a Scandinavian man in his early thirties, fair pale skin, blue eyes, (facial hair, dark-blond stubble:1.3), (silver rectangular glasses:1.2), high contrast, deep black shadows, surprised, eyes wide open, eyebrows raised, mouth slightly open, close-up of his face, plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, text, watermark, signature, 3d, realistic, photorealistic, render, nude, nsfw, child, loli, (rim light, red rim light, red outline, backlighting:1.4), chubby, fat, obese, plump, blush, closed eyes, smile, frown, furrowed brow, angry",
+  "seed": 3,
+  "denoise": 0.7,
+  "source": "art/production/PC/style-align-1/eric-ink-2001.png",
+  "crop": [
+   127,
+   207,
+   561,
+   641
+  ],
+  "oval": [
+   197,
+   297,
+   484,
+   588
+  ],
+  "model": "rdbtAnima",
+  "settings": "euler_ancestral normal, 30 steps, CFG 5, DifferentialDiffusion, face crop upscaled to 1024, 3 px feather"
+ },
+ "eric-tired-d65-1": {
+  "kind": "face",
+  "who": "eric",
+  "face": "tired",
+  "words": "tired, weary, heavy-lidded eyes, mouth closed, no smile",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, male focus, a Scandinavian man in his early thirties, fair pale skin, blue eyes, (facial hair, dark-blond stubble:1.3), (silver rectangular glasses:1.2), high contrast, deep black shadows, tired, weary, heavy-lidded eyes, mouth closed, no smile, close-up of his face, plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, text, watermark, signature, 3d, realistic, photorealistic, render, nude, nsfw, child, loli, (rim light, red rim light, red outline, backlighting:1.4), chubby, fat, obese, plump, blush, smile, grin, flushed cheeks, frown, furrowed brow, angry",
+  "seed": 1,
+  "denoise": 0.65,
+  "source": "art/production/PC/style-align-1/eric-ink-2001.png",
+  "crop": [
+   127,
+   207,
+   561,
+   641
+  ],
+  "oval": [
+   197,
+   297,
+   484,
+   588
+  ],
+  "model": "rdbtAnima",
+  "settings": "euler_ancestral normal, 30 steps, CFG 5, DifferentialDiffusion, face crop upscaled to 1024, 3 px feather"
+ },
+ "eric-tired-d65-2": {
+  "kind": "face",
+  "who": "eric",
+  "face": "tired",
+  "words": "tired, weary, heavy-lidded eyes, mouth closed, no smile",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, male focus, a Scandinavian man in his early thirties, fair pale skin, blue eyes, (facial hair, dark-blond stubble:1.3), (silver rectangular glasses:1.2), high contrast, deep black shadows, tired, weary, heavy-lidded eyes, mouth closed, no smile, close-up of his face, plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, text, watermark, signature, 3d, realistic, photorealistic, render, nude, nsfw, child, loli, (rim light, red rim light, red outline, backlighting:1.4), chubby, fat, obese, plump, blush, smile, grin, flushed cheeks, frown, furrowed brow, angry",
+  "seed": 2,
+  "denoise": 0.65,
+  "source": "art/production/PC/style-align-1/eric-ink-2001.png",
+  "crop": [
+   127,
+   207,
+   561,
+   641
+  ],
+  "oval": [
+   197,
+   297,
+   484,
+   588
+  ],
+  "model": "rdbtAnima",
+  "settings": "euler_ancestral normal, 30 steps, CFG 5, DifferentialDiffusion, face crop upscaled to 1024, 3 px feather"
+ },
+ "eric-tired-d65-3": {
+  "kind": "face",
+  "who": "eric",
+  "face": "tired",
+  "words": "tired, weary, heavy-lidded eyes, mouth closed, no smile",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, male focus, a Scandinavian man in his early thirties, fair pale skin, blue eyes, (facial hair, dark-blond stubble:1.3), (silver rectangular glasses:1.2), high contrast, deep black shadows, tired, weary, heavy-lidded eyes, mouth closed, no smile, close-up of his face, plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, text, watermark, signature, 3d, realistic, photorealistic, render, nude, nsfw, child, loli, (rim light, red rim light, red outline, backlighting:1.4), chubby, fat, obese, plump, blush, smile, grin, flushed cheeks, frown, furrowed brow, angry",
+  "seed": 3,
+  "denoise": 0.65,
+  "source": "art/production/PC/style-align-1/eric-ink-2001.png",
+  "crop": [
+   127,
+   207,
+   561,
+   641
+  ],
+  "oval": [
+   197,
+   297,
+   484,
+   588
+  ],
+  "model": "rdbtAnima",
+  "settings": "euler_ancestral normal, 30 steps, CFG 5, DifferentialDiffusion, face crop upscaled to 1024, 3 px feather"
+ },
+ "kenji-grin-d80-1": {
+  "kind": "face",
+  "who": "kenji",
+  "face": "grin",
+  "words": "big happy grin showing his teeth, bright eyes, looking at the viewer",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, adult, Kenji, a 21-year-old young adult man with a youthful face, round chubby face, thick eyebrows, messy black bedhead hair, high contrast, deep black shadows, big happy grin showing his teeth, bright eyes, looking at the viewer, close-up of his face, plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, text, watermark, signature, 3d, realistic, photorealistic, render, nude, nsfw, child, loli, (rim light, red rim light, red outline, backlighting:1.4), mature male, old man, middle-aged, stubble, facial hair, beard, moustache, square jaw, glasses, muscular, frown, furrowed brow, angry, closed eyes",
+  "seed": 1,
+  "denoise": 0.8,
+  "source": "art/production/PC/style-align-1/kenji-ink-2001.png",
+  "crop": [
+   290,
+   215,
+   610,
+   535
+  ],
+  "oval": [
+   350,
+   277,
+   550,
+   492
+  ],
+  "model": "rdbtAnima",
+  "settings": "euler_ancestral normal, 30 steps, CFG 5, DifferentialDiffusion, face crop upscaled to 1024, 3 px feather"
+ },
+ "kenji-grin-d80-2": {
+  "kind": "face",
+  "who": "kenji",
+  "face": "grin",
+  "words": "big happy grin showing his teeth, bright eyes, looking at the viewer",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, adult, Kenji, a 21-year-old young adult man with a youthful face, round chubby face, thick eyebrows, messy black bedhead hair, high contrast, deep black shadows, big happy grin showing his teeth, bright eyes, looking at the viewer, close-up of his face, plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, text, watermark, signature, 3d, realistic, photorealistic, render, nude, nsfw, child, loli, (rim light, red rim light, red outline, backlighting:1.4), mature male, old man, middle-aged, stubble, facial hair, beard, moustache, square jaw, glasses, muscular, frown, furrowed brow, angry, closed eyes",
+  "seed": 2,
+  "denoise": 0.8,
+  "source": "art/production/PC/style-align-1/kenji-ink-2001.png",
+  "crop": [
+   290,
+   215,
+   610,
+   535
+  ],
+  "oval": [
+   350,
+   277,
+   550,
+   492
+  ],
+  "model": "rdbtAnima",
+  "settings": "euler_ancestral normal, 30 steps, CFG 5, DifferentialDiffusion, face crop upscaled to 1024, 3 px feather"
+ },
+ "kenji-grin-d80-3": {
+  "kind": "face",
+  "who": "kenji",
+  "face": "grin",
+  "words": "big happy grin showing his teeth, bright eyes, looking at the viewer",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, adult, Kenji, a 21-year-old young adult man with a youthful face, round chubby face, thick eyebrows, messy black bedhead hair, high contrast, deep black shadows, big happy grin showing his teeth, bright eyes, looking at the viewer, close-up of his face, plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, text, watermark, signature, 3d, realistic, photorealistic, render, nude, nsfw, child, loli, (rim light, red rim light, red outline, backlighting:1.4), mature male, old man, middle-aged, stubble, facial hair, beard, moustache, square jaw, glasses, muscular, frown, furrowed brow, angry, closed eyes",
+  "seed": 3,
+  "denoise": 0.8,
+  "source": "art/production/PC/style-align-1/kenji-ink-2001.png",
+  "crop": [
+   290,
+   215,
+   610,
+   535
+  ],
+  "oval": [
+   350,
+   277,
+   550,
+   492
+  ],
+  "model": "rdbtAnima",
+  "settings": "euler_ancestral normal, 30 steps, CFG 5, DifferentialDiffusion, face crop upscaled to 1024, 3 px feather"
+ },
+ "kenji-sheepish-d80-1": {
+  "kind": "face",
+  "who": "kenji",
+  "face": "sheepish",
+  "words": "sheepish nervous smile, (worried eyebrows:1.3), sweatdrop, looking at the viewer",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, adult, Kenji, a 21-year-old young adult man with a youthful face, round chubby face, thick eyebrows, messy black bedhead hair, high contrast, deep black shadows, sheepish nervous smile, (worried eyebrows:1.3), sweatdrop, looking at the viewer, close-up of his face, plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, text, watermark, signature, 3d, realistic, photorealistic, render, nude, nsfw, child, loli, (rim light, red rim light, red outline, backlighting:1.4), mature male, old man, middle-aged, stubble, facial hair, beard, moustache, square jaw, glasses, muscular, frown, furrowed brow, angry, crying, tears",
+  "seed": 1,
+  "denoise": 0.8,
+  "source": "art/production/PC/style-align-1/kenji-ink-2001.png",
+  "crop": [
+   290,
+   215,
+   610,
+   535
+  ],
+  "oval": [
+   350,
+   277,
+   550,
+   492
+  ],
+  "model": "rdbtAnima",
+  "settings": "euler_ancestral normal, 30 steps, CFG 5, DifferentialDiffusion, face crop upscaled to 1024, 3 px feather"
+ },
+ "kenji-sheepish-d80-2": {
+  "kind": "face",
+  "who": "kenji",
+  "face": "sheepish",
+  "words": "sheepish nervous smile, (worried eyebrows:1.3), sweatdrop, looking at the viewer",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, adult, Kenji, a 21-year-old young adult man with a youthful face, round chubby face, thick eyebrows, messy black bedhead hair, high contrast, deep black shadows, sheepish nervous smile, (worried eyebrows:1.3), sweatdrop, looking at the viewer, close-up of his face, plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, text, watermark, signature, 3d, realistic, photorealistic, render, nude, nsfw, child, loli, (rim light, red rim light, red outline, backlighting:1.4), mature male, old man, middle-aged, stubble, facial hair, beard, moustache, square jaw, glasses, muscular, frown, furrowed brow, angry, crying, tears",
+  "seed": 2,
+  "denoise": 0.8,
+  "source": "art/production/PC/style-align-1/kenji-ink-2001.png",
+  "crop": [
+   290,
+   215,
+   610,
+   535
+  ],
+  "oval": [
+   350,
+   277,
+   550,
+   492
+  ],
+  "model": "rdbtAnima",
+  "settings": "euler_ancestral normal, 30 steps, CFG 5, DifferentialDiffusion, face crop upscaled to 1024, 3 px feather"
+ },
+ "kenji-sheepish-d80-3": {
+  "kind": "face",
+  "who": "kenji",
+  "face": "sheepish",
+  "words": "sheepish nervous smile, (worried eyebrows:1.3), sweatdrop, looking at the viewer",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, adult, Kenji, a 21-year-old young adult man with a youthful face, round chubby face, thick eyebrows, messy black bedhead hair, high contrast, deep black shadows, sheepish nervous smile, (worried eyebrows:1.3), sweatdrop, looking at the viewer, close-up of his face, plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, text, watermark, signature, 3d, realistic, photorealistic, render, nude, nsfw, child, loli, (rim light, red rim light, red outline, backlighting:1.4), mature male, old man, middle-aged, stubble, facial hair, beard, moustache, square jaw, glasses, muscular, frown, furrowed brow, angry, crying, tears",
+  "seed": 3,
+  "denoise": 0.8,
+  "source": "art/production/PC/style-align-1/kenji-ink-2001.png",
+  "crop": [
+   290,
+   215,
+   610,
+   535
+  ],
+  "oval": [
+   350,
+   277,
+   550,
+   492
+  ],
+  "model": "rdbtAnima",
+  "settings": "euler_ancestral normal, 30 steps, CFG 5, DifferentialDiffusion, face crop upscaled to 1024, 3 px feather"
+ },
+ "guard-stern-d70-1": {
+  "kind": "face",
+  "who": "guard",
+  "face": "stern",
+  "words": "stern, frowning, mouth a firm line",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, Ishibashi, a 64-year-old man, completely bald head, bushy white eyebrows, a thin white moustache, thin silver glasses with clear lenses, high contrast, deep black shadows, stern, frowning, mouth a firm line, close-up of his face, plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, text, watermark, signature, 3d, realistic, photorealistic, render, nude, nsfw, child, loli, (rim light, red rim light, red outline, backlighting:1.4), chubby, fat, obese, plump, blush, smile",
+  "seed": 1,
+  "denoise": 0.7,
+  "source": "art/production/PC/cast-faces-1/base-guard.png",
+  "crop": [
+   290,
+   217,
+   602,
+   529
+  ],
+  "oval": [
+   355,
+   272,
+   539,
+   487
+  ],
+  "model": "rdbtAnima",
+  "settings": "euler_ancestral normal, 30 steps, CFG 5, DifferentialDiffusion, face crop upscaled to 1024, 3 px feather"
+ },
+ "guard-stern-d70-2": {
+  "kind": "face",
+  "who": "guard",
+  "face": "stern",
+  "words": "stern, frowning, mouth a firm line",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, Ishibashi, a 64-year-old man, completely bald head, bushy white eyebrows, a thin white moustache, thin silver glasses with clear lenses, high contrast, deep black shadows, stern, frowning, mouth a firm line, close-up of his face, plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, text, watermark, signature, 3d, realistic, photorealistic, render, nude, nsfw, child, loli, (rim light, red rim light, red outline, backlighting:1.4), chubby, fat, obese, plump, blush, smile",
+  "seed": 2,
+  "denoise": 0.7,
+  "source": "art/production/PC/cast-faces-1/base-guard.png",
+  "crop": [
+   290,
+   217,
+   602,
+   529
+  ],
+  "oval": [
+   355,
+   272,
+   539,
+   487
+  ],
+  "model": "rdbtAnima",
+  "settings": "euler_ancestral normal, 30 steps, CFG 5, DifferentialDiffusion, face crop upscaled to 1024, 3 px feather"
+ },
+ "guard-stern-d70-3": {
+  "kind": "face",
+  "who": "guard",
+  "face": "stern",
+  "words": "stern, frowning, mouth a firm line",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, Ishibashi, a 64-year-old man, completely bald head, bushy white eyebrows, a thin white moustache, thin silver glasses with clear lenses, high contrast, deep black shadows, stern, frowning, mouth a firm line, close-up of his face, plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, text, watermark, signature, 3d, realistic, photorealistic, render, nude, nsfw, child, loli, (rim light, red rim light, red outline, backlighting:1.4), chubby, fat, obese, plump, blush, smile",
+  "seed": 3,
+  "denoise": 0.7,
+  "source": "art/production/PC/cast-faces-1/base-guard.png",
+  "crop": [
+   290,
+   217,
+   602,
+   529
+  ],
+  "oval": [
+   355,
+   272,
+   539,
+   487
+  ],
+  "model": "rdbtAnima",
+  "settings": "euler_ancestral normal, 30 steps, CFG 5, DifferentialDiffusion, face crop upscaled to 1024, 3 px feather"
+ },
+ "guard-amused-d70-1": {
+  "kind": "face",
+  "who": "guard",
+  "face": "amused",
+  "words": "amused, a small dry smile under the moustache, eyes softened",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, Ishibashi, a 64-year-old man, completely bald head, bushy white eyebrows, a thin white moustache, thin silver glasses with clear lenses, high contrast, deep black shadows, amused, a small dry smile under the moustache, eyes softened, close-up of his face, plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, text, watermark, signature, 3d, realistic, photorealistic, render, nude, nsfw, child, loli, (rim light, red rim light, red outline, backlighting:1.4), chubby, fat, obese, plump, blush, frown, furrowed brow, angry",
+  "seed": 1,
+  "denoise": 0.7,
+  "source": "art/production/PC/cast-faces-1/base-guard.png",
+  "crop": [
+   290,
+   217,
+   602,
+   529
+  ],
+  "oval": [
+   355,
+   272,
+   539,
+   487
+  ],
+  "model": "rdbtAnima",
+  "settings": "euler_ancestral normal, 30 steps, CFG 5, DifferentialDiffusion, face crop upscaled to 1024, 3 px feather"
+ },
+ "guard-amused-d70-2": {
+  "kind": "face",
+  "who": "guard",
+  "face": "amused",
+  "words": "amused, a small dry smile under the moustache, eyes softened",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, Ishibashi, a 64-year-old man, completely bald head, bushy white eyebrows, a thin white moustache, thin silver glasses with clear lenses, high contrast, deep black shadows, amused, a small dry smile under the moustache, eyes softened, close-up of his face, plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, text, watermark, signature, 3d, realistic, photorealistic, render, nude, nsfw, child, loli, (rim light, red rim light, red outline, backlighting:1.4), chubby, fat, obese, plump, blush, frown, furrowed brow, angry",
+  "seed": 2,
+  "denoise": 0.7,
+  "source": "art/production/PC/cast-faces-1/base-guard.png",
+  "crop": [
+   290,
+   217,
+   602,
+   529
+  ],
+  "oval": [
+   355,
+   272,
+   539,
+   487
+  ],
+  "model": "rdbtAnima",
+  "settings": "euler_ancestral normal, 30 steps, CFG 5, DifferentialDiffusion, face crop upscaled to 1024, 3 px feather"
+ },
+ "guard-amused-d70-3": {
+  "kind": "face",
+  "who": "guard",
+  "face": "amused",
+  "words": "amused, a small dry smile under the moustache, eyes softened",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, Ishibashi, a 64-year-old man, completely bald head, bushy white eyebrows, a thin white moustache, thin silver glasses with clear lenses, high contrast, deep black shadows, amused, a small dry smile under the moustache, eyes softened, close-up of his face, plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, text, watermark, signature, 3d, realistic, photorealistic, render, nude, nsfw, child, loli, (rim light, red rim light, red outline, backlighting:1.4), chubby, fat, obese, plump, blush, frown, furrowed brow, angry",
+  "seed": 3,
+  "denoise": 0.7,
+  "source": "art/production/PC/cast-faces-1/base-guard.png",
+  "crop": [
+   290,
+   217,
+   602,
+   529
+  ],
+  "oval": [
+   355,
+   272,
+   539,
+   487
+  ],
+  "model": "rdbtAnima",
+  "settings": "euler_ancestral normal, 30 steps, CFG 5, DifferentialDiffusion, face crop upscaled to 1024, 3 px feather"
+ },
+ "mori-smile-d70-1": {
+  "kind": "face",
+  "who": "mori",
+  "face": "smile",
+  "words": "warm polite smile, eyes creased",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, Mr. Mori, a 58-year-old Japanese man, neatly combed grey hair with a side parting, an older face with wrinkles around his eyes and mouth, warm polite smile, eyes creased, close-up of his face, plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, text, watermark, signature, 3d, realistic, photorealistic, render, nude, nsfw, child, loli, (rim light, red rim light, red outline, backlighting:1.4), chubby, fat, obese, plump, blush, glasses, frown, furrowed brow, angry",
+  "seed": 1,
+  "denoise": 0.7,
+  "source": "art/production/PC/npc-base-1/mori-new-713.png",
+  "crop": [
+   331,
+   85,
+   583,
+   337
+  ],
+  "oval": [
+   386,
+   145,
+   528,
+   309
+  ],
+  "model": "rdbtAnima",
+  "settings": "euler_ancestral normal, 30 steps, CFG 5, DifferentialDiffusion, face crop upscaled to 1024, 3 px feather"
+ },
+ "mori-smile-d70-2": {
+  "kind": "face",
+  "who": "mori",
+  "face": "smile",
+  "words": "warm polite smile, eyes creased",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, Mr. Mori, a 58-year-old Japanese man, neatly combed grey hair with a side parting, an older face with wrinkles around his eyes and mouth, warm polite smile, eyes creased, close-up of his face, plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, text, watermark, signature, 3d, realistic, photorealistic, render, nude, nsfw, child, loli, (rim light, red rim light, red outline, backlighting:1.4), chubby, fat, obese, plump, blush, glasses, frown, furrowed brow, angry",
+  "seed": 2,
+  "denoise": 0.7,
+  "source": "art/production/PC/npc-base-1/mori-new-713.png",
+  "crop": [
+   331,
+   85,
+   583,
+   337
+  ],
+  "oval": [
+   386,
+   145,
+   528,
+   309
+  ],
+  "model": "rdbtAnima",
+  "settings": "euler_ancestral normal, 30 steps, CFG 5, DifferentialDiffusion, face crop upscaled to 1024, 3 px feather"
+ },
+ "mori-smile-d70-3": {
+  "kind": "face",
+  "who": "mori",
+  "face": "smile",
+  "words": "warm polite smile, eyes creased",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, Mr. Mori, a 58-year-old Japanese man, neatly combed grey hair with a side parting, an older face with wrinkles around his eyes and mouth, warm polite smile, eyes creased, close-up of his face, plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, text, watermark, signature, 3d, realistic, photorealistic, render, nude, nsfw, child, loli, (rim light, red rim light, red outline, backlighting:1.4), chubby, fat, obese, plump, blush, glasses, frown, furrowed brow, angry",
+  "seed": 3,
+  "denoise": 0.7,
+  "source": "art/production/PC/npc-base-1/mori-new-713.png",
+  "crop": [
+   331,
+   85,
+   583,
+   337
+  ],
+  "oval": [
+   386,
+   145,
+   528,
+   309
+  ],
+  "model": "rdbtAnima",
+  "settings": "euler_ancestral normal, 30 steps, CFG 5, DifferentialDiffusion, face crop upscaled to 1024, 3 px feather"
+ },
+ "mori-flustered-d70-1": {
+  "kind": "face",
+  "who": "mori",
+  "face": "flustered",
+  "words": "flustered, embarrassed, eyebrows raised, a small awkward smile, faint sweat drop",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, Mr. Mori, a 58-year-old Japanese man, neatly combed grey hair with a side parting, an older face with wrinkles around his eyes and mouth, flustered, embarrassed, eyebrows raised, a small awkward smile, faint sweat drop, close-up of his face, plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, text, watermark, signature, 3d, realistic, photorealistic, render, nude, nsfw, child, loli, (rim light, red rim light, red outline, backlighting:1.4), chubby, fat, obese, plump, blush, glasses, angry",
+  "seed": 1,
+  "denoise": 0.7,
+  "source": "art/production/PC/npc-base-1/mori-new-713.png",
+  "crop": [
+   331,
+   85,
+   583,
+   337
+  ],
+  "oval": [
+   386,
+   145,
+   528,
+   309
+  ],
+  "model": "rdbtAnima",
+  "settings": "euler_ancestral normal, 30 steps, CFG 5, DifferentialDiffusion, face crop upscaled to 1024, 3 px feather"
+ },
+ "mori-flustered-d70-2": {
+  "kind": "face",
+  "who": "mori",
+  "face": "flustered",
+  "words": "flustered, embarrassed, eyebrows raised, a small awkward smile, faint sweat drop",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, Mr. Mori, a 58-year-old Japanese man, neatly combed grey hair with a side parting, an older face with wrinkles around his eyes and mouth, flustered, embarrassed, eyebrows raised, a small awkward smile, faint sweat drop, close-up of his face, plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, text, watermark, signature, 3d, realistic, photorealistic, render, nude, nsfw, child, loli, (rim light, red rim light, red outline, backlighting:1.4), chubby, fat, obese, plump, blush, glasses, angry",
+  "seed": 2,
+  "denoise": 0.7,
+  "source": "art/production/PC/npc-base-1/mori-new-713.png",
+  "crop": [
+   331,
+   85,
+   583,
+   337
+  ],
+  "oval": [
+   386,
+   145,
+   528,
+   309
+  ],
+  "model": "rdbtAnima",
+  "settings": "euler_ancestral normal, 30 steps, CFG 5, DifferentialDiffusion, face crop upscaled to 1024, 3 px feather"
+ },
+ "mori-flustered-d70-3": {
+  "kind": "face",
+  "who": "mori",
+  "face": "flustered",
+  "words": "flustered, embarrassed, eyebrows raised, a small awkward smile, faint sweat drop",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, Mr. Mori, a 58-year-old Japanese man, neatly combed grey hair with a side parting, an older face with wrinkles around his eyes and mouth, flustered, embarrassed, eyebrows raised, a small awkward smile, faint sweat drop, close-up of his face, plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, text, watermark, signature, 3d, realistic, photorealistic, render, nude, nsfw, child, loli, (rim light, red rim light, red outline, backlighting:1.4), chubby, fat, obese, plump, blush, glasses, angry",
+  "seed": 3,
+  "denoise": 0.7,
+  "source": "art/production/PC/npc-base-1/mori-new-713.png",
+  "crop": [
+   331,
+   85,
+   583,
+   337
+  ],
+  "oval": [
+   386,
+   145,
+   528,
+   309
+  ],
+  "model": "rdbtAnima",
+  "settings": "euler_ancestral normal, 30 steps, CFG 5, DifferentialDiffusion, face crop upscaled to 1024, 3 px feather"
+ },
+ "hamada-sleepy-d70-1": {
+  "kind": "face",
+  "who": "hamada",
+  "face": "sleepy",
+  "words": "sleepy, eyes half closed, drowsy, mouth slightly open",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, Mr. Hamada, a 54-year-old Japanese man, a tired middle-aged face, a receding hairline, short black hair going grey at the temples, tired eyes with dark circles, sleepy, eyes half closed, drowsy, mouth slightly open, close-up of his face, plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, text, watermark, signature, 3d, realistic, photorealistic, render, nude, nsfw, child, loli, (rim light, red rim light, red outline, backlighting:1.4), chubby, fat, obese, plump, blush, smile, frown, furrowed brow, angry",
+  "seed": 1,
+  "denoise": 0.7,
+  "source": "art/production/PC/npc-base-1/hamada-new-743.png",
+  "crop": [
+   276,
+   66,
+   632,
+   422
+  ],
+  "oval": [
+   361,
+   129,
+   543,
+   374
+  ],
+  "model": "rdbtAnima",
+  "settings": "euler_ancestral normal, 30 steps, CFG 5, DifferentialDiffusion, face crop upscaled to 1024, 3 px feather"
+ },
+ "hamada-sleepy-d70-2": {
+  "kind": "face",
+  "who": "hamada",
+  "face": "sleepy",
+  "words": "sleepy, eyes half closed, drowsy, mouth slightly open",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, Mr. Hamada, a 54-year-old Japanese man, a tired middle-aged face, a receding hairline, short black hair going grey at the temples, tired eyes with dark circles, sleepy, eyes half closed, drowsy, mouth slightly open, close-up of his face, plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, text, watermark, signature, 3d, realistic, photorealistic, render, nude, nsfw, child, loli, (rim light, red rim light, red outline, backlighting:1.4), chubby, fat, obese, plump, blush, smile, frown, furrowed brow, angry",
+  "seed": 2,
+  "denoise": 0.7,
+  "source": "art/production/PC/npc-base-1/hamada-new-743.png",
+  "crop": [
+   276,
+   66,
+   632,
+   422
+  ],
+  "oval": [
+   361,
+   129,
+   543,
+   374
+  ],
+  "model": "rdbtAnima",
+  "settings": "euler_ancestral normal, 30 steps, CFG 5, DifferentialDiffusion, face crop upscaled to 1024, 3 px feather"
+ },
+ "hamada-sleepy-d70-3": {
+  "kind": "face",
+  "who": "hamada",
+  "face": "sleepy",
+  "words": "sleepy, eyes half closed, drowsy, mouth slightly open",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, Mr. Hamada, a 54-year-old Japanese man, a tired middle-aged face, a receding hairline, short black hair going grey at the temples, tired eyes with dark circles, sleepy, eyes half closed, drowsy, mouth slightly open, close-up of his face, plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, text, watermark, signature, 3d, realistic, photorealistic, render, nude, nsfw, child, loli, (rim light, red rim light, red outline, backlighting:1.4), chubby, fat, obese, plump, blush, smile, frown, furrowed brow, angry",
+  "seed": 3,
+  "denoise": 0.7,
+  "source": "art/production/PC/npc-base-1/hamada-new-743.png",
+  "crop": [
+   276,
+   66,
+   632,
+   422
+  ],
+  "oval": [
+   361,
+   129,
+   543,
+   374
+  ],
+  "model": "rdbtAnima",
+  "settings": "euler_ancestral normal, 30 steps, CFG 5, DifferentialDiffusion, face crop upscaled to 1024, 3 px feather"
+ },
+ "hamada-panicked-d70-1": {
+  "kind": "face",
+  "who": "hamada",
+  "face": "panicked",
+  "words": "panicked, eyes wide, mouth open, sweat drops",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, Mr. Hamada, a 54-year-old Japanese man, a tired middle-aged face, a receding hairline, short black hair going grey at the temples, tired eyes with dark circles, panicked, eyes wide, mouth open, sweat drops, close-up of his face, plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, text, watermark, signature, 3d, realistic, photorealistic, render, nude, nsfw, child, loli, (rim light, red rim light, red outline, backlighting:1.4), chubby, fat, obese, plump, blush, smile",
+  "seed": 1,
+  "denoise": 0.7,
+  "source": "art/production/PC/npc-base-1/hamada-new-743.png",
+  "crop": [
+   276,
+   66,
+   632,
+   422
+  ],
+  "oval": [
+   361,
+   129,
+   543,
+   374
+  ],
+  "model": "rdbtAnima",
+  "settings": "euler_ancestral normal, 30 steps, CFG 5, DifferentialDiffusion, face crop upscaled to 1024, 3 px feather"
+ },
+ "hamada-panicked-d70-2": {
+  "kind": "face",
+  "who": "hamada",
+  "face": "panicked",
+  "words": "panicked, eyes wide, mouth open, sweat drops",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, Mr. Hamada, a 54-year-old Japanese man, a tired middle-aged face, a receding hairline, short black hair going grey at the temples, tired eyes with dark circles, panicked, eyes wide, mouth open, sweat drops, close-up of his face, plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, text, watermark, signature, 3d, realistic, photorealistic, render, nude, nsfw, child, loli, (rim light, red rim light, red outline, backlighting:1.4), chubby, fat, obese, plump, blush, smile",
+  "seed": 2,
+  "denoise": 0.7,
+  "source": "art/production/PC/npc-base-1/hamada-new-743.png",
+  "crop": [
+   276,
+   66,
+   632,
+   422
+  ],
+  "oval": [
+   361,
+   129,
+   543,
+   374
+  ],
+  "model": "rdbtAnima",
+  "settings": "euler_ancestral normal, 30 steps, CFG 5, DifferentialDiffusion, face crop upscaled to 1024, 3 px feather"
+ },
+ "hamada-panicked-d70-3": {
+  "kind": "face",
+  "who": "hamada",
+  "face": "panicked",
+  "words": "panicked, eyes wide, mouth open, sweat drops",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, Mr. Hamada, a 54-year-old Japanese man, a tired middle-aged face, a receding hairline, short black hair going grey at the temples, tired eyes with dark circles, panicked, eyes wide, mouth open, sweat drops, close-up of his face, plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, text, watermark, signature, 3d, realistic, photorealistic, render, nude, nsfw, child, loli, (rim light, red rim light, red outline, backlighting:1.4), chubby, fat, obese, plump, blush, smile",
+  "seed": 3,
+  "denoise": 0.7,
+  "source": "art/production/PC/npc-base-1/hamada-new-743.png",
+  "crop": [
+   276,
+   66,
+   632,
+   422
+  ],
+  "oval": [
+   361,
+   129,
+   543,
+   374
+  ],
+  "model": "rdbtAnima",
+  "settings": "euler_ancestral normal, 30 steps, CFG 5, DifferentialDiffusion, face crop upscaled to 1024, 3 px feather"
+ },
+ "fix-aoi-patch-d90-1": {
+  "kind": "fix",
+  "who": "aoi",
+  "source": "art/production/PC/style-align-1/aoi-base-2001.png",
+  "box": [
+   512,
+   776,
+   646,
+   916
+  ],
+  "crop": [
+   459,
+   726,
+   699,
+   966
+  ],
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1girl, dark green varsity jacket, a small pink star patch on the chest",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, text, watermark, signature, 3d, realistic, photorealistic, render, nude, nsfw, child, loli, (rim light, red rim light, red outline, backlighting:1.4), text, letters, words, numbers, logo text, writing, english text, alphabet",
+  "seed": 1,
+  "denoise": 0.9,
+  "model": "rdbtAnima",
+  "settings": "euler_ancestral normal, 30 steps, CFG 5, DifferentialDiffusion, crop upscaled to 1024"
+ },
+ "fix-aoi-patch-d90-2": {
+  "kind": "fix",
+  "who": "aoi",
+  "source": "art/production/PC/style-align-1/aoi-base-2001.png",
+  "box": [
+   512,
+   776,
+   646,
+   916
+  ],
+  "crop": [
+   459,
+   726,
+   699,
+   966
+  ],
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1girl, dark green varsity jacket, a small pink star patch on the chest",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, text, watermark, signature, 3d, realistic, photorealistic, render, nude, nsfw, child, loli, (rim light, red rim light, red outline, backlighting:1.4), text, letters, words, numbers, logo text, writing, english text, alphabet",
+  "seed": 2,
+  "denoise": 0.9,
+  "model": "rdbtAnima",
+  "settings": "euler_ancestral normal, 30 steps, CFG 5, DifferentialDiffusion, crop upscaled to 1024"
+ },
+ "fix-aoi-patch-d90-3": {
+  "kind": "fix",
+  "who": "aoi",
+  "source": "art/production/PC/style-align-1/aoi-base-2001.png",
+  "box": [
+   512,
+   776,
+   646,
+   916
+  ],
+  "crop": [
+   459,
+   726,
+   699,
+   966
+  ],
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1girl, dark green varsity jacket, a small pink star patch on the chest",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, text, watermark, signature, 3d, realistic, photorealistic, render, nude, nsfw, child, loli, (rim light, red rim light, red outline, backlighting:1.4), text, letters, words, numbers, logo text, writing, english text, alphabet",
+  "seed": 3,
+  "denoise": 0.9,
+  "model": "rdbtAnima",
+  "settings": "euler_ancestral normal, 30 steps, CFG 5, DifferentialDiffusion, crop upscaled to 1024"
+ },
+ "kenji-grin-nb-d80-1": {
+  "kind": "face",
+  "who": "kenji",
+  "face": "grin-nb",
+  "words": "big happy grin showing his teeth, bright eyes, looking at the viewer",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, adult, Kenji, a 21-year-old young adult man with a youthful face, round chubby face, thick eyebrows, messy black bedhead hair, high contrast, deep black shadows, big happy grin showing his teeth, bright eyes, looking at the viewer, close-up of his face, plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, text, watermark, signature, 3d, realistic, photorealistic, render, nude, nsfw, child, loli, (rim light, red rim light, red outline, backlighting:1.4), mature male, old man, middle-aged, stubble, facial hair, beard, moustache, square jaw, glasses, muscular, frown, furrowed brow, angry, closed eyes, blush",
+  "seed": 1,
+  "denoise": 0.8,
+  "source": "art/production/PC/style-align-1/kenji-ink-2001.png",
+  "crop": [
+   290,
+   215,
+   610,
+   535
+  ],
+  "oval": [
+   350,
+   277,
+   550,
+   492
+  ],
+  "model": "rdbtAnima",
+  "settings": "euler_ancestral normal, 30 steps, CFG 5, DifferentialDiffusion, face crop upscaled to 1024, 3 px feather"
+ },
+ "kenji-grin-nb-d80-2": {
+  "kind": "face",
+  "who": "kenji",
+  "face": "grin-nb",
+  "words": "big happy grin showing his teeth, bright eyes, looking at the viewer",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, adult, Kenji, a 21-year-old young adult man with a youthful face, round chubby face, thick eyebrows, messy black bedhead hair, high contrast, deep black shadows, big happy grin showing his teeth, bright eyes, looking at the viewer, close-up of his face, plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, text, watermark, signature, 3d, realistic, photorealistic, render, nude, nsfw, child, loli, (rim light, red rim light, red outline, backlighting:1.4), mature male, old man, middle-aged, stubble, facial hair, beard, moustache, square jaw, glasses, muscular, frown, furrowed brow, angry, closed eyes, blush",
+  "seed": 2,
+  "denoise": 0.8,
+  "source": "art/production/PC/style-align-1/kenji-ink-2001.png",
+  "crop": [
+   290,
+   215,
+   610,
+   535
+  ],
+  "oval": [
+   350,
+   277,
+   550,
+   492
+  ],
+  "model": "rdbtAnima",
+  "settings": "euler_ancestral normal, 30 steps, CFG 5, DifferentialDiffusion, face crop upscaled to 1024, 3 px feather"
+ },
+ "kenji-grin-nb-d80-3": {
+  "kind": "face",
+  "who": "kenji",
+  "face": "grin-nb",
+  "words": "big happy grin showing his teeth, bright eyes, looking at the viewer",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, adult, Kenji, a 21-year-old young adult man with a youthful face, round chubby face, thick eyebrows, messy black bedhead hair, high contrast, deep black shadows, big happy grin showing his teeth, bright eyes, looking at the viewer, close-up of his face, plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, text, watermark, signature, 3d, realistic, photorealistic, render, nude, nsfw, child, loli, (rim light, red rim light, red outline, backlighting:1.4), mature male, old man, middle-aged, stubble, facial hair, beard, moustache, square jaw, glasses, muscular, frown, furrowed brow, angry, closed eyes, blush",
+  "seed": 3,
+  "denoise": 0.8,
+  "source": "art/production/PC/style-align-1/kenji-ink-2001.png",
+  "crop": [
+   290,
+   215,
+   610,
+   535
+  ],
+  "oval": [
+   350,
+   277,
+   550,
+   492
+  ],
+  "model": "rdbtAnima",
+  "settings": "euler_ancestral normal, 30 steps, CFG 5, DifferentialDiffusion, face crop upscaled to 1024, 3 px feather"
+ },
+ "kenji-sheepish-nb-d80-1": {
+  "kind": "face",
+  "who": "kenji",
+  "face": "sheepish-nb",
+  "words": "sheepish nervous smile, (worried eyebrows:1.3), sweatdrop, looking at the viewer",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, adult, Kenji, a 21-year-old young adult man with a youthful face, round chubby face, thick eyebrows, messy black bedhead hair, high contrast, deep black shadows, sheepish nervous smile, (worried eyebrows:1.3), sweatdrop, looking at the viewer, close-up of his face, plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, text, watermark, signature, 3d, realistic, photorealistic, render, nude, nsfw, child, loli, (rim light, red rim light, red outline, backlighting:1.4), mature male, old man, middle-aged, stubble, facial hair, beard, moustache, square jaw, glasses, muscular, frown, furrowed brow, angry, crying, tears, blush",
+  "seed": 1,
+  "denoise": 0.8,
+  "source": "art/production/PC/style-align-1/kenji-ink-2001.png",
+  "crop": [
+   290,
+   215,
+   610,
+   535
+  ],
+  "oval": [
+   350,
+   277,
+   550,
+   492
+  ],
+  "model": "rdbtAnima",
+  "settings": "euler_ancestral normal, 30 steps, CFG 5, DifferentialDiffusion, face crop upscaled to 1024, 3 px feather"
+ },
+ "kenji-sheepish-nb-d80-2": {
+  "kind": "face",
+  "who": "kenji",
+  "face": "sheepish-nb",
+  "words": "sheepish nervous smile, (worried eyebrows:1.3), sweatdrop, looking at the viewer",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, adult, Kenji, a 21-year-old young adult man with a youthful face, round chubby face, thick eyebrows, messy black bedhead hair, high contrast, deep black shadows, sheepish nervous smile, (worried eyebrows:1.3), sweatdrop, looking at the viewer, close-up of his face, plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, text, watermark, signature, 3d, realistic, photorealistic, render, nude, nsfw, child, loli, (rim light, red rim light, red outline, backlighting:1.4), mature male, old man, middle-aged, stubble, facial hair, beard, moustache, square jaw, glasses, muscular, frown, furrowed brow, angry, crying, tears, blush",
+  "seed": 2,
+  "denoise": 0.8,
+  "source": "art/production/PC/style-align-1/kenji-ink-2001.png",
+  "crop": [
+   290,
+   215,
+   610,
+   535
+  ],
+  "oval": [
+   350,
+   277,
+   550,
+   492
+  ],
+  "model": "rdbtAnima",
+  "settings": "euler_ancestral normal, 30 steps, CFG 5, DifferentialDiffusion, face crop upscaled to 1024, 3 px feather"
+ },
+ "kenji-sheepish-nb-d80-3": {
+  "kind": "face",
+  "who": "kenji",
+  "face": "sheepish-nb",
+  "words": "sheepish nervous smile, (worried eyebrows:1.3), sweatdrop, looking at the viewer",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, adult, Kenji, a 21-year-old young adult man with a youthful face, round chubby face, thick eyebrows, messy black bedhead hair, high contrast, deep black shadows, sheepish nervous smile, (worried eyebrows:1.3), sweatdrop, looking at the viewer, close-up of his face, plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, text, watermark, signature, 3d, realistic, photorealistic, render, nude, nsfw, child, loli, (rim light, red rim light, red outline, backlighting:1.4), mature male, old man, middle-aged, stubble, facial hair, beard, moustache, square jaw, glasses, muscular, frown, furrowed brow, angry, crying, tears, blush",
+  "seed": 3,
+  "denoise": 0.8,
+  "source": "art/production/PC/style-align-1/kenji-ink-2001.png",
+  "crop": [
+   290,
+   215,
+   610,
+   535
+  ],
+  "oval": [
+   350,
+   277,
+   550,
+   492
+  ],
+  "model": "rdbtAnima",
+  "settings": "euler_ancestral normal, 30 steps, CFG 5, DifferentialDiffusion, face crop upscaled to 1024, 3 px feather"
+ }
+}

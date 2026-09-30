@@ -1,0 +1,416 @@
+{
+ "title": "The new cast portraits in the game, with their faces",
+ "date": "2026-09-30",
+ "by": "claude-agent:portrait-install",
+ "status": "open",
+ "question": "These are now in the game: keep each face, or name another attempt (or say what is off)?",
+ "multi": true,
+ "media": [
+  {
+   "image": "art/candidates/portraits/cast-faces-1/lineup.webp",
+   "caption": "Your picks from style-align-1 and npc-base-1 are installed: Eric eric-ink-2001, Kenji kenji-ink-2001, Emi emi-base-2001, Aoi aoi-base-2001, the guard guard-ink-2001, Mori mori-new-713, Hamada hamada-new-743. Mio is untouched. Each person keeps the faces the game had (Eric surprised and tired, Kenji grin and sheepish, the guard stern and amused, Mori smile and flustered, Hamada sleepy and panicked; Emi and Aoi only neutral). The faces are face-only repaints of the picked base, the way Kenji's were made; I picked one per face and put it in the game so the build is complete, every attempt is below.\nThings to know: Kenji's first pass made his cheeks and nose redder than his base, so pass 2 put blush in the negative (the picks are from pass 2). The guard's neutral already looks stern, so his stern face is only a little harder. The Eric pick had no head shadow I could find on the background at full size or with the contrast raised; the cut-out has no background left. Aoi's base has a pale cream edge along her left side (image right), hair and jacket, that shows on the dark game background; I left it, say if it should go. Emi's red-rim number (14.9%) is her auburn hair edge, not a rim light. Aoi is now 597x768 like the others.\nThe new cast in the game, placed the way the game places them (same face height, chins on one line), Mio and Kuro kept at the ends."
+  },
+  {
+   "image": "art/candidates/portraits/cast-faces-1/faces-installed.webp",
+   "caption": "Every face each person has in the game now. Each set is one base; only the face is repainted, everything else is pixel-identical."
+  },
+  {
+   "image": "art/candidates/portraits/cast-faces-1/fix-sheet.webp",
+   "caption": "The small fixes, before and every attempt. Guard: name plate \"BVIER\", shoulder patch \"SOLICY\", collar pin \"G2\" repainted without letters (used: plate 2, patch 2, collar 1, all denoise 0.75). Aoi: the \"IN\" chest patch; at 0.75 the letters stayed on all three seeds, at 0.9 seed 2 gave a pink star (used); seed 1 drew a girl's portrait into the patch."
+  },
+  {
+   "image": "art/candidates/portraits/cast-faces-1/faces-eric.webp",
+   "caption": "Eric: the face of every attempt in order, the base first."
+  },
+  {
+   "image": "art/candidates/portraits/cast-faces-1/attempts-eric.webp",
+   "caption": "Eric: every attempt framed for the game on its dark colour."
+  },
+  {
+   "image": "art/candidates/portraits/cast-faces-1/faces-kenji.webp",
+   "caption": "Kenji: the face of every attempt in order, the base first."
+  },
+  {
+   "image": "art/candidates/portraits/cast-faces-1/attempts-kenji.webp",
+   "caption": "Kenji: every attempt framed for the game on its dark colour."
+  },
+  {
+   "image": "art/candidates/portraits/cast-faces-1/faces-guard.webp",
+   "caption": "Ishibashi (guard): the face of every attempt in order, the base first."
+  },
+  {
+   "image": "art/candidates/portraits/cast-faces-1/attempts-guard.webp",
+   "caption": "Ishibashi (guard): every attempt framed for the game on its dark colour."
+  },
+  {
+   "image": "art/candidates/portraits/cast-faces-1/faces-mori.webp",
+   "caption": "Mr. Mori: the face of every attempt in order, the base first."
+  },
+  {
+   "image": "art/candidates/portraits/cast-faces-1/attempts-mori.webp",
+   "caption": "Mr. Mori: every attempt framed for the game on its dark colour."
+  },
+  {
+   "image": "art/candidates/portraits/cast-faces-1/faces-hamada.webp",
+   "caption": "Mr. Hamada: the face of every attempt in order, the base first."
+  },
+  {
+   "image": "art/candidates/portraits/cast-faces-1/attempts-hamada.webp",
+   "caption": "Mr. Hamada: every attempt framed for the game on its dark colour."
+  }
+ ],
+ "options": [
+  {
+   "id": "eric-neutral",
+   "label": "Eric · neutral (eric-ink-2001)",
+   "image": "art/candidates/portraits/cast-faces-1/eric-neutral.webp",
+   "note": "Your pick eric-ink-2001, cut out and framed for the game. In the game now as eric-neutral. imgqa: red rim 0.0% (pass), drift from the installed neutral ccip 0.000 (pass), matte frame 0.00."
+  },
+  {
+   "id": "eric-surprised-d70-1",
+   "label": "Eric · eric-surprised-d70-1",
+   "image": "art/candidates/portraits/cast-faces-1/eric-eric-surprised-d70-1.webp",
+   "note": "Surprised: face-only repaint of eric-ink-2001. Seed 1, denoise 0.7, rdbtAnima, euler_ancestral normal, 30 steps, CFG 5, DifferentialDiffusion, face crop upscaled to 1024, 3 px feather. imgqa: red rim 0.0% (pass), drift from the installed neutral ccip 0.005 (pass), matte frame 0.00. Prompt: masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, male focus, a Scandinavian man in his early thirties, fair pale skin, blue eyes, (facial hair, dark-blond stubble:1.3), (silver rectangular glasses:1.2), high contrast, deep black shadows, surprised, eyes wide open, eyebrows raised, mouth slightly open, close-up of his face, plain light grey background, soft even studio light | Negative: worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, text, watermark, signature, 3d, realistic, photorealistic, render, nude, nsfw, child, loli, (rim light, red rim light, red outline, backlighting:1.4), chubby, fat, obese, plump, blush, closed eyes, smile, frown, furrowed brow, angry"
+  },
+  {
+   "id": "eric-surprised-d70-2",
+   "label": "Eric · eric-surprised-d70-2",
+   "image": "art/candidates/portraits/cast-faces-1/eric-eric-surprised-d70-2.webp",
+   "note": "Surprised: face-only repaint of eric-ink-2001. Seed 2, denoise 0.7, rdbtAnima, euler_ancestral normal, 30 steps, CFG 5, DifferentialDiffusion, face crop upscaled to 1024, 3 px feather. imgqa: red rim 0.0% (pass), drift from the installed neutral ccip 0.004 (pass), matte frame 0.00. Prompt: masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, male focus, a Scandinavian man in his early thirties, fair pale skin, blue eyes, (facial hair, dark-blond stubble:1.3), (silver rectangular glasses:1.2), high contrast, deep black shadows, surprised, eyes wide open, eyebrows raised, mouth slightly open, close-up of his face, plain light grey background, soft even studio light | Negative: worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, text, watermark, signature, 3d, realistic, photorealistic, render, nude, nsfw, child, loli, (rim light, red rim light, red outline, backlighting:1.4), chubby, fat, obese, plump, blush, closed eyes, smile, frown, furrowed brow, angry"
+  },
+  {
+   "id": "eric-surprised-d70-3",
+   "label": "Eric · eric-surprised-d70-3",
+   "image": "art/candidates/portraits/cast-faces-1/eric-eric-surprised-d70-3.webp",
+   "note": "Surprised: face-only repaint of eric-ink-2001. In the game now as eric-surprised (my pick). Seed 3, denoise 0.7, rdbtAnima, euler_ancestral normal, 30 steps, CFG 5, DifferentialDiffusion, face crop upscaled to 1024, 3 px feather. imgqa: red rim 0.0% (pass), drift from the installed neutral ccip 0.003 (pass), matte frame 0.00. Prompt: masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, male focus, a Scandinavian man in his early thirties, fair pale skin, blue eyes, (facial hair, dark-blond stubble:1.3), (silver rectangular glasses:1.2), high contrast, deep black shadows, surprised, eyes wide open, eyebrows raised, mouth slightly open, close-up of his face, plain light grey background, soft even studio light | Negative: worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, text, watermark, signature, 3d, realistic, photorealistic, render, nude, nsfw, child, loli, (rim light, red rim light, red outline, backlighting:1.4), chubby, fat, obese, plump, blush, closed eyes, smile, frown, furrowed brow, angry"
+  },
+  {
+   "id": "eric-tired-d65-1",
+   "label": "Eric · eric-tired-d65-1",
+   "image": "art/candidates/portraits/cast-faces-1/eric-eric-tired-d65-1.webp",
+   "note": "Tired: face-only repaint of eric-ink-2001. Seed 1, denoise 0.65, rdbtAnima, euler_ancestral normal, 30 steps, CFG 5, DifferentialDiffusion, face crop upscaled to 1024, 3 px feather. imgqa: red rim 0.0% (pass), drift from the installed neutral ccip 0.004 (pass), matte frame 0.00. Prompt: masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, male focus, a Scandinavian man in his early thirties, fair pale skin, blue eyes, (facial hair, dark-blond stubble:1.3), (silver rectangular glasses:1.2), high contrast, deep black shadows, tired, weary, heavy-lidded eyes, mouth closed, no smile, close-up of his face, plain light grey background, soft even studio light | Negative: worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, text, watermark, signature, 3d, realistic, photorealistic, render, nude, nsfw, child, loli, (rim light, red rim light, red outline, backlighting:1.4), chubby, fat, obese, plump, blush, smile, grin, flushed cheeks, frown, furrowed brow, angry"
+  },
+  {
+   "id": "eric-tired-d65-2",
+   "label": "Eric · eric-tired-d65-2",
+   "image": "art/candidates/portraits/cast-faces-1/eric-eric-tired-d65-2.webp",
+   "note": "Tired: face-only repaint of eric-ink-2001. In the game now as eric-tired (my pick). Seed 2, denoise 0.65, rdbtAnima, euler_ancestral normal, 30 steps, CFG 5, DifferentialDiffusion, face crop upscaled to 1024, 3 px feather. imgqa: red rim 0.0% (pass), drift from the installed neutral ccip 0.005 (pass), matte frame 0.00. Prompt: masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, male focus, a Scandinavian man in his early thirties, fair pale skin, blue eyes, (facial hair, dark-blond stubble:1.3), (silver rectangular glasses:1.2), high contrast, deep black shadows, tired, weary, heavy-lidded eyes, mouth closed, no smile, close-up of his face, plain light grey background, soft even studio light | Negative: worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, text, watermark, signature, 3d, realistic, photorealistic, render, nude, nsfw, child, loli, (rim light, red rim light, red outline, backlighting:1.4), chubby, fat, obese, plump, blush, smile, grin, flushed cheeks, frown, furrowed brow, angry"
+  },
+  {
+   "id": "eric-tired-d65-3",
+   "label": "Eric · eric-tired-d65-3",
+   "image": "art/candidates/portraits/cast-faces-1/eric-eric-tired-d65-3.webp",
+   "note": "Tired: face-only repaint of eric-ink-2001. Seed 3, denoise 0.65, rdbtAnima, euler_ancestral normal, 30 steps, CFG 5, DifferentialDiffusion, face crop upscaled to 1024, 3 px feather. imgqa: red rim 0.0% (pass), drift from the installed neutral ccip 0.002 (pass), matte frame 0.00. Prompt: masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, male focus, a Scandinavian man in his early thirties, fair pale skin, blue eyes, (facial hair, dark-blond stubble:1.3), (silver rectangular glasses:1.2), high contrast, deep black shadows, tired, weary, heavy-lidded eyes, mouth closed, no smile, close-up of his face, plain light grey background, soft even studio light | Negative: worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, text, watermark, signature, 3d, realistic, photorealistic, render, nude, nsfw, child, loli, (rim light, red rim light, red outline, backlighting:1.4), chubby, fat, obese, plump, blush, smile, grin, flushed cheeks, frown, furrowed brow, angry"
+  },
+  {
+   "id": "kenji-neutral",
+   "label": "Kenji · neutral (kenji-ink-2001)",
+   "image": "art/candidates/portraits/cast-faces-1/kenji-neutral.webp",
+   "note": "Your pick kenji-ink-2001, cut out and framed for the game. In the game now as kenji-neutral. imgqa: red rim 6.3% (warn), drift from the installed neutral ccip 0.000 (pass)."
+  },
+  {
+   "id": "kenji-grin-d80-1",
+   "label": "Kenji · kenji-grin-d80-1",
+   "image": "art/candidates/portraits/cast-faces-1/kenji-kenji-grin-d80-1.webp",
+   "note": "Grin: face-only repaint of kenji-ink-2001. Seed 1, denoise 0.8, rdbtAnima, euler_ancestral normal, 30 steps, CFG 5, DifferentialDiffusion, face crop upscaled to 1024, 3 px feather. imgqa: red rim 6.3% (warn), drift from the installed neutral ccip 0.011 (pass). Prompt: masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, adult, Kenji, a 21-year-old young adult man with a youthful face, round chubby face, thick eyebrows, messy black bedhead hair, high contrast, deep black shadows, big happy grin showing his teeth, bright eyes, looking at the viewer, close-up of his face, plain light grey background, soft even studio light | Negative: worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, text, watermark, signature, 3d, realistic, photorealistic, render, nude, nsfw, child, loli, (rim light, red rim light, red outline, backlighting:1.4), mature male, old man, middle-aged, stubble, facial hair, beard, moustache, square jaw, glasses, muscular, frown, furrowed brow, angry, closed eyes"
+  },
+  {
+   "id": "kenji-grin-d80-2",
+   "label": "Kenji · kenji-grin-d80-2",
+   "image": "art/candidates/portraits/cast-faces-1/kenji-kenji-grin-d80-2.webp",
+   "note": "Grin: face-only repaint of kenji-ink-2001. Seed 2, denoise 0.8, rdbtAnima, euler_ancestral normal, 30 steps, CFG 5, DifferentialDiffusion, face crop upscaled to 1024, 3 px feather. imgqa: red rim 6.3% (warn), drift from the installed neutral ccip 0.006 (pass). Prompt: masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, adult, Kenji, a 21-year-old young adult man with a youthful face, round chubby face, thick eyebrows, messy black bedhead hair, high contrast, deep black shadows, big happy grin showing his teeth, bright eyes, looking at the viewer, close-up of his face, plain light grey background, soft even studio light | Negative: worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, text, watermark, signature, 3d, realistic, photorealistic, render, nude, nsfw, child, loli, (rim light, red rim light, red outline, backlighting:1.4), mature male, old man, middle-aged, stubble, facial hair, beard, moustache, square jaw, glasses, muscular, frown, furrowed brow, angry, closed eyes"
+  },
+  {
+   "id": "kenji-grin-d80-3",
+   "label": "Kenji · kenji-grin-d80-3",
+   "image": "art/candidates/portraits/cast-faces-1/kenji-kenji-grin-d80-3.webp",
+   "note": "Grin: face-only repaint of kenji-ink-2001. Seed 3, denoise 0.8, rdbtAnima, euler_ancestral normal, 30 steps, CFG 5, DifferentialDiffusion, face crop upscaled to 1024, 3 px feather. imgqa: red rim 6.2% (warn), drift from the installed neutral ccip 0.008 (pass). Prompt: masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, adult, Kenji, a 21-year-old young adult man with a youthful face, round chubby face, thick eyebrows, messy black bedhead hair, high contrast, deep black shadows, big happy grin showing his teeth, bright eyes, looking at the viewer, close-up of his face, plain light grey background, soft even studio light | Negative: worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, text, watermark, signature, 3d, realistic, photorealistic, render, nude, nsfw, child, loli, (rim light, red rim light, red outline, backlighting:1.4), mature male, old man, middle-aged, stubble, facial hair, beard, moustache, square jaw, glasses, muscular, frown, furrowed brow, angry, closed eyes"
+  },
+  {
+   "id": "kenji-sheepish-d80-1",
+   "label": "Kenji · kenji-sheepish-d80-1",
+   "image": "art/candidates/portraits/cast-faces-1/kenji-kenji-sheepish-d80-1.webp",
+   "note": "Sheepish: face-only repaint of kenji-ink-2001. Seed 1, denoise 0.8, rdbtAnima, euler_ancestral normal, 30 steps, CFG 5, DifferentialDiffusion, face crop upscaled to 1024, 3 px feather. imgqa: red rim 6.4% (warn), drift from the installed neutral ccip 0.008 (pass). Prompt: masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, adult, Kenji, a 21-year-old young adult man with a youthful face, round chubby face, thick eyebrows, messy black bedhead hair, high contrast, deep black shadows, sheepish nervous smile, (worried eyebrows:1.3), sweatdrop, looking at the viewer, close-up of his face, plain light grey background, soft even studio light | Negative: worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, text, watermark, signature, 3d, realistic, photorealistic, render, nude, nsfw, child, loli, (rim light, red rim light, red outline, backlighting:1.4), mature male, old man, middle-aged, stubble, facial hair, beard, moustache, square jaw, glasses, muscular, frown, furrowed brow, angry, crying, tears"
+  },
+  {
+   "id": "kenji-sheepish-d80-2",
+   "label": "Kenji · kenji-sheepish-d80-2",
+   "image": "art/candidates/portraits/cast-faces-1/kenji-kenji-sheepish-d80-2.webp",
+   "note": "Sheepish: face-only repaint of kenji-ink-2001. Seed 2, denoise 0.8, rdbtAnima, euler_ancestral normal, 30 steps, CFG 5, DifferentialDiffusion, face crop upscaled to 1024, 3 px feather. imgqa: red rim 6.3% (warn), drift from the installed neutral ccip 0.004 (pass). Prompt: masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, adult, Kenji, a 21-year-old young adult man with a youthful face, round chubby face, thick eyebrows, messy black bedhead hair, high contrast, deep black shadows, sheepish nervous smile, (worried eyebrows:1.3), sweatdrop, looking at the viewer, close-up of his face, plain light grey background, soft even studio light | Negative: worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, text, watermark, signature, 3d, realistic, photorealistic, render, nude, nsfw, child, loli, (rim light, red rim light, red outline, backlighting:1.4), mature male, old man, middle-aged, stubble, facial hair, beard, moustache, square jaw, glasses, muscular, frown, furrowed brow, angry, crying, tears"
+  },
+  {
+   "id": "kenji-sheepish-d80-3",
+   "label": "Kenji · kenji-sheepish-d80-3",
+   "image": "art/candidates/portraits/cast-faces-1/kenji-kenji-sheepish-d80-3.webp",
+   "note": "Sheepish: face-only repaint of kenji-ink-2001. Seed 3, denoise 0.8, rdbtAnima, euler_ancestral normal, 30 steps, CFG 5, DifferentialDiffusion, face crop upscaled to 1024, 3 px feather. imgqa: red rim 6.3% (warn), drift from the installed neutral ccip 0.006 (pass). Prompt: masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, adult, Kenji, a 21-year-old young adult man with a youthful face, round chubby face, thick eyebrows, messy black bedhead hair, high contrast, deep black shadows, sheepish nervous smile, (worried eyebrows:1.3), sweatdrop, looking at the viewer, close-up of his face, plain light grey background, soft even studio light | Negative: worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, text, watermark, signature, 3d, realistic, photorealistic, render, nude, nsfw, child, loli, (rim light, red rim light, red outline, backlighting:1.4), mature male, old man, middle-aged, stubble, facial hair, beard, moustache, square jaw, glasses, muscular, frown, furrowed brow, angry, crying, tears"
+  },
+  {
+   "id": "kenji-grin-nb-d80-1",
+   "label": "Kenji · kenji-grin-nb-d80-1",
+   "image": "art/candidates/portraits/cast-faces-1/kenji-kenji-grin-nb-d80-1.webp",
+   "note": "Grin: face-only repaint of kenji-ink-2001. In the game now as kenji-grin (my pick). Seed 1, denoise 0.8, rdbtAnima, euler_ancestral normal, 30 steps, CFG 5, DifferentialDiffusion, face crop upscaled to 1024, 3 px feather. imgqa: red rim 6.4% (warn), drift from the installed neutral ccip 0.014 (pass). Prompt: masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, adult, Kenji, a 21-year-old young adult man with a youthful face, round chubby face, thick eyebrows, messy black bedhead hair, high contrast, deep black shadows, big happy grin showing his teeth, bright eyes, looking at the viewer, close-up of his face, plain light grey background, soft even studio light | Negative: worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, text, watermark, signature, 3d, realistic, photorealistic, render, nude, nsfw, child, loli, (rim light, red rim light, red outline, backlighting:1.4), mature male, old man, middle-aged, stubble, facial hair, beard, moustache, square jaw, glasses, muscular, frown, furrowed brow, angry, closed eyes, blush"
+  },
+  {
+   "id": "kenji-grin-nb-d80-2",
+   "label": "Kenji · kenji-grin-nb-d80-2",
+   "image": "art/candidates/portraits/cast-faces-1/kenji-kenji-grin-nb-d80-2.webp",
+   "note": "Grin: face-only repaint of kenji-ink-2001. Seed 2, denoise 0.8, rdbtAnima, euler_ancestral normal, 30 steps, CFG 5, DifferentialDiffusion, face crop upscaled to 1024, 3 px feather. imgqa: red rim 6.2% (warn), drift from the installed neutral ccip 0.007 (pass). Prompt: masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, adult, Kenji, a 21-year-old young adult man with a youthful face, round chubby face, thick eyebrows, messy black bedhead hair, high contrast, deep black shadows, big happy grin showing his teeth, bright eyes, looking at the viewer, close-up of his face, plain light grey background, soft even studio light | Negative: worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, text, watermark, signature, 3d, realistic, photorealistic, render, nude, nsfw, child, loli, (rim light, red rim light, red outline, backlighting:1.4), mature male, old man, middle-aged, stubble, facial hair, beard, moustache, square jaw, glasses, muscular, frown, furrowed brow, angry, closed eyes, blush"
+  },
+  {
+   "id": "kenji-grin-nb-d80-3",
+   "label": "Kenji · kenji-grin-nb-d80-3",
+   "image": "art/candidates/portraits/cast-faces-1/kenji-kenji-grin-nb-d80-3.webp",
+   "note": "Grin: face-only repaint of kenji-ink-2001. Seed 3, denoise 0.8, rdbtAnima, euler_ancestral normal, 30 steps, CFG 5, DifferentialDiffusion, face crop upscaled to 1024, 3 px feather. imgqa: red rim 6.2% (warn), drift from the installed neutral ccip 0.010 (pass). Prompt: masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, adult, Kenji, a 21-year-old young adult man with a youthful face, round chubby face, thick eyebrows, messy black bedhead hair, high contrast, deep black shadows, big happy grin showing his teeth, bright eyes, looking at the viewer, close-up of his face, plain light grey background, soft even studio light | Negative: worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, text, watermark, signature, 3d, realistic, photorealistic, render, nude, nsfw, child, loli, (rim light, red rim light, red outline, backlighting:1.4), mature male, old man, middle-aged, stubble, facial hair, beard, moustache, square jaw, glasses, muscular, frown, furrowed brow, angry, closed eyes, blush"
+  },
+  {
+   "id": "kenji-sheepish-nb-d80-1",
+   "label": "Kenji · kenji-sheepish-nb-d80-1",
+   "image": "art/candidates/portraits/cast-faces-1/kenji-kenji-sheepish-nb-d80-1.webp",
+   "note": "Sheepish: face-only repaint of kenji-ink-2001. Seed 1, denoise 0.8, rdbtAnima, euler_ancestral normal, 30 steps, CFG 5, DifferentialDiffusion, face crop upscaled to 1024, 3 px feather. imgqa: red rim 6.5% (warn), drift from the installed neutral ccip 0.012 (pass). Prompt: masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, adult, Kenji, a 21-year-old young adult man with a youthful face, round chubby face, thick eyebrows, messy black bedhead hair, high contrast, deep black shadows, sheepish nervous smile, (worried eyebrows:1.3), sweatdrop, looking at the viewer, close-up of his face, plain light grey background, soft even studio light | Negative: worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, text, watermark, signature, 3d, realistic, photorealistic, render, nude, nsfw, child, loli, (rim light, red rim light, red outline, backlighting:1.4), mature male, old man, middle-aged, stubble, facial hair, beard, moustache, square jaw, glasses, muscular, frown, furrowed brow, angry, crying, tears, blush"
+  },
+  {
+   "id": "kenji-sheepish-nb-d80-2",
+   "label": "Kenji · kenji-sheepish-nb-d80-2",
+   "image": "art/candidates/portraits/cast-faces-1/kenji-kenji-sheepish-nb-d80-2.webp",
+   "note": "Sheepish: face-only repaint of kenji-ink-2001. Seed 2, denoise 0.8, rdbtAnima, euler_ancestral normal, 30 steps, CFG 5, DifferentialDiffusion, face crop upscaled to 1024, 3 px feather. imgqa: red rim 6.3% (warn), drift from the installed neutral ccip 0.004 (pass). Prompt: masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, adult, Kenji, a 21-year-old young adult man with a youthful face, round chubby face, thick eyebrows, messy black bedhead hair, high contrast, deep black shadows, sheepish nervous smile, (worried eyebrows:1.3), sweatdrop, looking at the viewer, close-up of his face, plain light grey background, soft even studio light | Negative: worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, text, watermark, signature, 3d, realistic, photorealistic, render, nude, nsfw, child, loli, (rim light, red rim light, red outline, backlighting:1.4), mature male, old man, middle-aged, stubble, facial hair, beard, moustache, square jaw, glasses, muscular, frown, furrowed brow, angry, crying, tears, blush"
+  },
+  {
+   "id": "kenji-sheepish-nb-d80-3",
+   "label": "Kenji · kenji-sheepish-nb-d80-3",
+   "image": "art/candidates/portraits/cast-faces-1/kenji-kenji-sheepish-nb-d80-3.webp",
+   "note": "Sheepish: face-only repaint of kenji-ink-2001. In the game now as kenji-sheepish (my pick). Seed 3, denoise 0.8, rdbtAnima, euler_ancestral normal, 30 steps, CFG 5, DifferentialDiffusion, face crop upscaled to 1024, 3 px feather. imgqa: red rim 6.2% (warn), drift from the installed neutral ccip 0.006 (pass). Prompt: masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, adult, Kenji, a 21-year-old young adult man with a youthful face, round chubby face, thick eyebrows, messy black bedhead hair, high contrast, deep black shadows, sheepish nervous smile, (worried eyebrows:1.3), sweatdrop, looking at the viewer, close-up of his face, plain light grey background, soft even studio light | Negative: worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, text, watermark, signature, 3d, realistic, photorealistic, render, nude, nsfw, child, loli, (rim light, red rim light, red outline, backlighting:1.4), mature male, old man, middle-aged, stubble, facial hair, beard, moustache, square jaw, glasses, muscular, frown, furrowed brow, angry, crying, tears, blush"
+  },
+  {
+   "id": "emi-neutral",
+   "label": "Emi · neutral (emi-base-2001)",
+   "image": "art/candidates/portraits/cast-faces-1/emi-neutral.webp",
+   "note": "Your pick emi-base-2001, cut out and framed for the game. In the game now as emi-neutral. imgqa: red rim 14.9% (fail), drift from the installed neutral ccip 0.000 (pass)."
+  },
+  {
+   "id": "aoi-neutral",
+   "label": "Aoi · neutral (aoi-base-2001)",
+   "image": "art/candidates/portraits/cast-faces-1/aoi-neutral.webp",
+   "note": "Your pick aoi-base-2001, cut out and framed for the game. In the game now as aoi-neutral. imgqa: red rim 1.3% (pass), drift from the installed neutral ccip 0.000 (pass)."
+  },
+  {
+   "id": "guard-neutral",
+   "label": "Ishibashi (guard) · neutral (guard-ink-2001)",
+   "image": "art/candidates/portraits/cast-faces-1/guard-neutral.webp",
+   "note": "Your pick guard-ink-2001, cut out and framed for the game. In the game now as guard-neutral. imgqa: red rim 7.7% (warn), drift from the installed neutral ccip 0.000 (pass)."
+  },
+  {
+   "id": "guard-stern-d70-1",
+   "label": "Ishibashi (guard) · guard-stern-d70-1",
+   "image": "art/candidates/portraits/cast-faces-1/guard-guard-stern-d70-1.webp",
+   "note": "Stern: face-only repaint of guard-ink-2001. In the game now as guard-stern (my pick). Seed 1, denoise 0.7, rdbtAnima, euler_ancestral normal, 30 steps, CFG 5, DifferentialDiffusion, face crop upscaled to 1024, 3 px feather. imgqa: red rim 7.6% (warn), drift from the installed neutral ccip 0.026 (pass). Prompt: masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, Ishibashi, a 64-year-old man, completely bald head, bushy white eyebrows, a thin white moustache, thin silver glasses with clear lenses, high contrast, deep black shadows, stern, frowning, mouth a firm line, close-up of his face, plain light grey background, soft even studio light | Negative: worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, text, watermark, signature, 3d, realistic, photorealistic, render, nude, nsfw, child, loli, (rim light, red rim light, red outline, backlighting:1.4), chubby, fat, obese, plump, blush, smile"
+  },
+  {
+   "id": "guard-stern-d70-2",
+   "label": "Ishibashi (guard) · guard-stern-d70-2",
+   "image": "art/candidates/portraits/cast-faces-1/guard-guard-stern-d70-2.webp",
+   "note": "Stern: face-only repaint of guard-ink-2001. Seed 2, denoise 0.7, rdbtAnima, euler_ancestral normal, 30 steps, CFG 5, DifferentialDiffusion, face crop upscaled to 1024, 3 px feather. imgqa: red rim 7.7% (warn), drift from the installed neutral ccip 0.022 (pass). Prompt: masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, Ishibashi, a 64-year-old man, completely bald head, bushy white eyebrows, a thin white moustache, thin silver glasses with clear lenses, high contrast, deep black shadows, stern, frowning, mouth a firm line, close-up of his face, plain light grey background, soft even studio light | Negative: worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, text, watermark, signature, 3d, realistic, photorealistic, render, nude, nsfw, child, loli, (rim light, red rim light, red outline, backlighting:1.4), chubby, fat, obese, plump, blush, smile"
+  },
+  {
+   "id": "guard-stern-d70-3",
+   "label": "Ishibashi (guard) · guard-stern-d70-3",
+   "image": "art/candidates/portraits/cast-faces-1/guard-guard-stern-d70-3.webp",
+   "note": "Stern: face-only repaint of guard-ink-2001. Seed 3, denoise 0.7, rdbtAnima, euler_ancestral normal, 30 steps, CFG 5, DifferentialDiffusion, face crop upscaled to 1024, 3 px feather. imgqa: red rim 7.6% (warn), drift from the installed neutral ccip 0.038 (pass). Prompt: masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, Ishibashi, a 64-year-old man, completely bald head, bushy white eyebrows, a thin white moustache, thin silver glasses with clear lenses, high contrast, deep black shadows, stern, frowning, mouth a firm line, close-up of his face, plain light grey background, soft even studio light | Negative: worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, text, watermark, signature, 3d, realistic, photorealistic, render, nude, nsfw, child, loli, (rim light, red rim light, red outline, backlighting:1.4), chubby, fat, obese, plump, blush, smile"
+  },
+  {
+   "id": "guard-amused-d70-1",
+   "label": "Ishibashi (guard) · guard-amused-d70-1",
+   "image": "art/candidates/portraits/cast-faces-1/guard-guard-amused-d70-1.webp",
+   "note": "Amused: face-only repaint of guard-ink-2001. In the game now as guard-amused (my pick). Seed 1, denoise 0.7, rdbtAnima, euler_ancestral normal, 30 steps, CFG 5, DifferentialDiffusion, face crop upscaled to 1024, 3 px feather. imgqa: red rim 7.9% (warn), drift from the installed neutral ccip 0.057 (warn). Prompt: masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, Ishibashi, a 64-year-old man, completely bald head, bushy white eyebrows, a thin white moustache, thin silver glasses with clear lenses, high contrast, deep black shadows, amused, a small dry smile under the moustache, eyes softened, close-up of his face, plain light grey background, soft even studio light | Negative: worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, text, watermark, signature, 3d, realistic, photorealistic, render, nude, nsfw, child, loli, (rim light, red rim light, red outline, backlighting:1.4), chubby, fat, obese, plump, blush, frown, furrowed brow, angry"
+  },
+  {
+   "id": "guard-amused-d70-2",
+   "label": "Ishibashi (guard) · guard-amused-d70-2",
+   "image": "art/candidates/portraits/cast-faces-1/guard-guard-amused-d70-2.webp",
+   "note": "Amused: face-only repaint of guard-ink-2001. Seed 2, denoise 0.7, rdbtAnima, euler_ancestral normal, 30 steps, CFG 5, DifferentialDiffusion, face crop upscaled to 1024, 3 px feather. imgqa: red rim 7.6% (warn), drift from the installed neutral ccip 0.042 (pass). Prompt: masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, Ishibashi, a 64-year-old man, completely bald head, bushy white eyebrows, a thin white moustache, thin silver glasses with clear lenses, high contrast, deep black shadows, amused, a small dry smile under the moustache, eyes softened, close-up of his face, plain light grey background, soft even studio light | Negative: worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, text, watermark, signature, 3d, realistic, photorealistic, render, nude, nsfw, child, loli, (rim light, red rim light, red outline, backlighting:1.4), chubby, fat, obese, plump, blush, frown, furrowed brow, angry"
+  },
+  {
+   "id": "guard-amused-d70-3",
+   "label": "Ishibashi (guard) · guard-amused-d70-3",
+   "image": "art/candidates/portraits/cast-faces-1/guard-guard-amused-d70-3.webp",
+   "note": "Amused: face-only repaint of guard-ink-2001. Seed 3, denoise 0.7, rdbtAnima, euler_ancestral normal, 30 steps, CFG 5, DifferentialDiffusion, face crop upscaled to 1024, 3 px feather. imgqa: red rim 7.6% (warn), drift from the installed neutral ccip 0.046 (pass). Prompt: masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, Ishibashi, a 64-year-old man, completely bald head, bushy white eyebrows, a thin white moustache, thin silver glasses with clear lenses, high contrast, deep black shadows, amused, a small dry smile under the moustache, eyes softened, close-up of his face, plain light grey background, soft even studio light | Negative: worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, text, watermark, signature, 3d, realistic, photorealistic, render, nude, nsfw, child, loli, (rim light, red rim light, red outline, backlighting:1.4), chubby, fat, obese, plump, blush, frown, furrowed brow, angry"
+  },
+  {
+   "id": "mori-neutral",
+   "label": "Mr. Mori · neutral (mori-new-713)",
+   "image": "art/candidates/portraits/cast-faces-1/mori-neutral.webp",
+   "note": "Your pick mori-new-713, cut out and framed for the game. In the game now as mori-neutral. imgqa: red rim 0.5% (pass), drift from the installed neutral ccip 0.000 (pass)."
+  },
+  {
+   "id": "mori-smile-d70-1",
+   "label": "Mr. Mori · mori-smile-d70-1",
+   "image": "art/candidates/portraits/cast-faces-1/mori-mori-smile-d70-1.webp",
+   "note": "Smile: face-only repaint of mori-new-713. Seed 1, denoise 0.7, rdbtAnima, euler_ancestral normal, 30 steps, CFG 5, DifferentialDiffusion, face crop upscaled to 1024, 3 px feather. imgqa: red rim 0.5% (pass), drift from the installed neutral ccip 0.011 (pass). Prompt: masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, Mr. Mori, a 58-year-old Japanese man, neatly combed grey hair with a side parting, an older face with wrinkles around his eyes and mouth, warm polite smile, eyes creased, close-up of his face, plain light grey background, soft even studio light | Negative: worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, text, watermark, signature, 3d, realistic, photorealistic, render, nude, nsfw, child, loli, (rim light, red rim light, red outline, backlighting:1.4), chubby, fat, obese, plump, blush, glasses, frown, furrowed brow, angry"
+  },
+  {
+   "id": "mori-smile-d70-2",
+   "label": "Mr. Mori · mori-smile-d70-2",
+   "image": "art/candidates/portraits/cast-faces-1/mori-mori-smile-d70-2.webp",
+   "note": "Smile: face-only repaint of mori-new-713. Seed 2, denoise 0.7, rdbtAnima, euler_ancestral normal, 30 steps, CFG 5, DifferentialDiffusion, face crop upscaled to 1024, 3 px feather. imgqa: red rim 0.5% (pass), drift from the installed neutral ccip 0.007 (pass). Prompt: masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, Mr. Mori, a 58-year-old Japanese man, neatly combed grey hair with a side parting, an older face with wrinkles around his eyes and mouth, warm polite smile, eyes creased, close-up of his face, plain light grey background, soft even studio light | Negative: worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, text, watermark, signature, 3d, realistic, photorealistic, render, nude, nsfw, child, loli, (rim light, red rim light, red outline, backlighting:1.4), chubby, fat, obese, plump, blush, glasses, frown, furrowed brow, angry"
+  },
+  {
+   "id": "mori-smile-d70-3",
+   "label": "Mr. Mori · mori-smile-d70-3",
+   "image": "art/candidates/portraits/cast-faces-1/mori-mori-smile-d70-3.webp",
+   "note": "Smile: face-only repaint of mori-new-713. In the game now as mori-smile (my pick). Seed 3, denoise 0.7, rdbtAnima, euler_ancestral normal, 30 steps, CFG 5, DifferentialDiffusion, face crop upscaled to 1024, 3 px feather. imgqa: red rim 0.5% (pass), drift from the installed neutral ccip 0.009 (pass). Prompt: masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, Mr. Mori, a 58-year-old Japanese man, neatly combed grey hair with a side parting, an older face with wrinkles around his eyes and mouth, warm polite smile, eyes creased, close-up of his face, plain light grey background, soft even studio light | Negative: worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, text, watermark, signature, 3d, realistic, photorealistic, render, nude, nsfw, child, loli, (rim light, red rim light, red outline, backlighting:1.4), chubby, fat, obese, plump, blush, glasses, frown, furrowed brow, angry"
+  },
+  {
+   "id": "mori-flustered-d70-1",
+   "label": "Mr. Mori · mori-flustered-d70-1",
+   "image": "art/candidates/portraits/cast-faces-1/mori-mori-flustered-d70-1.webp",
+   "note": "Flustered: face-only repaint of mori-new-713. Seed 1, denoise 0.7, rdbtAnima, euler_ancestral normal, 30 steps, CFG 5, DifferentialDiffusion, face crop upscaled to 1024, 3 px feather. imgqa: red rim 0.6% (pass), drift from the installed neutral ccip 0.005 (pass). Prompt: masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, Mr. Mori, a 58-year-old Japanese man, neatly combed grey hair with a side parting, an older face with wrinkles around his eyes and mouth, flustered, embarrassed, eyebrows raised, a small awkward smile, faint sweat drop, close-up of his face, plain light grey background, soft even studio light | Negative: worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, text, watermark, signature, 3d, realistic, photorealistic, render, nude, nsfw, child, loli, (rim light, red rim light, red outline, backlighting:1.4), chubby, fat, obese, plump, blush, glasses, angry"
+  },
+  {
+   "id": "mori-flustered-d70-2",
+   "label": "Mr. Mori · mori-flustered-d70-2",
+   "image": "art/candidates/portraits/cast-faces-1/mori-mori-flustered-d70-2.webp",
+   "note": "Flustered: face-only repaint of mori-new-713. Seed 2, denoise 0.7, rdbtAnima, euler_ancestral normal, 30 steps, CFG 5, DifferentialDiffusion, face crop upscaled to 1024, 3 px feather. imgqa: red rim 0.5% (pass), drift from the installed neutral ccip 0.010 (pass). Prompt: masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, Mr. Mori, a 58-year-old Japanese man, neatly combed grey hair with a side parting, an older face with wrinkles around his eyes and mouth, flustered, embarrassed, eyebrows raised, a small awkward smile, faint sweat drop, close-up of his face, plain light grey background, soft even studio light | Negative: worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, text, watermark, signature, 3d, realistic, photorealistic, render, nude, nsfw, child, loli, (rim light, red rim light, red outline, backlighting:1.4), chubby, fat, obese, plump, blush, glasses, angry"
+  },
+  {
+   "id": "mori-flustered-d70-3",
+   "label": "Mr. Mori · mori-flustered-d70-3",
+   "image": "art/candidates/portraits/cast-faces-1/mori-mori-flustered-d70-3.webp",
+   "note": "Flustered: face-only repaint of mori-new-713. In the game now as mori-flustered (my pick). Seed 3, denoise 0.7, rdbtAnima, euler_ancestral normal, 30 steps, CFG 5, DifferentialDiffusion, face crop upscaled to 1024, 3 px feather. imgqa: red rim 0.5% (pass), drift from the installed neutral ccip 0.009 (pass). Prompt: masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, Mr. Mori, a 58-year-old Japanese man, neatly combed grey hair with a side parting, an older face with wrinkles around his eyes and mouth, flustered, embarrassed, eyebrows raised, a small awkward smile, faint sweat drop, close-up of his face, plain light grey background, soft even studio light | Negative: worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, text, watermark, signature, 3d, realistic, photorealistic, render, nude, nsfw, child, loli, (rim light, red rim light, red outline, backlighting:1.4), chubby, fat, obese, plump, blush, glasses, angry"
+  },
+  {
+   "id": "hamada-neutral",
+   "label": "Mr. Hamada · neutral (hamada-new-743)",
+   "image": "art/candidates/portraits/cast-faces-1/hamada-neutral.webp",
+   "note": "Your pick hamada-new-743, cut out and framed for the game. In the game now as kuroda-neutral. imgqa: red rim 0.3% (pass), drift from the installed neutral ccip 0.000 (pass)."
+  },
+  {
+   "id": "hamada-sleepy-d70-1",
+   "label": "Mr. Hamada · hamada-sleepy-d70-1",
+   "image": "art/candidates/portraits/cast-faces-1/hamada-hamada-sleepy-d70-1.webp",
+   "note": "Sleepy: face-only repaint of hamada-new-743. Seed 1, denoise 0.7, rdbtAnima, euler_ancestral normal, 30 steps, CFG 5, DifferentialDiffusion, face crop upscaled to 1024, 3 px feather. imgqa: red rim 0.3% (pass), drift from the installed neutral ccip 0.006 (pass). Prompt: masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, Mr. Hamada, a 54-year-old Japanese man, a tired middle-aged face, a receding hairline, short black hair going grey at the temples, tired eyes with dark circles, sleepy, eyes half closed, drowsy, mouth slightly open, close-up of his face, plain light grey background, soft even studio light | Negative: worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, text, watermark, signature, 3d, realistic, photorealistic, render, nude, nsfw, child, loli, (rim light, red rim light, red outline, backlighting:1.4), chubby, fat, obese, plump, blush, smile, frown, furrowed brow, angry"
+  },
+  {
+   "id": "hamada-sleepy-d70-2",
+   "label": "Mr. Hamada · hamada-sleepy-d70-2",
+   "image": "art/candidates/portraits/cast-faces-1/hamada-hamada-sleepy-d70-2.webp",
+   "note": "Sleepy: face-only repaint of hamada-new-743. In the game now as kuroda-sleepy (my pick). Seed 2, denoise 0.7, rdbtAnima, euler_ancestral normal, 30 steps, CFG 5, DifferentialDiffusion, face crop upscaled to 1024, 3 px feather. imgqa: red rim 0.3% (pass), drift from the installed neutral ccip 0.008 (pass). Prompt: masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, Mr. Hamada, a 54-year-old Japanese man, a tired middle-aged face, a receding hairline, short black hair going grey at the temples, tired eyes with dark circles, sleepy, eyes half closed, drowsy, mouth slightly open, close-up of his face, plain light grey background, soft even studio light | Negative: worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, text, watermark, signature, 3d, realistic, photorealistic, render, nude, nsfw, child, loli, (rim light, red rim light, red outline, backlighting:1.4), chubby, fat, obese, plump, blush, smile, frown, furrowed brow, angry"
+  },
+  {
+   "id": "hamada-sleepy-d70-3",
+   "label": "Mr. Hamada · hamada-sleepy-d70-3",
+   "image": "art/candidates/portraits/cast-faces-1/hamada-hamada-sleepy-d70-3.webp",
+   "note": "Sleepy: face-only repaint of hamada-new-743. Seed 3, denoise 0.7, rdbtAnima, euler_ancestral normal, 30 steps, CFG 5, DifferentialDiffusion, face crop upscaled to 1024, 3 px feather. imgqa: red rim 0.5% (pass), drift from the installed neutral ccip 0.005 (pass). Prompt: masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, Mr. Hamada, a 54-year-old Japanese man, a tired middle-aged face, a receding hairline, short black hair going grey at the temples, tired eyes with dark circles, sleepy, eyes half closed, drowsy, mouth slightly open, close-up of his face, plain light grey background, soft even studio light | Negative: worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, text, watermark, signature, 3d, realistic, photorealistic, render, nude, nsfw, child, loli, (rim light, red rim light, red outline, backlighting:1.4), chubby, fat, obese, plump, blush, smile, frown, furrowed brow, angry"
+  },
+  {
+   "id": "hamada-panicked-d70-1",
+   "label": "Mr. Hamada · hamada-panicked-d70-1",
+   "image": "art/candidates/portraits/cast-faces-1/hamada-hamada-panicked-d70-1.webp",
+   "note": "Panicked: face-only repaint of hamada-new-743. Seed 1, denoise 0.7, rdbtAnima, euler_ancestral normal, 30 steps, CFG 5, DifferentialDiffusion, face crop upscaled to 1024, 3 px feather. imgqa: red rim 0.1% (pass), drift from the installed neutral ccip 0.010 (pass). Prompt: masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, Mr. Hamada, a 54-year-old Japanese man, a tired middle-aged face, a receding hairline, short black hair going grey at the temples, tired eyes with dark circles, panicked, eyes wide, mouth open, sweat drops, close-up of his face, plain light grey background, soft even studio light | Negative: worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, text, watermark, signature, 3d, realistic, photorealistic, render, nude, nsfw, child, loli, (rim light, red rim light, red outline, backlighting:1.4), chubby, fat, obese, plump, blush, smile"
+  },
+  {
+   "id": "hamada-panicked-d70-2",
+   "label": "Mr. Hamada · hamada-panicked-d70-2",
+   "image": "art/candidates/portraits/cast-faces-1/hamada-hamada-panicked-d70-2.webp",
+   "note": "Panicked: face-only repaint of hamada-new-743. In the game now as kuroda-panicked (my pick). Seed 2, denoise 0.7, rdbtAnima, euler_ancestral normal, 30 steps, CFG 5, DifferentialDiffusion, face crop upscaled to 1024, 3 px feather. imgqa: red rim 0.2% (pass), drift from the installed neutral ccip 0.012 (pass). Prompt: masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, Mr. Hamada, a 54-year-old Japanese man, a tired middle-aged face, a receding hairline, short black hair going grey at the temples, tired eyes with dark circles, panicked, eyes wide, mouth open, sweat drops, close-up of his face, plain light grey background, soft even studio light | Negative: worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, text, watermark, signature, 3d, realistic, photorealistic, render, nude, nsfw, child, loli, (rim light, red rim light, red outline, backlighting:1.4), chubby, fat, obese, plump, blush, smile"
+  },
+  {
+   "id": "hamada-panicked-d70-3",
+   "label": "Mr. Hamada · hamada-panicked-d70-3",
+   "image": "art/candidates/portraits/cast-faces-1/hamada-hamada-panicked-d70-3.webp",
+   "note": "Panicked: face-only repaint of hamada-new-743. Seed 3, denoise 0.7, rdbtAnima, euler_ancestral normal, 30 steps, CFG 5, DifferentialDiffusion, face crop upscaled to 1024, 3 px feather. imgqa: red rim 0.3% (pass), drift from the installed neutral ccip 0.010 (pass). Prompt: masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, solo, Mr. Hamada, a 54-year-old Japanese man, a tired middle-aged face, a receding hairline, short black hair going grey at the temples, tired eyes with dark circles, panicked, eyes wide, mouth open, sweat drops, close-up of his face, plain light grey background, soft even studio light | Negative: worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, text, watermark, signature, 3d, realistic, photorealistic, render, nude, nsfw, child, loli, (rim light, red rim light, red outline, backlighting:1.4), chubby, fat, obese, plump, blush, smile"
+  },
+  {
+   "id": "fix-guard-plate-d75-1",
+   "label": "Ishibashi (guard) · fix-guard-plate-d75-1",
+   "image": "art/candidates/portraits/cast-faces-1/fix-sheet.webp",
+   "note": "Patch repaint on the guard base, box [296, 616, 416, 652]. Seed 1, denoise 0.75, euler_ancestral normal, 30 steps, CFG 5, DifferentialDiffusion, crop upscaled to 1024. Prompt: masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, navy security uniform jacket, a small blank gold name plate on the chest pocket, plain metal bar | Negative: worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, text, watermark, signature, 3d, realistic, photorealistic, render, nude, nsfw, child, loli, (rim light, red rim light, red outline, backlighting:1.4), text, letters, words, numbers, logo text, writing, english text, alphabet"
+  },
+  {
+   "id": "fix-guard-plate-d75-2",
+   "label": "Ishibashi (guard) · fix-guard-plate-d75-2",
+   "image": "art/candidates/portraits/cast-faces-1/fix-sheet.webp",
+   "note": "Patch repaint on the guard base, box [296, 616, 416, 652]. Used. Seed 2, denoise 0.75, euler_ancestral normal, 30 steps, CFG 5, DifferentialDiffusion, crop upscaled to 1024. Prompt: masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, navy security uniform jacket, a small blank gold name plate on the chest pocket, plain metal bar | Negative: worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, text, watermark, signature, 3d, realistic, photorealistic, render, nude, nsfw, child, loli, (rim light, red rim light, red outline, backlighting:1.4), text, letters, words, numbers, logo text, writing, english text, alphabet"
+  },
+  {
+   "id": "fix-guard-plate-d75-3",
+   "label": "Ishibashi (guard) · fix-guard-plate-d75-3",
+   "image": "art/candidates/portraits/cast-faces-1/fix-sheet.webp",
+   "note": "Patch repaint on the guard base, box [296, 616, 416, 652]. Seed 3, denoise 0.75, euler_ancestral normal, 30 steps, CFG 5, DifferentialDiffusion, crop upscaled to 1024. Prompt: masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, navy security uniform jacket, a small blank gold name plate on the chest pocket, plain metal bar | Negative: worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, text, watermark, signature, 3d, realistic, photorealistic, render, nude, nsfw, child, loli, (rim light, red rim light, red outline, backlighting:1.4), text, letters, words, numbers, logo text, writing, english text, alphabet"
+  },
+  {
+   "id": "fix-guard-patch-d75-1",
+   "label": "Ishibashi (guard) · fix-guard-patch-d75-1",
+   "image": "art/candidates/portraits/cast-faces-1/fix-sheet.webp",
+   "note": "Patch repaint on the guard base, box [94, 606, 182, 726]. Seed 1, denoise 0.75, euler_ancestral normal, 30 steps, CFG 5, DifferentialDiffusion, crop upscaled to 1024. Prompt: masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, navy security uniform sleeve, a shoulder patch with a gold border and a simple winged emblem | Negative: worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, text, watermark, signature, 3d, realistic, photorealistic, render, nude, nsfw, child, loli, (rim light, red rim light, red outline, backlighting:1.4), text, letters, words, numbers, logo text, writing, english text, alphabet"
+  },
+  {
+   "id": "fix-guard-patch-d75-2",
+   "label": "Ishibashi (guard) · fix-guard-patch-d75-2",
+   "image": "art/candidates/portraits/cast-faces-1/fix-sheet.webp",
+   "note": "Patch repaint on the guard base, box [94, 606, 182, 726]. Used. Seed 2, denoise 0.75, euler_ancestral normal, 30 steps, CFG 5, DifferentialDiffusion, crop upscaled to 1024. Prompt: masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, navy security uniform sleeve, a shoulder patch with a gold border and a simple winged emblem | Negative: worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, text, watermark, signature, 3d, realistic, photorealistic, render, nude, nsfw, child, loli, (rim light, red rim light, red outline, backlighting:1.4), text, letters, words, numbers, logo text, writing, english text, alphabet"
+  },
+  {
+   "id": "fix-guard-patch-d75-3",
+   "label": "Ishibashi (guard) · fix-guard-patch-d75-3",
+   "image": "art/candidates/portraits/cast-faces-1/fix-sheet.webp",
+   "note": "Patch repaint on the guard base, box [94, 606, 182, 726]. Seed 3, denoise 0.75, euler_ancestral normal, 30 steps, CFG 5, DifferentialDiffusion, crop upscaled to 1024. Prompt: masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, navy security uniform sleeve, a shoulder patch with a gold border and a simple winged emblem | Negative: worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, text, watermark, signature, 3d, realistic, photorealistic, render, nude, nsfw, child, loli, (rim light, red rim light, red outline, backlighting:1.4), text, letters, words, numbers, logo text, writing, english text, alphabet"
+  },
+  {
+   "id": "fix-guard-collar-d75-1",
+   "label": "Ishibashi (guard) · fix-guard-collar-d75-1",
+   "image": "art/candidates/portraits/cast-faces-1/fix-sheet.webp",
+   "note": "Patch repaint on the guard base, box [310, 544, 362, 574]. Used. Seed 1, denoise 0.75, euler_ancestral normal, 30 steps, CFG 5, DifferentialDiffusion, crop upscaled to 1024. Prompt: masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, navy security uniform collar, a small plain gold collar pin | Negative: worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, text, watermark, signature, 3d, realistic, photorealistic, render, nude, nsfw, child, loli, (rim light, red rim light, red outline, backlighting:1.4), text, letters, words, numbers, logo text, writing, english text, alphabet"
+  },
+  {
+   "id": "fix-guard-collar-d75-2",
+   "label": "Ishibashi (guard) · fix-guard-collar-d75-2",
+   "image": "art/candidates/portraits/cast-faces-1/fix-sheet.webp",
+   "note": "Patch repaint on the guard base, box [310, 544, 362, 574]. Seed 2, denoise 0.75, euler_ancestral normal, 30 steps, CFG 5, DifferentialDiffusion, crop upscaled to 1024. Prompt: masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1boy, navy security uniform collar, a small plain gold collar pin | Negative: worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, text, watermark, signature, 3d, realistic, photorealistic, render, nude, nsfw, child, loli, (rim light, red rim light, red outline, backlighting:1.4), text, letters, words, numbers, logo text, writing, english text, alphabet"
+  },
+  {
+   "id": "fix-aoi-patch-d75-1",
+   "label": "Aoi · fix-aoi-patch-d75-1",
+   "image": "art/candidates/portraits/cast-faces-1/fix-sheet.webp",
+   "note": "Patch repaint on the aoi base, box [512, 776, 646, 916]. Seed 1, denoise 0.75, euler_ancestral normal, 30 steps, CFG 5, DifferentialDiffusion, crop upscaled to 1024. Prompt: masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1girl, dark green varsity jacket, a small pink star patch on the chest | Negative: worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, text, watermark, signature, 3d, realistic, photorealistic, render, nude, nsfw, child, loli, (rim light, red rim light, red outline, backlighting:1.4), text, letters, words, numbers, logo text, writing, english text, alphabet"
+  },
+  {
+   "id": "fix-aoi-patch-d75-2",
+   "label": "Aoi · fix-aoi-patch-d75-2",
+   "image": "art/candidates/portraits/cast-faces-1/fix-sheet.webp",
+   "note": "Patch repaint on the aoi base, box [512, 776, 646, 916]. Seed 2, denoise 0.75, euler_ancestral normal, 30 steps, CFG 5, DifferentialDiffusion, crop upscaled to 1024. Prompt: masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1girl, dark green varsity jacket, a small pink star patch on the chest | Negative: worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, text, watermark, signature, 3d, realistic, photorealistic, render, nude, nsfw, child, loli, (rim light, red rim light, red outline, backlighting:1.4), text, letters, words, numbers, logo text, writing, english text, alphabet"
+  },
+  {
+   "id": "fix-aoi-patch-d75-3",
+   "label": "Aoi · fix-aoi-patch-d75-3",
+   "image": "art/candidates/portraits/cast-faces-1/fix-sheet.webp",
+   "note": "Patch repaint on the aoi base, box [512, 776, 646, 916]. Seed 3, denoise 0.75, euler_ancestral normal, 30 steps, CFG 5, DifferentialDiffusion, crop upscaled to 1024. Prompt: masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1girl, dark green varsity jacket, a small pink star patch on the chest | Negative: worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, text, watermark, signature, 3d, realistic, photorealistic, render, nude, nsfw, child, loli, (rim light, red rim light, red outline, backlighting:1.4), text, letters, words, numbers, logo text, writing, english text, alphabet"
+  },
+  {
+   "id": "fix-aoi-patch-d90-1",
+   "label": "Aoi · fix-aoi-patch-d90-1",
+   "image": "art/candidates/portraits/cast-faces-1/fix-sheet.webp",
+   "note": "Patch repaint on the aoi base, box [512, 776, 646, 916]. Seed 1, denoise 0.9, euler_ancestral normal, 30 steps, CFG 5, DifferentialDiffusion, crop upscaled to 1024. Prompt: masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1girl, dark green varsity jacket, a small pink star patch on the chest | Negative: worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, text, watermark, signature, 3d, realistic, photorealistic, render, nude, nsfw, child, loli, (rim light, red rim light, red outline, backlighting:1.4), text, letters, words, numbers, logo text, writing, english text, alphabet"
+  },
+  {
+   "id": "fix-aoi-patch-d90-2",
+   "label": "Aoi · fix-aoi-patch-d90-2",
+   "image": "art/candidates/portraits/cast-faces-1/fix-sheet.webp",
+   "note": "Patch repaint on the aoi base, box [512, 776, 646, 916]. Used. Seed 2, denoise 0.9, euler_ancestral normal, 30 steps, CFG 5, DifferentialDiffusion, crop upscaled to 1024. Prompt: masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1girl, dark green varsity jacket, a small pink star patch on the chest | Negative: worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, text, watermark, signature, 3d, realistic, photorealistic, render, nude, nsfw, child, loli, (rim light, red rim light, red outline, backlighting:1.4), text, letters, words, numbers, logo text, writing, english text, alphabet"
+  },
+  {
+   "id": "fix-aoi-patch-d90-3",
+   "label": "Aoi · fix-aoi-patch-d90-3",
+   "image": "art/candidates/portraits/cast-faces-1/fix-sheet.webp",
+   "note": "Patch repaint on the aoi base, box [512, 776, 646, 916]. Seed 3, denoise 0.9, euler_ancestral normal, 30 steps, CFG 5, DifferentialDiffusion, crop upscaled to 1024. Prompt: masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1girl, dark green varsity jacket, a small pink star patch on the chest | Negative: worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, text, watermark, signature, 3d, realistic, photorealistic, render, nude, nsfw, child, loli, (rim light, red rim light, red outline, backlighting:1.4), text, letters, words, numbers, logo text, writing, english text, alphabet"
+  }
+ ],
+ "links": [
+  {
+   "label": "Play it",
+   "href": "game3d/"
+  },
+  {
+   "label": "Showcase",
+   "href": "bible/#showcase/cast-faces-1"
+  }
+ ]
+}

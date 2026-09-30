@@ -2,6 +2,7 @@
 // are both on stage, then saves the frame and a close-up of the two faces.
 //   node game3d/tools/eric-face-shots.mjs [w] [h] [tag]
 // WHO=eric (or mio) holds on the first line with just that person on stage (the phone shows one at a time).
+// BASE=.claude/worktrees/<name>/game3d shoots a worktree's game through the review server, as fast.mjs does.
 // Output: game3d/shots/eric-face/<w>x<h>[-tag].png and -faces.png, plus the placed boxes in the console.
 import { withBrowserJob } from '../../tools/lib/browser-job.mjs';
 import { openGame } from '../test/support/open-game.mjs';
@@ -15,7 +16,8 @@ fs.mkdirSync(out, { recursive: true });
 const name = `${W}x${H}${TAG ? '-' + TAG : ''}`;
 const phone = +W < 700;
 await withBrowserJob('eric-face-shots', async (browser) => {
-const { page: p } = await openGame(browser, { viewport: { width: +W, height: +H }, mode: 'fast', touch: phone });
+const url = process.env.BASE ? `http://127.0.0.1:8771/${process.env.BASE}/index.html?test=fast&q=0` : undefined;
+const { page: p } = await openGame(browser, { viewport: { width: +W, height: +H }, mode: 'fast', touch: phone, url });
 // hold the day on the first line with both of them on stage (the say never resolves)
 await p.evaluate((need) => {
   const g = globalThis.__game, say = g.ui.say.bind(g.ui);

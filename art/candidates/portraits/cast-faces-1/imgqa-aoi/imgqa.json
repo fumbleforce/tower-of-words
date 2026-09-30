@@ -1,0 +1,130 @@
+{
+ "character": "aoi",
+ "ref": "game3d/assets/portraits/aoi-neutral.webp",
+ "face_box_game": [
+  597,
+  768,
+  [
+   219,
+   167,
+   381,
+   336
+  ]
+ ],
+ "ref_face_detected": [
+  219,
+  166,
+  381,
+  336
+ ],
+ "thresholds": {
+  "redrim": [
+   0.02,
+   0.08
+  ],
+  "glasses_cover": [
+   0.87,
+   0.85
+  ],
+  "glasses_worst": [
+   0.7,
+   0.5
+  ],
+  "glasses_dE": [
+   8,
+   15
+  ],
+  "matte_frame": [
+   0.05,
+   0.12
+  ],
+  "matte_holes": [
+   0,
+   3
+  ],
+  "headroom": [
+   0.03,
+   0.01
+  ],
+  "zoom": [
+   0.04,
+   9
+  ],
+  "top": [
+   0.01,
+   9
+  ],
+  "eyes": [
+   0.06,
+   0.12
+  ],
+  "ccip": [
+   0.05,
+   0.09
+  ]
+ },
+ "images": [
+  {
+   "path": "art/candidates/portraits/cast-faces-1/aoi-neutral.webp",
+   "kind": "cut-out",
+   "size": [
+    597,
+    768
+   ],
+   "face": [
+    219,
+    166,
+    381,
+    336
+   ],
+   "eyes": [
+    [
+     258.0,
+     251.5
+    ],
+    [
+     333.5,
+     226.5
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.013
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for aoi"
+   },
+   "matte": {
+    "holes": 4,
+    "holes_px": 390,
+    "note": "no source render found: holes include gaps between hair strands, not graded",
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.091,
+    "zoom": 1.0,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 70,
+    "hair_top_ref": 70,
+    "crop": [
+     0.0,
+     0.0,
+     597.0,
+     768.0
+    ],
+    "eyes": 0.0,
+    "tilt": 0.0,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.0,
+    "ssim": 1.0
+   },
+   "status": "pass"
+  }
+ ]
+}
