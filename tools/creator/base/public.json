@@ -1,0 +1,32 @@
+{
+  "about": "Every file the live creator (dress.html) loads outside game3d/, for its public copy on GitHub Pages (game3d/tools/deploy-pages.sh). code: committed files, taken from HEAD. data: local files kept in R2 and the lock file (tools/assets/sync.json lists this file). The site's check fails on any request that 404s, so a new file the creator loads goes here.",
+  "page": "tools/creator/base/dress.html",
+  "code": [
+    "tools/creator/base/dress.html",
+    "tools/creator/base/dress.js",
+    "tools/creator/base/base.js",
+    "tools/creator/base/eyes.js",
+    "tools/creator/base/wardrobe.js",
+    "tools/creator/approved-idle.js",
+    "tools/creator/dispose.js",
+    "tools/creator/mio-prep.js",
+    "tools/creator/recipe.js",
+    "tools/creator/retarget.js",
+    "art/parts/library.json",
+    "art/parts/src/mio/faces.json"
+  ],
+  "data": [
+    "art/parts/anim/idle.glb",
+    "art/parts/anim/walk.glb",
+    "art/parts/src/eric/mesh.glb",
+    "art/parts/src/eric/tex.webp",
+    "art/parts/src/mio/mesh.glb",
+    "art/parts/src/mio/tex.webp",
+    "art/parts/base/clean-eric-source16.json",
+    "art/parts/base/clean-eric-source16.png",
+    "art/parts/base/clean-eric-source16-fit3-layers.json",
+    "art/parts/base/clean-mio-source16.json",
+    "art/parts/base/clean-mio-source16.png",
+    "art/parts/base/clean-mio-source16-fit3-layers.json"
+  ]
+}

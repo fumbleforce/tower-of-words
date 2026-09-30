@@ -10,6 +10,9 @@
     "tools/voice-refs/",
     "tools/assets/thumbs/"
   ],
+  "lists": [
+    "tools/creator/base/public.json"
+  ],
   "exclude": [
     "*.blend1"
   ],

@@ -19,6 +19,7 @@
  ],
  "links": [
   {"label": "The live creator (drag to turn it, Idle or Walk, Original puts the game model beside it)", "href": "tools/creator/base/dress.html"},
+  {"label": "The same creator online, for your phone", "href": "https://fumbleforce.github.io/tower-of-words/creator/"},
   {"label": "Example: new character on Mio's body", "href": "tools/creator/base/dress.html?body=mio&hair=bob&hairColour=%238a5a32&eyes=round&iris=%233f8f5a&top=tank&topColour=%23f2f0ea&bottom=skirt&bottomColour=%231f3552&shoes=sneakers&shoesColour=%23b3473d"},
   {"label": "Example: new character on Eric's body", "href": "tools/creator/base/dress.html?body=eric&hair=spiky&hairColour=%231d1f2b&eyes=sharp&iris=%23c08a2e&top=tee&topColour=%23b3473d&bottom=shorts&bottomColour=%23c9b79a&shoes=sneakers&shoesColour=%23f2f0ea"},
   {"label": "Mio: base over the original (checks nothing moved)", "href": "tools/creator/base/overlay.html?body=mio&version=source16&colours=original&motion=neutral&review=creator-base-6"},

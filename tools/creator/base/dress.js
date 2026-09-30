@@ -29,6 +29,8 @@ const params = new URLSearchParams(location.search);
 const state = { ...DEFAULT };
 for (const key of Object.keys(DEFAULT)) if (params.has(key)) state[key] = params.get(key);
 const view = window.__creator = { ready: false, state };
+// the overlay viewer isn't on the public copy (game3d/tools/deploy-pages.sh), so its links show only locally
+$('overlay-links').hidden = !['127.0.0.1', 'localhost'].includes(location.hostname);
 
 // ---------- scene ----------
 const host = $('viewport');
