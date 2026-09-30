@@ -1,0 +1,734 @@
+{
+ "character": "guard",
+ "ref": "game3d/assets/portraits/guard-neutral.webp",
+ "face_box_game": [
+  597,
+  768,
+  [
+   250,
+   162,
+   374,
+   300
+  ]
+ ],
+ "ref_face_detected": [
+  250,
+  162,
+  374,
+  300
+ ],
+ "thresholds": {
+  "redrim": [
+   0.02,
+   0.08
+  ],
+  "glasses_cover": [
+   0.87,
+   0.85
+  ],
+  "glasses_worst": [
+   0.7,
+   0.5
+  ],
+  "glasses_dE": [
+   8,
+   15
+  ],
+  "matte_frame": [
+   0.05,
+   0.12
+  ],
+  "matte_holes": [
+   0,
+   3
+  ],
+  "headroom": [
+   0.03,
+   0.01
+  ],
+  "zoom": [
+   0.04,
+   9
+  ],
+  "top": [
+   0.01,
+   9
+  ],
+  "eyes": [
+   0.06,
+   0.12
+  ],
+  "ccip": [
+   0.05,
+   0.09
+  ]
+ },
+ "images": [
+  {
+   "path": "art/production/PC/npc-base-1/guard-arm-1.png",
+   "kind": "render",
+   "size": [
+    1008,
+    1296
+   ],
+   "face": [
+    424,
+    274,
+    633,
+    507
+   ],
+   "eyes": [
+    [
+     500.0,
+     338.5
+    ],
+    [
+     584.5,
+     353.0
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0192
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for guard"
+   },
+   "framing": {
+    "headroom": 0.143,
+    "zoom": 0.999,
+    "top": 0.0,
+    "bottom_short": 0.001,
+    "hair_top_game": 109,
+    "hair_top_ref": 111,
+    "crop": [
+     1.7,
+     0.5,
+     1009.7,
+     1297.2
+    ],
+    "eyes": -0.0,
+    "tilt": -0.4,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.019,
+    "ssim": 0.688
+   },
+   "status": "pass"
+  },
+  {
+   "path": "art/production/PC/npc-base-1/guard-arm-2.png",
+   "kind": "render",
+   "size": [
+    1008,
+    1296
+   ],
+   "face": [
+    423,
+    274,
+    633,
+    506
+   ],
+   "eyes": [
+    [
+     500.0,
+     338.5
+    ],
+    [
+     584.5,
+     353.0
+    ]
+   ],
+   "redrim": {
+    "status": "warn",
+    "value": 0.0205
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for guard"
+   },
+   "framing": {
+    "headroom": 0.143,
+    "zoom": 1.004,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 109,
+    "hair_top_ref": 111,
+    "crop": [
+     3.5,
+     1.7,
+     1007.1,
+     1292.8
+    ],
+    "eyes": 0.001,
+    "tilt": -0.4,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.018,
+    "ssim": 0.774
+   },
+   "status": "warn"
+  },
+  {
+   "path": "art/production/PC/npc-base-1/guard-arm-3.png",
+   "kind": "render",
+   "size": [
+    1008,
+    1296
+   ],
+   "face": [
+    423,
+    274,
+    633,
+    507
+   ],
+   "eyes": [
+    [
+     500.5,
+     338.0
+    ],
+    [
+     585.0,
+     352.5
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0178
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for guard"
+   },
+   "framing": {
+    "headroom": 0.143,
+    "zoom": 0.999,
+    "top": 0.0,
+    "bottom_short": 0.001,
+    "hair_top_game": 109,
+    "hair_top_ref": 111,
+    "crop": [
+     1.2,
+     0.5,
+     1009.2,
+     1297.2
+    ],
+    "eyes": -0.002,
+    "tilt": -0.4,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.017,
+    "ssim": 0.744
+   },
+   "status": "pass"
+  },
+  {
+   "path": "art/production/PC/npc-base-1/guard-arm-4.png",
+   "kind": "render",
+   "size": [
+    1008,
+    1296
+   ],
+   "face": [
+    423,
+    275,
+    632,
+    505
+   ],
+   "eyes": [
+    [
+     500.0,
+     338.5
+    ],
+    [
+     584.5,
+     353.0
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0179
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for guard"
+   },
+   "framing": {
+    "headroom": 0.143,
+    "zoom": 1.012,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 108,
+    "hair_top_ref": 111,
+    "crop": [
+     7.5,
+     5.0,
+     1002.5,
+     1285.0
+    ],
+    "eyes": -0.0,
+    "tilt": -0.4,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.016,
+    "ssim": 0.711
+   },
+   "status": "pass"
+  },
+  {
+   "path": "art/production/PC/npc-base-1/guard-arm-5.png",
+   "kind": "render",
+   "size": [
+    1008,
+    1296
+   ],
+   "face": [
+    423,
+    274,
+    633,
+    506
+   ],
+   "eyes": [
+    [
+     500.0,
+     338.5
+    ],
+    [
+     584.5,
+     353.0
+    ]
+   ],
+   "redrim": {
+    "status": "warn",
+    "value": 0.0239
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for guard"
+   },
+   "framing": {
+    "headroom": 0.143,
+    "zoom": 1.004,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 109,
+    "hair_top_ref": 111,
+    "crop": [
+     3.5,
+     1.7,
+     1007.1,
+     1292.8
+    ],
+    "eyes": 0.001,
+    "tilt": -0.4,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.018,
+    "ssim": 0.774
+   },
+   "status": "warn"
+  },
+  {
+   "path": "art/production/PC/npc-base-1/guard-arm-6.png",
+   "kind": "render",
+   "size": [
+    1008,
+    1296
+   ],
+   "face": [
+    423,
+    274,
+    633,
+    507
+   ],
+   "eyes": [
+    [
+     500.0,
+     338.5
+    ]
+   ],
+   "redrim": {
+    "status": "warn",
+    "value": 0.0299
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for guard"
+   },
+   "framing": {
+    "headroom": 0.143,
+    "zoom": 0.999,
+    "top": 0.0,
+    "bottom_short": 0.001,
+    "hair_top_game": 109,
+    "hair_top_ref": 111,
+    "crop": [
+     1.2,
+     0.5,
+     1009.2,
+     1297.2
+    ],
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.017,
+    "ssim": 0.744
+   },
+   "status": "warn"
+  },
+  {
+   "path": "art/production/PC/npc-base-1/guard-fig-1.png",
+   "kind": "render",
+   "size": [
+    1008,
+    1296
+   ],
+   "face": [
+    423,
+    274,
+    633,
+    507
+   ],
+   "eyes": [
+    [
+     500.0,
+     338.5
+    ],
+    [
+     584.5,
+     353.0
+    ]
+   ],
+   "redrim": {
+    "status": "warn",
+    "value": 0.0217
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for guard"
+   },
+   "framing": {
+    "headroom": 0.143,
+    "zoom": 0.999,
+    "top": 0.0,
+    "bottom_short": 0.001,
+    "hair_top_game": 109,
+    "hair_top_ref": 111,
+    "crop": [
+     1.2,
+     0.5,
+     1009.2,
+     1297.2
+    ],
+    "eyes": -0.0,
+    "tilt": -0.4,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.017,
+    "ssim": 0.744
+   },
+   "status": "warn"
+  },
+  {
+   "path": "art/production/PC/npc-base-1/guard-fig-2.png",
+   "kind": "render",
+   "size": [
+    1008,
+    1296
+   ],
+   "face": [
+    424,
+    274,
+    633,
+    506
+   ],
+   "eyes": [
+    [
+     500.5,
+     338.0
+    ],
+    [
+     584.5,
+     353.0
+    ]
+   ],
+   "redrim": {
+    "status": "warn",
+    "value": 0.0211
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for guard"
+   },
+   "framing": {
+    "headroom": 0.143,
+    "zoom": 1.004,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 109,
+    "hair_top_ref": 111,
+    "crop": [
+     4.0,
+     1.7,
+     1007.6,
+     1292.8
+    ],
+    "eyes": 0.0,
+    "tilt": 0.0,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.018,
+    "ssim": 0.676
+   },
+   "status": "warn"
+  },
+  {
+   "path": "art/production/PC/npc-base-1/guard-fig-3.png",
+   "kind": "render",
+   "size": [
+    1008,
+    1296
+   ],
+   "face": [
+    424,
+    274,
+    633,
+    506
+   ],
+   "eyes": [
+    [
+     500.0,
+     338.0
+    ],
+    [
+     584.5,
+     353.0
+    ]
+   ],
+   "redrim": {
+    "status": "warn",
+    "value": 0.0201
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for guard"
+   },
+   "framing": {
+    "headroom": 0.143,
+    "zoom": 1.004,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 109,
+    "hair_top_ref": 111,
+    "crop": [
+     4.0,
+     1.7,
+     1007.6,
+     1292.8
+    ],
+    "eyes": 0.0,
+    "tilt": -0.0,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.018,
+    "ssim": 0.676
+   },
+   "status": "warn"
+  },
+  {
+   "path": "art/production/PC/npc-base-1/guard-fig-4.png",
+   "kind": "render",
+   "size": [
+    1008,
+    1296
+   ],
+   "face": [
+    423,
+    274,
+    633,
+    506
+   ],
+   "eyes": [
+    [
+     500.0,
+     338.5
+    ],
+    [
+     584.5,
+     353.0
+    ]
+   ],
+   "redrim": {
+    "status": "warn",
+    "value": 0.0222
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for guard"
+   },
+   "framing": {
+    "headroom": 0.143,
+    "zoom": 1.004,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 109,
+    "hair_top_ref": 111,
+    "crop": [
+     3.5,
+     1.7,
+     1007.1,
+     1292.8
+    ],
+    "eyes": 0.001,
+    "tilt": -0.4,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.018,
+    "ssim": 0.774
+   },
+   "status": "warn"
+  },
+  {
+   "path": "art/production/PC/npc-base-1/guard-fig-5.png",
+   "kind": "render",
+   "size": [
+    1008,
+    1296
+   ],
+   "face": [
+    424,
+    274,
+    633,
+    507
+   ],
+   "eyes": [
+    [
+     500.0,
+     338.5
+    ],
+    [
+     584.5,
+     353.0
+    ]
+   ],
+   "redrim": {
+    "status": "warn",
+    "value": 0.0249
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for guard"
+   },
+   "framing": {
+    "headroom": 0.143,
+    "zoom": 0.999,
+    "top": 0.0,
+    "bottom_short": 0.001,
+    "hair_top_game": 109,
+    "hair_top_ref": 111,
+    "crop": [
+     1.7,
+     0.5,
+     1009.7,
+     1297.2
+    ],
+    "eyes": -0.0,
+    "tilt": -0.4,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.019,
+    "ssim": 0.688
+   },
+   "status": "warn"
+  },
+  {
+   "path": "art/production/PC/npc-base-1/guard-fig-6.png",
+   "kind": "render",
+   "size": [
+    1008,
+    1296
+   ],
+   "face": [
+    424,
+    274,
+    633,
+    508
+   ],
+   "eyes": [
+    [
+     500.0,
+     338.0
+    ],
+    [
+     584.5,
+     353.0
+    ]
+   ],
+   "redrim": {
+    "status": "warn",
+    "value": 0.0222
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for guard"
+   },
+   "framing": {
+    "headroom": 0.143,
+    "zoom": 0.995,
+    "top": 0.001,
+    "bottom_short": 0.004,
+    "hair_top_game": 109,
+    "hair_top_ref": 111,
+    "crop": [
+     -0.5,
+     -0.7,
+     1011.8,
+     1301.6
+    ],
+    "eyes": -0.002,
+    "tilt": -0.0,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.022,
+    "ssim": 0.65
+   },
+   "status": "warn"
+  }
+ ]
+}
