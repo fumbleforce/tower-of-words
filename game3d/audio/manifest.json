@@ -367,7 +367,7 @@
  },
  {
   "key": "oh-5hn713",
-  "speaker": "kuro",
+  "speaker": "stander",
   "text": "…おはようございます。",
   "lang": "ja",
   "overheard": true,
@@ -378,7 +378,7 @@
    ]
   ],
   "clear": [],
-  "emo": "polite"
+  "emo": "low"
  },
  {
   "key": "ln-uf8chl",
@@ -1420,31 +1420,6 @@
   "emo": "surprised"
  },
  {
-  "key": "oh-w0fzye",
-  "speaker": "kuro",
-  "text": "いらっしゃいませ。ご用件は？",
-  "lang": "ja",
-  "overheard": true,
-  "words": [],
-  "clear": [],
-  "emo": "polite"
- },
- {
-  "key": "oh-1cne4ls",
-  "speaker": "kuro",
-  "text": "はい…？よろしくおねがいします…",
-  "lang": "ja",
-  "overheard": true,
-  "words": [
-   [
-    "yoroshiku",
-    "よろしくおねがいします"
-   ]
-  ],
-  "clear": [],
-  "emo": "puzzled"
- },
- {
   "key": "oh-18qexd9",
   "speaker": "gatev",
   "text": "おはようございます！カードをタッチしてください！",
@@ -1468,6 +1443,66 @@
   "words": [],
   "clear": [],
   "emo": "stern"
+ },
+ {
+  "key": "oh-1244oau",
+  "speaker": "kuro",
+  "text": "お疲れさまです。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [
+   [
+    "otsukare",
+    "お疲れさまです"
+   ]
+  ],
+  "clear": [],
+  "emo": "polite"
+ },
+ {
+  "key": "oh-nvf9du",
+  "speaker": "kuro",
+  "text": "おはようございます。どうぞ。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [
+   [
+    "ohayo",
+    "おはようございます"
+   ]
+  ],
+  "clear": [],
+  "emo": "polite"
+ },
+ {
+  "key": "oh-1tdi6z6",
+  "speaker": "kuro",
+  "text": "あ、おはようございます。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [
+   [
+    "ohayo",
+    "おはようございます"
+   ]
+  ],
+  "clear": [],
+  "emo": "polite"
+ },
+ {
+  "key": "oh-1ybstld",
+  "speaker": "kuro",
+  "text": "こちらこそ。よろしくおねがいします。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [
+   [
+    "yoroshiku",
+    "よろしくおねがいします"
+   ]
+  ],
+  "clear": [],
+  "emo": "polite"
  },
  {
   "key": "oh-2kggvg",
@@ -2503,6 +2538,16 @@
   "emo": "low"
  },
  {
+  "key": "oh-1cqcyyd",
+  "speaker": "mori",
+  "text": "あれ、止まりました？",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "puzzled"
+ },
+ {
   "key": "oh-2zff04",
   "speaker": "kenji",
   "text": "あれ？",
@@ -2511,6 +2556,33 @@
   "words": [],
   "clear": [],
   "emo": "puzzled"
+ },
+ {
+  "key": "ln-yet8nw",
+  "speaker": "eric",
+  "text": "I was hoping I'd at least be able to see the sky.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": []
+ },
+ {
+  "key": "ln-wbv686",
+  "speaker": "eric",
+  "text": "I can't remember which one I put the clean shirts in.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": []
+ },
+ {
+  "key": "ln-zco67p",
+  "speaker": "eric",
+  "text": "If I lie down now, I'm not getting up again.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": []
  },
  {
   "key": "oh-1dltuqt",

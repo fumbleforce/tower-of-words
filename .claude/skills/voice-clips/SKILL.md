@@ -23,6 +23,6 @@ One command does it: `sh tools/voice/run.sh`. It
 - A take picked by ear: put `"<key>": "<take>"` in tools/voice/force.json. Other English wording for a line that keeps failing: tools/voice/alt_text.json, then `~/ai/tts/qwen/venv/bin/python tools/voice/gen_takes.py 404,505,606 <key> --alt` under the lock.
 - To redo a clip whose text didn't change, delete its key from tools/voice/clips.json.
 - Takes, metrics, reports and run logs live in `$GAME3D_VOICE_WORK` (default ~/ai/game3d-voice/), outside git. Python venvs: ~/ai/tts/qwen/venv (takes), ~/ai/tts-bench/.venv (checks, export, spans), ~/ai/voice-pipeline/edge-venv (edge-tts); override with QWEN_PY, BENCH_PY, EDGE_PY.
-- The clone reference wavs in tools/voice-refs/ are not all in git yet; on another machine, copy that folder over first.
+- The clone reference wavs in tools/voice-refs/ are not all in git yet; on another machine, copy that folder over first. In a worktree, `tools/worktree.sh setup` doesn't link tools/island_audio/ or the .txt transcripts in tools/voice-refs/; symlink them from the main checkout before a run, or gen_takes.py stops, no take passes and every line falls through to edge-tts.
 
 New or changed voices (a new cast voice, a different timbre) are a Review item for Jørgen's ears (post-review-item), not a pipeline run.
