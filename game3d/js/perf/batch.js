@@ -723,6 +723,7 @@ export function optimizePlace(place, opt = {}) {
   }
   // the work queue, run in slices of BUDGET ms between frames
   const jobs = [];
+  perf.busy = () => jobs.length > 0; // merging still queued (js/perf/warm.js waits for it)
   const BUDGET = +(Q.get('pbudget') || opt.budget || 6);
   let pumping = false;
   // a job is a function, or a function returning a generator (a long job: it stays first in the queue and runs a step

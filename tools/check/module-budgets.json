@@ -23,10 +23,10 @@
       "reason": "Existing detailed prop builders; preserve geometry until the visual owner reviews extraction."
     },
     "game3d/js/main.js": {
-      "lines": 775,
-      "bytes": 27008,
+      "lines": 778,
+      "bytes": 27307,
       "owner": "codex-tui",
-      "review": "C-0110 / X-0193: one office batch integration line; 2026-09-30 one import line each for the dorms, plaza and dorm_court place factories; existing responsibility unchanged",
+      "review": "C-0110 / X-0193: one office batch integration line; 2026-09-30 one import line each for the dorms, plaza and dorm_court place factories; existing responsibility unchanged; 2026-09-30 game.overrideMaterials for the shader warm-up (notes/PERF.md)",
       "reason": "Composition, boot/Continue, input, rendering and frame loop remain after stage 4 hooks, interactions and place lifecycle extraction."
     },
     "game3d/js/menu.js": {
@@ -44,17 +44,17 @@
       "reason": "Existing procedural character and animation implementation; changes require character review."
     },
     "game3d/js/perf/batch.js": {
-      "lines": 1164,
-      "bytes": 41716,
+      "lines": 1165,
+      "bytes": 41808,
       "owner": "codex-tui",
-      "review": "C-0071; 2026-09-30 preparation slices (yield points, notes/PERF.md)",
+      "review": "C-0071; 2026-09-30 preparation slices (yield points, notes/PERF.md); 2026-09-30 busy() for the shader warm-up (notes/PERF.md)",
       "reason": "Existing batching and geometry optimization utilities; preserve rendering behavior during this pass."
     },
     "game3d/js/places/lift.js": {
       "lines": 1206,
-      "bytes": 43400,
+      "bytes": 43498,
       "owner": "codex-tui",
-      "review": "C-0071",
+      "review": "C-0071; 2026-09-30 landing lamp kept in the light count (notes/PERF.md)",
       "reason": "Existing shared lift geometry, movement and dialogue staging; extract after behavior characterization."
     },
     "game3d/js/places/lobby.js": {

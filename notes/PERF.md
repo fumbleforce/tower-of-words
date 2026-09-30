@@ -226,5 +226,39 @@ The office preload takes longer in wall time (about 0.5 s became 0.9 s; 3.4 s at
 frame, which is well inside the forecourt walk. The 1% low over a few seconds is one or two frames, so it moves a lot
 between runs; the longest task is the steady number. Left over at CPU 4x: attachLift (about 50 ms), one office step
 with a canvas text texture (48 ms) and the outdoor chunk builders (forecourt, plaza, dorm_court, dorms), which are
-small and not yet split. The worst frames the fast test prints (train 233 ms, office 217 ms) are not preparation
-(this tool sees no task over 50 ms there); they come from entering a place, probably shader compiles (not checked).
+small and not yet split. The worst frames the fast test printed on entering a place were shader compiles: see Entry
+hitches below.
+
+## Entry hitches: shader warm-up (2026-09-30): js/perf/warm.js
+
+Cause, measured with `hitch.mjs` in entry mode (a trip written `from>to`: `to` is prepared and left to settle, then
+`game.travel(to)`; it times every WebGL call, `GLDETAIL=1` by method and program, `PROGRAMS=1` lists the new ones):
+on build c298db0 the office entry frame (250 ms, desktop q0) was 142 ms of shader compile and link (36 new
+programs), 28 ms of texture upload, 25 ms of buffer upload and the rest JS; the gate entry (133 ms) was 109 ms of
+shaders. Programs depend on the scene's light count, so every place needs its own even for materials seen before.
+
+The fix: at the end of `prepare()` in places/lifecycle.js (after the draw-call pass is done), `warmPlace()` compiles
+the next place's programs with `renderer.compileAsync` a few meshes at a time between frames (6 ms slices), uploads its
+textures (`renderer.initTexture`), then makes the first use of each program (`getUniforms`), which in Chrome still
+waited 10 to 20 ms a program after the driver said it was ready. What `compile()` doesn't cover is handled by
+stand-ins: the shadow pass's depth material per kind of caster, and the materials the GTAO normal pass and the outline
+draw the whole scene with (`game.overrideMaterials()` in main.js, only while they are on). Eric and Mio are compiled
+for the next place too. The scene is compiled for a half-float render target, as the RenderPass draws into one.
+
+Also fixed: the lift's landing lamp came and went with the landing, which changed the light count and recompiled the
+whole forecourt mid-ride (67 ms). It now stays in the scene at intensity 0 (places/lift.js).
+
+Worst frame of the entry (walk out, crossfade, 2 s in the new place), GL=gpu, before (c298db0) → after:
+
+| trip | 1366x860 q1 | 390x844 q1 | 1366x860 q0 | 390x844 q0 |
+|---|--:|--:|--:|--:|
+| train → gate | 100 → 50 ms | 133 → 50 | 133 → 33 | 133 → 50 |
+| gate → forecourt | 83 → 33 | 67 → 33 | 67 → 50 | 67 → 17 |
+| forecourt → office (lift) | 217 → 50 | 183 → 50 | 233 → 50 | 200 → 50 |
+
+No long task over 57 ms is left on any entry. Frames are vsync-quantised (16.7 ms steps). Left: the lift cut-away's
+clipped materials (their shadow depth variant, about 19 ms at the office and forecourt): three's `compile()` can't
+build clipping variants (it never sets the clipping state), so they compile on first use; buffer uploads (bufferData,
+up to 16 ms; three has no public way to upload geometry ahead); and the crossfade snapshot (`canvas.toDataURL`,
+25 to 45 ms, in the last frame of the old place).
+

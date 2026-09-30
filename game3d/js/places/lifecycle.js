@@ -7,6 +7,7 @@ import { attachLift } from './lift.js';
 import { lookSteps } from '../look/index.js';
 import { sliced, setUrgent, nextFrame } from '../perf/slice.js';
 import { optimizePlace } from '../perf/batch.js';
+import { warmPlace } from '../perf/warm.js';
 import { SmoothWalker } from '../move.js';
 import { setPlace as sfxPlace } from '../sfx.js';
 import { playMusic } from '../ui.js';
@@ -36,6 +37,11 @@ export function createPlaceLifecycle(
         // place being played doesn't stall (js/perf/slice.js)
         await sliced(lookSteps(place, game));
         if (name === 'office') optimizePlace(place, { game });
+        // shaders and textures ready before the first frame there, so entering doesn't stall (js/perf/warm.js)
+        place.warm = await warmPlace(game.renderer, place, {
+          extra: [game.player?.root, game.mioNpc?.root],
+          overrides: game.overrideMaterials?.() || [],
+        });
         return { place, story };
       })();
     return game.prepared[name];

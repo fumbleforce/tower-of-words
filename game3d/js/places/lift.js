@@ -431,7 +431,7 @@ function buildCar(site) {
   landing.add(spill);
   const landLamp = new THREE.PointLight('#ffe2bd', 0, 3.0, 1.6);
   landLamp.position.set(0, 1.2, site.zFront - site.zBack + 0.5);
-  landing.add(landLamp);
+  g.add(landLamp); // not in `landing`: a light coming and going changes every shader's light count (a mid-ride recompile)
   landing.visible = false;
   g.add(landing);
   // the lid: in the lobby the car sits behind a tall wall; from the lobby's own camera nothing of it should show
