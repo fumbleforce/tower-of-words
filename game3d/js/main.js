@@ -544,7 +544,7 @@ function step(dt) {
   if (game.walker && !mio.seated && !mio.scripted) moving = game.walker.update(dt, place.camera);
   if (!mio.seated && !mio.scripted) {
     mio.setState(moving ? 'walk' : 'idle');
-    mio.setGait?.(game.walker.gait ? game.walker.gait.v : null);
+    mio.setGait?.(game.walker.gait.v, game.walker.gait); // .run
   } else mio.setGait?.(null);
   mio.update(dt, 1.25);
   if (game.mioNpc.root.visible) game.mioNpc.update(dt, 1.25);
