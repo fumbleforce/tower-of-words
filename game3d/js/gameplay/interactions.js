@@ -177,6 +177,8 @@ export function installInteractions(game) {
       meet(game, item.id);
       ui.refreshPeople(sim.met.size);
     }
+    // a thing whose only use now is a word (an empty talk node doesn't count): E opens the Say menu
+    if (item.sayOnly?.()) return void say();
     if (game.runner.trigger('talk:' + item.id)) return;
     if (item.act) {
       game.beat(() => item.act());
@@ -185,7 +187,6 @@ export function installInteractions(game) {
     const look = item.look;
     if (look) game.beat(() => ui.say(null, typeof look === 'function' ? look() : look));
     else if (person) idleTalk(game, item.id);
-    else if (item.sayOnly?.()) say();
   }
   // what E does on a target now: talk to a person, the story's talk: trigger, or the thing's own act or look line
   function canUse(item) {
