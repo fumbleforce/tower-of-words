@@ -404,6 +404,10 @@ change on screen:
   geometry) sends it back to drawing itself; its joints are only watched for staying visible and attached. People's
   batches are built at the first scan, hidden ones too (Aoi and Rei in the office), so nobody draws part by part for
   2 s when shown. Outlined people draw from skinned twins (batch-twin.js). `?norig` turns it off.
+- Culling (issue #155): each skinned batch keeps a sphere per joint round that joint's parts, and every frame, before
+  the cameras cull (check()), its culling sphere is refitted round those spheres where the joints are now; the twins
+  share it. A fixed sphere round the bind pose let Kuroda's briefcase swing out of it, so the batch could vanish at
+  the screen edge. test/unit/rig-bounds.test.mjs walks, sits and idles every person and checks each vertex.
 - Phone office (js/perf/phone.js): props a scene adds later under `place.space` (the copier's sheets, the vending
   machine's can) cast no sun shadow, like the office's other props there; the 15 sheets in the copier tray drew 30
   times a frame while settling.
