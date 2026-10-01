@@ -138,6 +138,7 @@ export function dormsPlace(game) {
     start: w.landing,
     startFacing: -Math.PI / 2, // along the corridor toward his door
     defaultPeriod: 'evening',
+    photoReady: () => st.inside && !st.entering, // the end card's "Eric's room" is the room, not the corridor (#92)
     music: 'night',
     grade: {
       exposure: 1.0,

@@ -1,10 +1,10 @@
 // The product shell around the day: the boot loader, the title (a posed shot of the train from outside, then a
 // camera flight into the car on Start), settings, the pause menu, three save slots with thumbnails, and the
-// loading chip between places. Loaded by index.html next to main.js; talks to the game through window.__game.
+// loading chip between places. Talks to the game through window.__game.
 //
 // Hooks it expects from main.js (see notes/production-requests.md):
-//   game.paused       menu.js sets it while the pause menu is open; the loop should skip step() while it's true
-//   body.loading      places/lifecycle.js sets it while travel(), its walk out done, waits for the next place to finish building
+//   game.paused       menu.js sets it while the pause menu is open; the loop skips step() meanwhile
+//   body.loading      places/lifecycle.js sets it while travel() waits for the next place to finish building
 // Without them the pause menu still stops sound, input and text, and the loading chip never shows.
 //
 // QA: ?shell=title|settings|pause|save|load|loading|end opens that screen on its own (with made-up save data),
@@ -1089,7 +1089,7 @@ window.addEventListener(
 );
 
 // ---------- photos of the day, for the end screen ----------
-// One quiet frame per place; end.js refreshes the final room after Eric walks in.
+// A quiet frame per place once photoReady() allows (#92; tests: ?photos); end.js redoes the last
 let placeSince = 0,
   placeName = '';
 async function photo(n, replace = false) {
@@ -1101,21 +1101,14 @@ async function photo(n, replace = false) {
     /* */
   }
 }
+const canShoot = (g) => g?.place && (!TEST || Q.has('photos')) && !CAP && !SHELL && g.place.photoReady?.() !== false;
 shell.photoNow = async () => {
   const g = game();
-  if (g && g.place && !TEST && !CAP && !SHELL) await photo(g.place.name, true);
+  if (canShoot(g)) await photo(g.place.name, true);
 };
 setInterval(async () => {
   const g = game();
-  if (
-    !g ||
-    !g.place ||
-    TEST ||
-    CAP ||
-    SHELL ||
-    document.body.classList.contains('at-title') ||
-    document.body.classList.contains('title-leaving')
-  )
+  if (!canShoot(g) || document.body.classList.contains('at-title') || document.body.classList.contains('title-leaving'))
     return;
   const n = g.place.name,
     now = performance.now();
