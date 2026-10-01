@@ -34,9 +34,11 @@ export const BORDER = 0.42; // the dark border ring, inside R
 export const HALF = path('route_home').w / 2;
 export const LZ = r2(local(path('route_home').line[0])[1]);
 const UNDER = Math.sqrt(R * R - HALF * HALF) - 1.0; // how far in the lanes and the link run, under the circle
+// past the plaza the lane turns north (the jog, built by plaza/east-lane.js): x of the leg's west edge
+export const JOG_W = r2(local(path('route_home').line[1])[0] - HALF);
 export const LANE = {
   w: [-44, F[0] - UNDER, LZ - HALF, LZ + HALF], // in from head office
-  e: [F[0] + UNDER, 44, LZ - HALF, LZ + HALF], // out toward the dorms
+  e: [F[0] + UNDER, JOG_W, LZ - HALF, LZ + HALF], // out toward the dorms, to the jog's corner
 };
 
 // the canteen and the shop street
@@ -88,7 +90,8 @@ export const ARCS = {
 // the zelkovas along the lanes, every 4 from the ring bed out to the edge of the view; the lamps stand between
 // every other pair
 export const AVENUE = [0, 4, 8].map((d) => R + BAND + 3 + d);
-export const FOOTPATH = [-44, 44, SHOPS_Z - 1.7, SHOPS_Z];
+// the footpath along the shops' backs, east to the dorm street
+export const FOOTPATH = [-44, local(path('dorm_street').rect)[0], SHOPS_Z - 1.7, SHOPS_Z];
 
 export const inRect = (x, z, [x0, x1, z0, z1], m = 0) => x > x0 + m && x < x1 - m && z > z0 + m && z < z1 - m;
 export const onLane = (x, z) => LANE_RECTS.some((r) => inRect(x, z, r, 0.25));

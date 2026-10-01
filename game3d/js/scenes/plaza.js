@@ -6,9 +6,9 @@
 // canteen's door, its terrace and a short link from the terrace to the circle. Built with the shared outdoor kit
 // (scenes/outdoor/): the ground in plaza/ground.js, the planting and edges in plaza/green.js, lamps, benches, the
 // notice board and the terrace in plaza/furniture.js, the fountain in plaza/fountain.js, the canteen and the shop
-// street in plaza-buildings.js. Everything else comes from the layout through buildSkyline. Palette and light are the
-// forecourt's; after work the lamps, the lights round the basin, the canteen, the shops and the town's windows light
-// up.
+// street in plaza-buildings.js, the east lane on to the dorm street (backdrop) in plaza/east-lane.js. Everything else
+// comes from the layout through buildSkyline. Palette and light are the forecourt's; after work the lamps, the lights
+// round the basin, the canteen, the shops and the town's windows light up.
 import * as THREE from 'three';
 import { Nav } from '../movement/navigation.js';
 import { outdoorLight, TOWN } from './town.js';
@@ -32,6 +32,8 @@ import {
 import { pigeons } from './outdoor/pigeons.js';
 import { fountain } from './plaza/fountain.js';
 import * as P from './plaza/plan.js';
+import { buildEastLane } from './plaza/east-lane.js';
+import { BLOCK_IDS } from './plaza/east-plan.js';
 
 const { F, R, BASIN, LZ, HALF, LINK, CANTEEN, SHOPS, DOOR_X, TERRACE, TERRACE_S, building, local, onLane, inRect } = P;
 const CHUNK = 'plaza';
@@ -81,6 +83,8 @@ export function* plazaSteps() {
   const board = buildNoticeBoard(p, nav);
   const chairs = buildTerrace(root, nav);
   buildBikes(root, nav);
+  yield;
+  const east = buildEastLane(root, p, lights); // backdrop: the lane on east to the dorm street
   p.build(root);
   const lit = lights.build(root, { poolY: 0.028 }); // over the circle's stones
   const flock = pigeons(root, PIGEON_HOME, { n: 6 });
@@ -108,7 +112,7 @@ export function* plazaSteps() {
   );
   const sky = yield* skylineSteps(root, CHUNK, {
     layout: LAYOUT,
-    skip: ['canteen', 'shops_north', 'arcade', 'shops_south'],
+    skip: ['canteen', 'shops_north', 'arcade', 'shops_south', ...BLOCK_IDS],
   });
   yield* mergeStaticSteps(root);
 
@@ -147,6 +151,7 @@ export function* plazaSteps() {
       hall.glass.emissiveIntensity = 0.45;
       water.evening();
       street.glass.emissiveIntensity = 0.55;
+      east.evening();
       sky.onPeriod('evening');
     },
     skyline: sky.stats,

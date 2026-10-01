@@ -48,7 +48,9 @@ function terrace(pv) {
 export function buildGround(root) {
   // the lawn under everything; the arcade's floor between the shop rows
   groundPatches(root, [[-44, 44, -30, SHOPS_Z + SHOPS.depth, TOWN.grass]]);
-  groundPatches(root, [[-44, 44, SHOPS_Z + SHOPS.depth, SHOPS_Z + SHOPS.depth * 2, TOWN.paving]]);
+  const rowsEnd = SHOPS.a[0] + SHOPS.length; // past the rows' east end, the lawn (plaza/east-lane.js lays the walk on)
+  groundPatches(root, [[-44, rowsEnd, SHOPS_Z + SHOPS.depth, SHOPS_Z + SHOPS.depth * 2, TOWN.paving]]);
+  groundPatches(root, [[rowsEnd, 44, SHOPS_Z + SHOPS.depth, SHOPS_Z + SHOPS.depth * 3, TOWN.grass]]);
   const pv = paver();
   lanes(pv);
   terrace(pv);
