@@ -9,9 +9,7 @@ Takes already on disk are skipped. Checks the GPU lock (cfg.LOCK, owner cfg.ME) 
 Run with the Qwen venv: ~/ai/tts/qwen/venv/bin/python (run.sh does)."""
 import json, os, sys, time
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from cfg import RAW, ALT, XVEC_JA, load, units, missing, speakers, lock_ok, spoken
-
-QWEN = os.environ.get('QWEN_MODEL', os.path.expanduser('~/ai/tts/qwen/Qwen3-TTS-12Hz-1.7B-Base'))
+from cfg import RAW, ALT, XVEC_JA, QWEN, load, units, missing, speakers, lock_ok, spoken, setup
 seeds = [int(x) for x in sys.argv[1].split(',')]
 arg = sys.argv[2] if len(sys.argv) > 2 and not sys.argv[2].startswith('--') else ''
 keys = set(arg.split(',')) if arg else set(missing())
@@ -44,9 +42,9 @@ for e in units(keys):
 print('lines', sum(len(v) for v in todo.values()), flush=True)
 if not todo:
     sys.exit()
-unknown = {sp for sp, _ in todo} - set(SP)
-if unknown:
-    sys.exit(f'no voice for speaker(s) {sorted(unknown)}: add them to speakers() in tools/voice/cfg.py')
+problems = setup({e.get('line', e['key']) for es in todo.values() for e in es})
+if problems:
+    sys.exit('voice setup:\n  ' + '\n  '.join(problems))
 
 import torch, soundfile as sf  # noqa: E402
 from qwen_tts import Qwen3TTSModel  # noqa: E402
