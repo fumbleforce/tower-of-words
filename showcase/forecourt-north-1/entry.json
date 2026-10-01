@@ -1,0 +1,57 @@
+{
+ "title": "Forecourt: the blocks north of the court",
+ "date": "2026-10-01",
+ "by": "claude-agent:forecourt-north",
+ "caption": "The top left of the day's first outdoor frames was a plain box on bare lawn. Head office's wing is now a building with a glazed ground floor and its own doors, a street runs north up the platform shed, and a second street runs behind the wing and the tower. Backdrop only (issue #140). Same cameras before and after.",
+ "sections": [
+  {
+   "title": "Stepping out of the station (desktop)",
+   "caption": "Top left: the street leaving the court's north-west corner, the wing with its lawn and hedge, and its staff door's porch.",
+   "images": [
+    {"id": "fc1-desk-before", "image": "bible/shots/showcase/forecourt-north-1/before-fc1-desk.webp", "caption": "Before"},
+    {"id": "fc1-desk-after", "image": "bible/shots/showcase/forecourt-north-1/after-fc1-desk.webp", "caption": "After"}
+   ]
+  },
+  {
+   "title": "Crossing the court (desktop)",
+   "caption": "A few steps up the street, three bollards with yellow-and-black chains close it.",
+   "images": [
+    {"id": "fc2-desk-before", "image": "bible/shots/showcase/forecourt-north-1/before-fc2-desk.webp", "caption": "Before"},
+    {"id": "fc2-desk-after", "image": "bible/shots/showcase/forecourt-north-1/after-fc2-desk.webp", "caption": "After"}
+   ]
+  },
+  {
+   "title": "Stepping out of the station (phone)",
+   "caption": "The phone looks up the court, so it sees the tower's wall along the service yard; that wall now has windows and a vent.",
+   "images": [
+    {"id": "fc1-phone-before", "image": "bible/shots/showcase/forecourt-north-1/before-fc1-phone.webp", "caption": "Before"},
+    {"id": "fc1-phone-after", "image": "bible/shots/showcase/forecourt-north-1/after-fc1-phone.webp", "caption": "After"}
+   ]
+  },
+  {
+   "title": "At the chains",
+   "caption": "Eric can walk up the street as far as the chains.",
+   "images": [
+    {"id": "bar-desk", "image": "bible/shots/showcase/forecourt-north-1/after-bar-desk.webp", "caption": "Desktop"},
+    {"id": "bar-phone", "image": "bible/shots/showcase/forecourt-north-1/after-bar-phone.webp", "caption": "Phone"}
+   ]
+  },
+  {
+   "title": "After work",
+   "caption": "The wing's ground floor and some of its windows are lit, with the windows in the tower's yard wall.",
+   "images": [
+    {"id": "fc1e-desk-before", "image": "bible/shots/showcase/forecourt-north-1/before-fc1e-desk.webp", "caption": "Before"},
+    {"id": "fc1e-desk-after", "image": "bible/shots/showcase/forecourt-north-1/after-fc1e-desk.webp", "caption": "After"}
+   ]
+  },
+  {
+   "title": "From above",
+   "caption": "The island map's view of the forecourt. After: the street up the shed, the square junction, the cross street behind the wing and the tower, the wing's paths to its door and its bike shelter.",
+   "images": [
+    {"id": "plan-before", "image": "bible/shots/showcase/forecourt-north-1/before-plan.webp", "caption": "Before"},
+    {"id": "plan-after", "image": "bible/shots/showcase/forecourt-north-1/after-plan.webp", "caption": "After"}
+   ]
+  }
+ ],
+ "links": [{"label": "Play it", "href": "game3d/"}]
+}

@@ -2,7 +2,8 @@
 // deliveries come in and the rubbish goes out. A closed steel gate with a STAFF ONLY sign across its mouth on the
 // court's edge, so it doesn't read as a way for him; inside, two roll cages of boxes by the wing's wall and a
 // delivery bike, a step and a lit plate at the tower's service door (scenes/head-office/tower.js), and across the
-// far end the roofed refuse store with its mesh doors, which closes the yard.
+// far end the roofed refuse store with its mesh doors, which closes the yard. Its collection doors, and the windows
+// in the tower's wall along the yard, are forecourt/north.js's.
 import { bollard, STEEL } from '../outdoor/furniture.js';
 import { sign, bikeRow } from './details.js';
 import * as P from './plan.js';

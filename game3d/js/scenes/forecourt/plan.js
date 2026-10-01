@@ -10,6 +10,7 @@
 //   the lane: east from the court's north-east corner along the tower's south face, an avenue on to the plaza
 import { STATION, DOOR_X } from '../station-exterior.js';
 import { T, at, DOOR_U, LU } from '../head-office/frame.js';
+import { BUILDINGS, toLocal } from '../island-layout.js';
 
 export { STATION, DOOR_X };
 export const X0 = STATION.x0, // the station's west face: the court's west edge
@@ -43,7 +44,29 @@ export const SERVICE = [5.95, T.o[0], TN, HZ]; // the service way north between 
 // the tower's service door near its north-west corner; it ends on the tower's north face line
 export const BIKES = [SE, HO_X + 1.95, ZN, 10.6];
 export const GARDEN = [BIKES[1], LE, ZN, 10.6]; // the raised garden east of the bike court
-export const NORTH_BED = [X0 + 0.3, 5.5, HZ + 0.05, HZ + 1.15]; // the raised bed along the court's north edge
+// The north edge (forecourt/north.js), seen beyond the court's bed: two streets as wide as the lane, and the wing
+// on its plot between them. The shed street leaves the court at its north-west corner, through a mouth west of the
+// north bed, and runs north along the platform shed; the cross street turns east off it behind the wing and the
+// tower and ends at office_e1's door (its west face, on the street's axis). The wing and office_e1 come from the
+// island layout.
+const box = (id) => {
+  const [x0, z0, x1, z1] = BUILDINGS.find((b) => b.id === id).rect;
+  const [a, c] = [toLocal('forecourt', x0, z0), toLocal('forecourt', x1, z1)].map((p) => p.map((v) => +v.toFixed(2)));
+  return [a[0], c[0], a[1], c[1]];
+};
+export const WING = box('head_office_wing'),
+  E1 = box('office_e1');
+export const STREET_W = 3;
+const XZ = (E1[2] + E1[3]) / 2; // the cross street's axis
+export const CROSS = [X0, E1[0], XZ - STREET_W / 2, XZ + STREET_W / 2];
+export const SHED_ST = [X0, X0 + STREET_W, CROSS[2] - 4, HZ]; // it runs on north past the junction, out of view
+export const JUNCTION = [SHED_ST[0], SHED_ST[1], CROSS[2], CROSS[3]];
+// a few steps up the shed street he can walk, to the chained bollards that close it; they stand far enough in that
+// the court's trees never hide them from the camera
+export const BARRIER_Z = HZ - 3.3;
+export const SHED_WALK = [SHED_ST[0] + 0.35, SHED_ST[1] - 0.35, BARRIER_Z + 0.3, HZ + 0.1];
+export const WING_PLOT = [SHED_ST[1], SERVICE[0], CROSS[3], HZ];
+export const NORTH_BED = [SHED_ST[1] + 0.3, 5.5, HZ + 0.05, HZ + 1.15]; // the raised bed along the court's north edge
 // the lane, and the planted strips either side of it (the north one starts past the tower)
 export const LANE = [LE, 52, HZ, HZ + 3];
 export const LANE_Z = (LANE[2] + LANE[3]) / 2;

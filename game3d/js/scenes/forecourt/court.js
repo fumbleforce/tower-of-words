@@ -54,7 +54,8 @@ function paving(root) {
 // the kerbs where paving meets grass or a bed
 function edges(p) {
   kerbRect(p, P.COURT, { sides: 'w' });
-  kerb(p, [X0, HZ], [5.95, HZ], { off: -0.08 }); // the court's north edge, west of the service lane
+  kerb(p, [P.SHED_ST[1], HZ], [5.95, HZ], { off: -0.08 }); // the court's north edge, from the shed street's mouth to
+  // the service lane
   kerbRect(p, P.SERVICE, { sides: 'wn' }); // the service yard (forecourt/service.js)
   kerbRect(p, BIKES, { sides: 's' });
   kerb(p, [LE, P.LANE[3]], [LE, ZN], { off: -0.08 }); // the court's east edge south of the lane
