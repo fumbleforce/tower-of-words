@@ -1,0 +1,127 @@
+{
+ "title": "Kuro's portrait down to the waist",
+ "date": "2026-10-01",
+ "by": "claude-agent:kuro-body",
+ "status": "open",
+ "question": "Which of these should replace Kuro in the game, or none?",
+ "multi": false,
+ "issue": 134,
+ "media": [
+  {
+   "image": "bible/shots/showcase/cast-faces-1/lineup.webp",
+   "caption": "Your note on showcase cast-faces-1: \"Kuro is off, her body is missing\". Her portrait ended at the chest; the others go to the waist."
+  },
+  {
+   "image": "bible/shots/kuro-body-1/lineup-all.webp",
+   "caption": "The cast as the game places them, then Kuro as installed, then every attempt in order (a, b, c; seeds 11 to 13)."
+  },
+  {
+   "image": "bible/shots/kuro-body-1/renders-imgqa.webp",
+   "caption": "Every render before the cut-out, beside the installed portrait, with the image check numbers."
+  },
+  {
+   "image": "bible/shots/kuro-body-1/game-1366x860-installed.webp",
+   "caption": "In the game now (desktop 1366x860): her picture ends above the bottom of the screen and fades out. The line is played on the train for this check, since the fast test never walks to her desk; the option cards have the same shot with each attempt."
+  },
+  {
+   "image": "bible/shots/kuro-body-1/game-390x844-installed.webp",
+   "caption": "In the game now (phone 390x844): her picture ends above the bottom of the screen and fades out. The line is played on the train for this check, since the fast test never walks to her desk; the option cards have the same shot with each attempt."
+  }
+ ],
+ "options": [
+  {
+   "id": "kuro-body-a-s11",
+   "label": "kuro-body-a-s11",
+   "image": "bible/shots/kuro-body-1/lineup-a-s11.webp",
+   "images": [
+    "bible/shots/kuro-body-1/a-s11.webp"
+   ],
+   "note": "Job a: first try: the new strip pre-filled by stretching her bottom rows down, denoise 1.0. Seed 11, RDBT, Euler A 30 steps, CFG 5, denoise 1.0, DifferentialDiffusion, 416 px added under the 1096x1408 render, 32 px seam. Her face and upper body are the installed file unchanged (max pixel change 0 above the seam). Red rim 5.5% (the anchor itself measures 6.0%). Seam: the model drew a new picture in the strip instead of continuing her (a-s11 a knee in tights, a-s12 a second collar and jacket, a-s13 a jacket hem with a hard line across). Not usable; shown because every attempt is. Prompt: masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1girl, solo, Luna, a 27-year-old night-shift receptionist: sleek black hair in a high bun held with two chopsticks, heavy black goth eyeliner, black cat-eye glasses with clear lenses, dark lipstick, company receptionist blazer over a black blouse, narrow face, slender, bored sly half-smile, waist-up portrait facing the viewer at a slight angle, plain light grey background, soft even studio light Negative: worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, fat, obese, plump, sunglasses, tinted eyewear, (rim light, red rim light, red outline, backlighting:1.4), holding, holding object, tool, screwdriver, pen, pencil, cup, phone, papers, book"
+  },
+  {
+   "id": "kuro-body-a-s12",
+   "label": "kuro-body-a-s12",
+   "image": "bible/shots/kuro-body-1/lineup-a-s12.webp",
+   "images": [
+    "bible/shots/kuro-body-1/a-s12.webp"
+   ],
+   "note": "Job a: first try: the new strip pre-filled by stretching her bottom rows down, denoise 1.0. Seed 12, RDBT, Euler A 30 steps, CFG 5, denoise 1.0, DifferentialDiffusion, 416 px added under the 1096x1408 render, 32 px seam. Her face and upper body are the installed file unchanged (max pixel change 0 above the seam). Red rim 6.1% (the anchor itself measures 6.0%). Seam: the model drew a new picture in the strip instead of continuing her (a-s11 a knee in tights, a-s12 a second collar and jacket, a-s13 a jacket hem with a hard line across). Not usable; shown because every attempt is. Prompt: masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1girl, solo, Luna, a 27-year-old night-shift receptionist: sleek black hair in a high bun held with two chopsticks, heavy black goth eyeliner, black cat-eye glasses with clear lenses, dark lipstick, company receptionist blazer over a black blouse, narrow face, slender, bored sly half-smile, waist-up portrait facing the viewer at a slight angle, plain light grey background, soft even studio light Negative: worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, fat, obese, plump, sunglasses, tinted eyewear, (rim light, red rim light, red outline, backlighting:1.4), holding, holding object, tool, screwdriver, pen, pencil, cup, phone, papers, book"
+  },
+  {
+   "id": "kuro-body-a-s13",
+   "label": "kuro-body-a-s13",
+   "image": "bible/shots/kuro-body-1/lineup-a-s13.webp",
+   "images": [
+    "bible/shots/kuro-body-1/a-s13.webp"
+   ],
+   "note": "Job a: first try: the new strip pre-filled by stretching her bottom rows down, denoise 1.0. Seed 13, RDBT, Euler A 30 steps, CFG 5, denoise 1.0, DifferentialDiffusion, 416 px added under the 1096x1408 render, 32 px seam. Her face and upper body are the installed file unchanged (max pixel change 0 above the seam). Red rim 6.8% (the anchor itself measures 6.0%). Seam: the model drew a new picture in the strip instead of continuing her (a-s11 a knee in tights, a-s12 a second collar and jacket, a-s13 a jacket hem with a hard line across). Not usable; shown because every attempt is. Prompt: masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1girl, solo, Luna, a 27-year-old night-shift receptionist: sleek black hair in a high bun held with two chopsticks, heavy black goth eyeliner, black cat-eye glasses with clear lenses, dark lipstick, company receptionist blazer over a black blouse, narrow face, slender, bored sly half-smile, waist-up portrait facing the viewer at a slight angle, plain light grey background, soft even studio light Negative: worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, fat, obese, plump, sunglasses, tinted eyewear, (rim light, red rim light, red outline, backlighting:1.4), holding, holding object, tool, screwdriver, pen, pencil, cup, phone, papers, book"
+  },
+  {
+   "id": "kuro-body-b-s11",
+   "label": "kuro-body-b-s11",
+   "image": "bible/shots/kuro-body-1/lineup-b-s11.webp",
+   "images": [
+    "bible/shots/kuro-body-1/b-s11.webp",
+    "bible/shots/kuro-body-1/game-1366x860-b-s11.webp",
+    "bible/shots/kuro-body-1/game-390x844-b-s11.webp"
+   ],
+   "note": "Job b: as a, plus the Anima LLLite inpainting-v2 patch (strength 1.0), which sees the picture and the mask. Seed 11, RDBT, Euler A 30 steps, CFG 5, denoise 1.0, LLLite inpainting-v2 1.0, DifferentialDiffusion, 416 px added under the 1096x1408 render, 32 px seam. Her face and upper body are the installed file unchanged (max pixel change 0 above the seam). Red rim 6.1% (the anchor itself measures 6.0%). Continues the blazer down to the waist with two more buttons and a pocket flap; arms at her sides, hands out of frame. The lower edge of her left side (image right) has pale pink folds, like the red line already on her chest in the anchor. Prompt: masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1girl, solo, Luna, a 27-year-old night-shift receptionist: sleek black hair in a high bun held with two chopsticks, heavy black goth eyeliner, black cat-eye glasses with clear lenses, dark lipstick, company receptionist blazer over a black blouse, narrow face, slender, bored sly half-smile, waist-up portrait facing the viewer at a slight angle, plain light grey background, soft even studio light Negative: worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, fat, obese, plump, sunglasses, tinted eyewear, (rim light, red rim light, red outline, backlighting:1.4), holding, holding object, tool, screwdriver, pen, pencil, cup, phone, papers, book"
+  },
+  {
+   "id": "kuro-body-b-s12",
+   "label": "kuro-body-b-s12",
+   "image": "bible/shots/kuro-body-1/lineup-b-s12.webp",
+   "images": [
+    "bible/shots/kuro-body-1/b-s12.webp",
+    "bible/shots/kuro-body-1/game-1366x860-b-s12.webp",
+    "bible/shots/kuro-body-1/game-390x844-b-s12.webp"
+   ],
+   "note": "Job b: as a, plus the Anima LLLite inpainting-v2 patch (strength 1.0), which sees the picture and the mask. Seed 12, RDBT, Euler A 30 steps, CFG 5, denoise 1.0, LLLite inpainting-v2 1.0, DifferentialDiffusion, 416 px added under the 1096x1408 render, 32 px seam. Her face and upper body are the installed file unchanged (max pixel change 0 above the seam). Red rim 6.1% (the anchor itself measures 6.0%). Continues the blazer down to the waist with two more buttons and a pocket flap; arms at her sides, hands out of frame. The lower edge of her left side (image right) has pale pink folds, like the red line already on her chest in the anchor. Prompt: masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1girl, solo, Luna, a 27-year-old night-shift receptionist: sleek black hair in a high bun held with two chopsticks, heavy black goth eyeliner, black cat-eye glasses with clear lenses, dark lipstick, company receptionist blazer over a black blouse, narrow face, slender, bored sly half-smile, waist-up portrait facing the viewer at a slight angle, plain light grey background, soft even studio light Negative: worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, fat, obese, plump, sunglasses, tinted eyewear, (rim light, red rim light, red outline, backlighting:1.4), holding, holding object, tool, screwdriver, pen, pencil, cup, phone, papers, book"
+  },
+  {
+   "id": "kuro-body-b-s13",
+   "label": "kuro-body-b-s13",
+   "image": "bible/shots/kuro-body-1/lineup-b-s13.webp",
+   "images": [
+    "bible/shots/kuro-body-1/b-s13.webp",
+    "bible/shots/kuro-body-1/game-1366x860-b-s13.webp",
+    "bible/shots/kuro-body-1/game-390x844-b-s13.webp"
+   ],
+   "note": "Job b: as a, plus the Anima LLLite inpainting-v2 patch (strength 1.0), which sees the picture and the mask. Seed 13, RDBT, Euler A 30 steps, CFG 5, denoise 1.0, LLLite inpainting-v2 1.0, DifferentialDiffusion, 416 px added under the 1096x1408 render, 32 px seam. Her face and upper body are the installed file unchanged (max pixel change 0 above the seam). Red rim 6.4% (the anchor itself measures 6.0%). Continues the blazer down to the waist with two more buttons and a pocket flap; arms at her sides, hands out of frame. The lower edge of her left side (image right) has pale pink folds, like the red line already on her chest in the anchor. Prompt: masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1girl, solo, Luna, a 27-year-old night-shift receptionist: sleek black hair in a high bun held with two chopsticks, heavy black goth eyeliner, black cat-eye glasses with clear lenses, dark lipstick, company receptionist blazer over a black blouse, narrow face, slender, bored sly half-smile, waist-up portrait facing the viewer at a slight angle, plain light grey background, soft even studio light Negative: worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, fat, obese, plump, sunglasses, tinted eyewear, (rim light, red rim light, red outline, backlighting:1.4), holding, holding object, tool, screwdriver, pen, pencil, cup, phone, papers, book"
+  },
+  {
+   "id": "kuro-body-c-s11",
+   "label": "kuro-body-c-s11",
+   "image": "bible/shots/kuro-body-1/lineup-c-s11.webp",
+   "images": [
+    "bible/shots/kuro-body-1/c-s11.webp",
+    "bible/shots/kuro-body-1/game-1366x860-c-s11.webp",
+    "bible/shots/kuro-body-1/game-390x844-c-s11.webp"
+   ],
+   "note": "Job c: as b, but the new strip starts as plain background colour instead of her stretched bottom rows. Seed 11, RDBT, Euler A 30 steps, CFG 5, denoise 1.0, LLLite inpainting-v2 1.0, DifferentialDiffusion, 416 px added under the 1096x1408 render, 32 px seam. Her face and upper body are the installed file unchanged (max pixel change 0 above the seam). Red rim 5.9% (the anchor itself measures 6.0%). Almost the same as b with the same seed: with the inpainting patch the starting fill makes little difference. Prompt: masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1girl, solo, Luna, a 27-year-old night-shift receptionist: sleek black hair in a high bun held with two chopsticks, heavy black goth eyeliner, black cat-eye glasses with clear lenses, dark lipstick, company receptionist blazer over a black blouse, narrow face, slender, bored sly half-smile, waist-up portrait facing the viewer at a slight angle, plain light grey background, soft even studio light Negative: worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, fat, obese, plump, sunglasses, tinted eyewear, (rim light, red rim light, red outline, backlighting:1.4), holding, holding object, tool, screwdriver, pen, pencil, cup, phone, papers, book"
+  },
+  {
+   "id": "kuro-body-c-s12",
+   "label": "kuro-body-c-s12",
+   "image": "bible/shots/kuro-body-1/lineup-c-s12.webp",
+   "images": [
+    "bible/shots/kuro-body-1/c-s12.webp",
+    "bible/shots/kuro-body-1/game-1366x860-c-s12.webp",
+    "bible/shots/kuro-body-1/game-390x844-c-s12.webp"
+   ],
+   "note": "Job c: as b, but the new strip starts as plain background colour instead of her stretched bottom rows. Seed 12, RDBT, Euler A 30 steps, CFG 5, denoise 1.0, LLLite inpainting-v2 1.0, DifferentialDiffusion, 416 px added under the 1096x1408 render, 32 px seam. Her face and upper body are the installed file unchanged (max pixel change 0 above the seam). Red rim 6.4% (the anchor itself measures 6.0%). Almost the same as b with the same seed: with the inpainting patch the starting fill makes little difference. Prompt: masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1girl, solo, Luna, a 27-year-old night-shift receptionist: sleek black hair in a high bun held with two chopsticks, heavy black goth eyeliner, black cat-eye glasses with clear lenses, dark lipstick, company receptionist blazer over a black blouse, narrow face, slender, bored sly half-smile, waist-up portrait facing the viewer at a slight angle, plain light grey background, soft even studio light Negative: worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, fat, obese, plump, sunglasses, tinted eyewear, (rim light, red rim light, red outline, backlighting:1.4), holding, holding object, tool, screwdriver, pen, pencil, cup, phone, papers, book"
+  },
+  {
+   "id": "kuro-body-c-s13",
+   "label": "kuro-body-c-s13",
+   "image": "bible/shots/kuro-body-1/lineup-c-s13.webp",
+   "images": [
+    "bible/shots/kuro-body-1/c-s13.webp",
+    "bible/shots/kuro-body-1/game-1366x860-c-s13.webp",
+    "bible/shots/kuro-body-1/game-390x844-c-s13.webp"
+   ],
+   "note": "Job c: as b, but the new strip starts as plain background colour instead of her stretched bottom rows. Seed 13, RDBT, Euler A 30 steps, CFG 5, denoise 1.0, LLLite inpainting-v2 1.0, DifferentialDiffusion, 416 px added under the 1096x1408 render, 32 px seam. Her face and upper body are the installed file unchanged (max pixel change 0 above the seam). Red rim 6.4% (the anchor itself measures 6.0%). Almost the same as b with the same seed: with the inpainting patch the starting fill makes little difference. Prompt: masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1girl, solo, Luna, a 27-year-old night-shift receptionist: sleek black hair in a high bun held with two chopsticks, heavy black goth eyeliner, black cat-eye glasses with clear lenses, dark lipstick, company receptionist blazer over a black blouse, narrow face, slender, bored sly half-smile, waist-up portrait facing the viewer at a slight angle, plain light grey background, soft even studio light Negative: worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, fat, obese, plump, sunglasses, tinted eyewear, (rim light, red rim light, red outline, backlighting:1.4), holding, holding object, tool, screwdriver, pen, pencil, cup, phone, papers, book"
+  }
+ ],
+ "links": []
+}

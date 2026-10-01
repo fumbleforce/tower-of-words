@@ -1,0 +1,170 @@
+{
+ "1": {
+  "class_type": "UNETLoader",
+  "inputs": {
+   "unet_name": "rdbtAnima.safetensors",
+   "weight_dtype": "default"
+  }
+ },
+ "2": {
+  "class_type": "CLIPLoader",
+  "inputs": {
+   "clip_name": "qwen_3_06b_base.safetensors",
+   "type": "stable_diffusion"
+  }
+ },
+ "3": {
+  "class_type": "VAELoader",
+  "inputs": {
+   "vae_name": "qwen_image_vae.safetensors"
+  }
+ },
+ "4": {
+  "class_type": "CLIPTextEncode",
+  "inputs": {
+   "text": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1girl, solo, Luna, a 27-year-old night-shift receptionist: sleek black hair in a high bun held with two chopsticks, heavy black goth eyeliner, black cat-eye glasses with clear lenses, dark lipstick, company receptionist blazer over a black blouse, narrow face, slender, bored sly half-smile, waist-up portrait facing the viewer at a slight angle, plain light grey background, soft even studio light",
+   "clip": [
+    "2",
+    0
+   ]
+  }
+ },
+ "5": {
+  "class_type": "CLIPTextEncode",
+  "inputs": {
+   "text": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, fat, obese, plump, sunglasses, tinted eyewear, (rim light, red rim light, red outline, backlighting:1.4), holding, holding object, tool, screwdriver, pen, pencil, cup, phone, papers, book",
+   "clip": [
+    "2",
+    0
+   ]
+  }
+ },
+ "10": {
+  "class_type": "LoadImage",
+  "inputs": {
+   "image": "INPUT_PADDED.png"
+  }
+ },
+ "11": {
+  "class_type": "VAEEncode",
+  "inputs": {
+   "pixels": [
+    "10",
+    0
+   ],
+   "vae": [
+    "3",
+    0
+   ]
+  }
+ },
+ "12": {
+  "class_type": "LoadImageMask",
+  "inputs": {
+   "image": "INPUT_MASK.png",
+   "channel": "red"
+  }
+ },
+ "14": {
+  "class_type": "DifferentialDiffusion",
+  "inputs": {
+   "model": [
+    "1",
+    0
+   ]
+  }
+ },
+ "13": {
+  "class_type": "SetLatentNoiseMask",
+  "inputs": {
+   "samples": [
+    "11",
+    0
+   ],
+   "mask": [
+    "12",
+    0
+   ]
+  }
+ },
+ "7": {
+  "class_type": "KSampler",
+  "inputs": {
+   "model": [
+    "A",
+    0
+   ],
+   "positive": [
+    "4",
+    0
+   ],
+   "negative": [
+    "5",
+    0
+   ],
+   "latent_image": [
+    "13",
+    0
+   ],
+   "seed": 11,
+   "steps": 30,
+   "cfg": 5,
+   "sampler_name": "euler_ancestral",
+   "scheduler": "normal",
+   "denoise": 1.0
+  }
+ },
+ "8": {
+  "class_type": "VAEDecode",
+  "inputs": {
+   "samples": [
+    "7",
+    0
+   ],
+   "vae": [
+    "3",
+    0
+   ]
+  }
+ },
+ "9": {
+  "class_type": "SaveImage",
+  "inputs": {
+   "images": [
+    "8",
+    0
+   ],
+   "filename_prefix": "kuro-body"
+  }
+ },
+ "P": {
+  "class_type": "ModelPatchLoader",
+  "inputs": {
+   "name": "anima-lllite-inpainting-v2.safetensors"
+  }
+ },
+ "A": {
+  "class_type": "AnimaLLLiteApply",
+  "inputs": {
+   "model": [
+    "14",
+    0
+   ],
+   "model_patch": [
+    "P",
+    0
+   ],
+   "image": [
+    "10",
+    0
+   ],
+   "mask": [
+    "12",
+    0
+   ],
+   "strength": 1.0,
+   "start_percent": 0.0,
+   "end_percent": 1.0
+  }
+ }
+}
