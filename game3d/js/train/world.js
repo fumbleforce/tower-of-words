@@ -25,7 +25,7 @@ void main(){
 const SEA_FRAG = /* glsl */ `
 precision highp float;
 varying vec3 vW;
-uniform float uTime, uScroll, uSeaY, uBeamY, uCarHalfZ, uPillarTop, uQuality, uBeam2Z, uBlur;
+uniform float uTime, uScroll, uSeaY, uBeamY, uCarHalfZ, uPillarTop, uQuality, uBeam2Z, uBlur, uBand;
 uniform vec3 uShadowDir, uSunDir, uCamPos;
 uniform float uPillarX[${NP}];
 uniform vec3 uDeep, uMid, uShallow, uFoam, uShadow;
@@ -127,8 +127,9 @@ void main(){
     float d = segDist(p, base, base - sh * hTop);
     shade = max(shade, smoothstep(0.55, 0.3, d));
   }
-  // the train and its beam throw one long soft band on the water, well off to the side of the car (it runs 17 m up)
-  shade = max(shade, 0.75 * smoothstep(2.6, 1.1, abs(p.y - 5.2)));
+  // the train and its beam throw one long soft band on the water, well off to the side of the car (it runs 17 m up;
+  // the band comes in as the line comes down to the island, setRide)
+  shade = max(shade, 0.75 * smoothstep(2.6, 1.1, abs(p.y - uBand)));
   col = mix(col, col * uShadow, shade * 0.78);
 
   // sun glints off the wave facets
@@ -166,6 +167,7 @@ export function buildWorld(scene, { sunDir }) {
         uCarHalfZ: { value: 1.3 },
         uBeam2Z: { value: BEAM2_Z },
         uBlur: { value: 0.14 },
+        uBand: { value: 5.2 },
         uPillarTop: { value: BEAM_TOP - 0.6 },
         uQuality: { value: 1 },
         uShadowDir: { value: SEA_SHADOW_DIR.clone() },
@@ -196,6 +198,33 @@ export function buildWorld(scene, { sunDir }) {
   const beam2 = beam.clone();
   beam2.position.z = BEAM2_Z;
   root.add(beam2);
+
+  // where the line ends (setRide): the beams stop at a buffer block; past it no pillars or joints
+  let end = Infinity;
+  const plateMat = new THREE.MeshStandardMaterial({ color: '#c9ccd0' });
+  const buffers = [0, BEAM2_Z].map((z) => {
+    const b = new THREE.Group();
+    const block = new THREE.Mesh(new RoundedBoxGeometry(0.7, 1.15, 0.9, 2, 0.08), concreteDark);
+    block.position.y = BEAM_TOP - 0.3;
+    const plate = new THREE.Mesh(new THREE.BoxGeometry(0.06, 0.34, 0.7), plateMat);
+    plate.position.set(-0.37, BEAM_TOP - 0.1, 0);
+    b.add(block, plate);
+    b.position.set(0, 0, z);
+    b.visible = false;
+    root.add(b);
+    return b;
+  });
+  function placeEnd() {
+    const open = !(end < 80);
+    for (const bm of [beam, beam2]) {
+      bm.scale.x = open ? 1 : Math.max(0.001, (end + 80) / 160);
+      bm.position.x = open ? 0 : (end - 80) / 2;
+    }
+    for (const b of buffers) {
+      b.visible = !open;
+      b.position.x = end + 0.35;
+    }
+  }
 
   const joints = new THREE.Group();
   root.add(joints);
@@ -249,6 +278,7 @@ export function buildWorld(scene, { sunDir }) {
       let x = i * PILLAR_GAP - (scroll % span);
       x = (((x % span) + span) % span) - span / 2 + 4;
       pillars[i].position.x = x;
+      pillars[i].visible = x < end - 0.8;
       u.uPillarX.value[i] = x;
     }
     const jspan = JGAP * JN;
@@ -256,6 +286,7 @@ export function buildWorld(scene, { sunDir }) {
       const i = idx;
       let x = i * JGAP - (scroll % jspan);
       j.position.x = (((x % jspan) + jspan) % jspan) - jspan / 2;
+      j.visible = j.position.x < end;
     });
   }
 
@@ -270,7 +301,18 @@ export function buildWorld(scene, { sunDir }) {
     root,
     sea,
     update,
-    movers: pillars, // for the draw-call pass (place.perfMovers)
+    movers: [...pillars, ...buffers], // for the draw-call pass (place.perfMovers)
+    // the run in to the station (train/island.js): the sea's level under the car, and where the line ends ahead
+    // (Infinity: on over the bay)
+    setRide(seaY, lineEnd) {
+      sea.position.y = seaY;
+      u.uSeaY.value = seaY;
+      u.uBand.value = (5.2 * (0.4 - seaY)) / (0.4 - SEA_Y);
+      if (lineEnd !== end) {
+        end = lineEnd;
+        placeEnd();
+      }
+    },
     pillarNear,
     setQuality: (q) => {
       u.uQuality.value = q ? 1 : 0.6;

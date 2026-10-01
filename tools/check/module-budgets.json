@@ -72,10 +72,10 @@
       "reason": "Existing office place geometry and interaction hooks; stage 5 room-builder review is planned."
     },
     "game3d/js/places/train.js": {
-      "lines": 1692,
-      "bytes": 61863,
+      "lines": 1680,
+      "bytes": 61706,
       "owner": "codex-tui",
-      "review": "C-0076; C-0166 named sounds per door and machine; 2026-09-30 eleven wiring lines for the passengers' discovery props and hooks (train/discoveries.js, issue #89); 2026-10-01 issue #137: layout() split from fit() and the perfMovers list (notes/PERF.md); 2026-10-01 issue #145: car.cab in perfMovers, saved car parts restored only from the same build (notes/PERF.md)",
+      "review": "C-0076; C-0166 named sounds per door and machine; 2026-09-30 eleven wiring lines for the passengers' discovery props and hooks (train/discoveries.js, issue #89); 2026-10-01 issue #137: layout() split from fit() and the perfMovers list (notes/PERF.md); 2026-10-01 issue #145: car.cab in perfMovers, saved car parts restored only from the same build (notes/PERF.md); 2026-10-01 issue #144: the run in's speed moved to train/island.js with the island it shows",
       "reason": "Existing train place geometry, animation and scene hooks; stage 5 room-builder review is planned."
     },
     "game3d/js/post.js": {
