@@ -3,7 +3,7 @@ import { migrateForecourtSave } from './places/forecourt-save.js';
 import { createPlaceLifecycle } from './places/lifecycle.js';
 import { GLOBAL_HOOKS } from './narrative/hooks.js';
 import { installInteractions } from './gameplay/interactions.js';
-import { outlineMeshes } from './gameplay/highlight.js';
+import { outlineMeshes, meshesNear } from './gameplay/highlight.js';
 import { PLACE_FILES, NEXT, canTravel } from './places/definitions.js';
 import { assertRegistered } from './narrative/registration.js';
 import { needsLegacyOpening } from './narrative/legacy-opening.js';
@@ -243,6 +243,7 @@ function setComposer(place) {
   outline.hiddenEdgeColor.set('#000000');
   outline.edgeStrength = 5.0;
   outline.edgeThickness = 1.0; // Jørgen: "i want the MODEL ITSELF to get an outline"
+  outline.resolve = (l) => place.perf?.forOutline(l) || l; // merged meshes outline through their twins
   // after the place's beforeAO pass, where the train's roof proxy hides (else it masks every target on the train)
   composer.insertPass(outline, place.beforeAO ? 2 : 1);
   applyQuality();
@@ -292,32 +293,21 @@ function objsOf(m) {
   const t = P.things && P.things[m.id];
   if (t && t.outline) return [].concat(t.outline()).filter(Boolean);
   if (t && t.obj) return [t.obj];
-  if (t && t.anchor && !/person/.test(t.kind || '')) return meshesNear(m.id, t);
+  if (t && t.anchor && !/person/.test(t.kind || '')) return nearOf(m.id, t);
   return [];
 }
-// a thing with no obj of its own: the small meshes around its anchor (cached per place and thing), so outlines and
-// the kotodama shimmer land on the copier, the kettle, the vending machine... (QA round 1: no visible payoff)
+// a thing with no obj of its own: the small meshes around its anchor, cached per place and thing (gameplay/highlight.js)
 const nearCache = new Map();
-function meshesNear(id, t) {
+function nearOf(id, t) {
   const P = game.place,
     key = P.name + ':' + id;
-  if (nearCache.has(key)) return nearCache.get(key);
-  const a = t.anchor(new THREE.Vector3()),
-    box = new THREE.Box3(),
-    c = new THREE.Vector3(),
-    sz = new THREE.Vector3(),
-    out = [];
-  P.space.updateMatrixWorld(true);
-  P.space.traverse((o) => {
-    if (!o.isMesh || !o.visible || o.isSkinnedMesh) return;
-    box.setFromObject(o);
-    box.getCenter(c);
-    box.getSize(sz);
-    if (sz.x > 1.6 || sz.z > 1.6 || sz.y > 2.2) return; // walls, floors, counters
-    if (Math.hypot(c.x - a.x, c.z - a.z) < 0.55 && c.y < a.y + 0.3) out.push(o);
-  });
-  nearCache.set(key, out);
-  return out;
+  if (!nearCache.has(key)) {
+    const skip = new Set([game.player?.root, game.mioNpc?.root]);
+    for (const r of Object.values(P.people || {})) skip.add(r?.root);
+    for (const x of Object.values(P.things || {})) skip.add(x?.obj);
+    nearCache.set(key, meshesNear(P.space, t.anchor(new THREE.Vector3()), skip));
+  }
+  return nearCache.get(key);
 }
 game.objsOf = objsOf;
 const hoverRay = new THREE.Raycaster();
