@@ -44,6 +44,13 @@ export async function plazaPlace(game) {
       spot: () => w.dormExit,
       face: () => w.dormEdge,
     },
+    // the training centre's door up the cross walk (block_e1): locked, it says why (story/plaza.js)
+    training_door: {
+      ...PLACE_DETAILS.plaza.things.training_door,
+      anchor: (v) => v.set(w.trainingDoor[0], 2.0, w.trainingDoor[1]),
+      spot: () => w.trainingStep,
+      face: () => w.trainingDoor,
+    },
     canteen_table: {
       ...PLACE_DETAILS.plaza.things.canteen_table,
       anchor: (v) => canteen.anchor(v),
@@ -125,7 +132,7 @@ export async function plazaPlace(game) {
           new THREE.Vector3(0, 0, 0),
           {
             follow: true,
-            clamp: [-8, 8, -11.5, 6.8],
+            clamp: [-8, 12.5, -11.5, 6.8], // east as far as the training centre's door
             lead: -1.4,
             limY: 0.96,
           },
@@ -140,7 +147,7 @@ export async function plazaPlace(game) {
             new THREE.Vector3(0, 1.2, 2.4),
           ],
           new THREE.Vector3(0, 0, 0),
-          { follow: true, clamp: [-12.5, 12.5, -14.5, 8.8], lead: -3.4 },
+          { follow: true, clamp: [-12.5, 18, -14.5, 8.8], lead: -3.4 },
         );
     },
     pick(rc) {

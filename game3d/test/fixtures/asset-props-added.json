@@ -614,4 +614,28 @@
       "thing"
     ]
   }
+,
+  {
+    "id_": "prop/plaza/training_door",
+    "kind": "prop",
+    "name": "Training centre",
+    "paths": [
+      "game3d/js/places/plaza.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "plaza.js things.training_door",
+    "place": "plaza",
+    "used": [
+      "Fountain plaza: tap target 'Training centre'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "plaza"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  }
 ]

@@ -20,6 +20,8 @@ import { Parts, rng } from '../outdoor/parts.js';
 import { shade } from '../outdoor/shade.js';
 import { bikeRow } from '../forecourt/details.js';
 import { buildFronts } from './east-fronts.js';
+import { signBoard } from '../plaza-buildings.js';
+import { faces, faceAt, tOf } from '../outdoor/block.js';
 import { LANE, FOOTPATH } from './plan.js';
 import * as E from './east-plan.js';
 import { BACK, E2 } from './north-plan.js';
@@ -325,6 +327,15 @@ export function buildEastLane(root, p, lights) {
   root.add(bikes);
   const fronts = buildFronts(q, lights, E.BLOCKS, { caster: p, casts: (k) => k.rect[0] < SHADOW_X });
   fronts.meshes(root);
+  // a block's sign standing on its door canopy's front edge, as the canteen's (k.sign: [kana, English])
+  for (const k of E.BLOCKS.filter((b) => b.sign)) {
+    const F = faces(k.rect)[k.face],
+      [x, z] = faceAt(F, tOf(F, k.at), 1.08);
+    const s = signBoard(k.sign[0], k.sign[1], 2.4, 0.6, '#44535f');
+    s.position.set(x, 2.72, z);
+    s.rotation.y = Math.atan2(F.n[0], F.n[1]);
+    root.add(s);
+  }
   for (const k of E.BLOCKS) if (k.rect[0] >= SHADOW_X) sh.block(k.rect, k.row.storeys * k.row.floorH);
   for (const m of q.build(root)) m.castShadow = false;
   const shadows = sh.build(root);

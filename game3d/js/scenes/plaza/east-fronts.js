@@ -3,6 +3,7 @@
 // bands, windows on every face, a flat roof with a parapet and plant (scenes/dorm-court/roofs.js), and a ground floor
 // that says what it is, with its door on its path:
 //   office  a glazed entrance under a canopy, window bands either side
+// dark: its windows stay unlit after work (nobody in on day 1); sign: [kana, English] on its canopy (east-lane.js)
 //   cafe    a glazed front between piers, an awning over each bay but the door's
 //   shop    a shopfront and a door hung with a noren, under a tiled roof
 //   house   a plain door with a light over it, a small window beside it
@@ -90,7 +91,7 @@ export function* frontsSteps(p, lights, blocks, { caster = p, casts = () => fals
         if (k.ground === 'office' && s > 0) {
           // a window band with mullions
           const L = F.L - 0.6;
-          onFace(pane(hash2(cx, y, f.charCodeAt(0)) < 0.45), F, F.L / 2, y + 0.55, 0.02, L, 0.9, 0.05);
+          onFace(pane(!k.dark && hash2(cx, y, f.charCodeAt(0)) < 0.45), F, F.L / 2, y + 0.55, 0.02, L, 0.9, 0.05);
           onFace(box(SILL, false), F, F.L / 2, y + 0.48, 0.06, L + 0.1, 0.07, 0.12);
           const m = Math.max(2, Math.round(L / 1.2));
           for (let i = 0; i <= m; i++) onFace(box(FRAME, false), F, 0.3 + (L * i) / m, y + 0.55, 0.05, 0.05, 0.9, 0.05);
@@ -219,8 +220,8 @@ function groundFloor(p, F, k, fh, { box, pane, lights }) {
       oz = F.a[1] + F.d[1] * at + F.n[1] * 0.9;
     lights.lit.push([ox, oz, 1.2]);
   };
-  const doors = (dw) => {
-    onFace(pane(true), F, at, 0.02, 0.02, dw, 1.95, 0.05);
+  const doors = (dw, lit = true) => {
+    onFace(pane(lit), F, at, 0.02, 0.02, dw, 1.95, 0.05);
     onFace(frame, F, at, 0.02, 0.05, 0.05, 1.95, 0.06);
     for (const s of [-1, 1]) onFace(frame, F, at + (s * dw) / 2, 0.02, 0.05, 0.08, 2.0, 0.08);
     onFace(frame, F, at, 1.97, 0.05, dw + 0.16, 0.08, 0.08);
@@ -242,10 +243,11 @@ function groundFloor(p, F, k, fh, { box, pane, lights }) {
     }
   };
   if (k.ground === 'office') {
-    doors(1.4);
+    const lit = !k.dark;
+    doors(1.4, lit);
     onFace(box('#8f969e'), F, at, 2.3, 0.55, 2.4, 0.12, 1.1); // the canopy
     onFace(box(STEEL.dark, false), F, at, 2.26, 1.05, 2.4, 0.04, 0.06);
-    bands(0.75, 1.05, 1.6, 1.3, true);
+    bands(0.75, 1.05, 1.6, 1.3, lit);
     lamp(2.15);
   } else if (k.ground === 'cafe') {
     doors(1.1);

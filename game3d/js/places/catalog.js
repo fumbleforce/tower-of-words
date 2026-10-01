@@ -166,6 +166,7 @@ export const PLACE_DETAILS = {
       office_lane: { label: 'To head office', kind: 'thing', verb: 'Go' },
       fountain: { label: 'Fountain', kind: 'thing' },
       dorm_lane: { label: 'To the dorms', kind: 'thing' },
+      training_door: { label: 'Training centre', kind: 'thing', verb: 'Go in' },
       canteen_table: { label: 'Canteen table', kind: 'thing', verb: 'Sit' },
       canteen_worker: { label: 'Canteen worker', kind: 'person' },
       noticeboard: { label: 'Notice board', kind: 'thing', verb: 'Read' },
