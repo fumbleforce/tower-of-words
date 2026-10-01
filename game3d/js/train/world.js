@@ -104,11 +104,14 @@ void main(){
   for (int k = 0; k < 6; k++) foam += foamAt(q + vec2(uBlur * (float(k) / 5.0 - 0.5), 0.0), crest);
   foam *= 1.0 / 6.0;
 
-  // foam collars where the pillars stand in the water
+  // foam collars where the pillars stand in the water: a crisp ring round the foot (radius 0.8), like the crest
+  // strokes, not a soft disc (that read as a blur where the run in brings a foot to the frame's edge)
   for (int i = 0; i < ${NP}; i++){
-    vec2 pc = vec2(uPillarX[i], 0.0);
-    float d = length((p - pc) * vec2(1.0, 1.2));
-    foam = max(foam, smoothstep(1.3, 0.75, d + h0 * 0.6) * 0.9);
+    for (int k = 0; k < 2; k++){ // both lines' pillars
+      vec2 pc = vec2(uPillarX[i], k == 0 ? 0.0 : uBeam2Z);
+      float d = length((p - pc) * vec2(1.0, 1.2));
+      foam = max(foam, smoothstep(1.12, 1.02, d + h0 * 0.3) * 0.9);
+    }
   }
   col = mix(col, uFoam, clamp(foam, 0.0, 1.0) * 0.72);
 
@@ -238,14 +241,18 @@ export function buildWorld(scene, { sunDir }) {
     joints.add(j);
   }
 
-  // Pillars: a tapered column with a hammerhead cap under the beam.
-  const pillars = [];
+  // Pillars: a tapered column with a hammerhead cap under the beam, and a foot where it stands in the sea. The feet
+  // ride on their own group (feet), which follows the sea's level on the run in (setRide): the column runs on down
+  // under the water, and the sea's foam collar always rings a foot.
+  const pillars = [],
+    feet = [];
   const colH = BEAM_TOP - 0.9 - 0.45 - (SEA_Y - 1);
   const colGeo = new THREE.CylinderGeometry(0.36, 0.46, colH, 10, 1);
   const capGeo = new RoundedBoxGeometry(1.1, 0.5, 1.5, 3, 0.12);
   const footGeo = new THREE.CylinderGeometry(0.72, 0.8, 0.8, 12, 1);
   for (let i = 0; i < NP; i++) {
-    const g = new THREE.Group();
+    const g = new THREE.Group(),
+      base = new THREE.Group();
     const col = new THREE.Mesh(colGeo, concrete);
     col.position.y = SEA_Y - 1 + colH / 2;
     const cap = new THREE.Mesh(capGeo, concrete);
@@ -255,13 +262,12 @@ export function buildWorld(scene, { sunDir }) {
     for (const m of [col, cap, foot]) {
       m.castShadow = false;
       m.receiveShadow = false;
-      g.add(m);
-    }
-    for (const m of [col, cap, foot]) {
       const c2 = m.clone();
       c2.position.z = BEAM2_Z;
-      g.add(c2);
+      (m === foot ? base : g).add(m, c2);
     }
+    g.add(base);
+    feet.push(base);
     root.add(g);
     pillars.push(g);
   }
@@ -301,12 +307,13 @@ export function buildWorld(scene, { sunDir }) {
     root,
     sea,
     update,
-    movers: [...pillars, ...buffers], // for the draw-call pass (place.perfMovers)
+    movers: [...pillars, ...feet, ...buffers], // for the draw-call pass (place.perfMovers)
     // the run in to the station (train/island.js): the sea's level under the car, and where the line ends ahead
     // (Infinity: on over the bay)
     setRide(seaY, lineEnd) {
       sea.position.y = seaY;
       u.uSeaY.value = seaY;
+      for (const f of feet) f.position.y = seaY - SEA_Y;
       u.uBand.value = (5.2 * (0.4 - seaY)) / (0.4 - SEA_Y);
       if (lineEnd !== end) {
         end = lineEnd;

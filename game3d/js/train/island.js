@@ -30,9 +30,10 @@ import { TOWN } from '../scenes/town.js';
 import { drain } from '../perf/slice.js';
 import { SEA_Y, BEAM2_Z } from './world.js';
 
-const { at: STOP, scale: S } = LAYOUT.CHUNKS.train;
-// an island point in the ride's frame, before the scale: north is +x, east +z, the stop at the origin
-const rideAt = (x, z) => [STOP[1] - z, x - STOP[0]];
+const { scale: S, turn: TURN } = LAYOUT.CHUNKS.train;
+// an island point in the ride's frame, before the scale: the train place's own frame (its chunk's turn makes north +x,
+// east +z), the stop at the origin
+const rideAt = (x, z) => LAYOUT.toLocal('train', x, z).map((v) => v * S);
 const SHED = LAYOUT.BUILDINGS.find((b) => b.id === 'platform_shed').rect;
 const GROUND_TINT = '#a2c2a6';
 export const WALL = 1.5; // the sea wall's height above the sea, car units
@@ -92,7 +93,7 @@ export function buildRideIsland(scene) {
     (function* () {
       yield* coastSteps(root, {
         at: rideAt,
-        turn: -Math.PI / 2,
+        turn: (TURN * Math.PI) / 180,
         sea: -WALL * S,
         clip: clear,
       });

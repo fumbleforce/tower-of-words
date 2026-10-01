@@ -35,11 +35,20 @@ await withBrowserJob(
       let at = null;
       for (const pose of poses) {
         const info = await page.evaluate(
-          ([pose, at]) => {
+          async ([pose, at]) => {
             const P = globalThis.__game.place,
               st = P._st;
             if (pose !== 'cruise') {
-              if (at === null) P.hooks.arrive();
+              if (at === null) {
+                // the arrival comes after Mio's lesson: the story's flags as they are when `approach` calls it, and
+                // no caption left from the car's opening (her Wi-Fi line, the ambient list in story/train.js, plays
+                // only before Eric sits, minutes before this), as in play
+                const { flags } = await import(new URL('js/narrative/state.js', globalThis.location.href).href);
+                const { ui } = await import(new URL('js/ui.js', globalThis.location.href).href);
+                Object.assign(flags, { sat: true, lesson_on: true, cat_done: true, lesson_done: true, arriving: true });
+                ui.caption(null, '');
+                P.hooks.arrive();
+              }
               globalThis.__advance(+pose - (at ?? 0));
             }
             return {

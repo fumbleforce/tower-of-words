@@ -43,6 +43,7 @@ import { flags } from '../narrative/state.js';
 import { dust, lightPool } from './life.js';
 import { route } from './route.js';
 import { trainDiscoveries } from '../train/discoveries.js';
+const WALK_X = -10.4; // the walkway out: past the car's left end, south (CHUNKS.train turn 270) toward the shed's stairs
 
 // Muted palette, after game3d/ref/2-security-gate-muted.png (Jørgen: "mute train too"): slate and charcoal,
 // dark navy seats, a calmer floor. Only colours; set before the car is built.
@@ -513,7 +514,7 @@ export async function trainPlace(game) {
     station.add(sg);
     signs.push(sg);
   }
-  // covered walkway to the company building, at the right end of the near platform
+  // covered walkway to the company building, at the left end of the near platform (WALK_X)
   const walk = new THREE.Group();
   // cutaway like everything else: posts, a low glass side and the sign, no roof over the player
   walk.add(
@@ -542,7 +543,7 @@ export async function trainPlace(game) {
       g.fillStyle = '#f2f4f7';
       g.font = '700 58px ' + JP_FONT;
       g.textBaseline = 'middle';
-      g.fillText('本社ビル →', 24, H / 2);
+      g.fillText('← 本社ビル', 24, H / 2);
       g.fillStyle = '#b9c6da';
       g.font = '600 32px ' + JP_FONT;
       g.fillText('To the office', 330, H / 2 + 6);
@@ -553,7 +554,7 @@ export async function trainPlace(game) {
   const wp = plane(1.9, 0.37, wt, { emissiveK: 0.3 });
   wp.position.set(0, 1.5, 1.32);
   walk.add(wp);
-  walk.position.set(8.4, 0, edge + 1.9);
+  walk.position.set(WALK_X, 0, edge + 1.9);
   station.add(walk);
   station.visible = false;
   const island = buildRideIsland(scene); // the island round the shed, sliding in with the station (train/island.js)
@@ -563,7 +564,7 @@ export async function trainPlace(game) {
 
   // ---- Mio lives in the car ----
   const space = car.root;
-  const nav = new Nav(-LX, LX + 8, -LZ, LZ + 3.2, 0.1);
+  const nav = new Nav(-LX - 8, LX, -LZ, LZ + 3.2, 0.1);
   nav.R = 0.16;
   for (const [x0, x1] of BENCHES) {
     nav.block(x0 - 0.04, x1 + 0.04, -LZ, -(LZ - BENCH_D) + 0.1);
@@ -571,13 +572,13 @@ export async function trainPlace(game) {
   }
   nav.block(-3.85, -3.35, -1.2, -0.58);
   for (const z of [-0.5, 0.5]) nav.block(-0.05, 0.05, z - 0.05, z + 0.05);
-  nav.block(LX, LX + 8, -LZ, LZ + T + 0.05); // beyond the car end
+  nav.block(-LX - 8, -LX, -LZ, LZ + T + 0.05); // beyond the car end
   // near wall, with gaps at the doors; the gaps and the platform are shut until the doors open
   nav.block(-LX, -DOOR_X - DOOR_W / 2 + 0.05, LZ, LZ + T + 0.05);
   nav.block(-DOOR_X + DOOR_W / 2 - 0.05, DOOR_X - DOOR_W / 2 + 0.05, LZ, LZ + T + 0.05);
   nav.block(DOOR_X + DOOR_W / 2 - 0.05, LX, LZ, LZ + T + 0.05);
-  nav.blockTagged('doors', -LX, LX + 8, LZ - 0.02, LZ + T + 0.06);
-  nav.block(-LX, -LX + 0.2, LZ + T, LZ + 3.2);
+  nav.blockTagged('doors', -LX - 8, LX, LZ - 0.02, LZ + T + 0.06);
+  nav.block(LX - 0.2, LX, LZ + T, LZ + 3.2);
   nav.extra = (x, z) => {
     if (z > LZ + 0.02) return true;
     const cx = Math.abs(x) - (LX - 0.34),
@@ -648,11 +649,11 @@ export async function trainPlace(game) {
         let x = p.x + 0.6;
         const gs = goalSpot();
         if (gs) x += clamp((gs[0] - p.x) * 0.35, -1.1, 1.1);
-        t.x = clamp(x, -1.7, out ? 8.2 : 2.6);
+        t.x = clamp(x, out ? -8.2 : -1.7, out ? 4.2 : 2.6);
         if (p.z > LZ) t.z = this.base.z + Math.min(2.4, (p.z - LZ) * 0.9);
       } else if (out && (Math.abs(p.x) > 4.0 || p.z > LZ + 1.0)) {
         // wide screen, off along the platform: shift
-        t.x = clamp(p.x * 0.85, -3.5, 6.5);
+        t.x = clamp(p.x * 0.85, -6.5, 3.5);
         t.z = this.base.z + clamp((p.z - LZ - 0.8) * 0.8, 0, 2.0);
       }
       return [keepEric(this, t, p), this.fitDist];
@@ -810,7 +811,7 @@ export async function trainPlace(game) {
     by_aoi: [-1.7, -0.35],
     by_kuroda: [-2.55, -0.35],
     platform: [DOOR_X, LZ + 1.0],
-    walkway: [8.4, LZ + 1.9],
+    walkway: [WALK_X, LZ + 1.9],
     plat_l: [-3.0, 2.2],
     plat_l2: [-2.2, 2.25],
     plat_hamada: [-3.75, 2.35],
@@ -904,6 +905,7 @@ export async function trainPlace(game) {
       anchor: carPt(-1.1, 1.0, -LZ),
       ...at(-1.1, -0.3, -1.1, -LZ),
       noMarker: true,
+      enabled: () => !station.visible, // its line is about the open bay
     },
     poster: {
       ...PLACE_DETAILS.train.things.poster,
@@ -1173,7 +1175,7 @@ export async function trainPlace(game) {
       setDoors(st.door);
       if (st.door > 0.3) nav.unblock('doors');
       else if (!nav.rects.some((r) => r.tag === 'doors'))
-        nav.blockTagged('doors', -LX, LX + 8, LZ - 0.02, LZ + T + 0.06);
+        nav.blockTagged('doors', -LX - 8, LX, LZ - 0.02, LZ + T + 0.06);
       stepPeople([...list, rei], dt);
       if (cupSt.state === 'tip') {
         cupSt.k += (cupSt.want - cupSt.k) * Math.min(1, dt * 3);
@@ -1261,9 +1263,9 @@ export async function trainPlace(game) {
                 [
                   ...route(nav, r.root.position, [dx, LZ - 0.4]),
                   [dx, LZ + 1.0],
-                  [dx + 1.2, LZ + 1.45],
-                  [7.6, LZ + 1.5],
-                  [8.4, LZ + 1.9],
+                  [dx - 1.2, LZ + 1.45],
+                  [WALK_X + 0.8, LZ + 1.5],
+                  [WALK_X, LZ + 1.9],
                 ],
                 { speed: 1.35, blobM: r.blob },
               ); // along the platform clear of the sign posts
@@ -1508,7 +1510,7 @@ export async function trainPlace(game) {
         });
         setDoors(st.door);
         nav.unblock('doors');
-        if (st.door <= 0.3) nav.blockTagged('doors', -LX, LX + 8, LZ - 0.02, LZ + T + 0.06);
+        if (st.door <= 0.3) nav.blockTagged('doors', -LX - 8, LX, LZ - 0.02, LZ + T + 0.06);
       }
       if (state.props) {
         restoreObject(folder, state.props.folder);
@@ -1615,10 +1617,10 @@ export async function trainPlace(game) {
             if (r.seated) await standOut(game, r, 0.5);
             r.root.visible = true;
             if (r.root.position.z < LZ) {
-              await glide(game, r.root, [DOOR_X - 0.3, LZ - 0.3], 1.4);
-              await glide(game, r.root, [DOOR_X - 0.3, LZ + 1.3], 1.4);
+              await glide(game, r.root, [-DOOR_X + 0.3, LZ - 0.3], 1.4);
+              await glide(game, r.root, [-DOOR_X + 0.3, LZ + 1.3], 1.4);
             } else await g.wait(350);
-            await walkRig(game, r, [7.0, LZ + 2.2], { speed: 1.45, route: false }); // steers round Eric
+            await walkRig(game, r, [WALK_X + 1.4, LZ + 2.2], { speed: 1.45, route: false }); // steers round Eric
             r.setState('idle');
             r.setGait?.(null);
           })();
@@ -1631,19 +1633,19 @@ export async function trainPlace(game) {
           walkPerson(
             r,
             [
-              [DOOR_X - 0.3, LZ + 1.3],
-              [7.6, LZ + 1.7],
+              [-DOOR_X + 0.3, LZ + 1.3],
+              [WALK_X + 0.8, LZ + 1.7],
             ],
             { speed: 1.45, blobM: r.blob },
           );
-        if (r.root.position.z < LZ) P.walkPerson(id, [DOOR_X - 0.3, LZ - 0.3]).then(go);
+        if (r.root.position.z < LZ) P.walkPerson(id, [-DOOR_X + 0.3, LZ - 0.3]).then(go);
         else go();
       }
       cam.closeOn([p.x, LZ + 1.0], 1.35);
       const follow = setInterval(() => {
         cam.close = { x: p.x, z: LZ + 1.0, zoom: 1.35 };
       }, 50);
-      await glide(g, mio.root, [7.4, LZ + 1.5], 1.45, true);
+      await glide(g, mio.root, [WALK_X + 1.0, LZ + 1.5], 1.45, true);
       clearInterval(follow);
       mio.setState('idle');
     },
