@@ -57,12 +57,6 @@
       "context": "30f8a22be21c40217e511076064e1bb82790c4218f9f11c1656968c4bad573fa"
     },
     {
-      "file": "game3d/js/perf/batch.js",
-      "ruleId": "no-unused-vars",
-      "message": "'shown' is assigned a value but never used.",
-      "context": "a4181e9bdc4da4fdda36d3cc740f7dd0f19a79d4b4a41dfadb1f8b68e486ded7"
-    },
-    {
       "file": "game3d/js/places/lift.js",
       "ruleId": "no-unused-vars",
       "message": "'JP_FONT' is defined but never used.",

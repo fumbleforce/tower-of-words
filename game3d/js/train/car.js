@@ -696,6 +696,10 @@ function buildGlass() {
 export function buildCar(mode = 'land', { furnished = true } = {}) {
   const root = new THREE.Group();
   root.name = 'car';
+  // the car's own build (everything but the shadow proxy), in one group that pulls out of the station as a whole:
+  // the draw-call pass batches under it (place.perfMovers), so the departure doesn't break its batches up
+  const cab = new THREE.Group();
+  root.add(cab);
   const straps = [];
   const nodders = []; // things that nod a little with the motion: {obj, k}
 
@@ -706,7 +710,7 @@ export function buildCar(mode = 'land', { furnished = true } = {}) {
   );
   floor.position.y = -0.04;
   floor.name = 'floor';
-  root.add(shadowOn(floor, false, true));
+  cab.add(shadowOn(floor, false, true));
 
   const body = new THREE.Mesh(
     placePlan(
@@ -722,7 +726,7 @@ export function buildCar(mode = 'land', { furnished = true } = {}) {
     mat('shellDark', COL.shellDark, { roughness: 0.6 }),
   );
   body.position.y = -0.46 - 0.12; // bevels grow the extrusion by 0.1 at each end; keep its top under the floor
-  root.add(shadowOn(body, false, true));
+  cab.add(shadowOn(body, false, true));
   const stripeShape = planRRect(LX + T + 0.012, LZ + T + 0.012, RI + T + 0.012);
   stripeShape.holes.push(planRRect(LX + T - 0.02, LZ + T - 0.02, RI + T - 0.02));
   const stripe = new THREE.Mesh(
@@ -739,13 +743,13 @@ export function buildCar(mode = 'land', { furnished = true } = {}) {
     mat('stripe', COL.stripe, { roughness: 0.5 }),
   );
   stripe.position.y = 0.3;
-  root.add(cutDoorways(stripe, 0.29, 0.07, stripe.material));
-  root.add(shadowOn(stripe, false, true));
+  cab.add(cutDoorways(stripe, 0.29, 0.07, stripe.material));
+  cab.add(shadowOn(stripe, false, true));
   const stripe2 = new THREE.Mesh(stripe.geometry.clone(), stripe.material);
   stripe2.position.y = -0.02;
   stripe2.scale.y = 0.6;
-  root.add(cutDoorways(stripe2, -0.03, 0.042, stripe.material));
-  root.add(stripe2);
+  cab.add(cutDoorways(stripe2, -0.03, 0.042, stripe.material));
+  cab.add(stripe2);
   // bogie housings straddling the beam
   for (const x of [-2.6, 2.6]) {
     const b = new THREE.Mesh(
@@ -753,18 +757,18 @@ export function buildCar(mode = 'land', { furnished = true } = {}) {
       mat('bogie', '#8e97a3', { roughness: 0.7 }),
     );
     b.position.set(x, -0.56, 0);
-    root.add(b);
+    cab.add(b);
   }
 
   const shellHolder = new THREE.Group();
-  root.add(shellHolder);
+  cab.add(shellHolder);
   let shell = buildShell(mode);
   shellHolder.add(shell);
   // the closed overlay: its own material copies, so it can fade without touching the cut shell
   let closed = null;
   const fadeMats = [];
   if (mode === 'closed') {
-    root.add(buildRoof(), buildGlass());
+    cab.add(buildRoof(), buildGlass());
   } else {
     closed = new THREE.Group();
     closed.name = 'closed';
@@ -782,14 +786,14 @@ export function buildCar(mode = 'land', { furnished = true } = {}) {
       o.castShadow = false;
     });
     closed.visible = false;
-    root.add(closed);
+    cab.add(closed);
   }
   const proxy = buildShadowProxy();
   root.add(proxy);
 
   // benches: far side always has backs; the near side has backs only in portrait
   const benchHolder = new THREE.Group();
-  root.add(benchHolder);
+  cab.add(benchHolder);
   function furnish(md) {
     benchHolder.clear();
     straps.length = 0;
@@ -826,7 +830,7 @@ export function buildCar(mode = 'land', { furnished = true } = {}) {
 
   const pl = plant();
   pl.position.set(-3.6, 0, -0.82);
-  root.add(pl);
+  cab.add(pl);
   nodders.push({ obj: pl.userData.leaves, k: 1 });
 
   // tiny glass panes, only a faint tint so the sea reads through them
@@ -887,6 +891,7 @@ export function buildCar(mode = 'land', { furnished = true } = {}) {
   };
   return {
     root,
+    cab,
     straps,
     nodders,
     proxy,

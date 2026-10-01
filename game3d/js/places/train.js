@@ -1483,7 +1483,8 @@ export async function trainPlace(game) {
         kitty.position.set(-3, 0, 2.9);
         kb.position.set(-3, 0.004, 2.9);
       }
-      if (state.geometry) {
+      if (state.geometry?.length === trainObjects.length) {
+        // (a save from a build with other car parts restores through the branch below)
         trainObjects.forEach((object, i) => restoreObject(object, state.geometry[i]));
         neighbours.forEach((n, i) => {
           restoreObject(n.pivot, state.neighbours?.[i]?.pivot);
@@ -1675,6 +1676,7 @@ export async function trainPlace(game) {
   // what update() moves every frame, so the draw-call pass batches under them before the first frame (js/perf/batch.js)
   P.perfMovers = [
     pivot,
+    car.cab,
     station,
     ...neighbours.flatMap((n) => [n.pivot, n.bellows]),
     ...world.movers,
