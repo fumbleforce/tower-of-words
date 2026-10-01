@@ -1,8 +1,9 @@
 # Write reviews/char-style-1/review.json from tools/style-concepts/concepts.json: one option per concept (Claude's
-# three and Codex's three), its final pair shot first, then the three-quarter pair and its sheets, then every earlier attempt's sheet in order.
+# round 1 and round 2, and Codex's three), its final pair shot first, then the three-quarter pair and its sheets, then every earlier attempt's sheet in order.
 #   python3 tools/style-concepts/review.py [--date YYYY-MM-DD]
 # A concept made elsewhere (Codex) is an entry with id, label, about and either `dir` + `attempts` laid out like
 # Claude's (renders/, sheet*.webp per attempt) or explicit `image` and `images` (repo-relative paths).
+# An entry's `jorgen` holds his words on an earlier round, shown first in that option's note.
 import json
 import os
 import sys
@@ -17,14 +18,18 @@ def rel(p):
     return p.lstrip('/')
 
 
+def said(c):
+    return [f'Jørgen on round 1: "{c["jorgen"]}"'] if c.get('jorgen') else []
+
+
 def option(c):
     if c.get('image'):
         return {'id': c['id'], 'label': c['label'], 'image': c['image'], 'images': c.get('images', []),
-                'note': c.get('about', '')}
+                'note': ' '.join(said(c) + [c.get('about', '')])}
     base = os.path.dirname(rel(c['dir']).rstrip('/'))
     final = rel(c['dir'])
     images = [final + n for n in ('pair-3q.webp', 'sheet-mio.webp', 'sheet-eric.webp', 'sheet-game.webp')]
-    lines = [c['about'], 'Attempts, in order:']
+    lines = said(c) + [c['about'], 'Attempts, in order:']
     for a, note in c['attempts']:
         lines.append(f'{a}: {note}')
         if final.rstrip('/').endswith(a):
@@ -53,7 +58,7 @@ def side_by_side(opts, main_root):
         x, y = (n % cols) * W, (n // cols) * (H + 44)
         sheet.paste(im, (x + (W - im.width) // 2, y + 44))
         d.text((x + 12, y + 8), lab, fill=(30, 30, 30), font=f)
-    path = 'art/parts/style-concepts/all-six.webp'
+    path = 'art/parts/style-concepts/all-concepts.webp'
     sheet.save(os.path.join(main_root, path), quality=86)
     return path
 
@@ -62,9 +67,9 @@ def main():
     d = sys.argv[sys.argv.index('--date') + 1] if '--date' in sys.argv else date.today().isoformat()
     concepts = json.load(open(os.path.join(HERE, 'concepts.json')))
     item = {
-        'title': 'Character style concepts: six ways to model Mio and Eric',
+        'title': f'Character style concepts: {len(concepts)} ways to model Mio and Eric',
         'date': d,
-        'by': 'Claude (concepts A to C) and Codex (concepts A to C)',
+        'by': 'Claude (round 1: A to C; round 2 after your comment on the voxel pair: D to F) and Codex (A to C)',
         'status': 'open',
         'question': "Which direction or directions should the game's characters take?",
         'multi': True,

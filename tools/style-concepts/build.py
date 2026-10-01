@@ -1,6 +1,7 @@
 # Build one char-style-1 concept (Mio and Eric), export each as a glb with idle and walk, and render the review views.
 #   ~/.local/bin/blender -b --factory-startup -P tools/style-concepts/build.py -- <style> <attempt> [views]
-# style: voxel | toyfig | facet (a module next to this file with build(char, coll) -> (armature, meshes)).
+# style: voxel | toyfig | facet | chamfer | ink | clump (a module next to this file with build(char, coll) -> (armature, meshes);
+# an optional prepare_render() runs after the glb export, before the renders).
 # views: comma list (default all): front,three-quarter,side,back,face,face-3q,walk,pair,game
 #
 # Staging (shot-staging note for every view): one character alone on an empty floor that only takes shadows,
@@ -35,6 +36,8 @@ for ch in ('mio', 'eric'):
     chars[ch] = (coll, arm, objs)
 
 cam = kit.setup_render()
+if hasattr(mod, 'prepare_render'):
+    mod.prepare_render()
 
 
 def only(names):
