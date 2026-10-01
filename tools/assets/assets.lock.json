@@ -2,7 +2,7 @@
  "about": "Used assets: path, size, sha256, content type. Files live in R2 at blobs/<sha256[:2]>/<sha256>. Written by tools/assets/sync.py push; see notes/asset-storage-proposal.md.",
  "files": {
   "art/approved/aoi/aoi-after.webp": {"size": 70226, "sha256": "f72c0a9ab29d1a5a5255c6b9add33ea23bdc63f1cf075494441d57848d27e4c7", "type": "image/webp"},
-  "art/approved/aoi/aoi-aoi-base-2001-neutral.webp": {"size": 69644, "sha256": "15b359aadb88f7bb474a315f9ff566361a6d0a658640b680527aa318370deed4", "type": "image/webp"},
+  "art/approved/aoi/aoi-aoi-base-2001-neutral.webp": {"size": 72776, "sha256": "e94e4b561d1478b59bc6a4814725ff2fc05fec99f5f582e64f24d41fbcec6edb", "type": "image/webp"},
   "art/approved/cctv/nanami-f-after.webp": {"size": 67742, "sha256": "b809cf89f8ec2d0ee5f4e36ab23897554bf6371164d172fb296900003442d125", "type": "image/webp"},
   "art/approved/copyroom/copyroom-copier-4203.webp": {"size": 103752, "sha256": "0e0ba61a3b27bd157da4c8b9dc29a5414a8afd3364a1127fa677c5ff60e4b7af", "type": "image/webp"},
   "art/approved/dorm/dorm-worst-c.webp": {"size": 94268, "sha256": "2f14ebb9b5335e18cf589e536c97bd948edb551857e06dfaf8551e59c19cb36b", "type": "image/webp"},
@@ -619,7 +619,7 @@
   "game3d/assets/mio/sit.glb": {"size": 775064, "sha256": "7a1c2589e2f63234887daef308faff86c0db8ae95e48c2b8e90dbe80d7efdb64", "type": "model/gltf-binary"},
   "game3d/assets/mio/tosit.glb": {"size": 490684, "sha256": "8ae905b3c4600081a99aa40d1c39ab4f639a9c9c87cf3e75935b6b58e58aa201", "type": "model/gltf-binary"},
   "game3d/assets/mio/walk.glb": {"size": 256264, "sha256": "e7c752480900ff152f1a3f77e7be5ac39514a28a12bb0e82d6f3e9fd87600798", "type": "model/gltf-binary"},
-  "game3d/assets/portraits/aoi-neutral.webp": {"size": 69644, "sha256": "15b359aadb88f7bb474a315f9ff566361a6d0a658640b680527aa318370deed4", "type": "image/webp"},
+  "game3d/assets/portraits/aoi-neutral.webp": {"size": 72776, "sha256": "e94e4b561d1478b59bc6a4814725ff2fc05fec99f5f582e64f24d41fbcec6edb", "type": "image/webp"},
   "game3d/assets/portraits/emi-neutral.webp": {"size": 52902, "sha256": "2fbe1fe06f3dd5b7e39855e4265872f2975d32111626c20faab10d084d3195f1", "type": "image/webp"},
   "game3d/assets/portraits/eric-neutral.webp": {"size": 71700, "sha256": "5afdaed3a1090567ebf4c3d6083eae9b29ec2c90ae17f22a3102b24ca0172fba", "type": "image/webp"},
   "game3d/assets/portraits/eric-surprised.webp": {"size": 71874, "sha256": "269ab60c3f34d5bfc5904076adfa200821d5f9cede1c503a0e11d0fa5457df80", "type": "image/webp"},
