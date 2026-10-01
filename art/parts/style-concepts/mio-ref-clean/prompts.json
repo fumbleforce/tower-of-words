@@ -1,0 +1,188 @@
+{
+ "step-01-upscale": {
+  "source": "/home/jorgen/repo/japanese/art/parts/style-concepts/claude-facetface/gen/i2i-cf04/mio-front-d60.png",
+  "method": "RealESRGAN_x4plus_anime_6B x4, lanczos x0.75 -> 3072x3072",
+  "workflow": "workflow-01-upscale.json"
+ },
+ "step-02-no-shadow": {
+  "method": "CPU: isnet-anime cut-out of step 01 to find the figure; floor pixels right of her left (image right) shoe outer edge, a line from (1730,2740) to (1760,2873), plus blue-teal shadow-coloured pixels below y 2720 and outside the figure (cut-out alpha < 245; green-red > 15, blue-red > 40; the soles have no green), filled with a quadratic fit of the background colour (feather 1.5 px). Figure pixels untouched.",
+  "script": "clean.py shadow"
+ },
+ "step-03a-no-strings-s301": {
+  "source": "step-02-no-shadow.png",
+  "crop": [
+   1025,
+   640,
+   2049,
+   1664
+  ],
+  "crop_scale": 1.0,
+  "mask": "mask-03-strings.png",
+  "model": "rdbtAnima.safetensors + anima-lllite-inpainting-v2",
+  "seed": 301,
+  "denoise": 0.95,
+  "steps": 30,
+  "cfg": 5.0,
+  "sampler": "euler_ancestral",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, safe, 1girl, solo, Mio, a 25-year-old woman: black hair with green underneath, light tan eyes, narrow almond eyes, half-lidded, slim with soft curves, oversized black hoodie, no drawstrings, glasses, calm neutral expression, low poly 3d game character, faceted flat-shaded polygons, anime face, looking at the viewer, plain light grey background",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, lowres, bad anatomy, extra limbs, child, loli, text, watermark, signature, fat, obese, plump, (rim light, red rim light, red outline, backlighting:1.4), holding, holding object, phone, cup, realistic, photorealistic, drawstrings, hoodie strings, cords, aglets, eyelets",
+  "workflow": "workflow-strings.json",
+  "note": "rejected: redrew the strings as dark strings (the string-shaped mask hints at strings)"
+ },
+ "step-03b-no-strings-s302": {
+  "source": "step-02-no-shadow.png",
+  "crop": [
+   1025,
+   640,
+   2049,
+   1664
+  ],
+  "crop_scale": 1.0,
+  "mask": "mask-03-strings.png",
+  "model": "rdbtAnima.safetensors + anima-lllite-inpainting-v2",
+  "seed": 302,
+  "denoise": 0.95,
+  "steps": 30,
+  "cfg": 5.0,
+  "sampler": "euler_ancestral",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, safe, 1girl, solo, Mio, a 25-year-old woman: black hair with green underneath, light tan eyes, narrow almond eyes, half-lidded, slim with soft curves, oversized black hoodie, no drawstrings, glasses, calm neutral expression, low poly 3d game character, faceted flat-shaded polygons, anime face, looking at the viewer, plain light grey background",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, lowres, bad anatomy, extra limbs, child, loli, text, watermark, signature, fat, obese, plump, (rim light, red rim light, red outline, backlighting:1.4), holding, holding object, phone, cup, realistic, photorealistic, drawstrings, hoodie strings, cords, aglets, eyelets",
+  "workflow": "workflow-strings.json",
+  "note": "rejected: redrew the strings as dark strings (the string-shaped mask hints at strings)"
+ },
+ "step-03c-no-strings-rowfill": {
+  "method": "CPU (clean.py prefill-strings): rectangle x 1450-1630, y 874-1465 round both strings and their shadows, each row a straight blend between the hoodie colours either side. Start picture for 03d/03e; mask-03-rect.png is their mask."
+ },
+ "step-03d-no-strings-refine-d50": {
+  "source": "step-03c-no-strings-rowfill.png",
+  "crop": [
+   1025,
+   640,
+   2049,
+   1664
+  ],
+  "crop_scale": 1.0,
+  "mask": "mask-03-rect.png",
+  "model": "rdbtAnima.safetensors + anima-lllite-inpainting-v2",
+  "seed": 301,
+  "denoise": 0.5,
+  "steps": 30,
+  "cfg": 5.0,
+  "sampler": "euler_ancestral",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, safe, 1girl, solo, Mio, a 25-year-old woman: black hair with green underneath, light tan eyes, narrow almond eyes, half-lidded, slim with soft curves, oversized black hoodie, no drawstrings, glasses, calm neutral expression, low poly 3d game character, faceted flat-shaded polygons, anime face, looking at the viewer, plain light grey background",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, lowres, bad anatomy, extra limbs, child, loli, text, watermark, signature, fat, obese, plump, (rim light, red rim light, red outline, backlighting:1.4), holding, holding object, phone, cup, realistic, photorealistic, drawstrings, hoodie strings, cords, aglets, eyelets",
+  "workflow": "workflow-strings-refine.json"
+ },
+ "step-03e-no-strings-refine-d65": {
+  "source": "step-03c-no-strings-rowfill.png",
+  "crop": [
+   1025,
+   640,
+   2049,
+   1664
+  ],
+  "crop_scale": 1.0,
+  "mask": "mask-03-rect.png",
+  "model": "rdbtAnima.safetensors + anima-lllite-inpainting-v2",
+  "seed": 301,
+  "denoise": 0.65,
+  "steps": 30,
+  "cfg": 5.0,
+  "sampler": "euler_ancestral",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, safe, 1girl, solo, Mio, a 25-year-old woman: black hair with green underneath, light tan eyes, narrow almond eyes, half-lidded, slim with soft curves, oversized black hoodie, no drawstrings, glasses, calm neutral expression, low poly 3d game character, faceted flat-shaded polygons, anime face, looking at the viewer, plain light grey background",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, lowres, bad anatomy, extra limbs, child, loli, text, watermark, signature, fat, obese, plump, (rim light, red rim light, red outline, backlighting:1.4), holding, holding object, phone, cup, realistic, photorealistic, drawstrings, hoodie strings, cords, aglets, eyelets",
+  "workflow": "workflow-strings-refine.json",
+  "note": "used as step-03-no-strings.png"
+ },
+ "step-04a-no-glasses-d70": {
+  "source": "step-03-no-strings.png",
+  "crop": [
+   1170,
+   260,
+   1938,
+   1028
+  ],
+  "crop_scale": 1.3333333333333333,
+  "mask": "mask-04-glasses.png",
+  "model": "rdbtAnima.safetensors + anima-lllite-inpainting-v2",
+  "seed": 301,
+  "denoise": 0.7,
+  "steps": 30,
+  "cfg": 5.0,
+  "sampler": "euler_ancestral",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, safe, 1girl, solo, Mio, a 25-year-old woman: black hair with green underneath, light tan eyes, narrow almond eyes, half-lidded, slim with soft curves, oversized black hoodie, no glasses, calm neutral expression, low poly 3d game character, faceted flat-shaded polygons, anime face, looking at the viewer, plain light grey background",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, lowres, bad anatomy, extra limbs, child, loli, text, watermark, signature, fat, obese, plump, (rim light, red rim light, red outline, backlighting:1.4), holding, holding object, phone, cup, realistic, photorealistic, glasses, eyewear, black-framed eyewear, round eyewear",
+  "workflow": "workflow-glasses.json",
+  "note": "rejected: still wears glasses (square frame)"
+ },
+ "step-04b-no-glasses-d85": {
+  "source": "step-03-no-strings.png",
+  "crop": [
+   1170,
+   260,
+   1938,
+   1028
+  ],
+  "crop_scale": 1.3333333333333333,
+  "mask": "mask-04-glasses.png",
+  "model": "rdbtAnima.safetensors + anima-lllite-inpainting-v2",
+  "seed": 301,
+  "denoise": 0.85,
+  "steps": 30,
+  "cfg": 5.0,
+  "sampler": "euler_ancestral",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, safe, 1girl, solo, Mio, a 25-year-old woman: black hair with green underneath, light tan eyes, narrow almond eyes, half-lidded, slim with soft curves, oversized black hoodie, no glasses, calm neutral expression, low poly 3d game character, faceted flat-shaded polygons, anime face, looking at the viewer, plain light grey background",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, lowres, bad anatomy, extra limbs, child, loli, text, watermark, signature, fat, obese, plump, (rim light, red rim light, red outline, backlighting:1.4), holding, holding object, phone, cup, realistic, photorealistic, glasses, eyewear, black-framed eyewear, round eyewear",
+  "workflow": "workflow-glasses.json",
+  "note": "rejected: glasses gone, but irises turned pale khaki and the eye shape changed"
+ },
+ "step-04c-no-glasses-cvfill": {
+  "method": "CPU (clean.py prefill-glasses): frame = dark pixels on a band round each rim ellipse, the bridge and the arm to her left ear (image right), grown 3 px, OpenCV Telea fill. Start picture for 04d/04e; their mask is the frame grown 12 px (mask-04-frame.png)."
+ },
+ "step-04d-no-glasses-refine-d45": {
+  "source": "step-04c-no-glasses-cvfill.png",
+  "crop": [
+   1170,
+   260,
+   1938,
+   1028
+  ],
+  "crop_scale": 1.3333333333333333,
+  "mask": "mask-04-frame.png",
+  "model": "rdbtAnima.safetensors + anima-lllite-inpainting-v2",
+  "seed": 301,
+  "denoise": 0.45,
+  "steps": 30,
+  "cfg": 5.0,
+  "sampler": "euler_ancestral",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, safe, 1girl, solo, Mio, a 25-year-old woman: black hair with green underneath, light tan eyes, narrow almond eyes, half-lidded, slim with soft curves, oversized black hoodie, no glasses, calm neutral expression, low poly 3d game character, faceted flat-shaded polygons, anime face, looking at the viewer, plain light grey background",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, lowres, bad anatomy, extra limbs, child, loli, text, watermark, signature, fat, obese, plump, (rim light, red rim light, red outline, backlighting:1.4), holding, holding object, phone, cup, realistic, photorealistic, glasses, eyewear, black-framed eyewear, round eyewear",
+  "workflow": "workflow-glasses-refine.json",
+  "note": "used as step-04-no-glasses.png = final.png"
+ },
+ "step-04e-no-glasses-refine-d60": {
+  "source": "step-04c-no-glasses-cvfill.png",
+  "crop": [
+   1170,
+   260,
+   1938,
+   1028
+  ],
+  "crop_scale": 1.3333333333333333,
+  "mask": "mask-04-frame.png",
+  "model": "rdbtAnima.safetensors + anima-lllite-inpainting-v2",
+  "seed": 301,
+  "denoise": 0.6,
+  "steps": 30,
+  "cfg": 5.0,
+  "sampler": "euler_ancestral",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, safe, 1girl, solo, Mio, a 25-year-old woman: black hair with green underneath, light tan eyes, narrow almond eyes, half-lidded, slim with soft curves, oversized black hoodie, no glasses, calm neutral expression, low poly 3d game character, faceted flat-shaded polygons, anime face, looking at the viewer, plain light grey background",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, lowres, bad anatomy, extra limbs, child, loli, text, watermark, signature, fat, obese, plump, (rim light, red rim light, red outline, backlighting:1.4), holding, holding object, phone, cup, realistic, photorealistic, glasses, eyewear, black-framed eyewear, round eyewear",
+  "workflow": "workflow-glasses-refine.json"
+ },
+ "final": {
+  "from": "step-04d-no-glasses-refine-d45",
+  "cutout": "clean.py cutout: isnet-anime + tools/matte_refine.py -> final-cutout.png",
+  "imgqa": "tools/imgqa.py --character mio (against the anime game portrait, so drift and glasses fail by design): original red rim 1.9% ccip 0.162; final red rim 1.4% ccip 0.182; cut-out red rim 2.3% (warn), matte frame 0.00, holes 2"
+ }
+}
