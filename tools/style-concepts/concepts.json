@@ -89,5 +89,76 @@
     "Glasses corner dots fixed."
    ]
   ]
+ },
+ {
+  "id": "codex-stitch",
+  "label": "Codex A · stitched cloth",
+  "dir": "/art/parts/style-concepts/codex-stitch/attempt-05/",
+  "note": "attempt-05",
+  "about": "Sewn cloth dolls with broad cloth face panels, continuous seams, padded sleeves and short legs. Seven rigid bones, idle and walk. Game-scale views are labelled Blender renders of actual forecourt geometry and cameras, with game textures and post-processing omitted.",
+  "attempts": [
+   [
+    "attempt-01",
+    "First face, side and pair studies. Pair framing too tight; Eric’s hoodie intersects the jacket."
+   ],
+   [
+    "attempt-02",
+    "Wider framing, jacket hem stitches, changed Eric hair. Hoodie and lapels sit off the torso."
+   ],
+   [
+    "attempt-03",
+    "Fitted clothing and combed cloth hair seams. Sparse face stitches resemble facial hair."
+   ],
+   [
+    "attempt-04",
+    "Continuous face seam and capped curves. A small break remains in Eric’s hoodie panel."
+   ],
+   [
+    "attempt-05",
+    "Clothing follows the actual torso mesh. Full views and forecourt scale comparison."
+   ]
+  ]
+ },
+ {
+  "id": "codex-carved",
+  "label": "Codex B · carved puppets",
+  "dir": "/art/parts/style-concepts/codex-carved/attempt-04/",
+  "note": "attempt-04",
+  "about": "Compact carved puppets: short barrel bodies, wedge shoes and shaped cheeks and jaws. Hair is cut into solid angular locks. Detailed faces and short rigid limbs on seven bones, idle and walk. Game-scale views are labelled Blender renders of actual forecourt geometry and cameras.",
+  "attempts": [
+   [
+    "attempt-01",
+    "Initial extruded faces and barrel bodies. Pair framing too tight."
+   ],
+   [
+    "attempt-02",
+    "Wider framing and changed hoodie panel. Blender stopped partway through; generated GLBs and partial images retained."
+   ],
+   [
+    "attempt-03",
+    "Added cheek and chin depth transitions; fitted clothing."
+   ],
+   [
+    "attempt-04",
+    "Clothing follows the torso mesh; Mio’s green side hair tapers. Full views and forecourt scale comparison."
+   ]
+  ]
+ },
+ {
+  "id": "codex-squash",
+  "label": "Codex C · squash cartoon",
+  "dir": "/art/parts/style-concepts/codex-squash/attempt-02/",
+  "note": "attempt-02",
+  "about": "Smooth squash cartoon bodies with pear torsos, narrow bean-shaped faces, large hands and long shoes. Mio has lower eyelids; Eric has a projecting nose. Seven rigid bones with a broader arm swing, idle and walk. Game-scale views are labelled Blender renders of actual forecourt geometry and cameras.",
+  "attempts": [
+   [
+    "attempt-01",
+    "First face, side and pair studies. Open hair ends and intersecting hoodie."
+   ],
+   [
+    "attempt-02",
+    "Closed and tapered hair, lower swept hair on Eric, fitted clothing and wider pair framing. Full views and forecourt scale comparison."
+   ]
+  ]
  }
 ]
