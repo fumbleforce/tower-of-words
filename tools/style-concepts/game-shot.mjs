@@ -2,6 +2,8 @@
 // review shows them at the game's camera height and scale. The game's own Eric is hidden; Eric stands where he
 // would, Mio a metre to his side, both facing the camera; Eric is caught mid-stride, Mio in her idle.
 //   node tools/style-concepts/game-shot.mjs <style> <attempt> [place ...]   (default places: forecourt office)
+// A concept with only mio.glb (no eric.glb) puts Mio where Eric would stand, idle, at the game Mio's height
+// (or 0.93 of the game Eric's when the place has no Mio).
 // Needs the review server on :8771 (GUIDE, Local review server). Writes <attempt>/renders/game-<place>-<size>.png
 // next to the concept's glb files (the main checkout's art/parts/style-concepts/, git-ignored).
 import { withBrowserJob } from '../lib/browser-job.mjs';
@@ -42,19 +44,24 @@ await withBrowserJob(
           if (g.mioNpc) g.mioNpc.root.visible = false;
           const loader = new GLTFLoader();
           const load = (u) => new Promise((ok, no) => loader.load(u, ok, undefined, no));
-          const [mio, eric] = await Promise.all([load(base + 'mio.glb'), load(base + 'eric.glb')]);
+          const mio = await load(base + 'mio.glb');
+          const eric = await load(base + 'eric.glb').catch(() => null);
+          const mioH = g.mioNpc ? new THREE.Box3().setFromObject(g.mioNpc.root).getSize(new THREE.Vector3()).y : 0;
           const at = me.position.clone();
           const toCam = new THREE.Vector3().subVectors(cam.position, at).setY(0).normalize();
           const side = new THREE.Vector3(-toCam.z, 0, toCam.x); // to the camera's left
           const yaw = Math.atan2(toCam.x, toCam.z);
           // scale both so Eric stands as tall as the game's Eric (Mio keeps her height relative to him)
-          const ours = new THREE.Box3().setFromObject(eric.scene).getSize(new THREE.Vector3()).y;
-          const k = size.y / ours;
+          const hOf = (gl) => new THREE.Box3().setFromObject(gl.scene).getSize(new THREE.Vector3()).y;
+          const k = eric ? size.y / hOf(eric) : (mioH || size.y * 0.93) / hOf(mio);
           const mixers = [];
-          for (const [gl, pos, clip, t] of [
-            [eric, at, 'walk', 0.25],
-            [mio, at.clone().addScaledVector(side, 0.9), 'idle', 0.5],
-          ]) {
+          const cast = eric
+            ? [
+                [eric, at, 'walk', 0.25],
+                [mio, at.clone().addScaledVector(side, 0.9), 'idle', 0.5],
+              ]
+            : [[mio, at, 'idle', 0.5]];
+          for (const [gl, pos, clip, t] of cast) {
             const o = gl.scene;
             o.position.copy(pos);
             o.scale.setScalar(k);
@@ -72,10 +79,10 @@ await withBrowserJob(
             mixers.push(mixer);
           }
           await new Promise((r) => setTimeout(r, 600));
-          const mid = at.clone().addScaledVector(side, 0.45).setY(0.7).project(cam);
+          const mid = at.clone().addScaledVector(side, eric ? 0.45 : 0).setY(0.7).project(cam);
           const sx = ((mid.x + 1) / 2) * globalThis.innerWidth,
             sy = ((1 - mid.y) / 2) * globalThis.innerHeight;
-          return { gameEricHeight: size.y, scale: k, sx, sy, clips: eric.animations.map((a) => a.name) };
+          return { gameEricHeight: size.y, gameMioHeight: mioH, scale: k, sx, sy, clips: mio.animations.map((a) => a.name) };
         }, url);
         const file = path.join(dir, 'renders', `game-${place}-${tag}.png`);
         await page.screenshot({ path: file });
