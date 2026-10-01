@@ -391,6 +391,31 @@ after, both sizes: same within run-to-run noise.
 Note for `day.mjs`: its off/on pairs read as over tolerance while a person is outlined (the outline in the "off" frame
 still selects the hidden batch twins), on main as well; pairs with nothing outlined pass.
 
+### People as skinned batches (2026-10-01, issue #136)
+
+The office still reached about 320 calls a frame on phone medium while people moved: a person's parts merged under
+their root and torso, so a walking or gesturing person (legs, knees, arms, head) let go of every part on a moving joint,
+and each drew on its own with its shadow (Emi about 32 draws and 30 shadow draws, Tama 16). Now, all layouts, with no
+change on screen:
+
+- js/perf/batch-rig.js: a person's parts (place.people, not Eric and Mio) merge into one skinned mesh per look, each
+  part weighted fully to the group it hangs from (that group is its bone). The batch bends exactly as the parts would
+  move, so a moving person draws once and casts once. Only a part's own change (its transform, visibility, material,
+  geometry) sends it back to drawing itself; its joints are only watched for staying visible and attached. People's
+  batches are built at the first scan, hidden ones too (Aoi and Rei in the office), so nobody draws part by part for
+  2 s when shown. Outlined people draw from skinned twins (batch-twin.js). `?norig` turns it off.
+- Phone office (js/perf/phone.js): props a scene adds later under `place.space` (the copier's sheets, the vending
+  machine's can) cast no sun shadow, like the office's other props there; the 15 sheets in the copier tray drew 30
+  times a frame while settling.
+
+`day-calls.mjs --every 60`, GL=gpu, before (07d92fa3) → after. Phone 390x844 q1: office max 322 → 248, median
+198 → 176, frames over 240 59 of 301 → 2 of 298; Emi's draws at most 64 → 4. Train median 162 → 144 (max is still
+the walk out, 332 → 321); gate median 180 → 141, max 301 → 276 (its first frames). Desktop 1366x860 q1: office max
+914 → 802, median 735 → 724; train median 334 → 286; gate 443 → 388. Look: people's batches off and on in the same
+paused frame through the whole day (nothing outlined), worst mean 0.013/255, at most 0.0024% of pixels over 8/255, at
+both sizes; close-ups of people in the train, gate and office looked the same. `day.mjs` reads as before (its pairs
+fail only where a person is outlined, on main as well).
+
 ## Office integration (C-0110, 2026-09-29)
 
 The office now uses the existing batching pass on both layouts, preserving all modelled detail. Claude reviewed layer31 picking, outline lifting, story visibility changes, fan motion and kotodama effects (C-0121).

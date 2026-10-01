@@ -26,6 +26,7 @@ import * as THREE from 'three';
 import { drain } from './slice.js';
 import { split } from './batch-split.js';
 import { makeTwin, dropTwin } from './batch-twin.js';
+import { rigSnap, skinOf, skinned, looseSnap, looseSame } from './batch-rig.js';
 import { matKey, hasTex, plainData, matSnap, matSame, nodeSnap, nodeSame, srcSnap, srcSame } from './batch-snap.js';
 
 const OBR = THREE.Object3D.prototype.onBeforeRender,
@@ -92,12 +93,18 @@ export function optimizePlace(place, opt = {}) {
   // under their own root (so outlines, hover and show/hide still work on the whole of them). Eric and Mio, and
   // whatever a thing's outline() names, are left alone completely.
   const BOUNDS = !Q.has('nobound');
-  let bounds = new Set();
+  // people (not Eric and Mio) are rigs: their parts merge into skinned batches with their joints as bones
+  // (js/perf/batch-rig.js); ?norig merges them per joint group as before
+  const RIGS = BOUNDS && !Q.has('norig');
+  let bounds = new Set(),
+    rigs = new Set();
   const excluded = () => {
     const ex = new Set(),
       bd = new Set();
+    rigs = new Set();
     for (const r of Object.values(place.people || {})) {
       if (r && r.root) (BOUNDS ? bd : ex).add(r.root);
+      if (RIGS && r && r.root) rigs.add(r.root);
       // a person's torso breathes every frame once the place is played (cast.js idle()): batch under it from the
       // start, or the parts on it draw one by one for the first second after every entry, until the pass sees it move
       if (r && r.torso && r.torso.isObject3D) movers.add(r.torso);
@@ -117,7 +124,7 @@ export function optimizePlace(place, opt = {}) {
       if (game.player && game.player.root) ex.add(game.player.root);
       if (game.mioNpc && game.mioNpc.root) ex.add(game.mioNpc.root);
     }
-    for (const o of ex) bd.delete(o);
+    for (const o of ex) (bd.delete(o), rigs.delete(o));
     bounds = bd;
     return ex;
   };
@@ -200,6 +207,8 @@ export function optimizePlace(place, opt = {}) {
   }
   const _rs = new THREE.Matrix4();
   function relSnap(o) {
+    const rg = rigOf(o);
+    if (rg) return rigSnap(o, rg);
     const a = anchorOf(o);
     if (!a) return '';
     relMatrix(o, a, _rs);
@@ -209,7 +218,13 @@ export function optimizePlace(place, opt = {}) {
     for (const v of _rs.elements) s += ',' + Math.round(v * 1e5);
     return s;
   }
+  const rigOf = (o) => {
+    if (rigs.size) for (let p = o.parent; p; p = p.parent) if (rigs.has(p)) return p;
+    return null;
+  };
   const anchorOf = (o) => {
+    const rg = rigOf(o);
+    if (rg) return rg;
     for (let p = o.parent; p; p = p.parent) if (movers.has(p) || bounds.has(p) || p === scene) return p;
     return null;
   };
@@ -356,7 +371,8 @@ export function optimizePlace(place, opt = {}) {
       if (ex.has(o) || o.isBone || o.userData.perfBatch || o.userData.noBatch || coplanar.has(o)) continue;
       // hidden subtrees wait until they show, but for a hidden group that moves (the train's station, shown as it pulls
       // in): its batches hang under it and hide with it
-      if (!o.visible && (o.isMesh || !movers.has(o))) continue;
+      // (and a hidden person: their batches hang under them, ready when they show)
+      if (!o.visible && (o.isMesh || !(movers.has(o) || rigs.has(o)))) continue;
       for (let i = 0; i < o.children.length; i++) stack.push(o.children[i]);
       if (!o.isMesh) continue;
       let r = info.get(o);
@@ -379,7 +395,7 @@ export function optimizePlace(place, opt = {}) {
             info.set(o, { state: 'dynamic' });
             continue;
           }
-          const anc = anchorOf(o),
+          const anc = rigOf(o) ? o.parent : anchorOf(o), // a person's part: only its own moves count
             chain = [];
           for (let n = o; n && n !== anc; n = n.parent) chain.push([n, nodeSnap(n)]);
           if (r && r.snap === '') regroup = true;
@@ -396,7 +412,8 @@ export function optimizePlace(place, opt = {}) {
         snaps.set(o, sn);
       } else snaps.set(o, relSnap(o));
       const m = o.material,
-        anchor = anchorOf(o);
+        anchor = anchorOf(o),
+        rig = rigs.has(anchor);
       if (!anchor) continue;
       const bake =
         bakeOK && (!m.transparent || o.userData.stackable) && BAKE.has(m.type) && plainData(m) && !m.clippingPlanes;
@@ -415,11 +432,12 @@ export function optimizePlace(place, opt = {}) {
         t: (o.geometry.index ? o.geometry.index.count : o.geometry.attributes.position.count) / 3,
       });
       // meshes that cast a shadow the plain way go into a shadow-only batch; the visible batch then casts nothing
-      const sh = o.castShadow && shadowable(o);
+      // (a person's skinned batch casts its own shadow)
+      const sh = o.castShadow && shadowable(o) && !rig;
       let k0 = mk.get(m);
       if (!k0) mk.set(m, (k0 = [matKey(m, false), matKey(m, true)]));
       const key = [
-        anchor.id,
+        anchor.id + (rig ? 'R' : ''),
         bake ? 'B' : 'E',
         k0[bake ? 0 : 1],
         uv,
@@ -431,7 +449,7 @@ export function optimizePlace(place, opt = {}) {
         JSON.stringify(o.userData),
       ].join('|');
       let gr = groups.get(key);
-      if (!gr) groups.set(key, (gr = { anchor, bake, uv, nrm, mat: m, list: [], cast: o.castShadow && !sh }));
+      if (!gr) groups.set(key, (gr = { anchor, rig, bake, uv, nrm, mat: m, list: [], cast: o.castShadow && !sh }));
       gr.list.push(o);
     }
     // the merging itself is queued and done a few milliseconds at a time (see pump), so it never holds up a frame
@@ -449,7 +467,7 @@ export function optimizePlace(place, opt = {}) {
           if (ok.length < 2 && !(ok.length === 1 && soloCaster(ok[0]))) return;
           const gr = { ...gr0, list: ok };
           build(gr);
-          const casters = ok.filter((o) => o.castShadow && shadowable(o));
+          const casters = gr.rig ? [] : ok.filter((o) => o.castShadow && shadowable(o));
           const bySide = new Map();
           for (const o of casters) {
             const sd = shadowSide(o.material);
@@ -512,6 +530,7 @@ export function optimizePlace(place, opt = {}) {
     }
     b.mesh.parent && b.mesh.parent.remove(b.mesh);
     b.mesh.geometry.dispose();
+    if (b.mesh.skeleton) b.mesh.skeleton.dispose();
     b.mesh.material.dispose();
     batches.delete(b);
     stats.batches = batches.size;
@@ -700,7 +719,7 @@ export function optimizePlace(place, opt = {}) {
       if (gr.mat.defaultAttributeValues) mat.defaultAttributeValues = gr.mat.defaultAttributeValues;
     }
     mat.userData = { ...(shadow ? {} : gr.mat.userData), perfBatch: true };
-    const mesh = new THREE.Mesh(geo, mat);
+    const mesh = gr.rig ? skinned(geo, mat, skinOf(list, anchor, relMatrix)) : new THREE.Mesh(geo, mat);
     mesh.name = shadow ? 'perf-shadow' : 'perf-batch';
     if (shadow) {
       mesh.castShadow = true;
@@ -743,8 +762,11 @@ export function optimizePlace(place, opt = {}) {
       live.add(p.o);
       p.o.layers.mask = HIDDEN;
       for (let n = p.o; n && n !== anchor; n = n.parent) {
+        // a person's joints only have to stay visible where they hang (their batch bends with them)
+        const loose = gr.rig && n !== p.o;
         let w = watch.get(n);
-        if (!w) watch.set(n, (w = { snap: nodeSnap(n), srcs: new Set() }));
+        if (w && w.loose && !loose) ((w.snap = nodeSnap(n)), (w.loose = false));
+        if (!w) watch.set(n, (w = { snap: loose ? looseSnap(n) : nodeSnap(n), loose, srcs: new Set() }));
         w.srcs.add(p.o);
         r.nodes.push(n);
       }
@@ -773,6 +795,7 @@ export function optimizePlace(place, opt = {}) {
       if (b.live <= 0) {
         b.mesh.parent && b.mesh.parent.remove(b.mesh);
         b.mesh.geometry.dispose();
+        if (b.mesh.skeleton) b.mesh.skeleton.dispose();
         b.mesh.material.dispose();
         batches.delete(b);
         stats.batches = batches.size;
@@ -887,7 +910,7 @@ export function optimizePlace(place, opt = {}) {
   function check() {
     const t0 = performance.now();
     for (const [n, w] of watch) {
-      if (nodeSame(n, w.snap)) continue;
+      if (w.loose ? looseSame(n, w.snap) : nodeSame(n, w.snap)) continue;
       const srcs = [...w.srcs];
       if (n.isMesh && info.get(n) && info.get(n).state === 'batched') {
         // the mesh itself changed: it draws itself from now on; the others hanging under it are handled as a group

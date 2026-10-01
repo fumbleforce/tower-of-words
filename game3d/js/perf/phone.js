@@ -17,6 +17,15 @@ const LIGHTER = {
       for (const c of o.children) skip(c);
     };
     skip(place.scene);
+    // and the props the scenes add later (the copier's sheets, the vending machine's can): 15 sheets landing in the
+    // copier's tray drew 30 times a frame with their shadows (issue #136)
+    const g = window.__game;
+    place.space?.addEventListener('childadded', ({ child }) => {
+      if (people.has(child) || child === g?.player?.root || child === g?.mioNpc?.root) return;
+      child.traverse((o) => {
+        if (o.isMesh) o.castShadow = false;
+      });
+    });
   },
   // The passengers and the cat are drawn again for every shadow they cast (about 60 draws a frame, each one many small
   // parts). Each has a blob shadow under them (places/train.js), which stays; Eric and Mio still cast theirs.
