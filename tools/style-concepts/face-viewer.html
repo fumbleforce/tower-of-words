@@ -174,9 +174,10 @@ function frame() {
     g.scene.visible = !close || close === i + 1;
     g.scene.position.x = close ? 0 : i ? 0.33 : -0.33;
   });
-  const box = new THREE.Box3().setFromObject(turn);
-  const cy = box.isEmpty() ? 0.6 : (box.min.y + box.max.y) / 2;
-  cam.position.set(0, cy + Math.sin(pitch) * dist, Math.cos(pitch) * dist);
+  const box = new THREE.Box3().setFromObject(close ? loaded[close - 1].scene : turn);
+  const cy = box.isEmpty() ? 0.6 : close ? box.max.y - (box.max.y - box.min.y) * 0.13 : (box.min.y + box.max.y) / 2;
+  const d = close ? (box.max.y - box.min.y) * 1.0 : dist;
+  cam.position.set(0, cy + Math.sin(pitch) * d, Math.cos(pitch) * d);
   cam.lookAt(0, cy, 0);
   r.render(scene, cam);
   requestAnimationFrame(frame);
