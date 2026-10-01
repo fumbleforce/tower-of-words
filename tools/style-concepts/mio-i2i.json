@@ -1,0 +1,107 @@
+[
+ {
+  "id": "mi-01",
+  "label": "mi-01",
+  "dir": "/art/parts/style-concepts/claude-mioi2i/mi-01/",
+  "ref": "/art/parts/style-concepts/claude-facetface/gen/i2i-cf04/mio-front-d60.png",
+  "note": "shape only, flat colours"
+ },
+ {
+  "id": "mi-02",
+  "label": "mi-02",
+  "dir": "/art/parts/style-concepts/claude-mioi2i/mi-02/",
+  "ref": "/art/parts/style-concepts/claude-facetface/gen/i2i-cf04/mio-front-d60.png",
+  "note": "+ target projected from its camera"
+ },
+ {
+  "id": "mi-03",
+  "label": "mi-03",
+  "dir": "/art/parts/style-concepts/claude-mioi2i/mi-03/",
+  "ref": "/art/parts/style-concepts/claude-facetface/gen/i2i-cf04/mio-front-d60.png",
+  "note": "+ front hair from the hairline"
+ },
+ {
+  "id": "mi-04",
+  "label": "mi-04",
+  "dir": "/art/parts/style-concepts/claude-mioi2i/mi-04/",
+  "ref": "/art/parts/style-concepts/claude-facetface/gen/i2i-cf04/mio-front-d60.png",
+  "note": "+ turnaround t1"
+ },
+ {
+  "id": "mi-05",
+  "label": "mi-05",
+  "dir": "/art/parts/style-concepts/claude-mioi2i/mi-05/",
+  "ref": "/art/parts/style-concepts/claude-facetface/gen/i2i-cf04/mio-front-d60.png",
+  "note": "+ unlit"
+ },
+ {
+  "id": "mi-06",
+  "label": "mi-06",
+  "dir": "/art/parts/style-concepts/claude-mioi2i/mi-06/",
+  "ref": "/art/parts/style-concepts/mio-ref-clean/final.png",
+  "note": "clean reference, glasses as geometry"
+ },
+ {
+  "id": "mi-07",
+  "label": "mi-07",
+  "dir": "/art/parts/style-concepts/claude-mioi2i/mi-07/",
+  "ref": "/art/parts/style-concepts/mio-ref-clean/final.png",
+  "note": "+ turnaround t2"
+ },
+ {
+  "id": "mi-08",
+  "label": "mi-08",
+  "dir": "/art/parts/style-concepts/claude-mioi2i/mi-08/",
+  "ref": "/art/parts/style-concepts/mio-ref-clean/final.png",
+  "note": "+ t2 colours matched"
+ },
+ {
+  "id": "mi-09",
+  "label": "mi-09",
+  "dir": "/art/parts/style-concepts/claude-mioi2i/mi-09/",
+  "ref": "/art/parts/style-concepts/mio-ref-clean/final.png",
+  "note": "+ crown fitted to the outline"
+ },
+ {
+  "id": "mi-10",
+  "label": "mi-10",
+  "dir": "/art/parts/style-concepts/claude-mioi2i/mi-10/",
+  "ref": "/art/parts/style-concepts/mio-ref-clean/final.png",
+  "note": "+ front keeps glancing surfaces"
+ },
+ {
+  "id": "mi-11",
+  "label": "mi-11",
+  "dir": "/art/parts/style-concepts/claude-mioi2i/mi-11/",
+  "ref": "/art/parts/style-concepts/mio-ref-clean/final.png",
+  "note": "+ facet skin from the front wireframe"
+ },
+ {
+  "id": "mi-12",
+  "label": "mi-12",
+  "dir": "/art/parts/style-concepts/claude-mioi2i/mi-12/",
+  "ref": "/art/parts/style-concepts/mio-ref-clean/final.png",
+  "note": "+ diptych turnaround t3"
+ },
+ {
+  "id": "mi-13",
+  "label": "mi-13",
+  "dir": "/art/parts/style-concepts/claude-mioi2i/mi-13/",
+  "ref": "/art/parts/style-concepts/mio-ref-clean/final.png",
+  "note": "+ back hair cut to the views"
+ },
+ {
+  "id": "mi-14",
+  "label": "mi-14",
+  "dir": "/art/parts/style-concepts/claude-mioi2i/mi-14/",
+  "ref": "/art/parts/style-concepts/mio-ref-clean/final.png",
+  "note": "+ facet skins from back and sides"
+ },
+ {
+  "id": "meshy-01",
+  "label": "meshy-01 (Meshy, comparison)",
+  "dir": "/art/parts/style-concepts/claude-mioi2i/meshy-01n/",
+  "ref": "/art/parts/style-concepts/mio-ref-clean/final.png",
+  "note": "Meshy image-to-3D from the clean cut-out, not rigged"
+ }
+]
