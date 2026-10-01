@@ -1,0 +1,93 @@
+[
+ {
+  "id": "claude-voxel",
+  "label": "Claude A · voxel",
+  "dir": "/art/parts/style-concepts/claude-voxel/attempt-04/",
+  "note": "attempt-04",
+  "about": "Blocky voxel figures, one cube size for everything (about 3 cm), face drawn as pixel blocks, glasses as a block frame one voxel off the face. Rigid parts on 7 bones, Minecraft-style swing walk.",
+  "attempts": [
+   [
+    "attempt-01",
+    "First build."
+   ],
+   [
+    "attempt-02",
+    "Smaller ID card, headphone cups with teal rings, bigger bun; Eric's hoodie strings and card smaller, more hair volume."
+   ],
+   [
+    "attempt-03",
+    "Eric: darker stubble, darker glasses frame, hair down to the nape, bigger ponytail."
+   ],
+   [
+    "attempt-04",
+    "Eric's hair combed back in steps instead of a straight fringe."
+   ]
+  ]
+ },
+ {
+  "id": "claude-toyfig",
+  "label": "Claude B · toy figure",
+  "dir": "/art/parts/style-concepts/claude-toyfig/attempt-08/",
+  "note": "attempt-08",
+  "about": "Toy-figure proportions (minifig, Playmobil) from clean primitives: cylinder head with a printed-style face, trapezoid torso, legs that swing from one hip pin, C-clip hands, clip-on hair pieces, glossy plastic.",
+  "attempts": [
+   [
+    "attempt-01",
+    "First build. Weak: the head's top shows through the hair as a pale band, the teal piece covers Mio's eyes."
+   ],
+   [
+    "attempt-02",
+    "Hair pieces bigger, teal piece moved to the back. Weak: the pale band is still there."
+   ],
+   [
+    "attempt-03",
+    "Hair pieces fitted closer. Weak: band still on Eric."
+   ],
+   [
+    "attempt-04",
+    "Hair pieces wider. Weak: band still on Eric."
+   ],
+   [
+    "attempt-05",
+    "Hair raised: band gone, but both hair pieces are tall egg-shaped helmets. Weak."
+   ],
+   [
+    "attempt-06",
+    "Head rebuilt as a cylinder with a low dome so the hair can hug it."
+   ],
+   [
+    "attempt-07",
+    "Mio's side strand round and tapered, glasses frame bars longer."
+   ],
+   [
+    "attempt-08",
+    "Eric's hair sides slope back (combed back); glasses corners no longer show black dots."
+   ]
+  ]
+ },
+ {
+  "id": "claude-facet",
+  "label": "Claude C · faceted low-poly",
+  "dir": "/art/parts/style-concepts/claude-facet/attempt-04/",
+  "note": "attempt-04",
+  "about": "Tall faceted low-poly, flat-shaded planes, a small head on a long body; silhouette first (Mio an A: a bell-shaped oversized hoodie on thin legs; Eric a V: broad blazer shoulders over a narrow waist). Face is only glasses, eye planes and brows. Knees in the walk.",
+  "attempts": [
+   [
+    "attempt-01",
+    "First build. Weak: teal frames Mio's face on both sides, Eric's hair sits like a helmet."
+   ],
+   [
+    "attempt-02",
+    "Mio's hair opened at the face, teal only at the nape and on her left (image right); smaller eyes; Eric's hairline higher with a lighter combed strip on top."
+   ],
+   [
+    "attempt-03",
+    "Glasses bars overlap at the corners (black dots still visible)."
+   ],
+   [
+    "attempt-04",
+    "Glasses corner dots fixed."
+   ]
+  ]
+ }
+]
