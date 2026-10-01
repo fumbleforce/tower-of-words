@@ -2,7 +2,7 @@
  "title": "Mio: saved generated volume guides",
  "date": "2026-10-01",
  "by": "Claude generation; Codex recovery and comparison",
- "status": "open",
+ "status": "superseded",
  "issue": 171,
  "question": "Does any saved guide have useful shape for the hand-built model?",
  "multi": true,
@@ -127,7 +127,11 @@
   {
    "label": "Job status, settings and retained-file hashes",
    "href": "reviews/char-mio-gen3d-1/inventory.json"
+  },
+  {
+   "label": "Texture and eye-edge cleanup follow-up",
+   "href": "bible/#review/char-mio-clean-1"
   }
  ],
- "decision": "meshy-single has potential: clean the dirty textures and eyes tilted forward on their own edge. The selected turnaround pictures remain references; no game asset approved."
+ "decision": "Cleanup requested; no game asset approved. The follow-up comparison is char-mio-clean-1."
 }
