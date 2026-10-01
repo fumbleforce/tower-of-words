@@ -127,6 +127,10 @@ export function pavingRects(rects, tile, { color = '#8e8a86', seam = '#7f7b77', 
 // stone paving with its seams as one mesh (tileFloor in props.js makes a mesh per seam line, too many outdoors)
 export const paving = (x0, x1, z0, z1, tile, opts) => pavingRects([[x0, x1, z0, z1]], tile, opts);
 
+// where the sun shines from, morning (outdoorLight) and after work (eveningLight); outdoor/shade.js lays the
+// shadows outside a place's shadow box along the same directions
+export const SUN = { morning: [0.8, 0.52, -0.3], evening: [-0.85, 0.34, 0.25] };
+
 // after work: dusk on a chunk built with outdoorLight (and the dorm courtyard's own lights), so the walk home is in
 // one light: a dim blue sky, the last of the sun low and orange from the west, lamps and windows glowing
 export const EVENING_GRADE = {
@@ -151,7 +155,7 @@ export function eveningLight(scene) {
     } else if (o.isDirectionalLight && o.castShadow) {
       o.color.set('#ffa56e');
       o.intensity = 1.45;
-      o.position.copy(new THREE.Vector3(-0.85, 0.34, 0.25).normalize().multiplyScalar(30));
+      o.position.copy(new THREE.Vector3(...SUN.evening).normalize().multiplyScalar(30));
     } else if (o.isDirectionalLight) {
       o.color.set('#b4c2ee');
       o.intensity = 0.4;
@@ -163,7 +167,7 @@ export function eveningLight(scene) {
 export function outdoorLight(scene) {
   scene.add(new THREE.HemisphereLight('#b7c1d2', '#6a625c', 1.7));
   const sun = new THREE.DirectionalLight('#ffc990', 3.2);
-  sun.position.copy(new THREE.Vector3(0.8, 0.52, -0.3).normalize().multiplyScalar(30));
+  sun.position.copy(new THREE.Vector3(...SUN.morning).normalize().multiplyScalar(30));
   sun.castShadow = true;
   sun.shadow.mapSize.set(2048, 2048);
   Object.assign(sun.shadow.camera, { left: -12, right: 12, top: 12, bottom: -12, near: 5, far: 70 });

@@ -558,3 +558,14 @@ outside the sun's shadow box (only those two blocks' walls cast); window panes a
 calls and triangles: phone q0 49 → 50 calls, 121k → 160k tris; phone q1 (medium) 56 → 58 calls (peak 69, under 250),
 123k → 164k; desktop q0 60 → 64 calls, 130k → 169k. The plaza's triangle baselines in budgets.json are raised to these
 runs (the added content, under the 300k budget); the call baselines stand.
+
+## North of the lane (2026-10-01, #142)
+
+The plaza now also builds the back lane behind the canteen as backdrop (game3d/js/scenes/plaza/north-lane.js,
+north-yard.js): the lane, the canteen's yard and apron, the clinic, office_e1, block_e2, m6 and a grove, in one
+collector that casts no shadow (it lies outside the sun's shadow box). The shadows of its trees and blocks, and of the
+east lane's, are laid flat on the ground instead (outdoor/shade.js: one mesh for the morning sun and one for after
+work, one shown). Fast test, plaza median calls and triangles against the baselines: phone q0 54 calls (baseline 49),
+160k → 197k tris; phone q1 62 calls (baseline 56, peak 74), 164k → 199k; desktop q0 68 calls (baseline 60), 169k →
+206k. The plaza's triangle baselines in budgets.json are raised to these runs (under the 300k budget); the call
+baselines stand, the calls being within the 20% tolerance.

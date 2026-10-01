@@ -45,7 +45,7 @@
       },
       "plaza": {
         "calls": 60,
-        "tris": 169227,
+        "tris": 205745,
         "gpu": {
           "medianMs": 16.7,
           "p99Ms": 16.8,
@@ -117,7 +117,7 @@
       },
       "plaza": {
         "calls": 49,
-        "tris": 160295,
+        "tris": 196697,
         "gpu": {
           "medianMs": 16.7,
           "p99Ms": 16.8,
@@ -189,7 +189,7 @@
       },
       "plaza": {
         "calls": 56,
-        "tris": 164166,
+        "tris": 198504,
         "gpu": {
           "medianMs": 16.7,
           "p99Ms": 16.8,

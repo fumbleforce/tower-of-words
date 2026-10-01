@@ -7,7 +7,8 @@
 //   cross at a gravel square with one big zelkova, four benches facing it and a lamp at two corners; a tree in each
 //   lawn quarter
 //   the north street's avenue: zelkovas every 4 down its west side in the lane's verge
-//   lamps along the streets, beds along block_e1's front, and the six blocks' fronts (plaza/east-fronts.js)
+//   lamps along the streets, beds along block_e1's front, and the nine blocks' fronts (plaza/east-fronts.js)
+// The back lane behind the canteen (plaza/north-lane.js) meets the north street from the west, through its verge.
 import * as THREE from 'three';
 import { paver, GRANITE } from '../outdoor/paving.js';
 import { laneField, verge, LANE_BORDER as BW } from '../outdoor/lane.js';
@@ -16,10 +17,12 @@ import { hedge, keyaki, sakura, ginkgo, pine, mound, grass, bed, LEAF } from '..
 import { drift } from '../forecourt/gardens.js';
 import { lamps, bench } from '../outdoor/furniture.js';
 import { Parts, rng } from '../outdoor/parts.js';
+import { shade } from '../outdoor/shade.js';
 import { bikeRow } from '../forecourt/details.js';
 import { buildFronts } from './east-fronts.js';
 import { LANE, FOOTPATH } from './plan.js';
 import * as E from './east-plan.js';
+import { BACK, E2 } from './north-plan.js';
 
 const { CORNERS, WEST_LEG, TOP_LEG, DORM_STREET: DS, NORTH_STREET: NS, CROSS, SOUTH_WALK: SW, PARK, SQUARE } = E;
 const ORIGIN = [LANE.e[0], LANE.e[2]]; // the lane's brick pattern runs on from the plaza's
@@ -47,13 +50,15 @@ function corner(pv, [x0, x1, z0, z1], closed, gaps = {}) {
     }
   }
 }
-// a tree standing free on the lawn, in its ring of mulch like the avenue's
-function tree(p, kind, x, z, s, seed) {
+// a tree standing free on the lawn, in its ring of mulch like the avenue's (north-lane.js uses these three too);
+// sh: a shade() collector for its laid shadow
+export function tree(p, kind, x, z, s, seed, sh = null) {
   kind(p, x, z, s, seed);
+  sh?.tree(x, z, s); // its shadow laid on the ground (outdoor/shade.js), out past the sun's shadow box
   p.geo(LEAF.mulch, new THREE.CylinderGeometry(0.55, 0.6, 0.03, 12).translate(x, 0, z), { cast: false, surf: 'soil' });
 }
 // a walk: pale slabs between soldier borders on its long sides
-function walk(pv, [x0, x1, z0, z1], alongX = x1 - x0 > z1 - z0) {
+export function walk(pv, [x0, x1, z0, z1], alongX = x1 - x0 > z1 - z0) {
   pv.field([x0, x1, z0, z1], { pattern: 'grid', module: [0.6, 0.6], tones: GRANITE.pale, origin: [x0, z0] });
   if (alongX) for (const z of [z0, z1 - BW]) edge(pv, [x0, x1, z, z + BW], [0.15, BW]);
   else for (const x of [x0, x1 - BW]) edge(pv, [x, x + BW, z0, z1], [BW, 0.15]);
@@ -99,7 +104,7 @@ function kerbs(p) {
   kerb(p, [WEST_LEG[0], TOP_LEG[2]], [CORNERS.c[1], TOP_LEG[2]], { off: -0.08, gaps: [[NS[0], NS[1]]] });
   // the dorm street's east side, open for the courtyard's gate leg and the ramen shop's door; its west side past the
   // south walk, open for the footpath along the shops' backs and the shop walk
-  const [e3, r9, ramen] = E.SPURS,
+  const [e3, r9, ramen, r3] = E.SPURS,
     AE = E.ARCADE_END;
   const gate = [E.GATE_Z - 1.5, E.GATE_Z + 1.5];
   kerb(p, [DS[1], CORNERS.c[2]], [DS[1], DS[3]], { off: 0.08, gaps: [gate, [ramen[2], ramen[3]]] });
@@ -116,6 +121,7 @@ function kerbs(p) {
     gaps: [
       [e3[2], e3[3]],
       [r9[2], r9[3]],
+      [r3[2], r3[3]],
     ],
   });
   // the shop walk: its south side; its north side between the rows' end, the izakaya and the street
@@ -148,7 +154,7 @@ function kerbs(p) {
   kerbRect(p, SQUARE, { gaps: { n: [ns], s: [ns], w: [ew], e: [ew] } });
 }
 
-function park(p, lights) {
+function park(p, lights, sh) {
   const ew = [E.PARK_EW[2], E.PARK_EW[3]],
     ns = [E.PARK_NS[0], E.PARK_NS[1]];
   const [x0, x1, z0, z1] = PARK,
@@ -206,6 +212,7 @@ function park(p, lights) {
     surf: 'soil',
   });
   keyaki(p, cx, cz, 1.05, 71);
+  sh.tree(cx, cz, 1.05);
   const off = (ns[1] - ns[0]) / 2 + 0.95;
   for (const sz of [-1, 1]) {
     const z = sz < 0 ? SQUARE[2] + 0.45 : SQUARE[3] - 0.45;
@@ -224,12 +231,12 @@ function park(p, lights) {
   // clipped pines to the south
   const qx = [(x0 + i + ns[0]) / 2, (ns[1] + x1 - i) / 2],
     qz = [(z0 + i + ew[0]) / 2, (ew[1] + z1 - i) / 2];
-  qz.forEach((z, a) => qx.forEach((x, b) => tree(p, a ? pine : sakura, x, z, a ? 0.8 : 0.7, 60 + a * 2 + b)));
+  qz.forEach((z, a) => qx.forEach((x, b) => tree(p, a ? pine : sakura, x, z, a ? 0.8 : 0.7, 60 + a * 2 + b, sh)));
 }
 
 // a bed against a wall or along a walk: kerbed on its open sides, planted with clipped mounds of mixed sizes and
 // greens, grass tufts and, if `pineAt` is set, a dwarf pine at that end ('w' or 'e')
-function shrubBed(p, rect, sides, seed, pineAt = null) {
+export function shrubBed(p, rect, sides, seed, pineAt = null) {
   kerbRect(p, rect, { sides });
   bed(p, rect, { y: 0.06 });
   const q = rng(seed),
@@ -245,9 +252,17 @@ function shrubBed(p, rect, sides, seed, pineAt = null) {
   if (pineAt) pine(p, px, zc, 0.55, seed + 3);
 }
 
-function planting(p, lights) {
-  // the north street's avenue
-  verge(p, [NS[0], NS[2]], [NS[0], TOP_LEG[2]], 'w', { trees: E.STREET_TREES, seed: 21 });
+function planting(p, lights, sh) {
+  // the north street's avenue, open where the back lane comes in (plaza/north-plan.js)
+  const back = [[BACK[2], BACK[3]]];
+  // and none against block_e2's east end, which stands close behind the verge
+  const clear = [
+    [BACK[2], BACK[3]],
+    [E2.rect[2], E2.rect[3]],
+  ];
+  const trees = E.STREET_TREES.filter((z) => !clear.some(([a, b]) => z > a - 1.2 && z < b + 1.2));
+  verge(p, [NS[0], NS[2]], [NS[0], TOP_LEG[2]], 'w', { crossings: back, trees, seed: 21 });
+  for (const z of trees) sh.tree(NS[0] - 2.1, z, 1.04);
   // block_e1: the bike pad west of its door (its bikes in buildEastLane), a deep bed along its front east of the
   // door, a ginkgo on the lawn between the pad and the lane; a zelkova east of it; a clipped hedge along its back
   // with two trees beyond, toward the canteen
@@ -255,27 +270,27 @@ function planting(p, lights) {
     pad = E.BIKE_PAD;
   kerbRect(p, pad, { sides: 'sw' });
   shrubBed(p, [CROSS[1] + 0.16, bx1 - 0.3, bz1, bz1 + 1.4], 'se', 41, 'e');
-  tree(p, ginkgo, pad[0] + 0.6, (pad[3] + LANE.e[2] - 1.1) / 2, 1.05, 37);
-  tree(p, keyaki, bx1 + 2.4, bz1 - 2.0, 1.05, 60);
+  tree(p, ginkgo, pad[0] + 0.6, (pad[3] + LANE.e[2] - 1.1) / 2, 1.05, 37, sh);
+  tree(p, keyaki, bx1 + 2.4, bz1 - 2.0, 1.05, 60, sh);
   hedge(p, [bx0 + 0.4, bz0 - 1.0], [bx1 - 0.4, bz0 - 1.0], { w: 0.6, h: 0.75, seed: 62 });
-  tree(p, keyaki, bx0 + 2.4, bz0 - 5.8, 1.15, 63);
-  tree(p, sakura, bx0 + 6.8, bz0 - 6.6, 1.0, 64);
+  tree(p, keyaki, bx0 + 2.4, bz0 - 5.8, 1.15, 63, sh);
+  tree(p, sakura, bx0 + 6.8, bz0 - 6.6, 1.0, 64, sh);
   // m_e2: a bed either side of its door; a drift down its west side; a cherry and a pine between it and m_e1
   const [me2, me1, r8] = ['m_e2', 'm_e1', 'r8'].map((id) => E.BLOCKS.find((k) => k.id === id).rect);
   shrubBed(p, [me2[0] + 0.3, CROSS[0] - 0.16, me2[2] - 1.1, me2[2]], 'nw', 42, 'w');
   shrubBed(p, [CROSS[1] + 0.16, me2[1] - 0.3, me2[2] - 1.1, me2[2]], 'ne', 43);
   drift(p, [me2[0] - 3.2, me2[0] - 0.4, me2[2] + 0.4, FOOTPATH[2] - 0.4], { back: 's', seed: 65 });
-  tree(p, sakura, (me2[1] + me1[0]) / 2, SW[3] + 2.4, 1.0, 35);
-  tree(p, pine, (me2[1] + me1[0]) / 2, me2[2] + 2.6, 1.0, 56);
+  tree(p, sakura, (me2[1] + me1[0]) / 2, SW[3] + 2.4, 1.0, 35, sh);
+  tree(p, pine, (me2[1] + me1[0]) / 2, me2[2] + 2.6, 1.0, 56, sh);
   // behind m_e1 and r8, along the footpath: a drift with its tall layer at the back and a zelkova
   drift(p, [me1[0] + 0.3, DS[0] - 0.6, r8[3] + 0.5, FOOTPATH[2] - 0.4], { back: 's', seed: 55 });
-  tree(p, keyaki, me1[1] + 0.3, r8[3] + 1.2, 1.05, 57);
+  tree(p, keyaki, me1[1] + 0.3, r8[3] + 1.2, 1.05, 57, sh);
   // the lawn south of the shop walk's east end: a hedge along the walk, two cherries behind it; the dorm street
   // ends at a bed across it
   const AE = E.ARCADE_END;
   hedge(p, [AE[0] + 0.4, AE[3] + 0.45], [AE[1] - 0.4, AE[3] + 0.45], { w: 0.5, h: 0.6, seed: 58 });
-  tree(p, sakura, AE[0] + 2.2, AE[3] + 2.4, 1.0, 59);
-  tree(p, sakura, AE[1] - 2.0, AE[3] + 2.8, 0.95, 67);
+  tree(p, sakura, AE[0] + 2.2, AE[3] + 2.4, 1.0, 59, sh);
+  tree(p, sakura, AE[1] - 2.0, AE[3] + 2.8, 0.95, 67, sh);
   shrubBed(p, [DS[0], DS[1], DS[3], DS[3] + 1.3], 'sew', 44, 'e');
   // lamps: down the dorm street's west side and the north street's east side every 8; by the cross walk at the
   // bike pad (the lane's own lamp by its south mouth is the plaza's)
@@ -293,20 +308,24 @@ function planting(p, lights) {
 
 // builds it all into the plaza: p, the plaza's Parts collector; lights, its light set. Returns the evening switch.
 // Almost all of it lies outside the sun's shadow box (scenes/plaza.js), so it goes into its own collector that casts
-// no shadow (no shadow-pass triangles); only the walls of the blocks inside the box cast, through the plaza's p.
+// no shadow (no shadow-pass triangles); only the walls of the blocks inside the box cast, through the plaza's p. The
+// rest get their shadows laid on the ground (outdoor/shade.js); update(sun) keeps them on the sun's side.
 const SHADOW_X = 22; // the shadow box's east edge, in the plaza's frame
 export function buildEastLane(root, p, lights) {
   const q = new Parts();
   ground(root);
   kerbs(q);
-  park(q, lights);
-  planting(q, lights);
+  const sh = shade();
+  park(q, lights, sh);
+  planting(q, lights, sh);
   const bikes = bikeRow(5, { gaps: [1, 3], seed: 9 }); // the rack against block_e1's front, the bikes facing the lane
   bikes.rotation.y = Math.PI;
   bikes.position.set(E.BIKE_PAD[1] - 0.6, 0, E.BIKE_PAD[2] + 0.75);
   root.add(bikes);
   const fronts = buildFronts(q, lights, E.BLOCKS, { caster: p, casts: (k) => k.rect[0] < SHADOW_X });
   fronts.meshes(root);
+  for (const k of E.BLOCKS) if (k.rect[0] >= SHADOW_X) sh.block(k.rect, k.row.storeys * k.row.floorH);
   for (const m of q.build(root)) m.castShadow = false;
-  return { evening: fronts.evening };
+  const shadows = sh.build(root);
+  return { evening: fronts.evening, update: (sun) => shadows.follow(sun.position) };
 }

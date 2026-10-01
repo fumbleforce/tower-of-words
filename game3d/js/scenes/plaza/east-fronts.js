@@ -1,4 +1,4 @@
-// The six small blocks along the east lane (plaza/east-lane.js), from the plan (plaza/east-plan.js): backdrop
+// The small blocks along the east lane (plaza/east-lane.js) and the back lane (plaza/north-lane.js), from the plan (plaza/east-plan.js): backdrop
 // exteriors in the town palette, nothing inside. Each is its layout footprint and storeys, with a plinth, floor
 // bands, windows on every face, a flat roof with a parapet and plant (scenes/dorm-court/roofs.js), and a ground floor
 // that says what it is, with its door on its path:
@@ -14,6 +14,7 @@ import { flatRoof, tiledRoof } from '../dorm-court/roofs.js';
 import { merged, AWNING } from '../plaza-buildings.js';
 import { hash2 } from '../outdoor/parts.js';
 import { STEEL } from '../outdoor/furniture.js';
+import { faces, faceAt, tOf } from '../outdoor/block.js';
 
 const PLINTH = '#6c7178',
   FRAME = '#4f565f',
@@ -22,21 +23,11 @@ const PLINTH = '#6c7178',
   NOREN = '#34425c',
   CAFE_AWNING = '#5a6f66';
 
-// one face of a rectangle [x0, x1, z0, z1]: its start, direction along it, outward normal and length
-function face([x0, x1, z0, z1], f) {
-  return {
-    s: { a: [x0, z1], d: [1, 0], n: [0, 1], L: x1 - x0 },
-    n: { a: [x1, z0], d: [-1, 0], n: [0, -1], L: x1 - x0 },
-    w: { a: [x0, z0], d: [0, 1], n: [-1, 0], L: z1 - z0 },
-    e: { a: [x1, z1], d: [0, -1], n: [1, 0], L: z1 - z0 },
-  }[f];
-}
-// a box on a face: u along it (centre), y up (bottom), o out from it (centre); w along, h up, t out
+// a box on a face (outdoor/block.js has the face maths): u along it (centre), y up (bottom), o out from it (centre);
+// w along, h up, t out
 function onFace(add, F, u, y, o, w, h, t) {
-  const x = F.a[0] + F.d[0] * u + F.n[0] * o,
-    z = F.a[1] + F.d[1] * u + F.n[1] * o;
-  const alongX = F.d[0] !== 0;
-  add(alongX ? w : t, h, alongX ? t : w, x, y, z);
+  const [x, z] = faceAt(F, u, o);
+  add(F.d[0] ? w : t, h, F.d[0] ? t : w, x, y, z);
 }
 
 // caster: the collector for the walls of the blocks `casts(block)` picks (the ones that should throw a shadow)
@@ -71,7 +62,7 @@ export function buildFronts(p, lights, blocks, { caster = p, casts = () => false
     // windows: every face, every storey above the ground, and the ground floor of the faces without the door
     const shop = k.ground === 'shop';
     for (const f of ['s', 'n', 'w', 'e']) {
-      const F = face(k.rect, f);
+      const F = faces(k.rect)[f];
       const front = f === k.face;
       for (let s = front ? 1 : 0; s < n; s++) {
         const y = s * fh;
@@ -151,7 +142,7 @@ export function buildFronts(p, lights, blocks, { caster = p, casts = () => false
 // the ground floor of the door's face
 function groundFloor(p, F, k, fh, { box, pane, lights }) {
   // the door, along the face from its start (k.at is its x on a north or south face, its z on a west or east one)
-  const at = F.d[0] ? (k.at - F.a[0]) * F.d[0] : (k.at - F.a[1]) * F.d[1];
+  const at = tOf(F, k.at);
   const frame = box(FRAME, false),
     sill = box(SILL, false);
   // a light over the door, its pool on the path

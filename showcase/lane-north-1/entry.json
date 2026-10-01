@@ -1,0 +1,30 @@
+{
+  "title": "North of the lane: the back lane behind the canteen, the clinic",
+  "date": "2026-10-01",
+  "by": "claude-agent:lane-north",
+  "caption": "The next of the island's neighbour blocks (work issue #142): behind the canteen, a back lane from the canteen's loading yard to the north street, the clinic on its own small court, office blocks with their doors on walks, trees in groups. Backdrop only: day 1 doesn't walk it, and the cameras look north over the canteen, so you see it on the island map (M).",
+  "sections": [
+    {
+      "title": "The island map",
+      "caption": "The plaza's tile now runs north to the clinic. Before, the canteen's back was bare lawn up to the tile's edge.",
+      "images": [
+        { "id": "before-map", "image": "bible/shots/showcase/lane-north-1/before-map.webp", "caption": "Before" },
+        { "id": "after-map", "image": "bible/shots/showcase/lane-north-1/after-map.webp", "caption": "After" },
+        { "id": "after-plan", "image": "bible/shots/showcase/lane-north-1/after-plan.webp", "caption": "After, close up from above" }
+      ]
+    },
+    {
+      "title": "Close up (the camera placed where the player can't go)",
+      "caption": "The clinic's court off the back lane, block_e2 by the junction with the north street, the canteen's loading yard, the trees between, and the clinic after work.",
+      "images": [
+        { "id": "after-clinic-desk", "image": "bible/shots/showcase/lane-north-1/after-clinic-desk.webp", "caption": "The clinic, desktop" },
+        { "id": "after-clinic-phone", "image": "bible/shots/showcase/lane-north-1/after-clinic-phone.webp", "caption": "The clinic, phone" },
+        { "id": "after-junction-desk", "image": "bible/shots/showcase/lane-north-1/after-junction-desk.webp", "caption": "block_e2 and the north street" },
+        { "id": "after-yard-desk", "image": "bible/shots/showcase/lane-north-1/after-yard-desk.webp", "caption": "The loading yard" },
+        { "id": "after-grove-desk", "image": "bible/shots/showcase/lane-north-1/after-grove-desk.webp", "caption": "The trees between the clinic and block_e2" },
+        { "id": "after-clinic-eve-desk", "image": "bible/shots/showcase/lane-north-1/after-clinic-eve-desk.webp", "caption": "After work" }
+      ]
+    }
+  ],
+  "links": [{ "label": "Play it", "href": "game3d/" }]
+}
