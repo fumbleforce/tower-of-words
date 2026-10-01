@@ -17,13 +17,16 @@ import * as THREE from 'three';
 import { Parts, hash2 } from './parts.js';
 import { kerb } from './edges.js';
 import { bench, STEEL } from './furniture.js';
-import { TREES, cluster } from './planting.js';
+import { TREES, cluster, mound, LEAF } from './planting.js';
+
+const GREENS = [LEAF.mid, LEAF.deep, LEAF.fresh];
 import { WEST_COAST, WEST_TREES, WEST_SHRUBS, WALKS } from '../island-west.js';
 
 const STONE = { wall: '#767a80', coping: '#a3a6a6', rocks: ['#6f7378', '#7d8187', '#686c71', '#858a8f'] };
 const SURF = '#b9c6cc'; // the sea shader's own foam (places/train.js uFoam)
 const ROCK_PITCH = 1.2;
 const NO_CAST = { cast: false }; // the wall, rocks and surf would throw their shadows on the sea, which takes none
+const FOAM = { cast: false, opts: { transparent: true, opacity: 0.42, depthWrite: false } }; // see-through, on the sea
 
 // a box `len` long along the unit heading d (in the place's frame), w across, from y0 to y1, centred at c
 function along(p, color, c, d, len, w, y0, y1, opts) {
@@ -31,8 +34,9 @@ function along(p, color, c, d, len, w, y0, y1, opts) {
   p.geo(color, g.translate(c[0], (y0 + y1) / 2, c[1]), opts);
 }
 
-// the sea wall, piece by piece; the sea lies to the right of the way the line runs
-function* wall(stone, surf, at, sea) {
+// the sea wall, piece by piece; the sea lies to the right of the way the line runs. Behind its coping a strip of
+// ground cover with clipped mounds at an uneven pitch, so the lawn meets the wall along planting
+function* wall(stone, green, surf, at, sea, clip) {
   const line = WEST_COAST.map(([x, z]) => at(x, z));
   for (let i = 0; i + 1 < line.length; i++) {
     const a = line[i],
@@ -45,28 +49,44 @@ function* wall(stone, surf, at, sea) {
     along(stone, STONE.wall, P(L / 2, 0.18), d, L + 0.3, 0.36, sea - 0.4, -0.05, NO_CAST);
     // a square pier at each corner of the line, so the joints read as built
     stone.box(STONE.coping, 0.75, 0.32 - sea, 0.75, a[0], sea - 0.1, a[1], { ry: Math.atan2(-d[1], d[0]), ...NO_CAST });
-    // the rocks: two rows, the inner one leaning on the wall, the outer one half in the sea, staggered
+    along(green, LEAF.cover, P(L / 2, -1.15), d, L - 0.4, 1.1, -0.04, 0.05, NO_CAST);
+    for (let u = 1; u < L - 1; u += 1.6 + hash2(u, i, 41) * 1.8) {
+      const [x, z] = P(u, -1.15 + (hash2(i, u, 43) - 0.5) * 0.4);
+      if (hash2(x, z, 45) < 0.7 && clip(x, z))
+        mound(green, x, z, 0.32 + hash2(z, x, 47) * 0.22, GREENS[(i + Math.round(u)) % 3]);
+    }
+    // the rocks: two rows, the inner one leaning on the wall, the outer one half in the sea, staggered, with rubble
+    // between the big ones
     for (const [row, off, lift, r0] of [
-      [0, 0.85, 0.35, 0.5],
-      [1, 1.75, 0.05, 0.58],
+      [0, 0.85, 0.3, 0.5],
+      [1, 1.8, 0.0, 0.6],
     ])
       for (let u = (row ? ROCK_PITCH / 2 : 0) + 0.4; u < L - 0.3; u += ROCK_PITCH * (0.75 + hash2(u, i, 21) * 0.5)) {
         // the outer row thins out here and there; sizes vary by a quarter either way
         if (row && hash2(u, i, 23) < 0.15) continue;
-        const [x, z] = P(u, off + (hash2(i, u, row) - 0.5) * 0.3),
-          r = r0 * (0.75 + hash2(u, i, 7) * 0.5);
+        const [x, z] = P(u, off + (hash2(i, u, row) - 0.5) * 0.4),
+          r = r0 * (0.6 + hash2(u, i, 7) * 0.9);
         const g = new THREE.DodecahedronGeometry(r, 0)
           .rotateY(hash2(x, z, 3) * 6.3)
-          .rotateX(hash2(z, x, 5) * 0.6)
-          .scale(1.1, 0.6 + hash2(x, z, 19) * 0.25, 1);
-        stone.geo(STONE.rocks[Math.floor(hash2(x, z, 9) * 4)], g.translate(x, sea + lift, z), NO_CAST);
+          .rotateX(hash2(z, x, 5) * 0.8)
+          .scale(1.15, 0.5 + hash2(x, z, 19) * 0.3, 1);
+        stone.geo(STONE.rocks[Math.floor(hash2(x, z, 9) * 4)], g.translate(x, sea + lift - r * 0.15, z), NO_CAST);
+        if (hash2(z, u, 37) < 0.5) {
+          const [rx, rz] = P(u + ROCK_PITCH * 0.5, off + 0.35 + hash2(u, z, 39) * 0.3);
+          const rub = new THREE.DodecahedronGeometry(0.16 + hash2(rx, rz, 1) * 0.12, 0).rotateY(hash2(rz, rx, 2) * 6);
+          stone.geo(
+            STONE.rocks[Math.floor(hash2(rx, rz, 4) * 4)],
+            rub.scale(1, 0.6, 1).translate(rx, sea + 0.05, rz),
+            NO_CAST,
+          );
+        }
         // foam where the outer rocks meet the water: low flat patches, not on every rock
         if (row && hash2(x, z, 29) < 0.55) {
-          const f = new THREE.DodecahedronGeometry(r * (0.8 + hash2(z, x, 31) * 0.7), 0)
+          const f = new THREE.DodecahedronGeometry(r * (0.55 + hash2(z, x, 31) * 0.45), 0)
             .scale(1.5, 0.03, 1)
             .rotateY(Math.atan2(-d[1], d[0]));
           const [fx, fz] = P(u + (hash2(x, z, 33) - 0.5) * 0.8, off + r * 0.9);
-          surf.geo(SURF, f.translate(fx, sea + 0.02, fz), NO_CAST);
+          surf.geo(SURF, f.translate(fx, sea + 0.02, fz), FOAM);
         }
       }
     yield;
@@ -142,7 +162,7 @@ export function* coastSteps(root, { at, turn = 0, sea = -0.2, clip = () => true,
   const stone = new Parts(),
     green = new Parts(),
     surf = new Parts();
-  yield* wall(stone, surf, at, sea);
+  yield* wall(stone, green, surf, at, sea, clip);
   walks(stone, at, turn, clip);
   yield;
   WEST_TREES.forEach(([kind, x, z, s], i) => {
