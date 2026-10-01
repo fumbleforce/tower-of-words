@@ -40,16 +40,76 @@ export const WEST = {
 
 const STONE = { wall: '#6c7177', coping: '#8d9194', rocks: ['#5f666e', '#6b7279', '#585e66', '#737a82'] };
 const SEAM = '#7f7c76'; // the joints between a terrace's slabs
-const SURF = '#b9c6cc'; // the sea shader's own foam (places/train.js uFoam)
+const SURF = '#dbe6ea'; // a little whiter than the sea shader's own foam (places/train.js uFoam), as it's thin
 const ROCK_PITCH = 1.2;
 const PIER_RUN = 8; // a pier at the line's ends and at a bend about every this far along it
 const NO_CAST = { cast: false }; // the wall, rocks and surf would throw their shadows on the sea, which takes none
-const FOAM = { cast: false, opts: { transparent: true, opacity: 0.3, depthWrite: false } }; // see-through, on the sea
+const FOAM = { transparent: true, depthWrite: false, side: THREE.DoubleSide }; // see-through, on the sea; each vertex carries its own opacity
 
 // a box `len` long along the unit heading d (in the place's frame), w across, from y0 to y1, centred at c
 export function along(p, color, c, d, len, w, y0, y1, opts) {
   const g = new THREE.BoxGeometry(len, y1 - y0, w).rotateY(Math.atan2(-d[1], d[0]));
   p.geo(color, g.translate(c[0], (y0 + y1) / 2, c[1]), opts);
+}
+
+// surf: a flat ribbon on the water whose edge by the stone is bright and whose far edge has faded out (vertex alpha)
+function ribbon(surf, ins, outs, sea, y = 0.02) {
+  const pos = [],
+    al = [];
+  for (let k = 0; k + 1 < ins.length; k++)
+    for (const [p, w] of [
+      [ins[k], 0.8],
+      [outs[k], 0],
+      [ins[k + 1], 0.8],
+      [outs[k], 0],
+      [outs[k + 1], 0],
+      [ins[k + 1], 0.8],
+    ]) {
+      pos.push(p[0], sea + y, p[1]);
+      al.push(w);
+    }
+  const g = new THREE.BufferGeometry();
+  g.setAttribute('position', new THREE.Float32BufferAttribute(pos, 3));
+  g.computeVertexNormals();
+  surf.geo(SURF, g, { cast: false, opts: FOAM, alpha: al });
+}
+// the surf round a rock of radius r at (x, z): an arc about the sea-side heading `h`, a gap left in it
+function arc(surf, x, z, r, h, rnd, sea) {
+  const span = 1.4 + rnd * 0.7,
+    start = h - span + (rnd - 0.5) * 0.5,
+    steps = 9,
+    cut = 3 + (Math.floor(rnd * 97) % 3), // the arc breaks here, and again a few steps on
+    w = 0.05 + rnd * 0.05;
+  let ins = [],
+    outs = [];
+  for (let k = 0; k <= steps; k++) {
+    const a = start + ((2 * span) / steps) * k,
+      c = Math.cos(a),
+      s = Math.sin(a);
+    if (k !== cut && k !== cut + 1) {
+      // hugging the stone's waterline, the inner edge just under it
+      ins.push([x + c * r * 0.9, z + s * r * 0.8]);
+      outs.push([x + c * (r * 1.02 + w), z + s * (r * 0.92 + w)]);
+    } else if (ins.length) {
+      if (ins.length > 1) ribbon(surf, ins, outs, sea);
+      ins = [];
+      outs = [];
+    }
+  }
+  if (ins.length > 1) ribbon(surf, ins, outs, sea);
+}
+// a run of surf along the wall's foot from a to b, n the way the sea lies, thin at both ends
+function foot(surf, a, b, n, sea) {
+  const ins = [],
+    outs = [];
+  for (let k = 0; k <= 4; k++) {
+    const t = k / 4,
+      p = [a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t],
+      w = 0.03 + 0.1 * Math.sin(Math.PI * t);
+    ins.push(p);
+    outs.push([p[0] + n[0] * w, p[1] + n[1] * w]);
+  }
+  ribbon(surf, ins, outs, sea, 0.015);
 }
 
 // the sea wall, piece by piece; the sea lies to the right of the way the line runs. Behind its coping (plant) a strip
@@ -101,6 +161,13 @@ function* wall(stone, green, surf, at, sea, clip, { line: pts, beach = false, pl
           mound(green, x, z, 0.32 + hash2(z, x, 47) * 0.22, GREENS[(i + Math.round(u)) % 3]);
       }
     }
+    if (!beach) {
+      // a thin broken line along the wall's foot, in runs of uneven length with gaps between
+      for (let u = hash2(i, L, 71) * 1.2; u < L - 0.4; u += 1.2 + hash2(u, i, 73) * 1.6) {
+        const len = Math.min(0.9 + hash2(i, u, 75) * 1.6, L - u);
+        foot(surf, P(u, 0.4), P(u + len, 0.4), n, sea);
+      }
+    }
     if (beach) {
       // groups of two to four shrubs of mixed size at uneven gaps, now and then a rock among them
       for (let u = 1.1 + hash2(i, L, 48) * 1.5; u < L - 0.8; u += 2.2 + hash2(u, i, 49) * 2.6) {
@@ -143,14 +210,8 @@ function* wall(stone, green, surf, at, sea, clip, { line: pts, beach = false, pl
             NO_CAST,
           );
         }
-        // foam where the outer rocks meet the water: low flat patches, not on every rock
-        if (row && hash2(x, z, 29) < 0.55) {
-          const f = new THREE.DodecahedronGeometry(r * (0.55 + hash2(z, x, 31) * 0.45), 0)
-            .scale(1.5, 0.03, 1)
-            .rotateY(Math.atan2(-d[1], d[0]));
-          const [fx, fz] = P(u + (hash2(x, z, 33) - 0.5) * 0.8, off + r * 0.9);
-          surf.geo(SURF, f.translate(fx, sea + 0.02, fz), FOAM);
-        }
+        // surf round the outer rocks: a broken arc on the sea side, hugging the stone
+        if (row && hash2(x, z, 29) < 0.7) arc(surf, x, z, r, Math.atan2(n[1], n[0]), hash2(z, x, 31), sea);
       }
     yield;
   }

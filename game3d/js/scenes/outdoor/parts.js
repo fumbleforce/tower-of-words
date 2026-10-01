@@ -28,17 +28,24 @@ export class Parts {
   constructor() {
     this.sets = new Map();
   }
-  geo(color, g, { cast = true, surf = null, opts = null } = {}) {
-    const key = `${cast}|${surf}|${opts ? JSON.stringify(opts) : ''}`;
-    if (!this.sets.has(key)) this.sets.set(key, { cast, surf, opts, list: [] });
+  // alpha: one opacity per vertex (a set whose geometry all has it draws with vertex alpha: the surf's fading edge)
+  geo(color, g, { cast = true, surf = null, opts = null, alpha = null } = {}) {
+    const key = `${cast}|${surf}|${opts ? JSON.stringify(opts) : ''}|${!!alpha}`;
     // one attribute set for all: position, normal, colour (and uv, zeroed, so everything merges)
-    if (g.index) g = g.toNonIndexed();
+    if (alpha && alpha.length !== g.attributes.position.count)
+      throw new Error('Parts.geo: alpha must have one value per vertex');
+    if (!this.sets.has(key)) this.sets.set(key, { cast, surf, opts, list: [] });
+    if (g.index) {
+      if (alpha) alpha = Array.from(g.index.array, (i) => alpha[i]);
+      g = g.toNonIndexed();
+    }
     for (const n of Object.keys(g.attributes)) if (n !== 'position' && n !== 'normal') g.deleteAttribute(n);
     const n = g.attributes.position.count;
     _c.set(color);
-    const col = new Float32Array(n * 3);
-    for (let i = 0; i < n; i++) col.set([_c.r, _c.g, _c.b], i * 3);
-    g.setAttribute('color', new THREE.Float32BufferAttribute(col, 3));
+    const k = alpha ? 4 : 3,
+      col = new Float32Array(n * k);
+    for (let i = 0; i < n; i++) col.set(alpha ? [_c.r, _c.g, _c.b, alpha[i]] : [_c.r, _c.g, _c.b], i * k);
+    g.setAttribute('color', new THREE.Float32BufferAttribute(col, k));
     g.setAttribute('uv', new THREE.Float32BufferAttribute(new Float32Array(n * 2), 2));
     this.sets.get(key).list.push(g);
     return this;
@@ -83,7 +90,13 @@ export function along(a, b, { pitch = 3, inset = 0, skip = [], side = 0, count =
   for (let i = 0; i < n; i++) {
     const t = start + step * i;
     if (skip.some(([s0, s1]) => t > s0 - 1e-6 && t < s1 + 1e-6)) continue;
-    out.push({ x: a[0] + ux * t - uz * side, z: a[1] + uz * t + ux * side, t, i, dir: Math.atan2(ux, uz) });
+    out.push({
+      x: a[0] + ux * t - uz * side,
+      z: a[1] + uz * t + ux * side,
+      t,
+      i,
+      dir: Math.atan2(ux, uz),
+    });
   }
   return out;
 }
