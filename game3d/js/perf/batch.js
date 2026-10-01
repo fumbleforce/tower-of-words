@@ -25,6 +25,7 @@
 import * as THREE from 'three';
 import { drain } from './slice.js';
 import { split } from './batch-split.js';
+import { makeTwin, dropTwin } from './batch-twin.js';
 import { matKey, hasTex, plainData, matSnap, matSame, nodeSnap, nodeSame, srcSnap, srcSame } from './batch-snap.js';
 
 const OBR = THREE.Object3D.prototype.onBeforeRender,
@@ -70,11 +71,16 @@ export function optimizePlace(place, opt = {}) {
   const movers = new Set(); // groups seen moving: batches go under them
   const matFlips = new WeakMap(); // mesh -> times its material changed while merged
   const live = new Set(); // meshes drawn by a batch right now
+  // outlined meshes lifted out of their batches, and the twins drawing them (see outlines below)
+  const lifted = new Set();
+  const twins = new Map(); // visible batch -> its twin
+  const twinOf = new Map(); // lifted mesh -> the twin drawing it
+  let twinsStale = false;
   let dead = false;
   const batches = new Set();
   const dirtyIdx = new Set();
   const stats = { merged: 0, released: 0, batches: 0, buildMs: 0, scans: 0, checkMs: 0 };
-  const perf = { stats, batches, info, movers, scan, check, dispose, toggle, why, toggleBatch, describe };
+  const perf = { stats, batches, info, movers, scan, check, dispose, toggle, why, toggleBatch, describe, forOutline };
   place.perf = perf;
   if (off) return perf;
 
@@ -493,6 +499,7 @@ export function optimizePlace(place, opt = {}) {
     }
   }
   function dropBatch(b) {
+    if (twins.has(b)) twinsStale = true;
     for (const o of b.parts.keys()) {
       const r = info.get(o);
       if (r && r.batches) r.batches = r.batches.filter((x) => x !== b);
@@ -767,7 +774,7 @@ export function optimizePlace(place, opt = {}) {
     }
     o.layers.mask = r.mask;
     live.delete(o);
-    lifted.delete(o);
+    if (lifted.delete(o)) twinsStale = true;
     for (const n of r.nodes) {
       const w = watch.get(n);
       if (w) {
@@ -793,9 +800,9 @@ export function optimizePlace(place, opt = {}) {
 
   // ---------- outlines ----------
   // main.js outlines what Eric is near and what the mouse is over (game.objsOf). A merged mesh in that set is taken
-  // out of its batch while it's outlined (its triangles there collapsed, the mesh drawn itself) and put back after,
-  // so the outline pass sees it and nothing is drawn twice.
-  const lifted = new Set();
+  // out of its batch while it's outlined (its triangles there collapsed) and put back after, so the outline's depth
+  // pass doesn't see it. Meanwhile its triangles draw from a twin of the batch (js/perf/batch-twin.js), one draw per
+  // batch the thing was in, and the outline pass selects the twins in its place (forOutline, read by perf/outline.js).
   function outlined() {
     const want = new Set();
     if (game && game.place === place && game.objsOf && !game.busy) {
@@ -826,6 +833,7 @@ export function optimizePlace(place, opt = {}) {
         lifted.add(o);
         lift(o, true);
       }
+    if (twinsStale) rebuildTwins();
   }
   function lift(o, out) {
     const r = info.get(o);
@@ -840,7 +848,33 @@ export function optimizePlace(place, opt = {}) {
       idx.addUpdateRange(p.i0, p.cnt);
       dirtyIdx.add(idx);
     }
-    o.layers.mask = out ? r.mask : HIDDEN;
+    twinsStale = true;
+  }
+  function rebuildTwins() {
+    twinsStale = false;
+    for (const t of twins.values()) dropTwin(t);
+    twins.clear();
+    twinOf.clear();
+    const by = new Map();
+    for (const o of lifted)
+      for (const b of info.get(o).batches) {
+        if (b.shadow || !batches.has(b) || !b.parts.has(o)) continue;
+        if (!by.has(b)) by.set(b, []);
+        by.get(b).push(o);
+      }
+    for (const [b, list] of by) {
+      const t = makeTwin(
+        b,
+        list.map((o) => b.parts.get(o)),
+      );
+      t.visible = b.mesh.visible;
+      twins.set(b, t);
+      for (const o of list) twinOf.set(o, t);
+    }
+  }
+  // what the outline pass selects for these meshes: a lifted mesh's twin instead of the mesh
+  function forOutline(list) {
+    return twinOf.size ? [...new Set(list.map((o) => twinOf.get(o) || o))] : list;
   }
 
   // ---------- every frame, before the first render pass ----------
@@ -909,14 +943,16 @@ export function optimizePlace(place, opt = {}) {
   function toggle(on) {
     shown = on;
     for (const b of batches) b.mesh.visible = on;
-    for (const [o, r] of info) if (r.state === 'batched') o.layers.mask = on && !lifted.has(o) ? HIDDEN : r.mask;
+    for (const t of twins.values()) t.visible = on;
+    for (const [o, r] of info) if (r.state === 'batched') o.layers.mask = on ? HIDDEN : r.mask;
   }
   // one batch off (its meshes drawn on their own) or back on: the day check uses it to find which batch differs
   function toggleBatch(b, on) {
     b.mesh.visible = on;
+    if (twins.has(b)) twins.get(b).visible = on;
     for (const o of b.parts.keys()) {
       const r = info.get(o);
-      if (r && r.state === 'batched' && !b.shadow) o.layers.mask = on && !lifted.has(o) ? HIDDEN : r.mask;
+      if (r && r.state === 'batched' && !b.shadow) o.layers.mask = on ? HIDDEN : r.mask;
       else if (r && b.shadow && !on) {
         /* shadow-only: its meshes cast through their own batch */
       }
@@ -947,6 +983,9 @@ export function optimizePlace(place, opt = {}) {
     dead = true;
     cancelAnimationFrame(raf);
     scene.onBeforeRender = prevOBR;
+    for (const t of twins.values()) dropTwin(t);
+    twins.clear();
+    twinOf.clear();
     for (const [o, r] of [...info]) if (r.state === 'batched') release(o, true);
   }
 

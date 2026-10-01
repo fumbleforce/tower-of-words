@@ -155,7 +155,8 @@ What it does:
   parent, material, geometry, and the material's colour, opacity and so on). On any change that mesh draws itself
   again at once (its triangles in the batch are collapsed; no rebuild). A group that moves (the swaying car, a door)
   gets its meshes re-merged under it once they are still for 2 s. Meshes main.js outlines (game.near, game.hover via
-  game.objsOf) are lifted out of their batch while outlined and put back after.
+  game.objsOf) are lifted out of their batch while outlined and put back after (since 2026-10-01 they draw from
+  twins of their batches meanwhile, see "Outline draws").
 - The merging runs in 6 ms slices between frames, so place load time is unchanged.
 - InstancedMesh: not used. Almost every prop has its own geometry (1,964 geometries for 1,978 meshes in the office),
   so merging per material is what cuts draws. Triangles were not reduced (no simplification of any prop or character).
@@ -309,10 +310,8 @@ instead of phones dropping to low, which would lose the outline, bloom and tilt-
 
 - Phone medium has no ambient occlusion (js/perf/phone.js `phoneTier`, read by post.js). Bloom, the tilt-shift, the
   outline, the 1.5 pixel ratio and the 2048 shadow map stay. High on a phone keeps AO.
-- The outline's depth pass is cropped to the outlined thing (js/perf/outline.js, all layouts): only what lies in front
-  of the target on screen can hide it, so it draws through the render camera cut down to the target's rectangle
-  (setViewOffset) and everything else is frustum-culled; the mask pass looks up through the same camera. Same
-  outline (desktop close-up identical), depth pass 60 to 80 → about 16 to 35 draws in the office and train.
+- The outline's depth pass was cropped to the outlined thing here (60 to 80 → 16 to 35 draws); since 2026-10-01 it
+  is gone, see "Outline draws" below.
 - In the train on a phone the passengers and the cat cast no sun shadow (about 60 draws a frame); their blob shadows
   stay, Eric and Mio still cast theirs.
 
@@ -338,6 +337,30 @@ Entry hitches (`hitch.mjs` entry mode, q0, GL=gpu, before → after): train → 
 gate → forecourt 17 → 17 (phone), 33 → 17 (desktop); no long task. The crossfade snapshot is now a canvas copy
 (places/crossfade.js) instead of a JPEG: 31 → 22 ms phone, 36 → 21 ms desktop for train → gate. The fast test's worst
 train frame (67 to 83 ms) is the first place's start, not an entry; the gate's (33 ms) came down from 100.
+
+### Outline draws (2026-10-01, issue #82)
+
+The office by the lift drew about 250 to 300 calls a frame on phone medium in the fast test, about 90 of them the
+outline. Three changes, all layouts, the outline looking the same (close-ups of the lift, Kenji behind his desk and a
+train passenger at 390x844 medium, and the lift on desktop high):
+
+- Things with no model of their own (main.js `objsOf` → gameplay/highlight.js `meshesNear`, cached at first use) no
+  longer take in people standing near them: the lift's set was 78 meshes, 58 of them its two riders and Eric. Now 20,
+  and the lift outline no longer wraps whoever was by it.
+- A merged mesh lifted out of its batch for the outline draws from a twin of that batch (js/perf/batch-twin.js: the
+  batch's vertex buffers with an index of just the lifted parts), one draw per batch instead of one per mesh, in the
+  main pass and in the outline's mask (the pass selects the twins: `perf.forOutline`, through `outline.resolve`).
+  The desk (about 70 meshes) went from about 120 outline and lifted draws to 12.
+- The outline no longer draws the scene's depth: post.js gives the composer's targets a depth texture and the mask
+  compares the target with the main render's depth (js/perf/outline.js; hidden only when something lies more than
+  1 cm plus 4 mm per metre in front). three's depth pass, cropped, stays as the fallback without a depth texture.
+
+Phone 390x844 q1, fast test (`day-calls.mjs --every 60`; calls a frame / of them the outline's), before (18b0d47) →
+after: lift 287 to 289 / 90 → 161 to 233 / 14 to 18; desk 397 to 417 / 123 to 130 → 218 to 246 / 12; vending 296 to 320
+/ 80 → 201 to 225 / 3; copier 355 to 380 / 85 → 279 to 293 / 10. Settled at the office start with the lift outlined:
+202 → 138. Left over 250 in the office: moments of a scene with nothing outlined (up to about 320: Emi's and the
+other people's parts and shadows while they move), and the train's first seconds (up to about 500 while the batches
+settle).
 
 ## Office integration (C-0110, 2026-09-29)
 

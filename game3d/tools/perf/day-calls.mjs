@@ -1,7 +1,7 @@
 // Where the draw calls go over the whole day: plays the fast test's day (?test=fast, q0) and every 400 ms counts one
-// frame's draws by pass (main, shadow) and kind (batch, person, thing, single, dynamic, transparent, other), per place.
+// frame's draws by pass (main, shadow, the outline's depth and mask) and kind (batch, person, thing, single, dynamic, transparent, other), per place.
 // Prints per place the median frame's split and the objects outside a batch that draw most often.
-// Also a timeline per place (ms after entering it, calls, Eric's x,z) and the split of the busiest frame.
+// Also a timeline per place (ms after entering it, calls, Eric's x,z, his target) and the split of the busiest frame.
 //   node game3d/tools/perf/day-calls.mjs [w] [h] [--places train,gate,office] [--q 0] [--every 400] [--trips] [--top 15] [--who kuro]
 // --trips also samples while a trip (walk out, crossfade, lift ride) is on screen, which is skipped otherwise.
 // BASE=<dir> for a worktree.
@@ -42,10 +42,10 @@ await withBrowserJob('perf-day-calls', async (browser) => {
       let tris = 0;
       const orig = R.renderBufferDirect.bind(R);
       R.renderBufferDirect = (camera, scene, geometry, material, object, group) => {
-        const c = cat(object), k = scene === null ? 'shadow ' + c : scene === S ? c : 'fullscreen';
+        const c = cat(object), k = scene === null ? 'shadow ' + c : scene === S ? (S.overrideMaterial ? (S.overrideMaterial.isShaderMaterial ? 'outline mask ' : S.overrideMaterial.isMeshDepthMaterial ? 'outline depth ' : 'override ') : '') + c : 'fullscreen';
         out[k] = (out[k] || 0) + 1;
         if (who.has(object) && (scene === null || scene === S)) per[who.get(object)] = (per[who.get(object)] || 0) + 1;
-        if (c !== 'batch' && scene !== null && scene === S) {
+        if (c !== 'batch' && scene !== null && scene === S && !S.overrideMaterial) {
           // the object's own name or type, under its nearest named ancestor (what a builder called it)
           let named = object.parent;
           while (named && named !== S && !named.name) named = named.parent;
@@ -60,7 +60,7 @@ await withBrowserJob('perf-day-calls', async (browser) => {
       await frame();
       R.renderBufferDirect = orig;
       const e = g.player?.root.position;
-      return { place: pl.name, at: Math.round(performance.now() - (entered || 0)), pos: e ? [+e.x.toFixed(1), +e.z.toFixed(1)] : null, per, total: Object.values(out).reduce((a, b) => a + b, 0), tris, out, names };
+      return { place: pl.name, near: g.near?.id, at: Math.round(performance.now() - (entered || 0)), pos: e ? [+e.x.toFixed(1), +e.z.toFixed(1)] : null, per, total: Object.values(out).reduce((a, b) => a + b, 0), tris, out, names };
     }
     let entered = 0, last = null;
     while (!window.__test?.done && !window.__ended) {
@@ -80,8 +80,8 @@ await withBrowserJob('perf-day-calls', async (browser) => {
     console.log(`\n${name}: ${rs.length} frames, draw calls min ${rs[0].total}, median ${med.total}, max ${rs[rs.length - 1].total}; median frame ${Math.round(med.tris / 1000)}k tris`);
     console.log('  median frame: ' + Object.entries(med.out).sort((a, b) => b[1] - a[1]).map(([k, v]) => `${k} ${v}`).join(', '));
     const top = rs[rs.length - 1];
-    console.log(`  timeline (ms after entry, calls, Eric x,z): ` + rows.filter((r) => r.place === name).map((r) => `${r.at} ${r.total}${r.pos ? ` (${r.pos})` : ''}${r.trip ? ' trip' : ''}${whoArg ? ` ${whoArg} ${r.per[whoArg] || 0}` : ''}`).join(' | '));
-    console.log(`  max frame at ${top.at} ms${top.trip ? ' (in a trip)' : ''}, Eric at ${top.pos}: ` + Object.entries(top.out).sort((a, b) => b[1] - a[1]).map(([k, v]) => `${k} ${v}`).join(', '));
+    console.log(`  timeline (ms after entry, calls, Eric x,z, target): ` + rows.filter((r) => r.place === name).map((r) => `${r.at} ${r.total}${r.pos ? ` (${r.pos})` : ''}${r.near ? ' ' + r.near + ' (outline ' + Object.entries(r.out).filter(([k]) => k.startsWith('outline')).reduce((n, [, v]) => n + v, 0) + ')' : ''}${r.trip ? ' trip' : ''}${whoArg ? ` ${whoArg} ${r.per[whoArg] || 0}` : ''}`).join(' | '));
+    console.log(`  max frame at ${top.at} ms${top.trip ? ' (in a trip)' : ''}, Eric at ${top.pos}${top.near ? ', target ' + top.near : ''}: ` + Object.entries(top.out).sort((a, b) => b[1] - a[1]).map(([k, v]) => `${k} ${v}`).join(', '));
     console.log('    its main-pass draws outside a batch: ' + Object.entries(top.names).sort((a, b) => b[1] - a[1]).slice(0, 12).map(([k, v]) => `${k} ${v}`).join(', '));
     console.log('  main-pass draws outside a batch, average a frame:');
     for (const [k, v] of Object.entries(agg).sort((a, b) => b[1] - a[1]).slice(0, +(arg('top', 15)))) console.log(`    ${v.toFixed(1).padStart(5)}  ${k}`);

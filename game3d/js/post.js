@@ -309,7 +309,12 @@ export function makePost(renderer, place, tier = 2) {
     camera = place.camera;
   const composer = new EffectComposer(
     renderer,
-    new THREE.WebGLRenderTarget(4, 4, { type: THREE.HalfFloatType, samples: 4 }),
+    // with its depth as a texture: the outline reads it instead of drawing the scene's depth again (perf/outline.js)
+    new THREE.WebGLRenderTarget(4, 4, {
+      type: THREE.HalfFloatType,
+      samples: 4,
+      depthTexture: new THREE.DepthTexture(4, 4),
+    }),
   );
   composer.addPass(new RenderPass(scene, camera));
   if (place.beforeAO) composer.addPass(place.beforeAO);

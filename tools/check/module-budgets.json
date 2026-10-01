@@ -23,8 +23,8 @@
       "reason": "Existing detailed prop builders; preserve geometry until the visual owner reviews extraction."
     },
     "game3d/js/main.js": {
-      "lines": 742,
-      "bytes": 26785,
+      "lines": 732,
+      "bytes": 26537,
       "owner": "codex-tui",
       "review": "C-0110 / X-0193: one office batch integration line; 2026-09-30 one import line each for the dorms, plaza and dorm_court place factories; existing responsibility unchanged; 2026-09-30 game.overrideMaterials for the shader warm-up (notes/PERF.md); 2026-09-30 one step() line for the look/cue layers over the idles (C-0171); C-0210 close-only things lose close calls for the target (same line)",
       "reason": "Composition, boot/Continue, input, rendering and frame loop remain after stage 4 hooks, interactions and place lifecycle extraction."
@@ -44,10 +44,10 @@
       "reason": "Existing procedural character and animation implementation; changes require character review."
     },
     "game3d/js/perf/batch.js": {
-      "lines": 957,
-      "bytes": 38482,
+      "lines": 996,
+      "bytes": 40032,
       "owner": "codex-tui",
-      "review": "C-0071; 2026-09-30 preparation slices (yield points, notes/PERF.md); 2026-09-30 busy() for the shader warm-up (notes/PERF.md); 2026-09-30 people's torsos batched under from the start (notes/PERF.md, evening draw calls)",
+      "review": "C-0071; 2026-09-30 preparation slices (yield points, notes/PERF.md); 2026-09-30 busy() for the shader warm-up (notes/PERF.md); 2026-09-30 people's torsos batched under from the start (notes/PERF.md, evening draw calls); 2026-10-01 issue #82: outlined meshes draw from twins of their batches (js/perf/batch-twin.js, notes/PERF.md)",
       "reason": "Existing batching and geometry optimization utilities; preserve rendering behavior during this pass."
     },
     "game3d/js/places/lift.js": {
@@ -79,10 +79,10 @@
       "reason": "Existing train place geometry, animation and scene hooks; stage 5 room-builder review is planned."
     },
     "game3d/js/post.js": {
-      "lines": 432,
-      "bytes": 16745,
+      "lines": 437,
+      "bytes": 16930,
       "owner": "codex-tui",
-      "review": "C-0071; 2026-09-30 issue #78: one import and one line for the phone medium tier (js/perf/phone.js)",
+      "review": "C-0071; 2026-09-30 issue #78: one import and one line for the phone medium tier (js/perf/phone.js); 2026-10-01 issue #82: the composer target keeps its depth as a texture for the outline (js/perf/outline.js)",
       "reason": "Existing post-processing pipeline and shader text; keep shader contents intact."
     },
     "game3d/js/props.js": {
