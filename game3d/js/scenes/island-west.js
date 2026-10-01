@@ -21,7 +21,7 @@ const pairs = (f) => f.reduce((a, v, i) => (i % 2 ? a[a.length - 1].push(v) : a.
 export const WALKS = {
   coast_path: { rect: [-42.6, -27.4, -40.6, 8.5] },
   coast_lookout: {
-    rect: [-43.4, 8.5, -39.6, 11.5],
+    rect: [-44.1, 8.5, -39.6, 11.5], // out to the wall
     terrace: 'ws',
     look: -Math.PI / 2,
   },
@@ -77,6 +77,14 @@ export const WEST_GREEN = [
 // The sea wall with armour rocks at its foot, from the north-west round to where the seafront's beach begins.
 export const WEST_COAST = pairs([-56.8, -32.9, -50.5, -10, -44.9, 10.7, -38, 24.5, -30.4, 33, -13.6, 42.3]);
 
+// Planted beds [x0, z0, x1, z1] along both sides of the monorail line south of the shed, either side of the walk.
+export const WEST_BEDS = [
+  [-33.4, 15, -32.2, 21.5],
+  [-33.4, 25.5, -32.2, 31],
+  [-25.2, 15, -24, 21.5],
+  [-25.2, 25.5, -24, 32],
+];
+
 // Trees on the grid, [kind, x, z, size]; shrub clusters [x, z].
 const row = (kind, x, z0, n, s, dz = 4) => Array.from({ length: n }, (_, i) => [kind, x, z0 + i * dz, s]);
 // pines in threes along a line, 3 apart, a gap between the groups; the middle one of each a little taller
@@ -105,7 +113,15 @@ export const WEST_TREES = [
   ].map(([x, z], i) => [i % 3 === 1 ? 'sakura' : 'keyaki', x, z, 1.25]),
 ];
 export const WEST_SHRUBS = [
-  ...Array.from({ length: 9 }, (_, i) => [-39.4, -24 + i * 4]), // between the coast path and the shed
+  // between the coast path and the shed, in pairs with a gap after each
+  ...[-25, -22.6, -16, -13.6, -7, -4.6, 2, 4.4].map((z) => [-39.4, z]),
+  // in the lawn between the pine groups, toward the wall
+  ...[
+    [-46.2, -16.5],
+    [-45.4, -3.5],
+    [-49.6, -21],
+    [-48.8, -9],
+  ],
   ...[-30, -26, -22, -18].flatMap((x) => [
     [x, 21.4],
     [x, 25.6],

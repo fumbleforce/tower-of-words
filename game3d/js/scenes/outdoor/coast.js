@@ -20,13 +20,13 @@ import { bench, STEEL } from './furniture.js';
 import { TREES, cluster, mound, LEAF } from './planting.js';
 
 const GREENS = [LEAF.mid, LEAF.deep, LEAF.fresh];
-import { WEST_COAST, WEST_TREES, WEST_SHRUBS, WALKS } from '../island-west.js';
+import { WEST_COAST, WEST_TREES, WEST_SHRUBS, WEST_BEDS, WALKS } from '../island-west.js';
 
 const STONE = { wall: '#767a80', coping: '#a3a6a6', rocks: ['#6f7378', '#7d8187', '#686c71', '#858a8f'] };
 const SURF = '#b9c6cc'; // the sea shader's own foam (places/train.js uFoam)
 const ROCK_PITCH = 1.2;
 const NO_CAST = { cast: false }; // the wall, rocks and surf would throw their shadows on the sea, which takes none
-const FOAM = { cast: false, opts: { transparent: true, opacity: 0.42, depthWrite: false } }; // see-through, on the sea
+const FOAM = { cast: false, opts: { transparent: true, opacity: 0.3, depthWrite: false } }; // see-through, on the sea
 
 // a box `len` long along the unit heading d (in the place's frame), w across, from y0 to y1, centred at c
 function along(p, color, c, d, len, w, y0, y1, opts) {
@@ -168,6 +168,20 @@ export function* coastSteps(root, { at, turn = 0, sea = -0.2, clip = () => true,
   WEST_TREES.forEach(([kind, x, z, s], i) => {
     const [lx, lz] = at(x, z);
     if (clip(lx, lz)) TREES[kind](green, lx, lz, s, 3 + i);
+  });
+  // the beds by the line: ground cover with clipped mounds along them
+  WEST_BEDS.forEach(([x0, z0, x1, z1], b) => {
+    const A = at(x0, z0),
+      B = at(x1, z1);
+    const cx = (A[0] + B[0]) / 2,
+      cz = (A[1] + B[1]) / 2,
+      w = Math.abs(B[0] - A[0]),
+      dd = Math.abs(B[1] - A[1]);
+    green.box(LEAF.cover, w, 0.08, dd, cx, -0.03, cz, { cast: false });
+    for (let k = 0.6; k < z1 - z0 - 0.4; k += 1.1 + hash2(b, k, 51) * 0.6) {
+      const [mx, mz] = at((x0 + x1) / 2, z0 + k);
+      if (clip(mx, mz)) mound(green, mx, mz, 0.3 + hash2(k, b, 53) * 0.2, GREENS[(b + Math.round(k)) % 3]);
+    }
   });
   WEST_SHRUBS.forEach(([x, z], i) => {
     const [lx, lz] = at(x, z);
