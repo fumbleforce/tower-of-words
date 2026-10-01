@@ -14,7 +14,7 @@
 // entrance door as the reference draws it.
 
 import { EAST_PATHS, EAST_GREEN } from './island-east.js';
-import { WEST_PATHS, WEST_GREEN } from './island-west.js';
+import { WEST_PATHS, WEST_GREEN, WEST_MOWN, WEST_COAST } from './island-west.js';
 import { NORTH_PATHS, NORTH_GREEN } from './island-north.js';
 import { DORM_PATHS, DORM_GREEN } from './island-dorms.js';
 import { SOUTH_PATHS, SOUTH_SAND, SHORE } from './island-south.js';
@@ -347,13 +347,16 @@ export const GREEN = [
 // beach and along the seafront's wall it is island-south.js's SHORE. The beach's sand: SAND.
 export const COAST = {
   line: [
-    ...pairs([-56.8, -32.9, -50.5, -10, -44.9, 10.7, -38, 24.5, -30.4, 33]),
+    ...WEST_COAST.slice(0, -1), // the sea wall west and south of the station (island-west.js), up to the beach
     ...SHORE,
     ...pairs([86, 38, 110.9, 31.1, 129.9, 19.4, 136.6, 2, 136.8, -26.1, 130.4, -47.8]),
   ],
   detail: 'Rocks and a sea wall, with the sand beach south of the shop street.',
 };
 export const SAND = [...SOUTH_SAND];
+// Mown bands and longer grass over the green, each { rect | poly, color, y } (skyline.js lays them between the green
+// and the paths)
+export const MOWN = [...WEST_MOWN];
 
 // a chunk's local point on the island, and back
 export function toIsland(chunk, x, z) {

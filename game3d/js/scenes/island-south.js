@@ -11,10 +11,12 @@
 //   lamps and benches, and a band across it on each alley's axis runs on to a flight of stairs down to the beach
 //   the arcade's two mouths: a walk down each end of the rows to the promenade, the west one from the footpath along
 //   the north row's backs
-//   the sea wall: along the promenade's south edge, with a return down the beach's west side to the west coast's
-//   wall; over the beach it stands on the sand (no armour rocks) with shrubs at its foot, east of the beach on armour
-//   rocks in the sea like the west's
+//   the sea wall: along the promenade's south edge, and the west coast's wall curving up the beach's west side to
+//   meet it (island-west.js WEST_RETURN); over the beach it stands on the sand (no armour rocks) with shrubs at its
+//   foot, east of the beach on armour rocks in the sea like the west's
 //   the beach: sand from the wall to the shoreline, boulders in groups, foam along the water
+import { WEST_RETURN } from './island-west.js';
+
 const pairs = (f) => f.reduce((a, v, i) => (i % 2 ? a[a.length - 1].push(v) : a.push([v]), a), []);
 
 // the shop rows' bay grid, and the rows' lines (scenes/island-layout.js ROWS: shops_north, arcade, shops_south)
@@ -82,31 +84,32 @@ export const SOUTH_PATHS = [
 
 // The shoreline from the west coast's wall end round the beach to where the wall meets the sea, then along the wall
 // (COAST.line takes these points; land north of them)
-export const SHORE = pairs([
-  -13.6,
-  42.3,
-  -4,
-  44.6,
-  6,
-  46.2,
-  20,
-  47.2,
-  36,
-  46.6,
-  48,
-  44.2,
-  55.5,
-  39.2,
-  BEACH_E + 0.6,
-  WALL_Z + 0.8,
-  WALL_E,
-  WALL_Z + 0.8,
-]);
+export const SHORE = [
+  WEST_RETURN[0], // the corner where the west coast's wall turns up the beach (island-west.js)
+  ...pairs([
+    -4,
+    44.6,
+    6,
+    46.2,
+    20,
+    47.2,
+    36,
+    46.6,
+    48,
+    44.2,
+    55.5,
+    39.2,
+    BEACH_E + 0.6,
+    WALL_Z + 0.8,
+    WALL_E,
+    WALL_Z + 0.8,
+  ]),
+];
 export const SHORELINE = SHORE.slice(0, 8); // round the beach only
 export const SOUTH_SAND = [
   {
     id: 'beach',
-    poly: [[-13.6, WALL_Z], [BEACH_E, WALL_Z], ...SHORELINE.slice().reverse()],
+    poly: [[BEACH_E, WALL_Z], ...SHORELINE.slice().reverse(), ...WEST_RETURN.slice(1)],
     detail: 'The sand beach below the sea wall, from the west coast’s wall to the rocks east of the shop street.',
   },
 ];
@@ -121,10 +124,7 @@ const run = (x0, x1) => [
 ];
 export const SOUTH_COAST = [
   {
-    line: [
-      [-13.6, 42.3],
-      [-13.6, WALL_Z],
-    ],
+    line: WEST_RETURN, // the west coast's wall up the beach's west side (island-west.js)
     beach: true,
     plant: true,
   },

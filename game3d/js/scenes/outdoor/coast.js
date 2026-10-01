@@ -11,9 +11,11 @@
 //     sea                  the sea's level, the ground being y 0: the wall's height
 //     clip(x, z)           false for a point in the place's frame to leave bare (the train's platforms stand there)
 //     layer                the camera layer to draw on (the island map's only, for a place whose cameras never see it)
-//     data                 { coast: [{ line, beach, plant }], walks, trees, shrubs, beds } (default WEST): each coast
-//                          line runs with the sea on its right; beach: it stands on sand, no rocks or surf, planting at
-//                          its foot; plant: a planted strip behind its coping
+//     data                 { coast: [{ line, beach, plant }], walks, trees, shrubs, beds, drifts } (default WEST):
+//                          each coast line runs with the sea on its right; beach: it stands on sand, no rocks or surf,
+//                          planting at its foot; plant: a planted strip behind its coping (left bare where a terrace
+//                          comes up to the wall, or on `paved` rects). beds [x0, z0, x1, z1]: ground cover with clipped mounds along the
+//                          long side; drifts [x0, x1, z0, z1, back]: layered planting (forecourt/gardens.js drift)
 //
 // Everything goes into three Parts collectors (one mesh each): stone (wall, coping, rocks, kerbs, rails, benches),
 // planting, and surf.
@@ -22,8 +24,9 @@ import { Parts, hash2 } from './parts.js';
 import { kerb } from './edges.js';
 import { bench, STEEL } from './furniture.js';
 import { TREES, cluster, mound, LEAF } from './planting.js';
+import { drift } from '../forecourt/gardens.js';
 
-import { WEST_COAST, WEST_TREES, WEST_SHRUBS, WEST_BEDS, WALKS } from '../island-west.js';
+import { WEST_COAST, WEST_TREES, WEST_SHRUBS, WEST_BEDS, WEST_DRIFTS, WALKS } from '../island-west.js';
 
 const GREENS = [LEAF.mid, LEAF.deep, LEAF.fresh];
 export const WEST = {
@@ -32,11 +35,14 @@ export const WEST = {
   trees: WEST_TREES,
   shrubs: WEST_SHRUBS,
   beds: WEST_BEDS,
+  drifts: WEST_DRIFTS,
 };
 
 const STONE = { wall: '#6c7177', coping: '#8d9194', rocks: ['#5f666e', '#6b7279', '#585e66', '#737a82'] };
+const SEAM = '#7f7c76'; // the joints between a terrace's slabs
 const SURF = '#b9c6cc'; // the sea shader's own foam (places/train.js uFoam)
 const ROCK_PITCH = 1.2;
+const PIER_RUN = 8; // a pier at the line's ends and at a bend about every this far along it
 const NO_CAST = { cast: false }; // the wall, rocks and surf would throw their shadows on the sea, which takes none
 const FOAM = { cast: false, opts: { transparent: true, opacity: 0.3, depthWrite: false } }; // see-through, on the sea
 
@@ -49,30 +55,49 @@ export function along(p, color, c, d, len, w, y0, y1, opts) {
 // the sea wall, piece by piece; the sea lies to the right of the way the line runs. Behind its coping (plant) a strip
 // of ground cover with clipped mounds at an uneven pitch, so the lawn meets the wall along planting; on a beach,
 // clumps of shrubs at its foot instead of rocks and surf
-function* wall(stone, green, surf, at, sea, clip, { line: pts, beach = false, plant = false }) {
+function* wall(stone, green, surf, at, sea, clip, { line: pts, beach = false, plant = false }, bare) {
   const line = pts.map(([x, z]) => at(x, z));
+  let run = PIER_RUN; // the length since the last pier
   for (let i = 0; i + 1 < line.length; i++) {
     const a = line[i],
       b = line[i + 1],
       L = Math.hypot(b[0] - a[0], b[1] - a[1]),
       d = [(b[0] - a[0]) / L, (b[1] - a[1]) / L],
       n = [-d[1], d[0]],
-      P = (u, o) => [a[0] + d[0] * u + n[0] * o, a[1] + d[1] * u + n[1] * o];
+      P = (u, o) => [a[0] + d[0] * u + n[0] * o, a[1] + d[1] * u + n[1] * o],
+      // the same point in the island frame (the place's frame only turns and shifts it)
+      I = (u, o) => {
+        const [ia, ib] = [pts[i], pts[i + 1]],
+          e = [(ib[0] - ia[0]) / L, (ib[1] - ia[1]) / L];
+        return [ia[0] + e[0] * u - e[1] * o, ia[1] + e[1] * u + e[0] * o];
+      };
     along(stone, STONE.coping, P(L / 2, 0), d, L + 0.6, 0.6, -0.05, 0.2, NO_CAST);
     along(stone, STONE.wall, P(L / 2, 0.18), d, L + 0.3, 0.36, sea - 0.4, -0.05, NO_CAST);
-    // a square pier at each corner of the line, so the joints read as built
+    // a square pier where the line starts and ends and at a bend every PIER_RUN or so, so the joints read as built
     const pier = (q) =>
       stone.box(STONE.coping, 0.75, 0.32 - sea, 0.75, q[0], sea - 0.1, q[1], {
         ry: Math.atan2(-d[1], d[0]),
         ...NO_CAST,
       });
-    pier(a);
+    if (run >= PIER_RUN) (pier(a), (run = 0));
+    run += L;
     if (i + 2 === line.length) pier(b); // and one at the line's end
     if (plant) {
-      along(green, LEAF.cover, P(L / 2, -1.15), d, L - 0.4, 1.1, -0.04, 0.05, NO_CAST);
+      // the strip of ground cover in runs between the terraces that come up to the wall, each piece a little past
+      // its ends so the strip runs on unbroken round the bends
+      const free = (u) => !bare(...I(u, -1.15)),
+        E = 0.45;
+      for (let u0 = -E; u0 < L + E;) {
+        let u1 = u0;
+        while (u1 < L + E && free(Math.min(u1 + 0.25, L + E))) u1 += 0.25;
+        u1 = Math.min(u1, L + E);
+        if (u1 - u0 > 0.3) along(green, LEAF.cover, P((u0 + u1) / 2, -1.15), d, u1 - u0, 1.1, -0.04, 0.05, NO_CAST);
+        u0 = u1 + 0.25;
+      }
       for (let u = 1; u < L - 1; u += 1.6 + hash2(u, i, 41) * 1.8) {
-        const [x, z] = P(u, -1.15 + (hash2(i, u, 43) - 0.5) * 0.4);
-        if (hash2(x, z, 45) < 0.7 && clip(x, z))
+        const o = -1.15 + (hash2(i, u, 43) - 0.5) * 0.4,
+          [x, z] = P(u, o);
+        if (hash2(x, z, 45) < 0.7 && clip(x, z) && !bare(...I(u, o)))
           mound(green, x, z, 0.32 + hash2(z, x, 47) * 0.22, GREENS[(i + Math.round(u)) % 3]);
       }
     }
@@ -96,8 +121,8 @@ function* wall(stone, green, surf, at, sea, clip, { line: pts, beach = false, pl
     // the rocks: two rows, the inner one leaning on the wall, the outer one half in the sea, staggered, with rubble
     // between the big ones
     for (const [row, off, lift, r0] of [
-      [0, 0.85, 0.3, 0.5],
-      [1, 1.8, 0.0, 0.6],
+      [0, 0.85, 0.3, 0.43],
+      [1, 1.8, 0.0, 0.5],
     ])
       for (let u = (row ? ROCK_PITCH / 2 : 0) + 0.4; u < L - 0.3; u += ROCK_PITCH * (0.75 + hash2(u, i, 21) * 0.5)) {
         // the outer row thins out here and there; sizes vary by a quarter either way
@@ -131,6 +156,29 @@ function* wall(stone, green, surf, at, sea, clip, { line: pts, beach = false, pl
   }
 }
 
+// a Parts collector that takes island-frame geometry and lays it in the place's frame (at: a turn by a quarter and a
+// shift), so kit pieces that lay out along x and z (forecourt/gardens.js drift) keep their own layout in any place
+function inFrame(p, at) {
+  const o = at(0, 0),
+    ex = at(1, 0),
+    ez = at(0, 1);
+  const M = new THREE.Matrix4()
+    .makeBasis(
+      new THREE.Vector3(ex[0] - o[0], 0, ex[1] - o[1]),
+      new THREE.Vector3(0, 1, 0),
+      new THREE.Vector3(ez[0] - o[0], 0, ez[1] - o[1]),
+    )
+    .setPosition(o[0], 0, o[1]);
+  return {
+    geo: (color, g, opts) => p.geo(color, g.applyMatrix4(M), opts),
+    box(color, w, h, d, x, y, z, { ry = 0, ...opts } = {}) {
+      const g = new THREE.BoxGeometry(w, h, d);
+      if (ry) g.rotateY(ry);
+      return this.geo(color, g.translate(x, y + h / 2, z), opts);
+    },
+  };
+}
+
 // the four sides of a rect [x0, z0, x1, z1] in the island frame: the fixed coordinate and the span along the side
 const sides = ([x0, z0, x1, z1]) => ({
   n: { fixed: z0, axis: 'x', lo: x0, hi: x1 },
@@ -158,6 +206,27 @@ export function rail(stone, A, B) {
     stone.box(STEEL.dark, 0.06, 0.94, 0.06, A[0] + d[0] * u, 0, A[1] + d[1] * u);
 }
 
+const SLAB = 1.1;
+function seams(stone, at, [x0, z0, x1, z1]) {
+  const line = (A, B) => {
+    const [a, b] = [at(...A), at(...B)],
+      L = Math.hypot(b[0] - a[0], b[1] - a[1]);
+    along(
+      stone,
+      SEAM,
+      [(a[0] + b[0]) / 2, (a[1] + b[1]) / 2],
+      [(b[0] - a[0]) / L, (b[1] - a[1]) / L],
+      L,
+      0.05,
+      -0.13,
+      -0.118,
+      NO_CAST,
+    );
+  };
+  for (let x = x0 + SLAB; x < x1 - 0.3; x += SLAB) line([x, z0], [x, z1]);
+  for (let z = z0 + SLAB; z < z1 - 0.3; z += SLAB) line([x0, z], [x1, z]);
+}
+
 // the walks' kerbs (each side less where another walk meets it, and less its open sides), the terraces' rails on
 // their seaward sides and two benches on each, a step back from the rail
 function walks(stone, at, turn, clip, WALKS) {
@@ -180,6 +249,10 @@ function walks(stone, at, turn, clip, WALKS) {
         v = Math.max(v, c1);
       }
     }
+    // benches a walk asks for, [x, z, look]
+    for (const [x, z, look] of w.benches || []) bench(stone, ...at(x, z), look + turn, { len: 1.5 });
+    // a paved place (a terrace, a square) is laid in slabs: a fine dark seam every SLAB both ways
+    if (w.slabs) seams(stone, at, w.rect);
     if (!w.terrace) continue;
     const [x0, z0, x1, z1] = w.rect,
       g = 0.15; // the rail stands this far in from the edge
@@ -202,14 +275,19 @@ export function* coastSteps(root, { at, turn = 0, sea = -0.2, clip = () => true,
   const stone = new Parts(),
     green = new Parts(),
     surf = new Parts();
-  for (const c of data.coast) yield* wall(stone, green, surf, at, sea, clip, c);
+  // where a terrace comes up to the wall, the planted strip behind the coping stops (island frame)
+  const terraces = Object.values(data.walks || {}).filter((w) => w.terrace);
+  const near = ([x0, z0, x1, z1], x, z, m) => x > x0 - m && x < x1 + m && z > z0 - m && z < z1 + m;
+  const bare = (x, z) =>
+    terraces.some((w) => near(w.rect, x, z, 0.5)) || (data.paved || []).some((r) => near(r, x, z, 0.3));
+  for (const c of data.coast) yield* wall(stone, green, surf, at, sea, clip, c, bare);
   walks(stone, at, turn, clip, data.walks || {});
   yield;
   (data.trees || []).forEach(([kind, x, z, s], i) => {
     const [lx, lz] = at(x, z);
     if (clip(lx, lz)) TREES[kind](green, lx, lz, s, 3 + i);
   });
-  // the beds by the line: ground cover with clipped mounds along them
+  // the beds: ground cover with clipped mounds along the long side
   (data.beds || []).forEach(([x0, z0, x1, z1], b) => {
     const A = at(x0, z0),
       B = at(x1, z1);
@@ -217,12 +295,16 @@ export function* coastSteps(root, { at, turn = 0, sea = -0.2, clip = () => true,
       cz = (A[1] + B[1]) / 2,
       w = Math.abs(B[0] - A[0]),
       dd = Math.abs(B[1] - A[1]);
-    green.box(LEAF.cover, w, 0.08, dd, cx, -0.03, cz, { cast: false });
-    for (let k = 0.6; k < z1 - z0 - 0.4; k += 1.1 + hash2(b, k, 51) * 0.6) {
-      const [mx, mz] = at((x0 + x1) / 2, z0 + k);
+    if (clip(cx, cz)) green.box(LEAF.cover, w, 0.08, dd, cx, -0.03, cz, { cast: false });
+    const alongZ = z1 - z0 >= x1 - x0;
+    for (let k = 0.6; k < (alongZ ? z1 - z0 : x1 - x0) - 0.4; k += 1.1 + hash2(b, k, 51) * 0.6) {
+      const [mx, mz] = alongZ ? at((x0 + x1) / 2, z0 + k) : at(x0 + k, (z0 + z1) / 2);
       if (clip(mx, mz)) mound(green, mx, mz, 0.3 + hash2(k, b, 53) * 0.2, GREENS[(b + Math.round(k)) % 3]);
     }
   });
+  // the drifts, laid out in the island frame and turned into the place's
+  const framed = inFrame(green, at);
+  (data.drifts || []).forEach(([x0, x1, z0, z1, back], i) => drift(framed, [x0, x1, z0, z1], { back, seed: 40 + i }));
   (data.shrubs || []).forEach(([x, z], i) => {
     const [lx, lz] = at(x, z);
     if (clip(lx, lz)) cluster(green, lx, lz, { n: 4, r: 0.38, spread: 0.7, seed: 20 + i });
