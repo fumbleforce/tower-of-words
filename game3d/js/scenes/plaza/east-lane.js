@@ -102,12 +102,13 @@ function kerbs(p) {
   // the west leg's west side, from the lane's north verge up round corner b; the top leg's north side
   kerb(p, [WEST_LEG[0], LANE.e[2] - vBack], [WEST_LEG[0], CORNERS.b[2]], { off: -0.08 });
   kerb(p, [WEST_LEG[0], TOP_LEG[2]], [CORNERS.c[1], TOP_LEG[2]], { off: -0.08, gaps: [[NS[0], NS[1]]] });
-  // the dorm street's east side, open for the courtyard's gate leg and the ramen shop's door; its west side past the
-  // south walk, open for the footpath along the shops' backs and the shop walk
+  // the dorm street's east side, open for the courtyard's gate leg, the dorm row and the ramen shop's door; its west
+  // side past the south walk, open for the footpath along the shops' backs and the shop walk
   const [e3, r9, ramen, r3] = E.SPURS,
     AE = E.ARCADE_END;
   const gate = [E.GATE_Z - 1.5, E.GATE_Z + 1.5];
-  kerb(p, [DS[1], CORNERS.c[2]], [DS[1], DS[3]], { off: 0.08, gaps: [gate, [ramen[2], ramen[3]]] });
+  const row = [E.DORM_ROW[2], E.DORM_ROW[3]];
+  kerb(p, [DS[1], CORNERS.c[2]], [DS[1], DS[3]], { off: 0.08, gaps: [gate, row, [ramen[2], ramen[3]]] });
   kerb(p, [DS[0], SW[3]], [DS[0], DS[3]], {
     off: -0.08,
     gaps: [

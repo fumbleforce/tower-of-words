@@ -29,6 +29,7 @@ const [, A, B, C] = ROUTE; // the jog: A turn north, B turn east, C turn south
 const sq = ([x, z]) => [x - HALF, x + HALF, z - HALF, z + HALF];
 export const CORNERS = { a: sq(A), b: sq(B), c: sq(C) };
 export const GATE_Z = ROUTE[4][1]; // the dorm courtyard's gate leg, east off the dorm street
+export const DORM_ROW = rect(path('dorm_row').rect); // the dorm cluster's street, east off it (dorm-court/cluster.js)
 export const WEST_LEG = [A[0] - HALF, A[0] + HALF, B[1] + HALF, A[1] - HALF];
 export const TOP_LEG = [B[0] + HALF, C[0] - HALF, B[1] - HALF, B[1] + HALF];
 export const DORM_STREET = (([x0, x1, , z1]) => [x0, x1, CORNERS.c[3], z1])(rect(path('dorm_street').rect));

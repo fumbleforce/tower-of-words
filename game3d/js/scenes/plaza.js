@@ -37,6 +37,7 @@ import { buildEastLane } from './plaza/east-lane.js';
 import { BLOCK_IDS } from './plaza/east-plan.js';
 import { buildNorthLane } from './plaza/north-lane.js';
 import { NORTH_IDS } from './plaza/north-plan.js';
+import { clusterSteps, placeIn, CLUSTER_IDS } from './dorm-court/cluster.js';
 
 const { F, R, BASIN, LZ, HALF, LINK, CANTEEN, SHOPS, DOOR_X, TERRACE, TERRACE_S, building, onLane, inRect } = P;
 const CHUNK = 'plaza';
@@ -111,9 +112,15 @@ export function* plazaSteps() {
   yield;
   const sky = yield* skylineSteps(root, CHUNK, {
     layout: LAYOUT,
-    skip: ['canteen', 'shops_north', 'arcade', 'shops_south', ...BLOCK_IDS, ...NORTH_IDS],
+    skip: ['canteen', 'shops_north', 'arcade', 'shops_south', ...BLOCK_IDS, ...NORTH_IDS, ...CLUSTER_IDS, 'dorm_1'],
   });
   yield* mergeStaticSteps(root);
+  // backdrop past the dorm street: the dorm cluster and stand-ins for the courtyard and Eric's block, in its own
+  // group so the merge above leaves it out (it is never near the camera)
+  const cluster = placeIn(new THREE.Group(), CHUNK);
+  root.add(cluster);
+  const dorms = yield* clusterSteps(cluster, { plaza: true });
+  yield;
 
   // the points the place uses; the lane's ends are where the walks to the forecourt and the dorms start
   const arriveIn = lanePoint(F[0] - R + 3.7);
@@ -154,6 +161,7 @@ export function* plazaSteps() {
       street.glass.emissiveIntensity = 0.55;
       east.evening();
       north.evening();
+      dorms.evening();
       sky.onPeriod('evening');
     },
     skyline: sky.stats,

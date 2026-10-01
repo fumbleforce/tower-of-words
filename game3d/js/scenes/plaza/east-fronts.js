@@ -6,6 +6,11 @@
 //   cafe    a glazed front between piers, an awning over each bay but the door's
 //   shop    a shopfront and a door hung with a noren, under a tiled roof
 //   house   a plain door with a light over it, a small window beside it
+//   dorm    a glazed entrance under a canopy with a name board, windows either side (the dorm cluster's blocks)
+// balconies: the faces (e.g. 's') whose upper storeys are a balcony a room, as on Eric's block (dorm-court/block.js):
+// a slab, a pale front panel and a rail, a divider between rooms and the room's sliding door behind
+// face null: no door (an annex reached through its neighbour); also: more doors, [{ face, at }], each with the same
+// ground floor on its face
 // Everything goes into the place's Parts collector (outdoor/parts.js); the glass is two meshes of its own (one lights
 // up after work), and the door lights join the place's light set.
 import * as THREE from 'three';
@@ -21,6 +26,10 @@ const PLINTH = '#6c7178',
   SILL = '#a7adb3',
   DOOR = '#3f4650',
   NOREN = '#34425c',
+  SLAB = '#9a9ea3',
+  UNIT = '#c9cccb',
+  CLOTHES = ['#d9dcd8', '#8fa2b4', '#b7b2a8', '#4f5f74', '#c7cdd2'],
+  PANEL = '#b3bac1',
   CAFE_AWNING = '#5a6f66';
 
 // a box on a face (outdoor/block.js has the face maths): u along it (centre), y up (bottom), o out from it (centre);
@@ -63,9 +72,17 @@ export function buildFronts(p, lights, blocks, { caster = p, casts = () => false
     const shop = k.ground === 'shop';
     for (const f of ['s', 'n', 'w', 'e']) {
       const F = faces(k.rect)[f];
-      const front = f === k.face;
+      const door =
+        f === k.face ? k : k.also?.find((d) => d.face === f) && { ...k, ...k.also.find((d) => d.face === f) };
+      const front = !!door;
       for (let s = front ? 1 : 0; s < n; s++) {
         const y = s * fh;
+        if (s > 0 && k.balconies?.includes(f)) {
+          balconyRow(F, y, { box, pane, seed: cx + cz + s });
+          // the top floor's balconies under the roof slab carried out over them
+          if (s === n - 1) onFace(box(SLAB), F, F.L / 2, H - 0.02, 0.4, F.L + 0.1, 0.16, 0.8);
+          continue;
+        }
         if (k.ground === 'office' && s > 0) {
           // a window band with mullions
           const L = F.L - 0.6;
@@ -85,7 +102,7 @@ export function buildFronts(p, lights, blocks, { caster = p, casts = () => false
           onFace(box(SILL, false), F, u, wy - 0.07, 0.06, 0.92, 0.07, 0.12);
         }
       }
-      if (front) groundFloor(p, F, k, fh, { box, pane, lights });
+      if (front) groundFloor(p, F, door, fh, { box, pane, lights });
     }
 
     // the roof
@@ -137,6 +154,38 @@ export function buildFronts(p, lights, blocks, { caster = p, casts = () => false
       lit.emissiveIntensity = 0.6;
     },
   };
+}
+
+// one storey of balconies along a face, floor at y: a room every 2.4 or so
+function balconyRow(F, y, { box, pane, seed }) {
+  const D = 0.75,
+    rooms = Math.max(1, Math.round(F.L / 2.4)),
+    w = F.L / rooms;
+  onFace(box(SLAB, false), F, F.L / 2, y - 0.12, D / 2, F.L, 0.12, D);
+  onFace(box(PANEL), F, F.L / 2, y, D - 0.03, F.L, 0.85, 0.06);
+  onFace(box(SILL, false), F, F.L / 2, y + 0.85, D - 0.03, F.L + 0.02, 0.04, 0.09);
+  for (let r = 0; r < rooms; r++) {
+    if (r) onFace(box(FRAME, false), F, w * r, y, D / 2, 0.05, 1.2, D - 0.06);
+    onFace(pane(hash2(seed, r, 3) < 0.3), F, w * (r + 0.5), y + 0.05, 0.02, w - 0.5, 1.35, 0.05);
+    // some rooms keep an air-conditioner unit out there, some have washing on a pole over the front
+    const h = hash2(seed, r, 7),
+      u = w * (r + 0.5);
+    if (h < 0.3) onFace(box(UNIT, false), F, u + w * 0.25, y, D * 0.45, 0.55, 0.42, 0.26);
+    else if (h < 0.5) {
+      onFace(box(STEEL.mid, false), F, u, y + 1.3, D * 0.6, w - 0.4, 0.03, 0.03);
+      for (let i = 0; i < 3; i++)
+        onFace(
+          box(CLOTHES[(r + i) % CLOTHES.length], false),
+          F,
+          u - w * 0.25 + i * w * 0.22,
+          y + 0.85,
+          D * 0.6,
+          0.3,
+          0.45,
+          0.02,
+        );
+    }
+  }
 }
 
 // the ground floor of the door's face
@@ -233,6 +282,15 @@ function groundFloor(p, F, k, fh, { box, pane, lights }) {
     for (let i = 0; i < 3; i++) onFace(box(NOREN, false), F, at - 0.32 + i * 0.32, 1.45, 0.12, 0.3, 0.5, 0.02);
     onFace(box(STEEL.dark, false), F, at, 1.93, 0.12, 1.05, 0.03, 0.03);
     bands(0.55, 1.15, 1.4, 0.9, true);
+    lamp(2.1);
+  } else if (k.ground === 'dorm') {
+    doors(1.3);
+    onFace(box('#8f969e'), F, at, 2.25, 0.5, 2.0, 0.12, 1.0); // the canopy, a darker fascia on its edge
+    onFace(box(FRAME, false), F, at, 2.2, 1.0, 2.04, 0.2, 0.05);
+    onFace(box(STEEL.dark, false), F, at, 2.21, 0.95, 2.0, 0.04, 0.06);
+    for (const s of [-1, 1]) onFace(box(STEEL.dark), F, at + s * 0.95, 0, 0.95, 0.07, 2.25, 0.07); // its posts
+    onFace(box('#e4e6e3', false), F, at + 1.15, 1.25, 0.04, 0.5, 0.65, 0.03); // the name board
+    bands(0.85, 0.95, 1.7, 1.1, true);
     lamp(2.1);
   } else {
     // a house: a solid door, a small window, a light over the door

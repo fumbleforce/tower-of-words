@@ -7,7 +7,8 @@
 // (dorm-court/hall.js). West of it the coin laundry's lit front with two drinks machines, east of it the sento's with its chimney; both are frontages (dorm-court/frontages.js). Where every zone
 // is: dorm-court/plan.js. The paving, the walk in, the beds, the bench and the lamps are dorm-court/court.js, the
 // bike shelter, the machines and the doorsteps dorm-court/fittings.js, all on the shared outdoor kit
-// (scenes/outdoor/). The rest of the cluster and the town come from the island layout (scenes/skyline.js).
+// (scenes/outdoor/). East of the block, the rest of the dorm cluster round its inner court is backdrop
+// (dorm-court/cluster.js); the town beyond comes from the island layout (scenes/skyline.js).
 // Evening: dusk after the sun has gone behind the blocks, lit windows, lamps, the hall, the laundry and the machines.
 import * as THREE from 'three';
 import { Nav } from '../movement/navigation.js';
@@ -16,6 +17,7 @@ import { hall } from './dorm-court/hall.js';
 import { ericBlock } from './dorm-court/block.js';
 import { buildCourt } from './dorm-court/court.js';
 import { shelter, vending, doorstep, garbage } from './dorm-court/fittings.js';
+import { clusterSteps, placeIn, CLUSTER_IDS } from './dorm-court/cluster.js';
 import { Parts } from './outdoor/parts.js';
 import { lightSet } from './outdoor/furniture.js';
 import { skylineSteps } from './skyline.js';
@@ -56,9 +58,13 @@ export function* dormCourtSteps() {
 
   const nav = new Nav(WEST + 0.1, EAST - 0.2, BACK_Z - 1.2, NEAR - 0.05, 0.1);
   const block = (x0, x1, z0, z1) => nav.block(x0, x1, z0, z1);
-  // under everything, out to the frame's edges and past them: the town's paving, the road past the street
+  // under everything: the town's paving under the court and its street, out past the frame's edges; grass past the
+  // street, and under the dorm cluster east of the block and south of the row (dorm-court/cluster.js)
+  const BACK = -8.45; // dorm_1's east face, the cluster's side
   groundPatches(root, [
-    [-40, 40, -40, PL.STREET[3], TOWN.paving],
+    [-40, PL.ROW_X, BACK, PL.STREET[3], TOWN.paving],
+    [-40, 40, -60, BACK, TOWN.grass],
+    [PL.ROW_X, 40, BACK, PL.STREET[3], TOWN.grass],
     [-40, 40, PL.STREET[3], 40, TOWN.grass],
   ]);
   const mailbox = hall(root, nav);
@@ -81,8 +87,13 @@ export function* dormCourtSteps() {
   lamps.build(root, { poolY: PL.POOL_Y }).evening();
   yield;
   yield* mergeStaticSteps(root);
-  // the rest of the dorm cluster and the town around, from the island layout; Eric's block is built above
-  const sky = yield* skylineSteps(root, 'dorm_court', { layout, evening: true, skip: ['dorm_1'] });
+  // the rest of the dorm cluster, in its own group so the court's merge leaves it out
+  const cluster = placeIn(new THREE.Group(), 'dorm_court');
+  root.add(cluster);
+  (yield* clusterSteps(cluster)).evening();
+  yield;
+  // the town around, from the island layout; Eric's block and the cluster are built above
+  const sky = yield* skylineSteps(root, 'dorm_court', { layout, evening: true, skip: ['dorm_1', ...CLUSTER_IDS] });
   return {
     root,
     scene,

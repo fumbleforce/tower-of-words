@@ -46,7 +46,7 @@ To see them: `?map=1` then M (or `?mapcompare=1`), "Compare with island-map-4" (
 - D1. Closed 2026-09-30 (map upgrade task F): the court is the open ground west of dorm_1, at (79.84, -1.3), its camera looking east; the dorm entrance is on the map's.
 - D2. Mostly closed 2026-09-30 (tasks F, grid-frame): Eric's block is five storeys, runs past both frame edges and returns on the court's south side (an L), on the grid; 4.4 off the traced block, which the map draws turned about 38° (F2).
 - D3. Closed 2026-09-30 (tasks B, F, grid-frame): the rest of the cluster (dorm_1e parallel to Eric's block, 1.3 outside his window, dorm_2 to dorm_6, housing_n, dorm_entry, dorm_gallery, dorm_annex), the shops and the ground come from the layout (buildSkyline), all on the grid.
-- D4. Open. The coin laundry and sento flank the hall in the game; the layout puts their shared frontage south of the dorm court (sento_laundry, from the brief; too small to read on the map).
+- D4. Closed 2026-10-01 (#141): the layout's sento_laundry box is gone; the coin laundry and sento are the court's own frontages. Its ground is the garden on the dorm row's south side (dorm-court/cluster.js).
 
 ## Eric's room (`dorms`)
 

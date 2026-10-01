@@ -267,7 +267,9 @@ export function createMapScreen(game) {
     ctx.setTransform(...base);
     if (drawnView()) ctx.transform(...localAffine(name));
     ctx.transform(Math.cos(t) * c.scale, Math.sin(t) * c.scale, -Math.sin(t) * c.scale, Math.cos(t) * c.scale, ...c.at);
-    if (!S.backdrop) {
+    // an upstairs place keeps to its own outline even with the backdrop on: its backdrop is its own scene's, not
+    // the ground's, and would cover the ground place it sits in
+    if (!S.backdrop || c.level > 0) {
       const [x0, x1, z0, z1] = c.view;
       ctx.beginPath();
       ctx.rect(x0, z0, x1 - x0, z1 - z0);

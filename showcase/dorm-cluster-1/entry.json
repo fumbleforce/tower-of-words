@@ -1,0 +1,46 @@
+{
+  "title": "Dorm cluster: the blocks round the inner court, past Eric's dorm courtyard",
+  "date": "2026-10-01",
+  "by": "claude-agent:dorm-cluster",
+  "caption": "The third of the island's neighbour blocks (work issue #141): the rest of the dorm cluster east of the dorm courtyard, built as backdrop. Day 1 doesn't walk it; you see it on the island map (M), and from the plaza the ground past the dorm street is no longer bare lawn. The courtyard you play in looks the same as before.",
+  "sections": [
+    {
+      "title": "The island map",
+      "caption": "The dorm courtyard's tile now covers the whole cluster: the dorm row, the inner court, the back walk and the woods round the edges.",
+      "images": [
+        { "id": "before-map", "image": "bible/shots/showcase/dorm-cluster-1/before-map.webp", "caption": "Before" },
+        { "id": "after-map", "image": "bible/shots/showcase/dorm-cluster-1/after-map.webp", "caption": "After" },
+        { "id": "before-plan", "image": "bible/shots/showcase/dorm-cluster-1/before-plan.webp", "caption": "Before, the courtyard's tile close up (the layout's boxes in pink)" },
+        { "id": "after-plan", "image": "bible/shots/showcase/dorm-cluster-1/after-plan.webp", "caption": "After, the same tile from above with its surroundings" }
+      ]
+    },
+    {
+      "title": "From the plaza, past the dorm street",
+      "caption": "Where the plaza used to show lawn east of the dorm street, it now shows the courtyard's front bed, its paving and Eric's block with balconies.",
+      "images": [
+        { "id": "before-ds3-desk", "image": "bible/shots/showcase/dorm-cluster-1/before-ds3-desk.webp", "caption": "Before" },
+        { "id": "after-ds3-desk", "image": "bible/shots/showcase/dorm-cluster-1/after-ds3-desk.webp", "caption": "After" }
+      ]
+    },
+    {
+      "title": "Close up (the courtyard's camera aimed where the player can't go, after work)",
+      "caption": "The inner court, the dorm row and its garden, the back walk with the bike shelter, and the row's end at dorm_3's door with the terrace beyond.",
+      "images": [
+        { "id": "after-court-desk", "image": "bible/shots/showcase/dorm-cluster-1/after-court-desk.webp", "caption": "The inner court" },
+        { "id": "after-court-phone", "image": "bible/shots/showcase/dorm-cluster-1/after-court-phone.webp", "caption": "The inner court, phone" },
+        { "id": "after-garden-desk", "image": "bible/shots/showcase/dorm-cluster-1/after-garden-desk.webp", "caption": "The dorm row and the garden with its pergola" },
+        { "id": "after-back-desk", "image": "bible/shots/showcase/dorm-cluster-1/after-back-desk.webp", "caption": "The back walk and the bike shelter" },
+        { "id": "after-east-desk", "image": "bible/shots/showcase/dorm-cluster-1/after-east-desk.webp", "caption": "The towers and the woods" },
+        { "id": "after-rowend-desk", "image": "bible/shots/showcase/dorm-cluster-1/after-rowend-desk.webp", "caption": "The row's end and the terrace" }
+      ]
+    },
+    {
+      "title": "The courtyard you play in",
+      "caption": "Unchanged, apart from its front bed now ending where the dorm row leaves the street, out of frame.",
+      "images": [
+        { "id": "after-dc1-phone", "image": "bible/shots/showcase/dorm-cluster-1/after-dc1-phone.webp", "caption": "After work, phone" }
+      ]
+    }
+  ],
+  "links": [{ "label": "Play it", "href": "game3d/" }]
+}
