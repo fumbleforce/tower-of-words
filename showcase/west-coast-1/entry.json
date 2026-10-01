@@ -8,34 +8,213 @@
    "title": "Pulling in (desktop)",
    "caption": "Before: the start of the arrival, and three seconds in. After: 4, 5, 6 and 7 seconds after the arrival starts (it now runs in at speed for about four seconds before braking).",
    "images": [
-    {"id": "arrive-desk-before", "image": "bible/shots/showcase/west-coast-1/before-arrive-desk.webp", "caption": "Before, arrival starts"},
-    {"id": "brake-desk-before", "image": "bible/shots/showcase/west-coast-1/before-brake-desk.webp", "caption": "Before, 3 s"},
-    {"id": "t4-desk", "image": "bible/shots/showcase/west-coast-1/after-4-desk.webp", "caption": "After, 4 s: the rocks come in"},
-    {"id": "t5-desk", "image": "bible/shots/showcase/west-coast-1/after-5-desk.webp", "caption": "After, 5 s: over the sea wall"},
-    {"id": "t6-desk", "image": "bible/shots/showcase/west-coast-1/after-6-desk.webp", "caption": "After, 6 s: the south walk and its terrace"},
-    {"id": "t7-desk", "image": "bible/shots/showcase/west-coast-1/after-7-desk.webp", "caption": "After, 7 s: the platforms"}
+    {
+     "id": "arrive-desk-before",
+     "image": "bible/shots/showcase/west-coast-1/before-arrive-desk.webp",
+     "caption": "Before, arrival starts"
+    },
+    {
+     "id": "brake-desk-before",
+     "image": "bible/shots/showcase/west-coast-1/before-brake-desk.webp",
+     "caption": "Before, 3 s"
+    },
+    {
+     "id": "t4-desk",
+     "image": "bible/shots/showcase/west-coast-1/after-4-desk.webp",
+     "caption": "After, 4 s: the rocks come in"
+    },
+    {
+     "id": "t5-desk",
+     "image": "bible/shots/showcase/west-coast-1/after-5-desk.webp",
+     "caption": "After, 5 s: over the sea wall"
+    },
+    {
+     "id": "t6-desk",
+     "image": "bible/shots/showcase/west-coast-1/after-6-desk.webp",
+     "caption": "After, 6 s: the south walk and its terrace"
+    },
+    {
+     "id": "t7-desk",
+     "image": "bible/shots/showcase/west-coast-1/after-7-desk.webp",
+     "caption": "After, 7 s: the platforms"
+    }
    ]
   },
   {
    "title": "Pulling in (phone)",
    "caption": "The phone looks along the car, so the coast comes down the sides.",
    "images": [
-    {"id": "arrive-phone-before", "image": "bible/shots/showcase/west-coast-1/before-arrive-phone.webp", "caption": "Before"},
-    {"id": "t3-phone", "image": "bible/shots/showcase/west-coast-1/after-3-phone.webp", "caption": "After, 3 s"},
-    {"id": "t4-phone", "image": "bible/shots/showcase/west-coast-1/after-4-phone.webp", "caption": "After, 4 s"},
-    {"id": "t5-phone", "image": "bible/shots/showcase/west-coast-1/after-5-phone.webp", "caption": "After, 5 s"}
+    {
+     "id": "arrive-phone-before",
+     "image": "bible/shots/showcase/west-coast-1/before-arrive-phone.webp",
+     "caption": "Before"
+    },
+    {
+     "id": "t3-phone",
+     "image": "bible/shots/showcase/west-coast-1/after-3-phone.webp",
+     "caption": "After, 3 s"
+    },
+    {
+     "id": "t4-phone",
+     "image": "bible/shots/showcase/west-coast-1/after-4-phone.webp",
+     "caption": "After, 4 s"
+    },
+    {
+     "id": "t5-phone",
+     "image": "bible/shots/showcase/west-coast-1/after-5-phone.webp",
+     "caption": "After, 5 s"
+    }
    ]
   },
   {
    "title": "The island map",
    "caption": "The forecourt's tile now reaches the coast and covers the platform shed, so there is no sea in the middle of the island. The court's own cameras never see this far, so play frames there are unchanged.",
    "images": [
-    {"id": "map-before", "image": "bible/shots/showcase/west-coast-1/before-map.webp", "caption": "Before"},
-    {"id": "map-after", "image": "bible/shots/showcase/west-coast-1/after-map.webp", "caption": "After"},
-    {"id": "plan-before", "image": "bible/shots/showcase/west-coast-1/before-plan.webp", "caption": "Forecourt from above with its backdrop, before"},
-    {"id": "plan-after", "image": "bible/shots/showcase/west-coast-1/after-plan.webp", "caption": "Forecourt from above with its backdrop, after"}
+    {
+     "id": "map-before",
+     "image": "bible/shots/showcase/west-coast-1/before-map.webp",
+     "caption": "Before"
+    },
+    {
+     "id": "map-after",
+     "image": "bible/shots/showcase/west-coast-1/after-map.webp",
+     "caption": "After"
+    },
+    {
+     "id": "plan-before",
+     "image": "bible/shots/showcase/west-coast-1/before-plan.webp",
+     "caption": "Forecourt from above with its backdrop, before"
+    },
+    {
+     "id": "plan-after",
+     "image": "bible/shots/showcase/west-coast-1/after-plan.webp",
+     "caption": "Forecourt from above with its backdrop, after"
+    }
+   ]
+  },
+  {
+   "title": "Follow-up: pulling in (desktop)",
+   "caption": "Issue #160. The arrival was about 12 seconds, the first four over open sea. Now about 8: the sea wall is in frame within the first second, the car eases off over the island so the coast and the lawn pass readably, and the brakes go on along the platforms. Before: 2 and 4 seconds in (still sea). After: 1 to 4 seconds in.",
+   "images": [
+    {
+     "id": "r2-before-2-desk",
+     "image": "bible/shots/showcase/west-coast-1/r2-before-2-desk.webp",
+     "caption": "Before, 2 s"
+    },
+    {
+     "id": "r2-before-4-desk",
+     "image": "bible/shots/showcase/west-coast-1/r2-before-4-desk.webp",
+     "caption": "Before, 4 s"
+    },
+    {
+     "id": "r2-after-1-desk",
+     "image": "bible/shots/showcase/west-coast-1/r2-after-1-desk.webp",
+     "caption": "After, 1 s: the rocks and the wall"
+    },
+    {
+     "id": "r2-after-2-desk",
+     "image": "bible/shots/showcase/west-coast-1/r2-after-2-desk.webp",
+     "caption": "After, 2 s: over the wall"
+    },
+    {
+     "id": "r2-after-3-desk",
+     "image": "bible/shots/showcase/west-coast-1/r2-after-3-desk.webp",
+     "caption": "After, 3 s: drifts and pines by the line"
+    },
+    {
+     "id": "r2-after-4-desk",
+     "image": "bible/shots/showcase/west-coast-1/r2-after-4-desk.webp",
+     "caption": "After, 4 s: the garden south of the station"
+    }
+   ]
+  },
+  {
+   "title": "Follow-up: pulling in (phone)",
+   "caption": "The same run in on a phone.",
+   "images": [
+    {
+     "id": "r2-before-2-phone",
+     "image": "bible/shots/showcase/west-coast-1/r2-before-2-phone.webp",
+     "caption": "Before, 2 s"
+    },
+    {
+     "id": "r2-before-4-phone",
+     "image": "bible/shots/showcase/west-coast-1/r2-before-4-phone.webp",
+     "caption": "Before, 4 s"
+    },
+    {
+     "id": "r2-after-1-phone",
+     "image": "bible/shots/showcase/west-coast-1/r2-after-1-phone.webp",
+     "caption": "After, 1 s"
+    },
+    {
+     "id": "r2-after-2-phone",
+     "image": "bible/shots/showcase/west-coast-1/r2-after-2-phone.webp",
+     "caption": "After, 2 s"
+    },
+    {
+     "id": "r2-after-3-phone",
+     "image": "bible/shots/showcase/west-coast-1/r2-after-3-phone.webp",
+     "caption": "After, 3 s"
+    }
+   ]
+  },
+  {
+   "title": "Follow-up: the coast on the map",
+   "caption": "The coastline bends now and turns up the beach's west side to meet the seafront's wall. The coast walk is one loop: past the shed, through the lookout on the point, on to a corner terrace where the monorail comes in, then east under the line to a square on the station's axis, where a walk comes down from the station's covered walkway and goes on to the promenade. The lawns have mown bands, beds and drifts, pines in threes along the wall, and a garden south of the station.",
+   "images": [
+    {
+     "id": "r2-before-north",
+     "image": "bible/shots/showcase/west-coast-1/r2-before-north.webp",
+     "caption": "Before, west of the shed"
+    },
+    {
+     "id": "r2-after-north",
+     "image": "bible/shots/showcase/west-coast-1/r2-after-north.webp",
+     "caption": "After, west of the shed"
+    },
+    {
+     "id": "r2-before-west",
+     "image": "bible/shots/showcase/west-coast-1/r2-before-west.webp",
+     "caption": "Before, the lookout and south of the station"
+    },
+    {
+     "id": "r2-after-west",
+     "image": "bible/shots/showcase/west-coast-1/r2-after-west.webp",
+     "caption": "After, the lookout and south of the station"
+    },
+    {
+     "id": "r2-before-south",
+     "image": "bible/shots/showcase/west-coast-1/r2-before-south.webp",
+     "caption": "Before, where the coast meets the beach"
+    },
+    {
+     "id": "r2-after-south",
+     "image": "bible/shots/showcase/west-coast-1/r2-after-south.webp",
+     "caption": "After, where the coast meets the beach"
+    },
+    {
+     "id": "r2-before-plan",
+     "image": "bible/shots/showcase/west-coast-1/r2-before-plan.webp",
+     "caption": "Before, the forecourt tile"
+    },
+    {
+     "id": "r2-after-plan",
+     "image": "bible/shots/showcase/west-coast-1/r2-after-plan.webp",
+     "caption": "After, the forecourt tile"
+    },
+    {
+     "id": "r2-after-plan-phone",
+     "image": "bible/shots/showcase/west-coast-1/r2-after-plan-phone.webp",
+     "caption": "After, phone"
+    }
    ]
   }
  ],
- "links": [{"label": "Play it", "href": "game3d/"}]
+ "links": [
+  {
+   "label": "Play it",
+   "href": "game3d/"
+  }
+ ]
 }

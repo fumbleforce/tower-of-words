@@ -300,7 +300,7 @@ export function* seafrontSteps(root, { at, layer = null, backWalk = false }) {
   yield;
 
   // the sea wall, its rocks and surf, the shrubs at its foot and the pines (outdoor/coast.js)
-  yield* coastSteps(group, { at, data: { coast: S.SOUTH_COAST, trees: S.SOUTH_TREES } });
+  yield* coastSteps(group, { at, data: { coast: S.SOUTH_COAST, trees: S.SOUTH_TREES, paved: [S.PROMENADE] } });
   mapOnly(group, layer, 'seafront');
   return { evening: () => lit.evening() };
 }

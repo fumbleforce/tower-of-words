@@ -39,7 +39,14 @@ export const WALL = 1.5; // the sea wall's height above the sea, car units
 const GROUND_STOP = -2.1; // the ground under the platforms when stopped: the shed's deck (2.5, station-shed.js) down
 const BEAM_END = rideAt(0, SHED[1])[0] / S; // the buffer at the shed's north end, from the stop
 const DESCENT = [12, 80]; // the line comes down between these distances from the stop
-export const RUN_IN = 75; // the arrival starts this far out, so the coast comes in from beyond the frame
+// The arrival starts RUN_IN out: the sea wall comes into the frame within its first second. Over the island the car
+// eases off from cruising speed to V_IN (EASE a second), so the coast and the lawn slide by readably, and the brakes
+// (DECEL) go on late and firmly along the platform: about eight and a half seconds from the doors to the stop, about
+// three of them over the island and three along the platform.
+export const RUN_IN = 50;
+const V_IN = 6.5,
+  EASE = 0.9,
+  DECEL = 2.8;
 // the train's own platforms, track beams and walkway stand here (ride frame, before the scale): nothing grows into them
 const DECK = { x: 21, z0: -10.6, z1: 5.6 };
 const BEAM2 = BEAM2_Z * S;
@@ -47,11 +54,12 @@ const clear = (x, z) =>
   !(Math.abs(x) < DECK.x && z > DECK.z0 && z < DECK.z1) && !(x < 0 && (Math.abs(z) < 2.4 || Math.abs(z - BEAM2) < 2.2));
 
 export function startRunIn(st) {
-  st.decel = 1.15;
+  st.decel = DECEL;
   st.mode = 'approach';
   st.stopAt = st.stopX = st.dist + Math.max(RUN_IN, (st.v * st.v) / (2 * st.decel));
 }
 export function runIn(st, dt, { brake, stop }) {
+  if (st.mode === 'approach') st.v = Math.max(Math.min(st.v, V_IN), st.v - EASE * dt);
   if (st.mode === 'approach' && st.stopAt - st.dist <= (st.v * st.v) / (2 * st.decel)) {
     st.mode = 'brake';
     brake();
