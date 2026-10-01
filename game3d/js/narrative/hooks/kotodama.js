@@ -94,7 +94,7 @@ export function installKotodamaHooks(game, { renderer, objsOf }) {
     const meshes = [];
     for (const t of targets)
       t.traverse((o) => {
-        if (o.isMesh && o.geometry) meshes.push(o);
+        if (o.isMesh && o.geometry && !o.userData.perfBatch) meshes.push(o);
       });
     for (const o of meshes) {
       const eg = new THREE.EdgesGeometry(o.geometry, 35);
