@@ -21,9 +21,11 @@ Substitute `carved` or `squash` for the other builders. Shot-staging notes are i
 
 ## Game-scale evidence
 
-The sandbox blocks Chromium startup, so these are **offline Blender renders**, not WebGL screenshots. `codex_scene.mjs` runs the real forecourt builders and `RoomCam`, exports meshes, vertex colours, lighting and desktop/phone camera fits, and checks both staging points are walkable. Eric uses his actual runtime height of 1.416 m; Mio keeps her model’s relative height. Native pixel crops accompany 1366 × 860 and 390 × 844 frames.
+The initial forecourt views are **offline Blender renders**. The worker’s sandbox blocked Chromium startup. `codex_scene.mjs` runs the real forecourt builders and `RoomCam`, exports meshes, vertex colours, lighting and desktop/phone camera fits, and checks both staging points are walkable. Eric uses his actual runtime height of 1.416 m; Mio keeps her model’s relative height. Native pixel crops accompany 1366 × 860 and 390 × 844 frames.
 
 Canvas signage, texture maps, UI, surface shaders and post-processing are omitted. Hemisphere lighting is approximated by the Blender world. Each staged attempt records these limits and exact camera matrices in `forecourt-manifest.json`, with a compressed copy of the exported scene. Keep these renders when direct runtime captures become available.
+
+Actual game captures use `node tools/style-concepts/codex_webgl.mjs stitch attempt-05 forecourt` (substitute the other style and attempt). The helper uses the running game’s camera, lighting and post-processing at desktop and phone sizes. It stages the pair on clear paving, grounds each static pose using precise mesh bounds and records the offsets beside each capture. These adjustments do not change the exported animation clips. `webgl-grounded-*` names and separate sheets distinguish these frames from the offline renders; earlier `webgl-*` attempts remain available. Completed captures are kept on reruns; partial captures require a new output prefix.
 
 ## Checks and handoff
 
