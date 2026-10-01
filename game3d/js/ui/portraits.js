@@ -3,7 +3,8 @@ import { $ } from './dom.js';
 
 // ---------- VN portraits ----------
 // Available expressions are declared in ui/portrait-data.js; missing files fall back to neutral.
-// Each cut-out's face box (imgutils detect_faces on the neutral image, image pixels [x0, y0, x1, y1]) and image size.
+// Each cut-out's face box (imgutils detect_faces on the neutral image, image pixels [x0, y0, x1, y1]) and image size;
+// `size` scales one person's picture about the chin (default 1).
 // All expressions of a person share the framing. Every portrait is placed from this: the same face height on screen,
 // the chin at the same height, the body cut at the waist.
 export const FACE = {
@@ -14,7 +15,9 @@ export const FACE = {
   eric: { W: 648, H: 768, f: [116, 203, 340, 394] },
   guard: { W: 597, H: 768, f: [222, 167, 378, 334] },
   kenji: { W: 597, H: 768, f: [219, 166, 383, 335] },
-  kuro: { W: 630, H: 809, f: [254, 325, 452, 525] },
+  // Kuro: extended down to the waist (reviews/kuro-body-1, c-s11), and shown 15% smaller than the others (size 0.85):
+  // Jørgen, "she is 15% too large / zoomed in compared to the others"
+  kuro: { W: 630, H: 1048, f: [254, 325, 452, 525], size: 0.85 },
   kuroda: { W: 597, H: 768, f: [237, 167, 362, 338] },
   mio: { W: 597, H: 768, f: [192, 214, 361, 383] },
   emi: { W: 597, H: 768, f: [217, 168, 383, 337] },
@@ -142,7 +145,7 @@ export function layoutStage() {
   // the top of the hair, about half a face above the face box, down to the cut)
   const place = (d, left, k) => {
     const F = F0 * k,
-      s = F / (d.f[3] - d.f[1]),
+      s = (F * (d.size || 1)) / (d.f[3] - d.f[1]),
       cx = (d.f[0] + d.f[2]) / 2,
       fw = (d.f[2] - d.f[0]) * s;
     const top = base - cutK * F - d.f[3] * s;

@@ -29,7 +29,7 @@ def main():
     def placed(who, face, table):
         if who == 'kuro' and face != 'neutral':
             im = Image.open(os.path.join(HERE, f'{face}-cut.webp')).convert('RGBA')
-            W, H, f = table['kuro']
+            W, H, f, _ = table['kuro']
             s = L.F / (f[3] - f[1])
             im = im.resize((round(im.width * s), round(im.height * s)), Image.LANCZOS)
             return im, (f[0] + f[2]) / 2 * s, f[3] * s

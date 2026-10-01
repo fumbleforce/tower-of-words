@@ -30,7 +30,7 @@ One folder per bible id. Each file here is a copy of one that bible/facts.yaml m
 - The cast redrawn toward Mio and Kuro (2026-09-30, picks in reviews/style-align-1 and reviews/npc-base-1; made in art/candidates/portraits/cast-faces-1). Each file is the game's framed cut-out, <game id>-<base pick>-<face>.webp, a copy of game3d/assets/portraits/<game id>-<face>.webp:
   - mc/eric-eric-ink-2001-{neutral,surprised,tired}.webp: Eric.
   - kenji/kenji-kenji-ink-2001-{neutral,grin,sheepish}.webp: Kenji. They replace the h4 faces above in the game.
-  - emi/emi-emi-base-2001-neutral.webp, aoi/aoi-aoi-base-2001-neutral.webp: Emi and Aoi.
+  - emi/emi-emi-base-2001-neutral.webp, aoi/aoi-aoi-base-2001-neutral.webp: Emi and Aoi. Aoi's is fill-d65-s1 since 2026-10-01, the cream edge on her left side redrawn (reviews/aoi-edge-2).
   - ishibashi/guard-guard-ink-2001-{neutral,stern,amused}.webp: Ishibashi, the guard.
   - mori/mori-mori-new-713-{neutral,smile,flustered}.webp: Mr. Mori.
   - hamada/kuroda-hamada-new-743-{neutral,sleepy,panicked}.webp: Mr. Hamada.

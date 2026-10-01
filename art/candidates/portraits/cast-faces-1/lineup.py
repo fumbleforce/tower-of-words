@@ -15,19 +15,20 @@ DARK = (18, 20, 28)
 FONT = ImageFont.truetype('/usr/share/fonts/TTF/DejaVuSans.ttf', 20)
 ORDER = ['mio', 'eric', 'kenji', 'emi', 'aoi', 'guard', 'mori', 'kuroda', 'kuro']
 NAME = {'mio': 'Mio (kept)', 'eric': 'Eric', 'kenji': 'Kenji', 'emi': 'Emi', 'aoi': 'Aoi', 'guard': 'Ishibashi',
-        'mori': 'Mr. Mori', 'kuroda': 'Mr. Hamada', 'kuro': 'Kuro (kept)'}
+        'mori': 'Mr. Mori', 'kuroda': 'Mr. Hamada', 'kuro': 'Kuro'}
 F, CHIN, CUT = 150, 260, 2.25   # face height, chin line, cut below the chin in face heights (desktop)
 
 
 def face_table():
     js = open(os.path.join(WT, 'game3d/js/ui/portraits.js')).read()
-    return {m[0]: (int(m[1]), int(m[2]), [int(v) for v in m[3].split(',')])
-            for m in re.findall(r'(\w+): \{ W: (\d+), H: (\d+), f: \[([\d, ]+)\] \}', js)}
+    # (W, H, face box, size): size scales one person about the chin, as the game does (FACE.kuro)
+    return {m[0]: (int(m[1]), int(m[2]), [int(v) for v in m[3].split(',')], float(m[4] or 1))
+            for m in re.findall(r'(\w+): \{ W: (\d+), H: (\d+), f: \[([\d, ]+)\](?:, size: ([\d.]+))? \}', js)}
 
 
 def placed(who, face, table):
-    W, H, f = table[who]
-    s = F / (f[3] - f[1])
+    W, H, f, k = table[who]
+    s = F * k / (f[3] - f[1])
     im = Image.open(os.path.join(P, f'{who}-{face}.webp')).convert('RGBA').resize((round(W * s), round(H * s)), Image.LANCZOS)
     return im, (f[0] + f[2]) / 2 * s, f[3] * s
 

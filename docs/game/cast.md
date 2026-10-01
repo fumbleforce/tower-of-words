@@ -103,12 +103,12 @@ The id `kuroda` is Mr. Hamada. The id is older than the name and stays so the vo
 ### Kuro (`kuro`)
 
 - The receptionist in the head office lobby, behind the reception counter by the door (moved there from the station's visitor counter; Jørgen, 2026-09-30: "Then kuro should be there rather than at security"). Her name is written 玖路 and reads like 黒, black. Polite Japanese.
-- Look: approved portrait art/approved/kuro/kuro-after.webp. Clear-lensed glasses, never tinted.
+- Look: approved portrait art/approved/kuro/kuro-after.webp, extended down to the waist as kuro-body-c-s11 (reviews/kuro-body-1) and shown 15% smaller than the others' framing, since at the same face height she looked "15% too large / zoomed in" (Jørgen, 2026-10-01). Clear-lensed glasses, never tinted.
 
 ### Aoi (`aoi`)
 
 - A new hire. Her assignment is decided today (day 1), and she's telling someone on the phone it can be anywhere but the basement. Japanese only.
-- Look: approved portrait aoi-base-2001 (reviews/style-align-1), redrawn from gallery B-aoi (art/approved/aoi/aoi-after.webp): pink bob with dark roots, winking grin, green varsity jacket with a pink star patch.
+- Look: approved portrait aoi-base-2001 (reviews/style-align-1), with the cream edge on her left side redrawn as fill-d65-s1 (reviews/aoi-edge-2); redrawn from gallery B-aoi (art/approved/aoi/aoi-after.webp): pink bob with dark roots, winking grin, green varsity jacket with a pink star patch.
 
 ### Rei (`rei`)
 
