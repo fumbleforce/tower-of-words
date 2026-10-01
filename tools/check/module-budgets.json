@@ -23,10 +23,10 @@
       "reason": "Existing detailed prop builders; preserve geometry until the visual owner reviews extraction."
     },
     "game3d/js/main.js": {
-      "lines": 732,
-      "bytes": 26537,
+      "lines": 733,
+      "bytes": 26545,
       "owner": "codex-tui",
-      "review": "C-0110 / X-0193: one office batch integration line; 2026-09-30 one import line each for the dorms, plaza and dorm_court place factories; existing responsibility unchanged; 2026-09-30 game.overrideMaterials for the shader warm-up (notes/PERF.md); 2026-09-30 one step() line for the look/cue layers over the idles (C-0171); C-0210 close-only things lose close calls for the target (same line)",
+      "review": "C-0110 / X-0193: one office batch integration line; 2026-09-30 one import line each for the dorms, plaza and dorm_court place factories; existing responsibility unchanged; 2026-09-30 game.overrideMaterials for the shader warm-up (notes/PERF.md); 2026-09-30 one step() line for the look/cue layers over the idles (C-0171); C-0210 close-only things lose close calls for the target (same line); 2026-10-01 issue #137: size passed to the place lifecycle (one line)",
       "reason": "Composition, boot/Continue, input, rendering and frame loop remain after stage 4 hooks, interactions and place lifecycle extraction."
     },
     "game3d/js/menu.js": {
@@ -44,10 +44,10 @@
       "reason": "Existing procedural character and animation implementation; changes require character review."
     },
     "game3d/js/perf/batch.js": {
-      "lines": 996,
-      "bytes": 40032,
+      "lines": 1002,
+      "bytes": 40600,
       "owner": "codex-tui",
-      "review": "C-0071; 2026-09-30 preparation slices (yield points, notes/PERF.md); 2026-09-30 busy() for the shader warm-up (notes/PERF.md); 2026-09-30 people's torsos batched under from the start (notes/PERF.md, evening draw calls); 2026-10-01 issue #82: outlined meshes draw from twins of their batches (js/perf/batch-twin.js, notes/PERF.md)",
+      "review": "C-0071; 2026-09-30 preparation slices (yield points, notes/PERF.md); 2026-09-30 busy() for the shader warm-up (notes/PERF.md); 2026-09-30 people's torsos batched under from the start (notes/PERF.md, evening draw calls); 2026-10-01 issue #82: outlined meshes draw from twins of their batches (js/perf/batch-twin.js, notes/PERF.md); 2026-10-01 issue #137: place.perfMovers and hidden moving groups batched from the first scan (notes/PERF.md)",
       "reason": "Existing batching and geometry optimization utilities; preserve rendering behavior during this pass."
     },
     "game3d/js/places/lift.js": {
@@ -72,10 +72,10 @@
       "reason": "Existing office place geometry and interaction hooks; stage 5 room-builder review is planned."
     },
     "game3d/js/places/train.js": {
-      "lines": 1673,
-      "bytes": 61184,
+      "lines": 1690,
+      "bytes": 61730,
       "owner": "codex-tui",
-      "review": "C-0076; C-0166 named sounds per door and machine; 2026-09-30 eleven wiring lines for the passengers' discovery props and hooks (train/discoveries.js, issue #89)",
+      "review": "C-0076; C-0166 named sounds per door and machine; 2026-09-30 eleven wiring lines for the passengers' discovery props and hooks (train/discoveries.js, issue #89); 2026-10-01 issue #137: layout() split from fit() and the perfMovers list (notes/PERF.md)",
       "reason": "Existing train place geometry, animation and scene hooks; stage 5 room-builder review is planned."
     },
     "game3d/js/post.js": {

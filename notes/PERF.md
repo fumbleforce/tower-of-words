@@ -257,7 +257,7 @@ q0, and phone at q1 (medium, what phones run by default; `QUALITY=1`, stored as 
 
 Phone q0 and q1 are inside the phone budget (250 calls, 300k triangles) but for the train at q1, which reads 231 to
 253 between runs: the train is the first place, and the fast test spends its few seconds there while the draw-call pass
-is still merging (see "Phone default quality" below for its settled numbers). The previous baselines: fa26043 had
+is still merging (see "Phone default quality" below for its settled numbers); since issue #137 the merging is done before its first frame, median 157 in the fast test ("The train's first seconds"). The previous baselines: fa26043 had
 train 230/230, gate 245/187, office 450/216 (desktop/phone q0); 0930-0748 (d2c8515) had train 851/680, gate
 1,157/731, office 918/590; 0929-1848-b196ef5 (office unbatched) had train 779/648, gate 1,246/833, office 4,130/2,714.
 
@@ -360,7 +360,36 @@ after: lift 287 to 289 / 90 → 161 to 233 / 14 to 18; desk 397 to 417 / 123 to 
 / 80 → 201 to 225 / 3; copier 355 to 380 / 85 → 279 to 293 / 10. Settled at the office start with the lift outlined:
 202 → 138. Left over 250 in the office: moments of a scene with nothing outlined (up to about 320: Emi's and the
 other people's parts and shadows while they move), and the train's first seconds (up to about 500 while the batches
-settle).
+settled; fixed, see the next section).
+
+### The train's first seconds (2026-10-01, issue #137)
+
+The train drew up to about 500 calls a frame on phone medium for its first 1.3 s: its batches were built in `prepare()`
+under the scene, then the first played frame swayed the car, every mesh in it was let go and drew on its own until the
+pass had found each moving group (car, neighbour cars, pillars, bags, heads) and merged again under it. On a portrait
+screen the car's shell was also rebuilt for the end-on view at entry (`fit()`), after the pass, so its new meshes waited
+2 s; and the station, hidden until the train brakes, was merged only 2 to 3 s after it showed (330 to 400 calls).
+Now, all layouts, with no change on screen:
+
+- A place lists what its update moves every frame in `place.perfMovers` (places/train.js: the car's pivot, the
+  station, the neighbour cars and bellows, the pillars from train/world.js, the nodding bags and plant, the passengers'
+  heads, the cat's head and tail); batch.js treats them as moving groups from its first scan. The track joints, which
+  slide on their own, are `noBatch`.
+- The scan also merges inside a hidden group that moves, hanging the batches under it, so they hide and show with it
+  (the station).
+- `prepare()` calls `place.layout(aspect)` before the pass (places/lifecycle.js; the train's `layout()` is the shell
+  switch that was in `fit()`), still after the look, so the shell is the same as before.
+
+Phone 390x844 q1, fast test (`day-calls.mjs --places train --every 60`, GL=gpu), before (31e1cba6) → after: the first
+1.3 s 470 to 494 → 128 to 179 calls; train max 494 → 332, median 175 → 161; the station's arrival 330 to 400 → 172 to
+237. Desktop 1366x860 q1: max 1,054 → 585, median 356 → 333. What is left over 250 in the train is the walk out at the
+end (about 0.4 s at 310 to 340: the closed car fading in, see-through and changing materials). Time to the train's
+first frames (phone, CPU 4x, 3 runs each): median 2.56 → 2.54 s; the pass's own work before the first frame 280 to 310
+→ 370 to 410 ms, in slices. Stills of the train at the start, the aisle, the station stop and the platform, before and
+after, both sizes: same within run-to-run noise.
+
+Note for `day.mjs`: its off/on pairs read as over tolerance while a person is outlined (the outline in the "off" frame
+still selects the hidden batch twins), on main as well; pairs with nothing outlined pass.
 
 ## Office integration (C-0110, 2026-09-29)
 

@@ -205,6 +205,7 @@ export function buildWorld(scene, { sunDir }) {
   for (let i = 0; i < JN; i++) {
     const j = new THREE.Mesh(jointGeo, concreteDark);
     j.position.set(0, BEAM_TOP - 0.45, 0);
+    j.userData.noBatch = true; // slides by every frame (update()): never merged (js/perf/batch.js)
     joints.add(j);
   }
 
@@ -269,6 +270,7 @@ export function buildWorld(scene, { sunDir }) {
     root,
     sea,
     update,
+    movers: pillars, // for the draw-call pass (place.perfMovers)
     pillarNear,
     setQuality: (q) => {
       u.uQuality.value = q ? 1 : 0.6;
