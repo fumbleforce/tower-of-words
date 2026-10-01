@@ -15,7 +15,7 @@ import { Nav } from '../movement/navigation.js';
 import { laundry, sento } from './dorm-court/frontages.js';
 import { hall } from './dorm-court/hall.js';
 import { ericBlock } from './dorm-court/block.js';
-import { buildCourt } from './dorm-court/court.js';
+import { courtSteps } from './dorm-court/court.js';
 import { shelter, vending, doorstep, garbage } from './dorm-court/fittings.js';
 import { clusterSteps, placeIn, CLUSTER_IDS } from './dorm-court/cluster.js';
 import { Parts } from './outdoor/parts.js';
@@ -76,7 +76,7 @@ export function* dormCourtSteps() {
   sento(root, nav, { east: EAST, back: BLOCK_Z });
   yield;
   const lamps = lightSet(); // every lamp's lantern and pool, one mesh each
-  buildCourt(root, nav, lamps);
+  yield* courtSteps(root, nav, lamps);
   yield;
   const p = new Parts();
   shelter(root, p, lamps, block);

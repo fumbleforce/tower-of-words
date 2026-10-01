@@ -17,7 +17,7 @@ import { laneField, verge, LANE_BORDER as BW } from '../outdoor/lane.js';
 import { kerb, kerbRect, wallRect } from '../outdoor/edges.js';
 import { hedge, sakura, ginkgo, maple, keyaki, mound, bed, treePit, LEAF } from '../outdoor/planting.js';
 import { lamps, bench, bins, lightSet } from '../outdoor/furniture.js';
-import { buildFronts } from '../plaza/east-fronts.js';
+import { frontsSteps } from '../plaza/east-fronts.js';
 import { CHUNKS, toLocal } from '../island-layout.js';
 import { TOWN, groundPatches } from '../town.js';
 import { cells } from './cells.js';
@@ -198,37 +198,38 @@ function lawn(group) {
 }
 
 // builds it all into `group`, in the island frame; plaza: also the stand-ins for the courtyard and Eric's block.
-// A generator that yields between parts, so the place can build it in slices (js/perf/slice.js); returns the
-// evening switch.
+// A generator that yields between parts (every few trees in the woods, every block front, every cell's meshes), so
+// the place can build it in slices of a few ms (js/perf/slice.js) while the plaza plays; returns the evening switch.
 export function* clusterSteps(group, { plaza = false } = {}) {
   group.name = 'dorm-cluster';
   const { parts: p, paver: pv } = cells(XCUTS, [0, 10]),
     lights = lightSet();
   ground(pv);
+  yield;
   kerbs(p);
   yield;
   court(p, lights);
+  yield;
   row(p, lights);
   yield;
-  endSquare(pv, p, lights);
-  backYards(pv, p, lights);
-  yield;
-  garden(pv, p);
+  yield* endSquare(pv, p, lights);
+  yield* backYards(pv, p, lights);
+  yield* garden(pv, p);
   yield* belts(p);
   doorPots(p, C.BLOCKS);
-  if (plaza) standIn(pv, p, lights);
+  yield;
+  if (plaza) yield* standIn(pv, p, lights);
   else {
     // the dorm street's edge south of the row, to the courtyard's end of it (the plaza's east lane kerbs its own)
     kerb(p, [ROW[0], ROW[3]], [ROW[0], P.STREET[1] + CHUNKS.dorm_court.at[1]], { off: 0.08 });
     lawn(group);
   }
   yield;
-  const fronts = buildFronts(p, lights, plaza ? [...C.BLOCKS, ...C.DORM_1_PARTS] : C.BLOCKS);
+  const fronts = yield* frontsSteps(p, lights, plaza ? [...C.BLOCKS, ...C.DORM_1_PARTS] : C.BLOCKS);
   fronts.meshes(group);
   yield;
-  pv.build(group);
-  yield;
-  for (const m of p.build(group)) m.castShadow = false;
+  yield* pv.build(group);
+  for (const m of yield* p.build(group)) m.castShadow = false;
   const lit = lights.build(group);
   // no shadows on it either: the courtyard's shadow box ends a little way into the row, and its edge would show
   group.traverse((m) => m.isMesh && (m.receiveShadow = false));
