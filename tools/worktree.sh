@@ -4,7 +4,9 @@
 #   tools/worktree.sh new <name>      make .claude/worktrees/<name> on a new branch wt/<name> from local main, then setup
 #   tools/worktree.sh setup [<path>]  give a worktree what the game and tools need that isn't in git (default: this one)
 #   tools/worktree.sh gone [--remove] list each worktree as gone (nothing in it that isn't on main) or keep (and why);
-#                                     --remove deletes the gone ones and their branches
+#                                     --remove deletes the gone ones and their branches, then runs prune-assets
+#   tools/worktree.sh prune-assets [--dry-run] [--min-age <minutes>]
+#                                     delete the asset store's file versions no worktree links to (see below)
 #
 # Claude Code's Agent tool makes its own worktrees (isolation: "worktree"; .claude/settings.json sets the base to
 # local HEAD and symlinks node_modules, .worktreeinclude copies .env). Run `setup` in those too: it's idempotent.
@@ -22,6 +24,8 @@
 #     in a store all worktrees share, .claude/worktrees/.assets/ (tools/assets/worktree_links.py: one copy per
 #     version, made the first time a setup needs it), so a script writing through a link fails with "Permission
 #     denied" and can't change main's file (#148). Rerunning setup points the links at main's current versions.
+#     Old versions stay in the store until prune-assets (or gone --remove) deletes the ones nothing links to; it
+#     keeps any changed in the last 10 minutes and waits for a running setup (worktree_links.py says how).
 # To change an asset in a worktree, delete its link first and write a new file; tools/land.sh then keeps the
 # worktree and lists the new file instead of deleting it.
 set -euo pipefail
@@ -180,13 +184,18 @@ gone() {  # gone [--remove]: which worktrees hold nothing that isn't on main, an
     esac
   done < <(git -C "$main" worktree list --porcelain)
   check
-  if (( remove )); then git -C "$main" worktree prune
+  if (( remove )); then git -C "$main" worktree prune; prune_assets
   else echo "(tools/worktree.sh gone --remove deletes the 'gone' ones and their branches)"; fi
+}
+
+prune_assets() {  # prune-assets [--dry-run] [--min-age <minutes>]
+  python3 "$(dirname "$(readlink -f "$0")")/assets/worktree_links.py" prune "$(main_root .)" "$@"
 }
 
 case "${1:-}" in
   new) shift; new "$@" ;;
   setup) shift; setup "$@" ;;
   gone) shift; gone "$@" ;;
-  *) sed -n '2,8p' "$0" | sed 's/^# \{0,1\}//'; exit 2 ;;
+  prune-assets) shift; prune_assets "$@" ;;
+  *) sed -n '2,10p' "$0" | sed 's/^# \{0,1\}//'; exit 2 ;;
 esac
