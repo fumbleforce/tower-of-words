@@ -12,7 +12,10 @@
 #
 # setup links, never copies, from the main checkout:
 #   - node_modules (the folder) and .env
-#   - every file in this worktree's asset lock file (tools/assets/assets.lock.json) that it lacks, binary or not;
+#   - every file in this worktree's asset lock file (tools/assets/assets.lock.json) that it lacks, binary or not,
+#     if main's copy is the locked version (same sha256; sync.py's hash cache keeps this fast). A locked file main
+#     has changed (another task's round in progress) is fetched from R2 into the worktree instead (sync.py pull),
+#     or left out and listed if that fails; a link an earlier setup made to such a file is replaced the same way;
 #   - main's other untracked files under the asset roots (tools/assets/sync.json, plus the voice pipeline's) that
 #     this worktree's .gitignore ignores, except unpushed assets (used but not in the lock: another task's work in
 #     progress, which the commit check would count). One symlink per file.
@@ -65,6 +68,30 @@ for p in filter(None, sys.stdin.buffer.read().decode().split("\0")):
     if p in lock or not used:
         sys.stdout.write(p + "\0")' "$wt/tools/assets"
   }
+  # Locked files whose copy in main isn't the locked version: another task is changing them in main (an art round
+  # repainting a portrait before its lock line is updated). Linking those would bring that task's work in, and the
+  # commit check would count it as this branch's, so they are fetched from R2 further down instead. Hashes come
+  # from sync.py's cache in the common git dir (size + mtime), so only files changed since their last hash are read.
+  local changed=()
+  if [[ -f "$wt/tools/assets/sync.py" && -f "$wt/tools/assets/assets.lock.json" ]]; then
+    mapfile -d '' -t changed < <(python3 -c 'import json, sys; sys.path.insert(0, sys.argv[1]); sys.dont_write_bytecode = True
+import sync
+lock = json.load(open(sys.argv[3], encoding="utf-8"))["files"]
+sync.ROOT = sys.argv[2]  # hash the main checkout copies
+cache = sync.load_cache()
+have = sync.local_state(sorted(lock), cache)
+sync.save_cache(cache)
+sys.stdout.write("".join(p + "\0" for p in sorted(have) if have[p][1] != lock[p]["sha256"]))' \
+      "$wt/tools/assets" "$main" "$wt/tools/assets/assets.lock.json")
+  fi
+  local -A skip=()
+  local rel
+  for rel in "${changed[@]}"; do
+    skip[$rel]=1
+    # a link from an earlier setup now points at the changed copy: drop it so the locked version can come in
+    if [[ -L "$wt/$rel" && "$(readlink "$wt/$rel")" == "$main/$rel" ]]; then rm "$wt/$rel"; fi
+  done
+
   # Linked: every locked file this worktree lacks, whatever its type or this branch's .gitignore says; and main's
   # other untracked files under the roots that this worktree ignores (so a link never shows up as a new file to
   # commit) and that aren't unpushed assets. Links to locked files git doesn't ignore (the public creator's JSON) do
@@ -72,11 +99,30 @@ for p in filter(None, sys.stdin.buffer.read().decode().split("\0")):
   local files=0 rel
   while IFS= read -r -d '' rel; do
     files=$((files + 1))
-    link "$rel"
+    [[ -n "${skip[$rel]:-}" ]] || link "$rel"
   done < <({ lock_paths; git -C "$main" ls-files -z --others -- "${roots[@]}" \
                | git -C "$wt" check-ignore -z --no-index --stdin | not_unpushed; } \
              | sort -z -u | grep -z -v -e '/private/' -e '^private/' -e '__pycache__' -e '\.pyc$')
   echo "worktree setup: $wt; $linked new links ($files candidates: the locked files, and main's other ignored files under the asset roots)"
+
+  # The changed ones this worktree lacks: fetch the locked version from R2. Only files this worktree's .gitignore
+  # ignores, so a fetched copy never shows up as a file to commit; the others (a locked JSON in a tracked folder)
+  # are left out and listed, like any that fail to download.
+  local want=() fetch=() left=() out=""
+  for rel in "${changed[@]}"; do [[ -e "$wt/$rel" || -L "$wt/$rel" ]] || want+=("$rel"); done
+  (( ${#want[@]} )) || return 0
+  mapfile -d '' -t fetch < <(printf '%s\0' "${want[@]}" | git -C "$wt" check-ignore -z --no-index --stdin || true)
+  if (( ${#fetch[@]} )); then
+    out=$(cd "$wt" && python3 tools/assets/sync.py pull "${fetch[@]}" 2>&1) || true
+  fi
+  for rel in "${want[@]}"; do [[ -e "$wt/$rel" ]] || left+=("$rel"); done
+  echo "worktree setup: ${#want[@]} locked file(s) differ in main (another task is changing them there): fetched $(( ${#want[@]} - ${#left[@]} )) from R2 instead of linking"
+  if (( ${#left[@]} )); then
+    echo "worktree setup: left out ${#left[@]} locked file(s); get one with: python3 tools/assets/sync.py pull <path>"
+    printf '  %s\n' "${left[@]:0:20}"
+    (( ${#left[@]} <= 20 )) || echo "  ... $(( ${#left[@]} - 20 )) more"
+    if [[ -n "$out" ]]; then printf '%s\n' "$out" | tail -n 3 | sed 's/^/  sync.py: /'; fi
+  fi
 }
 
 new() {
