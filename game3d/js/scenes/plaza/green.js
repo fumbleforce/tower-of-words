@@ -7,13 +7,14 @@
 //   avenue set back on the grass, as on the forecourt's lane
 //   the terrace's edges: a seat-height wall along its south line, open where the link starts; planted beds at its
 //   two ends
-//   the lawns beyond: groups of mixed trees with shrubs on low mounds
+//   the lawns beyond: connected low beds following the circle and the arms, under the mixed tree groups
 import * as THREE from 'three';
 import { rng } from '../outdoor/parts.js';
 import { lowWall, KERB } from '../outdoor/edges.js';
 import { verge } from '../outdoor/lane.js';
 import { arcBox } from '../outdoor/round.js';
-import { keyaki, sakura, maple, ginkgo, pine, cluster, grass, bed, mound, LEAF } from '../outdoor/planting.js';
+import { sakura, maple, pine, cluster, grass, bed, mound, LEAF } from '../outdoor/planting.js';
+import { groveSteps } from './groves.js';
 import * as P from './plan.js';
 import * as E from './east-plan.js';
 
@@ -150,47 +151,10 @@ function* terraceEdges(p) {
   }
 }
 
-// groups of mixed trees on low grassy mounds, shrubs at their feet, on the lawns clear of the buildings:
-// 'x z rx rz | kind dx dz size, ...' (kinds: k zelkova, s cherry, m maple, g ginkgo, p pine)
-const TREES = { k: keyaki, s: sakura, m: maple, g: ginkgo, p: pine };
-const GROVES = [
-  '-16.8 -7.6 2.4 1.8 | k -0.9 0.2 1.2, g 1.0 -0.5 1.05, m 0.2 1.0 0.9',
-  '-15.2 -11.0 1.6 1.2 | s 0 0 1.0, p 1.0 0.5 0.85',
-  '-21.5 7.6 2.4 1.6 | s 0 0 1.1, m 1.3 0.5 0.9',
-  '10.2 -11.5 2.4 1.8 | k -0.9 0 1.2, g 1.0 0.6 1.0, s 0.3 -1.0 1.0',
-  '14.6 6.6 2.0 1.4 | g -0.6 0 1.1, m 0.9 0.4 0.95, k 0.3 -0.8 1.1',
-  '-12.5 12.8 2.2 1.0 | m -0.9 0 0.9, s 0.9 0.1 0.95',
-  '12.5 12.8 2.2 1.0 | s -0.9 0 0.95, m 0.9 0.1 0.9',
-].map((row) => {
-  const [head, trees] = row.split('|');
-  return [
-    ...head.trim().split(/\s+/).map(Number),
-    trees.split(',').map((t) => {
-      const [k, ...n] = t.trim().split(/\s+/);
-      return [k, ...n.map(Number)];
-    }),
-  ];
-});
-function* groves(p) {
-  for (const [gi, [x, z, rx, rz, list]] of GROVES.entries()) {
-    const g = new THREE.SphereGeometry(1, 24, 6, 0, Math.PI * 2, 0, Math.PI / 2);
-    p.geo('#5f6d58', g.scale(rx, 0.22, rz).translate(x, -0.04, z), { cast: false });
-    for (const [i, [k, dx, dz, s]] of list.entries()) {
-      TREES[k](p, x + dx, z + dz, s, gi * 7 + i);
-      yield;
-    }
-    const r = rng(gi + 3);
-    for (let i = 0; i < 2; i++)
-      cluster(p, x + (r() - 0.5) * rx * 1.4, z + rz * (0.45 + r() * 0.3), { n: 3, r: 0.3, seed: gi + i, y: 0.1 });
-    grass(p, x - rx * 0.6, z + rz * 0.5, { seed: gi });
-    yield;
-  }
-}
-
 // a generator that yields every few trees and flowers, so the plaza builds in slices (js/perf/slice.js)
 export function* greenSteps(p) {
   yield* ring(p);
   yield* verges(p);
   yield* terraceEdges(p);
-  yield* groves(p);
+  yield* groveSteps(p);
 }
