@@ -1,0 +1,413 @@
+# char-mio-facets: the clean reference's facets, drawn by hand (mio_facets_hand.py reads this).
+# Corners in the picture's 1024 px frame (image left = her right). Read off the 3072 px clean reference on a 10 px
+# grid at 4 to 8x zoom.
+
+# ---- head: hair crown --------------------------------------------------------------------------------------------
+v P    516.5  71.9    # crown peak
+v B    420.3 126.9    # crown's left corner (her right)
+v K    526.0  92.0
+v R1   472.2 121.9    # where the tan planes meet
+v X1   533.8 105.3
+v Q    547.5 112.5
+v N1   551.3  90.4    # notch in the crown's right outline
+v N2   550.6  99.4
+v N3   566.9 101.3
+v S    551.5 116.5
+v E1   595.0 140.6    # crown's right corner (her left)
+v D    563.8 136.3
+v A    540.0 137.2    # top of the face, the parting
+v TL   439.4 140.4    # tan plane, left tip
+v TB   458.8 156.9    # tan plane, bottom
+v SR   480.0 157.3    # green spike, right foot
+v TR   513.1 137.5    # tan plane, right tip
+
+f head h01  B P K R1
+f head h02  P Q X1 R1 K
+f head h03  R1 X1 TR
+f head h04  X1 Q A TR
+f head h05  P N1 N2 Q
+f head h06  Q N2 S A
+f head h07  N2 N3 S
+f head h08  N3 E1 S
+f head h09  S E1 D
+f head h10  S D A
+f head h11  TL R1 TB
+f head h12  R1 TR SR
+f head h13  B R1 TL
+
+# ---- head: fringe, face, ear ---------------------------------------------------------------------------------------
+v F1   476.0 172.0    # fringe tip over her right brow
+v F2   458.0 190.0    # fringe's lower end, beside her right eye
+v PB1  464.0 188.0
+v PB2  537.0 142.5
+v FRt  567.5 191.7    # face's right edge at the ear's top
+v FR2  565.0 213.0
+v FR3  557.0 233.0    # jaw, her left (image right)
+v C    512.5 257.5    # chin
+v J1   539.0 242.0    # jaw, on the green's first point
+v FL1  463.0 207.0
+v FL2  467.0 231.0    # jaw, her right (image left)
+v CS1  456.0 205.0
+v CS2  458.0 229.0
+
+f head h14  R1 SR F1 F2 TB                         # the dark green spike
+f head h15  TR A F1 SR                     # fringe plane over the forehead
+f head h16  A F1 F2 PB1 PB2                           # hair's shadow on the forehead
+f head h17  A FRt FR2 FR3 J1 C FL2 FL1 F2 PB1 PB2   # the face
+f head h18  F2 FL1 FL2 CS2 CS1                     # her right cheek's side, in shade
+
+# ear, her left (image right)
+v M1   579.0 190.0
+v EA2  588.3 190.0
+v EA3  591.7 207.5
+v EA4  570.8 229.0
+f head h19  FRt M1 EA2 EA3 EA4 FR2
+
+# ---- head: hair at her left (image right) --------------------------------------------------------------------------
+v OR1  594.0 190.0
+v OR2  596.0 262.0
+v OR3  602.0 276.0
+v OR4  597.0 284.0
+v GL1  589.0 229.0    # bright green lock, top
+v GL2  593.0 268.0
+v GL3  585.0 274.0
+v GL4  580.0 260.0
+v GE2  568.0 258.0
+v UE1  575.0 284.0
+
+f head h20  A D M1 FRt
+f head h21  D E1 OR1 EA2 M1
+f head h22  EA2 OR1 OR2 GL2 GL1 EA3
+f hairlock h23  GL1 GL2 GL3 GL4
+f head h24  EA4 EA3 GL1 GL4 GL3 UE1 GE2
+f head h25  GL2 OR2 OR3 OR4 UE1 GL3
+
+# green underside, her left (image right): the dark ground and two light points
+v T1b  522.0 268.0
+v T2b  548.0 264.0
+f head h26  C J1 T1b
+f head h27  T1b J1 T2b
+f head h28  J1 FR3 T2b
+f head h29  T2b FR3 GE2
+f head h30  FR3 EA4 GE2
+f head h37  FR2 EA4 FR3                           # the face's side under the ear
+
+# ---- head: hair at her right (image left) --------------------------------------------------------------------------
+v HX   447.0 285.0
+v HL0  416.0 285.0
+v GK   457.0 285.0
+v GK2  463.0 285.0
+v G61  461.0 229.7
+v Lb0  461.0 265.0
+v La1  466.0 237.0
+v Lb1  471.0 262.0
+v La2  478.0 243.0
+v Lb2  494.0 267.0
+v Lb3  503.0 270.0
+
+f head h31  TL TB F2 CS1 CS2 GK HX B
+f head h32  B HX HL0
+f hairlock h33  CS2 G61 Lb0 GK2 GK
+f head h34  G61 FL2 C Lb3 Lb2 La2 Lb1 La1 Lb0
+f head h35  Lb0 La1 Lb1
+f head h36  Lb1 La2 Lb2
+
+# ---- the hair lock over her right shoulder (image left) -----------------------------------------------------------
+v LK1  430.0 300.0
+v LK2  433.0 338.0
+v LK3  443.0 342.0
+v LK4  450.0 363.0
+v GS3  453.0 342.0
+v GS4  472.0 356.0
+v LR2  474.0 345.0
+f hairlock k01  HL0 HX LK3 LK2 LK1
+f hairlock k02  HX GK GS3 LK4 LK3
+f hairlock k03  GK GK2 GS4 GS3                 # the green strand
+f hairlock k04  GK2 CT1 LR2 GS4
+
+# ---- hood and collar ---------------------------------------------------------------------------------------------
+v FLa  462.0 269.0    # left hood flap
+v FLb  511.0 298.0
+v V    510.7 303.3    # the collar's point
+v NKl  497.0 283.0
+v NKr  525.0 285.0
+v RFR  598.0 292.0
+v RFb  529.0 303.3
+f torso n01  Lb3 C T1b NKr FLb NKl              # neck
+f torso n02  Lb0 Lb1 Lb2 Lb3 NKl FLb FLa        # shadow under the green, her right
+f torso n03  FLa FLb V GK2                      # left hood flap
+f torso n04  FLb NKr T1b T2b GE2 UE1 V          # shadow under the green, her left
+f torso n05  V UE1 OR4 RFR RFb                  # right hood flap
+
+# ---- chest ---------------------------------------------------------------------------------------------------------
+v CT1  473.3 304.4
+v CT2  511.0 314.4
+v CM   506.7 336.7
+v CR1  553.3 314.4
+v CR2  538.0 321.5
+v CR3  571.1 296.3
+v CR4  593.3 310.0
+v CR5  564.0 366.0
+v CB1  460.0 366.0
+v CB2  509.0 379.0
+v SH1  601.0 306.0
+f torso c01  GK2 V CT2 CT1                      # shadow under the left flap
+f torso c02  CT1 CT2 CM
+f torso c03  CT2 RFb CR2 CM
+f torso c04  CM CR2 CR1 CR5 CB2                 # the lit centre
+f torso c05  RFb CR3 CR1 CR2
+f torso c06  CR1 CR3 CR4 CR5
+f torso c07  CR3 RFR SH1 CR4
+f torso c08  CT1 CM CB1 GS4 LR2
+f torso c09  CM CB2 CB1
+f torso c10  V RFb CT2
+
+# ---- belly ---------------------------------------------------------------------------------------------------------
+v KL1  424.0 340.0    # the crease between her right sleeve and the body (image left)
+v KL2  412.0 440.0
+v KL3  410.0 525.0
+v KL4  414.0 592.0
+v KR2  603.0 430.0    # the same crease at her left (image right)
+v KR3  609.0 500.0
+v KR4  606.0 592.0
+v W1   494.4 430.6
+v W2   508.0 487.5
+v M3   524.4 458.3
+f torso b01  LK2 LK3 LK4 CB1 KL2 KL1
+f torso b02  CB1 PTL PL1 KL3 KL2
+f torso b03  KL3 PL1 PL2 KL4
+f torso b04  CB1 CB2 W1
+f torso b05  CB1 W1 W2 PTM PTL                  # the dark fold down the middle
+f torso b06  CB2 W2 W1
+f torso b07  CB2 M3 W2
+f torso b08  W2 M3 PTR PTM
+f torso b09  CB2 CR5 PTR M3
+f torso b10  CR5 CR4 SH1 KR2
+f torso b11  CR5 KR2 KR3 PR1 PTR
+f torso b12  KR3 KR4 PR2 PR1
+f torso b13  LK4 GS3 GS4 CB1
+
+# ---- kangaroo pocket -----------------------------------------------------------------------------------------------
+v PTL  466.0 500.0
+v PT1  476.0 500.0
+v PTM  509.0 500.0
+v PT2  544.0 500.0
+v PTR  553.0 500.0
+v PT3  510.0 532.0
+v PL1  437.0 559.0
+v PL2  441.0 590.0
+v PR1  580.0 561.0
+v PR2  581.0 590.0
+v PM1  469.0 569.0
+v PM2  523.0 581.0
+v PM3  573.0 546.0
+f torso p01  PT1 PT2 PT3                        # light under the pocket's opening
+f torso p02  PTL PT1 PT3 PL1
+f torso p03  PT2 PTR PM3 PT3
+f torso p04  PT3 PM3 PM2 PM1 PL1
+f torso p05  PL1 PM1 PM2 PM3 PR1 PR2 PL2
+
+# ---- hem band ------------------------------------------------------------------------------------------------------
+v HV1  452.0 591.0
+v HV2  573.0 591.0
+v HV3  549.0 604.0
+v HB1  471.0 612.0
+v HBL  416.0 620.0
+v HBR  606.0 619.0
+f torso m01  KL4 PL2 HV1 HB1 HBL
+f torso m02  HV1 HV2 HV3 HB1
+f torso m03  HB1 HV3 HV2 PR2 KR4 HBR
+
+# ---- her right sleeve (image left) -----------------------------------------------------------------------------------
+v SO1  419.4 317.8
+v SO2  403.9 375.6    # the dropped shoulder seam meets the outline
+v SM   422.2 392.2    # ... and the crease
+v SO3  382.8 460.0
+v SX3  372.8 508.9
+v SE   360.6 547.8    # the sleeve's widest point
+v SX4  380.0 549.0
+v CF1  377.2 573.3    # ribbed cuff
+v CF2  401.7 571.1
+v CF3  409.4 595.6
+v CF4  381.7 602.9
+f sleeve.R s01  LK1 LK2 KL1 SM SO2 SO1       # shoulder
+f sleeve.R s02  SO2 SM KL2 SO3
+f sleeve.R s03  SO3 KL2 KL3
+f sleeve.R s04  SO3 KL3 SX3
+f sleeve.R s05  SX3 KL3 SE
+f sleeve.R s06  SE KL3 SX4
+f sleeve.R s07  SX4 KL3 CF2 CF1
+f sleeve.R s08  SE SX4 CF1
+f sleeve.R s09  KL3 KL4 CF3 CF2
+f sleeve.R s10  CF1 CF2 CF3 CF4                   # cuff
+
+# ---- her left sleeve (image right) -----------------------------------------------------------------------------------
+v SL1  605.6 323.3
+v SL2  619.6 373.3    # the dropped shoulder seam meets the outline
+v SLM  600.4 391.1    # ... and the crease
+v SL3  640.0 450.0
+v KQ1  607.0 460.0
+v LW1  653.0 509.0
+v SLW  612.2 529.0
+v LE   662.2 548.9    # the sleeve's widest point
+v LZ1  616.7 556.7
+v CL1  620.0 574.4    # ribbed cuff
+v CL2  645.6 573.3
+v CL3  641.1 603.3
+v CL4  608.9 597.8
+f sleeve.L t01  SH1 SL1 SL2 SLM                   # shoulder
+f sleeve.L t02  SLM SL2 SL3 KQ1 KR2
+f sleeve.L t03  KQ1 SL3 LW1 SLW KR3
+f sleeve.L t04  SLW LW1 LE
+f sleeve.L t05  SLW LE LZ1
+f sleeve.L t06  LZ1 LE CL2 CL1
+f sleeve.L t07  KR3 SLW LZ1 CL1 CL4 KR4
+f sleeve.L t08  CL1 CL2 CL3 CL4                   # cuff
+
+# ---- hands -----------------------------------------------------------------------------------------------------------
+v HRa  388.4 600.4    # her right hand (image left)
+v HRb  415.5 600.4
+v HRc  415.5 607.0
+v HRd  388.0 607.0
+v HRe  383.4 617.9
+v HRf  394.9 635.0
+v HRg  413.4 647.9
+v HRh  421.0 640.0
+v HRi  399.0 607.0
+v HRi2 405.0 607.0
+v HRj  404.0 631.0
+v HRj2 410.0 630.0
+v HRk  416.0 628.0
+f hand.R q01  HRa HRb HRc HRi2 HRi HRd            # wrist
+f hand.R q02  HRd HRi HRj HRf HRe
+f hand.R q03  HRi HRi2 HRj2 HRh HRj               # palm in shadow
+f hand.R q04  HRi2 HRc HRk HRj2
+f hand.R q05  HRf HRj HRh HRg
+v WLa  607.0 600.0    # her left hand (image right)
+v WLx  619.9 602.1
+v WLb  636.0 600.0
+v WLc  639.9 617.1
+v WLd  627.0 637.9
+v WLe  609.9 649.3
+v WLg  600.6 640.7
+v WLh  602.7 632.0
+v WLi  607.0 615.0
+v WLy  615.5 616.0
+v WLm  613.0 633.0
+v WLn  625.0 620.0
+v WLo  611.0 641.0
+f hand.L r01  WLa WLx WLy WLi
+f hand.L r02  WLi WLy WLm WLh
+f hand.L r03  WLx WLn WLo WLg WLh WLm WLy         # palm in shadow
+f hand.L r04  WLx WLb WLc WLd WLe WLo WLn
+
+# ---- her right leg (image left) ------------------------------------------------------------------------------------
+v LG0  432.4 620.3
+v LG1  460.3 621.8
+v LG2  497.0 621.8
+v GA1   436.8 630.6
+v GLM1  452.0 700.0
+v GUR1  497.0 680.0
+v KN1   452.9 730.6    # knee, outer notch
+v KN2   454.4 746.8
+v GJ1   476.0 731.5    # knee: where the leg's big planes meet
+v GKR   500.0 735.0
+v GKRi  492.6 774.7
+v GJ2   470.6 787.9    # shin junction
+v GKR2  495.6 810.0
+v GSH  439.7 805.6    # calf, outer point
+v GAL   458.8 871.8    # ankle
+v GAM   467.0 872.0
+v GAR   486.8 871.8
+f leg.R g01  GA1 LG1 GJ1 GLM1                         # lit thigh
+f leg.R g02  LG0 GA1 GLM1 KN1
+f leg.R g03  GLM1 GJ1 KN1
+f leg.R g04  LG1 LG2 GUR1 GJ1
+f leg.R g05  GUR1 GKR GJ1
+f leg.R g06  KN1 GJ1 KN2
+f leg.R g07  GJ1 GKR GKRi GJ2
+f leg.R g08  KN2 GJ1 GJ2
+f leg.R g09  KN2 GJ2 GSH
+f leg.R g10  GSH GJ2 GAM GAL
+f leg.R g11  GJ2 GKRi GKR2 GAR GAM
+
+# ---- her left leg (image right) ------------------------------------------------------------------------------------
+v LL0  527.0 621.8
+v LLm  549.5 621.8
+v LL2  590.3 621.8
+v LLa  527.0 648.0
+v LLb  549.5 627.6
+v LLc  553.5 670.0
+v LLd  527.0 686.0
+v LLe  586.0 660.0
+v LQ1  524.0 733.5
+v GJ1L  546.2 733.5    # knee: where the leg's big planes meet
+v LQn  571.2 733.5    # knee, outer notch
+v LQn2 574.1 748.2
+v LQ2  534.4 774.7
+v GJ2L  550.6 786.5    # shin junction
+v LS1  530.0 811.5
+v LS2  584.4 802.6    # calf, outer point
+v LAL  535.9 871.8    # ankle
+v LAM  551.0 872.0
+v LAR  566.8 871.8
+f leg.L e01  LLa LLb LLc GJ1L LLd                   # lit thigh
+f leg.L e02  LL0 LLm LLb LLa
+f leg.L e03  LLd GJ1L LQ1
+f leg.L e04  LLm LL2 LLe LLc LLb
+f leg.L e05  LLc LLe LQn GJ1L
+f leg.L e06  LQ1 GJ1L GJ2L LQ2
+f leg.L e07  GJ1L LQn LQn2 GJ2L
+f leg.L e08  LQ2 GJ2L LS1
+f leg.L e09  LQn2 LS2 GJ2L
+f leg.L e10  LS1 GJ2L LAM LAL
+f leg.L e11  GJ2L LS2 LAR LAM
+
+
+# ---- sneakers: her right (image left), then her left --------------------------------------------------------
+v SRa    455.0  874.5
+v SRb    492.5  874.5
+v SRc    490.0  883.0
+v SRd    460.0  883.0
+v SRe    493.0  896.0
+v SRf    457.0  896.0
+v SRg    445.0  890.0
+v SRh    500.8  890.0
+v SRi    450.0  932.0
+v SRj    497.0  930.0
+v SRk    439.2  947.5
+v SRl    503.5  946.0
+v SRm    437.5  960.0
+v SRn    505.0  960.8
+v SRo    450.0  946.0
+v SRp    493.0  945.0
+f shoe.R sr01  SRa SRb SRc SRd   # sock
+f shoe.R sr02  SRd SRc SRe SRf   # tongue
+f shoe.R sr03  SRf SRe SRj SRi   # lacing
+f shoe.R sr04  SRg SRa SRd SRf SRi SRo SRk   # side, image left
+f shoe.R sr05  SRh SRl SRp SRj SRe SRc SRb   # side, image right
+f shoe.R sr06  SRi SRj SRp SRo   # toe cap
+f shoe.R sr07  SRk SRo SRp SRl SRn SRm   # sole
+v SLa    530.8  874.7
+v SLb    568.3  875.8
+v SLc    565.0  883.3
+v SLd    533.3  883.3
+v SLe    567.0  896.0
+v SLf    533.0  896.0
+v SLg    523.3  890.0
+v SLh    579.2  890.0
+v SLi    528.0  930.0
+v SLj    575.0  930.0
+v SLk    517.5  946.7
+v SLl    583.3  946.7
+v SLm    517.0  960.8
+v SLn    587.5  960.0
+v SLo    530.0  946.5
+v SLp    573.0  946.0
+f shoe.L sl01  SLa SLb SLc SLd   # sock
+f shoe.L sl02  SLd SLc SLe SLf   # tongue
+f shoe.L sl03  SLf SLe SLj SLi   # lacing
+f shoe.L sl04  SLg SLa SLd SLf SLi SLo SLk   # side, image left
+f shoe.L sl05  SLh SLl SLp SLj SLe SLc SLb   # side, image right
+f shoe.L sl06  SLi SLj SLp SLo   # toe cap
+f shoe.L sl07  SLk SLo SLp SLl SLn SLm   # sole

@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>Mio facet studies · live</title>
+<script type="importmap">{"imports":{"three":"/game3d/vendor/three/three.module.js","three/addons/":"/game3d/vendor/"}}</script>
+<style>
+  :root { --ink: #1d2327; --muted: #5d676e; --line: #d7dde1; --teal: #13796d; }
+  * { box-sizing: border-box; }
+  body { margin: 0; font: 15px/1.4 system-ui, sans-serif; color: var(--ink); background: #f6f7f8; }
+  header { padding: 14px 18px 6px; }
+  h1 { font-size: 19px; margin: 0 0 4px; }
+  header p { margin: 0; color: var(--muted); }
+  .bar { display: flex; flex-wrap: wrap; gap: 8px; padding: 10px 18px; align-items: center; }
+  button, select { font: inherit; padding: 6px 12px; border: 1px solid var(--line); border-radius: 6px; background: #fff;
+    color: var(--ink); cursor: pointer; }
+  button[aria-pressed="true"] { background: var(--teal); border-color: var(--teal); color: #fff; }
+  #view { width: 100%; height: min(72vh, 760px); display: block; touch-action: none; cursor: grab; background: #e5e8ec; }
+  #status { padding: 6px 18px; color: var(--muted); }
+  .stage { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 0; }
+  .stage img { width: 100%; height: min(72vh, 760px); object-fit: contain; background: #e0e3e6; display: block; }
+  @media (max-width: 700px) { .stage { grid-template-columns: 1fr; } }
+</style>
+<link rel="stylesheet" href="./viewer-kit.css"></head><body>
+<header><h1>Mio facet studies</h1>
+<p>Drag to rotate, scroll or pinch to zoom. mf-06 and mf-07 are head studies with coloured geometry and no texture. Earlier attempts retain a facial decal and open side seams. These models have no rig.</p></header>
+<div class="bar" id="concepts" aria-label="Concept"></div>
+<div class="bar" aria-label="View">
+  <button id="spin" aria-pressed="false">Turntable</button>
+  <button data-yaw="0">Front</button><button data-yaw="40">Three-quarter</button><button data-yaw="90">Side</button>
+  <button data-yaw="180">Back</button><button id="surface" aria-pressed="true">Flat colours</button>
+</div>
+<div class="stage"><canvas id="view"></canvas><img id="ref" alt="The target picture"></div>
+<p id="status" role="status" aria-live="polite">Loading…</p>
+<script type="module">
+import * as THREE from 'three';
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import { attachOrbit } from './viewer-kit.js';
+
+const entries = await (await fetch('./mio-facets.json')).json();
+const list = Object.entries(entries).map(([id, c]) => ({...c, id, dir: '/art/parts/style-concepts/claude-miofacets/' + id + '/', ref: c.slice === 'head' ? '/art/parts/style-concepts/claude-miofacets/reference-head.png' : '/art/parts/style-concepts/mio-ref-clean/final.png'}));
+const refImg = document.getElementById('ref');
+let flat = true;
+const q = new URLSearchParams(location.search);
+let current = list.find((c) => c.id === q.get('c')) || list.at(-1);
+let spin = false, yaw = 0, pitch = 0.12, dist = 3.4;
+const canvas = document.getElementById('view');
+const r = new THREE.WebGLRenderer({ canvas, antialias: true });
+r.setPixelRatio(Math.min(devicePixelRatio, 2));
+r.outputColorSpace = THREE.SRGBColorSpace;
+r.shadowMap.enabled = true;
+const scene = new THREE.Scene();
+scene.background = new THREE.Color('#e5e8ec');
+scene.add(new THREE.HemisphereLight('#f4f6fa', '#9a958e', 1.6));
+const sun = new THREE.DirectionalLight('#fff4e6', 2.4);
+sun.position.set(-2, 4, 3); sun.castShadow = true; sun.shadow.mapSize.set(2048, 2048);
+sun.shadow.bias = -0.0004; sun.shadow.normalBias = 0.015;
+Object.assign(sun.shadow.camera, { left: -2, right: 2, top: 2, bottom: -2 });
+scene.add(sun);
+const floor = new THREE.Mesh(new THREE.CircleGeometry(3, 48), new THREE.ShadowMaterial({ opacity: 0.25 }));
+floor.rotation.x = -Math.PI / 2; floor.receiveShadow = true; scene.add(floor);
+const cam = new THREE.PerspectiveCamera(24, 1, 0.05, 50);
+const turn = new THREE.Group(); scene.add(turn);
+const loader = new GLTFLoader();
+let loaded = [], loadId = 0, fitDist = dist;
+const status = document.getElementById('status');
+
+function disposeModel(model) {
+  model.traverse((o) => {
+    if (!o.isMesh) return;
+    o.geometry.dispose();
+    const mats = new Set([...([o.material].flat()), ...(o.userData.lit || []), ...(o.userData.flat || [])]);
+    const textures = new Set([...mats].map((m) => m.map).filter(Boolean));
+    textures.forEach((t) => t.dispose()); mats.forEach((m) => m.dispose());
+  });
+}
+function fitPair(resetZoom = false) {
+  if (!turn.children.length) return;
+  const size = new THREE.Box3().setFromObject(turn).getSize(new THREE.Vector3());
+  const radius = Math.hypot(size.x, size.z) / 2;
+  const tanHalfFov = Math.tan(THREE.MathUtils.degToRad(cam.fov) / 2);
+  const aspect = canvas.clientWidth / canvas.clientHeight;
+  const zoom = resetZoom ? 1 : dist / fitDist;
+  fitDist = Math.max(0.6, (Math.max(size.y / (2 * tanHalfFov), radius / (tanHalfFov * aspect)) + radius) * 1.08);
+  dist = fitDist * zoom;
+}
+async function show(c) {
+  const id = ++loadId;
+  current = c;
+  history.replaceState(null, '', '?c=' + c.id);
+  for (const b of document.querySelectorAll('#concepts button')) b.setAttribute('aria-pressed', b.dataset.id === c.id);
+  document.querySelector('#concepts [aria-pressed="true"]')?.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+  status.textContent = 'Loading ' + c.label + '…';
+  loaded.forEach((g) => disposeModel(g.scene));
+  turn.clear(); loaded = [];
+  try {
+    refImg.src = c.ref;
+    const gl = [await loader.loadAsync(c.dir + 'mio.glb')];
+    if (id !== loadId) { gl.forEach((g) => disposeModel(g.scene)); return; }
+    gl.forEach((g, i) => {
+      g.scene.traverse((m) => {
+        if (m.isMesh) m.castShadow = m.receiveShadow = true;
+
+      });
+      turn.add(g.scene);
+      loaded.push(g);
+    });
+    fitPair(true);
+    setSurface();
+    status.textContent = c.label + (c.note ? ' · ' + c.note : '');
+  } catch (e) { if (id === loadId) status.textContent = 'Could not load ' + c.label + ': ' + e.message; }
+}
+function setSurface() {
+  turn.traverse((o) => {
+    if (!o.isMesh) return;
+    if (!o.userData.lit) {
+      o.userData.lit = [o.material].flat();
+      o.userData.flat = o.userData.lit.map((m) => new THREE.MeshBasicMaterial({
+        vertexColors: m.vertexColors, map: m.map, color: m.color,
+        transparent: m.transparent, opacity: m.opacity, side: m.side,
+        alphaTest: m.alphaTest, depthWrite: m.depthWrite,
+      }));
+    }
+    const mats = flat ? o.userData.flat : o.userData.lit;
+    o.material = mats.length === 1 ? mats[0] : mats;
+  });
+  document.getElementById('surface').setAttribute('aria-pressed', flat);
+}
+document.getElementById('surface').onclick = () => { flat = !flat; setSurface(); };
+for (const c of list) {
+  const b = document.createElement('button');
+  b.textContent = c.id; b.dataset.id = c.id; b.onclick = () => show(c);
+  document.getElementById('concepts').append(b);
+}
+for (const b of document.querySelectorAll('[data-yaw]')) b.onclick = () => {
+  spin = false; yaw = (+b.dataset.yaw * Math.PI) / 180;
+  document.getElementById('spin').setAttribute('aria-pressed', false);
+};
+document.getElementById('spin').onclick = (e) => { spin = !spin; e.target.setAttribute('aria-pressed', spin); };
+attachOrbit(canvas, {
+  rotate: (dx, dy) => { yaw -= dx * 0.01; pitch = Math.min(1.2, Math.max(-0.2, pitch + dy * 0.006)); },
+  zoom: (k) => { dist = Math.min(8, Math.max(0.5, dist * k)); },
+});
+const clock = new THREE.Clock();
+function frame() {
+  const dt = clock.getDelta();
+  if (spin) yaw += dt * 0.6;
+  const w = canvas.clientWidth, h = canvas.clientHeight;
+  if (canvas.width !== Math.round(w * r.getPixelRatio()) || canvas.height !== Math.round(h * r.getPixelRatio())) {
+    r.setSize(w, h, false); cam.aspect = w / h; cam.updateProjectionMatrix(); fitPair();
+  }
+  turn.rotation.y = -yaw;
+  const box = new THREE.Box3().setFromObject(turn);
+  const cy = box.isEmpty() ? 0.6 : (box.min.y + box.max.y) / 2;
+  cam.position.set(0, cy + Math.sin(pitch) * dist, Math.cos(pitch) * dist);
+  cam.lookAt(0, cy, 0);
+  r.render(scene, cam);
+  requestAnimationFrame(frame);
+}
+show(current);
+frame();
+</script></body></html>

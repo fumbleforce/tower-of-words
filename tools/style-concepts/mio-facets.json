@@ -1,0 +1,54 @@
+{
+  "mf-01": {
+    "label": "mf-01 \u00b7 the measured facets as the mesh",
+    "note": "front and back facet maps as measured (no hand edits), lifted onto per-row elliptical sections from the side views; one flat colour per facet",
+    "front": "front-auto",
+    "back": "back-auto"
+  },
+  "mf-02": {
+    "label": "mf-02 \u00b7 back kept inside the front outline",
+    "note": "as mf-01, with the back map's corners kept inside each part's front outline and the dark core at 80 % (in mf-01 both showed round and through the front)",
+    "front": "front-auto",
+    "back": "back-auto",
+    "clamp_back": true,
+    "core": 0.8
+  },
+  "mf-03": {
+    "label": "mf-03 \u00b7 dark core flattened to the middle",
+    "note": "as mf-02, with the dark core flattened to a thin card in the middle of each section (3 % deep): big facets cut straight across the section, so a round core showed through them",
+    "front": "front-auto",
+    "back": "back-auto",
+    "clamp_back": true,
+    "core": 0.97,
+    "core_depth": 0.03
+  },
+  "mf-04": {
+    "label": "mf-04 \u00b7 front facets drawn by hand",
+    "note": "as mf-03, with the front facet map drawn by hand (140 facets over 229 named corners, read off the clean reference on a 10 px grid at 4 to 8x zoom) in place of the measured one; the back is still the measured map",
+    "front": "front-hand",
+    "back": "back-auto",
+    "clamp_back": true,
+    "core": 0.97,
+    "core_depth": 0.03
+  },
+  "mf-05": {
+    "label": "mf-05 \u00b7 back stretched to the front outline",
+    "note": "as mf-04, with the back map mirrored and stretched row by row so each part spans the columns and rows it spans from the front (was: clamped inside it), so the front and back shells meet at her sides",
+    "front": "front-hand",
+    "back": "back-auto",
+    "clamp_back": true,
+    "core": 0.97,
+    "core_depth": 0.03,
+    "warp_back": true
+  },
+  "mf-06": {
+    "label": "mf-06 \u00b7 closed head with coloured facial geometry",
+    "note": "Head-only study continued by Codex from mf-05. The existing hand-traced front facets are retained. A matching rear shell and edge strips close the head; rear facet layout and dark hair colours are inferred. Eyes, brows, nose, mouth and ear marks are traced into flat-colour triangles. No texture, no rig.",
+    "slice": "head"
+  },
+  "mf-07": {
+    "label": "mf-07 \u00b7 hand-traced facial marks",
+    "note": "Same closed head as mf-06. Only the facial marks change: explicit coloured polygons replace the automatic contours, including a thin mouth line. The rear is still inferred and the model has no rig.",
+    "slice": "head"
+  }
+}
