@@ -16,6 +16,7 @@
 import { EAST_PATHS, EAST_GREEN } from './island-east.js';
 import { WEST_PATHS, WEST_GREEN } from './island-west.js';
 import { NORTH_PATHS, NORTH_GREEN } from './island-north.js';
+import { DORM_PATHS, DORM_GREEN } from './island-dorms.js';
 
 export const UNIT = 1.5;
 
@@ -111,7 +112,7 @@ export const CHUNKS = {
     scale: 1,
     level: 0,
     walk: [-5.1, 5.2, -4.1, 2.45],
-    view: [-6.5, 9.6, -8.4, 4.0],
+    view: [-12.7, 21.8, -49.2, 4.0], // east over the dorm cluster round the inner court (dorm-court/cluster.js)
     anchor: 'the open entrance court west of the dorm blocks as drawn, looking east at Eric’s block',
   },
   dorms: {
@@ -169,7 +170,6 @@ const ROWS = [
     [84.14, -11.8, 88.29, -11.8, 88.29, 8.1, 78.84, 8.1, 78.84, 4.6, 84.14, 4.6],
   ],
   ['dorm_1e', 'dorm', 7, 1.75, 1, DORM_ROOF, 'dorm', [89.44, -7.8, 94.2, 7.1]],
-  ['sento_laundry', 'low', 1, 2, 3, DORM_ROOF, 'shop', [83.6, 13.1, 89.3, 17.3]],
   ['nw_old', 'low', 4, 2, 3, ROOF, 'flat', [-96, -118.6, -85.4, -109.8]],
   ['chimney', 'low', 8, 2, 1, ROOF, 'flat', [-82, -123.3, -79, -118.1]],
   ['factory', 'low', 3, 2, 0, ROOF, 'flat', [-76.7, -128.8, -52.4, -114.5]],
@@ -210,10 +210,10 @@ const ROWS = [
   ['block_e3', 'office', 3, 2, 0, ROOF, 'flat', [71.6, -29.2, 76.4, -18]],
   ['block_e1', 'office', 2, 2, 1, ROOF, 'flat', [50.2, -19.6, 60.1, -12.6]],
   ['dorm_6', 'dorm', 4, 1.75, 2, DORM_ROOF, 'dorm', [108.4, -50.7, 114.9, -32.8]],
-  ['dorm_2', 'dorm', 7, 1.75, 2, DORM_ROOF, 'dorm', [91.4, 12, 99.4, 18.3]],
+  ['dorm_2', 'dorm', 7, 1.75, 2, DORM_ROOF, 'dorm', [96.9, 13.4, 104.9, 19.7]],
   ['dorm_entry', 'dorm', 3, 1.75, 3, DORM_ROOF, 'dorm', [97.2, -13.3, 101.3, -9.4]],
   ['dorm_gallery', 'dorm', 2, 1.75, 1, DORM_ROOF, 'dorm', [96.8, -2.9, 105, 2.1]],
-  ['dorm_3', 'dorm', 9, 1.75, 3, DORM_ROOF, 'dorm', [109, 0.7, 119.5, 6.5]],
+  ['dorm_3', 'dorm', 9, 1.75, 3, DORM_ROOF, 'dorm', [109, 2.6, 119.5, 8.4]],
   ['dorm_4', 'dorm', 9, 1.75, 0, DORM_ROOF, 'dorm', [116.3, -9.2, 125.4, -3.1]],
   ['dorm_annex', 'dorm', 1, 1.75, 3, DORM_ROOF, 'dorm', [125.4, -7.5, 128.1, -3.6]],
   ['r8', 'office', 2, 2, 2, ROOF, 'flat', [66.5, 3.4, 72.04, 7.6]],
@@ -245,8 +245,13 @@ const DETAILS = {
     'Eric’s block, five storeys: its long west face on the dorm entrance court, returning west at its south end (built by the dorm_court chunk, square to it). The map draws the dorm blocks turned 25 to 40° off the grid; here they are on it.',
   dorm_1e: 'The block east of Eric’s, parallel to it; its west face is the wall outside Eric’s window, 1.3 out.',
   housing_n: 'The more generous block on the cluster’s quieter north edge.',
-  sento_laundry:
-    'Sento and coin laundry sharing one frontage at the dorm approach (placed by the brief; too small to read on the reference).',
+  // the dorm cluster round the inner court (scenes/dorm-court/cluster.js builds their fronts), on the dorm row's grid
+  dorm_2: 'Seven storeys on the dorm row’s south side, balconies to the sea; its door on the inner court’s axis.',
+  dorm_entry: 'Three storeys north of dorm_gallery; its door on the walk down to the back walk.',
+  dorm_gallery: 'The dorms’ two-storey common building on the inner court’s north side, its glazed door on the court.',
+  dorm_3: 'Nine storeys east of the inner court, balconies south; its door on the court’s east-west walk.',
+  dorm_4: 'Nine storeys north-east of the court, balconies south; its door at the back walk’s east end.',
+  dorm_annex: 'A one-storey annex on dorm_4’s east end, reached through it.',
   // the east lane's six small blocks (scenes/plaza/east-lane.js builds their fronts), squared onto its paths
   block_e1:
     'Two storeys of offices north of the lane past the plaza; its door in the middle of its south face, at the head of the cross path.',
@@ -307,6 +312,7 @@ export const PATHS = [
   ...EAST_PATHS, // the east lane (scenes/island-east.js)
   ...WEST_PATHS, // the coast path west of the station (scenes/island-west.js)
   ...NORTH_PATHS, // the back lane behind the canteen (scenes/island-north.js)
+  ...DORM_PATHS, // the dorm cluster (scenes/island-dorms.js)
   {
     id: 'promenade',
     kind: 'promenade',
@@ -338,11 +344,7 @@ export const GREEN = [
   ...EAST_GREEN,
   ...WEST_GREEN,
   ...NORTH_GREEN,
-  {
-    id: 'dorm_inner_court',
-    rect: [95, 2.6, 108.5, 11.5],
-    detail: 'The planted inner court between the dorm blocks.',
-  },
+  ...DORM_GREEN, // the dorm cluster (scenes/island-dorms.js)
 ];
 
 // The coastline on the route's side of the island, land north-east of the line (sea south and west).

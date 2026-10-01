@@ -164,7 +164,7 @@ function gate(p, set, block) {
 // clipped balls, a sasanqua and a cherry out of the frame. Low at the front, taller at the back, so the court stays
 // in view from the camera.
 function frontBed(p, set, block) {
-  wallRect(p, SB, { sides: 'n', gaps: { n: [GATE] } });
+  wallRect(p, SB, { sides: 'ne', gaps: { n: [GATE] } });
   wallRect(p, [P.GARDEN[0], SB[1], SB[2], SB[3]], { sides: 's', gaps: { s: [GATE] } }); // on along the garden
   const [z0, z1] = [SB[2], SB[3]];
   const zf = z0 + 0.4,
@@ -175,9 +175,7 @@ function frontBed(p, set, block) {
     [-5.0, 0.95],
     [5.2, 0.7],
     [7.9, 0.8],
-    [9.8, 0.9],
-    [12.6, 0.9],
-    [14.8, 0.7],
+    [9.6, 0.6],
   ])
     moss(p, x, (z0 + z1) / 2 + 0.05, rx, 0.4);
   // west of the gate (the pier's column and azaleas are the gate's)
@@ -186,15 +184,12 @@ function frontBed(p, set, block) {
   maple(p, -5.0, zb - 0.25, 0.72, 3);
   balls(p, -5.3, zf + 0.02, { s: 0.7, seed: 1, tones: [PALE_LEAF, LEAF.fresh, LEAF.mid] });
   bloom(p, -4.45, zf + 0.05, 0.26, BED_Y, 2, WHITE);
-  // east of the gate, past the bay and on out of the frame
+  // east of the gate, past the bay and on out of the frame to the dorm row, where the bed ends
   maple(p, 5.0, zb - 0.25, 0.78, 2);
   drift(p, 5.6, 6.9, zf, { n: 3, seed: 5 });
   balls(p, 7.6, zb - 0.1, { s: 0.85, seed: 3 });
   bloom(p, 8.6, zf + 0.1, 0.3, BED_Y, 4, WHITE);
-  maple(p, 9.8, zb - 0.25, 0.8, 5);
-  drift(p, 10.4, 12, zf, { n: 3, seed: 7 });
-  balls(p, 13, zb - 0.1, { s: 0.85, seed: 5 });
-  sakura(p, 14.8, zb - 0.25, 0.7, 6);
+  sakura(p, 9.6, zb - 0.25, 0.7, 6);
   // pools of the bed's own lights on its planting (the ones on the ground sit under the raised soil)
   const zm = (z0 + z1) / 2; // kept inside the bed: a pool past its wall would hang over the street
   const lit = [[-3.55, zm, 0.5], ...P.PIERS.map((x, i) => [x + (i ? 0.55 : -0.55), zm, 0.5])]; // piers: bed side

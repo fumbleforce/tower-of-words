@@ -15,7 +15,7 @@
 //   the street: the lane, 3 wide, grey brick between pale borders; a verge on its far side
 //   the bike shelter: on the east side against the block's return, its roof out over the whole rack (tall things on
 //   the south side would stand between the camera and Eric, so the south side keeps to beds, benches and bollards)
-import { CHUNKS } from '../island-layout.js';
+import { CHUNKS, PATHS } from '../island-layout.js';
 
 export const HALL = [-1.1, 2.5], // the entrance hall: x range
   FRONT_Z = -1.2, // its glass front (cut low), with the doors
@@ -57,8 +57,10 @@ export const RACK = [-1.0, 0.7]; // the rack's first and last places, north to s
 // south-east: a bay of the front bed, and the garbage point beside it
 export const SE_BED = [2.0, 4.1, 1.85, 2.7];
 export const GARBAGE = [4.4, 5.6, 1.98, 2.62];
-// the front bed, the street (the lane) past it, and the verge on the street's far side
-export const SOUTH_BED = [GARDEN_X, 16, 2.7, 3.8];
+// the front bed, the street (the lane) past it, and the verge on the street's far side. The bed ends where the dorm
+// row (dorm-court/cluster.js) leaves the street, south of the block's return: the row's north edge in this frame
+export const ROW_X = PATHS.find((p) => p.id === 'dorm_row').rect[1] - CHUNKS.dorm_court.at[1];
+export const SOUTH_BED = [GARDEN_X, ROW_X, 2.7, 3.8];
 export const STREET = [-16, 16, 3.8, 6.8];
 // the gate: the opening in the front bed on the door leg's axis, and the link paved through it
 export const GATE = [DOOR_LEG[0] - 0.1, DOOR_LEG[1] + 0.1]; // the opening's x range

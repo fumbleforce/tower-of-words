@@ -569,3 +569,16 @@ work, one shown). Fast test, plaza median calls and triangles against the baseli
 160k → 197k tris; phone q1 62 calls (baseline 56, peak 74), 164k → 199k; desktop q0 68 calls (baseline 60), 169k →
 206k. The plaza's triangle baselines in budgets.json are raised to these runs (under the 300k budget); the call
 baselines stand, the calls being within the 20% tolerance.
+
+## The dorm cluster past the dorm courtyard (2026-10-01, #141)
+
+The dorm courtyard now builds the dorm cluster round the inner court as backdrop (game3d/js/scenes/dorm-court/
+cluster.js), and the plaza builds it too, with a stand-in for the courtyard (dorm-court/cluster-standin.js). It goes
+into its own group after the courtyard's merge, casts and takes no shadow, and is collected in cells about 8 across
+(dorm-court/cells.js), so the cells the camera can't see are culled; the woods round its edges are most of what is
+left drawn. The builder is a generator (`clusterSteps`), sliced with the rest.
+Fast test, dorm courtyard median calls and triangles: phone q0 46 → 64 calls, 68k → 113k tris; desktop q0 59 → 81,
+68k → 119k (peaks 86 and 83, under 200). The plaza is unchanged (phone 47 calls, 161k). budgets.json's dorm_court
+phone and desktop baselines are raised to these runs; phone-q1 wasn't measured. `hitch.mjs 390 844 plaza:dorm_court`
+at CPU 4x: preparing the courtyard while the plaza plays went 650 → 1400 ms, longest task 60 ms both, 1% low 30 → 20
+fps.
