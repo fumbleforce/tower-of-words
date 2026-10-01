@@ -14,7 +14,10 @@ import json, os, re, sys
 HERE = os.path.dirname(os.path.abspath(__file__))
 REPO = os.path.abspath(os.path.join(HERE, '..', '..'))
 sys.path.insert(0, f'{REPO}/tools/island_audio')
-from voices import REFS, VR, tts_text  # noqa: E402
+try:
+    from voices import REFS, VR, tts_text  # noqa: E402
+except ImportError as _e:  # untracked: a worktree needs it linked from the main checkout (voice-clips skill)
+    sys.exit(f'voice setup: cannot import tools/island_audio/voices.py ({_e}); symlink it from the main checkout')
 
 WORK = os.environ.get('GAME3D_VOICE_WORK', os.path.expanduser('~/ai/game3d-voice'))
 RAW = f'{WORK}/raw'
@@ -27,6 +30,7 @@ ALT = f'{HERE}/alt_text.json'
 EDGE = f'{HERE}/edge.json'
 LOCK = os.environ.get('GPU_LOCK', f'/tmp/claude-{os.getuid()}/gpu.lock') + '/owner'
 ME = os.environ.get('LOCK_ME', 'game3d-voices')
+QWEN = os.environ.get('QWEN_MODEL', os.path.expanduser('~/ai/tts/qwen/Qwen3-TTS-12Hz-1.7B-Base'))
 
 
 def load(path, default):
@@ -34,8 +38,9 @@ def load(path, default):
 
 
 def ref(name):
-    """A clone reference in tools/voice-refs/ with its transcript (<name>.txt)."""
-    return (f'{VR}/{name}.wav', open(f'{VR}/{name}.txt').read().strip(), name)
+    """A clone reference in tools/voice-refs/ with its transcript (<name>.txt; '' if missing, which setup() reports)."""
+    txt = f'{VR}/{name}.txt'
+    return (f'{VR}/{name}.wav', open(txt).read().strip() if os.path.exists(txt) else '', name)
 
 
 AOI_TEXT = 'あ、おはよう！　今日もがんばろうね！あたし、アオイ！インターンなんだけど、毎日ちょっと失敗しちゃうの。でも、明日はきっと大丈夫！たぶん！'
@@ -179,5 +184,30 @@ def lock_ok():
         return False
 
 
+def setup(keys=None):
+    """What would make a batch fail before any take is judged, as plain sentences (empty if none): a speaker in the lines
+    with no voice in speakers(), a clone reference wav that is missing or empty (check_takes.py loads every speaker's),
+    a missing or empty transcript for a speaker in the lines, no Qwen model folder. keys: the lines to voice (default all)."""
+    out, sp = [], speakers()
+    need = {e['speaker'] for e in units(keys)}
+    for s in sorted(need - set(sp)):
+        out.append(f'no voice for speaker {s!r}: add it to speakers() in tools/voice/cfg.py')
+    for wav in sorted({v[0] for v in sp.values()}):
+        if not os.path.isfile(wav) or os.path.getsize(wav) < 1000:
+            out.append(f'clone reference {os.path.relpath(wav, REPO)} is missing or empty (copy it from the main checkout)')
+    for s in sorted(need & set(sp)):
+        if not sp[s][1]:
+            out.append(f'no transcript for {s!r}: tools/voice-refs/{sp[s][2]}.txt is missing or empty')
+    if not os.path.isdir(QWEN):
+        out.append(f'Qwen model folder {QWEN} not found (set QWEN_MODEL)')
+    return out
+
+
 if __name__ == '__main__' and sys.argv[1:] == ['missing']:
     print(','.join(missing()))
+if __name__ == '__main__' and sys.argv[1:2] == ['setup']:
+    # setup [keys, comma separated]: prints every problem and exits 1; run.sh runs it before it waits for the GPU lock
+    _p = setup(set(sys.argv[2].split(',')) if sys.argv[2:] and sys.argv[2] else None)
+    for _x in _p:
+        print('SETUP', _x)
+    sys.exit(1 if _p else 0)
