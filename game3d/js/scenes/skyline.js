@@ -10,8 +10,9 @@
 // fins, bands and plant. Walls cast shadows only when a building stands within 12 units.
 // Far ring (within `far`): walls, roofs and window quads in one vertex-coloured mesh, outside the look, no shadows;
 // on the phone tier (q0) without windows.
-// Ground: sea everywhere, the island's land from COAST, green from GREEN and paving from PATHS, all in one
-// vertex-coloured mesh just under the chunk's own floor, so the frame edge never shows scene.background.
+// Ground: sea everywhere, the island's land from COAST (or opts.land), green from GREEN and paving from PATHS, all in
+// one vertex-coloured mesh just under the chunk's own floor, so the frame edge never shows scene.background
+// (opts.sea false: no sea, for a place with its own, like the train's).
 // Budget: at most 10 meshes and 25k triangles per chunk (stats on the returned handle).
 //
 // Shapes in the layout: `poly` [[x, z], ...], or `rect` [x0, z0, x1, z1] / { x0, x1, z0, z1 } / { x, z, w, d },
@@ -204,7 +205,7 @@ export const buildSkyline = (root, chunkId, opts) => drain(skylineSteps(root, ch
 export function* skylineSteps(
   root,
   chunkId,
-  { layout, near = 26, far = 60, evening = false, tier, skip = [], walk } = {},
+  { layout, near = 26, far = 60, evening = false, tier, skip = [], walk, land = null, landColor, sea = true } = {},
 ) {
   const L = layout,
     chunk = L.CHUNKS?.[chunkId] || {};
@@ -284,13 +285,16 @@ export function* skylineSteps(
   const gb = bucket(true),
     R = far + 30;
   const C = (hex) => new THREE.Color(hex);
-  flat(gb, rectPoly([cx - R, cz - R, cx + R, cz + R]), -0.2, C(GROUND.sea));
+  if (sea) flat(gb, rectPoly([cx - R, cz - R, cx + R, cz + R]), -0.2, C(GROUND.sea));
+  // opts.land: the land as one island-frame polygon (scenes/island-west.js coastLand); without it, COAST if it is
+  // a polygon, else land everywhere
+  if (land) flat(gb, ccw(land.map(local)), -0.16, C(landColor || GROUND.land));
   const coasts = L.COAST ? [].concat(L.COAST.poly || L.COAST.rect ? [L.COAST] : L.COAST) : [];
-  for (const c of coasts) {
+  for (const c of land ? [] : coasts) {
     const sh = Array.isArray(c[0]) ? c : shapeOf(c);
     if (sh) flat(gb, ccw(sh.map(local)), -0.16, C(GROUND.land));
   }
-  if (!coasts.length) flat(gb, rectPoly([cx - R, cz - R, cx + R, cz + R]), -0.16, C(GROUND.land));
+  if (!land && !coasts.length) flat(gb, rectPoly([cx - R, cz - R, cx + R, cz + R]), -0.16, C(GROUND.land));
   for (const g of L.GREEN || []) {
     const sh = shapeOf(g);
     if (sh) flat(gb, ccw(sh.map(local)), -0.145, C(g.color || GROUND.green));

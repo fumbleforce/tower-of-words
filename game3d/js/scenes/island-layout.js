@@ -14,6 +14,7 @@
 // entrance door as the reference draws it.
 
 import { EAST_PATHS, EAST_GREEN } from './island-east.js';
+import { WEST_PATHS, WEST_GREEN } from './island-west.js';
 
 export const UNIT = 1.5;
 
@@ -82,7 +83,7 @@ export const CHUNKS = {
     scale: 1,
     level: 0,
     walk: [-6.6, 35, -9.8, 10.6],
-    view: [-12, 31, -14, 14],
+    view: [-42, 31, -28, 17], // west to the coast and over the platform shed (scenes/island-west.js)
     anchor: 'the gate room (its exit is the station door at local (-1.5, 2.65))',
   },
   office: {
@@ -298,6 +299,7 @@ export const PATHS = [
       'The round paved plaza; the basin is about 8.6 across on the reference. Its centre sits on the lane’s axis, 2.4 south of where the reference draws it, so the lane runs straight in and out and the canteen’s terrace stays clear of it.',
   },
   ...EAST_PATHS, // the east lane (scenes/island-east.js)
+  ...WEST_PATHS, // the coast path west of the station (scenes/island-west.js)
   {
     id: 'promenade',
     kind: 'promenade',
@@ -327,6 +329,7 @@ export const GREEN = [
     detail: 'The verge between the lane and the shop street’s back.',
   },
   ...EAST_GREEN,
+  ...WEST_GREEN,
   {
     id: 'dorm_inner_court',
     rect: [95, 2.6, 108.5, 11.5],

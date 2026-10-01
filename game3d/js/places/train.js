@@ -11,6 +11,7 @@ import * as THREE from 'three';
 import { Pass } from 'three/addons/postprocessing/Pass.js';
 import { SimplexNoise } from 'three/addons/math/SimplexNoise.js';
 import { buildWorld, SPEED } from '../train/world.js';
+import { buildRideIsland, startRunIn, runIn } from '../train/island.js';
 import {
   buildCar,
   buildBellows,
@@ -555,6 +556,7 @@ export async function trainPlace(game) {
   walk.position.set(8.4, 0, edge + 1.9);
   station.add(walk);
   station.visible = false;
+  const island = buildRideIsland(scene); // the island round the shed, sliding in with the station (train/island.js)
 
   const carDust = dust([-LX + 0.3, LX - 0.3, 0.15, 1.3, -LZ + 0.3, LZ - 0.3], 70, { opacity: 0.5, size: 0.024 });
   car.root.add(carDust);
@@ -1097,23 +1099,13 @@ export async function trainPlace(game) {
         car.setClosed(st.closedK);
       }
       simT += dt;
-      // speed: cruise, brake into the station, stop, leave
-      if (st.mode === 'brake') {
-        const rem = st.stopAt - st.dist;
-        st.v = Math.sqrt(Math.max(0, 2 * st.decel * rem));
-        if (rem < 0.01) {
-          st.v = 0;
-          st.mode = 'stopped';
-          st.dist = st.stopAt;
-          onStop();
-        }
-      }
-      st.dist += st.v * dt;
+      runIn(st, dt, { brake: () => sfx('brake'), stop: onStop }); // speed: cruise, run in, brake, stop (train/island.js)
       const k = st.v / SPEED;
       world.update(st.dist / SPEED, camera);
       U.uTime.value = simT;
       carDust.userData.update(simT);
       station.position.x = st.stopX - st.dist;
+      island.update(station.visible ? st.stopX - st.dist : Infinity, world);
       const tj = st.dist / SPEED;
       const m = carMotion(tj, simT, Math.max(0.04, k));
       applyMotion(pivot, m);
@@ -1196,12 +1188,7 @@ export async function trainPlace(game) {
       announce: ({ text, voice: v }) => ui.board(text, { voiceKey: v }),
       arrive: () => {
         station.visible = true;
-        st.decel = 1.15;
-        st.mode = 'brake';
-        const D = (st.v * st.v) / (2 * st.decel);
-        st.stopAt = st.dist + D;
-        st.stopX = st.stopAt; // the station's centre lines up with the car when stopped
-        sfx('brake');
+        startRunIn(st);
         game.event(eventId('train', 'approach'));
       },
       doorsOpen: () => {
@@ -1445,7 +1432,7 @@ export async function trainPlace(game) {
         state = saved.world || {};
       if (state.motion) {
         Object.assign(st, state.motion);
-        station.visible = st.mode === 'brake';
+        station.visible = st.mode === 'brake' || st.mode === 'approach';
       }
       if (state.arrived !== undefined) st.arrived = state.arrived;
       if (state.arrived ?? f.arrived) {
@@ -1678,6 +1665,7 @@ export async function trainPlace(game) {
     pivot,
     car.cab,
     station,
+    island.root,
     ...neighbours.flatMap((n) => [n.pivot, n.bellows]),
     ...world.movers,
     ...car.nodders.map((n) => n.obj),

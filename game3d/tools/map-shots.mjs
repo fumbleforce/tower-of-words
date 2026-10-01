@@ -3,6 +3,7 @@
 // the built places (plain, with B2, with each place's backdrop). Also writes the landmark distances (gaps.json).
 //   node game3d/tools/map-shots.mjs [out dir]        (BASE=.claude/worktrees/<name>/game3d for a worktree)
 // Default out dir: game3d/shots/map/<time>/ (git-ignored). Desktop size, 1600 x 1000; SIZE=390x844 for a phone.
+// ONLY=forecourt-map,forecourt-plan: just those shots.
 import { withBrowserJob } from '../../tools/lib/browser-job.mjs';
 import fs from 'node:fs';
 import path from 'node:path';
@@ -45,7 +46,8 @@ await withBrowserJob(
       await page.goto(url, { timeout: 30000 });
       await page.waitForFunction(() => window.__game?.place && window.__map, null, { timeout: 90000 });
       await page.evaluate(() => window.__map.open('map'));
-      for (const [name, view, opts] of SHOTS) {
+      const only = process.env.ONLY?.split(',');
+      for (const [name, view, opts] of SHOTS.filter(([n]) => !only || only.includes(n))) {
         await page.evaluate(([v, o]) => window.__map.open(v, o), [view, opts]);
         await page.waitForTimeout(200);
         await page.screenshot({ path: path.join(out, name + '.png') });
@@ -59,7 +61,7 @@ await withBrowserJob(
       await context.close();
     }
   },
-  { timeoutMs: 240000 },
+  { timeoutMs: 240000, loadWaitMs: 150000 },
 );
 if (errors.length) console.log('page errors:\n' + errors.join('\n'));
 console.log(errors.length ? 'DONE WITH PAGE ERRORS' : 'DONE', out);

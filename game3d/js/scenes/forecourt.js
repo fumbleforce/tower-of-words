@@ -4,9 +4,9 @@
 // outside its north door), the platform shed runs north-south past its west side, and the head office tower stands
 // north-east of it across the court (scenes/head-office.js), its lobby door in the south face. The plan (which zone
 // is where) is forecourt/plan.js; the court with its walk, beds, bike court and garden is forecourt/court.js, the
-// lane on to the fountain plaza forecourt/lane.js, and what lies beyond the court's north bed (the head office
-// wing, the street up the platform shed, the cross street behind the tower) forecourt/north.js, all built with the
-// shared outdoor kit (scenes/outdoor/). The town beyond comes from the layout (scenes/skyline.js). No cars.
+// lane on to the fountain plaza forecourt/lane.js, what lies beyond the court's north bed (the head office
+// wing, the street up the platform shed, the cross street behind the tower) forecourt/north.js, and the coast west
+// of the shed outdoor/coast.js, all built with the shared outdoor kit (scenes/outdoor/). The town beyond comes from the layout (scenes/skyline.js). No cars.
 import * as THREE from 'three';
 import { Nav } from '../movement/navigation.js';
 import { outdoorLight, groundPatches, farTrees, TOWN } from './town.js';
@@ -20,6 +20,9 @@ import * as LAYOUT from './island-layout.js';
 import { buildCourt } from './forecourt/court.js';
 import { buildLane } from './forecourt/lane.js';
 import { northSteps } from './forecourt/north.js';
+import { coastSteps } from './outdoor/coast.js';
+import { coastLand } from './island-west.js';
+import { MAP_LAYER } from '../map/render.js';
 import { Parts } from './outdoor/parts.js';
 import { lightSet } from './outdoor/furniture.js';
 import { keyaki, sakura, cluster } from './outdoor/planting.js';
@@ -54,9 +57,14 @@ function* town(root) {
     [-9.8, 10.6, 1.15],
     [14.6, 13.4, 0.95],
   ]);
+  // west of the platform shed: the coast path, the pines and the sea wall (scenes/island-west.js); the court's
+  // cameras never see that far, so they're drawn on the island map only
+  yield* coastSteps(root, { at: (x, z) => LAYOUT.toLocal('forecourt', x, z), layer: MAP_LAYER });
   return yield* skylineSteps(root, 'forecourt', {
     layout: LAYOUT,
     skip: ['head_office', 'station', 'platform_shed', 'head_office_wing', 'office_e1'], // built here
+    land: coastLand(LAYOUT.COAST.line),
+    landColor: G,
   });
 }
 

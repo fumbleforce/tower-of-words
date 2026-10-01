@@ -6,6 +6,7 @@ import * as THREE from 'three';
 import { CHUNKS } from '../scenes/island-layout.js';
 
 export const MARGIN = 6; // units of backdrop drawn around a place's view (shown with "Backdrop" on)
+export const MAP_LAYER = 2; // drawn on the map only: backdrop a place's own cameras never see (scenes/outdoor/coast.js)
 const GROUND = '#2b3037';
 
 // one place's render: { canvas, x0, z0, ppu } (x0, z0: the local point at the canvas's top-left; ppu: pixels a unit)
@@ -25,6 +26,7 @@ export function renderPlace(game, place, name) {
     h = Math.floor((z1 - z0) * ppu);
   const cam = new THREE.OrthographicCamera(-(x1 - x0) / 2, (x1 - x0) / 2, (z1 - z0) / 2, -(z1 - z0) / 2, 1, 200);
   cam.up.set(0, 0, -1); // north up
+  cam.layers.enable(MAP_LAYER);
   cam.position.set((x0 + x1) / 2, 80, (z0 + z1) / 2);
   cam.lookAt((x0 + x1) / 2, 0, (z0 + z1) / 2);
   cam.updateMatrixWorld();
