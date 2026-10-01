@@ -6,7 +6,7 @@
 // several stems, one or two turning). Under them: mound (a clipped azalea dome), cluster (mounds of mixed sizes
 // round a point), hedge (a clipped run, a little uneven), grass (an ornamental tuft), and beds: bed() lays the soil
 // or ground cover of a planted rectangle, gravel() raked gravel, treePit() a street tree's square stone surround
-// and iron grate.
+// and iron grate, planter() a concrete planter box of clipped shrubs.
 import * as THREE from 'three';
 import { roundedBox } from '../../perf/rounded-box.js';
 import { rng } from './parts.js';
@@ -239,4 +239,24 @@ export function gravel(p, [x0, x1, z0, z1], { y = 0 } = {}) {
   p.box('#a4a6a3', x1 - x0, 0.02, z1 - z0, (x0 + x1) / 2, y, (z0 + z1) / 2, { cast: false });
   for (let z = z0 + 0.12; z < z1 - 0.06; z += 0.16)
     p.box('#939591', x1 - x0 - 0.04, 0.006, 0.025, (x0 + x1) / 2, y + 0.02, z, { cast: false });
+}
+// a planter box of pale concrete on a doorstep or a court: its four sides, soil, clipped shrubs down its length
+export function planter(p, [x0, x1, z0, z1], { h = 0.45, seed = 1, color = '#a9aaa8' } = {}) {
+  const t = 0.08,
+    cx = (x0 + x1) / 2,
+    cz = (z0 + z1) / 2;
+  for (const s of [-1, 1]) {
+    p.box(color, x1 - x0, h, t, cx, 0, s < 0 ? z0 + t / 2 : z1 - t / 2, { surf: 'concrete' });
+    p.box(color, t, h, z1 - z0 - 2 * t, s < 0 ? x0 + t / 2 : x1 - t / 2, 0, cz, { surf: 'concrete' });
+  }
+  p.box(LEAF.soil, x1 - x0 - 2 * t, 0.03, z1 - z0 - 2 * t, cx, h - 0.06, cz, { cast: false, surf: 'soil' });
+  const alongX = x1 - x0 >= z1 - z0,
+    L = alongX ? x1 - x0 : z1 - z0,
+    n = Math.max(1, Math.round((L - 0.2) / 0.36));
+  const q = rng(seed + 33);
+  for (let i = 0; i < n; i++) {
+    const u = (alongX ? x0 : z0) + 0.1 + ((L - 0.2) * (i + 0.5)) / n;
+    const tone = GREENS[(i + seed) % GREENS.length];
+    mound(p, alongX ? u : cx, alongX ? cz : u, 0.17 + q() * 0.07, tone, { y: h - 0.06 });
+  }
 }

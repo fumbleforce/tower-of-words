@@ -5,7 +5,10 @@
 //   kerbRect(p, [x0, x1, z0, z1], { sides, gaps })   kerbs round a rectangle, on its outline
 //   lowWall(p, a, b, { h, w })                   a seat-height wall with a coping, for raised beds and terraces
 //   wallRect(p, rect, { h, w, sides, gaps })     the same round a rectangle
+//   ramp(p, top, foot, w, h)                     a ramp down from a landing, with its cheeks
 // gaps: { n: [[from, to]], s: [...], w: [...], e: [...] } in world x (n, s) or z (w, e), left open.
+import * as THREE from 'three';
+
 export const KERB = { body: '#7d8087', top: '#a4a6a7', wall: '#8b8d90', coping: '#b0b1b0' };
 
 // the segments of a..b (1-D) left after cutting the gaps out
@@ -79,4 +82,35 @@ export function wallRect(p, rect, { sides = 'nsew', gaps = {}, ...o } = {}) {
   const S = sidesOf(rect);
   const off = { n: w / 2, s: -w / 2, w: w / 2, e: -w / 2 };
   for (const s of sides) lowWall(p, ...S[s], { ...o, gaps: gaps[s] || [], off: off[s] });
+}
+
+// a ramp from `a` ([x, z], its top, h high, against a landing) down to `b` on the ground, axis-aligned, w wide: a
+// sloped slab a shade darker than pale paving on its wedge and a low cheek down each side
+export function ramp(p, a, b, w, h, { stone = '#8f8c87', cheek = KERB.wall } = {}) {
+  const alongX = Math.abs(b[0] - a[0]) > Math.abs(b[1] - a[1]);
+  const L = alongX ? Math.abs(b[0] - a[0]) : Math.abs(b[1] - a[1]),
+    dir = Math.sign(alongX ? b[0] - a[0] : b[1] - a[1]);
+  const turn = alongX ? (dir > 0 ? 0 : Math.PI) : dir > 0 ? -Math.PI / 2 : Math.PI / 2;
+  // a wedge in (along, up), `ww` across, `off` across from the ramp's middle
+  const wedge = (color, pts, ww, off) => {
+    const s = new THREE.Shape(pts.map(([u, v]) => new THREE.Vector2(u, v)));
+    const g = new THREE.ExtrudeGeometry(s, { depth: ww, bevelEnabled: false });
+    g.translate(0, 0, off - ww / 2)
+      .rotateY(turn)
+      .translate(a[0], 0, a[1]);
+    p.geo(color, g, { surf: 'concrete' });
+  };
+  const slab = [
+    [0, 0],
+    [L, 0],
+    [0, h],
+  ];
+  const side = [
+    [0, 0],
+    [L, 0],
+    [L, 0.05],
+    [0, h + 0.05],
+  ];
+  wedge(stone, slab, w - 0.2, 0);
+  for (const o of [-1, 1]) wedge(cheek, side, 0.1, o * (w / 2 - 0.05));
 }

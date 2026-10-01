@@ -612,3 +612,10 @@ main as well (the plaza's `buildGreen`, `buildEastLane` and `buildNorthLane` ste
 
 Phone q1 (default tier) fast test, measured for the first time since the cluster: plaza 61 calls (peak 74), 198k
 tris; dorm_court 71 (peak 79), 115k. Both written to budgets.json's `phone-q1` entries.
+
+## The clinic built again (2026-10-01, #165)
+
+The clinic (plaza/north-clinic.js) goes into the north lane's collectors like the rest: its signs are one mesh with one
+texture (the canopy's name, the hours, the departments, the stair's name and the sign stone), and its bikes are laid
+into the collector, so the only call it adds is that mesh. Fast test, plaza median calls and triangles: phone q0 53 → 54
+calls, 201k → 204k tris; desktop q0 68 → 68 calls, 210k → 213k. Within the baselines; budgets.json unchanged.

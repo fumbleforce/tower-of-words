@@ -24,6 +24,18 @@
         { "id": "after-grove-desk", "image": "bible/shots/showcase/lane-north-1/after-grove-desk.webp", "caption": "The trees between the clinic and block_e2" },
         { "id": "after-clinic-eve-desk", "image": "bible/shots/showcase/lane-north-1/after-clinic-eve-desk.webp", "caption": "After work" }
       ]
+    },
+    {
+      "title": "The clinic, built again (#165)",
+      "caption": "You said the clinic was \"way too basic, looks worse than the other buildings\". Now each bay has its own framed window with a sill, the ground floor is a glass front frosted to the waist with the departments and the hours on it, and a glazed stair over the door carries クリニック down to the canopy and the green cross at the top. The door is under a canopy with クリニック CLINIC on it, up two steps or a ramp with handrails, with a tactile line from the lane. The court has a bench, a planter, a sign stone and a bike bay, and the roof has a stair house, a water tank and condensers. Before and after are from the same camera.",
+      "images": [
+        { "id": "clinic2-before-desk", "image": "bible/shots/showcase/lane-north-1/clinic2-before-desk.webp", "caption": "Before, desktop" },
+        { "id": "clinic2-after-desk", "image": "bible/shots/showcase/lane-north-1/clinic2-after-desk.webp", "caption": "After, desktop" },
+        { "id": "clinic2-before-phone", "image": "bible/shots/showcase/lane-north-1/clinic2-before-phone.webp", "caption": "Before, phone" },
+        { "id": "clinic2-after-phone", "image": "bible/shots/showcase/lane-north-1/clinic2-after-phone.webp", "caption": "After, phone" },
+        { "id": "clinic2-roof-desk", "image": "bible/shots/showcase/lane-north-1/clinic2-roof-desk.webp", "caption": "After, from higher up: the roof" },
+        { "id": "clinic2-eve-desk", "image": "bible/shots/showcase/lane-north-1/clinic2-eve-desk.webp", "caption": "After work" }
+      ]
     }
   ],
   "links": [{ "label": "Play it", "href": "game3d/" }]
