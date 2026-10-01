@@ -148,7 +148,11 @@ export function layoutStage() {
       s = (F * (d.size || 1)) / (d.f[3] - d.f[1]),
       cx = (d.f[0] + d.f[2]) / 2,
       fw = (d.f[2] - d.f[0]) * s;
-    const top = base - cutK * F - d.f[3] * s;
+    let top = base - cutK * F - d.f[3] * s;
+    // a picture that ends within a few px of the cut (Kuro at size 0.85 ends 3 px short at 1366x860) is set down onto
+    // it, so it ends hard like the others; only one that ends visibly early (Eric) keeps the faded edge below
+    const gap = base - (top + d.H * s);
+    if (gap > 0 && gap <= 6) top += gap;
     const fx = phone ? vw * (left ? 0.2 : 0.8) : vw * (left ? 0.16 : 0.86);
     // phone: slide the picture in so all of it stays on screen (Eric's 648-wide image ran 48 px past the right edge at
     // 390 wide); the face size stays the same
