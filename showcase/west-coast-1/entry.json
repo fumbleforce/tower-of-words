@@ -1,0 +1,41 @@
+{
+ "title": "The coast west of the station, and the island under the monorail",
+ "date": "2026-10-01",
+ "by": "claude-agent:west-coast",
+ "caption": "The ride used to stay over open sea right up to the platforms. Now, as the train pulls in, the line comes down off the bay, the sea wall and its rocks pass under the car, then lawn with pines, a walk out to a terrace over the rocks, and the platforms. On the island map, the ground west of the platform shed is built: a coast path with a lookout, black pines, the sea wall. Backdrop only (issue #144).",
+ "sections": [
+  {
+   "title": "Pulling in (desktop)",
+   "caption": "Before: the start of the arrival, and three seconds in. After: 4, 5, 6 and 7 seconds after the arrival starts (it now runs in at speed for about four seconds before braking).",
+   "images": [
+    {"id": "arrive-desk-before", "image": "bible/shots/showcase/west-coast-1/before-arrive-desk.webp", "caption": "Before, arrival starts"},
+    {"id": "brake-desk-before", "image": "bible/shots/showcase/west-coast-1/before-brake-desk.webp", "caption": "Before, 3 s"},
+    {"id": "t4-desk", "image": "bible/shots/showcase/west-coast-1/after-4-desk.webp", "caption": "After, 4 s: the rocks come in"},
+    {"id": "t5-desk", "image": "bible/shots/showcase/west-coast-1/after-5-desk.webp", "caption": "After, 5 s: over the sea wall"},
+    {"id": "t6-desk", "image": "bible/shots/showcase/west-coast-1/after-6-desk.webp", "caption": "After, 6 s: the south walk and its terrace"},
+    {"id": "t7-desk", "image": "bible/shots/showcase/west-coast-1/after-7-desk.webp", "caption": "After, 7 s: the platforms"}
+   ]
+  },
+  {
+   "title": "Pulling in (phone)",
+   "caption": "The phone looks along the car, so the coast comes down the sides.",
+   "images": [
+    {"id": "arrive-phone-before", "image": "bible/shots/showcase/west-coast-1/before-arrive-phone.webp", "caption": "Before"},
+    {"id": "t3-phone", "image": "bible/shots/showcase/west-coast-1/after-3-phone.webp", "caption": "After, 3 s"},
+    {"id": "t4-phone", "image": "bible/shots/showcase/west-coast-1/after-4-phone.webp", "caption": "After, 4 s"},
+    {"id": "t5-phone", "image": "bible/shots/showcase/west-coast-1/after-5-phone.webp", "caption": "After, 5 s"}
+   ]
+  },
+  {
+   "title": "The island map",
+   "caption": "The forecourt's tile now reaches the coast and covers the platform shed, so there is no sea in the middle of the island. The court's own cameras never see this far, so play frames there are unchanged.",
+   "images": [
+    {"id": "map-before", "image": "bible/shots/showcase/west-coast-1/before-map.webp", "caption": "Before"},
+    {"id": "map-after", "image": "bible/shots/showcase/west-coast-1/after-map.webp", "caption": "After"},
+    {"id": "plan-before", "image": "bible/shots/showcase/west-coast-1/before-plan.webp", "caption": "Forecourt from above with its backdrop, before"},
+    {"id": "plan-after", "image": "bible/shots/showcase/west-coast-1/after-plan.webp", "caption": "Forecourt from above with its backdrop, after"}
+   ]
+  }
+ ],
+ "links": [{"label": "Play it", "href": "game3d/"}]
+}
