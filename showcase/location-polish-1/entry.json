@@ -1,0 +1,108 @@
+{
+  "title": "Station lockers and plaza planting",
+  "date": "2026-10-01",
+  "by": "Codex",
+  "caption": "Eight coin lockers beneath the station notice display, and connected planting beds around the plaza.",
+  "sections": [
+    {
+      "title": "Station hall",
+      "caption": "The locker bank stands against the back wall, west of the ticket machines. The same fittings appear through the station cutaway from the forecourt.",
+      "images": [
+        {
+          "id": "station-hall-desk",
+          "image": "game3d/shots/codex-location-polish/station-final-wall/hall-desk.png",
+          "caption": "Hall from the entrance, desktop."
+        },
+        {
+          "id": "station-lockers-phone",
+          "image": "game3d/shots/codex-location-polish/station-final-wall/lockers-phone.png",
+          "caption": "Lockers and the approach to the ticket machines, phone."
+        },
+        {
+          "id": "station-lockers-desk",
+          "image": "game3d/shots/codex-location-polish/station-final-wall/lockers-desk.png",
+          "caption": "Locker doors, numbers and the notice display."
+        },
+        {
+          "id": "station-forecourt-desk",
+          "image": "game3d/shots/codex-location-polish/station-final-wall/court-desk.png",
+          "caption": "The hall seen from outside."
+        }
+      ]
+    },
+    {
+      "title": "Plaza lawns",
+      "caption": "Four low planting beds join the tree groups around the ring and lane arms. The existing paths and tree positions stay in place.",
+      "images": [
+        {
+          "id": "plaza-west-desk",
+          "image": "game3d/shots/plaza-planting-after1/west-beds-desk.png",
+          "caption": "West grove, with a strip of lawn between the bed and paving."
+        },
+        {
+          "id": "plaza-west-phone",
+          "image": "game3d/shots/plaza-planting-after1/west-beds-phone.png",
+          "caption": "West grove, phone."
+        },
+        {
+          "id": "plaza-arrival-desk",
+          "image": "game3d/shots/plaza-planting-after1/arrival-desk.png",
+          "caption": "Arriving at the fountain."
+        },
+        {
+          "id": "plaza-east-desk",
+          "image": "game3d/shots/plaza-planting-after3/exit-desk.png",
+          "caption": "Planting beside the east lane."
+        },
+        {
+          "id": "plaza-east-evening-phone",
+          "image": "game3d/shots/plaza-planting-after3/exit-evening-phone.png",
+          "caption": "The east lane after work, phone."
+        },
+        {
+          "id": "plaza-southeast-desk",
+          "image": "game3d/shots/plaza-planting-after2/southeast-close-desk.png",
+          "caption": "The southeast bed meets the existing planting beside the shops."
+        }
+      ]
+    },
+    {
+      "title": "Before this pass",
+      "caption": "The previous station corner and separate pale lawn mounds.",
+      "images": [
+        {
+          "id": "station-before",
+          "image": "game3d/shots/codex-location-polish/station-before/lockers-desk.png",
+          "caption": "Station corner before the lockers."
+        },
+        {
+          "id": "plaza-before",
+          "image": "game3d/shots/plaza-planting-before/west-beds-desk.png",
+          "caption": "West lawn before the connected bed."
+        }
+      ]
+    }
+  ],
+  "links": [
+    {
+      "label": "Walk through the day",
+      "href": "game3d/"
+    },
+    {
+      "label": "Station progress captures and checks",
+      "href": "game3d/shots/codex-location-polish/"
+    },
+    {
+      "label": "Plaza first pass",
+      "href": "game3d/shots/plaza-planting-after1/"
+    },
+    {
+      "label": "Plaza bed-edge corrections",
+      "href": "game3d/shots/plaza-planting-after2/"
+    },
+    {
+      "label": "Plaza final east views and geometry count",
+      "href": "game3d/shots/plaza-planting-after3/"
+    }
+  ]
+}

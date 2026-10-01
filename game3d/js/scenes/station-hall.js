@@ -9,6 +9,7 @@
 // and looking back shows the same room. The walls round it are the station's (the cut). Nothing here moves.
 import * as THREE from 'three';
 import { PAL, rbox, emissive, bench, plant, tileFloor } from '../props.js';
+import { stationFitout } from './station-fitout.js';
 import { pools } from './outdoor/parts.js';
 import { fareMachines, floorMarks, EXIT_X, FARES } from './station-fittings.js';
 
@@ -21,6 +22,9 @@ export function hall(root, cx, cz) {
   g.position.set(cx, 0, cz);
   root.add(g);
   const add = (...m) => g.add(...m);
+  const fitout = stationFitout().group;
+  fitout.position.z = 0.18; // the exterior wall sits inside the room's wall plane, as with hallFares
+  add(fitout);
 
   // the floor: the room's large tiles with the stone bands (the aisle from the entrance to the gate, the lines
   // along the barrier's front and back)

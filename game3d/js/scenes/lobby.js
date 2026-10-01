@@ -27,6 +27,7 @@ import { K } from './office.js';
 import { lightPool, dust, clockHands, groundShadows } from '../places/life.js';
 import { drain } from '../perf/slice.js';
 import { exitFrame, exitSign, fareMachines, floorMarks, sign, EXIT_X, FARES } from './station-fittings.js';
+import { stationFitout, LOCKER_BOUNDS } from './station-fitout.js';
 import { countTex } from './gate-count.js';
 
 const X = 6.3,
@@ -278,57 +279,6 @@ function entrance() {
 }
 
 const stationExit = (x, z) => ({ g: exitFrame(x, z), k: 1, want: 1, leaves: [], update() {} });
-function noticeScreen() {
-  const notices = [
-    ['本日のお知らせ', 'Fire drill: Thursday 14:00'],
-    ['本日のお知らせ', 'Canteen: curry day'],
-    ['本日のお知らせ', 'Welcome, new staff!'],
-  ];
-  const texs = notices.map(([a, b]) =>
-    textTexture(
-      (g, W, H) => {
-        const gr = g.createLinearGradient(0, 0, 0, H);
-        gr.addColorStop(0, '#24405e');
-        gr.addColorStop(1, '#172536');
-        g.fillStyle = gr;
-        g.fillRect(0, 0, W, H);
-        g.fillStyle = '#9fc4e8';
-        g.font = '700 34px ' + JP_FONT;
-        g.fillText(a, 28, 56);
-        g.fillStyle = '#eef3f8';
-        g.font = '600 38px ' + JP_FONT;
-        g.fillText(b, 28, 150);
-        g.fillStyle = '#5d86ad';
-        g.fillRect(28, 190, W - 56, 6);
-      },
-      512,
-      280,
-    ),
-  );
-  const grp = new THREE.Group();
-  grp.add(rbox(1.2, 0.72, 0.05, '#23262c', { r: 0.02, cast: false }));
-  const m = new THREE.MeshStandardMaterial({
-    map: texs[0],
-    emissive: new THREE.Color('#ffffff'),
-    emissiveMap: texs[0],
-    emissiveIntensity: 0.8,
-    roughness: 0.4,
-  });
-  const p = new THREE.Mesh(new THREE.PlaneGeometry(1.1, 0.62), m);
-  p.position.set(0, 0.36, 0.03);
-  grp.add(p);
-  let cur = 0;
-  grp.userData.update = (t) => {
-    const i = Math.floor(t / 5) % texs.length;
-    if (i !== cur) {
-      cur = i;
-      m.map = texs[i];
-      m.emissiveMap = texs[i];
-      m.needsUpdate = true;
-    }
-  };
-  return grp;
-}
 
 let _winTex = null;
 function winMat(k) {
@@ -450,9 +400,8 @@ export function* lobbySteps() {
     d.position.set(3.95, 0, -Z);
     root.add(d);
   }
-  const scr = noticeScreen();
-  scr.position.set(-3.95, 0.55, -Z + 0.03);
-  root.add(scr);
+  const { group: fitout, screen: scr } = stationFitout();
+  root.add(fitout);
   const p1 = poster(['PEOPLE', 'IDEAS', 'PROGRESS'], 'hills');
   p1.position.set(-2.1, 0.45, -Z + 0.02);
   root.add(p1);
@@ -999,6 +948,7 @@ export function* lobbySteps() {
   nav.block(-X, -5.2, 0.3, 0.8); // lost and found
   nav.block(5.05, X, 2.55, 3.45); // coffee machine
   nav.block(FARES.x - 0.55, FARES.x + 0.55, -Z, -Z + FARES.d + 0.1);
+  nav.block(...LOCKER_BOUNDS);
   nav.block(-2.1, -1.7, 2.45, 2.8);
   nav.block(3.3, 4.6, 2.5, 3.1); // bins, welcome stand
 

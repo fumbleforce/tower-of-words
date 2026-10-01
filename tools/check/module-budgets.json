@@ -100,10 +100,10 @@
       "reason": "Narrative execution, checkpoint replay and dialogue/audio dispatch remain after stage 2c; stage 3 reviews the presentation/audio boundary."
     },
     "game3d/js/scenes/lobby.js": {
-      "lines": 1039,
-      "bytes": 33717,
+      "lines": 989,
+      "bytes": 32348,
       "owner": "codex-tui",
-      "review": "C-0071; 2026-09-30 preparation slices (yield points, notes/PERF.md)",
+      "review": "C-0071; 2026-10-01 shared station display extracted with locker-bank fitout (#83)",
       "reason": "Existing lobby geometry composition; preserve the room while extracting responsibilities later."
     },
     "game3d/js/scenes/office.js": {
