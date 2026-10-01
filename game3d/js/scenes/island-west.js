@@ -32,7 +32,7 @@ export const WALKS = {
     lane: true,
   },
   south_walk: { rect: [-33.2, 22.5, -16.1, 24.5] },
-  south_link: { rect: [-16.1, 22.5, -14.1, 31.3], open: 's' },
+  south_link: { rect: [-16.1, 22.5, -14.1, 26.9], open: 's' }, // to the promenade (island-south.js)
   south_lookout: {
     rect: [-36.8, 21.5, -33.2, 24.5],
     terrace: 'ws',

@@ -10,8 +10,9 @@
 // fins, bands and plant. Walls cast shadows only when a building stands within 12 units.
 // Far ring (within `far`): walls, roofs and window quads in one vertex-coloured mesh, outside the look, no shadows;
 // on the phone tier (q0) without windows.
-// Ground: sea everywhere, the island's land from COAST (or opts.land), green from GREEN and paving from PATHS, all in
-// one vertex-coloured mesh just under the chunk's own floor, so the frame edge never shows scene.background
+// Ground: sea everywhere, the island's land from COAST (or opts.land), sand from SAND, green from GREEN and paving
+// from PATHS, all in one vertex-coloured mesh just under the chunk's own floor, so the frame edge never shows
+// scene.background
 // (opts.sea false: no sea, for a place with its own, like the train's).
 // Budget: at most 10 meshes and 25k triangles per chunk (stats on the returned handle).
 //
@@ -25,7 +26,8 @@ import { drain } from '../perf/slice.js';
 import { TOWN } from './town.js';
 
 export const SEA = '#50667a';
-const GROUND = { sea: SEA, land: '#707275', green: TOWN.grass, path: '#86847f' };
+export const SAND = '#bdb8a8';
+const GROUND = { sea: SEA, land: '#707275', green: TOWN.grass, path: '#86847f', sand: SAND };
 const FLOOR_H = 1.9, // a storey, in game units, unless the building says otherwise
   SHADOW_R = 12,
   WALL_COLOURS = 4,
@@ -295,6 +297,10 @@ export function* skylineSteps(
     if (sh) flat(gb, ccw(sh.map(local)), -0.16, C(GROUND.land));
   }
   if (!land && !coasts.length) flat(gb, rectPoly([cx - R, cz - R, cx + R, cz + R]), -0.16, C(GROUND.land));
+  for (const s of L.SAND || []) {
+    const sh = shapeOf(s);
+    if (sh) flat(gb, ccw(sh.map(local)), -0.15, C(s.color || GROUND.sand));
+  }
   for (const g of L.GREEN || []) {
     const sh = shapeOf(g);
     if (sh) flat(gb, ccw(sh.map(local)), -0.145, C(g.color || GROUND.green));

@@ -38,6 +38,10 @@ import { BLOCK_IDS, BLOCKS as EAST_BLOCKS, CROSS } from './plaza/east-plan.js';
 import { buildNorthLane } from './plaza/north-lane.js';
 import { NORTH_IDS } from './plaza/north-plan.js';
 import { clusterSteps, placeIn, CLUSTER_IDS } from './dorm-court/cluster.js';
+import { seafrontSteps } from './outdoor/seafront.js';
+import { BAYS } from './island-south.js';
+import { coastLand } from './island-west.js';
+import { MAP_LAYER } from '../map/render.js';
 
 const { F, R, BASIN, LZ, HALF, LINK, CANTEEN, SHOPS, DOOR_X, TERRACE, TERRACE_S, building, onLane, inRect } = P;
 const CHUNK = 'plaza';
@@ -106,19 +110,24 @@ export function* plazaSteps() {
     a: SHOPS.a,
     dir: SHOPS.dir,
     depth: SHOPS.depth,
-    u0: 10,
-    u1: SHOPS.length,
+    bays: { ...BAYS, u0: BAYS.x0 - building('shops_north').rect[0] },
+    from: 10,
+    farLayer: MAP_LAYER,
     storeyH: building('shops_north').floorH,
     // the island's one combined konbini, 100-yen shop and drugstore, and the bakery (island-places)
     signs: [
-      [5, 'コンビニ', 'KONBINI · 100 YEN · DRUGSTORE', '#3f5f6e'],
-      [8, 'パン', 'BAKERY', '#5d5a72'],
+      [7, 'コンビニ', 'KONBINI · 100 YEN · DRUGSTORE', '#3f5f6e'],
+      [10, 'パン', 'BAKERY', '#5d5a72'],
     ],
   });
   yield;
+  // the seafront behind the shop street, on the island map only (outdoor/seafront.js)
+  const front = yield* seafrontSteps(root, { at: (x, z) => LAYOUT.toLocal(CHUNK, x, z), layer: MAP_LAYER });
   const sky = yield* skylineSteps(root, CHUNK, {
     layout: LAYOUT,
     skip: ['canteen', 'shops_north', 'arcade', 'shops_south', ...BLOCK_IDS, ...NORTH_IDS, ...CLUSTER_IDS, 'dorm_1'],
+    land: coastLand(LAYOUT.COAST.line), // lawn to the coast, not sea, past the plaza's own ground
+    landColor: TOWN.grass,
   });
   yield* mergeStaticSteps(root);
   // backdrop past the dorm street: the dorm cluster and stand-ins for the courtyard and Eric's block, in its own
@@ -171,6 +180,7 @@ export function* plazaSteps() {
       east.evening();
       north.evening();
       dorms.evening();
+      front.evening();
       sky.onPeriod('evening');
     },
     skyline: sky.stats,

@@ -6,7 +6,9 @@
 // is where) is forecourt/plan.js; the court with its walk, beds, bike court and garden is forecourt/court.js, the
 // lane on to the fountain plaza forecourt/lane.js, what lies beyond the court's north bed (the head office
 // wing, the street up the platform shed, the cross street behind the tower) forecourt/north.js, and the coast west
-// of the shed outdoor/coast.js, all built with the shared outdoor kit (scenes/outdoor/). The town beyond comes from the layout (scenes/skyline.js). No cars.
+// of the shed outdoor/coast.js, all built with the shared outdoor kit (scenes/outdoor/); on the island map only, the
+// west end of the shop street and the seafront (outdoor/seafront.js). The town beyond comes from the layout
+// (scenes/skyline.js). No cars.
 import * as THREE from 'three';
 import { Nav } from '../movement/navigation.js';
 import { outdoorLight, groundPatches, farTrees, TOWN } from './town.js';
@@ -23,6 +25,9 @@ import { northSteps } from './forecourt/north.js';
 import { coastSteps } from './outdoor/coast.js';
 import { coastLand } from './island-west.js';
 import { MAP_LAYER } from '../map/render.js';
+import { seafrontSteps, mapOnly } from './outdoor/seafront.js';
+import { shopStreet } from './plaza-buildings.js';
+import { BAYS } from './island-south.js';
 import { Parts } from './outdoor/parts.js';
 import { lightSet } from './outdoor/furniture.js';
 import { keyaki, sakura, cluster } from './outdoor/planting.js';
@@ -59,13 +64,37 @@ function* town(root) {
   ]);
   // west of the platform shed: the coast path, the pines and the sea wall (scenes/island-west.js); the court's
   // cameras never see that far, so they're drawn on the island map only
-  yield* coastSteps(root, { at: (x, z) => LAYOUT.toLocal('forecourt', x, z), layer: MAP_LAYER });
-  return yield* skylineSteps(root, 'forecourt', {
+  const at = (x, z) => LAYOUT.toLocal('forecourt', x, z);
+  yield* coastSteps(root, { at, layer: MAP_LAYER });
+  // the shop street's west end and the seafront south of it, which the map tile reaches (the plaza builds the rest)
+  const rows = LAYOUT.BUILDINGS.find((b) => b.id === 'shops_north');
+  const shops = shopStreet(root, {
+    a: at(rows.rect[0], rows.rect[1]),
+    dir: [1, 0],
+    depth: rows.rect[3] - rows.rect[1],
+    storeyH: rows.floorH,
+    bays: { ...BAYS, u0: BAYS.x0 - rows.rect[0] },
+    to: 27,
+  });
+  mapOnly(shops.group, MAP_LAYER, 'shops');
+  const front = yield* seafrontSteps(root, { at, layer: MAP_LAYER, backWalk: true });
+  const sky = yield* skylineSteps(root, 'forecourt', {
     layout: LAYOUT,
-    skip: ['head_office', 'station', 'platform_shed', 'head_office_wing', 'office_e1'], // built here
+    // built here (the shop rows on the map only)
+    skip: [
+      'head_office',
+      'station',
+      'platform_shed',
+      'head_office_wing',
+      'office_e1',
+      'shops_north',
+      'arcade',
+      'shops_south',
+    ],
     land: coastLand(LAYOUT.COAST.line),
     landColor: G,
   });
+  return { sky, front };
 }
 
 // buildForecourt() builds it at once; forecourtSteps() yields between parts, for building in slices (js/perf/slice.js)
@@ -95,7 +124,7 @@ export function* forecourtSteps() {
   const north = yield* northSteps(statics, lamps);
   const lights = lamps.build(statics);
   yield;
-  const sky = yield* town(statics);
+  const { sky, front } = yield* town(statics);
   yield* mergeStaticSteps(statics);
   const ho = yield* headOfficeSteps(root, nav);
   const lift = ho.landing;
@@ -135,6 +164,7 @@ export function* forecourtSteps() {
     // after work the lamps come on
     lightsOn() {
       lights.evening();
+      front.evening();
       if (north.lit) north.lit.visible = true; // the windows lit after work
     },
     update(t, dt) {

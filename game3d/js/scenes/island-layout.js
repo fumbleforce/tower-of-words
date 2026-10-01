@@ -17,6 +17,7 @@ import { EAST_PATHS, EAST_GREEN } from './island-east.js';
 import { WEST_PATHS, WEST_GREEN } from './island-west.js';
 import { NORTH_PATHS, NORTH_GREEN } from './island-north.js';
 import { DORM_PATHS, DORM_GREEN } from './island-dorms.js';
+import { SOUTH_PATHS, SOUTH_SAND, SHORE } from './island-south.js';
 
 export const UNIT = 1.5;
 
@@ -85,7 +86,7 @@ export const CHUNKS = {
     scale: 1,
     level: 0,
     walk: [-6.6, 35, -9.8, 10.6],
-    view: [-42, 31, -28, 17], // west to the coast and over the platform shed (scenes/island-west.js)
+    view: [-42, 31, -28, 52.15], // west to the coast, over the platform shed, south to the beach (island-south.js)
     anchor: 'the gate room (its exit is the station door at local (-1.5, 2.65))',
   },
   office: {
@@ -103,7 +104,8 @@ export const CHUNKS = {
     scale: 1,
     level: 0,
     walk: [-11.8, 13.2, -16.4, 11.2],
-    view: [-22, 38.6, -42, 32], // east to the dorm courtyard's tile (plaza/east-lane.js), north to the clinic (plaza/north-lane.js)
+    view: [-22, 38.6, -42, 53.98], // east to the dorm courtyard's tile (plaza/east-lane.js), north to the clinic
+    // (plaza/north-lane.js), south to the beach (island-south.js)
     anchor: 'the fountain on the fountain as drawn',
   },
   dorm_court: {
@@ -313,13 +315,7 @@ export const PATHS = [
   ...WEST_PATHS, // the coast path west of the station (scenes/island-west.js)
   ...NORTH_PATHS, // the back lane behind the canteen (scenes/island-north.js)
   ...DORM_PATHS, // the dorm cluster (scenes/island-dorms.js)
-  {
-    id: 'promenade',
-    kind: 'promenade',
-    w: 4,
-    line: pairs([-15.1, 31.3, 33.3, 42.8, 63.6, 37, 97.5, 26.5, 123.7, 11.5]),
-    detail: 'The seafront promenade behind the shops and the dorms; it follows the sea wall.',
-  },
+  ...SOUTH_PATHS, // the seafront south of the shop street (scenes/island-south.js)
   {
     id: 'beam',
     kind: 'beam',
@@ -347,14 +343,17 @@ export const GREEN = [
   ...DORM_GREEN, // the dorm cluster (scenes/island-dorms.js)
 ];
 
-// The coastline on the route's side of the island, land north-east of the line (sea south and west).
+// The coastline on the route's side of the island, land north-east of the line (sea south and west); round the
+// beach and along the seafront's wall it is island-south.js's SHORE. The beach's sand: SAND.
 export const COAST = {
-  line: pairs([
-    -56.8, -32.9, -50.5, -10, -44.9, 10.7, -38, 24.5, -30.4, 33, -13.6, 42.3, -1, 50.1, 18.4, 53.1, 41, 51.4, 60.7, 45,
-    86, 38, 110.9, 31.1, 129.9, 19.4, 136.6, 2, 136.8, -26.1, 130.4, -47.8,
-  ]),
-  detail: 'Rocks and a sea wall, with the sand beach south of the shop street’s west end.',
+  line: [
+    ...pairs([-56.8, -32.9, -50.5, -10, -44.9, 10.7, -38, 24.5, -30.4, 33]),
+    ...SHORE,
+    ...pairs([86, 38, 110.9, 31.1, 129.9, 19.4, 136.6, 2, 136.8, -26.1, 130.4, -47.8]),
+  ],
+  detail: 'Rocks and a sea wall, with the sand beach south of the shop street.',
 };
+export const SAND = [...SOUTH_SAND];
 
 // a chunk's local point on the island, and back
 export function toIsland(chunk, x, z) {
