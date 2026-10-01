@@ -2,7 +2,7 @@
   "title": "VRoid / VRM compatibility proof",
   "date": "2026-10-01",
   "by": "Claude prototype, Codex continuation",
-  "status": "open",
+  "status": "decided",
   "question": "Is this smooth anime direction worth an authored VRoid character test?",
   "multi": true,
   "media": [
@@ -93,5 +93,8 @@
       "label": "SDK, editor and source details",
       "href": "notes/vrm-prototype.md"
     }
-  ]
+  ],
+  "decision": "The body is good; the character looks nuts. Provide controls Jørgen can experiment with himself; no character approved.",
+  "decided_at": "2026-10-01T17:12:00+0200",
+  "issue": 171
 }

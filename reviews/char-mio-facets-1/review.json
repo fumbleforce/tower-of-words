@@ -2,7 +2,7 @@
   "title": "Mio: traced facets and a closed head study",
   "date": "2026-10-01",
   "by": "Claude; continued by Codex",
-  "status": "open",
+  "status": "decided",
   "question": "Does mf-07 put the head’s facets and face in the right direction?",
   "multi": true,
   "options": [
@@ -125,5 +125,7 @@
       "href": "art/parts/style-concepts/claude-miofacets/mf-07/renders/"
     }
   ],
-  "issue": 171
+  "issue": 171,
+  "decision": "The face is surprisingly close, but it breaks down when she turns, especially on the body. Diagnose the 3D volume before another round; no model approved.",
+  "decided_at": "2026-10-01T17:11:53+0200"
 }
