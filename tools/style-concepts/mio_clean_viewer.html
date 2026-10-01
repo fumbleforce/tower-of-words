@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="robots" content="noindex,nofollow" />
+    <title>Mio cleanup comparison</title>
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "/game3d/vendor/three/three.module.js",
+          "three/addons/": "/game3d/vendor/"
+        }
+      }
+    </script>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        font:
+          15px/1.4 system-ui,
+          sans-serif;
+        color: #1d2327;
+        background: #f6f7f8;
+      }
+      header {
+        padding: 12px 18px 4px;
+      }
+      h1 {
+        font-size: 19px;
+        margin: 0;
+      }
+      p {
+        margin: 0;
+        color: #5d676e;
+      }
+      .bar {
+        display: flex;
+        gap: 8px;
+        padding: 7px 18px;
+        align-items: center;
+        overflow-x: auto;
+        flex: none;
+      }
+      button,
+      select {
+        font: inherit;
+        padding: 6px 10px;
+        border: 1px solid #d7dde1;
+        border-radius: 6px;
+        background: white;
+        color: inherit;
+        white-space: nowrap;
+      }
+      button[aria-pressed="true"] {
+        background: #13796d;
+        color: white;
+      }
+      .labels {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        text-align: center;
+        color: #5d676e;
+        padding: 4px;
+      }
+      #view {
+        display: block;
+        width: 100%;
+        height: min(72vh, 760px);
+        touch-action: none;
+        background: #e5e8ec;
+      }
+      #status {
+        padding: 6px 18px;
+      }
+      .phone-only {
+        display: none;
+      }
+      @media (max-width: 700px) {
+        html,
+        body {
+          height: 100%;
+        }
+        body {
+          display: flex;
+          flex-direction: column;
+          height: 100dvh;
+          overflow: hidden;
+        }
+        header {
+          padding: 8px 12px 0;
+        }
+        h1 {
+          font-size: 16px;
+        }
+        header p {
+          display: none;
+        }
+        .bar {
+          padding: 6px 12px;
+        }
+        button,
+        select {
+          font-size: 14px;
+        }
+        .phone-only {
+          display: initial;
+        }
+        .labels {
+          display: none;
+        }
+        #view {
+          flex: 1;
+          min-height: 0;
+          height: auto;
+        }
+        #status {
+          font-size: 13px;
+          flex: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Mio: texture and eye-edge cleanup</h1>
+      <p>
+        Original on the left, selected attempt on the right. Drag both together;
+        pinch or scroll to zoom.
+      </p>
+    </header>
+    <div class="bar">
+      <label for="attempt">Attempt</label
+      ><select id="attempt">
+        <option value="01-material">01 · Painted light only</option>
+        <option value="02-eyes">02 · Flattened eye edge (rejected)</option>
+        <option value="03-clean">03 · Strong eye correction (rejected)</option>
+        <option value="04-border">04 · Border pinning (rejected)</option>
+        <option value="05-safe" selected>
+          05 · Fine texture filter + gentle eye correction
+        </option>
+      </select>
+    </div>
+    <div class="bar">
+      <button id="side" class="phone-only" aria-pressed="false">
+        Show original</button
+      ><button id="face" aria-pressed="false">Face close-up</button
+      ><button data-yaw="0">Front</button><button data-yaw="40">40°</button
+      ><button data-yaw="90">Side</button><button data-yaw="180">Back</button
+      ><button id="reset">Reset zoom</button>
+    </div>
+    <div class="labels">
+      <span>Original Meshy</span
+      ><span id="candidate-label">Selected cleanup</span>
+    </div>
+    <canvas
+      id="view"
+      aria-label="Before and after models, drag to rotate"
+    ></canvas>
+    <p id="status" role="status" aria-live="polite">Loading…</p>
+    <script type="module" src="./mio_clean_viewer.js"></script>
+  </body>
+</html>
