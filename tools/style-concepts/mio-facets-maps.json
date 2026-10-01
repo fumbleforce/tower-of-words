@@ -1,0 +1,53 @@
+{
+ "front-auto": {
+  "note": "the clean front, measured: no hand edits except the eyes, brows, nose and mouth, which are the face texture",
+  "source": "art/parts/style-concepts/mio-ref-clean/final.png",
+  "mask": "art/parts/style-concepts/mio-ref-clean/final-cutout.png",
+  "params": {
+   "clahe": 0,
+   "weak": 5.0,
+   "min_area": 900,
+   "eps": 6.0,
+   "snap": 10.0
+  },
+  "edits": {
+   "dissolve": [
+    [
+     440,
+     168,
+     576,
+     216
+    ],
+    [
+     502,
+     202,
+     525,
+     225
+    ],
+    [
+     498,
+     230,
+     526,
+     244
+    ]
+   ]
+  }
+ },
+ "back-auto": {
+  "note": "the aligned back view (gen t3 back), measured, no hand edits",
+  "source": "art/parts/style-concepts/claude-mioi2i/gen/t3/back.png",
+  "mask": null,
+  "params": {
+   "clahe": 0,
+   "weak": 5.0,
+   "min_area": 900,
+   "eps": 6.0,
+   "snap": 10.0
+  }
+ },
+ "front-hand": {
+  "note": "the clean front, every facet drawn by hand",
+  "source": "art/parts/style-concepts/mio-ref-clean/final.png",
+  "hand": "mio-facets-front.txt"
+ }
+}
