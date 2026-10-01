@@ -18,9 +18,10 @@
   .stage { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 0; }
   .stage img { width: 100%; height: min(72vh, 760px); object-fit: contain; background: #e0e3e6; display: block; }
   @media (max-width: 700px) { .stage { grid-template-columns: 1fr; } }
-</style></head><body>
+</style>
+<link rel="stylesheet" href="./viewer-kit.css"></head><body>
 <header><h1>Mio, modelled to the picture</h1>
-<p>Left: the 3D model. Right: the picture it is modelled to. Drag to turn her, scroll to zoom. "Picture camera" puts the
+<p>Left: the 3D model. Right: the picture it is modelled to. Drag to turn her, scroll or pinch to zoom. "Picture camera" puts the
 camera where the picture's was.</p></header>
 <div class="bar" id="concepts" aria-label="Concept"></div>
 <div class="bar" aria-label="Motion">
@@ -34,6 +35,7 @@ camera where the picture's was.</p></header>
 <script type="module">
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import { attachOrbit } from './viewer-kit.js';
 
 const list = await (await fetch('./mio-i2i.json')).json();
 const refImg = document.getElementById('ref');
@@ -133,15 +135,10 @@ document.getElementById('pcam').onclick = (e) => {
   if (pcam) { spin = false; yaw = 0; }
 };
 document.getElementById('spin').onclick = (e) => { spin = !spin; e.target.setAttribute('aria-pressed', spin); };
-let drag = null;
-canvas.onpointerdown = (e) => { drag = [e.clientX, e.clientY]; canvas.setPointerCapture(e.pointerId); };
-canvas.onpointermove = (e) => {
-  if (!drag) return;
-  yaw -= (e.clientX - drag[0]) * 0.01; pitch = Math.min(1.2, Math.max(-0.2, pitch + (e.clientY - drag[1]) * 0.006));
-  drag = [e.clientX, e.clientY];
-};
-canvas.onpointerup = () => (drag = null);
-canvas.onwheel = (e) => { e.preventDefault(); dist = Math.min(8, Math.max(0.5, dist * (1 + e.deltaY * 0.001))); };
+attachOrbit(canvas, {
+  rotate: (dx, dy) => { yaw -= dx * 0.01; pitch = Math.min(1.2, Math.max(-0.2, pitch + dy * 0.006)); },
+  zoom: (k) => { dist = Math.min(8, Math.max(0.5, dist * k)); },
+});
 const clock = new THREE.Clock();
 function frame() {
   const dt = clock.getDelta();

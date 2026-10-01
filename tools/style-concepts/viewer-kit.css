@@ -1,0 +1,17 @@
+/* Phone layout shared by the three style-concept viewers: the page is one screen tall, the control rows are single
+   scrolling lines, and the canvas takes what is left, so the whole figure and the concept buttons share the viewport. */
+@media (max-width: 700px) {
+  html, body { height: 100%; }
+  body { display: flex; flex-direction: column; height: 100dvh; overflow: hidden; }
+  header { padding: 8px 12px 0; }
+  h1 { font-size: 16px; margin: 0; }
+  header p { display: none; }
+  .bar { flex-wrap: nowrap; overflow-x: auto; padding: 6px 12px; gap: 6px; scrollbar-width: none; flex: none; }
+  .bar button { flex: none; padding: 5px 10px; font-size: 14px; white-space: nowrap; }
+  #view { flex: 1 1 0; min-height: 0; height: auto; }
+  #status { padding: 4px 12px; font-size: 13px; flex: none; }
+  /* mio-i2i-viewer: the model fills the screen, the target picture is one scroll below it */
+  .stage { flex: 1 1 0; min-height: 0; overflow-y: auto; grid-template-rows: 100% auto; }
+  .stage #view { height: 100%; }
+  .stage img { height: auto; max-height: none; }
+}
