@@ -21,9 +21,11 @@ const SHOTS = [
   ['map', 'map', {}],
   ['map-b2', 'map', { basement: true }],
   ['map-backdrop', 'map', { backdrop: true }],
-  // close-ups of each outdoor place: from above, then over the reference as drawn with the layout
+  // close-ups of each outdoor place: from above, then over the reference as drawn with the layout; the plan view
+  // (from above with its backdrop, no layout boxes) is for checking the neighbour blocks a place builds
   ...['forecourt', 'plaza', 'dorm_court'].flatMap((focus) => [
     [`${focus}-map`, 'map', { focus, layout: true }],
+    [`${focus}-plan`, 'map', { focus, backdrop: true, layout: false }],
     [`${focus}-drawn`, 'compare', { focus, drawn: true, opacity: 0.6 }],
   ]),
   ['office-map', 'map', { focus: 'office', basement: true, layout: true }],

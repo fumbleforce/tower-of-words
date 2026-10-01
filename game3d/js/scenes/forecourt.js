@@ -4,8 +4,9 @@
 // outside its north door), the platform shed runs north-south past its west side, and the head office tower stands
 // north-east of it across the court (scenes/head-office.js), its lobby door in the south face. The plan (which zone
 // is where) is forecourt/plan.js; the court with its walk, beds, bike court and garden is forecourt/court.js, the
-// lane on to the fountain plaza forecourt/lane.js, both built with the shared outdoor kit (scenes/outdoor/). The
-// town beyond comes from the layout (scenes/skyline.js). No cars.
+// lane on to the fountain plaza forecourt/lane.js, and what lies beyond the court's north bed (the head office
+// wing, the street up the platform shed, the cross street behind the tower) forecourt/north.js, all built with the
+// shared outdoor kit (scenes/outdoor/). The town beyond comes from the layout (scenes/skyline.js). No cars.
 import * as THREE from 'three';
 import { Nav } from '../movement/navigation.js';
 import { outdoorLight, groundPatches, farTrees, TOWN } from './town.js';
@@ -18,6 +19,7 @@ import { drain } from '../perf/slice.js';
 import * as LAYOUT from './island-layout.js';
 import { buildCourt } from './forecourt/court.js';
 import { buildLane } from './forecourt/lane.js';
+import { northSteps } from './forecourt/north.js';
 import { Parts } from './outdoor/parts.js';
 import { lightSet } from './outdoor/furniture.js';
 import { keyaki, sakura, cluster } from './outdoor/planting.js';
@@ -29,24 +31,20 @@ const WALK = [X0 + 0.2, PL.LANE_WALK, HZ - 6.4, BIKES[3]];
 const lanePt = (x) => [x, LANE_Z];
 
 // beyond the court: lawns round the paving, a few trees near it in small groups (the lane's gardens are in
-// lane.js), and the layout's buildings further out (skyline)
+// lane.js, the north edge's avenues and grove in north.js), and the layout's buildings further out (skyline)
 function* town(root) {
   const G = TOWN.grass;
   groundPatches(root, [
-    [-14, X0, -16, 16, G], // west of the court and the station, under the platform shed
-    [X0, SERVICE[0], -16, HZ, G], // north of the court, round the wing
-    [SERVICE[0], TE, -16, SERVICE[2], G], // north of the service way and the tower
-    [TE, 60, -16, STRIP_N[2], G], // east of the tower, north of the lane
+    [-14, X0, -30, 16, G], // west of the court and the station, under the platform shed
+    [X0, SERVICE[0], -30, HZ, G], // north of the court, round the wing
+    [SERVICE[0], TE, -30, SERVICE[2], G], // north of the service way and the tower
+    [TE, 60, -30, STRIP_N[2], G], // east of the tower, north of the lane
     [LANE[0], 60, STRIP_S[3], 16, G], // south of the lane
     [SE, GARDEN[1], BIKES[3], 16, G], // south of the bike court and the garden
     [STATION.x0, SE, STATION.zS, 16, G], // south of the station, round the walkway
     [COURT[1], 60, LANE[3], STRIP_S[3], G], // under the lane's south strip
   ]);
   const p = new Parts();
-  keyaki(p, -9.2, -8.8, 1.1, 5);
-  sakura(p, -8.2, -12.2, 1.05, 2);
-  keyaki(p, -4.6, -14.2, 1.15, 8);
-  cluster(p, -8.6, -10.4, { n: 4, r: 0.35, seed: 3 });
   sakura(p, -9.6, 7.5, 1.0, 5);
   keyaki(p, 8.4, 12.6, 1.1, 6);
   sakura(p, 11.8, 13.2, 1.0, 7);
@@ -55,11 +53,10 @@ function* town(root) {
   farTrees(root, [
     [-9.8, 10.6, 1.15],
     [14.6, 13.4, 0.95],
-    [-12.6, -4.2, 1.0],
   ]);
   return yield* skylineSteps(root, 'forecourt', {
     layout: LAYOUT,
-    skip: ['head_office', 'station', 'platform_shed'],
+    skip: ['head_office', 'station', 'platform_shed', 'head_office_wing', 'office_e1'], // built here
   });
 }
 
@@ -73,10 +70,10 @@ export function* forecourtSteps() {
   const sun = outdoorLight(scene);
 
   const nav = new Nav(...WALK, 0.1);
-  // walkable: the court, the bike court, the lane and the garden's way in and gravel court; inside the tower the
-  // head office decides (its lobby)
+  // walkable: the court, the bike court, the lane, the garden's way in and gravel court, and the shed street up to
+  // its chained bollards; inside the tower the head office decides (its lobby)
   const tower = [T.o[0], T.o[0] + T.W, T.o[1] - T.D, T.o[1]];
-  const walkable = [COURT, BIKES, LANE, PL.GARDEN_PATH, PL.GARDEN_COURT, tower];
+  const walkable = [COURT, BIKES, LANE, PL.GARDEN_PATH, PL.GARDEN_COURT, PL.SHED_WALK, tower];
   nav.extra = (x, z) => walkable.some((r) => PL.inRect(x, z, r));
   // everything that never moves goes in one group, merged by material at the end
   const statics = new THREE.Group();
@@ -87,6 +84,7 @@ export function* forecourtSteps() {
   buildCourt(statics, nav, lamps);
   yield;
   buildLane(statics, nav, lamps);
+  const north = yield* northSteps(statics, lamps);
   const lights = lamps.build(statics);
   yield;
   const sky = yield* town(statics);
@@ -129,6 +127,7 @@ export function* forecourtSteps() {
     // after work the lamps come on
     lightsOn() {
       lights.evening();
+      if (north.lit) north.lit.visible = true; // the windows lit after work
     },
     update(t, dt) {
       const elapsed = dt ?? (previousTime == null ? 1 / 60 : t - previousTime);
