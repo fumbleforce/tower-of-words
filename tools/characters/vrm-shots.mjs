@@ -20,6 +20,25 @@ await withBrowserJob('vrm-preview', async browser => {
       for (const view of ['three', 'face', 'game']) {
         await page.goto(`${base}/vrm-test.html?variant=${variant}&view=${view}`, { timeout: 60000 });
         await page.waitForFunction(() => globalThis.__ready || globalThis.__error);
+        if (size === 'phone' && variant === 'base' && view === 'face') {
+          await page.getByRole('button', { name: 'Pause', exact: true }).click();
+          const probe = () => {
+            const character = globalThis.__preview.character;
+            const weights = [];
+            character.model.traverse(object => {
+              if (object.morphTargetInfluences) weights.push(...object.morphTargetInfluences);
+            });
+            return { time: character.mixer.time, weights };
+          };
+          const before = await page.evaluate(probe);
+          await page.getByRole('button', { name: 'Smile', exact: true }).click();
+          await page.waitForTimeout(100);
+          const after = await page.evaluate(probe);
+          if (before.time !== after.time || JSON.stringify(before.weights) === JSON.stringify(after.weights))
+            errors.push('Paused expression failed to update while animation stayed frozen');
+          await page.getByRole('button', { name: 'Neutral', exact: true }).click();
+          await page.getByRole('button', { name: 'Play', exact: true }).click();
+        }
         const info = await page.evaluate(() => {
           if (globalThis.__error) throw new Error(globalThis.__error);
           const preview = globalThis.__preview;
@@ -42,6 +61,19 @@ await withBrowserJob('vrm-preview', async browser => {
     }
     await context.close();
   }
+  const failed = await browser.newPage();
+  await failed.addInitScript(() => {
+    const original = globalThis.HTMLCanvasElement.prototype.getContext;
+    globalThis.HTMLCanvasElement.prototype.getContext = function(type, ...args) {
+      if (type.startsWith('webgl')) return null;
+      return original.call(this, type, ...args);
+    };
+  });
+  await failed.goto(`${base}/vrm-test.html`);
+  await failed.waitForFunction(() => globalThis.__error);
+  if (!(await failed.locator('#info').textContent()).startsWith('Preview could not load:'))
+    errors.push('WebGL initialization failure is not visible');
+  await failed.close();
 }, { timeoutMs: 280000 });
 fs.writeFileSync(path.join(out, 'report.json'), JSON.stringify({ report, errors }, null, 2));
 console.log(JSON.stringify({ captures: report.length, errors, first: report[0] }));
