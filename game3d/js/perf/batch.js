@@ -102,7 +102,13 @@ export function optimizePlace(place, opt = {}) {
     const ex = new Set(),
       bd = new Set();
     rigs = new Set();
-    for (const r of Object.values(place.people || {})) {
+    // and the background people outside place.people (the gate's workers and commuters: place.extras, place.crowd),
+    // or each walking commuter drew part by part, with shadows, for its first seconds on screen
+    for (const r of [
+      ...Object.values(place.people || {}),
+      ...Object.values(place.extras || {}),
+      ...(place.crowd || []),
+    ]) {
       if (r && r.root) (BOUNDS ? bd : ex).add(r.root);
       if (RIGS && r && r.root) rigs.add(r.root);
       // a person's torso breathes every frame once the place is played (cast.js idle()): batch under it from the
@@ -903,7 +909,8 @@ export function optimizePlace(place, opt = {}) {
   }
   // what the outline pass selects for these meshes: a lifted mesh's twin instead of the mesh
   function forOutline(list) {
-    return twinOf.size ? [...new Set(list.map((o) => twinOf.get(o) || o))] : list;
+    // toggled off (the day check's A/B), the lifted meshes draw themselves and the twins are hidden
+    return shown && twinOf.size ? [...new Set(list.map((o) => twinOf.get(o) || o))] : list;
   }
 
   // ---------- every frame, before the first render pass ----------

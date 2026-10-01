@@ -8,8 +8,8 @@
     "quality": 0,
     "places": {
       "train": {
-        "calls": 230,
-        "tris": 159185,
+        "calls": 142,
+        "tris": 141851,
         "gpu": {
           "medianMs": 16.7,
           "p99Ms": 16.8,
@@ -17,8 +17,8 @@
         }
       },
       "gate": {
-        "calls": 272,
-        "tris": 137461,
+        "calls": 145,
+        "tris": 136623,
         "gpu": {
           "medianMs": 16.7,
           "p99Ms": 16.8,
@@ -27,7 +27,7 @@
       },
       "office": {
         "calls": 390,
-        "tris": 525665,
+        "tris": 525667,
         "gpu": {
           "medianMs": 16.7,
           "p99Ms": 16.8,
@@ -80,8 +80,8 @@
     "quality": 0,
     "places": {
       "train": {
-        "calls": 179,
-        "tris": 133087,
+        "calls": 125,
+        "tris": 134361,
         "gpu": {
           "medianMs": 16.7,
           "p99Ms": 16.8,
@@ -89,8 +89,8 @@
         }
       },
       "gate": {
-        "calls": 173,
-        "tris": 124747,
+        "calls": 95,
+        "tris": 122189,
         "gpu": {
           "medianMs": 16.7,
           "p99Ms": 16.8,
@@ -98,8 +98,8 @@
         }
       },
       "office": {
-        "calls": 189,
-        "tris": 280989,
+        "calls": 167,
+        "tris": 257579,
         "gpu": {
           "medianMs": 16.7,
           "p99Ms": 16.8,
@@ -152,8 +152,8 @@
     "quality": 1,
     "places": {
       "train": {
-        "calls": 244,
-        "tris": 196792,
+        "calls": 143,
+        "tris": 135899,
         "gpu": {
           "medianMs": 16.7,
           "p99Ms": 16.8,
@@ -161,8 +161,8 @@
         }
       },
       "gate": {
-        "calls": 181,
-        "tris": 127710,
+        "calls": 103,
+        "tris": 122459,
         "gpu": {
           "medianMs": 16.7,
           "p99Ms": 16.8,
@@ -179,8 +179,8 @@
         }
       },
       "office": {
-        "calls": 196,
-        "tris": 281006,
+        "calls": 174,
+        "tris": 254314,
         "gpu": {
           "medianMs": 16.7,
           "p99Ms": 16.8,

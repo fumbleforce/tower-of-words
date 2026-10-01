@@ -388,8 +388,8 @@ first frames (phone, CPU 4x, 3 runs each): median 2.56 → 2.54 s; the pass's ow
 → 370 to 410 ms, in slices. Stills of the train at the start, the aisle, the station stop and the platform, before and
 after, both sizes: same within run-to-run noise.
 
-Note for `day.mjs`: its off/on pairs read as over tolerance while a person is outlined (the outline in the "off" frame
-still selects the hidden batch twins), on main as well; pairs with nothing outlined pass.
+Note for `day.mjs`: its off/on pairs used to read as over tolerance while something was outlined; fixed, see the next
+section but one.
 
 ### People as skinned batches (2026-10-01, issue #136)
 
@@ -415,6 +415,31 @@ the walk out, 332 → 321); gate median 180 → 141, max 301 → 276 (its first 
 paused frame through the whole day (nothing outlined), worst mean 0.013/255, at most 0.0024% of pixels over 8/255, at
 both sizes; close-ups of people in the train, gate and office looked the same. `day.mjs` reads as before (its pairs
 fail only where a person is outlined, on main as well).
+
+### The train's departure and the gate's first frames (2026-10-01, issue #145)
+
+Two peaks over the phone budget were left: the train at about 320 calls for 0.4 s as it pulls out at the end, and the
+gate at about 280 in its first second. Now, all layouts, with no change on screen:
+
+- The train's departure moved each child of the car on its own (places/train.js `departureMovers`), so every mesh under
+  the shell, the benches and the plant was let go and drew itself (about 160 draws) until merged again under the group
+  that moved. The car's own build now hangs under one group, `car.cab` (js/train/car.js; the shadow proxy stays out,
+  it stays behind), listed in `place.perfMovers`, so its batches hang under it from the first scan and pull out with it.
+  A saved game from an older build restores the departed train through the flags instead of the car's part list.
+- The gate's office workers and commuters (`place.extras`, `place.crowd`) are now skinned batches like `place.people`
+  (js/perf/batch.js `excluded()`), built at the first scan, hidden ones too. Walking commuters had drawn part by part
+  with their shadows (about 40 draws each) for their first seconds on screen.
+- `day.mjs` compares correctly with an outline up: toggled off, the pass's `forOutline` gives the outline the lifted
+  meshes themselves rather than the (then hidden) twins. What it still flags is on main too: the held doors during
+  their kotodama (the "on" frame draws the pulsing doors darker; #152), and under 0.2% of pixels at the gate's planter
+  footprints, the office and Eric's room.
+
+`day-calls.mjs --every 60`, GL=gpu, before (577c2367) → after. Phone 390x844 q1: train max 321 → 194, median 142 → 143,
+the departure 300 to 321 → 182 to 193; gate max 276 → 142, median 146 → 103. Desktop 1366x860 q1: train max 567 → 396,
+median 261 → 282 (run-to-run); gate max 531 → 333, median 375 → 283. Fast test phone q1 peaks: train 197, gate 141.
+budgets.json: calls and triangles of train, gate and office from these fast tests (desktop q0 142 / 145 / 390, phone
+q0 125 / 95 / 167, phone q1 143 / 103 / 174); the frame-time baselines are kept, the machine was busy. Stills of the
+departure and the gate's first frame, pass on and off, on main and after: the same.
 
 ## Office integration (C-0110, 2026-09-29)
 
