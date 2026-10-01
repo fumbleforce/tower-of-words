@@ -22,7 +22,7 @@ import { TREES, cluster, mound, LEAF } from './planting.js';
 const GREENS = [LEAF.mid, LEAF.deep, LEAF.fresh];
 import { WEST_COAST, WEST_TREES, WEST_SHRUBS, WEST_BEDS, WALKS } from '../island-west.js';
 
-const STONE = { wall: '#767a80', coping: '#a3a6a6', rocks: ['#6f7378', '#7d8187', '#686c71', '#858a8f'] };
+const STONE = { wall: '#6c7177', coping: '#8d9194', rocks: ['#5f666e', '#6b7279', '#585e66', '#737a82'] };
 const SURF = '#b9c6cc'; // the sea shader's own foam (places/train.js uFoam)
 const ROCK_PITCH = 1.2;
 const NO_CAST = { cast: false }; // the wall, rocks and surf would throw their shadows on the sea, which takes none
@@ -65,7 +65,7 @@ function* wall(stone, green, surf, at, sea, clip) {
         // the outer row thins out here and there; sizes vary by a quarter either way
         if (row && hash2(u, i, 23) < 0.15) continue;
         const [x, z] = P(u, off + (hash2(i, u, row) - 0.5) * 0.4),
-          r = r0 * (0.6 + hash2(u, i, 7) * 0.9);
+          r = r0 * (0.5 + hash2(u, i, 7) * 0.7);
         const g = new THREE.DodecahedronGeometry(r, 0)
           .rotateY(hash2(x, z, 3) * 6.3)
           .rotateX(hash2(z, x, 5) * 0.8)
