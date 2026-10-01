@@ -8,6 +8,12 @@ const canvas = document.getElementById('view');
 const status = document.getElementById('status');
 const select = document.getElementById('source');
 const clayButton = document.getElementById('clay');
+const targetButton = document.getElementById('target-toggle');
+targetButton.onclick = () => {
+  const shown = document.querySelector('.stage').classList.toggle('show-target');
+  targetButton.setAttribute('aria-pressed', String(shown));
+  targetButton.textContent = shown ? '3D model' : 'Target picture';
+};
 const renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
 renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
 const scene = new THREE.Scene();
