@@ -1,0 +1,24 @@
+{
+ "title": "Mio reference, clean and high res",
+ "date": "2026-10-01",
+ "by": "claude-agent:mio-ref-clean",
+ "caption": "Your char-face-1 pick (mio-front-d60) at 3072x3072, with no floor shadow, no hoodie drawstrings and no glasses. One change per step; pose, hair, face shape and colours are kept. The full PNGs, every attempt and the scripts are in art/parts/style-concepts/mio-ref-clean/.",
+ "images": [
+  {"id": "sheet", "image": "bible/shots/showcase/mio-ref-clean/sheet.webp", "caption": "Every attempt in order. Top row: original, each step, final, cut-out. Middle row: the drawstrings attempts (03a and 03b redrew dark strings). Bottom row: the glasses attempts (04a kept square glasses, 04b changed the eye colour)."}
+ ],
+ "sections": [
+  {"title": "Final", "caption": "3072x3072, plain pale grey background, and a transparent cut-out.",
+   "images": [
+    {"id": "final", "image": "bible/shots/showcase/mio-ref-clean/final.webp", "caption": "final.png (shown here as webp)"},
+    {"id": "final-cutout", "image": "bible/shots/showcase/mio-ref-clean/final-cutout.webp", "caption": "final-cutout.png, transparent background"}
+   ]},
+  {"title": "Steps", "caption": "Each step changes one thing in the step before it.",
+   "images": [
+    {"id": "step-01", "image": "bible/shots/showcase/mio-ref-clean/step-01-upscale.webp", "caption": "01: RealESRGAN anime x4, scaled to 3072"},
+    {"id": "step-02", "image": "bible/shots/showcase/mio-ref-clean/step-02-no-shadow.webp", "caption": "02: floor shadow filled with the background colour; the figure is untouched"},
+    {"id": "step-03", "image": "bible/shots/showcase/mio-ref-clean/step-03-no-strings.webp", "caption": "03: drawstrings and eyelets painted out (attempt 03e: blended fill, then RDBT masked inpaint at 0.65)"},
+    {"id": "step-04", "image": "bible/shots/showcase/mio-ref-clean/step-04-no-glasses.webp", "caption": "04: glasses frame painted out, eyes kept (attempt 04d: frame filled, then RDBT masked inpaint at 0.45 on the frame strip only)"}
+   ]}
+ ],
+ "links": [{"label": "Review char-face-1", "href": "bible/#review/char-face-1"}]
+}
