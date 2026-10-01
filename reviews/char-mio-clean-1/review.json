@@ -1,0 +1,116 @@
+{
+  "title": "Mio: Meshy texture and eye-edge cleanup",
+  "date": "2026-10-01",
+  "by": "Codex",
+  "status": "open",
+  "issue": 171,
+  "multi": true,
+  "question": "Does 05-safe improve the texture and eyes enough to keep working from it?",
+  "media": [
+    {
+      "image": "art/parts/style-concepts/claude-miogen3d/clean/05-safe/renders/face-40.png",
+      "caption": "Original left, 05-safe right. Fine mottling is softened; the raised eye ridge and some texture seams remain. Your brief: This is REALLY quite close, sans the \"dirty\" textures nad the eyes which havae tilted forward on their own little edge. Could this be cleaned up?  Overall: its not done but has potential"
+    },
+    {
+      "image": "art/parts/style-concepts/claude-miogen3d/clean/source-texture.jpg",
+      "caption": "Original embedded atlas, extracted without editing. Its broad facet colour blocks remain in every attempt. Unlit shading removes extra shadows; the viewer filter softens fine noise only."
+    }
+  ],
+  "options": [
+    {
+      "id": "01-material",
+      "label": "01-material",
+      "image": "art/parts/style-concepts/claude-miogen3d/clean/01-material/renders/body-0.png",
+      "images": [
+        "art/parts/style-concepts/claude-miogen3d/clean/01-material/renders/body-40.png",
+        "art/parts/style-concepts/claude-miogen3d/clean/01-material/renders/body-90.png",
+        "art/parts/style-concepts/claude-miogen3d/clean/01-material/renders/body-180.png",
+        "art/parts/style-concepts/claude-miogen3d/clean/01-material/renders/face-0.png",
+        "art/parts/style-concepts/claude-miogen3d/clean/01-material/renders/face-40.png",
+        "art/parts/style-concepts/claude-miogen3d/clean/01-material/renders/face-90.png",
+        "game3d/shots/codex-meshy-clean/01-material-face-0.png",
+        "game3d/shots/codex-meshy-clean/01-material-face-40.png",
+        "game3d/shots/codex-meshy-clean/01-material-face-90.png"
+      ],
+      "note": "Diagnostic: unlit material only. Geometry and embedded atlas are unchanged. Removes added lighting shadows; baked colour mottling and the eye ridge remain. Settings: no generation prompt or paid job; fixed grey studio, matched camera, original on the left and attempt on the right. Front, 40°, side, back, then face close-ups. Full method and byte hashes are in the receipts."
+    },
+    {
+      "id": "02-eyes",
+      "label": "02-eyes",
+      "image": "art/parts/style-concepts/claude-miogen3d/clean/02-eyes/renders/body-0.png",
+      "images": [
+        "art/parts/style-concepts/claude-miogen3d/clean/02-eyes/renders/body-40.png",
+        "art/parts/style-concepts/claude-miogen3d/clean/02-eyes/renders/body-90.png",
+        "art/parts/style-concepts/claude-miogen3d/clean/02-eyes/renders/body-180.png",
+        "art/parts/style-concepts/claude-miogen3d/clean/02-eyes/renders/face-0.png",
+        "art/parts/style-concepts/claude-miogen3d/clean/02-eyes/renders/face-40.png",
+        "art/parts/style-concepts/claude-miogen3d/clean/02-eyes/renders/face-90.png",
+        "game3d/shots/codex-meshy-clean/02-eyes-face-0.png",
+        "game3d/shots/codex-meshy-clean/02-eyes-face-40.png",
+        "game3d/shots/codex-meshy-clean/02-eyes-face-90.png"
+      ],
+      "note": "Rejected: full eye-depth correction collapses 8 triangles and reverses 455 geometric normals. Unlit material, unchanged atlas. Kept to show the failed attempt. Settings: no generation prompt or paid job; fixed grey studio, matched camera, original on the left and attempt on the right. Front, 40°, side, back, then face close-ups. Full method and byte hashes are in the receipts."
+    },
+    {
+      "id": "03-clean",
+      "label": "03-clean",
+      "image": "art/parts/style-concepts/claude-miogen3d/clean/03-clean/renders/body-0.png",
+      "images": [
+        "art/parts/style-concepts/claude-miogen3d/clean/03-clean/renders/body-40.png",
+        "art/parts/style-concepts/claude-miogen3d/clean/03-clean/renders/body-90.png",
+        "art/parts/style-concepts/claude-miogen3d/clean/03-clean/renders/body-180.png",
+        "art/parts/style-concepts/claude-miogen3d/clean/03-clean/renders/face-0.png",
+        "art/parts/style-concepts/claude-miogen3d/clean/03-clean/renders/face-40.png",
+        "art/parts/style-concepts/claude-miogen3d/clean/03-clean/renders/face-90.png",
+        "game3d/shots/codex-meshy-clean/03-clean-face-0.png",
+        "game3d/shots/codex-meshy-clean/03-clean-face-40.png",
+        "game3d/shots/codex-meshy-clean/03-clean-face-90.png"
+      ],
+      "note": "Rejected: 60% eye correction creates 10 local triangle crossings and reverses 17 geometric normals. Adds the viewer-only fine texture filter. Kept to show the failed attempt. Settings: no generation prompt or paid job; fixed grey studio, matched camera, original on the left and attempt on the right. Front, 40°, side, back, then face close-ups. Full method and byte hashes are in the receipts."
+    },
+    {
+      "id": "04-border",
+      "label": "04-border",
+      "image": "art/parts/style-concepts/claude-miogen3d/clean/04-border/renders/body-0.png",
+      "images": [
+        "art/parts/style-concepts/claude-miogen3d/clean/04-border/renders/body-40.png",
+        "art/parts/style-concepts/claude-miogen3d/clean/04-border/renders/body-90.png",
+        "art/parts/style-concepts/claude-miogen3d/clean/04-border/renders/body-180.png",
+        "art/parts/style-concepts/claude-miogen3d/clean/04-border/renders/face-0.png",
+        "art/parts/style-concepts/claude-miogen3d/clean/04-border/renders/face-40.png",
+        "art/parts/style-concepts/claude-miogen3d/clean/04-border/renders/face-90.png"
+      ],
+      "note": "Rejected: border pinning and a short taper create at least 67 local crossings and reverse 43 geometric normals. Same texture filter. Kept to show the failed repair. Settings: no generation prompt or paid job; fixed grey studio, matched camera, original on the left and attempt on the right. Front, 40°, side, back, then face close-ups. Full method and byte hashes are in the receipts."
+    },
+    {
+      "id": "05-safe",
+      "label": "05-safe",
+      "image": "art/parts/style-concepts/claude-miogen3d/clean/05-safe/renders/body-0.png",
+      "images": [
+        "art/parts/style-concepts/claude-miogen3d/clean/05-safe/renders/body-40.png",
+        "art/parts/style-concepts/claude-miogen3d/clean/05-safe/renders/body-90.png",
+        "art/parts/style-concepts/claude-miogen3d/clean/05-safe/renders/body-180.png",
+        "art/parts/style-concepts/claude-miogen3d/clean/05-safe/renders/face-0.png",
+        "art/parts/style-concepts/claude-miogen3d/clean/05-safe/renders/face-40.png",
+        "art/parts/style-concepts/claude-miogen3d/clean/05-safe/renders/face-90.png",
+        "art/parts/style-concepts/claude-miogen3d/clean/05-safe/renders/phone-clean.png",
+        "art/parts/style-concepts/claude-miogen3d/clean/05-safe/renders/phone-original.png"
+      ],
+      "note": "Partial cleanup: unlit material and a viewer-only, edge-aware fine texture filter. The eye band retreats by up to 6.67 mm at 20% strength. The raised eye ridge remains visible, especially from the side; hair and back texture seams remain. Independent local audit: 0 new crossings across 80,586 pairs, 0 new degenerate triangles and 0 reversed geometric normals. Face width/height, UVs, indices, embedded atlas and all vertices outside the eye patch are unchanged. Original normals are retained, so this candidate is for unlit viewing. The atlas itself has not been repainted; the filter is not portable in the GLB alone. Dense mesh, no rig; not installed in the game. Settings: no generation prompt or paid job; fixed grey studio, matched camera, original on the left and attempt on the right. Front, 40°, side, back, then face close-ups. Full method and byte hashes are in the receipts."
+    }
+  ],
+  "links": [
+    {
+      "label": "Rotate original and cleanup together",
+      "href": "tools/style-concepts/mio_clean_viewer.html?c=05-safe"
+    },
+    {
+      "label": "Methods, hashes and audit limits",
+      "href": "reviews/char-mio-clean-1/evidence.json"
+    },
+    {
+      "label": "Independent local geometry audit",
+      "href": "art/parts/style-concepts/claude-miogen3d/clean/evidence/codex-mio-clean05-review.txt"
+    }
+  ]
+}

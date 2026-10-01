@@ -1,0 +1,529 @@
+{
+  "source": "art/parts/style-concepts/claude-miogen3d/raw/meshy-single/norm.glb",
+  "source_sha256": "1345f5ba3796e76475356ca53cfc6c790ef5061d963e368db574fa8519f0a898",
+  "diagnosis": "Dirt combines baked texture mottling with added material lighting. No normal/AO map is present. Raised eye/lash edges are geometry, not a painted shadow.",
+  "new_paid_jobs": 0,
+  "atlas_repainted": false,
+  "texture_filter": "Viewer-only bilateral 5x5 sampling, 1.5 texel spacing. Coarse colour boundaries retained; no exported texture edit.",
+  "candidate": "05-safe",
+  "eye_strength": 0.2,
+  "max_retreat_m": 0.0066722147014271335,
+  "remaining": [
+    "Raised eye ridge remains",
+    "Hair/back texture seams remain",
+    "No rig or game integration",
+    "Dense 1,280,368-triangle source topology unchanged",
+    "Original stored normals retained for unlit viewing"
+  ],
+  "independent_geometry_audit": {
+    "pairs": 80586,
+    "local_triangles": 42720,
+    "source_crossings": 0,
+    "candidate_crossings": 0,
+    "new_degenerate": 0,
+    "normal_reversal": 0,
+    "scope": "Same swept-AABB local pairs for source and candidate; includes shared-corner folds; excludes shared-edge and coplanar contacts. Local regression check, not a global self-intersection or watertightness proof."
+  },
+  "viewer_regression": {
+    "afterDelayedOriginal": {
+      "shown": "03-clean",
+      "label": "03 \u00b7 Strong eye correction (rejected)",
+      "bitmaps": 4,
+      "closed": [
+        1,
+        2
+      ]
+    },
+    "afterReplacement": {
+      "shown": "05-safe",
+      "bitmaps": 5,
+      "closed": [
+        1,
+        2,
+        3
+      ]
+    },
+    "errors": []
+  },
+  "geometry_audit": [
+    {
+      "attempt": "01-material",
+      "vertices_moved": 0,
+      "triangles_touched": 0,
+      "new_degenerate_triangles": 0,
+      "normal_turn_over_90_degrees": 0,
+      "min_touched_area_ratio": 1.0,
+      "x_y_uv_indices_texture_unchanged": true,
+      "outside_receipt_region_unchanged": true,
+      "self_intersections": "Not exhaustively checked; original mesh may contain overlapping generated surfaces."
+    },
+    {
+      "attempt": "02-eyes",
+      "vertices_moved": 6003,
+      "triangles_touched": 11834,
+      "new_degenerate_triangles": 8,
+      "normal_turn_over_90_degrees": 455,
+      "min_touched_area_ratio": 0.0,
+      "x_y_uv_indices_texture_unchanged": true,
+      "outside_receipt_region_unchanged": true,
+      "self_intersections": "Not exhaustively checked; original mesh may contain overlapping generated surfaces."
+    },
+    {
+      "attempt": "03-clean",
+      "vertices_moved": 5996,
+      "triangles_touched": 11817,
+      "new_degenerate_triangles": 0,
+      "normal_turn_over_90_degrees": 17,
+      "min_touched_area_ratio": 0.024031683057011796,
+      "x_y_uv_indices_texture_unchanged": true,
+      "outside_receipt_region_unchanged": true,
+      "self_intersections": "Not exhaustively checked; original mesh may contain overlapping generated surfaces."
+    },
+    {
+      "attempt": "04-border",
+      "vertices_moved": 5988,
+      "triangles_touched": 11802,
+      "new_degenerate_triangles": 0,
+      "normal_turn_over_90_degrees": 43,
+      "min_touched_area_ratio": 0.08854798933783249,
+      "x_y_uv_indices_texture_unchanged": true,
+      "outside_receipt_region_unchanged": true,
+      "self_intersections": "Not exhaustively checked; original mesh may contain overlapping generated surfaces."
+    },
+    {
+      "attempt": "05-safe",
+      "vertices_moved": 5976,
+      "triangles_touched": 11776,
+      "new_degenerate_triangles": 0,
+      "normal_turn_over_90_degrees": 0,
+      "min_touched_area_ratio": 0.2599827883219679,
+      "x_y_uv_indices_texture_unchanged": true,
+      "outside_receipt_region_unchanged": true,
+      "self_intersections": "Not exhaustively checked; original mesh may contain overlapping generated surfaces."
+    }
+  ],
+  "receipts": {
+    "01-material": {
+      "source": "art/parts/style-concepts/claude-miogen3d/raw/meshy-single/norm.glb",
+      "source_sha256": "1345f5ba3796e76475356ca53cfc6c790ef5061d963e368db574fa8519f0a898",
+      "texture": "Original embedded JPEG bytes preserved exactly",
+      "material": "KHR_materials_unlit",
+      "vertices": 685823,
+      "triangles": 1280368,
+      "geometry_change": "none",
+      "moved_vertices": 0,
+      "output_sha256": "a45bcc14dee23e61d8543072ce89513db6fdc0a4034532f842fc2d3b3d4e06c7"
+    },
+    "02-eyes": {
+      "source": "art/parts/style-concepts/claude-miogen3d/raw/meshy-single/norm.glb",
+      "source_sha256": "1345f5ba3796e76475356ca53cfc6c790ef5061d963e368db574fa8519f0a898",
+      "texture": "Original embedded JPEG bytes preserved exactly",
+      "material": "KHR_materials_unlit",
+      "vertices": 685823,
+      "triangles": 1280368,
+      "geometry_change": "Eye-band depth only; raised vertices eased back to adjacent face surface",
+      "moved_vertices": 6003,
+      "max_depth_change_m": 0.033361073507135665,
+      "bounds_m": {
+        "x_abs": [
+          0.012,
+          0.088
+        ],
+        "y": [
+          1.064,
+          1.099
+        ],
+        "z_min": 0.04
+      },
+      "reference_surface": "z = 0.079 - 3.6*x*x, smooth regional weight",
+      "x_y_unchanged": true,
+      "output_sha256": "5c2d255fedfa0d71230edec96385153b9d654412764016de6faba3cb6be0385a"
+    },
+    "03-clean": {
+      "source": "art/parts/style-concepts/claude-miogen3d/raw/meshy-single/norm.glb",
+      "source_sha256": "1345f5ba3796e76475356ca53cfc6c790ef5061d963e368db574fa8519f0a898",
+      "texture": "Original embedded JPEG bytes preserved exactly",
+      "material": "KHR_materials_unlit",
+      "vertices": 685823,
+      "triangles": 1280368,
+      "geometry_change": "Reduce forward eye-band protrusion by 60%, with regional falloff",
+      "moved_vertices": 5996,
+      "max_depth_change_m": 0.0200166441042814,
+      "bounds_m": {
+        "x_abs": [
+          0.012,
+          0.088
+        ],
+        "y": [
+          1.064,
+          1.099
+        ],
+        "z_min": 0.04
+      },
+      "reference_surface": "z = 0.079 - 3.6*x*x, smooth regional weight",
+      "x_y_unchanged": true,
+      "material_filter": "Viewer-only bilateral 5x5 texture sampling, 1.5 texel spacing; no atlas repaint",
+      "output_sha256": "5c3acbdaa4adb536b26445b072ee4225c09f20ec3d216691c1f9d833c370e31b"
+    },
+    "04-border": {
+      "source": "art/parts/style-concepts/claude-miogen3d/raw/meshy-single/norm.glb",
+      "source_sha256": "1345f5ba3796e76475356ca53cfc6c790ef5061d963e368db574fa8519f0a898",
+      "texture": "Original embedded JPEG bytes preserved exactly",
+      "material": "KHR_materials_unlit",
+      "vertices": 685823,
+      "triangles": 1280368,
+      "geometry_change": "Reduce forward eye-band protrusion by 60%, with regional falloff",
+      "moved_vertices": 5988,
+      "max_depth_change_m": 0.0200166441042814,
+      "bounds_m": {
+        "x_abs": [
+          0.012,
+          0.088
+        ],
+        "y": [
+          1.064,
+          1.099
+        ],
+        "z_min": 0.04
+      },
+      "reference_surface": "z = 0.079 - 3.6*x*x, smooth regional weight",
+      "x_y_unchanged": true,
+      "material_filter": "Viewer-only bilateral 5x5 texture sampling, 1.5 texel spacing; no atlas repaint",
+      "border_fix": "Crossing border vertices fixed; matching UV seam vertices share 0/0.25/0.75 ring taper",
+      "output_sha256": "737938a2b2d65d7aae32389d6ee03f4a35ee4bbfeaef7bebddf86c11087bbb5a"
+    },
+    "05-safe": {
+      "source": "art/parts/style-concepts/claude-miogen3d/raw/meshy-single/norm.glb",
+      "source_sha256": "1345f5ba3796e76475356ca53cfc6c790ef5061d963e368db574fa8519f0a898",
+      "texture": "Original embedded JPEG bytes preserved exactly",
+      "material": "KHR_materials_unlit",
+      "vertices": 685823,
+      "triangles": 1280368,
+      "geometry_change": "Reduce forward eye-band protrusion by 20%, with regional falloff",
+      "moved_vertices": 5976,
+      "max_depth_change_m": 0.0066722147014271335,
+      "bounds_m": {
+        "x_abs": [
+          0.012,
+          0.088
+        ],
+        "y": [
+          1.064,
+          1.099
+        ],
+        "z_min": 0.04
+      },
+      "reference_surface": "z = 0.079 - 3.6*x*x, smooth regional weight",
+      "x_y_unchanged": true,
+      "material_filter": "Viewer-only bilateral 5x5 texture sampling, 1.5 texel spacing; no atlas repaint",
+      "output_sha256": "5f2ddb4e9d69d9ee629b702d8b5f7f82bc4df372a82d01d87318f71b4128e19f"
+    }
+  },
+  "files": [
+    {
+      "path": "art/parts/style-concepts/claude-miogen3d/clean/01-material/mio.glb",
+      "bytes": 39798388,
+      "sha256": "a45bcc14dee23e61d8543072ce89513db6fdc0a4034532f842fc2d3b3d4e06c7"
+    },
+    {
+      "path": "art/parts/style-concepts/claude-miogen3d/clean/01-material/receipt.json",
+      "bytes": 457,
+      "sha256": "c1df4969b05524d5ea1790fc440fd1242485c0ebe7203f29c78736863f9bb3d8"
+    },
+    {
+      "path": "art/parts/style-concepts/claude-miogen3d/clean/01-material/renders/body-0.png",
+      "bytes": 236760,
+      "sha256": "9505f7bd1958e0273657c524da22b3970a06094c882ad0cb3c5268926fe4217a"
+    },
+    {
+      "path": "art/parts/style-concepts/claude-miogen3d/clean/01-material/renders/body-180.png",
+      "bytes": 209107,
+      "sha256": "c07263e62c9c5b942beb06e627a4fb3867274bb9b138b4ca477ea2f6f2e47c38"
+    },
+    {
+      "path": "art/parts/style-concepts/claude-miogen3d/clean/01-material/renders/body-40.png",
+      "bytes": 239311,
+      "sha256": "22030ca1a6d68044e1ff671da339308001020dc67db27036484f05125a3ee7ae"
+    },
+    {
+      "path": "art/parts/style-concepts/claude-miogen3d/clean/01-material/renders/body-90.png",
+      "bytes": 194332,
+      "sha256": "dcecf05b96fff35d3090584980d8508800508e6076237c390b937ecd83221e71"
+    },
+    {
+      "path": "art/parts/style-concepts/claude-miogen3d/clean/01-material/renders/face-0.png",
+      "bytes": 802296,
+      "sha256": "df48523375d98848b999d737e89894d1fdd6fd83c89bd4aad6b4498cf1cd44b9"
+    },
+    {
+      "path": "art/parts/style-concepts/claude-miogen3d/clean/01-material/renders/face-40.png",
+      "bytes": 904108,
+      "sha256": "bd63fef7f15951cc6171d71e887a6160353cdf58920b18f38c7deace57ce4c2d"
+    },
+    {
+      "path": "art/parts/style-concepts/claude-miogen3d/clean/01-material/renders/face-90.png",
+      "bytes": 699158,
+      "sha256": "96fbeda32ba2917decd9617f8bf08df20ee88534d32358a1ecd69c4b60580715"
+    },
+    {
+      "path": "art/parts/style-concepts/claude-miogen3d/clean/02-eyes/mio.glb",
+      "bytes": 39798388,
+      "sha256": "5c2d255fedfa0d71230edec96385153b9d654412764016de6faba3cb6be0385a"
+    },
+    {
+      "path": "art/parts/style-concepts/claude-miogen3d/clean/02-eyes/receipt.json",
+      "bytes": 798,
+      "sha256": "b33feab4852f46954540f8000ca5ad9e83da66ecb1b44c655b0c3e83e81ab0d8"
+    },
+    {
+      "path": "art/parts/style-concepts/claude-miogen3d/clean/02-eyes/renders/body-0.png",
+      "bytes": 238689,
+      "sha256": "0e0bb221d381f06f2dc81fbc6f1728020295bf034c9a4cdc5a3dfc97aef95496"
+    },
+    {
+      "path": "art/parts/style-concepts/claude-miogen3d/clean/02-eyes/renders/body-180.png",
+      "bytes": 211018,
+      "sha256": "c840a5429d7b60bcf7df73273b1669cb47af24b1a278348a38dc989e25a9c535"
+    },
+    {
+      "path": "art/parts/style-concepts/claude-miogen3d/clean/02-eyes/renders/body-40.png",
+      "bytes": 241113,
+      "sha256": "794512cd1e783f4b73e86cdbe4c079e572b0470c356bfc7451bddcd5e45b2099"
+    },
+    {
+      "path": "art/parts/style-concepts/claude-miogen3d/clean/02-eyes/renders/body-90.png",
+      "bytes": 196399,
+      "sha256": "9148eb3cdda03a7009e7b1a85eda495c8229c53b49e1429ebf41840ed97c3013"
+    },
+    {
+      "path": "art/parts/style-concepts/claude-miogen3d/clean/02-eyes/renders/face-0.png",
+      "bytes": 806773,
+      "sha256": "096c40902662f04fb6a6e9ae5bfcea6c7395aa2093862ea1b9dbbe37d11fe834"
+    },
+    {
+      "path": "art/parts/style-concepts/claude-miogen3d/clean/02-eyes/renders/face-40.png",
+      "bytes": 905395,
+      "sha256": "7b091789fd1a82afcc7750ab39830190e764e2d3f43d57342697556e692d9c8c"
+    },
+    {
+      "path": "art/parts/style-concepts/claude-miogen3d/clean/02-eyes/renders/face-90.png",
+      "bytes": 699895,
+      "sha256": "6d557aa4d54bb342b1f41903275d4efc0d93e604711c3de011f352d76eef81c4"
+    },
+    {
+      "path": "art/parts/style-concepts/claude-miogen3d/clean/03-clean/mio.glb",
+      "bytes": 39798420,
+      "sha256": "5c3acbdaa4adb536b26445b072ee4225c09f20ec3d216691c1f9d833c370e31b"
+    },
+    {
+      "path": "art/parts/style-concepts/claude-miogen3d/clean/03-clean/receipt.json",
+      "bytes": 892,
+      "sha256": "21ea9b8d8bdc6a4bba4e6a12549ae830b53890f76afc3203c2cf2b15d47f28db"
+    },
+    {
+      "path": "art/parts/style-concepts/claude-miogen3d/clean/03-clean/renders/body-0.png",
+      "bytes": 231044,
+      "sha256": "1738e144aff163f087556aa78ab5f6f962ea0942889d9cbfeb4cfb7c4211a9b8"
+    },
+    {
+      "path": "art/parts/style-concepts/claude-miogen3d/clean/03-clean/renders/body-180.png",
+      "bytes": 201381,
+      "sha256": "df2b9c45ed7effdcea1258bd18f794bb3a6359233e034732965268cb7561644a"
+    },
+    {
+      "path": "art/parts/style-concepts/claude-miogen3d/clean/03-clean/renders/body-40.png",
+      "bytes": 234169,
+      "sha256": "f636ca2c7d494f0aa8c75cf1e46d866511ed7995e786e690501912258f9ec377"
+    },
+    {
+      "path": "art/parts/style-concepts/claude-miogen3d/clean/03-clean/renders/body-90.png",
+      "bytes": 190280,
+      "sha256": "cfe284ccf522d5de415e0bc8b9bbd24b3c32d1a0d1e6a76fd47ec51cdda68c82"
+    },
+    {
+      "path": "art/parts/style-concepts/claude-miogen3d/clean/03-clean/renders/face-0.png",
+      "bytes": 725500,
+      "sha256": "7b9cf583f1cf3cfb9b7c4d921228f2a880cb326d59a793f3fb587a82b1ffa642"
+    },
+    {
+      "path": "art/parts/style-concepts/claude-miogen3d/clean/03-clean/renders/face-40.png",
+      "bytes": 817674,
+      "sha256": "0892f779a74683a950fa27763654ae62057591f2d7d765f9db024624822a8032"
+    },
+    {
+      "path": "art/parts/style-concepts/claude-miogen3d/clean/03-clean/renders/face-90.png",
+      "bytes": 620717,
+      "sha256": "675d9e06702673d9df30775971eec3f1ac0bd216bbcbea948e4eb2653c66fa2f"
+    },
+    {
+      "path": "art/parts/style-concepts/claude-miogen3d/clean/03-clean/renders/phone-clean.png",
+      "bytes": 99495,
+      "sha256": "7f2f930114249c807b272479f5be627bcdfc68ab29b4f1b646d15f54eb27b86e"
+    },
+    {
+      "path": "art/parts/style-concepts/claude-miogen3d/clean/03-clean/renders/phone-original.png",
+      "bytes": 110066,
+      "sha256": "94a702b8d0c93c05b4b92fec320a2c5f926213f037c8f9988c2e6fccefab5785"
+    },
+    {
+      "path": "art/parts/style-concepts/claude-miogen3d/clean/04-border/mio.glb",
+      "bytes": 39798420,
+      "sha256": "737938a2b2d65d7aae32389d6ee03f4a35ee4bbfeaef7bebddf86c11087bbb5a"
+    },
+    {
+      "path": "art/parts/style-concepts/claude-miogen3d/clean/04-border/receipt.json",
+      "bytes": 998,
+      "sha256": "6bcc63faa60d71bfb78ab414cea797eade3d40d5e60c02275a87f4aeffb118d4"
+    },
+    {
+      "path": "art/parts/style-concepts/claude-miogen3d/clean/04-border/renders/body-0.png",
+      "bytes": 230434,
+      "sha256": "f0da755caf19629b78fb8e3a8a8d076bf10909ac8a40905c781546620aa47cb7"
+    },
+    {
+      "path": "art/parts/style-concepts/claude-miogen3d/clean/04-border/renders/body-180.png",
+      "bytes": 200790,
+      "sha256": "f707a590857c1c77bd0241c732f82841cbe21a7dd5dd2278bd60c9ff933468aa"
+    },
+    {
+      "path": "art/parts/style-concepts/claude-miogen3d/clean/04-border/renders/body-40.png",
+      "bytes": 233632,
+      "sha256": "c79f15e414c33086927dabfa8b034b1299a344f53129af82110b2c8870db3ec9"
+    },
+    {
+      "path": "art/parts/style-concepts/claude-miogen3d/clean/04-border/renders/body-90.png",
+      "bytes": 189854,
+      "sha256": "55e5befa7c33a83d0e61c6dc80762dc71be572562d858c2485261242180b467d"
+    },
+    {
+      "path": "art/parts/style-concepts/claude-miogen3d/clean/04-border/renders/face-0.png",
+      "bytes": 725004,
+      "sha256": "82f1c5b27dac3ee525c6b26bd41edfffcb3515310c0222657bf0cc74eef6ba56"
+    },
+    {
+      "path": "art/parts/style-concepts/claude-miogen3d/clean/04-border/renders/face-40.png",
+      "bytes": 817007,
+      "sha256": "f86ebe77f8b7b86368927ef91262be29475d0d910d9825cd514ffdefb9c9ec7f"
+    },
+    {
+      "path": "art/parts/style-concepts/claude-miogen3d/clean/04-border/renders/face-90.png",
+      "bytes": 620162,
+      "sha256": "1178d531f01122bd5a0038310d8e516fba12485aafad9baf0d1ca3fe289ae1a9"
+    },
+    {
+      "path": "art/parts/style-concepts/claude-miogen3d/clean/05-safe/mio.glb",
+      "bytes": 39798420,
+      "sha256": "5f2ddb4e9d69d9ee629b702d8b5f7f82bc4df372a82d01d87318f71b4128e19f"
+    },
+    {
+      "path": "art/parts/style-concepts/claude-miogen3d/clean/05-safe/receipt.json",
+      "bytes": 895,
+      "sha256": "5846cb8f172c5843dc58dcfd97fb03c51df823f3152af6f829d0ca3d8dd4a75b"
+    },
+    {
+      "path": "art/parts/style-concepts/claude-miogen3d/clean/05-safe/renders/body-0.png",
+      "bytes": 231523,
+      "sha256": "258c875333254cd471ae3299b0b2039bb21f1501f7203ac8ce99f5725756ad19"
+    },
+    {
+      "path": "art/parts/style-concepts/claude-miogen3d/clean/05-safe/renders/body-180.png",
+      "bytes": 201843,
+      "sha256": "4bf2635fafaa44bad407395257471ada9461b1462d6c5a34379aaf35a72fddb2"
+    },
+    {
+      "path": "art/parts/style-concepts/claude-miogen3d/clean/05-safe/renders/body-40.png",
+      "bytes": 234600,
+      "sha256": "9aa16ac9bdc9a70978b6c48d78867ed4566cfe74d49cd0b8dcede1ea8d43c9d0"
+    },
+    {
+      "path": "art/parts/style-concepts/claude-miogen3d/clean/05-safe/renders/body-90.png",
+      "bytes": 190787,
+      "sha256": "a9753c467b6743fb08718be6ba38ab30c0e10d67422095dc632d93de1ed9a1ce"
+    },
+    {
+      "path": "art/parts/style-concepts/claude-miogen3d/clean/05-safe/renders/face-0.png",
+      "bytes": 725423,
+      "sha256": "6c80c37efd3bb271dc362fe897878be3aa8396a19471e7124268d796506a22f2"
+    },
+    {
+      "path": "art/parts/style-concepts/claude-miogen3d/clean/05-safe/renders/face-40.png",
+      "bytes": 818486,
+      "sha256": "d8bb68c7468e35a99b5cb3c7340a2c7da529fe332a19eee458d6a0c781a700fd"
+    },
+    {
+      "path": "art/parts/style-concepts/claude-miogen3d/clean/05-safe/renders/face-90.png",
+      "bytes": 621687,
+      "sha256": "e617a89e82cd8f2144055b7df806bc35bae2f19f79b8d353444eae8dbc44ecac"
+    },
+    {
+      "path": "art/parts/style-concepts/claude-miogen3d/clean/05-safe/renders/phone-clean.png",
+      "bytes": 96608,
+      "sha256": "575aec4264b0ab88796af1bba73042ce93ae1bbf81a1f720e75cc1ca206ad9da"
+    },
+    {
+      "path": "art/parts/style-concepts/claude-miogen3d/clean/05-safe/renders/phone-original.png",
+      "bytes": 106775,
+      "sha256": "f0a328bee94085bea6c6666ca4e951b639b4602f37256966e5315c3a82f77f71"
+    },
+    {
+      "path": "art/parts/style-concepts/claude-miogen3d/clean/capture-results.json",
+      "bytes": 218,
+      "sha256": "045b9bfc5422f25e197eac215c7565f63e3ab575c9be7c18718d70a37d05f777"
+    },
+    {
+      "path": "art/parts/style-concepts/claude-miogen3d/clean/evidence/codex-clean04-audit.log",
+      "bytes": 1362,
+      "sha256": "60217a47974bf3fc3542636d5a2b94e5f57734252619882490a2a673cf97ee2f"
+    },
+    {
+      "path": "art/parts/style-concepts/claude-miogen3d/clean/evidence/codex-clean05-wide-audit.log",
+      "bytes": 328,
+      "sha256": "3ab2e02ff2b93450ec23455e1009b1bc0868f8d232bda07fc8a074cb3fd56806"
+    },
+    {
+      "path": "art/parts/style-concepts/claude-miogen3d/clean/evidence/codex-mio-clean-review-shared-corners.txt",
+      "bytes": 1362,
+      "sha256": "1f3b30fd865097bf0ee1620e37f25b1ee75d73154338073d5200aec6ce939950"
+    },
+    {
+      "path": "art/parts/style-concepts/claude-miogen3d/clean/evidence/codex-mio-clean-review.py",
+      "bytes": 3757,
+      "sha256": "d9f350c577fb7f670dd75b7058e2efb037a1073be02b7351458490ade233f8bf"
+    },
+    {
+      "path": "art/parts/style-concepts/claude-miogen3d/clean/evidence/codex-mio-clean05-proof.json",
+      "bytes": 1235,
+      "sha256": "78d712a238edcfc5966280e37dd41493ed1d895b7d219c759a735b180b8fef5f"
+    },
+    {
+      "path": "art/parts/style-concepts/claude-miogen3d/clean/evidence/codex-mio-clean05-review.txt",
+      "bytes": 328,
+      "sha256": "3ab2e02ff2b93450ec23455e1009b1bc0868f8d232bda07fc8a074cb3fd56806"
+    },
+    {
+      "path": "art/parts/style-concepts/claude-miogen3d/clean/evidence/viewer-repro.json",
+      "bytes": 307,
+      "sha256": "bcbea995f3cb94b90bb5422700d5ecd215267f498c34400b2b2a9379a0758538"
+    },
+    {
+      "path": "art/parts/style-concepts/claude-miogen3d/clean/evidence/viewer-repro.mjs",
+      "bytes": 3139,
+      "sha256": "bf05fed0de10563d4508f649cca81cb9da668e77c082d5593bb34a4f3d2b63c2"
+    },
+    {
+      "path": "art/parts/style-concepts/claude-miogen3d/clean/geometry-audit.json",
+      "bytes": 2090,
+      "sha256": "7805e6dd248e197e6d3ac66513ddad99aa6e34731cdd5d585cbd66dbe34d8d47"
+    },
+    {
+      "path": "art/parts/style-concepts/claude-miogen3d/clean/intersection-audit.json",
+      "bytes": 678,
+      "sha256": "266dffc89b2298f73e8b40d24723acb9eaa711bf54587eb4aa1487bba81329c2"
+    },
+    {
+      "path": "art/parts/style-concepts/claude-miogen3d/clean/source-texture.jpg",
+      "bytes": 2485934,
+      "sha256": "c542434587f6e8cdaa28328293b7d984c940e4372e685951f8f4a2b5fe200b33"
+    }
+  ]
+}
