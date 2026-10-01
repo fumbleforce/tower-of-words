@@ -14,6 +14,8 @@ def main():
     ims={}
     for file in sorted((base/'renders').glob('*.png')):
         name=file.stem
+        if name.startswith('webgl-'):
+            continue  # Actual game captures have their own sheets, made by the capture owner.
         ims[name]=Image.open(file).convert('RGB') if name.startswith('game-') else flat(file)
         ims[name].save(base/(name+'.webp'),quality=92)
     order=['front','three-quarter','side','back','face','face-3q','walk']

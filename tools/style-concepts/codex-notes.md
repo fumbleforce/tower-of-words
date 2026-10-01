@@ -4,7 +4,7 @@ For C-0276, C-0279 and C-0287, work issue #151. These are candidates for Claudeâ
 
 Portrait references: `game3d/assets/portraits/mio-neutral.webp` and `eric-neutral.webp`, checked against `docs/game/cast.md`. Mio keeps dark green hair with green beneath, glasses, light tan eyes, a dark hoodie and headphones. Eric keeps dark-blond tied hair, silver rectangular glasses, stubble, a grey hoodie and navy blazer. Her green underside is on her left (image right in the front view).
 
-The approaches are sewn cloth, compact carved puppets, and squash cartoon. Each has a solid body, separate movable limbs, a seven-bone Blender rig, and exported `idle` and `walk` clips. Materials are plain colours. The head proportions and bodies are stylized together. These are rigid part animation studies; they do not establish production deformation, expression rigs or a draw-call budget.
+The approaches are sewn cloth, compact carved puppets, and squash cartoon. Each has a solid body, separate movable limbs, a seven-bone Blender rig, and exported `idle` and `walk` clips. Materials are plain colours. The head proportions and bodies are stylized together. These are rigid part animation studies; they do not establish production deformation, expression rigs or a draw-call budget. The shared motion helper does not constrain the feet to the floor: idle can lift the whole body and a walk can dip a shoe below zero. Grounded locomotion is a follow-up if a style is selected (X-0392).
 
 ## Reproduce
 
@@ -29,4 +29,4 @@ Canvas signage, texture maps, UI, surface shaders and post-processing are omitte
 
 GLBs must contain both animation clips and load back into Blender. Pair, face, side, rear, walk and forecourt views are inspected before handoff. An independent visual pass identified the face seam and open hair ends corrected in later attempts.
 
-The session could read but could not write the shared `.git`, so the requested worktree was created in a local clone under `/tmp`. Source changes are handed off as a commit bundle and patch for a session able to run `tools/land.sh` against the shared checkout. The GPU driver, local HTTP server and GitHub were unavailable inside the sandbox. The GPU lock was still used for Blender jobs. No Review item is posted by this work.
+The session could read but could not write the shared `.git`, so the requested worktree was created in a local clone under `/tmp`. The main Codex session accepted shared landing and actual WebGL capture in X-0390 through X-0393. It can fetch this local source commit and run `tools/land.sh` against the shared checkout. Its `webgl-*` images and separate sheets remain distinct from these offline `game-*` renders. The GPU driver, local HTTP server and GitHub were unavailable inside the sandbox. The GPU lock was still used for Blender jobs. No Review item is posted by this work.
