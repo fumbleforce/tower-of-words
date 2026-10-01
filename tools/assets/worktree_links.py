@@ -14,7 +14,8 @@ inside .claude/worktrees/, which git ignores. Its files never change.
 
 prune (tools/worktree.sh prune-assets; gone --remove runs it after removing worktrees) deletes the store entries
 no link points at. It reads every symlink in the main checkout (the worktrees under .claude/worktrees/ included)
-and in any other worktree git lists, skipping .git and node_modules. A setup holds a shared lock on <store>/.lock
+and in any other worktree git lists, skipping .git, node_modules and private subtrees, as setup does.
+A setup holds a shared lock on <store>/.lock
 while it links and prune takes it exclusively, so the two never interleave. A setup running an older copy of this
 script (a worktree branched before the lock) doesn't take it, so prune also keeps every entry changed in the last
 --min-age minutes (default 10).
@@ -89,6 +90,8 @@ def linked_entries(main_root, store):
             continue
         with it:
             for e in it:
+                if e.name == 'private':
+                    continue  # GUIDE: never enumerate user-owned content; setup also excludes private paths
                 if e.is_symlink():
                     try:
                         t = os.path.normpath(os.path.join(d, os.readlink(e.path)))
