@@ -1,0 +1,47 @@
+# Island neighbours: what to model next around the day-1 route
+
+Jørgen, 2026-10-01: "I want to queue up more of the island, outdoor, for modelling. the adjacent blocks to where we currently are so it doesnt look like the game is half-finished".
+
+This note is a survey and a ranked queue, not a build. Build 1001-0649-31e1cba6. Where the places sit is in [docs/game/places.md](../docs/game/places.md) ("Where the places sit on the island"). The buildings, paths and green are in game3d/js/scenes/island-layout.js, and buildSkyline (game3d/js/scenes/skyline.js) draws them around each place. The differences from the map are in [map-gaps.md](map-gaps.md). The environment rules (one grid per area, designed junctions, palette, flat-shaded 3D) are in GUIDE.md under Visual design, and how the current places scored is in [environment-critique.md](environment-critique.md).
+
+## Shots
+
+Everything is in game3d/shots/island-neighbours/, which stays on this machine (git-ignored):
+
+- route/: game3d/tools/place-shots.mjs at 1366x860 (`-desk`) and 390x844 (`-phone`), q=1. Forecourt fc1 to fc6, plaza pl1 to pl5, dorm court dc1 and dc4, and the train tr1 and tr2. `e` means after work.
+- map/: game3d/tools/map-shots.mjs, the `?map=1` views and gaps.json.
+- plans/: one sheet per chunk below. On the left is island-map-4 straight down, turned onto the town grid, with the layout's boxes in pink. On the right is the proposed plan in the game's palette: teal outlines are new or upgraded, white marks are doors, and the dark rectangles are places already built. The numbers are a sketch for the builder to confirm, not final. 00-overview.png shows where each chunk sits.
+
+## What the frames show
+
+- The play cameras are steep and fixed: the player can't zoom or orbit. So from any spot, very little of the island beyond each place is in frame. Nowhere does the play camera show the edge of the world. The skyline's ground reaches about 90 units round each place.
+- The half-finished look comes from three things. First, empty ground in a few frames: lawn with nothing behind it east of the plaza, and the plain wing box with bare lawn at the forecourt's top left. Second, the island map. Its "Built places" view draws the forecourt and plaza as one tile and the dorm court as a small separate tile, both on navy, with nothing between them. Third, the two walks the crossfade skips: 9.7 units from the forecourt to the plaza, and 25.4 from the plaza to the dorm court (map-gaps F3).
+- The train's outside is its own world (game3d/js/train/world.js): sea, beam and pillars. It looks finished, but the island never appears during the ride.
+
+## Queue, most visible first
+
+| # | Chunk | Seen from | How much | Detail | Job | Plan |
+|---|---|---|---|---|---|---|
+| 1 | East lane: plaza to the dorm court | pl4 and pl4e (the plaza's east exit, morning side trip and the walk home), pl1-phone; the map's gap between the two tiles | phone pl4: about half the frame is bare lawn; desktop pl4: the right fifth | backdrop facades on six small blocks, the lane and its planting on the ground; nothing inside | large | plans/1-east-lane.png |
+| 2 | Forecourt north edge: the head office wing, a street up the shed's east side, a street behind the tower | fc1, fc2, fc3 desktop (the first outdoor frames of the day), fc1e; the forecourt tile's north edge on the map | desktop: about an eighth of the frame, top left | wing facade (ground floor, staff door), two streets, planting | medium | plans/2-forecourt-north.png |
+| 3 | Dorm cluster around the court | dc1 and dc4 edges (the street at the bottom, the dark garden at the left); the small dorm tile on the map | about a tenth of the frame, mostly the map | backdrop facades of the cluster's blocks, a dorm street, the inner court garden | medium | plans/3-dorm-cluster.png |
+| 4 | Shop street roofs and the seafront | the map only: the shop rows read as plain roof boxes over about a fifth of the main tile; no play frame | map | roofs and backs only (the shop fronts face the arcade); promenade, sea wall, stairs, beach | large | plans/4-shop-roofs-seafront.png |
+| 5 | North of the lane: office_e1, the clinic, the canteen's back | the top edge of fc5 and fc6 (beyond the garden's back hedge), the top edge of pl5; the map | under a tenth, top edge | backdrop facades, a back lane, door paths | medium-small | plans/6-lane-north.png |
+| 6 | Station west and the coast | the map only (the forecourt tile's west edge); env-rescore3's plan view of the west lawn running out | map | ground only: a coast path, planting, rocks, sea wall | small | plans/5-station-west-coast.png |
+| 7 | The train's arrival over the coast | every train frame is about half open sea; the island never shows | low (it reads as finished) | rocks, sea wall and beach sliding under the beam in the last seconds before the shed | small | plans/5-station-west-coast.png (the beam) |
+
+## The chunks
+
+1. **East lane.** On the map, the street east of the fountain runs between small two- and three-storey blocks among street trees: block_e1 to the north, m_e1, m_e2, r8 and r9 to the south, and block_e3 up a side street. The plan keeps route_home and its jog as they are. It carries the plaza's avenue on at the same pitch, puts a T where the jog's top leg meets a north street (toward housing_n), and puts a pocket park (lawn, a gravel square with one tree and benches) inside the jog. Each block's door gets a path that meets the lane square on, with a junction square. Files: island-layout.js (paths, green, details), a new builder module, game3d/js/scenes/plaza.js (it sees this ground; skip list and call), and the plaza's `view` in CHUNKS so the map draws it. It also closes most of map-gaps F3 on the map.
+2. **Forecourt north edge.** The map draws a street running north between the platform shed and the offices, and trees behind the tower. The plan has a shed street leaving the court through a mouth in its north bed, the same way the lane leaves its north-east corner, with a tree strip along the shed. A cross street behind the wing and the tower ends at office_e1's door. The wing gets a ground floor and a staff door onto the street. Files: island-layout.js, a new builder module, game3d/js/scenes/forecourt.js (skip list).
+3. **Dorm cluster.** The map draws towers round a planted inner court, with shops along the street to the south. The plan carries the lane's leg on south past the court gate, then east as a dorm street into the inner court, with a cross of paths and every block's door on a path. The layout's sento_laundry box repeats the frontage the court already shows (map-gaps D4); main decides whether to drop it or make it another shop. Files: island-layout.js, a new builder module, game3d/js/scenes/dorm-court.js (skip list).
+4. **Shop roofs and seafront.** The rows themselves are built (game3d/js/scenes/plaza-buildings.js). What's missing is roof variety (heights, signs, plant, a ribbed arcade roof) and the seafront: the map's promenade, sea wall, two stairs and beach. In the layout the promenade runs at an angle along the coast; the plan squares it onto the grid behind the south row and meets the arcade's two mouths. Files: plaza-buildings.js, island-layout.js (the promenade), skyline.js (the beach colour in the ground mesh), a new builder module.
+5. **North of the lane.** The map draws the clinic behind the canteen, and office_e1 among trees between the tower and the plaza. The plan has a back lane behind the canteen that gives the clinic its door and meets the main lane square on, just east of the plaza's ring bed (the ring stays closed). office_e1's door is the end of chunk 2's cross street, so build 2 before 5. Files: island-layout.js, plaza.js or forecourt.js, a new builder module.
+6. **Station west.** The map draws a promenade and rocks along the shed's west side, and the beach south of the station. The plan has a coast path on the grid west of the shed, down to the promenade's west end, with rocks and a sea wall along the layout's coast line. Files: island-layout.js, skyline.js (rocks in the ground), forecourt.js.
+7. **Train arrival.** The beam crosses the sea wall at about (-38, 27). For the last seconds before the shed, the sea could give way to rocks, the wall and the beach under the train. Files: game3d/js/train/world.js. game3d/js/places/train.js is held by claude-agent:train-batch-start (C-0251).
+
+## For every chunk
+
+- Day 1 walks none of these, so they get exterior and backdrop detail only, with no interiors. Each new module stays inside a perf budget like buildSkyline's (it says at most 10 meshes and 25k triangles per place) and is checked on the phone tier.
+- Each one changes what the game is, so it updates docs/game/places.md in the same commit. Grok holds places.md (G-0002, the dorm-court bath), so every chunk waits for that release or asks Grok. Chunk 3 also sits next to Grok's game3d/js/places/dorm-court.js. The scene builder game3d/js/scenes/dorm-court.js isn't in that claim.
+- Use the outdoor kit the plaza and forecourt use (game3d/js/scenes/outdoor/, game3d/js/look/), the town palette (game3d/js/scenes/town.js) and not the map's colours, and put every building and path on the grid.
