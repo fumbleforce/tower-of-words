@@ -478,6 +478,7 @@ const { prepare, enter, travel, startScene } = createPlaceLifecycle(game, {
   PLACES,
   setComposer,
   resize,
+  size,
   buildMarkers,
   nearSet,
   zoneSet,

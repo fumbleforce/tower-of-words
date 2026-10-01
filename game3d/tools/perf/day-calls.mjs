@@ -4,6 +4,7 @@
 // Also a timeline per place (ms after entering it, calls, Eric's x,z, his target) and the split of the busiest frame.
 //   node game3d/tools/perf/day-calls.mjs [w] [h] [--places train,gate,office] [--q 0] [--every 400] [--trips] [--top 15] [--who kuro]
 // --trips also samples while a trip (walk out, crossfade, lift ride) is on screen, which is skipped otherwise.
+// It stops once every place asked for has been played and left (the rest of the day is not waited for).
 // BASE=<dir> for a worktree.
 import { withBrowserJob } from '../../../tools/lib/browser-job.mjs';
 import { openGame } from '../../test/support/open-game.mjs';
@@ -63,8 +64,11 @@ await withBrowserJob('perf-day-calls', async (browser) => {
       return { place: pl.name, near: g.near?.id, at: Math.round(performance.now() - (entered || 0)), pos: e ? [+e.x.toFixed(1), +e.z.toFixed(1)] : null, per, total: Object.values(out).reduce((a, b) => a + b, 0), tris, out, names };
     }
     let entered = 0, last = null;
+    const left = new Set(only); // stop once every place asked for has been played and left
     while (!window.__test?.done && !window.__ended) {
       if (g.place !== last) (last = g.place), (entered = performance.now());
+      if (g.place && only.includes(g.place.name)) left.delete(g.place.name);
+      else if (g.place && !left.size) break;
       const trip = document.body.classList.contains('trip');
       if (g.place && only.includes(g.place.name) && (trips || !trip)) rows.push({ ...(await measure()), trip });
       await new Promise((x) => setTimeout(x, every));

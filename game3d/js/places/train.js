@@ -674,13 +674,18 @@ export async function trainPlace(game) {
     },
   };
   const _v = new THREE.Vector3();
-  function fit(aspect) {
+  // the cut-away for the screen's shape (a portrait phone sees the car from its end)
+  function layout(aspect) {
     const mode = aspect >= 1 ? 'land' : 'port';
     if (car.mode !== mode) {
       car.setMode(mode);
       findDoors();
       setDoors(st.door);
     }
+    return mode;
+  }
+  function fit(aspect) {
+    const mode = layout(aspect);
     camera.aspect = aspect;
     let pts, limX, limY;
     cam.follow = false;
@@ -1024,6 +1029,7 @@ export async function trainPlace(game) {
       car.proxy.visible = !st.departing;
     },
     fit,
+    layout,
     pick(rc) {
       const floorM = car.root.getObjectByName('floor');
       const hit = rc.intersectObject(floorM, false)[0];
@@ -1666,6 +1672,17 @@ export async function trainPlace(game) {
   P._setDoors = setDoors;
   P.kotodamaTargets = (name) => (name === 'doors' ? myLeaves.map((d) => d.g) : []);
   kitty.userData.tail.rotation.y = 0;
+  // what update() moves every frame, so the draw-call pass batches under them before the first frame (js/perf/batch.js)
+  P.perfMovers = [
+    pivot,
+    station,
+    ...neighbours.flatMap((n) => [n.pivot, n.bellows]),
+    ...world.movers,
+    ...car.nodders.map((n) => n.obj),
+    ...list.map((p) => p.head),
+    kitty.userData.head,
+    kitty.userData.tail,
+  ];
   return P;
 }
 // Mio's sitting pose on a bench: offsets from the seat top (tuned against screenshots)

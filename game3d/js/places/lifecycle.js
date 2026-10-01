@@ -21,7 +21,7 @@ const BATCHED = new Set(['train', 'gate', 'office', 'forecourt', 'plaza', 'dorm_
 
 export function createPlaceLifecycle(
   game,
-  { PLACES, setComposer, resize, buildMarkers, nearSet, zoneSet, snapshot, crossfade },
+  { PLACES, setComposer, resize, size, buildMarkers, nearSet, zoneSet, snapshot, crossfade },
 ) {
   const ui = game.ui;
   installFinds(game); // the photos and papers Eric picks up (finds/index.js)
@@ -41,6 +41,10 @@ export function createPlaceLifecycle(
         // place being played doesn't stall (js/perf/slice.js)
         await sliced(lookSteps(place, game));
         lightenForPhone(place, name); // phones only: less detail where it barely shows (js/perf/phone.js)
+        // a place built for the screen's shape (the train's cut-away) takes it now, so the draw-call pass merges
+        // what will be shown, not what entering would rebuild
+        const [w, h] = size();
+        place.layout?.(w / h);
         if (BATCHED.has(name)) optimizePlace(place, { game, ...phoneBatch() });
         addFindSpots(game, place); // after the draw-call pass, so each print stays its own mesh to hide
         // shaders and textures ready before the first frame there, so entering doesn't stall (js/perf/warm.js)

@@ -83,6 +83,10 @@ export function optimizePlace(place, opt = {}) {
   const perf = { stats, batches, info, movers, scan, check, dispose, toggle, why, toggleBatch, describe, forOutline };
   place.perf = perf;
   if (off) return perf;
+  // groups the place moves every frame (place.perfMovers: the train car swaying, the pillars going by): batches go
+  // under them from the first scan, built before the place shows, instead of every mesh under them drawing on its
+  // own for the first second or so while the pass finds them moving a level at a time
+  for (const n of place.perfMovers || []) if (n && n.isObject3D) movers.add(n);
 
   // People and the things the story talks about keep to themselves: their meshes only merge with each other,
   // under their own root (so outlines, hover and show/hide still work on the whole of them). Eric and Mio, and
@@ -350,7 +354,9 @@ export function optimizePlace(place, opt = {}) {
       }
       const o = stack.pop();
       if (ex.has(o) || o.isBone || o.userData.perfBatch || o.userData.noBatch || coplanar.has(o)) continue;
-      if (!o.visible) continue; // hidden subtrees wait until they show
+      // hidden subtrees wait until they show, but for a hidden group that moves (the train's station, shown as it pulls
+      // in): its batches hang under it and hide with it
+      if (!o.visible && (o.isMesh || !movers.has(o))) continue;
       for (let i = 0; i < o.children.length; i++) stack.push(o.children[i]);
       if (!o.isMesh) continue;
       let r = info.get(o);
