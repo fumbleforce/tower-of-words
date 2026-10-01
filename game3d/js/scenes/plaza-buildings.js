@@ -28,8 +28,8 @@ function litGlass(color = '#4c5a68') {
   });
 }
 
-// a sign board: the kana large, the English small under it
-function signBoard(text, en, w, h, color) {
+// a sign board: the kana large, the English small under it (also the east lane's, plaza/east-lane.js)
+export function signBoard(text, en, w, h, color) {
   const tex = textTexture(
     (ctx, W, H) => {
       ctx.fillStyle = color;

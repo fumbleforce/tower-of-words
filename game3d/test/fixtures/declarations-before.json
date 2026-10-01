@@ -625,6 +625,11 @@
           "label": "To the dorms",
           "kind": "thing"
         },
+        "training_door": {
+          "label": "Training centre",
+          "kind": "thing",
+          "verb": "Go in"
+        },
         "canteen_table": {
           "label": "Canteen table",
           "kind": "thing",

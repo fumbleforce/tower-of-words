@@ -34,7 +34,7 @@ import { pigeons } from './outdoor/pigeons.js';
 import { fountain } from './plaza/fountain.js';
 import * as P from './plaza/plan.js';
 import { buildEastLane } from './plaza/east-lane.js';
-import { BLOCK_IDS } from './plaza/east-plan.js';
+import { BLOCK_IDS, BLOCKS as EAST_BLOCKS, CROSS } from './plaza/east-plan.js';
 import { buildNorthLane } from './plaza/north-lane.js';
 import { NORTH_IDS } from './plaza/north-plan.js';
 import { clusterSteps, placeIn, CLUSTER_IDS } from './dorm-court/cluster.js';
@@ -46,8 +46,11 @@ const CHUNK = 'plaza';
 export const laneZ = () => LZ;
 const lanePoint = (x) => [x, LZ];
 const laneFace = () => Math.PI / 2; // east
+// the training centre (block_e1, plaza/east-plan.js): its door at the head of the cross walk, north off the lane
+const TRAINING = EAST_BLOCKS.find((k) => k.id === 'block_e1');
+const CROSS_N = [CROSS[0], CROSS[1], TRAINING.rect[3], LZ]; // the cross walk from the lane up to that door
 const WEST_X = F[0] - R - 2.5, // on the lane west of the circle: walking on past it goes back to the forecourt
-  EAST_X = F[0] + R + 2.5; // and on the lane east of it, on toward the dorms
+  EAST_X = CROSS[1] + 1.4; // and on the lane east of the cross walk, on toward the dorms
 const NAV = [WEST_X - 3.4, EAST_X + 3.4, CANTEEN[3] + 0.3, F[1] + R + 0.2];
 
 // buildPlaza() builds it at once; plazaSteps() yields between parts, for building in slices (js/perf/slice.js)
@@ -64,14 +67,17 @@ export function* plazaSteps() {
   sun.target.position.set(1, 0, -3);
   sun.position.add(sun.target.position);
 
-  // walkable: the circle (never the basin), the lanes, the link, the terrace (through the gap in its wall)
+  // walkable: the circle (never the basin), the lanes, the link, the terrace (through the gap in its wall), the
+  // cross walk up to the training centre's door
   const nav = new Nav(NAV[0], NAV[1], NAV[2], NAV[3], 0.1);
   const terrace = [TERRACE[0], TERRACE[1], TERRACE[2] + 0.3, TERRACE_S - 0.25];
   const link = [LINK[0], LINK[1], TERRACE_S - 1, LINK[3]];
   nav.extra = (x, z) => {
     const r = Math.hypot(x - F[0], z - F[1]);
     if (r < BASIN + 0.3) return false;
-    return r < R - 0.3 || onLane(x, z) || inRect(x, z, terrace) || inRect(x, z, link, 0.25);
+    return (
+      r < R - 0.3 || onLane(x, z) || inRect(x, z, terrace) || inRect(x, z, link, 0.25) || inRect(x, z, CROSS_N, 0.25)
+    );
   };
 
   buildGround(root);
@@ -139,6 +145,9 @@ export function* plazaSteps() {
     arriveIn,
     arriveFace: laneFace(),
     dormExit: lanePoint(EAST_X - 0.8),
+    // the training centre's door, and where Eric stands to try it
+    trainingDoor: [TRAINING.at, TRAINING.rect[3]],
+    trainingStep: [TRAINING.at, TRAINING.rect[3] + 0.8],
     dormEdge: lanePoint(EAST_X + 2.2),
     westX: WEST_X,
     eastX: EAST_X,

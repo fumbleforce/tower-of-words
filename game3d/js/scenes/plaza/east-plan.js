@@ -53,7 +53,16 @@ export const SQUARE = (() => {
 // roof instead of a flat one
 const b = (id) => rect(building(id).rect);
 export const BLOCKS = [
-  { id: 'block_e1', face: 's', at: (CROSS[0] + CROSS[1]) / 2, ground: 'office', wall: 1 },
+  // block_e1: the new-staff training centre, its sign on the canopy (its door is a thing, places/plaza.js)
+  {
+    id: 'block_e1',
+    face: 's',
+    at: (CROSS[0] + CROSS[1]) / 2,
+    ground: 'office',
+    wall: 1,
+    sign: ['けんしゅう', 'NEW STAFF TRAINING'],
+    dark: true,
+  },
   { id: 'm_e2', face: 'n', at: (CROSS[0] + CROSS[1]) / 2, ground: 'shop', wall: 3, tiled: true },
   { id: 'm_e1', face: 'n', at: null, ground: 'cafe', wall: 0 },
   { id: 'r8', face: 'n', at: (PARK_NS[0] + PARK_NS[1]) / 2, ground: 'office', wall: 2 },
