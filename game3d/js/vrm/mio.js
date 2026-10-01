@@ -204,7 +204,7 @@ export async function loadVrmMio({ height = 1.12, flat = false, original = false
       material.needsUpdate = true;
     }
   });
-  if (!original) glasses(vrm);
+  const eyewear = original ? null : glasses(vrm);
   const clips = retarget(walk.scene, vrm, {
     walk: walk.animations[0],
     run: run.animations[0],
@@ -225,13 +225,23 @@ export async function loadVrmMio({ height = 1.12, flat = false, original = false
     actions[name].reset().play();
     current = name;
   }
+  const head = vrm.humanoid.getNormalizedBoneNode('head');
+  const animatedHead = head.quaternion.clone();
+  let headPitch = 0;
+  function setHeadPitch(degrees) {
+    headPitch = THREE.MathUtils.degToRad(degrees);
+  }
   function update(dt) {
+    // Restore the animation result before applying the offset, including while paused.
+    head.quaternion.copy(animatedHead);
     mixer.update(dt);
+    animatedHead.copy(head.quaternion);
+    head.rotateX(headPitch);
     vrm.update(dt);
   }
   setState('idle');
   update(0);
   // Place spring bones after the first animated pose, before their simulation starts.
   vrm.springBoneManager?.reset();
-  return { root, model, mixer, vrm, setState, update };
+  return { root, model, mixer, vrm, setState, update, eyewear, setHeadPitch };
 }

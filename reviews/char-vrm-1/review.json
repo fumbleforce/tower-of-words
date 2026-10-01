@@ -86,8 +86,8 @@
   ],
   "links": [
     {
-      "label": "Live VRM preview: turn, zoom, idle, walk, run, expression",
-      "href": "game3d/vrm-test.html"
+      "label": "Adjust the VRM settings yourself",
+      "href": "game3d/vrm-test.html?variant=recolour"
     },
     {
       "label": "SDK, editor and source details",
