@@ -10,17 +10,20 @@
 # local HEAD and symlinks node_modules, .worktreeinclude copies .env). Run `setup` in those too: it's idempotent.
 # Codex and hand-made worktrees use `new`. Either way, land the branch with tools/land.sh.
 #
-# setup links, never copies, from the main checkout:
-#   - node_modules (the folder) and .env
+# setup links, from the main checkout:
+#   - node_modules (the folder) and .env, straight to main's
 #   - every file in this worktree's asset lock file (tools/assets/assets.lock.json) that it lacks, binary or not,
 #     if main's copy is the locked version (same sha256; sync.py's hash cache keeps this fast). A locked file main
 #     has changed (another task's round in progress) is fetched from R2 into the worktree instead (sync.py pull),
 #     or left out and listed if that fails; a link an earlier setup made to such a file is replaced the same way;
 #   - main's other untracked files under the asset roots (tools/assets/sync.json, plus the voice pipeline's) that
 #     this worktree's .gitignore ignores, except unpushed assets (used but not in the lock: another task's work in
-#     progress, which the commit check would count). One symlink per file.
-# The links are read-only in spirit: to change an asset in a worktree, delete its link first and write a new file;
-# tools/land.sh then keeps the worktree and lists the new file instead of deleting it.
+#     progress, which the commit check would count). One symlink per file, to a read-only copy of main's version
+#     in a store all worktrees share, .claude/worktrees/.assets/ (tools/assets/worktree_links.py: one copy per
+#     version, made the first time a setup needs it), so a script writing through a link fails with "Permission
+#     denied" and can't change main's file (#148). Rerunning setup points the links at main's current versions.
+# To change an asset in a worktree, delete its link first and write a new file; tools/land.sh then keeps the
+# worktree and lists the new file instead of deleting it.
 set -euo pipefail
 
 die() { echo "worktree: $*" >&2; exit 1; }
@@ -85,25 +88,30 @@ sys.stdout.write("".join(p + "\0" for p in sorted(have) if have[p][1] != lock[p]
       "$wt/tools/assets" "$main" "$wt/tools/assets/assets.lock.json")
   fi
   local -A skip=()
-  local rel
+  local rel store="$main/.claude/worktrees/.assets" old
   for rel in "${changed[@]}"; do
     skip[$rel]=1
-    # a link from an earlier setup now points at the changed copy: drop it so the locked version can come in
-    if [[ -L "$wt/$rel" && "$(readlink "$wt/$rel")" == "$main/$rel" ]]; then rm "$wt/$rel"; fi
+    # a link from an earlier setup holds main's old version, or (setups before #148) points at the changed copy:
+    # drop it so the locked version can come in
+    [[ -L "$wt/$rel" ]] || continue
+    old=$(readlink "$wt/$rel")
+    if [[ "$old" == "$main/$rel" || "$old" == "$store/"* ]]; then rm "$wt/$rel"; fi
   done
 
   # Linked: every locked file this worktree lacks, whatever its type or this branch's .gitignore says; and main's
   # other untracked files under the roots that this worktree ignores (so a link never shows up as a new file to
   # commit) and that aren't unpushed assets. Links to locked files git doesn't ignore (the public creator's JSON) do
   # show as untracked; tools/land.sh passes over links to main's same path.
-  local files=0 rel
-  while IFS= read -r -d '' rel; do
-    files=$((files + 1))
-    [[ -n "${skip[$rel]:-}" ]] || link "$rel"
-  done < <({ lock_paths; git -C "$main" ls-files -z --others -- "${roots[@]}" \
-               | git -C "$wt" check-ignore -z --no-index --stdin | not_unpushed; } \
-             | sort -z -u | grep -z -v -e '/private/' -e '^private/' -e '__pycache__' -e '\.pyc$')
-  echo "worktree setup: $wt; $linked new links ($files candidates: the locked files, and main's other ignored files under the asset roots)"
+  local counts new_links relinked stored
+  counts=$(while IFS= read -r -d '' rel; do
+      [[ -n "${skip[$rel]:-}" ]] || printf '%s\0' "$rel"
+    done < <({ lock_paths; git -C "$main" ls-files -z --others -- "${roots[@]}" \
+                 | git -C "$wt" check-ignore -z --no-index --stdin | not_unpushed; } \
+               | sort -z -u | grep -z -v -e '/private/' -e '^private/' -e '__pycache__' -e '\.pyc$') \
+    | python3 "$wt/tools/assets/worktree_links.py" "$main" "$wt")
+  read -r new_links relinked stored <<<"$counts"
+  echo "worktree setup: $wt; $((linked + new_links - relinked)) new links, $relinked repointed to main's current version;" \
+    "$stored new read-only copies in $store"
 
   # The changed ones this worktree lacks: fetch the locked version from R2. Only files this worktree's .gitignore
   # ignores, so a fetched copy never shows up as a file to commit; the others (a locked JSON in a tracked folder)
