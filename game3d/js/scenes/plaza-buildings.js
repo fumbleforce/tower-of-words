@@ -7,6 +7,7 @@ import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
 import { PAL, mat, textTexture, plane, JP_FONT } from '../props.js';
 import { TOWN } from './town.js';
 import { Parts } from './outdoor/parts.js';
+import { BLOCKS, roof, arcadeRoof } from './shop-roofs.js';
 
 // parts merged into one mesh of one material (the parts are disposed)
 export function merged(parts, material, { cast = true } = {}) {
@@ -139,9 +140,16 @@ export function canteen(root, [x0, z0, x1, z1], floorH, doorX = (x0 + x1) / 2) {
 }
 
 // The shop street: two rows along a line from `a` (the north row's north-west corner) in direction `dir`, each
-// `depth` deep, with the arcade between them; u0..u1 is the stretch built. Shops are bays of about 4.5.
-// signs: [[bay, kana, English, colour], ...] on the north row's arcade side.
-export function shopStreet(root, { a, dir, depth, u0, u1, storeyH, signs = [] }) {
+// `depth` deep, with the arcade between them. The rows are bays of `bays.w` from `bays.u0` (island-south.js BAYS),
+// grouped into buildings each with its own height, wall colour and roof (shop-roofs.js BLOCKS); the south row
+// leaves out the alleys' bays. Only the buildings with a bay between `from` and `to` are built (each place builds
+// the stretch its map tile shows). signs: [[bay, kana, English, colour], ...] on the north row's arcade side.
+// farLayer: the camera layer for the arcade's roof and the south row's roofs, which no play camera sees (the island
+// map's: they cost nothing in play).
+export function shopStreet(
+  root,
+  { a, dir, depth, storeyH, bays, from = 0, to = Infinity, signs = [], farLayer = null },
+) {
   const g = new THREE.Group();
   g.position.set(a[0], 0, a[1]);
   g.rotation.y = -Math.atan2(dir[1], dir[0]); // local +x along the street, +z across it to the south
@@ -149,71 +157,80 @@ export function shopStreet(root, { a, dir, depth, u0, u1, storeyH, signs = [] })
   const glass = litGlass('#556372');
   const H = storeyH * 2;
   const walls = TOWN.walls.map(() => []),
-    roofs = [],
     trims = [],
     panes = [],
     shutters = [],
     plant = [],
     awnings = [[], [], []],
-    arcade = [],
-    posts = [];
+    top = new Parts(),
+    far = new Parts();
   const AWN = ['#6e7f8c', '#7d7a8c', '#6f8474'];
-  const bayW = 4.5,
-    n = Math.floor((u1 - u0) / bayW);
-  const rows = [
-    { v0: 0, front: depth, back: 0, dirF: 1 }, // north row: its front (+z) faces the arcade
-    { v0: depth * 2, front: depth * 2, back: depth * 3, dirF: -1 }, // south row: its front (-z) faces the arcade
-  ];
-  rows.forEach((row, ri) => {
-    for (let i = 0; i < n; i++) {
-      const u = u0 + bayW * (i + 0.5),
+  const bayW = bays.w,
+    uOf = (i) => bays.u0 + bayW * i; // a bay's west side
+  const rows = {
+    north: { v0: 0, front: depth, back: 0, dirF: 1 }, // its front (+z) faces the arcade
+    south: { v0: depth * 2, front: depth * 2, back: depth * 3, dirF: -1 }, // its front (-z) faces the arcade
+  };
+  let uMin = Infinity,
+    uMax = -Infinity;
+  for (const [name, row] of Object.entries(rows))
+    BLOCKS[name].forEach(([i0, i1, kind, dh], bi) => {
+      const ua = uOf(i0),
+        ub = uOf(i1 + 1);
+      if (ub <= from || ua >= to) return;
+      uMin = Math.min(uMin, ua);
+      uMax = Math.max(uMax, ub);
+      const ri = name === 'north' ? 0 : 1,
+        h = H + dh,
+        storeys = dh > 1 ? 3 : 2,
         vc = row.v0 + depth / 2,
-        k = (i * 7 + ri * 3) % 4,
-        h = H + (((i + ri) % 3) - 1) * 0.12;
-      walls[k].push(box(bayW - 0.06, h, depth, u, 0, vc));
-      roofs.push(box(bayW - 0.2, 0.06, depth - 0.2, u, h, vc));
-      trims.push(box(bayW - 0.06, 0.22, 0.12, u, h - 0.02, row.front + row.dirF * 0.02));
-      // ground floor: a shopfront or a shutter; an awning; upper-floor windows
-      const f = row.front + row.dirF * 0.03;
-      if ((i + ri) % 5 === 3) shutters.push(box(bayW - 0.9, 1.35, 0.05, u, 0.05, f));
-      else panes.push(box(bayW - 0.9, 1.3, 0.05, u, 0.1, f));
-      awnings[(i + ri) % 3].push(
-        new THREE.BoxGeometry(bayW - 0.5, 0.05, 0.7)
-          .rotateX(row.dirF * 0.35)
-          .translate(u, 1.62, row.front + row.dirF * 0.35),
-      );
-      for (const o of [-1, 1]) panes.push(box(1.2, 0.7, 0.05, u + o * 1.05, storeyH + 0.45, f));
-      // the back: a small window, a door, a condenser on the wall
-      const b = row.back - row.dirF * 0.03;
-      panes.push(box(0.9, 0.55, 0.05, u + 0.9, storeyH + 0.5, b));
-      trims.push(box(0.8, 1.2, 0.05, u - 1.2, 0, b));
-      plant.push(box(0.7, 0.5, 0.35, u + 0.6, 0.1, b - row.dirF * 0.2), box(1.0, 0.45, 0.8, u - 0.6, h, vc));
-    }
-  });
-  // the arcade: a slim opaque roof over the lane between the rows, a little higher in the middle, on thin posts
-  const L = n * bayW,
-    uc = u0 + L / 2;
-  arcade.push(
-    new THREE.BoxGeometry(L, 0.08, depth * 0.55).rotateX(0.16).translate(uc, H + 0.32, depth + depth * 0.26),
-    new THREE.BoxGeometry(L, 0.08, depth * 0.55).rotateX(-0.16).translate(uc, H + 0.32, depth * 2 - depth * 0.26),
-    new THREE.BoxGeometry(L, 0.12, 0.3).translate(uc, H + 0.5, depth * 1.5),
-  );
-  for (let u = u0 + 1; u < u0 + L; u += bayW)
-    for (const v of [depth + 0.35, depth * 2 - 0.35]) posts.push(box(0.1, H + 0.2, 0.1, u, 0, v));
+        f = row.front + row.dirF * 0.03,
+        b = row.back - row.dirF * 0.03;
+      walls[(bi * 3 + ri) % 4].push(box(ub - ua - 0.06, h, depth, (ua + ub) / 2, 0, vc));
+      trims.push(box(ub - ua - 0.06, 0.22, 0.12, (ua + ub) / 2, H - 0.02, row.front + row.dirF * 0.02));
+      roof(ri ? far : top, kind, ua + 0.03, ub - 0.03, row.v0, row.v0 + depth, h, bi * 7 + ri, ri ? 1 : -1);
+      for (let i = i0; i <= i1; i++) {
+        const u = uOf(i) + bayW / 2;
+        // ground floor: a shopfront or a shutter; an awning; upper-floor windows
+        if ((i + ri) % 5 === 3) shutters.push(box(bayW - 0.9, 1.35, 0.05, u, 0.05, f));
+        else panes.push(box(bayW - 0.9, 1.3, 0.05, u, 0.1, f));
+        awnings[(i + ri) % 3].push(
+          new THREE.BoxGeometry(bayW - 0.5, 0.05, 0.7)
+            .rotateX(row.dirF * 0.35)
+            .translate(u, 1.62, row.front + row.dirF * 0.35),
+        );
+        for (let s = 1; s < storeys; s++)
+          for (const o of [-1, 1]) panes.push(box(1.2, 0.7, 0.05, u + o * 1.05, storeyH * s + 0.45, f));
+        // the back: a window on each upper floor, a door, a condenser on the wall
+        for (let s = 1; s < storeys; s++) panes.push(box(0.9, 0.55, 0.05, u + 0.9, storeyH * s + 0.5, b));
+        trims.push(box(0.8, 1.2, 0.05, u - 1.2, 0, b));
+        plant.push(box(0.7, 0.5, 0.35, u + 0.6, 0.1, b - row.dirF * 0.2));
+      }
+    });
+  // the arcade's glass roof over the walk between the rows, on thin posts
+  arcadeRoof(far, uMin, uMax, depth, depth * 2, H + 0.1);
+  const posts = [];
+  for (let u = uMin + 1; u < uMax; u += bayW)
+    for (const v of [depth + 0.35, depth * 2 - 0.35]) posts.push(box(0.1, H + 0.1, 0.1, u, 0, v));
   walls.forEach((parts, k) => parts.length && g.add(merged(parts, mat(TOWN.walls[k]))));
-  g.add(merged(roofs, mat('#7a7f87', { roughness: 0.85 })));
   g.add(merged(trims, mat('#8c939b')));
   g.add(merged(panes, glass, { cast: false }));
   if (shutters.length) g.add(merged(shutters, mat('#9ba1a8', { roughness: 0.6 })));
   g.add(merged(plant, mat('#a3a9b0')));
   awnings.forEach((parts, k) => parts.length && g.add(merged(parts, mat(AWN[k]))));
-  g.add(merged(arcade, mat('#9aa4ad', { roughness: 0.7 })));
   g.add(merged(posts, mat(PAL.dark)));
+  top.build(g);
+  far.build(g).forEach((m, i) => {
+    m.name = `shops:far${i}`; // named: the place's merge pass leaves it as it is
+    if (farLayer === null) return;
+    m.layers.set(farLayer);
+    m.userData.noBatch = true;
+  });
   // shop signs on the north row, under the arcade
   for (const [bay, kana, en, color] of signs) {
     const s = signBoard(kana, en, 3.0, 0.75, color);
-    s.position.set(u0 + bayW * (bay + 0.5), 2.05, depth + 0.1);
+    s.position.set(uOf(bay) + bayW / 2, 2.05, depth + 0.1);
     g.add(s);
   }
-  return { glass, n };
+  return { glass, group: g };
 }

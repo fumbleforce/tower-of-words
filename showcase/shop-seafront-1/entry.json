@@ -1,0 +1,44 @@
+{
+ "title": "The shop street's roofs and the seafront south of the plaza",
+ "date": "2026-10-01",
+ "by": "claude-agent:shop-seafront",
+ "caption": "On the island map the shop street south of the fountain plaza used to be two rows of plain grey boxes with sea right behind them. Now each row is small buildings with their own heights and roofs under a ribbed glass arcade, and behind them a promenade, a sea wall with three flights of stairs down to a beach, and the wall on armour rocks where it meets the sea, the same coast as west of the station. Backdrop only: day 1 never walks here (issue #143).",
+ "sections": [
+  {
+   "title": "The island map (desktop)",
+   "caption": "Before and after. The forecourt's and the plaza's tiles now both reach the beach.",
+   "images": [
+    {"id": "map-desk-before", "image": "bible/shots/showcase/shop-seafront-1/before-map-desk.webp", "caption": "Before"},
+    {"id": "map-desk-after", "image": "bible/shots/showcase/shop-seafront-1/after-map-desk.webp", "caption": "After"},
+    {"id": "plan-desk-before", "image": "bible/shots/showcase/shop-seafront-1/before-plan-desk.webp", "caption": "Before, the plaza with its backdrop"}
+   ]
+  },
+  {
+   "title": "Close-ups (desktop)",
+   "caption": "Three alleys through the south row line up with the three flights of stairs; walks run down both ends of the rows from the arcade's mouths. Close-ups are enlarged from the map's own render.",
+   "images": [
+    {"id": "west-desk", "image": "bible/shots/showcase/shop-seafront-1/after-west-desk.webp", "caption": "West end: the walk from the footpath past the arcade's mouth, beach huts"},
+    {"id": "east-desk", "image": "bible/shots/showcase/shop-seafront-1/after-east-desk.webp", "caption": "East end: the promenade turns up to the shop street's walk; the wall goes onto armour rocks"},
+    {"id": "reference", "image": "bible/shots/showcase/shop-seafront-1/reference.webp", "caption": "The picked map, straight down, for comparison"}
+   ]
+  },
+  {
+   "title": "Phone",
+   "images": [
+    {"id": "map-phone-before", "image": "bible/shots/showcase/shop-seafront-1/before-map-phone.webp", "caption": "Before"},
+    {"id": "map-phone-after", "image": "bible/shots/showcase/shop-seafront-1/after-map-phone.webp", "caption": "After"},
+    {"id": "sea-phone-after", "image": "bible/shots/showcase/shop-seafront-1/after-sea-phone.webp", "caption": "After, zoomed in"}
+   ]
+  },
+  {
+   "title": "From the plaza",
+   "caption": "Play frames only graze the north row's backs, at the bottom edge at the plaza's south rim.",
+   "images": [
+    {"id": "frame-phone-before", "image": "bible/shots/showcase/shop-seafront-1/before-frame-phone.webp", "caption": "Before, phone"},
+    {"id": "frame-phone-after", "image": "bible/shots/showcase/shop-seafront-1/after-frame-phone.webp", "caption": "After, phone"},
+    {"id": "frame-desk-after", "image": "bible/shots/showcase/shop-seafront-1/after-frame-desk.webp", "caption": "After, desktop"}
+   ]
+  }
+ ],
+ "links": [{"label": "Play it (press M for the map)", "href": "game3d/"}]
+}
