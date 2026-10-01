@@ -51,9 +51,9 @@ for name, e in log.items():
                              f"{e['settings']}. Prompt: {e['prompt']} | Negative: {e['negative']}"))
 
 media = [
-    dict(image=R + 'lineup.webp', caption='The new cast in the game, placed the way the game places them (same face height, chins on one line), '
+    dict(image='bible/shots/showcase/cast-faces-1/lineup.webp', caption='The new cast in the game, placed the way the game places them (same face height, chins on one line), '
          'Mio and Kuro kept at the ends.'),
-    dict(image=R + 'faces-installed.webp', caption='Every face each person has in the game now. Each set is one base; only the face is repainted, '
+    dict(image='bible/shots/showcase/cast-faces-1/faces-installed.webp', caption='Every face each person has in the game now. Each set is one base; only the face is repainted, '
          'everything else is pixel-identical.'),
     dict(image=R + 'fix-sheet.webp', caption='The small fixes, before and every attempt. Guard: name plate "BVIER", shoulder patch "SOLICY", collar '
          'pin "G2" repainted without letters (used: plate 2, patch 2, collar 1, all denoise 0.75). Aoi: the "IN" chest patch; at 0.75 the letters '
