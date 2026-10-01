@@ -53,17 +53,37 @@ floor.rotation.x = -Math.PI / 2; floor.receiveShadow = true; scene.add(floor);
 const cam = new THREE.PerspectiveCamera(24, 1, 0.05, 50);
 const turn = new THREE.Group(); scene.add(turn);
 const loader = new GLTFLoader();
-let mixers = [], loaded = [];
+let mixers = [], loaded = [], loadId = 0, fitDist = dist;
 const status = document.getElementById('status');
 
+function disposeModel(model) {
+  model.traverse((o) => {
+    if (!o.isMesh) return;
+    o.geometry.dispose();
+    for (const m of [o.material].flat()) m.dispose();
+  });
+}
+function fitPair(resetZoom = false) {
+  if (!turn.children.length) return;
+  const size = new THREE.Box3().setFromObject(turn).getSize(new THREE.Vector3());
+  const radius = Math.hypot(size.x, size.z) / 2;
+  const tanHalfFov = Math.tan(THREE.MathUtils.degToRad(cam.fov) / 2);
+  const aspect = canvas.clientWidth / canvas.clientHeight;
+  const zoom = resetZoom ? 1 : dist / fitDist;
+  fitDist = Math.max(2.4, (Math.max(size.y / (2 * tanHalfFov), radius / (tanHalfFov * aspect)) + radius) * 1.08);
+  dist = fitDist * zoom;
+}
 async function show(c) {
+  const id = ++loadId;
   current = c;
   history.replaceState(null, '', '?c=' + c.id);
   for (const b of document.querySelectorAll('#concepts button')) b.setAttribute('aria-pressed', b.dataset.id === c.id);
   status.textContent = 'Loading ' + c.label + '…';
+  loaded.forEach((g) => disposeModel(g.scene));
   turn.clear(); mixers = []; loaded = [];
   try {
     const gl = await Promise.all(['mio', 'eric'].map((n) => loader.loadAsync(c.dir + n + '.glb')));
+    if (id !== loadId) { gl.forEach((g) => disposeModel(g.scene)); return; }
     gl.forEach((g, i) => {
       g.scene.position.x = i ? 0.33 : -0.33;
       g.scene.traverse((m) => {
@@ -74,11 +94,10 @@ async function show(c) {
       const mx = new THREE.AnimationMixer(g.scene);
       mixers.push(mx); loaded.push(g);
     });
-    const box = new THREE.Box3().setFromObject(turn);
-    dist = Math.max(2.4, (box.max.y - box.min.y) * 2.9);
+    fitPair(true);
     play(clip);
     status.textContent = c.label + (c.note ? ' · ' + c.note : '');
-  } catch (e) { status.textContent = 'Could not load ' + c.label + ': ' + e.message; }
+  } catch (e) { if (id === loadId) status.textContent = 'Could not load ' + c.label + ': ' + e.message; }
 }
 function play(name) {
   clip = name;
@@ -116,10 +135,12 @@ function frame() {
   if (spin) yaw += dt * 0.6;
   mixers.forEach((m) => m.update(dt));
   const w = canvas.clientWidth, h = canvas.clientHeight;
-  if (canvas.width !== Math.round(w * r.getPixelRatio())) { r.setSize(w, h, false); cam.aspect = w / h; cam.updateProjectionMatrix(); }
+  if (canvas.width !== Math.round(w * r.getPixelRatio()) || canvas.height !== Math.round(h * r.getPixelRatio())) {
+    r.setSize(w, h, false); cam.aspect = w / h; cam.updateProjectionMatrix(); fitPair();
+  }
   turn.rotation.y = -yaw;
   const box = new THREE.Box3().setFromObject(turn);
-  const cy = (box.min.y + box.max.y) / 2 || 0.6;
+  const cy = box.isEmpty() ? 0.6 : (box.min.y + box.max.y) / 2;
   cam.position.set(0, cy + Math.sin(pitch) * dist, Math.cos(pitch) * dist);
   cam.lookAt(0, cy, 0);
   r.render(scene, cam);
