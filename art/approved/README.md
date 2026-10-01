@@ -24,7 +24,9 @@ One folder per bible id. Each file here is a copy of one that bible/facts.yaml m
 - nanami/nanami-g-after.webp: Nanami, nanami-g-204 (ID-card desk clerk) with headroom. Bible: characters › nanami, portrait.
 - cctv/nanami-f-after.webp: the night CCTV operator idea, nanami-f-201 with headroom. An idea only: the bible says the character needs clearly different hair. Bible: characters › cctv, portrait.
 - kiyoko/kiyoko-camel-after.webp: Kiyoko, kiyoko-camel-201 (face from A-kiyoko-s101) with headroom. Bible: characters › kiyoko, portrait.
-- kenji/kenji-g0-h4.webp, kenji-nk-d80-1.webp, kenji-s3k-d80-1.webp: Kenji's grin (concept h4 itself), neutral and sheepish, framed 597x768 cut-outs from reviews/kenji-expressions-1, screwdriver taken out in kenji-noprop-1; the game's kenji-grin, kenji-neutral and kenji-sheepish. Bible: characters › kenji, images.
+- kenji/kenji-g0-h4.webp: Kenji's grin, concept h4 itself, a framed 597x768 cut-out from reviews/kenji-expressions-1, screwdriver taken out in kenji-noprop-1; the game's kenji-grin until 2026-09-30. Bible: characters › kenji, images.
+- kenji/kenji-nk-d80-1.webp: Kenji's neutral, a framed 597x768 cut-out from reviews/kenji-expressions-1, screwdriver taken out in kenji-noprop-1; the game's kenji-neutral until 2026-09-30. Bible: characters › kenji, images.
+- kenji/kenji-s3k-d80-1.webp: Kenji's sheepish face, a framed 597x768 cut-out from reviews/kenji-expressions-1, screwdriver taken out in kenji-noprop-1; the game's kenji-sheepish until 2026-09-30. Bible: characters › kenji, images.
 - The cast redrawn toward Mio and Kuro (2026-09-30, picks in reviews/style-align-1 and reviews/npc-base-1; made in art/candidates/portraits/cast-faces-1). Each file is the game's framed cut-out, <game id>-<base pick>-<face>.webp, a copy of game3d/assets/portraits/<game id>-<face>.webp:
   - mc/eric-eric-ink-2001-{neutral,surprised,tired}.webp: Eric.
   - kenji/kenji-kenji-ink-2001-{neutral,grin,sheepish}.webp: Kenji. They replace the h4 faces above in the game.
