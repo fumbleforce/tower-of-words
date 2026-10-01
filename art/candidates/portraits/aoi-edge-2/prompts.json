@@ -1,0 +1,87 @@
+{
+ "recut": {
+  "kind": "recut",
+  "note": "matte cut inward past the band, 2 px smoothing, 3 px dark outline drawn on the new edge; no model"
+ },
+ "inp-d50-s1": {
+  "kind": "inp",
+  "denoise": 0.5,
+  "seed": 1,
+  "model": "rdbtAnima",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1girl, solo, Aoi, a 22-year-old woman, slim with small breasts, shoulder-length pink-dyed hair with dark roots, oversized varsity jacket over a white top, company lanyard, playful grin, winking, waist-up portrait facing the viewer at a slight angle, plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, fat, obese, (rim light, red rim light, red outline, backlighting:1.4), holding, holding object, tool, screwdriver, pen, pencil, cup, phone, papers, book, briefcase, bag, clipboard",
+  "settings": "euler_ancestral normal, 30 steps, CFG 5, DifferentialDiffusion, full 960x1216 canvas, mask = band grown 3 px minus the outer outline, 2 px blur; pasted back through it"
+ },
+ "inp-d65-s1": {
+  "kind": "inp",
+  "denoise": 0.65,
+  "seed": 1,
+  "model": "rdbtAnima",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1girl, solo, Aoi, a 22-year-old woman, slim with small breasts, shoulder-length pink-dyed hair with dark roots, oversized varsity jacket over a white top, company lanyard, playful grin, winking, waist-up portrait facing the viewer at a slight angle, plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, fat, obese, (rim light, red rim light, red outline, backlighting:1.4), holding, holding object, tool, screwdriver, pen, pencil, cup, phone, papers, book, briefcase, bag, clipboard",
+  "settings": "euler_ancestral normal, 30 steps, CFG 5, DifferentialDiffusion, full 960x1216 canvas, mask = band grown 3 px minus the outer outline, 2 px blur; pasted back through it"
+ },
+ "inp-d80-s1": {
+  "kind": "inp",
+  "denoise": 0.8,
+  "seed": 1,
+  "model": "rdbtAnima",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1girl, solo, Aoi, a 22-year-old woman, slim with small breasts, shoulder-length pink-dyed hair with dark roots, oversized varsity jacket over a white top, company lanyard, playful grin, winking, waist-up portrait facing the viewer at a slight angle, plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, fat, obese, (rim light, red rim light, red outline, backlighting:1.4), holding, holding object, tool, screwdriver, pen, pencil, cup, phone, papers, book, briefcase, bag, clipboard",
+  "settings": "euler_ancestral normal, 30 steps, CFG 5, DifferentialDiffusion, full 960x1216 canvas, mask = band grown 3 px minus the outer outline, 2 px blur; pasted back through it"
+ },
+ "dark-d65-s1": {
+  "kind": "dark",
+  "denoise": 0.65,
+  "seed": 1,
+  "model": "rdbtAnima",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1girl, solo, Aoi, a 22-year-old woman, slim with small breasts, shoulder-length pink-dyed hair with dark roots, oversized varsity jacket over a white top, company lanyard, playful grin, winking, waist-up portrait facing the viewer at a slight angle, plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, fat, obese, (rim light, red rim light, red outline, backlighting:1.4), holding, holding object, tool, screwdriver, pen, pencil, cup, phone, papers, book, briefcase, bag, clipboard",
+  "settings": "euler_ancestral normal, 30 steps, CFG 5, DifferentialDiffusion, full 960x1216 canvas, mask = band grown 3 px minus the outer outline, 2 px blur; pasted back through it"
+ },
+ "dark-d80-s1": {
+  "kind": "dark",
+  "denoise": 0.8,
+  "seed": 1,
+  "model": "rdbtAnima",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1girl, solo, Aoi, a 22-year-old woman, slim with small breasts, shoulder-length pink-dyed hair with dark roots, oversized varsity jacket over a white top, company lanyard, playful grin, winking, waist-up portrait facing the viewer at a slight angle, plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, fat, obese, (rim light, red rim light, red outline, backlighting:1.4), holding, holding object, tool, screwdriver, pen, pencil, cup, phone, papers, book, briefcase, bag, clipboard",
+  "settings": "euler_ancestral normal, 30 steps, CFG 5, DifferentialDiffusion, full 960x1216 canvas, mask = band grown 3 px minus the outer outline, 2 px blur; pasted back through it"
+ },
+ "fill-d50-s1": {
+  "kind": "fill",
+  "denoise": 0.5,
+  "seed": 1,
+  "model": "rdbtAnima",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1girl, solo, Aoi, a 22-year-old woman, slim with small breasts, shoulder-length pink-dyed hair with dark roots, oversized varsity jacket over a white top, company lanyard, playful grin, winking, waist-up portrait facing the viewer at a slight angle, plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, fat, obese, (rim light, red rim light, red outline, backlighting:1.4), holding, holding object, tool, screwdriver, pen, pencil, cup, phone, papers, book, briefcase, bag, clipboard",
+  "settings": "euler_ancestral normal, 30 steps, CFG 5, DifferentialDiffusion, full 960x1216 canvas, mask = band grown 3 px minus the outer outline, 2 px blur; pasted back through it"
+ },
+ "fill-d65-s1": {
+  "kind": "fill",
+  "denoise": 0.65,
+  "seed": 1,
+  "model": "rdbtAnima",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1girl, solo, Aoi, a 22-year-old woman, slim with small breasts, shoulder-length pink-dyed hair with dark roots, oversized varsity jacket over a white top, company lanyard, playful grin, winking, waist-up portrait facing the viewer at a slight angle, plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, fat, obese, (rim light, red rim light, red outline, backlighting:1.4), holding, holding object, tool, screwdriver, pen, pencil, cup, phone, papers, book, briefcase, bag, clipboard",
+  "settings": "euler_ancestral normal, 30 steps, CFG 5, DifferentialDiffusion, full 960x1216 canvas, mask = band grown 3 px minus the outer outline, 2 px blur; pasted back through it"
+ },
+ "fill-d50-s2": {
+  "kind": "fill",
+  "denoise": 0.5,
+  "seed": 2,
+  "model": "rdbtAnima",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1girl, solo, Aoi, a 22-year-old woman, slim with small breasts, shoulder-length pink-dyed hair with dark roots, oversized varsity jacket over a white top, company lanyard, playful grin, winking, waist-up portrait facing the viewer at a slight angle, plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, fat, obese, (rim light, red rim light, red outline, backlighting:1.4), holding, holding object, tool, screwdriver, pen, pencil, cup, phone, papers, book, briefcase, bag, clipboard",
+  "settings": "euler_ancestral normal, 30 steps, CFG 5, DifferentialDiffusion, full 960x1216 canvas, mask = band grown 3 px minus the outer outline, 2 px blur; pasted back through it"
+ },
+ "fill-d65-s2": {
+  "kind": "fill",
+  "denoise": 0.65,
+  "seed": 2,
+  "model": "rdbtAnima",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1girl, solo, Aoi, a 22-year-old woman, slim with small breasts, shoulder-length pink-dyed hair with dark roots, oversized varsity jacket over a white top, company lanyard, playful grin, winking, waist-up portrait facing the viewer at a slight angle, plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, fat, obese, (rim light, red rim light, red outline, backlighting:1.4), holding, holding object, tool, screwdriver, pen, pencil, cup, phone, papers, book, briefcase, bag, clipboard",
+  "settings": "euler_ancestral normal, 30 steps, CFG 5, DifferentialDiffusion, full 960x1216 canvas, mask = band grown 3 px minus the outer outline, 2 px blur; pasted back through it"
+ }
+}

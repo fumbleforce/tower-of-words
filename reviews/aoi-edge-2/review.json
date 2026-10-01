@@ -1,0 +1,140 @@
+{
+ "title": "Aoi's cream edge, second try",
+ "date": "2026-10-01",
+ "by": "claude-agent:aoi-edge-2",
+ "status": "open",
+ "question": "Which of these, if any, should replace Aoi's portrait in the game?",
+ "multi": false,
+ "media": [
+  {
+   "image": "art/candidates/portraits/aoi-edge-2/sheet.webp",
+   "caption": "Every attempt in order, at game size on the dark colour; 0 is the portrait in the game now (the one from before aoi-edge-1, put back after \"oh no this looks very bad, very distorted and ugly\")."
+  },
+  {
+   "image": "art/candidates/portraits/aoi-edge-2/ingame-1366x860-original.webp",
+   "caption": "In the game now, 1366x860: the cream band on her left (image right)."
+  },
+  {
+   "image": "art/candidates/portraits/aoi-edge-2/ingame-390x844-original.webp",
+   "caption": "In the game now, 390x844."
+  }
+ ],
+ "options": [
+  {
+   "id": "recut",
+   "label": "aoi-edge-2 recut",
+   "image": "art/candidates/portraits/aoi-edge-2/closeup-recut.webp",
+   "images": [
+    "art/candidates/portraits/aoi-edge-2/aoi-recut.webp",
+    "art/candidates/portraits/aoi-edge-2/ingame-1366x860-recut.webp",
+    "art/candidates/portraits/aoi-edge-2/ingame-390x844-recut.webp"
+   ],
+   "note": "No model: the cut-out trimmed inward past the cream band (smoothed 2 px) and a 3 px dark outline drawn on the new edge. Her silhouette gets thinner on her left (image right), and the top of the collar on that side is cut away. Red rim 4.7% (warn); the flagged pixels are her pink hair meeting the outline and the pink cuff stripes, not a red line. Face drift ccip 0.002 (pass). Pictures: close-ups at 100% beside the original on the dark colour, the game file, the game at 1366x860 and at 390x844."
+  },
+  {
+   "id": "inp-d50-s1",
+   "label": "aoi-edge-2 inp-d50-s1",
+   "image": "art/candidates/portraits/aoi-edge-2/closeup-inp-d50-s1.webp",
+   "images": [
+    "art/candidates/portraits/aoi-edge-2/aoi-inp-d50-s1.webp",
+    "art/candidates/portraits/aoi-edge-2/ingame-1366x860-inp-d50-s1.webp",
+    "art/candidates/portraits/aoi-edge-2/ingame-390x844-inp-d50-s1.webp"
+   ],
+   "note": "RDBT redraws only the band at denoise 0.5, on the render's own light grey background. The model paints the light rim back. Seed 1, denoise 0.5, euler_ancestral normal, 30 steps, CFG 5, DifferentialDiffusion, full 960x1216 canvas, mask = band grown 3 px minus the outer outline, 2 px blur; pasted back through it. Prompt: masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1girl, solo, Aoi, a 22-year-old woman, slim with small breasts, shoulder-length pink-dyed hair with dark roots, oversized varsity jacket over a white top, company lanyard, playful grin, winking, waist-up portrait facing the viewer at a slight angle, plain light grey background, soft even studio light Negative: worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, fat, obese, (rim light, red rim light, red outline, backlighting:1.4), holding, holding object, tool, screwdriver, pen, pencil, cup, phone, papers, book, briefcase, bag, clipboard Red rim 1.3% (pass). Face drift ccip 0.000 (pass). Pictures: close-ups at 100% beside the original on the dark colour, the game file, the game at 1366x860 and at 390x844."
+  },
+  {
+   "id": "inp-d65-s1",
+   "label": "aoi-edge-2 inp-d65-s1",
+   "image": "art/candidates/portraits/aoi-edge-2/closeup-inp-d65-s1.webp",
+   "images": [
+    "art/candidates/portraits/aoi-edge-2/aoi-inp-d65-s1.webp",
+    "art/candidates/portraits/aoi-edge-2/ingame-1366x860-inp-d65-s1.webp",
+    "art/candidates/portraits/aoi-edge-2/ingame-390x844-inp-d65-s1.webp"
+   ],
+   "note": "RDBT redraws only the band at denoise 0.65, on the render's own light grey background. The model paints the light rim back. Seed 1, denoise 0.65, euler_ancestral normal, 30 steps, CFG 5, DifferentialDiffusion, full 960x1216 canvas, mask = band grown 3 px minus the outer outline, 2 px blur; pasted back through it. Prompt: masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1girl, solo, Aoi, a 22-year-old woman, slim with small breasts, shoulder-length pink-dyed hair with dark roots, oversized varsity jacket over a white top, company lanyard, playful grin, winking, waist-up portrait facing the viewer at a slight angle, plain light grey background, soft even studio light Negative: worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, fat, obese, (rim light, red rim light, red outline, backlighting:1.4), holding, holding object, tool, screwdriver, pen, pencil, cup, phone, papers, book, briefcase, bag, clipboard Red rim 1.2% (pass). Face drift ccip 0.000 (pass). Pictures: close-ups at 100% beside the original on the dark colour, the game file, the game at 1366x860 and at 390x844."
+  },
+  {
+   "id": "inp-d80-s1",
+   "label": "aoi-edge-2 inp-d80-s1",
+   "image": "art/candidates/portraits/aoi-edge-2/closeup-inp-d80-s1.webp",
+   "images": [
+    "art/candidates/portraits/aoi-edge-2/aoi-inp-d80-s1.webp",
+    "art/candidates/portraits/aoi-edge-2/ingame-1366x860-inp-d80-s1.webp",
+    "art/candidates/portraits/aoi-edge-2/ingame-390x844-inp-d80-s1.webp"
+   ],
+   "note": "RDBT redraws only the band at denoise 0.8, on the render's own light grey background. The model paints the light rim back. Seed 1, denoise 0.8, euler_ancestral normal, 30 steps, CFG 5, DifferentialDiffusion, full 960x1216 canvas, mask = band grown 3 px minus the outer outline, 2 px blur; pasted back through it. Prompt: masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1girl, solo, Aoi, a 22-year-old woman, slim with small breasts, shoulder-length pink-dyed hair with dark roots, oversized varsity jacket over a white top, company lanyard, playful grin, winking, waist-up portrait facing the viewer at a slight angle, plain light grey background, soft even studio light Negative: worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, fat, obese, (rim light, red rim light, red outline, backlighting:1.4), holding, holding object, tool, screwdriver, pen, pencil, cup, phone, papers, book, briefcase, bag, clipboard Red rim 1.3% (pass). Face drift ccip 0.000 (pass). Pictures: close-ups at 100% beside the original on the dark colour, the game file, the game at 1366x860 and at 390x844."
+  },
+  {
+   "id": "dark-d65-s1",
+   "label": "aoi-edge-2 dark-d65-s1",
+   "image": "art/candidates/portraits/aoi-edge-2/closeup-dark-d65-s1.webp",
+   "images": [
+    "art/candidates/portraits/aoi-edge-2/aoi-dark-d65-s1.webp",
+    "art/candidates/portraits/aoi-edge-2/ingame-1366x860-dark-d65-s1.webp",
+    "art/candidates/portraits/aoi-edge-2/ingame-390x844-dark-d65-s1.webp"
+   ],
+   "note": "As the inp attempt at denoise 0.65, with one change: she is put on the game's dark colour before the redraw. The light rim still comes back. Seed 1, denoise 0.65, euler_ancestral normal, 30 steps, CFG 5, DifferentialDiffusion, full 960x1216 canvas, mask = band grown 3 px minus the outer outline, 2 px blur; pasted back through it. Prompt: masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1girl, solo, Aoi, a 22-year-old woman, slim with small breasts, shoulder-length pink-dyed hair with dark roots, oversized varsity jacket over a white top, company lanyard, playful grin, winking, waist-up portrait facing the viewer at a slight angle, plain light grey background, soft even studio light Negative: worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, fat, obese, (rim light, red rim light, red outline, backlighting:1.4), holding, holding object, tool, screwdriver, pen, pencil, cup, phone, papers, book, briefcase, bag, clipboard Red rim 1.2% (pass). Face drift ccip 0.000 (pass). Pictures: close-ups at 100% beside the original on the dark colour, the game file, the game at 1366x860 and at 390x844."
+  },
+  {
+   "id": "dark-d80-s1",
+   "label": "aoi-edge-2 dark-d80-s1",
+   "image": "art/candidates/portraits/aoi-edge-2/closeup-dark-d80-s1.webp",
+   "images": [
+    "art/candidates/portraits/aoi-edge-2/aoi-dark-d80-s1.webp",
+    "art/candidates/portraits/aoi-edge-2/ingame-1366x860-dark-d80-s1.webp",
+    "art/candidates/portraits/aoi-edge-2/ingame-390x844-dark-d80-s1.webp"
+   ],
+   "note": "As the inp attempt at denoise 0.8, with one change: she is put on the game's dark colour before the redraw. The light rim still comes back. Seed 1, denoise 0.8, euler_ancestral normal, 30 steps, CFG 5, DifferentialDiffusion, full 960x1216 canvas, mask = band grown 3 px minus the outer outline, 2 px blur; pasted back through it. Prompt: masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1girl, solo, Aoi, a 22-year-old woman, slim with small breasts, shoulder-length pink-dyed hair with dark roots, oversized varsity jacket over a white top, company lanyard, playful grin, winking, waist-up portrait facing the viewer at a slight angle, plain light grey background, soft even studio light Negative: worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, fat, obese, (rim light, red rim light, red outline, backlighting:1.4), holding, holding object, tool, screwdriver, pen, pencil, cup, phone, papers, book, briefcase, bag, clipboard Red rim 1.2% (pass). Face drift ccip 0.001 (pass). Pictures: close-ups at 100% beside the original on the dark colour, the game file, the game at 1366x860 and at 390x844."
+  },
+  {
+   "id": "fill-d50-s1",
+   "label": "aoi-edge-2 fill-d50-s1",
+   "image": "art/candidates/portraits/aoi-edge-2/closeup-fill-d50-s1.webp",
+   "images": [
+    "art/candidates/portraits/aoi-edge-2/aoi-fill-d50-s1.webp",
+    "art/candidates/portraits/aoi-edge-2/ingame-1366x860-fill-d50-s1.webp",
+    "art/candidates/portraits/aoi-edge-2/ingame-390x844-fill-d50-s1.webp"
+   ],
+   "note": "Before the redraw, the band is filled with the nearest hair pink or jacket teal (the aoi-edge-1 fill, which on its own looked smeared), then RDBT redraws only the band at denoise 0.5, seed 1. The cream is gone; the dark outline is kept. Seed 1, denoise 0.5, euler_ancestral normal, 30 steps, CFG 5, DifferentialDiffusion, full 960x1216 canvas, mask = band grown 3 px minus the outer outline, 2 px blur; pasted back through it. Prompt: masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1girl, solo, Aoi, a 22-year-old woman, slim with small breasts, shoulder-length pink-dyed hair with dark roots, oversized varsity jacket over a white top, company lanyard, playful grin, winking, waist-up portrait facing the viewer at a slight angle, plain light grey background, soft even studio light Negative: worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, fat, obese, (rim light, red rim light, red outline, backlighting:1.4), holding, holding object, tool, screwdriver, pen, pencil, cup, phone, papers, book, briefcase, bag, clipboard Red rim 3.3% (warn); the flagged pixels are her pink hair meeting the outline and the pink cuff stripes, not a red line. Face drift ccip 0.001 (pass). Pictures: close-ups at 100% beside the original on the dark colour, the game file, the game at 1366x860 and at 390x844."
+  },
+  {
+   "id": "fill-d65-s1",
+   "label": "aoi-edge-2 fill-d65-s1",
+   "image": "art/candidates/portraits/aoi-edge-2/closeup-fill-d65-s1.webp",
+   "images": [
+    "art/candidates/portraits/aoi-edge-2/aoi-fill-d65-s1.webp",
+    "art/candidates/portraits/aoi-edge-2/ingame-1366x860-fill-d65-s1.webp",
+    "art/candidates/portraits/aoi-edge-2/ingame-390x844-fill-d65-s1.webp"
+   ],
+   "note": "Before the redraw, the band is filled with the nearest hair pink or jacket teal (the aoi-edge-1 fill, which on its own looked smeared), then RDBT redraws only the band at denoise 0.65, seed 1. The cream is gone; the dark outline is kept. Seed 1, denoise 0.65, euler_ancestral normal, 30 steps, CFG 5, DifferentialDiffusion, full 960x1216 canvas, mask = band grown 3 px minus the outer outline, 2 px blur; pasted back through it. Prompt: masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1girl, solo, Aoi, a 22-year-old woman, slim with small breasts, shoulder-length pink-dyed hair with dark roots, oversized varsity jacket over a white top, company lanyard, playful grin, winking, waist-up portrait facing the viewer at a slight angle, plain light grey background, soft even studio light Negative: worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, fat, obese, (rim light, red rim light, red outline, backlighting:1.4), holding, holding object, tool, screwdriver, pen, pencil, cup, phone, papers, book, briefcase, bag, clipboard Red rim 2.8% (warn); the flagged pixels are her pink hair meeting the outline and the pink cuff stripes, not a red line. Face drift ccip 0.001 (pass). Pictures: close-ups at 100% beside the original on the dark colour, the game file, the game at 1366x860 and at 390x844."
+  },
+  {
+   "id": "fill-d50-s2",
+   "label": "aoi-edge-2 fill-d50-s2",
+   "image": "art/candidates/portraits/aoi-edge-2/closeup-fill-d50-s2.webp",
+   "images": [
+    "art/candidates/portraits/aoi-edge-2/aoi-fill-d50-s2.webp",
+    "art/candidates/portraits/aoi-edge-2/ingame-1366x860-fill-d50-s2.webp",
+    "art/candidates/portraits/aoi-edge-2/ingame-390x844-fill-d50-s2.webp"
+   ],
+   "note": "Before the redraw, the band is filled with the nearest hair pink or jacket teal (the aoi-edge-1 fill, which on its own looked smeared), then RDBT redraws only the band at denoise 0.5, seed 2. The cream is gone; the dark outline is kept. Seed 2, denoise 0.5, euler_ancestral normal, 30 steps, CFG 5, DifferentialDiffusion, full 960x1216 canvas, mask = band grown 3 px minus the outer outline, 2 px blur; pasted back through it. Prompt: masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1girl, solo, Aoi, a 22-year-old woman, slim with small breasts, shoulder-length pink-dyed hair with dark roots, oversized varsity jacket over a white top, company lanyard, playful grin, winking, waist-up portrait facing the viewer at a slight angle, plain light grey background, soft even studio light Negative: worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, fat, obese, (rim light, red rim light, red outline, backlighting:1.4), holding, holding object, tool, screwdriver, pen, pencil, cup, phone, papers, book, briefcase, bag, clipboard Red rim 3.9% (warn); the flagged pixels are her pink hair meeting the outline and the pink cuff stripes, not a red line. Face drift ccip 0.002 (pass). Pictures: close-ups at 100% beside the original on the dark colour, the game file, the game at 1366x860 and at 390x844."
+  },
+  {
+   "id": "fill-d65-s2",
+   "label": "aoi-edge-2 fill-d65-s2",
+   "image": "art/candidates/portraits/aoi-edge-2/closeup-fill-d65-s2.webp",
+   "images": [
+    "art/candidates/portraits/aoi-edge-2/aoi-fill-d65-s2.webp",
+    "art/candidates/portraits/aoi-edge-2/ingame-1366x860-fill-d65-s2.webp",
+    "art/candidates/portraits/aoi-edge-2/ingame-390x844-fill-d65-s2.webp"
+   ],
+   "note": "Before the redraw, the band is filled with the nearest hair pink or jacket teal (the aoi-edge-1 fill, which on its own looked smeared), then RDBT redraws only the band at denoise 0.65, seed 2. The cream is gone; the dark outline is kept. Seed 2, denoise 0.65, euler_ancestral normal, 30 steps, CFG 5, DifferentialDiffusion, full 960x1216 canvas, mask = band grown 3 px minus the outer outline, 2 px blur; pasted back through it. Prompt: masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1girl, solo, Aoi, a 22-year-old woman, slim with small breasts, shoulder-length pink-dyed hair with dark roots, oversized varsity jacket over a white top, company lanyard, playful grin, winking, waist-up portrait facing the viewer at a slight angle, plain light grey background, soft even studio light Negative: worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, fat, obese, (rim light, red rim light, red outline, backlighting:1.4), holding, holding object, tool, screwdriver, pen, pencil, cup, phone, papers, book, briefcase, bag, clipboard Red rim 4.3% (warn); the flagged pixels are her pink hair meeting the outline and the pink cuff stripes, not a red line. Face drift ccip 0.001 (pass). Pictures: close-ups at 100% beside the original on the dark colour, the game file, the game at 1366x860 and at 390x844."
+  }
+ ],
+ "links": [
+  {
+   "label": "Showcase aoi-edge-1 (the smeared fix, taken out)",
+   "href": "bible/#showcase/aoi-edge-1"
+  }
+ ]
+}
