@@ -1,0 +1,97 @@
+{
+  "title": "VRoid / VRM compatibility proof",
+  "date": "2026-10-01",
+  "by": "Claude prototype, Codex continuation",
+  "status": "open",
+  "question": "Is this smooth anime direction worth an authored VRoid character test?",
+  "multi": true,
+  "media": [
+    {
+      "image": "art/parts/vrm-prototype/claude-shots/test-smooth-front.png",
+      "caption": "Claude saved attempt: front. Preserved intermediate, not a finished character."
+    },
+    {
+      "image": "art/parts/vrm-prototype/claude-shots/test-smooth-three.png",
+      "caption": "Claude saved attempt: three. Preserved intermediate, not a finished character."
+    },
+    {
+      "image": "art/parts/vrm-prototype/claude-shots/test-smooth-face.png",
+      "caption": "Claude saved attempt: face. Preserved intermediate, not a finished character."
+    },
+    {
+      "image": "art/parts/vrm-prototype/inherited-check/test-smooth-front.png",
+      "caption": "Inherited loader check: front. Preserved intermediate, not a finished character."
+    },
+    {
+      "image": "art/parts/vrm-prototype/inherited-check/test-smooth-three.png",
+      "caption": "Inherited loader check: three. Preserved intermediate, not a finished character."
+    },
+    {
+      "image": "art/parts/vrm-prototype/inherited-check/test-smooth-face.png",
+      "caption": "Inherited loader check: face. Preserved intermediate, not a finished character."
+    },
+    {
+      "image": "art/parts/vrm-prototype/fixed-quaternion/test-smooth-front.png",
+      "caption": "Quaternion fix, before preview cleanup: front. Preserved intermediate, not a finished character."
+    },
+    {
+      "image": "art/parts/vrm-prototype/fixed-quaternion/test-smooth-three.png",
+      "caption": "Quaternion fix, before preview cleanup: three. Preserved intermediate, not a finished character."
+    },
+    {
+      "image": "art/parts/vrm-prototype/fixed-quaternion/test-smooth-face.png",
+      "caption": "Quaternion fix, before preview cleanup: face. Preserved intermediate, not a finished character."
+    }
+  ],
+  "options": [
+    {
+      "id": "vrm-base",
+      "label": "vrm-base",
+      "image": "art/parts/vrm-prototype/preview/desktop-base-three.png",
+      "images": [
+        "art/parts/vrm-prototype/preview/desktop-base-face.png",
+        "art/parts/vrm-prototype/preview/desktop-base-game.png",
+        "art/parts/vrm-prototype/preview/phone-base-three.png",
+        "art/parts/vrm-prototype/preview/phone-base-face.png",
+        "art/parts/vrm-prototype/preview/phone-base-game.png"
+      ],
+      "note": "Original pixiv sample. Tests smooth anime rendering and shared animation; it is not Mio."
+    },
+    {
+      "id": "vrm-recolour",
+      "label": "vrm-recolour",
+      "image": "art/parts/vrm-prototype/preview/desktop-recolour-three.png",
+      "images": [
+        "art/parts/vrm-prototype/preview/desktop-recolour-face.png",
+        "art/parts/vrm-prototype/preview/desktop-recolour-game.png",
+        "art/parts/vrm-prototype/preview/phone-recolour-three.png",
+        "art/parts/vrm-prototype/preview/phone-recolour-face.png",
+        "art/parts/vrm-prototype/preview/phone-recolour-game.png"
+      ],
+      "note": "Claude colour attempt. Same sample hair and clothes, painted sleeve boundaries, added glasses; not an authored Mio model."
+    },
+    {
+      "id": "vrm-flat",
+      "label": "vrm-flat",
+      "image": "art/parts/vrm-prototype/preview/desktop-flat-three.png",
+      "images": [
+        "art/parts/vrm-prototype/preview/desktop-flat-face.png",
+        "art/parts/vrm-prototype/preview/desktop-flat-game.png",
+        "art/parts/vrm-prototype/preview/phone-flat-three.png",
+        "art/parts/vrm-prototype/preview/phone-flat-face.png",
+        "art/parts/vrm-prototype/preview/phone-flat-game.png"
+      ],
+      "note": "Same recolour with flat shading on clothing and hair. No topology or facet placement changes."
+    }
+  ],
+  "links": [
+    {
+      "label": "Live VRM preview: turn, zoom, idle, walk, run, expression",
+      "href": "game3d/vrm-test.html"
+    },
+    {
+      "label": "SDK, editor and source details",
+      "href": "notes/vrm-prototype.md"
+    }
+  ]
+}

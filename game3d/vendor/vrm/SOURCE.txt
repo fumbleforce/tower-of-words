@@ -1,0 +1,6 @@
+@pixiv/three-vrm 3.5.5, MIT, pixiv Inc.
+Source package: https://registry.npmjs.org/@pixiv/three-vrm/-/three-vrm-3.5.5.tgz
+Vendored file: package/lib/three-vrm.module.min.js (unchanged)
+SHA-256: 99f943e956e52dbf52bbe418899e8a8ae5e35f5c79a94ab8e404926afc620bf2
+Package gitHead: ff42fae4fcee1fcbca2cd262c7f5f8cbddeaf5ab
+LICENSE is copied from the package. Used only by the isolated VRM preview.
