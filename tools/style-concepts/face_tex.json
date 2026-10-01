@@ -1,0 +1,388 @@
+{
+ "t1": {
+  "mio": {
+   "neutral": {
+    "src": "art/parts/style-concepts/claude-facetface/gen/front/mio-front-102.png",
+    "eyes": [
+     [
+      442,
+      334
+     ],
+     [
+      595,
+      334
+     ]
+    ],
+    "mouth": [
+     515,
+     460
+    ],
+    "mirror": "right"
+   },
+   "smile": {
+    "src": "art/parts/style-concepts/claude-facetface/gen/front/mio-front-102.png",
+    "eyes": [
+     [
+      442,
+      334
+     ],
+     [
+      595,
+      334
+     ]
+    ],
+    "mouth": [
+     515,
+     460
+    ],
+    "mirror": "right"
+   }
+  },
+  "eric": {
+   "neutral": {
+    "src": "art/parts/style-concepts/claude-facetface/gen/front/eric-front-101.png",
+    "eyes": [
+     [
+      432,
+      365
+     ],
+     [
+      600,
+      361
+     ]
+    ],
+    "mouth": [
+     520,
+     525
+    ]
+   },
+   "surprised": {
+    "src": "art/parts/style-concepts/claude-facetface/gen/front/eric-front-101.png",
+    "eyes": [
+     [
+      432,
+      365
+     ],
+     [
+      600,
+      361
+     ]
+    ],
+    "mouth": [
+     520,
+     525
+    ]
+   }
+  }
+ },
+ "t2": {
+  "mio": {
+   "neutral": {
+    "src": "art/parts/style-concepts/claude-facetface/gen/front2/mio-front2-113.png",
+    "eyes": [
+     [
+      442,
+      415
+     ],
+     [
+      595,
+      414
+     ]
+    ],
+    "mouth": [
+     517,
+     542
+    ],
+    "mirror": "right",
+    "width": 0.8,
+    "lower": 0.42,
+    "mouth_boost": 1.0,
+    "brow": 0.45
+   },
+   "smile": {
+    "src": "art/parts/style-concepts/claude-facetface/gen/front2/mio-front2-113.png",
+    "eyes": [
+     [
+      442,
+      415
+     ],
+     [
+      595,
+      414
+     ]
+    ],
+    "mouth": [
+     517,
+     542
+    ],
+    "mirror": "right",
+    "width": 0.8,
+    "lower": 0.42,
+    "mouth_boost": 1.0,
+    "brow": 0.45
+   }
+  },
+  "eric": {
+   "neutral": {
+    "src": "art/parts/style-concepts/claude-facetface/gen/front2/eric-front2-112.png",
+    "eyes": [
+     [
+      430,
+      350
+     ],
+     [
+      600,
+      347
+     ]
+    ],
+    "mouth": [
+     520,
+     510
+    ],
+    "width": 0.88,
+    "chin": 0.45,
+    "lower": 0.55,
+    "dark": [
+     34,
+     55
+    ],
+    "mouth_boost": 1.0,
+    "brow": 0.42
+   },
+   "surprised": {
+    "src": "art/parts/style-concepts/claude-facetface/gen/front2/eric-front2-112.png",
+    "eyes": [
+     [
+      430,
+      350
+     ],
+     [
+      600,
+      347
+     ]
+    ],
+    "mouth": [
+     520,
+     510
+    ],
+    "width": 0.88,
+    "chin": 0.45,
+    "lower": 0.55,
+    "dark": [
+     34,
+     55
+    ],
+    "mouth_boost": 1.0,
+    "brow": 0.42
+   }
+  }
+ },
+ "t3": {
+  "mio": {
+   "neutral": {
+    "src": "art/parts/style-concepts/claude-facetface/gen/front2/mio-front2-113.png",
+    "eyes": [
+     [
+      442,
+      415
+     ],
+     [
+      595,
+      414
+     ]
+    ],
+    "mouth": [
+     517,
+     542
+    ],
+    "mirror": "right",
+    "width": 0.8,
+    "lower": 0.42,
+    "mouth_boost": 1.0,
+    "brow": 0.45
+   },
+   "smile": {
+    "src": "art/parts/style-concepts/claude-facetface/gen/expr/mio-small-soft-smile-401-d60.png",
+    "eyes": [
+     [
+      442,
+      415
+     ],
+     [
+      595,
+      414
+     ]
+    ],
+    "mouth": [
+     517,
+     542
+    ],
+    "mirror": "right",
+    "width": 0.8,
+    "lower": 0.42,
+    "mouth_boost": 1.0,
+    "brow": 0.45
+   }
+  },
+  "eric": {
+   "neutral": {
+    "src": "art/parts/style-concepts/claude-facetface/gen/front2/eric-front2-112.png",
+    "eyes": [
+     [
+      430,
+      350
+     ],
+     [
+      600,
+      347
+     ]
+    ],
+    "mouth": [
+     520,
+     510
+    ],
+    "width": 0.88,
+    "chin": 0.45,
+    "lower": 0.55,
+    "dark": [
+     34,
+     55
+    ],
+    "mouth_boost": 1.0,
+    "brow": 0.42
+   },
+   "surprised": {
+    "src": "art/parts/style-concepts/claude-facetface/gen/expr/eric-surprised-401-d72.png",
+    "eyes": [
+     [
+      430,
+      350
+     ],
+     [
+      600,
+      347
+     ]
+    ],
+    "mouth": [
+     520,
+     510
+    ],
+    "width": 0.88,
+    "chin": 0.45,
+    "lower": 0.55,
+    "dark": [
+     34,
+     55
+    ],
+    "mouth_boost": 1.0,
+    "brow": 0.42
+   }
+  }
+ },
+ "t4": {
+  "mio": {
+   "neutral": {
+    "src": "art/parts/style-concepts/claude-facetface/gen/front2/mio-front2-113.png",
+    "eyes": [
+     [
+      442,
+      415
+     ],
+     [
+      595,
+      414
+     ]
+    ],
+    "mouth": [
+     517,
+     542
+    ],
+    "mirror": "right",
+    "width": 0.8,
+    "lower": 0.42,
+    "mouth_boost": 1.0,
+    "brow": 0.45,
+    "bold": 7
+   },
+   "smile": {
+    "src": "art/parts/style-concepts/claude-facetface/gen/expr/mio-small-soft-smile-401-d60.png",
+    "eyes": [
+     [
+      442,
+      415
+     ],
+     [
+      595,
+      414
+     ]
+    ],
+    "mouth": [
+     517,
+     542
+    ],
+    "mirror": "right",
+    "width": 0.8,
+    "lower": 0.42,
+    "mouth_boost": 1.0,
+    "brow": 0.45,
+    "bold": 7
+   }
+  },
+  "eric": {
+   "neutral": {
+    "src": "art/parts/style-concepts/claude-facetface/gen/front2/eric-front2-112.png",
+    "eyes": [
+     [
+      430,
+      350
+     ],
+     [
+      600,
+      347
+     ]
+    ],
+    "mouth": [
+     520,
+     510
+    ],
+    "width": 0.88,
+    "chin": 0.45,
+    "lower": 0.55,
+    "dark": [
+     34,
+     55
+    ],
+    "mouth_boost": 1.0,
+    "brow": 0.42,
+    "bold": 7
+   },
+   "surprised": {
+    "src": "art/parts/style-concepts/claude-facetface/gen/expr/eric-surprised-401-d72.png",
+    "eyes": [
+     [
+      430,
+      350
+     ],
+     [
+      600,
+      347
+     ]
+    ],
+    "mouth": [
+     520,
+     510
+    ],
+    "width": 0.88,
+    "chin": 0.45,
+    "lower": 0.55,
+    "dark": [
+     34,
+     55
+    ],
+    "mouth_boost": 1.0,
+    "brow": 0.42,
+    "bold": 7
+   }
+  }
+ }
+}
