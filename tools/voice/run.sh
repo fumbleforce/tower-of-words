@@ -7,7 +7,7 @@
 #      with no passing take
 #   4. export the best passing take (export.py); edge-tts for lines still failing only with EDGE_FALLBACK=1 (edge.py), else exit 1
 #   5. re-time known words in new overheard clips (spans.py), release the lock, run voice-manifest --check
-# A step that exits non-zero (a crash, a setup error, a lost lock) stops the batch with exit 1 and the end of its output;
+# A step that exits non-zero (the manifest rewrite, a crash, a setup error, a lost lock) stops the batch with exit 1 and the end of its output;
 # only takes that were made and checked can count as "no passing take".
 # Usage: sh tools/voice/run.sh [--no-manifest] [--dry]   (--dry: list the lines that need a clip, check the setup, stop)
 # Env: LOCK_ME (lock owner name, default game3d-voices), GAME3D_VOICE_WORK (takes and metrics, default ~/ai/game3d-voice),
@@ -46,7 +46,7 @@ step() {
 }
 
 for py in "$BENCH_PY" "$QWEN_PY"; do command -v "$py" > /dev/null || die "no Python at $py (QWEN_PY, BENCH_PY: see the voice-clips skill)"; done
-case " $* " in *" --no-manifest "*) ;; *) node "$REPO/game3d/tools/voice-manifest.mjs" | tee -a "$LOG" ;; esac
+case " $* " in *" --no-manifest "*) ;; *) step voice_manifest all node "$REPO/game3d/tools/voice-manifest.mjs" ;; esac
 MISSING=$($BENCH_PY "$HERE/cfg.py" missing) || die "tools/voice/cfg.py could not list the lines with no clip (error above)"
 if [ -z "$MISSING" ]; then say "every line has a clip"; node "$REPO/game3d/tools/voice-manifest.mjs" --check; exit $?; fi
 say "lines with no clip: $MISSING"
