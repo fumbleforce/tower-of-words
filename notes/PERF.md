@@ -582,3 +582,29 @@ Fast test, dorm courtyard median calls and triangles: phone q0 46 → 64 calls, 
 phone and desktop baselines are raised to these runs; phone-q1 wasn't measured. `hitch.mjs 390 844 plaza:dorm_court`
 at CPU 4x: preparing the courtyard while the plaza plays went 650 → 1400 ms, longest task 60 ms both, 1% low 30 → 20
 fps.
+
+### The cluster in finer slices (2026-10-01, #161)
+
+The 1% low drop above came from a few long steps in the courtyard's builder, each one frame: at CPU 4x,
+`endSquare`+`backYards` 60 ms, each of the woods (`belts`) 30 to 50 ms, the block fronts 44 ms, the cells' meshes
+24 ms, and the courtyard's own `buildCourt` 51 ms (older). Now they are generators with a `yield` every few trees,
+after every face and roof of a block (plaza/east-fronts.js `frontsSteps`; `buildFronts` drains it, so the east and
+north lanes are unchanged), after every cell's meshes (dorm-court/cells.js), and between the courtyard's parts
+(dorm-court/court.js `courtSteps`); the plaza's stand-in too. places/lifecycle.js waits a frame before and after the
+finds' floor raycasts (about 18 ms at CPU 4x in the courtyard). Longest builder step 60 → 21 ms (Eric's block,
+older). Every mesh's geometry, colour, matrix and shadow flags hash the same as on 287fe5d4 (dorm_court and plaza
+builders), and place shots at both sizes differ only in edge noise.
+
+`hitch.mjs 390 844 plaza:dorm_court`, CPU 4x, q0, GL=gpu (shots/perf/before-161-* and after-161-*):
+
+| | prepare | long tasks | frames over 34 ms | worst frame | 1% low |
+|---|--:|--:|--:|--:|--:|
+| before (287fe5d4, 2 runs) | 1,450-1,510 ms | 3 (60 ms) | 6-7 | 67 ms | 15 fps |
+| after (6 runs) | 1,690-2,050 ms | 0 in 5 runs, one of 67 ms | 0 in 4 runs, 1 in 2 | 33 ms (50 and 117 once each) | 30 fps (29.9 in 3: p99 33.4 ms) |
+
+The 1% low is the 30 fps step: the slowest frames are now one vsync late, not two or three. The preparation takes
+longer in wall time, still well inside the walk. Left over: `forecourt:plaza` at CPU 4x has 280-330 ms tasks on
+main as well (the plaza's `buildGreen`, `buildEastLane` and `buildNorthLane` steps, older than the cluster).
+
+Phone q1 (default tier) fast test, measured for the first time since the cluster: plaza 61 calls (peak 74), 198k
+tris; dorm_court 71 (peak 79), 115k. Both written to budgets.json's `phone-q1` entries.

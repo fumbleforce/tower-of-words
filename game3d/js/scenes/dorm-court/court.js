@@ -280,20 +280,27 @@ function bollards(set, p, block) {
   lamps(set, p, P.BOLLARDS, { kind: 'lantern', y: 0.5, pool: 0.75 });
 }
 
-export function buildCourt(root, nav, set) {
+// a generator that yields between parts, so the courtyard builds in slices (js/perf/slice.js)
+export function* courtSteps(root, nav, set) {
   const block = (x0, x1, z0, z1) => nav.block(x0, x1, z0, z1);
   paving(root);
+  yield;
   const p = new Parts();
   frontBed(p, set, block);
+  yield;
   gate(p, set, block);
   farSide(p);
+  yield;
   garden(p, block);
+  yield;
   doorBeds(root, p, block);
   seBed(p, block);
+  yield;
   seats(p, block);
   bollards(set, p, block);
   for (const [x, z] of P.LAMPS) block(x - 0.14, x + 0.14, z - 0.14, z + 0.14);
   lamps(set, p, P.LAMPS, { kind: 'post', pool: 1.05 });
+  yield;
   p.build(root);
   root.add(set.bedPools);
   // the gate is open, but the court ends there on day 1: he came in that way

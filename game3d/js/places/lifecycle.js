@@ -46,7 +46,9 @@ export function createPlaceLifecycle(
         const [w, h] = size();
         place.layout?.(w / h);
         if (BATCHED.has(name)) optimizePlace(place, { game, ...phoneBatch() });
+        await nextFrame(); // the pass's first scan and the finds' floor raycasts each take a frame's time on a phone
         addFindSpots(game, place); // after the draw-call pass, so each print stays its own mesh to hide
+        await nextFrame();
         // shaders and textures ready before the first frame there, so entering doesn't stall (js/perf/warm.js)
         place.warm = await warmPlace(game.renderer, place, {
           extra: [game.player?.root, game.mioNpc?.root],

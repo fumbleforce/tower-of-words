@@ -78,7 +78,7 @@ export function shelter(p, lights, [x0, x1, z0, z1], open, seed) {
 }
 
 // the square at the row's east end: herringbone brick in a pale border, dorm_3's door on its north side
-export function endSquare(pv, p, lights) {
+export function* endSquare(pv, p, lights) {
   const [x0, x1, z0, z1] = SQ;
   pv.field([x0, x1 - BW, z0, z1 - BW], {
     pattern: 'herringbone',
@@ -92,6 +92,7 @@ export function endSquare(pv, p, lights) {
   kerbRect(p, [x0, x1, z0, z1], { sides: 'e', gaps: { e: [[SW[2], SW[3]]] } });
   kerb(p, [x0, z0], [x0, ROW[2]], { off: 0.08 });
   verge(p, [x0, z1], [x1, z1], 's', { seed: 71 });
+  yield;
   lamps(
     lights,
     p,
@@ -107,8 +108,10 @@ export function endSquare(pv, p, lights) {
   for (const z of [SW[2], SW[3] - BW]) edge(pv, [SW[0], SW[1], z, z + BW], [0.15, BW]);
   kerbRect(p, [SW[0], SW[1], z0, SW[2]], { sides: 'ne' });
   drift(p, [SW[0], SW[1], z0, SW[2]], { back: 'n', seed: 72 });
+  yield;
   kerbRect(p, [SW[0], SW[1], SW[3], z1 + 1.1], { sides: 'se' });
   drift(p, [SW[0], SW[1], SW[3], z1 + 1.1], { back: 's', seed: 78 });
+  yield;
   pv.field(TR, { pattern: 'bond', module: [0.6, 0.3], tones: GRANITE.mid, origin: [TR[0], TR[2]] });
   for (const z of [TR[2], TR[3] - BW]) edge(pv, [TR[0], TR[1], z, z + BW], [0.15, BW]);
   edge(pv, [TR[1] - BW, TR[1], TR[2] + BW, TR[3] - BW], [BW, 0.15]);
@@ -127,19 +130,22 @@ export function endSquare(pv, p, lights) {
   // in the terrace's north half a raised bed with a big black pine, seen from up the row
   const tc = (TR[0] + TR[1]) / 2,
     tz = TR[2] + 1.6;
+  yield;
   wallRect(p, [tc - 1.0, tc + 1.0, tz - 0.8, tz + 0.8], { h: 0.45 });
   bed(p, [tc - 0.8, tc + 0.8, tz - 0.6, tz + 0.6], { y: 0.43 });
   pine(p, tc, tz, 1.25, 81);
   lamps(lights, p, [[TR[1] - 0.4, TR[2] + 0.4]], { pool: 1.5 });
+  yield;
   pine(p, (st[0] + st[1]) / 2 + 1.6, TR[3] + 2.4, 1.0, 82);
   pine(p, TR[0] - 0.6, TR[3] + 1.0, 0.9, 79);
   pine(p, TR[1] + 0.4, TR[3] + 0.8, 0.85, 80);
+  yield;
 }
 
 // a wood along an edge: trees of the given kinds in turn, in staggered rows about 2.4 apart and a little off the
 // grid, over an understorey of ground cover thick with clipped mounds in mixed greens and sizes; no kerb, it runs out
 // into the lawn
-function belt(p, [x0, x1, z0, z1], kinds, { seed = 1 } = {}) {
+function* belt(p, [x0, x1, z0, z1], kinds, { seed = 1 } = {}) {
   bed(p, [x0 - 0.3, x1 + 0.3, z0 - 0.3, z1 + 0.3], { y: 0.03 }); // a little over its neighbours, so no lawn between
   const alongX = x1 - x0 >= z1 - z0,
     [a0, a1] = alongX ? [x0, x1] : [z0, z1],
@@ -151,7 +157,9 @@ function belt(p, [x0, x1, z0, z1], kinds, { seed = 1 } = {}) {
     for (let j = 0; j < 2; j++) {
       const b = b0 + 0.35 + ((((k * 13 + j * 5 + seed) % 11) + 0.5) / 11) * (b1 - b0 - 0.7);
       mound(p, ...at(a, b), 0.2 + ((k + j + seed) % 4) * 0.06, tones[(k * 3 + j + seed) % 4], { y: 0.03 });
+      if (k % 4 === 3 && j) yield;
     }
+  yield;
   const rows = Math.max(1, Math.floor((b1 - b0) / 2.4));
   k = 0;
   for (let r = 0; r < rows; r++)
@@ -163,6 +171,7 @@ function belt(p, [x0, x1, z0, z1], kinds, { seed = 1 } = {}) {
         0.9 + ((k + seed) % 4) * 0.08,
         seed + k,
       );
+      yield;
     }
 }
 // round the cluster's outer edges, out past the map tile: the coast's black pines along the south, mixed trees along
@@ -170,26 +179,30 @@ function belt(p, [x0, x1, z0, z1], kinds, { seed = 1 } = {}) {
 export function* belts(p) {
   const DE = C.block('dorm_entry'),
     D2 = C.block('dorm_2');
-  belt(p, [GARDEN[0], D2[0] - 0.3, GARDEN[3] + 0.6, 26], [pine, pine, sakura], { seed: 90 });
-  yield;
-  belt(p, [D2[0] - 0.3, 136, D2[3] + 1.6, 26], [pine, pine, keyaki], { seed: 94 });
-  yield;
-  belt(p, [C.block('dorm_2')[1] + 0.6, TR[1] + 1.0, SQ[3] + 1.6, D2[3] + 1.6], [pine, sakura, pine], { seed: 98 });
-  yield;
-  belt(p, [TR[1] + 1.0, 136, -21, D2[3] + 1.6], [keyaki, ginkgo, pine], { seed: 102 });
-  yield;
-  belt(p, [C.block('dorm_1e')[0], TR[1] + 1.0, -21, DE[2] - 0.2], [keyaki, ginkgo, sakura, maple], { seed: 106 });
+  yield* belt(p, [GARDEN[0], D2[0] - 0.3, GARDEN[3] + 0.6, 26], [pine, pine, sakura], { seed: 90 });
+  yield* belt(p, [D2[0] - 0.3, 136, D2[3] + 1.6, 26], [pine, pine, keyaki], { seed: 94 });
+  yield* belt(p, [C.block('dorm_2')[1] + 0.6, TR[1] + 1.0, SQ[3] + 1.6, D2[3] + 1.6], [pine, sakura, pine], {
+    seed: 98,
+  });
+  yield* belt(p, [TR[1] + 1.0, 136, -21, D2[3] + 1.6], [keyaki, ginkgo, pine], { seed: 102 });
+  yield* belt(p, [C.block('dorm_1e')[0], TR[1] + 1.0, -21, DE[2] - 0.2], [keyaki, ginkgo, sakura, maple], {
+    seed: 106,
+  });
 }
 
 // mixed trees in a bed of layered planting: [kind, x, z, size] each
-function grove(p, rect, trees, seed) {
+function* grove(p, rect, trees, seed) {
   drift(p, rect, { back: 'n', seed });
-  trees.forEach(([k, x, z, s], i) => k(p, x, z, s, seed + i));
+  yield;
+  for (const [i, [k, x, z, s]] of trees.entries()) {
+    k(p, x, z, s, seed + i);
+    yield;
+  }
 }
 
 // the bike shelter's pad, north of the back walk and open to it
 export const SHELTER_PAD = [ENTRY[1] + 1.3, ENTRY[1] + 11.7, BACK[2] - 2.2, BACK[2]];
-export function backYards(pv, p, lights) {
+export function* backYards(pv, p, lights) {
   const GAL = C.block('dorm_gallery'),
     D1E = C.block('dorm_1e'),
     D2 = C.block('dorm_2'),
@@ -209,7 +222,8 @@ export function backYards(pv, p, lights) {
   });
   kerbRect(p, SHELTER_PAD, { sides: 'nwe' });
   shelter(p, lights, [ENTRY[1] + 1.5, ENTRY[1] + 11.5, BACK[2] - 2.0, BACK[2] - 0.05], 's', 7);
-  grove(
+  yield;
+  yield* grove(
     p,
     [DE[1] + 0.6, D4[0] - 0.3, DE[2] - 0.2, BACK[2] - 2.6],
     [
@@ -220,7 +234,7 @@ export function backYards(pv, p, lights) {
     55,
   );
   // the lawn north of dorm_1e and west of dorm_entry; between dorm_3 and dorm_4; east of the towers
-  grove(
+  yield* grove(
     p,
     [D1E[0] + 0.2, DE[0] - 1.6, DE[2] - 0.2, D1E[2] - 1.6],
     [
@@ -229,8 +243,13 @@ export function backYards(pv, p, lights) {
     ],
     61,
   );
-  grove(p, [D1E[1] + 0.4, ENTRY[0] - 0.4, D1E[2] - 1.4, BACK[3]], [[sakura, D1E[1] + 2.0, BACK[2] - 0.4, 0.9]], 53);
-  grove(
+  yield* grove(
+    p,
+    [D1E[1] + 0.4, ENTRY[0] - 0.4, D1E[2] - 1.4, BACK[3]],
+    [[sakura, D1E[1] + 2.0, BACK[2] - 0.4, 0.9]],
+    53,
+  );
+  yield* grove(
     p,
     [C.LINK[1] + 0.6, D4[0] - 0.3, BACK[3] + 0.6, D3[2] - 0.4],
     [
@@ -239,7 +258,7 @@ export function backYards(pv, p, lights) {
     ],
     63,
   );
-  grove(
+  yield* grove(
     p,
     [D3[1] + 1.1, D4[1] + 2.0, D4[3] + 1.2, TR[2] - 0.8],
     [
@@ -250,6 +269,7 @@ export function backYards(pv, p, lights) {
     65,
   );
   shrubBed(p, [D4[0], D3[1] + 1.0, D4[3] + 1.2, D3[2] - 0.4], 'nsw', 70);
+  yield;
   // beds along the blocks' feet where they face lawn
   shrubBed(p, [D4[0], D4[1], D4[3], D4[3] + 1.0], 'sew', 73);
   shrubBed(p, [D3[1], D3[1] + 1.0, D3[2], D3[3]], 'nse', 74);
@@ -268,7 +288,7 @@ export function backYards(pv, p, lights) {
 // the garden south of the row: a walk in from the row through the verge to a paved pad under a pergola with a bench
 // at each end, drifts of layered planting either side with a cherry in each
 export const GARDEN_WALK = [(GARDEN[0] + GARDEN[1]) / 2 - 0.75, (GARDEN[0] + GARDEN[1]) / 2 + 0.75];
-export function garden(pv, p) {
+export function* garden(pv, p) {
   const [x0, x1, , z1] = GARDEN,
     [w0, w1] = GARDEN_WALK,
     pad = [w0 - 2.6, w1 + 2.6, z1 - 3.4, z1 - 0.4];
@@ -291,12 +311,16 @@ export function garden(pv, p) {
     [pad[1] - 0.7, -Math.PI / 2],
   ])
     bench(p, x, (pad[2] + pad[3]) / 2, f, { len: 1.6 });
+  yield;
   // the drifts, and a cherry in each
   drift(p, [x0 + 0.4, pad[0] - 0.4, ROW[3] + 1.6, z1 - 0.3], { back: 's', seed: 41 });
+  yield;
   drift(p, [pad[1] + 0.4, x1 - 0.4, ROW[3] + 1.6, z1 - 0.3], { back: 's', seed: 45 });
+  yield;
   sakura(p, (x0 + pad[0]) / 2, ROW[3] + 3.6, 1.0, 42);
   sakura(p, (pad[1] + x1) / 2, ROW[3] + 3.9, 0.95, 43);
   pine(p, (x0 + pad[0]) / 2 + 0.8, z1 - 1.4, 0.8, 44);
+  yield;
 }
 
 // a glazed pot with a clipped shrub either side of each door

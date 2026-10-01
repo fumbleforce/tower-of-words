@@ -18,8 +18,9 @@ function fromCourt([x0, x1, z0, z1]) {
     [c, d] = toIsland('dorm_court', x1, z1);
   return [Math.min(a, c), Math.max(a, c), Math.min(b, d), Math.max(b, d)];
 }
-// the courtyard, plainly, for the plaza (the plaza lays the gate leg, 3 wide, off the dorm street)
-export function standIn(pv, p, lights) {
+// the courtyard, plainly, for the plaza (the plaza lays the gate leg, 3 wide, off the dorm street); a generator
+// that yields between parts, built in slices with the cluster
+export function* standIn(pv, p, lights) {
   const gz = PATHS.find((q) => q.id === 'route_home').line.at(-1)[1],
     gate = [gz - 1.5, gz + 1.5];
   const bedR = fromCourt(P.SOUTH_BED),
@@ -49,6 +50,7 @@ export function standIn(pv, p, lights) {
     mound(p, bx - 0.2, z, 0.24 + ((k * 3) % 4) * 0.05, tones[k % 4], { y: 0.3 });
     if (k % 2) mound(p, bx + 0.22, z + 0.15, 0.2 + ((k * 5) % 3) * 0.05, tones[(k + 2) % 4], { y: 0.3 });
   }
+  yield;
   bed(p, [garden[0] + 0.2, garden[1], garden[2], garden[3]], { y: 0.3 });
   const zm = (P.SOUTH_BED[2] + P.SOUTH_BED[3]) / 2;
   for (const [x, z, k, sz, seed] of [
@@ -59,8 +61,10 @@ export function standIn(pv, p, lights) {
     [-5.0, zm, maple, 0.6, 3],
     [5.0, zm, maple, 0.62, 2],
     [9.6, zm, sakura, 0.6, 6],
-  ])
+  ]) {
     k(p, ...toIsland('dorm_court', x, z), sz, seed);
+    yield;
+  }
   // the court's things: the two drinks machines by the laundry's end, the bench and bins on the front bed, the lamps
   const [mx, mz] = toIsland('dorm_court', P.LAUNDRY.x0 + 0.6, P.LAUNDRY.z + 0.45);
   // side by side, their lit fronts to the court (west)
@@ -84,6 +88,7 @@ export function standIn(pv, p, lights) {
   bins(p, bx2, bz2 - 1.3, Math.PI / 2);
   // the bike shelter against the block's return, and the garbage cage in the south-east corner
   shelter(p, lights, fromCourt(P.SHELTER), 'n', 5);
+  yield;
   // the garbage cage: a green steel frame, a lid, bars all round, bags inside
   const gc = fromCourt(P.GARBAGE),
     [gx, gcz] = [(gc[0] + gc[1]) / 2, (gc[2] + gc[3]) / 2],

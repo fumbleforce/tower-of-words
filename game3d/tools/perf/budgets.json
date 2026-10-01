@@ -188,21 +188,21 @@
         }
       },
       "plaza": {
-        "calls": 56,
-        "tris": 198504,
+        "calls": 61,
+        "tris": 197533,
         "gpu": {
           "medianMs": 16.7,
           "p99Ms": 16.8,
-          "build": "0930-1823-d329dc3a"
+          "build": "1001-1121-287fe5d4"
         }
       },
       "dorm_court": {
-        "calls": 54,
-        "tris": 70298,
+        "calls": 71,
+        "tris": 114719,
         "gpu": {
           "medianMs": 16.7,
           "p99Ms": 16.8,
-          "build": "0930-1823-d329dc3a"
+          "build": "1001-1121-287fe5d4"
         }
       },
       "dorms": {

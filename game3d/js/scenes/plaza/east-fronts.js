@@ -20,6 +20,7 @@ import { merged, AWNING } from '../plaza-buildings.js';
 import { hash2 } from '../outdoor/parts.js';
 import { STEEL } from '../outdoor/furniture.js';
 import { faces, faceAt, tOf } from '../outdoor/block.js';
+import { drain } from '../../perf/slice.js';
 
 const PLINTH = '#6c7178',
   FRAME = '#4f565f',
@@ -39,8 +40,11 @@ function onFace(add, F, u, y, o, w, h, t) {
   add(F.d[0] ? w : t, h, F.d[0] ? t : w, x, y, z);
 }
 
-// caster: the collector for the walls of the blocks `casts(block)` picks (the ones that should throw a shadow)
-export function buildFronts(p, lights, blocks, { caster = p, casts = () => false } = {}) {
+// caster: the collector for the walls of the blocks `casts(block)` picks (the ones that should throw a shadow).
+// frontsSteps is the same as a generator that yields after every face and roof, for a place built in slices
+// (js/perf/slice.js).
+export const buildFronts = (...a) => drain(frontsSteps(...a));
+export function* frontsSteps(p, lights, blocks, { caster = p, casts = () => false } = {}) {
   const glass = [],
     litGlass = [];
   const box =
@@ -103,6 +107,7 @@ export function buildFronts(p, lights, blocks, { caster = p, casts = () => false
         }
       }
       if (front) groundFloor(p, F, door, fh, { box, pane, lights });
+      yield;
     }
 
     // the roof
@@ -134,6 +139,7 @@ export function buildFronts(p, lights, blocks, { caster = p, casts = () => false
         p.box('#a9aeb2', 1.0, 0.6, 0.7, x1 - 1.4, y + 0.45, z1 - 1.0);
       }
     }
+    yield;
   }
 
   const out = new THREE.MeshStandardMaterial({ color: '#4c5a68', roughness: 0.3, side: THREE.DoubleSide });
