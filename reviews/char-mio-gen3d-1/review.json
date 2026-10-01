@@ -26,6 +26,7 @@
     "art/parts/style-concepts/claude-miogen3d/raw/meshy-single/renders/clay-l90.png",
     "art/parts/style-concepts/claude-miogen3d/raw/meshy-single/renders/clay-back.png",
     "art/parts/style-concepts/claude-miogen3d/raw/meshy-single/preview.png",
+    "art/parts/style-concepts/claude-miogen3d/views/src-meshy-single/front.png",
     "art/parts/style-concepts/claude-miogen3d/raw/meshy-single/input-0.png"
    ],
    "note": "Raw generated guide, 1280368 faces, no rig. 30 credits; latest model, texture on, remesh off, image enhancement off, PBR off. The first four views show its paint; the next four show the same shape in clay. No hand-placed facet rebuild is finished."

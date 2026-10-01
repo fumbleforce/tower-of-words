@@ -23,6 +23,7 @@ for name, label in [('meshy-single', 'Meshy from one picture'), ('meshy-multi-t3
     faces = (d / 'faces.txt').read_text().strip()
     options.append({'id': name, 'label': name + ' · ' + label, 'image': pictures[0],
                     'images': pictures[1:] + [f'{BASE}/raw/{name}/preview.png'] +
+                    ([f'{BASE}/views/src-meshy-single/front.png'] if name == 'meshy-single' else []) +
                     [str(p.relative_to(MAIN)) for p in sorted(d.glob('input-*.png'))],
                     'note': f'Raw generated guide, {faces} faces, no rig. 30 credits; latest model, texture on, '
                             'remesh off, image enhancement off, PBR off. The first four views show its paint; '

@@ -24,6 +24,16 @@
     @media (max-width: 700px) { .stage { grid-template-columns: 1fr; } }
   </style>
   <link rel="stylesheet" href="./viewer-kit.css">
+  <style>
+    #target-toggle { display: none; }
+    @media (max-width: 700px) {
+      #target-toggle { display: inline-block; }
+      .stage { grid-template-rows: 100%; overflow: hidden; }
+      .stage #target { display: none; height: 100%; object-fit: contain; }
+      .stage.show-target #view { display: none; }
+      .stage.show-target #target { display: block; }
+    }
+  </style>
 </head>
 <body>
   <header><h1>Mio: generated volume guides</h1><p>Raw results beside the target picture. Drag to turn, pinch or scroll to zoom. These are unrigged modelling guides; no character rebuild is finished.</p></header>
@@ -33,11 +43,12 @@
     <option value="triposg-single">TripoSG: one picture, clay</option>
   </select></div>
   <div class="bar">
+    <button id="target-toggle" aria-pressed="false" aria-controls="target">Target picture</button>
     <button data-yaw="0">Front</button><button data-yaw="40">Three-quarter</button>
     <button data-yaw="90">Side</button><button data-yaw="180">Back</button>
     <button id="clay" aria-pressed="false">Clay</button><button id="reset">Reset zoom</button>
   </div>
-  <div class="stage"><canvas id="view" aria-label="Rotatable generated model"></canvas><img src="/art/parts/style-concepts/mio-ref-clean/final.png" alt="The target picture"></div>
+  <div class="stage"><canvas id="view" aria-label="Rotatable generated model"></canvas><img id="target" src="/art/parts/style-concepts/mio-ref-clean/final.png" alt="The target picture"></div>
   <p id="status" role="status" aria-live="polite">Loading…</p>
   <script type="module" src="./mio-gen3d-viewer.js"></script>
 </body>
