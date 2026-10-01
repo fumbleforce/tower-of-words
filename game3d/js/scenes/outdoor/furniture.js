@@ -10,6 +10,9 @@
 //   bollard(p, x, z)                        stone, with a steel cap
 //   stoneLantern(p, set, x, z, y)           a garden's stone lantern, its fire box lit with the lamps
 //   fingerSign(root, p, x, z, boards)       a post with pointing boards: [{ text, sub, dir: 1 | -1 }]
+//   rod(p, color, [x, y, z], [x, y, z], r)  a round bar from one point to another (a rail, a tie rod)
+//   handrail(p, [[x, z, floorY], ...])      a steel handrail along a ramp or landing, posts down to the floor
+//   bikeRack(p, a, b, { n })                a row of steel hoops for bikes standing across it; returns their places
 import * as THREE from 'three';
 import { textTexture, plane, JP_FONT } from '../../props.js';
 import { pools } from './parts.js';
@@ -202,4 +205,56 @@ export function stoneLantern(p, set, x, z, y = 0) {
     p.box(stone, 0.05, 0.2, 0.05, x + dx * 0.1, y + 0.42, z + dz * 0.1);
   p.geo('#85867f', new THREE.CylinderGeometry(0.05, 0.23, 0.14, 6).translate(x, y + 0.67, z));
   p.geo('#85867f', new THREE.SphereGeometry(0.055, 6, 4).translate(x, y + 0.77, z));
+}
+
+const _up = new THREE.Vector3(0, 1, 0);
+export function rod(p, color, a, b, r = 0.02, { cast = false } = {}) {
+  const A = new THREE.Vector3(...a),
+    B = new THREE.Vector3(...b),
+    L = A.distanceTo(B);
+  const g = new THREE.CylinderGeometry(r, r, L, 6).translate(0, L / 2, 0);
+  g.applyQuaternion(new THREE.Quaternion().setFromUnitVectors(_up, B.sub(A).normalize()));
+  p.geo(color, g.translate(...a), { cast });
+}
+
+// a handrail along points [x, z, floorY]: steel posts at every point and every 1.3 between, from the floor up; a
+// round rail 0.85 over the floor and a lower one at 0.62, as on every Japanese ramp
+export function handrail(p, pts, { color = STEEL.mid } = {}) {
+  const post = (x, z, y) => p.box(STEEL.mid, 0.045, 0.85, 0.045, x, y, z, { cast: false });
+  for (let i = 0; i + 1 < pts.length; i++) {
+    const [ax, az, ay] = pts[i],
+      [bx, bz, by] = pts[i + 1];
+    for (const [hh, r] of [
+      [0.85, 0.04],
+      [0.62, 0.03],
+    ])
+      rod(p, color, [ax, ay + hh, az], [bx, by + hh, bz], r);
+    const n = Math.max(1, Math.ceil(Math.hypot(bx - ax, bz - az) / 1.3));
+    for (let k = 0; k < n; k++) {
+      const u = k / n;
+      post(ax + (bx - ax) * u, az + (bz - az) * u, ay + (by - ay) * u);
+    }
+  }
+  const [ex, ez, ey] = pts[pts.length - 1];
+  post(ex, ez, ey);
+}
+
+// a bike rack: steel hoops (an upturned U, 0.55 high, 0.6 long across the row) on a flat bar along the ground from
+// a to b ([x, z], axis-aligned), n of them, each with a bike's place beside it. Returns the places ([x, z]), for
+// the bikes, which stand across the row.
+export function bikeRack(p, a, b, { n = 3 } = {}) {
+  const alongX = Math.abs(b[0] - a[0]) >= Math.abs(b[1] - a[1]);
+  const at = (u) => [a[0] + (b[0] - a[0]) * u, a[1] + (b[1] - a[1]) * u];
+  const L = Math.hypot(b[0] - a[0], b[1] - a[1]),
+    [mx, mz] = at(0.5),
+    out = [];
+  p.box(STEEL.dark, alongX ? L : 0.06, 0.03, alongX ? 0.06 : L, mx, 0, mz, { cast: false });
+  for (let i = 0; i < n; i++) {
+    const [x, z] = at((i + 0.25) / n);
+    for (const d of [-0.3, 0.3])
+      p.box(STEEL.pale, 0.04, 0.55, 0.04, x + (alongX ? 0 : d), 0, z + (alongX ? d : 0), { cast: false });
+    p.box(STEEL.pale, alongX ? 0.04 : 0.64, 0.04, alongX ? 0.64 : 0.04, x, 0.53, z, { cast: false });
+    out.push(at((i + 0.62) / n));
+  }
+  return out;
 }
