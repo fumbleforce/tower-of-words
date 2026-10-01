@@ -13,6 +13,8 @@
 // to the game's cameras. "North" in the game and in these notes is the grid's north. Origin: the head office's
 // entrance door as the reference draws it.
 
+import { EAST_PATHS, EAST_GREEN } from './island-east.js';
+
 export const UNIT = 1.5;
 
 // The reference is a perspective view from the south: a camera whose horizon lies above the image. REF maps its
@@ -98,7 +100,7 @@ export const CHUNKS = {
     scale: 1,
     level: 0,
     walk: [-11.8, 13.2, -16.4, 11.2],
-    view: [-22, 22, -28, 32],
+    view: [-22, 38.6, -28, 32], // east to the dorm courtyard's tile: the east lane (plaza/east-lane.js)
     anchor: 'the fountain on the fountain as drawn',
   },
   dorm_court: {
@@ -149,11 +151,11 @@ const ROWS = [
   ['head_office_wing', 'office', 5, 2, 1, ROOF, 'office', [-14, -11.9, -8.2, -7.3]],
   ['canteen', 'canteen', 2, 2.1, 1, BLUE_ROOF, 'flat', [22.535, -28.8, 45.235, -20.5]],
   ['clinic', 'clinic', 3, 2, 0, ROOF, 'office', [25.4, -38.8, 36.1, -32.8]],
-  ['shops_north', 'shop', 2, 1.45, 2, SHOP_ROOF, 'shop', [-4, 13.4, 64, 17.9]],
-  ['arcade', 'arcade', 1, 2.9, 1, '#9aa4ad', 'flat', [-4, 17.9, 64, 22.4]],
-  ['shops_south', 'shop', 2, 1.45, 3, SHOP_ROOF, 'shop', [-4, 22.4, 64, 26.9]],
-  ['izakaya', 'shop', 3, 1.6, 3, SHOP_ROOF, 'shop', [68.8, 14.8, 72.3, 20.3]],
-  ['ramen', 'shop', 3, 1.6, 0, SHOP_ROOF, 'shop', [73.4, 13, 81.3, 18.4]],
+  ['shops_north', 'shop', 2, 1.45, 2, SHOP_ROOF, 'shop', [-4, 13.4, 64.5, 17.9]],
+  ['arcade', 'arcade', 1, 2.9, 1, '#9aa4ad', 'flat', [-4, 17.9, 64.5, 22.4]],
+  ['shops_south', 'shop', 2, 1.45, 3, SHOP_ROOF, 'shop', [-4, 22.4, 64.5, 26.9]],
+  ['izakaya', 'shop', 3, 1.6, 3, SHOP_ROOF, 'shop', [66.6, 13.4, 70.6, 17.9]],
+  ['ramen', 'shop', 3, 1.6, 0, SHOP_ROOF, 'shop', [76.6, 13.4, 82, 18.4]],
   [
     'dorm_1',
     'dorm',
@@ -203,8 +205,8 @@ const ROWS = [
   ['r3', 'office', 3, 2, 1, ROOF, 'flat', [72.9, -44.8, 78.3, -41.4]],
   ['housing_n', 'dorm', 4, 1.75, 2, DORM_ROOF, 'dorm', [78.7, -53.2, 102.5, -46.5]],
   ['dorm_5', 'dorm', 3, 1.75, 3, DORM_ROOF, 'dorm', [76.5, -37.2, 83.6, -18.4]],
-  ['block_e3', 'office', 3, 2, 0, ROOF, 'flat', [69.8, -29.2, 75, -18]],
-  ['block_e1', 'office', 2, 2, 1, ROOF, 'flat', [56.7, -18.4, 65.6, -11.8]],
+  ['block_e3', 'office', 3, 2, 0, ROOF, 'flat', [71.6, -29.2, 76.4, -18]],
+  ['block_e1', 'office', 2, 2, 1, ROOF, 'flat', [50.2, -19.6, 60.1, -12.6]],
   ['dorm_6', 'dorm', 4, 1.75, 2, DORM_ROOF, 'dorm', [108.4, -50.7, 114.9, -32.8]],
   ['dorm_2', 'dorm', 7, 1.75, 2, DORM_ROOF, 'dorm', [91.4, 12, 99.4, 18.3]],
   ['dorm_entry', 'dorm', 3, 1.75, 3, DORM_ROOF, 'dorm', [97.2, -13.3, 101.3, -9.4]],
@@ -212,10 +214,10 @@ const ROWS = [
   ['dorm_3', 'dorm', 9, 1.75, 3, DORM_ROOF, 'dorm', [109, 0.7, 119.5, 6.5]],
   ['dorm_4', 'dorm', 9, 1.75, 0, DORM_ROOF, 'dorm', [116.3, -9.2, 125.4, -3.1]],
   ['dorm_annex', 'dorm', 1, 1.75, 3, DORM_ROOF, 'dorm', [125.4, -7.5, 128.1, -3.6]],
-  ['r8', 'office', 2, 2, 2, ROOF, 'flat', [66.9, 2.8, 69.7, 6.2]],
-  ['r9', 'office', 2, 2, 3, ROOF, 'flat', [70.2, 2.6, 72.9, 4.9]],
-  ['m_e1', 'office', 2, 2, 2, ROOF, 'flat', [60, 3, 66.6, 7.3]],
-  ['m_e2', 'office', 1, 2, 3, ROOF, 'flat', [55.4, 6.5, 59.4, 8.3]],
+  ['r8', 'office', 2, 2, 2, ROOF, 'flat', [66.5, 3.4, 72.04, 7.6]],
+  ['r9', 'office', 2, 2, 3, ROOF, 'flat', [71.6, -16.6, 76, -12.6]],
+  ['m_e1', 'office', 2, 2, 2, ROOF, 'flat', [60.6, 3.4, 66, 8]],
+  ['m_e2', 'office', 1, 2, 3, ROOF, 'flat', [52.6, 6, 57.7, 8.6]],
 ];
 const DETAILS = {
   station:
@@ -235,13 +237,21 @@ const DETAILS = {
   arcade: 'The arcade roof over the walk between the rows.',
   shops_south: 'The south row, its back to the promenade and the sea.',
   izakaya: 'Izakaya at the east end of the shop street, by the way into the dorm court.',
-  ramen: 'Ramen next to the izakaya.',
+  ramen: 'Ramen across the dorm street from the izakaya, its door on the street.',
   dorm_1:
     'Eric’s block, five storeys: its long west face on the dorm entrance court, returning west at its south end (built by the dorm_court chunk, square to it). The map draws the dorm blocks turned 25 to 40° off the grid; here they are on it.',
   dorm_1e: 'The block east of Eric’s, parallel to it; its west face is the wall outside Eric’s window, 1.3 out.',
   housing_n: 'The more generous block on the cluster’s quieter north edge.',
   sento_laundry:
     'Sento and coin laundry sharing one frontage at the dorm approach (placed by the brief; too small to read on the reference).',
+  // the east lane's six small blocks (scenes/plaza/east-lane.js builds their fronts), squared onto its paths
+  block_e1:
+    'Two storeys of offices north of the lane past the plaza; its door in the middle of its south face, at the head of the cross path.',
+  m_e2: 'A one-storey shop with a tiled roof; its door at the foot of the cross path, opposite block_e1’s.',
+  m_e1: 'Two storeys, a café on the ground floor fronting the south walk.',
+  r8: 'Two storeys; its door on the pocket park’s north-south axis, across the south walk.',
+  r9: 'A two-storey house on the north street’s east side, south of block_e3, its door on that street.',
+  block_e3: 'Three storeys on the north street’s east side; its door on that street.',
 };
 const pairs = (f) => f.reduce((a, v, i) => (i % 2 ? a[a.length - 1].push(v) : a.push([v]), a), []);
 export const BUILDINGS = ROWS.map(([id, kind, storeys, floorH, wall, roof, windows, f]) => ({
@@ -287,6 +297,7 @@ export const PATHS = [
     detail:
       'The round paved plaza; the basin is about 8.6 across on the reference. Its centre sits on the lane’s axis, 2.4 south of where the reference draws it, so the lane runs straight in and out and the canteen’s terrace stays clear of it.',
   },
+  ...EAST_PATHS, // the east lane (scenes/island-east.js)
   {
     id: 'promenade',
     kind: 'promenade',
@@ -315,6 +326,7 @@ export const GREEN = [
     poly: pairs([5, -1.25, 65.5, -1.25, 65.5, 13.4, -4, 13.4, -4, 11, 5, 11]),
     detail: 'The verge between the lane and the shop street’s back.',
   },
+  ...EAST_GREEN,
   {
     id: 'dorm_inner_court',
     rect: [95, 2.6, 108.5, 11.5],

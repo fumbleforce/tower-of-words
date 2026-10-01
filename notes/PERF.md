@@ -499,3 +499,12 @@ q0, GL=gpu; before is d2c8515):
   before the look, which patched the batches' shaders twice).
 - `node game3d/tools/perf/builder-profile.mjs <module> <export> [args] [--gen]` profiles one builder at CPU 4x: the
   functions with the most time and, for a generator, its longest step.
+
+## The east lane past the plaza (2026-10-01, #139)
+
+The plaza now builds the east lane as backdrop (game3d/js/scenes/plaza/east-lane.js). Its kerbs, planting, furniture
+and block fronts go into their own Parts collector that casts no shadow, since all of it but block_e1 and m_e2 lies
+outside the sun's shadow box (only those two blocks' walls cast); window panes are flat quads. Fast test, plaza median
+calls and triangles: phone q0 49 → 50 calls, 121k → 160k tris; phone q1 (medium) 56 → 58 calls (peak 69, under 250),
+123k → 164k; desktop q0 60 → 64 calls, 130k → 169k. The plaza's triangle baselines in budgets.json are raised to these
+runs (the added content, under the 300k budget); the call baselines stand.

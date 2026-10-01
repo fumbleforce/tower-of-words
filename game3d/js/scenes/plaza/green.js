@@ -15,8 +15,10 @@ import { verge } from '../outdoor/lane.js';
 import { arcBox } from '../outdoor/round.js';
 import { keyaki, sakura, maple, ginkgo, pine, cluster, grass, bed, mound, LEAF } from '../outdoor/planting.js';
 import * as P from './plan.js';
+import * as E from './east-plan.js';
 
 const { F, R, BAND, ARCS, LANE, LINK, AVENUE, TERRACE, TERRACE_S, polar, rad } = P;
+const CROSS = E.CROSS_X;
 // cosmos, the autumn flower of every Japanese park: pink, white and a deep rose
 const COSMOS = ['#d59aae', '#ece6e3', '#b86f8e', '#dcb3c6'];
 
@@ -103,8 +105,11 @@ function verges(p) {
     east = AVENUE.map((d) => F[0] + d);
   verge(p, [-44, w[2]], [F[0] - stop, w[2]], 'n', { trees: west, seed: 3 });
   verge(p, [-44, w[3]], [F[0] - stop, w[3]], 's', { trees: west, seed: 4 });
-  verge(p, [F[0] + stop, e[2]], [44, e[2]], 'n', { trees: east, seed: 5 });
-  verge(p, [F[0] + stop, e[3]], [44, e[3]], 's', { trees: east, seed: 6 });
+  // east of the plaza to the jog (plaza/east-lane.js): the north verge stops at the leg, the south one at the
+  // corner's far side; the cross walk runs through both
+  const crossings = [CROSS];
+  verge(p, [F[0] + stop, e[2]], [e[1], e[2]], 'n', { trees: east, crossings, seed: 5 });
+  verge(p, [F[0] + stop, e[3]], [e[1] + 2 * P.HALF, e[3]], 's', { trees: east, crossings, seed: 6 });
 }
 
 // the terrace's south line: a seat-height wall along all of it, open only where the link starts; a planted bed at
@@ -141,8 +146,8 @@ const GROVES = [
   '-16.8 -7.6 2.4 1.8 | k -0.9 0.2 1.2, g 1.0 -0.5 1.05, m 0.2 1.0 0.9',
   '-15.2 -11.0 1.6 1.2 | s 0 0 1.0, p 1.0 0.5 0.85',
   '-21.5 7.6 2.4 1.6 | s 0 0 1.1, m 1.3 0.5 0.9',
-  '15.2 -11.5 2.4 1.8 | k -0.9 0 1.2, g 1.0 0.6 1.0, s 0.3 -1.0 1.0',
-  '17.6 6.4 2.2 1.4 | g -0.6 0 1.1, m 0.9 0.4 0.95, k 0.3 -0.8 1.1',
+  '10.2 -11.5 2.4 1.8 | k -0.9 0 1.2, g 1.0 0.6 1.0, s 0.3 -1.0 1.0',
+  '14.6 6.6 2.0 1.4 | g -0.6 0 1.1, m 0.9 0.4 0.95, k 0.3 -0.8 1.1',
   '-12.5 12.8 2.2 1.0 | m -0.9 0 0.9, s 0.9 0.1 0.95',
   '12.5 12.8 2.2 1.0 | s -0.9 0 0.95, m 0.9 0.1 0.9',
 ].map((row) => {

@@ -16,6 +16,7 @@ import { bikeRow, bicycle } from '../forecourt/details.js';
 import { merged, AWNING } from '../plaza-buildings.js';
 import { BENCH_ANGLES, RING_LAMPS, SOUTH_PAIR } from './green.js';
 import * as P from './plan.js';
+import { CROSS_X } from './east-plan.js';
 
 const { F, R, BORDER, BASIN, LANE, LINK, LZ, HALF, AVENUE, CANTEEN, SHOPS_Z, polar } = P;
 const SEAT_R = R - BORDER - 0.55; // the benches and the notice board, just inside the border ring
@@ -28,7 +29,9 @@ export function lampPoints() {
   const zs = LANE.w[3] + 0.35;
   for (let i = 0; i + 1 < AVENUE.length; i += 2) {
     const d = (AVENUE[i] + AVENUE[i + 1]) / 2;
-    out.push([F[0] - d, zs, [0, -0.9], 1.7], [F[0] + d, zs, [0, -0.9], 1.7]);
+    // east of the plaza the cross walk (plaza/east-plan.js) meets the lane here: that lamp stands beside its mouth
+    const ex = F[0] + d > CROSS_X[0] && F[0] + d < CROSS_X[1] ? CROSS_X[0] - 0.8 : F[0] + d;
+    out.push([F[0] - d, zs, [0, -0.9], 1.7], [ex, zs, [0, -0.9], 1.7]);
   }
   const rr = R + 0.38;
   const inward = ([x, z]) => {
