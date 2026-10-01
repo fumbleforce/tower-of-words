@@ -6,6 +6,7 @@
 //   const t = makeTwin(batch, parts)   parts: the batch's { i0, cnt } entries for the lifted meshes
 //   dropTwin(t)
 import * as THREE from 'three';
+import { skinnedTwin } from './batch-rig.js';
 
 const v = new THREE.Vector3();
 
@@ -28,7 +29,7 @@ export function makeTwin(b, parts) {
   geo.setIndex(new THREE.BufferAttribute(idx, 1));
   geo.boundingBox = box; // just these parts: culling and the outline's cropped depth pass stay tight
   geo.boundingSphere = box.getBoundingSphere(new THREE.Sphere());
-  const m = new THREE.Mesh(geo, src.material);
+  const m = src.isSkinnedMesh ? skinnedTwin(src, geo) : new THREE.Mesh(geo, src.material);
   m.name = 'perf-outlined';
   m.castShadow = src.castShadow;
   m.receiveShadow = src.receiveShadow;
