@@ -1,0 +1,115 @@
+{
+ "about": "char-face-1: claude-facet bodies with anime faces as textures (tools/style-concepts/facetface.py). One change per attempt; attempt-05/06 and 07/08 are two series that each start from attempt-04.",
+ "attempts": [
+  {
+   "id": "before",
+   "attempt": "claude-facet/attempt-04",
+   "short": "before",
+   "label": "Before · claude-facet attempt-04",
+   "dir": "/art/parts/style-concepts/claude-facet/attempt-04/",
+   "faces": false,
+   "note": "Round 1's faceted figures: box eyes, box glasses and brows on an eight-sided head.",
+   "read": "What I see: the eyes are two dark boxes behind box glasses, which is the blank stare."
+  },
+  {
+   "id": "cf-01",
+   "attempt": "attempt-01",
+   "short": "face texture",
+   "label": "cf-01 · face texture on the old head",
+   "dir": "/art/parts/style-concepts/claude-facetface/attempt-01/",
+   "faces": true,
+   "note": "Change: the box eyes, glasses, brows and Eric's stubble shell come off; a painted face texture (eyes, brows, nose, mouth, glasses, Eric's stubble) is projected onto the front of the same eight-sided head, lit like the rest. Thin temple bars stay as geometry.",
+   "read": "What I see: it reads as an anime face for the first time, with the portraits' half-lidded eyes and dark upper lash line. A facet edge runs down the middle of the face, so one half is lighter than the other. Mio's irises come out grey, not light tan."
+  },
+  {
+   "id": "cf-02",
+   "attempt": "attempt-02",
+   "short": "+ flat face shading",
+   "label": "cf-02 · + flat face shading",
+   "dir": "/art/parts/style-concepts/claude-facetface/attempt-02/",
+   "faces": true,
+   "note": "Change: every corner of the textured front gets one forward-facing normal, so the face shades as one plane and the facet edges no longer cut across the eyes. Geometry unchanged.",
+   "read": "What I see: the face is one even tone and the split is gone. The face area is now brighter than the head's sides, and that edge shows in three-quarter view."
+  },
+  {
+   "id": "cf-03",
+   "attempt": "attempt-03",
+   "short": "+ smoother face front",
+   "label": "cf-03 · + smoother face front",
+   "dir": "/art/parts/style-concepts/claude-facetface/attempt-03/",
+   "faces": true,
+   "note": "Change: the front 120 degrees of the head are seven narrow sides instead of three wide ones (the back keeps five flat sides), so the face sits on a gently curved front.",
+   "read": "What I see: the cheeks turn a little more smoothly in three-quarter view. From the front it looks almost the same as cf-02."
+  },
+  {
+   "id": "cf-04",
+   "attempt": "attempt-04",
+   "short": "+ ink outline",
+   "label": "cf-04 · + ink outline",
+   "dir": "/art/parts/style-concepts/claude-facetface/attempt-04/",
+   "faces": true,
+   "note": "Change: a dark outline round every part (the inverted hull from claude-ink attempt-07, 8 mm wide here, 5 mm on small parts). This is level 1 of both series below.",
+   "read": "What I see: the outline separates head, hair and body. The face itself is unchanged. At the game camera the face is about 8 pixels across, seen from above, and the eyes don't read; you see skin, glasses glint and hair."
+  },
+  {
+   "id": "cf-05",
+   "attempt": "attempt-05",
+   "short": "simpler 2",
+   "label": "cf-05 · simplification level 2",
+   "dir": "/art/parts/style-concepts/claude-facetface/attempt-05/",
+   "faces": true,
+   "note": "From cf-04, one change: simpler shapes. Two fewer sides on the body shapes, four-sided limbs, six-sided hair, no shoe soles.",
+   "read": "What I see: blockier shapes. At the game camera it looks almost the same as cf-04."
+  },
+  {
+   "id": "cf-06",
+   "attempt": "attempt-06",
+   "short": "simpler 3",
+   "label": "cf-06 · simplification level 3",
+   "dir": "/art/parts/style-concepts/claude-facetface/attempt-06/",
+   "faces": true,
+   "note": "From cf-05, one change: simplest. Five-sided body shapes and hair, and no hands, soles, cuffs, side strand or extra hair pieces.",
+   "read": "What I see: the plainest version, with no hands and simpler hair. The glasses' side bars stick out past Mio's hair, and at the game camera it looks about the same as cf-05."
+  },
+  {
+   "id": "cf-07",
+   "attempt": "attempt-07",
+   "short": "stylized 2",
+   "label": "cf-07 · stylization level 2",
+   "dir": "/art/parts/style-concepts/claude-facetface/attempt-07/",
+   "faces": true,
+   "note": "From cf-04, one change: proportions pushed toward chibi. Head 1.3 times bigger, legs 0.85 as long.",
+   "read": "What I see: a bigger head and shorter legs. In the game the head is easier to pick out, but the face still doesn't read."
+  },
+  {
+   "id": "cf-08",
+   "attempt": "attempt-08",
+   "short": "stylized 3",
+   "label": "cf-08 · stylization level 3",
+   "dir": "/art/parts/style-concepts/claude-facetface/attempt-08/",
+   "faces": true,
+   "note": "From cf-07, one change: further toward chibi. Head 1.65 times bigger, legs 0.7 as long.",
+   "read": "What I see: at the game camera this is the first level where the face shows as a face (eyes and glasses as dark marks), mostly on desktop. Up close Eric's head looks large and blocky."
+  },
+  {
+   "id": "cf-09",
+   "attempt": "attempt-09",
+   "short": "+ bolder face",
+   "label": "cf-09 · + bolder face marks",
+   "dir": "/art/parts/style-concepts/claude-facetface/attempt-09/",
+   "faces": true,
+   "note": "From cf-04, one change: the face texture's dark lines (lashes, pupils, brows, frames, mouth, Eric's stubble) spread by 3 pixels with a round brush, for the game camera.",
+   "read": "What I see: in the game the face is a little darker but not clearer than cf-04. Up close the bolder lines make Mio look like she's scowling, and Eric's stubble turns into dashes."
+  },
+  {
+   "id": "cf-10",
+   "attempt": "attempt-10",
+   "short": "stylized 3 + bolder",
+   "label": "cf-10 · stylization 3 with the bolder face",
+   "dir": "/art/parts/style-concepts/claude-facetface/attempt-10/",
+   "faces": true,
+   "note": "cf-08's proportions with cf-09's face: the two changes that most help the face at the game camera, together.",
+   "read": "What I see: in the game the face reads best of the round, but the difference from cf-08 is small. Up close it has the same harsh, scowling look as cf-09."
+  }
+ ]
+}
