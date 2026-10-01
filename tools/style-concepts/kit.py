@@ -431,3 +431,86 @@ def bounds(objs):
     lo = Vector([min(p[i] for p in pts) for i in range(3)])
     hi = Vector([max(p[i] for p in pts) for i in range(3)])
     return lo, hi
+
+
+# ---- round 2 helpers ----------------------------------------------------------------------------------------------
+
+def cbox(name, m, lo, hi, ch=0.012, rot=(0, 0, 0), pivot=None, coll=None, taper=None):
+    """A chamfered box from corner lo to corner hi (world metres), one flat bevel of ch on every edge (the world's
+    detail.js cbox), turned by rot degrees about pivot (default its centre). taper (tx, ty) scales the top face."""
+    lo, hi = Vector(lo), Vector(hi)
+    size, c = hi - lo, (lo + hi) / 2
+    bm = bmesh.new()
+    bmesh.ops.create_cube(bm, size=1)
+    if taper:
+        for v in bm.verts:
+            if v.co.z > 0:
+                v.co.x *= taper[0]
+                v.co.y *= taper[1]
+    bm.transform(Matrix.Diagonal((size.x, size.y, size.z, 1)))
+    if ch:
+        bmesh.ops.bevel(bm, geom=list(bm.edges), offset=min(ch, min(size) * 0.45), segments=1, profile=0.5,
+                        affect='EDGES', clamp_overlap=True)
+    p = Vector(pivot) if pivot is not None else c
+    bm.transform(Matrix.Translation(c))
+    bm.transform(Matrix.Translation(p) @ Euler([math.radians(a) for a in rot], 'XYZ').to_matrix().to_4x4() @
+                 Matrix.Translation(-p))
+    return to_obj(name, bm, [m], None, coll)
+
+
+def hull_mat(col='#15171c'):
+    """Outline material for an inverted hull: one-sided (backface culling), so a viewer that culls (three.js, the
+    game) shows only the far side peeking round the silhouette. Cycles ignores culling, so renders swap in
+    hull_render_mat() (prepare_render)."""
+    key = ('hull', col)
+    if key in _mats:
+        return _mats[key]
+    m = mat(col, rough=1.0, spec=0.0)
+    m = m.copy()
+    m.name = 'outline'
+    m.use_backface_culling = True
+    _mats[key] = m
+    return m
+
+
+def hull_render_mat(m, objs=()):
+    """Turn the outline material into: transparent where its face points at the camera, the ink colour elsewhere.
+    The hull objects are made camera-only: otherwise every shadow and bounce ray leaving the figure hits the hull's
+    inside and the figure renders black."""
+    for o in objs:
+        o.visible_shadow = o.visible_diffuse = o.visible_glossy = o.visible_transmission = False
+    nt = m.node_tree
+    out = next(n for n in nt.nodes if n.type == 'OUTPUT_MATERIAL')
+    bsdf = nt.nodes.get('Principled BSDF')
+    ink = nt.nodes.new('ShaderNodeEmission')
+    ink.inputs[0].default_value = bsdf.inputs['Base Color'].default_value
+    ink.inputs[1].default_value = 0.35
+    tr = nt.nodes.new('ShaderNodeBsdfTransparent')
+    geo = nt.nodes.new('ShaderNodeNewGeometry')
+    mix = nt.nodes.new('ShaderNodeMixShader')
+    nt.links.new(geo.outputs['Backfacing'], mix.inputs[0])
+    # the hull's faces are flipped, so its near side is the backfacing one: that side lets the figure show through
+    nt.links.new(ink.outputs[0], mix.inputs[1])
+    nt.links.new(tr.outputs[0], mix.inputs[2])
+    nt.links.new(mix.outputs[0], out.inputs['Surface'])
+
+
+def hull(o, w, m, coll=None):
+    """An inverted-hull outline round mesh object o: a copy pushed out w along its vertex normals, faces flipped."""
+    bm = bmesh.new()
+    bm.from_mesh(o.data)
+    bm.transform(o.matrix_world)
+    bmesh.ops.remove_doubles(bm, verts=list(bm.verts), dist=1e-5)
+    bmesh.ops.recalc_face_normals(bm, faces=list(bm.faces))
+    bm.normal_update()
+    for v in bm.verts:
+        v.co += v.normal * w
+    bmesh.ops.reverse_faces(bm, faces=list(bm.faces))
+    bm.normal_update()
+    me = bpy.data.meshes.new(o.name + '-ink')
+    bm.to_mesh(me)
+    bm.free()
+    for p in me.polygons:
+        p.use_smooth = False
+    me.materials.append(m)
+    return link(bpy.data.objects.new(o.name + '-ink', me), coll)

@@ -22,7 +22,8 @@
     "attempt-04",
     "Eric's hair combed back in steps instead of a straight fringe."
    ]
-  ]
+  ],
+  "jorgen": "Voxel one is most polished but we dont have a voxel world so they dont fit in. they have the right details and elements though. Do 3 more"
  },
  {
   "id": "claude-toyfig",
@@ -87,6 +88,97 @@
    [
     "attempt-04",
     "Glasses corner dots fixed."
+   ]
+  ]
+ },
+ {
+  "id": "claude-chamfer",
+  "label": "Claude D · chamfered blocks",
+  "dir": "/art/parts/style-concepts/claude-chamfer/attempt-06/",
+  "note": "attempt-06",
+  "about": "Round 2. Built the way the world's props are: boxes with one flat chamfer on every edge (the benches, planters and desks in game3d/js/look/detail.js), matte and flat-shaded. Keeps the voxel pair's parts and proportions (a squarish head about a third of the height, eyes and mouth as flat plates, glasses as a frame of bars standing off the face, hair as stepped slabs, lanyard, card, headphones) without the voxel grid. 7-bone rig, rigid parts, idle and walk.",
+  "attempts": [
+   [
+    "attempt-01",
+    "First build."
+   ],
+   [
+    "attempt-02",
+    "Thicker glasses frames; Mio's fringe as one slab across the brow. Weak: black dots at the frame corners, and the fringe slab reads as a cap brim."
+   ],
+   [
+    "attempt-03",
+    "Fringe back to attempt-01's stepped slabs, now overlapping; frame bars without a chamfer. Weak: the corner dots are worse."
+   ],
+   [
+    "attempt-04",
+    "Frame side bars run between the top and bottom bars, so nothing overlaps: dots gone. Weak: a black strip at the top of Eric's side and back hair."
+   ],
+   [
+    "attempt-05",
+    "Eric's side and back hair slabs raised into the first combed step. Weak: the strip is still there."
+   ],
+   [
+    "attempt-06",
+    "Those slabs set 6 mm inside the combed steps (faces in one plane rendered black): strip gone."
+   ]
+  ]
+ },
+ {
+  "id": "claude-ink",
+  "label": "Claude E · ink outline",
+  "dir": "/art/parts/style-concepts/claude-ink/attempt-07/",
+  "note": "attempt-07",
+  "about": "Round 2. An anime toon figure after the approved ink-line portraits: smooth simple forms in flat matte colours, about three and a half heads tall, anime eyes drawn on the face, hair as pointed clumps, and a dark ink outline round every part. The outline is an inverted hull (a pushed-out copy with flipped faces and back faces culled), so the game draws it with its normal materials; the world's own outline pass is thinner, so the people stand out from the props. 7 bones plus knees, idle and walk.",
+  "attempts": [
+   [
+    "attempt-01",
+    "First build. Weak: everything renders black (the outline's render material)."
+   ],
+   [
+    "attempt-02",
+    "The outline material's two sides swapped. Weak: still black; the cause was shadow rays hitting the outline from inside."
+   ],
+   [
+    "attempt-03",
+    "Outline seen by the camera only; outline normals recalculated (the legs had no outline). Weak: Mio's fringe clumps show only their tips; Eric's hair reads as a cap."
+   ],
+   [
+    "attempt-04",
+    "Clumps lifted off the head, the fringe wider; a second row of clumps over Eric's crown. Weak: Mio's fringe still looks like commas, Eric's crown row reads as bumps."
+   ],
+   [
+    "attempt-05",
+    "Mio's fringe clumps start under the hair on top of her head; Eric's crown row removed, his hairline clumps flatter. Weak: in the game Eric's head reads as a plain round ball."
+   ],
+   [
+    "attempt-06",
+    "Eric's clumps meet over the crown, some pointing forward to the hairline, some back. Weak: they are buried under the hair shell."
+   ],
+   [
+    "attempt-07",
+    "Those clumps raised above the shell. In the game Eric's head still reads fairly round from the camera."
+   ]
+  ]
+ },
+ {
+  "id": "claude-float",
+  "label": "Claude F · floating hands",
+  "dir": "/art/parts/style-concepts/claude-float/attempt-03/",
+  "note": "attempt-03",
+  "about": "Round 2. A limbless figure: body and head are one twelve-sided bean, flat-shaded like the world's trees and planters, split at the collar so the head can move. Hands and shoes float free, with a cuff over each wrist and a trouser hem over each shoe. Hair is heaped like the tree canopies, from low faceted clumps. The clothes are bands round the bean; the face, glasses, lanyard, card and headphones sit on its front facets. 7-bone rig (the arm and leg bones carry the hands and shoes), idle and walk.",
+  "attempts": [
+   [
+    "attempt-01",
+    "First build. Weak: the headphone ring crosses Mio's face, the glasses bars sink into the facets, the hands are small and far out, Eric's hair clumps are hidden under his cap."
+   ],
+   [
+    "attempt-02",
+    "Headphones an arc behind the collar, glasses further off the face, bigger hands closer in, Eric's clumps bigger."
+   ],
+   [
+    "attempt-03",
+    "Eric's clumps flatter, so they lie back."
    ]
   ]
  },
