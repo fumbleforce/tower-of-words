@@ -1,0 +1,688 @@
+{
+ "character": "aoi",
+ "ref": "game3d/assets/portraits/aoi-neutral.webp",
+ "face_box_game": [
+  597,
+  768,
+  [
+   219,
+   167,
+   381,
+   336
+  ]
+ ],
+ "ref_face_detected": [
+  219,
+  166,
+  381,
+  336
+ ],
+ "thresholds": {
+  "redrim": [
+   0.02,
+   0.08
+  ],
+  "glasses_cover": [
+   0.87,
+   0.85
+  ],
+  "glasses_worst": [
+   0.7,
+   0.5
+  ],
+  "glasses_dE": [
+   8,
+   15
+  ],
+  "matte_frame": [
+   0.05,
+   0.12
+  ],
+  "matte_holes": [
+   0,
+   3
+  ],
+  "headroom": [
+   0.03,
+   0.01
+  ],
+  "zoom": [
+   0.04,
+   9
+  ],
+  "top": [
+   0.01,
+   9
+  ],
+  "eyes": [
+   0.06,
+   0.12
+  ],
+  "ccip": [
+   0.05,
+   0.09
+  ]
+ },
+ "images": [
+  {
+   "path": "art/candidates/portraits/aoi-edge-2/aoi-recut.webp",
+   "kind": "cut-out",
+   "size": [
+    597,
+    768
+   ],
+   "face": [
+    219,
+    167,
+    380,
+    336
+   ],
+   "eyes": [
+    [
+     258.0,
+     251.5
+    ],
+    [
+     334.0,
+     226.5
+    ]
+   ],
+   "redrim": {
+    "status": "warn",
+    "value": 0.0466
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for aoi"
+   },
+   "matte": {
+    "holes": 4,
+    "holes_px": 390,
+    "note": "no source render found: holes include gaps between hair strands, not graded",
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.105,
+    "zoom": 1.006,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 79,
+    "hair_top_ref": 70,
+    "crop": [
+     1.3,
+     2.0,
+     594.8,
+     765.5
+    ],
+    "eyes": -0.003,
+    "tilt": 0.1,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.002,
+    "ssim": 0.641
+   },
+   "status": "warn"
+  },
+  {
+   "path": "art/candidates/portraits/aoi-edge-2/aoi-inp-d50-s1.webp",
+   "kind": "cut-out",
+   "size": [
+    597,
+    768
+   ],
+   "face": [
+    219,
+    166,
+    381,
+    336
+   ],
+   "eyes": [
+    [
+     258.0,
+     251.5
+    ],
+    [
+     333.5,
+     226.5
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0133
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for aoi"
+   },
+   "matte": {
+    "holes": 4,
+    "holes_px": 390,
+    "note": "no source render found: holes include gaps between hair strands, not graded",
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.091,
+    "zoom": 1.0,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 70,
+    "hair_top_ref": 70,
+    "crop": [
+     0.0,
+     0.0,
+     597.0,
+     768.0
+    ],
+    "eyes": 0.0,
+    "tilt": 0.0,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.0,
+    "ssim": 0.995
+   },
+   "status": "pass"
+  },
+  {
+   "path": "art/candidates/portraits/aoi-edge-2/aoi-inp-d65-s1.webp",
+   "kind": "cut-out",
+   "size": [
+    597,
+    768
+   ],
+   "face": [
+    219,
+    166,
+    381,
+    336
+   ],
+   "eyes": [
+    [
+     258.0,
+     251.5
+    ],
+    [
+     333.5,
+     226.5
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0124
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for aoi"
+   },
+   "matte": {
+    "holes": 4,
+    "holes_px": 390,
+    "note": "no source render found: holes include gaps between hair strands, not graded",
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.091,
+    "zoom": 1.0,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 70,
+    "hair_top_ref": 70,
+    "crop": [
+     0.0,
+     0.0,
+     597.0,
+     768.0
+    ],
+    "eyes": 0.0,
+    "tilt": 0.0,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.0,
+    "ssim": 0.994
+   },
+   "status": "pass"
+  },
+  {
+   "path": "art/candidates/portraits/aoi-edge-2/aoi-inp-d80-s1.webp",
+   "kind": "cut-out",
+   "size": [
+    597,
+    768
+   ],
+   "face": [
+    219,
+    166,
+    381,
+    336
+   ],
+   "eyes": [
+    [
+     258.0,
+     251.5
+    ],
+    [
+     333.5,
+     226.5
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0127
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for aoi"
+   },
+   "matte": {
+    "holes": 4,
+    "holes_px": 390,
+    "note": "no source render found: holes include gaps between hair strands, not graded",
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.091,
+    "zoom": 1.0,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 70,
+    "hair_top_ref": 70,
+    "crop": [
+     0.0,
+     0.0,
+     597.0,
+     768.0
+    ],
+    "eyes": 0.0,
+    "tilt": 0.0,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.0,
+    "ssim": 0.995
+   },
+   "status": "pass"
+  },
+  {
+   "path": "art/candidates/portraits/aoi-edge-2/aoi-dark-d65-s1.webp",
+   "kind": "cut-out",
+   "size": [
+    597,
+    768
+   ],
+   "face": [
+    219,
+    166,
+    381,
+    336
+   ],
+   "eyes": [
+    [
+     258.0,
+     251.5
+    ],
+    [
+     333.5,
+     226.5
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0119
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for aoi"
+   },
+   "matte": {
+    "holes": 4,
+    "holes_px": 390,
+    "note": "no source render found: holes include gaps between hair strands, not graded",
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.091,
+    "zoom": 1.0,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 70,
+    "hair_top_ref": 70,
+    "crop": [
+     0.0,
+     0.0,
+     597.0,
+     768.0
+    ],
+    "eyes": 0.0,
+    "tilt": 0.0,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.0,
+    "ssim": 0.993
+   },
+   "status": "pass"
+  },
+  {
+   "path": "art/candidates/portraits/aoi-edge-2/aoi-dark-d80-s1.webp",
+   "kind": "cut-out",
+   "size": [
+    597,
+    768
+   ],
+   "face": [
+    219,
+    167,
+    381,
+    336
+   ],
+   "eyes": [
+    [
+     258.0,
+     251.5
+    ],
+    [
+     333.5,
+     226.5
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0117
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for aoi"
+   },
+   "matte": {
+    "holes": 4,
+    "holes_px": 390,
+    "note": "no source render found: holes include gaps between hair strands, not graded",
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.091,
+    "zoom": 1.006,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 68,
+    "hair_top_ref": 70,
+    "crop": [
+     1.8,
+     2.0,
+     595.3,
+     765.5
+    ],
+    "eyes": -0.003,
+    "tilt": 0.0,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.001,
+    "ssim": 0.834
+   },
+   "status": "pass"
+  },
+  {
+   "path": "art/candidates/portraits/aoi-edge-2/aoi-fill-d50-s1.webp",
+   "kind": "cut-out",
+   "size": [
+    597,
+    768
+   ],
+   "face": [
+    218,
+    167,
+    381,
+    336
+   ],
+   "eyes": [
+    [
+     258.0,
+     251.5
+    ],
+    [
+     334.0,
+     226.5
+    ]
+   ],
+   "redrim": {
+    "status": "warn",
+    "value": 0.0327
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for aoi"
+   },
+   "matte": {
+    "holes": 4,
+    "holes_px": 390,
+    "note": "no source render found: holes include gaps between hair strands, not graded",
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.091,
+    "zoom": 1.006,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 68,
+    "hair_top_ref": 70,
+    "crop": [
+     1.3,
+     2.0,
+     594.8,
+     765.5
+    ],
+    "eyes": -0.003,
+    "tilt": 0.1,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.001,
+    "ssim": 0.649
+   },
+   "status": "warn"
+  },
+  {
+   "path": "art/candidates/portraits/aoi-edge-2/aoi-fill-d65-s1.webp",
+   "kind": "cut-out",
+   "size": [
+    597,
+    768
+   ],
+   "face": [
+    218,
+    167,
+    381,
+    336
+   ],
+   "eyes": [
+    [
+     258.0,
+     251.5
+    ],
+    [
+     333.5,
+     226.5
+    ]
+   ],
+   "redrim": {
+    "status": "warn",
+    "value": 0.028
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for aoi"
+   },
+   "matte": {
+    "holes": 4,
+    "holes_px": 390,
+    "note": "no source render found: holes include gaps between hair strands, not graded",
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.091,
+    "zoom": 1.006,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 68,
+    "hair_top_ref": 70,
+    "crop": [
+     1.3,
+     2.0,
+     594.8,
+     765.5
+    ],
+    "eyes": -0.003,
+    "tilt": 0.0,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.001,
+    "ssim": 0.647
+   },
+   "status": "warn"
+  },
+  {
+   "path": "art/candidates/portraits/aoi-edge-2/aoi-fill-d50-s2.webp",
+   "kind": "cut-out",
+   "size": [
+    597,
+    768
+   ],
+   "face": [
+    218,
+    167,
+    381,
+    336
+   ],
+   "eyes": [
+    [
+     258.0,
+     251.5
+    ],
+    [
+     333.5,
+     226.5
+    ]
+   ],
+   "redrim": {
+    "status": "warn",
+    "value": 0.0389
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for aoi"
+   },
+   "matte": {
+    "holes": 4,
+    "holes_px": 390,
+    "note": "no source render found: holes include gaps between hair strands, not graded",
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.091,
+    "zoom": 1.006,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 68,
+    "hair_top_ref": 70,
+    "crop": [
+     1.3,
+     2.0,
+     594.8,
+     765.5
+    ],
+    "eyes": -0.003,
+    "tilt": 0.0,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.002,
+    "ssim": 0.649
+   },
+   "status": "warn"
+  },
+  {
+   "path": "art/candidates/portraits/aoi-edge-2/aoi-fill-d65-s2.webp",
+   "kind": "cut-out",
+   "size": [
+    597,
+    768
+   ],
+   "face": [
+    218,
+    167,
+    381,
+    336
+   ],
+   "eyes": [
+    [
+     258.0,
+     251.5
+    ],
+    [
+     333.5,
+     226.5
+    ]
+   ],
+   "redrim": {
+    "status": "warn",
+    "value": 0.0426
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for aoi"
+   },
+   "matte": {
+    "holes": 4,
+    "holes_px": 390,
+    "note": "no source render found: holes include gaps between hair strands, not graded",
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.091,
+    "zoom": 1.006,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 68,
+    "hair_top_ref": 70,
+    "crop": [
+     1.3,
+     2.0,
+     594.8,
+     765.5
+    ],
+    "eyes": -0.003,
+    "tilt": 0.0,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.001,
+    "ssim": 0.648
+   },
+   "status": "warn"
+  }
+ ]
+}
