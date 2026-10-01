@@ -26,7 +26,7 @@ import * as THREE from 'three';
 import { drain } from './slice.js';
 import { split } from './batch-split.js';
 import { makeTwin, dropTwin } from './batch-twin.js';
-import { rigSnap, skinOf, skinned, looseSnap, looseSame } from './batch-rig.js';
+import { rigSnap, skinOf, skinned, fitBounds, looseSnap, looseSame } from './batch-rig.js';
 import { matKey, hasTex, plainData, matSnap, matSame, nodeSnap, nodeSame, srcSnap, srcSame } from './batch-snap.js';
 
 const OBR = THREE.Object3D.prototype.onBeforeRender,
@@ -745,6 +745,7 @@ export function optimizePlace(place, opt = {}) {
     mesh.matrixAutoUpdate = false;
     anchor.add(mesh);
     mesh.updateMatrixWorld(true);
+    if (gr.rig) fitBounds(mesh);
     const b = {
       mesh,
       parts: new Map(),
@@ -945,6 +946,8 @@ export function optimizePlace(place, opt = {}) {
           release(s, n >= 3);
         }
     outlined();
+    // a person's batches follow their joints: culling spheres round where the parts are this frame (issue #155)
+    for (const b of batches) if (b.mesh.isSkinnedMesh && b.mesh.visible) fitBounds(b.mesh);
     for (const idx of dirtyIdx) idx.needsUpdate = true;
     dirtyIdx.clear();
     stats.checkMs += performance.now() - t0;
