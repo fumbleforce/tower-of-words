@@ -71,15 +71,20 @@ function ringArc(p, [a0, a1]) {
   arcBox(p, LEAF.mid, F, r1 - 0.6, r1 - 0.22, a0 + pad, a1 - pad, { y: 0.51, h: 0.04, cast: false, surf: null });
 }
 
-function ring(p) {
-  for (const arc of Object.values(ARCS)) ringArc(p, arc);
+function* ring(p) {
+  for (const arc of Object.values(ARCS)) {
+    ringArc(p, arc);
+    yield;
+  }
   const mid = R + BAND * 0.42;
-  TREE_DEG.forEach((d, i) => {
+  for (const [i, d] of TREE_DEG.entries()) {
     const [x, z] = polar(rad(d), mid);
-    if (d === 90) return cluster(p, x, z, { n: 4, r: 0.34, spread: 0.6, seed: 9 }); // behind the notice board
-    if (MAPLES.includes(d)) maple(p, x, z, 1.15, i + 3);
+    if (d === 90)
+      cluster(p, x, z, { n: 4, r: 0.34, spread: 0.6, seed: 9 }); // behind the notice board
+    else if (MAPLES.includes(d)) maple(p, x, z, 1.15, i + 3);
     else sakura(p, x, z, 0.95 + (i % 3) * 0.05, i + 11);
-  });
+    if (i % 2) yield;
+  }
   // along the south arc, facing the plaza: drifts of cosmos and grass tufts between the cherries, in front of the
   // hedge
   const q = rng(31);
@@ -94,27 +99,32 @@ function ring(p) {
       const [x, z] = polar(rad(d + k * 3.2), R + 0.45);
       if (k === 0 && Math.round(d) % 2) grass(p, x, z, { seed: Math.round(d), h: 0.45 });
       else cosmos(p, x, z, Math.round(d * 10 + k + q() * 5));
+      if (k === 1) yield;
     }
 }
 
 // both sides of both lanes, from the edge of the view in to just short of the ring bed, the same on each side
-function verges(p) {
+function* verges(p) {
   const { w, e } = LANE;
   const stop = R + BAND + 0.9;
   const west = AVENUE.map((d) => F[0] - d),
     east = AVENUE.map((d) => F[0] + d);
   verge(p, [-44, w[2]], [F[0] - stop, w[2]], 'n', { trees: west, seed: 3 });
+  yield;
   verge(p, [-44, w[3]], [F[0] - stop, w[3]], 's', { trees: west, seed: 4 });
+  yield;
   // east of the plaza to the jog (plaza/east-lane.js): the north verge stops at the leg, the south one at the
   // corner's far side; the cross walk runs through both
   const crossings = [CROSS];
   verge(p, [F[0] + stop, e[2]], [e[1], e[2]], 'n', { trees: east, crossings, seed: 5 });
+  yield;
   verge(p, [F[0] + stop, e[3]], [e[1] + 2 * P.HALF, e[3]], 's', { trees: east, crossings, seed: 6 });
+  yield;
 }
 
 // the terrace's south line: a seat-height wall along all of it, open only where the link starts; a planted bed at
 // each end
-function terraceEdges(p) {
+function* terraceEdges(p) {
   lowWall(p, [TERRACE[0], TERRACE_S], [TERRACE[1], TERRACE_S], { off: -0.11, gaps: [[LINK[0], LINK[1]]] });
   for (const [x0, x1] of [
     [TERRACE[0] - 1.4, TERRACE[0]],
@@ -136,6 +146,7 @@ function terraceEdges(p) {
     const cx = (x0 + x1) / 2;
     cluster(p, cx, rect[3] - 0.8, { n: 4, r: 0.32, spread: 0.45, seed: Math.round(cx), y: 0.42 });
     pine(p, cx, rect[2] + 1.3, 0.85, Math.round(cx) + 2);
+    yield;
   }
 }
 
@@ -160,21 +171,26 @@ const GROVES = [
     }),
   ];
 });
-function groves(p) {
-  GROVES.forEach(([x, z, rx, rz, list], gi) => {
+function* groves(p) {
+  for (const [gi, [x, z, rx, rz, list]] of GROVES.entries()) {
     const g = new THREE.SphereGeometry(1, 24, 6, 0, Math.PI * 2, 0, Math.PI / 2);
     p.geo('#5f6d58', g.scale(rx, 0.22, rz).translate(x, -0.04, z), { cast: false });
-    list.forEach(([k, dx, dz, s], i) => TREES[k](p, x + dx, z + dz, s, gi * 7 + i));
+    for (const [i, [k, dx, dz, s]] of list.entries()) {
+      TREES[k](p, x + dx, z + dz, s, gi * 7 + i);
+      yield;
+    }
     const r = rng(gi + 3);
     for (let i = 0; i < 2; i++)
       cluster(p, x + (r() - 0.5) * rx * 1.4, z + rz * (0.45 + r() * 0.3), { n: 3, r: 0.3, seed: gi + i, y: 0.1 });
     grass(p, x - rx * 0.6, z + rz * 0.5, { seed: gi });
-  });
+    yield;
+  }
 }
 
-export function buildGreen(p) {
-  ring(p);
-  verges(p);
-  terraceEdges(p);
-  groves(p);
+// a generator that yields every few trees and flowers, so the plaza builds in slices (js/perf/slice.js)
+export function* greenSteps(p) {
+  yield* ring(p);
+  yield* verges(p);
+  yield* terraceEdges(p);
+  yield* groves(p);
 }

@@ -116,10 +116,11 @@ function kerbs(p) {
   kerbRect(p, [LINK[0], LINK[1], BACK[3], COURT[2]], { sides: 'w' });
 }
 
-function court(p, lights) {
+function* court(p, lights) {
   const ns = [NS[0], NS[1]];
   // the verge on the row, open for the north-south walk
   verge(p, [D1E[1], ROW[2]], [ROW[1], ROW[2]], 'n', { crossings: [ns], seed: 31 });
+  yield;
   // the raised bed in the square, a maple in it over clipped balls; a bench either side of the walks' mouths on the
   // square's north and south sides, facing the bed
   wallRect(p, PLANTER, { h: 0.42 });
@@ -130,6 +131,7 @@ function court(p, lights) {
     [0.4, -0.45],
   ])
     mound(p, AXIS_X + dx, AXIS_Z + dz, 0.2, LEAF.fresh, { y: 0.4 });
+  yield;
   // round the bed, no two corners alike: a bench facing it, one turned to face along the walk, a bench facing the
   // gallery, the sorted bins
   const off = (ns[1] - ns[0]) / 2 + 0.85;
@@ -147,6 +149,7 @@ function court(p, lights) {
     ],
     { pool: 1.5 },
   );
+  yield;
   const gz = GAL[3] + 0.3;
   // two bikes left on the apron by the common building's east end, and a third by dorm_1e's door
   bike(p, GAL[1] - 0.9, gz + 0.05, Math.PI / 2, 1);
@@ -154,25 +157,30 @@ function court(p, lights) {
   bike(p, D1E[1] + 0.35, EW[2] - 1.2, 0.1, 2);
   // the sorted bins at dorm_1e's door too
   bins(p, D1E[1] + 0.45, EW[3] + 0.9, Math.PI / 2);
+  yield;
   // the lawns: a ginkgo in each north one, a maple and a cherry in the south ones, in from the walks
   const qx = [(D1E[1] + SQUARE[0]) / 2, (SQUARE[1] + LINK[0]) / 2];
   qx.forEach((x, i) => ginkgo(p, x, (LAWN_Z[0] + EW[2]) / 2, 0.9, 81 + i));
   maple(p, qx[0], (EW[3] + LAWN_Z[1]) / 2, 0.8, 83);
   sakura(p, qx[1], (EW[3] + LAWN_Z[1]) / 2, 0.85, 84);
+  yield;
   // hedges closing the court's open corners, north of its apron: west of the gallery, and between it and the link
   hedge(p, [D1E[1] + 0.2, HEDGE_Z], [GAL[0], HEDGE_Z], { w: 0.5, h: 0.7, seed: 85 });
   hedge(p, [GAL[1], HEDGE_Z], [LINK[0] - 0.2, HEDGE_Z], { w: 0.5, h: 0.7, seed: 86 });
 }
 
-function row(p, lights) {
+function* row(p, lights) {
   // the south verge, a low hedge, along the ramen shop, the garden and dorm_2; zelkovas in pits along the row's
   // south edge between the lamps
   verge(p, [C.DORM_STREET[1], ROW[3]], [D2[0], ROW[3]], 's', { crossings: [GARDEN_WALK], seed: 33 });
+  yield;
   verge(p, [D2[1], ROW[3]], [ROW[1], ROW[3]], 's', { seed: 35 });
+  yield;
   for (const [i, x] of [84.5, 92.5, 106].entries()) {
     treePit(p, x, ROW[3] - 0.75);
     keyaki(p, x, ROW[3] - 0.75, 1.0 + (i % 2) * 0.06, 33 + i);
   }
+  yield;
   shrubBed(p, D1E_BED, 'sew', 37);
   // lamps on the south side every 8, at the verge's kerb
   lamps(
@@ -208,9 +216,9 @@ export function* clusterSteps(group, { plaza = false } = {}) {
   yield;
   kerbs(p);
   yield;
-  court(p, lights);
+  yield* court(p, lights);
   yield;
-  row(p, lights);
+  yield* row(p, lights);
   yield;
   yield* endSquare(pv, p, lights);
   yield* backYards(pv, p, lights);

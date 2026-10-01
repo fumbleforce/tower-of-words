@@ -8,6 +8,7 @@ import { PAL, mat, textTexture, plane, JP_FONT } from '../props.js';
 import { TOWN } from './town.js';
 import { Parts } from './outdoor/parts.js';
 import { BLOCKS, roof, arcadeRoof } from './shop-roofs.js';
+import { drain } from '../perf/slice.js';
 
 // parts merged into one mesh of one material (the parts are disposed)
 export function merged(parts, material, { cast = true } = {}) {
@@ -55,7 +56,9 @@ export function signBoard(text, en, w, h, color) {
 // canopy with the sign, striped canvas awnings over the other bays, a window band above; a blue-grey roof with a
 // parapet and plant.
 export const AWNING = { canvas: '#3f6f77', stripe: '#e3e0d7' };
-export function canteen(root, [x0, z0, x1, z1], floorH, doorX = (x0 + x1) / 2) {
+// canteenSteps is the same as a generator that yields between parts, for a place built in slices (js/perf/slice.js)
+export const canteen = (...a) => drain(canteenSteps(...a));
+export function* canteenSteps(root, [x0, z0, x1, z1], floorH, doorX = (x0 + x1) / 2) {
   const w = x1 - x0,
     d = z1 - z0,
     cx = (x0 + x1) / 2,
@@ -92,6 +95,7 @@ export function canteen(root, [x0, z0, x1, z1], floorH, doorX = (x0 + x1) / 2) {
   // the doors: a canopy over their bay, and the doors' middle frame
   const dx = doorX;
   frames.push(box(2.2, 0.08, 1.1, dx, 1.95, S + 0.55), box(0.06, 1.8, 0.06, dx, 0.18, S + 0.05));
+  yield;
   // the awnings: a sloping canvas over each other bay, in stripes, with a straight valance at the front
   const cloth = new Parts();
   for (let i = 0; i < bays; i++) {
@@ -113,7 +117,9 @@ export function canteen(root, [x0, z0, x1, z1], floorH, doorX = (x0 + x1) / 2) {
       cloth.box(color, sw, 0.16, 0.02, sx, 2.02 - Math.sin(slope) * out - 0.16, S + Math.cos(slope) * out + 0.04);
     }
   }
+  yield;
   cloth.build(root);
+  yield;
   // roof plant: three condenser boxes, a duct, a small stair housing
   for (const [px, pz, pw, pd, ph] of [
     [x0 + w * 0.2, cz - 1.2, 2.2, 1.4, 0.8],
@@ -128,6 +134,7 @@ export function canteen(root, [x0, z0, x1, z1], floorH, doorX = (x0 + x1) / 2) {
   root.add(merged(bands, mat(TOWN.band)));
   root.add(merged(panes, glass, { cast: false }));
   root.add(merged(plant, mat('#9aa1a9')));
+  yield;
   const roof = new THREE.Mesh(new THREE.BoxGeometry(w - 0.1, 0.08, d - 0.1), mat('#56697d', { roughness: 0.85 }));
   roof.position.set(cx, H + 0.02, cz);
   roof.receiveShadow = true;
@@ -146,7 +153,10 @@ export function canteen(root, [x0, z0, x1, z1], floorH, doorX = (x0 + x1) / 2) {
 // the stretch its map tile shows). signs: [[bay, kana, English, colour], ...] on the north row's arcade side.
 // farLayer: the camera layer for the arcade's roof and the south row's roofs, which no play camera sees (the island
 // map's: they cost nothing in play).
-export function shopStreet(
+// shopStreetSteps is the same as a generator that yields after every building and between the meshes, for a place
+// built in slices (js/perf/slice.js)
+export const shopStreet = (...a) => drain(shopStreetSteps(...a));
+export function* shopStreetSteps(
   root,
   { a, dir, depth, storeyH, bays, from = 0, to = Infinity, signs = [], farLayer = null },
 ) {
@@ -174,10 +184,10 @@ export function shopStreet(
   let uMin = Infinity,
     uMax = -Infinity;
   for (const [name, row] of Object.entries(rows))
-    BLOCKS[name].forEach(([i0, i1, kind, dh], bi) => {
+    for (const [bi, [i0, i1, kind, dh]] of BLOCKS[name].entries()) {
       const ua = uOf(i0),
         ub = uOf(i1 + 1);
-      if (ub <= from || ua >= to) return;
+      if (ub <= from || ua >= to) continue;
       uMin = Math.min(uMin, ua);
       uMax = Math.max(uMax, ub);
       const ri = name === 'north' ? 0 : 1,
@@ -206,26 +216,32 @@ export function shopStreet(
         trims.push(box(0.8, 1.2, 0.05, u - 1.2, 0, b));
         plant.push(box(0.7, 0.5, 0.35, u + 0.6, 0.1, b - row.dirF * 0.2));
       }
-    });
+      yield;
+    }
   // the arcade's glass roof over the walk between the rows, on thin posts
   arcadeRoof(far, uMin, uMax, depth, depth * 2, H + 0.1);
+  yield;
   const posts = [];
   for (let u = uMin + 1; u < uMax; u += bayW)
     for (const v of [depth + 0.35, depth * 2 - 0.35]) posts.push(box(0.1, H + 0.1, 0.1, u, 0, v));
   walls.forEach((parts, k) => parts.length && g.add(merged(parts, mat(TOWN.walls[k]))));
   g.add(merged(trims, mat('#8c939b')));
   g.add(merged(panes, glass, { cast: false }));
+  yield;
   if (shutters.length) g.add(merged(shutters, mat('#9ba1a8', { roughness: 0.6 })));
   g.add(merged(plant, mat('#a3a9b0')));
   awnings.forEach((parts, k) => parts.length && g.add(merged(parts, mat(AWN[k]))));
   g.add(merged(posts, mat(PAL.dark)));
+  yield;
   top.build(g);
+  yield;
   far.build(g).forEach((m, i) => {
     m.name = `shops:far${i}`; // named: the place's merge pass leaves it as it is
     if (farLayer === null) return;
     m.layers.set(farLayer);
     m.userData.noBatch = true;
   });
+  yield;
   // shop signs on the north row, under the arcade
   for (const [bay, kana, en, color] of signs) {
     const s = signBoard(kana, en, 3.0, 0.75, color);

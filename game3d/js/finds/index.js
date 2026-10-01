@@ -4,7 +4,8 @@
 // Their words (titles, captions, the paper's text, the notice board's posts) are the story's: story/finds.js.
 // Where they lie and how they look: finds/spots.js and finds/prints.js. The contract: game3d/story/FORMAT.md (Finds).
 //   installFinds(game)           the `find` hook; loads story/finds.js
-//   addFindSpots(game, place)    a built place gets its prints on the ground and a thing each to pick them up
+//   findSpotSteps(game, place)   a built place gets its prints on the ground and a thing each to pick them up (a
+//                                generator, run in slices: js/perf/slice.js)
 //   syncFinds(place)             the prints Eric already has stay gone (on every entry, after a load)
 //   take(game, id)               picks one up: the flag, the save, the close look
 //   hasBoard(id), readBoard(id)   a notice board's posts, held up close (from a thing's act, already a beat)
@@ -109,10 +110,21 @@ function floorAt(place, x, z) {
   return hit ? place.space.worldToLocal(hit.point.clone()).y : 0;
 }
 
-export function addFindSpots(game, place) {
+// It yields while it readies the meshes' bounds for the floor raycasts and builds the walk grid for the spots, each a
+// phone frame's work or more in one go.
+export function* findSpotSteps(game, place) {
   place.findProps = place.findProps || {};
-  for (const f of Object.values(FINDS)) {
-    if (f.place !== place.name || !f.at) continue;
+  const here = Object.values(FINDS).filter((f) => f.place === place.name && f.at);
+  if (!here.length) return;
+  const geos = new Set();
+  place.space.traverse((o) => o.isMesh && o.geometry && !o.geometry.boundingSphere && geos.add(o.geometry));
+  for (const g of geos) {
+    g.computeBoundingSphere();
+    yield;
+  }
+  if (place.nav && !place.nav.grid) yield* place.nav.buildSteps();
+  for (const f of here) {
+    yield;
     const [x, z] = f.at;
     const mesh = printMesh(f);
     const y = floorAt(place, x, z);

@@ -10,7 +10,7 @@ const KEEP = ['position', 'normal', 'uv'];
 
 export const mergeStatic = (root) => drain(mergeStaticSteps(root));
 
-// the same, yielding after each merged set (for builders that run in slices, js/perf/slice.js)
+// the same, yielding after each mesh copied and each merged set (for builders that run in slices, js/perf/slice.js)
 export function* mergeStaticSteps(root) {
   root.updateMatrixWorld(true);
   const toLocal = new THREE.Matrix4().copy(root.matrixWorld).invert();
@@ -24,14 +24,16 @@ export function* mergeStaticSteps(root) {
   });
   for (const meshes of sets.values()) {
     if (meshes.length < 2) continue;
-    const parts = meshes.map((o) => {
+    const parts = [];
+    for (const o of meshes) {
       let g = o.geometry.index ? o.geometry.toNonIndexed() : o.geometry.clone();
       for (const name of Object.keys(g.attributes))
         if (!KEEP.includes(name) && name !== 'color') g.deleteAttribute(name);
       if (!g.attributes.uv)
         g.setAttribute('uv', new THREE.Float32BufferAttribute(new Float32Array(g.attributes.position.count * 2), 2));
-      return g.applyMatrix4(new THREE.Matrix4().multiplyMatrices(toLocal, o.matrixWorld));
-    });
+      parts.push(g.applyMatrix4(new THREE.Matrix4().multiplyMatrices(toLocal, o.matrixWorld)));
+      yield; // a big set's copies take a phone's frame
+    }
     const merged = new THREE.Mesh(mergeGeometries(parts), meshes[0].material);
     merged.castShadow = meshes[0].castShadow;
     merged.receiveShadow = meshes[0].receiveShadow;

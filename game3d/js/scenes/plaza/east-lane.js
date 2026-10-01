@@ -19,7 +19,7 @@ import { lamps, bench } from '../outdoor/furniture.js';
 import { Parts, rng } from '../outdoor/parts.js';
 import { shade } from '../outdoor/shade.js';
 import { bikeRow } from '../forecourt/details.js';
-import { buildFronts } from './east-fronts.js';
+import { frontsSteps } from './east-fronts.js';
 import { signBoard } from '../plaza-buildings.js';
 import { faces, faceAt, tOf } from '../outdoor/block.js';
 import { LANE, FOOTPATH } from './plan.js';
@@ -66,38 +66,46 @@ export function walk(pv, [x0, x1, z0, z1], alongX = x1 - x0 > z1 - z0) {
   else for (const x of [x0, x1 - BW]) edge(pv, [x, x + BW, z0, z1], [BW, 0.15]);
 }
 
-function ground(root) {
+function* ground(root) {
   const pv = paver();
   const ew = [E.PARK_EW[2], E.PARK_EW[3]],
     ns = [E.PARK_NS[0], E.PARK_NS[1]];
   corner(pv, CORNERS.a, 'se', { e: [ew] });
   laneField(pv, WEST_LEG, { along: 'z', origin: ORIGIN });
+  yield;
   corner(pv, CORNERS.b, 'nw');
   laneField(pv, TOP_LEG, { origin: ORIGIN });
+  yield;
   corner(pv, CORNERS.c, 'ne');
   laneField(pv, DS, { along: 'z', origin: ORIGIN });
+  yield;
   edge(pv, [DS[0], DS[1], DS[3] - BW, DS[3]], [0.15, BW]); // the street's end, at the corner of the shop walk
   laneField(pv, [NS[0], NS[1], NS[2], TOP_LEG[2]], { along: 'z', origin: ORIGIN });
   // the dorm courtyard's gate leg, east off the street (the courtyard lays the rest)
   laneField(pv, [DS[1], DS[1] + 3, E.GATE_Z - 1.5, E.GATE_Z + 1.5], { origin: ORIGIN });
+  yield;
   // the walks
   walk(pv, [CROSS[0], CROSS[1], CROSS[2], LANE.e[2]]);
   walk(pv, [CROSS[0], CROSS[1], LANE.e[3], CROSS[3]]);
   walk(pv, [CROSS[1], DS[0], SW[2], SW[3]]);
+  yield;
   walk(pv, [CORNERS.a[1], SQUARE[0], ew[0], ew[1]]);
   walk(pv, [SQUARE[1], DS[0], ew[0], ew[1]]);
   walk(pv, [ns[0], ns[1], TOP_LEG[3], SQUARE[2]]);
   walk(pv, [ns[0], ns[1], SQUARE[3], SW[2]]);
+  yield;
   for (const s of E.SPURS) walk(pv, s, true);
   walk(pv, E.SEAT_BAY, true);
   pv.field(E.BIKE_PAD, { pattern: 'grid', module: [0.6, 0.6], tones: GRANITE.mid, origin: [CROSS[0], E.BIKE_PAD[2]] });
   // the shop street's walk out of the arcade, in the arcade's stone
   const AE = E.ARCADE_END;
   pv.field(AE, { pattern: 'grid', module: [0.6, 0.6], tones: GRANITE.mid, origin: [AE[0], AE[2]] });
+  yield;
   pv.build(root);
+  yield;
 }
 
-function kerbs(p) {
+function* kerbs(p) {
   const ew = [E.PARK_EW[2], E.PARK_EW[3]],
     ns = [E.PARK_NS[0], E.PARK_NS[1]];
   const vBack = 1.1; // the lane's verge depth
@@ -118,6 +126,7 @@ function kerbs(p) {
       [AE[2], AE[3]],
     ],
   });
+  yield;
   // the north street's east side, open for block_e3's and r9's doors
   kerb(p, [NS[1], NS[2]], [NS[1], TOP_LEG[2]], {
     off: 0.08,
@@ -131,6 +140,7 @@ function kerbs(p) {
   const iz = E.BLOCKS.find((k) => k.id === 'izakaya').rect;
   kerb(p, [AE[0], AE[3]], [AE[1], AE[3]], { off: -0.08 });
   kerb(p, [AE[0], AE[2]], [AE[1], AE[2]], { off: 0.08, gaps: [[iz[0], iz[1]]] });
+  yield;
   // the cross walk, north and south of the lane's verges
   for (const x of [CROSS[0], CROSS[1]]) {
     const o = x === CROSS[0] ? -0.08 : 0.08;
@@ -145,6 +155,7 @@ function kerbs(p) {
     off: 0.08,
     gaps: E.BLOCKS.filter((k) => Math.abs(k.rect[2] - SW[3]) < 0.01).map((k) => [k.rect[0], k.rect[1]]),
   });
+  yield;
   // the door spurs
   for (const s of E.SPURS)
     for (const [z, o] of [
@@ -157,7 +168,7 @@ function kerbs(p) {
   kerbRect(p, SQUARE, { gaps: { n: [ns], s: [ns], w: [ew], e: [ew] } });
 }
 
-function park(p, lights, sh) {
+function* park(p, lights, sh) {
   const ew = [E.PARK_EW[2], E.PARK_EW[3]],
     ns = [E.PARK_NS[0], E.PARK_NS[1]];
   const [x0, x1, z0, z1] = PARK,
@@ -196,7 +207,10 @@ function park(p, lights, sh) {
       [x1 - i, z1 - i],
     ],
   ];
-  runs.forEach(([a, b], k) => hedge(p, a, b, { w: 0.4, h: 0.5, seed: 40 + k }));
+  for (const [k, [a, b]] of runs.entries()) {
+    hedge(p, a, b, { w: 0.4, h: 0.5, seed: 40 + k });
+    if (k % 2) yield;
+  }
   // the square: loose pale gravel with stones scattered over it, one big zelkova in the middle, a bench either side
   // of each walk's mouth facing it
   const cx = (SQUARE[0] + SQUARE[1]) / 2,
@@ -209,6 +223,7 @@ function park(p, lights, sh) {
     const g = new THREE.DodecahedronGeometry(s, 0).scale(1, 0.45, 1);
     const tone = ['#93948f', '#b7b8b2', '#8a8b86'][k % 3];
     p.geo(tone, g.translate(gx0 + pebbles() * (gx1 - gx0), 0.02, gz0 + pebbles() * (gz1 - gz0)), { cast: false });
+    if (k % 30 === 29) yield;
   }
   p.geo(LEAF.mulch, new THREE.CylinderGeometry(0.8, 0.85, 0.04, 14).translate(cx, 0.0, cz), {
     cast: false,
@@ -216,6 +231,7 @@ function park(p, lights, sh) {
   });
   keyaki(p, cx, cz, 1.05, 71);
   sh.tree(cx, cz, 1.05);
+  yield;
   const off = (ns[1] - ns[0]) / 2 + 0.95;
   for (const sz of [-1, 1]) {
     const z = sz < 0 ? SQUARE[2] + 0.45 : SQUARE[3] - 0.45;
@@ -234,7 +250,12 @@ function park(p, lights, sh) {
   // clipped pines to the south
   const qx = [(x0 + i + ns[0]) / 2, (ns[1] + x1 - i) / 2],
     qz = [(z0 + i + ew[0]) / 2, (ew[1] + z1 - i) / 2];
-  qz.forEach((z, a) => qx.forEach((x, b) => tree(p, a ? pine : sakura, x, z, a ? 0.8 : 0.7, 60 + a * 2 + b, sh)));
+  yield;
+  for (const [a, z] of qz.entries())
+    for (const [b, x] of qx.entries()) {
+      tree(p, a ? pine : sakura, x, z, a ? 0.8 : 0.7, 60 + a * 2 + b, sh);
+      yield;
+    }
 }
 
 // a bed against a wall or along a walk: kerbed on its open sides, planted with clipped mounds of mixed sizes and
@@ -255,7 +276,7 @@ export function shrubBed(p, rect, sides, seed, pineAt = null) {
   if (pineAt) pine(p, px, zc, 0.55, seed + 3);
 }
 
-function planting(p, lights, sh) {
+function* planting(p, lights, sh) {
   // the north street's avenue, open where the back lane comes in (plaza/north-plan.js)
   const back = [[BACK[2], BACK[3]]];
   // and none against block_e2's east end, which stands close behind the verge
@@ -266,6 +287,7 @@ function planting(p, lights, sh) {
   const trees = E.STREET_TREES.filter((z) => !clear.some(([a, b]) => z > a - 1.2 && z < b + 1.2));
   verge(p, [NS[0], NS[2]], [NS[0], TOP_LEG[2]], 'w', { crossings: back, trees, seed: 21 });
   for (const z of trees) sh.tree(NS[0] - 2.1, z, 1.04);
+  yield;
   // block_e1: the bike pad west of its door (its bikes in buildEastLane), a deep bed along its front east of the
   // door, a ginkgo on the lawn between the pad and the lane; a zelkova east of it; a clipped hedge along its back
   // with two trees beyond, toward the canteen
@@ -275,26 +297,35 @@ function planting(p, lights, sh) {
   shrubBed(p, [CROSS[1] + 0.16, bx1 - 0.3, bz1, bz1 + 1.4], 'se', 41, 'e');
   tree(p, ginkgo, pad[0] + 0.6, (pad[3] + LANE.e[2] - 1.1) / 2, 1.05, 37, sh);
   tree(p, keyaki, bx1 + 2.4, bz1 - 2.0, 1.05, 60, sh);
+  yield;
   hedge(p, [bx0 + 0.4, bz0 - 1.0], [bx1 - 0.4, bz0 - 1.0], { w: 0.6, h: 0.75, seed: 62 });
   tree(p, keyaki, bx0 + 2.4, bz0 - 5.8, 1.15, 63, sh);
   tree(p, sakura, bx0 + 6.8, bz0 - 6.6, 1.0, 64, sh);
+  yield;
   // m_e2: a bed either side of its door; a drift down its west side; a cherry and a pine between it and m_e1
   const [me2, me1, r8] = ['m_e2', 'm_e1', 'r8'].map((id) => E.BLOCKS.find((k) => k.id === id).rect);
   shrubBed(p, [me2[0] + 0.3, CROSS[0] - 0.16, me2[2] - 1.1, me2[2]], 'nw', 42, 'w');
   shrubBed(p, [CROSS[1] + 0.16, me2[1] - 0.3, me2[2] - 1.1, me2[2]], 'ne', 43);
+  yield;
   drift(p, [me2[0] - 3.2, me2[0] - 0.4, me2[2] + 0.4, FOOTPATH[2] - 0.4], { back: 's', seed: 65 });
+  yield;
   tree(p, sakura, (me2[1] + me1[0]) / 2, SW[3] + 2.4, 1.0, 35, sh);
   tree(p, pine, (me2[1] + me1[0]) / 2, me2[2] + 2.6, 1.0, 56, sh);
+  yield;
   // behind m_e1 and r8, along the footpath: a drift with its tall layer at the back and a zelkova
   drift(p, [me1[0] + 0.3, DS[0] - 0.6, r8[3] + 0.5, FOOTPATH[2] - 0.4], { back: 's', seed: 55 });
+  yield;
   tree(p, keyaki, me1[1] + 0.3, r8[3] + 1.2, 1.05, 57, sh);
+  yield;
   // the lawn south of the shop walk's east end: a hedge along the walk, two cherries behind it; the dorm street
   // ends at a bed across it
   const AE = E.ARCADE_END;
   hedge(p, [AE[0] + 0.4, AE[3] + 0.45], [AE[1] - 0.4, AE[3] + 0.45], { w: 0.5, h: 0.6, seed: 58 });
   tree(p, sakura, AE[0] + 2.2, AE[3] + 2.4, 1.0, 59, sh);
   tree(p, sakura, AE[1] - 2.0, AE[3] + 2.8, 0.95, 67, sh);
+  yield;
   shrubBed(p, [DS[0], DS[1], DS[3], DS[3] + 1.3], 'sew', 44, 'e');
+  yield;
   // lamps: down the dorm street's west side and the north street's east side every 8; by the cross walk at the
   // bike pad (the lane's own lamp by its south mouth is the plaza's)
   const pts = [];
@@ -310,23 +341,27 @@ function planting(p, lights, sh) {
 }
 
 // builds it all into the plaza: p, the plaza's Parts collector; lights, its light set. Returns the evening switch.
+// A generator that yields between parts (every few trees, every face and roof), for building in slices
+// (js/perf/slice.js).
 // Almost all of it lies outside the sun's shadow box (scenes/plaza.js), so it goes into its own collector that casts
 // no shadow (no shadow-pass triangles); only the walls of the blocks inside the box cast, through the plaza's p. The
 // rest get their shadows laid on the ground (outdoor/shade.js); update(sun) keeps them on the sun's side.
 const SHADOW_X = 22; // the shadow box's east edge, in the plaza's frame
-export function buildEastLane(root, p, lights) {
+export function* eastLaneSteps(root, p, lights) {
   const q = new Parts();
-  ground(root);
-  kerbs(q);
+  yield* ground(root);
+  yield* kerbs(q);
   const sh = shade();
-  park(q, lights, sh);
-  planting(q, lights, sh);
+  yield* park(q, lights, sh);
+  yield* planting(q, lights, sh);
   const bikes = bikeRow(5, { gaps: [1, 3], seed: 9 }); // the rack against block_e1's front, the bikes facing the lane
   bikes.rotation.y = Math.PI;
   bikes.position.set(E.BIKE_PAD[1] - 0.6, 0, E.BIKE_PAD[2] + 0.75);
   root.add(bikes);
-  const fronts = buildFronts(q, lights, E.BLOCKS, { caster: p, casts: (k) => k.rect[0] < SHADOW_X });
+  yield;
+  const fronts = yield* frontsSteps(q, lights, E.BLOCKS, { caster: p, casts: (k) => k.rect[0] < SHADOW_X });
   fronts.meshes(root);
+  yield;
   // a block's sign standing on its door canopy's front edge, as the canteen's (k.sign: [kana, English])
   for (const k of E.BLOCKS.filter((b) => b.sign)) {
     const F = faces(k.rect)[k.face],
@@ -337,7 +372,9 @@ export function buildEastLane(root, p, lights) {
     root.add(s);
   }
   for (const k of E.BLOCKS) if (k.rect[0] >= SHADOW_X) sh.block(k.rect, k.row.storeys * k.row.floorH);
+  yield;
   for (const m of q.build(root)) m.castShadow = false;
+  yield;
   const shadows = sh.build(root);
   return { evening: fronts.evening, update: (sun) => shadows.follow(sun.position) };
 }

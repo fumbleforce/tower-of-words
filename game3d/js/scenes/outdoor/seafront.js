@@ -56,7 +56,7 @@ export function mapOnly(object, layer, tag) {
 
 // what stands on the beach (island data in scenes/island-south.js): trodden sand from each flight's foot to the
 // water, outcrops at the wall's foot midway between flights, the lifeguard's chair, the beach huts
-function beachThings(p, at) {
+function* beachThings(p, at) {
   const shoreZ = (x) => {
     const s = S.SHORELINE;
     for (let i = 0; i + 1 < s.length; i++)
@@ -80,6 +80,7 @@ function beachThings(p, at) {
       const [gx, gz] = at(x - 1.6 + hash2(j, x, 105) * 3.2, z - 1.2 + hash2(x, j, 107) * 2.4);
       grass(p, gx, gz, { h: 0.35, color: DUNE, seed: j + Math.round(x) });
     }
+    yield;
   }
   // the umbrellas: a pole and a canopy of eight panels in two colours, a towel beside some
   S.UMBRELLAS.forEach(([x, z], i) => {
@@ -92,6 +93,7 @@ function beachThings(p, at) {
       );
     if (i % 2 === 0) p.box(i % 4 ? HUT.walls[0] : CANVAS, 0.7, 0.02, 1.5, ux + 1.1, -0.15, uz + 0.3, { cast: false });
   });
+  yield;
   // the huts: a box with a door to the sea under a gable roof along x
   S.HUTS.forEach(([x, z], i) => {
     const [hx, hz] = at(x, z);
@@ -155,6 +157,7 @@ export function* seafrontSteps(root, { at, layer = null, backWalk = false }) {
   pv.field([px0, px1, bandZ, pz1 - 0.3], { pattern: 'grid', module: [0.6, 0.6], tones: GRANITE.mid, origin });
   course([px0, px1, bandZ - 0.15, bandZ], [0.3, 0.15]);
   course([px0, px1, pz1 - 0.3, pz1], [0.15, 0.3], GRANITE.edge);
+  yield;
   for (const s of STAIRS) {
     const [sx0, sx1] = R(s);
     pv.field([sx0, sx1, pz0 + BW, bandZ], {
@@ -166,6 +169,7 @@ export function* seafrontSteps(root, { at, layer = null, backWalk = false }) {
       h: 0.009,
     });
     for (const x of [sx0 - 0.15, sx1]) course([x, x + 0.15, pz0 + BW, bandZ], [0.15, 0.3], GRANITE.dark, 0.01);
+    yield;
   }
   // the footpath along the north row's backs, where the plaza's own doesn't reach (backWalk)
   if (backWalk)
@@ -182,11 +186,12 @@ export function* seafrontSteps(root, { at, layer = null, backWalk = false }) {
     pv.field([x0, x1, z0, z1], { pattern: 'grid', module: [0.6, 0.6], tones: GRANITE.pale, origin: [x0, z0] });
     for (const x of [x0, x1 - BW]) course([x, x + BW, z0, z1], [BW, 0.15], GRANITE.edge);
   }
+  yield;
   pv.build(group); // the paving is the bulk: built on its own step
   yield;
 
   // the alleys' beds, between the walk and the next building, kerbed on the walk's side
-  ALLEYS.forEach((w, k) => {
+  for (const [k, w] of ALLEYS.entries()) {
     const [x0, x1, z0, z1] = R(w),
       gap = BAYS.w / 2 - 1;
     bed(p, [x0 - gap + 0.05, x0 - 0.05, z0 + 0.1, z1 - 0.1], { y: 0.08 });
@@ -196,7 +201,8 @@ export function* seafrontSteps(root, { at, layer = null, backWalk = false }) {
       const [lx, lz] = at(sx, sz);
       cluster(p, lx, lz, { n: 3, r: 0.3, spread: 0.4, seed: 30 + k * 6 + i, y: 0.08 });
     });
-  });
+    yield;
+  }
   // kerbs where paving meets lawn: the promenade's west end and its north edge west and east of the rows, the west
   // walk's outer sides, the east walk's east side
   const kerbs = [
@@ -221,6 +227,7 @@ export function* seafrontSteps(root, { at, layer = null, backWalk = false }) {
     cluster(p, lx, lz, { n: 3, r: 0.32, spread: 0.4, seed: Math.round(x * 3), y: 0.08 });
   }
   for (const [x0, z0, x1, z1] of kerbs) kerb(p, at(x0, z0), at(x1, z1), { w: 0.16 });
+  yield;
 
   // the stairs: six treads down between two cheek walls, a dark nosing on each
   for (const s of STAIRS) {
@@ -236,9 +243,11 @@ export function* seafrontSteps(root, { at, layer = null, backWalk = false }) {
     for (const x of [x0 + 0.1, x1 - 0.1]) p.box(STONE.cheek, 0.22, 0.25, z1 - z0, x, -0.05, (z0 + z1) / 2);
     p.box(STONE.tread, x1 - x0 + 0.6, 0.03, 1.2, cx, -0.15, z1 + 0.6, { cast: false }); // a landing on the sand
   }
+  yield;
   // the lookout at the promenade's east end, over the rocks: a rail on its seaward sides
   rail(p, at(BEACH_E, WALL_Z - 0.25), at(P[2] - 0.15, WALL_Z - 0.25));
   rail(p, at(P[2] - 0.15, WALL_Z - 0.25), at(P[2] - 0.15, P[1] + 0.4));
+  yield;
   // lamps and benches in the band along the wall, bins beside every other bench
   const bz = WALL_Z - BAND / 2 - 0.15;
   lamps(
@@ -260,7 +269,7 @@ export function* seafrontSteps(root, { at, layer = null, backWalk = false }) {
   // line on the water's edge and patches of foam beyond it; boulders in groups, most at the water's edge and in the
   // shallows (each with a ring of foam), a few up the sand; trodden sand from each flight of stairs to the water;
   // outcrops at the wall's foot between the flights; a lifeguard's chair and three beach huts
-  beachThings(p, at);
+  yield* beachThings(p, at);
   const shore = S.SHORELINE.map(([x, z]) => at(x, z));
   for (let i = 0; i + 1 < shore.length; i++) {
     const a = shore[i],
@@ -296,6 +305,7 @@ export function* seafrontSteps(root, { at, layer = null, backWalk = false }) {
     yield;
   }
   p.build(group);
+  yield;
   const lit = lights.build(group, { poolY: 0.02 });
   yield;
 

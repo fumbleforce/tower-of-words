@@ -19,9 +19,9 @@ import { drain } from '../perf/slice.js';
 import { mergeStaticSteps } from './merge-static.js';
 import { Parts } from './outdoor/parts.js';
 import { lightSet } from './outdoor/furniture.js';
-import { canteen, shopStreet } from './plaza-buildings.js';
-import { buildGround } from './plaza/ground.js';
-import { buildGreen } from './plaza/green.js';
+import { canteenSteps, shopStreetSteps } from './plaza-buildings.js';
+import { groundSteps } from './plaza/ground.js';
+import { greenSteps } from './plaza/green.js';
 import {
   buildLamps,
   buildBenches,
@@ -33,9 +33,9 @@ import {
 import { pigeons } from './outdoor/pigeons.js';
 import { fountain } from './plaza/fountain.js';
 import * as P from './plaza/plan.js';
-import { buildEastLane } from './plaza/east-lane.js';
+import { eastLaneSteps } from './plaza/east-lane.js';
 import { BLOCK_IDS, BLOCKS as EAST_BLOCKS, CROSS } from './plaza/east-plan.js';
-import { buildNorthLane } from './plaza/north-lane.js';
+import { northLaneSteps } from './plaza/north-lane.js';
 import { NORTH_IDS } from './plaza/north-plan.js';
 import { clusterSteps, placeIn, CLUSTER_IDS } from './dorm-court/cluster.js';
 import { seafrontSteps } from './outdoor/seafront.js';
@@ -84,29 +84,31 @@ export function* plazaSteps() {
     );
   };
 
-  buildGround(root);
+  yield* groundSteps(root);
   yield;
   const water = fountain(root, F[0], F[1], BASIN);
   yield;
   const p = new Parts(),
     lights = lightSet();
-  buildGreen(p);
-  yield;
+  yield* greenSteps(p);
   const uplit = buildLamps(lights, p, nav, root);
+  yield;
   buildBenches(p, nav);
   const board = buildNoticeBoard(p, nav);
+  yield;
   const chairs = buildTerrace(root, nav);
+  yield;
   buildBikes(root, nav);
   yield;
-  const east = buildEastLane(root, p, lights); // backdrop: the lane on east to the dorm street
-  const north = buildNorthLane(root, lights); // backdrop: the back lane behind the canteen, the clinic
+  const east = yield* eastLaneSteps(root, p, lights); // backdrop: the lane on east to the dorm street
+  const north = yield* northLaneSteps(root, lights); // backdrop: the back lane behind the canteen, the clinic
   p.build(root);
+  yield;
   const lit = lights.build(root, { poolY: 0.028 }); // over the circle's stones
   const flock = pigeons(root, PIGEON_HOME, { n: 6 });
   yield;
-  const hall = canteen(root, CANTEEN, building('canteen').floorH, DOOR_X);
-  yield;
-  const street = shopStreet(root, {
+  const hall = yield* canteenSteps(root, CANTEEN, building('canteen').floorH, DOOR_X);
+  const street = yield* shopStreetSteps(root, {
     a: SHOPS.a,
     dir: SHOPS.dir,
     depth: SHOPS.depth,
