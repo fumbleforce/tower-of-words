@@ -55,6 +55,7 @@ bar.append(pause);
 const happy = document.createElement('button');
 happy.textContent = 'Smile';
 bar.append(happy);
+try {
 const renderer = new THREE.WebGLRenderer({ antialias: true });
 renderer.setPixelRatio(Math.min(2, devicePixelRatio));
 renderer.shadowMap.enabled = true;
@@ -68,7 +69,6 @@ sun.position.set(2, 4, 3); sun.castShadow = true; scene.add(sun);
 const floor = new THREE.Mesh(new THREE.CircleGeometry(1.2, 48), new THREE.MeshLambertMaterial({ color: '#c9ced4' }));
 floor.rotation.x = -Math.PI / 2; floor.receiveShadow = true; scene.add(floor);
 const camera = new THREE.PerspectiveCamera(30, 1, 0.01, 50);
-try {
   const start = performance.now();
   const character = await loadVrmMio({ original: variant === 'base', flat: variant === 'flat' });
   scene.add(character.root); character.setState(anim);
@@ -97,7 +97,7 @@ try {
   function render() { frame(); renderer.render(scene, camera); }
   renderer.setAnimationLoop(() => {
     const dt = Math.min(0.05, clock.getDelta());
-    if (!paused) character.update(dt);
+    character.update(paused ? 0 : dt);
     render();
     document.getElementById('info').textContent = `${info.triangles.toLocaleString()} triangles · ${renderer.info.render.calls} page draw calls including shadows. Drag to turn; pinch or scroll to zoom.`;
   });
