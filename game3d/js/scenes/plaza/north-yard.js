@@ -65,7 +65,8 @@ function trolley(q, x, z, ry) {
   g(STEEL.pale, 0.58, 0.035, 0.035, 0, 0.98, -0.43);
 }
 
-export function buildYard(q, { glass, lit }, lights, shade) {
+// a generator: yields between its parts, for building in slices (js/perf/slice.js)
+export function* yardSteps(q, { glass, lit }, lights, shade) {
   const [x0, x1, z0, z1] = YARD;
   // kerbs on the lawn sides, open for m6's walk; a hedge round them outside; a cherry at the corner
   kerb(q, [x0, z0], [x0, z1], { off: 0.08 });
@@ -79,8 +80,10 @@ export function buildYard(q, { glass, lit }, lights, shade) {
   hedge(q, [x0 - 0.45, z0 + 0.2], [x0 - 0.45, z1 + 0.45], { w: 0.5, h: 0.75, seed: 34 });
   hedge(q, [x0 - 0.2, z1 + 0.45], [x1 - 0.3, z1 + 0.45], { w: 0.5, h: 0.75, seed: 38 });
   // and on the lawn west of it, toward office_e1 and m6: a cherry at the corner, a group of three on a kerbed bed
+  yield;
   tree(q, sakura, x0 - 2.2, z1 + 1.6, 1.0, 35);
   shade.tree(x0 - 2.2, z1 + 1.6, 1.0);
+  yield;
   const g = [x0 - 5.2, x0 - 1.6, z0 + 1.0, z0 + 4.2];
   kerbRect(q, g);
   bed(q, [g[0] + 0.1, g[1] - 0.1, g[2] + 0.1, g[3] - 0.1], { y: 0.06 });
@@ -91,8 +94,10 @@ export function buildYard(q, { glass, lit }, lights, shade) {
   ]) {
     kind(q, g[0] + dx, g[2] + dz, s, seed);
     shade.tree(g[0] + dx, g[2] + dz, s);
+    yield;
   }
   cluster(q, g[0] + 0.7, g[3] - 0.6, { n: 3, r: 0.32, seed: 39 });
+  yield;
   // the roller shutter in the canteen's west face: a steel frame, slats, a hood box, a pale lip
   const W = CANTEEN[0],
     [s0, s1] = [z1 - 4.2, z1 - 1.0],
@@ -135,6 +140,7 @@ export function buildYard(q, { glass, lit }, lights, shade) {
   for (let i = 0; i < 4; i++) q.box(i % 2 ? '#9a9c9c' : '#8e9191', 1.1, 0.13, 1.1, x0 + 1.2, i * 0.14, z1 - 1.2);
   q.box('#b9bec4', 1.0, 0.5, 1.0, x0 + 1.2, 0.56, z1 - 1.2, { cast: false }); // shrink-wrapped boxes on top
   trolley(q, x0 + 4.4, z0 + 1.5, 0.4);
+  yield;
   // the bin store on the yard's west side: two big bins behind a slatted screen, the sorted pair by it
   const bz = (z0 + z1) / 2 - 0.6;
   // wheeled bins: a body, a lid lapping over it with a handle bar, two wheels at the back
@@ -152,6 +158,7 @@ export function buildYard(q, { glass, lit }, lights, shade) {
   for (let i = 0; i < 8; i++) q.box('#8f8a82', 0.04, 1.2, 0.08, x0 + 1.35, 0, bz - 0.85 + i * 0.243, { cast: false });
   bins(q, x0 + 0.55, bz + 1.6, Math.PI / 2);
 
+  yield;
   // the apron along the canteen's back (its north face)
   const [cx0, cx1, zb] = [CANTEEN[0], CANTEEN[1], CANTEEN[2]],
     fh = 2.1,
@@ -193,6 +200,7 @@ export function buildYard(q, { glass, lit }, lights, shade) {
       },
     );
   }
+  yield;
   // a linear drain where the apron meets the lane: a dark channel under a steel grate
   q.box('#3c4046', cx1 - cx0, 0.012, 0.16, (cx0 + cx1) / 2, 0.004, APRON[2] + 0.1, { cast: false });
   for (let x = cx0 + 0.1; x < cx1; x += 0.25)

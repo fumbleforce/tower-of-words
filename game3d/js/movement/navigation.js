@@ -1,3 +1,5 @@
+import { drain } from '../perf/slice.js';
+
 // ---------- walk grid ----------
 // Blockers are axis-aligned rectangles [x0, x1, z0, z1] in the place's local x/z.
 export class Nav {
@@ -49,13 +51,22 @@ export class Nav {
     return Math.max(0, c);
   }
   build() {
-    const g = new Uint8Array(this.nx * this.nz);
-    for (let i = 0; i < this.nx; i++)
+    drain(this.buildSteps());
+  }
+  // the same, yielding every few columns, for a place built in slices (js/perf/slice.js); a grid blocked or
+  // unblocked meanwhile is left unbuilt
+  *buildSteps() {
+    const g = new Uint8Array(this.nx * this.nz),
+      { rects, extra } = this,
+      n = rects.length;
+    for (let i = 0; i < this.nx; i++) {
       for (let k = 0; k < this.nz; k++)
         g[k * this.nx + i] = this.free(this.x0 + (i + 0.5) * this.cell, this.z0 + (k + 0.5) * this.cell, this.R + 0.02)
           ? 1
           : 0;
-    this.grid = g;
+      if (i % 8 === 7) yield;
+    }
+    if (this.rects === rects && rects.length === n && this.extra === extra) this.grid = g;
   }
   cellOf(x, z) {
     return [

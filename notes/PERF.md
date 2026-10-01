@@ -619,3 +619,33 @@ The clinic (plaza/north-clinic.js) goes into the north lane's collectors like th
 texture (the canopy's name, the hours, the departments, the stair's name and the sign stone), and its bikes are laid
 into the collector, so the only call it adds is that mesh. Fast test, plaza median calls and triangles: phone q0 53 → 54
 calls, 201k → 204k tris; desktop q0 68 → 68 calls, 210k → 213k. Within the baselines; budgets.json unchanged.
+
+## The plaza in finer slices (2026-10-01, #163)
+
+Preparing the plaza while the forecourt plays had three long tasks of 280 to 330 ms at CPU 4x. Per step of
+`plazaSteps` (each step profiled alone, CPU 4x): `buildGreen` 112 ms, `buildEastLane` and `buildNorthLane` together
+243 ms (the clinic 39 of it), the shop street 35 to 54, the canteen 25, the seafront's steps about 20, the static
+merge's biggest set 26, the cluster's `court` 28. Now generators with a `yield` every few trees and flowers, after
+every face of a block and every building of the shop street, between the parts of the lanes, the yard, the clinic
+(`officeBlockSteps`; `officeBlock` drains it, so the forecourt is unchanged), the canteen, the ground and the seafront,
+and after each mesh the static merge copies (merge-static.js). Longest step 243 → about 20 ms; 433 → 880 steps.
+
+What was left was one task of about 190 ms after the builder: the finds' spot (finds/index.js), which built the
+plaza's whole walk grid (`Nav.build`, 125 ms at 4x) and raycast the floor through meshes with no bounding spheres yet
+(43 ms). `findSpotSteps` now runs in slices: the bounds a mesh at a time, the grid in columns (`Nav.buildSteps`;
+`build` drains it), then each find. Same grid, same spot.
+
+No visible change: every mesh's geometry, colour, matrix, layers and shadow flags hash the same as on a044c7bb for the
+plaza, the forecourt and the dorm courtyard builders; place shots at both sizes differ from main only in edge noise
+(0.01 to 0.03% of pixels, on bench and bike edges, and the build stamp).
+
+`hitch.mjs 390 844 forecourt:plaza`, CPU 4x, q0, GL=gpu (shots/perf/before-163-* and after-163-*):
+
+| | prepare | long tasks | worst frame | frames over 1.5x median | 1% low |
+|---|--:|--:|--:|--:|--:|
+| before (a044c7bb, 2 runs) | 2,980-3,010 ms | 3 (296-335 ms) | 317-350 ms | 15-17 | 8.6-10 fps |
+| after (3 runs) | 3,230-3,440 ms | 0 | 50 ms | 12-24 | 29.9-30 fps (p99 33.4 ms) |
+
+Plaza budgets re-measured from the fast test (median calls, tris): desktop q0 60 → 64, 206k → 216k; phone q0 49 → 50,
+197k → 206k; phone q1 61 → 58, 198k → 208k (the clinic and the seafront since the last entries). Written to
+budgets.json.

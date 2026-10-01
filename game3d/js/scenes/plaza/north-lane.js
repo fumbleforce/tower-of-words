@@ -22,35 +22,41 @@ import { blockSets, buildBlockSets } from '../outdoor/block.js';
 import { shade } from '../outdoor/shade.js';
 import { groundPatches, TOWN } from '../town.js';
 import { officeE1 } from '../forecourt/north.js';
-import { buildFronts } from './east-fronts.js';
+import { frontsSteps } from './east-fronts.js';
 import { tree, walk } from './east-lane.js';
-import { yardGround, buildYard } from './north-yard.js';
-import { clinicGround, clinic } from './north-clinic.js';
+import { yardGround, yardSteps } from './north-yard.js';
+import { clinicGround, clinicSteps } from './north-clinic.js';
 import * as N from './north-plan.js';
 
 const { BACK, APRON, E2_WALK, GROVE_WALK, SQUARE, VERGE, CLINIC, CANTEEN } = N;
 const VB = BACK[2] - VERGE; // the north verge's back
 const E1_H = 2.4 + 3 * 2;
 
-function ground(root) {
+function* ground(root) {
   groundPatches(root, [[-44, 44, -48, -30, TOWN.grass]]); // the lawn on north of the plaza's
   const pv = paver();
   laneField(pv, BACK, { origin: [BACK[0], BACK[2]] });
+  yield;
   yardGround(pv);
   clinicGround(pv);
+  yield;
   walk(pv, E2_WALK, false);
   walk(pv, GROVE_WALK, false);
+  yield;
   pv.build(root);
+  yield;
 }
 
-function planting(q, lights, sh) {
+function* planting(q, lights, sh) {
   // the north verge and its avenue, lamps on the lane's north border every 8
   const east = BACK[1] - VERGE; // the north street's verge takes the corner
   verge(q, [BACK[0], BACK[2]], [east, BACK[2]], 'n', { crossings: N.OPENINGS, trees: N.AVENUE, seed: 31 });
   for (const x of N.AVENUE) sh.tree(x, BACK[2] - 2.1, 1.04);
+  yield;
   // the south verge past the canteen's east end: kerb, bed and hedge, no trees (the canteen's lawn has its own)
   verge(q, [APRON[1], BACK[3]], [east, BACK[3]], 's', { seed: 33 });
   kerb(q, [APRON[1], APRON[2]], [APRON[1], APRON[3]], { off: 0.08 }); // where the apron meets the canteen's lawn
+  yield;
   lamps(
     lights,
     q,
@@ -75,6 +81,7 @@ function planting(q, lights, sh) {
   kerbRect(q, SQUARE, { gaps: { s: [[wx0, wx1]] } });
   gravel(q, [sx0 + 0.08, sx1 - 0.08, sz0 + 0.08, sz1 - 0.08], { y: 0.01 });
   const [scx, scz] = [(sx0 + sx1) / 2, (sz0 + sz1) / 2];
+  yield;
   // the zelkova in a low round planter of stone above the gravel, mulch inside
   keyaki(q, scx, scz - 0.4, 1.05, 89);
   q.geo('#8b8d90', new THREE.CylinderGeometry(0.7, 0.72, 0.26, 18).translate(scx, 0.13, scz - 0.4), {
@@ -85,6 +92,7 @@ function planting(q, lights, sh) {
   bench(q, sx0 + 0.45, scz + 0.5, Math.PI / 2, { len: 1.3 });
   bench(q, sx1 - 0.45, scz + 0.5, -Math.PI / 2, { len: 1.3 });
   lamps(lights, q, [[sx1 - 0.3, sz0 + 0.3]], { kind: 'post', pool: 1.4 });
+  yield;
   const beds = [
     [
       [CLINIC[1] + 2.4, wx0 - 1.6, VB - 5.4, VB - 2.0],
@@ -101,22 +109,24 @@ function planting(q, lights, sh) {
       ],
     ],
   ];
-  beds.forEach(([r, trees], g) => {
+  for (const [g, [r, trees]] of beds.entries()) {
     kerbRect(q, r);
     bed(q, [r[0] + 0.1, r[1] - 0.1, r[2] + 0.1, r[3] - 0.1], { y: 0.06 });
-    trees.forEach(([kind, dx, s], i) => {
+    for (const [i, [kind, dx, s]] of trees.entries()) {
       const x = r[0] + dx,
         z = (r[2] + r[3]) / 2 + (i % 2 ? 0.4 : -0.3);
       kind(q, x, z, s, 90 + g * 4 + i);
       sh.tree(x, z, s);
-    });
+      yield;
+    }
     for (const [dx, n] of [
       [0.7, 3],
       [3.1, 4],
       [r[1] - r[0] - 0.8, 4],
     ])
       cluster(q, r[0] + dx, r[3] - 0.7, { n, r: 0.34, seed: 92 + g * 3 + n });
-  });
+    yield;
+  }
   // the row behind the square, on the lawn
   for (const [kind, x, s, seed] of [
     [sakura, CLINIC[1] + 3.4, 1.0, 101],
@@ -127,6 +137,7 @@ function planting(q, lights, sh) {
     const z = sz0 - 1.8;
     tree(q, kind, x, z, s, seed);
     sh.tree(x, z, s);
+    yield;
   }
   // by the canteen: a zelkova and a cherry on the lawn past its east end, a ginkgo west of it toward office_e1
   for (const [kind, x, z, s, seed] of [
@@ -136,30 +147,37 @@ function planting(q, lights, sh) {
   ]) {
     tree(q, kind, x, z, s, seed);
     sh.tree(x, z, s);
+    yield;
   }
 }
 
 // builds it all into the plaza: lights, the plaza's light set. Returns the evening switch, and update(sun), which
-// keeps the laid shadows on the side the sun is on
-export function buildNorthLane(root, lights) {
-  ground(root);
+// keeps the laid shadows on the side the sun is on. A generator that yields between parts, for building in slices
+// (js/perf/slice.js).
+export function* northLaneSteps(root, lights) {
+  yield* ground(root);
   const q = new Parts(),
     sets = blockSets(),
     sh = shade();
-  planting(q, lights, sh);
-  buildYard(q, sets, lights, sh);
-  const cl = clinic(sets, q, lights, sh);
+  yield* planting(q, lights, sh);
+  yield* yardSteps(q, sets, lights, sh);
+  const cl = yield* clinicSteps(sets, q, lights, sh);
   for (const m of cl.meshes) root.add(m);
+  yield;
   officeE1(sets, N.E1);
   sh.block(N.E1, E1_H);
-  const fronts = buildFronts(q, lights, [N.E2, N.M6]);
+  yield;
+  const fronts = yield* frontsSteps(q, lights, [N.E2, N.M6]);
   for (const k of [N.E2, N.M6]) sh.block(k.rect, k.row.storeys * k.row.floorH);
   fronts.meshes(root);
+  yield;
   const group = new THREE.Group(); // everything here, so none of it casts
   root.add(group);
   const { lit } = buildBlockSets(sets, group);
+  yield;
   q.build(group);
   group.traverse((m) => (m.castShadow = false));
+  yield;
   const shadows = sh.build(root);
   return {
     evening() {

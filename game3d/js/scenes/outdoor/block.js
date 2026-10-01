@@ -17,6 +17,7 @@ import * as THREE from 'three';
 import { Parts, hash2 } from './parts.js';
 import { STEEL } from './furniture.js';
 import { BLOCK, faces, onFace, tOf, vOf, bayOf } from './block-face.js';
+import { drain } from '../../perf/slice.js';
 import { STYLE, glassFront, copedParapet, punched, stairBay, roofPlant, frontDoor } from './block-style.js';
 
 export { BLOCK, faces, faceAt, tOf } from './block-face.js';
@@ -53,7 +54,10 @@ export function doorAt(rect, face, at) {
   return { at: vOf(f, snap(f, at)), w: bayOf(f.L) - 0.36 };
 }
 
-export function officeBlock(
+// officeBlockSteps is the same as a generator that yields after every face, for a place built in slices
+// (js/perf/slice.js)
+export const officeBlock = (...a) => drain(officeBlockSteps(...a));
+export function* officeBlockSteps(
   sets,
   rect,
   {
@@ -141,6 +145,7 @@ export function officeBlock(
     else onFace(p, BLOCK.band, f, -0.06, f.L + 0.06, top, top + 0.38, -0.16, 0.06); // the parapet
     if (st) stairBay(sets, f, st, gf, top, fh, storeys, wall);
     for (const o of myDoors) out.doors.push({ f, t: o.t, w: o.w, canopy: door(sets, f, o) });
+    yield;
   }
   if (roof === 'plant') {
     const sf = stair?.face === 's' && [stair.at - stair.w / 2, stair.at + stair.w / 2];

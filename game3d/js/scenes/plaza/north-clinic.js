@@ -19,7 +19,7 @@ import { LANE_BORDER as BW } from '../outdoor/lane.js';
 import { kerb, kerbRect } from '../outdoor/edges.js';
 import { planter, keyaki, cluster, bed, mound, LEAF } from '../outdoor/planting.js';
 import { bench, bikeRack } from '../outdoor/furniture.js';
-import { officeBlock, doorAt, BLOCK } from '../outdoor/block.js';
+import { officeBlockSteps, doorAt, BLOCK } from '../outdoor/block.js';
 import { textTexture, plane, JP_FONT } from '../../props.js';
 import { rowBike, slotYaw } from '../forecourt/details.js';
 import { shrubBed } from './east-lane.js';
@@ -67,26 +67,30 @@ export function clinicGround(pv) {
 }
 
 // the court's furniture and planting: the west bed, a planter and a bench by the door, the sign stone, the bike
-// rack and bikes, kerbs where the court and the bay leave the verge. Returns the sign stone's face.
-function clinicCourt(q) {
+// rack and bikes, kerbs where the court and the bay leave the verge. Returns the sign stone's face. Yields between
+// parts (js/perf/slice.js).
+function* clinicCourt(q) {
   const [cx0, , cz0] = COURT;
   kerb(q, [cx0, cz0], [cx0, VB], { off: -0.08 });
   kerb(q, [BIKES[1], cz0], [BIKES[1], VB], { off: 0.08 });
   shrubBed(q, [CLINIC[0] + 0.2, cx0 - 0.16, cz0, VB - 0.1], 'sw', 36, 'w');
   keyaki(q, CLINIC[0] + 0.9, cz0 + 0.8, 0.62, 41);
   cluster(q, cx0 - 0.7, cz0 + 0.6, { n: 3, r: 0.28, seed: 42, y: 0.06 });
+  yield;
   const px0 = cx0 + BW + 0.05,
     px1 = LAND.from - 0.1;
   bench(q, (px0 + px1) / 2, cz0 + 0.6, 0, { len: 1.2 }); // against the glass, facing the court
   planter(q, [cx0 + BW + 0.05, cx0 + BW + 0.5, cz0 + 0.95, cz0 + 1.85], { seed: 4 }); // along the court's west edge
   // the bikes, five side by side down the bay's west side at a rack, pointing east
   const rx = BIKES[0] + 0.45;
-  bikeRack(q, [rx, cz0 + 0.3], [rx, cz0 + 2.9], { n: 3 }).forEach(([x, z], i) => {
+  for (const [i, [x, z]] of bikeRack(q, [rx, cz0 + 0.3], [rx, cz0 + 2.9], { n: 3 }).entries()) {
+    yield;
     const b = rowBike(i, 4); // the forecourt's bikes, laid into the collector
     b.rotation.y = slotYaw(i, 4) - Math.PI / 2;
     b.position.set(x + 0.55, 0, z);
     intoParts(q, b);
-  });
+  }
+  yield;
   // along the bay's east edge a narrow kerbed bed of clipped shrubs
   const sb = [BIKES[1] - 0.6, BIKES[1] - 0.08, cz0 + 0.2, cz0 + 2.8];
   kerbRect(q, sb, { sides: 'w' });
@@ -211,9 +215,10 @@ function sheet() {
 }
 
 // the block, its entrance and signs; the cross on the stair crown and the roof cross for the map. Returns the meshes
-// that stay apart from the merge (the cross and the names, both lit after work) and the evening switch.
-export function clinic(sets, q, lights, sh) {
-  const { doors, top } = officeBlock(sets, CLINIC, {
+// that stay apart from the merge (the cross and the names, both lit after work) and the evening switch. A generator
+// that yields between parts, for building in slices (js/perf/slice.js).
+export function* clinicSteps(sets, q, lights, sh) {
+  const { doors, top } = yield* officeBlockSteps(sets, CLINIC, {
     storeys: 3,
     fh: 2,
     wall: WALL,
@@ -241,6 +246,7 @@ export function clinic(sets, q, lights, sh) {
   const bx = (BIKES[0] + BIKES[1]) / 2;
   lights.lit.push([bx, CLINIC[3] + 1.5, 1.4]);
   sh.block(CLINIC, top);
+  yield;
   // the cross on the stair's crown, in a white box
   const cy = top + 0.42,
     z = CLINIC[3] + 0.18;
@@ -267,6 +273,7 @@ export function clinic(sets, q, lights, sh) {
   );
   const names = plane(1, 1, sheet(), { emissiveK: 0.08 });
   names.geometry.dispose();
+  yield;
   const hx = LAND.from - 0.45,
     gz = CLINIC[3] - 0.045; // just proud of the ground floor's glass
   q.box('#3f4650', 0.58, 0.72, 0.02, hx, 0.99, gz - 0.02, { cast: false }); // the hours' frame
@@ -274,7 +281,8 @@ export function clinic(sets, q, lights, sh) {
   const depts = face(1.4, 0.22, [CLINIC[0] + 2.29, 1.58, gz], [0.5, 0.238, 1, 0.316]);
   const depts2 = face(1.4, 0.22, [CLINIC[1] - 2.29, 1.58, gz], [0.5, 0.238, 1, 0.316]);
   const blade = face(0.3, 3.05, [DOOR.at, 2.4 + 2.05, CLINIC[3] + 0.145], [0.943, 0.32, 0.998, 0.877]); // down the stair
-  names.geometry = mergeGeometries([band, hours, depts, depts2, blade, clinicCourt(q)]);
+  const stone = yield* clinicCourt(q);
+  names.geometry = mergeGeometries([band, hours, depts, depts2, blade, stone]);
   names.name = 'clinic:names';
   return {
     meshes: [cross, names],
