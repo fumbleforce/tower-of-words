@@ -128,12 +128,12 @@ export const CHUNKS = {
   },
   train: {
     at: [-28.6, -3.9],
-    turn: 90,
+    turn: 270, // heading north up the shed (the beam comes in from the south, train/island.js); the platform side east
     scale: 1.18,
     level: 1,
     walk: [-17, 17, -1.2, 4.6],
     view: [-17, 17, -4.6, 4.6],
-    anchor: 'the car in the middle of the platform shed as drawn, its walkway end toward the station',
+    anchor: 'the car in the middle of the platform shed as drawn, its walkway end south, toward the stairs',
   },
 };
 
