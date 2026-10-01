@@ -1,5 +1,5 @@
 // The east lane's plan (plaza/east-lane.js): the ground between the fountain plaza and the dorm courtyard, from the
-// island layout (scenes/island-layout.js: route_home's jog, the east paths, the pocket park and the six small
+// island layout (scenes/island-layout.js: route_home's jog, the east paths, the pocket park and the small
 // blocks), in the plaza's frame as [x0, x1, z0, z1] like the rest of the plaza's plan.
 //
 // One grid. The lane leaves the plaza east on the fountain's axis and turns north at the jog; its top leg runs east
@@ -17,7 +17,7 @@ import { local, building, HALF } from './plan.js';
 const path = (id) => LAYOUT.PATHS.find((p) => p.id === id);
 const green = (id) => LAYOUT.GREEN.find((g) => g.id === id);
 // a layout rect [x0, z0, x1, z1] (island) as [x0, x1, z0, z1] in the plaza's frame
-const rect = ([x0, z0, x1, z1]) => {
+export const rect = ([x0, z0, x1, z1]) => {
   const [a, b] = local([x0, z0]),
     [c, d] = local([x1, z1]);
   return [a, c, b, d];
@@ -58,6 +58,7 @@ export const BLOCKS = [
   { id: 'r8', face: 'n', at: (PARK_NS[0] + PARK_NS[1]) / 2, ground: 'office', wall: 2 },
   { id: 'r9', face: 'w', at: null, ground: 'house', wall: 3 },
   { id: 'block_e3', face: 'w', at: null, ground: 'office', wall: 0 },
+  { id: 'r3', face: 'w', at: null, ground: 'office', wall: 1 },
   { id: 'izakaya', face: 's', at: null, ground: 'shop', wall: 3 },
   { id: 'ramen', face: 'w', at: null, ground: 'shop', wall: 1 },
 ].map((k) => ({ ...k, rect: b(k.id), row: building(k.id) }));
@@ -70,7 +71,12 @@ const spur = (id, x0) => {
   const k = BLOCKS.find((q) => q.id === id);
   return [x0, k.rect[0], k.at - 0.75, k.at + 0.75];
 };
-export const SPURS = [spur('block_e3', NORTH_STREET[1]), spur('r9', NORTH_STREET[1]), spur('ramen', DORM_STREET[1])];
+export const SPURS = [
+  spur('block_e3', NORTH_STREET[1]),
+  spur('r9', NORTH_STREET[1]),
+  spur('ramen', DORM_STREET[1]),
+  spur('r3', NORTH_STREET[1]),
+];
 export const ARCADE_END = rect(path('arcade_end').rect);
 // block_e1's bike pad: along its front from its west end to the cross walk
 export const BIKE_PAD = ((r) => [r[0] + 0.3, CROSS[0], r[3], r[3] + 2.2])(BLOCKS[0].rect);

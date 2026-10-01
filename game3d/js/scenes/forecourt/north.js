@@ -30,8 +30,7 @@ import * as P from './plan.js';
 const { HZ, TE, TN, SERVICE, WING, E1, CROSS, SHED_ST: SH, JUNCTION: J, WING_PLOT, BARRIER_Z } = P;
 const layoutOf = (id) => BUILDINGS.find((b) => b.id === id);
 const WING_DOOR = doorAt(WING, 'w', (WING[2] + WING[3]) / 2), // its middle bay, past the chains
-  YARD_DOOR = doorAt(WING, 'e', WING[2] + 1.2),
-  E1_DOOR = { at: (CROSS[2] + CROSS[3]) / 2, w: 1.3 }; // on the street's axis
+  YARD_DOOR = doorAt(WING, 'e', WING[2] + 1.2);
 const PATH = [SH[1], WING[0], WING_DOOR.at - 0.8, WING_DOOR.at + 0.8]; // the staff door's path, 1.6 wide
 const AV = 4; // the avenues' pitch, as on the lane
 // the staff bike shelter behind the wing, and its path from the shed street
@@ -241,6 +240,19 @@ function grove(p) {
     cluster(p, x, z, { n: 4, r: 0.38, seed: s + 80 });
 }
 
+// office_e1 (outdoor/block.js) in the frame of the place that builds it, rect [x0, x1, z0, z1] there: its door in
+// the middle of its west face, which is the cross street's axis. The fountain plaza builds it too (plaza/north-lane.js).
+export function officeE1(sets, rect) {
+  const e1 = layoutOf('office_e1');
+  officeBlock(sets, rect, {
+    storeys: e1.storeys,
+    fh: e1.floorH,
+    wall: TOWN.walls[e1.wall],
+    doors: [{ face: 'w', at: (rect[2] + rect[3]) / 2, w: 1.3 }],
+    seed: 5,
+  });
+}
+
 // built in slices (js/perf/slice.js): it yields between parts, so the forecourt can build while the gate plays
 export function* northSteps(root, set) {
   paving(root);
@@ -262,8 +274,7 @@ export function* northSteps(root, set) {
   for (const m of q.build(root)) m.castShadow = false;
   yield;
   const sets = blockSets();
-  const wing = layoutOf('head_office_wing'),
-    e1 = layoutOf('office_e1');
+  const wing = layoutOf('head_office_wing');
   officeBlock(sets, WING, {
     storeys: wing.storeys,
     fh: wing.floorH,
@@ -276,13 +287,7 @@ export function* northSteps(root, set) {
   });
   towerYardWall(sets);
   yield;
-  officeBlock(sets, E1, {
-    storeys: e1.storeys,
-    fh: e1.floorH,
-    wall: TOWN.walls[e1.wall],
-    doors: [{ face: 'w', ...E1_DOOR }],
-    seed: 5,
-  });
+  officeE1(sets, E1);
   yield;
   return buildBlockSets(sets, root);
 }

@@ -15,6 +15,7 @@
 
 import { EAST_PATHS, EAST_GREEN } from './island-east.js';
 import { WEST_PATHS, WEST_GREEN } from './island-west.js';
+import { NORTH_PATHS, NORTH_GREEN } from './island-north.js';
 
 export const UNIT = 1.5;
 
@@ -101,7 +102,7 @@ export const CHUNKS = {
     scale: 1,
     level: 0,
     walk: [-11.8, 13.2, -16.4, 11.2],
-    view: [-22, 38.6, -28, 32], // east to the dorm courtyard's tile: the east lane (plaza/east-lane.js)
+    view: [-22, 38.6, -42, 32], // east to the dorm courtyard's tile (plaza/east-lane.js), north to the clinic (plaza/north-lane.js)
     anchor: 'the fountain on the fountain as drawn',
   },
   dorm_court: {
@@ -151,7 +152,7 @@ const ROWS = [
   ['head_office', 'tower', 12, 2, 0, ROOF, 'office', [-4.9, -13.85, 11.5, -4.25]],
   ['head_office_wing', 'office', 5, 2, 1, ROOF, 'office', [-14, -11.9, -8.2, -7.3]],
   ['canteen', 'canteen', 2, 2.1, 1, BLUE_ROOF, 'flat', [22.535, -28.8, 45.235, -20.5]],
-  ['clinic', 'clinic', 3, 2, 0, ROOF, 'office', [25.4, -38.8, 36.1, -32.8]],
+  ['clinic', 'clinic', 3, 2, 0, ROOF, 'office', [25.4, -42.2, 36.1, -36.2]],
   ['shops_north', 'shop', 2, 1.45, 2, SHOP_ROOF, 'shop', [-4, 13.4, 64.5, 17.9]],
   ['arcade', 'arcade', 1, 2.9, 1, '#9aa4ad', 'flat', [-4, 17.9, 64.5, 22.4]],
   ['shops_south', 'shop', 2, 1.45, 3, SHOP_ROOF, 'shop', [-4, 22.4, 64.5, 26.9]],
@@ -202,7 +203,7 @@ const ROWS = [
   ['statue', 'office', 4, 2, 2, ROOF, 'flat', [106, -153.9, 108.1, -150.9]],
   ['onsen_pav', 'office', 1, 2, 1, ROOF, 'flat', [122.1, -116.1, 130.1, -109]],
   ['onsen_main', 'office', 2, 2, 3, ROOF, 'flat', [117.6, -96.2, 128.6, -88.2]],
-  ['block_e2', 'office', 4, 2, 0, ROOF, 'flat', [59.2, -38.5, 66.5, -35.2]],
+  ['block_e2', 'office', 4, 2, 0, ROOF, 'flat', [58.2, -38.5, 65.5, -35.2]],
   ['r3', 'office', 3, 2, 1, ROOF, 'flat', [72.9, -44.8, 78.3, -41.4]],
   ['housing_n', 'dorm', 4, 1.75, 2, DORM_ROOF, 'dorm', [78.7, -53.2, 102.5, -46.5]],
   ['dorm_5', 'dorm', 3, 1.75, 3, DORM_ROOF, 'dorm', [76.5, -37.2, 83.6, -18.4]],
@@ -231,7 +232,8 @@ const DETAILS = {
   office_e1: 'North-east of the tower, behind the trees on the lane toward the fountain.',
   canteen:
     'The company canteen: two storeys, blue-grey roof with plant, umbrella terrace on its south side facing the fountain; placed so its door bay is on the fountain’s north-south axis and the terrace ends short of the plaza.',
-  clinic: 'The clinic (green cross).',
+  clinic:
+    'The clinic (green cross), three storeys behind the canteen, set back from the back lane by its entrance court; its door in the middle of its south face.',
   gym: 'The gym’s arched roof (green on the reference, muted); the pool and courts east of it.',
   shops_north:
     'The north row: awnings to the arcade, bilingual rooftop signs, backs to the lane. One street on the grid.',
@@ -253,6 +255,10 @@ const DETAILS = {
   r8: 'Two storeys; its door on the pocket park’s north-south axis, across the south walk.',
   r9: 'A two-storey house on the north street’s east side, south of block_e3, its door on that street.',
   block_e3: 'Three storeys on the north street’s east side; its door on that street.',
+  block_e2:
+    'Four storeys of offices on the back lane’s north side; its door in the middle of its south face, on a short walk.',
+  m6: 'Five storeys of offices north of the canteen’s loading yard; its door in the middle of its south face, on a walk from the yard.',
+  r3: 'Three storeys on the north street’s east side, north of block_e3; its door on that street.',
 };
 const pairs = (f) => f.reduce((a, v, i) => (i % 2 ? a[a.length - 1].push(v) : a.push([v]), a), []);
 export const BUILDINGS = ROWS.map(([id, kind, storeys, floorH, wall, roof, windows, f]) => ({
@@ -300,6 +306,7 @@ export const PATHS = [
   },
   ...EAST_PATHS, // the east lane (scenes/island-east.js)
   ...WEST_PATHS, // the coast path west of the station (scenes/island-west.js)
+  ...NORTH_PATHS, // the back lane behind the canteen (scenes/island-north.js)
   {
     id: 'promenade',
     kind: 'promenade',
@@ -330,6 +337,7 @@ export const GREEN = [
   },
   ...EAST_GREEN,
   ...WEST_GREEN,
+  ...NORTH_GREEN,
   {
     id: 'dorm_inner_court',
     rect: [95, 2.6, 108.5, 11.5],

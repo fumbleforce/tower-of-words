@@ -50,8 +50,10 @@ const litMat = new THREE.MeshStandardMaterial({
   emissiveIntensity: 0.9,
 });
 
+// The face maths every backdrop block shares (this file's officeBlock and the small blocks' fronts,
+// plaza/east-fronts.js): a rect's four faces, a point on a face, and a world coordinate's place along a face.
 // the four faces of a rect: where each starts, its direction along, its outward normal, its length
-function faces([x0, x1, z0, z1]) {
+export function faces([x0, x1, z0, z1]) {
   return {
     s: { a: [x0, z1], d: [1, 0], n: [0, 1], L: x1 - x0 },
     e: { a: [x1, z1], d: [0, -1], n: [1, 0], L: z1 - z0 },
@@ -59,16 +61,17 @@ function faces([x0, x1, z0, z1]) {
     w: { a: [x0, z0], d: [0, 1], n: [-1, 0], L: z1 - z0 },
   };
 }
+// the point t along a face and o out from it, [x, z]
+export const faceAt = (f, t, o) => [f.a[0] + f.d[0] * t + f.n[0] * o, f.a[1] + f.d[1] * t + f.n[1] * o];
 // a box on a face: t0..t1 along it, y0..y1, o0..o1 out from it
 function onFace(set, color, f, t0, t1, y0, y1, o0, o1, opts) {
-  const P = (t, o) => [f.a[0] + f.d[0] * t + f.n[0] * o, f.a[1] + f.d[1] * t + f.n[1] * o];
-  const [A, B] = [P(t0, o0), P(t1, o1)];
+  const [A, B] = [faceAt(f, t0, o0), faceAt(f, t1, o1)];
   const [xa, xb] = [Math.min(A[0], B[0]), Math.max(A[0], B[0])],
     [za, zb] = [Math.min(A[1], B[1]), Math.max(A[1], B[1])];
   set.box(color, xb - xa, y1 - y0, zb - za, (xa + xb) / 2, y0, (za + zb) / 2, opts);
 }
 // a face's position along it for a world coordinate (x on n and s, z on w and e), and back
-const tOf = (f, v) => (f.d[0] ? (v - f.a[0]) / f.d[0] : (v - f.a[1]) / f.d[1]);
+export const tOf = (f, v) => (f.d[0] ? (v - f.a[0]) / f.d[0] : (v - f.a[1]) / f.d[1]);
 const vOf = (f, t) => (f.d[0] ? f.a[0] + f.d[0] * t : f.a[1] + f.d[1] * t);
 const bayOf = (L) => L / Math.max(1, Math.round(L / BAY));
 const snap = (f, at) => {

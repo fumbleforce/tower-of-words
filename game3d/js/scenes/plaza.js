@@ -6,7 +6,8 @@
 // canteen's door, its terrace and a short link from the terrace to the circle. Built with the shared outdoor kit
 // (scenes/outdoor/): the ground in plaza/ground.js, the planting and edges in plaza/green.js, lamps, benches, the
 // notice board and the terrace in plaza/furniture.js, the fountain in plaza/fountain.js, the canteen and the shop
-// street in plaza-buildings.js, the east lane on to the dorm street (backdrop) in plaza/east-lane.js. Everything else
+// street in plaza-buildings.js, the east lane on to the dorm street (backdrop) in plaza/east-lane.js, the back lane
+// behind the canteen with the clinic (backdrop) in plaza/north-lane.js. Everything else
 // comes from the layout through buildSkyline. Palette and light are the forecourt's; after work the lamps, the lights
 // round the basin, the canteen, the shops and the town's windows light up.
 import * as THREE from 'three';
@@ -18,7 +19,7 @@ import { drain } from '../perf/slice.js';
 import { mergeStaticSteps } from './merge-static.js';
 import { Parts } from './outdoor/parts.js';
 import { lightSet } from './outdoor/furniture.js';
-import { canteen, shopStreet, clinicCross } from './plaza-buildings.js';
+import { canteen, shopStreet } from './plaza-buildings.js';
 import { buildGround } from './plaza/ground.js';
 import { buildGreen } from './plaza/green.js';
 import {
@@ -34,8 +35,10 @@ import { fountain } from './plaza/fountain.js';
 import * as P from './plaza/plan.js';
 import { buildEastLane } from './plaza/east-lane.js';
 import { BLOCK_IDS } from './plaza/east-plan.js';
+import { buildNorthLane } from './plaza/north-lane.js';
+import { NORTH_IDS } from './plaza/north-plan.js';
 
-const { F, R, BASIN, LZ, HALF, LINK, CANTEEN, SHOPS, DOOR_X, TERRACE, TERRACE_S, building, local, onLane, inRect } = P;
+const { F, R, BASIN, LZ, HALF, LINK, CANTEEN, SHOPS, DOOR_X, TERRACE, TERRACE_S, building, onLane, inRect } = P;
 const CHUNK = 'plaza';
 
 // the lane's centre z along the plaza, and a point on it
@@ -85,6 +88,7 @@ export function* plazaSteps() {
   buildBikes(root, nav);
   yield;
   const east = buildEastLane(root, p, lights); // backdrop: the lane on east to the dorm street
+  const north = buildNorthLane(root, lights); // backdrop: the back lane behind the canteen, the clinic
   p.build(root);
   const lit = lights.build(root, { poolY: 0.028 }); // over the circle's stones
   const flock = pigeons(root, PIGEON_HOME, { n: 6 });
@@ -105,14 +109,9 @@ export function* plazaSteps() {
     ],
   });
   yield;
-  clinicCross(
-    root,
-    [...local(building('clinic').rect.slice(0, 2)), ...local(building('clinic').rect.slice(2))],
-    building('clinic'),
-  );
   const sky = yield* skylineSteps(root, CHUNK, {
     layout: LAYOUT,
-    skip: ['canteen', 'shops_north', 'arcade', 'shops_south', ...BLOCK_IDS],
+    skip: ['canteen', 'shops_north', 'arcade', 'shops_south', ...BLOCK_IDS, ...NORTH_IDS],
   });
   yield* mergeStaticSteps(root);
 
@@ -144,6 +143,8 @@ export function* plazaSteps() {
     chairs, // the terrace chairs, standing or stacked for closing (places/canteen-closing.js)
     update(dt, t) {
       water.update(t);
+      north.update(sun);
+      east.update(sun);
     },
     evening() {
       lit.evening();
@@ -152,6 +153,7 @@ export function* plazaSteps() {
       water.evening();
       street.glass.emissiveIntensity = 0.55;
       east.evening();
+      north.evening();
       sky.onPeriod('evening');
     },
     skyline: sky.stats,
