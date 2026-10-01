@@ -3,6 +3,8 @@
 #
 #   tools/worktree.sh new <name>      make .claude/worktrees/<name> on a new branch wt/<name> from local main, then setup
 #   tools/worktree.sh setup [<path>]  give a worktree what the game and tools need that isn't in git (default: this one)
+#   tools/worktree.sh gone [--remove] list each worktree as gone (nothing in it that isn't on main) or keep (and why);
+#                                     --remove deletes the gone ones and their branches
 #
 # Claude Code's Agent tool makes its own worktrees (isolation: "worktree"; .claude/settings.json sets the base to
 # local HEAD and symlinks node_modules, .worktreeinclude copies .env). Run `setup` in those too: it's idempotent.
@@ -88,8 +90,49 @@ new() {
   setup "$wt"
 }
 
+gone() {  # gone [--remove]: which worktrees hold nothing that isn't on main, and (with --remove) delete them
+  local main; main=$(main_root .)
+  local remove=0; [[ "${1:-}" == --remove ]] && remove=1
+  local wt="" branch="" lock="" freed=0
+  check() {
+    [[ -n "$wt" && "$wt" != "$main" ]] || return 0
+    [[ -d "$wt" ]] || { echo "gone          $wt: the folder is missing (--remove prunes it)"; return 0; }
+    local why="" size
+    size=$(du -sh "$wt" 2>/dev/null | cut -f1 || true)
+    if [[ -z "$branch" ]]; then why="detached HEAD"
+    elif [[ "$lock" =~ pid\ ([0-9]+) ]] && kill -0 "${BASH_REMATCH[1]}" 2>/dev/null; then why="its agent is still running (pid ${BASH_REMATCH[1]})"
+    elif compgen -G "/proc/[0-9]*/cwd" >/dev/null && find /proc/[0-9]*/cwd -maxdepth 0 -lname "$wt*" 2>/dev/null | grep -q .; then why="a process is working in it"
+    elif git -C "$main" cherry main "$branch" | grep -q '^+'; then why="$(git -C "$main" cherry main "$branch" | grep -c '^+') commit(s) not on main"
+    else
+      # uncommitted edits to tracked files, and untracked files that aren't links into the main checkout
+      local dirty; dirty=$(git -C "$wt" status --porcelain --untracked-files=all | while IFS= read -r l; do
+        local f="${l:3}"; [[ "$l" == '??'* && -L "$wt/$f" && "$(readlink "$wt/$f")" == "$main/"* ]] || echo "$f"; done | wc -l)
+      (( dirty == 0 )) || why="$dirty uncommitted file(s)"
+    fi
+    if [[ -n "$why" ]]; then
+      echo "keep    $size  ${wt#"$main"/}  ($branch): $why"
+    elif (( remove )); then
+      git -C "$main" worktree remove --force --force "$wt" && git -C "$main" branch -D "$branch" >/dev/null \
+        && echo "removed $size  ${wt#"$main"/}  ($branch)"
+    else
+      echo "gone    $size  ${wt#"$main"/}  ($branch): everything is on main"
+    fi
+  }
+  while IFS= read -r line; do
+    case "$line" in
+      "worktree "*) check; wt="${line#worktree }"; branch=""; lock="" ;;
+      "branch "*) branch="${line#branch refs/heads/}" ;;
+      locked*) lock="$line" ;;
+    esac
+  done < <(git -C "$main" worktree list --porcelain)
+  check
+  if (( remove )); then git -C "$main" worktree prune
+  else echo "(tools/worktree.sh gone --remove deletes the 'gone' ones and their branches)"; fi
+}
+
 case "${1:-}" in
   new) shift; new "$@" ;;
   setup) shift; setup "$@" ;;
-  *) sed -n '2,6p' "$0" | sed 's/^# \{0,1\}//'; exit 2 ;;
+  gone) shift; gone "$@" ;;
+  *) sed -n '2,8p' "$0" | sed 's/^# \{0,1\}//'; exit 2 ;;
 esac
