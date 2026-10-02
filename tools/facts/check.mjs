@@ -5,7 +5,7 @@
 //   node tools/facts/check.mjs --game     print what the game has, to help write or fix a doc
 //
 // Areas: cast.md (people, names on screen, likes, portraits), places.md (things, spots, zones, who is there when,
-// small moments), words.md (every word), systems.md (the drinks), stories/*.md (cast, nodes, words taught, flags),
+// small moments, creatures), words.md (every word), systems.md (the drinks), stories/*.md (cast, nodes, words taught, flags),
 // and every story node belonging to a storyline or a place's small moments.
 // Rows or items marked "(to build)" or "(to remove)" are decided but not done yet: while the game still differs
 // they're listed as pending and don't fail the check; once the game matches, the check asks for the mark to go.
@@ -15,6 +15,7 @@ import { DEFAULT_SPEAKERS, PORTRAITS, ITEMS, PLACE_DETAILS, SHARED_THINGS, isEng
 import { storyBondGate } from '../../game3d/js/bonds/gates.js';
 import { PLACE_FILES } from '../../game3d/js/places/definitions.js';
 import { CHUNKS, PLACES, PLAN_PATHS } from '../../game3d/js/scenes/island-layout.js';
+import { CREATURES } from '../../game3d/js/creatures/catalog.js';
 import fs from 'node:fs';
 import path from 'node:path';
 import { pathToFileURL, fileURLToPath } from 'node:url';
@@ -334,6 +335,29 @@ function checkPlaces(game) {
     for (const p of Object.keys(sch)) if (!here.includes(p)) bad(file, `${place}: the story schedules \`${p}\`, who has no body there`);
   }
 }
+// places.md: each outdoor place's "### Creatures" table (Id, Kind, How many, When) against creatures/catalog.js
+function checkCreatures() {
+  const file = 'docs/game/places.md';
+  const md = read(path.join(DOCS, 'places.md'));
+  const heads = [...md.matchAll(/^## .*\(`([a-z_]+)`\)\s*$/gm)].map((m) => m[1]);
+  for (const place of heads) {
+    const sec = section(md, (h) => h.endsWith(`(\`${place}\`)`), 2, file);
+    const rows = tableIn(section(sec, (h) => h === 'Creatures', 3, file));
+    const game = CREATURES[place];
+    if (!rows && !game) continue;
+    if (!rows) { bad(file, `${place}: the game has creatures (game3d/js/creatures/catalog.js), there is no "### Creatures" table`); continue; }
+    if (!game) { bad(file, `${place}: "### Creatures" lists creatures, game3d/js/creatures/catalog.js has none there`); continue; }
+    const seen = new Set();
+    for (const r of rows) {
+      const c = id(r.Id); seen.add(c);
+      const g = game.find((x) => x.id === c);
+      if (!g) { bad(file, `${place}: creatures \`${c}\` aren't in game3d/js/creatures/catalog.js`); continue; }
+      for (const [col, want] of [['Kind', g.kind], ['How many', String(g.n)], ['When', g.when]])
+        if (val(r[col]).replace(/`/g, '') !== want) bad(file, `${place}, creatures \`${c}\`: ${col.toLowerCase()} is "${want}" in the game, "${val(r[col])}" in the doc`);
+    }
+    for (const g of game) if (!seen.has(g.id)) bad(file, `${place}: the game has creatures \`${g.id}\` (${g.kind}), "Creatures" doesn't`);
+  }
+}
 // a schedule as text, the way the doc writes it: "hidden all day", or "morning `racks`, evening hidden"
 const PERIODS = ['early', 'morning', 'lunch', 'afternoon', 'evening'];
 function schedOf(per) {
@@ -444,7 +468,7 @@ if (DUMP) {
   console.log('\nWords taught (type steps):'); for (const [sf, N] of Object.entries(game.nodes)) for (const [n, v] of Object.entries(N)) for (const t of v.types) console.log(`  ${t.word} from ${t.from} in ${sf} ${n}`);
   process.exit(0);
 }
-for (const [area, fn] of [['cast', checkCast], ['places', checkPlaces], ['trips', checkTrips], ['island', checkIsland], ['island plan', checkIslandPlan], ['words', checkWords], ['systems', checkSystems], ['stories', checkStories]]) {
+for (const [area, fn] of [['cast', checkCast], ['places', checkPlaces], ['creatures', checkCreatures], ['trips', checkTrips], ['island', checkIsland], ['island plan', checkIslandPlan], ['words', checkWords], ['systems', checkSystems], ['stories', checkStories]]) {
   try { fn(game); } catch (e) { bad(area, e.message); }
 }
 if (pending.length) { console.log(`\nPending (decided, not done yet):`); for (const p of pending) console.log('  ' + p); }

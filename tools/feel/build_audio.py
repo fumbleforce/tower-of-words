@@ -37,9 +37,13 @@ TARGET = {
     'printer': -39, 'phone_far': -40, 'typing': -40,
     # beds (under the music: -34.5)
     'bed_train': -35, 'bed_station': -38, 'bed_lobby': -36, 'bed_office': -39, 'bed_lift': -36,
+    # outdoors (tools/feel/nature.py): sparrows and wind by day, crickets after work, under everything; a flock of
+    # pigeons taking off near Eric
+    'bed_birds': -41, 'bed_insects': -42, 'wings_flap': -34,
 }
 BEDS = {k for k in TARGET if k.startswith('bed_')}
 PLUCKED = {'guitar_practice', 'zip', 'buzz'}
+NATURE = {'bed_birds', 'bed_insects', 'wings_flap'}
 # picked Stable Audio takes: name -> (raw file stem, start s, end s or None). Filled in after listening to the
 # spectrograms and scores; anything not here comes from synth.py.
 PICKS = json.load(open(os.path.join(os.path.dirname(__file__), 'picks.json'))) if os.path.exists(os.path.join(os.path.dirname(__file__), 'picks.json')) else {}
@@ -82,7 +86,7 @@ def load(name):
     else:
         p = f'{SYN}/{name}.wav'
         if not os.path.exists(p): return None, None, None
-        y, sr = sf.read(p, always_2d=True); src = f"synthesised (tools/feel/{'hum' if name.startswith('bath_') else 'pluck' if name in PLUCKED else 'synth'}.py)"
+        y, sr = sf.read(p, always_2d=True); src = f"synthesised (tools/feel/{'hum' if name.startswith('bath_') else 'pluck' if name in PLUCKED else 'nature' if name in NATURE else 'synth'}.py)"
     if y.shape[1] == 1: y = np.repeat(y, 2, 1)
     if sr != SR: y = librosa.resample(y.T, orig_sr=sr, target_sr=SR).T; sr = SR
     return y, sr, src

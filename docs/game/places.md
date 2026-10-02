@@ -4,13 +4,25 @@ Day 1 has eight places: the monorail (`train`), Honsha station’s security room
 
 Elsewhere: the island as a whole is in [setting.md](setting.md); the people in [cast.md](cast.md); what happens in a place as part of a storyline is in [stories/](stories/); how places look (palette, light, style) in [art-and-sound.md](art-and-sound.md). The hooks a story can call in each place (doors, the gate, the copier) are in game3d/story/FORMAT.md.
 
-The tables are checked by `node tools/facts/check.mjs`: things and their labels, spots, seats, zones, who has a body in each place and the story's schedule for them, and the small-moment nodes. Coordinates: x runs left to right on screen, z from the back (negative) toward the camera; a unit is about a metre and a half.
+The tables are checked by `node tools/facts/check.mjs`: things and their labels, spots, seats, zones, who has a body in each place and the story's schedule for them, the small-moment nodes, and the creatures. Coordinates: x runs left to right on screen, z from the back (negative) toward the camera; a unit is about a metre and a half.
 
 ## Places decided but not built
 
 The company city has dorms, a canteen, shops, a bar and a university ([setting.md](setting.md)); only the places in the list below are planned, and only the `##` sections further down are built. One line per planned place: name, id, what it is.
 
 The picked full-island layout is [island-map-4](../../reviews/island-map-4/review.json). Only the day-1 route is to be built, one chunk at a time, using the game's existing palette rather than the map's saturated colours. The plaza and dorm courtyard chunks replaced the earlier single outdoor `path` proposal. The rest of the island's south half is planned for day 2 in [island.md](island.md) (2026-10-02): every place there, its doors, connections and a Japanese hook. Jørgen confirmed the plan on Review island-half-1 (2026-10-02, "Correct"); its districts are built one at a time: the shop street and seafront is the first (`shotengai`, below), the east lane the second (`east_lane`, below), the east coast up to the onsen the third (`east_coast`, below), the sports ground the fourth (`sports`, below), the office street the fifth (`office_quarter`, below), the harbour the sixth (`harbour`, below), the old works the seventh (`works`, below).
+
+## Birds and small animals
+
+Jørgen, 2026-10-02: "we must make the island feel more alive ... and small creatures, birds etc". The outdoor places have birds and a few small animals, listed in each place's "Creatures" table: the group's id, its kind, how many there are on the high graphics tier, and when it is about (`day` is early morning to the afternoon, `evening` is after work, `all` is both). Medium graphics, what a phone picks, shows three quarters of each group and low graphics half, at least one. They are scenery: there is nothing to use, look at or talk to, no story reads them, and they never stand in Eric's way.
+
+- Pigeons and sparrows feed as a flock on paving Eric can see. When anyone walks up close (Eric, Mio or someone else), the flock scatters: the birds take off a moment apart, some to a roof, a wall or a hedge nearby and the rest away out of sight. Ten to twenty seconds later the flock lands again on another bit of paving in view. A flock left behind out of sight moves on and lands near him again.
+- Crows sit one to a roof, a tree or a wall, look about and caw now and then. About every half minute one moves to a perch nearer Eric. A crow sitting low flies off when someone comes close.
+- Gulls circle low over the water nearest Eric (over the place itself where there is none), mostly gliding. The others sit on the water, a quay or a roof, and every so often they swap. The harbour's gulls after work only sit.
+- Cats sit up on a wall, a planter or a bench, or at the foot of a wall, looking out over the street. The tail swishes and flicks, and the head follows Eric while he is near. None of them is Tama ([stories/tama.md](stories/tama.md)).
+- Butterflies loop over lawns and planting. Red dragonflies (akatombo, it is October) hover and then dart a little way.
+- When a group's time of day ends it flies off, or slips away where Eric can't see; when its time comes it flies in.
+- Where they can be is surveyed from each built place by game3d/tools/creature-perches.mjs, which writes game3d/js/creatures/perches.js. Run it again when a place's geometry changes; `--check` says whether any stored point has moved. Their sounds are in [art-and-sound.md](art-and-sound.md).
 
 ## Getting between places
 
@@ -259,6 +271,15 @@ Kuro works the head office reception all day. The two from Sales appear inside t
 | `to_plaza` | Reach or use the east lane | Eric walks on to the fountain plaza. |
 | `kuro`, `ohayo_kuro`, `yoroshiku_kuro` | Talk to Kuro, or greet her | A polite morning welcome and a point toward the lifts; after work, お疲れさまです and a bow. She returns おはよう in the morning and よろしく politely at either time. |
 
+### Creatures
+
+| Id | Kind | How many | When | Where |
+|---|---|---|---|---|
+| `pigeons` | pigeon | 6 | `day` | On the forecourt's paving and the lane to the head office. |
+| `sparrows` | sparrow | 4 | `day` | Round the benches and the hedges by the garden court. |
+| `crows` | crow | 2 | `all` | On the station's and the office blocks' roofs, the trees and the walls. |
+| `butterflies` | butterfly | 2 | `day` | Over the garden court and the planting. |
+
 ## Fountain plaza (`plaza`)
 
 The second outdoor chunk of island-map-4, east of the forecourt, built at the map's scale from the island layout (2026-09-30) with the forecourt's outdoor kit, palette and light (rebuilt the same day). The camera looks north and follows Eric. The round plaza is about 23 across (35 m), paved in rings of stone: a warm apron round the fountain, a dark band, pale granite, a dark ring line, a greyer outer field and a dark border ring. Two axes cross at the fountain: the lane east-west, the canteen's door north-south (paths laid out 2026-09-30 after Jørgen's "the entering and exiting paths are not aligned, you got that funky extra path around it for some reason, and the fountain plaza extends onto the restaurant(?)'s tiles"). The fountain: a wide open stone basin about 8.6 across with a blue-grey floor under clear water, coins scattered over the floor near the rim, and a two-tier centrepiece with a small jet on top whose bowls spill in thin curtains. The water moves: glints drift over it, the curtains fall and rings of ripples spread from where they land. A bilingual sign set into the rim's outer face, a little east of the front, reads コインを入れないで PLEASE DON'T THROW COINS. Six pigeons by the south-west rim peck, bob their heads as they walk about, turn and make small hops; when Eric comes within about two steps they all flutter up and fly off out of view, and a while after he has moved away they glide back in and land where they were. The lane from head office, grey brick between pale borders like the forecourt's lane, runs straight in from the west on the fountain's axis and meets the circle square on; it leaves the circle on the same axis on the east side and runs on east toward the dorms. The lane's ends run in under the circle's dark border ring, which crosses each mouth as a threshold. Along both sides of both lanes a planted verge: a kerbed bed of ground cover with a low hedge, and behind it on the grass a zelkova avenue every 4 (set back so nothing hides Eric on the lane); post lamps on each lane's south edge at every other gap between the trees. All round the plaza a kerbed ring bed with a clipped hedge at its back and a ring of cherries every 22.5°, open only for the two lanes and the canteen link, with two maples flanking the link and drifts of cosmos and grasses along the south arc. The furniture is symmetric about both axes: a pair of benches in each quarter just inside the border ring faces the fountain, a tree behind each bench and a lamp between them, the sorted bins beside the north-west and south-west pairs, a bike parked by the north-east pair and a dropped photo by the north-west one (a find, [systems.md](systems.md), Finds). On the canteen's axis at the south of the circle, where the ring has low shrubs instead of a tree, a notice board with a small hood and notices pinned on both faces faces the fountain. Reading it holds its posts up close as papers pinned on the board (mundane notices, their words in game3d/story/finds.js). A pair of lamps stands in the ring bed either side of each opening and either side of the notice board. Eight lights are set flush in the dark band round the basin. North of the plaza stands the canteen: two storeys, a glazed ground floor with the doors on the fountain's axis under a canopy sign (しょくどう CANTEEN) and teal-and-white striped awnings over the other bays, a blue-grey roof with a parapet and plant. In front of it the terrace, in large pale slabs, with five tables under teal and pale umbrellas; a seat-height wall runs along its whole south side, open only on the door's axis, where a short link in the lanes' brick and borders crosses a strip of lawn and the ring bed to the circle; raised beds with a pine close its ends. South of the plaza a lawn with two small groups of trees, then a footpath and a rack of bikes along the backs of the shop street (described under the shop street below). On the lawns round the plaza, four connected beds of low ground cover, mixed shrubs and grasses follow the outer ring and the lane arms, turning toward the footpath behind the shops at the south. Groups of mixed trees stand within them; a strip of lawn separates the beds from the paving, buildings and lane verges. The town beyond comes from the island layout, every building on the same grid. After work the lamps come on with pools of light on the lanes and the plaza's edge, the flush lights round the basin light the middle of the circle, the basin floor glows faintly from under the water so the coins keep their shine, and the canteen, the shops and the town's windows are lit. The terrace is closing: the chairs stand upside down on the tables, except at the table nearest the link, where one still stands at its south side and a canteen worker (`canteen_worker`, unnamed, in a white top and the canteen's teal apron) carries its neighbour over, then wipes down the next table east. Chairs Eric and the worker stack stay stacked for the evening. The tables and the chairs standing round them block only their own floor, so Eric can walk right up to the last chair. East lane (backdrop, 2026-10-01): the lane does not end at the plaza's east mouth. It runs on east to a jog, turns north at a square of herringbone brick, runs east along the top and turns south again as the dorm street, which passes the dorm courtyard's gate; each turn is a square as wide as the lane, closed by a pale border on its outer sides, and kerbs edge the paving wherever it meets grass. Eric can walk the lane on east past the cross walk, up the cross walk to block_e1's door (#162), and down it to the south walk, where a finger sign on the lawn points east along it: Shop street 商店街 →. Walking on along the south walk takes him to the shop street; walking on east along the lane, before work is over, takes him into the east lane (below), where the rest of this ground is walked. Inside the jog is a pocket park: a kerbed lawn with a clipped hedge round it, opened for two walks of pale slabs that cross at a square of loose pale gravel with one big zelkova, four benches facing it, two lamps, and a cherry or a clipped pine in each lawn quarter. A third street, in the lane's brick, leaves the top leg north between block_e1 and block_e3 on the park's north-south axis, with zelkovas every 4 down its west side and lamps on its east. A walk crosses the lane between two avenue trees from block_e1's door to m_e2's; beside it a paved bay holds a bench looking down the walk, and block_e1 has a rack of five bikes on a paved pad along its front. A south walk runs along the fronts of m_e1 and r8, and the shop street's walk comes out of the arcade's east mouth past the izakaya's door to the dorm street, which ends at a bed. East of the dorm street the plaza shows the dorm courtyard plainly (its paving, the walled and planted front bed open at the gate, the garden's trees, the drinks machines, bench, lamps, bike shelter and garbage cage, one low roof for the laundry, hall and sento, and Eric's block with balconies) and the dorm cluster beyond, described under the dorm courtyard. Eight small blocks stand along it, backdrop only, each a plinth, floor bands, windows on every face and a flat roof with a parapet and plant (the two shops under tiled roofs), with its ground floor saying what it is and a light over its door: block_e1 (two storeys) and block_e3 (three) have a glazed entrance under a canopy; block_e1 is the company's new-staff training centre, its sign standing on the canopy (けんしゅう NEW STAFF TRAINING, in the canteen's style), and its door is locked on day 1; m_e1 (two) a glazed café front between piers with an awning over each bay but the door's; m_e2 (one), the izakaya and the ramen shop a shopfront and a door hung with an indigo noren; r8 (two), the barber, a shopfront and a glass door without one; r9 (two) a plain door and a small window. The named shops (the café, the liquor and rice shop, the barber, and Amakawa Travel on the back lane) carry their signs, described under the east lane below. Short walks lead from the street to the doors of block_e3, r9 and the ramen shop. After work the glass of the blocks lights up, and the lamps along the streets and the park's two corner lamps come on with pools of light. The sun's shadow reaches only the blocks nearest the plaza. No cars.
@@ -313,6 +334,17 @@ Nobody lives here yet.
 | `to_forecourt` | Use or walk into the lane's west end | Eric walks back to the forecourt. |
 | `to_shops` | Use or walk into the south walk past the finger sign | Eric walks on to the shop street. |
 
+### Creatures
+
+| Id | Kind | How many | When | Where |
+|---|---|---|---|---|
+| `pigeons` | pigeon | 8 | `day` | On the paving round the fountain. |
+| `sparrows` | sparrow | 4 | `day` | Round the benches and in the hedges. |
+| `crows` | crow | 2 | `all` | On the fountain's top, the roofs and the trees. |
+| `butterflies` | butterfly | 3 | `day` | Over the lawns. |
+| `dragonflies` | dragonfly | 3 | `day` | Over the lawns. |
+| `cat` | cat | 1 | `evening` | A grey tabby on a wall or a bench. |
+
 ## Shop street and seafront (`shotengai`)
 
 The first district of the island's south half built to walk (issue #173, after Jørgen's "Correct" on Review island-half-1, 2026-10-02; its places are in [island.md](island.md), "Shop street and seafront"). The chunk is turned so its camera looks west, down the arcade from its east mouth, a little lower than the plaza's; over the alleys and down the rows' west end it steepens so the rows don't hide Eric. Eric comes in from the plaza along the dorm street, turning into the shop walk past the izakaya's door (Getting between places).
@@ -365,6 +397,17 @@ Nobody yet.
 | `shut` | Go in at any named shop's door | The door is shut; a card on the glass says 準備中: not open yet. |
 | `to_plaza` | Use or walk into the shop walk's east end, before work is over | Eric walks back to the plaza. |
 | `to_dorms` | Use or walk into the shop walk's east end, after work | Eric walks up the dorm street to the dorm courtyard. |
+
+### Creatures
+
+| Id | Kind | How many | When | Where |
+|---|---|---|---|---|
+| `pigeons` | pigeon | 5 | `day` | On the shop street and the seafront. |
+| `sparrows` | sparrow | 3 | `day` | On the paving and the planters. |
+| `gulls` | gull | 3 | `day` | Over the sea off the seafront, and on the water. |
+| `crows` | crow | 2 | `all` | On the shop roofs. |
+| `shop_cat` | cat | 1 | `all` | A ginger and white cat by a shop wall or on a planter. |
+| `night_cat` | cat | 1 | `evening` | A black cat on a wall. |
 
 ## East lane (`east_lane`)
 
@@ -425,6 +468,16 @@ Nobody yet.
 | `to_sports` | Use or walk on up the north street past the back lane | Eric walks on north to the sports ground. |
 | `to_dorms` | Use or walk into the dorm courtyard's gate, after work | Eric walks in to the dorm courtyard. |
 
+### Creatures
+
+| Id | Kind | How many | When | Where |
+|---|---|---|---|---|
+| `sparrows` | sparrow | 5 | `day` | On the lane and in the hedges. |
+| `crows` | crow | 2 | `all` | On the roofs and the trees. |
+| `butterflies` | butterfly | 2 | `day` | Over the verges and gardens. |
+| `dragonflies` | dragonfly | 2 | `day` | Over the verges. |
+| `cat` | cat | 1 | `evening` | A grey tabby on a wall. |
+
 ## East coast (`east_coast`)
 
 The third district of the island's south half built to walk (issue #173, after Jørgen's "Correct" on Review island-half-1; its places are in [island.md](island.md), "Dorms" and "Sports and baths"). It runs from the dorm street east along the dorm row to the dorms' sea terrace, north up the east coast and on to the onsen's front. The dorm row, the terrace and the blocks round the inner court are the dorm cluster the plaza, the east lane and the dorm courtyard show as backdrop (under the dorm courtyard below), built by the same code, with the courtyard and Eric's block as the plaza shows them. Eric comes in from the east lane, off the dorm street (Getting between places).
@@ -475,6 +528,16 @@ Nobody yet.
 | `shut` | Go in at the onsen's door | The door is shut; a card on the glass says 準備中: not open yet. |
 | `to_east_lane` | Use or walk into the dorm row's west end | Eric walks back to the dorm street. |
 | `to_sports` | Use or walk west along the courts walk | Eric walks on west to the sports ground. |
+
+### Creatures
+
+| Id | Kind | How many | When | Where |
+|---|---|---|---|---|
+| `gulls` | gull | 5 | `day` | Over the sea, on the water and on the sea wall. |
+| `sparrows` | sparrow | 3 | `day` | On the coast walk and in the hedges. |
+| `crows` | crow | 2 | `all` | On the roofs and the trees. |
+| `butterflies` | butterfly | 2 | `day` | Over the grass. |
+| `dragonflies` | dragonfly | 3 | `day` | Over the grass. |
 
 ## Gym and pool (`sports`)
 
@@ -534,6 +597,17 @@ Nobody yet.
 | `to_coast` | Use or walk into the courts walk's east end | Eric walks on east to the onsen path, in the east coast. |
 | `to_offices` | Use or walk west along the office street past the gym's corner | Eric walks on west along the office street, in the office quarter. |
 
+### Creatures
+
+| Id | Kind | How many | When | Where |
+|---|---|---|---|---|
+| `pigeons` | pigeon | 5 | `day` | On the sports lane and the pool walk. |
+| `sparrows` | sparrow | 4 | `day` | On the paths and in the hedges. |
+| `crows` | crow | 3 | `all` | On the gym's roof, the fences and the trees. |
+| `butterflies` | butterfly | 2 | `day` | Over the grass. |
+| `dragonflies` | dragonfly | 4 | `day` | Over the grass. |
+| `cat` | cat | 1 | `evening` | A black cat on a wall. |
+
 ## Office street (`office_quarter`)
 
 The fifth district of the island's south half built to walk (issue #173, after Jørgen's "Correct" on Review island-half-1; its places are in [island.md](island.md), "Office quarter"). It runs from the gym's corner, where the sports lane turns north by gym_link, west along the office street past the fronts of Amakawa Life, Logistics, Electric and Trading on its north side, with a walk north on the shed street's line to Amakawa Foods, a walk between Logistics and Life to the court before Amakawa Construction, and the bank's door a few steps down the quarter street. Eric comes in from the sports ground, west along the sports lane and round the corner, and from the harbour, east along the street (Getting between places); west past Amakawa Trading the street goes on into the harbour (`harbour`, below), which builds the street's west end with the same code. The gym is the sports ground's, built by the same code, and so is the corner: both chunks lay it, and the sports ground also builds the street in front of Amakawa Life and Construction.
@@ -590,6 +664,15 @@ Nobody yet.
 | `shut` | Go in at any office's or the bank's door | The door is shut; a card on the glass says 準備中: not open yet. |
 | `to_sports` | Use or walk into the sports lane east of the corner | Eric walks back east to the sports ground. |
 | `to_harbour` | Use or walk into the street's west end | Eric walks on west along the street, into the harbour. |
+
+### Creatures
+
+| Id | Kind | How many | When | Where |
+|---|---|---|---|---|
+| `pigeons` | pigeon | 6 | `day` | On the office street. |
+| `sparrows` | sparrow | 3 | `day` | On the street and in the planting. |
+| `crows` | crow | 2 | `all` | On the office blocks' canopies and roofs, and the trees. |
+| `cat` | cat | 1 | `evening` | A grey tabby on a wall or a planter. |
 
 ## Harbour (`harbour`)
 
@@ -715,6 +798,16 @@ Nobody yet.
 | `shut` | Go in at the server hall's, the recycling centre's or Amakawa Research's door | The door is shut; a card on the glass says 準備中: not open yet. |
 | `to_harbour` | Use or walk into the lane's south end | Eric walks back down into the supply yard. |
 | `to_street` | Use or walk into the street's south end | Eric walks back down onto the office street. |
+
+### Creatures
+
+| Id | Kind | How many | When | Where |
+|---|---|---|---|---|
+| `gulls` | gull | 7 | `day` | Over the harbour, on the water, the quays and the roofs. |
+| `night_gulls` | gull | 3 | `evening` | Sitting on the water, the quays and the roofs. |
+| `pigeons` | pigeon | 4 | `day` | On the street and in the yard. |
+| `crows` | crow | 2 | `all` | On the roofs and the trees. |
+| `harbour_cat` | cat | 1 | `all` | A ginger and white cat on a quay wall or a bench. |
 
 ## The lift (`lift`)
 
@@ -861,6 +954,15 @@ Played in the evening, after work. Nobody else is here.
 | `arrive` | Arrive | Goal line: "Go in through the dorm entrance. Your room is 203." Its pin on the hall doors. |
 | `hall` | Step inside the doors, or use them | Goal line: "Room 203 is on 2F. The stairs are through the back." Its pin on the passage. |
 | `go_up` | Reach or use the passage | The trip up to `dorms`. |
+
+### Creatures
+
+Grok agreed to these (G-0033): they keep 3 m clear of the sento doorway, the hall doors, the mailbox bank and the stairs passage.
+
+| Id | Kind | How many | When | Where |
+|---|---|---|---|---|
+| `sparrows` | sparrow | 4 | `day` | On the court's paving and the front bed's wall. |
+| `cat` | cat | 1 | `evening` | A grey tabby on the front bed's wall or a bench. |
 
 ## Eric's dorm room (`dorms`)
 

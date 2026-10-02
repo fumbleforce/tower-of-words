@@ -7,10 +7,20 @@
 //   gate    the lobby murmur, and card readers beeping now and then at the gates
 //   lift    during the ride between the lobby and the office (the player is hidden in the car)
 //   office  air conditioning, typing somewhere, a printer, a phone ringing across the floor; quieter after work
+//   outdoors  sparrows and a light wind by day, crickets after work (and the forecourt keeps the station's air);
+//           a flock of pigeons scattering near Eric is heard (creatureCall)
 // Beds loop as overlapping copies with an equal-power crossfade, so the seam never shows (MP3 padding included).
 import { ctx, running, bus, load, isMuted, onDip } from './sfx.js';
 
-const BEDS = { train: 'bed_train', station: 'bed_station', gate: 'bed_lobby', office: 'bed_office', lift: 'bed_lift' };
+const BEDS = {
+  train: 'bed_train',
+  station: 'bed_station',
+  gate: 'bed_lobby',
+  office: 'bed_office',
+  lift: 'bed_lift',
+  birds: 'bed_birds',
+  insects: 'bed_insects',
+};
 // one-shots per scene: file, gain, seconds between (random in range), a stereo spread
 const EVENTS = {
   gate: [
@@ -190,7 +200,11 @@ function scene(game) {
     return { train: 0.3 + 0.7 * speed, station: doors * (st.arrived ? 1 : 0.4) };
   }
   if (name === 'gate') return { gate: 1 };
-  if (name === 'forecourt') return { station: 0.6 };
+  // outdoors, where there are birds and animals (js/creatures/): sparrows and wind by day, crickets after work
+  if (p.creatures) {
+    const outside = p.creatures.evening() ? { insects: 1 } : { birds: 1 };
+    return name === 'forecourt' ? { station: 0.6, ...outside } : outside;
+  }
   if (name === 'office') return { office: game.sim && game.sim.period === 'evening' ? 0.7 : 1 };
   return {};
 }
@@ -235,6 +249,18 @@ async function playAmb(f, gain, pan = 0, at = 0) {
   }
   n.connect(out());
   s.start(c.currentTime + at);
+}
+
+// a bird's call or a flock's wings, from js/creatures/ (world.js sound): gain 0 to 1 by distance, pan by where it is
+// on screen; each kind no more than once in a while, so a scattering flock is one sound
+const CALLS = { flap: { f: ['wings_flap'], gap: 1.5 } };
+const callAt = {};
+export function creatureCall(name, gain, pan) {
+  const c = CALLS[name],
+    now = performance.now() / 1000;
+  if (!c || isMuted() || !running() || now - (callAt[name] || 0) < c.gap) return;
+  callAt[name] = now;
+  playAmb(c.f[Math.floor(Math.random() * c.f.length)], gain, pan);
 }
 
 export function update(game, dt) {

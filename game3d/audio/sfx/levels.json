@@ -378,5 +378,35 @@
   "seconds": 1.0,
   "kb": 15,
   "source": "synthesised (tools/feel/pluck.py)"
+ },
+ "bed_birds": {
+  "target_lufs": -41,
+  "measure": "integrated",
+  "encoded_integrated": -41.4,
+  "encoded_momentary_max": -36.8,
+  "peak_dbfs": -27.8,
+  "seconds": 27.0,
+  "kb": 264,
+  "source": "synthesised (tools/feel/nature.py)"
+ },
+ "bed_insects": {
+  "target_lufs": -42,
+  "measure": "integrated",
+  "encoded_integrated": -42.4,
+  "encoded_momentary_max": -38.3,
+  "peak_dbfs": -29.5,
+  "seconds": 27.0,
+  "kb": 264,
+  "source": "synthesised (tools/feel/nature.py)"
+ },
+ "wings_flap": {
+  "target_lufs": -34,
+  "measure": "momentary max",
+  "encoded_integrated": -37.9,
+  "encoded_momentary_max": -34.6,
+  "peak_dbfs": -22.5,
+  "seconds": 1.3,
+  "kb": 19,
+  "source": "synthesised (tools/feel/nature.py)"
  }
 }
