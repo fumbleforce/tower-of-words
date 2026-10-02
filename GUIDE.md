@@ -114,6 +114,7 @@ No text on timers, the first screen (controls only), a goal line that stays, sep
 - World style (Jørgen, 2026-09-27): flat-shaded simple 3D (docs/game/art-and-sound.md). Never mention or propose paper, cardboard, cut-out or pop-up styles in any form ("you always do and I hate it").
 - New props built with game3d/js/props.js get the world look from game3d/js/look/ (surface patterns, soft baked light, small modelled detail).
 - Places must not look empty or like a cheap RPG (Jørgen, 2026-09-26: "avoid the classic low quality RPG traps"). The trap list from the pixel era is in notes/map-design.md.
+- Every area gets nooks (Jørgen, 2026-10-02: "in all areas, make sure to carve out nooks, interesting props, locations where we could place secrets, encounters, collectibles etc."). Each place lists its nooks with stable ids in docs/game/places.md, so story and secrets can be placed there later.
 - Review pages: every option has its unique id as the card heading (e.g. sales-8301) so he can name his pick; large responsive grids (images at least about 480 to 520 px, not 2 per row), a lightbox with arrow keys, and the full prompt under each title.
 
 ## Art
