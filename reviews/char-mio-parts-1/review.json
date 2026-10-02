@@ -1,0 +1,216 @@
+{
+ "title": "Mio from parts: head and body generated separately, joined and rigged",
+ "date": "2026-10-02",
+ "by": "Claude (char-mio-parts agent)",
+ "status": "open",
+ "issue": 171,
+ "question": "Is the parts model (a11) closer to the picture than meshy-single, and worth building on?",
+ "multi": true,
+ "media": [
+  {
+   "image": "art/parts/char-mio-parts/faces-face.webp",
+   "caption": "Faces front: the target, meshy-single, then every attempt in order. Your brief on meshy-single: \"REALLY quite close, sans the dirty textures and the eyes which have tilted forward on their own little edge\"; on the cleanup: \"not good enough\"; your tip: \"generate head, body, and accessories separately in meshy/tripo and assemble+rig in blender\"."
+  },
+  {
+   "image": "art/parts/char-mio-parts/faces-face-l40.webp",
+   "caption": "The same faces from her left three-quarter (image right side turned to us)."
+  },
+  {
+   "image": "art/parts/char-mio-parts/motion-a11.webp",
+   "caption": "a11 in the live viewer: rest, your approved idle, and the walk from front, her left side and back. The idle and walk are her game clips, carried over by bone name. The hoodie hem drags with the arm swing (simple distance weights)."
+  },
+  {
+   "image": "art/parts/char-mio-parts/motion-a07.webp",
+   "caption": "a07 in the live viewer, the same clips."
+  },
+  {
+   "image": "art/parts/char-mio-parts/meshy-single/sheet.webp",
+   "caption": "meshy-single (char-mio-gen3d-1) under the same camera and light, for comparison."
+  },
+  {
+   "image": "art/parts/char-mio-parts/inputs.webp",
+   "caption": "The part pictures, cut from the target: the head with her right front lock; the body below the neck line, with that lock painted out of the hoodie (RDBT Anima inpaint, seeds 401-406, 405 used; 401-404 redrew the lock as a crystal)."
+  }
+ ],
+ "options": [
+  {
+   "id": "a01",
+   "label": "a01",
+   "image": "art/parts/char-mio-parts/a01/sheet.webp",
+   "images": [
+    "art/parts/char-mio-parts/a01/renders/front.png",
+    "art/parts/char-mio-parts/a01/renders/l45.png",
+    "art/parts/char-mio-parts/a01/renders/l90.png",
+    "art/parts/char-mio-parts/a01/renders/back.png",
+    "art/parts/char-mio-parts/a01/renders/r45.png",
+    "art/parts/char-mio-parts/a01/renders/face.png",
+    "art/parts/char-mio-parts/a01/renders/face-l40.png"
+   ],
+   "note": "Parts: head = Meshy image-to-3D (latest model, no remesh, textured in the same task, image enhancement off, 4k texture; 30 credits) from the head cut of the target picture; body = the same settings from the headless body cut, pose_mode a-pose asked (Meshy kept her arms down; 30 credits). Assembly: body scaled by its sleeve-to-sleeve width against the picture, head by its hair width, hair top where it is in the picture, neck centred on the body's neck. Nothing trimmed: Meshy closed the hood up round the missing head, so the hood swallows her chin and the green under the jaw."
+  },
+  {
+   "id": "a02",
+   "label": "a02",
+   "image": "art/parts/char-mio-parts/a02/sheet.webp",
+   "images": [
+    "art/parts/char-mio-parts/a02/renders/front.png",
+    "art/parts/char-mio-parts/a02/renders/l45.png",
+    "art/parts/char-mio-parts/a02/renders/l90.png",
+    "art/parts/char-mio-parts/a02/renders/back.png",
+    "art/parts/char-mio-parts/a02/renders/r45.png",
+    "art/parts/char-mio-parts/a02/renders/face.png",
+    "art/parts/char-mio-parts/a02/renders/face-l40.png"
+   ],
+   "note": "a01 plus one change: body vertices above the picture's collar line (850 px) across the whole hair width deleted. Chin and green hem show, but there are see-through holes beside the neck and white flecks."
+  },
+  {
+   "id": "a03",
+   "label": "a03",
+   "image": "art/parts/char-mio-parts/a03/sheet.webp",
+   "images": [
+    "art/parts/char-mio-parts/a03/renders/front.png",
+    "art/parts/char-mio-parts/a03/renders/l45.png",
+    "art/parts/char-mio-parts/a03/renders/l90.png",
+    "art/parts/char-mio-parts/a03/renders/back.png",
+    "art/parts/char-mio-parts/a03/renders/r45.png",
+    "art/parts/char-mio-parts/a03/renders/face.png",
+    "art/parts/char-mio-parts/a03/renders/face-l40.png"
+   ],
+   "note": "a02 with the trim narrowed to the face width (1400-1680 px). Smaller holes under her right jaw (image left)."
+  },
+  {
+   "id": "a04",
+   "label": "a04",
+   "image": "art/parts/char-mio-parts/a04/sheet.webp",
+   "images": [
+    "art/parts/char-mio-parts/a04/renders/front.png",
+    "art/parts/char-mio-parts/a04/renders/l45.png",
+    "art/parts/char-mio-parts/a04/renders/l90.png",
+    "art/parts/char-mio-parts/a04/renders/back.png",
+    "art/parts/char-mio-parts/a04/renders/r45.png",
+    "art/parts/char-mio-parts/a04/renders/face.png",
+    "art/parts/char-mio-parts/a04/renders/face-l40.png"
+   ],
+   "note": "a02 with the trim narrowed to the neck only (1470-1610 px). No holes, but the hood sides cover the green hem again."
+  },
+  {
+   "id": "a05",
+   "label": "a05",
+   "image": "art/parts/char-mio-parts/a05/sheet.webp",
+   "images": [
+    "art/parts/char-mio-parts/a05/renders/front.png",
+    "art/parts/char-mio-parts/a05/renders/l45.png",
+    "art/parts/char-mio-parts/a05/renders/l90.png",
+    "art/parts/char-mio-parts/a05/renders/back.png",
+    "art/parts/char-mio-parts/a05/renders/r45.png",
+    "art/parts/char-mio-parts/a05/renders/face.png",
+    "art/parts/char-mio-parts/a05/renders/face-l40.png"
+   ],
+   "note": "a03 plus a dark band (hood lining) round the back of the neck, open 35° each side at the front. It sat in front of the green underside of the back hair and covered it."
+  },
+  {
+   "id": "a06",
+   "label": "a06",
+   "image": "art/parts/char-mio-parts/a06/sheet.webp",
+   "images": [
+    "art/parts/char-mio-parts/a06/renders/front.png",
+    "art/parts/char-mio-parts/a06/renders/l45.png",
+    "art/parts/char-mio-parts/a06/renders/l90.png",
+    "art/parts/char-mio-parts/a06/renders/back.png",
+    "art/parts/char-mio-parts/a06/renders/r45.png",
+    "art/parts/char-mio-parts/a06/renders/face.png",
+    "art/parts/char-mio-parts/a06/renders/face-l40.png"
+   ],
+   "note": "a05 with the band open 80° each side. Still in front of the green."
+  },
+  {
+   "id": "a07",
+   "label": "a07",
+   "image": "art/parts/char-mio-parts/a07/sheet.webp",
+   "images": [
+    "art/parts/char-mio-parts/a07/renders/front.png",
+    "art/parts/char-mio-parts/a07/renders/l45.png",
+    "art/parts/char-mio-parts/a07/renders/l90.png",
+    "art/parts/char-mio-parts/a07/renders/back.png",
+    "art/parts/char-mio-parts/a07/renders/r45.png",
+    "art/parts/char-mio-parts/a07/renders/face.png",
+    "art/parts/char-mio-parts/a07/renders/face-l40.png"
+   ],
+   "note": "a03 plus a flat dark card just behind the back hair, from the collar up to 740 px, instead of the band. Green hem visible, holes filled. Rigged: in the live viewer."
+  },
+  {
+   "id": "a08",
+   "label": "a08",
+   "image": "art/parts/char-mio-parts/a08/sheet.webp",
+   "images": [
+    "art/parts/char-mio-parts/a08/renders/front.png",
+    "art/parts/char-mio-parts/a08/renders/l45.png",
+    "art/parts/char-mio-parts/a08/renders/l90.png",
+    "art/parts/char-mio-parts/a08/renders/back.png",
+    "art/parts/char-mio-parts/a08/renders/r45.png",
+    "art/parts/char-mio-parts/a08/renders/face.png",
+    "art/parts/char-mio-parts/a08/renders/face-l40.png"
+   ],
+   "note": "Same head, Smart Topology body (4,000 faces) instead, same trim and card as a07. The low-poly body has an open V-neck like the picture; the trim tore holes in its big faces."
+  },
+  {
+   "id": "a09",
+   "label": "a09",
+   "image": "art/parts/char-mio-parts/a09/sheet.webp",
+   "images": [
+    "art/parts/char-mio-parts/a09/renders/front.png",
+    "art/parts/char-mio-parts/a09/renders/l45.png",
+    "art/parts/char-mio-parts/a09/renders/l90.png",
+    "art/parts/char-mio-parts/a09/renders/back.png",
+    "art/parts/char-mio-parts/a09/renders/r45.png",
+    "art/parts/char-mio-parts/a09/renders/face.png",
+    "art/parts/char-mio-parts/a09/renders/face-l40.png"
+   ],
+   "note": "Smart Topology head (meshy-t2, 3,000 faces; 15 credits) on the Smart Topology body, a07's trim and card. The low-poly head loses the face: the nose juts and the eyelashes stick out as spikes."
+  },
+  {
+   "id": "a10",
+   "label": "a10",
+   "image": "art/parts/char-mio-parts/a10/sheet.webp",
+   "images": [
+    "art/parts/char-mio-parts/a10/renders/front.png",
+    "art/parts/char-mio-parts/a10/renders/l45.png",
+    "art/parts/char-mio-parts/a10/renders/l90.png",
+    "art/parts/char-mio-parts/a10/renders/back.png",
+    "art/parts/char-mio-parts/a10/renders/r45.png",
+    "art/parts/char-mio-parts/a10/renders/face.png",
+    "art/parts/char-mio-parts/a10/renders/face-l40.png"
+   ],
+   "note": "a08 without the trim (the Smart Topology body's collar already sits at the neck). Closest to the picture so far. Rigged: in the live viewer."
+  },
+  {
+   "id": "a11",
+   "label": "a11",
+   "image": "art/parts/char-mio-parts/a11/sheet.webp",
+   "images": [
+    "art/parts/char-mio-parts/a11/renders/front.png",
+    "art/parts/char-mio-parts/a11/renders/l45.png",
+    "art/parts/char-mio-parts/a11/renders/l90.png",
+    "art/parts/char-mio-parts/a11/renders/back.png",
+    "art/parts/char-mio-parts/a11/renders/r45.png",
+    "art/parts/char-mio-parts/a11/renders/face.png",
+    "art/parts/char-mio-parts/a11/renders/face-l40.png"
+   ],
+   "note": "a10 with the dark card one-sided, so it no longer shows over the hair from behind. Rigged, 104k faces in the viewer (head decimated from 1.86M faces; the stills use the full head). White flecks at the hair's back hem remain."
+  }
+ ],
+ "links": [
+  {
+   "label": "Turn a11, a10 and a07, play idle and walk, meshy-single beside her (live 3D)",
+   "href": "tools/characters/parts/viewer.html?a=a11&m=idle&c=meshy-single"
+  },
+  {
+   "label": "Credits spent (Meshy 90 of 1,525; Tripo none)",
+   "href": "reviews/char-mio-parts-1/credits.json"
+  },
+  {
+   "label": "How the part pictures were cut and painted",
+   "href": "reviews/char-mio-parts-1/inputs.json"
+  }
+ ]
+}
