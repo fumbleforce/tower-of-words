@@ -22,6 +22,7 @@ export const PLACE_EVENTS = {
   east_lane: { start: { id: 'start', source: 'engine' } },
   east_coast: { start: { id: 'start', source: 'engine' } },
   sports: { start: { id: 'start', source: 'engine' } },
+  office_quarter: { start: { id: 'start', source: 'engine' } },
   office: {
     start: { id: 'start', source: 'engine' },
     sat_down: { id: 'sat_down', source: 'place', hook: 'sitDown' },

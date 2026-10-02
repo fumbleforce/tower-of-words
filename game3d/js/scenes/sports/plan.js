@@ -6,14 +6,16 @@
 //
 //   the north street's top: from just north of the back lane, where Eric comes in from the east lane and leaves for
 //   it, up to the sports lane, with the short walk to r3's door
-//   the sports lane: west from the north street along the gym's south side to the gym's corner, where it stops for
-//   now (it goes on to the office street later); the gym's apron in front of its door
+//   the sports lane: west from the north street along the gym's south side to the gym's corner, where it turns north
+//   by gym_link into the office street's east end (office-quarter/plan.js LINK_WALKS, laid by office-quarter/link.js,
+//   which the office quarter walks too); the gym's apron in front of its door
 //   the pool walk: north from the sports lane between the gym and the pool's fence to the shower pavilion's door
 //   the courts walk: east from the pool walk along the pool's and the courts' fences, behind the north residence, to
 //   the onsen path's foot (the east coast chunk's), with the short walks to the courts' gate and the residence's
 //   door on one axis across it
 import * as LAYOUT from '../island-layout.js';
 import * as E from '../plaza/east-plan.js';
+import * as O from '../office-quarter/plan.js';
 
 export const CHUNK = 'sports';
 const AT = LAYOUT.CHUNKS[CHUNK].at;
@@ -46,7 +48,6 @@ export const DOOR_X = mid(GATE_WALK[0], GATE_WALK[1]); // the courts' gate and t
 export const PAV_DOOR_Z = POOL_WALK[2] + 1.2; // the pavilion's door, on its west face at the pool walk's end
 const R3_Z = mid(R3[2], R3[3]);
 export const R3_SPUR = [NS[1], R3[0], R3_Z - 0.75, R3_Z + 0.75];
-export const LANE_END = GYM[0] - 1; // the lane is walked from here east
 export const NORTH_END = BACK[2] - 4; // the north street is walked from here north
 export const APRON = [GX - 2.4, GX + 2.4, GYM[3], LANE[2]]; // in front of the gym's door
 
@@ -54,7 +55,8 @@ export const APRON = [GX - 2.4, GX + 2.4, GYM[3], LANE[2]]; // in front of the g
 const I_WALKS = [
   [NS[0], NS[1], LANE[3] - 0.1, NORTH_END],
   [R3_SPUR[0] - 0.1, R3_SPUR[1] - 0.15, R3_SPUR[2], R3_SPUR[3]],
-  [LANE_END, LANE[1], LANE[2], LANE[3]],
+  [LANE[0], LANE[1], LANE[2], LANE[3]],
+  ...O.LINK_WALKS,
   [APRON[0], APRON[1], APRON[2] + 0.15, APRON[3] + 0.1],
   [POOL_WALK[0], POOL_WALK[1], POOL_WALK[2], LANE[2] + 0.1],
   [POOL_WALK[1] - 0.1, COURTS_WALK[1] - 2.2, COURTS_WALK[2], COURTS_WALK[3]],
@@ -63,12 +65,13 @@ const I_WALKS = [
 ];
 export const WALKS = I_WALKS.map(rect);
 
-// the furniture, in the island frame: post lamps on the lane's south verge every 8, on the pool walk's east edge and
+// the furniture, in the island frame: post lamps on the lane's south verge every 8 (the one by the gym's corner is
+// link.js's), on the pool walk's east edge and
 // on the courts walk's south side, all off the walks; the north street's own lamps on its east edge (the east lane's,
 // plaza/east-plan.js), which stand on it; benches in two bays on the courts walk's south side, looking over it at the
 // pool; finger signs at the lane's corner and at the courts walk's start
 export const LAMPS = [
-  ...[41, 53, 64].map((x) => [x, LANE[3] + 0.45]),
+  ...[53, 64].map((x) => [x, LANE[3] + 0.45]),
   ...[-56, -66, -76, -86].map((z) => [POOL_WALK[1] + 0.4, z]),
   ...[67, 81, 97].map((x) => [x, COURTS_WALK[3] + 0.45]),
 ];
@@ -79,20 +82,28 @@ export const SIGNS = {
   courts: [COURTS_WALK[0] + 0.7, COURTS_WALK[3] + 0.45], // the courts walk's start, pointing east to the onsen
 };
 const post = ([x, z], r = 0.16) => [x - r, x + r, z - r, z + r];
-export const FURNITURE = STREET_LAMPS.map((p) => post(p)).map(rect);
+export const FURNITURE = [...STREET_LAMPS, ...O.LINK_LAMPS, O.SIGNS.corner].map((p) => post(p)).map(rect);
 
 // the shut doors: the gym's on its south face, the pool pavilion's on its west face (local), and where Eric stands to
 // try each (step)
 export const DOORS = [
   { id: 'gym', local: pt([GX, GYM[3]]), step: pt([GX - 0.35, GYM[3] + 1.0]) },
-  { id: 'pool', local: pt([PAVILION[0], PAV_DOOR_Z]), step: pt([PAVILION[0] - 1.0, PAV_DOOR_Z + 0.3]) },
+  {
+    id: 'pool',
+    local: pt([PAVILION[0], PAV_DOOR_Z]),
+    step: pt([PAVILION[0] - 1.0, PAV_DOOR_Z + 0.3]),
+  },
 ];
 
 // the ways out ({ edge, lane, zone, in } as the east lane's EXITS): south down the north street to the east lane;
-// east along the courts walk to the onsen path's foot, to the east coast (in: where he walks to, back from there)
+// east along the courts walk to the onsen path's foot, to the east coast (in: where he walks to, back from there);
+// west along the lane, round the gym's corner and west into the office street, to the office quarter (back from
+// there he comes the other way round, east along the lane from where the office quarter's way out ends: arrive)
 const NSX = mid(NS[0], NS[1]),
   CZ = mid(COURTS_WALK[2], COURTS_WALK[3]),
-  CE = COURTS_WALK[1] - 2.2;
+  CE = COURTS_WALK[1] - 2.2,
+  SZ = mid(O.STREET[2], O.STREET[3]),
+  LZ = mid(LANE[2], LANE[3]);
 export const EXITS = {
   east_lane: {
     edge: pt([NSX, NORTH_END - 0.2]),
@@ -104,6 +115,13 @@ export const EXITS = {
     lane: pt([CE - 1.6, CZ]),
     zone: rect([CE - 2.2, CE + 1, COURTS_WALK[2] - 0.5, COURTS_WALK[3] + 0.5]),
     in: pt([CE - 3.6, CZ]),
+  },
+  office_quarter: {
+    edge: pt([O.STUB_X - 1.2, SZ]),
+    lane: pt([O.STUB_X + 0.2, SZ]),
+    zone: rect([O.STUB_X - 2, O.STUB_X + 1, O.STREET[2] - 0.5, O.STREET[3] + 0.5]),
+    arrive: pt([O.LINK_E - 1.0, LZ]),
+    in: pt([O.LINK_E + 2.4, LZ]),
   },
 };
 // where Eric comes in from the east lane (and from anywhere a trip doesn't say): up the north street, walking north
@@ -126,7 +144,10 @@ export const BOUNDS = (() => {
 // turns north-east so the pavilion's door faces it ([z from, z to] it eases over); along the courts walk it looks
 // east from a little north of the walk, steeply, so the north residence south of the walk doesn't hide Eric ([x
 // from, x to] it eases over, north of [z from, z to], which only the courts walk and its two short walks are)
+// west of the gym's corner, on the office street's stub, it turns to the office street's look ([x from, x to]), as
+// the office quarter has it there (office-quarter/plan.js POSES)
 export const TURNS = {
+  street: { x: [pt([O.TURN_X[0], 0])[0], pt([O.TURN_X[1], 0])[0]] },
   pavilion: { z: [pt([0, GYM[2] - 1])[1], pt([0, GYM[2] - 6])[1]] },
   courts: {
     x: [pt([POOL_WALK[1] + 1.5, 0])[0], pt([POOL_WALK[1] + 5, 0])[0]],

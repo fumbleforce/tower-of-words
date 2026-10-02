@@ -98,12 +98,21 @@
         }
       },
       "sports": {
-        "calls": 49,
-        "tris": 83575,
+        "calls": 52,
+        "tris": 103392,
         "gpu": {
           "medianMs": 16.7,
           "p99Ms": 16.8,
-          "build": "1002-0951-221790b6"
+          "build": "1002-1039-ff930324"
+        }
+      },
+      "office_quarter": {
+        "calls": 33,
+        "tris": 85547,
+        "gpu": {
+          "medianMs": 16.7,
+          "p99Ms": 16.8,
+          "build": "1002-1039-ff930324"
         }
       }
     }
@@ -206,12 +215,21 @@
         }
       },
       "sports": {
-        "calls": 41,
-        "tris": 80175,
+        "calls": 43,
+        "tris": 93881,
         "gpu": {
           "medianMs": 16.7,
           "p99Ms": 16.8,
-          "build": "1002-0951-221790b6"
+          "build": "1002-1039-ff930324"
+        }
+      },
+      "office_quarter": {
+        "calls": 26,
+        "tris": 81471,
+        "gpu": {
+          "medianMs": 16.7,
+          "p99Ms": 16.8,
+          "build": "1002-1039-ff930324"
         }
       }
     }
@@ -314,12 +332,21 @@
         }
       },
       "sports": {
-        "calls": 48,
-        "tris": 82724,
+        "calls": 50,
+        "tris": 96392,
         "gpu": {
           "medianMs": 16.7,
           "p99Ms": 16.8,
-          "build": "1002-0951-221790b6"
+          "build": "1002-1039-ff930324"
+        }
+      },
+      "office_quarter": {
+        "calls": 33,
+        "tris": 83440,
+        "gpu": {
+          "medianMs": 16.7,
+          "p99Ms": 16.8,
+          "build": "1002-1039-ff930324"
         }
       }
     }

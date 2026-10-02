@@ -1,6 +1,6 @@
 # The island's south half
 
-The south half of Amakawa, mapped for day 2 and later: every building and outdoor place in it, who works, lives or spends time there, its doors, whether it can be entered later, how it connects, and one idea for using Japanese there. Jørgen asked for it on 2026-10-02: "I want mapping of half the island so we can make an interesting day 2 eventually". Nothing here is built unless the row says so. Built places are described in [places.md](places.md) and only linked from here. Jørgen confirmed this half as the set to build out (Review island-half-1, 2026-10-02: "Correct"); the districts are built one at a time: the shop street and seafront is built (chunk `shotengai`), and so are the east lane (chunk `east_lane`), the east coast from the dorms' sea terrace to the onsen's front (chunk `east_coast`), and the sports ground from the north street's top along the gym, the pool and the courts to the onsen path (chunk `sports`). The island as a whole (what is on it, no cars, no commute) is in [setting.md](setting.md).
+The south half of Amakawa, mapped for day 2 and later: every building and outdoor place in it, who works, lives or spends time there, its doors, whether it can be entered later, how it connects, and one idea for using Japanese there. Jørgen asked for it on 2026-10-02: "I want mapping of half the island so we can make an interesting day 2 eventually". Nothing here is built unless the row says so. Built places are described in [places.md](places.md) and only linked from here. Jørgen confirmed this half as the set to build out (Review island-half-1, 2026-10-02: "Correct"); the districts are built one at a time: the shop street and seafront is built (chunk `shotengai`), and so are the east lane (chunk `east_lane`), the east coast from the dorms' sea terrace to the onsen's front (chunk `east_coast`), the sports ground from the north street's top along the gym, the pool and the courts to the onsen path (chunk `sports`), and the office street from the gym's corner past the offices and the bank (chunk `office_quarter`). The island as a whole (what is on it, no cars, no commute) is in [setting.md](setting.md).
 
 The hooks are ideas for using Japanese in each place. Story, dialogue and secrets are Codex's ([collab/PROTOCOL.md](../../collab/PROTOCOL.md)).
 
@@ -10,7 +10,7 @@ The south half. It holds the whole day-1 route (station, head office, plaza, dor
 
 The edge runs east from the west coast north of the old power plant to the works street, south to the park's south edge, east along it, and north round the onsen to the east coast. The south half is a little more than half the land.
 
-The map: `?map=1`, then M, then "Day 2 plan". The planned streets, courts, piers, green, coast and the one new building are data in game3d/js/scenes/island-plan.js, in the island frame of [places.md](places.md) ("Where the places sit on the island"). They are drawn on the map only. When an area is built, its entries move into the layout proper with its chunk (the east coast's walks, the onsen's court, the tennis courts, the onsen's grounds and the coast past the onsen are in game3d/js/scenes/island-baths.js; the sports lane, the pool walk, the courts walk, the two short walks off it and the pool's deck in game3d/js/scenes/island-sports.js). `node tools/facts/check.mjs` checks the place ids and names below, and the street list, against that file.
+The map: `?map=1`, then M, then "Day 2 plan". The planned streets, courts, piers, green, coast and the one new building are data in game3d/js/scenes/island-plan.js, in the island frame of [places.md](places.md) ("Where the places sit on the island"). They are drawn on the map only. When an area is built, its entries move into the layout proper with its chunk (the east coast's walks, the onsen's court, the tennis courts, the onsen's grounds and the coast past the onsen are in game3d/js/scenes/island-baths.js; the sports lane, the pool walk, the courts walk, the two short walks off it and the pool's deck in game3d/js/scenes/island-sports.js; the office street, gym_link and the walks to Amakawa Foods and Amakawa Construction in game3d/js/scenes/island-offices.js). `node tools/facts/check.mjs` checks the place ids and names below, and the street list, against that file.
 
 ## How it fits together
 
@@ -32,13 +32,11 @@ The planned ones (island-plan.js PLAN_PATHS). Built and backdrop paths are in is
 
 | Id | Kind | Runs |
 |---|---|---|
-| `office_street` | Street | East-west through the office quarter, from the supply yard to the gym. |
 | `shed_street_far` | Street | The shed street carried on north from behind the head office wing to the office street. |
 | `quarter_street` | Street | North from the cross street behind the tower (the tower's rear door) to the office street. |
 | `back_lane_west` | Street | The back lane carried west past the canteen's loading yard to the quarter street. |
 | `works_street` | Street | North from the office street up the quarter's west side to the works yard. |
 | `harbour_walk` | Walk | The west coast walk carried north to the office street. |
-| `gym_link` | Street | From the office street's east end south along the gym's west side to the sports lane. |
 | `supply_yard` | Court | The supply quay's yard: warehouse, crane, containers; the quay along its south edge. |
 | `supply_pier` | Pier | South off the yard's west end, where the freighter ties up. |
 | `ferry_landing` | Court | In front of the ferry terminal, at the head of the ferry pier. |
@@ -68,15 +66,15 @@ One row per place. Where: the building ids in island-layout.js (or island-plan.j
 
 | Id | Place | Where | What and who | Ways in | Later | Day 2 hook |
 |---|---|---|---|---|---|---|
-| `trading_office` | Amakawa Trading (天川商事) | `w1` | Four storeys at the harbour end of the office street: imports, exports, trade with the mainland. | Door on the office street | Enter | Exchanging business cards (名刺): a name and a title, 部長, 課長. |
+| `trading_office` | Amakawa Trading (天川商事) | `w1` | Four storeys at the harbour end of the office street: imports, exports, trade with the mainland. Its front is built and walked past in `office_quarter` ([places.md](places.md)), the door shut. | Door on the office street | Enter | Exchanging business cards (名刺): a name and a title, 部長, 課長. |
 | `print_shop` | Print shop (印刷所) | `w3` | Three storeys. Prints the island's signs, menus, forms and the company newsletter; presses on the ground floor. | Door on the shed street | Enter | Proofreading a sign or a menu to find the one wrong kana. |
-| `foods_office` | Amakawa Foods (天川食品) | `m1` | Four storeys. The food division, which runs the canteen and stocks the shops; a test kitchen on the ground floor. | Door on a walk north from the office street | Enter | Tasting and saying how it is: おいしい, 甘い, 辛い, しょっぱい. |
-| `electric_office` | Amakawa Electric (天川電機) | `m2` | Five storeys. Made most of the island's machines in the nineties and still keeps their manuals. | Door on the office street | Enter | A manual or a machine plate: 電源, 入, 切, 注意. |
-| `logistics_office` | Amakawa Logistics (天川物流) | `m3` | Four storeys. Runs the supply quay, the ferry's freight and the cargo-bike deliveries round the island. | Door on the office street | Enter | A delivery slip and counting boxes: 一箱, 二箱, 三箱. |
-| `construction_office` | Amakawa Construction (天川建設) | `m4` | Five storeys behind m3 and m5. Keeps the island's buildings standing; hard hats on hooks inside the door. | Door on a walk north from the office street between m3 and m5 | Enter | Safety signs: 危険, 立入禁止, 工事中. |
-| `insurance_office` | Amakawa Life (天川生命) | `m5` | Three storeys. The life insurer every employee is signed up with; quiet and carpeted. | Door on the office street | Enter | Polite counter phrases: お名前は, 少々お待ちください. |
+| `foods_office` | Amakawa Foods (天川食品) | `m1` | Four storeys. The food division, which runs the canteen and stocks the shops; a test kitchen on the ground floor. Its front is built in `office_quarter`, the door shut. | Door on a walk north from the office street, on the shed street's line | Enter | Tasting and saying how it is: おいしい, 甘い, 辛い, しょっぱい. |
+| `electric_office` | Amakawa Electric (天川電機) | `m2` | Five storeys. Made most of the island's machines in the nineties and still keeps their manuals. Its front is built in `office_quarter`, the door shut. | Door on the office street | Enter | A manual or a machine plate: 電源, 入, 切, 注意. |
+| `logistics_office` | Amakawa Logistics (天川物流) | `m3` | Four storeys. Runs the supply quay, the ferry's freight and the cargo-bike deliveries round the island. Its front is built in `office_quarter`, the door shut. | Door on the office street | Enter | A delivery slip and counting boxes: 一箱, 二箱, 三箱. |
+| `construction_office` | Amakawa Construction (天川建設) | `m4` | Five storeys behind m3 and m5. Keeps the island's buildings standing; hard hats on hooks inside the door. Its front is built in `office_quarter`, the door shut. | Door on a court at the end of a walk north from the office street between m3 and m5 | Enter | Safety signs: 危険, 立入禁止, 工事中. |
+| `insurance_office` | Amakawa Life (天川生命) | `m5` | Three storeys. The life insurer every employee is signed up with; quiet and carpeted. Its front is built in `office_quarter`, the door shut. | Door on the office street | Enter | Polite counter phrases: お名前は, 少々お待ちください. |
 | `personnel_office` | Personnel (人事部) | `m6` | Five storeys north of the canteen's yard: hiring, transfers and the new-staff intake. | Door on the walk from the canteen's loading yard (built as backdrop) | Enter | The transfers notice (異動): names, departments, dates. |
-| `bank` | Company bank (天川銀行) | `b_h` | A long two-storey branch. Salaries land here, and the ATM corner stays open late. | Door and ATM corner on the office street | Enter | The ATM screen: お引き出し, 残高, 暗証番号, amounts in 円. |
+| `bank` | Company bank (天川銀行) | `b_h` | A long two-storey branch. Salaries land here, and the ATM corner stays open late. Its front is built in `office_quarter`, the door shut. | Door and ATM corner on its east face, in the quarter street's mouth at the office street | Enter | The ATM screen: お引き出し, 残高, 暗証番号, amounts in 円. |
 
 ### Plaza, canteen and clinic
 
@@ -136,7 +134,7 @@ The shop rows have fifteen bays each, numbered 0 to 14 from the west (island-sou
 
 | Id | Place | Where | What and who | Ways in | Later | Day 2 hook |
 |---|---|---|---|---|---|---|
-| `gym` | Gym (体育館) | `gym` | The arched hall: badminton and basketball courts, a weights room, changing rooms. Clubs in the evening. Its outside is built and its front walked past in `sports` ([places.md](places.md)), the door shut. | Main door on the sports lane | Enter | The club board and booking sheet: 曜日, 時間, club names. |
+| `gym` | Gym (体育館) | `gym` | The arched hall: badminton and basketball courts, a weights room, changing rooms. Clubs in the evening. Its outside is built and its front walked past in `sports` and `office_quarter` ([places.md](places.md)), the door shut. | Main door on the sports lane | Enter | The club board and booking sheet: 曜日, 時間, club names. |
 | `pool` | Pool and showers (プール) | `pool_hall`, `pool_deck` | An outdoor 25 m pool, and the low shower pavilion on its deck with separate men's and women's changing rooms. Open in summer. The deck, the pool and the pavilion's outside are built in `sports`, seen through the fence from the pool walk; the pavilion's door is shut. | Pavilion door at the end of the pool walk | Enter | The pool rules (飛び込み禁止) and the changing room signs (男子, 女子). |
 | `tennis_courts` | Tennis courts (テニスコート) | `court_hall`, `courts` | Two hard courts and a one-storey clubhouse; the courts and their fence are built in `east_coast` and `sports`, seen from the onsen path and the courts walk; the gate is shut. | Gate from the courts walk | Outside | Keeping score in Japanese numbers. |
 | `onsen` | Onsen (温泉) | `onsen_main`, `onsen_pav` | On the east shore: a red entrance gate, a reception hall, separate men's and women's bath courtyards with outdoor pools over the sea, a pavilion up the slope. The gate, the court, the hall's front and the bath courtyards' fences are built in `east_coast` ([places.md](places.md)), the door shut. | The red gate at the end of the onsen path | Enter | Blue 男湯 and red 女湯 noren, the bathing rules, the milk machine (牛乳). |

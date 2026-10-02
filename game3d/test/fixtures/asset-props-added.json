@@ -631,6 +631,190 @@
     ]
   },
   {
+    "id_": "prop/office_quarter/bank",
+    "kind": "prop",
+    "name": "Bank",
+    "paths": [
+      "game3d/js/places/office-quarter.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "office-quarter.js things.bank",
+    "place": "office_quarter",
+    "used": [
+      "Office street: tap target 'Bank'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "office-quarter"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/office_quarter/construction_office",
+    "kind": "prop",
+    "name": "Amakawa Construction",
+    "paths": [
+      "game3d/js/places/office-quarter.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "office-quarter.js things.construction_office",
+    "place": "office_quarter",
+    "used": [
+      "Office street: tap target 'Amakawa Construction'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "office-quarter"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/office_quarter/electric_office",
+    "kind": "prop",
+    "name": "Amakawa Electric",
+    "paths": [
+      "game3d/js/places/office-quarter.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "office-quarter.js things.electric_office",
+    "place": "office_quarter",
+    "used": [
+      "Office street: tap target 'Amakawa Electric'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "office-quarter"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/office_quarter/foods_office",
+    "kind": "prop",
+    "name": "Amakawa Foods",
+    "paths": [
+      "game3d/js/places/office-quarter.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "office-quarter.js things.foods_office",
+    "place": "office_quarter",
+    "used": [
+      "Office street: tap target 'Amakawa Foods'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "office-quarter"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/office_quarter/insurance_office",
+    "kind": "prop",
+    "name": "Amakawa Life",
+    "paths": [
+      "game3d/js/places/office-quarter.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "office-quarter.js things.insurance_office",
+    "place": "office_quarter",
+    "used": [
+      "Office street: tap target 'Amakawa Life'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "office-quarter"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/office_quarter/logistics_office",
+    "kind": "prop",
+    "name": "Amakawa Logistics",
+    "paths": [
+      "game3d/js/places/office-quarter.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "office-quarter.js things.logistics_office",
+    "place": "office_quarter",
+    "used": [
+      "Office street: tap target 'Amakawa Logistics'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "office-quarter"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/office_quarter/sports_lane",
+    "kind": "prop",
+    "name": "To the gym and pool",
+    "paths": [
+      "game3d/js/places/office-quarter.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "office-quarter.js things.sports_lane",
+    "place": "office_quarter",
+    "used": [
+      "Office street: tap target 'To the gym and pool'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "office-quarter"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/office_quarter/trading_office",
+    "kind": "prop",
+    "name": "Amakawa Trading",
+    "paths": [
+      "game3d/js/places/office-quarter.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "office-quarter.js things.trading_office",
+    "place": "office_quarter",
+    "used": [
+      "Office street: tap target 'Amakawa Trading'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "office-quarter"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
     "id_": "prop/office/chief_desk",
     "kind": "prop",
     "name": "Mr. Mori's desk",
@@ -728,7 +912,7 @@
       "room": "office",
       "anchor": [
         5.2,
-        1.0,
+        1,
         2.4
       ],
       "spot": [
@@ -761,7 +945,7 @@
       "room": "office",
       "anchor": [
         2.6,
-        1.0,
+        1,
         2.4
       ],
       "spot": [
@@ -1133,6 +1317,29 @@
     "place": "sports",
     "used": [
       "Gym and pool: tap target 'To the north street'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "sports"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/sports/office_street",
+    "kind": "prop",
+    "name": "To the office street",
+    "paths": [
+      "game3d/js/places/sports.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "sports.js things.office_street",
+    "place": "sports",
+    "used": [
+      "Gym and pool: tap target 'To the office street'"
     ],
     "view": {
       "type": "room",

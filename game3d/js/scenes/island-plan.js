@@ -37,13 +37,6 @@ export const PLAN_BUILDINGS = [
 // paths and each other square on.
 export const PLAN_PATHS = [
   {
-    id: 'office_street',
-    kind: 'lane',
-    rect: [-62, -55.5, 36, -52.5],
-    detail:
-      'The office quarter’s main street, east-west: from the supply quay’s yard past the office blocks to the gym.',
-  },
-  {
     id: 'shed_street_far',
     kind: 'lane',
     rect: [-20.75, -52.5, -17.75, -27.4],
@@ -72,12 +65,6 @@ export const PLAN_PATHS = [
     kind: 'walk',
     rect: [-42.6, -52.5, -40.6, -27.4],
     detail: 'The west coast walk (layout coast_path) carried north to the office street.',
-  },
-  {
-    id: 'gym_link',
-    kind: 'lane',
-    rect: [33, -55.5, 36, -46.5],
-    detail: 'The office street’s east end, turning south along the gym’s west side to the sports lane.',
   },
   {
     id: 'supply_yard',
@@ -129,7 +116,7 @@ export const PLAN_PATHS = [
 export const PLAN_GREEN = [
   {
     id: 'quarter_park',
-    rect: [-4, -48, 0, -36],
+    rect: [-4, -44.5, 0, -36],
     detail: 'A strip of lawn and trees west of the quarter street.',
   },
 ];

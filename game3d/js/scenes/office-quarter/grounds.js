@@ -1,0 +1,136 @@
+// The office street's paving and planting west of the gym's corner (office-quarter/plan.js; the corner is link.js),
+// in the island frame:
+//   the street: the lane's brick between pale borders, running on west past the bollards to the works street; its
+//   north side kerbed, open for the forecourts and the two walks north, low beds between them; its south side a
+//   verge (a kerb, ground cover and a low hedge, no trees, so nothing stands between Eric and the camera), with
+//   post lamps behind it, two bench bays looking over the street at the offices, and crossings at the side streets
+//   the side streets' mouths: the quarter street's walked a few steps south to the bank's door, the shed street's
+//   and the harbour walk's laid a little way, each with bollards across (they go on south, not walked yet)
+//   the lawns: belts of trees between and behind the blocks north of the street, and set back from the verge south
+//   of it, where the camera looks over them; a small wood on the quarter park
+//   a finger sign at the street's west end, pointing back east to the gym and the pool
+import { laneField, verge } from '../outdoor/lane.js';
+import { GRANITE } from '../outdoor/paving.js';
+import { kerb } from '../outdoor/edges.js';
+import { keyaki, sakura, maple, pine, ginkgo, hedge, bed } from '../outdoor/planting.js';
+import { lamps, bench, bollard, fingerSign } from '../outdoor/furniture.js';
+import { belt, shrubBed } from '../dorm-court/cluster-yards.js';
+import { walk, tree } from '../plaza/east-lane.js';
+import { ORIGIN, PAVE_W } from './link.js';
+import * as P from './plan.js';
+
+const { STREET: S, QUARTER: Q, SHED, HARBOUR_WALK: HW, FOODS_WALK: FW, CON_WALK: CW } = P;
+const V = 1.1, // a verge's depth
+  WORKS = [-50, -47], // the works street's mouth on the north side (island.md; planned)
+  W0 = WORKS[0];
+const SLABS = { pattern: 'grid', module: [0.6, 0.6], tones: GRANITE.mid };
+
+// the north side's openings along the street: the forecourts, the two walks, the works street
+const NORTH_OPEN = [...P.FORECOURTS.map((f) => [f.rect[0], f.rect[1]]), [FW[0], FW[1]], [CW[0], CW[1]], WORKS].sort(
+  (a, b) => a[0] - b[0],
+);
+const SOUTH_CROSS = [
+  [HW[0], HW[1]],
+  [SHED[0], SHED[1]],
+  [Q[0], Q[1]],
+];
+
+const inside = ([a, b], [x0, x1]) => a >= x0 && b <= x1;
+
+// the street between x0 and x1 (office-quarter/plan.js; the sports ground lays its east end too, scenes/sports.js):
+// its brick; its north kerb, open for the forecourts and the walks, and beds in the stretches between; its south
+// verge, open at the side streets' mouths and the bench bays, the benches in them and the lamps behind it
+export function* streetSteps(pv, p, lights, [x0, x1]) {
+  laneField(pv, [x0, x1, S[2], S[3]], { origin: ORIGIN });
+  const bays = P.BAYS.filter((r) => inside(r, [x0, x1]));
+  for (const [a, b] of bays) pv.field([a, b, S[3], S[3] + V], { ...SLABS, origin: [a, S[3]] });
+  yield;
+  const open = NORTH_OPEN.filter(([a, b]) => b > x0 && a < x1);
+  kerb(p, [x0, S[2]], [x1, S[2]], { off: -0.08, gaps: open });
+  let x = x0;
+  for (const [a, b] of [...open, [x1, x1]]) {
+    if (a - x > 1.2) shrubBed(p, [x + 0.15, a - 0.15, S[2] - 1.0, S[2] - 0.12], 'nwe', 81 + Math.round(x));
+    x = Math.max(x, b);
+  }
+  const v0 = Math.max(x0, HW[0] - 1.5);
+  verge(p, [v0, S[3]], [x1, S[3]], 's', {
+    crossings: SOUTH_CROSS.filter((r) => inside(r, [v0, x1])),
+    bays,
+    seed: 83,
+  });
+  for (const [a, b] of bays) bench(p, (a + b) / 2, S[3] + V - 0.4, Math.PI, { len: 1.5 });
+  const pts = P.LAMPS.filter(([lx]) => lx > x0 && lx < x1);
+  lamps(lights, p, pts, { pool: 1.2, poolShift: [0, -0.6] }); // the pools on the street, not the lawn behind
+  yield;
+}
+
+function* paving(pv) {
+  laneField(pv, [Q[0], Q[1], S[3], P.QUARTER_END + 1.6], { along: 'z', origin: ORIGIN });
+  laneField(pv, [SHED[0], SHED[1], S[3], S[3] + 3], { along: 'z', origin: ORIGIN });
+  laneField(pv, [WORKS[0], WORKS[1], S[2] - 3, S[2]], { along: 'z', origin: ORIGIN });
+  walk(pv, [HW[0], HW[1], S[3], S[3] + 3], false);
+  yield;
+  // the bank's apron between its east face and the quarter street
+  const bank = P.block('b_h').rect;
+  pv.field([bank[1], Q[0], bank[2], bank[3]], { ...SLABS, origin: [bank[1], bank[2]] });
+}
+
+function* edges(p, signRoot) {
+  // the side streets' mouths: kerbs down their open sides past the verge
+  const mouth = (r, z1, sides) => {
+    if (sides.includes('w')) kerb(p, [r[0], S[3] + V], [r[0], z1], { off: -0.08 });
+    if (sides.includes('e')) kerb(p, [r[1], S[3] + V], [r[1], z1], { off: 0.08 });
+  };
+  mouth(Q, P.QUARTER_END + 1.6, 'e');
+  mouth(SHED, S[3] + 3, 'we');
+  // bollards across the street's west end and the two mouths
+  for (const { a, b } of P.BOLLARDS) {
+    const n = Math.max(2, Math.round(Math.hypot(b[0] - a[0], b[1] - a[1]) / 0.66));
+    for (let i = 0; i <= n; i++) bollard(p, a[0] + ((b[0] - a[0]) * i) / n, a[1] + ((b[1] - a[1]) * i) / n);
+  }
+  fingerSign(signRoot, p, ...P.SIGNS.west, [
+    { text: 'Gym', sub: '体育館', dir: 1 },
+    { text: 'Pool', sub: 'プール', dir: 1 },
+  ]);
+  // a bed between the bank's north face and the verge, its hedge along the face
+  const bank = P.block('b_h').rect;
+  bed(p, [bank[0], bank[1], S[3] + V + 0.1, bank[2] - 0.05], { y: 0.04 });
+  hedge(p, [bank[0] + 0.3, bank[2] - 0.45], [bank[1] - 0.3, bank[2] - 0.45], {
+    w: 0.45,
+    h: 0.5,
+    seed: 85,
+  });
+  yield;
+}
+
+// the lawns' trees: belts between and behind the blocks north of the street, set back south of it; a few standing
+// free either side of the foods walk
+function* planting(p) {
+  const n = S[2]; // the street's north edge
+  for (const [r, kinds, seed] of [
+    [[-26.9, -24.6, -67, n - 2.2], [keyaki, sakura], 101],
+    [[-15.8, -10.8, -71, n - 2.2], [sakura, maple, keyaki], 103],
+    [[1.0, 5.3, -70, n - 2.4], [ginkgo, keyaki], 105],
+    [[-40, -28.5, -74, -63], [pine, keyaki, maple], 107],
+    [[-9.5, 14.2, -77, -65], [keyaki, sakura, pine], 109],
+    [[-23.5, -16.8, -80, -71.5], [maple, sakura], 111],
+    [[-39.5, -22, S[3] + 3.6, S[3] + 6.6], [keyaki, sakura, maple], 113],
+    [[-16.5, -8.4, S[3] + 3.6, S[3] + 10], [ginkgo, keyaki], 115],
+    [[7.5, 30.5, S[3] + 3.6, S[3] + 6.6], [sakura, keyaki, maple], 117],
+    [[-3.6, -0.4, -44, -36.5], [maple, sakura], 119],
+  ])
+    yield* belt(p, r, kinds, { seed, pitch: 3.3 });
+  for (const [kind, x, z, s, seed] of [
+    [sakura, -22.4, -61.2, 0.95, 121],
+    [maple, -17.2, -60.4, 0.9, 122],
+  ])
+    tree(p, kind, x, z, s, seed);
+}
+
+// c: cells (dorm-court/cells.js); lights: a lightSet; signRoot: the group the finger sign's boards go in
+export function* groundsSteps(c, lights, signRoot) {
+  yield* streetSteps(c.paver, c.parts, lights, [W0, PAVE_W]);
+  yield* paving(c.paver);
+  yield* edges(c.parts, signRoot);
+  yield* planting(c.parts);
+}
