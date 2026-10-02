@@ -115,6 +115,7 @@ function mergeFlat(list) {
 
 // a bench: facing is the way the sitter looks (0 = +z, south; Math.PI = north)
 export function bench(p, x, z, facing = 0, { len = 1.6, back = true } = {}) {
+  (p.seats ||= []).push({ x, z, facing, len }); // where people can sit (Parts.build hands it on; crowd/still.js)
   const c = Math.cos(facing),
     s = Math.sin(facing);
   // local (u across the seat, v toward where the sitter looks) to world

@@ -16,6 +16,7 @@ import * as trips from '../trips.js';
 import { installFinds, findSpotSteps, syncFinds } from '../finds/index.js';
 import { installBoot, installPlacePlugin, watchPlacePlugins } from '../plugins.js';
 import { installCreatures } from '../creatures/index.js';
+import { attachCrowd } from '../crowd/index.js';
 
 const MUSIC = { train: 'calm', gate: 'lively', office: 'office' };
 // places the draw-call pass (js/perf/batch.js) runs on
@@ -57,6 +58,7 @@ export function createPlaceLifecycle(
         await nextFrame();
         attachLift(game, place); // walk-in lift (places/lift.js)
         await nextFrame();
+        await attachCrowd(game, place, name); // the outdoor places' passers-by, before the draw-call pass (crowd/)
         // surface patterns, baked light (look/index.js); materials patched in place, in slices between frames so the
         // place being played doesn't stall (js/perf/slice.js)
         await sliced(lookSteps(place, game));
@@ -137,6 +139,7 @@ export function createPlaceLifecycle(
     )
       sim.period = place.defaultPeriod;
     applySchedule(game, { instant: true });
+    place.ambient?.enter(sim.period); // the crowd for this period, everyone at once (crowd/index.js)
     ui.clock(
       sim.date,
       {
