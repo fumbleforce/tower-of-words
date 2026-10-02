@@ -152,7 +152,7 @@ export async function runRoute(browser, route, { base, viewport }) {
         await page.addInitScript(saved => {
           if (!sessionStorage.getItem('branch-seeded')) {
             localStorage.setItem('amakawa-day1-save', JSON.stringify(saved));
-            localStorage.setItem('amakawa-settings', JSON.stringify({ textSpeed: 'instant', voiceOn: false, reduceMotion: true }));
+            localStorage.setItem('amakawa-settings', JSON.stringify({ textSpeed: 'instant', voiceOn: false, reduceMotion: true, privateMode: false }));
             sessionStorage.setItem('branch-seeded', '1');
           }
         }, saved);
