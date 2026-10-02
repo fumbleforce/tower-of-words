@@ -75,6 +75,8 @@ await withBrowserJob('chair-check', async (browser) => {
         g.ui.cycleInfo?.next?.();
         await new Promise((r) => setTimeout(r, 200));
       }
+      g.ui.openActs(g.near); // as a tap or Tab on it does
+      await new Promise((r) => setTimeout(r, 100));
       const act = document.querySelector('#actMenu');
       const rows = [...act.querySelectorAll('.act')].map((b) => ({ cls: b.className, text: b.querySelector('.lb')?.textContent || '' }));
       return { id, enabled, where, near: g.near?.id, hidden: act.hidden, head: act.querySelector('.hd')?.textContent || '', rows };

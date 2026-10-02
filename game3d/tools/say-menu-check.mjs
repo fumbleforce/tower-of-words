@@ -79,6 +79,8 @@ await withBrowserJob('say-menu', async (b) => {
         G.walker.sync?.();
         G.place.cam?.snap?.(G.player.root.position);
         await new Promise((r) => setTimeout(r, 400));
+        G.ui.openActs(G.near); // as a tap or Tab on it does
+        await new Promise((r) => setTimeout(r, 100));
         const act = globalThis.document.getElementById('actMenu');
         return {
           near: G.near?.id,

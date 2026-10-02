@@ -65,7 +65,7 @@ await shot('walked');
 const who = await g(() => { const G = window.__game, q = G.player.root.position; const c = G.markers.list.filter((m) => m.enabled() && /person/.test(m.kind || '') && !['mio', 'kuroda', 'tama'].includes(m.id)).map((m) => [m.id, Math.hypot(q.x - m.spot()[0], q.z - m.spot()[1])]).sort((a, b) => a[1] - b[1]); return c.length ? c[0][0] : null; });
 await walkTo(who);
 await shot(`near-${who}`);
-if (phone) { const xy = await g(() => { const a = document.querySelector('#actMenu .use'); if (!a) return null; const r = a.getBoundingClientRect(); return [r.x + r.width / 2, r.y + r.height / 2]; }); if (xy) await p.touchscreen.tap(xy[0], xy[1]); }
+if (phone) { const xy = await g(() => { const G = window.__game, a = G.near && G.near.el && G.near.el.querySelector('.pin'); if (!a) return null; const r = a.getBoundingClientRect(); return [r.x + r.width / 2, r.y + r.height / 2]; }); if (xy) await p.touchscreen.tap(xy[0], xy[1]); }
 else await p.keyboard.press('KeyE');
 await p.waitForTimeout(1500);
 await advance(10, `talk-${who}`);

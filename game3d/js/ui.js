@@ -14,6 +14,7 @@ import { notePractice, needsPractice, pipsHTML, MASTERY_CSS } from './mastery.js
 void VOICE_CSS;
 
 import { $, el } from './ui/dom.js';
+import { actMenu } from './ui/act-menu.js';
 import { showPortraits, resetPortraitSpeaker } from './ui/portraits.js';
 import { createDialogue } from './ui/dialogue.js';
 import { addFieldPlayButton } from './ui/dialogue-text.js';
@@ -405,7 +406,7 @@ export const ui = {
     const touch = document.body.classList.contains('phone') || matchMedia('(pointer: coarse)').matches;
     const key = keyLabel((settings && settings.keySay) || 'KeyQ');
     this._sayTipHTML = touch
-      ? 'Tap <b>Say</b> to say a word you know.'
+      ? 'Tap who you want to talk to, then <b>Say a word</b>.'
       : `Press <span class="k">${key}</span> to say a word you know.`;
     this.sayIntro = true;
     this._showTip();
@@ -423,112 +424,8 @@ export const ui = {
   sayReady(on) {
     $('#sayBtn').classList.toggle('ready', !!on);
   },
-  // The action menu (Jørgen's playtest: Talk and Say were separate popups that came and went on their own). One small
-  // menu beside the current target: its verb on E (Talk, Look, Pet...) and Say on Q, stacked, both whenever both
-  // apply; Next cycles through things in reach when several are close (menu.js). main.js calls this every frame
-  // with whether a word does something at the target in reach. A thing with nothing to use has no E row.
-  placeSay(show) {
-    $('#sayBtn').hidden = true;
-    const act = $('#actMenu'),
-      g = window.__game;
-    if (!act || !g || !g.place) return;
-    const blocked =
-      !$('#sayMenu').hidden ||
-      !$('#cmdsPanel').hidden ||
-      [...document.querySelectorAll('.panel')].some((p) => !p.hidden) ||
-      document.body.classList.contains('busy') ||
-      document.body.classList.contains('trip') ||
-      this.talking;
-    // only the target in reach (notes/ONBOARDING.md rule 4): never something across the room
-    const target = g.near,
-      st = g.sayTarget;
-    const obw = window.__onboard;
-    if (!target || blocked || (obw && obw.active && !obw.moved)) {
-      if (!act.hidden) act.hidden = true;
-      this._actKey = '';
-      return;
-    }
-    const ob = window.__onboard || {};
-    const phone = document.body.classList.contains('phone');
-    const verb = target.verb || (/person/.test(target.kind || '') ? 'Talk' : 'Look'),
-      name = target.label || '';
-    const isGoal = !!(target.goal && target.goal());
-    // Say shows for this target when a word does something here; the first time only at the goal (the cat)
-    const sayHere = show && st === target && (ob.sayUsed || !ob.active || isGoal);
-    const canUse = !g.canUse || g.canUse(target);
-    const uses = ob.uses || 0;
-    const cyc = !ob.active && this.cycleInfo && this.cycleInfo.n > 1 ? this.cycleInfo : null;
-    const key = [
-      target.id,
-      verb,
-      name,
-      sayHere,
-      canUse,
-      cyc ? cyc.i + '/' + cyc.n : '',
-      phone,
-      settings.keySay,
-      Math.min(uses, 5),
-      ob.sayUsed ? 1 : 0,
-    ].join('|');
-    if (key !== this._actKey) {
-      this._actKey = key;
-      // Jørgen: "the interaction box is also not very pretty". The name on top, then one row per action: a key cap
-      // and the action in one type style. The action row always names its action (Jørgen, 2026-09-30, on a box that
-      // had dropped it and showed only the name: "interaction windows but no actions"); the key cap goes after five
-      // uses. Phone rows have no key caps.
-      const k = (c) => (phone ? '' : `<span class="k">${c}</span>`);
-      const head = name ? `<div class="hd">${name}</div>` : '';
-      const useFace = `${uses < 5 ? k('E') : ''}<span class="lb">${verb}</span>`;
-      act.innerHTML =
-        head +
-        (canUse ? `<button type="button" class="act use">${useFace}</button>` : '') +
-        (sayHere
-          ? `<button type="button" class="act say${ob.sayUsed ? '' : ' first'}">${k(keyLabel(settings.keySay || 'KeyQ'))}<span class="lb">Say a word</span></button>`
-          : '') +
-        (cyc
-          ? `<button type="button" class="act next">${k('Tab')}<span class="lb">Next</span><span class="ct">${cyc.i + 1} of ${cyc.n}</span></button>`
-          : '');
-      act.querySelector('.use')?.addEventListener('click', (e) => {
-        e.stopPropagation();
-        g.use(g.near || target);
-      });
-      act.querySelector('.say')?.addEventListener('click', (e) => {
-        e.stopPropagation();
-        this.onSay && this.onSay();
-      });
-      act.querySelector('.next')?.addEventListener('click', (e) => {
-        e.stopPropagation();
-        this.cycleInfo?.next();
-      });
-    }
-    if (act.hidden) act.hidden = false;
-    // beside the target, level with its head: never over the target itself; flips to the left near the right edge
-    const V = g.place.camera.position.constructor,
-      v = target.anchor(new V()).project(g.place.camera);
-    const px = ((v.x + 1) / 2) * innerWidth,
-      py = ((1 - v.y) / 2) * innerHeight;
-    const sc = phone ? 1 : +getComputedStyle(document.documentElement).getPropertyValue('--ui') || 1;
-    const W = innerWidth,
-      H = innerHeight,
-      aw = (act.offsetWidth || 180) * sc,
-      ah = (act.offsetHeight || 50) * sc;
-    const gap = 22 * sc,
-      flip = px + gap + aw > W - 8;
-    let ax = flip ? px - gap - aw : px + gap,
-      ay = py - ah / 2;
-    ax = Math.max(8, Math.min(W - aw - 8, ax));
-    ay = Math.max((phone ? 60 : 64) * sc, Math.min(H - ah - 12, ay));
-    // never under the goal box (it grows with a tip): drop below it
-    const gb = $('#goal');
-    if (gb && !gb.hidden && gb.offsetParent) {
-      const q = gb.getBoundingClientRect();
-      if (ax < q.right + 6 && ax + aw > q.left && ay < q.bottom + 6 && ay + ah > q.top) ay = q.bottom + 8;
-    }
-    act.style.transform = `translate(${Math.round(ax)}px, ${Math.round(ay)}px) scale(${sc})`;
-    act.classList.toggle('flip', flip);
-    // the small pointer on the box's near side sits level with the target, wherever the box was clamped to
-    act.style.setProperty('--ny', Math.round(Math.max(14, Math.min(ah / sc - 14, (py - ay) / sc))) + 'px');
-  },
+  // the action menu beside the target: openActs, closeActs, placeSay (ui/act-menu.js)
+  ...actMenu({ keyLabel, settings }),
   // No text leaves on a timer (Jørgen: "completely inaccessible"). A hint stays until the player closes it or the
   // goal moves on (the ms argument is ignored); the goal chip shows it again.
   // Tips live in the goal box, as a second line under the goal (Jørgen: one place for goal and tips). One tip at a

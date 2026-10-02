@@ -1138,8 +1138,16 @@ body.phone #top > #goal #hint { font-size: 14px; }
 #actMenu .act.say.first .k { background: var(--accent); border-color: var(--accent); color: #0f2624; }
 #actMenu .act.next { min-height: 32px; color: var(--ink-dim); font-size: 14px; }
 #actMenu .act.next .ct { margin-left: auto; padding-left: 14px; color: var(--ink-dim); font-weight: 500; font-size: 13px; }
-body.phone #actMenu .act { min-height: 46px; padding: 0 16px; font-size: 16px; }
-body.phone #actMenu .hd { padding: 7px 16px; }
+/* phone: compact rows (Jørgen, 2026-10-02: the menu took "a lot of screen space") */
+body.phone #actMenu { min-width: 0; padding: 3px; }
+body.phone #actMenu .act { min-height: 40px; padding: 0 12px; font-size: 15px; }
+body.phone #actMenu .act.next { min-height: 36px; font-size: 13px; }
+body.phone #actMenu .act.next .ct { padding-left: 10px; font-size: 12px; }
+body.phone #actMenu .hd { padding: 5px 12px; font-size: 14px; }
+/* the pointer toward the pin: left (box right of the pin), right (.flip), bottom (.up, box above) or top (.down) */
+#actMenu.up::before, #actMenu.down::before { left: var(--nx, 50%); right: auto; transform: translateX(-50%) rotate(45deg); }
+#actMenu.up::before { top: auto; bottom: -6px; border-width: 0 1px 1px 0; }
+#actMenu.down::before { top: -6px; border-width: 1px 0 0 1px; }
 /* Words panel: the dictionary word under a word met in a form (-te, -masu), and the one-line note on the ending */
 #cmdsPanel li.wrow .bf { color: var(--ink-dim); font-size: 12px; opacity: .85; }
 #cmdsPanel li.wrow .bf .bj { font-size: 13px; }

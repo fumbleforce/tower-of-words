@@ -7,6 +7,7 @@
 // #84: it sat over the fountain). Where the goal's own spot on the edge is taken, it slides along that edge to the
 // nearest clear place, keeping to the side it was on while one stays clear.
 import * as THREE from 'three';
+import { thingBox, elBox as rect } from './screen-box.js';
 
 const PAD = 8, // px kept between the arrow and what it keeps clear of
   STEP = 6;
@@ -28,39 +29,6 @@ export function installGoalArrow({ game, phone, paused, root }) {
     if (target) game().use(target);
   };
   const v = new THREE.Vector3();
-
-  // a screen box round world points, in CSS px (null when any is behind the camera)
-  const box = (cam, pts) => {
-    const b = { x0: Infinity, x1: -Infinity, y0: Infinity, y1: -Infinity };
-    for (const p of pts) {
-      v.copy(p).project(cam);
-      if (v.z > 1) return null;
-      const x = ((v.x + 1) / 2) * innerWidth,
-        y = ((1 - v.y) / 2) * innerHeight;
-      b.x0 = Math.min(b.x0, x);
-      b.x1 = Math.max(b.x1, x);
-      b.y0 = Math.min(b.y0, y);
-      b.y1 = Math.max(b.y1, y);
-    }
-    return b;
-  };
-  // a person or thing on screen: from its anchor down to the floor, `keep` metres (default about a body) round it
-  const thingBox = (g, m) => {
-    const k = g.place.charScale || 1,
-      r = m.keep ?? (/person/.test(m.kind || '') ? 0.35 : 0.45) * k;
-    const top = m.anchor(new THREE.Vector3());
-    const pts = [top];
-    for (let i = 0; i < 8; i++) {
-      const t = (i / 8) * Math.PI * 2;
-      for (const y of [0, Math.min(top.y, 1)])
-        pts.push(new THREE.Vector3(top.x + Math.cos(t) * r, y, top.z + Math.sin(t) * r));
-    }
-    return box(g.place.camera, pts);
-  };
-  const rect = (el) => {
-    const r = el.getBoundingClientRect();
-    return r.width ? { x0: r.left, x1: r.right, y0: r.top, y1: r.bottom } : null;
-  };
   const keepClear = (g, goal) => {
     const out = [g.ericBox?.()];
     for (const m of g.markers.list) {

@@ -31,7 +31,7 @@
     },
     "game3d/js/menu.js": {
       "lines": 1179,
-      "bytes": 41784,
+      "bytes": 41757,
       "owner": "codex-tui",
       "review": "C-0089",
       "reason": "Existing action menus and target selection; stage 4 interaction extraction is planned."
@@ -170,8 +170,8 @@
       "reason": "Existing passenger mesh factories, per-seat placement and idle motion share rig conventions. Stage 5 crowd and room-builder review will separate appearance construction from placement and motion."
     },
     "game3d/js/ui.js": {
-      "lines": 884,
-      "bytes": 36156,
+      "lines": 781,
+      "bytes": 31169,
       "owner": "codex-tui",
       "review": "C-0080; C-0166 named sounds per door and machine, Words chip pop and voice placeholder",
       "reason": "Remaining HUD construction, action menus and word practice; dialogue, portraits and audio are extracted."

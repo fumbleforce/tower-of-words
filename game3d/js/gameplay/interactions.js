@@ -87,7 +87,13 @@ export function installInteractions(game) {
       game.markers.add(item);
     }
   }
-  game.use = (item) => use(item);
+  // the action menu's own Pet/Talk row uses its target straight away (no menu again)
+  game.use = (item) => use(item, { direct: true });
+  // a tap or click asks for a target's menu; E, Space and Enter use it straight away. The input that led to a use is
+  // read from the last pointer press (main.js calls use() from its pointer and key handlers alike)
+  let pointerAt = -1e9;
+  globalThis.addEventListener?.('pointerdown', () => (pointerAt = performance.now()), true);
+  globalThis.addEventListener?.('keydown', () => (pointerAt = -1e9), true);
   // a scene that starts while he walks to something he clicked (a zone he crossed, a queued event) stops that walk: he
   // carries on to it and uses it once the scenes are over (cold playtest 2026-09-30: Mio needed an extra E)
   let cutUse = null;
@@ -142,11 +148,13 @@ export function installInteractions(game) {
       game._holdBow = false;
     });
   }
-  function use(item) {
+  function use(item, { direct = false } = {}) {
     // while Eric is saying a word (its practice prompt, his voice, the answer) a tap on anything else is ignored, so
     // the word is never lost to a new talk; saying is cleared in sayWord's finally, so this can't stick
     if (!item || game.busy || game.saying) return;
     cutUse = null;
+    const ask = !direct && performance.now() - pointerAt < 1500;
+    ui.closeActs?.();
     if (held() && item.id !== game.hold) {
       holdNudge();
       return;
@@ -155,6 +163,14 @@ export function installInteractions(game) {
       // he may arrive after a Say started on the way
       if (game.busy || game.saying) return;
       if (item.face) game.walker.faceTo(...item.face());
+      // tapped or clicked, with more than one thing to do there (its verb and Say): its menu opens, nothing is used
+      // yet (Jørgen, 2026-10-02: the menu opening by itself "is very disruptive"). One thing to do: it's done.
+      if (ask && canUse(item) && sayRow(item)) {
+        game.targetLock = item;
+        game.near = item;
+        ui.openActs(item);
+        return;
+      }
       talk(item);
     };
     go.use = item; // the beat wrapper above sends him on to it if a scene cuts this walk
@@ -216,8 +232,17 @@ export function installInteractions(game) {
     const hook = (w) => game.runner.has(`say:${w}:${item.id}`) || game.runner.has(`say:${w}:*`);
     return SAYABLE.some((w) => known.has(w) && hook(w)) || !canUse(item);
   }
+  // whether the target's menu has a Say row: a word does something there (or the Say tip is up), and while the
+  // train teaches Say, only at the goal (the cat)
+  function sayRow(item) {
+    const ob = globalThis.__onboard || {};
+    if (!item || !SAYABLE.some((w) => known.has(w))) return false;
+    if (!saysSomething(item) && !ui.sayIntro) return false;
+    return !!(ob.sayUsed || !ob.active || item.goal?.());
+  }
   game.canUse = canUse;
   game.saysSomething = saysSomething;
+  game.sayRow = sayRow;
   async function say() {
     // one Say at a time: no reopening while the last word's reaction is still coming (QA round 1: menu under the dialogue, the cat line twice)
     if (game.busy || !SAYABLE.some((w) => known.has(w)) || game.saying) return;

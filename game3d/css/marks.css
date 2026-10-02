@@ -68,6 +68,17 @@ body.reduce-motion #marks .mark.goal .pin::after { animation: none; transform: s
 }
 @keyframes markbob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-3px); } }
 body.reduce-motion #marks .mark.near::after { animation: none; }
+/* desktop, until E has been used five times: the E key at the corner of the pin in reach (the action menu opens only
+   when asked for, so this is where E is taught; ui.js sets body.teach-e) */
+body.teach-e:not(.phone) #marks .mark.near .tag {
+  display: grid; place-items: center; left: 14px; top: -34px; width: auto; height: auto; padding: 0; gap: 0;
+  background: none; border: 0; opacity: 1; transform: none;
+}
+body.teach-e:not(.phone) #marks .mark.near .tag .vb, body.teach-e:not(.phone) #marks .mark.near .tag .nm { display: none; }
+body.teach-e:not(.phone) #marks .mark.near .tag .key {
+  display: grid; min-width: 16px; height: 16px; padding: 0 3px; border-radius: 4px; background: #2a323e;
+  border: 1px solid rgba(255, 255, 255, .3); border-bottom-width: 2px; color: #e6faf7; font: 700 10px/1 var(--font);
+}
 
 /* no room above the target (under the HUD): the pin sits beside the head on a short level line, never hanging down
    over the face (engine.js sets .below; .flip puts it on the left near the right edge) */
