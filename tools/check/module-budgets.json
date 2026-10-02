@@ -94,7 +94,7 @@
     },
     "game3d/js/runner.js": {
       "lines": 480,
-      "bytes": 17923,
+      "bytes": 17882,
       "owner": "codex-tui",
       "review": "C-0076; 2026-09-30 one line passing a subtitled line's English (`en`) to the dialogue (issue #89)",
       "reason": "Narrative execution, checkpoint replay and dialogue/audio dispatch remain after stage 2c; stage 3 reviews the presentation/audio boundary."
@@ -171,7 +171,7 @@
     },
     "game3d/js/ui.js": {
       "lines": 884,
-      "bytes": 36157,
+      "bytes": 36156,
       "owner": "codex-tui",
       "review": "C-0080; C-0166 named sounds per door and machine, Words chip pop and voice placeholder",
       "reason": "Remaining HUD construction, action menus and word practice; dialogue, portraits and audio are extracted."

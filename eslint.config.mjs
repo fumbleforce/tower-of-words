@@ -45,7 +45,7 @@ export default [
     'game3d/tools/play.mjs', 'game3d/tools/printer-shots.mjs', 'game3d/tools/shell-shots.mjs',
     'game3d/tools/shoot.mjs', 'game3d/tools/showcase-shots.mjs', 'game3d/tools/soft-collision.mjs',
     'game3d/tools/speech/*.mjs', 'game3d/tools/style-perf.mjs', 'game3d/tools/style-shots.mjs',
-    'game3d/minigames/tools/*.mjs', 'game3d/tools/talk-clicks.mjs', 'game3d/tools/type-word-play.mjs', 'game3d/tools/keyboard-fit.mjs', 'game3d/tools/gl-recover-check.mjs', 'game3d/tools/loop-check.mjs', 'game3d/tools/target-ring-shots.mjs', 'game3d/tools/words-menu-shots.mjs',
+    'game3d/minigames/tools/*.mjs', 'game3d/tools/talk-clicks.mjs', 'game3d/tools/type-word-play.mjs', 'game3d/tools/keyboard-fit.mjs', 'game3d/tools/gl-recover-check.mjs', 'game3d/tools/portrait-swap-check.mjs', 'game3d/tools/loop-check.mjs', 'game3d/tools/target-ring-shots.mjs', 'game3d/tools/words-menu-shots.mjs',
     'tools/assets/render3d.mjs', 'tools/assets/shots.mjs', 'tools/bible/check.mjs',
     'tools/characters/snap.mjs', 'tools/characters/parts/viewer-shots.mjs', 'tools/check/behavior-trace.mjs', 'tools/check/*-browser.mjs',
     'tools/creator/base/check_preview.mjs', 'tools/creator/base/run.mjs',

@@ -1,5 +1,5 @@
 export { PORTRAITS } from './ui/portrait-data.js';
-// HTML overlay: goal, words, the train's LED board, the talk panel with reply chips, fades and the end card.
+// HTML overlay: goal, words, the train's LED board, the talk panel, replies, fades, the end card.
 import { lineHTML, WORDS, COMMANDS, PHRASES, known, cmdHTML, iconHTML, baseHTML, FORM_NOTE } from './lang.js';
 import { settings, onSettings } from './settings.js';
 import { mountVoice, VOICE_CSS, voiceMode } from './speech.js';
@@ -17,7 +17,7 @@ import { $, el } from './ui/dom.js';
 import { showPortraits, resetPortraitSpeaker } from './ui/portraits.js';
 import { createDialogue } from './ui/dialogue.js';
 import { addFieldPlayButton } from './ui/dialogue-text.js';
-export { FACE, setFace, faceForEmote, layoutStage } from './ui/portraits.js';
+export { FACE, setFace, faceForEmote, layoutStage, newScene } from './ui/portraits.js';
 
 // Existing UI imports remain valid while audio ownership moves to its modules.
 import { voice, stopVoice, setAudioMuted, isMuted, setVoiceDucking } from './audio/core.js';
