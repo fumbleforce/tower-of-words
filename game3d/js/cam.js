@@ -255,8 +255,9 @@ export class RoomCam {
     if (this.space) this.space.localToWorld(v);
     return v;
   }
-  closeOn([x, z], zoom = 1.8, y = 0.5) {
-    this.close = { target: this.toWorld(x, z, y), zoom };
+  // onEric: the shot moves with him (a trip's walk in, places/edge-walk.js), not held on the spot
+  closeOn([x, z], zoom = 1.8, y = 0.5, { onEric = false } = {}) {
+    this.close = { target: this.toWorld(x, z, y), zoom, y, onEric };
     this.smooth = CLOSE;
   }
   release() {
@@ -278,6 +279,7 @@ export class RoomCam {
     const e = ericNow(this.space, p);
     if (this.close) {
       const d = this.fitDist / this.close.zoom;
+      if (this.close.onEric && p) this.close.target.copy(this.toWorld(p.x, p.z, this.close.y));
       if (!e || window.__game.busy) return [this.close.target, d];
       return [keepInView(this.camera, this.dir, this.want.copy(this.close.target), d, ...e), d];
     }
