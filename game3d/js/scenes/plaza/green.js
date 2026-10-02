@@ -105,21 +105,25 @@ function* ring(p) {
 }
 
 // both sides of both lanes, from the edge of the view in to just short of the ring bed, the same on each side
+const STOP = R + BAND + 0.9;
 function* verges(p) {
-  const { w, e } = LANE;
-  const stop = R + BAND + 0.9;
-  const west = AVENUE.map((d) => F[0] - d),
-    east = AVENUE.map((d) => F[0] + d);
-  verge(p, [-44, w[2]], [F[0] - stop, w[2]], 'n', { trees: west, seed: 3 });
+  const { w } = LANE;
+  const west = AVENUE.map((d) => F[0] - d);
+  verge(p, [-44, w[2]], [F[0] - STOP, w[2]], 'n', { trees: west, seed: 3 });
   yield;
-  verge(p, [-44, w[3]], [F[0] - stop, w[3]], 's', { trees: west, seed: 4 });
+  verge(p, [-44, w[3]], [F[0] - STOP, w[3]], 's', { trees: west, seed: 4 });
   yield;
-  // east of the plaza to the jog (plaza/east-lane.js): the north verge stops at the leg, the south one at the
-  // corner's far side; the cross walk runs through both
-  const crossings = [CROSS];
-  verge(p, [F[0] + stop, e[2]], [e[1], e[2]], 'n', { trees: east, crossings, seed: 5 });
+  yield* eastVergeSteps(p);
+}
+// east of the plaza to the jog (plaza/east-lane.js): the north verge stops at the leg, the south one at the corner's
+// far side; the cross walk runs through both. The east lane's chunk (scenes/east-lane.js) lays the same.
+export function* eastVergeSteps(p) {
+  const { e } = LANE;
+  const east = AVENUE.map((d) => F[0] + d),
+    crossings = [CROSS];
+  verge(p, [F[0] + STOP, e[2]], [e[1], e[2]], 'n', { trees: east, crossings, seed: 5 });
   yield;
-  verge(p, [F[0] + stop, e[3]], [e[1] + 2 * P.HALF, e[3]], 's', { trees: east, crossings, seed: 6 });
+  verge(p, [F[0] + STOP, e[3]], [e[1] + 2 * P.HALF, e[3]], 's', { trees: east, crossings, seed: 6 });
   yield;
 }
 

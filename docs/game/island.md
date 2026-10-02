@@ -1,6 +1,6 @@
 # The island's south half
 
-The south half of Amakawa, mapped for day 2 and later: every building and outdoor place in it, who works, lives or spends time there, its doors, whether it can be entered later, how it connects, and one idea for using Japanese there. Jørgen asked for it on 2026-10-02: "I want mapping of half the island so we can make an interesting day 2 eventually". Nothing here is built unless the row says so. Built places are described in [places.md](places.md) and only linked from here. Jørgen confirmed this half as the set to build out (Review island-half-1, 2026-10-02: "Correct"); the districts are built one at a time, and the shop street and seafront is built (chunk `shotengai`). The island as a whole (what is on it, no cars, no commute) is in [setting.md](setting.md).
+The south half of Amakawa, mapped for day 2 and later: every building and outdoor place in it, who works, lives or spends time there, its doors, whether it can be entered later, how it connects, and one idea for using Japanese there. Jørgen asked for it on 2026-10-02: "I want mapping of half the island so we can make an interesting day 2 eventually". Nothing here is built unless the row says so. Built places are described in [places.md](places.md) and only linked from here. Jørgen confirmed this half as the set to build out (Review island-half-1, 2026-10-02: "Correct"); the districts are built one at a time: the shop street and seafront is built (chunk `shotengai`), and so is the east lane (chunk `east_lane`). The island as a whole (what is on it, no cars, no commute) is in [setting.md](setting.md).
 
 The hooks are ideas for using Japanese in each place. Story, dialogue and secrets are Codex's ([collab/PROTOCOL.md](../../collab/PROTOCOL.md)).
 
@@ -117,13 +117,13 @@ The shop rows have fifteen bays each, numbered 0 to 14 from the west (island-sou
 | Id | Place | Where | What and who | Ways in | Later | Day 2 hook |
 |---|---|---|---|---|---|---|
 | `training_centre` | New-staff training centre (研修センター) | `block_e1` | Two storeys; its front and door are built in `plaza` ([places.md](places.md)). New hires spend their first weeks here. | Door at the head of the cross walk | Enter | The training timetable: times (9時半), rooms, 研修. |
-| `cafe` | Café (カフェ) | `m_e1` | A café on the ground floor (front built as backdrop). | Door on the south walk | Enter | Ordering a drink: ホット, アイス, サイズ, 店内 or 持ち帰り. |
-| `liquor_shop` | Liquor and rice shop (酒屋) | `m_e2` | One storey under a tiled roof (built as backdrop): sake, beer and rice by the bag, run by an old couple. | Door at the foot of the cross walk | Enter | Sake labels, and rice bags by the kilo: 重い. |
-| `barber` | Barber (床屋) | `r8` | Two storeys, the striped pole by the door; the barber lives upstairs. | Door on the pocket park's axis, across the south walk | Enter | Saying how to cut it: 短く, 少しだけ, 前髪. |
-| `pocket_park` | Pocket park (小さな公園) | `pocket_park` | Built as backdrop: a cross of walks, one tree, benches. | Walks from the lane and the dorm street | Outside | Small talk about the weather on a bench: 暑いですね. |
-| `travel_office` | Amakawa Travel (天川トラベル) | `block_e2` | Four storeys of offices; the ground floor books the ferry and trips to the mainland. | Door on a short walk from the back lane | Enter | Booking a trip: 何月何日, 往復, 何名. |
-| `family_flats` | Family flats (家族寮) | `block_e3`, `r3` | Three-storey blocks on the north street for staff with families; washing on the balconies. | Doors on the north street | Outside | Name plates (表札) by the doors: reading family names. |
-| `director_house` | Director’s house (所長の家) | `r9` | A detached two-storey house, one of the island's few better homes. | Door on the north street | Outside | The gate intercom: はい, どちら様ですか. |
+| `cafe` | Café (カフェ) | `m_e1` | A café on the ground floor; its front and sign are built, walked past in `east_lane` ([places.md](places.md)), the door shut. | Door on the south walk | Enter | Ordering a drink: ホット, アイス, サイズ, 店内 or 持ち帰り. |
+| `liquor_shop` | Liquor and rice shop (酒屋) | `m_e2` | One storey under a tiled roof, its sign on the roof and a cedar ball by the door; front built in `east_lane`, the door shut. Sake, beer and rice by the bag, run by an old couple. | Door at the foot of the cross walk | Enter | Sake labels, and rice bags by the kilo: 重い. |
+| `barber` | Barber (床屋) | `r8` | Two storeys, the striped pole by the door; front built in `east_lane`, the door shut. The barber lives upstairs. | Door on the pocket park's axis, across the south walk | Enter | Saying how to cut it: 短く, 少しだけ, 前髪. |
+| `pocket_park` | Pocket park (小さな公園) | `pocket_park` | Built in `east_lane` ([places.md](places.md)): a cross of walks, one tree, benches. | Walks from the lane and the dorm street | Outside | Small talk about the weather on a bench: 暑いですね. |
+| `travel_office` | Amakawa Travel (天川トラベル) | `block_e2` | Four storeys of offices; the ground floor books the ferry and trips to the mainland. Its front and sign are built, reached in `east_lane` up the north street and along the back lane, the door shut. | Door on a short walk from the back lane | Enter | Booking a trip: 何月何日, 往復, 何名. |
+| `family_flats` | Family flats (家族寮) | `block_e3`, `r3` | Three-storey blocks on the north street for staff with families; washing on the balconies. block_e3 is walked past in `east_lane`. | Doors on the north street | Outside | Name plates (表札) by the doors: reading family names. |
+| `director_house` | Director’s house (所長の家) | `r9` | A detached two-storey house, one of the island's few better homes; walked past in `east_lane`. | Door on the north street | Outside | The gate intercom: はい, どちら様ですか. |
 
 ### Dorms
 

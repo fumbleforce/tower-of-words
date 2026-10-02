@@ -15,12 +15,14 @@ import { laneField, verge, LANE_BORDER as BW } from '../outdoor/lane.js';
 import { kerb, kerbRect } from '../outdoor/edges.js';
 import { hedge, keyaki, sakura, ginkgo, pine, mound, grass, bed, LEAF } from '../outdoor/planting.js';
 import { drift } from '../forecourt/gardens.js';
-import { lamps, bench } from '../outdoor/furniture.js';
+import { lamps, bench, fingerSign } from '../outdoor/furniture.js';
 import { Parts, rng } from '../outdoor/parts.js';
 import { shade } from '../outdoor/shade.js';
 import { bikeRow } from '../forecourt/details.js';
 import { frontsSteps } from './east-fronts.js';
 import { signBoard } from '../plaza-buildings.js';
+import { signSet } from '../shop-signs.js';
+import { shopFittings } from './east-shops.js';
 import { faces, faceAt, tOf } from '../outdoor/block.js';
 import { LANE, FOOTPATH } from './plan.js';
 import * as E from './east-plan.js';
@@ -232,20 +234,8 @@ function* park(p, lights, sh) {
   keyaki(p, cx, cz, 1.05, 71);
   sh.tree(cx, cz, 1.05);
   yield;
-  const off = (ns[1] - ns[0]) / 2 + 0.95;
-  for (const sz of [-1, 1]) {
-    const z = sz < 0 ? SQUARE[2] + 0.45 : SQUARE[3] - 0.45;
-    for (const sx of [-1, 1]) bench(p, cx + sx * off, z, sz < 0 ? 0 : Math.PI, { len: 1.3 });
-  }
-  lamps(
-    lights,
-    p,
-    [
-      [SQUARE[1] - 0.3, SQUARE[2] + 0.3],
-      [SQUARE[0] + 0.3, SQUARE[3] - 0.3],
-    ],
-    { pool: 1.6, poolShift: [0, 0] },
-  );
+  for (const [x, z, ry] of E.SQUARE_BENCHES) bench(p, x, z, ry, { len: 1.3 });
+  lamps(lights, p, E.SQUARE_LAMPS, { pool: 1.6, poolShift: [0, 0] });
   // a small tree in the middle of each lawn quarter, clear of the hedge and the walks: cherries to the north,
   // clipped pines to the south
   const qx = [(x0 + i + ns[0]) / 2, (ns[1] + x1 - i) / 2],
@@ -328,10 +318,7 @@ function* planting(p, lights, sh) {
   yield;
   // lamps: down the dorm street's west side and the north street's east side every 8; by the cross walk at the
   // bike pad (the lane's own lamp by its south mouth is the plaza's)
-  const pts = [];
-  for (let z = CORNERS.c[3] + 3; z < DS[3] - 1; z += 8) pts.push([DS[0] + 0.35, z]);
-  for (let z = TOP_LEG[2] - 3; z > NS[2] + 2; z -= 8) pts.push([NS[1] - 0.35, z]);
-  lamps(lights, p, pts, { pool: 1.4 });
+  lamps(lights, p, E.STREET_LAMPS, { pool: 1.4 });
   lamps(lights, p, [[pad[1] - 0.3, pad[3] - 0.3]], { pool: 1.8, poolShift: [0.6, 0] }); // on the pad's corner
   // a bay off the cross walk, east of it in front of the bed: paved, a bench looking down the walk to the lane
   kerbRect(p, E.SEAT_BAY, { sides: 'nse' });
@@ -372,9 +359,21 @@ export function* eastLaneSteps(root, p, lights) {
     root.add(s);
   }
   for (const k of E.BLOCKS) if (k.rect[0] >= SHADOW_X) sh.block(k.rect, k.row.storeys * k.row.floorH);
+  // the named shops' signs and shut doors (plaza/east-shops.js), Amakawa Travel's too (its block is the back lane's,
+  // plaza/north-lane.js); a finger sign at the south walk's start pointing along it to the shop street
+  const signs = signSet();
+  shopFittings(q, signs, [...E.BLOCKS, E2]);
+  const shopSigns = signs.build(root);
+  fingerSign(root, q, ...E.FINGER, [{ text: 'Shop street', sub: '商店街', dir: 1 }]);
   yield;
   for (const m of q.build(root)) m.castShadow = false;
   yield;
   const shadows = sh.build(root);
-  return { evening: fronts.evening, update: (sun) => shadows.follow(sun.position) };
+  return {
+    evening() {
+      fronts.evening();
+      shopSigns.evening();
+    },
+    update: (sun) => shadows.follow(sun.position),
+  };
 }

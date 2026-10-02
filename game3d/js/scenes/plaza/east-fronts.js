@@ -5,7 +5,7 @@
 //   office  a glazed entrance under a canopy, window bands either side
 // dark: its windows stay unlit after work (nobody in on day 1); sign: [kana, English] on its canopy (east-lane.js)
 //   cafe    a glazed front between piers, an awning over each bay but the door's
-//   shop    a shopfront and a door hung with a noren, under a tiled roof
+//   shop    a shopfront and a door hung with a noren (noren false: none), under a tiled roof
 //   house   a plain door with a light over it, a small window beside it
 //   dorm    a glazed entrance under a canopy with a name board, windows either side (the dorm cluster's blocks)
 // balconies: the faces (e.g. 's') whose upper storeys are a balcony a room, as on Eric's block (dorm-court/block.js):
@@ -286,9 +286,11 @@ function groundFloor(p, F, k, fh, { box, pane, lights }) {
     lamp(2.2);
   } else if (k.ground === 'shop') {
     doors(1.0);
-    // the noren: indigo cloth in strips hung in front of the door
-    for (let i = 0; i < 3; i++) onFace(box(NOREN, false), F, at - 0.32 + i * 0.32, 1.45, 0.12, 0.3, 0.5, 0.02);
-    onFace(box(STEEL.dark, false), F, at, 1.93, 0.12, 1.05, 0.03, 0.03);
+    // the noren: indigo cloth in strips hung in front of the door (not on every shop: k.noren false)
+    if (k.noren !== false) {
+      for (let i = 0; i < 3; i++) onFace(box(NOREN, false), F, at - 0.32 + i * 0.32, 1.45, 0.12, 0.3, 0.5, 0.02);
+      onFace(box(STEEL.dark, false), F, at, 1.93, 0.12, 1.05, 0.03, 0.03);
+    }
     bands(0.55, 1.15, 1.4, 0.9, true);
     lamp(2.1);
   } else if (k.ground === 'dorm') {

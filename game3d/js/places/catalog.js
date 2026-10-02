@@ -1,5 +1,6 @@
 import { TRAIN_DETAILS } from './catalog-train.js';
 import { SHOTENGAI_DETAILS } from './catalog-shotengai.js';
+import { EAST_LANE_DETAILS } from './catalog-east-lane.js';
 // Labels and registration IDs shared by place factories and structural checks.
 export const PLACE_DETAILS = {
   train: TRAIN_DETAILS,
@@ -150,6 +151,7 @@ export const PLACE_DETAILS = {
     hooks: ['bathSong', 'mailbox203'],
   },
   shotengai: SHOTENGAI_DETAILS,
+  east_lane: EAST_LANE_DETAILS,
   dorms: {
     things: {
       door_203: { label: 'Room 203', kind: 'thing' },

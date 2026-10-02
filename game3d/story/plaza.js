@@ -1,5 +1,6 @@
-// The fountain plaza, east of the forecourt. In the morning a side trip (the goal points back to the lift); after
-// work it is on the way home, and the lane's east end goes on to the dorm courtyard.
+// The fountain plaza, east of the forecourt. In the morning a side trip (the goal points back to the lift), and the
+// lane's east end goes on into the east lane; after work it is on the way home, and the lane's east end goes on to
+// the dorm courtyard.
 export default {
   speakers: { canteen_worker: { name: 'Canteen worker' } },
   start: 'arrive',
@@ -13,8 +14,8 @@ export default {
     'zone:office_lane': 'to_forecourt',
     'talk:fountain': 'fountain',
     'talk:training_door': 'training_locked',
-    'talk:dorm_lane': [{ if: 'going_home', node: 'to_dorms' }, 'dorms_later'],
-    'zone:dorm_exit': [{ if: 'going_home', node: 'to_dorms' }, 'dorms_later'],
+    'talk:dorm_lane': [{ if: 'going_home', node: 'to_dorms' }, 'to_east_lane'],
+    'zone:dorm_exit': [{ if: 'going_home', node: 'to_dorms' }, 'to_east_lane'],
     'talk:shop_walk': 'to_shops',
     'zone:shop_walk': 'to_shops',
   },
@@ -47,9 +48,9 @@ export default {
     ],
     fountain: ['> A sign on the rim asks people not to throw coins. The bottom is covered in coins.'],
     training_locked: ['> The door is locked. A notice on the glass says the next new-staff training starts in April.'],
-    dorms_later: ["> The dorms are further down this lane. That's for after work."],
     to_forecourt: [{ do: 'trip', to: 'forecourt' }],
     to_dorms: [{ do: 'trip', to: 'dorm_court' }],
+    to_east_lane: [{ do: 'trip', to: 'east_lane' }],
     to_shops: [{ do: 'trip', to: 'shotengai' }],
   },
 };
