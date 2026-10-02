@@ -27,13 +27,14 @@ import { ui, unlockAudio } from './ui.js';
 import { known, SAYABLE } from './lang.js';
 import { Runner, flags } from './runner.js';
 import { trainPlace as train } from './places/train.js';
-import { lobbyPlace } from './places/lobby.js';
-import { forecourtPlace } from './places/forecourt.js';
+import { lobbyPlace as gate } from './places/lobby.js';
+import { forecourtPlace as forecourt } from './places/forecourt.js';
 import { plazaPlace as plaza } from './places/plaza.js';
 import { officePlace as office } from './places/office.js';
 import { dormCourtPlace as dorm_court } from './places/dorm-court.js';
 import { dormsPlace as dorms } from './places/dorms.js';
 import { shotengaiPlace as shotengai } from './places/shotengai.js';
+import { eastLanePlace as east_lane } from './places/east-lane.js';
 import { showEnd } from './end.js';
 import { snapshot as snapshotOf, crossfade } from './places/crossfade.js';
 import { installSim, sim, stepAmbient, save, loadSave, restore, clearSave } from './sim.js';
@@ -57,7 +58,7 @@ let quality = tierNow();
 ui.build();
 if (CAP) document.body.classList.add('cap');
 
-const PLACES = { train, gate: lobbyPlace, forecourt: forecourtPlace, plaza, office, dorm_court, dorms, shotengai };
+const PLACES = { train, gate, forecourt, plaza, office, dorm_court, dorms, shotengai, east_lane };
 assertRegistered(Object.keys(PLACE_FILES), PLACES, 'place factories');
 
 // ---------- shared game state ----------

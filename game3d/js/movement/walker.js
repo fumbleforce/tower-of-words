@@ -162,6 +162,7 @@ export class SmoothWalker extends Walker {
       dn = k('ArrowDown', 'KeyS'),
       lf = k('ArrowLeft', 'KeyA'),
       rt = k('ArrowRight', 'KeyD');
+    if (this.locked || !(up || dn || lf || rt)) this.keyFrame = null; // a trip or a scene starts a new frame
     const others = this.others();
     const R = BODY * (this.body.scale.x || 1); // his own body, for people (walls use the grid's own radius)
     if (!this.locked && (up || dn || lf || rt)) {
@@ -170,16 +171,21 @@ export class SmoothWalker extends Walker {
         this.arrive = null;
         this.preview.clear();
       }
-      const f = new THREE.Vector3();
-      camera.getWorldDirection(f);
-      const par = this.body.parent;
-      if (par) {
-        const q = new THREE.Quaternion();
-        par.getWorldQuaternion(q);
-        f.applyQuaternion(q.invert());
+      // the camera's forward when the keys went down, kept while any stays held, so a camera that turns by itself
+      // (the east lane's, the forecourt's on a phone) doesn't bend a held walk
+      if (!this.keyFrame) {
+        const f = new THREE.Vector3();
+        camera.getWorldDirection(f);
+        const par = this.body.parent;
+        if (par) {
+          const q = new THREE.Quaternion();
+          par.getWorldQuaternion(q);
+          f.applyQuaternion(q.invert());
+        }
+        f.y = 0;
+        this.keyFrame = f.normalize();
       }
-      f.y = 0;
-      f.normalize();
+      const f = this.keyFrame;
       const r = new THREE.Vector3().crossVectors(f, new THREE.Vector3(0, 1, 0)).normalize();
       const iy = (up ? 1 : 0) - (dn ? 1 : 0),
         ix = (rt ? 1 : 0) - (lf ? 1 : 0);

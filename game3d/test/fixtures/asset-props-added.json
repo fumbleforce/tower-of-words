@@ -184,6 +184,167 @@
     ]
   },
   {
+    "id_": "prop/east_lane/barber",
+    "kind": "prop",
+    "name": "Barber",
+    "paths": [
+      "game3d/js/places/east-lane.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "east-lane.js things.barber",
+    "place": "east_lane",
+    "used": [
+      "East lane: tap target 'Barber'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "east-lane"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/east_lane/cafe",
+    "kind": "prop",
+    "name": "Café",
+    "paths": [
+      "game3d/js/places/east-lane.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "east-lane.js things.cafe",
+    "place": "east_lane",
+    "used": [
+      "East lane: tap target 'Café'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "east-lane"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/east_lane/dorm_gate",
+    "kind": "prop",
+    "name": "To the dorms",
+    "paths": [
+      "game3d/js/places/east-lane.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "east-lane.js things.dorm_gate",
+    "place": "east_lane",
+    "used": [
+      "East lane: tap target 'To the dorms'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "east-lane"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/east_lane/liquor_shop",
+    "kind": "prop",
+    "name": "Liquor shop",
+    "paths": [
+      "game3d/js/places/east-lane.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "east-lane.js things.liquor_shop",
+    "place": "east_lane",
+    "used": [
+      "East lane: tap target 'Liquor shop'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "east-lane"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/east_lane/plaza_lane",
+    "kind": "prop",
+    "name": "To the plaza",
+    "paths": [
+      "game3d/js/places/east-lane.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "east-lane.js things.plaza_lane",
+    "place": "east_lane",
+    "used": [
+      "East lane: tap target 'To the plaza'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "east-lane"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/east_lane/shop_street",
+    "kind": "prop",
+    "name": "To the shop street",
+    "paths": [
+      "game3d/js/places/east-lane.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "east-lane.js things.shop_street",
+    "place": "east_lane",
+    "used": [
+      "East lane: tap target 'To the shop street'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "east-lane"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/east_lane/travel_office",
+    "kind": "prop",
+    "name": "Amakawa Travel",
+    "paths": [
+      "game3d/js/places/east-lane.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "east-lane.js things.travel_office",
+    "place": "east_lane",
+    "used": [
+      "East lane: tap target 'Amakawa Travel'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "east-lane"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
     "id_": "prop/forecourt/fallen_bicycle",
     "kind": "prop",
     "name": "Bicycle",

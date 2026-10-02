@@ -14,11 +14,14 @@ const WARM = ['#aea393', '#a89e8f', '#b3a99a', '#a59a8a']; // the apron round th
 
 // the lanes and the link: the town's lane (outdoor/lane.js), all running in under the circle's border ring, which
 // laps over their ends
+const ORIGIN = [F[0], LZ - HALF];
 function lanes(pv) {
-  const origin = [F[0], LZ - HALF];
-  for (const rect of [LANE.w, LANE.e]) laneField(pv, rect, { origin });
-  laneField(pv, LINK, { along: 'z', origin });
+  laneField(pv, LANE.w, { origin: ORIGIN });
+  eastLaneField(pv);
+  laneField(pv, LINK, { along: 'z', origin: ORIGIN });
 }
+// the lane out east to the jog, which the east lane's chunk (scenes/east-lane.js) lays too
+export const eastLaneField = (pv) => laneField(pv, LANE.e, { origin: ORIGIN });
 
 // the round plaza, whole: the paths run in under its border ring
 function* circle(root) {

@@ -3,7 +3,7 @@ import { shotengaiSteps } from '../scenes/shotengai.js';
 import { sliced } from '../perf/slice.js';
 import { RoomCam } from '../cam.js';
 import { K } from '../scenes/office.js';
-import { eveningLight, EVENING_GRADE } from '../scenes/town.js';
+import { eveningLight, EVENING_GRADE, MORNING_GRADE } from '../scenes/town.js';
 import { addOccluder, updateOccluders, footprint } from '../scenes/occluders.js';
 import { PLACE_DETAILS } from './catalog.js';
 import { snapshotPeople, restorePeople } from './saved-people.js';
@@ -78,19 +78,7 @@ export async function shotengaiPlace(game) {
     start: w.in,
     startFacing: w.face,
     music: 'calm',
-    grade: {
-      exposure: 1.04,
-      temp: 0.025,
-      sat: 0.78,
-      contrast: 1.04,
-      lift: [0.012, 0.012, 0.018],
-      shadowTint: [-0.008, -0.002, 0.02],
-      highTint: [0.022, 0.01, -0.014],
-      vignette: 0.2,
-      bloom: 0.3,
-      bloomThreshold: 0.82,
-      focusBand: 0.3,
-    },
+    grade: MORNING_GRADE,
     things,
     spots: { plaza_entry: w.in },
     seats: {},

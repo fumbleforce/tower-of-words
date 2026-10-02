@@ -131,6 +131,20 @@ export const paving = (x0, x1, z0, z1, tile, opts) => pavingRects([[x0, x1, z0, 
 // shadows outside a place's shadow box along the same directions
 export const SUN = { morning: [0.8, 0.52, -0.3], evening: [-0.85, 0.34, 0.25] };
 
+// the morning's grade on the outdoor chunks (the plaza, the shop street, the east lane)
+export const MORNING_GRADE = {
+  exposure: 1.04,
+  temp: 0.025,
+  sat: 0.78,
+  contrast: 1.04,
+  lift: [0.012, 0.012, 0.018],
+  shadowTint: [-0.008, -0.002, 0.02],
+  highTint: [0.022, 0.01, -0.014],
+  vignette: 0.2,
+  bloom: 0.3,
+  bloomThreshold: 0.82,
+  focusBand: 0.3,
+};
 // after work: dusk on a chunk built with outdoorLight (and the dorm courtyard's own lights), so the walk home is in
 // one light: a dim blue sky, the last of the sun low and orange from the west, lamps and windows glowing
 export const EVENING_GRADE = {

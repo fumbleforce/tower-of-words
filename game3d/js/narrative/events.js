@@ -19,6 +19,7 @@ export const PLACE_EVENTS = {
   dorm_court: { start: { id: 'start', source: 'engine' } },
   dorms: { start: { id: 'start', source: 'engine' } },
   shotengai: { start: { id: 'start', source: 'engine' } },
+  east_lane: { start: { id: 'start', source: 'engine' } },
   office: {
     start: { id: 'start', source: 'engine' },
     sat_down: { id: 'sat_down', source: 'place', hook: 'sitDown' },

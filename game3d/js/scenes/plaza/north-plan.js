@@ -37,7 +37,11 @@ const front = (id, walk, wall) => ({
   rect: rect(building(id).rect),
   row: building(id),
 });
-export const E2 = front('block_e2', E2_WALK, 2);
+// block_e2's ground floor is Amakawa Travel (docs/game/island.md, "East lane"; its sign: plaza/east-shops.js)
+export const E2 = {
+  ...front('block_e2', E2_WALK, 2),
+  shop: { id: 'travel_office', sign: ['あまかわトラベル', 'AMAKAWA TRAVEL', '#3f5f6e'], mount: 'canopy' },
+};
 export const M6 = front('m6', M6_WALK, 0);
 // built here, so the skyline leaves them out
 export const NORTH_IDS = ['clinic', 'office_e1', 'block_e2', 'm6'];

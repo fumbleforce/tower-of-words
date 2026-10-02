@@ -4,7 +4,7 @@ import { BASIN } from '../scenes/plaza/plan.js';
 import { sliced } from '../perf/slice.js';
 import { RoomCam } from '../cam.js';
 import { K } from '../scenes/office.js';
-import { eveningLight, EVENING_GRADE } from '../scenes/town.js';
+import { eveningLight, EVENING_GRADE, MORNING_GRADE } from '../scenes/town.js';
 import { sim } from '../sim.js';
 import { PLACE_DETAILS } from './catalog.js';
 import { snapshotPeople, restorePeople } from './saved-people.js';
@@ -13,7 +13,8 @@ import { canteenClosing } from './canteen-closing.js';
 import { hasBoard, readBoard } from '../finds/index.js';
 
 // The fountain plaza: a side trip east of the forecourt in the morning, and on the walk home after work, with the
-// lane on east to the dorm courtyard. Down the cross walk, the south walk leads on to the shop street.
+// lane on east into the east lane in the morning and to the dorm courtyard after work. Down the cross walk, the south
+// walk leads on to the shop street.
 export async function plazaPlace(game) {
   const w = await sliced(plazaSteps()); // in slices between frames: it's built while the forecourt is played
   const cam = new RoomCam(w.camera); // the forecourt's camera, so the walk between them keeps its angle
@@ -102,19 +103,7 @@ export async function plazaPlace(game) {
     start: w.arriveIn,
     startFacing: w.arriveFace,
     music: 'calm',
-    grade: {
-      exposure: 1.04,
-      temp: 0.025,
-      sat: 0.78,
-      contrast: 1.04,
-      lift: [0.012, 0.012, 0.018],
-      shadowTint: [-0.008, -0.002, 0.02],
-      highTint: [0.022, 0.01, -0.014],
-      vignette: 0.2,
-      bloom: 0.3,
-      bloomThreshold: 0.82,
-      focusBand: 0.3,
-    },
+    grade: MORNING_GRADE,
     things,
     spots,
     seats: {},
@@ -173,6 +162,8 @@ export async function plazaPlace(game) {
       // down the cross walk toward the south walk: build the shop street now, for the same reason
       const p = game.player.root.position;
       if (p.x > w.shopX - 4 && p.z > w.laneZ() + 2.4 && !game.prepared.shotengai) game.prepare?.('shotengai');
+      // heading east before work is over: the lane goes on into the east lane
+      if (sim.period !== 'evening' && p.x > w.eastX - 6 && !game.prepared.east_lane) game.prepare?.('east_lane');
     },
     onPeriod(period) {
       canteen.sync(); // on every entry: the terrace open, or closing after work
@@ -198,10 +189,12 @@ export async function plazaPlace(game) {
       forecourt: (g) => walkOut(g, cam, w.westLane, w.westEdge),
       dorm_court: (g) => walkOut(g, cam, w.dormExit, w.dormEdge),
       shotengai: (g) => walkOut(g, cam, w.shopWalk, w.shopEdge),
+      east_lane: (g) => walkOut(g, cam, w.dormExit, w.dormEdge),
     },
     tripInFrom: {
       forecourt: (g) => walkIn(g, cam, w.arriveEdge, w.arriveIn, w.arriveFace),
       shotengai: (g) => walkIn(g, cam, w.shopEdge, w.shopWalk, -Math.PI / 2),
+      east_lane: (g) => walkIn(g, cam, w.dormEdge, w.dormExit, -Math.PI / 2),
     },
   };
   return P;

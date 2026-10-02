@@ -18,7 +18,7 @@ import { skylineSteps } from './skyline.js';
 import { drain } from '../perf/slice.js';
 import { mergeStaticSteps } from './merge-static.js';
 import { Parts } from './outdoor/parts.js';
-import { lightSet, fingerSign } from './outdoor/furniture.js';
+import { lightSet } from './outdoor/furniture.js';
 import { canteenSteps, shopStreetSteps } from './plaza-buildings.js';
 import { groundSteps } from './plaza/ground.js';
 import { greenSteps } from './plaza/green.js';
@@ -34,7 +34,7 @@ import { pigeons } from './outdoor/pigeons.js';
 import { fountain } from './plaza/fountain.js';
 import * as P from './plaza/plan.js';
 import { eastLaneSteps } from './plaza/east-lane.js';
-import { BLOCK_IDS, BLOCKS as EAST_BLOCKS, CROSS, SOUTH_WALK } from './plaza/east-plan.js';
+import { BLOCK_IDS, BLOCKS as EAST_BLOCKS, CROSS, SOUTH_WALK, FINGER } from './plaza/east-plan.js';
 import { northLaneSteps } from './plaza/north-lane.js';
 import { NORTH_IDS } from './plaza/north-plan.js';
 import { clusterSteps, placeIn, CLUSTER_IDS } from './dorm-court/cluster.js';
@@ -110,12 +110,8 @@ export function* plazaSteps() {
   const chairs = buildTerrace(root, nav);
   yield;
   buildBikes(root, nav);
-  // a finger sign on the lawn at the south walk's start, on its south edge clear of the trees, pointing along it to
-  // the shop street
-  const sx = CROSS[1] + 0.4,
-    sz = SOUTH_WALK[3] + 0.4;
-  fingerSign(root, p, sx, sz, [{ text: 'Shop street', sub: '商店街', dir: 1 }]);
-  nav.block(sx - 0.1, sx + 0.1, sz - 0.1, sz + 0.1);
+  // the finger sign at the south walk's start (plaza/east-lane.js builds it)
+  nav.block(FINGER[0] - 0.1, FINGER[0] + 0.1, FINGER[1] - 0.1, FINGER[1] + 0.1);
   yield;
   const east = yield* eastLaneSteps(root, p, lights); // backdrop: the lane on east to the dorm street
   const north = yield* northLaneSteps(root, lights); // backdrop: the back lane behind the canteen, the clinic

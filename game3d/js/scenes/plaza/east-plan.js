@@ -49,8 +49,10 @@ export const SQUARE = (() => {
 
 // the blocks along it, each with its door: the face it is on and where along it (null: the face's middle).
 // Ground floors: 'office' (a glazed entrance under a canopy, window bands), 'cafe' (a glazed front, an awning),
-// 'shop' (a shopfront and a noren-hung door), 'house' (a door and a small window, a light over it); tiled: a tiled
-// roof instead of a flat one
+// 'shop' (a shopfront and a noren-hung door; noren false: none), 'house' (a door and a small window, a light over
+// it); tiled: a tiled roof instead of a flat one. shop: a named shop (docs/game/island.md, "East lane"), its sign
+// [kana, English, colour] and where the sign is mounted ('face': on the wall over the ground floor, 'roof': standing
+// on the front slope of a tiled roof, 'canopy': standing on the door's canopy); plaza/east-shops.js builds them
 const b = (id) => rect(building(id).rect);
 export const BLOCKS = [
   // block_e1: the new-staff training centre, its sign on the canopy (its door is a thing, places/plaza.js)
@@ -63,9 +65,32 @@ export const BLOCKS = [
     sign: ['けんしゅう', 'NEW STAFF TRAINING'],
     dark: true,
   },
-  { id: 'm_e2', face: 'n', at: (CROSS[0] + CROSS[1]) / 2, ground: 'shop', wall: 3, tiled: true },
-  { id: 'm_e1', face: 'n', at: null, ground: 'cafe', wall: 0 },
-  { id: 'r8', face: 'n', at: (PARK_NS[0] + PARK_NS[1]) / 2, ground: 'office', wall: 2 },
+  {
+    id: 'm_e2',
+    face: 'n',
+    at: (CROSS[0] + CROSS[1]) / 2,
+    ground: 'shop',
+    wall: 3,
+    tiled: true,
+    shop: { id: 'liquor_shop', sign: ['さかや', 'SAKE · RICE', '#34425c'], mount: 'roof' },
+  },
+  {
+    id: 'm_e1',
+    face: 'n',
+    at: null,
+    ground: 'cafe',
+    wall: 0,
+    shop: { id: 'cafe', sign: ['カフェ', 'CAFE', '#5a6f66'], mount: 'face' },
+  },
+  {
+    id: 'r8',
+    face: 'n',
+    at: (PARK_NS[0] + PARK_NS[1]) / 2,
+    ground: 'shop',
+    noren: false,
+    wall: 2,
+    shop: { id: 'barber', sign: ['とこや', 'BARBER', '#4f5f74'], mount: 'face' },
+  },
   { id: 'r9', face: 'w', at: null, ground: 'house', wall: 3 },
   { id: 'block_e3', face: 'w', at: null, ground: 'office', wall: 0 },
   { id: 'r3', face: 'w', at: null, ground: 'office', wall: 1 },
@@ -92,6 +117,30 @@ export const ARCADE_END = rect(path('arcade_end').rect);
 export const BIKE_PAD = ((r) => [r[0] + 0.3, CROSS[0], r[3], r[3] + 2.2])(BLOCKS[0].rect);
 // a seat bay east of the cross walk, between block_e1's bed and the lane's avenue
 export const SEAT_BAY = ((r) => [CROSS[1], CROSS[1] + 2.8, r[3] + 2.0, r[3] + 3.2])(BLOCKS[0].rect);
+
+// the park's square: a bench either side of each walk's mouth on its north and south edges, facing in, [x, z, ry];
+// a lamp at two corners
+export const SQUARE_BENCHES = (() => {
+  const cx = (SQUARE[0] + SQUARE[1]) / 2,
+    off = (PARK_NS[1] - PARK_NS[0]) / 2 + 0.95,
+    out = [];
+  for (const [z, ry] of [
+    [SQUARE[2] + 0.45, 0],
+    [SQUARE[3] - 0.45, Math.PI],
+  ])
+    for (const sx of [-1, 1]) out.push([cx + sx * off, z, ry]);
+  return out;
+})();
+export const SQUARE_LAMPS = [
+  [SQUARE[1] - 0.3, SQUARE[2] + 0.3],
+  [SQUARE[0] + 0.3, SQUARE[3] - 0.3],
+];
+// lamps down the dorm street's west side and the north street's east side, every 8
+export const STREET_LAMPS = [];
+for (let z = CORNERS.c[3] + 3; z < DORM_STREET[3] - 1; z += 8) STREET_LAMPS.push([DORM_STREET[0] + 0.35, z]);
+for (let z = TOP_LEG[2] - 3; z > NORTH_STREET[2] + 2; z -= 8) STREET_LAMPS.push([NORTH_STREET[1] - 0.35, z]);
+// the finger sign on the lawn at the south walk's start, on its south edge, pointing along it to the shop street
+export const FINGER = [CROSS[1] + 0.4, SOUTH_WALK[3] + 0.4];
 
 // the avenue: zelkovas every 4 along the north street's west side, from the top leg north
 export const STREET_TREES = (() => {

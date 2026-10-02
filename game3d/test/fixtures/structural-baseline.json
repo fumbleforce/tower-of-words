@@ -99,7 +99,8 @@
       "office": "game3d/js/places/office.js",
       "dorm_court": "game3d/js/places/dorm-court.js",
       "dorms": "game3d/js/places/dorms.js",
-      "shotengai": "game3d/js/places/shotengai.js"
+      "shotengai": "game3d/js/places/shotengai.js",
+      "east_lane": "game3d/js/places/east-lane.js"
     },
     "events": {
       "train": {
@@ -115,7 +116,8 @@
       "office": {
         "sat_down": "sitDown"
       },
-      "shotengai": {}
+      "shotengai": {},
+      "east_lane": {}
     },
     "speakers": {
       "eric": {
@@ -242,7 +244,8 @@
     "plaza",
     "dorm_court",
     "dorms",
-    "shotengai"
+    "shotengai",
+    "east_lane"
   ],
   "nodes": [
     "train:intro",
@@ -445,9 +448,9 @@
     "plaza:arrive",
     "plaza:fountain",
     "plaza:training_locked",
-    "plaza:dorms_later",
     "plaza:to_forecourt",
     "plaza:to_dorms",
+    "plaza:to_east_lane",
     "plaza:to_shops",
     "dorm_court:bath",
     "dorm_court:mailboxes",
@@ -464,6 +467,12 @@
     "shotengai:shut",
     "shotengai:to_plaza",
     "shotengai:to_dorms",
+    "east_lane:arrive",
+    "east_lane:shut",
+    "east_lane:dorms_later",
+    "east_lane:to_plaza",
+    "east_lane:to_shops",
+    "east_lane:to_dorms",
     "transitions:train_to_gate",
     "transitions:gate_to_forecourt",
     "transitions:forecourt_to_office",
@@ -1226,6 +1235,12 @@
       "labels": []
     },
     {
+      "from": "plaza:to_east_lane",
+      "to": "east_lane:arrive",
+      "kind": "trip",
+      "labels": []
+    },
+    {
       "from": "plaza:to_shops",
       "to": "shotengai:arrive",
       "kind": "trip",
@@ -1239,6 +1254,24 @@
     },
     {
       "from": "shotengai:to_dorms",
+      "to": "dorm_court:arrive",
+      "kind": "trip",
+      "labels": []
+    },
+    {
+      "from": "east_lane:to_plaza",
+      "to": "plaza:arrive",
+      "kind": "trip",
+      "labels": []
+    },
+    {
+      "from": "east_lane:to_shops",
+      "to": "shotengai:arrive",
+      "kind": "trip",
+      "labels": []
+    },
+    {
+      "from": "east_lane:to_dorms",
       "to": "dorm_court:arrive",
       "kind": "trip",
       "labels": []
