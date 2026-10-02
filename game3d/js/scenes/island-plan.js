@@ -1,6 +1,6 @@
 // The south half of the island, planned for day 2 (docs/game/island.md, the home of every place here): the half's
-// edge, the rest of its coastline, its planned streets, walks, courts and green, the one new building, and a label
-// point for every place in island.md. Same frame and grid as scenes/island-layout.js, which re-exports this; traced
+// edge, its planned streets, walks, courts and green, and a label point for every place in island.md (its coast and
+// every building are the layout's). Same frame and grid as scenes/island-layout.js, which re-exports this; traced
 // from the straight-down picked map (art/island/island-map-4-topdown.png) like the layout, a few units out.
 //
 // Drawn by the island map only (?map=1, "Day 2 plan"; map/plan.js). No chunk builds it and no backdrop shows it:
@@ -11,27 +11,6 @@ const pairs = (f) => f.reduce((a, v, i) => (i % 2 ? a[a.length - 1].push(v) : a.
 // The half's north edge, west coast to east coast: north of the old works, then along the park's south edge, then
 // round the onsen. North of it: the park, the sports field, the matsuri stage, the history hall and the shrine.
 export const HALF_EDGE = pairs([-154, -134, -48, -134, -48, -112, 104, -112, 104, -124, 140, -124]);
-
-// The coast the layout's COAST.line doesn't reach: west from the sea wall's north end round the harbour. Land on the
-// inside.
-export const PLAN_COAST = [
-  pairs(
-    [-56.8, -32.9, -59, -42, -63, -50, -70, -52.5, -100, -52.5, -100, -90, -120, -90, -120, -98, -124, -100].concat([
-      -134, -104, -146, -112, -152, -124, -154, -134,
-    ]),
-  ),
-];
-
-// The one building the layout doesn't have (the rest of the half's buildings are its ROWS).
-export const PLAN_BUILDINGS = [
-  {
-    id: 'ferry_terminal',
-    kind: 'low',
-    rect: [-112, -106, -100, -98],
-    storeys: 1,
-    detail: 'The ferry waiting room and ticket window at the head of the ferry pier; its doors on the landing.',
-  },
-];
 
 // Planned streets (lane, 3 wide), walks (2 or 1.5), courts, piers. Every one on the grid, meeting the layout's
 // paths and each other square on.
@@ -61,39 +40,9 @@ export const PLAN_PATHS = [
     detail: 'North from the office street up the quarter’s west side to the works yard.',
   },
   {
-    id: 'harbour_walk',
-    kind: 'walk',
-    rect: [-42.6, -52.5, -40.6, -27.4],
-    detail: 'The west coast walk (layout coast_path) carried north to the office street.',
-  },
-  {
-    id: 'supply_yard',
-    kind: 'court',
-    rect: [-100, -90, -62, -52.5],
-    detail: 'The supply quay’s yard: the warehouse, the crane, containers and crates; the quay along its south edge.',
-  },
-  {
-    id: 'supply_pier',
-    kind: 'pier',
-    rect: [-97, -56, -88, -30],
-    detail: 'The supply pier, south off the yard’s west end, where the freighter ties up.',
-  },
-  {
-    id: 'ferry_landing',
-    kind: 'court',
-    rect: [-120, -98, -100, -90],
-    detail: 'The ferry landing in front of the terminal, at the head of the pier.',
-  },
-  {
-    id: 'ferry_pier',
-    kind: 'pier',
-    rect: [-128, -90, -120, -50],
-    detail: 'The ferry pier, south from the landing, the ferry alongside its west face.',
-  },
-  {
     id: 'works_lane',
     kind: 'lane',
-    rect: [-83.5, -114.5, -80.5, -90],
+    rect: [-83.5, -114.5, -80.5, -98],
     detail:
       'From the supply yard north between the harbour office and the server hall, past the works yard, to the power plant.',
   },

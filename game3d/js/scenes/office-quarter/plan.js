@@ -7,8 +7,8 @@
 //   the gym's corner: the sports lane's west end turns north by gym_link to the office street's east end; the
 //   sports chunk walks it too (scenes/sports.js), and both lay it with link.js
 //   the office street: west from the corner past m5, m3, m2 and w1 on its north side, each with its door on a paved
-//   forecourt off the street, to a row of bollards just short of the harbour walk (the street goes on to the supply
-//   quay later)
+//   forecourt off the street, to just short of the harbour walk, where the harbour chunk takes over (it walks the
+//   street on west to the supply yard, harbour/plan.js)
 //   the walks north: on the shed street's line to Amakawa Foods (m1), and between m3 and m5 to the court in front of
 //   Amakawa Construction (m4)
 //   the quarter street's mouth: a few steps south to the bank's door and its ATM corner, on the bank's east face;
@@ -36,7 +36,7 @@ export const CON_WALK = path('construction_walk');
 export const CON_COURT = path('construction_court');
 export const QUARTER = plan('quarter_street');
 export const SHED = plan('shed_street_far');
-export const HARBOUR_WALK = plan('harbour_walk');
+export const HARBOUR_WALK = path('harbour_walk');
 export const GYM = box(building('gym').rect);
 
 // the gym's corner, laid by link.js in both chunks: the lane's west end (a turn), gym_link, the street's east end
@@ -46,7 +46,7 @@ export const LANE_TURN = [LINK[0], LINK[1], LANE[2], LANE[3]];
 export const STREET_TURN = [LINK[0], LINK[1], STREET[2], STREET[3]];
 export const STUB_X = 27.5;
 export const LINK_E = 44.5;
-export const WEST_END = HARBOUR_WALK[1] + 0.6; // the street is walked east from here; bollards across it
+export const WEST_END = HARBOUR_WALK[1] + 0.6; // the street is walked east from here; on west is the harbour's
 export const QUARTER_END = STREET[3] + 6; // the quarter street's mouth is walked this far south; bollards
 // the walkable rects of the corner, in the island frame (the sports chunk walks these too)
 export const LINK_WALKS = [
@@ -196,16 +196,17 @@ export const RACKS = [
   return { id, a: [from, z], b: [to, z] };
 });
 
-// furniture, in the island frame: post lamps behind the street's south kerb every 8, none at the side streets' mouths;
-// benches in two bays on the south verge, looking over the street at the offices; bollards across the street's west
-// end and the two side streets' mouths; finger signs at the gym's corner and at the street's west end
+// furniture, in the island frame: post lamps behind the street's south kerb every 8 from the supply yard's edge (the
+// harbour lays the ones west of WEST_END), none at the side streets' mouths; benches in two bays on the south verge,
+// looking over the street at the offices; bollards across the two side streets' mouths; finger signs at the gym's
+// corner and at the street's west end
 const mouths = [
   [SHED[0], SHED[1]],
   [QUARTER[0], QUARTER[1]],
 ];
 const clear = (x) => !mouths.some(([a, b]) => x > a - 1 && x < b + 1);
 export const LAMPS = [];
-for (let x = WEST_END + 2; x < STUB_X; x += 8) if (clear(x)) LAMPS.push([x, STREET[3] + 0.45]);
+for (let x = WEST_END + 2 - 8 * 2; x < STUB_X; x += 8) if (clear(x)) LAMPS.push([x, STREET[3] + 0.45]);
 export const LINK_LAMPS = [
   [STUB_X + 2.5, STREET[3] + 0.45],
   [LINK[0] - 0.45, LANE[2] + 0.5],
@@ -213,10 +214,6 @@ export const LINK_LAMPS = [
 ];
 export const BAYS = [-12.5, 24].map((x) => [x - 1.1, x + 1.1]); // along the south verge, a bench in each
 export const BOLLARDS = [
-  {
-    a: [WEST_END - 0.35, STREET[2] + 0.5],
-    b: [WEST_END - 0.35, STREET[3] - 0.3],
-  },
   {
     a: [SHED[0] + 0.5, STREET[3] + 0.55],
     b: [SHED[1] - 0.3, STREET[3] + 0.55],
@@ -228,8 +225,13 @@ export const BOLLARDS = [
 ];
 export const SIGNS = {
   corner: [LINK[0] - 0.45, STREET[3] + 0.45], // the street's east end, pointing west to the offices and the bank
-  west: [WEST_END + 0.6, STREET[3] + 0.45], // the street's west end, pointing back east to the gym
+  west: [WEST_END + 0.6, STREET[3] + 0.45], // the street's west end, pointing on west to the harbour, back east to the gym
 };
+export const WEST_BOARDS = [
+  { text: 'Harbour', sub: '港', dir: -1 },
+  { text: 'Gym', sub: '体育館', dir: 1 },
+  { text: 'Pool', sub: 'プール', dir: 1 },
+];
 const post = ([x, z], r = 0.16) => [x - r, x + r, z - r, z + r];
 export const FURNITURE = [
   ...[...LAMPS, ...LINK_LAMPS, SIGNS.corner, SIGNS.west].map((p) => post(p)),
@@ -246,16 +248,25 @@ export const DOORS = BLOCKS.map((k) => {
   };
 });
 
-// the way out ({ edge, lane, zone, in } as the sports chunk's EXITS): east along the sports lane past the gym's
-// corner, to the sports ground; in: where he walks to from there, coming west along the street
+// the ways out ({ edge, lane, zone, in } as the sports chunk's EXITS): east along the sports lane past the gym's
+// corner, to the sports ground; west along the street past the harbour walk, to the harbour (back from there he
+// comes east along the street from where the harbour's way out ends: arrive, to in)
 const LZ = mid(LANE[2], LANE[3]),
   SZ = mid(STREET[2], STREET[3]),
   EX = LINK_E - 1.2;
+export const HARBOUR_ARRIVE = WEST_END + 9.1; // where the harbour's way back here ends (harbour/plan.js EXITS)
 export const EXITS = {
   sports: {
     edge: pt([EX + 0.2, LZ]),
     lane: pt([EX - 1.4, LZ]),
     zone: rect([EX - 2, EX + 1, LANE[2] - 0.5, LANE[3] + 0.5]),
+  },
+  harbour: {
+    edge: pt([WEST_END + 0.2, SZ]),
+    lane: pt([WEST_END + 1.6, SZ]),
+    zone: rect([WEST_END - 0.2, WEST_END + 2.4, STREET[2] - 0.5, STREET[3] + 0.5]),
+    arrive: pt([HARBOUR_ARRIVE, SZ]),
+    in: pt([HARBOUR_ARRIVE + 3.6, SZ]),
   },
 };
 // where Eric comes in from the sports ground (and from anywhere a trip doesn't say): on the street west of the

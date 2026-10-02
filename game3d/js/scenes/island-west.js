@@ -22,8 +22,9 @@
 const pairs = (f) => f.reduce((a, v, i) => (i % 2 ? a[a.length - 1].push(v) : a.push([v]), a), []);
 
 // ---------- the coastline ----------
-// centripetal Catmull-Rom through keys, sampled about every `step`; the ends are kept
-function smooth(keys, step) {
+// centripetal Catmull-Rom through keys, sampled about every `step`; the ends are kept (the harbour's rocky shores
+// use it too, island-harbour.js)
+export function smooth(keys, step) {
   const P = [keys[0], ...keys, keys[keys.length - 1]],
     out = [keys[0]];
   for (let i = 1; i + 2 < P.length; i++) {
@@ -123,9 +124,9 @@ export const WEST_PATHS = Object.entries(WALKS).map(([id, w]) => ({
   detail: DETAIL[id],
 }));
 
-// The coastline's land side, closed round the north-east so it can be drawn as ground (COAST.line runs from the
-// north-west round the south to the east).
-export const coastLand = (line) => [...line, [140, -200], [-60, -200]];
+// The coastline's land side, closed round the north so it can be drawn as ground (COAST.line runs from the
+// north-west round the harbour and the south to the east).
+export const coastLand = (line) => [...line, [140, -200], [-160, -200]];
 
 // ---------- the lawn ----------
 // the coast line moved `d` inland (the sea is on its right)

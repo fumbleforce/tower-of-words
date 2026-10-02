@@ -31,6 +31,7 @@ const BATCHED = new Set([
   'east_coast',
   'sports',
   'office_quarter',
+  'harbour',
 ]);
 
 export function createPlaceLifecycle(

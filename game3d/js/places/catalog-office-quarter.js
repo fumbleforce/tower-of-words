@@ -2,6 +2,7 @@
 export const OFFICE_QUARTER_DETAILS = {
   things: {
     sports_lane: { label: 'To the gym and pool', kind: 'thing', verb: 'Go' },
+    harbour: { label: 'To the harbour', kind: 'thing', verb: 'Go' },
     trading_office: { label: 'Amakawa Trading', kind: 'thing', verb: 'Go in' },
     foods_office: { label: 'Amakawa Foods', kind: 'thing', verb: 'Go in' },
     electric_office: {
@@ -24,7 +25,7 @@ export const OFFICE_QUARTER_DETAILS = {
   },
   spots: ['street_entry'],
   seats: [],
-  zones: ['east_exit'],
+  zones: ['east_exit', 'west_exit'],
   people: [],
   hooks: [],
 };

@@ -1,11 +1,13 @@
 // The office quarter, walked from the sports ground round the gym's corner and west along the office street past the
 // offices and the bank (docs/game/places.md). Every door is shut for now and says so. East past the gym's corner
-// goes back to the sports ground.
+// goes back to the sports ground; west past the harbour walk goes on to the harbour.
 export default {
   start: 'arrive',
   on: {
     'talk:sports_lane': 'to_sports',
     'zone:east_exit': 'to_sports',
+    'talk:harbour': 'to_harbour',
+    'zone:west_exit': 'to_harbour',
     'talk:trading_office': 'shut',
     'talk:foods_office': 'shut',
     'talk:electric_office': 'shut',
@@ -30,5 +32,6 @@ export default {
     ],
     shut: ['> The door is shut. A card on the glass says 準備中: not open yet.'],
     to_sports: [{ do: 'trip', to: 'sports' }],
+    to_harbour: [{ do: 'trip', to: 'harbour' }],
   },
 };

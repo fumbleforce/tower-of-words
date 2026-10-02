@@ -39,6 +39,9 @@
       ],
       "private_mode": [
         "game3d/js/settings.js"
+      ],
+      "say_tip": [
+        "game3d/js/ui.js"
       ]
     },
     "prefix": {
@@ -106,7 +109,8 @@
       "east_lane": "game3d/js/places/east-lane.js",
       "east_coast": "game3d/js/places/east-coast.js",
       "sports": "game3d/js/places/sports.js",
-      "office_quarter": "game3d/js/places/office-quarter.js"
+      "office_quarter": "game3d/js/places/office-quarter.js",
+      "harbour": "game3d/js/places/harbour.js"
     },
     "events": {
       "train": {
@@ -126,7 +130,8 @@
       "office_quarter": {},
       "office": {
         "sat_down": "sitDown"
-      }
+      },
+      "harbour": {}
     },
     "speakers": {
       "eric": {
@@ -257,7 +262,8 @@
     "east_lane",
     "east_coast",
     "sports",
-    "office_quarter"
+    "office_quarter",
+    "harbour"
   ],
   "nodes": [
     "train:intro",
@@ -498,6 +504,10 @@
     "office_quarter:arrive",
     "office_quarter:shut",
     "office_quarter:to_sports",
+    "office_quarter:to_harbour",
+    "harbour:arrive",
+    "harbour:shut",
+    "harbour:to_offices",
     "transitions:train_to_gate",
     "transitions:gate_to_forecourt",
     "transitions:forecourt_to_office",
@@ -1346,6 +1356,18 @@
     {
       "from": "office_quarter:to_sports",
       "to": "sports:arrive",
+      "kind": "trip",
+      "labels": []
+    },
+    {
+      "from": "office_quarter:to_harbour",
+      "to": "harbour:arrive",
+      "kind": "trip",
+      "labels": []
+    },
+    {
+      "from": "harbour:to_offices",
+      "to": "office_quarter:arrive",
       "kind": "trip",
       "labels": []
     },
