@@ -4,7 +4,7 @@
 Smart Topology model (low poly at a set face count, 15 credits). Uses Jørgen's Meshy credits: one call, one part.
 
   meshy_part.py <part> <picture.png> [pose=a-pose] [tex=4k] [model=t2 faces=3000]
-Writes tools/characters/out/mio-parts-1/meshy/<part>.json and .glb (git-ignored) and appends the credits to
+Writes <part>.json and .glb to the main checkout's art/parts/char-mio-parts/meshy/ (local only) and appends the credits to
 reviews/char-mio-parts-1/credits.json.
 """
 import json, os, sys
@@ -43,7 +43,7 @@ def main():
     print('task', tid, flush=True)
     r = meshy.wait('image-to-3d', tid)
     after = meshy.call('GET', '/v1/balance')['balance']
-    d = os.path.join(ROOT, 'tools/characters/out/mio-parts-1/meshy'); os.makedirs(d, exist_ok=True)
+    d = os.path.join(MAIN, 'art/parts/char-mio-parts/meshy'); os.makedirs(d, exist_ok=True)
     r['_settings'] = {k: v for k, v in body.items() if k != 'image_url'}
     r['_input'] = os.path.relpath(pic, MAIN)
     json.dump(r, open(f'{d}/{part}.json', 'w'), indent=1)

@@ -5,7 +5,7 @@ The key is TRIPO_API_KEY in .env (this checkout's, else the main checkout's) and
   tripo.py image <id> <picture.png> [key=value ...]   image_to_model; values are JSON (texture=true face_limit=8000)
   tripo.py segment <id> <task_id>                     mesh_segmentation of a finished model
   tripo.py get <task_id>
-Every task's JSON and files land in tools/characters/out/<id>/tripo/ (git-ignored).
+Every task's JSON and files land in the main checkout's art/parts/<id>/tripo/ (local only).
 """
 import json, os, sys, time, uuid, urllib.request
 
@@ -55,7 +55,7 @@ def wait(tid, every=10, limit=1800):
 
 
 def save(cid, name, d):
-    out = os.path.join(ROOT, 'tools/characters/out', cid, 'tripo'); os.makedirs(out, exist_ok=True)
+    out = os.path.join(MAIN, 'art/parts', cid, 'tripo'); os.makedirs(out, exist_ok=True)
     json.dump(d, open(os.path.join(out, name + '.json'), 'w'), indent=1)
     for k, u in (d.get('output') or {}).items():
         if isinstance(u, str) and u.startswith('http'):
