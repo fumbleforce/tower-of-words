@@ -1021,8 +1021,8 @@ function watchLoading() {
 // ---------- the current target, and cycling through things in reach ----------
 // main.js picks the nearest thing as the target every frame, and holds a chosen one (game.targetLock) while it's
 // usable and within 1.7 m. When several are close (the gate: guard, gate, cat, sign-in sheet), Tab (or Next in the
-// action menu) steps through the ones in reach and sets that lock. The list of what's in reach is read from the
-// markers' per-frame update, where main.js hands over its pick.
+// action menu) steps to the next in reach, locks it and opens its menu. What's in reach is read from the markers'
+// per-frame update.
 function targetCycling() {
   const g = game();
   const mk = g && g.markers;
@@ -1062,7 +1062,7 @@ function targetCycling() {
     if (!list.length) return;
     const i = list.indexOf(G.targetLock || G.near);
     G.targetLock = list[(i + 1) % list.length];
-    G.near = G.targetLock;
+    ui.openActs((G.near = G.targetLock));
     sfx('tap');
   }
   shell.cycleTarget = cycle;

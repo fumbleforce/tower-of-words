@@ -19,7 +19,7 @@ for (const [tag, W, H] of [['desktop', 1366, 860], ['phone', 390, 844]]) {
   // talk to a passenger once (onboarding keeps the HUD back until then), click through their lines
   await p.evaluate(() => { const G = window.__game, q = G.player.root.position; const m = G.markers.list.filter((m) => m.enabled() && /person/.test(m.kind || '') && !['mio', 'kuroda', 'tama'].includes(m.id)).sort((a, b) => Math.hypot(q.x - a.spot()[0], q.z - a.spot()[1]) - Math.hypot(q.x - b.spot()[0], q.z - b.spot()[1]))[0]; const s = m.spot(); q.x = s[0]; q.z = s[1]; });
   await p.waitForTimeout(600);
-  await p.evaluate(() => document.querySelector('#actMenu .use')?.click());
+  await p.evaluate(() => window.__game.use(window.__game.near));
   for (let i = 0; i < 20; i++) { await p.waitForTimeout(500); const busy = await p.evaluate(() => !!window.__game.busy || !document.querySelector('#talk').hidden); if (!busy) break; await p.mouse.click(W - 20, H - 20); }
   const res = await p.evaluate(async () => {
     const L = await import('./js/lang.js');

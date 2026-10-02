@@ -60,7 +60,7 @@ Controls: WASD or click/tap the floor to walk, E to use or talk to whatever is i
 
 **Beat 1. Free walk (about 0:05 to 0:40, as long as the player wants).** The car moves. Passengers sit as they are: the sleeping man, Aoi on her phone, the man with a book, the girl with headphones, the woman with a bun, the young man, the cat on the seat, and Mio by the window with her laptop and the pickle bag.
 - On screen: nothing, until the player comes within reach of something.
-- First time anything is in reach: a small ring on that one target, its short label ("Man with a book") and a key cap reading "E Look" for a thing or "E Talk" for a person, next to the target and not in a floating menu. It stays until the player presses E or walks out of reach. The action word always stays; the key cap goes after five uses (docs/game/controls-and-ui.md).
+- Anything in reach: its pin lights up and the model gets an outline; on desktop the pin carries a small E key, which goes after five uses. No menu opens by itself (Jørgen, 2026-10-02: "The interaction menu opens automatically everywhere and is very disruptive"); a tap or click on a target with more than one thing to do opens its menu (docs/game/controls-and-ui.md).
 - Things (window, poster, straps, rack, plant, cup) answer with one short line. Straps: Eric grabs one as the car sways. Poster: katakana he can't read, and one thought from him. People answer as described in beat 2.
 - Not shown yet: goal, and anything about the story.
 
@@ -81,7 +81,7 @@ Controls: WASD or click/tap the floor to walk, E to use or talk to whatever is i
 **Beat 5. Free play (the player ends it).** Eric can stay seated or walk around the car. Mio types and doesn't press him. A person he talked to before might say a new line now (for example Aoi on her phone, the existing overheard line). The sleeping man has a zzz emote, which sets him up for the arrival. Talking to the sleeping man gives "He is fast asleep." Only a ring on Mio shows, and only when within reach, as with every target.
 
 **Beat 6. The lesson, part 1: おはようございます (`lesson`, started by E on Mio).** About 90 seconds: where he's from, how much Japanese he has, why it matters, the word, typing it. The type box is the first typing. It shows the romaji under the word, and Mio's prompt line says what to do. When it ends, Mio points him at the cat.
-- **Q (Say) is taught now, only now:** the goal line reads "Say good morning to the cat". When Eric is in reach of the cat, the action shows "E Pet" and "Q Say" stacked, with Q highlighted this first time. Pressing Q opens the Say menu with one word in it, おはようございます. Saying it to the cat gets the slow blink and Mio's "See? She's fine with it."
+- **Q (Say) is taught now, only now:** the goal line reads "Say good morning to the cat". Q works as soon as Eric is in reach of the cat; a tap or click on the cat opens its menu with "Pet" and "Say a word" stacked, Say highlighted this first time. Pressing Q opens the Say menu with one word in it, おはようございます. Saying it to the cat gets the slow blink and Mio's "See? She's fine with it."
 - The word list appears for the first time now, holding one word, because it has something in it.
 - After this, Say works on anyone. Every passenger has a small reaction (nods, a glance up, the sleeping man stays asleep). Nothing asks the player to try them. It's there to be found.
 
