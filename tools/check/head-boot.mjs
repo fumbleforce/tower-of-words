@@ -25,8 +25,9 @@ const TYPES = { '.html': 'text/html', '.js': 'text/javascript', '.mjs': 'text/ja
   '.css': 'text/css', '.svg': 'image/svg+xml', '.png': 'image/png', '.webp': 'image/webp', '.jpg': 'image/jpeg',
   '.glb': 'model/gltf-binary', '.mp3': 'audio/mpeg', '.ogg': 'audio/ogg', '.woff2': 'font/woff2', '.wasm': 'application/wasm' };
 
-// Missing on GitHub Pages too, and the game copes: the local review server's API and the favicon.
-const OPTIONAL = /^\/(api\/|favicon\.ico$)/;
+// Missing on GitHub Pages too, and the game copes: the local review server's API, the favicon, and a
+// private-mode plugin. plugins.js fetches that file and keeps the public game when it is not there.
+const OPTIONAL = /^\/(api\/|favicon\.ico$|island\/private\/plugins\/)/;
 
 fs.mkdirSync('/tmp/claude-1000', { recursive: true });
 const site = fs.mkdtempSync('/tmp/claude-1000/head-boot-');
