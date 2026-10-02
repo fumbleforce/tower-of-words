@@ -36,6 +36,7 @@ import { dormsPlace as dorms } from './places/dorms.js';
 import { shotengaiPlace as shotengai } from './places/shotengai.js';
 import { eastLanePlace as east_lane } from './places/east-lane.js';
 import { eastCoastPlace as east_coast } from './places/east-coast.js';
+import { sportsPlace as sports } from './places/sports.js';
 import { showEnd } from './end.js';
 import { snapshot as snapshotOf, crossfade } from './places/crossfade.js';
 import { installSim, sim, stepAmbient, save, loadSave, restore, clearSave } from './sim.js';
@@ -59,7 +60,7 @@ let quality = tierNow();
 ui.build();
 if (CAP) document.body.classList.add('cap');
 
-const PLACES = { train, gate, forecourt, plaza, office, dorm_court, dorms, shotengai, east_lane, east_coast };
+const PLACES = { train, gate, forecourt, plaza, office, dorm_court, dorms, shotengai, east_lane, east_coast, sports };
 assertRegistered(Object.keys(PLACE_FILES), PLACES, 'place factories');
 
 // ---------- shared game state ----------

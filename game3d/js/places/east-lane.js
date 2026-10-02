@@ -14,8 +14,8 @@ import { turningCam, followFit } from './turning-cam.js';
 // The east lane (scenes/east-lane.js): the plaza's lane walked on east, in the morning (after work the lane takes
 // Eric straight on to the dorm courtyard); it also loads with ?place=east_lane. The named shops are shut for now
 // (their doors say so). Out west along the lane goes back to the plaza, south down the dorm street to the shop
-// street, east along the dorm row to the sea terrace and the east coast, and after work in at the dorm
-// courtyard's gate.
+// street, east along the dorm row to the sea terrace and the east coast, north up the north street to the sports
+// ground, and after work in at the dorm courtyard's gate.
 //
 // The camera looks north-east over most of it, so the north street's fronts, the park and Amakawa Travel face it, and
 // south-east over the south walk, where the café, the liquor shop and the barber face north. It eases between the two
@@ -56,6 +56,12 @@ export async function eastLanePlace(game) {
       anchor: (v) => v.set(w.exits.east_coast.lane[0], 1.1, w.exits.east_coast.lane[1]),
       spot: () => w.exits.east_coast.lane,
       face: () => w.exits.east_coast.edge,
+    },
+    north_street: {
+      ...PLACE_DETAILS.east_lane.things.north_street,
+      anchor: (v) => v.set(w.exits.sports.lane[0], 1.1, w.exits.sports.lane[1]),
+      spot: () => w.exits.sports.lane,
+      face: () => w.exits.sports.edge,
     },
     dorm_gate: {
       ...PLACE_DETAILS.east_lane.things.dorm_gate,
@@ -110,6 +116,7 @@ export async function eastLanePlace(game) {
       shop_exit: (x, z) => inRect(x, z, w.exits.shotengai.zone),
       dorm_exit: (x, z) => inRect(x, z, w.exits.dorm_court.zone),
       row_exit: (x, z) => inRect(x, z, w.exits.east_coast.zone),
+      north_exit: (x, z) => inRect(x, z, w.exits.sports.zone),
     },
     hooks: {},
     fit(aspect) {
@@ -132,6 +139,7 @@ export async function eastLanePlace(game) {
       if (near('shotengai', 6) && !game.prepared.shotengai) game.prepare?.('shotengai');
       if (near('plaza', 6) && !game.prepared.plaza) game.prepare?.('plaza');
       if (near('east_coast', 6) && !game.prepared.east_coast) game.prepare?.('east_coast');
+      if (near('sports', 6) && !game.prepared.sports) game.prepare?.('sports');
       if (sim.period === 'evening' && near('dorm_court', 6) && !game.prepared.dorm_court) game.prepare?.('dorm_court');
     },
     onPeriod(period) {
@@ -155,8 +163,12 @@ export async function eastLanePlace(game) {
     },
     // in from the plaza along the lane, the jog ahead; out the ways plan.js EXITS gives
     tripIn: (g) => walkIn(g, cam, w.arriveEdge, w.in, Math.PI / 2),
-    // back from the east coast: in off the dorm row onto the dorm street, walking west
-    tripInFrom: { east_coast: (g) => walkIn(g, cam, w.exits.east_coast.edge, w.exits.east_coast.in, -Math.PI / 2) },
+    // back from the east coast: in off the dorm row onto the dorm street, walking west; back from the sports
+    // ground: in down the north street, walking south
+    tripInFrom: {
+      east_coast: (g) => walkIn(g, cam, w.exits.east_coast.edge, w.exits.east_coast.in, -Math.PI / 2),
+      sports: (g) => walkIn(g, cam, w.exits.sports.edge, w.exits.sports.in, 0),
+    },
     tripOutTo: Object.fromEntries(
       Object.entries(w.exits).map(([to, e]) => [to, (g) => walkOut(g, cam, e.lane, e.edge)]),
     ),

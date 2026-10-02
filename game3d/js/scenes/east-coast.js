@@ -56,7 +56,7 @@ export function* eastCoastSteps() {
   // (a group of its own, added after the merge below, so the merge leaves the cells apart)
   const c = cells([], Z_CUTS),
     wg = placeIn(new THREE.Group(), CHUNK);
-  yield* walkSteps(c, lights, isl);
+  yield* walkSteps(c, lights, isl, signs);
   yield* c.paver.build(wg);
   for (const m of yield* c.parts.build(wg)) m.castShadow = false;
   yield;

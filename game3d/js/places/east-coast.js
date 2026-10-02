@@ -12,7 +12,8 @@ import { turningCam, followFit } from './turning-cam.js';
 
 // The east coast (scenes/east-coast.js): the dorm row walked east from the east lane's dorm street, to the sea
 // terrace, the coast walk and the onsen's front; it also loads with ?place=east_coast. The onsen is shut for now
-// (its door says so). West along the row goes back to the dorm street.
+// (its door says so). West along the row goes back to the dorm street; west along the courts walk from the onsen
+// path's foot goes on to the sports ground (the gym, the pool and the courts walk, scenes/sports.js).
 //
 // The camera looks east down the row, toward the terrace and the sea, from a little north of it and steeply, so the
 // row's trees (on its south side) don't hide Eric; over the terrace it turns to look north-east up the coast, the
@@ -42,13 +43,20 @@ export async function eastCoastPlace(game) {
     };
   });
   const door = w.doors[0],
-    out = w.exits.east_lane;
+    out = w.exits.east_lane,
+    west = w.exits.sports;
   const things = {
     dorm_street: {
       ...PLACE_DETAILS.east_coast.things.dorm_street,
       anchor: (v) => v.set(out.lane[0], 1.1, out.lane[1]),
       spot: () => out.lane,
       face: () => out.edge,
+    },
+    courts_walk: {
+      ...PLACE_DETAILS.east_coast.things.courts_walk,
+      anchor: (v) => v.set(west.lane[0], 1.1, west.lane[1]),
+      spot: () => west.lane,
+      face: () => west.edge,
     },
     onsen: {
       ...PLACE_DETAILS.east_coast.things.onsen,
@@ -75,6 +83,7 @@ export async function eastCoastPlace(game) {
     people: {},
     zones: {
       row_exit: (x, z) => inRect(x, z, out.zone),
+      courts_exit: (x, z) => inRect(x, z, west.zone),
     },
     hooks: {},
     fit(aspect) {
@@ -88,11 +97,10 @@ export async function eastCoastPlace(game) {
       const p = game.player.root.position;
       w.follow(p.x, p.z);
       turn.steer(p, dt);
-      // heading back: build the east lane now, so the walk there needs no loading pause
-      const [x0, x1, z0, z1] = out.zone,
-        d = 6;
-      if (p.x > x0 - d && p.x < x1 + d && p.z > z0 - d && p.z < z1 + d && !game.prepared.east_lane)
-        game.prepare?.('east_lane');
+      // heading for a way out: build the next place now, so the walk there needs no loading pause
+      const near = ([x0, x1, z0, z1], d = 6) => p.x > x0 - d && p.x < x1 + d && p.z > z0 - d && p.z < z1 + d;
+      if (near(out.zone) && !game.prepared.east_lane) game.prepare?.('east_lane');
+      if (near(west.zone) && !game.prepared.sports) game.prepare?.('sports');
     },
     onPeriod(period) {
       if (period !== 'evening' || P.grade === EVENING_GRADE) return;
@@ -113,9 +121,13 @@ export async function eastCoastPlace(game) {
       turn.reset();
       cam.snap(game.player.root.position);
     },
-    // in off the dorm street onto the row, walking east; out the same way
+    // in off the dorm street onto the row, walking east; out the same way; from the sports ground in along the
+    // courts walk to the onsen path's foot, walking east, and out the same way
     tripIn: (g) => walkIn(g, cam, w.arriveEdge, w.in, Math.PI / 2),
-    tripOut: (g) => walkOut(g, cam, out.lane, out.edge),
+    tripInFrom: { sports: (g) => walkIn(g, cam, west.edge, west.in, Math.PI / 2) },
+    tripOutTo: Object.fromEntries(
+      Object.entries(w.exits).map(([to, e]) => [to, (g) => walkOut(g, cam, e.lane, e.edge)]),
+    ),
   };
   return P;
 }

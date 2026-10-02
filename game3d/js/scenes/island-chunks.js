@@ -75,7 +75,7 @@ export const CHUNKS = {
     turn: 0, // the camera turns itself: north-east over most of it, south-east over the south walk (scenes/east-lane.js)
     scale: 1,
     level: 0,
-    walk: [-17.38, 9.87, -32.46, 16.92],
+    walk: [-17.38, 9.87, -35.65, 16.92],
     view: [-26, 14, -40, 20],
     anchor: 'the middle of the pocket park’s gravel square, where its two walks cross',
   },
@@ -87,6 +87,15 @@ export const CHUNKS = {
     walk: [-50.7, 5.5, -98.7, 2.5],
     view: [-56, 18, -112, 20],
     anchor: 'the middle of the dorms’ sea terrace, at the dorm row’s east end',
+  },
+  sports: {
+    at: [58.2, -57.5],
+    turn: 0, // the camera turns itself: north over the lane and the pool walk, east along the courts walk (scenes/sports.js)
+    scale: 1,
+    level: 0,
+    walk: [-21.8, 43.6, -33.5, 20.5],
+    view: [-30, 50, -46, 32],
+    anchor: 'the corner where the pool walk meets the courts walk',
   },
   train: {
     at: [-28.6, -3.9],

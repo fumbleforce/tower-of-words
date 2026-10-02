@@ -2,11 +2,12 @@
 export const EAST_COAST_DETAILS = {
   things: {
     dorm_street: { label: 'To the dorm street', kind: 'thing', verb: 'Go' },
+    courts_walk: { label: 'To the gym and pool', kind: 'thing', verb: 'Go' },
     onsen: { label: 'Onsen', kind: 'thing', verb: 'Go in' },
   },
   spots: ['row_entry'],
   seats: [],
-  zones: ['row_exit'],
+  zones: ['row_exit', 'courts_exit'],
   people: [],
   hooks: [],
 };

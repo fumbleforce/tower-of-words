@@ -10,7 +10,7 @@ The tables are checked by `node tools/facts/check.mjs`: things and their labels,
 
 The company city has dorms, a canteen, shops, a bar and a university ([setting.md](setting.md)); only the places in the list below are planned, and only the `##` sections further down are built. One line per planned place: name, id, what it is.
 
-The picked full-island layout is [island-map-4](../../reviews/island-map-4/review.json). Only the day-1 route is to be built, one chunk at a time, using the game's existing palette rather than the map's saturated colours. The plaza and dorm courtyard chunks replaced the earlier single outdoor `path` proposal. The rest of the island's south half is planned for day 2 in [island.md](island.md) (2026-10-02): every place there, its doors, connections and a Japanese hook. Jørgen confirmed the plan on Review island-half-1 (2026-10-02, "Correct"); its districts are built one at a time: the shop street and seafront is the first (`shotengai`, below), the east lane the second (`east_lane`, below), the east coast up to the onsen the third (`east_coast`, below).
+The picked full-island layout is [island-map-4](../../reviews/island-map-4/review.json). Only the day-1 route is to be built, one chunk at a time, using the game's existing palette rather than the map's saturated colours. The plaza and dorm courtyard chunks replaced the earlier single outdoor `path` proposal. The rest of the island's south half is planned for day 2 in [island.md](island.md) (2026-10-02): every place there, its doors, connections and a Japanese hook. Jørgen confirmed the plan on Review island-half-1 (2026-10-02, "Correct"); its districts are built one at a time: the shop street and seafront is the first (`shotengai`, below), the east lane the second (`east_lane`, below), the east coast up to the onsen the third (`east_coast`, below), the sports ground the fourth (`sports`, below).
 
 ## Getting between places
 
@@ -33,6 +33,10 @@ There are no cuts to black (Jørgen, 2026-09-28: "elegant, continuous transition
 - `east_lane` → `dorm_court`, walk: after work only. Eric turns into the dorm courtyard's gate off the dorm street; the camera closes in and crossfades to him walking in at the gate, as from the plaza.
 - `east_lane` → `east_coast`, walk: Eric turns east off the dorm street into the dorm row; the camera closes in and crossfades to the same close framing of him walking on east along the row, toward the sea terrace, as the camera lets go.
 - `east_coast` → `east_lane`, walk: the same walk the other way, west along the dorm row onto the dorm street, crossfading to him stepping out of the row's mouth, walking west.
+- `east_lane` → `sports`, walk: Eric walks north up the north street past the back lane; the camera closes in and crossfades to the same close framing of him walking on north up the street toward the sports lane, as the camera lets go.
+- `sports` → `east_lane`, walk: the same walk the other way, south down the north street toward the back lane, crossfading to him walking on south past it.
+- `sports` → `east_coast`, walk: Eric walks east along the courts walk to its end; the camera closes in and crossfades to the same close framing of him walking on east to the foot of the onsen path, as the camera lets go. With the east lane and the east coast this closes a loop: up the north street, round by the pool and the courts, down the coast and back along the dorm row.
+- `east_coast` → `sports`, walk: the same walk the other way, west from the onsen path's foot along the courts walk, crossfading to him walking on west past the courts.
 - `shotengai` → `dorm_court`, walk: after work only. Eric walks out of the shop walk onto the dorm street; the camera closes in and crossfades to him walking up the street to the dorm courtyard's gate, as from the plaza.
 - `dorm_court` → `dorms`, walk then stairs: Eric has walked in through the hall doors and across the hall himself. At the passage the camera comes in close as he walks into it, then crossfades to him coming up the last flight onto the 2F landing; the camera pulls back along the corridor as he turns into it and lets go. He walks the corridor to his door himself (Eric's dorm room).
 
@@ -55,6 +59,7 @@ The buildings, paths, green and coast around the route, and the fit to the map, 
 | `shotengai` | 64.5 | 20.15 | 270 | 1 | 0 | The middle of the arcade's east mouth, between the two shop rows; its camera looks west down the arcade. |
 | `east_lane` | 69.27 | -2.75 | 0 | 1 | 0 | The middle of the pocket park's gravel square, where its two walks cross. Its camera turns: north-east over most of it, south-east over the south walk. |
 | `east_coast` | 126.5 | 10.5 | 0 | 1 | 0 | The middle of the dorms' sea terrace, at the dorm row's east end. Its camera turns: east along the row, north-east up the coast, north at the onsen. |
+| `sports` | 58.2 | -57.5 | 0 | 1 | 0 | The corner where the pool walk meets the courts walk. Its camera turns: a little east of north over the lane and the pool walk, east-north-east at the pavilion, east along the courts walk. |
 | `train` | -28.6 | -3.9 | 270 | 1.18 | 1 | The car in the middle of the platform shed, heading north (the line comes in from the south), its platform side east toward the station and its walkway end south, toward the shed's stairs. |
 
 ## Monorail (`train`)
@@ -356,7 +361,7 @@ Nobody yet.
 
 The second district of the island's south half built to walk (issue #173, after Jørgen's "Correct" on Review island-half-1; its places are in [island.md](island.md), "East lane"). It is the ground the plaza shows as its east lane backdrop (under the plaza above), built by the same code, so the two always match: the lane's jog, the pocket park, the dorm street, the north street, the south walk and the small blocks, with the back lane and the clinic to the north. Eric comes in from the plaza along the lane, in the morning (Getting between places).
 
-Walked: the lane from just west of the cross walk east to the jog, its west leg and top leg and the three turns; the dorm street from the top leg south past the dorm courtyard's gate and the dorm row's mouth to just short of the shop walk; the pocket park's two walks and its gravel square (not its benches, lamps or tree); the cross walk from the lane down to the south walk and on to the liquor shop's door; the south walk along the café and the barber to the dorm street; the north street from the top leg north to the back lane, with the short walks to block_e3's and r9's doors; the back lane west to Amakawa Travel's walk, and the walk up to its door. Lawns, beds, the plaza's own cross walk north of the lane and the dorm courtyard are not walked here.
+Walked: the lane from just west of the cross walk east to the jog, its west leg and top leg and the three turns; the dorm street from the top leg south past the dorm courtyard's gate and the dorm row's mouth to just short of the shop walk; the pocket park's two walks and its gravel square (not its benches, lamps or tree); the cross walk from the lane down to the south walk and on to the liquor shop's door; the south walk along the café and the barber to the dorm street; the north street from the top leg north to a little past the back lane, where it goes on to the sports ground (`sports`, below), with the short walks to block_e3's and r9's doors; the back lane west to Amakawa Travel's walk, and the walk up to its door. Lawns, beds, the plaza's own cross walk north of the lane and the dorm courtyard are not walked here.
 
 The camera turns with the place, and a held direction key keeps the frame it was pressed in until it is let go, so a walk doesn't bend while the camera turns. Over most of the district it looks north-east, so the park, the north street's fronts and Amakawa Travel face it; as Eric comes onto the south walk it eases round to look south-east and a little steeper, so the shop fronts there face it and the lane's trees north of the walk don't hide him.
 
@@ -371,6 +376,7 @@ In the morning the sun is the plaza's, and after work the lamps along the street
 | `plaza_lane` | To the plaza | The lane west of the cross walk, back to the plaza. |
 | `shop_street` | To the shop street | The dorm street's south end, toward the shop walk. |
 | `dorm_row` | To the sea terrace | The dorm row's mouth off the dorm street, east toward the sea terrace and the east coast. |
+| `north_street` | To the gym and pool | The north street north of the back lane, toward the sports lane. |
 | `dorm_gate` | To the dorms | The dorm courtyard's gate off the dorm street. |
 | `cafe` | Café | The café's door on the south walk. Go in: shut. |
 | `liquor_shop` | Liquor shop | The liquor and rice shop's door at the foot of the cross walk. Go in: shut. |
@@ -387,7 +393,7 @@ None.
 
 ### Zones
 
-`plaza_exit` (the lane west of the cross walk), `shop_exit` (the dorm street's south end), `dorm_exit` (the dorm courtyard's gate), `row_exit` (the dorm row's mouth)
+`plaza_exit` (the lane west of the cross walk), `shop_exit` (the dorm street's south end), `dorm_exit` (the dorm courtyard's gate), `row_exit` (the dorm row's mouth), `north_exit` (the north street north of the back lane)
 
 ### Who's there when
 
@@ -407,13 +413,14 @@ Nobody yet.
 | `to_plaza` | Use or walk into the lane west of the cross walk | Eric walks back to the plaza. |
 | `to_shops` | Use or walk into the dorm street's south end | Eric walks on to the shop street. |
 | `to_coast` | Use or walk into the dorm row's mouth | Eric walks on east along the dorm row to the east coast. |
+| `to_sports` | Use or walk on up the north street past the back lane | Eric walks on north to the sports ground. |
 | `to_dorms` | Use or walk into the dorm courtyard's gate, after work | Eric walks in to the dorm courtyard. |
 
 ## East coast (`east_coast`)
 
 The third district of the island's south half built to walk (issue #173, after Jørgen's "Correct" on Review island-half-1; its places are in [island.md](island.md), "Dorms" and "Sports and baths"). It runs from the dorm street east along the dorm row to the dorms' sea terrace, north up the east coast and on to the onsen's front. The dorm row, the terrace and the blocks round the inner court are the dorm cluster the plaza, the east lane and the dorm courtyard show as backdrop (under the dorm courtyard below), built by the same code, with the courtyard and Eric's block as the plaza shows them. Eric comes in from the east lane, off the dorm street (Getting between places).
 
-Walked: the dorm row from the dorm street east to the square at dorm_3's door, the walk on east to the sea terrace, and the terrace (not its pine bed, benches, drinks machine or lamp); the east coast walk out of the terrace's east side, north along the coast behind dorm_4, west where the coast comes in, north past dorm_6 and west behind the north residence; the onsen path north along the tennis courts' fence and east along the onsen's precinct wall to the red gate; inside the gate, the stone walk to the onsen's porch. The terrace's low wall on the coast side is now open on its east side, where the walk leaves it; a finger sign there points along it: Onsen 温泉 →, and another where the onsen path turns east.
+Walked: the dorm row from the dorm street east to the square at dorm_3's door, the walk on east to the sea terrace, and the terrace (not its pine bed, benches, drinks machine or lamp); the east coast walk out of the terrace's east side, north along the coast behind dorm_4, west where the coast comes in, north past dorm_6 and west behind the north residence; the onsen path north along the tennis courts' fence and east along the onsen's precinct wall to the red gate; inside the gate, the stone walk to the onsen's porch; and from the onsen path's foot a few steps west along the courts walk, which goes on to the sports ground (`sports`, below). The terrace's low wall on the coast side is now open on its east side, where the walk leaves it; a finger sign there points along it: Onsen 温泉 →, and another where the onsen path turns east.
 
 The coast walk is pale slabs between kerbs, 2 wide, turning in squares. On its landward edge stand post lamps about every 8, and two paved bays with a bench look over it to the sea. Between it and the coast's wall (the forecourt's wall, rocks and broken surf, here along the east coast) a strip of black pines; behind dorm_4 and dorm_6 a grove of cherries on the lawn; where it turns inland, pines and zelkovas; a clipped hedge along the north residence's back. The onsen path runs between the tennis courts (two hard courts with their lines and nets inside a steel fence) and the onsen's grounds: a wood of pines, maples and zelkovas, kept back from the path by a band of layered planting, and a belt of trees between the path and the precinct wall.
 
@@ -428,6 +435,7 @@ In the morning the sun is the plaza's; after work the lamps, the stone lanterns,
 | Id | Label | What it is |
 |---|---|---|
 | `dorm_street` | To the dorm street | The dorm row's west end, back to the dorm street. |
+| `courts_walk` | To the gym and pool | The courts walk west of the onsen path's foot, toward the pool and the gym. |
 | `onsen` | Onsen | The onsen's door under its porch. Go in: shut. |
 
 ### Spots
@@ -440,7 +448,7 @@ None.
 
 ### Zones
 
-`row_exit` (the dorm row's west end, at the dorm street)
+`row_exit` (the dorm row's west end, at the dorm street), `courts_exit` (the courts walk west of the onsen path's foot)
 
 ### Who's there when
 
@@ -457,6 +465,63 @@ Nobody yet.
 | `arrive` | Arrive | Goal line: "Head office is back west past the plaza. Take its lift down to B2."; after work, "The dorms are back along the row, through the gate off the street." |
 | `shut` | Go in at the onsen's door | The door is shut; a card on the glass says 準備中: not open yet. |
 | `to_east_lane` | Use or walk into the dorm row's west end | Eric walks back to the dorm street. |
+| `to_sports` | Use or walk west along the courts walk | Eric walks on west to the sports ground. |
+
+## Gym and pool (`sports`)
+
+The fourth district of the island's south half built to walk (issue #173, after Jørgen's "Correct" on Review island-half-1; its places are in [island.md](island.md), "Sports and baths"). It runs from the north street's top past the back lane, west along the sports lane to the gym's front, north up the pool walk between the gym and the pool to the shower pavilion's door, and east along the courts walk behind the north residence to the foot of the onsen path. Eric comes in from the east lane, up the north street, and from the east coast, along the courts walk (Getting between places). With those two it closes the first loop round the south-east of the island. The back lane, the clinic, the grove, Amakawa Travel and the blocks south of the north street's top are the ground the east lane shows (under the plaza above), built by the same code, as are r3's and block_e3's fronts.
+
+Walked: the north street from a little north of the back lane up to the sports lane, with the short walk to r3's door; the sports lane from the gym's west corner east to the north street, and the gym's apron in front of its door; the pool walk from the sports lane north to the pavilion's door; the courts walk from the pool walk east to the onsen path's foot, with the short walks north to the tennis courts' gate and south to the north residence's door, on one axis across it. Lawns, beds, the pool's deck and the courts are not walked. The sports lane goes on west past the gym's corner to the office street later; for now it stops at a row of bollards across it.
+
+The north street and the sports lane are the lanes' brick between pale borders, turning into each other at a square of herringbone; the north street keeps its verge and zelkovas down its west side and its lamps on its east, as in the east lane, and the sports lane has a verge with a low hedge on its south side and post lamps behind its kerb, and no trees there, so nothing stands between Eric and the camera. The walks are the coast walk's pale slabs between kerbs. A finger sign at the lanes' corner points west: Gym 体育館 and Pool プール; another at the courts walk's start points east: Onsen 温泉.
+
+The gym: a long hall of pale concrete on a granite plinth under a shallow barrel-vaulted roof of muted green with standing seams, overhanging, its eaves and arched ends edged dark. Pilasters run down the long sides with a band of clerestory glass between them under the eaves; the south end carries the wall up into the arch with a lunette of glass and mullions. On the south face, on the door's axis, a glass front in a dark frame with two pairs of glass doors, shut, a white card on the glass of each: 準備中 CLOSED; a flat canopy on two posts over it with たいいくかん GYM on a board standing on its front edge, two lights under it, and beds of low shrubs either side between the face and the lane.
+
+The pool: behind a steel mesh fence, a deck of pale slabs round a 25 m pool of six lanes in a white coping, the lane lines dark under the water, lane ropes of blue and white floats with red at the ends, starting blocks at the pavilion's end and a ladder at each of that end's corners; a lifeguard's chair by its middle and white loungers down the east side. The shower pavilion closes the deck's north side: one tall storey of white walls on a plinth, a blue band round it, frosted windows high up, a flat roof with its plant and two rows of solar water heaters. Its door is on the west face at the end of the pool walk: glass in a dark frame under a canopy with プール POOL on a board on its front edge and a 準備中 CLOSED card on the glass. On the deck side the two changing rooms' doors, a blue and a red plate by them, and shower heads on the wall between. The pool walk has gravel against the gym's wall on one side and ground cover and lamps along the pool's fence on the other.
+
+Along the courts walk: a clipped hedge in front of the pool's and the courts' fences, two paved bays on its south side with a bench each looking over the walk at the pool, lamps behind the south kerb, and a hedge and the north residence's planting between the walk and the residence. The tennis courts (the east coast's, under the east coast above) have a gate in their south fence on the gate walk, its two mesh leaves shut with a chain and lock, and テニスコート TENNIS COURTS on a board on two posts beside the walk, facing west. Across the walk the north residence's door: a glazed pair in a panel of its wall under a canopy with two lights, and きたレジデンス NORTH RESIDENCE on a low wall by its walk, facing west. Trees between the pool and the courts; a wood of cherries, maples and a pine in the corner between the lane, the pool walk and the courts walk; zelkovas and cherries east of the north street up to the residence; pines, maples and zelkovas north of the gym.
+
+The camera turns with the place, and a held direction key keeps its frame until it is let go (as in the east lane). Over the north street, the sports lane and the pool walk it looks a little east of north, so the gym's front faces it and the gym's east wall stays clear of the line to Eric on the pool walk; at the pool walk's north end, past the gym, it turns to look east-north-east, so the pavilion's door faces it; along the courts walk it looks east from a little north of the walk and steeply, so the north residence, south of the walk, doesn't hide Eric.
+
+In the morning the sun is the plaza's; after work the lamps, the gym's glass, the pavilion's windows and door, the canopies' lights, the back lane's lamps and the town's windows light up. It also loads directly with `?place=sports`, on the north street. Nobody is here yet.
+
+### Things
+
+| Id | Label | What it is |
+|---|---|---|
+| `north_street` | To the north street | The north street's south end, back down to the east lane. |
+| `onsen_path` | To the onsen path | The courts walk's east end, on to the onsen path's foot in the east coast. |
+| `gym` | Gym | The gym's doors on its south face. Go in: shut. |
+| `pool` | Pool | The pool pavilion's door at the end of the pool walk. Go in: shut. |
+
+### Spots
+
+`north_entry` (on the north street, the sports lane ahead)
+
+### Seats
+
+None.
+
+### Zones
+
+`north_exit` (the north street's south end, by the back lane), `east_exit` (the courts walk's east end, at the onsen path's foot)
+
+### Who's there when
+
+Nobody yet.
+
+| Id | Usually | Schedule |
+|---|---|---|
+| `mio` | Not here. | – |
+
+### Small moments
+
+| Nodes | When | What happens |
+|---|---|---|
+| `arrive` | Arrive | Goal line: "Head office is back west past the plaza. Take its lift down to B2."; after work, "The dorms are back down the north street, east of the park." |
+| `shut` | Go in at the gym's or the pool's door | The door is shut; a card on the glass says 準備中: not open yet. |
+| `to_east_lane` | Use or walk into the north street's south end | Eric walks back down to the east lane. |
+| `to_coast` | Use or walk into the courts walk's east end | Eric walks on east to the onsen path, in the east coast. |
 
 ## The lift (`lift`)
 

@@ -184,6 +184,29 @@
     ]
   },
   {
+    "id_": "prop/east_coast/courts_walk",
+    "kind": "prop",
+    "name": "To the gym and pool",
+    "paths": [
+      "game3d/js/places/east-coast.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "east-coast.js things.courts_walk",
+    "place": "east_coast",
+    "used": [
+      "East coast: tap target 'To the gym and pool'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "east-coast"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
     "id_": "prop/east_coast/dorm_street",
     "kind": "prop",
     "name": "To the dorm street",
@@ -334,6 +357,29 @@
     "place": "east_lane",
     "used": [
       "East lane: tap target 'Liquor shop'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "east-lane"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/east_lane/north_street",
+    "kind": "prop",
+    "name": "To the gym and pool",
+    "paths": [
+      "game3d/js/places/east-lane.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "east-lane.js things.north_street",
+    "place": "east_lane",
+    "used": [
+      "East lane: tap target 'To the gym and pool'"
     ],
     "view": {
       "type": "room",
@@ -682,7 +728,7 @@
       "room": "office",
       "anchor": [
         5.2,
-        1,
+        1.0,
         2.4
       ],
       "spot": [
@@ -715,7 +761,7 @@
       "room": "office",
       "anchor": [
         2.6,
-        1,
+        1.0,
         2.4
       ],
       "spot": [
@@ -1045,6 +1091,98 @@
     "view": {
       "type": "room",
       "room": "shotengai"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/sports/gym",
+    "kind": "prop",
+    "name": "Gym",
+    "paths": [
+      "game3d/js/places/sports.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "sports.js things.gym",
+    "place": "sports",
+    "used": [
+      "Gym and pool: tap target 'Gym'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "sports"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/sports/north_street",
+    "kind": "prop",
+    "name": "To the north street",
+    "paths": [
+      "game3d/js/places/sports.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "sports.js things.north_street",
+    "place": "sports",
+    "used": [
+      "Gym and pool: tap target 'To the north street'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "sports"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/sports/onsen_path",
+    "kind": "prop",
+    "name": "To the onsen path",
+    "paths": [
+      "game3d/js/places/sports.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "sports.js things.onsen_path",
+    "place": "sports",
+    "used": [
+      "Gym and pool: tap target 'To the onsen path'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "sports"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/sports/pool",
+    "kind": "prop",
+    "name": "Pool",
+    "paths": [
+      "game3d/js/places/sports.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "sports.js things.pool",
+    "place": "sports",
+    "used": [
+      "Gym and pool: tap target 'Pool'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "sports"
     },
     "tags": [
       "in game",
