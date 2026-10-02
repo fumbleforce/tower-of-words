@@ -10,7 +10,7 @@ The tables are checked by `node tools/facts/check.mjs`: things and their labels,
 
 The company city has dorms, a canteen, shops, a bar and a university ([setting.md](setting.md)); only the places in the list below are planned, and only the `##` sections further down are built. One line per planned place: name, id, what it is.
 
-The picked full-island layout is [island-map-4](../../reviews/island-map-4/review.json). Only the day-1 route is to be built, one chunk at a time, using the game's existing palette rather than the map's saturated colours. The plaza and dorm courtyard chunks replaced the earlier single outdoor `path` proposal. The rest of the island's south half is planned for day 2 in [island.md](island.md) (2026-10-02): every place there, its doors, connections and a Japanese hook. Jørgen confirmed the plan on Review island-half-1 (2026-10-02, "Correct"); its districts are built one at a time: the shop street and seafront is the first (`shotengai`, below), the east lane the second (`east_lane`, below), the east coast up to the onsen the third (`east_coast`, below), the sports ground the fourth (`sports`, below), the office street the fifth (`office_quarter`, below), the harbour the sixth (`harbour`, below).
+The picked full-island layout is [island-map-4](../../reviews/island-map-4/review.json). Only the day-1 route is to be built, one chunk at a time, using the game's existing palette rather than the map's saturated colours. The plaza and dorm courtyard chunks replaced the earlier single outdoor `path` proposal. The rest of the island's south half is planned for day 2 in [island.md](island.md) (2026-10-02): every place there, its doors, connections and a Japanese hook. Jørgen confirmed the plan on Review island-half-1 (2026-10-02, "Correct"); its districts are built one at a time: the shop street and seafront is the first (`shotengai`, below), the east lane the second (`east_lane`, below), the east coast up to the onsen the third (`east_coast`, below), the sports ground the fourth (`sports`, below), the office street the fifth (`office_quarter`, below), the harbour the sixth (`harbour`, below), the old works the seventh (`works`, below).
 
 ## Getting between places
 
@@ -41,6 +41,8 @@ There are no cuts to black (Jørgen, 2026-09-28: "elegant, continuous transition
 - `office_quarter` → `sports`, walk: the same corner the other way, east along the street, south round the gym's corner and east along the sports lane, crossfading to him walking on east toward the gym's front.
 - `office_quarter` → `harbour`, walk: Eric walks west along the office street past Amakawa Trading toward the harbour walk's mouth; the camera closes in and crossfades to the same close framing of him walking on west along the street past the walk's mouth, toward the supply yard, as the camera lets go.
 - `harbour` → `office_quarter`, walk: the same walk the other way, east along the street toward Amakawa Trading, crossfading to him walking on east along the street past its front.
+- `harbour` → `works`, walk, by either of two ways: Eric walks north out of the supply yard into the works lane, or north off the office street into the works street; the camera closes in and crossfades to the same close framing of him walking on north up the same lane or street, as the camera lets go. With the way back down the other one this makes a loop.
+- `works` → `harbour`, walk, by the way nearest him: south down the works lane, crossfading to him stepping out into the supply yard, or south down the works street, crossfading to him stepping out onto the office street.
 - `shotengai` → `dorm_court`, walk: after work only. Eric walks out of the shop walk onto the dorm street; the camera closes in and crossfades to him walking up the street to the dorm courtyard's gate, as from the plaza.
 - `dorm_court` → `dorms`, walk then stairs: Eric has walked in through the hall doors and across the hall himself. At the passage the camera comes in close as he walks into it, then crossfades to him coming up the last flight onto the 2F landing; the camera pulls back along the corridor as he turns into it and lets go. He walks the corridor to his door himself (Eric's dorm room).
 
@@ -66,6 +68,7 @@ The buildings, paths, green and coast around the route, and the fit to the map, 
 | `sports` | 58.2 | -57.5 | 0 | 1 | 0 | The corner where the pool walk meets the courts walk. Its camera turns: a little east of north over the lane and the pool walk, east-north-east at the pavilion, east along the courts walk. |
 | `office_quarter` | 4.5 | -54 | 0 | 1 | 0 | The office street where the quarter street meets it. Its camera turns: north-north-west along the street, north up the walks, from the south-east in the quarter street's mouth, as the sports lane by the gym. |
 | `harbour` | -100 | -88 | 0 | 1 | 0 | The corner of the quay where the ferry landing meets the supply yard. Its camera turns: the office street's look on the street and the harbour walk, a little west of north over the yard, the landing and the piers. |
+| `works` | -82 | -104 | 0 | 1 | 0 | The middle of the works lane where it meets the works yard. Its camera turns: from the south-east up the lane, from a little east of south over the yard, from the south-east on the hall apron, from the south-west up the street and the research walk. |
 | `train` | -28.6 | -3.9 | 270 | 1.18 | 1 | The car in the middle of the platform shed, heading north (the line comes in from the south), its platform side east toward the station and its walkway end south, toward the shed's stairs. |
 
 ## Monorail (`train`)
@@ -590,9 +593,9 @@ Nobody yet.
 
 ## Harbour (`harbour`)
 
-The sixth district of the island's south half built to walk (issue #173, after Jørgen's "Correct" on Review island-half-1; its places are in [island.md](island.md), "Harbour"). It runs from the office street in front of Amakawa Trading west past the harbour walk's mouth into the supply yard, out on the supply pier, across the yard to the ferry landing and out on the ferry pier, and south down the harbour walk. Eric comes in from the office quarter, west along the street (Getting between places), and leaves the same way. The street in front of Amakawa Trading, its front and the street's planting are the office quarter's, built by the same code.
+The sixth district of the island's south half built to walk (issue #173, after Jørgen's "Correct" on Review island-half-1; its places are in [island.md](island.md), "Harbour"). It runs from the office street in front of Amakawa Trading west past the harbour walk's mouth into the supply yard, out on the supply pier, across the yard to the ferry landing and out on the ferry pier, and south down the harbour walk. Eric comes in from the office quarter, west along the street, and from the old works, down the works lane or the works street (Getting between places), and leaves the same ways. The street in front of Amakawa Trading, its front and the street's planting are the office quarter's, built by the same code.
 
-Walked: the office street from Amakawa Trading's front west to the yard; the harbour walk from the street south to a row of bollards where it meets the coast walk (which goes on south past the station, not walked), and the bay off its sea side; the whole supply yard up to a step from its quay edges, round the warehouse, the foreman's hut, the containers and the crane; the supply pier; the ferry landing up to the terminal's door; the ferry pier; the works lane's mouth north of the yard to a row of bollards (it goes on north to the old works, not walked). The works street's mouth north of the office street is laid a little way with bollards across it. Lawns, planting and the water are not walked.
+Walked: the office street from Amakawa Trading's front west to the yard; the harbour walk from the street south to a row of bollards where it meets the coast walk (which goes on south past the station, not walked), and the bay off its sea side; the whole supply yard up to a step from its quay edges, round the warehouse, the foreman's hut, the containers and the crane; the supply pier; the ferry landing up to the terminal's door; the ferry pier; the works lane's mouth north of the yard and the works street's mouth north of the office street, a few steps each, where the old works take over (`works`, below). Lawns, planting and the water are not walked.
 
 The harbour's water lies lower than the quays, which are concrete walls down to it with a pale coping, black rubber fenders on their face, mooring bitts a step in from the edge, a steel ladder now and then, and a yellow line painted along them. The piers are concrete decks on rows of round piles, with fenders and bitts along both sides and a green-topped beacon on the head. The yard is big concrete slabs with a green footway painted across it, edged white, from the street to the landing. The landing is pale granite with benches looking out over the water, lamps, two pines in tree pits and lifebuoys on posts. The office street keeps its brick, its north side's beds and its verge with lamps on the south side; west of the harbour walk the rocks come up close behind the verge. The harbour walk is the coast walk's pale slabs between kerbs, lamps on its landward edge, the bay paved darker with two benches looking west over the rocks. North of the street's west end, west of the terminal, behind the harbour office and between the walk and the rocks stand belts of pines, zelkovas, cherries and maples, and a line of pines along the rocks. The rocks are the coast's sea wall with armour rocks and surf at the harbour's water level, north-west of the landing and from the yard round to the coast walk. Finger signs: at the yard's edge, Ferry フェリー west and Offices 事務所 east; on the landing, Offices 事務所 east; at the office street's west end, the office quarter's.
 
@@ -611,6 +614,8 @@ In the morning the sun is the plaza's; after work the lamps, the floodlights, th
 | Id | Label | What it is |
 |---|---|---|
 | `office_street` | To the office street | The street in front of Amakawa Trading, back to the office quarter. |
+| `works_lane` | To the old works | The works lane north out of the supply yard, on to the old works. |
+| `works_street` | To the works street | The works street north off the office street, on to the old works. |
 | `ferry_terminal` | Ferry terminal | The terminal's door on the landing. Go in: shut. |
 | `harbour_office` | Harbour office | The harbour office's door on the yard's north edge. Go in: shut. |
 
@@ -624,7 +629,7 @@ None.
 
 ### Zones
 
-`east_exit` (the street in front of Amakawa Trading)
+`east_exit` (the street in front of Amakawa Trading), `lane_exit` (the works lane's mouth), `street_exit` (the works street's mouth)
 
 ### Who's there when
 
@@ -641,6 +646,75 @@ Nobody yet.
 | `arrive` | Arrive | Goal line: "Head office is back along the office street, past the gym and the plaza. Take its lift down to B2."; after work, "The dorms are back along the office street, past the gym and down the north street." |
 | `shut` | Go in at the terminal's or the harbour office's door | The door is shut; a card on the glass says 準備中: not open yet. |
 | `to_offices` | Use or walk east along the street in front of Amakawa Trading | Eric walks back east to the office street. |
+| `to_works`, `to_works_street` | Use or walk into the works lane's mouth, or the works street's | Eric walks on north into the old works. |
+
+## Old works (`works`)
+
+The seventh district of the island's south half built to walk (issue #173, after Jørgen's "Correct" on Review island-half-1; its places are in [island.md](island.md), "Old works"). It runs from the supply yard's north edge up the works lane past the power plant's door to the chimney's foot, east along the works yard past the works shed, the factory's gates, the gatehouse and the server hall, down the works street to the office street past the recycling centre, and east along the research walk to Amakawa Research. Eric comes in from the harbour, up the lane out of the supply yard or up the street off the office street, and goes back down either (Getting between places). The harbour office's side and the warehouse are the harbour's, built by the same code.
+
+Walked: the works lane from the supply yard to a dead end at the chimney's foot, and the short apron before the power plant's door; the works yard; the factory apron north off it up to the gates; the hall apron south off it to the server hall's door; the works street from the office street to the yard; the forecourt before the recycling centre's door; the research walk and the landing before Amakawa Research's door; and the five nooks below. Lawns, planting and the fenced lot west of the street are not walked.
+
+The works are older than the rest of the town and look it. The lane carries on the supply yard's big concrete slabs; the yard and the aprons are older concrete, worn and patched, with cracks across them and weeds along the walls. An old siding comes out of the factory's gates, rails set flush in the concrete, curves east and runs along the yard to a buffer stop. The works street is old asphalt with faded white edge lines and patches, concrete utility poles with their wires down its west side, and behind them a chain-link fence round the works' empty land, its gate chained. The lamps are the works' own, arm lamps on tall poles; the research walk and the two forecourts are the town's pale slabs and post lamps, newer than the works round them. A pipe bridge of three pipes, one lagged in silver, runs on steel portals from the power plant over the lane's head to the factory. Trees stand between the lane and the harbour office, between the harbour office and the plant, behind the street's east side, in the fenced land and south of the research walk; a low hedge runs along the walk. A finger sign at the yard's east end points to Research 研究所 east and Harbour 港 west.
+
+The factory is three storeys of faded green-grey corrugated walls on a concrete base under four saw-tooth roofs, their glazing to the north, with rows of steel works windows, a few panes dark, and rust under the gutter. Its gates are a pair of teal sliding leaves under their track, chained and padlocked, a 立入禁止 KEEP OUT plate on them and 安全第一 SAFETY FIRST on a green board above. The power plant is a tall pale concrete hall, piers between tall works windows, a boiler house on the roof and ivy up its south-east corner; its door on the lane is a chained steel pair under a concrete hood, はつでんしょ No.1 POWER PLANT on a plate beside it. The chimney stands at the lane's head, round and tapering, banded red and white at the top, a caged ladder up its south side. The works shed is pale blue-grey corrugated under a low gable, a roller door to the yard and its number ２ on the east gable. The gatehouse is a pale concrete box under a slab roof, its counter window onto the factory apron with うけつけ RECEPTION over it, and a red and white barrier raised at the apron's mouth. The server hall is low, pale panels under a blue band, louvres and two high windows on its north side, condensers on the roof; its door on its east face is a glazed pair under a canopy with サーバーとう SERVER HALL on it. The recycling centre and Amakawa Research are the town's lower blocks, each door a glazed pair under a deep canopy with the name on it: リサイクルセンター RECYCLING CENTRE on the street, sorting bins in four colours beside it; けんきゅうじょ AMAKAWA RESEARCH at the walk's end. The three doors are shut, a white card on the glass: 準備中 CLOSED. The factory's gates and the plant's door are chained.
+
+The camera turns with the place, and a held direction key keeps its frame until it is let go (as in the east lane). Up the lane it looks from the south-east, so the plant's door faces it; over the yard from a little east of south, so the shed, the factory's gates and the gatehouse face it; on the hall apron from the south-east, so the server hall's door faces it; up the street and along the research walk from the south-west, so the recycling centre's and Amakawa Research's doors face it.
+
+In the morning the sun is the plaza's; after work the lamps, the server hall's door and two of its high windows, the two fronts' ground floors and canopies and the town's windows light up; the factory, the plant and the gatehouse stay dark. It also loads directly with `?place=works`, where the lane meets the yard. Nobody is here yet.
+
+### Things
+
+| Id | Label | What it is |
+|---|---|---|
+| `harbour_lane` | To the harbour | The works lane south, back into the supply yard. |
+| `office_street` | To the office street | The works street south, back onto the office street. |
+| `old_power_plant` | Old power plant | The plant's door on the lane. Go in: chained. |
+| `old_factory` | Old factory | The factory's gates on its apron. Go in: chained. |
+| `server_hall` | Server hall | The server hall's door on the hall apron. Go in: shut. |
+| `recycling_centre` | Recycling centre | The recycling centre's door on the works street. Go in: shut. |
+| `research_lab` | Amakawa Research | Amakawa Research's door at the research walk's end. Go in: shut. |
+
+### Spots
+
+`lane_entry` (where the lane meets the yard, facing north), `chimney_foot`, `smoking_corner`, `gatehouse_window`, `transformer_lot`, `weather_station` (the nooks, below)
+
+### Nooks
+
+Corners off the way, each reachable on foot, with something to look at and room for something more. Nothing is in them yet.
+
+| Id | Where | What's there | Could hold |
+|---|---|---|---|
+| `chimney_foot` | The lane's dead end past the plant's door, under the pipe bridge | The chimney's plinth and its caged ladder, two old drums | A secret |
+| `smoking_corner` | Behind the server hall, off the lane, fenced from the yard | The hall's condensers, a plank bench on two crates, a sand bucket, きつえんじょ SMOKING AREA on the wall | An encounter |
+| `gatehouse_window` | On the factory apron, at the gatehouse's counter window | The sliding window and the shelf under it | A collectible |
+| `transformer_lot` | East of the gatehouse, through the open gate of its chain-link fence | Two old transformers with their insulators, a water tank on legs, weeds | A secret |
+| `weather_station` | North of the research walk by Amakawa Research, through a low fence's open gate | A white louvred screen on legs, a rain gauge, a wind mast | An encounter or a collectible |
+
+### Seats
+
+None.
+
+### Zones
+
+`lane_exit` (the lane's south end, a step into the supply yard), `street_exit` (the street's south end, at the office street)
+
+### Who's there when
+
+Nobody yet.
+
+| Id | Usually | Schedule |
+|---|---|---|
+| `mio` | Not here. | – |
+
+### Small moments
+
+| Nodes | When | What happens |
+|---|---|---|
+| `arrive` | Arrive | Goal line: "Head office is back down the works street and east along the office street, past the gym and the plaza. Take its lift down to B2."; after work, "The dorms are back down the works street, east along the office street, past the gym and down the north street." |
+| `chained` | Go in at the factory's gates or the plant's door | It is chained shut. |
+| `shut` | Go in at the server hall's, the recycling centre's or Amakawa Research's door | The door is shut; a card on the glass says 準備中: not open yet. |
+| `to_harbour` | Use or walk into the lane's south end | Eric walks back down into the supply yard. |
+| `to_street` | Use or walk into the street's south end | Eric walks back down onto the office street. |
 
 ## The lift (`lift`)
 

@@ -17,11 +17,12 @@ import { lamps, bench, bollard, fingerSign } from '../outdoor/furniture.js';
 import { belt, shrubBed } from '../dorm-court/cluster-yards.js';
 import { walk, tree } from '../plaza/east-lane.js';
 import { ORIGIN, PAVE_W } from './link.js';
+import { worksStreet } from '../works/grounds.js';
 import * as P from './plan.js';
 
 const { STREET: S, QUARTER: Q, SHED, HARBOUR_WALK: HW, FOODS_WALK: FW, CON_WALK: CW } = P;
 const V = 1.1, // a verge's depth
-  WORKS = [-50, -47], // the works street's mouth on the north side (island.md; planned)
+  WORKS = [-50, -47], // the works street's mouth on the north side (the works chunk's, works/plan.js)
   W0 = WORKS[0];
 const SLABS = { pattern: 'grid', module: [0.6, 0.6], tones: GRANITE.mid };
 
@@ -67,7 +68,7 @@ export function* streetSteps(pv, p, lights, [x0, x1]) {
 function* paving(pv) {
   laneField(pv, [Q[0], Q[1], S[3], P.QUARTER_END + 1.6], { along: 'z', origin: ORIGIN });
   laneField(pv, [SHED[0], SHED[1], S[3], S[3] + 3], { along: 'z', origin: ORIGIN });
-  laneField(pv, [WORKS[0], WORKS[1], S[2] - 3, S[2]], { along: 'z', origin: ORIGIN });
+  worksStreet(pv, null, [S[2] - 3, S[2]]); // the works' asphalt (works/grounds.js)
   walk(pv, [HW[0], HW[1], S[3], S[3] + 3], false);
   yield;
   // the bank's apron between its east face and the quarter street

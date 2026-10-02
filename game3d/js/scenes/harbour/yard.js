@@ -31,8 +31,8 @@ const C = {
 };
 const BOXES = ['#3f6178', '#8a4b44', '#5f7a6a', '#b9b2a2', '#4e5a66', '#3e7377', '#8a4b44', '#3f6178'];
 
-// the warehouse
-function shed(p, glow, lights, signs) {
+// the warehouse (the works chunk builds it too, where the works lane looks down into the yard)
+export function shed(p, glow, lights, signs) {
   const [x0, x1, z0, z1] = P.SHED,
     w = x1 - x0,
     d = z1 - z0,

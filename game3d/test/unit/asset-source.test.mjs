@@ -43,6 +43,7 @@ test('asset source data includes the actual words, cast, music, sounds and style
     sports: {},
     office_quarter: {},
     harbour: {},
+    works: {},
     transitions: { sales1: 2, sales2: 1 },
   });
   assert.equal(data.icons.length, 18); // 18th: the Photos chip (ui/finds-view.js)

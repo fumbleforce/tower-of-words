@@ -25,8 +25,8 @@ const SLABS = { pattern: 'grid', module: [0.6, 0.6], tones: GRANITE.mid };
 const WALL = { w1: 0, m1: 2, m2: 3, m3: 0, m4: 1, m5: 2, b_h: 1 }; // the layout's walls (island-layout.js ROWS)
 
 // the name standing on the canopy's front edge, a dark back behind it; the card on the right leaf's glass; the
-// canopy's two downlights and their pool
-function fittings(p, signs, lights, k, door) {
+// canopy's two downlights and their pool (the works' server hall has them too, works/buildings.js)
+export function fittings(p, signs, lights, k, door) {
   const { f, t, canopy: c } = door,
     ry = Math.atan2(f.n[0], f.n[1]),
     [kana, en, colour] = k.sign;

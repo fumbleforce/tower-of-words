@@ -32,3 +32,16 @@ export async function walkIn(g, cam, edge, lane, facing, { release = true } = {}
   g.walker.sync();
   cam.release();
 }
+
+// two ways between the same two chunks (the harbour and the works: the works lane and the works street): leaving,
+// he takes the way out nearest him and the trip remembers which (game.transition.via), so the other chunk brings
+// him in at its end of the same way. ways: { [via]: { lane, edge } }
+export async function walkOutNearest(g, cam, ways) {
+  const p = g.player.root.position,
+    d = ([x, z]) => Math.hypot(x - p.x, z - p.z);
+  const [via, e] = Object.entries(ways).sort(([, a], [, b]) => d(a.lane) - d(b.lane))[0];
+  if (g.transition) g.transition.via = via;
+  await walkOut(g, cam, e.lane, e.edge);
+}
+// the way the trip came by (walkOutNearest), or `fallback` (a restored save, a trip from elsewhere)
+export const viaOf = (g, fallback) => g.transition?.via ?? fallback;

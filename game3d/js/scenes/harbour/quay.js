@@ -27,7 +27,7 @@ const C = {
   footEdge: '#d9dbd6',
   foam: '#61788b',
 };
-const CONCRETE = ['#8f8e8a', '#8a8985', '#94938e', '#878682'];
+export const CONCRETE = ['#8f8e8a', '#8a8985', '#94938e', '#878682'];
 const NO_CAST = { cast: false };
 const { SEA_Y } = P;
 
@@ -154,6 +154,7 @@ function* ground(pv, p) {
     tones: CONCRETE,
     vary: 0.04,
     gap: 0.03,
+    origin: [W[0], Y[2]], // as the works lay the lane on north (works/grounds.js)
   });
   yield;
   // kerbs: the yard's north edge (less the office's face and the works lane), its east edge north of the street, the

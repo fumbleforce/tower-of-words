@@ -24,6 +24,7 @@ export const PLACE_EVENTS = {
   sports: { start: { id: 'start', source: 'engine' } },
   office_quarter: { start: { id: 'start', source: 'engine' } },
   harbour: { start: { id: 'start', source: 'engine' } },
+  works: { start: { id: 'start', source: 'engine' } },
   office: {
     start: { id: 'start', source: 'engine' },
     sat_down: { id: 'sat_down', source: 'place', hook: 'sitDown' },

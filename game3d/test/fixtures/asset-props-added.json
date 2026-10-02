@@ -700,6 +700,52 @@
     ]
   },
   {
+    "id_": "prop/harbour/works_lane",
+    "kind": "prop",
+    "name": "To the old works",
+    "paths": [
+      "game3d/js/places/harbour.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "harbour.js things.works_lane",
+    "place": "harbour",
+    "used": [
+      "Harbour: tap target 'To the old works'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "harbour"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/harbour/works_street",
+    "kind": "prop",
+    "name": "To the works street",
+    "paths": [
+      "game3d/js/places/harbour.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "harbour.js things.works_street",
+    "place": "harbour",
+    "used": [
+      "Harbour: tap target 'To the works street'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "harbour"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
     "id_": "prop/office_quarter/bank",
     "kind": "prop",
     "name": "Bank",
@@ -1482,6 +1528,167 @@
     "view": {
       "type": "room",
       "room": "sports"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/works/harbour_lane",
+    "kind": "prop",
+    "name": "To the harbour",
+    "paths": [
+      "game3d/js/places/works.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "works.js things.harbour_lane",
+    "place": "works",
+    "used": [
+      "Old works: tap target 'To the harbour'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "works"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/works/office_street",
+    "kind": "prop",
+    "name": "To the office street",
+    "paths": [
+      "game3d/js/places/works.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "works.js things.office_street",
+    "place": "works",
+    "used": [
+      "Old works: tap target 'To the office street'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "works"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/works/old_factory",
+    "kind": "prop",
+    "name": "Old factory",
+    "paths": [
+      "game3d/js/places/works.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "works.js things.old_factory",
+    "place": "works",
+    "used": [
+      "Old works: tap target 'Old factory'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "works"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/works/old_power_plant",
+    "kind": "prop",
+    "name": "Old power plant",
+    "paths": [
+      "game3d/js/places/works.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "works.js things.old_power_plant",
+    "place": "works",
+    "used": [
+      "Old works: tap target 'Old power plant'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "works"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/works/recycling_centre",
+    "kind": "prop",
+    "name": "Recycling centre",
+    "paths": [
+      "game3d/js/places/works.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "works.js things.recycling_centre",
+    "place": "works",
+    "used": [
+      "Old works: tap target 'Recycling centre'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "works"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/works/research_lab",
+    "kind": "prop",
+    "name": "Amakawa Research",
+    "paths": [
+      "game3d/js/places/works.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "works.js things.research_lab",
+    "place": "works",
+    "used": [
+      "Old works: tap target 'Amakawa Research'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "works"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/works/server_hall",
+    "kind": "prop",
+    "name": "Server hall",
+    "paths": [
+      "game3d/js/places/works.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "works.js things.server_hall",
+    "place": "works",
+    "used": [
+      "Old works: tap target 'Server hall'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "works"
     },
     "tags": [
       "in game",

@@ -8,13 +8,14 @@ import { inRect, POSES, TURN_X } from '../scenes/harbour/plan.js';
 import * as LAYOUT from '../scenes/island-layout.js';
 import { PLACE_DETAILS } from './catalog.js';
 import { snapshotPeople, restorePeople } from './saved-people.js';
-import { walkOut, walkIn } from './edge-walk.js';
+import { walkOut, walkIn, walkOutNearest, viaOf } from './edge-walk.js';
 import { turningCam, followFit } from './turning-cam.js';
 
 // The harbour (scenes/harbour.js): the office street walked on west from the office quarter into the supply yard,
 // out on the supply pier and the ferry pier, across the ferry landing to the terminal's door and the harbour office's,
 // and south down the harbour walk; it also loads with ?place=harbour. The terminal and the harbour office are shut
-// for now (their doors say so). East along the street goes back to the office quarter.
+// for now (their doors say so). East along the street goes back to the office quarter; north up the works lane out
+// of the yard, or up the works street off the office street, goes on to the old works.
 //
 // The camera keeps the office street's look on the street and down the harbour walk; as Eric comes off the street
 // into the yard it turns to look a little west of north and a little steeper over the yard, the landing and the
@@ -32,7 +33,8 @@ export async function harbourPlace(game) {
     const q = 1 - smooth(x + AX, TURN_X[0], TURN_X[1]);
     return { yaw: lerp(street.yaw, quay.yaw, q), elev: lerp(street.elev, quay.elev, q) };
   });
-  const back = w.exits.office_quarter;
+  const back = w.exits.office_quarter,
+    works = { lane: w.exits.works_lane, street: w.exits.works_street };
   // the shut doors (plan.js DOORS): where each is, and where Eric stands to try it
   const dk = (id) => w.doors.find((d) => d.id === id);
   const pin = (v, id) => v.set(dk(id).local[0], 1.95, dk(id).local[1]);
@@ -43,6 +45,18 @@ export async function harbourPlace(game) {
       anchor: (v) => v.set(back.lane[0], 1.1, back.lane[1]),
       spot: () => back.lane,
       face: () => back.edge,
+    },
+    works_lane: {
+      ...PLACE_DETAILS.harbour.things.works_lane,
+      anchor: (v) => v.set(works.lane.lane[0], 1.1, works.lane.lane[1]),
+      spot: () => works.lane.lane,
+      face: () => works.lane.edge,
+    },
+    works_street: {
+      ...PLACE_DETAILS.harbour.things.works_street,
+      anchor: (v) => v.set(works.street.lane[0], 1.1, works.street.lane[1]),
+      spot: () => works.street.lane,
+      face: () => works.street.edge,
     },
     // the shut doors
     ferry_terminal: {
@@ -76,6 +90,8 @@ export async function harbourPlace(game) {
     people: {},
     zones: {
       east_exit: (x, z) => inRect(x, z, back.zone),
+      lane_exit: (x, z) => inRect(x, z, works.lane.zone),
+      street_exit: (x, z) => inRect(x, z, works.street.zone),
     },
     hooks: {},
     fit(aspect) {
@@ -89,11 +105,10 @@ export async function harbourPlace(game) {
       const p = game.player.root.position;
       w.follow(p.x, p.z);
       turn.steer(p, dt);
-      // heading for the way out: build the office quarter now, so the walk there needs no loading pause
-      const [x0, x1, z0, z1] = back.zone,
-        d = 6;
-      if (p.x > x0 - d && p.x < x1 + d && p.z > z0 - d && p.z < z1 + d && !game.prepared.office_quarter)
-        game.prepare?.('office_quarter');
+      // heading for a way out: build the place there now, so the walk there needs no loading pause
+      const near = ([x0, x1, z0, z1], d = 6) => p.x > x0 - d && p.x < x1 + d && p.z > z0 - d && p.z < z1 + d;
+      if (near(back.zone) && !game.prepared.office_quarter) game.prepare?.('office_quarter');
+      if ((near(works.lane.zone) || near(works.street.zone)) && !game.prepared.works) game.prepare?.('works');
     },
     onPeriod(period) {
       if (period !== 'evening' || P.grade === EVENING_GRADE) return;
@@ -114,9 +129,19 @@ export async function harbourPlace(game) {
       turn.reset();
       cam.snap(game.player.root.position);
     },
-    // in from the office quarter west along the street past the harbour walk's mouth; out east along it
+    // in from the office quarter west along the street past the harbour walk's mouth; out east along it. In from the
+    // works down the lane or the street, the way he left them, walking south; out up the one nearest
     tripIn: (g) => walkIn(g, cam, w.arriveEdge, w.in, -Math.PI / 2),
-    tripOut: (g) => walkOut(g, cam, back.lane, back.edge),
+    tripInFrom: {
+      works: (g) => {
+        const e = works[viaOf(g, 'lane')] || works.lane;
+        return walkIn(g, cam, e.arrive, e.in, 0);
+      },
+    },
+    tripOutTo: {
+      office_quarter: (g) => walkOut(g, cam, back.lane, back.edge),
+      works: (g) => walkOutNearest(g, cam, works),
+    },
   };
   return P;
 }
