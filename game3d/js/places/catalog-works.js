@@ -11,6 +11,7 @@ export const WORKS_DETAILS = {
     research_lab: { label: 'Amakawa Research', kind: 'thing', verb: 'Go in' },
   },
   spots: ['lane_entry', 'chimney_foot', 'smoking_corner', 'gatehouse_window', 'transformer_lot', 'weather_station'],
+  nooks: ['chimney_foot', 'smoking_corner', 'gatehouse_window', 'transformer_lot', 'weather_station'],
   seats: [],
   zones: ['lane_exit', 'street_exit'],
   people: [],

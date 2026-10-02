@@ -15,9 +15,10 @@
 import * as LAYOUT from '../island-layout.js';
 import * as E from '../plaza/east-plan.js';
 import * as N from '../plaza/north-plan.js';
-import { LANE, LZ, HALF } from '../plaza/plan.js';
+import { LANE, LZ, HALF, FOOTPATH } from '../plaza/plan.js';
 import { lampPoints } from '../plaza/furniture.js';
 import { shopDoor } from '../plaza/east-shops.js';
+import { nookWalks } from '../outdoor/nook-walks.js';
 
 export const CHUNK = 'east_lane';
 const [DX, DZ] = [0, 1].map((i) => LAYOUT.CHUNKS.plaza.at[i] - LAYOUT.CHUNKS[CHUNK].at[i]);
@@ -61,7 +62,41 @@ const P_WALKS = {
   e3_spur: [E.SPURS[0][0] - 0.1, ...E.SPURS[0].slice(1)],
   r9_spur: [E.SPURS[1][0] - 0.1, ...E.SPURS[1].slice(1)],
 };
-export const WALKS = Object.values(P_WALKS).map(rect);
+// the nooks (outdoor/nooks.js), in the chunk's frame: a roadside shrine through a gap in the north street's west
+// verge, between two of its zelkovas; a bench on the footpath behind the rows, off the dorm street, where the
+// footpath is closed by bollards (it is not walked on west)
+const SZ = (E.SHRINE_GAP[0] + E.SHRINE_GAP[1]) / 2 + DZ,
+  NSW = NS[0] + DX,
+  FZ = [FOOTPATH[2] + DZ, FOOTPATH[3] + DZ],
+  DSW = DS[0] + DX;
+export const NOOKS = [
+  {
+    id: 'east_lane_shrine',
+    kit: 'shrine',
+    at: [NSW - 0.8, SZ],
+    face: -Math.PI / 2,
+    tree: null,
+    walks: [[NSW - 1.55, NSW + 0.1, SZ - 0.85, SZ + 0.85]],
+    pads: [[NSW - 1.55, NSW - 0.02, SZ - 0.85, SZ + 0.85]],
+  },
+  {
+    id: 'east_lane_footpath',
+    kit: 'bench',
+    at: [DSW - 3.6, (FZ[0] + FZ[1]) / 2],
+    face: Math.PI,
+    back: false,
+    sides: 'none',
+    tree: null,
+    bollards: [
+      [2.3, -0.6],
+      [2.3, 0],
+      [2.3, 0.6],
+    ],
+    walks: [[DSW - 5.6, DSW + 0.1, FZ[0] + 0.05, FZ[1] - 0.05]],
+    pads: [[DSW - 6.0, DSW - 0.1, FZ[0] + 0.05, FZ[1] - 0.05]],
+  },
+];
+export const WALKS = [...Object.values(P_WALKS).map(rect), ...nookWalks(NOOKS)];
 
 // what stands on them, to keep Eric off: the park square's tree, benches and lamps; the street lamps; the lane's
 // lamps past the cross walk; the back lane's lamps on its north border

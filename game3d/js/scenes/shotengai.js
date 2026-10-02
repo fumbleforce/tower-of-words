@@ -27,6 +27,7 @@ import { signSet } from './shop-signs.js';
 import { BAYS, SHOPS, WALL_Z } from './island-south.js';
 import { streetSteps } from './shotengai/street.js';
 import * as P from './shotengai/plan.js';
+import { buildNooks } from './outdoor/nooks.js';
 
 const { CHUNK, local, rect, inRect } = P;
 // the sun, in the chunk's frame (local north is island west): mornings from the east-south-east over the camera's
@@ -111,12 +112,15 @@ export function* shotengaiSteps() {
     land: coastLand(LAYOUT.COAST.line),
     landColor: TOWN.grass,
   });
+  const nooks = buildNooks(P.NOOKS, root); // outdoor/nooks.js: props round each nook, its spot named
+  for (const r of nooks.blocks) nav.block(...r);
   yield* mergeStaticSteps(root);
   yield* nav.buildSteps();
 
   const edgeZ = local(P.EDGE)[1];
   const alleys = P.ALLEYS.map(rect);
   return {
+    nooks: nooks.spots,
     root,
     scene,
     sun,
@@ -125,7 +129,10 @@ export function* shotengaiSteps() {
     arcadeRoof: street.arcade, // the glass, ribs and ridge: the place fades them while he walks under them
     arcade: rect(P.ARCADE),
     // where the camera steepens to see into the alleys and down the rows' west end
-    steep: (x, z) => alleys.some((r) => inRect(x, z, r)) || inRect(x, z, rect(P.WEST_WALK)),
+    steep: (x, z) =>
+      alleys.some((r) => inRect(x, z, r)) ||
+      inRect(x, z, rect(P.WEST_WALK)) ||
+      P.NOOKS.find((n) => n.id === 'shotengai_shrine').walks.some((r) => inRect(x, z, r)), // and past the west end
     edge: local(P.EDGE), // on the dorm street, where he comes in and goes out
     in: local(P.IN), // on the shop walk, the arcade ahead
     exitZ: local([P.EXIT_X, 0])[1],
@@ -134,6 +141,7 @@ export function* shotengaiSteps() {
     doors: P.DOORS.map((d) => ({ ...d, local: local(d.at), step: local([d.at[0], d.at[1] + d.out * 0.85]) })),
     camera: { elev: 40, fov: 24 }, // a little lower than the plaza's, to see the shopfronts under the awnings
     evening() {
+      nooks.evening();
       sunDir = SUN_DIR.evening;
       lit.evening();
       eastLit.evening();

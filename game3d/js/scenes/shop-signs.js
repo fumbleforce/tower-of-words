@@ -6,6 +6,8 @@
 //   signs.board(kana, en, colour, w, h, [x, y, z], ry);      a board facing +z turned by ry (radians)
 //   signs.upright(kana, colour, w, h, [x, y, z], ry);        the kana stacked, read the same from both faces
 //   signs.card(kana, en, w, h, [x, y, z], ry);               a small white card, dark kana over small English
+//   signs.drawn(draw, w, h, [x, y, z], ry);                  any face: draw(ctx, W, H) paints its cell (a drinks
+//                                                            machine's front)
 //   const s = signs.build(group); s.evening();
 import * as THREE from 'three';
 import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
@@ -65,7 +67,16 @@ function drawCard(ctx, x, y, W, H, { kana, en }) {
   ctx.font = `600 ${Math.round(H * 0.17)}px sans-serif`;
   ctx.fillText(en, x + W / 2, y + H * 0.74, W - H * 0.4);
 }
-const DRAW = { board: drawBoard, upright: drawUpright, card: drawCard };
+function drawDrawn(ctx, x, y, W, H, { draw }) {
+  ctx.save();
+  ctx.translate(x, y);
+  ctx.beginPath();
+  ctx.rect(0, 0, W, H);
+  ctx.clip();
+  draw(ctx, W, H);
+  ctx.restore();
+}
+const DRAW = { board: drawBoard, upright: drawUpright, card: drawCard, drawn: drawDrawn };
 
 export function signSet() {
   const items = [];
@@ -81,6 +92,9 @@ export function signSet() {
     card(kana, en, w, h, at, ry = 0) {
       add('card', { kana, en }, w, h, at, [ry]);
     },
+    drawn(draw, w, h, at, ry = 0) {
+      add('drawn', { draw }, w, h, at, [ry]);
+    },
     build(root) {
       if (!items.length) return { mesh: null, evening() {} };
       // shelf-pack the cells: each sign w x h units at PX pixels a unit
@@ -88,7 +102,7 @@ export function signSet() {
         y = 0,
         rowH = 0;
       for (const it of items) {
-        const px = it.kind === 'card' ? PX * 3 : PX; // the small cards at a finer grain, so they read up close
+        const px = it.kind === 'card' ? PX * 3 : it.kind === 'drawn' ? PX * 2 : PX; // the small cards at a finer grain, so they read up close
         it.W = Math.min(ATLAS_W, Math.round(it.w * px));
         it.H = Math.round(it.h * px);
         if (x + it.W > ATLAS_W) [x, y, rowH] = [0, y + rowH + 2, 0];

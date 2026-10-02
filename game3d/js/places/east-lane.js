@@ -108,7 +108,11 @@ export async function eastLanePlace(game) {
     music: 'calm',
     grade: MORNING_GRADE,
     things,
-    spots: { plaza_entry: w.in },
+    spots: {
+      plaza_entry: w.in,
+      east_lane_shrine: w.nooks.east_lane_shrine,
+      east_lane_footpath: w.nooks.east_lane_footpath,
+    },
     seats: {},
     people: {},
     zones: {

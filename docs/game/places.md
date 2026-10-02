@@ -241,7 +241,15 @@ At the end of the B2 conversation the camera releases its close-up before Mio le
 
 ### Spots
 
-`station_exit`, `office_entrance`, `lift_front`, `plaza_lane`
+`station_exit`, `office_entrance`, `lift_front`, `plaza_lane`, `forecourt_staff_gate` (the nooks, below)
+
+### Nooks
+
+Small places off the walks, kept for later secrets, encounters and collectibles (GUIDE, Visual design). Each is a named spot in the place's code; nothing is placed in them yet.
+
+| Id | Where | What's there | Could hold |
+|---|---|---|---|
+| `forecourt_staff_gate` | The recess in front of the staff gate, between the court's north bed and head office's corner. | A bike leaning on the bed's end; a potted shrub and an umbrella stand by the corner. | An encounter: someone slipping out of the staff gate. Or a dropped staff card. |
 
 ### Seats
 
@@ -312,7 +320,16 @@ In the morning the plaza is a side trip with no story beat: the goal points back
 
 ### Spots
 
-`office_entry`, `fountain_edge`, `dorm_exit`, `shop_walk` (on the south walk by the finger sign)
+`office_entry`, `fountain_edge`, `dorm_exit`, `shop_walk` (on the south walk by the finger sign), `plaza_seat_bay`, `plaza_shrine` (the nooks, below)
+
+### Nooks
+
+Small places off the walks, kept for later secrets, encounters and collectibles (GUIDE, Visual design). Each is a named spot in the place's code; nothing is placed in them yet.
+
+| Id | Where | What's there | Could hold |
+|---|---|---|---|
+| `plaza_seat_bay` | The paved bay off the cross walk, east of it, in front of the training centre's bed. | The bay's bench looking down the cross walk; a potted shrub at its east end. Now walkable. | An encounter: someone on a break from the training centre. |
+| `plaza_shrine` | On the lawn west of the cross walk, under the ginkgo by the bike pad, reached off the cross walk. | A small hokora on a stone plinth behind a red torii, two stone lanterns, an offering box, raked gravel. | A secret or a collectible: an offering, an omamori, a note left at the shrine. |
 
 ### Seats
 
@@ -391,7 +408,17 @@ In the morning the sun comes from the east-south-east behind the camera's left s
 
 ### Spots
 
-`plaza_entry` (on the shop walk, the arcade ahead)
+`plaza_entry` (on the shop walk, the arcade ahead); and each nook below
+
+### Nooks
+
+Small places off the walks, kept for later secrets, encounters and collectibles (GUIDE, Visual design). Each is a named spot in the place's code; nothing is placed in them yet.
+
+| Id | Where | What's there | Could hold |
+|---|---|---|---|
+| `shotengai_shrine` | On the lawn past the arcade's west mouth, off the walk down the rows' west end, with the pines behind it. | A hokora on its plinth behind a red torii, two stone lanterns, an offering box, raked gravel. | A secret: something left at the shrine, or a shrine visit at night. |
+| `shotengai_back_alley` | The middle alley through the south row, along its west wall. | The shops' back: an air conditioner's outdoor unit, stacked crates of empties, a bucket, a potted shrub, a bike parked along the wall. | An encounter: a shop worker on a break. Or a cat. |
+| `shotengai_pine_bench` | Through a gap in the east rail of the promenade's lookout, on the lawn under the pines. | A bench looking out to sea past the pines, a stone lantern, a paved pad. | An encounter at sunset, or a collectible under the bench. |
 
 ### Seats
 
@@ -467,7 +494,16 @@ In the morning the sun is the plaza's, and after work the lamps along the street
 
 ### Spots
 
-`plaza_entry` (on the lane, the jog ahead)
+`plaza_entry` (on the lane, the jog ahead); and each nook below
+
+### Nooks
+
+Small places off the walks, kept for later secrets, encounters and collectibles (GUIDE, Visual design). Each is a named spot in the place's code; nothing is placed in them yet.
+
+| Id | Where | What's there | Could hold |
+|---|---|---|---|
+| `east_lane_shrine` | On the north street, through a gap in its west verge between two zelkovas. | A hokora on its plinth behind a red torii, two stone lanterns, an offering box, raked gravel. | A secret: something left at the shrine. |
+| `east_lane_footpath` | The footpath behind the barber's and the café, a few steps in off the dorm street, closed by bollards beyond. | Paving, a bench at the edge of the planting, a stone lantern, three bollards across the path. | An encounter: someone who comes here not to be seen from the street. |
 
 ### Seats
 
@@ -542,7 +578,16 @@ In the morning the sun is the plaza's; after work the lamps, the stone lanterns,
 
 ### Spots
 
-`row_entry` (on the dorm row, the terrace ahead)
+`row_entry` (on the dorm row, the terrace ahead); and each nook below
+
+### Nooks
+
+Small places off the walks, kept for later secrets, encounters and collectibles (GUIDE, Visual design). Each is a named spot in the place's code; nothing is placed in them yet.
+
+| Id | Where | What's there | Could hold |
+|---|---|---|---|
+| `east_coast_lookout` | Where the coast walk turns inland, out to the sea wall. | A low rail on the wall, a coin telescope, a name card (みはらし Lookout). | A collectible or a secret: what the telescope shows. |
+| `east_coast_shrine` | On the lawn south of the walk inland, before the cherries. | A hokora on its plinth behind a red torii, two stone lanterns, an offering box, raked gravel. | A secret or a collectible. |
 
 ### Seats
 
@@ -619,7 +664,16 @@ In the morning the sun is the plaza's; after work the lamps, the gym's glass, th
 
 ### Spots
 
-`north_entry` (on the north street, the sports lane ahead)
+`north_entry` (on the north street, the sports lane ahead); and each nook below
+
+### Nooks
+
+Small places off the walks, kept for later secrets, encounters and collectibles (GUIDE, Visual design). Each is a named spot in the place's code; nothing is placed in them yet.
+
+| Id | Where | What's there | Could hold |
+|---|---|---|---|
+| `sports_courtside` | North off the courts walk through a gap in its hedge, between the pool deck's fence and the tennis courts. | Two drinks machines against the courts' fence, the sorted bins beside them. | An encounter: a player buying a drink after a game. Or a coin under the machine. |
+| `sports_grove_bench` | On the grass between the pool walk and the grove behind the gym, near the pavilion. | A bench behind a clipped hedge, a stone lantern, a zelkova over it, paving. | An encounter, or a collectible left on the bench. |
 
 ### Seats
 
@@ -698,7 +752,16 @@ In the morning the sun is the plaza's; after work the lamps, the canopies' light
 
 ### Spots
 
-`street_entry` (on the street west of the corner, walking west)
+`street_entry` (on the street west of the corner, walking west); and each nook below
+
+### Nooks
+
+Small places off the walks, kept for later secrets, encounters and collectibles (GUIDE, Visual design). Each is a named spot in the place's code; nothing is placed in them yet.
+
+| Id | Where | What's there | Could hold |
+|---|---|---|---|
+| `office_smokers` | In the planted gap between Amakawa Electric and Amakawa Trading, off Electric's forecourt. | Frosted screens on three sides, a standing ashtray, a bench, the sign (きつえんじょ Smoking area). | An encounter: office gossip from someone on a smoke break. |
+| `office_vending` | On Amakawa Life's forecourt, west of its door. | Two drinks machines against the bed, the sorted bins beside them. | An encounter, or a coin under the machine. |
 
 ### Seats
 
@@ -774,7 +837,17 @@ In the morning the sun is the plaza's; after work the lamps, the floodlights, th
 
 ### Spots
 
-`street_entry` (on the street west of the harbour walk's mouth, walking west)
+`street_entry` (on the street west of the harbour walk's mouth, walking west); and each nook below
+
+### Nooks
+
+Small places off the walks, kept for later secrets, encounters and collectibles (GUIDE, Visual design). Each is a named spot in the place's code; nothing is placed in them yet.
+
+| Id | Where | What's there | Could hold |
+|---|---|---|---|
+| `harbour_pier_end` | The supply pier's south end. | Mooring bollards, a life ring on its post, a coil of rope, a bucket, a folding stool, a fish crate. | An encounter: someone fishing off the end. Or something fished up. |
+| `harbour_shed_back` | The warehouse's east side, between it and the yard's edge. | The outdoor units against the wall, crates of empties, buckets, a potted shrub, a hose reel. | An encounter: a dock hand on a break. Or a collectible behind the crates. |
+| `harbour_ferry_lookout` | The ferry pier's south end. | A low rail, a coin telescope, a bench looking out to sea, a name card (みなと Harbour). | A secret or a collectible: what the telescope shows. |
 
 ### Seats
 

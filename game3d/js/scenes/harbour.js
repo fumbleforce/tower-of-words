@@ -30,6 +30,7 @@ import { yardSteps } from './harbour/yard.js';
 import { shipsSteps } from './harbour/ships.js';
 import { groundsSteps } from './harbour/grounds.js';
 import * as P from './harbour/plan.js';
+import { buildNooks } from './outdoor/nooks.js';
 
 const { CHUNK, inRect } = P;
 
@@ -87,11 +88,14 @@ export function* harbourSteps() {
     near: 40,
     far: 80,
   });
+  const nooks = buildNooks(P.NOOKS, root); // outdoor/nooks.js: props round each nook, its spot named
+  for (const r of nooks.blocks) nav.block(...r);
   yield* mergeStaticSteps(root);
   root.add(wg, coast);
   yield* nav.buildSteps();
 
   return {
+    nooks: nooks.spots,
     root,
     scene,
     sun,
@@ -102,6 +106,7 @@ export function* harbourSteps() {
     exits: P.EXITS,
     doors: P.DOORS,
     evening() {
+      nooks.evening();
       shadows.evening();
       lit.evening();
       sg.evening();

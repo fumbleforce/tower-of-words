@@ -13,6 +13,8 @@
 //   are chained off at their heads, the beach is seen and not walked
 import * as LAYOUT from '../island-layout.js';
 import * as S from '../island-south.js';
+import { LOOKOUT_GAP } from '../outdoor/seafront.js';
+import { nookWalks } from '../outdoor/nook-walks.js';
 
 export const CHUNK = 'shotengai';
 const path = (id) => LAYOUT.PATHS.find((p) => p.id === id);
@@ -66,7 +68,47 @@ export const EXIT_X = SHOP_WALK[2] - 0.6; // island x past which he is leaving
 export const CHAINS = S.STAIRS.map(([x0, , x1]) => [x0, x1]);
 
 // the walkable rects in the chunk's frame, and the promenade's furniture to keep clear of
-export const WALKS = [ARCADE, SHOP_WALK, WEST_WALK, EAST_WALK, ...ALLEYS, PROM].map(rect);
+// the nooks (outdoor/nooks.js), in the chunk's frame: a roadside shrine on the lawn at the arcade's west mouth, its
+// pines behind it; the back of the shops in the middle alley, along its west wall; a bench under the pines past the
+// lookout's east rail, through the gap in it, looking at the sea
+const [GX0, GX1] = [local([0, LOOKOUT_GAP[1]])[0], local([0, LOOKOUT_GAP[0]])[0]],
+  END_Z = local([PROMENADE[2], 0])[1];
+const MID = rect(ALLEYS[1]);
+export const NOOKS = [
+  {
+    id: 'shotengai_shrine',
+    kit: 'shrine',
+    at: [-0.9, -71.0],
+    face: Math.PI,
+    tree: null,
+    walks: [[-2.0, 0.2, -72.0, -69.9]],
+    pads: [[-2.0, 0.2, -72.0, -70.05]],
+  },
+  {
+    id: 'shotengai_back_alley',
+    kit: 'alley',
+    at: [(MID[0] + MID[1]) / 2, MID[3] - 0.75],
+    face: Math.PI,
+    back: MID[3] - MID[2] - 0.8,
+    len: MID[1] - MID[0] - 0.4,
+  },
+  {
+    id: 'shotengai_pine_bench',
+    kit: 'bench',
+    at: [GX1 + 0.8, END_Z + 1.8],
+    face: -Math.PI / 2,
+    out: true,
+    back: false,
+    sides: 'none',
+    tree: null,
+    walks: [
+      [GX0 + 0.05, GX1 - 0.05, END_Z - 0.4, END_Z + 0.3],
+      [GX0 + 0.05, GX1 + 1.8, END_Z + 0.05, END_Z + 2.9],
+    ],
+    pads: [[GX0 + 0.05, GX1 + 1.8, END_Z + 0.05, END_Z + 2.9]],
+  },
+];
+export const WALKS = [...[ARCADE, SHOP_WALK, WEST_WALK, EAST_WALK, ...ALLEYS, PROM].map(rect), ...nookWalks(NOOKS)];
 export const STREET_END = rect([SHOP_WALK[2] - 0.1, SHOP_WALK[1], DORM_STREET[2], SHOP_WALK[3]]); // out onto the street
 export const FURNITURE = [
   ...S.LAMP_X.map((x) => [x - 0.15, S.FURNITURE_Z - 0.15, x + 0.15, S.FURNITURE_Z + 0.15]),

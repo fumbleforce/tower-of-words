@@ -19,6 +19,9 @@ import { coastSteps, rail, along } from './coast.js';
 import { SAND } from '../skyline.js';
 import * as S from '../island-south.js';
 
+// the gap in the lookout's east rail, island z [from, to] (shotengai/plan.js NOOKS walks through it)
+export const LOOKOUT_GAP = [28.55, 30.35];
+
 const { PROMENADE: P, WALL_Z, BAND, STAIRS, ALLEYS, LINKS, BEACH_E, BAYS } = S;
 const BW = 0.25; // soldier borders
 const STONE = { cheek: '#8d9194', nosing: '#6c7177', tread: '#9a9a96' };
@@ -244,7 +247,9 @@ export function* seafrontSteps(root, { at, layer = null, backWalk = false }) {
   yield;
   // the lookout at the promenade's east end, over the rocks: a rail on its seaward sides
   rail(p, at(BEACH_E, WALL_Z - 0.25), at(P[2] - 0.15, WALL_Z - 0.25));
-  rail(p, at(P[2] - 0.15, WALL_Z - 0.25), at(P[2] - 0.15, P[1] + 0.4));
+  // (its east side open at LOOKOUT_GAP, onto the lawn under the pines: the shop street's nook there)
+  rail(p, at(P[2] - 0.15, WALL_Z - 0.25), at(P[2] - 0.15, LOOKOUT_GAP[1]));
+  rail(p, at(P[2] - 0.15, LOOKOUT_GAP[0]), at(P[2] - 0.15, P[1] + 0.4));
   yield;
   // lamps and benches in the band along the wall, bins beside every other bench
   const bz = FURNITURE_Z;

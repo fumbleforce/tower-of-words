@@ -25,6 +25,7 @@ import { coastLand } from './island-west.js';
 import { walkSteps, kerbWalks, Z_CUTS } from './east-coast/walk.js';
 import { onsenSteps } from './east-coast/onsen.js';
 import * as P from './east-coast/plan.js';
+import { buildNooks } from './outdoor/nooks.js';
 
 const { CHUNK, inRect } = P;
 // the coast from south of the dorms round past the onsen (the layout's line, its east side)
@@ -83,6 +84,8 @@ export function* eastCoastSteps() {
     near: 40,
     far: 80,
   });
+  const nooks = buildNooks(P.NOOKS, root); // outdoor/nooks.js: props round each nook, its spot named
+  for (const r of nooks.blocks) nav.block(...r);
   yield* mergeStaticSteps(root);
   root.add(wg);
   // the dorm cluster round the inner court, with the courtyard and Eric's block as the plaza shows them, in its own
@@ -93,6 +96,7 @@ export function* eastCoastSteps() {
   yield* nav.buildSteps();
 
   return {
+    nooks: nooks.spots,
     root,
     scene,
     sun,
@@ -105,6 +109,7 @@ export function* eastCoastSteps() {
     turns: P.TURNS,
     camera: { elev: 46, fov: 24 },
     evening() {
+      nooks.evening();
       shadows.evening();
       lit.evening();
       sg.evening();

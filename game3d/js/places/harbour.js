@@ -85,7 +85,12 @@ export async function harbourPlace(game) {
     music: 'calm',
     grade: MORNING_GRADE,
     things,
-    spots: { street_entry: w.in },
+    spots: {
+      street_entry: w.in,
+      harbour_pier_end: w.nooks.harbour_pier_end,
+      harbour_shed_back: w.nooks.harbour_shed_back,
+      harbour_ferry_lookout: w.nooks.harbour_ferry_lookout,
+    },
     seats: {},
     people: {},
     zones: {

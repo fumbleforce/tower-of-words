@@ -280,7 +280,7 @@ export const avenueTrees = () =>
 
 function* planting(p, lights, sh) {
   // the north street's avenue, open where the back lane comes in
-  const back = [[BACK[2], BACK[3]]];
+  const back = [[BACK[2], BACK[3]], E.SHRINE_GAP];
   const trees = avenueTrees();
   verge(p, [NS[0], NS[2]], [NS[0], TOP_LEG[2]], 'w', { crossings: back, trees, seed: 21 });
   for (const z of trees) sh.tree(NS[0] - 2.1, z, 1.04);

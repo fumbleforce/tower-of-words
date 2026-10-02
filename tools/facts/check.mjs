@@ -5,7 +5,7 @@
 //   node tools/facts/check.mjs --game     print what the game has, to help write or fix a doc
 //
 // Areas: cast.md (people, names on screen, likes, portraits), places.md (things, spots, zones, who is there when,
-// small moments, creatures), words.md (every word), systems.md (the drinks), stories/*.md (cast, nodes, words taught, flags),
+// small moments, creatures, nooks), words.md (every word), systems.md (the drinks), stories/*.md (cast, nodes, words taught, flags),
 // and every story node belonging to a storyline or a place's small moments.
 // Rows or items marked "(to build)" or "(to remove)" are decided but not done yet: while the game still differs
 // they're listed as pending and don't fail the check; once the game matches, the check asks for the mark to go.
@@ -386,6 +386,23 @@ function checkCrowd() {
   }
 }
 
+// places.md: every place whose catalog lists nooks (game3d/js/places/catalog*.js `nooks`, the named spots kept for
+// later secrets, encounters and collectibles) has a "### Nooks" table under its section with the same ids, and each
+// nook is one of the place's spots
+function checkNooks() {
+  const file = 'docs/game/places.md';
+  const md = read(path.join(DOCS, 'places.md'));
+  for (const [place, d] of Object.entries(PLACE_DETAILS)) {
+    const sec = section(md, (h) => h.endsWith(`(\`${place}\`)`), 2, file);
+    const t = sec == null ? null : tableIn(section(sec, (h) => h === 'Nooks', 3, file));
+    const doc = (t || []).map((r) => id(r.Id)),
+      got = d.nooks || [];
+    if (!got.length && !doc.length) continue;
+    if (sec == null) { bad(file, `${place} has nooks but no "## ... (\`${place}\`)" section`); continue; }
+    if (!same(doc, got)) bad(file, `${place}: nooks are ${got.join(', ') || 'none'} in the game, ${doc.join(', ') || 'none'} in the doc's "### Nooks"`);
+    for (const n of got) if (!d.spots.includes(n)) bad(file, `${place}: nook \`${n}\` isn't one of its spots`);
+  }
+}
 // a schedule as text, the way the doc writes it: "hidden all day", or "morning `racks`, evening hidden"
 const PERIODS = ['early', 'morning', 'lunch', 'afternoon', 'evening'];
 function schedOf(per) {
@@ -496,7 +513,7 @@ if (DUMP) {
   console.log('\nWords taught (type steps):'); for (const [sf, N] of Object.entries(game.nodes)) for (const [n, v] of Object.entries(N)) for (const t of v.types) console.log(`  ${t.word} from ${t.from} in ${sf} ${n}`);
   process.exit(0);
 }
-for (const [area, fn] of [['cast', checkCast], ['places', checkPlaces], ['creatures', checkCreatures], ['crowd', checkCrowd], ['trips', checkTrips], ['island', checkIsland], ['island plan', checkIslandPlan], ['words', checkWords], ['systems', checkSystems], ['stories', checkStories]]) {
+for (const [area, fn] of [['cast', checkCast], ['places', checkPlaces], ['nooks', checkNooks], ['creatures', checkCreatures], ['crowd', checkCrowd], ['trips', checkTrips], ['island', checkIsland], ['island plan', checkIslandPlan], ['words', checkWords], ['systems', checkSystems], ['stories', checkStories]]) {
   try { fn(game); } catch (e) { bad(area, e.message); }
 }
 if (pending.length) { console.log(`\nPending (decided, not done yet):`); for (const p of pending) console.log('  ' + p); }

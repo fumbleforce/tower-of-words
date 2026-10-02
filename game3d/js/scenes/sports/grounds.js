@@ -110,11 +110,12 @@ function* planting(p, lights, signRoot) {
   gravel(p, [GYM[1], PW[0] - 0.08, GYM[2], LANE[2] - 0.08]);
   bed(p, [PW[1] + 0.08, DECK[0], DECK[2], CW[2] - 0.08], { y: 0.04 });
   // along the courts walk: the hedge before the fences, the benches in their bays, the residence's side
-  hedge(p, [PW[1] + 0.5, CW[2] - 0.55], [GW[0] - 0.3, CW[2] - 0.55], {
-    w: 0.5,
-    h: 0.55,
-    seed: 31,
-  });
+  // (open at the courtside nook, plan.js COURTSIDE)
+  for (const [a, b, seed] of [
+    [PW[1] + 0.5, P.COURTSIDE[0] - 0.1, 31],
+    [P.COURTSIDE[1] + 0.1, GW[0] - 0.3, 37],
+  ])
+    hedge(p, [a, CW[2] - 0.55], [b, CW[2] - 0.55], { w: 0.5, h: 0.55, seed });
   hedge(p, [GW[1] + 1.0, CW[2] - 0.55], [CE - 0.3, CW[2] - 0.55], {
     w: 0.5,
     h: 0.55,

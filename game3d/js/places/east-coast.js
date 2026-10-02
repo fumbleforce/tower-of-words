@@ -78,7 +78,11 @@ export async function eastCoastPlace(game) {
     music: 'calm',
     grade: MORNING_GRADE,
     things,
-    spots: { row_entry: w.in },
+    spots: {
+      row_entry: w.in,
+      east_coast_lookout: w.nooks.east_coast_lookout,
+      east_coast_shrine: w.nooks.east_coast_shrine,
+    },
     seats: {},
     people: {},
     zones: {

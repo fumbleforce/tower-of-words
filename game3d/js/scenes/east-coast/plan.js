@@ -12,6 +12,7 @@
 //   at the gate, the stone walk on its axis up to the entrance porch and the shut door
 import * as LAYOUT from '../island-layout.js';
 import * as C from '../dorm-court/cluster-plan.js';
+import { nookWalks } from '../outdoor/nook-walks.js';
 
 export const CHUNK = 'east_coast';
 const AT = LAYOUT.CHUNKS[CHUNK].at;
@@ -67,7 +68,31 @@ const I_WALKS = [
   STONE_WALK,
   COURTS_STUB,
 ];
-export const WALKS = I_WALKS.map(rect);
+// the nooks (outdoor/nooks.js), in the chunk's frame: a lookout with a coin telescope where the coast walk turns
+// inland, out to the sea wall; a roadside shrine on the lawn south of the walk inland, the cherries behind it
+export const NOOKS = [
+  {
+    id: 'east_coast_lookout',
+    kit: 'lookout',
+    at: [5.2, -46.5],
+    face: Math.PI / 2,
+    edge: 1.45,
+    span: 0.95,
+    seat: false,
+    walks: [[5.3, 6.75, -47.45, -45.55]],
+    pads: [[5.5, 6.75, -47.45, -45.55]],
+  },
+  {
+    id: 'east_coast_shrine',
+    kit: 'shrine',
+    at: [-2.5, -44.1],
+    face: 0,
+    tree: null,
+    walks: [[-3.6, -1.4, -45.6, -43.3]],
+    pads: [[-3.6, -1.4, -45.45, -43.75]],
+  },
+];
+export const WALKS = [...I_WALKS.map(rect), ...nookWalks(NOOKS)];
 
 // the coast walk's furniture, in the island frame: post lamps on its landward edge about every 8, and benches in
 // bays on its landward side looking over it to the sea; the onsen path's lamps on its outer edge

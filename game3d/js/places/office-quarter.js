@@ -112,7 +112,7 @@ export async function officeQuarterPlace(game) {
     music: 'calm',
     grade: MORNING_GRADE,
     things,
-    spots: { street_entry: w.in },
+    spots: { street_entry: w.in, office_smokers: w.nooks.office_smokers, office_vending: w.nooks.office_vending },
     seats: {},
     people: {},
     zones: {

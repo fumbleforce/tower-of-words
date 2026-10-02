@@ -34,7 +34,9 @@ import { pigeons } from './outdoor/pigeons.js';
 import { fountain } from './plaza/fountain.js';
 import * as P from './plaza/plan.js';
 import { eastLaneSteps } from './plaza/east-lane.js';
-import { BLOCK_IDS, BLOCKS as EAST_BLOCKS, CROSS, SOUTH_WALK, FINGER } from './plaza/east-plan.js';
+import { BLOCK_IDS, BLOCKS as EAST_BLOCKS, CROSS, SOUTH_WALK, FINGER, NOOKS } from './plaza/east-plan.js';
+import { buildNooks } from './outdoor/nooks.js';
+import { nookWalks } from './outdoor/nook-walks.js';
 import { northLaneSteps } from './plaza/north-lane.js';
 import { NORTH_IDS } from './plaza/north-plan.js';
 import { clusterSteps, placeIn, CLUSTER_IDS } from './dorm-court/cluster.js';
@@ -81,6 +83,7 @@ export function* plazaSteps() {
   const nav = new Nav(NAV[0], NAV[1], NAV[2], NAV[3], 0.1);
   const terrace = [TERRACE[0], TERRACE[1], TERRACE[2] + 0.3, TERRACE_S - 0.25];
   const link = [LINK[0], LINK[1], TERRACE_S - 1, LINK[3]];
+  const NOOK_WALKS = nookWalks(NOOKS);
   nav.extra = (x, z) => {
     const r = Math.hypot(x - F[0], z - F[1]);
     if (r < BASIN + 0.3) return false;
@@ -91,7 +94,8 @@ export function* plazaSteps() {
       inRect(x, z, link, 0.25) ||
       inRect(x, z, CROSS_N, 0.25) ||
       inRect(x, z, CROSS_S, 0.25) ||
-      inRect(x, z, SHOP_START, 0.25)
+      inRect(x, z, SHOP_START, 0.25) ||
+      NOOK_WALKS.some((r) => inRect(x, z, r))
     );
   };
 
@@ -113,6 +117,8 @@ export function* plazaSteps() {
   // the finger sign at the south walk's start (plaza/east-lane.js builds it)
   nav.block(FINGER[0] - 0.1, FINGER[0] + 0.1, FINGER[1] - 0.1, FINGER[1] + 0.1);
   yield;
+  const nooks = buildNooks(NOOKS, root, { p, lights }); // outdoor/nooks.js: props round each nook, its spot named
+  for (const r of nooks.blocks) nav.block(...r);
   const east = yield* eastLaneSteps(root, p, lights); // backdrop: the lane on east to the dorm street
   const north = yield* northLaneSteps(root, lights); // backdrop: the back lane behind the canteen, the clinic
   p.build(root);
@@ -183,6 +189,7 @@ export function* plazaSteps() {
     board, // the notice board: where it stands and its top
     pigeons: flock, // the flock by the fountain; the place feeds it Eric's position
     chairs, // the terrace chairs, standing or stacked for closing (places/canteen-closing.js)
+    nooks: nooks.spots,
     update(dt, t) {
       water.update(t);
       north.update(sun);
@@ -200,6 +207,7 @@ export function* plazaSteps() {
       dorms.evening();
       front.evening();
       sky.onPeriod('evening');
+      nooks.evening();
     },
     skyline: sky.stats,
   };

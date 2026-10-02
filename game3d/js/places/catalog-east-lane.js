@@ -11,7 +11,8 @@ export const EAST_LANE_DETAILS = {
     barber: { label: 'Barber', kind: 'thing', verb: 'Go in' },
     travel_office: { label: 'Amakawa Travel', kind: 'thing', verb: 'Go in' },
   },
-  spots: ['plaza_entry'],
+  spots: ['plaza_entry', 'east_lane_shrine', 'east_lane_footpath'],
+  nooks: ['east_lane_shrine', 'east_lane_footpath'], // docs/game/places.md, "Nooks"
   seats: [],
   zones: ['plaza_exit', 'shop_exit', 'dorm_exit', 'row_exit', 'north_exit'],
   people: [],

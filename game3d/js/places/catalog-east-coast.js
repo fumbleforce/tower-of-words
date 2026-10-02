@@ -5,7 +5,8 @@ export const EAST_COAST_DETAILS = {
     courts_walk: { label: 'To the gym and pool', kind: 'thing', verb: 'Go' },
     onsen: { label: 'Onsen', kind: 'thing', verb: 'Go in' },
   },
-  spots: ['row_entry'],
+  spots: ['row_entry', 'east_coast_lookout', 'east_coast_shrine'],
+  nooks: ['east_coast_lookout', 'east_coast_shrine'], // docs/game/places.md, "Nooks"
   seats: [],
   zones: ['row_exit', 'courts_exit'],
   people: [],

@@ -97,7 +97,11 @@ export async function sportsPlace(game) {
     music: 'calm',
     grade: MORNING_GRADE,
     things,
-    spots: { north_entry: w.in },
+    spots: {
+      north_entry: w.in,
+      sports_courtside: w.nooks.sports_courtside,
+      sports_grove_bench: w.nooks.sports_grove_bench,
+    },
     seats: {},
     people: {},
     zones: {
