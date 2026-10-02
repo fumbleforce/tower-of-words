@@ -159,6 +159,8 @@ gone() {  # gone [--remove]: which worktrees hold nothing that isn't on main, an
     size=$(du -sh "$wt" 2>/dev/null | cut -f1 || true)
     if [[ -z "$branch" ]]; then why="detached HEAD"
     elif [[ "$lock" =~ pid\ ([0-9]+) ]] && kill -0 "${BASH_REMATCH[1]}" 2>/dev/null; then why="its agent is still running (pid ${BASH_REMATCH[1]})"
+    elif [[ -n "$lock" ]]; then why="locked (${lock#locked}); an agent harness may still own it: remove it by hand once its agent has reported"
+    elif [[ -n "$(find "$wt" -maxdepth 0 -mmin -360 2>/dev/null)" ]] && ! git -C "$main" cherry main "$branch" | grep -q .; then why="made under 6 h ago with no commits yet: a just-started agent looks the same as a finished one"
     elif compgen -G "/proc/[0-9]*/cwd" >/dev/null && find /proc/[0-9]*/cwd -maxdepth 0 -lname "$wt*" 2>/dev/null | grep -q .; then why="a process is working in it"
     elif git -C "$main" cherry main "$branch" | grep -q '^+'; then why="$(git -C "$main" cherry main "$branch" | grep -c '^+') commit(s) not on main"
     else
