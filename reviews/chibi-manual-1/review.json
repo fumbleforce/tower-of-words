@@ -1,0 +1,115 @@
+{
+ "title": "Chibi office woman, built by hand in Blender",
+ "date": "2026-10-02",
+ "by": "Claude (chibi-manual agent)",
+ "status": "open",
+ "question": "How close is the hand-built chibi to your two pictures, and what should change?",
+ "multi": true,
+ "media": [
+  {
+   "image": "art/parts/chibi-manual/a12/pair-base.webp",
+   "caption": "a12 base body: your picture, then the model from the front. Your brief: \"Try making this model, both manually and with meshy\" (this is the manual one; the Meshy one is chibi-meshy-1)."
+  },
+  {
+   "image": "art/parts/chibi-manual/a12/pair-office.webp",
+   "caption": "a12 dressed: your picture, then the model from the front. The head is the base picture's head. In your dressed picture the head is about 20% smaller against the body, so with the hair on, ours reads much bigger."
+  },
+  {
+   "image": "art/parts/chibi-manual/a12/sheet.webp",
+   "caption": "a12 from the front, her left three-quarter (image right side turned to us), her left side and the back, beside your pictures. Cycles, soft white studio light."
+  },
+  {
+   "image": "art/parts/chibi-manual/a12/face.webp",
+   "caption": "The face: your base picture, then the painted face texture on the model (tools/characters/chibi/face-base.svg, drawn as vector shapes at the positions measured off your picture)."
+  },
+  {
+   "image": "art/parts/chibi-manual/a12/motion-office.webp",
+   "caption": "a12 in the live viewer (link below) with Mio's game idle and walk carried over by bone name: rest, idle, then the walk from the front, her left side and the back."
+  },
+  {
+   "image": "art/parts/chibi-manual/a12/motion-base.webp",
+   "caption": "The bare base body on the same rig, same clips."
+  }
+ ],
+ "options": [
+  {
+   "id": "a01",
+   "label": "a01",
+   "image": "art/parts/chibi-manual/a01/sheet.webp",
+   "note": "First build, dressed only (512 px test renders). Proportions eyeballed from the picture, which made the body too thin (torso 233 mm, legs 83 mm). The bang locks stood up off the head like horns (their lift was measured along the front ray instead of onto the hair). Lights too strong: key 160 W, fill 50, top 60, world 0.55."
+  },
+  {
+   "id": "a02",
+   "label": "a02",
+   "image": "art/parts/chibi-manual/a02/sheet.webp",
+   "note": "Bang locks laid back onto the hair shell. Lights lowered: key 70 W, fill 22, top 30, world 0.5. Body still eyeballed."
+  },
+  {
+   "id": "a03",
+   "label": "a03",
+   "image": "art/parts/chibi-manual/a03/sheet.webp",
+   "note": "Body measured from a row-by-row silhouette scan of your base picture (1 px = 1 mm, floor at 1185 px): torso 295 mm wide at the belly and 231 at the top, arms 94 thick, mitten hands 116, legs 134, feet 176. Head unchanged (it was measured right). The hair is a boxy helmet, and three of the five bang locks are missing (their rays missed the head)."
+  },
+  {
+   "id": "a04",
+   "label": "a04",
+   "image": "art/parts/chibi-manual/a04/sheet.webp",
+   "note": "Hair: tighter round the head with a rounder top, the bob widens 3 cm toward the ends, smaller tips; bang locks wider. Waistband widened (a03 showed a white gap between it and the skirt)."
+  },
+  {
+   "id": "a05",
+   "label": "a05",
+   "image": "art/parts/chibi-manual/a05/sheet.webp",
+   "images": ["art/parts/chibi-manual/a05/motion-office.webp"],
+   "note": "The three missing locks are back: past the head's outline they ride on the hair. First check in the viewer: the walk tore the skirt open, because each skirt vertex followed its nearest thigh."
+  },
+  {
+   "id": "a06",
+   "label": "a06",
+   "image": "art/parts/chibi-manual/a06/motion-office.webp",
+   "note": "Stills as a05. Skirt weights: a tube on the hips that shears with each thigh toward the hem (60% at the hem). In the walk the blouse still showed through the skirt."
+  },
+  {
+   "id": "a07",
+   "label": "a07",
+   "image": "art/parts/chibi-manual/a07/motion-office.webp",
+   "note": "Blouse and body below the waist follow the hips; the shoe openings are cut by a plane (a06 had stepped edges)."
+  },
+  {
+   "id": "a08",
+   "label": "a08",
+   "image": "art/parts/chibi-manual/a08/motion-office.webp",
+   "note": "The hem follows the thighs more (90%), and the cheek lock's root moved up into the hair. The blouse still poked out in the walk, now from the hip side."
+  },
+  {
+   "id": "a09",
+   "label": "a09",
+   "image": "art/parts/chibi-manual/a09/motion-office.webp",
+   "note": "The body and blouse under the skirt take exactly the skirt's weights, so nothing pokes through in the walk."
+  },
+  {
+   "id": "a10",
+   "label": "a10",
+   "image": "art/parts/chibi-manual/a10/sheet.webp",
+   "images": ["art/parts/chibi-manual/a10/pair-office.webp", "art/parts/chibi-manual/a10/motion-office.webp"],
+   "note": "Buttons moved above the waistband (one was on the skirt). First full-size renders: 1024 px, 64 samples, exposure -0.25."
+  },
+  {
+   "id": "a11",
+   "label": "a11",
+   "image": "art/parts/chibi-manual/a11/sheet.webp",
+   "images": ["art/parts/chibi-manual/a11/pair-office.webp", "art/parts/chibi-manual/a11/motion-office.webp"],
+   "note": "Sleeves end just above the wrist like your picture (95% of the arm, were 82%), with a bigger collar."
+  },
+  {
+   "id": "a12",
+   "label": "a12",
+   "image": "art/parts/chibi-manual/a12/sheet.webp",
+   "images": ["art/parts/chibi-manual/a12/pair-office.webp", "art/parts/chibi-manual/a12/pair-base.webp", "art/parts/chibi-manual/a12/face.webp", "art/parts/chibi-manual/a12/motion-office.webp", "art/parts/chibi-manual/a12/motion-base.webp"],
+   "note": "The sleeve now covers the round top of the arm (a11 showed bare skin there). Latest. 40,572 faces dressed; parts: base (head, torso, arms, hands, legs, feet), hair (shell + 5 locks), office (blouse, collar, buttons, sleeves, cuffs, skirt, waistband, flats). Close to the base picture. Unlike your dressed picture: the head is bigger against the body, the hair is a boxier bob with a straight hairline under the bangs, the collar has no V-neck, and the skirt is shorter and boxier."
+  }
+ ],
+ "links": [
+  {"label": "Live viewer: every attempt with idle and walk, a12 base and the Meshy model beside it", "href": "tools/characters/parts/viewer.html?cfg=/reviews/chibi-manual-1/viewer.json"}
+ ]
+}
