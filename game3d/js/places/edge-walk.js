@@ -15,14 +15,15 @@ export async function walkOut(g, cam, lane, edge) {
   g.player.setState('idle');
 }
 
-// arriving: he starts at the edge, facing in, and walks onto the lane; then the camera lets go (unless the place
-// walks him on further first: release false)
+// arriving: he starts at the edge, facing in, and walks onto the lane, the close shot going with him (held on the
+// edge, a long walk in took him off a phone's screen); then the camera lets go (unless the place walks him on
+// further first: release false)
 export async function walkIn(g, cam, edge, lane, facing, { release = true } = {}) {
   const eric = g.player;
   eric.scripted = true;
   eric.root.position.set(edge[0], 0, edge[1]);
   eric.root.rotation.y = facing;
-  cam.closeOn(edge, ZOOM);
+  cam.closeOn(edge, ZOOM, undefined, { onEric: true });
   cam.snap(eric.root.position);
   await glide(g, eric.root, lane, 1.1);
   if (!release) return;
