@@ -64,7 +64,7 @@ export function walkStep(game, w, dt, list, eric, wide) {
     const lead = followSpeed(ahead, fx, fz, ad - ahead.r - me);
     speed = lead !== null ? Math.min(speed, lead) : speed * 0.5;
   }
-  const s = Math.min(d, speed * dt);
+  const s = w.wait ? 0 : Math.min(d, speed * dt); // wait: Eric is at the door they're going to, in a scene
   let x = ox + fx * s,
     z = oz + fz * s,
     by = null;
