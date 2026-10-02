@@ -1,0 +1,23 @@
+{
+ "title": "Chibi office woman, built by hand (chibi-manual-1)",
+ "blurb": "Modelled in Blender from your two pictures: the base body, painted face, hair and office clothes are separate parts on one Mixamo-named rig (tools/characters/chibi/build.py). Idle and walk are Mio's game clips carried over by bone name. Every attempt is here in order; a12 is the latest. Drag to turn.",
+ "attempts": {
+  "a12": "/art/parts/chibi-manual/a12/office.glb",
+  "a12-base": "/art/parts/chibi-manual/a12/base.glb",
+  "a11": "/art/parts/chibi-manual/a11/office.glb",
+  "a10": "/art/parts/chibi-manual/a10/office.glb",
+  "a09": "/art/parts/chibi-manual/a09/office.glb",
+  "a08": "/art/parts/chibi-manual/a08/office.glb",
+  "a07": "/art/parts/chibi-manual/a07/office.glb",
+  "a06": "/art/parts/chibi-manual/a06/office.glb",
+  "a05": "/art/parts/chibi-manual/a05/office.glb",
+  "a04": "/art/parts/chibi-manual/a04/office.glb",
+  "a03": "/art/parts/chibi-manual/a03/office.glb",
+  "a02": "/art/parts/chibi-manual/a02/office.glb"
+ },
+ "compare": {
+  "a12-base": "/art/parts/chibi-manual/a12/base.glb",
+  "meshy dressed-t2": "/art/parts/chibi-meshy/meshy/dressed-t2-rigged.glb"
+ },
+ "refs": ["/art/parts/chibi-manual/ref-office.png", "/art/parts/chibi-manual/ref-base.png"]
+}
