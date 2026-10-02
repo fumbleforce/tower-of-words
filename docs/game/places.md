@@ -731,6 +731,16 @@ Nobody yet.
 | `to_offices` | Use or walk east along the street in front of Amakawa Trading | Eric walks back east to the office street. |
 | `to_works`, `to_works_street` | Use or walk into the works lane's mouth, or the works street's | Eric walks on north into the old works. |
 
+### Creatures
+
+| Id | Kind | How many | When | Where |
+|---|---|---|---|---|
+| `gulls` | gull | 7 | `day` | Over the harbour, on the water, the quays and the roofs. |
+| `night_gulls` | gull | 3 | `evening` | Sitting on the water, the quays and the roofs. |
+| `pigeons` | pigeon | 4 | `day` | On the street and in the yard. |
+| `crows` | crow | 2 | `all` | On the roofs and the trees. |
+| `harbour_cat` | cat | 1 | `all` | A ginger and white cat on a quay wall or a bench. |
+
 ## Old works (`works`)
 
 The seventh district of the island's south half built to walk (issue #173, after Jørgen's "Correct" on Review island-half-1; its places are in [island.md](island.md), "Old works"). It runs from the supply yard's north edge up the works lane past the power plant's door to the chimney's foot, east along the works yard past the works shed, the factory's gates, the gatehouse and the server hall, down the works street to the office street past the recycling centre, and east along the research walk to Amakawa Research. Eric comes in from the harbour, up the lane out of the supply yard or up the street off the office street, and goes back down either (Getting between places). The harbour office's side and the warehouse are the harbour's, built by the same code.
@@ -803,11 +813,11 @@ Nobody yet.
 
 | Id | Kind | How many | When | Where |
 |---|---|---|---|---|
-| `gulls` | gull | 7 | `day` | Over the harbour, on the water, the quays and the roofs. |
-| `night_gulls` | gull | 3 | `evening` | Sitting on the water, the quays and the roofs. |
-| `pigeons` | pigeon | 4 | `day` | On the street and in the yard. |
-| `crows` | crow | 2 | `all` | On the roofs and the trees. |
-| `harbour_cat` | cat | 1 | `all` | A ginger and white cat on a quay wall or a bench. |
+| `crows` | crow | 4 | `all` | On the factory's saw-tooth roofs, the power plant and the walls. |
+| `pigeons` | pigeon | 5 | `day` | On the works yard's old concrete. |
+| `sparrows` | sparrow | 3 | `day` | On the yard and the street, in the weeds and hedges. |
+| `butterflies` | butterfly | 2 | `day` | Over the planting. |
+| `works_cat` | cat | 1 | `all` | A black cat on a wall or a ledge. |
 
 ## The lift (`lift`)
 

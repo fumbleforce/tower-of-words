@@ -57,6 +57,13 @@ export const CREATURES = {
     { id: 'crows', kind: 'crow', n: 2, when: 'all' },
     { id: 'cat', kind: 'cat', n: 1, when: 'evening', coat: 'tabby' },
   ],
+  works: [
+    { id: 'crows', kind: 'crow', n: 4, when: 'all' },
+    { id: 'pigeons', kind: 'pigeon', n: 5, when: 'day' },
+    { id: 'sparrows', kind: 'sparrow', n: 3, when: 'day' },
+    { id: 'butterflies', kind: 'butterfly', n: 2, when: 'day' },
+    { id: 'works_cat', kind: 'cat', n: 1, when: 'all', coat: 'black' },
+  ],
   // Grok, G-0033: "Sparrows by day, and a cat on a wall after work, not Tama ... Keep them off the sento doorway and
   // off the mailbox bank."
   dorm_court: [
