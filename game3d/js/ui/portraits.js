@@ -1,6 +1,7 @@
 import { PORTRAITS } from './portrait-data.js';
 import { portraitSource } from '../plugins.js';
 import { $ } from './dom.js';
+import { onKeyboard } from './keyboard-fit.js';
 
 // ---------- VN portraits ----------
 // Available expressions are declared in ui/portrait-data.js; missing files fall back to neutral.
@@ -217,6 +218,7 @@ function follow() {
   else followRaf = requestAnimationFrame(follow);
 }
 addEventListener('resize', () => layoutStage());
+onKeyboard(() => layoutStage()); // the phone keyboard opened or closed (keyboard-fit.js)
 // the stage follows the talk panel: shown with it, hidden with it, re-laid out when its content changes (the phone
 // band grows with the text)
 let stageRaf = 0;

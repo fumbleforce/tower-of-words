@@ -98,4 +98,5 @@ Panels open above everything in the HUD, the goal arrow and the Say button inclu
 
 - The phone layout is used when the screen is taller than it is wide (width to height under 0.8) or narrower than 640 px. Phone and desktop have separate layouts (GUIDE, Visual design).
 - The UI scales with the screen: 1 at 1366 × 860 and up to 2 on large screens (QHD and 4K get a bigger UI by default), times the interface size setting. Phones keep 1.
+- The phone keyboard (Jørgen, 2026-10-02, Galaxy S23 in Chrome: "On phone the full panel doesn't show"): while the word field has focus and the keyboard is up, the whole typing prompt (the line, the word card, the field, the mic, the hint and "Never mind") sits just above the keyboard and the browser bar, a little tighter, and the portraits step out until the keyboard closes. The 3D view keeps its size. game3d/tools/keyboard-fit.mjs checks it with the visible area cut to keyboard heights at phone sizes.
 - The game targets desktop first; Android comes later.
