@@ -105,7 +105,8 @@
       "shotengai": "game3d/js/places/shotengai.js",
       "east_lane": "game3d/js/places/east-lane.js",
       "east_coast": "game3d/js/places/east-coast.js",
-      "sports": "game3d/js/places/sports.js"
+      "sports": "game3d/js/places/sports.js",
+      "office_quarter": "game3d/js/places/office-quarter.js"
     },
     "events": {
       "train": {
@@ -122,6 +123,7 @@
       "east_lane": {},
       "east_coast": {},
       "sports": {},
+      "office_quarter": {},
       "office": {
         "sat_down": "sitDown"
       }
@@ -254,7 +256,8 @@
     "shotengai",
     "east_lane",
     "east_coast",
-    "sports"
+    "sports",
+    "office_quarter"
   ],
   "nodes": [
     "train:intro",
@@ -491,6 +494,10 @@
     "sports:shut",
     "sports:to_east_lane",
     "sports:to_coast",
+    "sports:to_offices",
+    "office_quarter:arrive",
+    "office_quarter:shut",
+    "office_quarter:to_sports",
     "transitions:train_to_gate",
     "transitions:gate_to_forecourt",
     "transitions:forecourt_to_office",
@@ -1327,6 +1334,18 @@
     {
       "from": "sports:to_coast",
       "to": "east_coast:arrive",
+      "kind": "trip",
+      "labels": []
+    },
+    {
+      "from": "sports:to_offices",
+      "to": "office_quarter:arrive",
+      "kind": "trip",
+      "labels": []
+    },
+    {
+      "from": "office_quarter:to_sports",
+      "to": "sports:arrive",
       "kind": "trip",
       "labels": []
     },

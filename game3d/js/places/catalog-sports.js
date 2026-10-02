@@ -3,12 +3,13 @@ export const SPORTS_DETAILS = {
   things: {
     north_street: { label: 'To the north street', kind: 'thing', verb: 'Go' },
     onsen_path: { label: 'To the onsen path', kind: 'thing', verb: 'Go' },
+    office_street: { label: 'To the office street', kind: 'thing', verb: 'Go' },
     gym: { label: 'Gym', kind: 'thing', verb: 'Go in' },
     pool: { label: 'Pool', kind: 'thing', verb: 'Go in' },
   },
   spots: ['north_entry'],
   seats: [],
-  zones: ['north_exit', 'east_exit'],
+  zones: ['north_exit', 'east_exit', 'west_exit'],
   people: [],
   hooks: [],
 };

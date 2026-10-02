@@ -2,8 +2,8 @@
 //   the north street's top and the sports lane: the lane's brick between pale borders, the turn between them in
 //   herringbone closed on its outer sides (plaza/east-lane.js corner), the north street's verge and avenue down its
 //   west side and its lamps as the east lane lays them; the sports lane's south verge (a kerb, ground cover and a low
-//   hedge, no trees, so nothing stands between Eric and the camera), its lamps behind the kerb; it stops at the gym's
-//   west corner for now, with a row of bollards across it; r3's door walk as the east lane lays it
+//   hedge, no trees, so nothing stands between Eric and the camera), its lamps behind the kerb, east of the gym's
+//   corner (the corner and gym_link are office-quarter/link.js's); r3's door walk as the east lane lays it
 //   the walks: the pool walk and the courts walk in the coast walk's pale slabs on the island grid (east-coast/walk.js),
 //   kerbed, with the gate walk and the residence walk across the courts walk; the gym's apron in mid-grey slabs
 //   along the pool walk: gravel against the gym's wall, ground cover and lamps along the pool's fence
@@ -18,27 +18,41 @@ import { GRANITE } from '../outdoor/paving.js';
 import { laneField, verge } from '../outdoor/lane.js';
 import { kerb, kerbRect } from '../outdoor/edges.js';
 import { hedge, pine, keyaki, sakura, maple, gravel, bed } from '../outdoor/planting.js';
-import { lamps, bench, bollard, fingerSign } from '../outdoor/furniture.js';
+import { lamps, bench, fingerSign } from '../outdoor/furniture.js';
 import { drift } from '../forecourt/gardens.js';
 import { belt } from '../dorm-court/cluster-yards.js';
 import { corner, walk, avenueTrees } from '../plaza/east-lane.js';
 import { LANE as PLAZA_LANE } from '../plaza/plan.js';
 import * as LAYOUT from '../island-layout.js';
+import { LINK_E } from '../office-quarter/plan.js';
 import * as P from './plan.js';
 
 const PLAZA = LAYOUT.CHUNKS.plaza.at;
 const ORIGIN = [PLAZA_LANE.e[0] + PLAZA[0], PLAZA_LANE.e[2] + PLAZA[1]]; // the lane's brick runs on from the plaza's
-const SLABS = { pattern: 'grid', module: [0.6, 0.6], tones: GRANITE.pale, origin: [0, 0] };
+const SLABS = {
+  pattern: 'grid',
+  module: [0.6, 0.6],
+  tones: GRANITE.pale,
+  origin: [0, 0],
+};
 const { LANE, NS, BACK, POOL_WALK: PW, COURTS_WALK: CW, GATE_WALK: GW, RES_WALK: RW, DECK, GYM, RESIDENCE: RES } = P;
 const CE = CW[1] - 2; // the courts walk is laid to the onsen path's foot (the east coast lays the path)
 
 function* paving(pv) {
-  laneField(pv, [NS[0], NS[1], LANE[3], BACK[2]], { along: 'z', origin: ORIGIN });
+  laneField(pv, [NS[0], NS[1], LANE[3], BACK[2]], {
+    along: 'z',
+    origin: ORIGIN,
+  });
   corner(pv, [NS[0], NS[1], LANE[2], LANE[3]], 'ne');
-  laneField(pv, [LANE[0], NS[0], LANE[2], LANE[3]], { origin: ORIGIN });
+  laneField(pv, [LINK_E, NS[0], LANE[2], LANE[3]], { origin: ORIGIN });
   yield;
   walk(pv, [P.R3_SPUR[0], P.R3_SPUR[1], P.R3_SPUR[2], P.R3_SPUR[3]], true);
-  pv.field(P.APRON, { pattern: 'grid', module: [0.6, 0.6], tones: GRANITE.mid, origin: [P.GX, 0] });
+  pv.field(P.APRON, {
+    pattern: 'grid',
+    module: [0.6, 0.6],
+    tones: GRANITE.mid,
+    origin: [P.GX, 0],
+  });
   pv.field([PW[0], PW[1], PW[2], LANE[2]], SLABS);
   pv.field([PW[1], CE, CW[2], CW[3]], SLABS);
   pv.field([GW[0], GW[1], GW[2], CW[2]], SLABS);
@@ -48,22 +62,27 @@ function* paving(pv) {
 }
 
 function* kerbs(p) {
-  // the north street's east side, open for r3's door walk; the turn's outer sides; the lane's north side, open for
-  // the gym's apron and the pool walk, and its west end
-  kerb(p, [NS[1], LANE[3]], [NS[1], BACK[2]], { off: 0.08, gaps: [[P.R3_SPUR[2], P.R3_SPUR[3]]] });
+  // the north street's east side, open for r3's door walk; the turn's outer sides; the lane's north side east of the
+  // gym's corner, open for the gym's apron and the pool walk
+  kerb(p, [NS[1], LANE[3]], [NS[1], BACK[2]], {
+    off: 0.08,
+    gaps: [[P.R3_SPUR[2], P.R3_SPUR[3]]],
+  });
   kerb(p, [NS[1], LANE[2]], [NS[1], LANE[3]], { off: 0.08 });
-  kerb(p, [LANE[0], LANE[2]], [NS[1], LANE[2]], {
+  kerb(p, [LINK_E, LANE[2]], [NS[1], LANE[2]], {
     off: -0.08,
     gaps: [
       [P.APRON[0], P.APRON[1]],
       [PW[0], PW[1]],
     ],
   });
-  kerb(p, [LANE[0], LANE[2]], [LANE[0], LANE[3]], { off: -0.08 });
   // the walks: the pool walk's sides and end, the courts walk's sides (open for the bays and the two short walks),
   // the short walks' sides
   kerb(p, [PW[0], PW[2]], [PW[0], LANE[2]], { off: -0.08 });
-  kerb(p, [PW[1], PW[2]], [PW[1], LANE[2]], { off: 0.08, gaps: [[CW[2], CW[3]]] });
+  kerb(p, [PW[1], PW[2]], [PW[1], LANE[2]], {
+    off: 0.08,
+    gaps: [[CW[2], CW[3]]],
+  });
   kerb(p, [PW[0], PW[2]], [PW[1], PW[2]], { off: -0.08 });
   kerb(p, [PW[1], CW[2]], [CE, CW[2]], { off: -0.08, gaps: [[GW[0], GW[1]]] });
   kerb(p, [PW[1], CW[3]], [CE, CW[3]], {
@@ -78,24 +97,48 @@ function* kerbs(p) {
 function* planting(p, lights, signRoot) {
   // the north street's verge and avenue down its west side (as the east lane plants it), its lamps on its east edge
   const toI = (z) => z + PLAZA[1];
-  verge(p, [NS[0], LANE[3]], [NS[0], BACK[2]], 'w', { trees: avenueTrees().map(toI), seed: 21 });
+  verge(p, [NS[0], LANE[3]], [NS[0], BACK[2]], 'w', {
+    trees: avenueTrees().map(toI),
+    seed: 21,
+  });
   lamps(lights, p, P.STREET_LAMPS, { pool: 1.4 });
-  // the sports lane's south verge, its lamps behind the kerb; bollards across its west end
-  verge(p, [LANE[0], LANE[3]], [NS[0], LANE[3]], 's', { seed: 23 });
+  // the sports lane's south verge east of the gym's corner, its lamps behind the kerb
+  verge(p, [LINK_E, LANE[3]], [NS[0], LANE[3]], 's', { seed: 23 });
   lamps(lights, p, P.LAMPS, { pool: 1.4 });
-  for (let z = LANE[2] + 0.5; z < LANE[3] - 0.3; z += 0.66) bollard(p, P.LANE_END - 0.35, z);
   yield;
   // along the pool walk: gravel against the gym's wall, ground cover along the pool's fence
   gravel(p, [GYM[1], PW[0] - 0.08, GYM[2], LANE[2] - 0.08]);
   bed(p, [PW[1] + 0.08, DECK[0], DECK[2], CW[2] - 0.08], { y: 0.04 });
   // along the courts walk: the hedge before the fences, the benches in their bays, the residence's side
-  hedge(p, [PW[1] + 0.5, CW[2] - 0.55], [GW[0] - 0.3, CW[2] - 0.55], { w: 0.5, h: 0.55, seed: 31 });
-  hedge(p, [GW[1] + 1.0, CW[2] - 0.55], [CE - 0.3, CW[2] - 0.55], { w: 0.5, h: 0.55, seed: 32 });
+  hedge(p, [PW[1] + 0.5, CW[2] - 0.55], [GW[0] - 0.3, CW[2] - 0.55], {
+    w: 0.5,
+    h: 0.55,
+    seed: 31,
+  });
+  hedge(p, [GW[1] + 1.0, CW[2] - 0.55], [CE - 0.3, CW[2] - 0.55], {
+    w: 0.5,
+    h: 0.55,
+    seed: 32,
+  });
   for (const b of P.BAYS) bench(p, (b[0] + b[1]) / 2, b[3] - 0.45, Math.PI, { len: 1.5 });
-  hedge(p, [RES[0] + 0.3, CW[3] + 0.5], [RW[0] - 0.3, CW[3] + 0.5], { w: 0.5, h: 0.6, seed: 33 });
-  hedge(p, [RW[1] + 0.3, CW[3] + 0.5], [CE - 0.3, CW[3] + 0.5], { w: 0.5, h: 0.6, seed: 34 });
-  drift(p, [RES[0] + 0.2, RW[0] - 0.4, CW[3] + 1.0, RES[2] - 0.1], { back: 's', seed: 35 });
-  drift(p, [RW[1] + 0.4, RES[1] - 0.2, CW[3] + 1.0, RES[2] - 0.1], { back: 's', seed: 36 });
+  hedge(p, [RES[0] + 0.3, CW[3] + 0.5], [RW[0] - 0.3, CW[3] + 0.5], {
+    w: 0.5,
+    h: 0.6,
+    seed: 33,
+  });
+  hedge(p, [RW[1] + 0.3, CW[3] + 0.5], [CE - 0.3, CW[3] + 0.5], {
+    w: 0.5,
+    h: 0.6,
+    seed: 34,
+  });
+  drift(p, [RES[0] + 0.2, RW[0] - 0.4, CW[3] + 1.0, RES[2] - 0.1], {
+    back: 's',
+    seed: 35,
+  });
+  drift(p, [RW[1] + 0.4, RES[1] - 0.2, CW[3] + 1.0, RES[2] - 0.1], {
+    back: 's',
+    seed: 36,
+  });
   yield;
   // trees between the pool and the courts, in a bed
   bed(p, [DECK[1] + 0.3, 77.7, DECK[2] + 0.5, DECK[3] - 0.3], { y: 0.03 });

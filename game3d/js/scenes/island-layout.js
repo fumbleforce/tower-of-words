@@ -19,6 +19,7 @@ import { DORM_PATHS, DORM_GREEN } from './island-dorms.js';
 import { SOUTH_PATHS, SOUTH_SAND, SHORE } from './island-south.js';
 import { BATH_PATHS, BATH_GREEN, BATH_COAST } from './island-baths.js';
 import { SPORT_PATHS } from './island-sports.js';
+import { OFFICE_PATHS } from './island-offices.js';
 export * from './island-plan.js'; // the south half planned for day 2, drawn on the map only
 import { CHUNKS } from './island-chunks.js'; // each built place's frame
 export { CHUNKS };
@@ -128,7 +129,7 @@ const ROWS = [
   ['m4', 'office', 5, 2, 1, ROOF, 'office', [17, -74.2, 26.9, -69.4]],
   ['m5', 'office', 3, 2, 2, ROOF, 'office', [17.3, -62.6, 26, -59.1]],
   ['m6', 'office', 5, 2, 3, ROOF, 'office', [13.6, -45, 23.2, -39.1]],
-  ['b_h', 'office', 2, 2, 1, ROOF, 'office', [-7.1, -51.8, 2.5, -50]],
+  ['b_h', 'office', 2, 2, 1, ROOF, 'office', [-7.1, -50.3, 2.5, -45.5]], // set back off the street, deepened
   ['office_e1', 'office', 4, 2, 0, ROOF, 'office', [12.8, -18.3, 20.1, -14.9]],
   ['gym', 'gym', 3, 2, 1, '#6f7d72', 'flat', [37.4, -76.2, 56.7, -50.9]],
   ['pool_hall', 'office', 2, 2, 2, ROOF, 'flat', [59.4, -94, 73.1, -87.1]],
@@ -251,6 +252,7 @@ export const PATHS = [
   ...SOUTH_PATHS, // the seafront south of the shop street (scenes/island-south.js)
   ...BATH_PATHS, // the east coast walk and the onsen (scenes/island-baths.js)
   ...SPORT_PATHS, // the sports lane, the pool and the courts walk (scenes/island-sports.js)
+  ...OFFICE_PATHS, // the office street and gym_link (scenes/island-offices.js)
   {
     id: 'beam',
     kind: 'beam',

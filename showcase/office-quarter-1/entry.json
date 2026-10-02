@@ -1,0 +1,52 @@
+{
+  "title": "The office street, walkable",
+  "date": "2026-10-02",
+  "by": "claude-agent:office-quarter",
+  "caption": "The fifth south-half district from island-half-1: the sports lane goes on west past the gym's corner into the office street, past Amakawa Life, Logistics, Electric and Trading, with walks north to Amakawa Foods and Amakawa Construction and the bank's door at the quarter street. Reach it from the gym and pool in the morning: walk west along the sports lane past the gym. It also loads with ?place=office_quarter. Every door is shut for now. The harbour end of the street is not walkable yet.",
+  "sections": [
+    {
+      "title": "The gym's corner",
+      "caption": "Before: the sports lane stopped at a row of bollards by the gym. After: it turns north round the gym's corner into the office street, with a finger sign pointing west to the offices and the bank.",
+      "images": [
+        {"id": "before-corner-desk", "image": "bible/shots/showcase/office-quarter-1/before-corner-desk.webp", "caption": "Before, desktop"},
+        {"id": "before-corner-phone", "image": "bible/shots/showcase/office-quarter-1/before-corner-phone.webp", "caption": "Before, phone"},
+        {"id": "after-corner-desk", "image": "bible/shots/showcase/office-quarter-1/after-corner-desk.webp", "caption": "After, desktop"},
+        {"id": "after-corner-phone", "image": "bible/shots/showcase/office-quarter-1/after-corner-phone.webp", "caption": "After, phone"}
+      ]
+    },
+    {
+      "title": "The office street",
+      "caption": "Before: plain office boxes on bare lawn, seen from the sports lane. After: the street in brick between a hedged verge with lamps and benches and the offices' paved forecourts. Each office has its name on the canopy over its door (ぶつりゅう AMAKAWA LOGISTICS, せいめい AMAKAWA LIFE, しょうじ AMAKAWA TRADING), and the doors are shut with a 準備中 card. Company bikes stand in racks.",
+      "images": [
+        {"id": "before-street-desk", "image": "bible/shots/showcase/office-quarter-1/before-street-desk.webp", "caption": "Before, desktop"},
+        {"id": "before-street-phone", "image": "bible/shots/showcase/office-quarter-1/before-street-phone.webp", "caption": "Before, phone"},
+        {"id": "after-street-desk", "image": "bible/shots/showcase/office-quarter-1/after-street-desk.webp", "caption": "After, Logistics and Life, desktop"},
+        {"id": "after-street-phone", "image": "bible/shots/showcase/office-quarter-1/after-street-phone.webp", "caption": "After, Logistics and Life, phone"},
+        {"id": "after-trading-desk", "image": "bible/shots/showcase/office-quarter-1/after-trading-desk.webp", "caption": "After, Amakawa Trading at the west end, desktop"},
+        {"id": "after-trading-phone", "image": "bible/shots/showcase/office-quarter-1/after-trading-phone.webp", "caption": "After, Amakawa Trading at the west end, phone"}
+      ]
+    },
+    {
+      "title": "The bank and Amakawa Foods",
+      "caption": "The bank's door is a few steps down the quarter street, ぎんこう BANK on its canopy and the ATM corner beside it. Amakawa Foods is at the end of a walk north on the shed street's line. The camera turns so each door faces it.",
+      "images": [
+        {"id": "after-bank-desk", "image": "bible/shots/showcase/office-quarter-1/after-bank-desk.webp", "caption": "The bank, desktop"},
+        {"id": "after-bank-phone", "image": "bible/shots/showcase/office-quarter-1/after-bank-phone.webp", "caption": "The bank, phone"},
+        {"id": "after-foods-desk", "image": "bible/shots/showcase/office-quarter-1/after-foods-desk.webp", "caption": "Amakawa Foods, desktop"},
+        {"id": "after-foods-phone", "image": "bible/shots/showcase/office-quarter-1/after-foods-phone.webp", "caption": "Amakawa Foods, phone"}
+      ]
+    },
+    {
+      "title": "After work",
+      "caption": "The offices' ground floors, canopy lights, some windows above and the lamps lit.",
+      "images": [
+        {"id": "after-eve-desk", "image": "bible/shots/showcase/office-quarter-1/after-eve-desk.webp", "caption": "After work, desktop"},
+        {"id": "after-eve-phone", "image": "bible/shots/showcase/office-quarter-1/after-eve-phone.webp", "caption": "After work, phone"}
+      ]
+    }
+  ],
+  "links": [
+    {"label": "Play it", "href": "game3d/index.html?place=office_quarter"},
+    {"label": "Places doc", "href": "docs/game/places.md"}
+  ]
+}

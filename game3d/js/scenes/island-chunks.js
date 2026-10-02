@@ -97,6 +97,15 @@ export const CHUNKS = {
     view: [-30, 50, -46, 32],
     anchor: 'the corner where the pool walk meets the courts walk',
   },
+  office_quarter: {
+    at: [4.5, -54],
+    turn: 0, // the camera turns itself: north-north-west along the street, north up the walks, as the sports lane by the gym (scenes/office-quarter.js)
+    scale: 1,
+    level: 0,
+    walk: [-44.6, 39.6, -15.6, 7.6],
+    view: [-60, 50, -40, 25],
+    anchor: 'the office street where the quarter street meets it',
+  },
   train: {
     at: [-28.6, -3.9],
     turn: 270, // heading north up the shed (the beam comes in from the south, train/island.js); the platform side east
