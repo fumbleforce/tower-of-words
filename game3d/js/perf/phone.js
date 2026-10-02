@@ -49,6 +49,22 @@ export const phoneBatch = () => (on() ? { span: 6, tris: 12000 } : {});
 // Bloom, the tilt-shift, the outline, the pixel ratio and the sharper shadows stay. High keeps it on phones too.
 export const phoneTier = (q) => (on() && q === 1 ? { ao: false } : {});
 
+// A pass that is off (AO on low, and on medium on a phone; bloom on low) keeps its full-screen targets at 1x1, so a
+// phone doesn't hold GPU memory for nothing (the S23 lost its 3D view, perf/gl-guard.js). Wraps each pass's setSize;
+// call the returned function after turning passes on or off.
+export function sizeOnlyWhenOn(passes) {
+  const again = passes.map((p) => {
+    const set = p.setSize.bind(p);
+    let wh = [1, 1];
+    p.setSize = (w, h) => {
+      wh = [w, h];
+      set(p.enabled ? w : 1, p.enabled ? h : 1);
+    };
+    return () => p.setSize(...wh);
+  });
+  return () => again.forEach((f) => f());
+}
+
 export function lightenForPhone(place, name) {
   const f = LIGHTER[name];
   if (!f || !on()) return false;
