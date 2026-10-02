@@ -32,9 +32,10 @@ const ROCK = ['#8a8983', '#7f7e79', '#94928b'];
 const TONES = [LEAF.mid, LEAF.fresh, LEAF.deep, LEAF.light, LEAF.olive];
 
 // a rock set in the ground: a squat faceted stone, a little sunk
-const rock = (p, x, z, r, i = 0) => mound(p, x, z, r, ROCK[i % 3], { y: -r * 0.18, squash: 0.62, turn: x * 1.3 + z });
+export const rock = (p, x, z, r, i = 0) =>
+  mound(p, x, z, r, ROCK[i % 3], { y: -r * 0.18, squash: 0.62, turn: x * 1.3 + z });
 // three rocks as a group (a big one, two smaller ones leaning in), the Japanese garden's usual set
-function rocks(p, x, z, r = 0.34, seed = 1) {
+export function rocks(p, x, z, r = 0.34, seed = 1) {
   const q = rng(seed + 5);
   rock(p, x, z, r, seed);
   rock(p, x + r * (1.3 + q() * 0.3), z + r * (0.4 + q() * 0.4), r * 0.62, seed + 1);

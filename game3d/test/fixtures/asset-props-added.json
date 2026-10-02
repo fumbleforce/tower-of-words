@@ -184,6 +184,52 @@
     ]
   },
   {
+    "id_": "prop/east_coast/dorm_street",
+    "kind": "prop",
+    "name": "To the dorm street",
+    "paths": [
+      "game3d/js/places/east-coast.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "east-coast.js things.dorm_street",
+    "place": "east_coast",
+    "used": [
+      "East coast: tap target 'To the dorm street'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "east-coast"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/east_coast/onsen",
+    "kind": "prop",
+    "name": "Onsen",
+    "paths": [
+      "game3d/js/places/east-coast.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "east-coast.js things.onsen",
+    "place": "east_coast",
+    "used": [
+      "East coast: tap target 'Onsen'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "east-coast"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
     "id_": "prop/east_lane/barber",
     "kind": "prop",
     "name": "Barber",
@@ -242,6 +288,29 @@
     "place": "east_lane",
     "used": [
       "East lane: tap target 'To the dorms'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "east-lane"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/east_lane/dorm_row",
+    "kind": "prop",
+    "name": "To the sea terrace",
+    "paths": [
+      "game3d/js/places/east-lane.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "east-lane.js things.dorm_row",
+    "place": "east_lane",
+    "used": [
+      "East lane: tap target 'To the sea terrace'"
     ],
     "view": {
       "type": "room",
@@ -613,7 +682,7 @@
       "room": "office",
       "anchor": [
         5.2,
-        1.0,
+        1,
         2.4
       ],
       "spot": [
@@ -646,7 +715,7 @@
       "room": "office",
       "anchor": [
         2.6,
-        1.0,
+        1,
         2.4
       ],
       "spot": [

@@ -12,15 +12,14 @@ const pairs = (f) => f.reduce((a, v, i) => (i % 2 ? a[a.length - 1].push(v) : a.
 // round the onsen. North of it: the park, the sports field, the matsuri stage, the history hall and the shrine.
 export const HALF_EDGE = pairs([-154, -134, -48, -134, -48, -112, 104, -112, 104, -124, 140, -124]);
 
-// The coast the layout's COAST.line doesn't reach: west from the sea wall's north end round the harbour, and north
-// from its east end past the onsen. Land on the inside.
+// The coast the layout's COAST.line doesn't reach: west from the sea wall's north end round the harbour. Land on the
+// inside.
 export const PLAN_COAST = [
   pairs(
     [-56.8, -32.9, -59, -42, -63, -50, -70, -52.5, -100, -52.5, -100, -90, -120, -90, -120, -98, -124, -100].concat([
       -134, -104, -146, -112, -152, -124, -154, -134,
     ]),
   ),
-  pairs([130.4, -47.8, 128, -56, 136, -64, 142, -76, 144, -92, 141, -108, 138, -120, 136, -124]),
 ];
 
 // The one building the layout doesn't have (the rest of the half's buildings are its ROWS).
@@ -99,30 +98,10 @@ export const PLAN_PATHS = [
     detail: 'East from the pool walk along the pool’s and the courts’ south fences, behind the north residence.',
   },
   {
-    id: 'onsen_path',
-    kind: 'walk',
-    w: 2,
-    line: pairs([103, -57.5, 103, -85, 110, -85]),
-    detail: 'From the courts walk’s east end north through the trees to the onsen’s red entrance gate.',
-  },
-  {
-    id: 'east_coast_walk',
-    kind: 'walk',
-    w: 2,
-    line: pairs([129, 10.5, 131, 10.5, 131, -36, 120, -36, 120, -57.5, 104, -57.5]),
-    detail: 'From the dorms’ sea terrace north along the east coast behind dorm_4, then west to the courts walk.',
-  },
-  {
     id: 'pool_deck',
     kind: 'court',
     rect: [60, -87, 78, -61],
     detail: 'The pool’s deck round the 25 m pool, fenced; the shower pavilion on its north side.',
-  },
-  {
-    id: 'courts',
-    kind: 'court',
-    rect: [78, -84, 101, -61],
-    detail: 'Two hard tennis courts, fenced, the clubhouse at their north-west corner.',
   },
   {
     id: 'supply_yard',
@@ -172,11 +151,6 @@ export const PLAN_PATHS = [
 
 // Planned green, coarse.
 export const PLAN_GREEN = [
-  {
-    id: 'onsen_grounds',
-    rect: [104, -118, 140, -60],
-    detail: 'Pines and maples round the onsen, its walled bath courtyards inside them.',
-  },
   {
     id: 'quarter_park',
     rect: [-4, -48, 0, -36],

@@ -636,6 +636,11 @@
           "kind": "thing",
           "verb": "Go"
         },
+        "dorm_row": {
+          "label": "To the sea terrace",
+          "kind": "thing",
+          "verb": "Go"
+        },
         "dorm_gate": {
           "label": "To the dorms",
           "kind": "thing",
@@ -669,7 +674,8 @@
       "zones": [
         "plaza_exit",
         "shop_exit",
-        "dorm_exit"
+        "dorm_exit",
+        "row_exit"
       ],
       "people": [],
       "hooks": []
@@ -1006,6 +1012,29 @@
         "lunchSit",
         "lunchOver"
       ]
+    },
+    "east_coast": {
+      "things": {
+        "dorm_street": {
+          "label": "To the dorm street",
+          "kind": "thing",
+          "verb": "Go"
+        },
+        "onsen": {
+          "label": "Onsen",
+          "kind": "thing",
+          "verb": "Go in"
+        }
+      },
+      "spots": [
+        "row_entry"
+      ],
+      "seats": [],
+      "zones": [
+        "row_exit"
+      ],
+      "people": [],
+      "hooks": []
     }
   }
 }

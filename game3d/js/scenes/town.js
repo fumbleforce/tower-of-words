@@ -177,6 +177,23 @@ export function eveningLight(scene) {
   });
 }
 
+// for a chunk too long for one shadow box: the sun's box, a square 2r across round Eric, follows him in steps of 2
+// so the shadows don't crawl as he walks; evening() swings it round to the evening sun
+export function sunFollow(sun, r = 16) {
+  Object.assign(sun.shadow.camera, { left: -r, right: r, top: r, bottom: -r, far: 80 });
+  sun.shadow.camera.updateProjectionMatrix();
+  let dir = new THREE.Vector3(...SUN.morning).normalize();
+  return {
+    follow(x, z) {
+      sun.target.position.set(Math.round(x / 2) * 2, 0, Math.round(z / 2) * 2);
+      sun.position.copy(sun.target.position).addScaledVector(dir, 40);
+    },
+    evening() {
+      dir = new THREE.Vector3(...SUN.evening).normalize();
+    },
+  };
+}
+
 // the security room's light, outdoors: cool sky, a warm low morning sun from the east, a soft fill from the camera
 export function outdoorLight(scene) {
   scene.add(new THREE.HemisphereLight('#b7c1d2', '#6a625c', 1.7));

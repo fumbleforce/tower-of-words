@@ -27,6 +27,7 @@ const BATCHED = new Set([
   'dorms',
   'shotengai',
   'east_lane',
+  'east_coast',
 ]);
 
 export function createPlaceLifecycle(

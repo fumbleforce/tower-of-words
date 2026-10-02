@@ -100,7 +100,8 @@
       "dorm_court": "game3d/js/places/dorm-court.js",
       "dorms": "game3d/js/places/dorms.js",
       "shotengai": "game3d/js/places/shotengai.js",
-      "east_lane": "game3d/js/places/east-lane.js"
+      "east_lane": "game3d/js/places/east-lane.js",
+      "east_coast": "game3d/js/places/east-coast.js"
     },
     "events": {
       "train": {
@@ -113,11 +114,12 @@
       "plaza": {},
       "dorm_court": {},
       "dorms": {},
+      "shotengai": {},
+      "east_lane": {},
+      "east_coast": {},
       "office": {
         "sat_down": "sitDown"
-      },
-      "shotengai": {},
-      "east_lane": {}
+      }
     },
     "speakers": {
       "eric": {
@@ -245,7 +247,8 @@
     "dorm_court",
     "dorms",
     "shotengai",
-    "east_lane"
+    "east_lane",
+    "east_coast"
   ],
   "nodes": [
     "train:intro",
@@ -472,7 +475,11 @@
     "east_lane:dorms_later",
     "east_lane:to_plaza",
     "east_lane:to_shops",
+    "east_lane:to_coast",
     "east_lane:to_dorms",
+    "east_coast:arrive",
+    "east_coast:shut",
+    "east_coast:to_east_lane",
     "transitions:train_to_gate",
     "transitions:gate_to_forecourt",
     "transitions:forecourt_to_office",
@@ -1271,8 +1278,20 @@
       "labels": []
     },
     {
+      "from": "east_lane:to_coast",
+      "to": "east_coast:arrive",
+      "kind": "trip",
+      "labels": []
+    },
+    {
       "from": "east_lane:to_dorms",
       "to": "dorm_court:arrive",
+      "kind": "trip",
+      "labels": []
+    },
+    {
+      "from": "east_coast:to_east_lane",
+      "to": "east_lane:arrive",
       "kind": "trip",
       "labels": []
     },
