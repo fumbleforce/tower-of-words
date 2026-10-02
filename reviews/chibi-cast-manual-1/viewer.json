@@ -1,0 +1,23 @@
+{
+ "title": "Mio, Kuro and Eric, built by hand on the chibi base (chibi-cast-manual-1)",
+ "blurb": "Each one is the hand-built base body from chibi-manual-1 with their own hair, clothes, colours and painted face (tools/characters/chibi/cast.py). Idle and walk are Mio's game clips carried over by bone name. Latest attempts first, then the earlier ones in order. Drag to turn.",
+ "attempts": {
+  "mio-a04": "/art/parts/chibi-cast-manual/a04/mio/mio.glb",
+  "kuro-a04": "/art/parts/chibi-cast-manual/a04/kuro/kuro.glb",
+  "eric-a03": "/art/parts/chibi-cast-manual/a03/eric/eric.glb",
+  "mio-a03": "/art/parts/chibi-cast-manual/a03/mio/mio.glb",
+  "kuro-a03": "/art/parts/chibi-cast-manual/a03/kuro/kuro.glb",
+  "mio-a02": "/art/parts/chibi-cast-manual/a02/mio/mio.glb",
+  "kuro-a02": "/art/parts/chibi-cast-manual/a02/kuro/kuro.glb",
+  "eric-a02": "/art/parts/chibi-cast-manual/a02/eric/eric.glb",
+  "mio-a01": "/art/parts/chibi-cast-manual/a01/mio/mio.glb",
+  "kuro-a01": "/art/parts/chibi-cast-manual/a01/kuro/kuro.glb",
+  "eric-a01": "/art/parts/chibi-cast-manual/a01/eric/eric.glb"
+ },
+ "compare": {
+  "kuro-a04": "/art/parts/chibi-cast-manual/a04/kuro/kuro.glb",
+  "eric-a03": "/art/parts/chibi-cast-manual/a03/eric/eric.glb",
+  "office woman a12": "/art/parts/chibi-manual/a12/office.glb"
+ },
+ "refs": ["/game3d/assets/portraits/mio-neutral.webp", "/game3d/assets/portraits/kuro-neutral.webp", "/game3d/assets/portraits/eric-neutral.webp"]
+}

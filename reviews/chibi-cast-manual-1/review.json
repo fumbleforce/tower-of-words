@@ -1,0 +1,67 @@
+{
+ "title": "Mio, Kuro and Eric built by hand in the chibi style",
+ "date": "2026-10-02",
+ "by": "Claude (chibi-manual agent)",
+ "status": "open",
+ "question": "Do Mio, Kuro and Eric read as themselves in this style, and what should change on each?",
+ "multi": true,
+ "media": [
+  {
+   "image": "art/parts/chibi-cast-manual/a04/sheet.webp",
+   "caption": "Mio and Kuro, latest (a04): portrait, front, her left three-quarter (image right side turned to us), her left side, back. Your brief: \"Now try making kuro, eric and mio in that style\". Built on the base body from chibi-manual-1; the Meshy versions are chibi-cast-meshy-1."
+  },
+  {
+   "image": "art/parts/chibi-cast-manual/a03/pair-eric.webp",
+   "caption": "Eric, latest (a03): his portrait, then the front."
+  },
+  {
+   "image": "art/parts/chibi-cast-manual/a03/faces.webp",
+   "caption": "Face close-ups (a03; a04 changed only the side locks). Same eye shape as your base picture, recoloured per person, with their glasses painted on: Mio's taupe-grey rounded rectangles, Kuro's black frames with clear lenses, Eric's silver rectangles and stubble."
+  },
+  {
+   "image": "art/parts/chibi-cast-manual/a04/mio/motion.webp",
+   "caption": "Mio in the live viewer (link below) with her game idle and walk carried over by bone name."
+  },
+  {
+   "image": "art/parts/chibi-cast-manual/a04/kuro/motion.webp",
+   "caption": "Kuro in the live viewer, same clips."
+  },
+  {
+   "image": "art/parts/chibi-cast-manual/a03/eric/motion.webp",
+   "caption": "Eric in the live viewer, same clips."
+  }
+ ],
+ "options": [
+  {
+   "id": "a01",
+   "label": "a01",
+   "image": "art/parts/chibi-cast-manual/a01/sheet.webp",
+   "images": ["art/parts/chibi-cast-manual/a01/faces.webp"],
+   "note": "First build (512 px renders). Mio: dark green-black bob with blunt bangs, green underside and one green lock on her left (image right), bun at the back on her left, dark teal hoodie with hood, pocket and drawstrings, dark cargo trousers, sneakers; headphones and lanyard left off (no props). Kuro: black hair with blunt bangs, long locks beside the face, high bun (hair sticks left off), black blazer over a dark grey shirt, black pencil skirt and flats, dark lips. Eric: dark-blond short hair with strands over his right brow and a short ponytail, navy blazer open over a grey hoodie, dark trousers and trainers. Colours from cast.md (Mio's hair #13292f and #20a081) and the portraits. Faults: the side lock tips fold up where they hang past the hair, and the cut where the hair gets shorter toward the back steps from row to row."
+  },
+  {
+   "id": "a02",
+   "label": "a02",
+   "image": "art/parts/chibi-cast-manual/a02/sheet.webp",
+   "note": "The hair's end snapped onto a smooth line where it gets shorter toward the back (Kuro, Eric). Little visible change."
+  },
+  {
+   "id": "a03",
+   "label": "a03",
+   "image": "art/parts/chibi-cast-manual/a03/sheet.webp",
+   "images": ["art/parts/chibi-cast-manual/a03/pair-mio.webp", "art/parts/chibi-cast-manual/a03/pair-kuro.webp", "art/parts/chibi-cast-manual/a03/pair-eric.webp", "art/parts/chibi-cast-manual/a03/faces.webp", "art/parts/chibi-cast-manual/a03/eric/motion.webp"],
+   "note": "Kuro's hair ends at her nape at the back (0.58 m, was 0.66);Eric's hair tips made shallower (6 mm, were 20 mm) so his short cut doesn't look torn. Full renders: 1024 px, 64 samples. Eric's latest. In his walk the grey hoodie hem band tilts with the hips and shows under the blazer, and the lapels read as dark blobs."
+  },
+  {
+   "id": "a04",
+   "label": "a04",
+   "image": "art/parts/chibi-cast-manual/a04/sheet.webp",
+   "images": ["art/parts/chibi-cast-manual/a04/pair-mio.webp", "art/parts/chibi-cast-manual/a04/pair-kuro.webp", "art/parts/chibi-cast-manual/a04/faces.webp", "art/parts/chibi-cast-manual/a04/mio/motion.webp", "art/parts/chibi-cast-manual/a04/kuro/motion.webp"],
+   "note": "Mio and Kuro only: the side locks end where the hair ends, so their tips no longer fold. Latest for both. Still unlike the portraits: the heads are the base's big marshmallow block, so all three hairstyles read boxy; Eric's hair sits like a cap instead of swept back; Kuro is almost all black, as in her portrait."
+  }
+ ],
+ "links": [
+  {"label": "Live viewer: all three with idle and walk, every attempt, and the office woman beside them", "href": "tools/characters/parts/viewer.html?cfg=/reviews/chibi-cast-manual-1/viewer.json"},
+  {"label": "The base this is built on (chibi-manual-1)", "href": "bible/#review/chibi-manual-1"}
+ ]
+}

@@ -1,18 +1,20 @@
-"""Sheets for reviews/chibi-manual-1: each render flattened onto white, then per set (base, office) one row with
-Jørgen's reference picture first and the front, her left three-quarter, her left side and back after it.
+"""Review sheets for the chibi rounds (reviews/chibi-manual-1, chibi-cast-manual-1): each render flattened onto
+white, then one row per set with its reference picture first and the front, her left three-quarter, her left side
+and back after it.
 
-  python3 tools/characters/chibi/sheet.py <attempt dir with renders/> <ref base.png> <ref office.png>
+  python3 tools/characters/chibi/sheet.py <out dir> <set> <renders dir> <reference> [<set> <renders dir> <reference>...]
 
-Writes <dir>/sheet.webp (both rows), <dir>/pair-base.webp and <dir>/pair-office.webp (reference | front, same
-height), <dir>/face.webp (reference face | render face) and every render as webp under <dir>/webp/.
+A set's renders are <renders dir>/<set>-<view>.png (render.py). Writes <out>/sheet.webp (every row),
+<out>/pair-<set>.webp (reference | front), <out>/faces.webp (every face close-up in a row), every render as webp
+under <out>/webp/, and for a set named base <out>/face.webp (the reference's head | the face close-up).
 """
 import os
 import sys
 
 from PIL import Image, ImageDraw, ImageFont
 
-D, REF = sys.argv[1], {'base': sys.argv[2], 'office': sys.argv[3]}
-R = f'{D}/renders'
+D, rest = sys.argv[1], sys.argv[2:]
+SETS = [rest[i:i + 3] for i in range(0, len(rest), 3)]
 os.makedirs(f'{D}/webp', exist_ok=True)
 VIEWS = [('front', 'front'), ('l45', 'her left 3/4'), ('l90', 'her left side'), ('back', 'back')]
 try:
@@ -27,17 +29,26 @@ def flat(p):
     return Image.alpha_composite(bg, im).convert('RGB')
 
 
+def square(p):
+    """A reference picture on white, fitted into a square (portraits are taller than wide)."""
+    im = flat(p)
+    s = max(im.size)
+    sq = Image.new('RGB', (s, s), (253, 253, 253))
+    sq.paste(im, ((s - im.width) // 2, s - im.height))
+    return sq
+
+
 def tile(im, label, s=512):
     im = im.resize((s, s), Image.LANCZOS)
     ImageDraw.Draw(im).text((14, 10), label, fill=(90, 90, 90), font=FONT)
     return im
 
 
-rows = []
-for which in ('base', 'office'):
-    if not os.path.exists(f'{R}/{which}-front.png'):      # a01 was only rendered dressed
+rows, faces = [], []
+for which, R, refp in SETS:
+    if not os.path.exists(f'{R}/{which}-front.png'):
         continue
-    ref = Image.open(REF[which]).convert('RGB')
+    ref = square(refp)
     tiles = [tile(ref, 'reference')]
     for v, label in VIEWS:
         im = flat(f'{R}/{which}-{v}.png')
@@ -45,6 +56,7 @@ for which in ('base', 'office'):
         tiles.append(tile(im, label))
     face = flat(f'{R}/{which}-face.png')
     face.save(f'{D}/webp/{which}-face.webp', quality=90)
+    faces.append(tile(face, which, 768))
     row = Image.new('RGB', (512 * len(tiles), 512), 'white')
     for i, t in enumerate(tiles): row.paste(t, (512 * i, 0))
     rows.append(row)
@@ -52,15 +64,14 @@ for which in ('base', 'office'):
     pair.paste(ref.resize((1024, 1024), Image.LANCZOS), (0, 0))
     pair.paste(flat(f'{R}/{which}-front.png').resize((1024, 1024), Image.LANCZOS), (1024, 0))
     pair.save(f'{D}/pair-{which}.webp', quality=90)
+    if which == 'base':                    # the reference's head region beside the close-up render
+        head = Image.open(refp).convert('RGB').crop((272, 40, 982, 750)).resize((768, 768), Image.LANCZOS)
+        fp = Image.new('RGB', (1536, 768), 'white'); fp.paste(head, (0, 0)); fp.paste(face.resize((768, 768)), (768, 0))
+        fp.save(f'{D}/face.webp', quality=90)
 sheet = Image.new('RGB', (rows[0].width, 512 * len(rows)), 'white')
 for i, r in enumerate(rows): sheet.paste(r, (0, 512 * i))
 sheet.save(f'{D}/sheet.webp', quality=88)
-
-# faces: the reference's head region beside the close-up render
-if not os.path.exists(f'{R}/base-face.png'):
-    sys.exit(print('SHEETS', D, '(no base face)'))
-ref = Image.open(REF['base']).convert('RGB').crop((272, 40, 982, 750)).resize((768, 768), Image.LANCZOS)
-f = flat(f'{R}/base-face.png').resize((768, 768), Image.LANCZOS)
-pair = Image.new('RGB', (1536, 768), 'white'); pair.paste(ref, (0, 0)); pair.paste(f, (768, 0))
-pair.save(f'{D}/face.webp', quality=90)
+strip = Image.new('RGB', (768 * len(faces), 768), 'white')
+for i, f in enumerate(faces): strip.paste(f, (768 * i, 0))
+strip.save(f'{D}/faces.webp', quality=90)
 print('SHEETS', D)

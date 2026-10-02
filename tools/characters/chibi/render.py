@@ -2,7 +2,10 @@
 one large soft key from the front above her right (image left), a fill, and a soft contact shadow. Cycles on the
 CPU (no GPU lock needed), Standard view so the material colours stay as set. Blender, -t 8:
 
-  blender -b -t 8 chibi.blend -P tools/characters/chibi/render.py -- <outdir> <base|office> [size=1024] [samples=64]
+  blender -b -t 8 chibi.blend -P tools/characters/chibi/render.py -- <outdir> <set> [size=1024] [samples=64]
+
+<set> is base (the bare body) or anything else for the whole figure (office for the reference woman, the person's
+id for the cast); it also names the files.
 
 Views: front, her left three-quarter (image right side turned to us), her left side, back, and a face close-up.
 Writes <outdir>/<set>-<view>.png on white.
@@ -21,8 +24,7 @@ size, samples = int(opt.get('size', 1024)), int(opt.get('samples', 64))
 os.makedirs(out, exist_ok=True)
 sc = bpy.context.scene
 for c in bpy.data.collections:
-    show = c.name == 'base' or (which == 'office' and c.name in ('hair', 'office'))
-    c.hide_render = not show
+    c.hide_render = which == 'base' and c.name != 'base'
 
 sc.render.engine = 'CYCLES'
 sc.cycles.device = 'CPU'
