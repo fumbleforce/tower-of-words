@@ -64,7 +64,9 @@ export function walkStep(game, w, dt, list, eric, wide) {
     const lead = followSpeed(ahead, fx, fz, ad - ahead.r - me);
     speed = lead !== null ? Math.min(speed, lead) : speed * 0.5;
   }
-  const s = w.wait ? 0 : Math.min(d, speed * dt); // wait: Eric is at the door they're going to, in a scene
+  // wait: Eric is at the door they're going to, in a scene, or closer than the room a scene gives him
+  const crowded = !!(wide && eric && Math.hypot(ox - eric.x, oz - eric.z) < eric.r + me + wide);
+  const s = w.wait || crowded ? 0 : Math.min(d, speed * dt);
   let x = ox + fx * s,
     z = oz + fz * s,
     by = null;
@@ -86,7 +88,7 @@ export function walkStep(game, w, dt, list, eric, wide) {
       ed = Math.hypot(ex, ez) || 1e-4,
       want = eric.r + me + wide;
     if (ed < want) {
-      const push = Math.min(want - ed, Math.max(w.speed, 1.2 * K) * dt);
+      const push = Math.min(want - ed, Math.max(w.speed, 1.2 * K) * 2 * dt);
       x += (ex / ed) * push;
       z += (ez / ed) * push;
     }

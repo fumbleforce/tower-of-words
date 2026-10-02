@@ -195,6 +195,8 @@ export async function attachCrowd(game, place, name) {
       const lane = laneOf(g, routes.get(from + '>' + to), (0.15 + R() * 0.95) * K);
       // a new walker steps out of a door, or comes in along the street from further out than anyone can see
       let lead = A.door;
+      const e = game.player.root.position;
+      if (A.door && Math.hypot(e.x - A.door[0], e.z - A.door[1]) < 3.5 * K) continue; // not out of a door into him
       if (!fresh && !A.door) {
         const [ax, az] = lane[0],
           [bx, bz] = lane[1],
