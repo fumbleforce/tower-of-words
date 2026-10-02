@@ -60,5 +60,6 @@ The anime portraits beside the dialogue box. The faces each person has are in [c
 - Each door has its own sound: the train doors, the station's glass entrance doors, the lift doors (after the lift's ding when they open) and the gate's flaps. The copier running, the kettle pouring and a can dropping in the vending machine have theirs too. No crowd sound: the ambience bed carries the people.
 - The dorm courtyard no longer plays the sento humming. The two files (`bath_first`, `bath_answer`, made by tools/feel/hum.py) are still in the sound set.
 - A phone buzzing, a bag's zip and a clean electric guitar played by a learner, heard through a phone speaker or a lifted headphone, are synthesised the same way (tools/feel/pluck.py).
+- Outdoors, where there are birds and animals ([places.md](places.md), Birds and small animals): tree sparrows chirping and a light wind by day, bell crickets and field crickets after work, made offline by tools/feel/nature.py; the forecourt keeps the station's air under them. A flock of pigeons scattering near Eric is heard as a clatter of wings. Crows and gulls make no sound yet (to build).
 - No footsteps (Jørgen).
 - The opening theme is "Mastered: softer" (art/approved/music/opening.mp3); game3d doesn't use it yet.

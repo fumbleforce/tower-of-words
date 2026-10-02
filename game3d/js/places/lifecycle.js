@@ -15,6 +15,7 @@ import { sim, PERIODS as PERIOD_ORDER, absorb, applySchedule, save } from '../si
 import * as trips from '../trips.js';
 import { installFinds, findSpotSteps, syncFinds } from '../finds/index.js';
 import { installBoot, installPlacePlugin, watchPlacePlugins } from '../plugins.js';
+import { installCreatures } from '../creatures/index.js';
 
 const MUSIC = { train: 'calm', gate: 'lively', office: 'office' };
 // places the draw-call pass (js/perf/batch.js) runs on
@@ -65,6 +66,7 @@ export function createPlaceLifecycle(
         const [w, h] = size();
         place.layout?.(w / h);
         if (BATCHED.has(name)) optimizePlace(place, { game, ...phoneBatch() });
+        installCreatures(game, place, name); // birds and small animals outdoors (creatures/index.js), after the batching
         await nextFrame(); // the pass's first scan and the finds' floor raycasts each take a frame's time on a phone
         await sliced(findSpotSteps(game, place)); // after the draw-call pass, so each print stays its own mesh to hide
         await nextFrame();
