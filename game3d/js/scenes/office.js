@@ -29,7 +29,7 @@ import {
 import { PEOPLE, sit, armsHold, idle, mug } from '../cast.js';
 import { cat } from '../train/people.js';
 import { blob, Nav } from '../engine.js';
-import { lightPool, steam, dust, clockHands, screenMat, groundShadows } from '../places/life.js';
+import { lightPool, steam, dust, clockHands, groundShadows } from '../places/life.js';
 import { ledLights } from './office-leds.js';
 import { liveScreens } from '../props.js';
 import { drain } from '../perf/slice.js';
@@ -139,70 +139,6 @@ function copier() {
   for (let i = 0; i < 3; i++)
     g.add(rbox(0.6, 0.012, 0.01, '#9a9ea5', { y: 0.12 + i * 0.16, z: 0.313, r: 0.004, cast: false }));
   g.add(rbox(0.14, 0.05, 0.08, '#5ec28b', { x: 0.24, y: 0.78, z: 0.2, r: 0.01, cast: false }));
-  return g;
-}
-function kitchen() {
-  const g = new THREE.Group();
-  // counter along the back wall, cupboards above, sink, microwave, coffee maker; fridge at the end
-  g.add(rbox(3.0, 0.5, 0.56, '#9ea4ad', { r: 0.02 }));
-  g.add(rbox(3.04, 0.04, 0.6, '#d9dad6', { y: 0.5, r: 0.012 }));
-  for (let i = 0; i < 5; i++)
-    g.add(rbox(0.54, 0.4, 0.01, '#aab0b8', { x: -1.2 + i * 0.6, y: 0.05, z: 0.283, r: 0.006, cast: false }));
-  g.add(rbox(3.0, 0.34, 0.34, '#c9ccd0', { y: 0.92, z: -0.12, r: 0.02 }));
-  g.add(rbox(0.5, 0.02, 0.36, '#8d939b', { x: -0.9, y: 0.54, r: 0.01, cast: false }));
-  g.add(rbox(0.46, 0.26, 0.34, '#e8e8e4', { x: 0.35, y: 0.54, r: 0.03 }));
-  g.add(rbox(0.28, 0.18, 0.02, '#2b2f37', { x: 0.3, y: 0.58, z: 0.172, r: 0.01, cast: false }));
-  g.add(rbox(0.22, 0.34, 0.26, '#2c3038', { x: 0.95, y: 0.54, r: 0.03 }));
-  g.add(rbox(0.1, 0.1, 0.1, '#3e444e', { x: 0.95, y: 0.6, z: 0.1, r: 0.02 }));
-  const pot = new THREE.Mesh(
-    new THREE.CylinderGeometry(0.07, 0.08, 0.2, 12),
-    mat('#d4d6d8', { roughness: 0.35, metalness: 0.3 }),
-  );
-  pot.position.set(1.28, 0.64, 0);
-  g.add(sh(pot));
-  const f = rbox(0.62, 1.1, 0.56, '#dfe0dd', { x: 1.95, r: 0.03 });
-  g.add(f);
-  g.add(rbox(0.03, 0.3, 0.03, '#a4a8ae', { x: 1.72, y: 0.62, z: 0.29, r: 0.01, cast: false }));
-  g.add(rbox(0.6, 0.012, 0.01, '#c3c5c3', { x: 1.95, y: 0.7, z: 0.282, r: 0.004, cast: false }));
-  return g;
-}
-function tableSet() {
-  const g = new THREE.Group();
-  g.add(rbox(1.5, 0.04, 0.82, '#e3e3df', { y: 0.4, r: 0.012 }));
-  for (const [x, z] of [
-    [-0.68, -0.34],
-    [0.68, -0.34],
-    [-0.68, 0.34],
-    [0.68, 0.34],
-  ])
-    g.add(rbox(0.05, 0.4, 0.05, PAL.deskLeg, { x, z, r: 0.01 }));
-  for (const [x, z, ry] of [
-    [-0.38, -0.66, 0],
-    [0.38, -0.66, 0],
-    [-0.38, 0.66, Math.PI],
-    [0.38, 0.66, Math.PI],
-  ]) {
-    const c = new THREE.Group();
-    c.add(rbox(0.36, 0.05, 0.34, PAL.chair, { y: 0.24, r: 0.02 }));
-    c.add(rbox(0.34, 0.3, 0.05, PAL.chair, { y: 0.28, z: -0.16, r: 0.02 }));
-    for (const [lx, lz] of [
-      [-0.14, -0.13],
-      [0.14, -0.13],
-      [-0.14, 0.13],
-      [0.14, 0.13],
-    ])
-      c.add(rbox(0.03, 0.24, 0.03, PAL.deskLeg, { x: lx, z: lz, r: 0.008 }));
-    c.position.set(x, 0, z);
-    c.rotation.y = ry;
-    g.add(c);
-  }
-  const m = mug();
-  m.position.set(-0.45, 0.46, 0.1);
-  g.add(m);
-  g.add(rbox(0.26, 0.015, 0.2, PAL.paper, { x: 0.35, y: 0.42, z: 0.05, r: 0.004 }));
-  const pl = plant({ size: 0.45, seed: 8 });
-  pl.position.set(0, 0.42, -0.1);
-  g.add(pl);
   return g;
 }
 function sink() {
@@ -427,10 +363,18 @@ function fridge() {
   g.add(rbox(0.03, 0.26, 0.03, '#a4a8ae', { x: 0.24, y: 0.78, z: 0.29, r: 0.01, cast: false }));
   return g;
 }
+// counter()'s top; seat() puts a thing's lowest point on a surface (no shared faces, no floating)
+const COUNTER_TOP = 0.52,
+  GAP = 0.002; // flat things lie this far above the surface under them
+function seat(o, y) {
+  o.updateMatrixWorld(true);
+  o.position.y += y - new THREE.Box3().setFromObject(o).min.y;
+  return o;
+}
 function counter(len) {
   const g = new THREE.Group();
-  g.add(rbox(len, 0.48, 0.56, '#6f7682', { r: 0.02 }));
-  g.add(rbox(len + 0.04, 0.04, 0.6, '#c3c6c8', { y: 0.48, r: 0.012 }));
+  g.add(rbox(len, COUNTER_TOP - 0.04, 0.56, '#6f7682', { r: 0.02 }));
+  g.add(rbox(len + 0.04, 0.04, 0.6, '#c3c6c8', { y: COUNTER_TOP - 0.04, r: 0.012 }));
   const n = Math.round(len / 0.55);
   for (let i = 0; i < n; i++)
     g.add(
@@ -466,8 +410,8 @@ function table2() {
     g.add(rbox(0.26, 0.04, 0.26, PAL.chair, { x, y: 0.26, z: 0.55, r: 0.02 }));
     g.add(rbox(0.03, 0.26, 0.03, PAL.deskLeg, { x, z: 0.55, r: 0.01 }));
   }
-  const m = mug();
-  m.position.set(0.18, 0.46, 0.05);
+  const m = seat(mug(), 0.44);
+  m.position.set(0.18, m.position.y, 0.05);
   g.add(m);
   return g;
 }
@@ -966,12 +910,11 @@ export function* officeSteps() {
     new THREE.CylinderGeometry(0.06, 0.07, 0.18, 12),
     mat('#d4d6d8', { roughness: 0.35, metalness: 0.3 }),
   );
-  pot.position.set(2.0, 0.78, Z0 + 0.4);
+  pot.position.set(2.0, 0.79, Z0 + 0.4); // on the filing cabinet (0.7 m)
   root.add(sh(pot));
   root.add(
-    mug('#7aa0c8')
+    seat(mug('#7aa0c8'), 0.7)
       .translateX(2.2)
-      .translateY(0.73)
       .translateZ(Z0 + 0.4),
   );
   {
@@ -1078,17 +1021,17 @@ export function* officeSteps() {
   yield;
   // the 2019 party box on the cabinets, a tray of seven cups in the kitchenette, a nameplate face down on the chief's desk
   root.add(rbox(0.42, 0.22, 0.3, PAL.box, { x: -3.5, y: 1.2, z: Z0 + 0.3, r: 0.02 }));
+  // on the counter's left end beside the sink plate, every cup standing on it
   const tray = new THREE.Group();
-  tray.userData.noBatch = true; // Preserve overlapping cup/tray surfaces in their original draw order.
   tray.add(rbox(0.46, 0.02, 0.26, '#6d5a4a', { r: 0.006 }));
   for (let i = 0; i < 7; i++) {
     const cu = mug(['#e9e6df', '#c96a5a', '#7aa0c8', '#e9e6df', '#9cc39a', '#e2c26a', '#e9e6df'][i]);
-    cu.position.set(-0.17 + (i % 4) * 0.11, 0.05, i < 4 ? -0.06 : 0.06);
     cu.scale.setScalar(0.8);
+    seat(cu, 0.02).position.set(-0.17 + (i % 4) * 0.11, cu.position.y, i < 4 ? -0.06 : 0.06);
     tray.add(cu);
     yield;
   }
-  tray.position.set(0.4, 0.5, CS + T / 2 + 0.34);
+  tray.position.set(0.43, COUNTER_TOP + GAP, CS + T / 2 + 0.34);
   root.add(tray);
   root.add(rbox(0.26, 0.02, 0.08, '#3a3f48', { x: 1.55, y: 0.42, z: -3.1, r: 0.005 }));
   const card = nameCard('エリック', 'ERIC');
@@ -1204,21 +1147,19 @@ export function* officeSteps() {
   yield;
   // ---- kitchenette (給湯室) ----
   const ct = counter(1.5);
-  ct.userData.noBatch = true; // Its top overlaps the tray and sink plate.
   ct.position.set(0.95, 0, CS + T / 2 + 0.3);
   root.add(ct);
-  const sinkPlate = rbox(0.36, 0.02, 0.3, '#8d939b', { x: 0.55, y: 0.5, z: CS + 0.36, r: 0.01, cast: false });
-  sinkPlate.userData.noBatch = true;
-  root.add(sinkPlate);
+  // sink plate between the tray (x 0.20..0.66) and the coffee maker (0.99..1.21)
   root.add(
-    rbox(0.22, 0.32, 0.24, '#2c3038', { x: 1.1, y: 0.5, z: CS + 0.36, r: 0.03 }),
-    rbox(0.1, 0.1, 0.1, '#3e444e', { x: 1.1, y: 0.56, z: CS + 0.46, r: 0.02 }),
+    rbox(0.28, 0.012, 0.3, '#8d939b', { x: 0.825, y: COUNTER_TOP + GAP, z: CS + 0.36, r: 0.005, cast: false }),
+    rbox(0.22, 0.32, 0.24, '#2c3038', { x: 1.1, y: COUNTER_TOP, z: CS + 0.36, r: 0.03 }),
+    rbox(0.1, 0.1, 0.1, '#3e444e', { x: 1.1, y: COUNTER_TOP + 0.06, z: CS + 0.46, r: 0.02 }),
   );
   const kpot = new THREE.Mesh(
     new THREE.CylinderGeometry(0.07, 0.08, 0.2, 12),
     mat('#d4d6d8', { roughness: 0.35, metalness: 0.3 }),
   );
-  kpot.position.set(1.45, 0.6, CS + 0.36);
+  kpot.position.set(1.45, COUNTER_TOP + 0.1, CS + 0.36);
   root.add(sh(kpot));
   const mw = new THREE.Group();
   mw.add(rbox(0.46, 0.26, 0.34, '#e8e8e4', { r: 0.03 }));
@@ -1229,7 +1170,7 @@ export function* officeSteps() {
   side.rotation.y = -Math.PI / 2;
   side.position.set(1.5, 0, 4.3);
   root.add(side);
-  mw.position.y = 0.5;
+  mw.position.y = COUNTER_TOP;
   mw.position.x = 1.45;
   root.add(mw);
   const fr = fridge();
@@ -1253,9 +1194,9 @@ export function* officeSteps() {
       new THREE.CylinderGeometry(0.06, 0.07, 0.16, 12),
       mat('#c9ccd0', { roughness: 0.35, metalness: 0.3 }),
     );
-    kt2.position.set(-1.85, 0.56, 4.7);
+    kt2.position.set(-1.85, COUNTER_TOP + 0.08, 4.7);
     root.add(sh(kt2));
-    root.add(rbox(0.3, 0.12, 0.2, '#e8e4da', { x: -1.85, y: 0.5, z: 5.1, r: 0.01 }));
+    root.add(rbox(0.3, 0.12, 0.2, '#e8e4da', { x: -1.85, y: COUNTER_TOP, z: 5.1, r: 0.01 }));
   }
   yield;
   // a low sideboard against the front wall with the team's cups and a tea tin
@@ -1265,7 +1206,7 @@ export function* officeSteps() {
     for (let i = 0; i < 4; i++) {
       const cu = mug(['#e9e6df', '#7aa0c8', '#c96a5a', '#9cc39a'][i]);
       cu.scale.setScalar(0.85);
-      cu.position.set(-0.36 + i * 0.13, 0.33, 0.02);
+      seat(cu, 0.33).position.set(-0.36 + i * 0.13, cu.position.y, 0.02);
       sb.add(cu);
     }
     const tin = new THREE.Mesh(
@@ -1640,7 +1581,7 @@ export function* officeSteps() {
   }
   {
     const k = new THREE.Mesh(new THREE.CylinderGeometry(0.04, 0.05, 0.03, 10), mat('#e9e6df'));
-    k.position.set(-1.0, 0.44, 4.5);
+    k.position.set(-1.0, 0.455, 4.5); // on table2's top (0.44)
     root.add(k);
   }
   yield;
@@ -1780,7 +1721,7 @@ export function* officeSteps() {
     const m2 = mug(
       ['#e9e6df', '#7aa0c8', '#c96a5a', '#9cc39a', '#e2c26a', '#e9e6df'][(d.i + (d.row === 'n' ? 3 : 0)) % 6],
     );
-    m2.position.set(d.x - 0.3, 0.42, d.z + d.face * 0.12);
+    seat(m2, 0.42).position.set(d.x - 0.3, m2.position.y, d.z + d.face * 0.12); // on the desk top
     root.add(m2);
     yield;
   }
