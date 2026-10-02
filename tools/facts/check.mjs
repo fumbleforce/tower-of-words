@@ -359,8 +359,9 @@ function checkCreatures() {
     for (const g of game) if (!seen.has(g.id)) bad(file, `${place}: the game has creatures \`${g.id}\` (${g.kind}), "Creatures" doesn't`);
   }
 }
-// places.md: each outdoor place's crowd table ("| Period | Walking | Sitting | Talking | Waiting |", in "Who's there
-// when") against game3d/js/crowd/data.js; a place with no crowd there has no table
+// places.md: each outdoor place's crowd table ("| Period | Walking | Sitting | Talking | Waiting | Stop on the way |
+// In twos |", in "Who's there when", the last two as percentages) against game3d/js/crowd/data.js; a place with no
+// crowd there has no table
 function checkCrowd() {
   const file = 'docs/game/places.md';
   const md = read(path.join(DOCS, 'places.md'));
@@ -376,9 +377,16 @@ function checkCrowd() {
     for (const [p, s] of periods) {
       const r = rows.find((x) => id(x.Period) === p);
       if (!r) { bad(file, `${place}: the crowd has a ${p} in game3d/js/crowd/data.js, the crowd table doesn't`); continue; }
-      const want = { Walking: s.walk || 0, Sitting: s.sit || 0, Talking: s.chat || 0, Waiting: s.queue ? s.queue[1] : 0 };
+      const want = {
+        Walking: s.walk || 0,
+        Sitting: s.sit || 0,
+        Talking: s.chat || 0,
+        Waiting: s.queue ? s.queue[1] : 0,
+        'Stop on the way': Math.round((s.stop || 0) * 100),
+        'In twos': Math.round((s.twos || 0) * 100),
+      };
       for (const [col, v] of Object.entries(want)) {
-        const got = val(r[col]) === '' ? 0 : +val(r[col]);
+        const got = val(r[col]) === '' ? 0 : parseFloat(val(r[col]));
         if (got !== v) bad(file, `${place}, crowd, ${p}: ${col.toLowerCase()} is ${v} in game3d/js/crowd/data.js, ${val(r[col]) || '-'} in the doc`);
       }
     }

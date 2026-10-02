@@ -159,7 +159,7 @@ export function makeBody(kind, i) {
   else if (kind === 'sport') r = sport(i);
   else if (kind === 'elder') r = elder(i);
   else r = casual(i);
-  r.root.scale.multiplyScalar(K);
+  r.root.scale.multiplyScalar(K * (0.95 + ((i * 37) % 11) / 100)); // a little taller or shorter each
   // a bag in the right hand (arms[1]) or on the back, for some
   const pick = i % 4;
   if (kind === 'office' && pick !== 3) r.arms[1].add(pick === 2 ? tote('#5b6474') : briefcase());

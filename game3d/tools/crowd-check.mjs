@@ -3,6 +3,10 @@
 // the draw calls and triangles (the recorder, ?perf), overlaps and spins (the fast test's movement check), and any page
 // error. Shots in game3d/shots/crowd/<size>/.
 //   node game3d/tools/crowd-check.mjs [w h]       PLACES=plaza,forecourt PERIODS=early,evening SECS=6 Q=1
+//   STATS=1 [SCENE=1] SECS=40: the mix (share of walkers heading each compass way, top = the biggest share; stopped =
+//   share of walker samples standing on the way; walkers = how many walk on average; spawns, the mean gap between
+//   them, its spread gapCV and the most in any 3 s; afterScene = new walkers in the 4 s after an 8 s scene; at = when
+//   each set off). SEQ=n: n more shots 1.5 s apart.
 //   (NOSHOT=<places>: shoot those where Eric came in, not where the crowd is busiest)
 //   BASE=.claude/worktrees/<name>/game3d for a worktree. Exits 1 on a page error, an overlap or spin, or a route
 //   that does not resolve.
@@ -17,6 +21,9 @@ const PLACES = (
 const PERIODS = (process.env.PERIODS || 'early,lunch,evening').split(',');
 const SECS = +(process.env.SECS || 6);
 const q = process.env.Q || '1';
+const STATS = !!process.env.STATS; // the mix: headings, people stopped on the way, how spread out new walkers are
+const SCENE = !!process.env.SCENE; // with STATS: an 8 s scene in the middle, and who comes in the 4 s after it
+const SEQ = +(process.env.SEQ || 0); // n shots 1.5 s apart after the first (a strip of the crowd moving)
 const COMPARE = !!process.env.COMPARE; // also each place with ?nocrowd, for the before/after draw calls
 const out = `game3d/shots/crowd/${W}x${H}-q${q}${process.env.TAG ? '-' + process.env.TAG : ''}`;
 fs.mkdirSync(out, { recursive: true });
@@ -38,7 +45,7 @@ await withBrowserJob('crowd-check', async (browser) => {
           timeout: 120000,
         });
         const r = await page.evaluate(
-          async ({ period, SECS, SHOT }) => {
+          async ({ period, SECS, SHOT, STATS, SCENE }) => {
             const { sim } = await import('./js/sim.js');
             const { startMoveCheck } = await import('./js/move.js');
             globalThis.__run = true; // ?cap holds the world still until told to run
@@ -79,9 +86,62 @@ await withBrowserJob('crowd-check', async (browser) => {
               return s0;
             };
             const stops = [...ends.slice(0, 2).map(near), s0];
-            for (const e of stops) {
+            // the mix (STATS): every 0.1 s, who is walking which way (four compass headings), who stands on the way,
+            // and when someone new sets off; SCENE also holds a scene for 8 s in the middle and counts who comes
+            // in the 4 s after it
+            const st = { t0: performance.now(), spawns: [], dirs: [0, 0, 0, 0], moving: 0, stopped: 0, n: 0, sceneEnd: 0 };
+            const last = new Map();
+            const sample = () => {
+              const t = (performance.now() - st.t0) / 1000;
+              st.ticks = (st.ticks || 0) + 1;
+              for (const b of A?.pool || []) {
+                const p = b.r.root.position,
+                  was = last.get(b);
+                if (b.state === 'walk' && was && was.state === 'off') st.spawns.push(t);
+                if (b.state === 'walk' && was?.state === 'walk') {
+                  const dx = p.x - was.x,
+                    dz = p.z - was.z,
+                    v = Math.hypot(dx, dz) / 0.1;
+                  st.n++;
+                  if (v > 0.3) {
+                    st.moving++;
+                    st.dirs[Math.abs(dx) > Math.abs(dz) ? (dx > 0 ? 0 : 1) : dz > 0 ? 2 : 3]++;
+                  } else st.stopped++;
+                }
+                last.set(b, { state: b.state, x: p.x, z: p.z });
+              }
+            };
+            const timer = STATS ? setInterval(sample, 100) : null;
+            for (const [i, e] of stops.entries()) {
               put(e);
+              if (SCENE && i === 1) {
+                g.busy = true; // a scene: nobody new comes
+                await new Promise((res) => setTimeout(res, 8000));
+                g.busy = false;
+                st.sceneEnd = (performance.now() - st.t0) / 1000;
+              }
               await new Promise((res) => setTimeout(res, (SECS * 1000) / stops.length));
+            }
+            clearInterval(timer);
+            let mix = null;
+            if (STATS) {
+              const gaps = st.spawns.slice(1).map((t, i) => t - st.spawns[i]),
+                mean = gaps.reduce((a, b) => a + b, 0) / (gaps.length || 1),
+                sd = Math.sqrt(gaps.reduce((a, b) => a + (b - mean) ** 2, 0) / (gaps.length || 1));
+              const most3 = Math.max(0, ...st.spawns.map((t) => st.spawns.filter((u) => u >= t && u < t + 3).length));
+              const dsum = st.dirs.reduce((a, b) => a + b, 0) || 1;
+              const share = st.dirs.map((d) => Math.round((100 * d) / dsum));
+              mix = {
+                dirs: { E: share[0], W: share[1], S: share[2], N: share[3] },
+                top: Math.max(...share),
+                walkers: +(st.n / (st.ticks || 1)).toFixed(1),
+                stopped: Math.round((100 * st.stopped) / (st.n || 1)),
+                spawns: st.spawns.length,
+                gapMean: +mean.toFixed(2),
+                gapCV: +(sd / (mean || 1)).toFixed(2),
+                most3,
+                at: st.spawns.map((t) => +t.toFixed(1)),                afterScene: SCENE ? st.spawns.filter((t) => t >= st.sceneEnd && t < st.sceneEnd + 4).length : undefined,
+              };
             }
             const rep = globalThis.__perfReport?.().places[P.name] || {};
             // for the shot: Eric where most of the crowd is in sight (the busiest point among them, not near the edge)
@@ -120,6 +180,7 @@ await withBrowserJob('crowd-check', async (browser) => {
             const noRoute = [...A.routes].filter(([, l]) => !l).map(([k]) => k);
             return {
               ...A.counts(),
+              mix,
               seats: A.spots.seats.length,
               chats: A.spots.chats.length,
               pool: A.pool.length,
@@ -133,9 +194,14 @@ await withBrowserJob('crowd-check', async (browser) => {
               spins: globalThis.__moveCheck?.spins || [],
             };
           },
-          { period, SECS, SHOT: !off && !(process.env.NOSHOT || '').split(',').includes(place) },
+          { period, SECS, STATS, SCENE, SHOT: !off && !(process.env.NOSHOT || '').split(',').includes(place) },
         );
         if (!off) await page.screenshot({ path: `${out}/${place}-${period}.png` });
+        // SEQ=n: n more shots a second and a half apart, the crowd moving on (the same view)
+        for (let k = 0; !off && k < SEQ; k++) {
+          await page.waitForTimeout(1500);
+          await page.screenshot({ path: `${out}/${place}-${period}-${k}.png` });
+        }
         await page.close();
         rows.push({ place, period, ...r });
         fs.writeFileSync(`${out}/result.json`, JSON.stringify(rows, null, 1)); // kept as it goes: a run can hit its time limit

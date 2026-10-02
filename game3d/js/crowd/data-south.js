@@ -11,6 +11,8 @@ export const CROWD_SOUTH = {
     periods: {
       early: {
         who: ACTIVE,
+        stop: 0.15,
+        twos: 0.15,
         walk: 7,
         flows: [
           ['dorm_street', 'courts', 2, 'jog'],
@@ -23,6 +25,8 @@ export const CROWD_SOUTH = {
       },
       morning: {
         who: ACTIVE,
+        stop: 0.3,
+        twos: 0.2,
         walk: 4,
         flows: [
           ['dorm_street', 'courts', 1, 'stroll'],
@@ -32,6 +36,8 @@ export const CROWD_SOUTH = {
       },
       lunch: {
         who: MIXED,
+        stop: 0.3,
+        twos: 0.3,
         walk: 6,
         flows: [
           ['dorm_street', 'onsen', 1, 'stroll'],
@@ -42,6 +48,8 @@ export const CROWD_SOUTH = {
       },
       afternoon: {
         who: ACTIVE,
+        stop: 0.3,
+        twos: 0.2,
         walk: 4,
         flows: [
           ['dorm_street', 'courts', 1, 'jog'],
@@ -51,6 +59,8 @@ export const CROWD_SOUTH = {
       },
       evening: {
         who: HOME,
+        stop: 0.25,
+        twos: 0.3,
         walk: 11,
         flows: [
           ['dorm_street', 'onsen', 3],
@@ -74,6 +84,8 @@ export const CROWD_SOUTH = {
     periods: {
       early: {
         who: ACTIVE,
+        stop: 0.15,
+        twos: 0.15,
         walk: 10,
         flows: [
           ['north_street', 'onsen_path', 2, 'jog'],
@@ -86,6 +98,8 @@ export const CROWD_SOUTH = {
       },
       morning: {
         who: ACTIVE,
+        stop: 0.3,
+        twos: 0.2,
         walk: 4,
         flows: [
           ['north_street', 'pool', 1],
@@ -94,6 +108,8 @@ export const CROWD_SOUTH = {
       },
       lunch: {
         who: ACTIVE,
+        stop: 0.3,
+        twos: 0.3,
         walk: 7,
         flows: [
           ['office_street', 'pool', 2],
@@ -104,6 +120,8 @@ export const CROWD_SOUTH = {
       },
       afternoon: {
         who: ACTIVE,
+        stop: 0.3,
+        twos: 0.2,
         walk: 5,
         flows: [
           ['north_street', 'onsen_path', 1, 'jog'],
@@ -112,6 +130,8 @@ export const CROWD_SOUTH = {
       },
       evening: {
         who: ACTIVE,
+        stop: 0.25,
+        twos: 0.3,
         walk: 11,
         flows: [
           ['office_street', 'pool', 2],
@@ -135,6 +155,8 @@ export const CROWD_SOUTH = {
     periods: {
       early: {
         who: OFFICE,
+        stop: 0.15,
+        twos: 0.15,
         walk: 17,
         flows: [
           ['sports', 'harbour', 3],
@@ -143,11 +165,15 @@ export const CROWD_SOUTH = {
           ['sports', 'quarter', 2],
           ['harbour', 'quarter', 1],
           ['quarter', 'bank', 1],
+          ['harbour', 'sports', 1],
+          ['quarter', 'gym', 1],
         ],
         chat: 1,
       },
       morning: {
         who: OFFICE,
+        stop: 0.3,
+        twos: 0.2,
         walk: 7,
         flows: [
           ['harbour', 'quarter', 1],
@@ -157,6 +183,8 @@ export const CROWD_SOUTH = {
       },
       lunch: {
         who: OFFICE,
+        stop: 0.3,
+        twos: 0.3,
         walk: 14,
         flows: [
           ['quarter', 'bank', 2],
@@ -168,6 +196,8 @@ export const CROWD_SOUTH = {
       },
       afternoon: {
         who: OFFICE,
+        stop: 0.3,
+        twos: 0.2,
         walk: 7,
         flows: [
           ['quarter', 'harbour', 1],
@@ -176,12 +206,16 @@ export const CROWD_SOUTH = {
       },
       evening: {
         who: OFFICE,
+        stop: 0.25,
+        twos: 0.3,
         walk: 14,
         flows: [
           ['harbour', 'sports', 3],
           ['quarter', 'gym', 2],
           ['quarter', 'sports', 2],
           ['harbour', 'bank', 1],
+          ['sports', 'harbour', 1],
+          ['bank', 'quarter', 1],
         ],
         chat: 1,
       },
@@ -198,6 +232,8 @@ export const CROWD_SOUTH = {
     periods: {
       early: {
         who: { office: 2, casual: 3, elder: 1 },
+        stop: 0.15,
+        twos: 0.15,
         walk: 7,
         flows: [
           ['street', 'works', 2],
@@ -210,6 +246,8 @@ export const CROWD_SOUTH = {
       },
       morning: {
         who: MIXED,
+        stop: 0.3,
+        twos: 0.2,
         walk: 4,
         flows: [
           ['street', 'pier', 1],
@@ -219,6 +257,8 @@ export const CROWD_SOUTH = {
       },
       lunch: {
         who: MIXED,
+        stop: 0.3,
+        twos: 0.3,
         walk: 6,
         flows: [
           ['pier', 'street', 1],
@@ -229,6 +269,8 @@ export const CROWD_SOUTH = {
       },
       afternoon: {
         who: MIXED,
+        stop: 0.3,
+        twos: 0.2,
         walk: 4,
         flows: [
           ['street', 'works', 1],
@@ -238,6 +280,8 @@ export const CROWD_SOUTH = {
       },
       evening: {
         who: MIXED,
+        stop: 0.25,
+        twos: 0.3,
         walk: 7,
         flows: [
           ['works', 'street', 2],
