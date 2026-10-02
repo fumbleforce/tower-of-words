@@ -105,8 +105,7 @@ export const CHUNKS = {
     scale: 1,
     level: 0,
     walk: [-11.8, 13.2, -16.4, 11.2],
-    view: [-22, 38.6, -42, 53.98], // east to the dorm courtyard's tile (plaza/east-lane.js), north to the clinic
-    // (plaza/north-lane.js), south to the beach (island-south.js)
+    view: [-22, 38.6, -42, 53.98], // east to the dorm court's tile, north to the clinic, south to the beach
     anchor: 'the fountain on the fountain as drawn',
   },
   dorm_court: {
@@ -126,6 +125,15 @@ export const CHUNKS = {
     walk: [-1.55, 8.1, -2.6, 2.1],
     view: [-1.6, 8.3, -2.8, 4.6],
     anchor: 'in the dorm courtyard’s block, above the passage; its corridor runs to the stairs in the return',
+  },
+  shotengai: {
+    at: [64.5, 20.15],
+    turn: 270, // looking west down the arcade from its east mouth; view: the rows' backs to the beach
+    scale: 1,
+    level: 0,
+    walk: [-12.25, 2.25, -77.9, 9.5],
+    view: [-27, 7, -80.5, 13.5],
+    anchor: 'the middle of the arcade’s east mouth, between the two shop rows as drawn',
   },
   train: {
     at: [-28.6, -3.9],
@@ -157,11 +165,11 @@ const ROWS = [
   ['head_office_wing', 'office', 5, 2, 1, ROOF, 'office', [-14, -11.9, -8.2, -7.3]],
   ['canteen', 'canteen', 2, 2.1, 1, BLUE_ROOF, 'flat', [22.535, -28.8, 45.235, -20.5]],
   ['clinic', 'clinic', 3, 2, 0, ROOF, 'office', [25.4, -42.2, 36.1, -36.2]],
-  ['shops_north', 'shop', 2, 1.45, 2, SHOP_ROOF, 'shop', [-4, 13.4, 64.5, 17.9]],
-  ['arcade', 'arcade', 1, 2.9, 1, '#9aa4ad', 'flat', [-4, 17.9, 64.5, 22.4]],
-  ['shops_south', 'shop', 2, 1.45, 3, SHOP_ROOF, 'shop', [-4, 22.4, 64.5, 26.9]],
-  ['izakaya', 'shop', 3, 1.6, 3, SHOP_ROOF, 'shop', [66.6, 13.4, 70.6, 17.9]],
-  ['ramen', 'shop', 3, 1.6, 0, SHOP_ROOF, 'shop', [76.6, 13.4, 82, 18.4]],
+  ['shops_north', 'shop', 2, 2, 2, SHOP_ROOF, 'shop', [-4, 13.4, 64.5, 17.9]],
+  ['arcade', 'arcade', 1, 4.1, 1, '#9aa4ad', 'flat', [-4, 17.9, 64.5, 22.4]],
+  ['shops_south', 'shop', 2, 2, 3, SHOP_ROOF, 'shop', [-4, 22.4, 64.5, 26.9]],
+  ['izakaya', 'shop', 3, 2, 3, SHOP_ROOF, 'shop', [66.6, 13.4, 70.6, 17.9]],
+  ['ramen', 'shop', 3, 2, 0, SHOP_ROOF, 'shop', [76.6, 13.4, 82, 18.4]],
   [
     'dorm_1',
     'dorm',

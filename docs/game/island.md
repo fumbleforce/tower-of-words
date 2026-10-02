@@ -1,6 +1,6 @@
 # The island's south half
 
-The south half of Amakawa, mapped for day 2 and later: every building and outdoor place in it, who works, lives or spends time there, its doors, whether it can be entered later, how it connects, and one idea for using Japanese there. Jørgen asked for it on 2026-10-02: "I want mapping of half the island so we can make an interesting day 2 eventually". Nothing here is built unless the row says so. Built places are described in [places.md](places.md) and only linked from here. The island as a whole (what is on it, no cars, no commute) is in [setting.md](setting.md).
+The south half of Amakawa, mapped for day 2 and later: every building and outdoor place in it, who works, lives or spends time there, its doors, whether it can be entered later, how it connects, and one idea for using Japanese there. Jørgen asked for it on 2026-10-02: "I want mapping of half the island so we can make an interesting day 2 eventually". Nothing here is built unless the row says so. Built places are described in [places.md](places.md) and only linked from here. Jørgen confirmed this half as the set to build out (Review island-half-1, 2026-10-02: "Correct"); the districts are built one at a time, and the shop street and seafront is built (chunk `shotengai`). The island as a whole (what is on it, no cars, no commute) is in [setting.md](setting.md).
 
 The hooks are ideas for using Japanese in each place. Story, dialogue and secrets are Codex's ([collab/PROTOCOL.md](../../collab/PROTOCOL.md)).
 
@@ -89,7 +89,7 @@ One row per place. Where: the building ids in island-layout.js (or island-plan.j
 
 | Id | Place | Where | What and who | Ways in | Later | Day 2 hook |
 |---|---|---|---|---|---|---|
-| `plaza` | Fountain plaza (噴水広場) | `fountain_plaza` | Built as `plaza`. | The lane west and east, the canteen link north, the footpath south to the shop street | Built | Day-2 posters on the notice board: dates, times, places. |
+| `plaza` | Fountain plaza (噴水広場) | `fountain_plaza` | Built as `plaza`. | The lane west and east, the canteen link north, the cross walk south to the south walk, which leads on to the shop street | Built | Day-2 posters on the notice board: dates, times, places. |
 | `canteen` | Canteen (社員食堂) | `canteen` | Terrace and front built in `plaza`. Inside: a counter line with trays, about two hundred seats, cooks and a cashier. Most of head office eats here at noon. | Doors on the fountain's axis; kitchen door on the back lane | Enter | The meal-ticket machine (食券機): 定食, カレー, うどん, the right button. |
 | `canteen_yard` | Canteen loading yard (搬入口) | `canteen_yard` | Built as backdrop. Morning deliveries come in by cargo bike from the quay. | From the back lane; m6's walk north | Outside | Crate labels: 割れ物注意, 冷蔵, 天地無用. |
 | `clinic` | Clinic (クリニック) | `clinic` | The island's one clinic; its front is built as backdrop ([places.md](places.md)). Internal medicine and paediatrics, a nurse at reception, a pharmacy window. | Door off its entrance court on the back lane | Enter | The questionnaire (問診票) and saying what hurts: 頭が痛い, 熱, 咳. |
@@ -101,16 +101,16 @@ The shop rows have fifteen bays each, numbered 0 to 14 from the west (island-sou
 
 | Id | Place | Where | What and who | Ways in | Later | Day 2 hook |
 |---|---|---|---|---|---|---|
-| `shotengai` | Shop street (商店街) | `shops_north`, `arcade`, `shops_south` | Two rows of small shops facing each other under a glass arcade (built as backdrop). Some bays have their shutters down. Busiest after work. | West mouth from the station walk, east mouth to the dorm street, three alleys down to the promenade | Outside | Shop signs in kana and katakana, read bay by bay. |
-| `store` | Konbini, 100-yen and drugstore (コンビニ) | north row, bay 7 | The island's one combined konbini, 100-yen shop and drugstore; its sign is built. Open late, a clerk at the till. | Door on the arcade | Enter | At the till: 袋いりますか, 温めますか, paying in 円. |
-| `bakery` | Bakery (パン屋) | north row, bay 10 | Sign built; its flyer is in Eric's mailbox. Trays and tongs, breads labelled in katakana. | Door on the arcade | Enter | Picking breads by their katakana labels: メロンパン, カレーパン. |
-| `bike_shop` | Bike shop (自転車屋) | north row, bay 2 | At the station end. Repairs, tyres and the company bikes' servicing; an old mechanic. | Door on the arcade | Enter | Saying what is wrong: パンク, ブレーキ, いくらですか. |
-| `game_centre` | Game centre (ゲームセンター) | north row, bays 12 and 13 | Crane games, rhythm games and a change machine. | Door on the arcade | Enter | Crane-game instructions and the change machine (両替): 100円玉. |
-| `karaoke` | Karaoke box (カラオケ) | south row, bays 13 and 14 | Front desk downstairs, booths upstairs, open late; office groups after work. | Door on the arcade by the east mouth | Enter | The front desk (何名様, 何時間) and song titles in katakana. |
-| `izakaya` | Izakaya (居酒屋) | `izakaya` | Three storeys at the shop street's east end, a red lantern by the door. Where people drink after work. | Door on the walk out of the arcade's east mouth | Enter | The menu on the wall and ordering: すみません, とりあえずビール, 乾杯. |
+| `shotengai` | Shop street (商店街) | `shops_north`, `arcade`, `shops_south` | Built as `shotengai` ([places.md](places.md)): two rows of small shops facing each other under a glass arcade. Some bays have their shutters down. Busiest after work. | West mouth from the station walk, east mouth to the dorm street, three alleys down to the promenade | Built | Shop signs in kana and katakana, read bay by bay. |
+| `store` | Konbini, 100-yen and drugstore (コンビニ) | north row, bay 7 | The island's one combined konbini, 100-yen shop and drugstore; its front is built, the door shut. Open late, a clerk at the till. | Door on the arcade | Enter | At the till: 袋いりますか, 温めますか, paying in 円. |
+| `bakery` | Bakery (パン屋) | north row, bay 10 | Front built, the door shut; its flyer is in Eric's mailbox. Trays and tongs, breads labelled in katakana. | Door on the arcade | Enter | Picking breads by their katakana labels: メロンパン, カレーパン. |
+| `bike_shop` | Bike shop (自転車屋) | north row, bay 2 | At the station end; front built, the door shut. Repairs, tyres and the company bikes' servicing; an old mechanic. | Door on the arcade | Enter | Saying what is wrong: パンク, ブレーキ, いくらですか. |
+| `game_centre` | Game centre (ゲームセンター) | north row, bays 12 and 13 | Front built, the door shut, crane games outside. Inside: crane games, rhythm games and a change machine. | Door on the arcade | Enter | Crane-game instructions and the change machine (両替): 100円玉. |
+| `karaoke` | Karaoke box (カラオケ) | south row, bays 13 and 14 | Front built, the door shut. Front desk downstairs, booths upstairs, open late; office groups after work. | Door on the arcade by the east mouth | Enter | The front desk (何名様, 何時間) and song titles in katakana. |
+| `izakaya` | Izakaya (居酒屋) | `izakaya` | Three storeys at the shop street's east end, a red lantern by the door; front built, the door shut. Where people drink after work. | Door on the walk out of the arcade's east mouth | Enter | The menu on the wall and ordering: すみません, とりあえずビール, 乾杯. |
 | `ramen` | Ramen shop (ラーメン屋) | `ramen` | Across the dorm street from the izakaya: eight stools at a counter. | Door on the dorm street | Enter | The ticket machine, then how firm: かため, ふつう, やわらかめ. |
-| `promenade` | Seafront promenade (海辺の遊歩道) | `promenade` | Built as backdrop, on the map only. Benches and lamps, people walking in the evening. | The station walk at the west end, the arcade walk at the east end, the three alleys | Outside | A fingerpost with places and minutes: 駅, 浜辺, 5分. |
-| `beach` | Beach (浜辺) | `beach` | Built as backdrop, on the map only, with three beach huts. | Three flights of stairs down from the promenade | Outside | The beach rules board: 遊泳, 禁止, the hours. |
+| `promenade` | Seafront promenade (海辺の遊歩道) | `promenade` | Built in `shotengai`: walked from the alleys and the mouths' walks. Benches and lamps, people walking in the evening. | The station walk at the west end, the arcade walk at the east end, the three alleys | Outside | A fingerpost with places and minutes: 駅, 浜辺, 5分. |
+| `beach` | Beach (浜辺) | `beach` | Built in `shotengai` with three beach huts, seen and not walked: the stairs' heads are chained off. | Three flights of stairs down from the promenade | Outside | The beach rules board: 遊泳, 禁止, the hours. |
 
 ### East lane
 

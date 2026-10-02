@@ -13,7 +13,7 @@ import { canteenClosing } from './canteen-closing.js';
 import { hasBoard, readBoard } from '../finds/index.js';
 
 // The fountain plaza: a side trip east of the forecourt in the morning, and on the walk home after work, with the
-// lane on east to the dorm courtyard.
+// lane on east to the dorm courtyard. Down the cross walk, the south walk leads on to the shop street.
 export async function plazaPlace(game) {
   const w = await sliced(plazaSteps()); // in slices between frames: it's built while the forecourt is played
   const cam = new RoomCam(w.camera); // the forecourt's camera, so the walk between them keeps its angle
@@ -23,6 +23,7 @@ export async function plazaPlace(game) {
     office_entry: w.arriveIn,
     fountain_edge: w.fountainEdge,
     dorm_exit: w.dormExit,
+    shop_walk: w.shopWalk,
   };
   const things = {
     office_lane: {
@@ -82,6 +83,13 @@ export async function plazaPlace(game) {
       enabled: () => hasBoard('plaza_board'),
       act: () => readBoard('plaza_board'),
     },
+    // the south walk off the cross walk's foot, on to the shop street (places/shotengai.js)
+    shop_walk: {
+      ...PLACE_DETAILS.plaza.things.shop_walk,
+      anchor: (v) => v.set(w.shopWalk[0], 1.1, w.shopWalk[1]),
+      spot: () => w.shopWalk,
+      face: () => w.shopEdge,
+    },
   };
   const P = {
     scene: w.scene,
@@ -113,7 +121,8 @@ export async function plazaPlace(game) {
     people: { canteen_worker: canteen.person },
     zones: {
       office_lane: (x, z) => x < w.westX && z > w.laneZ(x) - 2.4,
-      dorm_exit: (x, z) => x > w.eastX && z > w.laneZ(x) - 2.4,
+      dorm_exit: (x, z) => x > w.eastX && Math.abs(z - w.laneZ(x)) < 2.4,
+      shop_walk: (x, z) => x > w.shopX && z > w.swZ,
     },
     hooks: { canteenChair: canteen.hooks.canteenChair },
     pigeons: w.pigeons, // the flock by the fountain (scenes/outdoor/pigeons.js), for checks
@@ -161,6 +170,9 @@ export async function plazaPlace(game) {
       // heading east after work: build the dorm courtyard now, so the walk there needs no loading pause
       if (sim.period === 'evening' && game.player.root.position.x > 2.5 && !game.prepared.dorm_court)
         game.prepare?.('dorm_court');
+      // down the cross walk toward the south walk: build the shop street now, for the same reason
+      const p = game.player.root.position;
+      if (p.x > w.shopX - 4 && p.z > w.laneZ() + 2.4 && !game.prepared.shotengai) game.prepare?.('shotengai');
     },
     onPeriod(period) {
       canteen.sync(); // on every entry: the terrace open, or closing after work
@@ -185,9 +197,11 @@ export async function plazaPlace(game) {
     tripOutTo: {
       forecourt: (g) => walkOut(g, cam, w.westLane, w.westEdge),
       dorm_court: (g) => walkOut(g, cam, w.dormExit, w.dormEdge),
+      shotengai: (g) => walkOut(g, cam, w.shopWalk, w.shopEdge),
     },
     tripInFrom: {
       forecourt: (g) => walkIn(g, cam, w.arriveEdge, w.arriveIn, w.arriveFace),
+      shotengai: (g) => walkIn(g, cam, w.shopEdge, w.shopWalk, -Math.PI / 2),
     },
   };
   return P;

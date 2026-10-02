@@ -1,0 +1,62 @@
+{
+  "title": "Shop street and seafront, walkable",
+  "date": "2026-10-02",
+  "by": "claude-agent:shotengai",
+  "caption": "The first south-half district from island-half-1 is now a place to walk: the shop street (shotengai), its alleys and the promenade. Reach it from the plaza: down the cross walk, then east along the south walk. It also loads with ?place=shotengai. The shops are shut for now.",
+  "sections": [
+    {
+      "title": "Arriving at the arcade's east mouth",
+      "caption": "Before: backdrop only, which no play camera saw (here the plaza's camera aimed at it, without the arcade roof and the south row's roofs, which were drawn on the map only). After: Eric comes in off the dorm street past the izakaya, looking west down the arcade.",
+      "images": [
+        {"id": "before-east-desk", "image": "bible/shots/showcase/shotengai-1/before-east-desk.webp", "caption": "Before, desktop"},
+        {"id": "before-east-phone", "image": "bible/shots/showcase/shotengai-1/before-east-phone.webp", "caption": "Before, phone"},
+        {"id": "after-east-desk", "image": "bible/shots/showcase/shotengai-1/after-east-desk.webp", "caption": "After, desktop: the shop walk, the glass arcade ahead"},
+        {"id": "after-east-phone", "image": "bible/shots/showcase/shotengai-1/after-east-phone.webp", "caption": "After, phone"}
+      ]
+    },
+    {
+      "title": "Under the arcade, by the konbini",
+      "caption": "The glass roof fades while Eric is under it. Lanterns and cloth banners on the posts, projecting signs for the named shops (コンビニ, パン, ゲーム, カラオケ, じてんしゃ), and each named shop's door shut with a 準備中 CLOSED card.",
+      "images": [
+        {"id": "before-konbini-desk", "image": "bible/shots/showcase/shotengai-1/before-konbini-desk.webp", "caption": "Before, desktop"},
+        {"id": "before-konbini-phone", "image": "bible/shots/showcase/shotengai-1/before-konbini-phone.webp", "caption": "Before, phone"},
+        {"id": "after-konbini-desk", "image": "bible/shots/showcase/shotengai-1/after-konbini-desk.webp", "caption": "After, desktop"},
+        {"id": "after-konbini-phone", "image": "bible/shots/showcase/shotengai-1/after-konbini-phone.webp", "caption": "After, phone"}
+      ]
+    },
+    {
+      "title": "Promenade",
+      "caption": "Walked from the three alleys and the walks at both ends of the rows. The stairs down to the beach are chained off: the beach is seen, not walked.",
+      "images": [
+        {"id": "before-prom-desk", "image": "bible/shots/showcase/shotengai-1/before-prom-desk.webp", "caption": "Before, desktop"},
+        {"id": "before-prom-phone", "image": "bible/shots/showcase/shotengai-1/before-prom-phone.webp", "caption": "Before, phone"},
+        {"id": "after-prom-desk", "image": "bible/shots/showcase/shotengai-1/after-prom-desk.webp", "caption": "After, desktop: the arcade roof shows when he is out of it"},
+        {"id": "after-prom-phone", "image": "bible/shots/showcase/shotengai-1/after-prom-phone.webp", "caption": "After, phone"}
+      ]
+    },
+    {
+      "title": "The way there from the plaza",
+      "caption": "The plaza's cross walk now goes on south to the south walk, where a finger sign (Shop street 商店街) points east.",
+      "images": [
+        {"id": "before-cross-desk", "image": "bible/shots/showcase/shotengai-1/before-cross-desk.webp", "caption": "Before, desktop"},
+        {"id": "before-cross-phone", "image": "bible/shots/showcase/shotengai-1/before-cross-phone.webp", "caption": "Before, phone"},
+        {"id": "after-cross-desk", "image": "bible/shots/showcase/shotengai-1/after-cross-desk.webp", "caption": "After, desktop"},
+        {"id": "after-cross-phone", "image": "bible/shots/showcase/shotengai-1/after-cross-phone.webp", "caption": "After, phone"}
+      ]
+    },
+    {
+      "title": "More",
+      "caption": "The game centre end with its crane games and the karaoke sign, and the arcade after work.",
+      "images": [
+        {"id": "after-game-desk", "image": "bible/shots/showcase/shotengai-1/after-game-desk.webp", "caption": "Game centre and karaoke, desktop"},
+        {"id": "after-game-phone", "image": "bible/shots/showcase/shotengai-1/after-game-phone.webp", "caption": "Game centre and karaoke, phone"},
+        {"id": "after-eve-desk", "image": "bible/shots/showcase/shotengai-1/after-eve-desk.webp", "caption": "After work, desktop"},
+        {"id": "after-eve-phone", "image": "bible/shots/showcase/shotengai-1/after-eve-phone.webp", "caption": "After work, phone"}
+      ]
+    }
+  ],
+  "links": [
+    {"label": "Play it", "href": "game3d/index.html?place=shotengai"},
+    {"label": "Places doc", "href": "docs/game/places.md"}
+  ]
+}

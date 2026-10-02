@@ -8,6 +8,7 @@ import { PAL, mat, textTexture, plane, JP_FONT } from '../props.js';
 import { TOWN } from './town.js';
 import { Parts } from './outdoor/parts.js';
 import { BLOCKS, roof, arcadeRoof } from './shop-roofs.js';
+import { signSet } from './shop-signs.js';
 import { drain } from '../perf/slice.js';
 
 // parts merged into one mesh of one material (the parts are disposed)
@@ -150,15 +151,19 @@ export function* canteenSteps(root, [x0, z0, x1, z1], floorH, doorX = (x0 + x1) 
 // `depth` deep, with the arcade between them. The rows are bays of `bays.w` from `bays.u0` (island-south.js BAYS),
 // grouped into buildings each with its own height, wall colour and roof (shop-roofs.js BLOCKS); the south row
 // leaves out the alleys' bays. Only the buildings with a bay between `from` and `to` are built (each place builds
-// the stretch its map tile shows). signs: [[bay, kana, English, colour], ...] on the north row's arcade side.
-// farLayer: the camera layer for the arcade's roof and the south row's roofs, which no play camera sees (the island
-// map's: they cost nothing in play).
+// the stretch its map tile shows). The ground floor is a shopfront under an awning (or a shutter down), sized to
+// the storey. shops: the named shops (island-south.js SHOPS): a sign board on the front over their bays and a
+// projecting sign over the arcade at their door bay, all in one mesh (shop-signs.js).
+// farLayer: the camera layer for the arcade's roof and the south row's roofs, which no camera of the backdrop's
+// places sees (the island map's: they cost nothing in play). Returned: the lit glass, the group, the signs and the
+// arcade roof's meshes (its glass, ribs and ridge; the gutters stay with the rows), for a place that walks under
+// it to fade (scenes/occluders.js).
 // shopStreetSteps is the same as a generator that yields after every building and between the meshes, for a place
 // built in slices (js/perf/slice.js)
 export const shopStreet = (...a) => drain(shopStreetSteps(...a));
 export function* shopStreetSteps(
   root,
-  { a, dir, depth, storeyH, bays, from = 0, to = Infinity, signs = [], farLayer = null },
+  { a, dir, depth, storeyH, bays, from = 0, to = Infinity, shops = [], farLayer = null },
 ) {
   const g = new THREE.Group();
   g.position.set(a[0], 0, a[1]);
@@ -173,7 +178,8 @@ export function* shopStreetSteps(
     plant = [],
     awnings = [[], [], []],
     top = new Parts(),
-    far = new Parts();
+    far = new Parts(),
+    arc = new Parts();
   const AWN = ['#6e7f8c', '#7d7a8c', '#6f8474'];
   const bayW = bays.w,
     uOf = (i) => bays.u0 + bayW * i; // a bay's west side
@@ -181,6 +187,11 @@ export function* shopStreetSteps(
     north: { v0: 0, front: depth, back: 0, dirF: 1 }, // its front (+z) faces the arcade
     south: { v0: depth * 2, front: depth * 2, back: depth * 3, dirF: -1 }, // its front (-z) faces the arcade
   };
+  // the named shops' bays keep their shopfronts (never a shutter down)
+  const doors = new Set(shops.map(({ row, door }) => row + door));
+  const named = new Set(
+    shops.flatMap(({ row, bays: [i0, i1] }) => [...Array(i1 - i0 + 1)].map((_, k) => row + (i0 + k))),
+  );
   let uMin = Infinity,
     uMax = -Infinity;
   for (const [name, row] of Object.entries(rows))
@@ -191,8 +202,8 @@ export function* shopStreetSteps(
       uMin = Math.min(uMin, ua);
       uMax = Math.max(uMax, ub);
       const ri = name === 'north' ? 0 : 1,
-        h = H + dh,
-        storeys = dh > 1 ? 3 : 2,
+        storeys = dh > 1 ? 3 : 2, // an extra height over a storey's is a third storey
+        h = storeys === 3 ? storeyH * 3 : H + dh,
         vc = row.v0 + depth / 2,
         f = row.front + row.dirF * 0.03,
         b = row.back - row.dirF * 0.03;
@@ -202,24 +213,35 @@ export function* shopStreetSteps(
       for (let i = i0; i <= i1; i++) {
         const u = uOf(i) + bayW / 2;
         // ground floor: a shopfront or a shutter; an awning; upper-floor windows
-        if ((i + ri) % 5 === 3) shutters.push(box(bayW - 0.9, 1.35, 0.05, u, 0.05, f));
-        else panes.push(box(bayW - 0.9, 1.3, 0.05, u, 0.1, f));
-        awnings[(i + ri) % 3].push(
-          new THREE.BoxGeometry(bayW - 0.5, 0.05, 0.7)
-            .rotateX(row.dirF * 0.35)
-            .translate(u, 1.62, row.front + row.dirF * 0.35),
-        );
+        if ((i + ri) % 5 === 3 && !named.has(name + i))
+          shutters.push(box(bayW - 0.9, storeyH * 0.76, 0.05, u, 0.05, f));
+        else panes.push(box(bayW - 0.9, storeyH * 0.72, 0.05, u, 0.12, f));
+        // the named shops' door bays have no awning, so the door shows from the street
+        if (!doors.has(name + i))
+          awnings[(i + ri) % 3].push(
+            new THREE.BoxGeometry(bayW - 0.5, 0.05, 0.8)
+              .rotateX(row.dirF * 0.35)
+              .translate(u, storeyH * 0.9, row.front + row.dirF * 0.4),
+          );
         for (let s = 1; s < storeys; s++)
-          for (const o of [-1, 1]) panes.push(box(1.2, 0.7, 0.05, u + o * 1.05, storeyH * s + 0.45, f));
+          for (const o of [-1, 1]) panes.push(box(1.2, storeyH * 0.45, 0.05, u + o * 1.05, storeyH * (s + 0.28), f));
         // the back: a window on each upper floor, a door, a condenser on the wall
-        for (let s = 1; s < storeys; s++) panes.push(box(0.9, 0.55, 0.05, u + 0.9, storeyH * s + 0.5, b));
-        trims.push(box(0.8, 1.2, 0.05, u - 1.2, 0, b));
+        for (let s = 1; s < storeys; s++) panes.push(box(0.9, storeyH * 0.38, 0.05, u + 0.9, storeyH * (s + 0.32), b));
+        trims.push(box(0.8, storeyH * 0.8, 0.05, u - 1.2, 0, b));
         plant.push(box(0.7, 0.5, 0.35, u + 0.6, 0.1, b - row.dirF * 0.2));
       }
+      // the rows' end walls, seen from the walks past them: a window either side on every floor
+      for (const [end, ue] of [
+        [i0 === 0, ua - 0.03],
+        [i1 === bays.n - 1, ub + 0.03],
+      ])
+        for (let s = 0; end && s < storeys; s++)
+          for (const o of [-1.1, 1.1])
+            panes.push(box(0.05, storeyH * 0.42, 1.0, ue, storeyH * (s + (s ? 0.3 : 0.36)), vc + o));
       yield;
     }
   // the arcade's glass roof over the walk between the rows, on thin posts
-  arcadeRoof(far, uMin, uMax, depth, depth * 2, H + 0.1);
+  arcadeRoof(arc, uMin, uMax, depth, depth * 2, H + 0.1, far);
   yield;
   const posts = [];
   for (let u = uMin + 1; u < uMax; u += bayW)
@@ -233,20 +255,39 @@ export function* shopStreetSteps(
   awnings.forEach((parts, k) => parts.length && g.add(merged(parts, mat(AWN[k]))));
   g.add(merged(posts, mat(PAL.dark)));
   yield;
+  // the named shops' signs: a board over their bays on the front, and a projecting sign over the arcade at the
+  // door bay's west pier, its kana stacked, read from up and down the street
+  const signs = signSet(),
+    face = { north: [depth, 1], south: [depth * 2, -1] };
+  for (const {
+    row,
+    bays: [i0, i1],
+    door,
+    sign,
+    tag,
+  } of shops) {
+    if (uOf(i1 + 1) <= from || uOf(i0) >= to) continue;
+    const [v, n] = face[row],
+      w = Math.min(3.0 + (i1 - i0) * 2, (i1 - i0 + 1) * bayW - 0.6);
+    const at = [(uOf(i0) + uOf(i1 + 1)) / 2, storeyH + 0.36, v + n * 0.08];
+    signs.board(sign[0], sign[1], sign[2], w, 0.66, at, n > 0 ? 0 : Math.PI);
+    const pu = uOf(door) + 0.2;
+    signs.upright(tag, sign[2], 0.62, 1.5, [pu, storeyH + 0.95, v + n * 0.62], Math.PI / 2);
+    top.box(PAL.dark, 0.08, 1.62, 0.7, pu, storeyH + 0.14, v + n * 0.62); // the board's edge, between its faces
+    top.box(PAL.dark, 0.05, 0.05, 0.32, pu, storeyH + 1.72, v + n * 0.16); // the bracket off the wall
+  }
   top.build(g);
   yield;
-  far.build(g).forEach((m, i) => {
-    m.name = `shops:far${i}`; // named: the place's merge pass leaves it as it is
+  const onFar = (tag) => (m, i) => {
+    m.name = `shops:${tag}${i}`; // named: the place's merge pass leaves it as it is
     if (farLayer === null) return;
     m.layers.set(farLayer);
     m.userData.noBatch = true;
-  });
+  };
+  far.build(g).forEach(onFar('far'));
+  const arcade = arc.build(g);
+  arcade.forEach(onFar('arcade'));
   yield;
-  // shop signs on the north row, under the arcade
-  for (const [bay, kana, en, color] of signs) {
-    const s = signBoard(kana, en, 3.0, 0.75, color);
-    s.position.set(uOf(bay) + bayW / 2, 2.05, depth + 0.1);
-    g.add(s);
-  }
-  return { glass, group: g };
+  const lit = signs.build(g);
+  return { glass, group: g, signs: lit, arcade };
 }

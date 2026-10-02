@@ -452,7 +452,7 @@
       "room": "office",
       "anchor": [
         5.2,
-        1,
+        1.0,
         2.4
       ],
       "spot": [
@@ -485,7 +485,7 @@
       "room": "office",
       "anchor": [
         2.6,
-        1,
+        1.0,
         2.4
       ],
       "spot": [
@@ -613,8 +613,30 @@
       "in game",
       "thing"
     ]
-  }
-,
+  },
+  {
+    "id_": "prop/plaza/shop_walk",
+    "kind": "prop",
+    "name": "To the shop street",
+    "paths": [
+      "game3d/js/places/plaza.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "plaza.js things.shop_walk",
+    "place": "plaza",
+    "used": [
+      "Fountain plaza: tap target 'To the shop street'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "plaza"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
   {
     "id_": "prop/plaza/training_door",
     "kind": "prop",
@@ -632,6 +654,167 @@
     "view": {
       "type": "room",
       "room": "plaza"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/shotengai/bakery",
+    "kind": "prop",
+    "name": "Bakery",
+    "paths": [
+      "game3d/js/places/shotengai.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "shotengai.js things.bakery",
+    "place": "shotengai",
+    "used": [
+      "Shop street: tap target 'Bakery'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "shotengai"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/shotengai/bike_shop",
+    "kind": "prop",
+    "name": "Bike shop",
+    "paths": [
+      "game3d/js/places/shotengai.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "shotengai.js things.bike_shop",
+    "place": "shotengai",
+    "used": [
+      "Shop street: tap target 'Bike shop'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "shotengai"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/shotengai/game_centre",
+    "kind": "prop",
+    "name": "Game centre",
+    "paths": [
+      "game3d/js/places/shotengai.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "shotengai.js things.game_centre",
+    "place": "shotengai",
+    "used": [
+      "Shop street: tap target 'Game centre'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "shotengai"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/shotengai/izakaya",
+    "kind": "prop",
+    "name": "Izakaya",
+    "paths": [
+      "game3d/js/places/shotengai.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "shotengai.js things.izakaya",
+    "place": "shotengai",
+    "used": [
+      "Shop street: tap target 'Izakaya'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "shotengai"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/shotengai/karaoke",
+    "kind": "prop",
+    "name": "Karaoke",
+    "paths": [
+      "game3d/js/places/shotengai.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "shotengai.js things.karaoke",
+    "place": "shotengai",
+    "used": [
+      "Shop street: tap target 'Karaoke'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "shotengai"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/shotengai/plaza_lane",
+    "kind": "prop",
+    "name": "To the plaza",
+    "paths": [
+      "game3d/js/places/shotengai.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "shotengai.js things.plaza_lane",
+    "place": "shotengai",
+    "used": [
+      "Shop street: tap target 'To the plaza'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "shotengai"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/shotengai/store",
+    "kind": "prop",
+    "name": "Konbini",
+    "paths": [
+      "game3d/js/places/shotengai.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "shotengai.js things.store",
+    "place": "shotengai",
+    "used": [
+      "Shop street: tap target 'Konbini'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "shotengai"
     },
     "tags": [
       "in game",

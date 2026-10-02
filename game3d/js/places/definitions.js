@@ -7,6 +7,7 @@ export const PLACE_FILES = {
   office: 'game3d/js/places/office.js',
   dorm_court: 'game3d/js/places/dorm-court.js',
   dorms: 'game3d/js/places/dorms.js',
+  shotengai: 'game3d/js/places/shotengai.js',
 };
 // Place names for the save list and the end-of-day photos.
 export const PLACE_NAMES = {
@@ -17,10 +18,27 @@ export const PLACE_NAMES = {
   office: 'IT support, B2',
   dorm_court: 'Dorm courtyard',
   dorms: "Eric's room",
+  shotengai: 'Shop street',
 };
 export const NEXT = { train: 'gate', gate: 'forecourt', forecourt: 'office', dorm_court: 'dorms' };
 // The other moves, played by the story's `trip` step: the walks between outdoor chunks, and the way home after work
-// (B2 up to the forecourt by lift, then east through the plaza to the dorm courtyard).
-export const TRIPS = { forecourt: ['plaza'], plaza: ['forecourt', 'dorm_court'], office: ['forecourt'] };
+// (B2 up to the forecourt by lift, then east through the plaza to the dorm courtyard). The shop street is a side
+// trip off the plaza; after work its east end goes on up the dorm street to the dorm courtyard.
+export const TRIPS = {
+  forecourt: ['plaza'],
+  plaza: ['forecourt', 'dorm_court', 'shotengai'],
+  office: ['forecourt'],
+  shotengai: ['plaza', 'dorm_court'],
+};
 export const canTravel = (from, to) => NEXT[from] === to || !!TRIPS[from]?.includes(to);
-export const STORY_FILES = ['train', 'gate', 'forecourt', 'plaza', 'office', 'dorm_court', 'dorms', 'transitions'];
+export const STORY_FILES = [
+  'train',
+  'gate',
+  'forecourt',
+  'plaza',
+  'office',
+  'dorm_court',
+  'dorms',
+  'shotengai',
+  'transitions',
+];

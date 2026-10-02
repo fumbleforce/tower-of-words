@@ -15,6 +15,8 @@ export default {
     'talk:training_door': 'training_locked',
     'talk:dorm_lane': [{ if: 'going_home', node: 'to_dorms' }, 'dorms_later'],
     'zone:dorm_exit': [{ if: 'going_home', node: 'to_dorms' }, 'dorms_later'],
+    'talk:shop_walk': 'to_shops',
+    'zone:shop_walk': 'to_shops',
   },
   show: { canteen_table: 'going_home && !evening_canteen_helped' },
   goal: { office_lane: '!going_home', dorm_lane: 'going_home' },
@@ -48,5 +50,6 @@ export default {
     dorms_later: ["> The dorms are further down this lane. That's for after work."],
     to_forecourt: [{ do: 'trip', to: 'forecourt' }],
     to_dorms: [{ do: 'trip', to: 'dorm_court' }],
+    to_shops: [{ do: 'trip', to: 'shotengai' }],
   },
 };

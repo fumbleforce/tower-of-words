@@ -158,3 +158,43 @@ export const UMBRELLAS = [
 ];
 export const HUTS = [-11.8, -9.4, -7].map((x) => [x, 34.6]);
 export const EAST_BED = [ROW_E, ROWS_Z.south, LINKS.east[0], ROWS_Z.back];
+
+// The promenade's furniture in the band along the wall, x each (scenes/outdoor/seafront.js builds it, the shop
+// street's chunk keeps Eric off it): lamps flank each flight of stairs, one more midway between flights; pairs of
+// benches back to back face the sea and the shops between them, bins beside every other pair
+export const LAMP_X = [-7.5, 1.5, 6, 15, 24, 28.5, 37.5, 46.5, 51, 60, 69];
+export const BENCH_X = [-3, 10.5, 19.5, 33, 42, 55.5, 66];
+export const FURNITURE_Z = WALL_Z - BAND / 2 - 0.15;
+
+// The shops with a name (docs/game/island.md, "Shop street and seafront"): the row, the bays they take, the bay
+// their door is in, their sign (kana, English, colour) on the front over the awnings, and the kana on their
+// projecting sign over the arcade at the door bay's west pier (plaza-buildings.js shopStreet). The izakaya and the
+// ramen shop are their own buildings (island-layout.js).
+export const SHOPS = [
+  {
+    id: 'bike_shop',
+    row: 'north',
+    bays: [2, 2],
+    door: 2,
+    sign: ['じてんしゃ', 'BICYCLES', '#4f6a63'],
+    tag: 'じてんしゃ',
+  },
+  {
+    id: 'store',
+    row: 'north',
+    bays: [7, 7],
+    door: 7,
+    sign: ['コンビニ', 'KONBINI · 100 YEN · DRUGSTORE', '#3f5f6e'],
+    tag: 'コンビニ',
+  },
+  { id: 'bakery', row: 'north', bays: [10, 10], door: 10, sign: ['パン', 'BAKERY', '#5d5a72'], tag: 'パン' },
+  {
+    id: 'game_centre',
+    row: 'north',
+    bays: [12, 13],
+    door: 12,
+    sign: ['ゲームセンター', 'GAME CENTRE', '#4a5577'],
+    tag: 'ゲーム',
+  },
+  { id: 'karaoke', row: 'south', bays: [13, 14], door: 14, sign: ['カラオケ', 'KARAOKE', '#6b4f68'], tag: 'カラオケ' },
+];

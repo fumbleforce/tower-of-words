@@ -37,6 +37,7 @@ test('asset source data includes the actual words, cast, music, sounds and style
     office: { kenji: 17, mori: 18, mio: 46, eric: 5, emi: 3 },
     dorm_court: {},
     dorms: { eric: 3 },
+    shotengai: {},
     transitions: { sales1: 2, sales2: 1 },
   });
   assert.equal(data.icons.length, 18); // 18th: the Photos chip (ui/finds-view.js)
