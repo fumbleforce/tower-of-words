@@ -107,24 +107,6 @@
     {
       "file": "game3d/js/scenes/office.js",
       "ruleId": "no-unused-vars",
-      "message": "'screenMat' is defined but never used.",
-      "context": "4e1afdae13498a2b31d98888a26d0cc8ec57957adf7f544b907b75296a3a7660"
-    },
-    {
-      "file": "game3d/js/scenes/office.js",
-      "ruleId": "no-unused-vars",
-      "message": "'kitchen' is defined but never used.",
-      "context": "7c328fc797f1ba57a581362bd8902e930ed9cd494c5ca8488f6a1920522d6bd9"
-    },
-    {
-      "file": "game3d/js/scenes/office.js",
-      "ruleId": "no-unused-vars",
-      "message": "'tableSet' is defined but never used.",
-      "context": "763c0f8d6d05e8834d26ed64d6bb33b78f4a15ab555ed7456a2ae6f5c27b91ee"
-    },
-    {
-      "file": "game3d/js/scenes/office.js",
-      "ruleId": "no-unused-vars",
       "message": "'sink' is defined but never used.",
       "context": "631c3dbe1a80ad9634b490945239cd8033f7d29c5047983dbbc8515689718bb7"
     },

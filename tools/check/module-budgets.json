@@ -107,10 +107,10 @@
       "reason": "Existing lobby geometry composition; preserve the room while extracting responsibilities later."
     },
     "game3d/js/scenes/office.js": {
-      "lines": 2115,
-      "bytes": 72532,
+      "lines": 2056,
+      "bytes": 70511,
       "owner": "codex-tui",
-      "review": "C-0110 / X-0193: preserve cup-tray, counter and sink overlap order; existing responsibility unchanged; 2026-09-30 preparation slices (yield points, notes/PERF.md)",
+      "review": "C-0110 / X-0193; C-0352: tray, sink plate and counter no longer overlap, unused kitchen()/tableSet() removed; existing responsibility unchanged; 2026-09-30 preparation slices (yield points, notes/PERF.md)",
       "reason": "Existing office geometry composition; preserve the room while extracting responsibilities later."
     },
     "game3d/js/showcase/decals.js": {
