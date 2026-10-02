@@ -151,7 +151,8 @@ export async function attachCrowd(game, place, name) {
       routes.set(key, line && line.length > 1 ? line : null);
       await nextFrame();
     }
-  const spots = stillSpots(game, place, g, data, ends, [...routes.values()].filter(Boolean));
+  // where people stand and sit: worked out on the first entry, once the finds and every thing are in place
+  let spots = null;
 
   const V = new THREE.Vector3(),
     frustum = new THREE.Frustum(),
@@ -190,7 +191,8 @@ export async function attachCrowd(game, place, name) {
       const [from, to, , kind = 'walk'] = f;
       const A = ends[from],
         B = ends[to];
-      const lane = laneOf(g, routes.get(from + '>' + to), (0.2 + R() * 0.3) * K);
+      // each walker its own lane, right of the line by up to a metre and a half where the way is wide
+      const lane = laneOf(g, routes.get(from + '>' + to), (0.15 + R() * 0.95) * K);
       // a new walker steps out of a door, or comes in along the street from further out than anyone can see
       let lead = A.door;
       if (!fresh && !A.door) {
@@ -270,6 +272,7 @@ export async function attachCrowd(game, place, name) {
       if (b.state === 'still' && (fresh || !inView(b.r.root.position.x, b.r.root.position.z))) hide(b);
     if (fresh) for (const b of pool) hide(b);
     if (!spec) return;
+    spots ||= stillSpots(game, place, g, data, ends, [...routes.values()].filter(Boolean));
     placeStill(pool, spots, counts, spec, R, { fresh, inView, K, place, game });
     if (fresh) for (let i = 0; i < counts.walk; i++) launch(true);
   }
@@ -335,7 +338,9 @@ export async function attachCrowd(game, place, name) {
     pool,
     ends,
     routes,
-    spots,
+    get spots() {
+      return spots;
+    },
     tier,
     enter: (p) => configure(p, true),
     counts: () => ({
