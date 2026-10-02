@@ -85,3 +85,10 @@ export const GARDEN_COURT = [PATH_X - 1.3, PATH_X + 2.1, STRIP_S[3] + 1.0, STRIP
 // its bench, on the court's north side looking south into the garden (seat top 0.34, as the outdoor kit's bench)
 export const GARDEN_BENCH = { x: GARDEN_COURT[1] - 1.0, z: GARDEN_COURT[2] + 0.45, len: 1.5, top: 0.34 };
 export const inRect = (x, z, [x0, x1, z0, z1]) => x > x0 && x < x1 && z > z0 && z < z1;
+
+// the forecourt's nook (outdoor/nooks.js): the recess in front of the staff gate between the court's north bed and
+// head office's corner, a bike against the bed's end, a pot and an umbrella stand by the corner (the recess is court
+// already, so it adds no walk)
+export const NOOKS = [
+  { id: 'forecourt_staff_gate', kit: 'gate', at: [7.4, -2.6], face: Math.PI, back: 1.3, half: 1.25, bike: 1 },
+];

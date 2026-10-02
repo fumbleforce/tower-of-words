@@ -118,6 +118,33 @@ export const BIKE_PAD = ((r) => [r[0] + 0.3, CROSS[0], r[3], r[3] + 2.2])(BLOCKS
 // a seat bay east of the cross walk, between block_e1's bed and the lane's avenue
 export const SEAT_BAY = ((r) => [CROSS[1], CROSS[1] + 2.8, r[3] + 2.0, r[3] + 3.2])(BLOCKS[0].rect);
 
+// the plaza's nooks (outdoor/nooks.js; scenes/plaza.js walks them): the bay off the cross walk, its bench looking
+// down the walk, a pot and the bins at its ends; a roadside shrine on the lawn west of the cross walk, under the
+// ginkgo by the bike pad
+export const NOOKS = [
+  {
+    id: 'plaza_seat_bay',
+    kit: 'bins',
+    at: [SEAT_BAY[0] + 1.4, SEAT_BAY[3] - 0.2],
+    face: Math.PI,
+    back: 0.3,
+    half: 1.1,
+    bins: false,
+    keep: [[SEAT_BAY[0] + 0.6, SEAT_BAY[0] + 2.2, SEAT_BAY[2], SEAT_BAY[2] + 0.75]], // the bay's own bench
+    walks: [[SEAT_BAY[0] - 0.7, SEAT_BAY[1] - 0.05, SEAT_BAY[2] + 0.05, SEAT_BAY[3] + 0.05]],
+  },
+  {
+    id: 'plaza_shrine',
+    kit: 'shrine',
+    at: [CROSS[0] - 0.85, BIKE_PAD[3] + 1.1], // close to the bike pad: the lane's avenue tree stands south of it
+    face: -Math.PI / 2,
+    tree: null,
+    clusters: false,
+    walks: [[CROSS[0] - 2.0, CROSS[0] + 0.7, BIKE_PAD[3] + 0.1, BIKE_PAD[3] + 2.1]],
+    pads: [[CROSS[0] - 2.0, CROSS[0] - 0.2, BIKE_PAD[3] + 0.05, BIKE_PAD[3] + 2.15]],
+  },
+];
+
 // the park's square: a bench either side of each walk's mouth on its north and south edges, facing in, [x, z, ry];
 // a lamp at two corners
 export const SQUARE_BENCHES = (() => {
@@ -149,3 +176,11 @@ export const STREET_TREES = (() => {
   return out;
 })();
 export const inRect = (x, z, [x0, x1, z0, z1], m = 0) => x > x0 + m && x < x1 - m && z > z0 + m && z < z1 - m;
+
+// the north street's verge is open between the second and third avenue trees from the top leg (z, the plaza's
+// frame), for the east lane's roadside shrine (east-lane/plan.js NOOKS)
+export const SHRINE_GAP = (() => {
+  const [, a, b] = STREET_TREES;
+  const m = (a + b) / 2 - 0.4; // a little nearer the northern one, so the southern's crown keeps off Eric
+  return [m - 0.95, m + 0.95];
+})();

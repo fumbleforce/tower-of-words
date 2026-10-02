@@ -32,6 +32,7 @@ import { Parts } from './outdoor/parts.js';
 import { lightSet } from './outdoor/furniture.js';
 import { keyaki, sakura, cluster } from './outdoor/planting.js';
 import * as PL from './forecourt/plan.js';
+import { buildNooks } from './outdoor/nooks.js';
 
 const { STATION, DOOR_X, X0, SE, ZN, HZ, HO_X, COURT, BIKES, GARDEN, LANE, LANE_Z, STRIP_S, STRIP_N, SERVICE, TE } = PL;
 // the nav grid: court, bikes, lane (up to where the plaza trip starts), lobby
@@ -123,6 +124,8 @@ export function* forecourtSteps() {
   yield;
   buildLane(statics, nav, lamps);
   const north = yield* northSteps(statics, lamps);
+  const nooks = buildNooks(PL.NOOKS, statics, { lights: lamps }); // outdoor/nooks.js: props round each, its spot named
+  for (const r of nooks.blocks) nav.block(...r);
   const lights = lamps.build(statics);
   yield;
   const { sky, front } = yield* town(statics);
@@ -160,12 +163,14 @@ export function* forecourtSteps() {
       lift.want = THREE.MathUtils.clamp(k, 0, 1);
     },
     camera: { elev: 46, fov: 24 },
+    nooks: nooks.spots,
     doorX: DOOR_X,
     hoDoor: [HO_X, T.o[1]],
     // after work the lamps come on
     lightsOn() {
       lights.evening();
       front.evening();
+      nooks.evening();
       if (north.lit) north.lit.visible = true; // the windows lit after work
     },
     update(t, dt) {

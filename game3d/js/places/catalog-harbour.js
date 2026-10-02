@@ -7,7 +7,8 @@ export const HARBOUR_DETAILS = {
     ferry_terminal: { label: 'Ferry terminal', kind: 'thing', verb: 'Go in' },
     harbour_office: { label: 'Harbour office', kind: 'thing', verb: 'Go in' },
   },
-  spots: ['street_entry'],
+  spots: ['street_entry', 'harbour_pier_end', 'harbour_shed_back', 'harbour_ferry_lookout'],
+  nooks: ['harbour_pier_end', 'harbour_shed_back', 'harbour_ferry_lookout'], // docs/game/places.md, "Nooks"
   seats: [],
   zones: ['east_exit', 'lane_exit', 'street_exit'],
   people: [],

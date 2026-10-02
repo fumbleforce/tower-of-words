@@ -108,7 +108,7 @@ export function* planting(p, [x0, x1] = [-Infinity, Infinity]) {
   for (const [r, kinds, seed] of [
     [[-26.9, -24.6, -67, n - 2.2], [keyaki, sakura], 101],
     [[-15.8, -10.8, -71, n - 2.2], [sakura, maple, keyaki], 103],
-    [[1.0, 5.3, -70, n - 2.4], [ginkgo, keyaki], 105],
+    [[1.0, 5.3, -70, n - 5.6], [ginkgo, keyaki], 105], // short of the smoking corner (plan.js NOOKS)
     [[-40, -28.5, -74, -63], [pine, keyaki, maple], 107],
     [[-9.5, 14.2, -77, -65], [keyaki, sakura, pine], 109],
     [[-23.5, -16.8, -80, -71.5], [maple, sakura], 111],

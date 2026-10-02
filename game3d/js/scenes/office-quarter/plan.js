@@ -15,6 +15,7 @@
 //   bollards across it, and across the shed street's mouth (both go on south to head office's back, not walked)
 import * as LAYOUT from '../island-layout.js';
 import { faces, faceAt, tOf, bayOf } from '../outdoor/block-face.js';
+import { nookWalks } from '../outdoor/nook-walks.js';
 
 export const CHUNK = 'office_quarter';
 const AT = LAYOUT.CHUNKS[CHUNK].at;
@@ -177,7 +178,22 @@ const I_WALKS = [
       : [[x0, x1, z0 + 0.15, z1 + 0.1]];
   }),
 ];
-export const WALKS = I_WALKS.map(rect);
+// the nooks (outdoor/nooks.js), in the chunk's frame: a smoking corner behind frosted screens in the planted gap
+// between Amakawa Electric and Amakawa Trading, off Electric's forecourt; drinks machines on Amakawa Life's
+// forecourt, west of its door
+export const NOOKS = [
+  {
+    id: 'office_smokers',
+    kit: 'smokers',
+    at: [-1.4, -4.0],
+    face: Math.PI,
+    back: 1.6,
+    walks: [[-5.0, 1.4, -6.5, -3.0]],
+    pads: [[-4.35, 1.4, -6.5, -2.85]],
+  },
+  { id: 'office_vending', kit: 'vending', at: [19.9, -2.3], face: Math.PI, back: 1.0 },
+];
+export const WALKS = [...I_WALKS.map(rect), ...nookWalks(NOOKS)];
 
 // the forecourts' beds against the face either side of the door, and where the bike racks stand (m2's and m3's, a
 // row along the forecourt's street edge at its outer end)

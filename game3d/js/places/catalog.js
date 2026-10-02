@@ -130,7 +130,8 @@ export const PLACE_DETAILS = {
       garden_bench: { label: 'Garden bench', kind: 'thing', verb: 'Sit' },
       fallen_bicycle: { label: 'Bicycle', kind: 'thing', verb: 'Stand up' },
     },
-    spots: ['station_exit', 'office_entrance', 'lift_front', 'plaza_lane'],
+    spots: ['station_exit', 'office_entrance', 'lift_front', 'plaza_lane', 'forecourt_staff_gate'],
+    nooks: ['forecourt_staff_gate'], // docs/game/places.md, "Nooks"
     seats: ['garden_bench'],
     zones: ['lift_front', 'plaza_lane'],
     people: ['kuro', 'tama'],
@@ -174,7 +175,8 @@ export const PLACE_DETAILS = {
       noticeboard: { label: 'Notice board', kind: 'thing', verb: 'Read' },
       shop_walk: { label: 'To the shop street', kind: 'thing', verb: 'Go' },
     },
-    spots: ['office_entry', 'fountain_edge', 'dorm_exit', 'shop_walk'],
+    spots: ['office_entry', 'fountain_edge', 'dorm_exit', 'shop_walk', 'plaza_seat_bay', 'plaza_shrine'],
+    nooks: ['plaza_seat_bay', 'plaza_shrine'], // docs/game/places.md, "Nooks"
     seats: [],
     zones: ['office_lane', 'dorm_exit', 'shop_walk'],
     people: ['canteen_worker'],

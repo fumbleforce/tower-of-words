@@ -29,6 +29,7 @@ export async function forecourtPlace(game) {
     office_entrance: w.officeEntrance,
     lift_front: w.liftOut,
     plaza_lane: w.plazaLane,
+    forecourt_staff_gate: w.nooks.forecourt_staff_gate,
   };
   const things = {
     station_exit: {

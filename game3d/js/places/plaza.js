@@ -25,6 +25,8 @@ export async function plazaPlace(game) {
     fountain_edge: w.fountainEdge,
     dorm_exit: w.dormExit,
     shop_walk: w.shopWalk,
+    plaza_seat_bay: w.nooks.plaza_seat_bay,
+    plaza_shrine: w.nooks.plaza_shrine,
   };
   const things = {
     office_lane: {

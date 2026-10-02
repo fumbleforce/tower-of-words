@@ -28,6 +28,7 @@ import { rowSteps } from './office-quarter/row.js';
 import { linkSteps } from './office-quarter/link.js';
 import { groundsSteps } from './office-quarter/grounds.js';
 import * as P from './office-quarter/plan.js';
+import { buildNooks } from './outdoor/nooks.js';
 
 const { CHUNK, inRect } = P;
 
@@ -79,11 +80,14 @@ export function* officeQuarterSteps() {
     near: 40,
     far: 80,
   });
+  const nooks = buildNooks(P.NOOKS, root); // outdoor/nooks.js: props round each nook, its spot named
+  for (const r of nooks.blocks) nav.block(...r);
   yield* mergeStaticSteps(root);
   root.add(wg);
   yield* nav.buildSteps();
 
   return {
+    nooks: nooks.spots,
     root,
     scene,
     sun,
@@ -94,6 +98,7 @@ export function* officeQuarterSteps() {
     exits: P.EXITS,
     doors: P.DOORS,
     evening() {
+      nooks.evening();
       shadows.evening();
       lit.evening();
       sg.evening();

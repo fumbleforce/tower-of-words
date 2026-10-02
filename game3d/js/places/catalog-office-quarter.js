@@ -23,7 +23,8 @@ export const OFFICE_QUARTER_DETAILS = {
     insurance_office: { label: 'Amakawa Life', kind: 'thing', verb: 'Go in' },
     bank: { label: 'Bank', kind: 'thing', verb: 'Go in' },
   },
-  spots: ['street_entry'],
+  spots: ['street_entry', 'office_smokers', 'office_vending'],
+  nooks: ['office_smokers', 'office_vending'], // docs/game/places.md, "Nooks"
   seats: [],
   zones: ['east_exit', 'west_exit'],
   people: [],

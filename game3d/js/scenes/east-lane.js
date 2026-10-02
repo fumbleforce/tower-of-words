@@ -33,6 +33,7 @@ import { clusterSteps, placeIn, CLUSTER_IDS } from './dorm-court/cluster.js';
 import { coastLand } from './island-west.js';
 import { BAYS, SHOPS } from './island-south.js';
 import * as P from './east-lane/plan.js';
+import { buildNooks } from './outdoor/nooks.js';
 
 const { CHUNK, inRect } = P;
 
@@ -93,6 +94,8 @@ export function* eastLaneChunkSteps() {
     land: coastLand(LAYOUT.COAST.line),
     landColor: TOWN.grass,
   });
+  const nooks = buildNooks(P.NOOKS, root); // outdoor/nooks.js: props round each nook, its spot named
+  for (const r of nooks.blocks) nav.block(...r);
   yield* mergeStaticSteps(root);
   // the dorm courtyard and its cluster east of the dorm street, in its own group so the merge leaves it out
   const cluster = placeIn(new THREE.Group(), CHUNK);
@@ -101,6 +104,7 @@ export function* eastLaneChunkSteps() {
   yield* nav.buildSteps();
 
   return {
+    nooks: nooks.spots,
     root,
     scene,
     sun,
@@ -117,6 +121,7 @@ export function* eastLaneChunkSteps() {
       east.update(sun);
     },
     evening() {
+      nooks.evening();
       shadows.evening();
       lit.evening();
       east.evening();

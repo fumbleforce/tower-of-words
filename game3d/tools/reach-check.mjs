@@ -1,6 +1,7 @@
 // Checks that Eric can walk up to everything he can select: in each place (morning, and after work where the place
 // has an evening), from where he arrives, the walk grid must reach every enabled thing's approach spot, and come
-// within reach of every person (a thing marked `reachAfter` once that walk-grid block is lifted). Prints a FAIL line
+// within reach of every person (a thing marked `reachAfter` once that walk-grid block is lifted), and every nook's
+// spot (places/catalog*.js `nooks`). Prints a FAIL line
 // for each one he can't get to, and PASS at the end if none.
 //   node game3d/tools/reach-check.mjs            (PLACES=plaza,dorm_court to limit; BASE=<worktree>/game3d)
 import { withBrowserJob } from '../../tools/lib/browser-job.mjs';
@@ -54,6 +55,14 @@ await withBrowserJob('reach-check', async (browser) => {
           const r = reachableNear(nav, sx, sz, target[0], target[1]);
           const d = r ? Math.hypot(r[0] - target[0], r[1] - target[1]) : 1e9;
           out.push({ id, d: +d.toFixed(2), need, target: target.map((v) => +v.toFixed(2)), after: t.reachAfter });
+        }
+        // and every nook (docs/game/places.md, "Nooks"): its named spot, from where he arrives
+        const { PLACE_DETAILS } = await import('./js/places/catalog.js');
+        for (const id of PLACE_DETAILS[P.name]?.nooks || []) {
+          const target = P.spots[id];
+          const r = target && reachableNear(nav, sx, sz, target[0], target[1]);
+          const d = r ? Math.hypot(r[0] - target[0], r[1] - target[1]) : 1e9;
+          out.push({ id: `nook ${id}`, d: +d.toFixed(2), need: 0.3, target: (target || [NaN, NaN]).map((v) => +v.toFixed(2)) });
         }
         return out;
       }, eve);

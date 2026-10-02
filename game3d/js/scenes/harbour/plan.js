@@ -20,6 +20,7 @@ import * as LAYOUT from '../island-layout.js';
 import { faces, faceAt, tOf, bayOf } from '../outdoor/block-face.js';
 import * as O from '../office-quarter/plan.js';
 import * as W from '../works/plan.js';
+import { nookWalks } from '../outdoor/nook-walks.js';
 
 export const CHUNK = 'harbour';
 const AT = LAYOUT.CHUNKS[CHUNK].at;
@@ -181,7 +182,39 @@ const I_WALKS = [
   [WORKS_LANE[0], WORKS_LANE[1], LANE_END, YARD[2] + 0.1],
   [WORKS_STREET[0], WORKS_STREET[1], STREET_TOP, STREET[2] + 0.1],
 ];
-export const WALKS = I_WALKS.map(rect);
+// the nooks (outdoor/nooks.js), in the chunk's frame, all on ground already walked: the supply pier's end, its
+// bollards, life ring and a fisherman's things; the warehouse's back, its east side, with the outdoor units and crates
+// of empties; a lookout at the ferry pier's end, a coin telescope and a bench looking out to sea
+const [SP, FP, SH] = [rect(SUPPLY_PIER), rect(FERRY_PIER), rect(SHED)];
+export const NOOKS = [
+  {
+    id: 'harbour_pier_end',
+    kit: 'pier',
+    at: [(SP[0] + SP[1]) / 2, SP[3] - EDGE - 1.8],
+    face: 0,
+    edge: 1.4,
+    span: 1.3,
+  },
+  {
+    id: 'harbour_shed_back',
+    kit: 'yard',
+    at: [SH[1] + 1.2, SH[2] + 8.0],
+    face: -Math.PI / 2,
+    back: 1.1,
+    side: 1,
+    bike: false,
+  },
+  {
+    id: 'harbour_ferry_lookout',
+    kit: 'lookout',
+    at: [(FP[0] + FP[1]) / 2, FP[3] - EDGE - 1.4],
+    face: 0,
+    edge: 1.2,
+    span: 1.6,
+    name: ['みなと', 'Harbour'],
+  },
+];
+export const WALKS = [...I_WALKS.map(rect), ...nookWalks(NOOKS)];
 
 // what stands on the walkable ground, in the island frame (the nav grid blocks these)
 const post = ([x, z], r = 0.16) => [x - r, x + r, z - r, z + r];

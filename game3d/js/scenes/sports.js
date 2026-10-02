@@ -40,6 +40,7 @@ import { streetSteps } from './office-quarter/grounds.js';
 import { block } from './office-quarter/plan.js';
 import { rowSteps } from './office-quarter/row.js';
 import * as P from './sports/plan.js';
+import { buildNooks } from './outdoor/nooks.js';
 
 const { CHUNK, inRect } = P;
 const FRONTS = E.BLOCKS.filter((k) => k.id === 'r3' || k.id === 'block_e3'); // on the north street's east side
@@ -114,6 +115,8 @@ export function* sportsSteps() {
     near: 40,
     far: 80,
   });
+  const nooks = buildNooks(P.NOOKS, root);
+  for (const r of nooks.blocks) nav.block(...r);
   yield* mergeStaticSteps(root);
   root.add(wg);
   yield* nav.buildSteps();
@@ -129,6 +132,7 @@ export function* sportsSteps() {
     exits: P.EXITS,
     doors: P.DOORS,
     turns: P.TURNS,
+    nooks: nooks.spots,
     camera: { elev: 50, fov: 24 },
     update() {
       north.update(sun);
@@ -142,6 +146,7 @@ export function* sportsSteps() {
       pool.evening();
       north.evening();
       fronts.evening();
+      nooks.evening();
       if (offices.lit) offices.lit.visible = true;
       sky.onPeriod('evening');
     },

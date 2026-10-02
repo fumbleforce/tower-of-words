@@ -80,7 +80,12 @@ export async function shotengaiPlace(game) {
     music: 'calm',
     grade: MORNING_GRADE,
     things,
-    spots: { plaza_entry: w.in },
+    spots: {
+      plaza_entry: w.in,
+      shotengai_shrine: w.nooks.shotengai_shrine,
+      shotengai_back_alley: w.nooks.shotengai_back_alley,
+      shotengai_pine_bench: w.nooks.shotengai_pine_bench,
+    },
     seats: {},
     people: {},
     zones: { plaza_exit: (x, z) => z > w.exitZ },

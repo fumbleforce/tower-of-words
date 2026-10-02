@@ -9,7 +9,8 @@ export const SHOTENGAI_DETAILS = {
     karaoke: { label: 'Karaoke', kind: 'thing', verb: 'Go in' },
     izakaya: { label: 'Izakaya', kind: 'thing', verb: 'Go in' },
   },
-  spots: ['plaza_entry'],
+  spots: ['plaza_entry', 'shotengai_shrine', 'shotengai_back_alley', 'shotengai_pine_bench'],
+  nooks: ['shotengai_shrine', 'shotengai_back_alley', 'shotengai_pine_bench'], // docs/game/places.md, "Nooks"
   seats: [],
   zones: ['plaza_exit'],
   people: [],

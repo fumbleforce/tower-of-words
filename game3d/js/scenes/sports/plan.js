@@ -16,6 +16,7 @@
 import * as LAYOUT from '../island-layout.js';
 import * as E from '../plaza/east-plan.js';
 import * as O from '../office-quarter/plan.js';
+import { nookWalks } from '../outdoor/nook-walks.js';
 
 export const CHUNK = 'sports';
 const AT = LAYOUT.CHUNKS[CHUNK].at;
@@ -63,7 +64,34 @@ const I_WALKS = [
   [GATE_WALK[0], GATE_WALK[1], GATE_WALK[2] + 0.3, GATE_WALK[3] + 0.1],
   [RES_WALK[0], RES_WALK[1], RES_WALK[2] - 0.1, RES_WALK[3] - 0.15],
 ];
-export const WALKS = I_WALKS.map(rect);
+// the nooks (outdoor/nooks.js), in the chunk's frame: drinks machines in the gap between the pool deck's fence and
+// the courts, north off the courts walk through a gap in its hedge (COURTSIDE, island x); a bench on the grass
+// between the pool walk and the grove behind the gym, looking back at the walk
+export const COURTSIDE = [POOL_WALK[1] + 16.4, POOL_WALK[1] + 18.8];
+const [CS0, CS1] = [COURTSIDE[0] - AT[0], COURTSIDE[1] - AT[0]],
+  CSZ = COURTS_WALK[2] - AT[1];
+export const NOOKS = [
+  {
+    id: 'sports_courtside',
+    kit: 'vending',
+    at: [CS0 + 0.7, CSZ - 1.5],
+    face: Math.PI / 2,
+    binSide: -1,
+    walks: [[CS0, CS1, CSZ - 2.6, CSZ + 0.1]],
+    pads: [[CS0, CS1, CSZ - 2.6, CSZ - 0.02]],
+  },
+  {
+    id: 'sports_grove_bench',
+    kit: 'bench',
+    at: [-2.8, -24.6],
+    face: Math.PI,
+    sides: 'right',
+    tree: 'keyaki',
+    walks: [[-4.3, -0.95, -26.2, -23.6]],
+    pads: [[-4.3, -1.15, -26.2, -23.6]],
+  },
+];
+export const WALKS = [...I_WALKS.map(rect), ...nookWalks(NOOKS)];
 
 // the furniture, in the island frame: post lamps on the lane's south verge every 8 (the one by the gym's corner is
 // link.js's), on the pool walk's east edge and

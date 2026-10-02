@@ -7,7 +7,8 @@ export const SPORTS_DETAILS = {
     gym: { label: 'Gym', kind: 'thing', verb: 'Go in' },
     pool: { label: 'Pool', kind: 'thing', verb: 'Go in' },
   },
-  spots: ['north_entry'],
+  spots: ['north_entry', 'sports_courtside', 'sports_grove_bench'],
+  nooks: ['sports_courtside', 'sports_grove_bench'], // docs/game/places.md, "Nooks"
   seats: [],
   zones: ['north_exit', 'east_exit', 'west_exit'],
   people: [],
