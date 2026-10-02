@@ -1,0 +1,188 @@
+{
+  "title": "The old works, walkable",
+  "date": "2026-10-02",
+  "by": "claude-agent:works",
+  "caption": "The seventh south-half district from island-half-1: north of the harbour, the old works. Walk up the works lane out of the supply yard, or up the works street off the office street, and back down either. The lane runs past the old power plant to the chimney's foot. The yard passes the works shed, the factory's chained gates, the empty gatehouse and the server hall, and the research walk ends at Amakawa Research. Five nooks are off the way, with nothing in them yet. It also loads with ?place=works. Every door is chained or shut.",
+  "sections": [
+    {
+      "title": "The works lane",
+      "caption": "Before: the lane stopped at bollards a few steps out of the supply yard, with plain blocks beyond. After: the lane runs on north between the harbour office and the server hall, past the power plant's chained door (はつでんしょ on a plate, ivy up the corner), and ends under the pipe bridge at the chimney's foot.",
+      "images": [
+        {
+          "id": "before-lane-desk",
+          "image": "bible/shots/showcase/works-1/before-lane-desk.webp",
+          "caption": "Before, desktop"
+        },
+        {
+          "id": "before-lane-phone",
+          "image": "bible/shots/showcase/works-1/before-lane-phone.webp",
+          "caption": "Before, phone"
+        },
+        {
+          "id": "after-lane-desk",
+          "image": "bible/shots/showcase/works-1/after-lane-desk.webp",
+          "caption": "After, desktop"
+        },
+        {
+          "id": "after-lane-phone",
+          "image": "bible/shots/showcase/works-1/after-lane-phone.webp",
+          "caption": "After, phone"
+        }
+      ]
+    },
+    {
+      "title": "The works yard and the factory",
+      "caption": "Before: grass and grey boxes. After: worn, cracked concrete, an old siding coming out of the factory's teal gates (chained, 立入禁止, 安全第一 above) and running along the yard to a buffer stop. Also the works shed, the gatehouse with its barrier raised, the transformer lot, and the server hall's door on its east face (サーバーとう, shut).",
+      "images": [
+        {
+          "id": "before-yardview-desk",
+          "image": "bible/shots/showcase/works-1/before-yardview-desk.webp",
+          "caption": "Before, desktop"
+        },
+        {
+          "id": "before-yardview-phone",
+          "image": "bible/shots/showcase/works-1/before-yardview-phone.webp",
+          "caption": "Before, phone"
+        },
+        {
+          "id": "after-overview-desk",
+          "image": "bible/shots/showcase/works-1/after-overview-desk.webp",
+          "caption": "After, from higher up, desktop"
+        },
+        {
+          "id": "after-overview-phone",
+          "image": "bible/shots/showcase/works-1/after-overview-phone.webp",
+          "caption": "After, from higher up, phone"
+        },
+        {
+          "id": "after-gate-desk",
+          "image": "bible/shots/showcase/works-1/after-gate-desk.webp",
+          "caption": "After, the factory's gates, desktop"
+        },
+        {
+          "id": "after-gate-phone",
+          "image": "bible/shots/showcase/works-1/after-gate-phone.webp",
+          "caption": "After, the factory's gates, phone"
+        },
+        {
+          "id": "after-hall-desk",
+          "image": "bible/shots/showcase/works-1/after-hall-desk.webp",
+          "caption": "After, the server hall's door, desktop"
+        },
+        {
+          "id": "after-hall-phone",
+          "image": "bible/shots/showcase/works-1/after-hall-phone.webp",
+          "caption": "After, the server hall's door, phone"
+        }
+      ]
+    },
+    {
+      "title": "The works street and the research walk",
+      "caption": "Before: the street's mouth stopped at bollards. After: old asphalt with faded edge lines and patches, utility poles and their wires, the works' chain-link fence behind them, the recycling centre's door (リサイクルセンター, shut), and the research walk to Amakawa Research's door (けんきゅうじょ, shut).",
+      "images": [
+        {
+          "id": "before-street-desk",
+          "image": "bible/shots/showcase/works-1/before-street-desk.webp",
+          "caption": "Before, desktop"
+        },
+        {
+          "id": "before-street-phone",
+          "image": "bible/shots/showcase/works-1/before-street-phone.webp",
+          "caption": "Before, phone"
+        },
+        {
+          "id": "after-street-desk",
+          "image": "bible/shots/showcase/works-1/after-street-desk.webp",
+          "caption": "After, the street, desktop"
+        },
+        {
+          "id": "after-street-phone",
+          "image": "bible/shots/showcase/works-1/after-street-phone.webp",
+          "caption": "After, the street, phone"
+        },
+        {
+          "id": "after-research-desk",
+          "image": "bible/shots/showcase/works-1/after-research-desk.webp",
+          "caption": "After, the research walk and the weather station, desktop"
+        },
+        {
+          "id": "after-research-phone",
+          "image": "bible/shots/showcase/works-1/after-research-phone.webp",
+          "caption": "After, the research walk and the weather station, phone"
+        }
+      ]
+    },
+    {
+      "title": "Nooks",
+      "caption": "Corners off the way for later secrets, encounters or collectibles, each reachable on foot, with nothing in them yet: the chimney's foot, the smoking corner behind the server hall, the transformer lot, and the weather station by Amakawa Research. The fifth, the gatehouse window, is in the factory gate pictures.",
+      "images": [
+        {
+          "id": "nook-chimney-desk",
+          "image": "bible/shots/showcase/works-1/nook-chimney-desk.webp",
+          "caption": "The chimney's foot, desktop"
+        },
+        {
+          "id": "nook-chimney-phone",
+          "image": "bible/shots/showcase/works-1/nook-chimney-phone.webp",
+          "caption": "The chimney's foot, phone"
+        },
+        {
+          "id": "nook-corner-desk",
+          "image": "bible/shots/showcase/works-1/nook-corner-desk.webp",
+          "caption": "The smoking corner, desktop"
+        },
+        {
+          "id": "nook-corner-phone",
+          "image": "bible/shots/showcase/works-1/nook-corner-phone.webp",
+          "caption": "The smoking corner, phone"
+        },
+        {
+          "id": "nook-lot-desk",
+          "image": "bible/shots/showcase/works-1/nook-lot-desk.webp",
+          "caption": "The transformer lot, desktop"
+        },
+        {
+          "id": "nook-lot-phone",
+          "image": "bible/shots/showcase/works-1/nook-lot-phone.webp",
+          "caption": "The transformer lot, phone"
+        },
+        {
+          "id": "nook-station-desk",
+          "image": "bible/shots/showcase/works-1/nook-station-desk.webp",
+          "caption": "The weather station, desktop"
+        },
+        {
+          "id": "nook-station-phone",
+          "image": "bible/shots/showcase/works-1/nook-station-phone.webp",
+          "caption": "The weather station, phone"
+        }
+      ]
+    },
+    {
+      "title": "After work",
+      "caption": "The arm lamps and the server hall's door are lit. The factory, the plant and the gatehouse stay dark.",
+      "images": [
+        {
+          "id": "after-eve-desk",
+          "image": "bible/shots/showcase/works-1/after-eve-desk.webp",
+          "caption": "After work, desktop"
+        },
+        {
+          "id": "after-eve-phone",
+          "image": "bible/shots/showcase/works-1/after-eve-phone.webp",
+          "caption": "After work, phone"
+        }
+      ]
+    }
+  ],
+  "links": [
+    {
+      "label": "Play it",
+      "href": "game3d/index.html?place=works"
+    },
+    {
+      "label": "Places doc",
+      "href": "docs/game/places.md"
+    }
+  ]
+}

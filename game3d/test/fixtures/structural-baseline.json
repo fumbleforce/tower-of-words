@@ -37,11 +37,11 @@
       "machineOpen": [
         "game3d/js/places/office.js"
       ],
-      "private_mode": [
-        "game3d/js/settings.js"
-      ],
       "say_tip": [
         "game3d/js/ui.js"
+      ],
+      "private_mode": [
+        "game3d/js/settings.js"
       ]
     },
     "prefix": {
@@ -110,7 +110,8 @@
       "east_coast": "game3d/js/places/east-coast.js",
       "sports": "game3d/js/places/sports.js",
       "office_quarter": "game3d/js/places/office-quarter.js",
-      "harbour": "game3d/js/places/harbour.js"
+      "harbour": "game3d/js/places/harbour.js",
+      "works": "game3d/js/places/works.js"
     },
     "events": {
       "train": {
@@ -128,10 +129,11 @@
       "east_coast": {},
       "sports": {},
       "office_quarter": {},
+      "harbour": {},
+      "works": {},
       "office": {
         "sat_down": "sitDown"
-      },
-      "harbour": {}
+      }
     },
     "speakers": {
       "eric": {
@@ -263,7 +265,8 @@
     "east_coast",
     "sports",
     "office_quarter",
-    "harbour"
+    "harbour",
+    "works"
   ],
   "nodes": [
     "train:intro",
@@ -508,6 +511,13 @@
     "harbour:arrive",
     "harbour:shut",
     "harbour:to_offices",
+    "harbour:to_works",
+    "harbour:to_works_street",
+    "works:arrive",
+    "works:chained",
+    "works:shut",
+    "works:to_harbour",
+    "works:to_street",
     "transitions:train_to_gate",
     "transitions:gate_to_forecourt",
     "transitions:forecourt_to_office",
@@ -1368,6 +1378,30 @@
     {
       "from": "harbour:to_offices",
       "to": "office_quarter:arrive",
+      "kind": "trip",
+      "labels": []
+    },
+    {
+      "from": "harbour:to_works",
+      "to": "works:arrive",
+      "kind": "trip",
+      "labels": []
+    },
+    {
+      "from": "harbour:to_works_street",
+      "to": "works:arrive",
+      "kind": "trip",
+      "labels": []
+    },
+    {
+      "from": "works:to_harbour",
+      "to": "harbour:arrive",
+      "kind": "trip",
+      "labels": []
+    },
+    {
+      "from": "works:to_street",
+      "to": "harbour:arrive",
       "kind": "trip",
       "labels": []
     },

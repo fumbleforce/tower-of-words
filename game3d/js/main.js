@@ -39,6 +39,7 @@ import { eastCoastPlace as east_coast } from './places/east-coast.js';
 import { sportsPlace as sports } from './places/sports.js';
 import { officeQuarterPlace as office_quarter } from './places/office-quarter.js';
 import { harbourPlace as harbour } from './places/harbour.js';
+import { worksPlace as works } from './places/works.js';
 import { showEnd } from './end.js';
 import { snapshot as snapshotOf, crossfade } from './places/crossfade.js';
 import { installSim, sim, stepAmbient, save, loadSave, restore, clearSave } from './sim.js';
@@ -76,6 +77,7 @@ const PLACES = {
   sports,
   office_quarter,
   harbour,
+  works,
 };
 assertRegistered(Object.keys(PLACE_FILES), PLACES, 'place factories');
 

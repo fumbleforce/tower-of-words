@@ -21,6 +21,7 @@ import { BATH_PATHS, BATH_GREEN, BATH_COAST } from './island-baths.js';
 import { SPORT_PATHS } from './island-sports.js';
 import { OFFICE_PATHS } from './island-offices.js';
 import { HARBOUR_PATHS, HARBOUR_COAST } from './island-harbour.js';
+import { WORKS_PATHS } from './island-works.js';
 export * from './island-plan.js'; // the south half planned for day 2, drawn on the map only
 import { CHUNKS } from './island-chunks.js'; // each built place's frame
 export { CHUNKS };
@@ -206,6 +207,15 @@ const DETAILS = {
     'The supply quay’s warehouse on the yard’s north side, its roller doors to the yard (the harbour chunk builds it).',
   dock_hut: 'The foreman’s hut by the supply pier’s root (the harbour chunk builds it).',
   ferry_terminal: 'The ferry waiting room and ticket window on the landing’s north side (the harbour chunk builds it).',
+  // the old works (the works chunk builds them, scenes/works/buildings.js)
+  nw_old: 'The old power plant: a tall concrete-framed hall, its door on the works lane (the works chunk builds it).',
+  chimney: 'The power plant’s chimney at the works lane’s head, round, banded red and white at the top.',
+  factory: 'The old factory under saw-tooth roofs, its chained gates on the factory apron off the works yard.',
+  works_shed: 'A corrugated shed on the yard’s north side, its roller door to the yard.',
+  works_kiosk: 'The works’ empty gatehouse beside the factory apron.',
+  works_blue: 'The old server hall, low, a blue band round it; its door on its east face, on the hall apron.',
+  w2: 'The recycling centre, three storeys, its door on the works street.',
+  n4: 'Amakawa Research, six storeys; its door on its west face at the end of the research walk.',
   m6: 'Five storeys of offices north of the canteen’s loading yard; its door in the middle of its south face, on a walk from the yard.',
   r3: 'Three storeys on the north street’s east side, north of block_e3; its door on that street.',
 };
@@ -262,6 +272,7 @@ export const PATHS = [
   ...SPORT_PATHS, // the sports lane, the pool and the courts walk (scenes/island-sports.js)
   ...OFFICE_PATHS, // the office street and gym_link (scenes/island-offices.js)
   ...HARBOUR_PATHS, // the harbour walk, the yard, the landing and the piers (scenes/island-harbour.js)
+  ...WORKS_PATHS, // the works lane, yard, street and research walk (scenes/island-works.js)
   {
     id: 'beam',
     kind: 'beam',

@@ -1153,6 +1153,16 @@
           "kind": "thing",
           "verb": "Go"
         },
+        "works_lane": {
+          "label": "To the old works",
+          "kind": "thing",
+          "verb": "Go"
+        },
+        "works_street": {
+          "label": "To the works street",
+          "kind": "thing",
+          "verb": "Go"
+        },
         "ferry_terminal": {
           "label": "Ferry terminal",
           "kind": "thing",
@@ -1169,7 +1179,63 @@
       ],
       "seats": [],
       "zones": [
-        "east_exit"
+        "east_exit",
+        "lane_exit",
+        "street_exit"
+      ],
+      "people": [],
+      "hooks": []
+    },
+    "works": {
+      "things": {
+        "harbour_lane": {
+          "label": "To the harbour",
+          "kind": "thing",
+          "verb": "Go"
+        },
+        "office_street": {
+          "label": "To the office street",
+          "kind": "thing",
+          "verb": "Go"
+        },
+        "old_power_plant": {
+          "label": "Old power plant",
+          "kind": "thing",
+          "verb": "Go in"
+        },
+        "old_factory": {
+          "label": "Old factory",
+          "kind": "thing",
+          "verb": "Go in"
+        },
+        "server_hall": {
+          "label": "Server hall",
+          "kind": "thing",
+          "verb": "Go in"
+        },
+        "recycling_centre": {
+          "label": "Recycling centre",
+          "kind": "thing",
+          "verb": "Go in"
+        },
+        "research_lab": {
+          "label": "Amakawa Research",
+          "kind": "thing",
+          "verb": "Go in"
+        }
+      },
+      "spots": [
+        "lane_entry",
+        "chimney_foot",
+        "smoking_corner",
+        "gatehouse_window",
+        "transformer_lot",
+        "weather_station"
+      ],
+      "seats": [],
+      "zones": [
+        "lane_exit",
+        "street_exit"
       ],
       "people": [],
       "hooks": []

@@ -13,6 +13,7 @@ export const PLACE_FILES = {
   sports: 'game3d/js/places/sports.js',
   office_quarter: 'game3d/js/places/office-quarter.js',
   harbour: 'game3d/js/places/harbour.js',
+  works: 'game3d/js/places/works.js',
 };
 // Place names for the save list and the end-of-day photos.
 export const PLACE_NAMES = {
@@ -29,6 +30,7 @@ export const PLACE_NAMES = {
   sports: 'Gym and pool',
   office_quarter: 'Office street',
   harbour: 'Harbour',
+  works: 'Old works',
 };
 export const NEXT = { train: 'gate', gate: 'forecourt', forecourt: 'office', dorm_court: 'dorms' };
 // The other moves, played by the story's `trip` step: the walks between outdoor chunks, and the way home after work
@@ -38,7 +40,8 @@ export const NEXT = { train: 'gate', gate: 'forecourt', forecourt: 'office', dor
 // dorm courtyard's gate. East along the dorm row from the east lane's dorm street is the east coast, up to the
 // onsen; north up the east lane's north street is the sports ground, whose courts walk leads on to the onsen path
 // in the east coast, so the three make a loop; west past the gym's corner is the office quarter, and west along
-// its street the harbour, which leads only back.
+// its street the harbour; north out of the harbour, up the works lane or up the works street, are the old works,
+// whose two ways both lead back into the harbour, so the two make a loop.
 export const TRIPS = {
   forecourt: ['plaza'],
   plaza: ['forecourt', 'dorm_court', 'shotengai', 'east_lane'],
@@ -48,7 +51,8 @@ export const TRIPS = {
   east_coast: ['east_lane', 'sports'],
   sports: ['east_lane', 'east_coast', 'office_quarter'],
   office_quarter: ['sports', 'harbour'],
-  harbour: ['office_quarter'],
+  harbour: ['office_quarter', 'works'],
+  works: ['harbour'],
 };
 export const canTravel = (from, to) => NEXT[from] === to || !!TRIPS[from]?.includes(to);
 export const STORY_FILES = [
@@ -65,5 +69,6 @@ export const STORY_FILES = [
   'sports',
   'office_quarter',
   'harbour',
+  'works',
   'transitions',
 ];

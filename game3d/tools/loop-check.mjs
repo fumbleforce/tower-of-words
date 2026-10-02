@@ -1,7 +1,9 @@
 // Walks the outdoor chunks through their trips, the way a player does: the first loop round the south-east of the
 // island (up the east lane's north street into the sports ground, east along the courts walk into the east coast,
 // back west into the sports ground and down the north street into the east lane; on the way, out west to the office
-// quarter and back), along the dorm row to the east coast and back, into the shotengai, to the plaza and east again.
+// quarter, on west to the harbour, round the loop through the old works (up the works lane, down the works street,
+// up it again, down the lane) and back), along the dorm row to the east coast and back, into the shotengai, to the
+// plaza and east again.
 // Each leg walks Eric (the game's own walkTo) into the next exit zone and waits for the next place; it prints each
 // arrival with where Eric stands, saves a shot per arrival, and FAILs on a leg that doesn't arrive, on any page
 // error, or when Eric leaves the frame at any moment of the walk in and the camera letting go (his feet and head,
@@ -20,6 +22,12 @@ const base = process.env.BASE || 'game3d';
 const LEGS = [
   ['east_lane', [[0, -35.4]], 'sports'],
   ['sports', 'office_street', 'office_quarter'],
+  ['office_quarter', 'harbour', 'harbour'],
+  ['harbour', 'works_lane', 'works'],
+  ['works', 'office_street', 'harbour'],
+  ['harbour', 'works_street', 'works'],
+  ['works', 'harbour_lane', 'harbour'],
+  ['harbour', 'office_street', 'office_quarter'],
   ['office_quarter', 'sports_lane', 'sports'],
   [
     'sports',

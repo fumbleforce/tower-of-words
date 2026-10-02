@@ -1,6 +1,6 @@
 // The harbour's ground away from the quays (harbour/plan.js), in the island frame:
 //   the office street's west end: the office quarter's street (office-quarter/grounds.js streetSteps) from the yard
-//   to in front of Amakawa Trading, the works street's mouth laid a little way north with bollards across; on its
+//   to in front of Amakawa Trading, the works street's mouth (the works' asphalt, works/grounds.js); on its
 //   south side west of the harbour walk a verge and the rocks beyond; Amakawa Trading's front (office-quarter/row.js)
 //   the harbour walk: pale slabs between borders, kerbed, south from the street to a row of bollards; a bay off its
 //   sea side with two benches looking west; lamps on its landward edge
@@ -10,16 +10,16 @@
 //   the rocks: the coast kit's sea wall, armour rocks and surf (outdoor/coast.js) north-west of the landing and from
 //   the yard round to the coast walk, at the harbour's water level
 import * as THREE from 'three';
-import { kerb, kerbRect } from '../outdoor/edges.js';
+import { kerbRect } from '../outdoor/edges.js';
 import { lamps, bench, bollard, fingerSign, STEEL } from '../outdoor/furniture.js';
 import { pine, keyaki, sakura, maple, planter, treePit } from '../outdoor/planting.js';
 import { belt } from '../dorm-court/cluster-yards.js';
 import { walk } from '../plaza/east-lane.js';
-import { laneField, verge } from '../outdoor/lane.js';
+import { verge } from '../outdoor/lane.js';
 import { GRANITE } from '../outdoor/paving.js';
 import { coastSteps } from '../outdoor/coast.js';
+import { worksStreet } from '../works/grounds.js';
 import { streetSteps, planting } from '../office-quarter/grounds.js';
-import { ORIGIN } from '../office-quarter/link.js';
 import * as O from '../office-quarter/plan.js';
 import { ROCKS_NW, ROCKS_SE } from '../island-harbour.js';
 import { WEST_COAST, WEST_TREES } from '../island-west.js';
@@ -30,9 +30,7 @@ const { STREET: S, HW, BAY } = P;
 // the street's west end, the works street's mouth, and the south side's verge west of the walk
 function* street(pv, p, lights, signRoot) {
   yield* streetSteps(pv, p, lights, [P.YARD[1], P.EAST_END + 4]);
-  const W = P.WORKS_STREET;
-  laneField(pv, [W[0], W[1], S[2] - 2.2, S[2]], { along: 'z', origin: ORIGIN });
-  for (const x of [W[0], W[1]]) kerb(p, [x, S[2] - 2.2], [x, S[2]], { off: x === W[0] ? -0.08 : 0.08 });
+  worksStreet(pv, p, [P.STREET_TOP - 0.9, S[2]]);
   verge(p, [P.YARD[1], S[3]], [HW[0] - 1.5, S[3]], 's', { seed: 151 });
   fingerSign(signRoot, p, ...O.SIGNS.west, O.WEST_BOARDS);
   fingerSign(signRoot, p, ...P.SIGNS.yard, [

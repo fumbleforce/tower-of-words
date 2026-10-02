@@ -33,32 +33,6 @@ export const PLAN_PATHS = [
     rect: [6, -33, 15.79, -30],
     detail: 'The back lane carried west past the canteen’s loading yard to the quarter street.',
   },
-  {
-    id: 'works_street',
-    kind: 'lane',
-    rect: [-50, -106, -47, -55.5],
-    detail: 'North from the office street up the quarter’s west side to the works yard.',
-  },
-  {
-    id: 'works_lane',
-    kind: 'lane',
-    rect: [-83.5, -114.5, -80.5, -98],
-    detail:
-      'From the supply yard north between the harbour office and the server hall, past the works yard, to the power plant.',
-  },
-  {
-    id: 'works_yard',
-    kind: 'court',
-    rect: [-80.5, -106, -47, -102],
-    detail:
-      'The old works’ cracked concrete yard between the factory’s sheds and the server hall, to the works street.',
-  },
-  {
-    id: 'research_walk',
-    kind: 'walk',
-    rect: [-47, -104.5, -35.2, -103],
-    detail: 'From the works yard’s east end to Amakawa Research’s door on its west face.',
-  },
 ];
 
 // Planned green, coarse.

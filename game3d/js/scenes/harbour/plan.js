@@ -5,19 +5,21 @@
 // the ferry landing meets the supply yard.
 //
 //   the office street's west end: from in front of Amakawa Trading (where the office quarter takes over) west past
-//   the harbour walk's mouth and the works street's to the yard
+//   the harbour walk's mouth and the works street's to the yard; the works street's mouth walked a few steps north,
+//   where the works take over (works/plan.js)
 //   the harbour walk: south from the street inland of the rocks, a bay with benches looking out to sea halfway, to a
 //   row of bollards where it meets the coast walk (which goes on south to the station, not walked yet)
 //   the supply yard: concrete, quays on its west and south sides; the warehouse on its north side, its roller doors
 //   to the yard; containers in blocks; the crane and the foreman's hut by the supply pier's root; a painted footway
 //   across it from the street to the landing; the harbour office's door on its north edge, and the works lane's
-//   mouth beside it, walked a few steps to a row of bollards (it goes on north to the old works, not walked yet)
+//   mouth beside it, walked a few steps north, where the works take over
 //   the supply pier: south off the yard's south quay, the freighter moored along its west face
 //   the ferry landing: west of the yard, the terminal's front on its north side; the ferry pier south off its
 //   south-west corner, the ferry moored along its west face
 import * as LAYOUT from '../island-layout.js';
 import { faces, faceAt, tOf, bayOf } from '../outdoor/block-face.js';
 import * as O from '../office-quarter/plan.js';
+import * as W from '../works/plan.js';
 
 export const CHUNK = 'harbour';
 const AT = LAYOUT.CHUNKS[CHUNK].at;
@@ -28,7 +30,6 @@ export const { inRect } = O;
 const mid = (a, b) => (a + b) / 2;
 const box = ([x0, z0, x1, z1]) => [x0, x1, z0, z1];
 const path = (id) => box(LAYOUT.PATHS.find((p) => p.id === id).rect);
-const plan = (id) => box(LAYOUT.PLAN_PATHS.find((p) => p.id === id).rect);
 const building = (id) => LAYOUT.BUILDINGS.find((b) => b.id === id);
 
 export const SEA_Y = -0.9; // the water in the harbour, the quays' tops being y 0
@@ -38,8 +39,8 @@ export const YARD = path('supply_yard');
 export const LANDING = path('ferry_landing');
 export const FERRY_PIER = path('ferry_pier');
 export const SUPPLY_PIER = path('supply_pier');
-export const WORKS_LANE = plan('works_lane');
-export const WORKS_STREET = plan('works_street');
+export const WORKS_LANE = path('works_lane');
+export const WORKS_STREET = path('works_street');
 export const TERMINAL = box(building('ferry_terminal').rect);
 export const OFFICE = box(building('works_orange').rect);
 export const SHED = box(building('dock_shed').rect);
@@ -48,7 +49,8 @@ export const SZ = mid(STREET[2], STREET[3]);
 
 export const EAST_END = O.HARBOUR_ARRIVE + 0.3; // the street is walked west from here; the office quarter's beyond
 export const WALK_END = HW[3] - 2; // the harbour walk is walked south to here; bollards across it
-export const LANE_END = YARD[2] - 3; // the works lane's mouth is walked this far north; bollards
+export const LANE_END = W.LANE_SEAM - 0.3; // the works lane's mouth is walked this far north; the works' beyond
+export const STREET_TOP = W.STREET_SEAM - 0.2; // the works street's mouth this far north; the works' beyond
 export const EDGE = 0.4; // how far from a quay's edge he can walk
 // the bay off the harbour walk's sea side, halfway down: two benches looking west over the rocks
 export const BAY = [HW[0] - 2.2, HW[0], -42.4, -38.4];
@@ -164,12 +166,8 @@ export const BEACONS = [
   [FERRY_PIER[1] - 0.5, FERRY_PIER[3] - 0.5],
   [SUPPLY_PIER[1] - 0.5, SUPPLY_PIER[3] - 0.5],
 ];
-// bollards across the walk's south end, the works lane's top and the works street's mouth
-export const BOLLARDS = [
-  { a: [HW[0] + 0.3, WALK_END + 0.35], b: [HW[1] - 0.3, WALK_END + 0.35] },
-  { a: [WORKS_LANE[0] + 0.4, LANE_END - 0.35], b: [WORKS_LANE[1] - 0.4, LANE_END - 0.35] },
-  { a: [WORKS_STREET[0] + 0.5, STREET[2] - 1.6], b: [WORKS_STREET[1] - 0.5, STREET[2] - 1.6] },
-];
+// bollards across the walk's south end
+export const BOLLARDS = [{ a: [HW[0] + 0.3, WALK_END + 0.35], b: [HW[1] - 0.3, WALK_END + 0.35] }];
 
 // the walkable rects, in the island frame
 const I_WALKS = [
@@ -181,6 +179,7 @@ const I_WALKS = [
   [FERRY_PIER[0] + EDGE, FERRY_PIER[1] - EDGE, FERRY_PIER[2] - EDGE - 0.1, FERRY_PIER[3] - EDGE],
   [SUPPLY_PIER[0] + EDGE, SUPPLY_PIER[1] - EDGE, SUPPLY_PIER[2] - EDGE - 0.1, SUPPLY_PIER[3] - EDGE],
   [WORKS_LANE[0], WORKS_LANE[1], LANE_END, YARD[2] + 0.1],
+  [WORKS_STREET[0], WORKS_STREET[1], STREET_TOP, STREET[2] + 0.1],
 ];
 export const WALKS = I_WALKS.map(rect);
 
@@ -220,14 +219,31 @@ export const DOORS = FRONTS.map((k) => {
   };
 });
 
-// the way out ({ edge, lane, zone } as the office quarter's EXITS): east along the street in front of Amakawa Trading,
-// to the office quarter; where he comes in from there: walking west along the street, from where its way out ends
-// (office-quarter/plan.js EXITS) to past the harbour walk's mouth
+// the ways out ({ edge, lane, zone } as the office quarter's EXITS): east along the street in front of Amakawa
+// Trading, to the office quarter; where he comes in from there: walking west along the street, from where its way
+// out ends (office-quarter/plan.js EXITS) to past the harbour walk's mouth. North up the works lane and up the works
+// street, both to the works, and back down them from where the works' ways out end (arrive, to in; works/plan.js
+// WAYS)
+const [LX, SX] = [W.WAYS.lane.in[0], W.WAYS.street.in[0]];
 export const EXITS = {
   office_quarter: {
     edge: pt([EAST_END - 0.2, SZ]),
     lane: pt([EAST_END - 1.6, SZ]),
     zone: rect([EAST_END - 2.4, EAST_END + 0.2, STREET[2] - 0.5, STREET[3] + 0.5]),
+  },
+  works_lane: {
+    edge: pt(W.WAYS.lane.in),
+    lane: pt([LX, W.LANE_SEAM + 1.1]),
+    zone: rect([WORKS_LANE[0], WORKS_LANE[1], LANE_END, W.LANE_SEAM + 1.5]),
+    arrive: pt(W.WAYS.lane.out),
+    in: pt([LX, W.WAYS.lane.out[1] + 2.7]),
+  },
+  works_street: {
+    edge: pt(W.WAYS.street.in),
+    lane: pt([SX, W.STREET_SEAM + 1.4]),
+    zone: rect([WORKS_STREET[0], WORKS_STREET[1], STREET_TOP, W.STREET_SEAM + 1.8]),
+    arrive: pt(W.WAYS.street.out),
+    in: pt([SX, SZ]),
   },
 };
 export const ARRIVE_EDGE = pt([O.WEST_END + 0.2, SZ]);
