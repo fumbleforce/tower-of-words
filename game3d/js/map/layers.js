@@ -11,12 +11,12 @@ export const INK = {
   walk: '#ff6b6b',
 };
 
-function shape(ctx, P, pts, close = true) {
+export function shape(ctx, P, pts, close = true) {
   ctx.beginPath();
   pts.forEach(([x, z], i) => (i ? ctx.lineTo(...P(x, z)) : ctx.moveTo(...P(x, z))));
   if (close) ctx.closePath();
 }
-function rectPts([x0, z0, x1, z1]) {
+export function rectPts([x0, z0, x1, z1]) {
   return [
     [x0, z0],
     [x1, z0],
@@ -24,14 +24,14 @@ function rectPts([x0, z0, x1, z1]) {
     [x0, z1],
   ];
 }
-function circlePts([x, z, r], n = 40) {
+export function circlePts([x, z, r], n = 40) {
   return Array.from({ length: n }, (_, i) => [
     x + r * Math.cos((i / n) * 2 * Math.PI),
     z + r * Math.sin((i / n) * 2 * Math.PI),
   ]);
 }
 // a polyline of width w as its outline
-function ribbon(line, w) {
+export function ribbon(line, w) {
   const left = [],
     right = [];
   // the unit normal of the piece from a to b

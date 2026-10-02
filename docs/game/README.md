@@ -13,6 +13,7 @@ The inboxes (collab/to-codex.md, collab/to-claude.md) and dated notes record mes
 | The island, the company, Eric's job, kotodama, the commute (there is none), what kind of game this is, what the story never does | [setting.md](setting.md) |
 | A person: age, job, home, routine, who they know, how they talk, approved look (hair, eyes, outfit), names on screen | [cast.md](cast.md) |
 | A place: things, spots, seats, zones, who is there when, small moments; getting from one place to the next | [places.md](places.md) |
+| The island's south half planned for day 2: every place, who is there, doors, connections, Japanese hooks; the planned streets | [island.md](island.md) |
 | A storyline: premise, cast, beats, choices and flags, words taught, nodes, what is built | [stories/](stories/), one file each, listed under [Storylines](#storylines) |
 | Every Japanese word (reading, meaning, kind), the words day 1 teaches, when a word counts as known | [words.md](words.md) |
 | The clock, schedules, bonds, memory, gifts and prices, typing and word practice, overheard Japanese, kotodama effects, saving | [systems.md](systems.md) |

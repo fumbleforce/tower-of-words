@@ -18,6 +18,7 @@ import { WEST_PATHS, WEST_GREEN, WEST_MOWN, WEST_COAST } from './island-west.js'
 import { NORTH_PATHS, NORTH_GREEN } from './island-north.js';
 import { DORM_PATHS, DORM_GREEN } from './island-dorms.js';
 import { SOUTH_PATHS, SOUTH_SAND, SHORE } from './island-south.js';
+export * from './island-plan.js'; // the south half planned for day 2, drawn on the map only
 
 export const UNIT = 1.5;
 

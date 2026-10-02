@@ -14,7 +14,7 @@
 import { DEFAULT_SPEAKERS, PORTRAITS, ITEMS, PLACE_DETAILS, SHARED_THINGS, isEngineFlag } from '../../game3d/js/narrative/contracts.js';
 import { storyBondGate } from '../../game3d/js/bonds/gates.js';
 import { PLACE_FILES } from '../../game3d/js/places/definitions.js';
-import { CHUNKS } from '../../game3d/js/scenes/island-layout.js';
+import { CHUNKS, PLACES, PLAN_PATHS } from '../../game3d/js/scenes/island-layout.js';
 import fs from 'node:fs';
 import path from 'node:path';
 import { pathToFileURL, fileURLToPath } from 'node:url';
@@ -267,6 +267,23 @@ function checkIsland() {
   for (const place of Object.keys(STORY)) if (place !== 'lift' && !CHUNKS[place]) bad(file, `"Where the places sit on the island": \`${place}\` is built but not placed`);
 }
 
+// island.md: every place table row (Id, Place "English (日本語)") against PLACES, and the "Streets and paths" table
+// against PLAN_PATHS, both in game3d/js/scenes/island-plan.js
+function checkIslandPlan() {
+  const file = 'docs/game/island.md', md = read(path.join(DOCS, 'island.md'));
+  const blocks = md.split(/\n(?!\|)/).map(tableIn).filter((t) => t && t.length && 'Id' in t[0]);
+  const places = blocks.filter((t) => 'Place' in t[0]).flat(), code = new Map(PLACES.map((p) => [p.id, p]));
+  for (const r of places) {
+    const p = code.get(id(r.Id)), want = p && `${p.en} (${p.ja})`;
+    if (!p) bad(file, `place \`${id(r.Id)}\` has no label in island-plan.js PLACES`);
+    else if (r.Place !== want) bad(file, `place \`${p.id}\` is "${r.Place}", island-plan.js has "${want}"`);
+  }
+  const rowIds = new Set(places.map((r) => id(r.Id)));
+  for (const p of PLACES) if (!rowIds.has(p.id)) bad(file, `no row for place \`${p.id}\` (island-plan.js PLACES)`);
+  const paths = table(md, 'Streets and paths', file).map((r) => id(r.Id));
+  if (!same(paths, PLAN_PATHS.map((p) => p.id))) bad(file, `"Streets and paths" lists ${paths.join(', ')}; island-plan.js PLAN_PATHS has ${PLAN_PATHS.map((p) => p.id).join(', ')}`);
+}
+
 // places.md: one "## <Name> (`<place>`)" section per place, with ### Things, Spots, Zones, Who's there when, Small moments
 const smallMoments = {};   // story file -> node ids claimed by places.md
 function checkPlaces(game) {
@@ -427,7 +444,7 @@ if (DUMP) {
   console.log('\nWords taught (type steps):'); for (const [sf, N] of Object.entries(game.nodes)) for (const [n, v] of Object.entries(N)) for (const t of v.types) console.log(`  ${t.word} from ${t.from} in ${sf} ${n}`);
   process.exit(0);
 }
-for (const [area, fn] of [['cast', checkCast], ['places', checkPlaces], ['trips', checkTrips], ['island', checkIsland], ['words', checkWords], ['systems', checkSystems], ['stories', checkStories]]) {
+for (const [area, fn] of [['cast', checkCast], ['places', checkPlaces], ['trips', checkTrips], ['island', checkIsland], ['island plan', checkIslandPlan], ['words', checkWords], ['systems', checkSystems], ['stories', checkStories]]) {
   try { fn(game); } catch (e) { bad(area, e.message); }
 }
 if (pending.length) { console.log(`\nPending (decided, not done yet):`); for (const p of pending) console.log('  ' + p); }
