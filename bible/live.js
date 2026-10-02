@@ -1,7 +1,8 @@
 // Live sources for the world bible. Everything here is read from the repo when the page loads, so it can't go
 // stale: the game facts docs (docs/game/), the story files, the word list, the portrait table, GUIDE.md, the
 // approved-art list, the design notes, folder listings (python's http.server lists folders) and the build ids.
-// Served from the repo root by ./start. Nothing here reads island/private/.
+// Served from the repo root by ./start. Nothing here reads island/private/, except the private Review folder when the
+// private bible (island/private/bible/index.html) names it in window.BIBLE_PRIVATE_REVIEWS.
 
 import { STORY_FILES } from '../game3d/js/places/definitions.js';
 
@@ -70,7 +71,14 @@ export async function loadLive(ROOT, snapshot, extraFiles = []) {
     const out = await Promise.all(dirs.map(async (id) => ({ id, ...(await get(`${folder}/${id}/${file}`) || { broken: true }), feedback: await get(`${folder}/${id}/feedback.json`) })));
     return out.filter((r) => !r.broken).sort((a, b) => String(b.date || '').localeCompare(String(a.date || '')) || a.id.localeCompare(b.id));
   };
-  L.reloadReviews = async () => { L.reviews = await loadItems('reviews', 'review.json'); return L.reviews; };
+  const PRIVATE_REVIEWS = (typeof window !== 'undefined' && window.BIBLE_PRIVATE_REVIEWS) || null;
+  L.reloadReviews = async () => {
+    const pub = await loadItems('reviews', 'review.json');
+    const priv = PRIVATE_REVIEWS ? (await loadItems(PRIVATE_REVIEWS, 'review.json')).map((r) => ({ ...r, private: true })) : [];
+    L.reviews = [...priv, ...pub.filter((r) => !priv.some((p) => p.id === r.id))]
+      .sort((a, b) => String(b.date || '').localeCompare(String(a.date || '')) || a.id.localeCompare(b.id));
+    return L.reviews;
+  };
   L.reloadShowcase = async () => { L.showcase = await loadItems('showcase', 'entry.json'); return L.showcase; };
   // the work tracker's GitHub issues and the stale list, from tools/review_server.py (GET /api/work, 60 s cache).
   // Without that server (a plain static host) L.work stays null and the Work page links to GitHub instead.

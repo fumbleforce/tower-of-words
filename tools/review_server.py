@@ -45,6 +45,8 @@ def review_changed(rid):
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 REVIEWS = os.path.join(ROOT, 'reviews')
 SHOWCASE = os.path.join(ROOT, 'showcase')
+# Private Review items (git-ignored, listed only by the private bible); their answers never go to GitHub
+PRIVATE_REVIEWS = os.path.join(ROOT, 'island', 'private', 'rewards', 'reviews')
 MAX_BODY = 256 * 1024
 FEEDBACK = os.path.join(ROOT, 'notes', 'feedback-game')
 FEEDBACK_LOG = os.path.join(ROOT, 'notes', 'feedback-log')
@@ -203,6 +205,9 @@ class Handler(SimpleHTTPRequestHandler):
             return self._json(403, {'error': 'local only'})
         base, marker, normalise = ANSWERS[kind]
         folder = os.path.join(base, rid)
+        private = False
+        if kind == 'review' and not os.path.isfile(os.path.join(folder, marker)) and os.path.isfile(os.path.join(PRIVATE_REVIEWS, rid, marker)):
+            folder, private = os.path.join(PRIVATE_REVIEWS, rid), True
         if not os.path.isfile(os.path.join(folder, marker)):
             return self._json(404, {'error': f'no {kind} item {rid}'})
         n = int(self.headers.get('Content-Length') or 0)
@@ -229,7 +234,7 @@ class Handler(SimpleHTTPRequestHandler):
         with open(tmp, 'w', encoding='utf-8') as f:
             json.dump(out, f, ensure_ascii=False, indent=1)
         os.replace(tmp, path)
-        if kind == 'review':
+        if kind == 'review' and not private:
             threading.Thread(target=review_changed, args=(rid,), daemon=True).start()
         return self._json(200, {'ok': True, 'sent': entry['sent']})
 
