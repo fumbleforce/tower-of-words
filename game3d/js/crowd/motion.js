@@ -49,7 +49,7 @@ export function walkStep(game, w, dt, list, eric, wide) {
     z = oz + fz * s,
     by = null;
   for (const b of list) {
-    if (b.root === r.root || isPassing(r.root, b.root)) continue;
+    if ((w.ghost && b.rig?.ambient) || b.root === r.root || isPassing(r.root, b.root)) continue;
     // Eric, the story's people and anyone seated are hard: the crowd goes round them and never leans in
     const crowd = b.rig && b.rig.ambient;
     const rr = b.r + me + (b === eric ? wide : 0);
@@ -58,6 +58,18 @@ export function walkStep(game, w, dt, list, eric, wide) {
     by = b;
     x = sx;
     z = sz;
+  }
+  // while a scene plays, out of Eric's way however he moves (a scripted walk doesn't go round people)
+  if (wide && eric) {
+    const ex = x - eric.x,
+      ez = z - eric.z,
+      ed = Math.hypot(ex, ez) || 1e-4,
+      want = eric.r + me + wide;
+    if (ed < want) {
+      const push = Math.min(want - ed, Math.max(w.speed, 1.2 * K) * dt);
+      x += (ex / ed) * push;
+      z += (ez / ed) * push;
+    }
   }
   const nav = P.nav;
   if (nav && w.onGrid && !nav.free(x, z) && nav.free(ox, oz)) [x, z] = nav.collide(x, z, ox, oz);
@@ -73,6 +85,17 @@ export function walkStep(game, w, dt, list, eric, wide) {
   if (moved > s * 0.3 && moved > 1e-4) r.root.rotation.y = turnToward(r.root.rotation.y, Math.atan2(mx, mz), dt, 5);
   w.moved = moved / Math.max(dt, 1e-4);
   return false;
+}
+
+// no nearer the next point for STALL seconds (the point moving on resets it)
+const STALL = 2.5;
+export function stalled(w, dt) {
+  const p = w.r.root.position,
+    t = w.line[Math.min(w.i, w.line.length - 1)],
+    d = Math.hypot(t[0] - p.x, t[1] - p.z);
+  if (w.i !== w.legAt || d < w.best - 0.05) Object.assign(w, { legAt: w.i, best: d, held: 0 });
+  else w.held += dt;
+  return w.held > STALL;
 }
 
 // the walk (or run) cycle, by the distance covered
