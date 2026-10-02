@@ -1,0 +1,19 @@
+{
+ "title": "Kuro, Eric and Mio as vinyl chibis, Meshy (chibi-cast-meshy-1)",
+ "blurb": "Meshy image-to-3D from our own front pictures in the style of your chibi office woman, rigged with Meshy's auto-rig. Idle and walk are Mio's game clips carried over by bone name; the walk's leg swing is scaled to 0.55 for the short legs. Drag to turn.",
+ "step": 0.55,
+ "attempts": {
+  "kuro-1": "/art/parts/chibi-cast-meshy/meshy/kuro-1-rigged.glb",
+  "eric-1": "/art/parts/chibi-cast-meshy/meshy/eric-1-rigged.glb",
+  "mio-3": "/art/parts/chibi-cast-meshy/meshy/mio-3-rigged.glb",
+  "mio-1": "/art/parts/chibi-cast-meshy/meshy/mio-1-rigged.glb"
+ },
+ "compare": {
+  "kuro-1": "/art/parts/chibi-cast-meshy/meshy/kuro-1-rigged.glb",
+  "eric-1": "/art/parts/chibi-cast-meshy/meshy/eric-1-rigged.glb",
+  "mio-3": "/art/parts/chibi-cast-meshy/meshy/mio-3-rigged.glb",
+  "office woman (chibi-meshy-1)": "/art/parts/chibi-meshy/meshy/dressed-nopose-rigged.glb"
+ },
+ "refs": ["/art/parts/chibi-meshy/inputs/dressed.png", "/art/parts/chibi-cast-meshy/inputs/kuro-d-101.png",
+  "/art/parts/chibi-cast-meshy/inputs/eric-e-101.png", "/art/parts/chibi-cast-meshy/inputs/mio-g-101-flip.png"]
+}
