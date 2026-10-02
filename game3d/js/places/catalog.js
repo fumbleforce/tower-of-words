@@ -138,7 +138,7 @@ export const PLACE_DETAILS = {
   },
   dorm_court: {
     things: {
-      bath: { label: 'Bath', kind: 'thing', verb: 'Listen' },
+      bath: { label: 'Bath', kind: 'thing', verb: 'Look' },
       dorm_entry: { label: 'Dorm entrance', kind: 'thing' },
       stairs: { label: 'To the stairs', kind: 'thing' },
       mailboxes: { label: 'Mailbox 203', kind: 'thing', verb: 'Take mail' },
@@ -147,7 +147,7 @@ export const PLACE_DETAILS = {
     seats: [],
     zones: ['hall', 'passage'],
     people: [],
-    hooks: ['bathSong', 'mailbox203'],
+    hooks: ['mailbox203'],
   },
   ...SOUTH_HALF_DETAILS, // the shop street, the east lane, the east coast
   dorms: {

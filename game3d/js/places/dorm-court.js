@@ -87,7 +87,6 @@ export async function dormCourtPlace(game) {
       passage: (x, z) => Math.abs(x - w.passage[0]) < 0.5 && z < w.passage[1] + 0.1,
     },
     hooks: {
-      bathSong: bath.bathSong,
       // mailbox 203 open (the camera close on it, the flap swung open on the flyer inside) or closed again
       async mailbox203({ state }) {
         const open = state === 'open';

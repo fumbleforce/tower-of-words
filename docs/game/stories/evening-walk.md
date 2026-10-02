@@ -11,7 +11,7 @@ Optional discoveries between leaving B2 and reaching Eric's room. Each starts fr
 1. In the forecourt garden, Eric can sit beside Tama. She settles on his lap; he quietly admits he meant to sit for only a second. On advance she hops back onto the bench. He stays seated until he chooses to move. Another visit lets him sit without repeating the line.
 2. At the station bicycle court, he can stand the fallen bicycle up. The neighbouring bike tips into its place. He looks at it; a second interaction stands that one up without another gag. Both bikes then stay upright.
 3. On the canteen terrace, he reaches for the last upright chair while a worker stacks the others. He realises they are closing, says すみません and helps put the chair on the table. The worker bows with お疲れさまです; he bows back and leaves them to finish. Talking to the worker before helping gets a short closing-time reply; afterwards she repeats her goodbye. Talk does not run the chair action.
-4. Outside the bath, an unseen man hums the monorail door chime. Eric can stop to listen. Another voice finishes the tune less successfully. A short sound caption remains until advance, including with audio muted. He never lifts the curtain or looks inside.
+4. The sento has no public interaction, and the humming is gone. Private mode can add an optional scene at the doorway. That scene is not described here.
 5. In the dorm hall, once he knows his room number, he can check mailbox 203. His name is already written in katakana on tape, with a readable inspection gloss. Inside is a bakery flyer. The open box remains in view until advance; later checks show the same contents.
 
 ## Choices and flags
@@ -24,7 +24,6 @@ These are optional actions, with no dialogue menu, purchase, inventory item, bon
 | `evening_bike_tipped` | The second bicycle has tipped over | The next bike interaction |
 | `evening_bikes_upright` | Eric has stood the second bicycle up | Bicycle action visibility |
 | `evening_canteen_helped` | Both chairs are stacked and bows finished | Canteen action visibility |
-| `evening_bath_heard` | The player advances past the sound caption | Bath action visibility |
 | `dorm_room_known` | The arrival goal has given Eric room 203 | Mailbox inspection availability |
 
 ## Words taught
@@ -37,4 +36,4 @@ None. Eric reuses his learned apology; the worker repeats Kuro's leaving-work gr
 |---|---|
 | `forecourt.js` | `garden_bench`, `fallen_bicycle` |
 | `plaza.js` | `canteen_table`, `canteen_closing`, `canteen_goodbye` |
-| `dorm_court.js` | `bath`, `mailboxes` |
+| `dorm_court.js` | `mailboxes` |

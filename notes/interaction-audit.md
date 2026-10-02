@@ -171,7 +171,7 @@ Counted by game3d/tools/pin-count.mjs (pins drawn: shown, on screen, not crowded
 
 | Id | Label | What it does | Pin before | Pin now | Why |
 |---|---|---|---|---|---|
-| `bath` | Bath | talk [going_home && !evening_bath_heard]: [face] / [bathSong] / > Someone else finishes the song for him. He's worse. | always while `going_home && !evening_bath_heard` | while a talk entry holds, else none | discovery |
+| `bath` | Bath | no public talk. Private mode may load a scene that uses `bathPeep`. | off in the public story | none in the public story | discovery |
 | `dorm_entry` | Dorm entrance | talk: : Room 203 is on 2F. The stairs are through the back. | always | always | the way in |
 | `stairs` | To the stairs | talk: [next] | always | always | the way up |
 | `mailboxes` | Mailbox 203 | talk [going_home && dorm_room_known]: [mailbox203] / > エリック · erikku · Eric / [mailbox203] | always while `going_home && dorm_room_known` | while a talk entry holds, else none | discovery |

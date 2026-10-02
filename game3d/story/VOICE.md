@@ -1,6 +1,6 @@
 # Voice sheet for day one
 
-Read this before writing a line in train.js, gate.js, office.js or transitions.js.
+Read this before writing a line of dialogue in train.js, gate.js, office.js or transitions.js. Discoveries and private scenes: `.claude/skills/rpg-scenes/SKILL.md`.
 
 ## What the skills say, applied here
 
