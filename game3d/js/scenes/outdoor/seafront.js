@@ -4,8 +4,8 @@
 // the alleys, the alleys' beds, the stairs down to the beach, the lookout's rail at the promenade's east end, the
 // lamps, benches and bins, kerbs where paving meets lawn, and on the beach a wet band and foam along the water and
 // boulders in groups on the sand and in the shallows. The sea wall, its rocks and the pines come from
-// scenes/outdoor/coast.js with the seafront's data, so the island's coast is one design. Day 1 never walks here and
-// no play camera sees it: the plaza and the forecourt build it for their island map tiles.
+// scenes/outdoor/coast.js with the seafront's data, so the island's coast is one design. The shop street's chunk
+// (scenes/shotengai.js) builds it to walk; the plaza and the forecourt build it for their island map tiles only.
 //
 //   const front = yield* seafrontSteps(root, { at, layer })     at: island point -> the place's frame (a shift)
 //   front.evening()                                              the lamps come on
@@ -38,9 +38,7 @@ const HUT = {
   trim: '#c9ccce',
 };
 
-// lamps flank each flight of stairs, one more midway between flights; benches face the sea between them
-const LAMP_X = [-7.5, 1.5, 6, 15, 24, 28.5, 37.5, 46.5, 51, 60, 69];
-const BENCH_X = [-3, 10.5, 19.5, 33, 42, 55.5, 66];
+const { LAMP_X, BENCH_X, FURNITURE_Z } = S;
 
 // draws everything under `object` on the island map's layer only
 export function mapOnly(object, layer, tag) {
@@ -249,7 +247,7 @@ export function* seafrontSteps(root, { at, layer = null, backWalk = false }) {
   rail(p, at(P[2] - 0.15, WALL_Z - 0.25), at(P[2] - 0.15, P[1] + 0.4));
   yield;
   // lamps and benches in the band along the wall, bins beside every other bench
-  const bz = WALL_Z - BAND / 2 - 0.15;
+  const bz = FURNITURE_Z;
   lamps(
     lights,
     p,

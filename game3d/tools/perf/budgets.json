@@ -69,6 +69,15 @@
           "p99Ms": 16.7,
           "build": "0930-1823-d329dc3a"
         }
+      },
+      "shotengai": {
+        "calls": 40,
+        "tris": 83808,
+        "gpu": {
+          "medianMs": 16.7,
+          "p99Ms": 16.8,
+          "build": "1002-0712-3db4101d"
+        }
       }
     }
   },
@@ -141,6 +150,15 @@
           "p99Ms": 16.8,
           "build": "0930-1823-d329dc3a"
         }
+      },
+      "shotengai": {
+        "calls": 39,
+        "tris": 83808,
+        "gpu": {
+          "medianMs": 16.7,
+          "p99Ms": 16.8,
+          "build": "1002-0712-3db4101d"
+        }
       }
     }
   },
@@ -212,6 +230,15 @@
           "medianMs": 16.7,
           "p99Ms": 16.8,
           "build": "0930-1823-d329dc3a"
+        }
+      },
+      "shotengai": {
+        "calls": 46,
+        "tris": 84819,
+        "gpu": {
+          "medianMs": 16.7,
+          "p99Ms": 16.8,
+          "build": "1002-0712-3db4101d"
         }
       }
     }

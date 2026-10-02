@@ -1,4 +1,5 @@
 import { TRAIN_DETAILS } from './catalog-train.js';
+import { SHOTENGAI_DETAILS } from './catalog-shotengai.js';
 // Labels and registration IDs shared by place factories and structural checks.
 export const PLACE_DETAILS = {
   train: TRAIN_DETAILS,
@@ -148,6 +149,7 @@ export const PLACE_DETAILS = {
     people: [],
     hooks: ['bathSong', 'mailbox203'],
   },
+  shotengai: SHOTENGAI_DETAILS,
   dorms: {
     things: {
       door_203: { label: 'Room 203', kind: 'thing' },
@@ -170,23 +172,18 @@ export const PLACE_DETAILS = {
       canteen_table: { label: 'Canteen table', kind: 'thing', verb: 'Sit' },
       canteen_worker: { label: 'Canteen worker', kind: 'person' },
       noticeboard: { label: 'Notice board', kind: 'thing', verb: 'Read' },
+      shop_walk: { label: 'To the shop street', kind: 'thing', verb: 'Go' },
     },
-    spots: ['office_entry', 'fountain_edge', 'dorm_exit'],
+    spots: ['office_entry', 'fountain_edge', 'dorm_exit', 'shop_walk'],
     seats: [],
-    zones: ['office_lane', 'dorm_exit'],
+    zones: ['office_lane', 'dorm_exit', 'shop_walk'],
     people: ['canteen_worker'],
     hooks: ['canteenChair'],
   },
   'office': {
     'things': {
-      'emi': {
-        'label': 'Emi',
-        'kind': 'person',
-      },
-      'kenji': {
-        'label': 'Kenji',
-        'kind': 'person',
-      },
+      'emi': { 'label': 'Emi', 'kind': 'person' },
+      'kenji': { 'label': 'Kenji', 'kind': 'person' },
       'rei': {
         'label': 'Rei',
         'kind': 'person',

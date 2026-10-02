@@ -197,8 +197,8 @@ export function roof(p, kind, u0, u1, v0, v1, h, seed, back) {
 }
 
 // The arcade's roof between the rows (v0..v1 across, u0..u1 along), its eaves at h: a shallow barrel of four glass
-// facets on steel ribs every 1.5, gutters along both eaves and a ridge beam
-export function arcadeRoof(p, u0, u1, v0, v1, h) {
+// facets on steel ribs every 1.5 and a ridge beam, into p; gutters along both eaves, on the posts, into edge
+export function arcadeRoof(p, u0, u1, v0, v1, h, edge = p) {
   const W = v1 - v0,
     L = u1 - u0,
     uc = (u0 + u1) / 2;
@@ -216,5 +216,5 @@ export function arcadeRoof(p, u0, u1, v0, v1, h) {
       p.geo(ARCADE.rib, new THREE.BoxGeometry(0.14, 0.08, len + 0.04).rotateX(-tilt).translate(...at(u, 0.05)));
   }
   p.box(ARCADE.rib, L, 0.1, 0.16, uc, h + 0.62, v0 + W / 2);
-  for (const v of [v0 + 0.1, v1 - 0.1]) p.box(ARCADE.gutter, L, 0.16, 0.22, uc, h - 0.1, v);
+  for (const v of [v0 + 0.1, v1 - 0.1]) edge.box(ARCADE.gutter, L, 0.16, 0.22, uc, h - 0.1, v);
 }

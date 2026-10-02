@@ -576,6 +576,54 @@
         "mailbox203"
       ]
     },
+    "shotengai": {
+      "things": {
+        "plaza_lane": {
+          "label": "To the plaza",
+          "kind": "thing",
+          "verb": "Go"
+        },
+        "bike_shop": {
+          "label": "Bike shop",
+          "kind": "thing",
+          "verb": "Go in"
+        },
+        "store": {
+          "label": "Konbini",
+          "kind": "thing",
+          "verb": "Go in"
+        },
+        "bakery": {
+          "label": "Bakery",
+          "kind": "thing",
+          "verb": "Go in"
+        },
+        "game_centre": {
+          "label": "Game centre",
+          "kind": "thing",
+          "verb": "Go in"
+        },
+        "karaoke": {
+          "label": "Karaoke",
+          "kind": "thing",
+          "verb": "Go in"
+        },
+        "izakaya": {
+          "label": "Izakaya",
+          "kind": "thing",
+          "verb": "Go in"
+        }
+      },
+      "spots": [
+        "plaza_entry"
+      ],
+      "seats": [],
+      "zones": [
+        "plaza_exit"
+      ],
+      "people": [],
+      "hooks": []
+    },
     "dorms": {
       "things": {
         "door_203": {
@@ -643,17 +691,24 @@
           "label": "Notice board",
           "kind": "thing",
           "verb": "Read"
+        },
+        "shop_walk": {
+          "label": "To the shop street",
+          "kind": "thing",
+          "verb": "Go"
         }
       },
       "spots": [
         "office_entry",
         "fountain_edge",
-        "dorm_exit"
+        "dorm_exit",
+        "shop_walk"
       ],
       "seats": [],
       "zones": [
         "office_lane",
-        "dorm_exit"
+        "dorm_exit",
+        "shop_walk"
       ],
       "people": [
         "canteen_worker"

@@ -17,7 +17,7 @@ import { installFinds, findSpotSteps, syncFinds } from '../finds/index.js';
 
 const MUSIC = { train: 'calm', gate: 'lively', office: 'office' };
 // places the draw-call pass (js/perf/batch.js) runs on
-const BATCHED = new Set(['train', 'gate', 'office', 'forecourt', 'plaza', 'dorm_court', 'dorms']);
+const BATCHED = new Set(['train', 'gate', 'office', 'forecourt', 'plaza', 'dorm_court', 'dorms', 'shotengai']);
 
 export function createPlaceLifecycle(
   game,

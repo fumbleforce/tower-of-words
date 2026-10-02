@@ -27,7 +27,7 @@ import { coastLand } from './island-west.js';
 import { MAP_LAYER } from '../map/render.js';
 import { seafrontSteps, mapOnly } from './outdoor/seafront.js';
 import { shopStreet } from './plaza-buildings.js';
-import { BAYS } from './island-south.js';
+import { BAYS, SHOPS } from './island-south.js';
 import { Parts } from './outdoor/parts.js';
 import { lightSet } from './outdoor/furniture.js';
 import { keyaki, sakura, cluster } from './outdoor/planting.js';
@@ -75,6 +75,7 @@ function* town(root) {
     storeyH: rows.floorH,
     bays: { ...BAYS, u0: BAYS.x0 - rows.rect[0] },
     to: 27,
+    shops: SHOPS,
   });
   mapOnly(shops.group, MAP_LAYER, 'shops');
   const front = yield* seafrontSteps(root, { at, layer: MAP_LAYER, backWalk: true });

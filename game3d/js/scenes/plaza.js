@@ -18,7 +18,7 @@ import { skylineSteps } from './skyline.js';
 import { drain } from '../perf/slice.js';
 import { mergeStaticSteps } from './merge-static.js';
 import { Parts } from './outdoor/parts.js';
-import { lightSet } from './outdoor/furniture.js';
+import { lightSet, fingerSign } from './outdoor/furniture.js';
 import { canteenSteps, shopStreetSteps } from './plaza-buildings.js';
 import { groundSteps } from './plaza/ground.js';
 import { greenSteps } from './plaza/green.js';
@@ -34,12 +34,12 @@ import { pigeons } from './outdoor/pigeons.js';
 import { fountain } from './plaza/fountain.js';
 import * as P from './plaza/plan.js';
 import { eastLaneSteps } from './plaza/east-lane.js';
-import { BLOCK_IDS, BLOCKS as EAST_BLOCKS, CROSS } from './plaza/east-plan.js';
+import { BLOCK_IDS, BLOCKS as EAST_BLOCKS, CROSS, SOUTH_WALK } from './plaza/east-plan.js';
 import { northLaneSteps } from './plaza/north-lane.js';
 import { NORTH_IDS } from './plaza/north-plan.js';
 import { clusterSteps, placeIn, CLUSTER_IDS } from './dorm-court/cluster.js';
 import { seafrontSteps } from './outdoor/seafront.js';
-import { BAYS } from './island-south.js';
+import { BAYS, SHOPS as NAMED_SHOPS } from './island-south.js';
 import { coastLand } from './island-west.js';
 import { MAP_LAYER } from '../map/render.js';
 
@@ -53,6 +53,11 @@ const laneFace = () => Math.PI / 2; // east
 // the training centre (block_e1, plaza/east-plan.js): its door at the head of the cross walk, north off the lane
 const TRAINING = EAST_BLOCKS.find((k) => k.id === 'block_e1');
 const CROSS_N = [CROSS[0], CROSS[1], TRAINING.rect[3], LZ]; // the cross walk from the lane up to that door
+// and down from the lane to the south walk, which leads east to the dorm street and on to the shop street
+// (scenes/shotengai.js): he walks onto the south walk's first stretch, past which he is on his way there
+const CROSS_S = [CROSS[0], CROSS[1], LZ, SOUTH_WALK[3]];
+const SHOP_START = [CROSS[0], CROSS[1] + 2.6, SOUTH_WALK[2], SOUTH_WALK[3]];
+const SW_Z = (SOUTH_WALK[2] + SOUTH_WALK[3]) / 2;
 const WEST_X = F[0] - R - 2.5, // on the lane west of the circle: walking on past it goes back to the forecourt
   EAST_X = CROSS[1] + 1.4; // and on the lane east of the cross walk, on toward the dorms
 const NAV = [WEST_X - 3.4, EAST_X + 3.4, CANTEEN[3] + 0.3, F[1] + R + 0.2];
@@ -72,7 +77,7 @@ export function* plazaSteps() {
   sun.position.add(sun.target.position);
 
   // walkable: the circle (never the basin), the lanes, the link, the terrace (through the gap in its wall), the
-  // cross walk up to the training centre's door
+  // cross walk up to the training centre's door and down to the south walk's start
   const nav = new Nav(NAV[0], NAV[1], NAV[2], NAV[3], 0.1);
   const terrace = [TERRACE[0], TERRACE[1], TERRACE[2] + 0.3, TERRACE_S - 0.25];
   const link = [LINK[0], LINK[1], TERRACE_S - 1, LINK[3]];
@@ -80,7 +85,13 @@ export function* plazaSteps() {
     const r = Math.hypot(x - F[0], z - F[1]);
     if (r < BASIN + 0.3) return false;
     return (
-      r < R - 0.3 || onLane(x, z) || inRect(x, z, terrace) || inRect(x, z, link, 0.25) || inRect(x, z, CROSS_N, 0.25)
+      r < R - 0.3 ||
+      onLane(x, z) ||
+      inRect(x, z, terrace) ||
+      inRect(x, z, link, 0.25) ||
+      inRect(x, z, CROSS_N, 0.25) ||
+      inRect(x, z, CROSS_S, 0.25) ||
+      inRect(x, z, SHOP_START, 0.25)
     );
   };
 
@@ -99,6 +110,12 @@ export function* plazaSteps() {
   const chairs = buildTerrace(root, nav);
   yield;
   buildBikes(root, nav);
+  // a finger sign on the lawn at the south walk's start, on its south edge clear of the trees, pointing along it to
+  // the shop street
+  const sx = CROSS[1] + 0.4,
+    sz = SOUTH_WALK[3] + 0.4;
+  fingerSign(root, p, sx, sz, [{ text: 'Shop street', sub: '商店街', dir: 1 }]);
+  nav.block(sx - 0.1, sx + 0.1, sz - 0.1, sz + 0.1);
   yield;
   const east = yield* eastLaneSteps(root, p, lights); // backdrop: the lane on east to the dorm street
   const north = yield* northLaneSteps(root, lights); // backdrop: the back lane behind the canteen, the clinic
@@ -116,11 +133,7 @@ export function* plazaSteps() {
     from: 10,
     farLayer: MAP_LAYER,
     storeyH: building('shops_north').floorH,
-    // the island's one combined konbini, 100-yen shop and drugstore, and the bakery (island-places)
-    signs: [
-      [7, 'コンビニ', 'KONBINI · 100 YEN · DRUGSTORE', '#3f5f6e'],
-      [10, 'パン', 'BAKERY', '#5d5a72'],
-    ],
+    shops: NAMED_SHOPS, // the named shops' signs (island-south.js)
   });
   yield;
   // the seafront behind the shop street, on the island map only (outdoor/seafront.js)
@@ -160,6 +173,12 @@ export function* plazaSteps() {
     trainingDoor: [TRAINING.at, TRAINING.rect[3]],
     trainingStep: [TRAINING.at, TRAINING.rect[3] + 0.8],
     dormEdge: lanePoint(EAST_X + 2.2),
+    // the south walk east of the cross walk's foot, on the way to the shop street: where he starts down it, and
+    // where the walk out ends (the same, walking in); past shopX he is leaving
+    shopWalk: [CROSS[1] + 0.9, SW_Z],
+    shopEdge: [CROSS[1] + 3.2, SW_Z],
+    shopX: CROSS[1] + 1.6,
+    swZ: SOUTH_WALK[2] - 0.3,
     westX: WEST_X,
     eastX: EAST_X,
     laneZ,
@@ -179,6 +198,7 @@ export function* plazaSteps() {
       hall.glass.emissiveIntensity = 0.45;
       water.evening();
       street.glass.emissiveIntensity = 0.55;
+      street.signs.evening();
       east.evening();
       north.evening();
       dorms.evening();

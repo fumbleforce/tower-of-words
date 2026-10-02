@@ -98,7 +98,8 @@
       "plaza": "game3d/js/places/plaza.js",
       "office": "game3d/js/places/office.js",
       "dorm_court": "game3d/js/places/dorm-court.js",
-      "dorms": "game3d/js/places/dorms.js"
+      "dorms": "game3d/js/places/dorms.js",
+      "shotengai": "game3d/js/places/shotengai.js"
     },
     "events": {
       "train": {
@@ -113,7 +114,8 @@
       "dorms": {},
       "office": {
         "sat_down": "sitDown"
-      }
+      },
+      "shotengai": {}
     },
     "speakers": {
       "eric": {
@@ -239,7 +241,8 @@
     "office",
     "plaza",
     "dorm_court",
-    "dorms"
+    "dorms",
+    "shotengai"
   ],
   "nodes": [
     "train:intro",
@@ -445,6 +448,7 @@
     "plaza:dorms_later",
     "plaza:to_forecourt",
     "plaza:to_dorms",
+    "plaza:to_shops",
     "dorm_court:bath",
     "dorm_court:mailboxes",
     "dorm_court:arrive",
@@ -456,6 +460,10 @@
     "dorms:window",
     "dorms:boxes",
     "dorms:bed",
+    "shotengai:arrive",
+    "shotengai:shut",
+    "shotengai:to_plaza",
+    "shotengai:to_dorms",
     "transitions:train_to_gate",
     "transitions:gate_to_forecourt",
     "transitions:forecourt_to_office",
@@ -1213,6 +1221,24 @@
     },
     {
       "from": "plaza:to_dorms",
+      "to": "dorm_court:arrive",
+      "kind": "trip",
+      "labels": []
+    },
+    {
+      "from": "plaza:to_shops",
+      "to": "shotengai:arrive",
+      "kind": "trip",
+      "labels": []
+    },
+    {
+      "from": "shotengai:to_plaza",
+      "to": "plaza:arrive",
+      "kind": "trip",
+      "labels": []
+    },
+    {
+      "from": "shotengai:to_dorms",
       "to": "dorm_court:arrive",
       "kind": "trip",
       "labels": []
