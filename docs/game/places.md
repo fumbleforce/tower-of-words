@@ -4,7 +4,7 @@ Day 1 has eight places: the monorail (`train`), Honsha station’s security room
 
 Elsewhere: the island as a whole is in [setting.md](setting.md); the people in [cast.md](cast.md); what happens in a place as part of a storyline is in [stories/](stories/); how places look (palette, light, style) in [art-and-sound.md](art-and-sound.md). The hooks a story can call in each place (doors, the gate, the copier) are in game3d/story/FORMAT.md.
 
-The tables are checked by `node tools/facts/check.mjs`: things and their labels, spots, seats, zones, who has a body in each place and the story's schedule for them, the small-moment nodes, and the creatures. Coordinates: x runs left to right on screen, z from the back (negative) toward the camera; a unit is about a metre and a half.
+The tables are checked by `node tools/facts/check.mjs`: things and their labels, spots, seats, zones, who has a body in each place and the story's schedule for them, the crowd's numbers, the small-moment nodes, and the creatures. Coordinates: x runs left to right on screen, z from the back (negative) toward the camera; a unit is about a metre and a half.
 
 ## Places decided but not built
 
@@ -260,6 +260,16 @@ Kuro works the head office reception all day. The two from Sales appear inside t
 | `kuro` | Behind the reception counter in the head office lobby, facing the door. | – |
 | `mio` | Hidden (she ran ahead to a server). | – |
 
+The crowd ([systems.md](systems.md), The crowd):
+
+| Period | Walking | Sitting | Talking | Waiting | What they do |
+|---|---|---|---|---|---|
+| early | 17 | 0 | 1 | 0 | Office workers crossing the court to the head office door: in off the plaza lane, up from the bike court, a few off the monorail. |
+| morning | 6 | 0 | 0 | 0 | A few people between the head office door, the plaza lane and the bike court. |
+| lunch | 14 | 0 | 2 | 0 | Out of head office toward the plaza and the canteen, and back. |
+| afternoon | 6 | 0 | 0 | 0 | A few people between the head office door and the plaza lane. |
+| evening | 17 | 0 | 2 | 0 | Out of head office: most east toward the plaza and the dorms, some to their bikes, one or two to the monorail. |
+
 ### Small moments
 
 | Nodes | When | What happens |
@@ -314,12 +324,22 @@ None.
 
 ### Who's there when
 
-Nobody lives here yet.
+None of the cast lives here yet.
 
 | Id | Usually | Schedule |
 |---|---|---|
 | `mio` | Hidden (she ran ahead to a server). | – |
 | `canteen_worker` | After work only: carries the last chair over, then wipes down the next table east. Can be talked to whenever not walking; helping with the chair is the canteen table's. | – |
+
+The crowd ([systems.md](systems.md), The crowd):
+
+| Period | Walking | Sitting | Talking | Waiting | What they do |
+|---|---|---|---|---|---|
+| early | 14 | 2 | 1 | 0 | Walking in from the dorms and the shop street toward head office; a few into the canteen; two on the benches, a pair talking. |
+| morning | 6 | 2 | 0 | 0 | A few crossing; two on the benches. |
+| lunch | 17 | 4 | 2 | 0 | Out of head office into the canteen and the shop street, and back; the benches fill up. |
+| afternoon | 7 | 2 | 1 | 0 | A few crossing; two on the benches, a pair talking. |
+| evening | 17 | 3 | 2 | 0 | Walking home east toward the dorms and down to the shop street; three on the benches, two pairs talking. |
 
 ### Small moments
 
@@ -383,11 +403,21 @@ None.
 
 ### Who's there when
 
-Nobody yet.
+None of the cast yet.
 
 | Id | Usually | Schedule |
 |---|---|---|
 | `mio` | Not here. | – |
+
+The crowd ([systems.md](systems.md), The crowd):
+
+| Period | Walking | Sitting | Talking | Waiting | What they do |
+|---|---|---|---|---|---|
+| early | 10 | 1 | 0 | 3 | People down the arcade both ways, three waiting at the konbini door for it to open, a jogger and a slow walker on the promenade. |
+| morning | 7 | 2 | 1 | 0 | A few down the arcade; two on the benches, a pair talking. |
+| lunch | 20 | 4 | 2 | 0 | The arcade busy both ways; strollers on the promenade; the benches full. |
+| afternoon | 9 | 2 | 1 | 0 | A few down the arcade; two on the benches, a pair talking. |
+| evening | 17 | 3 | 2 | 0 | People home from work down the arcade; strollers and a jogger on the promenade; three on the benches, two pairs talking. |
 
 ### Small moments
 
@@ -449,11 +479,21 @@ None.
 
 ### Who's there when
 
-Nobody yet.
+None of the cast yet.
 
 | Id | Usually | Schedule |
 |---|---|---|
 | `mio` | Not here. | – |
+
+The crowd ([systems.md](systems.md), The crowd):
+
+| Period | Walking | Sitting | Talking | Waiting | What they do |
+|---|---|---|---|---|---|
+| early | 14 | 1 | 1 | 0 | Out of the dorm gate and the dorm row, west along the lane toward head office, one or two up the north street; one on a bench, a pair talking. |
+| morning | 6 | 1 | 0 | 0 | A few between the dorm gate, the lane and the shop street. |
+| lunch | 12 | 2 | 1 | 0 | Between the lane and the shop street, a few down from the north street. |
+| afternoon | 6 | 1 | 0 | 0 | A few toward the dorm row and the shop street. |
+| evening | 14 | 2 | 1 | 0 | Home along the lane into the dorm gate and the dorm row, some on to the shop street; two on benches, a pair talking. |
 
 ### Small moments
 
@@ -514,11 +554,21 @@ None.
 
 ### Who's there when
 
-Nobody yet.
+None of the cast yet.
 
 | Id | Usually | Schedule |
 |---|---|---|
 | `mio` | Not here. | – |
+
+The crowd ([systems.md](systems.md), The crowd):
+
+| Period | Walking | Sitting | Talking | Waiting | What they do |
+|---|---|---|---|---|---|
+| early | 7 | 1 | 0 | 0 | Joggers along the dorm row and the coast walk to the courts and the onsen path, someone back from the onsen, a slow walker; one on a bench. |
+| morning | 4 | 1 | 0 | 0 | A walker and a jogger; one on a bench. |
+| lunch | 6 | 2 | 0 | 0 | Strollers to and from the onsen, a jogger; two on benches. |
+| afternoon | 4 | 1 | 0 | 0 | A jogger and someone back from the onsen; one on a bench. |
+| evening | 11 | 2 | 1 | 0 | People to and from the onsen, joggers on the coast walk; two on benches, a pair talking. |
 
 ### Small moments
 
@@ -581,11 +631,21 @@ None.
 
 ### Who's there when
 
-Nobody yet.
+None of the cast yet.
 
 | Id | Usually | Schedule |
 |---|---|---|
 | `mio` | Not here. | – |
+
+The crowd ([systems.md](systems.md), The crowd):
+
+| Period | Walking | Sitting | Talking | Waiting | What they do |
+|---|---|---|---|---|---|
+| early | 10 | 0 | 1 | 0 | Joggers round the lane, the courts walk and the onsen path; people up the north street on the way to the office street; a pair talking. |
+| morning | 4 | 0 | 0 | 0 | Someone to the pool, a jogger. |
+| lunch | 7 | 0 | 1 | 0 | Between the office street and the pool; a jogger; a pair talking. |
+| afternoon | 5 | 0 | 0 | 0 | A jogger; someone back from the pool. |
+| evening | 11 | 0 | 1 | 0 | From the office street to the pool and up the north street; joggers; a pair talking. |
 
 ### Small moments
 
@@ -650,11 +710,21 @@ None.
 
 ### Who's there when
 
-Nobody yet.
+None of the cast yet.
 
 | Id | Usually | Schedule |
 |---|---|---|
 | `mio` | Not here. | – |
+
+The crowd ([systems.md](systems.md), The crowd):
+
+| Period | Walking | Sitting | Talking | Waiting | What they do |
+|---|---|---|---|---|---|
+| early | 17 | 0 | 1 | 0 | Office workers along the office street both ways, in from the sports lane and up the quarter street; a pair talking. |
+| morning | 7 | 0 | 0 | 0 | A few between the quarter street, the bank and the harbour end. |
+| lunch | 14 | 0 | 2 | 0 | Between the quarter street and the bank, some along the street; two pairs talking. |
+| afternoon | 7 | 0 | 0 | 0 | A few along the street. |
+| evening | 14 | 0 | 1 | 0 | East along the street toward the sports lane and the gym; a pair talking. |
 
 ### Small moments
 
@@ -716,11 +786,21 @@ None.
 
 ### Who's there when
 
-Nobody yet.
+None of the cast yet.
 
 | Id | Usually | Schedule |
 |---|---|---|
 | `mio` | Not here. | – |
+
+The crowd ([systems.md](systems.md), The crowd):
+
+| Period | Walking | Sitting | Talking | Waiting | What they do |
+|---|---|---|---|---|---|
+| early | 7 | 1 | 1 | 0 | Dock workers in from the office street to the works lane and the piers, someone off the ferry, a jogger up the harbour walk; one on a bench, a pair talking. |
+| morning | 4 | 0 | 1 | 0 | A few between the street, the piers and the works lane; a pair talking. |
+| lunch | 6 | 2 | 1 | 0 | A few between the piers, the street and the ferry; two on benches, a pair talking. |
+| afternoon | 4 | 0 | 1 | 0 | A few between the street, the works lane and the piers; a pair talking. |
+| evening | 7 | 2 | 1 | 0 | Back from the works lane and the piers to the street, a stroller down the harbour walk; two on benches, a pair talking. |
 
 ### Small moments
 
@@ -950,11 +1030,17 @@ None.
 
 ### Who's there when
 
-Played in the evening, after work. Nobody else is here.
+Played in the evening, after work. None of the cast is here.
 
 | Id | Usually | Schedule |
 |---|---|---|
 | `mio` | Not here. | – |
+
+The crowd ([systems.md](systems.md), The crowd):
+
+| Period | Walking | Sitting | Talking | Waiting | What they do |
+|---|---|---|---|---|---|
+| evening | 3 | 0 | 0 | 0 | Two or three residents between the street gate and the hall, in and out past the mailboxes to the stairs. Nobody sits, and nobody stops in the doors, the passage, the sento doorway or at the mailboxes. |
 
 ### Small moments
 

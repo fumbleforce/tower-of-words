@@ -22,6 +22,7 @@ legacy/island/node_modules/
 
 # Per-run automated QA artifacts (review assets remain retained separately)
 game3d/shots/fast/
+game3d/shots/crowd/
 game3d/shots/routes/
 game3d/shots/words-menu/
 game3d/shots/prompts/

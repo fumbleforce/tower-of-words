@@ -16,6 +16,7 @@ import { storyBondGate } from '../../game3d/js/bonds/gates.js';
 import { PLACE_FILES } from '../../game3d/js/places/definitions.js';
 import { CHUNKS, PLACES, PLAN_PATHS } from '../../game3d/js/scenes/island-layout.js';
 import { CREATURES } from '../../game3d/js/creatures/catalog.js';
+import { CROWD } from '../../game3d/js/crowd/data.js';
 import fs from 'node:fs';
 import path from 'node:path';
 import { pathToFileURL, fileURLToPath } from 'node:url';
@@ -358,6 +359,33 @@ function checkCreatures() {
     for (const g of game) if (!seen.has(g.id)) bad(file, `${place}: the game has creatures \`${g.id}\` (${g.kind}), "Creatures" doesn't`);
   }
 }
+// places.md: each outdoor place's crowd table ("| Period | Walking | Sitting | Talking | Waiting |", in "Who's there
+// when") against game3d/js/crowd/data.js; a place with no crowd there has no table
+function checkCrowd() {
+  const file = 'docs/game/places.md';
+  const md = read(path.join(DOCS, 'places.md'));
+  for (const [place, d] of Object.entries(CROWD)) {
+    const sec = section(md, (h) => h.endsWith(`(\`${place}\`)`), 2, file);
+    if (sec == null) { bad(file, `no "## ... (\`${place}\`)" section for the crowd in game3d/js/crowd/data.js`); continue; }
+    const who = section(sec, (h) => h === "Who's there when", 3, file) || '';
+    const at = who.indexOf('| Period |');
+    const rows = at < 0 ? [] : tableIn(who.slice(at)) || [];
+    const periods = Object.entries(d.periods);
+    if (!periods.length) { if (at >= 0) bad(file, `${place}: a crowd table, but game3d/js/crowd/data.js has no crowd there`); continue; }
+    if (at < 0) { bad(file, `${place}: no crowd table ("| Period | Walking | ...") in "Who's there when"`); continue; }
+    for (const [p, s] of periods) {
+      const r = rows.find((x) => id(x.Period) === p);
+      if (!r) { bad(file, `${place}: the crowd has a ${p} in game3d/js/crowd/data.js, the crowd table doesn't`); continue; }
+      const want = { Walking: s.walk || 0, Sitting: s.sit || 0, Talking: s.chat || 0, Waiting: s.queue ? s.queue[1] : 0 };
+      for (const [col, v] of Object.entries(want)) {
+        const got = val(r[col]) === '' ? 0 : +val(r[col]);
+        if (got !== v) bad(file, `${place}, crowd, ${p}: ${col.toLowerCase()} is ${v} in game3d/js/crowd/data.js, ${val(r[col]) || '-'} in the doc`);
+      }
+    }
+    for (const r of rows) if (!d.periods[id(r.Period)]) bad(file, `${place}: the crowd table has ${id(r.Period)}, game3d/js/crowd/data.js doesn't`);
+  }
+}
+
 // a schedule as text, the way the doc writes it: "hidden all day", or "morning `racks`, evening hidden"
 const PERIODS = ['early', 'morning', 'lunch', 'afternoon', 'evening'];
 function schedOf(per) {
@@ -468,7 +496,7 @@ if (DUMP) {
   console.log('\nWords taught (type steps):'); for (const [sf, N] of Object.entries(game.nodes)) for (const [n, v] of Object.entries(N)) for (const t of v.types) console.log(`  ${t.word} from ${t.from} in ${sf} ${n}`);
   process.exit(0);
 }
-for (const [area, fn] of [['cast', checkCast], ['places', checkPlaces], ['creatures', checkCreatures], ['trips', checkTrips], ['island', checkIsland], ['island plan', checkIslandPlan], ['words', checkWords], ['systems', checkSystems], ['stories', checkStories]]) {
+for (const [area, fn] of [['cast', checkCast], ['places', checkPlaces], ['creatures', checkCreatures], ['crowd', checkCrowd], ['trips', checkTrips], ['island', checkIsland], ['island plan', checkIslandPlan], ['words', checkWords], ['systems', checkSystems], ['stories', checkStories]]) {
   try { fn(game); } catch (e) { bad(area, e.message); }
 }
 if (pending.length) { console.log(`\nPending (decided, not done yet):`); for (const p of pending) console.log('  ' + p); }

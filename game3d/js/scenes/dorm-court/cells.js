@@ -36,7 +36,10 @@ export function cells(xcuts, zcuts) {
       ps[at(x, z)].box(color, w, h, d, x, y, z, { ...o, cast: false });
       return parts;
     },
-    build: (root) => cellSteps(ps, root),
+    build: (root) => {
+      if (parts.seats) (root.userData.seats ||= []).push(...parts.seats.splice(0)); // benches' seats (crowd/still.js)
+      return cellSteps(ps, root);
+    },
   };
   const pv = {
     field(r, o) {

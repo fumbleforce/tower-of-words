@@ -1,6 +1,6 @@
 # Systems
 
-Day 1 is Thursday 1 October in five periods, and only the story moves the clock. Also here: schedules, ambient moments, bond steps, memory, gifts and their prices, typing a word and word practice, saying words to things, overheard Japanese, what a kotodama looks and sounds like, and saving (three slots and an autosave). Last checked against the game on 2026-09-29.
+Day 1 is Thursday 1 October in five periods, and only the story moves the clock. Also here: schedules, the crowd, ambient moments, bond steps, memory, gifts and their prices, typing a word and word practice, saying words to things, overheard Japanese, what a kotodama looks and sounds like, and saving (three slots and an autosave). Last checked against the game on 2026-09-29.
 
 Elsewhere: the controls and screens for these are in [controls-and-ui.md](controls-and-ui.md); the words in [words.md](words.md); each person's tastes, register and relations in [cast.md](cast.md); the data keys a story file uses for all of this in game3d/story/FORMAT.md ("Sim data").
 
@@ -18,6 +18,18 @@ Jørgen (2026-09-28): a day clock with periods, NPC schedules and NPC-to-NPC rel
 
 - Each place's story file says where each person is in each period ([places.md](places.md), Who's there when). When the period changes, people walk to their new spot or leave.
 - A person's schedule across places, and their whole week, are to build (cast.md has the routines that are decided).
+
+## The crowd
+
+The island is well populated (Jørgen, 2026-10-02: "there should be plenty of people about ... dependent on the time of day ofc."). Every outdoor place has a crowd of islanders going about their day, set by the period (the dorm courtyard only a few residents after work): how many walk, sit, stand talking and wait in each place is in [places.md](places.md), at the end of each place's Who's there when.
+
+- They walk the paths between the ends of the streets and the doors of open buildings (the head office, the station, the dorm hall), keeping to the middle of a path and a little to its right, sit on the benches, stand talking in pairs on open paving, and wait in a line at a shut door. Some carry a briefcase, a tote, groceries or a backpack; joggers run in sports clothes.
+- They are background, not people to talk to: no pin, no name, no talk.
+- They never stand in the way: walkers go round Eric and the story's people and never push them, and nobody stands or sits on the walking lines, by the things the story uses or where Eric comes in.
+- Nobody appears or vanishes in view: a new walker comes in at a street's end out of view or steps out of a door, and leaves the same way. The clock moving while Eric is there changes only the people out of view.
+- While a scene plays, nobody new comes and walkers give Eric a wide berth, so the scene keeps its room.
+- The numbers in places.md are for a desktop at high quality. The medium tier shows 85% of them and the low tier 70%; phones show 55, 75 or 90% (low, medium, high), with no sun shadows. There is a cap per place on how many are out at once: 22, 30 and 36 on a desktop, 14, 18 and 22 on a phone.
+- They are the same chibi bodies as the lobby's office workers, built in game3d/js/crowd/looks.js, so a later character model replaces one file.
 
 ## Ambient moments
 

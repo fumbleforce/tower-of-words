@@ -57,6 +57,8 @@ export class Parts {
   }
   build(root) {
     const out = [];
+    // the benches' seats (furniture.js bench()), in root's frame, for the ambient crowd (crowd/still.js)
+    if (this.seats) (root.userData.seats ||= []).push(...this.seats.splice(0));
     for (const { cast, surf, opts, list } of this.sets.values()) {
       const m = new THREE.Mesh(mergeGeometries(list), mat('#ffffff', { vertexColors: true, ...(opts || {}) }));
       list.forEach((g) => g.dispose());
