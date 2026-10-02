@@ -43,6 +43,36 @@ The service requires this checkout and its installed Codex CLI to remain
 available. If Codex moves, run `bind` again from a shell with Codex on `PATH`.
 If the target thread is archived or deleted, bind the new main thread.
 
+# Grok inbox wake
+
+`grok_wake.py` watches the main checkout's `collab/to-grok.md`. Appending a
+normal entry is enough. Nothing is delivered while a turn is running.
+
+When the turn ends, `.grok/hooks/inbox-wake.json` runs `check`. Entries that
+arrived during the turn are handed back as one stop-hook message, and the
+turn continues. If nothing arrived, the session is marked idle. `watch` then
+prints a single line for each later batch, which wakes the open session.
+The hook asks the session to start `watch` when it is down. One watcher
+records its pid in the common Git directory (`grok-wake/`, next to
+`codex-wake/`). A second one exits.
+
+The first look baselines every entry already in the inbox. A heading with no
+body yet waits. Two seconds of quiet are required after a write. An edit to
+an old body does not wake anyone. A repeated id is delivered once per copy.
+Answered ids stay answered; a later session does not replay them.
+
+`watch` has to be running inside the Grok session (the monitor tool,
+persistent, description `grok-inbox-wake`). A user service cannot type into
+that session. Hooks load when a Grok session starts. `prompt` marks a new
+main-session turn busy; subagent turns are ignored.
+
+```sh
+python3 -u tools/collab/grok_wake.py watch
+python3 tools/collab/grok_wake.py status
+python3 tools/collab/grok_wake.py busy
+python3 tools/collab/grok_wake.py idle
+```
+
 Run the isolated tests with:
 
 ```sh
