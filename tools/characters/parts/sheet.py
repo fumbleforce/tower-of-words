@@ -1,6 +1,6 @@
 """Contact sheet for one attempt of reviews/char-mio-parts-1: the target picture, then the turnaround and face renders.
 
-  python3 sheet.py <renders dir> <out.webp> [label]
+  python3 sheet.py <renders dir> <out.webp> [label] [target=<picture> face=x0,y0,x1,y1]
 Run with ~/ai/sd/venv/bin/python (PIL). Light grey background, each view labelled; the target is cropped the same way.
 """
 import os, sys
@@ -29,15 +29,21 @@ def cell(im, label):
 
 def main():
     d, out = sys.argv[1], sys.argv[2]
-    t = Image.open(TARGET)
-    cells = [cell(t.crop((636, 100, 2436, 2958)).resize((1800 * CELL // 2858, CELL)), 'target picture'),
-             cell(t.crop((1150, 220, 1950, 1020)), 'target face')]
+    opt = dict(a.split('=', 1) for a in sys.argv[3:] if '=' in a)
+    label = next((a for a in sys.argv[3:] if '=' not in a), None)
+    if 'target' in opt:                     # another round's picture: whole picture, and the face box x0,y0,x1,y1
+        t = Image.open(opt['target'])
+        cells = [cell(t, 'target picture'), cell(t.crop(tuple(int(v) for v in opt['face'].split(','))), 'target face')]
+    else:
+        t = Image.open(TARGET)
+        cells = [cell(t.crop((636, 100, 2436, 2958)).resize((1800 * CELL // 2858, CELL)), 'target picture'),
+                 cell(t.crop((1150, 220, 1950, 1020)), 'target face')]
     cells += [cell(Image.open(os.path.join(d, v + '.png')), lab) for v, lab in VIEWS if os.path.exists(os.path.join(d, v + '.png'))]
     cols = 5
     rows = (len(cells) + cols - 1) // cols
-    head = 44 if len(sys.argv) > 3 else 0
+    head = 44 if label else 0
     sh = Image.new('RGB', (cols * CELL, rows * (CELL + 34) + head), (236, 238, 241))
-    if head: ImageDraw.Draw(sh).text((12, 10), sys.argv[3], fill=(20, 25, 30), font=font(24))
+    if head: ImageDraw.Draw(sh).text((12, 10), label, fill=(20, 25, 30), font=font(24))
     for i, c in enumerate(cells):
         sh.paste(c, ((i % cols) * CELL, head + (i // cols) * (CELL + 34)))
     sh.save(out, quality=88)

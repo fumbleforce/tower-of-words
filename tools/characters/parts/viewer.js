@@ -1,14 +1,22 @@
-// Live viewer for reviews/char-mio-parts-1: the rigged parts model, her approved idle and walk carried over from the
-// game's Mio rig, and meshy-single beside her for comparison. Models are git-ignored files in the main checkout.
+// Live viewer for rigged character attempts: Mio's approved idle and walk carried over from the game's Mio rig by
+// bone name, and another model beside it for comparison. Models are git-ignored files in the main checkout.
+// Another round passes its own models as viewer.html?cfg=<json url>, the JSON being {"title", "blurb",
+// "attempts": {id: url}, "compare": {name: url}, "refs": [picture urls]}; without one it shows reviews/char-mio-parts-1.
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 
-const ART = '/art/parts/char-mio-parts/';
-const ATTEMPTS = ['a11', 'a10', 'a07'];
-const COMPARE = {
-  none: null,
-  'meshy-single': '/art/parts/style-concepts/claude-miogen3d/raw/meshy-single/norm.glb',
+const cfgUrl = new URLSearchParams(location.search).get('cfg');
+const CFG = (cfgUrl && await fetch(cfgUrl).then((r) => r.json())) || {
+  attempts: Object.fromEntries(['a11', 'a10', 'a07'].map((a) => [a, `/art/parts/char-mio-parts/${a}/mio-rigged.glb`])),
+  compare: { 'meshy-single': '/art/parts/style-concepts/claude-miogen3d/raw/meshy-single/norm.glb' },
 };
+const ATTEMPTS = Object.keys(CFG.attempts);
+const COMPARE = { none: null, ...CFG.compare };
+if (CFG.title) document.title = document.getElementById('title').textContent = CFG.title;
+if (CFG.blurb) document.getElementById('blurb').textContent = CFG.blurb;
+if (CFG.refs) {
+  document.getElementById('refs').replaceChildren(...CFG.refs.map((src) => Object.assign(new Image(), { src, alt: 'Target picture' })));
+}
 const SRC_RIG = '/game3d/assets/mio/walk.glb';
 const IDLE = '/game3d/assets/characters/relaxed-idle-mio.json';
 const HEIGHT = 1.6;
@@ -69,9 +77,17 @@ const ORDER = ['Hips', 'Spine', 'Spine1', 'Spine2', 'Neck', 'Head', 'LeftShoulde
   'RightUpLeg', 'RightLeg', 'RightFoot', 'RightToeBase'];
 const PARENT_OF = { Head: 'Neck', LeftHand: 'LeftForeArm', RightHand: 'RightForeArm', LeftToeBase: 'LeftFoot', RightToeBase: 'RightFoot' };
 
+// Meshy's auto-rig numbers the spine the other way round: Hips > Spine02 > Spine01 > Spine > neck.
+const MESHY = { Spine02: 'Spine', Spine01: 'Spine1', Spine: 'Spine2', neck: 'Neck' };
 function bones(root) {
   const m = {};
-  root.traverse((o) => { if (o.isBone) m[o.name.replace(/^mixamorig:?/, '')] = o; });
+  let meshy = false;
+  root.traverse((o) => { if (o.isBone && o.name === 'Spine02') meshy = true; });
+  root.traverse((o) => {
+    if (!o.isBone) return;
+    const n = o.name.replace(/^mixamorig:?/, '');
+    m[(meshy && MESHY[n]) || n] = o;
+  });
   return m;
 }
 const wq = (o) => o.getWorldQuaternion(new THREE.Quaternion());
@@ -149,7 +165,7 @@ async function loadModel(url) {
 let rt = null, action = null;
 async function showAttempt(id) {
   status.textContent = `loading ${id}`;
-  const m = await loadModel(ART + id + '/mio-rigged.glb');
+  const m = await loadModel(CFG.attempts[id]);
   if (target) turn.remove(target);
   target = m;
   turn.add(target);

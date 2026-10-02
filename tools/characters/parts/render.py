@@ -1,6 +1,6 @@
 """Turnaround stills for the parts round (reviews/char-mio-parts-1). Blender, run with -t 8:
 
-  blender -b -t 8 -P tools/characters/parts/render.py -- <model.glb|.blend> <outdir> [size=1024]
+  blender -b -t 8 -P tools/characters/parts/render.py -- <model.glb|.blend> <outdir> [size=1024] [face_z=1.38] [face_dist=0.9]
 
 Same camera and light for every attempt and for meshy-single, so they compare: a 50 mm camera at chest height,
 front, her left three-quarter (image right side turned to us), her left side, back, and a face close-up (front and
@@ -65,6 +65,7 @@ body_c = Vector((0, 0, 0.8))
 for name, yaw in (('front', 0), ('l45', 45), ('l90', 90), ('back', 180), ('r45', -45)):
     shot(name, yaw, body_c, 2.6)
 face_c = Vector((0, 0, float(opt.get('face_z', 1.38))))
-shot('face', 0, face_c, 0.9)
-shot('face-l40', 40, face_c, 0.9)
+fd = float(opt.get('face_dist', 0.9))
+shot('face', 0, face_c, fd)
+shot('face-l40', 40, face_c, fd)
 print('RENDERED', out)

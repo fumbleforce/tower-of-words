@@ -3,17 +3,20 @@
 `pose=a-pose` and `tex=4k` (same price as 2k) are the extra knobs, and `model=t2 faces=<n>` switches to Meshy's
 Smart Topology model (low poly at a set face count, 15 credits). Uses Jørgen's Meshy credits: one call, one part.
 
-  meshy_part.py <part> <picture.png> [pose=a-pose] [tex=4k] [model=t2 faces=3000]
-Writes <part>.json and .glb to the main checkout's art/parts/char-mio-parts/meshy/ (local only) and appends the credits to
-reviews/char-mio-parts-1/credits.json.
+  meshy_part.py <part> <picture.png> [pose=a-pose] [tex=4k] [model=t2 faces=3000] [round=chibi-meshy]
+Writes <part>.json and .glb to the main checkout's art/parts/<round>/meshy/ (local only) and appends the credits to
+reviews/<round>-1/credits.json. The round defaults to char-mio-parts.
+
+  meshy_part.py rig <part> [height=1.0] [round=chibi-meshy] [model=<local.glb>]
+Meshy auto-rig on that part's task (5 credits; height lowered for a big chibi head). Writes <part>-rigged.glb and
+Meshy's free walking and running clips next to it, and logs the credits the same way.
 """
-import json, os, sys
+import base64, json, os, sys
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 import meshy
 
 ROOT = meshy.ROOT
 MAIN = ROOT.split('/.claude/worktrees/')[0]
-LEDGER = os.path.join(ROOT, 'reviews/char-mio-parts-1/credits.json')
 
 
 def key():
@@ -28,9 +31,48 @@ def key():
 meshy.key = key
 
 
+def log(ledger, entry):
+    led = json.load(open(ledger)) if os.path.exists(ledger) else []
+    led.append(entry)
+    os.makedirs(os.path.dirname(ledger), exist_ok=True)
+    json.dump(led, open(ledger, 'w'), indent=1)
+
+
+def rig(part, opts):
+    rnd = opts.get('round', 'char-mio-parts')
+    d = os.path.join(MAIN, f'art/parts/{rnd}/meshy')
+    h = float(opts.get('height', 1.0))
+    if opts.get('model'):                    # a local glb (e.g. decimated under the 320k-face rig limit)
+        body = {'model_url': 'data:application/octet-stream;base64,' + base64.b64encode(open(opts['model'], 'rb').read()).decode()}
+        settings = {'model': os.path.relpath(opts['model'], MAIN)}
+    else:
+        body = {'input_task_id': json.load(open(f'{d}/{part}.json'))['id']}
+        settings = dict(body)
+    body['height_meters'] = settings['height_meters'] = h
+    tid = meshy.call('POST', '/v1/rigging', body)['result']
+    print('task', tid, flush=True)
+    r = meshy.wait('rigging', tid)
+    r['_settings'] = settings
+    json.dump(r, open(f'{d}/{part}-rig.json', 'w'), indent=1)
+    log(os.path.join(ROOT, f'reviews/{rnd}-1/credits.json'),
+        {'service': 'meshy', 'part': part + '-rig', 'task': tid, 'status': r.get('status'),
+         'credits': r.get('consumed_credits'), 'settings': r['_settings']})
+    if r.get('status') != 'SUCCEEDED':
+        sys.exit(f'rig failed: {r.get("task_error")}')
+    res = r['result']
+    meshy.fetch(res['rigged_character_glb_url'], f'{d}/{part}-rigged.glb')
+    for k, v in (res.get('basic_animations') or {}).items():
+        if k.endswith('glb_url') and v: meshy.fetch(v, f'{d}/{part}-' + k.replace('_glb_url', '') + '.glb')
+    print('credits', r.get('consumed_credits'))
+
+
 def main():
+    if sys.argv[1] == 'rig':
+        return rig(sys.argv[2], dict(kv.split('=', 1) for kv in sys.argv[3:]))
     part, pic = sys.argv[1], sys.argv[2]
     opts = dict(kv.split('=', 1) for kv in sys.argv[3:])
+    rnd = opts.pop('round', 'char-mio-parts')
+    ledger = os.path.join(ROOT, f'reviews/{rnd}-1/credits.json')
     body = {'image_url': meshy.data_uri(pic), 'ai_model': 'latest', 'should_remesh': False, 'should_texture': True,
             'enable_pbr': False, 'image_enhancement': False, 'target_formats': ['glb'], 'multi_view_thumbnails': True}
     if opts.get('pose'): body['pose_mode'] = opts['pose']
@@ -43,15 +85,13 @@ def main():
     print('task', tid, flush=True)
     r = meshy.wait('image-to-3d', tid)
     after = meshy.call('GET', '/v1/balance')['balance']
-    d = os.path.join(MAIN, 'art/parts/char-mio-parts/meshy'); os.makedirs(d, exist_ok=True)
+    d = os.path.join(MAIN, f'art/parts/{rnd}/meshy'); os.makedirs(d, exist_ok=True)
     r['_settings'] = {k: v for k, v in body.items() if k != 'image_url'}
     r['_input'] = os.path.relpath(pic, MAIN)
     json.dump(r, open(f'{d}/{part}.json', 'w'), indent=1)
-    led = json.load(open(LEDGER)) if os.path.exists(LEDGER) else []
-    led.append({'service': 'meshy', 'part': part, 'task': tid, 'status': r.get('status'), 'credits': before - after,
-                'balance_after': after, 'settings': r['_settings'], 'input': r['_input']})
-    os.makedirs(os.path.dirname(LEDGER), exist_ok=True)
-    json.dump(led, open(LEDGER, 'w'), indent=1)
+    log(ledger, {'service': 'meshy', 'part': part, 'task': tid, 'status': r.get('status'),
+                 'credits': r.get('consumed_credits', before - after), 'balance_after': after, 'settings': r['_settings'],
+                 'input': r['_input']})
     if r.get('status') != 'SUCCEEDED':
         sys.exit(f'{part} failed: {r.get("task_error")}')
     meshy.fetch(r['model_urls']['glb'], f'{d}/{part}.glb')
