@@ -3,7 +3,9 @@
 // the draw calls and triangles (the recorder, ?perf), overlaps and spins (the fast test's movement check), and any page
 // error. Shots in game3d/shots/crowd/<size>/.
 //   node game3d/tools/crowd-check.mjs [w h]       PLACES=plaza,forecourt PERIODS=early,evening SECS=6 Q=1
-//   BASE=.claude/worktrees/<name>/game3d for a worktree. Exits 1 on a page error, an overlap or spin, or a route that doesn't resolve.
+//   (NOSHOT=<places>: shoot those where Eric came in, not where the crowd is busiest)
+//   BASE=.claude/worktrees/<name>/game3d for a worktree. Exits 1 on a page error, an overlap or spin, or a route
+//   that does not resolve.
 import fs from 'node:fs';
 import { withBrowserJob } from '../../tools/lib/browser-job.mjs';
 
@@ -131,7 +133,7 @@ await withBrowserJob('crowd-check', async (browser) => {
               spins: globalThis.__moveCheck?.spins || [],
             };
           },
-          { period, SECS, SHOT: !off },
+          { period, SECS, SHOT: !off && !(process.env.NOSHOT || '').split(',').includes(place) },
         );
         if (!off) await page.screenshot({ path: `${out}/${place}-${period}.png` });
         await page.close();
