@@ -1,0 +1,361 @@
+// The south half of the island, planned for day 2 (docs/game/island.md, the home of every place here): the half's
+// edge, the rest of its coastline, its planned streets, walks, courts and green, the one new building, and a label
+// point for every place in island.md. Same frame and grid as scenes/island-layout.js, which re-exports this; traced
+// from the straight-down picked map (art/island/island-map-4-topdown.png) like the layout, a few units out.
+//
+// Drawn by the island map only (?map=1, "Day 2 plan"; map/plan.js). No chunk builds it and no backdrop shows it:
+// when a place is built, its entries move into the layout proper (PATHS, GREEN, BUILDINGS) with the chunk.
+// `node tools/facts/check.mjs` checks PLACES against island.md's tables.
+const pairs = (f) => f.reduce((a, v, i) => (i % 2 ? a[a.length - 1].push(v) : a.push([v]), a), []);
+
+// The half's north edge, west coast to east coast: north of the old works, then along the park's south edge, then
+// round the onsen. North of it: the park, the sports field, the matsuri stage, the history hall and the shrine.
+export const HALF_EDGE = pairs([-154, -134, -48, -134, -48, -112, 104, -112, 104, -124, 140, -124]);
+
+// The coast the layout's COAST.line doesn't reach: west from the sea wall's north end round the harbour, and north
+// from its east end past the onsen. Land on the inside.
+export const PLAN_COAST = [
+  pairs(
+    [-56.8, -32.9, -59, -42, -63, -50, -70, -52.5, -100, -52.5, -100, -90, -120, -90, -120, -98, -124, -100].concat([
+      -134, -104, -146, -112, -152, -124, -154, -134,
+    ]),
+  ),
+  pairs([130.4, -47.8, 128, -56, 136, -64, 142, -76, 144, -92, 141, -108, 138, -120, 136, -124]),
+];
+
+// The one building the layout doesn't have (the rest of the half's buildings are its ROWS).
+export const PLAN_BUILDINGS = [
+  {
+    id: 'ferry_terminal',
+    kind: 'low',
+    rect: [-112, -106, -100, -98],
+    storeys: 1,
+    detail: 'The ferry waiting room and ticket window at the head of the ferry pier; its doors on the landing.',
+  },
+];
+
+// Planned streets (lane, 3 wide), walks (2 or 1.5), courts, piers. Every one on the grid, meeting the layout's
+// paths and each other square on.
+export const PLAN_PATHS = [
+  {
+    id: 'office_street',
+    kind: 'lane',
+    rect: [-62, -55.5, 36, -52.5],
+    detail:
+      'The office quarter’s main street, east-west: from the supply quay’s yard past the office blocks to the gym.',
+  },
+  {
+    id: 'shed_street_far',
+    kind: 'lane',
+    rect: [-20.75, -52.5, -17.75, -27.4],
+    detail: 'The shed street (layout shed_street_north) carried on north to the office street.',
+  },
+  {
+    id: 'quarter_street',
+    kind: 'lane',
+    rect: [3, -52.5, 6, -18.1],
+    detail: 'North from the cross street behind the tower (the tower’s rear door) to the office street.',
+  },
+  {
+    id: 'back_lane_west',
+    kind: 'lane',
+    rect: [6, -33, 15.79, -30],
+    detail: 'The back lane carried west past the canteen’s loading yard to the quarter street.',
+  },
+  {
+    id: 'works_street',
+    kind: 'lane',
+    rect: [-50, -106, -47, -55.5],
+    detail: 'North from the office street up the quarter’s west side to the works yard.',
+  },
+  {
+    id: 'harbour_walk',
+    kind: 'walk',
+    rect: [-42.6, -52.5, -40.6, -27.4],
+    detail: 'The west coast walk (layout coast_path) carried north to the office street.',
+  },
+  {
+    id: 'gym_link',
+    kind: 'lane',
+    rect: [33, -55.5, 36, -46.5],
+    detail: 'The office street’s east end, turning south along the gym’s west side to the sports lane.',
+  },
+  {
+    id: 'sports_lane',
+    kind: 'lane',
+    rect: [33, -49.5, 70.77, -46.5],
+    detail: 'Along the gym’s south side, east to the top of the north street (layout north_street).',
+  },
+  {
+    id: 'pool_walk',
+    kind: 'walk',
+    rect: [57.2, -91, 59.2, -49.5],
+    detail: 'North from the sports lane between the gym and the pool to the shower pavilion’s door.',
+  },
+  {
+    id: 'courts_walk',
+    kind: 'walk',
+    rect: [59.2, -58.5, 104, -56.5],
+    detail: 'East from the pool walk along the pool’s and the courts’ south fences, behind the north residence.',
+  },
+  {
+    id: 'onsen_path',
+    kind: 'walk',
+    w: 2,
+    line: pairs([103, -57.5, 103, -85, 110, -85]),
+    detail: 'From the courts walk’s east end north through the trees to the onsen’s red entrance gate.',
+  },
+  {
+    id: 'east_coast_walk',
+    kind: 'walk',
+    w: 2,
+    line: pairs([129, 10.5, 131, 10.5, 131, -36, 120, -36, 120, -57.5, 104, -57.5]),
+    detail: 'From the dorms’ sea terrace north along the east coast behind dorm_4, then west to the courts walk.',
+  },
+  {
+    id: 'pool_deck',
+    kind: 'court',
+    rect: [60, -87, 78, -61],
+    detail: 'The pool’s deck round the 25 m pool, fenced; the shower pavilion on its north side.',
+  },
+  {
+    id: 'courts',
+    kind: 'court',
+    rect: [78, -84, 101, -61],
+    detail: 'Two hard tennis courts, fenced, the clubhouse at their north-west corner.',
+  },
+  {
+    id: 'supply_yard',
+    kind: 'court',
+    rect: [-100, -90, -62, -52.5],
+    detail: 'The supply quay’s yard: the warehouse, the crane, containers and crates; the quay along its south edge.',
+  },
+  {
+    id: 'supply_pier',
+    kind: 'pier',
+    rect: [-97, -56, -88, -30],
+    detail: 'The supply pier, south off the yard’s west end, where the freighter ties up.',
+  },
+  {
+    id: 'ferry_landing',
+    kind: 'court',
+    rect: [-120, -98, -100, -90],
+    detail: 'The ferry landing in front of the terminal, at the head of the pier.',
+  },
+  {
+    id: 'ferry_pier',
+    kind: 'pier',
+    rect: [-128, -90, -120, -50],
+    detail: 'The ferry pier, south from the landing, the ferry alongside its west face.',
+  },
+  {
+    id: 'works_lane',
+    kind: 'lane',
+    rect: [-83.5, -114.5, -80.5, -90],
+    detail:
+      'From the supply yard north between the harbour office and the server hall, past the works yard, to the power plant.',
+  },
+  {
+    id: 'works_yard',
+    kind: 'court',
+    rect: [-80.5, -106, -47, -102],
+    detail:
+      'The old works’ cracked concrete yard between the factory’s sheds and the server hall, to the works street.',
+  },
+  {
+    id: 'research_walk',
+    kind: 'walk',
+    rect: [-47, -104.5, -35.2, -103],
+    detail: 'From the works yard’s east end to Amakawa Research’s door on its west face.',
+  },
+];
+
+// Planned green, coarse.
+export const PLAN_GREEN = [
+  {
+    id: 'onsen_grounds',
+    rect: [104, -118, 140, -60],
+    detail: 'Pines and maples round the onsen, its walled bath courtyards inside them.',
+  },
+  {
+    id: 'quarter_park',
+    rect: [-4, -48, 0, -36],
+    detail: 'A strip of lawn and trees west of the quarter street.',
+  },
+];
+
+// A label point for every place in island.md: b names a layout or plan building (its footprint's middle), else at.
+export const PLACES = [
+  // arrival and head office
+  { id: 'station', en: 'Honsha station', ja: '本社駅', b: 'station' },
+  {
+    id: 'platforms',
+    en: 'Monorail platforms',
+    ja: 'ホーム',
+    b: 'platform_shed',
+  },
+  { id: 'forecourt', en: 'Station forecourt', ja: '駅前広場', at: [-8, -1] },
+  { id: 'bike_court', en: 'Bike parking', ja: '駐輪場', at: [-4, 6] },
+  { id: 'head_office', en: 'Head office', ja: '本社', b: 'head_office' },
+  {
+    id: 'general_affairs',
+    en: 'General affairs',
+    ja: '総務部',
+    b: 'head_office_wing',
+  },
+  {
+    id: 'facilities_office',
+    en: 'Facilities office',
+    ja: '施設課',
+    b: 'office_e1',
+  },
+  {
+    id: 'west_coast_walk',
+    en: 'West coast walk',
+    ja: '海沿いの道',
+    at: [-41.6, -8],
+  },
+  // office quarter
+  { id: 'trading_office', en: 'Amakawa Trading', ja: '天川商事', b: 'w1' },
+  { id: 'print_shop', en: 'Print shop', ja: '印刷所', b: 'w3' },
+  { id: 'foods_office', en: 'Amakawa Foods', ja: '天川食品', b: 'm1' },
+  { id: 'electric_office', en: 'Amakawa Electric', ja: '天川電機', b: 'm2' },
+  { id: 'logistics_office', en: 'Amakawa Logistics', ja: '天川物流', b: 'm3' },
+  {
+    id: 'construction_office',
+    en: 'Amakawa Construction',
+    ja: '天川建設',
+    b: 'm4',
+  },
+  { id: 'insurance_office', en: 'Amakawa Life', ja: '天川生命', b: 'm5' },
+  { id: 'personnel_office', en: 'Personnel', ja: '人事部', b: 'm6' },
+  { id: 'bank', en: 'Company bank', ja: '天川銀行', b: 'b_h' },
+  // fountain plaza, canteen, clinic
+  { id: 'plaza', en: 'Fountain plaza', ja: '噴水広場', at: [37.29, -2.75] },
+  { id: 'canteen', en: 'Canteen', ja: '社員食堂', b: 'canteen' },
+  {
+    id: 'canteen_yard',
+    en: 'Canteen loading yard',
+    ja: '搬入口',
+    at: [19.2, -28.5],
+  },
+  { id: 'clinic', en: 'Clinic', ja: 'クリニック', b: 'clinic' },
+  { id: 'clinic_grove', en: 'Grove', ja: '木立の広場', at: [47.6, -39] },
+  // shop street and seafront (bays: island-south.js BAYS, bay i's middle at -3 + 4.5 (i + 0.5))
+  { id: 'shotengai', en: 'Shop street', ja: '商店街', at: [20, 20.15] },
+  {
+    id: 'store',
+    en: 'Konbini, 100-yen and drugstore',
+    ja: 'コンビニ',
+    at: [30.75, 15.6],
+  },
+  { id: 'bakery', en: 'Bakery', ja: 'パン屋', at: [44.25, 15.6] },
+  { id: 'bike_shop', en: 'Bike shop', ja: '自転車屋', at: [8.25, 15.6] },
+  {
+    id: 'game_centre',
+    en: 'Game centre',
+    ja: 'ゲームセンター',
+    at: [53.25, 15.6],
+  },
+  { id: 'karaoke', en: 'Karaoke box', ja: 'カラオケ', at: [57.75, 24.6] },
+  { id: 'izakaya', en: 'Izakaya', ja: '居酒屋', b: 'izakaya' },
+  { id: 'ramen', en: 'Ramen shop', ja: 'ラーメン屋', b: 'ramen' },
+  {
+    id: 'promenade',
+    en: 'Seafront promenade',
+    ja: '海辺の遊歩道',
+    at: [30, 29.6],
+  },
+  { id: 'beach', en: 'Beach', ja: '浜辺', at: [25, 42] },
+  // east lane
+  {
+    id: 'training_centre',
+    en: 'New-staff training centre',
+    ja: '研修センター',
+    b: 'block_e1',
+  },
+  { id: 'cafe', en: 'Café', ja: 'カフェ', b: 'm_e1' },
+  { id: 'liquor_shop', en: 'Liquor and rice shop', ja: '酒屋', b: 'm_e2' },
+  { id: 'barber', en: 'Barber', ja: '床屋', b: 'r8' },
+  { id: 'pocket_park', en: 'Pocket park', ja: '小さな公園', at: [69.3, -5.5] },
+  {
+    id: 'travel_office',
+    en: 'Amakawa Travel',
+    ja: '天川トラベル',
+    b: 'block_e2',
+  },
+  { id: 'family_flats', en: 'Family flats', ja: '家族寮', b: 'block_e3' },
+  { id: 'director_house', en: 'Director’s house', ja: '所長の家', b: 'r9' },
+  // dorms
+  { id: 'dorm_court', en: 'Dorm courtyard', ja: '寮の前庭', at: [79.84, -1.3] },
+  {
+    id: 'coin_laundry',
+    en: 'Coin laundry',
+    ja: 'コインランドリー',
+    at: [82.8, -6],
+  },
+  { id: 'sento', en: 'Sento', ja: '銭湯', at: [82.8, 3] },
+  { id: 'eric_dorm', en: 'Eric’s dorm', ja: '社員寮', b: 'dorm_1' },
+  {
+    id: 'dorm_commons',
+    en: 'Dorm common building',
+    ja: '共用棟',
+    b: 'dorm_gallery',
+  },
+  { id: 'inner_court', en: 'Dorm inner court', ja: '中庭', at: [101.6, 6.5] },
+  { id: 'dorm_blocks', en: 'Dorm blocks', ja: '社員寮', b: 'dorm_3' },
+  {
+    id: 'north_residence',
+    en: 'North residence',
+    ja: '北レジデンス',
+    b: 'housing_n',
+  },
+  { id: 'sea_terrace', en: 'Sea terrace', ja: '海のテラス', at: [126.5, 10.5] },
+  // sports and baths
+  { id: 'gym', en: 'Gym', ja: '体育館', b: 'gym' },
+  { id: 'pool', en: 'Pool and showers', ja: 'プール', at: [69, -74] },
+  {
+    id: 'tennis_courts',
+    en: 'Tennis courts',
+    ja: 'テニスコート',
+    at: [89.5, -72.5],
+  },
+  { id: 'onsen', en: 'Onsen', ja: '温泉', at: [122, -82] },
+  {
+    id: 'east_coast_walk',
+    en: 'East coast walk',
+    ja: '東の海岸道',
+    at: [131, -16],
+  },
+  // harbour
+  {
+    id: 'ferry_terminal',
+    en: 'Ferry terminal',
+    ja: 'フェリー乗り場',
+    b: 'ferry_terminal',
+  },
+  { id: 'supply_quay', en: 'Supply quay', ja: '荷揚げ場', at: [-80, -70] },
+  {
+    id: 'harbour_office',
+    en: 'Harbour office',
+    ja: '港の事務所',
+    b: 'works_orange',
+  },
+  // old works
+  { id: 'old_factory', en: 'Old factory', ja: '旧工場', b: 'factory' },
+  { id: 'old_power_plant', en: 'Old power plant', ja: '旧発電所', b: 'nw_old' },
+  {
+    id: 'server_hall',
+    en: 'Old server hall',
+    ja: '旧サーバー棟',
+    b: 'works_blue',
+  },
+  { id: 'works_yard', en: 'Works yard', ja: '工場跡の広場', at: [-64, -104] },
+  {
+    id: 'recycling_centre',
+    en: 'Recycling centre',
+    ja: 'リサイクルセンター',
+    b: 'w2',
+  },
+  { id: 'research_lab', en: 'Amakawa Research', ja: '天川研究所', b: 'n4' },
+];

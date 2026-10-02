@@ -10,7 +10,7 @@ The tables are checked by `node tools/facts/check.mjs`: things and their labels,
 
 The company city has dorms, a canteen, shops, a bar and a university ([setting.md](setting.md)); only the places in the list below are planned, and only the `##` sections further down are built. One line per planned place: name, id, what it is.
 
-The picked full-island layout is [island-map-4](../../reviews/island-map-4/review.json). Only the day-1 route is to be built, one chunk at a time, using the game's existing palette rather than the map's saturated colours. The plaza and dorm courtyard chunks replaced the earlier single outdoor `path` proposal. No other place is planned yet.
+The picked full-island layout is [island-map-4](../../reviews/island-map-4/review.json). Only the day-1 route is to be built, one chunk at a time, using the game's existing palette rather than the map's saturated colours. The plaza and dorm courtyard chunks replaced the earlier single outdoor `path` proposal. The rest of the island's south half is planned for day 2 in [island.md](island.md) (2026-10-02): every place there, its doors, connections and a Japanese hook. None of it is built until Jørgen picks it.
 
 ## Getting between places
 

@@ -22,6 +22,8 @@ const SHOTS = [
   ['map', 'map', {}],
   ['map-b2', 'map', { basement: true }],
   ['map-backdrop', 'map', { backdrop: true }],
+  ['plan', 'plan', {}], // the south half planned for day 2 (docs/game/island.md)
+  ...[[-52, -75], [42, -75], [-52, -5], [42, -5]].map((centre, k) => [`plan-${k + 1}`, 'plan', { zoom: 1.6, centre }]),
   // close-ups of each outdoor place: from above, then over the reference as drawn with the layout; the plan view
   // (from above with its backdrop, no layout boxes) is for checking the neighbour blocks a place builds
   ...['forecourt', 'plaza', 'dorm_court'].flatMap((focus) => [
@@ -61,7 +63,7 @@ await withBrowserJob(
       await context.close();
     }
   },
-  { timeoutMs: 240000, loadWaitMs: 150000 },
+  { timeoutMs: process.env.GL === 'soft' ? 480000 : 240000, loadWaitMs: 150000 }, // software GL draws the places slowly
 );
 if (errors.length) console.log('page errors:\n' + errors.join('\n'));
 console.log(errors.length ? 'DONE WITH PAGE ERRORS' : 'DONE', out);

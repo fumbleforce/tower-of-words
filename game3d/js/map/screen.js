@@ -6,6 +6,7 @@ import { CHUNKS, REF, TOPDOWN, toIsland, toImage } from '../scenes/island-layout
 import { renderAll } from './render.js';
 import { rectify, localAffine, landmarkGaps, seamGaps } from './reference.js';
 import { drawLayout, tag } from './layers.js';
+import { drawPlan, HALF_BOUNDS } from './plan.js';
 import { PLACE_NAMES } from '../places/definitions.js';
 
 const CSS = `
@@ -59,7 +60,7 @@ export function createMapScreen(game) {
     root = document.createElement('div');
     root.id = 'map-screen';
     root.innerHTML = `<canvas></canvas><div class="bar">
-      <button data-view="map">Built places</button><button data-view="compare">Compare with island-map-4</button>
+      <button data-view="map">Built places</button><button data-view="compare">Compare with island-map-4</button><button data-view="plan">Day 2 plan</button>
       <label><input type="checkbox" data-opt="layout"> Layout</label>
       <label class="cmp"><input type="checkbox" data-opt="drawn"> As drawn</label>
       <label><input type="checkbox" data-opt="basement"> B2</label>
@@ -146,7 +147,8 @@ export function createMapScreen(game) {
     for (const el of root.querySelectorAll('.cmp')) el.style.display = S.view === 'compare' ? '' : 'none';
     draw();
   }
-  // opts: layout, drawn, basement, backdrop, whole (frame the whole reference), focus (frame one place), opacity
+  // opts: layout, drawn, basement, backdrop, whole (frame the whole reference), focus (frame one place), opacity,
+  // zoom and centre
   async function open(view = S.view, opts = {}) {
     if (!root) build();
     root.classList.add('open');
@@ -156,6 +158,7 @@ export function createMapScreen(game) {
       drawn: false,
       whole: false,
       focus: null,
+      centre: null,
       basement: false,
       backdrop: false,
       ...opts,
@@ -180,7 +183,8 @@ export function createMapScreen(game) {
   function frame(w, h) {
     let xs = [],
       zs = [];
-    if (compare() && S.whole) {
+    if (S.view === 'plan' && !S.focus) [xs, zs] = [HALF_BOUNDS.x, HALF_BOUNDS.z];
+    else if (compare() && S.whole) {
       if (drawnView()) ((xs = [0, REF.size[0]]), (zs = [0, REF.size[1]]));
       else if (rectified) {
         xs = [rectified.x0, rectified.x0 + rectified.canvas.width / rectified.ppu];
@@ -211,11 +215,8 @@ export function createMapScreen(game) {
     }
     const top = 48,
       s = Math.min(w / (b[2] - b[0]), (h - top) / (b[3] - b[1])) * 0.95 * S.zoom;
-    return {
-      s,
-      ox: w / 2 + S.pan[0] - ((b[0] + b[2]) / 2) * s,
-      oy: (top + h) / 2 + S.pan[1] - ((b[1] + b[3]) / 2) * s,
-    };
+    const [cx, cz] = S.centre || [(b[0] + b[2]) / 2, (b[1] + b[3]) / 2]; // opts.centre: an island point to centre on
+    return { s, ox: w / 2 + S.pan[0] - cx * s, oy: (top + h) / 2 + S.pan[1] - cz * s };
   }
 
   function draw() {
@@ -237,11 +238,13 @@ export function createMapScreen(game) {
     };
     ctx.setTransform(...base);
     if (drawnView() && !refFailed) ctx.drawImage(refImage, 0, 0);
-    else if (compare() && rectified) {
+    else if ((compare() || S.view === 'plan') && rectified) {
       const r = rectified;
+      ctx.globalAlpha = compare() ? 1 : 0.4;
       ctx.drawImage(r.canvas, r.x0, r.z0, r.canvas.width / r.ppu, r.canvas.height / r.ppu);
     }
     ctx.globalAlpha = compare() ? S.opacity : 1;
+    if (S.view === 'plan') return drawPlanView(ctx, base, P, dpr);
     for (const name of order()) drawPlace(ctx, base, name);
     ctx.globalAlpha = 1;
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
@@ -250,6 +253,13 @@ export function createMapScreen(game) {
     if (compare()) landmarks(ctx, P);
     eric(ctx, P);
     info.textContent = compare() ? compareText() : mapText();
+  }
+  // the plan: the built places at full strength, the half's plan over them (map/plan.js)
+  function drawPlanView(ctx, base, P, dpr) {
+    for (const name of order()) drawPlace(ctx, base, name);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    drawPlan(ctx, P);
+    info.textContent = progress() + 'The south half planned for day 2 (docs/game/island.md); yellow is planned.';
   }
   // the basement under everything, then the train (its platforms reach over the ground places), the ground, upstairs
   const depth = (n) => (n === 'train' ? -0.5 : CHUNKS[n].level);
