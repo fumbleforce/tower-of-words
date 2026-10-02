@@ -16,7 +16,7 @@ import * as THREE from 'three';
 import { CROWD } from './data.js';
 import { makeBody } from './looks.js';
 import { coarseGrid, routeBetween, laneOf, snapFree, clearAt, lineLength, pointAlong } from './paths.js';
-import { walkStep, stride, standPose, idleLife } from './motion.js';
+import { walkStep, stride, standPose, idleLife, stalled } from './motion.js';
 import { placeStill, stillSpots } from './still.js';
 import { bodies } from '../movement/shared.js';
 import { sim } from '../sim.js';
@@ -235,7 +235,14 @@ export async function attachCrowd(game, place, name) {
         offA: !!lead,
         offZ: true,
         toDoor: !!B.door,
+        goal: B.at,
+        tail: line.slice(-1), // the door, or the point past the street's end
         more: 0,
+        best: Infinity,
+        held: 0,
+        legAt: -1,
+        ghost: false,
+        rejoins: 0,
         speed: (kind === 'jog' ? 2.3 : kind === 'stroll' ? 0.75 : 1.0 + R() * 0.3) * K,
         ph: R() * 6,
         moved: 0,
@@ -243,6 +250,16 @@ export async function attachCrowd(game, place, name) {
       return true;
     }
     return false;
+  }
+  // a fresh line from where a walker stands to its end, then its way out (the door, or past the street's end)
+  function rejoin(b) {
+    if ((b.rejoins = (b.rejoins || 0) + 1) > 2) return false;
+    const p = b.r.root.position,
+      from = snapFree(g, [p.x, p.z], 0.3),
+      way = from && routeBetween(g, from, b.goal);
+    if (!way) return false;
+    Object.assign(b, { line: [[p.x, p.z], ...way, ...b.tail], i: 1, offA: false, best: Infinity, held: 0 });
+    return true;
   }
   function pickBody(sport) {
     const f = free();
@@ -303,6 +320,18 @@ export async function attachCrowd(game, place, name) {
       if (b.state === 'walk') {
         b.onGrid = !(b.offA && b.i === 1) && !(b.offZ && b.i >= b.line.length - 1);
         let done = walkStep(game, b, dt, list, eric, wide);
+        // held up (a jam at a corner, the story's people in the way) for a while: a new way round from here; with
+        // none, gone if nobody sees, or on through; through a door once at it
+        if (stalled(b, dt) && !rejoin(b)) {
+          if (!seen) {
+            hide(b);
+            continue;
+          }
+          b.ghost = true; // in sight with no way round: on through the other passers-by (never through Eric)
+          b.held = 0;
+        }
+        const out = b.tail[0];
+        if (b.toDoor && b.i >= b.line.length - 1 && Math.hypot(out[0] - p.x, out[1] - p.z) < 0.5 * K) done = true;
         // past a street's end and still in sight (a camera that sees the edge): on the same way a while longer
         if (done && seen && !b.toDoor && (b.more = (b.more || 0) + 1) < 4) {
           const [px, pz] = b.line[b.line.length - 2],
