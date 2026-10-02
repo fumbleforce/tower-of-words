@@ -4,7 +4,7 @@ const ENGINE_KEYS = flagKeys('game3d/js/runner.js');
 import { DEFAULT_SPEAKERS } from './narrative/speakers.js';
 // Runs the story files (game3d/story/*.js, format in game3d/story/FORMAT.md) against a place.
 import { voiceThenBeat } from './ui.js';
-import { ui, voice, sfx, setFace, PORTRAITS } from './ui.js';
+import { ui, voice, sfx, setFace, newScene } from './ui.js';
 import { WORDS, learn, known, cmdHTML, SAYABLE } from './lang.js';
 import { recordHeard } from './narrative/heard-record.js';
 
@@ -102,7 +102,7 @@ export class Runner {
     // last all day, so the listening portrait kept an old look (Jørgen: at the copier Eric looked surprised, still
     // from "Nineteen ninety-six?" in the ticket scene, and Mori flustered from the jam)
     const go = async () => {
-      for (const who in PORTRAITS) setFace(who, undefined);
+      newScene(this.story.nodes[node]);
       await this.run(node, { trigger: key });
     };
     // an event during a scene, or while Eric says a word (#81), waits for it to end
@@ -117,7 +117,7 @@ export class Runner {
     this.queued.push(queued);
     this.game.queue.push(async () => {
       this.queued.splice(this.queued.indexOf(queued), 1);
-      for (const who in PORTRAITS) setFace(who, undefined);
+      newScene(this.story.nodes[node]);
       await this.run(node, { trigger });
     });
     if (persist) this.persist();

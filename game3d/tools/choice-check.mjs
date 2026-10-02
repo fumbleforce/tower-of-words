@@ -9,7 +9,7 @@ import { pathToFileURL } from 'node:url';
 const root = path.resolve(path.dirname(new URL(import.meta.url).pathname), '..');
 // ui.js needs a DOM and audio; the runner only needs these few names from it
 const UI_STUB = `export const ui = globalThis.__ui; export const voice = () => Promise.resolve(); export const sfx = () => {};
-export const setFace = () => {}; export const PORTRAITS = {}; export async function voiceThenBeat() {}`;
+export const setFace = () => {}; export const newScene = () => {}; export const PORTRAITS = {}; export async function voiceThenBeat() {}`;
 register('data:text/javascript,' + encodeURIComponent(`
 export async function resolve(spec, ctx, next) { if (/\\/ui\\.js$/.test(spec) || spec === './ui.js') return { url: 'data:text/javascript,' + encodeURIComponent(${JSON.stringify(UI_STUB)}), shortCircuit: true }; return next(spec, ctx); }`));
 globalThis.window = globalThis.window || {};

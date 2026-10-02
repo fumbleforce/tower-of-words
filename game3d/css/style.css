@@ -488,6 +488,8 @@ body[data-place="office"] { --tint-top: 205, 226, 255; --tint-low: 22, 30, 44; }
 #stage .por.listen img { animation: none; }
 #stage .por.hop { animation: hop .32s ease-out; }
 #stage .por.aside { opacity: 0; }
+/* a new person's picture is still loading: nothing shows until it is ready, then it fades in (portraits.js) */
+#stage .por.wait { opacity: 0; transition: none; }
 @keyframes breathe { 50% { transform: scaleY(1.006); } }
 @keyframes hop { 0%, 100% { translate: 0 0; } 35% { translate: 0 -14px; } 65% { translate: 0 2px; } }
 

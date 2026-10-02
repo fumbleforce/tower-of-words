@@ -66,6 +66,57 @@ function portraitSrc(who, face) {
   if (!named) return null;
   return portraitSource(who, named) || workSrc(who, named);
 }
+// Pictures are loaded and decoded before they are shown. An <img> given a new src keeps painting its old picture until
+// the new one arrives, so on a slow phone a new conversation opened on the last person talked to (Jørgen: "Whenever i
+// talk to someone new, i first initially see the last person i talked to"). A new person stays hidden until their
+// picture is ready and then fades in; a new expression of the person already showing swaps in when it is ready.
+const loading = new Map(); // src -> Promise<boolean>, holding its Image so the decoded picture stays in memory
+const ready = new Set();
+function preload(src) {
+  if (!src) return Promise.resolve(false);
+  let p = loading.get(src);
+  if (!p) {
+    const im = new Image();
+    im.decoding = 'async';
+    im.src = src;
+    p = im.decode().then(
+      () => (ready.add(src), true),
+      () => false,
+    );
+    p.im = im;
+    loading.set(src, p);
+  }
+  return p;
+}
+// everyone who speaks in a scene's steps, nested branches included
+function speakersIn(steps, out = new Set()) {
+  for (const s of steps || []) {
+    const lines = typeof s === 'string' ? [s] : s && typeof s === 'object' ? [s.prompt, s.line] : [];
+    for (const l of lines) {
+      const m = typeof l === 'string' && /^(\w+): /.exec(l);
+      if (m) out.add(m[1]);
+    }
+    if (s && typeof s === 'object') {
+      if (s.say) out.add(s.say);
+      for (const v of Object.values(s)) if (Array.isArray(v)) speakersIn(v, out);
+    }
+  }
+  return out;
+}
+// A scene starts (runner.js): everyone back on their neutral face, since a face set on a line lasts for its scene
+// only, and every picture of everyone who speaks in it starts loading, so it's ready when they talk.
+export function newScene(steps) {
+  for (const who in PORTRAITS) faceNow[who] = undefined;
+  if (typeof Image === 'undefined') return; // tooling runs the story without a page
+  for (const who of speakersIn(steps)) for (const f of PORTRAITS[who] || []) preload(portraitSrc(who, f));
+}
+// everyone's neutral picture, once the game has settled after boot, so a first talk needn't wait on the network
+if (typeof Image !== 'undefined')
+  setTimeout(() => {
+    const all = () => Object.keys(PORTRAITS).forEach((who) => preload(portraitSrc(who, 'neutral')));
+    if (globalThis.requestIdleCallback) globalThis.requestIdleCallback(all, { timeout: 4000 });
+    else all();
+  }, 6000);
 const HOPS = new Set(['surprised', 'panicked', 'panic']);
 export function showPortraits(t, whoId, face) {
   const S = $('#stage'),
@@ -82,17 +133,26 @@ export function showPortraits(t, whoId, face) {
       el.hidden = true;
       return;
     }
-    const img = el.querySelector('img');
-    if (img.getAttribute('src') !== src) {
-      img.onerror = () => {
-        const n = workSrc(who, 'neutral');
-        if (n && img.getAttribute('src') !== n) {
-          img.src = n;
-          el.style.setProperty('--src', `url("${n}")`);
-        }
+    if (el._want !== src) {
+      const img = el.querySelector('img');
+      // the same person already on screen keeps their old face until the new one is ready; anyone else is hidden
+      // until theirs is
+      const same = el.dataset.who === who && !el.hidden && !el.classList.contains('wait');
+      el._want = src;
+      const put = (s) => {
+        if (img.getAttribute('src') !== s) img.src = s;
+        el.style.setProperty('--src', `url("${s}")`);
+        el.classList.remove('wait');
       };
-      img.src = src;
-      el.style.setProperty('--src', `url("${src}")`);
+      if (ready.has(src)) put(src);
+      else {
+        if (!same) el.classList.add('wait');
+        preload(src)
+          .then((ok) => (ok ? src : preload(workSrc(who, 'neutral')).then((n) => (n ? workSrc(who, 'neutral') : null))))
+          .then((s) => {
+            if (el._want === src && s) put(s);
+          });
+      }
       const fc = faceOf(who, f);
       if (!listen && el.dataset.face !== fc && HOPS.has(fc)) {
         el.classList.remove('hop');
