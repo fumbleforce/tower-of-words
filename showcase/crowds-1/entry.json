@@ -172,6 +172,11 @@
           "caption": "Lunch, phone"
         },
         {
+          "id": "east_coast-evening-desktop",
+          "image": "bible/shots/showcase/crowds-1/east_coast-evening-desktop.webp",
+          "caption": "After work, desktop"
+        },
+        {
           "id": "east_coast-evening-phone",
           "image": "bible/shots/showcase/crowds-1/east_coast-evening-phone.webp",
           "caption": "After work, phone"
