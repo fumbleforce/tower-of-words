@@ -55,7 +55,7 @@ const P_WALKS = {
   park_ew: [CORNERS.a[1] - 0.1, DS[0] + 0.1, E.PARK_EW[2], E.PARK_EW[3]],
   park_ns: [E.PARK_NS[0], E.PARK_NS[1], TOP_LEG[3] - 0.1, SW[2] + 0.1],
   square: E.SQUARE,
-  north_street: [NS[0], NS[1], N.BACK[2], TOP_LEG[2] + 0.1],
+  north_street: [NS[0], NS[1], N.BACK[2] - 5.4, TOP_LEG[2] + 0.1], // on north past the back lane, to the sports ground
   back_lane: [N.E2_WALK[0] - 0.6, NS[0] + 0.1, N.BACK[2], N.BACK[3]],
   e2_walk: [N.E2_WALK[0], N.E2_WALK[1], N.E2.rect[3], N.BACK[2] + 0.1],
   e3_spur: [E.SPURS[0][0] - 0.1, ...E.SPURS[0].slice(1)],
@@ -96,10 +96,13 @@ export const DOORS = [...E.BLOCKS, N.E2]
 //   plaza: west along the lane past the cross walk (also up the cross walk onto the lane)
 //   shotengai: south down the dorm street toward the shop walk
 //   east_coast: east along the dorm row toward the sea terrace
+//   sports: north up the north street past the back lane, toward the sports lane and the gym
 //   dorm_court: east into the dorm courtyard's gate leg (after work; before that, a line says so)
 const mid = (a, b) => (a + b) / 2;
 const DSX = mid(DS[0], DS[1]),
-  RZ = mid(ROW[2], ROW[3]);
+  RZ = mid(ROW[2], ROW[3]),
+  NSX = mid(NS[0], NS[1]),
+  NTOP = P_WALKS.north_street[2];
 export const EXITS = {
   plaza: {
     edge: pt([LANE_W + 0.6, LZ]),
@@ -116,6 +119,12 @@ export const EXITS = {
     lane: pt([DS[1] + 1.6, RZ]),
     zone: rect([DS[1] + 1.0, DS[1] + 4, ROW[2], ROW[3]]),
     in: pt([DSX, RZ]), // where he walks to, back from the east coast: on the dorm street, out of the zone
+  },
+  sports: {
+    edge: pt([NSX, NTOP + 0.2]),
+    lane: pt([NSX, NTOP + 1.6]),
+    zone: rect([NS[0] - 0.5, NS[1] + 0.5, NTOP - 1, NTOP + 2.2]),
+    in: pt([NSX, NTOP + 3.6]), // where he walks to, back from the sports ground: on the street, out of the zone
   },
   dorm_court: {
     edge: pt([DS[1] + 3.2, GATE_Z]),

@@ -36,6 +36,9 @@ export const COAST_WALK = path('east_coast_walk');
 export const ONSEN_PATH = path('onsen_path');
 export const COAST_LEGS = legs(COAST_WALK);
 export const ONSEN_LEGS = legs(ONSEN_PATH);
+// the courts walk's last stretch west of the onsen path's foot, the way to the sports chunk (scenes/sports.js)
+const CW = box(path('courts_walk').rect);
+export const COURTS_STUB = [ONSEN_LEGS[0][0] - 4.2, ONSEN_LEGS[0][0] + 0.1, CW[2], CW[3]];
 
 // the onsen (onsen_main): its precinct inside a plastered wall, the court inside the red gate, the gate on the
 // door's axis in the wall's south side; the two bath courtyards east of the hall, toward the sea
@@ -62,6 +65,7 @@ const I_WALKS = [
   ...COAST_LEGS,
   ...ONSEN_LEGS,
   STONE_WALK,
+  COURTS_STUB,
 ];
 export const WALKS = I_WALKS.map(rect);
 
@@ -110,14 +114,23 @@ export const FURNITURE = [
 // the shut door: on the hall's south face under the porch (local), and where Eric stands to try it (step)
 export const DOORS = [{ id: 'onsen', local: pt([GX, HALL[3]]), step: pt([GX - 0.35, HALL[3] + 1.0]) }];
 
-// the way out: west along the dorm row onto the dorm street, to the east lane ({ edge, lane, zone } as the east
-// lane's EXITS)
-const RZ = mid(ROW[2], ROW[3]);
+// the ways out ({ edge, lane, zone } as the east lane's EXITS): west along the dorm row onto the dorm street, to the
+// east lane; west along the courts walk from the onsen path's foot, to the sports ground (in: where he walks to,
+// back from there, out of the zone)
+const RZ = mid(ROW[2], ROW[3]),
+  CS = COURTS_STUB,
+  CZ = mid(CS[2], CS[3]);
 export const EXITS = {
   east_lane: {
     edge: pt([ROW[0] + 0.2, RZ]),
     lane: pt([ROW[0] + 1.6, RZ]),
     zone: rect([ROW[0] - 1, ROW[0] + 2.2, ROW[2] - 0.5, ROW[3] + 0.5]),
+  },
+  sports: {
+    edge: pt([CS[0] + 0.2, CZ]),
+    lane: pt([CS[0] + 1.6, CZ]),
+    zone: rect([CS[0] - 1, CS[0] + 2.2, CS[2] - 0.5, CS[3] + 0.5]),
+    in: pt([CS[1] + 0.9, CZ]),
   },
 };
 // where Eric comes in from the east lane (and from anywhere a trip doesn't say): on the row, walking east

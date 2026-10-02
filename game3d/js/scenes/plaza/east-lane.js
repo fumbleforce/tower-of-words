@@ -32,8 +32,9 @@ const { CORNERS, WEST_LEG, TOP_LEG, DORM_STREET: DS, NORTH_STREET: NS, CROSS, SO
 const ORIGIN = [LANE.e[0], LANE.e[2]]; // the lane's brick pattern runs on from the plaza's
 const edge = (pv, rect, module) => pv.field(rect, { pattern: 'grid', module, tones: GRANITE.edge, h: 0.007 });
 
-// a turn: herringbone brick, a pale border on its closed sides ('nsew'), each with optional gaps [from, to]
-function corner(pv, [x0, x1, z0, z1], closed, gaps = {}) {
+// a turn: herringbone brick, a pale border on its closed sides ('nsew'), each with optional gaps [from, to] (the
+// sports chunk turns the north street into the sports lane with it, scenes/sports/grounds.js)
+export function corner(pv, [x0, x1, z0, z1], closed, gaps = {}) {
   // the herringbone's own origin: the kit lays it only near its origin
   const brick = { pattern: 'herringbone', module: [0.5, 0.25], tones: GRANITE.brick, vary: 0.08, origin: [x0, z0] };
   pv.field([x0, x1, z0, z1], brick);
@@ -266,15 +267,21 @@ export function shrubBed(p, rect, sides, seed, pineAt = null) {
   if (pineAt) pine(p, px, zc, 0.55, seed + 3);
 }
 
+// the north street's avenue (z in the plaza's frame): none where the back lane comes in (plaza/north-plan.js) or
+// against block_e2's east end, which stands close behind the verge (the sports chunk plants its top too)
+export const avenueTrees = () =>
+  E.STREET_TREES.filter(
+    (z) =>
+      ![
+        [BACK[2], BACK[3]],
+        [E2.rect[2], E2.rect[3]],
+      ].some(([a, b]) => z > a - 1.2 && z < b + 1.2),
+  );
+
 function* planting(p, lights, sh) {
-  // the north street's avenue, open where the back lane comes in (plaza/north-plan.js)
+  // the north street's avenue, open where the back lane comes in
   const back = [[BACK[2], BACK[3]]];
-  // and none against block_e2's east end, which stands close behind the verge
-  const clear = [
-    [BACK[2], BACK[3]],
-    [E2.rect[2], E2.rect[3]],
-  ];
-  const trees = E.STREET_TREES.filter((z) => !clear.some(([a, b]) => z > a - 1.2 && z < b + 1.2));
+  const trees = avenueTrees();
   verge(p, [NS[0], NS[2]], [NS[0], TOP_LEG[2]], 'w', { crossings: back, trees, seed: 21 });
   for (const z of trees) sh.tree(NS[0] - 2.1, z, 1.04);
   yield;

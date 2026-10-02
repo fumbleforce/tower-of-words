@@ -641,6 +641,11 @@
           "kind": "thing",
           "verb": "Go"
         },
+        "north_street": {
+          "label": "To the gym and pool",
+          "kind": "thing",
+          "verb": "Go"
+        },
         "dorm_gate": {
           "label": "To the dorms",
           "kind": "thing",
@@ -675,7 +680,8 @@
         "plaza_exit",
         "shop_exit",
         "dorm_exit",
-        "row_exit"
+        "row_exit",
+        "north_exit"
       ],
       "people": [],
       "hooks": []
@@ -1020,6 +1026,11 @@
           "kind": "thing",
           "verb": "Go"
         },
+        "courts_walk": {
+          "label": "To the gym and pool",
+          "kind": "thing",
+          "verb": "Go"
+        },
         "onsen": {
           "label": "Onsen",
           "kind": "thing",
@@ -1031,7 +1042,42 @@
       ],
       "seats": [],
       "zones": [
-        "row_exit"
+        "row_exit",
+        "courts_exit"
+      ],
+      "people": [],
+      "hooks": []
+    },
+    "sports": {
+      "things": {
+        "north_street": {
+          "label": "To the north street",
+          "kind": "thing",
+          "verb": "Go"
+        },
+        "onsen_path": {
+          "label": "To the onsen path",
+          "kind": "thing",
+          "verb": "Go"
+        },
+        "gym": {
+          "label": "Gym",
+          "kind": "thing",
+          "verb": "Go in"
+        },
+        "pool": {
+          "label": "Pool",
+          "kind": "thing",
+          "verb": "Go in"
+        }
+      },
+      "spots": [
+        "north_entry"
+      ],
+      "seats": [],
+      "zones": [
+        "north_exit",
+        "east_exit"
       ],
       "people": [],
       "hooks": []

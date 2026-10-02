@@ -80,30 +80,6 @@ export const PLAN_PATHS = [
     detail: 'The office street’s east end, turning south along the gym’s west side to the sports lane.',
   },
   {
-    id: 'sports_lane',
-    kind: 'lane',
-    rect: [33, -49.5, 70.77, -46.5],
-    detail: 'Along the gym’s south side, east to the top of the north street (layout north_street).',
-  },
-  {
-    id: 'pool_walk',
-    kind: 'walk',
-    rect: [57.2, -91, 59.2, -49.5],
-    detail: 'North from the sports lane between the gym and the pool to the shower pavilion’s door.',
-  },
-  {
-    id: 'courts_walk',
-    kind: 'walk',
-    rect: [59.2, -58.5, 104, -56.5],
-    detail: 'East from the pool walk along the pool’s and the courts’ south fences, behind the north residence.',
-  },
-  {
-    id: 'pool_deck',
-    kind: 'court',
-    rect: [60, -87, 78, -61],
-    detail: 'The pool’s deck round the 25 m pool, fenced; the shower pavilion on its north side.',
-  },
-  {
     id: 'supply_yard',
     kind: 'court',
     rect: [-100, -90, -62, -52.5],
@@ -287,7 +263,7 @@ export const PLACES = [
   { id: 'sea_terrace', en: 'Sea terrace', ja: '海のテラス', at: [126.5, 10.5] },
   // sports and baths
   { id: 'gym', en: 'Gym', ja: '体育館', b: 'gym' },
-  { id: 'pool', en: 'Pool and showers', ja: 'プール', at: [69, -74] },
+  { id: 'pool', en: 'Pool and showers', ja: 'プール', at: [67.7, -74] },
   {
     id: 'tennis_courts',
     en: 'Tennis courts',

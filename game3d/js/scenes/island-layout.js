@@ -18,6 +18,7 @@ import { NORTH_PATHS, NORTH_GREEN } from './island-north.js';
 import { DORM_PATHS, DORM_GREEN } from './island-dorms.js';
 import { SOUTH_PATHS, SOUTH_SAND, SHORE } from './island-south.js';
 import { BATH_PATHS, BATH_GREEN, BATH_COAST } from './island-baths.js';
+import { SPORT_PATHS } from './island-sports.js';
 export * from './island-plan.js'; // the south half planned for day 2, drawn on the map only
 import { CHUNKS } from './island-chunks.js'; // each built place's frame
 export { CHUNKS };
@@ -249,6 +250,7 @@ export const PATHS = [
   ...DORM_PATHS, // the dorm cluster (scenes/island-dorms.js)
   ...SOUTH_PATHS, // the seafront south of the shop street (scenes/island-south.js)
   ...BATH_PATHS, // the east coast walk and the onsen (scenes/island-baths.js)
+  ...SPORT_PATHS, // the sports lane, the pool and the courts walk (scenes/island-sports.js)
   {
     id: 'beam',
     kind: 'beam',

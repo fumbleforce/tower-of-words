@@ -1,6 +1,6 @@
 # The island's south half
 
-The south half of Amakawa, mapped for day 2 and later: every building and outdoor place in it, who works, lives or spends time there, its doors, whether it can be entered later, how it connects, and one idea for using Japanese there. Jørgen asked for it on 2026-10-02: "I want mapping of half the island so we can make an interesting day 2 eventually". Nothing here is built unless the row says so. Built places are described in [places.md](places.md) and only linked from here. Jørgen confirmed this half as the set to build out (Review island-half-1, 2026-10-02: "Correct"); the districts are built one at a time: the shop street and seafront is built (chunk `shotengai`), and so are the east lane (chunk `east_lane`) and the east coast from the dorms' sea terrace to the onsen's front (chunk `east_coast`). The island as a whole (what is on it, no cars, no commute) is in [setting.md](setting.md).
+The south half of Amakawa, mapped for day 2 and later: every building and outdoor place in it, who works, lives or spends time there, its doors, whether it can be entered later, how it connects, and one idea for using Japanese there. Jørgen asked for it on 2026-10-02: "I want mapping of half the island so we can make an interesting day 2 eventually". Nothing here is built unless the row says so. Built places are described in [places.md](places.md) and only linked from here. Jørgen confirmed this half as the set to build out (Review island-half-1, 2026-10-02: "Correct"); the districts are built one at a time: the shop street and seafront is built (chunk `shotengai`), and so are the east lane (chunk `east_lane`), the east coast from the dorms' sea terrace to the onsen's front (chunk `east_coast`), and the sports ground from the north street's top along the gym, the pool and the courts to the onsen path (chunk `sports`). The island as a whole (what is on it, no cars, no commute) is in [setting.md](setting.md).
 
 The hooks are ideas for using Japanese in each place. Story, dialogue and secrets are Codex's ([collab/PROTOCOL.md](../../collab/PROTOCOL.md)).
 
@@ -10,7 +10,7 @@ The south half. It holds the whole day-1 route (station, head office, plaza, dor
 
 The edge runs east from the west coast north of the old power plant to the works street, south to the park's south edge, east along it, and north round the onsen to the east coast. The south half is a little more than half the land.
 
-The map: `?map=1`, then M, then "Day 2 plan". The planned streets, courts, piers, green, coast and the one new building are data in game3d/js/scenes/island-plan.js, in the island frame of [places.md](places.md) ("Where the places sit on the island"). They are drawn on the map only. When an area is built, its entries move into the layout proper with its chunk (the east coast's walks, the onsen's court, the tennis courts, the onsen's grounds and the coast past the onsen are in game3d/js/scenes/island-baths.js). `node tools/facts/check.mjs` checks the place ids and names below, and the street list, against that file.
+The map: `?map=1`, then M, then "Day 2 plan". The planned streets, courts, piers, green, coast and the one new building are data in game3d/js/scenes/island-plan.js, in the island frame of [places.md](places.md) ("Where the places sit on the island"). They are drawn on the map only. When an area is built, its entries move into the layout proper with its chunk (the east coast's walks, the onsen's court, the tennis courts, the onsen's grounds and the coast past the onsen are in game3d/js/scenes/island-baths.js; the sports lane, the pool walk, the courts walk, the two short walks off it and the pool's deck in game3d/js/scenes/island-sports.js). `node tools/facts/check.mjs` checks the place ids and names below, and the street list, against that file.
 
 ## How it fits together
 
@@ -39,10 +39,6 @@ The planned ones (island-plan.js PLAN_PATHS). Built and backdrop paths are in is
 | `works_street` | Street | North from the office street up the quarter's west side to the works yard. |
 | `harbour_walk` | Walk | The west coast walk carried north to the office street. |
 | `gym_link` | Street | From the office street's east end south along the gym's west side to the sports lane. |
-| `sports_lane` | Street | Along the gym's south side east to the top of the north street. |
-| `pool_walk` | Walk | North from the sports lane between the gym and the pool to the shower pavilion. |
-| `courts_walk` | Walk | East from the pool walk along the pool and courts fences, behind the north residence. |
-| `pool_deck` | Court | The deck round the pool, fenced, with the shower pavilion on its north side. |
 | `supply_yard` | Court | The supply quay's yard: warehouse, crane, containers; the quay along its south edge. |
 | `supply_pier` | Pier | South off the yard's west end, where the freighter ties up. |
 | `ferry_landing` | Court | In front of the ferry terminal, at the head of the ferry pier. |
@@ -133,16 +129,16 @@ The shop rows have fifteen bays each, numbered 0 to 14 from the west (island-sou
 | `dorm_commons` | Dorm common building (共用棟) | `dorm_gallery` | Two storeys on the inner court: a lounge with a TV, a shared kitchen, a shelf of books. | Glazed door on the inner court | Enter | Kitchen rules, and names on the food in the fridge. |
 | `inner_court` | Dorm inner court (中庭) | `dorm_inner_court` | Built as backdrop, on the map only. | Walks from the dorm row and between the blocks | Outside | Neighbours' evening greetings: こんばんは, お疲れさまです. |
 | `dorm_blocks` | Dorm blocks (社員寮) | `dorm_1e`, `dorm_2`, `dorm_3`, `dorm_4`, `dorm_annex`, `dorm_entry`, `dorm_5`, `dorm_6` | Everyone else's dorms, three to nine storeys (built as backdrop). | Doors on the inner court, the dorm row and the back walk | Outside | Room and floor numbers: 号室, 階. |
-| `north_residence` | North residence (北レジデンス) | `housing_n` | The roomier block on the cluster's quiet north edge, for senior staff, with a concierge desk. | Door on a short walk from the courts walk | Outside | The concierge's polite Japanese: いらっしゃいませ, ご用件は. |
+| `north_residence` | North residence (北レジデンス) | `housing_n` | The roomier block on the cluster's quiet north edge, for senior staff, with a concierge desk. Walked past in `sports`: its door at the end of a short walk off the courts walk, its name on a low wall by the walk. | Door on a short walk from the courts walk | Outside | The concierge's polite Japanese: いらっしゃいませ, ご用件は. |
 | `sea_terrace` | Sea terrace (海のテラス) | `sea_terrace` | Built and walked in `east_coast` ([places.md](places.md)): three benches looking out over the coast, a black pine in a raised bed, a drinks machine. | The dorm row's east end; the east coast walk north | Outside | Watching the ferry go out: 船, 島, 本土. |
 
 ### Sports and baths
 
 | Id | Place | Where | What and who | Ways in | Later | Day 2 hook |
 |---|---|---|---|---|---|---|
-| `gym` | Gym (体育館) | `gym` | The arched hall: badminton and basketball courts, a weights room, changing rooms. Clubs in the evening. | Main door on the sports lane | Enter | The club board and booking sheet: 曜日, 時間, club names. |
-| `pool` | Pool and showers (プール) | `pool_hall`, `pool_deck` | An outdoor 25 m pool, and the low shower pavilion on its deck with separate men's and women's changing rooms. Open in summer. | Pavilion door at the end of the pool walk | Enter | The pool rules (飛び込み禁止) and the changing room signs (男子, 女子). |
-| `tennis_courts` | Tennis courts (テニスコート) | `court_hall`, `courts` | Two hard courts and a one-storey clubhouse; the courts and their fence are built in `east_coast`, seen from the onsen path. | Gate from the courts walk | Outside | Keeping score in Japanese numbers. |
+| `gym` | Gym (体育館) | `gym` | The arched hall: badminton and basketball courts, a weights room, changing rooms. Clubs in the evening. Its outside is built and its front walked past in `sports` ([places.md](places.md)), the door shut. | Main door on the sports lane | Enter | The club board and booking sheet: 曜日, 時間, club names. |
+| `pool` | Pool and showers (プール) | `pool_hall`, `pool_deck` | An outdoor 25 m pool, and the low shower pavilion on its deck with separate men's and women's changing rooms. Open in summer. The deck, the pool and the pavilion's outside are built in `sports`, seen through the fence from the pool walk; the pavilion's door is shut. | Pavilion door at the end of the pool walk | Enter | The pool rules (飛び込み禁止) and the changing room signs (男子, 女子). |
+| `tennis_courts` | Tennis courts (テニスコート) | `court_hall`, `courts` | Two hard courts and a one-storey clubhouse; the courts and their fence are built in `east_coast` and `sports`, seen from the onsen path and the courts walk; the gate is shut. | Gate from the courts walk | Outside | Keeping score in Japanese numbers. |
 | `onsen` | Onsen (温泉) | `onsen_main`, `onsen_pav` | On the east shore: a red entrance gate, a reception hall, separate men's and women's bath courtyards with outdoor pools over the sea, a pavilion up the slope. The gate, the court, the hall's front and the bath courtyards' fences are built in `east_coast` ([places.md](places.md)), the door shut. | The red gate at the end of the onsen path | Enter | Blue 男湯 and red 女湯 noren, the bathing rules, the milk machine (牛乳). |
 | `east_coast_walk` | East coast walk (東の海岸道) | `east_coast_walk`, `onsen_path` | A path along the rocks from the dorms to the onsen; built and walked in `east_coast`. | The sea terrace at the south end; the courts walk at the west end | Outside | A trail sign: 温泉まで, metres. |
 
