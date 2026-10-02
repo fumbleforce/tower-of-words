@@ -1,0 +1,79 @@
+/* Lunch run: the canteen counter on top, B2's trays along the bottom. */
+.canteen { position: absolute; inset: 0; margin: auto; width: min(100%, 860px); display: grid; grid-template-rows: auto 1fr auto; gap: 10px; padding: 14px; }
+
+.counter { position: relative; padding: 26px 14px 16px; border-radius: 14px; background: linear-gradient(#d7dde1, #bfc8ce);
+  box-shadow: 0 8px 0 #8d979f, 0 14px 24px rgba(0,0,0,.35); }
+.counter .sign { position: absolute; left: 50%; top: -12px; transform: translateX(-50%); padding: 0 14px; border-radius: 8px;
+  background: #1f6f69; color: #e9fbf8; font-weight: 700; font-size: 15px; line-height: 2; }
+.dishes { display: flex; justify-content: center; align-items: flex-end; gap: 10px; min-height: 140px; }
+
+.dish { position: relative; display: flex; flex-direction: column; align-items: center; gap: 2px; min-width: 96px; padding: 8px 6px 6px; border-radius: 12px;
+  border: 2px solid transparent; background: rgba(255,255,255,.45); color: #1d2129; transition: transform .12s, border-color .12s; }
+.dish:hover { border-color: rgba(31, 111, 105, .5); }
+.dish.lifted { transform: translateY(-4px); border-color: #1f6f69; }
+.bowl { position: relative; width: calc(64px * var(--s)); height: calc(38px * var(--s)); margin-top: calc(14px * var(--s)); }
+.bowl::after { content: ""; position: absolute; inset: 30% 0 0; border-radius: 0 0 50% 50% / 0 0 100% 100%; background: #f7f7f5;
+  box-shadow: inset 0 -6px 0 #2a8f86, 0 3px 4px rgba(0,0,0,.25); }
+.bowl .food { position: absolute; left: 4%; right: 4%; top: 12%; height: 40%; border-radius: 50%; background: var(--f, #e2b04a); z-index: 1;
+  box-shadow: inset 0 0 0 3px rgba(255,255,255,.35); }
+.dish[data-id="ramen"] { --f: radial-gradient(circle at 35% 50%, #f6e7c4 0 14%, transparent 15%), radial-gradient(circle at 65% 45%, #3d6b3a 0 10%, transparent 11%), #d9a441; }
+.dish[data-id="curry"] { --f: radial-gradient(circle at 30% 50%, #fafafa 0 26%, transparent 27%), #c9762c; }
+.dish[data-id="udon"] { --f: repeating-linear-gradient(80deg, #f3ecd9 0 4px, #e6dcc2 4px 7px); }
+.dish[data-id="yakisoba"] { --f: repeating-linear-gradient(20deg, #b9773d 0 3px, #8c5428 3px 6px), #b9773d; }
+.bowl .lid { display: none; position: absolute; left: -4%; right: -4%; top: -40%; height: 92%; border-radius: 50% 50% 8px 8px / 90% 90% 8px 8px; z-index: 2;
+  background: linear-gradient(#e9edf0, #9aa5ad); box-shadow: 0 3px 4px rgba(0,0,0,.3); }
+.bowl .lid::after { content: ""; position: absolute; left: 50%; top: -6px; width: 14px; height: 8px; margin-left: -7px; border-radius: 4px; background: #7d8890; }
+.dish.lidded .lid { display: block; }
+.dish .nm { font-size: 17px; font-weight: 700; line-height: 1.9; color: #1d2129; }
+.dish .nm rt { color: #4d5866; }
+.dish .price { font-size: 14px; font-weight: 700; padding: 0 8px; border-radius: 6px; background: #1d2129; color: #fff; }
+.dish .hot { display: none; gap: 3px; margin-top: 3px; }
+.dish .hot i { width: 9px; height: 14px; border-radius: 5px 5px 7px 7px; background: #d8473c; }
+.dish .hot i.off { background: rgba(0,0,0,.15); }
+.show-hot .dish:not(.lidded) .hot { display: flex; }
+
+.note { align-self: start; justify-self: center; max-width: 520px; padding: 10px 14px; border-radius: 10px; background: #f3f1e8; color: #1d2129;
+  box-shadow: 0 4px 10px rgba(0,0,0,.35); transform: rotate(-1deg); }
+.note p { margin: 0; display: flex; flex-direction: column; }
+.note p + p { margin-top: 6px; }
+.note .jp { font-size: 18px; font-weight: 700; line-height: 2; }
+.note .jp rt { color: #4d5866; }
+.note .key { color: #1d2129; background: rgba(31, 111, 105, .2); }
+.note .gloss { font-size: 13px; color: #4d5866; }
+
+.trays { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; align-self: end; }
+.tray { display: grid; grid-template-columns: auto 1fr; grid-template-rows: auto 1fr; align-items: center; gap: 0 8px; padding: 8px; min-height: 108px;
+  border-radius: 12px; background: rgba(24, 27, 34, .75); border: 2px solid var(--panel-edge); text-align: left; }
+.tray.over { border-color: var(--accent); background: rgba(31, 71, 68, .8); }
+.tray .face { grid-row: span 2; width: 52px; height: 52px; border-radius: 50%; background-size: 210%; background-position: 50% 12%; background-color: #2a303a;
+  border: 2px solid rgba(255,255,255,.7); }
+.tray .nm { font-size: 14px; font-weight: 700; }
+.tray .slot { min-height: 64px; display: flex; align-items: center; }
+/* on a tray only the bowl shows, at its own small size (a scaled copy would keep its full layout height) */
+.tray .dish.small { min-width: 0; padding: 0; background: none; border: 0; pointer-events: none; }
+.tray .dish.small .nm, .tray .dish.small .price, .tray .dish.small .hot { display: none; }
+body .tray .dish.small .bowl { width: calc(54px * var(--s)); height: calc(32px * var(--s)); margin-top: 8px; }
+.dish.ghost, .dish.flying { background: rgba(255,255,255,.7); }
+
+.hint { margin: 0; color: var(--ink-dim); font-size: 14px; }
+
+body.phone .canteen { padding: 14px 8px 8px; gap: 8px; }
+body.phone .dishes { gap: 6px; min-height: 120px; flex-wrap: wrap; }
+body.phone .dish { min-width: 78px; padding: 6px 4px 4px; }
+body.phone .dish .nm { font-size: 15px; }
+body.phone .trays { grid-template-columns: repeat(2, 1fr); gap: 6px; }
+body.phone .tray { min-height: 76px; padding: 6px; }
+body.phone .tray .face { width: 40px; height: 40px; }
+body.phone .tray .slot { min-height: 36px; }
+body.phone .tray .dish.small .bowl { width: calc(40px * var(--s)); height: calc(24px * var(--s)); }
+body.phone .note .jp { font-size: 16px; }
+
+/* desktop: the counter and the trays fill the room the screen gives them */
+body:not(.phone) .dishes { gap: 18px; min-height: 190px; }
+body:not(.phone) .dish { min-width: 132px; padding: 10px 8px 8px; }
+body:not(.phone) .bowl { width: calc(92px * var(--s)); height: calc(54px * var(--s)); }
+body:not(.phone) .dish .nm { font-size: 20px; }
+body:not(.phone) .dish .price { font-size: 15px; }
+body:not(.phone) .tray { min-height: 120px; }
+body:not(.phone) .tray .face { width: 64px; height: 64px; }
+body:not(.phone) .note .jp { font-size: 21px; }
