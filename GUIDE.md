@@ -20,7 +20,7 @@ Jørgen's Japanese level (early intermediate, weak katakana), when and where he 
 
 ## Working with Jørgen
 
-Scope is day 1 only. Anything he picks or judges becomes a Review item; he approves every asset and sees every attempt. Also here: relaying his words as given, left and right on a character, links only (never open things on his screen), publishing and private content, and the Replicate and Meshy budgets.
+Scope is day 1 only, except places: half the island is mapped for a future day 2 (Jørgen, 2026-10-02: "so we can make an interesting day 2 eventually"; docs/game/island.md). Anything he picks or judges becomes a Review item; he approves every asset and sees every attempt. Also here: relaying his words as given, left and right on a character, links only (never open things on his screen), publishing and private content, and the Replicate and Meshy budgets.
 
 - Scope (Jørgen, 2026-09-28): "stop going overboard with generating speech and plots 10 steps ahead before we have the intro day nailed." Build only what the intro day plays: one stable, full, fun day before anything else. No future arcs, later-day plots, extra variants or systems for later; procedural content is parked in TODO.md.
 - Production pass (Jørgen, 2026-09-28): agents take day 1 to production grade in parallel. Ownership, rules and the quality bar are in notes/PRODUCTION.md; every agent reads it.
