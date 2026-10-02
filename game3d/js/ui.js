@@ -16,6 +16,7 @@ void VOICE_CSS;
 import { $, el } from './ui/dom.js';
 import { showPortraits, resetPortraitSpeaker } from './ui/portraits.js';
 import { createDialogue } from './ui/dialogue.js';
+import { addFieldPlayButton } from './ui/dialogue-text.js';
 export { FACE, setFace, faceForEmote, layoutStage } from './ui/portraits.js';
 
 // Existing UI imports remain valid while audio ownership moves to its modules.
@@ -687,15 +688,8 @@ export const ui = {
     return new Promise((res) => {
       // portraits: a lesson prompt shows the person who asks (Eric listening); Eric saying a word to someone or
       // something shows Eric alone (QA round 1: Mio showed for "Say it to Cat" and for machines)
-      {
-        const t0 = $('#talk');
-        if (prompt && prompt.whoId) {
-          showPortraits(t0, prompt.whoId);
-        } else {
-          resetPortraitSpeaker();
-          showPortraits(t0, 'eric');
-        }
-      }
+      if (!prompt?.whoId) resetPortraitSpeaker();
+      showPortraits($('#talk'), prompt?.whoId || 'eric');
       const w = WORDS[id];
       const canon = (s) =>
         s
@@ -740,6 +734,7 @@ export const ui = {
       this._chipKeys = null;
       const inp = t.querySelector('.tp-in'),
         hint = t.querySelector('.tp-hint');
+      addFieldPlayButton(t.querySelector('.tp-jp'), id);
       const letters = [...t.querySelectorAll('.tp-ro .lt')];
       const offVoice = mountVoice(t.querySelector('.tp'), id, {
         phone: document.body.classList.contains('phone'),

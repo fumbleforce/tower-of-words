@@ -178,6 +178,15 @@ export function addPlayButtons(line) {
     w.after(b);
   }
 }
+// the same button on the word of a typing prompt; ui.js's tapTalk plays both (Jørgen, 2026-10-02). The word's mouse
+// and touch defaults are cancelled so the answer field keeps its focus and text, and the phone its keyboard.
+export function addFieldPlayButton(el, id) {
+  if (!WORDS[id] || !WORDS[id].voice) return;
+  el.innerHTML = `<span class="jp" data-w="${id}">${WORDS[id].ja}</span>`;
+  addPlayButtons(el);
+  for (const ev of ['mousedown', 'touchend'])
+    el.addEventListener(ev, (e) => e.target.closest('.wplay, .jp[data-w]') && e.preventDefault(), { passive: false });
+}
 export async function whileUnpaused(ms) {
   await sleep(ms);
   while (paused) await sleep(200);
