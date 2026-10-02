@@ -9,9 +9,9 @@ import { assertRegistered } from './narrative/registration.js';
 import { needsLegacyOpening } from './narrative/legacy-opening.js';
 import * as THREE from 'three';
 import { createRenderer, Markers, Q, blob } from './engine.js';
-import { makePost } from './post.js';
 import { installMetrics } from './perf/metrics.js';
-import { OutlinePass } from './perf/outline.js';
+import { createView } from './perf/view.js';
+import { guardedLoop } from './perf/gl-guard.js';
 import { pickPerson, bodies, softSeparate } from './move.js';
 import * as ambience from './ambience.js';
 import { loadMio } from './mio.js';
@@ -49,17 +49,6 @@ const TEST = Q.get('test') === 'fast';
 const TS = TEST ? +(Q.get('ts') || 8) : 1; // test mode: everything runs this many times faster
 const canvas = document.getElementById('c');
 const renderer = createRenderer(canvas);
-// quality tier 0 low, 1 medium, 2 high (post.js). ?q= forces it; otherwise Settings > Graphics (window.__qualityTier)
-const TIER = { low: 0, medium: 1, high: 2 };
-const tierNow = () =>
-  Q.has('q')
-    ? +Q.get('q')
-    : window.__qualityTier
-      ? (TIER[window.__qualityTier()] ?? 1)
-      : renderer.userData.software
-        ? 0
-        : 2;
-let quality = tierNow();
 ui.build();
 if (CAP) document.body.classList.add('cap');
 
@@ -250,62 +239,8 @@ window.addEventListener(
 );
 
 // ---------- rendering ----------
-let composer = null,
-  post = null;
-let outline = null;
-function setComposer(place) {
-  post = makePost(renderer, place, quality);
-  composer = post.composer;
-  // a soft outline on the current target and on what the mouse is over (Jørgen: interactive things should be
-  // highlighted slightly); right after the render pass, off at low quality
-  const [w, h] = size();
-  outline = new OutlinePass(new THREE.Vector2(w, h), place.scene, place.camera);
-  // hidden edges black (the pass adds them): no outline showing through walls (QA round 1)
-  outline.visibleEdgeColor.set('#bff1ea');
-  outline.hiddenEdgeColor.set('#000000');
-  outline.edgeStrength = 5.0;
-  outline.edgeThickness = 1.0; // Jørgen: "i want the MODEL ITSELF to get an outline"
-  outline.resolve = (l) => place.perf?.forOutline(l) || l; // merged meshes outline through their twins
-  // after the place's beforeAO pass, where the train's roof proxy hides (else it masks every target on the train)
-  composer.insertPass(outline, place.beforeAO ? 2 : 1);
-  applyQuality();
-}
-function applyQuality() {
-  const dpr = Math.min(window.devicePixelRatio || 1, Q.has('dpr') ? +Q.get('dpr') : 2, post ? post.dpr(quality) : 2);
-  renderer.setPixelRatio(dpr);
-  if (post) post.setQuality(quality);
-  if (outline) outline.enabled = quality > 0;
-  if (game.place && game.place.sun) {
-    const s = game.place.sun,
-      ms = quality ? 2048 : 1024;
-    if (s.shadow.mapSize.x !== ms) {
-      s.shadow.mapSize.set(ms, ms);
-      if (s.shadow.map) {
-        s.shadow.map.dispose();
-        s.shadow.map = null;
-      }
-    }
-    s.shadow.radius = quality ? 4 : 2;
-  }
-  resize();
-}
-function size() {
-  return [+(Q.get('w') || window.innerWidth), +(Q.get('h') || window.innerHeight)];
-}
-function resize() {
-  const [w, h] = size();
-  renderer.setSize(w, h, !Q.has('w'));
-  if (composer) {
-    composer.setPixelRatio(renderer.getPixelRatio());
-    composer.setSize(w, h);
-  }
-  document.body.classList.toggle('phone', w / h < 0.8 || w < 640);
-  if (game.place) {
-    game.place.fit(w / h);
-    if (game.player) game.place.cam?.snap?.(game.player.root.position);
-  }
-}
-window.addEventListener('resize', resize);
+const view = createView(game, renderer, canvas, () => save(game)); // quality, post chain, size, render (perf/view.js)
+const { setComposer, resize, size, render } = view;
 // the 3D objects that stand for a marker (people's bodies, a thing's obj or outline())
 function objsOf(m) {
   const P = game.place;
@@ -378,6 +313,7 @@ const titleUp = () => {
   return !!(t && !t.hidden && t.offsetParent !== null);
 };
 function updateOutline() {
+  const outline = view.outline;
   if (!outline || !outline.enabled) return;
   if (titleUp()) {
     if (outlineKey !== 'title') {
@@ -396,20 +332,10 @@ function updateOutline() {
 game.skip = () => {
   if (game.busy) game.setHurry(true);
 };
-installMetrics(game, () => quality); // F3 overlay and the fast test's per-place numbers
+installMetrics(game, () => view.quality); // F3 overlay and the fast test's per-place numbers
 // what the look passes draw the whole scene with while on (GTAO normals, outline depth and mask), for js/perf/warm.js
 const overrides = (p) => (p?.enabled ? p.normalMaterial || [p.depthMaterial, p.prepareMaskMaterial] : []);
-game.overrideMaterials = () => [post?.gtao, outline].flatMap(overrides);
-game.setQuality = (q) => {
-  quality = q;
-  applyQuality();
-};
-window.addEventListener('amakawa:settings', (e) => {
-  if (e.detail && e.detail.key === 'quality' && !Q.has('q')) {
-    quality = tierNow();
-    applyQuality();
-  }
-});
+game.overrideMaterials = () => [view.post?.gtao, view.outline].flatMap(overrides);
 
 // ---------- things, markers, triggers ----------
 const { buildMarkers, use, standUp, held, holdNudge, say } = installInteractions(game);
@@ -523,12 +449,12 @@ if (CAP)
   window.__advance = (sec) => {
     for (let t = sec; t > 1e-6; t -= 1 / 30) step(Math.min(1 / 30, t));
   };
-function frame() {
+const frame = guardedLoop(tick); // an error in one frame never stops the loop (perf/gl-guard.js)
+function tick() {
   const now = performance.now();
   if (game.paused) {
     lastT = now;
     render();
-    requestAnimationFrame(frame);
     return;
   }
   let dt = Math.min(0.1, (now - lastT) / 1000) * TS * (game.hurry ? HURRY : 1);
@@ -542,7 +468,6 @@ function frame() {
   render();
   frames++;
   if (frames > 3 && game.place) window.__done = true;
-  requestAnimationFrame(frame);
 }
 function step(dt) {
   game.t += dt;
@@ -647,12 +572,6 @@ function step(dt) {
   stepAmbient(game);
   ambience.update(game, dt);
   game.markers.update(place.camera, canvas, mp, near);
-}
-function render() {
-  if (!composer || !game.place) return;
-  game.place.beforeRender?.();
-  renderer.shadowMap.needsUpdate = true;
-  post.render();
 }
 game.step = step;
 
