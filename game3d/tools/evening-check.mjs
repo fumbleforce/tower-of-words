@@ -25,7 +25,8 @@ const cases = [
       propNames: ['evening:chair-first', 'evening:chair-second'] },
   ] },
   { place: 'dorm_court', goal: 'Go in through the dorm entrance. Your room is 203.', actions: [
-    { id: 'mailboxes', repeat: 'same', checkpoint: true, caption: /エリック.*erikku.*Eric/, lines: 1,
+    // Taking the flyer retires the pin (show: !found_bakery_flyer), so there is no second look.
+    { id: 'mailboxes', checkpoint: true, caption: /エリック.*erikku.*Eric/, lines: 1,
       propNames: ['evening:mailbox-flap', 'evening:mailbox-flyer'] },
   ] },
 ];
@@ -146,6 +147,12 @@ async function shot(page, result, name, target) {
 async function settleOrLine(page, consumed = -1) {
   await page.waitForFunction(consumed => {
     const g = globalThis.__game, q = globalThis.__evening;
+    // A find or a board stays up until a tap (finds-view.js). Hide it the way that tap does, then keep waiting
+    // until the story that was held behind it actually finishes.
+    for (const sel of ['#findView', '#boardView']) {
+      const el = globalThis.document.querySelector(sel);
+      if (el && !el.hidden) el.hidden = true;
+    }
     return g.runner.recoveryError || (g.ui._advance && q.sequence !== consumed) ||
       (g.saveEnabled && !g.busy && !g.saying && !g.walker.path && !g.runner.frames.length &&
         !globalThis.document.body.classList.contains('at-title') && !globalThis.document.body.classList.contains('title-leaving'));
