@@ -30,8 +30,8 @@
     <main>
       <div id="view"><canvas id="c"></canvas><div id="status">loading</div></div>
       <aside>
-        <h1>Mio from parts</h1>
-        <p>Head and body generated separately in Meshy, joined and rigged in Blender. Drag to turn.</p>
+        <h1 id="title">Mio from parts</h1>
+        <p id="blurb">Head and body generated separately in Meshy, joined and rigged in Blender. Drag to turn.</p>
         <label>Attempt</label>
         <div class="row" id="attempts"></div>
         <label>Motion (her approved idle and walk, carried over from the game rig)</label>
@@ -40,7 +40,7 @@
         <div class="row" id="compare"></div>
         <div class="row"><button id="spin" aria-pressed="false">Turntable</button></div>
         <label>Target picture</label>
-        <img src="/art/parts/style-concepts/mio-ref-clean/final.png" alt="Target picture: Mio in a black hoodie" />
+        <div id="refs"><img src="/art/parts/style-concepts/mio-ref-clean/final.png" alt="Target picture: Mio in a black hoodie" /></div>
       </aside>
     </main>
     <script type="module" src="./viewer.js"></script>
