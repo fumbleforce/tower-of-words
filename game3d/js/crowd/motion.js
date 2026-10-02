@@ -15,6 +15,26 @@ export function walkStep(game, w, dt, list, eric, wide) {
     P = game.place,
     K = P.charScale || 1,
     me = ME * K;
+  // while a scene plays, nobody heads for a door Eric is at or going to (the dorm hall's stairs): they wait,
+  // stepping out of his way, until the scene is over
+  if (wide && eric && w.toDoor) {
+    const [dx, dz] = w.tail[0];
+    if (Math.hypot(eric.x - dx, eric.z - dz) < 3 * K) {
+      w.best = Infinity; // waiting is not being stuck (stalled())
+      w.moved = 0;
+      r._walk = false;
+      const ex = p.x - eric.x,
+        ez = p.z - eric.z,
+        ed = Math.hypot(ex, ez) || 1e-4,
+        want = eric.r + me + wide;
+      if (ed < want) {
+        const push = Math.min(want - ed, 1.2 * K * dt);
+        p.x += (ex / ed) * push;
+        p.z += (ez / ed) * push;
+      }
+      return false;
+    }
+  }
   const [tx, tz] = w.line[w.i];
   const d = Math.hypot(tx - p.x, tz - p.z);
   if (d < 0.3 * K) {
