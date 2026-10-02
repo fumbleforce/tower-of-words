@@ -8,16 +8,23 @@
 //   place.ambient.enter(period)           on entering: everyone placed at once, nobody near Eric
 //   (each frame)                          place.update runs the crowd after the place's own update
 //
+// The mix (Jørgen, 2026-10-02: "they come in waves and all walk the same way, it feels a bit artificial"): new walkers
+// set off at random gaps, about as often as people leave, so the numbers drift instead of coming in a rush; each
+// period's flows run every way, the commute only the biggest share; each walks at their own pace, some stop on the way
+// (crowd/stops.js) and some walk in twos.
+//
 // Rules: they are never story targets (not in place.people or place.things, so no pin, no talk); they never push
 // Eric or the story's people (crowd/motion.js); nobody appears or vanishes in view (new walkers start at a street end
-// out of view or step out of a door, and leave the same way); while a scene plays nobody new comes and walkers give
-// Eric a wide berth; phones and the low tier have fewer (TIERS), with no sun shadows on phones.
+// out of view or step out of a door, and leave the same way); while a scene plays nobody steps out of a door, nobody
+// stops on the way, and walkers give Eric a wide berth; phones and the low tier have fewer (TIERS), with no sun shadows on phones.
 import * as THREE from 'three';
 import { CROWD } from './data.js';
 import { makeBody } from './looks.js';
-import { coarseGrid, routeBetween, laneOf, snapFree, clearAt, lineLength, pointAlong } from './paths.js';
-import { walkStep, stride, standPose, idleLife, stalled } from './motion.js';
+import { coarseGrid, routeBetween, snapFree, clearAt } from './paths.js';
+import { walkStep, stride, idleLife, stalled } from './motion.js';
 import { placeStill, stillSpots } from './still.js';
+import { wantStop, startStop, stopBeside, stopStep, endStop } from './stops.js';
+import { launcher } from './launch.js';
 import { bodies } from '../movement/shared.js';
 import { sim } from '../sim.js';
 import { qualityTier, isPhone } from '../settings.js';
@@ -71,8 +78,13 @@ export function countsFor(spec, tier) {
 
 const KINDS = ['office', 'casual', 'elder', 'sport'];
 const rnd = (seed) => {
-  let s = (Math.abs(Math.floor(seed * 7919)) % 2147483646) + 1;
-  return () => (s = (s * 16807) % 2147483647) / 2147483647;
+  let s = Math.floor(seed * 7919) >>> 0;
+  return () => {
+    s = (s + 0x6d2b79f5) >>> 0;
+    let t = Math.imul(s ^ (s >>> 15), 1 | s);
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
 };
 const hashName = (s) => [...s].reduce((h, c) => (h * 31 + c.charCodeAt(0)) % 9973, 7);
 
@@ -166,92 +178,29 @@ export async function attachCrowd(game, place, name) {
     counts = null,
     spec = null,
     cool = 0,
+    gap = Infinity,
     R = rnd(seed);
   const walkers = () => pool.filter((b) => b.state === 'walk');
-  const free = () => pool.filter((b) => b.state === 'off');
+  const st = {},
+    { launch, cadence } = launcher({
+      game,
+      g,
+      K,
+      ends,
+      routes,
+      pool,
+      inView,
+      st,
+    });
 
   function hide(b) {
+    if (b.mate) b.mate.lead = null;
+    if (b.lead) b.lead.mate = null;
+    Object.assign(b, { mate: null, lead: null, stopped: null });
     b.state = 'off';
     b.r.root.visible = false;
     b.r._walk = false;
     b.r.seated = false;
-  }
-  // a walker for one of the period's flows: from the start of its line (s = 0) or part way along it
-  function launch(fresh) {
-    const flows = (spec.flows || []).filter((f) => routes.get(f[0] + '>' + f[1]));
-    const tot = flows.reduce((a, f) => a + f[2], 0);
-    for (let tries = 0; tries < 6 && flows.length; tries++) {
-      let x = R() * tot,
-        f = flows[0];
-      for (const fl of flows)
-        if ((x -= fl[2]) <= 0) {
-          f = fl;
-          break;
-        }
-      const [from, to, , kind = 'walk'] = f;
-      const A = ends[from],
-        B = ends[to];
-      // each walker its own lane, right of the line by up to a metre and a half where the way is wide
-      const lane = laneOf(g, routes.get(from + '>' + to), (0.15 + R() * 0.95) * K);
-      // a new walker steps out of a door, or comes in along the street from further out than anyone can see
-      let lead = A.door;
-      const e = game.player.root.position;
-      if (A.door && Math.hypot(e.x - A.door[0], e.z - A.door[1]) < 3.5 * K) continue; // not out of a door into him
-      if (!fresh && !A.door) {
-        const [ax, az] = lane[0],
-          [bx, bz] = lane[1],
-          l = Math.hypot(ax - bx, az - bz) || 1;
-        const outs = [0, 3, 6, 9].map((d) => [ax + ((ax - bx) / l) * d, az + ((az - bz) / l) * d]);
-        lead = outs.find((p) => !inView(...p));
-        if (!lead) continue;
-        if (lead === outs[0]) lead = null;
-      }
-      const body = pickBody(kind === 'jog');
-      if (!body) continue;
-      const line = [...(lead ? [lead] : []), ...lane, ...(B.door ? [B.door] : [])];
-      if (!B.door) {
-        // on past the street's end, out of the chunk, until out of view
-        const [px, pz] = line[line.length - 2],
-          [qx, qz] = line[line.length - 1],
-          l = Math.hypot(qx - px, qz - pz) || 1;
-        line.push([qx + ((qx - px) / l) * 5, qz + ((qz - pz) / l) * 5]);
-      }
-      let at = { x: line[0][0], z: line[0][1], leg: 1 };
-      if (fresh) {
-        const L = lineLength(lane);
-        at = pointAlong(lane, L * (0.08 + R() * 0.84));
-        at.leg += lead ? 1 : 0;
-        if (!clearOfAll(at.x, at.z, 3.5 * K, 1.0 * K)) continue;
-      }
-      const r = body.r;
-      standPose(r);
-      r.root.position.set(at.x, 0, at.z);
-      const [nx, nz] = line[at.leg];
-      r.root.rotation.y = Math.atan2(nx - at.x, nz - at.z);
-      r.root.visible = true;
-      Object.assign(body, {
-        state: 'walk',
-        line,
-        i: at.leg,
-        kind,
-        offA: !!lead,
-        offZ: true,
-        toDoor: !!B.door,
-        goal: B.at,
-        tail: line.slice(-1), // the door, or the point past the street's end
-        more: 0,
-        best: Infinity,
-        held: 0,
-        legAt: -1,
-        ghost: false,
-        rejoins: 0,
-        speed: (kind === 'jog' ? 2.3 : kind === 'stroll' ? 0.75 : 1.0 + R() * 0.3) * K,
-        ph: R() * 6,
-        moved: 0,
-      });
-      return true;
-    }
-    return false;
   }
   // a fresh line from where a walker stands to its end, then its way out (the door, or past the street's end)
   function rejoin(b) {
@@ -260,40 +209,31 @@ export async function attachCrowd(game, place, name) {
       from = snapFree(g, [p.x, p.z], 0.3),
       way = from && routeBetween(g, from, b.goal);
     if (!way) return false;
-    Object.assign(b, { line: [[p.x, p.z], ...way, ...b.tail], i: 1, offA: false, best: Infinity, held: 0 });
+    Object.assign(b, {
+      line: [[p.x, p.z], ...way, ...b.tail],
+      i: 1,
+      offA: false,
+      best: Infinity,
+      held: 0,
+    });
     return true;
   }
-  function pickBody(sport) {
-    const f = free();
-    const fit = f.filter((b) => (sport ? b.kind === 'sport' : b.kind !== 'sport' || R() < 0.25));
-    const list = fit.length ? fit : sport ? [] : f;
-    if (!list.length) return null;
-    const w = list.map((b) => (spec.who[b.kind] || 0.3) + 0.05);
-    let x = R() * w.reduce((a, b) => a + b, 0);
-    for (let i = 0; i < list.length; i++) if ((x -= w[i]) <= 0) return list[i];
-    return list[list.length - 1];
-  }
-  function clearOfAll(x, z, fromEric, fromOthers) {
-    const e = game.player.root.position;
-    if (Math.hypot(e.x - x, e.z - z) < fromEric) return false;
-    return pool.every(
-      (b) => b.state === 'off' || Math.hypot(b.r.root.position.x - x, b.r.root.position.z - z) >= fromOthers,
-    );
-  }
-
   // the period's people: on entering everyone at once; when the clock moves while here, only out of view
   function configure(p, fresh) {
     period = p;
     spec = data.periods[p];
     counts = countsFor(spec, tier);
     R = rnd(seed + PERIOD_SEED[p]);
+    Object.assign(st, { spec, counts, R });
     for (const b of pool)
       if (b.state === 'still' && (fresh || !inView(b.r.root.position.x, b.r.root.position.z))) hide(b);
     if (fresh) for (const b of pool) hide(b);
     if (!spec) return;
     spots ||= stillSpots(game, place, g, data, ends, [...routes.values()].filter(Boolean));
     placeStill(pool, spots, counts, spec, R, { fresh, inView, K, place, game });
-    if (fresh) for (let i = 0; i < counts.walk; i++) launch(true);
+    gap = cadence();
+    cool = R() * gap;
+    if (fresh) for (let i = 0; i < counts.walk * 2 && walkers().length < counts.walk; i++) launch(true);
   }
   const PERIOD_SEED = {
     early: 1,
@@ -314,12 +254,35 @@ export async function attachCrowd(game, place, name) {
     const list = bodies(game),
       eric = list.find((b) => b.root === game.player.root);
     const wide = scene ? 0.9 * K : 0;
+    const ctx = { g, K, eric, ends, place };
     let n = 0;
     for (const b of pool) {
       if (b.state === 'off') continue;
       const p = b.r.root.position;
       const seen = inView(p.x, p.z);
-      if (b.state === 'walk') {
+      if (b.hold > 0) {
+        if ((b.hold -= dt) > 0) continue; // not out yet (unseen, no shadow)
+        b.r.root.visible = true;
+      }
+      if (b.state === 'walk' && b.stopped) {
+        // stopped on the way: a phone, a shop window, a shoe, a word with the one they walk with (not in a scene)
+        if (scene || stopStep(b, dt, ctx)) endStop(b);
+      } else if (b.state === 'walk') {
+        // walking together: the second keeps beside the first
+        const m = b.lead;
+        if (m) {
+          const q = m.r.root.position,
+            y = b.r.root.rotation.y,
+            ahead = (p.x - q.x) * Math.sin(y) + (p.z - q.z) * Math.cos(y);
+          // into a door one after the other: the second drops back
+          const door = b.toDoor && b.tail[0],
+            near = door && Math.hypot(p.x - door[0], p.z - door[1]) < 2.5 * K;
+          b.speed = near
+            ? b.pace * 0.55
+            : m.stopped
+              ? b.pace
+              : m.speed * Math.max(0.5, Math.min(1.35, 1 - (ahead / K) * 0.6));
+        }
         b.onGrid = !(b.offA && b.i === 1) && !(b.offZ && b.i >= b.line.length - 1);
         // in a scene at the door they are going to (the dorm hall's stairs): they wait for Eric, out of his way
         const door = b.tail[0];
@@ -355,17 +318,24 @@ export async function attachCrowd(game, place, name) {
           continue;
         }
         stride(b, dt, seen);
+        b.walked += b.moved * dt;
+        if (!scene && wantStop(b, ctx)) {
+          startStop(b, R, ctx);
+          if (b.mate?.state === 'walk' && !b.mate.stopped) stopBeside(b.mate, b, R, ctx);
+        }
       } else if (seen) idleLife(b, dt);
       _m.makeTranslation(p.x, 0.006, p.z);
       blobs.setMatrixAt(n++, _m);
     }
     blobs.count = n;
     blobs.instanceMatrix.needsUpdate = true;
-    // someone new now and then, while there are fewer about than the period has (not during a scene)
-    cool -= dt;
-    if (!scene && cool <= 0 && walkers().length < counts.walk) {
-      launch(false);
-      cool = (0.5 + R() * 1.5) * (6 / Math.max(3, counts.walk));
+    // someone new at random gaps, about as often as people leave, so the numbers drift instead of coming in a rush;
+    // while a scene plays only from a street's end, so the place doesn't empty and then fill in a wave after it
+    if ((cool -= dt) <= 0) {
+      const now = walkers().length;
+      if (now < Math.ceil(counts.walk * 1.25)) launch(false, scene);
+      // a little sooner while fewer are about than the period has, a little later while more are
+      cool = Math.min(3, -Math.log(1 - R() * 0.95)) * gap * Math.min(1.3, Math.max(0.6, now / counts.walk));
     }
   }
   const own = place.update.bind(place);

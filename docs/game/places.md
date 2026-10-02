@@ -270,13 +270,13 @@ Kuro works the head office reception all day. The two from Sales appear inside t
 
 The crowd ([systems.md](systems.md), The crowd):
 
-| Period | Walking | Sitting | Talking | Waiting | What they do |
-|---|---|---|---|---|---|
-| early | 17 | 0 | 1 | 0 | Office workers crossing the court to the head office door: in off the plaza lane, up from the bike court, a few off the monorail. |
-| morning | 6 | 0 | 0 | 0 | A few people between the head office door, the plaza lane and the bike court. |
-| lunch | 14 | 0 | 2 | 0 | Out of head office toward the plaza and the canteen, and back. |
-| afternoon | 6 | 0 | 0 | 0 | A few people between the head office door and the plaza lane. |
-| evening | 17 | 0 | 2 | 0 | Out of head office: most east toward the plaza and the dorms, some to their bikes, one or two to the monorail. |
+| Period | Walking | Sitting | Talking | Waiting | Stop on the way | In twos | What they do |
+|---|---|---|---|---|---|---|---|
+| early | 17 | 0 | 1 | 0 | 15% | 20% | Most cross the court to the head office door: in off the plaza lane, up from the bike court, off the monorail. Some go the other way or across: back out toward the plaza and the konbini, to the monorail, between the bikes and the plaza. |
+| morning | 6 | 0 | 0 | 0 | 30% | 20% | A few people every way between the head office door, the plaza lane, the bike court and the monorail. |
+| lunch | 14 | 0 | 2 | 0 | 30% | 35% | Out of head office toward the plaza and the canteen and back, some to and from the bikes and the monorail; many in twos. |
+| afternoon | 6 | 0 | 0 | 0 | 30% | 20% | A few people between the head office door, the plaza lane, the monorail and the bike court. |
+| evening | 17 | 0 | 2 | 0 | 20% | 30% | Out of head office: most east toward the plaza and the dorms, some to their bikes or the monorail. Some come the other way, and some cross between the plaza, the bikes and the monorail. |
 
 ### Small moments
 
@@ -350,13 +350,13 @@ None of the cast lives here yet.
 
 The crowd ([systems.md](systems.md), The crowd):
 
-| Period | Walking | Sitting | Talking | Waiting | What they do |
-|---|---|---|---|---|---|
-| early | 14 | 2 | 1 | 0 | Walking in from the dorms and the shop street toward head office; a few into the canteen; two on the benches, a pair talking. |
-| morning | 6 | 2 | 0 | 0 | A few crossing; two on the benches. |
-| lunch | 17 | 4 | 2 | 0 | Out of head office into the canteen and the shop street, and back; the benches fill up. |
-| afternoon | 7 | 2 | 1 | 0 | A few crossing; two on the benches, a pair talking. |
-| evening | 17 | 3 | 2 | 0 | Walking home east toward the dorms and down to the shop street; three on the benches, two pairs talking. |
+| Period | Walking | Sitting | Talking | Waiting | Stop on the way | In twos | What they do |
+|---|---|---|---|---|---|---|---|
+| early | 14 | 2 | 1 | 0 | 20% | 20% | Most walk in from the dorms and the shop street toward head office. Others go the other way or across: to the shop street, back toward the dorms, in and out of the canteen. Two on the benches, a pair talking. |
+| morning | 6 | 2 | 0 | 0 | 35% | 20% | A few crossing every way; two on the benches. |
+| lunch | 17 | 4 | 2 | 0 | 30% | 35% | Out of head office into the canteen and the shop street, and back, some to and from the dorms; the benches fill up. |
+| afternoon | 7 | 2 | 1 | 0 | 35% | 20% | A few crossing every way; two on the benches, a pair talking. |
+| evening | 17 | 3 | 2 | 0 | 25% | 30% | Most walk home east toward the dorms and down to the shop street; some come the other way or go between the shops, the dorms and the canteen. Three on the benches, two pairs talking. |
 
 ### Small moments
 
@@ -438,13 +438,13 @@ None of the cast yet.
 
 The crowd ([systems.md](systems.md), The crowd):
 
-| Period | Walking | Sitting | Talking | Waiting | What they do |
-|---|---|---|---|---|---|
-| early | 10 | 1 | 0 | 3 | People down the arcade both ways, three waiting at the konbini door for it to open, a jogger and a slow walker on the promenade. |
-| morning | 7 | 2 | 1 | 0 | A few down the arcade; two on the benches, a pair talking. |
-| lunch | 20 | 4 | 2 | 0 | The arcade busy both ways; strollers on the promenade; the benches full. |
-| afternoon | 9 | 2 | 1 | 0 | A few down the arcade; two on the benches, a pair talking. |
-| evening | 17 | 3 | 2 | 0 | People home from work down the arcade; strollers and a jogger on the promenade; three on the benches, two pairs talking. |
+| Period | Walking | Sitting | Talking | Waiting | Stop on the way | In twos | What they do |
+|---|---|---|---|---|---|---|---|
+| early | 10 | 1 | 0 | 3 | 20% | 15% | People down the arcade both ways and in off the promenade, three waiting at the konbini door for it to open, a jogger and a slow walker on the promenade. |
+| morning | 7 | 2 | 1 | 0 | 40% | 25% | A few down the arcade both ways, a stroller on the promenade; two on the benches, a pair talking. |
+| lunch | 20 | 4 | 2 | 0 | 40% | 35% | The arcade busy both ways, some off toward the promenade; strollers on the promenade; the benches full. |
+| afternoon | 9 | 2 | 1 | 0 | 40% | 25% | A few down the arcade both ways, a stroller on the promenade; two on the benches, a pair talking. |
+| evening | 17 | 3 | 2 | 0 | 35% | 35% | People home from work down the arcade, some the other way and some up from the promenade; strollers and a jogger on the promenade; three on the benches, two pairs talking. |
 
 ### Small moments
 
@@ -523,13 +523,13 @@ None of the cast yet.
 
 The crowd ([systems.md](systems.md), The crowd):
 
-| Period | Walking | Sitting | Talking | Waiting | What they do |
-|---|---|---|---|---|---|
-| early | 14 | 1 | 1 | 0 | Out of the dorm gate and the dorm row, west along the lane toward head office, one or two up the north street; one on a bench, a pair talking. |
-| morning | 6 | 1 | 0 | 0 | A few between the dorm gate, the lane and the shop street. |
-| lunch | 12 | 2 | 1 | 0 | Between the lane and the shop street, a few down from the north street. |
-| afternoon | 6 | 1 | 0 | 0 | A few toward the dorm row and the shop street. |
-| evening | 14 | 2 | 1 | 0 | Home along the lane into the dorm gate and the dorm row, some on to the shop street; two on benches, a pair talking. |
+| Period | Walking | Sitting | Talking | Waiting | Stop on the way | In twos | What they do |
+|---|---|---|---|---|---|---|---|
+| early | 14 | 1 | 1 | 0 | 15% | 20% | Most go out of the dorm gate and the dorm row, west along the lane toward head office, one or two up the north street. Some go the other way: back to the dorm gate, to the shop street. One on a bench, a pair talking. |
+| morning | 6 | 1 | 0 | 0 | 30% | 20% | A few every way between the dorm gate, the lane, the shop street and the north street. |
+| lunch | 12 | 2 | 1 | 0 | 30% | 30% | Between the lane and the shop street, some to and from the north street and the dorm row. |
+| afternoon | 6 | 1 | 0 | 0 | 30% | 20% | A few toward the dorm row and the shop street, someone out of the dorm gate. |
+| evening | 14 | 2 | 1 | 0 | 25% | 30% | Home along the lane into the dorm gate and the dorm row, some on to the shop street, a few back out; two on benches, a pair talking. |
 
 ### Small moments
 
@@ -607,13 +607,13 @@ None of the cast yet.
 
 The crowd ([systems.md](systems.md), The crowd):
 
-| Period | Walking | Sitting | Talking | Waiting | What they do |
-|---|---|---|---|---|---|
-| early | 7 | 1 | 0 | 0 | Joggers along the dorm row and the coast walk to the courts and the onsen path, someone back from the onsen, a slow walker; one on a bench. |
-| morning | 4 | 1 | 0 | 0 | A walker and a jogger; one on a bench. |
-| lunch | 6 | 2 | 0 | 0 | Strollers to and from the onsen, a jogger; two on benches. |
-| afternoon | 4 | 1 | 0 | 0 | A jogger and someone back from the onsen; one on a bench. |
-| evening | 11 | 2 | 1 | 0 | People to and from the onsen, joggers on the coast walk; two on benches, a pair talking. |
+| Period | Walking | Sitting | Talking | Waiting | Stop on the way | In twos | What they do |
+|---|---|---|---|---|---|---|---|
+| early | 7 | 1 | 0 | 0 | 15% | 15% | Joggers along the dorm row and the coast walk to the courts and the onsen path, someone back from the onsen, a slow walker; one on a bench. |
+| morning | 4 | 1 | 0 | 0 | 30% | 20% | A walker and a jogger; one on a bench. |
+| lunch | 6 | 2 | 0 | 0 | 30% | 30% | Strollers to and from the onsen, a jogger; two on benches. |
+| afternoon | 4 | 1 | 0 | 0 | 30% | 20% | A jogger and someone back from the onsen; one on a bench. |
+| evening | 11 | 2 | 1 | 0 | 25% | 30% | People to and from the onsen, joggers on the coast walk; two on benches, a pair talking. |
 
 ### Small moments
 
@@ -693,13 +693,13 @@ None of the cast yet.
 
 The crowd ([systems.md](systems.md), The crowd):
 
-| Period | Walking | Sitting | Talking | Waiting | What they do |
-|---|---|---|---|---|---|
-| early | 10 | 0 | 1 | 0 | Joggers round the lane, the courts walk and the onsen path; people up the north street on the way to the office street; a pair talking. |
-| morning | 4 | 0 | 0 | 0 | Someone to the pool, a jogger. |
-| lunch | 7 | 0 | 1 | 0 | Between the office street and the pool; a jogger; a pair talking. |
-| afternoon | 5 | 0 | 0 | 0 | A jogger; someone back from the pool. |
-| evening | 11 | 0 | 1 | 0 | From the office street to the pool and up the north street; joggers; a pair talking. |
+| Period | Walking | Sitting | Talking | Waiting | Stop on the way | In twos | What they do |
+|---|---|---|---|---|---|---|---|
+| early | 10 | 0 | 1 | 0 | 15% | 15% | Joggers round the lane, the courts walk and the onsen path; people up the north street on the way to the office street; a pair talking. |
+| morning | 4 | 0 | 0 | 0 | 30% | 20% | Someone to the pool, a jogger. |
+| lunch | 7 | 0 | 1 | 0 | 30% | 30% | Between the office street and the pool; a jogger; a pair talking. |
+| afternoon | 5 | 0 | 0 | 0 | 30% | 20% | A jogger; someone back from the pool. |
+| evening | 11 | 0 | 1 | 0 | 25% | 30% | From the office street to the pool and up the north street; joggers; a pair talking. |
 
 ### Small moments
 
@@ -781,13 +781,13 @@ None of the cast yet.
 
 The crowd ([systems.md](systems.md), The crowd):
 
-| Period | Walking | Sitting | Talking | Waiting | What they do |
-|---|---|---|---|---|---|
-| early | 17 | 0 | 1 | 0 | Office workers along the office street both ways, in from the sports lane and up the quarter street; a pair talking. |
-| morning | 7 | 0 | 0 | 0 | A few between the quarter street, the bank and the harbour end. |
-| lunch | 14 | 0 | 2 | 0 | Between the quarter street and the bank, some along the street; two pairs talking. |
-| afternoon | 7 | 0 | 0 | 0 | A few along the street. |
-| evening | 14 | 0 | 1 | 0 | East along the street toward the sports lane and the gym; a pair talking. |
+| Period | Walking | Sitting | Talking | Waiting | Stop on the way | In twos | What they do |
+|---|---|---|---|---|---|---|---|
+| early | 17 | 0 | 1 | 0 | 15% | 15% | Office workers along the office street both ways, in from the sports lane and up the quarter street, some toward the gym and the harbour end; a pair talking. |
+| morning | 7 | 0 | 0 | 0 | 30% | 20% | A few between the quarter street, the bank and the harbour end. |
+| lunch | 14 | 0 | 2 | 0 | 30% | 30% | Between the quarter street and the bank, some along the street; two pairs talking. |
+| afternoon | 7 | 0 | 0 | 0 | 30% | 20% | A few along the street. |
+| evening | 14 | 0 | 1 | 0 | 25% | 30% | Most east along the street toward the sports lane and the gym, some west toward the harbour end and into the bank street; a pair talking. |
 
 ### Small moments
 
@@ -867,13 +867,13 @@ None of the cast yet.
 
 The crowd ([systems.md](systems.md), The crowd):
 
-| Period | Walking | Sitting | Talking | Waiting | What they do |
-|---|---|---|---|---|---|
-| early | 7 | 1 | 1 | 0 | Dock workers in from the office street to the works lane and the piers, someone off the ferry, a jogger up the harbour walk; one on a bench, a pair talking. |
-| morning | 4 | 0 | 1 | 0 | A few between the street, the piers and the works lane; a pair talking. |
-| lunch | 6 | 2 | 1 | 0 | A few between the piers, the street and the ferry; two on benches, a pair talking. |
-| afternoon | 4 | 0 | 1 | 0 | A few between the street, the works lane and the piers; a pair talking. |
-| evening | 7 | 2 | 1 | 0 | Back from the works lane and the piers to the street, a stroller down the harbour walk; two on benches, a pair talking. |
+| Period | Walking | Sitting | Talking | Waiting | Stop on the way | In twos | What they do |
+|---|---|---|---|---|---|---|---|
+| early | 7 | 1 | 1 | 0 | 15% | 15% | Dock workers in from the office street to the works lane and the piers, someone off the ferry, a jogger up the harbour walk; one on a bench, a pair talking. |
+| morning | 4 | 0 | 1 | 0 | 30% | 20% | A few between the street, the piers and the works lane; a pair talking. |
+| lunch | 6 | 2 | 1 | 0 | 30% | 30% | A few between the piers, the street and the ferry; two on benches, a pair talking. |
+| afternoon | 4 | 0 | 1 | 0 | 30% | 20% | A few between the street, the works lane and the piers; a pair talking. |
+| evening | 7 | 2 | 1 | 0 | 25% | 30% | Back from the works lane and the piers to the street, a stroller down the harbour walk; two on benches, a pair talking. |
 
 ### Small moments
 
@@ -1111,9 +1111,9 @@ Played in the evening, after work. None of the cast is here.
 
 The crowd ([systems.md](systems.md), The crowd):
 
-| Period | Walking | Sitting | Talking | Waiting | What they do |
-|---|---|---|---|---|---|
-| evening | 3 | 0 | 0 | 0 | Two or three residents between the street gate and the hall doors, in and out. Nobody sits, and nobody stops in the doors, the passage, the sento doorway or at the mailboxes. |
+| Period | Walking | Sitting | Talking | Waiting | Stop on the way | In twos | What they do |
+|---|---|---|---|---|---|---|---|
+| evening | 3 | 0 | 0 | 0 | 0% | 0% | Two or three residents between the street gate and the hall doors, in and out. Nobody sits, and nobody stops in the doors, the passage, the sento doorway or at the mailboxes. |
 
 ### Small moments
 
