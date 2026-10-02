@@ -20,6 +20,11 @@ if (CFG.refs) {
 const SRC_RIG = '/game3d/assets/mio/walk.glb';
 const IDLE = '/game3d/assets/characters/relaxed-idle-mio.json';
 const HEIGHT = 1.6;
+// Step scale for the walk (cfg "step" or ?step=): the leg bones get only this share of the clip's rotation, so short
+// chibi legs take smaller, lower steps than Mio's clip. 1 = the clip as it is (the default).
+const STEP = Number(new URLSearchParams(location.search).get('step') ?? CFG.step ?? 1);
+const LEGS = new Set(['LeftUpLeg', 'LeftLeg', 'LeftFoot', 'LeftToeBase', 'RightUpLeg', 'RightLeg', 'RightFoot', 'RightToeBase']);
+const NO_TURN = new THREE.Quaternion();
 
 const canvas = document.getElementById('c');
 const status = document.getElementById('status');
@@ -121,6 +126,7 @@ function applyRetarget(rt) {
   const q = new THREE.Quaternion(), pw = new THREE.Quaternion();
   for (const b of rt.map) {
     const delta = wq(b.s).multiply(b.sRest.clone().invert());
+    if (STEP !== 1 && motion === 'walk' && LEGS.has(b.n)) delta.slerp(NO_TURN, 1 - STEP);
     q.copy(turn.quaternion).multiply(delta).multiply(b.a).multiply(b.tRest);   // rest was taken facing front
     b.t.parent.getWorldQuaternion(pw);
     b.t.quaternion.copy(pw.invert().multiply(q));

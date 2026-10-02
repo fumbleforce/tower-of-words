@@ -1,0 +1,1013 @@
+[
+ {
+  "name": "kuro-a-101",
+  "who": "kuro",
+  "job": "kuro-a",
+  "parent": null,
+  "seed": 101,
+  "prompt": "Edit image 1: turn the woman into the person from image 2, keeping everything else about image 1 exactly: the same smooth matte vinyl 3D figure, the same big soft rounded-square head, the same large flat painted anime eyes and small simple nose and mouth, the same short body, round mitten hands with no fingers and stubby legs, the same front view standing pose with the arms slightly out, the same soft studio light and plain white background. She has blue-black hair in a high bun with two dark hair sticks, straight blunt bangs and two long side locks framing her face, black rectangular glasses with clear lenses, grey eyes, dark lipstick and pale skin. She wears a dark teal blazer over a black buttoned shirt, a black pencil skirt and black flat shoes. Empty hands. No text, no props.",
+  "model": "flux-2-klein-4b-fp8",
+  "steps": 4,
+  "cfg": 1.0,
+  "size": [
+   1024,
+   1024
+  ],
+  "refs": [
+   "image 1: art/parts/chibi-meshy/inputs/dressed.png (Jørgen's picture)",
+   "image 2: game3d/assets/portraits/kuro-neutral.webp"
+  ],
+  "seconds": 20.0
+ },
+ {
+  "name": "kuro-a-102",
+  "who": "kuro",
+  "job": "kuro-a",
+  "parent": null,
+  "seed": 102,
+  "prompt": "Edit image 1: turn the woman into the person from image 2, keeping everything else about image 1 exactly: the same smooth matte vinyl 3D figure, the same big soft rounded-square head, the same large flat painted anime eyes and small simple nose and mouth, the same short body, round mitten hands with no fingers and stubby legs, the same front view standing pose with the arms slightly out, the same soft studio light and plain white background. She has blue-black hair in a high bun with two dark hair sticks, straight blunt bangs and two long side locks framing her face, black rectangular glasses with clear lenses, grey eyes, dark lipstick and pale skin. She wears a dark teal blazer over a black buttoned shirt, a black pencil skirt and black flat shoes. Empty hands. No text, no props.",
+  "model": "flux-2-klein-4b-fp8",
+  "steps": 4,
+  "cfg": 1.0,
+  "size": [
+   1024,
+   1024
+  ],
+  "refs": [
+   "image 1: art/parts/chibi-meshy/inputs/dressed.png (Jørgen's picture)",
+   "image 2: game3d/assets/portraits/kuro-neutral.webp"
+  ],
+  "seconds": 11.0
+ },
+ {
+  "name": "kuro-a-103",
+  "who": "kuro",
+  "job": "kuro-a",
+  "parent": null,
+  "seed": 103,
+  "prompt": "Edit image 1: turn the woman into the person from image 2, keeping everything else about image 1 exactly: the same smooth matte vinyl 3D figure, the same big soft rounded-square head, the same large flat painted anime eyes and small simple nose and mouth, the same short body, round mitten hands with no fingers and stubby legs, the same front view standing pose with the arms slightly out, the same soft studio light and plain white background. She has blue-black hair in a high bun with two dark hair sticks, straight blunt bangs and two long side locks framing her face, black rectangular glasses with clear lenses, grey eyes, dark lipstick and pale skin. She wears a dark teal blazer over a black buttoned shirt, a black pencil skirt and black flat shoes. Empty hands. No text, no props.",
+  "model": "flux-2-klein-4b-fp8",
+  "steps": 4,
+  "cfg": 1.0,
+  "size": [
+   1024,
+   1024
+  ],
+  "refs": [
+   "image 1: art/parts/chibi-meshy/inputs/dressed.png (Jørgen's picture)",
+   "image 2: game3d/assets/portraits/kuro-neutral.webp"
+  ],
+  "seconds": 11.0
+ },
+ {
+  "name": "eric-a-101",
+  "who": "eric",
+  "job": "eric-a",
+  "parent": null,
+  "seed": 101,
+  "prompt": "Edit image 1: turn the woman into the person from image 2, keeping everything else about image 1 exactly: the same smooth matte vinyl 3D figure, the same big soft rounded-square head, the same large flat painted anime eyes and small simple nose and mouth, the same short body, round mitten hands with no fingers and stubby legs, the same front view standing pose with the arms slightly out, the same soft studio light and plain white background. He is a man with dark-blond hair, the same colour all over, swept back and tied in a short ponytail at the back, light stubble on his jaw, blue eyes and thin silver rectangular glasses. He wears a grey hoodie under an open navy blazer, dark grey trousers and dark shoes. Empty hands. No text, no props.",
+  "model": "flux-2-klein-4b-fp8",
+  "steps": 4,
+  "cfg": 1.0,
+  "size": [
+   1024,
+   1024
+  ],
+  "refs": [
+   "image 1: art/parts/chibi-meshy/inputs/dressed.png (Jørgen's picture)",
+   "image 2: game3d/assets/portraits/eric-neutral.webp"
+  ],
+  "seconds": 12.0
+ },
+ {
+  "name": "eric-a-102",
+  "who": "eric",
+  "job": "eric-a",
+  "parent": null,
+  "seed": 102,
+  "prompt": "Edit image 1: turn the woman into the person from image 2, keeping everything else about image 1 exactly: the same smooth matte vinyl 3D figure, the same big soft rounded-square head, the same large flat painted anime eyes and small simple nose and mouth, the same short body, round mitten hands with no fingers and stubby legs, the same front view standing pose with the arms slightly out, the same soft studio light and plain white background. He is a man with dark-blond hair, the same colour all over, swept back and tied in a short ponytail at the back, light stubble on his jaw, blue eyes and thin silver rectangular glasses. He wears a grey hoodie under an open navy blazer, dark grey trousers and dark shoes. Empty hands. No text, no props.",
+  "model": "flux-2-klein-4b-fp8",
+  "steps": 4,
+  "cfg": 1.0,
+  "size": [
+   1024,
+   1024
+  ],
+  "refs": [
+   "image 1: art/parts/chibi-meshy/inputs/dressed.png (Jørgen's picture)",
+   "image 2: game3d/assets/portraits/eric-neutral.webp"
+  ],
+  "seconds": 11.0
+ },
+ {
+  "name": "eric-a-103",
+  "who": "eric",
+  "job": "eric-a",
+  "parent": null,
+  "seed": 103,
+  "prompt": "Edit image 1: turn the woman into the person from image 2, keeping everything else about image 1 exactly: the same smooth matte vinyl 3D figure, the same big soft rounded-square head, the same large flat painted anime eyes and small simple nose and mouth, the same short body, round mitten hands with no fingers and stubby legs, the same front view standing pose with the arms slightly out, the same soft studio light and plain white background. He is a man with dark-blond hair, the same colour all over, swept back and tied in a short ponytail at the back, light stubble on his jaw, blue eyes and thin silver rectangular glasses. He wears a grey hoodie under an open navy blazer, dark grey trousers and dark shoes. Empty hands. No text, no props.",
+  "model": "flux-2-klein-4b-fp8",
+  "steps": 4,
+  "cfg": 1.0,
+  "size": [
+   1024,
+   1024
+  ],
+  "refs": [
+   "image 1: art/parts/chibi-meshy/inputs/dressed.png (Jørgen's picture)",
+   "image 2: game3d/assets/portraits/eric-neutral.webp"
+  ],
+  "seconds": 11.0
+ },
+ {
+  "name": "mio-a-101",
+  "who": "mio",
+  "job": "mio-a",
+  "parent": null,
+  "seed": 101,
+  "prompt": "Edit image 1: turn the woman into the person from image 2, keeping everything else about image 1 exactly: the same smooth matte vinyl 3D figure, the same big soft rounded-square head, the same large flat painted anime eyes and small simple nose and mouth, the same short body, round mitten hands with no fingers and stubby legs, the same front view standing pose with the arms slightly out, the same soft studio light and plain white background. She has dark green-black hair with bright green on the underside and in a few streaks, a side-swept fringe and a messy bun at the back of her head, taupe-grey glasses with rounded rectangle lenses, light tan eyes and pale skin. She wears a loose very dark green hoodie, dark cargo trousers and dark sneakers. Empty hands. No text, no props.",
+  "model": "flux-2-klein-4b-fp8",
+  "steps": 4,
+  "cfg": 1.0,
+  "size": [
+   1024,
+   1024
+  ],
+  "refs": [
+   "image 1: art/parts/chibi-meshy/inputs/dressed.png (Jørgen's picture)",
+   "image 2: game3d/assets/portraits/mio-neutral.webp"
+  ],
+  "seconds": 12.0
+ },
+ {
+  "name": "mio-a-102",
+  "who": "mio",
+  "job": "mio-a",
+  "parent": null,
+  "seed": 102,
+  "prompt": "Edit image 1: turn the woman into the person from image 2, keeping everything else about image 1 exactly: the same smooth matte vinyl 3D figure, the same big soft rounded-square head, the same large flat painted anime eyes and small simple nose and mouth, the same short body, round mitten hands with no fingers and stubby legs, the same front view standing pose with the arms slightly out, the same soft studio light and plain white background. She has dark green-black hair with bright green on the underside and in a few streaks, a side-swept fringe and a messy bun at the back of her head, taupe-grey glasses with rounded rectangle lenses, light tan eyes and pale skin. She wears a loose very dark green hoodie, dark cargo trousers and dark sneakers. Empty hands. No text, no props.",
+  "model": "flux-2-klein-4b-fp8",
+  "steps": 4,
+  "cfg": 1.0,
+  "size": [
+   1024,
+   1024
+  ],
+  "refs": [
+   "image 1: art/parts/chibi-meshy/inputs/dressed.png (Jørgen's picture)",
+   "image 2: game3d/assets/portraits/mio-neutral.webp"
+  ],
+  "seconds": 11.0
+ },
+ {
+  "name": "mio-a-103",
+  "who": "mio",
+  "job": "mio-a",
+  "parent": null,
+  "seed": 103,
+  "prompt": "Edit image 1: turn the woman into the person from image 2, keeping everything else about image 1 exactly: the same smooth matte vinyl 3D figure, the same big soft rounded-square head, the same large flat painted anime eyes and small simple nose and mouth, the same short body, round mitten hands with no fingers and stubby legs, the same front view standing pose with the arms slightly out, the same soft studio light and plain white background. She has dark green-black hair with bright green on the underside and in a few streaks, a side-swept fringe and a messy bun at the back of her head, taupe-grey glasses with rounded rectangle lenses, light tan eyes and pale skin. She wears a loose very dark green hoodie, dark cargo trousers and dark sneakers. Empty hands. No text, no props.",
+  "model": "flux-2-klein-4b-fp8",
+  "steps": 4,
+  "cfg": 1.0,
+  "size": [
+   1024,
+   1024
+  ],
+  "refs": [
+   "image 1: art/parts/chibi-meshy/inputs/dressed.png (Jørgen's picture)",
+   "image 2: game3d/assets/portraits/mio-neutral.webp"
+  ],
+  "seconds": 11.0
+ },
+ {
+  "name": "kuro-b-101",
+  "who": "kuro",
+  "job": "kuro-b",
+  "parent": "kuro-a",
+  "seed": 101,
+  "prompt": "Edit image 1: turn the woman into the person from image 2, keeping everything else about image 1 exactly: the same smooth matte vinyl 3D figure, the same big soft rounded-square head, the same large flat painted anime eyes and small simple nose and mouth, the same proportions with the head as tall as the whole body below it and very large anime eyes, the same short body, round mitten hands with no fingers and stubby legs, the same front view standing pose with the arms slightly out, the same soft studio light and plain white background. She has blue-black hair in a high bun with two dark hair sticks, straight blunt bangs and two long side locks framing her face, black rectangular glasses with clear lenses, grey eyes, dark lipstick and pale skin. She wears a dark teal blazer over a black buttoned shirt, a black pencil skirt and black flat shoes. Empty hands. No text, no props.",
+  "model": "flux-2-klein-4b-fp8",
+  "steps": 4,
+  "cfg": 1.0,
+  "size": [
+   1024,
+   1024
+  ],
+  "refs": [
+   "image 1: art/parts/chibi-meshy/inputs/dressed.png (Jørgen's picture)",
+   "image 2: game3d/assets/portraits/kuro-neutral.webp"
+  ],
+  "seconds": 12.0
+ },
+ {
+  "name": "kuro-b-102",
+  "who": "kuro",
+  "job": "kuro-b",
+  "parent": "kuro-a",
+  "seed": 102,
+  "prompt": "Edit image 1: turn the woman into the person from image 2, keeping everything else about image 1 exactly: the same smooth matte vinyl 3D figure, the same big soft rounded-square head, the same large flat painted anime eyes and small simple nose and mouth, the same proportions with the head as tall as the whole body below it and very large anime eyes, the same short body, round mitten hands with no fingers and stubby legs, the same front view standing pose with the arms slightly out, the same soft studio light and plain white background. She has blue-black hair in a high bun with two dark hair sticks, straight blunt bangs and two long side locks framing her face, black rectangular glasses with clear lenses, grey eyes, dark lipstick and pale skin. She wears a dark teal blazer over a black buttoned shirt, a black pencil skirt and black flat shoes. Empty hands. No text, no props.",
+  "model": "flux-2-klein-4b-fp8",
+  "steps": 4,
+  "cfg": 1.0,
+  "size": [
+   1024,
+   1024
+  ],
+  "refs": [
+   "image 1: art/parts/chibi-meshy/inputs/dressed.png (Jørgen's picture)",
+   "image 2: game3d/assets/portraits/kuro-neutral.webp"
+  ],
+  "seconds": 11.0
+ },
+ {
+  "name": "kuro-b-103",
+  "who": "kuro",
+  "job": "kuro-b",
+  "parent": "kuro-a",
+  "seed": 103,
+  "prompt": "Edit image 1: turn the woman into the person from image 2, keeping everything else about image 1 exactly: the same smooth matte vinyl 3D figure, the same big soft rounded-square head, the same large flat painted anime eyes and small simple nose and mouth, the same proportions with the head as tall as the whole body below it and very large anime eyes, the same short body, round mitten hands with no fingers and stubby legs, the same front view standing pose with the arms slightly out, the same soft studio light and plain white background. She has blue-black hair in a high bun with two dark hair sticks, straight blunt bangs and two long side locks framing her face, black rectangular glasses with clear lenses, grey eyes, dark lipstick and pale skin. She wears a dark teal blazer over a black buttoned shirt, a black pencil skirt and black flat shoes. Empty hands. No text, no props.",
+  "model": "flux-2-klein-4b-fp8",
+  "steps": 4,
+  "cfg": 1.0,
+  "size": [
+   1024,
+   1024
+  ],
+  "refs": [
+   "image 1: art/parts/chibi-meshy/inputs/dressed.png (Jørgen's picture)",
+   "image 2: game3d/assets/portraits/kuro-neutral.webp"
+  ],
+  "seconds": 11.0
+ },
+ {
+  "name": "eric-b-101",
+  "who": "eric",
+  "job": "eric-b",
+  "parent": "eric-a",
+  "seed": 101,
+  "prompt": "Edit image 1: turn the woman into the person from image 2, keeping everything else about image 1 exactly: the same smooth matte vinyl 3D figure, the same big soft rounded-square head, the same large flat painted anime eyes and small simple nose and mouth, the same proportions with the head as tall as the whole body below it and very large anime eyes, the same short body, round mitten hands with no fingers and stubby legs, the same front view standing pose with the arms slightly out, the same soft studio light and plain white background. He is a man with dark-blond hair, the same colour all over, swept back and tied in a short ponytail at the back, light stubble on his jaw, blue eyes and thin silver rectangular glasses. He wears a grey hoodie under an open navy blazer, dark grey trousers and dark shoes. Empty hands. No text, no props.",
+  "model": "flux-2-klein-4b-fp8",
+  "steps": 4,
+  "cfg": 1.0,
+  "size": [
+   1024,
+   1024
+  ],
+  "refs": [
+   "image 1: art/parts/chibi-meshy/inputs/dressed.png (Jørgen's picture)",
+   "image 2: game3d/assets/portraits/eric-neutral.webp"
+  ],
+  "seconds": 12.1
+ },
+ {
+  "name": "eric-b-102",
+  "who": "eric",
+  "job": "eric-b",
+  "parent": "eric-a",
+  "seed": 102,
+  "prompt": "Edit image 1: turn the woman into the person from image 2, keeping everything else about image 1 exactly: the same smooth matte vinyl 3D figure, the same big soft rounded-square head, the same large flat painted anime eyes and small simple nose and mouth, the same proportions with the head as tall as the whole body below it and very large anime eyes, the same short body, round mitten hands with no fingers and stubby legs, the same front view standing pose with the arms slightly out, the same soft studio light and plain white background. He is a man with dark-blond hair, the same colour all over, swept back and tied in a short ponytail at the back, light stubble on his jaw, blue eyes and thin silver rectangular glasses. He wears a grey hoodie under an open navy blazer, dark grey trousers and dark shoes. Empty hands. No text, no props.",
+  "model": "flux-2-klein-4b-fp8",
+  "steps": 4,
+  "cfg": 1.0,
+  "size": [
+   1024,
+   1024
+  ],
+  "refs": [
+   "image 1: art/parts/chibi-meshy/inputs/dressed.png (Jørgen's picture)",
+   "image 2: game3d/assets/portraits/eric-neutral.webp"
+  ],
+  "seconds": 11.2
+ },
+ {
+  "name": "eric-b-103",
+  "who": "eric",
+  "job": "eric-b",
+  "parent": "eric-a",
+  "seed": 103,
+  "prompt": "Edit image 1: turn the woman into the person from image 2, keeping everything else about image 1 exactly: the same smooth matte vinyl 3D figure, the same big soft rounded-square head, the same large flat painted anime eyes and small simple nose and mouth, the same proportions with the head as tall as the whole body below it and very large anime eyes, the same short body, round mitten hands with no fingers and stubby legs, the same front view standing pose with the arms slightly out, the same soft studio light and plain white background. He is a man with dark-blond hair, the same colour all over, swept back and tied in a short ponytail at the back, light stubble on his jaw, blue eyes and thin silver rectangular glasses. He wears a grey hoodie under an open navy blazer, dark grey trousers and dark shoes. Empty hands. No text, no props.",
+  "model": "flux-2-klein-4b-fp8",
+  "steps": 4,
+  "cfg": 1.0,
+  "size": [
+   1024,
+   1024
+  ],
+  "refs": [
+   "image 1: art/parts/chibi-meshy/inputs/dressed.png (Jørgen's picture)",
+   "image 2: game3d/assets/portraits/eric-neutral.webp"
+  ],
+  "seconds": 11.1
+ },
+ {
+  "name": "mio-b-101",
+  "who": "mio",
+  "job": "mio-b",
+  "parent": "mio-a",
+  "seed": 101,
+  "prompt": "Edit image 1: turn the woman into the person from image 2, keeping everything else about image 1 exactly: the same smooth matte vinyl 3D figure, the same big soft rounded-square head, the same large flat painted anime eyes and small simple nose and mouth, the same proportions with the head as tall as the whole body below it and very large anime eyes, the same short body, round mitten hands with no fingers and stubby legs, the same front view standing pose with the arms slightly out, the same soft studio light and plain white background. She has dark green-black hair with bright green on the underside and in a few streaks, a side-swept fringe and a messy bun at the back of her head, taupe-grey glasses with rounded rectangle lenses, light tan eyes and pale skin. She wears a loose very dark green hoodie, dark cargo trousers and dark sneakers. Empty hands. No text, no props.",
+  "model": "flux-2-klein-4b-fp8",
+  "steps": 4,
+  "cfg": 1.0,
+  "size": [
+   1024,
+   1024
+  ],
+  "refs": [
+   "image 1: art/parts/chibi-meshy/inputs/dressed.png (Jørgen's picture)",
+   "image 2: game3d/assets/portraits/mio-neutral.webp"
+  ],
+  "seconds": 12.0
+ },
+ {
+  "name": "mio-b-102",
+  "who": "mio",
+  "job": "mio-b",
+  "parent": "mio-a",
+  "seed": 102,
+  "prompt": "Edit image 1: turn the woman into the person from image 2, keeping everything else about image 1 exactly: the same smooth matte vinyl 3D figure, the same big soft rounded-square head, the same large flat painted anime eyes and small simple nose and mouth, the same proportions with the head as tall as the whole body below it and very large anime eyes, the same short body, round mitten hands with no fingers and stubby legs, the same front view standing pose with the arms slightly out, the same soft studio light and plain white background. She has dark green-black hair with bright green on the underside and in a few streaks, a side-swept fringe and a messy bun at the back of her head, taupe-grey glasses with rounded rectangle lenses, light tan eyes and pale skin. She wears a loose very dark green hoodie, dark cargo trousers and dark sneakers. Empty hands. No text, no props.",
+  "model": "flux-2-klein-4b-fp8",
+  "steps": 4,
+  "cfg": 1.0,
+  "size": [
+   1024,
+   1024
+  ],
+  "refs": [
+   "image 1: art/parts/chibi-meshy/inputs/dressed.png (Jørgen's picture)",
+   "image 2: game3d/assets/portraits/mio-neutral.webp"
+  ],
+  "seconds": 11.0
+ },
+ {
+  "name": "mio-b-103",
+  "who": "mio",
+  "job": "mio-b",
+  "parent": "mio-a",
+  "seed": 103,
+  "prompt": "Edit image 1: turn the woman into the person from image 2, keeping everything else about image 1 exactly: the same smooth matte vinyl 3D figure, the same big soft rounded-square head, the same large flat painted anime eyes and small simple nose and mouth, the same proportions with the head as tall as the whole body below it and very large anime eyes, the same short body, round mitten hands with no fingers and stubby legs, the same front view standing pose with the arms slightly out, the same soft studio light and plain white background. She has dark green-black hair with bright green on the underside and in a few streaks, a side-swept fringe and a messy bun at the back of her head, taupe-grey glasses with rounded rectangle lenses, light tan eyes and pale skin. She wears a loose very dark green hoodie, dark cargo trousers and dark sneakers. Empty hands. No text, no props.",
+  "model": "flux-2-klein-4b-fp8",
+  "steps": 4,
+  "cfg": 1.0,
+  "size": [
+   1024,
+   1024
+  ],
+  "refs": [
+   "image 1: art/parts/chibi-meshy/inputs/dressed.png (Jørgen's picture)",
+   "image 2: game3d/assets/portraits/mio-neutral.webp"
+  ],
+  "seconds": 11.0
+ },
+ {
+  "name": "kuro-c-101",
+  "who": "kuro",
+  "job": "kuro-c",
+  "parent": "kuro-a",
+  "seed": 101,
+  "prompt": "Edit image 1: turn the woman into the person from image 2, keeping everything else about image 1 exactly: the same smooth matte vinyl 3D figure, the same big soft rounded-square head, the same large flat painted anime eyes and small simple nose and mouth, the same short body, round mitten hands with no fingers and stubby legs, the same front view standing pose with the arms slightly out, the same soft studio light and plain white background. She has blue-black hair in a high bun with two dark hair sticks, straight blunt bangs and two long side locks framing her face, black rectangular glasses with clear lenses, grey eyes, dark lipstick and pale skin. She wears a dark teal blazer over a black buttoned shirt, a black pencil skirt and black flat shoes. Empty hands. No text, no props.",
+  "model": "flux-2-klein-4b-fp8",
+  "steps": 8,
+  "init_from_image1_denoise": 0.9,
+  "cfg": 1.0,
+  "size": [
+   1024,
+   1024
+  ],
+  "refs": [
+   "image 1: art/parts/chibi-meshy/inputs/dressed.png (Jørgen's picture)",
+   "image 2: game3d/assets/portraits/kuro-neutral.webp"
+  ],
+  "seconds": 20.0
+ },
+ {
+  "name": "kuro-c-102",
+  "who": "kuro",
+  "job": "kuro-c",
+  "parent": "kuro-a",
+  "seed": 102,
+  "prompt": "Edit image 1: turn the woman into the person from image 2, keeping everything else about image 1 exactly: the same smooth matte vinyl 3D figure, the same big soft rounded-square head, the same large flat painted anime eyes and small simple nose and mouth, the same short body, round mitten hands with no fingers and stubby legs, the same front view standing pose with the arms slightly out, the same soft studio light and plain white background. She has blue-black hair in a high bun with two dark hair sticks, straight blunt bangs and two long side locks framing her face, black rectangular glasses with clear lenses, grey eyes, dark lipstick and pale skin. She wears a dark teal blazer over a black buttoned shirt, a black pencil skirt and black flat shoes. Empty hands. No text, no props.",
+  "model": "flux-2-klein-4b-fp8",
+  "steps": 8,
+  "init_from_image1_denoise": 0.9,
+  "cfg": 1.0,
+  "size": [
+   1024,
+   1024
+  ],
+  "refs": [
+   "image 1: art/parts/chibi-meshy/inputs/dressed.png (Jørgen's picture)",
+   "image 2: game3d/assets/portraits/kuro-neutral.webp"
+  ],
+  "seconds": 19.0
+ },
+ {
+  "name": "kuro-c-103",
+  "who": "kuro",
+  "job": "kuro-c",
+  "parent": "kuro-a",
+  "seed": 103,
+  "prompt": "Edit image 1: turn the woman into the person from image 2, keeping everything else about image 1 exactly: the same smooth matte vinyl 3D figure, the same big soft rounded-square head, the same large flat painted anime eyes and small simple nose and mouth, the same short body, round mitten hands with no fingers and stubby legs, the same front view standing pose with the arms slightly out, the same soft studio light and plain white background. She has blue-black hair in a high bun with two dark hair sticks, straight blunt bangs and two long side locks framing her face, black rectangular glasses with clear lenses, grey eyes, dark lipstick and pale skin. She wears a dark teal blazer over a black buttoned shirt, a black pencil skirt and black flat shoes. Empty hands. No text, no props.",
+  "model": "flux-2-klein-4b-fp8",
+  "steps": 8,
+  "init_from_image1_denoise": 0.9,
+  "cfg": 1.0,
+  "size": [
+   1024,
+   1024
+  ],
+  "refs": [
+   "image 1: art/parts/chibi-meshy/inputs/dressed.png (Jørgen's picture)",
+   "image 2: game3d/assets/portraits/kuro-neutral.webp"
+  ],
+  "seconds": 19.0
+ },
+ {
+  "name": "eric-c-101",
+  "who": "eric",
+  "job": "eric-c",
+  "parent": "eric-a",
+  "seed": 101,
+  "prompt": "Edit image 1: turn the woman into the person from image 2, keeping everything else about image 1 exactly: the same smooth matte vinyl 3D figure, the same big soft rounded-square head, the same large flat painted anime eyes and small simple nose and mouth, the same short body, round mitten hands with no fingers and stubby legs, the same front view standing pose with the arms slightly out, the same soft studio light and plain white background. He is a man with dark-blond hair, the same colour all over, swept back and tied in a short ponytail at the back, light stubble on his jaw, blue eyes and thin silver rectangular glasses. He wears a grey hoodie under an open navy blazer, dark grey trousers and dark shoes. Empty hands. No text, no props.",
+  "model": "flux-2-klein-4b-fp8",
+  "steps": 8,
+  "init_from_image1_denoise": 0.9,
+  "cfg": 1.0,
+  "size": [
+   1024,
+   1024
+  ],
+  "refs": [
+   "image 1: art/parts/chibi-meshy/inputs/dressed.png (Jørgen's picture)",
+   "image 2: game3d/assets/portraits/eric-neutral.webp"
+  ],
+  "seconds": 20.0
+ },
+ {
+  "name": "eric-c-102",
+  "who": "eric",
+  "job": "eric-c",
+  "parent": "eric-a",
+  "seed": 102,
+  "prompt": "Edit image 1: turn the woman into the person from image 2, keeping everything else about image 1 exactly: the same smooth matte vinyl 3D figure, the same big soft rounded-square head, the same large flat painted anime eyes and small simple nose and mouth, the same short body, round mitten hands with no fingers and stubby legs, the same front view standing pose with the arms slightly out, the same soft studio light and plain white background. He is a man with dark-blond hair, the same colour all over, swept back and tied in a short ponytail at the back, light stubble on his jaw, blue eyes and thin silver rectangular glasses. He wears a grey hoodie under an open navy blazer, dark grey trousers and dark shoes. Empty hands. No text, no props.",
+  "model": "flux-2-klein-4b-fp8",
+  "steps": 8,
+  "init_from_image1_denoise": 0.9,
+  "cfg": 1.0,
+  "size": [
+   1024,
+   1024
+  ],
+  "refs": [
+   "image 1: art/parts/chibi-meshy/inputs/dressed.png (Jørgen's picture)",
+   "image 2: game3d/assets/portraits/eric-neutral.webp"
+  ],
+  "seconds": 19.0
+ },
+ {
+  "name": "eric-c-103",
+  "who": "eric",
+  "job": "eric-c",
+  "parent": "eric-a",
+  "seed": 103,
+  "prompt": "Edit image 1: turn the woman into the person from image 2, keeping everything else about image 1 exactly: the same smooth matte vinyl 3D figure, the same big soft rounded-square head, the same large flat painted anime eyes and small simple nose and mouth, the same short body, round mitten hands with no fingers and stubby legs, the same front view standing pose with the arms slightly out, the same soft studio light and plain white background. He is a man with dark-blond hair, the same colour all over, swept back and tied in a short ponytail at the back, light stubble on his jaw, blue eyes and thin silver rectangular glasses. He wears a grey hoodie under an open navy blazer, dark grey trousers and dark shoes. Empty hands. No text, no props.",
+  "model": "flux-2-klein-4b-fp8",
+  "steps": 8,
+  "init_from_image1_denoise": 0.9,
+  "cfg": 1.0,
+  "size": [
+   1024,
+   1024
+  ],
+  "refs": [
+   "image 1: art/parts/chibi-meshy/inputs/dressed.png (Jørgen's picture)",
+   "image 2: game3d/assets/portraits/eric-neutral.webp"
+  ],
+  "seconds": 19.0
+ },
+ {
+  "name": "mio-c-101",
+  "who": "mio",
+  "job": "mio-c",
+  "parent": "mio-a",
+  "seed": 101,
+  "prompt": "Edit image 1: turn the woman into the person from image 2, keeping everything else about image 1 exactly: the same smooth matte vinyl 3D figure, the same big soft rounded-square head, the same large flat painted anime eyes and small simple nose and mouth, the same short body, round mitten hands with no fingers and stubby legs, the same front view standing pose with the arms slightly out, the same soft studio light and plain white background. She has dark green-black hair with bright green on the underside and in a few streaks, a side-swept fringe and a messy bun at the back of her head, taupe-grey glasses with rounded rectangle lenses, light tan eyes and pale skin. She wears a loose very dark green hoodie, dark cargo trousers and dark sneakers. Empty hands. No text, no props.",
+  "model": "flux-2-klein-4b-fp8",
+  "steps": 8,
+  "init_from_image1_denoise": 0.9,
+  "cfg": 1.0,
+  "size": [
+   1024,
+   1024
+  ],
+  "refs": [
+   "image 1: art/parts/chibi-meshy/inputs/dressed.png (Jørgen's picture)",
+   "image 2: game3d/assets/portraits/mio-neutral.webp"
+  ],
+  "seconds": 20.0
+ },
+ {
+  "name": "mio-c-102",
+  "who": "mio",
+  "job": "mio-c",
+  "parent": "mio-a",
+  "seed": 102,
+  "prompt": "Edit image 1: turn the woman into the person from image 2, keeping everything else about image 1 exactly: the same smooth matte vinyl 3D figure, the same big soft rounded-square head, the same large flat painted anime eyes and small simple nose and mouth, the same short body, round mitten hands with no fingers and stubby legs, the same front view standing pose with the arms slightly out, the same soft studio light and plain white background. She has dark green-black hair with bright green on the underside and in a few streaks, a side-swept fringe and a messy bun at the back of her head, taupe-grey glasses with rounded rectangle lenses, light tan eyes and pale skin. She wears a loose very dark green hoodie, dark cargo trousers and dark sneakers. Empty hands. No text, no props.",
+  "model": "flux-2-klein-4b-fp8",
+  "steps": 8,
+  "init_from_image1_denoise": 0.9,
+  "cfg": 1.0,
+  "size": [
+   1024,
+   1024
+  ],
+  "refs": [
+   "image 1: art/parts/chibi-meshy/inputs/dressed.png (Jørgen's picture)",
+   "image 2: game3d/assets/portraits/mio-neutral.webp"
+  ],
+  "seconds": 19.0
+ },
+ {
+  "name": "mio-c-103",
+  "who": "mio",
+  "job": "mio-c",
+  "parent": "mio-a",
+  "seed": 103,
+  "prompt": "Edit image 1: turn the woman into the person from image 2, keeping everything else about image 1 exactly: the same smooth matte vinyl 3D figure, the same big soft rounded-square head, the same large flat painted anime eyes and small simple nose and mouth, the same short body, round mitten hands with no fingers and stubby legs, the same front view standing pose with the arms slightly out, the same soft studio light and plain white background. She has dark green-black hair with bright green on the underside and in a few streaks, a side-swept fringe and a messy bun at the back of her head, taupe-grey glasses with rounded rectangle lenses, light tan eyes and pale skin. She wears a loose very dark green hoodie, dark cargo trousers and dark sneakers. Empty hands. No text, no props.",
+  "model": "flux-2-klein-4b-fp8",
+  "steps": 8,
+  "init_from_image1_denoise": 0.9,
+  "cfg": 1.0,
+  "size": [
+   1024,
+   1024
+  ],
+  "refs": [
+   "image 1: art/parts/chibi-meshy/inputs/dressed.png (Jørgen's picture)",
+   "image 2: game3d/assets/portraits/mio-neutral.webp"
+  ],
+  "seconds": 19.0
+ },
+ {
+  "name": "kuro-d-101",
+  "who": "kuro",
+  "job": "kuro-d",
+  "parent": "kuro-a",
+  "seed": 101,
+  "prompt": "Edit image 1: turn the woman into the person from image 2, keeping everything else about image 1 exactly: the same smooth matte vinyl 3D figure, the same big soft rounded-square head, the same large flat painted anime eyes and small simple nose and mouth, the same short body, round mitten hands with no fingers and stubby legs, the same front view standing pose with the arms slightly out, the same soft studio light and plain white background. She has black hair with a dark blue sheen in a high bun with two dark hair sticks, straight blunt bangs and two long side locks framing her face, black rectangular glasses with clear lenses, grey eyes, dark lipstick and pale skin. She wears a dark teal blazer over a black buttoned shirt, a black pencil skirt and black flat shoes. Empty hands. No text, no props.",
+  "model": "flux-2-klein-4b-fp8",
+  "steps": 4,
+  "init_from_image1_denoise": null,
+  "cfg": 1.0,
+  "size": [
+   1024,
+   1024
+  ],
+  "refs": [
+   "image 1: art/parts/chibi-meshy/inputs/dressed.png (Jørgen's picture)",
+   "image 2: game3d/assets/portraits/kuro-neutral.webp"
+  ],
+  "seconds": 12.0
+ },
+ {
+  "name": "kuro-d-102",
+  "who": "kuro",
+  "job": "kuro-d",
+  "parent": "kuro-a",
+  "seed": 102,
+  "prompt": "Edit image 1: turn the woman into the person from image 2, keeping everything else about image 1 exactly: the same smooth matte vinyl 3D figure, the same big soft rounded-square head, the same large flat painted anime eyes and small simple nose and mouth, the same short body, round mitten hands with no fingers and stubby legs, the same front view standing pose with the arms slightly out, the same soft studio light and plain white background. She has black hair with a dark blue sheen in a high bun with two dark hair sticks, straight blunt bangs and two long side locks framing her face, black rectangular glasses with clear lenses, grey eyes, dark lipstick and pale skin. She wears a dark teal blazer over a black buttoned shirt, a black pencil skirt and black flat shoes. Empty hands. No text, no props.",
+  "model": "flux-2-klein-4b-fp8",
+  "steps": 4,
+  "init_from_image1_denoise": null,
+  "cfg": 1.0,
+  "size": [
+   1024,
+   1024
+  ],
+  "refs": [
+   "image 1: art/parts/chibi-meshy/inputs/dressed.png (Jørgen's picture)",
+   "image 2: game3d/assets/portraits/kuro-neutral.webp"
+  ],
+  "seconds": 11.0
+ },
+ {
+  "name": "kuro-d-103",
+  "who": "kuro",
+  "job": "kuro-d",
+  "parent": "kuro-a",
+  "seed": 103,
+  "prompt": "Edit image 1: turn the woman into the person from image 2, keeping everything else about image 1 exactly: the same smooth matte vinyl 3D figure, the same big soft rounded-square head, the same large flat painted anime eyes and small simple nose and mouth, the same short body, round mitten hands with no fingers and stubby legs, the same front view standing pose with the arms slightly out, the same soft studio light and plain white background. She has black hair with a dark blue sheen in a high bun with two dark hair sticks, straight blunt bangs and two long side locks framing her face, black rectangular glasses with clear lenses, grey eyes, dark lipstick and pale skin. She wears a dark teal blazer over a black buttoned shirt, a black pencil skirt and black flat shoes. Empty hands. No text, no props.",
+  "model": "flux-2-klein-4b-fp8",
+  "steps": 4,
+  "init_from_image1_denoise": null,
+  "cfg": 1.0,
+  "size": [
+   1024,
+   1024
+  ],
+  "refs": [
+   "image 1: art/parts/chibi-meshy/inputs/dressed.png (Jørgen's picture)",
+   "image 2: game3d/assets/portraits/kuro-neutral.webp"
+  ],
+  "seconds": 11.1
+ },
+ {
+  "name": "eric-d-101",
+  "who": "eric",
+  "job": "eric-d",
+  "parent": "eric-a",
+  "seed": 101,
+  "prompt": "Edit image 1: turn the woman into the person from image 2, keeping everything else about image 1 exactly: the same smooth matte vinyl 3D figure, the same big soft rounded-square head, the same large flat painted anime eyes and small simple nose and mouth, the same short body, round mitten hands with no fingers and stubby legs, the same front view standing pose with the arms slightly out, the same soft studio light and plain white background. He is a man with dark golden blond hair, the same colour all over, swept back and tied in a short ponytail at the back, light stubble on his jaw, blue eyes and thin silver rectangular glasses. He wears a grey hoodie under an open navy blazer, dark grey trousers and dark shoes. Empty hands. No text, no props.",
+  "model": "flux-2-klein-4b-fp8",
+  "steps": 4,
+  "init_from_image1_denoise": null,
+  "cfg": 1.0,
+  "size": [
+   1024,
+   1024
+  ],
+  "refs": [
+   "image 1: art/parts/chibi-meshy/inputs/dressed.png (Jørgen's picture)",
+   "image 2: game3d/assets/portraits/eric-neutral.webp"
+  ],
+  "seconds": 12.1
+ },
+ {
+  "name": "eric-d-102",
+  "who": "eric",
+  "job": "eric-d",
+  "parent": "eric-a",
+  "seed": 102,
+  "prompt": "Edit image 1: turn the woman into the person from image 2, keeping everything else about image 1 exactly: the same smooth matte vinyl 3D figure, the same big soft rounded-square head, the same large flat painted anime eyes and small simple nose and mouth, the same short body, round mitten hands with no fingers and stubby legs, the same front view standing pose with the arms slightly out, the same soft studio light and plain white background. He is a man with dark golden blond hair, the same colour all over, swept back and tied in a short ponytail at the back, light stubble on his jaw, blue eyes and thin silver rectangular glasses. He wears a grey hoodie under an open navy blazer, dark grey trousers and dark shoes. Empty hands. No text, no props.",
+  "model": "flux-2-klein-4b-fp8",
+  "steps": 4,
+  "init_from_image1_denoise": null,
+  "cfg": 1.0,
+  "size": [
+   1024,
+   1024
+  ],
+  "refs": [
+   "image 1: art/parts/chibi-meshy/inputs/dressed.png (Jørgen's picture)",
+   "image 2: game3d/assets/portraits/eric-neutral.webp"
+  ],
+  "seconds": 11.2
+ },
+ {
+  "name": "eric-d-103",
+  "who": "eric",
+  "job": "eric-d",
+  "parent": "eric-a",
+  "seed": 103,
+  "prompt": "Edit image 1: turn the woman into the person from image 2, keeping everything else about image 1 exactly: the same smooth matte vinyl 3D figure, the same big soft rounded-square head, the same large flat painted anime eyes and small simple nose and mouth, the same short body, round mitten hands with no fingers and stubby legs, the same front view standing pose with the arms slightly out, the same soft studio light and plain white background. He is a man with dark golden blond hair, the same colour all over, swept back and tied in a short ponytail at the back, light stubble on his jaw, blue eyes and thin silver rectangular glasses. He wears a grey hoodie under an open navy blazer, dark grey trousers and dark shoes. Empty hands. No text, no props.",
+  "model": "flux-2-klein-4b-fp8",
+  "steps": 4,
+  "init_from_image1_denoise": null,
+  "cfg": 1.0,
+  "size": [
+   1024,
+   1024
+  ],
+  "refs": [
+   "image 1: art/parts/chibi-meshy/inputs/dressed.png (Jørgen's picture)",
+   "image 2: game3d/assets/portraits/eric-neutral.webp"
+  ],
+  "seconds": 11.2
+ },
+ {
+  "name": "mio-d-101",
+  "who": "mio",
+  "job": "mio-d",
+  "parent": "mio-a",
+  "seed": 101,
+  "prompt": "Edit image 1: turn the woman into the person from image 2, keeping everything else about image 1 exactly: the same smooth matte vinyl 3D figure, the same big soft rounded-square head, the same large flat painted anime eyes and small simple nose and mouth, the same short body, round mitten hands with no fingers and stubby legs, the same front view standing pose with the arms slightly out, the same soft studio light and plain white background. She has dark green-black hair with bright green on the underside and in a few streaks, a side-swept fringe and a messy bun at the back of her head, taupe-grey glasses with rounded rectangle lenses, light tan eyes and pale skin. She wears a loose near-black dark teal hoodie, dark cargo trousers and dark sneakers. Empty hands. No text, no props.",
+  "model": "flux-2-klein-4b-fp8",
+  "steps": 4,
+  "init_from_image1_denoise": null,
+  "cfg": 1.0,
+  "size": [
+   1024,
+   1024
+  ],
+  "refs": [
+   "image 1: art/parts/chibi-meshy/inputs/dressed.png (Jørgen's picture)",
+   "image 2: game3d/assets/portraits/mio-neutral.webp"
+  ],
+  "seconds": 12.1
+ },
+ {
+  "name": "mio-d-102",
+  "who": "mio",
+  "job": "mio-d",
+  "parent": "mio-a",
+  "seed": 102,
+  "prompt": "Edit image 1: turn the woman into the person from image 2, keeping everything else about image 1 exactly: the same smooth matte vinyl 3D figure, the same big soft rounded-square head, the same large flat painted anime eyes and small simple nose and mouth, the same short body, round mitten hands with no fingers and stubby legs, the same front view standing pose with the arms slightly out, the same soft studio light and plain white background. She has dark green-black hair with bright green on the underside and in a few streaks, a side-swept fringe and a messy bun at the back of her head, taupe-grey glasses with rounded rectangle lenses, light tan eyes and pale skin. She wears a loose near-black dark teal hoodie, dark cargo trousers and dark sneakers. Empty hands. No text, no props.",
+  "model": "flux-2-klein-4b-fp8",
+  "steps": 4,
+  "init_from_image1_denoise": null,
+  "cfg": 1.0,
+  "size": [
+   1024,
+   1024
+  ],
+  "refs": [
+   "image 1: art/parts/chibi-meshy/inputs/dressed.png (Jørgen's picture)",
+   "image 2: game3d/assets/portraits/mio-neutral.webp"
+  ],
+  "seconds": 11.0
+ },
+ {
+  "name": "mio-d-103",
+  "who": "mio",
+  "job": "mio-d",
+  "parent": "mio-a",
+  "seed": 103,
+  "prompt": "Edit image 1: turn the woman into the person from image 2, keeping everything else about image 1 exactly: the same smooth matte vinyl 3D figure, the same big soft rounded-square head, the same large flat painted anime eyes and small simple nose and mouth, the same short body, round mitten hands with no fingers and stubby legs, the same front view standing pose with the arms slightly out, the same soft studio light and plain white background. She has dark green-black hair with bright green on the underside and in a few streaks, a side-swept fringe and a messy bun at the back of her head, taupe-grey glasses with rounded rectangle lenses, light tan eyes and pale skin. She wears a loose near-black dark teal hoodie, dark cargo trousers and dark sneakers. Empty hands. No text, no props.",
+  "model": "flux-2-klein-4b-fp8",
+  "steps": 4,
+  "init_from_image1_denoise": null,
+  "cfg": 1.0,
+  "size": [
+   1024,
+   1024
+  ],
+  "refs": [
+   "image 1: art/parts/chibi-meshy/inputs/dressed.png (Jørgen's picture)",
+   "image 2: game3d/assets/portraits/mio-neutral.webp"
+  ],
+  "seconds": 11.2
+ },
+ {
+  "name": "eric-e-101",
+  "who": "eric",
+  "job": "eric-e",
+  "parent": "eric-d",
+  "seed": 101,
+  "prompt": "Edit image 1: turn the woman into the person from image 2, keeping everything else about image 1 exactly: the same smooth matte vinyl 3D figure, the same big soft rounded-square head, the same large flat painted anime eyes and small simple nose and mouth, the same short body, round mitten hands with no fingers and stubby legs, the same front view standing pose with the arms slightly out, the same soft studio light and plain white background. He is a man with dark golden blond hair, the same colour all over, swept back and tied in a short ponytail at the back, light stubble on his jaw, large blue anime eyes as big as the woman's in image 1 and thin silver rectangular glasses. He wears a grey hoodie under an open navy blazer, dark grey trousers and dark shoes. Empty hands. No text, no props.",
+  "model": "flux-2-klein-4b-fp8",
+  "steps": 4,
+  "init_from_image1_denoise": null,
+  "cfg": 1.0,
+  "size": [
+   1024,
+   1024
+  ],
+  "refs": [
+   "image 1: art/parts/chibi-meshy/inputs/dressed.png (Jørgen's picture)",
+   "image 2: game3d/assets/portraits/eric-neutral.webp"
+  ],
+  "seconds": 12.1
+ },
+ {
+  "name": "eric-e-102",
+  "who": "eric",
+  "job": "eric-e",
+  "parent": "eric-d",
+  "seed": 102,
+  "prompt": "Edit image 1: turn the woman into the person from image 2, keeping everything else about image 1 exactly: the same smooth matte vinyl 3D figure, the same big soft rounded-square head, the same large flat painted anime eyes and small simple nose and mouth, the same short body, round mitten hands with no fingers and stubby legs, the same front view standing pose with the arms slightly out, the same soft studio light and plain white background. He is a man with dark golden blond hair, the same colour all over, swept back and tied in a short ponytail at the back, light stubble on his jaw, large blue anime eyes as big as the woman's in image 1 and thin silver rectangular glasses. He wears a grey hoodie under an open navy blazer, dark grey trousers and dark shoes. Empty hands. No text, no props.",
+  "model": "flux-2-klein-4b-fp8",
+  "steps": 4,
+  "init_from_image1_denoise": null,
+  "cfg": 1.0,
+  "size": [
+   1024,
+   1024
+  ],
+  "refs": [
+   "image 1: art/parts/chibi-meshy/inputs/dressed.png (Jørgen's picture)",
+   "image 2: game3d/assets/portraits/eric-neutral.webp"
+  ],
+  "seconds": 11.2
+ },
+ {
+  "name": "eric-e-103",
+  "who": "eric",
+  "job": "eric-e",
+  "parent": "eric-d",
+  "seed": 103,
+  "prompt": "Edit image 1: turn the woman into the person from image 2, keeping everything else about image 1 exactly: the same smooth matte vinyl 3D figure, the same big soft rounded-square head, the same large flat painted anime eyes and small simple nose and mouth, the same short body, round mitten hands with no fingers and stubby legs, the same front view standing pose with the arms slightly out, the same soft studio light and plain white background. He is a man with dark golden blond hair, the same colour all over, swept back and tied in a short ponytail at the back, light stubble on his jaw, large blue anime eyes as big as the woman's in image 1 and thin silver rectangular glasses. He wears a grey hoodie under an open navy blazer, dark grey trousers and dark shoes. Empty hands. No text, no props.",
+  "model": "flux-2-klein-4b-fp8",
+  "steps": 4,
+  "init_from_image1_denoise": null,
+  "cfg": 1.0,
+  "size": [
+   1024,
+   1024
+  ],
+  "refs": [
+   "image 1: art/parts/chibi-meshy/inputs/dressed.png (Jørgen's picture)",
+   "image 2: game3d/assets/portraits/eric-neutral.webp"
+  ],
+  "seconds": 11.3
+ },
+ {
+  "name": "mio-f-101",
+  "who": "mio",
+  "job": "mio-f",
+  "parent": "mio-d",
+  "seed": 101,
+  "prompt": "Edit image 1: turn the woman into the person from image 2, keeping everything else about image 1 exactly: the same smooth matte vinyl 3D figure, the same big soft rounded-square head, the same large flat painted anime eyes and small simple nose and mouth, the same short body, round mitten hands with no fingers and stubby legs, the same front view standing pose with the arms slightly out, the same soft studio light and plain white background. She has dark green-black hair with bright green on the underside and in a few streaks, a side-swept fringe and a smooth round bun at the back of her head, taupe-grey glasses with rounded rectangle lenses, light tan eyes and pale skin. She wears a loose near-black dark teal hoodie, dark cargo trousers and dark sneakers. Empty hands. No text, no props.",
+  "model": "flux-2-klein-4b-fp8",
+  "steps": 4,
+  "init_from_image1_denoise": null,
+  "cfg": 1.0,
+  "size": [
+   1024,
+   1024
+  ],
+  "refs": [
+   "image 1: art/parts/chibi-meshy/inputs/dressed.png (Jørgen's picture)",
+   "image 2: game3d/assets/portraits/mio-neutral.webp"
+  ],
+  "seconds": 20.0
+ },
+ {
+  "name": "mio-f-102",
+  "who": "mio",
+  "job": "mio-f",
+  "parent": "mio-d",
+  "seed": 102,
+  "prompt": "Edit image 1: turn the woman into the person from image 2, keeping everything else about image 1 exactly: the same smooth matte vinyl 3D figure, the same big soft rounded-square head, the same large flat painted anime eyes and small simple nose and mouth, the same short body, round mitten hands with no fingers and stubby legs, the same front view standing pose with the arms slightly out, the same soft studio light and plain white background. She has dark green-black hair with bright green on the underside and in a few streaks, a side-swept fringe and a smooth round bun at the back of her head, taupe-grey glasses with rounded rectangle lenses, light tan eyes and pale skin. She wears a loose near-black dark teal hoodie, dark cargo trousers and dark sneakers. Empty hands. No text, no props.",
+  "model": "flux-2-klein-4b-fp8",
+  "steps": 4,
+  "init_from_image1_denoise": null,
+  "cfg": 1.0,
+  "size": [
+   1024,
+   1024
+  ],
+  "refs": [
+   "image 1: art/parts/chibi-meshy/inputs/dressed.png (Jørgen's picture)",
+   "image 2: game3d/assets/portraits/mio-neutral.webp"
+  ],
+  "seconds": 11.0
+ },
+ {
+  "name": "mio-f-103",
+  "who": "mio",
+  "job": "mio-f",
+  "parent": "mio-d",
+  "seed": 103,
+  "prompt": "Edit image 1: turn the woman into the person from image 2, keeping everything else about image 1 exactly: the same smooth matte vinyl 3D figure, the same big soft rounded-square head, the same large flat painted anime eyes and small simple nose and mouth, the same short body, round mitten hands with no fingers and stubby legs, the same front view standing pose with the arms slightly out, the same soft studio light and plain white background. She has dark green-black hair with bright green on the underside and in a few streaks, a side-swept fringe and a smooth round bun at the back of her head, taupe-grey glasses with rounded rectangle lenses, light tan eyes and pale skin. She wears a loose near-black dark teal hoodie, dark cargo trousers and dark sneakers. Empty hands. No text, no props.",
+  "model": "flux-2-klein-4b-fp8",
+  "steps": 4,
+  "init_from_image1_denoise": null,
+  "cfg": 1.0,
+  "size": [
+   1024,
+   1024
+  ],
+  "refs": [
+   "image 1: art/parts/chibi-meshy/inputs/dressed.png (Jørgen's picture)",
+   "image 2: game3d/assets/portraits/mio-neutral.webp"
+  ],
+  "seconds": 11.0
+ },
+ {
+  "name": "eric-f-101",
+  "who": "eric",
+  "job": "eric-f",
+  "parent": "eric-e",
+  "seed": 101,
+  "prompt": "Edit image 1: turn the woman into the person from image 2, keeping everything else about image 1 exactly: the same smooth matte vinyl 3D figure, the same big soft rounded-square head, the same large flat painted anime eyes and small simple nose and mouth, the same short body, round mitten hands with no fingers and stubby legs, the same front view standing pose with the arms slightly out, the same soft studio light and plain white background. He is a man with dark golden blond hair, the same colour all over, swept back and tied in a short ponytail at the back, light stubble on his jaw, large blue anime eyes as big as the woman's in image 1 and thin silver rectangular glasses painted flat on the face like the eyes, with no 3D frame. He wears a grey hoodie under an open navy blazer, dark grey trousers and dark shoes. Empty hands. No text, no props.",
+  "model": "flux-2-klein-4b-fp8",
+  "steps": 4,
+  "init_from_image1_denoise": null,
+  "cfg": 1.0,
+  "size": [
+   1024,
+   1024
+  ],
+  "refs": [
+   "image 1: art/parts/chibi-meshy/inputs/dressed.png (Jørgen's picture)",
+   "image 2: game3d/assets/portraits/eric-neutral.webp"
+  ],
+  "seconds": 12.0
+ },
+ {
+  "name": "eric-f-102",
+  "who": "eric",
+  "job": "eric-f",
+  "parent": "eric-e",
+  "seed": 102,
+  "prompt": "Edit image 1: turn the woman into the person from image 2, keeping everything else about image 1 exactly: the same smooth matte vinyl 3D figure, the same big soft rounded-square head, the same large flat painted anime eyes and small simple nose and mouth, the same short body, round mitten hands with no fingers and stubby legs, the same front view standing pose with the arms slightly out, the same soft studio light and plain white background. He is a man with dark golden blond hair, the same colour all over, swept back and tied in a short ponytail at the back, light stubble on his jaw, large blue anime eyes as big as the woman's in image 1 and thin silver rectangular glasses painted flat on the face like the eyes, with no 3D frame. He wears a grey hoodie under an open navy blazer, dark grey trousers and dark shoes. Empty hands. No text, no props.",
+  "model": "flux-2-klein-4b-fp8",
+  "steps": 4,
+  "init_from_image1_denoise": null,
+  "cfg": 1.0,
+  "size": [
+   1024,
+   1024
+  ],
+  "refs": [
+   "image 1: art/parts/chibi-meshy/inputs/dressed.png (Jørgen's picture)",
+   "image 2: game3d/assets/portraits/eric-neutral.webp"
+  ],
+  "seconds": 11.0
+ },
+ {
+  "name": "eric-f-103",
+  "who": "eric",
+  "job": "eric-f",
+  "parent": "eric-e",
+  "seed": 103,
+  "prompt": "Edit image 1: turn the woman into the person from image 2, keeping everything else about image 1 exactly: the same smooth matte vinyl 3D figure, the same big soft rounded-square head, the same large flat painted anime eyes and small simple nose and mouth, the same short body, round mitten hands with no fingers and stubby legs, the same front view standing pose with the arms slightly out, the same soft studio light and plain white background. He is a man with dark golden blond hair, the same colour all over, swept back and tied in a short ponytail at the back, light stubble on his jaw, large blue anime eyes as big as the woman's in image 1 and thin silver rectangular glasses painted flat on the face like the eyes, with no 3D frame. He wears a grey hoodie under an open navy blazer, dark grey trousers and dark shoes. Empty hands. No text, no props.",
+  "model": "flux-2-klein-4b-fp8",
+  "steps": 4,
+  "init_from_image1_denoise": null,
+  "cfg": 1.0,
+  "size": [
+   1024,
+   1024
+  ],
+  "refs": [
+   "image 1: art/parts/chibi-meshy/inputs/dressed.png (Jørgen's picture)",
+   "image 2: game3d/assets/portraits/eric-neutral.webp"
+  ],
+  "seconds": 11.0
+ },
+ {
+  "name": "mio-g-101",
+  "who": "mio",
+  "job": "mio-g",
+  "parent": "mio-f",
+  "seed": 101,
+  "prompt": "Edit image 1: turn the woman into the person from image 2, keeping everything else about image 1 exactly: the same smooth matte vinyl 3D figure, the same big soft rounded-square head, the same large flat painted anime eyes and small simple nose and mouth, the same short body, round mitten hands with no fingers and stubby legs, the same front view standing pose with the arms slightly out, the same soft studio light and plain white background. She has dark green-black hair with bright green on the underside and in a few streaks, a side-swept fringe and a smooth round bun high at the back of her head on her left side, showing beside her head, taupe-grey glasses with rounded rectangle lenses, light tan eyes and pale skin. She wears a loose near-black dark teal hoodie, dark cargo trousers and dark sneakers. Empty hands. No text, no props.",
+  "model": "flux-2-klein-4b-fp8",
+  "steps": 4,
+  "init_from_image1_denoise": null,
+  "cfg": 1.0,
+  "size": [
+   1024,
+   1024
+  ],
+  "refs": [
+   "image 1: art/parts/chibi-meshy/inputs/dressed.png (Jørgen's picture)",
+   "image 2: game3d/assets/portraits/mio-neutral.webp"
+  ],
+  "seconds": 12.0
+ },
+ {
+  "name": "mio-g-102",
+  "who": "mio",
+  "job": "mio-g",
+  "parent": "mio-f",
+  "seed": 102,
+  "prompt": "Edit image 1: turn the woman into the person from image 2, keeping everything else about image 1 exactly: the same smooth matte vinyl 3D figure, the same big soft rounded-square head, the same large flat painted anime eyes and small simple nose and mouth, the same short body, round mitten hands with no fingers and stubby legs, the same front view standing pose with the arms slightly out, the same soft studio light and plain white background. She has dark green-black hair with bright green on the underside and in a few streaks, a side-swept fringe and a smooth round bun high at the back of her head on her left side, showing beside her head, taupe-grey glasses with rounded rectangle lenses, light tan eyes and pale skin. She wears a loose near-black dark teal hoodie, dark cargo trousers and dark sneakers. Empty hands. No text, no props.",
+  "model": "flux-2-klein-4b-fp8",
+  "steps": 4,
+  "init_from_image1_denoise": null,
+  "cfg": 1.0,
+  "size": [
+   1024,
+   1024
+  ],
+  "refs": [
+   "image 1: art/parts/chibi-meshy/inputs/dressed.png (Jørgen's picture)",
+   "image 2: game3d/assets/portraits/mio-neutral.webp"
+  ],
+  "seconds": 11.0
+ },
+ {
+  "name": "mio-g-103",
+  "who": "mio",
+  "job": "mio-g",
+  "parent": "mio-f",
+  "seed": 103,
+  "prompt": "Edit image 1: turn the woman into the person from image 2, keeping everything else about image 1 exactly: the same smooth matte vinyl 3D figure, the same big soft rounded-square head, the same large flat painted anime eyes and small simple nose and mouth, the same short body, round mitten hands with no fingers and stubby legs, the same front view standing pose with the arms slightly out, the same soft studio light and plain white background. She has dark green-black hair with bright green on the underside and in a few streaks, a side-swept fringe and a smooth round bun high at the back of her head on her left side, showing beside her head, taupe-grey glasses with rounded rectangle lenses, light tan eyes and pale skin. She wears a loose near-black dark teal hoodie, dark cargo trousers and dark sneakers. Empty hands. No text, no props.",
+  "model": "flux-2-klein-4b-fp8",
+  "steps": 4,
+  "init_from_image1_denoise": null,
+  "cfg": 1.0,
+  "size": [
+   1024,
+   1024
+  ],
+  "refs": [
+   "image 1: art/parts/chibi-meshy/inputs/dressed.png (Jørgen's picture)",
+   "image 2: game3d/assets/portraits/mio-neutral.webp"
+  ],
+  "seconds": 11.0
+ },
+ {
+  "name": "mio-g-101-flip",
+  "who": "mio",
+  "job": "mio-g",
+  "parent": "mio-g-101",
+  "seed": 101,
+  "prompt": "Edit image 1: turn the woman into the person from image 2, keeping everything else about image 1 exactly: the same smooth matte vinyl 3D figure, the same big soft rounded-square head, the same large flat painted anime eyes and small simple nose and mouth, the same short body, round mitten hands with no fingers and stubby legs, the same front view standing pose with the arms slightly out, the same soft studio light and plain white background. She has dark green-black hair with bright green on the underside and in a few streaks, a side-swept fringe and a smooth round bun high at the back of her head on her left side, showing beside her head, taupe-grey glasses with rounded rectangle lenses, light tan eyes and pale skin. She wears a loose near-black dark teal hoodie, dark cargo trousers and dark sneakers. Empty hands. No text, no props.",
+  "model": "flux-2-klein-4b-fp8",
+  "steps": 4,
+  "init_from_image1_denoise": null,
+  "cfg": 1.0,
+  "size": [
+   1024,
+   1024
+  ],
+  "refs": [
+   "image 1: art/parts/chibi-meshy/inputs/dressed.png (Jørgen's picture)",
+   "image 2: game3d/assets/portraits/mio-neutral.webp"
+  ],
+  "note": "mio-g-101 mirrored left to right, so the bun sits on her left (image right) as in her portrait. No new render."
+ }
+]

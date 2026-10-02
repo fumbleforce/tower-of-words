@@ -1,0 +1,193 @@
+[
+ {
+  "service": "meshy",
+  "part": "kuro-1",
+  "task": "01a0fe81-268f-74c5-a4a4-1a0adc495af9",
+  "status": "SUCCEEDED",
+  "credits": 30,
+  "balance_after": 1195,
+  "settings": {
+   "ai_model": "latest",
+   "should_remesh": false,
+   "should_texture": true,
+   "enable_pbr": false,
+   "image_enhancement": false,
+   "target_formats": [
+    "glb"
+   ],
+   "multi_view_thumbnails": true,
+   "texture_resolution": "4k"
+  },
+  "input": "art/parts/chibi-cast-meshy/inputs/cut/kuro-d-101.png"
+ },
+ {
+  "service": "meshy",
+  "part": "eric-1",
+  "task": "01a0fe81-752a-72df-a623-e7eb739c8c05",
+  "status": "SUCCEEDED",
+  "credits": 30,
+  "balance_after": 1195,
+  "settings": {
+   "ai_model": "latest",
+   "should_remesh": false,
+   "should_texture": true,
+   "enable_pbr": false,
+   "image_enhancement": false,
+   "target_formats": [
+    "glb"
+   ],
+   "multi_view_thumbnails": true,
+   "texture_resolution": "4k"
+  },
+  "input": "art/parts/chibi-cast-meshy/inputs/cut/eric-e-101.png"
+ },
+ {
+  "service": "meshy",
+  "part": "mio-1",
+  "task": "01a0fe81-c2b7-74cc-a164-f034ec0be6a6",
+  "status": "SUCCEEDED",
+  "credits": 30,
+  "balance_after": 1195,
+  "settings": {
+   "ai_model": "latest",
+   "should_remesh": false,
+   "should_texture": true,
+   "enable_pbr": false,
+   "image_enhancement": false,
+   "target_formats": [
+    "glb"
+   ],
+   "multi_view_thumbnails": true,
+   "texture_resolution": "4k"
+  },
+  "input": "art/parts/chibi-cast-meshy/inputs/cut/mio-d-101.png"
+ },
+ {
+  "service": "meshy",
+  "part": "kuro-1-rig",
+  "task": "01a0fe84-b78b-73ad-a264-6f4bf8651ae3",
+  "status": "SUCCEEDED",
+  "credits": 5,
+  "settings": {
+   "model": "art/parts/chibi-cast-meshy/meshy/kuro-1-60k.glb",
+   "height_meters": 1.0
+  }
+ },
+ {
+  "service": "meshy",
+  "part": "eric-1-rig",
+  "task": "01a0fe85-51c7-77f9-b43e-e977f670c620",
+  "status": "SUCCEEDED",
+  "credits": 5,
+  "settings": {
+   "model": "art/parts/chibi-cast-meshy/meshy/eric-1-60k.glb",
+   "height_meters": 1.0
+  }
+ },
+ {
+  "service": "meshy",
+  "part": "mio-1-rig",
+  "task": "01a0fe85-ebd1-72af-9aa6-b1ca6bc937ac",
+  "status": "SUCCEEDED",
+  "credits": 5,
+  "settings": {
+   "model": "art/parts/chibi-cast-meshy/meshy/mio-1-60k.glb",
+   "height_meters": 1.0
+  }
+ },
+ {
+  "service": "meshy",
+  "part": "kuro-2",
+  "task": "01a0fe88-7542-7526-b625-da2d6f2011e2",
+  "status": "SUCCEEDED",
+  "credits": 15,
+  "balance_after": 1165,
+  "settings": {
+   "ai_model": "meshy-t2",
+   "should_texture": true,
+   "enable_pbr": false,
+   "target_formats": [
+    "glb"
+   ],
+   "multi_view_thumbnails": true,
+   "texture_resolution": "4k",
+   "model_type": "smart-topology",
+   "target_polycount": 5000
+  },
+  "input": "art/parts/chibi-cast-meshy/inputs/cut/kuro-d-101.png"
+ },
+ {
+  "service": "meshy",
+  "part": "mio-2",
+  "task": "01a0fe89-2ba9-7459-ac11-1ff012114aad",
+  "status": "SUCCEEDED",
+  "credits": 15,
+  "balance_after": 1150,
+  "settings": {
+   "ai_model": "meshy-t2",
+   "should_texture": true,
+   "enable_pbr": false,
+   "target_formats": [
+    "glb"
+   ],
+   "multi_view_thumbnails": true,
+   "texture_resolution": "4k",
+   "model_type": "smart-topology",
+   "target_polycount": 5000
+  },
+  "input": "art/parts/chibi-cast-meshy/inputs/cut/mio-d-101.png"
+ },
+ {
+  "service": "meshy",
+  "part": "eric-2",
+  "task": "01a0fe89-e2b0-749c-b02b-2f064d68acbc",
+  "status": "SUCCEEDED",
+  "credits": 30,
+  "balance_after": 1120,
+  "settings": {
+   "ai_model": "latest",
+   "should_remesh": false,
+   "should_texture": true,
+   "enable_pbr": false,
+   "image_enhancement": false,
+   "target_formats": [
+    "glb"
+   ],
+   "multi_view_thumbnails": true,
+   "texture_resolution": "4k"
+  },
+  "input": "art/parts/chibi-cast-meshy/inputs/cut/eric-f-101.png"
+ },
+ {
+  "service": "meshy",
+  "part": "mio-3",
+  "task": "01a0fe8c-1c24-7706-99e4-0732140d67c4",
+  "status": "SUCCEEDED",
+  "credits": 30,
+  "balance_after": 1090,
+  "settings": {
+   "ai_model": "latest",
+   "should_remesh": false,
+   "should_texture": true,
+   "enable_pbr": false,
+   "image_enhancement": false,
+   "target_formats": [
+    "glb"
+   ],
+   "multi_view_thumbnails": true,
+   "texture_resolution": "4k"
+  },
+  "input": "art/parts/chibi-cast-meshy/inputs/cut/mio-g-101-flip.png"
+ },
+ {
+  "service": "meshy",
+  "part": "mio-3-rig",
+  "task": "01a0fe8d-618b-735f-ae68-b0fcb8c480d4",
+  "status": "SUCCEEDED",
+  "credits": 5,
+  "settings": {
+   "model": "art/parts/chibi-cast-meshy/meshy/mio-3-60k.glb",
+   "height_meters": 1.0
+  }
+ }
+]
