@@ -27,7 +27,7 @@ The island is well populated (Jørgen, 2026-10-02: "there should be plenty of pe
 - They are background, not people to talk to: no pin, no name, no talk.
 - They never stand in the way: walkers go round Eric and the story's people and never push them, and nobody stands or sits on the walking lines, by the things the story uses or where Eric comes in.
 - Nobody appears or vanishes in view: a new walker comes in at a street's end out of view or steps out of a door, and leaves the same way. The clock moving while Eric is there changes only the people out of view.
-- While a scene plays, nobody new comes and walkers give Eric a wide berth, so the scene keeps its room.
+- While a scene plays, nobody new comes, walkers give Eric a wide berth and nobody heads for a door he is at, so the scene keeps its room.
 - The numbers in places.md are for a desktop at high quality. The medium tier shows 85% of them and the low tier 70%; phones show 55, 75 or 90% (low, medium, high), with no sun shadows. There is a cap per place on how many are out at once: 22, 30 and 36 on a desktop, 14, 18 and 22 on a phone.
 - They are the same chibi bodies as the lobby's office workers, built in game3d/js/crowd/looks.js, so a later character model replaces one file.
 

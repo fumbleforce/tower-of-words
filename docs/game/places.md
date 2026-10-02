@@ -1040,7 +1040,7 @@ The crowd ([systems.md](systems.md), The crowd):
 
 | Period | Walking | Sitting | Talking | Waiting | What they do |
 |---|---|---|---|---|---|
-| evening | 3 | 0 | 0 | 0 | Two or three residents between the street gate and the hall, in and out past the mailboxes to the stairs. Nobody sits, and nobody stops in the doors, the passage, the sento doorway or at the mailboxes. |
+| evening | 3 | 0 | 0 | 0 | Two or three residents between the street gate and the hall doors, in and out. Nobody sits, and nobody stops in the doors, the passage, the sento doorway or at the mailboxes. |
 
 ### Small moments
 
