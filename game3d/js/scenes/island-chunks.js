@@ -106,6 +106,15 @@ export const CHUNKS = {
     view: [-60, 50, -40, 25],
     anchor: 'the office street where the quarter street meets it',
   },
+  harbour: {
+    at: [-100, -88],
+    turn: 0, // the camera turns itself: north over the yard, the landing and the piers, as the office street on the street and the harbour walk (scenes/harbour.js)
+    scale: 1,
+    level: 0,
+    walk: [-26, 69.4, -13, 58.6],
+    view: [-40, 80, -30, 72],
+    anchor: 'the corner of the quay where the ferry landing meets the supply yard',
+  },
   train: {
     at: [-28.6, -3.9],
     turn: 270, // heading north up the shed (the beam comes in from the south, train/island.js); the platform side east

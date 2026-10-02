@@ -5,10 +5,10 @@
 //   verge (a kerb, ground cover and a low hedge, no trees, so nothing stands between Eric and the camera), with
 //   post lamps behind it, two bench bays looking over the street at the offices, and crossings at the side streets
 //   the side streets' mouths: the quarter street's walked a few steps south to the bank's door, the shed street's
-//   and the harbour walk's laid a little way, each with bollards across (they go on south, not walked yet)
+//   laid a little way with bollards across (both go on south, not walked yet), and the harbour walk's (the harbour's)
 //   the lawns: belts of trees between and behind the blocks north of the street, and set back from the verge south
 //   of it, where the camera looks over them; a small wood on the quarter park
-//   a finger sign at the street's west end, pointing back east to the gym and the pool
+//   a finger sign at the street's west end, pointing on west to the harbour and back east to the gym and the pool
 import { laneField, verge } from '../outdoor/lane.js';
 import { GRANITE } from '../outdoor/paving.js';
 import { kerb } from '../outdoor/edges.js';
@@ -83,15 +83,12 @@ function* edges(p, signRoot) {
   };
   mouth(Q, P.QUARTER_END + 1.6, 'e');
   mouth(SHED, S[3] + 3, 'we');
-  // bollards across the street's west end and the two mouths
+  // bollards across the two mouths
   for (const { a, b } of P.BOLLARDS) {
     const n = Math.max(2, Math.round(Math.hypot(b[0] - a[0], b[1] - a[1]) / 0.66));
     for (let i = 0; i <= n; i++) bollard(p, a[0] + ((b[0] - a[0]) * i) / n, a[1] + ((b[1] - a[1]) * i) / n);
   }
-  fingerSign(signRoot, p, ...P.SIGNS.west, [
-    { text: 'Gym', sub: '体育館', dir: 1 },
-    { text: 'Pool', sub: 'プール', dir: 1 },
-  ]);
+  fingerSign(signRoot, p, ...P.SIGNS.west, P.WEST_BOARDS);
   // a bed between the bank's north face and the verge, its hedge along the face
   const bank = P.block('b_h').rect;
   bed(p, [bank[0], bank[1], S[3] + V + 0.1, bank[2] - 0.05], { y: 0.04 });
@@ -104,8 +101,8 @@ function* edges(p, signRoot) {
 }
 
 // the lawns' trees: belts between and behind the blocks north of the street, set back south of it; a few standing
-// free either side of the foods walk
-function* planting(p) {
+// free either side of the foods walk. [x0, x1]: only the belts that reach into it (the harbour lays the west end's)
+export function* planting(p, [x0, x1] = [-Infinity, Infinity]) {
   const n = S[2]; // the street's north edge
   for (const [r, kinds, seed] of [
     [[-26.9, -24.6, -67, n - 2.2], [keyaki, sakura], 101],
@@ -119,12 +116,12 @@ function* planting(p) {
     [[7.5, 30.5, S[3] + 3.6, S[3] + 6.6], [sakura, keyaki, maple], 117],
     [[-3.6, -0.4, -44, -36.5], [maple, sakura], 119],
   ])
-    yield* belt(p, r, kinds, { seed, pitch: 3.3 });
+    if (r[1] > x0 && r[0] < x1) yield* belt(p, r, kinds, { seed, pitch: 3.3 });
   for (const [kind, x, z, s, seed] of [
     [sakura, -22.4, -61.2, 0.95, 121],
     [maple, -17.2, -60.4, 0.9, 122],
   ])
-    tree(p, kind, x, z, s, seed);
+    if (x > x0 && x < x1) tree(p, kind, x, z, s, seed);
 }
 
 // c: cells (dorm-court/cells.js); lights: a lightSet; signRoot: the group the finger sign's boards go in

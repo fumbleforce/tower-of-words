@@ -84,25 +84,33 @@ function walks(pv, p, ids) {
   }
 }
 
+// one block with its door, the name on its canopy and the card on its glass: k as plan.js BLOCKS ({ id, rect, row,
+// face, door, w, seed, sign }, and wall, a colour, where the layout's own isn't wanted); the harbour builds its
+// terminal and its office with it too (scenes/harbour/fronts.js)
+export function* frontSteps(sets, signs, lights, k, { gf } = {}) {
+  const { doors } = yield* officeBlockSteps(sets, k.rect, {
+    storeys: k.row.storeys,
+    fh: k.row.floorH,
+    gf,
+    wall: k.wall ?? TOWN.walls[WALL[k.id]],
+    doors: [
+      {
+        face: k.face,
+        at: k.door[k.face === 's' || k.face === 'n' ? 0 : 1],
+        w: k.w,
+        canopy: { out: 1.3, side: 0.7 },
+      },
+    ],
+    seed: k.seed,
+  });
+  fittings(sets.p, signs, lights, k, doors[0]);
+}
+
 // sets: outdoor/block.js blockSets() (the caller builds them: buildBlockSets); pv, p: a paver and a Parts collector
 // (or cells') for the ground; signs: a shop-signs.js signSet; lights: a lightSet; ids: which blocks (default all)
 export function* rowSteps(sets, pv, p, signs, lights, ids = P.BLOCK_IDS) {
   for (const k of P.BLOCKS.filter((b) => ids.includes(b.id))) {
-    const { doors } = yield* officeBlockSteps(sets, k.rect, {
-      storeys: k.row.storeys,
-      fh: k.row.floorH,
-      wall: TOWN.walls[WALL[k.id]],
-      doors: [
-        {
-          face: k.face,
-          at: k.door[k.face === 's' ? 0 : 1],
-          w: k.w,
-          canopy: { out: 1.3, side: 0.7 },
-        },
-      ],
-      seed: k.seed,
-    });
-    fittings(sets.p, signs, lights, k, doors[0]);
+    yield* frontSteps(sets, signs, lights, k);
     if (k.id === 'b_h') atm(signs, k);
     const fc = P.FORECOURTS.find((q) => q.id === k.id);
     if (fc) forecourt(pv, p, fc);

@@ -1,6 +1,6 @@
 // The map's "Day 2 plan" view (map/screen.js): the south half of the island as docs/game/island.md plans it. Over
-// the built places it draws the layout's buildings, paths and green muted, the plan's streets, courts, piers, green,
-// coast and one new building in their own ink (scenes/island-plan.js), the half's edge, and every place's name in
+// the built places it draws the layout's buildings, paths, green and coast muted, the plan's streets, courts and green
+// in their own ink (scenes/island-plan.js), the half's edge, and every place's name in
 // English and Japanese.
 import {
   BUILDINGS,
@@ -8,8 +8,6 @@ import {
   GREEN,
   COAST,
   HALF_EDGE,
-  PLAN_COAST,
-  PLAN_BUILDINGS,
   PLAN_PATHS,
   PLAN_GREEN,
   PLACES,
@@ -45,27 +43,24 @@ const middle = (pts) => pts.reduce((s, [x, z]) => [s[0] + x / pts.length, s[1] +
 // a place's label point: its building's footprint middle, or its own point
 export function placePoint(p) {
   if (!p.b) return p.at;
-  const b = BUILDINGS.find((o) => o.id === p.b) || PLAN_BUILDINGS.find((o) => o.id === p.b);
+  const b = BUILDINGS.find((o) => o.id === p.b);
   return b ? middle(footprint(b)) : p.at;
 }
 
 export function drawPlan(ctx, P) {
   ctx.save();
   ctx.lineJoin = 'round';
-  for (const line of [COAST.line, ...PLAN_COAST]) {
-    ctx.strokeStyle = INK.coast;
-    ctx.lineWidth = 2;
-    ctx.setLineDash([8, 5]);
-    shape(ctx, P, line, false);
-    ctx.stroke();
-  }
+  ctx.strokeStyle = INK.coast;
+  ctx.lineWidth = 2;
+  ctx.setLineDash([8, 5]);
+  shape(ctx, P, COAST.line, false);
+  ctx.stroke();
   ctx.setLineDash([]);
   for (const g of GREEN) fillStroke(ctx, P, g.poly || rectPts(g.rect), INK.green + '22', INK.green + '88', 1);
   for (const g of PLAN_GREEN) fillStroke(ctx, P, rectPts(g.rect), INK.green + '33', INK.plan, 1.2, [5, 4]);
   for (const p of PATHS) if (p.kind !== 'beam') fillStroke(ctx, P, outlineOf(p), INK.path + '33', INK.path + 'aa', 1);
   for (const p of PLAN_PATHS) fillStroke(ctx, P, outlineOf(p), INK.plan + '40', INK.plan, 1.4);
   for (const b of BUILDINGS) fillStroke(ctx, P, footprint(b), '#ffffff10', INK.building, 1.2);
-  for (const b of PLAN_BUILDINGS) fillStroke(ctx, P, rectPts(b.rect), '#15181d99', INK.plan, 1.8);
   ctx.strokeStyle = INK.edge;
   ctx.lineWidth = 3;
   ctx.setLineDash([12, 6]);

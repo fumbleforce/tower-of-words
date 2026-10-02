@@ -20,6 +20,7 @@ import { SOUTH_PATHS, SOUTH_SAND, SHORE } from './island-south.js';
 import { BATH_PATHS, BATH_GREEN, BATH_COAST } from './island-baths.js';
 import { SPORT_PATHS } from './island-sports.js';
 import { OFFICE_PATHS } from './island-offices.js';
+import { HARBOUR_PATHS, HARBOUR_COAST } from './island-harbour.js';
 export * from './island-plan.js'; // the south half planned for day 2, drawn on the map only
 import { CHUNKS } from './island-chunks.js'; // each built place's frame
 export { CHUNKS };
@@ -110,11 +111,12 @@ const ROWS = [
   ['chimney', 'low', 8, 2, 1, ROOF, 'flat', [-82, -123.3, -79, -118.1]],
   ['factory', 'low', 3, 2, 0, ROOF, 'flat', [-76.7, -128.8, -52.4, -114.5]],
   ['works_shed', 'low', 2, 2, 1, ROOF, 'flat', [-79.4, -111.9, -70.7, -106.2]],
-  ['works_orange', 'low', 2, 2, 1, ROOF, 'flat', [-94.4, -100.7, -84.6, -95.3]],
+  ['works_orange', 'office', 2, 2, 1, ROOF, 'office', [-98, -105, -88, -98]], // the harbour office, its door on the yard
   ['works_blue', 'low', 1, 2, 1, ROOF, 'flat', [-75.4, -101.8, -64.5, -97.6]],
   ['works_kiosk', 'low', 1, 2, 2, ROOF, 'flat', [-62.4, -113.8, -56.9, -107.5]],
-  ['dock_shed', 'low', 2, 2, 0, ROOF, 'flat', [-84.2, -68, -74.4, -64.3]],
-  ['dock_hut', 'low', 1, 2, 1, ROOF, 'flat', [-80.4, -79.2, -75.2, -76.2]],
+  ['dock_shed', 'low', 2, 2.5, 0, ROOF, 'flat', [-79, -94, -64, -82]], // set back to the yard's north side
+  ['dock_hut', 'low', 1, 2, 1, ROOF, 'flat', [-97, -61, -93, -58.5]],
+  ['ferry_terminal', 'low', 1, 2.6, 1, ROOF, 'flat', [-120, -108, -104, -100]],
   ['n1', 'office', 3, 2, 3, ROOF, 'office', [-60.1, -142.9, -38.7, -129.4]],
   ['n2', 'office', 4, 2, 0, ROOF, 'office', [-33, -144.1, -23.1, -129.4]],
   ['n3', 'office', 4, 2, 1, ROOF, 'office', [-22.6, -144.8, -12.9, -133]],
@@ -198,6 +200,12 @@ const DETAILS = {
   block_e3: 'Three storeys on the north street’s east side; its door on that street.',
   block_e2:
     'Four storeys of offices on the back lane’s north side; its door in the middle of its south face, on a short walk.',
+  works_orange:
+    'The harbour office, two storeys on the supply yard’s north edge by the landing (the harbour chunk builds it).',
+  dock_shed:
+    'The supply quay’s warehouse on the yard’s north side, its roller doors to the yard (the harbour chunk builds it).',
+  dock_hut: 'The foreman’s hut by the supply pier’s root (the harbour chunk builds it).',
+  ferry_terminal: 'The ferry waiting room and ticket window on the landing’s north side (the harbour chunk builds it).',
   m6: 'Five storeys of offices north of the canteen’s loading yard; its door in the middle of its south face, on a walk from the yard.',
   r3: 'Three storeys on the north street’s east side, north of block_e3; its door on that street.',
 };
@@ -253,6 +261,7 @@ export const PATHS = [
   ...BATH_PATHS, // the east coast walk and the onsen (scenes/island-baths.js)
   ...SPORT_PATHS, // the sports lane, the pool and the courts walk (scenes/island-sports.js)
   ...OFFICE_PATHS, // the office street and gym_link (scenes/island-offices.js)
+  ...HARBOUR_PATHS, // the harbour walk, the yard, the landing and the piers (scenes/island-harbour.js)
   {
     id: 'beam',
     kind: 'beam',
@@ -281,16 +290,18 @@ export const GREEN = [
   ...BATH_GREEN,
 ];
 
-// The coastline on the route's side of the island, land north-east of the line (sea south and west); round the
-// beach and along the seafront's wall it is island-south.js's SHORE. The beach's sand: SAND.
+// The coastline of the island's south half, land north-east of the line (sea south and west): round the harbour from
+// the half's north edge (island-harbour.js), the sea wall west and south of the station; round the beach and along
+// the seafront's wall it is island-south.js's SHORE. The beach's sand: SAND.
 export const COAST = {
   line: [
+    ...HARBOUR_COAST, // the harbour's rocks and quays (island-harbour.js), down to the sea wall
     ...WEST_COAST.slice(0, -1), // the sea wall west and south of the station (island-west.js), up to the beach
     ...SHORE,
     ...pairs([86, 38, 110.9, 31.1, 129.9, 19.4, 136.6, 2, 136.8, -26.1, 130.4, -47.8]),
     ...BATH_COAST, // on north past the onsen (island-baths.js)
   ],
-  detail: 'Rocks and a sea wall, with the sand beach south of the shop street.',
+  detail: 'Rocks, quays and a sea wall, with the sand beach south of the shop street.',
 };
 export const SAND = [...SOUTH_SAND];
 // Mown bands and longer grass over the green, each { rect | poly, color, y } (skyline.js lays them between the green

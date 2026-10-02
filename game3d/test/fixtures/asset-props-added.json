@@ -631,6 +631,75 @@
     ]
   },
   {
+    "id_": "prop/harbour/ferry_terminal",
+    "kind": "prop",
+    "name": "Ferry terminal",
+    "paths": [
+      "game3d/js/places/harbour.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "harbour.js things.ferry_terminal",
+    "place": "harbour",
+    "used": [
+      "Harbour: tap target 'Ferry terminal'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "harbour"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/harbour/harbour_office",
+    "kind": "prop",
+    "name": "Harbour office",
+    "paths": [
+      "game3d/js/places/harbour.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "harbour.js things.harbour_office",
+    "place": "harbour",
+    "used": [
+      "Harbour: tap target 'Harbour office'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "harbour"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/harbour/office_street",
+    "kind": "prop",
+    "name": "To the office street",
+    "paths": [
+      "game3d/js/places/harbour.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "harbour.js things.office_street",
+    "place": "harbour",
+    "used": [
+      "Harbour: tap target 'To the office street'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "harbour"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
     "id_": "prop/office_quarter/bank",
     "kind": "prop",
     "name": "Bank",
@@ -712,6 +781,29 @@
     "place": "office_quarter",
     "used": [
       "Office street: tap target 'Amakawa Foods'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "office-quarter"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/office_quarter/harbour",
+    "kind": "prop",
+    "name": "To the harbour",
+    "paths": [
+      "game3d/js/places/office-quarter.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "office-quarter.js things.harbour",
+    "place": "office_quarter",
+    "used": [
+      "Office street: tap target 'To the harbour'"
     ],
     "view": {
       "type": "room",

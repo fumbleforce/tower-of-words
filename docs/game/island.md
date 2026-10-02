@@ -1,6 +1,6 @@
 # The island's south half
 
-The south half of Amakawa, mapped for day 2 and later: every building and outdoor place in it, who works, lives or spends time there, its doors, whether it can be entered later, how it connects, and one idea for using Japanese there. Jørgen asked for it on 2026-10-02: "I want mapping of half the island so we can make an interesting day 2 eventually". Nothing here is built unless the row says so. Built places are described in [places.md](places.md) and only linked from here. Jørgen confirmed this half as the set to build out (Review island-half-1, 2026-10-02: "Correct"); the districts are built one at a time: the shop street and seafront is built (chunk `shotengai`), and so are the east lane (chunk `east_lane`), the east coast from the dorms' sea terrace to the onsen's front (chunk `east_coast`), the sports ground from the north street's top along the gym, the pool and the courts to the onsen path (chunk `sports`), and the office street from the gym's corner past the offices and the bank (chunk `office_quarter`). The island as a whole (what is on it, no cars, no commute) is in [setting.md](setting.md).
+The south half of Amakawa, mapped for day 2 and later: every building and outdoor place in it, who works, lives or spends time there, its doors, whether it can be entered later, how it connects, and one idea for using Japanese there. Jørgen asked for it on 2026-10-02: "I want mapping of half the island so we can make an interesting day 2 eventually". Nothing here is built unless the row says so. Built places are described in [places.md](places.md) and only linked from here. Jørgen confirmed this half as the set to build out (Review island-half-1, 2026-10-02: "Correct"); the districts are built one at a time: the shop street and seafront is built (chunk `shotengai`), and so are the east lane (chunk `east_lane`), the east coast from the dorms' sea terrace to the onsen's front (chunk `east_coast`), the sports ground from the north street's top along the gym, the pool and the courts to the onsen path (chunk `sports`), the office street from the gym's corner past the offices and the bank (chunk `office_quarter`), and the harbour from the office street's west end: the harbour walk, the supply yard and pier, the ferry landing and pier (chunk `harbour`). The island as a whole (what is on it, no cars, no commute) is in [setting.md](setting.md).
 
 The hooks are ideas for using Japanese in each place. Story, dialogue and secrets are Codex's ([collab/PROTOCOL.md](../../collab/PROTOCOL.md)).
 
@@ -10,7 +10,7 @@ The south half. It holds the whole day-1 route (station, head office, plaza, dor
 
 The edge runs east from the west coast north of the old power plant to the works street, south to the park's south edge, east along it, and north round the onsen to the east coast. The south half is a little more than half the land.
 
-The map: `?map=1`, then M, then "Day 2 plan". The planned streets, courts, piers, green, coast and the one new building are data in game3d/js/scenes/island-plan.js, in the island frame of [places.md](places.md) ("Where the places sit on the island"). They are drawn on the map only. When an area is built, its entries move into the layout proper with its chunk (the east coast's walks, the onsen's court, the tennis courts, the onsen's grounds and the coast past the onsen are in game3d/js/scenes/island-baths.js; the sports lane, the pool walk, the courts walk, the two short walks off it and the pool's deck in game3d/js/scenes/island-sports.js; the office street, gym_link and the walks to Amakawa Foods and Amakawa Construction in game3d/js/scenes/island-offices.js). `node tools/facts/check.mjs` checks the place ids and names below, and the street list, against that file.
+The map: `?map=1`, then M, then "Day 2 plan". The planned streets, courts and green are data in game3d/js/scenes/island-plan.js, in the island frame of [places.md](places.md) ("Where the places sit on the island"). They are drawn on the map only; the half's coast and every building are the layout's. When an area is built, its entries move into the layout proper with its chunk (the east coast's walks, the onsen's court, the tennis courts, the onsen's grounds and the coast past the onsen are in game3d/js/scenes/island-baths.js; the sports lane, the pool walk, the courts walk, the two short walks off it and the pool's deck in game3d/js/scenes/island-sports.js; the office street, gym_link and the walks to Amakawa Foods and Amakawa Construction in game3d/js/scenes/island-offices.js; the harbour walk, the supply yard and pier, the ferry landing and pier and the harbour's coast in game3d/js/scenes/island-harbour.js, squared up so the landing meets the yard along a side and the ferry pier runs south from the landing's corner). `node tools/facts/check.mjs` checks the place ids and names below, and the street list, against that file.
 
 ## How it fits together
 
@@ -36,12 +36,7 @@ The planned ones (island-plan.js PLAN_PATHS). Built and backdrop paths are in is
 | `quarter_street` | Street | North from the cross street behind the tower (the tower's rear door) to the office street. |
 | `back_lane_west` | Street | The back lane carried west past the canteen's loading yard to the quarter street. |
 | `works_street` | Street | North from the office street up the quarter's west side to the works yard. |
-| `harbour_walk` | Walk | The west coast walk carried north to the office street. |
-| `supply_yard` | Court | The supply quay's yard: warehouse, crane, containers; the quay along its south edge. |
-| `supply_pier` | Pier | South off the yard's west end, where the freighter ties up. |
-| `ferry_landing` | Court | In front of the ferry terminal, at the head of the ferry pier. |
-| `ferry_pier` | Pier | South from the landing; the ferry lies along its west side. |
-| `works_lane` | Street | From the supply yard north between the harbour office and the server hall to the power plant. |
+| `works_lane` | Street | From the supply yard north between the harbour office and the server hall to the power plant (its mouth is walked in `harbour`). |
 | `works_yard` | Court | The old works' yard between the factory sheds and the server hall, east to the works street. |
 | `research_walk` | Walk | From the works yard's east end to Amakawa Research's door. |
 
@@ -60,7 +55,7 @@ One row per place. Where: the building ids in island-layout.js (or island-plan.j
 | `head_office` | Head office (本社) | `head_office` | Lobby, lift and B2 built ([places.md](places.md)). Twelve storeys; Sales on 5F, Accounts on 12F ([cast.md](cast.md)). | South door on the court; rear door on the cross street | Enter | The lobby's floor directory: 階 and department names, to find a floor. |
 | `general_affairs` | General affairs (総務部) | `head_office_wing` | The five-storey wing west of the tower: ID cards, forms, lost property and dorm assignments, clerks behind a long counter. | Staff door on the west face from the shed street; service door to the yard | Enter | Filling in a form: a name in katakana, 住所, 生年月日, a signature. |
 | `facilities_office` | Facilities office (施設課) | `office_e1` | Four storeys north-east of the tower. Takes the island's repair requests and passes the IT ones down to B2. | Door at the cross street's east end | Enter | A repair request slip (修理依頼): place, machine, 故障, date. |
-| `west_coast_walk` | West coast walk (海沿いの道) | `coast_path`, `harbour_walk` | Built as the forecourt's backdrop, with two lookouts. Early joggers, anglers on the rocks. | From the shed street and the station garden; north to the office street | Outside | A fishing sign (釣り禁止) and a passing jogger's おはようございます. |
+| `west_coast_walk` | West coast walk (海沿いの道) | `coast_path`, `harbour_walk` | Built as the forecourt's backdrop, with two lookouts; its north end, the harbour walk, is walked in `harbour`. Early joggers, anglers on the rocks. | From the shed street and the station garden; north to the office street | Outside | A fishing sign (釣り禁止) and a passing jogger's おはようございます. |
 
 ### Office quarter
 
@@ -144,9 +139,9 @@ The shop rows have fifteen bays each, numbered 0 to 14 from the west (island-sou
 
 | Id | Place | Where | What and who | Ways in | Later | Day 2 hook |
 |---|---|---|---|---|---|---|
-| `ferry_terminal` | Ferry terminal (フェリー乗り場) | `ferry_terminal`, `ferry_landing`, `ferry_pier` | A one-storey waiting room with a ticket window at the head of the ferry pier; the mainland ferry ties up along the pier. A ticket clerk, staff going home for the weekend. | Doors on the landing; the landing from the supply yard | Enter | The timetable (時刻表) and buying a ticket: 往復, 片道, 何時. |
-| `supply_quay` | Supply quay (荷揚げ場) | `dock_shed`, `dock_hut`, `supply_yard`, `supply_pier` | Where the freighter unloads: a crane, containers, the warehouse (dock_shed) and the foreman's hut (dock_hut). Dock workers from Amakawa Logistics. | The office street's west end; the works lane north | Outside | Warehouse labels and counting out loud: いち, に, さん. |
-| `harbour_office` | Harbour office (港の事務所) | `works_orange` | Two storeys by the landing: the harbourmaster and the ferry's paperwork. | Door on the works lane | Enter | The weather board: 晴れ, 雨, 風, 欠航. |
+| `ferry_terminal` | Ferry terminal (フェリー乗り場) | `ferry_terminal`, `ferry_landing`, `ferry_pier` | A one-storey waiting room with a ticket window on the landing's north side; the mainland ferry ties up along the pier. A ticket clerk, staff going home for the weekend. Its front, the landing and the pier, with the ferry moored, are built and walked in `harbour` ([places.md](places.md)), the door shut. | Doors on the landing; the landing from the supply yard | Enter | The timetable (時刻表) and buying a ticket: 往復, 片道, 何時. |
+| `supply_quay` | Supply quay (荷揚げ場) | `dock_shed`, `dock_hut`, `supply_yard`, `supply_pier` | Where the freighter unloads: a crane, containers, the warehouse (dock_shed) and the foreman's hut (dock_hut). Dock workers from Amakawa Logistics. The yard and the pier, with the freighter moored, are built and walked in `harbour`. | The office street's west end; the works lane north | Outside | Warehouse labels and counting out loud: いち, に, さん. |
+| `harbour_office` | Harbour office (港の事務所) | `works_orange` | Two storeys on the supply yard's north edge by the landing: the harbourmaster and the ferry's paperwork. Its front is built in `harbour`, the door shut. | Door on the yard, beside the works lane's mouth | Enter | The weather board: 晴れ, 雨, 風, 欠航. |
 
 ### Old works
 

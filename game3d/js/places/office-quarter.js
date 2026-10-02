@@ -14,7 +14,7 @@ import { turningCam, followFit } from './turning-cam.js';
 // The office quarter (scenes/office-quarter.js): the sports lane walked on west from the sports ground, round the
 // gym's corner and west along the office street past the offices and the bank; it also loads with
 // ?place=office_quarter. Every door is shut for now (each says so). East past the gym's corner goes back to the
-// sports ground.
+// sports ground; west past the harbour walk goes on to the harbour.
 //
 // The camera looks north-north-west along the street from a little east of south, so the offices' fronts on its
 // north side face it and the bank, south of the street, stays east of the line to Eric; up the walks north between
@@ -36,7 +36,8 @@ export async function officeQuarterPlace(game) {
     const blend = (k) => lerp(lerp(lerp(street[k], walks[k], v), mouth[k], m), lane[k], l);
     return { yaw: blend('yaw'), elev: blend('elev') };
   });
-  const back = w.exits.sports;
+  const back = w.exits.sports,
+    west = w.exits.harbour;
   // the shut doors (plan.js DOORS): where each is, and where Eric stands to try it
   const dk = (id) => w.doors.find((d) => d.id === id);
   const pin = (v, id) => v.set(dk(id).local[0], 1.95, dk(id).local[1]);
@@ -47,6 +48,12 @@ export async function officeQuarterPlace(game) {
       anchor: (v) => v.set(back.lane[0], 1.1, back.lane[1]),
       spot: () => back.lane,
       face: () => back.edge,
+    },
+    harbour: {
+      ...PLACE_DETAILS.office_quarter.things.harbour,
+      anchor: (v) => v.set(west.lane[0], 1.1, west.lane[1]),
+      spot: () => west.lane,
+      face: () => west.edge,
     },
     // the shut doors, west to east and the bank
     trading_office: {
@@ -110,6 +117,7 @@ export async function officeQuarterPlace(game) {
     people: {},
     zones: {
       east_exit: (x, z) => inRect(x, z, back.zone),
+      west_exit: (x, z) => inRect(x, z, west.zone),
     },
     hooks: {},
     fit(aspect) {
@@ -123,11 +131,10 @@ export async function officeQuarterPlace(game) {
       const p = game.player.root.position;
       w.follow(p.x, p.z);
       turn.steer(p, dt);
-      // heading for the way out: build the sports ground now, so the walk there needs no loading pause
-      const [x0, x1, z0, z1] = back.zone,
-        d = 6;
-      if (p.x > x0 - d && p.x < x1 + d && p.z > z0 - d && p.z < z1 + d && !game.prepared.sports)
-        game.prepare?.('sports');
+      // heading for a way out: build the place there now, so the walk there needs no loading pause
+      const near = ([x0, x1, z0, z1], d = 6) => p.x > x0 - d && p.x < x1 + d && p.z > z0 - d && p.z < z1 + d;
+      if (near(back.zone) && !game.prepared.sports) game.prepare?.('sports');
+      if (near(west.zone) && !game.prepared.harbour) game.prepare?.('harbour');
     },
     onPeriod(period) {
       if (period !== 'evening' || P.grade === EVENING_GRADE) return;
@@ -148,10 +155,13 @@ export async function officeQuarterPlace(game) {
       turn.reset();
       cam.snap(game.player.root.position);
     },
-    // in from the sports ground round the gym's corner onto the street, walking west; out east along the sports
-    // lane past the corner
+    // in from the sports ground round the gym's corner onto the street, walking west; from the harbour east along
+    // the street; out the ways plan.js EXITS gives
     tripIn: (g) => walkIn(g, cam, w.arriveEdge, w.in, -Math.PI / 2),
-    tripOut: (g) => walkOut(g, cam, back.lane, back.edge),
+    tripInFrom: { harbour: (g) => walkIn(g, cam, west.arrive, west.in, Math.PI / 2) },
+    tripOutTo: Object.fromEntries(
+      Object.entries(w.exits).map(([to, e]) => [to, (g) => walkOut(g, cam, e.lane, e.edge)]),
+    ),
   };
   return P;
 }

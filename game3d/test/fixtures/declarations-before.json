@@ -1094,6 +1094,11 @@
           "kind": "thing",
           "verb": "Go"
         },
+        "harbour": {
+          "label": "To the harbour",
+          "kind": "thing",
+          "verb": "Go"
+        },
         "trading_office": {
           "label": "Amakawa Trading",
           "kind": "thing",
@@ -1126,6 +1131,35 @@
         },
         "bank": {
           "label": "Bank",
+          "kind": "thing",
+          "verb": "Go in"
+        }
+      },
+      "spots": [
+        "street_entry"
+      ],
+      "seats": [],
+      "zones": [
+        "east_exit",
+        "west_exit"
+      ],
+      "people": [],
+      "hooks": []
+    },
+    "harbour": {
+      "things": {
+        "office_street": {
+          "label": "To the office street",
+          "kind": "thing",
+          "verb": "Go"
+        },
+        "ferry_terminal": {
+          "label": "Ferry terminal",
+          "kind": "thing",
+          "verb": "Go in"
+        },
+        "harbour_office": {
+          "label": "Harbour office",
           "kind": "thing",
           "verb": "Go in"
         }
