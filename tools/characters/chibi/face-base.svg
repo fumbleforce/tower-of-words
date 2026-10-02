@@ -31,17 +31,17 @@
       <!-- lower lid line under the iris -->
       <path d="M -176 487 C -150 490 -128 489 -110 485" fill="none" stroke="#3a2a24" stroke-width="3" stroke-linecap="round"/>
       <!-- upper lash: a thick band with the outer flick and a small inner hook -->
-      <path d="M -244 396 C -232 384 -218 372 -202 366 C -175 356 -135 352 -108 360 C -96 364 -88 372 -83 384
+      <path id="lash" d="M -244 396 C -232 384 -218 372 -202 366 C -175 356 -135 352 -108 360 C -96 364 -88 372 -83 384
                C -80 390 -80 398 -82 404 C -86 396 -90 390 -96 386 C -120 374 -165 373 -196 382 C -210 386 -222 392 -230 398
                C -234 402 -238 400 -244 396 Z" fill="#2b1d18"/>
       <!-- outer corner stroke down the side of the white -->
-      <path d="M -230 396 C -224 420 -218 440 -210 456 C -214 436 -218 414 -219 394 Z" fill="#2b1d18"/>
+      <path id="outer" d="M -230 396 C -224 420 -218 440 -210 456 C -214 436 -218 414 -219 394 Z" fill="#2b1d18"/>
       <!-- lash flicks above the outer corner -->
-      <path d="M -232 384 C -238 378 -244 376 -252 376 C -244 372 -236 372 -226 376 Z" fill="#2b1d18"/>
+      <path id="flick" d="M -232 384 C -238 378 -244 376 -252 376 C -244 372 -236 372 -226 376 Z" fill="#2b1d18"/>
       <!-- eyelid crease -->
       <path d="M -152 345 C -128 345 -106 352 -94 364" fill="none" stroke="#9c6c5c" stroke-width="2.6" stroke-linecap="round"/>
       <!-- brow: a thin tapered arc -->
-      <path d="M -216 316 C -190 302 -140 298 -84 321 C -140 306 -190 308 -216 316 Z" fill="#4e362e" stroke="#4e362e" stroke-width="1.5" stroke-linejoin="round"/>
+      <path id="brow" d="M -216 316 C -190 302 -140 298 -84 321 C -140 306 -190 308 -216 316 Z" fill="#4e362e" stroke="#4e362e" stroke-width="1.5" stroke-linejoin="round"/>
     </g>
   </defs>
   <rect x="-327.5" y="40" width="655" height="655" fill="#f2c8ae"/>
@@ -53,5 +53,5 @@
   <!-- nose: a soft dot -->
   <ellipse cx="0" cy="507" rx="5" ry="6.5" fill="#b9806c" opacity="0.7" filter="url(#soft)"/>
   <!-- mouth: a short line -->
-  <path d="M -22 563 C -8 561 8 561 22 563" fill="none" stroke="#a8665a" stroke-width="3.2" stroke-linecap="round"/>
+  <path id="mouth" d="M -22 563 C -8 561 8 561 22 563" fill="none" stroke="#a8665a" stroke-width="3.2" stroke-linecap="round"/>
 </svg>
