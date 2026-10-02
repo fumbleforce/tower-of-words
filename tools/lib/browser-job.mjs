@@ -1,9 +1,38 @@
 // Browser jobs keep per-process markers and share a bounded GPU slot pool.
+// Every exit path releases them: a normal end, an error, the time limit, a signal
+// and a browser close that hangs (Chromium is killed after CLOSE_GRACE_MS). If this
+// process is SIGKILLed instead, the next job to acquire reclaims its slot and kills
+// its Chromium (browser-gpu-slots.mjs).
 import fs from 'node:fs';
 import os from 'node:os';
 import { randomUUID } from 'node:crypto';
 import { chromium } from 'playwright';
-import { tryAcquireBrowserGpuSlot } from './browser-gpu-slots.mjs';
+import { processStart, tryAcquireBrowserGpuSlot } from './browser-gpu-slots.mjs';
+
+const ROOT = '/tmp/claude-1000';
+const CLOSE_GRACE_MS = 10000;
+
+function childPids(parent) {
+  const pids = [];
+  for (const name of fs.readdirSync('/proc')) {
+    if (!/^\d+$/.test(name)) continue;
+    try {
+      const stat = fs.readFileSync(`/proc/${name}/stat`, 'utf8');
+      const fields = stat.slice(stat.lastIndexOf(')') + 2).split(' ');
+      if (+fields[1] === parent) pids.push(+name);
+    } catch { /* exited while we looked */ }
+  }
+  return pids;
+}
+
+// Markers of jobs that died without cleanup (browser.lock.<pid> of a gone pid).
+function clearDeadMarkers() {
+  for (const name of fs.readdirSync(ROOT)) {
+    const pid = Number(/^browser\.lock\.(\d+)$/.exec(name)?.[1]);
+    if (!pid || processStart(pid) !== null) continue;
+    try { fs.rmSync(`${ROOT}/${name}`, { recursive: true }); } catch { /* raced */ }
+  }
+}
 
 export async function withBrowserJob(name, run, {
   timeoutMs = 285000, loadWaitMs = 60000, loadPollMs = 5000, gpuWaitMs = 60000,
@@ -13,7 +42,22 @@ export async function withBrowserJob(name, run, {
     || !Number.isFinite(gpuWaitMs) || gpuWaitMs < 0) throw new Error('Invalid browser job time limits');
   const started = Date.now();
   const owner = `${name} pid=${process.pid} ${randomUUID()}`, locks = [];
-  let safeToRelease = true, gpuSlot;
+  let safeToRelease = true, gpuSlot, browserPid = null;
+  // Kill Chromium's process group (Playwright starts it detached) when a close hangs
+  // or the process is going away; after that the locks are safe to drop.
+  const killBrowser = () => {
+    // Mid-launch we don't know the pid yet: take any Chromium child of ours.
+    const pids = browserPid ? [browserPid] : childPids(process.pid).filter(pid => {
+      try { return /chrom|headless/i.test(fs.readFileSync(`/proc/${pid}/comm`, 'utf8')); } catch { return false; }
+    });
+    for (const pid of pids) {
+      if (processStart(pid) === null) continue;
+      for (const target of [-pid, pid]) {
+        try { process.kill(target, 'SIGKILL'); } catch { /* already gone */ }
+      }
+    }
+    safeToRelease = true;
+  };
   const acquire = path => {
     fs.mkdirSync(path);
     try { fs.writeFileSync(path + '/owner', owner); }
@@ -21,13 +65,7 @@ export async function withBrowserJob(name, run, {
     locks.push(path);
   };
   const release = () => {
-    // SIGKILL cannot run cleanup. A dead owner PID alone does not prove that its
-    // Chromium children stopped, so this helper never scavenges stale locks.
-    // Likewise, retain our locks if an exit/close failure leaves shutdown unclear.
-    if (!safeToRelease) {
-      console.error(`${name}: retaining locks; browser shutdown is unconfirmed (${owner})`);
-      return;
-    }
+    if (!safeToRelease) killBrowser();
     if (gpuSlot && !gpuSlot.release()) return false;
     gpuSlot = null;
     for (const path of locks) {
@@ -40,10 +78,21 @@ export async function withBrowserJob(name, run, {
   let browser, timer, pollTimer, rejectSignal, cancelledError, deadlineError;
   const cancelled = new Promise((_, reject) => { rejectSignal = reject; });
   cancelled.catch(() => {}); // A signal can arrive while Chromium is launching.
-  const cancel = message => { cancelledError = new Error(`${name}: ${message}`); rejectSignal(cancelledError); };
+  const cancel = message => {
+    // A second signal means the polite shutdown is stuck: kill, release, leave.
+    if (cancelledError) { killBrowser(); releaseNow(); process.exit(130); }
+    cancelledError = new Error(`${name}: ${message}`); rejectSignal(cancelledError);
+  };
+  // In 'exit' and on a forced signal nothing async runs, so wait out a busy pool
+  // mutex synchronously (it is held for milliseconds).
+  const releaseNow = () => {
+    const nap = new Int32Array(new SharedArrayBuffer(4));
+    for (let i = 0; i < 100 && release() === false; i++) Atomics.wait(nap, 0, 0, 10);
+  };
+  const onExit = () => releaseNow();
   const signals = Object.entries({ SIGINT: 'interrupted', SIGTERM: 'terminated', SIGHUP: 'hangup', SIGQUIT: 'quit' })
     .map(([signal, message]) => [signal, () => cancel(message)]);
-  process.on('exit', release);
+  process.on('exit', onExit);
   for (const [signal, handler] of signals) process.on(signal, handler);
   try {
     const deadline = new Promise((_, reject) => {
@@ -69,7 +118,8 @@ export async function withBrowserJob(name, run, {
     if (deadlineError) throw deadlineError;
     // Check the clock too: an event-loop stall can delay the deadline callback.
     if (Date.now() - started >= timeoutMs) throw new Error(`${name} exceeded ${timeoutMs / 1000} seconds`);
-    acquire('/tmp/claude-1000/browser.lock.' + process.pid);
+    clearDeadMarkers();
+    acquire(`${ROOT}/browser.lock.${process.pid}`);
     const gpu = process.env.GL !== 'soft';
     if (gpu) {
       const gpuUntil = Math.min(started + timeoutMs, Date.now() + gpuWaitMs);
@@ -93,6 +143,7 @@ export async function withBrowserJob(name, run, {
       : ['--use-angle=swiftshader', '--enable-unsafe-swiftshader'];
     console.log(`${name}: ${gpu ? `GPU slot ${gpuSlot.slot + 1}` : 'software GL (explicit GL=soft)'}`);
     safeToRelease = false;
+    const before = new Set(childPids(process.pid));
     try {
       browser = await chromium.launch({ headless: true,
         timeout: Math.max(1, Math.min(30000, timeoutMs - (Date.now() - started))), args,
@@ -102,26 +153,34 @@ export async function withBrowserJob(name, run, {
       safeToRelease = true;
       throw error;
     }
+    browserPid = childPids(process.pid).find(pid => !before.has(pid)) ?? null;
+    if (browserPid && gpuSlot) gpuSlot.track(browserPid);
     if (cancelledError) throw cancelledError;
     if (deadlineError) throw deadlineError;
     return await Promise.race([deadline, cancelled, Promise.resolve().then(() => run(browser))]);
   } finally {
     clearTimeout(timer); clearTimeout(pollTimer);
-    // Software GL sometimes needs more than five seconds to release a large room.
-    // Keep shutdown bounded, including it in the five-minute job ceiling.
-    const closeMs = Math.max(1, Math.min(15000, 300000 - (Date.now() - started)));
-    const closeLimit = setTimeout(() => { console.error(`${name}: browser close timed out`); process.exit(124); }, closeMs);
+    // Software GL sometimes needs several seconds to release a large room. A close
+    // that takes longer than the grace is hung: kill Chromium and go on releasing.
+    let closeLimit;
     try {
-      if (browser) await browser.close();
+      if (browser) {
+        const closed = await Promise.race([
+          browser.close().then(() => true, () => false),
+          new Promise(resolve => { closeLimit = setTimeout(() => resolve(false), CLOSE_GRACE_MS); }),
+        ]);
+        if (!closed) console.error(`${name}: browser close failed or took over ${CLOSE_GRACE_MS / 1000}s; killing it`);
+        if (!closed) killBrowser();
+      }
       safeToRelease = true;
     }
     finally {
       clearTimeout(closeLimit);
-      const releaseUntil = Math.min(started + 300000, Date.now() + 3000);
+      const releaseUntil = Date.now() + 3000;
       while (release() === false && Date.now() < releaseUntil)
         await new Promise(resolve => setTimeout(resolve, 25));
       if (gpuSlot) console.error(`${name}: retaining GPU slot; pool mutex remained busy`);
-      process.off('exit', release);
+      process.off('exit', onExit);
       for (const [signal, handler] of signals) process.off(signal, handler);
     }
   }
