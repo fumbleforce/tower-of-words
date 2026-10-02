@@ -47,6 +47,14 @@ await withBrowserJob('crowd-check', async (browser) => {
             sim.period = period;
             P.onPeriod?.(period);
             A?.enter(period);
+            const LABEL = {
+              early: 'Early morning',
+              morning: 'Morning at work',
+              lunch: 'Lunch',
+              afternoon: 'Afternoon',
+              evening: 'After work',
+            };
+            g.ui.clock(sim.date, LABEL[period]);
             // Eric stands a while near two of the street ends and back where he came in, so the numbers cover more
             // than one view, the same views with and without the crowd (jumps: the opening scene can hold his walking)
             const put = ([x, z]) => {
