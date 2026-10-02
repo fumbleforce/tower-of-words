@@ -23,6 +23,10 @@ export const ROW = rect(path('dorm_row').rect);
 export const SQUARE_END = rect(path('row_square').rect);
 export const SEA_WALK = rect(path('sea_walk').rect);
 export const TERRACE = rect(path('sea_terrace').rect);
+// the east coast walk, out of the terrace's east side and north along the coast (the east coast chunk walks it)
+export const COAST_WALK = path('east_coast_walk');
+export const COAST_X = [COAST_WALK.line[1][0] - COAST_WALK.w / 2, COAST_WALK.line[1][0] + COAST_WALK.w / 2];
+export const COAST_Z = [COAST_WALK.line[0][1] - COAST_WALK.w / 2, COAST_WALK.line[0][1] + COAST_WALK.w / 2];
 export const NS = rect(path('court_walk_ns').rect);
 export const EW = rect(path('court_walk_ew').rect);
 export const LINK = rect(path('court_link').rect);

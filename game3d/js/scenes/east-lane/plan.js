@@ -5,8 +5,8 @@
 //
 //   the lane: from the plaza's cross walk east to the jog, where Eric comes in from the plaza and leaves for it
 //   the jog: its west leg north, its top leg east, both turns; the dorm street south from the top leg past the dorm
-//   courtyard's gate (its gate leg, east, is the way in after work) down to the ramen shop, where the shop street
-//   starts (the walk on is the shop street's chunk)
+//   courtyard's gate (its gate leg, east, is the way in after work) and the dorm row's mouth (east, the way to the
+//   sea terrace) down to the ramen shop, where the shop street starts (the walk on is the shop street's chunk)
 //   the pocket park: its two walks and the gravel square where they cross
 //   the cross walk south from the lane to the south walk, and on to the liquor shop's door; the south walk along the
 //   café and the barber to the dorm street
@@ -27,7 +27,17 @@ export const pt = ([x, z]) => [x + DX, z + DZ];
 export const rect = ([x0, x1, z0, z1]) => [x0 + DX, x1 + DX, z0 + DZ, z1 + DZ];
 export const inRect = (x, z, [x0, x1, z0, z1], m = 0) => x > x0 + m && x < x1 - m && z > z0 + m && z < z1 - m;
 
-const { CROSS, SOUTH_WALK: SW, DORM_STREET: DS, NORTH_STREET: NS, CORNERS, WEST_LEG, TOP_LEG, GATE_Z } = E;
+const {
+  CROSS,
+  SOUTH_WALK: SW,
+  DORM_STREET: DS,
+  NORTH_STREET: NS,
+  CORNERS,
+  WEST_LEG,
+  TOP_LEG,
+  GATE_Z,
+  DORM_ROW: ROW,
+} = E;
 const m_e2 = E.BLOCKS.find((k) => k.id === 'm_e2').rect;
 
 // the walkable rects, in the plaza's frame
@@ -39,6 +49,7 @@ const P_WALKS = {
   top_leg: [CORNERS.b[0], CORNERS.c[1], TOP_LEG[2], TOP_LEG[3]],
   dorm_street: [DS[0], DS[1], CORNERS.c[2], SHOP_END],
   gate_leg: [DS[1] - 0.1, DS[1] + 2.6, GATE_Z - HALF, GATE_Z + HALF],
+  row_leg: [DS[1] - 0.1, DS[1] + 2.6, ROW[2], ROW[3]],
   cross: [CROSS[0], CROSS[1], LZ + HALF - 0.1, m_e2[2]],
   south_walk: [CROSS[0], DS[0] + 0.1, SW[2], SW[3]],
   park_ew: [CORNERS.a[1] - 0.1, DS[0] + 0.1, E.PARK_EW[2], E.PARK_EW[3]],
@@ -84,9 +95,11 @@ export const DOORS = [...E.BLOCKS, N.E2]
 // the rect past which he is leaving }:
 //   plaza: west along the lane past the cross walk (also up the cross walk onto the lane)
 //   shotengai: south down the dorm street toward the shop walk
+//   east_coast: east along the dorm row toward the sea terrace
 //   dorm_court: east into the dorm courtyard's gate leg (after work; before that, a line says so)
 const mid = (a, b) => (a + b) / 2;
-const DSX = mid(DS[0], DS[1]);
+const DSX = mid(DS[0], DS[1]),
+  RZ = mid(ROW[2], ROW[3]);
 export const EXITS = {
   plaza: {
     edge: pt([LANE_W + 0.6, LZ]),
@@ -97,6 +110,12 @@ export const EXITS = {
     edge: pt([DSX, SHOP_END + 0.6]),
     lane: pt([DSX, SHOP_END - 1.0]),
     zone: rect([DS[0] - 1, DS[1] + 1, SHOP_END - 1.6, SHOP_END + 2]),
+  },
+  east_coast: {
+    edge: pt([DS[1] + 3.2, RZ]),
+    lane: pt([DS[1] + 1.6, RZ]),
+    zone: rect([DS[1] + 1.0, DS[1] + 4, ROW[2], ROW[3]]),
+    in: pt([DSX, RZ]), // where he walks to, back from the east coast: on the dorm street, out of the zone
   },
   dorm_court: {
     edge: pt([DS[1] + 3.2, GATE_Z]),

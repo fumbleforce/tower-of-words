@@ -17,6 +17,7 @@ import { WEST_PATHS, WEST_GREEN, WEST_MOWN, WEST_COAST } from './island-west.js'
 import { NORTH_PATHS, NORTH_GREEN } from './island-north.js';
 import { DORM_PATHS, DORM_GREEN } from './island-dorms.js';
 import { SOUTH_PATHS, SOUTH_SAND, SHORE } from './island-south.js';
+import { BATH_PATHS, BATH_GREEN, BATH_COAST } from './island-baths.js';
 export * from './island-plan.js'; // the south half planned for day 2, drawn on the map only
 import { CHUNKS } from './island-chunks.js'; // each built place's frame
 export { CHUNKS };
@@ -247,6 +248,7 @@ export const PATHS = [
   ...NORTH_PATHS, // the back lane behind the canteen (scenes/island-north.js)
   ...DORM_PATHS, // the dorm cluster (scenes/island-dorms.js)
   ...SOUTH_PATHS, // the seafront south of the shop street (scenes/island-south.js)
+  ...BATH_PATHS, // the east coast walk and the onsen (scenes/island-baths.js)
   {
     id: 'beam',
     kind: 'beam',
@@ -272,6 +274,7 @@ export const GREEN = [
   ...WEST_GREEN,
   ...NORTH_GREEN,
   ...DORM_GREEN, // the dorm cluster (scenes/island-dorms.js)
+  ...BATH_GREEN,
 ];
 
 // The coastline on the route's side of the island, land north-east of the line (sea south and west); round the
@@ -281,6 +284,7 @@ export const COAST = {
     ...WEST_COAST.slice(0, -1), // the sea wall west and south of the station (island-west.js), up to the beach
     ...SHORE,
     ...pairs([86, 38, 110.9, 31.1, 129.9, 19.4, 136.6, 2, 136.8, -26.1, 130.4, -47.8]),
+    ...BATH_COAST, // on north past the onsen (island-baths.js)
   ],
   detail: 'Rocks and a sea wall, with the sand beach south of the shop street.',
 };

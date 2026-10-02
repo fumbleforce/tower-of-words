@@ -116,8 +116,8 @@ export function* endSquare(pv, p, lights) {
   for (const z of [TR[2], TR[3] - BW]) edge(pv, [TR[0], TR[1], z, z + BW], [0.15, BW]);
   edge(pv, [TR[1] - BW, TR[1], TR[2] + BW, TR[3] - BW], [BW, 0.15]);
   kerbRect(p, TR, { sides: 'nw', gaps: { w: [[SW[2], SW[3]]] } });
-  kerbRect(p, TR, { sides: 'e' });
-  // the wall on the coast side, closed: the way on down to the shore comes with the seafront
+  kerbRect(p, TR, { sides: 'e', gaps: { e: [C.COAST_Z] } }); // open for the east coast walk
+  // the wall on the coast side, closed
   const st = [(TR[0] + TR[1]) / 2 - 0.75, (TR[0] + TR[1]) / 2 + 0.75];
   lowWall(p, [TR[0], TR[3]], [TR[1], TR[3]], { off: -0.11 });
   // a bench at each end looking out; a drinks machine lit on the terrace's north side, by the walk
@@ -142,10 +142,10 @@ export function* endSquare(pv, p, lights) {
   yield;
 }
 
-// a wood along an edge: trees of the given kinds in turn, in staggered rows about 2.4 apart and a little off the
+// a wood along an edge: trees of the given kinds in turn, in staggered rows `pitch` apart (2.4) and a little off the
 // grid, over an understorey of ground cover thick with clipped mounds in mixed greens and sizes; no kerb, it runs out
 // into the lawn
-function* belt(p, [x0, x1, z0, z1], kinds, { seed = 1 } = {}) {
+export function* belt(p, [x0, x1, z0, z1], kinds, { seed = 1, pitch = 2.4 } = {}) {
   bed(p, [x0 - 0.3, x1 + 0.3, z0 - 0.3, z1 + 0.3], { y: 0.03 }); // a little over its neighbours, so no lawn between
   const alongX = x1 - x0 >= z1 - z0,
     [a0, a1] = alongX ? [x0, x1] : [z0, z1],
@@ -160,10 +160,10 @@ function* belt(p, [x0, x1, z0, z1], kinds, { seed = 1 } = {}) {
       if (k % 4 === 3 && j) yield;
     }
   yield;
-  const rows = Math.max(1, Math.floor((b1 - b0) / 2.4));
+  const rows = Math.max(1, Math.floor((b1 - b0) / pitch));
   k = 0;
   for (let r = 0; r < rows; r++)
-    for (let a = a0 + 1.2 + (r % 2) * 1.2; a < a1 - 0.8; a += 2.4, k++) {
+    for (let a = a0 + pitch / 2 + (r % 2) * (pitch / 2); a < a1 - 0.8; a += pitch, k++) {
       const b = b0 + ((r + 0.5) * (b1 - b0)) / rows + (((k * 7 + seed) % 5) - 2) * 0.18;
       kinds[k % kinds.length](
         p,
@@ -184,8 +184,9 @@ export function* belts(p) {
   yield* belt(p, [C.block('dorm_2')[1] + 0.6, TR[1] + 1.0, SQ[3] + 1.6, D2[3] + 1.6], [pine, sakura, pine], {
     seed: 98,
   });
-  yield* belt(p, [TR[1] + 1.0, 136, -21, D2[3] + 1.6], [keyaki, ginkgo, pine], { seed: 102 });
-  yield* belt(p, [C.block('dorm_1e')[0], TR[1] + 1.0, -21, DE[2] - 0.2], [keyaki, ginkgo, sakura, maple], {
+  // east of the east coast walk, a strip of pines on the land above the coast's wall
+  yield* belt(p, [C.COAST_X[1] + 1.2, 135.8, -21, 0], [pine, pine, keyaki], { seed: 102, pitch: 3.4 });
+  yield* belt(p, [C.block('dorm_1e')[0], C.COAST_X[0] - 0.6, -21, DE[2] - 0.2], [keyaki, ginkgo, sakura, maple], {
     seed: 106,
   });
 }

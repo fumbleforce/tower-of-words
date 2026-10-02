@@ -12,7 +12,7 @@
 // Evening: the shops' signs, the blocks' glass and the lamps light up.
 import * as THREE from 'three';
 import { Nav } from '../movement/navigation.js';
-import { outdoorLight, TOWN, SUN } from './town.js';
+import { outdoorLight, sunFollow, TOWN } from './town.js';
 import * as LAYOUT from './island-layout.js';
 import { skylineSteps } from './skyline.js';
 import { drain } from '../perf/slice.js';
@@ -43,22 +43,8 @@ export function* eastLaneChunkSteps() {
   scene.background = new THREE.Color(TOWN.roof);
   scene.add(root);
   const sun = outdoorLight(scene);
-  // the district is long: the sun's shadow box follows Eric (follow() below), a square round him
-  Object.assign(sun.shadow.camera, {
-    left: -16,
-    right: 16,
-    top: 16,
-    bottom: -16,
-    far: 80,
-  });
-  sun.shadow.camera.updateProjectionMatrix();
-  let sunDir = new THREE.Vector3(...SUN.morning).normalize();
-  const follow = (x, z) => {
-    const sx = Math.round(x / 2) * 2,
-      sz = Math.round(z / 2) * 2; // in steps, so the shadows don't crawl as he walks
-    sun.target.position.set(sx, 0, sz);
-    sun.position.copy(sun.target.position).addScaledVector(sunDir, 40);
-  };
+  const shadows = sunFollow(sun); // the district is long: the sun's shadow box follows Eric
+  const follow = shadows.follow;
   follow(...P.IN);
 
   // walkable: the streets and walks (plan.js WALKS), never what stands on them
@@ -131,7 +117,7 @@ export function* eastLaneChunkSteps() {
       east.update(sun);
     },
     evening() {
-      sunDir = new THREE.Vector3(...SUN.evening).normalize();
+      shadows.evening();
       lit.evening();
       east.evening();
       north.evening();

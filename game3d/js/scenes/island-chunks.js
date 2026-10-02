@@ -79,6 +79,15 @@ export const CHUNKS = {
     view: [-26, 14, -40, 20],
     anchor: 'the middle of the pocket park’s gravel square, where its two walks cross',
   },
+  east_coast: {
+    at: [126.5, 10.5],
+    turn: 0, // the camera turns itself: east along the dorm row, north up the coast and to the onsen (scenes/east-coast.js)
+    scale: 1,
+    level: 0,
+    walk: [-50.7, 5.5, -98.7, 2.5],
+    view: [-56, 18, -112, 20],
+    anchor: 'the middle of the dorms’ sea terrace, at the dorm row’s east end',
+  },
   train: {
     at: [-28.6, -3.9],
     turn: 270, // heading north up the shed (the beam comes in from the south, train/island.js); the platform side east

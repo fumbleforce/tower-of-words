@@ -6,6 +6,7 @@
 //   tiledRoof(p, { x0, x1, zf, zb, eave, ridge, walls })   a gabled roof of grey kawara, its ridge along x: the two
 //     slopes with their tile rolls, the round tile ends along both eaves, the ridge with its end tiles, the gable
 //     walls and their bargeboards
+//   slope(p, x0, x1, zEave, yEave, zRidge, yRidge)   one tiled slope on its own (a pent roof over a front)
 import * as THREE from 'three';
 
 const SLAB = '#767b83',
@@ -57,7 +58,7 @@ const TILE = '#565d67',
   BARGE = '#4f5763';
 
 // one slope from its eave (z at y) up to the ridge, its tiles in rolls down the fall; sgn +1 falls toward +z
-function slope(p, x0, x1, zEave, yEave, zRidge, yRidge) {
+export function slope(p, x0, x1, zEave, yEave, zRidge, yRidge) {
   const run = zEave - zRidge,
     rise = yRidge - yEave;
   const len = Math.hypot(run, rise),

@@ -9,11 +9,13 @@ import { sim } from '../sim.js';
 import { PLACE_DETAILS } from './catalog.js';
 import { snapshotPeople, restorePeople } from './saved-people.js';
 import { walkOut, walkIn } from './edge-walk.js';
+import { turningCam, followFit } from './turning-cam.js';
 
 // The east lane (scenes/east-lane.js): the plaza's lane walked on east, in the morning (after work the lane takes
 // Eric straight on to the dorm courtyard); it also loads with ?place=east_lane. The named shops are shut for now
 // (their doors say so). Out west along the lane goes back to the plaza, south down the dorm street to the shop
-// street, and after work in at the dorm courtyard's gate.
+// street, east along the dorm row to the sea terrace and the east coast, and after work in at the dorm
+// courtyard's gate.
 //
 // The camera looks north-east over most of it, so the north street's fronts, the park and Amakawa Travel face it, and
 // south-east over the south walk, where the café, the liquor shop and the barber face north. It eases between the two
@@ -28,16 +30,10 @@ export async function eastLanePlace(game) {
   const T = w.southTurn;
   const southness = (x, z) => smooth(z, T.z[0], T.z[1]) * (1 - smooth(x, T.x[0], T.x[1]));
   const flat = cam.elev;
-  let turn = 0,
-    turnAt = null;
-  const steer = (p, dt) => {
-    const jump = !turnAt || Math.hypot(p.x - turnAt[0], p.z - turnAt[1]) > 0.8;
-    turnAt = [p.x, p.z];
-    const want = southness(p.x, p.z);
-    turn = jump ? want : turn + (want - turn) * (1 - Math.exp(-dt / 0.45));
-    cam.yaw = THREE.MathUtils.lerp(YAW.ne, YAW.se, turn);
-    cam.elev = THREE.MathUtils.lerp(flat, SE_ELEV, turn);
-  };
+  const turn = turningCam(cam, (x, z) => {
+    const t = southness(x, z);
+    return { yaw: THREE.MathUtils.lerp(YAW.ne, YAW.se, t), elev: THREE.MathUtils.lerp(flat, SE_ELEV, t) };
+  });
   // the named shops' doors: shut (story/east_lane.js says so); a pin over each, Eric steps up to it
   const dk = (id) => w.doors.find((k) => k.id === id);
   const pin = (v, id) => v.set(dk(id).local[0], 1.95, dk(id).local[1]);
@@ -54,6 +50,12 @@ export async function eastLanePlace(game) {
       anchor: (v) => v.set(w.exits.shotengai.lane[0], 1.1, w.exits.shotengai.lane[1]),
       spot: () => w.exits.shotengai.lane,
       face: () => w.exits.shotengai.edge,
+    },
+    dorm_row: {
+      ...PLACE_DETAILS.east_lane.things.dorm_row,
+      anchor: (v) => v.set(w.exits.east_coast.lane[0], 1.1, w.exits.east_coast.lane[1]),
+      spot: () => w.exits.east_coast.lane,
+      face: () => w.exits.east_coast.edge,
     },
     dorm_gate: {
       ...PLACE_DETAILS.east_lane.things.dorm_gate,
@@ -107,44 +109,11 @@ export async function eastLanePlace(game) {
       plaza_exit: (x, z) => inRect(x, z, w.exits.plaza.zone),
       shop_exit: (x, z) => inRect(x, z, w.exits.shotengai.zone),
       dorm_exit: (x, z) => inRect(x, z, w.exits.dorm_court.zone),
+      row_exit: (x, z) => inRect(x, z, w.exits.east_coast.zone),
     },
     hooks: {},
     fit(aspect) {
-      // as the plaza: the phone's camera distance on both, following him, a little ahead; fitted at the north-east
-      // look and kept through the turn
-      const [yaw, elev] = [cam.yaw, cam.elev];
-      [cam.yaw, cam.elev] = [YAW.ne, flat];
-      const c = Math.cos(YAW.ne),
-        s = Math.sin(YAW.ne);
-      const turned = (pts) => pts.map(([x, y, z]) => new THREE.Vector3(x * c + z * s, y, -x * s + z * c));
-      const { x0, x1, z0, z1 } = w.nav,
-        clamp = [x0 - 1, x1 + 1, z0 - 1, z1 + 1];
-      if (aspect >= 1)
-        cam.fit(
-          aspect,
-          turned([
-            [-9.6, 0, 0],
-            [9.6, 0, 0],
-            [0, 0, -4],
-            [0, 0, 4],
-          ]),
-          new THREE.Vector3(0, 0, 0),
-          { follow: true, clamp, lead: -1.4, limY: 0.96 },
-        );
-      else
-        cam.fit(
-          aspect,
-          turned([
-            [-2.9, 0, 0],
-            [2.9, 0, 0],
-            [0, 0, -2.6],
-            [0, 1.2, 2.4],
-          ]),
-          new THREE.Vector3(0, 0, 0),
-          { follow: true, clamp, lead: -3.4 },
-        );
-      [cam.yaw, cam.elev] = [yaw, elev];
-      cam.place();
+      followFit(cam, w.nav, aspect, { yaw: YAW.ne, elev: flat }); // fitted at the north-east look
     },
     pick(rc) {
       const point = new THREE.Vector3();
@@ -154,7 +123,7 @@ export async function eastLanePlace(game) {
       const p = game.player.root.position;
       w.follow(p.x, p.z);
       w.update();
-      steer(p, dt);
+      turn.steer(p, dt);
       // heading for a way out: build the next place now, so the walk there needs no loading pause
       const near = (key, d) => {
         const [x0, x1, z0, z1] = w.exits[key].zone;
@@ -162,6 +131,7 @@ export async function eastLanePlace(game) {
       };
       if (near('shotengai', 6) && !game.prepared.shotengai) game.prepare?.('shotengai');
       if (near('plaza', 6) && !game.prepared.plaza) game.prepare?.('plaza');
+      if (near('east_coast', 6) && !game.prepared.east_coast) game.prepare?.('east_coast');
       if (sim.period === 'evening' && near('dorm_court', 6) && !game.prepared.dorm_court) game.prepare?.('dorm_court');
     },
     onPeriod(period) {
@@ -180,11 +150,13 @@ export async function eastLanePlace(game) {
       const p = game.player.root.position;
       if (!w.nav.free(p.x, p.z)) p.set(w.in[0], p.y, w.in[1]);
       game.walker.sync();
-      turnAt = null;
+      turn.reset();
       cam.snap(game.player.root.position);
     },
     // in from the plaza along the lane, the jog ahead; out the ways plan.js EXITS gives
     tripIn: (g) => walkIn(g, cam, w.arriveEdge, w.in, Math.PI / 2),
+    // back from the east coast: in off the dorm row onto the dorm street, walking west
+    tripInFrom: { east_coast: (g) => walkIn(g, cam, w.exits.east_coast.edge, w.exits.east_coast.in, -Math.PI / 2) },
     tripOutTo: Object.fromEntries(
       Object.entries(w.exits).map(([to, e]) => [to, (g) => walkOut(g, cam, e.lane, e.edge)]),
     ),
