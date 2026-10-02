@@ -279,7 +279,7 @@ export const CROWD = {
   // the dorm courtyard after work (Grok, G-0034): two or three residents between the street gate and the hall, nobody
   // seated, nobody standing in the doors, the passage, the sento doorway or at the mailboxes
   dorm_court: {
-    ends: { gate: [0, 2.2], hall: { door: 'stairs' } },
+    ends: { gate: [0, 2.2], hall: { door: 'dorm_entry' } },
     periods: {
       evening: {
         who: HOME,

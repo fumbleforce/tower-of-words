@@ -83,10 +83,19 @@ export function walkStep(game, w, dt, list, eric, wide) {
   }
   // while a scene plays, out of Eric's way however he moves (a scripted walk doesn't go round people)
   if (wide && eric) {
+    const want = eric.r + me + wide;
+    // no step that comes closer to him once near: stay put (the push below moves them off)
+    if (
+      Math.hypot(x - eric.x, z - eric.z) < Math.hypot(ox - eric.x, oz - eric.z) &&
+      Math.hypot(ox - eric.x, oz - eric.z) < want + 0.4 * K
+    ) {
+      x = ox;
+      z = oz;
+      w.best = Infinity; // giving way is not being stuck (stalled())
+    }
     const ex = x - eric.x,
       ez = z - eric.z,
-      ed = Math.hypot(ex, ez) || 1e-4,
-      want = eric.r + me + wide;
+      ed = Math.hypot(ex, ez) || 1e-4;
     if (ed < want) {
       const push = Math.min(want - ed, Math.max(w.speed, 1.2 * K) * 2 * dt);
       x += (ex / ed) * push;
@@ -110,7 +119,7 @@ export function walkStep(game, w, dt, list, eric, wide) {
 }
 
 // no nearer the next point for STALL seconds (the point moving on resets it)
-const STALL = 2.5;
+const STALL = 1.5;
 export function stalled(w, dt) {
   const p = w.r.root.position,
     t = w.line[Math.min(w.i, w.line.length - 1)],
