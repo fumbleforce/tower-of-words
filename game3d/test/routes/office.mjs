@@ -110,7 +110,9 @@ const walkHome = [
   { ...use('lift'), settleAt: 'forecourt' },
   { ...use('plaza_lane'), settleAt: 'plaza' },
   { ...use('dorm_lane'), settleAt: 'dorm_court' },
-  { ...use('dorm_entry'), settleAt: 'dorms' },
+  { ...use('dorm_entry'), settleAt: 'dorm_court' },
+  { ...use('stairs'), settleAt: 'dorms' },
+  { ...use('door_203'), settleAt: 'dorms' },
 ];
 const endingRoutes = [
   ['dunno', '“I don\'t know.”', { lunch_mio: true }, ['tomatte']],
@@ -123,7 +125,7 @@ const endingRoutes = [
   choices: [reply],
   actions: [use('my_desk'), ...walkHome],
   expect: {
-    nodes: ['work_afternoon', 'emi_drops_in', 'ending', `end_${id}`, 'end_ticket', 'go_home', 'outside', 'to_plaza', 'arrive', 'to_dorms', 'arrive', 'go_in', 'home'],
+    nodes: ['work_afternoon', 'emi_drops_in', 'ending', `end_${id}`, 'end_ticket', 'go_home', 'outside', 'to_plaza', 'arrive', 'to_dorms', 'arrive', 'hall', 'go_up', 'landing', 'go_in', 'home'],
     flags: { evening_on: true, going_home: true },
     period: 'evening',
     ended: true,
