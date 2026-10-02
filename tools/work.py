@@ -15,7 +15,7 @@ this tool keeps them honest.
 
 An issue: title = what gets done, in plain English. Labels `work`, `state:<todo|running|blocked|parked|
 waiting-jorgen|done|dropped>`, `kind:<decision-followup|request|task|parked|check-for-jorgen>`, `owner:<claude-main|
-claude-agent:<name>|codex|jorgen>`. The body is written by this tool from its hidden `work` block (source, next step,
+claude-agent:<name>|codex|grok|jorgen>`. The body is written by this tool from its hidden `work` block (source, next step,
 done ref, the reason); edit issues through this tool, not by hand, or the next change overwrites the body. Done and
 dropped close the issue. A commit that finishes one says "Fixes #N" and `work.py done N --ref <commit>` records it.
 
@@ -57,7 +57,7 @@ ACTIVE_HOURS, DECISION_HOURS, PARKED_HOURS = 12, 1, 24
 KINDS = ('decision-followup', 'request', 'task', 'parked', 'check-for-jorgen')
 STATES = ('todo', 'running', 'blocked', 'parked', 'waiting-jorgen', 'done', 'dropped')
 CLOSED = ('done', 'dropped')
-OWNER_RE = re.compile(r'^(claude-main|claude-agent:[a-z0-9][a-z0-9-]*|codex|jorgen)$')
+OWNER_RE = re.compile(r'^(claude-main|claude-agent:[a-z0-9][a-z0-9-]*|codex|grok|jorgen)$')
 PRIVATE_RE = re.compile(r'island/private|private/rewards|manifest\.user\.json|reward[ -]scenes?\b', re.I)
 FIELDS = 'number,title,labels,body,createdAt,updatedAt,state,url'
 
@@ -211,7 +211,7 @@ def check(kind=None, owner=None, state=None):
     if state is not None and state not in STATES:
         sys.exit(f'state must be one of: {", ".join(STATES)}')
     if owner is not None and not OWNER_RE.match(owner):
-        sys.exit('owner must be claude-main, claude-agent:<name>, codex or jorgen')
+        sys.exit('owner must be claude-main, claude-agent:<name>, codex, grok or jorgen')
 
 
 def add(title, kind='task', owner='claude-main', state='todo', source=None, next_step='', detail='', reason='', done_ref='',
@@ -264,7 +264,7 @@ def ensure_labels():
     colours = {'work': '5319e7', 'state': '0e8a16', 'kind': '1d76db', 'owner': 'c5def5'}
     have = {x['name'] for x in gh('label', 'list', '--limit', '500', '--json', 'name')}
     want = ['work'] + [f'state:{s}' for s in STATES] + [f'kind:{k}' for k in KINDS] + \
-        ['owner:claude-main', 'owner:codex', 'owner:jorgen'] + sorted({f'owner:{i["owner"]}' for i in items()} - {'owner:'})
+        ['owner:claude-main', 'owner:codex', 'owner:grok', 'owner:jorgen'] + sorted({f'owner:{i["owner"]}' for i in items()} - {'owner:'})
     for lab in want:
         if lab not in have:
             gh('label', 'create', lab, '--color', colours[lab.split(':')[0]], parse=False)

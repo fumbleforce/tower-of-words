@@ -71,6 +71,8 @@ Plain writing (humanizer), how dialogue must sound (spoken, no AI voice, no expo
 
 ### Story craft
 
+Discoveries and private scenes use the skill [.claude/skills/rpg-scenes/SKILL.md](.claude/skills/rpg-scenes/SKILL.md). The novel skills below are for a conversation or a chapter that is actually broken. They are the wrong tool for a scene the player walks into.
+
 Skills: story-sense, story-analysis, dialogue, scene-sequencing, key-moments, character-arc, novel-revision and story-coach, in ~/.agents/skills.
 
 - Set up before you pay off: nobody refers to anything the player hasn't seen yet.
@@ -141,7 +143,7 @@ Prompt rules, models, settings, cast prompt lines, reward prompts, composition c
 - Every Anima-family prompt starts with the quality tags, then the rating, then the content; a content example from him never removes them (the 2026-09-27 flat-rewards lesson, art/PROMPTS.md "Reward quality").
 - Model (2026-09-27, after round 27): RDBT only for reward scenes. No Nova versions and no style variants of one concept; spend renders on new, varied concepts.
 - Perspective is not an anatomy fault (Jørgen, 2026-09-27: "it is the camera perspective, it's not off"). Low and overhead angles, foreshortening, hips above the head and upside-down top views are valid. Reject for anatomy only for real errors: extra or missing limbs, fused fingers, a joint bending the wrong way. Critics get the same rule.
-- Limit test (Jørgen, 2026-09-27: "nipple detection is oversensitive"). Reject for the limits only when a nipple, an areola or genitals are clearly drawn and visible. Highlights, water rings, shading, folds and show-through that only hints at shape don't count, and "could be read as" is no reason. Points showing through a braless T-shirt are fine and wanted (Jørgen, 2026-10-02: "still suitable for everyone so dont erase all indocations of a woman being a woman"), so never negative-prompt them away. Critics get the same test.
+- Limit test (Jørgen, 2026-09-27: "nipple detection is oversensitive"). Reject for the limits only when a nipple, an areola or genitals are clearly drawn and visible. Highlights, water rings, shading, folds and show-through that only hints at shape don't count, and "could be read as" is no reason. Points showing through a braless T-shirt are fine and wanted (Jørgen, 2026-10-02: "still suitable for everyone so dont erase all indocations of a woman being a woman"), so never negative-prompt them away. Critics get the same test. Explicit adult nudity is allowed in private mode. Anything that is not an adult is still rejected.
 - Rewards and privacy (Jørgen, 2026-09-26): sexy pictures, progression, relationships and the job are all rewards. Everything spicy stays private (island/private/rewards/) until he picks, never on a public page or in the public repo; discreet mode is on by default on the phone.
 
 ## Voices and audio

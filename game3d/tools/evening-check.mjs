@@ -25,7 +25,6 @@ const cases = [
       propNames: ['evening:chair-first', 'evening:chair-second'] },
   ] },
   { place: 'dorm_court', goal: 'Go in through the dorm entrance. Your room is 203.', actions: [
-    { id: 'bath', flag: 'evening_bath_heard', caption: /Someone else finishes the song/, lines: 1 },
     { id: 'mailboxes', repeat: 'same', checkpoint: true, caption: /エリック.*erikku.*Eric/, lines: 1,
       propNames: ['evening:mailbox-flap', 'evening:mailbox-flyer'] },
   ] },
@@ -239,7 +238,7 @@ async function runCase(browser, test) {
         await page.addInitScript(saved => {
           if (globalThis.sessionStorage.getItem('evening-seeded')) return;
           globalThis.localStorage.setItem('amakawa-day1-save', JSON.stringify(saved));
-          globalThis.localStorage.setItem('amakawa-settings', JSON.stringify({ textSpeed: 'instant', voiceOn: false, autoAdvance: false }));
+          globalThis.localStorage.setItem('amakawa-settings', JSON.stringify({ textSpeed: 'instant', voiceOn: false, autoAdvance: false, privateMode: false }));
           globalThis.sessionStorage.setItem('evening-seeded', '1');
         }, seed(test));
       } });
@@ -248,6 +247,7 @@ async function runCase(browser, test) {
     assert.equal((await settleOrLine(page)).waiting, false, 'Fixture unexpectedly started dialogue');
     const initial = await read(page);
     assert.equal(initial.place, test.place);
+    if (test.place === 'dorm_court') assert.equal(initial.markers.bath, false, 'The bath stays off in the public story');
     result.initial = compact(initial);
     requireProps(initial, result.requiredProps);
     // Check the real marker predicate without running any morning interactions or changing world state.

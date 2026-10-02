@@ -58,7 +58,7 @@ The anime portraits beside the dialogue box. The faces each person has are in [c
 - Each place has a Lyria loop, crossfading into itself: the train `calm`, the lobby `lively`, the office `office`, after work `night`. Voices duck it.
 - Each place has an ambience bed with occasional one-shots under the music; a kotodama dips it.
 - Each door has its own sound: the train doors, the station's glass entrance doors, the lift doors (after the lift's ding when they open) and the gate's flaps. The copier running, the kettle pouring and a can dropping in the vending machine have theirs too. No crowd sound: the ambience bed carries the people.
-- Two men humming in the dorm courtyard's sento (the monorail's door chime, badly) are synthesised offline (tools/feel/hum.py), like the interface sounds.
+- The dorm courtyard no longer plays the sento humming. The two files (`bath_first`, `bath_answer`, made by tools/feel/hum.py) are still in the sound set.
 - A phone buzzing, a bag's zip and a clean electric guitar played by a learner, heard through a phone speaker or a lifted headphone, are synthesised the same way (tools/feel/pluck.py).
 - No footsteps (Jørgen).
 - The opening theme is "Mastered: softer" (art/approved/music/opening.mp3); game3d doesn't use it yet.

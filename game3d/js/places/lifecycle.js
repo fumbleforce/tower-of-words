@@ -14,6 +14,7 @@ import { playMusic } from '../ui.js';
 import { sim, PERIODS as PERIOD_ORDER, absorb, applySchedule, save } from '../sim.js';
 import * as trips from '../trips.js';
 import { installFinds, findSpotSteps, syncFinds } from '../finds/index.js';
+import { installBoot, installPlacePlugin, watchPlacePlugins } from '../plugins.js';
 
 const MUSIC = { train: 'calm', gate: 'lively', office: 'office' };
 // places the draw-call pass (js/perf/batch.js) runs on
@@ -37,6 +38,7 @@ export function createPlaceLifecycle(
 ) {
   const ui = game.ui;
   installFinds(game); // the photos and papers Eric picks up (finds/index.js)
+  watchPlacePlugins(game);
   // preparation runs a slice a frame while a place is being played, flat out while the player waits for it
   setUrgent(() => !game.place || document.body.classList.contains('loading'));
   async function prepare(name) {
@@ -46,6 +48,8 @@ export function createPlaceLifecycle(
         const place = await PLACES[name](game, story);
         assertPlaceRegistered(place, name, PLACE_DETAILS[name]);
         place.name = name;
+        await installBoot();
+        await installPlacePlugin(name, { game, story, place });
         await nextFrame();
         attachLift(game, place); // walk-in lift (places/lift.js)
         await nextFrame();

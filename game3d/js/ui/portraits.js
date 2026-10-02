@@ -1,4 +1,5 @@
 import { PORTRAITS } from './portrait-data.js';
+import { portraitSource } from '../plugins.js';
 import { $ } from './dom.js';
 
 // ---------- VN portraits ----------
@@ -52,12 +53,17 @@ function faceOf(who, face) {
   if (!list) return null;
   return list.includes(face) ? face : list.includes(faceNow[who]) ? faceNow[who] : 'neutral';
 }
-function portraitSrc(who, face) {
+function workSrc(who, face) {
   if (!PORTRAITS[who]) return null;
   return new URL(
     `../../assets/portraits/${who}-${faceOf(who, face)}.webp?v=${encodeURIComponent(window.BUILD || '')}`,
     import.meta.url,
   ).href;
+}
+function portraitSrc(who, face) {
+  const named = faceOf(who, face);
+  if (!named) return null;
+  return portraitSource(who, named) || workSrc(who, named);
 }
 const HOPS = new Set(['surprised', 'panicked', 'panic']);
 export function showPortraits(t, whoId, face) {
@@ -78,8 +84,8 @@ export function showPortraits(t, whoId, face) {
     const img = el.querySelector('img');
     if (img.getAttribute('src') !== src) {
       img.onerror = () => {
-        const n = portraitSrc(who, 'neutral');
-        if (img.getAttribute('src') !== n) {
+        const n = workSrc(who, 'neutral');
+        if (n && img.getAttribute('src') !== n) {
           img.src = n;
           el.style.setProperty('--src', `url("${n}")`);
         }

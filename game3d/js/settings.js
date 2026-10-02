@@ -4,10 +4,22 @@
 //   window.__settings is the same object, for modules that don't import this one.
 //   A 'amakawa:settings' event fires on window after every change (detail: { key, value, settings }).
 
+import { flags } from './narrative/state.js';
+
 const KEY = 'amakawa-settings';
 const reduceDefault = (() => {
   try {
     return matchMedia('(prefers-reduced-motion: reduce)').matches;
+  } catch {
+    return false;
+  }
+})();
+const phoneDefault = (() => {
+  try {
+    return (
+      matchMedia('(pointer: coarse)').matches ||
+      Math.min(innerWidth || screen.width, innerHeight || screen.height) < 600
+    );
   } catch {
     return false;
   }
@@ -31,6 +43,7 @@ export const DEFAULTS = {
   voiceModel: 'auto', // 'auto' | 'base' | 'moon' | 'tiny' (testing only, no UI)
   masteryUses: 3, // how many times a word is typed or said before Say sends it with one click
   perfOverlay: false, // the performance numbers overlay (F3; js/perf/metrics.js)
+  privateMode: !phoneDefault, // adult scenes. Off on a phone until turned on (GUIDE, Rewards and privacy).
 };
 // characters per second for each text speed (0 = all at once)
 export const CPS = { slow: 28, normal: 55, fast: 110, instant: 0 };
@@ -46,6 +59,7 @@ function load() {
 }
 export const settings = load();
 window.__settings = settings;
+flags.private_mode = !!settings.privateMode;
 
 const subs = new Set();
 export function onSettings(fn) {
@@ -55,6 +69,7 @@ export function onSettings(fn) {
 export function setSetting(key, value) {
   if (!(key in DEFAULTS) || settings[key] === value) return;
   settings[key] = value;
+  if (key === 'privateMode') flags.private_mode = !!value;
   try {
     localStorage.setItem(KEY, JSON.stringify(settings));
   } catch {
@@ -102,3 +117,26 @@ function apply() {
 addEventListener('resize', () => apply());
 if (document.body) apply();
 else addEventListener('DOMContentLoaded', apply);
+
+// The switch lives here so menu.js can stay at its size ceiling. It is added the first time Settings is built.
+function ensurePrivateRow() {
+  const rows = document.querySelector('#settings .rows');
+  if (!rows || rows.querySelector('[data-key="privateMode"]')) return;
+  const row = document.createElement('div');
+  row.className = 'row';
+  row.innerHTML =
+    '<span class="lbl" id="l-pm">Private mode<small>Adult scenes on this device. Off on a phone until you turn this on.</small></span>' +
+    '<button type="button" class="sw" role="switch" data-key="privateMode" aria-labelledby="l-pm"><i></i></button>';
+  rows.append(row);
+  const sw = row.querySelector('.sw');
+  const paint = () => sw.setAttribute('aria-checked', settings.privateMode ? 'true' : 'false');
+  paint();
+  sw.onclick = () => {
+    setSetting('privateMode', !settings.privateMode);
+    paint();
+  };
+  onSettings((key) => {
+    if (key === 'privateMode') paint();
+  });
+}
+new MutationObserver(ensurePrivateRow).observe(document.documentElement, { childList: true, subtree: true });

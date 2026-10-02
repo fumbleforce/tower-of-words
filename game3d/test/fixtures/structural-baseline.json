@@ -36,6 +36,9 @@
       ],
       "machineOpen": [
         "game3d/js/places/office.js"
+      ],
+      "private_mode": [
+        "game3d/js/settings.js"
       ]
     },
     "prefix": {
@@ -458,7 +461,6 @@
     "plaza:to_dorms",
     "plaza:to_east_lane",
     "plaza:to_shops",
-    "dorm_court:bath",
     "dorm_court:mailboxes",
     "dorm_court:arrive",
     "dorm_court:hall",
@@ -1760,15 +1762,6 @@
         "going_home"
       ],
       "cross": true
-    },
-    {
-      "from": "office:end_ticket",
-      "to": "dorm_court:bath",
-      "kind": "unlock",
-      "labels": [
-        "going_home"
-      ],
-      "cross": true
     }
   ],
   "flags": [
@@ -1868,7 +1861,6 @@
     "met_emi",
     "going_home",
     "evening_canteen_helped",
-    "evening_bath_heard",
     "dorm_room_known",
     "home_203",
     "found_bakery_flyer"

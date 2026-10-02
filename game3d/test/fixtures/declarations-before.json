@@ -542,7 +542,7 @@
         "bath": {
           "label": "Bath",
           "kind": "thing",
-          "verb": "Listen"
+          "verb": "Look"
         },
         "dorm_entry": {
           "label": "Dorm entrance",
@@ -572,7 +572,6 @@
       ],
       "people": [],
       "hooks": [
-        "bathSong",
         "mailbox203"
       ]
     },
