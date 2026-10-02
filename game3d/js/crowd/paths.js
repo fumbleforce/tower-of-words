@@ -152,7 +152,8 @@ function search(g, a, b) {
     T = tk * g.nx + ti,
     N = g.nx * g.nz;
   const cost = new Float32Array(N).fill(Infinity),
-    from = new Int32Array(N).fill(-1);
+    from = new Int32Array(N).fill(-1),
+    done = new Uint8Array(N);
   const h = (n) => {
     const dx = Math.abs((n % g.nx) - ti),
       dz = Math.abs(((n / g.nx) | 0) - tk);
@@ -162,12 +163,14 @@ function search(g, a, b) {
   cost[S] = 0;
   open.push(S, h(S));
   let found = false;
-  for (let it = 0; open.size && it < 200000; it++) {
+  while (open.size) {
     const n = open.pop();
     if (n === T) {
       found = true;
       break;
     }
+    if (done[n]) continue; // an older, dearer entry for a cell already settled
+    done[n] = 1;
     const i = n % g.nx,
       k = (n / g.nx) | 0;
     for (let dk = -1; dk <= 1; dk++)

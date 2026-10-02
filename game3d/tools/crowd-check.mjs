@@ -1,8 +1,9 @@
 // The ambient crowd in each outdoor place and period (game3d/js/crowd/): loads the place, sets the period, lets the
 // crowd run a while, and reports what it has (walkers, sitters, pairs, queue; ends and routes that didn't resolve),
-// the draw calls and triangles of a frame, and any page error. Shots in game3d/shots/crowd/<size>/.
+// the draw calls and triangles (the recorder, ?perf), overlaps and spins (the fast test's movement check), and any page
+// error. Shots in game3d/shots/crowd/<size>/.
 //   node game3d/tools/crowd-check.mjs [w h]       PLACES=plaza,forecourt PERIODS=early,evening SECS=6 Q=1
-//   BASE=.claude/worktrees/<name>/game3d for a worktree. Exits 1 on a page error or a route that doesn't resolve.
+//   BASE=.claude/worktrees/<name>/game3d for a worktree. Exits 1 on a page error, an overlap or spin, or a route that doesn't resolve.
 import fs from 'node:fs';
 import { withBrowserJob } from '../../tools/lib/browser-job.mjs';
 
@@ -37,19 +38,40 @@ await withBrowserJob('crowd-check', async (browser) => {
         const r = await page.evaluate(
           async ({ period, SECS, SHOT }) => {
             const { sim } = await import('./js/sim.js');
+            const { startMoveCheck } = await import('./js/move.js');
+            globalThis.__run = true; // ?cap holds the world still until told to run
+            startMoveCheck(globalThis.__game); // overlaps and spins, as in the fast test
             const g = globalThis.__game,
               P = g.place,
               A = P.ambient;
             sim.period = period;
             P.onPeriod?.(period);
             A?.enter(period);
-            // Eric walks toward the first two ends and back, so the numbers cover more than where he came in
+            // Eric stands a while near two of the street ends and back where he came in, so the numbers cover more
+            // than one view, the same views with and without the crowd (jumps: the opening scene can hold his walking)
+            const put = ([x, z]) => {
+              g.player.root.position.set(x, g.player.root.position.y, z);
+              g.walker.sync();
+              P.cam?.snap?.(g.player.root.position);
+            };
             const { CROWD } = await import('./js/crowd/data.js');
-            const ends = Object.values(CROWD[P.name].ends).filter(Array.isArray);
             const s0 = [g.player.root.position.x, g.player.root.position.z];
-            for (const e of [ends[0], ends[1], s0].filter(Boolean)) {
-              g.walker.goTo(e[0], e[1]);
-              await new Promise((res) => setTimeout(res, (SECS * 1000) / 3));
+            const ends = Object.values(CROWD[P.name].ends).filter(Array.isArray);
+            // never into an exit zone (the running game would take the trip)
+            const inZone = ([x, z]) => Object.values(P.zones || {}).some((f) => f(x, z));
+            // on floor he can walk to from where he came in
+            const { reachableNear } = await import('./js/movement/navigation.js');
+            const near = (e) => {
+              for (const k of [0.45, 0.35, 0.25, 0.15]) {
+                const p = reachableNear(P.nav, ...s0, s0[0] + (e[0] - s0[0]) * k, s0[1] + (e[1] - s0[1]) * k);
+                if (p && !inZone(p)) return p;
+              }
+              return s0;
+            };
+            const stops = [...ends.slice(0, 2).map(near), s0];
+            for (const e of stops) {
+              put(e);
+              await new Promise((res) => setTimeout(res, (SECS * 1000) / stops.length));
             }
             const rep = globalThis.__perfReport?.().places[P.name] || {};
             // for the shot: Eric where most of the crowd is in sight (the busiest point among them, not near the edge)
@@ -59,14 +81,19 @@ await withBrowserJob('crowd-check', async (browser) => {
                 bn = -1;
               for (const p of on) {
                 const n = on.filter((q) => Math.hypot(q.x - p.x, q.z - p.z) < 6).length;
-                if (n > bn && A.clearAt(p.x + 1, p.z + 1) > 0.4) {
+                // a step from them toward where he came in, on open floor
+                const l = Math.hypot(s0[0] - p.x, s0[1] - p.z) || 1,
+                  at = [p.x + ((s0[0] - p.x) / l) * 1.2, p.z + ((s0[1] - p.z) / l) * 1.2];
+                if (n > bn && A.clearAt(...at) > 0.5 && !inZone(at)) {
                   bn = n;
-                  best = [p.x + 1, p.z + 1];
+                  best = at;
                 }
               }
               if (best) {
-                g.walker.goTo(best[0], best[1]);
-                await new Promise((res) => setTimeout(res, 4000));
+                // there at once, then a step, so whatever fades or turns as he walks (the arcade's roof) catches up
+                put(best);
+                g.walker.goTo(best[0] + 0.3, best[1] + 0.3);
+                await new Promise((res) => setTimeout(res, 3000));
               }
             }
             if (!A)
@@ -92,7 +119,8 @@ await withBrowserJob('crowd-check', async (browser) => {
               trisMax: rep.trisMax,
               missing,
               noRoute,
-              move: globalThis.__moveCheck ? globalThis.__moveCheck.overlaps.length : null,
+              overlaps: globalThis.__moveCheck?.overlaps || [],
+              spins: globalThis.__moveCheck?.spins || [],
             };
           },
           { period, SECS, SHOT: !off },
@@ -100,6 +128,9 @@ await withBrowserJob('crowd-check', async (browser) => {
         if (!off) await page.screenshot({ path: `${out}/${place}-${period}.png` });
         await page.close();
         rows.push({ place, period, ...r });
+        fs.writeFileSync(`${out}/result.json`, JSON.stringify(rows, null, 1)); // kept as it goes: a run can hit its time limit
+        if (r.overlaps?.length || r.spins?.length)
+          bad.push(`${place} ${period}: movement ${[...r.overlaps, ...r.spins].join('; ')}`);
         if (r.missing?.length || r.noRoute?.length)
           bad.push(`${place} ${period}: ends ${r.missing} routes ${r.noRoute}`);
         console.log(place.padEnd(15), period.padEnd(8), JSON.stringify(r));
