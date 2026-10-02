@@ -1081,6 +1081,19 @@ body.phone .tp-in::placeholder { font-size: 15px; letter-spacing: 0; } /* "Type 
 body.phone .tp-ans .vc-mic { width: 52px; height: 52px; }
 .tp-ans:not(:has(.tp-cancel)) :is(.tp-hint, .vc-side) { grid-column: 1 / -1; }
 
+/* the phone keyboard is up (js/ui/keyboard-fit.js sets body.kb, --kb and --vvh): the prompt sits just above the
+   keyboard and browser bar, never taller than the visible area, a little tighter; the portraits step out */
+body.kb #talk.typing { top: auto; bottom: calc(var(--kb, 0px) + 8px); max-height: calc(var(--vvh, 100%) - 16px); overflow-y: auto; overscroll-behavior: contain; animation: none; }
+body.phone.kb #talk.typing { padding: 10px 12px 10px; }
+body.phone.kb .tp-prompt { margin-bottom: 8px; }
+body.phone.kb #talk.typing .line { font-size: 16px; line-height: 1.4; }
+body.phone.kb .tp { gap: 8px; }
+body.phone.kb .tp-word { padding-top: 7px; padding-bottom: 7px; }
+body.phone.kb .tp-jp { font-size: 22px; }
+body.phone.kb .tp-in, body.phone.kb .tp-ans .vc-mic { height: 46px; }
+body.phone.kb .tp-ans .vc-mic { width: 46px; }
+body.kb #stage .por { visibility: hidden; }
+
 /* ---------- goal box and action prompt (Jørgen: "Put tips inside the goal box top left so we dont get so many
    places for this. the interaction box is also not very pretty, not well designed") ----------
    Goal box: the goal line, then a side goal and the current tip as quieter lines in the same box, aligned with
