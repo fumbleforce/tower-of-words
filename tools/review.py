@@ -8,7 +8,8 @@
     python3 tools/review.py set-status <id> open|decided|superseded [--decision "text"]   (Review items only;
                                               decided opens the follow-up GitHub issue, or comments on the one it has)
 
-<id> is looked up in reviews/, then showcase/; `showcase/<id>` picks the showcase entry. Review items live in
+<id> is looked up in reviews/, then showcase/, then the private island/private/rewards/reviews/ (show and mark-read
+only; private items stay out of list and GitHub); `showcase/<id>` picks the showcase entry. Review items live in
 reviews/<id>/review.json (how to add one: reviews/README.md); showcase entries in showcase/<id>/entry.json
 (showcase/README.md). His answers are <folder>/<id>/feedback.json, written by the bible's Send button through
 tools/review_server.py.
@@ -20,6 +21,8 @@ import sys
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 REVIEWS = os.path.join(ROOT, 'reviews')
 SHOWCASE = os.path.join(ROOT, 'showcase')
+# Private Review items: git-ignored, shown only in the private bible, never sent to GitHub (show and mark-read only)
+PRIVATE_REVIEWS = os.path.join(ROOT, 'island', 'private', 'rewards', 'reviews')
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import work  # noqa: E402  tools/work.py: the work tracker (GitHub issues)
 
@@ -69,8 +72,11 @@ def resolve(rid):
     if rid.startswith('showcase/'):
         return 'showcase', rid.split('/', 1)[1], SHOWCASE
     rid = rid.removeprefix('reviews/')
-    if not os.path.isfile(os.path.join(REVIEWS, rid, 'review.json')) and os.path.isfile(os.path.join(SHOWCASE, rid, 'entry.json')):
-        return 'showcase', rid, SHOWCASE
+    if not os.path.isfile(os.path.join(REVIEWS, rid, 'review.json')):
+        if os.path.isfile(os.path.join(SHOWCASE, rid, 'entry.json')):
+            return 'showcase', rid, SHOWCASE
+        if os.path.isfile(os.path.join(PRIVATE_REVIEWS, rid, 'review.json')):
+            return 'review', rid, PRIVATE_REVIEWS
     return 'review', rid, REVIEWS
 
 
@@ -165,10 +171,10 @@ def cmd_show_showcase(rid):
 
 
 def cmd_show(rid):
-    kind, rid, _base = resolve(rid)
+    kind, rid, base = resolve(rid)
     if kind == 'showcase':
         return cmd_show_showcase(rid)
-    r, fb = load(rid, 'review.json'), load(rid, 'feedback.json')
+    r, fb = load(rid, 'review.json', base), load(rid, 'feedback.json', base)
     if not r:
         sys.exit(f'no review item {rid}')
     print(f"{r.get('title')}  [{r.get('status', 'open')}]  {r.get('date', '')} by {r.get('by', '')}")
@@ -179,7 +185,8 @@ def cmd_show(rid):
         print(f"follow-up: {work.REPO_URL}/issues/{r['issue']}")
     for o in r.get('options', []):
         print(f"  {o.get('id')}: {o.get('label', '')}  {o.get('image') or o.get('audio') or ''}")
-    print(f"page: http://127.0.0.1:8771/bible/#review/{rid}")
+    page = 'island/private/bible/' if base == PRIVATE_REVIEWS else 'bible/'
+    print(f"page: http://127.0.0.1:8771/{page}#review/{rid}")
     if not fb:
         print('\nNo feedback yet.')
         return
@@ -203,6 +210,8 @@ def cmd_mark_read(rid):
 def cmd_set_status(rid, status, decision=None):
     if status not in ('open', 'decided', 'superseded'):
         sys.exit('status must be open, decided or superseded')
+    if resolve(rid)[2] == PRIVATE_REVIEWS:
+        sys.exit(f'{rid} is a private item: set its status in its review.json; it gets no GitHub issue')
     r = load(rid, 'review.json')
     if not r:
         sys.exit(f'no review item {rid}')
