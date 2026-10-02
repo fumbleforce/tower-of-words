@@ -319,6 +319,15 @@ export async function attachCrowd(game, place, name) {
       const seen = inView(p.x, p.z);
       if (b.state === 'walk') {
         b.onGrid = !(b.offA && b.i === 1) && !(b.offZ && b.i >= b.line.length - 1);
+        // in a scene at the door they are going to (the dorm hall's stairs): they wait for Eric, out of his way
+        const door = b.tail[0];
+        b.wait =
+          scene &&
+          b.toDoor &&
+          !!eric &&
+          Math.hypot(eric.x - door[0], eric.z - door[1]) < 3.5 * K &&
+          Math.hypot(p.x - door[0], p.z - door[1]) > 0.8 * K;
+        if (b.wait) b.held = 0;
         let done = walkStep(game, b, dt, list, eric, wide);
         // held up (a jam at a corner, the story's people in the way) for a while: a new way round from here; with
         // none, gone if nobody sees, or on through; through a door once at it
@@ -330,8 +339,7 @@ export async function attachCrowd(game, place, name) {
           b.ghost = true; // in sight with no way round: on through the other passers-by (never through Eric)
           b.held = 0;
         }
-        const out = b.tail[0];
-        if (b.toDoor && b.i >= b.line.length - 1 && Math.hypot(out[0] - p.x, out[1] - p.z) < 0.5 * K) done = true;
+        if (b.toDoor && b.i >= b.line.length - 1 && Math.hypot(door[0] - p.x, door[1] - p.z) < 0.5 * K) done = true;
         // past a street's end and still in sight (a camera that sees the edge): on the same way a while longer
         if (done && seen && !b.toDoor && (b.more = (b.more || 0) + 1) < 4) {
           const [px, pz] = b.line[b.line.length - 2],
