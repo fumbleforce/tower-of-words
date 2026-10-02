@@ -18,16 +18,25 @@ function pluginHref(name) {
   return `${location.origin}/${['island', 'private', 'plugins'].join('/')}/${name}.js`;
 }
 
+// A missing file is a fetch miss, not a script request. The day test treats a script 404 as a failed boot.
+async function loadPlugin(name) {
+  const href = pluginHref(name);
+  const res = await fetch(href);
+  if (!res.ok) return null;
+  return import(href);
+}
+
 export async function installPlacePlugin(name, ctx) {
   if (!settings.privateMode || !PLACE.test(name)) return false;
   const story = ctx.story;
   if (!story || story._plugins?.[name]) return false;
   let mod = null;
   try {
-    mod = await import(pluginHref(name));
+    mod = await loadPlugin(name);
   } catch {
     return false;
   }
+  if (!mod) return false;
   story._plugins = story._plugins || {};
   story._plugins[name] = true;
   await mod.install?.(ctx);
@@ -50,7 +59,11 @@ export function installBoot() {
   if (bootPromise) return bootPromise;
   bootPromise = (async () => {
     try {
-      const mod = await import(pluginHref('boot'));
+      const mod = await loadPlugin('boot');
+      if (!mod) {
+        bootPromise = null;
+        return false;
+      }
       await mod.install?.({ setPortrait: setPortraitSource });
       return true;
     } catch {
