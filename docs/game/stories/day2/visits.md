@@ -1,6 +1,6 @@
 # Day-2 visits
 
-Eric can use his room computer, take a nearby walk before or after work, and return home without a timer. Built; voice clips to make.
+Eric can use his room computer, take a nearby walk before or after work, and return home without a timer. Built. The room computer also opens the day-2 ticket app.
 
 ## Cast
 
@@ -8,7 +8,7 @@ Eric can use his room computer, take a nearby walk before or after work, and ret
 
 ## Beats
 
-1. A message from Mio reminds Eric about the station at the beginning of day 2. His computer optionally shows the repair-inbox note or lets him send a short message home. The message is fictional story text; no external service is contacted. Neither action changes the work schedule.
+1. A message from Mio reminds Eric about the station at the beginning of day 2. His computer optionally opens the [repair requests](service.md#repair-requests) or lets him send a short message home. The message is fictional story text; no external service is contacted. Neither action changes the work schedule.
 2. Room, courtyard and street exits remain available all day. The open area and its two periods are listed in [the day-2 overview](README.md). New districts are the shop street, east lane and east coast. Shop interiors stay inaccessible; their cards reflect the period and individual closure reasons in the handoff. The north crossings have visible resurfacing barriers.
 3. At the east-lane liquor shop, a tag explains the existing cedar ball. The bakery’s A-board reveals delivery to the dorm manager’s window; Eric recognises it if he kept the flyer. Both have one first-visit interaction and a shorter return.
 4. The east-coast lookout telescope has a taped-over coin slot and is free to use. After work, Hamada is cleaning the lens; he yields the eyepiece to Eric. Looking down from here reveals narrow maintenance steps between the shoreline’s armour rocks, the lowest washed by the water. The view is framed and staged, and the steps are inaccessible. Eric may ask how to say “I want to see”, learn mitai, simply look, or leave. Skipping the word keeps it available on return; morning visitors can look without meeting Hamada.

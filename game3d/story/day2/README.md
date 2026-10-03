@@ -1,20 +1,20 @@
 # Day 2 story handoff
 
-Full story data for C-0367 / work #192, revised after the [story cold read](../../../notes/day2-coldread.md) and C-0379 / work #200, following the revised [outline](../../../notes/day2-outline.md) and [cold read](../../../notes/day2-outline-coldread.md). These modules use FORMAT.md. They are **not selected by the current loader**; the hook and access work below is still required. Day 1 is unchanged.
+Full story data for C-0367 / work #192, revised after the [story cold read](../../../notes/day2-coldread.md) and C-0379 / work #200, following the revised [outline](../../../notes/day2-outline.md) and [cold read](../../../notes/day2-outline-coldread.md). These modules use FORMAT.md and are selected by the loader for day 2. The runtime contract below also covers returns and Continue. Day 1 is unchanged.
 
-`index.js` exports `STORIES`, the new word records and their base-form notes, the open places and trips, and `NEEDS`. `NEEDS` lists proposed additions to the current catalog; it is not a runtime registration. Run `node game3d/tools/day2-story-check.mjs` for structural and branch checks against that combined contract. Existing repository checks continue to cover the shipped day.
+`index.js` exports `STORIES`, the new word records and their base-form notes, the open places and trips, and `NEEDS`. `NEEDS` lists proposed additions to the current catalog; it is not a runtime registration. Run `node game3d/tools/day2-story-check.mjs` for structural and branch checks against that combined contract. Repository checks and the day-2 branch tests cover the selected set.
 
 ## Reading and selection
 
 Start with `dorms.js`, `train.js`, `office.js`, then `shotengai.js`. The other modules provide walks and optional interactions. All state owned by this story starts `d2_`; it reads day-1 lunch, warmth and known-word flags without replacing them. Select the complete set for day 2, including returns to earlier places. Never merge its start nodes into the day-1 route.
 
-The current first-day file selection in facts, voice, story-map and fast-test tooling will also need to select day 2. The new facts are under [docs/game/stories/day2](../../../docs/game/stories/day2/README.md); the dedicated check validates them until the general tooling understands multiple days.
+Facts, voice, story-map and fast-test tooling select day 2. The facts are under [docs/game/stories/day2](../../../docs/game/stories/day2/README.md); the dedicated check also exercises story continuity.
 
 ## Access and actors
 
 The exact open area and adjacency are in `index.js`. Both story periods use it. The north-road and pool-approach closures must be visible barriers at the two existing crossings into `sports`, with a readable resurfacing notice; do not let a walk trigger cross and then send Eric back. This keeps the visitable area to the established route plus the shop street, east lane and east coast.
 
-Actor placement and the food source live in [places.md](../../../docs/game/places.md), in the day-2 plans under “Who's there when” and the shop-street party plan. Gate visitors and the arriving train passengers from day 1 do not return for this job. The computer is `computer`, agreed with the room-prop work in C-0370. Its existing `desk_chair` seat and camera hooks handle the optional computer interaction; no extra computer hook is needed.
+Actor placement and the food source live in [places.md](../../../docs/game/places.md), in the day-2 plans under “Who's there when” and the shop-street party plan. Gate visitors and the arriving train passengers from day 1 do not return for this job. The computer is `computer`, agreed with the room-prop work in C-0370. Its existing `desk_chair` seat and camera hooks stage the optional computer interaction. Both PCs open the shared ticket app described below.
 
 ## Hook contract
 
@@ -29,13 +29,21 @@ Actor placement and the food source live in [places.md](../../../docs/game/place
 
 Existing `doorsClose`, `doorsHold` and `doorsOpen` stage the optional voice experiment. The held-door motor hum must agree with the narration. Don't reuse the train departure sequence. Existing `cam`, `sit`, `stand`, `walk`, `type`, `period`, `save`, `trip` and `end` retain their FORMAT meanings.
 
+## Ticket app
+
+The global `ticket` and `tickets` hooks use [FORMAT.md](../FORMAT.md). Full request text is in [story/tickets.js](../tickets.js); their story effects and access rules are in [the station report](../../../docs/game/stories/day2/service.md#repair-requests). The first opening teaches selecting a row, with the same saved tutorial state at both PCs.
+
+`shared.js` supplies idempotent queue setup for day 2 and older saves. It records T-0001 as closed and credits that repair once, adds T-0002 only if absent, and starts T-0002 when the station check/report flags already exist. The station test and submit also start T-0002. Nothing in this set closes T-0002. Opening the app waits for the player to close it; that close must not set `d2_shift_done`. At B2 the following explicit notes choice advances the period. The room's inbox returns Eric to standing, and the after-work B2 desk reopens the list without replaying the time advance. Save the read/tutorial state when the app closes.
+
+Check both PCs, deferring the afternoon, returning, and Continue with the app open. The browser route driver must operate the real modal; the story checker records its opening and uses the ticket model for queue effects. Update the voice clip for Emi's revised desk introduction after this story revision lands.
+
 ## Word and voice work
 
 Register the four records from `words.js` as phrases, and its `tai` base-form display. They start unknown and are learned only by their typing steps. Kenji models tabetai and optional nomitai; Hamada models optional mitai at the lookout, and Mori models optional ikitai after the party. Only tabetai is required. Declining a teaching offer leaves it available on a later visit. None commands a machine. The place files provide contextual people replies and honest fallback lines.
 
 Generate and review the spoken lines, the slow repeats for all four words, Eric’s four word attempts and the four word replay clips. Add the word voice fields only when those clips exist. Mori's and the guard's lines have `en` subtitles and clear Japanese audio. `miotext` is a read-only message with no voice clip. Assets still follow the existing approval process.
 
-## TODO for Claude's build
+## Integration checks
 
 - Select this story set for day 2; start inside room 203 with day-1 choices/words preserved, clear transient arrival state, and support saves, Continue and a day-2 summary. On later room returns, complete the walk into the room before running its start/end node.
 - Implement the declared trips, catalog additions and visible north closures. Keep both periods' paths home and back to the job reachable.

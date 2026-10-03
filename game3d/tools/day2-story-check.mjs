@@ -5,6 +5,8 @@ import { STORIES, WORDS as NEW_WORDS, NEEDS, TRIPS, OPEN_PLACES, PERIODS } from 
 import { WORDS } from '../js/lang.js';
 import { DEFAULT_SPEAKERS, PLACE_DETAILS, GLOBAL_HOOKS } from '../js/narrative/contracts.js';
 import { allowedConditionCharacters, compileCondition, createConditionEvaluator } from '../js/narrative/conditions.js';
+import TICKETS from '../story/tickets.js';
+import { createTickets } from '../js/tickets/model.js';
 
 const words = { ...WORDS, ...NEW_WORDS };
 const typed = [];
@@ -46,6 +48,9 @@ for (const [place, story] of Object.entries(STORIES)) {
       }
       if (s.do) {
         assert(hooks.has(s.do), `${place}/${node}: undeclared hook ${s.do}`);
+        if (s.do === 'ticket') for (const op of ['add', 'start', 'close']) {
+          if (s[op]) assert(TICKETS[s[op]], `${place}/${node}: unknown ticket ${s[op]}`);
+        }
         if (s.do === 'trip') assert(TRIPS[place]?.includes(s.to), `${place}/${node}: undeclared trip ${s.to}`);
         else if (s.do !== 'period') {
           for (const k of ['who', 'at', 'on', 'to']) if (typeof s[k] === 'string') assert(ids.has(s[k]), `${place}/${node}: undeclared ${k} ${s[k]}`);
@@ -91,7 +96,12 @@ for (const t of typed) assert(facts.includes(`| \`${t.word}\` | \`${t.from}\` | 
 
 // Exercise actual story data with the engine's condition evaluator. Hooks are recorded, not faked as built scenes.
 class Play {
-  constructor(flags) { this.flags = { ...flags }; this.lines = []; this.speech = []; this.hooks = []; this.place = 'dorms'; this.steps = 0; }
+  constructor(flags) {
+    this.flags = { ...flags }; this.lines = []; this.speech = []; this.hooks = []; this.place = 'dorms'; this.steps = 0;
+    this.payments = [];
+    this.tickets = createTickets({ flags: this.flags, cond: this.cond, defs: () => TICKETS,
+      onClose: (id, yen) => this.payments.push({ id, yen }) });
+  }
   cond = createConditionEvaluator(key => this.flags[key] ?? false);
   set(value) { if (typeof value === 'string') this.flags[value] = true; else Object.assign(this.flags, value); }
   run(node, picks = []) {
@@ -118,6 +128,11 @@ class Play {
         if (s.end) return { stop: true };
         if (s.do) {
           this.hooks.push({ place: this.place, ...s });
+          if (s.do === 'ticket') {
+            for (const op of ['add', 'start', 'close']) if (s[op]) this.tickets[op](s[op]);
+            this.tickets.sync();
+          }
+          if (s.do === 'tickets') this.tickets.sync();
           if (s.do === 'type') { this.flags['know_' + s.word] = true; this.flags['typed_' + s.word] = true; }
           if (s.do === 'period') this.flags.period = s.to;
           if (s.do === 'trip') return { trip: s.to };
@@ -143,6 +158,38 @@ class Play {
     const route = Object.entries(STORIES[this.place].nodes).find(([, body]) => body.length === 1 && body[0].do === 'trip' && body[0].to === to);
     assert(route, `No authored trip ${this.place} -> ${to}`); this.run(route[0]); assert.equal(this.place, to);
   }
+}
+// Reading the queue never spends the afternoon or finishes the outstanding station repair.
+for (const submitted of [false, true]) {
+  const p = new Play({ d2_started: true, d2_ticket_done: submitted, period: 'morning' });
+  p.fire('talk:computer', ['d2_inbox']);
+  assert.equal(p.tickets.status('T-0001'), 'done', 'Day-1 copier closure was lost');
+  assert.equal(p.tickets.status('T-0002'), submitted ? 'progress' : 'new');
+  assert.equal(p.flags.period, 'morning', 'Reading tickets spent the afternoon');
+  assert.equal(!!p.flags.d2_shift_done, false);
+  assert.deepEqual(p.payments, [{ id: 'T-0001', yen: TICKETS['T-0001'].pay }], 'Historical repair payment was not credited once');
+  p.fire('talk:computer', ['d2_inbox']);
+  assert.equal(p.tickets.list().length, 2, 'Reopening duplicated a request');
+  assert.equal(p.payments.length, 1, 'Reopening paid the same repair again');
+  const resumed = new Play(JSON.parse(JSON.stringify(p.flags)));
+  resumed.fire('talk:computer', ['d2_inbox']);
+  assert.equal(resumed.payments.length, 0, 'Continue paid the same repair again');
+}
+{
+  const p = new Play({ d2_ticket_done: true, d2_brief_done: true, period: 'morning' }); p.place = 'office';
+  p.fire('talk:my_desk', ['d2_leave_desk']);
+  assert.equal(p.flags.period, 'morning'); assert(!p.flags.d2_shift_done);
+  assert.equal(p.hooks.findLast(h => h.do === 'stand').who, 'eric');
+  assert.equal(p.hooks.findLast(h => h.do === 'goal').at, 'my_desk');
+  const resumed = new Play(JSON.parse(JSON.stringify(p.flags))); resumed.place = 'office';
+  resumed.fire('talk:my_chair', ['d2_notes']);
+  assert.equal(resumed.flags.period, 'evening'); assert(resumed.flags.d2_shift_done);
+  assert.equal(resumed.tickets.status('T-0002'), 'progress', 'A submitted report closed the repair');
+  resumed.fire('talk:my_desk');
+  assert.equal(resumed.hooks.filter(h => h.do === 'tickets').length, 2, 'After-work PC is unavailable');
+  assert.equal(resumed.hooks.filter(h => h.do === 'period').length, 1, 'Browsing repeats the time advance');
+  resumed.tickets.close('T-0002'); resumed.fire('talk:my_chair');
+  assert.equal(resumed.tickets.status('T-0002'), 'done', 'Queue setup reopened an already-closed request');
 }
 // The route graph must support every optional detour and a return home in both periods.
 for (const period of PERIODS) for (const start of OPEN_PLACES) {
@@ -201,7 +248,7 @@ for (const topic of ['d2_norway', 'd2_quiet', 'd2_after_work']) for (const food 
   p.move('gate'); p.move('forecourt'); p.move('office');
   p.fire('talk:emi', [warm ? 'd2_limits' : 'd2_assess']);
   assert(p.lines.some(s => s.includes(order ? 'put the order through' : 'keep the money')), 'Report was not read');
-  p.fire(meetFirst ? 'talk:my_chair' : 'talk:my_desk'); assert(p.flags.d2_shift_done); assert.equal(p.flags.period, 'evening');
+  p.fire(meetFirst ? 'talk:my_chair' : 'talk:my_desk', ['d2_notes']); assert(p.flags.d2_shift_done); assert.equal(p.flags.period, 'evening');
   p.move('forecourt'); p.move('plaza'); p.move('shotengai');
   if (meetFirst) p.fire('talk:kenji');
   p.fire('talk:party_seat', [{ go: 'd2_take_food', food }, topic]);
@@ -222,6 +269,8 @@ for (const topic of ['d2_norway', 'd2_quiet', 'd2_after_work']) for (const food 
   if (extra) { p.fire('talk:kuroda', ['d2_see_word']); assert(p.flags.know_mitai); }
   p.move('east_lane'); p.move('dorm_court'); p.move('dorms');
   assert(p.ended && p.flags.d2_complete);
+  assert.equal(p.tickets.status('T-0001'), 'done');
+  assert.equal(p.tickets.status('T-0002'), 'progress', 'Day end required a closed station repair');
   for (const word of Object.keys(NEW_WORDS)) {
     const expected = Number(extra || word === 'tabetai');
     assert.equal(p.hooks.filter(h => h.do === 'type' && h.word === word).length, expected, `${word}: lesson repeated or became compulsory`);

@@ -25,10 +25,10 @@ Applied below: skipping and pay in the core loop, the notice board under Order o
 
 ## The core loop: tickets and the office
 
-The tickets are how the main story moves. Each ticket is a repair request with a place and a person attached. Working one sends Eric somewhere on the island, gives him a reason to talk to people, and often puts an old machine in front of him (the kotodama, [setting.md](setting.md)). Closing a ticket, or the right ticket, is what unlocks the next stretch of story, and every closed ticket pays Eric.
+The tickets are how the main story moves. Each ticket is a repair request with a place and a person attached. Working one sends Eric somewhere on the island, gives him a reason to talk to people, and often puts an old machine in front of him (the kotodama, [setting.md](setting.md)). Closing the relevant story ticket unlocks the next stretch of that thread, and every closed ticket pays Eric. Work in progress can still produce a finding or a conversation; those local responses do not require closing the ticket. Other available threads and free activities remain open while it waits.
 
-- The ticket app is a small Windows 95-style program on Eric's computers: the one in room 203 and the one at his B2 desk. Day 2 shows it for the first time, with two tickets. The app, its data and its hook are being built now (claude-agent:tickets, C-0383); its facts go in [systems.md](systems.md) when it lands.
-- The office is optional on any given day. Amakawa is not an efficient company: nobody checks the hours, and a ticket can sit open for days. Going in is how the player picks up new tickets and sees the B2 team.
+- The ticket app is a small Windows 95-style program on Eric's computers: the one in room 203 and the one at his B2 desk. Day 2 shows it for the first time, with two tickets. The app is built; its runtime rules are in [systems.md](systems.md#tickets).
+- On the later free days, the office is optional on any given day. Day 2 still includes its authored B2 conversation. Amakawa is not an efficient company: nobody checks the hours, and a ticket can sit open for days. Going in is how the player picks up new tickets and sees the B2 team.
 - A ticket has no deadline, no fail state and no cost for leaving it. An open ticket only waits. Some tickets are story tickets: the story stays where it is until one is closed. Others are small jobs that give bond points ("A repair request for them or on their machine", [systems.md](systems.md), Bonds), memory lines and the odd new word.
 - Pay is per closed ticket, since Eric is a contractor. The ticket app shows what a ticket pays, and the money is added to what Eric has. Small jobs pay a little, story tickets more.
 - On a day Eric skips work, the clock moves through the periods as the player picks activities (see the events below), people keep to their schedules, and the evening is open. Nothing is lost.
@@ -41,12 +41,12 @@ Three kinds of thing can happen on a day, checked in this order when a period st
 |---|---|---|
 | Story event | A day, or a condition (a ticket closed, a flag, a place first visited) | The day-2 welcome party ([stories/day2](stories/day2/README.md)) |
 | Relationship event | A person's bond step plus where they are that period | The turn, payoff and last scenes that bonds steps 3 to 5 wait for ([systems.md](systems.md), Bonds) |
-| Free period | Nothing above is due | A club, shopping, a visit, exploring, a ticket |
+| Free period | The player chooses a free activity | A club, shopping, a visit, exploring, a ticket |
 
-- A story event that is due takes its period, and the player is told the day before or that morning, through someone saying so or a message. It never fires in the middle of something else.
-- A relationship event is offered: the person is somewhere sensible, with a marker, and the player can walk past. If ignored it stays available for a few days.
-- At most one story event and one relationship event a day, so free periods stay free.
-- Days 1 and 2 are entirely story events. From day 3 at least one period a day is free, and from the second week most are.
+- A due story event becomes available, announced the day before or that morning through a conversation or message. The player chooses to start it before it spends a period. It never starts in the middle of another activity.
+- A relationship event is offered: the person is somewhere sensible, with a marker, and the player can walk past. If passed over, it waits for a later eligible meeting. An invitation only expires when its scene makes the time limit clear; a pending relationship step is never silently discarded.
+- Budget at most one substantial story scene and one substantial relationship scene a day. Brief messages, responses to the player’s actions and incidental conversations fit around them without consuming another period.
+- Days 1 and 2 have guided beats with optional exploration around them. Day 2 also leaves its evening walks open around the gathering. From day 3 at least one period a day is free, and from the second week most are.
 
 ## Order of systems
 
@@ -54,7 +54,7 @@ Proposed; days after day 2 are not fixed. Places are from [island.md](island.md)
 
 | System | First day | Places | Japanese it practises |
 |---|---|---|---|
-| Tickets | Day 2 (two tickets, a glimpse) | Room 203 and the B2 desk (`dorms`, `office`); then wherever a ticket points | Short labels on a request slip: 修理依頼, 故障, 場所, 完了; place names |
+| Tickets | Day 2 (two tickets, a glimpse) | Room 203 and the B2 desk (`dorms`, `office`); then wherever a ticket points | Day 2 uses English controls and immediately glossed Japanese nouns in the requests; labels such as 修理依頼 and 完了 can come after they are learned |
 | Free periods and the week | Day 3 | The whole open half | Days and times: 曜日, 時, 午前, 午後 |
 | Notice board | Day 3 | The plaza's `noticeboard` ([places.md](places.md), Fountain plaza), which already carries day 2's posters | Posters: 募集, 日時, 場所, 入会 |
 | Clubs: swimming | Week 1 | `pool`, `gym` | Rules signs (飛び込み禁止, 男子, 女子), counting lengths, 泳ぐ and ～たい |
@@ -84,9 +84,9 @@ These come through the systems above rather than as systems of their own.
 
 Per system, short. Paths are in game3d/.
 
-- Tickets: being built (C-0383). Later it needs tickets arriving by day or condition, a ticket that points to a place and a thing (a goal pin, as goals do now), and closing a ticket as a story condition (a flag, which `if:` in FORMAT.md already reads).
+- Tickets: the app and saved queue are built. Later it needs tickets arriving by day or condition, a ticket that points to a place and a thing (a goal pin, as goals do now), and closing a ticket as a story condition (a flag, which `if:` in FORMAT.md already reads).
 - Free periods and the week: today js/days.js plays one fixed story set per day. It needs a day built from conditions: which storylines are due, the week's weekdays and weekend, and a way for the player to end a period by choosing an activity (the clock still moves only on a choice, never on a timer). A sixth period (night) is already listed as to build in systems.md. Schedules across places and the week (to build in systems.md) are needed here.
-- Events: a small scheduler that, when a period starts, picks the due story event, then a due relationship event, from conditions on day, flags and bond steps. js/bonds/gates.js already holds the scene gates for steps 3 to 5, and js/story.js runs the nodes.
+- Events: a small scheduler that, when a period starts, offers eligible story and relationship events from conditions on day, flags and bond steps, keeping deferred events pending for a later eligible meeting. js/bonds/gates.js already holds the scene gates for steps 3 to 5, and js/story.js runs the nodes.
 - Notice board: posts as data (an event or a club, with day, period and place), read on the plaza's `noticeboard`; taking a club's slip sets its membership flag.
 - Clubs: a club is a storyline with a meeting schedule (place, weekday, period), membership as a flag, a progress count per club, and its own events, markers and finds. The pool and the courts are built from the outside (chunks `sports` and `east_coast`); the pavilion and the court gate need insides or a playable area.
 - Pay: Eric has ¥1000 and the vending machine ([systems.md](systems.md), Gifts). Closing a ticket adds its pay to the wallet. Room upgrades need shop counters (the konbini, bakery and liquor shop are fronts only) and buying more than drinks.

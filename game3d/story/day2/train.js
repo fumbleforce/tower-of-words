@@ -30,6 +30,7 @@ export default {
         else: [{ do: 'goal', text: 'Run the door check.', at: 'door_test' }] },
     ],
     d2_check: [
+      { do: 'ticket', start: 'T-0002' },
       { if: '!d2_checked', then: [
         { do: 'doorTest' }, { set: 'd2_checked' },
         { say: 'eric', emo: 'tired', text: 'The sensor passes.' },
@@ -58,6 +59,7 @@ export default {
     d2_order_sensor: [{ set: 'd2_order_sensor' }, { go: 'd2_submit' }],
     d2_keep_sensor: [{ unset: 'd2_order_sensor' }, { go: 'd2_submit' }],
     d2_submit: [
+      { do: 'ticket', start: 'T-0002' },
       { set: 'd2_ticket_done' },
       '> Report sent to B2.',
       { if: 'd2_mio_here', then: [
