@@ -227,13 +227,14 @@ export function window_(kit, own, obj) {
   kit.box('#c9cdd2', b - a + 0.56, 0.025, 0.04, cx, top, zi + 0.07, {
     cast: false,
   });
-  for (const [x0, dir] of [
-    [a - 0.25, 1],
-    [b + 0.25, -1],
+  // the left one's hem a little higher, clear of the desk top under it (dorms/desk.js)
+  for (const [x0, dir, hem] of [
+    [a - 0.25, 1, 0.46],
+    [b + 0.25, -1, 0.43],
   ])
     for (let i = 0; i < 5; i++) {
       const x = x0 + dir * (0.025 + i * 0.052);
-      kit.box(i % 2 ? '#56657e' : '#5e6d87', 0.058, top - 0.43, 0.035, x, 0.43, zi + 0.075 + (i % 2) * 0.022, {
+      kit.box(i % 2 ? '#56657e' : '#5e6d87', 0.058, top - hem, 0.035, x, hem, zi + 0.075 + (i % 2) * 0.022, {
         r: 0.012,
         surf: 'fabric',
       });

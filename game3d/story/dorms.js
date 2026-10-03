@@ -8,6 +8,7 @@ export default {
     'talk:window': 'window',
     'talk:boxes': 'boxes',
     'talk:bed': 'bed',
+    'talk:computer': 'computer',
   },
   nodes: {
     landing: [{ unset: 'home_203' }, { do: 'goal', text: 'Room 203.', at: 'door_203' }],
@@ -24,5 +25,6 @@ export default {
     window: [{ say: 'eric', text: "I was hoping I'd at least be able to see the sky." }],
     boxes: [{ say: 'eric', text: "I can't remember which one I put the clean shirts in." }],
     bed: [{ say: 'eric', text: "If I lie down now, I'm not getting up again." }],
+    computer: ['> A company computer, already set up and switched on. Someone has stuck a welcome note on the screen.'],
   },
 };

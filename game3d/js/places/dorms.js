@@ -25,6 +25,7 @@ export function dormsPlace(game) {
     door_203: w.atDoor,
     room_entry: w.roomEntry,
     window_front: w.windowFront,
+    desk_front: w.computer.spot,
   };
   const things = {
     door_203: {
@@ -56,6 +57,14 @@ export function dormsPlace(game) {
       spot: () => w.bed.spot,
       face: () => [w.bed.x, w.bed.z],
       outline: () => w.obj.bed,
+      enabled: inRoom,
+    },
+    computer: {
+      ...PLACE_DETAILS.dorms.things.computer,
+      anchor: (v) => v.set(w.computer.x, w.computer.y, w.computer.z),
+      spot: () => w.computer.spot,
+      face: () => [w.computer.x, w.computer.z],
+      outline: () => w.obj.computer,
       enabled: inRoom,
     },
   };
@@ -155,7 +164,7 @@ export function dormsPlace(game) {
     },
     things,
     spots,
-    seats: {},
+    seats: { desk_chair: w.deskChair },
     people: {},
     zones: {
       door_203: (x, z) => !st.inside && Math.abs(x - w.doorstep[0]) < 0.4 && z > b.corr[0] && z < b.corr[0] + 0.45,
@@ -204,8 +213,9 @@ export function dormsPlace(game) {
     update() {
       const p = game.player?.root.position;
       if (!p) return;
-      // on the stairs (the trip up) his feet follow the flight; anywhere else the floor is level
-      p.y = p.x > w.stairFoot[0] - 0.5 && p.z > b.stairs.top ? stairY(p.z) : 0;
+      // on the stairs (the trip up) his feet follow the flight; anywhere else the floor is level (but for the desk
+      // chair, where sitting puts him)
+      if (!game.player.seated) p.y = p.x > w.stairFoot[0] - 0.5 && p.z > b.stairs.top ? stairY(p.z) : 0;
       // in the flat without the walk in (a saved game, a still): the room's view (not on the stair landing, which
       // runs back past the flat's front wall further east)
       if (!st.inside && !st.entering && p.z < b.near - 0.05 && p.x < b.x1 + 0.2) {

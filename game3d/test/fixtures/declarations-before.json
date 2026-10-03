@@ -720,15 +720,23 @@
         "bed": {
           "label": "Bed",
           "kind": "thing"
+        },
+        "computer": {
+          "label": "Computer",
+          "kind": "thing",
+          "verb": "Look"
         }
       },
       "spots": [
         "landing",
         "door_203",
         "room_entry",
-        "window_front"
+        "window_front",
+        "desk_front"
       ],
-      "seats": [],
+      "seats": [
+        "desk_chair"
+      ],
       "zones": [
         "door_203"
       ],

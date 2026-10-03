@@ -103,7 +103,7 @@ export function installMovementHooks(game, { rigOf, posOf, aimOf, isPlayer }) {
     if (isPlayer(who) && seatsPlayer()) {
       const s = game.place.seats[at];
       if (!s || !game.player.sitAt) return;
-      const out = [s.x, s.z + (s.ry ? -0.5 : 0.5)];
+      const out = s.out || [s.x, s.z + (s.ry ? -0.5 : 0.5)]; // a seat may name the floor you get on from
       await H.walk({ who, to: out });
       game.player.sitAt(s.x, s.top, s.z, s.ry || 0);
       game.player.seated = true;
@@ -116,7 +116,7 @@ export function installMovementHooks(game, { rigOf, posOf, aimOf, isPlayer }) {
       const s = game.place.seats[at];
       if (!s) return;
       r.root.visible = true;
-      await H.walk({ who, to: [s.x, s.z + (s.ry ? -0.5 : 0.5)] });
+      await H.walk({ who, to: s.out || [s.x, s.z + (s.ry ? -0.5 : 0.5)] });
       r.sitAt(s.x, s.top, s.z, s.ry || 0);
       r.seated = true;
       return;

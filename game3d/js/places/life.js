@@ -204,6 +204,37 @@ const SCREEN_KINDS = {
       }
     }
   },
+  // a plain desktop, still: a sea-and-island wallpaper, a few icons, one window, the taskbar (no words on it)
+  desktop: (g, W, H) => {
+    const sky = g.createLinearGradient(0, 0, 0, H);
+    sky.addColorStop(0, '#24496a');
+    sky.addColorStop(1, '#3d7d8c');
+    g.fillStyle = sky;
+    g.fillRect(0, 0, W, H);
+    g.fillStyle = '#2f6676';
+    g.beginPath();
+    g.moveTo(120, 112);
+    g.quadraticCurveTo(170, 82, 214, 104);
+    g.lineTo(240, 112);
+    g.fill();
+    g.fillStyle = '#5a9aa6';
+    g.fillRect(0, 112, W, 4);
+    g.fillStyle = '#e4ecf2';
+    for (let i = 0; i < 4; i++) g.fillRect(10, 10 + i * 24, 14, 12);
+    g.fillStyle = 'rgba(228,236,242,.6)';
+    for (let i = 0; i < 4; i++) g.fillRect(8, 24 + i * 24, 18, 3);
+    g.fillStyle = '#e6edf3';
+    g.fillRect(60, 22, 120, 74);
+    g.fillStyle = '#3f7f95';
+    g.fillRect(60, 22, 120, 11);
+    g.fillStyle = '#9aabbd';
+    for (let i = 0; i < 4; i++) g.fillRect(68, 42 + i * 11, 104 - ((i * 29) % 46), 4);
+    g.fillStyle = '#1a2230';
+    g.fillRect(0, H - 12, W, 12);
+    g.fillStyle = '#7fb7e0';
+    for (let i = 0; i < 4; i++) g.fillRect(8 + i * 14, H - 9, 9, 6);
+    g.drawImage(g.canvas, 0, 0, W, H, 0, H, W, H); // the same picture below, wherever the texture's window sits
+  },
   term: (g, W, H) => {
     g.fillStyle = '#10161c';
     g.fillRect(0, 0, W, H);
