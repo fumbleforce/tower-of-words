@@ -1,4 +1,6 @@
-# Day-one branch routes
+# Branch routes
+
+Day 2 has its own set, test/routes/day2.mjs, run with `--day 2` (`npm run check:routes:day2`) and checked against day 2's choices; its seeds carry `day: 2` and day 1's history in their flags. The rest of this page holds for both.
 
 Run `npm run check:routes` with the local server on port 8771. `--list` and route IDs work through `node game3d/tools/fast-routes.mjs`. Default viewport is 390 × 844; WIDTH/HEIGHT and BASE select another viewport or worktree. Three worker processes run independent contexts under the existing browser/GPU lifecycle. Each worker is bounded to 280 seconds.
 

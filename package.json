@@ -14,7 +14,8 @@
     "check:browser": "node tools/check/browser.mjs",
     "test": "node --test game3d/test/unit/*.test.mjs",
     "browser:install": "playwright install chromium",
-    "check:routes": "node game3d/tools/fast-routes.mjs"
+    "check:routes": "node game3d/tools/fast-routes.mjs",
+    "check:routes:day2": "node game3d/tools/fast-routes.mjs --day 2"
   },
   "devDependencies": {
     "eslint": "10.11.0",

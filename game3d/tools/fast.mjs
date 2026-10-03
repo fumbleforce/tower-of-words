@@ -1,4 +1,5 @@
 // Fast QA run: the whole day in test mode (?test=fast). node game3d/tools/fast.mjs [w] [h] [seconds]
+// DAY=2 plays day 2 instead (?day=2: from a plain finished day 1; HISTORY=mori|cold for the other day-1 histories).
 // Runs at quality tier 0; QUALITY=1 (or 2) runs the day at that tier, with its own perf baseline (phone-q1).
 // Prints PASS/FAIL, the places reached, the time taken and any page errors; saves the end screen.
 import { withBrowserJob } from '../../tools/lib/browser-job.mjs';
@@ -15,7 +16,7 @@ import { ensureBuild } from '../../tools/lib/build-stamp.mjs';
 {
   const G = path.resolve(path.dirname(new URL(import.meta.url).pathname), '..');
   const fails = [];
-  try { console.log(execFileSync('node', [path.join(G, 'tools/voice-manifest.mjs'), '--check'], { encoding: 'utf8' }).trim()); }
+  try { console.log(execFileSync('node', [path.join(G, 'tools/voice-manifest.mjs'), '--check', '--day', String(+process.env.DAY || 1)], { encoding: 'utf8' }).trim()); }
   catch (e) {
     const out = (e.stdout || '').trim() || 'voice check failed';
     // VOICE_WARN=1: missing clips warn instead of failing (a build shipped before the GPU is free); escapes still fail
@@ -28,9 +29,11 @@ import { ensureBuild } from '../../tools/lib/build-stamp.mjs';
     if (typeof v === 'string') { if (/\\|&quot;|&amp;|&#\d+;/.test(v)) bad.push(`${where}: ${v.slice(0, 90)}`); return; }
     if (Array.isArray(v)) v.forEach((x, i) => scan(x, where)); else if (v && typeof v === 'object') for (const [k, x] of Object.entries(v)) scan(x, where);
   };
-  for (const n of ['train', 'gate', 'forecourt', 'plaza', 'office', 'transitions']) {
+  const day2 = +process.env.DAY === 2;
+  for (const n of day2 ? fs.readdirSync(path.join(G, 'story/day2')).filter((f) => f.endsWith('.js')).map((f) => 'day2/' + f.slice(0, -3)) : ['train', 'gate', 'forecourt', 'plaza', 'office', 'transitions']) {
     const f = path.join(G, 'story', n + '.js'); if (!fs.existsSync(f)) continue;
-    scan((await import(pathToFileURL(f).href + '?' + Date.now())).default, n);
+    const m = await import(pathToFileURL(f).href + '?' + Date.now());
+    scan(m.default ?? m, n);
   }
   if (bad.length) fails.push('ESCAPES in story text:\n' + bad.join('\n'));
   if (fails.length && process.env.SKIP_CHECKS) console.log('(build checks failing, skipped for this run: SKIP_CHECKS)');
@@ -50,7 +53,7 @@ try { build = ensureBuild().id; } catch (error) { console.log('build stamp faile
 try {
   if (![W, H, S].every(value => Number.isFinite(+value) && +value > 0)) throw new Error('Width, height and seconds must be positive numbers');
   await withBrowserJob('fast-test', async browser => {
-    const url = `http://127.0.0.1:8771/${process.env.BASE || 'game3d'}/index.html?test=fast&q=${+process.env.QUALITY || 0}${process.env.ROUTE ? '&route=' + encodeURIComponent(process.env.ROUTE) : ''}${process.env.Q || ''}`;
+    const url = `http://127.0.0.1:8771/${process.env.BASE || 'game3d'}/index.html?test=fast&q=${+process.env.QUALITY || 0}${process.env.ROUTE ? '&route=' + encodeURIComponent(process.env.ROUTE) : ''}${+process.env.DAY > 1 ? `&day=${+process.env.DAY}${process.env.HISTORY ? '&history=' + process.env.HISTORY : ''}` : ''}${process.env.Q || ''}`;
     const game = await openGame(browser, { viewport: { width: +W, height: +H }, mode: 'fast', url });
     const { page } = game;
     pageErrors = game.errors;

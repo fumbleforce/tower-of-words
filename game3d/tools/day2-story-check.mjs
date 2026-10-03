@@ -1,4 +1,4 @@
-// Authoring checks for the pending day-2 set. This does not claim the requested scene hooks are implemented.
+// Authoring checks for the day-2 set, and that its requested ids and trips are registered in the engine.
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import { STORIES, WORDS as NEW_WORDS, NEEDS, TRIPS, OPEN_PLACES, PERIODS } from '../story/day2/index.js';
@@ -252,4 +252,12 @@ for (const lesson of [
 }
 if (process.env.TRANSCRIPTS) fs.writeFileSync(process.env.TRANSCRIPTS, JSON.stringify(transcripts, null, 2) + '\n');
 console.log(`day 2 draft: ${nodeCount} nodes, ${Object.keys(NEW_WORDS).length} new words, ${routes} complete branch routes passed`);
-console.log('Scene hooks, trips, audio, placement and runtime save integration remain pending in story/day2/README.md.');
+// every build request is now registered in the engine's catalog (C-0378), and the engine's trips are the set's
+import('../js/places/definitions.js').then(({ canTravel }) => {
+  for (const [place, need] of Object.entries(NEEDS)) for (const [field, ids] of Object.entries(need)) for (const id of ids) {
+    const base = PLACE_DETAILS[place], have = field === 'things' ? Object.keys(base.things) : base[field];
+    assert(id === 'mio' || have.includes(id), `${place}.${field}: requested ${id} is not registered`);
+  }
+  for (const [from, tos] of Object.entries(TRIPS)) for (const to of tos) assert(canTravel(from, to, 2), `No engine trip ${from} -> ${to}`);
+  console.log('Build requests registered and trips in the engine; the voice clips are still to make (voice-manifest.mjs --check --day 2).');
+});

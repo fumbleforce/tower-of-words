@@ -17,6 +17,7 @@ const checks = [
   ['unit', ['--test', ...unitTests]],
   ['choices', ['game3d/tools/choice-check.mjs']],
   ['story', ['game3d/tools/story-check.mjs']],
+  ['day 2 story', ['game3d/tools/day2-story-check.mjs']],
   ['language', ['game3d/tools/lang-audit.mjs']],
   ['bonds', ['game3d/js/bonds/test.mjs']],
   ['facts', ['tools/facts/check.mjs']],
