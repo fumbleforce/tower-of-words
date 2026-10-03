@@ -3,12 +3,14 @@
 // one vertex-coloured material, so the draw-call pass (perf/batch.js) turns each person into one skinned draw.
 // The character models are still being decided: everything about a body is made here, by makeBody(kind, i), so a
 // later model only has to replace this file (the crowd only needs root, hips, torso, head, arms, legs and knees).
+// With the chibi look on, the bodies are the generic Meshy chibis (chibi-crowd.js), the bags on their hand bones.
 import * as THREE from 'three';
 import { toCreasedNormals } from 'three/addons/utils/BufferGeometryUtils.js';
 import { chibi, SKINS } from '../train/people.js';
 import { hull } from '../train/hull.js';
 import { PEOPLE, HK } from '../cast.js';
 import { K } from '../scenes/office.js';
+import { GEN_ON, crowdBody, hold, boneAt } from '../chibi-crowd.js';
 
 // the chibi parts' own material settings (train/people.js), so the bags merge into the same draw
 const mat = new THREE.MeshStandardMaterial({
@@ -154,21 +156,36 @@ function elder(i) {
 
 // kind: office | casual | sport | elder. i picks the variant (clothes, hair, bag)
 export function makeBody(kind, i) {
-  let r;
-  if (kind === 'office') r = PEOPLE.worker(i + 7);
+  const gen = GEN_ON && crowdBody(kind, i);
+  let r = gen;
+  if (gen) r.root.traverse((o) => o.isSkinnedMesh && fitSphere(o));
+  else if (kind === 'office') r = PEOPLE.worker(i + 7);
   else if (kind === 'sport') r = sport(i);
   else if (kind === 'elder') r = elder(i);
   else r = casual(i);
   r.root.scale.multiplyScalar(K * (0.95 + ((i * 37) % 11) / 100)); // a little taller or shorter each
-  // a bag in the right hand (arms[1]) or on the back, for some
+  // a bag in the hand on arms[1]'s side (a chibi's left hand bone) or on the back, for some
   const pick = i % 4;
-  if (kind === 'office' && pick !== 3) r.arms[1].add(pick === 2 ? tote('#5b6474') : briefcase());
-  if (kind === 'casual' && pick === 0) r.arms[1].add(groceries());
-  if (kind === 'casual' && pick === 2) r.arms[1].add(tote(['#9db7c9', '#c9a98b', '#a9b88c'][i % 3]));
-  if (kind === 'casual' && pick === 3) r.torso.add(backpack(['#e39a3b', '#4c6a8a', '#7a8f6a'][i % 3]));
-  if (kind === 'elder' && pick === 1) r.arms[1].add(groceries());
+  let bag = null;
+  if (kind === 'office' && pick !== 3) bag = pick === 2 ? tote('#5b6474') : briefcase();
+  if ((kind === 'casual' && pick === 0) || (kind === 'elder' && pick === 1)) bag = groceries();
+  if (kind === 'casual' && pick === 2) bag = tote(['#9db7c9', '#c9a98b', '#a9b88c'][i % 3]);
+  const pack = kind === 'casual' && pick === 3 && backpack(['#e39a3b', '#4c6a8a', '#7a8f6a'][i % 3]);
+  // the hand-held bags hang from the arm group's top, a hand's length above the hand
+  if (bag && gen) hold(r, bag, boneAt(r, 'LeftHand').add(new THREE.Vector3(0, 0.255 * 1.15, 0)), 'LeftHand');
+  else if (bag) r.arms[1].add(bag);
+  if (pack && gen) hold(r, pack, boneAt(r, 'Spine').add(new THREE.Vector3(0, -0.03, 0.02)), 'Spine02');
+  else if (pack) r.torso.add(pack);
   r.kind = kind;
-  r.carries = r.arms[1].children.length > 2 || (kind === 'casual' && pick === 3);
+  r.carries = !!(bag || pack);
   r.ph = i * 1.37;
   return r;
+}
+// A chibi in the crowd is drawn only when its sphere is in view (meshyFrom draws them always, as the story's people may
+// be posed anywhere); its sphere from the standing model, with room for the arms and the walk.
+function fitSphere(o) {
+  o.geometry.computeBoundingSphere();
+  o.boundingSphere = o.geometry.boundingSphere.clone();
+  o.boundingSphere.radius *= 1.3;
+  o.frustumCulled = true;
 }

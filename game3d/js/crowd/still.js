@@ -169,7 +169,7 @@ export function placeStill(pool, spots, counts, spec, R, { fresh, inView }) {
       a.state = 'off';
       return;
     }
-    const K = a.r.root.scale.x / 1.15,
+    const K = a.r.root.scale.x / (a.r.meshy ? 1 : 1.15), // a chibi's root carries no code-built scale
       d = 0.33 * K;
     const ax = Math.sin(c.a) * d,
       az = Math.cos(c.a) * d;

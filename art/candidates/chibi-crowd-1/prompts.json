@@ -1,0 +1,515 @@
+[
+ {
+  "name": "suit-a-101",
+  "who": "suit",
+  "job": "suit-a",
+  "parent": null,
+  "seed": 101,
+  "prompt": "Edit image 1: turn the woman into the person described here, keeping everything else about image 1 exactly: the same smooth matte vinyl 3D figure, the same big soft rounded-square head, the same large flat painted anime eyes and small simple nose and mouth, the same short body, round mitten hands with no fingers and stubby legs, the same front view standing pose with the arms slightly out, the same soft studio light and plain white background. He is a 45-year-old man with short black hair neatly parted at the side and light tan skin. He wears a medium blue-grey suit jacket over a white shirt with a plain dark red tie, matching blue-grey trousers and black shoes. A calm, pleasant face. Empty hands. No text, no props.",
+  "model": "flux-2-klein-4b-fp8",
+  "steps": 4,
+  "cfg": 1.0,
+  "size": [
+   1024,
+   1024
+  ],
+  "refs": [
+   "image 1: art/parts/chibi-meshy/inputs/dressed.png (Jørgen's picture)"
+  ],
+  "seconds": 16.0
+ },
+ {
+  "name": "suit-a-102",
+  "who": "suit",
+  "job": "suit-a",
+  "parent": null,
+  "seed": 102,
+  "prompt": "Edit image 1: turn the woman into the person described here, keeping everything else about image 1 exactly: the same smooth matte vinyl 3D figure, the same big soft rounded-square head, the same large flat painted anime eyes and small simple nose and mouth, the same short body, round mitten hands with no fingers and stubby legs, the same front view standing pose with the arms slightly out, the same soft studio light and plain white background. He is a 45-year-old man with short black hair neatly parted at the side and light tan skin. He wears a medium blue-grey suit jacket over a white shirt with a plain dark red tie, matching blue-grey trousers and black shoes. A calm, pleasant face. Empty hands. No text, no props.",
+  "model": "flux-2-klein-4b-fp8",
+  "steps": 4,
+  "cfg": 1.0,
+  "size": [
+   1024,
+   1024
+  ],
+  "refs": [
+   "image 1: art/parts/chibi-meshy/inputs/dressed.png (Jørgen's picture)"
+  ],
+  "seconds": 7.0
+ },
+ {
+  "name": "suit-a-103",
+  "who": "suit",
+  "job": "suit-a",
+  "parent": null,
+  "seed": 103,
+  "prompt": "Edit image 1: turn the woman into the person described here, keeping everything else about image 1 exactly: the same smooth matte vinyl 3D figure, the same big soft rounded-square head, the same large flat painted anime eyes and small simple nose and mouth, the same short body, round mitten hands with no fingers and stubby legs, the same front view standing pose with the arms slightly out, the same soft studio light and plain white background. He is a 45-year-old man with short black hair neatly parted at the side and light tan skin. He wears a medium blue-grey suit jacket over a white shirt with a plain dark red tie, matching blue-grey trousers and black shoes. A calm, pleasant face. Empty hands. No text, no props.",
+  "model": "flux-2-klein-4b-fp8",
+  "steps": 4,
+  "cfg": 1.0,
+  "size": [
+   1024,
+   1024
+  ],
+  "refs": [
+   "image 1: art/parts/chibi-meshy/inputs/dressed.png (Jørgen's picture)"
+  ],
+  "seconds": 7.0
+ },
+ {
+  "name": "shirt-a-101",
+  "who": "shirt",
+  "job": "shirt-a",
+  "parent": null,
+  "seed": 101,
+  "prompt": "Edit image 1: turn the woman into the person described here, keeping everything else about image 1 exactly: the same smooth matte vinyl 3D figure, the same big soft rounded-square head, the same large flat painted anime eyes and small simple nose and mouth, the same short body, round mitten hands with no fingers and stubby legs, the same front view standing pose with the arms slightly out, the same soft studio light and plain white background. He is a 25-year-old young man with short tousled dark brown hair and light skin. He wears a light blue long-sleeved shirt with the sleeves rolled up to the elbows and a plain dark green tie, no jacket, charcoal trousers and brown shoes. A calm, pleasant face. Empty hands. No text, no props.",
+  "model": "flux-2-klein-4b-fp8",
+  "steps": 4,
+  "cfg": 1.0,
+  "size": [
+   1024,
+   1024
+  ],
+  "refs": [
+   "image 1: art/parts/chibi-meshy/inputs/dressed.png (Jørgen's picture)"
+  ],
+  "seconds": 8.0
+ },
+ {
+  "name": "shirt-a-102",
+  "who": "shirt",
+  "job": "shirt-a",
+  "parent": null,
+  "seed": 102,
+  "prompt": "Edit image 1: turn the woman into the person described here, keeping everything else about image 1 exactly: the same smooth matte vinyl 3D figure, the same big soft rounded-square head, the same large flat painted anime eyes and small simple nose and mouth, the same short body, round mitten hands with no fingers and stubby legs, the same front view standing pose with the arms slightly out, the same soft studio light and plain white background. He is a 25-year-old young man with short tousled dark brown hair and light skin. He wears a light blue long-sleeved shirt with the sleeves rolled up to the elbows and a plain dark green tie, no jacket, charcoal trousers and brown shoes. A calm, pleasant face. Empty hands. No text, no props.",
+  "model": "flux-2-klein-4b-fp8",
+  "steps": 4,
+  "cfg": 1.0,
+  "size": [
+   1024,
+   1024
+  ],
+  "refs": [
+   "image 1: art/parts/chibi-meshy/inputs/dressed.png (Jørgen's picture)"
+  ],
+  "seconds": 7.0
+ },
+ {
+  "name": "shirt-a-103",
+  "who": "shirt",
+  "job": "shirt-a",
+  "parent": null,
+  "seed": 103,
+  "prompt": "Edit image 1: turn the woman into the person described here, keeping everything else about image 1 exactly: the same smooth matte vinyl 3D figure, the same big soft rounded-square head, the same large flat painted anime eyes and small simple nose and mouth, the same short body, round mitten hands with no fingers and stubby legs, the same front view standing pose with the arms slightly out, the same soft studio light and plain white background. He is a 25-year-old young man with short tousled dark brown hair and light skin. He wears a light blue long-sleeved shirt with the sleeves rolled up to the elbows and a plain dark green tie, no jacket, charcoal trousers and brown shoes. A calm, pleasant face. Empty hands. No text, no props.",
+  "model": "flux-2-klein-4b-fp8",
+  "steps": 4,
+  "cfg": 1.0,
+  "size": [
+   1024,
+   1024
+  ],
+  "refs": [
+   "image 1: art/parts/chibi-meshy/inputs/dressed.png (Jørgen's picture)"
+  ],
+  "seconds": 7.0
+ },
+ {
+  "name": "blouse-a-101",
+  "who": "blouse",
+  "job": "blouse-a",
+  "parent": null,
+  "seed": 101,
+  "prompt": "Edit image 1: turn the woman into the person described here, keeping everything else about image 1 exactly: the same smooth matte vinyl 3D figure, the same big soft rounded-square head, the same large flat painted anime eyes and small simple nose and mouth, the same short body, round mitten hands with no fingers and stubby legs, the same front view standing pose with the arms slightly out, the same soft studio light and plain white background. She is a 28-year-old woman with straight black hair to her shoulders and a straight fringe, and light skin. She wears a light grey blazer over a white blouse, a light grey knee-length skirt and black low heels. A calm, pleasant face. Empty hands. No text, no props.",
+  "model": "flux-2-klein-4b-fp8",
+  "steps": 4,
+  "cfg": 1.0,
+  "size": [
+   1024,
+   1024
+  ],
+  "refs": [
+   "image 1: art/parts/chibi-meshy/inputs/dressed.png (Jørgen's picture)"
+  ],
+  "seconds": 8.0
+ },
+ {
+  "name": "blouse-a-102",
+  "who": "blouse",
+  "job": "blouse-a",
+  "parent": null,
+  "seed": 102,
+  "prompt": "Edit image 1: turn the woman into the person described here, keeping everything else about image 1 exactly: the same smooth matte vinyl 3D figure, the same big soft rounded-square head, the same large flat painted anime eyes and small simple nose and mouth, the same short body, round mitten hands with no fingers and stubby legs, the same front view standing pose with the arms slightly out, the same soft studio light and plain white background. She is a 28-year-old woman with straight black hair to her shoulders and a straight fringe, and light skin. She wears a light grey blazer over a white blouse, a light grey knee-length skirt and black low heels. A calm, pleasant face. Empty hands. No text, no props.",
+  "model": "flux-2-klein-4b-fp8",
+  "steps": 4,
+  "cfg": 1.0,
+  "size": [
+   1024,
+   1024
+  ],
+  "refs": [
+   "image 1: art/parts/chibi-meshy/inputs/dressed.png (Jørgen's picture)"
+  ],
+  "seconds": 7.0
+ },
+ {
+  "name": "blouse-a-103",
+  "who": "blouse",
+  "job": "blouse-a",
+  "parent": null,
+  "seed": 103,
+  "prompt": "Edit image 1: turn the woman into the person described here, keeping everything else about image 1 exactly: the same smooth matte vinyl 3D figure, the same big soft rounded-square head, the same large flat painted anime eyes and small simple nose and mouth, the same short body, round mitten hands with no fingers and stubby legs, the same front view standing pose with the arms slightly out, the same soft studio light and plain white background. She is a 28-year-old woman with straight black hair to her shoulders and a straight fringe, and light skin. She wears a light grey blazer over a white blouse, a light grey knee-length skirt and black low heels. A calm, pleasant face. Empty hands. No text, no props.",
+  "model": "flux-2-klein-4b-fp8",
+  "steps": 4,
+  "cfg": 1.0,
+  "size": [
+   1024,
+   1024
+  ],
+  "refs": [
+   "image 1: art/parts/chibi-meshy/inputs/dressed.png (Jørgen's picture)"
+  ],
+  "seconds": 7.0
+ },
+ {
+  "name": "cardigan-a-101",
+  "who": "cardigan",
+  "job": "cardigan-a",
+  "parent": null,
+  "seed": 101,
+  "prompt": "Edit image 1: turn the woman into the person described here, keeping everything else about image 1 exactly: the same smooth matte vinyl 3D figure, the same big soft rounded-square head, the same large flat painted anime eyes and small simple nose and mouth, the same short body, round mitten hands with no fingers and stubby legs, the same front view standing pose with the arms slightly out, the same soft studio light and plain white background. She is a 62-year-old woman with short curly grey hair and light skin. She wears a beige knitted cardigan over a pale blue blouse, a long dark brown skirt and brown flat shoes. A calm, pleasant face. Empty hands. No text, no props.",
+  "model": "flux-2-klein-4b-fp8",
+  "steps": 4,
+  "cfg": 1.0,
+  "size": [
+   1024,
+   1024
+  ],
+  "refs": [
+   "image 1: art/parts/chibi-meshy/inputs/dressed.png (Jørgen's picture)"
+  ],
+  "seconds": 8.0
+ },
+ {
+  "name": "cardigan-a-102",
+  "who": "cardigan",
+  "job": "cardigan-a",
+  "parent": null,
+  "seed": 102,
+  "prompt": "Edit image 1: turn the woman into the person described here, keeping everything else about image 1 exactly: the same smooth matte vinyl 3D figure, the same big soft rounded-square head, the same large flat painted anime eyes and small simple nose and mouth, the same short body, round mitten hands with no fingers and stubby legs, the same front view standing pose with the arms slightly out, the same soft studio light and plain white background. She is a 62-year-old woman with short curly grey hair and light skin. She wears a beige knitted cardigan over a pale blue blouse, a long dark brown skirt and brown flat shoes. A calm, pleasant face. Empty hands. No text, no props.",
+  "model": "flux-2-klein-4b-fp8",
+  "steps": 4,
+  "cfg": 1.0,
+  "size": [
+   1024,
+   1024
+  ],
+  "refs": [
+   "image 1: art/parts/chibi-meshy/inputs/dressed.png (Jørgen's picture)"
+  ],
+  "seconds": 7.0
+ },
+ {
+  "name": "cardigan-a-103",
+  "who": "cardigan",
+  "job": "cardigan-a",
+  "parent": null,
+  "seed": 103,
+  "prompt": "Edit image 1: turn the woman into the person described here, keeping everything else about image 1 exactly: the same smooth matte vinyl 3D figure, the same big soft rounded-square head, the same large flat painted anime eyes and small simple nose and mouth, the same short body, round mitten hands with no fingers and stubby legs, the same front view standing pose with the arms slightly out, the same soft studio light and plain white background. She is a 62-year-old woman with short curly grey hair and light skin. She wears a beige knitted cardigan over a pale blue blouse, a long dark brown skirt and brown flat shoes. A calm, pleasant face. Empty hands. No text, no props.",
+  "model": "flux-2-klein-4b-fp8",
+  "steps": 4,
+  "cfg": 1.0,
+  "size": [
+   1024,
+   1024
+  ],
+  "refs": [
+   "image 1: art/parts/chibi-meshy/inputs/dressed.png (Jørgen's picture)"
+  ],
+  "seconds": 7.0
+ },
+ {
+  "name": "polo-a-101",
+  "who": "polo",
+  "job": "polo-a",
+  "parent": null,
+  "seed": 101,
+  "prompt": "Edit image 1: turn the woman into the person described here, keeping everything else about image 1 exactly: the same smooth matte vinyl 3D figure, the same big soft rounded-square head, the same large flat painted anime eyes and small simple nose and mouth, the same short body, round mitten hands with no fingers and stubby legs, the same front view standing pose with the arms slightly out, the same soft studio light and plain white background. He is a 68-year-old man with short white hair, receding at the temples, and tanned skin. He wears a moss green polo shirt tucked into beige trousers with a brown belt, and brown shoes. A calm, pleasant face. Empty hands. No text, no props.",
+  "model": "flux-2-klein-4b-fp8",
+  "steps": 4,
+  "cfg": 1.0,
+  "size": [
+   1024,
+   1024
+  ],
+  "refs": [
+   "image 1: art/parts/chibi-meshy/inputs/dressed.png (Jørgen's picture)"
+  ],
+  "seconds": 8.0
+ },
+ {
+  "name": "polo-a-102",
+  "who": "polo",
+  "job": "polo-a",
+  "parent": null,
+  "seed": 102,
+  "prompt": "Edit image 1: turn the woman into the person described here, keeping everything else about image 1 exactly: the same smooth matte vinyl 3D figure, the same big soft rounded-square head, the same large flat painted anime eyes and small simple nose and mouth, the same short body, round mitten hands with no fingers and stubby legs, the same front view standing pose with the arms slightly out, the same soft studio light and plain white background. He is a 68-year-old man with short white hair, receding at the temples, and tanned skin. He wears a moss green polo shirt tucked into beige trousers with a brown belt, and brown shoes. A calm, pleasant face. Empty hands. No text, no props.",
+  "model": "flux-2-klein-4b-fp8",
+  "steps": 4,
+  "cfg": 1.0,
+  "size": [
+   1024,
+   1024
+  ],
+  "refs": [
+   "image 1: art/parts/chibi-meshy/inputs/dressed.png (Jørgen's picture)"
+  ],
+  "seconds": 7.0
+ },
+ {
+  "name": "polo-a-103",
+  "who": "polo",
+  "job": "polo-a",
+  "parent": null,
+  "seed": 103,
+  "prompt": "Edit image 1: turn the woman into the person described here, keeping everything else about image 1 exactly: the same smooth matte vinyl 3D figure, the same big soft rounded-square head, the same large flat painted anime eyes and small simple nose and mouth, the same short body, round mitten hands with no fingers and stubby legs, the same front view standing pose with the arms slightly out, the same soft studio light and plain white background. He is a 68-year-old man with short white hair, receding at the temples, and tanned skin. He wears a moss green polo shirt tucked into beige trousers with a brown belt, and brown shoes. A calm, pleasant face. Empty hands. No text, no props.",
+  "model": "flux-2-klein-4b-fp8",
+  "steps": 4,
+  "cfg": 1.0,
+  "size": [
+   1024,
+   1024
+  ],
+  "refs": [
+   "image 1: art/parts/chibi-meshy/inputs/dressed.png (Jørgen's picture)"
+  ],
+  "seconds": 7.0
+ },
+ {
+  "name": "hoodie-a-101",
+  "who": "hoodie",
+  "job": "hoodie-a",
+  "parent": null,
+  "seed": 101,
+  "prompt": "Edit image 1: turn the woman into the person described here, keeping everything else about image 1 exactly: the same smooth matte vinyl 3D figure, the same big soft rounded-square head, the same large flat painted anime eyes and small simple nose and mouth, the same short body, round mitten hands with no fingers and stubby legs, the same front view standing pose with the arms slightly out, the same soft studio light and plain white background. She is a 20-year-old young woman with long light brown hair worn loose and light skin. She wears a pale lavender hoodie, blue jeans and white sneakers. A calm, pleasant face. Empty hands. No text, no props.",
+  "model": "flux-2-klein-4b-fp8",
+  "steps": 4,
+  "cfg": 1.0,
+  "size": [
+   1024,
+   1024
+  ],
+  "refs": [
+   "image 1: art/parts/chibi-meshy/inputs/dressed.png (Jørgen's picture)"
+  ],
+  "seconds": 8.0
+ },
+ {
+  "name": "hoodie-a-102",
+  "who": "hoodie",
+  "job": "hoodie-a",
+  "parent": null,
+  "seed": 102,
+  "prompt": "Edit image 1: turn the woman into the person described here, keeping everything else about image 1 exactly: the same smooth matte vinyl 3D figure, the same big soft rounded-square head, the same large flat painted anime eyes and small simple nose and mouth, the same short body, round mitten hands with no fingers and stubby legs, the same front view standing pose with the arms slightly out, the same soft studio light and plain white background. She is a 20-year-old young woman with long light brown hair worn loose and light skin. She wears a pale lavender hoodie, blue jeans and white sneakers. A calm, pleasant face. Empty hands. No text, no props.",
+  "model": "flux-2-klein-4b-fp8",
+  "steps": 4,
+  "cfg": 1.0,
+  "size": [
+   1024,
+   1024
+  ],
+  "refs": [
+   "image 1: art/parts/chibi-meshy/inputs/dressed.png (Jørgen's picture)"
+  ],
+  "seconds": 7.0
+ },
+ {
+  "name": "hoodie-a-103",
+  "who": "hoodie",
+  "job": "hoodie-a",
+  "parent": null,
+  "seed": 103,
+  "prompt": "Edit image 1: turn the woman into the person described here, keeping everything else about image 1 exactly: the same smooth matte vinyl 3D figure, the same big soft rounded-square head, the same large flat painted anime eyes and small simple nose and mouth, the same short body, round mitten hands with no fingers and stubby legs, the same front view standing pose with the arms slightly out, the same soft studio light and plain white background. She is a 20-year-old young woman with long light brown hair worn loose and light skin. She wears a pale lavender hoodie, blue jeans and white sneakers. A calm, pleasant face. Empty hands. No text, no props.",
+  "model": "flux-2-klein-4b-fp8",
+  "steps": 4,
+  "cfg": 1.0,
+  "size": [
+   1024,
+   1024
+  ],
+  "refs": [
+   "image 1: art/parts/chibi-meshy/inputs/dressed.png (Jørgen's picture)"
+  ],
+  "seconds": 7.0
+ },
+ {
+  "name": "apron-a-101",
+  "who": "apron",
+  "job": "apron-a",
+  "parent": null,
+  "seed": 101,
+  "prompt": "Edit image 1: turn the woman into the person described here, keeping everything else about image 1 exactly: the same smooth matte vinyl 3D figure, the same big soft rounded-square head, the same large flat painted anime eyes and small simple nose and mouth, the same short body, round mitten hands with no fingers and stubby legs, the same front view standing pose with the arms slightly out, the same soft studio light and plain white background. She is a 45-year-old woman with dark brown hair pulled back from her face and tanned skin. She wears a white short-sleeved work shirt under a long dark green apron that reaches below her knees, black trousers and black shoes. A calm, pleasant face. Empty hands. No text, no props.",
+  "model": "flux-2-klein-4b-fp8",
+  "steps": 4,
+  "cfg": 1.0,
+  "size": [
+   1024,
+   1024
+  ],
+  "refs": [
+   "image 1: art/parts/chibi-meshy/inputs/dressed.png (Jørgen's picture)"
+  ],
+  "seconds": 8.0
+ },
+ {
+  "name": "apron-a-102",
+  "who": "apron",
+  "job": "apron-a",
+  "parent": null,
+  "seed": 102,
+  "prompt": "Edit image 1: turn the woman into the person described here, keeping everything else about image 1 exactly: the same smooth matte vinyl 3D figure, the same big soft rounded-square head, the same large flat painted anime eyes and small simple nose and mouth, the same short body, round mitten hands with no fingers and stubby legs, the same front view standing pose with the arms slightly out, the same soft studio light and plain white background. She is a 45-year-old woman with dark brown hair pulled back from her face and tanned skin. She wears a white short-sleeved work shirt under a long dark green apron that reaches below her knees, black trousers and black shoes. A calm, pleasant face. Empty hands. No text, no props.",
+  "model": "flux-2-klein-4b-fp8",
+  "steps": 4,
+  "cfg": 1.0,
+  "size": [
+   1024,
+   1024
+  ],
+  "refs": [
+   "image 1: art/parts/chibi-meshy/inputs/dressed.png (Jørgen's picture)"
+  ],
+  "seconds": 7.0
+ },
+ {
+  "name": "apron-a-103",
+  "who": "apron",
+  "job": "apron-a",
+  "parent": null,
+  "seed": 103,
+  "prompt": "Edit image 1: turn the woman into the person described here, keeping everything else about image 1 exactly: the same smooth matte vinyl 3D figure, the same big soft rounded-square head, the same large flat painted anime eyes and small simple nose and mouth, the same short body, round mitten hands with no fingers and stubby legs, the same front view standing pose with the arms slightly out, the same soft studio light and plain white background. She is a 45-year-old woman with dark brown hair pulled back from her face and tanned skin. She wears a white short-sleeved work shirt under a long dark green apron that reaches below her knees, black trousers and black shoes. A calm, pleasant face. Empty hands. No text, no props.",
+  "model": "flux-2-klein-4b-fp8",
+  "steps": 4,
+  "cfg": 1.0,
+  "size": [
+   1024,
+   1024
+  ],
+  "refs": [
+   "image 1: art/parts/chibi-meshy/inputs/dressed.png (Jørgen's picture)"
+  ],
+  "seconds": 7.0
+ },
+ {
+  "name": "dock-a-101",
+  "who": "dock",
+  "job": "dock-a",
+  "parent": null,
+  "seed": 101,
+  "prompt": "Edit image 1: turn the woman into the person described here, keeping everything else about image 1 exactly: the same smooth matte vinyl 3D figure, the same big soft rounded-square head, the same large flat painted anime eyes and small simple nose and mouth, the same short body, round mitten hands with no fingers and stubby legs, the same front view standing pose with the arms slightly out, the same soft studio light and plain white background. He is a 35-year-old man with short cropped black hair and tanned skin. He wears an orange work jacket with a grey reflective band around the chest and arms, dark grey work trousers and black boots. A calm, pleasant face. Empty hands. No text, no props.",
+  "model": "flux-2-klein-4b-fp8",
+  "steps": 4,
+  "cfg": 1.0,
+  "size": [
+   1024,
+   1024
+  ],
+  "refs": [
+   "image 1: art/parts/chibi-meshy/inputs/dressed.png (Jørgen's picture)"
+  ],
+  "seconds": 8.0
+ },
+ {
+  "name": "dock-a-102",
+  "who": "dock",
+  "job": "dock-a",
+  "parent": null,
+  "seed": 102,
+  "prompt": "Edit image 1: turn the woman into the person described here, keeping everything else about image 1 exactly: the same smooth matte vinyl 3D figure, the same big soft rounded-square head, the same large flat painted anime eyes and small simple nose and mouth, the same short body, round mitten hands with no fingers and stubby legs, the same front view standing pose with the arms slightly out, the same soft studio light and plain white background. He is a 35-year-old man with short cropped black hair and tanned skin. He wears an orange work jacket with a grey reflective band around the chest and arms, dark grey work trousers and black boots. A calm, pleasant face. Empty hands. No text, no props.",
+  "model": "flux-2-klein-4b-fp8",
+  "steps": 4,
+  "cfg": 1.0,
+  "size": [
+   1024,
+   1024
+  ],
+  "refs": [
+   "image 1: art/parts/chibi-meshy/inputs/dressed.png (Jørgen's picture)"
+  ],
+  "seconds": 7.0
+ },
+ {
+  "name": "dock-a-103",
+  "who": "dock",
+  "job": "dock-a",
+  "parent": null,
+  "seed": 103,
+  "prompt": "Edit image 1: turn the woman into the person described here, keeping everything else about image 1 exactly: the same smooth matte vinyl 3D figure, the same big soft rounded-square head, the same large flat painted anime eyes and small simple nose and mouth, the same short body, round mitten hands with no fingers and stubby legs, the same front view standing pose with the arms slightly out, the same soft studio light and plain white background. He is a 35-year-old man with short cropped black hair and tanned skin. He wears an orange work jacket with a grey reflective band around the chest and arms, dark grey work trousers and black boots. A calm, pleasant face. Empty hands. No text, no props.",
+  "model": "flux-2-klein-4b-fp8",
+  "steps": 4,
+  "cfg": 1.0,
+  "size": [
+   1024,
+   1024
+  ],
+  "refs": [
+   "image 1: art/parts/chibi-meshy/inputs/dressed.png (Jørgen's picture)"
+  ],
+  "seconds": 7.0
+ },
+ {
+  "name": "polo-b-101",
+  "who": "polo",
+  "job": "polo-b",
+  "parent": "polo-a",
+  "seed": 101,
+  "prompt": "Edit image 1: turn the woman into the person described here, keeping everything else about image 1 exactly: the same smooth matte vinyl 3D figure, the same big soft rounded-square head, the same large flat painted anime eyes and small simple nose and mouth, the same short body, round mitten hands with no fingers and stubby legs, the same front view standing pose with the arms slightly out, the same soft studio light and plain white background. He is a 68-year-old man with short white hair, receding at the temples, and lightly tanned skin. He wears a moss green polo shirt tucked into beige trousers with a brown belt, and brown shoes. A calm, pleasant face. Empty hands. No text, no props.",
+  "model": "flux-2-klein-4b-fp8",
+  "steps": 4,
+  "cfg": 1.0,
+  "size": [
+   1024,
+   1024
+  ],
+  "refs": [
+   "image 1: art/parts/chibi-meshy/inputs/dressed.png (Jørgen's picture)"
+  ],
+  "seconds": 8.0
+ },
+ {
+  "name": "polo-b-102",
+  "who": "polo",
+  "job": "polo-b",
+  "parent": "polo-a",
+  "seed": 102,
+  "prompt": "Edit image 1: turn the woman into the person described here, keeping everything else about image 1 exactly: the same smooth matte vinyl 3D figure, the same big soft rounded-square head, the same large flat painted anime eyes and small simple nose and mouth, the same short body, round mitten hands with no fingers and stubby legs, the same front view standing pose with the arms slightly out, the same soft studio light and plain white background. He is a 68-year-old man with short white hair, receding at the temples, and lightly tanned skin. He wears a moss green polo shirt tucked into beige trousers with a brown belt, and brown shoes. A calm, pleasant face. Empty hands. No text, no props.",
+  "model": "flux-2-klein-4b-fp8",
+  "steps": 4,
+  "cfg": 1.0,
+  "size": [
+   1024,
+   1024
+  ],
+  "refs": [
+   "image 1: art/parts/chibi-meshy/inputs/dressed.png (Jørgen's picture)"
+  ],
+  "seconds": 7.0
+ },
+ {
+  "name": "polo-b-103",
+  "who": "polo",
+  "job": "polo-b",
+  "parent": "polo-a",
+  "seed": 103,
+  "prompt": "Edit image 1: turn the woman into the person described here, keeping everything else about image 1 exactly: the same smooth matte vinyl 3D figure, the same big soft rounded-square head, the same large flat painted anime eyes and small simple nose and mouth, the same short body, round mitten hands with no fingers and stubby legs, the same front view standing pose with the arms slightly out, the same soft studio light and plain white background. He is a 68-year-old man with short white hair, receding at the temples, and lightly tanned skin. He wears a moss green polo shirt tucked into beige trousers with a brown belt, and brown shoes. A calm, pleasant face. Empty hands. No text, no props.",
+  "model": "flux-2-klein-4b-fp8",
+  "steps": 4,
+  "cfg": 1.0,
+  "size": [
+   1024,
+   1024
+  ],
+  "refs": [
+   "image 1: art/parts/chibi-meshy/inputs/dressed.png (Jørgen's picture)"
+  ],
+  "seconds": 7.0
+ }
+]

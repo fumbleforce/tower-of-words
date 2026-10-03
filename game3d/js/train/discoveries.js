@@ -16,6 +16,7 @@
 // Every state is kept in snapshot()/restore(), so Continue and a restarted scene put the props back.
 import * as THREE from 'three';
 import { phone as phoneProp } from './people.js';
+import { chibiPassengers } from '../chibi-passengers.js';
 import { reminderScreen, bookPage, printoutSheet } from './held-screens.js';
 import { footballPhoto, guitarVideo } from './screen-scenes.js';
 import { shopBag } from './shop-bag.js';
@@ -48,6 +49,7 @@ const armState = (a) => [a.rotation.x, a.rotation.y, a.rotation.z];
 
 // car: the car's root (props go in its frame, as the passengers do); nav: its walk grid (the bag on the floor blocks it)
 export function trainDiscoveries(game, { people, car, nav, SEAT_Y }) {
+  chibiPassengers(people); // with the chibi look: the passengers become generic chibis first, their props moved over
   const { youth, music, kuroda, reader, bun } = people;
   const st = { youth: 'away', music: 'lap', kuroda: 'off', cup: 'on', bag: 0, printout: 'away' };
   const tween = (dur, fn) => game.tween(dur, (k) => fn(ease(k)));

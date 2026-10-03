@@ -9,7 +9,7 @@
 // error, or when Eric leaves the frame at any moment of the walk in and the camera letting go (his feet and head,
 // sampled every frame for ARRIVE_MS after the new place is up; GUIDE: the player always sees Eric).
 // With the recorder on (?perf), it ends with each place's frame times, draw calls and triangles over the walk.
-//   node game3d/tools/loop-check.mjs [outdir] [w] [h]      BASE=<worktree>/game3d for a worktree; Q=0|1|2 the tier
+//   node game3d/tools/loop-check.mjs [outdir] [w] [h]      BASE=<worktree>/game3d for a worktree; Q=0|1|2 the tier; QS=&chibi=1 adds to the query
 import { withBrowserJob } from '../../tools/lib/browser-job.mjs';
 import fs from 'node:fs';
 
@@ -66,7 +66,7 @@ await withBrowserJob(
     page.on('pageerror', (e) => errors.push(e.message));
     page.on('console', (m) => m.type() === 'error' && !/404/.test(m.text()) && errors.push(m.text()));
     await page.goto(
-      `http://127.0.0.1:8771/${base}/index.html?cap&perf&q=${process.env.Q ?? 1}&place=east_lane&mx=0&mz=-31`,
+      `http://127.0.0.1:8771/${base}/index.html?cap&perf&q=${process.env.Q ?? 1}&place=east_lane&mx=0&mz=-31${process.env.QS || ''}`,
     );
     await page.waitForFunction(() => document.body.dataset.place === 'east_lane' && window.__game?.player, null, {
       timeout: 120000,
