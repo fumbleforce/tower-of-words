@@ -5,6 +5,9 @@ import { HIP, walkPose } from '../train/people.js';
 import { turnToward } from '../movement/shared.js';
 import { slideStep, followSpeed, press, isHard, isPassing } from '../movement/crowd.js';
 
+// someone with right of way walking through in fixed choreography (a trip's glide), whom the crowd steps aside for
+export const gliding = (b) => !!(b.rig && b.rig._noAvoid && b.rig._walk && !b.rig.ambient);
+
 const ME = 0.24; // a body's radius before the place's character scale (movement/shared.js BODY)
 
 // one step along w.line toward its next point. list: bodies(game) this frame; eric: his entry in it;
@@ -81,33 +84,53 @@ export function walkStep(game, w, dt, list, eric, wide) {
     x = sx;
     z = sz;
   }
-  // while a scene plays, out of Eric's way however he moves (a scripted walk doesn't go round people)
-  if (wide && eric) {
-    const want = eric.r + me + wide;
-    // no step that comes closer to him once near: stay put (the push below moves them off)
+  // out of the way of whoever has right of way however they move: Eric while a scene plays (a scripted walk doesn't go
+  // round people), and anyone in fixed choreography walking through (a trip's glide goes round nobody: Eric walking
+  // out along the forecourt's lane went straight through a passer-by coming the other way)
+  for (const b of list) {
+    const extra = b === eric && wide ? wide : gliding(b) ? 0.3 * K : -1;
+    if (extra < 0 || b.root === r.root) continue;
+    const want = b.r + me + extra;
+    // no step that comes closer to them once near: stay put (the push below moves them off)
     if (
-      Math.hypot(x - eric.x, z - eric.z) < Math.hypot(ox - eric.x, oz - eric.z) &&
-      Math.hypot(ox - eric.x, oz - eric.z) < want + 0.4 * K
+      Math.hypot(x - b.x, z - b.z) < Math.hypot(ox - b.x, oz - b.z) &&
+      Math.hypot(ox - b.x, oz - b.z) < want + 0.4 * K
     ) {
       x = ox;
       z = oz;
       w.best = Infinity; // giving way is not being stuck (stalled())
     }
-    const ex = x - eric.x,
-      ez = z - eric.z,
+    const ex = x - b.x,
+      ez = z - b.z,
       ed = Math.hypot(ex, ez) || 1e-4;
     if (ed < want) {
       const push = Math.min(want - ed, Math.max(w.speed, 1.2 * K) * 2 * dt);
-      x += (ex / ed) * push;
-      z += (ez / ed) * push;
+      // aside rather than ahead of someone walking at them: half away, the rest across their way, on the side they're on
+      let px = ex / ed,
+        pz = ez / ed;
+      const v = b.root.userData.walkVel,
+        vl = v ? Math.hypot(v[0], v[1]) : 0;
+      if (vl > 0.1) {
+        const sx = -v[1] / vl,
+          sz = v[0] / vl,
+          side = ex * sx + ez * sz >= 0 ? 1 : -1;
+        px = px * 0.5 + sx * side;
+        pz = pz * 0.5 + sz * side;
+        const l = Math.hypot(px, pz) || 1;
+        px /= l;
+        pz /= l;
+      }
+      x += px * push;
+      z += pz * push;
     }
   }
   const nav = P.nav;
   if (nav && w.onGrid && !nav.free(x, z) && nav.free(ox, oz)) [x, z] = nav.collide(x, z, ox, oz);
   p.x = x;
   p.z = z;
-  // no headway against someone for a while: slip past (the movement check lets passing pairs through)
-  press(game, r, r.root, by, Math.hypot(x - ox, z - oz), s, dt, 1.2);
+  // no headway against another passer-by for a while: slip past (the movement check lets passing pairs through); never
+  // through Eric or the story's people, whom they wait for or go round (stalled() and rejoin)
+  press(game, r, r.root, by && by.crowd ? by : null, Math.hypot(x - ox, z - oz), s, dt, 1.2);
   const mx = x - ox,
     mz = z - oz,
     moved = Math.hypot(mx, mz);

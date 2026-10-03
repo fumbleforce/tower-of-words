@@ -105,6 +105,12 @@ export function walkRig(
         (!nav || nav.clear([p.x, p.z], path[1]))
       )
         path.shift();
+      // on a corner whose next leg the floor doesn't allow (an end in the furniture), as close as the floor allows is
+      // here: heading for a point she already stood on, Mio turned round and round it
+      if (path.length > 1 && Math.hypot(path[0][0] - p.x, path[0][1] - p.z) < 0.05) {
+        done();
+        return true;
+      }
       const [gx, gz] = path[0];
       const dx = gx - p.x,
         dz = gz - p.z,
@@ -369,31 +375,4 @@ export async function standOut(game, rigOrObj, dz, { speed = 0.8 } = {}) {
 // still straight, but it follows whoever walks ahead and goes round whoever stands in the way.
 export function glide(g, obj, to, speed, avoid = false) {
   return walkRig(g, obj, to, { speed, route: false, avoid, brakeTo: 0.45, settle: false });
-}
-
-// One step of a set route (the lobby's commuters) that doesn't walk into anyone: with someone right in front they wait
-// (a queue at the reader) for up to 2 s, then carry on and softSeparate eases them round. Returns 0 when there, 1
-// after a step, 2 while waiting.
-export function queueStep(game, rig, tx, tz, speed, dt) {
-  const p = rig.root.position,
-    d = Math.hypot(tx - p.x, tz - p.z);
-  rig._walk = d >= 0.04;
-  if (!rig._walk) return 0;
-  const fx = (tx - p.x) / d,
-    fz = (tz - p.z) / d,
-    list = bodies(game),
-    me = list.find((b) => b.root === rig.root);
-  const ahead = list.find((b) => {
-    if (!me || b === me || isPassing(rig.root, b.root)) return false;
-    const bx = b.x - me.x,
-      bz = b.z - me.z,
-      bd = Math.hypot(bx, bz) || 1e-4;
-    return bd < b.r + me.r + 0.08 && (bx * fx + bz * fz) / bd > 0.5;
-  });
-  rig._queue = ahead ? (rig._queue || 0) + dt : 0;
-  if (ahead && rig._queue < 2) return 2;
-  const s = Math.min(d, speed * dt);
-  p.x += fx * s;
-  p.z += fz * s;
-  return 1;
 }

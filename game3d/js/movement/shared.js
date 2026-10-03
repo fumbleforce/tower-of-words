@@ -42,14 +42,15 @@ const KNEES = 0.15; // how far in front of a seated person's hips their circle s
 
 const CAT = 0.18; // the cat's radius: room for her whole body, so nobody stands on her
 
-// every visible person in the place, in the place's walk-grid space: { id, rig, root, x, z, r, seated }
+// every visible person in the place, in the place's walk-grid space: { id, rig, root, x, z, r, seated, crowd }
+// (crowd: a passer-by from place.crowd, who gives way to Eric and the story's people)
 export function bodies(game) {
   const P = game && game.place;
   if (!P || !P.space) return [];
   const out = [],
     seen = new Set(),
     K = P.charScale || 1;
-  const add = (id, r) => {
+  const add = (id, r, crowd = false) => {
     if (!r || !r.root || seen.has(r.root) || !r.root.visible || !r.root.parent) return;
     seen.add(r.root);
     r.root.getWorldPosition(_v);
@@ -81,12 +82,13 @@ export function bodies(game) {
       z: _v.z,
       r: (id === 'tama' ? CAT : seated ? BODY * 0.8 : BODY) * K,
       seated,
+      crowd,
     });
   };
   add('eric', game.player);
   add('mio', game.mioNpc);
   for (const [id, r] of Object.entries(P.people || {})) add(id, r);
-  (P.crowd || []).forEach((r, i) => add('crowd' + i, r)); // passers-by (the lobby's commuters)
+  (P.crowd || []).forEach((r, i) => add('crowd' + i, r, true)); // passers-by (the lobby's commuters)
   return out;
 }
 

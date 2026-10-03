@@ -325,7 +325,7 @@ export function personStep(game, rig, ox, oz, nx, nz, dt) {
     fz = (nz - oz) / step;
   const list = bodies(game).filter((b) => b.root !== rig.root);
   // someone right ahead, or another walker converging on the same spot (the one with the lower id gives way, so two
-  // never wait for each other)
+  // never wait for each other; a passer-by always gives way to the story's people, so they never wait for one)
   const ahead = list.find((b) => {
     if (b.seated || isPassing(rig.root, b.root)) return false;
     const rx = b.x - ox,
@@ -333,7 +333,7 @@ export function personStep(game, rig, ox, oz, nx, nz, dt) {
       bd = Math.hypot(rx, rz) || 1e-4,
       c = (rx * fx + rz * fz) / bd;
     if (bd >= b.r + me + 0.15) return false;
-    return c > 0.55 || (c > 0 && b.rig._walk && rig.root.id < b.root.id);
+    return c > 0.55 || (c > 0 && b.rig._walk && !b.crowd && rig.root.id < b.root.id);
   });
   if (ahead) rig._blocker = ahead;
   // the player in the way for half a second: he steps aside

@@ -66,7 +66,7 @@
     },
     "game3d/js/places/office.js": {
       "lines": 1109,
-      "bytes": 40452,
+      "bytes": 40451,
       "owner": "codex-tui",
       "review": "C-0076; 2026-09-30 preparation slices (yield points, notes/PERF.md); C-0166 named sounds per door and machine",
       "reason": "Existing office place geometry and interaction hooks; stage 5 room-builder review is planned."

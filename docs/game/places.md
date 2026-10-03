@@ -208,7 +208,7 @@ The security room is played in the early morning, before nine.
 | `mio` | Hidden (she ran ahead to a server). | – |
 | `worker_a` | Standing past the gate on the left with `worker_b`, chatting. Can be talked to. | – |
 | `worker_b` | Standing past the gate on the left with `worker_a`. Can be talked to. | – |
-| `commuter_1` | Walks in, taps a reader and goes through. While the gate is jammed, waits in a queue; can be talked to only while standing there. | – |
+| `commuter_1` | Walks in, taps a reader and goes through. While the gate is jammed, waits in a queue; can be talked to only while standing there. Waits for Eric and the story's people to move rather than walk into them. | – |
 | `commuter_2` | The same as `commuter_1`. | – |
 | `commuter_3` | The same, carrying a cake box. | – |
 
