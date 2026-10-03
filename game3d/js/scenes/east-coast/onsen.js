@@ -72,7 +72,8 @@ function fence(p, a, b, h = 2.0) {
   }
   const L = hi - lo,
     m = (lo + hi) / 2;
-  for (const y of [h * 0.35, h * 0.75, h])
+  // the top rail stands 5 mm over the slats' tops, so the two never lie level
+  for (const y of [h * 0.35, h * 0.75, h + 0.005])
     if (alongX) p.box(C.dark, L, 0.05, 0.12, m, y - 0.05, a[1]);
     else p.box(C.dark, 0.12, 0.05, L, a[0], y - 0.05, m);
 }

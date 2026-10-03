@@ -27,7 +27,8 @@ const NO = { cast: false };
 const { LANE: L, YARD: Y, GATE: G, APRON: A, STREET: S } = P;
 
 // the works street from z0 to z1 (south): asphalt, faded white edge lines, patches on a fixed grid (so every
-// chunk that lays a stretch of it lays the same ones), kerbs down both sides unless p is null
+// chunk that lays a stretch of it lays the same ones), kerbs down both sides unless p is null. The asphalt lies
+// 2 mm under the other paving (0.004), so a pad or lane that runs onto it never lies level with it
 export function worksStreet(pv, p, [z0, z1]) {
   const [x0, x1] = [S[0], S[1]];
   pv.field([x0, x1, z0, z1], {
@@ -36,6 +37,7 @@ export function worksStreet(pv, p, [z0, z1]) {
     tones: ASPHALT,
     vary: 0.04,
     gap: 0,
+    h: 0.004,
     origin: [x0, S[3]],
   });
   for (const x of [x0 + 0.22, x1 - 0.32])

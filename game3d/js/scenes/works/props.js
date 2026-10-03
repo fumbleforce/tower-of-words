@@ -185,7 +185,7 @@ function corner(p, mesh, plain) {
   for (const s of [-0.7, 0.7]) p.box('#5c7f9a', 0.45, 0.42, 0.4, bx + s, 0, bz);
   p.box('#9b958c', 1.9, 0.06, 0.34, bx, 0.42, bz);
   p.geo('#a33f37', new THREE.CylinderGeometry(0.17, 0.14, 0.32, 10).translate(bx + 1.35, 0.16, bz + 0.05));
-  p.geo('#c8bfa9', new THREE.CylinderGeometry(0.15, 0.15, 0.02, 10).translate(bx + 1.35, 0.31, bz + 0.05), NO);
+  p.geo('#c8bfa9', new THREE.CylinderGeometry(0.15, 0.15, 0.02, 10).translate(bx + 1.35, 0.325, bz + 0.05), NO);
   plain.board('きつえんじょ', 'SMOKING AREA', '#5a5f66', 0.9, 0.3, [x1 + 0.78, 1.7, (z0 + z1) / 2 + 0.6], -Math.PI / 2);
   for (let k = 0; k < 5; k++) grass(p, x0 + 0.3 + k * 0.9, z1 - 0.15, { seed: 320 + k });
 }

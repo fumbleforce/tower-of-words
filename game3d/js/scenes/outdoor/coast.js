@@ -144,14 +144,15 @@ function* wall(stone, green, surf, at, sea, clip, { line: pts, beach = false, pl
     if (i + 2 === line.length) pier(b); // and one at the line's end
     if (plant) {
       // the strip of ground cover in runs between the terraces that come up to the wall, each piece a little past
-      // its ends so the strip runs on unbroken round the bends
+      // its ends so the strip runs on unbroken round the bends; its top 6 mm under the terraces' paving (0.05), which
+      // its ends run in under
       const free = (u) => !bare(...I(u, -1.15)),
         E = 0.45;
       for (let u0 = -E; u0 < L + E;) {
         let u1 = u0;
         while (u1 < L + E && free(Math.min(u1 + 0.25, L + E))) u1 += 0.25;
         u1 = Math.min(u1, L + E);
-        if (u1 - u0 > 0.3) along(green, LEAF.cover, P((u0 + u1) / 2, -1.15), d, u1 - u0, 1.1, -0.04, 0.05, NO_CAST);
+        if (u1 - u0 > 0.3) along(green, LEAF.cover, P((u0 + u1) / 2, -1.15), d, u1 - u0, 1.1, -0.04, 0.044, NO_CAST);
         u0 = u1 + 0.25;
       }
       for (let u = 1; u < L - 1; u += 1.6 + hash2(u, i, 41) * 1.8) {

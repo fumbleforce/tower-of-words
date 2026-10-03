@@ -203,7 +203,8 @@ function managerWindow(root) {
 // starts the trip up (places/dorm-court.js)
 export function hall(root, nav) {
   const [x0, x1] = HALL;
-  root.add(tileFloor(x0, x1, BACK_Z, FRONT_Z, 0.6, { color: '#9c9aa0', seam: '#8d8b91', seamW: 0.015 }));
+  // 2 mm over the court's paving bed, which runs in under its front edge (and under the 4 mm door track)
+  root.add(tileFloor(x0, x1, BACK_Z, FRONT_Z, 0.6, { color: '#9c9aa0', seam: '#8d8b91', seamW: 0.015, y: 0.002 }));
   const opts = { color: '#7f848c', top: '#a6abb2' };
   root.add(
     wall('x', x0 - 0.09, x1 + 0.09, FRONT_Z, 0.5, 0.18, { ...opts, holes: [[DOOR_X - 0.85, DOOR_X + 0.85, 0, 1]] }),

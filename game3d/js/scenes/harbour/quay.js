@@ -49,7 +49,8 @@ function edge(p, a, b, { skip = [], ladders = true, line = true, foot = SEA_Y - 
     const m = (u0 + u1) / 2,
       len = u1 - u0;
     box(p, C.wall, at(m, -0.25), d, len + 0.5, 0.5, foot, -0.12, NO_CAST);
-    box(p, C.coping, at(m, -0.38), d, len + 0.04, 0.84, -0.12, 0.04, NO_CAST);
+    // (its top 5 mm over the 0.04 of what meets it along the edge, so the two never lie level)
+    box(p, C.coping, at(m, -0.38), d, len + 0.04, 0.84, -0.12, 0.045, NO_CAST);
     box(p, C.foam, at(m, 0.3), d, len, 0.36, SEA_Y + 0.002, SEA_Y + 0.008, NO_CAST);
     if (line) box(p, C.line, at(m, -1.05), d, Math.max(0.2, len - 0.8), 0.12, 0.004, 0.012, NO_CAST);
     for (let f = u0 + 1.2; f < u1 - 0.6; f += 4.4)

@@ -83,7 +83,8 @@ export function* officeBlockSteps(
   const out = { top, doors: [] };
   // the body: the ground floor's dark wall set back behind the piers, the upper floors flush with the face
   p.box(BLOCK.core, w - 0.3, gf, d - 0.3, cx, 0, cz, { surf: 'concrete' });
-  p.box(wall, w, top - gf, d, cx, gf, cz, { surf: 'concrete' });
+  // (a one-storey block gets a lid 1 cm thick instead, over the ground floor's top rather than level with it)
+  p.box(wall, w, Math.max(top - gf, 0.01), d, cx, gf, cz, { surf: 'concrete' });
   const F = faces(rect);
   for (const [id, f] of Object.entries(F)) {
     const bw = bayOf(f.L),

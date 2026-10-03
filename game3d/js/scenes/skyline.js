@@ -311,8 +311,10 @@ export function* skylineSteps(
   }
   for (const p of L.PATHS || []) {
     const color = C(p.color || GROUND.path);
+    // a path in its own stone (the terraces) lies 5 mm over the plain paths it overlaps, so the two never fight
+    const py = p.color && p.color !== GROUND.path ? -0.125 : -0.13;
     const sh = shapeOf(p);
-    if (sh) flat(gb, ccw(sh.map(local)), -0.13, color);
+    if (sh) flat(gb, ccw(sh.map(local)), py, color);
     else if (p.points) {
       const pts = p.points.map(pt).map(local),
         hw = (p.width || 1.5) / 2;
@@ -324,7 +326,7 @@ export function* skylineSteps(
           A = [a[0] - d[0] * hw, a[1] - d[1] * hw],
           B = [b[0] + d[0] * hw, b[1] + d[1] * hw];
         const P = (q0, s) => [q0[0] + n[0] * hw * s, q0[1] + n[1] * hw * s];
-        flat(gb, ccw([P(A, 1), P(B, 1), P(B, -1), P(A, -1)]), -0.13, color);
+        flat(gb, ccw([P(A, 1), P(B, 1), P(B, -1), P(A, -1)]), py, color);
       }
     }
     yield;

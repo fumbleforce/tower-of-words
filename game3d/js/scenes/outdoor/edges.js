@@ -41,7 +41,9 @@ function run(p, a, b, w, y, h, color, off = 0, gaps = [], cast = false) {
 }
 
 export function kerb(p, a, b, { w = 0.16, h = 0.1, gaps = [], off = 0, body = KERB.body, top = KERB.top } = {}) {
-  run(p, a, b, w, -0.06, h + 0.06 - 0.02, body, off, gaps);
+  // the body stops 2 mm under its top stone: its top then never lies level with a lower kerb's top stone where two
+  // cross, a bed's soil or a plinth beside it (they flickered against each other)
+  run(p, a, b, w, -0.06, h + 0.06 - 0.022, body, off, gaps);
   run(p, a, b, w - 0.02, h - 0.02, 0.02, top, off, gaps); // the top, a lighter worn stone
 }
 

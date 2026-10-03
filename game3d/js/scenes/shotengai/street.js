@@ -49,8 +49,9 @@ function* floor(group) {
     vary: 0.015,
     origin: [x0, zc],
   });
+  // (2 mm over the seafront's dark course, 0.007, where their ends run onto it)
   for (let x = ROW_W; x <= ROW_E + 0.01; x += BAYS.w)
-    pv.field([x - 0.08, x + 0.08, z0, z1], { pattern: 'grid', module: [0.16, 0.3], tones: GRANITE.dark, h: 0.007 });
+    pv.field([x - 0.08, x + 0.08, z0, z1], { pattern: 'grid', module: [0.16, 0.3], tones: GRANITE.dark, h: 0.009 });
   yield;
   const [w0, wz0, w1, wz1] = SHOP_WALK;
   pv.field([w0, w1, wz0, wz1], { pattern: 'grid', module: [0.6, 0.6], tones: GRANITE.mid, origin: [w0, wz0] });

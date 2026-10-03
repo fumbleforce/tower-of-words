@@ -32,7 +32,8 @@ export function upper(glass, lit, frame, lobby) {
       onFace(frame, f, -0.04, f.L + 0.04, y, y + 0.42, -0.02, 0.05); // the floor band
       for (let i = 0; i < bays; i++) {
         const g = f.fins && hash(`${f.id}|${k}|${i}`) < 0.3 ? lit : glass;
-        onFace(g, f, i * bw + 0.02, (i + 1) * bw - 0.02, y + 0.42, y + fh, -0.08, -0.02);
+        // the pane stops 3 mm short of the band (or the roof) over it, so their tops never lie level
+        onFace(g, f, i * bw + 0.02, (i + 1) * bw - 0.02, y + 0.42, y + fh - 0.003, -0.08, -0.02);
         if (f.fins) onFace(frame, f, (i + 0.5) * bw - 0.02, (i + 0.5) * bw + 0.02, y + 0.42, y + fh, -0.02, 0.04);
       }
     }
@@ -129,7 +130,7 @@ export function ground(g, frame) {
   // the strip of the ground floor between the lobby's east wall and the cut's east face (frame.js NU): a pale cap
   // over it, like every cut wall's top, so the room next door stays closed
   const capP = parts();
-  capP.box(LU, NU + 0.1, GF - 0.02, GF, 0.02, LN + 0.1);
+  capP.box(LU, NU + 0.1, GF - 0.016, GF + 0.004, 0.02, LN + 0.1); // 4 mm over the walls' tops it covers
   wallP.box(0, W, SUNK, GF, D - wt, D); // north face
   wallP.box(0, wt, SUNK, GF, 0, D - wt); // west face (the lobby's west wall)
   // the service door at the north end of the west face, where the service way from the court ends, under a hood
