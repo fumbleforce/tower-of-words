@@ -12,6 +12,8 @@ Jørgen, 2026-10-03, answering this doc's open questions:
 
 > "Let's keep it simple. There's no consequence for not completing the tickets. It's just you're not progressing in the story. Maybe you could get paid by tickets. That's quite neat. Since you're a contractor, that also would make sense. You're paid per task. And it's very simple to relate to. The clubs, no, you don't need a game. You don't need a mini game. It's just a social space where you can get to know certain people. Maybe some of the cast are also in some of these clubs. You get specific storylines. You get progression in these social clubs; they have special events and markers and things to discover that you can only find in these clubs. And the pace: there shouldn't be that many systems, it's mainly the ticket system and clubs, so let's not make it too difficult. Notice board is not a bad idea, both for single events and club memberships. So let's consolidate those into just a notice board."
 
+Clubs (2026-10-03, his words: "Skip lang and programming. art and something else"): swimming, tennis, art and karaoke.
+
 Applied below: skipping and pay in the core loop, the notice board under Order of systems, and Clubs.
 
 ## The principle
@@ -59,8 +61,8 @@ Proposed; days after day 2 are not fixed. Places are from [island.md](island.md)
 | Notice board | Day 3 | The plaza's `noticeboard` ([places.md](places.md), Fountain plaza), which already carries day 2's posters | Posters: 募集, 日時, 場所, 入会 |
 | Clubs: swimming | Week 1 | `pool`, `gym` | Rules signs (飛び込み禁止, 男子, 女子), counting lengths, 泳ぐ and ～たい |
 | Clubs: tennis | Week 1 | `tennis_courts`, `gym` | Numbers and keeping score; short calls between players |
-| Clubs: language | Week 2 | `dorm_commons` or `training_centre` | Self-introduction, asking and answering simple questions |
-| Clubs: programming | Week 2 | `server_hall` or `research_lab` | Katakana loanwords (プログラム, エラー, ファイル), which also trains Jørgen's weak katakana |
+| Clubs: art | Week 2 | `dorm_commons` or the shotengai (a room above a shop), sketching trips to the harbour and coast | Colours, shapes and things you draw; 描く, きれい, ～てみる |
+| Clubs: karaoke | Week 2 | The karaoke place on the shotengai | Song lyrics and their kana, cheering and thanks (上手, もう一回, ありがとう), choosing a song |
 
 The notice board is the one place to find what's on. It stands at the south of the fountain plaza, which Eric passes between the office and the dorms. It lists single events (a party, a festival, a trip) with day, time and place, and each club's poster. Joining a club means taking its slip from the board; nothing else is needed.
 
