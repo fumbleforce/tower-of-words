@@ -1,6 +1,6 @@
 # Systems
 
-Day 1 is Thursday 1 October in five periods, and only the story moves the clock. Also here: schedules, the crowd, ambient moments, bond steps, memory, gifts and their prices, typing a word and word practice, saying words to things, overheard Japanese, what a kotodama looks and sounds like, and saving (three slots and an autosave). Last checked against the game on 2026-09-29.
+Day 1 is Thursday 1 October in five periods, and only the story moves the clock. Also here: schedules, the crowd, ambient moments, bond steps, memory, gifts and their prices, typing a word and word practice, saying words to things, overheard Japanese, what a kotodama looks and sounds like, finds, repair tickets, and saving (three slots and an autosave). Last checked against the game on 2026-09-29.
 
 Elsewhere: the controls and screens for these are in [controls-and-ui.md](controls-and-ui.md); the words in [words.md](words.md); each person's tastes, register and relations in [cast.md](cast.md); the data keys a story file uses for all of this in game3d/story/FORMAT.md ("Sim data").
 
@@ -126,6 +126,21 @@ Things Eric picks up and keeps on his phone (Jørgen, 2026-09-30: "how lame, a p
 - A photo is a small print lying face up with a pin; Pick up walks Eric to it. The print disappears, the picture comes up close with its title and "Added to Photos · 2 of 5", and a tap closes it.
 - The Photos chip (top right, "Photos 2/5") appears with the first find. Its album shows the five frames in the day's order, the found ones as prints with their title and the rest as empty frames (no names, no hints), and under them the papers he has kept. Tapping one shows it up close again.
 - The pictures are stand-ins drawn in the game's flat look (game3d/js/finds/prints.js); titles, captions and the paper's text come from the story (game3d/story/finds.js). A found find is the flag `found_<id>`, so the save and Continue keep it.
+
+## Tickets
+
+Repair tickets are how the work reaches Eric (Jørgen, 2026-10-03: "the main storyline progression should perhaps revolve around the tickets and going to the office. But as this is not a super efficient company, you don't necessarily have to go to the office every day. You don't need to complete the ticket every day. You just use those as levers to progress the story."). Day 2 is the first glimpse: a simple Windows 95-style ticket app on his computers, with two tickets.
+
+- A ticket has an id (T-0001), a subject, who sent it, a short description in plain English with a few Japanese words (shown with reading and English), and a status: New, In progress or Done. The words are the story's (game3d/story/tickets.js).
+- The story adds tickets to his queue and closes them, by a scene or by a condition the ticket names. There are no deadlines, no penalties and no way to fail one (Jørgen, 2026-10-03: "There's no consequence for not completing the tickets. It's just you're not progressing in the story."): an open ticket only holds the story where it is, for as long as it stays open. In the app Eric reads them and can take a new one (it moves to In progress); he never closes one there.
+- Eric is a contractor paid per task (Jørgen: "Maybe you could get paid by tickets ... Since you're a contractor ... You're paid per task."). Each ticket pays a set amount, once, when it closes: it goes into his yen (the same money as Gifts, saved with it), with a notice "Paid ¥5,000 for T-0002 · ...". The app shows what a ticket pays and what the closed ones have paid him. Spending it beyond the drinks is to build.
+
+| Id | Subject | From | Pays |
+|---|---|---|---|
+| T-0001 | B2 copier eats paper | Mori | ¥3,000 |
+| T-0002 | Train doors at Honsha | Honsha station, via Mio | ¥5,000 |
+- The app opens only when the story puts him at a computer (Eric's room PC, his B2 desk); how it looks is in [controls-and-ui.md](controls-and-ui.md).
+- Tickets are flags (`ticket_T0001`, and whether he has opened it), so the save, Continue and the next day keep them like everything else.
 
 ## Saving
 

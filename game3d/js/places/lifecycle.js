@@ -14,6 +14,7 @@ import { playMusic } from '../ui.js';
 import { sim, PERIODS as PERIOD_ORDER, absorb, applySchedule, save } from '../sim.js';
 import * as trips from '../trips.js';
 import { installFinds, findSpotSteps, syncFinds } from '../finds/index.js';
+import { installTickets } from '../tickets/index.js';
 import { installBoot, installPlacePlugin, watchPlacePlugins } from '../plugins.js';
 import { installCreatures } from '../creatures/index.js';
 import { attachCrowd } from '../crowd/index.js';
@@ -43,6 +44,7 @@ export function createPlaceLifecycle(
 ) {
   const ui = game.ui;
   installFinds(game); // the photos and papers Eric picks up (finds/index.js)
+  installTickets(game); // the repair tickets and their app on Eric's computers (tickets/index.js)
   watchPlacePlugins(game);
   // preparation runs a slice a frame while a place is being played, flat out while the player waits for it
   setUrgent(() => !game.place || document.body.classList.contains('loading'));
