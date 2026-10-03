@@ -10,6 +10,7 @@ import { clone } from '../vendor/utils/SkeletonUtils.js';
 import { GLTFLoader } from '../vendor/loaders/GLTFLoader.js';
 import { meshyFrom, loadEric, GESTURES } from './avatar.js';
 import { loadMio, CDIR, V } from './mio.js';
+import { buildOf, shapeChibi } from './chibi-builds.js';
 // settings.js needs a page; the unit tests import the cast in Node, where the look is off
 const S = typeof addEventListener === 'function' ? await import('./settings.js') : null;
 
@@ -21,25 +22,8 @@ HEIGHT.aoi = HEIGHT.rei = 1.09;
 // people in cast.js that take their chibi through cast3d.js
 export const CHIBI_CAST = CHIBI_ON ? Object.keys(HEIGHT).filter((id) => id !== 'eric' && id !== 'mio') : [];
 
-// Jørgen, on the first in-game round: "Their heads are a little too big still". The head bone (and with it the hair,
-// glasses and face) is 15% smaller, scaled at its joint so the neck stays joined; the clips only turn it, so the size
-// holds. loadMeshy measures the model after this and brings it back to HEIGHT, so the body takes the freed height,
-// and the strides grow with the legs (the clips' speeds were measured on the old proportions).
-const HEAD = 0.85;
-function smallerHead(scene, gait) {
-  const tall = () => {
-    scene.updateMatrixWorld(true);
-    scene.traverse((o) => o.isSkinnedMesh && (o.boundingBox = null));
-    const b = new THREE.Box3().setFromObject(scene);
-    return b.max.y - b.min.y;
-  };
-  const before = tall();
-  scene.getObjectByName('Head').scale.setScalar(HEAD);
-  const k = before / tall();
-  gait.walkV *= k;
-  gait.runV *= k;
-  return scene;
-}
+// Each person's build (head size, slimmer or rounder trunk, leg and arm length) is applied once to the loaded files,
+// before any copy is made: chibi-builds.js.
 
 // One set of files per person, loaded once; every place that has them gets its own copy of the skeleton, sharing the
 // mesh, texture and clips (chibiFrom).
@@ -57,10 +41,12 @@ export function chibiFiles(id) {
     new GLTFLoader().loadAsync(dir + `model${lo}.glb` + V()),
     new THREE.TextureLoader().loadAsync(dir + `base${lo}.webp` + V()),
   ]).then(([data, gltf, tex]) => {
+    const shaped = shapeChibi(gltf.scene, data.clips, buildOf(id));
+    const gait = { ...data.gait, walkV: data.gait.walkV * shaped.stride, runV: data.gait.runV * shaped.stride };
     // the four motions parsed once; the phone pose and the gestures stay JSON, as meshyFrom takes them
     const clips = { ...data.clips };
     for (const n of ['walk', 'run', 'idle', 'sit']) clips[n] = THREE.AnimationClip.parse(data.clips[n]);
-    return { id, gait: data.gait, scene: gltf.scene, tex, clips };
+    return { id, gait, scene: gltf.scene, tex, clips };
   }));
 }
 
@@ -68,7 +54,7 @@ export function chibiFiles(id) {
 export function chibiFrom(f) {
   const gait = { ...f.gait },
     c = f.clips;
-  const scene = smallerHead(clone(f.scene), gait);
+  const scene = clone(f.scene);
   const parts = [{ scene, animations: [c.walk] }, { animations: [c.run] }, c.idle, { animations: [c.sit] }, f.tex];
   parts.push(c.phone || null, ...GESTURES.map((g) => c[g] || null));
   const m = meshyFrom('chibi-' + f.id, parts, { height: HEIGHT[f.id], stride: gait });

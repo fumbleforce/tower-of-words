@@ -1,4 +1,5 @@
-"""Game copies of the Meshy chibis (Review chibi-cast-meshy-1: kuro-1, eric-1, mio-3; chibi-cast-meshy-2: the rest).
+"""Game copies of the Meshy chibis (Review chibi-cast-meshy-1: kuro-1, eric-1, mio-3; chibi-cast-meshy-2: the rest;
+chibi-proportions-1: rei-2).
 
 From each rigged 60k-face file in art/parts/<round>/meshy/ (PICKS) this writes game3d/assets/characters/chibi-<id>/:
   model.glb     the mesh decimated to about 20k triangles (skin weights carried over, the full mesh's normals), the
@@ -19,7 +20,8 @@ PARTS = os.environ.get('CHIBI_PARTS', os.path.join(ROOT, 'art/parts'))
 OUT = os.path.join(ROOT, 'game3d/assets/characters')
 R1, R2 = 'chibi-cast-meshy', 'chibi-cast-meshy-2'
 PICKS = {'eric': (R1, 'eric-1'), 'mio': (R1, 'mio-3'), 'kuro': (R1, 'kuro-1')}
-PICKS.update({w: (R2, w + '-1') for w in ('mori', 'kenji', 'emi', 'guard', 'kuroda', 'aoi', 'rei')})
+PICKS.update({w: (R2, w + '-1') for w in ('mori', 'kenji', 'emi', 'guard', 'kuroda', 'aoi')})
+PICKS['rei'] = ('chibi-proportions-1', 'rei-2')  # a sly, confident face (Review chibi-proportions-1)
 # file suffix: triangles
 TIERS = {'': 20000, '-lo': 8000}
 TEX = int(os.environ.get('CHIBI_TEX', 1024))
