@@ -75,17 +75,22 @@ const KIND = {
   sport: ['hoodie'],
 };
 
-// a variant's colours: hair, top and bottom each from their own list, by a hash of i
+// a variant's colours: i counts through every mix of the base's hair, top and bottom once before any comes back (the
+// top changes from each i to the next, then the hair, then the bottom), so people made one after another, and the
+// same base a few people apart, don't come out alike (a hash of i gave neighbours the same colours now and then)
 export function variant(base, i) {
   const g = GEN[base],
-    h = Math.imul(i + 1, 2654435761) >>> 0;
-  const at = (list, k) => list[k % list.length];
-  const top = at(g.top, h >>> 3);
-  return {
-    hair: at(g.hair, h >>> 11),
-    top,
-    bottom: g.bottom === 'top' ? top : at(g.bottom, h >>> 19),
-  };
+    nt = g.top.length,
+    nh = g.hair.length,
+    nb = g.bottom === 'top' ? 1 : g.bottom.length,
+    n = nt * nh * nb;
+  const k = ((i % n) + n) % n,
+    t = k % nt,
+    q = Math.floor(k / nt);
+  const h = (q + t) % nh,
+    b = (Math.floor(q / nh) + t + h) % nb;
+  const top = g.top[t];
+  return { hair: g.hair[h], top, bottom: g.bottom === 'top' ? top : g.bottom[b] };
 }
 
 export const GEN_ON = CHIBI_ON;
@@ -97,8 +102,13 @@ if (GEN_ON)
     }),
   );
 
+// scratch for the per-frame arm update (no allocation a frame: the garbage collector's pauses showed as hitches)
 const _v = new THREE.Vector3(),
   _w = new THREE.Vector3(),
+  _s = new THREE.Vector3(),
+  _t = new THREE.Vector3(),
+  _turn = new THREE.Quaternion(),
+  _world = new THREE.Quaternion(),
   _q = new THREE.Quaternion(),
   _p = new THREE.Quaternion();
 const bone = (m, name) => m.model.getObjectByName(name);
@@ -161,9 +171,9 @@ function proxyParts(m) {
     m.model.updateMatrixWorld(true);
     m.root.getWorldQuaternion(_q);
     for (const a of arms) {
-      const s = a.sh.getWorldPosition(new THREE.Vector3()),
+      const s = a.sh.getWorldPosition(_s),
         d = a.hand.getWorldPosition(_w).sub(s);
-      a.anchor.position.copy(m.root.worldToLocal(s.clone()));
+      a.anchor.position.copy(m.root.worldToLocal(_t.copy(s)));
       const r = a.arm.rotation,
         rest = Math.abs(r.x) + Math.abs(r.y) + Math.abs(r.z) < 1e-3,
         mine = r.equals(a.auto);
@@ -175,9 +185,9 @@ function proxyParts(m) {
       }
       // leading: a scene has turned the stand-in; the upper arm turns so the hand goes to the stand-in's hand
       a.anchor.updateMatrixWorld(true);
-      const t = a.arm.userData.hand.getWorldPosition(new THREE.Vector3()).sub(s).normalize();
-      const turn = new THREE.Quaternion().setFromUnitVectors(d.normalize(), t);
-      const world = a.sh.getWorldQuaternion(new THREE.Quaternion()).premultiply(turn);
+      const t = a.arm.userData.hand.getWorldPosition(_t).sub(s).normalize();
+      const turn = _turn.setFromUnitVectors(d.normalize(), t);
+      const world = a.sh.getWorldQuaternion(_world).premultiply(turn);
       a.sh.quaternion.copy(a.sh.parent.getWorldQuaternion(_p).invert().multiply(world));
       a.sh.updateMatrixWorld(true);
     }

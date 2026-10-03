@@ -2,10 +2,10 @@
   "defaultLines": 400,
   "exceptions": {
     "game3d/js/avatar.js": {
-      "lines": 476,
-      "bytes": 15297,
+      "lines": 475,
+      "bytes": 15323,
       "owner": "codex-tui",
-      "review": "C-0071; 2026-10-03 C-0384 loadMeshy split into the async load and a synchronous meshyFrom, so one set of chibi files makes several people (chibi.js); 2026-10-03 C-0402 the stride measurement and clip actions moved to movement/gait.js",
+      "review": "C-0071; 2026-10-03 C-0384 loadMeshy split into the async load and a synchronous meshyFrom, so one set of chibi files makes several people (chibi.js); 2026-10-03 C-0402 the stride measurement and clip actions moved to movement/gait.js; C-0404 meshyFrom takes the height chibi.js measured once (a skinned box per copy stalled phones)",
       "reason": "Existing avatar loading, rig mapping and animation playback; keep the ceiling until the character pipeline split."
     },
     "game3d/js/cast.js": {

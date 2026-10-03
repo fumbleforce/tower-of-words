@@ -3,9 +3,10 @@
 // (every texture's pixels with mipmaps, every geometry's buffers; estimated from the objects, as WebGL can't report it)
 // plus the named people's share of it (Eric, Mio and the place's people) and the crowd's (the ambient crowd and the
 // background people: Review chibi-crowd-1).
-//   node game3d/tools/chibi-perf.mjs [q=0,1] [places=train,gate,forecourt,office,plaza]
+//   node game3d/tools/chibi-perf.mjs [q=0,1] [places=train,gate,forecourt,office,plaza] [size=phone|desktop] [chibi=0,1]
+// size=desktop: 1366 x 860 at DPR 1, no CPU throttling (the fast test's desktop).
 // A place may name its time of day, place:period (forecourt:morning,plaza:lunch,shotengai:lunch): the crowd for it.
-// BASE=.claude/worktrees/<name>/game3d measures a worktree. Prints a table; writes game3d/shots/chibi/perf.json.
+// BASE=.claude/worktrees/<name>/game3d measures a worktree. Prints a table; writes game3d/shots/chibi/perf-<size>.json.
 import fs from 'node:fs';
 import path from 'node:path';
 import { withBrowserJob } from '../../tools/lib/browser-job.mjs';
@@ -13,6 +14,12 @@ import { withBrowserJob } from '../../tools/lib/browser-job.mjs';
 const arg = (k, d) => (process.argv.find((a) => a.startsWith(k + '=')) || '').split('=')[1] || d;
 const QS = arg('q', '0,1').split(',');
 const PLACES = arg('places', 'train,gate,forecourt,office,plaza').split(',');
+const SIZE = arg('size', 'phone');
+const CHIBI = arg('chibi', '0,1').split(',');
+const VIEW =
+  SIZE === 'desktop'
+    ? { viewport: { width: 1366, height: 860 }, deviceScaleFactor: 1 }
+    : { viewport: { width: 393, height: 851 }, deviceScaleFactor: 2.75, isMobile: true, hasTouch: true };
 const G = path.resolve(path.dirname(new URL(import.meta.url).pathname), '..');
 const base = `http://127.0.0.1:8771/${process.env.BASE || 'game3d'}/index.html`;
 const rows = [];
@@ -20,13 +27,13 @@ await withBrowserJob(
   'chibi-perf',
   async (browser) => {
     for (const q of QS)
-      for (const chibi of ['0', '1'])
+      for (const chibi of CHIBI)
         for (const spec of PLACES) {
           const [place, period] = spec.split(':');
-          const ctx = await browser.newContext({ viewport: { width: 393, height: 851 }, deviceScaleFactor: 2.75, isMobile: true, hasTouch: true });
+          const ctx = await browser.newContext(VIEW);
           const p = await ctx.newPage();
           const cdp = await ctx.newCDPSession(p);
-          await cdp.send('Emulation.setCPUThrottlingRate', { rate: 4 });
+          if (SIZE !== 'desktop') await cdp.send('Emulation.setCPUThrottlingRate', { rate: 4 });
           const errs = [];
           p.on('pageerror', (e) => errs.push(e.message));
           await p.goto(`${base}?q=${q}&place=${place}&skip&chibi=${chibi}`);
@@ -101,7 +108,15 @@ await withBrowserJob(
             const cast = sum(...people.map((x) => x.root));
             const extra = [...(g.place.crowd || []), ...Object.values(g.place.extras || {})].filter((x) => x?.root);
             const crowd = { ...sum(...extra.map((x) => x.root)), n: extra.length };
+            // which mesh tier each chibi in sight draws (chibi.js), and how many draw a sun shadow
+            const tiers = {};
+            g.place.scene.traverseVisible((o) => {
+              if (!o.isSkinnedMesh || o.userData.tier == null) return;
+              const k = (o.userData.tier || 'hi') + (o.castShadow ? '+shadow' : '');
+              tiers[k] = (tiers[k] || 0) + 1;
+            });
             return {
+              tiers,
               ms50: +frames[60].toFixed(1),
               ms95: +frames[114].toFixed(1),
               calls: Math.round(calls / 120),
@@ -114,7 +129,7 @@ await withBrowserJob(
               geometries: g.renderer.info.memory.geometries,
             };
           }, period);
-          rows.push({ q, chibi, place: spec, ...r, errors: errs });
+          rows.push({ size: SIZE, q, chibi, place: spec, ...r, errors: errs });
           console.log(q, chibi, place, JSON.stringify(r), errs.length ? 'ERR ' + errs.join(' | ') : '');
           await ctx.close();
         }
@@ -122,7 +137,7 @@ await withBrowserJob(
   { timeoutMs: 600000 },
 );
 fs.mkdirSync(path.join(G, 'shots/chibi'), { recursive: true });
-fs.writeFileSync(path.join(G, 'shots/chibi/perf.json'), JSON.stringify(rows, null, 1));
+fs.writeFileSync(path.join(G, `shots/chibi/perf-${SIZE}.json`), JSON.stringify(rows, null, 1));
 console.log('\nq chibi place            calls  tris    ms50  ms95  sceneTexMB sceneGeoMB castTexMB castTris crowdN crowdTexMB crowdGeoMB');
 for (const r of rows)
   console.log(

@@ -266,7 +266,7 @@ export async function loadMeshy(id, { height = 1.2, dir = CDIR + id + '/', strid
   return meshyFrom(id, files, { height, stride });
 }
 // The person, at once, from files already loaded in loadMeshy's order (chibi.js makes several from one set).
-export function meshyFrom(id, [walk, run, idle, sitG, tex, phoneJson, ...gj], { height = 1.2, stride } = {}) {
+export function meshyFrom(id, [walk, run, idle, sitG, tex, phoneJson, ...gj], { height = 1.2, stride, size } = {}) {
   tex.flipY = false;
   tex.colorSpace = THREE.SRGBColorSpace;
   const model = walk.scene;
@@ -291,8 +291,7 @@ export function meshyFrom(id, [walk, run, idle, sitG, tex, phoneJson, ...gj], { 
     o.material.dispose();
     o.material = m;
   });
-  const box = new THREE.Box3().setFromObject(model);
-  const H = box.max.y - box.min.y;
+  const H = size || new THREE.Box3().setFromObject(model).getSize(new THREE.Vector3()).y; // size: chibi.js
   const root = new THREE.Group(),
     holder = new THREE.Group();
   holder.scale.setScalar(height / H);
