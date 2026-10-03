@@ -69,12 +69,24 @@ export default [
     id: 'd2-brief-order-assess',
     description: 'The ordered sensor at B2, asking for time to assess, the invitation, and the desk to evening.',
     seed: seed('office', { ...ticket, d2_order_sensor: true }),
-    choices: ['I’ll need time to see what you’ve got.'],
-    actions: [use('emi'), use('my_desk')],
+    choices: ['I’ll need time to see what you’ve got.', 'Read Mori’s notes for the afternoon.'],
+    actions: [use('emi'), use('my_desk'), use('my_desk')],
     expect: {
-      nodes: ['d2_brief', 'd2_assess', 'd2_invitation', 'd2_work'],
-      flags: { d2_brief_done: true, d2_shift_done: true },
+      nodes: ['d2_brief', 'd2_assess', 'd2_invitation', 'd2_work', 'd2_notes', 'd2_desk_later'],
+      flags: { d2_brief_done: true, d2_shift_done: true, ticket_T0001: 'done', ticket_T0002: 'progress' },
       period: 'evening',
+    },
+  },
+  {
+    id: 'd2-desk-defer',
+    description: 'Read the repair list twice and get up without spending the afternoon.',
+    seed: seed('office', briefed),
+    choices: ['Get up.', 'Get up.'],
+    actions: [use('my_desk'), use('my_chair')],
+    expect: {
+      nodes: ['d2_work', 'd2_leave_desk'],
+      flags: { d2_shift_done: false, ticket_T0001: 'done', ticket_T0002: 'progress' },
+      period: 'morning',
     },
   },
   {
@@ -200,11 +212,15 @@ export default [
     choices: [
       'Write home.',
       '“I found the office. Still unpacking. I’ll call at the weekend.”',
-      'Read the repair inbox.',
+      'Open repair requests.',
+      'Open repair requests.',
       'Close the computer.',
     ],
-    actions: [use('computer'), use('computer'), use('computer')],
-    expect: { nodes: ['d2_computer', 'd2_write_home', 'd2_send_home', 'd2_inbox', 'd2_close_computer'], flags: { d2_wrote_home: true } },
+    actions: [use('computer'), use('computer'), use('computer'), use('computer')],
+    expect: {
+      nodes: ['d2_computer', 'd2_write_home', 'd2_send_home', 'd2_inbox', 'd2_close_computer'],
+      flags: { d2_wrote_home: true, ticket_T0001: 'done', ticket_T0002: 'new' }, period: 'morning',
+    },
   },
   {
     id: 'd2-computer-later',

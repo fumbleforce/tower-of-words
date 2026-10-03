@@ -1,4 +1,4 @@
-import { direction, sayFallbacks, fallbackNodes } from './shared.js';
+import { direction, sayFallbacks, fallbackNodes, repairQueue } from './shared.js';
 export default {
   start: 'd2_office',
   on: {
@@ -48,7 +48,7 @@ export default {
       { go: 'd2_invitation' },
     ],
     d2_invitation: [
-      { say: 'emi', emo: 'casual', text: 'Mori’s left his maintenance notes on your desk. Have a look through them this afternoon.' },
+      { say: 'emi', emo: 'casual', text: 'Your repair list is on the computer. Mori’s left his notes beside it; have a look through them this afternoon.' },
       { do: 'cam', on: 'kenji', zoom: 1.2 },
       { say: 'kenji', emo: 'bright', text: 'Eric! After work. Food. Welcome food!' },
       { do: 'cam', on: 'emi', zoom: 1.2 },
@@ -63,6 +63,18 @@ export default {
     ],
     d2_work: [
       { do: 'sitDown' },
+      ...repairQueue,
+      { do: 'tickets' }, { do: 'save' },
+      { choice: [
+        { text: 'Read Mori’s notes for the afternoon.', go: 'd2_notes' },
+        { text: 'Get up.', go: 'd2_leave_desk' },
+      ] },
+    ],
+    d2_leave_desk: [
+      { do: 'stand', who: 'eric' },
+      { do: 'goal', text: 'Sit at your desk when you’re ready to work.', at: 'my_desk' }, { do: 'save' },
+    ],
+    d2_notes: [
       '> By the time you finish going through Mori’s notes, the others are packing up.',
       { set: 'd2_shift_done' }, { do: 'period', to: 'evening' }, { do: 'stand', who: 'eric' },
       { do: 'officeDay2', state: 'afterWork' },
@@ -71,7 +83,10 @@ export default {
     d2_emi_waiting: [{ say: 'emi', emo: 'casual', text: 'Do the station check first. Then we can have that chat.' }],
     d2_emi_later: [{ say: 'emi', emo: 'casual', text: 'I ought to be upstairs. We’ll catch up later.' }],
     d2_desk_wait: [{ say: 'eric', emo: 'tired', text: 'I should finish with Emi first.' }],
-    d2_desk_later: [{ say: 'eric', emo: 'tired', text: 'That can wait until Monday.' }],
+    d2_desk_later: [
+      { do: 'sitDown' }, ...repairQueue, { do: 'tickets' },
+      { do: 'stand', who: 'eric' }, { do: 'save' },
+    ],
     d2_mio_work: [{ say: 'mio', emo: 'tired', text: 'Can you give me a minute? It’s nearly finished restarting.' }],
     d2_mori_work: [{ say: 'mori', emo: 'polite', text: '古い資料ですが、よかったら使ってください。', en: 'These notes are old, but please use them if they help.' }],
     d2_kenji_work: [{ say: 'kenji', emo: 'sheepish', text: 'Ah, sorry. Is loading. Very slow.' }],

@@ -1,5 +1,11 @@
 // Story data helpers, evaluated when the files load. The engine still receives ordinary FORMAT objects.
 export const speakers = { miotext: { name: 'Mio', role: 'message', phone: true } };
+// Day 2 follows the completed copier repair. Older saves also acquire the queue when either PC opens.
+export const repairQueue = [
+  { do: 'ticket', close: 'T-0001' },
+  { do: 'ticket', add: 'T-0002' },
+  { if: 'd2_checked || d2_ticket_done', then: [{ do: 'ticket', start: 'T-0002' }] },
+];
 export function direction(station, office, party, home) {
   return [{ if: '!d2_ticket_done', then: [{ do: 'goal', text: 'Check the train doors at Honsha station.', at: station }], else: [
     { if: '!d2_shift_done', then: [

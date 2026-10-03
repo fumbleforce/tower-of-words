@@ -1,4 +1,4 @@
-import { direction, speakers, sayFallbacks, fallbackNodes } from './shared.js';
+import { direction, speakers, sayFallbacks, fallbackNodes, repairQueue } from './shared.js';
 export default {
   speakers,
   start: 'd2_room',
@@ -14,6 +14,7 @@ export default {
   goal: { door_out: '!d2_party_done' },
   nodes: {
     d2_room: [
+      ...repairQueue,
       { if: 'd2_party_done', then: [{ go: 'd2_end' }] },
       { if: '!d2_started', then: [
         { set: 'd2_started' }, { unset: 'going_home' }, { do: 'period', to: 'morning' },
@@ -32,16 +33,14 @@ export default {
         { say: 'eric', emo: 'tired', text: 'At least they set up my account.' },
       ] },
       { choice: [
-        { text: 'Read the repair inbox.', go: 'd2_inbox' },
+        { text: 'Open repair requests.', go: 'd2_inbox' },
         { text: 'Write home.', go: 'd2_write_home', if: '!d2_wrote_home' },
         { text: 'Close the computer.', go: 'd2_close_computer' },
       ] },
     ],
     d2_inbox: [
-      { if: 'd2_ticket_done', then: [{ say: 'eric', emo: 'tired', text: 'The station report went through.' }], else: [
-        { say: 'eric', emo: 'tired', text: 'Train doors, Honsha. They already put my name on it.' },
-        '> The note from Emi asks for a test result before she orders the sensor.',
-      ] },
+      ...repairQueue,
+      { do: 'tickets' }, { do: 'save' },
       { go: 'd2_close_computer' },
     ],
     d2_write_home: [
