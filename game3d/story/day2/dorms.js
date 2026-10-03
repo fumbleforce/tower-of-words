@@ -56,8 +56,17 @@ export default {
     d2_leave_room: [{ do: 'trip', to: 'dorm_court' }],
     d2_bed: [{ say: 'eric', emo: 'tired', text: 'I need to buy a second pillow.' }],
     d2_window: [{ say: 'eric', emo: 'dry', text: 'I can hear people in the courtyard. I can’t see them from here.' }],
-    d2_boxes: [{ say: 'eric', emo: 'tired', text: 'There are the shirts. Under the towels.' }],
-    d2_end: [{ do: 'goal', text: '' }, { set: 'd2_complete' }, { do: 'save' }, { do: 'end' }],
+    d2_boxes: [{ say: 'eric', emo: 'tired', text: 'There are the shirts. I should hang one up for Monday.' }],
+    d2_end: [
+      { do: 'goal', text: '' },
+      { if: '!d2_complete', then: [
+        { do: 'walk', who: 'eric', to: 'desk_front' }, { do: 'face', who: 'eric', to: 'computer' },
+        { do: 'cam', on: 'computer', zoom: 1.2 },
+        { say: 'eric', emo: 'warm', text: 'I can tell them about tonight when I call.' },
+        { do: 'cam', back: true },
+      ] },
+      { set: 'd2_complete' }, { do: 'save' }, { do: 'end' },
+    ],
     ...fallbackNodes,
   },
 };

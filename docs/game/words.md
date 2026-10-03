@@ -54,11 +54,13 @@ Day 1 teaches nine words, in the order a player meets them. Who teaches each, an
 
 ## Day 2 (to build)
 
-The authored [day-2 set](../../game3d/story/day2/README.md) adds the following records from `story/day2/words.js`. Registration, audio and runtime teaching are pending. The teacher and teaching nodes are in [welcome.md](stories/day2/welcome.md).
+The authored [day-2 set](../../game3d/story/day2/README.md) adds the following records from `story/day2/words.js`. Registration, audio and runtime teaching are pending. The teacher and teaching nodes are in [welcome.md](stories/day2/welcome.md) and [visits.md](stories/day2/visits.md).
 
 | Id | Japanese | Reading | Meaning | Kind |
 |---|---|---|---|---|
 | `tabetai` | 食べたい | tabetai | I want to eat | phrase (to build) |
 | `nomitai` | 飲みたい | nomitai | I want to drink | phrase (to build) |
+| `mitai` | 見たい | mitai | I want to see | phrase (to build) |
+| `ikitai` | 行きたい | ikitai | I want to go | phrase (to build) |
 
-The single new pattern is the **-tai form**, saying what you want to do yourself. The Words panel pairs 食べたい with 食べる (taberu, to eat), and 飲みたい with 飲む (nomu, to drink). The first is required; the second is optional reinforcement. Both start unknown, become known through typing, and are things to say to people. Neither commands a machine.
+The single new pattern is the **-tai form**, saying what you want to do yourself. The Words panel pairs 食べたい with 食べる (taberu, to eat), 飲みたい with 飲む (nomu, to drink), 見たい with 見る (miru, to see), and 行きたい with 行く (iku, to go). Only tabetai is required; the other three are optional reinforcement in the gathering or nearby encounters. All start unknown, become known through typing, and are things to say to people. None commands a machine.

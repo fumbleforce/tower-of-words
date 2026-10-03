@@ -13,7 +13,7 @@ export default {
     d2_to_office: [{ do: 'trip', to: 'forecourt' }],
     d2_to_lane: [{ do: 'trip', to: 'east_lane' }],
     d2_to_shops: [{ do: 'trip', to: 'shotengai' }],
-    d2_fountain: [{ say: 'eric', emo: 'tired', text: 'I could sit here a minute.' }],
+    d2_fountain: [{ say: 'eric', emo: 'tired', text: 'I can hear the water from the office steps. I thought it was a pipe leaking.' }],
     ...fallbackNodes,
   },
 };

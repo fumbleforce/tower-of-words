@@ -119,7 +119,7 @@ One car of the monorail, crossing the bay from the mainland to Honsha station. T
 
 ### Who's there when
 
-Day 2 (to build): Eric returns to the empty, stationary car for the door check. Mio joins him only before the B2 briefing and if `lunch_mio || mio_warm >= 2`; the day-1 passengers are absent. No departure sequence runs.
+Day 2 (to build): Eric returns to the empty, stationary car for the door check. Mio joins him only while `!d2_ticket_done` and if `lunch_mio || mio_warm >= 2`; she walks out to B2 immediately after the report; the day-1 passengers are absent. No departure sequence runs.
 
 The monorail has one period, early morning.
 
@@ -404,7 +404,7 @@ In the morning the sun comes from the east-south-east behind the camera's left s
 
 ### Day-2 party plan (not built)
 
-The authored [day-2 story](stories/day2/README.md) places B2's welcome food on the promenade. Mori orders rice balls and egg sandwiches from the existing canteen earlier in the day; Kenji helps him collect the takeaway before meeting Eric. This requires no arcade shop to open and no shopping task for Eric. At one sea-facing bench, Mori and Eric sit, with Mio and Kenji standing beside its ends, all in the same conversation space. Seats, actor spots and phone framing still need to be built and checked; the current “Seats: None” below describes the shipped place.
+The authored [day-2 story](stories/day2/README.md) places B2's welcome food on the promenade. Mori orders rice balls and egg sandwiches from the existing canteen earlier in the day; Kenji helps him collect the takeaway before meeting Eric. This requires no arcade shop to open and no shopping task for Eric. At one sea-facing bench, Mori and Eric sit, with Mio and Kenji standing beside its ends, all in the same conversation space. Mori packs the leftovers in the back alley afterwards; Eric can stop with him there. The [story handoff](../../game3d/story/day2/README.md) specifies this set’s closure cards, exit label, small discovery props and movement. Seats, actor spots and phone framing still need to be built and checked; the current “Seats: None” below describes the shipped place.
 
 ### Things
 
@@ -529,7 +529,7 @@ None.
 
 ### Who's there when
 
-Day 2 (to build): Only the established ambient population; no new story actor. The north crossing is visibly closed for resurfacing during both periods.
+Day 2 (to build): Only the established ambient population; no new story actor. The liquor-shop tag is an optional discovery ([Day-2 visits](stories/day2/visits.md)). The north crossing is visibly closed for resurfacing during both periods.
 
 None of the cast yet.
 
@@ -615,7 +615,7 @@ None.
 
 ### Who's there when
 
-Day 2 (to build): Only the established ambient population; Eric can visit the lookout. The pool approach is visibly closed for resurfacing during both periods.
+Day 2 (to build): Hamada (`kuroda`) visits the lookout telescope after work; he is absent here in the morning and absent from the day-2 gate and train. The optional encounter and sight are in [Day-2 visits](stories/day2/visits.md). The pool approach is visibly closed for resurfacing during both periods.
 
 None of the cast yet.
 
@@ -1056,7 +1056,7 @@ The second basement of head office: IT support. One compact floor, close to squa
 
 ### Who's there when
 
-Day 2 (to build): Mori, Mio and Kenji work here before the shift ends. Emi meets Eric here after the station check. After work, Emi is upstairs and the others leave for the gathering; no duplicate party cast remains at B2.
+Day 2 (to build): Mori and Kenji work here before the shift ends. Mio is at the station on the warm promise history (`lunch_mio || mio_warm >= 2`) until `d2_ticket_done`; she then walks to B2. On the other history she works at B2 throughout the morning. Emi meets Eric here after the station check. After work, Emi is upstairs and the others leave for the gathering; no duplicate party cast remains at B2.
 
 The story moves the clock ([systems.md](systems.md)): morning when Eric arrives, lunch at 12:10, afternoon at 14:00, evening at 18:05.
 

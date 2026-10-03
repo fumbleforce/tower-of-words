@@ -32,5 +32,5 @@ export const NEEDS = {
     people: ['mio', 'mori', 'kenji'], things: ['mio', 'mori', 'kenji', 'party_seat'],
     spots: ['party_group', 'party_kenji', 'party_mio'], seats: ['party_seat', 'party_mori'], hooks: ['partySetup', 'partyFood'],
   },
-  east_coast: { things: ['lookout'] },
+  east_coast: { people: ['kuroda'], things: ['lookout', 'kuroda'], spots: ['lookout_view'], hooks: ['coastVisit'] },
 };
