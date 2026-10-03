@@ -8,7 +8,7 @@
 //   them, its spread gapCV and the most in any 3 s; afterScene = new walkers in the 4 s after an 8 s scene; at = when
 //   each set off). SEQ=n: n more shots 1.5 s apart.
 //   (NOSHOT=<places>: shoot those where Eric came in, not where the crowd is busiest)
-//   QS=&chibi=1 adds to the query (the chibi look). BASE=.claude/worktrees/<name>/game3d for a worktree. Exits 1 on a page error, an overlap or spin, or a route
+//   QS=&chibi=0 adds to the query (the code-built people instead of the default chibi look). BASE=.claude/worktrees/<name>/game3d for a worktree. Exits 1 on a page error, an overlap or spin, or a route
 //   that does not resolve.
 import fs from 'node:fs';
 import { withBrowserJob } from '../../tools/lib/browser-job.mjs';

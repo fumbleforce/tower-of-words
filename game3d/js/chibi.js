@@ -1,6 +1,6 @@
 // The Meshy chibis of the named cast (Review chibi-cast-meshy-1: Eric, Mio, Kuro; chibi-cast-meshy-2: the rest) as a
 // switchable look. ?chibi=1 (or ?chibi=0) decides for one visit; otherwise Settings > Graphics > Chibi cast, from the
-// next load. When on, they get these bodies everywhere they appear; the approved models stay the default.
+// next load. On by default (Jørgen, 2026-10-03); when on, they get these bodies everywhere they appear.
 // Files in assets/characters/chibi-<id>/: model.glb and base.webp (tools/characters/chibi_game.py: about 20k
 // triangles and a 1024 px texture baked from the full model; -lo: 8k, for phones), and clips.json
 // (tools/characters/chibi-bake.mjs: the game's walk, run, idle, sit, phone pose and Eric's gestures carried over
