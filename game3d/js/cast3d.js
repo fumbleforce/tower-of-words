@@ -44,14 +44,13 @@ export function meshyPerson(m) {
   m.head = O();
   (hb || m.root).add(m.head);
   m.headK = O();
-  let last = null,
-    sk = null;
-  m.model.traverse((o) => {
-    if (!sk && o.isSkinnedMesh) sk = o;
-  });
+  let last = null;
+  const sks = [];
+  m.model.traverse((o) => o.isSkinnedMesh && sks.push(o));
   // on the game's clock, which moves them (a sped-up or paused game, a slow frame): on the wall clock their steps
   // fell behind or ran ahead of their feet; the wall clock only where there is no game (a viewer)
-  sk.onBeforeRender = () => {
+  // (on every mesh: a chibi draws only one of its tiers, chibi.js; the first drawn in a frame steps it)
+  const step = () => {
     const G = globalThis.__game,
       now = G ? G.t : performance.now() / 1000;
     if (last !== null && now >= last && now - last < 0.004) return;
@@ -64,6 +63,7 @@ export function meshyPerson(m) {
     }
     m.update(dt);
   };
+  for (const sk of sks) sk.onBeforeRender = step;
   // seat the hips on the chair under the root (train and office seats: SEAT_Y), keeping x, z and facing
   m.sitHere = () => {
     m.sitAt(m.root.position.x, SEAT_Y, m.root.position.z, m.root.rotation.y);
