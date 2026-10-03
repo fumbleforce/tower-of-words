@@ -28,6 +28,8 @@ import { BAYS, SHOPS, WALL_Z } from './island-south.js';
 import { streetSteps } from './shotengai/street.js';
 import * as P from './shotengai/plan.js';
 import { buildNooks } from './outdoor/nooks.js';
+import { shopDoor } from './plaza/east-shops.js';
+import { faceAt } from './outdoor/block.js';
 
 const { CHUNK, local, rect, inRect } = P;
 // the sun, in the chunk's frame (local north is island west): mornings from the east-south-east over the camera's
@@ -99,6 +101,14 @@ export function* shotengaiSteps() {
   );
   fronts.meshes(pf);
   q.build(pf);
+  // after work on day 2 a card tucked into the izakaya's noren: 本日貸切, reserved (its door's 準備中 card is down)
+  const izakaya = EAST_BLOCKS.find((k) => k.id === 'izakaya'),
+    { F: iF, u: iu } = shopDoor(izakaya),
+    [ix, iz] = faceAt(iF, iu, 0.145),
+    iry = Math.atan2(iF.n[0], iF.n[1]),
+    curtain = signSet();
+  curtain.card('本日貸切', 'RESERVED THIS EVENING', 0.32, 0.21, [ix, 1.66, iz], iry, { when: 'evening2' });
+  const curtainCard = curtain.build(pf);
   const eastLit = eastLights.build(pf, { poolY: 0.03 });
   yield;
   const front = yield* seafrontSteps(isl, { at: (x, z) => [x, z] });
@@ -150,7 +160,13 @@ export function* shotengaiSteps() {
       street.glass.emissiveIntensity = 0.55;
       street.signs.evening();
       doorCards.evening();
+      curtainCard.evening();
       sky.onPeriod('evening');
+    },
+    // the door cards for the day and the time (shop-signs.js WHEN)
+    cards(day, period) {
+      doorCards.show(day, period);
+      curtainCard.show(day, period);
     },
     skyline: sky.stats,
   };

@@ -131,6 +131,7 @@ export function* eastLaneChunkSteps() {
       street.signs.evening();
       sky.onPeriod('evening');
     },
+    cards: (day, period) => east.cards(day, period),
     skyline: sky.stats,
   };
 }

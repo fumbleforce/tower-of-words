@@ -381,6 +381,7 @@ export function* eastLaneSteps(root, p, lights) {
       fronts.evening();
       shopSigns.evening();
     },
+    cards: (day, period) => shopSigns.show(day, period), // the shops' door cards (shop-signs.js WHEN)
     update: (sun) => shadows.follow(sun.position),
   };
 }

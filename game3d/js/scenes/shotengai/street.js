@@ -1,7 +1,8 @@
 // The shop street's own ground and fittings (scenes/shotengai.js), in the island frame, on the outdoor kit
 // (scenes/outdoor/): the arcade's floor, the shop walk and the dorm street's end; a door in each named shop's door
-// bay, shut, with a 準備中 card; lanterns on the arcade's posts; what stands out in front of the shops; low planters
-// by the plain shopfronts; benches at the alleys' mouths; the chains across the beach stairs' heads.
+// bay, shut, with a 準備中 card (本日休業, closed today, after work on day 2: shop-signs.js WHEN); lanterns on the
+// arcade's posts; what stands out in front of the shops; low planters by the plain shopfronts; benches at the
+// alleys' mouths; the chains across the beach stairs' heads.
 //
 //   const st = yield* streetSteps(group, p, lights, signs)    group: island-aligned; p: Parts; lights: lightSet();
 //                                                              signs: a shop-signs.js signSet for the cards
@@ -59,7 +60,7 @@ function* floor(group) {
 }
 
 // a shop door in its bay, shut: frame, glass, a bar handle, and the card hung on the glass
-function door(p, signs, { at: [x, z], out }) {
+function door(p, signs, { id, at: [x, z], out }) {
   const f = z + out * 0.08,
     W = 1.1,
     H = 1.75;
@@ -68,7 +69,11 @@ function door(p, signs, { at: [x, z], out }) {
   p.box(DOOR.frame, 0.04, H, 0.08, x, 0, f); // the meeting stiles of the pair
   for (const s of [-1, 1]) p.box(DOOR.handle, 0.03, 0.5, 0.04, x + s * 0.09, 0.7, f + out * 0.06, { cast: false });
   p.box('#a9a8a3', 1.6, 0.03, 0.4, x, 0, z + out * 0.3, { cast: false }); // the doorstep
-  signs.card('準備中', 'CLOSED', 0.46, 0.3, [x + 0.3, 1.2, f + out * 0.045], out > 0 ? 0 : Math.PI);
+  const card = [x + 0.3, 1.2, f + out * 0.045],
+    ry = out > 0 ? 0 : Math.PI;
+  signs.card('準備中', 'CLOSED', 0.46, 0.3, card, ry, { when: 'prep' });
+  // day 2 after work: closed today (the izakaya is booked instead: its card is on the noren, scenes/shotengai.js)
+  if (id !== 'izakaya') signs.card('本日休業', 'CLOSED TODAY', 0.46, 0.3, card, ry, { when: 'evening2' });
 }
 
 // a crane game cabinet: a pale case, a glass box on top with a coloured top light

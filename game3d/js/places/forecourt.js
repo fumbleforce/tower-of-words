@@ -6,7 +6,8 @@ import { RoomCam } from '../cam.js';
 import { K } from '../scenes/office.js';
 import { walkOut, walkIn } from './edge-walk.js';
 import { glide } from '../move.js';
-import { eveningLight, EVENING_GRADE } from '../scenes/town.js';
+import { eveningLight, eveningGrade } from '../scenes/town.js';
+import { sim } from '../sim.js';
 import { relightLift } from './lift.js';
 import { PLACE_DETAILS } from './catalog.js';
 import { snapshotPeople, restorePeople } from './saved-people.js';
@@ -238,14 +239,14 @@ export async function forecourtPlace(game) {
     onPeriod(period) {
       garden.sync(); // on every entry: who is out after work, and what the story left moved
       bikes.sync();
-      if (period !== 'evening' || P.grade === EVENING_GRADE) return;
+      if (period !== 'evening' || P.grade === eveningGrade(sim.day)) return;
       relightLift(P);
-      eveningLight(w.scene);
+      eveningLight(w.scene, sim.day);
       w.headOffice.onPeriod(period);
       w.station.onPeriod(period);
       w.sky?.onPeriod(period);
       w.lightsOn();
-      P.grade = EVENING_GRADE;
+      P.grade = eveningGrade(sim.day);
     },
     snapshotState() {
       return {

@@ -3,7 +3,8 @@ import { shotengaiSteps } from '../scenes/shotengai.js';
 import { sliced } from '../perf/slice.js';
 import { RoomCam } from '../cam.js';
 import { K } from '../scenes/office.js';
-import { eveningLight, EVENING_GRADE, MORNING_GRADE } from '../scenes/town.js';
+import { eveningLight, eveningGrade, MORNING_GRADE } from '../scenes/town.js';
+import { sim } from '../sim.js';
 import { addOccluder, updateOccluders, footprint } from '../scenes/occluders.js';
 import { PLACE_DETAILS } from './catalog.js';
 import { snapshotPeople, restorePeople } from './saved-people.js';
@@ -142,11 +143,12 @@ export async function shotengaiPlace(game) {
       cam.elev += (want - cam.elev) * Math.min(1, dt * 3);
     },
     onPeriod(period) {
-      if (period !== 'evening' || P.grade === EVENING_GRADE) return;
-      eveningLight(w.scene);
+      w.cards(sim.day, period); // the shops' door cards for the day and the time (scenes/shop-signs.js WHEN)
+      if (period !== 'evening' || P.grade === eveningGrade(sim.day)) return;
+      eveningLight(w.scene, sim.day);
       w.evening();
       w.follow(game.player.root.position.x, game.player.root.position.z);
-      P.grade = EVENING_GRADE;
+      P.grade = eveningGrade(sim.day);
     },
     snapshotState() {
       return { player: snapshotPeople({ eric: game.player }) };

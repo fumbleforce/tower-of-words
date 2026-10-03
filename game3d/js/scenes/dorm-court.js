@@ -88,11 +88,11 @@ export function* dormCourtSteps({ morning = false } = {}) {
   const sky = yield* skylineSteps(root, 'dorm_court', { layout, evening: !morning, skip: ['dorm_1', ...CLUSTER_IDS] });
   // after work on a court built in the morning: the dusk sky and light, the lamps and windows lit
   let dusk = !morning;
-  const evening = () => {
+  const evening = (day = 1) => {
     if (dusk) return;
     dusk = true;
     scene.background.set(SKY);
-    eveningLight(scene); // the town's dusk, as on the other chunks built in the morning
+    eveningLight(scene, day); // the town's dusk, as on the other chunks built in the morning
     lit.evening();
     dorms.evening();
     sky.onPeriod?.('evening');

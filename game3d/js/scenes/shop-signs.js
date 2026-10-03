@@ -5,14 +5,24 @@
 //   const signs = signSet();
 //   signs.board(kana, en, colour, w, h, [x, y, z], ry);      a board facing +z turned by ry (radians)
 //   signs.upright(kana, colour, w, h, [x, y, z], ry);        the kana stacked, read the same from both faces
-//   signs.card(kana, en, w, h, [x, y, z], ry);               a small white card, dark kana over small English
+//   signs.card(kana, en, w, h, [x, y, z], ry, { when, sub }); a small white card, dark kana over small English; sub:
+//                                                            a smaller kana line between them (a notice's reason)
 //   signs.drawn(draw, w, h, [x, y, z], ry);                  any face: draw(ctx, W, H) paints its cell (a drinks
 //                                                            machine's front)
 //   const s = signs.build(group); s.evening();
+//   s.show(day, period)                                      the signs with a `when` (WHEN below) shown or hidden
+//                                                            for that day and time; the others always show
 import * as THREE from 'three';
 import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
 import { JP_FONT } from '../props.js';
 import { DECAL } from '../look/decal.js';
+
+// which signs show when, for the ones that change with the day (a shop's door card): day 1's 準備中 card stays all
+// day; on day 2 it is up in the morning, and after work the evening cards take its place (story/day2/README.md)
+export const WHEN = {
+  prep: (day, period) => !(day === 2 && period === 'evening'),
+  evening2: (day, period) => day === 2 && period === 'evening',
+};
 
 const PX = 160, // pixels per unit of sign
   ATLAS_W = 2048,
@@ -53,7 +63,7 @@ function drawUpright(ctx, x, y, W, H, { kana, color }) {
   });
 }
 
-function drawCard(ctx, x, y, W, H, { kana, en }) {
+function drawCard(ctx, x, y, W, H, { kana, en, sub }) {
   ctx.fillStyle = '#f2f0ea';
   ctx.fillRect(x, y, W, H);
   ctx.strokeStyle = '#8a3b3b';
@@ -62,6 +72,15 @@ function drawCard(ctx, x, y, W, H, { kana, en }) {
   ctx.fillStyle = '#2f3540';
   ctx.textAlign = 'center';
   ctx.textBaseline = 'middle';
+  if (sub) {
+    ctx.font = `700 ${Math.round(H * 0.27)}px ${JP_FONT}`;
+    ctx.fillText(kana, x + W / 2, y + H * 0.3, W - H * 0.3);
+    ctx.font = `600 ${Math.round(H * 0.15)}px ${JP_FONT}`;
+    ctx.fillText(sub, x + W / 2, y + H * 0.54, W - H * 0.3);
+    ctx.font = `600 ${Math.round(H * 0.11)}px sans-serif`;
+    ctx.fillText(en, x + W / 2, y + H * 0.75, W - H * 0.3);
+    return;
+  }
   ctx.font = `700 ${Math.round(H * 0.4)}px ${JP_FONT}`;
   ctx.fillText(kana, x + W / 2, y + H * 0.42, W - H * 0.4);
   ctx.font = `600 ${Math.round(H * 0.17)}px sans-serif`;
@@ -80,7 +99,7 @@ const DRAW = { board: drawBoard, upright: drawUpright, card: drawCard, drawn: dr
 
 export function signSet() {
   const items = [];
-  const add = (kind, data, w, h, at, faces) => items.push({ kind, data, w, h, at, faces });
+  const add = (kind, data, w, h, at, faces, when) => items.push({ kind, data, w, h, at, faces, when });
   return {
     board(kana, en, color, w, h, at, ry = 0) {
       add('board', { kana, en, color }, w, h, at, [ry]);
@@ -89,14 +108,14 @@ export function signSet() {
     upright(kana, color, w, h, at, ry = 0) {
       add('upright', { kana, color }, w, h, at, [ry, ry + Math.PI]);
     },
-    card(kana, en, w, h, at, ry = 0) {
-      add('card', { kana, en }, w, h, at, [ry]);
+    card(kana, en, w, h, at, ry = 0, { when, sub } = {}) {
+      add('card', { kana, en, sub }, w, h, at, [ry], when);
     },
     drawn(draw, w, h, at, ry = 0) {
       add('drawn', { draw }, w, h, at, [ry]);
     },
     build(root) {
-      if (!items.length) return { mesh: null, evening() {} };
+      if (!items.length) return { mesh: null, evening() {}, show() {} };
       // shelf-pack the cells: each sign w x h units at PX pixels a unit
       let x = 0,
         y = 0,
@@ -118,19 +137,21 @@ export function signSet() {
       const tex = new THREE.CanvasTexture(canvas);
       tex.colorSpace = THREE.SRGBColorSpace;
       tex.anisotropy = 4;
-      const geos = [];
+      // the signs that always show in one mesh; each `when` in a mesh of its own, the same material
+      const geos = new Map();
       for (const it of items) {
         const u0 = it.x / canvas.width,
           u1 = (it.x + it.W) / canvas.width,
           v1 = 1 - it.y / canvas.height,
           v0 = 1 - (it.y + it.H) / canvas.height;
+        if (!geos.has(it.when)) geos.set(it.when, []);
         for (const ry of it.faces) {
           const g = new THREE.PlaneGeometry(it.w, it.h);
           const uv = g.attributes.uv;
           for (let i = 0; i < uv.count; i++) uv.setXY(i, uv.getX(i) ? u1 : u0, uv.getY(i) ? v1 : v0);
           // back to back: each face a hair out from the middle along its own normal
           g.translate(0, 0, it.faces.length > 1 ? 0.045 : 0).rotateY(ry);
-          geos.push(g.translate(...it.at));
+          geos.get(it.when).push(g.translate(...it.at));
         }
       }
       const material = new THREE.MeshStandardMaterial({
@@ -141,16 +162,25 @@ export function signSet() {
         emissiveMap: tex,
         emissiveIntensity: 0,
       });
-      const mesh = new THREE.Mesh(mergeGeometries(geos), material);
-      geos.forEach((g) => g.dispose());
-      mesh.castShadow = false;
-      mesh.receiveShadow = true;
-      mesh.name = 'shop-signs';
-      root.add(mesh);
+      const meshes = new Map();
+      for (const [when, list] of geos) {
+        const m = new THREE.Mesh(mergeGeometries(list), material);
+        list.forEach((g) => g.dispose());
+        m.castShadow = false;
+        m.receiveShadow = true;
+        m.name = when ? 'shop-signs:' + when : 'shop-signs';
+        if (when) m.visible = WHEN[when](1, 'early');
+        root.add(m);
+        meshes.set(when, m);
+      }
+      const mesh = meshes.get(undefined) || null;
       return {
         mesh,
         evening() {
           material.emissiveIntensity = 0.6;
+        },
+        show(day, period) {
+          for (const [when, m] of meshes) if (when) m.visible = WHEN[when](day, period);
         },
       };
     },

@@ -10,7 +10,8 @@
 //   the hall: two storeys of white plaster between dark timber posts, a dark timber skirt, lattice windows over paper
 //   screens (lit after work), a tiled pent roof along the front over the ground floor and a tiled gable roof over
 //   all; the entrance porch on the axis under its own tiled roof, two paper lanterns on its posts, the name
-//   board standing on its eave, the sliding lattice doors shut with a 準備中 CLOSED card on the glass
+//   board standing on its eave, the sliding lattice doors shut with a 準備中 CLOSED card on the glass (after work on
+//   day 2, a boiler-repair notice instead)
 //   the bath courtyards east of the hall toward the sea, behind bamboo fences: a rock-edged pool in each
 import * as THREE from 'three';
 import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
@@ -211,7 +212,12 @@ function hall(p, shoji, signs, lights) {
   }
   p.box(C.dark, 2.2, 0.12, 0.08, GX, 2.06, f + 0.03); // the head over the doors
   p.box(STEEL.dark, 0.04, 0.18, 0.03, GX, 0.95, f + 0.07); // the pulls, meeting in the middle
-  signs.card('準備中', 'CLOSED', 0.46, 0.3, [GX + 0.5, 1.2, f + 0.08], 0);
+  signs.card('準備中', 'CLOSED', 0.46, 0.3, [GX + 0.5, 1.2, f + 0.08], 0, { when: 'prep' });
+  // day 2 after work: a notice in its place, shut for the boiler (story/day2/east_coast.js)
+  signs.card('本日休業', 'CLOSED TODAY · BOILER REPAIR', 0.6, 0.42, [GX + 0.5, 1.2, f + 0.08], 0, {
+    when: 'evening2',
+    sub: 'ボイラー修理のため',
+  });
 }
 
 // the bath courtyards: bamboo fences, stone flags, a pool edged with rocks in each, a low fence on the sea side

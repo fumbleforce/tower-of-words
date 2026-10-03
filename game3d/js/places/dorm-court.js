@@ -3,7 +3,7 @@ import { dormCourtSteps } from '../scenes/dorm-court.js';
 import { sliced } from '../perf/slice.js';
 import { RoomCam } from '../cam.js';
 import { K } from '../scenes/office.js';
-import { EVENING_GRADE, MORNING_GRADE } from '../scenes/town.js';
+import { eveningGrade, MORNING_GRADE } from '../scenes/town.js';
 import { sim } from '../sim.js';
 import { walkIn, walkOut } from './edge-walk.js';
 import { dormBath } from './dorm-bath.js';
@@ -87,11 +87,11 @@ export async function dormCourtPlace(game) {
     startFacing: Math.PI, // north, up the door axis from the gate
     defaultPeriod: 'evening',
     music: 'night',
-    grade: morning ? MORNING_GRADE : EVENING_GRADE,
+    grade: morning ? MORNING_GRADE : eveningGrade(sim.day),
     onPeriod(period) {
-      if (period !== 'evening' || P.grade === EVENING_GRADE) return;
-      w.evening();
-      P.grade = EVENING_GRADE;
+      if (period !== 'evening' || P.grade === eveningGrade(sim.day)) return;
+      w.evening(sim.day);
+      P.grade = eveningGrade(sim.day);
     },
     things,
     findProps: { bakery_flyer: mb.flyer }, // what taking the flyer hides (finds/index.js)

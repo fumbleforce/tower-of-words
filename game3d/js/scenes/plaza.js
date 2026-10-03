@@ -209,6 +209,7 @@ export function* plazaSteps() {
       sky.onPeriod('evening');
       nooks.evening();
     },
+    cards: (day, period) => east.cards(day, period),
     skyline: sky.stats,
   };
 }
