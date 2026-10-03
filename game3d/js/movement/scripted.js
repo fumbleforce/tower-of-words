@@ -99,15 +99,19 @@ export function walkRig(
     // one step of the walk (dt game seconds); true when it has ended
     const advance = (dt) => {
       const p = obj.position;
+      // on to the next leg once the way there is clear: from here, or, standing on the corner, from the corner itself
+      // (the route's legs are clear from its corners, and a few hundredths off one the doorway's line can fail: the
+      // cat stopped in the train's doorway that way and Hamada, held up behind her, rode off with the train, #196)
+      const onCorner = () => Math.hypot(path[0][0] - p.x, path[0][1] - p.z) < 0.05;
       while (
         path.length > 1 &&
         Math.hypot(path[0][0] - p.x, path[0][1] - p.z) < (route ? CORNER : 0.05) &&
-        (!nav || nav.clear([p.x, p.z], path[1]))
+        (!nav || nav.clear([p.x, p.z], path[1]) || (onCorner() && nav.clear(path[0], path[1])))
       )
         path.shift();
       // on a corner whose next leg the floor doesn't allow (an end in the furniture), as close as the floor allows is
       // here: heading for a point she already stood on, Mio turned round and round it
-      if (path.length > 1 && Math.hypot(path[0][0] - p.x, path[0][1] - p.z) < 0.05) {
+      if (path.length > 1 && onCorner()) {
         done();
         return true;
       }
