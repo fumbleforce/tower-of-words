@@ -80,9 +80,10 @@ function crane(p, x, z, k) {
   p.box(STEEL.dark, 0.3, 0.04, 0.12, x, 0.62, z + 0.38, { cast: false });
 }
 
-// an A-board on the walk: two leaning boards
-function aBoard(p, x, z, ry) {
-  for (const s of [-1, 1])
+// an A-board on the walk: two leaning boards; note: a printed notice pinned on each face (the bakery's dorm
+// deliveries, read in story/day2/shotengai.js)
+function aBoard(p, x, z, ry, { note = false } = {}) {
+  for (const s of [-1, 1]) {
     p.geo(
       GOODS.board,
       new THREE.BoxGeometry(0.5, 0.7, 0.03)
@@ -91,6 +92,18 @@ function aBoard(p, x, z, ry) {
         .rotateY(ry)
         .translate(x, 0, z),
     );
+    if (note)
+      p.geo(
+        '#f4efe4',
+        new THREE.BoxGeometry(0.32, 0.22, 0.004)
+          .translate(0, 0.08, 0.017 * s)
+          .rotateX(s * 0.2)
+          .translate(0, 0.33, s * 0.07)
+          .rotateY(ry)
+          .translate(x, 0, z),
+        { cast: false },
+      );
+  }
 }
 
 export function* streetSteps(group, p, lights, signs) {
@@ -111,7 +124,7 @@ export function* streetSteps(group, p, lights, signs) {
   bins(p, mid(7) - 1.2, nz, 0);
   keep.push([mid(7) - 1.6, ROWS_Z.arcade, mid(7) - 0.8, nz + 0.25]);
   // bakery and karaoke: an A-board each
-  aBoard(p, mid(10) + 1.1, nz + 0.2, 0);
+  aBoard(p, mid(10) + 1.1, nz + 0.2, 0, { note: true });
   aBoard(p, mid(14) - 1.1, sz - 0.2, Math.PI);
   keep.push(
     [mid(10) + 0.8, ROWS_Z.arcade, mid(10) + 1.4, nz + 0.45],

@@ -777,6 +777,10 @@
           "kind": "thing",
           "verb": "Look"
         },
+        "kuroda": {
+          "label": "Mr. Hamada",
+          "kind": "person"
+        },
         "onsen": {
           "label": "Onsen",
           "kind": "thing",
@@ -786,7 +790,8 @@
       "spots": [
         "row_entry",
         "east_coast_lookout",
-        "east_coast_shrine"
+        "east_coast_shrine",
+        "lookout_view"
       ],
       "nooks": [
         "east_coast_lookout",
@@ -797,8 +802,12 @@
         "row_exit",
         "courts_exit"
       ],
-      "people": [],
-      "hooks": []
+      "people": [
+        "kuroda"
+      ],
+      "hooks": [
+        "coastVisit"
+      ]
     },
     "sports": {
       "things": {

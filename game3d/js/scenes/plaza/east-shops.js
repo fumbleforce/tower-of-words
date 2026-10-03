@@ -54,6 +54,9 @@ function sugidama(p, F, u) {
   const [x, z] = faceAt(F, u, 0.32);
   p.geo(CEDAR, new THREE.IcosahedronGeometry(0.22, 1).translate(x, 1.62, z));
   p.geo(STEEL.dark, new THREE.CylinderGeometry(0.01, 0.01, 0.2, 4).translate(x, 1.92, z), { cast: false });
+  // and a small paper tag on a string beneath it (the new sake: story/day2/east_lane.js reads it)
+  p.geo(STEEL.dark, new THREE.CylinderGeometry(0.004, 0.004, 0.1, 3).translate(x, 1.36, z), { cast: false });
+  p.box('#f3eee2', 0.07, 0.12, 0.01, x, 1.19, z, { cast: false, ry: Math.atan2(F.n[0], F.n[1]) });
   const [bx, bz] = faceAt(F, u, 0.16);
   p.box(STEEL.dark, F.d[0] ? 0.04 : 0.34, 0.04, F.d[0] ? 0.34 : 0.04, bx, 2.0, bz);
 }

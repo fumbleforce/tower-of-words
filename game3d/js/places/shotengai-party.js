@@ -6,25 +6,16 @@
 // back alley with what's left. Everything is set from the story's flags, so a trip away and back, or a Continue,
 // puts it all where the story has got to. shotengai.js spreads thing(id), people, seats, spots and hooks into its own
 // registries and calls install(P) once its place is made.
-import * as THREE from 'three';
 import { PEOPLE, idle } from '../cast.js';
 import { blob } from '../engine.js';
 import { walkPerson, stepPeople, lookAt } from '../story.js';
 import { walkRig } from '../move.js';
 import { benchSit } from '../crowd/motion.js';
 import { flags } from '../narrative/state.js';
-import { rbox, mat, sh } from '../props.js';
 import { sim } from '../sim.js';
 import { sfx } from '../ui.js';
 import { route } from './route.js';
-
-const TOP = 0.34; // the bench's slats (scenes/outdoor/furniture.js; crowd/still.js)
-
-// the bench pair at the foot of the east walk, in the chunk's frame: island (66, FURNITURE_Z - 0.1) turned by the
-// chunk (local x = -(island z - 20.15), local z = island x - 64.5); the sea is toward -x
-const BENCH = [-11.3, 1.5],
-  SEA_X = BENCH[0] - 0.3, // the sea-facing bench's seat line
-  FACE = -Math.PI / 2; // looking out to sea
+import { partyFoodSet, TOP, BENCH, SEA_X, FACE } from './shotengai-food.js';
 
 export function shotengaiParty(game, { w, K }) {
   let P = null;
@@ -86,106 +77,7 @@ export function shotengaiParty(game, { w, K }) {
   };
   const ALLEY = w.nooks.shotengai_back_alley;
 
-  // ---- the food: a tray on the bench between them, Mio's jar, a bag of drinks at Mori's feet ----
-  const food = new THREE.Group();
-  w.root.add(food);
-  const onigiri = () => {
-    const g = new THREE.Group();
-    const rice = sh(new THREE.Mesh(new THREE.CylinderGeometry(0.06, 0.06, 0.045, 3), mat('#f3f1ea')));
-    rice.rotation.x = Math.PI / 2;
-    rice.position.y = 0.05;
-    const nori = sh(new THREE.Mesh(new THREE.BoxGeometry(0.05, 0.05, 0.05), mat('#1f2a24')));
-    nori.position.y = 0.03;
-    g.add(rice, nori);
-    return g;
-  };
-  const sandwich = () => {
-    const g = new THREE.Group();
-    const bread = sh(new THREE.Mesh(new THREE.CylinderGeometry(0.065, 0.065, 0.04, 3), mat('#efe3c4')));
-    bread.rotation.x = Math.PI / 2;
-    bread.position.y = 0.05;
-    const egg = sh(new THREE.Mesh(new THREE.CylinderGeometry(0.058, 0.058, 0.044, 3), mat('#f2d264')));
-    egg.rotation.x = Math.PI / 2;
-    egg.position.y = 0.05;
-    g.add(bread, egg);
-    return g;
-  };
-  const tray = new THREE.Group();
-  tray.add(rbox(0.36, 0.025, 0.24, '#2f3a55', { r: 0.008 }));
-  const cloth = rbox(0.3, 0.05, 0.2, '#b8573f', { r: 0.03 }); // the wrapped bundle, before it's opened
-  const items = { riceball: [], sandwich: [] };
-  for (let i = 0; i < 3; i++) {
-    const a = onigiri(),
-      b = sandwich();
-    a.position.set(-0.11 + i * 0.11, 0.025, -0.05);
-    b.position.set(-0.11 + i * 0.11, 0.025, 0.06);
-    a.rotation.y = b.rotation.y = 0.3 * i;
-    tray.add(a, b);
-    items.riceball.push(a);
-    items.sandwich.push(b);
-  }
-  tray.add(cloth);
-  tray.position.set(SEA_X, TOP, BENCH[1]);
-  tray.rotation.y = FACE;
-  const jar = new THREE.Group();
-  jar.add(sh(new THREE.Mesh(new THREE.CylinderGeometry(0.05, 0.05, 0.12, 14), mat('#a7c38a', { roughness: 0.3 }))));
-  jar.children[0].position.y = 0.06;
-  const lid = sh(new THREE.Mesh(new THREE.CylinderGeometry(0.052, 0.052, 0.025, 14), mat('#c9473f')));
-  lid.position.y = 0.13;
-  jar.add(lid);
-  const bag = rbox(0.22, 0.24, 0.12, '#e6e2d6', { r: 0.02 }); // the convenience bag of drinks
-  const can = () => sh(new THREE.Mesh(new THREE.CylinderGeometry(0.03, 0.03, 0.11, 12), mat('#3a8f8a')));
-  food.add(tray, jar, bag);
-  const LAP = [SEA_X - 0.2, seats.party_seat.z]; // in front of Eric, at his knees
-  const held = new THREE.Group(); // what Eric has been given, by his seat
-  food.add(held);
-  let looking = false; // the food's close look: the camera steeper (install's update)
-  const state = { opened: false, took: null, drinks: 0, more: 0, pickles: false };
-
-  function placeFood(where) {
-    food.visible = where !== 'none';
-    if (where === 'alley') {
-      const [ax, az] = ALLEY;
-      tray.position.set(ax + 0.35, 0.02, az);
-      jar.visible = false;
-      bag.visible = false;
-      held.visible = false;
-      return;
-    }
-    tray.position.set(SEA_X, TOP, BENCH[1]);
-    jar.visible = bag.visible = held.visible = true;
-    jar.position.set(SEA_X + 0.55, 0, spots.party_mio[1] - 0.25); // at Mio's feet
-    bag.position.set(SEA_X + 0.45, 0, seats.party_mori.z - 0.25);
-  }
-  function syncFood() {
-    cloth.visible = !state.opened;
-    for (const k of Object.keys(items)) for (const it of items[k]) it.visible = state.opened;
-    held.clear();
-    let n = 0;
-    const lay = (o) => {
-      o.position.set(LAP[0], TOP + 0.005, LAP[1] + 0.22 - n * 0.12);
-      n++;
-      held.add(o);
-    };
-    if (state.took) {
-      items[state.took][0].visible = false;
-      lay(state.took === 'riceball' ? onigiri() : sandwich());
-    }
-    for (let i = 1; i <= state.more && i < 3; i++) {
-      const kind = state.took === 'sandwich' ? 'riceball' : 'sandwich';
-      items[kind][i - 1].visible = false;
-      lay(kind === 'riceball' ? onigiri() : sandwich());
-    }
-    for (let i = 0; i < Math.min(2, state.drinks); i++) {
-      const c = can();
-      c.position.y = 0.055;
-      const g = new THREE.Group();
-      g.add(c);
-      lay(g);
-    }
-    lid.position.y = state.pickles ? 0.02 : 0.13;
-    lid.position.x = state.pickles ? 0.09 : 0;
-  }
+  const food = partyFoodSet(game, { w, seats, spots, ALLEY, getP: () => P });
 
   // ---- placement from the story's flags (partySetup's default) ----
   const hide = (r) => {
@@ -226,7 +118,7 @@ export function shotengaiParty(game, { w, K }) {
       hide(mori);
       hide(kenji);
       mio.root.visible = false;
-      placeFood('none');
+      food.place('none');
       return;
     }
     if (flags.d2_party_done) {
@@ -234,7 +126,7 @@ export function shotengaiParty(game, { w, K }) {
       mio.root.visible = false;
       const [ax, az] = ALLEY;
       if (!mori._walk) stand(mori, [ax, az], [ax + 1, az]);
-      placeFood('alley');
+      food.place('alley');
       return;
     }
     if (!mori._walk) seatMori(seats.party_mori);
@@ -243,10 +135,9 @@ export function shotengaiParty(game, { w, K }) {
       else stand(kenji, KENJI_WAIT, [izakaya.step[0], izakaya.step[1] + 3]);
     }
     if (!mio._walk) stand(mio, spots.party_mio, spots.party_group);
-    state.opened = !!flags.d2_ate || state.opened;
-    if (flags.d2_ate && !state.took) state.took = flags.d2_food === 'sandwich' ? 'sandwich' : 'riceball';
-    placeFood('bench');
-    syncFood();
+    food.fromFlags();
+    food.place('bench');
+    food.sync();
   }
 
   const leave = async (r) => {
@@ -267,39 +158,25 @@ export function shotengaiParty(game, { w, K }) {
         return;
       }
       if (s === 'pack') {
-        state.opened = true;
+        food.state.opened = true;
         const [ax, az] = ALLEY;
+        // Kenji gathers the boxes and the bag first, then he and Mio walk off
+        await P.walkPerson('kenji', [SEA_X + 0.7, seats.party_mori.z - 0.6], { speed: 1.3 });
+        food.gather();
+        sfx('tap');
+        await game.wait(400);
         void leave(game.mioNpc);
         void leave(kenji);
         await game.wait(600);
         await P.walkPerson('mori', [ax, az], { speed: 1.0 });
         stand(mori, [ax, az], [ax + 1, az]);
-        placeFood('alley');
+        food.place('alley');
         return;
       }
       arrange();
     },
     // the food follows what Eric does: open, take (food: riceball | sandwich), sharePickles, drink, offerMore
-    async partyFood({ state: s, food: f } = {}) {
-      if (s === 'open') state.opened = true;
-      if (s === 'take') state.took = f === 'sandwich' ? 'sandwich' : 'riceball';
-      if (s === 'sharePickles') state.pickles = true;
-      if (s === 'drink') state.drinks++;
-      if (s === 'offerMore' && state.more < 2) state.more++;
-      sfx('tap');
-      syncFood();
-      // a close look at the food on the bench, from higher up over the sea rail, then back to the shot it was in
-      const cam = P.cam,
-        before = cam.close;
-      const at = s === 'sharePickles' ? [jar.position.x, jar.position.z] : [SEA_X, BENCH[1] + 0.25];
-      cam.closeOn([at[0] + 0.25, at[1]], 3.6, TOP);
-      looking = true;
-      await game.wait(1400);
-      looking = false;
-      if (before) cam.close = before;
-      else cam.release();
-      await game.wait(800); // back in the group's shot before the next line
-    },
+    partyFood: (a) => food.hook(a),
   };
 
   // once the place is made: walking and seating the two chibis, each frame their walks, breathing and looking at
@@ -347,7 +224,7 @@ export function shotengaiParty(game, { w, K }) {
       const elev = cam.elev; // (the street's own update eases it too; the food's close look overrides that)
       update(dt, t);
       cam.yaw += (yaw - cam.yaw) * Math.min(1, dt * 2.5);
-      if (looking) cam.elev = elev + ((66 * Math.PI) / 180 - elev) * Math.min(1, dt * 3);
+      if (food.looking()) cam.elev = elev + ((66 * Math.PI) / 180 - elev) * Math.min(1, dt * 3);
       if (!later()) return;
       stepPeople([mori, kenji], dt);
       const p = game.player.root.position;
@@ -365,10 +242,10 @@ export function shotengaiParty(game, { w, K }) {
     };
     const snap = P.snapshotState,
       restore = P.restoreState;
-    P.snapshotState = () => ({ ...snap(), party: { ...state } });
+    P.snapshotState = () => ({ ...snap(), party: { ...food.state } });
     P.restoreState = (saved) => {
       restore(saved);
-      if (saved.world?.party) Object.assign(state, saved.world.party);
+      if (saved.world?.party) Object.assign(food.state, saved.world.party);
       arrange();
     };
   }

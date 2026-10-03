@@ -10,6 +10,7 @@ import { snapshotPeople, restorePeople } from './saved-people.js';
 import { walkOut, walkIn } from './edge-walk.js';
 import { turningCam, followFit } from './turning-cam.js';
 import { roadClosure } from './closure.js';
+import { coastVisit } from './coast-visit.js';
 
 // The east coast (scenes/east-coast.js): the dorm row walked east from the east lane's dorm street, to the sea
 // terrace, the coast walk and the onsen's front; it also loads with ?place=east_coast. The onsen is shut for now
@@ -47,6 +48,7 @@ export async function eastCoastPlace(game) {
     out = w.exits.east_lane,
     west = w.exits.sports;
   const pool = roadClosure({ nav: w.nav, space: w.root }, west, (x, z) => inRect(x, z, west.zone));
+  const visit = coastVisit(game, { w, K }); // day 2's lookout: Mr. Hamada and the view (coast-visit.js)
   const things = {
     dorm_street: {
       ...PLACE_DETAILS.east_coast.things.dorm_street,
@@ -72,6 +74,7 @@ export async function eastCoastPlace(game) {
       face: () => w.nooks.east_coast_lookout,
       enabled: () => game.runner.has('talk:lookout'),
     },
+    kuroda: { ...PLACE_DETAILS.east_coast.things.kuroda, ...visit.thing('kuroda') },
     onsen: {
       ...PLACE_DETAILS.east_coast.things.onsen,
       anchor: (v) => v.set(door.local[0], 1.95, door.local[1]),
@@ -96,14 +99,15 @@ export async function eastCoastPlace(game) {
       row_entry: w.in,
       east_coast_lookout: w.nooks.east_coast_lookout,
       east_coast_shrine: w.nooks.east_coast_shrine,
+      lookout_view: visit.spots.lookout_view,
     },
     seats: {},
-    people: {},
+    people: { kuroda: visit.people.kuroda },
     zones: {
       row_exit: (x, z) => inRect(x, z, out.zone),
       courts_exit: (x, z) => inRect(x, z, west.zone),
     },
-    hooks: {},
+    hooks: { coastVisit: visit.hooks.coastVisit },
     onDay: (day) => pool.sync(day),
     fit(aspect) {
       followFit(cam, w.nav, aspect, POSE.coast); // fitted at the coast's look, kept through the turns
@@ -148,5 +152,6 @@ export async function eastCoastPlace(game) {
       Object.entries(w.exits).map(([to, e]) => [to, (g) => walkOut(g, cam, e.lane, e.edge)]),
     ),
   };
+  visit.install(P);
   return P;
 }

@@ -115,9 +115,20 @@ export function trainDay2(game, ctx) {
   let doorsOpen, doorsHold;
   const hooks = {
     // { companion }: Mio there too (the promised branch), walking up the platform if she isn't by the doors yet
-    async stationSetup({ companion = false } = {}) {
+    // state 'depart': she walks off along the platform to the walkway (to B2), the scene going on, and only then is gone
+    async stationSetup({ companion = false, state } = {}) {
       standing();
       const m = game.mioNpc;
+      if (state === 'depart') {
+        if (!m.root.visible) return;
+        const here = game.place;
+        void (async () => {
+          await walkRig(game, m, [WALK_X + 1.2, LZ + 1.7], { speed: 1.4 });
+          await walkRig(game, m, [WALK_X, LZ + 1.95], { speed: 1.4, route: false });
+          if (game.place === here) m.root.visible = false;
+        })();
+        return;
+      }
       if (!companion) {
         m.root.visible = false;
         return;

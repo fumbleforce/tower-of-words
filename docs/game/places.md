@@ -416,7 +416,7 @@ In the morning the sun comes from the east-south-east behind the camera's left s
 
 ### Day-2 party plan
 
-The [day-2 story](stories/day2/README.md) places B2's welcome food on the promenade. Mori orders rice balls and egg sandwiches from the existing canteen earlier in the day; Kenji helps him collect the takeaway before meeting Eric. No arcade shop opens and Eric does no shopping. The pair of back-to-back benches at the foot of the east walk is theirs: Eric and Mori sit on the sea-facing one (Eric at its near end), Mio stands at its near end and Kenji at its far end, all in one conversation. The canteen's takeaway is a navy tray on the bench between the two seats, wrapped in a red cloth until it's opened, with three rice balls and three egg sandwiches on it; Mio's jar of pickles stands at her feet and a bag of drinks at Mori's. What Eric is given (his rice ball or sandwich, more food, a can) is laid by his seat; each change gets a close look at the food and back. Every shot of the group turns the camera to look in from over the sea wall, so the four stand side by side across a phone's screen; letting go turns it back down the street. After the goodbye the tray goes with Mori to the back alley, where he packs the leftovers and Eric can stop with him. The [story handoff](../../game3d/story/day2/README.md) specifies this set’s closure cards, exit label and small discovery props. All of it is set from the story's flags (the `partySetup` and `partyFood` hooks), so a trip away or a Continue puts it back.
+The [day-2 story](stories/day2/README.md) places B2's welcome food on the promenade. Mori orders rice balls and egg sandwiches from the existing canteen earlier in the day; Kenji helps him collect the takeaway before meeting Eric. No arcade shop opens and Eric does no shopping. The pair of back-to-back benches at the foot of the east walk is theirs: Eric and Mori sit on the sea-facing one (Eric at its near end), Mio stands at its near end and Kenji at its far end, all in one conversation. The canteen's takeaway is a navy tray on the bench between the two seats, wrapped in a red cloth until it's opened, with three rice balls and three egg sandwiches on it; Mio's jar of pickles stands at her feet and a bag of drinks and two stacked takeaway boxes at Mori's. What Eric is given (his rice ball or sandwich, more food, a can) is laid by his seat; each change gets a close look at the food and back. Every shot of the group turns the camera to look in from over the sea wall, so the four stand side by side across a phone's screen; letting go turns it back down the street. Mio can be passed the sandwiches, which she holds on a plate. At the goodbye Kenji first gathers the boxes and the bag, then he and Mio walk off up the east walk; the tray goes with Mori to the back alley, where he packs what's left into the takeaway boxes (lifting the tray off and away) and can hand Eric one more rice ball, which he eats there. The [story handoff](../../game3d/story/day2/README.md) specifies this set’s closure cards, exit label and small discovery props. All of it is set from the story's flags (the `partySetup` and `partyFood` hooks), so a trip away or a Continue puts it back.
 
 ### Things
 
@@ -605,12 +605,13 @@ In the morning the sun is the plaza's; after work the lamps, the stone lanterns,
 |---|---|---|
 | `dorm_street` | To the dorm street | The dorm row's west end, back to the dorm street. |
 | `courts_walk` | To the gym and pool | The courts walk west of the onsen path's foot, toward the pool and the gym. On day 2 it is the road-closed barrier there (below). |
-| `lookout` | Lookout | The lookout nook (`east_coast_lookout`); its pin shows while the story uses it (day 2). Look. |
+| `lookout` | Lookout | The lookout nook (`east_coast_lookout`); its pin shows while the story uses it (day 2). Look. The coin telescope's slot is taped over ("Free to use"). Below it, in a gap in the armour rocks, narrow maintenance steps go down off the sea wall's coping into the water, the lowest two wet and under the surface; they can't be walked. |
+| `kuroda` | Mr. Hamada | Day 2, after work, at the telescope. |
 | `onsen` | Onsen | The onsen's door under its porch. Go in: shut. |
 
 ### Spots
 
-`row_entry` (on the dorm row, the terrace ahead); and each nook below
+`row_entry` (on the dorm row, the terrace ahead); `lookout_view` (the shoreline below the lookout, where the view through the telescope is framed from above); and each nook below
 
 ### Nooks
 
@@ -631,7 +632,7 @@ None.
 
 ### Who's there when
 
-Day 2: Hamada (`kuroda`) visits the lookout telescope after work (the `coastVisit` hook); he is absent here in the morning and absent from the day-2 gate and train. The optional encounter and sight are in [Day-2 visits](stories/day2/visits.md). The pool approach (the courts walk) is closed for resurfacing in both periods, with the same barrier as the east lane's north street, just short of its way out.
+Day 2: Hamada (`kuroda`) visits the lookout telescope after work (the `coastVisit` hook: standing at the eyepiece wiping the lens, then aside by the rail; Eric at the eyepiece looks down on the steps from above, then steps back on the pad); he is absent here in the morning and absent from the day-2 gate and train. The optional encounter and sight are in [Day-2 visits](stories/day2/visits.md). The pool approach (the courts walk) is closed for resurfacing in both periods, with the same barrier as the east lane's north street, just short of its way out.
 
 None of the cast yet.
 
