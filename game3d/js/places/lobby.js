@@ -25,7 +25,8 @@ export const withList = (slot) =>
   (slot.with || []).filter((e) => typeof e === 'string' || cond(e.if)).map((e) => (typeof e === 'string' ? e : e.who));
 
 // walk an object in a straight line, ignoring the walk grid (scripted moves)
-import { glide, walkRig } from '../move.js';
+import { glide } from '../move.js';
+import { catWalk } from '../creatures/cat.js';
 export { glide }; // smooth start, turn and stop; never touches the player's facing
 
 export async function lobbyPlace(game) {
@@ -49,7 +50,7 @@ export async function lobbyPlace(game) {
     kuroda: w.man,
     aoi: w.aoi,
     rei,
-    tama: { root: w.tama, head: w.tama.userData.head },
+    tama: w.tamaRig,
   };
   const blobs = { aoi: w.aoiBlob, kuroda: w.manBlob, rei: reiBlob };
   // Aoi hides behind a newsletter on the right bench, upside down
@@ -548,9 +549,10 @@ export async function lobbyPlace(game) {
         const p = game.posOf(to);
         if (!p) return;
         const crosses = (w.tama.position.z - BZ) * (p[1] - BZ) < 0;
-        const run = walkRig(game, w.tama, p, { speed: 1.1 });
+        const up = w.tamaRig.mode === 'stand' ? 0 : 450; // she gets up from her bowl first (catWalk)
+        const run = catWalk(game, w.tamaRig, p, { speed: 1.1, end: 'sit' });
         if (crosses) {
-          await game.wait((Math.abs(w.tama.position.z - BZ) / 1.1) * 1000);
+          await game.wait(up + (Math.abs(w.tama.position.z - BZ) / 1.1) * 1000);
           readerFlash(1, 'red');
           w.arch.userData.set('no');
           setTimeout(() => w.arch.userData.set(st.gateOpen ? 'ok' : 'idle'), 1200);

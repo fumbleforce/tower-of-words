@@ -4,7 +4,7 @@
 //   kind   pigeon | sparrow | crow | gull (birds), cat, butterfly | dragonfly
 //   n      how many on the high graphics tier (medium shows three quarters, low half, at least one)
 //   when   day (early morning to the afternoon), evening (after work) or all
-//   coat   a cat's coat (models.js COATS)
+//   coat   a cat's coat (cat-rig.js COATS)
 // The birds' habits are in birds.js; where each place has room for them is surveyed in perches.js.
 export const CREATURES = {
   forecourt: [

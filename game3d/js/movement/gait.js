@@ -173,7 +173,7 @@ export function walking(rig, dist, dt) {
   return g;
 }
 export function stepGait(rig, dist, dt, { run = false } = {}) {
-  if (!rig?.root || dt <= 0 || rig.seated) return;
+  if (!rig?.root || dt <= 0 || rig.seated || rig.selfGait) return; // the cat steps herself (creatures/cat.js)
   const g = walking(rig, dist, dt),
     sc = rig.root.scale.x || 1;
   if (rig.setGait) {
@@ -193,7 +193,7 @@ export function stepGait(rig, dist, dt, { run = false } = {}) {
 
 // standing: the walk off at once (the end of a walk)
 export function stopGait(rig) {
-  if (!rig) return;
+  if (!rig || rig.selfGait) return;
   if (rig._gait) Object.assign(rig._gait, { on: false, low: 0, amt: 0 });
   if (rig.setGait) rig.setGait(null);
   if (rig.seated) return;

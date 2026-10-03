@@ -31,7 +31,9 @@ const _v = new THREE.Vector3(),
 function feetOf(r) {
   if (r._gaitFeet !== undefined) return r._gaitFeet;
   let f = null;
-  if (r.model) {
+  if (r.feet?.length === 2)
+    f = r.feet; // the cat's front paws (creatures/cat.js)
+  else if (r.model) {
     const bones = [];
     r.model.traverse((o) => {
       if (o.isBone && /(left|right).*foot$/i.test(o.name.replace(/[^a-z]/gi, ''))) bones.push(o);
@@ -86,7 +88,7 @@ export function startGaitCheck(game) {
     });
     const seen = new Set();
     for (const [id, r, seated] of list) {
-      if (!r?.root || seen.has(r) || id === 'tama') continue;
+      if (!r?.root?.parent || seen.has(r)) continue;
       // sitting, and getting up or down (the legs swing between the poses): not walking
       if (seated || r.state === 'sit') r._gwSat = t;
       if (t - (r._gwSat ?? -9) < SAT) continue;
@@ -98,10 +100,10 @@ export function startGaitCheck(game) {
       r.root.getWorldScale(_s);
       const u = _s.x || 1;
       if (!_f.intersectsSphere(_sp.set(_v.setY(_v.y + 0.5 * u), -0.2 * u))) continue;
-      // where they stand in the place (the train's car moves through the world, with everyone in it), in body units
-      P.space.worldToLocal(r.root.getWorldPosition(_v));
-      const k0 = P.space.getWorldScale(_s).x || 1,
-        at = [(_v.x * k0) / u, (_v.z * k0) / u];
+      // where they stand on whatever carries them (the train's car moves through the world with everyone in it; the
+      // cat rides Eric's chair), in body units
+      const k0 = r.root.parent.getWorldScale(_s).x || 1,
+        at = [(r.root.position.x * k0) / u, (r.root.position.z * k0) / u];
       seen.add(r);
       const rel = feetRel(r, feet);
       let k = track.get(r);

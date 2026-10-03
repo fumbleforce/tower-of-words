@@ -1,51 +1,29 @@
 // The island's cats and the insects (catalog.js).
 //   cats         sit up on a wall, a planter or a bench (or at the foot of a wall), looking out over the street;
-//                the tail swishes and flicks, and the head follows Eric while he is close, otherwise looks about.
+//                breathing, the tail swaying, an ear flicking and blinking (cat.js, the same cat as Tama), and the
+//                head follows Eric while he is close, otherwise looks about.
 //                One left far behind, out of sight, finds another spot nearer him. None of them is Tama.
 //   butterflies  wander in loops over lawns and planting; red dragonflies hover, then dart a little way.
 import * as THREE from 'three';
-import { catGeometry, butterflyGeometry, dragonflyGeometry } from './models.js';
+import { butterflyGeometry, dragonflyGeometry } from './models.js';
+import { makeCat } from './cat.js';
 import { InsectMeshes } from './meshes.js';
 
 const rnd = (a, b) => a + Math.random() * (b - a);
 const angle = (a) => Math.atan2(Math.sin(a), Math.cos(a));
 
-let catMat;
 export class Cat {
   constructor(def, W, parent) {
-    const g = catGeometry(def.coat);
-    catMat ||= new THREE.MeshStandardMaterial({
-      vertexColors: true,
-      flatShading: true,
-      roughness: 0.92,
-    });
-    catMat.userData.noLook = true;
-    const mesh = (geo) => {
-      const m = new THREE.Mesh(geo, catMat);
-      m.receiveShadow = true;
-      m.userData.creature = true;
-      return m;
-    };
+    // the same rigged cat as Tama (cat.js), sitting up; the blob under her is the creatures' own (W.blob)
+    this.rig = makeCat(def.coat, { mode: 'sit' });
+    this.rig.mesh.castShadow = false;
+    this.rig.mesh.userData.creature = true;
     this.W = W;
     this.def = def;
-    this.root = new THREE.Group();
-    this.root.userData.noBatch = true;
+    this.root = this.rig.root;
     this.root.scale.setScalar(W.K * 1.1);
-    this.body = mesh(g.body);
-    this.head = new THREE.Group();
-    this.head.position.set(...g.headAt);
-    this.head.add(mesh(g.head));
-    this.tail = new THREE.Group();
-    this.tail.position.set(...g.tailAt);
-    this.tail.add(mesh(g.tail));
-    this.root.add(this.body, this.head, this.tail);
     this.root.visible = false;
     parent.add(this.root);
-    this.look = 0;
-    this.lookAt = 0;
-    this.lookT = 0;
-    this.flick = 0;
-    this.phase = Math.random() * 6;
   }
   // a spot: on a low perch, else at the foot of a wall; seen = must be on screen (true), off it (false), either
   place(seen) {
@@ -92,24 +70,12 @@ export class Cat {
       this.wait = rnd(1, 4);
       return;
     }
-    this.phase += dt;
-    // the head: on Eric while he is near, else a slow look about
+    // the head on Eric while he is near, else the cat looks about by itself; the tail, ears and breathing are the
+    // rig's own
     const dx = W.eric.x - r.position.x,
       dz = W.eric.z - r.position.z;
-    this.lookT -= dt;
-    if (Math.hypot(dx, dz) < 5 * W.K)
-      this.lookAt = THREE.MathUtils.clamp(angle(Math.atan2(dx, dz) - r.rotation.y), -1.1, 1.1);
-    else if (this.lookT <= 0) ((this.lookT = rnd(2.5, 7)), (this.lookAt = rnd(-0.9, 0.9)));
-    this.look += (this.lookAt - this.look) * Math.min(1, dt * 3);
-    this.head.rotation.y = this.look;
-    this.head.rotation.z = 0.08 * Math.sin(this.phase * 0.5);
-    // the tail: a slow swish, and now and then a quick flick of the tip
-    if (this.flick <= 0 && Math.random() < dt * 0.25) this.flick = 0.35;
-    const f = this.flick > 0 ? Math.sin((1 - this.flick / 0.35) * Math.PI) * 0.6 : 0;
-    this.flick -= dt;
-    this.tail.rotation.y = 0.3 * Math.sin(this.phase * 0.8) + f;
-    this.tail.rotation.x = -0.1 * f;
-    this.body.scale.y = 1 + 0.015 * Math.sin(this.phase * 2.4); // breathing
+    this.rig.look = Math.hypot(dx, dz) < 5 * W.K ? angle(Math.atan2(dx, dz) - r.rotation.y) : null;
+    this.rig.update(dt);
     W.blob(r.position, 0.16 * W.K, r.position.y);
   }
   reset(active) {

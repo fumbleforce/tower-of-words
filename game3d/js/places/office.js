@@ -16,6 +16,7 @@ import { officeDay2 } from './office-day2.js';
 import { blob } from '../engine.js';
 import { flags } from '../narrative/state.js';
 import { glide, walkRig, hopOff } from '../move.js';
+import { catWalk, catHop } from '../creatures/cat.js';
 import { mat, rbox, PAL } from '../props.js';
 import { route } from './route.js';
 import { chairPusher } from './office-chair.js';
@@ -64,7 +65,7 @@ export async function officePlace(game) {
     mori: w.mori,
     aoi,
     rei,
-    tama: { root: w.tama, head: w.tama.userData.head },
+    tama: w.tamaRig,
   };
   const blobs = { emi: w.emiBlob, aoi: aoiBlob, rei: reiBlob };
   // a steam puff for the kettle and a blinking light on the racks
@@ -845,6 +846,7 @@ export async function officePlace(game) {
     },
     update(dt, t) {
       w.update(t);
+      w.tamaRig.update(dt);
       stepPeople([w.emi, w.kenji, w.mori, aoi, rei], dt);
       if (st.steam > 0) {
         st.steam -= dt;
@@ -921,11 +923,13 @@ export async function officePlace(game) {
         const p = game.posOf(to);
         if (!p) return;
         if (w.tama.parent !== w.root) {
+          // off the chair: a hop down, a little way toward where she is going
           w.root.attach(w.tama);
-          w.tama.position.y = 0;
+          const q = w.tama.position,
+            d = Math.hypot(p[0] - q.x, p[1] - q.z) || 1;
+          await catHop(game, w.tamaRig, [q.x + ((p[0] - q.x) / d) * 0.35, q.z + ((p[1] - q.z) / d) * 0.35], 0);
         }
-        w.tama.userData.head.rotation.x = 0;
-        await walkRig(game, w.tama, p, { speed: 1.1 });
+        await catWalk(game, w.tamaRig, p, { speed: 1.1, end: 'sit' });
       },
       chairRoll: async ({ to = 'my_seat' }) => {
         w.nav.unblock('chair');

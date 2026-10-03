@@ -21,7 +21,7 @@ import {
   sh,
 } from '../props.js';
 import { PEOPLE, sit, armsLap, walkPose, HIP, idle } from '../cast.js';
-import { cat } from '../train/people.js';
+import { makeCat } from '../creatures/cat.js';
 import { blob, Nav } from '../engine.js';
 import { K } from './office.js';
 import { lightPool, dust, clockHands, groundShadows } from '../places/life.js';
@@ -903,10 +903,11 @@ export function* lobbySteps() {
   const manBlob = blob(0.55, 0.38);
   manBlob.position.set(-1.2, 0.004, Z + 1.6);
   root.add(manBlob);
-  const tama = cat();
+  const tamaRig = makeCat('calico', { mode: 'eat' }), // eating from her bowl (docs/game/places.md, Gate)
+    tama = tamaRig.root;
   tama.scale.setScalar(1.45 * K);
   tama.position.set(3.45, 0, BZ + 0.42);
-  tama.rotation.y = -0.5;
+  tama.rotation.y = -1.05;
   root.add(tama);
   {
     const bowl = new THREE.Mesh(new THREE.CylinderGeometry(0.09, 0.07, 0.05, 14), mat('#d9dde2'));
@@ -966,12 +967,14 @@ export function* lobbySteps() {
     aoiBlob,
     manBlob,
     tama,
+    tamaRig,
     lifts,
     screen: scr,
     BZ,
     X,
     Z,
   };
+  let lastT = null;
   world.update = (t) => {
     motes.userData.update(t);
     sec.userData.set(0, Math.floor(t));
@@ -980,8 +983,8 @@ export function* lobbySteps() {
     scr.userData.update(t);
     guard.head.rotation.y = Math.sin(t * 0.3) * 0.25;
     if (!man._walk) idle(man, t);
-    tama.userData.tail.rotation.y = Math.sin(t * 1.3) * 0.3;
-    tama.userData.head.rotation.x = 0.25 + Math.max(0, Math.sin(t * 2.2)) * 0.15;
+    tamaRig.update(Math.min(0.1, t - (lastT ?? t)));
+    lastT = t;
     if (aoi.seated) idle(aoi, t);
   };
   world.clock = clock;

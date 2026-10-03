@@ -63,6 +63,7 @@ export function snapshotPeople(people) {
           lookTarget: person.lookTarget ? [...person.lookTarget] : null,
           blob: person.blob ? snapshotObject(person.blob) : null,
           ...(person.savedWalk ? { walk: structuredClone(person.savedWalk) } : {}),
+          ...(person.selfGait ? { catMode: person.mode } : {}), // the cat's pose (creatures/cat.js)
           pose: Object.fromEntries(
             Object.entries(poseParts(person)).map(([name, object]) => [name, snapshotObject(object)]),
           ),
@@ -83,5 +84,6 @@ export function restorePeople(people, data = {}) {
     restoreObject(person.root, saved);
     if (person.blob) restoreObject(person.blob, saved.blob);
     for (const [name, object] of Object.entries(poseParts(person))) restoreObject(object, saved.pose?.[name]);
+    if (saved.catMode) person.set?.(saved.catMode, { now: true });
   }
 }

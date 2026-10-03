@@ -63,18 +63,6 @@
       "context": "c05785bf24a7a6ac8fdd684aaa81267feefd0fcd85e0093b761e200fffb086ff"
     },
     {
-      "file": "game3d/js/places/train.js",
-      "ruleId": "no-unused-vars",
-      "message": "'walkPose' is defined but never used.",
-      "context": "ad837287a91b7bac7993c596f75b0b3ccd051ebe73a87266bd274d3e76d07034"
-    },
-    {
-      "file": "game3d/js/places/train.js",
-      "ruleId": "no-unused-vars",
-      "message": "'HIP' is defined but never used.",
-      "context": "e120ce4a132810b89fec545582b860fd6514138986b34c05d9f044c39e9c5e11"
-    },
-    {
       "file": "game3d/js/props.js",
       "ruleId": "no-unused-vars",
       "message": "'icoPoints' is defined but never used.",

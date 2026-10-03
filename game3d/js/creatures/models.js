@@ -1,8 +1,7 @@
 // The birds and small animals' shapes (docs/game/places.md, each place's "Creatures"): faceted convex parts with one
 // colour per face, built in code like the chibi people (train/hull.js), in metres, facing +z with the feet at y = 0.
 // A bird is two geometries: the body (head, beak, tail and legs in one) and one wing, its root at the shoulder and
-// its span along +x; the other wing is the same one mirrored. Cats are a body, a head and a tail, so the head can
-// turn and the tail swish. Insects are a single small shape whose wings are flapped by squashing it across.
+// its span along +x; the other wing is the same one mirrored. Insects are a single small shape whose wings are flapped by squashing it across.
 import * as THREE from 'three';
 import { hull, beamHull, icoPoints } from '../train/hull.js';
 import { V, Geo } from '../train/kit.js';
@@ -162,101 +161,7 @@ export function birdGeometry(kind) {
   };
 }
 
-// An island cat sitting up, facing +z: { body, head, tail, headAt, tailAt } (the head and tail pivots in the body's
-// frame). Coats: a black cat, a grey tabby and a ginger-and-white one (not Tama, the calico).
-export const COATS = {
-  black: {
-    coat: '#2b2b31',
-    chest: '#2b2b31',
-    stripe: '#232328',
-    eye: '#d8c34a',
-    nose: '#3a3236',
-    ear: '#4a3a40',
-  },
-  tabby: {
-    coat: '#8f8c88',
-    chest: '#d9d4cc',
-    stripe: '#5d5a58',
-    eye: '#9cc06a',
-    nose: '#c98a86',
-    ear: '#b88783',
-  },
-  ginger: {
-    coat: '#e09a55',
-    chest: '#f6efe4',
-    stripe: '#c27a3c',
-    eye: '#c9b048',
-    nose: '#d68e86',
-    ear: '#d99c8f',
-  },
-};
-export function catGeometry(coat) {
-  const c = COATS[coat];
-  const stripes = (p) => (Math.sin(p.z * 70 + p.y * 30) > 0.55 ? c.stripe : undefined);
-  const body = hull(
-    [
-      ...icoPoints(V(0, 0.1, -0.04), [0.105, 0.1, 0.12], 0.04, 21),
-      ...icoPoints(V(0, 0.2, 0.045), [0.07, 0.1, 0.065], 0.03, 22),
-    ],
-    c.coat,
-    {
-      grad: 0.16,
-      colorOf: (p) => (p.z > 0.07 && p.y > 0.1 ? c.chest : stripes(p)),
-    },
-  );
-  const legs = [-1, 1].map((x) => beamHull(V(x * 0.035, 0.2, 0.07), V(x * 0.036, 0.01, 0.095), 0.036, 0.04, c.chest));
-  const paws = [-1, 1].map((x) =>
-    hull(icoPoints(V(x * 0.037, 0.016, 0.105), [0.024, 0.016, 0.03], 0, 4), c.chest, { grad: 0 }),
-  );
-  const haunch = [-1, 1].map((x) =>
-    hull(icoPoints(V(x * 0.075, 0.07, -0.03), [0.04, 0.065, 0.085], 0.03, 9), c.coat, { grad: 0.12 }),
-  );
-  const head = new Geo();
-  head.add(
-    hull(icoPoints(V(0, 0, 0), [0.085, 0.074, 0.075], 0.02, 31), c.coat, {
-      grad: 0.1,
-      colorOf: (p) => (p.z > 0.045 && p.y < -0.005 ? c.chest : p.y > 0.04 ? stripes(p) : undefined),
-    }),
-  );
-  for (const s of [-1, 1]) {
-    const parts = [
-      hull(
-        [
-          [s * 0.025, 0.05, -0.025],
-          [s * 0.03, 0.05, 0.025],
-          [s * 0.075, 0.045, 0.0],
-          [s * 0.06, 0.115, -0.002],
-          [s * 0.05, 0.06, 0.014],
-        ],
-        c.coat,
-        { grad: 0.05, colorOf: (p, n) => (n.z > 0.5 ? c.ear : undefined) },
-      ),
-      // open eyes, with a dark slit
-      hull(icoPoints(V(s * 0.033, 0.012, 0.066), [0.016, 0.014, 0.008], 0, 3), c.eye, { grad: 0 }),
-      hull(icoPoints(V(s * 0.033, 0.012, 0.072), [0.004, 0.012, 0.004], 0, 3), '#121214', { grad: 0 }),
-    ];
-    for (const p of parts) head.add(p);
-  }
-  head.add(
-    hull(icoPoints(V(0, -0.012, 0.077), [0.011, 0.008, 0.006], 0, 3), c.nose, {
-      grad: 0,
-    }),
-  );
-  // the tail: from the rump back along the ground, curling up at the end
-  const tail = new Geo();
-  const path = [V(0, 0, 0), V(0.03, -0.02, -0.08), V(0.09, -0.025, -0.12), V(0.15, -0.02, -0.1), V(0.19, 0.0, -0.05)];
-  for (let i = 0; i < path.length - 1; i++)
-    tail.add(
-      beamHull(path[i], path[i + 1], 0.034 - i * 0.003, 0.032 - i * 0.003, i === path.length - 2 ? c.stripe : c.coat),
-    );
-  return {
-    body: build(body, ...legs, ...paws, ...haunch),
-    head: head.build(),
-    tail: tail.build(),
-    headAt: [0, 0.32, 0.075],
-    tailAt: [0, 0.035, -0.15],
-  };
-}
+// The cats: cat-rig.js (the rigged body) and cat.js (how they move).
 
 // Insects: a butterfly (two pairs of wings spread flat; the game squashes it across to flap) and a red dragonfly
 // (akatombo: a thin red body and four pale wings).
