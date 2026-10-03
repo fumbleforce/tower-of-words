@@ -248,20 +248,23 @@ const json = (u) =>
     .then((r) => (r.ok ? r.json() : null))
     .catch(() => null);
 // Any character made with the 3D workflow and rigged through Meshy's API (Eric, and the cast in assets/characters/<id>/):
-// walk, run, idle, sit clips, the base colour texture, optional phone and gestures (or all from packed(); chibi.js).
-export async function loadMeshy(id, { height = 1.2, dir = CDIR + id + '/', packed, stride } = {}) {
+// walk, run, idle, sit clips, the base colour texture, optional phone and gestures.
+export async function loadMeshy(id, { height = 1.2, dir = CDIR + id + '/', stride } = {}) {
   const loader = new GLTFLoader();
   const load = (u) => new Promise((ok, no) => loader.load(u, ok, undefined, no));
-  const [walk, run, idle, sitG, tex, phoneJson, ...gj] = await (packed?.(load) ??
-    Promise.all([
-      load(dir + 'walk.glb' + ver()),
-      load(dir + 'run.glb' + ver()),
-      loadRelaxedIdle(id, ver()),
-      load(dir + 'sit.glb' + ver()),
-      new THREE.TextureLoader().loadAsync(dir + 'base.webp' + ver()),
-      json(CDIR + id + '/phone.json'),
-      ...GESTURES.map((g) => json(CDIR + id + '/' + g + '.json')),
-    ]));
+  const files = await Promise.all([
+    load(dir + 'walk.glb' + ver()),
+    load(dir + 'run.glb' + ver()),
+    loadRelaxedIdle(id, ver()),
+    load(dir + 'sit.glb' + ver()),
+    new THREE.TextureLoader().loadAsync(dir + 'base.webp' + ver()),
+    json(CDIR + id + '/phone.json'),
+    ...GESTURES.map((g) => json(CDIR + id + '/' + g + '.json')),
+  ]);
+  return meshyFrom(id, files, { height, stride });
+}
+// The person, at once, from files already loaded in loadMeshy's order (chibi.js makes several from one set).
+export function meshyFrom(id, [walk, run, idle, sitG, tex, phoneJson, ...gj], { height = 1.2, stride } = {}) {
   tex.flipY = false;
   tex.colorSpace = THREE.SRGBColorSpace;
   const model = walk.scene;

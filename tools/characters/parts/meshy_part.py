@@ -5,7 +5,7 @@ Smart Topology model (low poly at a set face count, 15 credits). Uses Jørgen's 
 
   meshy_part.py <part> <picture.png> [pose=a-pose] [tex=4k] [model=t2 faces=3000] [round=chibi-meshy]
 Writes <part>.json and .glb to the main checkout's art/parts/<round>/meshy/ (local only) and appends the credits to
-reviews/<round>-1/credits.json. The round defaults to char-mio-parts.
+reviews/<round>-1/credits.json (or reviews/<review>/credits.json with review=<id>). The round defaults to char-mio-parts.
 
   meshy_part.py rig <part> [height=1.0] [round=chibi-meshy] [model=<local.glb>]
 Meshy auto-rig on that part's task (5 credits; height lowered for a big chibi head). Writes <part>-rigged.glb and
@@ -54,7 +54,7 @@ def rig(part, opts):
     r = meshy.wait('rigging', tid)
     r['_settings'] = settings
     json.dump(r, open(f'{d}/{part}-rig.json', 'w'), indent=1)
-    log(os.path.join(ROOT, f'reviews/{rnd}-1/credits.json'),
+    log(os.path.join(ROOT, f'reviews/{opts.get("review", rnd + "-1")}/credits.json'),
         {'service': 'meshy', 'part': part + '-rig', 'task': tid, 'status': r.get('status'),
          'credits': r.get('consumed_credits'), 'settings': r['_settings']})
     if r.get('status') != 'SUCCEEDED':
@@ -72,7 +72,7 @@ def main():
     part, pic = sys.argv[1], sys.argv[2]
     opts = dict(kv.split('=', 1) for kv in sys.argv[3:])
     rnd = opts.pop('round', 'char-mio-parts')
-    ledger = os.path.join(ROOT, f'reviews/{rnd}-1/credits.json')
+    ledger = os.path.join(ROOT, f'reviews/{opts.pop("review", rnd + "-1")}/credits.json')
     body = {'image_url': meshy.data_uri(pic), 'ai_model': 'latest', 'should_remesh': False, 'should_texture': True,
             'enable_pbr': False, 'image_enhancement': False, 'target_formats': ['glb'], 'multi_view_thumbnails': True}
     if opts.get('pose'): body['pose_mode'] = opts['pose']

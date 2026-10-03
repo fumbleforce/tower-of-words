@@ -167,8 +167,9 @@ export function walkPerson(rig, pts, { speed = 1.2, blobM } = {}) {
     };
   });
 }
+// (a Meshy person walked by walkRig has _walk = true and moves on its own)
 export function stepPeople(list, dt) {
-  for (const r of list) if (r && r._walk) r._walk(dt);
+  for (const r of list) if (typeof r?._walk === 'function') r._walk(dt);
 }
 
 // turn a rig's head toward a point, smoothly

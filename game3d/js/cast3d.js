@@ -1,27 +1,31 @@
 // The 3D cast from the Meshy workflow (tools/characters/, assets/characters/<id>/), wrapped so the scenes can treat
-// them like the code-built people of cast.js. Kuro's Meshy chibi (chibi.js) comes in here when that look is on.
+// them like the code-built people of cast.js. The Meshy chibis (chibi.js) come in here when that look is on: their
+// files load once, and every place that builds the person gets its own copy.
 import * as THREE from 'three';
 import { HIP } from './train/people.js';
 import { SEAT_Y } from './train/car.js';
 import { loadMeshy } from './avatar.js';
-import { loadChibi, CHIBI_CAST } from './chibi.js';
+import { chibiFiles, chibiFrom, CHIBI_CAST } from './chibi.js';
 
 // Standing heights next to Mio (1.12) and Eric (1.2). While a model waits for Jørgen's approval it only loads with
 // ?cast3d=<id>[,<id>]; approved ids go in CAST3D_ON.
 export const CAST3D = { mori: 1.2, kuro: 1.12 };
 const CAST3D_ON = [];
 const Q3 = new URLSearchParams(typeof location !== 'undefined' ? location.search : '');
-const want3 = [...CAST3D_ON, ...CHIBI_CAST, ...(Q3.get('cast3d') || '').split(',')].filter((id) => CAST3D[id]);
-const PRE3 = {};
-await Promise.all(
-  want3.map(async (id) => {
-    const load = CHIBI_CAST.includes(id) ? loadChibi(id) : loadMeshy(id, { height: CAST3D[id] });
-    PRE3[id] = await load.catch((e) => {
-      console.warn('3D cast', id, e);
-      return null;
-    });
-  }),
+const want3 = [...CAST3D_ON, ...(Q3.get('cast3d') || '').split(',')].filter(
+  (id) => CAST3D[id] && !CHIBI_CAST.includes(id),
 );
+const PRE3 = {};
+const warn = (id) => (e) => {
+  console.warn('3D cast', id, e);
+  return null;
+};
+await Promise.all([
+  ...want3.map(async (id) => (PRE3[id] = await loadMeshy(id, { height: CAST3D[id] }).catch(warn(id)))),
+  ...CHIBI_CAST.map(async (id) => (PRE3[id] = await chibiFiles(id).catch(warn(id)))),
+]);
+// the ids cast.js asks for here first
+export const CAST3D_IDS = [...new Set([...Object.keys(CAST3D), ...CHIBI_CAST])];
 // Wrap a loaded Meshy character so the scenes can treat it like a chibi rig: the pose helpers (sit, walkPose, arms...)
 // switch its clips instead, the chibi parts they write to are harmless stand-ins (the head follows the real head bone,
 // for labels and look-at), `seated` picks sit or idle, and it updates itself each frame it's drawn.
@@ -63,4 +67,8 @@ function meshyPerson(m) {
   };
   return m;
 }
-export const meshy3 = (id) => (PRE3[id] ? meshyPerson(PRE3[id]) : null);
+export const meshy3 = (id) => {
+  const p = PRE3[id];
+  if (!p) return null;
+  return meshyPerson(CHIBI_CAST.includes(id) ? chibiFrom(p) : p);
+};

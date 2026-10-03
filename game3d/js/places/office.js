@@ -563,7 +563,7 @@ export async function officePlace(game) {
     if (mo._walk) {
       for (let i = 0; i < 30 && mo._walk; i++) await game.wait(150);
     }
-    for (let i = 0; i < 60 && mo._walk; i++) mo._walk(5); // still on the way: finish his walk at once (story.js walkPerson steps)
+    for (let i = 0; i < 60 && mo._walk?.call; i++) mo._walk(5); // still on the way: finish his walk now (story.js walkPerson)
     if (Math.hypot(mo.root.position.x + 0.8, mo.root.position.z - 5.5) > 0.4) {
       mo._walk = null;
       standUp('mori');

@@ -1,0 +1,602 @@
+[
+ {
+  "name": "mori-a-101",
+  "who": "mori",
+  "job": "mori-a",
+  "parent": null,
+  "seed": 101,
+  "prompt": "Edit image 1: turn the woman into the person from image 2, keeping everything else about image 1 exactly: the same smooth matte vinyl 3D figure, the same big soft rounded-square head, the same large flat painted anime eyes and small simple nose and mouth, the same short body, round mitten hands with no fingers and stubby legs, the same front view standing pose with the arms slightly out, the same soft studio light and plain white background. He is a kind 58-year-old man with neatly combed grey hair, grey eyebrows, a few soft lines at his eyes, dark brown eyes and tanned skin. He wears a dark grey suit jacket over a white shirt with a navy tie, dark grey trousers and black shoes. Empty hands. No text, no props.",
+  "model": "flux-2-klein-4b-fp8",
+  "steps": 4,
+  "cfg": 1.0,
+  "size": [
+   1024,
+   1024
+  ],
+  "refs": [
+   "image 1: art/parts/chibi-meshy/inputs/dressed.png (Jørgen's picture)",
+   "image 2: game3d/assets/portraits/mori-neutral.webp"
+  ],
+  "seconds": 20.0
+ },
+ {
+  "name": "mori-a-102",
+  "who": "mori",
+  "job": "mori-a",
+  "parent": null,
+  "seed": 102,
+  "prompt": "Edit image 1: turn the woman into the person from image 2, keeping everything else about image 1 exactly: the same smooth matte vinyl 3D figure, the same big soft rounded-square head, the same large flat painted anime eyes and small simple nose and mouth, the same short body, round mitten hands with no fingers and stubby legs, the same front view standing pose with the arms slightly out, the same soft studio light and plain white background. He is a kind 58-year-old man with neatly combed grey hair, grey eyebrows, a few soft lines at his eyes, dark brown eyes and tanned skin. He wears a dark grey suit jacket over a white shirt with a navy tie, dark grey trousers and black shoes. Empty hands. No text, no props.",
+  "model": "flux-2-klein-4b-fp8",
+  "steps": 4,
+  "cfg": 1.0,
+  "size": [
+   1024,
+   1024
+  ],
+  "refs": [
+   "image 1: art/parts/chibi-meshy/inputs/dressed.png (Jørgen's picture)",
+   "image 2: game3d/assets/portraits/mori-neutral.webp"
+  ],
+  "seconds": 11.0
+ },
+ {
+  "name": "mori-a-103",
+  "who": "mori",
+  "job": "mori-a",
+  "parent": null,
+  "seed": 103,
+  "prompt": "Edit image 1: turn the woman into the person from image 2, keeping everything else about image 1 exactly: the same smooth matte vinyl 3D figure, the same big soft rounded-square head, the same large flat painted anime eyes and small simple nose and mouth, the same short body, round mitten hands with no fingers and stubby legs, the same front view standing pose with the arms slightly out, the same soft studio light and plain white background. He is a kind 58-year-old man with neatly combed grey hair, grey eyebrows, a few soft lines at his eyes, dark brown eyes and tanned skin. He wears a dark grey suit jacket over a white shirt with a navy tie, dark grey trousers and black shoes. Empty hands. No text, no props.",
+  "model": "flux-2-klein-4b-fp8",
+  "steps": 4,
+  "cfg": 1.0,
+  "size": [
+   1024,
+   1024
+  ],
+  "refs": [
+   "image 1: art/parts/chibi-meshy/inputs/dressed.png (Jørgen's picture)",
+   "image 2: game3d/assets/portraits/mori-neutral.webp"
+  ],
+  "seconds": 11.0
+ },
+ {
+  "name": "kenji-a-101",
+  "who": "kenji",
+  "job": "kenji-a",
+  "parent": null,
+  "seed": 101,
+  "prompt": "Edit image 1: turn the woman into the person from image 2, keeping everything else about image 1 exactly: the same smooth matte vinyl 3D figure, the same big soft rounded-square head, the same large flat painted anime eyes and small simple nose and mouth, the same short body, round mitten hands with no fingers and stubby legs, the same front view standing pose with the arms slightly out, the same soft studio light and plain white background. He is a 21-year-old young man with a soft round chubby build, short messy black hair sticking up on top, big dark brown eyes, rosy cheeks and tanned skin. He wears a white short-sleeved shirt with a dark navy tie, dark navy trousers and dark shoes. Empty hands. No text, no props.",
+  "model": "flux-2-klein-4b-fp8",
+  "steps": 4,
+  "cfg": 1.0,
+  "size": [
+   1024,
+   1024
+  ],
+  "refs": [
+   "image 1: art/parts/chibi-meshy/inputs/dressed.png (Jørgen's picture)",
+   "image 2: game3d/assets/portraits/kenji-neutral.webp"
+  ],
+  "seconds": 12.0
+ },
+ {
+  "name": "kenji-a-102",
+  "who": "kenji",
+  "job": "kenji-a",
+  "parent": null,
+  "seed": 102,
+  "prompt": "Edit image 1: turn the woman into the person from image 2, keeping everything else about image 1 exactly: the same smooth matte vinyl 3D figure, the same big soft rounded-square head, the same large flat painted anime eyes and small simple nose and mouth, the same short body, round mitten hands with no fingers and stubby legs, the same front view standing pose with the arms slightly out, the same soft studio light and plain white background. He is a 21-year-old young man with a soft round chubby build, short messy black hair sticking up on top, big dark brown eyes, rosy cheeks and tanned skin. He wears a white short-sleeved shirt with a dark navy tie, dark navy trousers and dark shoes. Empty hands. No text, no props.",
+  "model": "flux-2-klein-4b-fp8",
+  "steps": 4,
+  "cfg": 1.0,
+  "size": [
+   1024,
+   1024
+  ],
+  "refs": [
+   "image 1: art/parts/chibi-meshy/inputs/dressed.png (Jørgen's picture)",
+   "image 2: game3d/assets/portraits/kenji-neutral.webp"
+  ],
+  "seconds": 11.0
+ },
+ {
+  "name": "kenji-a-103",
+  "who": "kenji",
+  "job": "kenji-a",
+  "parent": null,
+  "seed": 103,
+  "prompt": "Edit image 1: turn the woman into the person from image 2, keeping everything else about image 1 exactly: the same smooth matte vinyl 3D figure, the same big soft rounded-square head, the same large flat painted anime eyes and small simple nose and mouth, the same short body, round mitten hands with no fingers and stubby legs, the same front view standing pose with the arms slightly out, the same soft studio light and plain white background. He is a 21-year-old young man with a soft round chubby build, short messy black hair sticking up on top, big dark brown eyes, rosy cheeks and tanned skin. He wears a white short-sleeved shirt with a dark navy tie, dark navy trousers and dark shoes. Empty hands. No text, no props.",
+  "model": "flux-2-klein-4b-fp8",
+  "steps": 4,
+  "cfg": 1.0,
+  "size": [
+   1024,
+   1024
+  ],
+  "refs": [
+   "image 1: art/parts/chibi-meshy/inputs/dressed.png (Jørgen's picture)",
+   "image 2: game3d/assets/portraits/kenji-neutral.webp"
+  ],
+  "seconds": 11.0
+ },
+ {
+  "name": "emi-a-101",
+  "who": "emi",
+  "job": "emi-a",
+  "parent": null,
+  "seed": 101,
+  "prompt": "Edit image 1: turn the woman into the person from image 2, keeping everything else about image 1 exactly: the same smooth matte vinyl 3D figure, the same big soft rounded-square head, the same large flat painted anime eyes and small simple nose and mouth, the same short body, round mitten hands with no fingers and stubby legs, the same front view standing pose with the arms slightly out, the same soft studio light and plain white background. She is a 32-year-old woman with a curvy figure, a reddish auburn bob to her chin with a side-swept fringe, round brown tortoiseshell glasses, brown eyes, a warm smile and light skin. She wears a charcoal blazer over a cream blouse, a charcoal skirt and black flat shoes. Empty hands. No text, no props.",
+  "model": "flux-2-klein-4b-fp8",
+  "steps": 4,
+  "cfg": 1.0,
+  "size": [
+   1024,
+   1024
+  ],
+  "refs": [
+   "image 1: art/parts/chibi-meshy/inputs/dressed.png (Jørgen's picture)",
+   "image 2: game3d/assets/portraits/emi-neutral.webp"
+  ],
+  "seconds": 12.0
+ },
+ {
+  "name": "emi-a-102",
+  "who": "emi",
+  "job": "emi-a",
+  "parent": null,
+  "seed": 102,
+  "prompt": "Edit image 1: turn the woman into the person from image 2, keeping everything else about image 1 exactly: the same smooth matte vinyl 3D figure, the same big soft rounded-square head, the same large flat painted anime eyes and small simple nose and mouth, the same short body, round mitten hands with no fingers and stubby legs, the same front view standing pose with the arms slightly out, the same soft studio light and plain white background. She is a 32-year-old woman with a curvy figure, a reddish auburn bob to her chin with a side-swept fringe, round brown tortoiseshell glasses, brown eyes, a warm smile and light skin. She wears a charcoal blazer over a cream blouse, a charcoal skirt and black flat shoes. Empty hands. No text, no props.",
+  "model": "flux-2-klein-4b-fp8",
+  "steps": 4,
+  "cfg": 1.0,
+  "size": [
+   1024,
+   1024
+  ],
+  "refs": [
+   "image 1: art/parts/chibi-meshy/inputs/dressed.png (Jørgen's picture)",
+   "image 2: game3d/assets/portraits/emi-neutral.webp"
+  ],
+  "seconds": 11.0
+ },
+ {
+  "name": "emi-a-103",
+  "who": "emi",
+  "job": "emi-a",
+  "parent": null,
+  "seed": 103,
+  "prompt": "Edit image 1: turn the woman into the person from image 2, keeping everything else about image 1 exactly: the same smooth matte vinyl 3D figure, the same big soft rounded-square head, the same large flat painted anime eyes and small simple nose and mouth, the same short body, round mitten hands with no fingers and stubby legs, the same front view standing pose with the arms slightly out, the same soft studio light and plain white background. She is a 32-year-old woman with a curvy figure, a reddish auburn bob to her chin with a side-swept fringe, round brown tortoiseshell glasses, brown eyes, a warm smile and light skin. She wears a charcoal blazer over a cream blouse, a charcoal skirt and black flat shoes. Empty hands. No text, no props.",
+  "model": "flux-2-klein-4b-fp8",
+  "steps": 4,
+  "cfg": 1.0,
+  "size": [
+   1024,
+   1024
+  ],
+  "refs": [
+   "image 1: art/parts/chibi-meshy/inputs/dressed.png (Jørgen's picture)",
+   "image 2: game3d/assets/portraits/emi-neutral.webp"
+  ],
+  "seconds": 11.0
+ },
+ {
+  "name": "guard-a-101",
+  "who": "guard",
+  "job": "guard-a",
+  "parent": null,
+  "seed": 101,
+  "prompt": "Edit image 1: turn the woman into the person from image 2, keeping everything else about image 1 exactly: the same smooth matte vinyl 3D figure, the same big soft rounded-square head, the same large flat painted anime eyes and small simple nose and mouth, the same short body, round mitten hands with no fingers and stubby legs, the same front view standing pose with the arms slightly out, the same soft studio light and plain white background. He is a stern 64-year-old bald man with a thin white moustache, bushy white eyebrows, thin silver glasses and tanned skin. He wears a plain navy blue security uniform jacket with a black belt, navy trousers and black shoes. Empty hands. No text, no props.",
+  "model": "flux-2-klein-4b-fp8",
+  "steps": 4,
+  "cfg": 1.0,
+  "size": [
+   1024,
+   1024
+  ],
+  "refs": [
+   "image 1: art/parts/chibi-meshy/inputs/dressed.png (Jørgen's picture)",
+   "image 2: game3d/assets/portraits/guard-neutral.webp"
+  ],
+  "seconds": 12.0
+ },
+ {
+  "name": "guard-a-102",
+  "who": "guard",
+  "job": "guard-a",
+  "parent": null,
+  "seed": 102,
+  "prompt": "Edit image 1: turn the woman into the person from image 2, keeping everything else about image 1 exactly: the same smooth matte vinyl 3D figure, the same big soft rounded-square head, the same large flat painted anime eyes and small simple nose and mouth, the same short body, round mitten hands with no fingers and stubby legs, the same front view standing pose with the arms slightly out, the same soft studio light and plain white background. He is a stern 64-year-old bald man with a thin white moustache, bushy white eyebrows, thin silver glasses and tanned skin. He wears a plain navy blue security uniform jacket with a black belt, navy trousers and black shoes. Empty hands. No text, no props.",
+  "model": "flux-2-klein-4b-fp8",
+  "steps": 4,
+  "cfg": 1.0,
+  "size": [
+   1024,
+   1024
+  ],
+  "refs": [
+   "image 1: art/parts/chibi-meshy/inputs/dressed.png (Jørgen's picture)",
+   "image 2: game3d/assets/portraits/guard-neutral.webp"
+  ],
+  "seconds": 11.0
+ },
+ {
+  "name": "guard-a-103",
+  "who": "guard",
+  "job": "guard-a",
+  "parent": null,
+  "seed": 103,
+  "prompt": "Edit image 1: turn the woman into the person from image 2, keeping everything else about image 1 exactly: the same smooth matte vinyl 3D figure, the same big soft rounded-square head, the same large flat painted anime eyes and small simple nose and mouth, the same short body, round mitten hands with no fingers and stubby legs, the same front view standing pose with the arms slightly out, the same soft studio light and plain white background. He is a stern 64-year-old bald man with a thin white moustache, bushy white eyebrows, thin silver glasses and tanned skin. He wears a plain navy blue security uniform jacket with a black belt, navy trousers and black shoes. Empty hands. No text, no props.",
+  "model": "flux-2-klein-4b-fp8",
+  "steps": 4,
+  "cfg": 1.0,
+  "size": [
+   1024,
+   1024
+  ],
+  "refs": [
+   "image 1: art/parts/chibi-meshy/inputs/dressed.png (Jørgen's picture)",
+   "image 2: game3d/assets/portraits/guard-neutral.webp"
+  ],
+  "seconds": 11.0
+ },
+ {
+  "name": "kuroda-a-101",
+  "who": "kuroda",
+  "job": "kuroda-a",
+  "parent": null,
+  "seed": 101,
+  "prompt": "Edit image 1: turn the woman into the person from image 2, keeping everything else about image 1 exactly: the same smooth matte vinyl 3D figure, the same big soft rounded-square head, the same large flat painted anime eyes and small simple nose and mouth, the same short body, round mitten hands with no fingers and stubby legs, the same front view standing pose with the arms slightly out, the same soft studio light and plain white background. He is a thin, tired 54-year-old man with black hair combed back, going grey at the temples, sleepy half-closed eyes and light tanned skin. He wears a navy suit jacket over a white shirt with a navy tie, navy trousers and dark brown shoes. Empty hands. No text, no props.",
+  "model": "flux-2-klein-4b-fp8",
+  "steps": 4,
+  "cfg": 1.0,
+  "size": [
+   1024,
+   1024
+  ],
+  "refs": [
+   "image 1: art/parts/chibi-meshy/inputs/dressed.png (Jørgen's picture)",
+   "image 2: game3d/assets/portraits/kuroda-neutral.webp"
+  ],
+  "seconds": 12.1
+ },
+ {
+  "name": "kuroda-a-102",
+  "who": "kuroda",
+  "job": "kuroda-a",
+  "parent": null,
+  "seed": 102,
+  "prompt": "Edit image 1: turn the woman into the person from image 2, keeping everything else about image 1 exactly: the same smooth matte vinyl 3D figure, the same big soft rounded-square head, the same large flat painted anime eyes and small simple nose and mouth, the same short body, round mitten hands with no fingers and stubby legs, the same front view standing pose with the arms slightly out, the same soft studio light and plain white background. He is a thin, tired 54-year-old man with black hair combed back, going grey at the temples, sleepy half-closed eyes and light tanned skin. He wears a navy suit jacket over a white shirt with a navy tie, navy trousers and dark brown shoes. Empty hands. No text, no props.",
+  "model": "flux-2-klein-4b-fp8",
+  "steps": 4,
+  "cfg": 1.0,
+  "size": [
+   1024,
+   1024
+  ],
+  "refs": [
+   "image 1: art/parts/chibi-meshy/inputs/dressed.png (Jørgen's picture)",
+   "image 2: game3d/assets/portraits/kuroda-neutral.webp"
+  ],
+  "seconds": 11.1
+ },
+ {
+  "name": "kuroda-a-103",
+  "who": "kuroda",
+  "job": "kuroda-a",
+  "parent": null,
+  "seed": 103,
+  "prompt": "Edit image 1: turn the woman into the person from image 2, keeping everything else about image 1 exactly: the same smooth matte vinyl 3D figure, the same big soft rounded-square head, the same large flat painted anime eyes and small simple nose and mouth, the same short body, round mitten hands with no fingers and stubby legs, the same front view standing pose with the arms slightly out, the same soft studio light and plain white background. He is a thin, tired 54-year-old man with black hair combed back, going grey at the temples, sleepy half-closed eyes and light tanned skin. He wears a navy suit jacket over a white shirt with a navy tie, navy trousers and dark brown shoes. Empty hands. No text, no props.",
+  "model": "flux-2-klein-4b-fp8",
+  "steps": 4,
+  "cfg": 1.0,
+  "size": [
+   1024,
+   1024
+  ],
+  "refs": [
+   "image 1: art/parts/chibi-meshy/inputs/dressed.png (Jørgen's picture)",
+   "image 2: game3d/assets/portraits/kuroda-neutral.webp"
+  ],
+  "seconds": 11.1
+ },
+ {
+  "name": "aoi-a-101",
+  "who": "aoi",
+  "job": "aoi-a",
+  "parent": null,
+  "seed": 101,
+  "prompt": "Edit image 1: turn the woman into the person from image 2, keeping everything else about image 1 exactly: the same smooth matte vinyl 3D figure, the same big soft rounded-square head, the same large flat painted anime eyes and small simple nose and mouth, the same short body, round mitten hands with no fingers and stubby legs, the same front view standing pose with the arms slightly out, the same soft studio light and plain white background. She is a young woman with a bright pink bob, dark roots at the top and a little teal underneath, purple eyes, both eyes open, a cheerful grin and light skin. She wears an open dark green varsity jacket with pink and white striped cuffs and a pink star patch on the chest, over a white T-shirt, a dark navy skirt and dark sneakers. Empty hands. No text, no props.",
+  "model": "flux-2-klein-4b-fp8",
+  "steps": 4,
+  "cfg": 1.0,
+  "size": [
+   1024,
+   1024
+  ],
+  "refs": [
+   "image 1: art/parts/chibi-meshy/inputs/dressed.png (Jørgen's picture)",
+   "image 2: game3d/assets/portraits/aoi-neutral.webp"
+  ],
+  "seconds": 12.0
+ },
+ {
+  "name": "aoi-a-102",
+  "who": "aoi",
+  "job": "aoi-a",
+  "parent": null,
+  "seed": 102,
+  "prompt": "Edit image 1: turn the woman into the person from image 2, keeping everything else about image 1 exactly: the same smooth matte vinyl 3D figure, the same big soft rounded-square head, the same large flat painted anime eyes and small simple nose and mouth, the same short body, round mitten hands with no fingers and stubby legs, the same front view standing pose with the arms slightly out, the same soft studio light and plain white background. She is a young woman with a bright pink bob, dark roots at the top and a little teal underneath, purple eyes, both eyes open, a cheerful grin and light skin. She wears an open dark green varsity jacket with pink and white striped cuffs and a pink star patch on the chest, over a white T-shirt, a dark navy skirt and dark sneakers. Empty hands. No text, no props.",
+  "model": "flux-2-klein-4b-fp8",
+  "steps": 4,
+  "cfg": 1.0,
+  "size": [
+   1024,
+   1024
+  ],
+  "refs": [
+   "image 1: art/parts/chibi-meshy/inputs/dressed.png (Jørgen's picture)",
+   "image 2: game3d/assets/portraits/aoi-neutral.webp"
+  ],
+  "seconds": 11.1
+ },
+ {
+  "name": "aoi-a-103",
+  "who": "aoi",
+  "job": "aoi-a",
+  "parent": null,
+  "seed": 103,
+  "prompt": "Edit image 1: turn the woman into the person from image 2, keeping everything else about image 1 exactly: the same smooth matte vinyl 3D figure, the same big soft rounded-square head, the same large flat painted anime eyes and small simple nose and mouth, the same short body, round mitten hands with no fingers and stubby legs, the same front view standing pose with the arms slightly out, the same soft studio light and plain white background. She is a young woman with a bright pink bob, dark roots at the top and a little teal underneath, purple eyes, both eyes open, a cheerful grin and light skin. She wears an open dark green varsity jacket with pink and white striped cuffs and a pink star patch on the chest, over a white T-shirt, a dark navy skirt and dark sneakers. Empty hands. No text, no props.",
+  "model": "flux-2-klein-4b-fp8",
+  "steps": 4,
+  "cfg": 1.0,
+  "size": [
+   1024,
+   1024
+  ],
+  "refs": [
+   "image 1: art/parts/chibi-meshy/inputs/dressed.png (Jørgen's picture)",
+   "image 2: game3d/assets/portraits/aoi-neutral.webp"
+  ],
+  "seconds": 11.1
+ },
+ {
+  "name": "rei-a-101",
+  "who": "rei",
+  "job": "rei-a",
+  "parent": null,
+  "seed": 101,
+  "prompt": "Edit image 1: turn the woman into the person from image 2, keeping everything else about image 1 exactly: the same smooth matte vinyl 3D figure, the same big soft rounded-square head, the same large flat painted anime eyes and small simple nose and mouth, the same short body, round mitten hands with no fingers and stubby legs, the same front view standing pose with the arms slightly out, the same soft studio light and plain white background. She is a woman with long silver-grey hair in a high ponytail and a side-swept fringe, steel-grey eyes, a slight smile and light skin. She wears a pale grey suit jacket over a black high-neck top, pale grey trousers and dark shoes. Empty hands. No text, no props.",
+  "model": "flux-2-klein-4b-fp8",
+  "steps": 4,
+  "cfg": 1.0,
+  "size": [
+   1024,
+   1024
+  ],
+  "refs": [
+   "image 1: art/parts/chibi-meshy/inputs/dressed.png (Jørgen's picture)",
+   "image 2: art/approved/rei/rei-after.webp"
+  ],
+  "seconds": 12.1
+ },
+ {
+  "name": "rei-a-102",
+  "who": "rei",
+  "job": "rei-a",
+  "parent": null,
+  "seed": 102,
+  "prompt": "Edit image 1: turn the woman into the person from image 2, keeping everything else about image 1 exactly: the same smooth matte vinyl 3D figure, the same big soft rounded-square head, the same large flat painted anime eyes and small simple nose and mouth, the same short body, round mitten hands with no fingers and stubby legs, the same front view standing pose with the arms slightly out, the same soft studio light and plain white background. She is a woman with long silver-grey hair in a high ponytail and a side-swept fringe, steel-grey eyes, a slight smile and light skin. She wears a pale grey suit jacket over a black high-neck top, pale grey trousers and dark shoes. Empty hands. No text, no props.",
+  "model": "flux-2-klein-4b-fp8",
+  "steps": 4,
+  "cfg": 1.0,
+  "size": [
+   1024,
+   1024
+  ],
+  "refs": [
+   "image 1: art/parts/chibi-meshy/inputs/dressed.png (Jørgen's picture)",
+   "image 2: art/approved/rei/rei-after.webp"
+  ],
+  "seconds": 11.1
+ },
+ {
+  "name": "rei-a-103",
+  "who": "rei",
+  "job": "rei-a",
+  "parent": null,
+  "seed": 103,
+  "prompt": "Edit image 1: turn the woman into the person from image 2, keeping everything else about image 1 exactly: the same smooth matte vinyl 3D figure, the same big soft rounded-square head, the same large flat painted anime eyes and small simple nose and mouth, the same short body, round mitten hands with no fingers and stubby legs, the same front view standing pose with the arms slightly out, the same soft studio light and plain white background. She is a woman with long silver-grey hair in a high ponytail and a side-swept fringe, steel-grey eyes, a slight smile and light skin. She wears a pale grey suit jacket over a black high-neck top, pale grey trousers and dark shoes. Empty hands. No text, no props.",
+  "model": "flux-2-klein-4b-fp8",
+  "steps": 4,
+  "cfg": 1.0,
+  "size": [
+   1024,
+   1024
+  ],
+  "refs": [
+   "image 1: art/parts/chibi-meshy/inputs/dressed.png (Jørgen's picture)",
+   "image 2: art/approved/rei/rei-after.webp"
+  ],
+  "seconds": 11.2
+ },
+ {
+  "name": "kenji-b-101",
+  "who": "kenji",
+  "job": "kenji-b",
+  "parent": "kenji-a",
+  "seed": 101,
+  "prompt": "Edit image 1: turn the woman into the person from image 2, keeping everything else about image 1 exactly: the same smooth matte vinyl 3D figure, the same big soft rounded-square head, the same large flat painted anime eyes and small simple nose and mouth, the same short body, round mitten hands with no fingers and stubby legs, the same front view standing pose with the arms slightly out, the same soft studio light and plain white background. He is a 21-year-old young man with a soft round chubby body, wider than the woman's in image 1, with a round belly, short messy black hair sticking up on top, big dark brown eyes, rosy cheeks and tanned skin. He wears a white short-sleeved shirt with a dark navy tie, dark navy trousers and dark shoes. Empty hands. No text, no props.",
+  "model": "flux-2-klein-4b-fp8",
+  "steps": 4,
+  "cfg": 1.0,
+  "size": [
+   1024,
+   1024
+  ],
+  "refs": [
+   "image 1: art/parts/chibi-meshy/inputs/dressed.png (Jørgen's picture)",
+   "image 2: game3d/assets/portraits/kenji-neutral.webp"
+  ],
+  "seconds": 12.2
+ },
+ {
+  "name": "kenji-b-102",
+  "who": "kenji",
+  "job": "kenji-b",
+  "parent": "kenji-a",
+  "seed": 102,
+  "prompt": "Edit image 1: turn the woman into the person from image 2, keeping everything else about image 1 exactly: the same smooth matte vinyl 3D figure, the same big soft rounded-square head, the same large flat painted anime eyes and small simple nose and mouth, the same short body, round mitten hands with no fingers and stubby legs, the same front view standing pose with the arms slightly out, the same soft studio light and plain white background. He is a 21-year-old young man with a soft round chubby body, wider than the woman's in image 1, with a round belly, short messy black hair sticking up on top, big dark brown eyes, rosy cheeks and tanned skin. He wears a white short-sleeved shirt with a dark navy tie, dark navy trousers and dark shoes. Empty hands. No text, no props.",
+  "model": "flux-2-klein-4b-fp8",
+  "steps": 4,
+  "cfg": 1.0,
+  "size": [
+   1024,
+   1024
+  ],
+  "refs": [
+   "image 1: art/parts/chibi-meshy/inputs/dressed.png (Jørgen's picture)",
+   "image 2: game3d/assets/portraits/kenji-neutral.webp"
+  ],
+  "seconds": 12.1
+ },
+ {
+  "name": "kenji-b-103",
+  "who": "kenji",
+  "job": "kenji-b",
+  "parent": "kenji-a",
+  "seed": 103,
+  "prompt": "Edit image 1: turn the woman into the person from image 2, keeping everything else about image 1 exactly: the same smooth matte vinyl 3D figure, the same big soft rounded-square head, the same large flat painted anime eyes and small simple nose and mouth, the same short body, round mitten hands with no fingers and stubby legs, the same front view standing pose with the arms slightly out, the same soft studio light and plain white background. He is a 21-year-old young man with a soft round chubby body, wider than the woman's in image 1, with a round belly, short messy black hair sticking up on top, big dark brown eyes, rosy cheeks and tanned skin. He wears a white short-sleeved shirt with a dark navy tie, dark navy trousers and dark shoes. Empty hands. No text, no props.",
+  "model": "flux-2-klein-4b-fp8",
+  "steps": 4,
+  "cfg": 1.0,
+  "size": [
+   1024,
+   1024
+  ],
+  "refs": [
+   "image 1: art/parts/chibi-meshy/inputs/dressed.png (Jørgen's picture)",
+   "image 2: game3d/assets/portraits/kenji-neutral.webp"
+  ],
+  "seconds": 13.3
+ },
+ {
+  "name": "kuroda-b-101",
+  "who": "kuroda",
+  "job": "kuroda-b",
+  "parent": "kuroda-a",
+  "seed": 101,
+  "prompt": "Edit image 1: turn the woman into the person from image 2, keeping everything else about image 1 exactly: the same smooth matte vinyl 3D figure, the same big soft rounded-square head, the same large flat painted anime eyes and small simple nose and mouth, the same short body, round mitten hands with no fingers and stubby legs, the same front view standing pose with the arms slightly out, the same soft studio light and plain white background. He is a thin, tired 54-year-old man with black hair combed back, going grey at the temples, tired heavy-lidded eyes that are open and light tanned skin. He wears a navy suit jacket over a white shirt with a navy tie, navy trousers and dark brown shoes. Empty hands. No text, no props.",
+  "model": "flux-2-klein-4b-fp8",
+  "steps": 4,
+  "cfg": 1.0,
+  "size": [
+   1024,
+   1024
+  ],
+  "refs": [
+   "image 1: art/parts/chibi-meshy/inputs/dressed.png (Jørgen's picture)",
+   "image 2: game3d/assets/portraits/kuroda-neutral.webp"
+  ],
+  "seconds": 17.6
+ },
+ {
+  "name": "kuroda-b-102",
+  "who": "kuroda",
+  "job": "kuroda-b",
+  "parent": "kuroda-a",
+  "seed": 102,
+  "prompt": "Edit image 1: turn the woman into the person from image 2, keeping everything else about image 1 exactly: the same smooth matte vinyl 3D figure, the same big soft rounded-square head, the same large flat painted anime eyes and small simple nose and mouth, the same short body, round mitten hands with no fingers and stubby legs, the same front view standing pose with the arms slightly out, the same soft studio light and plain white background. He is a thin, tired 54-year-old man with black hair combed back, going grey at the temples, tired heavy-lidded eyes that are open and light tanned skin. He wears a navy suit jacket over a white shirt with a navy tie, navy trousers and dark brown shoes. Empty hands. No text, no props.",
+  "model": "flux-2-klein-4b-fp8",
+  "steps": 4,
+  "cfg": 1.0,
+  "size": [
+   1024,
+   1024
+  ],
+  "refs": [
+   "image 1: art/parts/chibi-meshy/inputs/dressed.png (Jørgen's picture)",
+   "image 2: game3d/assets/portraits/kuroda-neutral.webp"
+  ],
+  "seconds": 11.2
+ },
+ {
+  "name": "kuroda-b-103",
+  "who": "kuroda",
+  "job": "kuroda-b",
+  "parent": "kuroda-a",
+  "seed": 103,
+  "prompt": "Edit image 1: turn the woman into the person from image 2, keeping everything else about image 1 exactly: the same smooth matte vinyl 3D figure, the same big soft rounded-square head, the same large flat painted anime eyes and small simple nose and mouth, the same short body, round mitten hands with no fingers and stubby legs, the same front view standing pose with the arms slightly out, the same soft studio light and plain white background. He is a thin, tired 54-year-old man with black hair combed back, going grey at the temples, tired heavy-lidded eyes that are open and light tanned skin. He wears a navy suit jacket over a white shirt with a navy tie, navy trousers and dark brown shoes. Empty hands. No text, no props.",
+  "model": "flux-2-klein-4b-fp8",
+  "steps": 4,
+  "cfg": 1.0,
+  "size": [
+   1024,
+   1024
+  ],
+  "refs": [
+   "image 1: art/parts/chibi-meshy/inputs/dressed.png (Jørgen's picture)",
+   "image 2: game3d/assets/portraits/kuroda-neutral.webp"
+  ],
+  "seconds": 11.3
+ },
+ {
+  "name": "rei-b-101",
+  "who": "rei",
+  "job": "rei-b",
+  "parent": "rei-a",
+  "seed": 101,
+  "prompt": "Edit image 1: turn the woman into the person from image 2, keeping everything else about image 1 exactly: the same smooth matte vinyl 3D figure, the same big soft rounded-square head, the same large flat painted anime eyes and small simple nose and mouth, the same short body, round mitten hands with no fingers and stubby legs, the same front view standing pose with the arms slightly out, the same soft studio light and plain white background. She is a woman with long silver-grey hair in a high ponytail that hangs down beside her head on her left side and a side-swept fringe, steel-grey eyes, a slight smile and light skin. She wears a pale grey suit jacket over a black high-neck top, pale grey trousers and dark shoes. Empty hands. No text, no props.",
+  "model": "flux-2-klein-4b-fp8",
+  "steps": 4,
+  "cfg": 1.0,
+  "size": [
+   1024,
+   1024
+  ],
+  "refs": [
+   "image 1: art/parts/chibi-meshy/inputs/dressed.png (Jørgen's picture)",
+   "image 2: art/approved/rei/rei-after.webp"
+  ],
+  "seconds": 12.3
+ },
+ {
+  "name": "rei-b-102",
+  "who": "rei",
+  "job": "rei-b",
+  "parent": "rei-a",
+  "seed": 102,
+  "prompt": "Edit image 1: turn the woman into the person from image 2, keeping everything else about image 1 exactly: the same smooth matte vinyl 3D figure, the same big soft rounded-square head, the same large flat painted anime eyes and small simple nose and mouth, the same short body, round mitten hands with no fingers and stubby legs, the same front view standing pose with the arms slightly out, the same soft studio light and plain white background. She is a woman with long silver-grey hair in a high ponytail that hangs down beside her head on her left side and a side-swept fringe, steel-grey eyes, a slight smile and light skin. She wears a pale grey suit jacket over a black high-neck top, pale grey trousers and dark shoes. Empty hands. No text, no props.",
+  "model": "flux-2-klein-4b-fp8",
+  "steps": 4,
+  "cfg": 1.0,
+  "size": [
+   1024,
+   1024
+  ],
+  "refs": [
+   "image 1: art/parts/chibi-meshy/inputs/dressed.png (Jørgen's picture)",
+   "image 2: art/approved/rei/rei-after.webp"
+  ],
+  "seconds": 11.1
+ },
+ {
+  "name": "rei-b-103",
+  "who": "rei",
+  "job": "rei-b",
+  "parent": "rei-a",
+  "seed": 103,
+  "prompt": "Edit image 1: turn the woman into the person from image 2, keeping everything else about image 1 exactly: the same smooth matte vinyl 3D figure, the same big soft rounded-square head, the same large flat painted anime eyes and small simple nose and mouth, the same short body, round mitten hands with no fingers and stubby legs, the same front view standing pose with the arms slightly out, the same soft studio light and plain white background. She is a woman with long silver-grey hair in a high ponytail that hangs down beside her head on her left side and a side-swept fringe, steel-grey eyes, a slight smile and light skin. She wears a pale grey suit jacket over a black high-neck top, pale grey trousers and dark shoes. Empty hands. No text, no props.",
+  "model": "flux-2-klein-4b-fp8",
+  "steps": 4,
+  "cfg": 1.0,
+  "size": [
+   1024,
+   1024
+  ],
+  "refs": [
+   "image 1: art/parts/chibi-meshy/inputs/dressed.png (Jørgen's picture)",
+   "image 2: art/approved/rei/rei-after.webp"
+  ],
+  "seconds": 12.2
+ }
+]

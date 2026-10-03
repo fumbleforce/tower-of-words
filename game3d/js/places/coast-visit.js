@@ -25,7 +25,7 @@ export function coastVisit(game, { w, K }) {
   let P = null;
   const later = () => sim.day > 1;
   const kuroda = PEOPLE.kuroda();
-  if (!kuroda.meshy) kuroda.root.scale.multiplyScalar(K);
+  if (!kuroda.meshy || kuroda.chibi) kuroda.root.scale.multiplyScalar(K); // chibis stand at the body they replace
   kuroda.root.visible = false;
   w.root.add(kuroda.root);
   kuroda.blob = blob(0.55, 0.38);
