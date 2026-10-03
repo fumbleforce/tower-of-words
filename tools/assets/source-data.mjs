@@ -39,7 +39,7 @@ export function assetSourceData(read) {
   const beds = table('game3d/js/ambience.js', 'BEDS');
   const events = table('game3d/js/ambience.js', 'EVENTS');
   const sfx = table('game3d/js/sfx.js', 'K');
-  const cast3d = table('game3d/js/cast.js', 'CAST3D_ON');
+  const cast3d = table('game3d/js/cast3d.js', 'CAST3D_ON');
   const stylesNode = sourceBindings(ast('game3d/js/style/index.js'), ['STYLES']).STYLES.init;
   const styles = Object.fromEntries(stylesNode.properties.map(property => {
     const fields = Object.fromEntries(property.value.properties.map(field => [field.key.name ?? field.key.value, field.value]));

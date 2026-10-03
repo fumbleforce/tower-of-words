@@ -424,7 +424,7 @@ mori_r = REVIEWS.get('mori-3d') or {}
 add('model/mori-meshy', 'model', 'Mr. Mori (Meshy test)', ls('game3d/assets/characters/mori', r'\.(glb|webp)$'),
     'approved' if 'mori' in cast3d_on else 'rejected', f"Review mori-3d: {mori_r.get('decision', '')}",
     source='Meshy workflow from a local FLUX.2 Klein chibi picture (tools/characters/, commit b01e6b0)', who='mori',
-    used=['Only with ?cast3d=mori (cast.js CAST3D, not in CAST3D_ON)'], review='mori-3d', view={'type': 'meshy', 'id': 'mori', 'height': 1.2})
+    used=['Only with ?cast3d=mori (cast3d.js CAST3D, not in CAST3D_ON)'], review='mori-3d', view={'type': 'meshy', 'id': 'mori', 'height': 1.2})
 for p in ls('tools/characters/out', r'\.glb$'):
     add(f'model/{os.path.splitext(os.path.basename(p))[0]}', 'model', os.path.basename(p), [p], 'candidate', 'Test output of tools/characters (not in a review yet)',
         source='tools/characters/meshy.py', view={'type': 'glb', 'src': p})

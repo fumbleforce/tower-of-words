@@ -1554,7 +1554,7 @@ export async function trainPlace(game) {
     },
     onEnter: async () => {},
     leave: () => finds.dispose(), // the passengers' sounds and pictures stop with the place
-    // Mio (the Meshy model) sits where the laptop woman sat, laptop on her knees
+    // Mio takes the laptop woman's seat, laptop on her knees
     placeMio(m) {
       rei.root.visible = false;
       rei.blob.visible = false;
@@ -1563,7 +1563,7 @@ export async function trainPlace(game) {
       m.sitAt(2.1, SEAT_Y, -(LZ - 0.24) + 0.02, 0);
       m.seated = true;
       car.root.attach(laptop);
-      laptop.position.set(2.1, SEAT_Y + 0.2, -(LZ - 0.24) + 0.3);
+      laptop.position.set(2.1, SEAT_Y + (m.chibi ? 0.1 : 0.2), -(LZ - 0.24) + 0.3);
       laptop.rotation.set(0, 0, 0);
     },
     capState(s) {

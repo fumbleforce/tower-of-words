@@ -4,6 +4,7 @@
 // "attempts": {id: url}, "compare": {name: url}, "refs": [picture urls]}; without one it shows reviews/char-mio-parts-1.
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import { bindRetarget as bindRig, applyRetarget as applyRig, resetPose } from './retarget.js';
 
 const cfgUrl = new URLSearchParams(location.search).get('cfg');
 const CFG = (cfgUrl && await fetch(cfgUrl).then((r) => r.json())) || {
@@ -23,8 +24,6 @@ const HEIGHT = 1.6;
 // Step scale for the walk (cfg "step" or ?step=): the leg bones get only this share of the clip's rotation, so short
 // chibi legs take smaller, lower steps than Mio's clip. 1 = the clip as it is (the default).
 const STEP = Number(new URLSearchParams(location.search).get('step') ?? CFG.step ?? 1);
-const LEGS = new Set(['LeftUpLeg', 'LeftLeg', 'LeftFoot', 'LeftToeBase', 'RightUpLeg', 'RightLeg', 'RightFoot', 'RightToeBase']);
-const NO_TURN = new THREE.Quaternion();
 
 const canvas = document.getElementById('c');
 const status = document.getElementById('status');
@@ -69,83 +68,12 @@ function fit(obj) {
   obj.position.y -= box.min.y;
 }
 
-// ---- retarget: copy each source bone's world direction change onto ours (same Mixamo names) ----
-const DIR_CHILD = {
-  Hips: 'Spine', Spine: 'Spine1', Spine1: 'Spine2', Spine2: 'Neck', Neck: 'Head',
-  LeftShoulder: 'LeftArm', LeftArm: 'LeftForeArm', LeftForeArm: 'LeftHand',
-  RightShoulder: 'RightArm', RightArm: 'RightForeArm', RightForeArm: 'RightHand',
-  LeftUpLeg: 'LeftLeg', LeftLeg: 'LeftFoot', LeftFoot: 'LeftToeBase',
-  RightUpLeg: 'RightLeg', RightLeg: 'RightFoot', RightFoot: 'RightToeBase',
-};
-const ORDER = ['Hips', 'Spine', 'Spine1', 'Spine2', 'Neck', 'Head', 'LeftShoulder', 'LeftArm', 'LeftForeArm', 'LeftHand',
-  'RightShoulder', 'RightArm', 'RightForeArm', 'RightHand', 'LeftUpLeg', 'LeftLeg', 'LeftFoot', 'LeftToeBase',
-  'RightUpLeg', 'RightLeg', 'RightFoot', 'RightToeBase'];
-const PARENT_OF = { Head: 'Neck', LeftHand: 'LeftForeArm', RightHand: 'RightForeArm', LeftToeBase: 'LeftFoot', RightToeBase: 'RightFoot' };
-
-// Meshy's auto-rig numbers the spine the other way round: Hips > Spine02 > Spine01 > Spine > neck.
-const MESHY = { Spine02: 'Spine', Spine01: 'Spine1', Spine: 'Spine2', neck: 'Neck' };
-function bones(root) {
-  const m = {};
-  let meshy = false;
-  root.traverse((o) => { if (o.isBone && o.name === 'Spine02') meshy = true; });
-  root.traverse((o) => {
-    if (!o.isBone) return;
-    const n = o.name.replace(/^mixamorig:?/, '');
-    m[(meshy && MESHY[n]) || n] = o;
-  });
-  return m;
-}
-const wq = (o) => o.getWorldQuaternion(new THREE.Quaternion());
-const wp = (o) => o.getWorldPosition(new THREE.Vector3());
-
+// ---- retarget (./retarget.js), with the walk's leg share and the turntable's turn ----
 function bindRetarget(model) {
-  const S = bones(src.root), T = bones(model);
-  turn.rotation.y = 0;                                   // rest is read facing front; frame() turns it back
-  src.root.updateMatrixWorld(true);
-  model.updateMatrixWorld(true);
-  const map = [];
-  const A = {};
-  for (const n of ORDER) {
-    if (!S[n] || !T[n]) continue;
-    const c = DIR_CHILD[n];
-    let a = new THREE.Quaternion();
-    if (c && S[c] && T[c]) {
-      const ds = wp(S[c]).sub(wp(S[n])).normalize(), dt = wp(T[c]).sub(wp(T[n])).normalize();
-      a.setFromUnitVectors(dt, ds);
-    } else if (PARENT_OF[n] && A[PARENT_OF[n]]) a = A[PARENT_OF[n]].clone();
-    A[n] = a;
-    map.push({ n, s: S[n], t: T[n], sRest: wq(S[n]), tRest: wq(T[n]), tLocal: T[n].quaternion.clone(), a });
-  }
-  const hips = { tLocal: T.Hips.position.clone() };
-  const feet = ['LeftFoot', 'RightFoot', 'LeftToeBase', 'RightToeBase'].map((n) => T[n]).filter(Boolean);
-  return { map, hips, T, feet, feetRest: Math.min(...feet.map((f) => wp(f).y)) };
+  turn.rotation.y = 0; // rest is read facing front; frame() turns it back
+  return bindRig(src.root, model);
 }
-
-function applyRetarget(rt) {
-  src.root.updateMatrixWorld(true);
-  const q = new THREE.Quaternion(), pw = new THREE.Quaternion();
-  for (const b of rt.map) {
-    const delta = wq(b.s).multiply(b.sRest.clone().invert());
-    if (STEP !== 1 && motion === 'walk' && LEGS.has(b.n)) delta.slerp(NO_TURN, 1 - STEP);
-    q.copy(turn.quaternion).multiply(delta).multiply(b.a).multiply(b.tRest);   // rest was taken facing front
-    b.t.parent.getWorldQuaternion(pw);
-    b.t.quaternion.copy(pw.invert().multiply(q));
-    b.t.updateMatrixWorld(true);
-  }
-  // hips: in place (no travel), at the height that keeps the lower foot on the floor. Her rig's hips height can't be
-  // copied: its legs are a chibi's, and the idle's hips sit higher than that rig's rest.
-  rt.T.Hips.position.copy(rt.hips.tLocal);
-  rt.T.Hips.updateMatrixWorld(true);
-  const low = Math.min(...rt.feet.map((f) => wp(f).y));
-  const p = wp(rt.T.Hips);
-  p.y += rt.feetRest - low;
-  rt.T.Hips.position.copy(rt.T.Hips.parent.worldToLocal(p));
-}
-
-function resetPose(rt) {
-  for (const b of rt.map) b.t.quaternion.copy(b.tLocal);
-  rt.T.Hips.position.copy(rt.hips.tLocal);
-}
+const applyRetarget = (r) => applyRig(r, { turn: turn.quaternion, legShare: motion === 'walk' ? STEP : 1 });
 
 async function loadSource() {
   const g = await load(SRC_RIG);
