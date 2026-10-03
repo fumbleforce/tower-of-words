@@ -132,7 +132,7 @@ def manifest():
 
 # Japanese said inside an English line: voiced natively, as its own Japanese take spliced into the line (splice.py).
 # Romaji Japanese in English lines, spelled in kana for that take:
-RO2JA = {'arigatō': 'ありがとう'}
+RO2JA = {'arigatō': 'ありがとう', '“tai”': 'たい'}  # quoted, so it never matches inside an English word
 _JA_RUN = re.compile('(' + '|'.join(RO2JA) + r'|[぀-ヿ㐀-鿿々][぀-ヿ㐀-鿿々ー〜]*)([!?！？.。,、…]*)', re.I)
 _JA_PUNCT = str.maketrans({'!': '！', '?': '？', '.': '。', ',': '、'})
 
