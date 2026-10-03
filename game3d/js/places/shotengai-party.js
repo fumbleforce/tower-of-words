@@ -335,7 +335,8 @@ export function shotengaiParty(game, { w, K }) {
     cam.closeOn = ([x, z], zoom, ...rest) => {
       const group = Math.hypot(x - spots.party_group[0], z - spots.party_group[1]) < 0.5;
       if (group) yaw = -Math.PI / 2; // (a closer look during it keeps the angle; release turns back)
-      return closeOn(group ? [x - 0.9, z] : [x, z], zoom, ...rest);
+      // (a wide screen fits the four with room to spare: closer there)
+      return closeOn(group ? [x - 0.9, z] : [x, z], group && cam.camera.aspect >= 1 ? zoom * 1.7 : zoom, ...rest);
     };
     cam.release = () => {
       yaw = street;
