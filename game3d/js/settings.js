@@ -35,7 +35,7 @@ export const DEFAULTS = {
   voiceOn: true,
   quality: 'auto', // 'auto' | 'low' | 'medium' | 'high' (post.js reads the tier; see qualityTier())
   surfaces: true, // Surface detail: patterns in floors, walls, fabric and metal (look/procedural.js)
-  chibi: false, // Mio, Eric and Kuro as the Meshy chibis, from the next load (chibi.js; ?chibi=1 forces it)
+  chibi: true, // everyone as the Meshy chibis, from the next load (chibi.js; ?chibi=0 forces the code-built people)
   reduceMotion: reduceDefault,
   keySay: 'KeyQ',
   uiSize: 1, // a multiplier on the viewport-based UI scale (0.85, 1, 1.2, 1.4)
@@ -49,14 +49,28 @@ export const DEFAULTS = {
 // characters per second for each text speed (0 = all at once)
 export const CPS = { slow: 28, normal: 55, fast: 110, instant: 0 };
 
+// One-time changes to saved settings, in order; v is the version they were saved at (missing = 0).
+//   1: the chibi cast became the default look (Jørgen, 2026-10-03), so a saved chibi: false from the old default
+//      is turned on once; turning it off in Settings afterwards sticks.
+const VERSION = 1;
+function migrate(s) {
+  const v = s.v || 0;
+  if (v < 1) s.chibi = true;
+  s.v = VERSION;
+  return s;
+}
+
 function load() {
   try {
     const s = JSON.parse(localStorage.getItem(KEY) || 'null');
-    if (s && typeof s === 'object') return { ...DEFAULTS, ...s };
+    if (s && typeof s === 'object') {
+      if ((s.v || 0) < VERSION) localStorage.setItem(KEY, JSON.stringify(migrate(s)));
+      return { ...DEFAULTS, ...s };
+    }
   } catch {
     /* storage off */
   }
-  return { ...DEFAULTS };
+  return { ...DEFAULTS, v: VERSION }; // saved with the first change, so the migrations above never run on it
 }
 export const settings = load();
 window.__settings = settings;
