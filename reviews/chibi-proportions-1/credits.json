@@ -1,0 +1,34 @@
+[
+ {
+  "service": "meshy",
+  "part": "rei-2",
+  "task": "01a101e5-c63e-722b-a9fa-43dc38334dd6",
+  "status": "SUCCEEDED",
+  "credits": 30,
+  "balance_after": 530,
+  "settings": {
+   "ai_model": "latest",
+   "should_remesh": false,
+   "should_texture": true,
+   "enable_pbr": false,
+   "image_enhancement": false,
+   "target_formats": [
+    "glb"
+   ],
+   "multi_view_thumbnails": true,
+   "texture_resolution": "4k"
+  },
+  "input": "art/parts/chibi-proportions-1/inputs/cut/rei-c-101.png"
+ },
+ {
+  "service": "meshy",
+  "part": "rei-2-rig",
+  "task": "01a101e7-25bb-742e-b8d9-4acf7069fd49",
+  "status": "SUCCEEDED",
+  "credits": 5,
+  "settings": {
+   "model": "art/parts/chibi-proportions-1/meshy/rei-2-60k.glb",
+   "height_meters": 1.0
+  }
+ }
+]

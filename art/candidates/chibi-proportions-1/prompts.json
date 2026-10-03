@@ -1,0 +1,116 @@
+[
+ {
+  "name": "rei-c-101",
+  "job": "rei-c",
+  "parent": null,
+  "seed": 101,
+  "prompt": "Edit image 1: change only her face, keeping everything else about image 1 exactly: the same smooth matte vinyl 3D figure, the same silver-grey hair, fringe and high ponytail hanging down on her left (image right), the same pale grey suit over a black high-neck top, the same front view standing pose with the arms slightly out and empty mitten hands, the same soft studio light and plain white background. She is a sly, confident saleswoman: a knowing half-smile with one corner of her mouth raised, slightly narrowed eyes under relaxed lids looking straight at the viewer, her chin a little up. Her face is the woman's from image 2, made simple like image 1. No text, no props.",
+  "model": "flux-2-klein-4b-fp8",
+  "steps": 4,
+  "cfg": 1.0,
+  "size": [
+   1024,
+   1024
+  ],
+  "refs": [
+   "image 1: art/parts/chibi-cast-meshy-2/inputs/rei-b-101-flip.png (round 2 input)",
+   "image 2: art/approved/rei/rei-after.webp"
+  ],
+  "seconds": 20.0
+ },
+ {
+  "name": "rei-c-102",
+  "job": "rei-c",
+  "parent": null,
+  "seed": 102,
+  "prompt": "Edit image 1: change only her face, keeping everything else about image 1 exactly: the same smooth matte vinyl 3D figure, the same silver-grey hair, fringe and high ponytail hanging down on her left (image right), the same pale grey suit over a black high-neck top, the same front view standing pose with the arms slightly out and empty mitten hands, the same soft studio light and plain white background. She is a sly, confident saleswoman: a knowing half-smile with one corner of her mouth raised, slightly narrowed eyes under relaxed lids looking straight at the viewer, her chin a little up. Her face is the woman's from image 2, made simple like image 1. No text, no props.",
+  "model": "flux-2-klein-4b-fp8",
+  "steps": 4,
+  "cfg": 1.0,
+  "size": [
+   1024,
+   1024
+  ],
+  "refs": [
+   "image 1: art/parts/chibi-cast-meshy-2/inputs/rei-b-101-flip.png (round 2 input)",
+   "image 2: art/approved/rei/rei-after.webp"
+  ],
+  "seconds": 11.0
+ },
+ {
+  "name": "rei-c-103",
+  "job": "rei-c",
+  "parent": null,
+  "seed": 103,
+  "prompt": "Edit image 1: change only her face, keeping everything else about image 1 exactly: the same smooth matte vinyl 3D figure, the same silver-grey hair, fringe and high ponytail hanging down on her left (image right), the same pale grey suit over a black high-neck top, the same front view standing pose with the arms slightly out and empty mitten hands, the same soft studio light and plain white background. She is a sly, confident saleswoman: a knowing half-smile with one corner of her mouth raised, slightly narrowed eyes under relaxed lids looking straight at the viewer, her chin a little up. Her face is the woman's from image 2, made simple like image 1. No text, no props.",
+  "model": "flux-2-klein-4b-fp8",
+  "steps": 4,
+  "cfg": 1.0,
+  "size": [
+   1024,
+   1024
+  ],
+  "refs": [
+   "image 1: art/parts/chibi-cast-meshy-2/inputs/rei-b-101-flip.png (round 2 input)",
+   "image 2: art/approved/rei/rei-after.webp"
+  ],
+  "seconds": 11.2
+ },
+ {
+  "name": "rei-d-101",
+  "job": "rei-d",
+  "parent": "rei-c",
+  "seed": 101,
+  "prompt": "Edit image 1: change only her face and her body proportions, keeping everything else about image 1 exactly: the same smooth matte vinyl 3D figure, the same silver-grey hair, fringe and high ponytail hanging down on her left (image right), the same pale grey suit over a black high-neck top, the same front view standing pose with the arms slightly out and empty mitten hands, the same soft studio light and plain white background. She is a sly, confident saleswoman: a knowing half-smile with one corner of her mouth raised, slightly narrowed eyes under relaxed lids looking straight at the viewer, her chin a little up. Her body is a slim adult figure about three and a half heads tall: a smaller head, a narrow waist, long straight legs and standing tall. Her face is the woman's from image 2, made simple like image 1. No text, no props.",
+  "model": "flux-2-klein-4b-fp8",
+  "steps": 4,
+  "cfg": 1.0,
+  "size": [
+   1024,
+   1024
+  ],
+  "refs": [
+   "image 1: art/parts/chibi-cast-meshy-2/inputs/rei-b-101-flip.png (round 2 input)",
+   "image 2: art/approved/rei/rei-after.webp"
+  ],
+  "seconds": 12.0
+ },
+ {
+  "name": "rei-d-102",
+  "job": "rei-d",
+  "parent": "rei-c",
+  "seed": 102,
+  "prompt": "Edit image 1: change only her face and her body proportions, keeping everything else about image 1 exactly: the same smooth matte vinyl 3D figure, the same silver-grey hair, fringe and high ponytail hanging down on her left (image right), the same pale grey suit over a black high-neck top, the same front view standing pose with the arms slightly out and empty mitten hands, the same soft studio light and plain white background. She is a sly, confident saleswoman: a knowing half-smile with one corner of her mouth raised, slightly narrowed eyes under relaxed lids looking straight at the viewer, her chin a little up. Her body is a slim adult figure about three and a half heads tall: a smaller head, a narrow waist, long straight legs and standing tall. Her face is the woman's from image 2, made simple like image 1. No text, no props.",
+  "model": "flux-2-klein-4b-fp8",
+  "steps": 4,
+  "cfg": 1.0,
+  "size": [
+   1024,
+   1024
+  ],
+  "refs": [
+   "image 1: art/parts/chibi-cast-meshy-2/inputs/rei-b-101-flip.png (round 2 input)",
+   "image 2: art/approved/rei/rei-after.webp"
+  ],
+  "seconds": 11.0
+ },
+ {
+  "name": "rei-d-103",
+  "job": "rei-d",
+  "parent": "rei-c",
+  "seed": 103,
+  "prompt": "Edit image 1: change only her face and her body proportions, keeping everything else about image 1 exactly: the same smooth matte vinyl 3D figure, the same silver-grey hair, fringe and high ponytail hanging down on her left (image right), the same pale grey suit over a black high-neck top, the same front view standing pose with the arms slightly out and empty mitten hands, the same soft studio light and plain white background. She is a sly, confident saleswoman: a knowing half-smile with one corner of her mouth raised, slightly narrowed eyes under relaxed lids looking straight at the viewer, her chin a little up. Her body is a slim adult figure about three and a half heads tall: a smaller head, a narrow waist, long straight legs and standing tall. Her face is the woman's from image 2, made simple like image 1. No text, no props.",
+  "model": "flux-2-klein-4b-fp8",
+  "steps": 4,
+  "cfg": 1.0,
+  "size": [
+   1024,
+   1024
+  ],
+  "refs": [
+   "image 1: art/parts/chibi-cast-meshy-2/inputs/rei-b-101-flip.png (round 2 input)",
+   "image 2: art/approved/rei/rei-after.webp"
+  ],
+  "seconds": 11.1
+ }
+]

@@ -1,0 +1,13 @@
+{
+ "title": "Rei's new chibi (chibi-proportions-1)",
+ "blurb": "rei-2, Meshy image-to-3D from rei-c-101 (her face only changed from round 2's input), rigged with Meshy's auto-rig, beside rei-1. These are Meshy's own proportions; the builds (Kuro's and Rei's slimmer, longer-legged figures) are applied in the game, so use the game links for those. Drag to turn.",
+ "step": 0.55,
+ "attempts": {
+  "rei-2": "/art/parts/chibi-proportions-1/meshy/rei-2-rigged.glb"
+ },
+ "compare": {
+  "rei-1": "/art/parts/chibi-cast-meshy-2/meshy/rei-1-rigged.glb",
+  "kuro-1": "/art/parts/chibi-cast-meshy/meshy/kuro-1-rigged.glb"
+ },
+ "refs": ["/art/parts/chibi-proportions-1/inputs/rei-c-101.png", "/art/parts/chibi-cast-meshy-2/inputs/rei-b-101-flip.png"]
+}
