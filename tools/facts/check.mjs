@@ -430,7 +430,7 @@ function checkWords(game) {
     const w = id(r.Id); seen.add(w);
     const g = game.WORDS[w];
     if (!g) { bad(file, `\`${w}\` isn't in game3d/js/lang.js`); continue; }
-    const kind = g.cmd ? 'command' : g.phrase ? 'phrase' : 'word';
+    const kind = g.cmd ? 'command' : g.phrase ? 'phrase' : g.ui ? 'label' : 'word';
     for (const [col, want] of [['Japanese', g.ja], ['Reading', g.ro], ['Meaning', g.en], ['Kind', kind]]) if (val(r[col]) !== want) bad(file, `\`${w}\`: ${col.toLowerCase()} is "${want}" in the game, "${val(r[col])}" in the doc`);
   }
   for (const w of Object.keys(game.WORDS)) if (!seen.has(w)) bad(file, `game3d/js/lang.js has \`${w}\`, "Words" doesn't`);

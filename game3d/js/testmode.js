@@ -148,11 +148,11 @@ function driveTickets(app, T) {
     T.log.push('tickets: take ' + app.querySelector('.d-id')?.textContent);
     return take.click();
   }
-  const row = app.querySelector('.rows .w95-row.unread');
+  const row = app.querySelector('.tk-rows .tk-row.unread');
   if (row) {
     T.log.push('tickets: read ' + row.dataset.id);
     return row.click();
   }
   T.log.push('tickets: close');
-  app.querySelector('.w95-title .x').click();
+  app.querySelector('.tk-close').click();
 }

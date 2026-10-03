@@ -1,28 +1,35 @@
-// The ticket app on Eric's computer: a Windows 95-style window on a teal desktop with a taskbar, a list of his
-// tickets (ID, Subject, From, Status) and the ticket itself. Desktop shows the list over the ticket; the phone shows
-// one at a time, with Back. It teaches itself the first time: a yellow tip over the list until he opens a ticket,
-// and one by Take ticket until he takes one. A panel (.panel), so Esc closes it (menu.js) and the game's input waits.
-//   openTickets({ list, show, date, earned, name, read, take })   resolves when the window is closed
-//     list() -> [{ id, title, from, text, pay, status, read }]; earned() -> yen paid for closed tickets; name(id) -> a speaker's name; read(id) marks it read;
-//     take(id) -> true when it moved to in progress
-import { lineHTML } from '../lang.js';
+// The ticket app on Eric's computer: Amakawa's in-house repair ticket system, a plain company web page in a browser
+// (Jørgen, 2026-10-03: "think japanese interfaces, corporate bad but simple design. Some japanese here, and
+// learnable"). A blue header with the company mark, a breadcrumb, a thin-bordered zebra table of his tickets
+// (No., 件名, 依頼者, 状態) and the ticket as a form table under it, a copyright footer. Desktop shows the list over
+// the ticket; the phone shows one at a time, with 戻る Back. The labels are words (tickets/words.js) shown with their
+// reading and English; tapping one, or using a button, teaches it. It teaches itself the first time: a tip over the
+// list until he opens a ticket, and one by 担当する until he takes one. A panel (.panel), so Esc closes it (menu.js)
+// and the game's input waits.
+//   openTickets({ list, show, date, earned, name, read, take, learn, isKnown })   resolves when the page is closed
+//     list() -> [{ id, title, from, text, pay, status, read }]; earned() -> yen paid for closed tickets;
+//     name(id) -> a speaker's name; read(id) marks it read; take(id) -> true when it moved to in progress;
+//     learn(id) -> true when the word is new to him; isKnown(id) -> whether he knows the word
+import { lineHTML, WORDS } from '../lang.js';
 
 const $ = (s, el = document) => el.querySelector(s);
 const esc = (s) =>
   String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
-const STATUS = { new: 'New', progress: 'In progress', done: 'Done' };
+const STATUS = { new: 'mitaio', progress: 'taiochu', done: 'kanryo' };
 const phone = () => document.body.classList.contains('phone');
 const yen = (n) => '¥' + n.toLocaleString('en');
 const APP = 'Repair Tickets';
-// a small ticket icon in the title bar and on the taskbar button: a slip with a punched hole and two lines
-const ICON =
-  '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 3h12v3a2 2 0 0 0 0 4v3H2v-3a2 2 0 0 0 0-4z" fill="#fff" stroke="#000"/><path d="M5 6h6M5 9h4" stroke="#000080"/></svg>';
-const LOGO =
-  '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M1 2l6-1v6H1z" fill="#e2412b"/><path d="M8 1l7-1v7H8z" fill="#3aa83a"/><path d="M1 8h6v6l-6-1z" fill="#2a63d4"/><path d="M8 8h7v7l-7-1z" fill="#f2c118"/></svg>';
+const URL = 'http://intra.amakawa.co.jp/shuri/list.do';
 
-// Shut down: a monitor going dark
-const POWER =
-  '<svg viewBox="0 0 16 16" aria-hidden="true"><rect x="1.5" y="2.5" width="13" height="9" fill="#000" stroke="#555"/><path d="M5 14h6M8 11.5V14" stroke="#000"/></svg>';
+// a label: the Japanese with its reading over it, the short English after it. `tap` makes it teach itself on a tap.
+function lab(id, { tap = true, en = WORDS[id].label } = {}) {
+  const w = WORDS[id];
+  const ja = `<ruby lang="ja">${w.ja}<rt>${w.ro}</rt></ruby>`;
+  return tap
+    ? `<span class="tkw" data-w="${id}" role="button" tabindex="0" title="${esc(w.ro)}: ${esc(w.en)}">${ja}<span class="en">${esc(en)}</span></span>`
+    : `<span class="tkw">${ja}<span class="en">${esc(en)}</span></span>`;
+}
+const badge = (status, tap) => `<span class="tk-badge st-${status}">${lab(STATUS[status], { tap })}</span>`;
 
 // Japanese in a ticket: {id} for a word in lang.js, or {ja|romaji|english} written out for a one-off
 function textHTML(text) {
@@ -47,46 +54,50 @@ function build() {
   if ($('#ticketsApp')) return $('#ticketsApp');
   $('#ui').insertAdjacentHTML(
     'beforeend',
-    `<div id="ticketsApp" class="panel w95" hidden>
-      <div class="w95-desk">
-        <section class="w95-win" role="dialog" aria-label="${APP}">
-          <header class="w95-title"><span class="ico">${ICON}</span><span class="t">${APP}</span>
-            <span class="w95-ctl"><button type="button" class="min" aria-label="Minimise"><i></i></button><button type="button" class="max" aria-label="Maximise"><i></i></button><button type="button" class="x" aria-label="Close">×</button></span>
-          </header>
-          <nav class="w95-tools">
-            <button type="button" class="w95-btn back">‹ Back</button>
-            <span class="w95-path"></span>
-            <button type="button" class="w95-btn close">Close</button>
-          </nav>
-          <div class="w95-body">
-            <div class="w95-tip list-tip" hidden></div>
-            <div class="w95-list sunk" role="listbox" aria-label="Tickets">
-              <div class="w95-row hdr" aria-hidden="true"><span class="c-id">ID</span><span class="c-sub">Subject</span><span class="c-from">From</span><span class="c-st">Status</span></div>
-              <div class="rows"></div>
+    `<div id="ticketsApp" class="panel tk" hidden>
+      <div class="tk-url" aria-hidden="true"><span class="nav">◀ ▶ ↻</span><span class="addr">${URL}</span></div>
+      <section class="tk-page" role="dialog" aria-label="${APP}">
+        <header class="tk-head">
+          <span class="tk-logo"><b lang="ja">天川</b><span>AMAKAWA<small>GROUP</small></span></span>
+          <span class="tk-sys">${APP}<small>Ver.2.03</small></span>
+          <button type="button" class="tk-btn tk-close" data-w="tojiru">${lab('tojiru', { tap: false })}</button>
+        </header>
+        <div class="tk-info"><span class="who">B2 IT · Eric</span><span class="sum"></span><span class="date"></span></div>
+        <nav class="tk-crumb">
+          <button type="button" class="tk-btn tk-back" data-w="modoru">${lab('modoru', { tap: false })}</button>
+          <span class="path"></span>
+        </nav>
+        <div class="tk-main">
+          <div class="tk-tip list-tip" hidden></div>
+          <section class="tk-list">
+            <h2 class="tk-h">Tickets <span class="cnt"></span></h2>
+            <div class="tk-table" role="listbox" aria-label="Tickets">
+              <div class="tk-row hdr"><span class="c-id">No.</span><span class="c-sub">${lab('kenmei')}</span><span class="c-from">${lab('iraisha')}</span><span class="c-st">${lab('jotai')}</span></div>
+              <div class="tk-rows"></div>
             </div>
-            <article class="w95-detail sunk"></article>
-          </div>
-          <footer class="w95-status"><span class="f1 sunk"></span><span class="f2 sunk"></span></footer>
-        </section>
-      </div>
-      <div class="w95-bar">
-        <button type="button" class="w95-btn start">${LOGO}<b>Start</b></button>
-        <button type="button" class="w95-btn task">${ICON}<span>${APP}</span></button>
-        <span class="clock sunk"></span>
-        <div class="w95-menu" hidden><div class="side"><b>Amakawa</b>95</div><div class="items">
-          <button type="button" class="restore">${ICON}<span>${APP}</span></button>
-          <button type="button" class="off">${POWER}<span>Shut down…</span></button>
-        </div></div>
-      </div>
+          </section>
+          <article class="tk-detail"></article>
+        </div>
+        <div class="tk-learn" aria-live="polite"></div>
+        <footer class="tk-foot">Copyright (C) 1996 Amakawa Group. All Rights Reserved.</footer>
+      </section>
     </div>`,
   );
   return $('#ticketsApp');
 }
 
-export function openTickets({ list, show, date, earned, name, read, take }) {
+export function openTickets({
+  list,
+  show,
+  date,
+  earned,
+  name,
+  read,
+  take,
+  learn = () => false,
+  isKnown = () => false,
+}) {
   const app = build();
-  const win = $('.w95-win', app);
-  const menu = $('.w95-menu', app);
   let sel = show || null;
   let mode = show ? 'detail' : 'list'; // the phone's one pane at a time
 
@@ -94,12 +105,27 @@ export function openTickets({ list, show, date, earned, name, read, take }) {
   const tickets = () => list();
   const cur = () => tickets().find((t) => t.id === sel) || null;
 
+  // a label tapped or a button used: the word is his, and the line under the page says so
+  function teach(id) {
+    if (!WORDS[id] || !learn(id)) return;
+    const w = WORDS[id];
+    $('.tk-learn', app).innerHTML = `New word in your Words: <b lang="ja">${w.ja}</b> ${esc(w.ro)}, ${esc(w.en)}`;
+    marks();
+  }
+  // known labels lose the dotted underline that says "tap me"; the hint goes once one is known
+  function marks() {
+    for (const el of app.querySelectorAll('.tkw[data-w]')) el.classList.toggle('kn', isKnown(el.dataset.w));
+    const learnLine = $('.tk-learn', app);
+    if (!learnLine.innerHTML && !Object.keys(WORDS).some((id) => WORDS[id].ui === 'tickets' && isKnown(id)))
+      learnLine.textContent = `${phone() ? 'Tap' : 'Click'} a Japanese label to learn it.`;
+  }
+
   function pick(id, open) {
     sel = id;
     if (id) read(id);
     if (open) mode = 'detail';
     render();
-    if (open && phone()) $('.w95-detail', app).scrollTop = 0;
+    if (open && phone()) $('.tk-main', app).scrollTop = 0;
   }
 
   function rowsHTML(all) {
@@ -107,9 +133,9 @@ export function openTickets({ list, show, date, earned, name, read, take }) {
     return all
       .map(
         (t) =>
-          `<button type="button" role="option" class="w95-row${t.id === sel ? ' on' : ''}${t.read ? '' : ' unread'} st-${t.status}" data-id="${esc(t.id)}" aria-selected="${t.id === sel}">` +
+          `<button type="button" role="option" class="tk-row${t.id === sel ? ' on' : ''}${t.read ? '' : ' unread'} st-${t.status}" data-id="${esc(t.id)}" aria-selected="${t.id === sel}">` +
           `<span class="c-id">${esc(t.id)}</span><span class="c-sub">${esc(t.title)}</span>` +
-          `<span class="c-from">${esc(name(t.from))}</span><span class="c-st"><i class="dot"></i>${STATUS[t.status]}</span></button>`,
+          `<span class="c-from">${esc(name(t.from))}</span><span class="c-st">${badge(t.status, false)}</span></button>`,
       )
       .join('');
   }
@@ -118,12 +144,20 @@ export function openTickets({ list, show, date, earned, name, read, take }) {
     if (!t) return '<div class="none">Select a ticket to read it.</div>';
     const act =
       t.status === 'new'
-        ? `<button type="button" class="w95-btn take">Take ticket</button>`
-        : `<div class="note">${t.status === 'done' ? 'Closed.' : 'On your list.'}</div>`;
-    return `<div class="d-head"><span class="d-id">${esc(t.id)}</span><h3>${esc(t.title)}</h3></div>
-      <dl class="d-meta"><dt>From</dt><dd>${esc(name(t.from))}</dd><dt>Status</dt><dd class="st-${t.status}"><i class="dot"></i>${STATUS[t.status]}</dd>${t.pay ? `<dt>${t.status === 'done' ? 'Paid' : 'Pays'}</dt><dd class="pay">${yen(t.pay)}</dd>` : ''}</dl>
-      <div class="d-text">${textHTML(t.text)}</div>
-      <div class="d-act">${act}<div class="w95-tip take-tip" hidden></div></div>`;
+        ? `<button type="button" class="tk-btn main take" data-w="tanto">${lab('tanto', { tap: false })}</button>`
+        : `<span class="note">${t.status === 'done' ? 'Closed.' : 'On your list.'}</span>`;
+    const pay = t.pay
+      ? `<tr><th>${lab('hoshu')}</th><td class="pay">${yen(t.pay)}${t.status === 'done' ? ' <span class="paid">Paid</span>' : ''}</td></tr>`
+      : '';
+    return `<h2 class="tk-h d-head"><span class="d-id">${esc(t.id)}</span> Ticket</h2>
+      <table class="tk-form d-meta">
+        <tr><th>${lab('kenmei')}</th><td class="d-title">${esc(t.title)}</td></tr>
+        <tr><th>${lab('iraisha')}</th><td>${esc(name(t.from))}</td></tr>
+        <tr><th>${lab('jotai')}</th><td>${badge(t.status, true)}</td></tr>
+        ${pay}
+        <tr><th>Details</th><td class="d-text">${textHTML(t.text)}</td></tr>
+      </table>
+      <div class="d-act">${act}<div class="tk-tip take-tip" hidden></div></div>`;
   }
 
   function render() {
@@ -132,12 +166,13 @@ export function openTickets({ list, show, date, earned, name, read, take }) {
     const onPhone = phone();
     app.classList.toggle('one', onPhone);
     app.dataset.mode = onPhone ? mode : 'both';
-    $('.rows', app).innerHTML = rowsHTML(all);
-    $('.w95-detail', app).innerHTML = detailHTML(t);
-    $('.w95-path', app).textContent = onPhone && mode === 'detail' && t ? t.id : '';
+    $('.tk-rows', app).innerHTML = rowsHTML(all);
+    $('.tk-detail', app).innerHTML = detailHTML(t);
+    $('.path', app).innerHTML =
+      `Top › Repair tickets${t && (!onPhone || mode === 'detail') ? ` › <b>${esc(t.id)}</b>` : ''}`;
     const open = all.filter((x) => x.status !== 'done').length;
-    $('.f1', app).textContent = `${all.length} ticket${all.length === 1 ? '' : 's'}, ${open} open`;
-    $('.f2', app).textContent = `Paid to you: ${yen(earned())}`;
+    $('.cnt', app).textContent = `${all.length} ticket${all.length === 1 ? '' : 's'}, ${open} open`;
+    $('.sum', app).textContent = `Paid to you: ${yen(earned())}`;
     // first use: how to open one, then what Take does
     const listTip = $('.list-tip', app);
     listTip.hidden = !all.length || all.some((x) => x.read) || (onPhone && mode === 'detail');
@@ -147,45 +182,41 @@ export function openTickets({ list, show, date, earned, name, read, take }) {
       takeTip.hidden = false;
       takeTip.textContent = 'Take ticket puts it on your list. It doesn’t have to be done today.';
     }
-    for (const b of app.querySelectorAll('.rows .w95-row')) b.onclick = () => pick(b.dataset.id, true);
+    for (const b of app.querySelectorAll('.tk-rows .tk-row')) b.onclick = () => pick(b.dataset.id, true);
     const tk = $('.d-act .take', app);
-    if (tk) tk.onclick = () => take(t.id) && render();
-    if (sel && !onPhone) $('.rows .on', app)?.scrollIntoView({ block: 'nearest' });
+    if (tk)
+      tk.onclick = () => {
+        if (!take(t.id)) return;
+        render();
+        teach('tanto');
+      };
+    marks();
+    if (sel && !onPhone) $('.tk-rows .on', app)?.scrollIntoView({ block: 'nearest' });
   }
 
-  // the window's controls
-  $('.x', app).onclick = close;
-  $('.w95-tools .close', app).onclick = close;
-  $('.back', app).onclick = () => {
+  // the page's controls
+  $('.tk-close', app).onclick = () => {
+    teach('tojiru');
+    close();
+  };
+  $('.tk-back', app).onclick = () => {
     mode = 'list';
     render();
+    teach('modoru');
   };
-  $('.max', app).onclick = () => win.classList.toggle('maxed');
-  $('.min', app).onclick = () => {
-    win.hidden = true;
-    $('.task', app).classList.remove('on');
-  };
-  const restore = () => {
-    win.hidden = false;
-    menu.hidden = true;
-    $('.task', app).classList.add('on');
-  };
-  $('.task', app).onclick = () => (win.hidden ? restore() : $('.min', app).click());
-  $('.start', app).onclick = (e) => {
+  // a tapped label teaches its word (the rows' badges don't: a tap there opens the ticket)
+  const tapWord = (e) => {
+    const w = e.target.closest('.tkw[data-w]');
+    if (!w) return false;
+    e.preventDefault();
     e.stopPropagation();
-    menu.hidden = !menu.hidden;
-    $('.start', app).classList.toggle('on', !menu.hidden);
+    teach(w.dataset.w);
+    return true;
   };
-  $('.restore', menu).onclick = restore;
-  $('.off', menu).onclick = close;
-  app.onclick = (e) => {
-    if (!menu.hidden && !e.target.closest('.w95-menu, .start')) {
-      menu.hidden = true;
-      $('.start', app).classList.remove('on');
-    }
-  };
-  // arrow keys move through the list on a keyboard; Enter opens the selected one on the phone layout
+  app.onclick = tapWord;
+  // arrow keys move through the list on a keyboard; Enter or Space on a label teaches it
   app.onkeydown = (e) => {
+    if ((e.key === 'Enter' || e.key === ' ') && tapWord(e)) return;
     if (e.key !== 'ArrowDown' && e.key !== 'ArrowUp') return;
     const ids = tickets().map((t) => t.id);
     if (!ids.length) return;
@@ -194,20 +225,17 @@ export function openTickets({ list, show, date, earned, name, read, take }) {
     pick(ids[Math.max(0, Math.min(ids.length - 1, i < 0 ? 0 : i + (e.key === 'ArrowDown' ? 1 : -1)))], false);
   };
 
-  win.hidden = false;
-  win.classList.remove('maxed');
-  menu.hidden = true;
-  $('.task', app).classList.add('on');
-  $('.start', app).classList.remove('on');
-  $('.clock', app).textContent = date || '';
+  $('.tk-learn', app).textContent = '';
+  $('.date', app).textContent = date || '';
   if (show) read(show);
   render();
   app.hidden = false;
   app.classList.remove('in');
   void app.offsetWidth;
   app.classList.add('in');
-  win.tabIndex = -1;
-  win.focus({ preventScroll: true });
+  const page = $('.tk-page', app);
+  page.tabIndex = -1;
+  page.focus({ preventScroll: true });
   return new Promise((res) => {
     const mo = new MutationObserver(() => {
       if (app.hidden) {

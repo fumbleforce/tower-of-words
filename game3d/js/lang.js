@@ -1,4 +1,5 @@
 import * as DAY2 from '../story/day2/words.js';
+import * as TICKETS from './tickets/words.js';
 // The few Japanese words in day one. Every one is shown with its reading and English, every time.
 // The four commands are the ones Mio can say to make things happen.
 
@@ -42,6 +43,8 @@ export const WORDS = {
   kotodama: { ja: '言霊', ro: 'kotodama', en: 'words with power in them' },
   // day 2's words (story/day2/words.js): phrases, unknown until typed there
   ...DAY2.WORDS,
+  // the ticket system's labels (tickets/words.js): learned by tapping them in the app, never said
+  ...TICKETS.WORDS,
 };
 // People's names are never garbled (Jørgen, 2026-09-30: "his name should not be obscured"). In an overheard line
 // each one stays readable with the name in romaji after it, taught or not, with an honorific if one follows.

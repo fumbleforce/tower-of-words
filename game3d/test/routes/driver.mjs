@@ -87,7 +87,7 @@ async function installDriver(page, route, resume = false, made = 0) {
       const app = document.getElementById('ticketsApp');
       if (app && !app.hidden) {
         state.ticketApps = (state.ticketApps || 0) + 1;
-        app.querySelector('.w95-title .x').click();
+        app.querySelector('.tk-close').click();
       }
     }, 30);
   }, { choices: (route.choices || []).slice(made), pauseAt: route.resumeAt, resume }); // (made: picked before a reload)
