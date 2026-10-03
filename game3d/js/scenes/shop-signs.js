@@ -5,24 +5,20 @@
 //   const signs = signSet();
 //   signs.board(kana, en, colour, w, h, [x, y, z], ry);      a board facing +z turned by ry (radians)
 //   signs.upright(kana, colour, w, h, [x, y, z], ry);        the kana stacked, read the same from both faces
-//   signs.card(kana, en, w, h, [x, y, z], ry, { when, sub }); a small white card, dark kana over small English; sub:
-//                                                            a smaller kana line between them (a notice's reason)
+//   signs.card(kana, en, w, h, [x, y, z], ry, { when, sub, door }); a small white card, dark kana over small English;
+//                                                            sub: a smaller kana line between them (a notice's
+//                                                            reason); door: the thing id of the door it hangs on, so
+//                                                            trying that door shows the card on screen (ui/door-card.js)
 //   signs.drawn(draw, w, h, [x, y, z], ry);                  any face: draw(ctx, W, H) paints its cell (a drinks
 //                                                            machine's front)
 //   const s = signs.build(group); s.evening();
-//   s.show(day, period)                                      the signs with a `when` (WHEN below) shown or hidden
-//                                                            for that day and time; the others always show
+//   s.show(day, period)                                      the signs with a `when` (door-cards.js WHEN) shown
+//                                                            or hidden for that day and time; the others always show
 import * as THREE from 'three';
 import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
 import { JP_FONT } from '../props.js';
 import { DECAL } from '../look/decal.js';
-
-// which signs show when, for the ones that change with the day (a shop's door card): day 1's 準備中 card stays all
-// day; on day 2 it is up in the morning, and after work the evening cards take its place (story/day2/README.md)
-export const WHEN = {
-  prep: (day, period) => !(day === 2 && period === 'evening'),
-  evening2: (day, period) => day === 2 && period === 'evening',
-};
+import { WHEN, registerDoorCard } from './door-cards.js';
 
 const PX = 160, // pixels per unit of sign
   ATLAS_W = 2048,
@@ -108,8 +104,9 @@ export function signSet() {
     upright(kana, color, w, h, at, ry = 0) {
       add('upright', { kana, color }, w, h, at, [ry, ry + Math.PI]);
     },
-    card(kana, en, w, h, at, ry = 0, { when, sub } = {}) {
+    card(kana, en, w, h, at, ry = 0, { when, sub, door } = {}) {
       add('card', { kana, en, sub }, w, h, at, [ry], when);
+      if (door) registerDoorCard(door, when, { kana, en, sub });
     },
     drawn(draw, w, h, at, ry = 0) {
       add('drawn', { draw }, w, h, at, [ry]);

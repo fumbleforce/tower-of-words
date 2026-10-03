@@ -212,11 +212,12 @@ function hall(p, shoji, signs, lights) {
   }
   p.box(C.dark, 2.2, 0.12, 0.08, GX, 2.06, f + 0.03); // the head over the doors
   p.box(STEEL.dark, 0.04, 0.18, 0.03, GX, 0.95, f + 0.07); // the pulls, meeting in the middle
-  signs.card('準備中', 'CLOSED', 0.46, 0.3, [GX + 0.5, 1.2, f + 0.08], 0, { when: 'prep' });
+  signs.card('準備中', 'CLOSED', 0.46, 0.3, [GX + 0.5, 1.2, f + 0.08], 0, { when: 'prep', door: 'onsen' });
   // day 2 after work: a notice in its place, shut for the boiler (story/day2/east_coast.js)
   signs.card('本日休業', 'CLOSED TODAY · BOILER REPAIR', 0.6, 0.42, [GX + 0.5, 1.2, f + 0.08], 0, {
     when: 'evening2',
     sub: 'ボイラー修理のため',
+    door: 'onsen',
   });
 }
 

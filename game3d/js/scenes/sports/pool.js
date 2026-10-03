@@ -139,7 +139,7 @@ function pavilion(p, glow, signs, lights) {
   glow.push(new THREE.BoxGeometry(0.02, 2.0, 1.8).translate(f - 0.05, 1.32, doorZ));
   p.box(C.frame, 0.06, 2.0, 0.06, f - 0.06, 0.32, doorZ);
   p.box(STEEL.pale, 0.04, 0.5, 0.04, f - 0.08, 0.85, doorZ - 0.12);
-  signs.card('準備中', 'CLOSED', 0.46, 0.3, [f - 0.09, 1.25, doorZ + 0.45], -Math.PI / 2);
+  signs.card('準備中', 'CLOSED', 0.46, 0.3, [f - 0.09, 1.25, doorZ + 0.45], -Math.PI / 2, { door: 'pool' });
   p.box(BLOCK.plinth, 0.9, 0.08, 2.6, f - 0.45, 0, doorZ, { surf: 'concrete' });
   p.box(BLOCK.canopy, 1.2, 0.12, 3.0, f - 0.6, 2.62, doorZ);
   p.box(BLOCK.fascia, 0.08, 0.1, 3.0, f - 1.2, 2.55, doorZ);

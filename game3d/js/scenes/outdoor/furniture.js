@@ -46,6 +46,7 @@ export function lightSet() {
       glowMesh.castShadow = false;
       root.add(glowMesh);
       const poolMesh = pools(lit, 1, { k: 0.16, y: poolY });
+      poolMesh.userData.lampPool = true; // the street lamps' pools: eveningLight sets their gain for the day
       root.add(poolMesh);
       return {
         evening() {

@@ -4,6 +4,7 @@ import { settings, CPS } from '../settings.js';
 import { voice, stopVoice, muted } from '../audio/core.js';
 import { showPortraits, resetPortraitSpeaker } from './portraits.js';
 import { heardHTML, scramble, reveal, addPlayButtons, whileUnpaused } from './dialogue-text.js';
+import { showDoorCard } from './door-card.js';
 
 // Methods use the UI receiver so input handlers and Runner retain the same state.
 export function createDialogue({ sfx }) {
@@ -15,6 +16,7 @@ export function createDialogue({ sfx }) {
       return new Promise((res) => {
         const t = $('#talk');
         showPortraits(t, speaker ? whoId : null, face);
+        showDoorCard(t, speaker ? null : text); // a shut door's card, beside the line that reads it
         t.classList.toggle('heard', !!overheard);
         t.hidden = false;
         t.classList.toggle('narr', !speaker);
@@ -100,6 +102,7 @@ export function createDialogue({ sfx }) {
       return new Promise((res) => {
         const t = $('#talk');
         if (!keepLine || whoId) showPortraits(t, speaker ? whoId : null);
+        if (!keepLine) showDoorCard(t, null);
         t.hidden = false;
         t.classList.toggle('narr', !speaker);
         const who = t.querySelector('.who');

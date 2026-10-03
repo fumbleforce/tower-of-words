@@ -170,10 +170,10 @@ export async function plazaPlace(game) {
     onPeriod(period) {
       w.cards(sim.day, period); // the shops' door cards for the day and the time (scenes/shop-signs.js WHEN)
       canteen.sync(); // on every entry: the terrace open, or closing after work
-      if (period !== 'evening' || P.grade === eveningGrade(sim.day)) return;
-      eveningLight(w.scene, sim.day);
+      if (period !== 'evening' || P.grade === eveningGrade(sim.day, 'plaza')) return;
+      eveningLight(w.scene, sim.day, { pool: 1.5 });
       w.evening();
-      P.grade = eveningGrade(sim.day);
+      P.grade = eveningGrade(sim.day, 'plaza');
     },
     snapshotState() {
       return { player: snapshotPeople({ eric: game.player }), canteen: canteen.snapshot() };

@@ -88,8 +88,8 @@ export function shopFittings(p, signs, blocks) {
       signs.board(kana, en, colour, 2.4, 0.6, at(1.08, 2.72), ry);
     }
     // the door's glass: shut, a card on it
-    signs.card('準備中', 'CLOSED', 0.46, 0.3, at(0.09, 1.2, 0.28), ry, { when: 'prep' });
-    signs.card('本日休業', 'CLOSED TODAY', 0.46, 0.3, at(0.09, 1.2, 0.28), ry, { when: 'evening2' }); // day 2 after work
+    signs.card('準備中', 'CLOSED', 0.46, 0.3, at(0.09, 1.2, 0.28), ry, { when: 'prep', door: k.shop.id });
+    signs.card('本日休業', 'CLOSED TODAY', 0.46, 0.3, at(0.09, 1.2, 0.28), ry, { when: 'evening2', door: k.shop.id }); // day 2 after work
     if (k.shop.id === 'barber') barberPole(p, F, u - 0.85);
   }
 }

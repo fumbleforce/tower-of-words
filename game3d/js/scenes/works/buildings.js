@@ -353,7 +353,13 @@ function* hall(p, sets, signs, lights) {
   onFace(p, C.hall, f, t - w / 2 - 0.06, t + w / 2 + 0.06, 2.12, H - 0.4, -0.15, 0);
   onFace(p, '#3a4048', f, t - w / 2, t + w / 2, 0, 2.12, -0.16, -0.12);
   const canopy = frontDoor(sets, f, { t, w, canopy: { out: 1.2, side: 0.5 } });
-  fittings(p, signs, lights, { sign: ['サーバーとう', 'SERVER HALL', '#2f5568'] }, { f, t, canopy });
+  fittings(
+    p,
+    signs,
+    lights,
+    { sign: ['サーバーとう', 'SERVER HALL', '#2f5568'], place: 'server_hall' },
+    { f, t, canopy },
+  );
   yield;
 }
 

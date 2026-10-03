@@ -161,7 +161,8 @@ export const EVENING_GRADE = {
   focusBand: 0.3,
 };
 // day 2's after work (story/day2/): the same dusk lifted, so faces and paths read on a phone screen, the lamps still
-// warm and the sky still dusk; day 1's evening stays as it is
+// warm and the sky still dusk; day 1's evening stays as it is. charLift: the people's own colours added back a little
+// with a rim of sky light (look/char-lift.js), so dark clothes keep their shape against the dusk
 export const EVENING_GRADE_2 = {
   ...EVENING_GRADE,
   exposure: 1.18,
@@ -169,16 +170,26 @@ export const EVENING_GRADE_2 = {
   contrast: 1.04,
   lift: [0.01, 0.012, 0.03],
   vignette: 0.22,
+  charLift: 0.13,
 };
-export const eveningGrade = (day = 1) => (day === 2 ? EVENING_GRADE_2 : EVENING_GRADE);
+// a place whose open paving takes more of the sky than the streets do gets its exposure eased back (the plaza)
+const EVENING_GRADE_2_BY = { plaza: { ...EVENING_GRADE_2, exposure: 1.08 } };
+export const eveningGrade = (day = 1, place) =>
+  day === 2 ? EVENING_GRADE_2_BY[place] || EVENING_GRADE_2 : EVENING_GRADE;
+// pool: the gain on the street lamps' pools (outdoor/furniture.js lightSet), up on day 2 so they hold against its
+// brighter dusk
 const EVENING_LIGHT = {
-  1: { sky: ['#8d9bb8', '#454850', 1.2], sun: ['#ffa56e', 1.45], fill: ['#b4c2ee', 0.4] },
-  2: { sky: ['#8fa2d4', '#5c5e6a', 1.75], sun: ['#ffa062', 2.1], fill: ['#c4cff4', 1.35] },
+  1: { sky: ['#8d9bb8', '#454850', 1.2], sun: ['#ffa56e', 1.45], fill: ['#b4c2ee', 0.4], pool: 1 },
+  2: { sky: ['#8fa2d4', '#5c5e6a', 1.75], sun: ['#ffa062', 2.1], fill: ['#c4cff4', 1.35], pool: 2 },
 };
-export function eveningLight(scene, day = 1) {
+// pool: a place's own gain on its lamps' pools instead of the day's (the plaza's are many and overlap)
+export function eveningLight(scene, day = 1, { pool } = {}) {
   const L = EVENING_LIGHT[day] || EVENING_LIGHT[1];
   scene.traverse((o) => {
-    if (o.isHemisphereLight) {
+    if (o.userData.lampPool) {
+      o.userData.gain = day === 2 && pool ? pool : L.pool;
+      o.userData.set(o.userData.k);
+    } else if (o.isHemisphereLight) {
       o.color.set(L.sky[0]);
       o.groundColor.set(L.sky[1]);
       o.intensity = L.sky[2];

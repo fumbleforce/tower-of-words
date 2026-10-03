@@ -107,7 +107,10 @@ export function* shotengaiSteps() {
     [ix, iz] = faceAt(iF, iu, 0.145),
     iry = Math.atan2(iF.n[0], iF.n[1]),
     curtain = signSet();
-  curtain.card('本日貸切', 'RESERVED THIS EVENING', 0.32, 0.21, [ix, 1.66, iz], iry, { when: 'evening2' });
+  curtain.card('本日貸切', 'RESERVED THIS EVENING', 0.32, 0.21, [ix, 1.66, iz], iry, {
+    when: 'evening2',
+    door: 'izakaya',
+  });
   const curtainCard = curtain.build(pf);
   const eastLit = eastLights.build(pf, { poolY: 0.03 });
   yield;
