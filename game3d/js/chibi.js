@@ -18,6 +18,26 @@ const HEIGHT = { eric: 1.2, mio: 1.12, kuro: 1.12 };
 // people in cast.js that take their chibi through cast3d.js
 export const CHIBI_CAST = CHIBI_ON ? ['kuro'] : [];
 
+// Jørgen, on the first in-game round: "Their heads are a little too big still". The head bone (and with it the hair,
+// glasses and face) is 15% smaller, scaled at its joint so the neck stays joined; the clips only turn it, so the size
+// holds. loadMeshy measures the model after this and brings it back to HEIGHT, so the body takes the freed height,
+// and the strides grow with the legs (the clips' speeds were measured on the old proportions).
+const HEAD = 0.85;
+function smallerHead(scene, gait) {
+  const tall = () => {
+    scene.updateMatrixWorld(true);
+    scene.traverse((o) => o.isSkinnedMesh && (o.boundingBox = null));
+    const b = new THREE.Box3().setFromObject(scene);
+    return b.max.y - b.min.y;
+  };
+  const before = tall();
+  scene.getObjectByName('Head').scale.setScalar(HEAD);
+  const k = before / tall();
+  gait.walkV *= k;
+  gait.runV *= k;
+  return scene;
+}
+
 export async function loadChibi(id) {
   const dir = CDIR + 'chibi-' + id + '/';
   const lo = S.isPhone() || S.qualityTier() === 'low' ? '-lo' : '';
@@ -28,7 +48,10 @@ export async function loadChibi(id) {
   const clip = (n) => THREE.AnimationClip.parse(data.clips[n]);
   const packed = (load) =>
     Promise.all([
-      load(dir + `model${lo}.glb` + V()).then((g) => ({ scene: g.scene, animations: [clip('walk')] })),
+      load(dir + `model${lo}.glb` + V()).then((g) => ({
+        scene: smallerHead(g.scene, data.gait),
+        animations: [clip('walk')],
+      })),
       { animations: [clip('run')] },
       clip('idle'),
       { animations: [clip('sit')] },
