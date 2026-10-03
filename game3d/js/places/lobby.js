@@ -19,6 +19,7 @@ import { rbox } from '../props.js';
 import { route } from './route.js';
 import { lobbyCommuters } from './lobby-commuters.js';
 import { gateBackground } from './background-people.js';
+import { lobbyDay2 } from './lobby-day2.js';
 
 export const withList = (slot) =>
   (slot.with || []).filter((e) => typeof e === 'string' || cond(e.if)).map((e) => (typeof e === 'string' ? e : e.who));
@@ -169,6 +170,7 @@ export async function lobbyPlace(game) {
     })();
   }
   const bg = gateBackground(extras, commuters); // background people to talk to too (#106)
+  const day2 = lobbyDay2(game, { Z, st, setGate, commuters, cam }); // day 2's ways out and open gate
   const things = {
     guard: { ...PLACE_DETAILS.gate.things.guard, anchor: rigAnchor(w.guard), ...at(2.1, BZ + 0.72, 2.35, BZ - 0.6) },
     kuroda: {
@@ -279,6 +281,12 @@ export async function lobbyPlace(game) {
     commuter_1: { ...PLACE_DETAILS.gate.things.commuter_1 },
     commuter_2: { ...PLACE_DETAILS.gate.things.commuter_2 },
     commuter_3: { ...PLACE_DETAILS.gate.things.commuter_3 },
+    platform_way: { ...PLACE_DETAILS.gate.things.platform_way, anchor: v3(0, 1.3, Z), ...day2.thing('platform_way') },
+    forecourt_way: {
+      ...PLACE_DETAILS.gate.things.forecourt_way,
+      anchor: v3(-1.0, 1.7, -Z),
+      ...day2.thing('forecourt_way'),
+    },
   };
   for (const id in bg.things) Object.assign(things[id], bg.things[id]);
 
@@ -286,6 +294,8 @@ export async function lobbyPlace(game) {
     arch: (x, z) => Math.abs(x) < 0.6 && z < BZ + 0.5 && z > BZ + 0.1 && !st.gateOpen,
     past_gate: (x, z) => z < BZ - 0.4,
     lift_front: (x, z) => z < -Z + 1.1 && Math.abs(x) < 1.8,
+    platform_way: day2.zones.platform_way,
+    forecourt_way: day2.zones.forecourt_way,
   };
 
   function standUp(id) {
@@ -660,6 +670,7 @@ export async function lobbyPlace(game) {
       g.player.setState('idle');
     },
   };
+  day2.install(P);
   // Aoi isn't in today's gate story: she stays on the right bench, hidden, unless the story shows her
   w.aoi.root.visible = false;
   w.aoiBlob.visible = false;

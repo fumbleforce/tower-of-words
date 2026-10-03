@@ -271,6 +271,16 @@
           "label": "Platform",
           "kind": "thing small",
           "reachAfter": "doors"
+        },
+        "door_test": {
+          "label": "Door test panel",
+          "kind": "thing",
+          "verb": "Test"
+        },
+        "station_exit": {
+          "label": "To the station",
+          "kind": "thing",
+          "verb": "Go"
         }
       },
       "spots": [
@@ -294,7 +304,8 @@
       ],
       "zones": [
         "door_zone",
-        "free_seat"
+        "free_seat",
+        "platform_exit"
       ],
       "people": [
         "kuroda",
@@ -323,7 +334,9 @@
         "phone",
         "headphones",
         "shopBag",
-        "printout"
+        "printout",
+        "stationSetup",
+        "doorTest"
       ]
     },
     "gate": {
@@ -436,6 +449,16 @@
         "commuter_3": {
           "label": "Office worker",
           "kind": "person"
+        },
+        "platform_way": {
+          "label": "To the platform",
+          "kind": "thing",
+          "verb": "Go"
+        },
+        "forecourt_way": {
+          "label": "Station exit",
+          "kind": "thing",
+          "verb": "Go"
         }
       },
       "spots": [
@@ -456,7 +479,9 @@
       "zones": [
         "arch",
         "past_gate",
-        "lift_front"
+        "lift_front",
+        "platform_way",
+        "forecourt_way"
       ],
       "people": [
         "guard",
@@ -520,11 +545,15 @@
         "plaza_lane",
         "forecourt_staff_gate"
       ],
+      "nooks": [
+        "forecourt_staff_gate"
+      ],
       "seats": [
         "garden_bench"
       ],
       "zones": [
         "lift_front",
+        "station_exit",
         "plaza_lane"
       ],
       "people": [
@@ -536,9 +565,6 @@
         "liftClose",
         "gardenCat",
         "bicycle"
-      ],
-      "nooks": [
-        "forecourt_staff_gate"
       ]
     },
     "dorm_court": {
@@ -560,6 +586,11 @@
           "label": "Mailbox 203",
           "kind": "thing",
           "verb": "Take mail"
+        },
+        "street_gate": {
+          "label": "To the street",
+          "kind": "thing",
+          "verb": "Go"
         }
       },
       "spots": [
@@ -572,7 +603,8 @@
       "seats": [],
       "zones": [
         "hall",
-        "passage"
+        "passage",
+        "street_exit"
       ],
       "people": [],
       "hooks": [
@@ -615,24 +647,49 @@
           "label": "Izakaya",
           "kind": "thing",
           "verb": "Go in"
+        },
+        "mori": {
+          "label": "Mr. Mori",
+          "kind": "person"
+        },
+        "kenji": {
+          "label": "Kenji",
+          "kind": "person"
+        },
+        "party_seat": {
+          "label": "Bench",
+          "kind": "thing",
+          "verb": "Sit"
         }
       },
       "spots": [
         "plaza_entry",
         "shotengai_shrine",
         "shotengai_back_alley",
-        "shotengai_pine_bench"
+        "shotengai_pine_bench",
+        "party_group",
+        "party_kenji",
+        "party_mio"
       ],
-      "seats": [],
-      "zones": [
-        "plaza_exit"
-      ],
-      "people": [],
-      "hooks": [],
       "nooks": [
         "shotengai_shrine",
         "shotengai_back_alley",
         "shotengai_pine_bench"
+      ],
+      "seats": [
+        "party_seat",
+        "party_mori"
+      ],
+      "zones": [
+        "plaza_exit"
+      ],
+      "people": [
+        "mori",
+        "kenji"
+      ],
+      "hooks": [
+        "partySetup",
+        "partyFood"
       ]
     },
     "east_lane": {
@@ -688,6 +745,10 @@
         "east_lane_shrine",
         "east_lane_footpath"
       ],
+      "nooks": [
+        "east_lane_shrine",
+        "east_lane_footpath"
+      ],
       "seats": [],
       "zones": [
         "plaza_exit",
@@ -697,11 +758,267 @@
         "north_exit"
       ],
       "people": [],
-      "hooks": [],
+      "hooks": []
+    },
+    "east_coast": {
+      "things": {
+        "dorm_street": {
+          "label": "To the dorm street",
+          "kind": "thing",
+          "verb": "Go"
+        },
+        "courts_walk": {
+          "label": "To the gym and pool",
+          "kind": "thing",
+          "verb": "Go"
+        },
+        "lookout": {
+          "label": "Lookout",
+          "kind": "thing",
+          "verb": "Look"
+        },
+        "onsen": {
+          "label": "Onsen",
+          "kind": "thing",
+          "verb": "Go in"
+        }
+      },
+      "spots": [
+        "row_entry",
+        "east_coast_lookout",
+        "east_coast_shrine"
+      ],
       "nooks": [
-        "east_lane_shrine",
-        "east_lane_footpath"
-      ]
+        "east_coast_lookout",
+        "east_coast_shrine"
+      ],
+      "seats": [],
+      "zones": [
+        "row_exit",
+        "courts_exit"
+      ],
+      "people": [],
+      "hooks": []
+    },
+    "sports": {
+      "things": {
+        "north_street": {
+          "label": "To the north street",
+          "kind": "thing",
+          "verb": "Go"
+        },
+        "onsen_path": {
+          "label": "To the onsen path",
+          "kind": "thing",
+          "verb": "Go"
+        },
+        "office_street": {
+          "label": "To the office street",
+          "kind": "thing",
+          "verb": "Go"
+        },
+        "gym": {
+          "label": "Gym",
+          "kind": "thing",
+          "verb": "Go in"
+        },
+        "pool": {
+          "label": "Pool",
+          "kind": "thing",
+          "verb": "Go in"
+        }
+      },
+      "spots": [
+        "north_entry",
+        "sports_courtside",
+        "sports_grove_bench"
+      ],
+      "nooks": [
+        "sports_courtside",
+        "sports_grove_bench"
+      ],
+      "seats": [],
+      "zones": [
+        "north_exit",
+        "east_exit",
+        "west_exit"
+      ],
+      "people": [],
+      "hooks": []
+    },
+    "office_quarter": {
+      "things": {
+        "sports_lane": {
+          "label": "To the gym and pool",
+          "kind": "thing",
+          "verb": "Go"
+        },
+        "harbour": {
+          "label": "To the harbour",
+          "kind": "thing",
+          "verb": "Go"
+        },
+        "trading_office": {
+          "label": "Amakawa Trading",
+          "kind": "thing",
+          "verb": "Go in"
+        },
+        "foods_office": {
+          "label": "Amakawa Foods",
+          "kind": "thing",
+          "verb": "Go in"
+        },
+        "electric_office": {
+          "label": "Amakawa Electric",
+          "kind": "thing",
+          "verb": "Go in"
+        },
+        "logistics_office": {
+          "label": "Amakawa Logistics",
+          "kind": "thing",
+          "verb": "Go in"
+        },
+        "construction_office": {
+          "label": "Amakawa Construction",
+          "kind": "thing",
+          "verb": "Go in"
+        },
+        "insurance_office": {
+          "label": "Amakawa Life",
+          "kind": "thing",
+          "verb": "Go in"
+        },
+        "bank": {
+          "label": "Bank",
+          "kind": "thing",
+          "verb": "Go in"
+        }
+      },
+      "spots": [
+        "street_entry",
+        "office_smokers",
+        "office_vending"
+      ],
+      "nooks": [
+        "office_smokers",
+        "office_vending"
+      ],
+      "seats": [],
+      "zones": [
+        "east_exit",
+        "west_exit"
+      ],
+      "people": [],
+      "hooks": []
+    },
+    "harbour": {
+      "things": {
+        "office_street": {
+          "label": "To the office street",
+          "kind": "thing",
+          "verb": "Go"
+        },
+        "works_lane": {
+          "label": "To the old works",
+          "kind": "thing",
+          "verb": "Go"
+        },
+        "works_street": {
+          "label": "To the works street",
+          "kind": "thing",
+          "verb": "Go"
+        },
+        "ferry_terminal": {
+          "label": "Ferry terminal",
+          "kind": "thing",
+          "verb": "Go in"
+        },
+        "harbour_office": {
+          "label": "Harbour office",
+          "kind": "thing",
+          "verb": "Go in"
+        }
+      },
+      "spots": [
+        "street_entry",
+        "harbour_pier_end",
+        "harbour_shed_back",
+        "harbour_ferry_lookout"
+      ],
+      "nooks": [
+        "harbour_pier_end",
+        "harbour_shed_back",
+        "harbour_ferry_lookout"
+      ],
+      "seats": [],
+      "zones": [
+        "east_exit",
+        "lane_exit",
+        "street_exit"
+      ],
+      "people": [],
+      "hooks": []
+    },
+    "works": {
+      "things": {
+        "harbour_lane": {
+          "label": "To the harbour",
+          "kind": "thing",
+          "verb": "Go"
+        },
+        "office_street": {
+          "label": "To the office street",
+          "kind": "thing",
+          "verb": "Go"
+        },
+        "old_power_plant": {
+          "label": "Old power plant",
+          "kind": "thing",
+          "verb": "Go in"
+        },
+        "old_factory": {
+          "label": "Old factory",
+          "kind": "thing",
+          "verb": "Go in"
+        },
+        "server_hall": {
+          "label": "Server hall",
+          "kind": "thing",
+          "verb": "Go in"
+        },
+        "recycling_centre": {
+          "label": "Recycling centre",
+          "kind": "thing",
+          "verb": "Go in"
+        },
+        "research_lab": {
+          "label": "Amakawa Research",
+          "kind": "thing",
+          "verb": "Go in"
+        }
+      },
+      "spots": [
+        "lane_entry",
+        "chimney_foot",
+        "smoking_corner",
+        "gatehouse_window",
+        "transformer_lot",
+        "weather_station"
+      ],
+      "nooks": [
+        "chimney_foot",
+        "smoking_corner",
+        "gatehouse_window",
+        "transformer_lot",
+        "weather_station"
+      ],
+      "seats": [],
+      "zones": [
+        "lane_exit",
+        "street_exit"
+      ],
+      "people": [],
+      "hooks": []
     },
     "dorms": {
       "things": {
@@ -725,6 +1042,11 @@
           "label": "Computer",
           "kind": "thing",
           "verb": "Look"
+        },
+        "door_out": {
+          "label": "Front door",
+          "kind": "thing",
+          "verb": "Go out"
         }
       },
       "spots": [
@@ -738,7 +1060,8 @@
         "desk_chair"
       ],
       "zones": [
-        "door_203"
+        "door_203",
+        "room_exit"
       ],
       "people": [],
       "hooks": [
@@ -793,6 +1116,10 @@
         "plaza_seat_bay",
         "plaza_shrine"
       ],
+      "nooks": [
+        "plaza_seat_bay",
+        "plaza_shrine"
+      ],
       "seats": [],
       "zones": [
         "office_lane",
@@ -804,10 +1131,6 @@
       ],
       "hooks": [
         "canteenChair"
-      ],
-      "nooks": [
-        "plaza_seat_bay",
-        "plaza_shrine"
       ]
     },
     "office": {
@@ -1047,262 +1370,8 @@
         "liftClose",
         "sitDown",
         "lunchSit",
-        "lunchOver"
-      ]
-    },
-    "east_coast": {
-      "things": {
-        "dorm_street": {
-          "label": "To the dorm street",
-          "kind": "thing",
-          "verb": "Go"
-        },
-        "courts_walk": {
-          "label": "To the gym and pool",
-          "kind": "thing",
-          "verb": "Go"
-        },
-        "onsen": {
-          "label": "Onsen",
-          "kind": "thing",
-          "verb": "Go in"
-        }
-      },
-      "spots": [
-        "row_entry",
-        "east_coast_lookout",
-        "east_coast_shrine"
-      ],
-      "seats": [],
-      "zones": [
-        "row_exit",
-        "courts_exit"
-      ],
-      "people": [],
-      "hooks": [],
-      "nooks": [
-        "east_coast_lookout",
-        "east_coast_shrine"
-      ]
-    },
-    "sports": {
-      "things": {
-        "north_street": {
-          "label": "To the north street",
-          "kind": "thing",
-          "verb": "Go"
-        },
-        "onsen_path": {
-          "label": "To the onsen path",
-          "kind": "thing",
-          "verb": "Go"
-        },
-        "office_street": {
-          "label": "To the office street",
-          "kind": "thing",
-          "verb": "Go"
-        },
-        "gym": {
-          "label": "Gym",
-          "kind": "thing",
-          "verb": "Go in"
-        },
-        "pool": {
-          "label": "Pool",
-          "kind": "thing",
-          "verb": "Go in"
-        }
-      },
-      "spots": [
-        "north_entry",
-        "sports_courtside",
-        "sports_grove_bench"
-      ],
-      "seats": [],
-      "zones": [
-        "north_exit",
-        "east_exit",
-        "west_exit"
-      ],
-      "people": [],
-      "hooks": [],
-      "nooks": [
-        "sports_courtside",
-        "sports_grove_bench"
-      ]
-    },
-    "office_quarter": {
-      "things": {
-        "sports_lane": {
-          "label": "To the gym and pool",
-          "kind": "thing",
-          "verb": "Go"
-        },
-        "harbour": {
-          "label": "To the harbour",
-          "kind": "thing",
-          "verb": "Go"
-        },
-        "trading_office": {
-          "label": "Amakawa Trading",
-          "kind": "thing",
-          "verb": "Go in"
-        },
-        "foods_office": {
-          "label": "Amakawa Foods",
-          "kind": "thing",
-          "verb": "Go in"
-        },
-        "electric_office": {
-          "label": "Amakawa Electric",
-          "kind": "thing",
-          "verb": "Go in"
-        },
-        "logistics_office": {
-          "label": "Amakawa Logistics",
-          "kind": "thing",
-          "verb": "Go in"
-        },
-        "construction_office": {
-          "label": "Amakawa Construction",
-          "kind": "thing",
-          "verb": "Go in"
-        },
-        "insurance_office": {
-          "label": "Amakawa Life",
-          "kind": "thing",
-          "verb": "Go in"
-        },
-        "bank": {
-          "label": "Bank",
-          "kind": "thing",
-          "verb": "Go in"
-        }
-      },
-      "spots": [
-        "street_entry",
-        "office_smokers",
-        "office_vending"
-      ],
-      "seats": [],
-      "zones": [
-        "east_exit",
-        "west_exit"
-      ],
-      "people": [],
-      "hooks": [],
-      "nooks": [
-        "office_smokers",
-        "office_vending"
-      ]
-    },
-    "harbour": {
-      "things": {
-        "office_street": {
-          "label": "To the office street",
-          "kind": "thing",
-          "verb": "Go"
-        },
-        "works_lane": {
-          "label": "To the old works",
-          "kind": "thing",
-          "verb": "Go"
-        },
-        "works_street": {
-          "label": "To the works street",
-          "kind": "thing",
-          "verb": "Go"
-        },
-        "ferry_terminal": {
-          "label": "Ferry terminal",
-          "kind": "thing",
-          "verb": "Go in"
-        },
-        "harbour_office": {
-          "label": "Harbour office",
-          "kind": "thing",
-          "verb": "Go in"
-        }
-      },
-      "spots": [
-        "street_entry",
-        "harbour_pier_end",
-        "harbour_shed_back",
-        "harbour_ferry_lookout"
-      ],
-      "seats": [],
-      "zones": [
-        "east_exit",
-        "lane_exit",
-        "street_exit"
-      ],
-      "people": [],
-      "hooks": [],
-      "nooks": [
-        "harbour_pier_end",
-        "harbour_shed_back",
-        "harbour_ferry_lookout"
-      ]
-    },
-    "works": {
-      "things": {
-        "harbour_lane": {
-          "label": "To the harbour",
-          "kind": "thing",
-          "verb": "Go"
-        },
-        "office_street": {
-          "label": "To the office street",
-          "kind": "thing",
-          "verb": "Go"
-        },
-        "old_power_plant": {
-          "label": "Old power plant",
-          "kind": "thing",
-          "verb": "Go in"
-        },
-        "old_factory": {
-          "label": "Old factory",
-          "kind": "thing",
-          "verb": "Go in"
-        },
-        "server_hall": {
-          "label": "Server hall",
-          "kind": "thing",
-          "verb": "Go in"
-        },
-        "recycling_centre": {
-          "label": "Recycling centre",
-          "kind": "thing",
-          "verb": "Go in"
-        },
-        "research_lab": {
-          "label": "Amakawa Research",
-          "kind": "thing",
-          "verb": "Go in"
-        }
-      },
-      "spots": [
-        "lane_entry",
-        "chimney_foot",
-        "smoking_corner",
-        "gatehouse_window",
-        "transformer_lot",
-        "weather_station"
-      ],
-      "seats": [],
-      "zones": [
-        "lane_exit",
-        "street_exit"
-      ],
-      "people": [],
-      "hooks": [],
-      "nooks": [
-        "chimney_foot",
-        "smoking_corner",
-        "gatehouse_window",
-        "transformer_lot",
-        "weather_station"
+        "lunchOver",
+        "officeDay2"
       ]
     }
   }

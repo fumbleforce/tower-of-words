@@ -1,6 +1,6 @@
 # The station report
 
-Eric checks the doors before going to B2. Mio's explanation of yesterday's incident and Emi's newly secured parts budget meet in his report. Authored; implementation pending.
+Eric checks the doors before going to B2. Mio's explanation of yesterday's incident and Emi's newly secured parts budget meet in his report. Built; voice clips to make.
 
 ## Cast
 
@@ -40,6 +40,3 @@ None. The optional door experiment reuses words already learned on both day-1 ga
 | `day2/forecourt.js` | `d2_arrive`, `d2_to_station`, `d2_to_office`, `d2_to_plaza`, `d2_food_away`, `d2_see_away`, `d2_go_away`, `d2_drink_away` |
 | `day2/office.js` | `d2_office`, `d2_brief`, `d2_assess`, `d2_limits`, `d2_invitation`, `d2_work`, `d2_emi_waiting`, `d2_emi_later`, `d2_desk_wait`, `d2_desk_later`, `d2_mio_work`, `d2_mori_work`, `d2_kenji_work`, `d2_kenji_invite_again`, `d2_leave`, `d2_food_away`, `d2_see_away`, `d2_go_away`, `d2_drink_away` |
 
-## To build
-
-See the [hook and access handoff](../../../../game3d/story/day2/README.md). The train's arrival/departure and day-1 office events must be suppressed in this set.

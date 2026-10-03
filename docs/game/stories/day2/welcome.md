@@ -1,6 +1,6 @@
 # Welcome food
 
-The team has arranged food for Eric after work. Mori wants him to enjoy it, Kenji is eager to start eating, and Mio has brought pickles. Authored; implementation pending.
+The team has arranged food for Eric after work. Mori wants him to enjoy it, Kenji is eager to start eating, and Mio has brought pickles. Built; voice clips to make.
 
 ## Cast
 
@@ -43,6 +43,3 @@ Only tabetai is required. Every word starts unknown and is learned by typing. Th
 |---|---|
 | `day2/shotengai.js` | `d2_arrive`, `d2_meet_kenji`, `d2_supper`, `d2_take_food`, `d2_topic`, `d2_after_work`, `d2_norway`, `d2_quiet`, `d2_party_free`, `d2_seat_menu`, `d2_stay`, `d2_goodnight`, `d2_kenji_party`, `d2_drink_word`, `d2_no_drink`, `d2_more_drink`, `d2_more_food`, `d2_mio_party`, `d2_mori_party`, `d2_kenji_wait`, `d2_mio_wait`, `d2_mori_wait`, `d2_mori_rest`, `d2_go_word`, `d2_mori_rest_end`, `d2_leftovers`, `d2_mori_drink`, `d2_mori_rest_idle`, `d2_mori_rest_again`, `d2_mori_go_reply`, `d2_mori_see_reply`, `d2_empty_bench`, `d2_to_lane`, `d2_izakaya`, `d2_bakery`, `d2_shut`, `d2_food_away`, `d2_see_away`, `d2_go_away`, `d2_drink_away` |
 
-## To build
-
-See the [handoff](../../../../game3d/story/day2/README.md): seating and camera at phone size, the small food setup, stable placements across trips, the new words and voices.

@@ -1,6 +1,6 @@
 # Day-2 visits
 
-Eric can use his room computer, take a nearby walk before or after work, and return home without a timer. Authored; implementation pending.
+Eric can use his room computer, take a nearby walk before or after work, and return home without a timer. Built; voice clips to make.
 
 ## Cast
 
@@ -47,6 +47,3 @@ Optional `mitai` is modelled normally and slowly by `kuroda`, then typed in `d2_
 | `day2/plaza.js` | `d2_arrive`, `d2_to_office`, `d2_to_lane`, `d2_to_shops`, `d2_fountain`, `d2_food_away`, `d2_see_away`, `d2_go_away`, `d2_drink_away` |
 | `day2/east_coast.js` | `d2_arrive`, `d2_to_lane`, `d2_north_closed`, `d2_onsen`, `d2_lookout`, `d2_hamada`, `d2_see_word`, `d2_lookout_view`, `d2_hamada_idle`, `d2_hamada_again`, `d2_leave_lookout`, `d2_hamada_go`, `d2_hamada_food`, `d2_hamada_drink`, `d2_lookout_again`, `d2_food_away`, `d2_see_away`, `d2_go_away`, `d2_drink_away` |
 
-## To build
-
-The PC prop is Claude's C-0369 work. The pending exits, camera, day selection and summary work are in the [handoff](../../../../game3d/story/day2/README.md).

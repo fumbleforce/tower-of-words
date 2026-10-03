@@ -91,6 +91,9 @@ export const TRAIN_DETAILS = {
       'kind': 'thing small',
       'reachAfter': 'doors', // outside the car: reached once the doors open (reach-check.mjs)
     },
+    // day 2, the car standing between runs: the door test panel by the right-hand doors, and the way back
+    'door_test': { 'label': 'Door test panel', 'kind': 'thing', 'verb': 'Test' },
+    'station_exit': { 'label': 'To the station', 'kind': 'thing', 'verb': 'Go' },
   },
   'spots': [
     'aisle',
@@ -105,7 +108,7 @@ export const TRAIN_DETAILS = {
     'plat_hamada',
   ],
   'seats': ['seat_aoi', 'seat_far_r', 'seat_near_l', 'seat_near_r', 'seat_mio'],
-  'zones': ['door_zone', 'free_seat'],
+  'zones': ['door_zone', 'free_seat', 'platform_exit'],
   'people': ['kuroda', 'aoi', 'reader', 'rei', 'music', 'stander', 'bun', 'youth', 'tama'],
   'hooks': [
     'announce',
@@ -124,5 +127,7 @@ export const TRAIN_DETAILS = {
     'headphones',
     'shopBag',
     'printout',
+    'stationSetup',
+    'doorTest',
   ],
 };

@@ -3,6 +3,7 @@ export const EAST_COAST_DETAILS = {
   things: {
     dorm_street: { label: 'To the dorm street', kind: 'thing', verb: 'Go' },
     courts_walk: { label: 'To the gym and pool', kind: 'thing', verb: 'Go' },
+    lookout: { label: 'Lookout', kind: 'thing', verb: 'Look' }, // the nook east_coast_lookout
     onsen: { label: 'Onsen', kind: 'thing', verb: 'Go in' },
   },
   spots: ['row_entry', 'east_coast_lookout', 'east_coast_shrine'],

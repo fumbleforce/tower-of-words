@@ -56,7 +56,15 @@ There are no cuts to black (Jørgen, 2026-09-28: "elegant, continuous transition
 - `harbour` → `works`, walk, by either of two ways: Eric walks north out of the supply yard into the works lane, or north off the office street into the works street; the camera closes in and crossfades to the same close framing of him walking on north up the same lane or street, as the camera lets go. With the way back down the other one this makes a loop.
 - `works` → `harbour`, walk, by the way nearest him: south down the works lane, crossfading to him stepping out into the supply yard, or south down the works street, crossfading to him stepping out onto the office street.
 - `shotengai` → `dorm_court`, walk: after work only. Eric walks out of the shop walk onto the dorm street; the camera closes in and crossfades to him walking up the street to the dorm courtyard's gate, as from the plaza.
-- `dorm_court` → `dorms`, walk then stairs: Eric has walked in through the hall doors and across the hall himself. At the passage the camera comes in close as he walks into it, then crossfades to him coming up the last flight onto the 2F landing; the camera pulls back along the corridor as he turns into it and lets go. He walks the corridor to his door himself (Eric's dorm room).
+- `dorm_court` → `dorms`, walk then stairs: Eric has walked in through the hall doors and across the hall himself. At the passage the camera comes in close as he walks into it, then crossfades to him coming up the last flight onto the 2F landing; the camera pulls back along the corridor as he turns into it and lets go. He walks the corridor to his door himself (Eric's dorm room); on day 2 he walks on along it and in at his door without stopping, before the room's start.
+
+On day 2 the ways are the day-2 set's (game3d/story/day2/index.js `TRIPS`), the same before and after work, with no day-1 time rules and no dialogue slots. They are the walks above plus these:
+
+- `dorms` → `dorm_court`, walk then stairs: Eric walks onto the genkan, the front door swings out and he steps onto the corridor; the camera is close on the door, then crossfades to him coming out of the passage at the back of the hall and walking to just inside the doors.
+- `dorm_court` → `east_lane`, walk: out of the court's gate onto the lane; the camera closes in and crossfades to him walking west onto the dorm street from the gate leg.
+- `shotengai` → `east_lane`, walk: out of the shop walk onto the dorm street; the camera closes in and crossfades to him walking north up the dorm street.
+- `forecourt` → `gate`, walk: back to the station door and in; the camera closes in at the door and crossfades to him walking in at the security room's north exit, past the open gate.
+- `gate` → `train`, walk: out through the glass doors; the camera closes in and crossfades to him coming off the covered walkway onto the platform, walking up it toward the standing car's left-hand doors.
 
 The dialogue slots for each trip are in game3d/story/transitions.js (format: FORMAT.md, Transitions).
 
@@ -104,6 +112,8 @@ One car of the monorail, crossing the bay from the mainland to Honsha station. T
 | `plant` | Plant | Plastic, and someone waters it anyway. |
 | `sign` | Station sign | Outside, once the train has stopped. |
 | `platform` | Platform | Outside the doors. |
+| `door_test` | Door test panel | Day 2: a portable door tester on the platform by the left-hand doors, a grey case on legs with a lamp on top and a small screen (`--`, `...` while testing, `OK`). Test: the `doorTest` hook. |
+| `station_exit` | To the station | Day 2: the covered walkway at the platform's left end, back to the security room. |
 
 ### Spots
 
@@ -115,11 +125,11 @@ One car of the monorail, crossing the bay from the mainland to Honsha station. T
 
 ### Zones
 
-`door_zone` (either door, while open), `free_seat` (standing at the seat beside Mio)
+`door_zone` (either door, while open), `free_seat` (standing at the seat beside Mio), `platform_exit` (day 2: the platform's left end at the walkway)
 
 ### Who's there when
 
-Day 2 (to build): Eric returns to the empty, stationary car for the door check. Mio joins him only while `!d2_ticket_done` and if `lunch_mio || mio_warm >= 2`; she walks out to B2 immediately after the report; the day-1 passengers are absent. No departure sequence runs.
+Day 2: the car stands at the platform between runs, empty, its doors open (the `stationSetup` hook, every visit and Continue); the passengers, Tama, the bags and Mio's things are gone, and nothing arrives or departs. Eric comes in from the walkway. Mio waits on the platform beside the left-hand doors only while `!d2_ticket_done` and if `lunch_mio || mio_warm >= 2`, walking up the platform as he arrives; she walks off along the platform to B2 right after the report (`stationSetup` `state: depart`); otherwise she isn't here. The door test runs in one go (`doorTest`): the doors shut, the tester's lamp blinks amber three times while the sensor is tried, the doors open again and the lamp turns green with OK on its screen; the doors stay open. Saying 待って in the optional experiment freezes the doors part shut and a low motor hum runs against them until 動いて lets them open.
 
 The monorail has one period, early morning.
 
@@ -180,6 +190,8 @@ The gate stays in this room, as Jørgen picked in [gate-location](../../reviews/
 | `entrance` | Entrance | The glass doors. |
 | `plant` | Plant | A plant. |
 | `bowl` | Tama's bowl | By the guard's desk. |
+| `platform_way` | To the platform | Day 2: the glass doors, out to the walkway and the platform. |
+| `forecourt_way` | Station exit | Day 2: the open exit to the forecourt (the day-1 `lift` marker is off on day 2). |
 
 ### Spots
 
@@ -191,11 +203,11 @@ The gate stays in this room, as Jørgen picked in [gate-location](../../reviews/
 
 ### Zones
 
-`arch` (walking into the closed gate), `past_gate`, `lift_front`
+`arch` (walking into the closed gate), `past_gate`, `lift_front`, `platform_way` and `forecourt_way` (day 2: at the glass doors, and at the exit)
 
 ### Who's there when
 
-Day 2 (to build): The guard remains at his desk and Tama may remain. The arriving day-1 visitors are absent; Eric can pass between the platform and forecourt without replaying the card problem.
+Day 2: the guard is at his desk and Tama by her bowl. The gate stands open, his card works and nobody is coming through (no commuters, no Hamada, no Aoi), so Eric walks between the platform and the forecourt without the card problem.
 
 The security room is played in the early morning, before nine.
 
@@ -261,11 +273,11 @@ Small places off the walks, kept for later secrets, encounters and collectibles 
 
 ### Zones
 
-`lift_front`, `plaza_lane` (the lane's east end along the tower's south face: walking into it starts the walk to the plaza)
+`lift_front`, `station_exit` (day 2: at the station's door, back into the security room), `plaza_lane` (the lane's east end along the tower's south face: walking into it starts the walk to the plaza)
 
 ### Who's there when
 
-Day 2 (to build): No day-1 Kuro encounter replays. The entrances stay available in both day-2 periods.
+Day 2: no day-1 Kuro encounter replays. The station door, head office's door and the lane stay open in both periods. A way out he arrives standing in (the lift, back up from B2) waits until he has stepped out of it.
 
 Kuro works the head office reception all day. The two from Sales appear inside the lift during the ride.
 
@@ -402,9 +414,9 @@ Three alleys, one bay wide and five bays apart, cut through the south row betwee
 
 In the morning the sun comes from the east-south-east behind the camera's left shoulder; after work it is low in the west, ahead down the street, and the shopfronts' glass, the signs, the lanterns with pools of light under them, the promenade's lamps and the izakaya's door light are lit. The shops stay shut. It also loads directly with `?place=shotengai`, at the shop walk. Nobody is here yet.
 
-### Day-2 party plan (not built)
+### Day-2 party plan
 
-The authored [day-2 story](stories/day2/README.md) places B2's welcome food on the promenade. Mori orders rice balls and egg sandwiches from the existing canteen earlier in the day; Kenji helps him collect the takeaway before meeting Eric. This requires no arcade shop to open and no shopping task for Eric. At one sea-facing bench, Mori and Eric sit, with Mio and Kenji standing beside its ends, all in the same conversation space. Mori packs the leftovers in the back alley afterwards; Eric can stop with him there. The [story handoff](../../game3d/story/day2/README.md) specifies this set’s closure cards, exit label, small discovery props and movement. Seats, actor spots and phone framing still need to be built and checked; the current “Seats: None” below describes the shipped place.
+The [day-2 story](stories/day2/README.md) places B2's welcome food on the promenade. Mori orders rice balls and egg sandwiches from the existing canteen earlier in the day; Kenji helps him collect the takeaway before meeting Eric. No arcade shop opens and Eric does no shopping. The pair of back-to-back benches at the foot of the east walk is theirs: Eric and Mori sit on the sea-facing one (Eric at its near end), Mio stands at its near end and Kenji at its far end, all in one conversation. The canteen's takeaway is a navy tray on the bench between the two seats, wrapped in a red cloth until it's opened, with three rice balls and three egg sandwiches on it; Mio's jar of pickles stands at her feet and a bag of drinks at Mori's. What Eric is given (his rice ball or sandwich, more food, a can) is laid by his seat; each change gets a close look at the food and back. Every shot of the group turns the camera to look in from over the sea wall, so the four stand side by side across a phone's screen; letting go turns it back down the street. After the goodbye the tray goes with Mori to the back alley, where he packs the leftovers and Eric can stop with him. The [story handoff](../../game3d/story/day2/README.md) specifies this set’s closure cards, exit label and small discovery props. All of it is set from the story's flags (the `partySetup` and `partyFood` hooks), so a trip away or a Continue puts it back.
 
 ### Things
 
@@ -417,10 +429,13 @@ The authored [day-2 story](stories/day2/README.md) places B2's welcome food on t
 | `game_centre` | Game centre | The game centre's door. Go in: shut. |
 | `karaoke` | Karaoke | The karaoke box's door. Go in: shut. |
 | `izakaya` | Izakaya | The izakaya's door on the shop walk. Go in: shut. |
+| `mori` | Mr. Mori | Day 2, after work. |
+| `kenji` | Kenji | Day 2, after work. |
+| `party_seat` | Bench | Day 2: Eric's end of the party bench (the story labels it "Join the others" until he has eaten). Sit. |
 
 ### Spots
 
-`plaza_entry` (on the shop walk, the arcade ahead); and each nook below
+`plaza_entry` (on the shop walk, the arcade ahead); `party_group` (the middle of the party bench), `party_mio` and `party_kenji` (standing at its near and far ends); and each nook below
 
 ### Nooks
 
@@ -434,7 +449,7 @@ Small places off the walks, kept for later secrets, encounters and collectibles 
 
 ### Seats
 
-None.
+`party_seat` and `party_mori` (day 2: the sea-facing bench of the pair at the foot of the east walk, Eric's near end and Mori's far end; each is got onto from the floor beside its end of the bench)
 
 ### Zones
 
@@ -442,13 +457,13 @@ None.
 
 ### Who's there when
 
-Day 2 (to build): Before the shift ends, none of the party cast is here. After work, Kenji waits by the blue curtain; Mori and Mio wait by the promenade bench. Kenji joins them when Eric approaches him or the bench. After the goodbye, Mio and Kenji leave and Mori rests at `shotengai_back_alley` with the leftovers. There is only one Mori. See the party plan above for food and seating.
-
-None of the cast yet.
+Day 1: none of the cast. Day 2, before the shift ends, none of the party cast is here either. After work Kenji waits by the izakaya's blue curtain; Mori sits on the party bench and Mio stands at its near end. Kenji walks ahead to the bench's far end when Eric meets him, or goes there when Eric reaches the bench first. After the goodbye Mio and Kenji walk off up the east walk and Mori walks to `shotengai_back_alley` with the leftovers and rests there. There is only one Mori. The crowd leaves the party bench free (it sits nobody near the story's spots). Food and seating: the party plan above.
 
 | Id | Usually | Schedule |
 |---|---|---|
-| `mio` | Not here. | – |
+| `mio` | Day 2 after work: standing at the near end of the party bench, until the goodbye. | – |
+| `mori` | Day 2 after work: on the party bench, then resting in the back alley. | – |
+| `kenji` | Day 2 after work: by the izakaya's curtain, then at the far end of the party bench, until the goodbye. | – |
 
 The crowd ([systems.md](systems.md), The crowd):
 
@@ -499,7 +514,7 @@ In the morning the sun is the plaza's, and after work the lamps along the street
 | `plaza_lane` | To the plaza | The lane west of the cross walk, back to the plaza. |
 | `shop_street` | To the shop street | The dorm street's south end, toward the shop walk. |
 | `dorm_row` | To the sea terrace | The dorm row's mouth off the dorm street, east toward the sea terrace and the east coast. |
-| `north_street` | To the gym and pool | The north street north of the back lane, toward the sports lane. |
+| `north_street` | To the gym and pool | The north street north of the back lane, toward the sports lane. On day 2 it is the road-closed barrier there (below), and using it walks Eric up to the barrier. |
 | `dorm_gate` | To the dorms | The dorm courtyard's gate off the dorm street. |
 | `cafe` | Café | The café's door on the south walk. Go in: shut. |
 | `liquor_shop` | Liquor shop | The liquor and rice shop's door at the foot of the cross walk. Go in: shut. |
@@ -529,7 +544,7 @@ None.
 
 ### Who's there when
 
-Day 2 (to build): Only the established ambient population; no new story actor. The liquor-shop tag is an optional discovery ([Day-2 visits](stories/day2/visits.md)). The north crossing is visibly closed for resurfacing during both periods.
+Day 2: only the usual crowd; no story actor. The liquor-shop tag is an optional discovery ([Day-2 visits](stories/day2/visits.md)). The north street is closed for resurfacing in both periods: just short of its way out a yellow-and-black striped bar on two white stands runs right across the street, with a round red no-entry sign on a post in its middle and an orange cone at each end (game3d/js/places/closure.js). The walk grid stops at it, so he never reaches the way out.
 
 None of the cast yet.
 
@@ -589,7 +604,8 @@ In the morning the sun is the plaza's; after work the lamps, the stone lanterns,
 | Id | Label | What it is |
 |---|---|---|
 | `dorm_street` | To the dorm street | The dorm row's west end, back to the dorm street. |
-| `courts_walk` | To the gym and pool | The courts walk west of the onsen path's foot, toward the pool and the gym. |
+| `courts_walk` | To the gym and pool | The courts walk west of the onsen path's foot, toward the pool and the gym. On day 2 it is the road-closed barrier there (below). |
+| `lookout` | Lookout | The lookout nook (`east_coast_lookout`); its pin shows while the story uses it (day 2). Look. |
 | `onsen` | Onsen | The onsen's door under its porch. Go in: shut. |
 
 ### Spots
@@ -615,7 +631,7 @@ None.
 
 ### Who's there when
 
-Day 2 (to build): Hamada (`kuroda`) visits the lookout telescope after work; he is absent here in the morning and absent from the day-2 gate and train. The optional encounter and sight are in [Day-2 visits](stories/day2/visits.md). The pool approach is visibly closed for resurfacing during both periods.
+Day 2: Hamada (`kuroda`) visits the lookout telescope after work (the `coastVisit` hook); he is absent here in the morning and absent from the day-2 gate and train. The optional encounter and sight are in [Day-2 visits](stories/day2/visits.md). The pool approach (the courts walk) is closed for resurfacing in both periods, with the same barrier as the east lane's north street, just short of its way out.
 
 None of the cast yet.
 
@@ -1056,7 +1072,7 @@ The second basement of head office: IT support. One compact floor, close to squa
 
 ### Who's there when
 
-Day 2 (to build): Mori and Kenji work here before the shift ends. Mio is at the station on the warm promise history (`lunch_mio || mio_warm >= 2`) until `d2_ticket_done`; she then walks to B2. On the other history she works at B2 throughout the morning. Emi meets Eric here after the station check. After work, Emi is upstairs and the others leave for the gathering; no duplicate party cast remains at B2.
+Day 2 (the `officeDay2` hook, also on entering, before the lift doors open): before the shift ends Emi stands by the lift lobby where she waits on day 1's evening, Mori sits at the chief's desk and Kenji at his. Mio is at the station on the warm promise history (`lunch_mio || mio_warm >= 2`) until `d2_ticket_done`, then at her desk beside Eric's; on the other history she is at her desk all morning. After work (sitting at Eric's desk) Emi is upstairs and the others have gone to the gathering, so none of them is here. Lunch, the copier and the day-1 evening don't run.
 
 The story moves the clock ([systems.md](systems.md)): morning when Eric arrives, lunch at 12:10, afternoon at 14:00, evening at 18:05.
 
@@ -1107,6 +1123,7 @@ Eric arrives along the lane from the plaza on the walk home, through the gate, a
 | `bath` | Bath | The sento's lit doorway under the ゆ noren. The pin stays off in the public story. Private mode may show it and run `bathPeep`. |
 | `dorm_entry` | Dorm entrance | The hall's glass doors; using them walks Eric in. Its pin goes once he is inside. |
 | `stairs` | To the stairs | The passage at the back of the hall, to the stairs. |
+| `street_gate` | To the street | Day 2: the court's gate, out to the lane and the east lane. Its pin shows while the story uses it. |
 | `mailboxes` | Mailbox 203 | Eric's mailbox in the bank: 203 and his name on tape (エリック ERIC), a flap that opens (the `mailbox203` hook) on one folded bakery flyer (パン BAKERY). Take mail: the box opens and Eric takes the flyer (a find, [systems.md](systems.md), Finds); the box stays empty after, and its pin goes. Its pin shows once the story uses it. |
 
 ### Spots
@@ -1119,11 +1136,11 @@ None.
 
 ### Zones
 
-`hall` (inside the doors), `passage` (the passage's mouth)
+`hall` (inside the doors), `passage` (the passage's mouth), `street_exit` (day 2: out on the lane past the gate)
 
 ### Who's there when
 
-Day 2 (to build): No new story actor; both the street exit and the route to room 203 remain available in both periods.
+Day 2: no story actor; the street gate and the way up to room 203 stay open in both periods. Coming down from his floor, Eric walks out of the passage to just inside the hall doors. The court is built in its evening light, also in the morning.
 
 Played in the evening, after work. None of the cast is here.
 
@@ -1170,6 +1187,7 @@ Eric arrives from the dorm courtyard (Getting between places) on the landing. Th
 | `bed` | Bed | The single bed. |
 | `door_203` | Room 203 | His front door on the corridor. |
 | `computer` | Computer | The company computer on his desk, switched on. Look. |
+| `door_out` | Front door | Day 2: the front door from inside, over the genkan. Go out: the trip down to the courtyard. |
 
 ### Spots
 
@@ -1181,11 +1199,11 @@ Eric arrives from the dorm courtyard (Getting between places) on the landing. Th
 
 ### Zones
 
-`door_203` (the corridor in front of his door)
+`door_203` (the corridor in front of his door), `room_exit` (day 2: down on the genkan tiles, on the way out)
 
 ### Who's there when
 
-Day 2 (to build): Eric starts inside room 203. Mio sends a phone message but is not physically present. The computer is optional, and returning before the final goodbye does not end the day.
+Day 2: the day starts with Eric inside room 203, in the middle of the room, in the room's view (the calm loop plays in the morning; the room keeps its lamp-lit evening look). Mio sends a phone message but isn't here. The computer is optional, and coming back before the goodbye doesn't end the day; coming back after it, he walks on along the corridor and in at his door, and the day ends.
 
 Played in the evening, after work.
 

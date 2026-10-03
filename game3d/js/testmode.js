@@ -16,12 +16,25 @@ export function start(game) {
   // ?route=social takes the other way through the gate (no akete; sumimasen to the guard)
   const route = new URLSearchParams(location.search).get('route') || 'magic';
   T.route = route;
+  // a later day: each choice takes the next reply on each visit (so a menu offered again, "Stay a little longer" or
+  // "Head home", moves on); the replies taken are kept for the report. Day 1 keeps the first reply.
+  const seenChoice = {};
+  T.choices = [];
+  ui.autoPick = (chips) => {
+    if ((game.sim?.day || 1) === 1) return 0;
+    const key = (game.runner.currentNode || '') + '|' + chips.map((c) => c.html).join('|');
+    const n = (seenChoice[key] = (seenChoice[key] ?? -1) + 1);
+    const i = n % chips.length;
+    T.choices.push(`${game.runner.currentNode}: ${String(chips[i].html).replace(/<[^>]+>/g, '')}`);
+    return i;
+  };
   let lastPlace = '',
     idle = 0,
     busyFor = 0;
   setInterval(() => {
     if (window.__ended) {
-      if (!T.practice) T.errors.push('the Say practice prompt was never passed');
+      T.day = game.sim?.day || 1;
+      if (!T.practice && T.day === 1) T.errors.push('the Say practice prompt was never passed');
       T.done = true;
       return;
     }

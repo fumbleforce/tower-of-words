@@ -82,7 +82,9 @@ export function createPlaceLifecycle(
     return game.prepared[name];
   }
   async function enter(name, { persist = true, resuming = false } = {}) {
-    const { place, story } = await prepare(name);
+    const { place } = await prepare(name);
+    // the story for today (days.js): a place built on the title's day 1 still plays a later day's set
+    const story = await game.runner.load(name);
     if (game.place && game.place.leave) game.place.leave();
     cancelSavedWalk(game.player);
     cancelSavedWalk(game.mioNpc);
@@ -128,12 +130,14 @@ export function createPlaceLifecycle(
     const [sx, sz] = place.start;
     game.player.root.position.set(sx, place.floorY ?? 0, sz);
     place.onPeriod?.(sim.period); // a chunk built in the morning, entered after work, takes the evening light
+    place.onDay?.(sim.day); // what a day changes in a place (day 2's closed streets: places/closure.js)
     setComposer(place);
     resize();
     place.cam?.snap?.(game.player.root.position);
     absorb(story);
     if (
       !resuming &&
+      sim.day === 1 &&
       place.defaultPeriod &&
       PERIOD_ORDER.indexOf(sim.period) < PERIOD_ORDER.indexOf(place.defaultPeriod)
     )
@@ -150,7 +154,8 @@ export function createPlaceLifecycle(
         evening: 'After work',
       }[sim.period],
     );
-    playMusic(sim.period === 'evening' ? 'night' : place.music || MUSIC[name] || 'calm');
+    const music = place.music === 'night' ? 'calm' : place.music; // a night place by day (day 2's morning room)
+    playMusic(sim.period === 'evening' ? 'night' : music || MUSIC[name] || 'calm');
     syncFinds(place); // prints already picked up stay gone, also after a load
     buildMarkers(place);
     ui.goal('');
@@ -189,6 +194,12 @@ export function createPlaceLifecycle(
       crossfade(snap);
     }
     await trips.arrive(game, game.place, slot);
+    // a later day: a way out he arrives standing in (B2's lift, back up at the forecourt) waits until he steps out of
+    // it and back in, so a trip never turns straight round
+    if (sim.day > 1) {
+      const p = game.player.root.position;
+      for (const [z, inside] of Object.entries(game.place.zones || {})) if (inside(p.x, p.z)) zoneSet.add(z);
+    }
     document.body.classList.remove('busy', 'trip');
     game.busy = false;
     game.walker.locked = false;

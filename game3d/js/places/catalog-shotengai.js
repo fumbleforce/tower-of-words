@@ -8,11 +8,23 @@ export const SHOTENGAI_DETAILS = {
     game_centre: { label: 'Game centre', kind: 'thing', verb: 'Go in' },
     karaoke: { label: 'Karaoke', kind: 'thing', verb: 'Go in' },
     izakaya: { label: 'Izakaya', kind: 'thing', verb: 'Go in' },
+    // day 2's gathering after work (story/day2/shotengai.js): the two from B2 with bodies here, and their bench
+    mori: { label: 'Mr. Mori', kind: 'person' },
+    kenji: { label: 'Kenji', kind: 'person' },
+    party_seat: { label: 'Bench', kind: 'thing', verb: 'Sit' },
   },
-  spots: ['plaza_entry', 'shotengai_shrine', 'shotengai_back_alley', 'shotengai_pine_bench'],
+  spots: [
+    'plaza_entry',
+    'shotengai_shrine',
+    'shotengai_back_alley',
+    'shotengai_pine_bench',
+    'party_group',
+    'party_kenji',
+    'party_mio',
+  ],
   nooks: ['shotengai_shrine', 'shotengai_back_alley', 'shotengai_pine_bench'], // docs/game/places.md, "Nooks"
-  seats: [],
+  seats: ['party_seat', 'party_mori'],
   zones: ['plaza_exit'],
-  people: [],
-  hooks: [],
+  people: ['mori', 'kenji'],
+  hooks: ['partySetup', 'partyFood'],
 };

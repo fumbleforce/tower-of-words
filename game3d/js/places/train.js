@@ -43,6 +43,7 @@ import { flags } from '../narrative/state.js';
 import { dust, lightPool } from './life.js';
 import { route } from './route.js';
 import { trainDiscoveries } from '../train/discoveries.js';
+import { trainDay2 } from './train-day2.js';
 const WALK_X = -10.4; // the walkway out: past the car's left end, south (CHUNKS.train turn 270) toward the shed's stairs
 
 // Muted palette, after game3d/ref/2-security-gate-muted.png (Jørgen: "mute train too"): slate and charcoal,
@@ -829,6 +830,24 @@ export async function trainPlace(game) {
     return v;
   };
   const at = (x, z, fx, fz) => ({ spot: () => [x, z], face: () => [fx, fz] });
+  // day 2: the car standing empty between runs (train-day2.js)
+  const props = [cup, folder, laptop, foodBag];
+  const day2 = trainDay2(game, {
+    st,
+    station,
+    setDoors,
+    car: car.root,
+    cam,
+    nav,
+    people,
+    kitty,
+    kb,
+    bagObjs,
+    props,
+    LZ,
+    DOOR_X,
+    WALK_X,
+  });
   const things = {
     aoi: {
       ...PLACE_DETAILS.train.things.aoi,
@@ -945,11 +964,22 @@ export async function trainPlace(game) {
       ...at(DOOR_X, LZ + 1.0, DOOR_X, LZ + 1.5),
       noMarker: true,
     },
+    door_test: {
+      ...PLACE_DETAILS.train.things.door_test,
+      anchor: carPt(-DOOR_X - 0.85, 1.1, LZ + 0.45), // the tester on the platform (train-day2.js)
+      ...day2.thing('door_test'),
+    },
+    station_exit: {
+      ...PLACE_DETAILS.train.things.station_exit,
+      anchor: carPt(WALK_X + 0.3, 1.3, LZ + 1.9),
+      ...day2.thing('station_exit'),
+    },
   };
   const zones = {
     door_zone: (x, z) => st.door > 0.3 && z > LZ - 0.35 && Math.abs(Math.abs(x) - DOOR_X) < 0.45,
     // standing on the free seat's floor spot (seat_far_r)
     free_seat: (x, z) => Math.hypot(x - 1.58, z - (-(LZ - 0.24) + 0.55)) < 0.3,
+    platform_exit: day2.zones.platform_exit,
   };
 
   function standUp(r) {
@@ -1384,6 +1414,8 @@ export async function trainPlace(game) {
       headphones: finds.hooks.headphones,
       shopBag: finds.hooks.shopBag,
       printout: finds.hooks.printout,
+      stationSetup: day2.hooks.stationSetup,
+      doorTest: day2.hooks.doorTest,
     },
     snapshotState() {
       return {
@@ -1658,6 +1690,7 @@ export async function trainPlace(game) {
     game.event(eventId('train', 'arrived'));
   }
   st.stopX = 1e6;
+  day2.install(P);
   P._st = st;
   P._setDoors = setDoors;
   P.kotodamaTargets = (name) => (name === 'doors' ? myLeaves.map((d) => d.g) : []);

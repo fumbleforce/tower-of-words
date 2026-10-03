@@ -3,10 +3,11 @@ import { buildDorms } from '../scenes/dorms.js';
 import { stairY } from '../scenes/dorms/stairs.js';
 import { RoomCam } from '../cam.js';
 import { K } from '../scenes/office.js';
-import { glide } from '../move.js';
+import { glide, freeNear } from '../move.js';
 import { sfx } from '../ui.js';
 import { PLACE_DETAILS } from './catalog.js';
 import { snapshotPeople, restorePeople } from './saved-people.js';
+import { sim } from '../sim.js';
 
 // Eric's floor and his room. The trip in from the dorm courtyard (dorm-court.js) brings him up the last flight onto
 // the 2F landing; he walks the corridor to his door himself, and going in (the enterRoom hook, from the story) drops
@@ -67,8 +68,20 @@ export function dormsPlace(game) {
       outline: () => w.obj.computer,
       enabled: inRoom,
     },
+    // day 2: out through the genkan and the front door (the trip down to the courtyard)
+    door_out: {
+      ...PLACE_DETAILS.dorms.things.door_out,
+      anchor: (v) => v.set(DOOR_MID, 1.0, b.near - 0.05),
+      spot: () => OUT_SPOT,
+      face: () => [DOOR_MID, b.near],
+      enabled: () => inRoom() && !st.entering && sim.day > 1,
+    },
   };
 
+  // the front door's middle, the genkan floor in front of it, and a spot in the room to start a day on
+  const DOOR_MID = (w.doorstep[0] + w.atDoor[0]) / 2 - 0.1,
+    OUT_SPOT = [w.doorstep[0], b.near - 0.35],
+    MORNING = freeNear(w.nav, [], -0.1, -1.0, 0) || w.roomEntry;
   // the corridor's view: over the court, down onto the corridor, the flats behind it and the stairs; on a desktop
   // the whole way from the landing to his door in one frame, on a phone following him along it
   function corridorFit(aspect) {
@@ -148,7 +161,7 @@ export function dormsPlace(game) {
     startFacing: -Math.PI / 2, // along the corridor toward his door
     defaultPeriod: 'evening',
     photoReady: () => st.inside && !st.entering, // the end card's "Eric's room" is the room, not the corridor (#92)
-    music: 'night',
+    music: 'night', // after work; in the morning (day 2) the calm loop (places/lifecycle.js)
     grade: {
       exposure: 1.0,
       temp: -0.02,
@@ -168,6 +181,8 @@ export function dormsPlace(game) {
     people: {},
     zones: {
       door_203: (x, z) => !st.inside && Math.abs(x - w.doorstep[0]) < 0.4 && z > b.corr[0] && z < b.corr[0] + 0.45,
+      // day 2: down off the step onto the genkan tiles, on the way out
+      room_exit: (x, z) => st.inside && !st.entering && sim.day > 1 && z > 0.6 && z < b.near && x > b.x0 && x < b.x1,
     },
     hooks: {
       // in at his door: the front drops, the door swings open, over the genkan to the room, the door shuts
@@ -224,14 +239,43 @@ export function dormsPlace(game) {
       }
     },
     snapshotState() {
-      return { player: snapshotPeople({ eric: game.player }) };
+      return { player: snapshotPeople({ eric: game.player }), inside: st.inside };
     },
     restoreState(saved) {
+      // a new day's opening save (days.js): Eric in the room, the room's view
+      if (saved.world?.inside && !saved.world.player) {
+        setInside();
+        game.player.root.position.set(MORNING[0], 0, MORNING[1]);
+        game.player.root.rotation.y = 0;
+        game.walker.facing = 0;
+        game.walker.sync();
+        P.fit(cam.camera.aspect);
+        cam.snap(game.player.root.position);
+        return;
+      }
       if (saved.world?.player) {
         restorePeople({ eric: game.player }, saved.world.player);
         game.walker.sync();
         cam.snap(game.player.root.position);
       }
+    },
+    // day 2, out to the courtyard: over the genkan, the door swings out, he steps onto the corridor; the stairs down
+    // are the crossfade
+    tripOutTo: {
+      async dorm_court(g) {
+        const eric = g.player;
+        if (eric.seated) await game.hooks.stand({ who: 'eric' });
+        await g.walkTo(OUT_SPOT[0], OUT_SPOT[1]);
+        eric.scripted = true;
+        g.walker.locked = true;
+        cam.closeOn(w.arrive.at, w.arrive.zoom);
+        sfx('door');
+        await g.tween(0.4, (k) => (w.frontLeaf.rotation.y = w.door.rotation.y = -1.4 * k * (2 - k)));
+        eric.setState('walk');
+        await glide(g, eric.root, w.doorstep, 0.9);
+        await glide(g, eric.root, w.atDoor, 0.9);
+        eric.setState('idle');
+      },
     },
     async tripIn(g) {
       // up the last flight from the half landing onto the landing, the camera close; then it pulls back along the
@@ -246,6 +290,13 @@ export function dormsPlace(game) {
       await glide(g, eric.root, w.landing, 1.1);
       cam.release();
       await glide(g, eric.root, w.corridorIn, 1.2);
+      // a later day has no landing scene: he goes on along the corridor and in at his door before the room's
+      // start node runs (story/day2/README.md)
+      if (sim.day > 1) {
+        await glide(g, eric.root, w.atDoor, 1.2);
+        await P.hooks.enterRoom();
+        return;
+      }
       eric.setState('idle');
       eric.scripted = false;
       g.walker.sync();

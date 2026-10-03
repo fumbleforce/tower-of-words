@@ -9,6 +9,7 @@ import { PLACE_DETAILS } from './catalog.js';
 import { snapshotPeople, restorePeople } from './saved-people.js';
 import { walkOut, walkIn } from './edge-walk.js';
 import { turningCam, followFit } from './turning-cam.js';
+import { roadClosure } from './closure.js';
 
 // The east coast (scenes/east-coast.js): the dorm row walked east from the east lane's dorm street, to the sea
 // terrace, the coast walk and the onsen's front; it also loads with ?place=east_coast. The onsen is shut for now
@@ -45,6 +46,7 @@ export async function eastCoastPlace(game) {
   const door = w.doors[0],
     out = w.exits.east_lane,
     west = w.exits.sports;
+  const pool = roadClosure({ nav: w.nav, space: w.root }, west, (x, z) => inRect(x, z, west.zone));
   const things = {
     dorm_street: {
       ...PLACE_DETAILS.east_coast.things.dorm_street,
@@ -52,11 +54,23 @@ export async function eastCoastPlace(game) {
       spot: () => out.lane,
       face: () => out.edge,
     },
+    // closed for resurfacing on day 2 (places/closure.js): the pin on the barrier, the spot in front of it
     courts_walk: {
       ...PLACE_DETAILS.east_coast.things.courts_walk,
-      anchor: (v) => v.set(west.lane[0], 1.1, west.lane[1]),
-      spot: () => west.lane,
+      anchor: (v) => {
+        const p = pool.closed() ? pool.at() : west.lane;
+        return v.set(p[0], 1.1, p[1]);
+      },
+      spot: () => (pool.closed() ? pool.spot() : west.lane),
       face: () => west.edge,
+    },
+    // the lookout nook (day 2's quiet view out to sea)
+    lookout: {
+      ...PLACE_DETAILS.east_coast.things.lookout,
+      anchor: (v) => v.set(w.nooks.east_coast_lookout[0], 1.1, w.nooks.east_coast_lookout[1]),
+      spot: () => w.nooks.east_coast_lookout,
+      face: () => w.nooks.east_coast_lookout,
+      enabled: () => game.runner.has('talk:lookout'),
     },
     onsen: {
       ...PLACE_DETAILS.east_coast.things.onsen,
@@ -90,6 +104,7 @@ export async function eastCoastPlace(game) {
       courts_exit: (x, z) => inRect(x, z, west.zone),
     },
     hooks: {},
+    onDay: (day) => pool.sync(day),
     fit(aspect) {
       followFit(cam, w.nav, aspect, POSE.coast); // fitted at the coast's look, kept through the turns
     },
@@ -104,7 +119,7 @@ export async function eastCoastPlace(game) {
       // heading for a way out: build the next place now, so the walk there needs no loading pause
       const near = ([x0, x1, z0, z1], d = 6) => p.x > x0 - d && p.x < x1 + d && p.z > z0 - d && p.z < z1 + d;
       if (near(out.zone) && !game.prepared.east_lane) game.prepare?.('east_lane');
-      if (near(west.zone) && !game.prepared.sports) game.prepare?.('sports');
+      if (near(west.zone) && !game.prepared.sports && !pool.closed()) game.prepare?.('sports');
     },
     onPeriod(period) {
       if (period !== 'evening' || P.grade === EVENING_GRADE) return;

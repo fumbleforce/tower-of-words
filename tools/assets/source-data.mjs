@@ -31,7 +31,21 @@ export function assetSourceData(read) {
     if (!asts.has(file)) asts.set(file, parseSource(read(file)));
     return asts.get(file);
   };
-  const table = (file, name) => staticValue(sourceBindings(ast(file), [name])[name].init);
+  // a table may spread in another module's (lang.js: ...DAY2.WORDS from story/day2/words.js); those are read too
+  const table = (file, name) => {
+    const init = sourceBindings(ast(file), [name])[name].init;
+    if (init?.type !== 'ObjectExpression' || !init.properties.some(p => p.type === 'SpreadElement')) return staticValue(init);
+    const out = {};
+    for (const property of init.properties) {
+      if (property.type !== 'SpreadElement') { Object.assign(out, staticValue({ ...init, properties: [property] })); continue; }
+      const { object, property: member } = property.argument;
+      const from = ast(file).body.find(n => n.type === 'ImportDeclaration'
+        && n.specifiers.some(sp => sp.type === 'ImportNamespaceSpecifier' && sp.local.name === object?.name));
+      if (!from) throw new Error(`${file}: ${name} spreads something that isn't a module's table`);
+      Object.assign(out, table(new URL(from.source.value, new URL(file, root)).href.slice(root.href.length), member.name));
+    }
+    return out;
+  };
   const words = table('game3d/js/lang.js', 'WORDS');
   const wordIcons = table('game3d/js/lang.js', 'ICON');
   const music = table('game3d/js/places/lifecycle.js', 'MUSIC');

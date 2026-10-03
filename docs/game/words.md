@@ -1,6 +1,6 @@
 # Words
 
-Every Japanese word the game knows (id, Japanese, reading, meaning, kind), the nine words day 1 teaches, how a word is shown, and when it counts as known. Last checked against the game on 2026-09-29.
+Every Japanese word the game knows (id, Japanese, reading, meaning, kind), the nine words day 1 teaches, the four day 2 teaches, how a word is shown, and when it counts as known. Last checked against the game on 2026-09-29.
 
 Elsewhere: which storyline teaches a word, and who teaches it, is in that storyline's "Words taught" table ([stories/](stories/); `node tools/facts/check.mjs --game` prints them all in one list). How the Say menu, typing and word practice work is in [systems.md](systems.md) and [controls-and-ui.md](controls-and-ui.md). How to write a word into a line (`{id}`) is in game3d/story/FORMAT.md.
 
@@ -13,6 +13,10 @@ Checked against game3d/js/lang.js. Kind: a `phrase` is a greeting Eric can say t
 | `ohayo` | おはようございます | ohayō gozaimasu | good morning | phrase |
 | `yoroshiku` | よろしくおねがいします | yoroshiku onegaishimasu | nice to meet you | phrase |
 | `sumimasen` | すみません | sumimasen | excuse me, sorry | phrase |
+| `tabetai` | 食べたい | tabetai | I want to eat | phrase |
+| `nomitai` | 飲みたい | nomitai | I want to drink | phrase |
+| `mitai` | 見たい | mitai | I want to see | phrase |
+| `ikitai` | 行きたい | ikitai | I want to go | phrase |
 | `matte` | 待って | matte | wait | command |
 | `akete` | 開けて | akete | open | command |
 | `ugoite` | 動いて | ugoite | work, move | command |
@@ -52,15 +56,8 @@ Day 1 teaches nine words, in the order a player meets them. Who teaches each, an
 - Known words stay sharp in overheard Japanese from then on, and in the voice they come out clear while the rest is muffled ([systems.md](systems.md), Overheard Japanese).
 - Phrases and commands Eric knows go in the Say menu; how often he has to type one before a click is enough is in [systems.md](systems.md), Word practice.
 
-## Day 2 (to build)
+## Taught on day 2
 
-The authored [day-2 set](../../game3d/story/day2/README.md) adds the following records from `story/day2/words.js`. Registration, audio and runtime teaching are pending. The teacher and teaching nodes are in [welcome.md](stories/day2/welcome.md) and [visits.md](stories/day2/visits.md).
+The [day-2 set](../../game3d/story/day2/README.md) keeps its four records in `story/day2/words.js`; game3d/js/lang.js adds them to its words, so they are in the table above. Who teaches them, and in which node, is in [welcome.md](stories/day2/welcome.md) and [visits.md](stories/day2/visits.md).
 
-| Id | Japanese | Reading | Meaning | Kind |
-|---|---|---|---|---|
-| `tabetai` | 食べたい | tabetai | I want to eat | phrase (to build) |
-| `nomitai` | 飲みたい | nomitai | I want to drink | phrase (to build) |
-| `mitai` | 見たい | mitai | I want to see | phrase (to build) |
-| `ikitai` | 行きたい | ikitai | I want to go | phrase (to build) |
-
-The single new pattern is the **-tai form**, saying what you want to do yourself. The Words panel pairs 食べたい with 食べる (taberu, to eat), 飲みたい with 飲む (nomu, to drink), 見たい with 見る (miru, to see), and 行きたい with 行く (iku, to go). Only tabetai is required; the other three are optional reinforcement in the gathering or nearby encounters. All start unknown, become known through typing, and are things to say to people. None commands a machine.
+The single new pattern is the **-tai form**, saying what you want to do yourself. The Words panel pairs 食べたい with 食べる (taberu, to eat), 飲みたい with 飲む (nomu, to drink), 見たい with 見る (miru, to see), and 行きたい with 行く (iku, to go), with one line on what -tai does over the phrases once one is known. Only tabetai is required; the other three are optional reinforcement in the gathering or nearby encounters. All start unknown, become known through typing, and are things to say to people. None commands a machine. Their clips (eric-<id> and word-<id> for each) are in the voice manifest, still to be made; until then the words have no play button and Eric says them silently.

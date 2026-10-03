@@ -170,3 +170,43 @@ const dipHooks = new Set();
 export function onDip(fn) {
   dipHooks.add(fn);
 }
+
+// ---------- the motor hum ----------
+// A door motor straining against doors that won't move (day 2's held train doors): two low saws through a lowpass,
+// with a slow wobble, made here rather than from a file. Returns { stop(ms) }; nothing sounds while muted or locked.
+export function hum({ gain = 0.05, f = 98 } = {}) {
+  const none = { stop() {} };
+  if (isMuted()) return none;
+  const c = running();
+  if (!c) return none;
+  const g = c.createGain(),
+    lp = c.createBiquadFilter();
+  lp.type = 'lowpass';
+  lp.frequency.value = 420;
+  g.gain.setValueAtTime(0, c.currentTime);
+  g.gain.linearRampToValueAtTime(gain, c.currentTime + 0.25);
+  const oscs = [f, f * 1.5, 7].map((hz, i) => {
+    const o = c.createOscillator();
+    o.type = i < 2 ? 'sawtooth' : 'sine';
+    o.frequency.value = hz;
+    return o;
+  });
+  const wob = c.createGain();
+  wob.gain.value = 3; // the wobble: a few hertz either way
+  oscs[2].connect(wob);
+  wob.connect(oscs[0].frequency);
+  oscs[0].connect(lp);
+  oscs[1].connect(lp);
+  lp.connect(g);
+  g.connect(audioBus('sfx'));
+  for (const o of oscs) o.start();
+  return {
+    stop(ms = 200) {
+      const t = c.currentTime;
+      g.gain.cancelScheduledValues(t);
+      g.gain.setValueAtTime(g.gain.value, t);
+      g.gain.linearRampToValueAtTime(0, t + ms / 1000);
+      for (const o of oscs) o.stop(t + ms / 1000 + 0.05);
+    },
+  };
+}

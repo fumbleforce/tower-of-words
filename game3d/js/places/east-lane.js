@@ -10,6 +10,8 @@ import { PLACE_DETAILS } from './catalog.js';
 import { snapshotPeople, restorePeople } from './saved-people.js';
 import { walkOut, walkIn } from './edge-walk.js';
 import { turningCam, followFit } from './turning-cam.js';
+import { canTravel } from './definitions.js';
+import { roadClosure } from './closure.js';
 
 // The east lane (scenes/east-lane.js): the plaza's lane walked on east, in the morning (after work the lane takes
 // Eric straight on to the dorm courtyard); it also loads with ?place=east_lane. The named shops are shut for now
@@ -57,10 +59,14 @@ export async function eastLanePlace(game) {
       spot: () => w.exits.east_coast.lane,
       face: () => w.exits.east_coast.edge,
     },
+    // closed for resurfacing on day 2 (places/closure.js): the pin on the barrier, the spot in front of it
     north_street: {
       ...PLACE_DETAILS.east_lane.things.north_street,
-      anchor: (v) => v.set(w.exits.sports.lane[0], 1.1, w.exits.sports.lane[1]),
-      spot: () => w.exits.sports.lane,
+      anchor: (v) => {
+        const p = north.closed() ? north.at() : w.exits.sports.lane;
+        return v.set(p[0], 1.1, p[1]);
+      },
+      spot: () => (north.closed() ? north.spot() : w.exits.sports.lane),
       face: () => w.exits.sports.edge,
     },
     dorm_gate: {
@@ -95,6 +101,7 @@ export async function eastLanePlace(game) {
       face: () => dk('travel_office').local,
     },
   };
+  const north = roadClosure({ nav: w.nav, space: w.root }, w.exits.sports, (x, z) => inRect(x, z, w.exits.sports.zone));
   const P = {
     scene: w.scene,
     camera: cam.camera,
@@ -123,6 +130,7 @@ export async function eastLanePlace(game) {
       north_exit: (x, z) => inRect(x, z, w.exits.sports.zone),
     },
     hooks: {},
+    onDay: (day) => north.sync(day),
     fit(aspect) {
       followFit(cam, w.nav, aspect, { yaw: YAW.ne, elev: flat }); // fitted at the north-east look
     },
@@ -143,7 +151,8 @@ export async function eastLanePlace(game) {
       if (near('shotengai', 6) && !game.prepared.shotengai) game.prepare?.('shotengai');
       if (near('plaza', 6) && !game.prepared.plaza) game.prepare?.('plaza');
       if (near('east_coast', 6) && !game.prepared.east_coast) game.prepare?.('east_coast');
-      if (near('sports', 6) && !game.prepared.sports) game.prepare?.('sports');
+      if (near('sports', 6) && !game.prepared.sports && canTravel('east_lane', 'sports', sim.day))
+        game.prepare?.('sports');
       if (sim.period === 'evening' && near('dorm_court', 6) && !game.prepared.dorm_court) game.prepare?.('dorm_court');
     },
     onPeriod(period) {
@@ -172,6 +181,9 @@ export async function eastLanePlace(game) {
     tripInFrom: {
       east_coast: (g) => walkIn(g, cam, w.exits.east_coast.edge, w.exits.east_coast.in, -Math.PI / 2),
       sports: (g) => walkIn(g, cam, w.exits.sports.edge, w.exits.sports.in, 0),
+      // day 2: out of the dorm courtyard's gate, walking west; back up from the shop street, walking north
+      dorm_court: (g) => walkIn(g, cam, w.exits.dorm_court.edge, w.exits.dorm_court.in, -Math.PI / 2),
+      shotengai: (g) => walkIn(g, cam, w.exits.shotengai.edge, w.exits.shotengai.in, Math.PI),
     },
     tripOutTo: Object.fromEntries(
       Object.entries(w.exits).map(([to, e]) => [to, (g) => walkOut(g, cam, e.lane, e.edge)]),

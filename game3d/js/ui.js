@@ -1,6 +1,6 @@
 export { PORTRAITS } from './ui/portrait-data.js';
 // HTML overlay: goal, words, the train's LED board, the talk panel, replies, fades, the end card.
-import { lineHTML, WORDS, COMMANDS, PHRASES, known, cmdHTML, iconHTML, baseHTML, FORM_NOTE } from './lang.js';
+import { lineHTML, WORDS, COMMANDS, PHRASES, known, cmdHTML, iconHTML, baseHTML, FORM_NOTE, BASE } from './lang.js';
 import { settings, onSettings } from './settings.js';
 import { mountVoice, VOICE_CSS, voiceMode } from './speech.js';
 import { notePractice, needsPractice, pipsHTML, MASTERY_CSS } from './mastery.js';
@@ -339,7 +339,9 @@ export const ui = {
       return `<li class="wrow"><span class="cw"><span class="jp">${w.ja}</span><span class="rd">${w.ro} · ${w.en}</span></span></li>`;
     };
     $('#cmdsPanel ul').innerHTML =
-      (ph.length ? `<li class="sec">Phrases</li>${ph.map(row).join('')}` : '') +
+      (ph.length
+        ? `<li class="sec">Phrases</li>${ph.some((id) => BASE[id]?.form === 'tai') ? `<li class="fnote">${FORM_NOTE.tai}</li>` : ''}${ph.map(row).join('')}`
+        : '') +
       (cm.length
         ? `<li class="sec">Commands <span>(they make old machines listen)</span></li><li class="fnote">${FORM_NOTE.te}</li>${cm.map(row).join('')}`
         : '') +

@@ -92,6 +92,29 @@
     ]
   },
   {
+    "id_": "prop/dorm_court/street_gate",
+    "kind": "prop",
+    "name": "To the street",
+    "paths": [
+      "game3d/js/places/dorm-court.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "dorm-court.js things.street_gate",
+    "place": "dorm_court",
+    "used": [
+      "Dorm courtyard: tap target 'To the street'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "dorm-court"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
     "id_": "prop/dorms/bed",
     "kind": "prop",
     "name": "Bed",
@@ -184,6 +207,29 @@
     ]
   },
   {
+    "id_": "prop/dorms/door_out",
+    "kind": "prop",
+    "name": "Front door",
+    "paths": [
+      "game3d/js/places/dorms.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "dorms.js things.door_out",
+    "place": "dorms",
+    "used": [
+      "Eric's dorm room: tap target 'Front door'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "dorms"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
     "id_": "prop/dorms/window",
     "kind": "prop",
     "name": "Window",
@@ -242,6 +288,29 @@
     "place": "east_coast",
     "used": [
       "East coast: tap target 'To the dorm street'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "east-coast"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/east_coast/lookout",
+    "kind": "prop",
+    "name": "Lookout",
+    "paths": [
+      "game3d/js/places/east-coast.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "east-coast.js things.lookout",
+    "place": "east_coast",
+    "used": [
+      "East coast: tap target 'Lookout'"
     ],
     "view": {
       "type": "room",
@@ -651,6 +720,66 @@
     "tags": [
       "in game",
       "thing small"
+    ]
+  },
+  {
+    "id_": "prop/gate/forecourt_way",
+    "kind": "prop",
+    "name": "Station exit",
+    "paths": [
+      "game3d/js/places/lobby.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code); props are judged with their room",
+    "source": "lobby.js things.forecourt_way; geometry in scenes/lobby.js",
+    "place": "gate",
+    "used": [
+      "Station security room: tap target 'Station exit'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "lobby",
+      "anchor": [
+        -1,
+        1.7,
+        -4.5
+      ],
+      "spot": null,
+      "small": false
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/gate/platform_way",
+    "kind": "prop",
+    "name": "To the platform",
+    "paths": [
+      "game3d/js/places/lobby.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code); props are judged with their room",
+    "source": "lobby.js things.platform_way; geometry in scenes/lobby.js",
+    "place": "gate",
+    "used": [
+      "Station security room: tap target 'To the platform'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "lobby",
+      "anchor": [
+        0,
+        1.3,
+        4.5
+      ],
+      "spot": null,
+      "small": false
+    },
+    "tags": [
+      "in game",
+      "thing"
     ]
   },
   {
@@ -1397,6 +1526,29 @@
     ]
   },
   {
+    "id_": "prop/shotengai/party_seat",
+    "kind": "prop",
+    "name": "Bench",
+    "paths": [
+      "game3d/js/places/shotengai.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "shotengai.js things.party_seat",
+    "place": "shotengai",
+    "used": [
+      "Shop street: tap target 'Bench'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "shotengai"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
     "id_": "prop/shotengai/plaza_lane",
     "kind": "prop",
     "name": "To the plaza",
@@ -1551,6 +1703,52 @@
     "view": {
       "type": "room",
       "room": "sports"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/train/door_test",
+    "kind": "prop",
+    "name": "Door test panel",
+    "paths": [
+      "game3d/js/places/train.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code); props are judged with their room",
+    "source": "train.js things.door_test; geometry in train/car.js",
+    "place": "train",
+    "used": [
+      "Train: tap target 'Door test panel'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "train"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/train/station_exit",
+    "kind": "prop",
+    "name": "To the station",
+    "paths": [
+      "game3d/js/places/train.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code); props are judged with their room",
+    "source": "train.js things.station_exit; geometry in train/car.js",
+    "place": "train",
+    "used": [
+      "Train: tap target 'To the station'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "train"
     },
     "tags": [
       "in game",

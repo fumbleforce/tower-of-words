@@ -8,6 +8,7 @@ import { addOccluder, updateOccluders, footprint } from '../scenes/occluders.js'
 import { PLACE_DETAILS } from './catalog.js';
 import { snapshotPeople, restorePeople } from './saved-people.js';
 import { walkOut, walkIn } from './edge-walk.js';
+import { shotengaiParty } from './shotengai-party.js';
 
 // The shop street and the seafront (scenes/shotengai.js): reached from the plaza down the cross walk and along the
 // south walk, it comes in at the arcade's east mouth off the dorm street; it also loads with ?place=shotengai. The
@@ -23,6 +24,7 @@ export async function shotengaiPlace(game) {
   // the named shops' doors: shut (story/shotengai.js says so); a pin over each, Eric steps up to it
   const dk = (id) => w.doors.find((k) => k.id === id);
   const pin = (v, id) => v.set(dk(id).local[0], 1.95, dk(id).local[1]);
+  const party = shotengaiParty(game, { w, K }); // day 2's gathering on the promenade (shotengai-party.js)
   const things = {
     plaza_lane: {
       ...PLACE_DETAILS.shotengai.things.plaza_lane,
@@ -66,6 +68,13 @@ export async function shotengaiPlace(game) {
       spot: () => dk('izakaya').step,
       face: () => dk('izakaya').local,
     },
+    mori: { ...PLACE_DETAILS.shotengai.things.mori, ...party.thing('mori') },
+    kenji: { ...PLACE_DETAILS.shotengai.things.kenji, ...party.thing('kenji') },
+    party_seat: {
+      ...PLACE_DETAILS.shotengai.things.party_seat,
+      anchor: (v) => party.anchor(v),
+      ...party.thing('party_seat'),
+    },
   };
   const P = {
     scene: w.scene,
@@ -85,11 +94,14 @@ export async function shotengaiPlace(game) {
       shotengai_shrine: w.nooks.shotengai_shrine,
       shotengai_back_alley: w.nooks.shotengai_back_alley,
       shotengai_pine_bench: w.nooks.shotengai_pine_bench,
+      party_group: party.spots.party_group,
+      party_kenji: party.spots.party_kenji,
+      party_mio: party.spots.party_mio,
     },
-    seats: {},
-    people: {},
+    seats: { party_seat: party.seats.party_seat, party_mori: party.seats.party_mori },
+    people: { mori: party.people.mori, kenji: party.people.kenji },
     zones: { plaza_exit: (x, z) => z > w.exitZ },
-    hooks: {},
+    hooks: { partySetup: party.hooks.partySetup, partyFood: party.hooks.partyFood },
     fit(aspect) {
       // as the plaza: the phone's camera distance on both, following him, a little ahead (west, down the street)
       if (aspect >= 1)
@@ -151,6 +163,7 @@ export async function shotengaiPlace(game) {
     tripIn: (g) => walkIn(g, cam, w.edge, w.in, w.face),
     tripOut: (g) => walkOut(g, cam, [w.edge[0], w.edge[1] - 1.6], w.edge),
   };
+  party.install(P);
   // the arcade's glass roof fades while he is under it
   addOccluder(P, w.arcadeRoof, footprint(w.arcade[0] - 0.2, w.arcade[1] + 0.2, az0 - 0.5, az1 + 0.5), {
     name: 'arcade',
