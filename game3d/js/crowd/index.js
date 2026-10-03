@@ -116,7 +116,9 @@ export async function attachCrowd(game, place, name) {
     r.ambient = true;
     r.root.visible = false;
     r.root.name = 'crowd';
-    if (tier.phone || tier.q === 0) r.root.traverse((o) => o.isMesh && (o.castShadow = false));
+    // no sun shadow on phones and at quality 0, nor ever for the Meshy chibis (each would draw its whole skinned mesh
+    // again into the shadow map): the contact shadows below stand under them
+    if (tier.phone || tier.q === 0 || r.meshy) r.root.traverse((o) => o.isMesh && (o.castShadow = false));
     place.space.add(r.root);
     pool.push({ r, kind: kinds[i], state: 'off' });
     if (i % 3 === 2) await nextFrame(); // built a few at a time between frames

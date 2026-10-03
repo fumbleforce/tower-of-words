@@ -1,5 +1,6 @@
 // Close-ups of the chibi look (?chibi=1, js/chibi.js): the cast in the places they appear, at one size.
 //   node game3d/tools/chibi-shots.mjs [w] [h] [off]      off: the same shots with the approved models, to compare
+// QS=&chibitier=far adds to the query (one mesh tier for everyone, chibi.js)
 // Each shot opens a place in capture mode (?cap), stands Mio beside Eric where the story hasn't put her, stops the
 // place's camera and frames the people from the front at head height; the train also has the game's own view and
 // both seated; 'lineup' stands Kuro (loaded here) beside the two on the plaza, 'cast' every chibi in a row;
@@ -14,7 +15,7 @@ const G = path.resolve(path.dirname(new URL(import.meta.url).pathname), '..');
 const out = path.join(G, 'shots/chibi', `${W}x${H}${OFF ? '-off' : ''}${process.env.TAG ? '-' + process.env.TAG : ''}`);
 fs.mkdirSync(out, { recursive: true });
 const phone = +W < 700;
-const base = `http://127.0.0.1:8771/${process.env.BASE || 'game3d'}/index.html?cap&q=${process.env.QUALITY ?? (phone ? 1 : 2)}${OFF ? '&chibi=0' : '&chibi=1'}`;
+const base = `http://127.0.0.1:8771/${process.env.BASE || 'game3d'}/index.html?cap&q=${process.env.QUALITY ?? (phone ? 1 : 2)}${OFF ? '&chibi=0' : '&chibi=1'}${process.env.QS || ''}`;
 // name, query, who to frame ('eric', 'mio', 'kuro', 'pair'), view: 'game' (the place's camera) or a close-up,
 // pose: 'walk' sets the framed people walking (side view), 'phone' has them look at their phones
 const SHOTS = [

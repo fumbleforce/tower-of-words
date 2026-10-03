@@ -106,7 +106,7 @@ function floorAt(place, x, z) {
   ray.far = 0.6;
   const hit = ray
     .intersectObject(place.space, true)
-    .find((h) => h.object.isMesh && h.object.visible && !h.object.isInstancedMesh);
+    .find((h) => h.object.isMesh && h.object.visible && !h.object.isInstancedMesh && !h.object.userData.person);
   return hit ? place.space.worldToLocal(hit.point.clone()).y : 0;
 }
 

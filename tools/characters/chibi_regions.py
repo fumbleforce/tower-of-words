@@ -4,6 +4,7 @@ For each tier of a generic it finds which texels of the baked texture are hair, 
 colours per region and the height on the body each texel comes from (the hair is never below the neck, trousers never
 above the waist), and writes next to the game files:
   mask<suffix>.webp      red = hair, green = top, blue = bottom (soft edges), half the texture's size, lossless
+  base<suffix>.webp      the baked texture again, its dark specks in light clothes and bare legs mended (specks())
   regions<suffix>.json   per region the mean linear luminance and colour of its texels (the shader keeps each texel's
                          shading relative to that mean when it recolours)
 Anchors: art/candidates/chibi-crowd-1/regions.json, { "gen-suit": { "hair": [[hex, ylo, yhi], ...], "top": [...],
@@ -11,7 +12,7 @@ Anchors: art/candidates/chibi-crowd-1/regions.json, { "gen-suit": { "hair": [[he
 band holds its height; "keep" anchors (skin, shirt, tie, shoes, eyes) stay as they are.
 Inputs are the mesh, UVs and baked PNG chibi_game.py keeps in art/parts/chibi-crowd-1/game/<id><suffix>/.
   uv run --python 3.12 --with numpy --with scipy --with pillow tools/characters/chibi_regions.py [id ...] [--sheet]
---sheet also writes art/parts/chibi-crowd-1/game/<id>-regions.png (the texture beside the mask) to check by eye.
+CHIBI_TIER=-lo: only that tier. --sheet also writes art/parts/chibi-crowd-1/game/<id>-regions.png (the texture beside the mask) to check by eye.
 """
 import json, os, sys
 import numpy as np
@@ -25,6 +26,7 @@ KEEP = os.path.join(os.environ.get('CHIBI_PARTS', os.path.join(MAIN, 'art/parts'
 SPEC = json.load(open(os.path.join(ROOT, 'art/candidates/chibi-crowd-1/regions.json')))
 OUT = os.path.join(ROOT, 'game3d/assets/characters')
 REGIONS = ('hair', 'top', 'bottom')
+SPECK = 0.0003  # of the texture's texels: a speck, not a painted detail
 
 
 def lin(c):
@@ -75,6 +77,49 @@ def raster(mesh, uv, px):
     return height
 
 
+def specks(img, label, covered, height):
+    """Dark specks inside a light garment: where the bake's rays met the garment's dark inside (folds of the
+    decimated copy facing in), a few texels came out near black. Inside the skirt they took the skirt's label and
+    showed black on its colour as made, and near the hair they took the hair's and showed the hair's colour on the
+    jacket; on bare legs they showed as dark flecks. A dark patch smaller than SPECK of the texture, surrounded by a
+    region whose texels are light (or by skin below the head), joins that region and takes the colour of its nearest
+    texels there; returns the image, the labels and how many texels were fixed."""
+    L = img.astype(np.float64) @ [0.3, 0.59, 0.11]
+    px = img.shape[0]
+    out, lab = img.copy(), label.copy()
+    dark = covered & (L < 60)
+    parts, n = ndimage.label(dark)
+    if not n:
+        return out, lab, 0
+    sizes = ndimage.sum(dark, parts, range(1, n + 1))
+    bad = np.zeros_like(covered)
+    boxes = ndimage.find_objects(parts)
+    for i in np.nonzero(sizes < SPECK * px * px)[0]:
+        y, x = boxes[i]
+        y = slice(max(y.start - 3, 0), y.stop + 3)
+        x = slice(max(x.start - 3, 0), x.stop + 3)
+        m = parts[y, x] == i + 1
+        ring = ndimage.binary_dilation(m, iterations=2) & ~m & covered[y, x]
+        if not ring.any():
+            continue
+        sub = lab[y, x]
+        r = np.bincount(sub[ring] + 1, minlength=4).argmax() - 1  # the surrounding label (-1 keep)
+        # in skin (keep) only below the head, where nothing dark is painted (the face has its eyes, brows and mouth)
+        if r < 0 and height[y, x][m].mean() > 0.42:
+            continue
+        if np.median(L[y, x][ring & (sub == r)]) < 110:
+            continue
+        sub[m] = r
+        bad[y, x] |= m
+    # each takes the colour of the nearest texel that isn't dark (its region's, as it is surrounded by it)
+    if bad.any():
+        good = covered & ~dark
+        idx = ndimage.distance_transform_edt(~good, return_distances=False, return_indices=True)
+        out[bad] = img[idx[0][bad], idx[1][bad]]
+    fixed = int(bad.sum())
+    return out, lab, fixed
+
+
 def regions(gid, suffix, spec, sheet):
     d = os.path.join(KEEP, gid + suffix)
     mesh = json.load(open(os.path.join(d, 'mesh.json')))
@@ -94,6 +139,7 @@ def regions(gid, suffix, spec, sheet):
         ok = covered & (height >= ylo) & (height <= yhi) & (dist < best)
         best[ok] = dist[ok]
         label[ok] = r
+    img, label, fixed = specks(img, label, covered, height)
     # uncovered texels (the padding between charts) take their nearest covered texel's label
     idx = ndimage.distance_transform_edt(~covered, return_distances=False, return_indices=True)
     label = label[idx[0], idx[1]]
@@ -103,7 +149,12 @@ def regions(gid, suffix, spec, sheet):
     mask = ndimage.uniform_filter(mask, size=(3, 3, 1))
     small = Image.fromarray((mask * 255).round().astype(np.uint8)).resize((px // 2, px // 2), Image.BILINEAR)
     out = os.path.join(OUT, 'chibi-' + gid)
+    for f in (f'mask{suffix}.webp', f'regions{suffix}.json', f'base{suffix}.webp'):  # a worktree's link: replaced
+        if os.path.islink(os.path.join(out, f)):
+            os.remove(os.path.join(out, f))
     small.save(os.path.join(out, f'mask{suffix}.webp'), 'WEBP', lossless=True, method=6)
+    # the texture with its specks mended (chibi_game.py's settings); the bake in KEEP stays as it came
+    Image.fromarray(img).save(os.path.join(out, f'base{suffix}.webp'), 'WEBP', quality=90, method=6)
     info = {}
     L = lin(img) @ [0.2126, 0.7152, 0.0722]
     for i, k in enumerate(REGIONS):
@@ -112,7 +163,7 @@ def regions(gid, suffix, spec, sheet):
             info[k] = {'lum': round(float(L[m].mean()), 4), 'hex': '#%02x%02x%02x' % tuple(int(v) for v in img[m].mean(0)),
                        'share': round(float(m.sum() / covered.sum()), 3)}
     json.dump(info, open(os.path.join(out, f'regions{suffix}.json'), 'w'))
-    print(gid + suffix, json.dumps(info))
+    print(gid + suffix, 'specks mended', fixed, json.dumps(info))
     if sheet:
         vis = img.copy()
         tint = np.array([[255, 60, 60], [60, 220, 60], [60, 90, 255]])
@@ -126,6 +177,6 @@ def regions(gid, suffix, spec, sheet):
 if __name__ == '__main__':
     args = [a for a in sys.argv[1:] if not a.startswith('--')]
     for gid in args or list(SPEC):
-        for suffix in ('', '-lo'):
-            if os.path.exists(os.path.join(KEEP, gid + suffix, 'mesh.json')):
+        for suffix in ('', '-lo', '-far'):
+            if os.environ.get('CHIBI_TIER', suffix) == suffix and os.path.exists(os.path.join(KEEP, gid + suffix, 'mesh.json')):
                 regions(gid, suffix, SPEC[gid], '--sheet' in sys.argv)

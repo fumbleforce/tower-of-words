@@ -273,14 +273,41 @@ export function freeNear(nav, list, x, z, rad, ok = null) {
   return [x, z];
 }
 
-// a route that goes round the people standing in the way (they're blocked on the walk grid just for this search)
+// a route that goes round the people standing in the way. They're blocked just for this search, on a copy of the
+// built grid with only their cells marked: blocking them on the grid itself rebuilt the whole grid twice a search
+// (every cell against every blocker), 150 to 400 ms on a phone each time Eric's way was full of people.
 export function pathAround(nav, from, to, list, myR) {
+  if (!nav.grid) nav.build();
+  const base = nav.grid,
+    rects = nav.rects,
+    g = base.slice(),
+    m = nav.R + 0.02, // the margin build() keeps from a blocker
+    people = [];
   for (const b of list) {
-    const r = Math.max(0.05, b.r + myR - nav.R);
-    nav.blockTagged('_people', b.x - r, b.x + r, b.z - r, b.z + r);
+    const r = Math.max(0.05, b.r + myR - nav.R),
+      rect = [b.x - r, b.x + r, b.z - r, b.z + r];
+    people.push(rect);
+    const [i0, k0] = nav.cellOf(rect[0] - m, rect[2] - m),
+      [i1, k1] = nav.cellOf(rect[1] + m, rect[3] + m);
+    for (let i = i0; i <= i1; i++)
+      for (let k = k0; k <= k1; k++) {
+        const x = nav.x0 + (i + 0.5) * nav.cell,
+          z = nav.z0 + (k + 0.5) * nav.cell;
+        const cx = Math.max(rect[0], Math.min(rect[1], x)),
+          cz = Math.max(rect[2], Math.min(rect[3], z));
+        if (Math.hypot(x - cx, z - cz) < m) g[k * nav.nx + i] = 0;
+      }
   }
-  const path = nav.path(from[0], from[1], to[0], to[1]);
-  nav.unblock('_people');
+  // free() and clear() (the end point, the string pulling) see them too, as before
+  nav.rects = rects.concat(people);
+  nav.grid = g;
+  let path;
+  try {
+    path = nav.path(from[0], from[1], to[0], to[1]);
+  } finally {
+    nav.rects = rects;
+    nav.grid = base;
+  }
   return path && path.length ? path : null;
 }
 

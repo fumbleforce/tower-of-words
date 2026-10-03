@@ -11,13 +11,34 @@
    "image": "art/parts/chibi-crowd-1/ingame/desktop-plaza-lunch-chibi.webp",
    "caption": "Your brief: \"we also need to use the new Chibi character generation to make generic characters. All the people milling about should have their own simple chibis that are unremarkable, but look all right.\" The plaza at lunch with ?chibi=1 (desktop, 1366x860, quality 1): the ambient crowd is now made of the eight bases below, each copy in its own colours and a little taller or shorter."
   },
-  {"image": "art/parts/chibi-crowd-1/ingame/desktop-plaza-lunch-off.webp", "caption": "The same moment with the chibi look off (the code-built crowd), for comparison."},
-  {"image": "art/parts/chibi-crowd-1/ingame/desktop-shotengai-lunch-chibi.webp", "caption": "The shotengai at lunch, desktop, chibis on."},
-  {"image": "art/parts/chibi-crowd-1/ingame/desktop-forecourt-morning-chibi.webp", "caption": "The forecourt in the morning, desktop, chibis on."},
-  {"image": "art/parts/chibi-crowd-1/ingame/phone-plaza-lunch-chibi.webp", "caption": "Phone (390x844, quality 1): the plaza at lunch. Phones use 2.8k-triangle copies with 512 px textures."},
-  {"image": "art/parts/chibi-crowd-1/ingame/phone-shotengai-lunch-chibi.webp", "caption": "Phone: the shotengai at lunch."},
-  {"image": "art/parts/chibi-crowd-1/ingame/phone-forecourt-morning-chibi.webp", "caption": "Phone: the forecourt in the morning."},
-  {"image": "art/parts/chibi-crowd-1/ingame/phone-plaza-lunch-off.webp", "caption": "Phone, chibi look off, for comparison."},
+  {
+   "image": "art/parts/chibi-crowd-1/ingame/desktop-plaza-lunch-off.webp",
+   "caption": "The same moment with the chibi look off (the code-built crowd), for comparison."
+  },
+  {
+   "image": "art/parts/chibi-crowd-1/ingame/desktop-shotengai-lunch-chibi.webp",
+   "caption": "The shotengai at lunch, desktop, chibis on."
+  },
+  {
+   "image": "art/parts/chibi-crowd-1/ingame/desktop-forecourt-morning-chibi.webp",
+   "caption": "The forecourt in the morning, desktop, chibis on."
+  },
+  {
+   "image": "art/parts/chibi-crowd-1/ingame/phone-plaza-lunch-chibi.webp",
+   "caption": "Phone (390x844, quality 1): the plaza at lunch. Phones use 2.8k-triangle copies with 512 px textures."
+  },
+  {
+   "image": "art/parts/chibi-crowd-1/ingame/phone-shotengai-lunch-chibi.webp",
+   "caption": "Phone: the shotengai at lunch."
+  },
+  {
+   "image": "art/parts/chibi-crowd-1/ingame/phone-forecourt-morning-chibi.webp",
+   "caption": "Phone: the forecourt in the morning."
+  },
+  {
+   "image": "art/parts/chibi-crowd-1/ingame/phone-plaza-lunch-off.webp",
+   "caption": "Phone, chibi look off, for comparison."
+  },
   {
    "image": "art/parts/chibi-crowd-1/variants.webp",
    "caption": "The variant sheet: each base in variants 0 to 4, front and from behind, in the game. Hair, top and bottom are recoloured per copy from a short list of plain colours (a mask per base marks those regions; the shading of the original stays). No extra Meshy credits. Known flaws: on the blouse the back of the skirt has dark flecks in some colours, and the hash picks the same colours twice in a row now and then (polo 1 and 2)."
@@ -26,8 +47,14 @@
    "image": "art/parts/chibi-crowd-1/ingame/desktop-train-view.webp",
    "caption": "The train with ?chibi=1: the young man (near bench, right), the girl with headphones (near bench, middle, orange headphone cups), the woman with a bun (near bench, left) and the man with a book (far bench) are generics now. Their props moved over from the code-built figures: the headphones, the book, the phones, and a bun for the woman."
   },
-  {"image": "art/parts/chibi-crowd-1/ingame/desktop-train-passengers.webp", "caption": "The passengers framed together."},
-  {"image": "art/parts/chibi-crowd-1/ingame/desktop-train-reader.webp", "caption": "The man with a book, close up."},
+  {
+   "image": "art/parts/chibi-crowd-1/ingame/desktop-train-passengers.webp",
+   "caption": "The passengers framed together."
+  },
+  {
+   "image": "art/parts/chibi-crowd-1/ingame/desktop-train-reader.webp",
+   "caption": "The man with a book, close up."
+  },
   {
    "image": "art/parts/chibi-crowd-1/ingame/desktop-gate-workers.webp",
    "caption": "The gate: the office workers and commuters are generics (suits, shirts, blouse, cardigan); the third commuter carries the cake box in his hand. The Sales pair in the lift and the canteen worker (the apron base, apron in the canteen's teal) are generics too."
@@ -36,30 +63,141 @@
    "image": "art/parts/chibi-crowd-1/inputs.webp",
    "caption": "Every input picture in the order made (FLUX.2 Klein 4B on the local GPU, 4 steps, your office woman as image 1, the cast rounds' prompt with \"into the person described here\"). One change: polo-a's \"tanned skin\" came out deep brown on all three seeds (and 101 winks), so polo-b says \"lightly tanned skin\". Sent to Meshy: suit-a-101, shirt-a-101, blouse-a-101, cardigan-a-101, polo-b-103, hoodie-a-101, apron-a-101, dock-a-102."
   },
-  {"image": "art/parts/chibi-crowd-1/models.webp", "caption": "The eight Meshy models beside their input pictures (Blender, the cast rounds' camera and light): front, left 3/4, left side, back and face."}
+  {
+   "image": "art/parts/chibi-crowd-1/models.webp",
+   "caption": "The eight Meshy models beside their input pictures (Blender, the cast rounds' camera and light): front, left 3/4, left side, back and face."
+  },
+  {
+   "image": "art/parts/chibi-crowd-1/cleanup/tops.webp",
+   "caption": "Cleanup after this round (#212): the tops of the heads from above, before and after, every base, phone and desktop. Your words: \"Many in the crowd have broken bald spots\". The lighter copies showed skin, and on the polo even eyes, through the hair: the colour was baked with rays that started inside the head where the copy sat below its hair. Now each texel takes the outermost surface above it, and on the head the rays reach further out first. The polo's pale crown is in his model."
+  },
+  {
+   "image": "art/parts/chibi-crowd-1/cleanup/cheeks.webp",
+   "caption": "The faces on a phone, before and after: the dark mark on the cheek came from the same bake and from the face being thinned with the rest of the body; the face now keeps its triangles."
+  },
+  {
+   "image": "art/parts/chibi-crowd-1/cleanup/skirt.webp",
+   "caption": "The back of the blouse's skirt, before and after. Most of the dark flecks were bits of the skirt's inside pushed out when its two layers were merged; the copies are now made in gentler steps, and the few dark texels left in light clothes are mended. A fleck or two at the hem remains on the lightest skirts."
+  },
+  {
+   "image": "art/parts/chibi-crowd-1/cleanup/tiers.webp",
+   "caption": "The colours now go through every mix before one comes back, so neighbours don't match, and people further off use lighter copies: the finest (6k triangles) close up, a middle one (2.8k), and a far one (1.8k) once someone is under 140 pixels tall."
+  }
  ],
  "options": [
-  {"id": "suit-1", "label": "1. suit-1 (man, 40s, suit)", "image": "art/parts/chibi-crowd-1/suit-1/renders/front.png", "images": ["art/parts/chibi-crowd-1/suit-1/renders/l45.png", "art/parts/chibi-crowd-1/suit-1/renders/back.png", "art/parts/chibi-crowd-1/suit-1/renders/face.png", "art/parts/chibi-crowd-1/inputs/suit-a-101.png"],
-   "note": "Input suit-a-101. Meshy latest model, textured, no remesh, no pose, 4k texture: 30 credits; auto-rig on a 60k copy: 5. Variants: hair black, dark brown, dark grey; suit blue-grey, charcoal, brown-grey, mid grey, dark navy (the red tie stays). In the office crowd, the gate and the lift."},
-  {"id": "shirt-1", "label": "2. shirt-1 (young man, shirt and tie)", "image": "art/parts/chibi-crowd-1/shirt-1/renders/front.png", "images": ["art/parts/chibi-crowd-1/shirt-1/renders/l45.png", "art/parts/chibi-crowd-1/shirt-1/renders/back.png", "art/parts/chibi-crowd-1/shirt-1/renders/face.png", "art/parts/chibi-crowd-1/inputs/shirt-a-101.png"],
-   "note": "Input shirt-a-101, same settings, 35 credits. Variants: hair brown, black, chestnut; shirt light blue, white, pale pink, pale green, beige; trousers charcoal, navy, khaki-grey. Also the young man on the train."},
-  {"id": "blouse-1", "label": "3. blouse-1 (woman, 20s, blazer and skirt)", "image": "art/parts/chibi-crowd-1/blouse-1/renders/front.png", "images": ["art/parts/chibi-crowd-1/blouse-1/renders/l45.png", "art/parts/chibi-crowd-1/blouse-1/renders/back.png", "art/parts/chibi-crowd-1/blouse-1/renders/face.png", "art/parts/chibi-crowd-1/inputs/blouse-a-101.png"],
-   "note": "Input blouse-a-101, 35 credits. Variants: hair black, dark brown, brown; blazer light grey, navy, cream, camel, slate; skirt grey, navy, brown. Also the woman with a bun on the train (a bun added)."},
-  {"id": "cardigan-1", "label": "4. cardigan-1 (woman, 60s, cardigan)", "image": "art/parts/chibi-crowd-1/cardigan-1/renders/front.png", "images": ["art/parts/chibi-crowd-1/cardigan-1/renders/l45.png", "art/parts/chibi-crowd-1/cardigan-1/renders/back.png", "art/parts/chibi-crowd-1/cardigan-1/renders/face.png", "art/parts/chibi-crowd-1/inputs/cardigan-a-101.png"],
-   "note": "Input cardigan-a-101, 35 credits. Variants: hair grey, white, dyed brown; cardigan beige, dusty red, sage, blue-grey, cream; skirt brown, navy, grey."},
-  {"id": "polo-1", "label": "5. polo-1 (man, 60s, polo)", "image": "art/parts/chibi-crowd-1/polo-1/renders/front.png", "images": ["art/parts/chibi-crowd-1/polo-1/renders/l45.png", "art/parts/chibi-crowd-1/polo-1/renders/back.png", "art/parts/chibi-crowd-1/polo-1/renders/face.png", "art/parts/chibi-crowd-1/inputs/polo-b-103.png"],
-   "note": "Input polo-b-103, 35 credits. His white hair stays white (recolouring it greyed the whites of the eyes). Variants: polo green, blue, brick red, cream, navy; trousers beige, grey."},
-  {"id": "hoodie-1", "label": "6. hoodie-1 (young woman, hoodie and jeans)", "image": "art/parts/chibi-crowd-1/hoodie-1/renders/front.png", "images": ["art/parts/chibi-crowd-1/hoodie-1/renders/l45.png", "art/parts/chibi-crowd-1/hoodie-1/renders/back.png", "art/parts/chibi-crowd-1/hoodie-1/renders/face.png", "art/parts/chibi-crowd-1/inputs/hoodie-a-101.png"],
-   "note": "Input hoodie-a-101, 35 credits. Variants: hair light brown, black, brown, dark brown; hoodie lavender, sage, peach, slate, off-white; jeans mid, dark, grey. Also the joggers, and the girl with headphones on the train."},
-  {"id": "apron-1", "label": "7. apron-1 (woman, 40s, work apron)", "image": "art/parts/chibi-crowd-1/apron-1/renders/front.png", "images": ["art/parts/chibi-crowd-1/apron-1/renders/l45.png", "art/parts/chibi-crowd-1/apron-1/renders/back.png", "art/parts/chibi-crowd-1/apron-1/renders/face.png", "art/parts/chibi-crowd-1/inputs/apron-a-101.png"],
-   "note": "Input apron-a-101, 35 credits. Variants: hair dark brown, black; apron green, blue, maroon, charcoal. The canteen worker wears it in the canteen's teal."},
-  {"id": "dock-1", "label": "8. dock-1 (man, 30s, harbour work jacket)", "image": "art/parts/chibi-crowd-1/dock-1/renders/front.png", "images": ["art/parts/chibi-crowd-1/dock-1/renders/l45.png", "art/parts/chibi-crowd-1/dock-1/renders/back.png", "art/parts/chibi-crowd-1/dock-1/renders/face.png", "art/parts/chibi-crowd-1/inputs/dock-a-102.png"],
-   "note": "Input dock-a-102, 35 credits. Variants: hair black, dark brown; jacket orange, blue, yellow (the grey band stays); trousers grey, navy."}
+  {
+   "id": "suit-1",
+   "label": "1. suit-1 (man, 40s, suit)",
+   "image": "art/parts/chibi-crowd-1/suit-1/renders/front.png",
+   "images": [
+    "art/parts/chibi-crowd-1/suit-1/renders/l45.png",
+    "art/parts/chibi-crowd-1/suit-1/renders/back.png",
+    "art/parts/chibi-crowd-1/suit-1/renders/face.png",
+    "art/parts/chibi-crowd-1/inputs/suit-a-101.png"
+   ],
+   "note": "Input suit-a-101. Meshy latest model, textured, no remesh, no pose, 4k texture: 30 credits; auto-rig on a 60k copy: 5. Variants: hair black, dark brown, dark grey; suit blue-grey, charcoal, brown-grey, mid grey, dark navy (the red tie stays). In the office crowd, the gate and the lift."
+  },
+  {
+   "id": "shirt-1",
+   "label": "2. shirt-1 (young man, shirt and tie)",
+   "image": "art/parts/chibi-crowd-1/shirt-1/renders/front.png",
+   "images": [
+    "art/parts/chibi-crowd-1/shirt-1/renders/l45.png",
+    "art/parts/chibi-crowd-1/shirt-1/renders/back.png",
+    "art/parts/chibi-crowd-1/shirt-1/renders/face.png",
+    "art/parts/chibi-crowd-1/inputs/shirt-a-101.png"
+   ],
+   "note": "Input shirt-a-101, same settings, 35 credits. Variants: hair brown, black, chestnut; shirt light blue, white, pale pink, pale green, beige; trousers charcoal, navy, khaki-grey. Also the young man on the train."
+  },
+  {
+   "id": "blouse-1",
+   "label": "3. blouse-1 (woman, 20s, blazer and skirt)",
+   "image": "art/parts/chibi-crowd-1/blouse-1/renders/front.png",
+   "images": [
+    "art/parts/chibi-crowd-1/blouse-1/renders/l45.png",
+    "art/parts/chibi-crowd-1/blouse-1/renders/back.png",
+    "art/parts/chibi-crowd-1/blouse-1/renders/face.png",
+    "art/parts/chibi-crowd-1/inputs/blouse-a-101.png"
+   ],
+   "note": "Input blouse-a-101, 35 credits. Variants: hair black, dark brown, brown; blazer light grey, navy, cream, camel, slate; skirt grey, navy, brown. Also the woman with a bun on the train (a bun added)."
+  },
+  {
+   "id": "cardigan-1",
+   "label": "4. cardigan-1 (woman, 60s, cardigan)",
+   "image": "art/parts/chibi-crowd-1/cardigan-1/renders/front.png",
+   "images": [
+    "art/parts/chibi-crowd-1/cardigan-1/renders/l45.png",
+    "art/parts/chibi-crowd-1/cardigan-1/renders/back.png",
+    "art/parts/chibi-crowd-1/cardigan-1/renders/face.png",
+    "art/parts/chibi-crowd-1/inputs/cardigan-a-101.png"
+   ],
+   "note": "Input cardigan-a-101, 35 credits. Variants: hair grey, white, dyed brown; cardigan beige, dusty red, sage, blue-grey, cream; skirt brown, navy, grey."
+  },
+  {
+   "id": "polo-1",
+   "label": "5. polo-1 (man, 60s, polo)",
+   "image": "art/parts/chibi-crowd-1/polo-1/renders/front.png",
+   "images": [
+    "art/parts/chibi-crowd-1/polo-1/renders/l45.png",
+    "art/parts/chibi-crowd-1/polo-1/renders/back.png",
+    "art/parts/chibi-crowd-1/polo-1/renders/face.png",
+    "art/parts/chibi-crowd-1/inputs/polo-b-103.png"
+   ],
+   "note": "Input polo-b-103, 35 credits. His white hair stays white (recolouring it greyed the whites of the eyes). Variants: polo green, blue, brick red, cream, navy; trousers beige, grey."
+  },
+  {
+   "id": "hoodie-1",
+   "label": "6. hoodie-1 (young woman, hoodie and jeans)",
+   "image": "art/parts/chibi-crowd-1/hoodie-1/renders/front.png",
+   "images": [
+    "art/parts/chibi-crowd-1/hoodie-1/renders/l45.png",
+    "art/parts/chibi-crowd-1/hoodie-1/renders/back.png",
+    "art/parts/chibi-crowd-1/hoodie-1/renders/face.png",
+    "art/parts/chibi-crowd-1/inputs/hoodie-a-101.png"
+   ],
+   "note": "Input hoodie-a-101, 35 credits. Variants: hair light brown, black, brown, dark brown; hoodie lavender, sage, peach, slate, off-white; jeans mid, dark, grey. Also the joggers, and the girl with headphones on the train."
+  },
+  {
+   "id": "apron-1",
+   "label": "7. apron-1 (woman, 40s, work apron)",
+   "image": "art/parts/chibi-crowd-1/apron-1/renders/front.png",
+   "images": [
+    "art/parts/chibi-crowd-1/apron-1/renders/l45.png",
+    "art/parts/chibi-crowd-1/apron-1/renders/back.png",
+    "art/parts/chibi-crowd-1/apron-1/renders/face.png",
+    "art/parts/chibi-crowd-1/inputs/apron-a-101.png"
+   ],
+   "note": "Input apron-a-101, 35 credits. Variants: hair dark brown, black; apron green, blue, maroon, charcoal. The canteen worker wears it in the canteen's teal."
+  },
+  {
+   "id": "dock-1",
+   "label": "8. dock-1 (man, 30s, harbour work jacket)",
+   "image": "art/parts/chibi-crowd-1/dock-1/renders/front.png",
+   "images": [
+    "art/parts/chibi-crowd-1/dock-1/renders/l45.png",
+    "art/parts/chibi-crowd-1/dock-1/renders/back.png",
+    "art/parts/chibi-crowd-1/dock-1/renders/face.png",
+    "art/parts/chibi-crowd-1/inputs/dock-a-102.png"
+   ],
+   "note": "Input dock-a-102, 35 credits. Variants: hair black, dark brown; jacket orange, blue, yellow (the grey band stays); trousers grey, navy."
+  }
  ],
  "links": [
-  {"label": "Turn all eight, play the idle and the walk, beside Eric, Mio and Mori (live 3D)", "href": "tools/characters/parts/viewer.html?cfg=/reviews/chibi-crowd-1/viewer.json&a=suit-1&m=walk&c=eric-1"},
-  {"label": "Play it with the chibi look on (?chibi=1, or Settings > Graphics > Chibi cast)", "href": "game3d/?chibi=1"},
-  {"label": "Credits spent: Meshy 280 (eight latest-model generations 240, eight rigs 40), balance 560", "href": "reviews/chibi-crowd-1/credits.json"},
-  {"label": "Every input picture's prompt, seed and settings", "href": "art/candidates/chibi-crowd-1/prompts.json"}
+  {
+   "label": "Turn all eight, play the idle and the walk, beside Eric, Mio and Mori (live 3D)",
+   "href": "tools/characters/parts/viewer.html?cfg=/reviews/chibi-crowd-1/viewer.json&a=suit-1&m=walk&c=eric-1"
+  },
+  {
+   "label": "Play it with the chibi look on (?chibi=1, or Settings > Graphics > Chibi cast)",
+   "href": "game3d/?chibi=1"
+  },
+  {
+   "label": "Credits spent: Meshy 280 (eight latest-model generations 240, eight rigs 40), balance 560",
+   "href": "reviews/chibi-crowd-1/credits.json"
+  },
+  {
+   "label": "Every input picture's prompt, seed and settings",
+   "href": "art/candidates/chibi-crowd-1/prompts.json"
+  }
  ]
 }
