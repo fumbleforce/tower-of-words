@@ -27,7 +27,7 @@ import {
   wallLamp,
 } from '../props.js';
 import { PEOPLE, sit, armsHold, idle, mug } from '../cast.js';
-import { cat } from '../train/people.js';
+import { makeCat } from '../creatures/cat.js';
 import { blob, Nav } from '../engine.js';
 import { lightPool, steam, dust, clockHands, groundShadows } from '../places/life.js';
 import { ledLights } from './office-leds.js';
@@ -1042,12 +1042,12 @@ export function* officeSteps() {
   myChair.position.set(5.5, 0, -1.3);
   myChair.rotation.y = -0.5;
   root.add(myChair);
-  const tama = cat();
+  const tamaRig = makeCat('calico', { mode: 'sleep' }), // asleep on Eric's chair
+    tama = tamaRig.root;
   tama.scale.setScalar(1.15 * K * 0.9);
   tama.position.set(0, 0.24, 0.02);
   tama.rotation.y = 0.4;
   myChair.add(tama);
-  tama.userData.head.rotation.x = 0.35;
 
   yield;
   // ---- machine room ----
@@ -2016,6 +2016,7 @@ export function* officeSteps() {
     yui,
     sota,
     tama,
+    tamaRig,
     covers,
     leaves,
     card,

@@ -1,0 +1,100 @@
+<!doctype html>
+<!-- The rigged cat (js/creatures/cat.js) in every pose, from the side, three-quarter front and the game's high
+     camera; then her walk at eight phases. ?coat=calico|black|tabby|ginger. Screenshot with tools/cat-sheet.mjs. -->
+<html>
+  <head>
+    <meta name="robots" content="noindex, nofollow" />
+    <meta charset="utf-8" />
+    <style>
+      body { margin: 0; background: #e9ece8; font: 12px sans-serif; }
+      #lab { position: absolute; inset: 0; pointer-events: none; }
+      #lab div { position: absolute; color: #333; }
+    </style>
+    <script type="importmap">
+      { "imports": { "three": "../vendor/three/three.module.js", "three/addons/": "../vendor/" } }
+    </script>
+  </head>
+  <body>
+    <div id="lab"></div>
+    <script type="module">
+      import * as THREE from 'three';
+      import { makeCat } from '../js/creatures/cat.js';
+      const Q = new URLSearchParams(location.search);
+      const coat = Q.get('coat') || 'calico';
+      const CELL = 260;
+      const modes = ['stand', 'sit', 'sleep', 'eat', 'wash'];
+      const views = [
+        ['side', [1, 0.25, 0]],
+        ['3/4', [0.7, 0.45, 0.8]],
+        ['high', [0.35, 1.3, 0.9]],
+      ];
+      const cols = Math.max(modes.length, 8);
+      const rows = views.length + 2;
+      const W = CELL * cols, H = CELL * rows;
+      const renderer = new THREE.WebGLRenderer({ antialias: true });
+      renderer.setSize(W, H);
+      renderer.setScissorTest(true);
+      renderer.shadowMap.enabled = true;
+      document.body.appendChild(renderer.domElement);
+      const scene = new THREE.Scene();
+      scene.background = new THREE.Color('#e9ece8');
+      scene.add(new THREE.HemisphereLight('#ffffff', '#8a8f86', 1.6));
+      const sun = new THREE.DirectionalLight('#ffffff', 2.2);
+      sun.position.set(1, 2, 1.5);
+      scene.add(sun);
+      const floor = new THREE.Mesh(new THREE.PlaneGeometry(40, 40), new THREE.MeshStandardMaterial({ color: '#cfd4cc' }));
+      floor.rotation.x = -Math.PI / 2;
+      scene.add(floor);
+      const cats = [], grid = {};
+      const lab = document.getElementById('lab');
+      const label = (x, y, t) => {
+        const d = document.createElement('div');
+        d.style.left = x + 4 + 'px';
+        d.style.top = y + 2 + 'px';
+        d.textContent = t;
+        lab.appendChild(d);
+      };
+      // one cat per cell, far apart, so each camera sees only its own
+      const at = (i, j) => new THREE.Vector3(i * 3, 0, j * 3);
+      const put = (i, j, setup) => {
+        const c = makeCat(coat, { mode: 'stand' });
+        c.root.position.copy(at(i, j));
+        scene.add(c.root);
+        setup(c);
+        cats.push(c);
+        grid[i + ',' + j] = c;
+        return c;
+      };
+      views.forEach(([vn], j) => modes.forEach((m, i) => put(i, j, (c) => (c.set(m, { now: true }), c.update(0.016)))));
+      // the walk: each cat walked forward to a phase (moved by hand, as the game moves her)
+      for (let i = 0; i < 8; i++)
+        for (const j of [3, 4])
+          put(i, j, (c) => {
+            c.set('stand', { now: true });
+            c.update(0.016);
+            for (let s = 0; s < 30; s++) { // three cycles and i/8 of one (a cycle is 0.161 units)
+              c.root.position.z += ((i / 8) * 0.161 + 0.161 * 3) / 30;
+              c.update(0.03);
+            }
+          });
+      const cam = new THREE.PerspectiveCamera(30, 1, 0.05, 50);
+      const draw = (i, j, dir, ttl) => {
+        const target = grid[i + ',' + j].root.position.clone();
+        target.y += 0.13;
+        cam.position.copy(target).add(new THREE.Vector3(...dir).normalize().multiplyScalar(1.05));
+        cam.lookAt(target);
+        const x = i * CELL, y = H - (j + 1) * CELL;
+        renderer.setViewport(x, y, CELL, CELL);
+        renderer.setScissor(x, y, CELL, CELL);
+        renderer.render(scene, cam);
+        label(i * CELL, j * CELL, ttl);
+      };
+      views.forEach(([vn, dir], j) => modes.forEach((m, i) => draw(i, j, dir, `${m} · ${vn}`)));
+      for (let i = 0; i < 8; i++) {
+        draw(i, 3, [1, 0.15, 0], `walk ${i}/8 · side`);
+        draw(i, 4, [0.6, 0.5, 0.9], `walk ${i}/8 · 3/4`);
+      }
+      window.__ready = true;
+    </script>
+  </body>
+</html>

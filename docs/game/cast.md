@@ -118,6 +118,7 @@ The id `kuroda` is Mr. Hamada. The id is older than the name and stays so the vo
 ### Tama (`tama`)
 
 - A calico cat who rides the monorail and gets off wherever she likes. Turns up on the train, by the guard's desk and asleep on Eric's chair in the B2 machine room. Her story: [`tama`](stories/tama.md).
+- Look and movement: a small faceted cat, white with orange and black patches and a black tail tip, rigged in code (game3d/js/creatures/cat.js). She washes, eats from her bowl, sits, and sleeps curled with her head on her paws and her tail round her; she breathes, sways her tail, flicks an ear and blinks. She walks on four legs in a cat's walk, tail up, her steps keeping to the ground she covers; she steps round when she turns on the spot, gets up before she sets off, sits down when she stops, and hops on and off seats.
 
 ### The others
 

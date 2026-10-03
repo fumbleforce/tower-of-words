@@ -30,7 +30,8 @@ import {
 } from '../train/car.js';
 import { buildDoorSets, lampShut, lampOpen } from '../train/doors.js';
 import { swingStraps } from '../train/straps.js';
-import { buildPassengers, cat, walkPose, HIP, sit, armsHold } from '../train/people.js';
+import { buildPassengers, sit, armsHold } from '../train/people.js';
+import { makeCat, catWalk, catHop } from '../creatures/cat.js';
 import { PEOPLE } from '../cast.js';
 import { Nav, blob } from '../engine.js';
 import { ui, sfx } from '../ui.js';
@@ -149,7 +150,8 @@ export async function trainPlace(game) {
   }
   blobs.kuroda = kuroda.blob;
   blobs.aoi = aoi.blob;
-  const kitty = cat();
+  const tama = makeCat('calico', { mode: 'wash' }), // washing on the far bench (docs/game/places.md, Train)
+    kitty = tama.root;
   kitty.scale.setScalar(1.15);
   kitty.position.set(-0.85, SEAT_Y, -(LZ - 0.24));
   kitty.rotation.y = 0.2;
@@ -794,7 +796,7 @@ export async function trainPlace(game) {
     stander,
     bun,
     youth,
-    tama: { root: kitty, head: kitty.userData.head },
+    tama,
   };
   // what the passengers can show Eric: their phone and bag hooks (train/discoveries.js)
   const finds = trainDiscoveries(game, { people, car: car.root, nav, SEAT_Y });
@@ -1160,11 +1162,8 @@ export async function trainPlace(game) {
         if (p.torso && p.breath) p.torso.scale.y = 1 + p.breath * Math.sin(simT * 1.7 + p.ph);
         if (p.act) p.act(simT, p, m.roll);
       }
-      const tc = (simT + 0.8) % 3.4;
-      kitty.userData.tail.rotation.y =
-        tc < 0.6 ? Math.sin((tc / 0.6) * Math.PI * 2) * 0.35 : Math.sin(simT * 0.8) * 0.05;
-      kitty.userData.tip.rotation.y = tc < 0.6 ? Math.sin((tc / 0.6) * Math.PI * 2 - 0.8) * 0.6 : 0;
-      kitty.userData.head.rotation.x = Math.sin(simT * 0.35) * 0.05;
+      tama.update(dt);
+      kb.position.set(kitty.position.x, kitty.position.y + 0.003, kitty.position.z); // her shadow goes with her
       if (bagWobble) {
         foodBag.rotation.x = Math.sin(simT * 7) * 0.12;
         foodBag.rotation.z = -0.15 + Math.sin(simT * 5.3) * 0.05;
@@ -1407,8 +1406,8 @@ export async function trainPlace(game) {
       catTo: async ({ to }) => {
         const p = game.posOf(to);
         if (!p) return;
-        await walkRig(game, kitty, p, { speed: 1.0 });
-        kitty.position.y = 0;
+        if (kitty.position.y > 0.05) await catHop(game, tama, [kitty.position.x, kitty.position.z * 0.55], 0); // off the seat
+        await catWalk(game, tama, p, { speed: 1.0, end: 'sit' }); // then she sits watching the door
       },
       phone: finds.hooks.phone,
       headphones: finds.hooks.headphones,
@@ -1503,6 +1502,7 @@ export async function trainPlace(game) {
         mio.root.position.set(-2.2, 0, 2.25);
         kitty.position.set(-3, 0, 2.9);
         kb.position.set(-3, 0.004, 2.9);
+        tama.set('sit', { now: true });
       }
       if (state.geometry?.length === trainObjects.length) {
         // (a save from a build with other car parts restores through the branch below)
@@ -1694,7 +1694,6 @@ export async function trainPlace(game) {
   P._st = st;
   P._setDoors = setDoors;
   P.kotodamaTargets = (name) => (name === 'doors' ? myLeaves.map((d) => d.g) : []);
-  kitty.userData.tail.rotation.y = 0;
   // what update() moves every frame, so the draw-call pass batches under them before the first frame (js/perf/batch.js)
   P.perfMovers = [
     pivot,
@@ -1705,8 +1704,7 @@ export async function trainPlace(game) {
     ...world.movers,
     ...car.nodders.map((n) => n.obj),
     ...list.map((p) => p.head),
-    kitty.userData.head,
-    kitty.userData.tail,
+    kitty,
   ];
   return P;
 }
