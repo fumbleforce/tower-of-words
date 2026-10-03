@@ -350,6 +350,17 @@ body.phone #talk .por.right { right: 10px; left: auto; height: 150px; }
 body.phone #talk .por img { filter: drop-shadow(0 3px 8px rgba(0,0,0,.5)); }
 #talk .por.card img { border-radius: 14px; border: 2px solid rgba(255,255,255,.14); height: 88%; margin-top: 12%; }
 body.phone #talk .por.card img { border-radius: 10px; }
+/* a shut door's card, beside the line that reads it (js/ui/door-card.js): the sign's own colours, kana over English */
+#talk .doorcard { position: absolute; left: calc(100% + 18px); bottom: 4px; width: 200px; padding: 14px 12px 12px; box-sizing: border-box; display: flex; flex-direction: column; align-items: center; gap: 4px; background: #f2f0ea; color: #2f3540; border-radius: 4px; outline: 3px solid #8a3b3b; outline-offset: -9px; box-shadow: 0 8px 22px rgba(0,0,0,.45); pointer-events: none; text-align: center; }
+#talk .doorcard[hidden] { display: none; }
+#talk .doorcard b { font: 700 34px/1.15 "Zen Kaku Gothic New", "Noto Sans JP", sans-serif; letter-spacing: .04em; }
+#talk .doorcard i { font: 500 16px/1.2 "Zen Kaku Gothic New", "Noto Sans JP", sans-serif; font-style: normal; }
+#talk .doorcard span { font: 700 12px/1.25 system-ui, sans-serif; letter-spacing: .08em; }
+@media (max-width: 1200px) { #talk .doorcard { left: auto; right: 14px; bottom: calc(100% + 12px); } }
+body.phone #talk .doorcard { left: auto; right: 14px; bottom: calc(100% + 12px); width: 156px; padding: 11px 10px 10px; outline-offset: -7px; }
+body.phone #talk .doorcard b { font-size: 27px; }
+body.phone #talk .doorcard i { font-size: 13px; }
+body.phone #talk .doorcard span { font-size: 11px; }
 
 /* ---------- one HUD system (Jørgen: "inconsistent and ugly") ----------
    Every HUD element is the same chip: 36 px tall, 10 px radius, a dark slate glass panel, a hairline border,

@@ -150,8 +150,8 @@ function entrance(p, glow, signs, lights) {
     p.box(STEEL.pale, 0.04, 0.5, 0.04, x - s * (DW - 0.12), 0.85, f + 0.16);
     p.box(C.frame, 0.06, 2.1, 0.08, x, 0.27, f + 0.13);
   }
-  signs.card('準備中', 'CLOSED', 0.46, 0.3, [GX + 0.5, 1.25, f + 0.14], 0);
-  signs.card('準備中', 'CLOSED', 0.46, 0.3, [GX - 0.5, 1.25, f + 0.14], 0);
+  signs.card('準備中', 'CLOSED', 0.46, 0.3, [GX + 0.5, 1.25, f + 0.14], 0, { door: 'gym' });
+  signs.card('準備中', 'CLOSED', 0.46, 0.3, [GX - 0.5, 1.25, f + 0.14], 0, { door: 'gym' });
   // the step and the canopy on two posts, its board standing on the front edge
   p.box(BLOCK.plinth, FW + 0.6, 0.08, 0.9, GX, 0, f + 0.45, { surf: 'concrete' });
   const CD = 1.25;

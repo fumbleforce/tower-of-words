@@ -71,9 +71,9 @@ function door(p, signs, { id, at: [x, z], out }) {
   p.box('#a9a8a3', 1.6, 0.03, 0.4, x, 0, z + out * 0.3, { cast: false }); // the doorstep
   const card = [x + 0.3, 1.2, f + out * 0.045],
     ry = out > 0 ? 0 : Math.PI;
-  signs.card('準備中', 'CLOSED', 0.46, 0.3, card, ry, { when: 'prep' });
+  signs.card('準備中', 'CLOSED', 0.46, 0.3, card, ry, { when: 'prep', door: id });
   // day 2 after work: closed today (the izakaya is booked instead: its card is on the noren, scenes/shotengai.js)
-  if (id !== 'izakaya') signs.card('本日休業', 'CLOSED TODAY', 0.46, 0.3, card, ry, { when: 'evening2' });
+  if (id !== 'izakaya') signs.card('本日休業', 'CLOSED TODAY', 0.46, 0.3, card, ry, { when: 'evening2', door: id });
 }
 
 // a crane game cabinet: a pale case, a glass box on top with a coloured top light

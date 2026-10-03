@@ -2,37 +2,164 @@
   "title": "Day 2: a lighter evening outdoors, and door cards for the time of day",
   "date": "2026-10-03",
   "by": "claude-agent:day2-cards-light",
-  "caption": "After work on day 2 the outdoor places were too dark on a phone. The same dusk is now lifted (more sky light, a stronger low sun and fill, a brighter grade), so people and paths read; the lamps and lit windows stay warm. Day 1's evening is unchanged. The shut shops now show a card for the time of day: 準備中 in the morning, 本日休業 after work, the izakaya's 本日貸切 on its curtain and the onsen's boiler-repair notice. Each pair is before | after.",
+  "caption": "After work on day 2 the outdoor places were too dark on a phone. The same dusk is now lifted (more sky light, a stronger low sun and fill, a brighter grade), so people and paths read; the lamps and lit windows stay warm. Day 1's evening is unchanged. The shut shops now show a card for the time of day: 準備中 in the morning, 本日休業 after work, the izakaya's 本日貸切 on its curtain and the onsen's boiler-repair notice. Each pair is before | after. Second pass (below): the door cards now show on screen when you try a door, the lamp pools are warm again, and dark-clothed people read against the dusk.",
   "sections": [
     {
       "title": "Phone, after work",
       "caption": "390 x 844.",
       "images": [
-        { "id": "phone-street", "image": "bible/shots/showcase/day2-evening-1/phone-street.webp", "caption": "Shop street" },
-        { "id": "phone-coast", "image": "bible/shots/showcase/day2-evening-1/phone-coast.webp", "caption": "East coast walk" },
-        { "id": "phone-lane", "image": "bible/shots/showcase/day2-evening-1/phone-lane.webp", "caption": "East lane" },
-        { "id": "phone-plaza", "image": "bible/shots/showcase/day2-evening-1/phone-plaza.webp", "caption": "Fountain plaza" },
-        { "id": "phone-court", "image": "bible/shots/showcase/day2-evening-1/phone-court.webp", "caption": "Dorm courtyard, loaded straight into the evening, so it keeps its own dusk light and barely changes" }
+        {
+          "id": "phone-street",
+          "image": "bible/shots/showcase/day2-evening-1/phone-street.webp",
+          "caption": "Shop street"
+        },
+        {
+          "id": "phone-coast",
+          "image": "bible/shots/showcase/day2-evening-1/phone-coast.webp",
+          "caption": "East coast walk"
+        },
+        {
+          "id": "phone-lane",
+          "image": "bible/shots/showcase/day2-evening-1/phone-lane.webp",
+          "caption": "East lane"
+        },
+        {
+          "id": "phone-plaza",
+          "image": "bible/shots/showcase/day2-evening-1/phone-plaza.webp",
+          "caption": "Fountain plaza"
+        },
+        {
+          "id": "phone-court",
+          "image": "bible/shots/showcase/day2-evening-1/phone-court.webp",
+          "caption": "Dorm courtyard, loaded straight into the evening, so it keeps its own dusk light and barely changes"
+        }
       ]
     },
     {
       "title": "Desktop, after work",
       "caption": "1366 x 860.",
       "images": [
-        { "id": "desktop-street", "image": "bible/shots/showcase/day2-evening-1/desktop-street.webp", "caption": "Shop street" },
-        { "id": "desktop-coast", "image": "bible/shots/showcase/day2-evening-1/desktop-coast.webp", "caption": "East coast walk" },
-        { "id": "desktop-lane", "image": "bible/shots/showcase/day2-evening-1/desktop-lane.webp", "caption": "East lane" },
-        { "id": "desktop-plaza", "image": "bible/shots/showcase/day2-evening-1/desktop-plaza.webp", "caption": "Fountain plaza" },
-        { "id": "desktop-court", "image": "bible/shots/showcase/day2-evening-1/desktop-court.webp", "caption": "Dorm courtyard" }
+        {
+          "id": "desktop-street",
+          "image": "bible/shots/showcase/day2-evening-1/desktop-street.webp",
+          "caption": "Shop street"
+        },
+        {
+          "id": "desktop-coast",
+          "image": "bible/shots/showcase/day2-evening-1/desktop-coast.webp",
+          "caption": "East coast walk"
+        },
+        {
+          "id": "desktop-lane",
+          "image": "bible/shots/showcase/day2-evening-1/desktop-lane.webp",
+          "caption": "East lane"
+        },
+        {
+          "id": "desktop-plaza",
+          "image": "bible/shots/showcase/day2-evening-1/desktop-plaza.webp",
+          "caption": "Fountain plaza"
+        },
+        {
+          "id": "desktop-court",
+          "image": "bible/shots/showcase/day2-evening-1/desktop-court.webp",
+          "caption": "Dorm courtyard"
+        }
       ]
     },
     {
       "title": "Door cards",
       "caption": "Close-ups with the camera moved in front of the doors (Eric's hair is in some). Rows: day 1 after work (unchanged), day 2 morning, day 2 after work.",
       "images": [
-        { "id": "door-cards", "image": "bible/shots/showcase/day2-evening-1/door-cards.webp", "caption": "Karaoke, izakaya, onsen, barber" }
+        {
+          "id": "door-cards",
+          "image": "bible/shots/showcase/day2-evening-1/door-cards.webp",
+          "caption": "Karaoke, izakaya, onsen, barber"
+        }
+      ]
+    },
+    {
+      "title": "Second pass, phone",
+      "caption": "390 x 844. Before | after. The street lamps' warm pools are stronger again, the plaza a little darker, and people in dark clothes keep their shape (a lift of their own colours and a soft rim of sky light on the people only).",
+      "images": [
+        {
+          "id": "r2-phone-street",
+          "image": "bible/shots/showcase/day2-evening-1/r2-phone-street.webp",
+          "caption": "Shop street"
+        },
+        {
+          "id": "r2-phone-coast",
+          "image": "bible/shots/showcase/day2-evening-1/r2-phone-coast.webp",
+          "caption": "East coast lookout, the man at the telescope in a dark suit"
+        },
+        {
+          "id": "r2-phone-lane",
+          "image": "bible/shots/showcase/day2-evening-1/r2-phone-lane.webp",
+          "caption": "East lane"
+        },
+        {
+          "id": "r2-phone-plaza",
+          "image": "bible/shots/showcase/day2-evening-1/r2-phone-plaza.webp",
+          "caption": "Fountain plaza"
+        },
+        {
+          "id": "r2-phone-court",
+          "image": "bible/shots/showcase/day2-evening-1/r2-phone-court.webp",
+          "caption": "Dorm courtyard"
+        }
+      ]
+    },
+    {
+      "title": "Second pass, desktop",
+      "caption": "1366 x 860. Before | after.",
+      "images": [
+        {
+          "id": "r2-desktop-street",
+          "image": "bible/shots/showcase/day2-evening-1/r2-desktop-street.webp",
+          "caption": "Shop street"
+        },
+        {
+          "id": "r2-desktop-coast",
+          "image": "bible/shots/showcase/day2-evening-1/r2-desktop-coast.webp",
+          "caption": "East coast lookout, the man at the telescope in a dark suit"
+        },
+        {
+          "id": "r2-desktop-lane",
+          "image": "bible/shots/showcase/day2-evening-1/r2-desktop-lane.webp",
+          "caption": "East lane"
+        },
+        {
+          "id": "r2-desktop-plaza",
+          "image": "bible/shots/showcase/day2-evening-1/r2-desktop-plaza.webp",
+          "caption": "Fountain plaza"
+        },
+        {
+          "id": "r2-desktop-court",
+          "image": "bible/shots/showcase/day2-evening-1/r2-desktop-court.webp",
+          "caption": "Dorm courtyard"
+        }
+      ]
+    },
+    {
+      "title": "Second pass, door cards in play",
+      "caption": "Trying a shut door now shows its card beside the line, as it hangs at that time of day. Day 1 and day 2, every shut door with a card.",
+      "images": [
+        {
+          "id": "r2-cards-phone",
+          "image": "bible/shots/showcase/day2-evening-1/r2-cards-phone.webp",
+          "caption": "Phone: karaoke and izakaya after work, the onsen's notice, the barber in the morning, day 1 konbini and gym"
+        },
+        {
+          "id": "r2-cards-desktop",
+          "image": "bible/shots/showcase/day2-evening-1/r2-cards-desktop.webp",
+          "caption": "Desktop: the onsen after work, the barber in the morning"
+        }
       ]
     }
   ],
-  "links": [{ "label": "Play day 2", "href": "game3d/?day=2" }]
+  "links": [
+    {
+      "label": "Play day 2",
+      "href": "game3d/?day=2"
+    }
+  ]
 }

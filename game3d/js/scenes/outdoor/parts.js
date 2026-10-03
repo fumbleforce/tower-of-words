@@ -116,7 +116,8 @@ export const pair = (c, gap, axis = 'x') =>
 
 // ---------- light ----------
 // light pools on the ground under a set of lamps, in one mesh (one draw call however many lamps). Returns the mesh;
-// set(k) changes their strength (the evening turns them up). y: their height, just over the paving they light.
+// set(k) changes their strength (the evening turns them up); userData.gain scales it on top (eveningLight's day 2,
+// whose brighter dusk would wash weaker pools out). y: their height, just over the paving they light.
 // POOL_Y: over the paving's highest parts (stones 0.006-0.008, tactile tiles 0.012, their ribs and dots 0.026). A pool
 // level with the stones fights them for depth, and flickers in stripes as the camera moves (issue #100).
 export const POOL_Y = 0.03;
@@ -133,6 +134,10 @@ export function pools(points, r = 0.9, { k = 0.2, color = '#ffcf94', y = POOL_Y 
   base.rotation.set(0, 0, 0);
   base.position.set(0, 0, 0);
   const c0 = new THREE.Color(color);
-  base.userData.set = (kk) => base.material.color.copy(c0).multiplyScalar(kk);
+  Object.assign(base.userData, { k, gain: 1 });
+  base.userData.set = (kk) => {
+    base.userData.k = kk;
+    base.material.color.copy(c0).multiplyScalar(kk * base.userData.gain);
+  };
   return base;
 }

@@ -38,7 +38,7 @@ export function fittings(p, signs, lights, k, door) {
   signs.board(kana, en, colour, bw, 0.56, at(t, c.out - 0.14, 2.3 + 0.3), ry);
   const [bx, , bz] = at(t, c.out - 0.17, 0);
   p.box('#2c3b42', f.d[0] ? bw + 0.04 : 0.04, 0.6, f.d[0] ? 0.04 : bw + 0.04, bx, 2.3, bz);
-  signs.card('準備中', 'CLOSED', 0.46, 0.3, at(t + 0.3, 0.012, 1.2), ry);
+  signs.card('準備中', 'CLOSED', 0.46, 0.3, at(t + 0.3, 0.012, 1.2), ry, { door: k.place });
   for (const s of [-1, 1]) {
     const [x, , z] = at(t + s * (c.c1 - c.c0) * 0.3, c.out * 0.5, 0);
     lights.glowParts.push(new THREE.BoxGeometry(0.26, 0.03, 0.26).translate(x, 2.18, z));

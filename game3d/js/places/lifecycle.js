@@ -18,6 +18,7 @@ import { installTickets } from '../tickets/index.js';
 import { installBoot, installPlacePlugin, watchPlacePlugins } from '../plugins.js';
 import { installCreatures } from '../creatures/index.js';
 import { attachCrowd } from '../crowd/index.js';
+import { liftPeople } from '../look/char-lift.js';
 
 const MUSIC = { train: 'calm', gate: 'lively', office: 'office' };
 // places the draw-call pass (js/perf/batch.js) runs on
@@ -134,6 +135,7 @@ export function createPlaceLifecycle(
     place.onPeriod?.(sim.period); // a chunk built in the morning, entered after work, takes the evening light
     place.onDay?.(sim.day); // what a day changes in a place (day 2's closed streets: places/closure.js)
     setComposer(place);
+    liftPeople(game, place); // the people's evening lift, where the grade asks for one (look/char-lift.js)
     resize();
     place.cam?.snap?.(game.player.root.position);
     absorb(story);

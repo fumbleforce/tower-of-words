@@ -9,9 +9,11 @@ import { defaultReaction } from '../story.js';
 import { flags, cond } from '../narrative/state.js';
 import { sim, ITEMS, meet, take, peopleHTML } from '../sim.js';
 import { isPerson, idleTalk } from './idle-talk.js';
+import { installDoorCards } from '../ui/door-card.js';
 
 export function installInteractions(game) {
   const ui = game.ui;
+  installDoorCards(game, () => sim); // a shut door's card on screen with its line (ui/door-card.js)
   function thingOn(id, t) {
     const person = game.place && game.place.people[id];
     if (person && person.root && !person.root.visible) return false;
