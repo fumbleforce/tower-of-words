@@ -35,14 +35,8 @@
     {
       "file": "game3d/js/cast.js",
       "ruleId": "no-unused-vars",
-      "message": "'k' is assigned a value but never used.",
-      "context": "068ef6ea1f4b4258100a7628d8c274d20797e33631f537777402fddccd8ff870"
-    },
-    {
-      "file": "game3d/js/cast.js",
-      "ruleId": "no-unused-vars",
       "message": "'guardCap' is defined but never used.",
-      "context": "3db0dacbf6bfccdecb09ecb783575fc68c083fc03aa287d6227d0ad45c023f17"
+      "context": "751916ade94d4fc64deed106db8570d4c88a190b1d59a56ad6fe6d73f1ef7746"
     },
     {
       "file": "game3d/js/cast.js",

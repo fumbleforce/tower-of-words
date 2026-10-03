@@ -35,6 +35,7 @@ export const DEFAULTS = {
   voiceOn: true,
   quality: 'auto', // 'auto' | 'low' | 'medium' | 'high' (post.js reads the tier; see qualityTier())
   surfaces: true, // Surface detail: patterns in floors, walls, fabric and metal (look/procedural.js)
+  chibi: false, // Mio, Eric and Kuro as the Meshy chibis, from the next load (chibi.js; ?chibi=1 forces it)
   reduceMotion: reduceDefault,
   keySay: 'KeyQ',
   uiSize: 1, // a multiplier on the viewport-based UI scale (0.85, 1, 1.2, 1.4)

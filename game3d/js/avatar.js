@@ -169,8 +169,7 @@ export function buildEric() {
   return rig;
 }
 
-// The player avatar: same interface as the Meshy loader returns (root, setState, update, sitAt), so a Meshy
-// Eric can replace it in main.js boot() with one line: game.player = await loadMeshy('eric', ...).
+// The code-built player (?eric=chibi, or when Meshy Eric fails), with the Meshy loader's interface.
 export function makeAvatar() {
   const rig = buildEric();
   const root = new THREE.Group();
@@ -249,19 +248,20 @@ const json = (u) =>
     .then((r) => (r.ok ? r.json() : null))
     .catch(() => null);
 // Any character made with the 3D workflow and rigged through Meshy's API (Eric, and the cast in assets/characters/<id>/):
-// walk, run, idle, sit clips, the base colour texture, and optional phone and gesture clips.
-export async function loadMeshy(id, { height = 1.2, dir = CDIR + id + '/' } = {}) {
+// walk, run, idle, sit clips, the base colour texture, optional phone and gestures (or all from packed(); chibi.js).
+export async function loadMeshy(id, { height = 1.2, dir = CDIR + id + '/', packed, stride } = {}) {
   const loader = new GLTFLoader();
   const load = (u) => new Promise((ok, no) => loader.load(u, ok, undefined, no));
-  const [walk, run, idle, sitG, tex, phoneJson, ...gj] = await Promise.all([
-    load(dir + 'walk.glb' + ver()),
-    load(dir + 'run.glb' + ver()),
-    loadRelaxedIdle(id, ver()),
-    load(dir + 'sit.glb' + ver()),
-    new THREE.TextureLoader().loadAsync(dir + 'base.webp' + ver()),
-    json(CDIR + id + '/phone.json'),
-    ...GESTURES.map((g) => json(CDIR + id + '/' + g + '.json')),
-  ]);
+  const [walk, run, idle, sitG, tex, phoneJson, ...gj] = await (packed?.(load) ??
+    Promise.all([
+      load(dir + 'walk.glb' + ver()),
+      load(dir + 'run.glb' + ver()),
+      loadRelaxedIdle(id, ver()),
+      load(dir + 'sit.glb' + ver()),
+      new THREE.TextureLoader().loadAsync(dir + 'base.webp' + ver()),
+      json(CDIR + id + '/phone.json'),
+      ...GESTURES.map((g) => json(CDIR + id + '/' + g + '.json')),
+    ]));
   tex.flipY = false;
   tex.colorSpace = THREE.SRGBColorSpace;
   const model = walk.scene;
@@ -386,7 +386,7 @@ export async function loadMeshy(id, { height = 1.2, dir = CDIR + id + '/' } = {}
       gesturing = { a: g, ok, out: false };
     });
   }
-  const gait = makeGait(actions, { walkV: 0.44, runV: 1.1, runOff: 0.03 }); // Eric's strides, used for all API cast
+  const gait = makeGait(actions, stride || { walkV: 0.44, runV: 1.1, runOff: 0.03 }); // Eric's strides by default
   function update(dt, speed = 1) {
     gait.step(dt, curName, speed);
     restoreBones();

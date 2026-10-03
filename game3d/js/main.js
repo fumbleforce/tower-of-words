@@ -14,8 +14,8 @@ import { createView } from './perf/view.js';
 import { guardedLoop } from './perf/gl-guard.js';
 import { pickPerson, bodies, softSeparate } from './move.js';
 import * as ambience from './ambience.js';
-import { loadMio } from './mio.js';
-import { makeAvatar, loadEric, setSitLift } from './avatar.js';
+import { mioBody, ericBody } from './chibi.js';
+import { makeAvatar, setSitLift } from './avatar.js';
 import { createTargets } from './narrative/hooks/targets.js';
 export { isPlayer } from './narrative/hooks/targets.js';
 import { installMovementHooks } from './narrative/hooks/movement.js';
@@ -585,13 +585,13 @@ async function boot() {
   game.player =
     Q.get('eric') === 'chibi'
       ? makeAvatar()
-      : await loadEric().catch((e) => {
+      : await ericBody().catch((e) => {
           console.warn('Meshy Eric failed, using the chibi', e);
           return makeAvatar();
         });
   game.player.root.add(blob(0.55, 0.4));
   // Mio is an NPC now: Jørgen's Meshy model, colour-tweaked only, shown wherever the story puts her
-  game.mioNpc = await loadMio({ height: 1.12 });
+  game.mioNpc = await mioBody();
   game.mioNpc.meshy = true;
   game.mioNpc.root.visible = false;
   game.mioNpc.blob = blob(0.55, 0.4);

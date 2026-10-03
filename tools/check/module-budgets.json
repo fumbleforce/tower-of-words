@@ -3,14 +3,14 @@
   "exceptions": {
     "game3d/js/avatar.js": {
       "lines": 474,
-      "bytes": 15177,
+      "bytes": 15147,
       "owner": "codex-tui",
       "review": "C-0071",
       "reason": "Existing avatar loading, rig mapping and animation playback; keep the ceiling until the character pipeline split."
     },
     "game3d/js/cast.js": {
-      "lines": 483,
-      "bytes": 14239,
+      "lines": 424,
+      "bytes": 12062,
       "owner": "codex-tui",
       "review": "C-0071",
       "reason": "Existing mixed character factories, appearance data and rig setup. Split factory families during the later character/module boundary review; avoid splitting coupled rig construction merely to hit a line target."
@@ -24,7 +24,7 @@
     },
     "game3d/js/main.js": {
       "lines": 674,
-      "bytes": 24450,
+      "bytes": 24436,
       "owner": "codex-tui",
       "review": "C-0110 / X-0193: one office batch integration line; 2026-09-30 one import line each for the dorms, plaza and dorm_court place factories; existing responsibility unchanged; 2026-09-30 game.overrideMaterials for the shader warm-up (notes/PERF.md); 2026-09-30 one step() line for the look/cue layers over the idles (C-0171); C-0210 close-only things lose close calls for the target (same line); 2026-10-01 issue #137: size passed to the place lifecycle (one line); 2026-10-02 issue #173: one import line for the shotengai place factory; 2026-10-02 issue #173: one import line for the east lane place factory (the gate and forecourt factories imported under their place names, so the registry stays on one line); 2026-10-02 issue #173: one import line for the east coast place factory; 2026-10-02 issue #173: one import line for the sports place factory; 2026-10-02 issue #173: one import line for the office quarter place factory, and the place registry one name a line (it no longer fits on one; the registration check needs plain keys); 2026-10-02 issue #173: one import line and one registry line for the harbour place factory; 2026-10-02 issue #173: one import line and one registry line for the works place factory",
       "reason": "Composition, boot/Continue, input, rendering and frame loop remain after stage 4 hooks, interactions and place lifecycle extraction."
@@ -73,7 +73,7 @@
     },
     "game3d/js/places/train.js": {
       "lines": 1682,
-      "bytes": 61971,
+      "bytes": 61969,
       "owner": "codex-tui",
       "review": "C-0076; C-0166 named sounds per door and machine; 2026-09-30 eleven wiring lines for the passengers' discovery props and hooks (train/discoveries.js, issue #89); 2026-10-01 issue #137: layout() split from fit() and the perfMovers list (notes/PERF.md); 2026-10-01 issue #145: car.cab in perfMovers, saved car parts restored only from the same build (notes/PERF.md); 2026-10-01 issue #144: the run in's speed moved to train/island.js with the island it shows; 2026-10-01 issue #156: WALK_X (the walkway out at the platform's south end) and the window's open-bay condition (#166)",
       "reason": "Existing train place geometry, animation and scene hooks; stage 5 room-builder review is planned."
