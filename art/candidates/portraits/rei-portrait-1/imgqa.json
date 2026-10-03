@@ -1,0 +1,955 @@
+{
+ "character": "rei",
+ "ref": "art/approved/rei/rei-after.webp",
+ "face_box_game": null,
+ "ref_face_detected": [
+  189,
+  248,
+  382,
+  453
+ ],
+ "thresholds": {
+  "redrim": [
+   0.02,
+   0.08
+  ],
+  "glasses_cover": [
+   0.87,
+   0.85
+  ],
+  "glasses_worst": [
+   0.7,
+   0.5
+  ],
+  "glasses_dE": [
+   8,
+   15
+  ],
+  "matte_frame": [
+   0.05,
+   0.12
+  ],
+  "matte_holes": [
+   0,
+   3
+  ],
+  "headroom": [
+   0.03,
+   0.01
+  ],
+  "zoom": [
+   0.04,
+   9
+  ],
+  "top": [
+   0.01,
+   9
+  ],
+  "eyes": [
+   0.06,
+   0.12
+  ],
+  "ccip": [
+   0.05,
+   0.09
+  ]
+ },
+ "images": [
+  {
+   "path": "art/candidates/portraits/rei-portrait-1/rei-t-202.webp",
+   "kind": "render",
+   "size": [
+    896,
+    1152
+   ],
+   "face": [
+    245,
+    207,
+    537,
+    535
+   ],
+   "eyes": [
+    [
+     305.0,
+     355.0
+    ],
+    [
+     424.5,
+     318.0
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0044
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for rei"
+   },
+   "framing": {
+    "headroom": 0.008,
+    "zoom": 0.89,
+    "top": 0.147,
+    "bottom_short": 0.0,
+    "hair_top_game": 124,
+    "hair_top_ref": 137,
+    "crop": [
+     -65.8,
+     -189.8,
+     942.2,
+     1104.6
+    ],
+    "eyes": -0.003,
+    "tilt": 12.0,
+    "status": "fail"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.038,
+    "ssim": 0.177
+   },
+   "status": "fail"
+  },
+  {
+   "path": "art/candidates/portraits/rei-portrait-1/rei-t-2101.webp",
+   "kind": "render",
+   "size": [
+    896,
+    1152
+   ],
+   "face": [
+    261,
+    187,
+    516,
+    480
+   ],
+   "eyes": [
+    [
+     319.0,
+     328.5
+    ],
+    [
+     419.0,
+     282.0
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for rei"
+   },
+   "framing": {
+    "headroom": 0.0,
+    "zoom": 0.996,
+    "top": 0.145,
+    "bottom_short": 0.0,
+    "hair_top_game": 117,
+    "hair_top_ref": 137,
+    "crop": [
+     -19.6,
+     -167.5,
+     880.9,
+     988.8
+    ],
+    "eyes": 0.006,
+    "tilt": 4.2,
+    "status": "fail"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.043,
+    "ssim": 0.192
+   },
+   "status": "fail"
+  },
+  {
+   "path": "art/candidates/portraits/rei-portrait-1/rei-t-2102.webp",
+   "kind": "render",
+   "size": [
+    896,
+    1152
+   ],
+   "face": [
+    268,
+    190,
+    545,
+    490
+   ],
+   "eyes": [
+    [
+     329.5,
+     323.0
+    ],
+    [
+     445.5,
+     287.0
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for rei"
+   },
+   "framing": {
+    "headroom": 0.003,
+    "zoom": 0.973,
+    "top": 0.146,
+    "bottom_short": 0.0,
+    "hair_top_game": 120,
+    "hair_top_ref": 137,
+    "crop": [
+     -11.3,
+     -172.9,
+     910.6,
+     1011.0
+    ],
+    "eyes": -0.014,
+    "tilt": 11.9,
+    "status": "fail"
+   },
+   "drift": {
+    "status": "warn",
+    "ccip": 0.064,
+    "ssim": 0.151
+   },
+   "status": "fail"
+  },
+  {
+   "path": "art/candidates/portraits/rei-portrait-1/rei-t-2103.webp",
+   "kind": "render",
+   "size": [
+    896,
+    1152
+   ],
+   "face": [
+    255,
+    182,
+    543,
+    505
+   ],
+   "eyes": [
+    [
+     323.5,
+     331.5
+    ],
+    [
+     433.0,
+     288.0
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for rei"
+   },
+   "framing": {
+    "headroom": 0.0,
+    "zoom": 0.904,
+    "top": 0.164,
+    "bottom_short": 0.0,
+    "hair_top_game": 132,
+    "hair_top_ref": 137,
+    "crop": [
+     -50.8,
+     -208.8,
+     941.8,
+     1065.9
+    ],
+    "eyes": -0.002,
+    "tilt": 7.5,
+    "status": "fail"
+   },
+   "drift": {
+    "status": "fail",
+    "ccip": 0.14,
+    "ssim": 0.118
+   },
+   "status": "fail"
+  },
+  {
+   "path": "art/candidates/portraits/rei-portrait-1/rei-t-2104.webp",
+   "kind": "render",
+   "size": [
+    896,
+    1152
+   ],
+   "face": [
+    269,
+    201,
+    546,
+    502
+   ],
+   "eyes": [
+    [
+     330.5,
+     341.0
+    ],
+    [
+     446.0,
+     301.0
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for rei"
+   },
+   "framing": {
+    "headroom": 0.0,
+    "zoom": 0.97,
+    "top": 0.137,
+    "bottom_short": 0.0,
+    "hair_top_game": 111,
+    "hair_top_ref": 137,
+    "crop": [
+     -11.7,
+     -163.1,
+     913.3,
+     1024.7
+    ],
+    "eyes": 0.001,
+    "tilt": 10.1,
+    "status": "fail"
+   },
+   "drift": {
+    "status": "warn",
+    "ccip": 0.067,
+    "ssim": 0.142
+   },
+   "status": "fail"
+  },
+  {
+   "path": "art/candidates/portraits/rei-portrait-1/rei-t-2105.webp",
+   "kind": "render",
+   "size": [
+    896,
+    1152
+   ],
+   "face": [
+    270,
+    208,
+    578,
+    528
+   ],
+   "eyes": [
+    [
+     344.5,
+     359.5
+    ],
+    [
+     448.5,
+     322.5
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0005
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for rei"
+   },
+   "framing": {
+    "headroom": 0.0,
+    "zoom": 0.912,
+    "top": 0.142,
+    "bottom_short": 0.0,
+    "hair_top_game": 114,
+    "hair_top_ref": 137,
+    "crop": [
+     -21.7,
+     -179.1,
+     961.8,
+     1083.7
+    ],
+    "eyes": 0.018,
+    "tilt": 9.6,
+    "status": "fail"
+   },
+   "drift": {
+    "status": "fail",
+    "ccip": 0.137,
+    "ssim": 0.178
+   },
+   "status": "fail"
+  },
+  {
+   "path": "art/candidates/portraits/rei-portrait-1/rei-i50-2101.webp",
+   "kind": "render",
+   "size": [
+    896,
+    1152
+   ],
+   "face": [
+    268,
+    349,
+    544,
+    643
+   ],
+   "eyes": [
+    [
+     327.0,
+     497.0
+    ],
+    [
+     430.5,
+     441.0
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for rei"
+   },
+   "framing": {
+    "headroom": 0.165,
+    "zoom": 0.993,
+    "top": 0.006,
+    "bottom_short": 0.001,
+    "hair_top_game": 137,
+    "hair_top_ref": 137,
+    "crop": [
+     -3.4,
+     -6.7,
+     900.1,
+     1153.6
+    ],
+    "eyes": 0.011,
+    "tilt": 0.7,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.018,
+    "ssim": 0.472
+   },
+   "status": "pass"
+  },
+  {
+   "path": "art/candidates/portraits/rei-portrait-1/rei-i50-2102.webp",
+   "kind": "render",
+   "size": [
+    896,
+    1152
+   ],
+   "face": [
+    266,
+    352,
+    539,
+    644
+   ],
+   "eyes": [
+    [
+     325.5,
+     498.0
+    ],
+    [
+     431.5,
+     440.0
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for rei"
+   },
+   "framing": {
+    "headroom": 0.163,
+    "zoom": 1.0,
+    "top": 0.001,
+    "bottom_short": 0.0,
+    "hair_top_game": 132,
+    "hair_top_ref": 137,
+    "crop": [
+     -4.2,
+     -1.2,
+     893.2,
+     1151.1
+    ],
+    "eyes": 0.003,
+    "tilt": 0.5,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.017,
+    "ssim": 0.355
+   },
+   "status": "pass"
+  },
+  {
+   "path": "art/candidates/portraits/rei-portrait-1/rei-i65-2101.webp",
+   "kind": "render",
+   "size": [
+    896,
+    1152
+   ],
+   "face": [
+    264,
+    340,
+    544,
+    644
+   ],
+   "eyes": [
+    [
+     325.5,
+     496.5
+    ],
+    [
+     429.5,
+     436.0
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0001
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for rei"
+   },
+   "framing": {
+    "headroom": 0.161,
+    "zoom": 0.96,
+    "top": 0.023,
+    "bottom_short": 0.017,
+    "hair_top_game": 144,
+    "hair_top_ref": 137,
+    "crop": [
+     -19.4,
+     -27.8,
+     914.9,
+     1171.9
+    ],
+    "eyes": 0.018,
+    "tilt": -1.0,
+    "status": "warn"
+   },
+   "drift": {
+    "status": "warn",
+    "ccip": 0.08,
+    "ssim": 0.259
+   },
+   "status": "warn"
+  },
+  {
+   "path": "art/candidates/portraits/rei-portrait-1/rei-i65-2102.webp",
+   "kind": "render",
+   "size": [
+    896,
+    1152
+   ],
+   "face": [
+    268,
+    356,
+    533,
+    640
+   ],
+   "eyes": [
+    [
+     324.5,
+     499.0
+    ],
+    [
+     428.0,
+     442.5
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for rei"
+   },
+   "framing": {
+    "headroom": 0.159,
+    "zoom": 1.028,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 123,
+    "hair_top_ref": 137,
+    "crop": [
+     5.0,
+     12.4,
+     877.8,
+     1133.2
+    ],
+    "eyes": 0.006,
+    "tilt": 0.5,
+    "status": "pass"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.042,
+    "ssim": 0.368
+   },
+   "status": "pass"
+  },
+  {
+   "path": "art/candidates/portraits/rei-portrait-1/rei-rf-202.webp",
+   "kind": "render",
+   "size": [
+    1096,
+    1408
+   ],
+   "face": [
+    344,
+    462,
+    638,
+    791
+   ],
+   "eyes": [
+    [
+     405.5,
+     612.0
+    ],
+    [
+     524.5,
+     574.5
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0039
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for rei"
+   },
+   "framing": {
+    "headroom": 0.188,
+    "zoom": 1.084,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 124,
+    "hair_top_ref": 137,
+    "crop": [
+     32.8,
+     64.0,
+     1043.9,
+     1362.3
+    ],
+    "eyes": 0.001,
+    "tilt": 11.7,
+    "status": "warn"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.039,
+    "ssim": 0.175
+   },
+   "status": "warn"
+  },
+  {
+   "path": "art/candidates/portraits/rei-portrait-1/rei-rf-2101.webp",
+   "kind": "render",
+   "size": [
+    1096,
+    1408
+   ],
+   "face": [
+    359,
+    442,
+    621,
+    737
+   ],
+   "eyes": [
+    [
+     418.5,
+     584.5
+    ],
+    [
+     520.5,
+     537.0
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for rei"
+   },
+   "framing": {
+    "headroom": 0.175,
+    "zoom": 1.209,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 112,
+    "hair_top_ref": 137,
+    "crop": [
+     79.2,
+     85.1,
+     985.7,
+     1249.3
+    ],
+    "eyes": 0.005,
+    "tilt": 4.2,
+    "status": "warn"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.042,
+    "ssim": 0.216
+   },
+   "status": "warn"
+  },
+  {
+   "path": "art/candidates/portraits/rei-portrait-1/rei-rf-2102.webp",
+   "kind": "render",
+   "size": [
+    1096,
+    1408
+   ],
+   "face": [
+    365,
+    443,
+    647,
+    748
+   ],
+   "eyes": [
+    [
+     430.0,
+     579.0
+    ],
+    [
+     548.0,
+     543.0
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for rei"
+   },
+   "framing": {
+    "headroom": 0.183,
+    "zoom": 1.17,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 122,
+    "hair_top_ref": 137,
+    "crop": [
+     81.2,
+     74.0,
+     1018.5,
+     1277.7
+    ],
+    "eyes": -0.011,
+    "tilt": 12.2,
+    "status": "warn"
+   },
+   "drift": {
+    "status": "warn",
+    "ccip": 0.066,
+    "ssim": 0.164
+   },
+   "status": "warn"
+  },
+  {
+   "path": "art/candidates/portraits/rei-portrait-1/rei-rf-2103.webp",
+   "kind": "render",
+   "size": [
+    1096,
+    1408
+   ],
+   "face": [
+    352,
+    438,
+    648,
+    765
+   ],
+   "eyes": [
+    [
+     423.0,
+     587.5
+    ],
+    [
+     534.0,
+     543.5
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for rei"
+   },
+   "framing": {
+    "headroom": 0.156,
+    "zoom": 1.091,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 111,
+    "hair_top_ref": 137,
+    "crop": [
+     44.6,
+     42.4,
+     1049.5,
+     1332.9
+    ],
+    "eyes": -0.008,
+    "tilt": 7.5,
+    "status": "warn"
+   },
+   "drift": {
+    "status": "fail",
+    "ccip": 0.15,
+    "ssim": 0.133
+   },
+   "status": "fail"
+  },
+  {
+   "path": "art/candidates/portraits/rei-portrait-1/rei-rf-2104.webp",
+   "kind": "render",
+   "size": [
+    1096,
+    1408
+   ],
+   "face": [
+    367,
+    453,
+    649,
+    762
+   ],
+   "eyes": [
+    [
+     430.5,
+     597.5
+    ],
+    [
+     546.5,
+     557.5
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for rei"
+   },
+   "framing": {
+    "headroom": 0.169,
+    "zoom": 1.155,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 105,
+    "hair_top_ref": 137,
+    "crop": [
+     77.7,
+     79.2,
+     1027.3,
+     1298.6
+    ],
+    "eyes": 0.005,
+    "tilt": 10.1,
+    "status": "warn"
+   },
+   "drift": {
+    "status": "warn",
+    "ccip": 0.061,
+    "ssim": 0.131
+   },
+   "status": "warn"
+  },
+  {
+   "path": "art/candidates/portraits/rei-portrait-1/rei-rf-2105.webp",
+   "kind": "render",
+   "size": [
+    1096,
+    1408
+   ],
+   "face": [
+    368,
+    462,
+    681,
+    786
+   ],
+   "eyes": [
+    [
+     443.5,
+     615.5
+    ],
+    [
+     562.5,
+     576.0
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0007
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for rei"
+   },
+   "framing": {
+    "headroom": 0.168,
+    "zoom": 1.101,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 105,
+    "hair_top_ref": 137,
+    "crop": [
+     73.3,
+     70.0,
+     1069.0,
+     1348.7
+    ],
+    "eyes": 0.015,
+    "tilt": 10.8,
+    "status": "warn"
+   },
+   "drift": {
+    "status": "fail",
+    "ccip": 0.137,
+    "ssim": 0.173
+   },
+   "status": "fail"
+  }
+ ]
+}
