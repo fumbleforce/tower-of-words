@@ -1,45 +1,49 @@
 # Day 2 outline
 
-Proposal for Claude's cold read; no dialogue or implementation yet. Request: C-0357, work #185.
+Revised after C-0366 and Claude's [cold read](day2-outline-coldread.md), work #189. Outline only.
 
 ## What the day is about
 
-Eric has to sign off the fault he caused yesterday. By evening, his colleagues have arranged a small welcome party by the sea. One service call, then an evening with B2; the walk to the party opens up the island.
+Eric has to sign off yesterday's fault. His answer reaches Emi, who has finally obtained money for parts. By evening, B2 has arranged a small welcome party for him. Optional exploration stays open around the job and party.
 
-Start in room 203. Follow the live [day-1 ending](../docs/game/stories/mio-notices.md) and [Emi's promise](../docs/game/stories/emi-budget.md). [day2-replace.md](day2-replace.md) is useful for avoiding repeats, but its Rei message, copy errand and older flags are obsolete. Neither lunch branch is required.
-
-## Japanese: saying what Eric wants
-
-One new pattern: **～たい, wanting to do something yourself**. Teach 食べたい (*tabetai*, “I want to eat”) as a useful chunk, with one short English explanation of the ending.
-
-Adapt the self-want part of the [wants prototype](../game3d/minigames/README.md) to the party food. First Eric chooses in English what he would like. Mori offers it; Mio supplies the Japanese, with English and romaji still visible. One guided turn lets Eric say *tabetai* while pointing to it. Further practice is optional. No new nouns, particles, timer or score gate; this is a casual statement of appetite, not a polite restaurant order.
-
-Keep ～てほしい for a later day. Giving/receiving adds viewpoint changes and several verbs; comparing adds new descriptions and sentence frames. Save those activities for later. The station reuses known words with prompts visible.
+Follow the live [day-1 ending](../docs/game/stories/mio-notices.md) and [Emi's promise](../docs/game/stories/emi-budget.md). The older ending and flags in [day2-replace.md](day2-replace.md) are obsolete. Neither lunch branch is required.
 
 ## Scenes and places
 
-### 1. A proper chat — B2 office (`office`)
+### 1. The morning job: room 203 to Honsha platform (`dorms`, `train`)
 
-Eric walks from the dorm to work. Emi asks what he can actually maintain; the train-door ticket is already on his list. Let him answer confidently or admit that yesterday surprised him too. She needs a diagnosis before she orders a replacement sensor. Kenji mentions the welcome food after work, with a clear meeting place at the arcade's east mouth. End the scene with the station as the immediate goal.
+A brief message from Mio reminds Eric about the station before he leaves his room. He walks there before going to B2. Mio meets him if `lunch_mio || mio_warm >= 2`, matching yesterday's offer. In person or by message, she explains that Emi can order a sensor once he confirms the fault. His card works; passing the guard costs no dialogue step.
 
-### 2. Checking the sensor — Honsha platform (`train`, platform state)
+The carriage is empty between runs. Two required actions: run the door check, then submit the ticket. The check cycles the doors and shows the sensor passing. The ticket offers “Confirm the sensor fault; order a replacement” or “Sensor passes; no replacement needed.” The first preserves Mio's explanation and spends the parts money; the second contradicts it. Emi reads this choice in scene 2. Neither answer reveals Eric's power.
 
-A stationary, empty carriage is available for the maintenance check. The doors cycle normally and the sensor test passes. With Eric's prompted 待って (*matte*, “wait”), they halt halfway even though the beam is clear. Show stopped doors, a clear sensor and a motor still trying. Prompted 開けて (*akete*, “open”) opens them again; the carriage remains stationary throughout.
+“Try saying it again” is optional after the check. 待って (*matte*, “wait”) holds the doors against the running motor; 動いて (*ugoite*, “work, move”) releases them, both prompted and already learned. The experiment finishes before ticket submission; the carriage stays stationary. Mio sees him try or decline. Alone, Eric is testing in a staffed station. The power's origin stays unexplained.
 
-The player chooses the ticket wording: “Couldn't reproduce it with the controls” or “Works normally; keep an eye on it.” Both are honest, both avoid buying a useless sensor, and the job ends here. Mio accompanies him only on the route where she offered yesterday; otherwise she handles the result by phone. End with the practical result; the power’s origin stays unexplained.
+### 2. A proper chat: B2 (`office`)
 
-### 3. Welcome food — arcade to seafront (`shotengai`)
+Eric brings Emi his result. She orders the replacement he recommended, or keeps the money for another repair: one conditional response.
 
-After work, Kenji meets Eric at the stated entrance and walks with him down to the promenade. Use the shop signs and their English to make this a place he can find again, with no compulsory stops.
+She asks what else he can maintain. He answers about the unfamiliar old equipment, keeping the magic secret. Kenji invites him for food after work. Emi has another upstairs meeting and tells them to go ahead. Sitting at Eric's desk advances to after work. Kenji goes ahead to help collect the food and tells Eric to meet him by the izakaya's blue curtain, with the goal pin marking it.
 
-Mori and Mio already have the food at the promenade benches. Four people including Eric; the party is ready when he arrives. Mori has bought a mixture because he doesn't know what Eric eats. This creates the small *tabetai* activity above. Keep the conversation around choosing and sharing the food: Mori quietly making room, Kenji eating before everyone has chosen, Mio finally away from the server room. Eric can talk about home or ask what they do here after work. One short exchange follows his choice.
+### 3. Welcome food: arcade and promenade (`shotengai`)
 
-The player ends the evening when ready and walks back to room 203.
+Kenji walks ahead from the meeting point; Eric can follow or explore, with no escort timer. Mori and Mio have the food ready at the party spot described in the [place plan](../docs/game/places.md#day-2-party-plan-not-built). Mori chose the sea over a noisy room. Mio came because he asked her, and she has brought some of her mother's pickles. These reasons emerge briefly while they settle, without arrival speeches.
 
-## Exploration and build scope
+Mori worries that the takeaway is a poor welcome. He opens the boxes for Eric to choose; Kenji is already reaching for one. Eric taking what he actually wants resolves Mori's uncertainty without a speech about belonging. Keep the exchange around the food and what each person does with it. Kenji models the Japanese below; Mio gets to eat. Mori's speech uses clear audio and English subtitles, not the muffled overheard mode.
 
-One optional encounter at the existing `shotengai_back_alley` nook: before the party, Mori is resting beside his shopping bag on the way to the benches. Eric can pause for company; neither needs to fill the silence. No task or reward. If skipped, Mori is simply at the party.
+Eric can talk about home or ask what they do after work. With `lunch_mori`, Mori can pick up their existing Lillehammer conversation; otherwise it needs its own introduction. With `lunch_mio`, Mio greets Eric more easily. These are short line variations. The party remains four people including Eric.
 
-Use the existing platform, B2, arcade and promenade; shop interiors stay outside this outline. Build needs: the door test, food props and the reduced wants activity, tested alone before integration. Check four-person staging at phone size. Follow [VOICE.md](../game3d/story/VOICE.md); Mori speaks Japanese, with English carrying the player through it.
+“Head home” on Eric's seat ends the gathering with a brief goodnight. Exploration stays open; the goal points to room 203. Entering his room saves and ends day 2 with the existing summary format, labelled for the completed day.
 
-Checked against [GUIDE](../GUIDE.md): learning pace, setting, voices and story/screen agreement; and the contest feedback on too many steps and people. Cold reader: does the service call feel repetitive? Does the party give these people enough room beyond teaching? Cut before adding another scene.
+## Japanese: one new pattern
+
+Teach **～たい, wanting to do something yourself**, through 食べたい (*tabetai*, “I want to eat”). Adapt only this part of the [wants prototype](../game3d/minigames/README.md). Kenji models it naturally as the boxes open and explains the meaning in his brief English. Eric taps the food he wants, then types *tabetai* once as he takes it: two player actions. English, romaji and replayable pronunciation stay visible. No new nouns, particles, timer or score gate. Further practice is optional.
+
+Keep ～てほしい, giving/receiving and comparing for later: each adds another distinction. Say treatment: propose the existing `phrase` kind, with contextual replies from people and no magical effect on machines. Claude checks that routing before integration.
+
+## Optional walk home and build handoff
+
+After the party, Mori pauses at `shotengai_back_alley` with the packed leftovers. Eric can keep him company briefly. He appears here only after the party ends. No task or reward. Every built outdoor district should remain reachable on the walk home; returning to room 203 is always available.
+
+Claude owns the access and staging work from cold-read points 15–19: morning dorm exit, return trips through the security room to the empty stationary carriage, day-2 schedules and save state, evening trip rules, the visible door test, party seats/camera and the room's end action. The sensor display and motor sound require approved assets. Test the reduced activity alone, then stage the party at phone size before scene integration.
+
+Follow [VOICE.md](../game3d/story/VOICE.md) and [GUIDE](../GUIDE.md): simple actions get clear moments, with specific lines in character.
