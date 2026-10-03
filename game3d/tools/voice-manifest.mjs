@@ -41,14 +41,31 @@ function walk(list) {
 for (const [id, w] of Object.entries(WORDS)) if (w.voice) out.set('word-' + id, { key: 'word-' + id, speaker: 'mio', text: w.ja + '。', lang: 'ja', overheard: false, words: [[id, w.ja]], clear: [], emo: 'slow', slow: true });
 // and Eric saying it (eric-<word>), for the words he says; a word only heard (外人) replays Mio's word clip instead
 for (const [id, w] of Object.entries(WORDS)) if (w.voice && w.voice !== 'word-' + id) out.set(w.voice, { key: w.voice, speaker: 'eric', text: w.ja + '。', lang: 'ja', overheard: false, words: [], clear: [] });
-for (const n of STORY_FILES) {
-  const f = path.join(root, 'story', n + '.js'); if (!fs.existsSync(f)) continue;
+// and each later day's own set (js/days.js): day 2 is story/day2/. --day N checks only that day's lines (and the words)
+const { DAYS } = await import(pathToFileURL(path.join(root, 'js/days.js')).href);
+const dayArg = process.argv.indexOf('--day'), onlyDay = dayArg > 0 ? +process.argv[dayArg + 1] : 0;
+const sets = Object.entries(DAYS).map(([day, d]) => [+day, d.dir, d.files || STORY_FILES]);
+const dayOfKey = new Map();
+for (const [day, dir, files] of sets) for (const n of files) {
+  const f = path.join(root, 'story', dir + n + '.js'); if (!fs.existsSync(f)) continue;
   const st = (await import(pathToFileURL(f).href + '?' + Date.now())).default;
+  const had = new Set(out.keys());
   for (const [id, sp] of Object.entries(st.speakers || {})) if (sp && sp.phone) PHONE.add(id);
   if (n === 'transitions') for (const v of Object.values(st)) { walk(v.walk); walk(v.ride); walk(v.arrive); }
   else for (const nodes of Object.values(st.nodes || {})) walk(nodes);
+  for (const k of out.keys()) if (!had.has(k) && !dayOfKey.has(k)) dayOfKey.set(k, day);
 }
-const list = [...out.values()];
+// day 2's new phrases (story/day2/words.js), until their clips exist and lang.js gives them a voice field: Eric saying
+// each, and Mio's slow replay of it (the shell's word-<id>)
+const { WORDS: DAY2_WORDS } = await import(pathToFileURL(path.join(root, 'story/day2/words.js')).href);
+for (const [id, w] of Object.entries(DAY2_WORDS)) {
+  if (WORDS[id]?.voice) continue;
+  out.set('eric-' + id, { key: 'eric-' + id, speaker: 'eric', text: w.ja + '。', lang: 'ja', overheard: false, words: [], clear: [] });
+  out.set('word-' + id, { key: 'word-' + id, speaker: 'mio', text: w.ja + '。', lang: 'ja', overheard: false, words: [[id, w.ja]], clear: [], emo: 'slow', slow: true });
+  dayOfKey.set('eric-' + id, 2);
+  dayOfKey.set('word-' + id, 2);
+}
+const list = [...out.values()].filter((o) => !onlyDay || !dayOfKey.has(o.key) || dayOfKey.get(o.key) === onlyDay);
 // --check: don't write; exit 1 if any line has no clip in audio/ or carries escape leftovers
 if (process.argv.includes('--check')) {
   const bad = [];

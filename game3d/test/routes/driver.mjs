@@ -6,11 +6,14 @@ import { scopedRoute } from '../../../tools/bible/check-scope.mjs';
 import train from '../../story/train.js';
 import gate from '../../story/gate.js';
 import office from '../../story/office.js';
+import { STORIES as day2 } from '../../story/day2/index.js';
 export const stories = { train, gate, office };
+// each day's story set; a seed with day: 2 checkpoints into day 2's (story/day2/)
+const days = { 1: stories, 2: day2 };
 
-export function choiceInventory() {
+export function choiceInventory(day = 1) {
   const found = [];
-  for (const [place, story] of Object.entries(stories)) for (const [node, steps] of Object.entries(story.nodes)) {
+  for (const [place, story] of Object.entries(days[day])) for (const [node, steps] of Object.entries(story.nodes)) {
     const walk = (list, path = []) => list.forEach((step, index) => {
       const at = [...path, index];
       step?.choice?.forEach((option, i) => found.push({ id: `${place}:${node}:${at.join('.')}:${i}`, text: option.text }));
@@ -22,18 +25,18 @@ export function choiceInventory() {
 }
 
 function seedSave(seed) {
-  const place = seed.place, period = seed.period || 'morning';
+  const place = seed.place, period = seed.period || 'morning', day = seed.day || 1;
   const known = seed.known || [];
   const flags = { place, period, ...seed.flags };
-  const execution = seed.node ? { v: 3, place, frames: [newFrame(seed.node, stories[place].nodes[seed.node])] } : null;
-  return { v: 1, day: 1, place, period, flags, known, seen: [], found: [], taught: {}, met: [],
+  const execution = seed.node ? { v: 3, place, frames: [newFrame(seed.node, days[day][place].nodes[seed.node])] } : null;
+  return { v: 1, day, place, period, flags, known, seen: [], found: seed.found || [], taught: {}, met: [],
     inv: seed.inv || [], yen: seed.yen ?? 1000, bonds: {},
     ui: { goal: 'Continue the branch under test.', sideGoal: '' },
     runner: { onceDone: seed.onceDone || [], execution }, pendingStart: null,
     ...(seed.world ? { world: seed.world } : {}) };
 }
 
-async function installDriver(page, route, resume = false) {
+async function installDriver(page, route, resume = false, made = 0) {
   await page.evaluate(async ({ choices, pauseAt, resume }) => {
     const g = window.__game;
     const { ui, setMuted } = await import(new URL('js/ui.js', location.href));
@@ -79,7 +82,7 @@ async function installDriver(page, route, resume = false) {
     };
     // Exercise the existing fast-forward control; no hooks, effects or runner branches are mocked.
     state.timer = setInterval(() => g.setHurry(true), 30);
-  }, { choices: route.choices || [], pauseAt: route.resumeAt, resume });
+  }, { choices: (route.choices || []).slice(made), pauseAt: route.resumeAt, resume }); // (made: picked before a reload)
 }
 
 async function continueSave(page) {
@@ -170,7 +173,7 @@ export async function runRoute(browser, route, { base, viewport }) {
       await waitForGame(page, 45000, () => page.reload(), 'title');
       assert.deepEqual(await page.evaluate(() => JSON.parse(localStorage.getItem('amakawa-day1-save'))), checkpoint,
         'Title must preserve the actual mid-day checkpoint');
-      await installDriver(page, route, true);
+      await installDriver(page, route, true, priorChoices.length);
       await continueSave(page);
       await settled(page, route.seed.place);
       const after = await page.evaluate(() => ({ inv: window.__game.sim.inv, yen: window.__game.sim.yen, nodes: window.__branch.nodes }));
@@ -181,8 +184,10 @@ export async function runRoute(browser, route, { base, viewport }) {
     for (const step of route.actions || []) await action(page, step, step.settleAt || route.seed.place);
     if (route.expect.ended) {
       await page.locator('#end.in .again').waitFor({ state: 'visible', timeout: 5000 });
-      assert.equal(await page.locator('#end h2').textContent(), 'Day one');
-      assert.match(await page.locator('#end .ticket').textContent(), /Repair request #2/i);
+      if ((route.seed.day || 1) === 1) {
+        assert.equal(await page.locator('#end h2').textContent(), 'Day one');
+        assert.match(await page.locator('#end .ticket').textContent(), /Repair request #2/i);
+      } else assert.equal(await page.locator('#end h2').textContent(), 'Day two');
       assert.equal(await page.locator('#end .again').textContent(), 'Back to title');
     }
     const state = await page.evaluate(async () => {

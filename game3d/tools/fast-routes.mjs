@@ -3,10 +3,14 @@ import { spawn } from 'node:child_process';
 import fs from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { withBrowserJob } from '../../tools/lib/browser-job.mjs';
-import routes from '../test/routes/index.mjs';
+import day1 from '../test/routes/index.mjs';
+import day2 from '../test/routes/day2.mjs';
 import { choiceInventory, runRoute } from '../test/routes/driver.mjs';
 
-const args = process.argv.slice(2), worker = args[0] === '--worker';
+// --day 2: day 2's routes and its own choice inventory (test/routes/day2.mjs); day 1's otherwise
+const argv = process.argv.slice(2), dayAt = argv.indexOf('--day'), day = dayAt >= 0 ? +argv[dayAt + 1] : 1;
+const args = dayAt >= 0 ? argv.filter((_, i) => i !== dayAt && i !== dayAt + 1) : argv, worker = args[0] === '--worker';
+const routes = day === 2 ? day2 : day1;
 const names = new Set(routes.map(route => route.id));
 if (names.size !== routes.length) throw new Error('Duplicate route ID');
 if (args[0] === '--list') {
@@ -15,7 +19,7 @@ if (args[0] === '--list') {
   const results = [], assigned = args.slice(1).map(id => routes.find(route => route.id === id));
   if (assigned.some(route => !route)) throw new Error('Unknown worker route');
   try {
-    await withBrowserJob('day1-branches', async browser => {
+    await withBrowserJob(`day${day}-branches`, async browser => {
       for (const route of assigned) results.push(await runRoute(browser, route, {
         base: `http://127.0.0.1:${process.env.PORT || 8771}/${process.env.BASE || 'game3d'}`,
         viewport: { width: +(process.env.WIDTH || 390), height: +(process.env.HEIGHT || 844) },
@@ -33,7 +37,7 @@ if (args[0] === '--list') {
   selected.forEach((route, index) => groups[index % groups.length].push(route.id));
   const runWorker = group => new Promise(resolve => {
     let output = '';
-    const child = spawn(process.execPath, [fileURLToPath(import.meta.url), '--worker', ...group], { env: process.env, stdio: ['ignore', 'pipe', 'pipe'] });
+    const child = spawn(process.execPath, [fileURLToPath(import.meta.url), '--worker', ...group, '--day', String(day)], { env: process.env, stdio: ['ignore', 'pipe', 'pipe'] });
     const timer = setTimeout(() => child.kill('SIGTERM'), 290000);
     child.stdout.on('data', data => { output += data; });
     child.stderr.on('data', data => { output += data; });
@@ -52,7 +56,7 @@ if (args[0] === '--list') {
   });
   const results = (await Promise.all(groups.map(runWorker))).flat();
   const coverage = new Set(results.filter(row => row.pass).flatMap(row => row.choices || []));
-  const inventory = choiceInventory(), missing = inventory.filter(choice => !coverage.has(choice.id));
+  const inventory = choiceInventory(day), missing = inventory.filter(choice => !coverage.has(choice.id));
   const passed = results.filter(row => row.pass).length;
   for (const row of results.sort((a, b) => a.id.localeCompare(b.id))) {
     console.log(`${row.pass ? 'PASS' : 'FAIL'} ${row.id.padEnd(30)} ${row.seconds?.toFixed(1) || '-'}s${row.error ? '  ' + row.error.split('\n')[0] : ''}`);
