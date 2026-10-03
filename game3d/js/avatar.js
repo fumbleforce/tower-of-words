@@ -177,7 +177,8 @@ export function makeAvatar() {
   let state = 'idle',
     ph = 0,
     amt = 0,
-    t = 0;
+    t = 0,
+    gv = null; // setGait
   const a = {
     root,
     rig,
@@ -197,6 +198,7 @@ export function makeAvatar() {
     get state() {
       return state;
     },
+    setGait: (v) => (gv = v),
     update(dt) {
       t += dt;
       if (state === 'sit') {
@@ -204,7 +206,7 @@ export function makeAvatar() {
         return;
       }
       amt += ((state === 'walk' ? 1 : 0) - amt) * Math.min(1, dt * 10);
-      if (state === 'walk') ph += dt * 9.5;
+      if (state === 'walk') ph += gv === null ? dt * 9.5 : (gv * dt) / codeStride(rig, root);
       walkPose(rig, ph, amt);
       if (amt < 0.02) {
         rig.hips.position.y = HIP;
@@ -236,7 +238,7 @@ export function makeAvatar() {
 // used with a Lambert material (as for Mio). Colour tweak only: the texture is pulled a little toward the muted
 // palette (slightly less saturated, a touch cooler). The mesh, face and body are untouched.
 import { GLTFLoader } from '../vendor/loaders/GLTFLoader.js';
-import { makeGait } from './movement/gait.js';
+import { meshyGait, codeStride, clipAction, clipActions } from './movement/gait.js';
 import { calmSitTime, V as ver, poseLayer, addPhone, API_PHONE_BONES, CDIR } from './mio.js';
 import { loadRelaxedIdle } from './relaxed-idle.js';
 const EDIR = new URL('../assets/eric/', import.meta.url).href;
@@ -297,17 +299,17 @@ export function meshyFrom(id, [walk, run, idle, sitG, tex, phoneJson, ...gj], { 
   holder.add(model);
   root.add(holder);
   const mixer = new THREE.AnimationMixer(model);
-  const actions = {
-    walk: mixer.clipAction(walk.animations[0]),
-    run: mixer.clipAction(run.animations[0]),
-    idle: mixer.clipAction(idle),
-    sit: mixer.clipAction(sitG.animations[0]),
-  };
+  const actions = clipActions(mixer, {
+    walk: walk.animations[0],
+    run: run.animations[0],
+    idle,
+    sit: sitG.animations[0],
+  });
   let hips = null;
   model.traverse((o) => {
     if (!hips && o.isBone && /hips/i.test(o.name)) hips = o;
   });
-  const hipRest = hips.position.clone();
+  const gait = meshyGait(actions, stride, { mixer, model, root, hips, scale: holder.scale.x, setState });
   const pose = { bow: 0 };
   let spine = null,
     spine2 = null;
@@ -321,7 +323,7 @@ export function meshyFrom(id, [walk, run, idle, sitG, tex, phoneJson, ...gj], { 
   const gact = {};
   GESTURES.forEach((g, i) => {
     if (gj[i]) {
-      const c = mixer.clipAction(THREE.AnimationClip.parse(gj[i]));
+      const c = clipAction(mixer, THREE.AnimationClip.parse(gj[i]));
       c.setLoop(THREE.LoopOnce, 1);
       c.clampWhenFinished = true;
       gact[g] = c;
@@ -389,7 +391,6 @@ export function meshyFrom(id, [walk, run, idle, sitG, tex, phoneJson, ...gj], { 
       gesturing = { a: g, ok, out: false };
     });
   }
-  const gait = makeGait(actions, stride || { walkV: 0.44, runV: 1.1, runOff: 0.03 }); // Eric's strides by default
   function update(dt, speed = 1) {
     gait.step(dt, curName, speed);
     restoreBones();
@@ -411,10 +412,7 @@ export function meshyFrom(id, [walk, run, idle, sitG, tex, phoneJson, ...gj], { 
       }, 380);
     }
     snapBones();
-    if (curName !== 'sit') {
-      hips.position.x = hipRest.x;
-      hips.position.z = hipRest.z;
-    }
+    if (curName !== 'sit') gait.pin();
     if (curName === 'sit') {
       breath = Math.sin(bt * 2.0) * 0.004;
       hips.position.y += breath;
@@ -458,6 +456,7 @@ export function meshyFrom(id, [walk, run, idle, sitG, tex, phoneJson, ...gj], { 
     meshy: true,
     setState,
     setGait: gait.set,
+    strides: gait.strides,
     get state() {
       return curName;
     },

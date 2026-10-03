@@ -65,6 +65,7 @@ try {
     run = await page.evaluate(() => ({
       ...window.__test, ended: !!window.__ended, place: window.__game.place?.name,
       goal: window.__game.ui.goalText, voices: window.__voiceLog, move: window.__moveCheck,
+      gait: window.__gaitCheck && { long: window.__gaitCheck.reports(4), short: window.__gaitCheck.reports(2).length, windows: window.__gaitCheck.windows },
     }));
     // per-place frame times, draw calls and triangles (js/perf/metrics.js); written to perf.json below
     try { perf = await page.evaluate(() => window.__perfReport?.() ?? null); }
@@ -95,6 +96,8 @@ fs.writeFileSync(path.join(output, 'result.json'), JSON.stringify({ viewport: [+
 console.log(result.verdict, `${W}x${H}`, `${((Date.now() - started) / 1000).toFixed(0)} s`, 'route:', run.route,
   'places:', (run.places || []).join(' > '), 'at:', run.place, '| goal:', run.goal);
 console.log(`movement: ${run.move?.steps || 0} steps, ${result.overlaps || 0} overlaps, ${result.spins || 0} spins`);
+console.log(`gait: ${run.gait?.windows || 0} windows, ${result.gait || 0} people stepping on the spot or sliding for 2.4 s or more (${run.gait?.short || 0} for 1.2 s or more: game3d/tools/gait-check.mjs looks closer)`);
+for (const line of run.gait?.long || []) console.log('  gait:', line);
 console.log('practice prompts passed via Say:', run.practice || 0);
 if (run.bondRoute || run.bonds) console.log('bonds:', run.bondRoute || '', JSON.stringify(run.bonds || {}).slice(0, 400));
 console.log('voices:', JSON.stringify(run.voices));

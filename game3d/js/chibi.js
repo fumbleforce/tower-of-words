@@ -4,7 +4,7 @@
 // Files in assets/characters/chibi-<id>/: model.glb and base.webp (tools/characters/chibi_game.py: about 20k
 // triangles and a 1024 px texture baked from the full model; -lo: 8k, for phones), and clips.json
 // (tools/characters/chibi-bake.mjs: the game's walk, run, idle, sit, phone pose and Eric's gestures carried over
-// onto Meshy's rig, the legs at 0.55 of the swing, half the walk's lean, and the gait speeds that go with them).
+// onto Meshy's rig, the legs at 0.85 of the swing, half the walk's lean, and the gait speeds that go with them).
 // The generic islanders (chibi-crowd.js, ids gen-<base>) also have mask.webp and regions.json (tools/characters/
 // chibi_regions.py): where their hair, top and bottom are, so each copy can wear its own colours (chibiFrom's tint).
 import * as THREE from 'three';

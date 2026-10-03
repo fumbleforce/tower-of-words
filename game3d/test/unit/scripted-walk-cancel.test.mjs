@@ -9,10 +9,13 @@ const ast = parse(source, { ecmaVersion: 'latest', sourceType: 'module', range: 
 const node = ast.body.find(n => n.type === 'ExportNamedDeclaration' && n.declaration?.id?.name === 'walkRig').declaration;
 function fixture() {
   const raf = [];
+  // the walk's feet (movement/gait.js): walking while it moves, idle when stopped
+  const stepGait = (rig, moved, dt) => rig.setState?.(moved / dt > 0.12 ? 'walk' : 'idle');
+  const stopGait = rig => [undefined, 'walk'].includes(rig.state) && rig.setState?.('idle');
   const walk = new Function('requestAnimationFrame', 'THREE', 'turnToward', 'angDiff', 'BRAKE', 'ACCEL', 'FRAME_MAX',
-    'STEP_MAX', 'stuck', `return ${source.slice(...node.range)}`)(fn => raf.push(fn),
+    'STEP_MAX', 'stuck', 'stepGait', 'stopGait', `return ${source.slice(...node.range)}`)(fn => raf.push(fn),
     { MathUtils: { clamp: (n, lo, hi) => Math.max(lo, Math.min(hi, n)) } }, (_from, to) => to,
-    (a, b) => a - b, 3, 3, 0.1, 0.05, () => false);
+    (a, b) => a - b, 3, 3, 0.1, 0.05, () => false, stepGait, stopGait);
   const rig = { root: { userData: {}, parent: {}, position: { x: 0, z: 0 }, rotation: { y: 0 }, scale: { x: 1 } },
     states: [], setState(value) { this.state = value; this.states.push(value); } };
   return { walk, rig, raf, game: { place: {}, timeScale: 1 } };

@@ -12,7 +12,7 @@ import path from 'node:path';
 import { withBrowserJob } from '../lib/browser-job.mjs';
 
 const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname), '../..');
-const STEP = 0.55;
+const STEP = 0.85;
 const LEAN = 0.5; // share of the walk's and run's lean kept in the hips, spine, neck and head
 const SOURCES = {
   eric: {

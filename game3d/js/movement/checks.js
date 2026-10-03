@@ -1,5 +1,6 @@
 import { bodies, angDiff } from './shared.js';
 import { isPassing, isHard, GIVE, awayFromHome } from './crowd.js';
+import { startGaitCheck } from './gait-watch.js';
 
 // ---------- the movement check (fast test) ----------
 // startMoveCheck(game): samples every game step (it rides on the player's update) and records to window.__moveCheck:
@@ -12,9 +13,11 @@ import { isPassing, isHard, GIVE, awayFromHome } from './crowd.js';
 //   spin     the player turning faster than 3 rad/s while standing still and not taking turning steps, for > 0.25 s;
 //            or anyone else (not seated) turning more than 1.5 full turns one way, or 3 back and forth, within 3 s
 //            (Jørgen, 2026-09-30: "Mio was spinning around 20 times in place before she continued the conversation")
-// fast.mjs fails the build on any overlap or spin.
+// fast.mjs fails the build on any overlap or spin. The gait check (people stepping on the spot or sliding,
+// gait-watch.js) runs alongside.
 export function startMoveCheck(game) {
   const C = (window.__moveCheck = { overlaps: [], spins: [], steps: 0, notes: [] });
+  startGaitCheck(game);
   const pl = game.player;
   if (!pl || pl._checked) return C;
   pl._checked = true;

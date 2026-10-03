@@ -3,6 +3,7 @@ import { standOff } from './targets.js';
 import { freeNear, reachableNear, clearOf, pathAround, stuck } from './navigation.js';
 import { spaceFrom, isPassing, slideStep, isHard, press, followSpeed } from './crowd.js';
 import * as THREE from 'three';
+import { stepGait, stopGait } from './gait.js';
 
 // ---------- scripted moves ----------
 // walkRig(game, rig, [x, z], { speed, route = true, avoid = true, brakeTo = 0, run = false }): walk someone to a spot
@@ -88,10 +89,13 @@ export function walkRig(
       if (rig) {
         rig._walk = false;
         rig._noAvoid = false;
-        if (settle && !rig.seated) {
-          rig.setGait?.(null);
-          rig.setState?.('idle');
-        }
+        if (settle) stopGait(rig);
+        // a glide keeps its walk going into the next move of the trip; with none two frames on, they stand
+        // (the last glide of a trip left them stepping on the spot)
+        else
+          requestAnimationFrame(() =>
+            requestAnimationFrame(() => obj.userData.walkTok === walkToken && !rig._walk && stopGait(rig)),
+          );
       }
       if (player && game.walker) game.walker.sync?.();
       res();
@@ -236,11 +240,7 @@ export function walkRig(
           done();
           return true;
         } // stuck behind something: end where it is rather than hang the scene
-        if (rig) {
-          const walking = moved / dt > 0.05 || Math.abs(angDiff(head, yaw)) > 0.5;
-          rig.setState?.(walking ? 'walk' : 'idle');
-          rig.setGait?.(walking ? Math.max(moved / dt, 0.3) / sc : null, { run });
-        }
+        if (rig) stepGait(rig, moved, dt, { run }); // the steps as fast as the ground goes; turning on the spot stands
       }
       return false;
     };
@@ -254,6 +254,7 @@ export function walkRig(
         if (rig) {
           rig._walk = false;
           rig._noAvoid = false;
+          stopGait(rig);
         }
         res();
         return;
@@ -311,7 +312,7 @@ export function faceRig(game, rigOrObj, [x, z]) {
     return Promise.resolve();
   }
   const token = (obj.userData.faceTok = (obj.userData.faceTok || 0) + 1);
-  const stepping = rig && !rig._walk && Math.abs(angDiff(target, obj.rotation.y)) > 0.6;
+  if (rig && !rig._walk) stopGait(rig); // turning on the spot, standing
   return new Promise((res) => {
     let last = performance.now();
     const tick = () => {
@@ -324,10 +325,6 @@ export function faceRig(game, rigOrObj, [x, z]) {
       last = now;
       obj.rotation.y = turnToward(obj.rotation.y, target, dt, TURN * 0.8);
       const left = Math.abs(angDiff(target, obj.rotation.y));
-      if (stepping) {
-        rig.setState?.(left > 0.05 ? 'walk' : 'idle');
-        rig.setGait?.(left > 0.05 ? 0.3 : null);
-      }
       if (left < 1e-3) {
         obj.rotation.y = target;
         res();

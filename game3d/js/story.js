@@ -2,7 +2,8 @@
 import * as THREE from 'three';
 import { ui, voice, sfx } from './ui.js';
 import { WORDS, learn, cmdHTML, lineHTML } from './lang.js';
-import { walkPose, HIP } from './cast.js';
+import { HIP } from './cast.js';
+import { stepGait, stopGait } from './movement/gait.js';
 import { personStep, standOff, detourPoint, freeNear } from './move.js';
 
 export const WHO = {
@@ -102,8 +103,7 @@ export function walkPerson(rig, pts, { speed = 1.2, blobM } = {}) {
     rig._press = 0;
     rig._detour = false;
     rig._blocker = null; // nothing left over from an earlier walk
-    let ph = 0,
-      age = 0,
+    let age = 0,
       plen = 0;
     {
       let q = rig.root.position;
@@ -118,7 +118,7 @@ export function walkPerson(rig, pts, { speed = 1.2, blobM } = {}) {
       const p = rig.root.position,
         t = path[0];
       if (!t) {
-        walkPose(rig, 0, 0);
+        stopGait(rig);
         rig.hips.position.y = HIP;
         rig._walk = null;
         res();
@@ -155,14 +155,14 @@ export function walkPerson(rig, pts, { speed = 1.2, blobM } = {}) {
         p.z + ((t.z - p.z) / d) * s,
         dt,
       );
+      const moved = Math.hypot(qx - p.x, qz - p.z);
       p.x = qx;
       p.z = qz;
       const want = Math.atan2(t.x - p.x, t.z - p.z);
       let a = want - rig.root.rotation.y;
       a = Math.atan2(Math.sin(a), Math.cos(a));
       rig.root.rotation.y += a * Math.min(1, dt * 10);
-      ph += dt * 9.5;
-      walkPose(rig, ph, 1);
+      stepGait(rig, moved, dt); // steps as far as they really went: held up behind someone, they stand
       if (blobM) blobM.position.set(p.x, 0.004, p.z);
     };
   });

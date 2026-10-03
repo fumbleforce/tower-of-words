@@ -313,17 +313,17 @@ export class SmoothWalker extends Walker {
     const speedNow = moved / Math.max(dt, 1e-4);
     const was = this.moving;
     this.moving = was ? speedNow > 0.04 && this.v > 0.04 : speedNow > 0.1 && this.v > 0.1;
-    // a big turn on the spot takes a few small steps instead of a frozen pirouette
+    // a big turn on the spot (the spin check lets it through); he turns standing, without steps
     const turnLeft = this.targetFacing === undefined ? 0 : Math.abs(angDiff(this.targetFacing, this.facing));
     this.turning = !this.moving && turnLeft > 0.5;
     const sc = this.body.scale.x || 1;
-    this.gait.v = this.moving ? this.v / sc : this.turning ? 0.3 : 0;
+    this.gait.v = this.moving ? this.v / sc : 0;
     this.gait.k = this.moving ? this.v / this.speed : 0;
     this.gait.run = run; // the avatar may show the run clip only while he runs (makeGait)
     this.preview.update(dt, p);
     this._yaw = this.body.rotation.y;
     this._facing = this.facing;
     this._pos = [p.x, p.z];
-    return this.moving || this.turning;
+    return this.moving;
   }
 }

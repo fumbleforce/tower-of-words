@@ -1,10 +1,11 @@
 // The gate's commuters: three office workers who walk in, tap a reader, pass the arch and leave by the door at the
 // back (the station's outdoor exit, where the lift used to be). A small crowd, so the story's people stand out.
-import { PEOPLE, walkPose, HIP } from '../cast.js';
+import { PEOPLE, HIP } from '../cast.js';
 import { blob } from '../engine.js';
 import { rbox } from '../props.js';
 import { queueStep, turnToward } from '../move.js';
 import { K } from '../scenes/office.js';
+import { stepGait, stopGait } from '../movement/gait.js';
 
 // w: the built room; st: the gate's state (rush, gateOpen, jam, leaving); readerFlash and openFor: the gate's readers
 export function lobbyCommuters(game, w, st, { readerFlash, openFor }) {
@@ -23,7 +24,7 @@ export function lobbyCommuters(game, w, st, { readerFlash, openFor }) {
     const b = blob(0.5, 0.35);
     w.root.add(b);
     b.visible = false;
-    commuters.push({ r, b, t: 1 - i * 3.5, side: i % 2 ? 1 : -1, stage: 'wait', ph: 0, qi: i });
+    commuters.push({ r, b, t: 1 - i * 3.5, side: i % 2 ? 1 : -1, stage: 'wait', qi: i });
   });
   function stepCommuter(c, dt) {
     const r = c.r,
@@ -43,14 +44,15 @@ export function lobbyCommuters(game, w, st, { readerFlash, openFor }) {
       return;
     }
     const moveTo = (tx, tz, sp = 1.25) => {
+      const ox = p.x,
+        oz = p.z;
       const k = queueStep(game, r, tx, tz, sp, dt);
-      if (k !== 1) return k === 0 || !!walkPose(r, 0, 0);
+      if (k !== 1) return k === 0 || !!stepGait(r, 0, dt); // waiting in the queue: stands (after a moment)
       // a smooth turn, and none in the last few centimetres, where a nudge from a neighbour flipped the heading
       // back and forth every step (the fast test's spin check caught commuters spinning at the gate)
       if (Math.hypot(tx - p.x, tz - p.z) > 0.15)
         r.root.rotation.y = turnToward(r.root.rotation.y, Math.atan2(tx - p.x, tz - p.z), dt);
-      c.ph += dt * 9.5;
-      walkPose(r, c.ph, 1);
+      stepGait(r, Math.hypot(p.x - ox, p.z - oz), dt);
       c.b.position.set(p.x, 0.004, p.z);
       return false;
     };
@@ -63,7 +65,7 @@ export function lobbyCommuters(game, w, st, { readerFlash, openFor }) {
         if (!c.path.length) {
           c.stage = 'tap';
           c.t = 0;
-          walkPose(r, 0, 0);
+          stopGait(r);
           r.hips.position.y = HIP;
           r.arms[0].rotation.x = -1.2;
         }
@@ -74,7 +76,7 @@ export function lobbyCommuters(game, w, st, { readerFlash, openFor }) {
       if (moveTo(...c.path[0], 1.1)) {
         c.stage = 'queue';
         c.t = 0;
-        walkPose(r, 0, 0);
+        stopGait(r);
         r.hips.position.y = HIP;
         r.root.rotation.y = Math.PI * 0.9;
       }
@@ -122,7 +124,7 @@ export function lobbyCommuters(game, w, st, { readerFlash, openFor }) {
       if (moveTo(c.side * 1.6, BZ + 1.2)) {
         c.stage = 'tapwait';
         c.t = 0;
-        walkPose(r, 0, 0);
+        stopGait(r);
       }
       return;
     }
@@ -137,7 +139,7 @@ export function lobbyCommuters(game, w, st, { readerFlash, openFor }) {
       // Eric is on his way out through the same door: whoever isn't nearly there lets him go first
       if (st.leaving && !c.letGo) {
         r._walk = false;
-        walkPose(r, 0, 0);
+        stopGait(r);
         return;
       }
       if (c.path.length === 1) w.lifts[0].want = 1;

@@ -3,6 +3,7 @@
 // walk and run cycles, sitting on a bench, and the small life of people standing about (talking, a phone, a nod).
 import { HIP, walkPose } from '../train/people.js';
 import { turnToward } from '../movement/shared.js';
+import { stepGait, stopGait, paceCap, walking, codeStride } from '../movement/gait.js';
 import { slideStep, followSpeed, press, isHard, isPassing } from '../movement/crowd.js';
 
 // someone with right of way walking through in fixed choreography (a trip's glide), whom the crowd steps aside for
@@ -46,7 +47,7 @@ export function walkStep(game, w, dt, list, eric, wide) {
   }
   let fx = (tx - p.x) / d,
     fz = (tz - p.z) / d;
-  let speed = w.speed;
+  let speed = Math.min(w.speed, paceCap(r)); // no faster than a chibi's steps can go
   const ox = p.x,
     oz = p.z;
   // someone right ahead: follow them at their pace when they walk the same way, slow down to go round otherwise
@@ -170,27 +171,27 @@ export function stalled(w, dt) {
   return w.held > STALL;
 }
 
-// the walk (or run) cycle, by the distance covered
+// the walk (or run) cycle, by the distance covered: the walk, and a chibi's run, timed to the ground they really
+// cover (movement/gait.js stepGait: standing while held up or given way to); a code-built jogger by its own swing
 export function stride(w, dt, visible) {
   const r = w.r,
     run = w.kind === 'jog';
-  w.ph += (w.moved * dt * (run ? 5.2 : 7.6)) / (r.root.scale.x || 1);
+  if (!run || r.meshy) {
+    if (!visible) return;
+    stepGait(r, w.moved * dt, dt, { run });
+    if (!r.meshy && r.arms[1].children.length > 2) r.arms[1].rotation.x *= 0.35; // a bag: that arm hardly swings
+    return;
+  }
   if (!visible) return;
-  if (r.meshy) {
-    // a chibi (chibi-crowd.js): its walk or run clip, timed to the ground it covers (movement/gait.js)
-    const amt = w.moved / (w.speed * 0.6 || 1);
-    r.setState(amt > 0.3 ? 'walk' : 'idle');
-    r.setGait(w.moved / (r.root.scale.x || 1), { run });
-    return;
-  }
-  const amt = Math.min(1, w.moved / (w.speed * 0.6 || 1));
-  if (!run) {
-    walkPose(r, w.ph, amt);
-    if (r.arms[1].children.length > 2) r.arms[1].rotation.x *= 0.35; // a bag: that arm hardly swings
-    return;
-  }
-  const sn = Math.sin(w.ph),
-    c = Math.cos(w.ph);
+  const { amt } = walking(r, w.moved * dt, dt);
+  w.ph += (w.moved * dt) / (r.root.scale.x || 1) / codeStride(r, r.root, jogPose, '_strideJog');
+  jogPose(r, w.ph, amt);
+}
+
+// a code-built jogger at phase ph, amt of the swing
+function jogPose(r, ph, amt) {
+  const sn = Math.sin(ph),
+    c = Math.cos(ph);
   r.legs[0].rotation.x = sn * 0.85 * amt;
   r.legs[1].rotation.x = -sn * 0.85 * amt;
   r.knees[0].rotation.x = Math.max(0, -c) * 1.1 * amt + 0.2;
@@ -206,10 +207,10 @@ export function stride(w, dt, visible) {
 
 // standing still, every joint back where it rests
 export function standPose(r) {
+  stopGait(r);
   if (r.meshy) {
     r.seated = false;
     r.root.position.y = 0;
-    r.setGait(null);
     if (r._ph) r.phone((r._ph = false) || '');
     return r.setState('idle');
   }
