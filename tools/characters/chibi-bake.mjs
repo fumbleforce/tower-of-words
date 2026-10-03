@@ -1,7 +1,9 @@
 // Bake the game's clips onto the Meshy chibis (game3d/assets/characters/chibi-<id>/model.glb, made by chibi_game.py)
 // with the parts viewer's retarget (tools/characters/parts/retarget.js), as Review chibi-cast-meshy-1 showed them.
 // Eric and the men take Eric's game clips (walk, run, sit, the approved idle, the phone pose and his four gestures);
-// Mio and the women take Mio's. The legs keep only STEP of the walk and run swing, for the short chibi legs. Writes
+// Mio and the women take Mio's; so do the generic islanders (gen-<base>, Review chibi-crowd-1), at half the frame rate
+// and with four decimals, since a crowd loads eight of them. The legs keep only STEP of the walk and run swing, for the
+// short chibi legs. Writes
 // chibi-<id>/clips.json: { gait, clips: { name: AnimationClip JSON } }, gait being the walk and run speeds at which
 // the feet keep pace with the ground (the source's, scaled by the stride measured on both).
 // Usage: node tools/characters/chibi-bake.mjs [id ...]   (all by default; files are served straight from this checkout)
@@ -33,8 +35,21 @@ const SOURCES = {
 // the same standing heights as game3d/js/chibi.js
 export const CHIBI_HEIGHTS = { eric: 1.2, mio: 1.12, kuro: 1.12, mori: 1.09, kenji: 1.12, emi: 1.09, guard: 1.09 };
 Object.assign(CHIBI_HEIGHTS, { kuroda: 1.09, aoi: 1.09, rei: 1.09 });
+// the generics: [base, clips from, standing height] (game3d/js/chibi-crowd.js has the same heights)
+export const GEN = [
+  ['suit', 'eric', 1.1],
+  ['shirt', 'eric', 1.1],
+  ['blouse', 'mio', 1.06],
+  ['cardigan', 'mio', 1.03],
+  ['polo', 'eric', 1.06],
+  ['hoodie', 'mio', 1.05],
+  ['apron', 'mio', 1.06],
+  ['dock', 'eric', 1.11],
+];
+for (const [b, , h] of GEN) CHIBI_HEIGHTS['gen-' + b] = h;
 const ALL = { eric: 'eric', mio: 'mio', kuro: 'mio', mori: 'eric', kenji: 'eric', emi: 'mio', guard: 'eric' };
 Object.assign(ALL, { kuroda: 'eric', aoi: 'mio', rei: 'mio' });
+for (const [b, from] of GEN) ALL['gen-' + b] = from;
 const pick = process.argv.slice(2);
 const TARGETS = Object.fromEntries(Object.entries(ALL).filter(([id]) => !pick.length || pick.includes(id)));
 const HOST = 'http://chibi.bake/';
@@ -68,7 +83,7 @@ const out = await withBrowserJob('chibi-bake', async (browser) => {
         const b = new THREE.Box3().setFromObject(o);
         return b.max.y - b.min.y;
       };
-      const r5 = (a) => Array.from(a, (v) => Math.round(v * 1e5) / 1e5);
+      const round = (a, k) => Array.from(a, (v) => Math.round(v * k) / k);
       const results = {};
       for (const [id, sid] of Object.entries(TARGETS)) {
         const S = SOURCES[sid];
@@ -80,7 +95,8 @@ const out = await withBrowserJob('chibi-bake', async (browser) => {
           idle: parse(await json(`/game3d/assets/characters/relaxed-idle-${S.idle}.json`)),
           phone: parse(await json(S.phone)),
         };
-        for (const [g, u] of S.gestures) clips[g] = parse(await json(u));
+        // the generics only nod (talked to in passing: gameplay/idle-talk.js)
+        for (const [g, u] of S.gestures) if (!id.startsWith('gen-') || g === 'nod') clips[g] = parse(await json(u));
         const model = (await loader.loadAsync(`/game3d/assets/characters/chibi-${id}/model.glb`)).scene;
         const srcRest = [];
         src.traverse((o) => o.isBone && srcRest.push([o, o.position.clone(), o.quaternion.clone()]));
@@ -97,7 +113,9 @@ const out = await withBrowserJob('chibi-bake', async (browser) => {
           mixer.stopAllAction();
           const a = mixer.clipAction(clip);
           a.reset().play();
-          const fps = name === 'sit' ? 10 : ['walk', 'run', 'idle'].includes(name) ? 30 : 15;
+          const gen = id.startsWith('gen-');
+          const fps = name === 'sit' ? 10 : ['walk', 'run', 'idle'].includes(name) && !gen ? 30 : 15;
+          const r5 = (a) => round(a, gen ? 1e4 : 1e5);
           const n = Math.max(0, Math.round(clip.duration * fps));
           const times = Array.from({ length: n + 1 }, (_, i) => Math.min(clip.duration, i / fps));
           const moving = name === 'walk' || name === 'run';

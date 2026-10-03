@@ -8,7 +8,7 @@
 //   them, its spread gapCV and the most in any 3 s; afterScene = new walkers in the 4 s after an 8 s scene; at = when
 //   each set off). SEQ=n: n more shots 1.5 s apart.
 //   (NOSHOT=<places>: shoot those where Eric came in, not where the crowd is busiest)
-//   BASE=.claude/worktrees/<name>/game3d for a worktree. Exits 1 on a page error, an overlap or spin, or a route
+//   QS=&chibi=1 adds to the query (the chibi look). BASE=.claude/worktrees/<name>/game3d for a worktree. Exits 1 on a page error, an overlap or spin, or a route
 //   that does not resolve.
 import fs from 'node:fs';
 import { withBrowserJob } from '../../tools/lib/browser-job.mjs';
@@ -39,7 +39,7 @@ await withBrowserJob('crowd-check', async (browser) => {
       for (const off of COMPARE ? [true, false] : [false]) {
         const page = await ctx.newPage();
         page.on('pageerror', (e) => bad.push(`${place} ${period}: ${e.message}`));
-        const url = `http://127.0.0.1:8771/${base}/index.html?cap&perf&q=${q}&place=${place}${off ? '&nocrowd' : ''}`;
+        const url = `http://127.0.0.1:8771/${base}/index.html?cap&perf&q=${q}&place=${place}${off ? '&nocrowd' : ''}${process.env.QS || ''}`;
         await page.goto(url, { timeout: 60000 });
         await page.waitForFunction(() => globalThis.__done, null, {
           timeout: 120000,

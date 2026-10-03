@@ -176,6 +176,13 @@ export function stride(w, dt, visible) {
     run = w.kind === 'jog';
   w.ph += (w.moved * dt * (run ? 5.2 : 7.6)) / (r.root.scale.x || 1);
   if (!visible) return;
+  if (r.meshy) {
+    // a chibi (chibi-crowd.js): its walk or run clip, timed to the ground it covers (movement/gait.js)
+    const amt = w.moved / (w.speed * 0.6 || 1);
+    r.setState(amt > 0.3 ? 'walk' : 'idle');
+    r.setGait(w.moved / (r.root.scale.x || 1), { run });
+    return;
+  }
   const amt = Math.min(1, w.moved / (w.speed * 0.6 || 1));
   if (!run) {
     walkPose(r, w.ph, amt);
@@ -199,6 +206,13 @@ export function stride(w, dt, visible) {
 
 // standing still, every joint back where it rests
 export function standPose(r) {
+  if (r.meshy) {
+    r.seated = false;
+    r.root.position.y = 0;
+    r.setGait(null);
+    if (r._ph) r.phone((r._ph = false) || '');
+    return r.setState('idle');
+  }
   walkPose(r, 0, 0);
   r.hips.position.y = HIP;
   r.torso.rotation.set(0, 0, 0);
@@ -215,6 +229,7 @@ export function standPose(r) {
 export function benchSit(r, x, z, yaw, seatY) {
   standPose(r);
   r.seated = true;
+  if (r.meshy) return r.sitAt(x, seatY, z, yaw);
   r.root.position.set(x, seatY - (HIP - 0.075) * r.root.scale.y + 0.012, z);
   r.root.rotation.y = yaw;
   for (const l of r.legs) l.rotation.x = -1.5;
@@ -231,6 +246,11 @@ export function benchSit(r, x, z, yaw, seatY) {
 export function idleLife(s, dt) {
   const r = s.r;
   s.t += dt;
+  // a chibi idles by its own clip; a phone held up while it looks at one
+  if (r.meshy) {
+    if (r._ph !== !!s.phone) r.phone((r._ph = !!s.phone) ? 'look' : '');
+    return;
+  }
   const t = s.t + s.ph;
   r.torso.scale.y = 1 + 0.012 * Math.sin(t * 1.7);
   if (s.phone) {

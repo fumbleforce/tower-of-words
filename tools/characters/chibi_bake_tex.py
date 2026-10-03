@@ -67,6 +67,14 @@ elif step == 'decimate':
     bpy.ops.object.select_all(action='DESELECT')
     lo.select_set(True)
     bpy.ops.object.shade_smooth()
+    # below what meshoptimizer reaches (its split vertices stop it near 5k on the generics): Blender's collapse on the
+    # already simple surface, to CHIBI_TRIS triangles (the phone copies of the generic chibis)
+    want = int(os.environ.get('CHIBI_TRIS', 0))
+    if want and count(lo) > want:
+        d = lo.modifiers.new('fewer', 'DECIMATE')
+        d.ratio = want / count(lo)
+        d.use_collapse_triangulate = True
+        bpy.ops.object.modifier_apply(modifier='fewer')
     print('triangles', count(lo))
     json.dump({'positions': [list(v.co) for v in lo.data.vertices],
                'faces': [list(p.vertices) for p in lo.data.polygons]}, open(mesh_json, 'w'))

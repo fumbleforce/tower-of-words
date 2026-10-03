@@ -29,7 +29,7 @@ export const CAST3D_IDS = [...new Set([...Object.keys(CAST3D), ...CHIBI_CAST])];
 // Wrap a loaded Meshy character so the scenes can treat it like a chibi rig: the pose helpers (sit, walkPose, arms...)
 // switch its clips instead, the chibi parts they write to are harmless stand-ins (the head follows the real head bone,
 // for labels and look-at), `seated` picks sit or idle, and it updates itself each frame it's drawn.
-function meshyPerson(m) {
+export function meshyPerson(m) {
   const O = () => new THREE.Object3D();
   m.legs = [O(), O()];
   m.knees = [O(), O()];

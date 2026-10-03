@@ -16,6 +16,7 @@ import { TERRACE_TABLES as T, chairAt, chairBlock, terraceChair, STACKED_Y } fro
 import { flags } from '../narrative/state.js';
 import { route } from './route.js';
 import { hold, lean } from './eric-hold.js';
+import { GEN_ON, generic } from '../chibi-crowd.js';
 
 // the story's flag once he has helped (story/plaza.js canteen_table): a plaza built later that evening starts from it
 const HELPED = 'evening_canteen_helped';
@@ -32,10 +33,15 @@ export function canteenClosing(game, root, nav, chairs) {
   theirs.name = 'evening:chair-second';
   root.add(his, theirs);
   his.userData.noBatch = theirs.userData.noBatch = true; // they move: the draw-call pass leaves them alone
-  // the worker: a background worker in white, with the canteen's apron
-  const r = PEOPLE.worker(25);
+  // the worker: a background worker in white, with the canteen's apron (with the chibi look, the generic in an apron,
+  // the apron in the canteen's colour)
+  const chibi = GEN_ON && generic('apron', 25, { proxy: true, tint: { top: AWNING.canvas } });
+  const r = chibi || PEOPLE.worker(25);
   r.root.scale.multiplyScalar(K);
-  r.torso.add(rbox(0.25, 0.3, 0.02, AWNING.canvas, { y: -0.15, z: 0.105, r: 0.008, seg: 1 }));
+  if (!chibi) r.torso.add(rbox(0.25, 0.3, 0.02, AWNING.canvas, { y: -0.15, z: 0.105, r: 0.008, seg: 1 }));
+  // a chibi's arms are its stand-ins (chibi-crowd.js), which armsHold leaves alone
+  const holdArms = (x, z) =>
+    chibi ? r.arms.forEach((a, i) => a.rotation.set(x, 0, (i ? -1 : 1) * z)) : armsHold(r, x, z);
   r.root.add(blob(0.45, 0.35));
   root.add(r.root);
   const AT = {
@@ -174,7 +180,7 @@ export function canteenClosing(game, root, nav, chairs) {
       stepPeople([r], dt);
       if (!r._walk) idle(r, t);
       if (carrying) {
-        armsHold(r, -1.0, 0.35);
+        holdArms(-1.0, 0.35);
         const h = inHands();
         theirs.position.set(h.x, h.y, h.z);
         theirs.rotation.set(0, h.yaw, 0);

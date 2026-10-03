@@ -5,6 +5,8 @@
 // triangles and a 1024 px texture baked from the full model; -lo: 8k, for phones), and clips.json
 // (tools/characters/chibi-bake.mjs: the game's walk, run, idle, sit, phone pose and Eric's gestures carried over
 // onto Meshy's rig, the legs at 0.55 of the swing, half the walk's lean, and the gait speeds that go with them).
+// The generic islanders (chibi-crowd.js, ids gen-<base>) also have mask.webp and regions.json (tools/characters/
+// chibi_regions.py): where their hair, top and bottom are, so each copy can wear its own colours (chibiFrom's tint).
 import * as THREE from 'three';
 import { clone } from '../vendor/utils/SkeletonUtils.js';
 import { GLTFLoader } from '../vendor/loaders/GLTFLoader.js';
@@ -36,28 +38,54 @@ export function chibiFiles(id) {
     if (!r.ok) throw new Error(`chibi ${id}: ${r.status}`);
     return r.json();
   };
+  const gen = id.startsWith('gen-');
   return (files[id] = Promise.all([
     fetch(dir + 'clips.json' + V()).then(got),
     new GLTFLoader().loadAsync(dir + `model${lo}.glb` + V()),
     new THREE.TextureLoader().loadAsync(dir + `base${lo}.webp` + V()),
-  ]).then(([data, gltf, tex]) => {
+    gen && new THREE.TextureLoader().loadAsync(dir + `mask${lo}.webp` + V()),
+    gen && fetch(dir + `regions${lo}.json` + V()).then(got),
+  ]).then(([data, gltf, tex, mask, regions]) => {
     const shaped = shapeChibi(gltf.scene, data.clips, buildOf(id));
     const gait = { ...data.gait, walkV: data.gait.walkV * shaped.stride, runV: data.gait.runV * shaped.stride };
     // the four motions parsed once; the phone pose and the gestures stay JSON, as meshyFrom takes them
     const clips = { ...data.clips };
     for (const n of ['walk', 'run', 'idle', 'sit']) clips[n] = THREE.AnimationClip.parse(data.clips[n]);
-    return { id, gait, scene: gltf.scene, tex, clips };
+    if (mask) Object.assign(mask, { flipY: false, colorSpace: THREE.NoColorSpace });
+    return { id, gait, scene: gltf.scene, tex, clips, mask, regions };
   }));
 }
 
-// a person from loaded files, at once
-export function chibiFrom(f) {
+// A generic's colours: each region of its mask (hair, top, bottom) recoloured to a target, keeping each texel's shading
+// against the region's mean brightness (regions.json), so folds and painted strands stay.
+const TINT = `vec3 tm = texture2D( tMask, vMapUv ).rgb;
+ float tl = dot( texel.rgb, vec3( 0.2126, 0.7152, 0.0722 ) );
+ if ( tHair.w > 0.0 ) texel.rgb = mix( texel.rgb, tHair.rgb * clamp( tl / tHair.w, 0.55, 1.6 ), tm.r );
+ if ( tTop.w > 0.0 ) texel.rgb = mix( texel.rgb, tTop.rgb * clamp( tl / tTop.w, 0.55, 1.6 ), tm.g );
+ if ( tBot.w > 0.0 ) texel.rgb = mix( texel.rgb, tBot.rgb * clamp( tl / tBot.w, 0.55, 1.6 ), tm.b );
+ diffuseColor *= texel;`;
+const REGION = { hair: 'tHair', top: 'tTop', bottom: 'tBot' };
+function tintUniforms(f, tint) {
+  const u = { tMask: { value: f.mask } };
+  for (const [k, n] of Object.entries(REGION)) {
+    const hex = tint[k],
+      r = f.regions[k];
+    const c = hex && r ? new THREE.Color(hex) : null;
+    u[n] = { value: c ? new THREE.Vector4(c.r, c.g, c.b, r.lum) : new THREE.Vector4(0, 0, 0, 0) };
+  }
+  return u;
+}
+
+// a person from loaded files, at once. opt.height: another standing height; opt.tint: { hair, top, bottom } colours
+// for a generic (null keeps a region as made)
+export function chibiFrom(f, opt = {}) {
   const gait = { ...f.gait },
     c = f.clips;
   const scene = clone(f.scene);
   const parts = [{ scene, animations: [c.walk] }, { animations: [c.run] }, c.idle, { animations: [c.sit] }, f.tex];
   parts.push(c.phone || null, ...GESTURES.map((g) => c[g] || null));
-  const m = meshyFrom('chibi-' + f.id, parts, { height: HEIGHT[f.id], stride: gait });
+  const m = meshyFrom('chibi-' + f.id, parts, { height: opt.height || HEIGHT[f.id], stride: gait });
+  const tint = f.mask && opt.tint ? tintUniforms(f, opt.tint) : null;
   // The decimated surface folds over on itself in places, and culled back faces showed as specks of whatever is
   // behind. Both sides draw, lit by the full model's normals whichever side faces the camera.
   m.model.traverse((o) => {
@@ -71,7 +99,15 @@ export function chibiFrom(f) {
         '#include <normal_fragment_begin>',
         '#include <normal_fragment_begin>\n normal = normalize( vNormal );',
       );
+      if (!tint) return;
+      Object.assign(sh.uniforms, tint);
+      sh.fragmentShader =
+        'uniform sampler2D tMask;\nuniform vec4 tHair, tTop, tBot;\n' +
+        sh.fragmentShader.replace('diffuseColor *= texel;', TINT);
     };
+    // every chibi shares this function's text, which three.js would take for one program
+    mat.customProgramCacheKey = () => (tint ? 'chibi-tint' : 'chibi');
+    mat.userData.tint = tint;
   });
   m.chibi = true;
   return m;
