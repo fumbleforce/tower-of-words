@@ -1,8 +1,8 @@
 // Before/after pictures of the chibi builds (js/chibi-builds.js, Review chibi-proportions-1), in the game with ?chibi=1.
 //   node game3d/tools/chibi-proportions.mjs [w] [h]
 // For each of 'before' (?chibibuild=0: Meshy's proportions with the 0.85 head) and 'after': the ten in a row on the
-// plaza, and per person in WHO (default kuro,rei) front, her left 3/4, her left side, mid-stride, and Kuro in the
-// game's own view at her counter. BASE=.claude/worktrees/<name>/game3d shoots a worktree; ONLY=lineup,kuro-walk;
+// plaza, and per person in WHO (default kuro,rei) front, her left 3/4, her left side, mid-stride, her head straight on
+// and from her left (face, face34), and Kuro in the game's own view at her counter. BASE=.claude/worktrees/<name>/game3d shoots a worktree; ONLY=lineup,kuro-walk;
 // WHEN=after shoots one side; TAG=rei2plain names the files in place of before/after.
 // Output: game3d/shots/chibi-proportions/<w>x<h>/<before|after>-<shot>.png
 import fs from 'node:fs';
@@ -24,6 +24,9 @@ for (const id of WHO) {
   SHOTS.push([`${id}-34`, 'plaza', id, [0.75, 0.2, 0.75]]);
   SHOTS.push([`${id}-side`, 'plaza', id, [1, 0.12, 0.02]]);
   SHOTS.push([`${id}-walk`, 'plaza', id, [1, 0.12, 0.02], 'walk']);
+  // the head alone, straight on and from her left (Review chibi-proportions-1, "Rei face" and "Kuro face")
+  SHOTS.push([`${id}-face`, 'plaza', id, [0, 0.08, 1], 'face']);
+  SHOTS.push([`${id}-face34`, 'plaza', id, [0.7, 0.08, 0.7], 'face']);
 }
 SHOTS.push(['kuro-counter', 'forecourt', 'counter', null]);
 const only = process.env.ONLY?.split(',');
@@ -90,6 +93,7 @@ await withBrowserJob('chibi-proportions', async (browser) => {
           if (pose === 'walk') row[0].update(0);
           const box = new THREE.Box3();
           for (const r of row) box.expandByObject(r.root);
+          if (pose === 'face') box.min.y = box.max.y - 0.5 * (box.max.y - box.min.y);
           const c = box.getCenter(new THREE.Vector3()),
             s = box.getSize(new THREE.Vector3());
           const cam = g.place.camera;

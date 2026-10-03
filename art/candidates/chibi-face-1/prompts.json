@@ -1,0 +1,126 @@
+[
+ {
+  "name": "rei-f1",
+  "who": "rei",
+  "change": "rei-c-101's face words, without the narrowed eyes (her eyes stay as they are)",
+  "seed": 101,
+  "prompt": "Edit image 1: change only her face, keeping everything else about image 1 exactly: the same smooth matte vinyl 3D figure, the same silver-grey hair, fringe and high ponytail hanging down on her left (image right), the same pale grey suit over a black high-neck top, the same front view, the same soft studio light and plain white background. She is a sly, confident saleswoman: a knowing half-smile with one corner of her mouth raised, looking straight at the viewer. No text, no props.",
+  "model": "flux-2-klein-4b-fp8",
+  "steps": 4,
+  "cfg": 1.0,
+  "size": [
+   1024,
+   1024
+  ],
+  "refs": [
+   "image 1: art/parts/chibi-face-1/work/rei-front-white.png (the model head, straight on)"
+  ],
+  "seconds": 16.5
+ },
+ {
+  "name": "kuro-f1",
+  "who": "kuro",
+  "change": "kuro-d-101's prompt with one sentence added: her expression is calm and serious",
+  "seed": 101,
+  "prompt": "Edit image 1: keeping everything else about image 1 exactly: the same smooth matte vinyl 3D figure, the same big soft rounded-square head, the same large flat painted anime eyes and small simple nose and mouth, the same front view, the same soft studio light and plain white background. She has black hair with a dark blue sheen in a high bun with two dark hair sticks, straight blunt bangs and two long side locks framing her face, black rectangular glasses with clear lenses, grey eyes, dark lipstick and pale skin. She wears a dark teal blazer over a black buttoned shirt. Her expression is calm and serious. No text, no props.",
+  "model": "flux-2-klein-4b-fp8",
+  "steps": 4,
+  "cfg": 1.0,
+  "size": [
+   1024,
+   1024
+  ],
+  "refs": [
+   "image 1: art/parts/chibi-face-1/work/kuro-front-white.png (the model head, straight on)"
+  ],
+  "seconds": 8.4
+ },
+ {
+  "name": "rei-f2",
+  "who": "rei",
+  "change": "the model: RDBT repaints only her eyes, brows and mouth (FLUX redrew the whole head with soft 3D shading and grey lines, and her smile stayed)",
+  "seed": 101,
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, safe, anime screenshot, anime coloring, 2d, cel shading, clean lineart, 1girl, solo, chibi, close-up of her face, front view, looking at viewer, Rei, an adult woman, silver-grey hair, steel-grey eyes, pale skin, sly, confident smile",
+  "model": "rdbtAnima",
+  "sampler": "euler_ancestral",
+  "steps": 30,
+  "cfg": 5,
+  "denoise": 0.6,
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, lowres, bad anatomy, child, loli, 3d, realistic, photorealistic, chubby",
+  "size": [
+   1024,
+   848
+  ],
+  "workflow": "tools/workflows/puppet-face-inpaint.json",
+  "refs": [
+   "art/parts/chibi-face-1/work/rei-front-white.png, crop [212, 200, 812, 697], mask face.py MASKS"
+  ],
+  "seconds": 26.9
+ },
+ {
+  "name": "kuro-f2",
+  "who": "kuro",
+  "change": "the model: RDBT repaints only her eyes (inside the lenses), brows and mouth (FLUX redrew the whole head with soft 3D shading and washed-out eyes)",
+  "seed": 101,
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, safe, anime screenshot, anime coloring, 2d, cel shading, clean lineart, 1girl, solo, chibi, close-up of her face, front view, looking at viewer, Kuro, an adult woman, black hair, blunt bangs, glasses with clear lenses, grey eyes, dark lipstick, pale skin, calm, serious expression, closed mouth",
+  "model": "rdbtAnima",
+  "sampler": "euler_ancestral",
+  "steps": 30,
+  "cfg": 5,
+  "denoise": 0.6,
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, lowres, bad anatomy, child, loli, 3d, realistic, photorealistic, chubby",
+  "size": [
+   1024,
+   848
+  ],
+  "workflow": "tools/workflows/puppet-face-inpaint.json",
+  "refs": [
+   "art/parts/chibi-face-1/work/kuro-front-white.png, crop [212, 400, 812, 897], mask face.py MASKS"
+  ],
+  "seconds": 21.5
+ },
+ {
+  "name": "rei-f3",
+  "who": "rei",
+  "change": "one word: smirk for smile",
+  "seed": 101,
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, safe, anime screenshot, anime coloring, 2d, cel shading, clean lineart, 1girl, solo, chibi, close-up of her face, front view, looking at viewer, Rei, an adult woman, silver-grey hair, steel-grey eyes, pale skin, sly, confident smirk",
+  "model": "rdbtAnima",
+  "sampler": "euler_ancestral",
+  "steps": 30,
+  "cfg": 5,
+  "denoise": 0.6,
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, lowres, bad anatomy, child, loli, 3d, realistic, photorealistic, chubby",
+  "size": [
+   1024,
+   848
+  ],
+  "workflow": "tools/workflows/puppet-face-inpaint.json",
+  "refs": [
+   "art/parts/chibi-face-1/work/rei-front-white.png, crop [212, 200, 812, 697], mask face.py MASKS"
+  ],
+  "seconds": 21.6
+ },
+ {
+  "name": "kuro-f3",
+  "who": "kuro",
+  "change": "denoise 0.45 for 0.6, to keep her eyes closer to how they were (f2 gave spiky lower lashes)",
+  "seed": 101,
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, safe, anime screenshot, anime coloring, 2d, cel shading, clean lineart, 1girl, solo, chibi, close-up of her face, front view, looking at viewer, Kuro, an adult woman, black hair, blunt bangs, glasses with clear lenses, grey eyes, dark lipstick, pale skin, calm, serious expression, closed mouth",
+  "model": "rdbtAnima",
+  "sampler": "euler_ancestral",
+  "steps": 30,
+  "cfg": 5,
+  "denoise": 0.45,
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, lowres, bad anatomy, child, loli, 3d, realistic, photorealistic, chubby",
+  "size": [
+   1024,
+   848
+  ],
+  "workflow": "tools/workflows/puppet-face-inpaint.json",
+  "refs": [
+   "art/parts/chibi-face-1/work/kuro-front-white.png, crop [212, 400, 812, 897], mask face.py MASKS"
+  ],
+  "seconds": 21.5
+ }
+]

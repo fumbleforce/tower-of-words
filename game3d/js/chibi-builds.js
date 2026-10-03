@@ -16,20 +16,9 @@ import * as THREE from 'three';
 
 const PLAIN = { head: 0.85 };
 export const BUILDS = {
-  // Jørgen's words: "sharp refined secretary", not "a fat short baby": slim waist and limbs, long legs, smaller head,
-  // smaller hands and feet (about 3 heads tall from 2.2, counting her bun)
-  kuro: {
-    head: 0.7,
-    torso: [0.8, 1.15, 0.84],
-    chest: [1, 1, 1.04],
-    legs: [1.7, 0.8],
-    arms: [1.25, 0.82],
-    feet: 0.85,
-    hands: 0.78,
-  },
-  // a refined adult build like Kuro's (her face is a new model: Review chibi-proportions-1)
-  rei: { head: 0.74, torso: [0.84, 1.12, 0.86], legs: [1.6, 0.84], arms: [1.2, 0.84], feet: 0.88, hands: 0.82 },
-  // small tweaks where the figure didn't say who they are; Eric, Mio, the guard and Aoi stay as they were
+  // small tweaks where the figure didn't say who they are. Eric, Mio, the guard, Aoi, Kuro and Rei stay as they were:
+  // Jørgen put Kuro's and Rei's bodies back (2026-10-03, "you agreed the face was the problem and you only changed the
+  // body"); their faces are repainted on the texture instead (Review chibi-proportions-1, "Rei face", "Kuro face")
   mori: { head: 0.82, torso: [1.05, 1.06, 1.08], legs: [1.06, 1] }, // older: a settled middle, a longer trunk
   kenji: { head: 0.85, torso: [1.2, 1, 1.25], legs: [1, 1.08], arms: [1, 1.08] }, // rounder, as his portrait
   emi: { head: 0.84, torso: [0.94, 1.03, 0.96], chest: [1.14, 1, 1.3], hips: [1.24, 1, 1.15], legs: [1.1, 0.98] }, // curvy

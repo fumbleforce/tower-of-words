@@ -4,21 +4,33 @@
  "by": "Claude (chibi-proportions agent)",
  "status": "open",
  "issue": 213,
- "question": "Are these the right builds, and what still looks off?",
+ "question": "Are these the right builds, and what still looks off? For Rei and Kuro: do the repainted faces read right (rei-f3, kuro-f3)?",
  "multi": true,
  "media": [
   {
    "image": "art/parts/chibi-proportions-1/kuro-desktop.webp",
    "caption": "Your words: \"The chibis are bit odd proportions sometimes, kuro looks like a fat short baby rather than the sharp refined secretary\". Kuro before and after, in the game with ?chibi=1 (desktop 1366x860): front, her left 3/4, her left side (her idle stance), walking. Same Meshy model (kuro-1), reshaped when it loads: head 0.70 (was 0.85), waist and hips 0.80 wide, trunk 1.15 long, legs 1.7 long and 0.8 thick, arms 1.25 long, hands 0.78, feet 0.85. Her standing height is unchanged (1.12, the scenes' own). About 3 heads tall now, counting her bun (2.2 before)."
   },
-  {"image": "art/parts/chibi-proportions-1/kuro-phone.webp", "caption": "Kuro before and after on the phone (390x844, the 8k-triangle copy)."},
-  {"image": "art/parts/chibi-proportions-1/counter-desktop.webp", "caption": "Kuro behind the head office counter in the game's own camera, before and after (desktop)."},
-  {"image": "art/parts/chibi-proportions-1/counter-phone.webp", "caption": "The counter on the phone, before and after."},
+  {
+   "image": "art/parts/chibi-proportions-1/kuro-phone.webp",
+   "caption": "Kuro before and after on the phone (390x844, the 8k-triangle copy)."
+  },
+  {
+   "image": "art/parts/chibi-proportions-1/counter-desktop.webp",
+   "caption": "Kuro behind the head office counter in the game's own camera, before and after (desktop)."
+  },
+  {
+   "image": "art/parts/chibi-proportions-1/counter-phone.webp",
+   "caption": "The counter on the phone, before and after."
+  },
   {
    "image": "art/parts/chibi-proportions-1/lineup-desktop.webp",
    "caption": "All ten on the plaza, before and after (desktop): Eric, Mio, Kuro, Mori, Kenji, Emi, the guard, Hamada, Aoi, Rei. Eric, Mio, the guard and Aoi are unchanged."
   },
-  {"image": "art/parts/chibi-proportions-1/lineup-phone.webp", "caption": "The same line-up on the phone."},
+  {
+   "image": "art/parts/chibi-proportions-1/lineup-phone.webp",
+   "caption": "The same line-up on the phone."
+  },
   {
    "image": "art/parts/chibi-proportions-1/others-desktop.webp",
    "caption": "The light tweaks, front and side, before and after. Mori: head 0.82, a slightly fuller and longer trunk (older, settled). Kenji: trunk 1.2 wide and 1.25 deep, limbs 1.08 thick (rounder, as his portrait). Emi: waist 0.94, chest 1.14 wide and 1.3 deep, hips 1.24 wide, legs 1.1 (curvy). Hamada: trunk and limbs about 0.9 thick, legs 1.1 (thin and tired). Emi's change is small on screen; her boxy blazer hides most of it."
@@ -27,34 +39,185 @@
    "image": "art/parts/chibi-proportions-1/rei-inputs.webp",
    "caption": "Your words on Rei: \"The white haired woman also too happy naive looking instead of sly confident saleswoman\". New input pictures, in order, edited from round 2's rei-b-101-flip with her portrait as image 2 (FLUX.2 Klein 4B, 4 steps, cfg 1, 1024 px). rei-c: her face only, \"a sly, confident saleswoman: a knowing half-smile with one corner of her mouth raised, slightly narrowed eyes under relaxed lids looking straight at the viewer, her chin a little up\". rei-d: one more change, \"a slim adult figure about three and a half heads tall: a smaller head, a narrow waist, long straight legs and standing tall\"; the body barely changed on any seed, so the build is done in the game as for Kuro. rei-c-101 went to Meshy."
   },
-  {"image": "art/parts/chibi-proportions-1/rei-2-meshy.webp", "caption": "rei-2 as Meshy made it (its own previews), under rei-1. Same settings as round 2: latest model, textured in the same task, no remesh, image enhancement off, no PBR, 4k texture; 30 credits. Rigged on a 60k copy (5 credits)."},
+  {
+   "image": "art/parts/chibi-proportions-1/rei-2-meshy.webp",
+   "caption": "rei-2 as Meshy made it (its own previews), under rei-1. Same settings as round 2: latest model, textured in the same task, no remesh, image enhancement off, no PBR, 4k texture; 30 credits. Rigged on a 60k copy (5 credits)."
+  },
   {
    "image": "art/parts/chibi-proportions-1/rei-desktop.webp",
    "caption": "Rei in the game, every step in order (desktop): 1. rei-1 as it was; 2. rei-1 with her build (no walking frame: that capture held the idle); 3. rei-2 at Meshy's proportions; 4. rei-2 with her build (head 0.74, waist 0.84, trunk 1.12, legs 1.6 long, arms 1.2). Hair and suit are still one pale grey, as in round 2."
   },
-  {"image": "art/parts/chibi-proportions-1/rei-phone.webp", "caption": "Rei on the phone: rei-1 as it was, and rei-2 with her build."}
+  {
+   "image": "art/parts/chibi-proportions-1/rei-phone.webp",
+   "caption": "Rei on the phone: rei-1 as it was, and rei-2 with her build."
+  },
+  {
+   "image": "art/parts/chibi-face-1/rei-faces-desktop.webp",
+   "caption": "Rei face. Your words: \"you agreed the face was the problem and you only changed the body\". Her body is back to the plain build (as Eric, Mio, the guard and Aoi), same rei-2 mesh; only the face on her texture is repainted. Rows in order: current, rei-f1, rei-f2, rei-f3. The first picture of each row is the model's head rendered straight on with its texture; the rest are in the game with ?chibi=1 (1366x860): face straight on, face from her left, front, her left 3/4. rei-f1: FLUX.2 Klein 4B, rei-c-101's face words without the narrowed eyes, seed 101, 4 steps, cfg 1; it redrew the whole head with soft 3D shading and grey lines, and the smile stayed. rei-f2, one change: the model, RDBT repainting only her eyes, brows and mouth (\"sly, confident smile\", Euler A, 30 steps, cfg 5, denoise 0.6, seed 101). rei-f3, one word: \"smirk\" for \"smile\"; the mouth corner on her left (image right) goes up. rei-f3 is in the game now. Small faults on f2 and f3: thin red lower lashes and two red creases above the eyes."
+  },
+  {
+   "image": "art/parts/chibi-face-1/kuro-faces-desktop.webp",
+   "caption": "Kuro face. Your words: \"Kuro is the worst you made the body slim and face didn't change at all\", then \"sharp as in trim, proper, serious\". Her body is back to the plain build, same kuro-1 mesh; glasses, hair, bun and sticks untouched (her eyes change only inside the lenses). Rows in order: current, kuro-f1, kuro-f2, kuro-f3, laid out as Rei's. kuro-f1: FLUX.2 Klein 4B, kuro-d-101's prompt plus \"Her expression is calm and serious\", seed 101, 4 steps, cfg 1; it washed the eyes out and left a pale ring round the mouth. kuro-f2, one change: the model, RDBT repainting only her eyes, brows and mouth (\"calm, serious expression, closed mouth\", denoise 0.6, seed 101): lids a little lower, a smaller, darker mouth, but spiky lower lashes. kuro-f3, one change: denoise 0.45, closer to her own eyes. kuro-f3 is in the game now. The change is small: the round face and big eyes stay, as you asked; her lips came out darker than before."
+  }
  ],
  "options": [
-  {"id": "kuro-build-1", "label": "kuro-build-1", "image": "art/parts/chibi-proportions-1/shots/1366x860/after-kuro-front.png",
-   "images": ["art/parts/chibi-proportions-1/shots/1366x860/after-kuro-34.png", "art/parts/chibi-proportions-1/shots/1366x860/after-kuro-walk.png", "art/parts/chibi-proportions-1/shots/1366x860/before-kuro-front.png"],
-   "note": "Kuro's new build on the same model. The last picture is before."},
-  {"id": "rei-2", "label": "rei-2 (new model, with her build)", "image": "art/parts/chibi-proportions-1/shots/1366x860/after-rei-front.png",
-   "images": ["art/parts/chibi-proportions-1/shots/1366x860/after-rei-34.png", "art/parts/chibi-proportions-1/shots/1366x860/rei2plain-rei-front.png", "art/parts/chibi-proportions-1/inputs/rei-c-101.png"],
-   "note": "The sly face from rei-c-101, with a build like Kuro's. Also shown: rei-2 at Meshy's proportions, and the input."},
-  {"id": "rei-1-build", "label": "rei-1 with her build", "image": "art/parts/chibi-proportions-1/shots/1366x860/rei1build-rei-front.png",
-   "images": ["art/parts/chibi-proportions-1/shots/1366x860/rei1build-rei-34.png"],
-   "note": "The old face on the new build, if you'd rather keep rei-1. Not in the game now (rei-2 replaced it under ?chibi=1)."},
-  {"id": "mori-build-1", "label": "mori-build-1", "image": "art/parts/chibi-proportions-1/shots/1366x860/after-mori-front.png", "images": ["art/parts/chibi-proportions-1/shots/1366x860/after-mori-side.png"]},
-  {"id": "kenji-build-1", "label": "kenji-build-1", "image": "art/parts/chibi-proportions-1/shots/1366x860/after-kenji-front.png", "images": ["art/parts/chibi-proportions-1/shots/1366x860/after-kenji-side.png"]},
-  {"id": "emi-build-1", "label": "emi-build-1", "image": "art/parts/chibi-proportions-1/shots/1366x860/after-emi-front.png", "images": ["art/parts/chibi-proportions-1/shots/1366x860/after-emi-side.png", "art/parts/chibi-proportions-1/shots/1366x860/after-emi-34.png"]},
-  {"id": "kuroda-build-1", "label": "kuroda-build-1 (Hamada)", "image": "art/parts/chibi-proportions-1/shots/1366x860/after-kuroda-front.png", "images": ["art/parts/chibi-proportions-1/shots/1366x860/after-kuroda-side.png"]}
+  {
+   "id": "kuro-build-1",
+   "label": "kuro-build-1",
+   "image": "art/parts/chibi-proportions-1/shots/1366x860/after-kuro-front.png",
+   "images": [
+    "art/parts/chibi-proportions-1/shots/1366x860/after-kuro-34.png",
+    "art/parts/chibi-proportions-1/shots/1366x860/after-kuro-walk.png",
+    "art/parts/chibi-proportions-1/shots/1366x860/before-kuro-front.png"
+   ],
+   "note": "Kuro's new build on the same model. The last picture is before. Body undone: Kuro and Rei have the plain build again (Rei face, Kuro face above)."
+  },
+  {
+   "id": "rei-2",
+   "label": "rei-2 (new model, with her build)",
+   "image": "art/parts/chibi-proportions-1/shots/1366x860/after-rei-front.png",
+   "images": [
+    "art/parts/chibi-proportions-1/shots/1366x860/after-rei-34.png",
+    "art/parts/chibi-proportions-1/shots/1366x860/rei2plain-rei-front.png",
+    "art/parts/chibi-proportions-1/inputs/rei-c-101.png"
+   ],
+   "note": "The sly face from rei-c-101, with a build like Kuro's. Also shown: rei-2 at Meshy's proportions, and the input. Body undone: Kuro and Rei have the plain build again (Rei face, Kuro face above)."
+  },
+  {
+   "id": "rei-1-build",
+   "label": "rei-1 with her build",
+   "image": "art/parts/chibi-proportions-1/shots/1366x860/rei1build-rei-front.png",
+   "images": [
+    "art/parts/chibi-proportions-1/shots/1366x860/rei1build-rei-34.png"
+   ],
+   "note": "The old face on the new build, if you'd rather keep rei-1. Not in the game now (rei-2 replaced it under ?chibi=1). Body undone: Kuro and Rei have the plain build again (Rei face, Kuro face above)."
+  },
+  {
+   "id": "mori-build-1",
+   "label": "mori-build-1",
+   "image": "art/parts/chibi-proportions-1/shots/1366x860/after-mori-front.png",
+   "images": [
+    "art/parts/chibi-proportions-1/shots/1366x860/after-mori-side.png"
+   ]
+  },
+  {
+   "id": "kenji-build-1",
+   "label": "kenji-build-1",
+   "image": "art/parts/chibi-proportions-1/shots/1366x860/after-kenji-front.png",
+   "images": [
+    "art/parts/chibi-proportions-1/shots/1366x860/after-kenji-side.png"
+   ]
+  },
+  {
+   "id": "emi-build-1",
+   "label": "emi-build-1",
+   "image": "art/parts/chibi-proportions-1/shots/1366x860/after-emi-front.png",
+   "images": [
+    "art/parts/chibi-proportions-1/shots/1366x860/after-emi-side.png",
+    "art/parts/chibi-proportions-1/shots/1366x860/after-emi-34.png"
+   ]
+  },
+  {
+   "id": "kuroda-build-1",
+   "label": "kuroda-build-1 (Hamada)",
+   "image": "art/parts/chibi-proportions-1/shots/1366x860/after-kuroda-front.png",
+   "images": [
+    "art/parts/chibi-proportions-1/shots/1366x860/after-kuroda-side.png"
+   ]
+  },
+  {
+   "id": "rei-f1",
+   "label": "rei-f1",
+   "image": "art/parts/chibi-face-1/shots/f1-rei-face.png",
+   "images": [
+    "art/parts/chibi-face-1/shots/f1-rei-face34.png",
+    "art/parts/chibi-face-1/shots/f1-rei-front.png",
+    "art/parts/chibi-face-1/shots/current-rei-face.png"
+   ],
+   "note": "FLUX edit of the whole head. Last picture: her current face."
+  },
+  {
+   "id": "rei-f2",
+   "label": "rei-f2",
+   "image": "art/parts/chibi-face-1/shots/f2-rei-face.png",
+   "images": [
+    "art/parts/chibi-face-1/shots/f2-rei-face34.png",
+    "art/parts/chibi-face-1/shots/f2-rei-front.png",
+    "art/parts/chibi-face-1/shots/current-rei-face.png"
+   ],
+   "note": "RDBT on her eyes, brows and mouth, \"smile\". Last picture: current."
+  },
+  {
+   "id": "rei-f3",
+   "label": "rei-f3 (in the game now)",
+   "image": "art/parts/chibi-face-1/shots/f3-rei-face.png",
+   "images": [
+    "art/parts/chibi-face-1/shots/f3-rei-face34.png",
+    "art/parts/chibi-face-1/shots/f3-rei-front.png",
+    "art/parts/chibi-face-1/shots/f3-rei-34.png",
+    "art/parts/chibi-face-1/shots/current-rei-face.png"
+   ],
+   "note": "As f2 with \"smirk\". Last picture: current."
+  },
+  {
+   "id": "kuro-f1",
+   "label": "kuro-f1",
+   "image": "art/parts/chibi-face-1/shots/f1-kuro-face.png",
+   "images": [
+    "art/parts/chibi-face-1/shots/f1-kuro-face34.png",
+    "art/parts/chibi-face-1/shots/f1-kuro-front.png",
+    "art/parts/chibi-face-1/shots/current-kuro-face.png"
+   ],
+   "note": "FLUX edit of the whole head. Last picture: her current face."
+  },
+  {
+   "id": "kuro-f2",
+   "label": "kuro-f2",
+   "image": "art/parts/chibi-face-1/shots/f2-kuro-face.png",
+   "images": [
+    "art/parts/chibi-face-1/shots/f2-kuro-face34.png",
+    "art/parts/chibi-face-1/shots/f2-kuro-front.png",
+    "art/parts/chibi-face-1/shots/current-kuro-face.png"
+   ],
+   "note": "RDBT on her eyes, brows and mouth, denoise 0.6. Last picture: current."
+  },
+  {
+   "id": "kuro-f3",
+   "label": "kuro-f3 (in the game now)",
+   "image": "art/parts/chibi-face-1/shots/f3-kuro-face.png",
+   "images": [
+    "art/parts/chibi-face-1/shots/f3-kuro-face34.png",
+    "art/parts/chibi-face-1/shots/f3-kuro-front.png",
+    "art/parts/chibi-face-1/shots/f3-kuro-34.png",
+    "art/parts/chibi-face-1/shots/current-kuro-face.png"
+   ],
+   "note": "As f2 at denoise 0.45. Last picture: current."
+  }
  ],
  "links": [
-  {"label": "Play it with the new builds (?chibi=1)", "href": "game3d/?chibi=1"},
-  {"label": "The same with Meshy's proportions, to compare (?chibi=1&chibibuild=0; Rei is rei-2 here too)", "href": "game3d/?chibi=1&chibibuild=0"},
-  {"label": "Turn rei-2 beside rei-1 and Kuro, with the idle and walk (live 3D, Meshy's proportions)", "href": "tools/characters/parts/viewer.html?cfg=/reviews/chibi-proportions-1/viewer.json&a=rei-2&m=walk&c=rei-1"},
-  {"label": "Credits spent: Meshy 35 (one generation 30, one rig 5), balance 530 after the generation", "href": "reviews/chibi-proportions-1/credits.json"},
-  {"label": "Every input picture's prompt, seed and settings", "href": "art/candidates/chibi-proportions-1/prompts.json"},
-  {"label": "Follow-up issue #213", "href": "https://github.com/fumbleforce/tower-of-words/issues/213"}
+  {
+   "label": "Play it with the new builds (?chibi=1)",
+   "href": "game3d/?chibi=1"
+  },
+  {
+   "label": "The same with Meshy's proportions, to compare (?chibi=1&chibibuild=0; Rei is rei-2 here too)",
+   "href": "game3d/?chibi=1&chibibuild=0"
+  },
+  {
+   "label": "Turn rei-2 beside rei-1 and Kuro, with the idle and walk (live 3D, Meshy's proportions)",
+   "href": "tools/characters/parts/viewer.html?cfg=/reviews/chibi-proportions-1/viewer.json&a=rei-2&m=walk&c=rei-1"
+  },
+  {
+   "label": "Credits spent: Meshy 35 (one generation 30, one rig 5), balance 530 after the generation",
+   "href": "reviews/chibi-proportions-1/credits.json"
+  },
+  {
+   "label": "Every input picture's prompt, seed and settings",
+   "href": "art/candidates/chibi-proportions-1/prompts.json"
+  },
+  {
+   "label": "Follow-up issue #213",
+   "href": "https://github.com/fumbleforce/tower-of-words/issues/213"
+  }
  ]
 }

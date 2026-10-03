@@ -1,5 +1,6 @@
 """Game copies of the Meshy chibis (Review chibi-cast-meshy-1: kuro-1, eric-1, mio-3; chibi-cast-meshy-2: the rest;
-chibi-proportions-1: rei-2).
+chibi-proportions-1: rei-2;
+chibi-face-1: rei-2 and kuro-1 with their faces repainted).
 
 From each rigged 60k-face file in art/parts/<round>/meshy/ (PICKS) this writes game3d/assets/characters/chibi-<id>/:
   model.glb     the mesh decimated to about 20k triangles (skin weights carried over, the full mesh's normals), the
@@ -21,7 +22,14 @@ OUT = os.path.join(ROOT, 'game3d/assets/characters')
 R1, R2 = 'chibi-cast-meshy', 'chibi-cast-meshy-2'
 PICKS = {'eric': (R1, 'eric-1'), 'mio': (R1, 'mio-3'), 'kuro': (R1, 'kuro-1')}
 PICKS.update({w: (R2, w + '-1') for w in ('mori', 'kenji', 'emi', 'guard', 'kuroda', 'aoi')})
-PICKS['rei'] = ('chibi-proportions-1', 'rei-2')  # a sly, confident face (Review chibi-proportions-1)
+# Rei's rei-2 and Kuro's kuro-1 with their faces repainted on the texture (art/candidates/chibi-face-1, Review
+# chibi-proportions-1 "Rei face" and "Kuro face"); the meshes are the same
+PICKS['rei'] = ('chibi-face-1', 'rei-f3')
+PICKS['kuro'] = ('chibi-face-1', 'kuro-f3')
+# CHIBI_PICK=rei=chibi-face-1/rei-f2,kuro=...: bake another rigged file for a person (to try one in the game)
+for p in filter(None, os.environ.get('CHIBI_PICK', '').split(',')):
+    k, v = p.split('=')
+    PICKS[k] = tuple(v.split('/'))
 # file suffix: triangles
 TIERS = {'': 20000, '-lo': 8000}
 TEX = int(os.environ.get('CHIBI_TEX', 1024))
