@@ -1,0 +1,230 @@
+{
+ "rei-t-202": {
+  "model": "rdbtAnima",
+  "method": "t2i",
+  "seed": 202,
+  "denoise": 1.0,
+  "source": null,
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1girl, solo, Rei, a 26-year-old woman: long silver-grey hair in a sleek high ponytail, steel-grey eyes, sharp eyeliner, gold hoop earrings, tailored white suit over a black shirt, gold pin on the lapel, narrow refined face, high cheekbones, tall and curvy, sly confident look, slight knowing smile, waist-up portrait facing the viewer at a slight angle, (the whole head inside the frame with empty space above the hair:1.2), plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, fat, obese, plump, (rim light, red rim light, red outline, backlighting:1.4), holding, holding object, tool, screwdriver, pen, pencil, cup, phone, papers, book",
+  "w": 896,
+  "h": 1152,
+  "steps": 30,
+  "cfg": 5,
+  "sampler": "euler_ancestral normal",
+  "frame_warn": [
+   "head/hair 9px from the top edge (want >= 34)"
+  ]
+ },
+ "rei-t-2101": {
+  "model": "rdbtAnima",
+  "method": "t2i",
+  "seed": 2101,
+  "denoise": 1.0,
+  "source": null,
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1girl, solo, Rei, a 26-year-old woman: long silver-grey hair in a sleek high ponytail, steel-grey eyes, sharp eyeliner, gold hoop earrings, tailored white suit over a black shirt, gold pin on the lapel, narrow refined face, high cheekbones, tall and curvy, sly confident look, slight knowing smile, waist-up portrait facing the viewer at a slight angle, (the whole head inside the frame with empty space above the hair:1.2), plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, fat, obese, plump, (rim light, red rim light, red outline, backlighting:1.4), holding, holding object, tool, screwdriver, pen, pencil, cup, phone, papers, book",
+  "w": 896,
+  "h": 1152,
+  "steps": 30,
+  "cfg": 5,
+  "sampler": "euler_ancestral normal",
+  "frame_warn": [
+   "head/hair 0px from the top edge (want >= 34)"
+  ]
+ },
+ "rei-t-2102": {
+  "model": "rdbtAnima",
+  "method": "t2i",
+  "seed": 2102,
+  "denoise": 1.0,
+  "source": null,
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1girl, solo, Rei, a 26-year-old woman: long silver-grey hair in a sleek high ponytail, steel-grey eyes, sharp eyeliner, gold hoop earrings, tailored white suit over a black shirt, gold pin on the lapel, narrow refined face, high cheekbones, tall and curvy, sly confident look, slight knowing smile, waist-up portrait facing the viewer at a slight angle, (the whole head inside the frame with empty space above the hair:1.2), plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, fat, obese, plump, (rim light, red rim light, red outline, backlighting:1.4), holding, holding object, tool, screwdriver, pen, pencil, cup, phone, papers, book",
+  "w": 896,
+  "h": 1152,
+  "steps": 30,
+  "cfg": 5,
+  "sampler": "euler_ancestral normal",
+  "frame_warn": [
+   "head/hair 3px from the top edge (want >= 34)"
+  ]
+ },
+ "rei-t-2103": {
+  "model": "rdbtAnima",
+  "method": "t2i",
+  "seed": 2103,
+  "denoise": 1.0,
+  "source": null,
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1girl, solo, Rei, a 26-year-old woman: long silver-grey hair in a sleek high ponytail, steel-grey eyes, sharp eyeliner, gold hoop earrings, tailored white suit over a black shirt, gold pin on the lapel, narrow refined face, high cheekbones, tall and curvy, sly confident look, slight knowing smile, waist-up portrait facing the viewer at a slight angle, (the whole head inside the frame with empty space above the hair:1.2), plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, fat, obese, plump, (rim light, red rim light, red outline, backlighting:1.4), holding, holding object, tool, screwdriver, pen, pencil, cup, phone, papers, book",
+  "w": 896,
+  "h": 1152,
+  "steps": 30,
+  "cfg": 5,
+  "sampler": "euler_ancestral normal",
+  "frame_warn": [
+   "head/hair 0px from the top edge (want >= 34)"
+  ]
+ },
+ "rei-t-2104": {
+  "model": "rdbtAnima",
+  "method": "t2i",
+  "seed": 2104,
+  "denoise": 1.0,
+  "source": null,
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1girl, solo, Rei, a 26-year-old woman: long silver-grey hair in a sleek high ponytail, steel-grey eyes, sharp eyeliner, gold hoop earrings, tailored white suit over a black shirt, gold pin on the lapel, narrow refined face, high cheekbones, tall and curvy, sly confident look, slight knowing smile, waist-up portrait facing the viewer at a slight angle, (the whole head inside the frame with empty space above the hair:1.2), plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, fat, obese, plump, (rim light, red rim light, red outline, backlighting:1.4), holding, holding object, tool, screwdriver, pen, pencil, cup, phone, papers, book",
+  "w": 896,
+  "h": 1152,
+  "steps": 30,
+  "cfg": 5,
+  "sampler": "euler_ancestral normal",
+  "frame_warn": [
+   "head/hair 0px from the top edge (want >= 34)"
+  ]
+ },
+ "rei-t-2105": {
+  "model": "rdbtAnima",
+  "method": "t2i",
+  "seed": 2105,
+  "denoise": 1.0,
+  "source": null,
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1girl, solo, Rei, a 26-year-old woman: long silver-grey hair in a sleek high ponytail, steel-grey eyes, sharp eyeliner, gold hoop earrings, tailored white suit over a black shirt, gold pin on the lapel, narrow refined face, high cheekbones, tall and curvy, sly confident look, slight knowing smile, waist-up portrait facing the viewer at a slight angle, (the whole head inside the frame with empty space above the hair:1.2), plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, fat, obese, plump, (rim light, red rim light, red outline, backlighting:1.4), holding, holding object, tool, screwdriver, pen, pencil, cup, phone, papers, book",
+  "w": 896,
+  "h": 1152,
+  "steps": 30,
+  "cfg": 5,
+  "sampler": "euler_ancestral normal",
+  "frame_warn": [
+   "head/hair 0px from the top edge (want >= 34)"
+  ]
+ },
+ "rei-i50-2101": {
+  "model": "rdbtAnima",
+  "method": "i2i",
+  "seed": 2101,
+  "denoise": 0.5,
+  "source": "art/approved/rei/rei-after.webp",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1girl, solo, Rei, a 26-year-old woman: long silver-grey hair in a sleek high ponytail, steel-grey eyes, sharp eyeliner, gold hoop earrings, tailored white suit over a black shirt, gold pin on the lapel, narrow refined face, high cheekbones, tall and curvy, sly confident look, slight knowing smile, waist-up portrait facing the viewer at a slight angle, (the whole head inside the frame with empty space above the hair:1.2), plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, fat, obese, plump, (rim light, red rim light, red outline, backlighting:1.4), holding, holding object, tool, screwdriver, pen, pencil, cup, phone, papers, book",
+  "w": 896,
+  "h": 1152,
+  "steps": 30,
+  "cfg": 5,
+  "sampler": "euler_ancestral normal",
+  "frame_warn": []
+ },
+ "rei-i50-2102": {
+  "model": "rdbtAnima",
+  "method": "i2i",
+  "seed": 2102,
+  "denoise": 0.5,
+  "source": "art/approved/rei/rei-after.webp",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1girl, solo, Rei, a 26-year-old woman: long silver-grey hair in a sleek high ponytail, steel-grey eyes, sharp eyeliner, gold hoop earrings, tailored white suit over a black shirt, gold pin on the lapel, narrow refined face, high cheekbones, tall and curvy, sly confident look, slight knowing smile, waist-up portrait facing the viewer at a slight angle, (the whole head inside the frame with empty space above the hair:1.2), plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, fat, obese, plump, (rim light, red rim light, red outline, backlighting:1.4), holding, holding object, tool, screwdriver, pen, pencil, cup, phone, papers, book",
+  "w": 896,
+  "h": 1152,
+  "steps": 30,
+  "cfg": 5,
+  "sampler": "euler_ancestral normal",
+  "frame_warn": []
+ },
+ "rei-i65-2101": {
+  "model": "rdbtAnima",
+  "method": "i2i",
+  "seed": 2101,
+  "denoise": 0.65,
+  "source": "art/approved/rei/rei-after.webp",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1girl, solo, Rei, a 26-year-old woman: long silver-grey hair in a sleek high ponytail, steel-grey eyes, sharp eyeliner, gold hoop earrings, tailored white suit over a black shirt, gold pin on the lapel, narrow refined face, high cheekbones, tall and curvy, sly confident look, slight knowing smile, waist-up portrait facing the viewer at a slight angle, (the whole head inside the frame with empty space above the hair:1.2), plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, fat, obese, plump, (rim light, red rim light, red outline, backlighting:1.4), holding, holding object, tool, screwdriver, pen, pencil, cup, phone, papers, book",
+  "w": 896,
+  "h": 1152,
+  "steps": 30,
+  "cfg": 5,
+  "sampler": "euler_ancestral normal",
+  "frame_warn": []
+ },
+ "rei-i65-2102": {
+  "model": "rdbtAnima",
+  "method": "i2i",
+  "seed": 2102,
+  "denoise": 0.65,
+  "source": "art/approved/rei/rei-after.webp",
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1girl, solo, Rei, a 26-year-old woman: long silver-grey hair in a sleek high ponytail, steel-grey eyes, sharp eyeliner, gold hoop earrings, tailored white suit over a black shirt, gold pin on the lapel, narrow refined face, high cheekbones, tall and curvy, sly confident look, slight knowing smile, waist-up portrait facing the viewer at a slight angle, (the whole head inside the frame with empty space above the hair:1.2), plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, fat, obese, plump, (rim light, red rim light, red outline, backlighting:1.4), holding, holding object, tool, screwdriver, pen, pencil, cup, phone, papers, book",
+  "w": 896,
+  "h": 1152,
+  "steps": 30,
+  "cfg": 5,
+  "sampler": "euler_ancestral normal",
+  "frame_warn": []
+ },
+ "rei-rf-202": {
+  "method": "reframe outpaint of rei-t-202",
+  "source": "rei-t-202",
+  "tool": "tools/reframe.py",
+  "canvas": "1096x1408 (256 px added on top, 100 px each side)",
+  "seed": 301,
+  "denoise": 0.7,
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1girl, solo, Rei, a 26-year-old woman: long silver-grey hair in a sleek high ponytail, steel-grey eyes, sharp eyeliner, gold hoop earrings, tailored white suit over a black shirt, gold pin on the lapel, narrow refined face, high cheekbones, tall and curvy, sly confident look, slight knowing smile, waist-up portrait facing the viewer at a slight angle, (the whole head inside the frame with empty space above the hair:1.2), plain light grey background, soft even studio light, a high ponytail tied at the crown with a plain dark hair tie, the top of the head inside the frame with empty plain background above it, elbows inside the frame",
+  "negative_extra": ", hat, headwear, hair bun, second ponytail, ponytail out of frame, pole, stick",
+  "frame_warn": []
+ },
+ "rei-rf-2101": {
+  "method": "reframe outpaint of rei-t-2101",
+  "source": "rei-t-2101",
+  "tool": "tools/reframe.py",
+  "canvas": "1096x1408 (256 px added on top, 100 px each side)",
+  "seed": 301,
+  "denoise": 0.7,
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1girl, solo, Rei, a 26-year-old woman: long silver-grey hair in a sleek high ponytail, steel-grey eyes, sharp eyeliner, gold hoop earrings, tailored white suit over a black shirt, gold pin on the lapel, narrow refined face, high cheekbones, tall and curvy, sly confident look, slight knowing smile, waist-up portrait facing the viewer at a slight angle, (the whole head inside the frame with empty space above the hair:1.2), plain light grey background, soft even studio light, a high ponytail tied at the crown with a plain dark hair tie, the top of the head inside the frame with empty plain background above it, elbows inside the frame",
+  "negative_extra": ", hat, headwear, hair bun, second ponytail, ponytail out of frame, pole, stick",
+  "frame_warn": []
+ },
+ "rei-rf-2102": {
+  "method": "reframe outpaint of rei-t-2102",
+  "source": "rei-t-2102",
+  "tool": "tools/reframe.py",
+  "canvas": "1096x1408 (256 px added on top, 100 px each side)",
+  "seed": 301,
+  "denoise": 0.7,
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1girl, solo, Rei, a 26-year-old woman: long silver-grey hair in a sleek high ponytail, steel-grey eyes, sharp eyeliner, gold hoop earrings, tailored white suit over a black shirt, gold pin on the lapel, narrow refined face, high cheekbones, tall and curvy, sly confident look, slight knowing smile, waist-up portrait facing the viewer at a slight angle, (the whole head inside the frame with empty space above the hair:1.2), plain light grey background, soft even studio light, a high ponytail tied at the crown with a plain dark hair tie, the top of the head inside the frame with empty plain background above it, elbows inside the frame",
+  "negative_extra": ", hat, headwear, hair bun, second ponytail, ponytail out of frame, pole, stick",
+  "frame_warn": []
+ },
+ "rei-rf-2103": {
+  "method": "reframe outpaint of rei-t-2103",
+  "source": "rei-t-2103",
+  "tool": "tools/reframe.py",
+  "canvas": "1096x1408 (256 px added on top, 100 px each side)",
+  "seed": 301,
+  "denoise": 0.7,
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1girl, solo, Rei, a 26-year-old woman: long silver-grey hair in a sleek high ponytail, steel-grey eyes, sharp eyeliner, gold hoop earrings, tailored white suit over a black shirt, gold pin on the lapel, narrow refined face, high cheekbones, tall and curvy, sly confident look, slight knowing smile, waist-up portrait facing the viewer at a slight angle, (the whole head inside the frame with empty space above the hair:1.2), plain light grey background, soft even studio light, a high ponytail tied at the crown with a plain dark hair tie, the top of the head inside the frame with empty plain background above it, elbows inside the frame",
+  "negative_extra": ", hat, headwear, hair bun, second ponytail, ponytail out of frame, pole, stick",
+  "frame_warn": []
+ },
+ "rei-rf-2104": {
+  "method": "reframe outpaint of rei-t-2104",
+  "source": "rei-t-2104",
+  "tool": "tools/reframe.py",
+  "canvas": "1096x1408 (256 px added on top, 100 px each side)",
+  "seed": 301,
+  "denoise": 0.7,
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1girl, solo, Rei, a 26-year-old woman: long silver-grey hair in a sleek high ponytail, steel-grey eyes, sharp eyeliner, gold hoop earrings, tailored white suit over a black shirt, gold pin on the lapel, narrow refined face, high cheekbones, tall and curvy, sly confident look, slight knowing smile, waist-up portrait facing the viewer at a slight angle, (the whole head inside the frame with empty space above the hair:1.2), plain light grey background, soft even studio light, a high ponytail tied at the crown with a plain dark hair tie, the top of the head inside the frame with empty plain background above it, elbows inside the frame",
+  "negative_extra": ", hat, headwear, hair bun, second ponytail, ponytail out of frame, pole, stick",
+  "frame_warn": []
+ },
+ "rei-rf-2105": {
+  "method": "reframe outpaint of rei-t-2105",
+  "source": "rei-t-2105",
+  "tool": "tools/reframe.py",
+  "canvas": "1096x1408 (256 px added on top, 100 px each side)",
+  "seed": 301,
+  "denoise": 0.7,
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1girl, solo, Rei, a 26-year-old woman: long silver-grey hair in a sleek high ponytail, steel-grey eyes, sharp eyeliner, gold hoop earrings, tailored white suit over a black shirt, gold pin on the lapel, narrow refined face, high cheekbones, tall and curvy, sly confident look, slight knowing smile, waist-up portrait facing the viewer at a slight angle, (the whole head inside the frame with empty space above the hair:1.2), plain light grey background, soft even studio light, a high ponytail tied at the crown with a plain dark hair tie, the top of the head inside the frame with empty plain background above it, elbows inside the frame",
+  "negative_extra": ", hat, headwear, hair bun, second ponytail, ponytail out of frame, pole, stick",
+  "frame_warn": []
+ }
+}
