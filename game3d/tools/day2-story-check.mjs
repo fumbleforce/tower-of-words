@@ -34,7 +34,7 @@ for (const [place, story] of Object.entries(STORIES)) {
       if (s.say) {
         assert(speakers[s.say], `${place}/${node}: unknown speaker ${s.say}`);
         assert(s.emo || speakers[s.say].phone, `${place}/${node}: unvoiced direction for ${s.say}`);
-        if (['mori', 'guard'].includes(s.say)) assert(s.en && !s.overheard, `${place}/${node}: Japanese must be subtitled`);
+        if (['mori', 'guard', 'kuroda'].includes(s.say)) assert(s.en && !s.overheard, `${place}/${node}: Japanese must be subtitled`);
       }
       for (const k of ['text', 'prompt', 'line', 'en']) if (s[k]) text(s[k]);
       if (s.if) cond(s.if);
@@ -69,6 +69,16 @@ for (const [place, story] of Object.entries(STORIES)) {
     for (const entry of Array.isArray(entries) ? entries : [entries]) {
       const e = typeof entry === 'string' ? { node: entry } : entry;
       assert(story.nodes[e.node], `${place}: trigger to missing ${e.node}`); if (e.if) cond(e.if);
+      if (kind === 'idle') {
+        const idleSteps = list => { for (const step of list || []) {
+          if (typeof step === 'string') continue;
+          assert(!step.choice && !step.offer && !step.go && !step.call
+            && !['goal', 'next', 'trip', 'end', 'hold', 'type', 'kotodama'].includes(step.do),
+          `${place}/${e.node}: idle dialogue must not move the story on`);
+          idleSteps(step.then); idleSteps(step.else);
+        } };
+        idleSteps(story.nodes[e.node]);
+      }
     }
   }
   for (const [id, c] of Object.entries({ ...story.show, ...story.goal })) { assert(things.has(id), `${place}: bad marker ${id}`); cond(c); }
@@ -76,12 +86,12 @@ for (const [place, story] of Object.entries(STORIES)) {
   assert(facts.includes(`day2/${place}.js`), `${place}: missing facts entry`);
   for (const node of Object.keys(story.nodes)) assert(facts.includes('`' + node + '`'), `${place}/${node}: missing facts node`);
 }
-assert.deepEqual(typed.map(x => x.word).sort(), Object.keys(NEW_WORDS).sort(), 'Each new word needs exactly one teaching node');
+assert.deepEqual([...new Set(typed.map(x => x.word))].sort(), Object.keys(NEW_WORDS).sort(), 'Each new word needs a teaching node');
 for (const t of typed) assert(facts.includes(`| \`${t.word}\` | \`${t.from}\` | \`${t.node}\` |`), 'Missing taught-word fact');
 
 // Exercise actual story data with the engine's condition evaluator. Hooks are recorded, not faked as built scenes.
 class Play {
-  constructor(flags) { this.flags = { ...flags }; this.lines = []; this.hooks = []; this.place = 'dorms'; this.steps = 0; }
+  constructor(flags) { this.flags = { ...flags }; this.lines = []; this.speech = []; this.hooks = []; this.place = 'dorms'; this.steps = 0; }
   cond = createConditionEvaluator(key => this.flags[key] ?? false);
   set(value) { if (typeof value === 'string') this.flags[value] = true; else Object.assign(this.flags, value); }
   run(node, picks = []) {
@@ -92,7 +102,7 @@ class Play {
         if (typeof s === 'string') { this.lines.push(s); continue; }
         if (s.set) this.set(s.set); if (s.unset) delete this.flags[s.unset];
         if (s.if) { const jump = visit(this.cond(s.if) ? s.then || [] : s.else || []); if (jump) return jump; }
-        if (s.say) this.lines.push(s.text);
+        if (s.say) { this.lines.push(s.text); this.speech.push(s); }
         if (s.choice) {
           const pick = picks.shift();
           const go = typeof pick === 'string' ? pick : pick?.go;
@@ -140,6 +150,37 @@ for (const period of PERIODS) for (const start of OPEN_PLACES) {
   while (queue.length) for (const next of TRIPS[queue.shift()]) if (!seen.has(next)) { seen.add(next); queue.push(next); }
   assert.equal(seen.size, OPEN_PLACES.length, `${period}: stranded at ${start}`);
 }
+// A return after any completed milestone must point toward the next unfinished action.
+const milestones = [
+  [{}, /station|train doors/i],
+  [{ d2_ticket_done: true }, /Emi|B2/i],
+  [{ d2_ticket_done: true, d2_brief_done: true }, /desk|ready to work/i],
+  [{ d2_ticket_done: true, d2_brief_done: true, d2_shift_done: true }, /Meet Kenji/i],
+  [{ d2_ticket_done: true, d2_brief_done: true, d2_shift_done: true, d2_met_kenji: true }, /bench|others/i],
+  [{ d2_ticket_done: true, d2_brief_done: true, d2_shift_done: true, d2_met_kenji: true, d2_ate: true }, /bench|others/i],
+  [{ d2_ticket_done: true, d2_brief_done: true, d2_shift_done: true, d2_met_kenji: true, d2_ate: true, d2_party_done: true }, /home|203/i],
+];
+for (const [flags, intent] of milestones) for (const place of ['dorm_court', 'east_lane', 'east_coast', 'plaza', 'forecourt', 'gate', 'train']) {
+  const p = new Play({ ...flags, d2_station_seen: true }); p.place = place; p.run(STORIES[place].start);
+  const goal = p.hooks.findLast(h => h.do === 'goal');
+  // On the platform, the initial station goal becomes the local check control.
+  assert.match(goal.text, place === 'train' && !flags.d2_ticket_done ? /door check/i : intent,
+    `${place}: wrong return goal for ${JSON.stringify(flags)}`);
+  assert(PLACE_DETAILS[place].things[goal.at] || NEEDS[place]?.things?.includes(goal.at), `${place}: goal pin is absent`);
+  if (place === 'dorm_court' && !flags.d2_party_done) {
+    const before = p.hooks.filter(h => h.do === 'goal').length; p.fire('talk:dorm_entry');
+    assert.equal(p.hooks.filter(h => h.do === 'goal').length, before, 'Dorm entrance replaced the current job goal');
+  }
+}
+for (const order of [false, true]) for (const warm of [false, true]) {
+  const p = new Play({ lunch_mio: warm, d2_checked: true }); p.place = 'train'; p.run('d2_platform');
+  const before = p.lines.length, spoken = p.speech.length; p.run(order ? 'd2_order_sensor' : 'd2_keep_sensor');
+  assert(p.lines.slice(before).some(s => /report.*sent|sent.*report/i.test(s)), 'Submitting the report gives no confirmation');
+  assert(p.speech.slice(spoken).some(s => s.say === (warm ? 'mio' : 'miotext')), 'Mio does not react to the submitted report');
+  p.run('d2_platform');
+  assert.equal(p.flags.d2_mio_here ?? false, false, 'Mio remains at the platform after the report');
+  assert.equal(p.hooks.findLast(h => h.do === 'stationSetup').companion, false, 'Station return restored a departed Mio');
+}
 const transcripts = [];
 let routes = 0;
 for (const historyKind of ['cold', 'lunch', 'warmth']) for (const order of [false, true]) for (const experiment of [false, true])
@@ -166,18 +207,26 @@ for (const topic of ['d2_norway', 'd2_quiet', 'd2_after_work']) for (const food 
   p.fire('talk:party_seat', [{ go: 'd2_take_food', food }, topic]);
   assert.equal(p.flags.d2_food, food); assert(p.flags.know_tabetai); assert(!p.flags.know_nomitai);
   assert.equal(p.hooks.filter(x => x.do === 'type' && x.word === 'tabetai').length, 1);
+  assert.match(p.hooks.find(x => x.do === 'type' && x.word === 'tabetai').prompt, food === 'riceball' ? /rice ball/i : /sandwich/i, 'Food prompt lost the chosen object');
   if (extra) { p.fire('talk:kenji', ['d2_drink_word']); assert(p.flags.know_nomitai); }
   p.move('east_lane'); p.move('shotengai');
   p.fire('talk:party_seat', ['d2_goodnight']); assert(p.flags.d2_party_done);
-  if (extra) { p.fire('talk:mori'); p.fire('talk:mori'); assert(p.flags.d2_mori_rest_seen); }
+  if (extra) { p.fire('talk:mori', ['d2_go_word']); p.fire('talk:mori'); assert(p.flags.d2_mori_rest_seen && p.flags.know_ikitai); }
   p.move('east_lane'); p.move('plaza'); p.move('forecourt'); p.move('office');
   assert(p.hooks.at(-1).text.includes('Head home'), 'Office return lost the home goal');
   p.move('forecourt'); p.move('gate'); p.move('train');
   assert(!p.flags.d2_mio_here, 'Mio duplicated at the station after work');
   assert(p.hooks.at(-1).text.includes('Head home'), 'Station return lost the home goal');
   p.move('gate'); p.move('forecourt'); p.move('plaza'); p.move('east_lane');
-  p.move('east_coast'); p.move('east_lane'); p.move('dorm_court'); p.move('dorms');
+  p.move('east_coast');
+  if (extra) { p.fire('talk:kuroda', ['d2_see_word']); assert(p.flags.know_mitai); }
+  p.move('east_lane'); p.move('dorm_court'); p.move('dorms');
   assert(p.ended && p.flags.d2_complete);
+  for (const word of Object.keys(NEW_WORDS)) {
+    const expected = Number(extra || word === 'tabetai');
+    assert.equal(p.hooks.filter(h => h.do === 'type' && h.word === word).length, expected, `${word}: lesson repeated or became compulsory`);
+    assert.equal(!!p.flags['know_' + word], !!expected);
+  }
   for (const [k, v] of Object.entries(history)) if (k !== 'going_home') assert.equal(p.flags[k], v, `Changed day-1 history ${k}`);
   // A saved flag set must preserve typed words and completed scenes on return.
   const resumed = new Play(JSON.parse(JSON.stringify(p.flags))); resumed.place = 'shotengai'; resumed.run('d2_arrive');
@@ -185,6 +234,22 @@ for (const topic of ['d2_norway', 'd2_quiet', 'd2_after_work']) for (const food 
   if (process.env.TRANSCRIPTS) transcripts.push({ historyKind, order, experiment, food, extra, meetFirst, topic, lines: p.lines });
   routes++;
 }
+// Optional lessons remain available after declining, leaving and restoring saved flags.
+for (const lesson of [
+  { place: 'shotengai', target: 'mori', word: 'ikitai', skip: 'd2_mori_rest_end', learn: 'd2_go_word' },
+  { place: 'east_coast', target: 'kuroda', word: 'mitai', skip: 'd2_leave_lookout', learn: 'd2_see_word' },
+]) {
+  const flags = { d2_ticket_done: true, d2_brief_done: true, d2_shift_done: true, d2_ate: true, d2_party_done: true };
+  const p = new Play(flags); p.place = lesson.place; p.run(STORIES[p.place].start);
+  p.fire('talk:' + lesson.target, [lesson.skip]); assert(!p.flags['know_' + lesson.word]);
+  const returned = new Play(JSON.parse(JSON.stringify(p.flags))); returned.place = lesson.place; returned.run(STORIES[returned.place].start);
+  returned.fire('talk:' + lesson.target, [lesson.learn]);
+  assert(returned.flags['know_' + lesson.word], `${lesson.word}: declining removed the lesson`);
+  assert.equal(returned.hooks.filter(h => h.do === 'type' && h.word === lesson.word).length, 1);
+  const learned = new Play(JSON.parse(JSON.stringify(returned.flags))); learned.place = lesson.place; learned.run(STORIES[learned.place].start);
+  learned.fire('say:' + lesson.word + ':' + lesson.target);
+  assert(!learned.hooks.some(h => h.do === 'type'), `${lesson.word}: saying a learned phrase replays teaching`);
+}
 if (process.env.TRANSCRIPTS) fs.writeFileSync(process.env.TRANSCRIPTS, JSON.stringify(transcripts, null, 2) + '\n');
-console.log(`day 2 draft: ${nodeCount} nodes, ${typed.length} new words, ${routes} complete branch routes passed`);
+console.log(`day 2 draft: ${nodeCount} nodes, ${Object.keys(NEW_WORDS).length} new words, ${routes} complete branch routes passed`);
 console.log('Scene hooks, trips, audio, placement and runtime save integration remain pending in story/day2/README.md.');

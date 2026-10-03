@@ -40,7 +40,7 @@ export default {
       ] },
     ],
     d2_assess: [
-      { say: 'emi', emo: 'casual', text: 'Of course. Start with B2. Mori can show you what’s been giving us trouble.' },
+      { say: 'emi', emo: 'casual', text: 'Of course. Start with B2 and see how far you get.' },
       { go: 'd2_invitation' },
     ],
     d2_limits: [
@@ -48,11 +48,16 @@ export default {
       { go: 'd2_invitation' },
     ],
     d2_invitation: [
+      { say: 'emi', emo: 'casual', text: 'Mori’s left his maintenance notes on your desk. Have a look through them this afternoon.' },
+      { do: 'cam', on: 'kenji', zoom: 1.2 },
       { say: 'kenji', emo: 'bright', text: 'Eric! After work. Food. Welcome food!' },
+      { do: 'cam', on: 'emi', zoom: 1.2 },
       { say: 'emi', emo: 'bright', text: 'Mori’s been arranging it. I’ve another meeting upstairs, so don’t wait for me.' },
       { say: 'eric', emo: 'warm', text: 'That’s kind of him.' },
+      { do: 'cam', on: 'kenji', zoom: 1.2 },
       { say: 'kenji', emo: 'bright', text: 'I help Mori-san. Then... izakaya. Blue curtain. We meet there.' },
-      { say: 'emi', emo: 'casual', text: 'You know the little street below the plaza? You’ll find him there.' },
+      { do: 'cam', back: true },
+      { say: 'emi', emo: 'casual', text: 'The covered street off the plaza, with the shops. You’ll find him there.' },
       { set: 'd2_brief_done' }, { do: 'cam', back: true },
       { do: 'goal', text: 'Sit at your desk when you’re ready to work.', at: 'my_desk' }, { do: 'save' },
     ],

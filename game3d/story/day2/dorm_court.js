@@ -10,7 +10,10 @@ export default {
   },
   nodes: {
     d2_arrive: direction('street_gate', 'street_gate', 'street_gate', 'stairs'),
-    d2_hall: [{ do: 'goal', text: 'Your room is upstairs, 203.', at: 'stairs' }],
+    d2_hall: [
+      { say: 'eric', emo: 'tired', text: 'Upstairs, 203. I know this bit now.' },
+      { if: 'd2_party_done', then: [{ do: 'goal', text: 'Your room is upstairs, 203.', at: 'stairs' }] },
+    ],
     d2_go_up: [{ do: 'trip', to: 'dorms' }],
     d2_to_lane: [{ do: 'trip', to: 'east_lane' }],
     d2_mailboxes: [
