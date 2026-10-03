@@ -4,9 +4,8 @@ import { createPlaceLifecycle } from './places/lifecycle.js';
 import { GLOBAL_HOOKS } from './narrative/hooks.js';
 import { installInteractions } from './gameplay/interactions.js';
 import { outlineMeshes, meshesNear } from './gameplay/highlight.js';
-import { PLACE_FILES, NEXT, canTravel } from './places/definitions.js';
+import { PLACE_FILES, NEXT } from './places/definitions.js';
 import { assertRegistered } from './narrative/registration.js';
-import { needsLegacyOpening } from './narrative/legacy-opening.js';
 import * as THREE from 'three';
 import { createRenderer, Markers, Q, blob } from './engine.js';
 import { installMetrics } from './perf/metrics.js';
@@ -40,9 +39,9 @@ import { sportsPlace as sports } from './places/sports.js';
 import { officeQuarterPlace as office_quarter } from './places/office-quarter.js';
 import { harbourPlace as harbour } from './places/harbour.js';
 import { worksPlace as works } from './places/works.js';
-import { showEnd } from './end.js';
 import { snapshot as snapshotOf, crossfade } from './places/crossfade.js';
-import { installSim, sim, stepAmbient, save, loadSave, restore, clearSave } from './sim.js';
+import { installSim, sim, stepAmbient, save, loadSave, clearSave } from './sim.js';
+import { createContinue, dayStartSave } from './continue.js';
 
 const CAP = Q.has('cap');
 const TEST = Q.get('test') === 'fast';
@@ -433,6 +432,7 @@ const { prepare, enter, travel, startScene } = createPlaceLifecycle(game, {
   snapshot: () => snapshotOf(render, canvas),
   crossfade,
 });
+const continueFrom = createContinue(game, { enter, travel, startScene, PLACES });
 const targets = createTargets(game);
 game.posOf = targets.posOf;
 installMovementHooks(game, targets);
@@ -597,10 +597,17 @@ async function boot() {
   game.mioNpc.blob = blob(0.55, 0.4);
   game.mioNpc.root.add(game.mioNpc.blob);
   requestAnimationFrame(frame);
-  const start = Q.get('place') || 'train';
-  const showTitle = start === 'train' && !Q.has('skip') && !TEST && !CAP;
-  const saved = showTitle ? migrateForecourtSave(loadSave()) : null;
+  // ?day=2: straight into that day, from the player's own finished day before it, or a plain one (days.js)
+  const forced = +Q.get('day') > 1 ? dayStartSave(+Q.get('day'), Q.get('history') || 'mio', Q.get('place')) : null;
+  const start = forced?.place || Q.get('place') || 'train';
+  const showTitle = start === 'train' && !forced && !Q.has('skip') && !TEST && !CAP;
+  const saved = forced || (showTitle ? migrateForecourtSave(loadSave()) : null);
   game.saveEnabled = !showTitle;
+  if (forced) {
+    if (TEST) (await import('./testmode.js')).start(game);
+    await continueFrom(forced);
+    return;
+  }
   await enter(start, { persist: !showTitle });
   if (CAP) {
     if (Q.has('mx')) game.player.root.position.set(+Q.get('mx'), game.player.root.position.y, +Q.get('mz'));
@@ -624,38 +631,7 @@ async function boot() {
   if (showTitle) {
     const pick = await title(saved);
     if (pick === 'continue' && saved) {
-      game.busy = true;
-      restore(game, saved);
-      await enter(saved.place || 'train', { persist: false, resuming: true });
-      // Rebuild the saved room directly. Arrival cinematics and opening scenes belong to new visits.
-      game.place.restoreState?.(saved);
-      // Schedule hooks may set visibility flags; saved progression remains authoritative.
-      for (const key of Object.keys(flags)) delete flags[key];
-      Object.assign(flags, saved.flags || {});
-      ui.refreshWords();
-      ui.refreshPeople(sim.met.size);
-      ui.refreshBag(sim);
-      ui.goal(saved.ui?.goal || '');
-      ui.sideGoal(saved.ui?.sideGoal || '');
-      game.hold = saved.ui?.hold || null;
-      game.busy = false;
-      game.saveEnabled = true;
-      const transition = saved.transition;
-      if (saved.ended) {
-        showEnd(game);
-        save(game);
-      } else if (transition && canTravel(transition.from, transition.to) && PLACES[transition.to]) {
-        await travel(transition.to, { arriving: saved.place === transition.to, fromName: transition.from });
-      } else if (saved.runner?.execution || saved.runner?.queued?.length)
-        await game.beat(async () => {
-          await game.runner.resume();
-        });
-      else if (saved.pendingStart === game.place.name || needsLegacyOpening(saved, game.story))
-        startScene(game.place.name);
-      else {
-        game.resumeWalks();
-        save(game);
-      }
+      await continueFrom(saved);
       return;
     }
     clearSave();

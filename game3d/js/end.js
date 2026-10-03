@@ -5,6 +5,11 @@ import { ui, FACE, PORTRAITS } from './ui.js';
 import { WORDS, COMMANDS, PHRASES, known, iconHTML } from './lang.js';
 import { sim, PERIOD_NAMES } from './sim.js';
 import { PLACE_NAMES } from './places/definitions.js';
+import { LAST_DAY, nextDaySave } from './days.js';
+
+const DAY_NAMES = { 1: 'Day one', 2: 'Day two' };
+const SAVE_KEY = 'amakawa-day1-save',
+  CONTINUE_FLAG = 'amakawa-continue'; // menu.js: a reload with this set continues straight into the save
 
 const esc = (s) =>
   String(s ?? '')
@@ -60,25 +65,31 @@ export function endHTML(game, { photos = {}, outro, ticket } = {}) {
   const ph = PHRASES.filter((id) => known.has(id)),
     cm = COMMANDS.filter((id) => known.has(id));
   return `<div class="card">
-    <header class="dayhead"><h2>Day one</h2><p class="when">${esc(sim.date)} · ${esc(PERIOD_NAMES[sim.period] || 'After work')}</p></header>
+    <header class="dayhead"><h2>${DAY_NAMES[sim.day] || 'Day ' + sim.day}</h2><p class="when">${esc(sim.date)} · ${esc(PERIOD_NAMES[sim.period] || 'After work')}</p></header>
     ${shots ? `<section class="today"><h3>Today</h3><div class="shots" style="--cols:${cols}">${shots}</div></section>` : ''}
     <div class="cols">
       ${people ? `<section class="met"><h3>People you met</h3><ul class="people">${people}</ul></section>` : ''}
       ${ph.length || cm.length ? `<section class="words"><h3>Words you can use</h3>${ph.length ? `<ul class="wl">${ph.map(word).join('')}</ul>` : ''}${cm.length ? `<p class="sub2">Commands</p><ul class="wl cmds">${cm.map(word).join('')}</ul>` : ''}</section>` : ''}
     </div>
     ${ticketHTML(ticket)}
-    <footer>${outro ? `<p class="outro">${esc(outro)}</p>` : ''}<button type="button" class="again primary">Back to title</button></footer>
+    <footer>${outro ? `<p class="outro">${esc(outro)}</p>` : ''}${sim.day < LAST_DAY ? `<div class="endbtns"><button type="button" class="again">Back to title</button><button type="button" class="nextday primary">Start ${DAY_NAMES[sim.day + 1].toLowerCase()}</button></div>` : '<button type="button" class="again primary">Back to title</button>'}</footer>
   </div>`;
 }
 
 export async function showEnd(game) {
   const S = game.story || {};
-  const outro = S.outro || 'Tomorrow morning: the station, the door sensor.';
-  const ticket = S.ticket || {
-    no: 'Repair request #2',
-    title: 'Monorail doors: sensor check',
-    lines: ['Raised by: Amakawa Station', 'Handed to: Eric (from Mio, B2)', 'Tomorrow morning, at the station.'],
-  };
+  // day one closes on the repair request it hands over; a later day closes on its own story's outro, if any
+  const first = sim.day === 1;
+  const outro = S.outro || (first ? 'Tomorrow morning: the station, the door sensor.' : '');
+  const ticket =
+    S.ticket ||
+    (first
+      ? {
+          no: 'Repair request #2',
+          title: 'Monorail doors: sensor check',
+          lines: ['Raised by: Amakawa Station', 'Handed to: Eric (from Mio, B2)', 'Tomorrow morning, at the station.'],
+        }
+      : null);
   if (window.__shell?.photoNow) await window.__shell.photoNow(); // the room the day ends in
   document.body.classList.add('ended');
   // the scene fades out first, then the card comes in (QA round 1: the card faded in over live play)
@@ -90,6 +101,20 @@ export async function showEnd(game) {
     document.body.classList.add('reloading');
     setTimeout(() => location.reload(), 200);
   };
-  setTimeout(() => b.focus({ preventScroll: true }), 700);
+  // the next day starts from this save, in Eric's room (days.js), through the title's Continue
+  const next = document.querySelector('#end .nextday');
+  if (next)
+    next.onclick = () => {
+      try {
+        const saved = JSON.parse(localStorage.getItem(SAVE_KEY) || 'null');
+        if (saved) localStorage.setItem(SAVE_KEY, JSON.stringify(nextDaySave(saved)));
+        sessionStorage.setItem(CONTINUE_FLAG, '1');
+      } catch {
+        /* storage may be off: the title's Continue still has the ended day */
+      }
+      document.body.classList.add('reloading');
+      setTimeout(() => location.reload(), 200);
+    };
+  setTimeout(() => (next || b).focus({ preventScroll: true }), 700);
   window.__ended = true;
 }

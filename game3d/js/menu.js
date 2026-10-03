@@ -354,7 +354,7 @@ function refreshTitle() {
   mc.hidden = !latest;
   if (latest)
     mc.querySelector('.s').textContent =
-      `${PLACE_NAMES[latest.place] || latest.place} · ${PERIOD_NAMES[latest.period] || ''}`;
+      `${latest.data?.day > 1 ? `Day ${latest.data.day} · ` : ''}${PLACE_NAMES[latest.place] || latest.place} · ${PERIOD_NAMES[latest.period] || ''}`;
 }
 let titleShown = false;
 function onTitleShow() {

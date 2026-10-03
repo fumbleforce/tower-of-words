@@ -57,7 +57,7 @@ export function installProgressionHooks(game, { travel }) {
   // a side trip to a neighbouring chunk ({ do: 'trip', to: 'plaza' }), the same watched walk as next
   H.trip = ({ to }) => {
     const from = game.place.name;
-    if (!canTravel(from, to)) {
+    if (!canTravel(from, to, sim.day)) {
       console.warn('trip: no way from', from, 'to', to);
       return;
     }

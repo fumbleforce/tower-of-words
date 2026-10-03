@@ -4,7 +4,7 @@ import { sliced } from '../perf/slice.js';
 import { RoomCam } from '../cam.js';
 import { K } from '../scenes/office.js';
 import { EVENING_GRADE } from '../scenes/town.js';
-import { walkIn } from './edge-walk.js';
+import { walkIn, walkOut } from './edge-walk.js';
 import { dormBath } from './dorm-bath.js';
 import { glide } from '../move.js';
 import { PLACE_DETAILS } from './catalog.js';
@@ -62,6 +62,14 @@ export async function dormCourtPlace(game) {
       face: () => mb.at,
       enabled: () => game.runner.has('talk:mailboxes'),
     },
+    // day 2: out through the gate onto the lane, east to the east lane (its story's talk:street_gate)
+    street_gate: {
+      ...PLACE_DETAILS.dorm_court.things.street_gate,
+      anchor: (v) => v.set(w.streetGate[0], 1.2, w.streetGate[1] - 1.3),
+      spot: () => [w.streetGate[0], w.streetGate[1] - 1.6],
+      face: () => w.streetGate,
+      enabled: () => game.runner.has('talk:street_gate'),
+    },
   };
   const b = w.bounds;
   const P = {
@@ -85,6 +93,8 @@ export async function dormCourtPlace(game) {
     zones: {
       hall: inHall,
       passage: (x, z) => Math.abs(x - w.passage[0]) < 0.5 && z < w.passage[1] + 0.1,
+      // out on the lane past the gate (day 2's way to the east lane)
+      street_exit: (x, z) => z > w.streetGate[1] - 0.9,
     },
     hooks: {
       // mailbox 203 open (the camera close on it, the flap swung open on the flyer inside) or closed again
@@ -168,6 +178,27 @@ export async function dormCourtPlace(game) {
       eric.scripted = false;
       g.walker.sync();
       cam.release();
+    },
+    // day 2: down the stairs from his floor, out of the passage into the hall (clear of the passage's zone)
+    tripInFrom: {
+      async dorms(g) {
+        const eric = g.player;
+        eric.scripted = true;
+        eric.root.position.set(w.passageIn[0], 0, w.passageIn[1]);
+        eric.root.rotation.y = 0;
+        cam.closeOn(w.passageMouth, 1.7);
+        cam.snap(eric.root.position);
+        eric.setState('walk');
+        await glide(g, eric.root, w.passage, 1.1);
+        await glide(g, eric.root, w.hall, 1.2);
+        eric.setState('idle');
+        eric.scripted = false;
+        g.walker.sync();
+        cam.release();
+      },
+    },
+    tripOutTo: {
+      east_lane: (g) => walkOut(g, cam, w.streetGate, w.streetEdge),
     },
     async tripOut(g) {
       // from the passage's mouth into the passage, the camera coming in close; the stairs are the crossfade

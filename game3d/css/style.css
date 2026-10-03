@@ -741,6 +741,11 @@ body.phone #end .wl { grid-template-columns: 1fr; }
 body.phone #end footer { flex-direction: column; align-items: stretch; gap: 16px; }
 body.phone #end .outro { font-size: 18px; }
 body.phone #end .again { width: 100%; }
+#end .endbtns { display: flex; gap: 12px; flex: none; }
+#end .nextday { margin: 0; flex: none; height: 50px; padding: 0 28px; border: 0; border-radius: var(--chip-r); font: 700 17px/1 var(--font); cursor: pointer; }
+#end .endbtns .again:not(.primary) { background: transparent; color: var(--ink); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .28); }
+body.phone #end .endbtns { flex-direction: column-reverse; }
+body.phone #end .nextday { width: 100%; }
 
 /* ---------- reduce motion (settings) ---------- */
 body.reduce-motion *, body.reduce-motion *::before, body.reduce-motion *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; animation-delay: 0s !important; }

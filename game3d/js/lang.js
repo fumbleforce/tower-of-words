@@ -1,3 +1,4 @@
+import * as DAY2 from '../story/day2/words.js';
 // The few Japanese words in day one. Every one is shown with its reading and English, every time.
 // The four commands are the ones Mio can say to make things happen.
 
@@ -39,6 +40,8 @@ export const WORDS = {
   // Eric never says it, so the replay is Mio's slow word clip (audio/word-gaijin.mp3), not an eric- clip
   gaijin: { ja: '外人', ro: 'gaijin', en: 'foreigner', voice: 'word-gaijin' },
   kotodama: { ja: '言霊', ro: 'kotodama', en: 'words with power in them' },
+  // day 2's words (story/day2/words.js): phrases, unknown until typed there
+  ...DAY2.WORDS,
 };
 // People's names are never garbled (Jørgen, 2026-09-30: "his name should not be obscured"). In an overheard line
 // each one stays readable with the name in romaji after it, taught or not, with an honorific if one follows.
@@ -84,10 +87,12 @@ export const BASE = {
   ohayo: { form: 'set', note: 'A fixed greeting. Gozaimasu makes it polite; with friends, just ohayō.' },
   yoroshiku: { form: 'masu', lead: 'onegaishimasu: ', ja: 'お願いする', ro: 'onegai suru', en: 'to ask a favour' },
   sumimasen: { form: 'set', note: 'A fixed phrase. The -masen ending is the polite way to say "not".' },
+  ...DAY2.BASE,
 };
-const FORM_NAME = { te: '-te form', masu: 'polite -masu form' };
+const FORM_NAME = { te: '-te form', masu: 'polite -masu form', ...DAY2.FORM_NAME };
 // what each ending does, in a line (shown once above the words that use it)
 export const FORM_NOTE = {
+  ...DAY2.FORM_NOTE,
   te: 'These words end in -te, the form you use to ask someone to do something. Matte on its own means "wait!", and matte kudasai means "please wait". The same ending also links two actions in one sentence.',
 };
 // the small line under a word in the Words panel: which form it is and its dictionary word
@@ -116,12 +121,15 @@ const ICON = {
     '<path d="M5 11h11v3.5a5.5 5.5 0 0 1-5.5 5.5A5.5 5.5 0 0 1 5 14.5z"/><path d="M16 12.5h1.5a2 2 0 0 1 0 4H16"/><path d="M10.5 3v5M8.5 6l2 2 2-2"/>',
   dashite: '<path d="M4 13.5V20h16v-6.5"/><path d="M12 15V4"/><path d="M8 8l4-4 4 4"/>',
   tomatte: '<path d="M8.4 3h7.2L21 8.4v7.2L15.6 21H8.4L3 15.6V8.4z"/><path d="M8 12h8"/>',
+  tabetai: '<path d="M4 12h16a8 8 0 0 1-16 0z"/><path d="M15 3l-4 7M19 4l-6 6"/>',
+  nomitai:
+    '<path d="M7 4h10l-1.2 15.2a2 2 0 0 1-2 1.8h-3.6a2 2 0 0 1-2-1.8z"/><path d="M7.4 9h9.2"/><path d="M13 4l2-2"/>',
 };
 export function iconHTML(id, cls = 'wi') {
   return ICON[id] ? `<svg class="${cls}" viewBox="0 0 24 24" aria-hidden="true">${ICON[id]}</svg>` : '';
 }
 export const COMMANDS = ['matte', 'akete', 'kite', 'ugoite', 'irete', 'dashite', 'tomatte'];
-export const PHRASES = ['ohayo', 'yoroshiku', 'sumimasen'];
+export const PHRASES = ['ohayo', 'yoroshiku', 'sumimasen', 'tabetai', 'nomitai'];
 export const SAYABLE = [...PHRASES, ...COMMANDS];
 
 // the words Eric has been taught in play (typed, `learn` or `offer`); nothing else counts as known

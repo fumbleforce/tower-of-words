@@ -19,13 +19,21 @@ const recovery = ast.body.find(n => n.type === 'ExpressionStatement'
 const text = node => source.slice(...node.range);
 
 test('the actual Continue branch migrates old openings after hydration and preserves current idle saves', async () => {
+  // main.js hands the title's Continue to continueFrom (js/continue.js createContinue): evaluate that function
   let branch;
   visitSource(ast, node => {
     if (node.type === 'IfStatement' && node.test.type === 'LogicalExpression' &&
       node.test.left.left?.name === 'pick' && node.test.left.right?.value === 'continue' &&
       node.test.right.name === 'saved') branch = node.consequent;
   });
-  assert.ok(branch, 'Continue branch must exist');
+  assert.ok(branch && text(branch).includes('continueFrom(saved)'), 'Continue branch must hand over to continueFrom');
+  const contSource = readFileSync(new URL('../../js/continue.js', import.meta.url), 'utf8');
+  const contAst = parse(contSource, { ecmaVersion: 'latest', sourceType: 'module', range: true });
+  let inner;
+  visitSource(contAst, node => {
+    if (node.type === 'FunctionExpression' && node.id?.name === 'continueFrom') inner = node.body;
+  });
+  assert.ok(inner, 'continueFrom must exist');
   for (const current of [false, true]) {
     const events = [], flags = { stale: true };
     const saved = { place: 'office', flags: { held_doors: true }, ...(current ? { pendingStart: null } : {}) };
@@ -38,12 +46,12 @@ test('the actual Continue branch migrates old openings after hydration and prese
     };
     const ui = Object.fromEntries(['refreshWords', 'refreshPeople', 'refreshBag', 'goal', 'sideGoal']
       .map(name => [name, () => events.push(name)]));
-    const dependencies = { game, flags, ui, sim: { met: new Set() }, enter, needsLegacyOpening,
+    const dependencies = { game, flags, ui, sim: { met: new Set(), day: 1 }, enter, needsLegacyOpening, canTravel: () => false,
       restore: (target, value) => { assert.equal(target, game); assert.equal(value, saved); events.push('restore'); },
       startScene: place => { assert.equal(place, 'office'); events.push('start'); },
       save: () => events.push('save'), showEnd: () => { throw new Error('Unexpected end'); }, NEXT: {}, PLACES: {},
       travel: () => { throw new Error('Unexpected travel'); } };
-    const run = new Function(...Object.keys(dependencies), `return async function(saved) ${text(branch)}`)(...Object.values(dependencies));
+    const run = new Function(...Object.keys(dependencies), `return async function(saved) ${contSource.slice(...inner.range)}`)(...Object.values(dependencies));
     await run(saved);
     assert.deepEqual(flags, saved.flags);
     assert.equal(game.busy, false); assert.equal(game.saveEnabled, true);

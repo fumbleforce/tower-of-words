@@ -148,6 +148,7 @@ export const EXITS = {
     edge: pt([DSX, SHOP_END + 0.6]),
     lane: pt([DSX, SHOP_END - 1.0]),
     zone: rect([DS[0] - 1, DS[1] + 1, SHOP_END - 1.6, SHOP_END + 2]),
+    in: pt([DSX, SHOP_END - 2.8]), // back from the shop street (day 2): up the dorm street, out of the zone
   },
   east_coast: {
     edge: pt([DS[1] + 3.2, RZ]),
@@ -165,6 +166,7 @@ export const EXITS = {
     edge: pt([DS[1] + 3.2, GATE_Z]),
     lane: pt([DS[1] + 1.6, GATE_Z]),
     zone: rect([DS[1] + 1.0, DS[1] + 4, GATE_Z - HALF - 1, GATE_Z + HALF + 1]),
+    in: pt([DSX, GATE_Z]), // out of the dorm courtyard's gate (day 2): onto the dorm street, out of the zone
   },
 };
 // where Eric comes in from the plaza (and from anywhere a trip doesn't say): on the lane, walking east toward the jog

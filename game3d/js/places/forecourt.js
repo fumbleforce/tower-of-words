@@ -168,6 +168,8 @@ export async function forecourtPlace(game) {
     people: { kuro: w.kuro, tama: garden.person },
     zones: {
       lift_front: (x, z) => Math.hypot(x - w.liftOut[0], z - w.liftOut[1]) < 0.42,
+      // day 2: back in at the station's door (the walk to the platform)
+      station_exit: (x, z) => Math.hypot(x - w.stationExit[0], z - w.stationExit[1]) < 0.45,
       plaza_lane: (x, z) => {
         const l = w.laneAt(x, z),
           l0 = w.laneAt(...w.plazaLane);
@@ -269,6 +271,21 @@ export async function forecourtPlace(game) {
     // the walks to and from the fountain plaza (trips.js picks these by the other place's name)
     tripOutTo: {
       plaza: (g) => walkOut(g, cam, w.plazaLane, w.plazaEdge),
+      // day 2: back in at the station's door, the way he came out of it (tripIn backwards)
+      async gate(g) {
+        await g.walkTo(w.start[0], w.start[1]);
+        const eric = g.player,
+          [sx, sz] = w.stationExit,
+          dx = sx - w.start[0],
+          dz = sz - w.start[1],
+          L = Math.hypot(dx, dz) || 1;
+        eric.scripted = true;
+        g.walker.locked = true;
+        cam.closeOn(w.stationExit, 1.7);
+        await glide(g, eric.root, w.stationExit, 1.1);
+        await glide(g, eric.root, [sx + (dx / L) * 0.7, sz + (dz / L) * 0.7], 1.1);
+        eric.setState('idle');
+      },
     },
     tripInFrom: {
       plaza: (g) => walkIn(g, cam, w.plazaEdge, w.plazaIn, w.laneFacing),

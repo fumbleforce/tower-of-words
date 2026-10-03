@@ -1,6 +1,6 @@
 # Day 2
 
-Authored for C-0367, work #192. Engine integration, voices and staging are pending. The first day remains the current playable story. The complete data set is [game3d/story/day2/index.js](../../../../game3d/story/day2/index.js); the [handoff](../../../../game3d/story/day2/README.md) names the remaining work.
+Authored for C-0367, work #192; built in C-0378. It plays after day one: day one's end has Start day two, and `?day=2` starts it straight away ([systems.md](../../systems.md), Saving). Its voice clips are still to be made (the voice manifest lists them). The complete data set is [game3d/story/day2/index.js](../../../../game3d/story/day2/index.js); the [handoff](../../../../game3d/story/day2/README.md) has the hook contract.
 
 | Storyline | What it covers |
 |---|---|
@@ -12,4 +12,4 @@ The place set and trips in index.js apply both before work (`morning`) and after
 
 The room starts day 2 with the previous day's choices and words intact. A first visit resets the transient `going_home` flag. The party's goodbye sets it again, while keeping exploration open. A return to the room after the party saves and ends the day; leaving the party does not end it on the promenade.
 
-The new words' spellings and form are in [words.md](../../words.md#day-2-to-build); actor placement and food source are in [places.md](../../places.md). Run `node game3d/tools/day2-story-check.mjs` for authoring validation. A two-size playable QA pass still requires the integration.
+The new words' spellings and form are in [words.md](../../words.md#taught-on-day-2); actor placement and food source are in [places.md](../../places.md). Run `node game3d/tools/day2-story-check.mjs` for authoring validation; `DAY=2 node game3d/tools/fast.mjs` plays the day, and `node game3d/tools/fast-routes.mjs --day 2` its branches.

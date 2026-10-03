@@ -539,6 +539,7 @@ export function restore(game, d) {
     for (const [id, pts] of Object.entries(d.bonds || {})) bonds.person(id).pts = pts;
   }
   for (const id of sim.met) bonds.meet(id);
+  if (bonds.day !== (sim.day || 1)) bonds.setDay(sim.day || 1); // a new day's opening save (days.js): caps reset
   sim.momentsDone = new Set(r.moments || []);
   sim.firedBonds = new Set(r.fired || []);
   ambientDone.clear();

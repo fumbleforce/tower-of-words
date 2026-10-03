@@ -34,7 +34,7 @@ function storyKey(file, node) {
   return false;
 }
 function hydration(file, node) {
-  const object = file.endsWith('/main.js') ? 'saved' : file.endsWith('/sim.js') ? 'd' : null;
+  const object = file.endsWith('/main.js') || file.endsWith('/continue.js') ? 'saved' : file.endsWith('/sim.js') ? 'd' : null;
   return object && node?.type === 'LogicalExpression' && node.operator === '||'
     && member(node.left, object, 'flags') && node.right.type === 'ObjectExpression' && !node.right.properties.length;
 }

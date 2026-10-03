@@ -2,6 +2,7 @@ import { newFrame, readCheckpoint } from './narrative/checkpoint.js';
 import { flagKeys } from './narrative/engine-flags.js';
 const ENGINE_KEYS = flagKeys('game3d/js/runner.js');
 import { DEFAULT_SPEAKERS } from './narrative/speakers.js';
+import { storyPath } from './days.js';
 // Runs the story files (game3d/story/*.js, format in game3d/story/FORMAT.md) against a place.
 import { voiceThenBeat } from './ui.js';
 import { ui, voice, sfx, setFace, newScene } from './ui.js';
@@ -54,6 +55,10 @@ export class Runner {
         return null;
       }
     };
+    // the day's own story set (days.js); a later day has no placeholders and no transition lines of its own
+    const day = this.game.sim?.day || 1;
+    if (day > 1)
+      return (await tryImport(storyPath(name, day))) || (name === 'transitions' ? {} : { nodes: {}, on: {} });
     const s = (await tryImport(`../story/${name}.js`)) ||
       (await tryImport(`../story/placeholder/${name}.js`)) || { nodes: {}, on: {} };
     return s;

@@ -12,6 +12,7 @@ import { RoomCam } from '../cam.js';
 import { ui, sfx } from '../ui.js';
 import { walkPerson, stepPeople, lookAt } from '../story.js';
 import { sit, armsLap, PEOPLE, idle } from '../cast.js';
+import { officeDay2 } from './office-day2.js';
 import { blob } from '../engine.js';
 import { flags } from '../narrative/state.js';
 import { glide, walkRig, hopOff } from '../move.js';
@@ -123,6 +124,7 @@ export async function officePlace(game) {
     // out: on from behind (in front: the desk)
     mio_seat: { x: dS0.seat[0], z: dS0.seat[1], top: 0.24, ry: Math.PI, out: [dS0.seat[0], dS0.seat[1] + 0.45] },
   };
+  const day2 = officeDay2(game, { people, blobs }); // who is at B2 on day 2 (office-day2.js)
   const rigAnchor =
     (rig, h = 1.25) =>
     (v) => {
@@ -980,6 +982,7 @@ export async function officePlace(game) {
       // lunch: { do: 'lunchSit', with: 'mio' | 'mori' } and { do: 'lunchOver' } (see the lunch block above)
       lunchSit: (s) => lunchSit(s),
       lunchOver: () => lunchOver(),
+      officeDay2: day2.hook,
     },
     // the lift's landing doors here (places/lift.js hides them while the wall is cut away and waits on k)
     liftLanding: { leaves: w.leaves, k: () => st.liftK },
@@ -1103,6 +1106,7 @@ export async function officePlace(game) {
     await game.wait(600);
   }
   P.lunch = { food: lunchFood, state: lunchState }; // QA (tools/lunch-shots.mjs)
+  day2.install(P);
   return P;
 }
 export const MIO_SEAT_Y = 0.0,

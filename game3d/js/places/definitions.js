@@ -1,3 +1,4 @@
+import { TRIPS as DAY2_TRIPS } from '../../story/day2/index.js';
 // Narrative place order and source references, consumed by the runtime and its checks.
 export const PLACE_FILES = {
   train: 'game3d/js/places/train.js',
@@ -54,7 +55,10 @@ export const TRIPS = {
   harbour: ['office_quarter', 'works'],
   works: ['harbour'],
 };
-export const canTravel = (from, to) => NEXT[from] === to || !!TRIPS[from]?.includes(to);
+// Day 2 has its own ways (game3d/story/day2/index.js TRIPS, both periods), and no NEXT line.
+export const DAY_TRIPS = { 2: DAY2_TRIPS };
+export const canTravel = (from, to, day = 1) =>
+  DAY_TRIPS[day] ? !!DAY_TRIPS[day][from]?.includes(to) : NEXT[from] === to || !!TRIPS[from]?.includes(to);
 export const STORY_FILES = [
   'train',
   'gate',
