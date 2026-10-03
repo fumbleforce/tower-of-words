@@ -21,7 +21,7 @@ import * as THREE from 'three';
 import { CROWD } from './data.js';
 import { makeBody } from './looks.js';
 import { coarseGrid, routeBetween, snapFree, clearAt } from './paths.js';
-import { walkStep, stride, idleLife, stalled } from './motion.js';
+import { walkStep, stride, idleLife, stalled, gliding } from './motion.js';
 import { placeStill, stillSpots } from './still.js';
 import { wantStop, startStop, stopBeside, stopStep, endStop } from './stops.js';
 import { launcher } from './launch.js';
@@ -266,7 +266,9 @@ export async function attachCrowd(game, place, name) {
       }
       if (b.state === 'walk' && b.stopped) {
         // stopped on the way: a phone, a shop window, a shoe, a word with the one they walk with (not in a scene)
-        if (scene || stopStep(b, dt, ctx)) endStop(b);
+        // (and on at once when someone in fixed choreography comes by: walkStep steps them out of the way)
+        const by = list.some((o) => gliding(o) && Math.hypot(o.x - p.x, o.z - p.z) < 2 * K);
+        if (scene || by || stopStep(b, dt, ctx)) endStop(b);
       } else if (b.state === 'walk') {
         // walking together: the second keeps beside the first
         const m = b.lead;

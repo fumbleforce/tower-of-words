@@ -82,10 +82,9 @@ export async function officePlace(game) {
   w.root.add(alarm);
   const dS1 = w.dS(1),
     dS0 = w.dS(0);
-  // Mori waits for him on the landing: about 1.7 m out from the lift and off to the stairs side, facing the spot
-  // where Eric stops (LIFT_OUT, places/lift.js), clear of the doors, of anyone else stepping out (they go 0.7 m to
-  // either side) and of the way to the corridor on the right, so his deep bow can't reach into Eric
-  // (Jørgen: "Mori stands right in front of you and bows into your model")
+  // Mori waits 1.7 m out from the lift, to the stairs side, facing where Eric stops (LIFT_OUT, places/lift.js), clear
+  // of the doors, of anyone stepping out (0.7 m to each side) and of the way to the corridor, so his bow can't reach
+  // Eric (Jørgen: "Mori stands right in front of you and bows into your model")
   const LIFT_OUT = [-5.45, -2.4],
     MORI_WAIT = [-6.0, -0.75];
   {
@@ -121,7 +120,8 @@ export async function officePlace(game) {
   const seats = {
     my_seat: { x: dS1.seat[0], z: dS1.seat[1], top: 0.24, ry: Math.PI },
     emi_seat: { x: dS0.seat[0], z: dS0.seat[1], top: 0.24, ry: Math.PI },
-    mio_seat: { x: dS0.seat[0], z: dS0.seat[1], top: 0.24, ry: Math.PI },
+    // out: on from behind (in front: the desk)
+    mio_seat: { x: dS0.seat[0], z: dS0.seat[1], top: 0.24, ry: Math.PI, out: [dS0.seat[0], dS0.seat[1] + 0.45] },
   };
   const rigAnchor =
     (rig, h = 1.25) =>
