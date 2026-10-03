@@ -124,12 +124,14 @@ const ICON = {
   tabetai: '<path d="M4 12h16a8 8 0 0 1-16 0z"/><path d="M15 3l-4 7M19 4l-6 6"/>',
   nomitai:
     '<path d="M7 4h10l-1.2 15.2a2 2 0 0 1-2 1.8h-3.6a2 2 0 0 1-2-1.8z"/><path d="M7.4 9h9.2"/><path d="M13 4l2-2"/>',
+  mitai: '<path d="M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6-9.5-6-9.5-6z"/><circle cx="12" cy="12" r="2.6"/>',
+  ikitai: '<path d="M4 12h13"/><path d="M13 7l5 5-5 5"/><path d="M4 7v10"/>',
 };
 export function iconHTML(id, cls = 'wi') {
   return ICON[id] ? `<svg class="${cls}" viewBox="0 0 24 24" aria-hidden="true">${ICON[id]}</svg>` : '';
 }
 export const COMMANDS = ['matte', 'akete', 'kite', 'ugoite', 'irete', 'dashite', 'tomatte'];
-export const PHRASES = ['ohayo', 'yoroshiku', 'sumimasen', 'tabetai', 'nomitai'];
+export const PHRASES = ['ohayo', 'yoroshiku', 'sumimasen', 'tabetai', 'nomitai', 'mitai', 'ikitai'];
 export const SAYABLE = [...PHRASES, ...COMMANDS];
 
 // the words Eric has been taught in play (typed, `learn` or `offer`); nothing else counts as known

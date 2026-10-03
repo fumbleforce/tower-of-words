@@ -26,8 +26,12 @@ export function officeDay2(game, { people, blobs }) {
       mori.seated = true;
       blobs.mori?.position.set(2.2, 0.004, -3.36);
     }
-    P.placeSeated('mio', 'mio_seat'); // at her own desk, beside his
-    for (const id of ['emi', 'kenji', 'mori', 'mio']) show(id, true);
+    // Mio at her own desk beside his; on the warm history she is at the station until his report is in
+    const promised = flags.lunch_mio || (flags.mio_warm || 0) >= 2;
+    const mio = !promised || flags.d2_ticket_done;
+    if (mio) P.placeSeated('mio', 'mio_seat');
+    for (const id of ['emi', 'kenji', 'mori']) show(id, true);
+    show('mio', mio);
   }
   function apply(state) {
     if (state === 'afterWork' || flags.d2_shift_done) for (const id of ['emi', 'kenji', 'mori', 'mio']) show(id, false);

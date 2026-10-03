@@ -4,12 +4,13 @@ export const EAST_COAST_DETAILS = {
     dorm_street: { label: 'To the dorm street', kind: 'thing', verb: 'Go' },
     courts_walk: { label: 'To the gym and pool', kind: 'thing', verb: 'Go' },
     lookout: { label: 'Lookout', kind: 'thing', verb: 'Look' }, // the nook east_coast_lookout
+    kuroda: { label: 'Mr. Hamada', kind: 'person' }, // day 2, after work, at the telescope
     onsen: { label: 'Onsen', kind: 'thing', verb: 'Go in' },
   },
-  spots: ['row_entry', 'east_coast_lookout', 'east_coast_shrine'],
+  spots: ['row_entry', 'east_coast_lookout', 'east_coast_shrine', 'lookout_view'],
   nooks: ['east_coast_lookout', 'east_coast_shrine'], // docs/game/places.md, "Nooks"
   seats: [],
   zones: ['row_exit', 'courts_exit'],
-  people: [],
-  hooks: [],
+  people: ['kuroda'],
+  hooks: ['coastVisit'],
 };
