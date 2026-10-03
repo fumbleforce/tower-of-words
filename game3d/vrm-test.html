@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>VRM workbench</title>
+<style>
+  :root { --ink: #1d3038; --muted: #54676c; --paper: #f8faf9; --line: #cbd6d5; --teal: #17675e; --stage: #dfe3e8; }
+  * { box-sizing: border-box; }
+  body { margin: 0; height: 100dvh; display: flex; flex-direction: column; color: var(--ink); background: var(--paper); font: 14px system-ui, sans-serif; }
+  header { padding: 12px 20px; border-bottom: 1px solid var(--line); display: flex; align-items: baseline; gap: 16px; flex-wrap: wrap; }
+  h1 { margin: 0; font: 600 22px 'Trebuchet MS', sans-serif; letter-spacing: -.4px; }
+  header p { margin: 0; color: var(--muted); }
+  a { color: var(--teal); }
+  #workspace { flex: 1; min-height: 0; display: grid; grid-template-columns: 310px minmax(0, 1fr); }
+  #controls { padding: 16px; overflow-y: auto; border-right: 1px solid var(--line); }
+  fieldset { border: 0; border-bottom: 1px solid var(--line); margin: 0 0 16px; padding: 0 0 16px; min-width: 0; }
+  legend { font-weight: 650; padding: 0 0 10px; }
+  label { display: grid; grid-template-columns: 90px minmax(0, 1fr); align-items: center; gap: 8px; margin-bottom: 9px; }
+  select, button, input, textarea { font: inherit; color: inherit; accent-color: var(--teal); }
+  select, button { min-height: 40px; border: 1px solid var(--line); border-radius: 5px; background: #fff; padding: 6px 9px; }
+  button { cursor: pointer; }
+  button:hover { border-color: var(--teal); }
+  :focus-visible { outline: 3px solid var(--teal); outline-offset: 2px; }
+  input[type=range] { width: 100%; min-width: 0; margin: 0; }
+  input[type=color] { width: 100%; height: 35px; padding: 2px; border: 1px solid var(--line); background: #fff; }
+  input[type=checkbox] { justify-self: start; width: 20px; height: 20px; }
+  .range { display: grid; grid-template-columns: minmax(0, 1fr) 42px; align-items: center; gap: 6px; }
+  output { text-align: right; font: 12px ui-monospace, monospace; }
+  .buttons { display: flex; flex-wrap: wrap; gap: 8px; }
+  #download { background: var(--teal); color: #fff; border-color: var(--teal); }
+  .hint { font-size: 12px; color: var(--muted); line-height: 1.5; margin: 10px 0; }
+  #config-status { font-size: 12px; line-height: 1.5; min-height: 36px; }
+  #load-config { max-width: 100%; margin: 8px 0; }
+  .file { display: block; margin-top: 12px; }
+  summary { cursor: pointer; padding: 8px 0; }
+  textarea { width: 100%; min-height: 150px; resize: vertical; padding: 8px; border: 1px solid var(--line); font: 12px ui-monospace, monospace; }
+  #preview { display: flex; flex-direction: column; min-height: 0; min-width: 0; background: var(--stage); }
+  #stage { flex: 1; min-height: 0; position: relative; }
+  canvas { display: block; width: 100%; height: 100%; touch-action: none; }
+  #info { margin: 0; padding: 8px 12px; font-size: 12px; color: var(--muted); }
+  body.cap header, body.cap #controls, body.cap #info { display: none; }
+  body.cap #workspace { display: flex; }
+  body.cap #preview { width: 100%; }
+  @media(max-width: 650px) {
+    header { padding: 9px 12px; gap: 3px 12px; }
+    h1 { font-size: 19px; }
+    header p { font-size: 12px; }
+    #workspace { grid-template-columns: 1fr; grid-template-rows: minmax(260px, 47%) minmax(0, 1fr); }
+    #preview { grid-row: 1; }
+    #controls { grid-row: 2; border-right: 0; border-top: 1px solid var(--line); padding: 14px 18px; }
+    fieldset { margin-bottom: 14px; }
+    label { grid-template-columns: 100px minmax(0, 1fr); }
+  }
+</style>
+</head>
+<body>
+<header><h1>VRM workbench</h1><p>Local settings for the pixiv sample. <a href="../notes/vrm-prototype.md">Source and limits</a></p></header>
+<main id="workspace">
+<aside id="controls" aria-label="Character settings">
+<fieldset disabled><legend>Preview</legend>
+<label>Sample <select id="variant" aria-label="Sample"><option value="base">Original</option><option value="recolour">Mio colour attempt</option><option value="flat">Flat shading attempt</option></select></label>
+<label>View <select id="view" aria-label="View"><option value="front">Front</option><option value="three">Three-quarter</option><option value="face">Face</option><option value="game">Game angle</option></select></label>
+<label>Animation <select id="animation" aria-label="Animation"><option value="idle">Idle</option><option value="walk">Walk</option><option value="run">Run</option></select></label>
+<button id="pause">Pause</button>
+</fieldset>
+<fieldset disabled><legend>Face</legend>
+<label>Expression <select id="expression"><option value="neutral">Neutral</option><option value="happy">Happy</option><option value="relaxed">Relaxed</option><option value="angry">Angry</option><option value="sad">Sad</option><option value="surprised">Surprised</option></select></label>
+<label for="strength">Strength <span class="range"><input id="strength" type="range" min="0" max="1" step="0.05"><output id="strength-value"></output></span></label>
+<label for="blink">Close eyes <span class="range"><input id="blink" type="range" min="0" max="1" step="0.05"><output id="blink-value"></output></span></label>
+<label for="headPitch">Head tilt <span class="range"><input id="headPitch" type="range" min="-25" max="25" step="1"><output id="headPitch-value"></output></span></label>
+<label for="glasses">Glasses <input id="glasses" type="checkbox"></label>
+<p class="hint">Glasses are available on the colour attempts. Head tilt adjusts the pose; body proportions stay as they are.</p>
+</fieldset>
+<fieldset disabled><legend>Colour tints</legend>
+<label for="tint-hair">Hair <input id="tint-hair" type="color" value="#ffffff"></label>
+<label for="tint-top">Shirt <input id="tint-top" type="color" value="#ffffff"></label>
+<label for="tint-bottom">Shorts <input id="tint-bottom" type="color" value="#ffffff"></label>
+<label for="tint-shoes">Shoes <input id="tint-shoes" type="color" value="#ffffff"></label>
+<p class="hint">White restores each original texture. Tints can darken it; they do not repaint the texture or change the clothes.</p>
+</fieldset>
+<fieldset disabled><legend>Your settings</legend>
+<div class="buttons"><button id="download">Download JSON</button><button id="copy">Copy JSON</button><button id="reset">Reset</button></div>
+<label class="file" for="load-config">Load settings JSON<input id="load-config" type="file" accept="application/json,.json"></label>
+<details id="json-details"><summary>Paste or edit JSON</summary><textarea id="config-json" aria-label="Settings JSON" spellcheck="false"></textarea><button id="apply-json">Apply JSON</button></details>
+<p id="config-status" role="status">Changes stay in this browser for each sample. Download a copy to share or keep.</p>
+</fieldset>
+<p class="hint">For face and body shape, hairstyles or different outfits, use <a href="https://vroid.com/en/studio" target="_blank" rel="noopener noreferrer">VRoid Studio</a>. This panel changes the preview only and saves settings, not a new model.</p>
+</aside>
+<section id="preview" aria-label="Live character preview"><div id="stage"></div><p id="info" role="status">Loading model…</p></section>
+</main>
+<script type="importmap">{ "imports": { "three": "./vendor/three/three.module.js", "three/addons/": "./vendor/" } }</script>
+<script type="module">
+import * as THREE from 'three';
+import { loadVrmMio } from './js/vrm/mio.js';
+import { defaults, parseConfig, storageKey, VARIANTS, VIEWS, ANIMATIONS, EXPRESSIONS } from './js/vrm/config.js';
+import { attachPanel } from './js/vrm/panel.js';
+import { attachOrbit } from '../tools/style-concepts/viewer-kit.js';
+const Q = new URLSearchParams(location.search);
+const variant = VARIANTS.includes(Q.get('variant')) ? Q.get('variant') : 'base';
+let config = defaults(variant);
+try {
+  const saved = localStorage.getItem(storageKey(variant));
+  if (saved) {
+    config = parseConfig(saved);
+    if (config.variant !== variant) throw new Error('Wrong sample');
+  }
+} catch { config = defaults(variant); document.getElementById('config-status').textContent = 'Saved settings could not be read. Using the original settings.'; }
+if (VIEWS.includes(Q.get('view'))) config.view = Q.get('view');
+if (ANIMATIONS.includes(Q.get('anim'))) config.animation = Q.get('anim');
+if (Q.has('cap')) document.body.classList.add('cap');
+let paused = config.paused, view = config.view;
+try {
+  const renderer = new THREE.WebGLRenderer({ antialias: true });
+  renderer.setPixelRatio(Math.min(2, devicePixelRatio));
+  renderer.shadowMap.enabled = true;
+  const stage = document.getElementById('stage');
+  stage.append(renderer.domElement);
+  const scene = new THREE.Scene();
+  scene.background = new THREE.Color('#dfe3e8');
+  scene.add(new THREE.HemisphereLight('#f2f5ff', '#8a8f86', 1.6));
+  const sun = new THREE.DirectionalLight('#fff6e8', 2.2);
+  sun.position.set(2, 4, 3); sun.castShadow = true; scene.add(sun);
+  const floor = new THREE.Mesh(new THREE.CircleGeometry(1.2, 48), new THREE.MeshLambertMaterial({ color: '#c9ced4' }));
+  floor.rotation.x = -Math.PI / 2; floor.receiveShadow = true; scene.add(floor);
+  const camera = new THREE.PerspectiveCamera(30, 1, 0.01, 50);
+  const start = performance.now();
+  const character = await loadVrmMio({ original: variant === 'base', flat: variant === 'flat' });
+  scene.add(character.root); character.setState(config.animation);
+  let triangles = 0;
+  const materials = new Map();
+  character.root.traverse(object => {
+    if (!object.isMesh) return;
+    triangles += (object.geometry.index?.count || object.geometry.attributes.position.count) / 3;
+    for (const material of [object.material].flat()) {
+      const name = material.name || '';
+      const key = /HAIR/.test(name) ? 'hair' : /Tops/.test(name) ? 'top' : /Bottoms/.test(name) ? 'bottom' : /Shoes/.test(name) ? 'shoes' : null;
+      if (key && material.color) materials.set(material, { key, original: material.color.clone() });
+    }
+  });
+  let yaw = 0, zoom = 1, tilt = 0;
+  function rememberQuery(key, value) {
+    const url = new URL(location.href); url.searchParams.set(key, value); history.replaceState(null, '', url);
+  }
+  function setView(next) {
+    view = next; yaw = view === 'three' ? 0.5 : 0; zoom = 1; tilt = view === 'game' ? 56 * Math.PI / 180 : 0.05;
+    rememberQuery('view', view);
+  }
+  function setAnimation(next) { character.setState(next); rememberQuery('anim', next); }
+  setView(config.view);
+  attachOrbit(renderer.domElement, {
+    rotate(dx, dy) { yaw -= dx * 0.008; tilt = THREE.MathUtils.clamp(tilt + dy * 0.006, -0.5, 1.3); },
+    zoom(factor) { zoom = THREE.MathUtils.clamp(zoom * factor, 0.45, 3); },
+  });
+  const panel = attachPanel({ initial: config, onView: setView, onAnimation: setAnimation, onPause(value) { paused = value; }, apply(next) {
+    for (const name of EXPRESSIONS) if (name !== 'neutral') character.vrm.expressionManager.setValue(name, name === next.expression ? next.strength : 0);
+    character.vrm.expressionManager.setValue('blink', next.blink);
+    character.setHeadPitch(next.headPitch);
+    if (character.eyewear) character.eyewear.visible = next.glasses;
+    for (const [material, { key, original }] of materials) material.color.copy(original).multiply(new THREE.Color(next.tints[key]));
+  }});
+  document.querySelectorAll('fieldset').forEach(field => { field.disabled = false; });
+  function frame() {
+    const width = stage.clientWidth, height = stage.clientHeight;
+    renderer.setSize(width, height, false); camera.aspect = width / height;
+    const face = view === 'face';
+    const target = face ? 1.01 : 0.58;
+    const distance = (face ? 0.95 : 2.8) * zoom * Math.max(1, 0.7 / camera.aspect);
+    camera.position.set(Math.sin(yaw) * Math.cos(tilt) * distance, target + Math.sin(tilt) * distance, Math.cos(yaw) * Math.cos(tilt) * distance);
+    camera.lookAt(0, target, 0); camera.updateProjectionMatrix();
+  }
+  for (let i = 0; i < 40; i++) character.update(1 / 60);
+  const clock = new THREE.Clock();
+  const info = { triangles: Math.round(triangles), loadMs: Math.round(performance.now() - start) };
+  function render() { frame(); renderer.render(scene, camera); }
+  renderer.setAnimationLoop(() => {
+    const dt = Math.min(0.05, clock.getDelta());
+    character.update(paused ? 0 : dt);
+    render();
+    document.getElementById('info').textContent = `Drag to turn · pinch or scroll to zoom · ${info.triangles.toLocaleString()} triangles · ${renderer.info.render.calls} page draws`;
+  });
+  render();
+  globalThis.__preview = { character, getConfig: panel.getConfig, setPaused(value) { paused = value; }, step(dt) { character.update(dt); render(); } };
+  globalThis.__ready = { ...info, calls: renderer.info.render.calls };
+  addEventListener('pagehide', () => { renderer.setAnimationLoop(null); character.mixer.stopAllAction(); renderer.dispose(); });
+} catch (error) {
+  document.getElementById('info').textContent = 'Preview could not load: ' + error.message;
+  globalThis.__error = error.message;
+  throw error;
+}
+</script>
+</body>
+</html>

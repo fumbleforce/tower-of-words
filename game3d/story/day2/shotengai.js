@@ -1,0 +1,222 @@
+import { direction, shut, sayFallbacks, fallbackNodes } from './shared.js';
+export default {
+  start: 'd2_arrive',
+  on: {
+    'talk:plaza_lane': 'd2_to_lane', 'zone:plaza_exit': 'd2_to_lane',
+    'talk:bike_shop': 'd2_shut', 'talk:store': 'd2_shut', 'talk:bakery': [{ if: '!d2_bakery_seen', node: 'd2_bakery' }, 'd2_shut'],
+    'talk:game_centre': 'd2_shut', 'talk:karaoke': 'd2_shut', 'talk:izakaya': 'd2_izakaya',
+    'talk:kenji': [
+      { if: 'd2_shift_done && !d2_met_kenji', node: 'd2_meet_kenji' },
+      { if: 'd2_ate && !d2_party_done', node: 'd2_kenji_party' }, 'd2_kenji_wait',
+    ],
+    'talk:party_seat': [
+      { if: 'd2_shift_done && !d2_ate', node: 'd2_supper' },
+      { if: 'd2_ate && !d2_party_done', node: 'd2_seat_menu' }, 'd2_empty_bench',
+    ],
+    'talk:mio': [{ if: 'd2_ate && !d2_party_done', node: 'd2_mio_party' }, 'd2_mio_wait'],
+    'talk:mori': [
+      { if: 'd2_party_done && !d2_mori_rest_seen', node: 'd2_mori_rest' },
+      { if: 'd2_party_done', node: 'd2_mori_rest_again' },
+      { if: 'd2_ate', node: 'd2_mori_party' }, 'd2_mori_wait',
+    ],
+    'idle:kenji': 'd2_kenji_wait', 'idle:mio': 'd2_mio_wait', 'idle:mori': [{ if: 'd2_party_done', node: 'd2_mori_rest_idle' }, { if: 'd2_ate', node: 'd2_mori_party' }, 'd2_mori_wait'],
+    ...sayFallbacks,
+    'say:tabetai:kenji': 'd2_more_food', 'say:tabetai:mori': [{ if: 'd2_party_done', node: 'd2_leftovers' }, 'd2_more_food'], 'say:tabetai:mio': 'd2_more_food',
+    'say:ikitai:mori': 'd2_mori_go_reply',
+    'say:mitai:mori': 'd2_mori_see_reply',
+    'say:nomitai:kenji': 'd2_more_drink', 'say:nomitai:mori': [{ if: 'd2_party_done', node: 'd2_mori_drink' }, 'd2_more_drink'], 'say:nomitai:mio': 'd2_more_drink',
+  },
+  show: { party_seat: 'd2_shift_done' },
+  goal: { kenji: 'd2_shift_done && !d2_met_kenji && !d2_ate', party_seat: 'd2_met_kenji && !d2_ate' },
+  labels: { plaza_lane: 'To the dorm street', party_seat: ['Join the others', '!d2_ate'] },
+  nodes: {
+    d2_arrive: [
+      { do: 'partySetup' },
+      { if: 'd2_shift_done && !d2_party_done', then: [
+        { if: 'd2_ate', then: [{ do: 'goal', text: 'Stay a while, or choose “Head home” at your seat.', at: 'party_seat' }], else: [
+          { if: 'd2_met_kenji', then: [{ do: 'goal', text: 'Join the others at the sea-facing bench.', at: 'party_seat' }],
+            else: [{ do: 'goal', text: 'Meet Kenji by the izakaya’s blue curtain.', at: 'kenji' }] },
+        ] },
+      ], else: direction('plaza_lane', 'plaza_lane', 'kenji', 'plaza_lane') },
+    ],
+    d2_meet_kenji: [
+      { say: 'kenji', emo: 'bright', text: 'Eric! This way. Mori-san is there.' },
+      { set: 'd2_met_kenji' }, { do: 'walk', who: 'kenji', to: 'party_kenji', wait: false },
+      { do: 'goal', text: 'Join the others at the sea-facing bench.', at: 'party_seat' },
+    ],
+    d2_supper: [
+      { set: 'd2_met_kenji' }, { do: 'partySetup', state: 'gather' },
+      { do: 'sit', who: 'eric', at: 'party_seat' }, { do: 'cam', on: 'party_group', zoom: 1.2 },
+      { if: 'lunch_mio', then: [{ say: 'mio', emo: 'casual', text: 'Hey. I left that end for you.' }],
+        else: [{ say: 'mio', emo: 'dry', text: 'You found us, then. There’s room at the end.' }] },
+      { say: 'mori', emo: 'warm', text: 'お疲れさまです。', en: 'Thanks for your work.' },
+      { say: 'eric', emo: 'warm', text: 'I thought we were going inside.' },
+      { say: 'mori', emo: 'polite', text: '店より、海のほうが静かですから。', en: 'It’s quieter by the sea than in a restaurant.' },
+      { say: 'mio', emo: 'casual', text: 'I told Mori-san I’d come if we ate out here. I don’t want to shout over a whole restaurant after work.' },
+      { say: 'kenji', emo: 'bright', text: 'And pickles! Thank you, Mio-san.' },
+      { say: 'mori', emo: 'sheepish', text: '食堂で作ってもらいました。簡単なもので、すみません。', en: 'The canteen made these for us. Sorry it’s such a simple supper.' },
+      { do: 'partyFood', state: 'open' },
+      { say: 'kenji', emo: 'bright', text: '{tabetai}!' },
+      { say: 'kenji', emo: 'slow', slow: true, text: '{tabetai}...' },
+      { say: 'kenji', emo: 'bright', text: 'Is “want eat”. Me, yes!' },
+      { say: 'mori', emo: 'warm', text: 'エリックさんは、どちらがいいですか。', en: 'Which would you like, Eric?' },
+      { choice: [
+        { text: 'I’d like a rice ball.', set: { d2_food: 'riceball' }, go: 'd2_take_food' },
+        { text: 'An egg sandwich, please.', set: { d2_food: 'sandwich' }, go: 'd2_take_food' },
+      ] },
+    ],
+    d2_take_food: [
+      { if: "d2_food == 'riceball'", then: [
+        { do: 'type', word: 'tabetai', from: 'kenji', prompt: 'Say “I want to eat” as you take a rice ball.' },
+      ], else: [
+        { do: 'type', word: 'tabetai', from: 'kenji', prompt: 'Say “I want to eat” as you take an egg sandwich.' },
+      ] },
+      { if: "d2_food == 'riceball'", then: [{ do: 'partyFood', state: 'take', food: 'riceball' }],
+        else: [{ do: 'partyFood', state: 'take', food: 'sandwich' }] },
+      { set: 'd2_ate' },
+      { say: 'eric', emo: 'warm', text: 'This is good. Thank you for doing all this.' },
+      { say: 'mori', emo: 'warm', text: 'よかったです。まだありますから、どうぞ。', en: 'I’m glad. There’s more, so help yourself.' },
+      { go: 'd2_topic' },
+    ],
+    d2_topic: [{ choice: [
+      { text: 'What do you do here after work?', go: 'd2_after_work' },
+      { text: 'Have you ever been to Norway, Mori-san?', go: 'd2_norway', if: '!lunch_mori' },
+      { text: 'You said you went to Lillehammer, didn’t you?', go: 'd2_norway', if: 'lunch_mori' },
+      { text: 'Eat and listen for a while.', go: 'd2_quiet' },
+    ] }],
+    d2_after_work: [
+      { say: 'mio', emo: 'casual', text: 'I was going to do washing tonight. I can do it tomorrow also.' },
+      { say: 'kenji', emo: 'bright', text: 'Me, computer game. You play?' },
+      { say: 'eric', emo: 'tired', text: 'I should probably finish unpacking first.' },
+      { say: 'mio', emo: 'dry', text: 'There’s still a box under my lamp. I’ve sort of stopped noticing it.' },
+      { go: 'd2_party_free' },
+    ],
+    d2_norway: [
+      { set: 'd2_norway_talked' },
+      { if: 'lunch_mori', then: [
+        { say: 'mori', emo: 'warm', text: 'はい。写真がどこにあるか、探さないと。', en: 'Yes. I’ll have to find where I put the photos.' },
+      ], else: [
+        { say: 'mori', emo: 'warm', text: 'はい。1994年にリレハンメルへ行きました。', en: 'Yes. I went to Lillehammer in 1994.' },
+      ] },
+      { if: 'lunch_mori', then: [{ say: 'eric', emo: 'warm', text: 'You’ll have to show me. I only know the ski jump from television.' }],
+        else: [{ say: 'eric', emo: 'curious', text: 'What did you think of it?' }] },
+      { say: 'mori', emo: 'fond', text: '寒かったですが、また行きたいですね。', en: 'It was cold, but I’d like to go again.' },
+      { go: 'd2_party_free' },
+    ],
+    d2_quiet: [
+      { do: 'partyFood', state: 'sharePickles' },
+      '> Mio pushes the pickles toward you while Kenji is talking.',
+      { say: 'kenji', emo: 'bright', text: 'Tomorrow, new game. Very big download. Tonight, I start. Maybe Monday, finish.' },
+      { go: 'd2_party_free' },
+    ],
+    d2_party_free: [
+      { do: 'cam', back: true },
+      { do: 'goal', text: 'Stay a while, or choose “Head home” at your seat.', at: 'party_seat' }, { do: 'save' },
+    ],
+    d2_seat_menu: [{ choice: [
+      { text: 'Stay a little longer.', go: 'd2_stay' },
+      { text: 'Head home.', go: 'd2_goodnight' },
+    ] }],
+    d2_stay: [{ do: 'sit', who: 'eric', at: 'party_seat' }],
+    d2_goodnight: [
+      { say: 'eric', emo: 'warm', text: 'I’m going to head back. Thank you for tonight.' },
+      { say: 'mori', emo: 'warm', text: '気をつけて。おやすみなさい。', en: 'Take care. Goodnight.' },
+      { say: 'mio', emo: 'tired', text: 'Night. Give Mori-san a hand with the boxes, Kenji.' },
+      { say: 'kenji', emo: 'bright', text: 'Yes! See you Monday, Eric. Computer game also, maybe?' },
+      { do: 'stand', who: 'eric' }, { set: 'd2_party_done' }, { set: 'going_home' },
+      { do: 'partySetup', state: 'pack' },
+      { do: 'goal', text: 'Head home when you’re ready. Your room is 203.', at: 'plaza_lane' }, { do: 'save' },
+    ],
+    d2_kenji_party: [{ choice: [
+      { text: 'How do I say I want a drink?', go: 'd2_drink_word', if: '!know_nomitai' },
+      { text: 'I’d like a drink.', go: 'd2_more_drink', if: 'know_nomitai' },
+      { text: 'I’m all right, thanks.', go: 'd2_no_drink' },
+    ] }],
+    d2_drink_word: [
+      { say: 'kenji', emo: 'bright', text: '{nomitai}. Want drink. Same “tai”!' },
+      { say: 'kenji', emo: 'slow', slow: true, text: '{nomitai}...' },
+      { do: 'type', word: 'nomitai', from: 'kenji', prompt: 'Kenji has the tea ready. Say “I want to drink” as you take your cup.' },
+      { go: 'd2_more_drink' },
+    ],
+    d2_no_drink: [{ say: 'kenji', emo: 'bright', text: 'Okay. Tea is here, if you want.' }],
+    d2_more_drink: [
+      { if: 'd2_ate && !d2_party_done', then: [
+        { say: 'kenji', emo: 'bright', text: 'Yes! Here.' }, { do: 'partyFood', state: 'drink' },
+      ], else: [{ go: 'd2_drink_away' }] },
+    ],
+    d2_more_food: [
+      { if: 'd2_ate && !d2_party_done', then: [{ do: 'partyFood', state: 'offerMore' }],
+        else: [{ go: 'd2_food_away' }] },
+    ],
+    d2_mio_party: [
+      { if: '!d2_mio_party_seen', then: [
+        { if: 'd2_voice_tested', then: [{ say: 'mio', emo: 'low', text: 'You did that thing with the doors again. I’ve been trying not to think about it all afternoon.' }], else: [
+          { if: 'd2_order_sensor', then: [{ say: 'mio', emo: 'low', text: 'The report says sensor, so that’s what I’ll say. But yesterday... you were talking to the doors, weren’t you?' }],
+            else: [{ say: 'mio', emo: 'low', text: 'So if the sensor was fine, what happened yesterday? You were talking to the doors, weren’t you?' }] },
+        ] },
+        { say: 'eric', emo: 'hesitant', text: 'I don’t really know how to explain it yet.' },
+        { say: 'mio', emo: 'casual', text: 'Okay. You can tell me when you do. Pass the sandwiches?' },
+        { do: 'partyFood', state: 'passSandwiches' }, { set: 'd2_mio_party_seen' },
+      ], else: [{ say: 'mio', emo: 'casual', text: 'Have some more pickles. There’s still half a jar.' }] },
+    ],
+    d2_mori_party: [{ say: 'mori', emo: 'warm', text: '遠慮しないでくださいね。', en: 'Please, help yourself.' }],
+    d2_kenji_wait: [{ say: 'kenji', emo: 'bright', text: 'Food is there. This way!' }],
+    d2_mio_wait: [{ say: 'mio', emo: 'tired', text: 'Mori-san won’t start until you sit down, so...'  }],
+    d2_mori_wait: [{ say: 'mori', emo: 'warm', text: 'こちらへどうぞ。', en: 'Come over here.' }],
+    d2_mori_rest: [
+      { do: 'face', who: 'eric', to: 'mori' }, { do: 'cam', on: 'mori', zoom: 1.2 },
+      { do: 'partyFood', state: 'packLeftovers' },
+      { say: 'eric', emo: 'warm', text: 'Did we leave you with all the clearing up?' },
+      { say: 'mori', emo: 'warm', text: 'いいえ。箱は月曜日に返せばいいんです。', en: 'No, it’s all right. The boxes don’t have to go back until Monday.' },
+      { say: 'eric', emo: 'warm', text: 'I can carry them back then. You did enough tonight.' },
+      { say: 'mori', emo: 'warm', text: 'ありがとうございます。写真も持ってきますね。リレハンメルの。', en: 'Thank you. I’ll bring my photos too. From Lillehammer.' },
+      { if: '!lunch_mori && !d2_norway_talked', then: [
+        { say: 'mori', emo: 'fond', text: '1994年に行ったんです。また行きたいですね。', en: 'I went in 1994. I’d like to go again.' },
+      ], else: [{ say: 'mori', emo: 'fond', text: 'また行きたいですね。今度は夏に。', en: 'I’d like to go again. In summer, this time.' }] },
+      { set: 'd2_mori_rest_seen' },
+      { choice: [
+        { text: 'How do you say “I want to go”?', go: 'd2_go_word', if: '!know_ikitai' },
+        { text: 'I’ll look forward to seeing the photos.', go: 'd2_mori_rest_end' },
+      ] },
+    ],
+    d2_go_word: [
+      { say: 'mori', emo: 'warm', text: '{ikitai}。', en: 'I want to go.' },
+      { say: 'mori', emo: 'slow', slow: true, text: '{ikitai}。', en: 'I want to go.' },
+      { do: 'type', word: 'ikitai', from: 'mori', prompt: 'Mori wants to go back to Norway. Try “I want to go”.' },
+      { say: 'eric', emo: 'warm', text: 'I’d like to see more of Japan first.' },
+      { say: 'mori', emo: 'warm', text: 'ええ、ぜひ。', en: 'Yes, you should.' },
+      { go: 'd2_mori_rest_end' },
+    ],
+    d2_mori_rest_end: [{ do: 'cam', back: true }],
+    d2_leftovers: [
+      { say: 'mori', emo: 'warm', text: 'まだありますよ。どうぞ。', en: 'There are still some left. Here you are.' },
+      { do: 'partyFood', state: 'leftovers' },
+    ],
+    d2_mori_drink: [{ say: 'mori', emo: 'polite', text: 'お茶は終わってしまいました。寮の前に自動販売機がありますよ。', en: 'We’ve finished the tea. There’s a drinks machine in front of the dorm.' }],
+    d2_mori_rest_idle: [{ say: 'mori', emo: 'warm', text: 'もう少ししたら、帰ります。', en: 'I’ll head home in a little while.' }],
+    d2_mori_rest_again: [
+      { say: 'mori', emo: 'warm', text: 'もう少ししたら、帰ります。', en: 'I’ll head home in a little while.' },
+      { if: '!know_ikitai', then: [{ choice: [
+        { text: 'How did you say “I want to go” earlier?', go: 'd2_go_word' },
+        { text: 'Goodnight, Mori-san.', go: 'd2_mori_rest_end' },
+      ] }] },
+    ],
+    d2_mori_go_reply: [{ say: 'mori', emo: 'warm', text: 'どこへ行きたいですか。', en: 'Where would you like to go?' }, { say: 'eric', emo: 'warm', text: 'I haven’t decided yet. I’m still finding my way round here.' }],
+    d2_mori_see_reply: [
+      { if: 'd2_norway_talked || d2_mori_rest_seen || lunch_mori', then: [{ say: 'mori', emo: 'warm', text: '写真ですね。月曜日に持ってきます。', en: 'The photos? I’ll bring them on Monday.' }],
+        else: [{ say: 'mori', emo: 'warm', text: '何が見たいですか。', en: 'What would you like to see?' }, { say: 'eric', emo: 'warm', text: 'A bit more of the island. I’ve barely been outside work.' }] },
+    ],
+    d2_empty_bench: [{ say: 'eric', emo: 'tired', text: 'I could bring my lunch down here.' }],
+    d2_to_lane: [{ do: 'trip', to: 'east_lane' }],
+    d2_izakaya: [{ if: 'd2_shift_done', then: ['> A card tucked into the blue curtain says “Reserved this evening.”'], else: shut }],
+    d2_bakery: [
+      { do: 'cam', on: 'bakery', zoom: 1.2 },
+      '> The board says bread can be delivered to the dorm manager’s window.',
+      { if: 'found_bakery_flyer', then: [{ say: 'eric', emo: 'warm', text: 'So this is the place on that flyer.' }],
+        else: [{ say: 'eric', emo: 'warm', text: 'That would save a wet walk before work.' }] },
+      { set: 'd2_bakery_seen' }, { do: 'cam', back: true },
+    ],
+    d2_shut: shut,
+    ...fallbackNodes,
+  },
+};

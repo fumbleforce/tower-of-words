@@ -1,0 +1,164 @@
+// The fountain plaza's planting and edges (scenes/plaza.js), with the outdoor kit (scenes/outdoor/), from the plan
+// (plaza/plan.js):
+//   the ring bed round the circle, opened only for the two lanes and the canteen link: a kerbed band of ground
+//   cover outside the dark border ring with a clipped hedge at its back, a ring of cherries at an even pitch (two
+//   maples flanking the link), and drifts of cosmos and grasses along the south arc
+//   the lanes' verges, both sides of each lane: a kerb, a bed of ground cover with a low hedge and the zelkova
+//   avenue set back on the grass, as on the forecourt's lane
+//   the terrace's edges: a seat-height wall along its south line, open where the link starts; planted beds at its
+//   two ends
+//   the lawns beyond: connected low beds following the circle and the arms, under the mixed tree groups
+import * as THREE from 'three';
+import { rng } from '../outdoor/parts.js';
+import { lowWall, KERB } from '../outdoor/edges.js';
+import { verge } from '../outdoor/lane.js';
+import { arcBox } from '../outdoor/round.js';
+import { sakura, maple, pine, cluster, grass, bed, mound, LEAF } from '../outdoor/planting.js';
+import { groveSteps } from './groves.js';
+import * as P from './plan.js';
+import * as E from './east-plan.js';
+
+const { F, R, BAND, ARCS, LANE, LINK, AVENUE, TERRACE, TERRACE_S, polar, rad } = P;
+const CROSS = E.CROSS_X;
+// cosmos, the autumn flower of every Japanese park: pink, white and a deep rose
+const COSMOS = ['#d59aae', '#ece6e3', '#b86f8e', '#dcb3c6'];
+
+// the tree ring: a tree every 22.5° round the ring bed, none on the two axes (the three openings, and the notice
+// board on the south, with low shrubs behind it), symmetric about both. The benches stand in front of eight of them
+// (plaza/furniture.js), a pair in each quarter, with a lamp between each pair: north-west, north-east, then their
+// mirrors south-west and south-east; maples flank the link, cherries everywhere else.
+const PITCH = 22.5;
+const TREE_DEG = Array.from({ length: 16 }, (_, i) => i * PITCH).filter((d) => d % 90 !== 0 || d === 90);
+export const BENCH_ANGLES = [202.5, 225, 315, 337.5, 157.5, 135, 45, 22.5].map(rad);
+export const RING_LAMPS = [213.75, 326.25, 146.25, 33.75].map(rad);
+// the lamp pair either side of the notice board, as far off the axis as the pair either side of the link
+export const SOUTH_PAIR = [-(P.HALF + 0.5), P.HALF + 0.5];
+const MAPLES = [247.5, 292.5];
+
+// cosmos: a low mound of leaves with small flowers dotted over its top
+function cosmos(p, x, z, seed) {
+  const q = rng(seed + 5);
+  mound(p, x, z, 0.32, LEAF.fresh, { squash: 0.7 });
+  for (let i = 0; i < 9; i++) {
+    const a = q() * Math.PI * 2,
+      d = q() * 0.26;
+    const g = new THREE.IcosahedronGeometry(0.045, 0).translate(
+      x + Math.cos(a) * d,
+      0.26 + q() * 0.08,
+      z + Math.sin(a) * d * 0.8,
+    );
+    p.geo(COSMOS[Math.floor(q() * COSMOS.length)], g, { cast: false });
+  }
+}
+
+// the ring bed over one arc [a0, a1]: kerbs both sides and at the ends, soil, ground cover, a clipped hedge along
+// its back
+function ringArc(p, [a0, a1]) {
+  const r0 = R,
+    r1 = R + BAND;
+  arcBox(p, LEAF.mulch, F, r0, r1, a0, a1, { y: -0.02, h: 0.07, surf: 'soil' });
+  arcBox(p, LEAF.cover, F, r0 + 0.2, r1 - 0.2, a0 + 0.2 / r1, a1 - 0.2 / r1, { y: 0.03, h: 0.07, surf: null });
+  arcBox(p, KERB.body, F, r0, r0 + 0.16, a0, a1, { y: -0.04, h: 0.16 });
+  arcBox(p, KERB.top, F, r0 + 0.01, r0 + 0.15, a0, a1, { y: 0.12, h: 0.02 });
+  arcBox(p, KERB.body, F, r1 - 0.16, r1, a0, a1, { y: -0.04, h: 0.16 });
+  arcBox(p, KERB.top, F, r1 - 0.15, r1 - 0.01, a0, a1, { y: 0.12, h: 0.02 });
+  for (const a of [a0, a1]) {
+    const [x, z] = polar(a, (r0 + r1) / 2);
+    p.box(KERB.body, BAND, 0.16, 0.16, x, -0.04, z, { ry: -a });
+    p.box(KERB.top, BAND - 0.02, 0.02, 0.14, x, 0.12, z, { ry: -a });
+  }
+  const pad = 0.5 / r1;
+  arcBox(p, LEAF.deep, F, r1 - 0.62, r1 - 0.2, a0 + pad, a1 - pad, { y: 0.05, h: 0.46, cast: true, surf: null });
+  arcBox(p, LEAF.mid, F, r1 - 0.6, r1 - 0.22, a0 + pad, a1 - pad, { y: 0.51, h: 0.04, cast: false, surf: null });
+}
+
+function* ring(p) {
+  for (const arc of Object.values(ARCS)) {
+    ringArc(p, arc);
+    yield;
+  }
+  const mid = R + BAND * 0.42;
+  for (const [i, d] of TREE_DEG.entries()) {
+    const [x, z] = polar(rad(d), mid);
+    if (d === 90)
+      cluster(p, x, z, { n: 4, r: 0.34, spread: 0.6, seed: 9 }); // behind the notice board
+    else if (MAPLES.includes(d)) maple(p, x, z, 1.15, i + 3);
+    else sakura(p, x, z, 0.95 + (i % 3) * 0.05, i + 11);
+    if (i % 2) yield;
+  }
+  // along the south arc, facing the plaza: drifts of cosmos and grass tufts between the cherries, in front of the
+  // hedge
+  const q = rng(31);
+  // the south lamps stand in the bed: no flowers at their feet
+  const rr = R + 0.38;
+  const lampDeg = [...RING_LAMPS.filter((a) => a < Math.PI), ...SOUTH_PAIR.map((dx) => Math.acos(dx / rr))].map(
+    (a) => (a * 180) / Math.PI,
+  );
+  for (let d = PITCH / 2; d < 180; d += PITCH)
+    for (const k of [-1, 0, 1]) {
+      if (lampDeg.some((l) => Math.abs(d + k * 3.2 - l) < 2.6)) continue;
+      const [x, z] = polar(rad(d + k * 3.2), R + 0.45);
+      if (k === 0 && Math.round(d) % 2) grass(p, x, z, { seed: Math.round(d), h: 0.45 });
+      else cosmos(p, x, z, Math.round(d * 10 + k + q() * 5));
+      if (k === 1) yield;
+    }
+}
+
+// both sides of both lanes, from the edge of the view in to just short of the ring bed, the same on each side
+const STOP = R + BAND + 0.9;
+function* verges(p) {
+  const { w } = LANE;
+  const west = AVENUE.map((d) => F[0] - d);
+  verge(p, [-44, w[2]], [F[0] - STOP, w[2]], 'n', { trees: west, seed: 3 });
+  yield;
+  verge(p, [-44, w[3]], [F[0] - STOP, w[3]], 's', { trees: west, seed: 4 });
+  yield;
+  yield* eastVergeSteps(p);
+}
+// east of the plaza to the jog (plaza/east-lane.js): the north verge stops at the leg, the south one at the corner's
+// far side; the cross walk runs through both. The east lane's chunk (scenes/east-lane.js) lays the same.
+export function* eastVergeSteps(p) {
+  const { e } = LANE;
+  const east = AVENUE.map((d) => F[0] + d),
+    crossings = [CROSS];
+  verge(p, [F[0] + STOP, e[2]], [e[1], e[2]], 'n', { trees: east, crossings, seed: 5 });
+  yield;
+  verge(p, [F[0] + STOP, e[3]], [e[1] + 2 * P.HALF, e[3]], 's', { trees: east, crossings, seed: 6 });
+  yield;
+}
+
+// the terrace's south line: a seat-height wall along all of it, open only where the link starts; a planted bed at
+// each end
+function* terraceEdges(p) {
+  lowWall(p, [TERRACE[0], TERRACE_S], [TERRACE[1], TERRACE_S], { off: -0.11, gaps: [[LINK[0], LINK[1]]] });
+  for (const [x0, x1] of [
+    [TERRACE[0] - 1.4, TERRACE[0]],
+    [TERRACE[1], TERRACE[1] + 1.4],
+  ]) {
+    const rect = [x0, x1, TERRACE[2] + 0.2, TERRACE_S];
+    for (const [a, b2] of [
+      [
+        [x0, rect[2]],
+        [x0, rect[3]],
+      ],
+      [
+        [x1, rect[2]],
+        [x1, rect[3]],
+      ],
+    ])
+      lowWall(p, a, b2, { h: 0.45, off: 0 });
+    bed(p, [x0 + 0.1, x1 - 0.1, rect[2], rect[3] - 0.1], { y: 0.42 });
+    const cx = (x0 + x1) / 2;
+    cluster(p, cx, rect[3] - 0.8, { n: 4, r: 0.32, spread: 0.45, seed: Math.round(cx), y: 0.42 });
+    pine(p, cx, rect[2] + 1.3, 0.85, Math.round(cx) + 2);
+    yield;
+  }
+}
+
+// a generator that yields every few trees and flowers, so the plaza builds in slices (js/perf/slice.js)
+export function* greenSteps(p) {
+  yield* ring(p);
+  yield* verges(p);
+  yield* terraceEdges(p);
+  yield* groveSteps(p);
+}

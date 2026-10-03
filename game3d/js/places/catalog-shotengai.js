@@ -1,0 +1,30 @@
+// The shop street's things and registration IDs (places/shotengai.js), kept beside the catalog (catalog.js).
+export const SHOTENGAI_DETAILS = {
+  things: {
+    plaza_lane: { label: 'To the plaza', kind: 'thing', verb: 'Go' },
+    bike_shop: { label: 'Bike shop', kind: 'thing', verb: 'Go in' },
+    store: { label: 'Konbini', kind: 'thing', verb: 'Go in' },
+    bakery: { label: 'Bakery', kind: 'thing', verb: 'Go in' },
+    game_centre: { label: 'Game centre', kind: 'thing', verb: 'Go in' },
+    karaoke: { label: 'Karaoke', kind: 'thing', verb: 'Go in' },
+    izakaya: { label: 'Izakaya', kind: 'thing', verb: 'Go in' },
+    // day 2's gathering after work (story/day2/shotengai.js): the two from B2 with bodies here, and their bench
+    mori: { label: 'Mr. Mori', kind: 'person' },
+    kenji: { label: 'Kenji', kind: 'person' },
+    party_seat: { label: 'Bench', kind: 'thing', verb: 'Sit' },
+  },
+  spots: [
+    'plaza_entry',
+    'shotengai_shrine',
+    'shotengai_back_alley',
+    'shotengai_pine_bench',
+    'party_group',
+    'party_kenji',
+    'party_mio',
+  ],
+  nooks: ['shotengai_shrine', 'shotengai_back_alley', 'shotengai_pine_bench'], // docs/game/places.md, "Nooks"
+  seats: ['party_seat', 'party_mori'],
+  zones: ['plaza_exit'],
+  people: ['mori', 'kenji'],
+  hooks: ['partySetup', 'partyFood'],
+};

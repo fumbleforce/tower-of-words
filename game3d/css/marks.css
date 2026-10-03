@@ -1,0 +1,109 @@
+/* ---------- what can be used: a pin over every usable person and thing ----------
+   Jørgen, 2026-09-29: "the microscopic dots are not enough to indicate interactive elements, they look like bugs
+   really. earlier you had a line and a circle with a symbol which was better." So every usable person and thing on
+   screen carries a pin again: a circle with a symbol (speech for people, a paw for the cat, an eye for things) on a
+   short line down to it (engine.js Markers). It must not clutter or cover people (his earlier complaint), so:
+   - pins further from Eric are smaller and paler (engine.js scales each pin from its tip and sets --mo);
+   - where two pins would overlap, only the one nearer to Eric shows (.crowded);
+   - no labels: the action beside the target has the name and the verb.
+   The goal's pin is teal and larger. The one in reach keeps the small bobbing pointer (in place of the line), with
+   the 3D outline on its body. Loaded after style.css, so it overrides the older pin rules there. */
+#marks { visibility: visible; }
+body.busy #marks, body.trip #marks, body.at-title #marks { display: none; }
+#marks .mark .tag { display: none; }
+#marks .mark.offscreen { visibility: hidden; }
+
+/* tapping or clicking a pin acts like tapping its target (main.js, the #marks click). Only the pin itself takes the
+   tap, with a slightly larger invisible area round it for thumbs; the rest of the button lets taps through to the
+   world. Crowded-out and off-screen pins take nothing. */
+#marks .mark, #marks .mark * { pointer-events: none; }
+#marks .mark::before { display: none; }
+#marks .mark:not(.crowded):not(.offscreen):not(.far) .pin { pointer-events: auto; cursor: pointer; }
+#marks .mark .pin::before { content: ""; position: absolute; inset: -8px; border-radius: 50%; }
+#marks .mark:not(.near) .pin:hover { transform: scale(1.15); border-color: #fff; }
+
+#marks .mark { opacity: var(--mo, 1); transition: opacity .2s; }
+#marks .mark.crowded { opacity: 0; }
+body:has(.mark.near) #marks .mark:not(.near):not(.crowded) { opacity: calc(var(--mo, 1) * .85); }
+
+/* the pin: a dark disc with a pale rim and a pale symbol, reading on the pale floors and the navy seats alike */
+#marks .mark .pin, #marks .mark.thing .pin, #marks .mark.goal .pin {
+  left: -13px; top: -44px; width: 26px; height: 26px; box-sizing: border-box; border-radius: 50%;
+  display: grid; place-items: center; clip-path: none; animation: none; transform: none;
+  background: rgba(24, 28, 36, .9); border: 2px solid rgba(236, 240, 245, .92);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, .45);
+  transition: transform .16s ease, background .16s, border-color .16s;
+}
+#marks .mark .pin svg { display: block; width: 14px; height: 14px; fill: #eef2f6; }
+#marks .mark.thing .pin { left: -11px; top: -40px; width: 22px; height: 22px; }
+#marks .mark.thing .pin svg { width: 12px; height: 12px; }
+#marks .mark .pin::after { display: none; }
+
+/* the line: from the pin down to just over the target, ending in a small dot */
+#marks .mark .stem { display: block; left: -1px; top: -18px; width: 2px; height: 13px; border-radius: 1px; background: rgba(236, 240, 245, .8); }
+#marks .mark .stem::after { left: -2px; bottom: -3px; width: 6px; height: 6px; background: rgba(236, 240, 245, .85); }
+
+/* the goal: the same pin in teal, a little larger, with a slow ring */
+#marks .mark.goal .pin { left: -16px; top: -52px; width: 32px; height: 32px; background: var(--accent, #6fd0c6); border: 2px solid #effcfa; box-shadow: 0 0 0 4px rgba(111, 208, 198, .25), 0 2px 8px rgba(0, 0, 0, .45); }
+#marks .mark.goal .pin svg { width: 17px; height: 17px; fill: #0f2624; }
+#marks .mark.goal .pin::after { display: block; content: ""; position: absolute; inset: -7px; border-radius: 50%; border: 2px solid rgba(111, 208, 198, .7); animation: goalring 2.2s ease-out infinite; }
+#marks .mark.goal .stem { top: -20px; height: 15px; width: 3px; left: -1.5px; }
+#marks .mark.goal .stem, #marks .mark.goal .stem::after { background: var(--accent, #6fd0c6); }
+body.reduce-motion #marks .mark.goal .pin::after { animation: none; transform: scale(1.1); opacity: .5; }
+
+/* under the mouse: the pin grows a little and its rim goes white (the model gets the 3D outline, main.js) */
+#marks .mark.hover:not(.near) .pin { transform: scale(1.15); border-color: #fff; }
+
+/* in reach: the pin lights up, and the line becomes the small bobbing pointer aimed at the target */
+#marks .mark.near .pin { border-color: #fff; background: #1d4744; box-shadow: 0 0 0 3px rgba(111, 208, 198, .4), 0 2px 6px rgba(0, 0, 0, .45); }
+#marks .mark.near .pin svg { fill: #bff1ea; }
+#marks .mark.near.goal .pin { background: var(--accent, #6fd0c6); }
+#marks .mark.near.goal .pin svg { fill: #0f2624; }
+#marks .mark.near .stem { display: none; }
+#marks .mark.near::after {
+  content: ""; position: absolute; left: -8px; top: -17px; width: 16px; height: 11px;
+  background: #bff1ea; clip-path: polygon(0 0, 100% 0, 50% 100%);
+  filter: drop-shadow(0 1px 1px rgba(10, 14, 24, .8));
+  animation: markbob 1.4s ease-in-out infinite;
+}
+@keyframes markbob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-3px); } }
+body.reduce-motion #marks .mark.near::after { animation: none; }
+/* desktop, until E has been used five times: the E key at the corner of the pin in reach (the action menu opens only
+   when asked for, so this is where E is taught; ui.js sets body.teach-e) */
+body.teach-e:not(.phone) #marks .mark.near .tag {
+  display: grid; place-items: center; left: 14px; top: -34px; width: auto; height: auto; padding: 0; gap: 0;
+  background: none; border: 0; opacity: 1; transform: none;
+}
+body.teach-e:not(.phone) #marks .mark.near .tag .vb, body.teach-e:not(.phone) #marks .mark.near .tag .nm { display: none; }
+body.teach-e:not(.phone) #marks .mark.near .tag .key {
+  display: grid; min-width: 16px; height: 16px; padding: 0 3px; border-radius: 4px; background: #2a323e;
+  border: 1px solid rgba(255, 255, 255, .3); border-bottom-width: 2px; color: #e6faf7; font: 700 10px/1 var(--font);
+}
+
+/* no room above the target (under the HUD): the pin sits beside the head on a short level line, never hanging down
+   over the face (engine.js sets .below; .flip puts it on the left near the right edge) */
+#marks .mark.below .pin, #marks .mark.thing.below .pin { top: -13px; left: 24px; }
+#marks .mark.thing.below .pin { top: -11px; left: 22px; }
+#marks .mark.goal.below .pin { top: -16px; left: 26px; }
+#marks .mark.below .stem, #marks .mark.goal.below .stem { top: -1px; left: 2px; width: 22px; height: 2px; }
+#marks .mark.below .stem::after { bottom: auto; top: -2px; left: -4px; }
+#marks .mark.below.flip .pin { left: -50px; }
+#marks .mark.thing.below.flip .pin { left: -44px; }
+#marks .mark.goal.below.flip .pin { left: -58px; }
+#marks .mark.below.flip .stem { left: -24px; }
+#marks .mark.below.flip .stem::after { left: auto; right: -4px; }
+#marks .mark.below.near::after { top: -6px; left: 6px; width: 11px; height: 12px; clip-path: polygon(100% 0, 100% 100%, 0 50%); }
+#marks .mark.below.flip.near::after { left: -17px; clip-path: polygon(0 0, 100% 50%, 0 100%); }
+
+/* phones: bigger pins for a thumb's glance */
+body.phone #marks .mark .pin { left: -15px; top: -48px; width: 30px; height: 30px; }
+body.phone #marks .mark .pin svg { width: 16px; height: 16px; }
+body.phone #marks .mark.thing .pin { left: -13px; top: -44px; width: 26px; height: 26px; }
+body.phone #marks .mark.thing .pin svg { width: 14px; height: 14px; }
+body.phone #marks .mark.goal .pin { left: -18px; top: -56px; width: 36px; height: 36px; }
+body.phone #marks .mark.goal .pin svg { width: 19px; height: 19px; }
+body.phone #marks .mark.below .pin { top: -15px; left: 24px; }
+body.phone #marks .mark.thing.below .pin { top: -13px; }
+body.phone #marks .mark.goal.below .pin { top: -18px; }
+body.phone #marks .mark.below.flip .pin { left: -54px; }
+body.phone #marks .mark.goal.below.flip .pin { left: -60px; }
