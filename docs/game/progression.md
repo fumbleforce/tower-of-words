@@ -27,7 +27,7 @@ Applied below: skipping and pay in the core loop, the notice board under Order o
 
 The tickets are how the main story moves. Each ticket is a repair request with a place and a person attached. Working one sends Eric somewhere on the island, gives him a reason to talk to people, and often puts an old machine in front of him (the kotodama, [setting.md](setting.md)). Closing the relevant story ticket unlocks the next stretch of that thread, and every closed ticket pays Eric. Work in progress can still produce a finding or a conversation; those local responses do not require closing the ticket. Other available threads and free activities remain open while it waits.
 
-- The ticket app is a small Windows 95-style program on Eric's computers: the one in room 203 and the one at his B2 desk. Day 2 shows it for the first time, with two tickets. The app is built; its runtime rules are in [systems.md](systems.md#tickets).
+- The ticket app is Amakawa's in-house repair web tool on Eric's computers: the one in room 203 and the one at his B2 desk. Day 2 shows it for the first time, with two tickets. The app is built; its appearance is in [controls-and-ui.md](controls-and-ui.md), and its runtime rules are in [systems.md](systems.md#tickets).
 - On the later free days, the office is optional on any given day. Day 2 still includes its authored B2 conversation. Amakawa is not an efficient company: nobody checks the hours, and a ticket can sit open for days. Going in is how the player picks up new tickets and sees the B2 team.
 - A ticket has no deadline, no fail state and no cost for leaving it. An open ticket only waits. Some tickets are story tickets: the story stays where it is until one is closed. Others are small jobs that give bond points ("A repair request for them or on their machine", [systems.md](systems.md), Bonds), memory lines and the odd new word.
 - Pay is per closed ticket, since Eric is a contractor. The ticket app shows what a ticket pays, and the money is added to what Eric has. Small jobs pay a little, story tickets more.
@@ -54,7 +54,7 @@ Proposed; days after day 2 are not fixed. Places are from [island.md](island.md)
 
 | System | First day | Places | Japanese it practises |
 |---|---|---|---|
-| Tickets | Day 2 (two tickets, a glimpse) | Room 203 and the B2 desk (`dorms`, `office`); then wherever a ticket points | Day 2 uses English controls and immediately glossed Japanese nouns in the requests; labels such as 修理依頼 and 完了 can come after they are learned |
+| Tickets | Day 2 (two tickets, a glimpse) | Room 203 and the B2 desk (`dorms`, `office`); then wherever a ticket points | Glossed Japanese nouns in the requests and learnable interface labels with readings and English; see [words.md](words.md#labels-on-the-ticket-system) |
 | Free periods and the week | Day 3 | The whole open half | Days and times: 曜日, 時, 午前, 午後 |
 | Notice board | Day 3 | The plaza's `noticeboard` ([places.md](places.md), Fountain plaza), which already carries day 2's posters | Posters: 募集, 日時, 場所, 入会 |
 | Clubs: swimming | Week 1 | `pool`, `gym` | Rules signs (飛び込み禁止, 男子, 女子), counting lengths, 泳ぐ and ～たい |
