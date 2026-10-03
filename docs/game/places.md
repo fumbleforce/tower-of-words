@@ -119,6 +119,8 @@ One car of the monorail, crossing the bay from the mainland to Honsha station. T
 
 ### Who's there when
 
+Day 2 (to build): Eric returns to the empty, stationary car for the door check. Mio joins him only before the B2 briefing and if `lunch_mio || mio_warm >= 2`; the day-1 passengers are absent. No departure sequence runs.
+
 The monorail has one period, early morning.
 
 | Id | Usually | Schedule |
@@ -193,6 +195,8 @@ The gate stays in this room, as Jørgen picked in [gate-location](../../reviews/
 
 ### Who's there when
 
+Day 2 (to build): The guard remains at his desk and Tama may remain. The arriving day-1 visitors are absent; Eric can pass between the platform and forecourt without replaying the card problem.
+
 The security room is played in the early morning, before nine.
 
 | Id | Usually | Schedule |
@@ -260,6 +264,8 @@ Small places off the walks, kept for later secrets, encounters and collectibles 
 `lift_front`, `plaza_lane` (the lane's east end along the tower's south face: walking into it starts the walk to the plaza)
 
 ### Who's there when
+
+Day 2 (to build): No day-1 Kuro encounter replays. The entrances stay available in both day-2 periods.
 
 Kuro works the head office reception all day. The two from Sales appear inside the lift during the ride.
 
@@ -341,6 +347,8 @@ None.
 
 ### Who's there when
 
+Day 2 (to build): No day-1 lunch workers or lunch event repeat. The established ambient crowd may remain; the plaza connects the job route and optional walks.
+
 None of the cast lives here yet.
 
 | Id | Usually | Schedule |
@@ -396,7 +404,7 @@ In the morning the sun comes from the east-south-east behind the camera's left s
 
 ### Day-2 party plan (not built)
 
-The [day-2 outline](../../notes/day2-outline.md) proposes B2's welcome food on the promenade. Mori orders rice balls and egg sandwiches from the existing canteen earlier in the day; Kenji helps him collect the takeaway before meeting Eric. This requires no arcade shop to open and no shopping task for Eric. At one sea-facing bench, Mori and Eric sit, with Mio and Kenji standing beside its ends, all in the same conversation space. Seats, actor spots and phone framing still need to be built and checked; the current “Seats: None” below describes the shipped place.
+The authored [day-2 story](stories/day2/README.md) places B2's welcome food on the promenade. Mori orders rice balls and egg sandwiches from the existing canteen earlier in the day; Kenji helps him collect the takeaway before meeting Eric. This requires no arcade shop to open and no shopping task for Eric. At one sea-facing bench, Mori and Eric sit, with Mio and Kenji standing beside its ends, all in the same conversation space. Seats, actor spots and phone framing still need to be built and checked; the current “Seats: None” below describes the shipped place.
 
 ### Things
 
@@ -433,6 +441,8 @@ None.
 `plaza_exit` (the shop walk's east end, out onto the dorm street)
 
 ### Who's there when
+
+Day 2 (to build): Before the shift ends, none of the party cast is here. After work, Kenji waits by the blue curtain; Mori and Mio wait by the promenade bench. Kenji joins them when Eric approaches him or the bench. After the goodbye, Mio and Kenji leave and Mori rests at `shotengai_back_alley` with the leftovers. There is only one Mori. See the party plan above for food and seating.
 
 None of the cast yet.
 
@@ -519,6 +529,8 @@ None.
 
 ### Who's there when
 
+Day 2 (to build): Only the established ambient population; no new story actor. The north crossing is visibly closed for resurfacing during both periods.
+
 None of the cast yet.
 
 | Id | Usually | Schedule |
@@ -602,6 +614,8 @@ None.
 `row_exit` (the dorm row's west end, at the dorm street), `courts_exit` (the courts walk west of the onsen path's foot)
 
 ### Who's there when
+
+Day 2 (to build): Only the established ambient population; Eric can visit the lookout. The pool approach is visibly closed for resurfacing during both periods.
 
 None of the cast yet.
 
@@ -1042,6 +1056,8 @@ The second basement of head office: IT support. One compact floor, close to squa
 
 ### Who's there when
 
+Day 2 (to build): Mori, Mio and Kenji work here before the shift ends. Emi meets Eric here after the station check. After work, Emi is upstairs and the others leave for the gathering; no duplicate party cast remains at B2.
+
 The story moves the clock ([systems.md](systems.md)): morning when Eric arrives, lunch at 12:10, afternoon at 14:00, evening at 18:05.
 
 | Id | Usually | Schedule |
@@ -1107,6 +1123,8 @@ None.
 
 ### Who's there when
 
+Day 2 (to build): No new story actor; both the street exit and the route to room 203 remain available in both periods.
+
 Played in the evening, after work. None of the cast is here.
 
 | Id | Usually | Schedule |
@@ -1166,6 +1184,8 @@ Eric arrives from the dorm courtyard (Getting between places) on the landing. Th
 `door_203` (the corridor in front of his door)
 
 ### Who's there when
+
+Day 2 (to build): Eric starts inside room 203. Mio sends a phone message but is not physically present. The computer is optional, and returning before the final goodbye does not end the day.
 
 Played in the evening, after work.
 

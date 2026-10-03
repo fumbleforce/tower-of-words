@@ -51,3 +51,14 @@ Day 1 teaches nine words, in the order a player meets them. Who teaches each, an
 - Only words taught in play count as known: typed at the typing prompt, or taught with `learn` or `offer` (Jørgen). Nothing is known at the start. A word shown glossed in a line is explained there but not taught; never mark other words as known (九時 at the gate was wrong).
 - Known words stay sharp in overheard Japanese from then on, and in the voice they come out clear while the rest is muffled ([systems.md](systems.md), Overheard Japanese).
 - Phrases and commands Eric knows go in the Say menu; how often he has to type one before a click is enough is in [systems.md](systems.md), Word practice.
+
+## Day 2 (to build)
+
+The authored [day-2 set](../../game3d/story/day2/README.md) adds the following records from `story/day2/words.js`. Registration, audio and runtime teaching are pending. The teacher and teaching nodes are in [welcome.md](stories/day2/welcome.md).
+
+| Id | Japanese | Reading | Meaning | Kind |
+|---|---|---|---|---|
+| `tabetai` | 食べたい | tabetai | I want to eat | phrase (to build) |
+| `nomitai` | 飲みたい | nomitai | I want to drink | phrase (to build) |
+
+The single new pattern is the **-tai form**, saying what you want to do yourself. The Words panel pairs 食べたい with 食べる (taberu, to eat), and 飲みたい with 飲む (nomu, to drink). The first is required; the second is optional reinforcement. Both start unknown, become known through typing, and are things to say to people. Neither commands a machine.
