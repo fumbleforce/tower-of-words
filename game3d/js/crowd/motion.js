@@ -105,23 +105,29 @@ export function walkStep(game, w, dt, list, eric, wide) {
       ed = Math.hypot(ex, ez) || 1e-4;
     if (ed < want) {
       const push = Math.min(want - ed, Math.max(w.speed, 1.2 * K) * 2 * dt);
-      // aside rather than ahead of someone walking at them: half away, the rest across their way, on the side they're on
-      let px = ex / ed,
-        pz = ez / ed;
+      // aside rather than ahead of someone walking at them: half away, the rest across their way, on the side they're on;
+      // failing that the other side, if it takes them no nearer; failing both, they wait. Each step aside must be clear
+      // of everyone else too: pushed after the collisions above, it put a walker inside a staff member beside them (#198)
       const v = b.root.userData.walkVel,
-        vl = v ? Math.hypot(v[0], v[1]) : 0;
+        vl = v ? Math.hypot(v[0], v[1]) : 0,
+        ux = ex / ed,
+        uz = ez / ed;
+      const sides = [];
       if (vl > 0.1) {
         const sx = -v[1] / vl,
           sz = v[0] / vl,
           side = ex * sx + ez * sz >= 0 ? 1 : -1;
-        px = px * 0.5 + sx * side;
-        pz = pz * 0.5 + sz * side;
-        const l = Math.hypot(px, pz) || 1;
-        px /= l;
-        pz /= l;
+        sides.push([ux * 0.5 + sx * side, uz * 0.5 + sz * side], [ux * 0.5 - sx * side, uz * 0.5 - sz * side]);
+      } else sides.push([ux, uz]);
+      for (const [dx, dz] of sides) {
+        const l = Math.hypot(dx, dz) || 1,
+          cx = x + (dx / l) * push,
+          cz = z + (dz / l) * push;
+        if (Math.hypot(cx - b.x, cz - b.z) < ed || !clearOf(list, b, r, w, me, x, z, cx, cz)) continue;
+        x = cx;
+        z = cz;
+        break;
       }
-      x += px * push;
-      z += pz * push;
     }
   }
   const nav = P.nav;
@@ -139,6 +145,18 @@ export function walkStep(game, w, dt, list, eric, wide) {
   if (moved > s * 0.3 && moved > 1e-4) r.root.rotation.y = turnToward(r.root.rotation.y, Math.atan2(mx, mz), dt, 5);
   w.moved = moved / Math.max(dt, 1e-4);
   return false;
+}
+
+// a step aside from (x, z) to (cx, cz) clear of everyone but the one given way to (b): outside each body, or no
+// nearer one they already touch. A passer-by who walks through others (w.ghost) only minds those who aren't.
+function clearOf(list, b, r, w, me, x, z, cx, cz) {
+  for (const o of list) {
+    if (o === b || o.root === r.root || (w.ghost && o.rig?.ambient) || isPassing(r.root, o.root)) continue;
+    const rr = o.r + me,
+      d = Math.hypot(cx - o.x, cz - o.z);
+    if (d < rr && d < Math.hypot(x - o.x, z - o.z)) return false;
+  }
+  return true;
 }
 
 // no nearer the next point for STALL seconds (the point moving on resets it)
