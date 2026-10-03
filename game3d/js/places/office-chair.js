@@ -3,6 +3,7 @@
 // him, facing the way it goes (the cat rides along if she's on it). The office's `chairRoll` hook and its update call
 // these; the office keeps the route, the nav blocking and the saved state.
 import { walkRig } from '../move.js';
+import { stepGait, stopGait } from '../movement/gait.js';
 
 const BEHIND = 0.52; // from the chair's centre to where he stands pushing it
 const SPEED = 1.1; // units a second: an easy walking pace
@@ -33,7 +34,7 @@ export function chairPusher(game, chair) {
         done = () => {
           chair.rotation.y = endYaw;
           pl.scripted = false;
-          pl.setState('idle');
+          stopGait(pl);
           game.walker?.sync?.();
           if (game.walker) game.walker.facing = pl.root.rotation.y;
           res();
@@ -61,9 +62,11 @@ export function chairPusher(game, chair) {
       dy = Math.atan2(Math.sin(dy), Math.cos(dy));
       chair.rotation.y += Math.sign(dy) * Math.min(Math.abs(dy), dt * 5);
       const pl = game.player.root,
-        a = chair.rotation.y;
+        a = chair.rotation.y,
+        [ox, oz] = [pl.position.x, pl.position.z];
       pl.position.set(c.x - Math.sin(a) * BEHIND, 0, c.z - Math.cos(a) * BEHIND);
       pl.rotation.y = a;
+      stepGait(game.player, Math.hypot(pl.position.x - ox, pl.position.z - oz), dt); // his steps keep to the chair
     },
   };
 }

@@ -6,7 +6,10 @@ export function fastResult(run = {}, pageErrors = [], overrides = {}) {
   if (!run.done) errors.push('route did not finish before the deadline');
   if (!run.ended) errors.push('day-end checkpoint was not reached');
   if ((overlaps || spins) && !overrides.MOVE_WARN) errors.push(`movement: ${overlaps} overlaps, ${spins} spins`);
+  // the gait check (js/movement/gait-watch.js): someone stepping on the spot or sliding for 2.4 s or more
+  const gait = count(run.gait?.long);
+  if (gait && !overrides.MOVE_WARN) errors.push(`gait: ${gait} people stepping on the spot or sliding`);
   const activeOverrides = Object.keys(overrides).filter(key => overrides[key]);
   const pass = errors.length === 0;
-  return { pass, verdict: pass ? (activeOverrides.length ? 'PASS WITH OVERRIDES' : 'PASS') : 'FAIL', errors, overlaps, spins, activeOverrides };
+  return { pass, verdict: pass ? (activeOverrides.length ? 'PASS WITH OVERRIDES' : 'PASS') : 'FAIL', errors, overlaps, spins, gait, activeOverrides };
 }

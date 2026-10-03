@@ -44,15 +44,18 @@ export function meshyPerson(m) {
   m.head = O();
   (hb || m.root).add(m.head);
   m.headK = O();
-  let last = 0,
+  let last = null,
     sk = null;
   m.model.traverse((o) => {
     if (!sk && o.isSkinnedMesh) sk = o;
   });
+  // on the game's clock, which moves them (a sped-up or paused game, a slow frame): on the wall clock their steps
+  // fell behind or ran ahead of their feet; the wall clock only where there is no game (a viewer)
   sk.onBeforeRender = () => {
-    const now = performance.now();
-    if (now - last < 4) return;
-    const dt = last ? Math.min(0.1, (now - last) / 1000) : 0;
+    const G = globalThis.__game,
+      now = G ? G.t : performance.now() / 1000;
+    if (last !== null && now >= last && now - last < 0.004) return;
+    const dt = last !== null && now > last ? Math.min(G ? 0.5 : 0.1, now - last) : 0;
     last = now;
     if (m.seated && m.state !== 'sit') m.sitHere();
     else if (m.seated === false && m.state === 'sit') {
