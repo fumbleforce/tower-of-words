@@ -17,6 +17,7 @@ import { startOnboarding, resetOnboarding } from './onboard.js';
 import { browserSpeechAvailable, prepareVoice } from './speech.js';
 import { PLACE_NAMES } from './places/definitions.js';
 import { installGoalArrow } from './ui/goal-arrow.js';
+import { addDayTwo } from './ui/title-day2.js';
 
 const Q = new URLSearchParams(location.search);
 const TEST = Q.get('test') === 'fast',
@@ -323,6 +324,10 @@ function buildTitle() {
   inner.querySelector('.btns')?.remove();
   inner.querySelector('.keys')?.remove();
   inner.append(menu);
+  addDayTwo(menu, ms, {
+    inProgress: () => !!autosaveInfo() && !autosaveInfo().data.ended,
+    keys: { SAVE_KEY, AUTO_META, CONTINUE_FLAG },
+  });
   t.append(cont);
   go.innerHTML = '<span class="l">Start</span>';
   mc.onclick = () => {

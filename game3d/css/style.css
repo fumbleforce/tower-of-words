@@ -565,6 +565,8 @@ body.reloading::after { content: ""; position: fixed; inset: 0; z-index: 50; bac
 #title .inner { position: absolute; left: clamp(32px, 6.5vw, 96px); bottom: clamp(40px, 10vh, 104px); width: auto; max-width: calc(100vw - 64px); }
 #title .wordmark { display: inline-block; }
 #title .tmenu { width: 300px; margin-left: -20px; }
+#title .tmenu[hidden] { display: none; }
+#title .confirmq { width: 420px; max-width: 100%; text-shadow: 0 1px 10px rgba(14, 18, 28, .8); }
 #title .wordmark { margin: 0 0 30px; font-size: clamp(44px, 5.4vw, 72px); line-height: 1; font-weight: 700; color: #f4f6f9; letter-spacing: .3em; text-shadow: 0 2px 24px rgba(14, 18, 28, .6); white-space: nowrap; }
 #title .wordmark .w { display: block; }
 #title .rail { position: relative; display: block; width: calc(100% - .3em); height: 2px; margin-top: 18px; border-radius: 1px; background: rgba(238, 240, 244, .22); overflow: hidden; }
@@ -612,10 +614,10 @@ body.phone .mlist > button { min-height: 54px; }
 #pause .pane { position: absolute; left: clamp(32px, 6.5vw, 96px); bottom: clamp(40px, 10vh, 104px); width: 320px; animation: riseT .22s ease-out; }
 #pause h2 { font-size: 34px; letter-spacing: .02em; }
 #pause .where { margin: 6px 0 22px; color: var(--ink-dim); font-size: 14px; }
-#pause .confirmq p { margin: 0 0 14px; font-size: 17px; line-height: 1.45; color: var(--ink); }
-#pause .row2 { flex-direction: row; gap: 10px; }
-#pause .row2 > button { flex: 1; align-items: center; font-size: 17px; background: rgba(22, 25, 32, .78); border: 1px solid var(--chip-edge); }
-#pause .row2 > button::before { display: none; }
+#pause .confirmq p, #title .confirmq p { margin: 0 0 14px; font-size: 17px; line-height: 1.45; color: var(--ink); }
+#pause .row2, #title .row2 { flex-direction: row; gap: 10px; }
+#pause .row2 > button, #title .row2 > button { flex: 1; align-items: center; font-size: 17px; background: rgba(22, 25, 32, .78); border: 1px solid var(--chip-edge); }
+#pause .row2 > button::before, #title .row2 > button::before { display: none; }
 #pause .keys { margin: 18px 0 0 20px; color: var(--ink-dim); font-size: 13px; }
 #pause .pmenu .resume.primary { background: transparent !important; color: var(--ink) !important; }
 body.phone #pause .keys { display: none; }
