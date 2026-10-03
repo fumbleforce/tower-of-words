@@ -2,14 +2,15 @@
 //   node game3d/tools/chibi-shots.mjs [w] [h] [off]      off: the same shots with the approved models, to compare
 // Each shot opens a place in capture mode (?cap), stands Mio beside Eric where the story hasn't put her, stops the
 // place's camera and frames the people from the front at head height; the train also has the game's own view and
-// both seated. BASE=.claude/worktrees/<name>/game3d shoots a worktree. Output: game3d/shots/chibi/<w>x<h>[-off]/.
+// both seated; 'lineup' stands Kuro (loaded here) beside the two on the plaza. BASE=.claude/worktrees/<name>/game3d
+// shoots a worktree; TAG=before names the run. Output: game3d/shots/chibi/<w>x<h>[-off][-TAG]/.
 import fs from 'node:fs';
 import path from 'node:path';
 import { withBrowserJob } from '../../tools/lib/browser-job.mjs';
 
 const [W = '1366', H = '860', OFF = ''] = process.argv.slice(2);
 const G = path.resolve(path.dirname(new URL(import.meta.url).pathname), '..');
-const out = path.join(G, 'shots/chibi', `${W}x${H}${OFF ? '-off' : ''}`);
+const out = path.join(G, 'shots/chibi', `${W}x${H}${OFF ? '-off' : ''}${process.env.TAG ? '-' + process.env.TAG : ''}`);
 fs.mkdirSync(out, { recursive: true });
 const phone = +W < 700;
 const base = `http://127.0.0.1:8771/${process.env.BASE || 'game3d'}/index.html?cap&q=${process.env.QUALITY ?? (phone ? 1 : 2)}${OFF ? '&chibi=0' : '&chibi=1'}`;
@@ -27,6 +28,7 @@ const SHOTS = [
   ['plaza', 'place=plaza', 'pair', 'close'],
   ['plaza-walk', 'place=plaza', 'pair', 'side', 'walk'],
   ['plaza-phone', 'place=plaza', 'pair', 'close', 'phone'],
+  ['lineup', 'place=plaza', 'trio', 'close'],
 ];
 await withBrowserJob('chibi-shots', async (browser) => {
   const ctx = await browser.newContext({ viewport: { width: +W, height: +H }, deviceScaleFactor: phone ? 2 : 1, isMobile: phone, hasTouch: phone });
@@ -43,15 +45,21 @@ await withBrowserJob('chibi-shots', async (browser) => {
     await p.goto(`${base}&${q}`);
     await p.waitForFunction(() => window.__done, null, { timeout: 90000 }).catch(() => errs.push('timeout'));
     const info = await p.evaluate(
-      async ({ who: shot, view, pose, norecv }) => {
+      async ({ who: shot, view, pose, norecv, fitY }) => {
         const [who, focus] = shot.split(':');
         const g = window.__game;
         const THREE = await import('three');
         const eric = g.player,
           mio = g.mioNpc;
         let kuro = g.place.people?.kuro;
+        if (who === 'trio') {
+          // Kuro's body as the cast loads it, beside Mio (the same module the page loaded, so the same look)
+          const v = document.querySelector('script[src*="main.js"]').src.split('main.js')[1];
+          const m = await import('./js/chibi.js' + v);
+          kuro = m.CHIBI_ON ? await m.loadChibi('kuro') : null;
+        }
         // Mio beside Eric unless the place already shows her
-        if (who === 'pair' && !mio.root.visible) {
+        if ((who === 'pair' || who === 'trio') && !mio.root.visible) {
           eric.root.parent.add(mio.root);
           mio.root.visible = true;
           mio.root.scale.copy(eric.root.scale);
@@ -62,6 +70,14 @@ await withBrowserJob('chibi-shots', async (browser) => {
           mio.root.rotation.y = 0;
           eric.root.rotation.y = 0;
           mio.setState('idle');
+        }
+        if (who === 'trio' && kuro) {
+          eric.root.parent.add(kuro.root);
+          kuro.root.scale.copy(eric.root.scale);
+          kuro.root.position.copy(mio.root.position).x += 0.55 * eric.root.scale.x;
+          kuro.root.rotation.y = 0;
+          kuro.setState('idle');
+          kuro.update(0.3);
         }
         if (pose === 'walk')
           for (const r of [eric, mio]) {
@@ -83,7 +99,7 @@ await withBrowserJob('chibi-shots', async (browser) => {
           eric.root.position.set(kp.x, eric.root.position.y, kp.z);
           for (let i = 0; i < 30; i++) g.step(1 / 30);
         }
-        const people = who === 'kuro' ? [kuro] : who === 'eric' || focus === 'eric' ? [eric] : focus === 'mio' ? [mio] : [eric, mio];
+        const people = who === 'trio' ? [eric, mio, kuro].filter(Boolean) : who === 'kuro' ? [kuro] : who === 'eric' || focus === 'eric' ? [eric] : focus === 'mio' ? [mio] : [eric, mio];
         const box = new THREE.Box3();
         for (const r of people) box.expandByObject(r.root);
         const c = box.getCenter(new THREE.Vector3()),
@@ -92,7 +108,7 @@ await withBrowserJob('chibi-shots', async (browser) => {
         if (view !== 'game') {
           if (g.place.cam) g.place.cam.update = () => {};
           document.getElementById('marks').style.display = 'none';
-          const f = (Math.max(s.y, s.x / cam.aspect) * 1.25) / (2 * Math.tan((cam.fov * Math.PI) / 360));
+          const f = (Math.max(s.y, fitY ? 0 : s.x / cam.aspect) * 1.25) / (2 * Math.tan((cam.fov * Math.PI) / 360));
           const dir = view === 'side' ? new THREE.Vector3(1, 0.12, 0.05) : new THREE.Vector3(0.08, cam.aspect < 1 ? 0.5 : 0.3, 1);
           let yaw = 0;
           if (who === 'kuro') yaw = kuro.root.getWorldQuaternion(new THREE.Quaternion());
@@ -106,9 +122,9 @@ await withBrowserJob('chibi-shots', async (browser) => {
           const b = new THREE.Box3().setFromObject(r.root);
           return +(b.max.y - b.min.y).toFixed(3);
         };
-        return { heights: people.map(h), chibi: people.map((r) => !!r.chibi) };
+        return { heights: people.map(h), chibi: people.map((r) => !!r.chibi), box: [...c.toArray(), ...s.toArray()].map((x) => +x.toFixed(2)) };
       },
-      { who, view, pose, norecv: !!process.env.NORECV },
+      { who, view, pose, norecv: !!process.env.NORECV, fitY: !!process.env.FIT_Y }, // FIT_Y: frame by height only (before/after pairs)
     );
     await p.screenshot({ path: path.join(out, name + '.png') });
     console.log(name, JSON.stringify(info), errs.length ? 'ERR ' + errs.join(' | ') : 'ok');
