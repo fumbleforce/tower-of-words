@@ -1,0 +1,431 @@
+{
+ "character": "rei",
+ "ref": "art/candidates/portraits/rei-portrait-1/rei-i65-2102-cut.webp",
+ "face_box_game": null,
+ "ref_face_detected": [
+  268,
+  356,
+  533,
+  640
+ ],
+ "thresholds": {
+  "redrim": [
+   0.02,
+   0.08
+  ],
+  "glasses_cover": [
+   0.87,
+   0.85
+  ],
+  "glasses_worst": [
+   0.7,
+   0.5
+  ],
+  "glasses_dE": [
+   8,
+   15
+  ],
+  "matte_frame": [
+   0.05,
+   0.12
+  ],
+  "matte_holes": [
+   0,
+   3
+  ],
+  "headroom": [
+   0.03,
+   0.01
+  ],
+  "zoom": [
+   0.04,
+   9
+  ],
+  "top": [
+   0.01,
+   9
+  ],
+  "eyes": [
+   0.06,
+   0.12
+  ],
+  "ccip": [
+   0.05,
+   0.09
+  ]
+ },
+ "images": [
+  {
+   "path": "art/candidates/portraits/rei-body-1/a-s11-cut.webp",
+   "kind": "cut-out",
+   "size": [
+    896,
+    1408
+   ],
+   "face": [
+    269,
+    353,
+    531,
+    643
+   ],
+   "eyes": [
+    [
+     324.0,
+     498.5
+    ],
+    [
+     429.0,
+     440.5
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.001
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for rei"
+   },
+   "matte": {
+    "source": "art/candidates/portraits/rei-body-1/a-s11.webp",
+    "holes": 0,
+    "holes_px": 2063,
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.132,
+    "zoom": 1.197,
+    "top": 0.009,
+    "bottom_short": 0.0,
+    "hair_top_game": 192,
+    "hair_top_ref": 186,
+    "crop": [
+     -9.0,
+     -10.5,
+     906.0,
+     1165.8
+    ],
+    "eyes": -0.001,
+    "tilt": -0.1,
+    "status": "warn"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.001,
+    "ssim": 0.461
+   },
+   "status": "warn"
+  },
+  {
+   "path": "art/candidates/portraits/rei-body-1/a-s12-cut.webp",
+   "kind": "cut-out",
+   "size": [
+    896,
+    1408
+   ],
+   "face": [
+    269,
+    353,
+    531,
+    643
+   ],
+   "eyes": [
+    [
+     324.0,
+     498.5
+    ],
+    [
+     429.0,
+     440.5
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for rei"
+   },
+   "matte": {
+    "source": "art/candidates/portraits/rei-body-1/a-s12.webp",
+    "holes": 0,
+    "holes_px": 1726,
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.132,
+    "zoom": 1.197,
+    "top": 0.009,
+    "bottom_short": 0.0,
+    "hair_top_game": 192,
+    "hair_top_ref": 186,
+    "crop": [
+     -9.0,
+     -10.5,
+     906.0,
+     1165.8
+    ],
+    "eyes": -0.001,
+    "tilt": -0.1,
+    "status": "warn"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.001,
+    "ssim": 0.461
+   },
+   "status": "warn"
+  },
+  {
+   "path": "art/candidates/portraits/rei-body-1/a-s13-cut.webp",
+   "kind": "cut-out",
+   "size": [
+    896,
+    1408
+   ],
+   "face": [
+    269,
+    353,
+    531,
+    643
+   ],
+   "eyes": [
+    [
+     324.0,
+     498.5
+    ],
+    [
+     429.0,
+     440.5
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for rei"
+   },
+   "matte": {
+    "source": "art/candidates/portraits/rei-body-1/a-s13.webp",
+    "holes": 0,
+    "holes_px": 2080,
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.132,
+    "zoom": 1.197,
+    "top": 0.009,
+    "bottom_short": 0.0,
+    "hair_top_game": 192,
+    "hair_top_ref": 186,
+    "crop": [
+     -9.0,
+     -10.5,
+     906.0,
+     1165.8
+    ],
+    "eyes": -0.001,
+    "tilt": -0.1,
+    "status": "warn"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.001,
+    "ssim": 0.461
+   },
+   "status": "warn"
+  },
+  {
+   "path": "art/candidates/portraits/rei-body-1/b-s11-cut.webp",
+   "kind": "cut-out",
+   "size": [
+    896,
+    1408
+   ],
+   "face": [
+    269,
+    353,
+    531,
+    643
+   ],
+   "eyes": [
+    [
+     324.0,
+     498.5
+    ],
+    [
+     429.0,
+     440.5
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0009
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for rei"
+   },
+   "matte": {
+    "source": "art/candidates/portraits/rei-body-1/b-s11.webp",
+    "holes": 1,
+    "holes_px": 2154,
+    "status": "warn"
+   },
+   "framing": {
+    "headroom": 0.132,
+    "zoom": 1.197,
+    "top": 0.009,
+    "bottom_short": 0.0,
+    "hair_top_game": 192,
+    "hair_top_ref": 186,
+    "crop": [
+     -9.0,
+     -10.5,
+     906.0,
+     1165.8
+    ],
+    "eyes": -0.001,
+    "tilt": -0.1,
+    "status": "warn"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.001,
+    "ssim": 0.461
+   },
+   "status": "warn"
+  },
+  {
+   "path": "art/candidates/portraits/rei-body-1/b-s12-cut.webp",
+   "kind": "cut-out",
+   "size": [
+    896,
+    1408
+   ],
+   "face": [
+    269,
+    353,
+    531,
+    643
+   ],
+   "eyes": [
+    [
+     324.0,
+     498.5
+    ],
+    [
+     429.0,
+     440.5
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for rei"
+   },
+   "matte": {
+    "source": "art/candidates/portraits/rei-body-1/b-s12.webp",
+    "holes": 0,
+    "holes_px": 1706,
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.132,
+    "zoom": 1.197,
+    "top": 0.009,
+    "bottom_short": 0.0,
+    "hair_top_game": 192,
+    "hair_top_ref": 186,
+    "crop": [
+     -9.0,
+     -10.5,
+     906.0,
+     1165.8
+    ],
+    "eyes": -0.001,
+    "tilt": -0.1,
+    "status": "warn"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.001,
+    "ssim": 0.461
+   },
+   "status": "warn"
+  },
+  {
+   "path": "art/candidates/portraits/rei-body-1/b-s13-cut.webp",
+   "kind": "cut-out",
+   "size": [
+    896,
+    1408
+   ],
+   "face": [
+    269,
+    353,
+    531,
+    643
+   ],
+   "eyes": [
+    [
+     324.0,
+     498.5
+    ],
+    [
+     429.0,
+     440.5
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for rei"
+   },
+   "matte": {
+    "source": "art/candidates/portraits/rei-body-1/b-s13.webp",
+    "holes": 1,
+    "holes_px": 2067,
+    "status": "warn"
+   },
+   "framing": {
+    "headroom": 0.132,
+    "zoom": 1.197,
+    "top": 0.009,
+    "bottom_short": 0.0,
+    "hair_top_game": 192,
+    "hair_top_ref": 186,
+    "crop": [
+     -9.0,
+     -10.5,
+     906.0,
+     1165.8
+    ],
+    "eyes": -0.001,
+    "tilt": -0.1,
+    "status": "warn"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.001,
+    "ssim": 0.461
+   },
+   "status": "warn"
+  }
+ ]
+}

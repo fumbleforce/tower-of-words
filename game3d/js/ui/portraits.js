@@ -24,6 +24,8 @@ export const FACE = {
   mio: { W: 597, H: 768, f: [192, 214, 361, 383] },
   emi: { W: 597, H: 768, f: [217, 168, 383, 337] },
   mori: { W: 597, H: 768, f: [228, 171, 371, 334] },
+  // Rei: rei-i65-2102 (reviews/rei-portrait-1) extended down to the waist (reviews/rei-body-1, b-s11)
+  rei: { W: 533, H: 838, f: [160, 210, 316, 383] },
 };
 const EMOTE_FACE = {
   '?': ['suspicious', 'deadpan', 'stern'],

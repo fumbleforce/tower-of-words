@@ -113,7 +113,7 @@ The id `kuroda` is Mr. Hamada. The id is older than the name and stays so the vo
 ### Rei (`rei`)
 
 - Sales. Built in the game (figures on the train, at the gate and in the office) but hidden all day and in no storyline. Kept for a later day.
-- Look: approved portrait art/approved/rei/rei-after.webp (silver ponytail, steel-grey eyes).
+- Look: dialogue portrait rei-i65-2102 (reviews/rei-portrait-1, Jørgen: "65-2102"), an img2img of art/approved/rei/rei-after.webp with a sly confident look: silver-grey high ponytail, steel-grey eyes, gold hoops, light grey suit over a black high-neck top. Extended down to the waist as b-s11 (reviews/rei-body-1).
 
 ### Tama (`tama`)
 
@@ -198,6 +198,7 @@ The faces each person can show beside the text box: `game3d/assets/portraits/<id
 | `kuroda` | neutral, sleepy, panicked |
 | `kuro` | neutral |
 | `aoi` | neutral |
+| `rei` | neutral |
 
 Mio's `phone` face is her looking down at her phone, a dialogue portrait of its own (Jørgen asked for it instead of a timed phone icon). Approved 2026-09-29 (reviews/mio-phone-5).
 

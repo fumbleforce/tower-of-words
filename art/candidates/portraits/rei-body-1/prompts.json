@@ -1,0 +1,170 @@
+[
+ {
+  "id": "a-s11",
+  "job": "a",
+  "seed": 11,
+  "change": "Kuro's method (kuro-body-1 job c, picked): new strip starts as plain background colour, Anima LLLite inpainting-v2 patch 1.0, denoise 1.0",
+  "fill": "bg",
+  "denoise": 1.0,
+  "lllite": true,
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1girl, solo, Rei, a 26-year-old woman: long silver-grey hair in a sleek high ponytail, steel-grey eyes, sharp eyeliner, gold hoop earrings, tailored white suit over a black shirt, gold pin on the lapel, narrow refined face, high cheekbones, tall and curvy, sly confident look, slight knowing smile, waist-up portrait facing the viewer at a slight angle, (the whole head inside the frame with empty space above the hair:1.2), plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, fat, obese, plump, (rim light, red rim light, red outline, backlighting:1.4), holding, holding object, tool, screwdriver, pen, pencil, cup, phone, papers, book",
+  "model": "rdbtAnima.safetensors",
+  "steps": 30,
+  "cfg": 5,
+  "sampler": "euler_ancestral normal",
+  "source": "rei-i65-2102",
+  "canvas": [
+   896,
+   1408
+  ],
+  "added_px": 256,
+  "seam_px": 32,
+  "blend": [
+   1120,
+   32
+  ],
+  "raw_from": "a",
+  "max_change_above_blend": 0
+ },
+ {
+  "id": "a-s12",
+  "job": "a",
+  "seed": 12,
+  "change": "Kuro's method (kuro-body-1 job c, picked): new strip starts as plain background colour, Anima LLLite inpainting-v2 patch 1.0, denoise 1.0",
+  "fill": "bg",
+  "denoise": 1.0,
+  "lllite": true,
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1girl, solo, Rei, a 26-year-old woman: long silver-grey hair in a sleek high ponytail, steel-grey eyes, sharp eyeliner, gold hoop earrings, tailored white suit over a black shirt, gold pin on the lapel, narrow refined face, high cheekbones, tall and curvy, sly confident look, slight knowing smile, waist-up portrait facing the viewer at a slight angle, (the whole head inside the frame with empty space above the hair:1.2), plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, fat, obese, plump, (rim light, red rim light, red outline, backlighting:1.4), holding, holding object, tool, screwdriver, pen, pencil, cup, phone, papers, book",
+  "model": "rdbtAnima.safetensors",
+  "steps": 30,
+  "cfg": 5,
+  "sampler": "euler_ancestral normal",
+  "source": "rei-i65-2102",
+  "canvas": [
+   896,
+   1408
+  ],
+  "added_px": 256,
+  "seam_px": 32,
+  "blend": [
+   1120,
+   32
+  ],
+  "raw_from": "a",
+  "max_change_above_blend": 0
+ },
+ {
+  "id": "a-s13",
+  "job": "a",
+  "seed": 13,
+  "change": "Kuro's method (kuro-body-1 job c, picked): new strip starts as plain background colour, Anima LLLite inpainting-v2 patch 1.0, denoise 1.0",
+  "fill": "bg",
+  "denoise": 1.0,
+  "lllite": true,
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1girl, solo, Rei, a 26-year-old woman: long silver-grey hair in a sleek high ponytail, steel-grey eyes, sharp eyeliner, gold hoop earrings, tailored white suit over a black shirt, gold pin on the lapel, narrow refined face, high cheekbones, tall and curvy, sly confident look, slight knowing smile, waist-up portrait facing the viewer at a slight angle, (the whole head inside the frame with empty space above the hair:1.2), plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, fat, obese, plump, (rim light, red rim light, red outline, backlighting:1.4), holding, holding object, tool, screwdriver, pen, pencil, cup, phone, papers, book",
+  "model": "rdbtAnima.safetensors",
+  "steps": 30,
+  "cfg": 5,
+  "sampler": "euler_ancestral normal",
+  "source": "rei-i65-2102",
+  "canvas": [
+   896,
+   1408
+  ],
+  "added_px": 256,
+  "seam_px": 32,
+  "blend": [
+   1120,
+   32
+  ],
+  "raw_from": "a",
+  "max_change_above_blend": 0
+ },
+ {
+  "id": "b-s11",
+  "job": "b",
+  "seed": 11,
+  "change": "as a (same renders), but the seam blend moved up: the original kept to row 1104, then an 8 px blend into the model's own drawing, where both still match, instead of a 32 px cross-fade over rows the model redrew",
+  "fill": "bg",
+  "denoise": 1.0,
+  "lllite": true,
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1girl, solo, Rei, a 26-year-old woman: long silver-grey hair in a sleek high ponytail, steel-grey eyes, sharp eyeliner, gold hoop earrings, tailored white suit over a black shirt, gold pin on the lapel, narrow refined face, high cheekbones, tall and curvy, sly confident look, slight knowing smile, waist-up portrait facing the viewer at a slight angle, (the whole head inside the frame with empty space above the hair:1.2), plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, fat, obese, plump, (rim light, red rim light, red outline, backlighting:1.4), holding, holding object, tool, screwdriver, pen, pencil, cup, phone, papers, book",
+  "model": "rdbtAnima.safetensors",
+  "steps": 30,
+  "cfg": 5,
+  "sampler": "euler_ancestral normal",
+  "source": "rei-i65-2102",
+  "canvas": [
+   896,
+   1408
+  ],
+  "added_px": 256,
+  "seam_px": 32,
+  "blend": [
+   1104,
+   8
+  ],
+  "raw_from": "a",
+  "max_change_above_blend": 0
+ },
+ {
+  "id": "b-s12",
+  "job": "b",
+  "seed": 12,
+  "change": "as a (same renders), but the seam blend moved up: the original kept to row 1104, then an 8 px blend into the model's own drawing, where both still match, instead of a 32 px cross-fade over rows the model redrew",
+  "fill": "bg",
+  "denoise": 1.0,
+  "lllite": true,
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1girl, solo, Rei, a 26-year-old woman: long silver-grey hair in a sleek high ponytail, steel-grey eyes, sharp eyeliner, gold hoop earrings, tailored white suit over a black shirt, gold pin on the lapel, narrow refined face, high cheekbones, tall and curvy, sly confident look, slight knowing smile, waist-up portrait facing the viewer at a slight angle, (the whole head inside the frame with empty space above the hair:1.2), plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, fat, obese, plump, (rim light, red rim light, red outline, backlighting:1.4), holding, holding object, tool, screwdriver, pen, pencil, cup, phone, papers, book",
+  "model": "rdbtAnima.safetensors",
+  "steps": 30,
+  "cfg": 5,
+  "sampler": "euler_ancestral normal",
+  "source": "rei-i65-2102",
+  "canvas": [
+   896,
+   1408
+  ],
+  "added_px": 256,
+  "seam_px": 32,
+  "blend": [
+   1104,
+   8
+  ],
+  "raw_from": "a",
+  "max_change_above_blend": 0
+ },
+ {
+  "id": "b-s13",
+  "job": "b",
+  "seed": 13,
+  "change": "as a (same renders), but the seam blend moved up: the original kept to row 1104, then an 8 px blend into the model's own drawing, where both still match, instead of a 32 px cross-fade over rows the model redrew",
+  "fill": "bg",
+  "denoise": 1.0,
+  "lllite": true,
+  "prompt": "masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1girl, solo, Rei, a 26-year-old woman: long silver-grey hair in a sleek high ponytail, steel-grey eyes, sharp eyeliner, gold hoop earrings, tailored white suit over a black shirt, gold pin on the lapel, narrow refined face, high cheekbones, tall and curvy, sly confident look, slight knowing smile, waist-up portrait facing the viewer at a slight angle, (the whole head inside the frame with empty space above the hair:1.2), plain light grey background, soft even studio light",
+  "negative": "worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, fat, obese, plump, (rim light, red rim light, red outline, backlighting:1.4), holding, holding object, tool, screwdriver, pen, pencil, cup, phone, papers, book",
+  "model": "rdbtAnima.safetensors",
+  "steps": 30,
+  "cfg": 5,
+  "sampler": "euler_ancestral normal",
+  "source": "rei-i65-2102",
+  "canvas": [
+   896,
+   1408
+  ],
+  "added_px": 256,
+  "seam_px": 32,
+  "blend": [
+   1104,
+   8
+  ],
+  "raw_from": "a",
+  "max_change_above_blend": 0
+ }
+]

@@ -31,7 +31,7 @@ test('actual bible loader preserves the complete portrait table', async () => {
   };
   try {
     const live = await loadLive('../', {});
-    assert.equal(Object.keys(live.portraits).length, 9);
+    assert.equal(Object.keys(live.portraits).length, 10);
     assert.deepEqual(live.portraits, declarations.PORTRAITS);
     assert.equal(live.ok['game3d/js/ui/portrait-data.js'], true);
     assert.equal(live.errors.length, 0, live.errors.join('\n'));
