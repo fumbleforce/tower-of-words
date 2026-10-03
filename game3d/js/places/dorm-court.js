@@ -3,7 +3,8 @@ import { dormCourtSteps } from '../scenes/dorm-court.js';
 import { sliced } from '../perf/slice.js';
 import { RoomCam } from '../cam.js';
 import { K } from '../scenes/office.js';
-import { EVENING_GRADE } from '../scenes/town.js';
+import { EVENING_GRADE, MORNING_GRADE } from '../scenes/town.js';
+import { sim } from '../sim.js';
 import { walkIn, walkOut } from './edge-walk.js';
 import { dormBath } from './dorm-bath.js';
 import { glide } from '../move.js';
@@ -17,7 +18,9 @@ import { snapshotPeople, restorePeople } from './saved-people.js';
 const FLAP_OPEN = -1.9, // mailbox 203's flap swung open
   MAIL_ZOOM = 6; // the camera close on it, the number, the tape and the flyer readable on a phone
 export async function dormCourtPlace(game) {
-  const w = await sliced(dormCourtSteps()); // in slices between frames: it's built while the plaza is played
+  // in slices between frames: it's built while the plaza is played; in the morning light when entered before work (day 2)
+  const morning = sim.day > 1 && sim.period !== 'evening';
+  const w = await sliced(dormCourtSteps({ morning }));
   const cam = new RoomCam(w.camera);
   const floor = new THREE.Plane(new THREE.Vector3(0, 1, 0), 0);
   const bath = dormBath(game);
@@ -84,7 +87,12 @@ export async function dormCourtPlace(game) {
     startFacing: Math.PI, // north, up the door axis from the gate
     defaultPeriod: 'evening',
     music: 'night',
-    grade: EVENING_GRADE,
+    grade: morning ? MORNING_GRADE : EVENING_GRADE,
+    onPeriod(period) {
+      if (period !== 'evening' || P.grade === EVENING_GRADE) return;
+      w.evening();
+      P.grade = EVENING_GRADE;
+    },
     things,
     findProps: { bakery_flyer: mb.flyer }, // what taking the flyer hides (finds/index.js)
     spots,

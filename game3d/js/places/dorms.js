@@ -13,6 +13,20 @@ import { sim } from '../sim.js';
 // the 2F landing; he walks the corridor to his door himself, and going in (the enterRoom hook, from the story) drops
 // his front wall, opens the door and takes him over the genkan into the room, the view widening to the whole flat.
 // It also loads directly with ?place=dorms, on the landing.
+const NIGHT_GRADE = {
+  exposure: 1.0,
+  temp: -0.02,
+  sat: 0.74,
+  contrast: 1.05,
+  lift: [0.01, 0.012, 0.022],
+  shadowTint: [-0.01, 0, 0.025],
+  highTint: [0.02, 0.008, -0.012],
+  vignette: 0.26,
+  bloom: 0.32,
+  bloomThreshold: 0.8,
+  focusBand: 0.3,
+};
+const DAY_GRADE = { ...NIGHT_GRADE, exposure: 1.06, temp: 0.01, sat: 0.8, vignette: 0.22 };
 export function dormsPlace(game) {
   const w = buildDorms();
   const cam = new RoomCam(w.camera);
@@ -144,6 +158,33 @@ export function dormsPlace(game) {
     front.visible = false;
     for (const m of ms) ((m.opacity = 1), (m.transparent = false));
   }
+  // the morning (day 2 starts here): daylight from the sky in place of dusk, the same lamps on. Each light's dusk
+  // values are kept, for after work.
+  const dusk = [];
+  w.scene.traverse((o) => {
+    if (o.isHemisphereLight || o.isDirectionalLight)
+      dusk.push({ o, color: o.color.clone(), ground: o.groundColor?.clone(), k: o.intensity });
+  });
+  const dayBg = new THREE.Color('#39414e'),
+    duskBg = w.scene.background.clone();
+  function daylight(day) {
+    for (const { o, color, ground, k } of dusk) {
+      if (!day) {
+        o.color.copy(color);
+        if (ground) o.groundColor.copy(ground);
+        o.intensity = k;
+      } else if (o.isHemisphereLight) {
+        o.color.set('#d6e0ee');
+        o.groundColor.set('#6f6a62');
+        o.intensity = 1.55;
+      } else if (o.castShadow) {
+        o.color.set('#fff0dc');
+        o.intensity = 0.95;
+      }
+    }
+    w.scene.background.copy(day ? dayBg : duskBg);
+    P.grade = day ? DAY_GRADE : NIGHT_GRADE;
+  }
   function setInside() {
     st.inside = true;
     w.front.visible = false;
@@ -162,19 +203,8 @@ export function dormsPlace(game) {
     defaultPeriod: 'evening',
     photoReady: () => st.inside && !st.entering, // the end card's "Eric's room" is the room, not the corridor (#92)
     music: 'night', // after work; in the morning (day 2) the calm loop (places/lifecycle.js)
-    grade: {
-      exposure: 1.0,
-      temp: -0.02,
-      sat: 0.74,
-      contrast: 1.05,
-      lift: [0.01, 0.012, 0.022],
-      shadowTint: [-0.01, 0, 0.025],
-      highTint: [0.02, 0.008, -0.012],
-      vignette: 0.26,
-      bloom: 0.32,
-      bloomThreshold: 0.8,
-      focusBand: 0.3,
-    },
+    grade: NIGHT_GRADE,
+    onPeriod: (period) => daylight(sim.day > 1 && period !== 'evening'), // (day 1 is only ever here after work)
     things,
     spots,
     seats: { desk_chair: w.deskChair },
