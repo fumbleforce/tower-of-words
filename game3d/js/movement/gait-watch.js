@@ -136,8 +136,8 @@ export function startGaitCheck(game) {
       if (vRoot < STILL && vAnim > STEPPING) kind = 'on the spot';
       else if (vRoot > MOVING && w.rootS > 0) {
         // sampled coarsely (the sped-up fast test: a frame is several game steps), a quick step's swing falls
-        // between samples and reads short: only a clear slide counts
-        const loose = w.t / w.n > 0.05 ? 1.6 : 1;
+        // between samples and reads short (a quick jog most): only a glide, hardly stepping at all, counts
+        const loose = w.t / w.n > 0.05 ? 2.5 : 1;
         kind = ratio > SLIDE_HI * loose ? 'slide' : ratio < SLIDE_LO / loose ? 'slide (feet too fast)' : '';
       }
       const ps = (C.people[id] ||= {
