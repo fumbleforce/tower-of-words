@@ -10,6 +10,8 @@
 // (scenes/outdoor/). East of the block, the rest of the dorm cluster round its inner court is backdrop
 // (dorm-court/cluster.js); the town beyond comes from the island layout (scenes/skyline.js).
 // Evening: dusk after the sun has gone behind the blocks, lit windows, lamps, the hall, the laundry and the machines.
+// Built for the morning ({ morning: true }, day 2) it has the other outdoor chunks' morning light and its lamps off,
+// and evening() turns it to dusk when the clock reaches after work.
 import * as THREE from 'three';
 import { Nav } from '../movement/navigation.js';
 import { laundry, sento } from './dorm-court/frontages.js';
@@ -23,7 +25,7 @@ import { lightSet } from './outdoor/furniture.js';
 import { skylineSteps } from './skyline.js';
 import { drain } from '../perf/slice.js';
 import * as layout from './island-layout.js';
-import { groundPatches, TOWN } from './town.js';
+import { groundPatches, TOWN, outdoorLight, eveningLight } from './town.js';
 import { mergeStaticSteps } from './merge-static.js';
 import * as PL from './dorm-court/plan.js';
 
@@ -34,27 +36,15 @@ const IN = [DOOR_X, NEAR - 0.45]; // just inside the gate, on the door axis
 
 // buildDormCourt() builds it all at once; dormCourtSteps() is the same as a generator that yields between parts, so
 // the game can build it in slices while the plaza is played (js/perf/slice.js)
-export const buildDormCourt = () => drain(dormCourtSteps());
-export function* dormCourtSteps() {
+export const buildDormCourt = (o) => drain(dormCourtSteps(o));
+export function* dormCourtSteps({ morning = false } = {}) {
   const root = new THREE.Group(),
     scene = new THREE.Scene();
-  scene.background = new THREE.Color(SKY);
+  scene.background = new THREE.Color(morning ? TOWN.roof : SKY);
   scene.add(root);
-  // dusk after work: a cool sky over everything, the last warm light from the west high enough that the blocks'
-  // shadows stay short, a soft fill from the camera side. The lamps, windows and machines do the rest.
-  scene.add(new THREE.HemisphereLight('#a4b0cf', '#565862', 1.4));
-  const sun = new THREE.DirectionalLight('#ffbf94', 1.05);
-  sun.position.copy(new THREE.Vector3(-0.62, 0.68, 0.39).normalize().multiplyScalar(30));
-  sun.castShadow = true;
-  sun.shadow.mapSize.set(2048, 2048);
-  Object.assign(sun.shadow.camera, { left: -13, right: 13, top: 13, bottom: -13, near: 5, far: 70 });
-  sun.shadow.bias = -0.0006;
-  sun.shadow.normalBias = 0.06;
-  sun.shadow.radius = 4;
-  scene.add(sun, sun.target);
-  const fill = new THREE.DirectionalLight('#bcc8f0', 0.5);
-  fill.position.set(0.3, 1, 0.9);
-  scene.add(fill);
+  const sun = morning ? outdoorLight(scene) : duskLight(scene);
+  // the court lies in the blocks' morning shade: more of the sky's light, so it reads as day
+  if (morning) scene.traverse((o) => o.isHemisphereLight && (o.intensity = 2.3));
 
   const nav = new Nav(WEST + 0.1, EAST - 0.2, BACK_Z - 1.2, NEAR - 0.05, 0.1);
   const block = (x0, x1, z0, z1) => nav.block(x0, x1, z0, z1);
@@ -84,16 +74,29 @@ export function* dormCourtSteps() {
   garbage(root, p, block);
   vending(root, p, block);
   p.build(root);
-  lamps.build(root, { poolY: PL.POOL_Y }).evening();
+  const lit = lamps.build(root, { poolY: PL.POOL_Y });
+  if (!morning) lit.evening();
   yield;
   yield* mergeStaticSteps(root);
   // the rest of the dorm cluster, in its own group so the court's merge leaves it out
   const cluster = placeIn(new THREE.Group(), 'dorm_court');
   root.add(cluster);
-  (yield* clusterSteps(cluster)).evening();
+  const dorms = yield* clusterSteps(cluster);
+  if (!morning) dorms.evening();
   yield;
   // the town around, from the island layout; Eric's block and the cluster are built above
-  const sky = yield* skylineSteps(root, 'dorm_court', { layout, evening: true, skip: ['dorm_1', ...CLUSTER_IDS] });
+  const sky = yield* skylineSteps(root, 'dorm_court', { layout, evening: !morning, skip: ['dorm_1', ...CLUSTER_IDS] });
+  // after work on a court built in the morning: the dusk sky and light, the lamps and windows lit
+  let dusk = !morning;
+  const evening = () => {
+    if (dusk) return;
+    dusk = true;
+    scene.background.set(SKY);
+    eveningLight(scene); // the town's dusk, as on the other chunks built in the morning
+    lit.evening();
+    dorms.evening();
+    sky.onPeriod?.('evening');
+  };
   return {
     root,
     scene,
@@ -113,6 +116,26 @@ export function* dormCourtSteps() {
     mailbox, // 203's: its flap, the flyer inside, where it is (dorm-court/hall.js)
     bounds: { west: WEST, east: EAST, front: FRONT_Z, back: BACK_Z, near: NEAR, hall: HALL },
     camera: { elev: 46, fov: 24 },
+    evening,
     update() {},
   };
+}
+
+// dusk after work: a cool sky over everything, the last warm light from the west high enough that the blocks'
+// shadows stay short, a soft fill from the camera side. The lamps, windows and machines do the rest.
+function duskLight(scene) {
+  scene.add(new THREE.HemisphereLight('#a4b0cf', '#565862', 1.4));
+  const sun = new THREE.DirectionalLight('#ffbf94', 1.05);
+  sun.position.copy(new THREE.Vector3(-0.62, 0.68, 0.39).normalize().multiplyScalar(30));
+  sun.castShadow = true;
+  sun.shadow.mapSize.set(2048, 2048);
+  Object.assign(sun.shadow.camera, { left: -13, right: 13, top: 13, bottom: -13, near: 5, far: 70 });
+  sun.shadow.bias = -0.0006;
+  sun.shadow.normalBias = 0.06;
+  sun.shadow.radius = 4;
+  scene.add(sun, sun.target);
+  const fill = new THREE.DirectionalLight('#bcc8f0', 0.5);
+  fill.position.set(0.3, 1, 0.9);
+  scene.add(fill);
+  return sun;
 }

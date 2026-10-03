@@ -139,6 +139,7 @@ export function shotengaiParty(game, { w, K }) {
   const LAP = [SEA_X - 0.2, seats.party_seat.z]; // in front of Eric, at his knees
   const held = new THREE.Group(); // what Eric has been given, by his seat
   food.add(held);
+  let looking = false; // the food's close look: the camera steeper (install's update)
   const state = { opened: false, took: null, drinks: 0, more: 0, pickles: false };
 
   function placeFood(where) {
@@ -287,14 +288,17 @@ export function shotengaiParty(game, { w, K }) {
       if (s === 'offerMore' && state.more < 2) state.more++;
       sfx('tap');
       syncFood();
-      // a close look at the food on the bench, then back to the shot it was in
+      // a close look at the food on the bench, from higher up over the sea rail, then back to the shot it was in
       const cam = P.cam,
         before = cam.close;
       const at = s === 'sharePickles' ? [jar.position.x, jar.position.z] : [SEA_X, BENCH[1] + 0.25];
-      cam.closeOn([at[0] - 0.35, at[1]], 3.2, 0.4);
-      await game.wait(1300);
+      cam.closeOn([at[0] + 0.25, at[1]], 3.6, TOP);
+      looking = true;
+      await game.wait(1400);
+      looking = false;
       if (before) cam.close = before;
       else cam.release();
+      await game.wait(800); // back in the group's shot before the next line
     },
   };
 
@@ -339,8 +343,10 @@ export function shotengaiParty(game, { w, K }) {
     };
     const update = P.update;
     P.update = (dt, t) => {
+      const elev = cam.elev; // (the street's own update eases it too; the food's close look overrides that)
       update(dt, t);
       cam.yaw += (yaw - cam.yaw) * Math.min(1, dt * 2.5);
+      if (looking) cam.elev = elev + ((66 * Math.PI) / 180 - elev) * Math.min(1, dt * 3);
       if (!later()) return;
       stepPeople([mori, kenji], dt);
       const p = game.player.root.position;

@@ -1140,7 +1140,7 @@ None.
 
 ### Who's there when
 
-Day 2: no story actor; the street gate and the way up to room 203 stay open in both periods. Coming down from his floor, Eric walks out of the passage to just inside the hall doors. The court is built in its evening light, also in the morning.
+Day 2: no story actor; the street gate and the way up to room 203 stay open in both periods. Coming down from his floor, Eric walks out of the passage to just inside the hall doors. In the morning the court has the other chunks' morning light, its lamps off and a little more light from the sky in the blocks' shade; it turns to dusk after work.
 
 Played in the evening, after work. None of the cast is here.
 
@@ -1203,7 +1203,7 @@ Eric arrives from the dorm courtyard (Getting between places) on the landing. Th
 
 ### Who's there when
 
-Day 2: the day starts with Eric inside room 203, in the middle of the room, in the room's view (the calm loop plays in the morning; the room keeps its lamp-lit evening look). Mio sends a phone message but isn't here. The computer is optional, and coming back before the goodbye doesn't end the day; coming back after it, he walks on along the corridor and in at his door, and the day ends.
+Day 2: the day starts with Eric inside room 203, in the middle of the room, in the room's view (in the morning daylight from the sky in place of the dusk, the lamps still on, and the calm loop). Mio sends a phone message but isn't here. The computer is optional, and coming back before the goodbye doesn't end the day; coming back after it, he walks on along the corridor and in at his door, and the day ends.
 
 Played in the evening, after work.
 
