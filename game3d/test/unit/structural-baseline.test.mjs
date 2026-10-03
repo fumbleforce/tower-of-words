@@ -34,6 +34,8 @@ test('structural migration preserves ordered graph IDs, edges and engine declara
   expected.engine.prefix.bought_ = ['game3d/js/narrative/hooks/progression.js'];
   expected.engine.exact.cant_buy = ['game3d/js/narrative/hooks/progression.js'];
   expected.engine.exact.say_tip = ['game3d/js/ui.js'];
+  expected.engine.prefix.ticket_ = ['game3d/js/tickets/model.js'];
+  expected.engine.prefix.ticketread_ = ['game3d/js/tickets/model.js'];
   assert.deepEqual(plain, expected);
 });
 test('missing and unexpected runtime registrations fail before play', () => {

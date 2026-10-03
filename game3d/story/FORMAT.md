@@ -132,6 +132,8 @@ Any id in docs/game/cast.md "Everyone" can speak. Add names or roles under `spea
 | `trip` | `to` | Walks Eric to a neighbouring place off the day's line (`forecourt` and `plaza` both ways, and the way home: `office` to `forecourt`, `plaza` to `dorm_court`; places/definitions.js TRIPS). The same watched walk and crossfade as `next`, with no transition slot; the place's start node runs on arrival. |
 | `end` | | The end of the day (Eric's room, on the walk home). |
 | `find` | `id` | Eric takes a find (see Finds): it goes into his album, shows up close until tapped, and sets `found_<id>`. Nothing happens if he has it already. `{ do: 'find', id: 'bakery_flyer' }` |
+| `ticket` | `add`, `start` or `close`: a ticket id | Adds a ticket to Eric's queue as new (nothing if it's there already), puts it in progress, or closes it. Running it again changes nothing, so a scene that restarts after a load is safe. `{ do: 'ticket', add: 'T-0002' }` |
+| `tickets` | `show` (optional ticket id) | Opens the ticket app (docs/game/controls-and-ui.md) and waits: the next step runs once Eric has closed it. `show` opens straight on that ticket. Stage it at a computer: `{ do: 'sit', who: 'eric', at: 'desk_chair' }, { do: 'cam', on: 'computer', zoom: 1.2 }, { do: 'tickets' }, { do: 'cam', back: true }, { do: 'stand', who: 'eric' }` in room 203, or after `sitDown` at the B2 desk. |
 
 Sim hooks (`period`, `bond`, `bondStep`, `remember`, `fact`, `relate`, `meet`, `buy`, `take`, `save`) are under Sim data.
 
@@ -286,6 +288,24 @@ export default {
 ```
 
 A post or paper line is `{ ja, en }`: `ja` optional, `en` always, so Japanese never shows without English. A post has `en` or `lines` (several), an optional `title`, and `color` (white, yellow, blue, pink, green). A photo with no entry shows the engine's plain title. Picking up sets `found_<id>`, usable in any condition (`'!found_bakery_flyer'`). A scene hands one over with the `find` hook.
+
+## Tickets (`tickets.js`)
+
+Repair tickets (docs/game/systems.md, Tickets). `game3d/story/tickets.js` holds every ticket of every day, since a ticket can stay open across days:
+
+```js
+export default {
+  'T-0002': {
+    title: 'Copier on B2 jams',       // the list's Subject: short
+    from: 'mori',                     // who sent it: a speaker id (shown by name) or a plain name
+    pay: 3000,                        // yen Eric is paid, once, when it closes
+    text: 'It jams on the {honsha} forms.\n\nPlease look before Monday.',   // a blank line between paragraphs
+    done: 'copier_fixed',             // optional: a condition that closes it when it holds
+  },
+};
+```
+
+Ids are T- and four digits. In `text`, Japanese is a `{word}` id from docs/game/words.md, or written out once as `{駅|eki|station}`; both show with reading and English. A ticket's status is the flag `ticket_<id without the dash>`: unset until added, then `'new'`, `'progress'` (Eric took it in the app) or `'done'`: `{ if: "ticket_T0002 == 'progress'", ... }`. `ticketread_T0002` is true once he has opened it. A `done` condition is checked when the app opens and whenever a `ticket` hook runs. The hooks are under Hooks that work everywhere. `node game3d/tools/story-check.mjs` checks the ids, words and conditions.
 
 ## Transitions (`transitions.js`)
 

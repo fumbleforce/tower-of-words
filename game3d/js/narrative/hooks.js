@@ -39,4 +39,6 @@ export const GLOBAL_HOOKS = [
   'fact',
   'relate',
   'find',
+  'ticket',
+  'tickets',
 ];

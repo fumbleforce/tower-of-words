@@ -3,6 +3,7 @@ import { WORDS, SAYABLE } from '../js/lang.js';
 import { DEFAULT_SPEAKERS, ITEMS, PLACE_DETAILS, STORY_FILES, GLOBAL_HOOKS, PLACE_EVENTS } from '../js/narrative/contracts.js';
 import { canTravel } from '../js/places/definitions.js';
 import { FINDS } from '../js/finds/spots.js';
+import TICKETS from '../story/tickets.js';
 // Checks the story files against the engine: unknown speakers, words, hooks, ids, spots, missing nodes,
 // conditions that don't parse. node game3d/tools/story-check.mjs
 import fs from 'node:fs';
@@ -26,6 +27,16 @@ function checkCond(f, c) {
   if (compileCondition(c).error) bad(f, `condition doesn't parse: ${c}`);
 }
 function checkText(f, t) { for (const m of t.matchAll(/\{(\w+)\}/g)) if (!words.includes(m[1])) bad(f, `unknown word {${m[1]}} in "${t.slice(0, 60)}"`); }
+
+// the tickets (story/tickets.js): ids like T-0002, who sent each, its words and its closing condition
+for (const [id, t] of Object.entries(TICKETS)) {
+  const f = 'tickets.js';
+  if (!/^T-\d{4}$/.test(id)) bad(f, `ticket id '${id}' is not like T-0002`);
+  for (const k of ['title', 'from', 'text']) if (typeof t[k] !== 'string' || !t[k]) bad(f, `${id}: no ${k}`);
+  checkText(f, t.text || '');
+  if (t.done !== undefined) checkCond(f, t.done);
+  if (!Number.isInteger(t.pay) || t.pay < 0) bad(f, `${id}: pay '${t.pay}' is not a whole number of yen`);
+}
 
 for (const name of STORY_FILES) {
   let file = `story/${name}.js`;
@@ -58,6 +69,8 @@ for (const name of STORY_FILES) {
         if (!hookOk(s.do)) bad(file, `${where}: unknown hook ${s.do}`);
         if (s.do === 'trip' && !canTravel(name, s.to)) bad(file, `${where}: no trip from ${name} to '${s.to}' (places/definitions.js TRIPS)`);
         if (s.do === 'find' && !FINDS[s.id]) bad(file, `${where}: find '${s.id}' is not a find (js/finds/spots.js)`);
+        if (s.do === 'ticket') for (const k of ['add', 'start', 'close']) if (s[k] !== undefined && !TICKETS[s[k]]) bad(file, `${where}: ticket ${k} '${s[k]}' is not in story/tickets.js`);
+        if (s.do === 'tickets' && s.show !== undefined && !TICKETS[s.show]) bad(file, `${where}: tickets show '${s.show}' is not in story/tickets.js`);
         if (s.do !== 'find') for (const k of ['who', 'to', 'on', 'at', 'id']) if (s[k] !== undefined && typeof s[k] === 'string' && !idOk(s[k]) && !(s.do === 'floor') && !(s.do === 'period') && !(s.do === 'trip') && !(s.do === 'sit' && k === 'at')) bad(file, `${where}: ${s.do} ${k} '${s[k]}' is not a person, object or spot here`);
         if (s.do === 'sit' && P && s.at && !P.seats.includes(s.at)) bad(file, `${where}: no seat '${s.at}'`);
       }

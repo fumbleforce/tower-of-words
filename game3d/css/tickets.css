@@ -1,0 +1,127 @@
+/* The ticket app on Eric's computer (js/ui/tickets-view.js): a Windows 95 window on a teal desktop with a taskbar.
+   Grey faces with the four-line bevel, a navy title bar, white sunken fields, navy selection. Only the type is
+   bigger than the original, so it reads on a phone. */
+#ticketsApp {
+  --face: #c3c3c3; --hi: #fff; --lite: #dfdfdf; --shade: #808080; --dark: #0a0a0a; --navy: #000080;
+  --raised: inset -1px -1px var(--dark), inset 1px 1px var(--hi), inset -2px -2px var(--shade), inset 2px 2px var(--lite);
+  --pressed: inset -1px -1px var(--hi), inset 1px 1px var(--dark), inset -2px -2px var(--lite), inset 2px 2px var(--shade);
+  --sunken: inset -1px -1px var(--hi), inset 1px 1px var(--shade), inset -2px -2px var(--lite), inset 2px 2px var(--dark);
+  display: flex; flex-direction: column; place-items: stretch; background: #008080; color: #000;
+  font: 400 15px/1.35 Tahoma, Verdana, "Segoe UI", "Zen Kaku Gothic New", sans-serif; -webkit-font-smoothing: auto;
+  z-index: 40; cursor: default;
+}
+#ticketsApp[hidden] { display: none; }
+#ticketsApp.in .w95-win { animation: w95-open .16s steps(4, end); }
+@keyframes w95-open { from { transform: scale(.6); opacity: .2; } }
+#ticketsApp button { font: inherit; color: inherit; cursor: pointer; }
+#ticketsApp .sunk { box-shadow: var(--sunken); background: #fff; }
+#ticketsApp .w95-btn { min-height: 32px; padding: 4px 14px; border: 0; border-radius: 0; background: var(--face); box-shadow: var(--raised); }
+#ticketsApp .w95-btn:active, #ticketsApp .w95-btn.on { box-shadow: var(--pressed); }
+#ticketsApp .w95-btn:focus-visible { outline: 1px dotted #000; outline-offset: -5px; }
+#ticketsApp svg { width: 16px; height: 16px; flex: none; }
+
+/* the desktop and the window */
+#ticketsApp .w95-desk { flex: 1; min-height: 0; display: grid; place-items: center; padding: 22px; }
+#ticketsApp .w95-win { width: min(820px, 100%); height: min(600px, 100%); display: flex; flex-direction: column; padding: 3px; background: var(--face); box-shadow: var(--raised); outline: none; }
+#ticketsApp .w95-win[hidden] { display: none; }
+#ticketsApp .w95-win.maxed { width: 100%; height: 100%; }
+#ticketsApp .w95-title { display: flex; align-items: center; gap: 6px; height: 30px; padding: 0 3px 0 6px; background: linear-gradient(90deg, var(--navy), #1084d0); color: #fff; font-weight: 700; flex: none; }
+#ticketsApp .w95-title .t { flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+#ticketsApp .w95-ctl { display: flex; gap: 2px; }
+#ticketsApp .w95-ctl button { position: relative; width: 26px; height: 22px; padding: 0; border: 0; background: var(--face); box-shadow: var(--raised); color: #000; font-weight: 700; font-size: 18px; line-height: 20px; }
+#ticketsApp .w95-ctl button:active { box-shadow: var(--pressed); }
+#ticketsApp .w95-ctl .x { margin-left: 2px; }
+#ticketsApp .w95-ctl .min i { position: absolute; left: 8px; bottom: 5px; width: 9px; height: 2px; background: #000; }
+#ticketsApp .w95-ctl .max i { position: absolute; left: 7px; top: 4px; width: 10px; height: 9px; border: 1px solid #000; border-top-width: 2px; }
+
+/* toolbar, body, status bar */
+#ticketsApp .w95-tools { display: flex; align-items: center; gap: 6px; padding: 5px 3px; border-bottom: 1px solid var(--shade); box-shadow: 0 1px var(--hi); flex: none; }
+#ticketsApp .w95-tools .back { display: none; }
+#ticketsApp .w95-tools .w95-btn { width: auto; white-space: nowrap; border-radius: 0; }
+#ticketsApp .w95-path { flex: 1; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+#ticketsApp .w95-body { flex: 1; min-height: 0; display: flex; flex-direction: column; gap: 6px; padding: 6px 3px; position: relative; }
+#ticketsApp .w95-status { display: flex; gap: 3px; flex: none; padding-top: 2px; }
+#ticketsApp .w95-status span { box-shadow: inset -1px -1px var(--hi), inset 1px 1px var(--shade); background: none; padding: 2px 8px; min-height: 22px; font-size: 14px; }
+#ticketsApp .w95-status .f1 { flex: 1; }
+#ticketsApp .w95-status .f2 { width: 38%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+/* the list: a report view with column headers */
+#ticketsApp .w95-list { flex: 0 1 auto; min-height: 120px; max-height: 42%; overflow: auto; padding: 2px; }
+#ticketsApp .w95-row { display: grid; grid-template-columns: 76px 1fr 180px 118px; align-items: center; gap: 0; width: 100%; min-height: 30px; padding: 0; border: 0; background: none; text-align: left; }
+#ticketsApp .w95-row > span { padding: 3px 8px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+#ticketsApp .w95-row.hdr { position: sticky; top: 0; z-index: 1; min-height: 26px; background: var(--face); }
+#ticketsApp .w95-row.hdr > span { box-shadow: var(--raised); padding: 2px 8px; font-size: 14px; }
+#ticketsApp .w95-row.unread { font-weight: 700; }
+#ticketsApp .w95-row.on { background: var(--navy); color: #fff; }
+#ticketsApp .w95-row.on .c-sub { outline: 1px dotted #ff0; outline-offset: -3px; }
+#ticketsApp .w95-row.st-done:not(.on) { color: #5a5a5a; }
+#ticketsApp .dot { display: inline-block; width: 9px; height: 9px; margin-right: 6px; border: 1px solid #000; vertical-align: 0; }
+#ticketsApp .st-new .dot { background: #ffd800; }
+#ticketsApp .st-progress .dot { background: #1084d0; }
+#ticketsApp .st-done .dot { background: #3aa83a; }
+#ticketsApp .empty, #ticketsApp .none { padding: 14px 10px; color: #5a5a5a; }
+
+/* the ticket */
+#ticketsApp .w95-detail { flex: 1; min-height: 0; overflow: auto; padding: 12px 16px; }
+#ticketsApp .d-head { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; border-bottom: 1px solid var(--shade); padding-bottom: 6px; }
+#ticketsApp .d-head h3 { margin: 0; font-size: 18px; }
+#ticketsApp .d-id { color: var(--navy); font-weight: 700; }
+#ticketsApp .d-meta { display: grid; grid-template-columns: max-content 1fr; gap: 2px 14px; margin: 8px 0 4px; }
+#ticketsApp .d-meta dt { color: #444; }
+#ticketsApp .d-meta dd { margin: 0; }
+#ticketsApp .d-meta .pay { font-weight: 700; }
+#ticketsApp .d-text p { margin: 10px 0 0; max-width: 62ch; }
+#ticketsApp .d-text .jp { font-family: "Zen Kaku Gothic New", sans-serif; font-weight: 700; color: #000; }
+#ticketsApp .d-text .gl { color: #444; }
+#ticketsApp .d-act { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-top: 16px; }
+#ticketsApp .d-act .take { min-height: 36px; padding: 4px 20px; font-weight: 700; }
+#ticketsApp .d-act .note { color: #333; font-style: italic; }
+
+/* first-use tips: the yellow tooltip */
+#ticketsApp .w95-tip { padding: 5px 9px; background: #ffffe1; border: 1px solid #000; box-shadow: 2px 2px 0 rgba(0,0,0,.35); font-size: 14px; }
+#ticketsApp .w95-tip[hidden] { display: none; }
+#ticketsApp .list-tip { align-self: flex-start; }
+#ticketsApp .take-tip { max-width: 38ch; }
+
+/* the taskbar and its Start menu */
+#ticketsApp .w95-bar { position: relative; display: flex; align-items: center; gap: 4px; height: 40px; padding: 3px 4px; background: var(--face); box-shadow: inset 0 1px var(--lite), inset 0 2px var(--hi); flex: none; }
+#ticketsApp .w95-bar .w95-btn { display: flex; align-items: center; gap: 5px; height: 32px; padding: 0 8px; }
+#ticketsApp .w95-bar .task { width: min(200px, 40vw); justify-content: flex-start; }
+#ticketsApp .w95-bar .task span { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+#ticketsApp .w95-bar .task.on { background: repeating-conic-gradient(var(--face) 0 25%, #fff 0 50%) 0 0 / 2px 2px; font-weight: 700; }
+#ticketsApp .w95-bar .clock { margin-left: auto; padding: 4px 10px; box-shadow: inset -1px -1px var(--hi), inset 1px 1px var(--shade); background: none; font-size: 14px; white-space: nowrap; }
+#ticketsApp .w95-menu { position: absolute; left: 3px; bottom: 37px; display: flex; background: var(--face); box-shadow: var(--raised); padding: 3px; }
+#ticketsApp .w95-menu[hidden] { display: none; }
+#ticketsApp .w95-menu .side { writing-mode: vertical-rl; transform: rotate(180deg); background: linear-gradient(0deg, var(--navy), #1084d0); color: #c3c3c3; padding: 8px 4px; font-size: 20px; }
+#ticketsApp .w95-menu .side b { color: #fff; }
+#ticketsApp .w95-menu .items { display: flex; flex-direction: column; min-width: 190px; }
+#ticketsApp .w95-menu .items button { display: flex; align-items: center; gap: 10px; min-height: 44px; padding: 0 12px; border: 0; background: none; text-align: left; }
+#ticketsApp .w95-menu .items button:hover, #ticketsApp .w95-menu .items button:focus-visible { background: var(--navy); color: #fff; }
+#ticketsApp .w95-menu .off { border-top: 1px solid var(--shade) !important; box-shadow: inset 0 1px var(--hi); }
+
+/* the phone: one pane at a time, bigger rows and type */
+#ticketsApp.one { font-size: 16px; }
+#ticketsApp.one .w95-desk { padding: 8px 6px; }
+#ticketsApp.one .w95-win { width: 100%; height: 100%; }
+#ticketsApp.one .w95-title { height: 36px; }
+#ticketsApp.one .w95-ctl button { width: 32px; height: 28px; }
+#ticketsApp.one .w95-ctl .min i { left: 11px; bottom: 7px; }
+#ticketsApp.one .w95-ctl .max i { left: 10px; top: 7px; }
+#ticketsApp.one .w95-btn { min-height: 44px; }
+#ticketsApp.one .w95-list { max-height: none; flex: 1; }
+#ticketsApp.one .w95-row { grid-template-columns: 1fr auto; grid-template-areas: 'id st' 'sub sub' 'from from'; min-height: 64px; padding: 6px 4px; border-bottom: 1px solid var(--lite); }
+#ticketsApp.one .w95-row > span { padding: 1px 6px; }
+#ticketsApp.one .w95-row .c-id { grid-area: id; font-size: 14px; }
+#ticketsApp.one .w95-row .c-st { grid-area: st; font-size: 14px; }
+#ticketsApp.one .w95-row .c-sub { grid-area: sub; white-space: normal; }
+#ticketsApp.one .w95-row .c-from { grid-area: from; font-size: 14px; color: #444; }
+#ticketsApp.one .w95-row.on .c-from { color: #dde; }
+#ticketsApp.one .w95-row.hdr { display: none; }
+#ticketsApp.one[data-mode='list'] .w95-detail { display: none; }
+#ticketsApp.one[data-mode='detail'] .w95-list { display: none; }
+#ticketsApp.one[data-mode='detail'] .w95-tools .back { display: block; }
+#ticketsApp.one .w95-bar { height: 48px; }
+#ticketsApp.one .w95-bar .w95-btn { height: 40px; }
+#ticketsApp.one .w95-menu { bottom: 45px; }
+#ticketsApp.one .d-act .take { min-height: 48px; width: 100%; }
+#ticketsApp.one .take-tip { max-width: none; }

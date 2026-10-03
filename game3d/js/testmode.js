@@ -38,6 +38,9 @@ export function start(game) {
       T.done = true;
       return;
     }
+    // the ticket app (ui/tickets-view.js): open each unread ticket, take a new one, then close the window
+    const app = globalThis.document?.getElementById('ticketsApp');
+    if (app && !app.hidden) return driveTickets(app, T);
     const p = game.place;
     if (!p || !game.walker) return;
     if (p.name !== lastPlace) {
@@ -137,4 +140,19 @@ export function start(game) {
       T.done = true;
     }
   }, 60);
+}
+// one action a tick, as a player would: read an unread ticket, take it if it's new, close the app when all are read
+function driveTickets(app, T) {
+  const take = app.querySelector('.d-act .take');
+  if (take) {
+    T.log.push('tickets: take ' + app.querySelector('.d-id')?.textContent);
+    return take.click();
+  }
+  const row = app.querySelector('.rows .w95-row.unread');
+  if (row) {
+    T.log.push('tickets: read ' + row.dataset.id);
+    return row.click();
+  }
+  T.log.push('tickets: close');
+  app.querySelector('.w95-title .x').click();
 }

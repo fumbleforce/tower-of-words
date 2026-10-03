@@ -81,7 +81,15 @@ async function installDriver(page, route, resume = false, made = 0) {
       return index;
     };
     // Exercise the existing fast-forward control; no hooks, effects or runner branches are mocked.
-    state.timer = setInterval(() => g.setHurry(true), 30);
+    // The ticket app (ui/tickets-view.js) waits for the player: close it with its own × control, taking nothing.
+    state.timer = setInterval(() => {
+      g.setHurry(true);
+      const app = document.getElementById('ticketsApp');
+      if (app && !app.hidden) {
+        state.ticketApps = (state.ticketApps || 0) + 1;
+        app.querySelector('.w95-title .x').click();
+      }
+    }, 30);
   }, { choices: (route.choices || []).slice(made), pauseAt: route.resumeAt, resume }); // (made: picked before a reload)
 }
 
