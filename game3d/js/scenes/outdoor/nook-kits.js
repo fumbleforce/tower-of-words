@@ -27,7 +27,7 @@ export function vending(T, { back = 1.0, n = 2, binSide = 1, seed = 1 }) {
       [body, accent] = MACHINES[(i + seed) % MACHINES.length];
     T.box(body, W, H, D, u, 0, back + D / 2);
     T.box('#3a3f47', W + 0.02, 0.08, D + 0.02, u, 0, back + D / 2, { cast: false }); // the plinth
-    T.box(accent, W + 0.02, 0.1, D + 0.02, u, H - 0.1, back + D / 2); // the top band
+    T.box(accent, W + 0.02, 0.1, D + 0.02, u, H - 0.09, back + D / 2); // the top band, its lid 1 cm over the body's
     T.face(drinksFace(accent, i + seed), W - 0.08, H - 0.2, u, 0.06 + (H - 0.2) / 2, back);
   }
   const bu = binSide * (span / 2 + 0.3);

@@ -1,6 +1,7 @@
 // Shared pieces for the three places: renderer and post chain (the same light model and AO as the train),
 // contact shadows, a walk grid with A* for tap-to-move, the player controller and the talk markers.
 import * as THREE from 'three';
+import { DECAL } from './look/decal.js';
 import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
 import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
 import { GTAOPass } from 'three/addons/postprocessing/GTAOPass.js';
@@ -67,8 +68,10 @@ export function blob(size, opacity = 0.42, color = '#1d1a22') {
     _blobTex = new THREE.CanvasTexture(c);
   }
   const m = new THREE.Mesh(
-    new THREE.PlaneGeometry(size, size * 0.8),
-    new THREE.MeshBasicMaterial({ map: _blobTex, transparent: true, opacity, depthWrite: false, color }),
+    // lifted 8 mm in its own frame (its local z is up once turned flat), over the outdoor paving's stones whose
+    // tops stand 6 to 9 mm up; position.y stays 0.004 for whoever moves it (story.js walkPerson)
+    new THREE.PlaneGeometry(size, size * 0.8).translate(0, 0, 0.008),
+    new THREE.MeshBasicMaterial({ map: _blobTex, transparent: true, opacity, depthWrite: false, color, ...DECAL }),
   );
   m.rotation.x = -Math.PI / 2;
   m.position.y = 0.004;

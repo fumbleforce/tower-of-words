@@ -184,7 +184,7 @@ function bikeShelter(root, p) {
     z = (z0 + z1) / 2;
   for (const x of [x0, (x0 + x1) / 2, x1]) p.box(STEEL.dark, 0.07, 1.6, 0.07, x, 0, z0 + 0.05);
   p.box(BLOCK.canopy, x1 - x0 + 0.3, 0.07, z1 - z0 + 0.1, (x0 + x1) / 2, 1.6, z);
-  p.box(BLOCK.fascia, x1 - x0 + 0.3, 0.12, 0.05, (x0 + x1) / 2, 1.55, z1 + 0.05);
+  p.box(BLOCK.fascia, x1 - x0 + 0.3, 0.125, 0.05, (x0 + x1) / 2, 1.55, z1 + 0.05); // a 5 mm lip over the canopy's top
   const n = Math.floor((x1 - x0) / 0.55);
   const row = bikeRow(n, { gaps: [...Array(n).keys()].filter((i) => i % 2), seed: 6 }); // every other place taken
   row.position.set(x0 + 0.3, 0, z); // the row runs along x, the bikes across it, under the roof

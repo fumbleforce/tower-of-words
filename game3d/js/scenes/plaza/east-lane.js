@@ -228,7 +228,8 @@ function* park(p, lights, sh) {
     p.geo(tone, g.translate(gx0 + pebbles() * (gx1 - gx0), 0.02, gz0 + pebbles() * (gz1 - gz0)), { cast: false });
     if (k % 30 === 29) yield;
   }
-  p.geo(LEAF.mulch, new THREE.CylinderGeometry(0.8, 0.85, 0.04, 14).translate(cx, 0.0, cz), {
+  // the tree's mulch stands 1 cm proud of the gravel (top 0.03 against 0.02): level with it the two fought
+  p.geo(LEAF.mulch, new THREE.CylinderGeometry(0.8, 0.85, 0.05, 14).translate(cx, 0.005, cz), {
     cast: false,
     surf: 'soil',
   });

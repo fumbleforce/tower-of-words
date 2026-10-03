@@ -102,8 +102,9 @@ function* factory(p, plain) {
       .translate(x0 - 0.15, H, z0 + k * D);
     p.geo(C.roof, g, { surf: 'metal' });
     p.box(C.pane, x1 - x0 - 0.6, TH - 0.4, 0.05, (x0 + x1) / 2, H + 0.2, z0 + k * D - 0.03, NO);
+    // the mullions stand 5 mm over the glass's top edge
     for (let x = x0 + 0.6; x < x1 - 0.4; x += 1.2)
-      p.box(C.frame, 0.06, TH - 0.4, 0.07, x, H + 0.2, z0 + k * D - 0.04, NO);
+      p.box(C.frame, 0.06, TH - 0.395, 0.07, x, H + 0.2, z0 + k * D - 0.04, NO);
   }
   yield;
   // the south face: two rows of works windows either side of the gates, rust under the gutter, downpipes

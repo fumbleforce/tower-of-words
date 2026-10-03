@@ -19,8 +19,9 @@ import * as P from './plan.js';
 
 export const Z_CUTS = [-72, -56, -40, -24, -8, 8];
 
-// a line path's legs paved in one grid, each leg less the corner square the leg before it laid
-function pave(pv, legs, line) {
+// a line path's legs paved in one grid, each leg less the corner square the leg before it laid; the coast walk's
+// first leg (the link off the dorms' terrace) lies 2 mm lower, under the terrace's stones where it runs in under them
+function pave(pv, legs, line, { linkH = 0.006 } = {}) {
   legs.forEach((r, i) => {
     const q = [...r];
     if (i) {
@@ -32,7 +33,7 @@ function pave(pv, legs, line) {
       else if (z1 > z0) q[2] += w;
       else q[3] -= w;
     }
-    pv.field(q, { pattern: 'grid', module: [0.6, 0.6], tones: GRANITE.pale, origin: [0, 0] });
+    pv.field(q, { pattern: 'grid', module: [0.6, 0.6], tones: GRANITE.pale, origin: [0, 0], h: i ? 0.006 : linkH });
   });
 }
 
@@ -49,7 +50,7 @@ export function kerbWalks() {
 
 export function* walkSteps(c, lights, signRoot, signs) {
   const { parts: p, paver: pv } = c;
-  pave(pv, P.COAST_LEGS, P.COAST_WALK.line);
+  pave(pv, P.COAST_LEGS, P.COAST_WALK.line, { linkH: 0.004 });
   pave(pv, P.ONSEN_LEGS, P.ONSEN_PATH.line);
   const cs = P.COURTS_STUB; // the courts walk's end, in its grid (the sports chunk's)
   pv.field([cs[0], P.ONSEN_LEGS[0][0], cs[2], cs[3]], {
