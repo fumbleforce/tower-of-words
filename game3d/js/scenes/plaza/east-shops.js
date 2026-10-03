@@ -1,9 +1,9 @@
 // The named shops along the east lane (docs/game/island.md, "East lane"): the café, the liquor and rice shop, the
 // barber and Amakawa Travel, the blocks with a `shop` in plaza/east-plan.js BLOCKS and north-plan.js E2. Their
 // fronts are plaza/east-fronts.js's; this adds what makes each one a shop with a name: its sign (the kana large, the
-// English small, as the shop street's), a white 準備中 CLOSED card on the door's glass, and by the door the liquor
-// shop's cedar ball (sugidama) and the barber's striped pole. Built for the plaza's backdrop and the east lane's
-// own chunk (scenes/east-lane.js) alike.
+// English small, as the shop street's), a white 準備中 CLOSED card on the door's glass (本日休業 CLOSED TODAY
+// after work on day 2), and by the door the liquor shop's cedar ball (sugidama) and the barber's striped pole.
+// Built for the plaza's backdrop and the east lane's own chunk (scenes/east-lane.js) alike.
 //
 //   shopFittings(p, signs, blocks)     p: a Parts collector; signs: a shop-signs.js signSet (one draw call for all)
 //   shopDoor(k)                        the door's middle on its face [x, z], the face's outward normal, the face
@@ -88,7 +88,8 @@ export function shopFittings(p, signs, blocks) {
       signs.board(kana, en, colour, 2.4, 0.6, at(1.08, 2.72), ry);
     }
     // the door's glass: shut, a card on it
-    signs.card('準備中', 'CLOSED', 0.46, 0.3, at(0.09, 1.2, 0.28), ry);
+    signs.card('準備中', 'CLOSED', 0.46, 0.3, at(0.09, 1.2, 0.28), ry, { when: 'prep' });
+    signs.card('本日休業', 'CLOSED TODAY', 0.46, 0.3, at(0.09, 1.2, 0.28), ry, { when: 'evening2' }); // day 2 after work
     if (k.shop.id === 'barber') barberPole(p, F, u - 0.85);
   }
 }

@@ -117,6 +117,7 @@ export function* eastCoastSteps() {
       dorms.evening();
       sky.onPeriod('evening');
     },
+    cards: (day, period) => sg.show(day, period), // the onsen's door card (shop-signs.js WHEN)
     skyline: sky.stats,
   };
 }

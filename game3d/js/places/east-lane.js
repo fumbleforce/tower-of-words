@@ -3,7 +3,7 @@ import { eastLaneChunkSteps } from '../scenes/east-lane.js';
 import { sliced } from '../perf/slice.js';
 import { RoomCam } from '../cam.js';
 import { K } from '../scenes/office.js';
-import { eveningLight, EVENING_GRADE, MORNING_GRADE } from '../scenes/town.js';
+import { eveningLight, eveningGrade, MORNING_GRADE } from '../scenes/town.js';
 import { inRect } from '../scenes/east-lane/plan.js';
 import { sim } from '../sim.js';
 import { PLACE_DETAILS } from './catalog.js';
@@ -156,11 +156,12 @@ export async function eastLanePlace(game) {
       if (sim.period === 'evening' && near('dorm_court', 6) && !game.prepared.dorm_court) game.prepare?.('dorm_court');
     },
     onPeriod(period) {
-      if (period !== 'evening' || P.grade === EVENING_GRADE) return;
-      eveningLight(w.scene);
+      w.cards(sim.day, period); // the shops' door cards for the day and the time (scenes/shop-signs.js WHEN)
+      if (period !== 'evening' || P.grade === eveningGrade(sim.day)) return;
+      eveningLight(w.scene, sim.day);
       w.evening();
       w.follow(game.player.root.position.x, game.player.root.position.z);
-      P.grade = EVENING_GRADE;
+      P.grade = eveningGrade(sim.day);
     },
     snapshotState() {
       return { player: snapshotPeople({ eric: game.player }) };

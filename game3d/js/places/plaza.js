@@ -4,7 +4,7 @@ import { BASIN } from '../scenes/plaza/plan.js';
 import { sliced } from '../perf/slice.js';
 import { RoomCam } from '../cam.js';
 import { K } from '../scenes/office.js';
-import { eveningLight, EVENING_GRADE, MORNING_GRADE } from '../scenes/town.js';
+import { eveningLight, eveningGrade, MORNING_GRADE } from '../scenes/town.js';
 import { sim } from '../sim.js';
 import { PLACE_DETAILS } from './catalog.js';
 import { snapshotPeople, restorePeople } from './saved-people.js';
@@ -168,11 +168,12 @@ export async function plazaPlace(game) {
       if (sim.period !== 'evening' && p.x > w.eastX - 6 && !game.prepared.east_lane) game.prepare?.('east_lane');
     },
     onPeriod(period) {
+      w.cards(sim.day, period); // the shops' door cards for the day and the time (scenes/shop-signs.js WHEN)
       canteen.sync(); // on every entry: the terrace open, or closing after work
-      if (period !== 'evening' || P.grade === EVENING_GRADE) return;
-      eveningLight(w.scene);
+      if (period !== 'evening' || P.grade === eveningGrade(sim.day)) return;
+      eveningLight(w.scene, sim.day);
       w.evening();
-      P.grade = EVENING_GRADE;
+      P.grade = eveningGrade(sim.day);
     },
     snapshotState() {
       return { player: snapshotPeople({ eric: game.player }), canteen: canteen.snapshot() };
