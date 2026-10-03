@@ -129,7 +129,7 @@ Things Eric picks up and keeps on his phone (Jørgen, 2026-09-30: "how lame, a p
 
 ## Tickets
 
-Repair tickets are how the work reaches Eric (Jørgen, 2026-10-03: "the main storyline progression should perhaps revolve around the tickets and going to the office. But as this is not a super efficient company, you don't necessarily have to go to the office every day. You don't need to complete the ticket every day. You just use those as levers to progress the story."). Day 2 is the first glimpse: a simple Windows 95-style ticket app on his computers, with two tickets.
+Repair tickets are how the work reaches Eric (Jørgen, 2026-10-03: "the main storyline progression should perhaps revolve around the tickets and going to the office. But as this is not a super efficient company, you don't necessarily have to go to the office every day. You don't need to complete the ticket every day. You just use those as levers to progress the story."). Day 2 is the first glimpse: the company's in-house ticket system on his computers, with two tickets.
 
 - A ticket has an id (T-0001), a subject, who sent it, a short description in plain English with a few Japanese words (shown with reading and English), and a status: New, In progress or Done. The words are the story's (game3d/story/tickets.js).
 - The story adds tickets to his queue and closes them, by a scene or by a condition the ticket names. There are no deadlines, no penalties and no way to fail one (Jørgen, 2026-10-03: "There's no consequence for not completing the tickets. It's just you're not progressing in the story."): an open ticket only holds the story where it is, for as long as it stays open. In the app Eric reads them and can take a new one (it moves to In progress); he never closes one there.

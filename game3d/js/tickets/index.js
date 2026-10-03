@@ -1,4 +1,4 @@
-// Tickets: the repair requests in Eric's queue, and the Windows 95-style app on his computers that shows them
+// Tickets: the repair requests in Eric's queue, and the company's in-house ticket page on his computers that shows them
 // (ui/tickets-view.js). The state is the model's flags (tickets/model.js); the words are the story's
 // (story/tickets.js). The contract: game3d/story/FORMAT.md (Tickets); what the player sees: docs/game/systems.md.
 //   installTickets(game)   the `ticket` hook (add, start, close; safe to run twice) and the `tickets` hook
@@ -9,6 +9,7 @@ import { save, sim } from '../sim.js';
 import { sfx } from '../sfx.js';
 import { createTickets } from './model.js';
 import { openTickets } from '../ui/tickets-view.js';
+import { learn, known } from '../lang.js';
 // imported up front, not on demand: a story's first `ticket` step can run before any lazy load would finish
 import TICKETS from '../../story/tickets.js';
 
@@ -50,6 +51,15 @@ export function installTickets(game) {
         save(game);
         return true;
       },
+      // the page's Japanese labels (tickets/words.js): a tap teaches one, into the Words panel and the save
+      learn: (id) => {
+        if (!learn(id)) return false;
+        sfx('word');
+        game.ui.refreshWords();
+        save(game);
+        return true;
+      },
+      isKnown: (id) => known.has(id),
     });
   };
 }

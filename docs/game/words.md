@@ -1,12 +1,12 @@
 # Words
 
-Every Japanese word the game knows (id, Japanese, reading, meaning, kind), the nine words day 1 teaches, the four day 2 teaches, how a word is shown, and when it counts as known. Last checked against the game on 2026-09-29.
+Every Japanese word the game knows (id, Japanese, reading, meaning, kind), the nine words day 1 teaches, the four day 2 teaches, the ticket system's ten labels, how a word is shown, and when it counts as known. Last checked against the game on 2026-09-29.
 
 Elsewhere: which storyline teaches a word, and who teaches it, is in that storyline's "Words taught" table ([stories/](stories/); `node tools/facts/check.mjs --game` prints them all in one list). How the Say menu, typing and word practice work is in [systems.md](systems.md) and [controls-and-ui.md](controls-and-ui.md). How to write a word into a line (`{id}`) is in game3d/story/FORMAT.md.
 
 ## Words
 
-Checked against game3d/js/lang.js. Kind: a `phrase` is a greeting Eric can say to people; a `command` is a word he can say to make a machine do something (kotodama); a `word` is shown with its gloss but can't be said.
+Checked against game3d/js/lang.js. Kind: a `phrase` is a greeting Eric can say to people; a `command` is a word he can say to make a machine do something (kotodama); a `word` is shown with its gloss but can't be said; a `label` is one of the ticket system's screen labels (Labels on the ticket system, below).
 
 | Id | Japanese | Reading | Meaning | Kind |
 |---|---|---|---|---|
@@ -29,6 +29,16 @@ Checked against game3d/js/lang.js. Kind: a `phrase` is a greeting Eric can say t
 | `tsugiwa` | つぎは | tsugi wa | next | word |
 | `otsukare` | お疲れさまです | otsukaresama desu | the everyday hello at work | word |
 | `kotodama` | 言霊 | kotodama | words with power in them | word |
+| `kenmei` | 件名 | kenmei | subject (of a ticket or an email) | label |
+| `iraisha` | 依頼者 | iraisha | the person who asked | label |
+| `jotai` | 状態 | jōtai | status, state | label |
+| `mitaio` | 未対応 | mitaiō | not started yet | label |
+| `taiochu` | 対応中 | taiōchū | being worked on | label |
+| `kanryo` | 完了 | kanryō | done, finished | label |
+| `hoshu` | 報酬 | hōshū | pay, a fee | label |
+| `tanto` | 担当する | tantō suru | to take something on as your job | label |
+| `modoru` | 戻る | modoru | to go back | label |
+| `tojiru` | 閉じる | tojiru | to close | label |
 
 Verbs are met in their -te form, the form for asking someone to do something. The Words panel shows each with its dictionary form (待って matte is the -te form of 待つ matsu) and a short note on what -te does (Jørgen: "it is never explained in the word menu what the -te ending is").
 
@@ -52,7 +62,7 @@ Day 1 teaches nine words, in the order a player meets them. Who teaches each, an
 
 ## When a word is known
 
-- Only words taught in play count as known: typed at the typing prompt, or taught with `learn` or `offer` (Jørgen). Nothing is known at the start. A word shown glossed in a line is explained there but not taught; never mark other words as known (九時 at the gate was wrong).
+- Only words taught in play count as known: typed at the typing prompt, taught with `learn` or `offer`, or a ticket system label tapped or used (below) (Jørgen). Nothing is known at the start. A word shown glossed in a line is explained there but not taught; never mark other words as known (九時 at the gate was wrong).
 - Known words stay sharp in overheard Japanese from then on, and in the voice they come out clear while the rest is muffled ([systems.md](systems.md), Overheard Japanese).
 - Phrases and commands Eric knows go in the Say menu; how often he has to type one before a click is enough is in [systems.md](systems.md), Word practice.
 
@@ -61,3 +71,7 @@ Day 1 teaches nine words, in the order a player meets them. Who teaches each, an
 The [day-2 set](../../game3d/story/day2/README.md) keeps its four records in `story/day2/words.js`; game3d/js/lang.js adds them to its words, so they are in the table above. Who teaches them, and in which node, is in [welcome.md](stories/day2/welcome.md) and [visits.md](stories/day2/visits.md).
 
 The single new pattern is the **-tai form**, saying what you want to do yourself. The Words panel pairs 食べたい with 食べる (taberu, to eat), 飲みたい with 飲む (nomu, to drink), 見たい with 見る (miru, to see), and 行きたい with 行く (iku, to go), with one line on what -tai does over the phrases once one is known. Only tabetai is required; the other three are optional reinforcement in the gathering or nearby encounters. All start unknown, become known through typing, and are things to say to people. None commands a machine. Their clips (eric-<id> and word-<id> for each) are in the voice manifest, still to be made; until then the words have no play button and Eric says them silently.
+
+## Labels on the ticket system
+
+The ticket app ([controls-and-ui.md](controls-and-ui.md)) labels its columns, fields, statuses and buttons in Japanese (Jørgen, 2026-10-03: "Some japanese here, and learnable"): 件名, 依頼者 and 状態 over the list and down the ticket's form, 報酬 by the pay, the statuses 未対応, 対応中 and 完了, and the buttons 担当する, 戻る and 閉じる. They are kept in game3d/js/tickets/words.js, which lang.js adds to its words. Each label shows its reading over it in small type and its short English after it (件名 Subject), every time. Tapping or clicking a label teaches its word, and using a button teaches the button's; a line at the foot of the page says "New word in your Words: 件名 kenmei, subject (of a ticket or an email)", the Words chip pops and the word joins the Words panel's Words list. Until one is known, that line says "Tap a Japanese label to learn it." (desktop: "Click"). A known label loses its dotted underline. None of them is needed to use the app or to move the story, none can be said, and none has a voice clip yet.

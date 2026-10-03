@@ -46,7 +46,7 @@ test('asset source data includes the actual words, cast, music, sounds and style
     works: {},
     transitions: { sales1: 2, sales2: 1 },
   });
-  assert.equal(data.icons.length, 21); // 18th: the Photos chip (ui/finds-view.js); 19th to 21st: the ticket app's (ui/tickets-view.js)
+  assert.equal(data.icons.length, 18); // 18th: the Photos chip (ui/finds-view.js); the ticket app (ui/tickets-view.js) has none
 });
 
 test('the full public scanner registers parsed metadata and preserves existing icon IDs', () => {
