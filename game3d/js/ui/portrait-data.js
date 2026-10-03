@@ -9,4 +9,5 @@ export const PORTRAITS = {
   kuroda: ['neutral', 'sleepy', 'panicked'],
   guard: ['neutral', 'stern', 'amused'],
   emi: ['neutral'],
+  rei: ['neutral'],
 };
