@@ -1,0 +1,87 @@
+{
+ "title": "The rest of the cast as Meshy vinyl chibis, and in the game",
+ "date": "2026-10-03",
+ "by": "Claude (chibi-cast-meshy-2 agent)",
+ "status": "open",
+ "issue": 171,
+ "question": "Do these work for Mori, Kenji, Emi, the guard, Hamada, Aoi and Rei, and what should change?",
+ "multi": true,
+ "media": [
+  {
+   "image": "art/parts/chibi-cast-meshy-2/ingame/desktop-cast.webp",
+   "caption": "Your brief: \"I think the current chibi models are decent to be expanded and used for everyone ... So let's just create each character by hand, as you've done currently with meshy ... So just build on that and add them to the game.\" The whole cast in the game with ?chibi=1 (desktop, 1366x860, on the plaza): Eric, Mio, Kuro (round 1), then Mori, Kenji, Emi, the guard, Hamada, Aoi and Rei. Each stands at the height of the code-built figure they replace, scaled as the scenes scale those (Kenji a little taller for his hair)."
+  },
+  {
+   "image": "art/parts/chibi-cast-meshy-2/ingame/phone-cast.webp",
+   "caption": "The same line-up on the phone (390x844, quality 1, the 8k-triangle copies)."
+  },
+  {
+   "image": "art/parts/chibi-cast-meshy-2/ingame/desktop-b2-view.webp",
+   "caption": "B2 office in the game view, desktop: Mori arriving (outlined: he can be talked to), Kenji at his desk. Emi is upstairs all day on day 1, so she isn't there."
+  },
+  {
+   "image": "art/parts/chibi-cast-meshy-2/ingame/phone-b2-view.webp",
+   "caption": "B2 office on the phone."
+  },
+  {
+   "image": "art/parts/chibi-cast-meshy-2/ingame/desktop-gate-people.webp",
+   "caption": "The gate, desktop: the guard at his desk, Hamada from behind at the lower left. Aoi isn't on screen at this time of the morning."
+  },
+  {
+   "image": "art/parts/chibi-cast-meshy-2/ingame/phone-gate-people.webp",
+   "caption": "The gate on the phone."
+  },
+  {
+   "image": "art/parts/chibi-cast-meshy-2/faces.webp",
+   "caption": "Faces close up: per person the approved portrait, the input picture, and the model front and left 3/4 (Blender, the same camera and soft light as round 1). The eyes stay painted and crisp. Glasses are real 3D frames again (Emi's tortoiseshell, the guard's thin silver)."
+  },
+  {"image": "art/parts/chibi-cast-meshy-2/side-mori.webp", "caption": "Mori: portrait, input mori-a-101, then front, his left 3/4, his left side and back."},
+  {"image": "art/parts/chibi-cast-meshy-2/side-kenji.webp", "caption": "Kenji, same layout (input kenji-b-101)."},
+  {"image": "art/parts/chibi-cast-meshy-2/side-emi.webp", "caption": "Emi, same layout (input emi-a-101)."},
+  {"image": "art/parts/chibi-cast-meshy-2/side-guard.webp", "caption": "The guard, same layout (input guard-a-101). His glasses' arms stand out past the sides of his head in the 3/4 and side views."},
+  {"image": "art/parts/chibi-cast-meshy-2/side-kuroda.webp", "caption": "Hamada, same layout (input kuroda-b-101)."},
+  {"image": "art/parts/chibi-cast-meshy-2/side-aoi.webp", "caption": "Aoi, same layout (input aoi-a-101). The dark roots read as a dark band over the top of her head, and the back of her hair fades from near-black to pink."},
+  {"image": "art/parts/chibi-cast-meshy-2/side-rei.webp", "caption": "Rei, same layout (input rei-b-101-flip). The ponytail shows on her left (image right) and hangs down behind. Hair and suit are almost the same pale grey."},
+  {
+   "image": "art/parts/chibi-cast-meshy-2/inputs-mori.webp",
+   "caption": "Every input picture for Mori, in order: your office woman picture (image 1), his portrait (image 2), then mori-a-101 to 103 (FLUX.2 Klein 4B on the local GPU, 4 steps, round 1's prompt with his description). mori-a-101 went to Meshy."
+  },
+  {
+   "image": "art/parts/chibi-cast-meshy-2/inputs-kenji.webp",
+   "caption": "Kenji. a: first prompt, the reference's slim body. b: one change, \"a soft round chubby body, wider than the woman's in image 1, with a round belly\" in place of \"a soft round chubby build\". kenji-b-101 went to Meshy. The lanyard is left off (accessories stay off the models)."
+  },
+  {"image": "art/parts/chibi-cast-meshy-2/inputs-emi.webp", "caption": "Emi. emi-a-101 went to Meshy. The skirt and flats are my choice (her portrait stops at the hips; her code-built figure wears a skirt)."},
+  {"image": "art/parts/chibi-cast-meshy-2/inputs-guard.webp", "caption": "The guard: bald, white moustache, thin silver glasses, plain navy uniform with no badges or letters, no cap. guard-a-101 went to Meshy."},
+  {
+   "image": "art/parts/chibi-cast-meshy-2/inputs-kuroda.webp",
+   "caption": "Hamada. a: \"sleepy half-closed eyes\" came out shut on two of three seeds. b: one change, \"tired heavy-lidded eyes that are open\". kuroda-b-101 went to Meshy (grey at the temples, as in the portrait). Standing with arms out, not hands in pockets, like everyone else."
+  },
+  {"image": "art/parts/chibi-cast-meshy-2/inputs-aoi.webp", "caption": "Aoi: both eyes open (her portrait winks; a wink would stay on the model for good). The skirt and sneakers are my choice. aoi-a-101 went to Meshy."},
+  {
+   "image": "art/parts/chibi-cast-meshy-2/inputs-rei.webp",
+   "caption": "Rei. a: the ponytail hid behind her head on every seed. b: one change, \"a high ponytail that hangs down beside her head on her left side\". b-101 had it on her right, so I mirrored the picture, as for Mio's bun in round 1 (rei-b-101-flip went to Meshy). Earrings left off."
+  }
+ ],
+ "options": [
+  {"id": "mori-1", "label": "1. mori-1", "image": "art/parts/chibi-cast-meshy-2/mori-1/renders/front.png", "images": ["art/parts/chibi-cast-meshy-2/mori-1/renders/l45.png", "art/parts/chibi-cast-meshy-2/mori-1/renders/back.png", "art/parts/chibi-cast-meshy-2/mori-1/renders/face.png", "art/parts/chibi-cast-meshy-2/inputs/mori-a-101.png"],
+   "note": "Input mori-a-101, background cut away (BiRefNet, CPU). Meshy image-to-3D with round 1's settings: latest model, textured in the same task, no remesh, image enhancement off, no PBR, 4k texture, no pose. 30 credits. Matches: combed grey hair, grey brows, tanned skin, a small smile, dark grey suit, navy tie. Doesn't: he looks younger than 58 (the chibi face has almost no lines). Rigged on a 60k copy (5 credits); in the game with Eric's clips."},
+  {"id": "kenji-1", "label": "2. kenji-1", "image": "art/parts/chibi-cast-meshy-2/kenji-1/renders/front.png", "images": ["art/parts/chibi-cast-meshy-2/kenji-1/renders/l45.png", "art/parts/chibi-cast-meshy-2/kenji-1/renders/back.png", "art/parts/chibi-cast-meshy-2/kenji-1/renders/face.png", "art/parts/chibi-cast-meshy-2/inputs/kenji-b-101.png"],
+   "note": "Input kenji-b-101, same settings. 30 credits. Matches: spiky black bedhead, rosy round cheeks, smile, white short-sleeved shirt, dark tie. Doesn't: still slimmer than his pudgy portrait (rounder than a, not round). Rigged (5 credits); Eric's clips."},
+  {"id": "emi-1", "label": "3. emi-1", "image": "art/parts/chibi-cast-meshy-2/emi-1/renders/front.png", "images": ["art/parts/chibi-cast-meshy-2/emi-1/renders/l45.png", "art/parts/chibi-cast-meshy-2/emi-1/renders/back.png", "art/parts/chibi-cast-meshy-2/emi-1/renders/face.png", "art/parts/chibi-cast-meshy-2/inputs/emi-a-101.png"],
+   "note": "Input emi-a-101, same settings. 30 credits. Matches: red-auburn hair, round brown glasses as a 3D frame, smile, charcoal blazer over a cream blouse. Doesn't: the hair is longer than a chin bob, her skin is paler than in the portrait, and the curvy figure isn't there. Rigged (5 credits); Mio's clips."},
+  {"id": "guard-1", "label": "4. guard-1", "image": "art/parts/chibi-cast-meshy-2/guard-1/renders/front.png", "images": ["art/parts/chibi-cast-meshy-2/guard-1/renders/l45.png", "art/parts/chibi-cast-meshy-2/guard-1/renders/back.png", "art/parts/chibi-cast-meshy-2/guard-1/renders/face.png", "art/parts/chibi-cast-meshy-2/inputs/guard-a-101.png"],
+   "note": "Input guard-a-101, same settings. 30 credits. Matches: bald, stern white brows, white moustache, thin silver glasses, navy uniform with a black belt. Doesn't: the moustache is thick and short where the portrait's is long and thin, and the glasses' arms stick out past the sides of his head. Rigged (5 credits); Eric's clips."},
+  {"id": "kuroda-1", "label": "5. kuroda-1 (Hamada)", "image": "art/parts/chibi-cast-meshy-2/kuroda-1/renders/front.png", "images": ["art/parts/chibi-cast-meshy-2/kuroda-1/renders/l45.png", "art/parts/chibi-cast-meshy-2/kuroda-1/renders/back.png", "art/parts/chibi-cast-meshy-2/kuroda-1/renders/face.png", "art/parts/chibi-cast-meshy-2/inputs/kuroda-b-101.png"],
+   "note": "Input kuroda-b-101, same settings. 30 credits. Matches: tired heavy-lidded eyes, worried brows, black hair grey at the temples, navy suit and tie, brown shoes. Doesn't: his face is round and full, not thin; his skin is lighter than the portrait's. Rigged (5 credits); Eric's clips."},
+  {"id": "aoi-1", "label": "6. aoi-1", "image": "art/parts/chibi-cast-meshy-2/aoi-1/renders/front.png", "images": ["art/parts/chibi-cast-meshy-2/aoi-1/renders/l45.png", "art/parts/chibi-cast-meshy-2/aoi-1/renders/back.png", "art/parts/chibi-cast-meshy-2/aoi-1/renders/face.png", "art/parts/chibi-cast-meshy-2/inputs/aoi-a-101.png"],
+   "note": "Input aoi-a-101, same settings. 30 credits. Matches: pink bob, teal underneath, purple eyes, grin, green varsity jacket with striped cuffs and the pink star. Doesn't: the pink is lighter than the portrait's magenta, and the dark roots sit like a band on top. Rigged (5 credits); Mio's clips."},
+  {"id": "rei-1", "label": "7. rei-1", "image": "art/parts/chibi-cast-meshy-2/rei-1/renders/front.png", "images": ["art/parts/chibi-cast-meshy-2/rei-1/renders/l45.png", "art/parts/chibi-cast-meshy-2/rei-1/renders/back.png", "art/parts/chibi-cast-meshy-2/rei-1/renders/face.png", "art/parts/chibi-cast-meshy-2/inputs/rei-b-101-flip.png"],
+   "note": "Input rei-b-101-flip, same settings. 30 credits. Matches: silver hair, high ponytail on her left, grey eyes, slight smile, pale suit over a black high-neck top. Doesn't: hair and suit are one flat pale grey (the portrait's hair is blue-silver); hidden all day on day 1, so only the line-up shows her. Rigged (5 credits); Mio's clips."}
+ ],
+ "links": [
+  {"label": "Turn all seven, play the idle and the shorter-step walk, side by side with round 1's Eric, Mio and Kuro (live 3D)", "href": "tools/characters/parts/viewer.html?cfg=/reviews/chibi-cast-meshy-2/viewer.json&a=mori-1&m=walk&c=eric-1"},
+  {"label": "Play it with everyone as chibis (?chibi=1; or Settings > Graphics > Chibi cast)", "href": "game3d/?chibi=1"},
+  {"label": "Credits spent: Meshy 245 (seven latest-model generations 210, seven rigs 35), balance about 840", "href": "reviews/chibi-cast-meshy-2/credits.json"},
+  {"label": "Every input picture's prompt, seed and settings", "href": "art/candidates/chibi-cast-meshy-2/prompts.json"}
+ ]
+}

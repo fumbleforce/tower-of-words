@@ -1,7 +1,7 @@
 // The chibi look's cost on the phone profile (393 x 851, DPR 2.75, touch, CPU 4x slower), with and without ?chibi=1:
 // per place, draw calls and triangles per frame, frame time over a few seconds, and the GPU memory the scene holds
 // (every texture's pixels with mipmaps, every geometry's buffers; estimated from the objects, as WebGL can't report it)
-// plus the three people's share of it.
+// plus the named people's share of it (Eric, Mio and the place's people).
 //   node game3d/tools/chibi-perf.mjs [q=0,1] [places=train,gate,forecourt,office,plaza]
 // BASE=.claude/worktrees/<name>/game3d measures a worktree. Prints a table; writes game3d/shots/chibi/perf.json.
 import fs from 'node:fs';
@@ -66,10 +66,12 @@ await withBrowserJob(
               for (const a of Object.values(geo.attributes)) s += a.array.byteLength;
               return s;
             };
-            const sum = (root) => {
+            // each texture and geometry once, however many people share it
+            const sum = (...roots) => {
               const tx = new Set(),
                 gs = new Set();
-              root.traverse((o) => {
+              for (const root of roots)
+                root.traverse((o) => {
                 if (o.geometry) gs.add(o.geometry);
                 for (const m of [].concat(o.material || []))
                   for (const v of Object.values(m)) if (v && v.isTexture) tx.add(v);
@@ -84,19 +86,15 @@ await withBrowserJob(
               }
               return { texMB: +(t / 1048576).toFixed(1), geoMB: +(gb / 1048576).toFixed(1), tris: Math.round(tri) };
             };
-            const people = [g.player, g.mioNpc, g.place.people?.kuro].filter((x) => x?.root);
-            const cast = people.map((x) => sum(x.root));
+            const people = [...new Set([g.player, g.mioNpc, ...Object.values(g.place.people || {})])].filter((x) => x?.root);
+            const cast = sum(...people.map((x) => x.root));
             return {
               ms50: +frames[60].toFixed(1),
               ms95: +frames[114].toFixed(1),
               calls: Math.round(calls / 120),
               tris: Math.round(tris / 120),
               scene: sum(g.place.scene),
-              cast: {
-                texMB: +cast.reduce((s, c) => s + c.texMB, 0).toFixed(1),
-                geoMB: +cast.reduce((s, c) => s + c.geoMB, 0).toFixed(1),
-                tris: cast.reduce((s, c) => s + c.tris, 0),
-              },
+              cast: { ...cast, n: people.length },
               heapMB: performance.memory ? +(performance.memory.usedJSHeapSize / 1048576).toFixed(0) : null,
               textures: g.renderer.info.memory.textures,
               geometries: g.renderer.info.memory.geometries,

@@ -1,10 +1,10 @@
 // Bake the game's clips onto the Meshy chibis (game3d/assets/characters/chibi-<id>/model.glb, made by chibi_game.py)
 // with the parts viewer's retarget (tools/characters/parts/retarget.js), as Review chibi-cast-meshy-1 showed them.
-// Eric takes his own game clips (walk, run, sit, the approved idle, the phone pose and his four gestures); Mio and
-// Kuro take Mio's. The legs keep only STEP of the walk and run swing, for the short chibi legs. Writes
+// Eric and the men take Eric's game clips (walk, run, sit, the approved idle, the phone pose and his four gestures);
+// Mio and the women take Mio's. The legs keep only STEP of the walk and run swing, for the short chibi legs. Writes
 // chibi-<id>/clips.json: { gait, clips: { name: AnimationClip JSON } }, gait being the walk and run speeds at which
 // the feet keep pace with the ground (the source's, scaled by the stride measured on both).
-// Usage: node tools/characters/chibi-bake.mjs   (files are served straight from this checkout)
+// Usage: node tools/characters/chibi-bake.mjs [id ...]   (all by default; files are served straight from this checkout)
 import fs from 'node:fs';
 import path from 'node:path';
 import { withBrowserJob } from '../lib/browser-job.mjs';
@@ -30,8 +30,13 @@ const SOURCES = {
     gait: { walkV: 0.47, runV: 0.77, runOff: 0.04 },
   },
 };
-export const CHIBI_HEIGHTS = { eric: 1.2, mio: 1.12, kuro: 1.12 };
-const TARGETS = { eric: 'eric', mio: 'mio', kuro: 'mio' };
+// the same standing heights as game3d/js/chibi.js
+export const CHIBI_HEIGHTS = { eric: 1.2, mio: 1.12, kuro: 1.12, mori: 1.09, kenji: 1.12, emi: 1.09, guard: 1.09 };
+Object.assign(CHIBI_HEIGHTS, { kuroda: 1.09, aoi: 1.09, rei: 1.09 });
+const ALL = { eric: 'eric', mio: 'mio', kuro: 'mio', mori: 'eric', kenji: 'eric', emi: 'mio', guard: 'eric' };
+Object.assign(ALL, { kuroda: 'eric', aoi: 'mio', rei: 'mio' });
+const pick = process.argv.slice(2);
+const TARGETS = Object.fromEntries(Object.entries(ALL).filter(([id]) => !pick.length || pick.includes(id)));
 const HOST = 'http://chibi.bake/';
 const MIME = { js: 'text/javascript', json: 'application/json', glb: 'model/gltf-binary', html: 'text/html' };
 

@@ -1,22 +1,25 @@
-// The Meshy chibis of Eric, Mio and Kuro (Review chibi-cast-meshy-1: eric-1, mio-3, kuro-1) as a switchable look.
-// ?chibi=1 (or ?chibi=0) decides for one visit; otherwise Settings > Graphics > Chibi cast, from the next load. When
-// on, the three get these bodies everywhere they appear; the approved models stay the default.
+// The Meshy chibis of the named cast (Review chibi-cast-meshy-1: Eric, Mio, Kuro; chibi-cast-meshy-2: the rest) as a
+// switchable look. ?chibi=1 (or ?chibi=0) decides for one visit; otherwise Settings > Graphics > Chibi cast, from the
+// next load. When on, they get these bodies everywhere they appear; the approved models stay the default.
 // Files in assets/characters/chibi-<id>/: model.glb and base.webp (tools/characters/chibi_game.py: about 20k
 // triangles and a 1024 px texture baked from the full model; -lo: 8k, for phones), and clips.json
 // (tools/characters/chibi-bake.mjs: the game's walk, run, idle, sit, phone pose and Eric's gestures carried over
 // onto Meshy's rig, the legs at 0.55 of the swing, half the walk's lean, and the gait speeds that go with them).
 import * as THREE from 'three';
-import { loadMeshy, loadEric, GESTURES } from './avatar.js';
+import { clone } from '../vendor/utils/SkeletonUtils.js';
+import { GLTFLoader } from '../vendor/loaders/GLTFLoader.js';
+import { meshyFrom, loadEric, GESTURES } from './avatar.js';
 import { loadMio, CDIR, V } from './mio.js';
 // settings.js needs a page; the unit tests import the cast in Node, where the look is off
 const S = typeof addEventListener === 'function' ? await import('./settings.js') : null;
 
 const flag = typeof location !== 'undefined' ? new URLSearchParams(location.search).get('chibi') : null;
 export const CHIBI_ON = flag != null ? flag !== '0' : !!S?.settings.chibi;
-// standing heights, the same as the bodies they stand in for
-const HEIGHT = { eric: 1.2, mio: 1.12, kuro: 1.12 };
+// standing heights, the same as the bodies they stand in for (the scenes scale them as they scale those)
+const HEIGHT = { eric: 1.2, mio: 1.12, kuro: 1.12, mori: 1.09, kenji: 1.12, emi: 1.09, guard: 1.09, kuroda: 1.09 };
+HEIGHT.aoi = HEIGHT.rei = 1.09;
 // people in cast.js that take their chibi through cast3d.js
-export const CHIBI_CAST = CHIBI_ON ? ['kuro'] : [];
+export const CHIBI_CAST = CHIBI_ON ? Object.keys(HEIGHT).filter((id) => id !== 'eric' && id !== 'mio') : [];
 
 // Jørgen, on the first in-game round: "Their heads are a little too big still". The head bone (and with it the hair,
 // glasses and face) is 15% smaller, scaled at its joint so the neck stays joined; the clips only turn it, so the size
@@ -38,28 +41,37 @@ function smallerHead(scene, gait) {
   return scene;
 }
 
-export async function loadChibi(id) {
+// One set of files per person, loaded once; every place that has them gets its own copy of the skeleton, sharing the
+// mesh, texture and clips (chibiFrom).
+const files = {};
+export function chibiFiles(id) {
+  if (files[id]) return files[id];
   const dir = CDIR + 'chibi-' + id + '/';
   const lo = S.isPhone() || S.qualityTier() === 'low' ? '-lo' : '';
-  const data = await fetch(dir + 'clips.json' + V()).then((r) => {
+  const got = (r) => {
     if (!r.ok) throw new Error(`chibi ${id}: ${r.status}`);
     return r.json();
-  });
-  const clip = (n) => THREE.AnimationClip.parse(data.clips[n]);
-  const packed = (load) =>
-    Promise.all([
-      load(dir + `model${lo}.glb` + V()).then((g) => ({
-        scene: smallerHead(g.scene, data.gait),
-        animations: [clip('walk')],
-      })),
-      { animations: [clip('run')] },
-      clip('idle'),
-      { animations: [clip('sit')] },
-      new THREE.TextureLoader().loadAsync(dir + `base${lo}.webp` + V()),
-      data.clips.phone || null,
-      ...GESTURES.map((g) => data.clips[g] || null),
-    ]);
-  const m = await loadMeshy('chibi-' + id, { height: HEIGHT[id], dir, packed, stride: data.gait });
+  };
+  return (files[id] = Promise.all([
+    fetch(dir + 'clips.json' + V()).then(got),
+    new GLTFLoader().loadAsync(dir + `model${lo}.glb` + V()),
+    new THREE.TextureLoader().loadAsync(dir + `base${lo}.webp` + V()),
+  ]).then(([data, gltf, tex]) => {
+    // the four motions parsed once; the phone pose and the gestures stay JSON, as meshyFrom takes them
+    const clips = { ...data.clips };
+    for (const n of ['walk', 'run', 'idle', 'sit']) clips[n] = THREE.AnimationClip.parse(data.clips[n]);
+    return { id, gait: data.gait, scene: gltf.scene, tex, clips };
+  }));
+}
+
+// a person from loaded files, at once
+export function chibiFrom(f) {
+  const gait = { ...f.gait },
+    c = f.clips;
+  const scene = smallerHead(clone(f.scene), gait);
+  const parts = [{ scene, animations: [c.walk] }, { animations: [c.run] }, c.idle, { animations: [c.sit] }, f.tex];
+  parts.push(c.phone || null, ...GESTURES.map((g) => c[g] || null));
+  const m = meshyFrom('chibi-' + f.id, parts, { height: HEIGHT[f.id], stride: gait });
   // The decimated surface folds over on itself in places, and culled back faces showed as specks of whatever is
   // behind. Both sides draw, lit by the full model's normals whichever side faces the camera.
   m.model.traverse((o) => {
@@ -78,6 +90,7 @@ export async function loadChibi(id) {
   m.chibi = true;
   return m;
 }
+export const loadChibi = (id) => chibiFiles(id).then(chibiFrom);
 
 const fallback = (load) => (e) => {
   console.warn('chibi failed, using the approved model', e);
@@ -98,7 +111,7 @@ function ensureRow() {
   const row = document.createElement('div');
   row.className = 'row';
   row.innerHTML =
-    '<span class="lbl" id="l-chibi">Chibi cast<small>Mio, Eric and Kuro as chibi figures, from the next time the game loads</small></span>' +
+    '<span class="lbl" id="l-chibi">Chibi cast<small>Eric, Mio and the people they meet as chibi figures, from the next time the game loads</small></span>' +
     '<button type="button" class="sw" role="switch" data-key="chibi" aria-labelledby="l-chibi"><i></i></button>';
   surf.after(row);
   const sw = row.querySelector('.sw');

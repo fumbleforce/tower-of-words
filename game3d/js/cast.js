@@ -8,7 +8,7 @@ import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.j
 import { toCreasedNormals } from 'three/addons/utils/BufferGeometryUtils.js';
 import { LOOK } from './look/flags.js';
 import { mug as detailMug } from './look/detail.js';
-import { meshy3 } from './cast3d.js';
+import { meshy3, CAST3D_IDS } from './cast3d.js';
 
 const charMat = new THREE.MeshStandardMaterial({ vertexColors: true, roughness: 0.78, metalness: 0 });
 charMat.userData.noLook = true; // people keep their flat colours (look/index.js)
@@ -226,8 +226,6 @@ export const PEOPLE = {
     return r;
   },
   kuro: () => {
-    const m3 = meshy3('kuro'); // her 3D chibi, when that look is on (chibi.js)
-    if (m3) return m3;
     // the receptionist: black hair in a high bun, black-framed glasses, receptionist blazer
     const r = chibi({
       headK: HK,
@@ -335,8 +333,6 @@ export const PEOPLE = {
     return r;
   },
   mori: () => {
-    const m3 = meshy3('mori');
-    if (m3) return m3;
     // portrait: grey hair, no glasses, brown-grey suit, navy tie
     const r = chibi({
       headK: HK,
@@ -416,6 +412,10 @@ export const PEOPLE = {
     return r;
   },
 };
+
+// the 3D cast and the chibis (cast3d.js) stand in for these people when loaded
+const own = { ...PEOPLE };
+for (const id of CAST3D_IDS) PEOPLE[id] = (...a) => meshy3(id) ?? own[id](...a);
 
 // idle life: breathing and small head turns
 export function idle(r, t) {

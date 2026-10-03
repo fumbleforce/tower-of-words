@@ -35,7 +35,7 @@ export function shotengaiParty(game, { w, K }) {
 
   // the two from B2 with bodies here (Mio is the shared one)
   const mk = (r) => {
-    if (!r.meshy) r.root.scale.multiplyScalar(K);
+    if (!r.meshy || r.chibi) r.root.scale.multiplyScalar(K); // chibis stand at the body they replace
     r.root.visible = false;
     w.root.add(r.root);
     r.blob = blob(0.55, 0.38);
