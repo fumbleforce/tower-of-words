@@ -394,6 +394,10 @@ Three alleys, one bay wide and five bays apart, cut through the south row betwee
 
 In the morning the sun comes from the east-south-east behind the camera's left shoulder; after work it is low in the west, ahead down the street, and the shopfronts' glass, the signs, the lanterns with pools of light under them, the promenade's lamps and the izakaya's door light are lit. The shops stay shut. It also loads directly with `?place=shotengai`, at the shop walk. Nobody is here yet.
 
+### Day-2 party plan (not built)
+
+The [day-2 outline](../../notes/day2-outline.md) proposes B2's welcome food on the promenade. Mori orders rice balls and egg sandwiches from the existing canteen earlier in the day; Kenji helps him collect the takeaway before meeting Eric. This requires no arcade shop to open and no shopping task for Eric. At one sea-facing bench, Mori and Eric sit, with Mio and Kenji standing beside its ends, all in the same conversation space. Seats, actor spots and phone framing still need to be built and checked; the current “Seats: None” below describes the shipped place.
+
 ### Things
 
 | Id | Label | What it is |
