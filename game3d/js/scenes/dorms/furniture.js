@@ -1,115 +1,11 @@
-// The room's furniture: the desk and its lamp in the back-left corner, the bed along the left wall, the oshiire
-// closet in the back-right corner, a folding table on a rug with his dinner from the konbini, and his boxes from
-// home stacked along the right wall, one of them open. Each returns where its thing is and blocks the nav grid.
-import * as THREE from 'three';
+// The room's furniture (the desk is in desk.js): the bed along the left wall, the oshiire closet in the back-right
+// corner, a folding table on a rug with his dinner from the konbini, and his boxes from home stacked along the right
+// wall, one of them open. Each returns where its thing is and blocks the nav grid.
 import { X0, X1, BACK, PART, H, C } from './layout.js';
 
 const BOX = '#b09474',
   BOX_IN = '#9c805f',
   TAPE = '#c9b48c';
-
-export function desk(kit, nav) {
-  // a grey steel desk against the left wall, a drawer pedestal, the lamp switched on over a closed laptop
-  const x0 = X0 + 0.02,
-    x1 = -0.62,
-    z0 = BACK + 0.06,
-    z1 = -1.98,
-    top = 0.43,
-    cx = (x0 + x1) / 2,
-    cz = (z0 + z1) / 2;
-  kit.box('#a4a8ae', x1 - x0, 0.03, z1 - z0, cx, top - 0.03, cz, {
-    r: 0.006,
-    surf: 'laminate',
-  });
-  kit.boxes(
-    '#848a93',
-    [
-      [x1 - x0 - 0.04, top - 0.04, 0.22, cx, 0, z0 + 0.13],
-      [0.03, top - 0.03, 0.03, x1 - 0.03, 0, z1 - 0.03],
-      [x1 - x0 - 0.06, 0.03, 0.03, cx, 0.05, z1 - 0.03],
-    ],
-    { surf: 'metal' },
-  );
-  kit.boxes('#c9cdd2', [
-    [0.012, 0.012, 0.1, x1 - 0.015, 0.33, z0 + 0.13],
-    [0.012, 0.012, 0.1, x1 - 0.015, 0.18, z0 + 0.13],
-  ]);
-  // laptop, closed; the company handbook and forms from today; a mug
-  kit.box('#3a3f48', 0.2, 0.018, 0.26, cx + 0.02, top, cz + 0.07, {
-    r: 0.006,
-    surf: 'plastic',
-  });
-  kit.box('#f2f0ea', 0.15, 0.02, 0.2, cx - 0.02, top, cz - 0.19, {
-    ry: 0.2,
-    surf: 'paper',
-  });
-  kit.box('#4a6490', 0.13, 0.025, 0.18, cx, top + 0.02, cz - 0.19, {
-    ry: -0.1,
-    surf: 'binder',
-  });
-  kit.cyl('#e9e6df', 0.03, 0.028, 0.07, x1 - 0.08, top, cz + 0.28, {
-    surf: 'ceramic',
-  });
-  // the lamp: a round foot in the back corner, a post, an arm reaching out over the desk, the shade hanging from it
-  const lx = x0 + 0.07,
-    lz = z0 + 0.07,
-    ex = cx + 0.04,
-    ez = cz - 0.02,
-    py = top + 0.34,
-    len = Math.hypot(ex - lx, ez - lz);
-  kit.cyl('#2f343c', 0.05, 0.055, 0.02, lx, top, lz, { seg: 14 });
-  kit.cyl('#2f343c', 0.011, 0.011, py - top, lx, top, lz, { seg: 6 });
-  kit.box('#2f343c', len, 0.018, 0.018, (lx + ex) / 2, py - 0.01, (lz + ez) / 2, {
-    ry: Math.atan2(-(ez - lz), ex - lx),
-  });
-  kit.cyl('#2f343c', 0.028, 0.075, 0.09, ex, py - 0.1, ez, { seg: 14 });
-  kit.cyl('#fff1d6', 0.07, 0.07, 0.004, ex, py - 0.104, ez, {
-    seg: 14,
-    cast: false,
-    opts: { emissive: '#ffd9a0', emissiveIntensity: 2.2 },
-  });
-  // a wall shelf over the desk, nearly empty: a few books, a small plant from the office
-  const sy = 0.92;
-  kit.box('#c3c6ca', 0.17, 0.025, 0.62, X0 + 0.085, sy, cz, { r: 0.005, surf: 'laminate' });
-  kit.boxes('#8b919b', [
-    [0.1, 0.06, 0.015, X0 + 0.05, sy - 0.06, cz - 0.26],
-    [0.1, 0.06, 0.015, X0 + 0.05, sy - 0.06, cz + 0.26],
-  ]);
-  kit.box('#4a6490', 0.12, 0.17, 0.03, X0 + 0.08, sy + 0.025, cz - 0.22, { surf: 'binder' });
-  kit.box('#c96a5a', 0.11, 0.15, 0.025, X0 + 0.08, sy + 0.025, cz - 0.19, { surf: 'binder' });
-  kit.box('#e9e6df', 0.11, 0.16, 0.03, X0 + 0.08, sy + 0.025, cz - 0.155, { rx: 0.25, surf: 'binder' });
-  kit.cyl('#b3aea5', 0.035, 0.028, 0.06, X0 + 0.08, sy + 0.025, cz + 0.16, { seg: 10, surf: 'ceramic' });
-  kit.cyl('#577650', 0.01, 0.045, 0.08, X0 + 0.08, sy + 0.085, cz + 0.16, { seg: 7 });
-  // the chair, pulled out, facing the desk
-  const chair = { x: -0.44, z: cz - 0.02 };
-  kit.boxes(
-    '#6f747c',
-    [
-      [0.025, 0.24, 0.025, chair.x - 0.1, 0, chair.z - 0.1],
-      [0.025, 0.24, 0.025, chair.x + 0.1, 0, chair.z - 0.1],
-      [0.025, 0.24, 0.025, chair.x - 0.1, 0, chair.z + 0.1],
-      [0.025, 0.24, 0.025, chair.x + 0.1, 0, chair.z + 0.1],
-      [0.025, 0.28, 0.025, chair.x + 0.11, 0.24, chair.z - 0.1],
-      [0.025, 0.28, 0.025, chair.x + 0.11, 0.24, chair.z + 0.1],
-    ],
-    { surf: 'metal' },
-  );
-  kit.box('#2f3a5c', 0.24, 0.04, 0.24, chair.x, 0.24, chair.z, {
-    r: 0.012,
-    surf: 'fabric',
-  });
-  kit.box('#2f3a5c', 0.03, 0.13, 0.23, chair.x + 0.115, 0.38, chair.z, {
-    r: 0.012,
-    surf: 'fabric',
-  });
-  nav.block(X0, x1 + 0.02, z0 - 0.1, z1);
-  nav.block(chair.x - 0.13, chair.x + 0.13, chair.z - 0.13, chair.z + 0.13);
-  // where the lamp's light comes from
-  return {
-    lamp: new THREE.Vector3(ex, py - 0.14, ez),
-    desk: { x: ex, z: ez, top },
-  };
-}
 
 export function bed(kit, nav) {
   // a single bed along the left wall, head to the back: a white steel frame, the duvet thrown back, his work bag

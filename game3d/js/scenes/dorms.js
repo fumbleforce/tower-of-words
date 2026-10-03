@@ -1,7 +1,7 @@
 // Eric's floor, 2F of his dorm block, and his room: the worst one, its window facing the next block's bare end wall a
 // couple of metres out (docs/game/places.md). The camera looks north, down onto the floor with its ceiling cut away:
 // the open corridor from the stairs at its east end (dorms/stairs.js) past the neighbours' doors to his, and behind
-// it the flats cut open, his in the middle: the tatami room at the back (desk and lamp, bed, closet, a table with
+// it the flats cut open, his in the middle: the tatami room at the back (the desk with the company PC, bed, closet, a table with
 // his dinner, his boxes from home), the entry strip in front (kitchenette, unit bath, genkan). Over the corridor's
 // parapet, the roofs on the court below (dorms/below.js). The plan is in scenes/dorms/layout.js; the parts in
 // scenes/dorms/. Evening only: dim cool dusk, the room's own warm lights, the cool corridor and stair lights.
@@ -34,11 +34,12 @@ import { tallFront } from './dorms/doors.js';
 import { stairs } from './dorms/stairs.js';
 import { below } from './dorms/below.js';
 import * as F from './dorms/furniture.js';
+import { desk } from './dorms/desk.js';
 import { kitchenette, bath, genkan, slidingDoor } from './dorms/entry.js';
 
 const BG = '#1b1f26';
 
-function lights(scene, root, { lamp, desk, kitchen }) {
+function lights(scene, root, { lamp, desk, screen, seat, kitchen }) {
   // dusk: a dim cool sky, a low cool key for the shadows
   scene.add(new THREE.HemisphereLight('#8e9cb6', '#3a3f4b', 1.05));
   const sun = new THREE.DirectionalLight('#b8c6e0', 0.55);
@@ -66,7 +67,9 @@ function lights(scene, root, { lamp, desk, kitchen }) {
   desklamp.position.copy(lamp);
   root.add(desklamp);
   root.add(lightPool(desk.x, desk.z, 0.19, { y: desk.top + 0.003, k: 0.4 }));
-  root.add(lightPool(-0.45, desk.z, 0.45, { k: 0.1 }));
+  root.add(lightPool(seat.x + 0.1, seat.z, 0.45, { k: 0.1 }));
+  // the screen's cool glow on the desk in front of it (no light of its own)
+  root.add(lightPool(screen.x, screen.z, 0.2, { color: '#bcd8f0', y: desk.top + 0.002, k: 0.28, sx: 1.2 }));
   // the strip light under the kitchen hood
   const hood = new THREE.PointLight('#ffecd0', 0.7, 1.2, 1.6);
   hood.position.copy(kitchen).add(new THREE.Vector3(0.05, -0.1, 0));
@@ -119,12 +122,17 @@ export function buildDorms() {
   root.add(front);
   stairs(kit, root);
   below(root);
-  // the three things Eric looks at get their own groups, for their outlines
-  const obj = { window: new THREE.Group(), bed: new THREE.Group(), boxes: new THREE.Group() };
-  const own = { window: new Kit(), bed: new Kit(), boxes: new Kit() };
+  // the four things Eric looks at get their own groups, for their outlines
+  const obj = {
+    window: new THREE.Group(),
+    bed: new THREE.Group(),
+    boxes: new THREE.Group(),
+    computer: new THREE.Group(),
+  };
+  const own = { window: new Kit(), bed: new Kit(), boxes: new Kit(), computer: new Kit() };
   window_(kit, own.window, obj.window);
   outside(root, kit);
-  const d = F.desk(kit, nav);
+  const d = desk(kit, own.computer, obj.computer, nav);
   const bedAt = F.bed(own.bed, nav);
   F.closet(kit, nav);
   F.dinner(kit, nav);
@@ -139,7 +147,7 @@ export function buildDorms() {
   nav.block(X0, -0.4, PART - 0.06, PART + 0.06);
   nav.block(0.34, X1, PART - 0.06, PART + 0.06);
   kit.flush(root);
-  const sun = lights(scene, root, { lamp: d.lamp, desk: d.desk, kitchen });
+  const sun = lights(scene, root, { ...d, kitchen });
 
   const win = [(WIN[0] + WIN[1]) / 2, BACK];
   const entry = [-0.1, -0.2]; // just through the doorway, clear of the things' spots
@@ -166,6 +174,8 @@ export function buildDorms() {
     windowY: WIN[3], // the look marker over the frame's head, clear of the view out
     bed: { ...bedAt, spot: [-0.2, bedAt.z - 0.12] },
     boxes: { ...boxAt, spot: [0.3, -1.12] },
+    computer: { ...d.monitor, spot: d.seat.out }, // the desk's computer, looked at from beside the chair
+    deskChair: d.seat, // the desk chair: a seat facing the screen, got onto from the floor beside it (seat.out)
     arrive: { at: [(DOOR[0] + DOOR[1]) / 2, 0.2], zoom: 1.2 },
     obj,
     door, // the front door's leaf: rotation.y below 0 swings it out onto the corridor

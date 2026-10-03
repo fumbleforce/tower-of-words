@@ -27,7 +27,7 @@ export function goalAt(game, posOf) {
       return;
     }
     const s = typeof at === 'string' ? P.seats?.[at] : null;
-    const p = s ? [s.x, s.z + (s.ry ? -0.55 : 0.55)] : posOf(at);
+    const p = s ? s.out || [s.x, s.z + (s.ry ? -0.55 : 0.55)] : posOf(at);
     if (!p) return;
     const y = (P.floorY || 0) + (s ? (s.top || 0.3) + 0.35 : 0.5);
     pin = game.markers.add({

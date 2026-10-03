@@ -138,6 +138,29 @@
     ]
   },
   {
+    "id_": "prop/dorms/computer",
+    "kind": "prop",
+    "name": "Computer",
+    "paths": [
+      "game3d/js/places/dorms.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "dorms.js things.computer",
+    "place": "dorms",
+    "used": [
+      "Eric's dorm room: tap target 'Computer'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "dorms"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
     "id_": "prop/dorms/door_203",
     "kind": "prop",
     "name": "Room 203",
