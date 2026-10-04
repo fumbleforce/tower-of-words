@@ -23,16 +23,16 @@ export default {
       {
         title: 'ありがとう (arigatou, thank you)',
         lines: [
-          { en: "To whoever folded my washing at the coin laundry: thank you. The shirts were still damp, so I've hung them up again. You fold much better than I do." },
-          { en: 'Reply: Sorry. The towels were dry.' },
+          { en: "To whoever folded my washing at the coin laundry: thank you. I got held up at work and thought I'd find it dumped on the floor." },
+          { en: 'Reply: I needed the dryer. Hope I matched the socks right.' },
         ],
         color: 'white',
       },
       {
         title: 'カラオケ (karaoke)',
         lines: [
-          { en: 'Does anyone know the song with the woman on the ferry in the video? It starts quietly, then she gets angry. Karaoke box, room 3.' },
-          { en: 'Reply: Room 3 shows the ferry video for every song.' },
+          { en: "Did anyone take the wrong black umbrella home from karaoke last night? Mine has a bent handle. I've left yours at the front desk." },
+          { en: 'Reply: Sorry! Yours is back there now too.' },
         ],
         color: 'blue',
       },
@@ -46,7 +46,7 @@ export default {
       },
       {
         title: 'ラジオ体操 (rajio taisou, radio exercises)',
-        en: 'The bakery staff leave after the first stretch to start the ovens. They are not skipping. Please stop crossing their names off the sheet.',
+        en: 'We leave radio exercises early to take the bread out of the ovens. Please stop marking us absent. From the bakery staff.',
         color: 'green',
       },
     ],
