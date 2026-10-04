@@ -142,7 +142,7 @@ test('save loading rejects corrupt and unsupported versions; disabled storage st
     assert.doesNotThrow(() => S.clearSave());
   } finally { globalThis.localStorage = original; }
 });
-test('three real menu slots retain separate saves and thumbnails, and loading stages Continue', async () => {
+test('real menu slots retain separate saves and thumbnails, and loading stages Continue', async () => {
   seed();
   const reloads = [], originalTimeout = globalThis.setTimeout, originalReload = location.reload;
   let reloadCount = 0;
@@ -150,23 +150,23 @@ test('three real menu slots retain separate saves and thumbnails, and loading st
   globalThis.setTimeout = (fn, delay) => { if (delay === 0) fn(); else reloads.push({ fn, delay }); return 0; };
   globalThis.requestAnimationFrame = fn => fn();
   try {
-    for (const i of [1, 2, 3]) {
-      S.sim.yen = 100 * i;
-      assert.equal(await menu.saveTo(i), true);
-      const slot = menu.slotInfo(i);
-      assert.equal(slot.data.yen, 100 * i);
-      assert.equal(slot.thumb, 'data:image/jpeg;base64,fixture');
+    for (const i of [1, 2, 3, 12, 'quick']) {
+      S.sim.yen = 100 * (i === 'quick' ? 7 : i);
+      assert.equal(await menu.saving.saveTo(i), true);
+      const slot = menu.saving.store.info(i);
+      assert.equal(slot.data.yen, 100 * (i === 'quick' ? 7 : i));
+      assert.equal(await menu.saving.store.thumb(i), 'data:image/jpeg;base64,fixture');
       assert.equal(slot.place, 'office');
       assert.equal(slot.period, 'lunch');
       assert.equal(slot.date, 'Thu 1 Oct');
       assert.ok(slot.at > 0);
     }
-    assert.equal(menu.slotInfo(1).data.yen, 100);
-    assert.equal(menu.slotInfo(2).data.yen, 200);
-    assert.equal(menu.slotInfo(3).data.yen, 300);
-    menu.loadInto(menu.slotInfo(2));
+    assert.equal(menu.saving.store.info(1).data.yen, 100);
+    assert.equal(menu.saving.store.info(2).data.yen, 200);
+    assert.equal(menu.saving.store.info(3).data.yen, 300);
+    await menu.saving.loadInto(menu.saving.store.info(2));
     assert.equal(S.loadSave().yen, 200);
-    assert.equal(menu.autosaveInfo().thumb, 'data:image/jpeg;base64,fixture');
+    assert.equal(await menu.saving.store.thumb('auto'), 'data:image/jpeg;base64,fixture');
     assert.equal(sessionStorage.getItem('amakawa-continue'), '1');
     assert.equal(classes.has('reloading'), true);
     assert.equal(reloads.at(-1).delay, 250);
@@ -174,7 +174,7 @@ test('three real menu slots retain separate saves and thumbnails, and loading st
     assert.equal(reloadCount, 1);
     S.clearSave();
     assert.equal(S.loadSave(), null);
-    assert.equal(menu.slotInfo(1).data.yen, 100, 'clearing autosave preserves manual slots');
+    assert.equal(menu.saving.store.info(1).data.yen, 100, 'clearing autosave preserves manual slots');
   } finally { globalThis.setTimeout = originalTimeout; location.reload = originalReload; delete globalThis.requestAnimationFrame; }
 });
 test('restored schedule applies its real instant placement, seating and hide operations', () => {
@@ -201,7 +201,7 @@ test('autosave at the title continues directly; manual slot reload consumes its 
   globalThis.requestAnimationFrame = () => 0;
   try {
     classes.add('at-title');
-    menu.loadInto(menu.autosaveInfo());
+    menu.saving.loadInto(menu.saving.store.info('auto'));
     assert.equal(clicks, 1);
     assert.equal(sessionStorage.getItem('amakawa-continue'), null);
     assert.equal(classes.has('reloading'), false);
@@ -267,4 +267,31 @@ test('save retains pending travel, destination opening and the completed-day sta
   assert.equal(game.ended, false);
   assert.equal(game.transition, null);
   assert.equal(game.pendingStart, null);
+});
+
+test('quick save keeps the game, progress after it counts as unsaved, and quick load restores it exactly', async () => {
+  seed();
+  const originalTimeout = globalThis.setTimeout, originalReload = location.reload;
+  location.reload = () => {};
+  globalThis.setTimeout = (fn, delay) => { if (delay === 0) fn(); return 0; };
+  globalThis.requestAnimationFrame = fn => fn();
+  try {
+    S.save(game);
+    const before = S.loadSave();
+    assert.equal(await menu.saving.saveTo('quick'), true);
+    assert.equal(menu.saving.unsaved(), false, 'nothing since the quick save');
+    assert.equal(S.buy(game, 'melon'), true);
+    flags.after_quick = true;
+    assert.equal(menu.saving.unsaved(), true, 'a purchase and a flag after it are unsaved progress');
+    assert.equal(await menu.saving.loadInto(menu.saving.store.info('quick')), true);
+    assert.equal(game.saveEnabled, false, 'nothing in play writes over the loaded save before the reload');
+    const loaded = S.loadSave();
+    assert.deepEqual(loaded, before);
+    assert.equal(sessionStorage.getItem('amakawa-continue'), '1');
+    reset();
+    S.restore(game, loaded);
+    assert.equal(S.sim.yen, before.yen);
+    assert.deepEqual(S.sim.inv, before.inv);
+    assert.equal(flags.after_quick, undefined);
+  } finally { globalThis.setTimeout = originalTimeout; location.reload = originalReload; delete globalThis.requestAnimationFrame; }
 });

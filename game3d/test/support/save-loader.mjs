@@ -20,7 +20,7 @@ export async function load(url, context, next) {
   const result = await next(url, context);
   if (url.endsWith('/game3d/js/menu.js')) {
     // Expose existing operations only in the test loader; do not copy their bodies.
-    return { ...result, source: String(result.source) + '\nexport { saveTo, loadInto, autosaveInfo, slotInfo, onTitleShow };\n' };
+    return { ...result, source: String(result.source) + '\nexport { saving, onTitleShow };\n' };
   }
   return result;
 }

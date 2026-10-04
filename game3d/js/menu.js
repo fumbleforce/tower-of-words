@@ -1,5 +1,5 @@
 // The product shell around the day: the boot loader, the title (a posed shot of the train from outside, then a
-// camera flight into the car on Start), settings, the pause menu, three save slots with thumbnails, and the
+// camera flight into the car on Start), settings, the pause menu (with quick save and load; the saves screen is saves/), and the
 // loading chip between places. Talks to the game through window.__game.
 //
 // Hooks it expects from main.js (see notes/production-requests.md):
@@ -12,12 +12,15 @@
 import * as THREE from 'three';
 import { ui, sfx, unlockAudio, pauseAudio } from './ui.js';
 import { settings } from './settings.js';
-import { sim, PERIOD_NAMES, save as simSave } from './sim.js';
+import { sim, PERIOD_NAMES } from './sim.js';
 import { startOnboarding, resetOnboarding } from './onboard.js';
 import { PLACE_NAMES } from './places/definitions.js';
 import { installGoalArrow } from './ui/goal-arrow.js';
 import { addDayTwo } from './ui/title-day2.js';
 import { settingsView } from './ui/settings-view.js';
+import { createSaving, kv, store as slots } from './saves/actions.js';
+import { savesView } from './saves/view.js';
+import { KEYS, slotKey } from './saves/store.js';
 
 const Q = new URLSearchParams(location.search);
 const TEST = Q.get('test') === 'fast',
@@ -31,27 +34,6 @@ const el = (tag, cls, html) => {
   return e;
 };
 const game = () => window.__game;
-const SAVE_KEY = 'amakawa-day1-save',
-  AUTO_META = 'amakawa-auto-meta',
-  SLOT = (i) => `amakawa-slot-${i}`,
-  CONTINUE_FLAG = 'amakawa-continue';
-const store = {
-  get(k) {
-    try {
-      return JSON.parse(localStorage.getItem(k) || 'null');
-    } catch {
-      return null;
-    }
-  },
-  set(k, v) {
-    try {
-      localStorage.setItem(k, JSON.stringify(v));
-      return true;
-    } catch {
-      return false;
-    }
-  },
-};
 const shell = (window.__shell = { photos: {}, PLACE_NAMES });
 
 // ---------- thumbnails: a frame of the world with no UI on it ----------
@@ -88,17 +70,6 @@ function grab(w = 320, aspect = 1.6) {
 shell.grab = grab;
 
 // ---------- helpers ----------
-const fmtTime = (t) => {
-  if (!t) return '';
-  const d = new Date(t),
-    now = new Date();
-  const hm = d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-  if (d.toDateString() === now.toDateString()) return `Today ${hm}`;
-  const y = new Date(now);
-  y.setDate(now.getDate() - 1);
-  if (d.toDateString() === y.toDateString()) return `Yesterday ${hm}`;
-  return `${d.toLocaleDateString([], { day: 'numeric', month: 'short' })} ${hm}`;
-};
 const phone = () => document.body.classList.contains('phone');
 function focusables(root) {
   return [...root.querySelectorAll('button:not([disabled]):not([tabindex="-1"]), input, [tabindex="0"]')].filter(
@@ -284,28 +255,6 @@ shell._flightAt = (k) => {
   cam.update = () => {};
 };
 
-function autosaveInfo() {
-  const d = store.get(SAVE_KEY);
-  if (!d || !d.place) return null;
-  const m = store.get(AUTO_META) || {};
-  return {
-    kind: 'auto',
-    data: d,
-    place: d.place,
-    period: d.period,
-    date: m.date || sim.date,
-    at: m.at,
-    thumb: m.thumb,
-  };
-}
-function slotInfo(i) {
-  const s = store.get(SLOT(i));
-  return s && s.data ? { kind: 'slot', i, ...s } : null;
-}
-function anySave() {
-  return !!(autosaveInfo() || [1, 2, 3].some(slotInfo));
-}
-
 function buildTitle() {
   const t = $('#title');
   if (!t || t.dataset.shell) return t;
@@ -325,8 +274,8 @@ function buildTitle() {
   inner.querySelector('.keys')?.remove();
   inner.append(menu);
   addDayTwo(menu, ms, {
-    inProgress: () => !!autosaveInfo() && !autosaveInfo().data.ended,
-    keys: { SAVE_KEY, AUTO_META, CONTINUE_FLAG },
+    inProgress: () => !!slots.info('auto') && !slots.info('auto').data.ended,
+    keys: { SAVE_KEY: KEYS.SAVE, AUTO_META: KEYS.AUTO_META, CONTINUE_FLAG: KEYS.CONTINUE },
   });
   t.append(cont);
   go.innerHTML = '<span class="l">Start</span>';
@@ -354,8 +303,7 @@ function refreshTitle() {
   const t = $('#title');
   if (!t) return;
   const mc = t.querySelector('.mcont');
-  const a = autosaveInfo();
-  const latest = [a, ...[1, 2, 3].map(slotInfo)].filter(Boolean).sort((x, y) => (y.at || 0) - (x.at || 0))[0];
+  const latest = slots.latest();
   mc.hidden = !latest;
   if (latest)
     mc.querySelector('.s').textContent =
@@ -377,8 +325,8 @@ function onTitleShow() {
     }),
   );
   // a save picked on the last visit's title (a reload carries the choice): continue straight into it
-  if (sessionStorage.getItem(CONTINUE_FLAG)) {
-    sessionStorage.removeItem(CONTINUE_FLAG);
+  if (sessionStorage.getItem(KEYS.CONTINUE)) {
+    sessionStorage.removeItem(KEYS.CONTINUE);
     $('#title .cont').click();
   }
 }
@@ -395,154 +343,20 @@ const settingsPanel = settingsView({ openLayer, closeLayer, trap });
 const openSettings = settingsPanel.open;
 shell.openSettings = openSettings;
 
-// ---------- saves ----------
-function slotCard(info, i, mode) {
-  const b = el('button', 'slot' + (info ? '' : ' empty'));
-  b.type = 'button';
-  const label = info ? (info.kind === 'auto' ? 'Autosave' : `Slot ${i}`) : `Slot ${i}`;
-  b.innerHTML = `<span class="thumb">${info && info.thumb ? `<img alt="" src="${info.thumb}">` : '<span class="blank"></span>'}</span>
-    <span class="meta"><span class="nm">${label}</span>${info ? `<span class="pl">${PLACE_NAMES[info.place] || info.place}</span><span class="tm">${[info.date, PERIOD_NAMES[info.period]].filter(Boolean).join(' · ')}</span><span class="at">${info.at ? 'Saved ' + fmtTime(info.at) : ''}</span>` : `<span class="pl dim">${mode === 'save' ? 'Empty. Save here' : 'Empty'}</span>`}</span>`;
-  b.setAttribute(
-    'aria-label',
-    info
-      ? `${label}: ${PLACE_NAMES[info.place] || info.place}, ${PERIOD_NAMES[info.period] || ''}${info.at ? ', saved ' + fmtTime(info.at) : ''}`
-      : `${label}, empty`,
-  );
-  return b;
-}
-function buildSaves() {
-  let s = $('#saves');
-  if (s) return s;
-  s = el(
-    'div',
-    'layer sheet',
-    `<div class="scrim" data-close></div>
-    <section class="pane wide" role="dialog" aria-modal="true" aria-labelledby="savesTitle">
-      <header><h2 id="savesTitle"></h2><button type="button" class="x" data-close aria-label="Close"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button></header>
-      <div class="slots mlist"></div>
-      <p class="note" aria-live="polite"></p>
-    </section>`,
-  );
-  s.id = 'saves';
-  s.hidden = true;
-  document.body.appendChild(s);
-  s.querySelectorAll('[data-close]').forEach((b) => {
-    b.onclick = () => closeLayer(s);
-  });
-  s.addEventListener('keydown', (e) => {
-    trap(s, e);
-    e.stopPropagation();
-  });
-  return s;
-}
-let pendingThumb = null;
-function renderSaves(mode) {
-  const s = buildSaves();
-  s.dataset.mode = mode;
-  s.querySelector('h2').textContent = mode === 'save' ? 'Save' : 'Continue';
-  const list = s.querySelector('.slots');
-  list.innerHTML = '';
-  const note = s.querySelector('.note');
-  note.textContent = '';
-  if (mode === 'load') {
-    const a = autosaveInfo();
-    if (a) {
-      const c = slotCard(a, 0, mode);
-      c.onclick = () => loadInto(a);
-      list.appendChild(c);
-    }
-  }
-  for (const i of [1, 2, 3]) {
-    const info = slotInfo(i);
-    const c = slotCard(info, i, mode);
-    if (mode === 'load') {
-      if (!info) continue;
-      c.onclick = () => loadInto(info);
-    } else
-      c.onclick = () => {
-        if (info && !c.classList.contains('confirm')) {
-          list.querySelectorAll('.confirm').forEach((x) => x.classList.remove('confirm'));
-          c.classList.add('confirm');
-          note.textContent = `Slot ${i} has a save. Press it again to replace it.`;
-          return;
-        }
-        saveTo(i).then((ok) => {
-          note.textContent = ok
-            ? `Saved to slot ${i}.`
-            : "Couldn't save: this browser isn't keeping data for the game.";
-          if (ok) {
-            sfx('ok');
-            renderSaves('save');
-            s.querySelector('.note').textContent = `Saved to slot ${i}.`;
-            s.querySelectorAll('.slot')[i - 1]?.focus();
-          }
-        });
-      };
-    list.appendChild(c);
-  }
-  const first = list.querySelector('.slot:not([disabled])');
-  list.querySelectorAll('[data-first]').forEach((x) => delete x.dataset.first);
-  if (first) first.dataset.first = '';
-  return s;
-}
-function openSaves(mode) {
-  const s = renderSaves(mode);
-  openLayer(s, () => closeLayer(s));
-}
-async function saveTo(i) {
-  const g = game();
-  if (!g || !g.place || g.runner?.recoveryError) return false;
-  simSave(g);
-  const data = store.get(SAVE_KEY);
-  if (!data) return false;
-  const thumb = pendingThumb || (await grab());
-  return store.set(SLOT(i), { data, thumb, place: data.place, period: data.period, date: sim.date, at: Date.now() });
-}
-// loading a save: it becomes the current save, and the page restarts into it (the title's Continue does the rest)
-function loadInto(info) {
-  sfx('tap');
-  if (info.kind === 'slot') {
-    store.set(SAVE_KEY, info.data);
-    store.set(AUTO_META, { at: info.at, thumb: info.thumb, date: info.date });
-  }
-  const t = $('#title');
-  if (
-    info.kind === 'auto' &&
-    t &&
-    !t.hidden &&
-    t.querySelector('.cont') &&
-    document.body.classList.contains('at-title')
-  ) {
-    // the autosave is what main.js already read: continue without a reload
-    layers.slice().forEach((l) => closeLayer(l.el));
-    t.querySelector('.cont').click();
-    return;
-  }
-  try {
-    sessionStorage.setItem(CONTINUE_FLAG, '1');
-  } catch {
-    /* */
-  }
-  document.body.classList.add('reloading');
-  setTimeout(() => location.reload(), 250);
-}
-
-// keep a note of when the autosave last changed, with a thumbnail, for the Continue card
-let lastAuto = null;
-setInterval(async () => {
-  const g = game();
-  if (!g || !g.place || document.body.classList.contains('at-title') || SHELL) return;
-  let raw = null;
-  try {
-    raw = localStorage.getItem(SAVE_KEY);
-  } catch {
-    return;
-  }
-  if (!raw || raw === lastAuto) return;
-  lastAuto = raw;
-  const thumb = await grab();
-  store.set(AUTO_META, { at: Date.now(), thumb, date: sim.date });
-}, 2500);
+// ---------- saves (saves/actions.js: saving and loading; saves/view.js: the screen) ----------
+let pendingThumb = null; // a frame taken as the pause menu opens, before it covers the world
+const saving = createSaving({ game, grab, openLayer, closeLayer, setPaused: (on) => setPaused(on) });
+const savesPanel = savesView({
+  saving,
+  openLayer,
+  closeLayer,
+  trap,
+  thumbNow: async () => pendingThumb || (await grab()),
+});
+const openSaves = (mode) => savesPanel.open(mode);
+shell.saving = saving;
+shell.closeLayers = () => layers.slice().forEach((l) => closeLayer(l.el));
+saving.noteAutosave();
 
 // ---------- pause ----------
 function buildPause() {
@@ -557,6 +371,8 @@ function buildPause() {
       <p class="where"></p>
       <nav class="mlist pmenu">
         <button type="button" class="resume primary" data-first>Resume</button>
+        <button type="button" class="qsave">Quick save<kbd class="desk">F5</kbd></button>
+        <button type="button" class="qload">Quick load<kbd class="desk">F9</kbd></button>
         <button type="button" class="save">Save</button>
         <button type="button" class="load">Load</button>
         <button type="button" class="settings">Settings</button>
@@ -576,6 +392,11 @@ function buildPause() {
   p.querySelector('.save').onclick = () => {
     sfx('tap');
     openSaves('save');
+  };
+  p.querySelector('.qsave').onclick = () => saving.quickSave();
+  p.querySelector('.qload').onclick = () => {
+    sfx('tap');
+    saving.quickLoad();
   };
   p.querySelector('.load').onclick = () => {
     sfx('tap');
@@ -634,7 +455,8 @@ function setPaused(on) {
     grab().then((t) => {
       pendingThumb = t;
     });
-    p.querySelector('.load').disabled = !anySave();
+    p.querySelector('.load').disabled = !slots.any();
+    p.querySelector('.qload').disabled = !slots.info('quick');
     p.querySelector('.where').textContent = [
       PLACE_NAMES[g?.place?.name] || '',
       PERIOD_NAMES[sim.period] || '',
@@ -679,6 +501,23 @@ window.addEventListener(
       return;
     }
     if (settingsPanel.captureKey(e)) return;
+    // F5 quick save, F9 quick load (the browser's own F5 reload is kept off once the game is running)
+    if ((e.code === 'F5' || e.code === 'F9') && !e.ctrlKey && !e.metaKey && !e.altKey) {
+      const top = topLayer();
+      const free = !top || top.el.id === 'pause';
+      if (e.code === 'F5' && (saving.canSave() || !document.body.classList.contains('at-title'))) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        if (free && !e.repeat) saving.quickSave();
+        return;
+      }
+      if (e.code === 'F9') {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        if (free && !e.repeat && !document.body.classList.contains('reloading')) saving.quickLoad();
+        return;
+      }
+    }
     // Say (Q by default, rebindable): opens the Say menu, or closes it again. Taken here in the capture phase so the
     // key does nothing else in the game.
     if (
@@ -712,7 +551,8 @@ window.addEventListener(
             return;
           }
           setPaused(false);
-        } else closeLayer(top.el);
+        } else if (top.close) top.close();
+        else closeLayer(top.el);
         return;
       }
       if (!$('#sayMenu')?.hidden) return; // ui.js closes the Say menu
@@ -761,6 +601,7 @@ function addPauseChip() {
     setPaused(true);
   };
   hud.appendChild(b);
+  saving.addQuickChip(hud, b);
 }
 
 // ---------- loading between places ----------
@@ -966,10 +807,10 @@ whenReady(() => {
           setPaused,
           onTitleShow,
           hideBoot,
-          store,
-          SLOT,
-          SAVE_KEY,
-          AUTO_META,
+          store: kv,
+          SLOT: slotKey,
+          SAVE_KEY: KEYS.SAVE,
+          AUTO_META: KEYS.AUTO_META,
           grab,
         }),
       )

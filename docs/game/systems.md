@@ -1,6 +1,6 @@
 # Systems
 
-Day 1 is Thursday 1 October in five periods, and only the story moves the clock. Also here: schedules, the crowd, ambient moments, bond steps, memory, gifts and their prices, typing a word and word practice, saying words to things, overheard Japanese, what a kotodama looks and sounds like, finds, repair tickets, and saving (three slots and an autosave). Last checked against the game on 2026-09-29.
+Day 1 is Thursday 1 October in five periods, and only the story moves the clock. Also here: schedules, the crowd, ambient moments, bond steps, memory, gifts and their prices, typing a word and word practice, saying words to things, overheard Japanese, what a kotodama looks and sounds like, finds, repair tickets, and saving (an autosave, a quick save and twelve slots). Last checked against the game on 2026-09-29.
 
 Elsewhere: the controls and screens for these are in [controls-and-ui.md](controls-and-ui.md); the words in [words.md](words.md); each person's tastes, register and relations in [cast.md](cast.md); the data keys a story file uses for all of this in game3d/story/FORMAT.md ("Sim data").
 
@@ -65,6 +65,7 @@ Points come from:
 | An authored moment | 1 | once each |
 
 - At most 3 points per person per day. Points never go down.
+- The People panel shows each met person's step as hearts with a line on where things stand, never the points or what the next step needs ([controls-and-ui.md](controls-and-ui.md), People).
 - While a step's scene hasn't played, points stop at its threshold, so nobody can be ground past it. Day 1 only reaches steps 1 and 2; the scenes for steps 3 to 5 are to build.
 - How people get on with each other (`likes`, `owes`, `rivals`, one way) is data too, and can change in play. Ambient moments and lines can depend on it.
 - The register each person expects ([cast.md](cast.md), What they like) is compared with the last word Eric said to them, so a line can react to too polite or too casual.
@@ -144,7 +145,9 @@ Repair tickets are how the work reaches Eric (Jørgen, 2026-10-03: "the main sto
 
 ## Saving
 
-The game saves by itself at every place change and at the end of the day: flags (the finds among them), bonds, memory, the period, the Bag, money, goals, the words and where they came from, which scenes have played, and the place. There are three save slots with thumbnails.
+The game saves by itself at every place change and at the end of the day: flags (the finds among them), bonds, memory, the period, the Bag, money, goals, the words and where they came from, which scenes have played, and the place.
+
+Besides the autosave there is one quick slot (F5 and F9) and twelve manual slots (Jørgen agreed 2026-10-04). A quick or manual save is a copy of the game at that moment, with a picture of the world (320 × 200, JPEG), the day, period and place, the goal or line, and the real time. They are kept in the browser: the saves in localStorage (keys amakawa-slot-quick and amakawa-slot-1 to 12; the three slots of older builds are slots 1 to 3 and keep their saves), the pictures in IndexedDB (database amakawa-saves), where a dozen of them don't crowd localStorage. On the first start of this build a picture an older build kept inside its slot moves to IndexedDB, and is dropped from the slot only once IndexedDB has it; without IndexedDB pictures stay in the slot as before. A save the browser refuses (storage full or off) says so and keeps the old one. Loading a slot makes it the autosave and restarts the page into it, the way Continue plays. Loading in play asks first only when the game has progress no quick or manual slot holds ([controls-and-ui.md](controls-and-ui.md), Load confirm). Code: game3d/js/saves/ (store.js the slots, actions.js saving and loading, view.js the screen).
 
 Continuing a save (the title's Continue, or Load from a slot) resumes exactly where it was made: same place, period, flags, bonds, words, Bag and money; Eric appears at a safe spot in that place; the place's doors, gate and props are as they were; no scene that already played replays, and nothing resets to morning. Starting the game never overwrites a save before the player chooses (fixed 2026-09-29; the old build always sent Continue back to the train). If a save is made in the middle of a scene, only that scene restarts from its beginning: the room is put back as it was when the scene started, scenes it already finished stay finished, and purchases, relationship changes and typed lessons are kept. If a saved scene no longer matches the story (the story changed since the save) or a scene fails while loading, the game keeps the previous save untouched and shows a Return to title dialog instead of playing on; nothing in play can overwrite that save until the player chooses. The day ends when Eric gets home to his room after work ([`mio-notices`](stories/mio-notices.md); day 2: [visits](stories/day2/visits.md)); its end ("Day one", "Day two") shows the places, the people met and the words he can use now, with no quiz and no score; day one's also shows the repair request and its closing line.
 
