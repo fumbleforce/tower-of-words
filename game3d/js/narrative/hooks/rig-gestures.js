@@ -41,7 +41,12 @@ function turn(model, b, axis, a) {
   b.updateMatrixWorld(true);
 }
 
+// The cast from cast3d.js step their own clips when drawn (meshyPerson), which comes after the tweens in a frame and
+// would put back the bones a tween just turned: such a rig takes this frame's step first (it then skips the one when
+// drawn), so the turns are laid over this frame's clip pose, as for Eric and Mio, whose mixers run before the tweens.
+const boneTween = (game, r) => (r.stepNow ? (dur, fn) => game.tween(dur, (k) => (r.stepNow(), fn(k))) : game.tween);
 export async function meshyGesture(game, r, kind, { to, face, low = 1 } = {}) {
+  const tween = boneTween(game, r);
   const B = bonesOf(r),
     model = r.root; // the body axes: the root faces the way he faces (the model inside may be turned to Y-up)
   if (kind === 'point') {
@@ -50,7 +55,7 @@ export async function meshyGesture(game, r, kind, { to, face, low = 1 } = {}) {
       await game.wait(250);
     }
     // right arm out toward what he means, hand at shoulder height, held a moment
-    await game.tween(1.5, (k) => {
+    await tween(1.5, (k) => {
       const b = bell(k);
       turn(model, B.RightArm, 'x', -1.35 * b);
       turn(model, B.RightArm, 'y', -0.45 * b); // a little out to his right, so it shows past his body from behind
@@ -59,7 +64,7 @@ export async function meshyGesture(game, r, kind, { to, face, low = 1 } = {}) {
   } else if (kind === 'lift') {
     // both arms up and out in a wide V, forearms bent in over his head as if holding a case up there (his arms are
     // too short to reach over the hair, so the V keeps the hands in sight from above); a small lean back
-    await game.tween(2.0, (k) => {
+    await tween(2.0, (k) => {
       const b = bell(k);
       turn(model, B.Spine, 'x', 0.1 * b);
       turn(model, B.RightArm, 'z', -2.6 * b);
@@ -75,7 +80,7 @@ export async function meshyGesture(game, r, kind, { to, face, low = 1 } = {}) {
       await game.wait(150);
     }
     // lean in, both hands forward and down, two pushes, back up
-    await game.tween(1.7, (k) => {
+    await tween(1.7, (k) => {
       const b = bell(k),
         push = Math.max(0, Math.sin(k * Math.PI * 4 - Math.PI / 2)) * b;
       turn(model, B.Spine, 'x', 0.3 * b);
@@ -96,7 +101,7 @@ export async function meshyGesture(game, r, kind, { to, face, low = 1 } = {}) {
       await game.wait(120);
     }
     // bend down to it, the right hand out and down onto its back, three slow strokes, then back up
-    await game.tween(2.4, (k) => {
+    await tween(2.4, (k) => {
       const b = bell(k),
         stroke = Math.sin(k * Math.PI * 6) * Math.min(1, b * 1.6);
       turn(model, B.Spine, 'x', (0.2 + 0.25 * low) * b);
@@ -111,7 +116,7 @@ export async function meshyGesture(game, r, kind, { to, face, low = 1 } = {}) {
   } else if (kind === 'squeeze') {
     // a quarter turn sideways, chest back and stomach in, arms up out of the way
     const y0 = r.root.rotation.y;
-    await game.tween(2.2, (k) => {
+    await tween(2.2, (k) => {
       const b = bell(k);
       r.root.rotation.y = y0 + (Math.PI / 2) * Math.min(1, b * 1.4);
       turn(model, B.Spine, 'x', 0.22 * b);
@@ -145,11 +150,12 @@ function shortBones(r) {
   return (r._sbones = { ...bonesOf(r), ...found });
 }
 export async function meshyShort(game, r, kind) {
+  const tween = boneTween(game, r);
   const B = shortBones(r),
     model = r.root;
   if (kind === 'nod') {
     // two dips of the chin, the first deeper, with a little of the upper back so it reads from behind him
-    await game.tween(0.9, (k) => {
+    await tween(0.9, (k) => {
       const d = (1 - Math.cos(k * Math.PI * 4)) / 2,
         a = (k < 0.5 ? 1 : 0.6) * d;
       turn(model, B.Head, 'x', 0.38 * a);
@@ -158,7 +164,7 @@ export async function meshyShort(game, r, kind) {
     });
   } else if (kind === 'bow') {
     // a small bow from the waist, head following
-    await game.tween(1.0, (k) => {
+    await tween(1.0, (k) => {
       const b = bell(k);
       turn(model, B.Spine, 'x', 0.3 * b);
       turn(model, B.Spine01, 'x', 0.15 * b);
@@ -166,7 +172,7 @@ export async function meshyShort(game, r, kind) {
     });
   } else if (kind === 'shrug') {
     // shoulders up, forearms out to the sides with the palms up, head tipped a little
-    await game.tween(0.9, (k) => {
+    await tween(0.9, (k) => {
       const b = bell(k);
       turn(model, B.RightShoulder, 'z', -0.3 * b);
       turn(model, B.LeftShoulder, 'z', 0.3 * b);
@@ -178,7 +184,7 @@ export async function meshyShort(game, r, kind) {
     });
   } else if (kind === 'wave') {
     // the right hand up beside his head, waving side to side twice
-    await game.tween(1.0, (k) => {
+    await tween(1.0, (k) => {
       const b = bell(Math.min(1, k * 1.1)),
         sw = Math.sin(k * Math.PI * 4) * b;
       turn(model, B.RightArm, 'z', -2.5 * b);
