@@ -1,21 +1,22 @@
 // Kotodama: the flow of a run (title, three shifts, a power word between them, the end card), input
 // (taps, keys) and the test hook window.mg that tools/play.mjs drives.
 
-import { THINGS, SHIFTS, COACH, POWERS, PARTICLES, VERBS } from './data.js';
-import { parse, english, afterword } from './grammar.js';
+import { THINGS, SHIFTS, COACH, POWERS, PARTICLES, VERBS, TUTORIAL, TO_STEP, GOAL } from './data.js';
+import { parse, english, afterword, draft } from './grammar.js';
 import { newRun, startShift, resolve, wait, plan, daySeed, shiftOf } from './sim.js';
 import { initStage, setShift, setTickets, setRoles, act, expire, waited, face, shake, roomEl, burst, centre, thingEl, floater } from './stage.js';
-import { skeleton, $, hud, lastPoints, countScore, line, talk, says, rail, pad, banner, overlay, powerCard, stars } from './ui.js';
+import { skeleton, $, hud, lastPoints, countScore, line, talk, says, rail, pad, banner, overlay, powerCard, stars, pointAt, goal } from './ui.js';
 import { sfx, unlock, muted, setMuted } from './audio.js';
 import { word } from '../common/sound.js';
 import { sleep } from './fx.js';
 import { jp } from '../common/jp.js';
 
 const opts = { en: true, polite: false };
-let run, tokens = [], explicit = null, busy = false, lines = [], tutorial = null, daily = true, seed = 0;
+let run, tokens = [], explicit = null, busy = false, lines = [], guide = null, daily = true, seed = 0;
 const seen = new Set();
-// The first command, shown step by step with a glow: Kenji に, cola を, だして.
-const TUTORIAL = [{ id: 'kenji' }, { p: 'ni' }, { id: 'cola' }, { p: 'o' }];
+// What this device has been taught already, so a second run starts without the walkthrough.
+const taught = k => localStorage.getItem(`kd-taught-${k}`) === '1';
+const learn = k => localStorage.setItem(`kd-taught-${k}`, '1');
 const mg = (window.mg = { expect: null, steps: 0, done: false });
 const expect = e => {
   mg.expect = e;
@@ -40,7 +41,9 @@ function roles() {
       group = [];
     }
   }
-  for (const id of group) out[id] = out[id] || 'to';
+  // A group still open: と on the nouns already joined, a grey ? on the one waiting for its particle.
+  const last = tokens[tokens.length - 1];
+  for (const id of group) out[id] = out[id] || (last.t === 'n' && last.id === id ? 'open' : 'to');
   return out;
 }
 
@@ -53,25 +56,65 @@ function markup(machine) {
 const plainText = m => m.replace(/\{([^|}]+)[^}]*\}/g, '$1');
 
 function setTalk(ls) {
-  lines = ls.filter(Boolean).slice(0, document.body.classList.contains('phone') ? 2 : 3);
+  lines = ls.filter(Boolean);
   talk(lines, opts.en);
 }
 
 function render(bump = false) {
   const m = machineOf();
   const st = status();
-  rail(tokens, m, st, { ...opts, bump });
+  rail(tokens, m, st, { ...opts, bump, draft: guide ? draft(tokens, m) || '' : null });
   pad(run, m, st, opts);
   setRoles(roles(), m, shiftOf(run).english === 'full');
   hud(run, shiftOf(run), opts);
   $('.kd').classList.toggle('en-on', opts.en);
+  goal(run, shiftOf(run));
   document.querySelectorAll('.hint-glow').forEach(e => e.classList.remove('hint-glow'));
-  const onTrack = tutorial && tokens.every((t, i) => TUTORIAL[i] && (t.t === 'n' ? t.id === TUTORIAL[i].id : t.p === TUTORIAL[i].p));
-  if (onTrack) {
-    const sel = tutorial[tokens.length];
-    const e = sel && document.querySelector(sel);
-    if (e) e.classList.add('hint-glow');
+  const e = guideEl();
+  if (e) e.classList.add('hint-glow');
+}
+
+/* ---------- the walkthrough: one step at a time, a hand on the next tap, other taps wait ---------- */
+
+const selOf = ([k, id]) => (k === 'p' ? `.pad [data-p="${id}"]` : k === 'fire' ? '.fire' : `${THINGS[id].kind === 'item' ? '.item' : '.person'}[data-thing="${id}"]`);
+const guideEl = () => (guide && !busy ? document.querySelector(selOf(guide.taps[guide.n])) : null);
+
+/** steps: [{ taps, text }]; rest: the lines shown under the step card. */
+function startGuide(steps, rest, badge) {
+  guide = { taps: [], step: [], texts: steps.map(s => s.text), n: 0, rest, badge };
+  steps.forEach((s, i) => s.taps.forEach(t => (guide.taps.push(t), guide.step.push(i))));
+  guideTalk();
+  requestAnimationFrame(handLoop);
+}
+
+function guideTalk() {
+  const i = guide.step[guide.n];
+  const n = guide.texts.length;
+  const card = { ...line(null, null, guide.texts[i], 'step'), badge: guide.badge || (n > 1 ? `${i + 1}/${n}` : '') };
+  setTalk([card, ...guide.rest]);
+}
+
+/** The hand follows its target every frame, so it stays put while the room animates or resizes. */
+function handLoop() {
+  pointAt($('.overlay').hidden ? guideEl() : null);
+  if (guide) requestAnimationFrame(handLoop);
+}
+
+/** Lets a tap through if it is the one the hand points at, and moves the walkthrough on. */
+function guideOk(tap) {
+  if (!guide) return true;
+  const want = guide.taps[guide.n];
+  if (want[0] !== tap[0] || want[1] !== tap[1]) {
+    blocked('Tap where the hand points.');
+    const e = guideEl();
+    if (e) e.animate([{ transform: 'scale(1)' }, { transform: 'scale(1.12)' }, { transform: 'scale(1)' }], { duration: 300 });
+    return false;
   }
+  const step = guide.step[guide.n];
+  guide.n++;
+  if (guide.n >= guide.taps.length) guide = null;
+  else if (guide.step[guide.n] !== step) queueMicrotask(guideTalk);
+  return true;
 }
 
 function blocked(msg) {
@@ -88,6 +131,7 @@ function tapThing(id) {
   if (busy || !run) return;
   dismiss();
   const t = THINGS[id];
+  if (!guideOk(['thing', id])) return;
   if (t.kind === 'machine') {
     explicit = id;
     sfx.tap('machine');
@@ -105,6 +149,7 @@ function tapParticle(p) {
   if (busy || !run) return;
   dismiss();
   const last = tokens[tokens.length - 1];
+  if (!guideOk(['p', p])) return;
   if (!last) return blocked('Tap a person or a drink first, then its particle.');
   if (last.t === 'p') last.p = p;
   else tokens.push({ t: 'p', p });
@@ -114,6 +159,7 @@ function tapParticle(p) {
 
 function undo() {
   if (busy || !run) return;
+  if (guide) return guideOk(['undo']);
   dismiss();
   if (tokens.length) tokens.pop();
   else explicit = null;
@@ -122,13 +168,13 @@ function undo() {
 }
 
 function matte() {
-  if (busy || !run || !run.charges.matte) return;
+  if (busy || !run || !run.charges.matte || guide) return;
   wait(run);
   sfx.wait();
   word('matte');
   waited();
   setTickets(run.tickets);
-  setTalk([line(null, '{みんな|minna|everyone}、{ちょっと|chotto|a moment} {まって|matte|wait}！', 'Everyone, wait a moment! (Two more commands of patience each.)', 'note'), ...lines]);
+  setTalk([line(null, '{みなさん|minasan|everyone}、{ちょっと|chotto|a moment} {まってください|matte kudasai|please wait}！', 'Everyone, please wait a moment! (Every request gets two more dots.)', 'note'), ...lines]);
   render();
 }
 
@@ -136,12 +182,14 @@ async function fire() {
   if (busy || !run) return;
   const st = status();
   if (!st.ok) return blocked(st.need);
+  if (!guideOk(['fire'])) return;
   busy = true;
   mg.expect = null;
   const m = markup(st.machine);
   const prev = run.score;
-  const firstCmd = tutorial;
-  tutorial = null;
+  const firstCmd = run.shift === 0 && run.turn === 0;
+  if (firstCmd) learn('first');
+  if (run.shift === 1 && run.turn === 0) learn('to');
   for (const id of shiftOf(run).people) face(id);
   const order = roles();
   const toFirst = tokens.findIndex(t => t.t === 'p' && t.p === 'ni') < tokens.findIndex(t => t.t === 'p' && t.p === 'o');
@@ -176,6 +224,10 @@ async function fire() {
     seen.add('second');
     L.push(line('mio', COACH.second[0], COACH.second[1], 'coach'));
   }
+  if (run.shift === 1 && !seen.has('pot')) {
+    seen.add('pot');
+    L.push(line('mio', COACH.pot[0], COACH.pot[1], 'coach'));
+  }
   if (!toFirst && order && Object.values(order).includes('ni') && res.clean && !seen.has('order')) {
     seen.add('order');
     L.push(line('mio', COACH.order[0], COACH.order[1], 'coach'));
@@ -187,6 +239,10 @@ async function fire() {
     for (const x of after.expired) {
       await expire(x.who);
       L.unshift(says('expired', x.who));
+      if (!seen.has('expired')) {
+        seen.add('expired');
+        L.unshift(line(null, null, COACH.expired[1], 'note'));
+      }
       hud(run, shiftOf(run), opts);
       $('.hearts').animate([{ transform: 'scale(1.4)' }, { transform: 'none' }], { duration: 300 });
     }
@@ -208,6 +264,7 @@ async function fire() {
 }
 
 function nextExpect() {
+  if (guide) return expect({ kind: 'fill', seq: guide.taps.map(selOf), wrong: null });
   const p = plan(run);
   if (!p) return expect({ kind: 'tap', sel: '.pad [data-act="undo"]' });
   const seq = [];
@@ -226,13 +283,19 @@ function beginShift() {
   explicit = null;
   setTickets(run.tickets, arrived.map(a => a.who));
   sfx.shift();
-  const coach = { 0: ['first'], 1: ['shift2', 'pot'], 2: ['shift3'] }[run.shift];
-  const L = coach.map(k => line('mio', COACH[k][0], COACH[k][1], 'coach'));
+  guide = null;
   if (run.shift === 0) {
-    L.push(says('ask', 'kenji', 'cola'));
-    tutorial = ['.person[data-thing="kenji"]', '.pad [data-p="ni"]', '.item[data-thing="cola"]', '.pad [data-p="o"]', '.fire'];
-  }
-  setTalk(L);
+    const ask = says('ask', 'kenji', 'cola');
+    if (!taught('first')) startGuide(TUTORIAL, [ask]);
+    else setTalk([line('mio', COACH.first[0], COACH.first[1], 'coach'), ask]);
+  } else if (run.shift === 1) {
+    const coach = line('mio', COACH.shift2[0], COACH.shift2[1], 'coach');
+    const p = plan(run);
+    if (!taught('to') && p && p.who.length === 2) {
+      const taps = [['thing', p.who[0]], ['p', 'to'], ['thing', p.who[1]], ['p', 'ni'], ['thing', p.item], ['p', 'o'], ['fire']];
+      startGuide([{ taps, text: TO_STEP }], [coach], 'と');
+    } else setTalk([line('mio', COACH.shift2how[0], COACH.shift2how[1], 'coach')]);
+  } else setTalk([line('mio', COACH.shift3[0], COACH.shift3[1], 'coach')]);
   render();
   nextExpect();
 }
@@ -312,6 +375,7 @@ function title() {
   overlay(`<div class="sheet title-card">
     <div class="logo"><span class="l-jp">ことだま</span><span class="l-r">kotodama</span></div>
     <p class="tag">B2 after six. The old machines do exactly what you say.</p>
+    <p class="how">${GOAL.replace('dots', '<span class="mini-pips"><i></i><i></i><i></i></span>')}.</p>
     <button class="primary go-daily">Today’s run <small>${date}${best ? ` · best ${best}` : ''}</small></button>
     <button class="ghost go-free">Free play</button></div>`, 'title');
   $('.overlay .go-daily').onclick = () => start(true);
