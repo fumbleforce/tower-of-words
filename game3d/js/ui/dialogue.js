@@ -1,20 +1,27 @@
 import { $, el } from './dom.js';
 import { lineHTML } from '../lang.js';
 import { settings, CPS } from '../settings.js';
-import { voice, stopVoice, muted } from '../audio/core.js';
+import { voice, stopVoice } from '../audio/core.js';
 import { showPortraits, resetPortraitSpeaker } from './portraits.js';
-import { heardHTML, scramble, reveal, addPlayButtons, whileUnpaused } from './dialogue-text.js';
+import { heardHTML, scramble, reveal, addPlayButtons } from './dialogue-text.js';
 import { showDoorCard } from './door-card.js';
+import { lineId, wasRead, markRead, logLine, logToJSON, logLoad } from './backlog.js';
+import { vn, skipLine, autoLine, choiceShown } from './vn-controls.js';
+export { installVn } from './vn-controls.js';
 
 // Methods use the UI receiver so input handlers and Runner retain the same state.
 export function createDialogue({ sfx }) {
   return {
+    // the backlog in the save (sim.js): today's lines come back with the day they belong to
+    logJSON: logToJSON,
+    logLoad,
     // Show a line and wait for a tap. speaker: {name, role, color} or null for narration.
     // en: Japanese spoken (the voice clip is of `text`) with this English as its subtitle, unmuffled (runner `en`)
     say(speaker, text, { voiceKey, auto, overheard, clear, whoId, face, en } = {}) {
       if (en) overheard = false;
       return new Promise((res) => {
         const t = $('#talk');
+        this._autoGo = this._skipGo = null;
         showPortraits(t, speaker ? whoId : null, face);
         showDoorCard(t, speaker ? null : text); // a shut door's card, beside the line that reads it
         t.classList.toggle('heard', !!overheard);
@@ -36,15 +43,40 @@ export function createDialogue({ sfx }) {
         t.classList.add('in');
         this.refreshWords();
         if (overheard) scramble(lineEl);
-        const spoken = voiceKey ? voice(voiceKey, { muffle: !!overheard }) : null;
+        // the backlog and the read state (ui/backlog.js); Skip moves a line seen before on at once (ui/vn-controls.js)
+        const id = lineId(whoId || speaker?.name, en ? `${text}|${en}` : text),
+          seen = wasRead(id);
+        markRead(id);
+        const sp = speaker || {};
+        logLine({
+          k: 'line',
+          who: speaker ? whoId : null,
+          name: sp.name,
+          role: sp.role,
+          color: sp.color,
+          phone: !!sp.phone,
+          text,
+          en,
+          ov: !!overheard,
+          clear,
+          vk: voiceKey,
+          face,
+          seen,
+        });
+        this._cur = { voiceKey, overheard };
+        const skip = !this.auto && skipLine(seen);
+        const spoken = voiceKey && !skip ? voice(voiceKey, { muffle: !!overheard }) : null;
         const started = performance.now();
         this._lines = (this._lines || 0) + 1; // the continue hint shows with words for the first few lines
-        if (this.auto) {
-          setTimeout(() => {
-            this._advance = null;
-            stopVoice();
-            res();
-          }, 15);
+        if (this.auto || skip) {
+          setTimeout(
+            () => {
+              this._advance = null;
+              stopVoice();
+              res();
+            },
+            skip ? 70 : 15,
+          );
           return;
         }
         const cps = CPS[settings.textSpeed] || 0;
@@ -66,35 +98,37 @@ export function createDialogue({ sfx }) {
           sfx('tap');
           res();
         });
-        void auto; // lines never move on by a timer of their own; only the player's auto-advance setting does that
-        if (settings.autoAdvance) {
-          // auto-advance: once the line is written out and the voice has finished (or a reading time has passed)
-          const plain = lineEl.textContent.length;
-          const revealed = new Promise((r) => {
-            if (rv.done) r();
-            else {
-              const o = rv.onDone;
-              rv.onDone = () => {
-                o && o();
-                r();
-              };
-            }
-          });
-          Promise.all([
+        void auto; // lines never move on by a timer of their own; only the player's Auto toggle does that
+        const revealed = new Promise((r) => {
+          if (rv.done) r();
+          else {
+            const o = rv.onDone;
+            rv.onDone = () => {
+              o && o();
+              r();
+            };
+          }
+        });
+        const go = () => {
+          if (this._advance !== adv) return;
+          this._advance = null;
+          stopVoice();
+          res();
+        };
+        // Auto (ui/vn-controls.js): once the line is written out and spoken, or its reading time has passed
+        this._autoGo = () =>
+          autoLine({
             revealed,
-            spoken && settings.voiceOn && !muted
-              ? spoken.then(() => whileUnpaused(700))
-              : whileUnpaused(1300 + plain * 45),
-          ])
-            .then(() => whileUnpaused(250))
-            .then(() => {
-              if (this._advance === adv && settings.autoAdvance) {
-                this._advance = null;
-                stopVoice();
-                res();
-              }
-            });
-        }
+            spoken,
+            chars: lineEl.textContent.length,
+            still: () => this._advance === adv,
+          }).then((ok) => ok && go());
+        // Skip turned on (or Ctrl pressed) while this line waits: it has been seen now, so it moves on
+        this._skipGo = () => {
+          rv.done || rv.finish();
+          setTimeout(go, 40);
+        };
+        if (vn.auto) this._autoGo();
       });
     },
     // Show a line with reply chips; resolves with the chip index. chips: [{html}]
@@ -110,6 +144,23 @@ export function createDialogue({ sfx }) {
           ? `<span class="nm" style="--c:${speaker.color || '#8fa3c0'}">${speaker.name}</span>${speaker.role ? `<span class="rl">${speaker.role}</span>` : ''}`
           : '';
         if (!keepLine) t.querySelector('.line').innerHTML = text ? lineHTML(text) : '';
+        if (!keepLine && text) {
+          const id = lineId(whoId || speaker?.name, text);
+          logLine({
+            k: 'line',
+            who: speaker ? whoId : null,
+            name: speaker?.name,
+            role: speaker?.role,
+            color: speaker?.color,
+            text,
+            vk: voiceKey,
+            seen: wasRead(id),
+          });
+          markRead(id);
+        }
+        this._cur = { voiceKey };
+        this._autoGo = this._skipGo = null;
+        choiceShown();
         t.querySelector('.more').hidden = true;
         const box = t.querySelector('.chips');
         box.innerHTML = '';
@@ -135,6 +186,7 @@ export function createDialogue({ sfx }) {
             });
             b.classList.add('picked');
             stopVoice();
+            logLine({ k: 'pick', html: c.html });
             res(i);
           };
           box.appendChild(b);
@@ -209,6 +261,7 @@ export function createDialogue({ sfx }) {
       resetPortraitSpeaker();
       this._advance = null;
       this._chipKeys = null;
+      this._autoGo = this._skipGo = null;
     },
   };
 }

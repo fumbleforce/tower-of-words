@@ -27,7 +27,8 @@ const phoneDefault = (() => {
 
 export const DEFAULTS = {
   textSpeed: 'fast', // 'slow' | 'normal' | 'fast' | 'instant': how quickly a line writes itself out
-  autoAdvance: false, // lines move on by themselves once the voice has finished
+  autoSpeed: 'normal', // 'slow' | 'normal' | 'fast': how long Auto (the dialogue box's toggle, ui/vn-controls.js) waits
+  skipUnread: false, // Skip runs through lines not seen before too (off: it stops at the first new line)
   master: 0.9,
   music: 0.7,
   voice: 1,
@@ -48,6 +49,8 @@ export const DEFAULTS = {
 };
 // characters per second for each text speed (0 = all at once)
 export const CPS = { slow: 28, normal: 55, fast: 110, instant: 0 };
+// Auto's wait on a line with no voice: a base plus a time per character (ms), for each auto speed
+export const AUTO_WAIT = { slow: [1800, 70], normal: [1300, 45], fast: [800, 28] };
 
 // One-time changes to saved settings, in order; v is the version they were saved at (missing = 0).
 //   1: the chibi cast became the default look (Jørgen, 2026-10-03), so a saved chibi: false from the old default

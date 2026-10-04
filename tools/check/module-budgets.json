@@ -135,10 +135,10 @@
       "reason": "Existing wall, window and edge geometry builders share showcase dimensions and materials. Stage 5 room-builder review will separate reusable trim construction from room composition."
     },
     "game3d/js/sim.js": {
-      "lines": 536,
-      "bytes": 20415,
+      "lines": 538,
+      "bytes": 20514,
       "owner": "codex-tui",
-      "review": "C-0076; 2026-10-03 C-0378 day 2: a new day's opening save resets the bonds' daily caps; 2026-10-04 C-0432 the People cards moved out to ui/people-view.js (ceiling lowered)",
+      "review": "C-0076; 2026-10-03 C-0378 day 2: a new day's opening save resets the bonds' daily caps; 2026-10-04 C-0432 the People cards moved out to ui/people-view.js (ceiling lowered); 2026-10-04 the dialogue box controls: the backlog rides in the save (two lines in save/restore)",
       "reason": "Existing simulation, save and relationship integration; retain compatibility while extracting state."
     },
     "game3d/js/speech.js": {
@@ -170,10 +170,10 @@
       "reason": "Existing passenger mesh factories, per-seat placement and idle motion share rig conventions. Stage 5 crowd and room-builder review will separate appearance construction from placement and motion."
     },
     "game3d/js/ui.js": {
-      "lines": 783,
-      "bytes": 31284,
+      "lines": 784,
+      "bytes": 31391,
       "owner": "codex-tui",
-      "review": "C-0080; C-0166 named sounds per door and machine, Words chip pop and voice placeholder; 2026-10-03 C-0378 day 2: the -tai note over the phrases in the Words panel",
+      "review": "C-0080; C-0166 named sounds per door and machine, Words chip pop and voice placeholder; 2026-10-03 C-0378 day 2: the -tai note over the phrases in the Words panel; 2026-10-04 C-0432: installVn, the dialogue box controls (ui/vn-controls.js)",
       "reason": "Remaining HUD construction, action menus and word practice; dialogue, portraits and audio are extracted."
     }
   }

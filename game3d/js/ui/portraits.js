@@ -122,6 +122,20 @@ if (typeof Image !== 'undefined')
     if (globalThis.requestIdleCallback) globalThis.requestIdleCallback(all, { timeout: 4000 });
     else all();
   }, 6000);
+// a small round face for the backlog: the face box, a little wider, filling a square (CSS percentages, any size)
+export function thumbStyle(whoId, face) {
+  const text = TEXT_PORTRAITS[whoId];
+  if (text) [whoId, face] = [text[0], PORTRAITS[text[0]].includes(face) ? face : text[1]];
+  const F = FACE[whoId],
+    src = portraitSrc(whoId, face);
+  if (!F || !src) return '';
+  const [x0, y0, x1, y1] = F.f,
+    R = (y1 - y0) * 1.5,
+    cx = (x0 + x1) / 2,
+    cy = (y0 + y1) / 2 + (y1 - y0) * 0.08;
+  const pct = (c, n) => ((Math.max(0, c - R / 2) / (n - R)) * 100).toFixed(1);
+  return `background-image:url('${src}');background-size:${((F.W / R) * 100).toFixed(1)}% auto;background-position:${pct(cx, F.W)}% ${pct(cy, F.H)}%`;
+}
 const HOPS = new Set(['surprised', 'panicked', 'panic']);
 export function showPortraits(t, whoId, face) {
   const text = TEXT_PORTRAITS[whoId]; // a text message: the sender's portrait

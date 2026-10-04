@@ -30,7 +30,17 @@ const SECTIONS = [
         ['fast', 'Fast'],
         ['instant', 'Instant'],
       ]),
-      sw('autoAdvance', 'Auto-advance', "Lines move on by themselves once they've been spoken"),
+      seg(
+        'autoSpeed',
+        'Auto speed',
+        [
+          ['slow', 'Slow'],
+          ['normal', 'Normal'],
+          ['fast', 'Fast'],
+        ],
+        'How long Auto waits on a line nobody speaks',
+      ),
+      sw('skipUnread', 'Skip unread too', "Skip also runs through lines you haven't seen yet"),
     ],
   ],
   [
