@@ -12,6 +12,7 @@
 // The published game does not contain these files, and a checkout without them plays the public story.
 import { forcePrivateMode, onSettings, settings } from './settings.js';
 import { sampleDayOneEnd } from './days.js';
+import { voice, stopVoice, setClipResolver } from './audio/core.js';
 
 const PLACE = /^[a-z0-9_]+$/;
 
@@ -64,7 +65,8 @@ export async function installPlacePlugin(name, ctx) {
 
 // ?scene=<id> on a local server: the private scene viewer (island/private/plugins/viewer.js). Private mode is forced on
 // for this page only (in memory, never saved). Without the file, off a local host or without the param the game
-// starts as usual and this returns null. Returns what the viewer's start() returns when it took over the boot.
+// starts as usual and this returns null. The viewer also gets the voice player and the clip resolver hook (audio/core.js)
+// to play its own clips. Returns what the viewer's start() returns when it took over the boot.
 const LOCAL_HOST = /^(localhost|127\.\d+\.\d+\.\d+|\[::1\]|192\.168\.\d+\.\d+|10\.\d+\.\d+\.\d+|[a-z0-9-]+\.local)$/;
 export async function installViewer(query, ctx) {
   const id = query.get('scene');
@@ -77,7 +79,7 @@ export async function installViewer(query, ctx) {
   }
   if (!mod) return null;
   forcePrivateMode();
-  return mod.start({ ...ctx, id, addPlaceInstaller, sampleDayOneEnd });
+  return mod.start({ ...ctx, id, addPlaceInstaller, sampleDayOneEnd, audio: { voice, stopVoice, setClipResolver } });
 }
 
 let portraitFn = null;
