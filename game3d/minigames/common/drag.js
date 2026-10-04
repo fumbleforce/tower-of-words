@@ -61,9 +61,9 @@ export async function fly(thing, from, to, host, ms = 650) {
 /**
  * Waits for the player to move something from a source to a target.
  * sources, targets: elements. mode 'arrow' draws a line as they drag; 'carry' moves a copy.
- * Resolves { from, to } with the elements.
+ * Resolves { from, to } with the elements, or null if `signal` aborts first.
  */
-export function pick({ sources, targets, host, svg = null, mode = 'arrow' }) {
+export function pick({ sources, targets, host, svg = null, mode = 'arrow', signal = null }) {
   return new Promise(resolve => {
     let from = null, line = null, ghost = null, armed = false, start = null, over = null;
     const all = [...new Set([...sources, ...targets])];
@@ -153,6 +153,7 @@ export function pick({ sources, targets, host, svg = null, mode = 'arrow' }) {
     addEventListener('pointermove', move);
     addEventListener('pointerup', up);
     addEventListener('keydown', key);
+    if (signal) signal.addEventListener('abort', () => (clear(), off(), resolve(null)), { once: true });
     function off() {
       sources.forEach(s => s.classList.remove('can-drag'));
       host.removeEventListener('pointerdown', down);

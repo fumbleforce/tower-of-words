@@ -4,18 +4,35 @@ Three standalone pages, each teaching one family of connected grammar with the w
 
 Play them with the repo served on 8771 (`./start`):
 
-- http://127.0.0.1:8771/game3d/minigames/give.html (Drink round)
+- http://127.0.0.1:8771/game3d/minigames/give.html (Friday drinks; the first version is give-v1.html)
 - http://127.0.0.1:8771/game3d/minigames/compare.html (Lunch run)
 - http://127.0.0.1:8771/game3d/minigames/want.html (Favours)
 
-Each takes about five minutes, works offline, on the phone and on the desktop (drag, or tap one thing and then the other; Enter on a focused thing works too). Nothing runs on a timer. Japanese shows with readings: kana over kanji, romaji over katakana, and any dotted word can be tapped for its reading and meaning. Early lines show the English under them; later ones keep it one tap away, and the English button in the top bar shows it always. A wrong answer is never a fail: the game shows what the sentence would have meant, someone reacts, Mio says the rule once, and the player tries again. The round pips at the top fill in teal for a first-try answer.
+Each takes three to five minutes, works offline, on the phone and on the desktop (drag, or tap one thing and then the other; Enter on a focused thing works too). Nothing runs on a timer. Japanese shows with readings: kana over kanji, romaji over katakana, and any dotted word can be tapped for its reading and meaning. Early lines show the English under them; later ones keep it one tap away, and the English button in the top bar shows it always. A wrong answer is never a fail: the game shows what the sentence would have meant, someone reacts, Mio says the rule once, and the player tries again. The round pips at the top fill in teal for a first-try answer.
 
-## Drink round (give.html): あげる, くれる, もらう
+## Friday drinks (give.html): あげる, くれる, もらう
 
-- Mechanic: the B2 team swaps vending-machine drinks at the kitchenette table, and Mr. Mori writes down who gave what so he can thank the right person. Four seats round the table; the one who is talking wears a teal "わたし" tag. In "show it" rounds the player reads a sentence and drags from the one who gives to the one who gets. In "say it" rounds a drink is handed over in front of them and they fill the gaps in the sentence (the verb, the particle on the giver, or who got it).
-- What it teaches: direction and point of view. あげる goes away from whoever is talking, くれる comes in to them, もらう puts the one who gets it first with に or から on the giver; は, が, に, から and を on the right people. The drinks are the day-1 gifts (コーヒー, こうちゃ, メロンソーダ, コーンスープ) plus チョコ and おにぎり.
-- Feedback: a wrong verb is acted out literally, the way kotodama takes words. Say くれました for a drink that went to Kenji and it flies to Eric instead, and Eric says he didn't get anything; get もらう backwards and the drink goes the other way and the "giver" protests.
-- Ramp: あげる with English under it (two show-it rounds, then naming who got it); くれる when it comes to Eric; もらう with the trap that the first name is the one who gets; then Mio and Kenji talk, the わたし tag moves to them, and the same hand-over needs a different verb. Ends with Mori's notebook: every sentence with its English and the first-try count. Play again replays the rounds with other people and drinks, keeping each one's direction to the speaker.
+The second version of the giving game, after Jørgen's verdict on all three prototypes (Review minigames-1, 2026-10-04: "it's a starting point, but they are not particularly fun"). The first version, the Drink round, is kept as give-v1.html with its code in give-v1/, for comparison.
+
+Why the Drink round wasn't fun, from playing it at phone size:
+
+- No decisions. Each task was answered by the scene: in the "show it" rounds the English sat under the sentence, and in the "say it" rounds the player had just watched the drink fly to the person they then had to name.
+- No stakes. Nothing depended on getting it right; a wrong answer was a short detour and Mori's notebook at the end was a list nobody cared about.
+- The same action thirteen times, with 31 tap-to-continue lines around them (44 steps on a clean run, 68 with mistakes), for five minutes.
+- No surprise. The one twist (Mio talking, so わたし moves) was announced before it happened.
+- Weak feedback. A thin border flash for right, a shake for wrong, and no score, run or payoff.
+- The people only commented. Nobody had anything riding on the drinks.
+
+What changed:
+
+- A small puzzle each round. Everyone at the table gave one drink and got one, and each person sits with the drink they got. People say what happened, each from their own side: the giver says あげました, the one who got it says くれました or もらいました, and each drops their own わたし the way people do. One person never says anything (Mori never says what he gave), so the last arrow has to be worked out. In the last round one clue only names the drink ("I gave the corn soup"), so the player has to look at who is holding it.
+- The player draws all the arrows (drag, or tap one and then the other), can redraw any of them, and commits with Thank them. Nothing is checked until then.
+- Stakes and payoff: everyone thanks whoever the drawing says gave them theirs. A wrong arrow means a thank-you goes to the wrong person; they react in character (Kenji takes the credit), and Mio says which line gave it away, quoting it. The ending depends on how many thank-yous went wrong: Mori thanks everyone, or Kenji decides he is very generous.
+- Juice: the cans arrive from the machine and land in front of people, thank-you bubbles pop over each one in turn with a tick or a cross on whoever was thanked, the arrows turn teal or red and wrong ones are redrawn dashed, there is a run counter for right thank-yous in the top bar, and the round pips fill teal for a round with no mix-up.
+- Shorter: four rounds (あげる with English shown; くれる; もらう with に and から; everything mixed), 15 arrows, 38 steps on a clean run (21 of them actions, 17 lines), about 3 minutes. Two of the rounds end with Eric saying the hand-over that came to him (filling in the verb, and in the last round the particle too); a wrong verb is acted out literally, as before.
+- The people have something going on across the rounds: Mori gives Mio tea every week although she doesn't drink it, she gives it to Kenji in the last round in front of him, and the one round where Mori finally says what he gave is commented on.
+- Play again swaps Mio, Kenji and Mori round and changes the drinks, so the clues have to be read again; the lines written for the first run are left out.
+- English: the first round shows it under every line, later rounds keep it one tap away per line (and the English button shows it always). Nothing runs on a timer: the thank-you round animates, but every line it leaves stays on screen.
 - Next tier, not built: さしあげる, いただく and くださる when Mori or Emi is involved.
 
 ## Lunch run (compare.html): すき, のほうが, より, いちばん, どちら, どれ
@@ -39,5 +56,5 @@ Mio's word clips play for the day-1 commands in Favours (tap the word, or when E
 ## Code
 
 - common/: the shared frame (ui.js: top bar, talk box with portraits, choices, sentences with gaps, the word popover, the end card), jp.js (furigana, romaji over katakana, glossed words), drag.js (drag or tap-tap between things, arrows, flying items), cast.js, sound.js (the game's own interface sounds and word clips), mg.css (the game's colours and type).
-- give/, compare/, want/: each game's rounds (data) and game.js (its scene and round types).
-- tools/play.mjs plays a game to the end in a headless browser, the way a player would, with a screenshot per step in game3d/shots/minigames/. `--wrong 3` gets every third task wrong first. tools/play-all.sh runs all three at 390 × 844 and 1366 × 860, both ways. The pages draw no WebGL, so they run with GL=soft.
+- give/, give-v1/, compare/, want/: each game's rounds (data) and game.js (its scene and round types). give/tables.js builds every clue sentence from who said it and which hand-over it is about.
+- tools/play.mjs plays a game to the end in a headless browser, the way a player would, with a screenshot per step in game3d/shots/minigames/. `--wrong 3` gets every third task wrong first. tools/play-all.sh runs all four pages at 390 × 844 and 1366 × 860, both ways. The pages draw no WebGL, so they run with GL=soft.
