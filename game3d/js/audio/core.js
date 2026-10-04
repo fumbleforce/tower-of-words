@@ -101,6 +101,12 @@ const sounding = () =>
   [...Object.values(clips), clips._muffled].filter(
     (a) => a && a instanceof Audio && !a.paused && !a.ended && !a._fading,
   ).length;
+// A local plugin may serve some clips from elsewhere: fn(key) returns a URL, or null to use audio/<key>.mp3.
+let clipResolver = null;
+export function setClipResolver(fn) {
+  clipResolver = fn;
+}
+const clipUrl = (key) => clipResolver?.(key) || new URL(`../../audio/${key}.mp3`, import.meta.url).href;
 export function stopVoice(ms = 80) {
   voiceGen++; // a clip still starting up for the old line won't play on
   const a = curVoice;
@@ -187,7 +193,7 @@ function playVoice(key, { rate = 1, muffle = false } = {}, gen = voiceGen, done 
     const c = audioContext();
     if (!c) return;
     try {
-      const a = new Audio(new URL(`../../audio/${key}.mp3`, import.meta.url).href);
+      const a = new Audio(clipUrl(key));
       a.crossOrigin = 'anonymous';
       const src = c.createMediaElementSource(a),
         f = c.createBiquadFilter(),
@@ -266,7 +272,7 @@ function playVoice(key, { rate = 1, muffle = false } = {}, gen = voiceGen, done 
     return;
   }
   try {
-    const a = clips[key] || (clips[key] = new Audio(new URL(`../../audio/${key}.mp3`, import.meta.url).href));
+    const a = clips[key] || (clips[key] = new Audio(clipUrl(key)));
     a._fading = false;
     a.pause();
     a.currentTime = 0;
