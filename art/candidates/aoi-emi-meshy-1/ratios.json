@@ -1,0 +1,22 @@
+{
+ "Aoi model": {
+  "height_share": 0.43,
+  "head_over_legs_width": 2.11,
+  "chin_row": 440
+ },
+ "Emi model": {
+  "height_share": 0.477,
+  "head_over_legs_width": 2.78,
+  "chin_row": 488
+ },
+ "Aoi picture c2": {
+  "height_share": 0.419,
+  "head_over_legs_width": 2.31,
+  "chin_row": 440
+ },
+ "Emi picture c1": {
+  "height_share": 0.471,
+  "head_over_legs_width": 2.96,
+  "chin_row": 463
+ }
+}
