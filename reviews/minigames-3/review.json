@@ -1,0 +1,62 @@
+{
+ "title": "Kotodama: a new grammar game from scratch",
+ "date": "2026-10-04",
+ "by": "claude-agent:grammar-game",
+ "status": "open",
+ "question": "This is a playable prototype, not pictures: play it at https://fumbleforce.github.io/tower-of-words/game3d/minigames/kotodama.html (phone or desktop, about four minutes). It's a new game, started over after \"even less fun, start over, write a new game from scratch, make it the most fun and impressive grammar game in existence\". Is this fun?",
+ "multi": false,
+ "media": [
+  {
+   "image": "reviews/minigames-3/shots/strip-combo.webp",
+   "caption": "Frame strip, phone: the first と combo in shift 2. ケンジくんと モリさんに コーヒーを だしてください: the lights dip, the command rises off the vending machine, two cans fly, both bubbles pop, then 2 × 2 with the streak and ください multipliers."
+  },
+  {
+   "image": "reviews/minigames-3/shots/strip-swapped.webp",
+   "caption": "Frame strip, phone: the particles swapped on purpose. コーヒーに ミオさんを だして puts Mio out of the vending machine and lands her on the coffee, then one line says what を and に said."
+  }
+ ],
+ "options": [
+  {
+   "id": "kotodama",
+   "label": "kotodama: fun, keep going with it",
+   "image": "reviews/minigames-3/shots/phone-3-built.webp",
+   "images": [
+    "reviews/minigames-3/shots/phone-1-title.webp",
+    "reviews/minigames-3/shots/phone-2-first.webp",
+    "reviews/minigames-3/shots/phone-4-swapped.webp",
+    "reviews/minigames-3/shots/phone-5-launch.webp",
+    "reviews/minigames-3/shots/phone-6-why.webp",
+    "reviews/minigames-3/shots/phone-7-pick.webp",
+    "reviews/minigames-3/shots/phone-8-combo-built.webp",
+    "reviews/minigames-3/shots/phone-9-combo.webp",
+    "reviews/minigames-3/shots/phone-10-shift3.webp",
+    "reviews/minigames-3/shots/phone-11-end.webp",
+    "reviews/minigames-3/shots/desktop-1-combo-built.webp",
+    "reviews/minigames-3/shots/desktop-2-combo.webp",
+    "reviews/minigames-3/shots/desktop-3-shift3.webp",
+    "reviews/minigames-3/shots/desktop-4-end.webp"
+   ],
+   "note": "The pitch: B2 after six, and the old machines do exactly what Eric says, word for word. You build each command from the room itself (tap who and what, give each a particle, then fire the verb), and the particles decide what flies where. Requests pile up faster than one command can answer them one at a time, so と (two or three people served in one sentence) is the combo you need, scored 2 × 2 or 3 × 3 with a streak on top. Between shifts you pick a power word: も, みんな, まって or ください. Three shifts, three hearts, a daily run with a best score. The design page, with what it borrows and an honest check, is game3d/minigames/README.md (Kotodama). The screens come from a headless run of the daily seed; the frame strips are from game3d/minigames/tools/frames.mjs."
+  },
+  {
+   "id": "not-fun",
+   "label": "not-fun: not it yet",
+   "image": "reviews/minigames-3/shots/phone-9-combo.webp",
+   "note": "Say what's missing in the comment and it goes into the next round."
+  }
+ ],
+ "links": [
+  {
+   "label": "Play Kotodama (published)",
+   "href": "https://fumbleforce.github.io/tower-of-words/game3d/minigames/kotodama.html"
+  },
+  {
+   "label": "Locally",
+   "href": "game3d/minigames/kotodama.html"
+  },
+  {
+   "label": "The design page",
+   "href": "game3d/minigames/README.md"
+  }
+ ]
+}
