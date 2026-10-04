@@ -1,0 +1,11 @@
+{
+ "title": "meshy-single, rigged (char-mio-parts-1)",
+ "blurb": "A real rigged 3D model, not a picture: the Meshy Mio from one picture (meshy-single, char-mio-gen3d-1), a copy decimated from 1,280,368 to 299,999 faces with its own texture, then Meshy auto-rig at 1.6 m. Idle and walk are the game's (Mio's approved idle and walk, carried over by bone name). Beside her: the in-game Mio, playing the same moves. Drag to turn, wheel to zoom.",
+ "attempts": {
+  "meshy-single": "/art/parts/char-mio-parts/meshy/meshy-single-rigged.glb"
+ },
+ "compare": {
+  "Mio (in game)": [{"glb": "/game3d/assets/mio/walk.glb", "tex": "/game3d/assets/mio/base-clean.webp"}]
+ },
+ "refs": ["/art/parts/style-concepts/mio-ref-clean/final.png"]
+}

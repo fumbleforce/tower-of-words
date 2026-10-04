@@ -8,6 +8,10 @@
  "multi": true,
  "media": [
   {
+   "image": "art/parts/char-mio-parts/meshy-single/motion-rigged.webp",
+   "caption": "Your words: \"can you make the meshy single move?\" meshy-single rigged, a real 3D model in the live viewer: rest, your approved idle, and the walk from the front, her left side and the back, the in-game Mio beside her (on the side view the two overlap). How: a copy of meshy-single decimated from 1,280,368 to 299,999 faces with its own texture (Meshy's auto-rig takes at most 320,000), then Meshy auto-rig at 1.6 m (5 credits); the idle and walk are the game's, carried over by bone name. What shows: her hands stretch at the wrist in the walk (the auto-rig's weights), and the eye edge you named is still there. Not in the game."
+  },
+  {
    "image": "art/parts/char-mio-parts/faces-face.webp",
    "caption": "Faces front: the target, meshy-single, then every attempt in order. Your brief on meshy-single: \"REALLY quite close, sans the dirty textures and the eyes which have tilted forward on their own little edge\"; on the cleanup: \"not good enough\"; your tip: \"generate head, body, and accessories separately in meshy/tripo and assemble+rig in blender\"."
   },
@@ -201,11 +205,15 @@
  ],
  "links": [
   {
+   "label": "meshy-single moving: a real rigged 3D model (Meshy auto-rig), playing the game's idle and walk beside the in-game Mio (live 3D, drag to turn)",
+   "href": "tools/characters/parts/viewer.html?cfg=/reviews/char-mio-parts-1/viewer-single.json&a=meshy-single&m=walk&c=Mio%20(in%20game)"
+  },
+  {
    "label": "Turn a11, a10 and a07, play idle and walk, meshy-single beside her (live 3D)",
    "href": "tools/characters/parts/viewer.html?a=a11&m=idle&c=meshy-single"
   },
   {
-   "label": "Credits spent (Meshy 90 of 1,525; Tripo none)",
+   "label": "Credits spent (Meshy 95; the rig was 5, balance now 480; Tripo none)",
    "href": "reviews/char-mio-parts-1/credits.json"
   },
   {
