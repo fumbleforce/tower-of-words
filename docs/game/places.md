@@ -283,7 +283,7 @@ Kuro works the head office reception all day. The two from Sales appear inside t
 
 | Id | Usually | Schedule |
 |---|---|---|
-| `kuro` | Behind the reception counter in the head office lobby, facing the door. | – |
+| `kuro` | Behind the reception counter in the head office lobby, facing the door. Eric approaches the visitor position in front of the counter to talk to her. | – |
 | `mio` | Hidden (she ran ahead to a server). | – |
 
 The crowd ([systems.md](systems.md), The crowd):
