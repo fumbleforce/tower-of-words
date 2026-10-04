@@ -35,7 +35,7 @@ export const DEFAULTS = {
   voiceOn: true,
   quality: 'auto', // 'auto' | 'low' | 'medium' | 'high' (post.js reads the tier; see qualityTier())
   surfaces: true, // Surface detail: patterns in floors, walls, fabric and metal (look/procedural.js)
-  chibi: true, // everyone as the Meshy chibis, from the next load (chibi.js; ?chibi=0 forces the code-built people)
+  chibi: false, // the Meshy chibis, from the next load (chibi.js; ?chibi=1 forces them). Off: Jørgen dropped the look, 2026-10-04
   reduceMotion: reduceDefault,
   keySay: 'KeyQ',
   uiSize: 1, // a multiplier on the viewport-based UI scale (0.85, 1, 1.2, 1.4)
@@ -52,10 +52,12 @@ export const CPS = { slow: 28, normal: 55, fast: 110, instant: 0 };
 // One-time changes to saved settings, in order; v is the version they were saved at (missing = 0).
 //   1: the chibi cast became the default look (Jørgen, 2026-10-03), so a saved chibi: false from the old default
 //      is turned on once; turning it off in Settings afterwards sticks.
-const VERSION = 1;
+//   2: the chibi look was dropped (Jørgen, 2026-10-04: "too creepy looking"), so it is turned off once.
+const VERSION = 2;
 function migrate(s) {
   const v = s.v || 0;
   if (v < 1) s.chibi = true;
+  if (v < 2) s.chibi = false;
   s.v = VERSION;
   return s;
 }
