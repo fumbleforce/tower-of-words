@@ -43,6 +43,7 @@ import { worksPlace as works } from './places/works.js';
 import { snapshot as snapshotOf, crossfade } from './places/crossfade.js';
 import { installSim, sim, stepAmbient, save, loadSave, clearSave } from './sim.js';
 import { createContinue, dayStartSave } from './continue.js';
+import { installViewer } from './plugins.js';
 
 const CAP = Q.has('cap');
 const TEST = Q.get('test') === 'fast';
@@ -559,6 +560,7 @@ async function boot() {
   game.mioNpc.blob = blob(0.55, 0.4);
   game.mioNpc.root.add(game.mioNpc.blob);
   requestAnimationFrame(frame);
+  if (await installViewer(Q, { game, continueFrom })) return; // ?scene=<id>, local only (plugins.js)
   // ?day=2: straight into that day, from the player's own finished day before it, or a plain one (days.js)
   const forced = +Q.get('day') > 1 ? dayStartSave(+Q.get('day'), Q.get('history') || 'mio', Q.get('place')) : null;
   const start = forced?.place || Q.get('place') || 'train';

@@ -107,3 +107,11 @@ body.phone #marks .mark.thing.below .pin { top: -13px; }
 body.phone #marks .mark.goal.below .pin { top: -18px; }
 body.phone #marks .mark.below.flip .pin { left: -54px; }
 body.phone #marks .mark.goal.below.flip .pin { left: -60px; }
+
+/* a pin that names its own symbol (engine.js setIcon): the heart of a private scene, in the eye's disc, rim and size.
+   Purple marks a soft scene, red a hard one. Both read on the dark disc in day and evening light. */
+#marks .mark .pin svg.heart { display: none; }
+#marks .mark[class*="icon-heart"] .pin svg:not(.heart) { display: none; }
+#marks .mark[class*="icon-heart"] .pin svg.heart { display: block; }
+#marks .mark.icon-heart-soft .pin svg.heart, #marks .mark.icon-heart-soft.near .pin svg.heart { fill: #c9a0ff; }
+#marks .mark.icon-heart-hard .pin svg.heart, #marks .mark.icon-heart-hard.near .pin svg.heart { fill: #ff5468; }

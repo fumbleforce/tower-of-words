@@ -199,6 +199,17 @@ export class Walker {
 // ---------- screen markers for people and things ----------
 // A small DOM pin that follows a 3D point: a circle with a symbol on a short line down to the person or thing.
 const NEAR_PIN = 2.5; // m from Eric to the spot in front of it
+// a thing may name its own symbol: item.icon is a name ('heart-soft', 'heart-hard') or a function giving one (or
+// ''), and the pin takes the class icon-<name> (css/marks.css). Only the name is known here; local plugins supply it.
+const HEART =
+  '<svg class="heart" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5C5.2 15.6 3 12.2 3 8.8 3 6.3 5 4.5 7.3 4.5c1.9 0 3.5 1 4.7 2.8 1.2-1.8 2.8-2.8 4.7-2.8C19 4.5 21 6.3 21 8.8c0 3.4-2.2 6.8-9 11.7z"/></svg>';
+function setIcon(m) {
+  const name = typeof m.icon === 'function' ? m.icon() : m.icon;
+  if (name === m._ic) return;
+  if (m._ic) m.el.classList.remove('icon-' + m._ic);
+  if (name) m.el.classList.add('icon-' + name);
+  m._ic = name;
+}
 export class Markers {
   constructor(layer) {
     this.layer = layer;
@@ -221,8 +232,10 @@ export class Markers {
           : '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 6c4.4 0 7.8 3.3 9 6-1.2 2.7-4.6 6-9 6s-7.8-3.3-9-6c1.2-2.7 4.6-6 9-6zm0 3a3 3 0 1 0 0 6 3 3 0 0 0 0-6z"/></svg>';
     el.innerHTML = `<span class="pin" aria-hidden="true">${icon}</span><span class="tag"><span class="vb">${item.verb || (person ? 'Talk' : 'Look')}</span><span class="nm">${item.label}</span><span class="key">E</span></span><span class="stem" aria-hidden="true"></span>`;
     el.setAttribute('aria-label', item.label);
+    if (item.icon) el.querySelector('.pin').insertAdjacentHTML('beforeend', HEART);
     this.layer.appendChild(el);
     item.el = el;
+    if (item.icon) setIcon(item);
     item.enabled = item.enabled ?? true;
     this.list.push(item);
     return item;
@@ -282,6 +295,7 @@ export class Markers {
           m.el.querySelector('.nm').textContent = want;
         }
       }
+      if (m.icon) setIcon(m);
       m.el.classList.toggle('near', near === m);
       const isGoal = !!(m.goal && m.goal());
       m.el.classList.toggle('goal', isGoal);
