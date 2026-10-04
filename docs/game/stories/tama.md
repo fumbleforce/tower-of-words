@@ -10,7 +10,7 @@ A calico cat who rides the monorail and gets off wherever she likes. She's Eric'
 
 1. On the train she sits on the far bench washing. Talking to her: she lets him scratch behind one ear. Mio sends him to say おはようございます to her (his first use of Say), and she answers with a heart ([`mio-train`](mio-train.md)). 待って makes her stop washing, one paw in the air, and stare. She gets off at Honsha with everyone else.
 2. At the gate she's by the guard's desk, eating from her bowl. Talking to her: the guard, sternly, 猫？何の猫ですか, and the bowl disappears. Greeting her, 待って ("Tama freezes with her head in the bowl.") or すみません (she trots to the desk): each time, 猫はいません. Pointing at her during the jam gets the same ([`sleeping-man`](sleeping-man.md)). The visitor book says "TAMA is the first name in today's visitor book."
-3. On B2 she's asleep on Eric's chair in the machine room, and rides it back to his desk ([`b2-welcome`](b2-welcome.md)). She opens one eye and closes it again. A line of small paw prints goes up the stairs in the dust.
+3. On B2 she's asleep on Eric's chair in the machine room. Petting her there sends the chair back to his desk with her riding it ([`b2-welcome`](b2-welcome.md)). She opens one eye and closes it again. A line of small paw prints goes up the stairs in the dust.
 
 ## Choices and flags
 

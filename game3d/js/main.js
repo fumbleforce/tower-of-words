@@ -11,7 +11,8 @@ import { createRenderer, Markers, Q, blob } from './engine.js';
 import { installMetrics } from './perf/metrics.js';
 import { createView } from './perf/view.js';
 import { guardedLoop } from './perf/gl-guard.js';
-import { pickPerson, bodies, softSeparate } from './move.js';
+import { pickPerson, softSeparate } from './move.js';
+import { scanTargets } from './gameplay/targeting.js';
 import * as ambience from './ambience.js';
 import { mioBody, ericBody } from './chibi.js';
 import { makeAvatar, setSitLift } from './avatar.js';
@@ -492,48 +493,9 @@ function step(dt) {
   softSeparate(game, dt); // people overlapping are pushed apart gently (move.js, soft collision)
   place.cam?.update?.(dt, mio.root.position);
   if (!game.saveEnabled) return;
-  // nearest usable thing, the Say target, and near/zone triggers
-  let near = null,
-    nd = 0.95,
-    st = null,
-    sd = 2.2;
-  // seated he can reach a bit further (his seat spot is not the bench edge), but not across the carriage
-  const seatedReach = game.player.seated ? 0.35 : 0;
+  // nearest usable thing, the Say target and near: triggers (gameplay/targeting.js); then the zones
+  let { near, st } = scanTargets(game, nearSet);
   const mp = mio.root.position;
-  // people are in reach within talking range of the person, from any side (not only at their one marker spot); the
-  // current goal wins a close call (QA round 1: E and the phone's Use button picked the reader next to Mio)
-  const who = new Map();
-  for (const b of bodies(game)) who.set(b.id, b);
-  const talkR = 0.8 * (place.charScale || 1);
-  for (const m of game.markers.list) {
-    if (!m.enabled()) continue;
-    const s = m.spot ? m.spot() : null;
-    if (!s) continue;
-    const d = Math.hypot(mp.x - s[0], mp.z - s[1]);
-    const b = /person/.test(m.kind || '') && who.get(m.id);
-    const dr =
-      b && b.root !== mio.root ? Math.min(d, Math.max(0, Math.hypot(mp.x - b.x, mp.z - b.z) - talkR) + 0.3) : d;
-    const dn = dr - (m.goal && m.goal() ? 0.3 : 0) + (m.nearOnly?.() ? 0.4 : 0); // close-only things lose close calls
-    if (!game.busy && dn < nd + seatedReach) {
-      nd = dn - seatedReach;
-      near = m;
-    }
-    const bias =
-      (m.goal && m.goal() ? -1.2 : 0) +
-      (/person/.test(m.kind || '') ? -0.7 : 0) +
-      (m.wordable && m.wordable() ? -0.6 : 0);
-    // Say works on what's in reach; goals and people win over things when several are close
-    if (!game.busy && known.size && d < 1.6 + seatedReach && d + bias < sd) {
-      sd = d + bias;
-      st = m;
-    }
-    if (d < 0.9) {
-      if (!nearSet.has(m.id) && !game.busy) {
-        nearSet.add(m.id);
-        game.runner.trigger('near:' + m.id);
-      }
-    } else if (d > 1.3) nearSet.delete(m.id);
-  }
   for (const [z, fn] of Object.entries(place.zones || {})) {
     const inz = fn(mp.x, mp.z);
     // a zone fires once per visit, but only when it can: if he walked in during a scene, or before the zone's

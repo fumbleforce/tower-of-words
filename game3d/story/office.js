@@ -65,7 +65,9 @@ export default {
     ],
     // while the first can is stuck the machine takes no new order: 動いて gets the one already paid for
     'talk:vending': [{ if: 'vend_stuck', node: 'vend_still_stuck' }, 'vending'],
-    'talk:tama': 'tama',
+    // the cat moves the chair scene along: petting her sends the chair home with her on it (Jørgen, 2026-10-04: "make
+    // the cat be the one that moves the scene along"); the chair's own Push still does the same
+    'talk:tama': [{ if: '!chair_back && found_chair', node: 'chair_push' }, 'tama'],
     'talk:inout_board': 'inout_board',
     'talk:covered': 'covered',
     'talk:stairs': 'stairs',
@@ -108,7 +110,7 @@ export default {
     mori: '!greeted_mori',
     kenji: 'greeted_mori && !kenji_intro',
     machine_door: 'kenji_intro && !machine_open',
-    my_chair: 'found_chair && !chair_back',
+    tama: 'found_chair && !chair_back',
     copier: 'got_ticket && !copier_done',
     vending: 'vend_stuck',
     my_desk: 'afternoon_on && !evening_on',

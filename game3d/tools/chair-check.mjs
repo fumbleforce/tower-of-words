@@ -9,6 +9,8 @@
 //  - uses the chair through its menu row and checks the push starts from that (and not before),
 //  - samples Mio's heading every frame from the push to her line and fails if she turns more than 1.5 full turns,
 //  - checks chair_back and got_ticket are set after the scene.
+// MODE=key starts the push by keyboard only (E with Mio, the cat and the chair in reach); MODE=tap by a tap on the
+// cat's pin and its menu row. Either must start it from the cat or the chair.
 // Output: game3d/shots/chair/<w>x<h>/ (JPEGs, log.json). BASE=<path to game3d> tests a worktree's copy.
 import { withBrowserJob } from '../../tools/lib/browser-job.mjs';
 import { openGame } from '../test/support/open-game.mjs';
@@ -132,8 +134,77 @@ await withBrowserJob('chair-check', async (browser) => {
     g.use = window.__keep.use;
     g.sayWord = window.__keep.sayWord;
   });
-  await page.evaluate(() => { const r = window.__game.runner, t = r.trigger.bind(r); window.__trig = []; r.trigger = (k, o) => { const v = t(k, o); window.__trig.push(k + '=' + v); return v; }; });
-  const clicked = await page.evaluate(() => {
+  // every talk the player starts from here on, with the node it runs (talk:tama>chair_push)
+  await page.evaluate(() => { const r = window.__game.runner, t = r.trigger.bind(r); window.__trig = []; r.trigger = (k, o) => { if (/^talk:/.test(k)) window.__trig.push(k + '>' + r.resolve(k, { peek: true })); return t(k, o); }; });
+  // MODE=key: keyboard only. Eric stands where Mio, the cat and the chair are all in reach, nothing picked, and
+  // presses E (Jørgen, 2026-10-04: "impossible to do it by keyboard as you will always either interact with mio or
+  // the cat"). MODE=tap: a tap on the cat's pin, then its menu's action row. Default: the chair's own menu row.
+  const MODE = process.env.MODE || 'menu';
+  let clicked;
+  if (MODE === 'key') {
+    // every spot round the chair where a goal is in reach: which target E would use there. Then E is pressed at the
+    // first spot that picks something else (before the fix), or at STAND=x,z (default: between the cat and Mio)
+    log.keyStand = await page.evaluate(async (stand) => {
+      const g = window.__game;
+      g.ui.closeActs?.();
+      g.targetLock = null;
+      const frame = () => new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r)));
+      const put = async (x, z) => {
+        g.player.root.position.x = x;
+        g.player.root.position.z = z;
+        g.walker.sync?.();
+        await frame();
+      };
+      const cat = g.markers.list.find((x) => x.id === 'tama').spot();
+      const goals = () => g.markers.list.filter((m) => m.enabled() && m.goal());
+      const scan = { spots: 0, wrong: [] };
+      for (let x = cat[0] - 1.0; x <= cat[0] + 1.0; x += 0.2)
+        for (let z = cat[1] - 1.6; z <= cat[1] + 0.6; z += 0.2) {
+          await put(x, z);
+          const reach = goals().filter((m) => { const s = m.spot(); return Math.hypot(x - s[0], z - s[1]) < 0.9; });
+          if (!reach.length || !g.near) continue;
+          scan.spots++;
+          if (!reach.includes(g.near)) scan.wrong.push([+x.toFixed(2), +z.toFixed(2), g.near.id]);
+        }
+      const p = scan.wrong[0] || stand || [cat[0], cat[1] - 0.6];
+      await put(p[0], p[1]);
+      await new Promise((r) => setTimeout(r, 500));
+      return { goals: goals().map((m) => m.id), scan: { spots: scan.spots, wrong: scan.wrong.length, sample: scan.wrong.slice(0, 8) }, eric: [p[0], p[1]].map((v) => +v.toFixed(2)), near: g.near?.id, menuClosed: g.ui.menuClosed() };
+    }, process.env.STAND ? process.env.STAND.split(',').map(Number) : null);
+    console.log('key stand', JSON.stringify(log.keyStand));
+    await shot('key-stand');
+    await page.keyboard.press('KeyE');
+    clicked = await page.evaluate(() => ({ called: window.__game.near?.id, busy: window.__game.busy, trig: window.__trig.slice() }));
+  } else if (MODE === 'tap') {
+    const box = await page.evaluate(() => {
+      const g = window.__game;
+      g.ui.closeActs?.();
+      g.targetLock = null;
+      // where the cat is on screen (her anchor, just above her back)
+      const m = g.markers.list.find((x) => x.id === 'tama');
+      const a = m.anchor(g.player.root.position.clone());
+      a.y -= 0.2;
+      a.project(g.place.camera);
+      const r = document.getElementById('c').getBoundingClientRect();
+      const p = { x: r.left + ((a.x + 1) / 2) * r.width, y: r.top + ((1 - a.y) / 2) * r.height };
+      return p.x > 0 && p.y > 0 && p.x < innerWidth && p.y < innerHeight ? p : null;
+    });
+    log.tapAt = box;
+    if (!box) fails.push('tama: not on screen to tap');
+    else {
+      await page.touchscreen.tap(box.x, box.y);
+      await page.waitForTimeout(1500);
+      await shot('tap-cat');
+      const row = await page.$('#actMenu:not([hidden]) .act.use');
+      log.tapMenu = await page.evaluate(() => [...document.querySelectorAll('#actMenu:not([hidden]) .act')].map((b) => b.textContent.trim()));
+      if (row) {
+        const rb = await row.boundingBox();
+        await page.touchscreen.tap(rb.x + rb.width / 2, rb.y + rb.height / 2);
+      }
+      clicked = await page.evaluate(() => ({ called: 'tama', busy: window.__game.busy, trig: window.__trig.slice() }));
+    }
+  } else {
+  clicked = await page.evaluate(() => {
     const b = document.querySelector('#actMenu:not([hidden]) .act.use');
     if (!b) return false;
     const g = window.__game, u = g.use;
@@ -143,6 +214,7 @@ await withBrowserJob('chair-check', async (browser) => {
     g.use = u;
     return { called, busy: g.busy, saying: g.saying, seated: g.player.seated };
   });
+  }
   if (!clicked) fails.push('my_chair: no use row to click');
   console.log('click', JSON.stringify(clicked));
   await page.waitForTimeout(1200);
@@ -152,6 +224,10 @@ await withBrowserJob('chair-check', async (browser) => {
   await page.waitForTimeout(300);
   log.afterClick = await page.evaluate(() => { const g = window.__game; return { busy: g.busy, saying: g.saying, hold: g.hold, near: g.near?.id, path: !!g.walker.path, trig: window.__trig, node: g.runner.node || g.runner.current || null }; });
   console.log('after click', JSON.stringify(log.afterClick));
+  // the first thing the player used must be what starts the push
+  const first = (log.afterClick.trig || [])[0] || 'nothing';
+  if (MODE !== 'menu' && !/^talk:(tama|my_chair)>chair_push$/.test(first))
+    fails.push(`${MODE}: the first use was ${first}, not the push (all: ${(log.afterClick.trig || []).join(', ')})`);
   await shot('push-done');
   await page.waitForFunction(() => window.__spin.line, null, { timeout: 60000 }).catch(() => fails.push('Mio never said her chair line'));
   await shot('mio-line');
