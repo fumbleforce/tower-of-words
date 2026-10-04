@@ -132,10 +132,11 @@ export async function forecourtPlace(game) {
     const jump = !turnAt || Math.hypot(p.x - turnAt[0], p.z - turnAt[1]) > 0.8;
     turnAt = [p.x, p.z];
     if (!phone) return;
-    // Look north in the bicycle court, keeping the station wall out of the phone's foreground.
+    // Look north in the bicycle court and lobby, keeping their side walls out of the phone's foreground.
     const want =
       (1 - THREE.MathUtils.smoothstep(p.x, TURN[0], TURN[1])) *
-      (1 - THREE.MathUtils.smoothstep(p.z, BIKES[2], BIKES[2] + 0.8));
+      (1 - THREE.MathUtils.smoothstep(p.z, BIKES[2], BIKES[2] + 0.8)) *
+      THREE.MathUtils.smoothstep(p.z, w.hoDoor[1], w.hoDoor[1] + 0.8);
     if (Math.abs(want - turn) < 1e-4) return; // settled: leave the camera alone (the lift ride sets its elevation)
     setTurn(jump ? want : turn + (want - turn) * (1 - Math.exp(-dt / 0.45)));
   };
