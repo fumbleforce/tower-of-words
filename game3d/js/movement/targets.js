@@ -78,6 +78,8 @@ export function standOff(game, rig, [x, z]) {
 export function approachSpot(game, item) {
   const P = game.place;
   if (!P || !item || !/person/.test(item.kind || '')) return null;
+  // A counter can require an authored visitor position, even for a standing person.
+  if (item.fixedSpot) return item.spot?.() || null;
   const r = P.people && P.people[item.id];
   if (!r || !r.root || !r.root.visible) return null;
   const seatedNow = !!r.seated || (!!r.hips && r.root.position.y > 0.05);

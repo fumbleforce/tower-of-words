@@ -64,6 +64,7 @@ export async function forecourtPlace(game) {
         return v;
       },
       spot: () => w.headOffice.receptionFront,
+      fixedSpot: true,
       face: () => w.headOffice.kuroAt,
     },
     plaza_lane: {
