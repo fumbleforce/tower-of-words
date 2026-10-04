@@ -16,12 +16,13 @@ The picked full-island layout is [island-map-4](../../reviews/island-map-4/revie
 
 ## Birds and small animals
 
-Jørgen, 2026-10-02: "we must make the island feel more alive ... and small creatures, birds etc". The outdoor places have birds and a few small animals, listed in each place's "Creatures" table: the group's id, its kind, how many there are on the high graphics tier, and when it is about (`day` is early morning to the afternoon, `evening` is after work, `all` is both). Medium graphics, what a phone picks, shows three quarters of each group and low graphics half, at least one. They are scenery: there is nothing to use, look at or talk to, no story reads them, and they never stand in Eric's way.
+Jørgen, 2026-10-02: "we must make the island feel more alive ... and small creatures, birds etc". The outdoor places have birds and a few small animals, listed in each place's "Creatures" table: the group's id, its kind, how many there are on the high graphics tier, and when it is about (`day` is early morning to the afternoon, `evening` is after work, `all` is both). Medium graphics, what a phone picks, shows three quarters of each group and low graphics half, at least one. They are scenery: no story reads them and they never stand in Eric's way. The cats are the one thing to use: Eric can pet them (below).
 
 - Pigeons and sparrows feed as a flock on paving Eric can see. When anyone walks up close (Eric, Mio or someone else), the flock scatters: the birds take off a moment apart, some to a roof, a wall or a hedge nearby and the rest away out of sight. Ten to twenty seconds later the flock lands again on another bit of paving in view. A flock left behind out of sight moves on and lands near him again.
 - Crows sit one to a roof, a tree or a wall, look about and caw now and then. About every half minute one moves to a perch nearer Eric. A crow sitting low flies off when someone comes close.
 - Gulls circle low over the water nearest Eric (over the place itself where there is none), mostly gliding. The others sit on the water, a quay or a roof, and every so often they swap. The harbour's gulls after work only sit.
 - Cats sit up on a wall, a planter or a bench, or at the foot of a wall, looking out over the street. They are Tama's body in their own coats (black, grey tabby, ginger and white): they breathe, sway the tail, flick an ear and blink, and the head follows Eric while he is near. None of them is Tama ([stories/tama.md](stories/tama.md)).
+- Any cat Eric can reach can be petted, the way Tama is (Jørgen, 2026-10-04: "I need to be able to pet the other stray cats as well"): it has Tama's paw pin, Pet is on E when it is the nearest target and on a tap, and he walks to free floor beside it, bends down and strokes it. The cat looks up and leans into his hand with a soft purr, then settles (black cats mostly curl up, tabbies wash, ginger ones sit on; sometimes another way), and ten or so seconds later sits up as before. The first time each cat is petted in a day, one narration line says something about it that can't be seen (its fur, its smell). No story, bond or flag comes of it. A cat picks a spot Eric can reach when there is one in range; one sitting too high (over about 0.7 units up), or with no free floor beside it that Eric can walk to, is not a target. Pigeons, sparrows, crows, gulls and insects stay scenery.
 - Butterflies loop over lawns and planting. Red dragonflies (akatombo, it is October) hover and then dart a little way.
 - When a group's time of day ends it flies off, or slips away where Eric can't see; when its time comes it flies in.
 - Where they can be is surveyed from each built place by game3d/tools/creature-perches.mjs, which writes game3d/js/creatures/perches.js. Run it again when a place's geometry changes; `--check` says whether any stored point has moved. Their sounds are in [art-and-sound.md](art-and-sound.md).
@@ -402,7 +403,7 @@ The crowd ([systems.md](systems.md), The crowd):
 | `crows` | crow | 2 | `all` | On the fountain's top, the roofs and the trees. |
 | `butterflies` | butterfly | 3 | `day` | Over the lawns. |
 | `dragonflies` | dragonfly | 3 | `day` | Over the lawns. |
-| `cat` | cat | 1 | `evening` | A grey tabby on a wall or a bench. |
+| `cat` | cat | 1 | `evening` | A grey tabby on a wall or a bench. Can be petted. |
 
 ## Shop street and seafront (`shotengai`)
 
@@ -494,8 +495,8 @@ The crowd ([systems.md](systems.md), The crowd):
 | `sparrows` | sparrow | 3 | `day` | On the paving and the planters. |
 | `gulls` | gull | 3 | `day` | Over the sea off the seafront, and on the water. |
 | `crows` | crow | 2 | `all` | On the shop roofs. |
-| `shop_cat` | cat | 1 | `all` | A ginger and white cat by a shop wall or on a planter. |
-| `night_cat` | cat | 1 | `evening` | A black cat on a wall. |
+| `shop_cat` | cat | 1 | `all` | A ginger and white cat by a shop wall or on a planter. Can be petted. |
+| `night_cat` | cat | 1 | `evening` | A black cat on a wall. Can be petted. |
 
 ## East lane (`east_lane`)
 
@@ -585,7 +586,7 @@ The crowd ([systems.md](systems.md), The crowd):
 | `crows` | crow | 2 | `all` | On the roofs and the trees. |
 | `butterflies` | butterfly | 2 | `day` | Over the verges and gardens. |
 | `dragonflies` | dragonfly | 2 | `day` | Over the verges. |
-| `cat` | cat | 1 | `evening` | A grey tabby on a wall. |
+| `cat` | cat | 1 | `evening` | A grey tabby on a wall. Can be petted. |
 
 ## East coast (`east_coast`)
 
@@ -757,7 +758,7 @@ The crowd ([systems.md](systems.md), The crowd):
 | `crows` | crow | 3 | `all` | On the gym's roof, the fences and the trees. |
 | `butterflies` | butterfly | 2 | `day` | Over the grass. |
 | `dragonflies` | dragonfly | 4 | `day` | Over the grass. |
-| `cat` | cat | 1 | `evening` | A black cat on a wall. |
+| `cat` | cat | 1 | `evening` | A black cat on a wall. Can be petted. |
 
 ## Office street (`office_quarter`)
 
@@ -842,7 +843,7 @@ The crowd ([systems.md](systems.md), The crowd):
 | `pigeons` | pigeon | 6 | `day` | On the office street. |
 | `sparrows` | sparrow | 3 | `day` | On the street and in the planting. |
 | `crows` | crow | 2 | `all` | On the office blocks' canopies and roofs, and the trees. |
-| `cat` | cat | 1 | `evening` | A grey tabby on a wall or a planter. |
+| `cat` | cat | 1 | `evening` | A grey tabby on a wall or a planter. Can be petted. |
 
 ## Harbour (`harbour`)
 
@@ -929,7 +930,7 @@ The crowd ([systems.md](systems.md), The crowd):
 | `night_gulls` | gull | 3 | `evening` | Sitting on the water, the quays and the roofs. |
 | `pigeons` | pigeon | 4 | `day` | On the street and in the yard. |
 | `crows` | crow | 2 | `all` | On the roofs and the trees. |
-| `harbour_cat` | cat | 1 | `all` | A ginger and white cat on a quay wall or a bench. |
+| `harbour_cat` | cat | 1 | `all` | A ginger and white cat on a quay wall or a bench. Can be petted. |
 
 ## Old works (`works`)
 
@@ -1007,7 +1008,7 @@ Nobody yet.
 | `pigeons` | pigeon | 5 | `day` | On the works yard's old concrete. |
 | `sparrows` | sparrow | 3 | `day` | On the yard and the street, in the weeds and hedges. |
 | `butterflies` | butterfly | 2 | `day` | Over the planting. |
-| `works_cat` | cat | 1 | `all` | A black cat on a wall or a ledge. |
+| `works_cat` | cat | 1 | `all` | A black cat on a wall or a ledge. Can be petted. |
 
 ## The lift (`lift`)
 
@@ -1173,7 +1174,7 @@ Grok agreed to these (G-0033): they keep 3 m clear of the sento doorway, the hal
 | Id | Kind | How many | When | Where |
 |---|---|---|---|---|
 | `sparrows` | sparrow | 4 | `day` | On the court's paving and the front bed's wall. |
-| `cat` | cat | 1 | `evening` | A grey tabby on the front bed's wall or a bench. |
+| `cat` | cat | 1 | `evening` | A grey tabby on the front bed's wall or a bench. Can be petted. |
 
 ## Eric's dorm room (`dorms`)
 

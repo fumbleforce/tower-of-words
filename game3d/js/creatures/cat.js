@@ -161,6 +161,7 @@ export function makeCat(coat = 'calico', { mode = 'sit' } = {}) {
     selfGait: true, // stepGait / stopGait leave her alone: update() steps her by what she really moved
     after: 'sit',
     look: null,
+    lean: 0, // 0..1: leaning into a hand that pets her (creatures/pet.js): chin up, head tilted, eyes half shut
     air: false, // in a hop: no steps
     get mode() {
       return base;
@@ -237,6 +238,14 @@ export function makeCat(coat = 'calico', { mode = 'sit' } = {}) {
     else if ((look.t -= dt) <= 0) ((look.t = rnd(2.5, 7)), (look.at = asleep || base === 'eat' ? 0 : rnd(-0.7, 0.7)));
     look.now += ((amt > 0.5 ? 0 : look.at) - look.now) * Math.min(1, dt * 3);
     o.ny += look.now;
+    const ln = rig.lean;
+    if (ln > 0) {
+      o.np -= 0.4 * ln;
+      o.nr += 0.3 * ln * Math.sin(t * 1.7);
+      o.eyes = Math.max(o.eyes, 0.7 * ln);
+      o.el -= 0.25 * ln;
+      o.er -= 0.25 * ln;
+    }
   }
   function apply(o) {
     const B = bones;

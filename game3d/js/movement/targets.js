@@ -74,13 +74,14 @@ export function standOff(game, rig, [x, z]) {
 // ---------- talking to someone ----------
 // Where Eric should stand to talk to a standing person: a talking distance away, on the side he comes from, leaning
 // toward their front (no walking round behind someone to reach their face); never inside furniture or another person. Null for seated people (their
-// places keep hand-placed spots) and for things.
+// places keep hand-placed spots) and for things. A thing with a `rig` (a stray cat, creatures/pet.js) is approached
+// like Tama: close beside her, wherever there is free floor round her (`dists`, its own distances to try).
 export function approachSpot(game, item) {
   const P = game.place;
-  if (!P || !item || !/person/.test(item.kind || '')) return null;
+  if (!P || !item || !(item.rig || /person/.test(item.kind || ''))) return null;
   // A counter can require an authored visitor position, even for a standing person.
   if (item.fixedSpot) return item.spot?.() || null;
-  const r = P.people && P.people[item.id];
+  const r = item.rig ? item.rig() : P.people && P.people[item.id];
   if (!r || !r.root || !r.root.visible) return null;
   const seatedNow = !!r.seated || (!!r.hips && r.root.position.y > 0.05);
   const nav = P.nav,
@@ -94,11 +95,16 @@ export function approachSpot(game, item) {
   const x = c.x,
     z = c.z,
     yaw = Math.atan2(f.x, f.z);
-  const D = (item.id === 'tama' ? 0.5 : TALK + (seatedNow ? 0.08 : 0)) * K; // seated: their knees reach into the aisle
+  const cat = item.id === 'tama' || !!item.rig;
+  const D = (cat ? 0.5 : TALK + (seatedNow ? 0.08 : 0)) * K; // seated: their knees reach into the aisle
   const others = bodies(game).filter((b) => b.root !== r.root && b.root !== game.player.root);
   const toMe = Math.atan2(me.x - x, me.z - z);
+  // a cat is small: he keeps out from between her and the camera, so she stays in sight while he pets her
+  const cam = cat && P.camera ? P.space.worldToLocal(P.camera.getWorldPosition(new THREE.Vector3())) : null,
+    toCam = cam ? Math.atan2(cam.x - x, cam.z - z) : 0,
+    hides = (a) => (cam ? Math.max(0, Math.PI / 2 - Math.abs(angDiff(a, toCam))) * 1.8 : 0);
   const cands = [];
-  for (const dist of [D, D * 0.85, D * 1.2])
+  for (const dist of item.dists ? item.dists.map((k) => k * K) : [D, D * 0.85, D * 1.2])
     for (let i = 0; i < 16; i++) {
       const a = yaw + (i / 16) * Math.PI * 2,
         cx = x + Math.sin(a) * dist,
@@ -109,7 +115,8 @@ export function approachSpot(game, item) {
         Math.abs(angDiff(a, yaw)) * 0.45 +
           Math.abs(angDiff(a, toMe)) * 0.75 +
           Math.hypot(cx - me.x, cz - me.z) * 0.15 +
-          Math.abs(dist - D) * 2,
+          Math.abs(dist - D) * 2 +
+          hides(a),
         cx,
         cz,
       ]);

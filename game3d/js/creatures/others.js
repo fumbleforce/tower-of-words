@@ -3,11 +3,14 @@
 //                breathing, the tail swaying, an ear flicking and blinking (cat.js, the same cat as Tama), and the
 //                head follows Eric while he is close, otherwise looks about.
 //                One left far behind, out of sight, finds another spot nearer him. None of them is Tama.
+//                Eric can pet them (pet.js): after it a cat stays settled (curled up, washing or sitting on) for a
+//                while, then sits up again as before.
 //   butterflies  wander in loops over lawns and planting; red dragonflies hover, then dart a little way.
 import * as THREE from 'three';
 import { butterflyGeometry, dragonflyGeometry } from './models.js';
 import { makeCat } from './cat.js';
 import { InsectMeshes } from './meshes.js';
+import { pettable } from './pet.js';
 
 const rnd = (a, b) => a + Math.random() * (b - a);
 const angle = (a) => Math.atan2(Math.sin(a), Math.cos(a));
@@ -25,18 +28,14 @@ export class Cat {
     this.root.visible = false;
     parent.add(this.root);
   }
-  // a spot: on a low perch, else at the foot of a wall; seen = must be on screen (true), off it (false), either
+  // a spot: on a low perch, else at the foot of a wall; seen = must be on screen (true), off it (false), either.
+  // Somewhere Eric can reach to pet her first (pet.js), anywhere else only if there is no such spot
   place(seen) {
     const W = this.W;
-    const s =
-      W.claim('low', this, { min: 4, max: 16, view: seen, maxY: 1.6 }) ||
-      W.claim('ground', this, {
-        min: 4,
-        max: 16,
-        view: seen,
-        edge: true,
-        clear: 2,
-      });
+    const at = (ok) =>
+      W.claim('low', this, { min: 4, max: 16, view: seen, maxY: 1.6, ok }) ||
+      W.claim('ground', this, { min: 4, max: 16, view: seen, edge: true, clear: 2, ok });
+    const s = at((p) => pettable(W.nav, p, W.K)) || at();
     if (!s) return (this.root.visible = false);
     this.root.position.copy(s.p);
     // face out over the open ground: the direction round it with the most walkable space
@@ -51,6 +50,8 @@ export class Cat {
     }
     this.root.rotation.y = best + rnd(-0.4, 0.4);
     this.root.visible = true;
+    this.settled = 0;
+    this.rig.set('sit', { now: true });
     return true;
   }
   step(dt, active) {
@@ -72,9 +73,14 @@ export class Cat {
     }
     // the head on Eric while he is near, else the cat looks about by itself; the tail, ears and breathing are the
     // rig's own
+    // petted a while ago (pet.js): settled until then, then up to sitting and looking about again
+    if (this.settled && W.t > this.settled && !this.petting) ((this.settled = 0), this.rig.set('sit'));
     const dx = W.eric.x - r.position.x,
       dz = W.eric.z - r.position.z;
-    this.rig.look = Math.hypot(dx, dz) < 5 * W.K ? angle(Math.atan2(dx, dz) - r.rotation.y) : null;
+    this.rig.look =
+      this.petting || (Math.hypot(dx, dz) < 5 * W.K && this.rig.mode !== 'sleep')
+        ? angle(Math.atan2(dx, dz) - r.rotation.y)
+        : null;
     this.rig.update(dt);
     W.blob(r.position, 0.16 * W.K, r.position.y);
   }

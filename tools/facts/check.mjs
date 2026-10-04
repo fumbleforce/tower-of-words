@@ -355,6 +355,8 @@ function checkCreatures() {
       if (!g) { bad(file, `${place}: creatures \`${c}\` aren't in game3d/js/creatures/catalog.js`); continue; }
       for (const [col, want] of [['Kind', g.kind], ['How many', String(g.n)], ['When', g.when]])
         if (val(r[col]).replace(/`/g, '') !== want) bad(file, `${place}, creatures \`${c}\`: ${col.toLowerCase()} is "${want}" in the game, "${val(r[col])}" in the doc`);
+      // the cats are Pet targets (creatures/pet.js); nothing else is
+      if ((g.kind === 'cat') !== /Can be petted\./.test(r.Where || '')) bad(file, `${place}, creatures \`${c}\`: ${g.kind === 'cat' ? 'a cat can be petted in the game; its Where should say "Can be petted."' : 'only cats can be petted'}`);
     }
     for (const g of game) if (!seen.has(g.id)) bad(file, `${place}: the game has creatures \`${g.id}\` (${g.kind}), "Creatures" doesn't`);
   }
