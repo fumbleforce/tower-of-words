@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta name="robots" content="noindex, nofollow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Amakawa · Characters</title>
+<meta name="theme-color" content="#dfe4e8">
+<!-- The game's people, islanders and Tama in 3D, code-built or chibi, as the game builds them (js/viewer/). Turn, zoom and pan; the
+     address holds who is shown and what they do (js/viewer/main.js). -->
+<style>
+:root { --bg: #dfe4e8; --panel: rgba(250, 251, 252, 0.92); --line: rgba(29, 36, 48, 0.12); --text: #1d2430; --dim: #5d6773; --accent: #1f7f78; --accent-bg: rgba(31, 127, 120, 0.12); }
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; background: var(--bg); color: var(--text); font: 14px/1.35 system-ui, -apple-system, "Segoe UI", sans-serif; overflow: hidden; -webkit-tap-highlight-color: transparent; }
+body { display: grid; grid-template-columns: 276px 1fr; height: 100dvh; }
+#view { position: relative; min-width: 0; min-height: 0; }
+#c { display: block; width: 100%; height: 100%; touch-action: none; outline: none; }
+#panel { overflow-y: auto; padding: 18px 16px 16px; background: var(--panel); border-right: 1px solid var(--line); }
+h1 { font-size: 15px; margin: 0 0 14px; font-weight: 650; letter-spacing: 0.01em; }
+h2 { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--dim); margin: 14px 0 7px; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+button { font: inherit; color: var(--text); background: #fff; border: 1px solid var(--line); border-radius: 8px; padding: 6px 11px; min-height: 34px; cursor: pointer; white-space: nowrap; }
+button:hover { border-color: rgba(29, 36, 48, 0.3); }
+button:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+button[aria-pressed="true"] { border-color: var(--accent); background: var(--accent-bg); color: #0f4f4a; font-weight: 600; }
+.chip[data-n]:not([data-n=""])::after { content: attr(data-n); margin-left: 6px; font-size: 11px; color: var(--accent); font-variant-numeric: tabular-nums; }
+.chip.busy { animation: pulse 0.9s ease-in-out infinite alternate; }
+.chip.bad { border-color: #c4543f; color: #9a3524; }
+@keyframes pulse { to { opacity: 0.45; } }
+#moves .chip, #catmoves .chip { text-transform: capitalize; }
+.keys { margin-top: 18px; color: var(--dim); font-size: 12px; line-height: 1.6; }
+.keys b { color: var(--text); font-weight: 600; }
+#top { position: absolute; top: 12px; right: 12px; display: flex; gap: 6px; flex-wrap: wrap; justify-content: flex-end; }
+#top button { background: var(--panel); backdrop-filter: blur(6px); }
+.seg { display: flex; }
+.seg button:first-child { border-radius: 8px 0 0 8px; }
+.seg button:last-child { border-radius: 0 8px 8px 0; margin-left: -1px; }
+#tags { position: fixed; inset: 0; pointer-events: none; overflow: hidden; }
+.tag { position: absolute; left: 0; top: 0; font-size: 12px; padding: 2px 7px; border-radius: 6px; background: rgba(250, 251, 252, 0.8); color: var(--text); white-space: nowrap; }
+#empty { position: absolute; inset: 0; display: grid; place-items: center; color: var(--dim); pointer-events: none; }
+#toast { position: absolute; left: 50%; bottom: 16px; transform: translateX(-50%); background: #2b313b; color: #fff; padding: 8px 14px; border-radius: 8px; font-size: 13px; }
+#hint { display: none; }
+[hidden] { display: none !important; }
+.short { display: none; }
+
+/* phone: the stage takes the screen; the picker is two or three scrolling rows under it */
+@media (max-width: 720px) {
+  body { grid-template-columns: minmax(0, 1fr); grid-template-rows: minmax(0, 1fr) auto; }
+  #panel { grid-row: 2; min-width: 0; border-right: 0; border-top: 1px solid var(--line); padding: 6px 0 calc(6px + env(safe-area-inset-bottom)); overflow: visible; }
+  h1, .keys { display: none; }
+  .sec { display: flex; align-items: center; gap: 6px; overflow-x: auto; padding: 3px 10px; scrollbar-width: none; }
+  .sec::-webkit-scrollbar { display: none; }
+  .sec .chips { display: contents; }
+  h2 { margin: 0 2px 0 4px; font-size: 10px; flex: none; }
+  .sec h2:first-child { margin-left: 0; }
+  button { min-height: 36px; padding: 5px 10px; font-size: 13px; }
+  #top { top: 8px; right: 8px; left: 8px; }
+  #top button { min-height: 34px; padding: 4px 10px; }
+  .long { display: none; }
+  .short { display: inline; }
+  #hint { display: block; position: absolute; left: 50%; bottom: 12px; transform: translateX(-50%); background: rgba(43, 49, 59, 0.82); color: #fff; font-size: 12px; padding: 6px 12px; border-radius: 8px; pointer-events: none; white-space: nowrap; transition: opacity 0.6s; }
+  #hint.gone { opacity: 0; }
+}
+</style>
+</head>
+<body>
+<aside id="panel" aria-label="Who and what">
+  <h1>Amakawa characters</h1>
+  <div class="sec" id="who-sec">
+    <h2>Cast</h2><div class="chips" id="cast"></div>
+    <h2>Islanders</h2><div class="chips" id="islanders"></div>
+    <h2>Animals</h2><div class="chips" id="animals"></div>
+  </div>
+  <div class="sec" id="moves-sec"><h2>Moves</h2><div class="chips" id="moves"></div></div>
+  <div class="sec" id="cat-sec"><h2>Tama</h2><div class="chips" id="catmoves"></div></div>
+  <p class="keys"><b>Drag</b> to turn · <b>right-drag</b> or <b>shift-drag</b> to pan · <b>wheel</b> to zoom. On a phone: one finger turns, two fingers pinch to zoom and drag to pan.</p>
+</aside>
+<main id="view">
+  <canvas id="c" tabindex="0" aria-label="The characters in 3D"></canvas>
+  <div id="top">
+    <div class="seg" role="group" aria-label="Look">
+      <button type="button" id="look-code">Code-built</button>
+      <button type="button" id="look-chibi">Chibi</button>
+    </div>
+    <div class="seg" role="group" aria-label="How many">
+      <button type="button" id="mode-row"><span class="long">Side by side</span><span class="short">Many</span></button>
+      <button type="button" id="mode-one"><span class="long">One at a time</span><span class="short">One</span></button>
+    </div>
+    <button type="button" id="colours" hidden><span class="long">New colours</span><span class="short">Colours</span></button>
+    <button type="button" id="reset"><span class="long">Reset view</span><span class="short">Reset</span></button>
+  </div>
+  <div id="hint">One finger turns · pinch zooms · two fingers pan</div>
+  <div id="empty" hidden>Pick someone below</div>
+  <div id="toast" hidden></div>
+</main>
+<div id="tags"></div>
+<script>
+// as index.html: build.json versions every module through an import map
+(async () => {
+  let b = { id: String(Date.now()), files: [] };
+  try { b = await (await fetch('build.json', { cache: 'no-store' })).json(); } catch (e) { /* offline: a fresh id */ }
+  window.BUILD = b.id;
+  const v = '?v=' + encodeURIComponent(b.id);
+  const imports = { three: './vendor/three/three.module.js', 'three/addons/': './vendor/' };
+  for (const f of b.files) imports[new URL(f, location.href).href] = new URL(f + v, location.href).href;
+  const map = document.createElement('script'); map.type = 'importmap'; map.textContent = JSON.stringify({ imports }); document.head.appendChild(map);
+  // chibi.js reads these as it loads: the finest mesh at every distance, and none of the game's crowd preloaded
+  // (js/viewer/main.js puts the address back)
+  const q = new URLSearchParams(location.search); q.set('chibi', '0'); q.set('chibitier', 'hi');
+  history.replaceState(null, '', location.pathname + '?' + q);
+  const s = document.createElement('script'); s.type = 'module'; s.src = './js/viewer/main.js' + v; document.body.appendChild(s);
+})();
+</script>
+</body>
+</html>
