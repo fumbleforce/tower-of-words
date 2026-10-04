@@ -289,7 +289,10 @@ export function hall(root, nav) {
   nav.block(x1 - 0.1, EAST, BACK_Z, FRONT_Z + 0.1);
   nav.block(x0, DOOR_X - 0.8, FRONT_Z - 0.1, FRONT_Z + 0.1);
   nav.block(DOOR_X + 0.8, x1, FRONT_Z - 0.1, FRONT_Z + 0.1);
-  // the back wall and the passage: Eric only goes through it on the watched trip up (places/dorm-court.js)
-  nav.block(WEST, EAST, BACK_Z - 1.3, BACK_Z + 0.1);
+  // the back wall and the passage: Eric only goes through it on the watched trip up (places/dorm-court.js), which
+  // opens its tagged block so he waits for his floor on floor
+  nav.block(WEST, PASS_X - 0.5, BACK_Z - 1.3, BACK_Z + 0.1);
+  nav.block(PASS_X + 0.5, EAST, BACK_Z - 1.3, BACK_Z + 0.1);
+  nav.blockTagged('passage', PASS_X - 0.5, PASS_X + 0.5, BACK_Z - 1.3, BACK_Z + 0.1);
   return mailbox;
 }

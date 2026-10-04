@@ -112,8 +112,13 @@ export function* forecourtSteps() {
   // walkable: the court, the bike court, the lane, the garden's way in and gravel court, and the shed street up to
   // its chained bollards; inside the tower the head office decides (its lobby)
   const tower = [T.o[0], T.o[0] + T.W, T.o[1] - T.D, T.o[1]];
-  const walkable = [COURT, BIKES, LANE, PL.GARDEN_PATH, PL.GARDEN_COURT, PL.SHED_WALK, tower];
+  // and the station's doorway, shut to him by a tagged block from a step in (he still reaches its zone): only day
+  // 2's walk back in to the platform goes through it (places/forecourt.js opens it for that walk, so he waits for
+  // the gate room on floor)
+  const doorway = [DOOR_X - 0.55, DOOR_X + 0.55, ZN - 0.1, ZN + 1.4];
+  const walkable = [COURT, BIKES, LANE, PL.GARDEN_PATH, PL.GARDEN_COURT, PL.SHED_WALK, tower, doorway];
   nav.extra = (x, z) => walkable.some((r) => PL.inRect(x, z, r));
+  nav.blockTagged('station_door', doorway[0], doorway[1], ZN + 0.2, doorway[3]);
   // everything that never moves goes in one group, merged by material at the end
   const statics = new THREE.Group();
   root.add(statics);

@@ -156,6 +156,7 @@ export async function dormCourtPlace(game) {
     },
     leave() {
       bath.leave();
+      w.nav.shut('passage');
     },
     snapshotState() {
       return { player: snapshotPeople({ eric: game.player }), mailbox: { ...mbState } };
@@ -213,6 +214,7 @@ export async function dormCourtPlace(game) {
       const eric = g.player;
       eric.scripted = true;
       g.walker.locked = true;
+      w.nav.open('passage'); // shut again when the place is left (leave)
       cam.closeOn(w.passageMouth, 1.7);
       await glide(g, eric.root, w.passage, 1.1);
       await glide(g, eric.root, w.passageIn, 1.1);

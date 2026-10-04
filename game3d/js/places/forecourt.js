@@ -250,6 +250,9 @@ export async function forecourtPlace(game) {
       w.lightsOn();
       P.grade = eveningGrade(sim.day);
     },
+    leave() {
+      w.nav.shut('station_door');
+    },
     snapshotState() {
       return {
         player: snapshotPeople({ eric: game.player }),
@@ -284,6 +287,7 @@ export async function forecourtPlace(game) {
           L = Math.hypot(dx, dz) || 1;
         eric.scripted = true;
         g.walker.locked = true;
+        w.nav.open('station_door'); // shut again when the place is left (leave)
         cam.closeOn(w.stationExit, 1.7);
         await glide(g, eric.root, w.stationExit, 1.1);
         await glide(g, eric.root, [sx + (dx / L) * 0.7, sz + (dz / L) * 0.7], 1.1);
