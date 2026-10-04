@@ -1,7 +1,9 @@
 // Live viewer for rigged character attempts: Mio's approved idle and walk carried over from the game's Mio rig by
 // bone name, and another model beside it for comparison. Models are git-ignored files in the main checkout.
 // Another round passes its own models as viewer.html?cfg=<json url>, the JSON being {"title", "blurb",
-// "attempts": {id: url}, "compare": {name: url}, "refs": [picture urls]}; without one it shows reviews/char-mio-parts-1.
+// "attempts": {id: url}, "compare": {name: url or [{glb, tex}]}, "refs": [picture urls]}; without one it shows
+// reviews/char-mio-parts-1. A compare entry that is a list stands each model beside the attempt (tex: a base colour
+// texture for game files that keep it apart, as game3d/assets/eric/), and they all play the same idle and walk.
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { bindRetarget as bindRig, applyRetarget as applyRig, resetPose } from './retarget.js';
@@ -43,8 +45,8 @@ const loader = new GLTFLoader();
 const load = (u) => new Promise((ok, no) => loader.load(u, ok, undefined, no));
 
 let yaw = 0, pitch = 0.05, dist = 4.2, spin = false, motion = 'rest';
-let target = null, other = null;
-const src = { root: null, mixer: null, clips: {} };
+let target = null, others = [], otherRts = [];
+const src = { root: null, mixer: null, clips: {}, rest: [] };
 
 // ---- drag to turn, wheel to zoom ----
 let drag = null;
@@ -71,6 +73,8 @@ function fit(obj) {
 // ---- retarget (./retarget.js), with the walk's leg share and the turntable's turn ----
 function bindRetarget(model) {
   turn.rotation.y = 0; // rest is read facing front; frame() turns it back
+  turn.updateMatrixWorld(true);
+  for (const [o, q, p] of src.rest) { o.quaternion.copy(q); o.position.copy(p); } // the source back at rest
   return bindRig(src.root, model);
 }
 const applyRetarget = (r) => applyRig(r, { turn: turn.quaternion, legShare: motion === 'walk' ? STEP : 1 });
@@ -78,6 +82,8 @@ const applyRetarget = (r) => applyRig(r, { turn: turn.quaternion, legShare: moti
 async function loadSource() {
   const g = await load(SRC_RIG);
   src.root = g.scene;
+  src.rest = [];
+  src.root.traverse((o) => { if (o.isBone) src.rest.push([o, o.quaternion.clone(), o.position.clone()]); });
   src.root.traverse((o) => { if (o.isMesh) o.visible = false; });
   scene.add(src.root);                                   // invisible; only its bones are read
   src.root.position.set(100, 0, 0);
@@ -87,8 +93,14 @@ async function loadSource() {
   src.clips.idle = THREE.AnimationClip.parse(idle);
 }
 
-async function loadModel(url) {
+async function loadModel(url, tex) {
   const g = await load(url);
+  if (tex) {
+    const map = await new THREE.TextureLoader().loadAsync(tex);
+    map.flipY = false;
+    map.colorSpace = THREE.SRGBColorSpace;
+    g.scene.traverse((o) => { if (o.isMesh) o.material = new THREE.MeshStandardMaterial({ map, roughness: 0.9 }); });
+  }
   const root = new THREE.Group();
   root.add(g.scene);
   fit(root);
@@ -111,29 +123,35 @@ async function showAttempt(id) {
 }
 
 async function showCompare(key) {
-  if (other) turn.remove(other);
-  other = null;
-  if (COMPARE[key]) {
-    status.textContent = `loading ${key}`;
-    other = await loadModel(COMPARE[key]);
-    turn.add(other);
+  for (const o of others) turn.remove(o);
+  others = [];
+  otherRts = [];
+  const list = COMPARE[key] ? (Array.isArray(COMPARE[key]) ? COMPARE[key] : [{ glb: COMPARE[key] }]) : [];
+  if (list.length) status.textContent = `loading ${key}`;
+  for (const c of list) {
+    const m = await loadModel(c.glb, c.tex);
+    turn.add(m);
+    others.push(m);
   }
   layout();
+  otherRts = others.map((m) => bindRetarget(m));
+  setMotion(motion);
   setPressed('compare', key);
   status.textContent = '';
 }
 
 function layout() {
-  if (target) target.position.x = other ? -0.45 : 0;
-  if (other) other.position.x = 0.45;
-  dist = other ? 5.2 : 4.2;
+  const n = others.length, gap = 0.9;
+  if (target) target.position.x = (-n * gap) / 2;
+  others.forEach((o, i) => (o.position.x = (-n * gap) / 2 + (i + 1) * gap));
+  dist = n ? 4.2 + n : 4.2;
 }
 
 function setMotion(m) {
   motion = m;
   if (action) action.stop();
   action = null;
-  if (rt) resetPose(rt);
+  for (const r of [rt, ...otherRts]) if (r) resetPose(r);
   if (m !== 'rest' && src.clips[m]) {
     action = src.mixer.clipAction(src.clips[m]);
     action.reset().play();
@@ -167,7 +185,7 @@ function frame() {
   const dt = Math.min(clock.getDelta(), 0.05);
   if (spin) yaw += dt * 0.6;
   turn.rotation.y = yaw;
-  if (action) { src.mixer.update(dt); applyRetarget(rt); }
+  if (action) { src.mixer.update(dt); for (const r of [rt, ...otherRts]) applyRetarget(r); }
   const w = canvas.clientWidth, h = canvas.clientHeight;
   if (canvas.width !== Math.floor(w * renderer.getPixelRatio()) || canvas.height !== Math.floor(h * renderer.getPixelRatio())) {
     renderer.setSize(w, h, false);
