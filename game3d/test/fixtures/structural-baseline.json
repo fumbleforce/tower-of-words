@@ -376,6 +376,7 @@
     "forecourt:head_office",
     "forecourt:to_b2",
     "forecourt:to_plaza",
+    "forecourt:kuro_intro",
     "forecourt:kuro",
     "forecourt:ohayo_kuro",
     "forecourt:yoroshiku_kuro",
@@ -1615,6 +1616,15 @@
       "cross": true
     },
     {
+      "from": "train:lesson2",
+      "to": "forecourt:kuro_intro",
+      "kind": "unlock",
+      "labels": [
+        "know_ohayo"
+      ],
+      "cross": true
+    },
+    {
       "from": "train:lesson3",
       "to": "office:yoroshiku_mori",
       "kind": "unlock",
@@ -1891,6 +1901,7 @@
     "evening_bench_seen",
     "evening_bike_tipped",
     "evening_bikes_upright",
+    "kuro_reception_seen",
     "period",
     "greeted_mori",
     "met_mori",

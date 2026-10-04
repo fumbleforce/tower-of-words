@@ -103,6 +103,7 @@ The id `kuroda` is Mr. Hamada. The id is older than the name and stays so the vo
 ### Kuro (`kuro`)
 
 - The receptionist in the head office lobby, behind the reception counter by the door (moved there from the station's visitor counter; Jørgen, 2026-09-30: "Then kuro should be there rather than at security"). Her name is written 玖路 and reads like 黒, black. Polite Japanese.
+- She can handle a short reception exchange in English. Her first-day conversation is in [places.md](places.md#small-moments-2), with delivery in `story/VOICE.md` (Jørgen, 2026-10-04: "Kuro should have some more dialogue than good morning on the first day, maybe a tiny bit flirtatious").
 - Look: approved portrait art/approved/kuro/kuro-after.webp, extended down to the waist as kuro-body-c-s11 (reviews/kuro-body-1) and shown 15% smaller than the others' framing, since at the same face height she looked "15% too large / zoomed in" (Jørgen, 2026-10-01). Clear-lensed glasses, never tinted.
 
 ### Aoi (`aoi`)
