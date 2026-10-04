@@ -15,6 +15,7 @@ for (const [name, w, h, dpr, mobile] of [['settings-desk', 1366, 860, 1, false],
   p.on('pageerror', (e) => errs.push(e.message));
   await p.goto('http://127.0.0.1:8771/game3d/index.html?shell=settings');
   await p.waitForTimeout(6000);
+  await p.locator('#settings #st-graphics').click().catch((e) => errs.push(e.message)); // Surface detail is in Graphics
   const sw = p.locator('#settings [data-key="surfaces"]');
   await sw.scrollIntoViewIfNeeded().catch((e) => errs.push(e.message));
   await p.screenshot({ path: `${out}/${name}.png` });

@@ -134,26 +134,3 @@ function apply() {
 addEventListener('resize', () => apply());
 if (document.body) apply();
 else addEventListener('DOMContentLoaded', apply);
-
-// The switch lives here so menu.js can stay at its size ceiling. It is added the first time Settings is built.
-function ensurePrivateRow() {
-  const rows = document.querySelector('#settings .rows');
-  if (!rows || rows.querySelector('[data-key="privateMode"]')) return;
-  const row = document.createElement('div');
-  row.className = 'row';
-  row.innerHTML =
-    '<span class="lbl" id="l-pm">Private mode<small>Adult scenes on this device. Off on a phone until you turn this on.</small></span>' +
-    '<button type="button" class="sw" role="switch" data-key="privateMode" aria-labelledby="l-pm"><i></i></button>';
-  rows.append(row);
-  const sw = row.querySelector('.sw');
-  const paint = () => sw.setAttribute('aria-checked', settings.privateMode ? 'true' : 'false');
-  paint();
-  sw.onclick = () => {
-    setSetting('privateMode', !settings.privateMode);
-    paint();
-  };
-  onSettings((key) => {
-    if (key === 'privateMode') paint();
-  });
-}
-new MutationObserver(ensurePrivateRow).observe(document.documentElement, { childList: true, subtree: true });

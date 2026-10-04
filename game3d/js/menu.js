@@ -10,14 +10,14 @@
 // QA: ?shell=title|settings|pause|save|load|loading|end opens that screen on its own (with made-up save data),
 // for screenshots of each screen in isolation (game3d/tools/shell-shots.mjs).
 import * as THREE from 'three';
-import { ui, sfx, unlockAudio, pauseAudio, keyLabel } from './ui.js';
-import { settings, setSetting, onSettings, qualityTier } from './settings.js';
+import { ui, sfx, unlockAudio, pauseAudio } from './ui.js';
+import { settings } from './settings.js';
 import { sim, PERIOD_NAMES, save as simSave } from './sim.js';
 import { startOnboarding, resetOnboarding } from './onboard.js';
-import { browserSpeechAvailable, prepareVoice } from './speech.js';
 import { PLACE_NAMES } from './places/definitions.js';
 import { installGoalArrow } from './ui/goal-arrow.js';
 import { addDayTwo } from './ui/title-day2.js';
+import { settingsView } from './ui/settings-view.js';
 
 const Q = new URLSearchParams(location.search);
 const TEST = Q.get('test') === 'fast',
@@ -101,7 +101,7 @@ const fmtTime = (t) => {
 };
 const phone = () => document.body.classList.contains('phone');
 function focusables(root) {
-  return [...root.querySelectorAll('button:not([disabled]), input, [tabindex="0"]')].filter(
+  return [...root.querySelectorAll('button:not([disabled]):not([tabindex="-1"]), input, [tabindex="0"]')].filter(
     (e) => e.offsetParent !== null,
   );
 }
@@ -390,201 +390,9 @@ function onTitleLeave() {
   releaseTitleCamera(1700).then(() => document.body.classList.remove('title-leaving'));
 }
 
-// ---------- settings ----------
-const SEG = {
-  textSpeed: [
-    ['slow', 'Slow'],
-    ['normal', 'Normal'],
-    ['fast', 'Fast'],
-    ['instant', 'Instant'],
-  ],
-  quality: [
-    ['auto', 'Auto'],
-    ['low', 'Low'],
-    ['medium', 'Medium'],
-    ['high', 'High'],
-  ],
-  uiSize: [
-    [0.85, 'Small'],
-    [1, 'Normal'],
-    [1.2, 'Large'],
-    [1.4, 'Larger'],
-  ],
-  voiceInput: [
-    ['off', 'Off'],
-    ['device', 'On this device'],
-    ['browser', 'Browser'],
-  ],
-  masteryUses: [
-    [1, '1'],
-    [3, '3'],
-    [5, '5'],
-  ],
-};
-const VOICE_NOTE = {
-  device:
-    'Runs in the game. A one-time download (77 MB on a computer, 147 MB on a phone), then it works offline. What you say stays on this device.',
-  browser: "Uses the browser's own recogniser. Chrome sends what you say to Google.",
-  off: 'Type the words. Voice is optional.',
-};
-function buildSettings() {
-  let s = $('#settings');
-  if (s) return s;
-  s = el(
-    'div',
-    'layer sheet',
-    `
-    <div class="scrim" data-close></div>
-    <section class="pane" role="dialog" aria-modal="true" aria-labelledby="setTitle">
-      <header><h2 id="setTitle">Settings</h2><button type="button" class="x" data-close aria-label="Close settings"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button></header>
-      <div class="rows">
-        <div class="row"><span class="lbl" id="l-ts">Text speed</span><div class="seg" role="radiogroup" aria-labelledby="l-ts" data-key="textSpeed"></div></div>
-        <div class="row"><span class="lbl" id="l-aa">Auto-advance<small>Lines move on once they've been spoken</small></span><button type="button" class="sw" role="switch" data-key="autoAdvance" aria-labelledby="l-aa"><i></i></button></div>
-        <div class="gap"></div>
-        ${[
-          ['master', 'Master volume'],
-          ['music', 'Music'],
-          ['voice', 'Voices'],
-          ['ambience', 'Ambience'],
-        ]
-          .map(
-            ([k, l]) =>
-              `<div class="row"><span class="lbl" id="l-${k}">${l}</span><span class="rng">${k === 'voice' ? '<button type="button" class="sw sm" role="switch" data-key="voiceOn" aria-label="Voices on or off"><i></i></button>' : ''}<input type="range" min="0" max="100" step="5" data-key="${k}" aria-labelledby="l-${k}"><output></output></span></div>`,
-          )
-          .join('')}
-        <div class="gap"></div>
-        <div class="row"><span class="lbl" id="l-q">Graphics<small class="qnow"></small></span><div class="seg" role="radiogroup" aria-labelledby="l-q" data-key="quality"></div></div>
-        <div class="row"><span class="lbl" id="l-sf">Surface detail<small>Patterns in floors, walls, fabric and metal</small></span><button type="button" class="sw" role="switch" data-key="surfaces" aria-labelledby="l-sf"><i></i></button></div>
-        <div class="row"><span class="lbl" id="l-ui">Interface size</span><div class="seg" role="radiogroup" aria-labelledby="l-ui" data-key="uiSize"></div></div>
-        <div class="gap"></div>
-        <div class="row"><span class="lbl" id="l-vi">Voice input<small class="vnote"></small></span><div class="seg" role="radiogroup" aria-labelledby="l-vi" data-key="voiceInput"></div></div>
-        <div class="row"><span class="lbl" id="l-mu">Before a word is one click<small>Times you type or say it first</small></span><div class="seg" role="radiogroup" aria-labelledby="l-mu" data-key="masteryUses"></div></div>
-        <div class="row"><span class="lbl" id="l-ks">Say key<small class="kmsg">Talk is E, Space or Enter</small></span><button type="button" class="keybind" data-key="keySay" aria-labelledby="l-ks"></button></div>
-        <div class="row"><span class="lbl" id="l-rm">Reduce motion<small>Less camera sway and fewer moving parts in menus</small></span><button type="button" class="sw" role="switch" data-key="reduceMotion" aria-labelledby="l-rm"><i></i></button></div>
-        <div class="row"><span class="lbl" id="l-pf">Performance numbers<small>Frame rate and draw calls in a corner (F3)</small></span><button type="button" class="sw" role="switch" data-key="perfOverlay" aria-labelledby="l-pf"><i></i></button></div>
-      </div>
-      <footer><button type="button" class="done" data-close>Done</button></footer>
-    </section>`,
-  );
-  s.id = 'settings';
-  s.hidden = true;
-  document.body.appendChild(s);
-  for (const seg of s.querySelectorAll('.seg')) {
-    const k = seg.dataset.key;
-    for (const [v, l] of SEG[k]) {
-      const b = el('button', '', l);
-      b.type = 'button';
-      b.setAttribute('role', 'radio');
-      b.dataset.v = v;
-      if (k === 'voiceInput' && v === 'browser' && !browserSpeechAvailable()) continue;
-      b.onclick = () => {
-        setSetting(k, v);
-        sfx('tap');
-        if (k === 'voiceInput') {
-          const note = s.querySelector('.vnote');
-          note.textContent = VOICE_NOTE[v] || '';
-          if (v === 'device')
-            prepareVoice((f) => {
-              note.textContent = `Downloading the voice model: ${Math.round(f * 100)}%`;
-            })
-              .then(() => {
-                note.textContent = VOICE_NOTE.device;
-              })
-              .catch(() => {
-                note.textContent = "Couldn't load the voice model. Typing still works.";
-              });
-        }
-      };
-      seg.appendChild(b);
-    }
-    seg.addEventListener('keydown', (e) => {
-      if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
-      const opts = SEG[k].map((o) => o[0]);
-      const i = opts.indexOf(settings[k]);
-      const n = opts[(i + (e.key === 'ArrowRight' ? 1 : opts.length - 1)) % opts.length];
-      setSetting(k, n);
-      seg.querySelector(`[data-v="${n}"]`).focus();
-      e.preventDefault();
-    });
-  }
-  const kb = s.querySelector('.keybind');
-  kb.onclick = () => {
-    if (kb.classList.contains('listening')) {
-      stopListen();
-      return;
-    }
-    kb.classList.add('listening');
-    kb.textContent = 'Press a key';
-    s.querySelector('.kmsg').textContent = 'Esc to cancel';
-    listening = kb;
-  };
-  s.addEventListener('focusout', (e) => {
-    if (e.target === kb && listening) stopListen();
-  });
-  for (const sw of s.querySelectorAll('.sw'))
-    sw.onclick = () => {
-      setSetting(sw.dataset.key, !settings[sw.dataset.key]);
-      sfx('tap');
-    };
-  for (const r of s.querySelectorAll('input[type=range]')) {
-    r.addEventListener('input', () => setSetting(r.dataset.key, +r.value / 100));
-    r.addEventListener('change', () => {
-      if (r.dataset.key !== 'music') sfx('tap');
-    });
-  }
-  s.querySelectorAll('[data-close]').forEach((b) => {
-    b.onclick = () => closeLayer(s);
-  });
-  s.addEventListener('keydown', (e) => {
-    trap(s, e);
-    e.stopPropagation();
-  });
-  syncSettings();
-  return s;
-}
-// rebinding: the next key pressed becomes the Say key, unless the game already uses it
-let listening = null;
-const RESERVED = /^(Escape|Tab|Enter|Space|Key[WASDE]|Arrow\w+|Digit\d|Shift\w*|Control\w*|Alt\w*|Meta\w*)$/;
-function stopListen(msg) {
-  const kb = listening;
-  listening = null;
-  if (!kb) return;
-  kb.classList.remove('listening');
-  syncSettings();
-  const m = $('#settings .kmsg');
-  if (m) m.textContent = msg || 'Talk is E, Space or Enter';
-}
-function syncSettings() {
-  const s = $('#settings');
-  if (!s) return;
-  for (const seg of s.querySelectorAll('.seg'))
-    for (const b of seg.children) {
-      const on = String(settings[seg.dataset.key]) === b.dataset.v;
-      b.setAttribute('aria-checked', on);
-      b.tabIndex = on ? 0 : -1;
-    }
-  for (const sw of s.querySelectorAll('.sw')) sw.setAttribute('aria-checked', !!settings[sw.dataset.key]);
-  for (const r of s.querySelectorAll('input[type=range]')) {
-    const v = Math.round((settings[r.dataset.key] ?? 0) * 100);
-    if (+r.value !== v) r.value = v;
-    r.nextElementSibling.textContent = v;
-    r.style.setProperty('--p', v + '%');
-  }
-  const kb = s.querySelector('.keybind');
-  if (kb && !kb.classList.contains('listening')) kb.textContent = keyLabel(settings.keySay || 'KeyQ');
-  const vn = s.querySelector('.vnote');
-  if (vn && !/Downloading/.test(vn.textContent)) vn.textContent = VOICE_NOTE[settings.voiceInput] || '';
-  const q = s.querySelector('.qnow');
-  if (q)
-    q.textContent = settings.quality === 'auto' ? `Auto picks ${qualityTier()} on this device` : 'Takes effect at once';
-}
-onSettings(syncSettings);
-function openSettings() {
-  const s = buildSettings();
-  syncSettings();
-  s.querySelector('.done').dataset.first = '';
-  openLayer(s, () => closeLayer(s));
-}
+// ---------- settings (the panel is ui/settings-view.js) ----------
+const settingsPanel = settingsView({ openLayer, closeLayer, trap });
+const openSettings = settingsPanel.open;
 shell.openSettings = openSettings;
 
 // ---------- saves ----------
@@ -870,22 +678,7 @@ window.addEventListener(
       e.stopImmediatePropagation();
       return;
     }
-    if (listening) {
-      e.preventDefault();
-      e.stopImmediatePropagation();
-      if (e.code === 'Escape') {
-        stopListen();
-        return;
-      }
-      if (RESERVED.test(e.code)) {
-        stopListen(`${keyLabel(e.code)} is already used by the game`);
-        return;
-      }
-      setSetting('keySay', e.code);
-      sfx('ok');
-      stopListen(`Say is now ${keyLabel(e.code)}`);
-      return;
-    }
+    if (settingsPanel.captureKey(e)) return;
     // Say (Q by default, rebindable): opens the Say menu, or closes it again. Taken here in the capture phase so the
     // key does nothing else in the game.
     if (

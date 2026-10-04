@@ -30,10 +30,10 @@
       "reason": "Composition, boot/Continue, input, rendering and frame loop remain after stage 4 hooks, interactions and place lifecycle extraction."
     },
     "game3d/js/menu.js": {
-      "lines": 1184,
-      "bytes": 42014,
+      "lines": 977,
+      "bytes": 33275,
       "owner": "codex-tui",
-      "review": "C-0089; 2026-10-03 C-0378 day 2: the title's Continue card names a later day; C-0401 the title's Day 2 entry (its code in ui/title-day2.js)",
+      "review": "C-0089; 2026-10-03 C-0378 day 2: the title's Continue card names a later day; C-0401 the title's Day 2 entry (its code in ui/title-day2.js); 2026-10-04 C-0411 the Settings panel moved out to ui/settings-view.js (ceiling lowered)",
       "reason": "Existing action menus and target selection; stage 4 interaction extraction is planned."
     },
     "game3d/js/mio.js": {

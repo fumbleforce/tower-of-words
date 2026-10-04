@@ -1,0 +1,91 @@
+/* Settings (js/ui/settings-view.js): the shell's slate glass panel, Mio's teal for the section and the choice you
+   are on. Desktop: a centred panel with a rail of sections on the left. Phone: a sheet from the bottom with a strip of
+   section tabs under the header. The panel never grows past the screen: on desktop it is zoomed by --ui (style.css,
+   scale), so its limits are divided by --ui; a section that doesn't fit scrolls inside, under the header. */
+#settings .pane { position: absolute; top: 50%; left: 50%; translate: -50% -50%; display: grid; grid-template-rows: auto minmax(0, 1fr);
+  width: min(820px, calc((100vw - 48px) / var(--ui, 1))); height: min(460px, calc((100dvh - 32px) / var(--ui, 1)));
+  border-radius: 16px; background: #11151e; border: 1px solid var(--chip-edge); box-shadow: 0 16px 48px rgba(6, 8, 14, .55);
+  overflow: hidden; animation: panelIn .2s cubic-bezier(.2, .7, .2, 1); }
+#settings .shead { display: flex; align-items: center; justify-content: space-between; padding: 14px 14px 12px 28px; border-bottom: 1px solid rgba(255, 255, 255, .07); }
+#settings .shead h2 { font-size: 22px; }
+#settings .x { display: grid; place-items: center; width: 44px; height: 44px; border: 0; border-radius: 10px; background: transparent; cursor: pointer; }
+#settings .x:hover { background: rgba(255, 255, 255, .06); }
+#settings .x svg { width: 20px; height: 20px; fill: none; stroke: var(--ink-dim); stroke-width: 2; stroke-linecap: round; }
+#settings .x:hover svg { stroke: var(--ink); }
+#settings .sbody { display: grid; grid-template-columns: 200px minmax(0, 1fr); min-height: 0; }
+
+/* sections: the rail */
+#settings .stabs { display: flex; flex-direction: column; gap: 2px; padding: 12px 10px; overflow: auto; border-right: 1px solid rgba(255, 255, 255, .07); background: rgba(255, 255, 255, .02); scrollbar-width: none; }
+#settings .stabs button { position: relative; flex: none; min-height: 44px; padding: 0 12px 0 22px; border: 0; border-radius: 10px; background: transparent; color: var(--ink-dim); font: 600 15px/1.2 var(--font); text-align: left; white-space: nowrap; cursor: pointer; transition: background .15s, color .15s; }
+#settings .stabs button::before { content: ""; position: absolute; left: 8px; top: 13px; bottom: 13px; width: 3px; border-radius: 2px; background: var(--accent); opacity: 0; transform: scaleY(.3); transition: opacity .15s, transform .15s; }
+#settings .stabs button:hover { color: var(--ink); background: rgba(255, 255, 255, .04); }
+#settings .stabs button[aria-selected="true"] { color: var(--ink); background: rgba(111, 208, 198, .09); }
+#settings .stabs button[aria-selected="true"]::before { opacity: 1; transform: none; }
+
+/* a section: one row per setting, the name and a short note on the left, the control on the right */
+#settings .spanels { overflow: auto; overscroll-behavior: contain; padding: 4px 28px 20px; scrollbar-width: thin; scrollbar-color: rgba(255, 255, 255, .18) transparent; }
+#settings .spanel[hidden] { display: none; }
+#settings .srow { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 10px 28px; min-height: 64px; padding: 14px 0; border-top: 1px solid rgba(255, 255, 255, .06); }
+#settings .srow:first-child { border-top: 0; }
+#settings .lbl { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+#settings .lbl > span { font-size: 16px; font-weight: 500; color: var(--ink); }
+#settings .help { font-size: 13px; line-height: 1.4; color: var(--ink-dim); max-width: 44ch; }
+#settings .ctl { display: flex; justify-content: flex-end; }
+
+/* segmented choice */
+#settings .seg { display: inline-flex; flex: none; padding: 3px; gap: 2px; border-radius: 12px; background: rgba(255, 255, 255, .05); border: 1px solid var(--chip-edge); }
+#settings .seg button { min-width: 48px; height: 38px; padding: 0 14px; border: 0; border-radius: 9px; background: transparent; color: var(--ink-dim); font: 600 14px/1 var(--font); white-space: nowrap; cursor: pointer; transition: background .15s, color .15s; }
+#settings .seg button:hover { color: var(--ink); }
+#settings .seg button[aria-checked="true"] { background: #1d4744; color: #d9f5f1; box-shadow: inset 0 0 0 1px rgba(111, 208, 198, .6); }
+#settings .seg button[aria-checked="true"]:focus-visible { box-shadow: inset 0 0 0 1px rgba(111, 208, 198, .6), var(--focus); }
+
+/* on/off switch: the focus ring goes round the track */
+#settings .sw { position: relative; flex: none; width: 56px; height: 44px; border: 0; background: transparent; cursor: pointer; }
+#settings .sw i { position: absolute; left: 3px; right: 3px; top: 8px; bottom: 8px; border-radius: 14px; background: #333a47; transition: background .15s, box-shadow .15s; }
+#settings .sw i::after { content: ""; position: absolute; left: 3px; top: 3px; width: 22px; height: 22px; border-radius: 50%; background: #c9d0db; transition: transform .15s, background .15s; }
+#settings .sw[aria-checked="true"] i { background: #2a6e68; }
+#settings .sw[aria-checked="true"] i::after { transform: translateX(22px); background: #e8fbf8; }
+#settings .sw:focus-visible { box-shadow: none; }
+#settings .sw:focus-visible i { box-shadow: var(--focus); }
+
+/* volume: slider and its number */
+#settings .rng { display: flex; align-items: center; gap: 14px; }
+#settings .rng input { width: 240px; }
+#settings .rng output { width: 3ch; text-align: right; font: 600 14px/1 var(--font); color: var(--ink-dim); font-variant-numeric: tabular-nums; }
+#settings .srow.k-range { min-height: 56px; padding: 8px 0; }
+#settings .srow.off .rng { opacity: .45; }
+
+/* the Say key: a key cap; while it waits for a key it lights up */
+#settings .keybind { min-width: 64px; height: 40px; padding: 0 16px; border-radius: 9px; border: 1px solid var(--chip-edge); background: #2c3441; color: #d9f5f1; font: 700 15px/1 var(--font); box-shadow: inset 0 -2px 0 rgba(0, 0, 0, .35); cursor: pointer; }
+#settings .keybind:hover { border-color: rgba(111, 208, 198, .45); }
+#settings .keybind.listening { border-color: var(--accent); background: rgba(111, 208, 198, .1); color: var(--accent); animation: keywait 1.4s ease-in-out infinite; }
+@keyframes keywait { 50% { border-color: rgba(111, 208, 198, .35); } }
+
+/* landscape phones and short windows: a tighter header and rows */
+@media (max-height: 520px) {
+  body:not(.phone) #settings .shead { padding-top: 8px; padding-bottom: 6px; }
+  body:not(.phone) #settings .srow { min-height: 54px; padding: 8px 0; }
+  body:not(.phone) #settings .stabs { padding: 8px; }
+  body:not(.phone) #settings .stabs button { min-height: 40px; }
+}
+
+/* phone: a sheet from the bottom, the sections as a strip of tabs, controls under their names */
+body.phone #settings .pane { top: auto; left: 0; right: 0; bottom: 0; translate: none; width: auto; height: min(78dvh, 560px); border-radius: 18px 18px 0 0; border-bottom: 0; padding-bottom: env(safe-area-inset-bottom); animation: sheetUp .24s cubic-bezier(.2, .7, .2, 1); }
+body.phone #settings .shead { padding: 12px 8px 8px 20px; border-bottom: 0; }
+body.phone #settings .sbody { grid-template-columns: minmax(0, 1fr); grid-template-rows: auto minmax(0, 1fr); }
+body.phone #settings .stabs { flex-direction: row; gap: 6px; padding: 2px 16px 12px; overflow-x: auto; border-right: 0; border-bottom: 1px solid rgba(255, 255, 255, .07); background: none; scroll-padding: 0 16px; }
+body.phone #settings .stabs button { min-height: 40px; padding: 0 14px; border: 1px solid var(--chip-edge); font-size: 14px; }
+body.phone #settings .stabs button::before { display: none; }
+body.phone #settings .stabs button[aria-selected="true"] { background: #1d4744; color: #d9f5f1; border-color: rgba(111, 208, 198, .6); }
+body.phone #settings .spanels { padding: 2px 20px 20px; }
+body.phone #settings .srow { gap: 10px 16px; min-height: 60px; padding: 12px 0; }
+body.phone #settings .help { font-size: 14px; max-width: none; }
+body.phone #settings .srow:is(.k-seg, .k-range) { grid-template-columns: minmax(0, 1fr); }
+body.phone #settings .srow.k-range { padding: 10px 0 4px; gap: 0; }
+body.phone #settings .seg { display: flex; width: 100%; }
+body.phone #settings .seg button { flex: 1; height: 44px; padding: 0 6px; }
+body.phone #settings .ctl { justify-content: stretch; }
+body.phone #settings .srow.k-sw .ctl { justify-content: flex-end; }
+body.phone #settings .rng { width: 100%; }
+body.phone #settings .rng input { width: auto; flex: 1; }
+body.phone #settings .srow.k-key, body.phone #settings .help .desk { display: none; }
