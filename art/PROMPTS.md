@@ -7,6 +7,8 @@ The main image model is RDBT Anima in local ComfyUI, with One Obsession for open
 
 Result: art/refs/monorail-bay-ref.webp. This is the target quality and the target prompt style: a style line, then a few plain sentences about what's in the picture, one idea each. No staging jargon, no stacked weights, no long lists.
 
+Quality tags always come first, even though this example has none (Jørgen, 2026-09-27: he left them out only to show the content, and dropping them made the rewards flat and plain). On Anima-family models (RDBT, One Obsession Anima, Nova Anime AM): `masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic`, then the rating tag, then the rest.
+
 ```
 anime screenshot, anime coloring, 2d, cel shading, clean lineart, (detailed anime background art, hand-painted anime background, painted clouds, no humans, scenery, showing a monorail train riding high above a Bay on a curving elevated monorail. The monorail is crossing toward a large man-made island city with office towers and other buildings. the office towers are catching the low morning sun, the calm sea below with sunlight glittering on the water, early morning sun low on the horizon. dominant clear sky blue and sea blue, broad white cloud and glass, sparse warm sunrise orange accents, bright hopeful light. No other city in the background, only island and monorail going towards it.
 ```
@@ -101,8 +103,6 @@ interior view inside the monorail train, window showing sea and sky. 2 seats vis
 - Attitude through body language, not adjectives alone: `sharp authoritative demeanor, cold unblinking gaze, regal posture`, `heavy-lidded gaze, faint knowing smile`.
 - Keep every character clearly adult: state the age (23+ for the cast) and use `adult` or `mature female`.
 
-## Camera and composition
-- Shot size and angle in photography terms: `medium full shot`, `intimate high three-quarter close view`, `low angle over the table`, `extreme dutch angle`.
 ## House portrait style: Mio and Kuro (Jørgen, 2026-09-30)
 
 "the original Mio and Kuro are my favorites so if we can try to align the world around those." The anchors are art/approved/mio/mio-after.webp and art/approved/kuro/kuro-after.webp. Both are RDBT with the short gallery prompt (`<quality tags>, safe, 1girl, solo, <name>, <age>: <hair, glasses, clothes>, <expression>, waist-up portrait facing the viewer at a slight angle, plain light grey background, soft even studio light`) and no style words. What they share, looked at and measured against the rest of the cast:
@@ -114,6 +114,8 @@ interior view inside the monorail train, window showing sea and sky. 2 seats vis
 - Off: Kuro's anchor has a thin red outline down her left side (image right). Never copy that (red-rim negative, "Eric (mc) portrait").
 - Tried in reviews/style-align-1: img2img at 0.6 from a portrait with its own prompt gives the cast one line weight, pale cool skin and a cool palette. None of these brought over the black ink shapes: the anchor beside the character on one canvas (in-context repaint), the IP-Adapter fed an anchor (only her background came through), and "high contrast, deep black shadows".
 
+## Camera and composition
+- Shot size and angle in photography terms: `medium full shot`, `intimate high three-quarter close view`, `low angle over the table`, `extreme dutch angle`.
 - Place things in thirds and weight what the model tends to drop: `(face sharp in upper-right third:1.5)`, `(enlarged foreground knee and thigh:1.35)`.
 - Name the line that holds the image together: `face-knee diagonal`, `joined torsos forming a circular silhouette`.
 - A framing element: `stone pillar cropping one edge`.
@@ -201,11 +203,19 @@ These were in GUIDE.md until the guide diet and are copied here as they were. GU
   - Window views by compositing (tools/blockout/composite.py): the approved interior master, padded to 1216×832 (outpainted strips), the person inpainted out, the view rendered on its own with a short prompt, pasted into the window rectangle, then a masked img2img over the window at denoise 0.4 so the glass and light match.
 
 ### 3D characters: ChatGPT chibi, then Meshy
-- 3D character workflow (Jørgen, 2026-09-28; worked first try for Eric):
-  1. Chibi picture in ChatGPT: attach the character's approved portrait and the Mio chibi picture; ask in turn "make a 3d chibi anime character in the style of the attached image", then "simplify the character a LOT to match the detail level of the other chibi, with open eyes", then remove anything Meshy garbles (for Eric: simpler head, grey closed jacket, no glasses). About three rounds.
-  2. Turn the character at an angle, which gives better Meshy results: "looking to the left, same orientation as the body. Keep all features thick and sturdy, no fine strands or thin spikes. No text, no props, no extra subjects, no photorealism. Flat matte texture."
-  3. Meshy image-to-3D: smart topology, about 1050 polygons, a pose; texture in a second pass only if the shape looks right.
-  4. Meshy auto-rig (lower the height setting because of the big head), then add animations. Accessories like glasses and lanyards are left off the model.
+- 3D character workflow (Jørgen, 2026-09-28; worked first try for Eric). His words, verbatim; use them as written:
+  > So the workflow I've used is to generate the chibi picture in chatgpt. I needed 3 rounds to get it right, and need to remove accessories that get garbled by meshy.
+  >
+  > this is the earlier prompt I had to make the character at an angle which leads to better meshy results.
+  > "she should be looking to the left instead, same orientation as her body. Keep all features thick and sturdy, no fine strands or thin spikes. No text, no props, no extra subjects, no photorealism. she is looking the same orintation as her body. Flat matte texture of model"
+  >
+  > Then the 3 steps, where I attached the portrait of eric with the chibi of mio:
+  > 1. make a 3d chibi anime character in the style of the attached image
+  > 2. Simplify male character a LOT to match the detail level of the other chibi, with open eyes
+  > 3. Simpler head model, grey closed jacket, no glasses
+  >
+  > then in meshy I used the image to 3d model, smart topography, 1050 poly count, a pose, then textured it in a second pass if it looked right. Worked on first try this time. From there it can be automatically rigged (just need to lower the height due to the big head), and add animations.
+  - The picture steps were done in ChatGPT's image model, not a local one. Step 3 was specific to Eric; for another character it names what to simplify on that character. His Mio chibi reference is tools/characters/ref/mio-chibi-34.png (angled: mio-chibi-angled.png).
   In the game, these models only get colour tweaks (see Meshy parts).
 
 ### Video
