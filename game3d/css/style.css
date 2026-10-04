@@ -278,13 +278,15 @@ body.phone #end ul.w { grid-template-columns: 1fr; }
 .panel ul { list-style: none; margin: 0 0 12px; padding: 0; }
 .panel .close { width: 100%; padding: 10px; border-radius: 10px; border: 1px solid var(--panel-edge); background: #2a303b; cursor: pointer; }
 #peoplePanel li { display: grid; grid-template-columns: 44px 1fr auto; column-gap: 12px; padding: 10px 0; border-top: 1px solid rgba(255,255,255,.06); }
-#peoplePanel .pic { grid-row: span 3; width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center; background: var(--c); color: #16181d; font-weight: 700; font-size: 18px; }
+#peoplePanel .pic { grid-row: span 4; width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center; background: var(--c); color: #16181d; font-weight: 700; font-size: 18px; }
 #peoplePanel .nm { font-weight: 700; }
 #peoplePanel .ab { grid-column: 2 / span 2; color: var(--ink-dim); font-size: 14px; }
 #peoplePanel .cm { grid-column: 2 / span 2; font-size: 14px; color: var(--ink-dim); }
-#peoplePanel .bd { display: flex; gap: 3px; align-items: center; }
-#peoplePanel .bd i, #peoplePanel .bd b { width: 8px; height: 8px; border-radius: 50%; background: var(--jp); }
-#peoplePanel .bd b { background: #3c424e; }
+#peoplePanel .bd { display: flex; gap: 2px; align-items: center; }
+#peoplePanel .bd svg { width: 16px; height: 16px; stroke-width: 1.6; stroke-linejoin: round; }
+#peoplePanel .bd .on { fill: #ef8fa6; stroke: #ef8fa6; }
+#peoplePanel .bd .off { fill: none; stroke: #4a5160; }
+#peoplePanel .stand { grid-column: 2 / span 2; font-size: 13.5px; color: #f3b8c6; margin: 1px 0 3px; }
 #peoplePanel .none { color: var(--ink-dim); }
 #bagPanel .yen { color: var(--ink-dim); margin: 0 0 8px; }
 #bagPanel li { padding: 8px 0; border-top: 1px solid rgba(255,255,255,.06); }
@@ -642,28 +644,9 @@ input[type=range]::-moz-range-thumb { width: 22px; height: 22px; border-radius: 
 input[type=range]:focus-visible { box-shadow: none; }
 input[type=range]:focus-visible::-webkit-slider-thumb { box-shadow: var(--focus); }
 
-/* save slots */
-#saves .slots { flex: 1; overflow: auto; padding: 14px 16px 6px; gap: 10px; }
-#saves .note { min-height: 20px; margin: 0; padding: 4px 22px 18px; color: var(--ink-dim); font-size: 14px; }
-#saves .slots > .slot { display: grid; grid-template-columns: 152px 1fr; min-height: 0; font-size: 16px; font-weight: 500; text-shadow: none; gap: 14px; align-items: center; width: 100%; padding: 8px; border: 1px solid var(--chip-edge); border-radius: 12px; background: rgba(255, 255, 255, .03); color: var(--ink); text-align: left; cursor: pointer; font: inherit; }
-#saves .slots > .slot:hover:not([disabled]) { border-color: rgba(111, 208, 198, .45); background: rgba(255, 255, 255, .05); }
-#saves .slots > .slot::before { display: none; }
-.slot[disabled] { cursor: default; opacity: .55; }
-.slot.confirm { border-color: var(--warn); box-shadow: 0 0 0 1px var(--warn); }
-.slot .thumb { display: block; aspect-ratio: 1.6; border-radius: 8px; overflow: hidden; background: #232937; }
-.slot .thumb img { display: block; width: 100%; height: 100%; object-fit: cover; }
-.slot .blank { display: block; width: 100%; height: 100%; background: repeating-linear-gradient(135deg, rgba(255, 255, 255, .03) 0 8px, transparent 8px 16px); }
-.slot .meta { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
-.slot .nm { font-size: 13px; font-weight: 700; color: var(--accent); }
-.slot .pl { font-size: 17px; font-weight: 700; }
-.slot .pl.dim { color: var(--ink-dim); font-weight: 500; font-size: 15px; }
-.slot .tm, .slot .at { font-size: 13px; color: var(--ink-dim); }
-
 body.phone .sheet .pane { top: auto; left: 0; right: 0; bottom: 0; width: auto; max-height: 90vh; max-height: 90dvh; border-radius: 18px 18px 0 0; border-bottom: 0; padding-bottom: env(safe-area-inset-bottom); animation: sheetUp .24s cubic-bezier(.2, .7, .2, 1); }
 @keyframes sheetUp { from { transform: translateY(40px); opacity: 0; } }
 body.phone .sheet header { padding: 12px 8px 10px 18px; }
-body.phone #saves .slots > .slot { grid-template-columns: 116px 1fr; }
-body.phone .slot .pl { font-size: 16px; }
 
 /* ---------- loading between places ---------- */
 #loadchip { position: fixed; left: 16px; bottom: 16px; z-index: 25; gap: 10px; padding: 0 14px 0 12px; animation: fadeIn .25s ease; }
@@ -796,16 +779,15 @@ body.phone #sayBtn .key { display: none; }
 body.phone .hchip { height: 44px; }
 body.phone #goal { min-height: 44px; height: auto; }
 body.phone .hchip.icon { width: 44px; }
-body.phone .slot .tm, body.phone .slot .at { font-size: 14px; }
+/* phone: the quick save button joined the row (css/saves.css); counts sit a little tighter so a full HUD (People, Bag,
+   Words, Photos, sound, quick save, menu) fits 390 px, and a row that still doesn't fit wraps instead of running off */
+body.phone #hud { flex-wrap: wrap; justify-content: flex-end; row-gap: 4px; }
+body.phone :is(#peopleBtn, #bagBtn, #cmdsBtn, #photosBtn) { padding: 0 8px 0 7px; gap: 5px; }
 
 /* ---------- critic round 1 (6/10): one centred panel for settings and saves, a backed pause menu, a notice in the
    HUD's own shape, a loading chip that says where you're going, an end screen that fits with its button in view ---------- */
 body:not(.phone) .sheet .pane { top: 50%; left: 50%; right: auto; bottom: auto; translate: -50% -50%; width: min(520px, calc(100vw - 48px)); max-height: calc((100dvh - 48px) / var(--ui, 1)); animation: panelIn .2s cubic-bezier(.2, .7, .2, 1); }
 @keyframes panelIn { from { transform: scale(.97); opacity: 0; } }
-body:not(.phone) #saves .pane { width: min(760px, calc((100vw - 48px) / var(--ui, 1))); }
-body:not(.phone) #saves .slots { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; padding: 16px 18px 8px; }
-body:not(.phone) #saves .slots > .slot { grid-template-columns: 1fr; gap: 10px; padding: 8px 8px 12px; align-items: start; }
-body:not(.phone) #saves .slot .meta { padding: 0 6px; }
 .layer .scrim { background: rgba(14, 18, 28, .62); }
 .layer.under .pane { opacity: .0; pointer-events: none; transition: opacity .15s; }
 .layer.under .scrim { opacity: .0; }

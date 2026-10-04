@@ -13,6 +13,7 @@ import { ui, sfx } from './ui.js';
 import { Bonds, STEPS, dateOf, safeKey } from './bonds/model.js';
 import { CAST, WORD_REGISTER } from './bonds/cast.js';
 import { MOMENTS, REASONS, EXPECT } from './bonds/day1.js';
+import { peopleCards } from './ui/people-view.js';
 
 export const PERIODS = ['early', 'morning', 'lunch', 'afternoon', 'evening'];
 export const PERIOD_NAMES = {
@@ -380,8 +381,7 @@ export function take(item) {
   }
 }
 
-// ---------- the People panel ----------
-const esc = (t) => String(t).replace(/&/g, '&amp;').replace(/</g, '&lt;');
+// ---------- the People panel (its cards: ui/people-view.js) ----------
 const itemName = (x) => (ITEMS[x] ? ITEMS[x].name : x);
 // per person met: bond step, what you know about them, what they remember of you, the commands they taught
 export function peopleData() {
@@ -399,28 +399,7 @@ export function peopleData() {
       return { id, name: p.name || id, about: p.about || '', color: p.color || '#8a93a3', ...v, taught };
     });
 }
-export function peopleHTML() {
-  const list = peopleData();
-  if (!list.length) return '<p class="none">Nobody yet.</p>';
-  return list
-    .map((d) => {
-      const pips = [1, 2, 3, 4, 5].map((n) => (n <= d.step ? '<i></i>' : '<b></b>')).join('');
-      const cmds = d.taught.map((c) => `<span class="jp">${c.ja}</span> <span class="gl">${c.en}</span>`).join(' ');
-      const known = d.known.slice(-4).map(esc).join('<br>');
-      const rem = d.remembers.slice(0, 2).map(esc).join('<br>');
-      return (
-        `<li data-id="${d.id}" data-step="${d.step}"><span class="pic" style="--c:${d.color}">${esc(d.name[0])}</span>` +
-        `<span class="nm">${esc(d.name)} <small class="st">${d.stepName}</small></span>` +
-        `<span class="bd" title="${d.stepName}" aria-label="Bond: ${d.stepName}">${pips}</span>` +
-        `<span class="ab">${esc(d.about)}</span>` +
-        (known ? `<span class="ab kn">${known}</span>` : '') +
-        (rem ? `<span class="ab rm">They remember: ${rem}</span>` : '') +
-        (cmds ? `<span class="cm">Taught you: ${cmds}</span>` : '') +
-        '</li>'
-      );
-    })
-    .join('');
-}
+export const peopleHTML = () => peopleCards(peopleData());
 
 // ---------- QA ----------
 // every bond at a glance (fast test, console): { id: { step, pts, met, ready, remembers, facts, log } }

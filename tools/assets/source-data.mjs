@@ -114,7 +114,7 @@ export function assetSourceData(read) {
       .filter(([, person]) => person.name).map(([id, person]) => [id, person.name]));
     stories[name] = { speakers, texts, names };
   }
-  const iconFiles = ['game3d/js/ui.js', ...assetSourceFiles.filter(file => file.startsWith('game3d/js/ui/')),
+  const iconFiles = ['game3d/js/ui.js', ...assetSourceFiles.filter(file => file.startsWith('game3d/js/ui/') || file.startsWith('game3d/js/saves/')),
     ...['menu', 'engine', 'speech'].map(name => `game3d/js/${name}.js`)];
   const icons = iconFiles.flatMap(file => inlineIcons(ast(file), file));
   return { words, wordIcons, music, emotes, beds, events, sfx, cast3d, styles, people, stories,
