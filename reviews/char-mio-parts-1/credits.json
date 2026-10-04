@@ -84,5 +84,18 @@
    "target_polycount": 4000
   },
   "input": "art/parts/char-mio-parts/inputs/body.png"
+ },
+ {
+  "service": "meshy",
+  "part": "meshy-single-rig",
+  "task": "01a10827-1051-777c-a894-ea13ec8e4e10",
+  "status": "SUCCEEDED",
+  "credits": 5,
+  "settings": {
+   "model": "art/parts/char-mio-parts/meshy/meshy-single-300k.glb",
+   "height_meters": 1.6
+  },
+  "balance_after": 480,
+  "note": "Jørgen on char-mio-parts-1: \"can you make the meshy single move?\" Rigged a copy of meshy-single (char-mio-gen3d-1) decimated from 1,280,368 to 299,999 faces (texture kept), under the 320k-face rig limit."
  }
 ]

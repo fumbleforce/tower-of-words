@@ -2,7 +2,7 @@
  "title": "Rei's portrait down to the waist",
  "date": "2026-10-03",
  "by": "claude-agent:rei-body-1",
- "status": "open",
+ "status": "decided",
  "question": "Is b-s11 right for Rei in the game, or should another of these replace it?",
  "multi": false,
  "media": [
@@ -29,6 +29,10 @@
   {
    "image": "bible/shots/rei-body-1/imgqa-cutouts.webp",
    "caption": "Every cut-out with the image check numbers; cyan marks see-through holes."
+  },
+  {
+   "image": "bible/shots/rei-body-1/seam-a-s11-b-s11.webp",
+   "caption": "Your pick a-s11 at the seam (rows 1060 to 1200, shown 2x), top, and the same render with attempt b's blend, bottom. a-s11 shows ghost lines across the jacket and a doubled cuff at her right side (image left), so it is blended the way b did. b-s11 is that same seed-11 render with the blend moved up, so a-s11 blended is pixel for pixel the file already installed (rows below 1150 identical; the lower body is a-s11's). The installed portrait did not change."
   }
  ],
  "options": [
@@ -93,5 +97,11 @@
    "note": "Job b: as a (same renders), but the seam blend moved up: the original kept to row 1104, then an 8 px blend into the model's own drawing, where both still match, instead of a 32 px cross-fade over rows the model redrew. Seed 13, RDBT Anima, Euler A 30 steps, CFG 5, denoise 1.0, LLLite inpainting-v2 1.0, DifferentialDiffusion, 256 px added under the 896x1152 render (canvas 896x1408), blend rows 1104 to 1112. Her face and upper body are rei-i65-2102 unchanged (max pixel change 0 above the blend). Red rim 0.0% render, 0.0% cut-out; matte holes 1. The ghost lines are mostly gone; a faint trace of the old cuff shape stays at her right side (image left) on s12 and s13. Two buttons, a belt buckle at the bottom edge, and a small white diamond with a pale pink edge between her left sleeve and the ponytail (image right); the cut-out makes that a see-through gap (matte warn: 1 hole). Prompt (rei-i65-2102's own): masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1girl, solo, Rei, a 26-year-old woman: long silver-grey hair in a sleek high ponytail, steel-grey eyes, sharp eyeliner, gold hoop earrings, tailored white suit over a black shirt, gold pin on the lapel, narrow refined face, high cheekbones, tall and curvy, sly confident look, slight knowing smile, waist-up portrait facing the viewer at a slight angle, (the whole head inside the frame with empty space above the hair:1.2), plain light grey background, soft even studio light Negative: worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, fat, obese, plump, (rim light, red rim light, red outline, backlighting:1.4), holding, holding object, tool, screwdriver, pen, pencil, cup, phone, papers, book"
   }
  ],
- "links": []
+ "links": [],
+ "decided": [
+  "rei-body-a-s11"
+ ],
+ "decision": "rei-body-a-s11 (his words: choose one). Its seam showed ghost lines, so it keeps attempt b's blend; that is the installed b-s11, the same render, so the portrait file stays.",
+ "decided_at": "2026-10-04T20:28:40+0200",
+ "issue": 220
 }
