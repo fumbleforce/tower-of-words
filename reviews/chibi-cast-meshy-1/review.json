@@ -2,9 +2,9 @@
  "title": "Kuro, Eric and Mio as vinyl chibis, with Meshy",
  "date": "2026-10-02",
  "by": "Claude (chibi-cast-meshy agent)",
- "status": "open",
+ "status": "decided",
  "issue": 171,
- "question": "Which of these work, and what should change?",
+ "question": "These are real 3D models (Meshy, rigged), not just pictures. The images below are renders of the models from several angles. Open the live 3D link to turn them and watch them idle and walk. They are now in the game: Eric, Mio and Kuro use them by default. Which of these work, and what should change?",
  "multi": true,
  "media": [
   {
@@ -53,49 +53,82 @@
    "id": "kuro-1",
    "label": "1. kuro-1",
    "image": "art/parts/chibi-cast-meshy/kuro-1/renders/front.png",
-   "images": ["art/parts/chibi-cast-meshy/kuro-1/renders/l45.png", "art/parts/chibi-cast-meshy/kuro-1/renders/back.png", "art/parts/chibi-cast-meshy/kuro-1/renders/face.png", "art/parts/chibi-cast-meshy/inputs/kuro-d-101.png"],
+   "images": [
+    "art/parts/chibi-cast-meshy/kuro-1/renders/l45.png",
+    "art/parts/chibi-cast-meshy/kuro-1/renders/back.png",
+    "art/parts/chibi-cast-meshy/kuro-1/renders/face.png",
+    "art/parts/chibi-cast-meshy/inputs/kuro-d-101.png"
+   ],
    "note": "Input kuro-d-101, background cut away (BiRefNet, CPU). Meshy image-to-3D with the settings of chibi-meshy-1's dressed-nopose: latest model, textured in the same task, no remesh, image enhancement off, no PBR, 4k texture, no pose. 30 credits, 411,354 triangles. Close to the input: bun with two hair sticks, blunt fringe, side locks, black frames, dark lips, teal blazer, skirt, flats, mitten hands. The hair sticks are thin rods. Rigged (5 credits): in the live viewer."
   },
   {
    "id": "eric-1",
    "label": "2. eric-1",
    "image": "art/parts/chibi-cast-meshy/eric-1/renders/front.png",
-   "images": ["art/parts/chibi-cast-meshy/eric-1/renders/l45.png", "art/parts/chibi-cast-meshy/eric-1/renders/back.png", "art/parts/chibi-cast-meshy/eric-1/renders/face.png", "art/parts/chibi-cast-meshy/inputs/eric-e-101.png"],
+   "images": [
+    "art/parts/chibi-cast-meshy/eric-1/renders/l45.png",
+    "art/parts/chibi-cast-meshy/eric-1/renders/back.png",
+    "art/parts/chibi-cast-meshy/eric-1/renders/face.png",
+    "art/parts/chibi-cast-meshy/inputs/eric-e-101.png"
+   ],
    "note": "Input eric-e-101, same settings as 1. 30 credits, 445,636 triangles. Blond swept-back hair, stubble, silver frame, grey hoodie under a navy blazer, grey trousers. No ponytail (not in the front picture). His hands are rounder fists than the women's mittens. A faint second frame is painted on the skin beside his left eye. Rigged (5 credits): in the live viewer."
   },
   {
    "id": "mio-1",
    "label": "3. mio-1",
    "image": "art/parts/chibi-cast-meshy/mio-1/renders/front.png",
-   "images": ["art/parts/chibi-cast-meshy/mio-1/renders/l45.png", "art/parts/chibi-cast-meshy/mio-1/renders/back.png", "art/parts/chibi-cast-meshy/mio-1/renders/face.png", "art/parts/chibi-cast-meshy/inputs/mio-d-101.png"],
+   "images": [
+    "art/parts/chibi-cast-meshy/mio-1/renders/l45.png",
+    "art/parts/chibi-cast-meshy/mio-1/renders/back.png",
+    "art/parts/chibi-cast-meshy/mio-1/renders/face.png",
+    "art/parts/chibi-cast-meshy/inputs/mio-d-101.png"
+   ],
    "note": "Input mio-d-101, same settings as 1. 30 credits, 760,332 triangles. Green-black hair with green streaks, taupe frames, pale skin, dark teal hoodie, cargo trousers. The messy bun came out as thin curled strands, and a faint copy of the frame is painted under the lenses. Rigged (5 credits): in the live viewer."
   },
   {
    "id": "kuro-2",
    "label": "4. kuro-2",
    "image": "art/parts/chibi-cast-meshy/kuro-2/renders/front.png",
-   "images": ["art/parts/chibi-cast-meshy/kuro-2/renders/l45.png", "art/parts/chibi-cast-meshy/kuro-2/renders/back.png", "art/parts/chibi-cast-meshy/kuro-2/renders/face.png"],
+   "images": [
+    "art/parts/chibi-cast-meshy/kuro-2/renders/l45.png",
+    "art/parts/chibi-cast-meshy/kuro-2/renders/back.png",
+    "art/parts/chibi-cast-meshy/kuro-2/renders/face.png"
+   ],
    "note": "1 with one change: Meshy Smart Topology (meshy-t2, target 5,000 faces) instead of the latest model, for a game-light model. 15 credits, 5,377 triangles. Shape kept. The face texture is blotchier (grey patches on the cheeks) and the lenses look glassy. Not rigged."
   },
   {
    "id": "mio-2",
    "label": "5. mio-2",
    "image": "art/parts/chibi-cast-meshy/mio-2/renders/front.png",
-   "images": ["art/parts/chibi-cast-meshy/mio-2/renders/l45.png", "art/parts/chibi-cast-meshy/mio-2/renders/back.png", "art/parts/chibi-cast-meshy/mio-2/renders/face.png"],
+   "images": [
+    "art/parts/chibi-cast-meshy/mio-2/renders/l45.png",
+    "art/parts/chibi-cast-meshy/mio-2/renders/back.png",
+    "art/parts/chibi-cast-meshy/mio-2/renders/face.png"
+   ],
    "note": "3 with one change: Smart Topology (meshy-t2, 5,000 faces), to see whether low poly turns the bun's strands into chunks. It didn't: the bun is still spiky strands with green bands. 15 credits, 5,287 triangles. Not rigged."
   },
   {
    "id": "eric-2",
    "label": "6. eric-2",
    "image": "art/parts/chibi-cast-meshy/eric-2/renders/front.png",
-   "images": ["art/parts/chibi-cast-meshy/eric-2/renders/l45.png", "art/parts/chibi-cast-meshy/eric-2/renders/back.png", "art/parts/chibi-cast-meshy/eric-2/renders/face.png", "art/parts/chibi-cast-meshy/inputs/eric-f-101.png"],
+   "images": [
+    "art/parts/chibi-cast-meshy/eric-2/renders/l45.png",
+    "art/parts/chibi-cast-meshy/eric-2/renders/back.png",
+    "art/parts/chibi-cast-meshy/eric-2/renders/face.png",
+    "art/parts/chibi-cast-meshy/inputs/eric-f-101.png"
+   ],
    "note": "2 with one change: input eric-f-101, glasses asked for as painted on. The picture barely changed, and Meshy still built a separate 3D frame. Otherwise as eric-1, without the painted second frame. 30 credits, 431,200 triangles. Not rigged."
   },
   {
    "id": "mio-3",
    "label": "7. mio-3",
    "image": "art/parts/chibi-cast-meshy/mio-3/renders/front.png",
-   "images": ["art/parts/chibi-cast-meshy/mio-3/renders/l45.png", "art/parts/chibi-cast-meshy/mio-3/renders/back.png", "art/parts/chibi-cast-meshy/mio-3/renders/face.png", "art/parts/chibi-cast-meshy/inputs/mio-g-101-flip.png"],
+   "images": [
+    "art/parts/chibi-cast-meshy/mio-3/renders/l45.png",
+    "art/parts/chibi-cast-meshy/mio-3/renders/back.png",
+    "art/parts/chibi-cast-meshy/mio-3/renders/face.png",
+    "art/parts/chibi-cast-meshy/inputs/mio-g-101-flip.png"
+   ],
    "note": "3 with a new input, mio-g-101-flip (smooth round bun on her left, image right), same Meshy settings. 30 credits, 567,130 triangles. The bun is now one clean ball. Fringe, streaks, frames and hoodie as before. Rigged (5 credits): in the live viewer."
   }
  ],
@@ -112,5 +145,6 @@
    "label": "Every input picture's prompt, seed and settings",
    "href": "art/candidates/chibi-cast-meshy/prompts.json"
   }
- ]
+ ],
+ "decision": "Decided 2026-10-03: Meshy chibis for everyone (\"The meshy ones are much better. So just build on that and add them to the game\"); kuro-1, eric-1, mio-3 are in the game (now the default look)."
 }
