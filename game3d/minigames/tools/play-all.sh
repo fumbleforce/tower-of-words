@@ -4,7 +4,7 @@
 port=${1:-8771}
 dir=$(dirname "$0")
 status=0
-for game in give give-v1 compare want; do
+for game in kotodama give give-v1 compare want; do
   for size in "390 844" "1366 860"; do
     # shellcheck disable=SC2086
     GL=soft node "$dir/play.mjs" $game $size --port "$port" | grep -E "PASS|FAIL|page error" || status=1

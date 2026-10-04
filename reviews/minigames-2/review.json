@@ -2,7 +2,7 @@
  "title": "Friday drinks: the giving game, made into a puzzle",
  "date": "2026-10-04",
  "by": "claude-agent:give-fun",
- "status": "open",
+ "status": "superseded",
  "question": "This is a playable prototype, not pictures: play it at https://fumbleforce.github.io/tower-of-words/game3d/minigames/give.html (phone or desktop, about 3 minutes; the first version is still at give-v1.html). It is the giving game from minigames-1, redesigned after \"it's a starting point, but they are not particularly fun\". Is this fun now, and should the other two get the same treatment? Pick friday-drinks if it is fun, and pick each of the others you want redone this way.",
  "multi": true,
  "media": [

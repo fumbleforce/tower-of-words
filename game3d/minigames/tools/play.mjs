@@ -1,6 +1,6 @@
 // Plays a minigame to its end card in a headless browser, the way a player would (clicks, drags),
 // and saves a screenshot after every step.
-//   node game3d/minigames/tools/play.mjs <give|give-v1|compare|want> <width> <height> [--wrong N] [--port P] [--again]
+//   node game3d/minigames/tools/play.mjs <kotodama|give|give-v1|compare|want> <width> <height> [--wrong N] [--port P] [--again]
 // --wrong N gets every Nth task wrong first, to see the mistakes play out. --again also plays Play again.
 // Needs the repo served on the port (default 8771). Prints PASS or FAIL with any page errors.
 import fs from 'node:fs';
@@ -13,7 +13,7 @@ const flag = (k, d) => (rest.includes(k) ? rest[rest.indexOf(k) + 1] : d);
 const wrongEvery = Number(flag('--wrong', 0));
 const port = flag('--port', '8771');
 const again = rest.includes('--again');
-if (!name) throw new Error('Which minigame? give, give-v1, compare or want');
+if (!name) throw new Error('Which minigame? kotodama, give, give-v1, compare or want');
 const width = Number(w), height = Number(h), phone = width < 640 || width / height < 0.8;
 const root = path.resolve(fileURLToPath(new URL('../../', import.meta.url)));
 const out = path.join(root, 'shots', 'minigames', `${name}-${width}x${height}${wrongEvery ? '-wrong' : ''}`);
