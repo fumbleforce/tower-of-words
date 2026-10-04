@@ -1,0 +1,71 @@
+[
+ {
+  "service": "meshy",
+  "part": "kuro-3",
+  "task": "01a10868-9391-707a-956b-1c2065b93130",
+  "status": "SUCCEEDED",
+  "credits": 5,
+  "balance_after": 475,
+  "settings": {
+   "ai_model": "meshy-t2",
+   "should_texture": false,
+   "target_formats": [
+    "glb"
+   ],
+   "multi_view_thumbnails": true,
+   "pose_mode": "a-pose",
+   "model_type": "smart-topology",
+   "target_polycount": 1050
+  },
+  "input": "art/parts/kuro-meshy-orig-3/pics/e5.png"
+ },
+ {
+  "service": "meshy",
+  "part": "kuro-3b",
+  "task": "01a10869-58c7-738d-a8e1-d621b25264ef",
+  "status": "SUCCEEDED",
+  "credits": 5,
+  "balance_after": 470,
+  "settings": {
+   "ai_model": "meshy-t2",
+   "should_texture": false,
+   "target_formats": [
+    "glb"
+   ],
+   "multi_view_thumbnails": true,
+   "pose_mode": "a-pose",
+   "model_type": "smart-topology",
+   "target_polycount": 1050
+  },
+  "input": "art/parts/kuro-meshy-orig-3/pics/e5.png"
+ },
+ {
+  "service": "meshy",
+  "part": "kuro-3b-tex",
+  "task": "01a1086c-920c-75be-bb6e-8273ad13b570",
+  "status": "SUCCEEDED",
+  "credits": 10,
+  "balance_after": 460,
+  "settings": {
+   "enable_pbr": false,
+   "remove_lighting": true,
+   "enable_original_uv": true,
+   "target_formats": [
+    "glb"
+   ],
+   "model": "art/parts/kuro-meshy-orig-3/meshy/kuro-3b-uv.glb"
+  },
+  "input": "art/parts/kuro-meshy-orig-3/pics/e5.png"
+ },
+ {
+  "service": "meshy",
+  "part": "kuro-3b-tex-rig",
+  "task": "01a1086e-083c-7265-a179-78acc237346b",
+  "status": "SUCCEEDED",
+  "credits": 5,
+  "settings": {
+   "input_task_id": "01a1086c-920c-75be-bb6e-8273ad13b570",
+   "height_meters": 1.1
+  }
+ }
+]

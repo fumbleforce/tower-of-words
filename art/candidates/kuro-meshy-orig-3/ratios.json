@@ -1,0 +1,46 @@
+{
+ "Eric (in game)": {
+  "height_share": 0.464,
+  "head_over_legs_width": 1.95
+ },
+ "Mio (in game)": {
+  "height_share": 0.523,
+  "head_over_legs_width": 2.33
+ },
+ "Kuro round 2 model": {
+  "height_share": 0.474,
+  "head_over_legs_width": 2.55
+ },
+ "Kuro round 3 model": {
+  "height_share": 0.409,
+  "head_over_legs_width": 2.2
+ },
+ "d2 (round 2 picture)": {
+  "height_share": 0.505,
+  "head_over_legs_width": 2.96
+ },
+ "e1": {
+  "height_share": 0.431,
+  "head_over_legs_width": 2.74
+ },
+ "e2": {
+  "height_share": 0.443,
+  "head_over_legs_width": 2.64
+ },
+ "e3": {
+  "height_share": 0.468,
+  "head_over_legs_width": 2.56
+ },
+ "e4": {
+  "height_share": 0.509,
+  "head_over_legs_width": 2.17
+ },
+ "e5": {
+  "height_share": 0.445,
+  "head_over_legs_width": 2.8
+ },
+ "e6": {
+  "height_share": 0.43,
+  "head_over_legs_width": 2.26
+ }
+}

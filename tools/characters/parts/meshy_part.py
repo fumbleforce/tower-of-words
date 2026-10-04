@@ -12,9 +12,11 @@ reviews/<round>-1/credits.json (or reviews/<review>/credits.json with review=<id
 Meshy auto-rig on that part's task (5 credits; height lowered for a big chibi head). Writes <part>-rigged.glb and
 Meshy's free walking and running clips next to it, and logs the credits the same way.
 
-  meshy_part.py retex <part> <picture.png> [round=chibi-meshy]
+  meshy_part.py retex <part> <picture.png> [round=chibi-meshy] [model=<local.glb>] [tex=4k] [name=<part>-tex]
 Texture pass on that part's untextured shape, styled from the picture (Meshy retexture, no PBR, lighting removed,
-the shape's own UVs). Writes <part>-tex.json and <part>-tex.glb; rig it with `rig <part>-tex`.
+the shape's own UVs). `model=` sends a local copy of the shape instead (e.g. with UVs of our own, which "own UVs"
+then keeps; Meshy's smart-topology shapes come with none). Writes <name>.json and <name>.glb (default <part>-tex);
+rig it with `rig <name>`.
 """
 import base64, json, os, sys
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -74,23 +76,30 @@ def rig(part, opts):
 def retex(part, pic, opts):
     rnd = opts.get('round', 'char-mio-parts')
     d = os.path.join(MAIN, f'art/parts/{rnd}/meshy')
-    body = {'input_task_id': json.load(open(f'{d}/{part}.json'))['id'], 'image_style_url': meshy.data_uri(pic),
-            'enable_pbr': False, 'remove_lighting': True, 'enable_original_uv': True, 'target_formats': ['glb']}
-    settings = {k: v for k, v in body.items() if k != 'image_style_url'}
+    name = opts.get('name', part + '-tex')
+    body = {'image_style_url': meshy.data_uri(pic), 'enable_pbr': False, 'remove_lighting': True,
+            'enable_original_uv': True, 'target_formats': ['glb']}
+    if opts.get('model'):
+        body['model_url'] = 'data:application/octet-stream;base64,' + base64.b64encode(open(opts['model'], 'rb').read()).decode()
+    else:
+        body['input_task_id'] = json.load(open(f'{d}/{part}.json'))['id']
+    if opts.get('tex'): body['texture_resolution'] = opts['tex']
+    settings = {k: v for k, v in body.items() if k not in ('image_style_url', 'model_url')}
+    if opts.get('model'): settings['model'] = os.path.relpath(opts['model'], MAIN)
     before = meshy.call('GET', '/v1/balance')['balance']
     tid = meshy.call('POST', '/v1/retexture', body)['result']
     print('task', tid, flush=True)
     r = meshy.wait('retexture', tid)
     after = meshy.call('GET', '/v1/balance')['balance']
     r['_settings'], r['_input'] = settings, os.path.relpath(pic, MAIN)
-    json.dump(r, open(f'{d}/{part}-tex.json', 'w'), indent=1)
+    json.dump(r, open(f'{d}/{name}.json', 'w'), indent=1)
     log(os.path.join(ROOT, f'reviews/{opts.get("review", rnd + "-1")}/credits.json'),
-        {'service': 'meshy', 'part': part + '-tex', 'task': tid, 'status': r.get('status'),
+        {'service': 'meshy', 'part': name, 'task': tid, 'status': r.get('status'),
          'credits': r.get('consumed_credits', before - after), 'balance_after': after, 'settings': settings,
          'input': r['_input']})
     if r.get('status') != 'SUCCEEDED':
         sys.exit(f'texture failed: {r.get("task_error")}')
-    meshy.fetch(r['model_urls']['glb'], f'{d}/{part}-tex.glb')
+    meshy.fetch(r['model_urls']['glb'], f'{d}/{name}.glb')
     print('credits', before - after, 'balance', after)
 
 
