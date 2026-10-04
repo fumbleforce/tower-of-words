@@ -10,10 +10,12 @@ import { chibiFiles, chibiFrom, CHIBI_CAST } from './chibi.js';
 // Standing heights next to Mio (1.12) and Eric (1.2). While a model waits for Jørgen's approval it only loads with
 // ?cast3d=<id>[,<id>]; approved ids go in CAST3D_ON.
 export const CAST3D = { mori: 1.2, kuro: 1.12 };
-const CAST3D_ON = [];
+const CAST3D_ON = ['kuro']; // Kuro: Review kuro-meshy-orig-3 (Jørgen, 2026-10-04: "Yes, very good")
 const Q3 = new URLSearchParams(typeof location !== 'undefined' ? location.search : '');
+// only in a page: the unit tests import the cast in Node, where everyone stays code-built (as in chibi.js)
+const PAGE = typeof addEventListener === 'function';
 const want3 = [...CAST3D_ON, ...(Q3.get('cast3d') || '').split(',')].filter(
-  (id) => CAST3D[id] && !CHIBI_CAST.includes(id),
+  (id) => PAGE && CAST3D[id] && !CHIBI_CAST.includes(id),
 );
 const PRE3 = {};
 const warn = (id) => (e) => {
@@ -64,6 +66,7 @@ export function meshyPerson(m) {
     m.update(dt);
   };
   for (const sk of sks) sk.onBeforeRender = step;
+  m.stepNow = step; // a gesture tween takes the frame's step first (rig-gestures.js boneTween)
   // seat the hips on the chair under the root (train and office seats: SEAT_Y), keeping x, z and facing
   m.sitHere = () => {
     m.sitAt(m.root.position.x, SEAT_Y, m.root.position.z, m.root.rotation.y);
