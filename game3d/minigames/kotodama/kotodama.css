@@ -110,7 +110,7 @@ ruby rt { font-size: .5em; color: var(--dim); font-weight: 500; }
 .role .por, .item.role { box-shadow: 0 0 0 3px var(--role); }
 .role::before { position: absolute; z-index: 6; top: -10px; right: -6px; min-width: 26px; height: 26px; padding: 0 5px; border-radius: 13px; background: var(--role); color: #0b1218; font-weight: 700; font-size: 15px; line-height: 26px; text-align: center; box-shadow: 0 2px 6px rgba(0,0,0,.4); }
 .person.role::before { top: 4px; right: 2px; }
-[data-role="o"]::before { content: "を"; } [data-role="ni"]::before { content: "に"; } [data-role="to"]::before { content: "と"; } [data-role="nimo"]::before { content: "にも"; }
+[data-role="o"]::before { content: "を"; } [data-role="ni"]::before { content: "に"; } [data-role="to"]::before { content: "と"; } [data-role="nimo"]::before { content: "にも"; } [data-role="open"]::before { content: "?"; }
 .m-body.role::before { content: none; }
 
 .arrows { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 6; overflow: visible; }
@@ -132,22 +132,43 @@ ruby rt { font-size: .5em; color: var(--dim); font-weight: 500; }
 .person.hint-glow .por { animation: glow 1.1s ease-in-out infinite; }
 
 /* ---------- what people say ---------- */
-.talk { display: flex; flex-direction: column; gap: 5px; padding: 8px 12px 0; height: 118px; overflow: hidden; background: linear-gradient(180deg, #10171e, var(--bg)); border-top: 1px solid var(--edge); }
+.talk { display: flex; flex-direction: column; gap: 5px; padding: 8px 12px 6px; min-height: 142px; background: linear-gradient(180deg, #10171e, var(--bg)); border-top: 1px solid var(--edge); }
 .t-line { display: flex; gap: 9px; align-items: flex-start; }
 .t-face { flex: none; width: 34px; height: 34px; border-radius: 50%; object-fit: cover; object-position: 50% 4%; background: #1f2b36; }
 img.t-face { width: 34px; }
-.t-cat svg { width: 34px; height: 34px; }
+.t-cat { display: grid; place-items: center; }
+.t-cat svg { width: 34px; height: 34px; display: block; }
 .t-note { display: grid; place-items: center; background: var(--o); color: #1a0c06; font-weight: 700; }
 .t-line.coach .t-text { border-left: 2px solid var(--ni); padding-left: 8px; }
 .t-text { min-width: 0; }
 .t-jp { color: var(--jp); font-size: 16px; line-height: 1.75; }
-.t-en { color: var(--dim); font-size: 13.5px; line-height: 1.3; }
+.t-en { color: var(--dim); font-size: 13.5px; line-height: 1.3; word-break: keep-all; overflow-wrap: break-word; }
 .t-line.note .t-en { color: var(--ink); font-size: 14.5px; }
 .t-line.coach .t-en { color: #cfe6e2; }
+/* a walkthrough step: the one thing to do now */
+.t-line.step { align-items: center; padding: 7px 12px 7px 7px; border-radius: 12px; background: rgba(255, 211, 107, .1); border: 1px solid rgba(255, 211, 107, .45); }
+.t-step { display: grid; place-items: center; background: var(--gold); color: #1a1405; font-weight: 700; font-size: 14px; }
+.t-line.step .t-en { color: var(--ink); font-size: 17px; line-height: 1.35; }
+.t-line.step b { color: #fff; }
+.t-line.step b.p-ni { color: var(--ni); } .t-line.step b.p-o { color: var(--o); } .t-line.step b.p-to { color: var(--to); }
+.t-line.step i { font-style: normal; color: var(--dim); font-size: .85em; }
+
+/* the pointing hand of the walkthrough, its fingertip on the next thing to tap */
+.hand { position: fixed; left: 0; top: 0; transform-origin: 14px 2px; z-index: 30; width: 40px; height: 48px; pointer-events: none; filter: drop-shadow(0 4px 6px rgba(0,0,0,.5)); }
+.hand[hidden] { display: none; }
+.hand svg { width: 100%; height: 100%; display: block; animation: poke 1s ease-in-out infinite; }
+@keyframes poke { 50% { transform: translate(5px, 9px); } }
+
+/* the shift's goal on the wall */
+.goal { position: absolute; left: 12px; top: 20px; max-width: min(360px, calc(50% - 36px)); display: flex; flex-direction: column; gap: 1px; padding: 6px 10px; border-radius: 10px; background: rgba(8, 12, 16, .72); border: 1px solid var(--edge); font-size: 12.5px; line-height: 1.3; color: var(--ink); z-index: 1; }
+.goal:empty { display: none; }
+.goal b { color: var(--ni); font-size: 12px; }
+.mini-pips { display: inline-flex; gap: 2px; vertical-align: middle; margin: 0 1px; }
+.mini-pips i { width: 7px; height: 7px; border-radius: 50%; background: #2fae9c; }
 
 /* ---------- the sentence and the pad ---------- */
 .console { padding: 8px 12px max(12px, env(safe-area-inset-bottom)); background: var(--bg); }
-.rail { height: 96px; overflow: hidden; padding: 8px 10px; border-radius: 14px; background: #121a22; border: 1px solid var(--edge); }
+.rail { min-height: 96px; padding: 8px 10px; border-radius: 14px; background: #121a22; border: 1px solid var(--edge); }
 .tiles { --k: 1; display: flex; flex-wrap: nowrap; gap: calc(6px * var(--k)); align-items: flex-end; min-height: 46px; overflow: hidden; }
 .tile { flex: none; display: inline-flex; flex-direction: column; align-items: center; padding: 3px calc(9px * var(--k)) 4px; border-radius: 10px; background: #1e2a36; border: 1px solid rgba(255,255,255,.1); line-height: 1.15; }
 .tile .tj { font-size: calc(20px * var(--k)); font-weight: 700; color: #fff; line-height: 1.7; }
@@ -159,7 +180,7 @@ img.t-face { width: 34px; }
 .tile.voc { background: transparent; border-style: dashed; color: var(--dim); }
 .tile.voc .tj { font-size: calc(17px * var(--k)); color: var(--dim); font-weight: 500; }
 .tile.ghost { background: transparent; border: 1px dashed #2f3c49; color: #4b5866; font-size: 15px; padding: 9px 14px; }
-.hint { margin-top: 4px; font-size: 13.5px; line-height: 1.3; color: var(--dim); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.hint { margin-top: 4px; word-break: keep-all; overflow-wrap: break-word; min-height: 1.3em; font-size: 13.5px; line-height: 1.3; color: var(--dim); }
 .hint.ok { color: #d7f7f1; }
 .hint .dim { color: var(--dim); }
 .hint .said { color: var(--ni); font-weight: 700; }
@@ -208,7 +229,9 @@ body.phone .pbtn.power b, body.phone .pbtn.p-nimo b { font-size: 15px; }
 .logo { display: flex; flex-direction: column; align-items: center; margin-bottom: 10px; }
 .l-jp { font-size: 64px; font-weight: 700; letter-spacing: .06em; line-height: 1.1; background: linear-gradient(180deg, #ffffff 30%, #9ff3e6); -webkit-background-clip: text; background-clip: text; color: transparent; }
 .l-r { font-size: 14px; letter-spacing: .5em; color: var(--ni); margin-top: 4px; padding-left: .5em; }
-.tag { color: var(--dim); margin: 6px 0 24px; }
+.tag { color: var(--dim); margin: 6px 0 10px; }
+.how { margin: 0 0 24px; color: var(--ink); }
+.how .mini-pips i { width: 9px; height: 9px; }
 .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
 .card { display: flex; flex-direction: column; align-items: flex-start; gap: 6px; padding: 16px 14px; border-radius: 16px; background: #1a2430; border: 1px solid rgba(185, 162, 255, .25); text-align: left; box-shadow: 0 5px 0 #0a0f14; transition: transform .12s, border-color .12s; }
 .card:hover { transform: translateY(-3px); border-color: rgba(185, 162, 255, .7); }
@@ -243,6 +266,25 @@ body:not(.phone) .tube.a { left: 8%; } body:not(.phone) .tube.b { right: 8%; }
 body:not(.phone) .talk { padding: 10px calc(max(24px, (100% - 980px) / 2)) 0; }
 body:not(.phone) .console { padding: 8px calc(max(24px, (100% - 980px) / 2)) 16px; }
 
+body:not(.phone) .goal { left: auto; right: 3%; top: 16px; max-width: min(340px, calc(50% - 40px)); }
+body:not(.phone) .plate { top: max(22%, 76px); }
+
+/* short desktop windows: what people say sits beside the command, so the room keeps its height */
+@media (max-height: 820px) {
+  body:not(.phone) .kd { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); grid-template-areas: "hud hud" "room room" "talk rail" "pad pad"; background: var(--bg); }
+  body:not(.phone) .hud { grid-area: hud; }
+  body:not(.phone) .room { grid-area: room; }
+  body:not(.phone) .talk { grid-area: talk; min-height: 120px; padding: 8px 12px 6px 16px; border-top: 0; background: none; }
+  body:not(.phone) .console { display: contents; }
+  body:not(.phone) .rail { grid-area: rail; margin: 8px 16px 0 4px; align-self: start; }
+  body:not(.phone) .pad { grid-area: pad; margin: 6px 16px 10px; }
+  body:not(.phone) .pbtn { height: 50px; }
+  body:not(.phone) .hud { padding: 6px 14px; }
+  body:not(.phone) .h-score { flex-direction: row; justify-content: center; align-items: baseline; gap: 10px; }
+  body:not(.phone) .last { min-height: 0; }
+  body:not(.phone) .people { padding-top: 50px; }
+}
+
 /* ---------- phone ---------- */
 body.phone .hud { padding: 6px 10px; gap: 8px; }
 body.phone .h-time { min-width: 0; }
@@ -251,15 +293,15 @@ body.phone .streak { font-size: 11px; padding: 1px 6px; }
 body.phone .h-time b { font-size: 16px; }
 body.phone .chip { min-width: 36px; height: 32px; padding: 0 8px; }
 body.phone .machines { gap: 2cqw; padding: 0 6px; }
-body.phone .m-body { height: clamp(96px, 26cqh, 170px); }
-body.phone .m-pot .m-body { height: clamp(70px, 18cqh, 120px); }
+body.phone .m-body { height: clamp(62px, 19cqh, 170px); }
+body.phone .m-pot .m-body { height: clamp(46px, 13cqh, 120px); }
 body.phone .m-label { font-size: 11px; margin-top: 2px; }
 body.phone .m-items { gap: 4px; }
 body.phone .item { flex-direction: column; gap: 0; min-width: 54px; padding: 3px 4px 2px; }
 body.phone .item .lbl { align-items: center; text-align: center; }
 body.phone .item .ico svg { width: 22px; height: 27px; }
 body.phone .item .lbl { font-size: 12.5px; line-height: 1.5; }
-body.phone .people { gap: 1.5cqw; padding: 48px 6px 6px; }
+body.phone .people { gap: 1.5cqw; padding: 44px 6px 6px; }
 body.phone .person { width: 84px; }
 body.phone .por { width: 74px; height: clamp(64px, 16cqh, 100px); }
 body.phone .flyer.body { width: 74px; height: clamp(64px, 16cqh, 100px); }
@@ -270,16 +312,20 @@ body.phone .ask .ico svg { width: 24px; height: 28px; }
 body.phone .pips i { width: 6px; height: 6px; }
 body.phone .name { font-size: 12px; }
 body.phone .rack { display: none; }
-body.phone .talk { height: 108px; padding: 6px 10px 0; }
+body.phone .talk { min-height: 128px; padding: 6px 10px 4px; }
+body.phone .t-line.step .t-en { font-size: 15.5px; }
+body.phone .hud { flex-wrap: wrap; row-gap: 2px; }
+body.phone .goal { position: static; order: 10; flex: 1 0 100%; max-width: none; flex-direction: row; justify-content: center; align-items: baseline; gap: 6px; padding: 0 0 1px; border: 0; background: none; font-size: 11px; white-space: nowrap; }
+body.phone .goal b { font-size: 11px; }
 body.phone .t-jp { font-size: 15px; }
 body.phone .t-en { font-size: 13px; }
 body.phone .console { padding: 6px 10px max(10px, env(safe-area-inset-bottom)); }
-body.phone .rail { height: 100px; padding: 6px 8px; }
+body.phone .rail { min-height: 96px; padding: 6px 8px; }
 body.phone .tile .tj { font-size: calc(18px * var(--k)); }
 body.phone .pad { flex-direction: column; gap: 8px; margin-top: 8px; }
 body.phone .parts { flex-wrap: nowrap; gap: 6px; }
-body.phone .pbtn { flex: 1; min-width: 0; height: 54px; padding: 0 4px; }
-body.phone .fire { min-width: 0; height: 60px; }
+body.phone .pbtn { flex: 1; min-width: 0; height: 48px; padding: 0 4px; }
+body.phone .fire { min-width: 0; height: 54px; }
 body.phone .cards { grid-template-columns: 1fr; }
 body.phone .card { padding: 12px 14px; }
 body.phone .c-jp { font-size: 28px; }
@@ -289,4 +335,4 @@ body.phone .banner { top: 17%; padding: 6px 16px; }
 body.phone .b-n { font-size: 30px; }
 body.phone .banner.big .b-n { font-size: 42px; }
 
-@media (prefers-reduced-motion: reduce) { .fire.ready, .person.urgent .ask, .arrow, .hint-glow { animation: none; } }
+@media (prefers-reduced-motion: reduce) { .fire.ready, .person.urgent .ask, .arrow, .hint-glow, .hand svg { animation: none; } }

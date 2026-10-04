@@ -3,9 +3,57 @@
  "date": "2026-10-04",
  "by": "claude-agent:grammar-game",
  "status": "open",
- "question": "This is a playable prototype, not pictures: play it at https://fumbleforce.github.io/tower-of-words/game3d/minigames/kotodama.html (phone or desktop, about four minutes). It's a new game, started over after \"even less fun, start over, write a new game from scratch, make it the most fun and impressive grammar game in existence\". Is this fun?",
+ "question": "This is a playable prototype, not pictures: play it at https://fumbleforce.github.io/tower-of-words/game3d/minigames/kotodama.html (phone or desktop, about four minutes). It's a new game, started over after \"even less fun, start over, write a new game from scratch, make it the most fun and impressive grammar game in existence\". Is this fun? Round 2 (after your note: translations cut off, too casual, instructions unclear): the first twelve pictures show the fixes. Same game; the translations fit at every size, people speak politely (～さん, ください, です/ます; the machines still get plain だして), and the first command is a three-step walkthrough with a hand.",
  "multi": false,
  "media": [
+  {
+   "image": "reviews/minigames-3/shots/fix-phone-0-title.webp",
+   "caption": "Fix, phone 390: the title now says the goal in one line, with the dots drawn."
+  },
+  {
+   "image": "reviews/minigames-3/shots/fix-phone-1-step1.webp",
+   "caption": "Fix, the first minute, step 1 of 3: a hand on Kenji, the step card says \"Tap Kenji, then に (to)\". Kenji asks politely: コーラを ください！ Other taps wait until the hand's one is done."
+  },
+  {
+   "image": "reviews/minigames-3/shots/fix-phone-2-step2.webp",
+   "caption": "Step 2 of 3: Kenji has に, the hand moves to the cola: \"Tap the cola, then を (what)\"."
+  },
+  {
+   "image": "reviews/minigames-3/shots/fix-phone-3-step3.webp",
+   "caption": "Step 3 of 3: \"Press だして\". The whole English translation sits on its own line under the tiles and wraps instead of being cut off."
+  },
+  {
+   "image": "reviews/minigames-3/shots/fix-phone-4-second.webp",
+   "caption": "After the walkthrough: Mio, in です/ます: つぎは わたしです / コーヒー、いいですか？ The goal and the commands left stay under the top bar."
+  },
+  {
+   "image": "reviews/minigames-3/shots/fix-phone-5-to.webp",
+   "caption": "Shift 2: と is taught the first time it matters, with the hand on each tap (Kenji, と, Mori, に, coffee を)."
+  },
+  {
+   "image": "reviews/minigames-3/shots/fix-phone360-6-shift3.webp",
+   "caption": "Phone 360x780, shift 3: four people, three machines, every line whole."
+  },
+  {
+   "image": "reviews/minigames-3/shots/fix-desktop-1-step3.webp",
+   "caption": "Desktop at your window size (1000x645): on a short window the talk sits beside the sentence, so the room and the full translation both fit."
+  },
+  {
+   "image": "reviews/minigames-3/shots/fix-desktop-2-to.webp",
+   "caption": "Desktop 1000x645: the と step."
+  },
+  {
+   "image": "reviews/minigames-3/shots/fix-desktop-3-pick.webp",
+   "caption": "Desktop 1000x645: the power word pick between shifts."
+  },
+  {
+   "image": "reviews/minigames-3/shots/fix-desktop-4-end.webp",
+   "caption": "Desktop 1000x645: the end card."
+  },
+  {
+   "image": "reviews/minigames-3/shots/fix-desktop1920-step2.webp",
+   "caption": "Desktop 1920x1080: step 2 of the walkthrough."
+  },
   {
    "image": "reviews/minigames-3/shots/strip-combo.webp",
    "caption": "Frame strip, phone: the first と combo in shift 2. ケンジくんと モリさんに コーヒーを だしてください: the lights dip, the command rises off the vending machine, two cans fly, both bubbles pop, then 2 × 2 with the streak and ください multipliers."

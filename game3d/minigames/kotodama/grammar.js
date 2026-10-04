@@ -30,7 +30,7 @@ export function parse(tokens, machine, ctx = {}) {
   const what = groups.filter(g => g.p === 'o');
   const to = groups.filter(g => g.p === 'ni' || g.p === 'nimo');
   if (what.length > 1) return { ok: false, need: 'One を per command. Join things with と: コーラと コーヒーを.' };
-  if (to.length > 1) return { ok: false, need: 'One に per command. Join people with と: ケンジくんと ミオさんに.' };
+  if (to.length > 1) return { ok: false, need: 'One に per command. Join people with と: ケンジさんと ミオさんに.' };
   const mo = to.length === 1 && to[0].p === 'nimo';
   if (mo) {
     if (!ctx.last || ctx.last.machine !== machine) return { ok: false, need: 'にも repeats your last command for someone else. Say a command to this machine first.' };

@@ -37,9 +37,15 @@ A run is about four minutes. The daily run has the same requests for everyone th
 ### What it teaches, and how
 
 - を marks the thing that moves, に where it goes or who gets it. Word order is free; the particle decides the role, and the room shows it.
-- と joins nouns on either side: ケンジくんと モリさんに コーヒーを (two people), コーラと コーヒーを (two things).
-- Request forms from day 1 (だして, いれて), ～てください, the power words も and みんな, and the people's own lines (コーラ、ちょうだい, おちゃを おねがいします, ありがとうございます), each tappable for its reading and meaning.
+- と joins nouns on either side: ケンジさんと モリさんに コーヒーを (two people), コーラと コーヒーを (two things).
+- Request forms from day 1 (だして, いれて), ～てください, the power words も and みんな, and the people's own lines, each tappable for its reading and meaning. The commands to the machines stay in the plain te-form (that is the kotodama); the people talk the way colleagues do at work, with ～さん, ください, おねがいします and です/ます (コーラを ください, コーヒー、いいですか？, もう いいです). Jørgen on the first build (Review minigames-3): "it might be too casual".
 - English fades by shift: shift 1 shows English under every tile, the whole command in English as it is built, and arrows on the room for where things will go. Shift 2 keeps the English one tap away (the EN chip) and drops the arrows. Shift 3 is the same with more machines and people. A mistake is never a fail screen: the command plays out literally, then one short line says what the particles said ("に marks where it goes: the cola. を marks what goes: Mio.").
+
+### The first minute
+
+Jørgen on the first build: "I dont really understand the instructions." So the title says the goal in one line (serve each request before its dots run out), and the first command is a walkthrough in three steps, one at a time: 1. tap Kenji, then に; 2. tap the cola, then を; 3. press だして. A hand points at the next tap and the step card above the talk says it; other taps wait (the hint shakes) until the hand's one is done. The goal stays on the wall with the commands left in the shift. The first time two people want the same thing (the start of shift 2), one more card shows と with the hand on each tap. The first time someone's dots run out, a note says they gave up and that it cost a heart. A device that has done the walkthrough skips it on later runs (localStorage kd-taught-first and kd-taught-to).
+
+Every line of text is shown whole at every size: the talk strip drops the least important lines (thanks first, then notes, then requests; never a step or Mio's coaching) and grows if one line still doesn't fit, and the sentence rail grows to wrap the full English. On a short desktop window (under 820 px tall) the talk sits beside the sentence so the room keeps its height.
 
 ### Honest check against "most fun and impressive"
 

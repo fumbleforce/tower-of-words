@@ -1,7 +1,7 @@
 // Kotodama's interface around the room: the top bar, the talk strip, the sentence rail, the pad of
 // particles with the verb as the fire button, and the cards between shifts and at the end.
 
-import { THINGS, VERBS, PARTICLES, POWERS, LINES, STARS } from './data.js';
+import { THINGS, VERBS, PARTICLES, POWERS, LINES, STARS, GOAL } from './data.js';
 import { jp } from '../common/jp.js';
 import { portrait } from '../common/cast.js';
 import { word } from '../common/sound.js';
@@ -19,6 +19,7 @@ export function skeleton() {
       <div class="h-time"><b class="h-clock">17:00</b><span class="h-shift"></span></div>
       <div class="h-score"><div class="h-main"><b class="score">0</b><span class="streak" hidden></span></div><span class="last"></span></div>
       <div class="h-right"><span class="hearts"></span><button class="chip en" aria-pressed="false" title="English (E)">EN</button><button class="chip snd" aria-pressed="true" title="Sound">♪</button></div>
+      <div class="goal"></div>
     </header>
     <main class="room"></main>
     <div class="talk" aria-live="polite"></div>
@@ -29,8 +30,37 @@ export function skeleton() {
     <div class="banner" hidden></div>
   </div>
   <div class="overlay" hidden></div>
+  <div class="hand" hidden>${HAND}</div>
   <div class="pop" hidden></div>`;
   wirePopover();
+}
+
+/** A pointing hand, its fingertip at (14, 2). Outline first, then the white fill on top. */
+const HAND_SHAPES = '<rect x="10" y="2" width="8" height="26" rx="4"/><rect x="17" y="14" width="7" height="14" rx="3.5"/><rect x="23" y="16" width="7" height="13" rx="3.5"/><rect x="29" y="19" width="6" height="12" rx="3"/><rect x="3" y="24" width="12" height="7" rx="3.5" transform="rotate(35 9 27)"/><rect x="8" y="20" width="27" height="24" rx="9"/>';
+const HAND = `<svg viewBox="0 0 40 48" aria-hidden="true"><g fill="#0b1218" stroke="#0b1218" stroke-width="5" stroke-linejoin="round">${HAND_SHAPES}</g><g fill="#fff">${HAND_SHAPES}</g></svg>`;
+
+/** Puts the hand's fingertip on the middle of an element, or hides it (el null). */
+export function pointAt(el) {
+  const h = $('.hand');
+  if (!el) return (h.hidden = true);
+  const r = el.getBoundingClientRect();
+  h.hidden = false;
+  // Near the bottom of the screen the hand comes from above instead, turned round on its fingertip.
+  const y = r.top + r.height * 0.55;
+  const flip = y + 50 > innerHeight;
+  h.style.transform = `translate(${Math.round(r.left + r.width / 2 - 14)}px, ${Math.round((flip ? r.top + Math.min(r.height * 0.3, 16) : y) - 2)}px)${flip ? ' rotate(180deg)' : ''}`;
+}
+
+/** The goal on the wall: what a shift asks of you, and how many commands are left in it. */
+export function goal(run, shift) {
+  const el = $('.goal');
+  if (!el || !shift) return;
+  const left = Math.max(0, shift.turns - run.turn);
+  // On the phone it is a line under the top bar; on the desktop a sign on the wall.
+  const phone = document.body.classList.contains('phone');
+  const host = phone ? $('.hud') : $('.room .wall');
+  if (host && el.parentNode !== host) host.append(el);
+  el.innerHTML = `<span>${GOAL.replace('dots', '<span class="mini-pips"><i></i><i></i><i></i></span>')}</span><b>${phone ? '· ' : ''}${left} ${left === 1 ? 'command' : 'commands'} left</b>`;
 }
 
 /** Tap any dotted Japanese word for its reading and meaning (and Mio's clip, if there is one). */
@@ -87,15 +117,36 @@ export function countScore(from, to) {
 /** One line in the talk strip: a person, Mio coaching, or the narrator (who: null). */
 export const line = (who, markup, en, kind = '') => ({ who, markup, en, kind });
 
+// Which lines go first when the strip is full: chatter, then notes, then requests. Steps and Mio's
+// coaching always stay.
+const DROP = ['', 'note', 'req'];
+
+function lineHtml(l, en) {
+  const face = l.kind === 'step' ? `<span class="t-face t-step">${l.badge || '▶'}</span>` : l.who && THINGS[l.who].kind === 'person' ? `<img class="t-face" alt="" src="${portrait(l.who, l.face)}">` : l.who === 'tama' ? `<span class="t-face t-cat">${cat()}</span>` : '<span class="t-face t-note">!</span>';
+  const showEn = en || l.kind === 'coach' || l.kind === 'note' || l.kind === 'step';
+  return `<div class="t-line ${l.kind}">${face}<div class="t-text">${l.markup ? `<div class="t-jp">${jp(l.markup)}</div>` : ''}<div class="t-en"${showEn ? '' : ' hidden'}>${l.en}</div></div></div>`;
+}
+
+/**
+ * Shows lines in the strip under the room. Every line is shown whole: when they don't all fit the
+ * strip's height, the least important go, and a single line that is still too tall grows the strip.
+ */
 export function talk(lines, en) {
   const box = $('.talk');
-  box.innerHTML = lines
-    .map(l => {
-      const face = l.who && THINGS[l.who].kind === 'person' ? `<img class="t-face" alt="" src="${portrait(l.who, l.face)}">` : l.who === 'tama' ? `<span class="t-face t-cat">${cat()}</span>` : '<span class="t-face t-note">!</span>';
-      const showEn = en || l.kind === 'coach' || l.kind === 'note';
-      return `<div class="t-line ${l.kind}">${face}<div class="t-text">${l.markup ? `<div class="t-jp">${jp(l.markup)}</div>` : ''}<div class="t-en"${showEn ? '' : ' hidden'}>${l.en}</div></div></div>`;
-    })
-    .join('');
+  let shown = lines.slice();
+  const fit = () => (box.innerHTML = shown.map(l => lineHtml(l, en)).join(''));
+  fit();
+  const room = parseFloat(getComputedStyle(box).minHeight) || 0;
+  while (box.scrollHeight > room + 1 && shown.length > 1) {
+    let drop = -1;
+    for (const k of DROP) {
+      drop = shown.map(l => l.kind).lastIndexOf(k);
+      if (drop >= 0) break;
+    }
+    if (drop < 0) break;
+    shown.splice(drop, 1);
+    fit();
+  }
   box.querySelectorAll('.t-line').forEach((e, i) => e.animate([{ opacity: 0, transform: 'translateY(-8px)' }, { opacity: 1, transform: 'none' }], { duration: ms(260), delay: ms(i * 90), fill: 'backwards' }));
   box.onclick = e => {
     const t = e.target.closest('.t-line');
@@ -107,7 +158,7 @@ export function talk(lines, en) {
 export function says(kind, who, item) {
   const set = LINES[kind][who];
   const l = item ? set[item] : set;
-  return l ? line(who, l[0], l[1]) : null;
+  return l ? line(who, l[0], l[1], kind === 'ask' ? 'req' : '') : null;
 }
 
 /** The sentence rail: who you talk to, the tiles so far, and the hint or the English under it. */
@@ -135,7 +186,7 @@ export function rail(tokens, machine, status, opts) {
   const hint = $('.hint');
   hint.className = `hint${status.ok ? ' ok' : ''}`;
   if (status.ok) hint.innerHTML = opts.en ? english(status, opts.polite) : '<span class="dim">Ready. Tap the verb to say it, or EN for the English.</span>';
-  else hint.textContent = status.need;
+  else hint.textContent = opts.draft != null ? opts.draft : status.need;
 }
 
 /** The pad: particle buttons, power words, undo, and the verb as the fire button. */

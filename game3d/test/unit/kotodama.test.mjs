@@ -62,3 +62,9 @@ test('にも repeats the last command for someone else, free, and grows the comb
   assert.equal(s.turn, turn);
   assert.equal(res.n, 2);
 });
+
+test('people speak politely, the way colleagues do at work', async () => {
+  const { LINES, COACH, THINGS } = await import('../../minigames/kotodama/data.js');
+  const all = JSON.stringify([LINES, COACH, THINGS]);
+  for (const casual of ['ちょうだい', 'くん', 'ありがと|', 'おねがい|']) assert.ok(!all.includes(casual), casual);
+});

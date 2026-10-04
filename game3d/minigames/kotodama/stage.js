@@ -8,7 +8,7 @@ import { jp } from '../common/jp.js';
 import { initFx, centre, burst, puff, motes, shake, floater, fly, sleep, ms } from './fx.js';
 import { sfx } from './audio.js';
 
-const ROLE = { o: '#ff8f6b', ni: '#5fe0cf', nimo: '#ffd36b', to: '#b9a2ff' };
+const ROLE = { o: '#ff8f6b', ni: '#5fe0cf', nimo: '#ffd36b', to: '#b9a2ff', open: '#93a4b5' };
 const HAPPY = { kenji: 'grin', mio: 'smile', mori: 'smile' };
 const ODD = { kenji: 'sheepish', mio: 'deadpan', mori: 'flustered' };
 const SHOCK = { kenji: 'sheepish', mio: 'surprised', mori: 'flustered' };
