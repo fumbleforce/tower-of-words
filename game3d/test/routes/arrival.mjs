@@ -11,6 +11,32 @@ const jam = (greeted_guard) => ({
 });
 
 export default [
+  ...['talk', 'ohayo'].map(entry => ({
+    id: `reception-${entry}`,
+    description: `Meet Kuro through ${entry}, then repeat the greeting without repeating the exchange.`,
+    seed: { place: 'forecourt', period: 'morning', known: ['ohayo'] },
+    choices: [],
+    actions: [
+      entry === 'talk' ? { type: 'use', target: 'kuro' } : { type: 'say', word: 'ohayo', target: 'kuro' },
+      { type: 'use', target: 'kuro' },
+      { type: 'say', word: 'ohayo', target: 'kuro' },
+    ],
+    expect: { nodes: ['kuro_intro', 'kuro', 'ohayo_kuro'], flags: { kuro_reception_seen: true, going_home: false }, period: 'morning' },
+  })),
+  {
+    id: 'reception-saved',
+    description: 'A saved reception conversation stays finished after Continue.',
+    seed: { place: 'forecourt', period: 'morning', flags: { kuro_reception_seen: true } },
+    choices: [], actions: [{ type: 'use', target: 'kuro' }],
+    expect: { nodes: ['kuro'], flags: { kuro_reception_seen: true }, period: 'morning' },
+  },
+  {
+    id: 'reception-evening-first',
+    description: 'Skipping reception in the morning keeps the evening goodbye short.',
+    seed: { place: 'forecourt', period: 'evening', flags: { going_home: true }, known: ['ohayo'] },
+    choices: [], actions: [{ type: 'use', target: 'kuro' }, { type: 'say', word: 'ohayo', target: 'kuro' }],
+    expect: { nodes: ['kuro', 'ohayo_kuro'], flags: { kuro_reception_seen: false, going_home: true }, period: 'evening' },
+  },
   {
     id: 'train-catch-family',
     description: 'Catch the lunchbox, ask about her mother, know one Japanese word, and greet the cat.',

@@ -41,6 +41,8 @@ Who each person is (age, job, what they speak) is in docs/game/cast.md. This she
 
 **Mr. Hamada**. Japanese only, apologises constantly, talks to machines like animals.
 
+**Kuro**. Composed and precise, with the courtesy of someone at work. A tease stays in her usual even delivery; she lets Eric notice it without laughing at him or explaining it. No gushing, pet names or coy pauses.
+
 **Narration**. Second person, a few words, only for what the scene can't show.
 
 **Mio's texts** (`miotext`). Lower case, no full stops, short: "is that you?", "loud".

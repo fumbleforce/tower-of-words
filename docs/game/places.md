@@ -305,7 +305,7 @@ The crowd ([systems.md](systems.md), The crowd):
 | `head_office` | Use the head-office entrance | Eric walks in to the lift; the goal points to the B2 lift. |
 | `to_b2` | Reach or use the lift | Eric boards the existing watched lift ride. |
 | `to_plaza` | Reach or use the east lane | Eric walks on to the fountain plaza. |
-| `kuro`, `ohayo_kuro`, `yoroshiku_kuro` | Talk to Kuro, or greet her | A polite morning welcome and a point toward the lifts; after work, お疲れさまです and a bow. She returns おはよう in the morning and よろしく politely at either time. |
+| `kuro_intro`, `kuro`, `ohayo_kuro`, `yoroshiku_kuro` | Talk to Kuro, or greet her | The first morning Talk or ohayo asks Eric's floor in English and lightly invites him to greet her again tomorrow, then she points toward the lift. `kuro_reception_seen` saves that exchange as finished; repeats and Continue keep the short welcome. No task, bond point or word lesson. After work, お疲れさまです and a bow; よろしく gets a polite reply at either time. |
 
 ### Creatures
 

@@ -8,8 +8,8 @@ export default {
     // Kuro greets arrivals at reception and people heading home after work.
     'talk:garden_bench': { if: 'going_home', node: 'garden_bench' },
     'talk:fallen_bicycle': { if: 'going_home && !evening_bikes_upright', node: 'fallen_bicycle' },
-    'talk:kuro': 'kuro',
-    'say:ohayo:kuro': 'ohayo_kuro',
+    'talk:kuro': [{ if: '!going_home && !kuro_reception_seen', node: 'kuro_intro' }, 'kuro'],
+    'say:ohayo:kuro': [{ if: '!going_home && !kuro_reception_seen', node: 'kuro_intro' }, 'ohayo_kuro'],
     'say:yoroshiku:kuro': 'yoroshiku_kuro',
     'talk:office_entrance': { if: '!going_home', node: 'head_office' },
     'talk:lift': { if: '!going_home', node: 'to_b2' },
@@ -51,6 +51,21 @@ export default {
     head_office: [{ do: 'goal', text: 'Take the lift inside head office down to B2.' }],
     to_b2: [{ do: 'next' }],
     to_plaza: [{ do: 'trip', to: 'plaza' }],
+    kuro_intro: [
+      { do: 'face', who: 'kuro', to: 'eric' },
+      { do: 'cam', on: 'kuro', zoom: 1.2 },
+      { say: 'kuro', emo: 'polite', text: '{ohayo}. Which floor, please?' },
+      { say: 'eric', emo: 'polite', text: 'B2. Sorry, I should have said.' },
+      { say: 'kuro', emo: 'teasing', text: "You're allowed to say good morning first." },
+      { say: 'eric', emo: 'casual', text: "I'll remember that." },
+      { say: 'kuro', emo: 'polite', text: 'Do come and say it tomorrow.' },
+      { do: 'face', who: 'kuro', to: 'lift' },
+      { do: 'gesture', who: 'kuro', kind: 'point' },
+      { do: 'face', who: 'kuro', to: 'eric' },
+      { do: 'cam', back: true },
+      { set: 'kuro_reception_seen' },
+      { do: 'save' },
+    ],
     kuro: [
       { do: 'face', who: 'kuro', to: 'eric' },
       { if: 'going_home', then: [
