@@ -58,7 +58,7 @@ const CROSS_N = [CROSS[0], CROSS[1], TRAINING.rect[3], LZ]; // the cross walk fr
 // and down from the lane to the south walk, which leads east to the dorm street and on to the shop street
 // (scenes/shotengai.js): he walks onto the south walk's first stretch, past which he is on his way there
 const CROSS_S = [CROSS[0], CROSS[1], LZ, SOUTH_WALK[3]];
-const SHOP_START = [CROSS[0], CROSS[1] + 2.6, SOUTH_WALK[2], SOUTH_WALK[3]];
+const SHOP_START = [CROSS[0], CROSS[1] + 3.8, SOUTH_WALK[2], SOUTH_WALK[3]]; // on past shopEdge, where the walk out ends
 const SW_Z = (SOUTH_WALK[2] + SOUTH_WALK[3]) / 2;
 const WEST_X = F[0] - R - 2.5, // on the lane west of the circle: walking on past it goes back to the forecourt
   EAST_X = CROSS[1] + 1.4; // and on the lane east of the cross walk, on toward the dorms

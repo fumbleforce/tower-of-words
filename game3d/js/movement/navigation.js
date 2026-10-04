@@ -27,6 +27,19 @@ export class Nav {
     this.rects.push(r);
     this.grid = null;
   }
+  // a way only a scene walks him through (the station's door, the dorm hall's passage): its tagged blocks lifted
+  // while he goes through it and waits there for the next place, put back when the place is left
+  open(tag) {
+    this.opened = [...(this.opened || []), ...this.rects.filter((r) => r.tag === tag)];
+    this.unblock(tag);
+  }
+  shut(tag) {
+    const back = (this.opened || []).filter((r) => r.tag === tag);
+    if (!back.length) return;
+    this.opened = this.opened.filter((r) => r.tag !== tag);
+    this.rects.push(...back);
+    this.grid = null;
+  }
   free(x, z, r = this.R) {
     if (x < this.x0 + r || x > this.x1 - r || z < this.z0 + r || z > this.z1 - r) return false;
     for (const [a, b, c, d] of this.rects)
