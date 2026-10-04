@@ -16,12 +16,13 @@ await withBrowserJob('perf-overlay-shots', async (browser) => {
       // the switch in Settings (phone has no F3)
       await page.evaluate(() => window.__shell.openSettings());
       await page.waitForTimeout(400);
+      await page.locator('#settings #st-graphics').tap(); // the switch is in Graphics
       const sw = page.locator('#settings [data-key="perfOverlay"]');
       await sw.scrollIntoViewIfNeeded();
       await sw.tap();
       await page.waitForTimeout(300);
       await page.screenshot({ path: out + `${name}-settings.png` });
-      await page.locator('#settings .done').tap();
+      await page.locator('#settings .x').tap();
       await page.waitForTimeout(400);
     } else {
       await page.keyboard.press('F3');

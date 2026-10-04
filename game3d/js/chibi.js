@@ -273,24 +273,3 @@ export const mioBody = () => {
   const mio = () => loadMio({ height: 1.12 });
   return CHIBI_ON ? loadChibi('mio').catch(fallback(mio)) : mio();
 };
-
-// Settings > Graphics: the switch, under Surface detail. Added the first time Settings is built (menu.js is at its
-// size ceiling, as for the private-mode row in settings.js).
-function ensureRow() {
-  const surf = document.querySelector('#settings .sw[data-key="surfaces"]')?.closest('.row');
-  if (!surf || document.querySelector('#settings [data-key="chibi"]')) return;
-  const row = document.createElement('div');
-  row.className = 'row';
-  row.innerHTML =
-    '<span class="lbl" id="l-chibi">Chibi cast<small>Eric, Mio and the people they meet as chibi figures, from the next time the game loads</small></span>' +
-    '<button type="button" class="sw" role="switch" data-key="chibi" aria-labelledby="l-chibi"><i></i></button>';
-  surf.after(row);
-  const sw = row.querySelector('.sw');
-  const paint = () => sw.setAttribute('aria-checked', S.settings.chibi ? 'true' : 'false');
-  paint();
-  sw.onclick = () => {
-    S.setSetting('chibi', !S.settings.chibi);
-    paint();
-  };
-}
-if (S) new MutationObserver(ensureRow).observe(document.documentElement, { childList: true, subtree: true });
