@@ -125,7 +125,7 @@ Things Eric picks up and keeps on his phone (Jørgen, 2026-09-30: "how lame, a p
 
 - A photo is a small print lying face up with a pin; Pick up walks Eric to it. The print disappears, the picture comes up close with its title and "Added to Photos · 2 of 5", and a tap closes it.
 - The Photos chip (top right, "Photos 2/5") appears with the first find. Its album shows the five frames in the day's order, the found ones as prints with their title and the rest as empty frames (no names, no hints), and under them the papers he has kept. Tapping one shows it up close again.
-- The pictures are stand-ins drawn in the game's flat look (game3d/js/finds/prints.js); titles, captions and the paper's text come from the story (game3d/story/finds.js). A found find is the flag `found_<id>`, so the save and Continue keep it.
+- The pictures are the ones Jørgen picked in Review photos-1 (2026-10-04), in game3d/assets/photos/: the early monorail, the cherry over the garden, pigeons at the fountain, the cat at the office, fireworks on a summer night. The album shows a small copy, the close look the large one (game3d/js/finds/prints.js). Titles, captions and the paper's text come from the story (game3d/story/finds.js). A found find is the flag `found_<id>`, so the save and Continue keep it.
 
 ## Tickets
 

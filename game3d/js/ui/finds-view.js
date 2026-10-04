@@ -6,7 +6,7 @@
 //   refreshFinds(newId)  updates the chip (and pops it when newId was just found)
 //   showFind(id, { fresh })   the close look; resolves when it closes
 //   showBoard(posts)          the posts pinned on a board; resolves when it closes
-import { drawPrint, drawFlyerHead } from '../finds/prints.js';
+import { photoImg, drawFlyerHead } from '../finds/prints.js';
 
 let source = () => ({ photos: [], papers: [], count: 0, total: 0 });
 export function setFindsSource(fn) {
@@ -58,10 +58,11 @@ export function refreshFinds(newId) {
   }
 }
 
-function picture(f, w, h) {
-  const cv = f.print === 'flyer' ? drawFlyerHead(w, Math.round(w * 0.42)) : drawPrint(f.print, w, h);
-  cv.className = 'pic';
-  return cv;
+// the album shows the small picture, the close look the large one
+function picture(f, { thumb = false } = {}) {
+  const el = f.print === 'flyer' ? drawFlyerHead(640, 269) : photoImg(f.print, thumb);
+  el.className = 'pic';
+  return el;
 }
 
 function openAlbum() {
@@ -75,7 +76,7 @@ function openAlbum() {
     b.type = 'button';
     b.className = f.found ? 'slot got' : 'slot';
     if (f.found) {
-      b.appendChild(picture(f, 240, 180));
+      b.appendChild(picture(f, { thumb: true }));
       b.insertAdjacentHTML('beforeend', `<span class="t">${esc(f.title)}</span>`);
       b.onclick = () => showFind(f.id).then(openAlbum); // back to the album after
     } else {
@@ -131,7 +132,7 @@ export function showFind(id, { fresh = false } = {}) {
   shot.innerHTML = '';
   const frame = document.createElement('div');
   frame.className = 'frame';
-  frame.appendChild(picture(f, 640, 480));
+  frame.appendChild(picture(f));
   if (f.kind === 'paper') frame.insertAdjacentHTML('beforeend', lines(f.lines));
   shot.appendChild(frame);
   const n = s.photos.findIndex((x) => x.id === id);

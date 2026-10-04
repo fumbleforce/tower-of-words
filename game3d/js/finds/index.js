@@ -82,7 +82,7 @@ export function readBoard(id) {
 
 // the print lying on the ground, named so the draw-call passes leave it alone
 function printMesh(f) {
-  const tex = new THREE.CanvasTexture(printTexture(f.print));
+  const tex = new THREE.CanvasTexture(printTexture(f.print, () => (tex.needsUpdate = true)));
   tex.colorSpace = THREE.SRGBColorSpace;
   tex.anisotropy = 4;
   // one flat card, one draw call: the picture's white border is in the texture

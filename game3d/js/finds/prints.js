@@ -1,16 +1,26 @@
-// The pictures of the finds (js/finds/spots.js), drawn on a canvas in the game's flat-shaded look: flat shapes in
-// the world's palette, no outlines. Stand-ins until a subject gets a picture of its own; each draws itself at any
-// size (w x h, 4:3), so the same drawing makes the print on the ground and the close look.
-//   drawPrint(kind, w, h)  a canvas with the picture only
-//   printTexture(kind)     a small canvas: the picture in a white border, for the print lying in the world
+// The pictures of the finds (js/finds/spots.js): the photos picked in Review photos-1, in
+// game3d/assets/photos/<print>.webp (1024x768, the close look) and <print>-thumb.webp (320x240, the album and the
+// print on the ground). The bakery flyer's head is drawn here.
+//   photoImg(print, thumb)          an <img> of the picture, 4:3
+//   printTexture(print, onReady)    a small canvas: the picture in a white border, for the print lying in the world;
+//                                   onReady() runs once the picture is drawn into it
 import { JP_FONT } from '../props.js';
-import { poly } from './paint.js';
-import { DAY } from './pictures-day.js';
-import { NIGHT } from './pictures-night.js';
 
 const TAU = Math.PI * 2;
 
-const DRAW = { ...DAY, ...NIGHT };
+const photoUrl = (print, thumb) =>
+  new URL(
+    `../../assets/photos/${print}${thumb ? '-thumb' : ''}.webp?v=${encodeURIComponent(window.BUILD || '')}`,
+    import.meta.url,
+  ).href;
+
+export function photoImg(print, thumb = false) {
+  const img = new Image(4, 3); // the 4:3 box holds its place in the layout while it loads
+  img.decoding = 'async';
+  img.alt = '';
+  img.src = photoUrl(print, thumb);
+  return img;
+}
 
 // the bakery flyer's head, as the one in mailbox 203 shows it (dorm-court): パン on the bakery's colour
 export function drawFlyerHead(w, h) {
@@ -37,17 +47,8 @@ export function drawFlyerHead(w, h) {
   return cv;
 }
 
-export function drawPrint(kind, w = 640, h = 480) {
-  const cv = document.createElement('canvas');
-  cv.width = w;
-  cv.height = h;
-  const c = cv.getContext('2d');
-  (DRAW[kind] || DRAW.pigeons)(c, w, h);
-  return cv;
-}
-
 // the print lying on the ground: the picture in a white border, a little worn at one corner
-export function printTexture(kind) {
+export function printTexture(print, onReady) {
   const W = 256,
     H = 208,
     b = 12;
@@ -57,16 +58,23 @@ export function printTexture(kind) {
   const c = cv.getContext('2d');
   c.fillStyle = '#f3f1ec';
   c.fillRect(0, 0, W, H);
-  c.drawImage(drawPrint(kind, 320, 240), b, b, W - 2 * b, H - 2 * b - 10);
-  poly(
-    c,
-    [
-      [W - 26, H],
-      [W, H - 22],
-      [W, H],
-    ],
-    '#d9d5cc',
-  );
+  c.fillStyle = '#c9c4ba'; // a plain grey print until the picture has loaded
+  c.fillRect(b, b, W - 2 * b, H - 2 * b - 10);
+  const corner = () => {
+    c.fillStyle = '#d9d5cc';
+    c.beginPath();
+    c.moveTo(W - 26, H);
+    c.lineTo(W, H - 22);
+    c.lineTo(W, H);
+    c.closePath();
+    c.fill();
+  };
+  corner();
+  const img = photoImg(print, true);
+  img.onload = () => {
+    c.drawImage(img, b, b, W - 2 * b, H - 2 * b - 10);
+    corner();
+    onReady?.();
+  };
   return cv;
 }
-export const PRINT_KINDS = Object.keys(DRAW);
