@@ -1,0 +1,16 @@
+{
+ "title": "Kuro from your original 3D workflow, ChatGPT pictures (kuro-meshy-orig-2)",
+ "blurb": "A real rigged 3D model: the picture steps in ChatGPT's image model (GPT Image 2) with your words, then Meshy smart topology (1,050 polygons, A-pose), textured in a second pass, Meshy auto-rig at 1.1 m. Idle and walk are the game's (Mio's approved idle and walk, carried over by bone name). Beside her: the in-game Meshy Eric and Mio, playing the same moves. Drag to turn, wheel to zoom.",
+ "attempts": {
+  "kuro-2": "/art/parts/kuro-meshy-orig-2/meshy/kuro-2-tex-rigged.glb"
+ },
+ "compare": {
+  "Eric and Mio (in game)": [
+   {"glb": "/game3d/assets/eric/walk.glb", "tex": "/game3d/assets/eric/base.webp"},
+   {"glb": "/game3d/assets/mio/walk.glb", "tex": "/game3d/assets/mio/base-clean.webp"}
+  ],
+  "Eric (in game)": [{"glb": "/game3d/assets/eric/walk.glb", "tex": "/game3d/assets/eric/base.webp"}],
+  "Mio (in game)": [{"glb": "/game3d/assets/mio/walk.glb", "tex": "/game3d/assets/mio/base-clean.webp"}]
+ },
+ "refs": ["/art/parts/kuro-meshy-orig-2/pics/d2.png", "/game3d/assets/portraits/kuro-neutral.webp"]
+}
