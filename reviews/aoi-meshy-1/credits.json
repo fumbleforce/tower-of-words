@@ -1,0 +1,52 @@
+[
+ {
+  "service": "meshy",
+  "part": "aoi-1",
+  "task": "01a108ad-f02d-7578-bed5-6b0af1564b09",
+  "status": "SUCCEEDED",
+  "credits": 5,
+  "balance_after": 447,
+  "settings": {
+   "ai_model": "meshy-t2",
+   "should_texture": false,
+   "target_formats": [
+    "glb"
+   ],
+   "multi_view_thumbnails": true,
+   "pose_mode": "a-pose",
+   "model_type": "smart-topology",
+   "target_polycount": 1050
+  },
+  "input": "art/parts/aoi-meshy-1/pics/c2.png",
+  "note": "aoi-1 and emi-1 ran at the same time; Meshy reports 5 credits each (452 before, 442 after both)"
+ },
+ {
+  "service": "meshy",
+  "part": "aoi-1-tex",
+  "task": "01a108bf-110b-746f-89b6-e601b309b013",
+  "status": "SUCCEEDED",
+  "credits": 10,
+  "balance_after": 432,
+  "settings": {
+   "enable_pbr": false,
+   "remove_lighting": true,
+   "enable_original_uv": true,
+   "target_formats": [
+    "glb"
+   ],
+   "model": "art/parts/aoi-meshy-1/meshy/aoi-1-uv.glb"
+  },
+  "input": "art/parts/aoi-meshy-1/pics/c2.png"
+ },
+ {
+  "service": "meshy",
+  "part": "aoi-1-tex-rig",
+  "task": "01a108c0-ee1e-715d-85f4-a9e68eb65005",
+  "status": "SUCCEEDED",
+  "credits": 5,
+  "settings": {
+   "input_task_id": "01a108bf-110b-746f-89b6-e601b309b013",
+   "height_meters": 1.1
+  }
+ }
+]
