@@ -1,0 +1,25 @@
+{
+ "title": "Photos finds: the picked pictures in the game",
+ "date": "2026-10-04",
+ "by": "claude-agent:photos-install",
+ "caption": "The five Photos finds now show the pictures picked in Review photos-1, on the Added to Photos card, in the album and on the print lying on the ground. Titles, places and the print frame are as before.",
+ "sections": [
+  {"title": "Added to Photos card", "caption": "The close look when Eric picks a photo up (1024 px picture).",
+   "images": [
+    {"id": "card-photo_gate-390x844", "image": "bible/shots/showcase/photos-ingame-1/card-photo_gate-390x844.webp", "caption": "Early train, phone"},
+    {"id": "card-photo_dorm-390x844", "image": "bible/shots/showcase/photos-ingame-1/card-photo_dorm-390x844.webp", "caption": "Summer night, phone"},
+    {"id": "card-photo_office-1366x860", "image": "bible/shots/showcase/photos-ingame-1/card-photo_office-1366x860.webp", "caption": "Office company, desktop"},
+    {"id": "card-photo_forecourt-1366x860", "image": "bible/shots/showcase/photos-ingame-1/card-photo_forecourt-1366x860.webp", "caption": "Spring garden, desktop"}
+   ]},
+  {"title": "Photos album", "caption": "All five found (320 px thumbnails).",
+   "images": [
+    {"id": "album-390x844", "image": "bible/shots/showcase/photos-ingame-1/album-390x844.webp", "caption": "Phone"},
+    {"id": "album-1366x860", "image": "bible/shots/showcase/photos-ingame-1/album-1366x860.webp", "caption": "Desktop"}
+   ]},
+  {"title": "The print on the ground", "caption": "The plaza's print by the north-west benches, close crop.",
+   "images": [
+    {"id": "ground-1366x860", "image": "bible/shots/showcase/photos-ingame-1/ground-1366x860.webp", "caption": "Desktop, cropped"}
+   ]}
+ ],
+ "links": [{"label": "Play it", "href": "game3d/"}]
+}
