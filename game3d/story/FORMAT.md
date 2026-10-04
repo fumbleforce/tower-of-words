@@ -224,10 +224,10 @@ Words count as known only once taught with `type`, `learn` or `offer`; a glossed
 
 All optional, all per story file, all generic so they carry over to later days. How these behave for the player (bond steps and points, gifts, memory) is in docs/game/systems.md. The engine side is game3d/js/sim.js, the bond maths js/bonds/model.js (tested by `node game3d/js/bonds/test.mjs`), standing cast data js/bonds/cast.js, and day 1's recorded moments js/bonds/day1.js.
 
+The People panel's names and lines are not per file: they live in `game3d/story/people.js` alone (`{ id: { name, about, color } }`), which the engine loads up front so the panel is right on any day and after a load. Someone shows in the panel once Eric has talked to them, if they have an entry there. A story file with a `people` block fails the language audit.
+
 ```js
 export default {
-  // who they are, for the People panel (shown once Eric has talked to them)
-  people: { kuroda: { name: 'Mr. Hamada', about: 'Accounts, 12th floor. Falls asleep on trains.', color: '#b3a58f' } },
   // where people are in each period ('*' = any period); `at` is a spot, object id or [x, z]; `sit` a seat id;
   // `face` an id to turn to; `hide: true` takes them out of the place. Applied when a place starts and whenever the period changes.
   schedule: { mori: { lunch: { at: 'kitchen_table' }, afternoon: { at: 'chief_desk' }, evening: { hide: true } } },

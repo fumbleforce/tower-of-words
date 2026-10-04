@@ -16,11 +16,6 @@ export default {
     miotext: { name: 'Mio', role: 'message', color: '#5fc6bf', phone: true },
   },
 
-  people: {
-    guard: { name: 'The guard', about: 'Strict, fair, no English. Feeds a cat he says is not there.', color: '#8ea2c8' },
-    kuroda: { name: 'Mr. Hamada', about: 'Accounts, 12th floor. Falls asleep on trains, late through every gate.', color: '#b3a58f' },
-  },
-
   schedule: {
     aoi: { '*': { hide: true } },
   },

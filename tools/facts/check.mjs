@@ -143,8 +143,8 @@ export async function readGame(load = file => import(pathToFileURL(G(file)).href
     if (Array.isArray(L)) return `${L[0]} (while \`${L[1]}\`), else ${t ? t.label : ''}`;
     return L || (t ? t.label : '');
   };
-  const panel = {};
-  for (const st of Object.values(stories)) for (const [p, v] of Object.entries(st.people || {})) panel[p] = v.name;
+  // the People panel's names (story/people.js, the one home of the panel's text)
+  const panel = Object.fromEntries(Object.entries((await load('story/people.js')).default).map(([p, v]) => [p, v.name]));
   return { defaults, portraits, items, CAST, WORDS, places, stories, where, people, plate, label, panel, nodes, flagsSet, builtIn, personIn };
 }
 

@@ -129,33 +129,6 @@ export async function run(mode, api) {
     }
     if (mode === 'end') {
       for (const id of ['mio', 'guard', 'kuroda', 'mori', 'kenji']) sim.met.add(id);
-      Object.assign(sim.people, {
-        mio: sim.people.mio || {
-          name: 'Mio',
-          about: 'Programmer. The only one with English. Hates bowing. Drinks black canned coffee.',
-          color: '#5fc6bf',
-        },
-        guard: sim.people.guard || {
-          name: 'The guard',
-          about: 'Strict, fair, no English. Feeds a cat he says is not there.',
-          color: '#8ea2c8',
-        },
-        kuroda: sim.people.kuroda || {
-          name: 'Mr. Hamada',
-          about: 'Accounts, 12th floor. Falls asleep on trains, late through every gate.',
-          color: '#b3a58f',
-        },
-        mori: sim.people.mori || {
-          name: 'Mr. Mori',
-          about: 'Used to be a manager. Formal and kind. Makes the tea. Rinses his corn soup cans.',
-          color: '#b9a3d3',
-        },
-        kenji: sim.people.kenji || {
-          name: 'Kenji',
-          about: 'Engineer. Casual. Borrowed your chair. Lives on melon soda.',
-          color: '#9fb6d8',
-        },
-      });
       for (const w of ['ohayo', 'yoroshiku', 'sumimasen', 'matte', 'akete', 'ugoite']) known.add(w);
       sim.period = 'evening';
       const photos = {};

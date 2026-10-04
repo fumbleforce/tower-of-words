@@ -318,9 +318,10 @@ for (const place of ['train', 'gate', 'office']) {
 for (const place of STORY_FILES) {
   const st = STORY[place];
   for (const [id, sp] of Object.entries(st.speakers || {})) for (const k of ['name', 'role']) if (sp[k] && isJP(sp[k])) flag('ERROR', 'story', `${place} speakers.${id}`, `name plate ${k} in Japanese: ${sp[k]}`);
-  for (const [id, p] of Object.entries(st.people || {})) for (const k of ['name', 'about']) if (p[k] && isJP(p[k])) flag('ERROR', 'story', `${place} people.${id}`, `People panel ${k} has Japanese`, p[k]);
+  if (st.people) flag('ERROR', 'story', `${place} people`, 'People panel text lives in story/people.js only; drop this block');
   for (const [id, l] of Object.entries(st.labels || {})) { const t = Array.isArray(l) ? l[0] : l; if (isJP(t)) flag('ERROR', 'story', `${place} labels.${id}`, `marker label in Japanese: ${t}`); }
 }
+for (const [id, p] of Object.entries((await imp('story/people.js')).default)) for (const k of ['name', 'about']) if (isJP(p[k])) flag('ERROR', 'story', `people.js ${id}`, `People panel ${k} has Japanese`, p[k]);
 for (const [id, speaker] of Object.entries(DEFAULT_SPEAKERS)) for (const text of [speaker.name, speaker.role]) if (text && isJP(text)) flag('ERROR', 'builder', `narrative/speakers.js speaker ${id}`, `default name plate in Japanese: ${text}`);
 
 // ---------------------------------------------------------------- the 3D scenes and the UI

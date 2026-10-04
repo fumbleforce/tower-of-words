@@ -9,13 +9,6 @@ export default {
     kenji: { name: 'Kenji', role: 'IT support' },
   },
 
-  people: {
-    mio: { name: 'Mio', about: 'Programmer. The only one with English. Hates bowing. Drinks black canned coffee.', color: '#5fc6bf' },
-    mori: { name: 'Mr. Mori', about: 'Used to be a manager. Formal and kind. Makes the tea. Drinks corn soup from a can.', color: '#b9a3d3' },
-    kenji: { name: 'Kenji', about: 'Newest on the team before you, 21. Keen to help, easily distracted. Borrowed your chair. Lives on melon soda.', color: '#9fb6d8' },
-    emi: { name: 'Emi', about: 'Runs B2. Spent day one upstairs fighting for a parts budget.', color: '#c98a6b' },
-  },
-
   schedule: {
     emi: { '*': { hide: true } },
     aoi: { '*': { hide: true } },

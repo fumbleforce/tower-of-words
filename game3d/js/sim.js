@@ -5,8 +5,8 @@ export { ITEMS } from './gameplay/items.js';
 // Social-sim layer, data-driven so it can grow into the open world: the day clock and its periods, NPC
 // schedules, ambient NPC-to-NPC moments, bonds (steps 0-5, points with caps, steps 3-5 gated on a scene),
 // what people remember of Eric, gifts, and save/load. Day one uses it lightly. Data comes from the story files
-// (story/FORMAT.md, "Sim data"), js/bonds/cast.js (tastes, registers, relations) and js/bonds/day1.js (day 1's
-// moments, recorded by node name so the story's lines stay as they are). The maths is js/bonds/model.js.
+// (story/FORMAT.md, "Sim data"), story/people.js (People panel text), js/bonds/cast.js (tastes, registers,
+// relations) and js/bonds/day1.js (day 1's moments, by node name). The maths is js/bonds/model.js.
 import { flags, cond } from './narrative/state.js';
 import { known, seen, WORDS, COMMANDS } from './lang.js';
 import { ui, sfx } from './ui.js';
@@ -14,6 +14,7 @@ import { Bonds, STEPS, dateOf, safeKey } from './bonds/model.js';
 import { CAST, WORD_REGISTER } from './bonds/cast.js';
 import { MOMENTS, REASONS, EXPECT } from './bonds/day1.js';
 import { peopleCards } from './ui/people-view.js';
+import PEOPLE from '../story/people.js';
 
 export const PERIODS = ['early', 'morning', 'lunch', 'afternoon', 'evening'];
 export const PERIOD_NAMES = {
@@ -35,7 +36,7 @@ export const sim = {
   taught: {},
   met: new Set(),
   yen: 1000,
-  people: {}, // id -> { name, about, color } merged from the story files
+  people: PEOPLE, // id -> { name, about, color }: who has a People card (story/people.js, always loaded)
   thresholds: {}, // id -> [{ at: step, node, if }] from the story's `bondStep` / `bonds`
   firedBonds: new Set(),
   momentsDone: new Set(),
@@ -327,7 +328,6 @@ function observe(key) {
 
 // merge a story file's sim data
 export function absorb(story) {
-  for (const [id, p] of Object.entries(story.people || {})) sim.people[id] = { ...(sim.people[id] || {}), ...p };
   // bondStep: { mio: { 3: 'node' } } (or the older bonds: { mio: [{ at: 3, node }] })
   for (const [id, list] of Object.entries(story.bonds || {}))
     sim.thresholds[id] = [...(sim.thresholds[id] || []).filter((t) => !list.some((u) => u.at === t.at)), ...list];
@@ -386,9 +386,9 @@ const itemName = (x) => (ITEMS[x] ? ITEMS[x].name : x);
 // per person met: bond step, what you know about them, what they remember of you, the commands they taught
 export function peopleData() {
   return [...sim.met]
-    .filter((id) => id !== 'eric')
+    .filter((id) => sim.people[id])
     .map((id) => {
-      const p = sim.people[id] || {};
+      const p = sim.people[id];
       const v = bonds.view(id, { itemName });
       const taught = COMMANDS.filter((c) => sim.taught[c] === id && known.has(c)).map((c) => ({
         id: c,
@@ -396,7 +396,7 @@ export function peopleData() {
         ro: WORDS[c].ro,
         en: WORDS[c].en,
       }));
-      return { id, name: p.name || id, about: p.about || '', color: p.color || '#8a93a3', ...v, taught };
+      return { id, name: p.name, about: p.about, color: p.color, ...v, taught };
     });
 }
 export const peopleHTML = () => peopleCards(peopleData());

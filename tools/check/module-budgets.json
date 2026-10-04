@@ -136,9 +136,9 @@
     },
     "game3d/js/sim.js": {
       "lines": 538,
-      "bytes": 20514,
+      "bytes": 20433,
       "owner": "codex-tui",
-      "review": "C-0076; 2026-10-03 C-0378 day 2: a new day's opening save resets the bonds' daily caps; 2026-10-04 C-0432 the People cards moved out to ui/people-view.js (ceiling lowered); 2026-10-04 the dialogue box controls: the backlog rides in the save (two lines in save/restore)",
+      "review": "C-0076; 2026-10-03 C-0378 day 2: a new day's opening save resets the bonds' daily caps; 2026-10-04 C-0432 the People cards moved out to ui/people-view.js (ceiling lowered); 2026-10-04 the dialogue box controls: the backlog rides in the save (two lines in save/restore); C-0438 People panel text from story/people.js, #223 (ceiling lowered)",
       "reason": "Existing simulation, save and relationship integration; retain compatibility while extracting state."
     },
     "game3d/js/speech.js": {
