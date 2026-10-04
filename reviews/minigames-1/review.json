@@ -2,7 +2,7 @@
  "title": "Grammar minigame prototypes",
  "date": "2026-10-02",
  "by": "claude-agent:minigames",
- "status": "open",
+ "status": "superseded",
  "question": "Which of these should we develop further, and what would you change?",
  "multi": true,
  "options": [
@@ -47,9 +47,21 @@
   }
  ],
  "links": [
-  {"label": "Play Drink round", "href": "game3d/minigames/give.html"},
-  {"label": "Play Lunch run", "href": "game3d/minigames/compare.html"},
-  {"label": "Play Favours", "href": "game3d/minigames/want.html"},
-  {"label": "Design notes (mechanic, what each teaches, how it ramps, missing voice clips)", "href": "game3d/minigames/README.md"}
+  {
+   "label": "Play Drink round",
+   "href": "game3d/minigames/give.html"
+  },
+  {
+   "label": "Play Lunch run",
+   "href": "game3d/minigames/compare.html"
+  },
+  {
+   "label": "Play Favours",
+   "href": "game3d/minigames/want.html"
+  },
+  {
+   "label": "Design notes (mechanic, what each teaches, how it ramps, missing voice clips)",
+   "href": "game3d/minigames/README.md"
+  }
  ]
 }

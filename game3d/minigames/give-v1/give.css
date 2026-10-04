@@ -1,0 +1,51 @@
+/* Drink round: the kitchenette table seen from above, four seats round it. */
+.room { position: absolute; inset: 0; margin: auto; width: min(100%, 760px); max-height: 640px; }
+.table { position: absolute; left: 50%; top: 50%; width: 46%; height: 40%; transform: translate(-50%, -50%); border-radius: 22px;
+  background: linear-gradient(160deg, #d9dfe3, #b9c2c9); box-shadow: 0 10px 0 #8d979f, 0 18px 30px rgba(0,0,0,.35); }
+.pot { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); z-index: 2; }
+
+.seat { position: absolute; transform: translate(-50%, -50%); display: flex; flex-direction: column; align-items: center; gap: 2px;
+  width: 130px; padding: 0; border: 0; background: none; z-index: 2; }
+.seat .face { width: 100px; height: 100px; border-radius: 50%; background-size: 210%; background-position: 50% 12%; background-repeat: no-repeat;
+  background-color: #2a303a; border: 3px solid rgba(255,255,255,.75); box-shadow: 0 4px 10px rgba(0,0,0,.4); transition: transform .15s, border-color .15s; }
+.seat .nm { font-size: 15px; font-weight: 700; color: var(--ink); line-height: 1.9; text-shadow: 0 1px 3px rgba(0,0,0,.7); }
+.seat .me { display: none; position: absolute; top: -12px; left: 50%; transform: translateX(-50%); padding: 1px 8px; border-radius: 8px;
+  background: var(--accent); color: #10302d; font-size: 13px; font-weight: 700; white-space: nowrap; }
+.seat.speaker .me { display: block; }
+.seat.speaker .face { border-color: var(--accent); box-shadow: 0 0 0 6px rgba(111, 208, 198, .25), 0 4px 10px rgba(0,0,0,.4); }
+.seat.lifted .face, .seat.over .face { transform: scale(1.1); border-color: #fff; }
+.seat.over .face { box-shadow: 0 0 0 6px rgba(255,255,255,.3); }
+.seat .got { position: absolute; top: 18px; display: flex; gap: 2px; pointer-events: none; }
+.seat[data-id="mori"] .got { top: 130px; }
+.seat[data-id="eric"] .got { top: -40px; }
+.seat[data-id="mio"] .got { left: 112px; flex-direction: column; top: 0; }
+.seat[data-id="kenji"] .got { right: 112px; flex-direction: column; top: 0; }
+.seat .got .item { transform: scale(.7); margin: -7px -5px; }
+.seat .got .item .lbl { display: none; }
+
+/* drinks: flat cans in their own colours; the rice ball and chocolate have their own shapes */
+.item { display: inline-flex; flex-direction: column; align-items: center; gap: 2px; }
+.item i { display: block; width: 30px; height: 46px; border-radius: 6px; background: var(--c, #ccc);
+  box-shadow: inset 0 5px 0 rgba(255,255,255,.55), inset 0 -5px 0 rgba(0,0,0,.18), inset 0 -16px 0 var(--band, rgba(255,255,255,.25)), 0 3px 6px rgba(0,0,0,.35); }
+.item .lbl { font-size: 13px; font-weight: 700; color: var(--jp); line-height: 1.9; white-space: nowrap; text-shadow: 0 1px 3px rgba(0,0,0,.8); }
+.item[data-kind="coffee"] { --c: #2f4f8a; --band: #e9edf3; }
+.item[data-kind="tea"] { --c: #e9dcc7; --band: #c84a5a; }
+.item[data-kind="melon"] { --c: #5cc46a; --band: #e9f6ea; }
+.item[data-kind="cornsoup"] { --c: #f1c94a; --band: #d0533f; }
+.item[data-kind="choco"] i { width: 44px; height: 28px; border-radius: 4px; background: #5a3a3e; box-shadow: inset 0 0 0 4px #c0444f, 0 3px 6px rgba(0,0,0,.35); }
+.item[data-kind="onigiri"] i { width: 42px; height: 40px; border-radius: 0; background: #f4f4f2; box-shadow: none;
+  clip-path: polygon(50% 0, 100% 92%, 96% 100%, 4% 100%, 0 92%); background-image: linear-gradient(transparent 62%, #1f2a24 62%); }
+
+/* on the table the drink's name is dark, so it reads against the light top */
+.pot .item .lbl { color: #1d2129; text-shadow: none; font-size: 15px; }
+.pot .item .lbl rt { color: #4d5866; }
+
+.hint { margin: 0; color: var(--ink-dim); font-size: 14px; }
+
+body.phone .seat { width: 92px; }
+body.phone .seat .face { width: 70px; height: 70px; }
+body.phone .seat .nm { font-size: 14px; }
+body.phone .seat[data-id="mio"] .got { left: 78px; }
+body.phone .seat[data-id="kenji"] .got { right: 78px; }
+body.phone .seat[data-id="mori"] .got { top: 96px; }
+body.phone .table { width: 50%; height: 34%; }

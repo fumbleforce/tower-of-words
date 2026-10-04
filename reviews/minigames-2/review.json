@@ -1,0 +1,59 @@
+{
+ "title": "Friday drinks: the giving game, made into a puzzle",
+ "date": "2026-10-04",
+ "by": "claude-agent:give-fun",
+ "status": "open",
+ "question": "This is a playable prototype, not pictures: play it at https://fumbleforce.github.io/tower-of-words/game3d/minigames/give.html (phone or desktop, about 3 minutes; the first version is still at give-v1.html). It is the giving game from minigames-1, redesigned after \"it's a starting point, but they are not particularly fun\". Is this fun now, and should the other two get the same treatment? Pick friday-drinks if it is fun, and pick each of the others you want redone this way.",
+ "multi": true,
+ "media": [
+  {
+   "image": "reviews/minigames-2/shots/v1-phone-before.webp",
+   "caption": "Before (give-v1.html), and why it wasn't fun, from playing it on a phone: the scene gave every answer away (the English sat under the sentence, or you had just watched the drink go where you then had to say it went, as here); nothing depended on getting it right; it was the same drag or gap-fill 13 times with 31 tap-to-continue lines around them; there was no surprise; feedback was a border flash; and the people only commented."
+  }
+ ],
+ "options": [
+  {
+   "id": "friday-drinks",
+   "label": "friday-drinks: the new giving game (give.html)",
+   "image": "reviews/minigames-2/shots/phone-1-clues.webp",
+   "images": [
+    "reviews/minigames-2/shots/phone-2-drawn.webp",
+    "reviews/minigames-2/shots/phone-3-kureru.webp",
+    "reviews/minigames-2/shots/phone-4-thanks-mixup.webp",
+    "reviews/minigames-2/shots/phone-5-why.webp",
+    "reviews/minigames-2/shots/phone-6-say-it.webp",
+    "reviews/minigames-2/shots/phone-7-end.webp",
+    "reviews/minigames-2/shots/desktop-1-clues.webp",
+    "reviews/minigames-2/shots/desktop-2-thanks.webp",
+    "reviews/minigames-2/shots/desktop-3-say-it.webp"
+   ],
+   "note": "What changed: each of the four rounds is a small puzzle. Everyone at the table gave one drink and got one, and sits with the one they got. People say what happened from their own side (the giver says あげました, the one who got it says くれました or もらいました, dropping わたし the way people do), and one person never says anything, so the last arrow has to be worked out. You draw all the arrows, then press Thank them: everyone thanks whoever your drawing says gave them theirs. A wrong arrow sends a thank-you to the wrong person, who reacts (Kenji takes the credit), and Mio points at the line that gave it away. Run counter, ticks and crosses on whoever was thanked, two endings depending on how many thank-yous went wrong, and two rounds end with Eric saying his own hand-over. 15 arrows, 38 steps on a clean run instead of 44, no timers, English shown in round 1 and one tap away after. Screens are from a headless run that got every third arrow wrong on purpose, so the mix-ups show; the last three are desktop."
+  },
+  {
+   "id": "redo-lunch-run",
+   "label": "redo-lunch-run: give comparing (compare.html) the same treatment",
+   "image": "reviews/minigames-1/shots/compare-phone-1-read.webp",
+   "note": "The first version, unchanged. Pick to have it redesigned the same way (a decision to make, a payoff that depends on your answers, fewer lines)."
+  },
+  {
+   "id": "redo-favours",
+   "label": "redo-favours: give wanting (want.html) the same treatment",
+   "image": "reviews/minigames-1/shots/want-phone-1-tai.webp",
+   "note": "The first version, unchanged. Pick to have it redesigned the same way."
+  }
+ ],
+ "links": [
+  {
+   "label": "Play Friday drinks (published)",
+   "href": "https://fumbleforce.github.io/tower-of-words/game3d/minigames/give.html"
+  },
+  {
+   "label": "The first version, for comparison",
+   "href": "https://fumbleforce.github.io/tower-of-words/game3d/minigames/give-v1.html"
+  },
+  {
+   "label": "Locally",
+   "href": "game3d/minigames/give.html"
+  }
+ ]
+}
