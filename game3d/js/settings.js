@@ -102,6 +102,11 @@ export function setSetting(key, value) {
   }
   window.dispatchEvent(new CustomEvent('amakawa:settings', { detail: { key, value, settings } }));
 }
+// private mode on for this page only, not saved (the local scene viewer, plugins.js installViewer)
+export function forcePrivateMode() {
+  settings.privateMode = true;
+  flags.private_mode = true;
+}
 export function resetSettings() {
   for (const k of Object.keys(DEFAULTS)) setSetting(k, DEFAULTS[k]);
 }
