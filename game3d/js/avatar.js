@@ -251,7 +251,7 @@ const json = (u) =>
     .catch(() => null);
 // Any character made with the 3D workflow and rigged through Meshy's API (Eric, and the cast in assets/characters/<id>/):
 // walk, run, idle, sit clips, the base colour texture, optional phone and gestures.
-export async function loadMeshy(id, { height = 1.2, dir = CDIR + id + '/', stride } = {}) {
+export async function loadMeshy(id, { height = 1.2, dir = CDIR + id + '/', stride, extra = true } = {}) {
   const loader = new GLTFLoader();
   const load = (u) => new Promise((ok, no) => loader.load(u, ok, undefined, no));
   const files = await Promise.all([
@@ -260,8 +260,7 @@ export async function loadMeshy(id, { height = 1.2, dir = CDIR + id + '/', strid
     loadRelaxedIdle(id, ver()),
     load(dir + 'sit.glb' + ver()),
     new THREE.TextureLoader().loadAsync(dir + 'base.webp' + ver()),
-    json(CDIR + id + '/phone.json'),
-    ...GESTURES.map((g) => json(CDIR + id + '/' + g + '.json')),
+    ...['phone', ...GESTURES].map((f) => extra && json(CDIR + id + '/' + f + '.json')),
   ]);
   return meshyFrom(id, files, { height, stride });
 }

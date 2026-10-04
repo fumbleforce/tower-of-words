@@ -17,13 +17,18 @@ const PAGE = typeof addEventListener === 'function';
 const want3 = [...CAST3D_ON, ...(Q3.get('cast3d') || '').split(',')].filter(
   (id) => PAGE && CAST3D[id] && !CHIBI_CAST.includes(id),
 );
+// Kuro has no phone pose or library gestures: her scenes use the drawn bow and point (rig-gestures.js)
+const NO_EXTRAS = ['kuro'];
 const PRE3 = {};
 const warn = (id) => (e) => {
   console.warn('3D cast', id, e);
   return null;
 };
 await Promise.all([
-  ...want3.map(async (id) => (PRE3[id] = await loadMeshy(id, { height: CAST3D[id] }).catch(warn(id)))),
+  ...want3.map(
+    async (id) =>
+      (PRE3[id] = await loadMeshy(id, { height: CAST3D[id], extra: !NO_EXTRAS.includes(id) }).catch(warn(id))),
+  ),
   ...CHIBI_CAST.map(async (id) => (PRE3[id] = await chibiFiles(id).catch(warn(id)))),
 ]);
 // the ids cast.js asks for here first
