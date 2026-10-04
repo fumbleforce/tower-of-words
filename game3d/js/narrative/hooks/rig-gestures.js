@@ -2,13 +2,14 @@
 // office use that no-op today"). hooks/gestures.js hands these kinds over.
 //   Meshy rigs (Eric, Mio): point (turned toward `to`), lift (an invisible case over his head), squeeze (sideways,
 //   stomach in), press (turned toward `to`, leaning in, both hands pushing down on something low in front: the train's
-//   overfull shopping bag). They are offsets on the arm and spine bones, laid over the idle clip every frame: game.tween runs
+//   overfull shopping bag), pet (turned toward `to`, bending down, the right hand stroking something low: a stray
+//   cat, creatures/pet.js; `low` 0..1, how far down it is). They are offsets on the arm and spine bones, laid over the idle clip every frame: game.tween runs
 //   after the player's and Mio's mixer update in main.js step(), so the clip underneath keeps breathing.
 //   Chibi rigs (the guard, Hamada, Kenji): beckon, lift (both arms overhead: Hamada's briefcase hangs from his left
 //   hand, so it goes up with it), highfive, fistbump.
 import * as THREE from 'three';
 
-export const MESHY_KINDS = new Set(['point', 'lift', 'squeeze', 'press']);
+export const MESHY_KINDS = new Set(['point', 'lift', 'squeeze', 'press', 'pet']);
 export const CHIBI_KINDS = new Set(['beckon', 'lift', 'highfive', 'fistbump']);
 
 const bell = (k) => Math.sin(Math.PI * Math.min(1, k)) ** 0.7; // 0 -> 1 -> 0, holding at the top
@@ -40,7 +41,7 @@ function turn(model, b, axis, a) {
   b.updateMatrixWorld(true);
 }
 
-export async function meshyGesture(game, r, kind, { to, face } = {}) {
+export async function meshyGesture(game, r, kind, { to, face, low = 1 } = {}) {
   const B = bonesOf(r),
     model = r.root; // the body axes: the root faces the way he faces (the model inside may be turned to Y-up)
   if (kind === 'point') {
@@ -88,6 +89,24 @@ export async function meshyGesture(game, r, kind, { to, face } = {}) {
         turn(model, arm, 'z', inward * 0.15 * b);
         turn(model, fore, 'x', -0.25 * b);
       }
+    });
+  } else if (kind === 'pet') {
+    if (to && face) {
+      await face();
+      await game.wait(120);
+    }
+    // bend down to it, the right hand out and down onto its back, three slow strokes, then back up
+    await game.tween(2.4, (k) => {
+      const b = bell(k),
+        stroke = Math.sin(k * Math.PI * 6) * Math.min(1, b * 1.6);
+      turn(model, B.Spine, 'x', (0.2 + 0.25 * low) * b);
+      turn(model, B.Spine02, 'x', (0.3 + 0.45 * low) * b);
+      turn(model, B.Head, 'x', -(0.25 + 0.4 * low) * b);
+      // the arm hangs from a bent back, so it swings well forward to reach down in front of him
+      turn(model, B.RightArm, 'x', -(1.5 + 0.9 * low) * b - 0.12 * stroke);
+      turn(model, B.RightArm, 'z', 0.12 * b);
+      turn(model, B.LeftArm, 'x', -(0.5 + 0.7 * low) * b); // the other arm hangs down, not back along his back
+      turn(model, B.RightForeArm, 'x', -0.2 * b + 0.12 * stroke);
     });
   } else if (kind === 'squeeze') {
     // a quarter turn sideways, chest back and stomach in, arms up out of the way

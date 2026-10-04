@@ -1,8 +1,8 @@
 // Birds and small animals in the outdoor places (Jørgen, 2026-10-02: "we must make the island feel more alive ...
 // and small creatures, birds etc"; docs/game/places.md, each place's "Creatures"). Installed on a place once it is
 // built and its static geometry batched (places/lifecycle.js); from then on it steps with the place's own update.
-// They are scenery: nothing to use or talk to, and they never stand in Eric's way (people walk through the birds,
-// which get out of the way first). Off with ?nocreatures.
+// They are scenery: nothing to use or talk to except the cats, which Eric can pet (pet.js), and they never stand in
+// Eric's way (people walk through the birds, which get out of the way first). Off with ?nocreatures.
 import * as THREE from 'three';
 import { CREATURES, AVOID, BIRD_KINDS, countFor, about } from './catalog.js';
 import { PERCHES } from './perches.js';
@@ -13,6 +13,7 @@ import { creatureWorld } from './world.js';
 import { qualityTier } from '../settings.js';
 import { sim } from '../sim.js';
 import { creatureCall } from '../ambience.js';
+import { petThings } from './pet.js';
 
 const OFF = new URLSearchParams(location.search).has('nocreatures');
 let stepping = null; // the place whose creatures stepped last
@@ -48,6 +49,12 @@ export function installCreatures(game, place, name) {
     g.def = d;
     return [g];
   });
+  petThings(
+    game,
+    place,
+    name,
+    groups.filter((g) => g instanceof Cat),
+  ); // the cats can be petted
 
   function reset() {
     W.reset();

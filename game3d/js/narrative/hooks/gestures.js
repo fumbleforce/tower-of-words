@@ -52,7 +52,7 @@ export function installGesturesHooks(game, { whoRig, aimOf }) {
       r.torso.rotation.x = x0;
     }
   };
-  H.gesture = async ({ who, kind, to }) => {
+  H.gesture = async ({ who, kind, to, low }) => {
     const r = whoRig(who);
     // Meshy rigs: nod, bow, shrug, wave as short drawn moves of about a second (their library clips run 2 to 13 s)
     if (r && r.meshy && MESHY_SHORT.has(kind)) return meshyShort(game, r, kind);
@@ -64,7 +64,7 @@ export function installGesturesHooks(game, { whoRig, aimOf }) {
       return;
     }
     if (r && r.meshy && MESHY_KINDS.has(kind))
-      return meshyGesture(game, r, kind, { to, face: to ? () => H.face({ who, to }) : null });
+      return meshyGesture(game, r, kind, { to, low, face: to ? () => H.face({ who, to }) : null });
     if (!r || !r.arms || r.meshy) return;
     // a directed nod or point (the train passengers' "that seat"): drawn over the rig's idle, see rig-gestures.js
     if (CUE_KINDS.has(kind)) return chibiCue(game, r, kind, to ? aimOf(to) : null);

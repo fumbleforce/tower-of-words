@@ -42,7 +42,7 @@ export function creatureWorld(game, place, pts, { sound, blobs, avoid = [] }) {
     // a point of one kind (ground, low, high, green, water): { p, on: { kind, i, y } } or null
     //   near (default Eric), min, max: its distance from near; view: on screen (true) or off it (false);
     //   clear: that far from everyone; maxY: no higher; awayFrom: farther from it than near is; nearest: the
-    //   closest one instead of any. Taken ones (claim) are skipped
+    //   closest one instead of any; ok(p): only where it says yes. Taken ones (claim) are skipped
     pick(kind, o = {}) {
       const a = pts[kind];
       if (!a || !a.length) return null;
@@ -73,6 +73,7 @@ export function creatureWorld(game, place, pts, { sound, blobs, avoid = [] }) {
         if (clear && W.threats.some((t) => Math.hypot(t.x - _v.x, t.z - _v.z) < clear)) continue;
         if (avoid.some(([x, z]) => Math.hypot(x - _v.x, z - _v.z) < 3 * K)) continue; // catalog.js AVOID
         if (o.edge && W.nav.clearance(_v.x, _v.z) > 0.7) continue;
+        if (o.ok && !o.ok(_v)) continue;
         // on screen: well inside it; off it: past the edge
         if (o.view === true && !W.inView(_v, 0.75)) continue;
         if (o.view === false && W.inView(_v, 1.05)) continue;

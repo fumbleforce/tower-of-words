@@ -210,3 +210,44 @@ export function hum({ gain = 0.05, f = 98 } = {}) {
     },
   };
 }
+
+// ---------- a purr ----------
+// A stray cat being petted (creatures/pet.js): soft low noise pulsing about 25 times a second, in breaths, the breath
+// in quieter than the breath out. Made here rather than from a file, like hum(). pan: -1..1.
+export function purr({ gain = 0.5, secs = 2.6, pan = 0 } = {}) {
+  if (isMuted()) return;
+  const c = running();
+  if (!c) return;
+  const n = Math.ceil(c.sampleRate * secs),
+    buf = c.createBuffer(1, n, c.sampleRate),
+    d = buf.getChannelData(0),
+    rate = 23 + Math.random() * 4,
+    breath = 0.9 + Math.random() * 0.3;
+  let lp = 0;
+  for (let i = 0; i < n; i++) {
+    const t = i / c.sampleRate;
+    lp += (Math.random() * 2 - 1 - lp) * 0.08; // brown-ish noise
+    const pulse = Math.pow(0.5 + 0.5 * Math.sin(2 * Math.PI * rate * t), 3),
+      ph = (t / breath) % 2, // breath in (0..1), out (1..2)
+      env = Math.sin(Math.PI * (ph % 1)) ** 0.6 * Math.min(1, t / 0.15, (secs - t) / 0.3);
+    d[i] = lp * pulse * (ph < 1 ? 0.55 : 1) * env;
+  }
+  let peak = 1e-6;
+  for (let i = 0; i < n; i++) peak = Math.max(peak, Math.abs(d[i]));
+  for (let i = 0; i < n; i++) d[i] *= 0.8 / peak;
+  const src = c.createBufferSource();
+  src.buffer = buf;
+  const f = c.createBiquadFilter();
+  f.type = 'lowpass';
+  f.frequency.value = 380;
+  const g = c.createGain();
+  g.gain.value = gain;
+  let node = src.connect(f).connect(g);
+  if (c.createStereoPanner) {
+    const p = c.createStereoPanner();
+    p.pan.value = Math.max(-1, Math.min(1, pan));
+    node = node.connect(p);
+  }
+  node.connect(audioBus('sfx'));
+  src.start();
+}
