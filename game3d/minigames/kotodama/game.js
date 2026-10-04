@@ -68,6 +68,9 @@ function render(bump = false) {
   setRoles(roles(), m, shiftOf(run).english === 'full');
   hud(run, shiftOf(run), opts);
   $('.kd').classList.toggle('en-on', opts.en);
+  // A drink or a person waiting for its particle: the particle buttons pulse until one is tapped.
+  const last = tokens[tokens.length - 1];
+  $('.parts').classList.toggle('want', !guide && !!last && last.t === 'n');
   goal(run, shiftOf(run));
   document.querySelectorAll('.hint-glow').forEach(e => e.classList.remove('hint-glow'));
   const e = guideEl();

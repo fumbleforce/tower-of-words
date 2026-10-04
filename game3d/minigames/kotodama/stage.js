@@ -2,7 +2,8 @@
 // requests, and everything that flies between them when a command is said.
 
 import { THINGS, SHIFTS } from './data.js';
-import { MACHINE_ART, ITEMS, cat, clock } from './art.js';
+import { ITEMS, cat, clock } from './art.js';
+import { MACHINE_ART, fireMachine } from './machines.js';
 import { portrait } from '../common/cast.js';
 import { jp } from '../common/jp.js';
 import { initFx, centre, burst, puff, motes, shake, floater, fly, sleep, ms } from './fx.js';
@@ -139,8 +140,8 @@ export function setRoles(roles, machine, arrows) {
     }
 }
 
-/** Where things come out of a machine. */
-const mouth = id => centre(els[id], id === 'vend' ? 0.85 : id === 'pot' ? 0.45 : 0.55);
+/** Where things come out of a machine: its drawing's .mouth (the tray, the mug, the open fridge). */
+const mouth = id => centre(els[id].querySelector('.mouth') || els[id]);
 const deskTop = id => centre(els[id].querySelector('.desk'), 0.1);
 
 function flyer(html, cls = '') {
@@ -168,6 +169,7 @@ export async function act(cmd, res, text) {
   setRoles({}, null, false);
   await kotodama(cmd.machine, text);
   sfx.dispense(cmd.machine);
+  if (res.deliveries.some(d => d.kind !== 'none' && d.kind !== 'dodge')) await fireMachine(els[cmd.machine], cmd.machine);
   let served = 0;
   const jobs = res.deliveries.map(async (d, i) => {
     await sleep(i * 150);

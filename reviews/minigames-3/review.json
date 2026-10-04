@@ -3,9 +3,37 @@
  "date": "2026-10-04",
  "by": "claude-agent:grammar-game",
  "status": "open",
- "question": "This is a playable prototype, not pictures: play it at https://fumbleforce.github.io/tower-of-words/game3d/minigames/kotodama.html (phone or desktop, about four minutes). It's a new game, started over after \"even less fun, start over, write a new game from scratch, make it the most fun and impressive grammar game in existence\". Is this fun? Round 2 (after your note: translations cut off, too casual, instructions unclear): the first twelve pictures show the fixes. Same game; the translations fit at every size, people speak politely (～さん, ください, です/ます; the machines still get plain だして), and the first command is a three-step walkthrough with a hand.",
+ "question": "This is a playable prototype, not pictures: play it at https://fumbleforce.github.io/tower-of-words/game3d/minigames/kotodama.html (phone or desktop, about four minutes). It's a new game, started over after \"even less fun, start over, write a new game from scratch, make it the most fun and impressive grammar game in existence\". Is this fun? Round 2 (after your note: translations cut off, too casual, instructions unclear): the first twelve pictures show the fixes. Same game; the translations fit at every size, people speak politely (～さん, ください, です/ます; the machines still get plain だして), and the first command is a three-step walkthrough with a hand. Round 3 (after \"kotodama: fun, keep going with it\"; tapping over dragging, better machines): the first seven pictures. Same game. The vending machine, hot-water pot and fridge are redrawn with idle motion and a dispense, and the drinks are redrawn to match. Every action was already a tap; now a unit test keeps it that way, and the particle buttons pulse while a word waits for its particle.",
  "multi": false,
  "media": [
+  {
+   "image": "reviews/minigames-3/shots/r3-machines-before.webp",
+   "caption": "Round 3, before: the machines and drinks as they were (SVG, shown large and at phone size)."
+  },
+  {
+   "image": "reviews/minigames-3/shots/r3-machines-after.webp",
+   "caption": "Round 3, after: a red street vending machine (lit COLD sign, two shelves of drinks with prices and blinking select lights, ¥130 display, coin slot, PUSH tray), the thermos pot with its pump button, water gauge, 98° display, keep-warm lamp, steam and a mug under the spout, and a mint fridge covered in notes with Tama's photo on it. Below: the drinks redrawn to match."
+  },
+  {
+   "image": "reviews/minigames-3/shots/r3-dispense-strip.webp",
+   "caption": "Round 3, the dispense, slowed down (read left to right, top to bottom): the can clunks into the tray and the flap swings up; the pot's pump goes down and pours into the mug; the fridge door swings open in a puff of cold, then shuts."
+  },
+  {
+   "image": "reviews/minigames-3/shots/r3-ingame-strip.webp",
+   "caption": "Round 3, in the game at 1366x860: the first command. Lights dip, the can drops into the tray, the flap opens and the cola flies to Kenji."
+  },
+  {
+   "image": "reviews/minigames-3/shots/r3-phone-shift3.webp",
+   "caption": "Round 3, phone 390x844, shift 3: all three machines, a little bigger than before."
+  },
+  {
+   "image": "reviews/minigames-3/shots/r3-desktop-shift1.webp",
+   "caption": "Round 3, desktop 1366x860, shift 1."
+  },
+  {
+   "image": "reviews/minigames-3/shots/r3-desktop-shift3.webp",
+   "caption": "Round 3, desktop 1366x860, shift 3."
+  },
   {
    "image": "reviews/minigames-3/shots/fix-phone-0-title.webp",
    "caption": "Fix, phone 390: the title now says the goal in one line, with the dots drawn."

@@ -68,3 +68,12 @@ test('people speak politely, the way colleagues do at work', async () => {
   const all = JSON.stringify([LINES, COACH, THINGS]);
   for (const casual of ['ちょうだい', 'くん', 'ありがと|', 'おねがい|']) assert.ok(!all.includes(casual), casual);
 });
+
+test('every action is a tap: nothing in Kotodama drags', async () => {
+  const fs = await import('node:fs');
+  const dir = new URL('../../minigames/kotodama/', import.meta.url);
+  for (const f of fs.readdirSync(dir).filter(f => f.endsWith('.js'))) {
+    const src = fs.readFileSync(new URL(f, dir), 'utf8');
+    assert.doesNotMatch(src, /drag\.js|pointermove|dragstart|touchmove|draggable/, f);
+  }
+});
