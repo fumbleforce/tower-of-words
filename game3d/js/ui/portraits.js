@@ -1,4 +1,4 @@
-import { PORTRAITS } from './portrait-data.js';
+import { PORTRAITS, TEXT_PORTRAITS } from './portrait-data.js';
 import { portraitSource } from '../plugins.js';
 import { $ } from './dom.js';
 import { onKeyboard } from './keyboard-fit.js';
@@ -110,7 +110,10 @@ function speakersIn(steps, out = new Set()) {
 export function newScene(steps) {
   for (const who in PORTRAITS) faceNow[who] = undefined;
   if (typeof Image === 'undefined') return; // tooling runs the story without a page
-  for (const who of speakersIn(steps)) for (const f of PORTRAITS[who] || []) preload(portraitSrc(who, f));
+  for (const id of speakersIn(steps)) {
+    const who = TEXT_PORTRAITS[id]?.[0] || id;
+    for (const f of PORTRAITS[who] || []) preload(portraitSrc(who, f));
+  }
 }
 // everyone's neutral picture, once the game has settled after boot, so a first talk needn't wait on the network
 if (typeof Image !== 'undefined')
@@ -121,6 +124,8 @@ if (typeof Image !== 'undefined')
   }, 6000);
 const HOPS = new Set(['surprised', 'panicked', 'panic']);
 export function showPortraits(t, whoId, face) {
+  const text = TEXT_PORTRAITS[whoId]; // a text message: the sender's portrait
+  if (text) [whoId, face] = [text[0], PORTRAITS[text[0]].includes(face) ? face : text[1]];
   const S = $('#stage'),
     L = S.querySelector('.por.left'),
     R = S.querySelector('.por.right');

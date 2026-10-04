@@ -6,7 +6,7 @@ import { snapshotPeople, restorePeople, snapshotObject, restoreObject } from './
 // Place 3, the office floor, as the engine side: things, spots, zones, the command effects and the arrival by lift.
 // Every word said here comes from game3d/story/office.js (placeholder: story/placeholder/office.js).
 import * as THREE from 'three';
-import { officeSteps, K, CN, CS } from '../scenes/office.js';
+import { officeSteps, K, CN, CS, DOORWAYS } from '../scenes/office.js';
 import { sliced } from '../perf/slice.js';
 import { RoomCam } from '../cam.js';
 import { ui, sfx } from '../ui.js';
@@ -373,10 +373,11 @@ export async function officePlace(game) {
   };
   const zones = {
     office: (x, z) => x > -4.2 && x < 3.4 && z < CN && z > Z0,
-    copy_room: (x, z) => x < -2.2 && z > CS,
+    // the two rooms with a scene on the way in fire a step past their doorway, never in it (movement/doorways.js)
+    copy_room: (x, z) => x < -2.2 && z > CS + 0.45,
     kitchen: (x, z) => x > -2.2 && x < 1.8 && z > CS,
     toilets: (x, z) => x > 1.8 && z > CS,
-    machine_room: (x, z) => x > 3.4 && z < CN,
+    machine_room: (x, z) => x > 3.4 && z < CN - 0.45,
     corridor: (x, z) => z > CN && z < CS,
   };
 
@@ -663,6 +664,7 @@ export async function officePlace(game) {
     people,
     spots,
     zones,
+    doorways: DOORWAYS,
     seats,
     defaultPeriod: 'morning',
     fit(aspect) {

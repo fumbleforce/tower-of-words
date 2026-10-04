@@ -43,6 +43,14 @@ export const X0 = -7,
   Z1 = 6.4;
 export const CN = 0.2,
   CS = 2.4; // corridor north and south wall lines
+// the door openings in the corridor's walls, x0 to x1: the walls' holes and the place's doorways (movement/doorways.js)
+const DOORS = {
+  [CN]: { office_door: [-0.8, 0.3], machine_door: [4.7, 5.5] },
+  [CS]: { copy_room: [-4.4, -3.6], kitchen: [-0.8, 0.1], toilet_m: [2.3, 2.9], toilet_f: [4.9, 5.5] },
+};
+export const DOORWAYS = Object.entries(DOORS).flatMap(([z, doors]) =>
+  Object.entries(doors).map(([id, [x0, x1]]) => ({ id, x0, x1, z0: +z - T / 2, z1: +z + T / 2 })),
+);
 
 function toiletSign(kind) {
   const tex = textTexture(
@@ -659,20 +667,15 @@ export function* officeSteps() {
   W('x', X0, X1, CN, WH, T, {
     holes: [
       [X0, -4.2, 0, WH],
-      [-0.8, 0.3, 0, 1.3],
-      [4.7, 5.5, 0, 1.25],
+      [...DOORS[CN].office_door, 0, 1.3],
+      [...DOORS[CN].machine_door, 0, 1.25],
       [6.2, 6.8, 0, 0.0001],
     ],
   });
   yield;
   // bottom row
   W('x', X0, X1, CS, LO, T, {
-    holes: [
-      [-4.4, -3.6, 0, LO],
-      [-0.8, 0.1, 0, LO],
-      [2.3, 2.9, 0, LO],
-      [4.9, 5.5, 0, LO],
-    ],
+    holes: Object.values(DOORS[CS]).map(([x0, x1]) => [x0, x1, 0, LO]),
   });
   W('z', CS, Z1, -2.2, MID, T);
   W('z', CS, Z1, 1.8, MID, T);
