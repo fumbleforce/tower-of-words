@@ -215,6 +215,11 @@ These were in GUIDE.md until the guide diet and are copied here as they were. GU
   > 3. Simpler head model, grey closed jacket, no glasses
   >
   > then in meshy I used the image to 3d model, smart topography, 1050 poly count, a pose, then textured it in a second pass if it looked right. Worked on first try this time. From there it can be automatically rigged (just need to lower the height due to the big head), and add animations.
+  - Mio, the first one (Jørgen, 2026-10-04): from Mio's portrait alone, with several takes per step, in ChatGPT:
+    1. "low poly chibi 3d game model of this character"
+    2. "simplify 3d chibi model further, stronger contrasts, low poly"
+    3. "simplify chibi character much more"
+    The Eric steps above then used this Mio chibi as the style reference.
   - The picture steps were done in ChatGPT's image model, not a local one. Step 3 was specific to Eric; for another character it names what to simplify on that character. His Mio chibi reference is tools/characters/ref/mio-chibi-34.png (angled: mio-chibi-angled.png).
   In the game, these models only get colour tweaks (see Meshy parts).
 
