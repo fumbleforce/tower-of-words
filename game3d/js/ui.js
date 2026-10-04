@@ -16,7 +16,7 @@ void VOICE_CSS;
 import { $, el } from './ui/dom.js';
 import { actMenu } from './ui/act-menu.js';
 import { showPortraits, resetPortraitSpeaker } from './ui/portraits.js';
-import { createDialogue } from './ui/dialogue.js';
+import { createDialogue, installVn } from './ui/dialogue.js';
 import { addFieldPlayButton } from './ui/dialogue-text.js';
 export { FACE, setFace, faceForEmote, layoutStage, newScene } from './ui/portraits.js';
 
@@ -183,6 +183,7 @@ export const ui = {
       }
     };
     this.setSayKey(settings.keySay);
+    installVn(this); // the dialogue box's Log, Auto, Skip, Hide and Replay (ui/vn-controls.js)
     onSettings((k, v) => {
       if (k === 'keySay') this.setSayKey(v);
     });

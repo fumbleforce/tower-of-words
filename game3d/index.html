@@ -48,6 +48,7 @@ html, body { margin: 0; height: 100%; background: #0e121c; }
   const tk = document.createElement('link'); tk.rel = 'stylesheet'; tk.href = 'css/tickets.css' + v; document.head.appendChild(tk);
   const st = document.createElement('link'); st.rel = 'stylesheet'; st.href = 'css/settings.css' + v; document.head.appendChild(st);
   const sv = document.createElement('link'); sv.rel = 'stylesheet'; sv.href = 'css/saves.css' + v; document.head.appendChild(sv);
+  const vn = document.createElement('link'); vn.rel = 'stylesheet'; vn.href = 'css/vn.css' + v; document.head.appendChild(vn);
   const imports = { three: './vendor/three/three.module.js', 'three/addons/': './vendor/' };
   for (const f of b.files) imports[new URL(f, location.href).href] = new URL(f + v, location.href).href;
   const map = document.createElement('script'); map.type = 'importmap'; map.textContent = JSON.stringify({ imports }); document.head.appendChild(map);

@@ -1,0 +1,32 @@
+{
+  "title": "Dialogue box: backlog, Auto, Skip, Hide and Replay",
+  "date": "2026-10-04",
+  "by": "claude-agent:vn-controls",
+  "caption": "The visual novel controls you said yes to. After a new player's first few lines, five small buttons show at the top right of the dialogue box: Log, Auto, Skip, Hide and Replay. Log (L, PageUp, the wheel up, or a swipe down on the phone) opens every line said today, with faces, readings, Mio's texts and the replies you picked; each voiced line has a play button and taught words still play when tapped. Auto (Y) is off at every start, moves on once a line is spoken, waits at replies and prompts, and any tap or key stops it. Skip (or Ctrl held) runs through lines you've already seen and stops at replies, word prompts and new lines; Settings has Skip unread too. Hide (H, or a long press on the phone) shows only the world until you tap. Replay (R) plays the line again. The backlog comes back with a save of the same day.",
+  "sections": [
+    {
+      "title": "Computer, 1366 × 860",
+      "caption": "The row, Auto and Skip on (teal, with their name), Skip stopped at a reply on a scene played a second time, the text hidden, the backlog after the train and gate, and the Text settings.",
+      "images": [
+        { "id": "desk-row", "image": "bible/shots/showcase/vn-controls-1/desk-row.webp", "caption": "The row beside the name" },
+        { "id": "desk-auto", "image": "bible/shots/showcase/vn-controls-1/desk-auto.webp", "caption": "Auto on" },
+        { "id": "desk-skip-stopped", "image": "bible/shots/showcase/vn-controls-1/desk-skip-stopped.webp", "caption": "Skip ran through the seen lines and stopped at the reply" },
+        { "id": "desk-hidden", "image": "bible/shots/showcase/vn-controls-1/desk-hidden.webp", "caption": "Hidden" },
+        { "id": "desk-backlog", "image": "bible/shots/showcase/vn-controls-1/desk-backlog.webp", "caption": "The backlog after the gate scenes" },
+        { "id": "desk-settings", "image": "bible/shots/showcase/vn-controls-1/desk-settings.webp", "caption": "Settings, Text: Auto speed and Skip unread too" }
+      ]
+    },
+    {
+      "title": "Phone, 390 × 844",
+      "caption": "Each button is a 44 px target; on narration the row sits above the line so the text keeps the full width.",
+      "images": [
+        { "id": "phone-row", "image": "bible/shots/showcase/vn-controls-1/phone-row.webp", "caption": "The row at a reply" },
+        { "id": "phone-auto", "image": "bible/shots/showcase/vn-controls-1/phone-auto.webp", "caption": "Auto on, over narration" },
+        { "id": "phone-hidden", "image": "bible/shots/showcase/vn-controls-1/phone-hidden.webp", "caption": "Hidden" },
+        { "id": "phone-backlog", "image": "bible/shots/showcase/vn-controls-1/phone-backlog.webp", "caption": "The backlog after the gate scenes" },
+        { "id": "phone-backlog-choice", "image": "bible/shots/showcase/vn-controls-1/phone-backlog-choice.webp", "caption": "A reply you picked, in the backlog" }
+      ]
+    }
+  ],
+  "links": [{ "label": "Play it", "href": "game3d/" }]
+}

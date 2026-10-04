@@ -477,6 +477,7 @@ export function save(game) {
     if (game.transition) data.transition = { ...game.transition };
     data.pendingStart = game.pendingStart || null;
     if (game.ended) data.ended = true;
+    data.log = ui.logJSON?.(); // the backlog (ui/backlog.js)
     localStorage.setItem(KEY, JSON.stringify(data));
   } catch {
     /* storage may be off */
@@ -505,6 +506,7 @@ export function restore(game, d) {
     yen: d.yen ?? 1000,
   });
   sim.date = dateOf(sim.day || 1);
+  ui.logLoad?.(d.log, sim.day || 1);
   sim.met = new Set(d.met || []);
   Object.assign(flags, d.flags || {});
   for (const k of d.known || []) known.add(k);
