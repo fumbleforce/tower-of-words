@@ -1522,6 +1522,61 @@
   "emo": "low"
  },
  {
+  "key": "ln-svtn16",
+  "speaker": "kuro",
+  "text": "おはようございます. Which floor, please?",
+  "lang": "en",
+  "overheard": false,
+  "words": [
+   [
+    "ohayo",
+    "おはようございます"
+   ]
+  ],
+  "clear": [],
+  "emo": "polite"
+ },
+ {
+  "key": "ln-rh2bfc",
+  "speaker": "eric",
+  "text": "B2. Sorry, I should have said.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "polite"
+ },
+ {
+  "key": "ln-13pmq0",
+  "speaker": "kuro",
+  "text": "You're allowed to say good morning first.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "teasing"
+ },
+ {
+  "key": "ln-17d7qzu",
+  "speaker": "eric",
+  "text": "I'll remember that.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "casual"
+ },
+ {
+  "key": "ln-1bwy26f",
+  "speaker": "kuro",
+  "text": "Do come and say it tomorrow.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "polite"
+ },
+ {
   "key": "oh-1244oau",
   "speaker": "kuro",
   "text": "お疲れさまです。",
@@ -2685,26 +2740,6 @@
   "emo": "tired"
  },
  {
-  "key": "ln-1yh8qz8",
-  "speaker": "eric",
-  "text": "The station report went through.",
-  "lang": "en",
-  "overheard": false,
-  "words": [],
-  "clear": [],
-  "emo": "tired"
- },
- {
-  "key": "ln-m5hrwm",
-  "speaker": "eric",
-  "text": "Train doors, Honsha. They already put my name on it.",
-  "lang": "en",
-  "overheard": false,
-  "words": [],
-  "clear": [],
-  "emo": "tired"
- },
- {
   "key": "ln-bvydd8",
   "speaker": "eric",
   "text": "I need to buy a second pillow.",
@@ -3160,9 +3195,9 @@
   "emo": "sheepish"
  },
  {
-  "key": "ln-1r01nac",
+  "key": "ln-5p13c1",
   "speaker": "emi",
-  "text": "Mori’s left his maintenance notes on your desk. Have a look through them this afternoon.",
+  "text": "Your repair list is on the computer. Mori’s left his notes beside it; have a look through them this afternoon.",
   "lang": "en",
   "overheard": false,
   "words": [],
@@ -3243,16 +3278,6 @@
   "key": "ln-k946lc",
   "speaker": "eric",
   "text": "I should finish with Emi first.",
-  "lang": "en",
-  "overheard": false,
-  "words": [],
-  "clear": [],
-  "emo": "tired"
- },
- {
-  "key": "ln-6v1roe",
-  "speaker": "eric",
-  "text": "That can wait until Monday.",
   "lang": "en",
   "overheard": false,
   "words": [],
