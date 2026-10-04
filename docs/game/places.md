@@ -6,6 +6,8 @@ Elsewhere: the island as a whole is in [setting.md](setting.md); the people in [
 
 The tables are checked by `node tools/facts/check.mjs`: things and their labels, spots, seats, zones, who has a body in each place and the story's schedule for them, the crowd's numbers, the small-moment nodes, and the creatures. Coordinates: x runs left to right on screen, z from the back (negative) toward the camera; a unit is about a metre and a half.
 
+No scene starts with Eric in a doorway (Jørgen, 2026-10-04: "I didnt make it fully onto the platform before the scene triggered, trapping me in the door"). A zone that starts a scene sits clear of the doorway beside it; if a scene starts with Eric in one anyway (a tap on a door, someone talking to him there), he first walks out of it to free floor. The doorways are the train's two platform doors and the office corridor's six; the day test fails if a zone fires, or a scene begins, with him in one (game3d/js/movement/doorways.js).
+
 ## Places decided but not built
 
 The company city has dorms, a canteen, shops, a bar and a university ([setting.md](setting.md)); only the places in the list below are planned, and only the `##` sections further down are built. One line per planned place: name, id, what it is.
@@ -125,7 +127,7 @@ One car of the monorail, crossing the bay from the mainland to Honsha station. T
 
 ### Zones
 
-`door_zone` (either door, while open), `free_seat` (standing at the seat beside Mio), `platform_exit` (day 2: the platform's left end at the walkway)
+`door_zone` (out on the platform in front of either door, while open, with Eric's body clear of the doorway), `free_seat` (standing at the seat beside Mio), `platform_exit` (day 2: the platform's left end at the walkway)
 
 ### Who's there when
 
@@ -1069,7 +1071,7 @@ The second basement of head office: IT support. One compact floor, close to squa
 
 ### Zones
 
-`office`, `copy_room`, `kitchen`, `toilets`, `machine_room`, `corridor`
+`office`, `copy_room`, `kitchen`, `toilets`, `machine_room`, `corridor`. The copy room and machine room zones start a step past their doorways.
 
 ### Who's there when
 

@@ -24,6 +24,7 @@ import {
   BENCHES,
   DOOR_X,
   DOOR_W,
+  DOORWAYS,
   NEAR_END,
   COL,
   mat as carMat,
@@ -978,7 +979,9 @@ export async function trainPlace(game) {
     },
   };
   const zones = {
-    door_zone: (x, z) => st.door > 0.3 && z > LZ - 0.35 && Math.abs(Math.abs(x) - DOOR_X) < 0.45,
+    // out on the platform, his body clear of the doorway (it used to start just inside the car: Jørgen was caught in
+    // the door, 2026-10-04)
+    door_zone: (x, z) => st.door > 0.3 && z > LZ + T + 0.35 && Math.abs(Math.abs(x) - DOOR_X) < 1.4,
     // standing on the free seat's floor spot (seat_far_r)
     free_seat: (x, z) => Math.hypot(x - 1.58, z - (-(LZ - 0.24) + 0.55)) < 0.3,
     platform_exit: day2.zones.platform_exit,
@@ -1051,6 +1054,7 @@ export async function trainPlace(game) {
     people,
     spots,
     zones,
+    doorways: DOORWAYS.map((d, i) => ({ id: i ? 'door_r' : 'door_l', x0: d.x0, x1: d.x1, z0: LZ, z1: LZ + T })),
     seats,
     beforeAO: new (class extends Pass {
       constructor() {

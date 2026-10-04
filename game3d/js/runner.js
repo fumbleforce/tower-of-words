@@ -8,7 +8,7 @@ import { voiceThenBeat } from './ui.js';
 import { ui, voice, sfx, setFace, newScene } from './ui.js';
 import { WORDS, learn, known, cmdHTML, SAYABLE } from './lang.js';
 import { recordHeard } from './narrative/heard-record.js';
-
+import { walkClear } from './movement/doorways.js';
 import { flags, cond } from './narrative/state.js';
 export { flags, cond } from './narrative/state.js';
 import { lineKey, heardKey, audioKeys } from './narrative/voice-keys.js';
@@ -108,6 +108,7 @@ export class Runner {
     // from "Nineteen ninety-six?" in the ticket scene, and Mori flustered from the jam)
     const go = async () => {
       newScene(this.story.nodes[node]);
+      await walkClear(this.game); // never a scene with Eric in a doorway (movement/doorways.js)
       await this.run(node, { trigger: key });
     };
     // an event during a scene, or while Eric says a word (#81), waits for it to end
@@ -123,6 +124,7 @@ export class Runner {
     this.game.queue.push(async () => {
       this.queued.splice(this.queued.indexOf(queued), 1);
       newScene(this.story.nodes[node]);
+      await walkClear(this.game);
       await this.run(node, { trigger });
     });
     if (persist) this.persist();

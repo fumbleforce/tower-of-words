@@ -162,7 +162,7 @@ export const game = {
         res();
       };
       // watch is declared before goTo: goTo calls finish at once when there is no path (already there)
-      w.goTo(x, z, finish);
+      w.goTo(x, z, finish, { scripted: true });
       if (done) return;
       watch = setInterval(() => {
         if (this.paused) return;

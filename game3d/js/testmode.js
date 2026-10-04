@@ -4,6 +4,7 @@
 import { ui, setMuted } from './ui.js';
 import { known, SAYABLE } from './lang.js';
 import { flags } from './narrative/state.js';
+import { doorwayAt } from './movement/doorways.js';
 
 export function start(game) {
   setMuted(true);
@@ -12,6 +13,7 @@ export function start(game) {
   const T = (window.__test = { log: [], errors: [], places: [], done: false, t0: performance.now() });
   window.addEventListener('error', (e) => T.errors.push(String(e.message)));
   window.addEventListener('unhandledrejection', (e) => T.errors.push(String(e.reason)));
+  watchDoorways(game, T);
   const tried = new Set();
   // ?route=social takes the other way through the gate (no akete; sumimasen to the guard)
   const route = new URLSearchParams(location.search).get('route') || 'magic';
@@ -155,4 +157,24 @@ function driveTickets(app, T) {
   }
   T.log.push('tickets: close');
   app.querySelector('.tk-close').click();
+}
+// No scene starts with Eric in a doorway (movement/doorways.js; Jørgen, 2026-10-04: "trapping me in the door"). Fails
+// the day when a trigger zone fires with him in one (the zone must sit clear of it), or when he is still in one as a
+// scene's lines begin; a scene that had to walk him out first is logged.
+function watchDoorways(game, T) {
+  const where = (d) => {
+    const p = game.player.root.position;
+    return `${game.place.name} ${d.id} at (${p.x.toFixed(2)}, ${p.z.toFixed(2)})`;
+  };
+  const onTrigger = game.onTrigger;
+  game.onTrigger = (key) => {
+    const p = game.player?.root.position;
+    const d = p && /^zone:/.test(key) && game.runner.has(key) && doorwayAt(game.place, p.x, p.z);
+    if (d) T.errors.push(`${key} fired with Eric in a doorway: ${where(d)}`);
+    onTrigger?.(key);
+  };
+  game.onDoorway = (d, still) => {
+    T.log.push(`doorway: walked out of ${where(d)} as a scene started`);
+    if (still) T.errors.push(`a scene started with Eric in a doorway: ${where(still)}`);
+  };
 }

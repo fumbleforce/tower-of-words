@@ -32,11 +32,15 @@ export class SmoothWalker extends Walker {
     this.aside = null;
     this.runTo = false;
   }
-  goTo(x, z, arrive) {
+  // scripted: a scene's walk (game.walkTo), which a key still held from walking doesn't take over. It used to drop
+  // the walk and leave Eric where he stood, in the train's doorway as its doors closed (Jørgen, 2026-10-04: "I didnt
+  // make it fully onto the platform before the scene triggered, trapping me in the door")
+  goTo(x, z, arrive, { scripted = false } = {}) {
     this.preview.clear();
     this.aside = null;
     this.runTo = false;
     super.goTo(x, z, arrive);
+    if (this.path) this.path.scripted = scripted;
   }
   // someone walking (dx, dz) is held up by him: step aside, off their line, even during a scene (people do)
   makeRoom(fx, fz, need) {
@@ -165,7 +169,7 @@ export class SmoothWalker extends Walker {
     if (this.locked || !(up || dn || lf || rt)) this.keyFrame = null; // a trip or a scene starts a new frame
     const others = this.others();
     const R = BODY * (this.body.scale.x || 1); // his own body, for people (walls use the grid's own radius)
-    if (!this.locked && (up || dn || lf || rt)) {
+    if (!this.locked && !this.path?.scripted && (up || dn || lf || rt)) {
       if (this.path) {
         this.path = null;
         this.arrive = null;
