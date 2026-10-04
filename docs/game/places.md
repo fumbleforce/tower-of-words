@@ -1034,7 +1034,7 @@ The second basement of head office: IT support. One compact floor, close to squa
 | `fan` | Fan | A desk fan. |
 | `boxes` | Boxes | Cardboard boxes. |
 | `my_desk` | Your desk | South row, middle. Name card エリック, with ERIC written under it in pen. |
-| `my_chair` | Your chair | Starts in the machine room with Tama asleep on it. Its action, "Push to your desk", is what sends it home: Eric pushes it through the corridor to his desk with Tama riding. |
+| `my_chair` | Your chair | Starts in the machine room with Tama asleep on it. Its action, "Push to your desk", sends it home: Eric pushes it through the corridor to his desk with Tama riding. Petting Tama does the same, and she is the goal there (`tama`, below). |
 | `chief_desk` | Mr. Mori's desk | The section chief's desk at the head of the island. |
 | `nameplate` | Nameplate | Face down on Mori's desk. |
 | `covered` | A covered desk | North row, middle: a dust sheet over the monitor, and no dust on the name card. |
@@ -1083,7 +1083,7 @@ The story moves the clock ([systems.md](systems.md)): morning when Eric arrives,
 | `mori` | Waits at the lift landing to greet Eric, then at his desk; the kitchenette table at lunch; gone home in the evening. | lunch `kitchen_table`, afternoon `chief_desk`, evening hidden |
 | `kenji` | His desk, north row, left; gone home in the evening. | evening hidden |
 | `emi` | Upstairs all day; comes down at 17:40 for a few minutes. | hidden all day |
-| `tama` | Asleep on Eric's chair in the machine room, then wherever the chair goes. | – |
+| `tama` | Asleep on Eric's chair in the machine room, then wherever the chair goes. In the machine room she is the goal, and petting her sends the chair home with her on it (Jørgen, 2026-10-04: "make the cat be the one that moves the scene along"). | – |
 | `aoi` | Hidden. | hidden all day |
 | `rei` | Hidden. | hidden all day |
 
