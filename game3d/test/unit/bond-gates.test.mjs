@@ -72,6 +72,7 @@ test('transition gates use the departing story for walk/ride and destination for
     [slot, { walk: step, ride: step, arrive: step }]));
   mods.dorm_court = { nodes: {} };
   mods.dorms = { nodes: {} };
+  mods.people = {}; // story/people.js, the People panel's text
   const graph = buildGraph({ mods, cast });
   for (const [slot, expected] of Object.entries({
     train_to_gate: ['train_trust', 'train_trust', 'gate_trust'],
@@ -93,6 +94,7 @@ test('story map and facts record the same custom and default gate writes as the 
   mods.transitions = {};
   mods.dorm_court = { nodes: {} };
   mods.dorms = { nodes: {} };
+  mods.people = {}; // story/people.js, the People panel's text
   mods.plaza = { nodes: {} };
   const graph = buildGraph({ mods, cast });
   const expected = {

@@ -19,10 +19,6 @@ export default {
     ] },
   ],
 
-  people: {
-    mio: { name: 'Mio', about: 'Programmer, B2. The only one on the team with some English. Busy.', color: '#5fc6bf' },
-  },
-
   start: 'intro',
 
   on: {

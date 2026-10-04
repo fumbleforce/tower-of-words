@@ -131,6 +131,8 @@ The B2 team is Eric, Mio, Mori and Kenji, with Emi as team lead. Goro is a late-
 
 The name plate is the name above their lines; the label is the name over them in the world; the People panel is where people Eric has met are listed. "none" means there isn't one.
 
+Each People panel card has the name and one line about them, the same on every day, in every place and after a load (code: game3d/story/people.js, loaded with the game; #223).
+
 | Id | Name plate | Label over them | People panel |
 |---|---|---|---|
 | `eric` | Eric | none | none |
