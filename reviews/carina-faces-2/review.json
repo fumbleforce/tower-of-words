@@ -1,0 +1,101 @@
+{
+ "title": "Carina faces round 2: one specified sweater (9 renders)",
+ "date": "2026-10-05",
+ "by": "art-round agent (carina-faces-2)",
+ "status": "open",
+ "question": "Is this the same sweater in every picture now, and which of these are Carina's neutral, surprised and tired faces?",
+ "multi": true,
+ "media": [
+  {
+   "image": "art/candidates/portraits/carina-faces-2/sheet.png",
+   "caption": "Sweater compared across all 9: all PASS (ribbed black knit, round crew neckline, plain, long sleeves). Rows: neutral 1-3, surprised 4-6, tired 7-9; seeds 390617760, ...761, ...762 in each row. His approved render (old sweater) sits at the end of row 1. Identity PASS: 4 and 7. DRIFT: the rest (seed ...761 turns her head the other way; some lose the brow piercings). None picked."
+  },
+  {
+   "image": "art/candidates/portraits/carina-faces-2/cast-sheet.png",
+   "caption": "Game fit: Carina's surprised and tired (seed ...760, from this round) and neutral (from round 1, because round 2 neutral seed ...760 shows only 1 brow piercing) beside Mio, Aoi, Emi and Eric. tools/portrait_fit.py: scaled only, canvas 648x768, top 70, head 312. Right-hand slot: the round 2 neutral fit, not swapped in. Files: art/approved/carina/."
+  }
+ ],
+ "options": [
+  {
+   "id": "01-neutral-asis-1",
+   "label": "1. neutral-asis-1",
+   "image": "art/candidates/portraits/carina-faces-2/cf2-neutral-asis-1.webp",
+   "images": [
+    "art/candidates/portraits/carina-faces-2/cf2-neutral-asis-1-cut.webp"
+   ],
+   "note": "Seed 390617760. His prompt with only the sweater changed to \"tight black ribbed knit sweater, fine vertical ribbing, round crew neckline, long sleeves, plain, no collar, no pattern\" (negative + \"v-neck, turtleneck, cardigan, collar, buttons, zipper, hoodie, pattern, logo\"); expression words added: none. rdbtAnima, 896x1152, euler_ancestral normal, 30 steps, CFG 5. Sweater PASS. Identity DRIFT (minor): head turned like his render, teal eyes, dark roots, hoop ear ring, but only 1 brow piercing visible. imgqa: red rim 0.0%, ccip 0.007 (pass); hair touches the top edge, as in his render. Second image: cut-out (isnet-anime + matte_refine)."
+  },
+  {
+   "id": "02-neutral-asis-2",
+   "label": "2. neutral-asis-2",
+   "image": "art/candidates/portraits/carina-faces-2/cf2-neutral-asis-2.webp",
+   "images": [
+    "art/candidates/portraits/carina-faces-2/cf2-neutral-asis-2-cut.webp"
+   ],
+   "note": "Seed 390617761. His prompt with only the sweater changed to \"tight black ribbed knit sweater, fine vertical ribbing, round crew neckline, long sleeves, plain, no collar, no pattern\" (negative + \"v-neck, turtleneck, cardigan, collar, buttons, zipper, hoodie, pattern, logo\"); expression words added: none. rdbtAnima, 896x1152, euler_ancestral normal, 30 steps, CFG 5. Sweater PASS. Identity DRIFT: head turned the other way, brow piercings not visible. imgqa: red rim 0.6%, ccip 0.012 (pass); hair touches the top edge, as in his render. Second image: cut-out (isnet-anime + matte_refine)."
+  },
+  {
+   "id": "03-neutral-asis-3",
+   "label": "3. neutral-asis-3",
+   "image": "art/candidates/portraits/carina-faces-2/cf2-neutral-asis-3.webp",
+   "images": [
+    "art/candidates/portraits/carina-faces-2/cf2-neutral-asis-3-cut.webp"
+   ],
+   "note": "Seed 390617762. His prompt with only the sweater changed to \"tight black ribbed knit sweater, fine vertical ribbing, round crew neckline, long sleeves, plain, no collar, no pattern\" (negative + \"v-neck, turtleneck, cardigan, collar, buttons, zipper, hoodie, pattern, logo\"); expression words added: none. rdbtAnima, 896x1152, euler_ancestral normal, 30 steps, CFG 5. Sweater PASS. Identity DRIFT: no brow piercings visible (teal eyes, roots, ear ring fine). imgqa: red rim 0.0%, ccip 0.005 (pass); hair touches the top edge, as in his render. Second image: cut-out (isnet-anime + matte_refine)."
+  },
+  {
+   "id": "04-surprised-1",
+   "label": "4. surprised-1",
+   "image": "art/candidates/portraits/carina-faces-2/cf2-surprised-1.webp",
+   "images": [
+    "art/candidates/portraits/carina-faces-2/cf2-surprised-1-cut.webp"
+   ],
+   "note": "Seed 390617760. His prompt with only the sweater changed to \"tight black ribbed knit sweater, fine vertical ribbing, round crew neckline, long sleeves, plain, no collar, no pattern\" (negative + \"v-neck, turtleneck, cardigan, collar, buttons, zipper, hoodie, pattern, logo\"); expression words added: \"surprised, eyes wide open, small open mouth\". rdbtAnima, 896x1152, euler_ancestral normal, 30 steps, CFG 5. Sweater PASS. Identity PASS: head like his render, teal eyes wide, dark roots, hoop ear ring, 2 brow piercings. imgqa: red rim 0.1%, ccip 0.005 (pass); hair touches the top edge, as in his render. Second image: cut-out (isnet-anime + matte_refine)."
+  },
+  {
+   "id": "05-surprised-2",
+   "label": "5. surprised-2",
+   "image": "art/candidates/portraits/carina-faces-2/cf2-surprised-2.webp",
+   "images": [
+    "art/candidates/portraits/carina-faces-2/cf2-surprised-2-cut.webp"
+   ],
+   "note": "Seed 390617761. His prompt with only the sweater changed to \"tight black ribbed knit sweater, fine vertical ribbing, round crew neckline, long sleeves, plain, no collar, no pattern\" (negative + \"v-neck, turtleneck, cardigan, collar, buttons, zipper, hoodie, pattern, logo\"); expression words added: \"surprised, eyes wide open, small open mouth\". rdbtAnima, 896x1152, euler_ancestral normal, 30 steps, CFG 5. Sweater PASS. Identity DRIFT: head turned the other way, no brow piercings. imgqa: red rim 0.7%, ccip 0.012 (pass); hair touches the top edge, as in his render. Second image: cut-out (isnet-anime + matte_refine)."
+  },
+  {
+   "id": "06-surprised-3",
+   "label": "6. surprised-3",
+   "image": "art/candidates/portraits/carina-faces-2/cf2-surprised-3.webp",
+   "images": [
+    "art/candidates/portraits/carina-faces-2/cf2-surprised-3-cut.webp"
+   ],
+   "note": "Seed 390617762. His prompt with only the sweater changed to \"tight black ribbed knit sweater, fine vertical ribbing, round crew neckline, long sleeves, plain, no collar, no pattern\" (negative + \"v-neck, turtleneck, cardigan, collar, buttons, zipper, hoodie, pattern, logo\"); expression words added: \"surprised, eyes wide open, small open mouth\". rdbtAnima, 896x1152, euler_ancestral normal, 30 steps, CFG 5. Sweater PASS. Identity DRIFT: no brow piercings visible. imgqa: red rim 0.0%, ccip 0.004 (pass); hair touches the top edge, as in his render. Second image: cut-out (isnet-anime + matte_refine)."
+  },
+  {
+   "id": "07-tired-1",
+   "label": "7. tired-1",
+   "image": "art/candidates/portraits/carina-faces-2/cf2-tired-1.webp",
+   "images": [
+    "art/candidates/portraits/carina-faces-2/cf2-tired-1-cut.webp"
+   ],
+   "note": "Seed 390617760. His prompt with only the sweater changed to \"tight black ribbed knit sweater, fine vertical ribbing, round crew neckline, long sleeves, plain, no collar, no pattern\" (negative + \"v-neck, turtleneck, cardigan, collar, buttons, zipper, hoodie, pattern, logo\"); expression words added: \"tired, half-lidded eyes, slight eye bags, slumped relaxed look\". rdbtAnima, 896x1152, euler_ancestral normal, 30 steps, CFG 5. Sweater PASS. Identity PASS: head like his render, teal eyes, dark roots, hoop ear ring, 2 brow piercings; heavy bags. imgqa: red rim 0.0%, ccip 0.007 (pass); hair touches the top edge, as in his render. Second image: cut-out (isnet-anime + matte_refine)."
+  },
+  {
+   "id": "08-tired-2",
+   "label": "8. tired-2",
+   "image": "art/candidates/portraits/carina-faces-2/cf2-tired-2.webp",
+   "images": [
+    "art/candidates/portraits/carina-faces-2/cf2-tired-2-cut.webp"
+   ],
+   "note": "Seed 390617761. His prompt with only the sweater changed to \"tight black ribbed knit sweater, fine vertical ribbing, round crew neckline, long sleeves, plain, no collar, no pattern\" (negative + \"v-neck, turtleneck, cardigan, collar, buttons, zipper, hoodie, pattern, logo\"); expression words added: \"tired, half-lidded eyes, slight eye bags, slumped relaxed look\". rdbtAnima, 896x1152, euler_ancestral normal, 30 steps, CFG 5. Sweater PASS. Identity DRIFT: head turned the other way, no brow piercings, very dark bags. imgqa: red rim 0.0%, ccip 0.01 (pass); hair touches the top edge, as in his render. Second image: cut-out (isnet-anime + matte_refine)."
+  },
+  {
+   "id": "09-tired-3",
+   "label": "9. tired-3",
+   "image": "art/candidates/portraits/carina-faces-2/cf2-tired-3.webp",
+   "images": [
+    "art/candidates/portraits/carina-faces-2/cf2-tired-3-cut.webp"
+   ],
+   "note": "Seed 390617762. His prompt with only the sweater changed to \"tight black ribbed knit sweater, fine vertical ribbing, round crew neckline, long sleeves, plain, no collar, no pattern\" (negative + \"v-neck, turtleneck, cardigan, collar, buttons, zipper, hoodie, pattern, logo\"); expression words added: \"tired, half-lidded eyes, slight eye bags, slumped relaxed look\". rdbtAnima, 896x1152, euler_ancestral normal, 30 steps, CFG 5. Sweater PASS. Identity DRIFT: only 1 brow piercing visible, very dark bags. imgqa: red rim 0.0%, ccip 0.006 (pass); hair touches the top edge, as in his render. Second image: cut-out (isnet-anime + matte_refine)."
+  }
+ ]
+}

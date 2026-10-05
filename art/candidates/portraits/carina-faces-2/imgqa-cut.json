@@ -1,0 +1,617 @@
+{
+ "character": "carina",
+ "ref": "art/candidates/portraits/carina-9-jorgen/jorgen-r261005-203349-2fd-1.webp",
+ "face_box_game": null,
+ "ref_face_detected": [
+  237.0,
+  173.0,
+  577.0,
+  514.0
+ ],
+ "thresholds": {
+  "redrim": [
+   0.02,
+   0.08
+  ],
+  "glasses_cover": [
+   0.87,
+   0.85
+  ],
+  "glasses_worst": [
+   0.7,
+   0.5
+  ],
+  "glasses_dE": [
+   8,
+   15
+  ],
+  "matte_frame": [
+   0.05,
+   0.12
+  ],
+  "matte_holes": [
+   0,
+   3
+  ],
+  "headroom": [
+   0.03,
+   0.01
+  ],
+  "zoom": [
+   0.04,
+   9
+  ],
+  "top": [
+   0.01,
+   9
+  ],
+  "eyes": [
+   0.06,
+   0.12
+  ],
+  "ccip": [
+   0.05,
+   0.09
+  ]
+ },
+ "images": [
+  {
+   "path": "art/candidates/portraits/carina-faces-2/cf2-neutral-asis-1-cut.webp",
+   "kind": "cut-out",
+   "size": [
+    896,
+    1152
+   ],
+   "face": [
+    246.0,
+    171.0,
+    544.0,
+    500.0
+   ],
+   "eyes": [
+    [
+     309.0,
+     320.5
+    ],
+    [
+     413.5,
+     271.5
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0023
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for carina"
+   },
+   "matte": {
+    "source": "art/candidates/portraits/carina-faces-2/cf2-neutral-asis-1.webp",
+    "holes": 0,
+    "holes_px": 22,
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.009,
+    "zoom": 1.036,
+    "top": 0.0,
+    "bottom_short": 0.0,
+    "hair_top_game": 6,
+    "hair_top_ref": 13,
+    "crop": [
+     2.3,
+     4.1,
+     866.8,
+     1115.5
+    ],
+    "eyes": -0.001,
+    "tilt": -4.5,
+    "status": "fail"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.009,
+    "ssim": 0.21
+   },
+   "status": "fail"
+  },
+  {
+   "path": "art/candidates/portraits/carina-faces-2/cf2-neutral-asis-2-cut.webp",
+   "kind": "cut-out",
+   "size": [
+    896,
+    1152
+   ],
+   "face": [
+    357.0,
+    167.0,
+    672.0,
+    502.0
+   ],
+   "eyes": [
+    [
+     486.0,
+     274.0
+    ],
+    [
+     605.5,
+     315.0
+    ]
+   ],
+   "redrim": {
+    "status": "fail",
+    "value": 0.1074
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for carina"
+   },
+   "matte": {
+    "source": "art/candidates/portraits/carina-faces-2/cf2-neutral-asis-2.webp",
+    "holes": 0,
+    "holes_px": 27,
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.005,
+    "zoom": 1.018,
+    "top": 0.003,
+    "bottom_short": 0.0,
+    "hair_top_game": 9,
+    "hair_top_ref": 13,
+    "crop": [
+     114.7,
+     -3.0,
+     994.9,
+     1128.8
+    ],
+    "eyes": 0.0,
+    "tilt": 39.5,
+    "status": "fail"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.011,
+    "ssim": 0.115
+   },
+   "status": "fail"
+  },
+  {
+   "path": "art/candidates/portraits/carina-faces-2/cf2-neutral-asis-3-cut.webp",
+   "kind": "cut-out",
+   "size": [
+    896,
+    1152
+   ],
+   "face": [
+    267.0,
+    165.0,
+    589.0,
+    498.0
+   ],
+   "eyes": [
+    [
+     337.0,
+     310.0
+    ],
+    [
+     458.5,
+     272.0
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for carina"
+   },
+   "matte": {
+    "source": "art/candidates/portraits/carina-faces-2/cf2-neutral-asis-3.webp",
+    "holes": 0,
+    "holes_px": 110,
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.002,
+    "zoom": 1.024,
+    "top": 0.004,
+    "bottom_short": 0.0,
+    "hair_top_game": 6,
+    "hair_top_ref": 13,
+    "crop": [
+     30.5,
+     -3.9,
+     905.5,
+     1121.0
+    ],
+    "eyes": -0.002,
+    "tilt": 3.2,
+    "status": "fail"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.004,
+    "ssim": 0.358
+   },
+   "status": "fail"
+  },
+  {
+   "path": "art/candidates/portraits/carina-faces-2/cf2-surprised-1-cut.webp",
+   "kind": "cut-out",
+   "size": [
+    896,
+    1152
+   ],
+   "face": [
+    239.0,
+    165.0,
+    550.0,
+    511.0
+   ],
+   "eyes": [
+    [
+     302.0,
+     322.0
+    ],
+    [
+     409.5,
+     275.0
+    ]
+   ],
+   "redrim": {
+    "status": "warn",
+    "value": 0.0213
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for carina"
+   },
+   "matte": {
+    "source": "art/candidates/portraits/carina-faces-2/cf2-surprised-1.webp",
+    "holes": 0,
+    "holes_px": 32,
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.014,
+    "zoom": 0.986,
+    "top": 0.009,
+    "bottom_short": 0.005,
+    "hair_top_game": 26,
+    "hair_top_ref": 13,
+    "crop": [
+     -18.5,
+     -10.5,
+     890.7,
+     1158.4
+    ],
+    "eyes": 0.005,
+    "tilt": -3.0,
+    "status": "warn"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.007,
+    "ssim": 0.321
+   },
+   "status": "warn"
+  },
+  {
+   "path": "art/candidates/portraits/carina-faces-2/cf2-surprised-2-cut.webp",
+   "kind": "cut-out",
+   "size": [
+    896,
+    1152
+   ],
+   "face": [
+    347.0,
+    160.0,
+    673.0,
+    504.0
+   ],
+   "eyes": [
+    [
+     486.0,
+     270.5
+    ],
+    [
+     607.5,
+     313.0
+    ]
+   ],
+   "redrim": {
+    "status": "fail",
+    "value": 0.0898
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for carina"
+   },
+   "matte": {
+    "source": "art/candidates/portraits/carina-faces-2/cf2-surprised-2.webp",
+    "holes": 0,
+    "holes_px": 28,
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.01,
+    "zoom": 0.991,
+    "top": 0.012,
+    "bottom_short": 0.0,
+    "hair_top_game": 25,
+    "hair_top_ref": 13,
+    "crop": [
+     99.4,
+     -14.5,
+     1003.3,
+     1147.6
+    ],
+    "eyes": 0.002,
+    "tilt": 39.9,
+    "status": "fail"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.013,
+    "ssim": 0.134
+   },
+   "status": "fail"
+  },
+  {
+   "path": "art/candidates/portraits/carina-faces-2/cf2-surprised-3-cut.webp",
+   "kind": "cut-out",
+   "size": [
+    896,
+    1152
+   ],
+   "face": [
+    267.0,
+    160.0,
+    584.0,
+    503.0
+   ],
+   "eyes": [
+    [
+     335.0,
+     300.0
+    ],
+    [
+     462.5,
+     276.5
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0013
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for carina"
+   },
+   "matte": {
+    "source": "art/candidates/portraits/carina-faces-2/cf2-surprised-3.webp",
+    "holes": 0,
+    "holes_px": 94,
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.007,
+    "zoom": 0.994,
+    "top": 0.012,
+    "bottom_short": 0.0,
+    "hair_top_game": 21,
+    "hair_top_ref": 13,
+    "crop": [
+     16.1,
+     -14.0,
+     917.4,
+     1144.7
+    ],
+    "eyes": -0.007,
+    "tilt": 10.1,
+    "status": "fail"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.004,
+    "ssim": 0.227
+   },
+   "status": "fail"
+  },
+  {
+   "path": "art/candidates/portraits/carina-faces-2/cf2-tired-1-cut.webp",
+   "kind": "cut-out",
+   "size": [
+    896,
+    1152
+   ],
+   "face": [
+    232.0,
+    166.0,
+    557.0,
+    510.0
+   ],
+   "eyes": [
+    [
+     300.0,
+     330.5
+    ],
+    [
+     417.0,
+     285.5
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0013
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for carina"
+   },
+   "matte": {
+    "source": "art/candidates/portraits/carina-faces-2/cf2-tired-1.webp",
+    "holes": 0,
+    "holes_px": 207,
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.0,
+    "zoom": 0.991,
+    "top": 0.007,
+    "bottom_short": 0.001,
+    "hair_top_game": 8,
+    "hair_top_ref": 13,
+    "crop": [
+     -16.1,
+     -8.5,
+     887.8,
+     1153.6
+    ],
+    "eyes": 0.032,
+    "tilt": -0.5,
+    "status": "fail"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.009,
+    "ssim": 0.279
+   },
+   "status": "fail"
+  },
+  {
+   "path": "art/candidates/portraits/carina-faces-2/cf2-tired-2-cut.webp",
+   "kind": "cut-out",
+   "size": [
+    896,
+    1152
+   ],
+   "face": [
+    360.0,
+    160.0,
+    675.0,
+    504.0
+   ],
+   "eyes": [
+    [
+     482.0,
+     280.5
+    ],
+    [
+     606.5,
+     316.5
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0018
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for carina"
+   },
+   "matte": {
+    "source": "art/candidates/portraits/carina-faces-2/cf2-tired-2.webp",
+    "holes": 0,
+    "holes_px": 4,
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.004,
+    "zoom": 0.991,
+    "top": 0.012,
+    "bottom_short": 0.0,
+    "hair_top_game": 19,
+    "hair_top_ref": 13,
+    "crop": [
+     106.9,
+     -14.5,
+     1010.8,
+     1147.6
+    ],
+    "eyes": 0.022,
+    "tilt": 36.7,
+    "status": "fail"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.01,
+    "ssim": 0.115
+   },
+   "status": "fail"
+  },
+  {
+   "path": "art/candidates/portraits/carina-faces-2/cf2-tired-3-cut.webp",
+   "kind": "cut-out",
+   "size": [
+    896,
+    1152
+   ],
+   "face": [
+    268.0,
+    167.0,
+    590.0,
+    517.0
+   ],
+   "eyes": [
+    [
+     342.5,
+     319.5
+    ],
+    [
+     475.0,
+     297.5
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0
+   },
+   "glasses": {
+    "status": "pass",
+    "value": null,
+    "note": "no glasses reference for carina"
+   },
+   "matte": {
+    "source": "art/candidates/portraits/carina-faces-2/cf2-tired-3.webp",
+    "holes": 0,
+    "holes_px": 16,
+    "status": "pass"
+   },
+   "framing": {
+    "headroom": 0.006,
+    "zoom": 0.974,
+    "top": 0.009,
+    "bottom_short": 0.017,
+    "hair_top_game": 17,
+    "hair_top_ref": 13,
+    "crop": [
+     11.3,
+     -10.6,
+     930.9,
+     1171.8
+    ],
+    "eyes": 0.024,
+    "tilt": 11.2,
+    "status": "fail"
+   },
+   "drift": {
+    "status": "pass",
+    "ccip": 0.006,
+    "ssim": 0.148
+   },
+   "status": "fail"
+  }
+ ]
+}
