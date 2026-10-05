@@ -17,6 +17,7 @@ Checked against game3d/js/lang.js. Kind: a `phrase` is a greeting Eric can say t
 | `nomitai` | 飲みたい | nomitai | I want to drink | phrase |
 | `mitai` | 見たい | mitai | I want to see | phrase |
 | `ikitai` | 行きたい | ikitai | I want to go | phrase |
+| `koko` | ここ | koko | here | phrase |
 | `matte` | 待って | matte | wait | command |
 | `akete` | 開けて | akete | open | command |
 | `ugoite` | 動いて | ugoite | work, move | command |
@@ -71,6 +72,10 @@ Day 1 teaches nine words, in the order a player meets them. Who teaches each, an
 The [day-2 set](../../game3d/story/day2/README.md) keeps its four records in `story/day2/words.js`; game3d/js/lang.js adds them to its words, so they are in the table above. Who teaches them, and in which node, is in [welcome.md](stories/day2/welcome.md) and [visits.md](stories/day2/visits.md).
 
 The single new pattern is the **-tai form**, saying what you want to do yourself. The Words panel pairs 食べたい with 食べる (taberu, to eat), 飲みたい with 飲む (nomu, to drink), 見たい with 見る (miru, to see), and 行きたい with 行く (iku, to go), with one line on what -tai does over the phrases once one is known. Only tabetai is required; the other three are optional reinforcement in the gathering or nearby encounters. All start unknown, become known through typing, and are things to say to people. None commands a machine. Their clips (eric-<id> and word-<id> for each) are in the voice manifest, still to be made; until then the words have no play button and Eric says them silently.
+
+## Taught on day 3
+
+The [day-3 set](../../game3d/story/day3/README.md) keeps its one new record, `koko` (ここ, here), in `story/day3/words.js`; lang.js adds it to its words. It is taught by typing at the plaza's map, whose handwritten sticker by the arrow says ここ (story/day3/plaza.js `d3_map`, `d3_koko_word`; optional), and said to the map afterwards. The Words panel calls it a place word. At the gym's printer the attendant says the known command 出して (dashite) to the machine out of habit; a player who doesn't know it yet can learn it there by typing, after the sheet is out (`d3_dashite_word`). Clips: eric-koko and word-koko in the voice manifest.
 
 ## Labels on the ticket system
 

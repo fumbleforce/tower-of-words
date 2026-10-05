@@ -47,6 +47,7 @@ import { dust, lightPool } from './life.js';
 import { route } from './route.js';
 import { trainDiscoveries } from '../train/discoveries.js';
 import { trainDay2 } from './train-day2.js';
+import { day3Place } from './day3/place.js';
 import { PLAYER_ID, isPlayer } from '../mc.js';
 const WALK_X = -10.4; // the walkway out: past the car's left end, south (CHUNKS.train turn 270) toward the shed's stairs
 
@@ -794,6 +795,7 @@ export async function trainPlace(game) {
   }
 
   // ---- people ids for the story ----
+  const d3 = day3Place(game, 'train', { root: car.root, ids: ['guard'] }); // day 3: the guard on the platform
   const people = {
     kuroda,
     aoi,
@@ -804,6 +806,7 @@ export async function trainPlace(game) {
     bun,
     youth,
     tama,
+    guard: d3.people.guard,
   };
   // what the passengers can show Eric: their phone and bag hooks (train/discoveries.js)
   const finds = trainDiscoveries(game, { people, car: car.root, nav, SEAT_Y });
@@ -856,6 +859,7 @@ export async function trainPlace(game) {
     LZ,
     DOOR_X,
     WALK_X,
+    d3,
   });
   const things = {
     aoi: {
@@ -983,6 +987,7 @@ export async function trainPlace(game) {
       anchor: carPt(WALK_X + 0.3, 1.3, LZ + 1.9),
       ...day2.thing('station_exit'),
     },
+    guard: { ...PLACE_DETAILS.train.things.guard, ...d3.thing('guard') },
   };
   const zones = {
     // out on the platform, his body clear of the doorway (it used to start just inside the car: Jørgen was caught in
@@ -1441,6 +1446,7 @@ export async function trainPlace(game) {
       printout: finds.hooks.printout,
       stationSetup: day2.hooks.stationSetup,
       doorTest: day2.hooks.doorTest,
+      stationSignoff: day2.hooks.stationSignoff,
     },
     snapshotState() {
       return {

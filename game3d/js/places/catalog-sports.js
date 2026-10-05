@@ -8,6 +8,7 @@ export const SPORTS_DETAILS = {
     pool: { label: 'Pool', kind: 'thing', verb: 'Go in' },
     court_display: { label: 'Score display', kind: 'thing small' },
     ball_basket: { label: 'Ball basket', kind: 'thing small' },
+    rei: { label: 'Tennis player', kind: 'person' }, // day 3, the afternoon: serves on the west court
   },
   spots: [
     'north_entry',
@@ -24,7 +25,7 @@ export const SPORTS_DETAILS = {
   nooks: ['sports_courtside', 'sports_grove_bench', 'court_corner'], // docs/game/places.md, "Nooks"
   seats: ['court_bench'],
   zones: ['north_exit', 'east_exit', 'west_exit'],
-  people: [],
+  people: ['rei'],
   hooks: [],
 };
 
@@ -32,6 +33,12 @@ export const SPORTS_DETAILS = {
 export const POOL_DETAILS = {
   things: {
     changing_room: { label: 'To the changing room', kind: 'thing', verb: 'Go' },
+    // day 3, the evening: the swimming club's last outdoor swim (story/clubs.js, story/day3/pool.js)
+    emi: { label: 'Emi', kind: 'person' },
+    kuro: { label: 'Receptionist', kind: 'person' },
+    attendant: { label: 'Attendant', kind: 'person' },
+    member: { label: 'Club member', kind: 'person' },
+    pool_goggles: { label: 'Goggles', kind: 'thing small' },
   },
   spots: [
     'deck_in',
@@ -46,8 +53,8 @@ export const POOL_DETAILS = {
   nooks: ['pool_fence_corner', 'pool_lost_property'], // docs/game/places.md, "Nooks"
   seats: ['deck_bench_n', 'deck_bench_s'],
   zones: [],
-  people: [],
-  hooks: [],
+  people: ['emi', 'kuro', 'attendant', 'member'],
+  hooks: ['poolSession'],
 };
 
 // The gym's corner inside its main door (places/gym.js), from the sports lane.
@@ -58,11 +65,16 @@ export const GYM_DETAILS = {
     gym_printer: { label: 'Printer', kind: 'thing small' },
     desk_fan: { label: 'Desk fan', kind: 'thing small' },
     gym_board: { label: 'Club board', kind: 'thing' },
+    // day 3: the attendant at the desk, Mori's booking visit, Emi and Kuro (story/day3/gym.js, story/clubs.js)
+    attendant: { label: 'Attendant', kind: 'person' },
+    mori: { label: 'Mr. Mori', kind: 'person' },
+    emi: { label: 'Emi', kind: 'person' },
+    kuro: { label: 'Receptionist', kind: 'person' },
   },
   spots: ['gym_in', 'gym_desk', 'gym_benches', 'gym_meeting', 'gym_court', 'gym_store', 'gym_lockers'],
   nooks: ['gym_store', 'gym_lockers'], // docs/game/places.md, "Nooks"
   seats: ['gym_bench_n', 'gym_bench_s'],
   zones: [],
-  people: [],
-  hooks: [],
+  people: ['attendant', 'mori', 'emi', 'kuro'],
+  hooks: ['bookingRepair'],
 };

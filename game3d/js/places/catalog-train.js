@@ -94,6 +94,8 @@ export const TRAIN_DETAILS = {
     // day 2, the car standing between runs: the door test panel by the right-hand doors, and the way back
     'door_test': { 'label': 'Door test panel', 'kind': 'thing', 'verb': 'Test' },
     'station_exit': { 'label': 'To the station', 'kind': 'thing', 'verb': 'Go' },
+    // day 3: the guard on the platform for the witnessed check (places/day3/station.js)
+    'guard': { 'label': 'Guard', 'kind': 'person' },
   },
   'spots': [
     'aisle',
@@ -109,7 +111,7 @@ export const TRAIN_DETAILS = {
   ],
   'seats': ['seat_aoi', 'seat_far_r', 'seat_near_l', 'seat_near_r', 'seat_mio'],
   'zones': ['door_zone', 'free_seat', 'platform_exit'],
-  'people': ['kuroda', 'aoi', 'reader', 'rei', 'music', 'stander', 'bun', 'youth', 'tama'],
+  'people': ['kuroda', 'aoi', 'reader', 'rei', 'music', 'stander', 'bun', 'youth', 'tama', 'guard'],
   'hooks': [
     'announce',
     'arrive',
@@ -129,5 +131,6 @@ export const TRAIN_DETAILS = {
     'printout',
     'stationSetup',
     'doorTest',
+    'stationSignoff',
   ],
 };

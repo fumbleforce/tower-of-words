@@ -1,4 +1,5 @@
 import * as DAY2 from '../story/day2/words.js';
+import * as DAY3 from '../story/day3/words.js';
 import * as TICKETS from './tickets/words.js';
 import { MC } from './mc.js';
 // The few Japanese words in day one. Every one is shown with its reading and English, every time.
@@ -44,6 +45,8 @@ export const WORDS = {
   kotodama: { ja: '言霊', ro: 'kotodama', en: 'words with power in them' },
   // day 2's words (story/day2/words.js): phrases, unknown until typed there
   ...DAY2.WORDS,
+  // day 3's (story/day3/words.js): koko, typed at the plaza's map
+  ...DAY3.WORDS,
   // the ticket system's labels (tickets/words.js): learned by tapping them in the app, never said
   ...TICKETS.WORDS,
 };
@@ -91,6 +94,7 @@ export const BASE = {
   ohayo: { form: 'set', note: 'A fixed greeting. Gozaimasu makes it polite; with friends, just ohayō.' },
   yoroshiku: { form: 'masu', lead: 'onegaishimasu: ', ja: 'お願いする', ro: 'onegai suru', en: 'to ask a favour' },
   sumimasen: { form: 'set', note: 'A fixed phrase. The -masen ending is the polite way to say "not".' },
+  koko: { form: 'set', note: 'A place word: koko is here, by the one speaking.' },
   ...DAY2.BASE,
 };
 const FORM_NAME = { te: '-te form', masu: 'polite -masu form', ...DAY2.FORM_NAME };
@@ -130,12 +134,13 @@ const ICON = {
     '<path d="M7 4h10l-1.2 15.2a2 2 0 0 1-2 1.8h-3.6a2 2 0 0 1-2-1.8z"/><path d="M7.4 9h9.2"/><path d="M13 4l2-2"/>',
   mitai: '<path d="M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6-9.5-6-9.5-6z"/><circle cx="12" cy="12" r="2.6"/>',
   ikitai: '<path d="M4 12h13"/><path d="M13 7l5 5-5 5"/><path d="M4 7v10"/>',
+  koko: '<path d="M12 21s-6.5-6.2-6.5-11a6.5 6.5 0 0 1 13 0c0 4.8-6.5 11-6.5 11z"/><circle cx="12" cy="10" r="2.3"/>',
 };
 export function iconHTML(id, cls = 'wi') {
   return ICON[id] ? `<svg class="${cls}" viewBox="0 0 24 24" aria-hidden="true">${ICON[id]}</svg>` : '';
 }
 export const COMMANDS = ['matte', 'akete', 'kite', 'ugoite', 'irete', 'dashite', 'tomatte'];
-export const PHRASES = ['ohayo', 'yoroshiku', 'sumimasen', 'tabetai', 'nomitai', 'mitai', 'ikitai'];
+export const PHRASES = ['ohayo', 'yoroshiku', 'sumimasen', 'tabetai', 'nomitai', 'mitai', 'ikitai', 'koko'];
 export const SAYABLE = [...PHRASES, ...COMMANDS];
 
 // the words Eric has been taught in play (typed, `learn` or `offer`); nothing else counts as known

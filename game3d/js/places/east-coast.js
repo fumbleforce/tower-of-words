@@ -12,6 +12,7 @@ import { walkOut, walkIn } from './edge-walk.js';
 import { turningCam, followFit } from './turning-cam.js';
 import { roadClosure } from './closure.js';
 import { coastVisit } from './coast-visit.js';
+import { day3Place } from './day3/place.js';
 
 // The east coast (scenes/east-coast.js): the dorm row walked east from the east lane's dorm street, to the sea
 // terrace, the coast walk and the onsen's front; it also loads with ?place=east_coast. The onsen is shut for now
@@ -53,6 +54,7 @@ export async function eastCoastPlace(game) {
     west = w.exits.sports;
   const pool = roadClosure({ nav: w.nav, space: w.root }, west, (x, z) => inRect(x, z, west.zone));
   const visit = coastVisit(game, { w, K }); // day 2's lookout: Mr. Hamada and the view (coast-visit.js)
+  const d3 = day3Place(game, 'east_coast', { root: w.root, K, ids: ['emi', 'aoi'] }); // day 3: the sea terrace
   const things = {
     dorm_street: {
       ...PLACE_DETAILS.east_coast.things.dorm_street,
@@ -79,6 +81,8 @@ export async function eastCoastPlace(game) {
       enabled: () => game.runner.has('talk:lookout'),
     },
     kuroda: { ...PLACE_DETAILS.east_coast.things.kuroda, ...visit.thing('kuroda') },
+    emi: { ...PLACE_DETAILS.east_coast.things.emi, ...d3.thing('emi') },
+    aoi: { ...PLACE_DETAILS.east_coast.things.aoi, ...d3.thing('aoi') },
     onsen: {
       ...PLACE_DETAILS.east_coast.things.onsen,
       anchor: (v) => v.set(door.local[0], 1.95, door.local[1]),
@@ -115,12 +119,13 @@ export async function eastCoastPlace(game) {
       inner_court_bench: w.inner.bench,
     },
     seats: {},
-    people: { kuroda: visit.people.kuroda },
+    people: { kuroda: visit.people.kuroda, emi: d3.people.emi, aoi: d3.people.aoi },
     zones: {
       row_exit: (x, z) => inRect(x, z, out.zone),
       courts_exit: (x, z) => inRect(x, z, west.zone),
     },
     hooks: { coastVisit: visit.hooks.coastVisit },
+    day3: (a) => d3.setup(P, a),
     onDay: (day) => pool.sync(day),
     fit(aspect) {
       followFit(cam, w.nav, aspect, POSE.coast); // fitted at the coast's look, kept through the turns
@@ -130,6 +135,7 @@ export async function eastCoastPlace(game) {
       return rc.ray.intersectPlane(floor, point) ? point : null;
     },
     update(dt) {
+      d3.update(dt);
       const p = game.player.root.position;
       w.follow(p.x, p.z);
       turn.steer(p, dt);

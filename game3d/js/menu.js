@@ -11,11 +11,11 @@
 // for screenshots of each screen in isolation (game3d/tools/shell-shots.mjs).
 import { ui, sfx, unlockAudio, pauseAudio } from './ui.js';
 import { settings } from './settings.js';
-import { sim, PERIOD_NAMES } from './sim.js';
+import { sim, periodName } from './sim.js';
 import { startOnboarding, resetOnboarding } from './onboard.js';
 import { PLACE_NAMES } from './places/definitions.js';
 import { installGoalArrow } from './ui/goal-arrow.js';
-import { addDayTwo } from './ui/title-day2.js';
+import { addDayPicker } from './ui/title-days.js';
 import { poseTitleCamera, releaseTitleCamera, flightAt } from './ui/title-camera.js';
 import { snapshot, crossfade } from './places/crossfade.js';
 import { settingsView } from './ui/settings-view.js';
@@ -162,7 +162,7 @@ function buildTitle() {
   inner.querySelector('.btns')?.remove();
   inner.querySelector('.keys')?.remove();
   inner.append(menu);
-  addDayTwo(menu, ms, {
+  addDayPicker(menu, ms, {
     inProgress: () => !!slots.info('auto') && !slots.info('auto').data.ended,
     keys: { SAVE_KEY: KEYS.SAVE, AUTO_META: KEYS.AUTO_META, CONTINUE_FLAG: KEYS.CONTINUE },
   });
@@ -196,7 +196,7 @@ function refreshTitle() {
   mc.hidden = !latest;
   if (latest)
     mc.querySelector('.s').textContent =
-      `${latest.data?.day > 1 ? `Day ${latest.data.day} · ` : ''}${PLACE_NAMES[latest.place] || latest.place} · ${PERIOD_NAMES[latest.period] || ''}`;
+      `${latest.data?.day > 1 ? `Day ${latest.data.day} · ` : ''}${PLACE_NAMES[latest.place] || latest.place} · ${periodName(latest.period, latest.data?.day) || ''}`;
 }
 let titleShown = false;
 function onTitleShow() {
@@ -363,11 +363,7 @@ function setPaused(on) {
     });
     p.querySelector('.load').disabled = !slots.any();
     p.querySelector('.qload').disabled = !slots.info('quick');
-    p.querySelector('.where').textContent = [
-      PLACE_NAMES[g?.place?.name] || '',
-      PERIOD_NAMES[sim.period] || '',
-      sim.date,
-    ]
+    p.querySelector('.where').textContent = [PLACE_NAMES[g?.place?.name] || '', periodName(sim.period) || '', sim.date]
       .filter(Boolean)
       .join(' · ');
     p.querySelector('.pmenu').hidden = false;

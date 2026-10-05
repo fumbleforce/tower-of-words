@@ -8,12 +8,13 @@ import { sim } from '../sim.js';
 import { sfx, hum } from '../sfx.js';
 import { glide, walkRig } from '../move.js';
 import { rbox, mat, emissive, textTexture, plane } from '../props.js';
+import { stationSignoff } from './day3/signoff.js';
 
 // ctx: what the day-1 place keeps to itself: { st, station, setDoors, car, cam, nav, people, kitty, kb, bagObjs,
-// props: [cup, folder, laptop, foodBag], LZ, DOOR_X, WALK_X }
+// props: [cup, folder, laptop, foodBag], LZ, DOOR_X, WALK_X, d3: day 3's part (places/day3/place.js, the guard) }
 export function trainDay2(game, ctx) {
   let P = null;
-  const { st, station, setDoors, car, cam, nav, people, kitty, kb, bagObjs, props, LZ, DOOR_X, WALK_X } = ctx;
+  const { st, station, setDoors, car, cam, nav, people, kitty, kb, bagObjs, props, LZ, DOOR_X, WALK_X, d3 } = ctx;
   const later = () => sim.day > 1;
   // the tester: a grey case on legs on the platform, a lamp on top and a small screen facing the platform
   const TX = -DOOR_X - 0.85,
@@ -167,10 +168,29 @@ export function trainDay2(game, ctx) {
       cam.release();
     },
   };
+  // day 3: the guard witnesses the last check and signs the report off (places/day3/signoff.js)
+  const signoff = stationSignoff(game, {
+    cast: d3.cast,
+    tester,
+    doorTest: () => hooks.doorTest(),
+    closeDoors(now) {
+      if (!now) return P.hooks.doorsClose({});
+      st.slide = null;
+      st.door = st.doorWant = 0;
+      setDoors(0);
+    },
+    TX,
+    TZ,
+    WALK_X,
+    LZ,
+  });
+  hooks.stationSignoff = signoff.hook;
+  d3.also(() => signoff.arrange());
   // once the place is made: the held doors' motor hums until they're let go (the voice experiment), the walk in from
   // the walkway, and the tester's light kept in the save
   function install(place) {
     P = place;
+    P.day3 = (o) => d3.setup(P, o);
     doorsOpen = P.hooks.doorsOpen;
     doorsHold = P.hooks.doorsHold;
     P.hooks.doorsHold = async (a = {}) => {

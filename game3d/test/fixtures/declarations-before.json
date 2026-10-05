@@ -284,6 +284,10 @@
           "label": "To the station",
           "kind": "thing",
           "verb": "Go"
+        },
+        "guard": {
+          "label": "Guard",
+          "kind": "person"
         }
       },
       "spots": [
@@ -319,7 +323,8 @@
         "stander",
         "bun",
         "youth",
-        "tama"
+        "tama",
+        "guard"
       ],
       "hooks": [
         "announce",
@@ -339,7 +344,8 @@
         "shopBag",
         "printout",
         "stationSetup",
-        "doorTest"
+        "doorTest",
+        "stationSignoff"
       ]
     },
     "gate": {
@@ -508,7 +514,8 @@
         "catTo",
         "newsletter",
         "liftOpen",
-        "liftClose"
+        "liftClose",
+        "monitorRepair"
       ]
     },
     "forecourt": {
@@ -602,6 +609,11 @@
           "label": "To the street",
           "kind": "thing",
           "verb": "Go"
+        },
+        "tama": {
+          "label": "Tama",
+          "verb": "Pet",
+          "kind": "person small"
         }
       },
       "spots": [
@@ -617,7 +629,9 @@
         "passage",
         "street_exit"
       ],
-      "people": [],
+      "people": [
+        "tama"
+      ],
       "hooks": [
         "mailbox203"
       ]
@@ -671,6 +685,22 @@
           "label": "Bench",
           "kind": "thing",
           "verb": "Sit"
+        },
+        "kuroda": {
+          "label": "Mr. Hamada",
+          "kind": "person"
+        },
+        "aoi": {
+          "label": "Woman from the train",
+          "kind": "person"
+        },
+        "kuro": {
+          "label": "Receptionist",
+          "kind": "person"
+        },
+        "rei": {
+          "label": "Tennis player",
+          "kind": "person"
         }
       },
       "spots": [
@@ -696,7 +726,11 @@
       ],
       "people": [
         "mori",
-        "kenji"
+        "kenji",
+        "kuroda",
+        "aoi",
+        "kuro",
+        "rei"
       ],
       "hooks": [
         "partySetup",
@@ -856,6 +890,14 @@
           "label": "Mr. Hamada",
           "kind": "person"
         },
+        "emi": {
+          "label": "Emi",
+          "kind": "person"
+        },
+        "aoi": {
+          "label": "Woman from the train",
+          "kind": "person"
+        },
         "onsen": {
           "label": "Onsen",
           "kind": "thing",
@@ -885,7 +927,9 @@
         "courts_exit"
       ],
       "people": [
-        "kuroda"
+        "kuroda",
+        "emi",
+        "aoi"
       ],
       "hooks": [
         "coastVisit"
@@ -913,6 +957,10 @@
         "commons_board": {
           "label": "Notice board",
           "kind": "thing"
+        },
+        "kenji": {
+          "label": "Kenji",
+          "kind": "person"
         }
       },
       "spots": [
@@ -932,7 +980,9 @@
         "commons_sofa"
       ],
       "zones": [],
-      "people": [],
+      "people": [
+        "kenji"
+      ],
       "hooks": []
     },
     "sports": {
@@ -969,6 +1019,10 @@
         "ball_basket": {
           "label": "Ball basket",
           "kind": "thing small"
+        },
+        "rei": {
+          "label": "Tennis player",
+          "kind": "person"
         }
       },
       "spots": [
@@ -996,7 +1050,9 @@
         "east_exit",
         "west_exit"
       ],
-      "people": [],
+      "people": [
+        "rei"
+      ],
       "hooks": []
     },
     "pool": {
@@ -1005,6 +1061,26 @@
           "label": "To the changing room",
           "kind": "thing",
           "verb": "Go"
+        },
+        "emi": {
+          "label": "Emi",
+          "kind": "person"
+        },
+        "kuro": {
+          "label": "Receptionist",
+          "kind": "person"
+        },
+        "attendant": {
+          "label": "Attendant",
+          "kind": "person"
+        },
+        "member": {
+          "label": "Club member",
+          "kind": "person"
+        },
+        "pool_goggles": {
+          "label": "Goggles",
+          "kind": "thing small"
         }
       },
       "spots": [
@@ -1026,8 +1102,15 @@
         "deck_bench_s"
       ],
       "zones": [],
-      "people": [],
-      "hooks": []
+      "people": [
+        "emi",
+        "kuro",
+        "attendant",
+        "member"
+      ],
+      "hooks": [
+        "poolSession"
+      ]
     },
     "gym": {
       "things": {
@@ -1051,6 +1134,22 @@
         "gym_board": {
           "label": "Club board",
           "kind": "thing"
+        },
+        "attendant": {
+          "label": "Attendant",
+          "kind": "person"
+        },
+        "mori": {
+          "label": "Mr. Mori",
+          "kind": "person"
+        },
+        "emi": {
+          "label": "Emi",
+          "kind": "person"
+        },
+        "kuro": {
+          "label": "Receptionist",
+          "kind": "person"
         }
       },
       "spots": [
@@ -1071,8 +1170,15 @@
         "gym_bench_s"
       ],
       "zones": [],
-      "people": [],
-      "hooks": []
+      "people": [
+        "attendant",
+        "mori",
+        "emi",
+        "kuro"
+      ],
+      "hooks": [
+        "bookingRepair"
+      ]
     },
     "office_quarter": {
       "things": {
@@ -1334,6 +1440,20 @@
           "label": "To the shop street",
           "kind": "thing",
           "verb": "Go"
+        },
+        "aoi": {
+          "label": "Woman from the train",
+          "kind": "person"
+        },
+        "board_map": {
+          "label": "Map",
+          "kind": "thing small",
+          "verb": "Look"
+        },
+        "tama": {
+          "label": "Tama",
+          "verb": "Pet",
+          "kind": "person small"
         }
       },
       "spots": [
@@ -1355,10 +1475,13 @@
         "shop_walk"
       ],
       "people": [
-        "canteen_worker"
+        "canteen_worker",
+        "aoi",
+        "tama"
       ],
       "hooks": [
-        "canteenChair"
+        "canteenChair",
+        "boardVisit"
       ]
     },
     "office": {

@@ -11,6 +11,8 @@ import { snapshotPeople, restorePeople } from './saved-people.js';
 import { walkOut, walkIn } from './edge-walk.js';
 import { canteenClosing } from './canteen-closing.js';
 import { hasNotices, readNotices } from '../clubs/index.js';
+import { day3Place } from './day3/place.js';
+import { plazaBoard } from './day3/board.js';
 
 // The fountain plaza: a side trip east of the forecourt in the morning, and on the walk home after work, with the
 // lane on east into the east lane in the morning and to the dorm courtyard after work. Down the cross walk, the south
@@ -20,6 +22,9 @@ export async function plazaPlace(game) {
   const cam = new RoomCam(w.camera); // the forecourt's camera, so the walk between them keeps its angle
   const floor = new THREE.Plane(new THREE.Vector3(0, 1, 0), 0);
   const canteen = canteenClosing(game, w.root, w.nav, w.chairs); // after work: the terrace closing
+  // day 3: Aoi at the board in the morning, Tama in the shade at lunch, the map beside the board (places/day3/)
+  const d3 = day3Place(game, 'plaza', { root: w.root, K, ids: ['aoi', 'tama'] });
+  const board = plazaBoard(game, { w, root: w.root, nav: w.nav, cast: d3.cast });
   const spots = {
     office_entry: w.arriveIn,
     fountain_edge: w.fountainEdge,
@@ -94,6 +99,9 @@ export async function plazaPlace(game) {
       spot: () => w.shopWalk,
       face: () => w.shopEdge,
     },
+    aoi: { ...PLACE_DETAILS.plaza.things.aoi, ...d3.thing('aoi') },
+    board_map: { ...PLACE_DETAILS.plaza.things.board_map, ...board.thing(), anchor: (v) => board.thing().anchor(v) },
+    tama: { ...PLACE_DETAILS.plaza.things.tama, ...d3.thing('tama') },
   };
   const P = {
     scene: w.scene,
@@ -110,13 +118,14 @@ export async function plazaPlace(game) {
     things,
     spots,
     seats: {},
-    people: { canteen_worker: canteen.person },
+    people: { canteen_worker: canteen.person, aoi: d3.people.aoi, tama: d3.people.tama },
     zones: {
       office_lane: (x, z) => x < w.westX && z > w.laneZ(x) - 2.4,
       dorm_exit: (x, z) => x > w.eastX && Math.abs(z - w.laneZ(x)) < 2.4,
       shop_walk: (x, z) => x > w.shopX && z > w.swZ,
     },
-    hooks: { canteenChair: canteen.hooks.canteenChair },
+    hooks: { canteenChair: canteen.hooks.canteenChair, boardVisit: board.hooks.boardVisit },
+    day3: (a) => d3.setup(P, a),
     pigeons: w.pigeons, // the flock by the fountain (scenes/outdoor/pigeons.js), for checks
     fit(aspect) {
       // both: the phone's camera distance (as in the forecourt and the dorm courtyard, so the walks between them
@@ -159,6 +168,7 @@ export async function plazaPlace(game) {
       w.update(dt, t);
       w.pigeons.update(dt, t, game.player.root.position);
       canteen.update(dt, t);
+      d3.update(dt);
       // heading east after work: build the dorm courtyard now, so the walk there needs no loading pause
       if (sim.period === 'evening' && game.player.root.position.x > 2.5 && !game.prepared.dorm_court)
         game.prepare?.('dorm_court');

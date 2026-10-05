@@ -35,8 +35,9 @@ export function officeDay2(game, { people, blobs }) {
     blobs.emi?.position.set(EMI.seat.x, 0.004, EMI.seat.z);
     show('mio', mio);
   }
-  function apply(state) {
-    if (state === 'afterWork' || flags.d2_shift_done) for (const id of ['emi', 'kenji', 'mori', 'mio']) show(id, false);
+  function apply(state, d = 2) {
+    if (state === 'afterWork' || flags.d2_shift_done || d > 2)
+      for (const id of ['emi', 'kenji', 'mori', 'mio']) show(id, false);
     else atDesks();
     for (const id of ['aoi', 'rei']) show(id, false);
   }
@@ -47,7 +48,7 @@ export function officeDay2(game, { people, blobs }) {
       const day = P.onDay;
       P.onDay = (d) => {
         day?.(d);
-        if (d > 1) apply('arrive');
+        if (d > 1) apply('arrive', d);
       };
     },
   };

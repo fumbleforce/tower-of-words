@@ -5,7 +5,7 @@
 // middle of a scene, that scene starts again from its first line, which the "Quick saved" notice says.
 //   const saving = createSaving({ game, grab, openLayer, closeLayer, trap, setPaused }); menu.js
 import { ui, sfx } from '../ui.js';
-import { sim, save as simSave, PERIOD_NAMES } from '../sim.js';
+import { sim, save as simSave, periodName } from '../sim.js';
 import { PLACE_NAMES } from '../places/definitions.js';
 import { createSlotStore, localKV, idbThumbs, KEYS } from './store.js';
 import { el } from '../ui/dom.js';
@@ -29,7 +29,8 @@ export const fmtTime = (t) => {
   return `${d.toLocaleDateString([], { day: 'numeric', month: 'short' })} ${hm}`;
 };
 export const placeName = (p) => PLACE_NAMES[p] || p || '';
-export const dayPeriod = (info) => [`Day ${info.day || 1}`, PERIOD_NAMES[info.period]].filter(Boolean).join(' · ');
+export const dayPeriod = (info) =>
+  [`Day ${info.day || 1}`, periodName(info.period, info.day || 1)].filter(Boolean).join(' · ');
 
 // what a slot shows under its place: the goal, else the line on screen
 function currentLine() {

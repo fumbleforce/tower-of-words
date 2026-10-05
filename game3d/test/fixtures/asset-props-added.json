@@ -1687,6 +1687,29 @@
     ]
   },
   {
+    "id_": "prop/plaza/board_map",
+    "kind": "prop",
+    "name": "Map",
+    "paths": [
+      "game3d/js/places/plaza.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "plaza.js things.board_map",
+    "place": "plaza",
+    "used": [
+      "Fountain plaza: tap target 'Map'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "plaza"
+    },
+    "tags": [
+      "in game",
+      "thing small"
+    ]
+  },
+  {
     "id_": "prop/plaza/canteen_table",
     "kind": "prop",
     "name": "Canteen table",
@@ -1868,6 +1891,29 @@
     "tags": [
       "in game",
       "thing"
+    ]
+  },
+  {
+    "id_": "prop/pool/pool_goggles",
+    "kind": "prop",
+    "name": "Goggles",
+    "paths": [
+      "game3d/js/places/pool.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "pool.js things.pool_goggles",
+    "place": "pool",
+    "used": [
+      "Pool deck: tap target 'Goggles'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "pool"
+    },
+    "tags": [
+      "in game",
+      "thing small"
     ]
   },
   {

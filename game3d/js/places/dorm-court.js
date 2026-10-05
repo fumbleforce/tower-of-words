@@ -11,6 +11,7 @@ import { glide } from '../move.js';
 import { PLACE_DETAILS } from './catalog.js';
 import { found } from '../finds/index.js';
 import { snapshotPeople, restorePeople } from './saved-people.js';
+import { day3Place } from './day3/place.js';
 
 // The dorm courtyard, on the walk home after work; it also loads with ?place=dorm_court.
 // Eric walks in through the hall doors himself; the trip out starts at the passage at the back of the hall and
@@ -34,6 +35,7 @@ export async function dormCourtPlace(game) {
   const mb = w.mailbox,
     mbState = { seen: false, open: false }; // the flyer found; the flap open (an inspection on screen)
   const inHall = (x, z) => x > w.bounds.hall[0] && x < w.bounds.hall[1] && z < w.door[1] - 0.2;
+  const d3 = day3Place(game, 'dorm_court', { root: w.root, K, ids: ['tama'] }); // day 3's afternoon: Tama asleep
   const things = {
     bath: {
       ...PLACE_DETAILS.dorm_court.things.bath,
@@ -73,6 +75,7 @@ export async function dormCourtPlace(game) {
       face: () => w.streetGate,
       enabled: () => game.runner.has('talk:street_gate'),
     },
+    tama: { ...PLACE_DETAILS.dorm_court.things.tama, ...d3.thing('tama') },
   };
   const b = w.bounds;
   const P = {
@@ -97,7 +100,8 @@ export async function dormCourtPlace(game) {
     findProps: { bakery_flyer: mb.flyer }, // what taking the flyer hides (finds/index.js)
     spots,
     seats: {},
-    people: {},
+    people: { tama: d3.people.tama },
+    day3: (a) => d3.setup(P, a),
     zones: {
       hall: inHall,
       passage: (x, z) => Math.abs(x - w.passage[0]) < 0.5 && z < w.passage[1] + 0.1,
@@ -153,6 +157,7 @@ export async function dormCourtPlace(game) {
     },
     update(dt) {
       bath.update(dt);
+      d3.update(dt);
     },
     leave() {
       bath.leave();

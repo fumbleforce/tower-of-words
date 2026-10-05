@@ -80,7 +80,7 @@ The game is not one walkthrough. After day 1 it won't be linear at all, so the s
 | [`evening-walk`](stories/evening-walk.md) | Optional encounters on the walk home. | built |
 | [`tama`](stories/tama.md) | Tama the calico cat, who goes where she likes and isn't there, says the guard. | built |
 
-The authored [day-2 storylines](stories/day2/README.md) have their own index and node tables. They await the loader, scene hooks and voices listed in the handoff.
+The [day-2 storylines](stories/day2/README.md) and [day 3](stories/day3/README.md) have their own indexes.
 
 ### Writing a storyline file
 

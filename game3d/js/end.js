@@ -3,12 +3,12 @@
 // the way back to the title. Photos come from menu.js (window.__shell.photos); faces from the portrait cut-outs.
 import { ui, FACE, PORTRAITS } from './ui.js';
 import { WORDS, COMMANDS, PHRASES, known, iconHTML } from './lang.js';
-import { sim, PERIOD_NAMES } from './sim.js';
+import { sim, periodName } from './sim.js';
 import { PLACE_NAMES } from './places/definitions.js';
 import { LAST_DAY, nextDaySave } from './days.js';
 import { MC, isPlayer } from './mc.js';
 
-const DAY_NAMES = { 1: 'Day one', 2: 'Day two' };
+const DAY_NAMES = { 1: 'Day one', 2: 'Day two', 3: 'Day three' };
 const SAVE_KEY = 'amakawa-day1-save',
   CONTINUE_FLAG = 'amakawa-continue'; // menu.js: a reload with this set continues straight into the save
 
@@ -46,7 +46,7 @@ export function endHTML(game, { photos = {}, outro, ticket } = {}) {
   const shots = where
     .map(
       (p) =>
-        `<figure class="shot"><img alt="" src="${photos[p].src}"><figcaption><b>${PLACE_NAMES[p]}</b><span>${esc(PERIOD_NAMES[photos[p].period] || '')}</span></figcaption></figure>`,
+        `<figure class="shot"><img alt="" src="${photos[p].src}"><figcaption><b>${PLACE_NAMES[p]}</b><span>${esc(periodName(photos[p].period) || '')}</span></figcaption></figure>`,
     )
     .join('');
   const met = [...sim.met].filter((id) => !isPlayer(id));
@@ -66,7 +66,7 @@ export function endHTML(game, { photos = {}, outro, ticket } = {}) {
   const ph = PHRASES.filter((id) => known.has(id)),
     cm = COMMANDS.filter((id) => known.has(id));
   return `<div class="card">
-    <header class="dayhead"><h2>${DAY_NAMES[sim.day] || 'Day ' + sim.day}</h2><p class="when">${esc(sim.date)} · ${esc(PERIOD_NAMES[sim.period] || 'After work')}</p></header>
+    <header class="dayhead"><h2>${DAY_NAMES[sim.day] || 'Day ' + sim.day}</h2><p class="when">${esc(sim.date)} · ${esc(periodName(sim.period) || 'After work')}</p></header>
     ${shots ? `<section class="today"><h3>Today</h3><div class="shots" style="--cols:${cols}">${shots}</div></section>` : ''}
     <div class="cols">
       ${people ? `<section class="met"><h3>People you met</h3><ul class="people">${people}</ul></section>` : ''}
