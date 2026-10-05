@@ -1733,6 +1733,52 @@
     ]
   },
   {
+    "id_": "prop/sports/ball_basket",
+    "kind": "prop",
+    "name": "Ball basket",
+    "paths": [
+      "game3d/js/places/sports.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "sports.js things.ball_basket",
+    "place": "sports",
+    "used": [
+      "Gym and pool: tap target 'Ball basket'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "sports"
+    },
+    "tags": [
+      "in game",
+      "thing small"
+    ]
+  },
+  {
+    "id_": "prop/sports/court_display",
+    "kind": "prop",
+    "name": "Score display",
+    "paths": [
+      "game3d/js/places/sports.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "sports.js things.court_display",
+    "place": "sports",
+    "used": [
+      "Gym and pool: tap target 'Score display'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "sports"
+    },
+    "tags": [
+      "in game",
+      "thing small"
+    ]
+  },
+  {
     "id_": "prop/sports/gym",
     "kind": "prop",
     "name": "Gym",

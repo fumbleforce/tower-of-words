@@ -4,12 +4,13 @@ import { sliced } from '../perf/slice.js';
 import { RoomCam } from '../cam.js';
 import { K } from '../scenes/office.js';
 import { eveningLight, EVENING_GRADE, MORNING_GRADE } from '../scenes/town.js';
-import { inRect } from '../scenes/sports/plan.js';
+import { inRect, pt } from '../scenes/sports/plan.js';
+import * as CP from '../scenes/sports/court-plan.js';
 import { POSES } from '../scenes/office-quarter/plan.js';
 import { PLACE_DETAILS } from './catalog.js';
 import { snapshotPeople, restorePeople } from './saved-people.js';
 import { walkOut, walkIn } from './edge-walk.js';
-import { turningCam, followFit } from './turning-cam.js';
+import { turningCam, followFit, frameFit, quietly } from './turning-cam.js';
 
 // The sports ground (scenes/sports.js): the north street walked on north from the east lane, past the back lane, to
 // the sports lane, the gym's front, the pool walk to the shower pavilion and the courts walk to the onsen path; it
@@ -29,6 +30,7 @@ const POSE = {
   lane: { yaw: -0.2, elev: deg(50) },
   pavilion: { yaw: -1.05, elev: deg(52) },
   courts: { yaw: -Math.PI / 2 - 0.25, elev: deg(58) },
+  court: { yaw: 0.18, elev: deg(60) }, // on the tennis court: up it from the south, the whole court framed
   street: POSES.street,
 };
 const smooth = THREE.MathUtils.smoothstep,
@@ -39,7 +41,9 @@ export async function sportsPlace(game) {
   const cam = new RoomCam({ ...w.camera, yaw: lane.yaw, elev: lane.elev });
   const floor = new THREE.Plane(new THREE.Vector3(0, 1, 0), 0);
   const T = w.turns;
+  const onCourt = (x, z) => inRect(x, z, CP.ON);
   const turn = turningCam(cam, (x, z) => {
+    if (onCourt(x, z)) return POSE.court;
     const v = 1 - smooth(z, T.pavilion.z[1], T.pavilion.z[0]),
       c = smooth(x, T.courts.x[0], T.courts.x[1]) * (1 - smooth(z, T.courts.z[1], T.courts.z[0]));
     const s = 1 - smooth(x, T.street.x[0], T.street.x[1]);
@@ -51,6 +55,10 @@ export async function sportsPlace(game) {
     on = w.exits.east_coast,
     west = w.exits.office_quarter;
   const pin = (v, id) => v.set(dk(id).local[0], 1.95, dk(id).local[1]);
+  const court = { display: pt(CP.DISPLAY), basket: pt(CP.BASKET), spots: CP.SPOTS };
+  const bench = pt(CP.SEAT.at);
+  let aspect = 1,
+    framed = false; // the camera holding the whole court
   const things = {
     // the ways out (plan.js EXITS)
     north_street: {
@@ -84,6 +92,20 @@ export async function sportsPlace(game) {
       spot: () => dk('pool').step,
       face: () => dk('pool').local,
     },
+    // on the west tennis court: the score display by the net and the ball basket (named for the tickets and the
+    // club's evenings; no pin until one uses them)
+    court_display: {
+      ...PLACE_DETAILS.sports.things.court_display,
+      anchor: (v) => v.set(court.display[0], 1.6, court.display[1]),
+      spot: () => court.spots.court_display,
+      face: () => court.display,
+    },
+    ball_basket: {
+      ...PLACE_DETAILS.sports.things.ball_basket,
+      anchor: (v) => v.set(court.basket[0], 1.4, court.basket[1]),
+      spot: () => [court.basket[0] + 0.75, court.basket[1]],
+      face: () => court.basket,
+    },
   };
   const P = {
     scene: w.scene,
@@ -102,8 +124,15 @@ export async function sportsPlace(game) {
       north_entry: w.in,
       sports_courtside: w.nooks.sports_courtside,
       sports_grove_bench: w.nooks.sports_grove_bench,
+      court_gate: CP.SPOTS.court_gate,
+      court_bench: CP.SPOTS.court_bench,
+      court_net: CP.SPOTS.court_net,
+      court_baseline_s: CP.SPOTS.court_baseline_s,
+      court_baseline_n: CP.SPOTS.court_baseline_n,
+      court_display: CP.SPOTS.court_display,
+      court_corner: CP.SPOTS.court_corner,
     },
-    seats: {},
+    seats: { court_bench: { x: bench[0], z: bench[1], top: CP.SEAT.top, ry: CP.SEAT.ry } },
     people: {},
     zones: {
       north_exit: (x, z) => inRect(x, z, back.zone),
@@ -111,8 +140,11 @@ export async function sportsPlace(game) {
       west_exit: (x, z) => inRect(x, z, west.zone),
     },
     hooks: {},
-    fit(aspect) {
-      followFit(cam, w.nav, aspect, lane); // fitted at the lane's look, kept through the turns
+    fit(a) {
+      aspect = a;
+      // fitted at the lane's look, kept through the turns; on the court, the whole court (both sides of the net)
+      if (framed) frameFit(cam, aspect, CP.FRAME, POSE.court);
+      else followFit(cam, w.nav, aspect, lane);
     },
     pick(rc) {
       const point = new THREE.Vector3();
@@ -123,6 +155,11 @@ export async function sportsPlace(game) {
       w.follow(p.x, p.z);
       w.update();
       turn.steer(p, dt);
+      // on and off the court the framing eases over (the follow spring takes the camera to the new frame)
+      if (onCourt(p.x, p.z) !== framed) {
+        framed = !framed;
+        quietly(cam, () => P.fit(aspect));
+      }
       // heading for a way out: build the next place now, so the walk there needs no loading pause
       const near = ([x0, x1, z0, z1], d = 6) => p.x > x0 - d && p.x < x1 + d && p.z > z0 - d && p.z < z1 + d;
       if (near(back.zone) && !game.prepared.east_lane) game.prepare?.('east_lane');

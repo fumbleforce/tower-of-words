@@ -9,6 +9,8 @@ import * as THREE from 'three';
 //   turn.steer(position, dt) each frame; turn.reset() after a jump
 //   followFit(cam, nav, aspect, { yaw, elev })   the plaza's follow framing, fitted at that look and kept through
 //                                                 the turns
+//   frameFit(cam, aspect, rect, { yaw, elev })    a fixed frame round a rect on the ground (the tennis court)
+//   quietly(cam, () => fit...)                    change the framing and let the camera ease to it
 export function turningCam(cam, poseAt) {
   let at = null,
     yaw = cam.yaw,
@@ -64,5 +66,38 @@ export function followFit(cam, nav, aspect, look) {
       { follow: true, clamp, lead: -3.4 },
     );
   [cam.yaw, cam.elev] = [yaw, elev];
+  cam.place();
+}
+
+// a fixed frame: the rect [x0, x1, z0, z1] (on the ground) all in view at that look, the camera held on its middle
+// (the sports ground's tennis court, both sides of the net)
+export function frameFit(cam, aspect, [x0, x1, z0, z1], look) {
+  const [yaw, elev] = [cam.yaw, cam.elev];
+  [cam.yaw, cam.elev] = [look.yaw, look.elev];
+  cam.fit(
+    aspect,
+    [
+      new THREE.Vector3(x0, 0, z0),
+      new THREE.Vector3(x1, 0, z0),
+      new THREE.Vector3(x0, 0, z1),
+      new THREE.Vector3(x1, 0, z1),
+      new THREE.Vector3(x0, 1.2, z0),
+      new THREE.Vector3(x1, 1.2, z0),
+    ],
+    new THREE.Vector3((x0 + x1) / 2, 0, (z0 + z1) / 2),
+    { limX: 0.94, limY: 0.9 },
+  );
+  [cam.yaw, cam.elev] = [yaw, elev];
+  cam.place();
+}
+
+// a new framing without a jump: fit() sets where the camera wants to be, and the shot it had is put back, so the
+// follow spring eases it there (the camera's update damps toward its base and distance)
+export function quietly(cam, fit) {
+  const t = cam.target.clone(),
+    d = cam.dist;
+  fit();
+  cam.target.copy(t);
+  cam.dist = d;
   cam.place();
 }

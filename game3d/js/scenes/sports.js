@@ -40,6 +40,7 @@ import { streetSteps } from './office-quarter/grounds.js';
 import { block } from './office-quarter/plan.js';
 import { rowSteps } from './office-quarter/row.js';
 import * as P from './sports/plan.js';
+import * as CP from './sports/court-plan.js';
 import { buildNooks } from './outdoor/nooks.js';
 
 const { CHUNK, inRect } = P;
@@ -48,9 +49,13 @@ const OFFICES = ['m4', 'm5']; // the office row's nearest the gym's corner, and 
 const STREET_W = block('m3').rect[1];
 
 export const buildSports = (ground) => drain(sportsSteps(ground));
-// ground: what is walked, in the chunk's frame (the streets and walks by default; the pool deck walks the deck, in
-// the same world: places/pool.js): { walks, blocks, start }
-export function* sportsSteps({ walks = P.WALKS, blocks = P.FURNITURE, start = P.IN } = {}) {
+// ground: what is walked, in the chunk's frame (the streets and walks and the west tennis court by default; the pool
+// deck walks the deck, in the same world: places/pool.js): { walks, blocks, start }
+export function* sportsSteps({
+  walks = [...P.WALKS, ...CP.WALKS],
+  blocks = [...P.FURNITURE, ...CP.BLOCKS],
+  start = P.IN,
+} = {}) {
   const root = new THREE.Group(),
     scene = new THREE.Scene();
   scene.background = new THREE.Color(TOWN.roof);
