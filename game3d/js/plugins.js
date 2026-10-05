@@ -20,8 +20,20 @@ function pluginHref(name) {
   return `${location.origin}/${['island', 'private', 'plugins'].join('/')}/${name}.js`;
 }
 
+// The local server lists the plugin names (/api/plugins), so places without one cost no request. Without the list
+// (published build, plain static server) every name is tried.
+let listed = null;
+function pluginList() {
+  listed ??= fetch(`${location.origin}/api/plugins`)
+    .then((res) => (res.ok ? res.json() : null))
+    .catch(() => null);
+  return listed;
+}
+
 // A missing file is a fetch miss, not a script request. The day test treats a script 404 as a failed boot.
 async function loadPlugin(name) {
+  const names = await pluginList();
+  if (Array.isArray(names) && !names.includes(name)) return null;
   const href = pluginHref(name);
   const res = await fetch(href);
   if (!res.ok) return null;
