@@ -78,8 +78,15 @@ export function createView(game, renderer, canvas, save) {
   }
   onResizeFrame(resize);
   const guard = installGlGuard({ canvas, renderer, save, resize: () => resize() });
+  // The title's shot moves only by a slow sway, so it draws at most 30 frames a second: at the screen's full rate it
+  // kept the GPU busy for nothing (Jørgen, 2026-10-05: an RTX 3080 at about 80 % load with only the title open).
+  const TITLE_GAP = 1000 / 30 - 3; // ms; the slack lets a 60 Hz screen draw every other frame
+  let lastDraw = 0;
   function render() {
     if (!view.composer || !game.place) return;
+    const now = performance.now();
+    if (now - lastDraw < TITLE_GAP && document.body.classList.contains('at-title')) return;
+    lastDraw = now;
     game.place.beforeRender?.();
     renderer.shadowMap.needsUpdate = true;
     view.post.render();
