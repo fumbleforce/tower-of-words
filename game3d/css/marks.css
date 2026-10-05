@@ -70,15 +70,31 @@ body.reduce-motion #marks .mark.goal .pin::after { animation: none; transform: s
 body.reduce-motion #marks .mark.near::after { animation: none; }
 /* desktop, until E has been used five times: the E key at the corner of the pin in reach (the action menu opens only
    when asked for, so this is where E is taught; ui.js sets body.teach-e) */
+/* Jørgen, 2026-10-04: "the E button indicator is almost to small to read". A real key cap: 24 px at --ui 1 and growing
+   with the interface size, a light face with a dark rim and a dark bold letter, so it reads on the pale floors and the
+   dark seats and sea alike. It sits level with the pin, just beside it (--kx from the pin's centre line to the cap's
+   near edge, --ky the pin's centre), so it covers neither the pin nor the target under it; on the left near the right
+   edge (.flip). */
 body.teach-e:not(.phone) #marks .mark.near .tag {
-  display: grid; place-items: center; left: 14px; top: -34px; width: auto; height: auto; padding: 0; gap: 0;
-  background: none; border: 0; opacity: 1; transform: none;
+  display: block; left: var(--kx); right: auto; top: calc(var(--ky) - 12px * var(--ui, 1)); width: auto; height: auto;
+  padding: 0; gap: 0; background: none; border: 0; opacity: 1; transform: none; text-shadow: none;
 }
-body.teach-e:not(.phone) #marks .mark.near .tag .vb, body.teach-e:not(.phone) #marks .mark.near .tag .nm { display: none; }
+body.teach-e:not(.phone) #marks .mark.near.flip .tag { left: auto; right: var(--kx); }
+body.teach-e:not(.phone) #marks .mark.near .tag .vb, body.teach-e:not(.phone) #marks .mark.near .tag .nm,
+body.teach-e:not(.phone) #marks .mark.near .tag::before { display: none; }
 body.teach-e:not(.phone) #marks .mark.near .tag .key {
-  display: grid; min-width: 16px; height: 16px; padding: 0 3px; border-radius: 4px; background: #2a323e;
-  border: 1px solid rgba(255, 255, 255, .3); border-bottom-width: 2px; color: #e6faf7; font: 700 10px/1 var(--font);
+  display: grid; place-items: center; box-sizing: border-box; min-width: calc(24px * var(--ui, 1)); height: calc(24px * var(--ui, 1));
+  padding: 0 calc(6px * var(--ui, 1)) calc(2px * var(--ui, 1)); border-radius: calc(6px * var(--ui, 1));
+  background: linear-gradient(#ffffff, #e4eaee); border: calc(1.5px * var(--ui, 1)) solid #0d1219;
+  box-shadow: inset 0 calc(-3px * var(--ui, 1)) 0 #b4c0c9, 0 2px 6px rgba(0, 0, 0, .55);
+  color: #0d1219; font: 800 calc(15px * var(--ui, 1))/1 var(--font);
 }
+#marks .mark { --kx: 19px; --ky: -31px; }
+#marks .mark.thing { --kx: 17px; --ky: -29px; }
+#marks .mark.goal { --kx: 22px; --ky: -36px; }
+#marks .mark.below { --kx: 56px; --ky: 0px; }
+#marks .mark.thing.below { --kx: 50px; }
+#marks .mark.goal.below { --kx: 64px; }
 
 /* no room above the target (under the HUD): the pin sits beside the head on a short level line, never hanging down
    over the face (engine.js sets .below; .flip puts it on the left near the right edge) */
