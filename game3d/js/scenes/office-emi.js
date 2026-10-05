@@ -139,7 +139,9 @@ export function* emiOffice(root, pool, { X0, CS, Z1, T }) {
   // her desk, with the lamp, a mug, folders and her nameplate facing the visitor; things on it at DESK + [dx, dz]
   const X = (dx) => DESK[0] + dx,
     Z = (dz) => DESK[1] + dz;
-  const d = desk({ w: 1.2, d: 0.66, seed: 4, mon: false, clutter: 0 }); // her monitor to one side, so she's seen
+  // her monitor to one side, so she's seen; open underneath, so her legs are too (Jørgen, #248: "the desk should also
+  // be open underneath showing her legs")
+  const d = desk({ w: 1.2, d: 0.66, seed: 4, mon: false, clutter: 0, open: true });
   d.position.set(DESK[0], 0, DESK[1]);
   root.add(d);
   const top = 0.42;

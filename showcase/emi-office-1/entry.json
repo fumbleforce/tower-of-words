@@ -50,6 +50,20 @@
         {"id": "fix241-before-overview-phone", "image": "bible/shots/showcase/emi-office-1/fix241-before-overview-phone.webp", "caption": "Before: B2, phone"},
         {"id": "fix241-after-overview-phone", "image": "bible/shots/showcase/emi-office-1/fix241-after-overview-phone.webp", "caption": "After: B2, phone"}
       ]
+    },
+    {
+      "title": "Her desk is open underneath (#248)",
+      "caption": "Jørgen: \"the desk should also be open underneath showing her legs\". Her desk has no front panel now and only one drawer unit, on the side away from the doorway, with two slim legs at the other end, so her legs and feet show from the doorway and from the guest chair. The open-office desks keep both drawer units and their front panels.",
+      "images": [
+        {"id": "fix248-before-door-desk", "image": "bible/shots/showcase/emi-office-1/fix248-before-door-desk.webp", "caption": "Before: from the doorway, desktop"},
+        {"id": "fix248-after-door-desk", "image": "bible/shots/showcase/emi-office-1/fix248-after-door-desk.webp", "caption": "After: from the doorway, desktop"},
+        {"id": "fix248-before-door-phone", "image": "bible/shots/showcase/emi-office-1/fix248-before-door-phone.webp", "caption": "Before: from the doorway, phone"},
+        {"id": "fix248-after-door-phone", "image": "bible/shots/showcase/emi-office-1/fix248-after-door-phone.webp", "caption": "After: from the doorway, phone"},
+        {"id": "fix248-before-guest-desk", "image": "bible/shots/showcase/emi-office-1/fix248-before-guest-desk.webp", "caption": "Before: from the guest chair, desktop"},
+        {"id": "fix248-after-guest-desk", "image": "bible/shots/showcase/emi-office-1/fix248-after-guest-desk.webp", "caption": "After: from the guest chair, desktop"},
+        {"id": "fix248-before-guest-phone", "image": "bible/shots/showcase/emi-office-1/fix248-before-guest-phone.webp", "caption": "Before: from the guest chair, phone"},
+        {"id": "fix248-after-guest-phone", "image": "bible/shots/showcase/emi-office-1/fix248-after-guest-phone.webp", "caption": "After: from the guest chair, phone"}
+      ]
     }
   ],
   "links": [{"label": "Play it", "href": "game3d/"}]

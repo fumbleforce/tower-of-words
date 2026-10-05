@@ -17,9 +17,9 @@
     },
     "game3d/js/look/detail.js": {
       "lines": 670,
-      "bytes": 26916,
+      "bytes": 26965,
       "owner": "codex-tui",
-      "review": "C-0071; 2026-10-05 #240 the desk's pedestals PED wide (props.js)",
+      "review": "C-0071; 2026-10-05 #240 the desk's pedestals PED wide (props.js); #248 the open desk option (one pedestal, no front panel)",
       "reason": "Existing detailed prop builders; preserve geometry until the visual owner reviews extraction."
     },
     "game3d/js/main.js": {
@@ -86,10 +86,10 @@
       "reason": "Existing post-processing pipeline and shader text; keep shader contents intact."
     },
     "game3d/js/props.js": {
-      "lines": 533,
-      "bytes": 19403,
+      "lines": 540,
+      "bytes": 19858,
       "owner": "codex-tui",
-      "review": "C-0071; 2026-09-30 signs take the shared decal depth offset (look/decal.js, issue #112); 2026-10-05 #240 PED, the desks' narrower drawer pedestals, so seated knees fit between them",
+      "review": "C-0071; 2026-09-30 signs take the shared decal depth offset (look/decal.js, issue #112); 2026-10-05 #240 PED, the desks' narrower drawer pedestals, so seated knees fit between them; #248 desk({ open }), Emi's desk open underneath with two legs",
       "reason": "Existing primitive prop and material builders; coordinate the look/detail cycle split with visual work."
     },
     "game3d/js/runner.js": {

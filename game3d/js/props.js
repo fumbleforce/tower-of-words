@@ -374,14 +374,21 @@ export function plainMonitor({ on = true, kind } = {}) {
   return g;
 }
 export const PED = 0.26; // a desk's drawer pedestals: wide enough to leave room for seated knees (#240)
-// desk facing +z (the sitter sits on the +z side)
-export const desk = (o) => (LOOK.detail ? D.desk(o) : plainDesk(o));
-export function plainDesk({ w = 1.4, d = 0.72, mon = true, clutter = 1, seed = 1 } = {}) {
+// desk facing +z (the sitter sits on the +z side). open: no front panel and one drawer unit, on the -x side, with two
+// legs at the +x end, set in from the top's edges and 5 mm up into it, so a seated person's legs show (Emi's, #248)
+export function desk(o = {}) {
+  const g = LOOK.detail ? D.desk(o) : plainDesk(o);
+  const { w = 1.4, d = 0.72 } = o;
+  const leg = (sz) => rbox(0.04, 0.385, 0.04, PAL.metal, { x: w / 2 - 0.06, z: sz * (d / 2 - 0.06), r: 0.008 });
+  if (o.open) g.add(leg(-1), leg(1));
+  return g;
+}
+export function plainDesk({ w = 1.4, d = 0.72, mon = true, clutter = 1, seed = 1, open = false } = {}) {
   const g = new THREE.Group();
   const H = 0.42;
   g.add(rbox(w, 0.04, d, PAL.deskTop, { y: H - 0.04, r: 0.012 }));
-  // drawer pedestals both sides
-  for (const sx of [-1, 1]) {
+  // drawer pedestals both sides (open: one side)
+  for (const sx of open ? [-1] : [-1, 1]) {
     g.add(rbox(PED, H - 0.05, d - 0.06, PAL.drawer, { x: sx * (w / 2 - 0.02 - PED / 2), r: 0.015 }));
     for (let k = 0; k < 3; k++)
       g.add(
@@ -394,7 +401,7 @@ export function plainDesk({ w = 1.4, d = 0.72, mon = true, clutter = 1, seed = 1
         }),
       );
   }
-  g.add(rbox(w - 2 * (PED + 0.02), 0.2, 0.03, PAL.drawer, { y: 0.16, z: -d / 2 + 0.05, r: 0.01 }));
+  if (!open) g.add(rbox(w - 2 * (PED + 0.02), 0.2, 0.03, PAL.drawer, { y: 0.16, z: -d / 2 + 0.05, r: 0.01 }));
   if (mon) {
     const m = plainMonitor();
     m.position.set(0, H, -d * 0.2);
