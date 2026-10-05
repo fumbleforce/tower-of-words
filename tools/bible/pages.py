@@ -7,7 +7,8 @@
     python3 tools/bible/pages.py push            media, then tools/assets/sync.py push; commit the list and the lock file
 
 The site gets bible/ (index, app.js, live.js, work.js, app.css) in remote mode, every committed file under reviews/
-and showcase/, and the images and audio those items show. Nothing else of the bible goes up: the character, rules,
+and showcase/, the images and audio those items show, and the files listed in an item's "viewer_files" (the models,
+textures and clips a live 3D viewer committed in that item's folder loads; staged at their own paths, unconverted). Nothing else of the bible goes up: the character, rules,
 art and prompt pages stay local, so no reward-look prompt, reward rule or private page is ever on the public site.
 
 Text comes from HEAD. Media come from this disk, each checked against HEAD's tools/assets/assets.lock.json, like the
@@ -36,6 +37,7 @@ REPO_TREE = 'https://github.com/fumbleforce/tower-of-words/tree/main/'
 LIST = 'bible/pages-media.json'
 BIBLE_FILES = ['bible/index.html', 'bible/app.js', 'bible/app.css', 'bible/live.js', 'bible/work.js']
 MEDIA_RE = re.compile(r'\.(webp|png|jpe?g|gif|avif|mp3|wav|ogg|opus|m4a|mp4|webm)$', re.I)
+VIEWER_RE = re.compile(r'\.(glb|webp|json)$', re.I)  # review.json "viewer_files": staged as they are
 CONVERT_RE = re.compile(r'\.(png|jpe?g)$', re.I)
 CONVERT_MIN = 200 * 1024  # smaller PNG/JPEG files go up as they are
 # Never on the public site: the private folder, any private/ folder, anything reward, his own manifest.
@@ -121,6 +123,11 @@ def referenced(base):
         for ln in item.get('links') or []:  # a link straight to a picture or a clip
             p = norm(ln.get('href', ''))
             if p and MEDIA_RE.search(p) and not denied(p) and not DENY_MEDIA_RE.search(p):
+                refs.setdefault(p, []).append(f'{folder}/{rid}')
+        # the files a live 3D viewer committed in the item's folder loads (models, textures, clips), at their paths
+        for raw in item.get('viewer_files') or []:
+            p = norm(raw)
+            if p and VIEWER_RE.search(p) and not denied(p) and not DENY_MEDIA_RE.search(p):
                 refs.setdefault(p, []).append(f'{folder}/{rid}')
     return refs
 

@@ -1,0 +1,189 @@
+{
+ "title": "Crowd pilot: office man (A) and office woman (B)",
+ "blurb": "Real rigged 3D models, built by the game's own loader from the files the game would load (walk, run, sit, the approved relaxed-3 idle). Each model is shown on two rigs: (a) our rig, the game's Meshy skeleton placed inside the model with a cast donor's bone orientations, playing the cast's Meshy walk, run and sit (as on Rei); (b) Meshy's auto-rig with Meshy's own walk, run and Chair_Sit_Idle_F. Not in the game.",
+ "rigs": {
+  "a-own": {
+   "id": "crowd-a-own",
+   "label": "A, rig (a): ours",
+   "dir": "art/parts/crowd-pilot-1/game/a-own/",
+   "idle": "art/parts/crowd-pilot-1/game/a-own/idle.json",
+   "height": 1.09
+  },
+  "a-meshy": {
+   "id": "crowd-a-meshy",
+   "label": "A, rig (b): Meshy's",
+   "dir": "art/parts/crowd-pilot-1/game/a-meshy/",
+   "idle": "art/parts/crowd-pilot-1/game/a-meshy/idle.json",
+   "height": 1.09
+  },
+  "b-own": {
+   "id": "crowd-b-own",
+   "label": "B, rig (a): ours",
+   "dir": "art/parts/crowd-pilot-1/game/b-own/",
+   "idle": "art/parts/crowd-pilot-1/game/b-own/idle.json",
+   "height": 1.06
+  },
+  "b-meshy": {
+   "id": "crowd-b-meshy",
+   "label": "B, rig (b): Meshy's",
+   "dir": "art/parts/crowd-pilot-1/game/b-meshy/",
+   "idle": "art/parts/crowd-pilot-1/game/b-meshy/idle.json",
+   "height": 1.06
+  },
+  "hamada": {
+   "id": "kuroda",
+   "label": "Hamada (in game)",
+   "dir": "game3d/assets/characters/kuroda/",
+   "idle": "game3d/assets/characters/relaxed-idle-kuroda.json",
+   "height": 1.09
+  },
+  "mori": {
+   "id": "mori",
+   "label": "Mori (in game)",
+   "dir": "game3d/assets/characters/mori/",
+   "idle": "game3d/assets/characters/relaxed-idle-mori.json",
+   "height": 1.09
+  },
+  "emi": {
+   "id": "emi",
+   "label": "Emi (in game)",
+   "dir": "game3d/assets/characters/emi/",
+   "idle": "game3d/assets/characters/relaxed-idle-emi.json",
+   "height": 1.09
+  },
+  "kuro": {
+   "id": "kuro",
+   "label": "Kuro (in game)",
+   "dir": "game3d/assets/characters/kuro/",
+   "idle": "game3d/assets/characters/relaxed-idle-kuro.json",
+   "height": 1.12
+  }
+ },
+ "scenes": {
+  "rigs": {
+   "label": "Both rigs side by side",
+   "items": [
+    {
+     "rig": "a-own"
+    },
+    {
+     "rig": "a-meshy"
+    },
+    {
+     "rig": "b-own"
+    },
+    {
+     "rig": "b-meshy"
+    }
+   ],
+   "gap": 0.9
+  },
+  "cast": {
+   "label": "Beside the cast",
+   "items": [
+    {
+     "rig": "mori"
+    },
+    {
+     "rig": "a-own"
+    },
+    {
+     "rig": "hamada"
+    },
+    {
+     "rig": "emi"
+    },
+    {
+     "rig": "b-own"
+    },
+    {
+     "rig": "kuro"
+    }
+   ],
+   "gap": 0.85
+  },
+  "variety": {
+   "label": "Variety: 6 of each",
+   "camUp": 1.6,
+   "rows": [
+    "a",
+    "b"
+   ],
+   "gap": 0.75
+  }
+ },
+ "varietyRigs": [
+  "?-own",
+  "?-meshy"
+ ],
+ "varietyRigLabels": {
+  "?-own": "rig (a): ours",
+  "?-meshy": "rig (b): Meshy's"
+ },
+ "variety": {
+  "a": [
+   {
+    "tex": "art/parts/crowd-pilot-1/variety/a/v0.webp",
+    "height": 1.09,
+    "label": "A v0 (as made)"
+   },
+   {
+    "tex": "art/parts/crowd-pilot-1/variety/a/v1.webp",
+    "height": 1.12,
+    "label": "A v1"
+   },
+   {
+    "tex": "art/parts/crowd-pilot-1/variety/a/v2.webp",
+    "height": 1.06,
+    "label": "A v2"
+   },
+   {
+    "tex": "art/parts/crowd-pilot-1/variety/a/v3.webp",
+    "height": 1.1,
+    "label": "A v3"
+   },
+   {
+    "tex": "art/parts/crowd-pilot-1/variety/a/v4.webp",
+    "height": 1.05,
+    "label": "A v4"
+   },
+   {
+    "tex": "art/parts/crowd-pilot-1/variety/a/v5.webp",
+    "height": 1.13,
+    "label": "A v5"
+   }
+  ],
+  "b": [
+   {
+    "tex": "art/parts/crowd-pilot-1/variety/b/v0.webp",
+    "height": 1.06,
+    "label": "B v0 (as made)"
+   },
+   {
+    "tex": "art/parts/crowd-pilot-1/variety/b/v1.webp",
+    "height": 1.03,
+    "label": "B v1"
+   },
+   {
+    "tex": "art/parts/crowd-pilot-1/variety/b/v2.webp",
+    "height": 1.08,
+    "label": "B v2"
+   },
+   {
+    "tex": "art/parts/crowd-pilot-1/variety/b/v3.webp",
+    "height": 1.05,
+    "label": "B v3"
+   },
+   {
+    "tex": "art/parts/crowd-pilot-1/variety/b/v4.webp",
+    "height": 1.02,
+    "label": "B v4"
+   },
+   {
+    "tex": "art/parts/crowd-pilot-1/variety/b/v5.webp",
+    "height": 1.09,
+    "label": "B v5"
+   }
+  ]
+ }
+}

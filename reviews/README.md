@@ -41,6 +41,7 @@ To post a review item, write `reviews/<id>/review.json` as in Adding an item bel
 | `multi` | no | `true` (default) lets him pick several; `false` means one. |
 | `media` | no | Context shown above the options (sheets, references, before/after). Each is `{image}` or `{audio}` with a `caption`. |
 | `links` | no | Pages to open (a game URL with flags, a review page). |
+| `viewer_files` | no | For a live viewer committed in the item's own folder (reviews/crowd-pilot-1/viewer.html): every model, texture and clip it loads (.glb, .webp, .json). They go to the public site with the item, so the viewer works there too. |
 | `decided` | when decided | The option ids that won. |
 | `decision` | when decided | One line: what was decided, in his words where possible. |
 | `decided_at`, `issue` | set by review.py | When it was decided, and the GitHub issue that holds the work on it (tools/work.py). |
