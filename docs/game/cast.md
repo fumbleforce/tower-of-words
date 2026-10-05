@@ -104,19 +104,19 @@ The id `kuroda` is Mr. Hamada. The id is older than the name and stays so the vo
 
 ### Kuro (`kuro`)
 
-- The receptionist in the head office lobby, behind the reception counter by the door (moved there from the station's visitor counter; Jørgen, 2026-09-30: "Then kuro should be there rather than at security"). Her name is written 玖路 and reads like 黒, black. Polite Japanese.
+- Age 38 (Jørgen, 2026-10-05). The receptionist in the head office lobby, behind the reception counter by the door (moved there from the station's visitor counter; Jørgen, 2026-09-30: "Then kuro should be there rather than at security"). Her name is written 玖路 and reads like 黒, black. Polite Japanese.
 - She can handle a short reception exchange in English. Her first-day conversation is in [places.md](places.md#small-moments-2), with delivery in `story/VOICE.md` (Jørgen, 2026-10-04: "Kuro should have some more dialogue than good morning on the first day, maybe a tiny bit flirtatious").
 - Look: approved portrait art/approved/kuro/kuro-after.webp, extended down to the waist as kuro-body-c-s11 (reviews/kuro-body-1) and shown 15% smaller than the others' framing, since at the same face height she looked "15% too large / zoomed in" (Jørgen, 2026-10-01). Clear-lensed glasses, never tinted. In the 3D world, Jørgen's approved Meshy model kuro-3 (reviews/kuro-meshy-orig-3, 2026-10-04: "Yes, very good"): black hair in a high bun with long side locks and a blunt fringe, dark eyes, a black trouser suit; no glasses or hair sticks on the model ([art-and-sound.md](art-and-sound.md#people-in-the-world)).
 
 ### Aoi (`aoi`)
 
-- A new hire. Her assignment is decided today (day 1), and she's telling someone on the phone it can be anywhere but the basement. Japanese only.
+- Age 24 (Jørgen, 2026-10-05). A new hire. Her assignment is decided today (day 1), and she's telling someone on the phone it can be anywhere but the basement. Japanese only.
 - Assignment (#226, to build): Facilities scheduling, with her first weeks at the east-lane training centre. At their first real meeting she tells Eric she got a room upstairs, then learns he works on B2. She checks whether he heard her train call and starts again with her name; the awkwardness is brief. Her work concerns room bookings, not engineering.
 - Look: approved portrait aoi-base-2001 (reviews/style-align-1), with the cream edge on her left side redrawn as fill-d65-s1 (reviews/aoi-edge-2); redrawn from gallery B-aoi (art/approved/aoi/aoi-after.webp): pink bob with dark roots, winking grin, green varsity jacket with a pink star patch. In the 3D world, the Meshy model aoi-2 (reviews/aoi-meshy-1, round 2, made after Jørgen's note on aoi-1, 2026-10-05: "her face is a tiny bit too large and her hands are larger than the others. but it is very very close id say"): pink hair with teal underneath, a dark teal track jacket with a pink star over a white top, dark trousers; her hands are shown at 0.75 of Meshy's size ([art-and-sound.md](art-and-sound.md#people-in-the-world)).
 
 ### Rei (`rei`)
 
-- Sales. Built in the game (figures on the train, at the gate and in the office) but hidden all day and in no storyline. Her first authored meeting is planned at tennis (#226, to build).
+- Age 41 (Jørgen, 2026-10-05). Sales. Built in the game (figures on the train, at the gate and in the office) but hidden all day and in no storyline. Her first authored meeting is planned at tennis (#226, to build).
 - Language (#226): native Japanese; conversational English used with overseas customers. She can make plans, explain a practical problem and tease in short complete sentences. Idioms and abstract conversation take effort. She knows English tennis jargon better than Eric does, so a failed explanation is about the jargon, not his inability to understand any English. She can demonstrate or rephrase; she is not another general translator.
 - Look: dialogue portrait rei-i65-2102 (reviews/rei-portrait-1, Jørgen: "65-2102"), an img2img of art/approved/rei/rei-after.webp with a sly confident look: silver-grey high ponytail, steel-grey eyes, gold hoops, light grey suit over a black high-neck top. Extended down to the waist with Jørgen's pick a-s11 (reviews/rei-body-1), its seam blended as attempt b did, which is the file b-s11.
 
