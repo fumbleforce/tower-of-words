@@ -277,8 +277,12 @@ body.phone #end ul.w { grid-template-columns: 1fr; }
 .panel .head { font-weight: 700; margin-bottom: 8px; }
 .panel ul { list-style: none; margin: 0 0 12px; padding: 0; }
 .panel .close { width: 100%; padding: 10px; border-radius: 10px; border: 1px solid var(--panel-edge); background: #2a303b; cursor: pointer; }
-#peoplePanel li { display: grid; grid-template-columns: 44px 1fr auto; column-gap: 12px; padding: 10px 0; border-top: 1px solid rgba(255,255,255,.06); }
-#peoplePanel .pic { grid-row: span 4; width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center; background: var(--c); color: #16181d; font-weight: 700; font-size: 18px; }
+#peoplePanel li { display: grid; grid-template-columns: 56px 1fr auto; column-gap: 14px; padding: 10px 0; border-top: 1px solid rgba(255,255,255,.06); }
+/* the face (people-view.js pic): a round crop of the neutral portrait in a ring of the person's colour; the initial
+   under it shows while it loads and for anyone without a portrait */
+#peoplePanel .pic { grid-row: span 4; align-self: start; position: relative; width: 56px; height: 56px; border-radius: 50%; display: grid; place-items: center; background: var(--c); color: #16181d; font-weight: 700; font-size: 21px; }
+#peoplePanel .pic.has { background: #2a303b; color: var(--ink-dim); box-shadow: 0 0 0 2px var(--c); }
+#peoplePanel .pic .face { position: absolute; inset: 0; border-radius: 50%; background-repeat: no-repeat; }
 #peoplePanel .nm { font-weight: 700; }
 #peoplePanel .ab { grid-column: 2 / span 2; color: var(--ink-dim); font-size: 14px; }
 #peoplePanel .cm { grid-column: 2 / span 2; font-size: 14px; color: var(--ink-dim); }
@@ -987,6 +991,8 @@ body.ending canvas, body.ended canvas { filter: brightness(.18) saturate(.6); tr
 #peoplePanel .ab.rm { font-size: 12.5px; color: var(--ink-dim); font-style: italic; margin-top: 4px; }
 #peoplePanel .card { max-height: min(80vh, 720px); overflow: auto; }
 body.phone #peoplePanel .card { max-height: 72vh; }
+body.phone #peoplePanel li { grid-template-columns: 48px 1fr auto; column-gap: 12px; }
+body.phone #peoplePanel .pic { width: 48px; height: 48px; font-size: 18px; }
 
 /* ---------- practice box (ui.js typePrompt; preview: tools/speech/states.html) ----------
    Jørgen: "old and untidy, lots of lines in different shapes and sizes". Three parts, one type scale:

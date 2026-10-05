@@ -136,9 +136,9 @@
     },
     "game3d/js/sim.js": {
       "lines": 554,
-      "bytes": 21511,
+      "bytes": 21525,
       "owner": "codex-tui",
-      "review": "C-0076; 2026-10-03 C-0378 day 2: a new day's opening save resets the bonds' daily caps; 2026-10-04 C-0432 the People cards moved out to ui/people-view.js (ceiling lowered); 2026-10-04 the dialogue box controls: the backlog rides in the save (two lines in save/restore); C-0438 People panel text from story/people.js, #223 (ceiling lowered); 2026-10-05 #251: imports, game.mc and game.cast, the save mc and cast fields and their migration (mc.js, roles.js); 2026-10-05 #229 day 3: the place's day-3 bodies, hooks and setup registered (places/day3/), a few lines each; 2026-10-05 #262: period_* flags (period-flags.js) on a period change and a load, bond2_<id> at step 2 (four lines)",
+      "review": "C-0076; 2026-10-03 C-0378 day 2: a new day's opening save resets the bonds' daily caps; 2026-10-04 C-0432 the People cards moved out to ui/people-view.js (ceiling lowered); 2026-10-04 the dialogue box controls: the backlog rides in the save (two lines in save/restore); C-0438 People panel text from story/people.js, #223 (ceiling lowered); 2026-10-05 #251: imports, game.mc and game.cast, the save mc and cast fields and their migration (mc.js, roles.js); 2026-10-05 #229 day 3: the place's day-3 bodies, hooks and setup registered (places/day3/), a few lines each; 2026-10-05 #262: period_* flags (period-flags.js) on a period change and a load, bond2_<id> at step 2 (four lines); 2026-10-05 People portraits: peopleHTML passes the face crop through (14 bytes)",
       "reason": "Existing simulation, save and relationship integration; retain compatibility while extracting state."
     },
     "game3d/js/speech.js": {
@@ -171,9 +171,9 @@
     },
     "game3d/js/ui.js": {
       "lines": 785,
-      "bytes": 31431,
+      "bytes": 31453,
       "owner": "codex-tui",
-      "review": "C-0080; C-0166 named sounds per door and machine, Words chip pop and voice placeholder; 2026-10-03 C-0378 day 2: the -tai note over the phrases in the Words panel; 2026-10-04 C-0432: installVn, the dialogue box controls (ui/vn-controls.js); 2026-10-05 #251: one import line for the protagonist (mc.js PLAYER_ID, isPlayer or MC)",
+      "review": "C-0080; C-0166 named sounds per door and machine, Words chip pop and voice placeholder; 2026-10-03 C-0378 day 2: the -tai note over the phrases in the Words panel; 2026-10-04 C-0432: installVn, the dialogue box controls (ui/vn-controls.js); 2026-10-05 #251: one import line for the protagonist (mc.js PLAYER_ID, isPlayer or MC); 2026-10-05 People portraits: the panel gets thumbStyle for its faces (22 bytes)",
       "reason": "Remaining HUD construction, action menus and word practice; dialogue, portraits and audio are extracted."
     }
   }

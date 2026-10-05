@@ -15,7 +15,7 @@ void VOICE_CSS;
 
 import { $, el } from './ui/dom.js';
 import { actMenu } from './ui/act-menu.js';
-import { showPortraits, resetPortraitSpeaker } from './ui/portraits.js';
+import { showPortraits, resetPortraitSpeaker, thumbStyle } from './ui/portraits.js';
 import { createDialogue, installVn } from './ui/dialogue.js';
 import { addFieldPlayButton } from './ui/dialogue-text.js';
 export { FACE, setFace, faceForEmote, layoutStage, newScene } from './ui/portraits.js';
@@ -146,7 +146,7 @@ export const ui = {
       this.onGive && this.onGive();
     };
     $('#peopleBtn').onclick = () => {
-      $('#peoplePanel ul').innerHTML = this.peopleHTML ? this.peopleHTML() : '';
+      $('#peoplePanel ul').innerHTML = this.peopleHTML ? this.peopleHTML(thumbStyle) : '';
       $('#peoplePanel').hidden = false;
     };
     $('#bagBtn').onclick = () => {
