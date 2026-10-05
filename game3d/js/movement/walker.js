@@ -339,7 +339,8 @@ export class SmoothWalker extends Walker {
             others.filter((o) => !o.seated),
             R,
           );
-        if (alt) this.path = alt;
+        // the new route stays what the old one was (a steer's route, a scene's walk), so letting go still ends it
+        if (alt) this.path = Object.assign(alt, { steer: this.path.steer, scripted: this.path.scripted });
       }
       p.x = nx;
       p.z = nz;
