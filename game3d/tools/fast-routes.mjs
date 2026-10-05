@@ -6,13 +6,14 @@ import { fileURLToPath } from 'node:url';
 import { withBrowserJob } from '../../tools/lib/browser-job.mjs';
 import day1 from '../test/routes/index.mjs';
 import day2 from '../test/routes/day2.mjs';
+import day3 from '../test/routes/day3.mjs';
 import { choiceInventory, runRoute } from '../test/routes/driver.mjs';
 import { mcArgs } from '../test/support/mc-args.mjs';
 
-// --day 2: day 2's routes and its own choice inventory (test/routes/day2.mjs); day 1's otherwise
+// --day 2 (or 3): that day's routes and its own choice inventory (test/routes/day2.mjs, day3.mjs); day 1's otherwise
 const who = mcArgs(), argv = who.rest, dayAt = argv.indexOf('--day'), day = dayAt >= 0 ? +argv[dayAt + 1] : 1;
 const args = dayAt >= 0 ? argv.filter((_, i) => i !== dayAt && i !== dayAt + 1) : argv, worker = args[0] === '--worker';
-const routes = day === 2 ? day2 : day1;
+const routes = { 2: day2, 3: day3 }[day] || day1;
 const names = new Set(routes.map(route => route.id));
 if (names.size !== routes.length) throw new Error('Duplicate route ID');
 if (args[0] === '--list') {

@@ -74,12 +74,16 @@ def speakers():
     # Background people use the approved body-matched contextual Talk presets.
     sp['worker_a'] = sp['sales2']; sp['worker_b'] = sp['reader']
     sp['commuter_1'] = sp['sales1']; sp['commuter_2'] = sp['reader']; sp['commuter_3'] = sp['kenji']
+    # day 3 (story/day3/): the gym's attendant and the swimming club's member, borrowed voices; Rei (Sales) borrows the
+    # woman from Sales' until she has a voice of her own
+    sp['attendant'] = sp['sales1']; sp['member'] = sp['aoi']; sp['rei'] = sp['sales2']
     return sp
 
 
-FEMALE = {'mio', 'aoi', 'sales2', 'kuro', 'gatev', 'conductor', 'ann', 'emi', 'bun', 'music', 'canteen_worker', 'worker_a'}
+FEMALE = {'mio', 'aoi', 'sales2', 'kuro', 'gatev', 'conductor', 'ann', 'emi', 'bun', 'music', 'canteen_worker', 'worker_a',
+          'member', 'rei'}
 MALE = {'eric', 'guard', 'kuroda', 'sales1', 'mori', 'kenji', 'reader', 'commuter', 'youth', 'stander', 'worker_b',
-        'commuter_1', 'commuter_2', 'commuter_3'}
+        'commuter_1', 'commuter_2', 'commuter_3', 'attendant'}
 # clones whose reference speaks English: their Japanese is made from the timbre alone (gen_takes.xvec)
 XVEC_JA = {'eric'}
 LUFS = {'eric': -23.0, 'gatev': -20.0, 'conductor': -20.0, 'ann': -20.0,  # Eric quieter, recorded voices a little under the cast

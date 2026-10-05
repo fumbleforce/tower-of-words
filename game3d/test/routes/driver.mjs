@@ -7,9 +7,16 @@ import train from '../../story/train.js';
 import gate from '../../story/gate.js';
 import office from '../../story/office.js';
 import { STORIES as day2 } from '../../story/day2/index.js';
+import { STORIES as day3 } from '../../story/day3/index.js';
+import CLUBS from '../../story/clubs.js';
 export const stories = { train, gate, office };
-// each day's story set; a seed with day: 2 checkpoints into day 2's (story/day2/)
-const days = { 1: stories, 2: day2 };
+// day 3's set with the swimming club's pool session in the pool's story, as the game plays it (clubs/index.js
+// withClubs); the winter branch is a later Saturday's
+const clubNodes = Object.fromEntries(Object.entries(CLUBS.nodes).filter(([id]) => !/winter/.test(id)));
+const day3Played = { ...day3, pool: { ...day3.pool, nodes: { ...clubNodes, ...day3.pool.nodes } } };
+// each day's story set; a seed with day: 2 checkpoints into day 2's (story/day2/), day: 3 into day 3's
+const days = { 1: stories, 2: day2, 3: day3Played };
+const DAY_NAMES = { 1: 'Day one', 2: 'Day two', 3: 'Day three' };
 
 export function choiceInventory(day = 1) {
   const found = [];
@@ -90,6 +97,12 @@ async function installDriver(page, route, resume = false, made = 0) {
       if (app && !app.hidden) {
         state.ticketApps = (state.ticketApps || 0) + 1;
         app.querySelector('.tk-close').click();
+      }
+      // the notice board up close (ui/finds-view.js): read, then closed with a tap, no slip taken
+      const board = document.getElementById('boardView');
+      if (board && !board.hidden && board.classList.contains('in')) {
+        state.boards = (state.boards || 0) + 1;
+        board.click();
       }
     }, 30);
   }, { choices: (route.choices || []).slice(made), pauseAt: route.resumeAt, resume }); // (made: picked before a reload)
@@ -190,14 +203,14 @@ export async function runRoute(browser, route, { base, viewport, who = {} }) {
       assert.equal(after.nodes[0], route.resumeAt, 'Continue must resume at the unfinished node');
       assert.deepEqual(after.inv, checkpoint.inv, 'Continue must preserve inventory');
       assert.equal(after.yen, checkpoint.yen, 'Continue must not spend twice');
-    } else await settled(page, route.seed.place);
+    } else await settled(page, route.startAt || route.seed.place); // (startAt: where the opening scene ends up)
     for (const step of route.actions || []) await action(page, step, step.settleAt || route.seed.place);
     if (route.expect.ended) {
       await page.locator('#end.in .again').waitFor({ state: 'visible', timeout: 5000 });
       if ((route.seed.day || 1) === 1) {
         assert.equal(await page.locator('#end h2').textContent(), 'Day one');
         assert.match(await page.locator('#end .ticket').textContent(), /Repair request #2/i);
-      } else assert.equal(await page.locator('#end h2').textContent(), 'Day two');
+      } else assert.equal(await page.locator('#end h2').textContent(), DAY_NAMES[route.seed.day]);
       assert.equal(await page.locator('#end .again').textContent(), 'Back to title');
     }
     const state = await page.evaluate(async () => {
