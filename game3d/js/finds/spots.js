@@ -26,7 +26,7 @@ const LIST = [
     at: [-8.48, -4.5],
     turn: 0.6,
   },
-  { id: 'photo_office', kind: 'photo', place: 'office', print: 'cat', title: 'Cat', at: [-5.6, 5.9], turn: 0.9 },
+  { id: 'photo_office', kind: 'photo', place: 'office', print: 'cat', title: 'Cat', at: [-4.25, 5.45], turn: 0.9 },
   {
     id: 'photo_dorm',
     kind: 'photo',

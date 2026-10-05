@@ -1353,6 +1353,7 @@
       ],
       "zones": [
         "office",
+        "emi_office",
         "copy_room",
         "kitchen",
         "toilets",

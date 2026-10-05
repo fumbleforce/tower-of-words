@@ -33,6 +33,8 @@ import { lightPool, steam, dust, clockHands, groundShadows } from '../places/lif
 import { ledLights } from './office-leds.js';
 import { liveScreens } from '../props.js';
 import { drain } from '../perf/slice.js';
+import { emiOffice, emiOfficeBlocks, EMI_X, EMI_DOOR } from './office-emi.js';
+export { EMI } from './office-emi.js';
 
 export const K = 1.18; // people scale in the office and lobby
 const WH = 1.45,
@@ -46,7 +48,13 @@ export const CN = 0.2,
 // the door openings in the corridor's walls, x0 to x1: the walls' holes and the place's doorways (movement/doorways.js)
 const DOORS = {
   [CN]: { office_door: [-0.8, 0.3], machine_door: [4.7, 5.5] },
-  [CS]: { copy_room: [-4.4, -3.6], kitchen: [-0.8, 0.1], toilet_m: [2.3, 2.9], toilet_f: [4.9, 5.5] },
+  [CS]: {
+    emi_office: EMI_DOOR,
+    copy_room: [-4.4, -3.6],
+    kitchen: [-0.8, 0.1],
+    toilet_m: [2.3, 2.9],
+    toilet_f: [4.9, 5.5],
+  },
 };
 export const DOORWAYS = Object.entries(DOORS).flatMap(([z, doors]) =>
   Object.entries(doors).map(([id, [x0, x1]]) => ({ id, x0, x1, z0: +z - T / 2, z1: +z + T / 2 })),
@@ -618,7 +626,8 @@ export function* officeSteps() {
     [-4.4, 1.3, 1.1],
     [0.2, 1.3, 1.1],
     [4.6, 1.3, 1.1],
-    [-4.6, 4.2, 1.3],
+    [-5.5, 5.3, 1.1],
+    [-3.4, 4.3, 1.2],
     [-0.2, 4.2, 1.2],
     [3.1, 4.4, 0.9],
     [5.7, 4.4, 0.9],
@@ -637,7 +646,7 @@ export function* officeSteps() {
   root.add(tileFloor(X0, X1, CN, CS, 0.8, { color: '#8f949b', seam: '#80858c', y: 0.006 })); // corridor, older vinyl
   root.add(tileFloor(3.4, X1, Z0, CN, 0.6, { color: '#9da2a8', seam: '#8d9298', y: 0.006 })); // machine room, painted concrete
   root.add(tileFloor(1.8, X1, CS, Z1, 0.4, { color: '#a3a8ae', seam: '#90959b', y: 0.006 })); // toilets
-  root.add(tileFloor(-7, -2.2, CS, Z1, 1.0, { color: '#979a9e', seam: '#898c90', y: 0.006 })); // copy room sheet vinyl
+  root.add(tileFloor(EMI_X, -2.2, CS, Z1, 1.0, { color: '#979a9e', seam: '#898c90', y: 0.006 })); // copy room sheet vinyl
   root.add(tileFloor(-2.2, 1.8, CS, Z1, 1.0, { color: '#92969c', seam: '#83878d', y: 0.006 })); // kitchenette
 
   yield;
@@ -677,6 +686,7 @@ export function* officeSteps() {
   W('x', X0, X1, CS, LO, T, {
     holes: Object.values(DOORS[CS]).map(([x0, x1]) => [x0, x1, 0, LO]),
   });
+  W('z', CS, Z1, EMI_X, MID, T); // Emi's office / copy room
   W('z', CS, Z1, -2.2, MID, T);
   W('z', CS, Z1, 1.8, MID, T);
   W('z', CS, Z1, 4.4, MID, T);
@@ -729,6 +739,7 @@ export function* officeSteps() {
   yield;
   // plates for the bottom rooms stand on the low wall tops, tilted up toward the camera
   for (const [t, x, sub] of [
+    ['マネージャー', -6.05, 'MANAGER'],
     ['コピー室', -3.1, 'COPY ROOM'],
     ['給湯室', 0.55, 'KITCHEN'],
   ]) {
@@ -779,11 +790,6 @@ export function* officeSteps() {
   root.add(trolley);
   yield;
   // corridor dressing: plants off the doors, a folded 清掃中 sign, bins
-  {
-    const p = plant({ size: 0.95, seed: 14 });
-    p.position.set(-4.85, 0, 2.05);
-    root.add(p);
-  }
   {
     const p = plant({ size: 0.95, seed: 15 });
     p.position.set(3.4, 0, 2.05);
@@ -1095,51 +1101,35 @@ export function* officeSteps() {
   fax.add(rbox(0.8, 0.44, 0.5, '#9ea4ad', { r: 0.02 }));
   fax.add(rbox(0.46, 0.14, 0.36, '#dadcd8', { x: -0.1, y: 0.44, r: 0.02 }));
   fax.add(rbox(0.2, 0.08, 0.14, PAL.paper, { x: 0.25, y: 0.44, r: 0.01 }));
-  fax.position.set(-5.4, 0, CS + T / 2 + 0.3);
+  fax.rotation.y = Math.PI / 2; // against the partition, its front to the room
+  fax.position.set(-4.27, 0, 4.6);
   root.add(fax);
   const sh1 = shelf(0.95, 1.1, 0.4, { fill: 'paper', seed: 3 });
   sh1.rotation.y = Math.PI / 2;
-  sh1.position.set(X0 + 0.28, 0, 3.6);
+  sh1.position.set(EMI_X + T / 2 + 0.2, 0, 3.55);
   root.add(sh1);
-  const sh3 = shelf(0.95, 1.1, 0.4, { fill: 'box', seed: 5 });
-  sh3.rotation.y = Math.PI / 2;
-  sh3.position.set(X0 + 0.28, 0, 4.8);
-  root.add(sh3);
   const work = new THREE.Group();
-  work.add(rbox(1.5, 0.04, 0.8, '#d5d6d3', { y: 0.42, r: 0.01 }));
+  work.add(rbox(1.0, 0.04, 0.55, '#d5d6d3', { y: 0.42, r: 0.01 }));
   for (const [x, z] of [
-    [-0.68, -0.34],
-    [0.68, -0.34],
-    [-0.68, 0.34],
-    [0.68, 0.34],
+    [-0.45, -0.22],
+    [0.45, -0.22],
+    [-0.45, 0.22],
+    [0.45, 0.22],
   ])
     work.add(rbox(0.05, 0.42, 0.05, PAL.deskLeg, { x, z, r: 0.01 }));
-  for (let i = 0; i < 4; i++)
-    work.add(rbox(0.22, 0.03 + (i % 2) * 0.04, 0.3, PAL.paper, { x: -0.5 + i * 0.32, y: 0.46, r: 0.005 }));
-  work.position.set(-4.4, 0, 4.7);
+  for (let i = 0; i < 2; i++)
+    work.add(rbox(0.22, 0.03 + (i % 2) * 0.04, 0.3, PAL.paper, { x: -0.3 + i * 0.28, y: 0.46, r: 0.005 }));
+  work.position.set(-3.3, 0, 5.3);
   root.add(work);
   for (const [x, z, s] of [
     [-2.7, 5.9, 0.4],
     [-3.15, 5.95, 0.34],
-    [-6.5, 5.9, 0.36],
   ])
     root.add(rbox(s, s * 0.8, s, PAL.box, { x, z, r: 0.02 }));
   root.add(
     rbox(0.26, 0.32, 0.26, '#b8453e', { x: -2.55, z: 4.6, r: 0.03 }),
     rbox(0.26, 0.3, 0.26, '#4f8a55', { x: -2.55, z: 5.0, r: 0.03 }),
   );
-  {
-    const sd = new THREE.Group();
-    sd.add(
-      rbox(0.7, 0.04, 0.45, '#d5d6d3', { y: 0.4, r: 0.01 }),
-      rbox(0.05, 0.4, 0.4, PAL.deskLeg, { x: -0.3, r: 0.01 }),
-      rbox(0.05, 0.4, 0.4, PAL.deskLeg, { x: 0.3, r: 0.01 }),
-      rbox(0.12, 0.05, 0.05, '#3a3f48', { x: -0.15, y: 0.44, r: 0.01 }),
-      rbox(0.2, 0.05, 0.28, PAL.paper, { x: 0.15, y: 0.44, r: 0.004 }),
-    );
-    sd.position.set(-6.2, 0, 5.9);
-    root.add(sd);
-  }
 
   {
     const s4 = shelf(1.2, 1.0, 0.36, { fill: 'binders', seed: 9 });
@@ -1320,7 +1310,8 @@ export function* officeSteps() {
     [-4.4, 1.3, 1.1],
     [0.2, 1.3, 1.1],
     [4.6, 1.3, 1.1],
-    [-4.6, 4.2, 1.3],
+    [-5.5, 5.3, 1.1],
+    [-3.4, 4.3, 1.2],
     [-0.2, 4.2, 1.2],
     [3.1, 4.4, 0.9],
     [5.7, 4.4, 0.9],
@@ -1496,50 +1487,15 @@ export function* officeSteps() {
     root.add(m);
   }
   yield;
-  // shredder, a pallet of paper reams, a paper box stack by the copier, a cutter and stapler on the table
-  {
-    const s2 = new THREE.Group();
-    s2.add(
-      rbox(0.36, 0.5, 0.3, '#3a3f48', { r: 0.02 }),
-      rbox(0.3, 0.03, 0.08, '#15181d', { y: 0.5, r: 0.005, cast: false }),
-    );
-    s2.position.set(-6.45, 0, 2.85);
-    root.add(s2);
-  }
-  {
-    const pl = new THREE.Group();
-    pl.add(rbox(0.8, 0.1, 0.6, '#8a7a64', { r: 0.01 }));
-    for (let i = 0; i < 3; i++)
-      for (let j = 0; j < 2; j++) {
-        pl.add(
-          rbox(0.36, 0.14, 0.26, i % 2 ? '#e7e3d8' : '#dcd8cc', {
-            x: -0.19 + j * 0.38,
-            y: 0.1 + i * 0.145,
-            z: 0,
-            r: 0.01,
-          }),
-        );
-        pl.add(
-          rbox(0.365, 0.03, 0.265, '#4a74b8', {
-            x: -0.19 + j * 0.38,
-            y: 0.155 + i * 0.145,
-            z: 0,
-            r: 0.004,
-            cast: false,
-          }),
-        );
-      }
-    pl.position.set(-4.7, 0, 5.95);
-    root.add(pl);
-  }
+  // a paper box stack by the copier, a cutter and stapler on the table
   for (let i = 0; i < 3; i++)
     root.add(
       rbox(0.34, 0.14, 0.26, i % 2 ? '#e7e3d8' : '#dcd8cc', { x: -2.45, y: i * 0.145, z: 3.3, r: 0.01 }),
       rbox(0.345, 0.03, 0.265, '#c9473f', { x: -2.45, y: i * 0.145 + 0.055, z: 3.3, r: 0.004, cast: false }),
     );
   root.add(
-    rbox(0.36, 0.04, 0.26, '#6d747e', { x: -4.0, y: 0.46, z: 4.55, r: 0.01 }),
-    rbox(0.12, 0.05, 0.04, '#3a3f48', { x: -4.75, y: 0.46, z: 4.9, r: 0.01 }),
+    rbox(0.36, 0.04, 0.26, '#6d747e', { x: -2.98, y: 0.46, z: 5.3, r: 0.01 }),
+    rbox(0.12, 0.05, 0.04, '#3a3f48', { x: -3.68, y: 0.46, z: 5.45, r: 0.01 }),
   );
   {
     const p = plant({ size: 0.8, seed: 21 });
@@ -1547,26 +1503,7 @@ export function* officeSteps() {
     root.add(p);
   }
   yield;
-  // a paper trolley parked by the shelves
-  {
-    const tr = new THREE.Group();
-    tr.add(rbox(0.6, 0.04, 0.4, '#6d747e', { y: 0.1, r: 0.01 }), rbox(0.6, 0.04, 0.4, '#6d747e', { y: 0.5, r: 0.01 }));
-    for (const [dx, dz] of [
-      [-0.28, -0.18],
-      [0.28, -0.18],
-      [-0.28, 0.18],
-      [0.28, 0.18],
-    ])
-      tr.add(rbox(0.03, 0.5, 0.03, '#9aa0a8', { x: dx, y: 0.04, z: dz, r: 0.01 }));
-    for (let i = 0; i < 2; i++)
-      tr.add(
-        rbox(0.34, 0.14, 0.26, '#e7e3d8', { x: -0.12 + i * 0.26, y: 0.54, r: 0.01 }),
-        rbox(0.34, 0.12, 0.26, '#dcd8cc', { x: -0.12 + i * 0.26, y: 0.14, r: 0.01 }),
-      );
-    tr.rotation.y = Math.PI / 2;
-    tr.position.set(-6.25, 0, 4.2);
-    root.add(tr);
-  }
+  yield* emiOffice(root, pool, { X0, CS, Z1, T });
   yield;
   // ---- kitchenette ----
   {
@@ -1823,12 +1760,11 @@ export function* officeSteps() {
   for (const [x, z, s2] of [
     [-2.7, 5.9, 0.4],
     [-3.15, 5.95, 0.34],
-    [-6.5, 5.9, 0.36],
     [2.3, -0.35, 0.34],
   ])
     root.add(rbox(s2 + 0.005, 0.02, 0.08, '#c9b089', { x, y: s2 * 0.8 - 0.005, z, r: 0.004, cast: false }));
   pool(-3.0, 3.5, 0.8, { k: 0.26 });
-  pool(-4.4, 4.7, 1.0, { k: 0.26 });
+  pool(-3.3, 5.3, 0.9, { k: 0.26 });
   pool(-0.8, 4.7, 0.9, { k: 0.26 });
   pool(4.1, 3.55, 0.7, { k: 0.2, sx: 0.8, sz: 1.5 });
   pool(6.7, 3.55, 0.7, { k: 0.2, sx: 0.8, sz: 1.5 });
@@ -1890,7 +1826,8 @@ export function* officeSteps() {
     [-4.2, -0.8, CN],
     [0.3, 4.7, CN],
     [5.5, X1, CN],
-    [X0, -4.4, CS],
+    [X0, EMI_DOOR[0], CS],
+    [EMI_DOOR[1], -4.4, CS],
     [-3.6, -0.8, CS],
     [0.1, 2.3, CS],
     [2.9, 4.9, CS],
@@ -1902,6 +1839,7 @@ export function* officeSteps() {
   const wallsZ = [
     [Z0, CN, -4.2],
     [Z0, CN, 3.4],
+    [CS, Z1, EMI_X],
     [CS, Z1, -2.2],
     [CS, Z1, 1.8],
     [CS, Z1, 4.4],
@@ -1941,11 +1879,11 @@ export function* officeSteps() {
   nav.blockTagged('mdoor', 4.7, 5.5, CN - 0.2, CN + 0.12); // shut; when it opens the leaf stands along the room's side of the jamb (see places/office.js)
   B(6.0, 6.6, 1.85, 2.25); // trolley
   B(-3.35, -2.55, CS, CS + 0.75);
-  B(-5.8, -5.0, CS, CS + 0.58);
-  B(X0, X0 + 0.5, 3.1, 5.3);
-  B(-5.2, -3.6, 4.25, 5.15);
+  B(-4.55, -3.98, 4.18, 5.02); // fax
+  B(-4.55, -4.08, 3.05, 4.05); // paper shelf
+  B(-3.82, -2.78, 5.0, 5.6); // worktable
   B(-4.25, -2.35, 5.6, Z1);
-  B(-6.75, -6.25, 5.65, Z1);
+  emiOfficeBlocks(B, { X0, Z1, CS });
   B(-2.75, -2.35, 4.4, 5.2);
   B(0.15, 1.75, CS, CS + 0.62);
   B(1.15, 1.8, 3.6, 5.0);
@@ -1959,19 +1897,15 @@ export function* officeSteps() {
     B(x0 + 2.2, x0 + 2.5, 3.85, 4.15);
     yield;
   }
-  B(-5.1, -4.6, 1.85, CS);
   B(3.15, 3.65, 1.85, CS);
   B(1.45, 1.75, 1.85, 2.1);
   B(0.55, 1.12, 1.95, CS);
   B(-2.65, -2.15, 1.85, CS);
-  B(-6.6, -5.8, 5.6, Z1);
-  B(-3.95, -3.35, 2.9, 3.5);
   B(-2.1, -1.7, 3.4, 3.8);
   B(-2.15, -1.55, 4.35, 5.45);
   B(-2.7, -2.25, 4.8, 6.0);
   B(-4.2, -3.7, -3.1, -1.6);
   B(-2.7, -1.1, 0.35, 0.9);
-  nav.blockTagged('emi', -5.5, -5.1, -1.55, -1.15);
   yield;
   // production dressing
   B(2.7, 3.3, -2.7, -2.1);
@@ -1982,12 +1916,9 @@ export function* officeSteps() {
   B(6.4, 6.8, 1.85, 2.25);
   B(-6.85, -6.45, 1.85, 2.25);
   B(-1.7, -0.85, 1.95, CS); // recycling row
-  B(-6.65, -6.25, CS, 3.05);
-  B(-5.1, -4.3, 5.65, Z1);
   B(-2.65, -2.25, CS, 3.45);
   B(-2.8, -2.4, 5.85, 6.25);
-  B(-1.25, -0.35, 3.9, 4.25);
-  B(-6.5, -6.0, 3.85, 4.55); // kitchen stools, paper trolley
+  B(-1.25, -0.35, 3.9, 4.25); // kitchen stools
   B(4.6, 5.0, 4.65, 5.05);
   B(6.3, 6.8, -3.6, -2.95);
   B(6.4, 6.8, -0.6, -0.2); // mop bucket, UPS, ladder

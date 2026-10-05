@@ -6,7 +6,7 @@ import { snapshotPeople, restorePeople, snapshotObject, restoreObject } from './
 // Place 3, the office floor, as the engine side: things, spots, zones, the command effects and the arrival by lift.
 // Every word said here comes from game3d/story/office.js (placeholder: story/placeholder/office.js).
 import * as THREE from 'three';
-import { officeSteps, K, CN, CS, DOORWAYS } from '../scenes/office.js';
+import { officeSteps, K, CN, CS, DOORWAYS, EMI } from '../scenes/office.js';
 import { sliced } from '../perf/slice.js';
 import { RoomCam } from '../cam.js';
 import { ui, sfx } from '../ui.js';
@@ -110,7 +110,7 @@ export async function officePlace(game) {
     lobby: [-5.6, -1.0],
     office_door: [-0.25, 0.9],
     my_seat: [dS1.seat[0], dS1.seat[1] + 0.45],
-    emi_seat: [dS0.seat[0], dS0.seat[1]],
+    emi_seat: [EMI.seat.x, EMI.seat.z],
     copier_front: [-2.95, 4.2],
     coffee_front: [0.7, 4.1],
     corridor_w: [-3.5, 1.3],
@@ -121,7 +121,7 @@ export async function officePlace(game) {
   };
   const seats = {
     my_seat: { x: dS1.seat[0], z: dS1.seat[1], top: 0.24, ry: Math.PI },
-    emi_seat: { x: dS0.seat[0], z: dS0.seat[1], top: 0.24, ry: Math.PI },
+    emi_seat: EMI.seat,
     // out: on from behind (in front: the desk)
     mio_seat: { x: dS0.seat[0], z: dS0.seat[1], top: 0.24, ry: Math.PI, out: [dS0.seat[0], dS0.seat[1] + 0.45] },
   };
@@ -143,8 +143,7 @@ export async function officePlace(game) {
     emi: {
       ...PLACE_DETAILS.office.things.emi,
       anchor: rigAnchor(w.emi),
-      spot: () =>
-        w.emi.seated ? [dS0.seat[0] - 0.55, dS0.seat[1] + 0.5] : [w.emi.root.position.x, w.emi.root.position.z - 0.62],
+      spot: () => (w.emi.seated ? EMI.talk : [w.emi.root.position.x, w.emi.root.position.z - 0.62]),
       face: () => [w.emi.root.position.x, w.emi.root.position.z],
       enabled: () => !w.emi._walk,
     },
@@ -318,20 +317,20 @@ export async function officePlace(game) {
     },
     fax: {
       ...PLACE_DETAILS.office.things.fax,
-      anchor: v3(-5.4, 0.9, CS + 0.3),
-      ...at(-5.4, 3.4, -5.4, CS + 0.3),
+      anchor: v3(-4.27, 0.9, 4.6),
+      ...at(-3.8, 4.6, -4.27, 4.6),
       noMarker: true,
     },
     paper_shelf: {
       ...PLACE_DETAILS.office.things.paper_shelf,
-      anchor: v3(-6.7, 1.3, 3.6),
-      ...at(-6.2, 3.6, -6.7, 3.6),
+      anchor: v3(-4.32, 1.3, 3.55),
+      ...at(-3.85, 3.55, -4.32, 3.55),
       noMarker: true,
     },
     worktable: {
       ...PLACE_DETAILS.office.things.worktable,
-      anchor: v3(-4.4, 0.8, 4.7),
-      ...at(-4.4, 3.9, -4.4, 4.7),
+      anchor: v3(-3.3, 0.8, 5.3),
+      ...at(-3.3, 4.75, -3.3, 5.3),
       noMarker: true,
     },
     coffee_machine: {
@@ -374,7 +373,8 @@ export async function officePlace(game) {
   const zones = {
     office: (x, z) => x > -4.2 && x < 3.4 && z < CN && z > Z0,
     // the two rooms with a scene on the way in fire a step past their doorway, never in it (movement/doorways.js)
-    copy_room: (x, z) => x < -2.2 && z > CS + 0.45,
+    emi_office: (x, z) => x < EMI.x && z > CS + 0.45,
+    copy_room: (x, z) => x > EMI.x && x < -2.2 && z > CS + 0.45,
     kitchen: (x, z) => x > -2.2 && x < 1.8 && z > CS,
     toilets: (x, z) => x > 1.8 && z > CS,
     machine_room: (x, z) => x > 3.4 && z < CN - 0.45,
