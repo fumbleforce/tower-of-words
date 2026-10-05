@@ -2,7 +2,7 @@
  "title": "Kuro voice, more relaxed",
  "date": "2026-10-05",
  "by": "voice agent",
- "status": "open",
+ "status": "decided",
  "multi": false,
  "question": "Which of these is Kuro, relaxed and a little seductive?",
  "media": [
@@ -102,5 +102,11 @@
    "audio": "art/candidates/kuro-voice-2/d-ja2.mp3",
    "note": "Smooth, intimate, low and slow, velvety with a soft breathy edge. The most seductive of the four. Reference about 264 Hz. Proposed VOICE.md wording if picked: Kuro. Smooth, low and slow, close and intimate, with a soft breathy edge. Courteous at the desk, composed, never hurried. She leaves a little silence after a line on purpose. No gushing or pet names."
   }
- ]
+ ],
+ "decided": [
+  "b"
+ ],
+ "decision": "Voice b is Kuro's voice (live, 9 clips re-voiced); voice a is kept as a reserved warm voice.",
+ "decided_at": "2026-10-05T21:12:12+0200",
+ "issue": 258
 }
