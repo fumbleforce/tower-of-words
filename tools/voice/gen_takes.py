@@ -5,7 +5,7 @@ Usage: gen_takes.py <seeds, comma separated> [keys, comma separated] [--lang Aut
   no keys: every manifest line with no exported clip for its current text (cfg.missing())
   --alt: read the text in alt_text.json instead (take tag 'a'); --lang: force the TTS language (tag 'u');
   --xvec: clone the timbre only, not the reference's way of speaking (tag 'x', also Eric's Japanese); TAG=x sets the tag
-Takes already on disk are skipped. Checks the GPU lock (cfg.LOCK, owner cfg.ME) before every batch and stops if it is gone.
+Takes already on disk from the same reference are skipped. Checks the GPU lock (cfg.LOCK, owner cfg.ME) before every batch and stops if it is gone.
 Run with the Qwen venv: ~/ai/tts/qwen/venv/bin/python (run.sh does)."""
 import json, os, sys, time
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -28,6 +28,11 @@ def xvec(sp, lang):
 
 def tag(sp, lang):
     return TAG or ('x' if xvec(sp, lang) else 's')
+
+
+def have(stem, label):
+    """A take on disk made from this speaker's current reference (a changed reference in cfg.py remakes the takes)."""
+    return os.path.exists(f'{stem}.wav') and load(f'{stem}.json', {}).get('reference', label) == label
 
 
 alt = load(ALT, {})
@@ -53,7 +58,7 @@ for (sp, lang), es in todo.items():
     ref, ref_text, label = SP[sp]
     for seed in seeds:
         tk = f'{tag(sp, lang)}{seed}'
-        need = [e for e in es if not os.path.exists(f'{RAW}/{e["key"]}/{tk}.wav')]
+        need = [e for e in es if not have(f'{RAW}/{e["key"]}/{tk}', label)]
         for i in range(0, len(need), BS):
             b = need[i:i + BS]
             if not lock_ok():

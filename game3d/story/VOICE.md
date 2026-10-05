@@ -41,7 +41,7 @@ Who each person is (age, job, what they speak) is in docs/game/cast.md. This she
 
 **Mr. Hamada**. Japanese only, apologises constantly, talks to machines like animals.
 
-**Kuro**. Composed and precise, with the courtesy of someone at work. A tease stays in her usual even delivery; she lets Eric notice it without laughing at him or explaining it. No gushing, pet names or coy pauses.
+**Kuro**. She is 38: relaxed, warm, low and unhurried, with the courtesy of someone at work. A tease stays in her usual easy delivery; she lets Eric notice it without laughing at him or explaining it. No gushing or pet names.
 
 **Aoi**. She wants to take part and is tired of being handed the basket or a form. Her [assignment and language](../../docs/game/cast.md#aoi-aoi) stay in the cast sheet.
 
