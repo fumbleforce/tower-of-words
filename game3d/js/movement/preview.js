@@ -37,6 +37,16 @@ export class PathPreview {
     }
     this.crossMat = xm;
     this.group.add(this.cross);
+    // steering (a held press, steer.js): a faint ring that rides under the cursor while the press is held
+    this.aimRing = new THREE.Mesh(
+      new THREE.RingGeometry(0.1, 0.13, 32),
+      // drawn over the ground whatever its height (the plaza's paving stands above its floor plane)
+      new THREE.MeshBasicMaterial({ color: OK, transparent: true, opacity: 0, depthWrite: false, depthTest: false }),
+    );
+    this.aimRing.rotation.x = -Math.PI / 2;
+    this.aimRing.renderOrder = 4;
+    this.group.add(this.aimRing);
+    this.aimOn = false;
     this.t = 0;
     this.mode = null;
     this.failT = -1;
@@ -87,6 +97,14 @@ export class PathPreview {
     this.cross.position.set(x, 0, z);
     this.failT = 0;
   }
+  // the steer ring at (x, z), or aim(null) to let it fade
+  aim(space, x, z, y, k = 1) {
+    this.aimOn = !!space;
+    if (!space) return;
+    this.attach(space, y);
+    this.aimRing.position.set(x, 0, z);
+    this.aimK = k; // the place's character scale, so the ring reads the same size everywhere
+  }
   arrived() {
     if (this.mode === 'walk') {
       this.mode = 'land';
@@ -124,6 +142,9 @@ export class PathPreview {
       for (const d of this.dots) d.material.opacity = Math.max(0, d.material.opacity - dt * 5);
       if (k >= 1) this.clear();
     }
+    const am = this.aimRing.material;
+    am.opacity = this.aimOn ? Math.min(0.55, am.opacity + dt * 4) : Math.max(0, am.opacity - dt * 3);
+    this.aimRing.scale.setScalar((this.aimK || 1) * (1 + 0.06 * Math.sin(this.t * 4)));
     if (this.failT >= 0) {
       this.failT += dt;
       const k = this.failT / 0.7;

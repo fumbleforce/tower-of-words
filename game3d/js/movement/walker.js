@@ -11,6 +11,8 @@ import { heldRun, doubleTap } from './run-input.js';
 // while Shift is held, Caps Lock is on (run-input.js) or the tapped route was a double tap. gait.run tells the avatar
 // to show the run clip (makeGait in mio.js); scripted walks never set it.
 export const RUN = 1.8;
+const STEER_STOP = 0.3,
+  STEER_GO = 0.5; // m from the steer point where a held walk stops, and how far it must move away to set off again
 
 export class SmoothWalker extends Walker {
   constructor(body, nav, opts = {}) {
@@ -25,12 +27,14 @@ export class SmoothWalker extends Walker {
     this._facing = undefined;
     this._pos = null;
     this.runTo = false; // this tapped route is run (a double tap on the floor); ends with the route
+    this.steer = null; // { x, z, run }: the floor point a held press steers him toward (steer.js); keys win over it
   }
   stop() {
     super.stop();
     this.preview.clear();
     this.aside = null;
     this.runTo = false;
+    this.steer = null;
   }
   // scripted: a scene's walk (game.walkTo), which a key still held from walking doesn't take over. It used to drop
   // the walk and leave Eric where he stood, in the train's doorway as its doors closed (Jørgen, 2026-10-04: "I didnt
@@ -45,7 +49,8 @@ export class SmoothWalker extends Walker {
   // someone walking (dx, dz) is held up by him: step aside, off their line, even during a scene (people do)
   makeRoom(fx, fz, need) {
     const now = performance.now();
-    if (this.aside || this.keys.size || (this.path && !this.locked) || now - (this._roomT || 0) < 2500) return;
+    if (this.aside || this.keys.size || this.steer || (this.path && !this.locked) || now - (this._roomT || 0) < 2500)
+      return;
     this._roomT = now;
     const p = this.body.position,
       others = this.others().filter((o) => !o.seated),
@@ -75,6 +80,28 @@ export class SmoothWalker extends Walker {
       C.notes.push(
         `makeRoom at [${p.x.toFixed(2)}, ${p.z.toFixed(2)}] -> ${best ? best.map((v) => v.toFixed(2)).join(', ') : 'no room'}`,
       );
+  }
+  // a held press with the way to its point clear: true, he walks straight at it (the steer branch of update). Not
+  // clear: false, and the nav's route to it becomes his path, walked by the same code as a tapped route (round the
+  // fountain, through a doorway). The route is planned again when the point has moved on, or every second; never
+  // every frame, so a fresh plan doesn't tug him back and forth.
+  steerDirect(p, dt) {
+    const s = this.steer,
+      k = this.body.scale.x || 1;
+    if (this.nav.clear([p.x, p.z], [s.x, s.z])) {
+      if (this.path?.steer) this.path = null;
+      return true;
+    }
+    s.routeT = (s.routeT ?? 9) + dt;
+    if (!this.path?.steer || s.routeT > 1 || Math.hypot(s.x - s.planned[0], s.z - s.planned[1]) > 0.6 * k) {
+      s.planned = [s.x, s.z];
+      s.routeT = 0;
+      const route = this.nav.path(p.x, p.z, s.x, s.z);
+      if (!route?.length) return true;
+      this.path = Object.assign(route, { steer: true });
+      this.arrive = null;
+    }
+    return false;
   }
   // snap the walker to the body as it is now (after a trip or a sit): no leftover turn, no leftover speed
   sync() {
@@ -160,6 +187,7 @@ export class SmoothWalker extends Walker {
     let mx = 0,
       mz = 0,
       keys = false,
+      steering = false,
       remain = Infinity;
     const k = (a, b) => this.keys.has(a) || this.keys.has(b);
     const up = k('ArrowUp', 'KeyW'),
@@ -196,6 +224,22 @@ export class SmoothWalker extends Walker {
       mx = f.x * iy + r.x * ix;
       mz = f.z * iy + r.z * ix;
       keys = true;
+    } else if (this.steer && !this.locked && this.steerDirect(p, dt)) {
+      // held press, the way clear: straight at the point under the cursor; stops within STEER_STOP of it, sets off
+      // again past STEER_GO
+      steering = true;
+      mx = this.steer.x - p.x;
+      mz = this.steer.z - p.z;
+      const k = this.body.scale.x || 1; // in the place's own units, like his body
+      remain = Math.hypot(mx, mz);
+      if (remain < (this.moving ? STEER_STOP : STEER_GO) * k) {
+        if (remain > 0.05 * k) this.targetFacing = Math.atan2(mx, mz);
+        mx = mz = 0;
+      } else remain -= STEER_STOP * k;
+      if (this.path) {
+        this.path = null;
+        this.arrive = null;
+      }
     } else if (this.aside) {
       // a step aside: short, and given up after a second and a half whatever happens
       const [tx, tz] = this.aside[0];
@@ -240,7 +284,7 @@ export class SmoothWalker extends Walker {
       }
     }
     if (!this.path) this.runTo = false;
-    const run = (heldRun() && !this.locked) || (this.runTo && !keys);
+    const run = (heldRun() && !this.locked) || ((this.runTo || this.steer?.run) && !keys);
     const len = Math.hypot(mx, mz);
     // wanted speed: full, less when the facing is far off (turn first, don't moonwalk), braking into the end of a path
     let want = 0;
@@ -250,6 +294,8 @@ export class SmoothWalker extends Walker {
       want = this.speed * (run ? RUN : 1);
       const ang = Math.abs(angDiff(Math.atan2(mx, mz), this.facing));
       want *= THREE.MathUtils.clamp((Math.cos(ang) + 0.35) / 1.35, this.v > 0.4 ? 0.35 : 0.12, 1);
+      // a held press swung round behind him: stop and turn on the spot, not a slow shuffle round (the feet slid)
+      if (steering && ang > 1.75) want = 0;
       if (!keys && remain < Infinity) want = Math.min(want, Math.sqrt(2 * BRAKE * 0.6 * remain) + 0.15);
       this.targetFacing = Math.atan2(mx, mz);
       // the direction of travel swings round smoothly too (no instant sideways moves)
@@ -279,7 +325,8 @@ export class SmoothWalker extends Walker {
         [nx, nz] = this.nav.collide(sx, sz, ox, oz);
       }
       // pressing into someone with no headway (a doorway, a corner): slip past them after a moment
-      if (keys || this.path) press(window.__game, this, this.body, blockedBy, Math.hypot(nx - ox, nz - oz), step, dt);
+      if (keys || this.steer || this.path)
+        press(window.__game, this, this.body, blockedBy, Math.hypot(nx - ox, nz - oz), step, dt);
       // held up by someone on a tapped route for a moment: plan round them
       this.blockT = blockedBy && this.path ? (this.blockT || 0) + dt : 0;
       if (this.blockT > 0.4 && this.path) {
@@ -299,6 +346,12 @@ export class SmoothWalker extends Walker {
       moved = Math.hypot(nx - ox, nz - oz);
       // blocked: the speed drops to what actually happened (sliding along a wall is slower)
       if (step > 1e-5) this.v = Math.min(this.v, (moved / dt) * 1.02 + 0.02);
+      // steering into a wall: sliding along it, he turns to walk the way he goes (his feet stepping one way while he
+      // slides another read as sliding); pressed into it with hardly any headway, he stands
+      if (steering && step > 1e-5) {
+        if (moved < step * 0.25) this.v = 0;
+        else if (moved < step * 0.9) this.targetFacing = Math.atan2(nx - ox, nz - oz);
+      }
       if (this.path) {
         this.stuck = moved < step * 0.2 ? this.stuck + dt : 0;
         if (this.stuck > 0.5) {

@@ -60,7 +60,7 @@ function controlsLine() {
   line.setAttribute('role', 'status');
   line.hidden = true;
   line.innerHTML =
-    '<span class="desk"><span class="k">W</span><span class="k">A</span><span class="k">S</span><span class="k">D</span> or click the floor to walk</span><span class="tch">Tap the floor to walk</span>';
+    '<span class="desk"><span class="k">W</span><span class="k">A</span><span class="k">S</span><span class="k">D</span> , or click or hold the floor to walk</span><span class="tch">Tap or hold the floor to walk</span>';
   document.getElementById('ui').appendChild(line);
   return line;
 }

@@ -13,6 +13,7 @@ import { createView } from './perf/view.js';
 import { guardedLoop } from './perf/gl-guard.js';
 import { pickPerson, softSeparate } from './move.js';
 import { scanTargets } from './gameplay/targeting.js';
+import { installSteer } from './movement/steer.js';
 import * as ambience from './ambience.js';
 import { mioBody, ericBody } from './chibi.js';
 import { makeAvatar, setSitLift } from './avatar.js';
@@ -343,6 +344,7 @@ const { buildMarkers, use, standUp, held, holdNudge, say } = installInteractions
 
 // ---------- input ----------
 const raycaster = new THREE.Raycaster();
+const steer = installSteer(game, canvas); // hold on the floor to steer (movement/steer.js)
 function ndc(e) {
   const r = canvas.getBoundingClientRect();
   return new THREE.Vector2(((e.clientX - r.left) / r.width) * 2 - 1, -((e.clientY - r.top) / r.height) * 2 + 1);
@@ -390,6 +392,7 @@ canvas.addEventListener('pointerdown', (e) => {
   }
   if (p) standUp();
   game.walker.tapRay(raycaster, game.place);
+  steer.press(e);
 });
 document.getElementById('marks').addEventListener('click', (e) => {
   const b = e.target.closest('.mark');
@@ -481,6 +484,7 @@ function step(dt) {
     game.walker.keys.clear();
     holdNudge();
   }
+  steer.update(dt);
   if (game.walker && !mio.seated && !mio.scripted) moving = game.walker.update(dt, place.camera);
   if (!mio.seated && !mio.scripted && !mio._walk) {
     mio.setState(moving ? 'walk' : 'idle');
