@@ -2,7 +2,7 @@
  "title": "Minimap, island map and fast travel: plan",
  "date": "2026-10-05",
  "by": "Claude (plan agent, #261)",
- "status": "open",
+ "status": "decided",
  "question": "This is a plan and a mock-up, not built. The pictures are drawings made from the game's real island layout data, not screenshots; the pins, the goal and Saturday at the plaza are made up to show every state. Six choices, pick one per number: 1 map style (default 1a), 2 transition (default 2a), 3 time cost (default 3a), 4 fast travel only to places you've been (default 4a), 5 where the minimap sits (default 5a), 6 minimap orientation (default 6a). Untouched numbers get their default.",
  "multi": true,
  "media": [
@@ -107,5 +107,15 @@
    "label": "Issue #261",
    "href": "https://github.com/fumbleforce/tower-of-words/issues/261"
   }
- ]
+ ],
+ "decided": [
+  "1a",
+  "2a",
+  "3a",
+  "4b",
+  "5b"
+ ],
+ "decision": "1a clean UI map, 2a quick crossfade, 3a no time cost, 4b travel to any open place (not only visited), 5b minimap bottom left; 6 default north-up",
+ "decided_at": "2026-10-05T23:56:25+0200",
+ "issue": 261
 }
