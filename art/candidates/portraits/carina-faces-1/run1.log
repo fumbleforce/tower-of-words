@@ -1,0 +1,24 @@
+ok carina-faces-1 cf1-neutral-asis-1 30 s
+FRAME WARN cf1-neutral-asis-1.png head/hair 12px from the top edge (want >= 34)
+ok carina-faces-1 cf1-neutral-asis-2 26 s
+FRAME WARN cf1-neutral-asis-2.png head/hair 5px from the top edge (want >= 34)
+ok carina-faces-1 cf1-neutral-asis-3 26 s
+FRAME WARN cf1-neutral-asis-3.png head/hair 7px from the top edge (want >= 34)
+ok carina-faces-1 cf1-neutral-closed-1 26 s
+FRAME WARN cf1-neutral-closed-1.png head/hair 15px from the top edge (want >= 34)
+ok carina-faces-1 cf1-neutral-closed-2 27 s
+FRAME WARN cf1-neutral-closed-2.png head/hair 5px from the top edge (want >= 34)
+ok carina-faces-1 cf1-neutral-closed-3 27 s
+FRAME WARN cf1-neutral-closed-3.png head/hair 8px from the top edge (want >= 34)
+ok carina-faces-1 cf1-surprised-1 26 s
+FRAME WARN cf1-surprised-1.png head/hair 14px from the top edge (want >= 34)
+ok carina-faces-1 cf1-surprised-2 27 s
+FRAME WARN cf1-surprised-2.png head/hair 5px from the top edge (want >= 34)
+ok carina-faces-1 cf1-surprised-3 26 s
+FRAME WARN cf1-surprised-3.png head/hair 18px from the top edge (want >= 34)
+ok carina-faces-1 cf1-tired-1 24 s
+FRAME WARN cf1-tired-1.png head/hair 1px from the top edge (want >= 34)
+ok carina-faces-1 cf1-tired-2 24 s
+FRAME WARN cf1-tired-2.png head/hair 2px from the top edge (want >= 34)
+ok carina-faces-1 cf1-tired-3 24 s
+FRAME WARN cf1-tired-3.png head/hair 5px from the top edge (want >= 34)
