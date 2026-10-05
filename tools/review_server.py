@@ -238,11 +238,25 @@ class Handler(SimpleHTTPRequestHandler):
         path = self.path.split('?')[0]
         if path == '/api/feedback':
             return self._feedback()
+        if path == '/api/diag':
+            return self._diag()
         m = re.fullmatch(r'/api/(review|showcase)/([a-z0-9][a-z0-9-]{0,79})', path)
         if not m:
             return self._json(404, {'error': 'unknown endpoint'})
         kind, rid = m.groups()
         return self._save_answer(kind, rid)
+
+    def _diag(self):
+        """POST /api/diag: the game's self-reports (plugin loading, private-mode rows) appended as one line each to
+        /tmp/claude-1000/game-diag.log, so a bug on his machine can be read without asking him to open a console."""
+        try:
+            n = min(int(self.headers.get('Content-Length') or 0), 8000)
+            body = self.rfile.read(n).decode('utf-8', 'replace').replace('\n', ' ')
+            with open('/tmp/claude-1000/game-diag.log', 'a', encoding='utf-8') as f:
+                f.write(time.strftime('%H:%M:%S ') + body + '\n')
+        except Exception:
+            pass
+        return self._json(200, {'ok': True})
 
     def _save_answer(self, kind, rid):
         """One POST /api/<kind>/<id>: read the JSON body, normalise it for its kind, keep the earlier send in

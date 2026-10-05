@@ -16,6 +16,27 @@ import { voice, stopVoice, setClipResolver } from './audio/core.js';
 
 const PLACE = /^[a-z0-9_]+$/;
 
+// Self-reports to the local server (POST /api/diag, tools/review_server.py), so a plugin problem on a machine can be
+// read from /tmp/claude-1000/game-diag.log instead of asking for a console. Local hosts only, private mode only.
+const LOCAL = /^(127\.0\.0\.1|localhost)$/.test(location.hostname);
+export function diag(event, data = {}) {
+  if (!LOCAL || !settings.privateMode) return;
+  try {
+    const body = JSON.stringify({
+      event,
+      ms: Math.round(performance.now()),
+      ...data,
+    });
+    fetch(`${location.origin}/api/diag`, {
+      method: 'POST',
+      body,
+      keepalive: true,
+    }).catch(() => {});
+  } catch {
+    // reporting must never break the game
+  }
+}
+
 function pluginHref(name) {
   return `${location.origin}/${['island', 'private', 'plugins'].join('/')}/${name}.js`;
 }
@@ -31,11 +52,21 @@ function pluginList() {
 }
 
 // A missing file is a fetch miss, not a script request. The day test treats a script 404 as a failed boot.
+// On a local host the plugin files are fetched with cache 'reload' first: import() reads the HTTP cache, and a stale
+// boot.js or kit.js kept by the browser hid new plugin code for hours (Jørgen, 2026-10-05: the log showed
+// installBoot ok but never the new boot.js running). The fresh fetch replaces the cached copy before the import.
+const refreshed = new Set();
+async function refresh(name) {
+  if (!LOCAL || refreshed.has(name)) return;
+  refreshed.add(name);
+  await fetch(pluginHref(name), { cache: 'reload' }).catch(() => {});
+}
 async function loadPlugin(name) {
   const names = await pluginList();
   if (Array.isArray(names) && !names.includes(name)) return null;
   const href = pluginHref(name);
-  const res = await fetch(href);
+  if (Array.isArray(names)) await Promise.all(names.map(refresh)); // boot.js imports kit.js and encounters.js
+  const res = await fetch(href, LOCAL ? { cache: 'reload' } : undefined);
   if (!res.ok) return null;
   return import(href);
 }
@@ -91,7 +122,13 @@ export async function installViewer(query, ctx) {
   }
   if (!mod) return null;
   forcePrivateMode();
-  return mod.start({ ...ctx, id, addPlaceInstaller, sampleDayOneEnd, audio: { voice, stopVoice, setClipResolver } });
+  return mod.start({
+    ...ctx,
+    id,
+    addPlaceInstaller,
+    sampleDayOneEnd,
+    audio: { voice, stopVoice, setClipResolver },
+  });
 }
 
 let portraitFn = null;
@@ -108,16 +145,22 @@ export function portraitSource(who, face) {
 export function installBoot() {
   if (!settings.privateMode) return Promise.resolve(false);
   if (bootPromise) return bootPromise;
+  diag('installBoot start');
   bootPromise = (async () => {
     try {
       const mod = await loadPlugin('boot');
       if (!mod) {
+        diag('installBoot: boot plugin not found');
         bootPromise = null;
         return false;
       }
-      await mod.install?.({ setPortrait: setPortraitSource });
+      await mod.install?.({ setPortrait: setPortraitSource, diag });
+      diag('installBoot ok');
       return true;
-    } catch {
+    } catch (err) {
+      diag('installBoot failed', {
+        error: String(err && err.stack ? err.stack : err).slice(0, 600),
+      });
       bootPromise = null;
       return false;
     }
@@ -131,6 +174,20 @@ export function watchPlacePlugins(game) {
     if (key !== 'privateMode' || !settings.privateMode) return;
     void installBoot();
     if (!game.place?.name) return;
-    void installPlacePlugin(game.place.name, { game, story: game.story, place: game.place });
+    void installPlacePlugin(game.place.name, {
+      game,
+      story: game.story,
+      place: game.place,
+    });
   });
 }
+
+// The private boot plugin (its settings rows and portrait stand-in) starts as soon as this module loads, not
+// when the first place is built: the title screen and its Settings come before any place (Jørgen, 2026-10-05: the
+// private settings row never showed when Settings was opened from the main menu).
+diag('plugins.js loaded', {
+  privateMode: settings.privateMode,
+  url: import.meta.url,
+  path: location.pathname + location.search,
+});
+if (settings.privateMode) void installBoot();
