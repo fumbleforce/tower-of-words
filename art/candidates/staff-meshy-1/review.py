@@ -90,6 +90,63 @@ P = {
        'eyes in one piece, Meshy retexture styled from d1, auto-rig at 1.1 m, Meshy sit. Head share 0.46. In the game at '
        '1.09 tall in place of his code-built body, hand bones at 0.75. 23 Meshy credits; five pictures $1.24.',
   q='Is the guard right?'),
+ 'kuroda': dict(
+  name='Mr. Hamada', he='he', his='his', pic='e1', attempt='kuroda-1',
+  steps='ChatGPT pictures. Every take, in order, with your words as written: 1 "make a 3d chibi anime character in the '
+        'style of the attached image" (a1, a2; a1 keeps more of his thin, tired face, so it went on), 2 "Simplify male '
+        'character a LOT to match the detail level of the other chibi, with open eyes" (b1), 3 "Simpler head model" '
+        '(c1; he wears nothing that needed removing; here he lost the tired look and the grey at his temples and '
+        'looks younger), then your angle prompt with "he" and "his" (d1). d1\'s head was 0.46 of his height, above '
+        'Kuro (0.41), Aoi (0.40) and Emi (0.43), and the staff before him came out bigger on the model than in their '
+        'pictures, so Kuro\'s follow-up with "his": "make his head a little smaller relative to his body, everything '
+        'else the same" (e1, 0.36; it also turned him further). 6 takes, $1.50.',
+  shape='Meshy\'s previews; first roll, kept.',
+  uv='116 polygons, red; the biggest front-facing piece',
+  faces='From below the chin in the texture\'s own colours: no black streaks under the jaw; there is a small grey '
+        'mark at the point of his chin, like a drawn chin line.',
+  extra=[('chin-fix-try.webp', 'The chin mark: cheek_fix.py with a band round his chin found the downward skin '
+          'triangles, but the mark is not on them, and it repainted other texels (white, right). So that fix is not '
+          'used: the game has the texture as Meshy painted it, with the mark. Say if it should go.')],
+  measure='Head share on the models (straight-on, flat colour, rest pose, each figure at the same height): Eric 0.46, '
+          'Kuro 0.41, Aoi 0.40, Emi 0.43, Hamada 0.40 after the follow-up. Hands, counted from the rig\'s hand bones: '
+          '0.092 of his height (Eric 0.107, Mio 0.105, Mori 0.093), left as Meshy made them.',
+  game='Meshy auto-rig at 1.1 m, 5 credits, and Meshy\'s Chair_Sit_Idle_F for his train seat, 3 credits.',
+  credits='Meshy credits for Hamada: 23 (shape 5, texture 10, rig 5, sit 3); balance 274 after him.',
+  ingame='In the game (day 1, 1366x860, test mode). On the train he takes the sleeping salaryman\'s seat: asleep, his '
+         'head dropped forward and to the side and nodding every ~7 s (drawn on his head and upper back bones over the '
+         'sit clip), and sitting up when he wakes. Then at the gate.',
+  note='The rigged model from e1 (chat a1, b1, c1, d1, then the head follow-up): smart topology, 1,050 polygons, our UV '
+       'layout with the face in one piece, Meshy retexture styled from e1, auto-rig at 1.1 m, Meshy sit. Head share '
+       '0.40. In the game at 1.09 tall in place of his code-built body wherever he appears. '
+       '23 Meshy credits; six pictures $1.50.',
+  q='Is Hamada right?'),
+ 'rei': dict(
+  name='Rei', he='she', his='her', pic='d1', attempt='rei-1', installed=False,
+  steps='ChatGPT pictures. Every take, in order, with your words as written: 1 "make a 3d chibi anime character in the '
+        'style of the attached image" (a1 with black trousers, a2 in the light grey trouser suit of her portrait, so '
+        'a2 went on), 2 "Simplify female character a LOT to match the detail level of the other chibi, with open eyes" '
+        '(b1), 3 "Simpler head model, no earrings" (c1: the gold hoops gone), then your angle prompt (d1). Head share in '
+        'd1: 0.39 of her height counting the ponytail (Eric 0.46, Kuro 0.41, Aoi 0.40, Emi 0.43), so no head-size '
+        'follow-up. Her long ponytail hangs down her left side (image right) to her knees in every take. 5 takes, $1.24.',
+  shape='Meshy\'s previews; first roll, kept. The ponytail is one big slab beside her left arm (image right).',
+  uv='24 polygons, red; the biggest front-facing pieces were her fringe, so the face is piece=1',
+  faces='From below the chin in the texture\'s own colours.',
+  extra=[('rig-fault.webp', 'The problem: Meshy\'s auto-rig put her skeleton in the wrong place. Her spine sits '
+          'behind her body and her shoulders are twisted about 50 degrees (her left shoulder 0.2 m behind her right), '
+          'so in the idle and walk her head and upper body bend and turn away. A second auto-rig on the same model (5 '
+          'credits) placed the bones the same way. Most likely the ponytail slab: it hangs beside her left arm and '
+          'the rig reads it as part of her body.')],
+  measure='Head share on the model (straight-on, flat colour, rest pose): see the last figure. Not checked further '
+          'because of the rig.',
+  game='Meshy auto-rig at 1.1 m, twice (5 credits each), and Meshy\'s Chair_Sit_Idle_F, 3 credits.',
+  credits='Meshy credits for Rei: 28 (shape 5, texture 10, rig 5, second rig 5, sit 3); balance 251 after her.',
+  ingame='',
+  note='The model from d1 (chat a2, b1, c1, d1): smart topology, 1,050 polygons, our UV layout with the face in one '
+       'piece, Meshy retexture styled from d1, auto-rig at 1.1 m. Her rig is twisted, so she is NOT in the game; '
+       'the code-built Rei stays (she is hidden all day anyway). 28 Meshy credits; five pictures $1.24.',
+  q='Her rig came out twisted, so she is not in the game. Shall I redo her with one more take of the angle step, '
+    'asking nothing new but picking a take where the ponytail hangs behind her back, then the same Meshy steps (about '
+    '23 credits)?'),
 }
 
 
@@ -113,17 +170,19 @@ def main():
         {'image': f'{S}/tex.webp', 'caption': 'The textured model: front, three-quarter (the left side of the image turned to '
          'us), side, back, the other three-quarter, face. Same camera and light as Kuro\'s, Aoi\'s and Emi\'s rounds.'},
         {'image': f'{S}/faces.webp', 'caption': p['faces']},
+        *({'image': f'{S}/{f}', 'caption': c} for f, c in p.get('extra', [])),
         {'image': f'{S}/measure.webp', 'caption': p['measure']},
         {'image': f'{S}/compare.webp', 'caption': f'{p["name"]} beside the in-game Eric and Mio and Kuro (the same render '
          'script and camera), front and three-quarter.'},
         {'image': f'{S}/viewer.webp', 'caption': p['game'] + ' Stills from the live viewer (rest, idle, walk, walk from the '
          'side); the idle and walk are the game\'s. ' + p['credits']},
     ]
-    if os.path.exists(f'/home/jorgen/repo/japanese/{S}/ingame.webp'):
+    if p['ingame'] and os.path.exists(f'/home/jorgen/repo/japanese/{S}/ingame.webp'):
         media.append({'image': f'{S}/ingame.webp', 'caption': p['ingame']})
     r = {'title': f'{p["name"]}: a 3D model made the way Kuro, Aoi and Emi were', 'date': '2026-10-05',
          'by': 'Claude (staff-meshy agent)', 'status': 'open',
-         'question': FIRST + f'{p["he"].capitalize()} is in the game now. ' + p['q'], 'multi': False, 'media': media,
+         'question': FIRST + (f'{p["he"].capitalize()} is in the game now. ' if p.get('installed', True) else '') + p['q'],
+         'multi': False, 'media': media,
          'options': [{'id': a, 'label': a, 'image': f'{A}/renders/tex/r45.png',
                       'images': [f'{A}/renders/tex/front.png', f'{A}/renders/tex/face.png', f'{A}/renders/tex/back.png',
                                  f'{A}/pics/{p["pic"]}.png'], 'note': p['note']}],
