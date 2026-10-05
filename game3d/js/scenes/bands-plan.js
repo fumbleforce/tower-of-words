@@ -1,6 +1,11 @@
 // The bands past each outdoor place's exits (#260), what builds each and where, in the island frame
 // ([x0, x1, z0, z1]); scenes/bands.js builds them (its header lists the builders). Rects of one band never overlap,
 // and never cover what the place lays itself. Each place's bands stay small (game3d/test/unit/bands-build.test.mjs).
+// the lawn between the bank and m6, south of the office street's own belts: the office quarter and the sports ground
+// (past its west end) both plant it
+const BANK_LAWN = [[3.6, 12.6, -45.4, -41], 'sakura,keyaki', 3.4];
+const M6_LAWN = [[24.4, 31, -45.4, -41], 'keyaki,pine', 3.4];
+
 export const BANDS = {
   east_coast: [
     // the dorm street's foot and the ramen corner, past the dorm row's west end
@@ -13,7 +18,8 @@ export const BANDS = {
     },
     // the courts walk on west past the courts' gate, the north residence's door and its hedges
     { by: 'sportsGrounds', rects: [[84, 97.8, -62, -50]] },
-    // the field between the dorm cluster and the courts walk, round dorm_6; the lawn north of the courts
+    // the field between the dorm cluster and the courts walk, round dorm_6; then the lawn north of the courts (its own
+    // band, so each is culled on its own)
     {
       by: 'lawn',
       seed: 310,
@@ -22,9 +28,9 @@ export const BANDS = {
         [[92, 104, -44, -39.6], 'ginkgo,keyaki,sakura', 3.6],
         [[116, 118.2, -49, -34], 'sakura,pine', 3.4],
         [[106, 118, -55.4, -52.6], 'pine,maple,keyaki', 3.4],
-        [[88, 100.8, -91, -86.4], 'pine,keyaki,maple', 3.6],
       ],
     },
+    { by: 'lawn', seed: 320, belts: [[[88, 100.8, -91, -86.4], 'pine,keyaki,maple', 3.6]] },
     // the boxes nearest the walks given ground floors and doors: the north residence's back on the field, dorm_6
     // facing the coast walk
     {
@@ -68,6 +74,9 @@ export const BANDS = {
     },
   ],
   sports: [
+    // past the sports lane's west end: the office street's lawns south of it, as the office quarter plants them
+    { by: 'officeLawns', rects: [[14, 36, -52.4, -40]] },
+    { by: 'lawn', seed: 380, belts: [M6_LAWN] },
     // the north street south of the back lane, with r9's front, past the north street's foot
     {
       by: 'eastLane',
@@ -94,11 +103,7 @@ export const BANDS = {
     {
       by: 'lawn',
       seed: 370,
-      belts: [
-        [[-22, -17, -45.4, -40.6], 'maple,sakura', 3.4],
-        [[3.6, 12.6, -45.4, -41], 'sakura,keyaki', 3.4],
-        [[24.4, 31, -45.4, -41], 'keyaki,pine', 3.4],
-      ],
+      belts: [[[-22, -17, -45.4, -40.6], 'maple,sakura', 3.4], BANK_LAWN, M6_LAWN],
     },
   ],
 };
