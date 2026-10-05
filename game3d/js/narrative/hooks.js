@@ -42,4 +42,5 @@ export const GLOBAL_HOOKS = [
   'ticket',
   'tickets',
   'noticeboard',
+  'day3Setup',
 ];

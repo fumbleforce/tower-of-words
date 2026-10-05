@@ -22,6 +22,8 @@ The tables are checked against the game by `node tools/facts/check.mjs`. Ids in 
 | `rei` | Rei | Sales. Not met on day 1. |
 | `tama` | Tama | A calico cat. |
 | `canteen_worker` | Canteen worker | An unnamed adult who closes the canteen terrace after work. |
+| `attendant` | Attendant | The gym's attendant on day 3: the desk by day, the pool's floats at the club's evening. An office worker's body, a borrowed voice. |
+| `member` | Club member | A swimming club member on day 3's evening, with the equipment list; her goggles are on the pool's fence. An office worker's body, a borrowed voice. |
 | `bun` | Woman with a bun | A monorail passenger. |
 | `youth` | Young man | A monorail passenger. |
 | `music` | Girl with headphones | A monorail passenger. |
@@ -310,6 +312,8 @@ Each People panel card has the name and one line about them, the same on every d
 | `aoi` | Aoi | Woman on her phone | none |
 | `tama` | none | Cat | none |
 | `canteen_worker` | Canteen worker | Canteen worker | none |
+| `attendant` | Attendant | Attendant | none |
+| `member` | Club member | Club member | none |
 | `bun` | Woman with a bun | Woman with a bun | none |
 | `youth` | Young man | Young man | none |
 | `music` | Girl with headphones | Girl with headphones | none |
@@ -336,6 +340,8 @@ Each People panel card has the name and one line about them, the same on every d
 | `tama` | gate | none | Tama |
 
 On the train Mio's lines are headed "Woman with a laptop" until she says her name.
+
+Day 3: Kuro's name plate and label stay "Receptionist" until `d3_kuro_intro`; Aoi's stay "Woman from the train" until `d3_aoi_intro`. Their own names appear after they introduce themselves, including on later visits and Continue. Rei is "Tennis player" throughout day 3; her proper introduction belongs to day 4. The guard is "Guard", including on the platform, and ticket T-0003 calls him "The guard, Honsha station". These story introductions are independent of the engine's `met_*` flags.
 
 ## What they like
 

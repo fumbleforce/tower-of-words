@@ -147,6 +147,8 @@ One car of the monorail, crossing the bay from the mainland to Honsha station. T
 
 ### Who's there when
 
+Day 3: the car still stands out of service at the platform with the tester by its doors (`stationSetup`). On a morning visit while the door report waits for his signature, the guard stands on the platform beside the tester; the witnessed check, his taking the tester clear, the last close and his signature are `stationSignoff` (game3d/js/places/day3/signoff.js). Signed off, the doors stay shut and the tester is gone on every return.
+
 Day 2: the car stands at the platform between runs, empty, its doors open (the `stationSetup` hook, every visit and Continue); the passengers, Tama, the bags and Mio's things are gone, and nothing arrives or departs. Eric comes in from the walkway. Mio waits on the platform beside the left-hand doors only while `!d2_ticket_done` and if `lunch_mio || mio_warm >= 2`, walking up the platform as he arrives; she walks off along the platform to B2 right after the report (`stationSetup` `state: depart`); otherwise she isn't here. The door test runs in one go (`doorTest`): the doors shut, the tester's lamp blinks amber three times while the sensor is tried, the doors open again and the lamp turns green with OK on its screen; the doors stay open. Saying 待って in the optional experiment freezes the doors part shut and a low motor hum runs against them until 動いて lets them open.
 
 The monorail has one period, early morning.
@@ -163,6 +165,7 @@ The monorail has one period, early morning.
 | `stander` | Hidden following the rejected silhouette. | – |
 | `tama` | Far bench, washing. | – |
 | `rei` | Hidden (her seat is Mio's now). | – |
+| `guard` | Day 3 only: on the platform beside the tester on a morning visit before the sign-off; walks back along the platform after it. Label "Guard". | – |
 
 ### Small moments
 
@@ -225,6 +228,8 @@ The gate stays in this room, as Jørgen picked in [gate-location](../../reviews/
 `arch` (walking into the closed gate), `past_gate`, `lift_front`, `platform_way` and `forecourt_way` (day 2: at the glass doors, and at the exit)
 
 ### Who's there when
+
+Day 3: the guard at his desk in the morning and afternoon, on his break on the left bench at lunch, gone home in the evening; Tama at her bowl in the morning and back by it in the evening; Hamada, Aoi and Rei not here. His monitor turns to a visitor for ticket T-0003 (`monitorRepair`, game3d/js/places/day3/monitor.js): turned, its loose plug drops the picture; seated, it holds.
 
 Day 2: the guard is at his desk and Tama by her bowl. The gate stands open, his card works and nobody is coming through (no commuters, no Hamada, no Aoi), so Eric walks between the platform and the forecourt without the card problem.
 
@@ -297,6 +302,8 @@ Small places off the walks, kept for later secrets, encounters and collectibles 
 
 ### Who's there when
 
+Day 3: Kuro and Tama are not here on Saturday.
+
 Day 2: no day-1 Kuro encounter replays. The station door, head office's door and the lane stay open in both periods. A way out he arrives standing in (the lift, back up from B2) waits until he has stepped out of it.
 
 Kuro works the head office reception all day. The two from Sales appear inside the lift during the ride.
@@ -355,6 +362,7 @@ In the morning the plaza is a side trip with no story beat: the goal points back
 | `canteen_table` | Canteen table | The terrace table nearest the link, with the last chair standing. After work only. |
 | `noticeboard` | Notice board | The notice board at the south of the circle. Read: its posts up close; from day 3 the club posters first, each with a slip to take ([systems.md](systems.md#notice-board)). |
 | `shop_walk` | To the shop street | The south walk east of the cross walk's foot, by the finger sign. |
+| `board_map` | Map | From day 3: the island map on its own post beside the notice board, a handwritten ここ sticker by its arrow. Look: the map close up, and the word koko to try. |
 
 ### Spots
 
@@ -379,6 +387,8 @@ None.
 
 ### Who's there when
 
+Day 3: Aoi at the notice board in the morning until she has introduced herself (`boardVisit`: she takes a tennis slip, then walks off toward the shop street); Tama asleep in the seat bay's shade at lunch. The island map stands on its own post beside the board from day 3.
+
 Day 2 (to build): No day-1 lunch workers or lunch event repeat. The established ambient crowd may remain; the plaza connects the job route and optional walks.
 
 None of the cast lives here yet.
@@ -387,6 +397,8 @@ None of the cast lives here yet.
 |---|---|---|
 | `mio` | Hidden (she ran ahead to a server). | – |
 | `canteen_worker` | After work only: carries the last chair over, then wipes down the next table east. Can be talked to whenever not walking; helping with the chair is the canteen table's. | – |
+| `aoi` | Day 3, morning: at the notice board until her introduction (`d3_aoi_intro`). Label "Woman from the train", then "Aoi". | – |
+| `tama` | Day 3, lunch: asleep in the seat bay's shade. Can be petted. | – |
 
 The crowd ([systems.md](systems.md), The crowd):
 
@@ -477,6 +489,8 @@ Small places off the walks, kept for later secrets, encounters and collectibles 
 
 ### Who's there when
 
+Day 3: Mori shopping by the konbini in the morning; at lunch Kenji with his curry bread and Hamada making up his mind at the bakery, Aoi at the bike shop's window, Kuro and Rei at the izakaya's lunch counter; Kenji watching the game centre in the afternoon. Day 2's party is not here.
+
 Day 1: none of the cast. Day 2, before the shift ends, none of the party cast is here either. After work Kenji waits by the izakaya's blue curtain; Mori sits on the party bench and Mio stands at its near end. Kenji walks ahead to the bench's far end when Eric meets him, or goes there when Eric reaches the bench first. After the goodbye Mio and Kenji walk off up the east walk and Mori walks to `shotengai_back_alley` with the leftovers and rests there. There is only one Mori. The crowd leaves the party bench free (it sits nobody near the story's spots). Food and seating: the party plan above.
 
 | Id | Usually | Schedule |
@@ -484,6 +498,10 @@ Day 1: none of the cast. Day 2, before the shift ends, none of the party cast is
 | `mio` | Day 2 after work: standing at the near end of the party bench, until the goodbye. | – |
 | `mori` | Day 2 after work: on the party bench, then resting in the back alley. | – |
 | `kenji` | Day 2 after work: by the izakaya's curtain, then at the far end of the party bench, until the goodbye. | – |
+| `kuroda` | Day 3, lunch: at the bakery, still deciding. | – |
+| `aoi` | Day 3, lunch: looking at shoes. Label "Woman from the train" until her introduction. | – |
+| `kuro` | Day 3, lunch: waiting at the izakaya. Label "Receptionist" until her introduction. | – |
+| `rei` | Day 3, lunch: at the izakaya beside Kuro. Label "Tennis player". | – |
 
 The crowd ([systems.md](systems.md), The crowd):
 
@@ -757,6 +775,8 @@ None.
 
 ### Who's there when
 
+Day 3: Emi eating her lunch on a terrace bench at lunch; Mio with her laptop on the other in the afternoon, and Hamada resting on the coast walk's first bench; Aoi walking by the terrace's sea wall in the evening. Day 2's lookout visit is not here.
+
 Day 2: Hamada (`kuroda`) visits the lookout telescope after work (the `coastVisit` hook: standing at the eyepiece wiping the lens, then aside by the rail; Eric at the eyepiece looks down on the steps from above, then steps back on the pad); he is absent here in the morning and absent from the day-2 gate and train. The optional encounter and sight are in [Day-2 visits](stories/day2/visits.md). The pool approach (the courts walk) is closed for resurfacing in both periods, with the same barrier as the east lane's north street, just short of its way out.
 
 None of the cast yet.
@@ -764,6 +784,8 @@ None of the cast yet.
 | Id | Usually | Schedule |
 |---|---|---|
 | `mio` | Not here. | – |
+| `emi` | Day 3, lunch: on a terrace bench. | – |
+| `aoi` | Day 3, evening: by the terrace's sea wall. Label "Woman from the train" until her introduction. | – |
 
 The crowd ([systems.md](systems.md), The crowd):
 
@@ -836,11 +858,14 @@ None.
 
 ### Who's there when
 
+Day 3: Kenji on the sofa in front of the TV in the evening.
+
 None of the cast yet.
 
 | Id | Usually | Schedule |
 |---|---|---|
 | `mio` | Not here. | – |
+| `kenji` | Day 3, evening: on the sofa, watching a replay. | – |
 
 No crowd.
 
@@ -905,11 +930,14 @@ Small places off the walks, kept for later secrets, encounters and collectibles 
 
 ### Who's there when
 
+Day 3: Rei serving on the west court in the afternoon. The office street is closed past the gym's corner by a barrier (places/closure.js); its marker moves to the barrier.
+
 None of the cast yet.
 
 | Id | Usually | Schedule |
 |---|---|---|
 | `mio` | Not here. | – |
+| `rei` | Day 3, afternoon: serving on the west court. Label "Tennis player". | – |
 
 The crowd ([systems.md](systems.md), The crowd):
 
@@ -984,11 +1012,17 @@ None.
 
 ### Who's there when
 
+Day 3: the attendant behind the desk through the day (not in the evening); Mori checking his Tuesday booking in the afternoon; Emi at the equipment store looking for the pool keys in the afternoon. The booking terminal and printer are ticket T-0004 (`bookingRepair`, game3d/js/places/day3/booking.js): the frozen screen, the red reset button under it, the sheet printed with the day's date, the attendant's check. On a later Saturday's first winter meeting (`day3Setup` state `winterClub`) Emi, Kuro and the attendant are by the benches.
+
 None of the cast yet.
 
 | Id | Usually | Schedule |
 |---|---|---|
 | `mio` | Not here. | – |
+| `attendant` | Day 3: behind the desk in the morning, at lunch and in the afternoon. Label "Attendant". | – |
+| `mori` | Day 3, afternoon: at the desk about his booking. | – |
+| `emi` | Day 3, afternoon: by the equipment store. | – |
+| `kuro` | A later Saturday's winter meeting only. | – |
 
 No crowd.
 
@@ -1014,6 +1048,7 @@ The camera looks a little east of north up the pool from the south-west and stee
 | Id | Label | What it is |
 |---|---|---|
 | `changing_room` | To the changing room | The men's changing room's door on the pavilion's deck side, back through the pavilion to the pool walk. |
+| `pool_goggles` | Goggles | Day 3, evening, members of the swimming club only: a pair of goggles hung on the fence by the south-west corner, until their owner has them back. |
 
 ### Spots
 
@@ -1038,11 +1073,17 @@ None.
 
 ### Who's there when
 
+Day 3, evening: the swimming club's last outdoor swim (game3d/js/places/day3/swim.js, `poolSession`). Before it Emi stands by the steps with the club's three bags, Kuro is already in the water in the second lane, a member stands with the equipment list and the attendant packs the unused floats on the south deck; after it Emi rests on the south bench and Kuro by its end with their towels, the bags with the attendant. A swimming player changes in their own changing room: Carina comes and goes by the women's door (`changing_room` is hers).
+
 None of the cast yet.
 
 | Id | Usually | Schedule |
 |---|---|---|
 | `mio` | Not here. | – |
+| `emi` | Day 3, evening: the club (above). Talk to her to start or resume the session. | – |
+| `kuro` | Day 3, evening: in the water, then resting. Label "Receptionist" until her introduction. | – |
+| `attendant` | Day 3, evening: packing the floats; takes the bags and the list. | – |
+| `member` | Day 3, evening: the club member with the equipment list; her goggles are on the fence. | – |
 
 No crowd.
 
@@ -1379,6 +1420,8 @@ Emi's office is the left part of what was one big copy room, split by a partitio
 
 ### Who's there when
 
+Day 3: B2 is empty on Saturday.
+
 Day 2 (the `officeDay2` hook, also on entering, before the lift doors open): before the shift ends Emi sits at her desk in her office, Mori sits at the chief's desk and Kenji at his. Mio is at the station on the warm promise history (`lunch_mio || mio_warm >= 2`) until `d2_ticket_done`, then at her desk beside Eric's; on the other history she is at her desk all morning. After work (sitting at Eric's desk) Emi is upstairs and the others have gone to the gathering, so none of them is here. Lunch, the copier and the day-1 evening don't run.
 
 The story moves the clock ([systems.md](systems.md)): morning when Eric arrives, lunch at 12:10, afternoon at 14:00, evening at 18:05.
@@ -1447,6 +1490,8 @@ None.
 
 ### Who's there when
 
+Day 3: Tama asleep on the courtyard's bench in the afternoon.
+
 Day 2: no story actor; the street gate and the way up to room 203 stay open in both periods. Coming down from his floor, Eric walks out of the passage to just inside the hall doors. In the morning the court has the other chunks' morning light, its lamps off and a little more light from the sky in the blocks' shade; it turns to dusk after work.
 
 Played in the evening, after work. None of the cast is here.
@@ -1454,6 +1499,7 @@ Played in the evening, after work. None of the cast is here.
 | Id | Usually | Schedule |
 |---|---|---|
 | `mio` | Not here. | – |
+| `tama` | Day 3, afternoon: asleep on the bench. Can be petted. | – |
 
 The crowd ([systems.md](systems.md), The crowd):
 

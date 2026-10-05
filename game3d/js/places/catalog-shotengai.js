@@ -12,6 +12,11 @@ export const SHOTENGAI_DETAILS = {
     mori: { label: 'Mr. Mori', kind: 'person' },
     kenji: { label: 'Kenji', kind: 'person' },
     party_seat: { label: 'Bench', kind: 'thing', verb: 'Sit' },
+    // day 3 (story/day3/shotengai.js): Saturday's shoppers (places/day3/)
+    kuroda: { label: 'Mr. Hamada', kind: 'person' },
+    aoi: { label: 'Woman from the train', kind: 'person' },
+    kuro: { label: 'Receptionist', kind: 'person' },
+    rei: { label: 'Tennis player', kind: 'person' },
   },
   spots: [
     'plaza_entry',
@@ -25,7 +30,7 @@ export const SHOTENGAI_DETAILS = {
   nooks: ['shotengai_shrine', 'shotengai_back_alley', 'shotengai_pine_bench'], // docs/game/places.md, "Nooks"
   seats: ['party_seat', 'party_mori'],
   zones: ['plaza_exit'],
-  people: ['mori', 'kenji'],
+  people: ['mori', 'kenji', 'kuroda', 'aoi', 'kuro', 'rei'],
   hooks: ['partySetup', 'partyFood'],
 };
 

@@ -224,7 +224,9 @@ function guardDesk() {
   mon.add(rbox(0.46, 0.3, 0.04, PAL.monitor, { y: 0.08, r: 0.015 }));
   mon.add(rbox(0.05, 0.1, 0.04, PAL.monitor, { r: 0.01 }));
   mon.position.set(MONITOR.dx, 0.55, 0.05);
+  mon.userData.noBatch = true; // it turns on day 3 (places/day3/monitor.js)
   g.add(mon);
+  g.userData.mon = mon;
   g.add(rbox(0.16, 0.05, 0.12, '#2c3038', { x: -0.45, y: 0.55, z: 0.05, r: 0.015 }));
   const pl = plant({ size: 0.5, seed: 4 });
   pl.position.set(0.72, 0.55, 0.05);
@@ -978,6 +980,7 @@ export function* lobbySteps() {
     X,
     Z,
     monitor: [DESK_AT + MONITOR.dx, MONITOR.y, BZ + 0.05], // the guard's monitor (places/lobby.js guard_monitor)
+    monitorObj: dk.userData.mon, // the monitor itself, turned on day 3 (places/day3/monitor.js)
   };
   let lastT = null;
   world.update = (t) => {

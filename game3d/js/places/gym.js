@@ -5,6 +5,8 @@ import { K } from '../scenes/office.js';
 import { PLACE_DETAILS } from './catalog.js';
 import { walkOut, walkIn } from './edge-walk.js';
 import { roomView, roomSave } from './room-view.js';
+import { day3Place } from './day3/place.js';
+import { gymDesk } from './day3/booking.js';
 
 // The gym's corner inside its main door (scenes/rooms/gym.js): the entrance with its shoe lockers, the attendant's
 // desk with the booking terminal, the printer and the fan, the benches, the equipment store and the winter meeting
@@ -17,6 +19,13 @@ export function gymPlace(game) {
   const floor = new THREE.Plane(new THREE.Vector3(0, 1, 0), 0);
   const d = w.door,
     save = roomSave(game, w.nav, d.in, cam);
+  // day 3: the attendant, Mori and Emi; the booking repair at the desk (places/day3/booking.js)
+  const d3 = day3Place(game, 'gym', { root: w.root, K, ids: ['attendant', 'mori', 'emi', 'kuro'] });
+  const desk = gymDesk(game, { w, cast: d3.cast });
+  d3.also(({ state } = {}) => {
+    desk.restore();
+    if (state === 'winterClub') desk.winterClub();
+  });
   const things = {
     gym_door: {
       ...PLACE_DETAILS.gym.things.gym_door,
@@ -49,6 +58,10 @@ export function gymPlace(game) {
       face: () => [w.board[0], w.board[2]],
       spot: () => [w.board[0] - 0.8, w.board[2]],
     },
+    attendant: { ...PLACE_DETAILS.gym.things.attendant, ...d3.thing('attendant') },
+    mori: { ...PLACE_DETAILS.gym.things.mori, ...d3.thing('mori') },
+    emi: { ...PLACE_DETAILS.gym.things.emi, ...d3.thing('emi') },
+    kuro: { ...PLACE_DETAILS.gym.things.kuro, ...d3.thing('kuro') },
   };
   const P = {
     scene: w.scene,
@@ -72,9 +85,11 @@ export function gymPlace(game) {
       gym_lockers: w.spots.gym_lockers,
     },
     seats: { gym_bench_n: w.seats[1], gym_bench_s: w.seats[0] },
-    people: {},
+    people: { attendant: d3.people.attendant, mori: d3.people.mori, emi: d3.people.emi, kuro: d3.people.kuro },
     zones: {},
-    hooks: {},
+    hooks: { bookingRepair: desk.hooks.bookingRepair },
+    day3: (a) => d3.setup(P, a),
+    kotodamaTargets: desk.kotodamaTargets,
     fit(aspect) {
       roomView(cam, w.bounds, aspect);
     },
@@ -82,7 +97,9 @@ export function gymPlace(game) {
       const point = new THREE.Vector3();
       return rc.ray.intersectPlane(floor, point) ? point : null;
     },
-    update() {},
+    update(dt) {
+      d3.update(dt);
+    },
     snapshotState: save.snapshot,
     restoreState: save.restore,
     // in through the main doors, walking north onto the tiles; out the same way

@@ -5,6 +5,7 @@ import { K } from '../scenes/office.js';
 import { PLACE_DETAILS } from './catalog.js';
 import { walkOut, walkIn } from './edge-walk.js';
 import { roomView, roomSave } from './room-view.js';
+import { day3Place } from './day3/place.js';
 
 // The dorm common room (scenes/rooms/commons.js): the ground floor of dorm_gallery on the inner court, the art
 // club's room. In through the glazed door off the inner court's north-south walk, out the same way (the east coast,
@@ -16,6 +17,7 @@ export function commonsPlace(game) {
   const floor = new THREE.Plane(new THREE.Vector3(0, 1, 0), 0);
   const d = w.door,
     save = roomSave(game, w.nav, d.in, cam);
+  const d3 = day3Place(game, 'dorm_commons', { root: w.root, K, ids: ['kenji'] }); // day 3's evening: the TV
   const things = {
     commons_door: {
       ...PLACE_DETAILS.dorm_commons.things.commons_door,
@@ -48,6 +50,7 @@ export function commonsPlace(game) {
       face: () => [w.board[0], w.board[2]],
       spot: () => [w.board[0] - 0.75, w.board[2]],
     },
+    kenji: { ...PLACE_DETAILS.dorm_commons.things.kenji, ...d3.thing('kenji') },
   };
   const P = {
     scene: w.scene,
@@ -71,9 +74,10 @@ export function commonsPlace(game) {
       commons_fridge: w.spots.commons_fridge,
     },
     seats: { commons_sofa: w.seats[0] },
-    people: {},
+    people: { kenji: d3.people.kenji },
     zones: {},
     hooks: {},
+    day3: (a) => d3.setup(P, a),
     fit(aspect) {
       roomView(cam, w.bounds, aspect);
     },
@@ -81,7 +85,9 @@ export function commonsPlace(game) {
       const point = new THREE.Vector3();
       return rc.ray.intersectPlane(floor, point) ? point : null;
     },
-    update() {},
+    update(dt) {
+      d3.update(dt);
+    },
     snapshotState: save.snapshot,
     restoreState: save.restore,
     // in through the glazed door, walking north; out the same way

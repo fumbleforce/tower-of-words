@@ -5,7 +5,7 @@ import { flags } from './narrative/state.js';
 import { canTravel } from './places/definitions.js';
 import { needsLegacyOpening } from './narrative/legacy-opening.js';
 import { showEnd } from './end.js';
-import { nextDaySave, sampleDayOneEnd } from './days.js';
+import { nextDaySave, sampleDayEnd } from './days.js';
 
 export function createContinue(game, { enter, travel, startScene, PLACES }) {
   const ui = game.ui;
@@ -48,11 +48,11 @@ export function createContinue(game, { enter, travel, startScene, PLACES }) {
 }
 
 // ?day=N: the opening save of day N, made from the autosave when it is the finished day before, else from a sample
-// finished day 1 (&history=mio|mori|cold, days.js)
+// finished day before (&history=mio|mori|cold, and for day 3 ,keep: days.js sampleDayEnd)
 // (&place=<id>: that place instead of Eric's room, for looking at a place on that day)
 export function dayStartSave(day, history = 'mio', place = null) {
   const prev = loadSave();
-  const base = prev?.ended && prev.day === day - 1 ? prev : sampleDayOneEnd(history);
+  const base = prev?.ended && prev.day === day - 1 ? prev : sampleDayEnd(day, history);
   const save = nextDaySave({ ...base, day: day - 1 });
   return place && place !== save.place ? { ...save, place, pendingStart: place, world: null } : save;
 }

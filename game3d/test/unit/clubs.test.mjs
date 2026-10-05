@@ -167,25 +167,32 @@ test('membership and progress survive a save and a restore', () => {
   assert.equal(back.nextMeeting('swimming', 3, 'evening').day, 10);
 });
 
-test('the day-3 test skeleton: ?day=3 only, its ways allowed, its ids real', () => {
+test('day 3: its ways allowed, its ids, hooks and nodes real', () => {
   assert.equal(DAYS[3].dir, 'day3/');
   for (const [place, st] of Object.entries(DAY3)) {
     const d = PLACE_DETAILS[place];
     assert.ok(d, place);
-    assert.ok(st.nodes[st.start], `${place}: start node`);
+    const nodes = { ...CLUBS.nodes, ...st.nodes }; // a place's story as played (clubs/index.js withClubs)
+    assert.ok(nodes[st.start], `${place}: start node`);
     for (const [k, v] of Object.entries(st.on)) {
-      const [kind, id] = k.split(':');
-      if (kind === 'talk') assert.ok(d.things[id], `${place}: thing ${id}`);
+      const [kind, a, b] = k.split(':');
+      const id = kind === 'say' ? b : a;
       if (kind === 'zone') assert.ok(d.zones.includes(id), `${place}: zone ${id}`);
-      assert.ok(st.nodes[v], `${place}: node ${v}`);
+      else assert.ok(d.things[id] || id === 'mio', `${place}: thing ${id}`); // (Mio is every place's: SHARED_THINGS)
+      for (const e of [v].flat()) assert.ok(nodes[typeof e === 'string' ? e : e.node], `${place}: node for ${k}`);
     }
-    for (const steps of Object.values(st.nodes))
+    const walk = (steps) => {
       for (const s of steps) {
-        if (s?.do === 'trip') assert.ok(canTravel(place, s.to, 3), `${place} -> ${s.to}`);
-        if (s?.do) assert.ok(GLOBAL_HOOKS.includes(s.do), `${place}: hook ${s.do}`);
-        if (s?.go) assert.ok(st.nodes[s.go], `${place}: go ${s.go}`);
-        for (const o of s?.choice || []) assert.ok(st.nodes[o.go], `${place}: choice ${o.go}`);
+        if (!s || typeof s !== 'object') continue;
+        if (s.do === 'trip') assert.ok(canTravel(place, s.to, 3), `${place} -> ${s.to}`);
+        if (s.do) assert.ok(GLOBAL_HOOKS.includes(s.do) || d.hooks.includes(s.do), `${place}: hook ${s.do}`);
+        for (const k of ['go', 'call']) if (s[k]) assert.ok(nodes[s[k]], `${place}: ${k} ${s[k]}`);
+        for (const o of s.choice || []) assert.ok(nodes[o.go], `${place}: choice ${o.go}`);
+        walk(s.then || []);
+        walk(s.else || []);
       }
+    };
+    for (const steps of Object.values(st.nodes)) walk(steps);
   }
   // every club place can be reached from room 203 on day 3
   const seen = new Set(['dorms']), todo = ['dorms'];

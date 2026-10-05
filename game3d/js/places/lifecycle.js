@@ -11,11 +11,13 @@ import { lightenForPhone, phoneBatch } from '../perf/phone.js';
 import { warmPlace } from '../perf/warm.js';
 import { SmoothWalker } from '../move.js';
 import { playMusic } from '../ui.js';
-import { sim, PERIODS as PERIOD_ORDER, absorb, applySchedule, save } from '../sim.js';
+import { sim, PERIODS as PERIOD_ORDER, absorb, applySchedule, save, periodName } from '../sim.js';
 import * as trips from '../trips.js';
 import { installFinds, findSpotSteps, syncFinds } from '../finds/index.js';
 import { installTickets } from '../tickets/index.js';
 import { installClubs, withClubs, clubArrival } from '../clubs/index.js';
+import { installDay3 } from './day3/place.js';
+import { noteBenches } from './day3/seats.js';
 import { installBoot, installPlacePlugin, watchPlacePlugins } from '../plugins.js';
 import { installCreatures } from '../creatures/index.js';
 import { attachCrowd } from '../crowd/index.js';
@@ -53,6 +55,7 @@ export function createPlaceLifecycle(
   installFinds(game); // the photos and papers Eric picks up (finds/index.js)
   installTickets(game); // the repair tickets and their app on Eric's computers (tickets/index.js)
   installClubs(game); // the clubs and the notice board (clubs/index.js)
+  installDay3(game); // Saturday's people and scenes, the story's day3Setup (places/day3/)
   watchPlacePlugins(game);
   // preparation runs a slice a frame while a place is being played, flat out while the player waits for it
   setUrgent(() => !game.place || document.body.classList.contains('loading'));
@@ -63,6 +66,7 @@ export function createPlaceLifecycle(
         const place = await PLACES[name](game, story);
         assertPlaceRegistered(place, name, PLACE_DETAILS[name]);
         place.name = name;
+        noteBenches(place); // its benches' seats, before the draw-call pass merges them (places/day3/seats.js)
         await installBoot();
         await installPlacePlugin(name, { game, story, place });
         await nextFrame();
@@ -155,16 +159,7 @@ export function createPlaceLifecycle(
       sim.period = place.defaultPeriod;
     applySchedule(game, { instant: true });
     place.ambient?.enter(sim.period); // the crowd for this period, everyone at once (crowd/index.js)
-    ui.clock(
-      sim.date,
-      {
-        early: 'Early morning',
-        morning: 'Morning at work',
-        lunch: 'Lunch',
-        afternoon: 'Afternoon',
-        evening: 'After work',
-      }[sim.period],
-    );
+    ui.clock(sim.date, periodName(sim.period)); // a weekend's own names (sim.js periodName)
     const music = place.music === 'night' ? 'calm' : place.music; // a night place by day (day 2's morning room)
     playMusic(sim.period === 'evening' ? 'night' : music || MUSIC[name] || 'calm');
     syncFinds(place); // prints already picked up stay gone, also after a load

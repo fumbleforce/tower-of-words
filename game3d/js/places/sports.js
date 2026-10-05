@@ -11,6 +11,8 @@ import { PLACE_DETAILS } from './catalog.js';
 import { snapshotPeople, restorePeople } from './saved-people.js';
 import { walkOut, walkIn } from './edge-walk.js';
 import { turningCam, followFit, frameFit, quietly } from './turning-cam.js';
+import { roadClosure } from './closure.js';
+import { day3Place } from './day3/place.js';
 
 // The sports ground (scenes/sports.js): the north street walked on north from the east lane, past the back lane, to
 // the sports lane, the gym's front, the pool walk to the shower pavilion and the courts walk to the onsen path; it
@@ -59,6 +61,9 @@ export async function sportsPlace(game) {
   const bench = pt(CP.SEAT.at);
   let aspect = 1,
     framed = false; // the camera holding the whole court
+  const d3 = day3Place(game, 'sports', { root: w.root, K, ids: ['rei'] }); // day 3's afternoon: Rei's serves
+  // day 3: the office street closed past the gym's corner (places/closure.js; story/day3/sports.js d3_closed)
+  const westClosed = roadClosure({ space: w.root, nav: w.nav }, west, (x, z) => inRect(x, z, west.zone), { days: [3] });
   const things = {
     // the ways out (plan.js EXITS)
     north_street: {
@@ -75,8 +80,11 @@ export async function sportsPlace(game) {
     },
     office_street: {
       ...PLACE_DETAILS.sports.things.office_street,
-      anchor: (v) => v.set(west.lane[0], 1.1, west.lane[1]),
-      spot: () => west.lane,
+      anchor: (v) => {
+        const p = westClosed.closed() ? westClosed.at() : west.lane;
+        return v.set(p[0], 1.1, p[1]);
+      },
+      spot: () => (westClosed.closed() ? westClosed.spot() : west.lane),
       face: () => west.edge,
     },
     // the shut doors
@@ -106,6 +114,7 @@ export async function sportsPlace(game) {
       spot: () => [court.basket[0] + 0.75, court.basket[1]],
       face: () => court.basket,
     },
+    rei: { ...PLACE_DETAILS.sports.things.rei, ...d3.thing('rei') },
   };
   const P = {
     scene: w.scene,
@@ -133,7 +142,9 @@ export async function sportsPlace(game) {
       court_corner: CP.SPOTS.court_corner,
     },
     seats: { court_bench: { x: bench[0], z: bench[1], top: CP.SEAT.top, ry: CP.SEAT.ry } },
-    people: {},
+    people: { rei: d3.people.rei },
+    day3: (a) => d3.setup(P, a),
+    onDay: (day) => westClosed.sync(day),
     zones: {
       north_exit: (x, z) => inRect(x, z, back.zone),
       east_exit: (x, z) => inRect(x, z, on.zone),
@@ -151,6 +162,7 @@ export async function sportsPlace(game) {
       return rc.ray.intersectPlane(floor, point) ? point : null;
     },
     update(dt) {
+      d3.update(dt);
       const p = game.player.root.position;
       w.follow(p.x, p.z);
       w.update();

@@ -10,6 +10,7 @@ import { PLACE_DETAILS } from './catalog.js';
 import { snapshotPeople, restorePeople } from './saved-people.js';
 import { walkOut, walkIn } from './edge-walk.js';
 import { shotengaiParty } from './shotengai-party.js';
+import { day3Place } from './day3/place.js';
 
 // The shop street and the seafront (scenes/shotengai.js): reached from the plaza down the cross walk and along the
 // south walk, it comes in at the arcade's east mouth off the dorm street; it also loads with ?place=shotengai. The
@@ -29,6 +30,7 @@ export async function shotengaiPlace(game) {
   // the way a door faces: from it out to the step in front of it
   const outOf = (id) => Math.atan2(dk(id).step[0] - dk(id).local[0], dk(id).step[1] - dk(id).local[1]);
   const party = shotengaiParty(game, { w, K }); // day 2's gathering on the promenade (shotengai-party.js)
+  const d3 = day3Place(game, 'shotengai', { root: w.root, K, ids: ['kuroda', 'aoi', 'kuro', 'rei'] }); // day 3's shoppers
   const things = {
     plaza_lane: {
       ...PLACE_DETAILS.shotengai.things.plaza_lane,
@@ -79,6 +81,10 @@ export async function shotengaiPlace(game) {
       anchor: (v) => party.anchor(v),
       ...party.thing('party_seat'),
     },
+    kuroda: { ...PLACE_DETAILS.shotengai.things.kuroda, ...d3.thing('kuroda') },
+    aoi: { ...PLACE_DETAILS.shotengai.things.aoi, ...d3.thing('aoi') },
+    kuro: { ...PLACE_DETAILS.shotengai.things.kuro, ...d3.thing('kuro') },
+    rei: { ...PLACE_DETAILS.shotengai.things.rei, ...d3.thing('rei') },
   };
   const P = {
     scene: w.scene,
@@ -103,9 +109,17 @@ export async function shotengaiPlace(game) {
       party_mio: party.spots.party_mio,
     },
     seats: { party_seat: party.seats.party_seat, party_mori: party.seats.party_mori },
-    people: { mori: party.people.mori, kenji: party.people.kenji },
+    people: {
+      mori: party.people.mori,
+      kenji: party.people.kenji,
+      kuroda: d3.people.kuroda,
+      aoi: d3.people.aoi,
+      kuro: d3.people.kuro,
+      rei: d3.people.rei,
+    },
     zones: { plaza_exit: (x, z) => z > w.exitZ },
     hooks: { partySetup: party.hooks.partySetup, partyFood: party.hooks.partyFood },
+    day3: (a) => d3.setup(P, a),
     fit(aspect) {
       // as the plaza: the phone's camera distance on both, following him, a little ahead (west, down the street)
       if (aspect >= 1)
@@ -138,6 +152,7 @@ export async function shotengaiPlace(game) {
       return rc.ray.intersectPlane(floor, point) ? point : null;
     },
     update(dt) {
+      d3.update(dt);
       const p = game.player.root.position;
       w.follow(p.x, p.z);
       updateOccluders(P, p, dt);

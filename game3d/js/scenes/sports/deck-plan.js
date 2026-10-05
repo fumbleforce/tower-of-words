@@ -94,6 +94,12 @@ export const EXIT = {
   lane: P.pt([MEN_X, DOOR_Z + 1.5]),
   in: P.pt([MEN_X, DOOR_Z + 1.9]),
 };
+// the women's changing room's door, the same way (Carina's: places/pool.js picks the protagonist's)
+export const EXIT_W = {
+  edge: P.pt([WOMEN_X, DOOR_Z + 0.1]),
+  lane: P.pt([WOMEN_X, DOOR_Z + 1.5]),
+  in: P.pt([WOMEN_X, DOOR_Z + 1.9]),
+};
 // the named spots on the deck: the top of the steps, the north end behind the blocks, by the chair, between the
 // benches, by the float rack
 export const SPOTS = {

@@ -19,7 +19,7 @@ import { partyFoodSet, TOP, BENCH, SEA_X, FACE } from './shotengai-food.js';
 
 export function shotengaiParty(game, { w, K }) {
   let P = null;
-  const later = () => sim.day > 1;
+  const later = () => sim.day === 2; // (day 3's shoppers: places/day3/plan.js)
   const seats = {
     // Eric nearer the camera, Mori further along; each gets on from the floor beside its end of the bench
     party_seat: { x: SEA_X, z: BENCH[1] + 0.4, top: TOP, ry: FACE, out: [SEA_X + 0.1, BENCH[1] + 1.3] },

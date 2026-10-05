@@ -28,6 +28,9 @@ export const PERIOD_NAMES = {
   afternoon: 'Afternoon',
   evening: 'After work',
 };
+// a period's name on a given day: a weekend has no work in it (Saturday morning is "Morning", its evening "Evening")
+const WEEKEND_NAMES = { ...PERIOD_NAMES, morning: 'Morning', evening: 'Evening' };
+export const periodName = (p, day = sim.day) => (/^(Sat|Sun)/.test(dateOf(day || 1)) ? WEEKEND_NAMES : PERIOD_NAMES)[p];
 
 export { STEPS };
 
@@ -100,7 +103,7 @@ export function setPeriod(p, game) {
   if (!PERIODS.includes(p)) return;
   sim.period = p;
   flags[ENGINE_KEYS.period] = p;
-  ui.clock(sim.date, PERIOD_NAMES[p]);
+  ui.clock(sim.date, periodName(p));
   applySchedule(game);
   save(game);
 }

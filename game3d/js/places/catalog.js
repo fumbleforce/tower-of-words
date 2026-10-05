@@ -126,6 +126,7 @@ export const PLACE_DETAILS = {
       'newsletter',
       'liftOpen',
       'liftClose',
+      'monitorRepair',
     ],
   },
   forecourt: {
@@ -153,11 +154,12 @@ export const PLACE_DETAILS = {
       stairs: { label: 'To the stairs', kind: 'thing' },
       mailboxes: { label: 'Mailbox 203', kind: 'thing', verb: 'Take mail' },
       street_gate: { label: 'To the street', kind: 'thing', verb: 'Go' }, // day 2: out to the east lane
+      tama: { label: 'Tama', verb: 'Pet', kind: 'person small' }, // day 3, the afternoon: asleep (places/day3/)
     },
     spots: ['plaza_entry', 'dorm_entry', 'hall', 'passage', 'bath'],
     seats: [],
     zones: ['hall', 'passage', 'street_exit'],
-    people: [],
+    people: ['tama'],
     hooks: ['mailbox203'],
   },
   ...SOUTH_HALF_DETAILS, // the shop street, the east lane, the east coast
@@ -186,13 +188,17 @@ export const PLACE_DETAILS = {
       canteen_worker: { label: 'Canteen worker', kind: 'person' },
       noticeboard: { label: 'Notice board', kind: 'thing', verb: 'Read' },
       shop_walk: { label: 'To the shop street', kind: 'thing', verb: 'Go' },
+      // day 3 (story/day3/plaza.js): Aoi at the board in the morning, its map, Tama in the shade at lunch
+      aoi: { label: 'Woman from the train', kind: 'person' },
+      board_map: { label: 'Map', kind: 'thing small', verb: 'Look' },
+      tama: { label: 'Tama', verb: 'Pet', kind: 'person small' },
     },
     spots: ['office_entry', 'fountain_edge', 'dorm_exit', 'shop_walk', 'plaza_seat_bay', 'plaza_shrine'],
     nooks: ['plaza_seat_bay', 'plaza_shrine'], // docs/game/places.md, "Nooks"
     seats: [],
     zones: ['office_lane', 'dorm_exit', 'shop_walk'],
-    people: ['canteen_worker'],
-    hooks: ['canteenChair'],
+    people: ['canteen_worker', 'aoi', 'tama'],
+    hooks: ['canteenChair', 'boardVisit'],
   },
   office: OFFICE_DETAILS,
 };

@@ -9,10 +9,10 @@ import { STORIES as DAY3_STORIES } from '../story/day3/index.js';
 export const DAYS = {
   1: { dir: '', start: 'train', period: 'early' },
   2: { dir: 'day2/', start: 'dorms', period: 'morning', files: Object.keys(DAY2_STORIES) },
-  // a test skeleton for the clubs (story/day3/index.js), reached only with ?day=3 until day 3's story lands (#229)
+  // Saturday: a free day (story/day3/README.md), its places from story/day3/index.js
   3: { dir: 'day3/', start: 'dorms', period: 'morning', files: Object.keys(DAY3_STORIES) },
 };
-export const LAST_DAY = 2; // the last day a player plays on into; ?day=N starts any day in DAYS
+export const LAST_DAY = 3; // the last day a player plays on into; ?day=N starts any day in DAYS
 export const dayOf = (n) => DAYS[n] || DAYS[1];
 // the story module path for a place on a day, relative to game3d/js/
 export const storyPath = (name, day = 1) => `../story/${dayOf(day).dir}${name}.js`;
@@ -34,6 +34,37 @@ export function nextDaySave(prev) {
     world: { inside: true }, // a day starts in Eric's room (places/dorms.js restoreState)
     ui: { goal: '', sideGoal: '' },
   };
+}
+// ?day=N with no save of one's own from the day before: a plain finished day N-1. history is a comma list: day 1's
+// (mio, mori or cold) and day 2's report (order: the new sensor ordered, the default; keep: the old one kept).
+export function sampleDayEnd(day, history = 'mio') {
+  const h = String(history || 'mio').split(',');
+  const one = sampleDayOneEnd(h.find((x) => ['mio', 'mori', 'cold'].includes(x)) || 'mio');
+  return day <= 2 ? one : sampleDayTwoEnd(one, h.includes('keep') ? 'keep' : 'order');
+}
+// a plain finished day 2 on top of a finished day 1: the door report sent, the brief, the shift and the party done
+function sampleDayTwoEnd(one, report) {
+  const flags = {
+    ...one.flags,
+    d2_started: true,
+    d2_station_seen: true,
+    d2_checked: true,
+    d2_ticket_done: true,
+    ...(report === 'order' ? { d2_order_sensor: true } : {}),
+    d2_brief_done: true,
+    d2_shift_done: true,
+    d2_met_kenji: true,
+    d2_ate: true,
+    d2_food: 'riceball',
+    d2_party_done: true,
+    d2_complete: true,
+    going_home: true,
+    ticket_T0001: 'done',
+    ticket_T0002: 'progress',
+    ticketread_T0001: true,
+    ticketread_T0002: true,
+  };
+  return { ...one, day: 2, flags, known: [...one.known, 'tabetai'], yen: one.yen + 3000, ended: true };
 }
 // ?day=2 with no day-1 save of one's own: a plain finished day 1 (the magic way through the gate, lunch with Mio).
 // &history=mori takes lunch with Mori instead; &history=cold, lunch alone and no promise from Mio.
