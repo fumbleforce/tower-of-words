@@ -3,7 +3,7 @@
  "date": "2026-10-05",
  "by": "Claude (staff-meshy agent)",
  "status": "open",
- "question": "The first two sheets are ChatGPT pictures; every sheet after them is a render of the real rigged model, which you can turn in the live viewer next to Eric, Mio, Kuro, Aoi and Emi (link below). Her rig came out twisted, so she is not in the game. Shall I redo her with one more take of the angle step, asking nothing new but picking a take where the ponytail hangs behind her back, then the same Meshy steps (about 23 credits)?",
+ "question": "The first two sheets are ChatGPT pictures; every sheet after them is a render of the real rigged model, which you can turn in the live viewer (links below; rei-1-rig2 is the new rig). Your note on rei-1: \"model good, rig terrible\". rei-1-rig2 is the same model on a new rig of ours, and she is in the game now. Is her rig right?",
  "multi": false,
  "media": [
   {
@@ -45,6 +45,26 @@
   {
    "image": "art/parts/rei-meshy-1/sheets/viewer.webp",
    "caption": "Meshy auto-rig at 1.1 m, twice (5 credits each), and Meshy's Chair_Sit_Idle_F, 3 credits. Stills from the live viewer (rest, idle, walk, walk from the side); the idle and walk are the game's. Meshy credits for Rei: 28 (shape 5, texture 10, rig 5, second rig 5, sit 3); balance 251 after her."
+  },
+  {
+   "image": "art/parts/rei-meshy-1/sheets/rig2-joints.webp",
+   "caption": "Rig round 2, from here on renders of the real model. Your note on rei-1: \"model good, rig terrible\". Left: Meshy's skeleton on rei-1; its spine, neck and her left arm's bones sit inside the ponytail (the red piece, behind her and to her left, image right), 12 cm behind her back and 7 cm to her left. Right: the new skeleton, the same 24 bones and names the other Meshy people have, each joint placed from her own mesh (the middle of each trouser leg, of the jacket between the arms, of each sleeve), left and right mirrored. Her model is not touched (no new Meshy generation, 0 credits)."
+  },
+  {
+   "image": "art/parts/rei-meshy-1/sheets/rig2-weights.webp",
+   "caption": "Which bone moves each part, by its strongest bone. Left: Meshy's weights. Right: the new ones. Head and hair tie on the head; the ponytail on the head at the top, blending to the neck lower down, so it turns with her head and hangs from her neck; arms, spine and legs each on their own side's bones."
+  },
+  {
+   "image": "art/parts/rei-meshy-1/sheets/rig2-before-after.webp",
+   "caption": "The live viewer, before and after: rei-1 (Meshy's rig) bends sideways and turns her head; rei-1-rig2 stands and walks straight. The idle and walk here are the game's."
+  },
+  {
+   "image": "art/parts/rei-meshy-1/sheets/rig2-viewer.webp",
+   "caption": "rei-1-rig2 in the live viewer: rest, idle and walk from the front, three-quarter (the left side of the image turned to us), side and back."
+  },
+  {
+   "image": "art/parts/rei-meshy-1/sheets/rig2-ingame.webp",
+   "caption": "In the game (day 1, test mode, 2560x1440): seated on the train with Meshy's Chair_Sit_Idle_F, as she is before the story seats Mio in her place. The story keeps her hidden for the rest of day 1, so this still shows her for the picture only. Run, sit, idle and walk were also checked frame by frame: her head, chest and hips turn exactly as Emi's do (at most 4.5, 17 and 7 degrees in the walk)."
   }
  ],
  "options": [
@@ -59,9 +79,25 @@
     "art/parts/rei-meshy-1/pics/d1.png"
    ],
    "note": "The model from d1 (chat a2, b1, c1, d1): smart topology, 1,050 polygons, our UV layout with the face in one piece, Meshy retexture styled from d1, auto-rig at 1.1 m. Her rig is twisted, so she is NOT in the game; the code-built Rei stays (she is hidden all day anyway). 28 Meshy credits; five pictures $1.24."
+  },
+  {
+   "id": "rei-1-rig2",
+   "label": "rei-1-rig2 (new rig)",
+   "image": "art/parts/rei-meshy-1/viewer/close-rig2/walk-80.png",
+   "images": [
+    "art/parts/rei-meshy-1/viewer/close-rig2/idle-0.png",
+    "art/parts/rei-meshy-1/viewer/close-rig2/walk-0.png",
+    "art/parts/rei-meshy-1/viewer/close-rig2/walk-157.png",
+    "art/parts/rei-meshy-1/game/train-rei.png"
+   ],
+   "note": "rei-1 as Meshy made it (the same vertices, UVs and texture, unchanged) on a rig of ours: the game's Meshy skeleton placed inside her body, with Emi's bone orientations, so Meshy's walk, run and sit play on her as on Emi; the ponytail weighted to her head and neck. In the game since this round, 1.12 tall. No Meshy credits, no pictures."
   }
  ],
  "links": [
+  {
+   "label": "Live 3D: rei-1-rig2, the new rig, alone (turn, zoom, idle, walk; switch to rei-1 to compare)",
+   "href": "tools/characters/parts/viewer.html?cfg=/reviews/rei-meshy-1/viewer.json&a=rei-1-rig2&m=walk&c=none"
+  },
   {
    "label": "Live 3D: Rei beside the in-game Eric, Mio, Kuro, Aoi and Emi (turn, zoom, idle, walk)",
    "href": "tools/characters/parts/viewer.html?cfg=/reviews/rei-meshy-1/viewer.json&a=rei-1&m=idle&c=Eric%2C%20Mio%2C%20Kuro%2C%20Aoi%20and%20Emi"

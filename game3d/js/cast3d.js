@@ -10,12 +10,22 @@ import { chibiFiles, chibiFrom, CHIBI_CAST } from './chibi.js';
 
 // Standing heights next to Mio (1.12) and Eric (1.2). While a model waits for Jørgen's approval it only loads with
 // ?cast3d=<id>[,<id>]; approved ids go in CAST3D_ON.
-export const CAST3D = { mori: 1.09, kenji: 1.12, guard: 1.09, kuroda: 1.09, kuro: 1.12, aoi: 1.09, emi: 1.09 };
+export const CAST3D = {
+  mori: 1.09,
+  kenji: 1.12,
+  guard: 1.09,
+  kuroda: 1.09,
+  kuro: 1.12,
+  aoi: 1.09,
+  emi: 1.09,
+  rei: 1.12,
+};
 // Kuro: Review kuro-meshy-orig-3 (Jørgen, 2026-10-04: "Yes, very good"); Aoi and Emi: Reviews aoi-meshy-1 and
 // emi-meshy-1, round 2; the staff from Reviews <id>-meshy-1, made the same way (Jørgen, 2026-10-05: "can you also
 // kick off the remaining staff and background characters in the new style"); Kenji is round 2 (kenji-2), after
-// Jørgen's "he is too slim, doesnt look like himself" on kenji-1
-const CAST3D_ON = ['kuro', 'aoi', 'emi', 'mori', 'guard', 'kuroda', 'kenji'];
+// Jørgen's "he is too slim, doesnt look like himself" on kenji-1; Rei is rei-1 on a new rig of ours (Jørgen: "model good,
+// rig terrible"; art/candidates/rei-rig-1)
+const CAST3D_ON = ['kuro', 'aoi', 'emi', 'mori', 'guard', 'kuroda', 'kenji', 'rei'];
 const Q3 = new URLSearchParams(typeof location !== 'undefined' ? location.search : '');
 // only in a page: the unit tests import the cast in Node, where everyone stays code-built (as in chibi.js)
 const PAGE = typeof addEventListener === 'function';
@@ -23,7 +33,7 @@ const want3 = [...CAST3D_ON, ...(Q3.get('cast3d') || '').split(',')].filter(
   (id) => PAGE && CAST3D[id] && !CHIBI_CAST.includes(id),
 );
 // The Meshy cast has no phone pose or library gestures: their scenes use the drawn ones (rig-gestures.js)
-const NO_EXTRAS = ['kuro', 'aoi', 'emi', 'mori', 'kenji', 'guard', 'kuroda'];
+const NO_EXTRAS = ['kuro', 'aoi', 'emi', 'mori', 'kenji', 'guard', 'kuroda', 'rei'];
 // Hand bones scaled at load (Jørgen on aoi-1: "her hands are larger than the others"; at 0.75 hers are between Kuro's
 // and Mio's, art/candidates/aoi-emi-meshy-2/hand_area.py); the rest is as Meshy made her
 // The guard's came out larger still (0.139 of his height, Eric's 0.107; aoi-emi-meshy-2/hands.py): 0.75 brings them to Eric's
@@ -61,6 +71,12 @@ export function meshyPerson(m) {
   });
   m.head = O();
   (hb || m.root).add(m.head);
+  // the lap when seated, for things a place puts there (Rei's laptop on the train); the stand-ins above are not drawn
+  if (m.sitHip) {
+    m.lap = O();
+    m.lap.position.set(0, m.sitHip.y + 0.03, 0);
+    m.root.add(m.lap);
+  }
   m.headK = O();
   let last = null;
   const bones = {};
