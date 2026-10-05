@@ -1,0 +1,111 @@
+{
+ "title": "Minimap, island map and fast travel: plan",
+ "date": "2026-10-05",
+ "by": "Claude (plan agent, #261)",
+ "status": "open",
+ "question": "This is a plan and a mock-up, not built. The pictures are drawings made from the game's real island layout data, not screenshots; the pins, the goal and Saturday at the plaza are made up to show every state. Six choices, pick one per number: 1 map style (default 1a), 2 transition (default 2a), 3 time cost (default 3a), 4 fast travel only to places you've been (default 4a), 5 where the minimap sits (default 5a), 6 minimap orientation (default 6a). Untouched numbers get their default.",
+ "multi": true,
+ "media": [
+  {
+   "image": "reviews/minimap-plan-1/phone-map.png",
+   "caption": "Phone, 390 × 844: the map open after tapping the minimap, Shop street picked. The sheet gives the walking time, what's inside (the karaoke box, not been yet) and Go there. Drag or pinch to move. Pins: teal is you, solid white is a place you've been (fast travel), a dashed ring is a place you haven't been (walk there), grey with a lock is not open today. The flag is the goal."
+  },
+  {
+   "image": "reviews/minimap-plan-1/desktop-map.png",
+   "caption": "Desktop, 1366 × 860: the whole built island on the left, the picked place and every place grouped on the right. M or Esc closes; arrow keys move through the list, Enter travels."
+  },
+  {
+   "image": "reviews/minimap-plan-1/phone-hud.png",
+   "caption": "The minimap in the phone HUD, top right under the chips (88 px). The game view is a plain backdrop here. The teal dot on its edge points at the goal; tap it to open the map."
+  },
+  {
+   "image": "reviews/minimap-plan-1/desktop-hud.png",
+   "caption": "The minimap in the desktop HUD (180 px at interface size 1). M or a click opens the map."
+  }
+ ],
+ "options": [
+  {
+   "id": "1a",
+   "label": "1a. Clean UI map from the layout data (default)",
+   "image": "reviews/minimap-plan-1/desktop-map.png",
+   "note": "What the mock-ups show: coast, streets and buildings drawn from game3d/js/scenes/island-layout.js in the HUD's slate and Mio's teal. It always matches the built world, and each new district shows up on the map the day it's built. Cheap on a phone (2D canvas, no WebGL)."
+  },
+  {
+   "id": "1b",
+   "label": "1b. The illustrated island map",
+   "image": "art/candidates/island-map-4/01-overview.png",
+   "note": "A painted map like island-map-4, toned down to the game's palette. Needs a new art round for you to approve, a straight-down version so the pins sit right, and a repaint or patch every time a district is built."
+  },
+  {
+   "id": "2a",
+   "label": "2a. Quick crossfade into the arriving walk (default)",
+   "note": "Go there: the current frame crossfades (the same 1.3 s fade as every walk between places) into Eric walking in at the destination, the way he'd arrive on foot from the last street on the route. About 2 to 3 seconds, never black, and arrival scenes play as they would on foot."
+  },
+  {
+   "id": "2b",
+   "label": "2b. Short walk montage",
+   "note": "Eric walks out of here, then a moment of him walking through each place on the way, then the arrival walk. 4 to 8 seconds by distance. Every place on the way has to be built first, which costs a phone several seconds and memory per place."
+  },
+  {
+   "id": "3a",
+   "label": "3a. No time cost (default)",
+   "note": "Walking between places costs no time today: the clock has five periods and only the story (day 1) or your choice at the desk (free days) moves it. A charge would make fast travel dearer than walking. The sheet still shows the walking time (\"about 2 min on foot\")."
+  },
+  {
+   "id": "3b",
+   "label": "3b. A fixed short cost",
+   "note": "Every fast travel costs, say, 10 minutes. The clock needs minutes inside its periods first (10:20 on the HUD, a period ends at a set time), a change to the clock system on every day."
+  },
+  {
+   "id": "3c",
+   "label": "3c. A cost by distance",
+   "note": "Minutes by route length, about what the walk would take. Needs the same minute clock as 3b, and walking would then have to cost the same time to be fair."
+  },
+  {
+   "id": "4a",
+   "label": "4a. Only to places you've been (default)",
+   "note": "A place you haven't been shows a dashed ring and \"Not been here yet\" with the way to walk there, so new places are still found on foot. The game starts keeping which places you've been to across days (older saves get the day-1 route)."
+  },
+  {
+   "id": "4b",
+   "label": "4b. Any place that's open now",
+   "note": "Every place the story lets you reach right now, been there or not."
+  },
+  {
+   "id": "5a",
+   "label": "5a. Top right, under the chips (default)",
+   "image": "reviews/minimap-plan-1/phone-hud.png",
+   "note": "88 px on the phone, 180 px on desktop. Clear of the goal box, the dialogue box and the portraits."
+  },
+  {
+   "id": "5b",
+   "label": "5b. Bottom left",
+   "note": "The usual game spot. On the phone it sits where you tap to walk and where the dialogue box and portraits come up, so it would hide during every line."
+  },
+  {
+   "id": "5c",
+   "label": "5c. No minimap on the phone, a Map button only",
+   "note": "Desktop keeps the minimap; the phone gets a small map button in the chip row, for more of the game view."
+  },
+  {
+   "id": "6a",
+   "label": "6a. North up (default)",
+   "note": "The minimap and the map always have the island's north up, with Eric's arrow turning. Matches the full map, so places stay where you remember them."
+  },
+  {
+   "id": "6b",
+   "label": "6b. Turning with the camera",
+   "note": "The minimap turns so up on it is up on screen. Several outdoor places turn their camera as you walk (the east lane, the east coast, the sports ground), so the minimap would spin with it."
+  }
+ ],
+ "links": [
+  {
+   "label": "The full plan: rules for when fast travel is allowed, modules, tests and phone performance (notes/minimap-plan.md)",
+   "href": "https://github.com/fumbleforce/tower-of-words/blob/main/notes/minimap-plan.md"
+  },
+  {
+   "label": "Issue #261",
+   "href": "https://github.com/fumbleforce/tower-of-words/issues/261"
+  }
+ ]
+}
