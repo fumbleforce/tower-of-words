@@ -112,6 +112,8 @@ export async function officePlace(game) {
     office_door: [-0.25, 0.9],
     my_seat: [dS1.seat[0], dS1.seat[1] + 0.45],
     emi_seat: [EMI.seat.x, EMI.seat.z],
+    emi_door: [(EMI.door[0] + EMI.door[1]) / 2, CS], // her office's doorway, in the corridor's south wall
+    emi_desk: EMI.desk, // the middle of her desk (for the camera and pins; walk to emi_seat or EMI.talk)
     copier_front: [-2.95, 4.2],
     coffee_front: [0.7, 4.1],
     corridor_w: [-3.5, 1.3],
@@ -851,6 +853,8 @@ export async function officePlace(game) {
       w.update(t);
       w.tamaRig.update(dt);
       stepPeople([w.emi, w.kenji, w.mori, aoi, rei], dt);
+      const e = people.emi.root; // her shadow goes where she does (the place's people hold her Meshy body)
+      if (e.visible) w.emiBlob.position.set(e.position.x, 0.004, e.position.z);
       if (st.steam > 0) {
         st.steam -= dt;
         steam.material.opacity = Math.min(0.6, st.steam) * 0.8;

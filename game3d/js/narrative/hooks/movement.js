@@ -116,6 +116,8 @@ export function installMovementHooks(game, { rigOf, posOf, aimOf, isPlayer }) {
     if (r && r.meshy) {
       const s = game.place.seats[at];
       if (!s) return;
+      // already sitting there (a schedule's sit after the scene sat her down): nothing to do
+      if (r.seated && Math.hypot(r.root.position.x - s.x, r.root.position.z - s.z) < 0.1) return;
       r.root.visible = true;
       await H.walk({ who, to: s.out || [s.x, s.z + (s.ry ? -0.5 : 0.5)] });
       r.sitAt(s.x, s.top, s.z, s.ry || 0);

@@ -182,6 +182,8 @@ export const OFFICE_DETAILS = {
     'office_door',
     'my_seat',
     'emi_seat',
+    'emi_door',
+    'emi_desk',
     'copier_front',
     'coffee_front',
     'corridor_w',
