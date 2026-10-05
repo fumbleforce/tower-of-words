@@ -52,8 +52,8 @@ def seg_dist(P, a, b):
     return np.linalg.norm(P - (a + t[:, None] * ab), axis=1)
 
 
-def weights(V, lab, idx, J):
-    """Per-vertex weights {bone: array} (metres)."""
+def weights(V, lab, idx, J, hem=0.40):
+    """Per-vertex weights {bone: array} (metres). hem: below this height the top also follows the thighs."""
     j = {k: np.array(v) for k, v in J.items()}
     n = len(V)
     segs = {'Hips': (np.array([0, j['LeftUpLeg'][1], j['Hips'][2]]), j['Spine02']), 'Spine02': (j['Spine02'], j['Spine01']),
@@ -88,7 +88,7 @@ def weights(V, lab, idx, J):
             if b.replace('Left', '').replace('Right', '') in ('Arm', 'ForeArm', 'Hand'):
                 ok &= np.abs(x) > 0.06                          # the arms never pull the chest
             if piece == 0 and b.endswith('UpLeg'):
-                ok &= V[:, 1] < 0.40                            # the hem only
+                ok &= V[:, 1] < hem                             # the hem only
                 w = w * 0.35
             raw[b] = np.where(m & ok, w, 0)
         tot = sum(raw.values())
