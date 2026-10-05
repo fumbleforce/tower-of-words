@@ -2,7 +2,7 @@
  "title": "Carina faces round 2: one specified sweater (9 renders)",
  "date": "2026-10-05",
  "by": "art-round agent (carina-faces-2)",
- "status": "open",
+ "status": "decided",
  "question": "Is this the same sweater in every picture now, and which of these are Carina's neutral, surprised and tired faces?",
  "multi": true,
  "media": [
@@ -97,5 +97,13 @@
    ],
    "note": "Seed 390617762. His prompt with only the sweater changed to \"tight black ribbed knit sweater, fine vertical ribbing, round crew neckline, long sleeves, plain, no collar, no pattern\" (negative + \"v-neck, turtleneck, cardigan, collar, buttons, zipper, hoodie, pattern, logo\"); expression words added: \"tired, half-lidded eyes, slight eye bags, slumped relaxed look\". rdbtAnima, 896x1152, euler_ancestral normal, 30 steps, CFG 5. Sweater PASS. Identity DRIFT: only 1 brow piercing visible, very dark bags. imgqa: red rim 0.0%, ccip 0.006 (pass); hair touches the top edge, as in his render. Second image: cut-out (isnet-anime + matte_refine)."
   }
- ]
+ ],
+ "decided": [
+  "02-neutral-asis-2",
+  "06-surprised-3",
+  "09-tired-3"
+ ],
+ "decision": "Picked neutral-asis-2 (mirrored), surprised-3, tired-3; in the game",
+ "decided_at": "2026-10-05T23:11:03+0200",
+ "issue": 267
 }
