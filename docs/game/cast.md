@@ -2,7 +2,7 @@
 
 Every person and their id: the Everyone table, then one section per person with age, work, home, routine, who they know, how they talk and their approved look (hair, eyes, 3D colours). Then the names shown on screen, what each person likes (for gifts), which portrait faces each has, and people in the code but in no storyline. Last checked against the game on 2026-09-29.
 
-Elsewhere: which storylines each person is in is in each storyline's Cast line ([stories/](stories/)); where the game puts people at each time of day is in [places.md](places.md); how to write their lines is in game3d/story/VOICE.md, and their voice settings in game3d/story/VOICE-DIRECTION.md; art history and candidates are in the bible. Ideas for later days (notes/walkthrough/) aren't facts until Jørgen decides them.
+Elsewhere: which storylines each person is in is in each storyline's Cast line ([stories/](stories/)); where the game puts people at each time of day is in [places.md](places.md); how to write their lines is in game3d/story/VOICE.md, and their voice settings in game3d/story/VOICE-DIRECTION.md; art history and candidates are in the bible. The current requested character plans are under [Personal plots and bond milestones](#personal-plots-and-bond-milestones), marked to build. Older ideas in notes/walkthrough/ remain unapproved.
 
 The tables are checked against the game by `node tools/facts/check.mjs`. Ids in backticks are the ids the story files use.
 
@@ -109,11 +109,13 @@ The id `kuroda` is Mr. Hamada. The id is older than the name and stays so the vo
 ### Aoi (`aoi`)
 
 - A new hire. Her assignment is decided today (day 1), and she's telling someone on the phone it can be anywhere but the basement. Japanese only.
+- Assignment (#226, to build): Facilities scheduling, with her first weeks at the east-lane training centre. At their first real meeting she tells Eric she got a room upstairs, then learns he works on B2. She checks whether he heard her train call and starts again with her name; the awkwardness is brief. Her work concerns room bookings, not engineering.
 - Look: approved portrait aoi-base-2001 (reviews/style-align-1), with the cream edge on her left side redrawn as fill-d65-s1 (reviews/aoi-edge-2); redrawn from gallery B-aoi (art/approved/aoi/aoi-after.webp): pink bob with dark roots, winking grin, green varsity jacket with a pink star patch. In the 3D world, the Meshy model aoi-2 (reviews/aoi-meshy-1, round 2, made after Jørgen's note on aoi-1, 2026-10-05: "her face is a tiny bit too large and her hands are larger than the others. but it is very very close id say"): pink hair with teal underneath, a dark teal track jacket with a pink star over a white top, dark trousers; her hands are shown at 0.75 of Meshy's size ([art-and-sound.md](art-and-sound.md#people-in-the-world)).
 
 ### Rei (`rei`)
 
-- Sales. Built in the game (figures on the train, at the gate and in the office) but hidden all day and in no storyline. Kept for a later day.
+- Sales. Built in the game (figures on the train, at the gate and in the office) but hidden all day and in no storyline. Her first authored meeting is planned at tennis (#226, to build).
+- Language (#226): native Japanese; conversational English used with overseas customers. She can make plans, explain a practical problem and tease in short complete sentences. Idioms and abstract conversation take effort. She knows English tennis jargon better than Eric does, so a failed explanation is about the jargon, not his inability to understand any English. She can demonstrate or rephrase; she is not another general translator.
 - Look: dialogue portrait rei-i65-2102 (reviews/rei-portrait-1, Jørgen: "65-2102"), an img2img of art/approved/rei/rei-after.webp with a sly confident look: silver-grey high ponytail, steel-grey eyes, gold hoops, light grey suit over a black high-neck top. Extended down to the waist with Jørgen's pick a-s11 (reviews/rei-body-1), its seam blended as attempt b did, which is the file b-s11.
 
 ### Tama (`tama`)
@@ -126,6 +128,168 @@ The id `kuroda` is Mr. Hamada. The id is older than the name and stays so the vo
 The passengers, the office workers, the two from Sales, the announcer and the gate's voice are people with a day of their own; none of them know they're in Eric's story. They speak Japanese, which Eric hears as overheard speech ([systems.md](systems.md)).
 
 The B2 team is Eric, Mio, Mori and Kenji, with Emi as team lead. Goro is a late-game character and not on day 1 (Jørgen).
+
+## Personal plots and bond milestones
+
+#226, to build. These are the current character plans requested on 2026-10-05, awaiting Claude's story read. They replace older walkthrough ideas for these people; none claims a runtime scene already exists. The [days 3–5 outline](../../notes/days3-5-outline.md) owns those days' shared scenes and period-by-period placements. This section owns each person's plot, club affiliation, repeat meeting and milestones. Future scene scripts should link back here rather than copy the plan into another document.
+
+Use [the existing bond rules](systems.md#bonds). Steps 0 and 1 describe the first meeting; step 2's moment is a possible expression of friendship, not another gate beyond its points. Steps 3–5 require the scenes below, in order, with the existing thresholds and daily cap. Their completion flags use the existing names `bond3_<id>`, `bond4_<id>` and `bond5_<id>`; the scene sets its flag only at the completed turn. These are proposed flags, not implemented ones. An early conversation or day-3 club visit cannot jump a step. Existing first meetings carry over; never make a known person introduce themselves again.
+
+Each later scene is offered at the listed recurring meeting once its bond requirement is ready. Walking past or leaving early keeps it available next time. A scene can recall a ticket, gift or command actually used, but none requires a particular optional repair or magic demonstration. Club milestones need that club's board slip; place-based threads need no membership. Completion produces the stated memory and changes the next encounter; repeated visits cannot award the same milestone again.
+
+The women below each have a friendship ending and an optional romantic invitation at step 5. Eric chooses whether to ask for a date; the scene supplies a clear mutual answer. Either ending completes the same step and retains the continuing friendship. Nothing in points, gifts, club attendance or a work favour silently selects romance. Public scenes end with plans to meet again. Mori, Kenji, Ishibashi and Hamada have friendship endings; Tama's last step is familiarity with a cat.
+
+Eric is the player, so has no bond with himself. This covers all ten named non-player characters in Everyone. Unnamed workers/passengers, voice aliases, removed speakers and undeveloped wider-cast placeholders such as Goro and Kanae do not gain invented routes here.
+
+### Mio: leaving a working server alone
+
+Route: B2 machine room, then the sea terrace; no club. She wants an afternoon away without leaving a fault for someone else. Her habit of carrying every failure onto her own list keeps her close to Eric at work and hard to meet elsewhere. Continue [Mio notices](stories/mio-notices.md); the shared reveal's witnesses and timing belong to the days 3–5 outline. Her route never investigates the magic's origin.
+
+Repeat meeting: weekday lunch in the machine room; after step 3 she also offers a Sunday afternoon at the sea terrace. Her sea-terrace scenes remain outdoors; home access is unnecessary.
+
+| Step | Milestone and consequence |
+|---|---|
+| 0 | A woman on the train protecting her laptop and lunch bag. Eric has not introduced himself. |
+| 1 | Their train introduction, or a later B2 greeting if needed. She remembers whether he caught the bag. |
+| 2 | At lunch she leaves a space beside the server rack and lets him stay while she eats. Repeated gifts do not manufacture a new lunch scene. |
+| 3 | The server is working, but she has brought another diagnostic to lunch. Eric can offer to take the next ordinary check or ask her to eat first. She hands over the checklist and leaves the room for lunch; she has accepted help with something she normally guards. |
+| 4 | On the terrace her work phone rings. The call is a routine request; Eric can wait while she redirects it or offer to head back with her. She redirects it herself and stays. Her later terrace visits stop opening with a server report. |
+| 5 | She invites him back with food from her mother and asks what he actually wants to do with their afternoon. They choose an outing as friends or explicitly call it a date. She brings enough for two on subsequent invitations. |
+
+### Mori: something he can leave unfinished
+
+Route: art club in `dorm_commons`, with B2 lunches as early contact. He wants to draw the mainland ski jump he remembers, but turns every art session into sharpening pencils and making tea for everyone else. The old manager has kept the habit of making himself useful before taking a seat.
+
+Repeat meeting: Tuesday evening art club. His first reference is his own 1994 photograph; seeing it here establishes it before any later callback. It is a scene prop, not an album collectible.
+
+| Step | Milestone and consequence |
+|---|---|
+| 0 | The older colleague beside B2's copier. |
+| 1 | His B2 welcome and introduction; he makes room for Eric at the desk. |
+| 2 | He shows Eric the photograph while trying to fit the slope onto a page. Eric can recognise the place or ask him to demonstrate the jump again. |
+| 3 | Everyone has a sharp pencil and his own page is still blank. Eric offers to pour the next tea or sits beside him to draw. Mori starts the jump's outline and leaves the cups for someone else. |
+| 4 | The club asks which work to hang. Mori reaches for somebody else's finished picture; Eric asks about his unfinished slope. Mori chooses to hang it with the empty foreground visible and signs his own name. |
+| 5 | He brings two sheets to a coastal sketching meeting and gives Eric the better seat. They draw separately and compare what each left out. Later art sessions include Mori's own drawing alongside the tea. |
+
+### Kenji: finishing the part he promised
+
+Route: karaoke club, through the booth and B2. He wants to host an evening people enjoy, but keeps adding songs and equipment tricks before checking that anything works. His broken-chair history stays a personal debt, rather than becoming an endless series of rescue jobs.
+
+Repeat meeting: Wednesday evening karaoke, with weekday B2 contact. The chair and melon-soda preferences remain in his People entry above. Kotodama knowledge only follows witnessed scenes; his relationship scenes work without the day-5 reveal.
+
+| Step | Milestone and consequence |
+|---|---|
+| 0 | The junior colleague borrowing furniture. |
+| 1 | He introduces himself at B2 and owns up to the borrowed chair. |
+| 2 | He asks Eric to listen while he tries the opening of a song, then starts again in the right key. The player can listen without singing. |
+| 3 | Kenji's growing queue has displaced another member's one request. Eric points out the missing song or offers to help put the queue back. Kenji deletes his own extras and asks the member to choose again. |
+| 4 | At the next hosting evening, a microphone cuts out. Eric can offer the spare or wait. Kenji passes over the working microphone, keeps the evening going and labels the faulty one afterwards. The player is no longer required to finish his hosting work. |
+| 5 | Kenji chooses a song with an easy shared chorus and asks Eric to join or just sit beside him. Both choices finish the friendship scene. Later he leaves one open slot in his queue for Eric without selecting for him. |
+
+### Emi: joining without running it
+
+Route: swimming club at the seasonal pool session, then the gym's winter meetings. She wants a regular evening with people who can see her without bringing a budget request. She is good at organising, so people keep letting her do it, including herself.
+
+Repeat meeting: Saturday evening swimming club; weekdays at B2 for brief contact. Winter milestones concern the club's next-season plans and conditioning; actual lengths wait for the pool's next opening. None requires catching the one October swim.
+
+| Step | Milestone and consequence |
+|---|---|
+| 0 | The absent team lead whose parts meeting is keeping her upstairs. |
+| 1 | Her B2 introduction after the budget meeting. |
+| 2 | At a club meeting she asks Eric to sit beside her while someone else explains the plan. She leaves her work bag under the bench. |
+| 3 | The group hands her the winter booking sheet by habit. Eric can offer to ask another member or ask which exercise she wanted to join. She names a volunteer, hands over the sheet and joins the session. |
+| 4 | The volunteer chooses a different session order. Emi starts correcting it, then asks for the spare mat instead. Eric can join her or watch; she finishes a session somebody else arranged. |
+| 5 | She asks him to get supper after the meeting, with their work phones put away. They settle whether this is their regular meal as friends or a date. Later invitations come from her as a member, without a club job attached. |
+
+### Ishibashi: someone to sit with on a break
+
+Route: Honsha station desk and the sheltered bench outside; no club. He wants his short break undisturbed but keeps finding reasons to check the entrance. Eric becomes someone with whom he can sit without converting the visit into another inspection.
+
+Repeat meeting: station lunch break. The station attendant covers the desk during these scenes; Eric never takes security duty. The cat may be elsewhere, so her presence cannot be a scene prerequisite.
+
+| Step | Milestone and consequence |
+|---|---|
+| 0 | A guard behind a gate Eric cannot yet pass. |
+| 1 | Eric greets him properly; the guard checks the card and introduces himself when Eric asks his name. |
+| 2 | He leaves a clear place on the bench beside his lunch. Eric can sit; the guard's spare cat bowl stays under the bench. |
+| 3 | He interrupts his own lunch to check an arrival already being handled by the attendant. Eric offers to wait. Ishibashi looks back, sees the attendant wave them through and sits down again. |
+| 4 | Rain reaches the bench. He asks Eric to hold his lunch while he moves the cat bowl under cover, then invites Eric into the shelter. For once he directly names what the bowl is for. |
+| 5 | He brings two cups for their break and tells Eric which seat stays dry. Later lunch visits begin with that seat available; Tama may or may not join them. |
+
+### Hamada: keeping his own place in the evening
+
+Route: karaoke club, with the bakery and station as early contacts. He wants to sing a particular long song to the end. He habitually offers his turn to somebody else, then apologises when the room booking ends. His accountancy is ordinary work; this is not a financial mystery.
+
+Repeat meeting: Wednesday evening karaoke. He shares the venue with Kenji, but his milestone never requires Kenji's bond or hosting scene; another member can run the queue.
+
+| Step | Milestone and consequence |
+|---|---|
+| 0 | A sleeping passenger Eric has not spoken to. |
+| 1 | Eric wakes him on the train or greets him later at the bakery; he supplies his name. |
+| 2 | He shows Eric the song number he wrote on the back of a bakery receipt. Their next greeting can recall that song. |
+| 3 | His turn comes and he offers it away again. Eric can ask to hear his song or point to his number on the screen. Hamada keeps the microphone and starts. |
+| 4 | A late arrival interrupts the instrumental break to ask for another song. Eric can wait or indicate that Hamada is still singing. Hamada asks the newcomer to wait, then finishes the last verse. |
+| 5 | He books another evening and asks Eric which song should follow his. Eric may choose or just listen. Later Hamada keeps his turn and leaves a seat for Eric. |
+
+### Kuro: being recognised away from the counter
+
+Route: swimming club, with reception as first contact. She wants an evening where people remember what she enjoys without asking her to find somebody or hold a bag. Her even courtesy stays; trust means letting Eric hear a direct preference without wrapping it as a service offer.
+
+Repeat meeting: Saturday club, pool in season and gym in winter. She attends as a member and does not become the club's receptionist. Her short English exchanges remain within the language limits in her People entry.
+
+| Step | Milestone and consequence |
+|---|---|
+| 0 | The receptionist Eric passes in the lobby. |
+| 1 | Their reception exchange, or her club introduction if he never stopped at the counter. |
+| 2 | She remembers his name at the club and asks which seat he wants while keeping her own beside the window. |
+| 3 | A member asks her to sort the spare equipment while she is choosing an activity. Eric can point them to the store cupboard or wait for her reply. Kuro tells them where it is and joins the activity she chose. |
+| 4 | Someone offers to book everyone into the same session next week. She tells Eric privately that she dislikes it, then voices her own choice to the group. Eric can join her choice or keep his; both preserve their plans to talk afterwards. |
+| 5 | She invites him for a walk after club and asks him to choose a place that is open after her shift. They make a friendship plan or a date. Her later greetings recall what they did outside reception. |
+
+### Aoi: choosing an assignment she can stand behind
+
+Route: tennis club, plus the training-centre frontage. Her assignment is in her People entry. She wants to be trusted to make a booking that someone else will actually use, while fearing that asking a basic question will confirm she is the newest person in the room.
+
+Repeat meeting: Sunday evening tennis; weekday lunch at the plaza for short work follow-ups. Booking discussions stay at the frontage or board, so this route needs no training-office interior.
+
+| Step | Milestone and consequence |
+|---|---|
+| 0 | Eric overheard a woman on her phone. This alone earns no introduction or bond. |
+| 1 | At the board she gives her name, explains her assignment and takes the tennis slip. If missed, her first court greeting covers those facts. |
+| 2 | She asks Eric to hit a few balls and keeps the racket between turns. She greets him as someone who plays with her. |
+| 3 | She has agreed to book next week's practice but cannot tell which slot leaves time for beginners. Eric can read the posted durations with her or suggest asking Rei. Aoi asks the club directly and makes the booking herself. |
+| 4 | Experienced members want to use the whole booking. Eric can stay beside her or take his place on court. Aoi keeps the beginner portion she promised and tells them when their game starts. |
+| 5 | She books a slot because she wants to play and invites Eric first. He can accept as her regular practice friend or ask to go out afterwards as a date. Her next invitation names something she wants, with no assigned errand attached. |
+
+### Rei: playing a game she could lose
+
+Route: tennis club and the sea terrace. She enjoys competitive doubles and wants a partner who can disagree with her. At work she can steer an uncertain conversation toward an easy yes; on court she does the same by explaining every shot until the other person stops choosing.
+
+Repeat meeting: Sunday evening tennis, with later terrace conversations immediately after the session. She keeps her other doubles partners and work commitments as Eric's bond grows.
+
+| Step | Milestone and consequence |
+|---|---|
+| 0 | A player Eric can see practising. Hidden day-1 figures and hypothetical day-2 encounters count for nothing. |
+| 1 | She introduces herself courtside and offers the spare racket. |
+| 2 | She remembers whether Eric asked for a serve demonstration or played with Aoi. With neither history, she asks what he wants to try today. |
+| 3 | She takes over Eric's side of a doubles drill after explaining it. He can ask for another try or ask her to cover only her half. She stays on her side and lets his return miss. Then she asks him where he wanted the next ball. |
+| 4 | They disagree about the next play. Eric can propose his idea or ask hers; Rei gives him the deciding call and plays it. The staged rally can go badly without losing the milestone. Afterwards she asks to play with him again. |
+| 5 | On the terrace she asks whether he wants another Sunday game or an evening together away from tennis. He can choose regular friendship or make the latter a date. Later practice retains her competitiveness while giving him room to choose. |
+
+### Tama: a place she chooses to return to
+
+Route: station bowl, dorm courtyard and B2 chair; no club. She wants warmth, food and a way out. Eric becomes familiar by making space and letting her leave. Her monorail trips continue; the route never turns her into Eric's possession or a magical informant. Continue [Tama](stories/tama.md).
+
+Repeat meeting: station in the morning, dorm court in the evening. Later scenes use the cat's next eligible appearance, never a search across the map. Cat-specific authored interactions use the ordinary bond limits; there are no speech, gift or obedience requirements.
+
+| Step | Milestone and consequence |
+|---|---|
+| 0 | A cat passing through. Seeing her does not make her Eric's acquaintance. |
+| 1 | Eric crouches or pets her when offered; the guard supplies her name if he has not heard it. |
+| 2 | She stays on the chair while he sits nearby. He can wait or use another seat. |
+| 3 | At the dorm bench she approaches, then pauses at his bag. Eric moves it or moves himself; she jumps onto the space she chose. |
+| 4 | During a shower she comes under the station shelter beside him. He leaves the exit clear; when the rain stops she leaves, then rubs against his leg on the way past. |
+| 5 | At the dorm courtyard she joins him without food being offered and settles against his shoe. He can stay or gently get up. Later appearances may include her greeting him; she still leaves whenever she wants. |
 
 ## Names on screen
 

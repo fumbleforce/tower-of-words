@@ -1,6 +1,6 @@
-# Voice sheet for day one
+# Voice sheet
 
-Read this before writing a line of dialogue in train.js, gate.js, office.js or transitions.js. Discoveries and private scenes: `.claude/skills/rpg-scenes/SKILL.md`.
+Read this before writing dialogue for any day. Discoveries and private scenes: `.claude/skills/rpg-scenes/SKILL.md`.
 
 ## What the skills say, applied here
 
@@ -42,6 +42,20 @@ Who each person is (age, job, what they speak) is in docs/game/cast.md. This she
 **Mr. Hamada**. Japanese only, apologises constantly, talks to machines like animals.
 
 **Kuro**. Composed and precise, with the courtesy of someone at work. A tease stays in her usual even delivery; she lets Eric notice it without laughing at him or explaining it. No gushing, pet names or coy pauses.
+
+**Aoi**. She wants to take part and is tired of being handed the basket or a form. Her [assignment and language](../../docs/game/cast.md#aoi-aoi) stay in the cast sheet.
+
+- Uses casual Japanese with peers, switching to short polite requests with senior staff or someone she has just met. A hesitation usually comes before asking a basic question; once she asks it, she wants an answer.
+- Notices whose turn it is, who has a racket and whether a booking leaves room for beginners. She asks concrete questions and sometimes corrects her first request halfway through.
+- Eric gets meaning from pointing, demonstrations and translated dialogue. Do not give her convenient English or make every misunderstanding a language lesson.
+- The train-call callback is briefly awkward; she does not spend the whole meeting apologising. Avoid bubbly mascot speech, constant exclamations, instant confessions and enthusiasm written as a row of fragments.
+
+**Rei**. She is used to getting a useful answer and moving on. On court she wants the next rally to be worth playing.
+
+- English level and limits: [conversational, used with overseas customers](../../docs/game/cast.md#rei-rei). Write short complete requests and explanations; when she loses a word, she substitutes an ordinary one or demonstrates. Her tennis jargon can outrun Eric even when her English grammar is simple.
+- In Japanese she is polite with a new acquaintance and more direct with a regular partner. English has fewer softeners; a correction can sound firmer than she intended, and she can notice that without giving a speech about it.
+- Notices where someone aimed, whether they got another turn, and when an explanation has stopped helping. Teasing refers to something that just happened between them.
+- Avoid stock sales pitches, mysterious insinuations, automatic flirtation and Mio's internet fillers. She is comfortable leaving a conversation to return to her own game.
 
 **Narration**. Second person, a few words, only for what the scene can't show.
 
