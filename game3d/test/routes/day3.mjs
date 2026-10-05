@@ -44,6 +44,11 @@ export default [
     expect: { nodes: ['d3_rest', 'd3_up'], flags: { d3_time_seen: true }, period: 'morning' },
   },
   {
+    id: 'd3-rest-first', description: 'Rest until evening the first time: the clock explained, then rest.',
+    seed: seed('dorms'), choices: ['Rest until evening.', 'Rest until evening.'], actions: [use('computer')],
+    expect: { nodes: ['d3_rest', 'd3_rest_now'], flags: { d3_time_seen: true }, period: 'evening' },
+  },
+  {
     id: 'd3-rest-evening', description: 'Rest until evening, the second time without the explanation.',
     seed: seed('dorms', { d3_time_seen: true }), choices: ['Rest until evening.', 'Get up.'], actions: [use('computer'), use('computer')],
     expect: { nodes: ['d3_rest', 'd3_rest_now', 'd3_chair', 'd3_up'], period: 'evening' },
@@ -110,7 +115,7 @@ export default [
   {
     id: 'd3-monitor-later', description: 'The monitor left for another morning.',
     seed: seed('gate', { d3_monitor_seen: true }), choices: ['Leave the monitor for another morning.'], actions: [use('guard_monitor')],
-    expect: { nodes: ['d3_monitor', 'd3_monitor_later'], flags: { ticket_T0003: 'progress', d3_monitor_done: false }, yen: YEN },
+    expect: { nodes: ['d3_monitor', 'd3_monitor_later'], flags: { ticket_T0003: 'new', d3_monitor_done: false }, yen: YEN },
   },
   // the gym's booking terminal: reset and print (the printer's word), the word, later
   {
