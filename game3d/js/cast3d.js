@@ -10,18 +10,19 @@ import { chibiFiles, chibiFrom, CHIBI_CAST } from './chibi.js';
 
 // Standing heights next to Mio (1.12) and Eric (1.2). While a model waits for Jørgen's approval it only loads with
 // ?cast3d=<id>[,<id>]; approved ids go in CAST3D_ON.
-export const CAST3D = { mori: 1.2, kuro: 1.12, aoi: 1.09, emi: 1.09 };
+export const CAST3D = { mori: 1.09, kuro: 1.12, aoi: 1.09, emi: 1.09 };
 // Kuro: Review kuro-meshy-orig-3 (Jørgen, 2026-10-04: "Yes, very good"); Aoi and Emi: Reviews aoi-meshy-1 and
-// emi-meshy-1, round 2
-const CAST3D_ON = ['kuro', 'aoi', 'emi'];
+// emi-meshy-1, round 2; the staff from Reviews <id>-meshy-1, made the same way (Jørgen, 2026-10-05: "can you also
+// kick off the remaining staff and background characters in the new style")
+const CAST3D_ON = ['kuro', 'aoi', 'emi', 'mori'];
 const Q3 = new URLSearchParams(typeof location !== 'undefined' ? location.search : '');
 // only in a page: the unit tests import the cast in Node, where everyone stays code-built (as in chibi.js)
 const PAGE = typeof addEventListener === 'function';
 const want3 = [...CAST3D_ON, ...(Q3.get('cast3d') || '').split(',')].filter(
   (id) => PAGE && CAST3D[id] && !CHIBI_CAST.includes(id),
 );
-// Kuro, Aoi and Emi have no phone pose or library gestures: their scenes use the drawn ones (rig-gestures.js)
-const NO_EXTRAS = ['kuro', 'aoi', 'emi'];
+// The Meshy cast has no phone pose or library gestures: their scenes use the drawn ones (rig-gestures.js)
+const NO_EXTRAS = ['kuro', 'aoi', 'emi', 'mori'];
 // Hand bones scaled at load (Jørgen on aoi-1: "her hands are larger than the others"; at 0.75 hers are between Kuro's
 // and Mio's, art/candidates/aoi-emi-meshy-2/hand_area.py); the rest is as Meshy made her
 const HANDS = { aoi: 0.75 };
@@ -31,7 +32,12 @@ const warn = (id) => (e) => {
   return null;
 };
 await Promise.all([
-  ...want3.map(async (id) => (PRE3[id] = await meshyFiles(id, { extra: !NO_EXTRAS.includes(id) }).catch(warn(id)))),
+  ...want3.map(
+    async (id) =>
+      (PRE3[id] = await meshyFiles(id, {
+        extra: !NO_EXTRAS.includes(id),
+      }).catch(warn(id))),
+  ),
   ...CHIBI_CAST.map(async (id) => (PRE3[id] = await chibiFiles(id).catch(warn(id)))),
 ]);
 // the ids cast.js asks for here first
@@ -89,7 +95,10 @@ export const meshy3 = (id) => {
   // measured once on the loaded original (a fresh clone's skinned bounds come out a hundredth of the size, chibi.js)
   const [walk, ...rest] = p;
   p.size ??= new THREE.Box3().setFromObject(walk.scene).getSize(new THREE.Vector3()).y;
-  const m = meshyFrom(id, [{ ...walk, scene: clone(walk.scene) }, ...rest], { height: CAST3D[id], size: p.size });
+  const m = meshyFrom(id, [{ ...walk, scene: clone(walk.scene) }, ...rest], {
+    height: CAST3D[id],
+    size: p.size,
+  });
   const hands = [];
   if (HANDS[id]) m.model.traverse((o) => o.isBone && /^(Left|Right)Hand$/.test(o.name) && hands.push(o));
   if (hands.length) {

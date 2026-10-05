@@ -3,13 +3,16 @@
 //   Meshy rigs (Eric, Mio): point (turned toward `to`), lift (an invisible case over his head), squeeze (sideways,
 //   stomach in), press (turned toward `to`, leaning in, both hands pushing down on something low in front: the train's
 //   overfull shopping bag), pet (turned toward `to`, bending down, the right hand stroking something low: a stray
-//   cat, creatures/pet.js; `low` 0..1, how far down it is). They are offsets on the arm and spine bones, laid over the idle clip every frame: game.tween runs
+//   cat, creatures/pet.js; `low` 0..1, how far down it is); for the staff's Meshy models (cast3d.js) beckon,
+//   highfive, fistbump, finger and skijump (upper body only, so they work seated). They are offsets on the arm and
+//   spine bones, laid over the idle clip every frame: game.tween runs
 //   after the player's and Mio's mixer update in main.js step(), so the clip underneath keeps breathing.
 //   Chibi rigs (the guard, Hamada, Kenji): beckon, lift (both arms overhead: Hamada's briefcase hangs from his left
 //   hand, so it goes up with it), highfive, fistbump.
 import * as THREE from 'three';
 
-export const MESHY_KINDS = new Set(['point', 'lift', 'squeeze', 'press', 'pet']);
+const STAFF_KINDS = ['beckon', 'highfive', 'fistbump', 'finger', 'skijump']; // the staff's Meshy models
+export const MESHY_KINDS = new Set(['point', 'lift', 'squeeze', 'press', 'pet', ...STAFF_KINDS]);
 export const CHIBI_KINDS = new Set(['beckon', 'lift', 'highfive', 'fistbump']);
 
 const bell = (k) => Math.sin(Math.PI * Math.min(1, k)) ** 0.7; // 0 -> 1 -> 0, holding at the top
@@ -112,6 +115,47 @@ export async function meshyGesture(game, r, kind, { to, face, low = 1 } = {}) {
       turn(model, B.RightArm, 'z', 0.12 * b);
       turn(model, B.LeftArm, 'x', -(0.5 + 0.7 * low) * b); // the other arm hangs down, not back along his back
       turn(model, B.RightForeArm, 'x', -0.2 * b + 0.12 * stroke);
+    });
+  } else if (kind === 'beckon') {
+    // the guard (Meshy): the right hand held out in front, curling in twice: come here
+    await tween(1.8, (k) => {
+      const out = bell(k),
+        curl = Math.max(0, Math.sin(k * Math.PI * 4)) * out;
+      turn(model, B.RightArm, 'x', -1.2 * out);
+      turn(model, B.RightForeArm, 'x', -0.2 * out - 0.7 * curl);
+    });
+  } else if (kind === 'highfive') {
+    // Kenji (Meshy): the right hand up high and open, then a quick slap forward
+    await tween(1.4, (k) => {
+      const up = bell(k),
+        slap = k > 0.45 && k < 0.65 ? Math.sin(((k - 0.45) / 0.2) * Math.PI) : 0;
+      turn(model, B.RightArm, 'x', -2.5 * up + 0.5 * slap);
+      turn(model, B.RightArm, 'y', -0.3 * up);
+    });
+  } else if (kind === 'fistbump') {
+    // Kenji (Meshy): the fist out in front at chest height, a small push forward, back
+    await tween(1.3, (k) => {
+      const out = bell(k),
+        push = k > 0.4 && k < 0.6 ? Math.sin(((k - 0.4) / 0.2) * Math.PI) : 0;
+      turn(model, B.RightArm, 'x', -1.4 * out - 0.18 * push);
+      turn(model, B.RightForeArm, 'x', -0.15 * out);
+    });
+  } else if (kind === 'finger') {
+    // Mori (Meshy): one finger up, the hand raised in front of his face: one moment
+    await tween(1.4, (k) => {
+      const b = bell(k);
+      turn(model, B.RightArm, 'x', -1.0 * b);
+      turn(model, B.RightForeArm, 'x', -1.3 * b);
+    });
+  } else if (kind === 'skijump') {
+    // Mori (Meshy), at the lunch table: the ski jump with his upper body and hands, so it works seated too. Lean in
+    // with the arms swept back (the in-run), then spring up with the arms forward, and settle
+    await tween(2.6, (k) => {
+      const crouch = k < 0.55 ? Math.sin(((k / 0.55) * Math.PI) / 2) : Math.max(0, 1 - (k - 0.55) / 0.12);
+      const air = k > 0.58 && k < 0.85 ? Math.sin(((k - 0.58) / 0.27) * Math.PI) : 0;
+      turn(model, B.Spine, 'x', 0.35 * crouch - 0.12 * air);
+      turn(model, B.Head, 'x', -0.25 * crouch);
+      for (const arm of [B.RightArm, B.LeftArm]) turn(model, arm, 'x', 0.7 * crouch - 1.4 * air);
     });
   } else if (kind === 'squeeze') {
     // a quarter turn sideways, chest back and stomach in, arms up out of the way
