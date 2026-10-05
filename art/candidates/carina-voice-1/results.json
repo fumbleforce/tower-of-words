@@ -1,0 +1,707 @@
+{
+ "lufs": -20.0,
+ "cands": {
+  "a": {
+   "label": "a. Tired and quiet",
+   "instruct": "A woman in her thirties, quiet and polite, a little tired. Soft medium-low voice, gentle and reserved, unhurried, slightly weary at the end of a long day but kind. Neutral, standard English with no regional or foreign accent.",
+   "takes": {
+    "en1-404": {
+     "seconds": 4.16,
+     "f0": 167.2,
+     "heard": "Yeah, IT support, I'm the contractor. It's my first day.",
+     "sim": 1.0
+    },
+    "en1-505": {
+     "seconds": 3.92,
+     "f0": 208.3,
+     "heard": "Yeah, IT support, I'm the contractor, it's my first day.",
+     "sim": 1.0
+    },
+    "en1-606": {
+     "seconds": 4.56,
+     "f0": 178.2,
+     "heard": "Yeah, IT support. I'm the contractor. It's my first day.",
+     "sim": 1.0
+    },
+    "en2-404": {
+     "seconds": 3.36,
+     "f0": 185.5,
+     "heard": "See on both sides? Nobody said the island was this far out.",
+     "sim": 0.978
+    },
+    "en2-505": {
+     "seconds": 4.08,
+     "f0": 202.3,
+     "heard": "See on both sides, nobody said the island was this far out.",
+     "sim": 0.978
+    },
+    "en2-606": {
+     "seconds": 3.84,
+     "f0": 173.6,
+     "heard": "See, on both sides, nobody said the island was this far out.",
+     "sim": 0.978
+    },
+    "mix-en-404": {
+     "seconds": 1.04,
+     "f0": 208.3,
+     "heard": "Right by the fountain.",
+     "sim": 1.0
+    },
+    "mix-en-505": {
+     "seconds": 1.04,
+     "f0": 189.9,
+     "heard": "Right by the fountain.",
+     "sim": 1.0
+    },
+    "mix-en-606": {
+     "seconds": 1.52,
+     "f0": 201.8,
+     "heard": "right by the fountain.",
+     "sim": 1.0
+    },
+    "mix-ja-404": {
+     "seconds": 1.68,
+     "f0": 176.1,
+     "p_ja": 0.861,
+     "p_en": 0.019,
+     "heard": "ここ",
+     "sim": 1.0
+    },
+    "mix-ja-505": {
+     "seconds": 1.92,
+     "f0": 203.5,
+     "p_ja": 0.865,
+     "p_en": 0.014,
+     "heard": "ここを",
+     "sim": 0.8
+    },
+    "mix-ja-606": {
+     "seconds": 0.96,
+     "f0": 210.7,
+     "p_ja": 0.965,
+     "p_en": 0.006,
+     "heard": "ここ",
+     "sim": 1.0
+    },
+    "word-404": {
+     "seconds": 1.36,
+     "f0": 213.1,
+     "p_ja": 0.998,
+     "p_en": 0.001,
+     "heard": "おはようございます。",
+     "sim": 1.0
+    },
+    "word-505": {
+     "seconds": 1.68,
+     "f0": 214.4,
+     "p_ja": 0.995,
+     "p_en": 0.003,
+     "heard": "おはようございます",
+     "sim": 1.0
+    },
+    "word-606": {
+     "seconds": 1.84,
+     "f0": 239.2,
+     "p_ja": 0.998,
+     "p_en": 0.001,
+     "heard": "おはようございます。",
+     "sim": 1.0
+    }
+   },
+   "pick": {
+    "en1": 606,
+    "en2": 404,
+    "mix-en": 505,
+    "mix-ja": 606,
+    "word": 404
+   },
+   "ref_f0": 184.5,
+   "ref_seconds": 12.8
+  },
+  "b": {
+   "label": "b. Dry and level",
+   "instruct": "A woman in her thirties with a dry, level, matter-of-fact voice. Medium-low pitch, understated, little emotion, even pace, quietly deadpan and polite, a practical tech support engineer. Neutral, standard English with no regional or foreign accent.",
+   "takes": {
+    "en1-404": {
+     "seconds": 4.08,
+     "f0": 172.6,
+     "heard": "Yeah, IT support. I'm the contractor. It's my first day.",
+     "sim": 1.0
+    },
+    "en1-505": {
+     "seconds": 4.32,
+     "f0": 196.6,
+     "heard": "Yeah, it's support. I'm the contractor. It's my first day.",
+     "sim": 0.988
+    },
+    "en1-606": {
+     "seconds": 4.32,
+     "f0": 263.9,
+     "heard": "Yeah, IT support. I'm the contractor. It's my first day.",
+     "sim": 1.0
+    },
+    "en2-404": {
+     "seconds": 3.36,
+     "f0": 216.8,
+     "heard": "See on both sides. Nobody said the island was this far out.",
+     "sim": 0.978
+    },
+    "en2-505": {
+     "seconds": 4.32,
+     "f0": 223.2,
+     "heard": "See on both sides. Nobody said the island was this far out.",
+     "sim": 0.978
+    },
+    "en2-606": {
+     "seconds": 3.28,
+     "f0": 168.2,
+     "heard": "See on both sides, nobody said the island was this far out.",
+     "sim": 0.978
+    },
+    "mix-en-404": {
+     "seconds": 1.12,
+     "f0": 202.3,
+     "heard": "Right by the fountain.",
+     "sim": 1.0
+    },
+    "mix-en-505": {
+     "seconds": 1.12,
+     "f0": 288.6,
+     "heard": "Right by the fountain.",
+     "sim": 1.0
+    },
+    "mix-en-606": {
+     "seconds": 1.12,
+     "f0": 201.2,
+     "heard": "Right by the fountain.",
+     "sim": 1.0
+    },
+    "mix-ja-404": {
+     "seconds": 0.88,
+     "f0": 188.8,
+     "p_ja": 0.855,
+     "p_en": 0.036,
+     "heard": "ここ",
+     "sim": 1.0
+    },
+    "mix-ja-505": {
+     "seconds": 0.88,
+     "f0": 151.6,
+     "p_ja": 0.94,
+     "p_en": 0.009,
+     "heard": "ここ",
+     "sim": 1.0
+    },
+    "mix-ja-606": {
+     "seconds": 0.88,
+     "f0": 171.1,
+     "p_ja": 0.872,
+     "p_en": 0.021,
+     "heard": "ここ",
+     "sim": 1.0
+    },
+    "word-404": {
+     "seconds": 1.44,
+     "f0": 239.9,
+     "p_ja": 0.993,
+     "p_en": 0.003,
+     "heard": "おはようございます",
+     "sim": 1.0
+    },
+    "word-505": {
+     "seconds": 1.84,
+     "f0": 260.9,
+     "p_ja": 0.998,
+     "p_en": 0.001,
+     "heard": "おはようございます。",
+     "sim": 1.0
+    },
+    "word-606": {
+     "seconds": 1.52,
+     "f0": 257.1,
+     "p_ja": 0.721,
+     "p_en": 0.03,
+     "heard": "おはようございます。",
+     "sim": 1.0
+    }
+   },
+   "pick": {
+    "en1": 606,
+    "en2": 505,
+    "mix-en": 404,
+    "mix-ja": 505,
+    "word": 404
+   },
+   "ref_f0": 227.1,
+   "ref_seconds": 11.7
+  },
+  "c": {
+   "label": "c. Relaxed, slightly husky",
+   "instruct": "A confident, relaxed woman in her late twenties. Low-medium pitch with a slightly husky texture, warm and calm, a little amused, unhurried, never shy, not girlish. Neutral, standard English with no regional or foreign accent.",
+   "takes": {
+    "en1-404": {
+     "seconds": 5.2,
+     "f0": 216.8,
+     "heard": "Yeah. IT support. I'm the contractor. It's my first day.",
+     "sim": 1.0
+    },
+    "en1-505": {
+     "seconds": 4.24,
+     "f0": 195.4,
+     "heard": "Yeah, IT support. I'm the contractor, it's my first day.",
+     "sim": 1.0
+    },
+    "en1-606": {
+     "seconds": 3.76,
+     "f0": 253.4,
+     "heard": "Yeah, IT support. I'm the contractor, it's my first day.",
+     "sim": 1.0
+    },
+    "en2-404": {
+     "seconds": 4.24,
+     "f0": 205.9,
+     "heard": "See on both sides nobody said the island was this far out.",
+     "sim": 0.978
+    },
+    "en2-505": {
+     "seconds": 4.08,
+     "f0": 215.6,
+     "heard": "See on both sides, nobody said the island was this far out,",
+     "sim": 0.978
+    },
+    "en2-606": {
+     "seconds": 4.32,
+     "f0": 188.8,
+     "heard": "See on both sides. Nobody said the island was this far out.",
+     "sim": 0.978
+    },
+    "mix-en-404": {
+     "seconds": 1.28,
+     "f0": 205.9,
+     "heard": "Right by the fountain.",
+     "sim": 1.0
+    },
+    "mix-en-505": {
+     "seconds": 1.6,
+     "f0": 196.6,
+     "heard": "Right by the fountain?",
+     "sim": 1.0
+    },
+    "mix-en-606": {
+     "seconds": 1.52,
+     "f0": 219.4,
+     "heard": "Right by the fountain.",
+     "sim": 1.0
+    },
+    "mix-ja-404": {
+     "seconds": 0.72,
+     "f0": 208.3,
+     "p_ja": 0.939,
+     "p_en": 0.026,
+     "heard": "ここ",
+     "sim": 1.0
+    },
+    "mix-ja-505": {
+     "seconds": 0.96,
+     "f0": 188.8,
+     "p_ja": 0.985,
+     "p_en": 0.005,
+     "heard": "ここ",
+     "sim": 1.0
+    },
+    "mix-ja-606": {
+     "seconds": 1.12,
+     "f0": 228.4,
+     "p_ja": 0.918,
+     "p_en": 0.015,
+     "heard": "ここ",
+     "sim": 1.0
+    },
+    "word-404": {
+     "seconds": 1.44,
+     "f0": 297.9,
+     "p_ja": 0.999,
+     "p_en": 0.001,
+     "heard": "おはようございます",
+     "sim": 1.0
+    },
+    "word-505": {
+     "seconds": 1.52,
+     "f0": 257.9,
+     "p_ja": 0.999,
+     "p_en": 0.001,
+     "heard": "おはようございます",
+     "sim": 1.0
+    },
+    "word-606": {
+     "seconds": 1.36,
+     "f0": 253.4,
+     "p_ja": 0.998,
+     "p_en": 0.001,
+     "heard": "おはようございます",
+     "sim": 1.0
+    }
+   },
+   "pick": {
+    "en1": 404,
+    "en2": 505,
+    "mix-en": 606,
+    "mix-ja": 606,
+    "word": 606
+   },
+   "ref_f0": 221.9,
+   "ref_seconds": 12.0
+  },
+  "d": {
+   "label": "d. Warm, easy, amused",
+   "instruct": "A relaxed, self-assured woman in her late twenties. Medium pitch, warm and clear, an easy smile in the voice, lightly amused, calm and natural pace, not girlish. Neutral, standard English with no regional or foreign accent.",
+   "takes": {
+    "en1-404": {
+     "seconds": 5.12,
+     "f0": 274.8,
+     "heard": "Yeah, it's tea support. I'm the contractor. It's my first day.",
+     "sim": 0.953
+    },
+    "en1-505": {
+     "seconds": 3.92,
+     "f0": 294.5,
+     "heard": "Yeah, IT support. I'm the contractor. It's my first day.",
+     "sim": 1.0
+    },
+    "en1-606": {
+     "seconds": 4.32,
+     "f0": 301.4,
+     "heard": "Yeah, IT support. I'm the contractor. It's my first day.",
+     "sim": 1.0
+    },
+    "en2-404": {
+     "seconds": 4.16,
+     "f0": 220.6,
+     "heard": "See on both sides. Nobody said the island was this far out.",
+     "sim": 0.978
+    },
+    "en2-505": {
+     "seconds": 4.16,
+     "f0": 236.5,
+     "heard": "See on both sides. Nobody said the island was this far out.",
+     "sim": 0.978
+    },
+    "en2-606": {
+     "seconds": 3.84,
+     "f0": 213.1,
+     "heard": "See on both sides, nobody said the island was this far out.",
+     "sim": 0.978
+    },
+    "mix-en-404": {
+     "seconds": 1.28,
+     "f0": 263.9,
+     "heard": "Right by the fountain.",
+     "sim": 1.0
+    },
+    "mix-en-505": {
+     "seconds": 1.6,
+     "f0": 257.9,
+     "heard": "Right by the fountain.",
+     "sim": 1.0
+    },
+    "mix-en-606": {
+     "seconds": 1.36,
+     "f0": 303.1,
+     "heard": "Right by the fountain.",
+     "sim": 1.0
+    },
+    "mix-ja-404": {
+     "seconds": 0.88,
+     "f0": 233.1,
+     "p_ja": 0.931,
+     "p_en": 0.019,
+     "heard": "ここ?",
+     "sim": 1.0
+    },
+    "mix-ja-505": {
+     "seconds": 0.88,
+     "f0": 203.5,
+     "p_ja": 0.997,
+     "p_en": 0.001,
+     "heard": "ここ",
+     "sim": 1.0
+    },
+    "mix-ja-606": {
+     "seconds": 1.12,
+     "f0": 207.1,
+     "p_ja": 0.95,
+     "p_en": 0.009,
+     "heard": "ここ",
+     "sim": 1.0
+    },
+    "word-404": {
+     "seconds": 1.76,
+     "f0": 315.7,
+     "p_ja": 0.999,
+     "p_en": 0.001,
+     "heard": "おはようございます。",
+     "sim": 1.0
+    },
+    "word-505": {
+     "seconds": 2.0,
+     "f0": 324.9,
+     "p_ja": 0.998,
+     "p_en": 0.001,
+     "heard": "おはようございます",
+     "sim": 1.0
+    },
+    "word-606": {
+     "seconds": 1.36,
+     "f0": 323.0,
+     "p_ja": 0.999,
+     "p_en": 0.0,
+     "heard": "おはようございます",
+     "sim": 1.0
+    }
+   },
+   "pick": {
+    "en1": 505,
+    "en2": 505,
+    "mix-en": 606,
+    "mix-ja": 404,
+    "word": 404
+   },
+   "ref_f0": 291.1,
+   "ref_seconds": 11.4
+  },
+  "e": {
+   "label": "e. Low, husky, weary",
+   "instruct": "A woman in her thirties with a low, husky, slightly smoky voice. Calm and quiet, tired, slow and deliberate, polite, a little dry. Neutral, standard English with no regional or foreign accent.",
+   "takes": {
+    "en1-404": {
+     "seconds": 4.48,
+     "f0": 175.1,
+     "heard": "Yeah, IT support. I'm the contractor. It's my first day.",
+     "sim": 1.0
+    },
+    "en1-505": {
+     "seconds": 4.4,
+     "f0": 174.1,
+     "heard": "Yeah, IT support. I'm the contractor, it's my first day.",
+     "sim": 1.0
+    },
+    "en1-606": {
+     "seconds": 4.72,
+     "f0": 169.2,
+     "heard": "Yeah, IT support. I'm the contractor. It's my first day.",
+     "sim": 1.0
+    },
+    "en2-404": {
+     "seconds": 4.8,
+     "f0": 173.1,
+     "heard": "See, on both sides. Nobody said the island was this far out.",
+     "sim": 0.978
+    },
+    "en2-505": {
+     "seconds": 4.4,
+     "f0": 166.2,
+     "heard": "See on both sides. Nobody said the island was this far out.",
+     "sim": 0.978
+    },
+    "en2-606": {
+     "seconds": 4.48,
+     "f0": 172.1,
+     "heard": "See on both sides. Nobody said the island was this far out.",
+     "sim": 0.978
+    },
+    "mix-en-404": {
+     "seconds": 1.52,
+     "f0": 168.2,
+     "heard": "Right by the fountain.",
+     "sim": 1.0
+    },
+    "mix-en-505": {
+     "seconds": 1.92,
+     "f0": 167.2,
+     "heard": "right by the fountain.",
+     "sim": 1.0
+    },
+    "mix-en-606": {
+     "seconds": 2.0,
+     "f0": 169.2,
+     "heard": "right by the fountain.",
+     "sim": 1.0
+    },
+    "mix-ja-404": {
+     "seconds": 1.36,
+     "f0": 182.9,
+     "p_ja": 0.811,
+     "p_en": 0.024,
+     "heard": "ここ",
+     "sim": 1.0
+    },
+    "mix-ja-505": {
+     "seconds": 1.36,
+     "f0": 169.2,
+     "p_ja": 0.326,
+     "p_en": 0.034,
+     "heard": "ここを",
+     "sim": 0.8
+    },
+    "mix-ja-606": {
+     "seconds": 1.36,
+     "f0": 181.3,
+     "p_ja": 0.91,
+     "p_en": 0.02,
+     "heard": "ここ",
+     "sim": 1.0
+    },
+    "word-404": {
+     "seconds": 1.6,
+     "f0": 198.8,
+     "p_ja": 0.996,
+     "p_en": 0.002,
+     "heard": "おはようございます",
+     "sim": 1.0
+    },
+    "word-505": {
+     "seconds": 2.0,
+     "f0": 192.1,
+     "p_ja": 0.998,
+     "p_en": 0.001,
+     "heard": "おはようございます。",
+     "sim": 1.0
+    },
+    "word-606": {
+     "seconds": 1.6,
+     "f0": 201.7,
+     "p_ja": 0.997,
+     "p_en": 0.002,
+     "heard": "おはようございます。",
+     "sim": 1.0
+    }
+   },
+   "pick": {
+    "en1": 505,
+    "en2": 404,
+    "mix-en": 606,
+    "mix-ja": 606,
+    "word": 505
+   },
+   "ref_f0": 173.1,
+   "ref_seconds": 14.8
+  },
+  "f": {
+   "label": "f. Bright and clear",
+   "instruct": "A woman around thirty with a bright, clear, crisp voice. Medium-high pitch, polite and friendly, quick and articulate, composed. Neutral, standard English with no regional or foreign accent.",
+   "takes": {
+    "en1-404": {
+     "seconds": 3.76,
+     "f0": 352.3,
+     "heard": "Yeah! It's support, I'm the contractor, it's my first day.",
+     "sim": 0.988
+    },
+    "en1-505": {
+     "seconds": 4.48,
+     "f0": 381.9,
+     "heard": "Yeah! It's support! I'm the contractor. It's my first day.",
+     "sim": 0.988
+    },
+    "en1-606": {
+     "seconds": 4.64,
+     "f0": 281.2,
+     "heard": "Yeah, it's a support. I'm the contractor. It's my first day.",
+     "sim": 0.976
+    },
+    "en2-404": {
+     "seconds": 4.16,
+     "f0": 315.7,
+     "heard": "See on both sides? Nobody said the island was this far out.",
+     "sim": 0.978
+    },
+    "en2-505": {
+     "seconds": 4.48,
+     "f0": 259.4,
+     "heard": "See on both sides. Nobody said the island was this far out.",
+     "sim": 0.978
+    },
+    "en2-606": {
+     "seconds": 4.16,
+     "f0": 265.4,
+     "heard": "See on both sides, nobody said the island was this far out.",
+     "sim": 0.978
+    },
+    "mix-en-404": {
+     "seconds": 1.6,
+     "f0": 304.9,
+     "heard": "Right by the fountain.",
+     "sim": 1.0
+    },
+    "mix-en-505": {
+     "seconds": 1.44,
+     "f0": 203.5,
+     "heard": "Right by the fountain.",
+     "sim": 1.0
+    },
+    "mix-en-606": {
+     "seconds": 1.52,
+     "f0": 278.0,
+     "heard": "Right by the fountain.",
+     "sim": 1.0
+    },
+    "mix-ja-404": {
+     "seconds": 1.04,
+     "f0": 340.3,
+     "p_ja": 0.967,
+     "p_en": 0.015,
+     "heard": "ここ?",
+     "sim": 1.0
+    },
+    "mix-ja-505": {
+     "seconds": 0.88,
+     "f0": 233.8,
+     "p_ja": 0.757,
+     "p_en": 0.027,
+     "heard": "ここ",
+     "sim": 1.0
+    },
+    "mix-ja-606": {
+     "seconds": 1.04,
+     "f0": 216.8,
+     "p_ja": 0.286,
+     "p_en": 0.01,
+     "heard": "ここ",
+     "sim": 1.0
+    },
+    "word-404": {
+     "seconds": 1.76,
+     "f0": 340.3,
+     "p_ja": 0.998,
+     "p_en": 0.001,
+     "heard": "おはようございます",
+     "sim": 1.0
+    },
+    "word-505": {
+     "seconds": 2.0,
+     "f0": 364.7,
+     "p_ja": 0.997,
+     "p_en": 0.001,
+     "heard": "おはようございます",
+     "sim": 1.0
+    },
+    "word-606": {
+     "seconds": 2.0,
+     "f0": 354.3,
+     "p_ja": 0.998,
+     "p_en": 0.001,
+     "heard": "おはようございます",
+     "sim": 1.0
+    }
+   },
+   "pick": {
+    "en1": 404,
+    "en2": 404,
+    "mix-en": 404,
+    "mix-ja": 404,
+    "word": 404
+   },
+   "ref_f0": 346.2,
+   "ref_seconds": 11.2
+  }
+ }
+}
