@@ -1,9 +1,11 @@
 {
  "title": "Kenji (kenji-meshy-1)",
- "blurb": "A real rigged 3D model, made the way Kuro, Aoi and Emi were: Meshy smart topology (1,050 polygons, A-pose) from the ChatGPT picture, textured in a second pass on a UV layout with the face as one piece, Meshy auto-rig at 1.1 m. Idle and walk are the game's. Beside him or her: the in-game Eric, Mio, Kuro, Aoi and Emi. Drag to turn, wheel to zoom.",
+ "blurb": "A real rigged 3D model, made the way Kuro, Aoi and Emi were: Meshy smart topology (1,050 polygons, A-pose) from the ChatGPT picture, textured in a second pass on a UV layout with the face as one piece, Meshy auto-rig at 1.1 m. Idle and walk are the game's. Beside him or her: the in-game Eric, Mio, Kuro, Aoi and Emi. Drag to turn, wheel to zoom. kenji-3 is round 3 with its skin weights mended (his torso and tie were on his thigh bones); kenji-3 (Meshy weights) is the same model as Meshy rigged it.",
  "attempts": {
   "kenji-1": "/art/parts/kenji-meshy-1/meshy/kenji-1-tex-rigged.glb",
-  "kenji-2": "/art/parts/kenji-meshy-1/meshy/kenji-2-tex-rigged.glb"
+  "kenji-2": "/art/parts/kenji-meshy-1/meshy/kenji-2-tex-rigged.glb",
+  "kenji-3 (Meshy weights)": "/art/parts/kenji-meshy-1/meshy/kenji-3-tex-rigged.glb",
+  "kenji-3": "/art/parts/kenji-meshy-1/meshy/kenji-3-fix-rigged.glb"
  },
  "compare": {
   "Eric, Mio, Kuro, Aoi and Emi": [

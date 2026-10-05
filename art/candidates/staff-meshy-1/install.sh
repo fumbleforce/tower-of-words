@@ -6,7 +6,7 @@
 # jaw repainted (kuro-meshy-orig-3/cheek_fix.py) when cheek options are given. Then the approved relaxed-3 idle is
 # baked onto the rig (tools/characters/export-approved-idle.mjs; the server on 8771 must be up).
 #   sh art/candidates/staff-meshy-1/install.sh <id> <part, e.g. mori-1-tex> [cheek_fix options: lo=.. hi=.. skip=..]
-# Run from the worktree root.
+# Run from the worktree root. SIT=<glb> takes the sit from another file (Kenji round 3: his reweighted one).
 set -e
 C=$1; P=$2; shift 2
 A=/home/jorgen/repo/japanese/art/parts/$C-meshy-1/meshy
@@ -15,7 +15,7 @@ WT=$(pwd)
 mkdir -p "$G"
 rm -f "$G"/*.json "$G"/idle.glb
 python3 game3d/tools/slim_glb.py "$A/$P-walking.glb" "$G/walk.glb" "$A/$P-running.glb" "$G/run.glb" \
-  "tools/characters/out/$C/meshy/anim-sit.glb" "$G/sit.glb"
+  "${SIT:-tools/characters/out/$C/meshy/anim-sit.glb}" "$G/sit.glb"
 if [ $# -gt 0 ]; then
   ~/ai/sd/venv/bin/python art/candidates/kuro-meshy-orig-3/cheek_fix.py "$A/$P-rigged.glb" "$G/base.webp" \
     "/home/jorgen/repo/japanese/art/parts/$C-meshy-1/diag/fix-mask.png" "$@"

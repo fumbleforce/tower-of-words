@@ -122,5 +122,67 @@
    "name": "Chair_Sit_Idle_F"
   },
   "note": "for the game: tools/characters/meshy.py anim kenji <rig task> 32 sit"
+ },
+ {
+  "service": "meshy",
+  "part": "kenji-3",
+  "task": "01a10cd6-3b3b-756b-9cec-eec69de47836",
+  "status": "SUCCEEDED",
+  "credits": 5,
+  "balance_after": 318,
+  "settings": {
+   "ai_model": "meshy-t2",
+   "should_texture": false,
+   "target_formats": [
+    "glb"
+   ],
+   "multi_view_thumbnails": true,
+   "pose_mode": "a-pose",
+   "model_type": "smart-topology",
+   "target_polycount": 1050
+  },
+  "input": "art/parts/kenji-meshy-1/pics/f3.png"
+ },
+ {
+  "service": "meshy",
+  "part": "kenji-3-tex",
+  "task": "01a10cdb-641f-76d1-8bab-fb90821076f2",
+  "status": "SUCCEEDED",
+  "credits": 10,
+  "balance_after": 308,
+  "settings": {
+   "enable_pbr": false,
+   "remove_lighting": true,
+   "enable_original_uv": true,
+   "target_formats": [
+    "glb"
+   ],
+   "model": "art/parts/kenji-meshy-1/meshy/kenji-3-uv.glb"
+  },
+  "input": "art/parts/kenji-meshy-1/pics/f3.png"
+ },
+ {
+  "service": "meshy",
+  "part": "kenji-3-tex-rig",
+  "task": "01a10cde-7189-7671-9c86-ca1a94c9f871",
+  "status": "SUCCEEDED",
+  "credits": 5,
+  "settings": {
+   "input_task_id": "01a10cdb-641f-76d1-8bab-fb90821076f2",
+   "height_meters": 1.1
+  }
+ },
+ {
+  "service": "meshy",
+  "part": "kenji-sit-01a10ce2",
+  "task": "01a10ce2-20c9-744a-a932-ca0d7fce1f1a",
+  "status": "SUCCEEDED",
+  "credits": 3,
+  "balance_after": 300,
+  "settings": {
+   "action_id": 32,
+   "name": "Chair_Sit_Idle_F"
+  },
+  "note": "for the game: tools/characters/meshy.py anim kenji 01a10cde-7189-7671-9c86-ca1a94c9f871 32 sit; then reweighted (art/candidates/kenji-meshy-3/reweight.py)"
  }
 ]
