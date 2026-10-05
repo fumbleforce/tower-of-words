@@ -34,7 +34,7 @@ Entries are listed newest first by `date`.
 
 ## Reading his feedback
 
-He presses Send on an entry and the page saves `showcase/<id>/feedback.json` through tools/review_server.py (POST /api/showcase/<id>, local only). Earlier sends are kept in its `history`. Its shape:
+He presses Send on an entry and the page saves `showcase/<id>/feedback.json` through tools/review_server.py (POST /api/showcase/<id>, local only); from the public site it goes through a GitHub issue (reviews/README.md, "Answering from the public site"). Earlier sends are kept in its `history`. Its shape:
 
 ```json
 {"sent": "2026-09-30T12:00:00+0200", "flag": false, "comment": "about the whole entry",

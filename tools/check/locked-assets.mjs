@@ -63,7 +63,7 @@ export function materializeLockedAssets(cwd, directory, { env = process.env } = 
 export function checkAssetSync(cwd, { env = process.env } = {}) {
   const working = fs.existsSync(path.join(cwd, LOCK)) ? fs.readFileSync(path.join(cwd, LOCK), 'utf8') : null;
   let staged = null;
-  try { staged = execFileSync('git', ['show', `:${LOCK}`], { cwd, env, encoding: 'utf8', timeout: 10000, stdio: ['ignore', 'pipe', 'ignore'] }); }
+  try { staged = execFileSync('git', ['show', `:${LOCK}`], { cwd, env, encoding: 'utf8', timeout: 10000, maxBuffer: 64 << 20, stdio: ['ignore', 'pipe', 'ignore'] }); }  // the lock file is over 1 MB, execFileSync's default limit
   catch { /* not in the index */ }
   if (working !== staged) throw new Error(`asset sync: ${LOCK} differs from the staged copy; stage it (git add ${LOCK}) or restore it`);
   if (working === null) return;

@@ -41,10 +41,11 @@ const PUSHED = 'https://fumbleforce.github.io/tower-of-words/game3d/build.json';
 const PLACES = STORY_FILES;
 const GAME_DOCS = ['docs/game/README.md', 'docs/game/cast.md', 'docs/game/places.md', 'docs/game/words.md', 'docs/game/art-and-sound.md', 'docs/game/setting.md'];
 
-export async function loadLive(ROOT, snapshot, extraFiles = []) {
+// remote: the public site (GitHub Pages, tools/bible/pages.py), which has only Review and Showcase
+export async function loadLive(ROOT, snapshot, extraFiles = [], { remote = false } = {}) {
   const base = new URL(ROOT, location.href);
   const abs = (p) => /^https?:/.test(p) ? p : new URL(p, base).href;
-  const L = { ok: {}, errors: [], files: {}, abs };
+  const L = { ok: {}, errors: [], files: {}, abs, remote };
   const text = async (p) => {
     try {
       const r = await fetch(abs(p), { cache: 'no-cache' });
@@ -90,6 +91,13 @@ export async function loadLive(ROOT, snapshot, extraFiles = []) {
     } catch (e) { L.work = null; L.workStale = []; L.workError = e.message; }
     return L.work;
   };
+
+  if (remote) {
+    L.work = null; L.workStale = [];
+    L.reloadWork = async () => null;
+    await Promise.all([L.reloadReviews(), L.reloadShowcase()]);
+    return L;
+  }
 
   const mods = {};
   const tasks = [

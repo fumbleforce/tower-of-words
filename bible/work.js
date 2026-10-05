@@ -43,6 +43,9 @@ export function pageWork(L, h) {
   const head = `<div class="page work"><h1>Work</h1>
     <p class="lede">What is being worked on, what waits, and what is stuck, with who has it and the next step. Each item is a GitHub issue; open it to comment. The agents keep them up to date with tools/work.py.</p>`;
   const foot = `<p class="muted small" style="margin-top:22px"><a href="${ALL}">All work issues on GitHub</a> · how agents keep them: <a href="#src/tools/work.py">tools/work.py</a>.</p></div>`;
+  if (!L.work && L.remote) {
+    return `${head}<p>On the public site this list is GitHub's own: <a href="${ALL}">open the work issues on GitHub</a>. The local bible (./start) shows them grouped, with the stuck ones on top.</p></div>`;
+  }
   if (!L.work) {
     return `${head}<p>The list comes from GitHub through the local server (./start), and it didn't answer${L.workError ? `: ${esc(L.workError)}` : ''}. <a href="${ALL}">Open the issues on GitHub</a>.</p>${foot}`;
   }

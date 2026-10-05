@@ -140,6 +140,39 @@ def showcase_answer(data):
 ANSWERS = {'review': (REVIEWS, 'review.json', review_answer), 'showcase': (SHOWCASE, 'entry.json', showcase_answer)}
 
 
+def answer_folder(kind, rid, allow_private=True):
+    """The folder an answer goes to, and whether it is a private Review item; None when there is no such item."""
+    base, marker, _ = ANSWERS[kind]
+    folder = os.path.join(base, rid)
+    if (allow_private and kind == 'review' and not os.path.isfile(os.path.join(folder, marker))
+            and os.path.isfile(os.path.join(PRIVATE_REVIEWS, rid, marker))):
+        return os.path.join(PRIVATE_REVIEWS, rid), True
+    return (folder, False) if os.path.isfile(os.path.join(folder, marker)) else (None, False)
+
+
+def save_answer(kind, folder, data, sent=None):
+    """Normalise one answer for its kind, keep the earlier send in `history` and write <folder>/feedback.json
+    atomically. The local Send (POST) and tools/review.py pull (answers sent from the public site) both save here.
+    Returns the `sent` stamp."""
+    entry = dict(sent=sent or time.strftime('%Y-%m-%dT%H:%M:%S%z'), **ANSWERS[kind][2](data))
+    path = os.path.join(folder, 'feedback.json')
+    old = None
+    if os.path.exists(path):
+        try:
+            old = json.load(open(path, encoding='utf-8'))
+        except Exception:
+            old = None
+    history = (old or {}).get('history', [])
+    if old and old.get('sent'):
+        history.append({k: v for k, v in old.items() if k != 'history'})
+    out = dict(entry, read=False, history=history)
+    tmp = path + '.tmp'
+    with open(tmp, 'w', encoding='utf-8') as f:
+        json.dump(out, f, ensure_ascii=False, indent=1)
+    os.replace(tmp, path)
+    return entry['sent']
+
+
 class Handler(SimpleHTTPRequestHandler):
     def _json(self, code, obj):
         body = json.dumps(obj, ensure_ascii=False).encode('utf-8')
@@ -203,12 +236,8 @@ class Handler(SimpleHTTPRequestHandler):
         `history` and write <folder>/<id>/feedback.json atomically."""
         if not self._local():
             return self._json(403, {'error': 'local only'})
-        base, marker, normalise = ANSWERS[kind]
-        folder = os.path.join(base, rid)
-        private = False
-        if kind == 'review' and not os.path.isfile(os.path.join(folder, marker)) and os.path.isfile(os.path.join(PRIVATE_REVIEWS, rid, marker)):
-            folder, private = os.path.join(PRIVATE_REVIEWS, rid), True
-        if not os.path.isfile(os.path.join(folder, marker)):
+        folder, private = answer_folder(kind, rid)
+        if not folder:
             return self._json(404, {'error': f'no {kind} item {rid}'})
         n = int(self.headers.get('Content-Length') or 0)
         if n <= 0 or n > MAX_BODY:
@@ -218,25 +247,10 @@ class Handler(SimpleHTTPRequestHandler):
             assert isinstance(data, dict)
         except Exception:
             return self._json(400, {'error': 'body must be a JSON object'})
-        entry = dict(sent=time.strftime('%Y-%m-%dT%H:%M:%S%z'), **normalise(data))
-        path = os.path.join(folder, 'feedback.json')
-        old = None
-        if os.path.exists(path):
-            try:
-                old = json.load(open(path, encoding='utf-8'))
-            except Exception:
-                old = None
-        history = (old or {}).get('history', [])
-        if old and old.get('sent'):
-            history.append({k: v for k, v in old.items() if k != 'history'})
-        out = dict(entry, read=False, history=history)
-        tmp = path + '.tmp'
-        with open(tmp, 'w', encoding='utf-8') as f:
-            json.dump(out, f, ensure_ascii=False, indent=1)
-        os.replace(tmp, path)
+        sent = save_answer(kind, folder, data)
         if kind == 'review' and not private:
             threading.Thread(target=review_changed, args=(rid,), daemon=True).start()
-        return self._json(200, {'ok': True, 'sent': entry['sent']})
+        return self._json(200, {'ok': True, 'sent': sent})
 
     def end_headers(self):
         # feedback and review files change while the page is open
