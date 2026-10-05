@@ -1,23 +1,48 @@
-// Day 3 TEST SKELETON (#228): the ways between the places the clubs use, and room 203's chair, so ?day=3 can play
-// the notice board, joining a club and a club session (js/clubs/). It has no story. Codex's day 3 (#229,
-// notes/days3-5-outline.md) replaces these files' contents; keep the ways and the chair's period choices.
-//
-// place(ways, extra): a place's story where talking to an exit (or walking into its zone) walks on to the next place.
-//   ways: { to: ['talk:thing', 'zone:zone', ...] }; closed: triggers that lead somewhere this day doesn't open
-export const goal = (at) => [
-  {
-    if: '!clubs_joined',
-    then: [{ do: 'goal', text: 'Read the notice board in the fountain plaza.', ...(at ? { at } : {}) }],
-    else: [{ do: 'goal', text: 'Your clubs and when they meet are under People.' }],
-  },
+// Plain FORMAT data. Pending place hooks and placement are declared in index.js / README.md.
+export const speakers = {
+  miotext: { name: 'Mio', role: 'message', phone: true },
+  attendant: { name: 'Attendant' },
+  member: { name: 'Club member' },
+  guard: { name: 'Guard' },
+  kuro: { name: 'Receptionist' },
+  aoi: { name: 'Woman from the train' },
+  rei: { name: 'Tennis player' },
+};
+// Talk marks people met before their first line. Preserve an unmet Emi on arrival until she says her name.
+export const emiHello = [{ if: '!met_emi || d3_emi_needs_intro', then: [
+  { say: 'emi', emo: 'bright', text: 'You must be {mc.name}. I’m Emi, your team lead. We’ve managed to miss each other at the office.' },
+  { do: 'meet', who: 'emi' }, { unset: 'd3_emi_needs_intro' },
+] }];
+export const repairQueue = [
+  { do: 'ticket', add: 'T-0003' },
+  { do: 'ticket', add: 'T-0004' },
 ];
-export function place(ways, { closed = [], on = {}, nodes = {}, at } = {}) {
-  const o = {},
-    n = { d3_arrive: goal(at), d3_closed: ["> That way isn't open on this test day."] };
+export const goal = (at) => [{
+  if: "period == 'evening'",
+  then: [{
+    if: 'club_swimming && !d3_swim_done',
+    then: [{ do: 'goal', text: 'The swimming club meets at the outdoor pool tonight. Or head home to sleep.' }],
+    else: [{ do: 'goal', text: 'Explore this evening, or choose Sleep at the bed in room 203.' }],
+  }],
+  else: [{
+    if: '!d3_board_read',
+    then: [{ do: 'goal', text: 'Read the club posters in the fountain plaza.', ...(at ? { at } : {}) }],
+    else: [{ do: 'goal', text: 'Your time is free. Rest at the chair in room 203 when you want evening.' }],
+  }],
+}];
+export function place(ways, { closed = [], on = {}, nodes = {}, at, show = {}, labels = {} } = {}) {
+  const o = {}, n = {
+    d3_arrive: [{ do: 'day3Setup' }, ...goal(at)],
+    d3_closed: [{ say: 'eric', emo: 'tired', text: 'I can get back through the plaza.' }],
+  };
   for (const [to, keys] of Object.entries(ways)) {
     n['d3_to_' + to] = [{ do: 'trip', to }];
     for (const k of keys) o[k] = 'd3_to_' + to;
   }
   for (const k of closed) o[k] = 'd3_closed';
-  return { start: 'd3_arrive', on: { ...o, ...on }, nodes: { ...n, ...nodes } };
+  const combined = { ...n, ...nodes };
+  combined.d3_arrive = [
+    { if: '!met_emi', then: [{ set: 'd3_emi_needs_intro' }] }, ...combined.d3_arrive,
+  ];
+  return { speakers, start: 'd3_arrive', on: { ...o, ...on }, show, labels, nodes: combined };
 }
