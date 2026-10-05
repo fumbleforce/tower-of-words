@@ -11,7 +11,7 @@ Staging (shot-staging skill; the prompts are his, so this is what each picture i
 body, standing, eye level, plain light background, nothing else in frame; for the angle step head and body face the
 same way.
 
-  python3 art/candidates/staff-meshy-1/gen.py <id> <take-id> <step: s1|s2|s3|angle|head|chubby> [<picked take> ...]
+  python3 art/candidates/staff-meshy-1/gen.py <id> <take-id> <step: s1|s2|s3|angle|head|chubby|even> [<picked take> ...]
 The picked takes are the chat so far, in order; each one's own .json says which step it answered.
 Writes the main checkout's art/parts/<id>-meshy-1/pics/<take-id>.png and .json and logs the cost in the main
 checkout's tools/spend.json.
@@ -41,6 +41,9 @@ def prompts(cid):
             'angle': angle,
             # Jørgen on kenji-1 (2026-10-05: "he is too slim, doesnt look like himself"), his words for round 2
             'chubby': 'make him rounder and chubbier like in the portrait, everything else the same',
+            # Jørgen on kenji-2 (2026-10-05: "his hair is getting skin color due to aggressive lighting in
+            # reference"); round 3 asks for even light on the chosen round-2 picture
+            'even': 'same character, even soft flat lighting, his hair a solid dark colour, everything else the same',
             'head': 'make her head a little smaller relative to her body, everything else the same' if she else
                     'make his head a little smaller relative to his body, everything else the same'}
 

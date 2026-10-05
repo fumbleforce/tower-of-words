@@ -3,7 +3,7 @@
  "date": "2026-10-05",
  "by": "Claude (staff-meshy agent)",
  "status": "open",
- "question": "The first two sheets are ChatGPT pictures; every sheet after them is a render of the real rigged model, which you can turn in the live viewer next to Eric, Mio, Kuro, Aoi and Emi (link below). He is in the game now. Round 2 (kenji-2, the last option and the round 2 sheets; its first sheet is ChatGPT pictures too, the rest renders) is rounder and chubbier, as you asked. Is Kenji right now?",
+ "question": "The ChatGPT sheets are pictures (step0, steps, r2-steps, r3-steps); every other sheet is a render of the real rigged model, which you can turn in the live viewer (links below). Round 3 (kenji-3, the last option and the r3 sheets) answers your note on kenji-2: the reference picture now has even light and his hair one dark colour, and Meshy's broken skin weights are mended. He is in the game now. Is Kenji right now?",
  "multi": false,
  "media": [
   {
@@ -81,6 +81,50 @@
   {
    "image": "art/parts/kenji-meshy-1/sheets/r2-ingame.webp",
    "caption": "Round 2 in the game (day 1, test mode): at his desk in B2."
+  },
+  {
+   "image": "art/parts/kenji-meshy-1/sheets/r3-steps.webp",
+   "caption": "Round 3. ChatGPT pictures. Your verdict on kenji-2: \"his model is a bit broken, his hair is getting skin color due to aggressive lighting in reference\". In his round-2 chat (a1, b1, c1, d1, e2), attaching e2, one follow-up: \"same character, even soft flat lighting, his hair a solid dark colour, everything else the same\". Three takes, every one shown: all three lost the pale hair tips; f3 kept e2's round belly and spiky hair best (f1 came out a little slimmer, f2 smoother hair), so f3 went to Meshy. 3 takes, $0.89."
+  },
+  {
+   "image": "art/parts/kenji-meshy-1/sheets/r3-shape-previews.webp",
+   "caption": "Round 3. Renders of the real model from here on. The same Meshy steps: image-to-3D from f3, smart topology, 1,050 polygons, A-pose, no texture, 5 credits. Meshy's previews; first roll, kept. Three pieces this time (body with both arms whole, hair, tie); round 2 had seven (both forearms cut off at the elbow, a loose shirt pocket plate, two loose patches for the pale hair tips)."
+  },
+  {
+   "image": "art/parts/kenji-meshy-1/sheets/r3-uv.webp",
+   "caption": "Round 3. The face-first UV unwrap (the whole face one piece, red), then Meshy retexture styled from f3, keep the UVs, no PBR, 10 credits."
+  },
+  {
+   "image": "art/parts/kenji-meshy-1/sheets/r3-tex.webp",
+   "caption": "Round 3. The textured model, same cameras as before. His hair is one dark colour all round."
+  },
+  {
+   "image": "art/parts/kenji-meshy-1/sheets/r3-before-after.webp",
+   "caption": "Round 2 and round 3, front and back: the skin-coloured patches on the back of his hair are gone."
+  },
+  {
+   "image": "art/parts/kenji-meshy-1/sheets/r3-weights.webp",
+   "caption": "What else was broken: Meshy's auto-rig weights, shown as each part's strongest bone. On kenji-2 and again on kenji-3, Meshy put his whole torso and belly on the two thigh bones (almost nothing on the spine), his knees barely bent, his tie went 53% to the thighs and 30% to the head, and on kenji-2 the loose pocket plate followed his left thigh and arm. Mended on kenji-3 (right): the skeleton Meshy placed is kept, the weights are Blender's bone-heat weights, the belly above the hips goes with the pelvis, the hair with the head, and the tie takes the weights of the shirt behind it."
+  },
+  {
+   "image": "art/parts/kenji-meshy-1/sheets/r3-walk.webp",
+   "caption": "The walk in the live viewer: kenji-2; kenji-3 with Meshy's weights (his shirt hem and tie pulled about by his legs); kenji-3 mended (hem straight, tie in place). Both kenji-3 versions are in the viewer to compare."
+  },
+  {
+   "image": "art/parts/kenji-meshy-1/sheets/r3-viewer.webp",
+   "caption": "kenji-3 in the live viewer: rest, idle from four sides, walk."
+  },
+  {
+   "image": "art/parts/kenji-meshy-1/sheets/r3-faces.webp",
+   "caption": "Round 3. From below the chin in the texture's own colours: no dark marks; the texture is in the game as Meshy painted it."
+  },
+  {
+   "image": "art/parts/kenji-meshy-1/sheets/r3-compare.webp",
+   "caption": "Round 3 beside the in-game Eric and Mio and Kuro. Head share 0.41 of his height (round 2 0.43; Eric 0.46, Kuro 0.41). His hands counted from the hand bones come to 0.158 of his height, which again takes in his bare forearms; on the renders they match his arms, so they are left as Meshy made them."
+  },
+  {
+   "image": "art/parts/kenji-meshy-1/sheets/r3-ingame.webp",
+   "caption": "Round 3 in the game (day 1, test mode, 1366x860): at his desk in B2 (Meshy sit, reweighted the same way). Meshy credits for round 3: 23 (shape 5, texture 10, rig 5, sit 3); balance 300."
   }
  ],
  "options": [
@@ -107,9 +151,25 @@
     "art/parts/kenji-meshy-1/pics/e2.png"
    ],
    "note": "Round 2, from picture e2 (chat a1, b1, c1, d1, then \"make him rounder and chubbier like in the portrait, everything else the same\"): the same Meshy steps. Head share 0.43. In the game at 1.12 tall since this round. 23 Meshy credits; three pictures $0.86."
+  },
+  {
+   "id": "kenji-3",
+   "label": "kenji-3 (round 3)",
+   "image": "art/parts/kenji-meshy-1/renders/tex3/r45.png",
+   "images": [
+    "art/parts/kenji-meshy-1/renders/tex3/front.png",
+    "art/parts/kenji-meshy-1/renders/tex3/face.png",
+    "art/parts/kenji-meshy-1/renders/tex3/back.png",
+    "art/parts/kenji-meshy-1/pics/f3.png"
+   ],
+   "note": "Round 3, from picture f3 (his round-2 chat, then \"same character, even soft flat lighting, his hair a solid dark colour, everything else the same\"): the same Meshy steps, then his skin weights mended (Meshy had put his whole torso and his tie on his thigh bones). Head share 0.41. In the game since this round, 1.12 tall. 23 Meshy credits; three pictures $0.89."
   }
  ],
  "links": [
+  {
+   "label": "Live 3D: kenji-3 alone (turn, zoom, idle, walk; \"kenji-3 (Meshy weights)\" and kenji-2 to compare)",
+   "href": "tools/characters/parts/viewer.html?cfg=/reviews/kenji-meshy-1/viewer.json&a=kenji-3&m=walk&c=none"
+  },
   {
    "label": "Live 3D: Kenji beside the in-game Eric, Mio, Kuro, Aoi and Emi (turn, zoom, idle, walk)",
    "href": "tools/characters/parts/viewer.html?cfg=/reviews/kenji-meshy-1/viewer.json&a=kenji-2&m=idle&c=Eric%2C%20Mio%2C%20Kuro%2C%20Aoi%20and%20Emi"
