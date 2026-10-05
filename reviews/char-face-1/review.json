@@ -2,7 +2,7 @@
  "title": "Character faces: faceted bodies with anime face textures",
  "date": "2026-10-01",
  "by": "Claude (char-face agent)",
- "status": "open",
+ "status": "decided",
  "question": "Is this the direction for the game's characters, and which attempt?",
  "multi": true,
  "media": [
@@ -184,5 +184,11 @@
    "label": "Turn them, play idle and walk, swap the expressions (live 3D)",
    "href": "tools/style-concepts/face-viewer.html"
   }
- ]
+ ],
+ "decided": [
+  "gen-i2i"
+ ],
+ "decision": "Texture-face attempts rejected ('all the options like this look the same but they look like shit'); gen-front rejected. Target: gen-i2i mio-front-d60, 'if you were able to do this it would be mindboggling ... I doubt it. Prove me wrong.'",
+ "decided_at": "2026-10-01T13:42:25+0200",
+ "issue": 164
 }

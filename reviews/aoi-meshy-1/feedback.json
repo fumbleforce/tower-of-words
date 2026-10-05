@@ -1,0 +1,32 @@
+{
+ "sent": "2026-10-05T07:31:41+0200",
+ "picked": [
+  "aoi-2"
+ ],
+ "options": {
+  "aoi-1": {
+   "star": false,
+   "reject": false,
+   "comment": "her face is a tiny bit too large and her hands are larger than the others. but it is very very close id say"
+  }
+ },
+ "comment": "",
+ "read": true,
+ "history": [
+  {
+   "sent": "2026-10-05T00:14:14+0200",
+   "picked": [
+    "aoi-1"
+   ],
+   "options": {
+    "aoi-1": {
+     "star": false,
+     "reject": false,
+     "comment": "her face is a tiny bit too large and her hands are larger than the others. but it is very very close id say"
+    }
+   },
+   "comment": "",
+   "read": true
+  }
+ ]
+}

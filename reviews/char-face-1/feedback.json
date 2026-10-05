@@ -1,0 +1,26 @@
+{
+ "sent": "2026-10-01T13:38:35+0200",
+ "picked": [
+  "gen-i2i"
+ ],
+ "options": {
+  "cf-02": {
+   "star": false,
+   "reject": false,
+   "comment": "all the options like this look the same but they look like shit"
+  },
+  "gen-front": {
+   "star": false,
+   "reject": true,
+   "comment": ""
+  },
+  "gen-i2i": {
+   "star": false,
+   "reject": false,
+   "comment": "if you were able to do this it would be mindboggling, mio-front-d60, but I doublt it. Prove me wrong."
+  }
+ },
+ "comment": "",
+ "read": true,
+ "history": []
+}
