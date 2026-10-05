@@ -2,7 +2,7 @@
  "title": "Rei: a 3D model made the way Kuro, Aoi and Emi were",
  "date": "2026-10-05",
  "by": "Claude (staff-meshy agent)",
- "status": "open",
+ "status": "decided",
  "question": "The first two sheets are ChatGPT pictures; every sheet after them is a render of the real rigged model, which you can turn in the live viewer (links below; rei-1-rig2 is the new rig). Your note on rei-1: \"model good, rig terrible\". rei-1-rig2 is the same model on a new rig of ours, and she is in the game now. Is her rig right?",
  "multi": false,
  "media": [
@@ -110,5 +110,11 @@
    "label": "Kuro round 3, the approved process (kuro-meshy-orig-3)",
    "href": "bible/#review/kuro-meshy-orig-3"
   }
- ]
+ ],
+ "decided": [
+  "rei-1"
+ ],
+ "decision": "Answered; follow-up handled",
+ "decided_at": "2026-10-05T23:15:37+0200",
+ "issue": 271
 }
