@@ -7,6 +7,10 @@
 // Chromium of that owner is killed first, so a reclaimed slot never hides a GPU
 // browser that is still running. An exclusive owner (anything without the pool
 // prefix) is never touched.
+//
+// Jørgen's image gen dashboard has priority over every agent job: while its
+// gpu.priority file is live (tools/gpu_priority.py writes and reads it) no new
+// slot is handed out.
 import fs from 'node:fs';
 import path from 'node:path';
 import { randomUUID } from 'node:crypto';
@@ -53,6 +57,15 @@ function parseSlot(text) {
   } catch { /* plain owner string */ }
   const pid = Number(/\bpid=(\d+)/.exec(text)?.[1]);
   return { owner: text, pid: Number.isInteger(pid) && pid > 0 ? pid : null };
+}
+
+// The dashboard's live priority record ({by, pid, start, time}), or null. A file
+// whose writer has died is ignored.
+export function gpuPriority({ root = DEFAULT_ROOT } = {}) {
+  let data;
+  try { data = JSON.parse(fs.readFileSync(path.join(root, 'gpu.priority'), 'utf8')); }
+  catch { return null; }
+  return data && Number.isInteger(data.pid) && alive(data.pid, data.start) ? data : null;
 }
 
 function slotDead(data) {
@@ -124,6 +137,7 @@ export function tryAcquireBrowserGpuSlot({ owner, root = DEFAULT_ROOT, pid = pro
   return mutatePool(root, null, () => {
     let poolOwner;
     if (fs.existsSync(pool)) reclaimInPool(pool, log);
+    if (gpuPriority({ root })) return null;
     try {
       fs.mkdirSync(pool);
       poolOwner = poolPrefix + randomUUID();
@@ -169,6 +183,6 @@ export function tryAcquireBrowserGpuSlot({ owner, root = DEFAULT_ROOT, pid = pro
 }
 
 if (process.argv[1] && fileURLToPath(import.meta.url) === path.resolve(process.argv[1]) && process.argv[2] === 'reclaim') {
-  const n = reclaimDeadBrowserSlots({ log: console.log });
+  const n = reclaimDeadBrowserSlots({ root: process.argv[3] || DEFAULT_ROOT, log: console.log });
   console.log(n === null ? 'pool mutex busy; try again' : `reclaimed ${n} dead browser GPU slot(s)`);
 }

@@ -5,11 +5,12 @@ Usage: gen_takes.py <seeds, comma separated> [keys, comma separated] [--lang Aut
   no keys: every manifest line with no exported clip for its current text (cfg.missing())
   --alt: read the text in alt_text.json instead (take tag 'a'); --lang: force the TTS language (tag 'u');
   --xvec: clone the timbre only, not the reference's way of speaking (tag 'x', also Eric's Japanese); TAG=x sets the tag
-Takes already on disk from the same reference are skipped. Checks the GPU lock (cfg.LOCK, owner cfg.ME) before every batch and stops if it is gone.
+Takes already on disk from the same reference are skipped. Checks the GPU lock (cfg.LOCK, owner cfg.ME) before every batch and stops if it is gone,
+or with exit 75 when Jørgen's image gen dashboard asks for the GPU (cfg.must_yield); a rerun picks up from the takes on disk.
 Run with the Qwen venv: ~/ai/tts/qwen/venv/bin/python (run.sh does)."""
 import json, os, sys, time
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from cfg import RAW, ALT, XVEC_JA, QWEN, load, units, missing, speakers, lock_ok, spoken, setup
+from cfg import RAW, ALT, XVEC_JA, QWEN, load, units, missing, speakers, lock_ok, must_yield, spoken, setup
 seeds = [int(x) for x in sys.argv[1].split(',')]
 arg = sys.argv[2] if len(sys.argv) > 2 and not sys.argv[2].startswith('--') else ''
 keys = set(arg.split(',')) if arg else set(missing())
@@ -61,6 +62,9 @@ for (sp, lang), es in todo.items():
         need = [e for e in es if not have(f'{RAW}/{e["key"]}/{tk}', label)]
         for i in range(0, len(need), BS):
             b = need[i:i + BS]
+            if must_yield():
+                print("stopping for Jørgen's image gen dashboard (gpu.priority); takes so far are on disk", flush=True)
+                sys.exit(75)
             if not lock_ok():
                 sys.exit('lock lost, stopping')
             texts = [spoken(alt[e['key']]) if use_alt else e['tts'] for e in b]

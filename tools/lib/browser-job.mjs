@@ -126,7 +126,7 @@ export async function withBrowserJob(name, run, {
       let waitingForGpu = false;
       while (!(gpuSlot = tryAcquireBrowserGpuSlot({ owner }))) {
         const remaining = gpuUntil - Date.now();
-        if (remaining <= 0) throw Object.assign(new Error(`${name}: render deferred; browser GPU slots or exclusive GPU lock busy`), { code: 'GPU_DEFERRED' });
+        if (remaining <= 0) throw Object.assign(new Error(`${name}: render deferred; browser GPU slots or exclusive GPU lock busy, or Jørgen's image gen dashboard has priority (gpu.priority)`), { code: 'GPU_DEFERRED' });
         if (!waitingForGpu) console.log(`${name}: waiting up to ${gpuWaitMs / 1000}s for a browser GPU slot`);
         waitingForGpu = true;
         await Promise.race([deadline, cancelled, new Promise(resolve => {

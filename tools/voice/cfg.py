@@ -14,6 +14,8 @@ import json, os, re, sys
 HERE = os.path.dirname(os.path.abspath(__file__))
 REPO = os.path.abspath(os.path.join(HERE, '..', '..'))
 sys.path.insert(0, f'{REPO}/tools/island_audio')
+sys.path.insert(0, f'{REPO}/tools')
+import gpu_priority  # noqa: E402
 try:
     from voices import REFS, VR, tts_text  # noqa: E402
 except ImportError as _e:  # untracked: a worktree needs it linked from the main checkout (voice-clips skill)
@@ -180,6 +182,11 @@ def missing():
     """Manifest keys with no exported clip for their current text."""
     clips = load(CLIPS, {})
     return [e['key'] for e in manifest() if not (clips.get(e['key']) == e['said'] and os.path.exists(f"{AUD}/{e['key']}.mp3"))]
+
+
+def must_yield():
+    """Jørgen's image gen dashboard wants the GPU (tools/gpu_priority.py): stop between batches with exit 75."""
+    return gpu_priority.should_stop(ME)
 
 
 def lock_ok():
