@@ -230,8 +230,9 @@ export async function trainPlace(game) {
     hinge.add(scr);
     laptop.add(base, kb, hinge);
   }
+  const lap = rei.lap || rei.torso; // a Meshy Rei's stand-in torso is not drawn (cast3d.js meshyPerson)
   laptop.position.set(0, 0.02, 0.2);
-  rei.torso.add(laptop);
+  lap.add(laptop);
   const folder = rbox(0.22, 0.025, 0.3, '#2f3a55', { x: 1.55, y: SEAT_Y, z: -(LZ - 0.26), r: 0.008 });
   car.root.add(folder);
   const cup = new THREE.Group();
@@ -1422,7 +1423,7 @@ export async function trainPlace(game) {
           cup.rotation.set(0, 0, 0);
           if (rei.root.visible) {
             cup.position.set(0.08, 0.14, 0.18);
-            rei.torso.add(cup);
+            lap.add(cup);
           } else {
             cup.position.set(2.32, SEAT_Y + 0.02, -(LZ - 0.3));
           }
@@ -1467,7 +1468,7 @@ export async function trainPlace(game) {
         },
         motion: { mode: st.mode, v: st.v, dist: st.dist, stopAt: st.stopAt, stopX: st.stopX, decel: st.decel },
         player: snapshotPeople({ eric: game.player }),
-        cup: { ...cupSt, ...snapshotObject(cup), withRei: cup.parent === rei.torso },
+        cup: { ...cupSt, ...snapshotObject(cup), withRei: cup.parent === lap },
         people: Object.fromEntries(
           Object.entries(snapshotPeople(people)).map(([id, person]) => [
             id,
@@ -1510,7 +1511,7 @@ export async function trainPlace(game) {
       bagMotion = state.bagMotion ? structuredClone(state.bagMotion) : null;
       if (state.cup) {
         Object.assign(cupSt, { state: state.cup.state, want: state.cup.want, k: state.cup.k });
-        (state.cup.withRei ? rei.torso : car.root).add(cup);
+        (state.cup.withRei ? lap : car.root).add(cup);
         if (state.cup.visible !== undefined) cup.visible = state.cup.visible;
         cup.position.fromArray(state.cup.position);
         cup.rotation.fromArray(state.cup.rotation);
