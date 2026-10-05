@@ -59,6 +59,7 @@ The anime portraits beside the dialogue box. The faces each person has are in [c
 - Mio: voice A (tools/voice-refs/mio-a.wav), low and slightly husky.
 - Eric: voice design eric-2 with no accent (tools/voice-refs/eric-voice.wav). The Nordic accent was dropped (Jørgen: "not any better, just drop it, English accent instead"). His Japanese words are read in Japanese with the same clone, so they sound right with a light foreign voice (Jørgen, 2026-09-30: "if it is possible to make eric pronounce it correctly that would be the best. Now he says Tomato rather than Tomatte").
 - Kuro: the relaxed, husky voice design kuro-husky (tools/voice-refs/kuro-husky.wav; Review kuro-voice-2, Jørgen, 2026-10-05: "bit loud but right tone"), so her clips are normalised 2 dB under the cast. The girl with headphones on the train borrows it.
+- Day 3's gym attendant and swimming club member borrow voices (the man from Sales and Aoi's), and so does Rei for now (the woman from Sales). Rei needs a voice of her own, picked by Jørgen.
 - Japanese speakers speak Japanese; overheard lines play muffled, subtitled ones clear ([systems.md](systems.md)).
 - Japanese inside an English line (Mio's 待って, おはようございます, 外人) is said natively: the Japanese is its own Japanese take in the speaker's clone, spliced into the English line (Jørgen, 2026-09-30: "she sometimes says the japanese words with an english accent like Matte in the office scenes"). How: the voice-clips skill.
 - Loudness is normalised per character; Eric's voice is quieter.
