@@ -212,7 +212,7 @@ The speaker's portrait shows beside the text box ([docs/game/controls-and-ui.md]
 
 ## Subtitled Japanese
 
-`{ say: 'music', text: '自分で録ったの。まだ下手だけど。', en: 'I recorded it myself. I’m still pretty bad, though.' }`. For the moments the player should follow although Eric can't. The text is the Japanese (the voice clip is made from it, found by speaker and text like any line; not muffled); the screen shows the English, marked "in Japanese" by the name. The Japanese isn't shown and teaches nothing. Only the long form supports `en`; ambient lines take it too.
+`{ say: 'music', text: '自分で録ったの。まだ下手だけど。', en: 'I recorded it myself. I’m still pretty bad, though.' }`. For the rare moments the player should follow although Eric can't, overheard between other people (the train passengers). Never in a conversation Eric is part of: there a Japanese speaker is overheard, as on day 1, and Eric gets the rest from known words, gestures, the action or someone translating (Jørgen, 2026-10-05, on day 3's gym desk: "first of all it should not be in english"). The text is the Japanese (the voice clip is made from it, found by speaker and text like any line; not muffled); the screen shows the English, marked "in Japanese" by the name. The Japanese isn't shown and teaches nothing. Only the long form supports `en`; ambient lines take it too.
 
 ## Overheard Japanese
 

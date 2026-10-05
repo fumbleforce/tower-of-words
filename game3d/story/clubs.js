@@ -93,7 +93,7 @@ export default {
         { if: 'kuro_reception_seen', then: [
           { say: 'kuro', name: 'Receptionist', emo: 'polite', text: 'Good evening. No floor number tonight?' },
           { say: 'eric', emo: 'warm', text: 'I think I’m in the right place this time.' },
-          { say: 'kuro', name: 'Receptionist', emo: 'polite', text: 'I’m Kuro. We didn’t say names.' },
+          { say: 'kuro', name: 'Receptionist', emo: 'polite', text: 'I’m Kuro, by the way. We never got as far as names at the desk.' },
         ], else: [
           { say: 'kuro', name: 'Receptionist', emo: 'polite', text: 'Good evening. I’m Kuro. I work at reception.' },
           { say: 'eric', emo: 'warm', text: 'I’m {mc.name}. Nice to meet you.' },
@@ -105,12 +105,13 @@ export default {
     club_swimming_pool: [
       { call: 'd3_pool_begin' },
       { say: 'emi', emo: 'casual', text: 'I meant to be in already. I went for the keys and came back with everyone’s bags.' },
-      { say: 'member', emo: 'polite', text: 'これも、お願いします。備品のリストです。', en: 'Could you take this too? It’s the equipment list.' },
+      { say: 'member', overheard: true, emo: 'polite', text: 'エミさん、これもお願いします。備品のリストです。', clear: ['リスト'] },
       { call: 'd3_pool_list' },
-      { say: 'emi', emo: 'bright', text: 'Yes, I’ll check... actually, I’d like to swim first.' },
-      { say: 'kuro', name: 'Kuro', emo: 'polite', text: 'エミさん、まだ一本も泳いでいませんよ。', en: 'Emi, you haven’t swum a single length yet.' },
-      { say: 'emi', emo: 'puzzled', text: 'Are you closing up already?' },
-      { say: 'attendant', emo: 'polite', text: '使わない物を片づけるだけです。泳ぎ終わるまで、このコースは開けておきます。', en: 'I’m only putting the unused things away. This lane stays open until you’ve finished.' },
+      { say: 'emi', emo: 'bright', text: 'And now the list as well. I’ll check it... no, actually, I’d like to swim first.' },
+      { say: 'kuro', name: 'Kuro', overheard: true, emo: 'teasing', text: 'エミさん、まだ一本も泳いでいませんよ。' },
+      { say: 'emi', emo: 'puzzled', text: 'I know, I know. Hang on, is he packing up already? We haven’t even started.' },
+      { say: 'attendant', overheard: true, emo: 'polite', text: '使わない物を片づけるだけです。このコースは、最後まで開けておきますよ。', clear: ['コース'] },
+      { say: 'emi', emo: 'casual', text: 'Oh, good, it’s only the spare floats. He’ll leave our lane open.' },
       { choice: [
         { text: 'Swim with Kuro.', go: 'club_swimming_join' },
         { text: 'Carry Emi’s bags to the attendant.', go: 'club_swimming_bags' },
@@ -120,16 +121,16 @@ export default {
     ],
     club_swimming_join: [
       { say: 'eric', emo: 'warm', text: 'I’ll come in. I’m a bit out of practice.' },
-      { say: 'kuro', name: 'Kuro', emo: 'polite', text: 'Slow is fine. Use the steps.' },
+      { say: 'kuro', name: 'Kuro', emo: 'polite', text: 'Take it slowly. The steps are on this side.' },
       { set: 'd3_player_swims' }, { call: 'd3_pool_enter' },
       { do: 'cam', on: 'attendant', zoom: 1.2 },
-      { say: 'emi', emo: 'casual', text: 'Could you take these for me? I can’t get in with all this.' },
-      { say: 'attendant', emo: 'polite', text: 'はい、どうぞ。', en: 'Yes, here.' },
+      { say: 'emi', overheard: true, emo: 'casual', text: '{sumimasen}、これ、お願いできますか？' },
+      { say: 'attendant', overheard: true, emo: 'polite', text: 'はい、預かりますね。' },
       { call: 'd3_pool_emi_hands_over' }, { go: 'club_swimming_length' },
     ],
     club_swimming_bags: [
       { say: 'eric', emo: 'warm', text: 'I can carry those over. Go on.' },
-      { say: 'emi', emo: 'bright', text: 'Thank you. The blue bag’s mine; he can take the others.' },
+      { say: 'emi', emo: 'bright', text: 'Thank you. Just take them over to him by the steps.' },
       { call: 'd3_pool_bags' },
       { choice: [
         { text: 'Get in the water.', go: 'club_swimming_after_bags' },
@@ -140,15 +141,15 @@ export default {
     club_swimming_watch: [
       { say: 'eric', emo: 'warm', text: 'I’ll watch for a bit. Don’t wait for me.' },
       { do: 'cam', on: 'attendant', zoom: 1.2 },
-      { say: 'emi', emo: 'casual', text: 'Could you hold these at the table, please? I’m going in.' },
-      { say: 'attendant', emo: 'polite', text: 'はい、どうぞ。', en: 'Yes, here.' },
+      { say: 'emi', overheard: true, emo: 'casual', text: '{sumimasen}、これ、お願いできますか？' },
+      { say: 'attendant', overheard: true, emo: 'polite', text: 'はい、預かりますね。' },
       { call: 'd3_pool_emi_hands_over' }, { go: 'club_swimming_deck' },
     ],
     club_swimming_deck: [{ do: 'sit', who: 'eric', at: 'deck_bench_s' }, { go: 'club_swimming_length' }],
     club_swimming_length: [
       { call: 'd3_pool_emi_enters' },
       { say: 'emi', emo: 'surprised', text: 'Oh. That’s colder than it was in August.' },
-      { say: 'kuro', name: 'Kuro', emo: 'polite', text: '泳ぐと、少し温かくなりますよ。', en: 'You’ll warm up a little once you’re swimming.' },
+      { say: 'kuro', name: 'Kuro', overheard: true, emo: 'warm', text: '泳げば、少し温かくなりますよ。' },
       { call: 'd3_pool_length' },
       { if: 'd3_player_swims', then: [
         { do: 'cam', on: 'kuro', zoom: 1.2 },
@@ -156,11 +157,11 @@ export default {
         { say: 'eric', emo: 'warm', text: 'Yes. I just need a moment at the wall.' },
       ] },
       { say: 'emi', emo: 'warm', text: 'I’d forgotten how quiet it is when your ears are under.' },
-      { say: 'kuro', name: 'Kuro', emo: 'polite', text: 'もう一本、泳ぎませんか。', en: 'Will you swim one more length with me?' },
-      { say: 'emi', emo: 'bright', text: 'Yes, go on then.' },
+      { say: 'kuro', name: 'Kuro', overheard: true, emo: 'polite', text: 'もう一本、泳ぎませんか。' },
+      { say: 'emi', emo: 'bright', text: 'One more length? Go on, then.' },
       { do: 'cam', on: 'attendant', zoom: 1.2 },
-      { say: 'emi', emo: 'casual', text: 'Could you leave the list on the table? I’ll look after we get out.' },
-      { say: 'attendant', emo: 'polite', text: 'はい、置いておきます。', en: 'Yes, I’ll leave it there.' },
+      { say: 'emi', overheard: true, emo: 'casual', text: '{sumimasen}、リスト、テーブルに置いてもらえますか？', clear: ['リスト', 'テーブル'] },
+      { say: 'attendant', overheard: true, emo: 'polite', text: 'はい、置いておきます。' },
       { call: 'd3_pool_another' },
       { set: 'd3_swim_done' }, { call: 'club_swimming_shared' },
       { do: 'remember', who: 'emi', id: 'first_club', text: 'You were there for the last outdoor swim.' },
@@ -173,7 +174,8 @@ export default {
     club_swimming_sit: [
       { call: 'd3_pool_sit' },
       { say: 'emi', emo: 'warm', text: 'I’d stay out here another week if they’d let us.' },
-      { say: 'attendant', emo: 'polite', text: '来週から体育館です。室内用の靴を持ってきてください。', en: 'We meet in the gym from next week. Please bring indoor shoes.' },
+      { say: 'attendant', overheard: true, emo: 'polite', text: '来週から体育館です。室内用の靴を持ってきてくださいね。' },
+      { say: 'emi', emo: 'casual', text: 'Gym from next week, he says, and bring indoor shoes. They really do send you home without them.' },
       { say: 'kuro', name: 'Kuro', emo: 'polite', text: 'My hair will still be wet when I get home.' },
       { say: 'eric', emo: 'warm', text: 'At least it’s a short walk.' },
       { do: 'remember', who: 'kuro', id: 'club_seat', text: 'Sat with her after the club session.' },
@@ -182,7 +184,7 @@ export default {
     ],
     club_swimming_goodnight: [
       { say: 'eric', emo: 'warm', text: 'I’ll head back. Thanks for having me.' },
-      { say: 'emi', emo: 'warm', text: 'See you next Saturday, if you’re free. In the gym.' },
+      { say: 'emi', emo: 'warm', text: 'See you next Saturday, if you’re free. We’ll be in the gym by then.' },
       { call: 'd3_pool_exit' }, { do: 'cam', back: true }, { do: 'trip', to: 'sports' },
     ],
     club_swimming_leave_early: [
@@ -202,7 +204,8 @@ export default {
     ],
     club_swimming_winter_sit: [
       { do: 'sit', who: 'eric', at: 'gym_bench_n' },
-      { say: 'attendant', emo: 'polite', text: 'このあたりは自由に使えます。マットは、そこの棚にあります。', en: 'You can use this part of the hall. The mats are on that shelf.' },
+      { say: 'attendant', overheard: true, emo: 'polite', text: 'このあたりは自由に使えます。マットは、そこの棚です。', clear: ['マット'] },
+      { do: 'gesture', who: 'attendant', kind: 'point' },
       { say: 'kuro', name: 'Kuro', emo: 'polite', text: 'I should have brought thicker socks.' },
       { say: 'eric', emo: 'warm', text: 'I’ll remember that for next time.' },
       { do: 'remember', who: 'emi', id: 'first_club', text: 'Joined her for your first winter club meeting.' },

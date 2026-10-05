@@ -57,6 +57,10 @@ Who each person is (age, job, what they speak) is in docs/game/cast.md. This she
 - Notices where someone aimed, whether they got another turn, and when an explanation has stopped helping. Teasing refers to something that just happened between them.
 - Avoid stock sales pitches, mysterious insinuations, automatic flirtation and Mio's internet fillers. She is comfortable leaving a conversation to return to her own game.
 
+**The gym attendant** (`attendant`, day 3). A man at the gym's reception counter by day and on the pool deck in the evening. Polite Japanese to visitors, short practical sentences, and a casual あ、戻った！ when something works again. Says 出して to his printer out of habit. Never English.
+
+**The club member** (`member`, day 3). A young woman in the swimming club. Quick, casual-polite Japanese, an あっ before she knows what she's saying. Never English.
+
 **Narration**. Second person, a few words, only for what the scene can't show.
 
 **Mio's texts** (`miotext`). Lower case, no full stops, short: "is that you?", "loud".

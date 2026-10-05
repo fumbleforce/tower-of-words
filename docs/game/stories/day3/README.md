@@ -4,10 +4,10 @@ Saturday 3 October, a free day. Written by Codex (C-0462, X-0546, X-0548; #229),
 
 | Part | What it covers | Story |
 |---|---|---|
-| The room | Mio's messages, the two new repair requests on the computer, the chair that moves the clock (one period, or rest until evening), and Sleep at the bed in the evening, which ends the day. | dorms.js |
+| The room | Mio's messages (which name the two new repair requests), the requests on the computer, the chair that moves the clock (one period, or rest until evening), and Sleep at the bed in the evening, which ends the day. | dorms.js |
 | The board | The club posters, Aoi's first proper introduction, and the map's word koko. | plaza.js |
 | The station | The witnessed final door check and the guard's signature (T-0002, any morning), and his monitor (T-0003, mornings). | gate.js, train.js |
-| The gym desk | The frozen booking terminal and the printer (T-0004, daytime). | gym.js |
+| The gym desk | The reception counter in the gym's entrance lobby: Eric, who has the request from Mio's text, tells the attendant he's from IT support; the frozen booking terminal on the counter and the printer behind it (T-0004, daytime). | gym.js |
 | The swimming club | The last outdoor swim at the pool in the evening, for members: swim, carry the bags, watch, or leave; the goggles on the fence. | clubs.js, pool.js |
 | Walks | Short looks and people across the open places. | the other place files |
 

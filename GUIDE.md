@@ -68,6 +68,8 @@ Plain writing (humanizer), how dialogue must sound (spoken, no AI voice, no expo
 - No characters or beats that add nothing (the conductor). Nobody answers a greeting that wasn't addressed to them. A new word is learned by typing its romaji, not by clicking an option.
 - Every branch must flow: after each choice the next lines make sense, with the right speaker and voice. Check every path.
 - Natural casual Japanese at N5 to N4, in character. Nothing illogical or repeated.
+- Japanese speakers speak Japanese on screen in every conversation Eric is part of, as on day 1 (Jørgen, 2026-10-05, on day 3's gym desk: "first of all it should not be in english ... WHAT BUTTONS THIS IS A GYM"). How: game3d/story/FORMAT.md, Subtitled Japanese.
+- A repair job never just happens to Eric (Jørgen, 2026-10-05: "I am apparently just stumbling into a ticket I have not taken"). He knows about it before he arrives (his request list, a message), or someone asks him for help out loud and the ticket opens then.
 
 ### Story craft
 

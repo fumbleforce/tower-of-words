@@ -39,7 +39,12 @@ for (const [where, story] of Object.entries(STORIES)) {
         const speaker = story.speakers?.[s.say] || DEFAULT_SPEAKERS[s.say];
         assert(speaker, `${where}/${name}: speaker ${s.say}`);
         assert(s.emo || speaker.phone, `${where}/${name}: no voice direction`);
-        if (['guard', 'mori', 'kuroda', 'aoi', 'attendant', 'member'].includes(s.say)) assert(s.en, `${where}/${name}: untranslated Japanese`);
+        // Japanese speakers talk Japanese on screen, as on day 1: overheard (known words sharp, the rest by context and
+        // gesture), or a bare taught word ({dashite}). The subtitled `en` form is never used in a day-3 conversation.
+        assert(!s.en, `${where}/${name}: subtitled Japanese (en) in a day-3 conversation`);
+        if (['guard', 'mori', 'kuroda', 'aoi', 'attendant', 'member'].includes(s.say)) {
+          assert(s.overheard || /^(\{\w+\}[。、.…!?！？]*\s*)+$/.test(s.text), `${where}/${name}: Japanese line neither overheard nor a taught word`);
+        }
       }
       for (const k of ['text', 'en', 'prompt']) text(s[k]);
       if (s.if) condition(s.if);
@@ -221,7 +226,7 @@ for (const route of poolChoices) for (const finish of ['club_swimming_sit', 'clu
   assert(gate.flags.d3_monitor_seen); assert.equal(gate.destination, 'train');
   const train = new Play('train', { ...gate.flags, place: 'train' });
   train.run('d3_arrive', ['d3_signoff_later']);
-  assert(!train.flags.d3_signoff_walk); assert(train.lines.some(s => s.includes('out of service')));
+  assert(!train.flags.d3_signoff_walk); assert(train.lines.some(s => s.includes('センサー')));
   assert(!train.hooks.some(h => h.do === 'goal' && h.at === 'door_test'));
   train.run('d3_arrive'); assert(train.hooks.some(h => h.do === 'goal' && h.at === 'door_test'));
   gate.record('Guard: monitor setup without PC, then escort'); train.record('Platform: escorted arrival and return');
@@ -233,7 +238,7 @@ for (const period of PERIODS) {
 }
 for (const joined of [false, true]) {
   const aoi = new Play('plaza', { d3_aoi_intro: true, club_tennis: joined }); aoi.run('d3_aoi_again');
-  assert.equal(aoi.lines.some(s => s.includes('See you at the courts')), joined);
+  assert.equal(aoi.lines.some(s => s.includes('テニスで')), joined);
   const emi = new Play('gym', { met_emi: true, club_swimming: joined }); emi.run('d3_emi');
   assert.equal(emi.lines.some(s => s.includes('Take a slip')), !joined);
   aoi.record(`Aoi: member ${joined}`); emi.record(`Emi: member ${joined}`);

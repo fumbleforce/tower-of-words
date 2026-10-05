@@ -26,13 +26,20 @@ export default place(
       d3_emi_lunch: [...emiHello, { say: 'emi', emo: 'bright', text: 'You’ve found my lunch spot. I can usually finish a sandwich here.' }],
       d3_hamada: [
         { if: 'd2_hamada_seen', then: [
-          { say: 'kuroda', emo: 'polite', text: '今日は拭きません。座るだけです。', en: 'I’m not cleaning the lens today. I’m just sitting down.' },
-        ], else: [{ say: 'kuroda', emo: 'polite', text: 'どうぞ。海がよく見えますよ。', en: 'Go ahead. You can see the sea well from here.' }] },
+          { say: 'kuroda', overheard: true, emo: 'sheepish', text: 'あ、今日は拭きません。座ってるだけです。' },
+          { say: 'eric', emo: 'warm', text: 'You’ve left the cloth at home today, then.' },
+        ], else: [
+          { say: 'kuroda', overheard: true, emo: 'polite', text: 'あ、{sumimasen}。どうぞ、どうぞ。' },
+          { do: 'gesture', who: 'kuroda', kind: 'point', to: 'east_coast_lookout' },
+        ] },
       ],
       d3_aoi_walk: [
         { if: 'd3_aoi_intro', then: [
-          { say: 'aoi', name: 'Aoi', emo: 'casual', text: '靴、買えました。明日は借りたラケットでやってみます。', en: 'I got the shoes. Tomorrow I’ll try with a borrowed racket.' },
-        ], else: [{ say: 'aoi', emo: 'polite', text: 'こんばんは。', en: 'Good evening.' }] },
+          { say: 'aoi', name: 'Aoi', overheard: true, emo: 'bright', text: '靴、買えました！明日はラケットを借りて、テニスです。', clear: ['ラケット', 'テニス'] },
+          { do: 'emote', who: 'aoi', kind: '♪' },
+        ], else: [
+          { say: 'aoi', overheard: true, emo: 'polite', text: 'こんばんは。' }, { do: 'bow', who: 'aoi' },
+        ] },
       ],
     },
   },

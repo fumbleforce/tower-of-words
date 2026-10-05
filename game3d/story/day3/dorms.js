@@ -14,10 +14,12 @@ export default {
         { unset: 'going_home' },
         { do: 'phone', who: 'eric', state: 'buzz' },
         { if: "d2_ticket_done && ticket_T0002 != 'done'", then: [
-          { say: 'miotext', text: 'the station can do the final check this morning\nor any morning, if you want your saturday' },
-          { say: 'miotext', text: 'the guard will sign it off\ni’m going back to sleep' },
+          { say: 'miotext', text: 'the station can do the final door check this morning\nor any morning, if you want your saturday' },
         ] },
+        { say: 'miotext', text: 'two more requests came in this morning\nthe station desk monitor, and the gym’s booking terminal froze' },
+        { say: 'miotext', text: 'both in your list on the computer\nnone of it has to be today' },
         { say: 'miotext', text: 'club posters are up by the fountain\nif you’re looking for something to do' },
+        { say: 'miotext', text: 'ok going back to sleep' },
         { do: 'phone', who: 'eric', state: 'away' },
         { set: 'd3_started' }, { do: 'save' },
       ] },
@@ -55,7 +57,7 @@ export default {
     ] }], else: [{ say: 'eric', emo: 'tired', text: 'Too early to sleep. I could sit at the desk for a while.' }] }],
     d3_sleep: [{ set: 'd3_complete' }, { do: 'goal', text: '' }, { do: 'save' }, { do: 'end' }],
     d3_awake: goal('door_out'),
-    d3_window: [{ say: 'eric', emo: 'dry', text: 'It sounds sunny on the other side of the building.' }],
+    d3_window: [{ say: 'eric', emo: 'dry', text: 'I can hear people out in the sun on the other side of the building.' }],
     d3_boxes: [
       { if: '!d3_unpacked', then: [
         { say: 'eric', emo: 'tired', text: 'The towels are in the kitchen box, round the mugs. I knew I’d packed them somewhere.' },
