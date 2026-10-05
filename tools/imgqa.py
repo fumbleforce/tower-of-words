@@ -71,8 +71,8 @@ THRESH = {
 }
 
 
-def grade(key, v):
-    lo, hi = THRESH[key]
+def grade(key, v, thresh=None):
+    lo, hi = (thresh or THRESH)[key]
     if v is None:
         return 'warn'
     if hi < lo:  # higher is better
@@ -128,14 +128,21 @@ def lab(rgb):
     return np.stack([116 * f[..., 1] - 16, 500 * (f[..., 0] - f[..., 1]), 200 * (f[..., 1] - f[..., 2])], -1)
 
 
+def detect_all(pil):
+    """Every anime face in a PIL image: [(box [x0, y0, x1, y1], score)], biggest first (tools/imgqa_scene.py uses it too)."""
+    from imgutils.detect import detect_faces
+    return sorted(([[float(v) for v in b], float(s)] for b, _, s in detect_faces(pil)),
+                  key=lambda f: -(f[0][2] - f[0][0]) * (f[0][3] - f[0][1]))
+
+
 def detect(img):
     """Face box (best score) and up to two eye centres inside it, sorted left to right in the image."""
-    from imgutils.detect import detect_faces, detect_eyes
+    from imgutils.detect import detect_eyes
     pil = to_pil(img['grey'])
-    faces = detect_faces(pil)
+    faces = detect_all(pil)
     if not faces:
         return None, []
-    (x0, y0, x1, y1), _, _ = max(faces, key=lambda f: f[2] * (f[0][2] - f[0][0]))
+    (x0, y0, x1, y1), _ = max(faces, key=lambda f: f[1] * (f[0][2] - f[0][0]))
     eyes = []
     for (a, b, c, d), _, score in sorted(detect_eyes(pil), key=lambda e: -e[2]):
         cx, cy = (a + c) / 2, (b + d) / 2
