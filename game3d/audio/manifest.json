@@ -4154,61 +4154,106 @@
   "emo": "tired"
  },
  {
-  "key": "ln-qlhv4i",
-  "speaker": "guard",
+  "key": "oh-3qdcej",
+  "speaker": "aoi",
   "text": "こんばんは。",
   "lang": "ja",
-  "overheard": false,
+  "overheard": true,
   "words": [],
   "clear": [],
   "emo": "polite"
  },
  {
-  "key": "ln-qlzml7",
+  "key": "oh-3q3h4y",
   "speaker": "guard",
   "text": "こんにちは。",
   "lang": "ja",
-  "overheard": false,
+  "overheard": true,
   "words": [],
   "clear": [],
   "emo": "polite"
  },
  {
-  "key": "ln-1monayr",
+  "key": "oh-1lnrsqf",
   "speaker": "guard",
-  "text": "今は休憩です。点検は、また朝に。",
+  "text": "今は休憩中です。点検は、また朝に。",
   "lang": "ja",
-  "overheard": false,
+  "overheard": true,
   "words": [],
   "clear": [],
   "emo": "polite"
  },
  {
-  "key": "ln-11web01",
+  "key": "ln-ilwr14",
+  "speaker": "eric",
+  "text": "He’s eating his lunch. I’ll come back one morning.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "tired"
+ },
+ {
+  "key": "oh-h7if3d",
   "speaker": "guard",
-  "text": "点検は午前中にお願いします。",
+  "text": "点検は、午前中にお願いします。",
   "lang": "ja",
-  "overheard": false,
+  "overheard": true,
   "words": [],
   "clear": [],
   "emo": "polite"
  },
  {
-  "key": "ln-1skptci",
+  "key": "ln-1h4e3b6",
+  "speaker": "eric",
+  "text": "Nine fingers again. He only does the checks in the morning.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "tired"
+ },
+ {
+  "key": "oh-1sswqvf",
   "speaker": "guard",
   "text": "この画面も、見ていただけますか。",
   "lang": "ja",
-  "overheard": false,
+  "overheard": true,
   "words": [],
   "clear": [],
   "emo": "polite"
  },
  {
-  "key": "ln-tug9nr",
+  "key": "ln-ev853h",
+  "speaker": "eric",
+  "text": "That’s the monitor from my request list.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "ln-1cgzvh8",
+  "speaker": "eric",
+  "text": "おはようございます.",
+  "lang": "ja",
+  "overheard": false,
+  "words": [
+   [
+    "ohayo",
+    "おはようございます"
+   ]
+  ],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "oh-fj7i2q",
   "speaker": "guard",
   "text": "おはようございます。今日はお休みですか。",
   "lang": "ja",
-  "overheard": false,
+  "overheard": true,
   "words": [
    [
     "ohayo",
@@ -4219,11 +4264,11 @@
   "emo": "polite"
  },
  {
-  "key": "ln-14k4yup",
+  "key": "oh-ib5p0o",
   "speaker": "guard",
   "text": "報告は届いています。こちらへどうぞ。",
   "lang": "ja",
-  "overheard": false,
+  "overheard": true,
   "words": [],
   "clear": [],
   "emo": "polite"
@@ -4249,19 +4294,19 @@
   "emo": "tired"
  },
  {
-  "key": "ln-1qbeuh7",
+  "key": "oh-1axh8oj",
   "speaker": "guard",
-  "text": "こちらに向けると、消えます。",
+  "text": "こちらに向けると、消えるんです。",
   "lang": "ja",
-  "overheard": false,
+  "overheard": true,
   "words": [],
   "clear": [],
   "emo": "polite"
  },
  {
-  "key": "ln-177sk92",
+  "key": "ln-1254rfy",
   "speaker": "eric",
-  "text": "Leave it there a moment. The plug’s almost out.",
+  "text": "Hold it there a second. The plug at the back is half out.",
   "lang": "en",
   "overheard": false,
   "words": [],
@@ -4279,14 +4324,16 @@
   "emo": "warm"
  },
  {
-  "key": "ln-1rlvu6m",
+  "key": "oh-iufy8n",
   "speaker": "guard",
   "text": "今度は大丈夫です。ありがとうございます。",
   "lang": "ja",
-  "overheard": false,
+  "overheard": true,
   "words": [],
-  "clear": [],
-  "emo": "polite"
+  "clear": [
+   "ありがとう"
+  ],
+  "emo": "warm"
  },
  {
   "key": "ln-t5xtwj",
@@ -4299,19 +4346,29 @@
   "emo": "warm"
  },
  {
-  "key": "ln-1quuzrw",
+  "key": "oh-l2iogg",
   "speaker": "guard",
-  "text": "猫はいません。……もう食べましたから。",
+  "text": "猫は、いません。",
   "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "stern"
+ },
+ {
+  "key": "ln-1na6nr3",
+  "speaker": "eric",
+  "text": "All right. I didn’t see anything.",
+  "lang": "en",
   "overheard": false,
   "words": [],
   "clear": [],
-  "emo": "polite"
+  "emo": "dry"
  },
  {
-  "key": "ln-12r85et",
+  "key": "ln-c4be4u",
   "speaker": "eric",
-  "text": "I’ll go round. Keep your shelter.",
+  "text": "I’ll go round. You keep the shelter.",
   "lang": "en",
   "overheard": false,
   "words": [],
@@ -4359,39 +4416,21 @@
   "emo": "tired"
  },
  {
-  "key": "ln-1lse62v",
+  "key": "oh-y4b6hd",
   "speaker": "guard",
-  "text": "この車両は点検用です。発車しません。",
+  "text": "センサーは、新しいのに交換しました。確認をお願いします。",
   "lang": "ja",
-  "overheard": false,
+  "overheard": true,
   "words": [],
-  "clear": [],
+  "clear": [
+   "センサー"
+  ],
   "emo": "polite"
  },
  {
-  "key": "ln-mp15jj",
-  "speaker": "guard",
-  "text": "センサーは交換しました。確認をお願いします。",
-  "lang": "ja",
-  "overheard": false,
-  "words": [],
-  "clear": [],
-  "emo": "polite"
- },
- {
-  "key": "ln-vbcmv3",
-  "speaker": "guard",
-  "text": "センサーはそのままです。もう一度、確認をお願いします。",
-  "lang": "ja",
-  "overheard": false,
-  "words": [],
-  "clear": [],
-  "emo": "polite"
- },
- {
-  "key": "ln-1xgn1jb",
+  "key": "ln-1bnxq9q",
   "speaker": "eric",
-  "text": "It stopped where it should.",
+  "text": "So the new sensor’s in. Let’s see it work.",
   "lang": "en",
   "overheard": false,
   "words": [],
@@ -4399,39 +4438,71 @@
   "emo": "warm"
  },
  {
-  "key": "ln-38drc4",
+  "key": "oh-9144o7",
   "speaker": "guard",
-  "text": "道具は全部出しました。最後に閉めます。",
+  "text": "センサーは、そのままです。もう一度、確認をお願いします。",
   "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [
+   "センサー"
+  ],
+  "emo": "polite"
+ },
+ {
+  "key": "ln-m0qcov",
+  "speaker": "eric",
+  "text": "Same old sensor, then. Let’s see if it behaves this time.",
+  "lang": "en",
   "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "ln-mzpd8p",
+  "speaker": "eric",
+  "text": "There. It stopped short, the way it’s meant to.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "oh-5q728r",
+  "speaker": "guard",
+  "text": "道具は、全部出しました。閉めます。",
+  "lang": "ja",
+  "overheard": true,
   "words": [],
   "clear": [],
   "emo": "polite"
  },
  {
-  "key": "ln-fommk6",
+  "key": "oh-h92qa5",
   "speaker": "guard",
-  "text": "時刻を先に書いてしまいました。一分、直します。",
+  "text": "あ、時刻を先に書いてしまいました。",
   "lang": "ja",
-  "overheard": false,
+  "overheard": true,
   "words": [],
   "clear": [],
   "emo": "puzzled"
  },
  {
-  "key": "ln-1j2vvyy",
+  "key": "oh-l610cj",
   "speaker": "guard",
   "text": "確認しました。お疲れさまでした。",
   "lang": "ja",
-  "overheard": false,
+  "overheard": true,
   "words": [],
   "clear": [],
-  "emo": "polite"
+  "emo": "warm"
  },
  {
-  "key": "ln-a44qau",
+  "key": "ln-ygvqyq",
   "speaker": "eric",
-  "text": "I’m going to leave you alone while you’re working.",
+  "text": "Nobody’s printing anything today. I’ll leave you alone.",
   "lang": "en",
   "overheard": false,
   "words": [],
@@ -4449,9 +4520,9 @@
   "emo": "tired"
  },
  {
-  "key": "ln-1wfiet5",
+  "key": "ln-nkok6j",
   "speaker": "eric",
-  "text": "It sounds sunny on the other side of the building.",
+  "text": "I can hear people out in the sun on the other side of the building.",
   "lang": "en",
   "overheard": false,
   "words": [],
@@ -4489,9 +4560,9 @@
   "emo": "tired"
  },
  {
-  "key": "ln-4zeapz",
+  "key": "ln-4jzp36",
   "speaker": "eric",
-  "text": "I can go up for a rest and come out again later.",
+  "text": "I’ll go up later. It’s too nice to sit indoors.",
   "lang": "en",
   "overheard": false,
   "words": [],
@@ -4499,9 +4570,9 @@
   "emo": "warm"
  },
  {
-  "key": "ln-xxewlg",
+  "key": "ln-1ugch6q",
   "speaker": "eric",
-  "text": "All right. I’ll use the other end.",
+  "text": "All right, you can keep that spot.",
   "lang": "en",
   "overheard": false,
   "words": [],
@@ -4529,29 +4600,31 @@
   "emo": "warm"
  },
  {
-  "key": "ln-p4e2vl",
+  "key": "oh-9hf846",
   "speaker": "aoi",
-  "text": "どうぞ。私はテニスにします。日曜日なら来られるので。",
+  "text": "あ、どうぞ。私はテニスにします。",
   "lang": "ja",
-  "overheard": false,
+  "overheard": true,
   "words": [],
-  "clear": [],
+  "clear": [
+   "テニス"
+  ],
   "emo": "casual"
  },
  {
-  "key": "ln-1f0ir8t",
+  "key": "oh-10u0c51",
   "speaker": "aoi",
-  "text": "同じ電車でしたよね。もう、お仕事は始まりましたか。",
+  "text": "あれ、電車の……",
   "lang": "ja",
-  "overheard": false,
+  "overheard": true,
   "words": [],
   "clear": [],
-  "emo": "curious"
+  "emo": "surprised"
  },
  {
-  "key": "ln-18c4u5h",
+  "key": "ln-xpv2y6",
   "speaker": "eric",
-  "text": "Yes. IT support, B2.",
+  "text": "Morning. You were on my train, on the phone the whole way.",
   "lang": "en",
   "overheard": false,
   "words": [],
@@ -4559,21 +4632,63 @@
   "emo": "warm"
  },
  {
-  "key": "ln-1ytv7qt",
+  "key": "oh-1p714l0",
   "speaker": "aoi",
-  "text": "あ、地下……。電話、聞こえましたか。",
+  "text": "お仕事は、どちらですか？",
   "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "ln-kvzn3f",
+  "speaker": "eric",
+  "text": "Where I work? IT support, down in B2.",
+  "lang": "en",
   "overheard": false,
   "words": [],
   "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "oh-1ppzky5",
+  "speaker": "aoi",
+  "text": "B2……地下……。電話、聞こえてました？",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [
+   "B2"
+  ],
   "emo": "hesitant"
  },
  {
-  "key": "ln-ump6kc",
-  "speaker": "aoi",
-  "text": "すみません。窓のある部屋がよかっただけで。",
-  "lang": "ja",
+  "key": "ln-1jpi4rx",
+  "speaker": "eric",
+  "text": "She’s gone red. I think she’s asking whether I heard her on the phone.",
+  "lang": "en",
   "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "ln-1judhhw",
+  "speaker": "eric",
+  "text": "Don’t worry about it. It was a long ride.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "oh-1ia2944",
+  "speaker": "aoi",
+  "text": "すみません。窓のある部屋が、よかっただけで……",
+  "lang": "ja",
+  "overheard": true,
   "words": [
    [
     "sumimasen",
@@ -4584,9 +4699,9 @@
   "emo": "sheepish"
  },
  {
-  "key": "ln-8hgkeu",
+  "key": "ln-i7cp77",
   "speaker": "eric",
-  "text": "So did I.",
+  "text": "I couldn’t follow a word of it, if that helps.",
   "lang": "en",
   "overheard": false,
   "words": [],
@@ -4594,94 +4709,107 @@
   "emo": "dry"
  },
  {
-  "key": "ln-1o66c4",
+  "key": "oh-1jjb61m",
   "speaker": "aoi",
-  "text": "窓のある部屋がいいって、言ってたんです。",
+  "text": "よかった……",
   "lang": "ja",
-  "overheard": false,
+  "overheard": true,
   "words": [],
   "clear": [],
   "emo": "sheepish"
  },
  {
-  "key": "ln-2j480e",
+  "key": "oh-1st71km",
   "speaker": "aoi",
-  "text": "葵です。よろしくお願いします。",
+  "text": "アオイです。よろしくおねがいします。",
   "lang": "ja",
-  "overheard": false,
+  "overheard": true,
   "words": [
    [
     "yoroshiku",
-    "よろしくお願いします"
+    "よろしくおねがいします"
    ]
   ],
   "clear": [],
   "emo": "polite"
  },
  {
-  "key": "ln-lh6048",
+  "key": "ln-oi6zp4",
   "speaker": "eric",
-  "text": "I’m Eric. Where did you end up?",
+  "text": "Eric. よろしくおねがいします.",
   "lang": "en",
   "overheard": false,
-  "words": [],
+  "words": [
+   [
+    "yoroshiku",
+    "よろしくおねがいします"
+   ]
+  ],
   "clear": [],
   "emo": "warm"
  },
  {
-  "key": "ln-1lohu2c",
+  "key": "oh-1al5j7p",
   "speaker": "aoi",
-  "text": "施設の予約担当です。今は研修センターの二階にいます。",
+  "text": "プール、今夜が最後ですよ！",
   "lang": "ja",
-  "overheard": false,
+  "overheard": true,
   "words": [],
-  "clear": [],
-  "emo": "casual"
+  "clear": [
+   "プール"
+  ],
+  "emo": "bright"
  },
  {
-  "key": "ln-qoozl1",
-  "speaker": "aoi",
-  "text": "泳ぐなら、今夜ですよ。十月だけど、今日だけ開けるそうです。",
-  "lang": "ja",
-  "overheard": false,
-  "words": [],
-  "clear": [],
-  "emo": "casual"
- },
- {
-  "key": "ln-1ovo52",
-  "speaker": "aoi",
-  "text": "私はテニスの靴を買ってきます。",
-  "lang": "ja",
-  "overheard": false,
-  "words": [],
-  "clear": [],
-  "emo": "polite"
- },
- {
-  "key": "ln-1fiwq8a",
-  "speaker": "aoi",
-  "text": "日曜日に、コートで。",
-  "lang": "ja",
-  "overheard": false,
-  "words": [],
-  "clear": [],
-  "emo": "polite"
- },
- {
-  "key": "ln-1hibw0z",
-  "speaker": "aoi",
-  "text": "日曜日、がんばります。",
-  "lang": "ja",
-  "overheard": false,
-  "words": [],
-  "clear": [],
-  "emo": "polite"
- },
- {
-  "key": "ln-1jt4934",
+  "key": "ln-zz6sjj",
   "speaker": "eric",
-  "text": "ここ. Right by the fountain.",
+  "text": "The pool? I’ll have a look at the poster.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "oh-1eq9rt8",
+  "speaker": "aoi",
+  "text": "私は、テニスの靴を買ってきます。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [
+   "テニス"
+  ],
+  "emo": "bright"
+ },
+ {
+  "key": "oh-pbft3e",
+  "speaker": "aoi",
+  "text": "日曜日、テニスで！",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [
+   "テニス"
+  ],
+  "emo": "bright"
+ },
+ {
+  "key": "oh-twpndu",
+  "speaker": "aoi",
+  "text": "日曜日のテニス、がんばります。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [
+   "テニス"
+  ],
+  "emo": "polite"
+ },
+ {
+  "key": "ln-17i8000",
+  "speaker": "eric",
+  "text": "ここ. So we’re right by the fountain.",
   "lang": "en",
   "overheard": false,
   "words": [
@@ -4784,14 +4912,14 @@
   "emo": "bright"
  },
  {
-  "key": "ln-f8m4vi",
+  "key": "ln-1o0b7il",
   "speaker": "kuro",
-  "text": "Next week we’ll be in the gym.",
+  "text": "Enjoy it while it lasts. Next week it’s the gym, and nobody has told me how we swim in a gym.",
   "lang": "en",
   "overheard": false,
   "words": [],
   "clear": [],
-  "emo": "polite"
+  "emo": "teasing"
  },
  {
   "key": "ln-19uyidh",
@@ -4814,24 +4942,39 @@
   "emo": "polite"
  },
  {
-  "key": "ln-1fwi4m4",
+  "key": "oh-ewljs",
   "speaker": "attendant",
-  "text": "水泳部の方は、まだ大丈夫です。",
+  "text": "どうぞ。まだ大丈夫ですよ。",
   "lang": "ja",
-  "overheard": false,
+  "overheard": true,
   "words": [],
   "clear": [],
   "emo": "polite"
  },
  {
-  "key": "ln-f21d81",
+  "key": "oh-zs1i52",
   "speaker": "attendant",
-  "text": "入会は広場の掲示板でお願いします。",
+  "text": "すみません、今夜は水泳部だけなんです。",
   "lang": "ja",
+  "overheard": true,
+  "words": [
+   [
+    "sumimasen",
+    "すみません"
+   ]
+  ],
+  "clear": [],
+  "emo": "polite"
+ },
+ {
+  "key": "ln-1oyqkxf",
+  "speaker": "eric",
+  "text": "Club members only, I think. The slips were on the plaza board.",
+  "lang": "en",
   "overheard": false,
   "words": [],
   "clear": [],
-  "emo": "polite"
+  "emo": "tired"
  },
  {
   "key": "ln-x7f563",
@@ -4854,29 +4997,36 @@
   "emo": "curious"
  },
  {
-  "key": "ln-1bqqr5o",
+  "key": "oh-1mobbdu",
   "speaker": "member",
-  "text": "あ、私のです。名前の最後が残ってます。",
+  "text": "あっ、私の！ありがとうございます。",
   "lang": "ja",
-  "overheard": false,
+  "overheard": true,
   "words": [],
-  "clear": [],
-  "emo": "warm"
+  "clear": [
+   "ありがとう"
+  ],
+  "emo": "surprised"
  },
  {
-  "key": "ln-th768j",
+  "key": "oh-1qq2ej",
   "speaker": "member",
-  "text": "こっちだけ、いつも水が入るんです。",
+  "text": "ほら、名前の最後、ここに残ってますよね？",
   "lang": "ja",
-  "overheard": false,
-  "words": [],
+  "overheard": true,
+  "words": [
+   [
+    "koko",
+    "ここ"
+   ]
+  ],
   "clear": [],
   "emo": "sheepish"
  },
  {
-  "key": "ln-1x5lbae",
+  "key": "ln-jgam7s",
   "speaker": "eric",
-  "text": "I’d put my name on a better pair.",
+  "text": "I’ll take your word for it.",
   "lang": "en",
   "overheard": false,
   "words": [],
@@ -4884,9 +5034,9 @@
   "emo": "dry"
  },
  {
-  "key": "ln-1i7urvk",
+  "key": "ln-1cih3ak",
   "speaker": "eric",
-  "text": "The desk is closed. I can come back during the day.",
+  "text": "Nobody’s on the desk this late. I’ll come back in the daytime.",
   "lang": "en",
   "overheard": false,
   "words": [],
@@ -4894,89 +5044,24 @@
   "emo": "tired"
  },
  {
-  "key": "ln-1kcqlw0",
+  "key": "oh-x2ta5f",
   "speaker": "attendant",
-  "text": "予約表、使えています。ありがとうございます。",
+  "text": "端末、ちゃんと動いてますよ。",
   "lang": "ja",
-  "overheard": false,
-  "words": [],
+  "overheard": true,
+  "words": [
+   [
+    "ugoite",
+    "動いて"
+   ]
+  ],
   "clear": [],
   "emo": "polite"
  },
  {
-  "key": "ln-1f56ta1",
-  "speaker": "attendant",
-  "text": "押しても変わりません。今日の予約表を出したいんですが。",
-  "lang": "ja",
-  "overheard": false,
-  "words": [],
-  "clear": [],
-  "emo": "polite"
- },
- {
-  "key": "ln-1lzuieu",
+  "key": "ln-xjlw8",
   "speaker": "eric",
-  "text": "There’s a reset switch underneath.",
-  "lang": "en",
-  "overheard": false,
-  "words": [],
-  "clear": [],
-  "emo": "curious"
- },
- {
-  "key": "ln-ntci2a",
-  "speaker": "attendant",
-  "text": "あ、戻りました。どこを押したんですか。",
-  "lang": "ja",
-  "overheard": false,
-  "words": [],
-  "clear": [],
-  "emo": "puzzled"
- },
- {
-  "key": "ln-1vll3gn",
-  "speaker": "eric",
-  "text": "Let’s check the printout first.",
-  "lang": "en",
-  "overheard": false,
-  "words": [],
-  "clear": [],
-  "emo": "hesitant"
- },
- {
-  "key": "ln-bn2ajq",
-  "speaker": "attendant",
-  "text": "今日の分を、一枚お願いします。",
-  "lang": "ja",
-  "overheard": false,
-  "words": [],
-  "clear": [],
-  "emo": "polite"
- },
- {
-  "key": "ln-1oe2g0k",
-  "speaker": "eric",
-  "text": "I need the attendant here to check the sheet.",
-  "lang": "en",
-  "overheard": false,
-  "words": [],
-  "clear": [],
-  "emo": "tired"
- },
- {
-  "key": "ln-1ftosno",
-  "speaker": "attendant",
-  "text": "先に、こちらの画面をお願いします。",
-  "lang": "ja",
-  "overheard": false,
-  "words": [],
-  "clear": [],
-  "emo": "polite"
- },
- {
-  "key": "ln-z4pggc",
-  "speaker": "eric",
-  "text": "They have the sheet they need.",
+  "text": "Hi. I’m from IT support, about the booking terminal?",
   "lang": "en",
   "overheard": false,
   "words": [],
@@ -4984,14 +5069,128 @@
   "emo": "warm"
  },
  {
-  "key": "ln-1j4s9va",
+  "key": "oh-223zs0",
+  "speaker": "attendant",
+  "text": "あ、ITの方！助かります。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [
+   "IT"
+  ],
+  "emo": "bright"
+ },
+ {
+  "key": "oh-1fo69bs",
+  "speaker": "attendant",
+  "text": "朝から、ずっとこのままなんです。今日の分をプリントしたいんですけど……",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [
+   "プリント"
+  ],
+  "emo": "tired"
+ },
+ {
+  "key": "ln-k12nub",
   "speaker": "eric",
-  "text": "What did you say to it?",
+  "text": "And you need today’s list printed. There’s a reset button underneath. I’ll try that first.",
   "lang": "en",
   "overheard": false,
   "words": [],
   "clear": [],
   "emo": "curious"
+ },
+ {
+  "key": "oh-1xw9kg0",
+  "speaker": "attendant",
+  "text": "あ、戻った！",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "bright"
+ },
+ {
+  "key": "oh-1ncscsm",
+  "speaker": "attendant",
+  "text": "え？今、どこも押してないですよね？",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "puzzled"
+ },
+ {
+  "key": "ln-n04xma",
+  "speaker": "eric",
+  "text": "It probably just needed a minute.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "hesitant"
+ },
+ {
+  "key": "ln-x03ufr",
+  "speaker": "eric",
+  "text": "Let me print today’s list from here, so we know the whole thing comes out.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-1ptvtcz",
+  "speaker": "eric",
+  "text": "I’d rather print it when he’s here to check it.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "tired"
+ },
+ {
+  "key": "oh-7f0bza",
+  "speaker": "attendant",
+  "text": "あ、先にこっちを……",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "polite"
+ },
+ {
+  "key": "ln-18awq8v",
+  "speaker": "eric",
+  "text": "He’s got his sheet. I’ll leave the printer alone.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-y5usuf",
+  "speaker": "eric",
+  "text": "What was that you said to it?",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "curious"
+ },
+ {
+  "key": "oh-inh098",
+  "speaker": "attendant",
+  "text": "あ、いつも言っちゃうんです。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "sheepish"
  },
  {
   "key": "ln-1qzhl3i",
@@ -5006,72 +5205,112 @@
    ]
   ],
   "clear": [],
-  "emo": "polite"
+  "emo": "slow",
+  "slow": true
  },
  {
-  "key": "ln-1oxi1ja",
+  "key": "oh-1xqxr5z",
   "speaker": "attendant",
-  "text": "いつも言っちゃうんです。",
+  "text": "出して。",
   "lang": "ja",
-  "overheard": false,
-  "words": [],
+  "overheard": true,
+  "words": [
+   [
+    "dashite",
+    "出して"
+   ]
+  ],
   "clear": [],
-  "emo": "sheepish"
+  "emo": "polite"
  },
  {
-  "key": "ln-vs0e5p",
+  "key": "oh-1uj7q7n",
   "speaker": "attendant",
-  "text": "最後の行もあります。これで大丈夫です。",
+  "text": "最後の行まで、ちゃんと出てます。",
   "lang": "ja",
-  "overheard": false,
+  "overheard": true,
   "words": [],
   "clear": [],
-  "emo": "polite"
+  "emo": "warm"
  },
  {
-  "key": "ln-33imf3",
-  "speaker": "mori",
-  "text": "火曜日の部屋を確認しに来ました。絵を描くんです。",
-  "lang": "ja",
-  "overheard": false,
-  "words": [],
-  "clear": [],
-  "emo": "polite"
- },
- {
-  "key": "ln-1lb2lwt",
-  "speaker": "mori",
-  "text": "でも、まだ動かないそうです。",
-  "lang": "ja",
-  "overheard": false,
-  "words": [],
-  "clear": [],
-  "emo": "polite"
- },
- {
-  "key": "ln-18adrl6",
-  "speaker": "mori",
-  "text": "談話室で、お待ちしています。",
-  "lang": "ja",
+  "key": "ln-1o90k53",
+  "speaker": "eric",
+  "text": "Swimming club at six is the last line. That’s all of it.",
+  "lang": "en",
   "overheard": false,
   "words": [],
   "clear": [],
   "emo": "warm"
  },
  {
-  "key": "ln-99v9a2",
-  "speaker": "mori",
-  "text": "よかったら、広場の掲示板を見てください。",
+  "key": "oh-1f9koot",
+  "speaker": "attendant",
+  "text": "ありがとうございました。",
   "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [
+   "ありがとう"
+  ],
+  "emo": "polite"
+ },
+ {
+  "key": "oh-ymugyz",
+  "speaker": "mori",
+  "text": "あ、エリックさん。こんにちは。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-1tj8cfq",
+  "speaker": "eric",
+  "text": "It’s frozen for you too? I’m looking at it.",
+  "lang": "en",
   "overheard": false,
   "words": [],
   "clear": [],
   "emo": "warm"
  },
  {
-  "key": "ln-10p4h70",
+  "key": "oh-jkza60",
+  "speaker": "mori",
+  "text": "火曜日、楽しみにしています。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-53akh9",
+  "speaker": "eric",
+  "text": "Tuesday’s the art club. I think he’s glad I signed up.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "oh-1g9orgd",
+  "speaker": "mori",
+  "text": "よかったら、美術部にもどうぞ。",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [
+   "美術部"
+  ],
+  "emo": "warm"
+ },
+ {
+  "key": "ln-vla143",
   "speaker": "emi",
-  "text": "I’m finding the pool keys. We’ve got one last swim tonight.",
+  "text": "I’m here for the pool keys. We’ve got one last swim outdoors tonight.",
   "lang": "en",
   "overheard": false,
   "words": [],
@@ -5079,9 +5318,9 @@
   "emo": "bright"
  },
  {
-  "key": "ln-n0ogsm",
+  "key": "ln-sfkuxf",
   "speaker": "emi",
-  "text": "See you at the pool tonight, then. You can sit by the water too.",
+  "text": "See you at the pool, then. You don’t have to swim, you can sit by the water.",
   "lang": "en",
   "overheard": false,
   "words": [],
@@ -5089,9 +5328,9 @@
   "emo": "bright"
  },
  {
-  "key": "ln-1x802xa",
+  "key": "ln-1ux7zwc",
   "speaker": "emi",
-  "text": "Take a slip at the plaza if you fancy it. You can sit by the water too.",
+  "text": "Take a slip at the plaza if you fancy it. You don’t have to swim, you can sit by the water.",
   "lang": "en",
   "overheard": false,
   "words": [],
@@ -5179,44 +5418,52 @@
   "emo": "bright"
  },
  {
-  "key": "ln-kexpl6",
+  "key": "oh-vkr4pi",
   "speaker": "kuroda",
-  "text": "今日は拭きません。座るだけです。",
+  "text": "あ、今日は拭きません。座ってるだけです。",
   "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [],
+  "emo": "sheepish"
+ },
+ {
+  "key": "ln-slo8hn",
+  "speaker": "eric",
+  "text": "You’ve left the cloth at home today, then.",
+  "lang": "en",
   "overheard": false,
   "words": [],
   "clear": [],
-  "emo": "polite"
+  "emo": "warm"
  },
  {
-  "key": "ln-5i5kzi",
+  "key": "oh-1h6spdj",
   "speaker": "kuroda",
-  "text": "どうぞ。海がよく見えますよ。",
+  "text": "あ、すみません。どうぞ、どうぞ。",
   "lang": "ja",
-  "overheard": false,
-  "words": [],
+  "overheard": true,
+  "words": [
+   [
+    "sumimasen",
+    "すみません"
+   ]
+  ],
   "clear": [],
   "emo": "polite"
  },
  {
-  "key": "ln-zss7xd",
+  "key": "oh-sbk9uv",
   "speaker": "aoi",
-  "text": "靴、買えました。明日は借りたラケットでやってみます。",
+  "text": "靴、買えました！明日はラケットを借りて、テニスです。",
   "lang": "ja",
-  "overheard": false,
+  "overheard": true,
   "words": [],
-  "clear": [],
-  "emo": "casual"
- },
- {
-  "key": "ln-i2gyog",
-  "speaker": "aoi",
-  "text": "こんばんは。",
-  "lang": "ja",
-  "overheard": false,
-  "words": [],
-  "clear": [],
-  "emo": "polite"
+  "clear": [
+   "ラケット",
+   "テニス"
+  ],
+  "emo": "bright"
  },
  {
   "key": "ln-xqrxp2",
@@ -5299,25 +5546,20 @@
   "emo": "warm"
  },
  {
-  "key": "ln-1qmu86v",
+  "key": "oh-c8s6yz",
   "speaker": "mori",
-  "text": "おはようございますございます。夕食の買い物です。",
+  "text": "あ、エリックさん。お買い物ですか。",
   "lang": "ja",
-  "overheard": false,
-  "words": [
-   [
-    "ohayo",
-    "おはようございます"
-   ]
-  ],
+  "overheard": true,
+  "words": [],
   "clear": [],
   "emo": "polite"
  },
  {
-  "key": "ln-1gfbnnu",
-  "speaker": "mori",
-  "text": "箱は月曜日で大丈夫です。今日はお休みですから。",
-  "lang": "ja",
+  "key": "ln-1qovs1t",
+  "speaker": "eric",
+  "text": "I’ll still help you carry those boxes back on Monday.",
+  "lang": "en",
   "overheard": false,
   "words": [],
   "clear": [],
@@ -5344,11 +5586,11 @@
   "emo": "bright"
  },
  {
-  "key": "ln-114ty7o",
+  "key": "oh-1ebh2gd",
   "speaker": "kuroda",
-  "text": "すみません、先にどうぞ。まだ迷ってて……",
+  "text": "あ、すみません、先にどうぞ。まだ迷ってて……",
   "lang": "ja",
-  "overheard": false,
+  "overheard": true,
   "words": [
    [
     "sumimasen",
@@ -5359,21 +5601,43 @@
   "emo": "sheepish"
  },
  {
-  "key": "ln-1g6wq8g",
-  "speaker": "aoi",
-  "text": "テニス用って、こんなに種類があるんですね。",
-  "lang": "ja",
+  "key": "ln-nfa7nn",
+  "speaker": "eric",
+  "text": "Oh, thanks. Take your time choosing.",
+  "lang": "en",
   "overheard": false,
   "words": [],
   "clear": [],
+  "emo": "warm"
+ },
+ {
+  "key": "oh-1lsezvr",
+  "speaker": "aoi",
+  "text": "テニスの靴って、こんなにあるんですね……",
+  "lang": "ja",
+  "overheard": true,
+  "words": [],
+  "clear": [
+   "テニス"
+  ],
   "emo": "puzzled"
  },
  {
-  "key": "ln-1u2jp77",
-  "speaker": "aoi",
-  "text": "すみません、ここ、空いてます。",
-  "lang": "ja",
+  "key": "ln-105jzy6",
+  "speaker": "eric",
+  "text": "Still shopping for tennis things?",
+  "lang": "en",
   "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "dry"
+ },
+ {
+  "key": "oh-ibhcir",
+  "speaker": "aoi",
+  "text": "すみません。ここ、どうぞ。",
+  "lang": "ja",
+  "overheard": true,
   "words": [
    [
     "sumimasen",
@@ -5388,14 +5652,14 @@
   "emo": "polite"
  },
  {
-  "key": "ln-s40tl3",
+  "key": "ln-1rzasrf",
   "speaker": "kuro",
-  "text": "Hello. I’m away from the reception desk today.",
+  "text": "Hello. It’s strange without a counter between us, isn’t it?",
   "lang": "en",
   "overheard": false,
   "words": [],
   "clear": [],
-  "emo": "polite"
+  "emo": "teasing"
  },
  {
   "key": "ln-8fpgpu",
@@ -5478,9 +5742,9 @@
   "emo": "warm"
  },
  {
-  "key": "ln-13rzwxv",
+  "key": "ln-1mqt7rp",
   "speaker": "kuro",
-  "text": "I’m Kuro. We didn’t say names.",
+  "text": "I’m Kuro, by the way. We never got as far as names at the desk.",
   "lang": "en",
   "overheard": false,
   "words": [],
@@ -5518,19 +5782,21 @@
   "emo": "casual"
  },
  {
-  "key": "ln-1u7qv1c",
+  "key": "oh-1q1604d",
   "speaker": "member",
-  "text": "これも、お願いします。備品のリストです。",
+  "text": "エミさん、これもお願いします。備品のリストです。",
   "lang": "ja",
-  "overheard": false,
+  "overheard": true,
   "words": [],
-  "clear": [],
+  "clear": [
+   "リスト"
+  ],
   "emo": "polite"
  },
  {
-  "key": "ln-i9k8o4",
+  "key": "ln-a5hfa7",
   "speaker": "emi",
-  "text": "Yes, I’ll check... actually, I’d like to swim first.",
+  "text": "And now the list as well. I’ll check it... no, actually, I’d like to swim first.",
   "lang": "en",
   "overheard": false,
   "words": [],
@@ -5538,19 +5804,19 @@
   "emo": "bright"
  },
  {
-  "key": "ln-1vggcwi",
+  "key": "oh-1txhw31",
   "speaker": "kuro",
   "text": "エミさん、まだ一本も泳いでいませんよ。",
   "lang": "ja",
-  "overheard": false,
+  "overheard": true,
   "words": [],
   "clear": [],
-  "emo": "polite"
+  "emo": "teasing"
  },
  {
-  "key": "ln-8hrdgi",
+  "key": "ln-1gtwhl",
   "speaker": "emi",
-  "text": "Are you closing up already?",
+  "text": "I know, I know. Hang on, is he packing up already? We haven’t even started.",
   "lang": "en",
   "overheard": false,
   "words": [],
@@ -5558,19 +5824,31 @@
   "emo": "puzzled"
  },
  {
-  "key": "ln-p2sev9",
+  "key": "oh-flndyr",
   "speaker": "attendant",
-  "text": "使わない物を片づけるだけです。泳ぎ終わるまで、このコースは開けておきます。",
+  "text": "使わない物を片づけるだけです。このコースは、最後まで開けておきますよ。",
   "lang": "ja",
-  "overheard": false,
+  "overheard": true,
   "words": [
    [
     "akete",
     "開けて"
    ]
   ],
-  "clear": [],
+  "clear": [
+   "コース"
+  ],
   "emo": "polite"
+ },
+ {
+  "key": "ln-nknsdh",
+  "speaker": "emi",
+  "text": "Oh, good, it’s only the spare floats. He’ll leave our lane open.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "casual"
  },
  {
   "key": "ln-twfrvs",
@@ -5583,9 +5861,9 @@
   "emo": "warm"
  },
  {
-  "key": "ln-fh2vso",
+  "key": "ln-e060n0",
   "speaker": "kuro",
-  "text": "Slow is fine. Use the steps.",
+  "text": "Take it slowly. The steps are on this side.",
   "lang": "en",
   "overheard": false,
   "words": [],
@@ -5593,21 +5871,26 @@
   "emo": "polite"
  },
  {
-  "key": "ln-xejrwg",
+  "key": "oh-1ycryqt",
   "speaker": "emi",
-  "text": "Could you take these for me? I can’t get in with all this.",
-  "lang": "en",
-  "overheard": false,
-  "words": [],
+  "text": "すみません、これ、お願いできますか？",
+  "lang": "ja",
+  "overheard": true,
+  "words": [
+   [
+    "sumimasen",
+    "すみません"
+   ]
+  ],
   "clear": [],
   "emo": "casual"
  },
  {
-  "key": "ln-17uxos5",
+  "key": "oh-1d89h86",
   "speaker": "attendant",
-  "text": "はい、どうぞ。",
+  "text": "はい、預かりますね。",
   "lang": "ja",
-  "overheard": false,
+  "overheard": true,
   "words": [],
   "clear": [],
   "emo": "polite"
@@ -5623,9 +5906,9 @@
   "emo": "warm"
  },
  {
-  "key": "ln-8i9mq2",
+  "key": "ln-gdpjke",
   "speaker": "emi",
-  "text": "Thank you. The blue bag’s mine; he can take the others.",
+  "text": "Thank you. Just take them over to him by the steps.",
   "lang": "en",
   "overheard": false,
   "words": [],
@@ -5643,16 +5926,6 @@
   "emo": "warm"
  },
  {
-  "key": "ln-10xpyhl",
-  "speaker": "emi",
-  "text": "Could you hold these at the table, please? I’m going in.",
-  "lang": "en",
-  "overheard": false,
-  "words": [],
-  "clear": [],
-  "emo": "casual"
- },
- {
   "key": "ln-1knpnpe",
   "speaker": "emi",
   "text": "Oh. That’s colder than it was in August.",
@@ -5663,14 +5936,14 @@
   "emo": "surprised"
  },
  {
-  "key": "ln-lc0iqe",
+  "key": "oh-qcn3qr",
   "speaker": "kuro",
-  "text": "泳ぐと、少し温かくなりますよ。",
+  "text": "泳げば、少し温かくなりますよ。",
   "lang": "ja",
-  "overheard": false,
+  "overheard": true,
   "words": [],
   "clear": [],
-  "emo": "polite"
+  "emo": "warm"
  },
  {
   "key": "ln-10w365b",
@@ -5703,19 +5976,19 @@
   "emo": "warm"
  },
  {
-  "key": "ln-1m08901",
+  "key": "oh-1e5g21a",
   "speaker": "kuro",
   "text": "もう一本、泳ぎませんか。",
   "lang": "ja",
-  "overheard": false,
+  "overheard": true,
   "words": [],
   "clear": [],
   "emo": "polite"
  },
  {
-  "key": "ln-w4gui3",
+  "key": "ln-1vn3646",
   "speaker": "emi",
-  "text": "Yes, go on then.",
+  "text": "One more length? Go on, then.",
   "lang": "en",
   "overheard": false,
   "words": [],
@@ -5723,21 +5996,29 @@
   "emo": "bright"
  },
  {
-  "key": "ln-1gb1tb8",
+  "key": "oh-lijly6",
   "speaker": "emi",
-  "text": "Could you leave the list on the table? I’ll look after we get out.",
-  "lang": "en",
-  "overheard": false,
-  "words": [],
-  "clear": [],
+  "text": "すみません、リスト、テーブルに置いてもらえますか？",
+  "lang": "ja",
+  "overheard": true,
+  "words": [
+   [
+    "sumimasen",
+    "すみません"
+   ]
+  ],
+  "clear": [
+   "リスト",
+   "テーブル"
+  ],
   "emo": "casual"
  },
  {
-  "key": "ln-1jql2fc",
+  "key": "oh-3z03c1",
   "speaker": "attendant",
   "text": "はい、置いておきます。",
   "lang": "ja",
-  "overheard": false,
+  "overheard": true,
   "words": [],
   "clear": [],
   "emo": "polite"
@@ -5753,14 +6034,24 @@
   "emo": "warm"
  },
  {
-  "key": "ln-1r27snx",
+  "key": "oh-5ztdsp",
   "speaker": "attendant",
-  "text": "来週から体育館です。室内用の靴を持ってきてください。",
+  "text": "来週から体育館です。室内用の靴を持ってきてくださいね。",
   "lang": "ja",
-  "overheard": false,
+  "overheard": true,
   "words": [],
   "clear": [],
   "emo": "polite"
+ },
+ {
+  "key": "ln-c32ryv",
+  "speaker": "emi",
+  "text": "Gym from next week, he says, and bring indoor shoes. They really do send you home without them.",
+  "lang": "en",
+  "overheard": false,
+  "words": [],
+  "clear": [],
+  "emo": "casual"
  },
  {
   "key": "ln-nyfhjb",
@@ -5793,9 +6084,9 @@
   "emo": "warm"
  },
  {
-  "key": "ln-1k8bcyt",
+  "key": "ln-1lf08x1",
   "speaker": "emi",
-  "text": "See you next Saturday, if you’re free. In the gym.",
+  "text": "See you next Saturday, if you’re free. We’ll be in the gym by then.",
   "lang": "en",
   "overheard": false,
   "words": [],
@@ -5843,13 +6134,15 @@
   "emo": "casual"
  },
  {
-  "key": "ln-s8wyx8",
+  "key": "oh-1itr97j",
   "speaker": "attendant",
-  "text": "このあたりは自由に使えます。マットは、そこの棚にあります。",
+  "text": "このあたりは自由に使えます。マットは、そこの棚です。",
   "lang": "ja",
-  "overheard": false,
+  "overheard": true,
   "words": [],
-  "clear": [],
+  "clear": [
+   "マット"
+  ],
   "emo": "polite"
  },
  {

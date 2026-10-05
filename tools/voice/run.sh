@@ -75,7 +75,10 @@ grep -qx "$LOCK_ME" "$LOCKDIR/owner" 2>/dev/null || die "could not take the GPU 
 release() { grep -qx "$LOCK_ME" "$LOCKDIR/owner" 2>/dev/null && rm -r "$LOCKDIR" && echo "GPU lock released"; }
 trap release EXIT
 trap 'exit 130' INT TERM
-say "GPU lock taken as $LOCK_ME; VRAM in use: $(nvidia-smi --query-gpu=memory.used --format=csv,noheader 2>/dev/null)"
+# the previous lock holder may have left models loaded in ComfyUI (GUIDE: free ComfyUI's VRAM before TTS jobs)
+curl -s -m 10 -X POST -H 'Content-Type: application/json' -d '{"unload_models":true,"free_memory":true}' \
+  http://127.0.0.1:${COMFY_PORT:-8188}/free > /dev/null 2>&1 && sleep 3
+say "GPU lock taken as $LOCK_ME; VRAM in use:$(nvidia-smi --query-gpu=memory.used --format=csv,noheader 2>/dev/null)"
 
 KEYS=$MISSING
 for seeds in 404,505,606 707,808,909 1010,1111,1212; do
