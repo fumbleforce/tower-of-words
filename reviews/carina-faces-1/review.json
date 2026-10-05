@@ -2,7 +2,7 @@
  "title": "Carina portrait faces: neutral, surprised, tired (his prompt, 3 seeds each)",
  "date": "2026-10-05",
  "by": "art-round agent (carina-faces-1)",
- "status": "open",
+ "status": "decided",
  "question": "Which of these are Carina's neutral, surprised and tired faces?",
  "multi": true,
  "media": [
@@ -124,5 +124,8 @@
    ],
    "note": "Seed 390617762. His prompt and negative unchanged; added before \"arms relaxed at her sides\": \"tired, half-lidded eyes, slight eye bags, slumped relaxed look\". rdbtAnima, 896x1152, euler_ancestral normal, 30 steps, CFG 5. DRIFT: no brow piercings visible; very dark eye bags. imgqa: red rim 0.0%, ccip drift 0.007 (pass), framing fail: hair touches the top edge (his own render does too). Second image is the cut-out (isnet-anime + matte_refine, no other pixel changes)."
   }
- ]
+ ],
+ "decision": "Picked faces in carina-faces-2 instead; wired into the game",
+ "decided_at": "2026-10-05T23:09:52+0200",
+ "issue": 266
 }
