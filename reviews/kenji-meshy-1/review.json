@@ -2,7 +2,7 @@
  "title": "Kenji: a 3D model made the way Kuro, Aoi and Emi were",
  "date": "2026-10-05",
  "by": "Claude (staff-meshy agent)",
- "status": "open",
+ "status": "decided",
  "question": "The ChatGPT sheets are pictures (step0, steps, r2-steps, r3-steps); every other sheet is a render of the real rigged model, which you can turn in the live viewer (links below). Round 3 (kenji-3, the last option and the r3 sheets) answers your note on kenji-2: the reference picture now has even light and his hair one dark colour, and Meshy's broken skin weights are mended. He is in the game now. Is Kenji right now?",
  "multi": false,
  "media": [
@@ -182,5 +182,8 @@
    "label": "Kuro round 3, the approved process (kuro-meshy-orig-3)",
    "href": "bible/#review/kuro-meshy-orig-3"
   }
- ]
+ ],
+ "decision": "Answered; follow-up handled",
+ "decided_at": "2026-10-05T23:13:27+0200",
+ "issue": 269
 }
