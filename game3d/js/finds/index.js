@@ -13,6 +13,7 @@ import * as THREE from 'three';
 import { flags } from '../narrative/state.js';
 import { reachableNear } from '../movement/navigation.js';
 import { save } from '../sim.js';
+import { expandMc } from '../mc.js';
 import { sfx } from '../sfx.js';
 import { FINDS, PHOTOS } from './spots.js';
 import { printTexture } from './prints.js';
@@ -28,7 +29,7 @@ export const findText = () => text;
 async function loadText() {
   try {
     const m = await import('../../story/finds.js');
-    text = { photos: {}, papers: {}, boards: {}, ...(m.default || {}) };
+    text = { photos: {}, papers: {}, boards: {}, ...expandMc(m.default || {}) };
   } catch {
     /* no text yet: titles fall back to the engine's, boards stay shut */
   }

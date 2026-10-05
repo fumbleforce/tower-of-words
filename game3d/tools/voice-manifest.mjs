@@ -10,6 +10,8 @@ const { WORDS } = await import(pathToFileURL(path.join(root, 'js/lang.js')).href
 const { heardKey, lineKey } = await import(pathToFileURL(path.join(root, 'tools/heardkey.mjs')).href);
 // every story file the game loads (the same list story-check and lang-audit use), so a new place is voiced too
 const { STORY_FILES } = await import(pathToFileURL(path.join(root, 'js/places/definitions.js')).href);
+// the story as the game shows it: {mc.name} and the other protagonist tokens filled in (js/mc.js; the default, Eric)
+const { expandMc } = await import(pathToFileURL(path.join(root, 'js/mc.js')).href);
 const out = new Map();
 const PHONE = new Set();
 const resolve = (t) => t.replace(/\{(\w+)\}/g, (_, id) => (WORDS[id] ? WORDS[id].ja : id));
@@ -48,7 +50,7 @@ const sets = Object.entries(DAYS).map(([day, d]) => [+day, d.dir, d.files || STO
 const dayOfKey = new Map();
 for (const [day, dir, files] of sets) for (const n of files) {
   const f = path.join(root, 'story', dir + n + '.js'); if (!fs.existsSync(f)) continue;
-  const st = (await import(pathToFileURL(f).href + '?' + Date.now())).default;
+  const st = expandMc((await import(pathToFileURL(f).href + '?' + Date.now())).default);
   const had = new Set(out.keys());
   for (const [id, sp] of Object.entries(st.speakers || {})) if (sp && sp.phone) PHONE.add(id);
   if (n === 'transitions') for (const v of Object.values(st)) { walk(v.walk); walk(v.ride); walk(v.arrive); }

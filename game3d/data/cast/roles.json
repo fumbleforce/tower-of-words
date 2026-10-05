@@ -1,0 +1,15 @@
+{
+  "roles": {
+    "team_lead": { "default": "emi", "swappable": true },
+    "receptionist": { "default": "kuro", "swappable": true },
+    "new_hire": { "default": "aoi", "swappable": true },
+    "sales": { "default": "rei", "swappable": true },
+    "gate_guard": { "default": "guard", "swappable": true },
+    "programmer": { "default": "mio", "swappable": false },
+    "section_chief": { "default": "mori", "swappable": false },
+    "engineer": { "default": "kenji", "swappable": false }
+  },
+  "sets": {
+    "default": {}
+  }
+}

@@ -27,6 +27,7 @@ export const withList = (slot) =>
 // walk an object in a straight line, ignoring the walk grid (scripted moves)
 import { glide } from '../move.js';
 import { catWalk } from '../creatures/cat.js';
+import { isPlayer } from '../mc.js';
 export { glide }; // smooth start, turn and stop; never touches the player's facing
 
 export async function lobbyPlace(game) {
@@ -445,7 +446,7 @@ export async function lobbyPlace(game) {
     },
     async sitPerson(id, seatId) {
       const s = seats[seatId];
-      if (!s || id === 'eric' || id === 'player') return;
+      if (!s || isPlayer(id)) return;
       const r = people[id];
       if (!r) return;
       await P.walkPerson(id, [s.x, s.z + 0.5]);

@@ -12,7 +12,9 @@ import { openTickets } from '../ui/tickets-view.js';
 import { learn, known } from '../lang.js';
 // imported up front, not on demand: a story's first `ticket` step can run before any lazy load would finish
 import TICKETS from '../../story/tickets.js';
+import { expandMc } from '../mc.js';
 
+expandMc(TICKETS); // the protagonist's name in the ticket text (mc.js)
 export const ticketDefs = () => TICKETS;
 // closing a ticket pays Eric its `pay` into his yen (saved with the sim), with a notice so the payment is seen
 let paid = () => {};

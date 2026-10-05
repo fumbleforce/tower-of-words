@@ -23,10 +23,10 @@
       "reason": "Existing detailed prop builders; preserve geometry until the visual owner reviews extraction."
     },
     "game3d/js/main.js": {
-      "lines": 628,
-      "bytes": 22574,
+      "lines": 630,
+      "bytes": 22731,
       "owner": "codex-tui",
-      "review": "C-0110 / X-0193: one office batch integration line; 2026-09-30 one import line each for the dorms, plaza and dorm_court place factories; existing responsibility unchanged; 2026-09-30 game.overrideMaterials for the shader warm-up (notes/PERF.md); 2026-09-30 one step() line for the look/cue layers over the idles (C-0171); C-0210 close-only things lose close calls for the target (same line); 2026-10-01 issue #137: size passed to the place lifecycle (one line); 2026-10-02 issue #173: one import line for the shotengai place factory; 2026-10-02 issue #173: one import line for the east lane place factory (the gate and forecourt factories imported under their place names, so the registry stays on one line); 2026-10-02 issue #173: one import line for the east coast place factory; 2026-10-02 issue #173: one import line for the sports place factory; 2026-10-02 issue #173: one import line for the office quarter place factory, and the place registry one name a line (it no longer fits on one; the registration check needs plain keys); 2026-10-02 issue #173: one import line and one registry line for the harbour place factory; 2026-10-02 issue #173: one import line and one registry line for the works place factory; 2026-10-03 C-0378 day 2: Continue moved out to continue.js (ceiling lowered); ?day=N boot; 2026-10-04 C-0413: the per-frame target scan moved out to gameplay/targeting.js (ceiling lowered); 2026-10-04 C-0429: one import and one boot line for the local scene viewer hook (plugins.js installViewer); 2026-10-04 C-0439: hold to steer, one import, one install and two call lines (movement/steer.js); 2026-10-05 #227: one import line and one registry line for the pool deck place factory; 2026-10-05 #227: the same for the gym corner, the dorm common room and the karaoke desk and booth",
+      "review": "C-0110 / X-0193: one office batch integration line; 2026-09-30 one import line each for the dorms, plaza and dorm_court place factories; existing responsibility unchanged; 2026-09-30 game.overrideMaterials for the shader warm-up (notes/PERF.md); 2026-09-30 one step() line for the look/cue layers over the idles (C-0171); C-0210 close-only things lose close calls for the target (same line); 2026-10-01 issue #137: size passed to the place lifecycle (one line); 2026-10-02 issue #173: one import line for the shotengai place factory; 2026-10-02 issue #173: one import line for the east lane place factory (the gate and forecourt factories imported under their place names, so the registry stays on one line); 2026-10-02 issue #173: one import line for the east coast place factory; 2026-10-02 issue #173: one import line for the sports place factory; 2026-10-02 issue #173: one import line for the office quarter place factory, and the place registry one name a line (it no longer fits on one; the registration check needs plain keys); 2026-10-02 issue #173: one import line and one registry line for the harbour place factory; 2026-10-02 issue #173: one import line and one registry line for the works place factory; 2026-10-03 C-0378 day 2: Continue moved out to continue.js (ceiling lowered); ?day=N boot; 2026-10-04 C-0413: the per-frame target scan moved out to gameplay/targeting.js (ceiling lowered); 2026-10-04 C-0429: one import and one boot line for the local scene viewer hook (plugins.js installViewer); 2026-10-04 C-0439: hold to steer, one import, one install and two call lines (movement/steer.js); 2026-10-05 #227: one import line and one registry line for the pool deck place factory; 2026-10-05 #227: the same for the gym corner, the dorm common room and the karaoke desk and booth; 2026-10-05 #251: one import line and the Continue line that reloads into a save of another protagonist (mc.js)",
       "reason": "Composition, boot/Continue, input, rendering and frame loop remain after stage 4 hooks, interactions and place lifecycle extraction."
     },
     "game3d/js/menu.js": {
@@ -51,31 +51,31 @@
       "reason": "Existing batching and geometry optimization utilities; preserve rendering behavior during this pass."
     },
     "game3d/js/places/lift.js": {
-      "lines": 1106,
-      "bytes": 41266,
+      "lines": 1107,
+      "bytes": 41322,
       "owner": "codex-tui",
-      "review": "C-0071; 2026-09-30 landing lamp kept in the light count (notes/PERF.md); 2026-09-30 forecourt riders cast no sun shadow (notes/PERF.md, evening draw calls); 2026-09-30 displays and ride light split out (lift-displays.js, lift-light.js; issue #102)",
+      "review": "C-0071; 2026-09-30 landing lamp kept in the light count (notes/PERF.md); 2026-09-30 forecourt riders cast no sun shadow (notes/PERF.md, evening draw calls); 2026-09-30 displays and ride light split out (lift-displays.js, lift-light.js; issue #102); 2026-10-05 #251: one import line for the protagonist (mc.js PLAYER_ID, isPlayer or MC)",
       "reason": "Existing shared lift geometry, movement and dialogue staging; extract after behavior characterization."
     },
     "game3d/js/places/lobby.js": {
-      "lines": 688,
-      "bytes": 24321,
+      "lines": 689,
+      "bytes": 24338,
       "owner": "codex-tui",
-      "review": "C-0076; 2026-09-30 preparation slices (yield points, notes/PERF.md); C-0166 named sounds per door and machine; C-0210 background people as things (explicit registrations, the rest in places/background-people.js); 2026-10-03 C-0378 day 2: the day-2 ways out spread into the registries and lobbyDay2 installed (places/lobby-day2.js); 2026-10-03 C-0406 Tama on the rigged cat (creatures/cat.js: makeCat, catWalk, catHop)",
+      "review": "C-0076; 2026-09-30 preparation slices (yield points, notes/PERF.md); C-0166 named sounds per door and machine; C-0210 background people as things (explicit registrations, the rest in places/background-people.js); 2026-10-03 C-0378 day 2: the day-2 ways out spread into the registries and lobbyDay2 installed (places/lobby-day2.js); 2026-10-03 C-0406 Tama on the rigged cat (creatures/cat.js: makeCat, catWalk, catHop); 2026-10-05 #251: one import line for the protagonist (mc.js PLAYER_ID, isPlayer or MC)",
       "reason": "Existing gate place geometry and interaction hooks; stage 5 room-builder review is planned."
     },
     "game3d/js/places/office.js": {
-      "lines": 1119,
-      "bytes": 41051,
+      "lines": 1120,
+      "bytes": 41048,
       "owner": "codex-tui",
-      "review": "C-0076; 2026-09-30 preparation slices (yield points, notes/PERF.md); C-0166 named sounds per door and machine; 2026-10-03 C-0378 day 2: the officeDay2 hook registered and installed (places/office-day2.js); 2026-10-03 C-0406 Tama on the rigged cat (creatures/cat.js: makeCat, catWalk, catHop); 2026-10-04 C-0413 copy_room and machine_room zones a step past their doors, and the doorways; 2026-10-05 #238 Emi's office cut from the copy room (scenes/office-emi.js; ceiling lowered)",
+      "review": "C-0076; 2026-09-30 preparation slices (yield points, notes/PERF.md); C-0166 named sounds per door and machine; 2026-10-03 C-0378 day 2: the officeDay2 hook registered and installed (places/office-day2.js); 2026-10-03 C-0406 Tama on the rigged cat (creatures/cat.js: makeCat, catWalk, catHop); 2026-10-04 C-0413 copy_room and machine_room zones a step past their doors, and the doorways; 2026-10-05 #238 Emi's office cut from the copy room (scenes/office-emi.js; ceiling lowered); 2026-10-05 #251: one import line for the protagonist (mc.js PLAYER_ID, isPlayer or MC)",
       "reason": "Existing office place geometry and interaction hooks; stage 5 room-builder review is planned."
     },
     "game3d/js/places/train.js": {
-      "lines": 1737,
-      "bytes": 64220,
+      "lines": 1738,
+      "bytes": 64231,
       "owner": "codex-tui",
-      "review": "C-0076; C-0166 named sounds per door and machine; 2026-09-30 eleven wiring lines for the passengers' discovery props and hooks (train/discoveries.js, issue #89); 2026-10-01 issue #137: layout() split from fit() and the perfMovers list (notes/PERF.md); 2026-10-01 issue #145: car.cab in perfMovers, saved car parts restored only from the same build (notes/PERF.md); 2026-10-01 issue #144: the run in's speed moved to train/island.js with the island it shows; 2026-10-01 issue #156: WALK_X (the walkway out at the platform's south end) and the window's open-bay condition (#166); 2026-10-03 C-0378 day 2: the standing car, tester and walk in registered and installed (places/train-day2.js); 2026-10-03 C-0406 Tama on the rigged cat (creatures/cat.js: makeCat, catWalk, catHop); 2026-10-04 C-0413 door_zone out on the platform, and the doorways (movement/doorways.js); 2026-10-05 C-0441 Aoi's Meshy model in her seat, and a walkRig way off the train for a Meshy passenger in alight; 2026-10-05 C-0444 the seat swaps moved to cast3d.js inSeat (Aoi, and Hamada dozing)",
+      "review": "C-0076; C-0166 named sounds per door and machine; 2026-09-30 eleven wiring lines for the passengers' discovery props and hooks (train/discoveries.js, issue #89); 2026-10-01 issue #137: layout() split from fit() and the perfMovers list (notes/PERF.md); 2026-10-01 issue #145: car.cab in perfMovers, saved car parts restored only from the same build (notes/PERF.md); 2026-10-01 issue #144: the run in's speed moved to train/island.js with the island it shows; 2026-10-01 issue #156: WALK_X (the walkway out at the platform's south end) and the window's open-bay condition (#166); 2026-10-03 C-0378 day 2: the standing car, tester and walk in registered and installed (places/train-day2.js); 2026-10-03 C-0406 Tama on the rigged cat (creatures/cat.js: makeCat, catWalk, catHop); 2026-10-04 C-0413 door_zone out on the platform, and the doorways (movement/doorways.js); 2026-10-05 C-0441 Aoi's Meshy model in her seat, and a walkRig way off the train for a Meshy passenger in alight; 2026-10-05 C-0444 the seat swaps moved to cast3d.js inSeat (Aoi, and Hamada dozing); 2026-10-05 #251: one import line for the protagonist (mc.js PLAYER_ID, isPlayer or MC)",
       "reason": "Existing train place geometry, animation and scene hooks; stage 5 room-builder review is planned."
     },
     "game3d/js/post.js": {
@@ -93,10 +93,10 @@
       "reason": "Existing primitive prop and material builders; coordinate the look/detail cycle split with visual work."
     },
     "game3d/js/runner.js": {
-      "lines": 487,
-      "bytes": 18381,
+      "lines": 491,
+      "bytes": 18783,
       "owner": "codex-tui",
-      "review": "C-0076; 2026-09-30 one line passing a subtitled line's English (`en`) to the dialogue (issue #89); 2026-10-03 C-0378 day 2: load() reads the day's story set (days.js); 2026-10-04 C-0413 a scene starts with Eric walked out of any doorway (movement/doorways.js; the import on a blank line)",
+      "review": "C-0076; 2026-09-30 one line passing a subtitled line's English (`en`) to the dialogue (issue #89); 2026-10-03 C-0378 day 2: load() reads the day's story set (days.js); 2026-10-04 C-0413 a scene starts with Eric walked out of any doorway (movement/doorways.js; the import on a blank line); 2026-10-05 #251: one import line, the story files expanded for the protagonist tokens at load, the player line clip in the protagonist voice (mc.js)",
       "reason": "Narrative execution, checkpoint replay and dialogue/audio dispatch remain after stage 2c; stage 3 reviews the presentation/audio boundary."
     },
     "game3d/js/scenes/lobby.js": {
@@ -107,10 +107,10 @@
       "reason": "Existing lobby geometry composition; preserve the room while extracting responsibilities later."
     },
     "game3d/js/scenes/office.js": {
-      "lines": 1991,
-      "bytes": 68939,
+      "lines": 1992,
+      "bytes": 69002,
       "owner": "codex-tui",
-      "review": "C-0110 / X-0193; C-0352: tray, sink plate and counter no longer overlap, unused kitchen()/tableSet() removed; existing responsibility unchanged; 2026-09-30 preparation slices (yield points, notes/PERF.md); 2026-10-03 C-0406 Tama on the rigged cat (creatures/cat.js: makeCat, catWalk, catHop); 2026-10-04 C-0413 the corridor door openings defined once, for the wall holes and the doorways; 2026-10-05 #238 Emi's office cut from the copy room (scenes/office-emi.js; ceiling lowered)",
+      "review": "C-0110 / X-0193; C-0352: tray, sink plate and counter no longer overlap, unused kitchen()/tableSet() removed; existing responsibility unchanged; 2026-09-30 preparation slices (yield points, notes/PERF.md); 2026-10-03 C-0406 Tama on the rigged cat (creatures/cat.js: makeCat, catWalk, catHop); 2026-10-04 C-0413 the corridor door openings defined once, for the wall holes and the doorways; 2026-10-05 #238 Emi's office cut from the copy room (scenes/office-emi.js; ceiling lowered); 2026-10-05 #251: one import line for the protagonist (mc.js PLAYER_ID, isPlayer or MC)",
       "reason": "Existing office geometry composition; preserve the room while extracting responsibilities later."
     },
     "game3d/js/showcase/decals.js": {
@@ -135,10 +135,10 @@
       "reason": "Existing wall, window and edge geometry builders share showcase dimensions and materials. Stage 5 room-builder review will separate reusable trim construction from room composition."
     },
     "game3d/js/sim.js": {
-      "lines": 538,
-      "bytes": 20433,
+      "lines": 547,
+      "bytes": 20912,
       "owner": "codex-tui",
-      "review": "C-0076; 2026-10-03 C-0378 day 2: a new day's opening save resets the bonds' daily caps; 2026-10-04 C-0432 the People cards moved out to ui/people-view.js (ceiling lowered); 2026-10-04 the dialogue box controls: the backlog rides in the save (two lines in save/restore); C-0438 People panel text from story/people.js, #223 (ceiling lowered)",
+      "review": "C-0076; 2026-10-03 C-0378 day 2: a new day's opening save resets the bonds' daily caps; 2026-10-04 C-0432 the People cards moved out to ui/people-view.js (ceiling lowered); 2026-10-04 the dialogue box controls: the backlog rides in the save (two lines in save/restore); C-0438 People panel text from story/people.js, #223 (ceiling lowered); 2026-10-05 #251: imports, game.mc and game.cast, the save mc and cast fields and their migration (mc.js, roles.js)",
       "reason": "Existing simulation, save and relationship integration; retain compatibility while extracting state."
     },
     "game3d/js/speech.js": {
@@ -170,10 +170,10 @@
       "reason": "Existing passenger mesh factories, per-seat placement and idle motion share rig conventions. Stage 5 crowd and room-builder review will separate appearance construction from placement and motion."
     },
     "game3d/js/ui.js": {
-      "lines": 784,
-      "bytes": 31391,
+      "lines": 785,
+      "bytes": 31431,
       "owner": "codex-tui",
-      "review": "C-0080; C-0166 named sounds per door and machine, Words chip pop and voice placeholder; 2026-10-03 C-0378 day 2: the -tai note over the phrases in the Words panel; 2026-10-04 C-0432: installVn, the dialogue box controls (ui/vn-controls.js)",
+      "review": "C-0080; C-0166 named sounds per door and machine, Words chip pop and voice placeholder; 2026-10-03 C-0378 day 2: the -tai note over the phrases in the Words panel; 2026-10-04 C-0432: installVn, the dialogue box controls (ui/vn-controls.js); 2026-10-05 #251: one import line for the protagonist (mc.js PLAYER_ID, isPlayer or MC)",
       "reason": "Remaining HUD construction, action menus and word practice; dialogue, portraits and audio are extracted."
     }
   }

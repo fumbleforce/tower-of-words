@@ -8,6 +8,7 @@ import { rectify, localAffine, landmarkGaps, seamGaps } from './reference.js';
 import { drawLayout, tag } from './layers.js';
 import { drawPlan, HALF_BOUNDS } from './plan.js';
 import { PLACE_NAMES } from '../places/definitions.js';
+import { MC } from '../mc.js';
 
 const CSS = `
 #map-screen{position:fixed;inset:0;z-index:9000;background:#15181d;color:#e6e9ee;font:14px/1.35 system-ui,sans-serif;
@@ -350,7 +351,7 @@ export function createMapScreen(game) {
     ctx.closePath();
     ctx.fill();
     ctx.stroke();
-    tag(ctx, 'Eric', sx, sy + 22, ERIC);
+    tag(ctx, MC.name, sx, sy + 22, ERIC);
   }
   function progress() {
     const n = Object.keys(S.renders || {}).length,

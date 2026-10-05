@@ -24,10 +24,12 @@ export function dependencyGraph(files, { read = file => fs.readFileSync(path.joi
     else if (specifier.startsWith('.')) target = path.posix.normalize(path.posix.join(path.posix.dirname(from), specifier));
     else throw new Error(`${from}: unsupported import ${specifier}`);
     assert(!target.startsWith('../') && !target.split('/').includes('private'), `${from}: import outside public sources`);
-    assert(['game3d/js/', 'game3d/story/', 'game3d/vendor/'].some(prefix => target.startsWith(prefix)),
+    // game3d/data/: plain JSON the code imports (`with { type: 'json' }`), a leaf of the graph
+    assert(['game3d/js/', 'game3d/story/', 'game3d/vendor/'].some(prefix => target.startsWith(prefix))
+      || (target.startsWith('game3d/data/') && target.endsWith('.json')),
       `${from}: runtime import outside runtime sources (${target})`);
     assert(exists(target), `${from}: unresolved import ${specifier} (${target})`);
-    return target.startsWith('game3d/vendor/') ? null : target;
+    return target.startsWith('game3d/vendor/') || target.startsWith('game3d/data/') ? null : target;
   }
   const visit = file => {
     if (Object.hasOwn(graph, file)) return;

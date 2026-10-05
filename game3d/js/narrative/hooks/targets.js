@@ -1,4 +1,6 @@
-export const isPlayer = (id) => id === 'eric' || id === 'player';
+import { isPlayer } from '../../mc.js';
+
+export { isPlayer };
 export function createTargets(game) {
   function rigOf(id) {
     // `extras`: background people a place lets the story look at and gesture with, but not walk (lobby.js)

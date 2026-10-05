@@ -10,6 +10,7 @@ import * as THREE from 'three';
 import { purr } from '../sfx.js';
 import { sim } from '../sim.js';
 import { approachSpot } from '../move.js';
+import { PLAYER_ID } from '../mc.js';
 
 const REACH = 0.62, // the highest a cat can sit and still be reached (place units over the floor, before K)
   DISTS = [0.5, 0.42, 0.62, 0.78], // where Eric stands from her (before K)
@@ -98,7 +99,7 @@ async function pet(game, c, place) {
     game.walker.faceTo(c.root.position.x, c.root.position.z); // (the face hook would turn him to his own spot)
     await game.wait(300);
     await Promise.all([
-      game.hooks.gesture({ who: 'eric', kind: 'pet', low }),
+      game.hooks.gesture({ who: PLAYER_ID, kind: 'pet', low }),
       game.wait(350).then(() => game.tween(2.0, (k) => (rig.lean = curled ? 0 : bell(k)))),
     ]);
     rig.lean = 0;

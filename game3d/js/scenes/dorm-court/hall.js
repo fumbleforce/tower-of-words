@@ -10,6 +10,7 @@ import { boxes, openDoor } from '../forecourt/details.js';
 import { Parts } from '../outdoor/parts.js';
 import { hallRoof } from './frontages.js';
 import { BLOCK } from './block.js';
+import { MC } from '../../mc.js';
 import { HALL, FRONT_Z, BACK_Z, DOOR_X, PASS_X, BLOCK_Z, WEST, EAST, MAIL_X, MANAGER, POOL_Y } from './plan.js';
 
 // the mailbox bank: 6 across, 4 up (2F at the bottom), its doors' size and pitch; 203 is the bottom row's third
@@ -93,9 +94,9 @@ function mailbox203(root) {
         g.fillStyle = '#2a2e35';
         g.textBaseline = 'middle';
         g.font = `500 ${Math.round(ch * 0.62)}px ${JP_FONT}`;
-        g.fillText('エリック', cw * 0.05, ch * 0.54, cw * 0.56);
+        g.fillText(MC.name_jp, cw * 0.05, ch * 0.54, cw * 0.56);
         g.font = `600 ${Math.round(ch * 0.5)}px sans-serif`;
-        g.fillText('ERIC', cw * 0.66, ch * 0.54, cw * 0.3);
+        g.fillText(MC.name.toUpperCase(), cw * 0.66, ch * 0.54, cw * 0.3);
       },
       256,
       64,

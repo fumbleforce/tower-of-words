@@ -2,6 +2,7 @@
 // necessarily need to say that much interesting"). When no talk:<id> entry holds for a person right now, talking to
 // them runs their `idle:<id>` trigger, and with none of those holding they turn to Eric and nod. The contract is in
 // game3d/story/FORMAT.md (Triggers, idle:).
+import { PLAYER_ID } from '../mc.js';
 
 // a person with a body in this place (the cat counts: she has her own talk everywhere), or a background one (extras)
 const rigOf = (game, id) => game.place?.people[id] || game.place?.extras?.[id];
@@ -14,7 +15,7 @@ export function idleTalk(game, id) {
   const nods = r && (r.arms || r.meshy || r.gesture);
   game.beat(() =>
     nods
-      ? game.hooks.gesture({ who: id, kind: 'nod', to: 'eric' })
+      ? game.hooks.gesture({ who: id, kind: 'nod', to: PLAYER_ID })
       : game.hooks.emote({ who: id, kind: '♪', ms: 1400 }),
   );
 }

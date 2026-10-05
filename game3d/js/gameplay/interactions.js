@@ -10,6 +10,7 @@ import { flags, cond } from '../narrative/state.js';
 import { sim, ITEMS, meet, take, peopleHTML } from '../sim.js';
 import { isPerson, idleTalk } from './idle-talk.js';
 import { installDoorCards } from '../ui/door-card.js';
+import { PLAYER_ID } from '../mc.js';
 
 export function installInteractions(game) {
   const ui = game.ui;
@@ -119,7 +120,7 @@ export function installInteractions(game) {
       pl.root.position.set(pl.seatOut[0], 0, pl.seatOut[1]);
       pl.seatOut = null;
       game.walker.sync?.();
-    } else if (game.place.standPerson) game.place.standPerson('eric');
+    } else if (game.place.standPerson) game.place.standPerson(PLAYER_ID);
     else {
       pl.seated = false;
       pl.setState('idle');

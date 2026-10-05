@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import { PLAYER_ID } from '../mc.js';
 
 export const ACCEL = 5.5; // m/s² from standing
 
@@ -85,7 +86,7 @@ export function bodies(game) {
       crowd,
     });
   };
-  add('eric', game.player);
+  add(PLAYER_ID, game.player);
   add('mio', game.mioNpc);
   for (const [id, r] of Object.entries(P.people || {})) add(id, r);
   (P.crowd || []).forEach((r, i) => add('crowd' + i, r, true)); // passers-by (the lobby's commuters)

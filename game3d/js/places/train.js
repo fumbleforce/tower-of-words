@@ -47,6 +47,7 @@ import { dust, lightPool } from './life.js';
 import { route } from './route.js';
 import { trainDiscoveries } from '../train/discoveries.js';
 import { trainDay2 } from './train-day2.js';
+import { PLAYER_ID, isPlayer } from '../mc.js';
 const WALK_X = -10.4; // the walkway out: past the car's left end, south (CHUNKS.train turn 270) toward the shed's stairs
 
 // Muted palette, after game3d/ref/2-security-gate-muted.png (Jørgen: "mute train too"): slate and charcoal,
@@ -1093,7 +1094,7 @@ export async function trainPlace(game) {
     async sitPerson(id, seatId) {
       const s = seats[seatId];
       if (!s) return;
-      if (id === 'eric' || id === 'player') {
+      if (isPlayer(id)) {
         if (s.bag !== undefined) {
           const b = bagObjs[s.bag];
           b.visible = false;
@@ -1115,7 +1116,7 @@ export async function trainPlace(game) {
       }
     },
     async standPerson(id) {
-      if (id === 'eric' || id === 'player') {
+      if (isPlayer(id)) {
         const m = game.player;
         if (!m.seated) return;
         for (const b of bagObjs) {
@@ -1656,7 +1657,7 @@ export async function trainPlace(game) {
     async tripOut(g, slot) {
       const mio = g.player;
       mio.scripted = true;
-      if (mio.seated) await P.standPerson('eric');
+      if (mio.seated) await P.standPerson(PLAYER_ID);
       const p = mio.root.position;
       mio.setState('walk');
       if (p.z < LZ + 0.2) {

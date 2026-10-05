@@ -1,4 +1,5 @@
-"""Write build.json: a build id (UTC time + short commit) and the list of modules the page version-maps.
+"""Write build.json: a build id (UTC time + short commit) and the list of modules the page version-maps (js/, story/,
+and the JSON modules in data/ the code imports).
 build.json is generated and git-ignored. Whatever serves or loads the game stamps it first (./start, the review
 server, the browser tools, deploy-pages.sh, push.sh), so there is nothing to run before a commit.
   python3 game3d/tools/stamp.py              always write a fresh id
@@ -8,7 +9,7 @@ root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 out = os.path.join(root, 'build.json')
 try: commit = subprocess.run(['git', 'rev-parse', '--short', 'HEAD'], capture_output=True, text=True, cwd=root).stdout.strip()
 except Exception: commit = ''
-files = sorted(os.path.relpath(p, root).replace(os.sep, '/') for p in glob.glob(os.path.join(root, 'js', '**', '*.js'), recursive=True) + glob.glob(os.path.join(root, 'story', '**', '*.js'), recursive=True))
+files = sorted(os.path.relpath(p, root).replace(os.sep, '/') for p in glob.glob(os.path.join(root, 'js', '**', '*.js'), recursive=True) + glob.glob(os.path.join(root, 'story', '**', '*.js'), recursive=True) + glob.glob(os.path.join(root, 'data', '**', '*.json'), recursive=True))
 if '--if-stale' in sys.argv[1:]:
     try:
         old = json.load(open(out))

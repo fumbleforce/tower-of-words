@@ -34,6 +34,7 @@ import { ledLights } from './office-leds.js';
 import { liveScreens } from '../props.js';
 import { drain } from '../perf/slice.js';
 import { emiOffice, emiOfficeBlocks, EMI_X, EMI_DOOR } from './office-emi.js';
+import { MC } from '../mc.js';
 export { EMI } from './office-emi.js';
 
 export const K = 1.18; // people scale in the office and lobby
@@ -1043,7 +1044,7 @@ export function* officeSteps() {
   tray.position.set(0.43, COUNTER_TOP + GAP, CS + T / 2 + 0.34);
   root.add(tray);
   root.add(rbox(0.26, 0.02, 0.08, '#3a3f48', { x: 1.55, y: 0.42, z: -3.1, r: 0.005 }));
-  const card = nameCard('エリック', 'ERIC');
+  const card = nameCard(MC.name_jp, MC.name.toUpperCase()); // the player's desk
   card.position.set(DX[1] + 0.32, 0.42, ZS + 0.2);
   root.add(card);
 

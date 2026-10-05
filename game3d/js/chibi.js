@@ -10,7 +10,8 @@
 import * as THREE from 'three';
 import { clone } from '../vendor/utils/SkeletonUtils.js';
 import { GLTFLoader } from '../vendor/loaders/GLTFLoader.js';
-import { meshyFrom, loadEric, GESTURES } from './avatar.js';
+import { meshyFrom, loadMeshy, GESTURES } from './avatar.js';
+import { MC } from './mc.js';
 import { loadMio, CDIR, V } from './mio.js';
 import { buildOf, shapeChibi } from './chibi-builds.js';
 // settings.js needs a page; the unit tests import the cast in Node, where the look is off
@@ -267,8 +268,13 @@ const fallback = (load) => (e) => {
   console.warn('chibi failed, using the approved model', e);
   return load();
 };
-// the player's and Mio's bodies for main.js boot(); a chibi that fails to load falls back to the approved model
-export const ericBody = () => (CHIBI_ON ? loadChibi('eric').catch(fallback(loadEric)) : loadEric());
+// the player's and Mio's bodies for main.js boot(); a chibi that fails to load falls back to the approved model.
+// The player's is the protagonist's (data/mc/<id>.json model: assets/<id>/ and its chibi)
+export const playerBody = () => {
+  const m = MC.model,
+    body = () => loadMeshy(m.id, { dir: new URL(`../assets/${m.id}/`, import.meta.url).href, height: m.height });
+  return CHIBI_ON ? loadChibi(m.chibi).catch(fallback(body)) : body();
+};
 export const mioBody = () => {
   const mio = () => loadMio({ height: 1.12 });
   return CHIBI_ON ? loadChibi('mio').catch(fallback(mio)) : mio();

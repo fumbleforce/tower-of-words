@@ -1,4 +1,5 @@
 import { TRIPS as DAY2_TRIPS } from '../../story/day2/index.js';
+import { MC } from '../mc.js';
 // Narrative place order and source references, consumed by the runtime and its checks.
 export const PLACE_FILES = {
   train: 'game3d/js/places/train.js',
@@ -29,7 +30,7 @@ export const PLACE_NAMES = {
   plaza: 'Fountain plaza',
   office: 'IT support, B2',
   dorm_court: 'Dorm courtyard',
-  dorms: "Eric's room",
+  dorms: `${MC.possessive} room`,
   shotengai: 'Shop street',
   karaoke: 'Karaoke box',
   karaoke_booth: 'Karaoke booth',

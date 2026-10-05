@@ -23,6 +23,7 @@ export { FACE, setFace, faceForEmote, layoutStage, newScene } from './ui/portrai
 // Existing UI imports remain valid while audio ownership moves to its modules.
 import { voice, stopVoice, setAudioMuted, isMuted, setVoiceDucking } from './audio/core.js';
 import { duckWhile } from './audio/music.js';
+import { PLAYER_ID } from './mc.js';
 export { audioBus, pauseAudio, voice, stopVoice, voiceThenBeat, isMuted, unlockAudio } from './audio/core.js';
 export { playMusic } from './audio/music.js';
 setVoiceDucking(duckWhile);
@@ -589,7 +590,7 @@ export const ui = {
       // portraits: a lesson prompt shows the person who asks (Eric listening); Eric saying a word to someone or
       // something shows Eric alone (QA round 1: Mio showed for "Say it to Cat" and for machines)
       if (!prompt?.whoId) resetPortraitSpeaker();
-      showPortraits($('#talk'), prompt?.whoId || 'eric');
+      showPortraits($('#talk'), prompt?.whoId || PLAYER_ID);
       const w = WORDS[id];
       const canon = (s) =>
         s

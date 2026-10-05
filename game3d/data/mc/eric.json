@@ -1,0 +1,30 @@
+{
+  "id": "eric",
+  "name": "Eric",
+  "name_jp": "エリック",
+  "name_ro": "erikku",
+  "possessive": "Eric's",
+  "gender": "man",
+  "pronouns": { "they": "he", "them": "him", "their": "his", "theirs": "his", "themself": "himself" },
+  "address": { "default": "エリックさん", "by": {} },
+  "portrait": {
+    "set": "eric",
+    "faces": ["neutral", "surprised", "tired"],
+    "crop": { "W": 648, "H": 768, "f": [116, 203, 340, 394] },
+    "note": "crop: x and chin from the detector ([116, 171, 340, 394], eric-ink-2001 from reviews/style-align-1); the top kept 191 px above the chin, the old crop's face height, so he shows 25% bigger than the others, as approved (reviews/eric-portrait-final-3). 648 wide so his left shoulder (image right) ends inside the picture (reviews/eric-canvas-1)"
+  },
+  "model": { "id": "eric", "height": 1.2, "chibi": "eric" },
+  "voice": {
+    "lines": "eric",
+    "words": "eric",
+    "ref": "tools/voice-refs/eric-voice.wav",
+    "description": "Tired man in his thirties, quiet and polite, no accent."
+  },
+  "bio": {
+    "from": "Norway",
+    "job": "IT support engineer on B2, on a support contract to keep Amakawa's ancient systems running",
+    "home": "dorm room 203 on 2F"
+  },
+  "text": {},
+  "placeholders": []
+}

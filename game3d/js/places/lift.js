@@ -26,6 +26,7 @@ import { K } from '../scenes/office.js';
 import { clipLiftMaterial, isolateLiftMaterials } from './lift-materials.js';
 import { setDark, setAway, forgetLight } from './lift-light.js';
 import { indicatorMat, copMat } from './lift-displays.js';
+import { PLAYER_ID } from '../mc.js';
 
 // ---------- where the lift is in each place ----------
 // x: the door's centre; zBack: the back face of the wall the doors are in (the car starts here); zFront: just in
@@ -780,7 +781,7 @@ async function doors(game, L, state) {
       }
     // and back to the middle once they're gone
     const eric = game.player,
-      [ex, ez] = slotW(L, 'eric');
+      [ex, ez] = slotW(L, PLAYER_ID);
     if (Math.hypot(eric.root.position.x - ex, eric.root.position.z - ez) > 0.05) {
       eric.setState('walk');
       await glide(game, eric.root, [ex, ez], 0.9);
@@ -843,7 +844,7 @@ async function rideOut(g, L, slot) {
     }),
     anim(g, 1.1, (k) => setDark(L, k)),
   ]);
-  const [ex, ez] = slotW(L, 'eric');
+  const [ex, ez] = slotW(L, PLAYER_ID);
   await glide(g, eric.root, [ex, ez], 1.0);
   eric.setState('idle');
   // anyone coming along walks in after him
@@ -911,7 +912,7 @@ async function rideIn(g, L, slot) {
   setCut(L, CUT);
   L.car.want = 0;
   L.car.k = 0;
-  const [ex, ez] = slotW(L, 'eric');
+  const [ex, ez] = slotW(L, PLAYER_ID);
   eric.root.position.set(ex, 0, ez);
   eric.root.rotation.y = 0;
   eric.setState('idle');
@@ -1003,7 +1004,7 @@ async function rideUp(g, L) {
     anim(g, 0.7, (k) => setCut(L, lerp(L.site.wallH + 0.25, CUT, k))),
     anim(g, 1.1, (k) => setDark(L, k)),
   ]);
-  await glide(g, eric.root, slotW(L, 'eric'), 1.0);
+  await glide(g, eric.root, slotW(L, PLAYER_ID), 1.0);
   eric.setState('idle');
   await turnTo(g, eric.root, 0);
   await g.wait(250);
@@ -1039,7 +1040,7 @@ async function rideHome(g, L) {
   setCap(L, 0);
   L.car.want = L.car.k = 0;
   L.car.landWant = L.car.land = 0;
-  const [ex, ez] = slotW(L, 'eric');
+  const [ex, ez] = slotW(L, PLAYER_ID);
   eric.root.position.set(ex, 0, ez);
   eric.root.rotation.y = 0;
   eric.setState('idle');
@@ -1089,7 +1090,7 @@ async function capState(game, name) {
   if (name === 'open' || name === 'inside' || name === 'ride' || name === 'stop5') {
     for (const rd of L.riders) if (!(name === 'ride' && L.site.floor === 'B2')) placeRider(L, rd);
     L.car.want = L.car.k = name === 'open' || name === 'stop5' ? 1 : 0;
-    const [ex, ez] = name === 'open' ? L.site.out : slotW(L, 'eric');
+    const [ex, ez] = name === 'open' ? L.site.out : slotW(L, PLAYER_ID);
     eric.root.position.set(ex, 0, ez + (name === 'open' ? 0 : 0.05));
     eric.root.rotation.y = name === 'open' ? Math.PI : 0;
     if (name !== 'open') {

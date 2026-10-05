@@ -2,6 +2,7 @@ import { newFrame, readCheckpoint } from './narrative/checkpoint.js';
 import { flagKeys } from './narrative/engine-flags.js';
 const ENGINE_KEYS = flagKeys('game3d/js/runner.js');
 import { DEFAULT_SPEAKERS } from './narrative/speakers.js';
+import { MC, PLAYER_ID, expandMc, isPlayer } from './mc.js';
 import { storyPath } from './days.js';
 // Runs the story files (game3d/story/*.js, format in game3d/story/FORMAT.md) against a place.
 import { voiceThenBeat } from './ui.js';
@@ -57,17 +58,19 @@ export class Runner {
     };
     // the day's own story set (days.js); a later day has no placeholders and no transition lines of its own
     const day = this.game.sim?.day || 1;
+    // {mc.name} and the other protagonist tokens are filled in once, before anything reads the lines (mc.js)
     if (day > 1)
-      return (await tryImport(storyPath(name, day))) || (name === 'transitions' ? {} : { nodes: {}, on: {} });
+      return expandMc((await tryImport(storyPath(name, day))) || (name === 'transitions' ? {} : { nodes: {}, on: {} }));
     const s = (await tryImport(`../story/${name}.js`)) ||
       (await tryImport(`../story/placeholder/${name}.js`)) || { nodes: {}, on: {} };
-    return s;
+    return expandMc(s);
   }
   use(place, story) {
     this.place = place;
     this.story = story;
     flags[ENGINE_KEYS.place] = place.name;
     this.speakers = { ...DEFAULT_SPEAKERS, ...(story.speakers || {}) };
+    this.speakers[PLAYER_ID] = { ...this.speakers[PLAYER_ID], name: MC.name }; // a story file's `eric` too (mc.js)
   }
   speaker(id) {
     return this.speakers[id] || { name: id };
@@ -350,12 +353,13 @@ export class Runner {
   async sayLine(who, text, voiceKey, name, s = {}) {
     const sp = name ? { ...this.speaker(who), name, role: '' } : this.speaker(who);
     this.game.talkingTo = who;
-    if (!voiceKey && who !== 'eric' && !s.overheard) {
+    if (!voiceKey && !isPlayer(who) && !s.overheard) {
       const k = lineKey(who, text);
       if (audioKeys.has(k)) voiceKey = k;
     }
-    if (!voiceKey && who === 'eric') {
-      const k = lineKey(who, text);
+    // the player's lines in the protagonist's voice (data/mc/<id>.json voice.lines)
+    if (!voiceKey && isPlayer(who)) {
+      const k = lineKey(MC.voice.lines, text);
       if (audioKeys.has(k)) voiceKey = k;
     }
     if (voiceKey && s.overheard && !audioKeys.has(voiceKey)) voiceKey = null;

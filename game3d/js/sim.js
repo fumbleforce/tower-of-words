@@ -15,6 +15,10 @@ import { CAST, WORD_REGISTER } from './bonds/cast.js';
 import { MOMENTS, REASONS, EXPECT } from './bonds/day1.js';
 import { peopleCards } from './ui/people-view.js';
 import PEOPLE from '../story/people.js';
+import { MC, expandMc, migrateMc } from './mc.js';
+import { defaultCast } from './roles.js';
+
+expandMc(PEOPLE); // the protagonist's tokens in the People cards (mc.js)
 
 export const PERIODS = ['early', 'morning', 'lunch', 'afternoon', 'evening'];
 export const PERIOD_NAMES = {
@@ -52,6 +56,8 @@ let G = null; // the game, once installed
 export function installSim(game) {
   if (G === game) return;
   G = game;
+  game.mc = MC; // the protagonist (mc.js) and the cast by role (roles.js; a save brings its own)
+  game.cast ||= defaultCast();
   const H = game.hooks;
   H.bond = (s) => {
     bond(game, s.who, s.add, s);
@@ -478,6 +484,8 @@ export function save(game) {
     data.pendingStart = game.pendingStart || null;
     if (game.ended) data.ended = true;
     data.log = ui.logJSON?.(); // the backlog (ui/backlog.js)
+    data.mc = MC.id; // who plays this game (mc.js), and who fills each role (roles.js)
+    data.cast = game.cast || defaultCast();
     localStorage.setItem(KEY, JSON.stringify(data));
   } catch {
     /* storage may be off */
@@ -486,12 +494,13 @@ export function save(game) {
 export function loadSave() {
   try {
     const d = JSON.parse(localStorage.getItem(KEY) || 'null');
-    return d && d.v === 1 ? d : null;
+    return d && d.v === 1 ? migrateMc(d) : null;
   } catch {
     return null;
   }
 }
 export function restore(game, d) {
+  game.cast = d.cast || defaultCast();
   game.pendingStart = d.pendingStart || null;
   game.transition = d.transition || null;
   game.ended = !!d.ended;

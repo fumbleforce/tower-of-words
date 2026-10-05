@@ -94,7 +94,7 @@ test('real syntax checker rejects malformed JavaScript without running it', () =
 test('real story checker rejects a missing destination in an isolated copy', () => {
   const temp = fs.mkdtempSync(path.join(os.tmpdir(), 'story-negative-'));
   try {
-    for (const folder of ['js', 'story']) fs.cpSync(path.join(root, 'game3d', folder), path.join(temp, folder), { recursive: true });
+    for (const folder of ['js', 'story', 'data']) fs.cpSync(path.join(root, 'game3d', folder), path.join(temp, folder), { recursive: true });
     fs.mkdirSync(path.join(temp, 'tools'));
     fs.copyFileSync(path.join(root, 'game3d/tools/story-check.mjs'), path.join(temp, 'tools/story-check.mjs'));
     const story = path.join(temp, 'story/train.js');
