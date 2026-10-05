@@ -31,6 +31,15 @@ set -e
 ROOT=$(git rev-parse --show-toplevel)
 cd "$ROOT"
 PUSH=0; [ "$1" = "--push" ] && PUSH=1
+# The bible is staged from committed files only, so an uncommitted status or answer would publish stale. tools/review.py
+# and tools/review_server.py commit their own changes; anything left over here must be committed first.
+REVIEW_DIRTY=$(git status --porcelain -- 'reviews/*/review.json' 'reviews/*/feedback.json' 'showcase/*/entry.json' 'showcase/*/feedback.json')
+if [ -n "$REVIEW_DIRTY" ]; then
+  echo "deploy-pages: refusing to deploy; these Review/Showcase files have uncommitted changes, so the public bible would show stale statuses or answers:" >&2
+  echo "$REVIEW_DIRTY" >&2
+  echo "Commit them (\"Facts: none\"), then run this again." >&2
+  exit 1
+fi
 [ -n "$(git status --porcelain game3d/index.html)" ] && echo "note: game3d/index.html has uncommitted changes; the site uses the committed version"
 
 STAGE=$(mktemp -d "${TMPDIR:-/tmp}/pages.XXXXXX")
