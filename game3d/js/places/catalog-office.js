@@ -191,7 +191,7 @@ export const OFFICE_DETAILS = {
     'kenji_desk',
   ],
   'seats': ['my_seat', 'emi_seat', 'mio_seat'],
-  'zones': ['office', 'copy_room', 'kitchen', 'toilets', 'machine_room', 'corridor'],
+  'zones': ['office', 'emi_office', 'copy_room', 'kitchen', 'toilets', 'machine_room', 'corridor'],
   'people': ['emi', 'kenji', 'mori', 'aoi', 'rei', 'tama'],
   'hooks': [
     'copier',

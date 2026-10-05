@@ -1016,7 +1016,9 @@ A small lit car, the same inside head office at the forecourt (floor 1) and on B
 
 ## IT support, B2 (`office`)
 
-The second basement of head office: IT support. One compact floor, close to square with no empty gaps, planned from the B2 pixel mockup (art/pixel/island/b2/mockup2-full-1x.png; Jørgen: "not bad"), not from 3-office.png's plan, which was "kind of nonsensical". Top row, left to right: the lift landing with the stairwell behind it and a vending machine; the main office (企画室) with one island of six steel desks and the section chief's desk across its head; the machine room (機械室) with the server racks, behind a door with a card reader. A corridor runs across the middle, with the fire exit at its right end. Bottom row: the copy room (コピー室), the kitchenette (給湯室, its door facing the office door, with a tray of seven cups, three of them dusty), then the men's and women's toilets. Door plates B2 and 企画室７. Near walls are cut away for the play camera.
+The second basement of head office: IT support. One compact floor, close to square with no empty gaps, planned from the B2 pixel mockup (art/pixel/island/b2/mockup2-full-1x.png; Jørgen: "not bad"), not from 3-office.png's plan, which was "kind of nonsensical". Top row, left to right: the lift landing with the stairwell behind it and a vending machine; the main office (企画室) with one island of six steel desks and the section chief's desk across its head; the machine room (機械室) with the server racks, behind a door with a card reader. A corridor runs across the middle, with the fire exit at its right end. Bottom row: Emi's office and the copy room (コピー室), the kitchenette (給湯室, its door facing the office door, with a tray of seven cups, three of them dusty), then the men's and women's toilets. Door plates B2 and 企画室７. Near walls are cut away for the play camera.
+
+Emi's office is the left part of what was one big copy room, split by a partition (Jørgen, 2026-10-05: "the copy room is too big, if you slice it vertically and use the left side for Emi's office, that would work. her office should have some decoration not just bare walls, and a defined desk etc."). It has its own doorway from the corridor, a plate マネージャー / MANAGER on the wall top beside it, and carpet tiles instead of the copy room's vinyl. Her desk faces the visitor, her chair behind it with the corridor wall at her back, where a backlit coast panel stands in for a window (B2 has none) beside a wall calendar. On the desk: a monitor, a keyboard, a paper tray, folders, a desk lamp, a mug and a nameplate エミ / EMI facing the visitor. A guest chair stands across the desk, on a rug. On the left wall a low cabinet holds a framed team photo, a small plant and binders; two framed prints hang over a low bookcase of binders, with a tall plant in the corner. A coat stand and a filing cabinet stand against the partition. The copier, the fax, the paper shelf and the worktable are in the copy room on the right.
 
 ### Things
 
@@ -1068,15 +1070,15 @@ The second basement of head office: IT support. One compact floor, close to squa
 
 ### Seats
 
-`my_seat` (Eric's, south row, middle), `emi_seat` and `mio_seat` (the same chair: south row, left)
+`my_seat` (Eric's, south row, middle), `mio_seat` (south row, left), `emi_seat` (Emi's desk chair, in her office)
 
 ### Zones
 
-`office`, `copy_room`, `kitchen`, `toilets`, `machine_room`, `corridor`. The copy room and machine room zones start a step past their doorways.
+`office`, `emi_office`, `copy_room`, `kitchen`, `toilets`, `machine_room`, `corridor`. The copy room and machine room zones start a step past their doorways.
 
 ### Who's there when
 
-Day 2 (the `officeDay2` hook, also on entering, before the lift doors open): before the shift ends Emi stands by the lift lobby where she waits on day 1's evening, Mori sits at the chief's desk and Kenji at his. Mio is at the station on the warm promise history (`lunch_mio || mio_warm >= 2`) until `d2_ticket_done`, then at her desk beside Eric's; on the other history she is at her desk all morning. After work (sitting at Eric's desk) Emi is upstairs and the others have gone to the gathering, so none of them is here. Lunch, the copier and the day-1 evening don't run.
+Day 2 (the `officeDay2` hook, also on entering, before the lift doors open): before the shift ends Emi sits at her desk in her office, Mori sits at the chief's desk and Kenji at his. Mio is at the station on the warm promise history (`lunch_mio || mio_warm >= 2`) until `d2_ticket_done`, then at her desk beside Eric's; on the other history she is at her desk all morning. After work (sitting at Eric's desk) Emi is upstairs and the others have gone to the gathering, so none of them is here. Lunch, the copier and the day-1 evening don't run.
 
 The story moves the clock ([systems.md](systems.md)): morning when Eric arrives, lunch at 12:10, afternoon at 14:00, evening at 18:05.
 
@@ -1085,7 +1087,7 @@ The story moves the clock ([systems.md](systems.md)): morning when Eric arrives,
 | `mio` | In the machine room in the morning and at lunch; sitting at her desk in the afternoon; standing beside Eric's desk in the evening, until she leaves by the lift. | morning `racks`, lunch `racks`, afternoon sits `mio_seat`, evening `mio_by_desk` |
 | `mori` | Waits at the lift landing to greet Eric, then at his desk; the kitchenette table at lunch; gone home in the evening. | lunch `kitchen_table`, afternoon `chief_desk`, evening hidden |
 | `kenji` | His desk, north row, left; gone home in the evening. | evening hidden |
-| `emi` | Upstairs all day; comes down at 17:40 for a few minutes. | hidden all day |
+| `emi` | Upstairs all day, so her office is empty; comes down at 17:40 for a few minutes. | hidden all day |
 | `tama` | Asleep on Eric's chair in the machine room, then wherever the chair goes. In the machine room she is the goal, and petting her sends the chair home with her on it (Jørgen, 2026-10-04: "make the cat be the one that moves the scene along"). | – |
 | `aoi` | Hidden. | hidden all day |
 | `rei` | Hidden. | hidden all day |

@@ -1,11 +1,11 @@
-// B2 on day 2 (story/day2/office.js, docs/game/places.md "Who's there when"): before the shift ends Emi waits by the
-// lift lobby, Mori is at the chief's desk, Kenji at his and Mio at hers beside Eric's; after work Emi is upstairs and the other
+// B2 on day 2 (story/day2/office.js, docs/game/places.md "Who's there when"): before the shift ends Emi sits at her
+// desk in her office, Mori is at the chief's desk, Kenji at his and Mio at hers beside Eric's; after work Emi is upstairs and the other
 // three have gone ahead to the gathering, so nobody from the party is left here. Applied on entering (before the lift
 // doors open, so nobody moves in view) and again by the story's officeDay2 hook (office.js registers hook and calls
 // install(P) once its place is made).
 import { flags } from '../narrative/state.js';
 import { sit, armsLap } from '../cast.js';
-import { K } from '../scenes/office.js';
+import { K, EMI } from '../scenes/office.js';
 
 export function officeDay2(game, { people, blobs }) {
   let P = null;
@@ -31,6 +31,8 @@ export function officeDay2(game, { people, blobs }) {
     const mio = !promised || flags.d2_ticket_done;
     if (mio) P.placeSeated('mio', 'mio_seat');
     for (const id of ['emi', 'kenji', 'mori']) show(id, true);
+    P.placeSeated('emi', 'emi_seat'); // at her own desk (scenes/office-emi.js)
+    blobs.emi?.position.set(EMI.seat.x, 0.004, EMI.seat.z);
     show('mio', mio);
   }
   function apply(state) {

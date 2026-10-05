@@ -1,0 +1,28 @@
+{
+  "title": "Emi's office on B2",
+  "date": "2026-10-05",
+  "by": "claude-agent:emi-office",
+  "caption": "The copy room is cut in two by a partition: the left part is now Emi's office with its own doorway from the corridor, and the copier keeps the right part. On day 2 Emi sits at her own desk there instead of standing in the lift lobby. Issue #238.",
+  "sections": [
+    {
+      "title": "Before",
+      "caption": "One big copy room; on day 2 Emi waited in the lift lobby.",
+      "images": [
+        {"id": "before-day1-desk", "image": "bible/shots/showcase/emi-office-1/before-desk.webp", "caption": "Day 1, desktop"},
+        {"id": "before-day1-phone", "image": "bible/shots/showcase/emi-office-1/before-phone.webp", "caption": "Day 1, phone"},
+        {"id": "before-day2-desk", "image": "bible/shots/showcase/emi-office-1/before-day2-desk.webp", "caption": "Day 2, desktop"}
+      ]
+    },
+    {
+      "title": "After",
+      "caption": "Her desk with a nameplate エミ / EMI, a monitor, lamp, folders and mug; a guest chair on a rug; a backlit coast panel for a window and a calendar on the wall behind her; a cabinet with a team photo and a plant, prints over a bookcase, a coat stand, a filing cabinet and a tall plant.",
+      "images": [
+        {"id": "after-day2-desk", "image": "bible/shots/showcase/emi-office-1/after-day2-desk.webp", "caption": "Day 2, desktop"},
+        {"id": "emi-at-desk-desk", "image": "bible/shots/showcase/emi-office-1/emi-at-desk-desk.webp", "caption": "Emi at her desk, close, desktop"},
+        {"id": "emi-at-desk-phone", "image": "bible/shots/showcase/emi-office-1/emi-at-desk-phone.webp", "caption": "Emi at her desk, phone"},
+        {"id": "copy-room-after", "image": "bible/shots/showcase/emi-office-1/copy-room-after-desk.webp", "caption": "The copy room now: copier, fax and paper shelf along the partition, a smaller worktable"}
+      ]
+    }
+  ],
+  "links": [{"label": "Play it", "href": "game3d/"}]
+}
