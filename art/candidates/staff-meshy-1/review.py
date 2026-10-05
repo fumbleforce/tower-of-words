@@ -60,8 +60,37 @@ P = {
   ingame='In the game (day 1, 1366x860, test mode): B2 from above, and Kenji at his desk (Meshy sit) talking to Eric.',
   note='The rigged model from d1 (chat a1, b1, c1, d1): smart topology, 1,050 polygons, our UV layout with the face in '
        'one piece, Meshy retexture styled from d1, auto-rig at 1.1 m, Meshy sit. Head share 0.46. Slimmer than his '
-       'portrait. In the game at 1.12 tall in place of his code-built body. 23 Meshy credits; five pictures $1.23.',
-  q='Is Kenji right?'),
+       'portrait. Rejected (Jørgen: "he is too slim, doesnt look like himself"). 23 Meshy credits; five pictures $1.23.',
+  q='Round 2 (kenji-2, the last option and the round 2 sheets; its first sheet is ChatGPT pictures too, the rest '
+    'renders) is rounder and chubbier, as you asked. Is Kenji right now?',
+  view='kenji-2',
+  r2=[('r2-steps.webp', 'Round 2. ChatGPT pictures. Your verdict on kenji-1: "he is too slim, doesnt look like himself". '
+       'In his round-1 chat (a1, b1, c1, d1), your words as written, attaching d1: "make him rounder and chubbier like '
+       'in the portrait, everything else the same". Three takes, every one shown: e1 and e2 are round and chubby with '
+       'his hands at his sides; e2 also has the light tips in his hair from the portrait, so it went to Meshy; e3 has a '
+       'hand in his pocket. 3 takes, $0.86.'),
+      ('r2-shape-previews.webp', 'Round 2. Renders of the real model from here on. The same Meshy steps: image-to-3D '
+       'from e2, smart topology, 1,050 polygons, A-pose, no texture, 5 credits. Meshy\'s previews; first roll, kept.'),
+      ('r2-uv.webp', 'Round 2. The face-first UV unwrap (65 polygons, red, the biggest front-facing piece), then Meshy '
+       'retexture styled from e2, keep the UVs, no PBR, 10 credits.'),
+      ('r2-tex.webp', 'Round 2. The textured model, same cameras as round 1. The light hair tips came out as two brown '
+       'patches on the back of his hair.'),
+      ('r2-before-after.webp', 'Round 1 and round 2, front and three-quarter.'),
+      ('r2-faces.webp', 'Round 2. From below the chin in the texture\'s own colours: no dark marks; the texture is in the '
+       'game as Meshy painted it.'),
+      ('r2-compare.webp', 'Round 2 beside the in-game Eric and Mio and Kuro. Head share 0.43 of his height (round 1 '
+       '0.46; Eric 0.46, Kuro 0.41, Aoi 0.40, Emi 0.43). His hands, counted from the hand bones, come to 0.160 of his '
+       'height, but that count takes in his bare, now thick forearms; on the renders they look in proportion to his '
+       'arms, so they are left as Meshy made them.'),
+      ('r2-viewer.webp', 'Round 2. Meshy auto-rig at 1.1 m, 5 credits, and Chair_Sit_Idle_F for his desk, 3 credits. '
+       'Stills from the live viewer. Meshy credits for round 2: 23; for Kenji in all 46; balance 223.'),
+      ('r2-ingame.webp', 'Round 2 in the game (day 1, test mode): at his desk in B2.')],
+  r2opt=[{'id': 'kenji-2', 'label': 'kenji-2 (round 2)', 'image': 'art/parts/kenji-meshy-1/renders/tex2/r45.png',
+          'images': ['art/parts/kenji-meshy-1/renders/tex2/front.png', 'art/parts/kenji-meshy-1/renders/tex2/face.png',
+                     'art/parts/kenji-meshy-1/renders/tex2/back.png', 'art/parts/kenji-meshy-1/pics/e2.png'],
+          'note': 'Round 2, from picture e2 (chat a1, b1, c1, d1, then "make him rounder and chubbier like in the '
+                  'portrait, everything else the same"): the same Meshy steps. Head share 0.43. In the game at 1.12 '
+                  'tall since this round. 23 Meshy credits; three pictures $0.86.'}]),
  'guard': dict(
   name='Mr. Ishibashi (the guard)', he='he', his='his', pic='d1', attempt='guard-1',
   steps='ChatGPT pictures. Every take, in order, with your words as written: 1 "make a 3d chibi anime character in the '
@@ -136,8 +165,9 @@ P = {
           'so in the idle and walk her head and upper body bend and turn away. A second auto-rig on the same model (5 '
           'credits) placed the bones the same way. Most likely the ponytail slab: it hangs beside her left arm and '
           'the rig reads it as part of her body.')],
-  measure='Head share on the model (straight-on, flat colour, rest pose): see the last figure. Not checked further '
-          'because of the rig.',
+  measure='Head share on the models (straight-on, flat colour, rest pose, each figure at the same height): Eric 0.46, '
+          'Kuro 0.41, Aoi 0.40, Emi 0.43, Rei 0.47 counting the top of her ponytail (0.39 in the picture). Hands not '
+          'checked further because of the rig.',
   game='Meshy auto-rig at 1.1 m, twice (5 credits each), and Meshy\'s Chair_Sit_Idle_F, 3 credits.',
   credits='Meshy credits for Rei: 28 (shape 5, texture 10, rig 5, second rig 5, sit 3); balance 251 after her.',
   ingame='',
@@ -156,7 +186,7 @@ def main():
     A = f'art/parts/{cid}-meshy-1'
     S = f'{A}/sheets'
     a = p['attempt']
-    view = (f'tools/characters/parts/viewer.html?cfg=/reviews/{cid}-meshy-1/viewer.json&a={a}&m=idle'
+    view = (f'tools/characters/parts/viewer.html?cfg=/reviews/{cid}-meshy-1/viewer.json&a={p.get("view", a)}&m=idle'
             '&c=Eric%2C%20Mio%2C%20Kuro%2C%20Aoi%20and%20Emi')
     media = [
         {'image': f'{S}/step0-inputs.webp', 'caption': STEP1},
@@ -179,13 +209,15 @@ def main():
     ]
     if p['ingame'] and os.path.exists(f'/home/jorgen/repo/japanese/{S}/ingame.webp'):
         media.append({'image': f'{S}/ingame.webp', 'caption': p['ingame']})
+    # a later round: its sheets after the first round's, in order, and its option after the first one
+    media += [{'image': f'{S}/{f}', 'caption': c} for f, c in p.get('r2', []) if os.path.exists(f'/home/jorgen/repo/japanese/{S}/{f}')]
     r = {'title': f'{p["name"]}: a 3D model made the way Kuro, Aoi and Emi were', 'date': '2026-10-05',
          'by': 'Claude (staff-meshy agent)', 'status': 'open',
          'question': FIRST + (f'{p["he"].capitalize()} is in the game now. ' if p.get('installed', True) else '') + p['q'],
          'multi': False, 'media': media,
          'options': [{'id': a, 'label': a, 'image': f'{A}/renders/tex/r45.png',
                       'images': [f'{A}/renders/tex/front.png', f'{A}/renders/tex/face.png', f'{A}/renders/tex/back.png',
-                                 f'{A}/pics/{p["pic"]}.png'], 'note': p['note']}],
+                                 f'{A}/pics/{p["pic"]}.png'], 'note': p['note']}] + p.get('r2opt', []),
          'links': [{'label': f'Live 3D: {p["name"]} beside the in-game Eric, Mio, Kuro, Aoi and Emi (turn, zoom, idle, walk)',
                     'href': view},
                    {'label': 'Aoi round 2, the same process (aoi-meshy-1)', 'href': 'bible/#review/aoi-meshy-1'},
