@@ -160,7 +160,20 @@ export function openTickets({
       <div class="d-act">${act}<div class="tk-tip take-tip" hidden></div></div>`;
   }
 
+  // the rows and the ticket are drawn again on every change, which takes the focus off the row or button that had it
+  // and the arrow keys out of the app (Codex X-0539): it comes back to the selected row, or on a phone showing the
+  // ticket, to Take ticket (else Back)
   function render() {
+    const had = app.contains(document.activeElement);
+    draw();
+    const f = document.activeElement;
+    const shown = (el) => !!el?.getClientRects().length;
+    if (!had || (app.contains(f) && shown(f))) return;
+    const to = phone() && mode === 'detail' ? $('.d-act .take', app) || $('.tk-back', app) : $('.tk-rows .on', app);
+    (shown(to) ? to : $('.tk-page', app))?.focus({ preventScroll: true });
+  }
+
+  function draw() {
     const all = tickets();
     const t = cur();
     const onPhone = phone();
