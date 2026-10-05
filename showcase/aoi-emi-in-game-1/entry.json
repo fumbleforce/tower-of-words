@@ -1,0 +1,48 @@
+{
+ "title": "Aoi and Emi as 3D models in the game",
+ "date": "2026-10-05",
+ "by": "claude-agent:aoi-emi-meshy-2",
+ "caption": "Round 2 of Aoi and Emi (Reviews aoi-meshy-1 and emi-meshy-1) now replace their code-built bodies on day 1 and day 2: Aoi in her train seat and on her way out, Emi in B2. Aoi has a smaller head and her hands at 0.75; Emi has no lanyard, and the dark texels along her jaw are repainted in skin.",
+ "sections": [
+  {
+   "title": "The fixes, close up",
+   "caption": "Before and after, same cameras as the reviews.",
+   "images": [
+    {"id": "aoi-before-after", "image": "bible/shots/showcase/aoi-emi-in-game-1/aoi-before-after.webp", "caption": "Aoi: round 1 and round 2, figure and face (head 0.43 of her height, now 0.40)"},
+    {"id": "aoi-hands", "image": "bible/shots/showcase/aoi-emi-in-game-1/aoi-hands.webp", "caption": "Aoi's hands as Meshy made them, and at 0.75 as the game shows them"},
+    {"id": "aoi-hands-cast", "image": "bible/shots/showcase/aoi-emi-in-game-1/aoi-hands-cast.webp", "caption": "Her hands at 0.75 beside Mio, Kuro and Emi"},
+    {"id": "emi-before-after", "image": "bible/shots/showcase/aoi-emi-in-game-1/emi-before-after.webp", "caption": "Emi: round 1 with the lanyard, round 2 without"},
+    {"id": "emi-jaw", "image": "bible/shots/showcase/aoi-emi-in-game-1/emi-jaw.webp", "caption": "Emi from below, before and after the jaw repaint"}
+   ]
+  },
+  {
+   "title": "Aoi on the train, day 1",
+   "caption": "In her seat with the camera closed on her (dialogue hidden for the picture), and her あ、すみません as played.",
+   "images": [
+    {"id": "aoi-seat-desktop", "image": "bible/shots/showcase/aoi-emi-in-game-1/aoi-seat-1366x860.webp", "caption": "Seated, desktop 1366x860"},
+    {"id": "aoi-seat-phone", "image": "bible/shots/showcase/aoi-emi-in-game-1/aoi-seat-390x844.webp", "caption": "Seated, phone 390x844"},
+    {"id": "aoi-line-desktop", "image": "bible/shots/showcase/aoi-emi-in-game-1/aoi-line-1366x860.webp", "caption": "Her line, desktop"},
+    {"id": "aoi-line-phone", "image": "bible/shots/showcase/aoi-emi-in-game-1/aoi-line-390x844.webp", "caption": "Her line, phone"}
+   ]
+  },
+  {
+   "title": "Emi in B2",
+   "caption": "Meeting Eric at 17:40 on day 1, and the morning brief on day 2: closed on her, then as played.",
+   "images": [
+    {"id": "emi-meet-desktop", "image": "bible/shots/showcase/aoi-emi-in-game-1/emi-meet-1366x860.webp", "caption": "Day 1, desktop"},
+    {"id": "emi-meet-phone", "image": "bible/shots/showcase/aoi-emi-in-game-1/emi-meet-390x844.webp", "caption": "Day 1, phone"},
+    {"id": "emi-line-desktop", "image": "bible/shots/showcase/aoi-emi-in-game-1/emi-line-1366x860.webp", "caption": "Day 1 as played, desktop"},
+    {"id": "emi-line-phone", "image": "bible/shots/showcase/aoi-emi-in-game-1/emi-line-390x844.webp", "caption": "Day 1 as played, phone"},
+    {"id": "emi-day2-desktop", "image": "bible/shots/showcase/aoi-emi-in-game-1/emi-day2-1366x860.webp", "caption": "Day 2, desktop"},
+    {"id": "emi-day2-phone", "image": "bible/shots/showcase/aoi-emi-in-game-1/emi-day2-390x844.webp", "caption": "Day 2, phone"},
+    {"id": "emi-day2-line-desktop", "image": "bible/shots/showcase/aoi-emi-in-game-1/emi-day2-line-1366x860.webp", "caption": "Day 2 as played, desktop"},
+    {"id": "emi-day2-line-phone", "image": "bible/shots/showcase/aoi-emi-in-game-1/emi-day2-line-390x844.webp", "caption": "Day 2 as played, phone"}
+   ]
+  }
+ ],
+ "links": [
+  {"label": "Review aoi-meshy-1 (round 2)", "href": "bible/#review/aoi-meshy-1"},
+  {"label": "Review emi-meshy-1 (round 2)", "href": "bible/#review/emi-meshy-1"},
+  {"label": "Play it", "href": "game3d/"}
+ ]
+}

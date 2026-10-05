@@ -2,13 +2,15 @@
 colours (no light), scaled so the model's full height fills the frame. Used to measure the head-to-body ratio of the
 in-game Eric and Mio against Kuro (measure.py).
 
-  blender -b -P front_bl.py -- <model.glb> <out.png> [texture.webp] [px=1024]
+  blender -b -P front_bl.py -- <model.glb> <out.png> [texture.webp] [px=1024] [hands=<scale>]
+hands=: a rigged model with both hand bones scaled by that much, as the game does for Aoi (reviews/aoi-meshy-1, round 2).
 """
 import bpy, math, sys
 from mathutils import Vector
 
 src, out, *rest = sys.argv[sys.argv.index('--') + 1:]
-tex = next((r for r in rest if not r.startswith('px=')), None)
+tex = next((r for r in rest if '=' not in r), None)
+hands = float(next((r[6:] for r in rest if r.startswith('hands=')), 1))
 px = int(next((r[3:] for r in rest if r.startswith('px=')), 1024))
 
 bpy.ops.wm.read_factory_settings(use_empty=True)
@@ -16,6 +18,11 @@ bpy.ops.import_scene.gltf(filepath=src)
 for a in [o for o in bpy.data.objects if o.type == 'ARMATURE']:
     a.data.pose_position = 'REST'
     a.animation_data_clear()
+    if hands != 1:
+        a.data.pose_position = 'POSE'
+        for b in a.pose.bones:
+            b.rotation_mode = 'QUATERNION'; b.rotation_quaternion = (1, 0, 0, 0); b.location = (0, 0, 0)
+            b.scale = (hands,) * 3 if b.name in ('LeftHand', 'RightHand') else (1, 1, 1)
 bpy.context.view_layer.update()
 meshes = [o for o in bpy.data.objects if o.type == 'MESH']
 deps = bpy.context.evaluated_depsgraph_get()

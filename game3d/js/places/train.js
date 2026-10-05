@@ -34,6 +34,7 @@ import { swingStraps } from '../train/straps.js';
 import { buildPassengers, sit, armsHold } from '../train/people.js';
 import { makeCat, catWalk, catHop } from '../creatures/cat.js';
 import { PEOPLE } from '../cast.js';
+import { meshy3 } from '../cast3d.js';
 import { Nav, blob } from '../engine.js';
 import { ui, sfx } from '../ui.js';
 import { walkPerson, stepPeople, lookAt } from '../story.js';
@@ -139,6 +140,14 @@ export async function trainPlace(game) {
 
   // passengers, cat and bags as in side/train
   const list = buildPassengers(LZ, SEAT_Y);
+  // Aoi's Meshy model (cast3d.js) takes the code-built woman's seat, without the phone (no props on the models)
+  const aoi3 = meshy3('aoi');
+  if (aoi3) {
+    aoi3.root.position.set(list[1].root.position.x, 0, list[1].root.position.z);
+    aoi3.root.rotation.copy(list[1].root.rotation);
+    aoi3.seated = true;
+    list[1] = aoi3;
+  }
   const [kuroda, aoi, reader, music, stander, bun, youth] = list;
   const blobs = {};
   for (const p of list) {
@@ -1288,9 +1297,23 @@ export async function trainPlace(game) {
           .map(([id, r, k]) =>
             (async () => {
               await game.wait(250 + k * 1500 + (r.root.position.x < 0 ? 0 : 400));
+              const dx = r.root.position.x < 0 ? -DOOR_X : DOOR_X;
+              if (r.meshy) {
+                // Aoi (cast3d.js) walks by walkRig; the story's own walk may still be running, and its end would clear
+                // a walk started here: let it finish, then the same way off
+                for (let i = 0; i < 100 && r._walk; i++) await game.wait(100);
+                for (const q of [
+                  [dx, LZ - 0.4],
+                  [dx, LZ + 1.0],
+                  [dx - 1.2, LZ + 1.45],
+                  [WALK_X + 0.8, LZ + 1.5],
+                ])
+                  await walkRig(game, r, q, { speed: 1.35, route: q[1] < LZ, settle: false });
+                await walkRig(game, r, [WALK_X, LZ + 1.9], { speed: 1.35, route: false });
+                return void (r.root.visible = false);
+              }
               if (r.seated) standUp(r);
               r.act = null;
-              const dx = r.root.position.x < 0 ? -DOOR_X : DOOR_X;
               await walkPerson(
                 r,
                 [

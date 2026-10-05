@@ -8,7 +8,10 @@ below level) between 58 and 69 % of her height, the band under the chin and jaw.
 filled from the skin texels around it (repeated neighbour averaging, so the fill takes their colour and light). The
 mouth, the faint line under it, the eyes, the hair and every other texel are left exactly as they were.
 
-  python art/candidates/kuro-meshy-orig-3/cheek_fix.py <rigged.glb> <out.png|out.webp> [mask.png]
+  python art/candidates/kuro-meshy-orig-3/cheek_fix.py <rigged.glb> <out.png|out.webp> [mask.png] [lo=0.58] [hi=0.69] [dark=0.6]
+lo and hi: the band of her height the triangles sit in; dark: texels below this luminance are repainted; skip=<i,j,..>:
+triangles to leave alone. The defaults are Kuro's. Emi (reviews/emi-meshy-1, round 2): lo=0.45 hi=0.65, and skip the
+four chin triangles of her face piece (19,20,72,73), whose only dark texels are the edge of her mouth.
 (needs numpy and Pillow, e.g. ~/ai/sd/venv/bin/python). The game's texture is
   cheek_fix.py art/parts/kuro-meshy-orig-3/meshy/kuro-3b-tex-rigged.glb game3d/assets/characters/kuro/base.webp
 and its walk, run and sit files are Meshy's GLBs (kuro-3b-tex-walking and -running from the auto-rig, and
@@ -20,6 +23,10 @@ import numpy as np
 from PIL import Image, ImageDraw, ImageFilter
 
 src, out = sys.argv[1:3]
+opt = dict(a.split('=', 1) for a in sys.argv[3:] if '=' in a)
+mask_out = next((a for a in sys.argv[3:] if '=' not in a), None)
+LO, HI, DARK = (float(opt.get(k, d)) for k, d in (('lo', 0.58), ('hi', 0.69), ('dark', 0.6)))
+SKIP = {int(i) for i in opt.get('skip', '').split(',') if i}
 b = open(src, 'rb').read()
 n = struct.unpack('<I', b[12:16])[0]
 j = json.loads(b[20:20 + n])
@@ -62,7 +69,7 @@ pick = Image.new('L', (W, W), 0)
 dp = ImageDraw.Draw(pick)
 chosen = []
 for i, t in enumerate(tri):
-    if not (0.58 < hy[i] < 0.69 and nrm[i, 1] < -0.5):
+    if i in SKIP or not (LO < hy[i] < HI and nrm[i, 1] < -0.5):
         continue
     m = I == i
     if m.sum() < 3 or np.abs(np.median(A[m], 0) - skin).max() > 0.2:
@@ -75,7 +82,7 @@ other = (I >= 0) & ~np.isin(I, chosen)
 area = (np.asarray(pick.filter(ImageFilter.MaxFilter(5))) > 0) & ~other
 # black: the skin here is 0.8 to 0.9 luminance (0.8 in the soft shade under the chin, which stays); the streaks are
 # below 0.3, and their grey JPEG fringe (up to 0.6) is caught by the one-texel ring added next
-bad = area & (lum < 0.6)
+bad = area & (lum < DARK)
 # and a texel of fringe round each bad one, inside the area
 bad = area & (np.asarray(Image.fromarray((bad * 255).astype(np.uint8)).filter(ImageFilter.MaxFilter(3))) > 0)
 print('texels repainted', int(bad.sum()))
@@ -112,5 +119,5 @@ R = A.copy()
 R[bad] = acc_[bad]
 Image.fromarray((R * 255).round().clip(0, 255).astype(np.uint8)).save(
     out, **({'quality': 90, 'method': 6} if out.endswith('.webp') else {}))
-if len(sys.argv) > 3:
-    Image.fromarray((bad * 255).astype(np.uint8)).save(sys.argv[3])
+if mask_out:
+    Image.fromarray((bad * 255).astype(np.uint8)).save(mask_out)

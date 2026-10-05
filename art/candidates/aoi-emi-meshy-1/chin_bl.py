@@ -2,7 +2,8 @@
 for dark smudges or discolouration under the cheeks like Kuro round 3's (Jørgen: "black discoloration under her
 cheek"). Texture colours only, no light. For reviews/aoi-meshy-1 and emi-meshy-1.
 
-  blender -b -P chin_bl.py -- <model.glb> <out prefix> [chin=0.57]    (chin: the chin's height as a fraction)
+  blender -b -P chin_bl.py -- <model.glb> <out prefix> [chin=0.57] [tex=<image>]    (chin: the chin's height as a
+fraction; tex: another texture on the same UVs, e.g. Emi's repainted one in round 2)
 Writes <out prefix>-front.png, -left.png (her left, image right), -right.png.
 """
 import bpy, math, sys
@@ -22,6 +23,7 @@ for o in meshes:
         outn = [n for n in nt.nodes if n.type == 'OUTPUT_MATERIAL'][0]
         img = [n for n in nt.nodes if n.type == 'TEX_IMAGE']
         em = nt.nodes.new('ShaderNodeEmission')
+        if img and opt.get('tex'): img[0].image = bpy.data.images.load(opt['tex'])
         if img: nt.links.new(img[0].outputs['Color'], em.inputs['Color'])
         nt.links.new(em.outputs[0], outn.inputs['Surface'])
 sc = bpy.context.scene
