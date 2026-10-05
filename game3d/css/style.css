@@ -1136,8 +1136,6 @@ body.phone #actMenu .hd { padding: 5px 12px; font-size: 14px; }
 #held .phone.tall .scr { width: 196px; border-radius: 12px; }
 #held .sheet .scr { width: 300px; border-radius: 2px; }
 #held .sheet + .sheet { margin-left: -26px; }
-#held .ring { position: absolute; width: 22%; aspect-ratio: 1; border-radius: 50%; border: 3px solid #fff; box-shadow: 0 0 0 2px rgba(0, 0, 0, .25), 0 0 14px rgba(255, 255, 255, .6); translate: -50% -50%; animation: heldRing 1.2s ease-in-out infinite; }
-@keyframes heldRing { 50% { scale: 1.12; opacity: .75; } }
 body:not(.phone) #held { zoom: var(--ui, 1); }
 body.phone #held { left: 50%; right: auto; top: calc(9% + env(safe-area-inset-top)); transform: translateX(-50%); }
 body.phone #held .phone .scr { width: min(290px, calc(100vw - 72px)); }

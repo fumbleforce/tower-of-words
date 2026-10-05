@@ -146,7 +146,7 @@ for story in STORY_DATA.values():
 NAMES.update({'ann': 'Station announcer', 'gatev': 'Gate voice', 'sales1': 'Sales (1)', 'sales2': 'Sales (2)',
               'commuter': 'Commuter', 'worker': 'Office workers', 'tama': 'Tama (cat)', 'briefcaseMan': 'Man with a briefcase',
               'yui': 'Yui', 'sota': 'Sota', 'music': 'Girl with headphones', 'reader': 'Man with a book',
-              'bun': 'Woman with a bun', 'youth': 'Young man', 'stander': 'Man with a bag', 'kuroda': 'Mr. Hamada'})
+              'bun': 'Woman with a bun', 'stander': 'Man with a bag', 'kuroda': 'Mr. Hamada'})
 
 
 def who_of_bible(bid):

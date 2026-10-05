@@ -590,7 +590,8 @@ export function buildPassengers(LZ, SEAT_Y) {
     r.head.rotation.y = Math.sin(t * 0.3) * 0.05;
   };
 
-  // 3. man reading, with glasses; turns a page now and then
+  // 3. man reading, with glasses; turns a page now and then. Near bench, right (Jørgen, 2026-10-05: "have the excel
+  // guy sit there instead, to give mio the full row"), so Mio has the far bench's right half to herself
   const reader = chibi({
     skin: SKINS[0],
     top: '#f4f5f7',
@@ -615,7 +616,7 @@ export function buildPassengers(LZ, SEAT_Y) {
   });
   sit(reader);
   armsHold(reader, -1.05, 0.55);
-  add(reader, 1.05, far);
+  add(reader, 2.55, near);
   const bk = book();
   bk.position.set(0, 0.05, 0.2);
   bk.rotation.x = 0.75;
@@ -780,26 +781,6 @@ export function buildPassengers(LZ, SEAT_Y) {
   bunW.head.rotation.x = 0.12;
   bunW.act = (t, r) => {
     r.head.rotation.y = -0.8 + Math.sin(t * 0.21 + 1) * 0.15;
-  };
-
-  // 7. near side: young guy with light olive hair
-  const youth = chibi({
-    skin: SKINS[3],
-    top: '#2f3542',
-    sleeve: '#2f3542',
-    bottom: '#4a5263',
-    hair: '#c3c27e',
-    hairOpts: { messy: 0.1, front: 0.05, seed: 31, tufts: [[0.0, 0.29, -0.06]] },
-    shoes: '#e8e6e0',
-    sole: '#bfbcb4',
-  });
-  sit(youth);
-  armsLap(youth);
-  add(youth, 2.55, near);
-  youth.head.rotation.y = 0.9;
-  youth.head.rotation.x = -0.1;
-  youth.act = (t, r) => {
-    r.head.rotation.y = 0.9 + Math.sin(t * 0.17) * 0.25;
   };
 
   for (const r of list) r.breath = 0.012;

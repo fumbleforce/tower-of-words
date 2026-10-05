@@ -1,10 +1,8 @@
-// The two phone pictures on the train that need people in them, rendered in the game's own style: the young man's
-// photo of his first goal (him in his team's kit, arms up, the scoreboard behind him reading 1 - 6) and the video the
-// girl with headphones took of herself practising guitar (her, cap and all, on her bed, strumming in time with
-// audio/sfx/guitar_practice.mp3, fumbling where the recording fumbles). Each is a small scene drawn into a corner of
-// the game's own canvas and copied out at once (the map does the same, map/render.js), so no second WebGL context.
+// The phone video on the train that needs a person in it, rendered in the game's own style: the video the girl with
+// headphones took of herself practising guitar (her, cap and all, on her bed, strumming in time with
+// audio/sfx/guitar_practice.mp3, fumbling where the recording fumbles). It is a small scene drawn into a corner of the
+// game's own canvas and copied out at once (the map does the same, map/render.js), so no second WebGL context.
 import * as THREE from 'three';
-import { chibi, SKINS } from './people.js';
 
 // the note onsets in guitar_practice (tools/feel/pluck.py prints them); DEAD is the fumbled one, END the file's length
 const NOTES = [0.15, 0.43, 0.74, 1.03, 1.29, 1.55, 1.93, 2.16, 2.45, 2.73, 3.0, 3.75, 4.08, 4.41, 4.75, 5.09];
@@ -68,117 +66,6 @@ function dispose(scene) {
       }
     }
   });
-}
-
-// ---------- the goal photo ----------
-export function footballPhoto(renderer) {
-  const out = document.createElement('canvas');
-  out.width = 480;
-  out.height = 360;
-  const s = new THREE.Scene();
-  s.background = new THREE.Color('#a9d2f2');
-  lit(s, '#e8f3ff', '#4f7a3f', 1.7);
-  const pitch = textTex((g, w, h) => {
-    for (let i = 0; i < 8; i++) {
-      g.fillStyle = i % 2 ? '#5d9e4f' : '#67a857';
-      g.fillRect(0, (i * h) / 8, w, h / 8);
-    }
-  });
-  const ground = mesh(new THREE.PlaneGeometry(30, 30), std('#ffffff', { map: pitch }));
-  ground.rotation.x = -Math.PI / 2;
-  s.add(ground);
-  const line = mesh(new THREE.PlaneGeometry(30, 0.08), std('#f4f6f2'), 0, 0.005, -1.6);
-  line.rotation.x = -Math.PI / 2;
-  s.add(line);
-  // the far side: a low stand and a row of boards
-  s.add(mesh(new THREE.BoxGeometry(30, 1.8, 1.5), std('#5a6474'), 0, 0.9, -9));
-  const boards = textTex((g, w, h) => {
-    for (let i = 0; i < 8; i++) {
-      g.fillStyle = ['#2a8f86', '#f3f1ea', '#3d5a8c', '#f3f1ea'][i % 4];
-      g.fillRect((i * w) / 8, 0, w / 8, h);
-    }
-  });
-  s.add(mesh(new THREE.BoxGeometry(24, 0.4, 0.08), std('#ffffff', { map: boards }), 0, 0.2, -6));
-  // the goal behind him, the ball still in the net
-  const white = std('#f7f7f4');
-  for (const x of [-3.4, -1.2]) s.add(mesh(new THREE.CylinderGeometry(0.04, 0.04, 1.2, 8), white, x, 0.6, -3.2));
-  const bar = mesh(new THREE.CylinderGeometry(0.04, 0.04, 2.2, 8), white, -2.3, 1.2, -3.2);
-  bar.rotation.z = Math.PI / 2;
-  s.add(bar);
-  const net = textTex((g, w, h) => {
-    g.strokeStyle = 'rgba(255,255,255,.85)';
-    g.lineWidth = 2;
-    for (let i = 0; i <= w; i += 16) {
-      g.beginPath();
-      g.moveTo(i, 0);
-      g.lineTo(i, h);
-      g.stroke();
-    }
-    for (let j = 0; j <= h; j += 16) {
-      g.beginPath();
-      g.moveTo(0, j);
-      g.lineTo(w, j);
-      g.stroke();
-    }
-  });
-  s.add(mesh(new THREE.PlaneGeometry(2.2, 1.2), std('#ffffff', { map: net, transparent: true }), -2.3, 0.6, -3.7));
-  s.add(mesh(new THREE.IcosahedronGeometry(0.11, 1), std('#fbfbf8', { flatShading: true }), -2.0, 0.11, -3.55));
-  // the scoreboard: numbers only
-  const board = textTex((g, w, h) => {
-    g.fillStyle = '#171a21';
-    g.fillRect(0, 0, w, h);
-    g.fillStyle = '#ffb44a';
-    g.font = '700 92px "DejaVu Sans Mono", "Courier New", monospace';
-    g.textAlign = 'center';
-    g.textBaseline = 'middle';
-    g.fillText('1 - 6', w / 2, h / 2 + 4);
-  });
-  const dark = std('#2a2f38');
-  for (const x of [0.75, 1.95]) s.add(mesh(new THREE.CylinderGeometry(0.04, 0.04, 1.3, 8), dark, x, 0.65, -2.6));
-  s.add(mesh(new THREE.BoxGeometry(1.5, 0.78, 0.1), dark, 1.35, 1.55, -2.6));
-  s.add(
-    mesh(
-      new THREE.PlaneGeometry(1.38, 0.66),
-      std('#ffffff', { map: board, emissive: '#ffffff', emissiveMap: board, emissiveIntensity: 0.35 }),
-      1.35,
-      1.55,
-      -2.54,
-    ),
-  );
-  // him, in his team's kit (the olive hair and the same face as on the train), both arms up
-  const me = chibi({
-    skin: SKINS[3],
-    top: '#2d8c85',
-    sleeve: '#2d8c85',
-    bottom: '#f4f4f0',
-    legs: '#f4f4f0',
-    shin: '#2d8c85',
-    hair: '#c3c27e',
-    hairOpts: { messy: 0.1, front: 0.05, seed: 31, tufts: [[0.0, 0.29, -0.06]] },
-    eyes: 'closed',
-    blush: '#f2b4ab',
-    shoes: '#20242c',
-    sole: '#20242c',
-  });
-  me.arms[0].rotation.set(-2.75, 0, -0.45);
-  me.arms[1].rotation.set(-2.75, 0, 0.45);
-  me.torso.rotation.x = -0.12;
-  me.head.rotation.set(-0.18, 0.1, 0);
-  me.legs[0].rotation.x = 0.12;
-  me.legs[1].rotation.x = -0.18;
-  me.root.rotation.y = 0.25;
-  s.add(me.root);
-  const cam = new THREE.PerspectiveCamera(36, 4 / 3, 0.1, 60);
-  cam.position.set(0.55, 0.85, 2.5);
-  cam.lookAt(0.55, 0.95, 0);
-  snap(renderer, s, cam, out);
-  // where he is in the picture (0..1 across and down), for a finger on the screen
-  const chest = me.torso
-    .getWorldPosition(new THREE.Vector3())
-    .lerp(me.head.getWorldPosition(new THREE.Vector3()), 0.6)
-    .project(cam);
-  dispose(s);
-  return { canvas: out, me: [(chest.x + 1) / 2, (1 - chest.y) / 2] };
 }
 
 // ---------- the practice video ----------

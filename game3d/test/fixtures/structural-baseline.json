@@ -220,10 +220,6 @@
         "name": "Woman with a bun",
         "color": "#a8b0bf"
       },
-      "youth": {
-        "name": "Young man",
-        "color": "#a8b0bf"
-      },
       "stander": {
         "name": "Man by the door",
         "color": "#a8b0bf"
@@ -287,16 +283,13 @@
     "train:intro",
     "train:first_aoi",
     "train:first_bun",
-    "train:first_youth",
     "train:first_music",
     "train:first_stander",
     "train:nod_seat",
     "train:bun",
-    "train:youth",
     "train:music",
     "train:stander",
     "train:ohayo_bun",
-    "train:ohayo_youth",
     "train:ohayo_music",
     "train:ohayo_stander",
     "train:window",
@@ -573,22 +566,6 @@
     },
     {
       "from": "train:first_bun",
-      "to": "train:nod_seat",
-      "kind": "call",
-      "labels": [],
-      "cond": "",
-      "call": true
-    },
-    {
-      "from": "train:first_youth",
-      "to": "train:youth",
-      "kind": "call",
-      "labels": [],
-      "cond": "",
-      "call": true
-    },
-    {
-      "from": "train:first_youth",
       "to": "train:nod_seat",
       "kind": "call",
       "labels": [],
@@ -1943,7 +1920,6 @@
     "passengers",
     "seat_goal",
     "train_bun_seen",
-    "train_youth_seen",
     "train_music_seen",
     "bag_wobble",
     "mio_warm",

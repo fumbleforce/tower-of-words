@@ -1,12 +1,12 @@
 // Focused check of the train passengers' discovery hooks (train/discoveries.js) and English subtitles for spoken
 // Japanese (runner `en`), before and after the story uses them. Each encounter runs as a small test scene through the
 // real marker tap (Eric walks up), with the steps the draft stages (reviews/train-discoveries-1/draft-notes.md), and
-// takes a still at every line: the held view (photo, video, reminder, pages) must be up where it belongs, subtitled
+// takes a still at every line: the held view (video, reminder, pages) must be up where it belongs, subtitled
 // lines must show their English with the "in Japanese" tag, and the props must end where they should (bag shut,
 // phones away, headphone back on). STORY=1 also checks first-seat routes, quiet repeats, and a real saved Continue at a held view.
 //   node game3d/tools/train-finds-check.mjs [outdir]      SIZES=1366x860,390x844  BASE=<worktree>/game3d  MUTE=1
 // PERF_ONLY=1 only counts the draw calls (also against a build without the hooks, for comparison).
-// ONLY=bun,youth runs some. STORY=1 uses the story's own talk triggers instead of the test scenes (after
+// ONLY=bun,reader runs some. STORY=1 uses the story's own talk triggers instead of the test scenes (after
 // integration). Each viewport has its own 290-second browser deadline.
 import { withBrowserJob } from '../../tools/lib/browser-job.mjs';
 import fs from 'node:fs';
@@ -28,17 +28,6 @@ const SCENES = {
     { do: 'shopBag', state: 'ask' },
     { do: 'shopBag', state: 'close' },
     { say: 'bun', text: 'ありがとう。', en: 'Thank you.' },
-    { do: 'cam', back: true },
-  ],
-  youth: [
-    cam('youth'),
-    { do: 'phone', who: 'youth', state: 'show' },
-    { say: 'youth', text: '負けたけど、初めてゴール決めたんだ。', en: 'We lost, but I scored my first goal.' },
-    { do: 'gesture', who: 'eric', kind: 'point', to: 'youth' },
-    "eric: That's you?",
-    { do: 'phone', who: 'youth', state: 'point' },
-    { do: 'gesture', who: 'youth', kind: 'nod', to: 'eric' },
-    { do: 'phone', who: 'youth', state: 'away' },
     { do: 'cam', back: true },
   ],
   music: [
@@ -73,7 +62,6 @@ const SCENES = {
 // what the held view must show while each line is up (null: nothing)
 const HELD = {
   bun: [null],
-  youth: ['youth', 'youth'],
   music: [null, 'music'],
   reader: [null, 'reader', 'reader'],
   kuroda: ['kuroda'],
@@ -81,7 +69,7 @@ const HELD = {
 const ids = Object.keys(SCENES).filter((id) => !only || only.includes(id));
 
 const story = process.env.STORY === '1';
-const firstPassengers = new Set(['bun', 'youth', 'music']);
+const firstPassengers = new Set(['bun', 'music']);
 const seenFlag = (id) => `train_${id === 'kuroda' ? 'hamada' : id}_seen`;
 const expectedLines = (id) => SCENES[id].flatMap((step) => {
   if (typeof step === 'string') return [{ text: step.replace(/^(>\s*|\w+: )/, ''), sub: false }];
@@ -189,7 +177,7 @@ async function continueHeld(page, tag, id, line, lineIndex) {
   for (const key of ['seat_goal', ...Object.keys(SCENES).map(seenFlag)]) {
     if (state.flags[key] !== saved.flags[key]) fails.push(`FAIL ${tag} Continue: flag ${key} changed`);
   }
-  for (const key of ['bag', 'youth', 'music', 'cup', 'kuroda', 'printout']) {
+  for (const key of ['bag', 'music', 'cup', 'kuroda', 'printout']) {
     if (state.finds[key] !== saved.world.finds[key]) fails.push(`FAIL ${tag} Continue: prop ${key} changed`);
   }
   await page.screenshot({ path: path.join(out, `${id}-${tag}-continued.png`) });
@@ -268,7 +256,6 @@ for (const [W, H] of sizes) await withBrowserJob('train-finds-check', async (bro
       });
       if (after.heldUp) fails.push(`FAIL ${tag} ${id}: held view stayed up after scene`);
       if (id === 'bun' && after.bag !== 1) fails.push(`FAIL ${tag} bun: bag is not shut`);
-      if (id === 'youth' && after.youth !== 'away') fails.push(`FAIL ${tag} youth: phone ${after.youth}`);
       if (id === 'music' && (after.music !== 'lap' || after.cup !== 'on')) fails.push(`FAIL ${tag} music: ${after.music} ${after.cup}`);
       if (id === 'kuroda' && after.kuroda !== 'off') fails.push(`FAIL ${tag} kuroda: phone ${after.kuroda}`);
       if (id === 'reader' && after.printout !== 'away') fails.push(`FAIL ${tag} reader: printout ${after.printout}`);
@@ -284,9 +271,7 @@ for (const [W, H] of sizes) await withBrowserJob('train-finds-check', async (bro
         await usePassenger(page, id);
         if (await waitForBeat(page) !== 'done') throw new Error(`${id} repeated a dialogue line`);
         const repeat = await page.evaluate(() => ({ lines: globalThis.__findChecks.lines, voices: globalThis.__voiceLog.plays, emotes: globalThis.__findChecks.emotes, gestures: globalThis.__findChecks.gestures }));
-        const quietResponse = id === 'youth'
-          ? repeat.gestures.slice(beforeRepeat.gestures).some((s) => s.who === id && s.kind === 'nod' && s.to === 'eric')
-          : repeat.emotes.slice(beforeRepeat.emotes).some((s) => s.who === id);
+        const quietResponse = repeat.emotes.slice(beforeRepeat.emotes).some((s) => s.who === id);
         if (repeat.lines !== beforeRepeat.lines || repeat.voices !== beforeRepeat.voices || !quietResponse)
           fails.push(`FAIL ${tag} ${id}: repeat must respond quietly without new dialogue or voice`);
       }

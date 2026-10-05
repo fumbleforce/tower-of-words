@@ -145,7 +145,7 @@ export async function trainPlace(game) {
   // Meshy models in passengers' seats (cast3d.js): Aoi (no phone: no props on models), Hamada asleep
   list[1] = inSeat('aoi', list[1]);
   list[0] = inSeat('kuroda', list[0], dozing);
-  const [kuroda, aoi, reader, music, stander, bun, youth] = list;
+  const [kuroda, aoi, reader, music, stander, bun] = list;
   const blobs = {};
   for (const p of list) {
     car.root.add(p.root);
@@ -804,7 +804,6 @@ export async function trainPlace(game) {
     music,
     stander,
     bun,
-    youth,
     tama,
     guard: d3.people.guard,
   };
@@ -874,7 +873,7 @@ export async function trainPlace(game) {
       ...at(-2.55, -0.3, -2.55, -1.0),
       enabled: () => kuroda.root.visible && !kuroda._walk,
     },
-    reader: { ...PLACE_DETAILS.train.things.reader, anchor: rigAnchor(reader), ...at(1.05, -0.3, 1.05, -1.0) },
+    reader: { ...PLACE_DETAILS.train.things.reader, anchor: rigAnchor(reader), ...at(2.55, 0.35, 2.55, 1.0) },
     music: { ...PLACE_DETAILS.train.things.music, anchor: rigAnchor(music), ...at(0.75, 0.35, 0.75, 1.0) },
     rei: {
       ...PLACE_DETAILS.train.things.rei,
@@ -889,7 +888,6 @@ export async function trainPlace(game) {
       noMarker: true,
     },
     bun: { ...PLACE_DETAILS.train.things.bun, anchor: rigAnchor(bun), ...at(-2.5, 0.35, -2.5, 1.0) },
-    youth: { ...PLACE_DETAILS.train.things.youth, anchor: rigAnchor(youth), ...at(2.55, 0.35, 2.55, 1.0) },
     tama: {
       ...PLACE_DETAILS.train.things.tama,
       anchor: carPt(-0.85, 0.5, -(LZ - 0.24)),

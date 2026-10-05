@@ -4,7 +4,7 @@ Eric's arrival on the island. He finds a seat next to a woman with a laptop, who
 
 ## Cast
 
-`eric`, `mio`, `aoi`, `bun`, `youth`, `music`, `stander`, `ann`, `tama`, `kuroda`
+`eric`, `mio`, `aoi`, `bun`, `music`, `stander`, `ann`, `tama`, `kuroda`
 
 ## Beats
 
@@ -52,6 +52,6 @@ Eric's arrival on the island. He finds a seat next to a woman with a laptop, who
 
 | File | Nodes |
 |---|---|
-| `train.js` | `intro`, `ambient:mio_wifi`, `first_aoi`, `first_bun`, `first_youth`, `first_music`, `first_stander`, `nod_seat`, `seat`, `mio_catches`, `caught`, `dropped`, `sit`, `its_eric`, `family`, `leave_it`, `chat1_end`, `lesson`, `jp_one`, `jp_none`, `lesson2`, `cat_nudge`, `ohayo_mio_again`, `ohayo_cat`, `lesson3`, `mio_doors_nudge`, `approach`, `arrival` |
+| `train.js` | `intro`, `ambient:mio_wifi`, `first_aoi`, `first_bun`, `first_music`, `first_stander`, `nod_seat`, `seat`, `mio_catches`, `caught`, `dropped`, `sit`, `its_eric`, `family`, `leave_it`, `chat1_end`, `lesson`, `jp_one`, `jp_none`, `lesson2`, `cat_nudge`, `ohayo_mio_again`, `ohayo_cat`, `lesson3`, `mio_doors_nudge`, `approach`, `arrival` |
 
 `first_stander` has no trigger: the man with a bag can't be talked to, so it never plays.

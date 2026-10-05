@@ -4,7 +4,6 @@
 // the camera frames; phone: across the top), clear of the dialogue and the portraits, and never takes a tap (the line
 // underneath still moves on).
 //   showHeld(id, items)   items: [{ canvas, frame: 'phone' | 'sheet', tilt (degrees) }]; replaces what was shown
-//   ringHeld(id, [x, y])  a soft ring on the first item at x, y (0..1 of its picture), e.g. a finger on the photo
 //   hideHeld(id)          takes it away (only if `id` is what's shown; no id: whatever is shown)
 import { el } from './dom.js';
 
@@ -40,17 +39,6 @@ export function showHeld(id, items) {
   void b.offsetWidth;
   b.classList.add('in');
   shown = id;
-}
-
-export function ringHeld(id, at) {
-  if (!box || shown !== id) return;
-  box.querySelector('.ring')?.remove();
-  if (!at) return;
-  const scr = box.querySelector('.scr');
-  const r = el('i', 'ring');
-  r.style.left = `${at[0] * 100}%`;
-  r.style.top = `${at[1] * 100}%`;
-  scr?.appendChild(r);
 }
 
 export function hideHeld(id) {

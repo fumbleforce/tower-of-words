@@ -28,10 +28,6 @@ export const TRAIN_DETAILS = {
       'label': 'Woman with a bun',
       'kind': 'person small',
     },
-    'youth': {
-      'label': 'Young man',
-      'kind': 'person small',
-    },
     'tama': {
       'label': 'Cat',
       'verb': 'Pet',
@@ -111,7 +107,7 @@ export const TRAIN_DETAILS = {
   ],
   'seats': ['seat_aoi', 'seat_far_r', 'seat_near_l', 'seat_near_r', 'seat_mio'],
   'zones': ['door_zone', 'free_seat', 'platform_exit'],
-  'people': ['kuroda', 'aoi', 'reader', 'rei', 'music', 'stander', 'bun', 'youth', 'tama', 'guard'],
+  'people': ['kuroda', 'aoi', 'reader', 'rei', 'music', 'stander', 'bun', 'tama', 'guard'],
   'hooks': [
     'announce',
     'arrive',

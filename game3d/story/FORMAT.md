@@ -156,7 +156,6 @@ Events: `start`, `approach` (the train starts slowing, when the story runs `{ do
 - `cup` `state: 'tip'|'safe'`: the coffee on the seat beside Mio.
 
 The passengers' own props. Each returns once its motion is done, and saves (Continue puts them back); what's held up also shows large on screen (the held view) until its `away`/`tap`. Put a `cam` on the person first on the near bench: they sit with their backs to the camera.
-- `phone` `who: 'youth'`, `state: 'show'|'point'|'away'`: he turns to Eric and holds out his phone; the held view shows the photo of his first goal (him arms up in his team's kit, the scoreboard reading 1 - 6). `point`: his other hand on the screen and a ring round him in the photo. `away` puts it back.
 - `phone` `who: 'music'`, `state: 'show'|'away'`: she turns her own phone to Eric; the held view plays the video of her practising the guitar, with its sound (about 6.6 s, then it stops on a play mark). `away` stops it.
 - `phone` `who: 'kuroda'`, `state: 'buzz'|'tap'`: buzz: his phone on the seat beside him lights up and buzzes with the 12F 9:00 reminder (held view: his lock screen); it keeps buzzing until `tap`, and the hook returns after about 2 s. tap: eyes shut, his hand taps it silent, the screen goes dark and the held view goes.
 - `headphones` `who: 'music'`, `state: 'lift'|'on'`: she lifts the cup on Eric's side and her guitar practice leaks out (returns after a few notes, about 2 s; muted, sooner); `on` puts it back and the sound stops.
@@ -213,7 +212,7 @@ The speaker's portrait shows beside the text box ([docs/game/controls-and-ui.md]
 
 ## Subtitled Japanese
 
-`{ say: 'youth', text: '負けたけど、初めてゴール決めたんだ。', en: 'We lost, but I scored my first goal.' }`. For the moments the player should follow although Eric can't. The text is the Japanese (the voice clip is made from it, found by speaker and text like any line; not muffled); the screen shows the English, marked "in Japanese" by the name. The Japanese isn't shown and teaches nothing. Only the long form supports `en`; ambient lines take it too.
+`{ say: 'music', text: '自分で録ったの。まだ下手だけど。', en: 'I recorded it myself. I’m still pretty bad, though.' }`. For the moments the player should follow although Eric can't. The text is the Japanese (the voice clip is made from it, found by speaker and text like any line; not muffled); the screen shows the English, marked "in Japanese" by the name. The Japanese isn't shown and teaches nothing. Only the long form supports `en`; ambient lines take it too.
 
 ## Overheard Japanese
 

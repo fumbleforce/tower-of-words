@@ -30,7 +30,7 @@ const SHOTS = [
     [`top-${b}`, 'place=plaza&nocrowd', 'variants:' + b, 'top'],
   ]),
   ['train-view', 'place=train', 'view', 'game'],
-  ['train-passengers', 'place=train', 'people:reader,music,bun,youth', 'front'],
+  ['train-passengers', 'place=train', 'people:reader,music,bun', 'front'],
   ['train-music', 'place=train', 'people:music', 'front'],
   ['train-reader', 'place=train', 'people:reader', 'front'],
   ['train-bun', 'place=train', 'people:bun', 'back'],
