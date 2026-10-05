@@ -207,6 +207,12 @@ class Handler(SimpleHTTPRequestHandler):
                 return self._json(200, {'items': None, 'stale': [], 'repo': work.REPO_URL, 'error': str(e)[:300]})
         if path == '/game3d/build.json' or path.endswith('/game3d/build.json'):
             stamp_build(path)
+        if path == '/api/plugins':
+            # the local plugin names, so the game asks only for files that exist (no 404 per place)
+            folder = os.path.join(ROOT, 'island', 'private', 'plugins')
+            if not os.path.isdir(folder):
+                return self._json(404, {'error': 'no plugins'})
+            return self._json(200, sorted(f[:-3] for f in os.listdir(folder) if f.endswith('.js')))
         return super().do_GET()
 
     def _feedback(self):
@@ -260,8 +266,9 @@ class Handler(SimpleHTTPRequestHandler):
         return self._json(200, {'ok': True, 'sent': sent})
 
     def end_headers(self):
-        # feedback and review files change while the page is open
-        if '/reviews/' in self.path or '/showcase/' in self.path:
+        # Everything here changes while the page is open (reviews, game modules, local plugins), and without this
+        # header the browser caches by heuristic and can keep running an old module after a reload.
+        if not any(h.lower().startswith(b'cache-control:') for h in getattr(self, '_headers_buffer', [])):
             self.send_header('Cache-Control', 'no-cache')
         super().end_headers()
 
