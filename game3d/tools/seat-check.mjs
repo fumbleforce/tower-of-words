@@ -2,7 +2,8 @@
 // she clipped into the table").
 //   node game3d/tools/seat-check.mjs [w] [h]          (BASE=<path to game3d> for a worktree, SHOTS=0 for no stills,
 //   ONLY=train,gate for some scenes, QS=&mc=carina adds to the page query: another protagonist's body as Eric)
-// For each place where people sit (B2 on day 1 and day 2, the train, the gate's bench, the day-2 party bench), it
+// For each place where people sit (B2 on day 1 and day 2, the train, the gate's bench, the day-2 party bench, day 3's
+// pool benches, common-room sofa and gym benches), it
 // measures:
 //  - everyone the place seats itself (as placed), and
 //  - every 3D-model body there (Eric, Mio and the Meshy cast) put on every seat of that place (the seats the story
@@ -34,6 +35,10 @@ const SCENES = [
   { name: 'train', q: 'place=train' },
   { name: 'gate', q: 'place=gate' },
   { name: 'party-day2', q: 'day=2&place=shotengai', party: true },
+  // day 3: the pool deck's benches (the swimming club), the common room's sofa (Kenji's evening), the gym's benches
+  { name: 'pool-day3', q: 'day=3&place=pool' },
+  { name: 'commons-day3', q: 'day=3&place=dorm_commons' },
+  { name: 'gym-day3', q: 'day=3&place=gym' },
 ];
 const fails = [],
   notes = [];
@@ -45,6 +50,7 @@ const MINE = {
   my_seat: 'eric', mio_seat: 'mio', emi_seat: 'emi', emi_guest: 'eric', lunch_eric: 'eric', lunch_mio: 'mio',
   seat_aoi: 'eric', seat_far_r: ['eric', 'mio'], seat_near_l: 'eric', seat_near_r: 'eric', seat_mio: 'mio',
   party_seat: 'eric', party_mori: 'mori', bench_r: 'eric',
+  deck_bench_s: ['eric', 'emi'], deck_bench_n: 'eric', commons_sofa: ['eric', 'kenji'], gym_bench_n: 'eric', gym_bench_s: ['eric', 'kuro'],
 };
 
 // ---- in the page ----
