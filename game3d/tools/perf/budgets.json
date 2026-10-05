@@ -159,6 +159,24 @@
           "p99Ms": 16.8,
           "build": "1005-0944-9e08117a"
         }
+      },
+      "karaoke": {
+        "calls": 26,
+        "tris": 9871,
+        "gpu": {
+          "medianMs": 16.7,
+          "p99Ms": 16.8,
+          "build": "1005-1103-014bdc68"
+        }
+      },
+      "karaoke_booth": {
+        "calls": 24,
+        "tris": 8915,
+        "gpu": {
+          "medianMs": 16.7,
+          "p99Ms": 16.8,
+          "build": "1005-1103-014bdc68"
+        }
       }
     }
   },
@@ -321,6 +339,24 @@
           "p99Ms": 16.8,
           "build": "1005-0944-9e08117a"
         }
+      },
+      "karaoke": {
+        "calls": 22,
+        "tris": 9823,
+        "gpu": {
+          "medianMs": 16.7,
+          "p99Ms": 16.8,
+          "build": "1005-1103-014bdc68"
+        }
+      },
+      "karaoke_booth": {
+        "calls": 22,
+        "tris": 8915,
+        "gpu": {
+          "medianMs": 16.7,
+          "p99Ms": 16.8,
+          "build": "1005-1103-014bdc68"
+        }
       }
     }
   },
@@ -482,6 +518,24 @@
           "medianMs": 16.7,
           "p99Ms": 16.8,
           "build": "1005-0944-9e08117a"
+        }
+      },
+      "karaoke": {
+        "calls": 29,
+        "tris": 9830,
+        "gpu": {
+          "medianMs": 16.7,
+          "p99Ms": 16.8,
+          "build": "1005-1103-014bdc68"
+        }
+      },
+      "karaoke_booth": {
+        "calls": 29,
+        "tris": 8922,
+        "gpu": {
+          "medianMs": 16.7,
+          "p99Ms": 16.8,
+          "build": "1005-1103-014bdc68"
         }
       }
     }
