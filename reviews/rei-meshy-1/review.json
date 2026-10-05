@@ -1,0 +1,78 @@
+{
+ "title": "Rei: a 3D model made the way Kuro, Aoi and Emi were",
+ "date": "2026-10-05",
+ "by": "Claude (staff-meshy agent)",
+ "status": "open",
+ "question": "The first two sheets are ChatGPT pictures; every sheet after them is a render of the real rigged model, which you can turn in the live viewer next to Eric, Mio, Kuro, Aoi and Emi (link below). Her rig came out twisted, so she is not in the game. Shall I redo her with one more take of the angle step, asking nothing new but picking a take where the ponytail hangs behind her back, then the same Meshy steps (about 23 credits)?",
+ "multi": false,
+ "media": [
+  {
+   "image": "art/parts/rei-meshy-1/sheets/step0-inputs.webp",
+   "caption": "ChatGPT pictures. Your words: \"can you also kick off the remaining staff and background characters in the new style\". One chat in ChatGPT's image model (openai/gpt-5.4-image-2 on OpenRouter), as for Kuro, Aoi and Emi. Step 1 attached these two: the approved portrait and your Mio chibi."
+  },
+  {
+   "image": "art/parts/rei-meshy-1/sheets/steps.webp",
+   "caption": "ChatGPT pictures. Every take, in order, with your words as written: 1 \"make a 3d chibi anime character in the style of the attached image\" (a1 with black trousers, a2 in the light grey trouser suit of her portrait, so a2 went on), 2 \"Simplify female character a LOT to match the detail level of the other chibi, with open eyes\" (b1), 3 \"Simpler head model, no earrings\" (c1: the gold hoops gone), then your angle prompt (d1). Head share in d1: 0.39 of her height counting the ponytail (Eric 0.46, Kuro 0.41, Aoi 0.40, Emi 0.43), so no head-size follow-up. Her long ponytail hangs down her left side (image right) to her knees in every take. 5 takes, $1.24."
+  },
+  {
+   "image": "art/parts/rei-meshy-1/sheets/shape-previews.webp",
+   "caption": "Renders of the real model from here on. Meshy image-to-3D from d1 with Kuro's settings: smart topology (meshy-t2), 1,050 polygons, A-pose, no texture, 5 credits. Meshy's previews; first roll, kept. The ponytail is one big slab beside her left arm (image right)."
+  },
+  {
+   "image": "art/parts/rei-meshy-1/sheets/uv.webp",
+   "caption": "The face-first UV unwrap before the texture pass (Aoi's uv_bl.py): the front of the face as one piece at 3 times the detail of the rest (24 polygons, red; the biggest front-facing pieces were her fringe, so the face is piece=1). Then Meshy retexture on that mesh, styled from d1, keep the UVs, lighting removed, no PBR, 10 credits. Right: the texture Meshy painted."
+  },
+  {
+   "image": "art/parts/rei-meshy-1/sheets/tex.webp",
+   "caption": "The textured model: front, three-quarter (the left side of the image turned to us), side, back, the other three-quarter, face. Same camera and light as Kuro's, Aoi's and Emi's rounds."
+  },
+  {
+   "image": "art/parts/rei-meshy-1/sheets/faces.webp",
+   "caption": "From below the chin in the texture's own colours."
+  },
+  {
+   "image": "art/parts/rei-meshy-1/sheets/rig-fault.webp",
+   "caption": "The problem: Meshy's auto-rig put her skeleton in the wrong place. Her spine sits behind her body and her shoulders are twisted about 50 degrees (her left shoulder 0.2 m behind her right), so in the idle and walk her head and upper body bend and turn away. A second auto-rig on the same model (5 credits) placed the bones the same way. Most likely the ponytail slab: it hangs beside her left arm and the rig reads it as part of her body."
+  },
+  {
+   "image": "art/parts/rei-meshy-1/sheets/measure.webp",
+   "caption": "Head share on the models (straight-on, flat colour, rest pose, each figure at the same height): Eric 0.46, Kuro 0.41, Aoi 0.40, Emi 0.43, Rei 0.47 counting the top of her ponytail (0.39 in the picture). Hands not checked further because of the rig."
+  },
+  {
+   "image": "art/parts/rei-meshy-1/sheets/compare.webp",
+   "caption": "Rei beside the in-game Eric and Mio and Kuro (the same render script and camera), front and three-quarter."
+  },
+  {
+   "image": "art/parts/rei-meshy-1/sheets/viewer.webp",
+   "caption": "Meshy auto-rig at 1.1 m, twice (5 credits each), and Meshy's Chair_Sit_Idle_F, 3 credits. Stills from the live viewer (rest, idle, walk, walk from the side); the idle and walk are the game's. Meshy credits for Rei: 28 (shape 5, texture 10, rig 5, second rig 5, sit 3); balance 251 after her."
+  }
+ ],
+ "options": [
+  {
+   "id": "rei-1",
+   "label": "rei-1",
+   "image": "art/parts/rei-meshy-1/renders/tex/r45.png",
+   "images": [
+    "art/parts/rei-meshy-1/renders/tex/front.png",
+    "art/parts/rei-meshy-1/renders/tex/face.png",
+    "art/parts/rei-meshy-1/renders/tex/back.png",
+    "art/parts/rei-meshy-1/pics/d1.png"
+   ],
+   "note": "The model from d1 (chat a2, b1, c1, d1): smart topology, 1,050 polygons, our UV layout with the face in one piece, Meshy retexture styled from d1, auto-rig at 1.1 m. Her rig is twisted, so she is NOT in the game; the code-built Rei stays (she is hidden all day anyway). 28 Meshy credits; five pictures $1.24."
+  }
+ ],
+ "links": [
+  {
+   "label": "Live 3D: Rei beside the in-game Eric, Mio, Kuro, Aoi and Emi (turn, zoom, idle, walk)",
+   "href": "tools/characters/parts/viewer.html?cfg=/reviews/rei-meshy-1/viewer.json&a=rei-1&m=idle&c=Eric%2C%20Mio%2C%20Kuro%2C%20Aoi%20and%20Emi"
+  },
+  {
+   "label": "Aoi round 2, the same process (aoi-meshy-1)",
+   "href": "bible/#review/aoi-meshy-1"
+  },
+  {
+   "label": "Kuro round 3, the approved process (kuro-meshy-orig-3)",
+   "href": "bible/#review/kuro-meshy-orig-3"
+  }
+ ]
+}
