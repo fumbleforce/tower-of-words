@@ -117,6 +117,7 @@ export async function eastCoastPlace(game) {
       lookout_view: visit.spots.lookout_view,
       inner_court: w.inner.square,
       inner_court_bench: w.inner.bench,
+      terrace_bench: w.terraceBench,
     },
     seats: {},
     people: { kuroda: visit.people.kuroda, emi: d3.people.emi, aoi: d3.people.aoi },

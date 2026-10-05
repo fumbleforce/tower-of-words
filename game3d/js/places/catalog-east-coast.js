@@ -11,7 +11,15 @@ export const EAST_COAST_DETAILS = {
     onsen: { label: 'Onsen', kind: 'thing', verb: 'Go in' },
     commons: { label: 'Common room', kind: 'thing', verb: 'Go in' },
   },
-  spots: ['row_entry', 'east_coast_lookout', 'east_coast_shrine', 'lookout_view', 'inner_court', 'inner_court_bench'],
+  spots: [
+    'row_entry',
+    'east_coast_lookout',
+    'east_coast_shrine',
+    'lookout_view',
+    'inner_court',
+    'inner_court_bench',
+    'terrace_bench',
+  ],
   nooks: ['east_coast_lookout', 'east_coast_shrine'], // docs/game/places.md, "Nooks"
   seats: [],
   zones: ['row_exit', 'courts_exit'],

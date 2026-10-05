@@ -185,7 +185,7 @@ Planned passenger revisions, awaiting [train-discoveries-1](../../reviews/train-
 
 ## Honsha station security room (`gate`)
 
-Honsha station's security room, in the muted palette ([art-and-sound.md](art-and-sound.md)). About 12.6 wide and 9 deep, glass entrance doors at the front. A security barrier runs across the middle with two card readers either side of a scanner arch with two glass flaps and a small head-count screen. The guard's desk sits in the barrier line on the right; the unstaffed visitor counter with the visitor book and a lost-and-found shelf on the left; benches either side; posters on the back wall, beside the open exit to the forecourt, with a yellow 出口 EXIT sign over it. At the west end of the back wall, eight coin lockers stand below the notice display on its two supports. Between the lockers and the exit, a pair of ticket machines stands in a steel surround with the lit fare map over them. A yellow tactile guide line runs from the entrance through the gate to the exit, and a yellow ↑ 出口 EXIT arrow is painted on the floor past the gate. Office workers walk in, tap through and leave toward head office on their own (not tappable); their number follows the story (a jammed gate means a queue, waiting by the readers with their phones out). One of them carries a cake box.
+Honsha station's security room, in the muted palette ([art-and-sound.md](art-and-sound.md)). About 12.6 wide and 9 deep, glass entrance doors at the front. A security barrier runs across the middle with two card readers either side of a scanner arch with two glass flaps and a small head-count screen. The guard's desk sits in the barrier line on the right; the unstaffed visitor counter with the visitor book and a lost-and-found shelf on the left; benches either side; posters on the back wall, beside the open exit to the forecourt, with a yellow 出口 EXIT sign over it. At the west end of the back wall, eight coin lockers stand below the notice display on its two supports. On the guard's side of the back wall, behind his desk, a closed staff door has a 階段 STAIRS plate over it. Between the lockers and the exit, a pair of ticket machines stands in a steel surround with the lit fare map over them. A yellow tactile guide line runs from the entrance through the gate to the exit, and a yellow ↑ 出口 EXIT arrow is painted on the floor past the gate. Office workers walk in, tap through and leave toward head office on their own (not tappable); their number follows the story (a jammed gate means a queue, waiting by the readers with their phones out). One of them carries a cake box.
 
 The gate stays in this room, as Jørgen picked in [gate-location](../../reviews/gate-location/review.json). Its mechanism and layout stay as built. The former lift bank is now an open exit to the forecourt; the lift is inside the separate head office. The internal `lift`, `lift_front` and `to_lift` ids remain for saved-game compatibility.
 
@@ -216,7 +216,7 @@ The gate stays in this room, as Jørgen picked in [gate-location](../../reviews/
 
 ### Spots
 
-`entrance_in`, `bench_l`, `bench_r`, `before_gate`, `after_gate`, `lift_front`, `counter_front`, `desk_front`, `outside`
+`entrance_in`, `bench_l`, `bench_r`, `before_gate`, `after_gate`, `lift_front`, `counter_front`, `desk_front`, `outside`, `gate_lockers` (in front of the coin lockers), `gate_staff_door` (in front of the staff door)
 
 ### Seats
 
@@ -753,7 +753,7 @@ In the morning the sun is the plaza's; after work the lamps, the stone lanterns,
 
 ### Spots
 
-`row_entry` (on the dorm row, the terrace ahead); `inner_court` (on the inner court's square, by the maple's bed), `inner_court_bench` (in front of the square's bench facing the common room); `lookout_view` (the shoreline below the lookout, where the view through the telescope is framed from above); and each nook below
+`row_entry` (on the dorm row, the terrace ahead); `inner_court` (on the inner court's square, by the maple's bed), `inner_court_bench` (in front of the square's bench facing the common room); `terrace_bench` (just behind the sea terrace's east bench, which looks south over the low wall to the sea); `lookout_view` (the shoreline below the lookout, where the view through the telescope is framed from above); and each nook below
 
 ### Nooks
 

@@ -110,6 +110,8 @@ export const PLACE_DETAILS = {
       'counter_front',
       'desk_front',
       'outside',
+      'gate_lockers',
+      'gate_staff_door',
     ],
     'seats': ['bench_r', 'bench_l'],
     'zones': ['arch', 'past_gate', 'lift_front', 'platform_way', 'forecourt_way'],

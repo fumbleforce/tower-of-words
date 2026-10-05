@@ -303,3 +303,34 @@ test('quick save keeps the game, progress after it counts as unsaved, and quick 
     assert.equal(flags.after_quick, undefined);
   } finally { globalThis.setTimeout = originalTimeout; location.reload = originalReload; delete globalThis.requestAnimationFrame; }
 });
+
+test('period flags: only the current period is true, through period changes, a load and a new day', async () => {
+  const { nextDaySave } = await import('../../js/days.js');
+  const on = () => S.PERIODS.filter(p => flags['period_' + p]);
+  assert.deepEqual(on(), ['early']);
+  for (const p of ['morning', 'lunch', 'afternoon', 'evening']) {
+    S.setPeriod(p, game);
+    assert.deepEqual(on(), [p]);
+    assert.equal(flags.period, p);
+  }
+  assert.equal(flags.period_lunch, false);
+  S.save(game);
+  const next = nextDaySave(S.loadSave());
+  assert.equal(next.flags.period_evening, true); // the last day's evening rides in the save...
+  S.restore(game, next);
+  assert.deepEqual(on(), ['morning']); // ...and the new day's start clears it
+});
+
+test('bond2_<id> is set when a person reaches step 2 and stays set', () => {
+  S.meet(game, 'mio');
+  S.bond(game, 'mio', 3, { source: 'scene', key: 'a' });
+  assert.equal(flags.bond2_mio, undefined);
+  S.bonds.setDay(2);
+  S.bond(game, 'mio', 3, { source: 'scene', key: 'b' });
+  assert.equal(S.bonds.step('mio'), 2);
+  assert.equal(flags.bond2_mio, true);
+  S.save(game);
+  for (const key of Object.keys(flags)) delete flags[key];
+  S.restore(game, S.loadSave());
+  assert.equal(flags.bond2_mio, true);
+});

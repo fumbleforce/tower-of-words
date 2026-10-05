@@ -474,7 +474,9 @@
         "lift_front",
         "counter_front",
         "desk_front",
-        "outside"
+        "outside",
+        "gate_lockers",
+        "gate_staff_door"
       ],
       "seats": [
         "bench_r",
@@ -906,7 +908,8 @@
         "east_coast_shrine",
         "lookout_view",
         "inner_court",
-        "inner_court_bench"
+        "inner_court_bench",
+        "terrace_bench"
       ],
       "nooks": [
         "east_coast_lookout",
