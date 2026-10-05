@@ -1,0 +1,15 @@
+ok carina-5 carina5-01-bob-behind-ear-a3 24 s
+ok carina-5 carina5-02-blunt-lob-a3 24 s
+ok carina-5 carina5-03-layered-ashgold-a3 24 s
+ok carina-5 carina5-04-soft-waves-a3 24 s
+FRAME WARN carina5-04-soft-waves-a3.png head/hair 17px from the top edge (want >= 34)
+ok carina-5 carina5-05-long-bob-framing-a3 24 s
+ok carina-5 carina5-06-low-pony-glasses-a3 24 s
+ok carina-5 carina5-07-stripes-bob-a3 24 s
+ok carina-5 carina5-08-stripes-layered-a3 24 s
+ok carina-5 carina5-09-stripes-lob-glasses-a3 24 s
+ok carina-5 carina5-10-free-swept-a3 24 s
+FRAME WARN carina5-10-free-swept-a3.png head/hair 32px from the top edge (want >= 34)
+ok carina-5 carina5-11-free-fringe-a3 24 s
+FRAME WARN carina5-11-free-fringe-a3.png head/hair 27px from the top edge (want >= 34)
+ok carina-5 carina5-12-free-glasses-a3 24 s

@@ -1,0 +1,1301 @@
+{
+ "character": "eric",
+ "ref": "game3d/assets/portraits/eric-neutral.webp",
+ "face_box_game": null,
+ "ref_face_detected": [
+  117.0,
+  172.0,
+  341.0,
+  395.0
+ ],
+ "thresholds": {
+  "redrim": [
+   0.02,
+   0.08
+  ],
+  "glasses_cover": [
+   0.87,
+   0.85
+  ],
+  "glasses_worst": [
+   0.7,
+   0.5
+  ],
+  "glasses_dE": [
+   8,
+   15
+  ],
+  "matte_frame": [
+   0.05,
+   0.12
+  ],
+  "matte_holes": [
+   0,
+   3
+  ],
+  "headroom": [
+   0.03,
+   0.01
+  ],
+  "zoom": [
+   0.04,
+   9
+  ],
+  "top": [
+   0.01,
+   9
+  ],
+  "eyes": [
+   0.06,
+   0.12
+  ],
+  "ccip": [
+   0.05,
+   0.09
+  ]
+ },
+ "images": [
+  {
+   "path": "art/candidates/portraits/carina-5/carina5-01-bob-behind-ear-a2-r-final.webp",
+   "kind": "render",
+   "size": [
+    896,
+    1152
+   ],
+   "face": [
+    346.0,
+    375.0,
+    649.0,
+    693.0
+   ],
+   "eyes": [
+    [
+     466.5,
+     475.0
+    ],
+    [
+     587.5,
+     514.0
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0036
+   },
+   "glasses": {
+    "status": "fail",
+    "cover": 0.53,
+    "worst": 0.008,
+    "worst_part": "her right lens bottom",
+    "dE": 19.1,
+    "parts": {
+     "her right lens top": 0.679,
+     "her right lens bottom": 0.008,
+     "her right lens outer": 0.385,
+     "her right lens inner": 0.248,
+     "her left lens top": 0.133,
+     "her left lens bottom": 0.117,
+     "her left lens outer": 1.0,
+     "her left lens inner": 0.448
+    },
+    "flipped": false
+   },
+   "framing": {
+    "headroom": 0.204,
+    "zoom": 1.052,
+    "top": 0.0,
+    "bottom_short": 0.067,
+    "hair_top_game": 73,
+    "hair_top_ref": 51,
+    "crop": [
+     170.9,
+     129.7,
+     1095.0,
+     1224.9
+    ],
+    "eyes": 0.075,
+    "tilt": 32.3,
+    "status": "warn"
+   },
+   "drift": {
+    "status": "fail",
+    "ccip": 0.191,
+    "ssim": 0.138
+   },
+   "status": "fail"
+  },
+  {
+   "path": "art/candidates/portraits/carina-5/carina5-01-bob-behind-ear-s2-final.webp",
+   "kind": "render",
+   "size": [
+    896,
+    1152
+   ],
+   "face": [
+    235.0,
+    269.0,
+    595.0,
+    641.0
+   ],
+   "eyes": [
+    [
+     311.5,
+     424.5
+    ],
+    [
+     458.5,
+     382.0
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0019
+   },
+   "glasses": {
+    "status": "fail",
+    "cover": 0.614,
+    "worst": 0.0,
+    "worst_part": "her left lens bottom",
+    "dE": 21.6,
+    "parts": {
+     "her right lens top": 0.39,
+     "her right lens bottom": 0.202,
+     "her right lens outer": 1.0,
+     "her right lens inner": 0.452,
+     "her left lens top": 0.871,
+     "her left lens bottom": 0.0,
+     "her left lens outer": 0.58,
+     "her left lens inner": 0.357
+    },
+    "flipped": true
+   },
+   "framing": {
+    "headroom": 0.098,
+    "zoom": 0.899,
+    "top": 0.014,
+    "bottom_short": 0.087,
+    "hair_top_game": 78,
+    "hair_top_ref": 51,
+    "crop": [
+     33.0,
+     -17.9,
+     1114.0,
+     1263.2
+    ],
+    "eyes": 0.06,
+    "tilt": -1.7,
+    "status": "warn"
+   },
+   "drift": {
+    "status": "fail",
+    "ccip": 0.198,
+    "ssim": 0.176
+   },
+   "status": "fail"
+  },
+  {
+   "path": "art/candidates/portraits/carina-5/carina5-01-bob-behind-ear-s3-final.webp",
+   "kind": "render",
+   "size": [
+    896,
+    1152
+   ],
+   "face": [
+    249.0,
+    218.0,
+    616.0,
+    598.0
+   ],
+   "eyes": [
+    [
+     325.5,
+     389.0
+    ],
+    [
+     480.5,
+     334.0
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0004
+   },
+   "glasses": {
+    "status": "fail",
+    "cover": 0.438,
+    "worst": 0.0,
+    "worst_part": "her right lens top",
+    "dE": 18.9,
+    "parts": {
+     "her right lens top": 0.0,
+     "her right lens bottom": 0.437,
+     "her right lens outer": 0.529,
+     "her right lens inner": 0.371,
+     "her left lens top": 0.713,
+     "her left lens bottom": 0.024,
+     "her left lens outer": 0.682,
+     "her left lens inner": 0.315
+    },
+    "flipped": true
+   },
+   "framing": {
+    "headroom": 0.034,
+    "zoom": 0.88,
+    "top": 0.057,
+    "bottom_short": 0.062,
+    "hair_top_game": 66,
+    "hair_top_ref": 51,
+    "crop": [
+     42.3,
+     -75.1,
+     1146.5,
+     1233.6
+    ],
+    "eyes": 0.077,
+    "tilt": -5.1,
+    "status": "warn"
+   },
+   "drift": {
+    "status": "fail",
+    "ccip": 0.2,
+    "ssim": 0.179
+   },
+   "status": "fail"
+  },
+  {
+   "path": "art/candidates/portraits/carina-5/carina5-02-blunt-lob-a2-r-final.webp",
+   "kind": "render",
+   "size": [
+    896,
+    1152
+   ],
+   "face": [
+    264.0,
+    425.0,
+    567.0,
+    742.0
+   ],
+   "eyes": [
+    [
+     328.5,
+     569.0
+    ],
+    [
+     440.5,
+     517.0
+    ]
+   ],
+   "redrim": {
+    "status": "warn",
+    "value": 0.0234
+   },
+   "glasses": {
+    "status": "fail",
+    "cover": 0.491,
+    "worst": 0.016,
+    "worst_part": "her left lens bottom",
+    "dE": 18.4,
+    "parts": {
+     "her right lens top": 0.057,
+     "her right lens bottom": 0.038,
+     "her right lens outer": 0.951,
+     "her right lens inner": 0.415,
+     "her left lens top": 0.565,
+     "her left lens bottom": 0.016,
+     "her left lens outer": 0.245,
+     "her left lens inner": 0.462
+    },
+    "flipped": true
+   },
+   "framing": {
+    "headroom": 0.269,
+    "zoom": 1.055,
+    "top": 0.0,
+    "bottom_short": 0.11,
+    "hair_top_game": 91,
+    "hair_top_ref": 51,
+    "crop": [
+     90.0,
+     180.5,
+     1011.1,
+     1272.2
+    ],
+    "eyes": 0.072,
+    "tilt": -10.4,
+    "status": "warn"
+   },
+   "drift": {
+    "status": "fail",
+    "ccip": 0.205,
+    "ssim": 0.184
+   },
+   "status": "fail"
+  },
+  {
+   "path": "art/candidates/portraits/carina-5/carina5-03-layered-ashgold-a2-r-final.webp",
+   "kind": "render",
+   "size": [
+    896,
+    1152
+   ],
+   "face": [
+    351.0,
+    356.0,
+    639.0,
+    658.0
+   ],
+   "eyes": [
+    [
+     475.0,
+     444.5
+    ],
+    [
+     578.5,
+     496.5
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0002
+   },
+   "glasses": {
+    "status": "fail",
+    "cover": 0.523,
+    "worst": 0.0,
+    "worst_part": "her right lens bottom",
+    "dE": 21.7,
+    "parts": {
+     "her right lens top": 0.77,
+     "her right lens bottom": 0.0,
+     "her right lens outer": 0.192,
+     "her right lens inner": 0.382,
+     "her left lens top": 0.129,
+     "her left lens bottom": 0.061,
+     "her left lens outer": 1.0,
+     "her left lens inner": 0.458
+    },
+    "flipped": false
+   },
+   "framing": {
+    "headroom": 0.209,
+    "zoom": 1.108,
+    "top": 0.0,
+    "bottom_short": 0.011,
+    "hair_top_game": 87,
+    "hair_top_ref": 51,
+    "crop": [
+     184.9,
+     123.1,
+     1062.4,
+     1163.1
+    ],
+    "eyes": 0.079,
+    "tilt": 41.1,
+    "status": "warn"
+   },
+   "drift": {
+    "status": "fail",
+    "ccip": 0.195,
+    "ssim": 0.12
+   },
+   "status": "fail"
+  },
+  {
+   "path": "art/candidates/portraits/carina-5/carina5-04-soft-waves-a2-r-final.webp",
+   "kind": "render",
+   "size": [
+    896,
+    1172
+   ],
+   "face": [
+    219.0,
+    195.0,
+    599.0,
+    619.0
+   ],
+   "eyes": [
+    [
+     296.0,
+     363.0
+    ],
+    [
+     458.5,
+     342.5
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0009
+   },
+   "glasses": {
+    "status": "fail",
+    "cover": 0.538,
+    "worst": 0.206,
+    "worst_part": "her left lens inner",
+    "dE": 17.4,
+    "parts": {
+     "her right lens top": 0.405,
+     "her right lens bottom": 0.221,
+     "her right lens outer": 1.0,
+     "her right lens inner": 0.331,
+     "her left lens top": 0.263,
+     "her left lens bottom": 0.452,
+     "her left lens outer": 0.441,
+     "her left lens inner": 0.206
+    },
+    "flipped": true
+   },
+   "framing": {
+    "headroom": 0.034,
+    "zoom": 0.803,
+    "top": 0.09,
+    "bottom_short": 0.107,
+    "hair_top_game": 90,
+    "hair_top_ref": 51,
+    "crop": [
+     -26.4,
+     -132.0,
+     1205.7,
+     1328.2
+    ],
+    "eyes": 0.072,
+    "tilt": 7.3,
+    "status": "warn"
+   },
+   "drift": {
+    "status": "fail",
+    "ccip": 0.261,
+    "ssim": 0.139
+   },
+   "status": "fail"
+  },
+  {
+   "path": "art/candidates/portraits/carina-5/carina5-04-soft-waves-s2-final.webp",
+   "kind": "render",
+   "size": [
+    896,
+    1177
+   ],
+   "face": [
+    240.0,
+    221.0,
+    621.0,
+    632.0
+   ],
+   "eyes": [
+    [
+     316.0,
+     383.5
+    ],
+    [
+     481.0,
+     352.5
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0013
+   },
+   "glasses": {
+    "status": "fail",
+    "cover": 0.491,
+    "worst": 0.0,
+    "worst_part": "her left lens bottom",
+    "dE": 17.0,
+    "parts": {
+     "her right lens top": 0.257,
+     "her right lens bottom": 0.028,
+     "her right lens outer": 0.997,
+     "her right lens inner": 0.294,
+     "her left lens top": 0.675,
+     "her left lens bottom": 0.0,
+     "her left lens outer": 0.255,
+     "her left lens inner": 0.206
+    },
+    "flipped": true
+   },
+   "framing": {
+    "headroom": 0.035,
+    "zoom": 0.832,
+    "top": 0.068,
+    "bottom_short": 0.101,
+    "hair_top_game": 74,
+    "hair_top_ref": 51,
+    "crop": [
+     8.4,
+     -96.0,
+     1202.7,
+     1319.5
+    ],
+    "eyes": 0.057,
+    "tilt": 3.8,
+    "status": "warn"
+   },
+   "drift": {
+    "status": "fail",
+    "ccip": 0.231,
+    "ssim": 0.18
+   },
+   "status": "fail"
+  },
+  {
+   "path": "art/candidates/portraits/carina-5/carina5-04-soft-waves-s3-final.webp",
+   "kind": "render",
+   "size": [
+    896,
+    1152
+   ],
+   "face": [
+    225.0,
+    324.0,
+    585.0,
+    705.0
+   ],
+   "eyes": [
+    [
+     304.0,
+     492.0
+    ],
+    [
+     437.5,
+     432.0
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0021
+   },
+   "glasses": {
+    "status": "fail",
+    "cover": 0.518,
+    "worst": 0.105,
+    "worst_part": "her left lens bottom",
+    "dE": 15.8,
+    "parts": {
+     "her right lens top": 0.162,
+     "her right lens bottom": 0.192,
+     "her right lens outer": 0.992,
+     "her right lens inner": 0.291,
+     "her left lens top": 0.579,
+     "her left lens bottom": 0.105,
+     "her left lens outer": 0.353,
+     "her left lens inner": 0.336
+    },
+    "flipped": true
+   },
+   "framing": {
+    "headroom": 0.153,
+    "zoom": 0.878,
+    "top": 0.0,
+    "bottom_short": 0.145,
+    "hair_top_game": 85,
+    "hair_top_ref": 51,
+    "crop": [
+     13.7,
+     30.1,
+     1120.9,
+     1342.3
+    ],
+    "eyes": 0.062,
+    "tilt": -9.7,
+    "status": "warn"
+   },
+   "drift": {
+    "status": "fail",
+    "ccip": 0.269,
+    "ssim": 0.2
+   },
+   "status": "fail"
+  },
+  {
+   "path": "art/candidates/portraits/carina-5/carina5-05-long-bob-framing-a2c-r-final.webp",
+   "kind": "render",
+   "size": [
+    896,
+    1152
+   ],
+   "face": [
+    257.0,
+    450.0,
+    584.0,
+    814.0
+   ],
+   "eyes": [
+    [
+     331.0,
+     602.0
+    ],
+    [
+     474.5,
+     582.5
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0129
+   },
+   "glasses": {
+    "status": "fail",
+    "cover": 0.537,
+    "worst": 0.062,
+    "worst_part": "her right lens top",
+    "dE": 17.6,
+    "parts": {
+     "her right lens top": 0.062,
+     "her right lens bottom": 0.127,
+     "her right lens outer": 0.898,
+     "her right lens inner": 0.528,
+     "her left lens top": 0.593,
+     "her left lens bottom": 0.274,
+     "her left lens outer": 0.549,
+     "her left lens inner": 0.311
+    },
+    "flipped": true
+   },
+   "framing": {
+    "headroom": 0.299,
+    "zoom": 0.919,
+    "top": 0.0,
+    "bottom_short": 0.216,
+    "hair_top_game": 107,
+    "hair_top_ref": 51,
+    "crop": [
+     46.7,
+     169.2,
+     1104.4,
+     1422.8
+    ],
+    "eyes": 0.09,
+    "tilt": 6.7,
+    "status": "warn"
+   },
+   "drift": {
+    "status": "fail",
+    "ccip": 0.21,
+    "ssim": 0.149
+   },
+   "status": "fail"
+  },
+  {
+   "path": "art/candidates/portraits/carina-5/carina5-05-long-bob-framing-a2-r-final.webp",
+   "kind": "render",
+   "size": [
+    896,
+    1152
+   ],
+   "face": [
+    254.0,
+    456.0,
+    569.0,
+    806.0
+   ],
+   "eyes": [
+    [
+     330.5,
+     600.5
+    ],
+    [
+     472.5,
+     577.5
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0109
+   },
+   "glasses": {
+    "status": "fail",
+    "cover": 0.492,
+    "worst": 0.281,
+    "worst_part": "her right lens top",
+    "dE": 19.2,
+    "parts": {
+     "her right lens top": 0.281,
+     "her right lens bottom": 0.606,
+     "her right lens outer": 0.52,
+     "her right lens inner": 0.445,
+     "her left lens top": 0.589,
+     "her left lens bottom": 0.621,
+     "her left lens outer": 0.538,
+     "her left lens inner": 0.34
+    },
+    "flipped": true
+   },
+   "framing": {
+    "headroom": 0.298,
+    "zoom": 0.956,
+    "top": 0.0,
+    "bottom_short": 0.199,
+    "hair_top_game": 100,
+    "hair_top_ref": 51,
+    "crop": [
+     52.1,
+     186.0,
+     1069.1,
+     1391.4
+    ],
+    "eyes": 0.08,
+    "tilt": 5.3,
+    "status": "warn"
+   },
+   "drift": {
+    "status": "fail",
+    "ccip": 0.22,
+    "ssim": 0.157
+   },
+   "status": "fail"
+  },
+  {
+   "path": "art/candidates/portraits/carina-5/carina5-06-low-pony-glasses-a2-r-final.webp",
+   "kind": "render",
+   "size": [
+    896,
+    1152
+   ],
+   "face": [
+    282.0,
+    486.0,
+    559.0,
+    763.0
+   ],
+   "eyes": [
+    [
+     342.0,
+     603.0
+    ],
+    [
+     447.0,
+     577.5
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0008
+   },
+   "glasses": {
+    "status": "fail",
+    "cover": 0.589,
+    "worst": 0.065,
+    "worst_part": "her left lens bottom",
+    "dE": 19.0,
+    "parts": {
+     "her right lens top": 0.219,
+     "her right lens bottom": 0.352,
+     "her right lens outer": 0.892,
+     "her right lens inner": 0.465,
+     "her left lens top": 0.77,
+     "her left lens bottom": 0.065,
+     "her left lens outer": 0.441,
+     "her left lens inner": 0.66
+    },
+    "flipped": true
+   },
+   "framing": {
+    "headroom": 0.319,
+    "zoom": 1.208,
+    "top": 0.0,
+    "bottom_short": 0.078,
+    "hair_top_game": 76,
+    "hair_top_ref": 51,
+    "crop": [
+     136.0,
+     272.3,
+     941.0,
+     1226.3
+    ],
+    "eyes": 0.076,
+    "tilt": 0.8,
+    "status": "warn"
+   },
+   "drift": {
+    "status": "fail",
+    "ccip": 0.198,
+    "ssim": 0.169
+   },
+   "status": "fail"
+  },
+  {
+   "path": "art/candidates/portraits/carina-5/carina5-07-stripes-bob-a2-r-final.webp",
+   "kind": "render",
+   "size": [
+    896,
+    1152
+   ],
+   "face": [
+    279.0,
+    299.0,
+    615.0,
+    649.0
+   ],
+   "eyes": [
+    [
+     356.5,
+     414.5
+    ],
+    [
+     505.0,
+     431.5
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0009
+   },
+   "glasses": {
+    "status": "fail",
+    "cover": 0.374,
+    "worst": 0.0,
+    "worst_part": "her right lens top",
+    "dE": 21.7,
+    "parts": {
+     "her right lens top": 0.0,
+     "her right lens bottom": 0.347,
+     "her right lens outer": 0.69,
+     "her right lens inner": 0.043,
+     "her left lens top": 0.435,
+     "her left lens bottom": 0.0,
+     "her left lens outer": 0.441,
+     "her left lens inner": 0.248
+    },
+    "flipped": true
+   },
+   "framing": {
+    "headroom": 0.147,
+    "zoom": 0.956,
+    "top": 0.0,
+    "bottom_short": 0.068,
+    "hair_top_game": 89,
+    "hair_top_ref": 51,
+    "crop": [
+     87.6,
+     29.0,
+     1104.6,
+     1234.4
+    ],
+    "eyes": 0.054,
+    "tilt": 21.0,
+    "status": "warn"
+   },
+   "drift": {
+    "status": "fail",
+    "ccip": 0.184,
+    "ssim": 0.138
+   },
+   "status": "fail"
+  },
+  {
+   "path": "art/candidates/portraits/carina-5/carina5-08-stripes-layered-a2b-r-final.webp",
+   "kind": "render",
+   "size": [
+    896,
+    1152
+   ],
+   "face": [
+    288.0,
+    449.0,
+    590.0,
+    767.0
+   ],
+   "eyes": [
+    [
+     354.5,
+     593.0
+    ],
+    [
+     486.5,
+     547.5
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0045
+   },
+   "glasses": {
+    "status": "fail",
+    "cover": 0.316,
+    "worst": 0.0,
+    "worst_part": "her right lens bottom",
+    "dE": 22.2,
+    "parts": {
+     "her right lens top": 0.545,
+     "her right lens bottom": 0.0,
+     "her right lens outer": 0.524,
+     "her right lens inner": 0.126,
+     "her left lens top": 0.124,
+     "her left lens bottom": 0.0,
+     "her left lens outer": 0.566,
+     "her left lens inner": 0.0
+    },
+    "flipped": false
+   },
+   "framing": {
+    "headroom": 0.258,
+    "zoom": 1.052,
+    "top": 0.0,
+    "bottom_short": 0.134,
+    "hair_top_game": 65,
+    "hair_top_ref": 51,
+    "crop": [
+     112.4,
+     203.7,
+     1036.5,
+     1298.9
+    ],
+    "eyes": 0.081,
+    "tilt": -4.5,
+    "status": "warn"
+   },
+   "drift": {
+    "status": "fail",
+    "ccip": 0.236,
+    "ssim": 0.152
+   },
+   "status": "fail"
+  },
+  {
+   "path": "art/candidates/portraits/carina-5/carina5-09-stripes-lob-glasses-a2-r-final.webp",
+   "kind": "render",
+   "size": [
+    896,
+    1152
+   ],
+   "face": [
+    273.0,
+    405.0,
+    569.0,
+    703.0
+   ],
+   "eyes": [
+    [
+     334.5,
+     524.5
+    ],
+    [
+     448.0,
+     491.5
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0003
+   },
+   "glasses": {
+    "status": "fail",
+    "cover": 0.649,
+    "worst": 0.276,
+    "worst_part": "her right lens top",
+    "dE": 20.7,
+    "parts": {
+     "her right lens top": 0.276,
+     "her right lens bottom": 0.545,
+     "her right lens outer": 1.0,
+     "her right lens inner": 0.445,
+     "her left lens top": 0.569,
+     "her left lens bottom": 0.363,
+     "her left lens outer": 0.748,
+     "her left lens inner": 0.366
+    },
+    "flipped": true
+   },
+   "framing": {
+    "headroom": 0.257,
+    "zoom": 1.122,
+    "top": 0.0,
+    "bottom_short": 0.048,
+    "hair_top_game": 90,
+    "hair_top_ref": 51,
+    "crop": [
+     115.0,
+     175.2,
+     980.9,
+     1201.4
+    ],
+    "eyes": 0.045,
+    "tilt": -1.7,
+    "status": "warn"
+   },
+   "drift": {
+    "status": "fail",
+    "ccip": 0.2,
+    "ssim": 0.164
+   },
+   "status": "fail"
+  },
+  {
+   "path": "art/candidates/portraits/carina-5/carina5-10-free-swept-a2-r-final.webp",
+   "kind": "render",
+   "size": [
+    896,
+    1152
+   ],
+   "face": [
+    222.0,
+    260.0,
+    602.0,
+    667.0
+   ],
+   "eyes": [
+    [
+     303.0,
+     429.0
+    ],
+    [
+     460.5,
+     386.5
+    ]
+   ],
+   "redrim": {
+    "status": "warn",
+    "value": 0.033
+   },
+   "glasses": {
+    "status": "fail",
+    "cover": 0.517,
+    "worst": 0.0,
+    "worst_part": "her left lens bottom",
+    "dE": 20.6,
+    "parts": {
+     "her right lens top": 0.11,
+     "her right lens bottom": 0.094,
+     "her right lens outer": 0.962,
+     "her right lens inner": 0.445,
+     "her left lens top": 0.737,
+     "her left lens bottom": 0.0,
+     "her left lens outer": 0.437,
+     "her left lens inner": 0.172
+    },
+    "flipped": true
+   },
+   "framing": {
+    "headroom": 0.076,
+    "zoom": 0.822,
+    "top": 0.038,
+    "bottom_short": 0.14,
+    "hair_top_game": 77,
+    "hair_top_ref": 51,
+    "crop": [
+     -6.0,
+     -53.9,
+     1176.7,
+     1347.8
+    ],
+    "eyes": 0.063,
+    "tilt": -0.6,
+    "status": "warn"
+   },
+   "drift": {
+    "status": "fail",
+    "ccip": 0.218,
+    "ssim": 0.174
+   },
+   "status": "fail"
+  },
+  {
+   "path": "art/candidates/portraits/carina-5/carina5-11-free-fringe-a2c-r-final.webp",
+   "kind": "render",
+   "size": [
+    896,
+    1163
+   ],
+   "face": [
+    245.0,
+    187.0,
+    589.0,
+    551.0
+   ],
+   "eyes": [
+    [
+     321.0,
+     342.0
+    ],
+    [
+     456.0,
+     298.5
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0029
+   },
+   "glasses": {
+    "status": "fail",
+    "cover": 0.397,
+    "worst": 0.024,
+    "worst_part": "her right lens top",
+    "dE": 21.7,
+    "parts": {
+     "her right lens top": 0.024,
+     "her right lens bottom": 0.376,
+     "her right lens outer": 0.601,
+     "her right lens inner": 0.13,
+     "her left lens top": 0.622,
+     "her left lens bottom": 0.129,
+     "her left lens outer": 0.437,
+     "her left lens inner": 0.361
+    },
+    "flipped": true
+   },
+   "framing": {
+    "headroom": 0.035,
+    "zoom": 0.928,
+    "top": 0.075,
+    "bottom_short": 0.0,
+    "hair_top_game": 82,
+    "hair_top_ref": 51,
+    "crop": [
+     43.2,
+     -93.8,
+     1100.9,
+     1159.8
+    ],
+    "eyes": 0.066,
+    "tilt": -3.4,
+    "status": "warn"
+   },
+   "drift": {
+    "status": "fail",
+    "ccip": 0.206,
+    "ssim": 0.158
+   },
+   "status": "fail"
+  },
+  {
+   "path": "art/candidates/portraits/carina-5/carina5-11-free-fringe-a2-r-final.webp",
+   "kind": "render",
+   "size": [
+    896,
+    1166
+   ],
+   "face": [
+    245.0,
+    178.0,
+    583.0,
+    531.0
+   ],
+   "eyes": [
+    [
+     320.0,
+     338.5
+    ],
+    [
+     450.0,
+     283.5
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0024
+   },
+   "glasses": {
+    "status": "fail",
+    "cover": 0.369,
+    "worst": 0.0,
+    "worst_part": "her right lens top",
+    "dE": 22.0,
+    "parts": {
+     "her right lens top": 0.0,
+     "her right lens bottom": 0.577,
+     "her right lens outer": 0.446,
+     "her right lens inner": 0.214,
+     "her left lens top": 0.622,
+     "her left lens bottom": 0.121,
+     "her left lens outer": 0.427,
+     "her left lens inner": 0.307
+    },
+    "flipped": true
+   },
+   "framing": {
+    "headroom": 0.035,
+    "zoom": 0.959,
+    "top": 0.078,
+    "bottom_short": 0.0,
+    "hair_top_game": 85,
+    "hair_top_ref": 51,
+    "crop": [
+     51.5,
+     -94.3,
+     1077.3,
+     1121.4
+    ],
+    "eyes": 0.076,
+    "tilt": -8.5,
+    "status": "warn"
+   },
+   "drift": {
+    "status": "fail",
+    "ccip": 0.212,
+    "ssim": 0.173
+   },
+   "status": "fail"
+  },
+  {
+   "path": "art/candidates/portraits/carina-5/carina5-12-free-glasses-a2-r-final.webp",
+   "kind": "render",
+   "size": [
+    896,
+    1152
+   ],
+   "face": [
+    329.0,
+    347.0,
+    669.0,
+    694.0
+   ],
+   "eyes": [
+    [
+     457.5,
+     456.0
+    ],
+    [
+     594.5,
+     501.5
+    ]
+   ],
+   "redrim": {
+    "status": "pass",
+    "value": 0.0034
+   },
+   "glasses": {
+    "status": "fail",
+    "cover": 0.532,
+    "worst": 0.169,
+    "worst_part": "her left lens bottom",
+    "dE": 15.6,
+    "parts": {
+     "her right lens top": 0.986,
+     "her right lens bottom": 0.235,
+     "her right lens outer": 0.353,
+     "her right lens inner": 0.763,
+     "her left lens top": 0.435,
+     "her left lens bottom": 0.169,
+     "her left lens outer": 0.867,
+     "her left lens inner": 0.521
+    },
+    "flipped": true
+   },
+   "framing": {
+    "headroom": 0.183,
+    "zoom": 0.964,
+    "top": 0.0,
+    "bottom_short": 0.102,
+    "hair_top_game": 84,
+    "hair_top_ref": 51,
+    "crop": [
+     142.7,
+     79.4,
+     1151.0,
+     1274.4
+    ],
+    "eyes": 0.079,
+    "tilt": 32.8,
+    "status": "warn"
+   },
+   "drift": {
+    "status": "fail",
+    "ccip": 0.172,
+    "ssim": 0.107
+   },
+   "status": "fail"
+  }
+ ]
+}
