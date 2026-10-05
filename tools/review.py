@@ -18,6 +18,8 @@ only; private items stay out of list and GitHub); `showcase/<id>` picks the show
 reviews/<id>/review.json (how to add one: reviews/README.md); showcase entries in showcase/<id>/entry.json
 (showcase/README.md). His answers are <folder>/<id>/feedback.json, written by the bible's Send button through
 tools/review_server.py, or, from the public site, through a GitHub issue that `pull` imports.
+mark-read, set-status, pull and the Send button commit the json they change at once (tools/review_commit.py), since
+the public bible shows committed files only.
 """
 import datetime as dt
 import json
@@ -34,6 +36,7 @@ PRIVATE_REVIEWS = os.path.join(ROOT, 'island', 'private', 'rewards', 'reviews')
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import work  # noqa: E402  tools/work.py: the work tracker (GitHub issues)
 import review_server  # noqa: E402  the one place answers are normalised and saved
+import review_commit  # noqa: E402  status and read changes are committed at once, so the public bible matches
 PULL_LABEL = 'review-feedback'
 OWNER = work.REPO.split('/')[0]  # only the repo owner's issues are imported; anyone can open an issue on a public repo
 
@@ -222,6 +225,7 @@ def cmd_mark_read(rid):
     fb['read'] = True
     save(rid, 'feedback.json', fb, base)
     print(f'{rid}: marked read')
+    review_commit.commit([os.path.join(base, rid, 'feedback.json')], f'Review: {rid}, feedback marked read')
 
 
 def cmd_set_status(rid, status, decision=None):
@@ -242,12 +246,15 @@ def cmd_set_status(rid, status, decision=None):
         r['decided_at'] = work.stamp()
     save(rid, 'review.json', r)
     print(f'{rid}: {status}')
-    if status == 'decided':
-        issue, new = work.followup_for(rid, r)
-        r['issue'] = int(issue['id'])
-        save(rid, 'review.json', r)
-        print(f"{'opened' if new else 'updated'} issue #{issue['id']} {issue['url']}. Whoever acts on it: "
-              f"python3 tools/work.py set {issue['id']} --state running --owner <you>")
+    try:
+        if status == 'decided':
+            issue, new = work.followup_for(rid, r)
+            r['issue'] = int(issue['id'])
+            save(rid, 'review.json', r)
+            print(f"{'opened' if new else 'updated'} issue #{issue['id']} {issue['url']}. Whoever acts on it: "
+                  f"python3 tools/work.py set {issue['id']} --state running --owner <you>")
+    finally:  # the status is committed even when the issue step fails
+        review_commit.commit([os.path.join(REVIEWS, rid, 'review.json')], f'Review: {rid}, {status}')
 
 
 # ---------------------------------------------------------------- answers from the public site

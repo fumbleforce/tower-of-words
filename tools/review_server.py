@@ -33,6 +33,7 @@ from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import work  # noqa: E402  tools/work.py, the work tracker (GitHub issues)
+import review_commit  # noqa: E402  commits each saved answer so the public bible matches
 
 
 def review_changed(rid):
@@ -150,10 +151,11 @@ def answer_folder(kind, rid, allow_private=True):
     return (folder, False) if os.path.isfile(os.path.join(folder, marker)) else (None, False)
 
 
-def save_answer(kind, folder, data, sent=None):
+def save_answer(kind, folder, data, sent=None, wait=True):
     """Normalise one answer for its kind, keep the earlier send in `history` and write <folder>/feedback.json
     atomically. The local Send (POST) and tools/review.py pull (answers sent from the public site) both save here.
-    Returns the `sent` stamp."""
+    Then commits it (tools/review_commit.py; private items are skipped); wait=False commits in a thread, since the
+    commit checks take about 30 s. Returns the `sent` stamp."""
     entry = dict(sent=sent or time.strftime('%Y-%m-%dT%H:%M:%S%z'), **ANSWERS[kind][2](data))
     path = os.path.join(folder, 'feedback.json')
     old = None
@@ -170,6 +172,11 @@ def save_answer(kind, folder, data, sent=None):
     with open(tmp, 'w', encoding='utf-8') as f:
         json.dump(out, f, ensure_ascii=False, indent=1)
     os.replace(tmp, path)
+    args = ([path], f'Review: {kind} {os.path.basename(folder)}, answer saved')
+    if wait:
+        review_commit.commit(*args)
+    else:
+        threading.Thread(target=review_commit.commit, args=args).start()
     return entry['sent']
 
 
@@ -247,7 +254,7 @@ class Handler(SimpleHTTPRequestHandler):
             assert isinstance(data, dict)
         except Exception:
             return self._json(400, {'error': 'body must be a JSON object'})
-        sent = save_answer(kind, folder, data)
+        sent = save_answer(kind, folder, data, wait=False)
         if kind == 'review' and not private:
             threading.Thread(target=review_changed, args=(rid,), daemon=True).start()
         return self._json(200, {'ok': True, 'sent': sent})
