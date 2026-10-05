@@ -7,7 +7,7 @@ import fs from 'node:fs';
 import os from 'node:os';
 import { randomUUID } from 'node:crypto';
 import { chromium } from 'playwright';
-import { processStart, tryAcquireBrowserGpuSlot } from './browser-gpu-slots.mjs';
+import { enqueueGpuTicket, processStart, tryAcquireBrowserGpuSlot } from './browser-gpu-slots.mjs';
 
 const ROOT = '/tmp/claude-1000';
 const CLOSE_GRACE_MS = 10000;
@@ -42,7 +42,7 @@ export async function withBrowserJob(name, run, {
     || !Number.isFinite(gpuWaitMs) || gpuWaitMs < 0) throw new Error('Invalid browser job time limits');
   const started = Date.now();
   const owner = `${name} pid=${process.pid} ${randomUUID()}`, locks = [];
-  let safeToRelease = true, gpuSlot, browserPid = null;
+  let safeToRelease = true, gpuSlot, browserPid = null, gpuTicket = null;
   // Kill Chromium's process group (Playwright starts it detached) when a close hangs
   // or the process is going away; after that the locks are safe to drop.
   const killBrowser = () => {
@@ -65,6 +65,7 @@ export async function withBrowserJob(name, run, {
     locks.push(path);
   };
   const release = () => {
+    gpuTicket?.remove(); gpuTicket = null;
     if (!safeToRelease) killBrowser();
     if (gpuSlot && !gpuSlot.release()) return false;
     gpuSlot = null;
@@ -124,9 +125,11 @@ export async function withBrowserJob(name, run, {
     if (gpu) {
       const gpuUntil = Math.min(started + timeoutMs, Date.now() + gpuWaitMs);
       let waitingForGpu = false;
-      while (!(gpuSlot = tryAcquireBrowserGpuSlot({ owner }))) {
+      // A place in the GPU queue (tools/gpu_priority.py), dropped once a slot is ours or on any exit.
+      gpuTicket = enqueueGpuTicket({ owner, rank: 'browser' });
+      while (!(gpuSlot = tryAcquireBrowserGpuSlot({ owner, ticket: gpuTicket }))) {
         const remaining = gpuUntil - Date.now();
-        if (remaining <= 0) throw Object.assign(new Error(`${name}: render deferred; browser GPU slots or exclusive GPU lock busy, or Jørgen's image gen dashboard has priority (gpu.priority)`), { code: 'GPU_DEFERRED' });
+        if (remaining <= 0) throw Object.assign(new Error(`${name}: render deferred; browser GPU slots or exclusive GPU lock busy, an image or model job is ahead in the GPU queue (python3 tools/gpu_priority.py queue), or Jørgen's image gen dashboard has priority (gpu.priority)`), { code: 'GPU_DEFERRED' });
         if (!waitingForGpu) console.log(`${name}: waiting up to ${gpuWaitMs / 1000}s for a browser GPU slot`);
         waitingForGpu = true;
         await Promise.race([deadline, cancelled, new Promise(resolve => {
@@ -134,6 +137,7 @@ export async function withBrowserJob(name, run, {
         })]);
         clearTimeout(pollTimer);
       }
+      gpuTicket.remove(); gpuTicket = null;
     }
     if (cancelledError) throw cancelledError;
     if (deadlineError) throw deadlineError;

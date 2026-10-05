@@ -11,6 +11,13 @@
 // Jørgen's image gen dashboard has priority over every agent job: while its
 // gpu.priority file is live (tools/gpu_priority.py writes and reads it) no new
 // slot is handed out.
+//
+// The GPU queue (gpu.queue/, rules and ranks in tools/gpu_priority.py): a browser
+// job that has to wait keeps a ticket there (enqueueGpuTicket) and passes it to
+// tryAcquireBrowserGpuSlot, which hands out a slot only when no exclusive job's
+// ticket goes first. Browser tickets rank after voices and before renders, and
+// while the pool holds the lock a new browser job does not join past an older
+// render, so neither side can keep the other out.
 import fs from 'node:fs';
 import path from 'node:path';
 import { randomUUID } from 'node:crypto';
@@ -66,6 +73,72 @@ export function gpuPriority({ root = DEFAULT_ROOT } = {}) {
   try { data = JSON.parse(fs.readFileSync(path.join(root, 'gpu.priority'), 'utf8')); }
   catch { return null; }
   return data && Number.isInteger(data.pid) && alive(data.pid, data.start) ? data : null;
+}
+
+// ---------------------------------------------------------------- the GPU queue
+// Same ranks and order as tools/gpu_priority.py (RANKS, order_key).
+export const GPU_RANKS = { dashboard: 1, 'carina-image': 2, 'carina-voice': 3, voice: 4, browser: 4.5, render: 5 };
+
+export function rankOf(rank) {
+  const r = typeof rank === 'string' && rank in GPU_RANKS ? GPU_RANKS[rank] : Number(rank);
+  if (!Object.values(GPU_RANKS).includes(r)) throw new Error(`unknown GPU rank ${rank}: use 1 to 5 or ${Object.keys(GPU_RANKS).join(', ')}`);
+  return r;
+}
+
+function poolHeld(root) {
+  return readOwner(path.join(root, 'gpu.lock', 'owner'))?.startsWith(poolPrefix) ?? false;
+}
+
+// Rank, then time. While the browser pool holds the lock a browser ticket counts
+// as a render, so it cannot join past an older render.
+export function orderKey(ticket, held) {
+  const rank = ticket.kind === 'browser' && held ? GPU_RANKS.render : ticket.rank;
+  return [rank, ticket.time, path.basename(ticket.path ?? '')];
+}
+const before = (a, b) => a[0] - b[0] || a[1] - b[1] || (a[2] < b[2] ? -1 : a[2] > b[2] ? 1 : 0);
+
+// Every ticket with its path and liveness; dead ones are removed from disk.
+export function readGpuQueue({ root = DEFAULT_ROOT, prune = true } = {}) {
+  const dir = path.join(root, 'gpu.queue');
+  let names;
+  try { names = fs.readdirSync(dir).sort(); } catch { return []; }
+  const out = [];
+  for (const name of names) {
+    if (!name.endsWith('.json')) continue;
+    const file = path.join(dir, name);
+    let ticket;
+    try { ticket = JSON.parse(fs.readFileSync(file, 'utf8')); } catch { continue; }
+    if (!ticket || ticket.rank == null || ticket.time == null) continue;
+    ticket.path = file;
+    ticket.live = ticket.start != null && Number.isInteger(ticket.pid) && processStart(ticket.pid) === String(ticket.start);
+    if (!ticket.live && prune) { try { fs.unlinkSync(file); } catch { /* raced */ } }
+    out.push(ticket);
+  }
+  return out;
+}
+
+// Write a ticket; returns {path, remove()}. pid: the process it lives with.
+export function enqueueGpuTicket({ owner, rank = 'browser', root = DEFAULT_ROOT, pid = process.pid }) {
+  const r = rankOf(rank), start = processStart(pid);
+  if (start === null) throw new Error(`no process ${pid} to queue for`);
+  const dir = path.join(root, 'gpu.queue');
+  fs.mkdirSync(dir, { recursive: true });
+  const file = path.join(dir, `${pid}-${start}-${randomUUID().slice(0, 8)}.json`);
+  const record = { rank: r, time: Date.now() / 1000, owner, pid, start, kind: r === GPU_RANKS.browser ? 'browser' : 'exclusive',
+    at: new Date().toTimeString().slice(0, 8) };
+  fs.writeFileSync(file + '.tmp', JSON.stringify(record));
+  fs.renameSync(file + '.tmp', file);
+  return { path: file, remove: () => { try { fs.unlinkSync(file); } catch { /* gone already */ } } };
+}
+
+// The live tickets that go before this one. A browser ticket only waits for
+// exclusive ones: browser jobs share the pool's slots.
+export function ticketsAhead(ticket, { root = DEFAULT_ROOT } = {}) {
+  const live = readGpuQueue({ root }).filter(t => t.live);
+  const me = live.find(t => t.path === (ticket?.path ?? ticket));
+  if (!me) return [];
+  const held = poolHeld(root), mine = orderKey(me, held);
+  return live.filter(t => t !== me && before(orderKey(t, held), mine) < 0 && !(me.kind === 'browser' && t.kind === 'browser'));
 }
 
 function slotDead(data) {
@@ -129,7 +202,9 @@ export function reclaimDeadBrowserSlots({ root = DEFAULT_ROOT, log } = {}) {
   return mutatePool(root, null, () => (fs.existsSync(pool) ? reclaimInPool(pool, log) : 0));
 }
 
-export function tryAcquireBrowserGpuSlot({ owner, root = DEFAULT_ROOT, pid = process.pid, log = console.error }) {
+// ticket: this job's queue ticket (enqueueGpuTicket). Without one the job only
+// gets a slot while no exclusive job is waiting at all.
+export function tryAcquireBrowserGpuSlot({ owner, root = DEFAULT_ROOT, pid = process.pid, log = console.error, ticket = null }) {
   if (!owner) throw new Error('A browser GPU slot needs an owner');
   const pool = path.join(root, 'gpu.lock');
   const ownerFile = path.join(pool, 'owner');
@@ -138,6 +213,7 @@ export function tryAcquireBrowserGpuSlot({ owner, root = DEFAULT_ROOT, pid = pro
     let poolOwner;
     if (fs.existsSync(pool)) reclaimInPool(pool, log);
     if (gpuPriority({ root })) return null;
+    if (ticket ? ticketsAhead(ticket, { root }).length : readGpuQueue({ root }).some(t => t.live && t.kind !== 'browser')) return null;
     try {
       fs.mkdirSync(pool);
       poolOwner = poolPrefix + randomUUID();

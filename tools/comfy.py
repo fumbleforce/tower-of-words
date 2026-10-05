@@ -9,6 +9,12 @@ import gpu_priority  # noqa: E402
 HOST = 'http://127.0.0.1:8188'
 
 
+def gpu(owner, rank='render', timeout=None):
+    """with comfy.gpu('carina-faces-3', 'carina-image'): ...  waits its turn in the GPU queue, holds gpu.lock as owner
+    and releases it on any exit (tools/gpu_priority.py has the ranks)."""
+    return gpu_priority.hold(owner, rank, timeout=timeout)
+
+
 def yield_to_dashboard(status=None):
     """Stop the batch (exit 75, so finally blocks release the GPU lock) while Jørgen's image gen dashboard has
     priority (tools/gpu_priority.py). Checked before every queued workflow, and when one ends interrupted."""

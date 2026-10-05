@@ -2,7 +2,7 @@
 # Voice every game line that has no clip: game3d/audio/<key>.mp3 for each manifest line whose current text has no clip.
 #   1. rewrite game3d/audio/manifest.json from the story (skip with --no-manifest)
 #   2. check the setup (venvs, clone references and transcripts, Qwen model: cfg.py setup), then take the GPU lock
-#      (waits while someone else holds it or Jørgen's image gen dashboard has priority; GUIDE: GPU lock). When the
+#      (waits its turn in the GPU queue at rank GPU_RANK, and while Jørgen's image gen dashboard has priority; GUIDE: GPU lock). When the
 #      dashboard asks for the GPU mid-batch, the batch stops with exit 75 and a rerun picks up from the takes on disk
 #   3. three takes per line (gen_takes.py), checked (check_takes.py); up to two retry rounds with new seeds for lines
 #      with no passing take
@@ -12,7 +12,7 @@
 # A step that exits non-zero (the manifest rewrite, a crash, a setup error, a lost lock) stops the batch with exit 1 and the end of its output;
 # only takes that were made and checked can count as "no passing take".
 # Usage: sh tools/voice/run.sh [--no-manifest] [--dry]   (--dry: list the lines that need a clip, check the setup, stop)
-# Env: LOCK_ME (lock owner name, default game3d-voices), GAME3D_VOICE_WORK (takes and metrics, default ~/ai/game3d-voice),
+# Env: LOCK_ME (lock owner name, default game3d-voices), GPU_RANK (queue rank, default voice), GAME3D_VOICE_WORK (takes and metrics, default ~/ai/game3d-voice),
 #      QWEN_PY, BENCH_PY, EDGE_PY (the three Python venvs below).
 set -u
 HERE=$(cd "$(dirname "$0")" && pwd)
@@ -67,14 +67,11 @@ import sys; sys.path.insert(0, '$HERE'); from cfg import manifest
 need = set('$MISSING'.split(','))
 print(any(e['overheard'] for e in manifest() if e['key'] in need))") || die "could not read the manifest's overheard lines"
 
-# the GPU lock: mkdir is the test-and-set; never remove a lock with someone else's name in it
-[ -d "$(dirname "$LOCKDIR")" ] || mkdir -p "$(dirname "$LOCKDIR")"
-# never while the dashboard has priority; a lock left by dead browser jobs is freed first
-until ! "$BENCH_PY" "$PRIO" live > /dev/null && { "$BENCH_PY" "$PRIO" reclaim > /dev/null; mkdir "$LOCKDIR" 2>/dev/null; }; do
-  WHO=$("$BENCH_PY" "$PRIO" live) || WHO="GPU lock held by $(cat "$LOCKDIR/owner" 2>/dev/null)"
-  say "$WHO, waiting ($(date +%T))"; sleep 120
-done
-echo "$LOCK_ME" > "$LOCKDIR/owner"
+# the GPU lock, through the GPU queue (tools/gpu_priority.py): a ticket at rank GPU_RANK (default voice; carina-voice
+# for Carina's samples) that takes the lock when it is first in line; never while the dashboard has priority
+GPU_RANK=${GPU_RANK:-voice}
+GPU_ROOT=$(dirname "$LOCKDIR") "$BENCH_PY" "$PRIO" acquire "$LOCK_ME" --rank "$GPU_RANK" --pid $$ 2>&1 | tee -a "$LOG"
+grep -qx "$LOCK_ME" "$LOCKDIR/owner" 2>/dev/null || die "could not take the GPU lock (above)"
 release() { grep -qx "$LOCK_ME" "$LOCKDIR/owner" 2>/dev/null && rm -r "$LOCKDIR" && echo "GPU lock released"; }
 trap release EXIT
 trap 'exit 130' INT TERM

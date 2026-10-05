@@ -63,6 +63,8 @@ def log(msg):
 
 def main():
     dry = '--dry-run' in sys.argv
+    if not dry:
+        gpu_priority.read_queue(BASE)  # drops the GPU queue tickets of waiters that died
     if not os.path.isdir(LOCK):
         return
     try:
