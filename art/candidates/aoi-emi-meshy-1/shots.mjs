@@ -1,13 +1,13 @@
 // Stills of the live viewer for reviews/aoi-meshy-1 and emi-meshy-1: her beside the in-game Eric and Mio and Kuro
 // round 3, at rest, idling and walking, from the front and her left side, to check the page loads and the moves play.
 // The review links the live page.
-//   node art/candidates/aoi-emi-meshy-1/shots.mjs <aoi|emi> [base url] [viewer json url]
+//   node art/candidates/aoi-emi-meshy-1/shots.mjs <aoi|emi> [base url] [viewer json url]     ATTEMPT=<id> (default <char>-1)
 import fs from 'node:fs';
 import { withBrowserJob } from '../../../tools/lib/browser-job.mjs';
 
 const char = process.argv[2];
 const base = process.argv[3] || 'http://127.0.0.1:8771/';
-const attempt = `${char}-1`;
+const attempt = process.env.ATTEMPT || `${char}-1`;
 const out = `/home/jorgen/repo/japanese/art/parts/${char}-meshy-1/viewer/${attempt}`;
 fs.mkdirSync(out, { recursive: true });
 const cfg = process.argv[4] || `/reviews/${char}-meshy-1/viewer.json`;

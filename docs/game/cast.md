@@ -83,7 +83,7 @@ The id `kuroda` is Mr. Hamada. The id is older than the name and stays so the vo
 - On day 1 she is upstairs at head office all day, arguing for B2's parts budget, and comes down at 17:40 ([`emi-budget`](stories/emi-budget.md)).
 - Quick and complete sentences; says the good news first and the problem as an aside.
 - A cast member like any other, with no special restrictions: romance and rewards apply to her as to the rest (Jørgen, 2026-09-27).
-- Look: approved portrait emi-base-2001 (reviews/style-align-1), redrawn from round 3 RDBT seed 41 (art/approved/emi/emi-after.webp): reddish auburn bob, tortoiseshell glasses, curvy, charcoal blazer over a cream blouse.
+- Look: approved portrait emi-base-2001 (reviews/style-align-1), redrawn from round 3 RDBT seed 41 (art/approved/emi/emi-after.webp): reddish auburn bob, tortoiseshell glasses, curvy, charcoal blazer over a cream blouse. In the 3D world, the Meshy model emi-2 (reviews/emi-meshy-1, round 2, made after Jørgen's note on emi-1, 2026-10-05: "looking good, but for some discoloration, and the lanyard which becomes mangled. we should remove props when making the models."): the auburn bob, a black trouser suit over a cream blouse; no glasses or lanyard on the model ([art-and-sound.md](art-and-sound.md#people-in-the-world)).
 
 ### Mr. Ishibashi (`guard`)
 
@@ -109,7 +109,7 @@ The id `kuroda` is Mr. Hamada. The id is older than the name and stays so the vo
 ### Aoi (`aoi`)
 
 - A new hire. Her assignment is decided today (day 1), and she's telling someone on the phone it can be anywhere but the basement. Japanese only.
-- Look: approved portrait aoi-base-2001 (reviews/style-align-1), with the cream edge on her left side redrawn as fill-d65-s1 (reviews/aoi-edge-2); redrawn from gallery B-aoi (art/approved/aoi/aoi-after.webp): pink bob with dark roots, winking grin, green varsity jacket with a pink star patch.
+- Look: approved portrait aoi-base-2001 (reviews/style-align-1), with the cream edge on her left side redrawn as fill-d65-s1 (reviews/aoi-edge-2); redrawn from gallery B-aoi (art/approved/aoi/aoi-after.webp): pink bob with dark roots, winking grin, green varsity jacket with a pink star patch. In the 3D world, the Meshy model aoi-2 (reviews/aoi-meshy-1, round 2, made after Jørgen's note on aoi-1, 2026-10-05: "her face is a tiny bit too large and her hands are larger than the others. but it is very very close id say"): pink hair with teal underneath, a dark teal track jacket with a pink star over a white top, dark trousers; her hands are shown at 0.75 of Meshy's size ([art-and-sound.md](art-and-sound.md#people-in-the-world)).
 
 ### Rei (`rei`)
 

@@ -9,7 +9,7 @@ face width, a fraction of the height); the rest is Kuro's: the front of the face
 face_scale times the texel density of the rest, everything else is Smart UV Project, then all islands are packed.
 Geometry is untouched. debug=<png> also writes a front picture with the face island in red.
 
-  blender -b -P uv_bl.py -- <shape.glb> <out.glb> [face_scale=3] [zmin=0.58] [seed=0.70] [half_w=0.16] [ny=-0.35] [debug=<png>]
+  blender -b -P uv_bl.py -- <shape.glb> <out.glb> [face_scale=3] [zmin=0.58] [seed=0.70] [half_w=0.16] [ny=-0.35] [piece=0] [debug=<png>]
 """
 import bpy, bmesh, math, sys
 
@@ -66,8 +66,8 @@ for p in pieces[:6]:
     print('piece', len(p), 'polygons, area %.4f, height %.2f-%.2f, front y %.3f' % (area(p), min(zz), max(zz), min(mid(i).y for i in p)))
 if 'seed' in opt:      # Kuro's rule: the piece around a point in the middle of the face
     keep = piece(min(face_ids, key=lambda i: abs(mid(i).x - xc) + abs(mid(i).z - (z0 + H * SEED))))
-else:                  # the largest front-facing piece in the window
-    keep = pieces[0]
+else:                  # the largest front-facing piece in the window, or the piece=<n>th largest (0 = largest) where
+    keep = pieces[int(opt.get('piece', 0))]   # a hair shell is bigger than the face (round 2: Aoi 1, Emi's below)
 print('face polygons', len(keep), 'of', len(bm.faces), '(candidates', len(face_ids), ')')
 bm.free()
 
