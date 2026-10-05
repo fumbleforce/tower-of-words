@@ -1,5 +1,6 @@
 import * as DAY2 from '../story/day2/words.js';
 import * as TICKETS from './tickets/words.js';
+import { MC } from './mc.js';
 // The few Japanese words in day one. Every one is shown with its reading and English, every time.
 // The four commands are the ones Mio can say to make things happen.
 
@@ -54,7 +55,7 @@ export const NAMES = [
   { ja: '浜田', en: 'Hamada' },
   { ja: '石橋', en: 'Ishibashi' },
   { ja: '玖路', en: 'Kuro' },
-  { ja: 'エリック', en: 'Eric' },
+  { ja: MC.name_jp, en: MC.name }, // the protagonist (data/mc/)
   { ja: 'ミオ', en: 'Mio' },
   { ja: 'ケンジ', en: 'Kenji' },
   { ja: 'エミ', en: 'Emi' },

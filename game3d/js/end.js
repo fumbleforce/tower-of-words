@@ -6,6 +6,7 @@ import { WORDS, COMMANDS, PHRASES, known, iconHTML } from './lang.js';
 import { sim, PERIOD_NAMES } from './sim.js';
 import { PLACE_NAMES } from './places/definitions.js';
 import { LAST_DAY, nextDaySave } from './days.js';
+import { MC, isPlayer } from './mc.js';
 
 const DAY_NAMES = { 1: 'Day one', 2: 'Day two' };
 const SAVE_KEY = 'amakawa-day1-save',
@@ -48,7 +49,7 @@ export function endHTML(game, { photos = {}, outro, ticket } = {}) {
         `<figure class="shot"><img alt="" src="${photos[p].src}"><figcaption><b>${PLACE_NAMES[p]}</b><span>${esc(PERIOD_NAMES[photos[p].period] || '')}</span></figcaption></figure>`,
     )
     .join('');
-  const met = [...sim.met].filter((id) => id !== 'eric');
+  const met = [...sim.met].filter((id) => !isPlayer(id));
   const people = met
     .map((id) => {
       const p = sim.people[id] || {},
@@ -87,7 +88,11 @@ export async function showEnd(game) {
       ? {
           no: 'Repair request #2',
           title: 'Monorail doors: sensor check',
-          lines: ['Raised by: Amakawa Station', 'Handed to: Eric (from Mio, B2)', 'Tomorrow morning, at the station.'],
+          lines: [
+            'Raised by: Amakawa Station',
+            `Handed to: ${MC.name} (from Mio, B2)`,
+            'Tomorrow morning, at the station.',
+          ],
         }
       : null);
   if (window.__shell?.photoNow) await window.__shell.photoNow(); // the room the day ends in

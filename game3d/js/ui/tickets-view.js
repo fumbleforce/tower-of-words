@@ -11,6 +11,7 @@
 //     name(id) -> a speaker's name; read(id) marks it read; take(id) -> true when it moved to in progress;
 //     learn(id) -> true when the word is new to him; isKnown(id) -> whether he knows the word
 import { lineHTML, WORDS } from '../lang.js';
+import { MC } from '../mc.js';
 
 const $ = (s, el = document) => el.querySelector(s);
 const esc = (s) =>
@@ -62,7 +63,7 @@ function build() {
           <span class="tk-sys">${APP}<small>Ver.2.03</small></span>
           <button type="button" class="tk-btn tk-close" data-w="tojiru">${lab('tojiru', { tap: false })}</button>
         </header>
-        <div class="tk-info"><span class="who">B2 IT · Eric</span><span class="sum"></span><span class="date"></span></div>
+        <div class="tk-info"><span class="who">B2 IT · ${MC.name}</span><span class="sum"></span><span class="date"></span></div>
         <nav class="tk-crumb">
           <button type="button" class="tk-btn tk-back" data-w="modoru">${lab('modoru', { tap: false })}</button>
           <span class="path"></span>

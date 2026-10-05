@@ -1,6 +1,8 @@
 // Shared runtime declaration; tooling imports this without DOM or renderer side effects.
+import { MC, PLAYER_ID } from '../mc.js';
+
 export const DEFAULT_SPEAKERS = {
-  eric: { name: 'Eric', role: 'you', color: '#8fb4d8' },
+  [PLAYER_ID]: { name: MC.name, role: 'you', color: '#8fb4d8' },
   mio: { name: 'Mio', role: 'programmer', color: '#5fc6bf' },
   aoi: { name: 'Aoi', color: '#e79fb0' },
   kuroda: { name: 'Mr. Hamada', role: 'Accounts', color: '#b3a58f' },

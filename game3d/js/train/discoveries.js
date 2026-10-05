@@ -22,6 +22,7 @@ import { footballPhoto, guitarVideo } from './screen-scenes.js';
 import { shopBag } from './shop-bag.js';
 import { showHeld, hideHeld, ringHeld } from '../ui/held-view.js';
 import { sfx, running, isMuted } from '../sfx.js';
+import { PLAYER_ID } from '../mc.js';
 
 const ease = (k) => k * k * (3 - 2 * k);
 const texOf = (c) => {
@@ -271,10 +272,10 @@ export function trainDiscoveries(game, { people, car, nav, SEAT_Y }) {
         bun.lookTarget = eric();
       } else if (state === 'close') {
         const [bx, bz] = bagAt();
-        await game.hooks.walk({ who: 'eric', to: [bx - 0.02, bz - 0.36] });
-        game.hooks.face({ who: 'eric', to: [bx, bz] });
+        await game.hooks.walk({ who: PLAYER_ID, to: [bx - 0.02, bz - 0.36] });
+        game.hooks.face({ who: PLAYER_ID, to: [bx, bz] });
         bun.lookTarget = bagAt();
-        const press = game.hooks.gesture({ who: 'eric', kind: 'press', to: [bx, bz] });
+        const press = game.hooks.gesture({ who: PLAYER_ID, kind: 'press', to: [bx, bz] });
         await game.wait(350);
         const reach = armTo(bArm, [-0.75, 0, -0.55], 0.45);
         await tween(0.45, (k) => bag.setClosed(k * 0.8));

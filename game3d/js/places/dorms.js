@@ -8,6 +8,7 @@ import { sfx } from '../ui.js';
 import { PLACE_DETAILS } from './catalog.js';
 import { snapshotPeople, restorePeople } from './saved-people.js';
 import { sim } from '../sim.js';
+import { PLAYER_ID } from '../mc.js';
 
 // Eric's floor and his room. The trip in from the dorm courtyard (dorm-court.js) brings him up the last flight onto
 // the 2F landing; he walks the corridor to his door himself, and going in (the enterRoom hook, from the story) drops
@@ -294,7 +295,7 @@ export function dormsPlace(game) {
     tripOutTo: {
       async dorm_court(g) {
         const eric = g.player;
-        if (eric.seated) await game.hooks.stand({ who: 'eric' });
+        if (eric.seated) await game.hooks.stand({ who: PLAYER_ID });
         await g.walkTo(OUT_SPOT[0], OUT_SPOT[1]);
         eric.scripted = true;
         g.walker.locked = true;

@@ -20,6 +20,7 @@ import { catWalk, catHop } from '../creatures/cat.js';
 import { mat, rbox, PAL } from '../props.js';
 import { route } from './route.js';
 import { chairPusher } from './office-chair.js';
+import { isPlayer } from '../mc.js';
 
 export async function officePlace(game) {
   const w = await sliced(officeSteps()); // in slices between frames: it's built while the forecourt is played
@@ -813,7 +814,7 @@ export async function officePlace(game) {
     },
     async sitPerson(id, seatId) {
       const s = seats[seatId];
-      if (id === 'eric' || id === 'player') {
+      if (isPlayer(id)) {
         await sitMio();
         return;
       }
@@ -837,7 +838,7 @@ export async function officePlace(game) {
       r.seated = true;
     },
     async standPerson(id) {
-      if (id === 'eric' || id === 'player') {
+      if (isPlayer(id)) {
         game.player.seated = false;
         game.player.setState('idle');
         game.player.root.position.y = 0;

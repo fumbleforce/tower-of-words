@@ -27,6 +27,7 @@ const { flags } = await import('../../js/runner.js');
 const { known, seen } = await import('../../js/lang.js');
 const { Bonds } = await import('../../js/bonds/model.js');
 const { CAST } = await import('../../js/bonds/cast.js');
+const { defaultCast } = await import('../../js/roles.js');
 const initialSim = structuredClone(S.sim);
 // Prevent shell background loops during import; later only scheduled reload and
 // thumbnail callbacks are controlled. No game saving operation is replaced.
@@ -93,7 +94,14 @@ function seed() {
 }
 test('whole simulation save restores words, inventory, flags, relationships and one-shot state', () => {
   const saved = seed();
-  assert.deepEqual(saved, { ...savedBaseline, pendingStart: null }, 'legacy values plus explicit completed-opening marker');
+  assert.deepEqual(saved, { ...savedBaseline, pendingStart: null, mc: 'eric', cast: defaultCast() },
+    'legacy values plus explicit completed-opening marker, and the protagonist and cast (#251)');
+  // Eric's save is byte for byte the one from before protagonists, with mc and cast added at the end
+  const { mc, cast, ...before } = JSON.parse(localStorage.getItem('amakawa-day1-save'));
+  assert.deepEqual([mc, cast], ['eric', defaultCast()]);
+  assert.equal(localStorage.getItem('amakawa-day1-save'),
+    JSON.stringify(before).slice(0, -1) + ',"mc":"eric","cast":' + JSON.stringify(defaultCast()) + '}');
+  assert.deepEqual(Object.keys(before), Object.keys({ ...savedBaseline, pendingStart: null }).filter((k) => k in before));
   assert.deepEqual(saved.known, ['ugoite', 'ohayo']);
   assert.deepEqual(saved.inv, ['coffee', 'tea']);
   assert.equal(saved.yen, 750);

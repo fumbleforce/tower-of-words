@@ -4,6 +4,7 @@ import { beginSavedWalk } from '../../places/saved-people.js';
 import { save } from '../../sim.js';
 import { flags } from '../state.js';
 import { flagKeys } from '../engine-flags.js';
+import { PLAYER_ID } from '../../mc.js';
 const ENGINE_KEYS = flagKeys('game3d/js/narrative/hooks/movement.js');
 
 export function installMovementHooks(game, { rigOf, posOf, aimOf, isPlayer }) {
@@ -121,7 +122,7 @@ export function installMovementHooks(game, { rigOf, posOf, aimOf, isPlayer }) {
       r.seated = true;
       return;
     }
-    await game.place.sitPerson?.(isPlayer(who) ? 'eric' : who, at);
+    await game.place.sitPerson?.(isPlayer(who) ? PLAYER_ID : who, at);
   };
   H.stand = async ({ who }) => {
     const pl = game.player;

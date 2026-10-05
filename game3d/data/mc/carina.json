@@ -1,0 +1,31 @@
+{
+  "id": "carina",
+  "name": "Carina",
+  "name_jp": "カリーナ",
+  "name_ro": "karīna",
+  "possessive": "Carina's",
+  "gender": "woman",
+  "orientation": "bisexual",
+  "pronouns": { "they": "she", "them": "her", "their": "her", "theirs": "hers", "themself": "herself" },
+  "address": { "default": "カリーナさん", "by": {} },
+  "portrait": {
+    "set": "eric",
+    "faces": ["neutral", "surprised", "tired"],
+    "crop": { "W": 648, "H": 768, "f": [116, 203, 340, 394] },
+    "note": "PLACEHOLDER: Eric's portraits and crop until Carina's are approved (art agent)"
+  },
+  "model": { "id": "eric", "height": 1.2, "chibi": "eric" },
+  "voice": {
+    "lines": "eric",
+    "words": "eric",
+    "ref": null,
+    "description": "Tired woman in her thirties, quiet and polite, no accent."
+  },
+  "bio": {
+    "from": "Norway",
+    "job": "IT support engineer on B2, on a support contract to keep Amakawa's ancient systems running",
+    "home": "dorm room 203 on 2F"
+  },
+  "text": {},
+  "placeholders": ["portrait", "model", "voice.lines", "voice.words", "voice.ref"]
+}

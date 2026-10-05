@@ -8,6 +8,7 @@ import { settings, setSetting, onSettings, qualityTier } from '../settings.js';
 import { sfx, keyLabel } from '../ui.js';
 import { browserSpeechAvailable, prepareVoice } from '../speech.js';
 import { el } from './dom.js';
+import { MC } from '../mc.js';
 
 const seg = (key, label, options, help = '') => ({ kind: 'seg', key, label, options, help });
 const sw = (key, label, help = '') => ({ kind: 'sw', key, label, help });
@@ -73,7 +74,7 @@ const SECTIONS = [
       sw(
         'chibi',
         'Chibi cast',
-        'Eric, Mio and the people they meet as chibi figures, from the next time the game loads',
+        `${MC.name}, Mio and the people they meet as chibi figures, from the next time the game loads`,
       ),
       sw('perfOverlay', 'Performance numbers', 'Frame rate and draw calls in a corner<span class="desk"> (F3)</span>'),
     ],

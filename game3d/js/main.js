@@ -15,7 +15,8 @@ import { pickPerson, softSeparate } from './move.js';
 import { scanTargets } from './gameplay/targeting.js';
 import { installSteer } from './movement/steer.js';
 import * as ambience from './ambience.js';
-import { mioBody, ericBody } from './chibi.js';
+import { mioBody, playerBody } from './chibi.js';
+import { reloadForMc } from './mc.js';
 import { makeAvatar, setSitLift } from './avatar.js';
 import { createTargets } from './narrative/hooks/targets.js';
 export { isPlayer } from './narrative/hooks/targets.js';
@@ -558,12 +559,12 @@ async function boot() {
   installSim(game); // bonds: bond, bondStep, remember, fact, relate hooks (js/bonds/)
   assertRegistered(GLOBAL_HOOKS, game.hooks, 'global hooks');
   if (Q.has('slift')) setSitLift(+Q.get('slift'));
-  // Eric: Jørgen's Meshy model; the code-built chibi is the fallback (?eric=chibi, or if loading fails)
+  // the player: the protagonist's Meshy model (mc.js); the code-built chibi is the fallback (?eric=chibi, or if loading fails)
   game.player =
     Q.get('eric') === 'chibi'
       ? makeAvatar()
-      : await ericBody().catch((e) => {
-          console.warn('Meshy Eric failed, using the chibi', e);
+      : await playerBody().catch((e) => {
+          console.warn('Meshy body failed, using the chibi', e);
           return makeAvatar();
         });
   game.player.root.add(blob(0.55, 0.4));
@@ -609,6 +610,7 @@ async function boot() {
   if (showTitle) {
     const pick = await title(saved);
     if (pick === 'continue' && saved) {
+      if (reloadForMc(saved)) return; // saved with another protagonist than ?mc= asked for
       await continueFrom(saved);
       return;
     }

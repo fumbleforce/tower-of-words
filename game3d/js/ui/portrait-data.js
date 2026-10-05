@@ -1,9 +1,11 @@
 // Shared runtime declaration; tooling imports this without DOM or renderer side effects.
+import { MC } from '../mc.js';
+
 export const PORTRAITS = {
   mio: ['neutral', 'smile', 'deadpan', 'surprised', 'embarrassed', 'tired', 'phone'],
   aoi: ['neutral'],
   kuro: ['neutral'],
-  eric: ['neutral', 'surprised', 'tired'],
+  [MC.portrait.set]: MC.portrait.faces, // the protagonist's (data/mc/<id>.json)
   mori: ['neutral', 'smile', 'flustered'],
   kenji: ['neutral', 'grin', 'sheepish'],
   kuroda: ['neutral', 'sleepy', 'panicked'],

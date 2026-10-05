@@ -1,5 +1,6 @@
 import { settings, onSettings } from '../settings.js';
 import { known } from '../lang.js';
+import { playerClip } from '../mc.js';
 
 // ---------- sound ----------
 let actx = null;
@@ -142,6 +143,7 @@ export function stopVoice(ms = 80) {
 // let a speaker finish: Eric's words must never be cut off by the next line.
 export function voice(key, opts = {}) {
   if (muted || !key || !settings.voiceOn) return Promise.resolve();
+  key = playerClip(key); // the player's word clips in the protagonist's voice
   const wait = stopVoice(80);
   const gen = voiceGen;
   return new Promise((res) => {

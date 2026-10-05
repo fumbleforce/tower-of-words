@@ -2,6 +2,7 @@ import { PORTRAITS, TEXT_PORTRAITS } from './portrait-data.js';
 import { portraitSource } from '../plugins.js';
 import { $ } from './dom.js';
 import { onKeyboard } from './keyboard-fit.js';
+import { MC, isPlayer } from '../mc.js';
 
 // ---------- VN portraits ----------
 // Available expressions are declared in ui/portrait-data.js; missing files fall back to neutral.
@@ -11,10 +12,8 @@ import { onKeyboard } from './keyboard-fit.js';
 // the chin at the same height, the body cut at the waist.
 export const FACE = {
   aoi: { W: 597, H: 768, f: [219, 167, 381, 336] },
-  // Eric: x and chin from the detector ([116, 171, 340, 394], eric-ink-2001 from reviews/style-align-1); the top kept 191 px above the chin, the old crop's face
-  // height, so he shows 25% bigger than the others, as approved (reviews/eric-portrait-final-3). 648 wide so his left
-  // shoulder (image right) ends inside the picture (reviews/eric-canvas-1)
-  eric: { W: 648, H: 768, f: [116, 203, 340, 394] },
+  // the protagonist's, with why it is cut that way (data/mc/<id>.json portrait.crop and its note)
+  [MC.portrait.set]: MC.portrait.crop,
   guard: { W: 597, H: 768, f: [222, 167, 378, 334] },
   kenji: { W: 597, H: 768, f: [219, 166, 383, 335] },
   // Kuro: extended down to the waist (reviews/kuro-body-1, c-s11), and shown 15% smaller than the others (size 0.85):
@@ -44,10 +43,14 @@ export function setPortraitAvoid(fn) {
   avoidBoxes = fn;
 }
 let lastNpc = null;
+// the player's lines and faces (id 'eric', mc.js PLAYER_ID) use the protagonist's portrait set
+const ME = MC.portrait.set;
+const pid = (who) => (isPlayer(who) ? ME : who);
 export function setFace(who, face) {
-  faceNow[who] = face;
+  faceNow[pid(who)] = face;
 }
 export function faceForEmote(who, kind) {
+  who = pid(who);
   const f = (EMOTE_FACE[kind] || []).find((x) => PORTRAITS[who] && PORTRAITS[who].includes(x));
   if (f) faceNow[who] = f;
 }
@@ -124,6 +127,7 @@ if (typeof Image !== 'undefined')
   }, 6000);
 // a small round face for the backlog: the face box, a little wider, filling a square (CSS percentages, any size)
 export function thumbStyle(whoId, face) {
+  whoId = pid(whoId);
   const text = TEXT_PORTRAITS[whoId];
   if (text) [whoId, face] = [text[0], PORTRAITS[text[0]].includes(face) ? face : text[1]];
   const F = FACE[whoId],
@@ -138,6 +142,7 @@ export function thumbStyle(whoId, face) {
 }
 const HOPS = new Set(['surprised', 'panicked', 'panic']);
 export function showPortraits(t, whoId, face) {
+  whoId = pid(whoId);
   const text = TEXT_PORTRAITS[whoId]; // a text message: the sender's portrait
   if (text) [whoId, face] = [text[0], PORTRAITS[text[0]].includes(face) ? face : text[1]];
   const S = $('#stage'),
@@ -187,14 +192,14 @@ export function showPortraits(t, whoId, face) {
     el.classList.toggle('listen', !!listen);
   };
   const phone = document.body.classList.contains('phone');
-  if (whoId === 'eric') {
-    set(R, 'eric', face, false);
+  if (whoId === ME) {
+    set(R, ME, face, false);
     if (!phone && lastNpc && PORTRAITS[lastNpc]) set(L, lastNpc, undefined, true);
     else L.hidden = true;
   } else {
     lastNpc = whoId;
     set(L, whoId, face, false);
-    if (!phone && PORTRAITS[whoId]) set(R, 'eric', undefined, true);
+    if (!phone && PORTRAITS[whoId]) set(R, ME, undefined, true);
     else R.hidden = true;
   }
   if (!PORTRAITS[whoId]) L.hidden = true;
