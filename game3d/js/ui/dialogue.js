@@ -3,7 +3,7 @@ import { lineHTML } from '../lang.js';
 import { settings, CPS } from '../settings.js';
 import { voice, stopVoice } from '../audio/core.js';
 import { showPortraits, resetPortraitSpeaker } from './portraits.js';
-import { heardHTML, scramble, reveal, addPlayButtons } from './dialogue-text.js';
+import { heardHTML, scramble, reveal, addPlayButtons, whileUnpaused } from './dialogue-text.js';
 import { showDoorCard } from './door-card.js';
 import { lineId, wasRead, markRead, logLine, logToJSON, logLoad } from './backlog.js';
 import { vn, skipLine, autoLine, choiceShown } from './vn-controls.js';
@@ -68,19 +68,16 @@ export function createDialogue({ sfx }) {
         const spoken = voiceKey && !skip ? voice(voiceKey, { muffle: !!overheard }) : null;
         const started = performance.now();
         this._lines = (this._lines || 0) + 1; // the continue hint shows with words for the first few lines
-        if (this.auto || skip) {
-          setTimeout(
-            () => {
-              this._advance = null;
-              stopVoice();
-              res();
-            },
-            skip ? 70 : 15,
-          );
+        if (this.auto) {
+          setTimeout(() => {
+            this._advance = null;
+            stopVoice();
+            res();
+          }, 15);
           return;
         }
         const cps = CPS[settings.textSpeed] || 0;
-        const rv = !overheard && cps ? reveal(lineEl, cps) : { done: true };
+        const rv = !overheard && cps && !skip ? reveal(lineEl, cps) : { done: true };
         if (!rv.done) {
           more.hidden = true;
           rv.onDone = () => {
@@ -129,6 +126,9 @@ export function createDialogue({ sfx }) {
           setTimeout(go, 40);
         };
         if (vn.auto) this._autoGo();
+        // Skip: the line moves on after a moment, held while the game is paused, and only if Skip is still on then
+        // (Codex X-0538: it ran on behind the pause menu); turned off meanwhile, the line waits for a tap as usual
+        else if (skip) whileUnpaused(70).then(() => this._advance === adv && skipLine(seen) && go());
       });
     },
     // Show a line with reply chips; resolves with the chip index. chips: [{html}]
