@@ -2,7 +2,7 @@
  "title": "Carina: portrait round 5 (blonde with dark roots, relaxed face)",
  "date": "2026-10-05",
  "by": "art agent (Carina portrait 5)",
- "status": "open",
+ "status": "superseded",
  "multi": true,
  "question": "Is any of these Carina, or which parts (hair shape, root or stripe look, face, glasses, clothes) should I combine?",
  "media": [
@@ -232,5 +232,6 @@
    ],
    "note": "REJECTED: blotchy script recolour. Jørgen: \"what did you do to carina, her hair is blotchy and ugly, are you manually truing to edit it?\" The shown image (-r-final) has its dark roots painted on by script (roots.py); do not use it. The unrecoloured render is the earlier image in this option's list. PASS; STYLE PASS. Extra seed 11248 of option 4, same attempt-2 prompt as option 4, root pass applied. Red rim 0.0021% (pass). Roots: dark band at the hairline and part, golden below (reads as roots, not ombre)."
   }
- ]
+ ],
+ "decision": "Jørgen made Carina himself in the image gen dashboard (art/candidates/portraits/carina-9-jorgen); this round is closed."
 }
