@@ -3902,6 +3902,10 @@
   "game3d/assets/characters/kuro/run.glb": {"size": 280564, "sha256": "efa1cb6422f63287c42c5fa36be7c6918c567b922aa2990d013d0751969393f6", "type": "model/gltf-binary"},
   "game3d/assets/characters/kuro/sit.glb": {"size": 564448, "sha256": "46de7cc3f78bed94df5dcd814422c0ba651447110bb312d02722c6d26b4a59b4", "type": "model/gltf-binary"},
   "game3d/assets/characters/kuro/walk.glb": {"size": 291164, "sha256": "1455479372821f713cabe23f8baf8742d4fbf7e7c05276cdfd526a08b15a83ac", "type": "model/gltf-binary"},
+  "game3d/assets/characters/kuroda/base.webp": {"size": 231246, "sha256": "07c9d97d4f45c8d277464abfd769f11fe8b73e837804d60f8edcae655e28d4e2", "type": "image/webp"},
+  "game3d/assets/characters/kuroda/run.glb": {"size": 285880, "sha256": "a0008072effd19364d711491434c9f105377cd5d42bbb2126c0e02e2e917064a", "type": "model/gltf-binary"},
+  "game3d/assets/characters/kuroda/sit.glb": {"size": 569788, "sha256": "d2718294ebd6f8b331fbbd82d85ddefa76313c5242781605843a8e7541c9fc82", "type": "model/gltf-binary"},
+  "game3d/assets/characters/kuroda/walk.glb": {"size": 296492, "sha256": "a96076e30535509bdd97049f0d7a4ddb21bb48cc8308c1a3c9dc975804a6e63c", "type": "model/gltf-binary"},
   "game3d/assets/characters/mori/base.webp": {"size": 189232, "sha256": "b97aef91f15fa386df2468820166ec24543911650cf0b829666af2ddbe78c3a1", "type": "image/webp"},
   "game3d/assets/characters/mori/idle.glb": {"size": 152740, "sha256": "7302de261164d09809cc908797de894604a17e9173776909f47a16351993f5ba", "type": "model/gltf-binary"},
   "game3d/assets/characters/mori/run.glb": {"size": 283992, "sha256": "41b3090c10725ba34e13623cd5db50e2b38e63f15972f69ad20111fdebbe0e19", "type": "model/gltf-binary"},
@@ -4710,6 +4714,7 @@
   "game3d/shots/round-9/office.png": {"size": 1643389, "sha256": "9fe2d2a6ae15b97f704a5d35ff058c3d28366670a9c0181dfffa48d71e56d8ac", "type": "image/png"},
   "game3d/shots/round-9/platform.png": {"size": 1599434, "sha256": "bfa70957399642d7345aad1ba784c674c4b092c864d69cfec2f8a51cc87acb94", "type": "image/png"},
   "game3d/shots/round-9/train.png": {"size": 1611936, "sha256": "85fa62fb062bc213497be8390350df371090f4ac0931d4119d4bc20649e51192", "type": "image/png"},
+  "game3d/shots/story-cues/lift-desktop.png": {"size": 847755, "sha256": "8f9a45279acd4bd5f8c22a5f7735f86b12dc6fbbc9a7285a309f4de79edd3c7c", "type": "image/png"},
   "game3d/shots/style-in-game/extra/settings-desk.png": {"size": 613289, "sha256": "5983d68e9b4710b43689f7122ab7a5873535361f9e0f6362e2b17897354a5ea3", "type": "image/png"},
   "game3d/shots/style-in-game/extra/settings-phone.png": {"size": 215134, "sha256": "8e42702df83ccc4007a38785f3259e2c88cd753f4b7d1b795ce4528957ef87fc", "type": "image/png"},
   "game3d/shots/style-in-game/extra/showcase-look2.png": {"size": 893770, "sha256": "9e8dcd607c722dffb495638338b05935c0f57fdf91d9157f4eb8a211613f607e", "type": "image/png"},
@@ -6646,6 +6651,7 @@
   "tools/voice-refs/lift-announcer.wav": {"size": 252506, "sha256": "f50b2e2f84b8ef879af7746ba9c4846eb4647b39c6edb29c39c72080cf211dc0", "type": "audio/wav"},
   "tools/voice-refs/mio-a.wav": {"size": 533804, "sha256": "2591e427f5aa86a70f659e1880f2071d5cfb75ae387d8975f73b7eca48a474e9", "type": "audio/wav"},
   "tools/voice-refs/mio.wav": {"size": 522284, "sha256": "761c2fe9ccfb7232f4fdad35f4355fab27b1fc9cee1acd883c494f34f94bfff7", "type": "audio/wav"},
+  "tools/voice-refs/mizuno-design.wav": {"size": 779564, "sha256": "e99624c2928cfbddc62791e93c680cb2183ded8b1065fc05b8ec05a66247481f", "type": "audio/wav"},
   "tools/voice-refs/mori-design.wav": {"size": 606764, "sha256": "4a5994beabe9adea64aab20a1ecb5c474cf6039c544ce1e60e095b384103648e", "type": "audio/wav"},
   "tools/voice-refs/player-slice12.wav": {"size": 588208, "sha256": "8e18dded83d7349d6836d943303ec6b816f95c6e03d92daa44cf8a1c224120c7", "type": "audio/wav"},
   "tools/voice-refs/rei-slice12.wav": {"size": 615692, "sha256": "765f811e87741e2c6ed15283da6054c83ee3a6ee885df3de39d43b92aa7193cd", "type": "audio/wav"},
@@ -6653,6 +6659,7 @@
   "tools/voice-refs/sales-design.wav": {"size": 802638, "sha256": "48ee0a1a63c6edbb2a69c0ba48387ff5cffbfd96fe53c8d33bdb1e377fa18e30", "type": "audio/wav"},
   "tools/voice-refs/sales1-design.wav": {"size": 606764, "sha256": "7bdea29fb2e4ab063f89af005796a9ff3599090fe37de1492a4891c024390077", "type": "audio/wav"},
   "tools/voice-refs/staff-design.wav": {"size": 875598, "sha256": "a3b1567d3a5f367db130d188852f7d3633adf7bb84136f9b4aff0c09a92f033b", "type": "audio/wav"},
-  "tools/voice-refs/vending-design.wav": {"size": 1025358, "sha256": "088dc2a6af7b3598c7ab06d99779473d8161a0ce95f3170c2ed5982b367f0036", "type": "audio/wav"}
+  "tools/voice-refs/vending-design.wav": {"size": 1025358, "sha256": "088dc2a6af7b3598c7ab06d99779473d8161a0ce95f3170c2ed5982b367f0036", "type": "audio/wav"},
+  "tools/voice-refs/worker-design.wav": {"size": 576044, "sha256": "8331edc568ff2e50c3170f9e8c721b445bbb32907b7dd09576f2e61425999428", "type": "audio/wav"}
  }
 }
