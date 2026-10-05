@@ -2,7 +2,7 @@
  "title": "Mr. Ishibashi (the guard): a 3D model made the way Kuro, Aoi and Emi were",
  "date": "2026-10-05",
  "by": "Claude (staff-meshy agent)",
- "status": "open",
+ "status": "decided",
  "question": "The first two sheets are ChatGPT pictures; every sheet after them is a render of the real rigged model, which you can turn in the live viewer next to Eric, Mio, Kuro, Aoi and Emi (link below). He is in the game now. Is the guard right?",
  "multi": false,
  "media": [
@@ -74,5 +74,11 @@
    "label": "Kuro round 3, the approved process (kuro-meshy-orig-3)",
    "href": "bible/#review/kuro-meshy-orig-3"
   }
- ]
+ ],
+ "decided": [
+  "guard-1"
+ ],
+ "decision": "guard-1 picked",
+ "decided_at": "2026-10-05T13:16:40+0200",
+ "issue": 249
 }
