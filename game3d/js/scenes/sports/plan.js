@@ -156,16 +156,17 @@ export const EXITS = {
 export const IN = pt([NSX, NORTH_END - 3.6]);
 export const ARRIVE_EDGE = EXITS.east_lane.edge;
 // the walks' bounds, for the nav grid and the camera
-export const BOUNDS = (() => {
+export function boundsOf(walks) {
   const b = [Infinity, -Infinity, Infinity, -Infinity];
-  for (const [x0, x1, z0, z1] of WALKS) {
+  for (const [x0, x1, z0, z1] of walks) {
     b[0] = Math.min(b[0], x0);
     b[1] = Math.max(b[1], x1);
     b[2] = Math.min(b[2], z0);
     b[3] = Math.max(b[3], z1);
   }
   return b;
-})();
+}
+export const BOUNDS = boundsOf(WALKS);
 
 // where the camera turns (places/sports.js), in the chunk's frame: it looks a little east of north over the lane,
 // the north street and the pool walk, so the gym's front faces it; at the pool walk's north end, past the gym, it

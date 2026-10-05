@@ -14,3 +14,25 @@ export const SPORTS_DETAILS = {
   people: [],
   hooks: [],
 };
+
+// The pool deck's (places/pool.js), walked through the shower pavilion from the sports ground.
+export const POOL_DETAILS = {
+  things: {
+    changing_room: { label: 'To the changing room', kind: 'thing', verb: 'Go' },
+  },
+  spots: [
+    'deck_in',
+    'pool_steps',
+    'pool_blocks',
+    'lifeguard_chair',
+    'deck_benches',
+    'float_rack',
+    'pool_fence_corner',
+    'pool_lost_property',
+  ],
+  nooks: ['pool_fence_corner', 'pool_lost_property'], // docs/game/places.md, "Nooks"
+  seats: ['deck_bench_n', 'deck_bench_s'],
+  zones: [],
+  people: [],
+  hooks: [],
+};

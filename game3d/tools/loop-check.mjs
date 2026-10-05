@@ -1,4 +1,5 @@
-// Walks the outdoor chunks through their trips, the way a player does: the first loop round the south-east of the
+// Walks the outdoor chunks through their trips, the way a player does (in through the pool pavilion onto the deck
+// and back on the way): the first loop round the south-east of the
 // island (up the east lane's north street into the sports ground, east along the courts walk into the east coast,
 // back west into the sports ground and down the north street into the east lane; on the way, out west to the office
 // quarter, on west to the harbour, round the loop through the old works (up the works lane, down the works street,
@@ -29,6 +30,9 @@ const LEGS = [
   ['works', 'harbour_lane', 'harbour'],
   ['harbour', 'office_street', 'office_quarter'],
   ['office_quarter', 'sports_lane', 'sports'],
+  // through the shower pavilion's door onto the pool deck and back (a door: used, not walked into)
+  ['sports', { use: 'pool' }, 'pool'],
+  ['pool', { use: 'changing_room' }, 'sports'],
   [
     'sports',
     [
@@ -87,6 +91,13 @@ await withBrowserJob(
           const g = window.__game;
           // a way out: to where he stands to use it, then on toward its edge (the plaza's zone starts past the spot)
           if (typeof points === 'string') points = [g.place.things[points].spot(), g.place.things[points].face()];
+          // a door: to where he stands to use it, then use it
+          if (points.use) {
+            const id = points.use;
+            await g.walkTo(...g.place.things[id].spot());
+            g.runner.trigger('talk:' + id);
+            return;
+          }
           for (const [x, z] of points) await g.walkTo(x, z);
         }, points)
         .catch(() => {}); // the page moves on to the next place mid-walk

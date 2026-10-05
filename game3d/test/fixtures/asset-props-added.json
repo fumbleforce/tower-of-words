@@ -1411,6 +1411,29 @@
     ]
   },
   {
+    "id_": "prop/pool/changing_room",
+    "kind": "prop",
+    "name": "To the changing room",
+    "paths": [
+      "game3d/js/places/pool.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "pool.js things.changing_room",
+    "place": "pool",
+    "used": [
+      "Pool deck: tap target 'To the changing room'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "pool"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
     "id_": "prop/shotengai/bakery",
     "kind": "prop",
     "name": "Bakery",

@@ -47,21 +47,23 @@ const FRONTS = E.BLOCKS.filter((k) => k.id === 'r3' || k.id === 'block_e3'); // 
 const OFFICES = ['m4', 'm5']; // the office row's nearest the gym's corner, and the street in front of them
 const STREET_W = block('m3').rect[1];
 
-export const buildSports = () => drain(sportsSteps());
-export function* sportsSteps() {
+export const buildSports = (ground) => drain(sportsSteps(ground));
+// ground: what is walked, in the chunk's frame (the streets and walks by default; the pool deck walks the deck, in
+// the same world: places/pool.js): { walks, blocks, start }
+export function* sportsSteps({ walks = P.WALKS, blocks = P.FURNITURE, start = P.IN } = {}) {
   const root = new THREE.Group(),
     scene = new THREE.Scene();
   scene.background = new THREE.Color(TOWN.roof);
   scene.add(root);
   const sun = outdoorLight(scene);
   const shadows = sunFollow(sun); // the district is long: the sun's shadow box follows Eric
-  shadows.follow(...P.IN);
+  shadows.follow(...start);
 
   // walkable: the streets and walks (plan.js WALKS), never what stands on them
-  const [bx0, bx1, bz0, bz1] = P.BOUNDS;
+  const [bx0, bx1, bz0, bz1] = P.boundsOf(walks);
   const nav = new Nav(bx0 - 0.2, bx1 + 0.2, bz0 - 0.2, bz1 + 0.2, 0.12);
-  nav.extra = (x, z) => P.WALKS.some((r) => inRect(x, z, r, -0.02));
-  for (const r of P.FURNITURE) nav.block(...r);
+  nav.extra = (x, z) => walks.some((r) => inRect(x, z, r, -0.02));
+  for (const r of blocks) nav.block(...r);
 
   // everything of its own is laid in the island frame, in a group moved into the chunk's
   const isl = placeIn(new THREE.Group(), CHUNK);

@@ -15,7 +15,7 @@ import path from 'node:path';
 
 const OUT = path.join(path.dirname(new URL(import.meta.url).pathname), '../js/creatures/perches.js');
 const CHECK = process.argv.includes('--check');
-const ALL = ['forecourt', 'plaza', 'dorm_court', 'shotengai', 'east_lane', 'east_coast', 'sports', 'office_quarter', 'harbour', 'works'];
+const ALL = ['forecourt', 'plaza', 'dorm_court', 'shotengai', 'east_lane', 'east_coast', 'sports', 'pool', 'office_quarter', 'harbour', 'works'];
 const args = process.argv.slice(2).filter((a) => !a.startsWith('--'));
 const places = args.length ? args : ALL;
 const base = process.env.BASE || 'game3d';

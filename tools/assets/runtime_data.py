@@ -9,7 +9,7 @@ ROOT = Path(__file__).resolve().parents[2]
 CONST = {'lobby': {'BZ': -0.55, 'Z': 4.5, 'X': 6.3}, 'office': {'CN': 0.2, 'CS': 2.4, 'Z0': -6.4}, 'train': {'LZ': 1.2, 'LX': 4.0, 'DOOR_X': 3.25}}
 # Library labels for every place the game registers (game3d/js/places/definitions.js PLACE_FILES), plus the lift,
 # which rides between places. load_runtime_data() refuses a registered place that has no label here.
-PLACES = {'train': 'Train', 'gate': 'Station security room', 'forecourt': 'Forecourt', 'plaza': 'Fountain plaza', 'lift': 'Lift', 'office': 'B2 office', 'dorm_court': 'Dorm courtyard', 'dorms': "Eric's dorm room", 'shotengai': 'Shop street', 'east_lane': 'East lane', 'east_coast': 'East coast', 'sports': 'Gym and pool', 'office_quarter': 'Office street', 'harbour': 'Harbour', 'works': 'Old works'}
+PLACES = {'train': 'Train', 'gate': 'Station security room', 'forecourt': 'Forecourt', 'plaza': 'Fountain plaza', 'lift': 'Lift', 'office': 'B2 office', 'dorm_court': 'Dorm courtyard', 'dorms': "Eric's dorm room", 'shotengai': 'Shop street', 'east_lane': 'East lane', 'east_coast': 'East coast', 'sports': 'Gym and pool', 'pool': 'Pool deck', 'office_quarter': 'Office street', 'harbour': 'Harbour', 'works': 'Old works'}
 
 
 def num(expr, consts):

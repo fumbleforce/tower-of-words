@@ -34,6 +34,7 @@ const BATCHED = new Set([
   'east_lane',
   'east_coast',
   'sports',
+  'pool',
   'office_quarter',
   'harbour',
   'works',

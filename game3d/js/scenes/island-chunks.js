@@ -97,6 +97,15 @@ export const CHUNKS = {
     view: [-30, 50, -46, 32],
     anchor: 'the corner where the pool walk meets the courts walk',
   },
+  pool: {
+    at: [58.2, -57.5],
+    turn: 0, // the sports ground's frame and world (scenes/sports.js), walked on the deck: the camera looks up the pool
+    scale: 1,
+    level: 0,
+    walk: [1.8, 17.2, -29.5, -3.5],
+    view: [-4, 22, -40, 0],
+    anchor: 'the sports ground’s own, the deck inside the pool’s fence',
+  },
   office_quarter: {
     at: [4.5, -54],
     turn: 0, // the camera turns itself: north-north-west along the street, north up the walks, as the sports lane by the gym (scenes/office-quarter.js)
