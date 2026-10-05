@@ -1,0 +1,194 @@
+{
+ "title": "Crowd pilot: office man (A) and office woman (B), each on two rigs",
+ "date": "2026-10-05",
+ "by": "Claude (crowd-pilot agent, #232)",
+ "status": "open",
+ "question": "The first two sheets are ChatGPT pictures; every sheet after them shows real rigged 3D models, which you can turn, pan and play in the live viewer (first link). Which rig do you want for the crowd, (a) ours or (b) Meshy's, and are the office man and office woman right?",
+ "multi": true,
+ "media": [
+  {
+   "image": "art/parts/crowd-pilot-1/sheets/step0-input.webp",
+   "caption": "ChatGPT pictures. The plan's first two people (notes/people-plan.md; your answer \"1: 7, 2: you must show me examples, 3: a, 4: b, 5: a\"). They have no portrait, so step 1 attached only your Mio chibi and added one sentence naming who to draw. One chat each in ChatGPT's image model (openai/gpt-5.4-image-2 on OpenRouter), as for the cast."
+  },
+  {
+   "image": "art/parts/crowd-pilot-1/sheets/steps-a.webp",
+   "caption": "ChatGPT pictures, A, every take in order. 1 \"make a 3d chibi anime character in the style of the attached image. The character: an office man in his thirties with short dark brown hair, a plain mid-grey suit, white shirt and dark tie, black shoes, average build, empty hands.\" (a-a1), 2 \"Simplify male character a LOT to match the detail level of the other chibi, with open eyes\" (a-b1), 3 \"Simpler head model\" (a-c1; nothing on him for Meshy to garble), then your angle prompt with \"he\" and \"his\" (a-d1). Head share in a-d1 about 0.40 of his height (cast pictures 0.37 to 0.46), so no head follow-up. He is unlike Mori (grey hair) and Hamada (black hair, navy suit). One take per step, 4 takes, $0.99."
+  },
+  {
+   "image": "art/parts/crowd-pilot-1/sheets/steps-b.webp",
+   "caption": "ChatGPT pictures, B, every take in order: 1 the same words with \"The character: an office woman in her thirties with dark brown hair in a low bun, a navy blazer and knee-length navy skirt, white blouse, dark flat shoes, empty hands.\" (b-a1), 2 with \"female\" (b-b1), 3 \"Simpler head model\" (b-c1), your angle prompt (b-d1). Head share in b-d1 about 0.38. Her bun sits at the back on her left (image right in a front view). 4 takes, $0.98."
+  },
+  {
+   "image": "art/parts/crowd-pilot-1/sheets/shape-previews.webp",
+   "caption": "Real 3D models from here on. Meshy image-to-3D from a-d1 and b-d1 with the cast's settings: smart topology (meshy-t2), 1,050 polygons, A-pose, no texture, 5 credits each. Meshy's previews; first roll of each, kept."
+  },
+  {
+   "image": "art/parts/crowd-pilot-1/sheets/tex-b.webp",
+   "caption": "B textured: the face-first UV layout (kuro-meshy-orig-3/uv_bl.py, her face one piece at 3 times the detail), then Meshy retexture styled from b-d1, keeping our UVs, no PBR, 10 credits. Front, three-quarter (her left side, image right, turned to us), side, back, face. CPU renders of the textured model, not the game's light."
+  },
+  {
+   "image": "art/parts/crowd-pilot-1/sheets/tex-a.webp",
+   "caption": "A textured, three tries, all shown. Texture 1 (styled from a-d1, as for the cast): his eyes came out as smeared white and black blotches. Texture 2: the same settings again (10 credits) came back almost the same (mean difference 1 of 255), so Meshy repeats itself on the same input. Texture 3: one change, styled from a-c1, his face toward the camera (10 credits): smeared the same way. Texture 1 is on the model. 30 credits on his texture."
+  },
+  {
+   "image": "art/parts/crowd-pilot-1/sheets/eyes-a.webp",
+   "caption": "Why A's eyes smear: Meshy built his eyes and brows as four loose shells floating just in front of his face (left: from the side, the white sliver in front of his face). The paint lands on those shells badly whatever the picture. B's eyes are painted on her face itself and are clean. Not fixed in this round: see the question on A."
+  },
+  {
+   "image": "art/parts/crowd-pilot-1/sheets/rigs-idle.webp",
+   "caption": "The live viewer, both rigs side by side, left to right: A on rig (a) ours, A on rig (b) Meshy's, B on rig (a), B on rig (b). The game's own loader and files (walk, run, sit, the approved relaxed-3 idle baked on each rig). Idle from the front, three-quarter (their left side turned to us), side and back. Rig (b): Meshy's auto-rig at 1.1 m (5 credits each) with Meshy's walk and run and its Chair_Sit_Idle_F (3 credits each). Rig (a): the same model, untouched, on the game's Meshy skeleton placed inside it, with the bone orientations of a cast donor (Hamada for A, Emi for B) so the cast's own Meshy walk, run and sit play on it (Rei's method, art/candidates/crowd-pilot-1/rerig_gen.py); no credits."
+  },
+  {
+   "image": "art/parts/crowd-pilot-1/sheets/rigs-walk.webp",
+   "caption": "Walk (in place), same order: A (a), A (b), B (a), B (b)."
+  },
+  {
+   "image": "art/parts/crowd-pilot-1/sheets/rigs-run.webp",
+   "caption": "Run, same order."
+  },
+  {
+   "image": "art/parts/crowd-pilot-1/sheets/rigs-sit.webp",
+   "caption": "Sit, same order, on a see-through block 0.3 m high (the asset gallery's seat, not a game seat). Both rigs sink into it about the same."
+  },
+  {
+   "image": "art/parts/crowd-pilot-1/sheets/close-idle-upper.webp",
+   "caption": "Close on shoulders and elbows, idle: front then side, each of the four alone."
+  },
+  {
+   "image": "art/parts/crowd-pilot-1/sheets/close-idle-lower.webp",
+   "caption": "Close on hips and knees, idle."
+  },
+  {
+   "image": "art/parts/crowd-pilot-1/sheets/close-walk-upper.webp",
+   "caption": "Shoulders and elbows, walk."
+  },
+  {
+   "image": "art/parts/crowd-pilot-1/sheets/close-walk-lower.webp",
+   "caption": "Hips and knees, walk."
+  },
+  {
+   "image": "art/parts/crowd-pilot-1/sheets/close-run-upper.webp",
+   "caption": "Shoulders and elbows, run."
+  },
+  {
+   "image": "art/parts/crowd-pilot-1/sheets/close-run-lower.webp",
+   "caption": "Hips and knees, run."
+  },
+  {
+   "image": "art/parts/crowd-pilot-1/sheets/close-sit-upper.webp",
+   "caption": "Shoulders and elbows, sit."
+  },
+  {
+   "image": "art/parts/crowd-pilot-1/sheets/close-sit-lower.webp",
+   "caption": "Hips and knees, sit (the seat is see-through so the knees show)."
+  },
+  {
+   "image": "art/parts/crowd-pilot-1/sheets/joints.webp",
+   "caption": "Offline check of the walk on each rig (skinned on the CPU, flat colour per mesh piece, red dots are joints), front and side over one step. Over the clip the head, chest and hips turn at most 4.5, 16.6 and 7 degrees on both rigs of both people, the same as Emi and Rei. What rig (a) needed beyond Rei's script, found on the way: B's arms hang 12 degrees lower than Emi's in the A-pose, so Emi's clip first put B's arms inside her body (each limb bone is now turned onto the model's own limb line); bone heat failed on A's loose eye shells (they now take the weights of the nearest face vertex); and heat put B's bun on her left shoulder, so it vanished into her body in the run (anything over the neck is now on the head)."
+  },
+  {
+   "image": "art/parts/crowd-pilot-1/sheets/cast.webp",
+   "caption": "Beside the cast, all built the same way in the viewer: Mori, A on rig (a), Hamada, Emi, B on rig (a), Kuro (idle, walk, side). A is 1.09 tall, as Hamada; B 1.06."
+  },
+  {
+   "image": "art/parts/crowd-pilot-1/sheets/masks.webp",
+   "caption": "How the variety is made, as the crowd routing (chibi-crowd.js) will: a mask on each texture (red hair, green top, blue skirt; for A the trousers go with the jacket, as the old suit did). Skin, shirt, tie, shoes and eyes stay as made."
+  },
+  {
+   "image": "art/parts/crowd-pilot-1/sheets/variety-own.webp",
+   "caption": "Variety on rig (a): 6 of each, colours from the old crowd lists (suit and blouse), heights within 5% (A 1.05 to 1.13, B 1.02 to 1.09). Front row A, back row B. The faces are the same on every copy (one face per archetype, your answer 4: b); A's smeared eyes repeat on every copy."
+  },
+  {
+   "image": "art/parts/crowd-pilot-1/sheets/variety-meshy.webp",
+   "caption": "The same 12 on rig (b)."
+  }
+ ],
+ "options": [
+  {
+   "id": "rig-a",
+   "label": "rig-a: our rig",
+   "image": "art/parts/crowd-pilot-1/close/walk-upper-front-b-own.png",
+   "images": [
+    "art/parts/crowd-pilot-1/close/run-upper-side-b-own.png",
+    "art/parts/crowd-pilot-1/close/sit-lower-side-a-own.png",
+    "art/parts/crowd-pilot-1/close/walk-lower-side-a-own.png"
+   ],
+   "note": "Rig (a), as on Rei: the game's Meshy skeleton placed inside the model, a cast donor's bone orientations, bone-heat weights, and the cast's own Meshy walk, run and sit (Hamada's for men, Emi's for women). 0 credits per model, so each new archetype costs 15 (shape and texture) instead of 23. Every crowd body walks with exactly the cast's clips."
+  },
+  {
+   "id": "rig-b",
+   "label": "rig-b: Meshy's auto-rig",
+   "image": "art/parts/crowd-pilot-1/close/walk-upper-front-b-meshy.png",
+   "images": [
+    "art/parts/crowd-pilot-1/close/run-upper-side-b-meshy.png",
+    "art/parts/crowd-pilot-1/close/sit-lower-side-a-meshy.png",
+    "art/parts/crowd-pilot-1/close/walk-lower-side-a-meshy.png"
+   ],
+   "note": "Rig (b): Meshy's auto-rig at 1.1 m with its walk and run, and its Chair_Sit_Idle_F: 8 credits per model (rig 5, sit 3). On these two it placed the bones well; on Rei it put them in her ponytail."
+  },
+  {
+   "id": "model-a",
+   "label": "model-a: office man",
+   "image": "art/parts/crowd-pilot-1/close/idle-upper-front-a-own.png",
+   "images": [
+    "art/parts/crowd-pilot-1/pics/a-d1.png",
+    "art/parts/crowd-pilot-1/renders/a-1-tex.png"
+   ],
+   "note": "From a-d1: grey suit, dark tie, short dark hair, 1.09 tall. His eyes are smeared (Meshy made them as loose shells in front of the face). 40 credits so far (shape 5, three textures 30, rig 5); pictures $0.99. Ways on, your choice: a new shape from a-d1 (15 credits with its texture, the eyes may come out painted on the face like B's), or repaint his eyes on the texture from a-d1 (no credits)."
+  },
+  {
+   "id": "model-b",
+   "label": "model-b: office woman",
+   "image": "art/parts/crowd-pilot-1/close/idle-upper-front-b-own.png",
+   "images": [
+    "art/parts/crowd-pilot-1/pics/b-d1.png",
+    "art/parts/crowd-pilot-1/renders/b-1-tex.png"
+   ],
+   "note": "From b-d1: navy blazer and knee-length skirt, dark brown hair in a low bun at the back on her left (image right), 1.06 tall. First shape, first texture. 18 credits (shape 5, texture 10, sit 3) plus the rig's 5; pictures $0.98."
+  }
+ ],
+ "links": [
+  {
+   "label": "Live 3D: both rigs side by side, beside the cast, and the variety (turn, pan, zoom; idle, walk, run, sit)",
+   "href": "reviews/crowd-pilot-1/viewer.html"
+  },
+  {
+   "label": "Rei's rig round, the method rig (a) follows (rei-meshy-1)",
+   "href": "bible/#review/rei-meshy-1"
+  }
+ ],
+ "viewer_files": [
+  "art/parts/crowd-pilot-1/game/a-meshy/base.webp",
+  "art/parts/crowd-pilot-1/game/a-meshy/idle.json",
+  "art/parts/crowd-pilot-1/game/a-meshy/run.glb",
+  "art/parts/crowd-pilot-1/game/a-meshy/sit.glb",
+  "art/parts/crowd-pilot-1/game/a-meshy/walk.glb",
+  "art/parts/crowd-pilot-1/game/a-own/base.webp",
+  "art/parts/crowd-pilot-1/game/a-own/idle.json",
+  "art/parts/crowd-pilot-1/game/a-own/run.glb",
+  "art/parts/crowd-pilot-1/game/a-own/sit.glb",
+  "art/parts/crowd-pilot-1/game/a-own/walk.glb",
+  "art/parts/crowd-pilot-1/game/b-meshy/base.webp",
+  "art/parts/crowd-pilot-1/game/b-meshy/idle.json",
+  "art/parts/crowd-pilot-1/game/b-meshy/run.glb",
+  "art/parts/crowd-pilot-1/game/b-meshy/sit.glb",
+  "art/parts/crowd-pilot-1/game/b-meshy/walk.glb",
+  "art/parts/crowd-pilot-1/game/b-own/base.webp",
+  "art/parts/crowd-pilot-1/game/b-own/idle.json",
+  "art/parts/crowd-pilot-1/game/b-own/run.glb",
+  "art/parts/crowd-pilot-1/game/b-own/sit.glb",
+  "art/parts/crowd-pilot-1/game/b-own/walk.glb",
+  "art/parts/crowd-pilot-1/variety/a/v0.webp",
+  "art/parts/crowd-pilot-1/variety/a/v1.webp",
+  "art/parts/crowd-pilot-1/variety/a/v2.webp",
+  "art/parts/crowd-pilot-1/variety/a/v3.webp",
+  "art/parts/crowd-pilot-1/variety/a/v4.webp",
+  "art/parts/crowd-pilot-1/variety/a/v5.webp",
+  "art/parts/crowd-pilot-1/variety/b/v0.webp",
+  "art/parts/crowd-pilot-1/variety/b/v1.webp",
+  "art/parts/crowd-pilot-1/variety/b/v2.webp",
+  "art/parts/crowd-pilot-1/variety/b/v3.webp",
+  "art/parts/crowd-pilot-1/variety/b/v4.webp",
+  "art/parts/crowd-pilot-1/variety/b/v5.webp"
+ ]
+}
