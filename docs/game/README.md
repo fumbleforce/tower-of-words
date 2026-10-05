@@ -16,7 +16,7 @@ The inboxes (collab/to-codex.md, collab/to-claude.md) and dated notes record mes
 | The island's south half planned for day 2: every place, who is there, doors, connections, Japanese hooks; the planned streets | [island.md](island.md) |
 | A storyline: premise, cast, beats, choices and flags, words taught, nodes, what is built | [stories/](stories/), one file each, listed under [Storylines](#storylines) |
 | Every Japanese word (reading, meaning, kind), the words day 1 teaches, when a word counts as known | [words.md](words.md) |
-| The clock, schedules, bonds, memory, gifts and prices, typing and word practice, overheard Japanese, kotodama effects, saving | [systems.md](systems.md) |
+| The clock, schedules, bonds, memory, gifts and prices, typing and word practice, overheard Japanese, kotodama effects, tickets, clubs, the notice board, saving | [systems.md](systems.md) |
 | How the game opens up after day 1: which system comes when, tickets as the story's lever, story and relationship events, free days | [progression.md](progression.md) |
 | Controls, when each control is taught, the HUD, the dialogue box, menus and panels, camera, phone and desktop layouts, the build id | [controls-and-ui.md](controls-and-ui.md) |
 | The world's look, approved portraits and models, approved voices, music and sound | [art-and-sound.md](art-and-sound.md) |

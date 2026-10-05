@@ -36,6 +36,8 @@ test('structural migration preserves ordered graph IDs, edges and engine declara
   expected.engine.exact.say_tip = ['game3d/js/ui.js'];
   expected.engine.prefix.ticket_ = ['game3d/js/tickets/model.js'];
   expected.engine.prefix.ticketread_ = ['game3d/js/tickets/model.js'];
+  expected.engine.exact.clubs_joined = ['game3d/js/clubs/model.js'];
+  for (const k of ['club_', 'clubprog_', 'clubday_', 'clubev_']) expected.engine.prefix[k] = ['game3d/js/clubs/model.js'];
   assert.deepEqual(plain, expected);
 });
 test('missing and unexpected runtime registrations fail before play', () => {

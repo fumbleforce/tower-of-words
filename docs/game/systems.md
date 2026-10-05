@@ -1,6 +1,6 @@
 # Systems
 
-Day 1 is Thursday 1 October in five periods, and only the story moves the clock. Also here: schedules, the crowd, ambient moments, bond steps, memory, gifts and their prices, typing a word and word practice, saying words to things, overheard Japanese, what a kotodama looks and sounds like, finds, repair tickets, saving (an autosave, a quick save and twelve slots), and protagonists (who the player is, and the cast by role). Last checked against the game on 2026-09-29.
+Day 1 is Thursday 1 October in five periods, and only the story moves the clock. Also here: schedules, the crowd, ambient moments, bond steps, memory, gifts and their prices, typing a word and word practice, saying words to things, overheard Japanese, what a kotodama looks and sounds like, finds, repair tickets, clubs, the notice board, saving (an autosave, a quick save and twelve slots), and protagonists (who the player is, and the cast by role). Last checked against the game on 2026-09-29.
 
 Elsewhere: the controls and screens for these are in [controls-and-ui.md](controls-and-ui.md); the words in [words.md](words.md); each person's tastes, register and relations in [cast.md](cast.md); the data keys a story file uses for all of this in game3d/story/FORMAT.md ("Sim data").
 
@@ -13,7 +13,9 @@ Jørgen (2026-09-28): a day clock with periods, NPC schedules and NPC-to-NPC rel
 - Day 1 is Thursday 1 October. A day has five periods: early morning, morning at work, lunch, afternoon, after work. The HUD shows the date and the period ("Thu 1 Oct · Morning at work").
 - Only the story moves the clock. There are no real-time timers and no clock fail states; text never runs on a timer (GUIDE, Visual design).
 - Day 2 is Friday 2 October and uses two periods: morning (it starts in Eric's room) and after work (from sitting at his B2 desk). Its story set, the places it opens and the ways between them are game3d/story/day2/ ([stories/day2](stories/day2/README.md)); game3d/js/days.js says which set a day plays and where it starts. A later day's own walks between places are the same in both periods.
-- Later days after day 2, a sixth period (night) and the week are to build.
+- Day 3 so far is a test skeleton, reached only with `?day=3` (game3d/story/day3/; day 2's end still offers no day three): Saturday 3 October from the morning in room 203, the ways between room 203, the plaza and the club places, and no story (that is #229).
+- A free day's clock moves only when the player chooses ([days 3 to 5](../../notes/days3-5-outline.md), Routine and clock). At the desk in room 203 Eric sits in its chair and picks "Spend the rest of the morning here" (of lunch, of the afternoon), which moves to the next period, or "Rest until evening", which moves to the evening; both are always there before the evening. A club session uses the evening without moving the clock. The place takes the new period's light at once.
+- Sleep, the weekend's period names, a sixth period (night) and the week are to build.
 
 ## Schedules
 
@@ -142,6 +144,36 @@ Repair tickets are how the work reaches Eric (Jørgen, 2026-10-03: "the main sto
 | T-0002 | Train doors at Honsha | Honsha station, via Mio | ¥5,000 |
 - The app opens only when the story puts him at a computer (Eric's room PC, his B2 desk); how it looks is in [controls-and-ui.md](controls-and-ui.md).
 - Tickets are flags (`ticket_T0001`, and whether he has opened it), so the save, Continue and the next day keep them like everything else.
+
+## Clubs
+
+Clubs are social spaces, not minigames (Jørgen, 2026-10-03: "It's just a social space where you can get to know certain people"). Each meets one evening a week, and a session is a scene with its people. Built in game3d/js/clubs/ (model.js, index.js); the clubs, their posters and session nodes are game3d/story/clubs.js (contract: FORMAT.md, Clubs).
+
+| Id | Club | Meets | Where | Members |
+|---|---|---|---|---|
+| `swimming` | Swimming club 水泳部 | Saturday evening | The outdoor pool (`pool`) on 3 October, the season's last; the gym (`gym`) from 10 October | team_lead (Emi), receptionist (Kuro) |
+| `tennis` | Tennis club テニス部 | Sunday evening | The tennis courts (`sports`) | new_hire (Aoi), sales (Rei) |
+| `art` | Art club 美術部 | Tuesday evening | The dorm common room (`dorm_commons`) | section_chief (Mori) |
+| `karaoke` | Karaoke club カラオケ部 | Wednesday evening | The karaoke booth (`karaoke_booth`) | engineer (Kenji), Hamada (`kuroda`) |
+
+- Joining: taking the club's slip on the notice board (below). Any number of clubs; nothing else is needed and there is no leaving.
+- A session: when Eric, a member, arrives at the club's place on its weekday in its period, the club's next session runs once that day, after the place's own start. The next session is the first special event due, else the next node in the club's list (the last repeats). It counts as he arrives: progress (sessions he has been to) goes up by one. Outside meeting time the place is open and quiet. A missed week costs nothing.
+- Members are roles or people (data/cast/roles.json, Protagonists), so another cast puts another person in the club.
+- Each club has its own special events (a node that runs once instead of the week's session, after enough visits and when its condition holds), markers (things in its places shown to members only) and finds (a find with `club: <id>` lies there for members only).
+- The People panel opens with the joined clubs: name, the next meeting ("Next: Saturday 3 Oct, evening · Outdoor pool") and the members Eric has met.
+- Membership, progress, the day of the last session and the events that ran are flags (FORMAT.md, Clubs), so the save, Continue and the next day keep them.
+- The sessions are one-line placeholders until Codex writes them.
+
+## Notice board
+
+The fountain plaza's board (places.md, `noticeboard`) is the one place to find what's on (Jørgen, 2026-10-03: "Notice board is not a bad idea, both for single events and club memberships").
+
+- Reading it holds its posts up close: from day 3 first the club posters and single events, then the neighbours' notes (game3d/story/finds.js), six at most.
+- A club poster shows the club's name in Japanese with its reading and the English, 募集 (boshū, members wanted), 日時 (nichiji, when) with the next meeting and the weekday's kanji beside the English (土曜日 Saturday 3 Oct, evening), 場所 (basho, where), one line, and a slip: 入会 (nyūkai) Take a slip. The labels carry their reading and English; they are poster labels, not taught words. Later meetings replace dates that have passed.
+- A single event's poster has its name, 日時, 場所 and a line, and no slip. It stays up until its day has passed.
+- Tapping a slip joins the club: the slip is stamped Joined and a notice says "Joined the Swimming club · Saturday 3 Oct, evening, Outdoor pool".
+- Taught on the board: while Eric is in no club, the line under it reads "Take a slip to join a club. Your clubs are listed under People. Tap anywhere else to close."
+- Code: game3d/js/clubs/index.js (the posts and joining), ui/finds-view.js (the board up close), css/clubs.css.
 
 ## Saving
 

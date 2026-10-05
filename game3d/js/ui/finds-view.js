@@ -5,7 +5,8 @@
 //   setFindsSource(fn)   fn() -> { photos: [{ id, title, caption, found, print }], papers: [...], count, total }
 //   refreshFinds(newId)  updates the chip (and pops it when newId was just found)
 //   showFind(id, { fresh })   the close look; resolves when it closes
-//   showBoard(posts)          the posts pinned on a board; resolves when it closes
+//   showBoard(posts, { take, note })   the posts pinned on a board; resolves when it closes. A club poster has a slip:
+//                             tapping it calls take(clubId), and a true answer stamps it Joined
 import { photoImg, drawFlyerHead } from '../finds/prints.js';
 
 let source = () => ({ photos: [], papers: [], count: 0, total: 0 });
@@ -154,10 +155,32 @@ export function showFind(id, { fresh = false } = {}) {
   return whenHidden(v);
 }
 
-// posts: [{ title, ja, en, lines: [{ ja, en }], color }]; laid out as papers pinned in a loose grid
+// posts: [{ title, ja, en, lines: [{ ja, en }], color }] or a poster ({ poster: { id, ja, ro, en, rows: [{ label:
+// { ja, ro, en }, ja, value }], text, slip: { label, joined } } }, clubs/index.js); laid out as papers pinned in a
+// loose grid
 const COLORS = { white: '#f1efe8', yellow: '#ece1b0', blue: '#cfe0e9', pink: '#eed2d2', green: '#d9e6cc' };
 const ORDER = ['white', 'yellow', 'blue', 'white', 'pink', 'green'];
-export function showBoard(posts) {
+const label = (l) =>
+  l ? `<span class="lb"><b lang="ja">${esc(l.ja)}</b> <i>${esc(l.ro)}</i> ${esc(l.en)}</span>` : '';
+const slipHTML = (s) =>
+  s.joined
+    ? '<span class="slip joined">Joined</span>'
+    : `<button type="button" class="slip"><b lang="ja">${esc(s.label.ja)}</b> <i>${esc(s.label.ro)}</i> Take a slip</button>`;
+function posterHTML(p) {
+  const rows = p.rows
+    .map(
+      (r) =>
+        `<p class="row">${label(r.label)}${r.value ? `<span class="v">${r.ja ? `<b lang="ja">${esc(r.ja)}</b> ` : ''}${esc(r.value)}</span>` : ''}</p>`,
+    )
+    .join('');
+  return (
+    `<div class="pt"><span class="pj" lang="ja">${esc(p.ja)}</span> <i>${esc(p.ro)}</i><br>${esc(p.en)}</div>` +
+    rows +
+    (p.text ? `<p class="tx">${esc(p.text)}</p>` : '') +
+    (p.slip ? slipHTML(p.slip) : '')
+  );
+}
+export function showBoard(posts, { take = () => false, note = '' } = {}) {
   build();
   const v = $('#boardView');
   const box = v.querySelector('.posts');
@@ -165,15 +188,25 @@ export function showBoard(posts) {
   v.style.setProperty('--cols', posts.length <= 4 ? 2 : 3); // four as two rows of two, not three and one
   posts.slice(0, 6).forEach((p, i) => {
     const d = document.createElement('div');
-    d.className = 'post';
+    d.className = p.poster ? 'post poster' : 'post';
     d.style.setProperty('--bg', COLORS[p.color] || COLORS[ORDER[i % ORDER.length]]);
     d.style.setProperty('--tilt', `${[-1.6, 1.1, -0.6, 1.7, -1.2, 0.8][i % 6]}deg`);
     d.innerHTML =
       '<i class="pin"></i>' +
-      (p.title ? `<div class="pt">${esc(p.title)}</div>` : '') +
-      lines(p.lines || [{ ja: p.ja, en: p.en }]);
+      (p.poster
+        ? posterHTML(p.poster)
+        : (p.title ? `<div class="pt">${esc(p.title)}</div>` : '') + lines(p.lines || [{ ja: p.ja, en: p.en }]));
+    const slip = d.querySelector('button.slip');
+    if (slip)
+      slip.addEventListener('click', (e) => {
+        e.stopPropagation(); // a tap on the slip takes it; anywhere else closes the board
+        if (!take(p.poster.id)) return;
+        slip.outerHTML = slipHTML({ joined: true });
+        v.querySelector('.tapx').textContent = 'Tap to close';
+      });
     box.appendChild(d);
   });
+  v.querySelector('.tapx').textContent = note ? `${note} Tap anywhere else to close.` : 'Tap to close';
   v.hidden = false;
   v.classList.remove('in');
   void v.offsetWidth;
