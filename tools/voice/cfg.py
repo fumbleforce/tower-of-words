@@ -59,7 +59,7 @@ def speakers():
         'conductor': REFS['lift'][:2] + ('lift-announcer',),
         'mori': ref('mori-design'),
         'kenji': ref('kenji-design'),
-        'kuro': ref('kuro-design'),
+        'kuro': ref('kuro-husky'),  # Review kuro-voice-2, b
         'reader': ref('goro-ref12'),
         # Eric: the English voice eric-2 (no accent); his Japanese words are still read in Japanese (gen_takes.py)
         'eric': ref('eric-voice'),
@@ -82,7 +82,8 @@ MALE = {'eric', 'guard', 'kuroda', 'sales1', 'mori', 'kenji', 'reader', 'commute
         'commuter_1', 'commuter_2', 'commuter_3'}
 # clones whose reference speaks English: their Japanese is made from the timbre alone (gen_takes.xvec)
 XVEC_JA = {'eric'}
-LUFS = {'eric': -23.0, 'gatev': -20.0, 'conductor': -20.0, 'ann': -20.0}  # Eric quieter, recorded voices a little under the cast
+LUFS = {'eric': -23.0, 'gatev': -20.0, 'conductor': -20.0, 'ann': -20.0,  # Eric quieter, recorded voices a little under the cast
+        'kuro': -20.0}  # Kuro's husky voice: "bit loud" at -18 (Review kuro-voice-2)
 LUFS_DEFAULT = -18.0
 
 # what the TTS reads instead of the written line (numbers, letters); the check still compares against the written line
