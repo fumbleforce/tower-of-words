@@ -1,0 +1,20 @@
+{
+  "title": "Train seat cue and lift glance",
+  "date": "2026-09-30",
+  "by": "codex",
+  "caption": "The first passenger points toward the lunchbox seat. The Sales rider turns toward Eric before the conversation stops.",
+  "commit": "e8bd725",
+  "images": [
+    {
+      "id": "lift-glance",
+      "image": "game3d/shots/story-cues/lift-desktop.png",
+      "caption": "Sales rider turning toward Eric during the lanyard line."
+    }
+  ],
+  "links": [
+    {
+      "label": "Play day 1",
+      "href": "game3d/"
+    }
+  ]
+}
