@@ -238,7 +238,7 @@ export function makeAvatar() {
 // used with a Lambert material (as for Mio). Colour tweak only: the texture is pulled a little toward the muted
 // palette (slightly less saturated, a touch cooler). The mesh, face and body are untouched.
 import { GLTFLoader } from '../vendor/loaders/GLTFLoader.js';
-import { meshyGait, codeStride, clipAction, clipActions } from './movement/gait.js';
+import { meshyGait, codeStride, clipAction, clipActions, holdNow } from './movement/gait.js';
 import { calmSitTime, V as ver, poseLayer, addPhone, API_PHONE_BONES, CDIR } from './mio.js';
 import { loadRelaxedIdle } from './relaxed-idle.js';
 const EDIR = new URL('../assets/eric/', import.meta.url).href;
@@ -461,12 +461,12 @@ export function meshyFrom(id, [walk, run, idle, sitG, tex, phoneJson, ...gj], { 
     get state() {
       return curName;
     },
-    // hips on the seat top at (x, z), facing ry
+    // hips on the seat top at (x, z), facing ry, straight into the seated frame (gait.js holdNow)
     sitAt(x, seatTop, z, ry) {
-      const k = root.scale.x;
-      root.position.set(x, seatTop + SIT_LIFT * k - sitHip.y * k, z);
+      root.position.set(x, seatTop + (SIT_LIFT - sitHip.y) * root.scale.x, z);
       root.rotation.y = ry;
       setState('sit');
+      holdNow(mixer, cur, [...Object.values(actions), ...Object.values(gact)], restoreBones, snapBones);
     },
   };
   return a;

@@ -7,7 +7,7 @@
 // (window frame, switch, socket, cables, tower, bin, pins, clock rim).
 import * as THREE from 'three';
 import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
-import { PAL, mat, emissive, rbox, plainPlant as basePlant, plainMonitor as baseMonitor, sh } from '../props.js';
+import { PAL, PED, mat, emissive, rbox, plainPlant as basePlant, plainMonitor as baseMonitor, sh } from '../props.js';
 
 // chamfered box: one-segment rounded box, so the edge is a single flat bevel
 const cbox = (w, h, d, color, o = {}) => rbox(w, h, d, color, { seg: 1, r: 0.012, ...o });
@@ -210,17 +210,17 @@ export function desk({ w = 1.4, d = 0.72, mon = true, clutter = 1, seed = 1 } = 
   const H = 0.42;
   g.add(cbox(w, 0.04, d, PAL.deskTop, { y: H - 0.04, r: 0.014 }));
   for (const sx of [-1, 1]) {
-    const px = sx * (w / 2 - 0.19),
+    const px = sx * (w / 2 - 0.02 - PED / 2),
       pd = d - 0.06;
-    g.add(cbox(0.34, H - 0.05, pd, PAL.drawer, { x: px, r: 0.01 }));
-    g.add(cbox(0.35, 0.03, pd + 0.004, PAL.dark, { x: px, r: 0.006, cast: false })); // plinth
+    g.add(cbox(PED, H - 0.05, pd, PAL.drawer, { x: px, r: 0.01 }));
+    g.add(cbox(PED + 0.01, 0.03, pd + 0.004, PAL.dark, { x: px, r: 0.006, cast: false })); // plinth
     const fronts = [
       [0.04, 0.1],
       [0.15, 0.1],
       [0.26, 0.1],
     ];
     for (const [y, fh] of fronts) {
-      g.add(cbox(0.3, fh - 0.012, 0.014, PAL.drawer, { x: px, y, z: pd / 2 + 0.006, r: 0.006, cast: false }));
+      g.add(cbox(PED - 0.04, fh - 0.012, 0.014, PAL.drawer, { x: px, y, z: pd / 2 + 0.006, r: 0.006, cast: false }));
       g.add(cbox(0.14, 0.012, 0.012, '#c9cdd2', { x: px, y: y + fh * 0.62, z: pd / 2 + 0.022, r: 0.005, cast: false }));
       for (const hx of [-0.06, 0.06])
         g.add(
@@ -228,7 +228,7 @@ export function desk({ w = 1.4, d = 0.72, mon = true, clutter = 1, seed = 1 } = 
         );
     }
   }
-  g.add(cbox(w - 0.72, 0.22, 0.022, PAL.drawer, { y: 0.15, z: -d / 2 + 0.05 }));
+  g.add(cbox(w - 2 * (PED + 0.02), 0.22, 0.022, PAL.drawer, { y: 0.15, z: -d / 2 + 0.05 }));
   // monitor: bezel frame, inset screen, a stand with a round foot and a hinge
   if (mon) {
     const m = monitor();

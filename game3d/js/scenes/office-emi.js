@@ -27,8 +27,15 @@ export const EMI_DOOR = [-5.45, -4.85]; // its doorway in the corridor wall
 const DESK = [-6.0, 4.25];
 export const EMI_SEAT = [DESK[0], DESK[1] - 0.5]; // her chair, behind the desk, facing +z (the guest and the camera)
 export const EMI_TALK = [-5.15, 3.95]; // where Eric stands to talk to her: the desk's corner on the doorway side
-// for the place (places/office.js): the partition line, her seat (an office chair's top) and where Eric talks to her
-export const EMI = { x: EMI_X, seat: { x: EMI_SEAT[0], z: EMI_SEAT[1], top: 0.24, ry: 0 }, talk: EMI_TALK };
+const GUEST = [DESK[0], DESK[1] + 0.72]; // the guest chair across the desk, facing her
+// for the place (places/office.js): the partition line, her seat (an office chair's top), the guest chair and where
+// Eric talks to her
+export const EMI = {
+  x: EMI_X,
+  seat: { x: EMI_SEAT[0], z: EMI_SEAT[1], top: 0.24, ry: 0 },
+  guest: { x: GUEST[0], z: GUEST[1], top: 0.25, ry: Math.PI },
+  talk: EMI_TALK,
+};
 
 // a framed picture: a canvas drawing in a thin frame, facing +z (turned onto a wall by the caller)
 function framed(w, h, draw, { frame = '#3e434d', glow = 0 } = {}) {
@@ -215,7 +222,7 @@ export function* emiOffice(root, pool, { X0, CS, Z1, T }) {
       [0.16, 0.15],
     ])
       g.add(rbox(0.025, 0.2, 0.025, PAL.metal, { x, z, r: 0.008 }));
-    g.position.set(DESK[0], 0, DESK[1] + 0.72);
+    g.position.set(GUEST[0], 0, GUEST[1]);
     root.add(g);
   }
   yield;
@@ -316,7 +323,7 @@ export function* emiOffice(root, pool, { X0, CS, Z1, T }) {
 export function emiOfficeBlocks(B, { X0, Z1 }) {
   B(DESK[0] - 0.62, DESK[0] + 0.62, DESK[1] - 0.35, DESK[1] + 0.35); // desk
   B(EMI_SEAT[0] - 0.24, EMI_SEAT[0] + 0.24, EMI_SEAT[1] - 0.24, EMI_SEAT[1] + 0.22); // her chair
-  B(DESK[0] - 0.21, DESK[0] + 0.21, DESK[1] + 0.52, DESK[1] + 0.92); // guest chair
+  B(GUEST[0] - 0.21, GUEST[0] + 0.21, GUEST[1] - 0.2, GUEST[1] + 0.2); // guest chair
   B(X0, X0 + 0.4, 2.9, 3.86); // cabinet
   B(EMI_X - 0.42, EMI_X, 5.22, 5.58); // coat stand
   B(X0, X0 + 0.34, 4.83, 5.87); // bookcase

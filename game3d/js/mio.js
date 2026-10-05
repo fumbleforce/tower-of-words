@@ -5,7 +5,7 @@
 // muted office palette. Nothing is moved, reshaped or removed for that.
 import * as THREE from 'three';
 import { loadRelaxedIdle } from './relaxed-idle.js';
-import { makeGait } from './movement/gait.js';
+import { makeGait, holdNow } from './movement/gait.js';
 import { GLTFLoader } from '../vendor/loaders/GLTFLoader.js';
 
 const DIR = new URL('../assets/mio/', import.meta.url).href;
@@ -795,6 +795,7 @@ export async function loadMio({ height = 1.12, colours = MIO_COLOURS } = {}) {
     root.rotation.y = ry;
     setState('sit');
     sitO = o.clone();
+    holdNow(mixer, cur, Object.values(actions), restoreBones, snapBones); // straight into the seated frame
   }
   return {
     root,

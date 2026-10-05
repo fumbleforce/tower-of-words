@@ -232,3 +232,15 @@ export const clipActions = (mixer, clips) =>
 
 // the fastest a Meshy person walks with their steps keeping up (place units / s; makeGait's BRISK times their walk)
 export const paceCap = (rig) => (rig?.strides ? rig.strides.walkV * BRISK * (rig.root.scale.x || 1) : Infinity);
+
+// Straight into a held frame (sitAt): every other clip stopped, this one at full weight and applied now. A seated
+// model is shifted back for the seated hips at once, so a crossfade from standing showed the body that far forward,
+// through the desk in front, until it ended, and for good in a still or a paused game (#240,
+// game3d/tools/seat-check.mjs). before/after: the rig's bone restore and snapshot round its mixer step.
+export function holdNow(mixer, action, others, before, after) {
+  for (const a of others) if (a !== action) a.stop();
+  action.stopFading().setEffectiveWeight(1);
+  before();
+  mixer.update(0);
+  after();
+}
