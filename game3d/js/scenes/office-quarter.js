@@ -29,6 +29,7 @@ import { linkSteps } from './office-quarter/link.js';
 import { groundsSteps } from './office-quarter/grounds.js';
 import * as P from './office-quarter/plan.js';
 import { buildNooks } from './outdoor/nooks.js';
+import { bandSteps } from './bands.js';
 
 const { CHUNK, inRect } = P;
 
@@ -72,9 +73,10 @@ export function* officeQuarterSteps() {
   const lit = lights.build(isl, { poolY: 0.03 });
   const sg = signs.build(isl);
   yield;
+  const bands = yield* bandSteps(root, CHUNK); // the ground past the exits, as the neighbours build it (bands.js)
   const sky = yield* skylineSteps(root, CHUNK, {
     layout: LAYOUT,
-    skip: ['gym', ...P.BLOCK_IDS],
+    skip: ['gym', ...P.BLOCK_IDS, ...bands.ids],
     land: coastLand(LAYOUT.COAST.line),
     landColor: TOWN.grass,
     near: 40,
@@ -98,6 +100,7 @@ export function* officeQuarterSteps() {
     exits: P.EXITS,
     doors: P.DOORS,
     evening() {
+      bands.evening();
       nooks.evening();
       shadows.evening();
       lit.evening();

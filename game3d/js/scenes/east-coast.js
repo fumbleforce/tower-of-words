@@ -27,6 +27,7 @@ import { onsenSteps } from './east-coast/onsen.js';
 import * as P from './east-coast/plan.js';
 import * as C from './dorm-court/cluster-plan.js';
 import { buildNooks } from './outdoor/nooks.js';
+import { bandSteps } from './bands.js';
 
 const { CHUNK, inRect } = P;
 // the coast from south of the dorms round past the onsen (the layout's line, its east side)
@@ -77,9 +78,10 @@ export function* eastCoastSteps() {
     data: { coast: [{ line: EAST_COAST, plant: true }], walks: kerbWalks() },
   });
   yield;
+  const bands = yield* bandSteps(root, CHUNK); // the ground past the exits, as the neighbours build it (bands.js)
   const sky = yield* skylineSteps(root, CHUNK, {
     layout: LAYOUT,
-    skip: [...CLUSTER_IDS, 'dorm_1', 'onsen_main'],
+    skip: [...CLUSTER_IDS, 'dorm_1', 'onsen_main', ...bands.ids],
     land: coastLand(LAYOUT.COAST.line),
     landColor: TOWN.grass,
     near: 40,
@@ -116,7 +118,11 @@ export function* eastCoastSteps() {
     // the sea terrace's east bench, which looks south over the wall to the sea: the spot is just behind it
     terraceBench: P.pt([C.TERRACE[1] - 1.1, C.TERRACE[3] - 1.35]),
     camera: { elev: 46, fov: 24 },
+    update() {
+      bands.update(sun);
+    },
     evening() {
+      bands.evening();
       nooks.evening();
       shadows.evening();
       lit.evening();
@@ -125,7 +131,7 @@ export function* eastCoastSteps() {
       dorms.evening();
       sky.onPeriod('evening');
     },
-    cards: (day, period) => sg.show(day, period), // the onsen's door card (shop-signs.js WHEN)
+    cards: (day, period) => (sg.show(day, period), bands.cards(day, period)), // the door cards (shop-signs.js WHEN)
     skyline: sky.stats,
   };
 }

@@ -11,6 +11,8 @@
 //     sea                  the sea's level, the ground being y 0: the wall's height
 //     clip(x, z)           false for a point in the place's frame to leave bare (the train's platforms stand there)
 //     layer                the camera layer to draw on (the island map's only, for a place whose cameras never see it)
+//     into                 a Parts collector the stone and the planting go into, built by the caller (the bands,
+//                          scenes/bands.js, which merge with the place); the surf is built here either way
 //     data                 { coast: [{ line, beach, plant }], walks, trees, shrubs, beds, drifts } (default WEST):
 //                          each coast line runs with the sea on its right; beach: it stands on sand, no rocks or surf,
 //                          planting at its foot; plant: a planted strip behind its coping (left bare where a terrace
@@ -311,7 +313,9 @@ function walks(stone, at, turn, clip, WALKS) {
         v = Math.max(v, c1);
       }
     }
-    // benches a walk asks for, [x, z, look]
+    // benches a walk asks for, [x, z, look]; a walk whose middle is clipped keeps only its kerbs
+    const [wx0, wz0, wx1, wz1] = w.rect;
+    if (!clip(...at((wx0 + wx1) / 2, (wz0 + wz1) / 2))) continue;
     for (const [x, z, look] of w.benches || []) bench(stone, ...at(x, z), look + turn, { len: 1.5 });
     // a paved place (a terrace, a square) is laid in slabs: a fine dark seam every SLAB both ways
     if (w.slabs) seams(stone, at, w.rect);
@@ -333,9 +337,12 @@ function walks(stone, at, turn, clip, WALKS) {
   }
 }
 
-export function* coastSteps(root, { at, turn = 0, sea = -0.2, clip = () => true, layer = null, data = WEST }) {
-  const stone = new Parts(),
-    green = new Parts(),
+export function* coastSteps(
+  root,
+  { at, turn = 0, sea = -0.2, clip = () => true, layer = null, data = WEST, into = null },
+) {
+  const stone = into || new Parts(),
+    green = into || new Parts(),
     surf = new Parts();
   // where a terrace comes up to the wall, the planted strip behind the coping stops (island frame)
   const terraces = Object.values(data.walks || {}).filter((w) => w.terrace);
@@ -366,13 +373,14 @@ export function* coastSteps(root, { at, turn = 0, sea = -0.2, clip = () => true,
   });
   // the drifts, laid out in the island frame and turned into the place's
   const framed = inFrame(green, at);
-  (data.drifts || []).forEach(([x0, x1, z0, z1, back], i) => drift(framed, [x0, x1, z0, z1], { back, seed: 40 + i }));
+  for (const [i, [x0, x1, z0, z1, back]] of (data.drifts || []).entries())
+    if (clip(...at((x0 + x1) / 2, (z0 + z1) / 2))) drift(framed, [x0, x1, z0, z1], { back, seed: 40 + i });
   (data.shrubs || []).forEach(([x, z], i) => {
     const [lx, lz] = at(x, z);
     if (clip(lx, lz)) cluster(green, lx, lz, { n: 4, r: 0.38, spread: 0.7, seed: 20 + i });
   });
   yield;
-  const meshes = [...stone.build(root), ...green.build(root), ...surf.build(root)];
+  const meshes = [...(into ? [] : [...stone.build(root), ...green.build(root)]), ...surf.build(root)];
   meshes.forEach((m, i) => {
     m.name = `coast:${i}`; // named: the place's merge pass leaves it as it is
     if (layer === null) return;

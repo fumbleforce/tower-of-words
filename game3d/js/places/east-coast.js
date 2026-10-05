@@ -139,6 +139,7 @@ export async function eastCoastPlace(game) {
       d3.update(dt);
       const p = game.player.root.position;
       w.follow(p.x, p.z);
+      w.update(); // the bands' laid shadows on the sun's side (scenes/bands.js)
       turn.steer(p, dt);
       // heading for a way out: build the next place now, so the walk there needs no loading pause
       const near = ([x0, x1, z0, z1], d = 6) => p.x > x0 - d && p.x < x1 + d && p.z > z0 - d && p.z < z1 + d;

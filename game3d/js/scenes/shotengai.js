@@ -30,6 +30,7 @@ import * as P from './shotengai/plan.js';
 import { buildNooks } from './outdoor/nooks.js';
 import { shopDoor } from './plaza/east-shops.js';
 import { faceAt } from './outdoor/block.js';
+import { bandSteps } from './bands.js';
 
 const { CHUNK, local, rect, inRect } = P;
 // the sun, in the chunk's frame (local north is island west): mornings from the east-south-east over the camera's
@@ -119,9 +120,10 @@ export function* shotengaiSteps() {
   const lit = lights.build(isl, { poolY: 0.03 });
   const doorCards = cards.build(isl);
   yield;
+  const bands = yield* bandSteps(root, CHUNK); // the ground past the exits, as the neighbours build it (bands.js)
   const sky = yield* skylineSteps(root, CHUNK, {
     layout: LAYOUT,
-    skip: ['shops_north', 'arcade', 'shops_south', 'izakaya', 'ramen'],
+    skip: ['shops_north', 'arcade', 'shops_south', 'izakaya', 'ramen', ...bands.ids],
     land: coastLand(LAYOUT.COAST.line),
     landColor: TOWN.grass,
   });
@@ -154,6 +156,7 @@ export function* shotengaiSteps() {
     doors: P.DOORS.map((d) => ({ ...d, local: local(d.at), step: local([d.at[0], d.at[1] + d.out * 0.85]) })),
     camera: { elev: 40, fov: 24 }, // a little lower than the plaza's, to see the shopfronts under the awnings
     evening() {
+      bands.evening();
       nooks.evening();
       sunDir = SUN_DIR.evening;
       lit.evening();
@@ -170,6 +173,7 @@ export function* shotengaiSteps() {
     cards(day, period) {
       doorCards.show(day, period);
       curtainCard.show(day, period);
+      bands.cards(day, period);
     },
     skyline: sky.stats,
   };

@@ -69,8 +69,9 @@ export function walk(pv, [x0, x1, z0, z1], alongX = x1 - x0 > z1 - z0) {
   else for (const x of [x0, x1 - BW]) edge(pv, [x, x + BW, z0, z1], [BW, 0.15]);
 }
 
-function* ground(root) {
-  const pv = paver();
+function* ground(root, clip) {
+  const laid = paver(),
+    pv = clip ? clip.paver(laid) : laid;
   const ew = [E.PARK_EW[2], E.PARK_EW[3]],
     ns = [E.PARK_NS[0], E.PARK_NS[1]];
   corner(pv, CORNERS.a, 'se', { e: [ew] });
@@ -104,7 +105,7 @@ function* ground(root) {
   const AE = E.ARCADE_END;
   pv.field(AE, { pattern: 'grid', module: [0.6, 0.6], tones: GRANITE.mid, origin: [AE[0], AE[2]] });
   yield;
-  pv.build(root);
+  laid.build(root);
   yield;
 }
 
@@ -341,24 +342,29 @@ function* planting(p, lights, sh) {
 // Almost all of it lies outside the sun's shadow box (scenes/plaza.js), so it goes into its own collector that casts
 // no shadow (no shadow-pass triangles); only the walls of the blocks inside the box cast, through the plaza's p. The
 // rest get their shadows laid on the ground (outdoor/shade.js); update(sun) keeps them on the sun's side.
+// clip: a band (outdoor/band.js) in the plaza's frame, for a neighbour showing only the ground past its exit: only
+// what reaches into it is built, nothing casts, and the blocks in `skip` are the neighbour's own.
 const SHADOW_X = 22; // the shadow box's east edge, in the plaza's frame
-export function* eastLaneSteps(root, p, lights) {
-  const q = new Parts();
-  yield* ground(root);
-  yield* kerbs(q);
-  const sh = shade();
-  yield* park(q, lights, sh);
-  yield* planting(q, lights, sh);
+export function* eastLaneSteps(root, p, lights, { clip = null, skip = [] } = {}) {
+  const q = new Parts(),
+    sh = shade(),
+    [Q, L, SH] = clip ? [clip.parts(q), clip.lights(lights), clip.shade(sh)] : [q, lights, sh];
+  yield* ground(root, clip);
+  yield* kerbs(Q);
+  if (!clip || clip.hits(PARK)) yield* park(Q, L, SH);
+  yield* planting(Q, L, SH);
   const bikes = bikeRow(5, { gaps: [1, 3], seed: 9 }); // the rack against block_e1's front, the bikes facing the lane
   bikes.rotation.y = Math.PI;
   bikes.position.set(E.BIKE_PAD[1] - 0.6, 0, E.BIKE_PAD[2] + 0.75);
-  root.add(bikes);
+  if (!clip || clip.hits(E.BIKE_PAD)) root.add(bikes);
   yield;
-  const fronts = yield* frontsSteps(q, lights, E.BLOCKS, { caster: p, casts: (k) => k.rect[0] < SHADOW_X });
+  const blocks = clip ? E.BLOCKS.filter((k) => clip.hits(k.rect) && !skip.includes(k.id)) : E.BLOCKS;
+  const cast = clip ? { caster: q, casts: () => false } : { caster: p, casts: (k) => k.rect[0] < SHADOW_X };
+  const fronts = yield* frontsSteps(q, lights, blocks, cast);
   fronts.meshes(root);
   yield;
   // a block's sign standing on its door canopy's front edge, as the canteen's (k.sign: [kana, English])
-  for (const k of E.BLOCKS.filter((b) => b.sign)) {
+  for (const k of blocks.filter((b) => b.sign)) {
     const F = faces(k.rect)[k.face],
       [x, z] = faceAt(F, tOf(F, k.at), 1.08);
     const s = signBoard(k.sign[0], k.sign[1], 2.4, 0.6, '#44535f');
@@ -366,13 +372,14 @@ export function* eastLaneSteps(root, p, lights) {
     s.rotation.y = Math.atan2(F.n[0], F.n[1]);
     root.add(s);
   }
-  for (const k of E.BLOCKS) if (k.rect[0] >= SHADOW_X) sh.block(k.rect, k.row.storeys * k.row.floorH);
+  for (const k of blocks) if (clip || k.rect[0] >= SHADOW_X) sh.block(k.rect, k.row.storeys * k.row.floorH);
   // the named shops' signs and shut doors (plaza/east-shops.js), Amakawa Travel's too (its block is the back lane's,
   // plaza/north-lane.js); a finger sign at the south walk's start pointing along it to the shop street
   const signs = signSet();
-  shopFittings(q, signs, [...E.BLOCKS, E2]);
+  shopFittings(q, signs, clip ? blocks : [...E.BLOCKS, E2]);
   const shopSigns = signs.build(root);
-  fingerSign(root, q, ...E.FINGER, [{ text: 'Shop street', sub: '商店街', dir: 1 }]);
+  if (!clip || clip.has(...E.FINGER))
+    fingerSign(root, q, ...E.FINGER, [{ text: 'Shop street', sub: '商店街', dir: 1 }]);
   yield;
   for (const m of q.build(root)) m.castShadow = false;
   yield;
