@@ -22,7 +22,7 @@ export function roomView(cam, R, aspect) {
       { limX: 0.94, limY: 0.9 },
     );
   else {
-    const span = Math.min(3.2, (x1 - x0) / 2),
+    const span = Math.min(3.2, ((x1 - x0) / 2) * 0.75), // a small room fills more of the phone
       zs = [Math.min(z0 + 2.0, (z0 + z1) / 2), Math.max(z1 - 2.2, (z0 + z1) / 2)];
     cam.fit(
       aspect,

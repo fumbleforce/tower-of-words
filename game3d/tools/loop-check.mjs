@@ -10,7 +10,8 @@
 // error, or when Eric leaves the frame at any moment of the walk in and the camera letting go (his feet and head,
 // sampled every frame for ARRIVE_MS after the new place is up; GUIDE: the player always sees Eric).
 // With the recorder on (?perf), it ends with each place's frame times, draw calls and triangles over the walk.
-//   node game3d/tools/loop-check.mjs [outdir] [w] [h]      BASE=<worktree>/game3d for a worktree; Q=0|1|2 the tier; QS=&chibi=0 adds to the query (code-built people)
+//   node game3d/tools/loop-check.mjs [outdir] [w] [h]      BASE=<worktree>/game3d for a worktree; Q=0|1|2 the tier; QS=&chibi=0 adds to the query (code-built people);
+// START=<place> loads that place and walks from the first leg out of it (a part of the loop, under its own time)
 import { withBrowserJob } from '../../tools/lib/browser-job.mjs';
 import fs from 'node:fs';
 
@@ -76,6 +77,7 @@ const LEGS = [
   ['shotengai', 'plaza_lane', 'plaza'],
   ['plaza', 'dorm_lane', 'east_lane'],
 ];
+const START = process.env.START || 'east_lane';
 const ARRIVE_MS = 5000; // the walk in (about 3 s) and the camera letting go
 const errors = [];
 let fails = 0;
@@ -87,14 +89,16 @@ await withBrowserJob(
     page.on('pageerror', (e) => errors.push(e.message));
     page.on('console', (m) => m.type() === 'error' && !/404/.test(m.text()) && errors.push(m.text()));
     await page.goto(
-      `http://127.0.0.1:8771/${base}/index.html?cap&perf&q=${process.env.Q ?? 1}&place=east_lane&mx=0&mz=-31${process.env.QS || ''}`,
+      `http://127.0.0.1:8771/${base}/index.html?cap&perf&q=${process.env.Q ?? 1}&place=${START}${START === 'east_lane' ? '&mx=0&mz=-31' : ''}${process.env.QS || ''}`,
     );
-    await page.waitForFunction(() => document.body.dataset.place === 'east_lane' && window.__game?.player, null, {
+    await page.waitForFunction((at) => document.body.dataset.place === at && window.__game?.player, START, {
       timeout: 120000,
     });
     await page.evaluate(() => (window.__run = true)); // ?cap holds the world still until told to run
     await page.waitForTimeout(1500);
+    const first = LEGS.findIndex(([from]) => from === START);
     for (const [i, [from, points, to]] of LEGS.entries()) {
+      if (i < first) continue;
       // the place's arrival beat over (it stops a walk begun under it), as a player gets control back
       await page.waitForFunction(() => !window.__game.busy, null, { timeout: 30000 }).catch(() => {});
       const here = await page.evaluate(() => document.body.dataset.place);
@@ -171,7 +175,7 @@ await withBrowserJob(
         `perf ${name}: median ${r.medianMs} ms, 1% ${r.p99Ms} ms, calls ${r.calls} (max ${r.callsMax}), tris ${r.tris}`,
       );
   },
-  { timeoutMs: 900000 },
+  { timeoutMs: 1500000 }, // the whole loop, 26 legs, on a busy machine
 );
 for (const e of errors) console.log('page error: ' + e);
 console.log(fails || errors.length ? 'FAIL' : 'PASS');
