@@ -15,6 +15,7 @@ import { sim, PERIODS as PERIOD_ORDER, absorb, applySchedule, save } from '../si
 import * as trips from '../trips.js';
 import { installFinds, findSpotSteps, syncFinds } from '../finds/index.js';
 import { installTickets } from '../tickets/index.js';
+import { installClubs, withClubs, clubArrival } from '../clubs/index.js';
 import { installBoot, installPlacePlugin, watchPlacePlugins } from '../plugins.js';
 import { installCreatures } from '../creatures/index.js';
 import { attachCrowd } from '../crowd/index.js';
@@ -51,6 +52,7 @@ export function createPlaceLifecycle(
   const ui = game.ui;
   installFinds(game); // the photos and papers Eric picks up (finds/index.js)
   installTickets(game); // the repair tickets and their app on Eric's computers (tickets/index.js)
+  installClubs(game); // the clubs and the notice board (clubs/index.js)
   watchPlacePlugins(game);
   // preparation runs a slice a frame while a place is being played, flat out while the player waits for it
   setUrgent(() => !game.place || document.body.classList.contains('loading'));
@@ -92,7 +94,7 @@ export function createPlaceLifecycle(
   async function enter(name, { persist = true, resuming = false } = {}) {
     const { place } = await prepare(name);
     // the story for today (days.js): a place built on the title's day 1 still plays a later day's set
-    const story = await game.runner.load(name);
+    const story = withClubs(await game.runner.load(name)); // with the club sessions (clubs/index.js)
     if (game.place && game.place.leave) game.place.leave();
     cancelSavedWalk(game.player);
     cancelSavedWalk(game.mioNpc);
@@ -225,6 +227,7 @@ export function createPlaceLifecycle(
     if (game.runner.has(eventTrigger(name, 'start'))) game.runner.trigger(eventTrigger(name, 'start'));
     else if (game.story.start) game.beat(() => game.runner.run(game.story.start));
     else save(game);
+    clubArrival(game, name); // a club Eric is in that meets here now: its next session, after the place's start
   }
   return { prepare, enter, travel, startScene };
 }

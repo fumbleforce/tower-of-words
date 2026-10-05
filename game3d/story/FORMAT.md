@@ -134,6 +134,7 @@ Any id in docs/game/cast.md "Everyone" can speak. Add names or roles under `spea
 | `find` | `id` | Eric takes a find (see Finds): it goes into his album, shows up close until tapped, and sets `found_<id>`. Nothing happens if he has it already. `{ do: 'find', id: 'bakery_flyer' }` |
 | `ticket` | `add`, `start` or `close`: a ticket id | Adds a ticket to Eric's queue as new (nothing if it's there already), puts it in progress, or closes it. Running it again changes nothing, so a scene that restarts after a load is safe. `{ do: 'ticket', add: 'T-0002' }` |
 | `tickets` | `show` (optional ticket id) | Opens the ticket app (docs/game/controls-and-ui.md) and waits: the next step runs once Eric has closed it. `show` opens straight on that ticket. Stage it at a computer: `{ do: 'sit', who: 'eric', at: 'desk_chair' }, { do: 'cam', on: 'computer', zoom: 1.2 }, { do: 'tickets' }, { do: 'cam', back: true }, { do: 'stand', who: 'eric' }` in room 203, or after `sitDown` at the B2 desk. |
+| `noticeboard` | | Holds the plaza's notice board up close and waits until it is closed: the club posters with their slips, then the neighbours' notes (see Clubs). Talking to the board does this by itself; use the hook when a scene at the board ends by reading it. |
 
 Sim hooks (`period`, `bond`, `bondStep`, `remember`, `fact`, `relate`, `meet`, `buy`, `take`, `save`) are under Sim data.
 
@@ -265,7 +266,7 @@ Bond point sources, for `source`: `greet`, `talk`, `gift`, `need`, `ticket`, `he
 - `fact` `who`, `id`, `text`, `like`: something Eric has learned about them, for People; `like: 'coffee'` also shows that taste as noticed.
 - `relate` `a`, `b`, `kind` (`likes`, `owes`, `rivals`, `none`): changes how a feels about b.
 - `meet` `who`: adds them to People (step 1); talking to a person does this too.
-- `period` `to: 'early'|'morning'|'lunch'|'afternoon'|'evening'`; only the story moves it.
+- `period` `to: 'early'|'morning'|'lunch'|'afternoon'|'evening'`, or `to: 'next'` (the next period of the day; nothing after the evening); only the story moves it. A free day's chair: "Spend the rest of the morning here" is `{ do: 'period', to: 'next' }`, "Rest until evening" is `to: 'evening'` (story/day3/dorms.js).
 - `buy` `item` (item ids: docs/game/systems.md, Gifts): sets `bought_<item>`, or `cant_buy`. `take` `item`. `save`.
 
 **Flags for conditions.** `bond_<who>` (points), `step_<who>`, `bondready_<who>` (the step whose scene is due, else 0), `met_<who>`, `rem_<who>_<id>`, `fact_<who>_<id>`, `rel_<a>_<b>` (`'likes'`...), `register_<who>` (`'right'` or `'wrong'`: the register of the last word Eric said to them), and after a gift `gave_<item>_<who>`, `gift_<who>` and `gift_reaction` (`'need'`, `'like'`, `'neutral'`, `'dislike'`), set before the `give:` node runs. So one trigger can answer any gift: `'give:*:mio': [{ if: "gift_mio == 'like'", node: 'mio_likes_it' }, 'mio_polite_thanks']`. A refusal entry takes `keep: true` (`{ if: 'gifted_mio', node: 'gift_again', keep: true }`): its node runs, but the item stays in the bag and none of the gift flags are set.
@@ -306,6 +307,38 @@ export default {
 ```
 
 Ids are T- and four digits. In `text`, Japanese is a `{word}` id from docs/game/words.md, or written out once as `{駅|eki|station}`; both show with reading and English. A ticket's status is the flag `ticket_<id without the dash>`: unset until added, then `'new'`, `'progress'` (Eric took it in the app) or `'done'`: `{ if: "ticket_T0002 == 'progress'", ... }`. `ticketread_T0002` is true once he has opened it. A `done` condition is checked when the app opens and whenever a `ticket` hook runs. The hooks are under Hooks that work everywhere. `node game3d/tools/story-check.mjs` checks the ids, words and conditions.
+
+## Clubs (`clubs.js`)
+
+The clubs and the board's single events (docs/game/systems.md, Clubs and Notice board). `game3d/story/clubs.js` holds them all, since a club runs across days:
+
+```js
+export default {
+  labels: { boshu: { ja: '募集', ro: 'boshū', en: 'members wanted' }, nichiji: {...}, basho: {...}, nyukai: {...} },
+  clubs: {
+    swimming: {
+      name: 'Swimming club', ja: '水泳部', ro: 'suieibu',
+      open: 'day >= 3',                       // when its poster is on the board
+      meets: [{ weekday: 'Sat', period: 'evening', place: 'pool', where: 'Outdoor pool', until: 3 },
+              { weekday: 'Sat', period: 'evening', place: 'gym', where: 'Gym', from: 4 }],
+      members: ['role:team_lead', 'role:receptionist'],   // person ids, or role:<role> (data/cast/roles.json)
+      poster: 'One short English line.',
+      sessions: ['club_swimming_1', 'club_swimming_2'],   // the n-th visit runs the n-th; the last repeats
+      events: [{ id: 'cup', node: 'club_swimming_cup', after: 3, if: 'step_emi >= 2' }],
+      show: { float_rack: 'true' },           // markers in its places, for members only
+    },
+  },
+  events: [{ id: 'fair', title: 'Book fair', ja: '古本市', ro: 'furuhonichi', day: 4, period: 'afternoon', place: 'plaza', where: 'Fountain plaza', text: 'One line.' }],
+  nodes: { club_swimming_1: [ ...steps ] },
+};
+```
+
+- A session node is an ordinary node (Steps), run in the club's place after that place's own start node, when Eric is a member and arrives while the club meets: weekday, period and place all match, and he hasn't been to it that day. It is part of every place's story, so it can use that place's ids, but write it for the place the club meets in on that date. A club whose place changes (the pool, then the gym) can branch on `place == 'gym'`.
+- An event runs instead of the week's session once Eric has been `after` times and `if` holds, then never again.
+- Leave the clock alone in a session: it uses the evening, and the player goes on exploring after it.
+- Flags: `club_<id>` (a member), `clubs_joined` (how many), `clubprog_<id>` (sessions he has been to, counted as one starts), `clubday_<id>` (the day of the last one), `clubev_<id>_<event>`. All save with the game.
+- A find in js/finds/spots.js with `club: '<id>'` is there only for members.
+- `node --test game3d/test/unit/clubs.test.mjs` checks the data: places, weekdays, periods, members, that every session and event node exists, and that sessions use only hooks that work everywhere.
 
 ## Transitions (`transitions.js`)
 

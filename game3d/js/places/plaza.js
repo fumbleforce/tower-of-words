@@ -10,7 +10,7 @@ import { PLACE_DETAILS } from './catalog.js';
 import { snapshotPeople, restorePeople } from './saved-people.js';
 import { walkOut, walkIn } from './edge-walk.js';
 import { canteenClosing } from './canteen-closing.js';
-import { hasBoard, readBoard } from '../finds/index.js';
+import { hasNotices, readNotices } from '../clubs/index.js';
 
 // The fountain plaza: a side trip east of the forecourt in the morning, and on the walk home after work, with the
 // lane on east into the east lane in the morning and to the dorm courtyard after work. Down the cross walk, the south
@@ -77,14 +77,15 @@ export async function plazaPlace(game) {
       face: () => [canteen.person.root.position.x, canteen.person.root.position.z],
       enabled: () => canteen.person.root.visible && !canteen.person._walk,
     },
-    // the notice board: reading it holds its posts up close (ui/finds-view.js), posts from story/finds.js
+    // the notice board: reading it holds its posts up close (ui/finds-view.js): the club posters and single events
+    // (story/clubs.js, through clubs/index.js), then the neighbours' notes (story/finds.js)
     noticeboard: {
       ...PLACE_DETAILS.plaza.things.noticeboard,
       anchor: (v) => v.set(w.board.at[0], w.board.top + 0.35, w.board.at[1]),
       spot: () => [w.board.at[0], w.board.at[1] - 0.85],
       face: () => w.board.at,
-      enabled: () => hasBoard('plaza_board'),
-      act: () => readBoard('plaza_board'),
+      enabled: () => hasNotices('plaza_board'),
+      act: () => readNotices(game, 'plaza_board'),
     },
     // the south walk off the cross walk's foot, on to the shop street (places/shotengai.js)
     shop_walk: {

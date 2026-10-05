@@ -41,4 +41,5 @@ export const GLOBAL_HOOKS = [
   'find',
   'ticket',
   'tickets',
+  'noticeboard',
 ];

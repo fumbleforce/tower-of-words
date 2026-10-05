@@ -306,7 +306,7 @@ export function installInteractions(game) {
   }
   ui.onSay = say;
   game.sayWord = sayWord;
-  ui.peopleHTML = peopleHTML;
+  ui.peopleHTML = () => (ui.clubsHTML?.() || '') + peopleHTML(); // the joined clubs above the people (clubs/index.js)
   ui.items = ITEMS;
   // the person in reach who can be given something (the Give button and the bag both use it)
   function giveTarget() {

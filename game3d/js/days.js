@@ -4,12 +4,15 @@
 // A new day starts from the save the last one ended on: every choice, word, bond and find carries over, and only
 // the state of being somewhere (the place's world, a running scene, a trip, one-off triggers) is cleared.
 import { STORIES as DAY2_STORIES } from '../story/day2/index.js';
+import { STORIES as DAY3_STORIES } from '../story/day3/index.js';
 
 export const DAYS = {
   1: { dir: '', start: 'train', period: 'early' },
   2: { dir: 'day2/', start: 'dorms', period: 'morning', files: Object.keys(DAY2_STORIES) },
+  // a test skeleton for the clubs (story/day3/index.js), reached only with ?day=3 until day 3's story lands (#229)
+  3: { dir: 'day3/', start: 'dorms', period: 'morning', files: Object.keys(DAY3_STORIES) },
 };
-export const LAST_DAY = 2;
+export const LAST_DAY = 2; // the last day a player plays on into; ?day=N starts any day in DAYS
 export const dayOf = (n) => DAYS[n] || DAYS[1];
 // the story module path for a place on a day, relative to game3d/js/
 export const storyPath = (name, day = 1) => `../story/${dayOf(day).dir}${name}.js`;

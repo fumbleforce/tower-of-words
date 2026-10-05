@@ -353,7 +353,7 @@ In the morning the plaza is a side trip with no story beat: the goal points back
 | `dorm_lane` | To the dorms | The lane east of the plaza, toward the dorms (before work is over, into the east lane). |
 | `training_door` | Training centre | block_e1's door at the head of the cross walk. Go in: it is locked. |
 | `canteen_table` | Canteen table | The terrace table nearest the link, with the last chair standing. After work only. |
-| `noticeboard` | Notice board | The notice board at the south of the circle. Read: its posts up close. |
+| `noticeboard` | Notice board | The notice board at the south of the circle. Read: its posts up close; from day 3 the club posters first, each with a slip to take ([systems.md](systems.md#notice-board)). |
 | `shop_walk` | To the shop street | The south walk east of the cross walk's foot, by the finger sign. |
 
 ### Spots

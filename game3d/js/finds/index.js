@@ -8,7 +8,8 @@
 //                                generator, run in slices: js/perf/slice.js)
 //   syncFinds(place)             the prints Eric already has stay gone (on every entry, after a load)
 //   take(game, id)               picks one up: the flag, the save, the close look
-//   hasBoard(id), readBoard(id)   a notice board's posts, held up close (from a thing's act, already a beat)
+// A find with `club: <id>` (spots.js) is there only for that club's members (clubs/model.js); the notice board's
+// posts are read through clubs/index.js.
 import * as THREE from 'three';
 import { flags } from '../narrative/state.js';
 import { reachableNear } from '../movement/navigation.js';
@@ -17,7 +18,8 @@ import { expandMc } from '../mc.js';
 import { sfx } from '../sfx.js';
 import { FINDS, PHOTOS } from './spots.js';
 import { printTexture } from './prints.js';
-import { showFind, showBoard, refreshFinds, setFindsSource } from '../ui/finds-view.js';
+import { showFind, refreshFinds, setFindsSource } from '../ui/finds-view.js';
+import { memberFlag } from '../clubs/model.js';
 
 export { FINDS, PHOTOS };
 export const FOUND = 'found_';
@@ -75,11 +77,8 @@ export async function take(game, id) {
   await showFind(id, { fresh: true });
 }
 
-export const hasBoard = (id) => (text.boards?.[id] || []).length > 0;
-// a thing's act already runs as a beat (gameplay/interactions.js talk), so this only holds the view up
-export function readBoard(id) {
-  return showBoard(text.boards[id] || []);
-}
+// a club's find is only there for its members
+const present = (f) => !found(f.id) && (!f.club || !!flags[memberFlag(f.club)]);
 
 // the print lying on the ground, named so the draw-call passes leave it alone
 function printMesh(f) {
@@ -141,13 +140,13 @@ export function* findSpotSteps(game, place) {
       anchor: (v) => place.space.localToWorld(v.set(x, y + 0.5, z)),
       spot: () => stand,
       face: () => [x, z],
-      enabled: () => !found(f.id),
+      enabled: () => present(f),
       act: () => take(game, f.id),
     };
   }
 }
 
 export function syncFinds(place) {
-  for (const [id, o] of Object.entries(place.findProps || {})) if (FINDS[id]?.at) o.visible = !found(id);
+  for (const [id, o] of Object.entries(place.findProps || {})) if (FINDS[id]?.at) o.visible = present(FINDS[id]);
   refreshFinds();
 }

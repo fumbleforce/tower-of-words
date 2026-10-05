@@ -1,6 +1,6 @@
 import { WORDS } from '../../lang.js';
 import { voice, voiceThenBeat, playMusic } from '../../ui.js';
-import { sim, setPeriod, meet, buy, take, save } from '../../sim.js';
+import { sim, setPeriod, meet, buy, take, save, PERIODS } from '../../sim.js';
 import { NEXT, canTravel } from '../../places/definitions.js';
 import { showEnd } from '../../end.js';
 import { flags } from '../state.js';
@@ -34,9 +34,13 @@ export function installProgressionHooks(game, { travel }) {
     });
     await voiceThenBeat(spoken, 350);
   };
+  // { do: 'period', to: 'lunch' }, or to: 'next' (the next period of the day: a free day's chair, notes/days3-5-outline.md)
   H.period = ({ to }) => {
-    setPeriod(to, game);
-    if (to === 'evening') playMusic('night');
+    const p = to === 'next' ? PERIODS[PERIODS.indexOf(sim.period) + 1] : to;
+    if (!p) return; // after work there is no next period: Sleep moves the day on
+    setPeriod(p, game);
+    game.place?.onPeriod?.(p); // the place's light for the new period (outdoors, the room's window)
+    if (p === 'evening') playMusic('night');
   };
   // a story can change the loop: { hook: 'music', name: 'calm' | 'office' | 'lively' | 'night' | null }
   H.music = ({ name }) => playMusic(name || null);

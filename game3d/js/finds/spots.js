@@ -5,6 +5,7 @@
 //   at: [x, z] in the place's frame; turn: its angle on the ground (Eric picks it up from the nearest free floor
 //   a step toward the camera: finds/index.js)
 //   print: the picture (finds/prints.js); title: the engine's fallback name until story/finds.js gives one
+//   club: a club's id (story/clubs.js): the find is there only once Eric has joined that club
 
 const LIST = [
   { id: 'photo_gate', kind: 'photo', place: 'gate', print: 'monorail', title: 'Monorail', at: [4.3, 4.1], turn: 0.3 },
