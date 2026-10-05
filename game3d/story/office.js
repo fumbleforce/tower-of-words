@@ -10,7 +10,8 @@ export default {
   },
 
   schedule: {
-    emi: { '*': { hide: true } },
+    // upstairs all day; after her 17:40 visit she stays at her desk in her office (scenes/office-emi.js)
+    emi: { evening: { sit: 'emi_seat' }, '*': { hide: true } },
     aoi: { '*': { hide: true } },
     rei: { '*': { hide: true } },
     // morning: inside the machine room, behind its shut door (the door scene shouts through it), not in the corridor
@@ -549,11 +550,12 @@ export default {
       { go: 'ending' },
     ],
 
-    // Emi, the team lead, down from head office for five minutes
+    // Emi, the team lead, down from head office; afterwards she goes into her own office and stays at her desk
     emi_drops_in: [
       { do: 'liftOpen' },
       { do: 'show', id: 'emi' },
       { do: 'walk', who: 'emi', to: 'my_desk', wait: true },
+      { do: 'liftClose' },
       { do: 'face', who: 'emi', to: 'eric' },
       { do: 'cam', on: 'emi', zoom: 1.6 },
       { do: 'meet', who: 'emi' },
@@ -562,8 +564,7 @@ export default {
       { say: 'emi', emo: 'bright', text: "I got it. Well. I may have told them B2 can keep every machine on this island running for another ten years." },
       { say: 'emi', emo: 'bright', text: "With the right contractor, I said. So, welcome aboard. Tomorrow you and I should have a proper chat about what you can actually do." },
       { do: 'cam', back: true },
-      { do: 'walk', who: 'emi', to: 'lift_out', wait: true },
-      { do: 'hide', id: 'emi' },
+      { do: 'sit', who: 'emi', at: 'emi_seat' },
     ],
 
     // ================================================================== EVENING: her question, and a new repair request

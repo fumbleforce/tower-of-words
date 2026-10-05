@@ -34,10 +34,12 @@ const GUEST = [DESK[0], DESK[1] - 0.72]; // the guest chair across the desk, nea
 const CAB = [-5.95, 6.21], // the low cabinet behind her, against the near wall
   COAT = [-6.0, 2.68], // the coat stand inside the doorway
   BOOK = 3.4; // the bookcase's centre along the left wall
-// for the place (places/office.js): the partition line, her seat (an office chair's top), the guest chair and where
-// Eric talks to her
+// for the place (places/office.js): the partition line, her doorway's x range, her desk's centre, her seat (an office
+// chair's top), the guest chair and where Eric talks to her
 export const EMI = {
   x: EMI_X,
+  door: EMI_DOOR,
+  desk: DESK,
   // out: on from behind (in front: the desk)
   seat: { x: EMI_SEAT[0], z: EMI_SEAT[1], top: 0.24, ry: Math.PI, out: [EMI_SEAT[0], EMI_SEAT[1] + 0.45] },
   guest: { x: GUEST[0], z: GUEST[1], top: 0.25, ry: 0 },

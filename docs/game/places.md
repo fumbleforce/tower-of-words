@@ -1407,7 +1407,7 @@ Emi's office is the left part of what was one big copy room, split by a partitio
 
 ### Spots
 
-`lift_out`, `mori_greet`, `lobby`, `office_door`, `my_seat`, `emi_seat`, `copier_front`, `coffee_front`, `corridor_w`, `corridor_e`, `machine_front`, `mio_by_desk`, `kenji_desk`
+`lift_out`, `mori_greet`, `lobby`, `office_door`, `my_seat`, `emi_seat`, `emi_door` (the doorway of Emi's office, in the corridor's south wall), `emi_desk` (the middle of her desk; for the camera and pins, not a walk target), `copier_front`, `coffee_front`, `corridor_w`, `corridor_e`, `machine_front`, `mio_by_desk`, `kenji_desk`
 
 ### Seats
 
@@ -1430,7 +1430,7 @@ The story moves the clock ([systems.md](systems.md)): morning when Eric arrives,
 | `mio` | In the machine room in the morning and at lunch; sitting at her desk in the afternoon; standing beside Eric's desk in the evening, until she leaves by the lift. | morning `racks`, lunch `racks`, afternoon sits `mio_seat`, evening `mio_by_desk` |
 | `mori` | Waits at the lift landing to greet Eric, then at his desk; the kitchenette table at lunch; gone home in the evening. | lunch `kitchen_table`, afternoon `chief_desk`, evening hidden |
 | `kenji` | His desk, north row, left; gone home in the evening. | evening hidden |
-| `emi` | Upstairs all day, so her office is empty; comes down at 17:40 for a few minutes. | hidden all day |
+| `emi` | Upstairs all day, so her office is empty; comes down at 17:40, then sits at her desk in her office for the rest of the day. | early hidden, morning hidden, lunch hidden, afternoon hidden, evening sits `emi_seat` |
 | `tama` | Asleep on Eric's chair in the machine room, then wherever the chair goes. In the machine room she is the goal, and petting her sends the chair home with her on it (Jørgen, 2026-10-04: "make the cat be the one that moves the scene along"). | – |
 | `aoi` | Hidden. | hidden all day |
 | `rei` | Hidden. | hidden all day |
