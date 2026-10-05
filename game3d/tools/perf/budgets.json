@@ -89,12 +89,12 @@
         }
       },
       "east_coast": {
-        "calls": 39,
-        "tris": 81893,
+        "calls": 61,
+        "tris": 108480,
         "gpu": {
           "medianMs": 16.7,
           "p99Ms": 16.8,
-          "build": "1002-0857-b32316a9"
+          "build": "1005-0944-9e08117a"
         }
       },
       "sports": {
@@ -149,6 +149,15 @@
           "medianMs": 16.7,
           "p99Ms": 16.8,
           "build": "1005-0813-abc9a3d7"
+        }
+      },
+      "dorm_commons": {
+        "calls": 26,
+        "tris": 12435,
+        "gpu": {
+          "medianMs": 16.7,
+          "p99Ms": 16.8,
+          "build": "1005-0944-9e08117a"
         }
       }
     }
@@ -242,12 +251,12 @@
         }
       },
       "east_coast": {
-        "calls": 35,
-        "tris": 72051,
+        "calls": 55,
+        "tris": 94406,
         "gpu": {
           "medianMs": 16.7,
           "p99Ms": 16.8,
-          "build": "1002-0857-b32316a9"
+          "build": "1005-0944-9e08117a"
         }
       },
       "sports": {
@@ -302,6 +311,15 @@
           "medianMs": 16.7,
           "p99Ms": 16.8,
           "build": "1005-0813-abc9a3d7"
+        }
+      },
+      "dorm_commons": {
+        "calls": 18,
+        "tris": 12363,
+        "gpu": {
+          "medianMs": 16.7,
+          "p99Ms": 16.8,
+          "build": "1005-0944-9e08117a"
         }
       }
     }
@@ -395,12 +413,12 @@
         }
       },
       "east_coast": {
-        "calls": 42,
-        "tris": 73460,
+        "calls": 62,
+        "tris": 94923,
         "gpu": {
           "medianMs": 16.7,
           "p99Ms": 16.8,
-          "build": "1002-0857-b32316a9"
+          "build": "1005-0944-9e08117a"
         }
       },
       "sports": {
@@ -455,6 +473,15 @@
           "medianMs": 16.7,
           "p99Ms": 16.8,
           "build": "1005-0813-abc9a3d7"
+        }
+      },
+      "dorm_commons": {
+        "calls": 25,
+        "tris": 12370,
+        "gpu": {
+          "medianMs": 16.7,
+          "p99Ms": 16.8,
+          "build": "1005-0944-9e08117a"
         }
       }
     }
