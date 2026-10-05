@@ -2,7 +2,7 @@
  "title": "Carina: portrait round 6 (the liked tile, small changes to hair and expression)",
  "date": "2026-10-05",
  "by": "art agent (Carina portrait 6)",
- "status": "open",
+ "status": "decided",
  "multi": true,
  "question": "Is any of these Carina, or which hair line and which expression line should I keep?",
  "media": [
@@ -129,5 +129,8 @@
    ],
    "note": "blonde, roots, lips parted. Seed 11496. Changed against the original prompt: hair: \"(dark roots, dark brown roots at the crown fading into honey blonde and golden lengths, obvious root regrowth, ombre hair:1.5)\" -> \"(blonde hair with dark roots, honey blonde and golden lengths, obvious root regrowth:1.5)\" ; expression: \"(confident slight smile:1.2)\" -> \"(relaxed expression, slightly amused:1.2)\". Nothing else differs (negative unchanged). Headroom under 34 px was padded to 40 px with the edge colour where needed. Full prompt = the original with that change."
   }
- ]
+ ],
+ "decision": "Jørgen: '3. hair 2, roots + stripes pretty good'. Hair is settled (tile 3, hair 2 phrase); eyes and expression continue in carina-portrait-7.",
+ "decided_at": "2026-10-05T19:07:12+0200",
+ "issue": 256
 }
