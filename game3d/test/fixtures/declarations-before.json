@@ -838,18 +838,36 @@
           "label": "Pool",
           "kind": "thing",
           "verb": "Go in"
+        },
+        "court_display": {
+          "label": "Score display",
+          "kind": "thing small"
+        },
+        "ball_basket": {
+          "label": "Ball basket",
+          "kind": "thing small"
         }
       },
       "spots": [
         "north_entry",
         "sports_courtside",
-        "sports_grove_bench"
+        "sports_grove_bench",
+        "court_gate",
+        "court_bench",
+        "court_net",
+        "court_baseline_s",
+        "court_baseline_n",
+        "court_display",
+        "court_corner"
       ],
       "nooks": [
         "sports_courtside",
-        "sports_grove_bench"
+        "sports_grove_bench",
+        "court_corner"
       ],
-      "seats": [],
+      "seats": [
+        "court_bench"
+      ],
       "zones": [
         "north_exit",
         "east_exit",
