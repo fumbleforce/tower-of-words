@@ -39,6 +39,20 @@ export const AXIS_Z = (EW[2] + EW[3]) / 2;
 // the square where the court's walks cross, and the raised bed in its middle
 export const SQUARE = [AXIS_X - 2.2, AXIS_X + 2.2, AXIS_Z - 2.2, AXIS_Z + 2.2];
 export const PLANTER = [AXIS_X - 0.75, AXIS_X + 0.75, AXIS_Z - 0.75, AXIS_Z + 0.75];
+// round the bed, no two corners alike: a bench facing it, one turned to face along the walk, a bench facing the
+// gallery ([x, z, facing], 1.1 long), the sorted bins ([x, z, facing]); the lamps on the east-west walk's edges just
+// outside the square, one each side (cluster.js lays them; the east coast walks round them)
+const OFF = (NS[1] - NS[0]) / 2 + 0.85;
+export const SQUARE_BENCHES = [
+  [AXIS_X - OFF, SQUARE[2] + 0.45, 0],
+  [AXIS_X + OFF + 0.2, SQUARE[2] + 0.75, -Math.PI / 2],
+  [AXIS_X - OFF, SQUARE[3] - 0.45, Math.PI],
+];
+export const SQUARE_BINS = [AXIS_X + OFF, SQUARE[3] - 0.35, Math.PI];
+export const COURT_LAMPS = [
+  [SQUARE[0] - 0.5, EW[2] + 0.2],
+  [SQUARE[1] + 0.5, EW[3] - 0.2],
+];
 // the ends of Eric's block (dorm_1, its return) and dorm_1e along the row's north side
 export const DORM_1_SOUTH = 8.1;
 

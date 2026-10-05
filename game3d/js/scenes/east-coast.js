@@ -25,6 +25,7 @@ import { coastLand } from './island-west.js';
 import { walkSteps, kerbWalks, Z_CUTS } from './east-coast/walk.js';
 import { onsenSteps } from './east-coast/onsen.js';
 import * as P from './east-coast/plan.js';
+import * as C from './dorm-court/cluster-plan.js';
 import { buildNooks } from './outdoor/nooks.js';
 
 const { CHUNK, inRect } = P;
@@ -107,6 +108,11 @@ export function* eastCoastSteps() {
     exits: P.EXITS,
     doors: P.DOORS,
     turns: P.TURNS,
+    // the inner court's named spots: the square by the maple's bed, the bench facing the common room
+    inner: {
+      square: P.pt([C.AXIS_X + 1.2, C.AXIS_Z + 1.4]),
+      bench: P.pt([C.SQUARE_BENCHES[0][0], C.SQUARE_BENCHES[0][1] + 0.7]),
+    },
     camera: { elev: 46, fov: 24 },
     evening() {
       nooks.evening();

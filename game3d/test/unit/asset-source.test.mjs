@@ -40,6 +40,7 @@ test('asset source data includes the actual words, cast, music, sounds and style
     shotengai: {},
     east_lane: {},
     east_coast: {},
+    dorm_commons: {},
     sports: {},
     pool: {},
     gym: {},

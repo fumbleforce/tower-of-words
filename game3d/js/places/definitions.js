@@ -11,6 +11,7 @@ export const PLACE_FILES = {
   shotengai: 'game3d/js/places/shotengai.js',
   east_lane: 'game3d/js/places/east-lane.js',
   east_coast: 'game3d/js/places/east-coast.js',
+  dorm_commons: 'game3d/js/places/commons.js',
   sports: 'game3d/js/places/sports.js',
   pool: 'game3d/js/places/pool.js',
   gym: 'game3d/js/places/gym.js',
@@ -30,6 +31,7 @@ export const PLACE_NAMES = {
   shotengai: 'Shop street',
   east_lane: 'East lane',
   east_coast: 'East coast',
+  dorm_commons: 'Dorm common room',
   sports: 'Gym and pool',
   pool: 'Pool deck',
   gym: 'Gym',
@@ -47,14 +49,16 @@ export const NEXT = { train: 'gate', gate: 'forecourt', forecourt: 'office', dor
 // in the east coast, so the three make a loop; west past the gym's corner is the office quarter, and west along
 // its street the harbour; north out of the harbour, up the works lane or up the works street, are the old works,
 // whose two ways both lead back into the harbour, so the two make a loop. The pool deck is through the shower
-// pavilion's door at the sports ground's pool walk, and back; the gym's corner through its main doors on the lane.
+// pavilion's door at the sports ground's pool walk, and back; the gym's corner through its main doors on the lane;
+// the dorm common room through its glazed door on the inner court, off the east coast's dorm row.
 export const TRIPS = {
   forecourt: ['plaza'],
   plaza: ['forecourt', 'dorm_court', 'shotengai', 'east_lane'],
   office: ['forecourt'],
   shotengai: ['plaza', 'dorm_court'],
   east_lane: ['plaza', 'shotengai', 'dorm_court', 'east_coast', 'sports'],
-  east_coast: ['east_lane', 'sports'],
+  east_coast: ['east_lane', 'sports', 'dorm_commons'],
+  dorm_commons: ['east_coast'],
   sports: ['east_lane', 'east_coast', 'office_quarter', 'pool', 'gym'],
   pool: ['sports'],
   gym: ['sports'],
@@ -77,6 +81,7 @@ export const STORY_FILES = [
   'shotengai',
   'east_lane',
   'east_coast',
+  'dorm_commons',
   'sports',
   'pool',
   'gym',

@@ -788,13 +788,20 @@
           "label": "Onsen",
           "kind": "thing",
           "verb": "Go in"
+        },
+        "commons": {
+          "label": "Common room",
+          "kind": "thing",
+          "verb": "Go in"
         }
       },
       "spots": [
         "row_entry",
         "east_coast_lookout",
         "east_coast_shrine",
-        "lookout_view"
+        "lookout_view",
+        "inner_court",
+        "inner_court_bench"
       ],
       "nooks": [
         "east_coast_lookout",
@@ -811,6 +818,50 @@
       "hooks": [
         "coastVisit"
       ]
+    },
+    "dorm_commons": {
+      "things": {
+        "commons_door": {
+          "label": "To the inner court",
+          "kind": "thing",
+          "verb": "Go"
+        },
+        "commons_printer": {
+          "label": "Printer",
+          "kind": "thing small"
+        },
+        "art_table": {
+          "label": "Art materials",
+          "kind": "thing small"
+        },
+        "drying_rack": {
+          "label": "Drying rack",
+          "kind": "thing"
+        },
+        "commons_board": {
+          "label": "Notice board",
+          "kind": "thing"
+        }
+      },
+      "spots": [
+        "commons_in",
+        "commons_table",
+        "commons_sofa",
+        "commons_kitchen",
+        "commons_rack",
+        "commons_books",
+        "commons_fridge"
+      ],
+      "nooks": [
+        "commons_books",
+        "commons_fridge"
+      ],
+      "seats": [
+        "commons_sofa"
+      ],
+      "zones": [],
+      "people": [],
+      "hooks": []
     },
     "sports": {
       "things": {
