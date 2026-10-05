@@ -2,7 +2,7 @@
  "title": "Head office lobby rebuild: layout plan",
  "date": "2026-10-05",
  "by": "Claude (plan agent, #259)",
- "status": "open",
+ "status": "decided",
  "question": "The two pictures are concepts from ChatGPT's image model, not the game, and the plans are drawings; nothing is built yet. The look is decided (your pick: marble and glass atrium, warm wood desk, cool daylight). Two layout choices are left, pick one per number: 1, how tall (default 1a), and 2, where the lifts sit relative to Kuro's desk (default 2a).",
  "multi": true,
  "media": [
@@ -84,5 +84,11 @@
    "label": "Today's lobby in the game",
    "href": "game3d/index.html?place=forecourt"
   }
- ]
+ ],
+ "decided": [
+  "1a"
+ ],
+ "decision": "1a with a black sleek desk and a receptionist's office door on the right; lifts 2a; building",
+ "decided_at": "2026-10-05T23:14:30+0200",
+ "issue": 270
 }
