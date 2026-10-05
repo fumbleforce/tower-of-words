@@ -9,7 +9,6 @@
 //
 // QA: ?shell=title|settings|pause|save|load|loading|end opens that screen on its own (with made-up save data),
 // for screenshots of each screen in isolation (game3d/tools/shell-shots.mjs).
-import * as THREE from 'three';
 import { ui, sfx, unlockAudio, pauseAudio } from './ui.js';
 import { settings } from './settings.js';
 import { sim, PERIOD_NAMES } from './sim.js';
@@ -17,6 +16,8 @@ import { startOnboarding, resetOnboarding } from './onboard.js';
 import { PLACE_NAMES } from './places/definitions.js';
 import { installGoalArrow } from './ui/goal-arrow.js';
 import { addDayTwo } from './ui/title-day2.js';
+import { poseTitleCamera, releaseTitleCamera, flightAt } from './ui/title-camera.js';
+import { snapshot, crossfade } from './places/crossfade.js';
 import { settingsView } from './ui/settings-view.js';
 import { createSaving, kv, store as slots } from './saves/actions.js';
 import { savesView } from './saves/view.js';
@@ -139,122 +140,10 @@ function hideBoot() {
 // ---------- title ----------
 // The key art is the game itself: the train's own scene, seen from outside the car at dawn. On Start the camera
 // flies from there into the car and lands on the play view while the title fades, so the day starts with no cut.
-const TITLE_POSE = {
-  land: { t: [-2.6, -0.9, 0.6], el: 24, yaw: 30, d: 16, fov: 30 },
-  port: { t: [-0.3, -2.0, 0.6], el: 32, yaw: -62, d: 17, fov: 40 },
-};
-let titleCam = null;
-function poseTitleCamera() {
-  const g = game();
-  if (!g || !g.place || g.place.name !== 'train' || titleCam) return;
-  const cam = g.place.cam,
-    camera = g.place.camera;
-  const orig = { update: cam.update, fov: camera.fov };
-  let t0 = performance.now();
-  const place = () => {
-    const P = TITLE_POSE[camera.aspect >= 1 ? 'land' : 'port'];
-    if (camera.fov !== P.fov) orig.fov = camera.fov; // a resize re-fit the game camera: remember its fov
-    const drift = settings.reduceMotion ? 0 : Math.sin((performance.now() - t0) / 9000) * 3.5; // a slow sway of a few degrees
-    const el = THREE.MathUtils.degToRad(P.el),
-      yw = THREE.MathUtils.degToRad(P.yaw + drift);
-    camera.fov = P.fov;
-    camera.updateProjectionMatrix();
-    camera.position.set(
-      P.t[0] + Math.sin(yw) * Math.cos(el) * P.d,
-      P.t[1] + Math.sin(el) * P.d,
-      P.t[2] + Math.cos(yw) * Math.cos(el) * P.d,
-    );
-    camera.up.set(0, 1, 0);
-    camera.lookAt(P.t[0], P.t[1], P.t[2]);
-    camera.updateMatrixWorld();
-  };
-  cam.update = function () {
-    place();
-  };
-  if (cam.snap) {
-    cam._titleSnap = cam.snap;
-    cam.snap = function () {
-      place();
-    };
-  }
-  place();
-  titleCam = { cam, camera, orig, place };
-}
-// fly from the title shot to the play view; resolves when the camera is back under the game's control
-function releaseTitleCamera(ms = 1600) {
-  const tc = titleCam;
-  if (!tc) return Promise.resolve();
-  titleCam = null;
-  const { cam, camera, orig } = tc;
-  if (cam._titleSnap) {
-    cam.snap = cam._titleSnap;
-    delete cam._titleSnap;
-  }
-  const p0 = camera.position.clone(),
-    q0 = camera.quaternion.clone(),
-    f0 = camera.fov;
-  const done = () => {
-    cam.update = orig.update;
-    camera.fov = orig.fov;
-    camera.updateProjectionMatrix();
-  };
-  if (settings.reduceMotion || ms <= 0) {
-    done();
-    cam.snap?.(game().player.root.position);
-    return Promise.resolve();
-  }
-  const start = performance.now();
-  return new Promise((res) => {
-    // Continue into another place stops this camera's updates before the flight ends: finish on time anyway, or
-    // the UI stays hidden under title-leaving (the day's summary never showed after a Continue in the dorms)
-    const late = setTimeout(() => {
-      done();
-      res();
-    }, ms + 400);
-    cam.update = function (dt, p) {
-      camera.fov = orig.fov;
-      orig.update.call(this, dt, p); // where the game camera wants to be now
-      const k = Math.min(1, (performance.now() - start) / ms),
-        e = k < 0.5 ? 4 * k * k * k : 1 - Math.pow(-2 * k + 2, 3) / 2;
-      const pg = camera.position.clone(),
-        qg = camera.quaternion.clone();
-      camera.position.lerpVectors(p0, pg, e);
-      camera.quaternion.slerpQuaternions(q0, qg, e);
-      camera.fov = f0 + (orig.fov - f0) * e;
-      camera.updateProjectionMatrix();
-      camera.updateMatrixWorld();
-      if (k >= 1) {
-        clearTimeout(late);
-        done();
-        res();
-      }
-    };
-  });
-}
-
-// QA: hold the camera at a point k (0..1) of the flight from the title shot into the car, for stills
-shell._flightAt = (k) => {
-  if (!titleCam) poseTitleCamera();
-  const tc = titleCam;
-  if (!tc) return;
-  const { cam, camera, orig } = tc;
-  tc.place();
-  const p0 = camera.position.clone(),
-    q0 = camera.quaternion.clone(),
-    f0 = camera.fov;
-  camera.fov = orig.fov;
-  (cam._titleSnap || orig.update).call(cam, game().player.root.position);
-  const e = k < 0.5 ? 4 * k * k * k : 1 - Math.pow(-2 * k + 2, 3) / 2;
-  const pg = camera.position.clone(),
-    qg = camera.quaternion.clone();
-  camera.position.lerpVectors(p0, pg, e);
-  camera.quaternion.slerpQuaternions(q0, qg, e);
-  camera.fov = f0 + (orig.fov - f0) * e;
-  camera.updateProjectionMatrix();
-  camera.updateMatrixWorld();
-  cam.update = () => {};
-};
-
+// Continue (and a loaded slot, quick load or Day 2, which reload into it) has no flight: the shot holds under the
+// loading chip until the saved place is in, then crossfades to it (shell.titleEntered, called by continue.js).
+// The train's clacks and carriage bed stay quiet under the title (sfx.js titleQuiet). The camera: ui/title-camera.js.
+shell._flightAt = flightAt; // QA: a point k (0..1) of the flight, for stills
 function buildTitle() {
   const t = $('#title');
   if (!t || t.dataset.shell) return t;
@@ -292,7 +181,7 @@ function buildTitle() {
     onTitleLeave();
   });
   cont.addEventListener('click', () => {
-    onTitleLeave();
+    onTitleLeave({ fly: false });
   });
   t.addEventListener('keydown', (e) => {
     if (!topLayer()) trap(t, e);
@@ -317,6 +206,13 @@ function onTitleShow() {
   refreshTitle();
   document.body.classList.add('at-title');
   poseTitleCamera();
+  // a save picked on the last visit's title (a reload carries the choice): continue straight into it, with the
+  // boot loader up until the saved place is in (shell.titleEntered), so no title shot shows first
+  if (sessionStorage.getItem(KEYS.CONTINUE)) {
+    sessionStorage.removeItem(KEYS.CONTINUE);
+    $('#title .cont').click();
+    return;
+  }
   // the boot loader goes once the posed shot has had a frame to render
   requestAnimationFrame(() =>
     requestAnimationFrame(() => {
@@ -324,19 +220,29 @@ function onTitleShow() {
       requestAnimationFrame(() => $('#title .go')?.focus({ preventScroll: true }));
     }),
   );
-  // a save picked on the last visit's title (a reload carries the choice): continue straight into it
-  if (sessionStorage.getItem(KEYS.CONTINUE)) {
-    sessionStorage.removeItem(KEYS.CONTINUE);
-    $('#title .cont').click();
-  }
 }
-function onTitleLeave() {
-  if (!document.body.classList.contains('at-title')) return;
-  document.body.classList.remove('at-title');
-  document.body.classList.add('title-leaving');
+function onTitleLeave({ fly = true } = {}) {
+  const b = document.body.classList;
+  if (!b.contains('at-title')) return;
+  b.add('title-leaving');
+  if (!fly) b.add('title-cont', 'loading');
+  b.remove('at-title');
+  // the title shot, to crossfade from (read in the frame after the game's own draw); none behind the boot loader
+  contSnap = null;
+  if (!fly && !$('#boot:not(.gone)')) requestAnimationFrame(() => (contSnap = snapshot(() => {}, $('#c'))));
   unlockAudio();
-  releaseTitleCamera(1700).then(() => document.body.classList.remove('title-leaving'));
+  if (fly) releaseTitleCamera(1700).then(() => b.remove('title-leaving'));
 }
+// Continue: the saved place is in (continue.js); the title shot lets go of the camera with no flight
+let contSnap = null;
+shell.titleEntered = () => {
+  const b = document.body.classList;
+  if (!b.contains('title-cont')) return;
+  releaseTitleCamera(0);
+  b.remove('title-cont', 'loading', 'title-leaving');
+  hideBoot();
+  crossfade(contSnap);
+};
 
 // ---------- settings (the panel is ui/settings-view.js) ----------
 const settingsPanel = settingsView({ openLayer, closeLayer, trap });

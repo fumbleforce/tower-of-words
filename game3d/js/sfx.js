@@ -56,6 +56,9 @@ const K = {
   guitar: { f: ['guitar_practice'] },
 };
 
+// the title shot of the train (menu.js): its clacks and carriage bed stay quiet there (body.at-title, and
+// body.title-cont while a Continue waits for the saved place)
+export const titleQuiet = () => /\b(at-title|title-cont)\b/.test(document.body.className);
 export function ctx() {
   if (!unlocked && !C) return null;
   if (!C) {
@@ -99,7 +102,7 @@ function preloadAll() {
 // { stop } if nothing played).
 export function sfx(kind, opts = {}) {
   const none = { stop() {} };
-  if (isMuted()) return none;
+  if (isMuted() || (kind === 'clack' && titleQuiet())) return none; // no rail clacks under the title's train shot
   const c = ctx();
   if (!c) return none;
   const k = K[kind];

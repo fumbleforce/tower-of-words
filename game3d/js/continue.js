@@ -14,6 +14,7 @@ export function createContinue(game, { enter, travel, startScene, PLACES }) {
     restore(game, saved);
     await enter(saved.place || 'train', { persist: false, resuming: true });
     game.place.restoreState?.(saved);
+    globalThis.__shell?.titleEntered?.(); // from the title's Continue: its shot fades to this place (menu.js)
     // Schedule hooks may set visibility flags; saved progression remains authoritative.
     for (const key of Object.keys(flags)) delete flags[key];
     Object.assign(flags, saved.flags || {});
