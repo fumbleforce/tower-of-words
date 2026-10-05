@@ -106,6 +106,8 @@
       "dorm_court": "game3d/js/places/dorm-court.js",
       "dorms": "game3d/js/places/dorms.js",
       "shotengai": "game3d/js/places/shotengai.js",
+      "karaoke": "game3d/js/places/karaoke.js",
+      "karaoke_booth": "game3d/js/places/karaoke-booth.js",
       "east_lane": "game3d/js/places/east-lane.js",
       "east_coast": "game3d/js/places/east-coast.js",
       "dorm_commons": "game3d/js/places/commons.js",
@@ -128,6 +130,8 @@
       "dorm_court": {},
       "dorms": {},
       "shotengai": {},
+      "karaoke": {},
+      "karaoke_booth": {},
       "east_lane": {},
       "east_coast": {},
       "dorm_commons": {},
@@ -267,6 +271,8 @@
     "dorm_court",
     "dorms",
     "shotengai",
+    "karaoke",
+    "karaoke_booth",
     "east_lane",
     "east_coast",
     "dorm_commons",
@@ -497,7 +503,13 @@
     "shotengai:arrive",
     "shotengai:shut",
     "shotengai:to_plaza",
+    "shotengai:to_karaoke",
     "shotengai:to_dorms",
+    "karaoke:arrive",
+    "karaoke:to_street",
+    "karaoke:to_booth",
+    "karaoke_booth:arrive",
+    "karaoke_booth:to_desk",
     "east_lane:arrive",
     "east_lane:shut",
     "east_lane:dorms_later",
@@ -1317,8 +1329,32 @@
       "labels": []
     },
     {
+      "from": "shotengai:to_karaoke",
+      "to": "karaoke:arrive",
+      "kind": "trip",
+      "labels": []
+    },
+    {
       "from": "shotengai:to_dorms",
       "to": "dorm_court:arrive",
+      "kind": "trip",
+      "labels": []
+    },
+    {
+      "from": "karaoke:to_street",
+      "to": "shotengai:arrive",
+      "kind": "trip",
+      "labels": []
+    },
+    {
+      "from": "karaoke:to_booth",
+      "to": "karaoke_booth:arrive",
+      "kind": "trip",
+      "labels": []
+    },
+    {
+      "from": "karaoke_booth:to_desk",
+      "to": "karaoke:arrive",
       "kind": "trip",
       "labels": []
     },

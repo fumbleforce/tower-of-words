@@ -68,6 +68,11 @@ const LEGS = [
   ['dorm_commons', { use: 'commons_door' }, 'east_coast'],
   ['east_coast', 'dorm_street', 'east_lane'],
   ['east_lane', 'shop_street', 'shotengai'],
+  // in at the karaoke box's door, up to the booth, down and out again
+  ['shotengai', { use: 'karaoke' }, 'karaoke'],
+  ['karaoke', { use: 'karaoke_stairs' }, 'karaoke_booth'],
+  ['karaoke_booth', { use: 'booth_door' }, 'karaoke'],
+  ['karaoke', { use: 'karaoke_door' }, 'shotengai'],
   ['shotengai', 'plaza_lane', 'plaza'],
   ['plaza', 'dorm_lane', 'east_lane'],
 ];

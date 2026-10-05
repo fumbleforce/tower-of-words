@@ -13,7 +13,8 @@ import { shotengaiParty } from './shotengai-party.js';
 
 // The shop street and the seafront (scenes/shotengai.js): reached from the plaza down the cross walk and along the
 // south walk, it comes in at the arcade's east mouth off the dorm street; it also loads with ?place=shotengai. The
-// shops are shut for now (their doors say so). Out the east end goes back to the plaza, or after work up the dorm
+// shops are shut for now (their doors say so), but the karaoke box's door opens onto its front desk
+// (places/karaoke.js). Out the east end goes back to the plaza, or after work up the dorm
 // street to the dorm courtyard.
 const STEEP = (84 * Math.PI) / 180; // the camera's elevation in the alleys and down the rows' west end
 export async function shotengaiPlace(game) {
@@ -25,6 +26,8 @@ export async function shotengaiPlace(game) {
   // the named shops' doors: shut (story/shotengai.js says so); a pin over each, Eric steps up to it
   const dk = (id) => w.doors.find((k) => k.id === id);
   const pin = (v, id) => v.set(dk(id).local[0], 1.95, dk(id).local[1]);
+  // the way a door faces: from it out to the step in front of it
+  const outOf = (id) => Math.atan2(dk(id).step[0] - dk(id).local[0], dk(id).step[1] - dk(id).local[1]);
   const party = shotengaiParty(game, { w, K }); // day 2's gathering on the promenade (shotengai-party.js)
   const things = {
     plaza_lane: {
@@ -138,6 +141,8 @@ export async function shotengaiPlace(game) {
       const p = game.player.root.position;
       w.follow(p.x, p.z);
       updateOccluders(P, p, dt);
+      const [kx, kz] = dk('karaoke').step;
+      if (Math.hypot(p.x - kx, p.z - kz) < 7 && !game.prepared.karaoke) game.prepare?.('karaoke');
       // steeper over the alleys and the rows' west end, where the rows would hide him
       const want = w.steep(p.x, p.z) ? STEEP : flat;
       cam.elev += (want - cam.elev) * Math.min(1, dt * 3);
@@ -164,6 +169,9 @@ export async function shotengaiPlace(game) {
     // in off the dorm street onto the shop walk, the arcade ahead; out the same way
     tripIn: (g) => walkIn(g, cam, w.edge, w.in, w.face),
     tripOut: (g) => walkOut(g, cam, [w.edge[0], w.edge[1] - 1.6], w.edge),
+    // the karaoke box: in at its door off the arcade, and back out of it onto the arcade
+    tripInFrom: { karaoke: (g) => walkIn(g, cam, dk('karaoke').local, dk('karaoke').step, outOf('karaoke')) },
+    tripOutTo: { karaoke: (g) => walkOut(g, cam, dk('karaoke').step, dk('karaoke').local) },
   };
   party.install(P);
   // the arcade's glass roof fades while he is under it

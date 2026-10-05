@@ -19,6 +19,8 @@ export const PLACE_EVENTS = {
   dorm_court: { start: { id: 'start', source: 'engine' } },
   dorms: { start: { id: 'start', source: 'engine' } },
   shotengai: { start: { id: 'start', source: 'engine' } },
+  karaoke: { start: { id: 'start', source: 'engine' } },
+  karaoke_booth: { start: { id: 'start', source: 'engine' } },
   east_lane: { start: { id: 'start', source: 'engine' } },
   east_coast: { start: { id: 'start', source: 'engine' } },
   dorm_commons: { start: { id: 'start', source: 'engine' } },

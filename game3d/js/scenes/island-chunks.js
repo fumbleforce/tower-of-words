@@ -70,6 +70,24 @@ export const CHUNKS = {
     view: [-27, 7, -80.5, 13.5],
     anchor: 'the middle of the arcade’s east mouth, between the two shop rows as drawn',
   },
+  karaoke: {
+    at: [62.25, 22.4],
+    turn: 180, // an interior, its door on the arcade (the south row faces north): looked into from the arcade's side
+    scale: 1,
+    level: 0,
+    walk: [-3.6, 3.6, -4.4, 0],
+    view: [-3.8, 3.8, -4.6, 0.4],
+    anchor: 'the karaoke box’s door off the arcade, south row bay 14, inside',
+  },
+  karaoke_booth: {
+    at: [59.4, 24.6],
+    turn: 180, // upstairs over the front desk
+    scale: 1,
+    level: 1,
+    walk: [-2.4, 2.4, -3.6, 0],
+    view: [-2.6, 2.6, -3.8, 0.4],
+    anchor: 'one booth on the karaoke box’s first floor, over the desk',
+  },
   east_lane: {
     at: [69.27, -2.75],
     turn: 0, // the camera turns itself: north-east over most of it, south-east over the south walk (scenes/east-lane.js)

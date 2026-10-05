@@ -695,6 +695,70 @@
         "partyFood"
       ]
     },
+    "karaoke": {
+      "things": {
+        "karaoke_door": {
+          "label": "To the shop street",
+          "kind": "thing",
+          "verb": "Go"
+        },
+        "karaoke_stairs": {
+          "label": "Upstairs",
+          "kind": "thing",
+          "verb": "Go"
+        },
+        "karaoke_desk": {
+          "label": "Front desk",
+          "kind": "thing"
+        }
+      },
+      "spots": [
+        "karaoke_in",
+        "karaoke_desk",
+        "karaoke_drinks",
+        "karaoke_bench",
+        "karaoke_stairs"
+      ],
+      "nooks": [
+        "karaoke_bench"
+      ],
+      "seats": [
+        "karaoke_bench"
+      ],
+      "zones": [],
+      "people": [],
+      "hooks": []
+    },
+    "karaoke_booth": {
+      "things": {
+        "booth_door": {
+          "label": "Downstairs",
+          "kind": "thing",
+          "verb": "Go"
+        },
+        "song_terminal": {
+          "label": "Song selector",
+          "kind": "thing small"
+        },
+        "booth_screen": {
+          "label": "Screen",
+          "kind": "thing"
+        }
+      },
+      "spots": [
+        "booth_in",
+        "booth_table",
+        "booth_screen"
+      ],
+      "nooks": [],
+      "seats": [
+        "booth_seat_w",
+        "booth_seat_e"
+      ],
+      "zones": [],
+      "people": [],
+      "hooks": []
+    },
     "east_lane": {
       "things": {
         "plaza_lane": {

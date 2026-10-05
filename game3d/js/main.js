@@ -35,6 +35,8 @@ import { officePlace as office } from './places/office.js';
 import { dormCourtPlace as dorm_court } from './places/dorm-court.js';
 import { dormsPlace as dorms } from './places/dorms.js';
 import { shotengaiPlace as shotengai } from './places/shotengai.js';
+import { karaokePlace as karaoke } from './places/karaoke.js';
+import { karaokeBoothPlace as karaoke_booth } from './places/karaoke-booth.js';
 import { eastLanePlace as east_lane } from './places/east-lane.js';
 import { eastCoastPlace as east_coast } from './places/east-coast.js';
 import { commonsPlace as dorm_commons } from './places/commons.js';
@@ -66,6 +68,8 @@ const PLACES = {
   dorm_court,
   dorms,
   shotengai,
+  karaoke,
+  karaoke_booth,
   east_lane,
   east_coast,
   dorm_commons,
