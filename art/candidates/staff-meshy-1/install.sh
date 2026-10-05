@@ -33,8 +33,9 @@ fi
 # it also rewrites Eric's and Mio's idles, which stay as committed
 S=/home/jorgen/repo/japanese/art/parts/src
 mkdir -p art/parts/src/mio
-LINKS="art/parts/src/eric art/parts/src/mio/mesh.glb art/parts/src/mio/tex.webp"
+LINKS="art/parts/src/eric art/parts/src/mio/mesh.glb art/parts/src/mio/tex.webp art/parts/candidates"
 ln -sfn $S/eric art/parts/src/eric; ln -sf $S/mio/mesh.glb art/parts/src/mio/mesh.glb; ln -sf $S/mio/tex.webp art/parts/src/mio/tex.webp
+ln -sfn /home/jorgen/repo/japanese/art/parts/candidates art/parts/candidates
 SOURCE_BASE="http://127.0.0.1:8771/${WT#/home/jorgen/repo/japanese/}/" \
   IDLE_SOURCE=/home/jorgen/repo/japanese/art/parts/candidates/idle-neutral-3.glb \
   node tools/characters/export-approved-idle.mjs "$C" || { rm -f $LINKS; exit 1; }
