@@ -1,0 +1,13 @@
+[["carina6-01","1. original, re-render same seed","dark top, blonde ends (as r4)",false],
+ ["carina6-02","2. hair 1, dark roots no ombre","blonde, dark roots at part",true],
+ ["carina6-03","3. hair 2, roots + stripes","blonde, roots, stripes faint",true],
+ ["carina6-04","4. hair 3, honey brown roots","honey, very faint roots",true],
+ ["carina6-05","5. smile 1, soft smile","dark top still",false],
+ ["carina6-06","6. smile 2, relaxed amused","dark top still",false],
+ ["carina6-07","7. hair 1 + smile 1","blonde, roots, soft smile",true],
+ ["carina6-08","8. hair 1 + smile 2","blonde, roots, relaxed",true],
+ ["carina6-09","9. hair 2 + smile 1","blonde, roots, soft smile",true],
+ ["carina6-10","10. hair 3 + smile 2","honey, head small",true],
+ ["carina6-03-seed2","3. second seed, hair 2","blonde, dark roots",true],
+ ["carina6-07-seed2","7. second seed","blonde, roots, soft smile",true],
+ ["carina6-08-seed2","8. second seed","blonde, roots, lips parted",true]]

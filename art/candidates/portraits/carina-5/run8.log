@@ -1,0 +1,10 @@
+ok carina-5 carina5-01-bob-behind-ear-a8 29 s
+ok carina-5 carina5-02-blunt-lob-a8 26 s
+ok carina-5 carina5-04-soft-waves-a8 26 s
+FRAME WARN carina5-04-soft-waves-a8.png head/hair 15px from the top edge (want >= 34)
+ok carina-5 carina5-05-long-bob-framing-a8 27 s
+ok carina-5 carina5-07-stripes-bob-a8 36 s
+ok carina-5 carina5-08-stripes-layered-a8 36 s
+ok carina-5 carina5-10-free-swept-a8 36 s
+ok carina-5 carina5-11-free-fringe-a8 36 s
+FRAME WARN carina5-11-free-fringe-a8.png head/hair 26px from the top edge (want >= 34)

@@ -1,0 +1,108 @@
+{
+ "1": {
+  "name": "bob behind her left ear, golden",
+  "style": "PASS",
+  "mark": "PASS",
+  "src": "carina5-01-bob-behind-ear-a2-r",
+  "final": "carina5-01-bob-behind-ear-a2-r-final.webp"
+ },
+ "2": {
+  "name": "blunt lob, honey",
+  "style": "PASS",
+  "mark": "PASS",
+  "src": "carina5-02-blunt-lob-a2-r",
+  "final": "carina5-02-blunt-lob-a2-r-final.webp"
+ },
+ "3": {
+  "name": "layered, ash-gold",
+  "style": "PASS",
+  "mark": "PASS",
+  "src": "carina5-03-layered-ashgold-a2-r",
+  "final": "carina5-03-layered-ashgold-a2-r-final.webp"
+ },
+ "4": {
+  "name": "soft waves, golden, hazel",
+  "style": "PASS",
+  "mark": "PASS",
+  "src": "carina5-04-soft-waves-a2-r",
+  "final": "carina5-04-soft-waves-a2-r-final.webp"
+ },
+ "5": {
+  "name": "long bob, honey",
+  "style": "PASS",
+  "mark": "PASS",
+  "src": "carina5-05-long-bob-framing-a2c-r",
+  "final": "carina5-05-long-bob-framing-a2c-r-final.webp"
+ },
+ "6": {
+  "name": "half-tied pony, glasses",
+  "style": "PASS",
+  "mark": "PASS",
+  "src": "carina5-06-low-pony-glasses-a2-r",
+  "final": "carina5-06-low-pony-glasses-a2-r-final.webp"
+ },
+ "7": {
+  "name": "stripes, bob behind ear",
+  "style": "PASS",
+  "mark": "PASS",
+  "src": "carina5-07-stripes-bob-a2-r",
+  "final": "carina5-07-stripes-bob-a2-r-final.webp"
+ },
+ "8": {
+  "name": "stripes, layered, honey",
+  "style": "PASS",
+  "mark": "PASS",
+  "src": "carina5-08-stripes-layered-a2b-r",
+  "final": "carina5-08-stripes-layered-a2b-r-final.webp"
+ },
+ "9": {
+  "name": "stripes, lob, glasses",
+  "style": "PASS",
+  "mark": "DRIFT: dark smear at temple",
+  "src": "carina5-09-stripes-lob-glasses-a2-r",
+  "final": "carina5-09-stripes-lob-glasses-a2-r-final.webp"
+ },
+ "10": {
+  "name": "swept behind ear, golden",
+  "style": "PASS",
+  "mark": "PASS",
+  "src": "carina5-10-free-swept-a2-r",
+  "final": "carina5-10-free-swept-a2-r-final.webp"
+ },
+ "11": {
+  "name": "honey, side fringe",
+  "style": "PASS",
+  "mark": "DRIFT: no fringe (re-rolled once)",
+  "src": "carina5-11-free-fringe-a2c-r",
+  "final": "carina5-11-free-fringe-a2c-r-final.webp"
+ },
+ "12": {
+  "name": "long bob, glasses",
+  "style": "PASS",
+  "mark": "DRIFT: temple shadow dark",
+  "src": "carina5-12-free-glasses-a2-r",
+  "final": "carina5-12-free-glasses-a2-r-final.webp"
+ },
+ "extras": [
+  [
+   "carina5-01-bob-behind-ear-s2",
+   "1. extra seed 2",
+   "PASS"
+  ],
+  [
+   "carina5-01-bob-behind-ear-s3",
+   "1. extra seed 3",
+   "PASS"
+  ],
+  [
+   "carina5-04-soft-waves-s2",
+   "4. extra seed 2",
+   "PASS"
+  ],
+  [
+   "carina5-04-soft-waves-s3",
+   "4. extra seed 3",
+   "PASS"
+  ]
+ ]
+}
