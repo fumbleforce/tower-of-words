@@ -45,7 +45,7 @@ To post a review item, write `reviews/<id>/review.json` as in Adding an item bel
 | `decision` | when decided | One line: what was decided, in his words where possible. |
 | `decided_at`, `issue` | set by review.py | When it was decided, and the GitHub issue that holds the work on it (tools/work.py). |
 
-4. Check it shows: open http://127.0.0.1:8771/bible/#review/<id>. Every image and audio path must resolve (`node tools/bible/check.mjs` checks them).
+4. Check it shows: open http://127.0.0.1:8771/bible/#review/<id>. Every image and audio path must resolve (`node tools/bible/check.mjs` checks them). For the public site, run `python3 tools/bible/pages.py push` and commit bible/pages-media.json and the lock file with the item (Answering from the public site).
 5. Tell the main agent the id. Don't paste the candidates into chat.
 
 ## Reading his answers
@@ -57,11 +57,26 @@ python3 tools/review.py mark-read <id>    # after acting on it; the page stops s
 python3 tools/review.py set-status <id> decided --decision "b, with the city-pop jacket"
 ```
 
-`feedback.json` is written only by the page through `tools/review_server.py` (POST /api/review/<id>, local only). Don't edit it by hand except through `review.py`. Its shape:
+`feedback.json` is written only by the page through `tools/review_server.py` (POST /api/review/<id>, local only), or by `review.py pull` (next section). Don't edit it by hand except through `review.py`. Its shape:
 
 ```json
 {"sent": "2026-09-28T23:59:00+0200", "picked": ["b"], "options": {"b": {"star": true, "reject": false, "comment": "..."}},
  "comment": "overall comment", "read": false, "history": [ earlier sends ]}
 ```
+
+## Answering from the public site
+
+Review and Showcase are also on GitHub Pages, https://fumbleforce.github.io/tower-of-words/bible/#review, so he can answer away from home. `sh game3d/tools/deploy-pages.sh --push` publishes them with every deploy (tools/bible/pages.py: the committed items, the images and audio they show, nothing from island/private/ or any reward path). The rest of the bible stays local.
+
+Pages has no server, so Send there opens a prefilled GitHub issue on fumbleforce/tower-of-words: label `review-feedback`, title `Review answer: <id>` (or `Showcase answer: <id>`), and the same JSON the local page would post, in a fenced block. He presses Submit new issue. An answer too long for a link is copied to his clipboard, and the issue opens with a note to paste it.
+
+```
+python3 tools/review.py pull --dry-run    # what is waiting
+python3 tools/review.py pull              # in the main checkout: write each answer to <folder>/<id>/feedback.json
+```
+
+`pull` imports only issues he opened, oldest first, saves them exactly as the local Send would (earlier sends go to `history`, `sent` is when he opened the issue), comments "Imported" and closes each issue. `review.py list` says when answers are waiting. Commit the feedback.json files as usual.
+
+New items reach the public site with the next deploy. Their pictures must be in the asset store first: `python3 tools/bible/pages.py push` (lists them in bible/pages-media.json and runs `tools/assets/sync.py push`), then commit that list and tools/assets/assets.lock.json. The deploy leaves out, with a warning, any picture that isn't pushed.
 
 When he has decided, set the item's `status` to `decided` with `decided` and `decision` through `review.py set-status` (it opens the follow-up GitHub issue and stores its number), move the approved files where they belong (art/approved/, the game), and update GUIDE.md and bible/facts.yaml as usual.

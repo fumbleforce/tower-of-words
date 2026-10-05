@@ -6,7 +6,11 @@
 // Review (reviews/) and Showcase (showcase/) are read live too, and Jørgen's answers are saved through tools/review_server.py.
 // Work (bible/work.js) lists the work tracker's GitHub issues, read through the server's /api/work.
 // Paths in the data are relative to the repo root. Plain JS, no build step; ./start serves the repo.
+// Remote mode (GitHub Pages, staged by tools/bible/pages.py): only Review, Showcase and Work, and Send opens a
+// prefilled GitHub issue instead of posting to the local server; tools/review.py pull imports it.
 const ROOT = window.BIBLE_ROOT || '../';
+const REMOTE = !!window.BIBLE_REMOTE || /\.github\.io$/.test(location.hostname);
+const REPO_URL = 'https://github.com/fumbleforce/tower-of-words';
 const PRIVATE_URL = window.BIBLE_PRIVATE || null;
 const DATA_URL = window.BIBLE_DATA || 'data.json';
 const HERE = document.currentScript ? document.currentScript.src : location.href;
@@ -44,6 +48,16 @@ function docHref(h) {
   const st = L && L.stories && L.stories.find((x) => x.file === full);
   if (st) return `#story/${st.id}`;
   return '#doc/' + full;
+}
+// Remote: a #doc or #src link to a file the public site doesn't carry opens it on GitHub instead.
+const ON_SITE = /^(reviews|showcase)\//;
+function remoteLinks(html) {
+  if (!REMOTE) return html;
+  return html.replace(/href="#(doc|src)\/([^"]+)"/g, (m, kind, spec) => {
+    const [path, line] = spec.replace(/&amp;/g, '&').split(/:(?=\d+$)/);
+    if (kind === 'doc' && ON_SITE.test(path)) return m;
+    return `href="${esc(`${REPO_URL}/blob/main/${path}${line ? '#L' + line : ''}`)}"`;
+  });
 }
 function inline(t) {
   return esc(t)
@@ -201,6 +215,7 @@ function wordLabel(id) {
 }
 
 // ------------------------------------------------------------------ pages
+const REMOTE_NAV = [['review', 'Review'], ['showcase', 'Showcase'], ['work', 'Work']];
 const NAV = [
   ['review', 'Review'], ['showcase', 'Showcase'], ['work', 'Work'], ['home', 'Home'], ['characters', 'Characters'], ['places', 'Places'], ['place-map', 'Places diagram'], ['story', 'Stories'], ['story-map', 'Story map'],
   ['words', 'Words and commands'], ['rules', 'Rules and decisions'], ['art', 'Art and style'], ['audio', 'Audio'],
@@ -621,8 +636,8 @@ async function pageDoc(path) {
   const r = await fetch(url(path)); if (!r.ok) return notFound();
   const t = await r.text();
   const draft = /^notes\//.test(path) && !/^notes\/(PRODUCTION|VISUAL_QA|PERF)\.md$/.test(path);
-  const legacy = /^legacy\//.test(path) || D.story.legacy_docs.some((d) => d.path === path);
-  const st = L.stories.find((x) => x.file === path);
+  const legacy = /^legacy\//.test(path) || ((D.story || {}).legacy_docs || []).some((d) => d.path === path);
+  const st = (L.stories || []).find((x) => x.file === path);
   if (st) return pageStoryline(st.id);
   return `<div class="page"><div class="crumbs"><a href="#story">Stories</a> / <a href="#src/${esc(path)}">view source</a> ${legacy ? chip('legacy') : draft ? chip('draft') + ' <span class="muted small">design, not approved</span>' : ''}</div><div class="md" style="max-width:82ch">${atBase(path, () => md(t))}</div></div>`;
 }
@@ -664,7 +679,9 @@ function clearDraft(kind, id) { try { localStorage.removeItem(draftKey(kind, id)
 const sentLine = (fb) => fb && fb.sent ? `Last sent ${esc(fb.sent.replace('T', ' ').slice(0, 16))}${fb.read ? ', read by the agents' : ', not read yet'}.` : 'Not sent yet.';
 function markChanged(box) { const st = box.querySelector('.rstate'); st.textContent = 'Changed, not sent yet.'; st.className = 'rstate muted small'; }
 // POST the answer to tools/review_server.py; `box` holds the Send button (.rsendbtn) and the status line (.rstate).
+// On the public site there is no server: the answer goes into a new GitHub issue instead (sendAsIssue).
 async function sendAnswer(kind, id, d, box) {
+  if (REMOTE) return sendAsIssue(kind, id, d, box);
   const b = box.querySelector('.rsendbtn'), st = box.querySelector('.rstate');
   b.disabled = true; st.textContent = 'Sending…';
   try {
@@ -680,6 +697,30 @@ async function sendAnswer(kind, id, d, box) {
     st.textContent = `Not sent: ${err.message}. Saving needs the server from ./start (tools/review_server.py). Your draft is kept in this browser.`;
     st.className = 'rstate err small';
   } finally { b.disabled = false; }
+}
+// The issue: label review-feedback, title "Review answer: <id>", and the same JSON the local server would get, in a
+// fenced block (tools/review.py pull reads it, writes <folder>/<id>/feedback.json and closes the issue). An answer too
+// long for a link goes to the clipboard, and the issue opens with a note to paste it.
+const ISSUE_URL_MAX = 7000;
+function answerIssue(kind, id, d) {
+  const json = JSON.stringify({ kind, id, answer: d });
+  const fence = '`'.repeat(Math.max(3, ...(json.match(/`+/g) || []).map((x) => x.length + 1)));
+  const block = `${fence}json\n${json}\n${fence}\n`;
+  const title = `${kind === 'review' ? 'Review' : 'Showcase'} answer: ${id}`;
+  const intro = `Answer from the public bible, ${location.href.split('#')[0]}#${kind}/${id}. The agents import it with \`python3 tools/review.py pull\`; leave the block as it is.\n\n`;
+  const link = (body) => `${REPO_URL}/issues/new?labels=review-feedback&title=${encodeURIComponent(title)}&body=${encodeURIComponent(body)}`;
+  const full = link(intro + block);
+  return full.length <= ISSUE_URL_MAX ? { url: full, block } : { url: link(intro + 'Paste the answer here: it is on your clipboard.\n\n'), block, paste: true };
+}
+function sendAsIssue(kind, id, d, box) {
+  const st = box.querySelector('.rstate');
+  const is = answerIssue(kind, id, d);
+  if (is.paste && navigator.clipboard) navigator.clipboard.writeText(is.block).catch(() => {});
+  const w = window.open(is.url, '_blank', 'noopener');
+  saveDraft(kind, id, d);
+  st.className = 'rstate ok small';
+  st.innerHTML = `${w === null ? `<a href="${esc(is.url)}" target="_blank" rel="noopener">Open the GitHub issue with your answer</a>` : 'Opened a GitHub issue with your answer in a new tab'}. Press <b>Submit new issue</b> there; the agents import it into ${esc(FOLDER[kind])}/${esc(id)}/feedback.json.`
+    + (is.paste ? ` The answer is long, so it is on your clipboard: paste it into the issue first.<textarea class="rcom" rows="4" readonly aria-label="Your answer, to copy">${esc(is.block)}</textarea>` : '');
 }
 const media = (m, cap) => m.audio
   ? `<figure class="raudio"><audio controls preload="none" src="${esc(url(m.audio))}"></audio><figcaption>${esc(cap || m.caption || m.audio)}</figcaption></figure>`
@@ -707,7 +748,7 @@ function pageReviewQueue() {
   const dec = R.filter((r) => r.status === 'decided');
   const sup = R.filter((r) => r.status === 'superseded');
   return `<div class="page"><h1>Review</h1>
-    <p class="lede">Things waiting for your pick. Open one, pick what works, star or reject options, comment on any of them, and press Send. Your answer is saved in the repo (reviews/&lt;id&gt;/feedback.json) and the agents read it from there.</p>
+    <p class="lede">Things waiting for your pick. Open one, pick what works, star or reject options, comment on any of them, and press Send. ${REMOTE ? 'Send opens a GitHub issue with your answer; submit it there, and the agents copy it into the repo (reviews/&lt;id&gt;/feedback.json).' : 'Your answer is saved in the repo (reviews/&lt;id&gt;/feedback.json) and the agents read it from there.'}</p>
     <h2>Open <span class="muted">(${open.length})</span></h2>
     <div class="rlist">${open.map(reviewRow).join('') || '<p class="muted">Nothing waiting.</p>'}</div>
     <h2>Decided <span class="muted">(${dec.length})</span></h2>
@@ -919,8 +960,10 @@ async function route() {
   if (head === 'showcase' && L.reloadShowcase) await L.reloadShowcase();
   if (head === 'work' && L.reloadWork) await L.reloadWork();
   let html, after = null;
+  if (REMOTE && !['home', 'review', 'showcase', 'work'].includes(head) && !(head === 'doc' && ON_SITE.test(arg))) head = 'local-only';
   switch (head) {
-    case 'home': html = pageHome(); break;
+    case 'local-only': html = pageLocalOnly(); break;
+    case 'home': html = REMOTE ? pageRemoteHome() : pageHome(); break;
     case 'review': html = arg ? pageReviewItem(arg) : pageReviewQueue(); break;
     case 'showcase': html = pageShowcase(arg); break;
     case 'work': html = WORK.pageWork(L, { esc, inline }); break;
@@ -950,7 +993,7 @@ async function route() {
     case 'src': html = await pageSrc(arg); break;
     default: html = notFound();
   }
-  $('#main').innerHTML = html;
+  $('#main').innerHTML = remoteLinks(html);
   if (after) await after();
   const navKey = { character: 'characters', doc: 'story', src: '' }[head] ?? head;
   if (head === 'review' || head === 'showcase' || head === 'work') renderNav();
@@ -962,7 +1005,25 @@ async function route() {
   document.body.dataset.ready = '1';
 }
 
+function pageRemoteHome() {
+  const open = openReviews().length;
+  return `<div class="page"><h1>Amakawa bible: Review</h1>
+    <p class="lede">The review queue and the Showcase log, on the public site so you can answer from anywhere. Send opens a GitHub issue with your answer; the agents copy it into the repo. The rest of the bible (cast, places, story, rules) is on the local bible only.</p>
+    <div class="tiles"><a class="tile" href="#review"><span class="n">${open}</span><b>Review</b><span>${open} waiting for your pick</span></a>
+      <a class="tile" href="#showcase"><span class="n">${(L.showcase || []).length}</span><b>Showcase</b><span>Finished work to look at; flag or comment on anything</span></a>
+      <a class="tile" href="#work"><span class="n"></span><b>Work</b><span>The work issues on GitHub</span></a></div></div>`;
+}
+function pageLocalOnly() {
+  return `<div class="page"><h1>Local bible only</h1><p>This part of the bible is not on the public site, which has <a href="#review">Review</a>, <a href="#showcase">Showcase</a> and <a href="#work">Work</a>. At home it is on <span class="src">http://127.0.0.1:8771/bible/</span>.</p></div>`;
+}
+
 function renderNav() {
+  if (REMOTE) {
+    const n = openReviews().length, newFb = (L.reviews || []).filter(unread).length;
+    $('#navlist').innerHTML = REMOTE_NAV.map(([r, t]) => `<li${r === 'review' ? ' class="navreview"' : ''}><a href="#${r}" data-r="${r}">${esc(t)}${r === 'review' ? `<small class="${n ? 'badge' : ''}" title="${n} open${newFb ? `, ${newFb} answered but not read yet` : ''}">${n}</small>` : r === 'showcase' ? `<small>${(L.showcase || []).length}</small>` : ''}</a></li>`).join('');
+    $('#cast').innerHTML = '';
+    return;
+  }
   const stuck = (L.workStale || []).length;
   const n = { review: openReviews().length, showcase: (L.showcase || []).length, characters: D.characters.length, reviews: D.reviews.filter((r) => r.group === 'current').length, questions: openQuestions().length, words: Object.keys(L.words).length };
   const items = NAV.concat(P ? [['rewards', 'Reward pictures']] : []);
@@ -980,6 +1041,12 @@ async function init() {
   ]);
   D = d; P = p;
   [LIVE, WORK] = await Promise.all([import(new URL('live.js', HERE).href), import(new URL('work.js', HERE).href)]);
+  if (REMOTE) {
+    L = await LIVE.loadLive(ROOT, D.snapshot, [], { remote: true });
+    $('.search').hidden = true;
+    document.querySelector('.brand span').textContent = 'review';
+    return start();
+  }
   // every file a quote points at, so quotes can be read synchronously while rendering
   const quoted = new Set();
   JSON.stringify(D).replace(/"q":true,"s":"[a-z]+","src":\{"path":"([^"]+)"/g, (m, path) => quoted.add(path));
@@ -987,8 +1054,12 @@ async function init() {
   D.characters.forEach((c) => c.walkthrough && quoted.add(c.walkthrough));
   L = await LIVE.loadLive(ROOT, D.snapshot, [...quoted].filter((x) => !/^https?:/.test(x)));
   if (P) document.querySelector('.brand span').innerHTML = '<span class="priv">private</span>';
-  renderNav();
   L.reloadWork().then(renderNav);  // GitHub issues can take a second; the nav's stuck count follows when they arrive
+  start();
+}
+// events and the first route, for the local and the remote bible alike
+function start() {
+  renderNav();
   let timer;
   $('#q').addEventListener('input', (e) => {
     clearTimeout(timer);

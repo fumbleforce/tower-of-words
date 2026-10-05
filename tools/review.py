@@ -7,15 +7,23 @@
     python3 tools/review.py mark-read <id>    mark the latest feedback as read (it stops showing as "new")
     python3 tools/review.py set-status <id> open|decided|superseded [--decision "text"]   (Review items only;
                                               decided opens the follow-up GitHub issue, or comments on the one it has)
+    python3 tools/review.py pull [--dry-run] [issue ...]
+                                              import the answers he sent from the public site: open GitHub issues
+                                              labelled review-feedback (or just the numbered ones) become
+                                              <folder>/<id>/feedback.json, then each gets an "imported" comment and
+                                              is closed (main checkout only)
 
 <id> is looked up in reviews/, then showcase/, then the private island/private/rewards/reviews/ (show and mark-read
 only; private items stay out of list and GitHub); `showcase/<id>` picks the showcase entry. Review items live in
 reviews/<id>/review.json (how to add one: reviews/README.md); showcase entries in showcase/<id>/entry.json
 (showcase/README.md). His answers are <folder>/<id>/feedback.json, written by the bible's Send button through
-tools/review_server.py.
+tools/review_server.py, or, from the public site, through a GitHub issue that `pull` imports.
 """
+import datetime as dt
 import json
 import os
+import re
+import subprocess
 import sys
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
@@ -25,6 +33,9 @@ SHOWCASE = os.path.join(ROOT, 'showcase')
 PRIVATE_REVIEWS = os.path.join(ROOT, 'island', 'private', 'rewards', 'reviews')
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import work  # noqa: E402  tools/work.py: the work tracker (GitHub issues)
+import review_server  # noqa: E402  the one place answers are normalised and saved
+PULL_LABEL = 'review-feedback'
+OWNER = work.REPO.split('/')[0]  # only the repo owner's issues are imported; anyone can open an issue on a public repo
 
 
 def load(rid, name, base=REVIEWS):
@@ -110,6 +121,12 @@ def cmd_list():
     for rid, e, fb in sorted(showcase_items(), key=lambda x: x[1].get('date', ''), reverse=True):
         new = 'NEW ' if fb and not fb.get('read') else '    '
         print(f"{'showcase':10} {new}{rid:28} {e.get('title', '')}" + (f"  [{showcase_counts(fb)}]" if fb else ''))
+    try:
+        waiting = len(pull_issues())
+        if waiting:
+            print(f'\n{waiting} answers from the public site wait on GitHub: python3 tools/review.py pull')
+    except Exception as e:
+        print(f'\n(answers on GitHub not checked: {e})')
     try:
         stuck = work.stale_lines()
     except Exception as e:  # offline or gh not logged in: say so, never fail the list
@@ -233,6 +250,65 @@ def cmd_set_status(rid, status, decision=None):
               f"python3 tools/work.py set {issue['id']} --state running --owner <you>")
 
 
+# ---------------------------------------------------------------- answers from the public site
+def pull_issues():
+    return work.gh('issue', 'list', '--label', PULL_LABEL, '--state', 'open', '--limit', '200',
+                   '--json', 'number,title,body,author,createdAt,url')
+
+
+def parse_answer(body):
+    """The {kind, id, answer} block of an issue body, from the bible's sendAsIssue: a fenced json block, or the
+    first {...} when he pasted it bare. Raises ValueError when there is none."""
+    body = body or ''
+    m = re.search(r'(`{3,})json[ \t]*\r?\n(.*?)\r?\n\1', body, re.S)
+    d = json.loads(m.group(2) if m else body[body.find('{'):body.rfind('}') + 1])
+    if not isinstance(d, dict) or d.get('kind') not in ('review', 'showcase') or not isinstance(d.get('answer'), dict):
+        raise ValueError('no {kind, id, answer} block')
+    if not re.fullmatch(r'[a-z0-9][a-z0-9-]{0,79}', str(d.get('id', ''))):
+        raise ValueError(f'bad id {d.get("id")!r}')
+    return d
+
+
+def local_stamp(iso):
+    return dt.datetime.fromisoformat(iso.replace('Z', '+00:00')).astimezone().strftime('%Y-%m-%dT%H:%M:%S%z')
+
+
+def cmd_pull(dry=False, only=()):
+    """only: issue numbers to import (all open ones when empty). REVIEW_PULL_HERE=1 allows a worktree (tests)."""
+    dirs = subprocess.run(['git', 'rev-parse', '--path-format=absolute', '--git-dir', '--git-common-dir'], cwd=ROOT,
+                          capture_output=True, text=True, check=True).stdout.split()
+    if len(dirs) == 2 and os.path.realpath(dirs[0]) != os.path.realpath(dirs[1]) and not dry and not os.environ.get('REVIEW_PULL_HERE'):
+        sys.exit('review.py pull: run it in the main checkout; answers saved in a worktree would be lost with it')
+    issues = sorted((i for i in pull_issues() if not only or i['number'] in only), key=lambda i: i['createdAt'])  # oldest first
+    if not issues:
+        print('No answers from the public site waiting.')
+        return
+    for i in issues:
+        n, who = i['number'], (i.get('author') or {}).get('login')
+        if who != OWNER:
+            print(f'#{n}: skipped, opened by {who}, not {OWNER}')
+            continue
+        try:
+            d = parse_answer(i.get('body'))
+        except ValueError as e:
+            print(f'#{n}: skipped, no answer in it ({e}): {i["url"]}')
+            continue
+        kind, rid = d['kind'], d['id']
+        folder, _private = review_server.answer_folder(kind, rid, allow_private=False)
+        if not folder:
+            print(f'#{n}: skipped, no {kind} item {rid}')
+            continue
+        where = os.path.relpath(os.path.join(folder, 'feedback.json'), ROOT)
+        if dry:
+            print(f'#{n}: would import {kind} {rid} into {where}')
+            continue
+        sent = review_server.save_answer(kind, folder, d['answer'], sent=local_stamp(i['createdAt']))
+        if kind == 'review':
+            review_server.review_changed(rid)
+        work.gh('issue', 'close', str(n), '--comment', f'Imported into {where} by tools/review.py pull.', parse=False)
+        print(f'#{n}: {kind} {rid}, sent {sent}, imported into {where}; issue closed')
+
+
 def main(a):
     if not a or a[0] in ('-h', '--help'):
         print(__doc__)
@@ -242,6 +318,8 @@ def main(a):
         cmd_show(a[1])
     elif a[0] == 'mark-read' and len(a) == 2:
         cmd_mark_read(a[1])
+    elif a[0] == 'pull':
+        cmd_pull('--dry-run' in a, {int(x) for x in a[1:] if x.isdigit()})
     elif a[0] == 'set-status' and len(a) >= 3:
         dec = a[a.index('--decision') + 1] if '--decision' in a else None
         cmd_set_status(a[1], a[2], dec)

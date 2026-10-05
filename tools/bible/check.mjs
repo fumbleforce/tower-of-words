@@ -10,6 +10,8 @@
 // ids are unique within the entry. The Work page (GitHub issues through the server) must render.
 //
 // --public-only checks the public site without accessing private sources.
+// The public site on GitHub Pages (remote mode: only Review, Showcase and Work):
+//   BIBLE_BASE=https://fumbleforce.github.io/tower-of-words/ node tools/bible/check.mjs --public-only
 import { withBrowserJob } from '../lib/browser-job.mjs';
 import { blockedSource, scopedFetch, scopedRoute } from './check-scope.mjs';
 
@@ -71,12 +73,14 @@ await context.route('**/*', scopedRoute({ publicOnly, isClosing: () => closing, 
 try {
 for (const site of SITES) {
   const data = await (await read(BASE + site.data)).json();
-  const routes = ['home', 'characters', 'places', 'story', 'words', 'rules', 'art', 'audio', 'reviews', 'questions', 'sources', 'story-map', 'story-map/office/office:ticket',
+  // the public site (tools/bible/pages.py) carries only Review, Showcase and Work; other routes say "local bible only"
+  const itemRoutes = [...(await folderIds('reviews')).map(id => 'review/' + id), ...showcaseIds.map(id => 'showcase/' + id)];
+  const routes = data.remote ? ['home', 'review', 'doc/reviews/README.md', 'showcase', 'doc/showcase/README.md', 'work', 'characters', ...itemRoutes] : ['home', 'characters', 'places', 'story', 'words', 'rules', 'art', 'audio', 'reviews', 'questions', 'sources', 'story-map', 'story-map/office/office:ticket',
     ...data.characters.map(c => 'character/' + c.id),
     'search/mio', 'search/copier', 'story/lunch', 'doc/docs/game/cast.md', 'doc/docs/game/stories/mio-train.md', 'doc/notes/RELATIONSHIPS.md', 'doc/notes/mini-stories.md', 'src/GUIDE.md:42',
     ...data.story.legacy_docs.map(d => 'doc/' + d.path),
     'review', 'doc/reviews/README.md', 'showcase', 'doc/showcase/README.md', 'work',
-    ...(await folderIds('reviews')).map(id => 'review/' + id), ...showcaseIds.map(id => 'showcase/' + id)];
+    ...itemRoutes];
   if (site.priv) routes.push('rewards');
   const page = await context.newPage();
   const errors = [];

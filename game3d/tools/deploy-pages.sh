@@ -18,6 +18,12 @@
 # The creator: /creator/ opens the character creator, staged at its repo paths (tools/creator/..., art/parts/...) from
 # the list in tools/creator/base/public.json, so its relative URLs work here and on 127.0.0.1:8771 alike.
 #
+# The bible: /bible/ is the world bible's Review and Showcase in remote mode, with every committed file under reviews/ and
+# showcase/ and the images and audio they show (tools/bible/pages.py stage: text from HEAD, media sha-checked against
+# HEAD's lock file, big PNGs as WebP). Send there opens a GitHub issue; tools/review.py pull imports it.
+# Deny check (tools/bible/pages.py deny): the build stops if any file in the site is under island/private/, in a
+# private/ folder or on a reward path.
+#
 # The site: /game3d/ with index.html, build.json (stamped here), css, js, story (.js), fonts, vendor, audio (mp3, json) and the
 # assets the game loads. Left out: tools, design, ref, shots, notes (*.md) and contact sheets. Only committed files
 # and files in the committed lock file go up, so nothing local, private or git-ignored beyond those can leak.
@@ -74,6 +80,7 @@ USED=$(grep -rhoE "assets/[A-Za-z0-9_-]+/" "$G/js" | sort -u | sed 's#assets/##;
 for d in "$G"/assets/*; do n=$(basename "$d"); if [ -d "$d" ]; then echo "$USED" | grep -qx "$n" || rm -rf "$d"; else rm -f "$d"; fi; done
 find "$G/assets" \( -name 'check*.png' -o -name 'check*.html' -o -name '*.blend' \) -delete 2>/dev/null || true
 for x in $EXTRA; do git archive HEAD "$x" | tar -x -C "$STAGE"; done
+python3 "$ROOT/tools/bible/pages.py" stage "$STAGE"
 
 # 2. Pages extras: no Jekyll, /creator/ opens the creator (keeping a look's ?body=... query), and the site root sends visitors to the game
 touch "$STAGE/.nojekyll"
@@ -81,13 +88,15 @@ mkdir -p "$STAGE/creator"
 printf '<!doctype html><meta charset="utf-8"><meta name="robots" content="noindex,nofollow"><title>Character creator</title><script>location.replace("../tools/creator/base/dress.html" + location.search)</script><a href="../tools/creator/base/dress.html">Character creator</a>\n' > "$STAGE/creator/index.html"
 [ -f "$STAGE/index.html" ] || printf '<!doctype html><meta charset="utf-8"><meta http-equiv="refresh" content="0; url=game3d/"><title>Amakawa</title><a href="game3d/">Amakawa</a>\n' > "$STAGE/index.html"
 
-# 3. no secrets in anything that goes up (tools/check/secrets.sh; the pre-push hook scans the commit again)
+# 3. nothing private (tools/bible/pages.py deny) and no secrets in anything that goes up (tools/check/secrets.sh; the
+# pre-push hook scans the commit again)
+python3 "$ROOT/tools/bible/pages.py" deny "$STAGE" || { echo "deploy: REFUSED: nothing was pushed" >&2; exit 1; }
 bash "$ROOT/tools/check/secrets.sh" dir "$STAGE" >"$STAGE.scan" 2>&1 || { cat "$STAGE.scan" >&2; rm -f "$STAGE.scan"; echo "deploy: REFUSED: the secret scan of the site failed; nothing was pushed" >&2; exit 1; }
 tail -1 "$STAGE.scan"; rm -f "$STAGE.scan"
 
 # 4. what goes up
 echo "site from $REV: $(find "$STAGE" -type f | wc -l) files, $(du -sh "$STAGE" | cut -f1)"
-du -sh "$G"/* 2>/dev/null | sort -h | tail -8 | sed 's#'"$STAGE"'/##'
+du -sh "$G"/* "$STAGE"/bible "$STAGE"/reviews "$STAGE"/showcase "$STAGE"/art 2>/dev/null | sort -h | tail -10 | sed 's#'"$STAGE"'/##'
 
 # 5. one orphan commit of exactly that tree, built with a private index (the working tree and main are untouched)
 export GIT_INDEX_FILE="$STAGE.idx"
@@ -98,7 +107,7 @@ COMMIT=$(printf 'Pages: game3d from %s\n' "$REV" | git commit-tree "$TREE")
 echo "commit $COMMIT (tree $TREE, no parent)"
 if [ $PUSH = 1 ]; then
   git push --force origin "$COMMIT:refs/heads/gh-pages"
-  echo "pushed gh-pages. Live once Pages serves gh-pages: https://fumbleforce.github.io/tower-of-words/game3d/ and .../creator/"
+  echo "pushed gh-pages. Live once Pages serves gh-pages: https://fumbleforce.github.io/tower-of-words/game3d/, .../creator/ and .../bible/#review"
 else
   echo "dry run: nothing pushed (add --push)"
 fi
