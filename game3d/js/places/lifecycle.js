@@ -31,6 +31,8 @@ const BATCHED = new Set([
   'dorm_court',
   'dorms',
   'shotengai',
+  'karaoke',
+  'karaoke_booth',
   'east_lane',
   'east_coast',
   'dorm_commons',

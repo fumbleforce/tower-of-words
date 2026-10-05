@@ -28,3 +28,32 @@ export const SHOTENGAI_DETAILS = {
   people: ['mori', 'kenji'],
   hooks: ['partySetup', 'partyFood'],
 };
+
+// The karaoke box's (places/karaoke.js, karaoke-booth.js): the front desk downstairs, through its door off the
+// arcade, and one booth upstairs.
+export const KARAOKE_DETAILS = {
+  things: {
+    karaoke_door: { label: 'To the shop street', kind: 'thing', verb: 'Go' },
+    karaoke_stairs: { label: 'Upstairs', kind: 'thing', verb: 'Go' },
+    karaoke_desk: { label: 'Front desk', kind: 'thing' },
+  },
+  spots: ['karaoke_in', 'karaoke_desk', 'karaoke_drinks', 'karaoke_bench', 'karaoke_stairs'],
+  nooks: ['karaoke_bench'], // docs/game/places.md, "Nooks"
+  seats: ['karaoke_bench'],
+  zones: [],
+  people: [],
+  hooks: [],
+};
+export const KARAOKE_BOOTH_DETAILS = {
+  things: {
+    booth_door: { label: 'Downstairs', kind: 'thing', verb: 'Go' },
+    song_terminal: { label: 'Song selector', kind: 'thing small' },
+    booth_screen: { label: 'Screen', kind: 'thing' },
+  },
+  spots: ['booth_in', 'booth_table', 'booth_screen'],
+  nooks: [],
+  seats: ['booth_seat_w', 'booth_seat_e'],
+  zones: [],
+  people: [],
+  hooks: [],
+};

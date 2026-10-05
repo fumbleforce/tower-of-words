@@ -8,6 +8,7 @@
 // day; on day 2 it is up in the morning, and after work the evening cards take its place (story/day2/README.md)
 export const WHEN = {
   prep: (day, period) => !(day === 2 && period === 'evening'),
+  prep2: (day, period) => day === 2 && period !== 'evening', // a door open on the other days (the karaoke box)
   evening2: (day, period) => day === 2 && period === 'evening',
 };
 

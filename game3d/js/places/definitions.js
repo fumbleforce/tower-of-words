@@ -9,6 +9,8 @@ export const PLACE_FILES = {
   dorm_court: 'game3d/js/places/dorm-court.js',
   dorms: 'game3d/js/places/dorms.js',
   shotengai: 'game3d/js/places/shotengai.js',
+  karaoke: 'game3d/js/places/karaoke.js',
+  karaoke_booth: 'game3d/js/places/karaoke-booth.js',
   east_lane: 'game3d/js/places/east-lane.js',
   east_coast: 'game3d/js/places/east-coast.js',
   dorm_commons: 'game3d/js/places/commons.js',
@@ -29,6 +31,8 @@ export const PLACE_NAMES = {
   dorm_court: 'Dorm courtyard',
   dorms: "Eric's room",
   shotengai: 'Shop street',
+  karaoke: 'Karaoke box',
+  karaoke_booth: 'Karaoke booth',
   east_lane: 'East lane',
   east_coast: 'East coast',
   dorm_commons: 'Dorm common room',
@@ -50,12 +54,15 @@ export const NEXT = { train: 'gate', gate: 'forecourt', forecourt: 'office', dor
 // its street the harbour; north out of the harbour, up the works lane or up the works street, are the old works,
 // whose two ways both lead back into the harbour, so the two make a loop. The pool deck is through the shower
 // pavilion's door at the sports ground's pool walk, and back; the gym's corner through its main doors on the lane;
-// the dorm common room through its glazed door on the inner court, off the east coast's dorm row.
+// the dorm common room through its glazed door on the inner court, off the east coast's dorm row;
+// the karaoke box's front desk through its door off the arcade, and its booth up the stairs.
 export const TRIPS = {
   forecourt: ['plaza'],
   plaza: ['forecourt', 'dorm_court', 'shotengai', 'east_lane'],
   office: ['forecourt'],
-  shotengai: ['plaza', 'dorm_court'],
+  shotengai: ['plaza', 'dorm_court', 'karaoke'],
+  karaoke: ['shotengai', 'karaoke_booth'],
+  karaoke_booth: ['karaoke'],
   east_lane: ['plaza', 'shotengai', 'dorm_court', 'east_coast', 'sports'],
   east_coast: ['east_lane', 'sports', 'dorm_commons'],
   dorm_commons: ['east_coast'],
@@ -79,6 +86,8 @@ export const STORY_FILES = [
   'dorm_court',
   'dorms',
   'shotengai',
+  'karaoke',
+  'karaoke_booth',
   'east_lane',
   'east_coast',
   'dorm_commons',

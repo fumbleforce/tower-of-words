@@ -58,6 +58,10 @@ There are no cuts to black (Jørgen, 2026-09-28: "elegant, continuous transition
 - `pool` → `sports`, walk: the same way back, in at the men's changing room's door on the deck, crossfading to him walking out of the pavilion's door onto the pool walk, heading west.
 - `east_coast` → `dorm_commons`, walk: Eric goes in at the common room's glazed door at the north end of the inner court; the camera closes in on him at the door and crossfades to the same close framing of him walking in onto the common room's floor, as the camera lets go.
 - `dorm_commons` → `east_coast`, walk: the same way back, out through the glazed door, crossfading to him walking out onto the inner court, heading south.
+- `shotengai` → `karaoke`, walk: Eric goes in at the karaoke box's glass door off the arcade; the camera closes in on him at the door and crossfades to the same close framing of him walking in onto the front desk's floor, as the camera lets go.
+- `karaoke` → `shotengai`, walk: the same way back, out through the glass door, crossfading to him stepping out onto the arcade.
+- `karaoke` → `karaoke_booth`, walk then stairs: Eric walks to the foot of the stairs at the back and steps onto the bottom tread; the camera closes in on him there and crossfades to him walking in through the booth's door from the corridor upstairs, as the camera lets go.
+- `karaoke_booth` → `karaoke`, walk then stairs: out of the booth's door into the corridor, crossfading to him stepping off the bottom tread of the stairs downstairs.
 - `sports` → `office_quarter`, walk: Eric walks west along the sports lane past the gym's front, north round the gym's corner and west into the office street; the camera closes in and crossfades to the same close framing of him walking on west along the street, as the camera lets go.
 - `office_quarter` → `sports`, walk: the same corner the other way, east along the street, south round the gym's corner and east along the sports lane, crossfading to him walking on east toward the gym's front.
 - `office_quarter` → `harbour`, walk: Eric walks west along the office street past Amakawa Trading toward the harbour walk's mouth; the camera closes in and crossfades to the same close framing of him walking on west along the street past the walk's mouth, toward the supply yard, as the camera lets go.
@@ -92,6 +96,8 @@ The buildings, paths, green and coast around the route, and the fit to the map, 
 | `dorm_court` | 79.84 | -1.3 | 90 | 1 | 0 | The open entrance court on the west side of the dorm blocks; its camera looks east at Eric's block. |
 | `dorms` | 85.49 | -1.79 | 90 | 1 | 1 | Eric's flat on 2F of his block, above the passage; its window faces the next block's west end, 1.2 out. The corridor runs to the stairs in the block's return. |
 | `shotengai` | 64.5 | 20.15 | 270 | 1 | 0 | The middle of the arcade's east mouth, between the two shop rows; its camera looks west down the arcade. |
+| `karaoke` | 62.25 | 22.4 | 180 | 1 | 0 | The karaoke box's glass door off the arcade (south row, bay 14), inside. An interior, looked into from the door's side over its cut-down front wall. |
+| `karaoke_booth` | 59.4 | 24.6 | 180 | 1 | 1 | One booth upstairs over the front desk, its door from the corridor at the top of the stairs. An interior, looked into over its cut-down front wall. |
 | `east_lane` | 69.27 | -2.75 | 0 | 1 | 0 | The middle of the pocket park's gravel square, where its two walks cross. Its camera turns: north-east over most of it, south-east over the south walk. |
 | `east_coast` | 126.5 | 10.5 | 0 | 1 | 0 | The middle of the dorms' sea terrace, at the dorm row's east end. Its camera turns: east along the row, north-east up the coast, north at the onsen. |
 | `dorm_commons` | 100.9 | 2.1 | 0 | 1 | 0 | The common room's glazed door in dorm_gallery's south face, inside. An interior, looked into from the south over its cut-down front wall. |
@@ -424,7 +430,7 @@ The shops with a name have a sign board over their bays on the front, the kana l
 
 Three alleys, one bay wide and five bays apart, cut through the south row between planted beds, from the arcade to the promenade. A walk runs down the rows' west end past the arcade's west mouth to the promenade (its north half, on to the footpath behind the rows, isn't walked); at the east end a walk turns down from the shop walk past a planted bed with a zelkova to the promenade. The promenade runs behind the south row in pale slabs, with a dark course on every bay line and a darker band along the sea wall where lamps, back-to-back benches and bins stand, from the foot of the walk south of the station (not walked) to a lookout with a rail over the rocks. On each alley's axis a band of darker stone crosses it to a flight of stairs down the wall to a sand beach; each flight's head is chained off between two posts, so the beach is seen and not walked: shrubs and rocks at the wall's foot, three beach huts by its west return, a few striped umbrellas, boulders in groups at the water's edge, wet sand and foam along the shore. East of the beach the wall stands in the sea on armour rocks, as west of the station, with three black pines behind it. The plaza and the forecourt draw the same street, from its backs, as backdrop and on the island map.
 
-In the morning the sun comes from the east-south-east behind the camera's left shoulder; after work it is low in the west, ahead down the street, and the shopfronts' glass, the signs, the lanterns with pools of light under them, the promenade's lamps and the izakaya's door light are lit. The shops stay shut. It also loads directly with `?place=shotengai`, at the shop walk. Nobody is here yet.
+In the morning the sun comes from the east-south-east behind the camera's left shoulder; after work it is low in the west, ahead down the street, and the shopfronts' glass, the signs, the lanterns with pools of light under them, the promenade's lamps and the izakaya's door light are lit. The shops stay shut, except the karaoke box, whose door opens onto its front desk (`karaoke`, below; on day 2 it is shut with the others). It also loads directly with `?place=shotengai`, at the shop walk. Nobody is here yet.
 
 ### Day-2 party plan
 
@@ -439,7 +445,7 @@ The [day-2 story](stories/day2/README.md) places B2's welcome food on the promen
 | `store` | Konbini | The konbini's door. Go in: shut. |
 | `bakery` | Bakery | The bakery's door. Go in: shut. |
 | `game_centre` | Game centre | The game centre's door. Go in: shut. |
-| `karaoke` | Karaoke | The karaoke box's door. Go in: shut. |
+| `karaoke` | Karaoke | The karaoke box's door. Go in: into its front desk (`karaoke`). |
 | `izakaya` | Izakaya | The izakaya's door on the shop walk. Go in: shut. |
 | `mori` | Mr. Mori | Day 2, after work. |
 | `kenji` | Kenji | Day 2, after work. |
@@ -492,7 +498,8 @@ The crowd ([systems.md](systems.md), The crowd):
 | Nodes | When | What happens |
 |---|---|---|
 | `arrive` | Arrive | Goal line: "Head office is back past the plaza. Take its lift down to B2."; after work, "The dorms are up the street, east of the arcade." The way out east is the goal's pin. |
-| `shut` | Go in at any named shop's door | The door is shut; a card on the glass says 準備中: not open yet. |
+| `shut` | Go in at any named shop's door but the karaoke box's | The door is shut; a card on the glass says 準備中: not open yet. |
+| `to_karaoke` | Go in at the karaoke box's door | Eric walks in, onto the front desk's floor. |
 | `to_plaza` | Use or walk into the shop walk's east end, before work is over | Eric walks back to the plaza. |
 | `to_dorms` | Use or walk into the shop walk's east end, after work | Eric walks up the dorm street to the dorm courtyard. |
 
@@ -506,6 +513,109 @@ The crowd ([systems.md](systems.md), The crowd):
 | `crows` | crow | 2 | `all` | On the shop roofs. |
 | `shop_cat` | cat | 1 | `all` | A ginger and white cat by a shop wall or on a planter. Can be petted. |
 | `night_cat` | cat | 1 | `evening` | A black cat on a wall. Can be petted. |
+
+## Karaoke box, front desk (`karaoke`)
+
+Downstairs in the karaoke box at the shop street's east end (south row, bays 13 and 14), for the karaoke club (issue #227; [days 3 to 5](../../notes/days3-5-outline.md): the desk where the Sunday booking is made, the stairs up to the booth). In through its glass door off the arcade and out the same way; up the stairs at the back to the booth (`karaoke_booth`, below) and down again (Getting between places). It also loads directly with `?place=karaoke`, inside the door. Built as a room in its own frame (scenes/rooms/karaoke.js) on the club interiors' shared shell.
+
+The camera looks in from the door's side over the cut-down front wall: on a desktop the whole room in one still frame, on a phone following Eric. Walked: the floor round the desk, the drinks bar and the bench; not behind the desk or up the flight itself.
+
+A dark carpet and pale walls, posters for new songs on the back wall. Along the east wall the front desk, a purple front under a pale top with a pink stripe: the staff's terminal on it, two baskets of microphones, a bell, and the price board on the wall behind it, a pink band over rows of times and prices. Along the back wall the drinks bar: three drinks machines with coloured panels, glasses stacked, an ice bin. By the door the stand of song catalogues and a padded bench to wait on along the west wall. In the north-west corner the stairs up, carpeted, a rail along their open side and a pink sign over them.
+
+### Things
+
+| Id | Label | What it is |
+|---|---|---|
+| `karaoke_door` | To the shop street | The glass door, back out onto the arcade. |
+| `karaoke_stairs` | Upstairs | The stairs at the back, up to the booth. |
+| `karaoke_desk` | Front desk | The front desk and its terminal, where booths are booked. Nothing uses it yet. |
+
+### Spots
+
+`karaoke_in` (inside the door, the arrival point), `karaoke_desk` (in front of the desk), `karaoke_drinks` (at the drinks bar), `karaoke_stairs` (at the foot of the stairs); and each nook below
+
+### Nooks
+
+Small places in the room, kept for later secrets, encounters and collectibles (GUIDE, Visual design). Each is a named spot in the place's code; nothing is placed in them yet.
+
+| Id | Where | What's there | Could hold |
+|---|---|---|---|
+| `karaoke_bench` | At the waiting bench along the west wall, by the song catalogues. | The bench, the catalogue stand, a poster over it. | Something left on the bench; a page marked in a catalogue. |
+
+### Seats
+
+`karaoke_bench` (the waiting bench, facing the room)
+
+### Zones
+
+None.
+
+### Who's there when
+
+None of the cast yet.
+
+| Id | Usually | Schedule |
+|---|---|---|
+| `mio` | Not here. | – |
+
+No crowd.
+
+### Small moments
+
+| Nodes | When | What happens |
+|---|---|---|
+| `arrive` | Arrive | Goal line: "Head office is back past the plaza. Take its lift down to B2."; after work, "The dorms are up the street, east of the arcade." |
+| `to_street` | Use the glass door | Eric walks back out onto the arcade. |
+| `to_booth` | Use the stairs | Eric goes up to the booth. |
+
+## Karaoke booth (`karaoke_booth`)
+
+One booth upstairs in the karaoke box, up the stairs from the front desk (`karaoke`, above), for the karaoke club's evenings and its ticket (the song selector). In at its door from the corridor at the top of the stairs, out the same way and down. It also loads directly with `?place=karaoke_booth`, inside the door.
+
+The camera looks in over the cut-down front wall: on a desktop the whole booth, on a phone following Eric. Walked: the floor between the benches and the table.
+
+Dark walls and carpet, the door in the east wall open onto the corridor's warm light. On the north wall the screen, a song's title and lyrics lit on it, over a low cabinet with a speaker either side. Padded benches in a deep rose along the west wall, the east wall and the inside of the front wall round a low table: on it the song selector, a tablet in its docking cradle with a pink stylus on a cord, two microphones in their basket, a tambourine, the menu and two glasses. A small mirror ball hangs over the table; pink, cyan and blue lights.
+
+### Things
+
+| Id | Label | What it is |
+|---|---|---|
+| `booth_door` | Downstairs | The booth's door, back down to the front desk. |
+| `song_terminal` | Song selector | The tablet in its cradle on the table, where songs are chosen. Named for the ticket; nothing uses it yet. |
+| `booth_screen` | Screen | The screen on the north wall. Nothing uses it yet. |
+
+### Spots
+
+`booth_in` (inside the door, the arrival point), `booth_table` (at the table, by the selector), `booth_screen` (in front of the screen)
+
+### Nooks
+
+None.
+
+### Seats
+
+`booth_seat_w` (the bench along the west wall, facing the table), `booth_seat_e` (the bench along the east wall, facing it)
+
+### Zones
+
+None.
+
+### Who's there when
+
+None of the cast yet.
+
+| Id | Usually | Schedule |
+|---|---|---|
+| `mio` | Not here. | – |
+
+No crowd.
+
+### Small moments
+
+| Nodes | When | What happens |
+|---|---|---|
+| `arrive` | Arrive | Goal line: "Head office is back past the plaza. Take its lift down to B2."; after work, "The dorms are up the street, east of the arcade." |
+| `to_desk` | Use the booth's door | Eric goes back down to the front desk. |
 
 ## East lane (`east_lane`)
 

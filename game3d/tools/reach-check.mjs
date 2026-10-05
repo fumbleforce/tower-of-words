@@ -7,7 +7,7 @@
 import { withBrowserJob } from '../../tools/lib/browser-job.mjs';
 
 const base = process.env.BASE || 'game3d';
-const PLACES = (process.env.PLACES || 'train,gate,forecourt,plaza,office,dorm_court,dorms,shotengai,east_lane,east_coast,dorm_commons,sports,pool,gym,office_quarter,harbour,works').split(',');
+const PLACES = (process.env.PLACES || 'train,gate,forecourt,plaza,office,dorm_court,dorms,shotengai,karaoke,karaoke_booth,east_lane,east_coast,dorm_commons,sports,pool,gym,office_quarter,harbour,works').split(',');
 const EVENING = new Set(['forecourt', 'plaza', 'dorm_court', 'dorms', 'shotengai', 'east_lane', 'east_coast', 'sports', 'pool', 'office_quarter', 'harbour', 'works']);
 const fails = [],
   errors = [];

@@ -1151,6 +1151,144 @@
     ]
   },
   {
+    "id_": "prop/karaoke_booth/booth_door",
+    "kind": "prop",
+    "name": "Downstairs",
+    "paths": [
+      "game3d/js/places/karaoke-booth.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "karaoke-booth.js things.booth_door",
+    "place": "karaoke_booth",
+    "used": [
+      "Karaoke booth: tap target 'Downstairs'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "karaoke-booth"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/karaoke_booth/booth_screen",
+    "kind": "prop",
+    "name": "Screen",
+    "paths": [
+      "game3d/js/places/karaoke-booth.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "karaoke-booth.js things.booth_screen",
+    "place": "karaoke_booth",
+    "used": [
+      "Karaoke booth: tap target 'Screen'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "karaoke-booth"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/karaoke_booth/song_terminal",
+    "kind": "prop",
+    "name": "Song selector",
+    "paths": [
+      "game3d/js/places/karaoke-booth.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "karaoke-booth.js things.song_terminal",
+    "place": "karaoke_booth",
+    "used": [
+      "Karaoke booth: tap target 'Song selector'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "karaoke-booth"
+    },
+    "tags": [
+      "in game",
+      "thing small"
+    ]
+  },
+  {
+    "id_": "prop/karaoke/karaoke_desk",
+    "kind": "prop",
+    "name": "Front desk",
+    "paths": [
+      "game3d/js/places/karaoke.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "karaoke.js things.karaoke_desk",
+    "place": "karaoke",
+    "used": [
+      "Karaoke box: tap target 'Front desk'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "karaoke"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/karaoke/karaoke_door",
+    "kind": "prop",
+    "name": "To the shop street",
+    "paths": [
+      "game3d/js/places/karaoke.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "karaoke.js things.karaoke_door",
+    "place": "karaoke",
+    "used": [
+      "Karaoke box: tap target 'To the shop street'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "karaoke"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/karaoke/karaoke_stairs",
+    "kind": "prop",
+    "name": "Upstairs",
+    "paths": [
+      "game3d/js/places/karaoke.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "karaoke.js things.karaoke_stairs",
+    "place": "karaoke",
+    "used": [
+      "Karaoke box: tap target 'Upstairs'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "karaoke"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
     "id_": "prop/office_quarter/bank",
     "kind": "prop",
     "name": "Bank",
