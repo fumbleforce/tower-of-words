@@ -34,6 +34,7 @@ import { coastLand } from './island-west.js';
 import { BAYS, SHOPS } from './island-south.js';
 import * as P from './east-lane/plan.js';
 import { buildNooks } from './outdoor/nooks.js';
+import { bandSteps } from './bands.js';
 
 const { CHUNK, inRect } = P;
 
@@ -88,9 +89,10 @@ export function* eastLaneChunkSteps() {
     shops: SHOPS,
   });
   yield;
+  const bands = yield* bandSteps(root, CHUNK); // the ground past the exits, as the neighbours build it (bands.js)
   const sky = yield* skylineSteps(root, CHUNK, {
     layout: LAYOUT,
-    skip: ['shops_north', 'arcade', 'shops_south', ...BLOCK_IDS, ...NORTH_IDS, ...CLUSTER_IDS, 'dorm_1'],
+    skip: ['shops_north', 'arcade', 'shops_south', ...BLOCK_IDS, ...NORTH_IDS, ...CLUSTER_IDS, 'dorm_1', ...bands.ids],
     land: coastLand(LAYOUT.COAST.line),
     landColor: TOWN.grass,
   });
@@ -118,9 +120,11 @@ export function* eastLaneChunkSteps() {
     camera: { elev: 46, fov: 24 },
     update() {
       north.update(sun);
+      bands.update(sun);
       east.update(sun);
     },
     evening() {
+      bands.evening();
       nooks.evening();
       shadows.evening();
       lit.evening();
@@ -131,7 +135,7 @@ export function* eastLaneChunkSteps() {
       street.signs.evening();
       sky.onPeriod('evening');
     },
-    cards: (day, period) => east.cards(day, period),
+    cards: (day, period) => (east.cards(day, period), bands.cards(day, period)),
     skyline: sky.stats,
   };
 }

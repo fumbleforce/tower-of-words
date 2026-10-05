@@ -42,6 +42,7 @@ import { rowSteps } from './office-quarter/row.js';
 import * as P from './sports/plan.js';
 import * as CP from './sports/court-plan.js';
 import { buildNooks } from './outdoor/nooks.js';
+import { bandSteps } from './bands.js';
 
 const { CHUNK, inRect } = P;
 const FRONTS = E.BLOCKS.filter((k) => k.id === 'r3' || k.id === 'block_e3'); // on the north street's east side
@@ -114,9 +115,10 @@ export function* sportsSteps({
   for (const m of q.build(pf)) m.castShadow = false;
   const nlit = nlights.build(pf, { poolY: 0.03 });
   yield;
+  const bands = yield* bandSteps(root, CHUNK); // the ground past the exits, as the neighbours build it (bands.js)
   const sky = yield* skylineSteps(root, CHUNK, {
     layout: LAYOUT,
-    skip: ['gym', 'pool_hall', ...NORTH_IDS, ...FRONTS.map((k) => k.id), ...OFFICES],
+    skip: ['gym', 'pool_hall', ...NORTH_IDS, ...FRONTS.map((k) => k.id), ...OFFICES, ...bands.ids],
     land: coastLand(LAYOUT.COAST.line),
     landColor: TOWN.grass,
     near: 40,
@@ -143,8 +145,10 @@ export function* sportsSteps({
     camera: { elev: 50, fov: 24 },
     update() {
       north.update(sun);
+      bands.update(sun);
     },
     evening() {
+      bands.evening();
       shadows.evening();
       lit.evening();
       nlit.evening();
