@@ -34,7 +34,7 @@ import { swingStraps } from '../train/straps.js';
 import { buildPassengers, sit, armsHold } from '../train/people.js';
 import { makeCat, catWalk, catHop } from '../creatures/cat.js';
 import { PEOPLE } from '../cast.js';
-import { meshy3 } from '../cast3d.js';
+import { inSeat, dozing } from '../cast3d.js';
 import { Nav, blob } from '../engine.js';
 import { ui, sfx } from '../ui.js';
 import { walkPerson, stepPeople, lookAt } from '../story.js';
@@ -140,14 +140,9 @@ export async function trainPlace(game) {
 
   // passengers, cat and bags as in side/train
   const list = buildPassengers(LZ, SEAT_Y);
-  // Aoi's Meshy model (cast3d.js) takes the code-built woman's seat, without the phone (no props on the models)
-  const aoi3 = meshy3('aoi');
-  if (aoi3) {
-    aoi3.root.position.set(list[1].root.position.x, 0, list[1].root.position.z);
-    aoi3.root.rotation.copy(list[1].root.rotation);
-    aoi3.seated = true;
-    list[1] = aoi3;
-  }
+  // Meshy models in passengers' seats (cast3d.js): Aoi (no phone: no props on models), Hamada asleep
+  list[1] = inSeat('aoi', list[1]);
+  list[0] = inSeat('kuroda', list[0], dozing);
   const [kuroda, aoi, reader, music, stander, bun, youth] = list;
   const blobs = {};
   for (const p of list) {
@@ -1174,6 +1169,7 @@ export async function trainPlace(game) {
       for (const p of list) {
         if (p.torso && p.breath) p.torso.scale.y = 1 + p.breath * Math.sin(simT * 1.7 + p.ph);
         if (p.act) p.act(simT, p, m.roll);
+        else if (p.lean) p.lean = null; // act cleared: Hamada sits up
       }
       tama.update(dt);
       kb.position.set(kitty.position.x, kitty.position.y + 0.003, kitty.position.z); // her shadow goes with her
@@ -1365,6 +1361,7 @@ export async function trainPlace(game) {
         const r = people[who];
         if (!r || !r.hips) return;
         r.act = null;
+        r.lean = null;
         r.head.rotation.set(0.1, 0, 0);
       },
       bag: async ({ state }) => {

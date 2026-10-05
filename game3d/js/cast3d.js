@@ -10,11 +10,11 @@ import { chibiFiles, chibiFrom, CHIBI_CAST } from './chibi.js';
 
 // Standing heights next to Mio (1.12) and Eric (1.2). While a model waits for Jørgen's approval it only loads with
 // ?cast3d=<id>[,<id>]; approved ids go in CAST3D_ON.
-export const CAST3D = { mori: 1.09, kenji: 1.12, guard: 1.09, kuro: 1.12, aoi: 1.09, emi: 1.09 };
+export const CAST3D = { mori: 1.09, kenji: 1.12, guard: 1.09, kuroda: 1.09, kuro: 1.12, aoi: 1.09, emi: 1.09 };
 // Kuro: Review kuro-meshy-orig-3 (Jørgen, 2026-10-04: "Yes, very good"); Aoi and Emi: Reviews aoi-meshy-1 and
 // emi-meshy-1, round 2; the staff from Reviews <id>-meshy-1, made the same way (Jørgen, 2026-10-05: "can you also
 // kick off the remaining staff and background characters in the new style")
-const CAST3D_ON = ['kuro', 'aoi', 'emi', 'mori', 'kenji', 'guard'];
+const CAST3D_ON = ['kuro', 'aoi', 'emi', 'mori', 'kenji', 'guard', 'kuroda'];
 const Q3 = new URLSearchParams(typeof location !== 'undefined' ? location.search : '');
 // only in a page: the unit tests import the cast in Node, where everyone stays code-built (as in chibi.js)
 const PAGE = typeof addEventListener === 'function';
@@ -22,7 +22,7 @@ const want3 = [...CAST3D_ON, ...(Q3.get('cast3d') || '').split(',')].filter(
   (id) => PAGE && CAST3D[id] && !CHIBI_CAST.includes(id),
 );
 // The Meshy cast has no phone pose or library gestures: their scenes use the drawn ones (rig-gestures.js)
-const NO_EXTRAS = ['kuro', 'aoi', 'emi', 'mori', 'kenji', 'guard'];
+const NO_EXTRAS = ['kuro', 'aoi', 'emi', 'mori', 'kenji', 'guard', 'kuroda'];
 // Hand bones scaled at load (Jørgen on aoi-1: "her hands are larger than the others"; at 0.75 hers are between Kuro's
 // and Mio's, art/candidates/aoi-emi-meshy-2/hand_area.py); the rest is as Meshy made her
 // The guard's came out larger still (0.139 of his height, Eric's 0.107; aoi-emi-meshy-2/hands.py): 0.75 brings them to Eric's
@@ -137,3 +137,22 @@ export const meshy3 = (id) => {
   }
   return meshyPerson(m);
 };
+
+// A Meshy model (if it is on) in a code-built passenger's seat, facing the same way, with an optional act (train.js);
+// otherwise the passenger as built
+export function inSeat(id, r, act) {
+  const m = meshy3(id);
+  if (!m) return r;
+  m.root.position.set(r.root.position.x, 0, r.root.position.z);
+  m.root.rotation.copy(r.root.rotation);
+  m.seated = true;
+  if (act) m.act = act;
+  return m;
+}
+// asleep in a seat (Hamada on the train): the head drops slowly and catches itself every ~7 s, as the code-built
+// sleeper's act; the place clears it with the act when he wakes
+export function dozing(t, r) {
+  const c = (t + 2.3) % 7.2,
+    drop = c < 6.5 ? c / 6.5 : 1 - (c - 6.5) / 0.7;
+  r.lean = { head: [0.35 + drop * 0.25 - (c > 6.5 && c < 6.8 ? 0.08 : 0), 0.3 + drop * 0.08], spine: 0.12 };
+}
