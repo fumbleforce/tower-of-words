@@ -1,0 +1,49 @@
+{
+ "title": "Bigger E key on the pin in reach",
+ "date": "2026-10-05",
+ "by": "claude-agent:keycaps",
+ "caption": "Your note from the train: \"the E button indicator is almost to small to read\". The E on the pin in reach is now a proper key cap: 24 px at the default interface size, a white face with a dark rim and a bold letter, level with the pin and just beside it. It grows with Interface size. The keys in the action menu (E, Q, Tab), the controls line and the Say tip have bigger, bolder letters too. Phones still show no keys.",
+ "sections": [
+  {
+   "title": "The pin in reach, before and after",
+   "caption": "Close-ups at 2x, on the train next to the cat.",
+   "images": [
+    {"id": "pin-1366", "image": "bible/shots/showcase/key-hints-1/pin-1366x860.webp", "caption": "1366x860"},
+    {"id": "pin-1920", "image": "bible/shots/showcase/key-hints-1/pin-1920x1080.webp", "caption": "1920x1080"},
+    {"id": "goal-pin", "image": "bible/shots/showcase/key-hints-1/goal-pin.webp", "caption": "After, on Mio's goal pin"}
+   ]
+  },
+  {
+   "title": "Interface size",
+   "caption": "Settings > Controls > Interface size at 0.85, 1, 1.2 and 1.4.",
+   "images": [
+    {"id": "sizes-1366", "image": "bible/shots/showcase/key-hints-1/sizes-1366x860.webp", "caption": "1366x860"},
+    {"id": "sizes-1920", "image": "bible/shots/showcase/key-hints-1/sizes-1920x1080.webp", "caption": "1920x1080"}
+   ]
+  },
+  {
+   "title": "The action menu",
+   "caption": "Its key caps, before and after.",
+   "images": [
+    {"id": "menu-1366", "image": "bible/shots/showcase/key-hints-1/menu-1366x860.webp", "caption": "1366x860"},
+    {"id": "menu-1920", "image": "bible/shots/showcase/key-hints-1/menu-1920x1080.webp", "caption": "1920x1080"}
+   ]
+  },
+  {
+   "title": "Whole screen",
+   "images": [
+    {"id": "full-before-1366", "image": "bible/shots/showcase/key-hints-1/full-before-1366x860.webp", "caption": "Before, 1366x860"},
+    {"id": "full-after-1366", "image": "bible/shots/showcase/key-hints-1/full-after-1366x860.webp", "caption": "After, 1366x860"},
+    {"id": "full-before-1920", "image": "bible/shots/showcase/key-hints-1/full-before-1920x1080.webp", "caption": "Before, 1920x1080"},
+    {"id": "full-after-1920", "image": "bible/shots/showcase/key-hints-1/full-after-1920x1080.webp", "caption": "After, 1920x1080"}
+   ]
+  },
+  {
+   "title": "Phone",
+   "images": [
+    {"id": "phone", "image": "bible/shots/showcase/key-hints-1/phone.webp", "caption": "390x844: no key cap, as before"}
+   ]
+  }
+ ],
+ "links": [{"label": "Play it", "href": "game3d/"}]
+}
