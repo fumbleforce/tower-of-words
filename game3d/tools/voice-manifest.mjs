@@ -24,6 +24,7 @@ const { expandMc, isPlayer, ownClip, PROTAGONISTS, DEFAULT_MC } = await imp('js/
 const { DAYS } = await imp('js/days.js');
 // day 2's new phrases (story/day2/words.js), until their clips exist and lang.js gives them a voice field
 const { WORDS: DAY2_WORDS } = await imp('story/day2/words.js');
+const { WORDS: DAY3_WORDS } = await imp('story/day3/words.js');
 const jaRe = /[぀-ヿ一-龯]/;
 const resolve = (t) => t.replace(/\{(\w+)\}/g, (_, id) => (WORDS[id] ? WORDS[id].ja : id));
 
@@ -35,7 +36,9 @@ export const storySets = () =>
       const f = path.join(root, 'story', d.dir + n + '.js');
       return { name: n, load: fs.existsSync(f) ? () => import(pathToFileURL(f).href + '?' + Math.random()).then((m) => m.default) : null };
     }),
-  }));
+  }))
+    // the clubs' session nodes (story/clubs.js), played in their club's place from day 3 on (clubs/index.js withClubs)
+    .concat([{ day: 3, files: [{ name: 'clubs', load: () => import(pathToFileURL(path.join(root, 'story/clubs.js')).href + '?' + Math.random()).then((m) => m.default) }] }]);
 
 // The lines one protagonist hears and says, keyed as for the default protagonist: { out: Map key -> entry, dayOfKey }
 async function collect(mc, sets) {
@@ -77,13 +80,13 @@ async function collect(mc, sets) {
     else for (const nodes of Object.values(st.nodes || {})) walk(nodes);
     for (const k of out.keys()) if (!had.has(k) && !dayOfKey.has(k)) dayOfKey.set(k, day);
   }
-  // day 2's new phrases: the player saying each, and Mio's slow replay of it (the shell's word-<id>)
-  for (const [id, w] of Object.entries(DAY2_WORDS)) {
+  // day 2's and day 3's new phrases: the player saying each, and Mio's slow replay of it (the shell's word-<id>)
+  for (const [id, w, day] of [...Object.entries(DAY2_WORDS).map(([k, v]) => [k, v, 2]), ...Object.entries(DAY3_WORDS).map(([k, v]) => [k, v, 3])]) {
     if (WORDS[id]?.voice) continue;
     out.set('eric-' + id, { key: 'eric-' + id, speaker: 'eric', text: w.ja + '。', lang: 'ja', overheard: false, words: [], clear: [] });
     out.set('word-' + id, { key: 'word-' + id, speaker: 'mio', text: w.ja + '。', lang: 'ja', overheard: false, words: [[id, w.ja]], clear: [], emo: 'slow', slow: true });
-    dayOfKey.set('eric-' + id, 2);
-    dayOfKey.set('word-' + id, 2);
+    dayOfKey.set('eric-' + id, day);
+    dayOfKey.set('word-' + id, day);
   }
   return { out, dayOfKey };
 }

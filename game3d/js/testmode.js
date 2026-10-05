@@ -5,6 +5,7 @@ import { ui, setMuted } from './ui.js';
 import { known, SAYABLE } from './lang.js';
 import { flags } from './narrative/state.js';
 import { doorwayAt } from './movement/doorways.js';
+import { day3Tick, preferred } from './testmode-day3.js';
 
 export function start(game) {
   setMuted(true);
@@ -24,6 +25,11 @@ export function start(game) {
   T.choices = [];
   ui.autoPick = (chips) => {
     if ((game.sim?.day || 1) === 1) return 0;
+    const want = preferred(T, chips); // a reply day 3's route asked for (testmode-day3.js)
+    if (want >= 0) {
+      T.choices.push(`${game.runner.currentNode}: ${String(chips[want].html).replace(/<[^>]+>/g, '')}`);
+      return want;
+    }
     const key = (game.runner.currentNode || '') + '|' + chips.map((c) => c.html).join('|');
     const n = (seenChoice[key] = (seenChoice[key] ?? -1) + 1);
     const i = n % chips.length;
@@ -43,6 +49,18 @@ export function start(game) {
     // the ticket app (ui/tickets-view.js): open each unread ticket, take a new one, then close the window
     const app = globalThis.document?.getElementById('ticketsApp');
     if (app && !app.hidden) return driveTickets(app, T);
+    // the notice board up close (ui/finds-view.js showBoard): take the first slip on offer, then close it
+    const board = globalThis.document?.getElementById('boardView');
+    if (board && !board.hidden) {
+      const slip = board.querySelector('button.slip');
+      if (slip && !T.slipTaken) {
+        T.slipTaken = true;
+        T.log.push('board: take a slip');
+        return slip.click();
+      }
+      T.log.push('board: close');
+      return board.click();
+    }
     const p = game.place;
     if (!p || !game.walker) return;
     if (p.name !== lastPlace) {
@@ -60,6 +78,8 @@ export function start(game) {
       return;
     }
     busyFor = 0;
+    // day 3: the route through the Saturday (testmode-day3.js) before anything else
+    if ((game.sim?.day || 1) === 3 && day3Tick(game, T, (T.route3 ||= { i: 0, wait: 0 }))) return;
     const list = game.markers.list.filter((m) => m.enabled());
     const goals = list.filter((m) => m.goal());
     // social route: at the jam, say すみません to the guard (the way a player takes the social way), not the goal

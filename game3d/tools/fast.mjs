@@ -1,5 +1,6 @@
 // Fast QA run: the whole day in test mode (?test=fast). node game3d/tools/fast.mjs [w] [h] [seconds]
-// DAY=2 plays day 2 instead (?day=2: from a plain finished day 1; HISTORY=mori|cold for the other day-1 histories).
+// DAY=2 plays day 2 instead (?day=2: from a plain finished day 1; HISTORY=mori|cold for the other day-1 histories);
+// DAY=3 plays day 3 from a plain finished day 2 (HISTORY=keep: the old sensor kept; testmode-day3.js is its route).
 // Runs at quality tier 0; QUALITY=1 (or 2) runs the day at that tier, with its own perf baseline (phone-q1).
 // --mc <id> plays another protagonist (?mc=), --cast <set or role=person,...> another cast (?cast=); or MC=, CAST=.
 // Prints PASS/FAIL, the places reached, the time taken and any page errors; saves the end screen.
@@ -32,8 +33,8 @@ const who = mcArgs();
     if (typeof v === 'string') { if (/\\|&quot;|&amp;|&#\d+;/.test(v)) bad.push(`${where}: ${v.slice(0, 90)}`); return; }
     if (Array.isArray(v)) v.forEach((x, i) => scan(x, where)); else if (v && typeof v === 'object') for (const [k, x] of Object.entries(v)) scan(x, where);
   };
-  const day2 = +process.env.DAY === 2;
-  for (const n of day2 ? fs.readdirSync(path.join(G, 'story/day2')).filter((f) => f.endsWith('.js')).map((f) => 'day2/' + f.slice(0, -3)) : ['train', 'gate', 'forecourt', 'plaza', 'office', 'transitions']) {
+  const later = +process.env.DAY > 1 ? `day${+process.env.DAY}` : null; // a later day's own story set (story/dayN/)
+  for (const n of later ? fs.readdirSync(path.join(G, 'story', later)).filter((f) => f.endsWith('.js') && f !== 'check.js').map((f) => `${later}/` + f.slice(0, -3)) : ['train', 'gate', 'forecourt', 'plaza', 'office', 'transitions']) {
     const f = path.join(G, 'story', n + '.js'); if (!fs.existsSync(f)) continue;
     const m = await import(pathToFileURL(f).href + '?' + Date.now());
     scan(m.default ?? m, n);
