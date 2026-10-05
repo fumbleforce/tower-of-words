@@ -998,6 +998,7 @@ body.phone #peoplePanel .card { max-height: 72vh; }
 .tp-prompt { margin: 0 0 12px; }
 .tp-who { font-weight: 700; margin-right: 6px; }
 .tp { display: grid; gap: 12px; }
+.tp-shown { margin-top: 12px; } /* a skipped skill check: the word under its line (Settings, Skip skill checks) */
 
 /* the word */
 .tp-word { display: grid; grid-template-columns: 44px minmax(0, 1fr) auto; grid-template-areas: "ico jp jp" "ico ro en"; column-gap: 14px; row-gap: 2px; align-items: center;

@@ -1,11 +1,17 @@
-import { WORDS } from '../../lang.js';
+import { WORDS, iconHTML } from '../../lang.js';
 import { voice, voiceThenBeat, playMusic } from '../../ui.js';
 import { sim, setPeriod, meet, buy, take, save, PERIODS } from '../../sim.js';
 import { NEXT, canTravel } from '../../places/definitions.js';
 import { showEnd } from '../../end.js';
 import { flags } from '../state.js';
 import { flagKeys } from '../engine-flags.js';
+import { settings } from '../../settings.js';
 const ENGINE_KEYS = flagKeys('game3d/js/narrative/hooks/progression.js');
+// a taught word under its line, as the typing prompt shows it (kana with its play button, romaji, English)
+function wordCard(id) {
+  const w = WORDS[id];
+  return `<div class="tp tp-shown"><div class="tp-word">${iconHTML(id, 'wi tp-ico')}<div class="tp-jp"><span class="jp" data-w="${id}">${w.ja}</span></div><div class="tp-ro">${w.ro}</div><div class="tp-en">${w.en}</div></div></div>`;
+}
 
 export function installProgressionHooks(game, { travel }) {
   const H = game.hooks;
@@ -25,7 +31,9 @@ export function installProgressionHooks(game, { travel }) {
         pr = { who: game.runner.speaker(prompt.slice(0, i)), whoId: prompt.slice(0, i), text: prompt.slice(i + 2) };
       else pr = { who: null, text: prompt.replace(/^>\s*/, '') };
     }
-    await ui.typePrompt(word, pr);
+    // Settings > Skip skill checks: the prompt is a line with the word under it, passed without counting as practice
+    if (settings.skipChecks) await ui.say(pr?.who || null, pr?.text || '', { whoId: pr?.whoId, card: wordCard(word) });
+    else await ui.typePrompt(word, pr);
     game.lastSaid = word; // the next kotodama shows it rising off what it caught
     const spoken = voice(WORDS[word].voice || '');
     complete(() => {

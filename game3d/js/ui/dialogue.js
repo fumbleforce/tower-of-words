@@ -17,7 +17,8 @@ export function createDialogue({ sfx }) {
     logLoad,
     // Show a line and wait for a tap. speaker: {name, role, color} or null for narration.
     // en: Japanese spoken (the voice clip is of `text`) with this English as its subtitle, unmuffled (runner `en`)
-    say(speaker, text, { voiceKey, auto, overheard, clear, whoId, face, en } = {}) {
+    // card: HTML shown under the line (a skipped typing prompt's word, narrative/hooks/progression.js)
+    say(speaker, text, { voiceKey, auto, overheard, clear, whoId, face, en, card = '' } = {}) {
       if (en) overheard = false;
       return new Promise((res) => {
         const t = $('#talk');
@@ -33,7 +34,7 @@ export function createDialogue({ sfx }) {
           ? `<span class="nm" style="--c:${speaker.color || '#8fa3c0'}">${speaker.name}</span>${speaker.role ? `<span class="rl">${speaker.role}</span>` : ''}${en ? '<span class="subtag">in Japanese</span>' : ''}`
           : '';
         const lineEl = t.querySelector('.line');
-        lineEl.innerHTML = overheard ? heardHTML(text, clear) : lineHTML(en || text);
+        lineEl.innerHTML = (overheard ? heardHTML(text, clear) : lineHTML(en || text)) + card;
         if (!overheard) addPlayButtons(lineEl);
         t.querySelector('.chips').innerHTML = '';
         const more = t.querySelector('.more');
