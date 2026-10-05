@@ -42,6 +42,7 @@ test('asset source data includes the actual words, cast, music, sounds and style
     east_coast: {},
     sports: {},
     pool: {},
+    gym: {},
     office_quarter: {},
     harbour: {},
     works: {},

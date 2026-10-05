@@ -783,6 +783,121 @@
     ]
   },
   {
+    "id_": "prop/gym/booking_terminal",
+    "kind": "prop",
+    "name": "Booking terminal",
+    "paths": [
+      "game3d/js/places/gym.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "gym.js things.booking_terminal",
+    "place": "gym",
+    "used": [
+      "Gym: tap target 'Booking terminal'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "gym"
+    },
+    "tags": [
+      "in game",
+      "thing small"
+    ]
+  },
+  {
+    "id_": "prop/gym/desk_fan",
+    "kind": "prop",
+    "name": "Desk fan",
+    "paths": [
+      "game3d/js/places/gym.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "gym.js things.desk_fan",
+    "place": "gym",
+    "used": [
+      "Gym: tap target 'Desk fan'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "gym"
+    },
+    "tags": [
+      "in game",
+      "thing small"
+    ]
+  },
+  {
+    "id_": "prop/gym/gym_board",
+    "kind": "prop",
+    "name": "Club board",
+    "paths": [
+      "game3d/js/places/gym.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "gym.js things.gym_board",
+    "place": "gym",
+    "used": [
+      "Gym: tap target 'Club board'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "gym"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/gym/gym_door",
+    "kind": "prop",
+    "name": "To the sports lane",
+    "paths": [
+      "game3d/js/places/gym.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "gym.js things.gym_door",
+    "place": "gym",
+    "used": [
+      "Gym: tap target 'To the sports lane'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "gym"
+    },
+    "tags": [
+      "in game",
+      "thing"
+    ]
+  },
+  {
+    "id_": "prop/gym/gym_printer",
+    "kind": "prop",
+    "name": "Printer",
+    "paths": [
+      "game3d/js/places/gym.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "gym.js things.gym_printer",
+    "place": "gym",
+    "used": [
+      "Gym: tap target 'Printer'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "gym"
+    },
+    "tags": [
+      "in game",
+      "thing small"
+    ]
+  },
+  {
     "id_": "prop/harbour/ferry_terminal",
     "kind": "prop",
     "name": "Ferry terminal",

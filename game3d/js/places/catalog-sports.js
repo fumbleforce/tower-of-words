@@ -36,3 +36,20 @@ export const POOL_DETAILS = {
   people: [],
   hooks: [],
 };
+
+// The gym's corner inside its main door (places/gym.js), from the sports lane.
+export const GYM_DETAILS = {
+  things: {
+    gym_door: { label: 'To the sports lane', kind: 'thing', verb: 'Go' },
+    booking_terminal: { label: 'Booking terminal', kind: 'thing small' },
+    gym_printer: { label: 'Printer', kind: 'thing small' },
+    desk_fan: { label: 'Desk fan', kind: 'thing small' },
+    gym_board: { label: 'Club board', kind: 'thing' },
+  },
+  spots: ['gym_in', 'gym_desk', 'gym_benches', 'gym_meeting', 'gym_court', 'gym_store', 'gym_lockers'],
+  nooks: ['gym_store', 'gym_lockers'], // docs/game/places.md, "Nooks"
+  seats: ['gym_bench_n', 'gym_bench_s'],
+  zones: [],
+  people: [],
+  hooks: [],
+};

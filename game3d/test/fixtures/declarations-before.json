@@ -888,6 +888,51 @@
       "people": [],
       "hooks": []
     },
+    "gym": {
+      "things": {
+        "gym_door": {
+          "label": "To the sports lane",
+          "kind": "thing",
+          "verb": "Go"
+        },
+        "booking_terminal": {
+          "label": "Booking terminal",
+          "kind": "thing small"
+        },
+        "gym_printer": {
+          "label": "Printer",
+          "kind": "thing small"
+        },
+        "desk_fan": {
+          "label": "Desk fan",
+          "kind": "thing small"
+        },
+        "gym_board": {
+          "label": "Club board",
+          "kind": "thing"
+        }
+      },
+      "spots": [
+        "gym_in",
+        "gym_desk",
+        "gym_benches",
+        "gym_meeting",
+        "gym_court",
+        "gym_store",
+        "gym_lockers"
+      ],
+      "nooks": [
+        "gym_store",
+        "gym_lockers"
+      ],
+      "seats": [
+        "gym_bench_n",
+        "gym_bench_s"
+      ],
+      "zones": [],
+      "people": [],
+      "hooks": []
+    },
     "office_quarter": {
       "things": {
         "sports_lane": {

@@ -33,6 +33,8 @@ const LEGS = [
   // through the shower pavilion's door onto the pool deck and back (a door: used, not walked into)
   ['sports', { use: 'pool' }, 'pool'],
   ['pool', { use: 'changing_room' }, 'sports'],
+  ['sports', { use: 'gym' }, 'gym'],
+  ['gym', { use: 'gym_door' }, 'sports'],
   [
     'sports',
     [

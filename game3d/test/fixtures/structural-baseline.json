@@ -110,6 +110,7 @@
       "east_coast": "game3d/js/places/east-coast.js",
       "sports": "game3d/js/places/sports.js",
       "pool": "game3d/js/places/pool.js",
+      "gym": "game3d/js/places/gym.js",
       "office_quarter": "game3d/js/places/office-quarter.js",
       "harbour": "game3d/js/places/harbour.js",
       "works": "game3d/js/places/works.js"
@@ -130,6 +131,7 @@
       "east_coast": {},
       "sports": {},
       "pool": {},
+      "gym": {},
       "office_quarter": {},
       "harbour": {},
       "works": {},
@@ -267,6 +269,7 @@
     "east_coast",
     "sports",
     "pool",
+    "gym",
     "office_quarter",
     "harbour",
     "works"
@@ -505,13 +508,15 @@
     "east_coast:to_east_lane",
     "east_coast:to_sports",
     "sports:arrive",
-    "sports:shut",
     "sports:to_east_lane",
     "sports:to_coast",
     "sports:to_offices",
     "sports:to_pool",
+    "sports:to_gym",
     "pool:arrive",
     "pool:to_sports",
+    "gym:arrive",
+    "gym:to_sports",
     "office_quarter:arrive",
     "office_quarter:shut",
     "office_quarter:to_sports",
@@ -1378,7 +1383,19 @@
       "labels": []
     },
     {
+      "from": "sports:to_gym",
+      "to": "gym:arrive",
+      "kind": "trip",
+      "labels": []
+    },
+    {
       "from": "pool:to_sports",
+      "to": "sports:arrive",
+      "kind": "trip",
+      "labels": []
+    },
+    {
+      "from": "gym:to_sports",
       "to": "sports:arrive",
       "kind": "trip",
       "labels": []
