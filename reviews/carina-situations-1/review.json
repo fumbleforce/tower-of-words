@@ -2,7 +2,7 @@
  "title": "Carina (option 5) in ten situations of the game world",
  "date": "2026-10-05",
  "by": "art agent (Carina situations 1)",
- "status": "open",
+ "status": "superseded",
  "multi": true,
  "question": "Does Carina (option 5 from round 3) fit the game's world in these situations, and which shots are wrong?",
  "media": [
@@ -105,5 +105,6 @@
    ],
    "note": "PASS (v2). Hoodie, jeans, paper coffee cup in both hands, dorm block with lit corridors at dusk. v1 was GLOSSY. Staging: Camera at eye level in the courtyard facing the dorm block; she stands in front; concrete five-storey block with lit corridors behind; dusk. Attempts in order: v1, v2 (v1 first identity line with 'glossy' words: rejected as too glossy per Jørgen; v2 same seed with the gloss words removed from the identity line and matte negatives added; v3 one scene fix, same seed). Final v2: rdbtAnima, seed 9670, 832x1216, euler_ancestral normal, 30 steps, CFG 5. Final prompt: masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, anime screenshot, anime coloring, 2d, cel shading, clean lineart, safe, 1girl, solo, a beautiful Swedish woman in her late twenties, (attractive:1.2), glowing fair skin with a warm healthy glow, light natural makeup, soft pink full lips, long eyelashes, thin gold chain necklace, company lanyard, (slim narrow build, narrow shoulders, small bust:1.3), light blue eyes, large round eyes, thick straight brows, oval-round face, short slightly upturned nose, soft chin, (bright golden blonde hair:1.6), (vivid sunny gold, light gold highlights:1.35), same colour all over, straight shoulder-length hair, tucked behind one ear, side parting, oversized grey hoodie and blue jeans, small silver studs, (confident slight smile:1.2), holding a paper coffee cup in both hands, cowboy shot, she stands in a concrete courtyard at dusk, behind her a plain five-storey concrete apartment block with open corridors and lit doors, warm lights in the evening, soft blue sky, face toward the viewer | Negative: worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, bad anatomy, bad hands, missing fingers, extra fingers, long fingernails, claws, extra limbs, merged limbs, text, watermark, signature, 3d, realistic, photorealistic, render, chubby, nude, nsfw, child, loli, fat, obese, plump, closed eyes, (rim light, red rim light, red outline, backlighting:1.4), sunglasses, tinted eyewear, red hair, orange hair, cropped head, head out of frame, from behind, dark hair, brown hair, black hair, (ash blond hair, grey hair, silver hair, white hair, platinum hair, dull hair, muted colours:1.3), cleavage, (large breasts, huge breasts, wide shoulders, broad shoulders:1.3), canary yellow hair, neon yellow hair, (dirty blonde hair, tan hair, brown-blond hair, bronze hair, dark blond hair:1.3), circle, halo, shy, sad, frown, tan skin, visible nipples, visible genitals, uncovered crotch, explicit sexual action, glossy, shiny hair, specular highlights, glossy skin, wet skin, oily skin, airbrushed, smooth gradient shading, 3d render, glossy lips, lens flare, glasses, eyewear"
   }
- ]
+ ],
+ "decision": "Jørgen made Carina himself in the image gen dashboard (art/candidates/portraits/carina-9-jorgen); this round is closed."
 }
