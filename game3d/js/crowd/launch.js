@@ -56,10 +56,16 @@ export function launcher({ game, g, K, ends, routes, pool, inView, st }) {
       };
       let lead = lanes.map(() => A.door || null);
       if (!fresh && !A.door) {
+        // d back from the street's end: the first at d (the end itself at 0), the second 0.4 behind; each of them
+        // checked out of view right where they will stand (#183: a point half a metre further back was checked, so
+        // someone could appear at the end in plain view)
         const extra = R() * 4,
-          d = [0, 3 + extra, 6 + extra, 9 + extra].find((d) => lanes.every((ln) => !inView(...back(ln, d + 0.5 * K))));
+          leadOf = (d) => lanes.map((ln, i) => (d || i ? back(ln, d + i * 0.4 * K) : null)),
+          d = [0, 3 + extra, 6 + extra, 9 + extra].find((d) =>
+            leadOf(d).every((at, i) => !inView(...(at || lanes[i][0]))),
+          );
         if (d === undefined) continue;
-        lead = lanes.map((ln, i) => (d || i ? back(ln, d + i * 0.4 * K) : null));
+        lead = leadOf(d);
       }
       const L = lineLength(lanes[0]);
       const s0 = L * (0.08 + R() * 0.84);

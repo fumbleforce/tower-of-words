@@ -5,10 +5,11 @@
 //   planStop(b, R, share, L)      at launch: whether and how far along (b.stopAt, in place units walked) they stop
 //   wantStop(b, ctx)              each frame while walking: time to stop here? (wide paving, away from Eric and doors)
 //   startStop(b, R, ctx, with)    stop now (with: the walking companion, who stops too, facing them)
-//   stopStep(b, dt, ctx)          each frame while stopped: the step aside, the turn, the small life; true when over
+//   stopStep(b, dt, ctx)          each frame while stopped: the step aside (clear of ctx.list, bodies(game)), the turn,
+//                                 the small life; true when over
 //   endStop(b)                    back to walking
 import { standPose, idleLife, stride } from './motion.js';
-import { turnToward } from '../movement/shared.js';
+import { turnToward, BODY } from '../movement/shared.js';
 import { clearAt } from './paths.js';
 
 export function planStop(b, R, share, L) {
@@ -92,7 +93,7 @@ export function stopBeside(m, lead, R, ctx) {
   return s;
 }
 
-export function stopStep(b, dt, { place, eric, K }) {
+export function stopStep(b, dt, { place, eric, K, list = [] }) {
   const s = b.stopped,
     r = b.r,
     p = r.root.position;
@@ -110,7 +111,7 @@ export function stopStep(b, dt, { place, eric, K }) {
       eric &&
       Math.hypot(x - eric.x, z - eric.z) < Math.hypot(p.x - eric.x, p.z - eric.z) &&
       Math.hypot(x - eric.x, z - eric.z) < 1.5 * K;
-    if (!closer && (!place.nav || place.nav.free(x, z))) {
+    if (!closer && (!place.nav || place.nav.free(x, z)) && !into(list, r, x, z, p, K)) {
       p.x = x;
       p.z = z;
       r.root.rotation.y = turnToward(r.root.rotation.y, Math.atan2(dx, dz), dt, 5);
@@ -143,6 +144,18 @@ export function stopStep(b, dt, { place, eric, K }) {
     r.head.rotation.x = 0.05;
   } else idleLife(s.life, dt);
   return s.t >= s.dur;
+}
+
+// a step to (x, z) that goes into someone (anyone in bodies(game), seated or standing): they stop where they are.
+// The step aside was only checked against Eric and the walls, so a stop toward someone standing pressed into them (#182)
+function into(list, r, x, z, p, K) {
+  const me = BODY * K;
+  for (const o of list) {
+    if (o.root === r.root) continue;
+    const d = Math.hypot(x - o.x, z - o.z);
+    if (d < o.r + me && d < Math.hypot(p.x - o.x, p.z - o.z)) return true;
+  }
+  return false;
 }
 
 export function endStop(b) {

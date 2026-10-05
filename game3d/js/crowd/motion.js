@@ -32,9 +32,13 @@ export function walkStep(game, w, dt, list, eric, wide) {
         ed = Math.hypot(ex, ez) || 1e-4,
         want = eric.r + me + wide;
       if (ed < want) {
+        // out of his way only as far as the floor goes: pushed straight, a walker by a wall went into it (#179)
         const push = Math.min(want - ed, 1.2 * K * dt);
-        p.x += (ex / ed) * push;
-        p.z += (ez / ed) * push;
+        let x = p.x + (ex / ed) * push,
+          z = p.z + (ez / ed) * push;
+        if (P.nav && w.onGrid) [x, z] = onFloor(P.nav, x, z, p.x, p.z);
+        p.x = x;
+        p.z = z;
       }
       return false;
     }
@@ -131,8 +135,7 @@ export function walkStep(game, w, dt, list, eric, wide) {
       }
     }
   }
-  const nav = P.nav;
-  if (nav && w.onGrid && !nav.free(x, z) && nav.free(ox, oz)) [x, z] = nav.collide(x, z, ox, oz);
+  if (P.nav && w.onGrid) [x, z] = onFloor(P.nav, x, z, ox, oz);
   p.x = x;
   p.z = z;
   // no headway against another passer-by for a while: slip past (the movement check lets passing pairs through); never
@@ -146,6 +149,15 @@ export function walkStep(game, w, dt, list, eric, wide) {
   if (moved > s * 0.3 && moved > 1e-4) r.root.rotation.y = turnToward(r.root.rotation.y, Math.atan2(mx, mz), dt, 5);
   w.moved = moved / Math.max(dt, 1e-4);
   return false;
+}
+
+// a step from (ox, oz) to (x, z) kept on the walk grid: slid along the wall, or no step. Someone already inside a
+// wall's margin (a lane or a scene put them there) may walk along it or out of it, never further in (#179: only a step
+// from free floor was checked, so a walker pushed into the margin could be pushed on into the wall)
+export function onFloor(nav, x, z, ox, oz) {
+  if (nav.free(x, z)) return [x, z];
+  if (!nav.free(ox, oz) && nav.clearance(x, z) >= nav.clearance(ox, oz) - 1e-6) return [x, z];
+  return nav.collide(x, z, ox, oz);
 }
 
 // a step aside from (x, z) to (cx, cz) clear of everyone but the one given way to (b): outside each body, or no
