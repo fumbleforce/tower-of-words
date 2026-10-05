@@ -64,7 +64,7 @@ test('the bands table names real places, builders and blocks, and no band covers
     const { BANDS } = await import('../../js/scenes/bands-plan.js');
     const { CHUNKS, BUILDINGS } = await import('../../js/scenes/island-layout.js');
     const { BLOCKS } = await import('../../js/scenes/plaza/east-plan.js');
-    const builders = ['eastLane', 'sportsGrounds', 'coastWalk', 'westCoast', 'lawn', 'fronts'];
+    const builders = ['eastLane', 'sportsGrounds', 'coastWalk', 'westCoast', 'officeLawns', 'lawn', 'fronts'];
     for (const [chunk, list] of Object.entries(BANDS)) {
       assert.ok(CHUNKS[chunk], `${chunk} is a place`);
       for (const b of list) {

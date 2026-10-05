@@ -144,8 +144,8 @@ export function* endSquare(pv, p, lights) {
 
 // a wood along an edge: trees of the given kinds in turn, in staggered rows `pitch` apart (2.4) and a little off the
 // grid, over an understorey of ground cover thick with clipped mounds in mixed greens and sizes; no kerb, it runs out
-// into the lawn
-export function* belt(p, [x0, x1, z0, z1], kinds, { seed = 1, pitch = 2.4 } = {}) {
+// into the lawn. under: mounds per step along it (2; 1 for a lighter wood seen from further off, scenes/bands.js)
+export function* belt(p, [x0, x1, z0, z1], kinds, { seed = 1, pitch = 2.4, under = 2 } = {}) {
   bed(p, [x0 - 0.3, x1 + 0.3, z0 - 0.3, z1 + 0.3], { y: 0.03 }); // a little over its neighbours, so no lawn between
   const alongX = x1 - x0 >= z1 - z0,
     [a0, a1] = alongX ? [x0, x1] : [z0, z1],
@@ -154,7 +154,7 @@ export function* belt(p, [x0, x1, z0, z1], kinds, { seed = 1, pitch = 2.4 } = {}
   const tones = [LEAF.deep, LEAF.mid, LEAF.fresh, LEAF.light];
   let k = 0;
   for (let a = a0 + 0.4; a < a1 - 0.3; a += 0.45 + ((k * 7 + seed) % 4) * 0.12, k++)
-    for (let j = 0; j < 2; j++) {
+    for (let j = 0; j < under; j++) {
       const b = b0 + 0.35 + ((((k * 13 + j * 5 + seed) % 11) + 0.5) / 11) * (b1 - b0 - 0.7);
       mound(p, ...at(a, b), 0.2 + ((k + j + seed) % 4) * 0.06, tones[(k * 3 + j + seed) % 4], { y: 0.03 });
       if (k % 4 === 3 && j) yield;

@@ -16,7 +16,15 @@ test('every place builds its bands inside the triangle budget', async () => {
       return next(specifier, context);
     },
   });
-  const saved = { location: globalThis.location, window: globalThis.window, document: globalThis.document };
+  const saved = {
+    location: globalThis.location,
+    window: globalThis.window,
+    document: globalThis.document,
+    addEventListener: globalThis.addEventListener,
+    localStorage: globalThis.localStorage,
+    innerWidth: globalThis.innerWidth,
+    innerHeight: globalThis.innerHeight,
+  };
   // a canvas that draws nothing, for the signs' textures
   const ctx = new Proxy(
     {},
@@ -25,8 +33,13 @@ test('every place builds its bands inside the triangle budget', async () => {
   Object.assign(globalThis, {
     location: { search: '' },
     window: {},
+    addEventListener() {},
+    innerWidth: 1366,
+    innerHeight: 860,
+    localStorage: { getItem: () => null, setItem() {} },
     document: {
-      body: { classList: { contains: () => false } },
+      body: { classList: { contains: () => false, toggle() {}, add() {}, remove() {} } },
+      documentElement: { style: { setProperty() {} } },
       createElement: () => ({ width: 1, height: 1, getContext: () => ctx, style: {} }),
     },
   });
@@ -39,7 +52,7 @@ test('every place builds its bands inside the triangle budget', async () => {
       let r = it.next();
       while (!r.done) r = it.next();
       const total = r.value.stats.reduce((s, b) => s + b.tris, 0);
-      console.log(chunk, total, r.value.stats.map((b) => `${b.by} ${b.tris}`).join(', '), 'ids', r.value.ids.join(' '));
+      console.log(chunk, total, r.value.stats.map((b) => `${b.by} ${b.tris}/${b.meshes}`).join(', '), 'ids', r.value.ids.join(' '));
       assert.ok(total < BAND_TRIS, `${chunk}: its bands are ${total} triangles, over ${BAND_TRIS}`);
     }
   } finally {

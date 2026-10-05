@@ -10,12 +10,13 @@
 //   coastWalk     east-coast/walk.js and the coast kit's kerbs: the east coast walk, the onsen path, their woods
 //   westCoast     outdoor/coast.js with the west coast's data (the forecourt draws it on the map only): kerbs,
 //                 beds, drifts, pines and benches, and the walks in `pave` laid in the walks' pale slabs
+//   officeLawns   office-quarter/grounds.js planting: the belts of trees on the office street's lawns
 //   lawn          ground nobody builds, planted with the kit in the same style: belts [rect, kinds, pitch] of
 //                 trees over layered planting (dorm-court/cluster-yards.js belt), and walks [rect, kerb sides]
 //                 in the walks' pale slabs
 //   fronts        skyline boxes given a ground floor and a door (plaza/east-fronts.js): blocks [{ id, face, ground }]
-// Nothing in a band casts a shadow (the laid shadows of outdoor/shade.js stand in). The island-frame bands share one
-// set of collectors (one mesh per kind for all of them), and their static meshes merge with the place's.
+// Nothing in a band casts a shadow (the laid shadows of outdoor/shade.js stand in). Each band is one group, merged by
+// material on its own (one mesh per kind) and named, so the camera culls it whenever its exit is out of view.
 import * as THREE from 'three';
 import * as LAYOUT from './island-layout.js';
 import { Parts } from './outdoor/parts.js';
@@ -33,6 +34,8 @@ import { frontsSteps } from './plaza/east-fronts.js';
 import { BLOCKS as EAST_BLOCKS } from './plaza/east-plan.js';
 import { groundsSteps } from './sports/grounds.js';
 import { walkSteps, kerbWalks } from './east-coast/walk.js';
+import { planting as officeLawns } from './office-quarter/grounds.js';
+import { mergeStaticSteps } from './merge-static.js';
 import { BANDS } from './bands-plan.js';
 
 export { BANDS };
@@ -93,7 +96,12 @@ const BUILD = {
   *westCoast(b, isl, out, s) {
     const clip = band(b.rects);
     for (const id of b.pave || []) walk(clip.paver(s.pv), box(WEST.walks[id].rect));
-    yield* coastSteps(isl, { at, clip: clip.has, data: WEST, into: s.p });
+    yield* coastSteps(isl, { at, clip: clip.has, data: { ...WEST, coast: [] }, into: s.p }); // the sea wall is not in it
+  },
+  *officeLawns(b, isl, out, s) {
+    const clip = band(b.rects),
+      [x0, x1] = [Math.min(...b.rects.map((r) => r[0])), Math.max(...b.rects.map((r) => r[1]))];
+    yield* officeLawns(clip.parts(s.p), [x0, x1]);
   },
   *lawn(b, isl, out, { p, pv }) {
     for (const [r, sides] of b.walks || []) {
@@ -105,7 +113,7 @@ const BUILD = {
         p,
         r,
         kinds.split(',').map((k) => TREES[k]),
-        { seed: (b.seed || 300) + i * 7, pitch },
+        { seed: (b.seed || 300) + i * 7, pitch, under: 1 },
       );
   },
   *fronts(b, isl, out, s) {
@@ -115,13 +123,15 @@ const BUILD = {
       const a = k.at ?? (k.face === 'w' || k.face === 'e' ? (rect[2] + rect[3]) / 2 : (rect[0] + rect[1]) / 2);
       return { wall: row.wall, ...k, at: a, rect, row };
     });
-    const fronts = yield* frontsSteps(s.p, s.lights, blocks);
+    const walls = new Parts(); // the walls throw their shadows, as the skyline's boxes they replace did
+    const fronts = yield* frontsSteps(s.p, s.lights, blocks, { caster: walls, casts: () => true });
     fronts.meshes(isl);
+    walls.build(isl);
     out.evening.push(fronts.evening);
   },
 };
 
-// the collectors the island-frame bands share
+// the collectors the island-frame builders of one band share
 function shared() {
   const p = new Parts(),
     pv = paver(),
@@ -156,16 +166,23 @@ export function* bandSteps(root, chunk) {
     isl.traverse((o) => o.isMesh && (n += (o.geometry.index?.count ?? o.geometry.attributes.position.count) / 3));
     return Math.round(n);
   };
-  const s = shared();
   for (const b of BANDS[chunk] || []) {
-    const t0 = tris();
-    yield* BUILD[b.by](b, isl, out, s);
-    stats.push({ by: b.by, tris: tris() - t0 }); // what it built into meshes of its own
+    // each band in a group of its own, merged by material and named, so the place's merge leaves it apart and the
+    // camera culls it whole when it is out of view (it shows only near its exit)
+    const g = new THREE.Group(),
+      s = shared(),
+      t0 = tris();
+    isl.add(g);
+    yield* BUILD[b.by](b, g, out, s);
+    s.build(g, out);
+    // blocks' fronts stand tall and show from most of the place: they merge with the place's own meshes instead
+    if (b.by !== 'fronts') {
+      yield* mergeStaticSteps(g);
+      g.traverse((o) => o.isMesh && !o.name && (o.name = `band:${b.by}`));
+    }
+    stats.push({ by: b.by, tris: tris() - t0, meshes: g.children.length });
     yield;
   }
-  const t0 = tris();
-  s.build(isl, out);
-  stats.push({ by: 'shared', tris: tris() - t0 });
   root.userData.bandStats = stats;
   return {
     stats,
