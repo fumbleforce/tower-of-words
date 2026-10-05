@@ -23,3 +23,26 @@ export function setRole(cast, role, person) {
   cast.roles[role] = person;
   return cast;
 }
+
+// A cast from a spec: a set name, role=person pairs, or both ('default', 'team_lead=rei,sales=emi',
+// 'default,sales=emi'). ?cast=<spec> gives a new game this cast (the tests' --cast); a saved game keeps its own.
+export function parseCast(spec) {
+  const parts = String(spec)
+    .split(',')
+    .map((s) => s.trim())
+    .filter(Boolean);
+  const sets = parts.filter((p) => !p.includes('='));
+  if (sets.length > 1) throw new Error(`cast ${spec}: more than one set`);
+  const cast = castSet(sets[0] || 'default');
+  for (const p of parts.filter((p) => p.includes('='))) {
+    const [role, person] = p.split('=').map((s) => s.trim());
+    if (!person) throw new Error(`cast ${spec}: ${role} has no person`);
+    setRole(cast, role, person);
+  }
+  return cast;
+}
+// what a new game starts with: the cast ?cast= asks for, else the default
+export function newCast() {
+  const q = typeof location !== 'undefined' ? new URLSearchParams(location.search).get('cast') : null;
+  return q ? parseCast(q) : defaultCast();
+}
