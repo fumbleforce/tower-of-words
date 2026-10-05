@@ -1,0 +1,72 @@
+{
+ "_about": "Reference faces for tools/imgqa_scene.py: several per person, CCIP-matched against every face in a scene render. Public references only (art/approved, game3d portraits). More references, and the private-only people, are in island/private/rewards/tools/imgqa-cast.json (git-ignored, same shape, merged in when it exists; the tool finds the main checkout from a worktree). glasses = what this person wears in every picture. only_in: the person is only looked for in files whose path has one of those words. thresh: a person's own thresholds over THRESH in tools/imgqa_scene.py (Eric's approved portrait is ink-style and the renders are not, so his distances run higher); cost_bonus is taken off his distance when picking who is who for a face with stubble. A reference 'file#1' is the second biggest face of a picture. hair_refs: the references the hair colour is measured on. hair_check false: not checked (cap, no approved look).",
+ "people": {
+  "eric": {
+   "sex": "m",
+   "glasses": true,
+   "refs": [
+    "art/approved/mc/eric-eric-ink-2001-neutral.webp",
+    "art/approved/mc/eric-eric-ink-2001-surprised.webp",
+    "art/approved/mc/eric-eric-ink-2001-tired.webp"
+   ],
+   "hair_refs": [
+    "art/approved/mc/eric-eric-ink-2001-neutral.webp"
+   ],
+   "thresh": {
+    "ccip": [
+     0.22,
+     0.3
+    ],
+    "unknown": 0.32,
+    "hair_dE": [
+     28,
+     45
+    ],
+    "cost_bonus": 0.08
+   }
+  },
+  "mio": {
+   "sex": "f",
+   "glasses": true,
+   "refs": [
+    "art/approved/mio/mio-after.webp",
+    "game3d/assets/portraits/mio-neutral.webp",
+    "game3d/assets/portraits/mio-smile.webp",
+    "game3d/assets/portraits/mio-embarrassed.webp",
+    "game3d/assets/portraits/mio-deadpan.webp"
+   ],
+   "hair_kind": "green",
+   "skin": "pale"
+  },
+  "emi": {
+   "sex": "f",
+   "glasses": true,
+   "refs": [
+    "game3d/assets/portraits/emi-neutral.webp"
+   ],
+   "skin": "pale"
+  },
+  "aoi": {
+   "sex": "f",
+   "glasses": false,
+   "skin": "pale",
+   "refs": [
+    "game3d/assets/portraits/aoi-neutral.webp"
+   ]
+  },
+  "kuro": {
+   "sex": "f",
+   "glasses": true,
+   "refs": [
+    "game3d/assets/portraits/kuro-neutral.webp"
+   ]
+  },
+  "rei": {
+   "sex": "f",
+   "glasses": false,
+   "refs": [
+    "game3d/assets/portraits/rei-neutral.webp"
+   ]
+  }
+ }
+}
