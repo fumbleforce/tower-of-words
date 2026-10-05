@@ -130,6 +130,32 @@ def sdxl_refine(image_name, prompt, negative, ckpt, denoise=0.4, steps=28, cfg=5
     }
 
 
+def _imagegen_tools_dir():
+    """The tools/ folder that holds imagegen/ (untracked, so a worktree's copy of tools/ may not have it: use the main checkout's)."""
+    here = os.path.dirname(os.path.abspath(__file__))
+    main = here.split(os.sep + '.claude' + os.sep + 'worktrees' + os.sep)[0] + os.sep + 'tools'
+    return next((d for d in (here, main) if os.path.isdir(os.path.join(d, 'imagegen'))), None)
+
+
+def log_render(workflow, out_path, elapsed=None):
+    """Show this render in Jørgen's image gen dashboard (tools/imagegen/agentlog.py): prompt, negative, seed, size, steps,
+    cfg, sampler, model and who made it. Logging only: it never raises and never changes the render."""
+    try:
+        import comfy_log
+        d = _imagegen_tools_dir()
+        if d is None:
+            return None
+        if d not in sys.path:
+            sys.path.append(d)
+        from imagegen import agentlog
+        return agentlog.record(comfy_log.parse_workflow(workflow), out_path, elapsed)
+    except BaseException as e:  # a logging failure must not break a render
+        if isinstance(e, (KeyboardInterrupt, SystemExit)):
+            raise
+        print(f'comfy: render not logged ({type(e).__name__}: {e})', file=sys.stderr)
+        return None
+
+
 def run(workflow, out_path, timeout=900):
     """Queue a workflow, wait for it, save the first output image to out_path."""
     yield_to_dashboard()
@@ -148,6 +174,7 @@ def run(workflow, out_path, timeout=900):
                     os.makedirs(os.path.dirname(out_path) or '.', exist_ok=True)
                     with open(out_path, 'wb') as f:
                         f.write(_get('/view?' + q))
+                    log_render(workflow, out_path, round(time.time() - t0, 1))
                     return out_path
         time.sleep(1.5)
     raise TimeoutError(pid)
