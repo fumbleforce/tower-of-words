@@ -1,0 +1,124 @@
+{
+ "title": "Mio: a new 3D model, made the way Kuro, Aoi and Emi were",
+ "date": "2026-10-06",
+ "by": "Claude (mio-meshy agent)",
+ "status": "open",
+ "question": "The sheets marked ChatGPT pictures are pictures; every other sheet is a real rigged model (the live viewer, first link, plays the same files the game would load). Should mio-2 replace Mio's model in the game, and in which colours: as Meshy painted her (mio-2), with the hair and hoodie turned to the portrait's dark green (mio-2-green), or with the other texture pass (mio-2-d1)?",
+ "multi": false,
+ "media": [
+  {
+   "image": "art/parts/mio-meshy-2/sheets/viewer-now.webp",
+   "caption": "Real models in the live viewer, built by the game's own loader: mio-2 (left) beside Mio now (right, her model in the game today with the game's colours), idle, walk, sit and her face. Your words: \"can we redo Mei's chibi, her design is falling behind in quality, it is not as accurate as the others\". The idle is the approved relaxed-3; walk, run and sit are Meshy's, as for Kuro, Aoi and Emi. Turn and play them in the viewer (first link)."
+  },
+  {
+   "image": "art/parts/mio-meshy-2/sheets/viewer-cast.webp",
+   "caption": "Real models: mio-2 beside the in-game Kuro, Aoi and Emi, idle and walking. 1.12 tall, as Mio is now and as Kuro. Her head sits between Kuro's and Aoi's in size; the wide hoodie is the portrait's."
+  },
+  {
+   "image": "art/parts/mio-meshy-2/sheets/viewer-textures.webp",
+   "caption": "Real models: the three colour versions on the same model and rig. mio-2: Meshy's texture styled from picture h1 (the hair and hoodie came out dark navy, hue 213). mio-2-green: the same texture with every dark navy texel turned 20 degrees toward green, to the portrait's dark green (hair #13292f, hoodie #09232a, hue 193); shading kept, face, skin, streaks and soles untouched; the trousers turn green too. mio-2-d1: the other texture pass, styled from picture d1 (no mouth line, less of the lighter green under the hair)."
+  },
+  {
+   "image": "art/parts/mio-meshy-2/sheets/viewer-green.webp",
+   "caption": "Real models: mio-2-green beside Mio now, the same views."
+  },
+  {
+   "image": "art/parts/mio-meshy-2/sheets/game-train.webp",
+   "caption": "In the real game (?mio=meshy2, day 1 played by the fast test): mio-2 seated on the train with her laptop on her lap (the seat and lap as for Mio now), the story's camera step on her, standing by Eric, and Mio now at the same moment. The whole day plays through with her: the fast test passes with ?mio=meshy2 (1366x860, 0 overlaps, 0 spins, no page errors)."
+  },
+  {
+   "image": "art/parts/mio-meshy-2/sheets/game-office.webp",
+   "caption": "In the real game: mio-2 at lunch in the machine room, seated on the crate with her lunch on her lap (the same sit as on the train), with the story's camera on her, and standing by the racks."
+  },
+  {
+   "image": "art/parts/mio-meshy-2/game/meshy2-1366x860/train-to-platform.webp",
+   "caption": "In the real game, a clip (it moves): mio-2 on the train, standing up, and walking off along the platform with Eric. The fast test runs the day sped up, so she moves faster than in play."
+  },
+  {
+   "image": "art/parts/mio-meshy-2/game/meshy2-1366x860/office.webp",
+   "caption": "In the real game, a clip (it moves): the office and the machine room with mio-2, sped up as above."
+  },
+  {
+   "image": "art/parts/mio-meshy-2/sheets/inputs.webp",
+   "caption": "ChatGPT pictures from here to the next note. One chat in ChatGPT's image model (openai/gpt-5.4-image-2 on OpenRouter), as for Kuro, Aoi and Emi. Step 1 attached these two: her approved portrait and your Mio chibi."
+  },
+  {
+   "image": "art/parts/mio-meshy-2/sheets/steps.webp",
+   "caption": "ChatGPT pictures, every take in order, one each, your words as written: 1 \"make a 3d chibi anime character in the style of the attached image\" (a1), 2 \"Simplify female character a LOT to match the detail level of the other chibi, with open eyes\" (b1). Step 3 branched: \"Simpler head model, no glasses, no lanyard, no headphones\" (c1, the props rule) and \"Simpler head model, no lanyard, no headphones\" (g1, glasses kept). Then your angle prompt on each (d1 after c1, h1 after g1). The head came out at 0.38 of her height, under Aoi's 0.41, so no head step. 6 takes, $1.52."
+  },
+  {
+   "image": "art/parts/mio-meshy-2/sheets/shape2.webp",
+   "caption": "Renders of real models from here on (Blender on the CPU, so lit flatter than Kuro's EEVEE sheets). mio-2's first shape from d1: Meshy image-to-3D, smart topology (meshy-t2), 1,050 polygons, A-pose, no texture, 5 credits. No bun at the back; not used."
+  },
+  {
+   "image": "art/parts/mio-meshy-2/sheets/shape3.webp",
+   "caption": "mio-3's shape from h1 (glasses kept), same settings, 5 credits: the glasses came out as a solid block over the eyes and the bun is missing. Not textured. The glasses stay off the model, as for Kuro and Emi."
+  },
+  {
+   "image": "art/parts/mio-meshy-2/sheets/shape2b.webp",
+   "caption": "mio-2 again from d1, same settings (5 credits): the messy bun at the back, on her left side, as in the picture. Kept: every mio-2 version is this shape."
+  },
+  {
+   "image": "art/parts/mio-meshy-2/sheets/uv.webp",
+   "caption": "The face-first UV layout (Aoi's uv_bl.py, zmin=0.6 seed=0.72): the front of her face as one piece (47 polygons, red) at 3 times the detail of the rest. Then Meshy retexture on that mesh, keep the UVs, lighting removed, no PBR, 10 credits each: styled from h1 (mio-2) and from d1 (mio-2-d1). The h1 one was a try at painting her glasses on; Meshy left them off."
+  },
+  {
+   "image": "art/parts/mio-meshy-2/sheets/turn-texg2b.webp",
+   "caption": "mio-2 (texture from h1) turned round, with face close-ups. The face is clean in one piece: no dark marks under the jaw, so no cheek fix."
+  },
+  {
+   "image": "art/parts/mio-meshy-2/sheets/turn-tex2b.webp",
+   "caption": "mio-2-d1 (texture from d1) turned round. Meshy credits for the round: 43 (three shapes 15, two textures 20, the auto-rig 5, Chair_Sit_Idle_F 3); balance 146 after."
+  }
+ ],
+ "options": [
+  {
+   "id": "mio-2",
+   "label": "mio-2 (as Meshy painted her)",
+   "image": "art/parts/mio-meshy-2/viewer/textures/idle-front.png",
+   "images": [
+    "art/parts/mio-meshy-2/renders/texg2b/face.png",
+    "art/parts/mio-meshy-2/renders/texg2b/l45.png",
+    "art/parts/mio-meshy-2/renders/texg2b/back.png",
+    "art/parts/mio-meshy-2/pics/h1.png"
+   ],
+   "note": "Shape from d1, texture styled from h1. Meshy smart topology 1,050, A-pose; our face-first UVs; Meshy retexture; Meshy's auto-rig (height 1.1), walk, run and Chair_Sit_Idle_F; the relaxed-3 idle. 1.12 tall. In the game with ?mio=meshy2."
+  },
+  {
+   "id": "mio-2-green",
+   "label": "mio-2-green (hair and hoodie to the portrait's green)",
+   "image": "art/parts/mio-meshy-2/viewer/green/idle-front.png",
+   "images": [
+    "art/parts/mio-meshy-2/viewer/green/idle-face.png",
+    "art/parts/mio-meshy-2/viewer/green/idle-q.png",
+    "art/parts/mio-meshy-2/viewer/green/walk-side.png"
+   ],
+   "note": "mio-2 with a colour tweak only (art/candidates/mio-meshy-2/green.py): dark navy texels turned 20 degrees toward green. The model is untouched."
+  },
+  {
+   "id": "mio-2-d1",
+   "label": "mio-2-d1 (the other texture pass)",
+   "image": "art/parts/mio-meshy-2/renders/tex2b/front.png",
+   "images": [
+    "art/parts/mio-meshy-2/renders/tex2b/face.png",
+    "art/parts/mio-meshy-2/renders/tex2b/l45.png",
+    "art/parts/mio-meshy-2/pics/d1.png"
+   ],
+   "note": "The same shape and rig with Meshy's texture styled from d1 (10 credits)."
+  }
+ ],
+ "links": [
+  {
+   "label": "Live 3D: mio-2 beside Mio now, the colour versions, and beside Kuro, Aoi and Emi (idle, walk, run, sit; turn, zoom)",
+   "href": "reviews/crowd-pilot-1/viewer.html?cfg=../mio-meshy-2/viewer.json&s=now&m=walk"
+  },
+  {
+   "label": "Play day 1 with mio-2 (?mio=meshy2)",
+   "href": "https://fumbleforce.github.io/tower-of-words/game3d/?mio=meshy2"
+  },
+  {
+   "label": "Kuro's round, the method (kuro-meshy-orig-3)",
+   "href": "bible/#review/kuro-meshy-orig-3"
+  }
+ ]
+}
