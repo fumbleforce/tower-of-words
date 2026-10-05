@@ -20,7 +20,7 @@ import time
 import uuid
 
 SERVICE = "amakawa-codex-wake.service"
-HEADER = re.compile(r"^## ([CG]-\d+) · [^\n]+$", re.MULTILINE)
+HEADER = re.compile(r"^## ([CG]P?(?:-[a-z0-9]+)?-\d+) · [^\n]+$", re.MULTILINE)
 
 
 def entries(text):

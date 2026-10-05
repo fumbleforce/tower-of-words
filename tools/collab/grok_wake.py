@@ -23,7 +23,7 @@ import subprocess
 import sys
 import time
 
-HEADER = re.compile(r"^## ([CXG]-\d+) · [^\n]+$", re.MULTILINE)
+HEADER = re.compile(r"^## ([CXG]P?(?:-[a-z0-9]+)?-\d+) · [^\n]+$", re.MULTILINE)
 SETTLE_SECONDS = 2
 
 
