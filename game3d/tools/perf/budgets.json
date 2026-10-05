@@ -98,12 +98,12 @@
         }
       },
       "sports": {
-        "calls": 63,
-        "tris": 110267,
+        "calls": 65,
+        "tris": 109861,
         "gpu": {
           "medianMs": 16.7,
           "p99Ms": 16.8,
-          "build": "1005-0709-c9e572be"
+          "build": "1005-0848-b1b04375"
         }
       },
       "office_quarter": {
@@ -251,12 +251,12 @@
         }
       },
       "sports": {
-        "calls": 54,
-        "tris": 102691,
+        "calls": 55,
+        "tris": 103007,
         "gpu": {
           "medianMs": 16.7,
           "p99Ms": 16.8,
-          "build": "1005-0709-c9e572be"
+          "build": "1005-0848-b1b04375"
         }
       },
       "office_quarter": {
@@ -404,12 +404,12 @@
         }
       },
       "sports": {
-        "calls": 61,
-        "tris": 105204,
+        "calls": 62,
+        "tris": 105536,
         "gpu": {
           "medianMs": 16.7,
           "p99Ms": 16.8,
-          "build": "1005-0709-c9e572be"
+          "build": "1005-0848-b1b04375"
         }
       },
       "office_quarter": {

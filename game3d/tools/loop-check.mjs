@@ -40,6 +40,13 @@ const LEGS = [
     [
       [0, 9.5],
       [0, 0],
+      // in at the tennis courts' gate, up the court past the net and back out (the camera frames the court)
+      [31.3, -1.4],
+      [31.3, -4.7],
+      [26, -14],
+      [27, -21],
+      [31.3, -4.7],
+      [31.3, -1.4],
       [43.2, 0],
     ],
     'east_coast',

@@ -1,0 +1,34 @@
+{
+  "title": "The west tennis court, through its open gate",
+  "date": "2026-10-05",
+  "by": "claude-agent:club-places",
+  "caption": "For the tennis club (day 4 in the plan). The courts' gate off the courts walk stands open, and the west court with the run-off round it is walked. On the court the camera looks up it and holds the whole court, both sides of the net. Reach it from the sports ground (?place=sports, then east along the courts walk). The clubhouse stays a front.",
+  "sections": [
+    {
+      "title": "The gate",
+      "caption": "Before: two mesh leaves shut with a chain and lock. After: the leaves swung in against the inside of the fence, the chain hanging loose off the west post.",
+      "images": [
+        {"id": "before-gate-desk", "image": "game3d/shots/club-before/courts-gate-desk.png", "caption": "Before, desktop"},
+        {"id": "before-gate-phone", "image": "game3d/shots/club-before/courts-gate-phone.png", "caption": "Before, phone"},
+        {"id": "after-gate-desk", "image": "game3d/shots/club-tennis/gate-look-desk.png", "caption": "After, desktop"},
+        {"id": "after-gate-phone", "image": "game3d/shots/club-tennis/gate-look-phone.png", "caption": "After, phone"}
+      ]
+    },
+    {
+      "title": "On the court",
+      "caption": "The whole court in one frame from the gate and from the net. By the net's west post along the fence: the players' bench, a wire basket of balls on legs, and the score display on its post facing the court.",
+      "images": [
+        {"id": "after-in-desk", "image": "game3d/shots/club-tennis/gate-desk.png", "caption": "Inside the gate, desktop"},
+        {"id": "after-in-phone", "image": "game3d/shots/club-tennis/gate-phone.png", "caption": "Inside the gate, phone"},
+        {"id": "after-net-desk", "image": "game3d/shots/club-tennis/net-desk.png", "caption": "At the net, desktop"},
+        {"id": "after-net-phone", "image": "game3d/shots/club-tennis/net-phone.png", "caption": "At the net, phone"},
+        {"id": "after-bench-desk", "image": "game3d/shots/club-tennis/bench-desk.png", "caption": "By the bench, desktop"},
+        {"id": "after-bench-phone", "image": "game3d/shots/club-tennis/bench-phone.png", "caption": "By the bench, phone"}
+      ]
+    }
+  ],
+  "links": [
+    {"label": "Play it", "href": "game3d/index.html?place=sports"},
+    {"label": "Places doc", "href": "docs/game/places.md"}
+  ]
+}
