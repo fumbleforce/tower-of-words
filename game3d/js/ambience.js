@@ -10,7 +10,7 @@
 //   outdoors  sparrows and a light wind by day, crickets after work (and the forecourt keeps the station's air);
 //           a flock of pigeons scattering near Eric is heard (creatureCall)
 // Beds loop as overlapping copies with an equal-power crossfade, so the seam never shows (MP3 padding included).
-import { ctx, running, bus, load, isMuted, onDip } from './sfx.js';
+import { ctx, running, bus, load, isMuted, onDip, titleQuiet } from './sfx.js';
 
 const BEDS = {
   train: 'bed_train',
@@ -192,6 +192,7 @@ function scene(game) {
   const hidden = game.player && !game.player.root.visible;
   if (hidden && document.body.classList.contains('trip') && game.liftFloor) return { lift: 1 };
   if (name === 'train') {
+    if (titleQuiet()) return {}; // no rattle under the title (menu.js)
     const st = p._st || {};
     if (st.v > trainV0) trainV0 = st.v;
     const speed = st.arrived ? 0 : st.v === undefined ? 1 : Math.max(0, Math.min(1, st.v / Math.max(1e-3, trainV0)));
