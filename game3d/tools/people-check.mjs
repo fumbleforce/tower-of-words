@@ -1,7 +1,8 @@
 // The People panel on day 2, before any place's story has been visited this session (issue #223): starts day 2
 // fresh (?day=2), opens People, then reloads and comes back through the title's Continue (a load) and opens it
 // again. Fails on a card whose name is a raw id ("mio", "guard") or that has no line about them (story/people.js),
-// or when someone met on day 1 has no card.
+// or when someone met on day 1 has no card, or when a card for someone with a portrait shows no face (or one that
+// didn't load). Each run also saves a close-up of the panel (<tag>-panel.png).
 //   node game3d/tools/people-check.mjs [w] [h]     writes game3d/shots/people-check/<w>x<h>/, prints PASS or FAIL
 import fs from 'node:fs';
 import path from 'node:path';
@@ -47,17 +48,39 @@ await withBrowserJob('people-check', async (b) => {
           id: li.dataset.id,
           name: li.querySelector('.nm')?.firstChild?.textContent.trim() || '',
           about: li.querySelector('.ab')?.textContent.trim() || '',
+          face: /url\(["']?([^"')]+)/.exec(li.querySelector('.pic .face')?.style.backgroundImage || '')?.[1] || '',
         })),
+        portraits: Object.keys((await import(new URL('js/ui/portrait-data.js', location.href).href)).PORTRAITS),
       };
     });
+    // every face shown has loaded (a broken one would leave the initial showing)
+    const loaded = await p.evaluate(
+      (srcs) =>
+        Promise.all(
+          srcs.map(
+            (s) =>
+              new Promise((ok) => {
+                const im = new Image();
+                im.onload = () => ok(im.naturalWidth > 0);
+                im.onerror = () => ok(false);
+                im.src = s;
+              }),
+          ),
+        ),
+      r.cards.map((c) => c.face).filter(Boolean),
+    );
+    await p.waitForTimeout(300);
     await p.screenshot({ path: path.join(out, tag + '.png') });
+    await p.locator('#peoplePanel .card').screenshot({ path: path.join(out, tag + '-panel.png') }).catch(() => {});
     console.log(`     ${tag}: met ${r.met.join(', ')}`);
     for (const c of r.cards) console.log(`     ${c.id}: "${c.name}" / "${c.about}"`);
     check(r.cards.length > 0, `${tag}: People lists someone`);
     for (const c of r.cards) {
       check(c.name && c.name !== c.id && !/^[a-z_]+$/.test(c.name), `${tag}: ${c.id} shows a name, not a raw id ("${c.name}")`);
       check(!!c.about, `${tag}: ${c.id} has a line about them`);
+      if (r.portraits.includes(c.id)) check(!!c.face, `${tag}: ${c.id} shows their portrait`);
     }
+    check(loaded.every(Boolean), `${tag}: every face in People loaded`);
     const shown = new Set(r.cards.map((c) => c.id));
     for (const id of ['mio', 'guard', 'kuroda', 'mori', 'kenji']) if (r.met.includes(id)) check(shown.has(id), `${tag}: ${id}, met on day 1, has a card`);
     await p.evaluate(() => document.querySelector('#peoplePanel .close')?.click());

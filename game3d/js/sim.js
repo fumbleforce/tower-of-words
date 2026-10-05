@@ -411,7 +411,7 @@ export function peopleData() {
       return { id, name: p.name, about: p.about, color: p.color, ...v, taught };
     });
 }
-export const peopleHTML = () => peopleCards(peopleData());
+export const peopleHTML = (faceOf) => peopleCards(peopleData(), faceOf);
 
 // ---------- QA ----------
 // every bond at a glance (fast test, console): { id: { step, pts, met, ready, remembers, facts, log } }
