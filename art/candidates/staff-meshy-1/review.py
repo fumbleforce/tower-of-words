@@ -37,6 +37,31 @@ P = {
        'one piece, Meshy retexture styled from d1, auto-rig at 1.1 m, Meshy sit. Head share 0.47. In the game at 1.09 '
        'tall in place of his code-built body. 23 Meshy credits; five pictures $1.23.',
   q='Is Mori right?'),
+ 'kenji': dict(
+  name='Kenji', he='he', his='his', pic='d1', attempt='kenji-1',
+  steps='ChatGPT pictures. Every take, in order, with your words as written: 1 "make a 3d chibi anime character in the '
+        'style of the attached image" (a1, a2; a1 is closer to his soft, pudgy build, so it went on), 2 "Simplify male '
+        'character a LOT to match the detail level of the other chibi, with open eyes" (b1), 3 "Simpler head model, no '
+        'lanyard, no badge" (c1: lanyard and badge gone; he also came out slimmer than his portrait), then your angle '
+        'prompt with "he" and "his" (d1). Head share in d1: 0.37 of his height (Eric 0.46, Kuro 0.41, Aoi 0.40, Emi '
+        '0.43), so no head-size follow-up. 5 takes, $1.23.',
+  shape='Meshy\'s previews; first roll, kept. His hair spikes lean to one side, as in d1.',
+  uv='40 polygons, red; the biggest front-facing piece',
+  faces='From below the chin in the texture\'s own colours, looking for dark marks like Kuro\'s: none. There are thin '
+        'pale lines along the edge of his jaw (lighter than the skin, not dark). The texture is in the game as Meshy '
+        'painted it.',
+  measure='Head share on the models (straight-on, flat colour, rest pose, each figure at the same height): Eric 0.46, '
+          'Kuro 0.41, Aoi 0.40, Emi 0.43, Kenji 0.46. As with Mori, the model\'s head came out bigger than the '
+          'picture\'s (0.37); it matches Eric\'s. Hands, counted from the rig\'s hand bones: 0.102 of his height, about '
+          'Eric\'s (0.107) and Mio\'s (0.105); Aoi\'s were 0.108 before the game scaled them to 0.75. His are left as '
+          'Meshy made them, since they match Eric\'s; say if they should be scaled like Aoi\'s.',
+  game='Meshy auto-rig at 1.1 m, 5 credits, and Meshy\'s Chair_Sit_Idle_F for his desk, 3 credits.',
+  credits='Meshy credits for Kenji: 23 (shape 5, texture 10, rig 5, sit 3); balance 320 after him.',
+  ingame='In the game (day 1, 1366x860, test mode): B2 from above, and Kenji at his desk (Meshy sit) talking to Eric.',
+  note='The rigged model from d1 (chat a1, b1, c1, d1): smart topology, 1,050 polygons, our UV layout with the face in '
+       'one piece, Meshy retexture styled from d1, auto-rig at 1.1 m, Meshy sit. Head share 0.46. Slimmer than his '
+       'portrait. In the game at 1.12 tall in place of his code-built body. 23 Meshy credits; five pictures $1.23.',
+  q='Is Kenji right?'),
 }
 
 
