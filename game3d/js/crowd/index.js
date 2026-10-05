@@ -256,7 +256,7 @@ export async function attachCrowd(game, place, name) {
     const list = bodies(game),
       eric = list.find((b) => b.root === game.player.root);
     const wide = scene ? 0.9 * K : 0;
-    const ctx = { g, K, eric, ends, place };
+    const ctx = { g, K, eric, ends, place, list };
     let n = 0;
     for (const b of pool) {
       if (b.state === 'off') continue;
