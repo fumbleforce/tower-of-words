@@ -15,6 +15,9 @@ faces and angles, so this finds EVERY face (imgutils anime face detection) and m
   skin     median CIELAB colour of the cheeks against the references (Mio is pale; flags tan).
   ponytail Eric only: the tagger sees a ponytail on the head crop or not. Not seeing one is "not measurable" (from the front
            it is hidden), so it goes to the visual pass instead of failing.
+  outfit   the women only (Aoi, Emi, Mio, Kuro): the approved skimpy outfit in the private cast json (CP-0013, "the clothing must be
+           consistent for the whole game"): colours of the torso and legs below the face and the tagger's garment words against
+           it; see the block under grade_face for what is measured, OUTFIT for the thresholds.
 It flags; the visual pass (looking at the picture next to the approved one) decides, and is written to <round>/identity.json.
 CPU only (CUDA hidden), about 2 s a face.
 
@@ -22,6 +25,8 @@ Usage: python3 tools/imgqa_scene.py <round> [<round> ...]   a round folder, or <
        python3 tools/imgqa_scene.py --all                   every round there (not user/, not imagegen/)
        python3 tools/imgqa_scene.py img.webp ... --out DIR  single images
        python3 tools/imgqa_scene.py <round> --regrade       grade the stored measurements again (new thresholds or cast json)
+       python3 tools/imgqa_scene.py <round> --outfit        only add the outfit check to the stored reports (no CCIP / hair again)
+       python3 tools/imgqa_scene.py outfit [who]            per person and round: pictures in the approved outfit and the ones not, why
        python3 tools/imgqa_scene.py report                  per round and per person counts from the written reports, the worst
                                                             Mio and Eric pictures, and the sequences.json steps they sit in
 Writes <round>/imgqa-scene.json, <round>/imgqa-scene-sheet[-N].webp (the pictures with face boxes, warn and fail first) and
@@ -183,6 +188,7 @@ class Cast:
             for w, d in json.load(open(private))['people'].items():
                 if w in self.people:
                     self.people[w]['refs'] = self.people[w]['refs'] + d['refs']
+                    self.people[w].update({k: v for k, v in d.items() if k in ('outfit',)})
                 else:
                     self.people[w] = d
         self.refs = {}
@@ -300,8 +306,193 @@ def grade_face(f, p):
         else:
             s['status'], s['note'] = 'pass', 'shown, not graded (only the pale people are)'
         st.append(s['status'])
+    o = f.get('outfit')
+    if o and p.get('outfit'):
+        st.append('pass' if grade_outfit(o, p) == 'na' else o['status'])
     f['status'] = imgqa.worst(*st)
     return f['status']
+
+
+# ------------------------------------------------------------------------------------------------------------------ outfit
+# Jørgen (CP-0013): "in skimpy, the clothing must be consistent for the whole game". Each woman has one approved outfit in the
+# private cast json (island/private/rewards/tools/imgqa-cast.json, `outfit`): its parts, each with a region (torso / legs), a colour
+# in CIELAB with a tolerance, whether it is required, and the tagger words that do not belong to it. Per identified person this
+# samples the torso and legs below the matched face (regions scaled from the face box), drops skin, and measures
+#   coverage  per part: share of the clothing pixels of its region within `tol` of the approved colour
+#   foreign   share of the clothing pixels farther than 1.4 x tol from every approved part colour of that region, with the
+#             dominant such colour named (beige, cream, dark green ...)
+#   tags      wd14 on the person crop: garment words (skirt, jacket, denim, crop top ...) at 0.25 or more; a word in the
+#             person's `forbid_tags`, or a colour word (brown_shorts) outside her `colour_words`, at 0.5 or more is a warn;
+#             a required part's `need_tags` (jacket, denim ...) below 0.3 while its part of the body is in the picture is a warn
+# Not measured: cut and fit (jeans or hotpants, zipped or open); only colour and what the tagger sees. A region more than half
+# outside the picture, or bare skin, is not graded. Thresholds in OUTFIT; what they were calibrated on in OUTFIT_CALIBRATION.
+OUTFIT = {
+    'cover': (0.10, 0.03),       # required part: coverage at or above the first = pass, above the second = warn, else fail
+    'foreign': (0.14, 0.40),     # share of unmatched clothing pixels: up to the first = pass, up to the second = warn, else fail
+    'foreign_tol': 1.15,         # a pixel is foreign beyond this many tolerances from every part of its region
+    'min_visible': 0.5,          # share of a region inside the picture for it to be graded
+    'min_cloth': 0.12,           # share of a region that is clothing (not skin) for it to be graded: else bare / hidden
+    'forbid_tag': 0.5,           # a forbidden garment word at this probability = warn
+    'need_tag': 0.3,             # a part's need_tags words must reach this when its region is in the picture, else warn
+}
+COLOUR_WORDS = ('black', 'white', 'grey', 'gray', 'red', 'blue', 'green', 'teal', 'aqua', 'cyan', 'yellow', 'orange', 'pink', 'purple',
+                'brown', 'beige', 'tan', 'khaki', 'cream', 'navy')
+# Calibrated 2026-10-05. The approved set (skimpy/sets-1: Aoi 1, Emi 1, Mio 7, Kuro 3 pictures) passes whole, and so do the Aoi
+# round-1 gate pictures that show the white tank and denim shorts (the palette's tones were widened until they did). Known
+# offenders it flags: Mio's copier pictures (day1/consistency-2 r1-copier-*: black tank + beige or brown skirt or shorts: tagger
+# `skirt` 0.97, `brown_shorts` 0.72, no jacket), Emi in day1/extras-1 r2-lift-calm-7303 (no blazer: tagger sees no jacket; the
+# cream blouse itself is NOT separable: its Lab is [93, 4, 7] against the approved white [92, 1, 1] and warm office light
+# makes the approved white read [92, 1, 10], so white and cream are one family here), Aoi with a green varsity jacket
+# tied at the waist or worn open (day1/consistency-2 ribs/low-arch, gate-search-1 r3+, gate-search-2: tagger `jacket` 0.9+,
+# `clothes_around_waist` 0.5 to 0.97, `green_jacket`, dark teal 30 to 60 % of the torso). The colour test is weak where a
+# partner's dark uniform or the room fills the region; the tagger words are the stronger evidence.
+OUTFIT_CALIBRATION = ('approved set passes; flags Mio copier skirt/shorts, Emi 7303 (no blazer; cream blouse not separable from '
+                      'white), Aoi jacket (tied or worn); see the comment above OUTFIT in tools/imgqa_scene.py')
+GARMENT_WORDS = ('skirt', 'shorts', 'pants', 'jeans', 'denim', 'jacket', 'blazer', 'coat', 'shirt', 'blouse', 'top', 'camisole',
+                 'dress', 'vest', 'sweater', 'cardigan', 'hoodie', 'bra', 'choker', 'headphones', 'midriff', 'navel', 'cleavage',
+                 'around_waist', 'uniform', 'tie', 'lanyard', 'bikini', 'swimsuit', 'towel', 'robe', 'apron', 'leggings', 'pantyhose')
+
+
+def outfit_regions(box, W, H):
+    """{region: (x0, y0, x1, y1, visible)}: torso = chest to belly, legs = hips down, scaled from the face box;
+    visible = share of the region inside the picture."""
+    x0, y0, x1, y1 = box
+    fw, fh = x1 - x0, y1 - y0
+    cx = (x0 + x1) / 2
+    out = {}
+    for name, (a, b, wide) in dict(torso=(.5, 2.4, 1.2), legs=(2.8, 4.4, 1.3)).items():
+        ya, yb, xa, xb = y1 + a * fh, y1 + b * fh, cx - wide * fw, cx + wide * fw
+        vis = max(0, min(yb, H) - max(ya, 0)) * max(0, min(xb, W) - max(xa, 0)) / ((yb - ya) * (xb - xa))
+        out[name] = (xa, ya, xb, yb, vis)
+    return out
+
+
+def skin_like(L, skin):
+    """Skin and its shaded / lit tones: near the face's own colour, or the hue of skin (pink-red to orange, hue -30 to 68 degrees, at
+    chroma 13 or more, so white in shadow and cream, hue 75 and up, stay clothing)."""
+    near = np.linalg.norm(L - skin, axis=-1) < 12 if skin is not None else np.zeros(len(L), bool)
+    hue = np.degrees(np.arctan2(L[:, 2], L[:, 1]))
+    return near | ((hue > -30) & (hue < 68) & (np.hypot(L[:, 1], L[:, 2]) >= 13) & (L[:, 0] > 25))
+
+
+def colour_name(c):
+    """A plain word for a CIELAB colour: for the report only."""
+    L, a, b = c
+    ch = float(np.hypot(a, b))
+    if L < 22:
+        return 'black'
+    if ch < 9:
+        return ('cream' if b > 5.5 else 'white') if L > 80 else 'light grey' if L > 62 else 'grey' if L > 38 else 'dark grey'
+    hue = float(np.degrees(np.arctan2(b, a))) % 360
+    tone = 'dark ' if L < 38 else 'light ' if L > 72 else ''
+    if hue < 20 or hue >= 340:
+        return tone + ('pink' if L > 60 else 'red')
+    if hue < 50:
+        return 'cream' if (L > 80 and ch < 22) else 'beige' if (L > 62 and ch < 32) else tone + 'brown'
+    if hue < 95:
+        return 'cream' if (L > 80 and ch < 22) else tone + 'yellow-brown' if L < 62 else 'yellow'
+    if hue < 160:
+        return tone + 'green'
+    if hue < 215:
+        return tone + 'teal'
+    if hue < 290:
+        return 'denim blue' if 45 < L < 78 else tone + 'blue'
+    return tone + 'purple'
+
+
+def outfit_tags(pil, box):
+    """wd14 garment words (0.25 or more) on the person: the face box grown to take the head and the body below it."""
+    from imgutils.tagging import get_wd14_tags
+    x0, y0, x1, y1 = box
+    fw, fh = x1 - x0, y1 - y0
+    W, H = pil.size
+    crop = pil.crop((int(max(0, x0 - 1.8 * fw)), int(max(0, y0 - .4 * fh)), int(min(W, x1 + 1.8 * fw)), int(min(H, y1 + 6.5 * fh))))
+    _, general, _ = get_wd14_tags(crop, model_name='SwinV2_v3')
+    return {k: round(float(v), 2) for k, v in sorted(general.items(), key=lambda kv: -kv[1])
+            if v >= 0.25 and any(w in k for w in GARMENT_WORDS)}
+
+
+def measure_outfit(img, pil, box, p, skin, tags=True):
+    """Raw outfit measurements of one identified person against the approved parts of `p['outfit']`."""
+    spec = p['outfit']
+    rgb = flat(img)
+    H, W = rgb.shape[:2]
+    res = dict(regions={}, tags=outfit_tags(pil, box) if tags else {})
+    for name, (xa, ya, xb, yb, vis) in outfit_regions(box, W, H).items():
+        parts = [q for q in spec['parts'] if q['region'] == name]
+        r = dict(visible=round(vis, 2))
+        res['regions'][name] = r
+        if vis < OUTFIT['min_visible']:
+            continue
+        ia, ib, ja, jb = max(0, int(ya)), min(H, int(yb)), max(0, int(xa)), min(W, int(xb))
+        px = rgb[ia:ib, ja:jb].reshape(-1, 3)
+        if img['cut']:
+            px = px[img['alpha'][ia:ib, ja:jb].reshape(-1) > 128]
+        if len(px) < 200:
+            continue
+        L = imgqa.lab(px)
+        cloth = L[~skin_like(L, skin)]
+        r['cloth'] = round(len(cloth) / len(L), 2)
+        if r['cloth'] < OUTFIT['min_cloth'] or len(cloth) < 100:
+            continue
+        sub = cloth[np.random.default_rng(0).choice(len(cloth), min(len(cloth), 5000), replace=False)]
+        def dist(q):  # to the nearest of the part's colours (`lab` is one colour or a list: its lit and shaded tones)
+            c = np.atleast_2d(q['lab'])
+            w = np.array([q.get('wL', 1.0), 1, 1])  # whites and greys: lightness counts less, so shade is not another colour
+            return np.linalg.norm((sub[:, None] - c[None]) * w, axis=-1).min(1)
+        r['coverage'] = {q['name']: round(float((dist(q) <= q['tol']).mean()), 3) for q in parts}
+        # foreign = in none of the approved colours of the whole outfit, whichever region they belong to
+        far = np.stack([dist(q) > OUTFIT['foreign_tol'] * q['tol'] for q in spec['parts']]).all(0)
+        if spec.get('ignore_highlights'):  # specular white on skin and black cloth is not a garment
+            far &= ~((sub[:, 0] > 90) & (np.hypot(sub[:, 1], sub[:, 2]) < 14))
+        r['foreign'] = round(float(far.mean()), 3)
+        if far.sum() >= 30:
+            fc = imgqa.kmeans(sub[far], min(3, int(far.sum() // 30)))
+            big = max(fc, key=lambda c: (np.linalg.norm(sub[far] - c, axis=-1) < 15).sum())
+            r['foreign_colour'] = dict(lab=lab3(big), name=colour_name(big))
+    return res
+
+
+def grade_outfit(o, p):
+    """Statuses from the stored measurements, the approved spec and OUTFIT: per region, then the worst. Adds `status`, `why`."""
+    spec, why = p['outfit'], []
+    o.pop('tag_warn', None)
+    for name, r in o['regions'].items():
+        if 'coverage' not in r:
+            r['status'] = 'na'
+            r['note'] = 'not graded: ' + ('mostly outside the picture' if r['visible'] < OUTFIT['min_visible'] else
+                                          'bare skin or hidden' if 'cloth' in r else 'too few pixels')
+            continue
+        s = []
+        for q in spec['parts']:
+            if q['region'] == name and q.get('required', True):
+                c = r['coverage'][q['name']]
+                cs = imgqa.grade('cover', c, {'cover': q.get('cover', OUTFIT['cover'])})
+                s.append(cs)
+                if cs != 'pass':
+                    why.append(f"{name}: no {q['name']} ({c:.0%} of the clothing is that colour)")
+        fs = imgqa.grade('foreign', r['foreign'], OUTFIT)
+        s.append(fs)
+        if fs != 'pass':
+            fc = r.get('foreign_colour', {})
+            why.append(f"{name}: {r['foreign']:.0%} of the clothing is {fc.get('name', 'another colour')} {fc.get('lab', '')}, not in the approved outfit")
+        r['status'] = imgqa.worst(*s)
+    for q in spec['parts']:  # a garment the tagger should see when its part of the body is in the picture
+        if q.get('need_tags') and o['regions'].get(q['region'], {}).get('visible', 0) >= OUTFIT['min_visible']:
+            seen = max([v for t, v in o['tags'].items() if any(w in t for w in q['need_tags'])] or [0])
+            if seen < OUTFIT['need_tag']:
+                why.append(f"tagger does not see the {q['name']} ({'/'.join(q['need_tags'])}: {seen})")
+                o['tag_warn'] = True
+    for t, v in o['tags'].items():
+        word = t.split('_')[0]
+        if v >= OUTFIT['forbid_tag'] and (any(w in t for w in spec.get('forbid_tags', [])) or (
+                word in COLOUR_WORDS and word not in spec.get('colour_words', COLOUR_WORDS) and t != word + '_hair')):
+            why.append(f'tagger sees {t} {v}, not in the approved outfit')
+            o['tag_warn'] = True
+    sts = [r['status'] for r in o['regions'].values() if r['status'] != 'na'] + (['warn'] if o.get('tag_warn') else [])
+    o['status'] = imgqa.worst(*sts) if sts else 'na'
+    o['why'] = why
+    return o['status']
 
 
 # ------------------------------------------------------------------------------------------------------------- per image
@@ -340,6 +531,8 @@ def analyse(cast, path):
         sk = raw_skin(ref, m['skin'], m['tags'])
         if sk:
             f['skin'] = sk
+        if p.get('outfit'):
+            f['outfit'] = measure_outfit(img, pil, m['box'], p, m['skin'])
         if who == 'eric':
             pt = m['tags']['ponytail']
             # not graded: from the front it is hidden, so not seeing one is "not measurable", not a fail
@@ -354,6 +547,30 @@ def finish(res):
     if not res['faces']:
         res['note'] = 'no face found (back, crop or detail shot)'
     return res
+
+
+def add_outfit(cast, rd):
+    """Add (or redo) the outfit measurements of a round from its stored boxes and who, without CCIP or hair again; pictures that
+    are not in the report yet are run in full. Then grade."""
+    jp = os.path.join(rd, 'imgqa-scene.json')
+    rep = json.load(open(jp)) if os.path.exists(jp) else dict(images=[])
+    have = {r['path'] for r in rep['images']}
+    for r in rep['images']:
+        faces = [f for f in r['faces'] if f['who'] in cast.people and cast.people[f['who']].get('outfit') and 'glasses' in f]
+        if not faces or not os.path.exists(os.path.join(rd, r['path'])):
+            continue
+        img = imgqa.load(os.path.join(rd, r['path']))
+        pil = imgqa.to_pil(img['grey'])
+        for f in faces:
+            f['outfit'] = measure_outfit(img, pil, f['box'], cast.people[f['who']], skin_lab(flat(img), f['box']))
+    for p in round_images(rd):
+        if os.path.relpath(p, rd) not in have:
+            r, _ = analyse(cast, p)
+            r['path'] = os.path.relpath(p, rd)
+            rep['images'].append(r)
+            print('new', r['path'], flush=True)
+    json.dump(dict(rep, round=os.path.relpath(rd, private_root()), thresholds=THRESH, calibration=CALIBRATION), open(jp, 'w'), indent=1)
+    return regrade(cast, rd)
 
 
 def regrade(cast, rd):
@@ -375,6 +592,8 @@ def regrade(cast, rd):
         finish(r)
     rep['thresholds'] = THRESH
     rep['calibration'] = CALIBRATION
+    rep['outfit_thresholds'] = OUTFIT
+    rep['outfit_calibration'] = OUTFIT_CALIBRATION
     json.dump(rep, open(jp, 'w'), indent=1)
     return rep['images']
 
@@ -391,7 +610,7 @@ def tile(res, img, TH=300):
         c = COL[f['status']]
         x0, y0, x1, y1 = [v * s for v in f['box']]
         d.rectangle([x0, y0, x1, y1], outline=c, width=3)
-        t = f"{f['who']} {f.get('ccip', '')}"
+        t = f"{f['who']} {f.get('ccip', '')}" + (f" outfit {f['outfit']['status']}" if f.get('outfit') else '')
         d.rectangle([x0, y0 - 15, x0 + 7 * len(t) + 6, y0], fill=c)
         d.text((x0 + 3, y0 - 15), t, font=font, fill=(255, 255, 255))
     out = Image.new('RGB', (tw, TH + 22), (24, 26, 30))
@@ -437,7 +656,7 @@ SKIP_DIRS = {'cut', 'ref', 'ctl', 'web', 'work', '__pycache__', 'rejected_thumbs
 # only produce false matches); name a round on the command line to check it anyway
 SKIP_TOP = {'user', 'imagegen', 'tools', 'workflows', 'reviews', 'story', 'docs', 'archive'}
 # the rounds sit in rewards/<project>/<topic>-<n>/ (island/PRIVATE.md, Layout); archive/ is not checked
-PROJECTS = ('skimpy', 'peeks', 'day1', 'characters')
+PROJECTS = ('skimpy', 'peeks', 'day1', 'characters', 'library')
 
 
 def round_images(rd):
@@ -521,9 +740,11 @@ def build_sheets(cast, rd, results):
     return write_sheets(rd, [tiles[i] for i in order]) + write_faces_sheet(rd, cast, heads) if tiles else []
 
 
-def run_round(cast, rd, files=None, sheets=True, again=False):
+def run_round(cast, rd, files=None, sheets=True, again=False, outfit=False):
     """Measure every picture of a round (again = only grade the stored measurements anew) and write the report and sheets."""
-    if again:
+    if outfit:
+        results = add_outfit(cast, rd)
+    elif again:
         results = regrade(cast, rd)
     else:
         imgs = files or round_images(rd)
@@ -534,7 +755,8 @@ def run_round(cast, rd, files=None, sheets=True, again=False):
             results.append(r)
             fs = '  '.join(f"{f['who']}:{f.get('ccip', '-')}:{f['status']}" for f in r['faces']) or 'no face'
             print(f"{r['status'].upper():4} {i + 1}/{len(imgs)} {r['path']:52} {fs}", flush=True)
-        json.dump(dict(round=os.path.relpath(rd, private_root()), thresholds=THRESH, calibration=CALIBRATION, images=results),
+        json.dump(dict(round=os.path.relpath(rd, private_root()), thresholds=THRESH, calibration=CALIBRATION, outfit_thresholds=OUTFIT,
+                       outfit_calibration=OUTFIT_CALIBRATION, images=results),
                   open(os.path.join(rd, 'imgqa-scene.json'), 'w'), indent=1)
     made = build_sheets(cast, rd, results) if sheets else []
     print('report', os.path.join(rd, 'imgqa-scene.json'), '\nsheets', *made, flush=True)
@@ -556,6 +778,9 @@ def reasons(f):
     s = f.get('skin')
     if s and s['status'] != 'pass':
         out.append(f"skin chroma {s['chroma']} (ref {s['ref_chroma']}), tan tag {s['tan_tag']}")
+    o = f.get('outfit')
+    if o and o['status'] not in ('pass', 'na'):
+        out += ['outfit: ' + '; '.join(o['why'])]
     return out
 
 
@@ -598,7 +823,38 @@ def report():
         print(f'  {p}  {faces}   {v}')
 
 
+def outfit_report(who=None):
+    """Per person and round: which pictures wear the approved outfit (pass), which do not (warn / fail, with the difference),
+    which cannot be judged (na: body outside the picture or hidden). library/ is listed on its own."""
+    root = private_root()
+    per = {}
+    for rd in all_rounds():
+        jp = os.path.join(rd, 'imgqa-scene.json')
+        if not os.path.exists(jp):
+            continue
+        name = os.path.relpath(rd, root)
+        for im in json.load(open(jp))['images']:
+            for f in im['faces']:
+                o = f.get('outfit')
+                if o and (who is None or f['who'] == who):
+                    per.setdefault(f['who'], {}).setdefault(name, []).append((im['path'], o['status'], o))
+    for w, rounds in sorted(per.items()):
+        for lib in (False, True):
+            names = [n for n in sorted(rounds) if n.startswith('library/') == lib]
+            if not names:
+                continue
+            print(f"\n== {w}{' (library)' if lib else ''}")
+            for n in names:
+                c = {k: sum(1 for _, st, _ in rounds[n] if st == k) for k in ('pass', 'warn', 'fail', 'na')}
+                print(f"{n}: {c['pass']} pass, {c['warn']} warn, {c['fail']} fail, {c['na']} not judged")
+                for path, st, o in rounds[n]:
+                    if st in ('warn', 'fail'):
+                        print(f"   {st:4} {path}: {'; '.join(o['why'])}")
+
+
 def main():
+    if len(sys.argv) > 1 and sys.argv[1] == 'outfit':
+        return outfit_report(sys.argv[2] if len(sys.argv) > 2 else None)
     if len(sys.argv) > 1 and sys.argv[1] == 'report':
         return report()
     ap = argparse.ArgumentParser(description=__doc__.split('\n')[0])
@@ -606,10 +862,11 @@ def main():
     ap.add_argument('--all', action='store_true')
     ap.add_argument('--out', help='folder for the report when giving single images')
     ap.add_argument('--no-sheet', action='store_true')
+    ap.add_argument('--outfit', action='store_true', help='only add the outfit check to the stored reports (pictures not in them are run in full)')
     ap.add_argument('--regrade', action='store_true', help='grade the stored measurements again (new thresholds or cast json) and redraw the sheets')
     a = ap.parse_args()
     cast = Cast()
-    kw = dict(sheets=not a.no_sheet, again=a.regrade)
+    kw = dict(sheets=not a.no_sheet, again=a.regrade, outfit=a.outfit)
     if a.all:
         for rd in all_rounds():
             run_round(cast, rd, **kw)
