@@ -1,0 +1,32 @@
+{
+ "take": "c2-eye",
+ "shot": "eye",
+ "model": "openai/gpt-5.4-image-2",
+ "prompt": "Concept picture for a 3D video game location, in the same flat-shaded low-poly 3D style as the attached screenshot from the game: simple geometric shapes, flat matte colours, soft even light, crisp edges, no textures, no painterly brushwork, no outlines. Camera at standing eye height just inside the entrance doors, looking straight ahead along the granite walkway to the reception desk; the feature wall rises high above the desk, the lift doors at the right edge of the frame, the tall glass wall at the left. The room is the ground-floor reception of a large corporate head office: a double-height marble and glass atrium, about twice as tall and twice as wide as the small lobby in the screenshot. A wide pale marble floor with a faint square grid, and dark grey granite walkway bands: one straight from the glass entrance doors to the reception desk, one branching right to the lifts. A long light oak reception desk with a pale stone front, standing in front of a tall pale stone feature wall with large brushed steel letters AMAKAWA and a smaller sign 受付 RECEPTION. One receptionist stands behind the middle of the desk, facing the entrance. On the back wall to the right of the desk, a row of four brushed steel lift doors set in the stone wall, a small floor display over each. Two seating islands in the right half: round stone planters with small trees, low curved slate-blue benches around them. Tall potted plants beside the lifts. Cool daylight through tall glass walls, soft shadows. A few small chibi office workers like the ones in the screenshot. Palette: cream-white marble, cool grey granite, slate blue, light oak, green plants, brushed steel. No other text.",
+ "style_ref": "current game, reception 1366x860 (place-shots)",
+ "images": 1,
+ "usage": {
+  "prompt_tokens": 3707,
+  "completion_tokens": 7401,
+  "total_tokens": 11108,
+  "cost": 0.246031,
+  "is_byok": false,
+  "prompt_tokens_details": {
+   "cached_tokens": 0,
+   "cache_write_tokens": 0,
+   "audio_tokens": 0,
+   "video_tokens": 0
+  },
+  "cost_details": {
+   "upstream_inference_cost": 0.246031,
+   "upstream_inference_prompt_cost": 0.029656,
+   "upstream_inference_completions_cost": 0.216375
+  },
+  "completion_tokens_details": {
+   "reasoning_tokens": 0,
+   "image_tokens": 7024,
+   "audio_tokens": 0
+  }
+ },
+ "reply_text": null
+}
