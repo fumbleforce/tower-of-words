@@ -18,7 +18,7 @@ faces and angles, so this finds EVERY face (imgutils anime face detection) and m
 It flags; the visual pass (looking at the picture next to the approved one) decides, and is written to <round>/identity.json.
 CPU only (CUDA hidden), about 2 s a face.
 
-Usage: python3 tools/imgqa_scene.py <round> [<round> ...]   a round folder, or its name under island/private/rewards/
+Usage: python3 tools/imgqa_scene.py <round> [<round> ...]   a round folder, or <project>/<round> under island/private/rewards/
        python3 tools/imgqa_scene.py --all                   every round there (not user/, not imagegen/)
        python3 tools/imgqa_scene.py img.webp ... --out DIR  single images
        python3 tools/imgqa_scene.py <round> --regrade       grade the stored measurements again (new thresholds or cast json)
@@ -59,7 +59,7 @@ THRESH = {
     'glasses_want': (0.60, 0.30),  # wd14 `glasses` probability when she / he must wear them (higher is better)
     'glasses_none': (0.30, 0.60),  # when they must not
 }
-# Calibrated 2026-10-05 on the day-1 hard scene renders (island/private/rewards/day1-hard-1) that Jørgen and the index page marked,
+# Calibrated 2026-10-05 on the day-1 hard scene renders (island/private/rewards/day1/hard-1) that Jørgen and the index page marked,
 # and on a full-size look at every picture the scene sequences use. Numbers:
 #   Mio hair: round-6 dark-green renders have a median a* of -5.6 to -15.9 and the approved-look skimpy portraits -4.3 to -4.6;
 #   the renders marked "black-haired Mio" in the earlier rounds sit at -2.5 to +0, so pass <= -3.5, fail > -2.5.
@@ -435,7 +435,9 @@ def write_sheets(round_dir, tiles, per=48, cols=6):
 SKIP_DIRS = {'cut', 'ref', 'ctl', 'web', 'work', '__pycache__', 'rejected_thumbs'}
 # not renders of this cast: Jørgen's own folders, scripts, and September's round-27/28 (the other characters, 450 pictures that
 # only produce false matches); name a round on the command line to check it anyway
-SKIP_TOP = {'user', 'imagegen', 'tools', 'workflows', 'reviews', 'story', 'web', 'work', 'img', 'docs', 'round-27', 'round-28'}
+SKIP_TOP = {'user', 'imagegen', 'tools', 'workflows', 'reviews', 'story', 'docs', 'archive'}
+# the rounds sit in rewards/<project>/<topic>-<n>/ (island/PRIVATE.md, Layout); archive/ is not checked
+PROJECTS = ('skimpy', 'peeks', 'day1', 'characters')
 
 
 def round_images(rd):
@@ -459,8 +461,16 @@ def round_images(rd):
 
 def all_rounds():
     root = private_root()
-    return [os.path.join(root, d) for d in sorted(os.listdir(root))
-            if os.path.isdir(os.path.join(root, d)) and d not in SKIP_TOP]
+    out = []
+    for d in sorted(os.listdir(root)):
+        p = os.path.join(root, d)
+        if not os.path.isdir(p) or d in SKIP_TOP:
+            continue
+        if d in PROJECTS:
+            out += [os.path.join(p, r) for r in sorted(os.listdir(p)) if os.path.isdir(os.path.join(p, r))]
+        else:
+            out.append(p)
+    return out
 
 
 def write_faces_sheet(rd, cast, heads, cols=8, per=96):
@@ -524,7 +534,7 @@ def run_round(cast, rd, files=None, sheets=True, again=False):
             results.append(r)
             fs = '  '.join(f"{f['who']}:{f.get('ccip', '-')}:{f['status']}" for f in r['faces']) or 'no face'
             print(f"{r['status'].upper():4} {i + 1}/{len(imgs)} {r['path']:52} {fs}", flush=True)
-        json.dump(dict(round=os.path.basename(rd), thresholds=THRESH, calibration=CALIBRATION, images=results),
+        json.dump(dict(round=os.path.relpath(rd, private_root()), thresholds=THRESH, calibration=CALIBRATION, images=results),
                   open(os.path.join(rd, 'imgqa-scene.json'), 'w'), indent=1)
     made = build_sheets(cast, rd, results) if sheets else []
     print('report', os.path.join(rd, 'imgqa-scene.json'), '\nsheets', *made, flush=True)
@@ -565,7 +575,7 @@ def report():
         jp = os.path.join(rd, 'imgqa-scene.json')
         if not os.path.exists(jp):
             continue
-        name = os.path.basename(rd)
+        name = os.path.relpath(rd, root)
         rep = json.load(open(jp))
         cnt = {}
         for im in rep['images']:
