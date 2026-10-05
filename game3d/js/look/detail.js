@@ -204,12 +204,12 @@ export function socket() {
 }
 
 // ---------- desk: chamfered top, pedestals with inset drawer fronts and bar handles, a modesty panel,
-// a keyboard with keys, a mouse, a tray with a lip, a pen cup with pens, binders with a ring hole ----------
-export function desk({ w = 1.4, d = 0.72, mon = true, clutter = 1, seed = 1 } = {}) {
+// a keyboard with keys, a mouse, a tray with a lip, a pen cup with pens, binders with a ring hole (open: props.js) ---
+export function desk({ w = 1.4, d = 0.72, mon = true, clutter = 1, seed = 1, open = false } = {}) {
   const g = new THREE.Group();
   const H = 0.42;
   g.add(cbox(w, 0.04, d, PAL.deskTop, { y: H - 0.04, r: 0.014 }));
-  for (const sx of [-1, 1]) {
+  for (const sx of open ? [-1] : [-1, 1]) {
     const px = sx * (w / 2 - 0.02 - PED / 2),
       pd = d - 0.06;
     g.add(cbox(PED, H - 0.05, pd, PAL.drawer, { x: px, r: 0.01 }));
@@ -228,7 +228,7 @@ export function desk({ w = 1.4, d = 0.72, mon = true, clutter = 1, seed = 1 } = 
         );
     }
   }
-  g.add(cbox(w - 2 * (PED + 0.02), 0.22, 0.022, PAL.drawer, { y: 0.15, z: -d / 2 + 0.05 }));
+  if (!open) g.add(cbox(w - 2 * (PED + 0.02), 0.22, 0.022, PAL.drawer, { y: 0.15, z: -d / 2 + 0.05 }));
   // monitor: bezel frame, inset screen, a stand with a round foot and a hinge
   if (mon) {
     const m = monitor();
