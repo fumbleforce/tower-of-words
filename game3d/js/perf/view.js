@@ -77,7 +77,7 @@ export function createView(game, renderer, canvas, save) {
     }
   }
   onResizeFrame(resize);
-  const guard = installGlGuard({ canvas, renderer, save });
+  const guard = installGlGuard({ canvas, renderer, save, resize: () => resize() });
   function render() {
     if (!view.composer || !game.place) return;
     game.place.beforeRender?.();

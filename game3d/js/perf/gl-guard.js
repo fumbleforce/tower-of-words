@@ -9,6 +9,13 @@
 //     the rest of the session, so the next try needs less GPU memory
 //   - a resize never sets a zero or invalid size, and the window's resize events are handled once a frame
 //   - the frame loop survives an error in one frame
+// Back from another app (Jørgen, S23 Chrome, 2026-10-05: "got black screen again on mobile in elevator as i switched
+// between apps"): the page background again and no note, so the context was gone but the lost event never reached the
+// guard (a frozen tab can miss it), and the sampled pixel was skipped while the context reported lost. Now a context
+// found lost without the event counts as lost; coming back to the page (visibilitychange, pageshow, resume) checks
+// the context, gives the canvas a fresh drawing buffer and samples the next frames at once; and a sample reads five
+// pixels, where all five fully transparent, or all the same pure black, is a dead view (the lift's dark ride is
+// #14171d round the lit car, never pure black).
 //   import { installGlGuard, lighterAfterLoss, onResizeFrame, validSize, guardedLoop, disposePost } from './perf/gl-guard.js'
 const WAIT_MS = 3000;
 const CHECK_MS = 2000; // how often a drawn frame is sampled (one pixel, read right after the frame)
@@ -78,10 +85,21 @@ export function disposePost(composer, keep = []) {
   composer.dispose();
 }
 
-export function installGlGuard({ canvas, renderer, save }) {
+// where a sample reads the frame: the middle and four points round it
+const SPOTS = [
+  [0.5, 0.5],
+  [0.25, 0.25],
+  [0.75, 0.25],
+  [0.25, 0.75],
+  [0.75, 0.75],
+];
+
+// resize: sets the canvas and the post chain to the window's size (perf/view.js)
+export function installGlGuard({ canvas, renderer, save, resize = () => {} }) {
   let note = null,
     timer = 0,
     gone = false,
+    lost = false, // lost and not given back yet
     nextCheck = performance.now() + CHECK_MS,
     blank = 0;
   const px = new Uint8Array(4);
@@ -113,33 +131,82 @@ export function installGlGuard({ canvas, renderer, save }) {
     document.body.classList.add('reloading');
     setTimeout(() => location.reload(), 250);
   };
-  canvas.addEventListener('webglcontextlost', (e) => {
-    e.preventDefault(); // without this the browser never gives the context back
-    console.warn('WebGL context lost');
+  // lost (the event, or the context found lost without it): a note, and WAIT_MS for the browser to give it back
+  const onLost = () => {
+    if (lost || gone) return;
+    lost = true;
     say('The graphics stopped. Starting them again...');
     clearTimeout(timer);
     timer = setTimeout(reload, WAIT_MS);
+  };
+  canvas.addEventListener('webglcontextlost', (e) => {
+    e.preventDefault(); // without this the browser never gives the context back
+    console.warn('WebGL context lost');
+    onLost();
   });
   canvas.addEventListener('webglcontextrestored', () => {
     console.warn('WebGL context restored');
+    lost = false;
     clearTimeout(timer);
     note?.remove();
     note = null;
     nextCheck = 0; // check the next frames right away
     blank = 0;
   });
+  // back on the page: the context checked, a fresh drawing buffer at the window's size, the next frames sampled
+  let backTimer = 0;
+  const back = () => {
+    if (document.hidden || gone) return;
+    nextCheck = 0;
+    blank = 0;
+    clearTimeout(backTimer);
+    backTimer = setTimeout(() => {
+      if (document.hidden || gone) return;
+      if (renderer.getContext().isContextLost()) {
+        console.warn('WebGL context lost while away');
+        onLost();
+        return;
+      }
+      if (lost) return;
+      // the same size again still gives the canvas a new drawing buffer (a phone can leave the old one undrawable)
+      canvas.width = +canvas.width;
+      resize();
+      nextCheck = 0;
+    }, 300);
+  };
+  document.addEventListener('visibilitychange', back);
+  window.addEventListener('pageshow', back);
+  document.addEventListener('resume', back);
+  // the frame just drawn shows nothing: all five pixels fully transparent, or all the same pure black
+  const dead = (gl) => {
+    let clear = 0,
+      black = 0,
+      first = -1;
+    for (const [fx, fy] of SPOTS) {
+      const x = Math.floor(gl.drawingBufferWidth * fx),
+        y = Math.floor(gl.drawingBufferHeight * fy);
+      gl.readPixels(x, y, 1, 1, gl.RGBA, gl.UNSIGNED_BYTE, px);
+      if (px[3] === 0) clear++;
+      const v = px[0] | (px[1] << 8) | (px[2] << 16);
+      if (first < 0) first = v;
+      if (v === first && Math.max(px[0], px[1], px[2]) <= 6) black++;
+    }
+    return clear === SPOTS.length || black === SPOTS.length;
+  };
   return {
-    // after each drawn frame: now and then read one pixel of what was just drawn (still readable in this task). The
-    // game draws every pixel opaque, so alpha 0 means nothing reached the canvas.
+    // after each drawn frame: now and then read a few pixels of what was just drawn (still readable in this task)
     afterRender() {
       const now = performance.now();
       if (gone || now < nextCheck) return;
       nextCheck = now + (blank ? 100 : CHECK_MS);
       const gl = renderer.getContext();
-      if (gl.isContextLost()) return; // the lost handler is on it
+      if (gl.isContextLost()) {
+        onLost(); // with or without the lost event
+        return;
+      }
+      if (lost) return; // the browser hasn't given it back yet
       renderer.setRenderTarget(null);
-      gl.readPixels(gl.drawingBufferWidth >> 1, gl.drawingBufferHeight >> 1, 1, 1, gl.RGBA, gl.UNSIGNED_BYTE, px);
-      blank = px[3] === 0 ? blank + 1 : 0;
+      blank = dead(gl) ? blank + 1 : 0;
       if (blank >= BLANK_CHECKS) {
         console.warn('the 3D view draws nothing');
         reload();
