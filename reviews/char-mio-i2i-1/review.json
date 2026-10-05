@@ -2,7 +2,7 @@
  "title": "Mio modelled to the picked picture (mio-front-d60)",
  "date": "2026-10-01",
  "by": "Claude (mio-i2i agent)",
- "status": "open",
+ "status": "decided",
  "question": "Does any of these reach the picture, and which way should the next round go?",
  "multi": true,
  "media": [
@@ -223,5 +223,7 @@
    "href": "tools/style-concepts/mio-i2i-viewer.html?c=mi-13"
   }
  ],
- "issue": 164
+ "issue": 164,
+ "decision": "Not close: 'it is genuinely not close at all, you have all square edges and zero of the hand crafted look, only optimizing for a silhouette that doesnt matter instead of placing the actual edges where they need to go'. Next: geometry built from the picture's facets (vertices at facet corners, flat colour per face), no projected texture.",
+ "decided_at": "2026-10-01T15:29:04+0200"
 }

@@ -2,25 +2,72 @@
  "title": "Kuro round 3: a smaller head, and her face textured as one piece",
  "date": "2026-10-04",
  "by": "Claude (kuro-meshy-orig-3 agent)",
- "status": "open",
+ "status": "decided",
  "question": "The first sheet is ChatGPT pictures; every sheet after it is a render of a real rigged 3D model, and the live 3D link (below) lets you turn her and watch her idle and walk beside the in-game Eric and Mio. Is her head the right size now, and are her eyes clean enough?",
  "multi": false,
  "media": [
-  {"image": "art/parts/kuro-meshy-orig-3/sheets/edit.webp", "caption": "ChatGPT pictures. Your verdict on round 2: \"Her head is a little too big compared to body, when comparing to eric and mio. The reference image are quite good\". So the pictures stay, with one short follow-up in the same chat as round 2 (openai/gpt-5.4-image-2 on OpenRouter, after a1, b5, c3, d2), attaching d2 and saying only: \"make her head a little smaller relative to her body, everything else the same\". Six takes, in order. The number on each is her head's share of her height (top of the hair to the chin, over top to soles; d2 was 0.51). e2 and e4 put her glasses back, e3, e4 and e6 put the hair sticks back (accessories Meshy garbles), e4 and e6 changed the pose. e1 and e5 kept everything else the same; e5 went on (0.45, the smaller change of the two). About $0.25 a take, $1.49 in all."},
-  {"image": "art/parts/kuro-meshy-orig-3/sheets/measure.webp", "caption": "3D renders from here on. How the heads compare, on the models: straight-on, flat-colour pictures of each model in its rest pose, each scaled to the same height. Head share of height: Eric 0.46, Mio 0.52 (her buns count), Kuro round 2 0.47, Kuro round 3 0.41. Round 2's head wasn't taller than Eric's, but it was wider against her slim body: widest part of the head over the width of the legs is Eric 1.95, Mio 2.33, round 2 2.55, round 3 2.20. Round 3 is smaller on both counts; by height it is now a little below Eric."},
-  {"image": "art/parts/kuro-meshy-orig-3/sheets/shape-previews.webp", "caption": "Meshy image-to-3D from e5, the same settings as round 2: smart topology (meshy-t2), 1,050 polygons, A-pose, no texture, 5 credits each. Meshy's own previews. The 1st roll turned her bun into a long tail down to her shoulders (left and back views); the 2nd roll, same picture and settings, kept a round bun and went on."},
-  {"image": "art/parts/kuro-meshy-orig-3/sheets/shape.webp", "caption": "The 2nd roll in Blender, untextured (same camera and light as rounds 1 and 2): front, her left three-quarter (image right side turned to us), her left side, back, her right three-quarter. 1,104 triangles. A long lock still hangs from the bun down her back."},
-  {"image": "art/parts/kuro-meshy-orig-3/sheets/diagnosis.webp", "caption": "Why round 2's texture went wrong. Meshy's smart-topology shapes come with no UV layout at all, so the \"keep the original UVs\" setting had nothing to keep, and Meshy cut the 1,092 triangles into 218 small pieces itself. Her face was 66 triangles spread over 23 pieces, about 4.6 % of the 2048 px texture, so each eye was painted in bits across piece edges, and Meshy's edge fill smeared them (the grey streaks and the smudge in her left eye, image right, in round 2). The resolution (2048) and the style picture were not the cause. The fix, one change: before the texture pass, I gave the shape a UV layout of our own in Blender (round 3 UVs: the front of her face is one piece, three times the detail of the rest, 14 % of the texture), and sent that to Meshy's retexture with the same settings as round 2 (styled from picture e5, keep the UVs, lighting removed, no PBR, 2048 px). 10 credits. Round 3 texture: the face comes out whole."},
-  {"image": "art/parts/kuro-meshy-orig-3/sheets/tex.webp", "caption": "The textured model: front, her left three-quarter, her left side, back, her right three-quarter, face. Same camera and light as round 2."},
-  {"image": "art/parts/kuro-meshy-orig-3/sheets/faces.webp", "caption": "Face close-ups, straight on, flat texture colour (the same render for both rounds), with the picture's face for reference. Round 3's eyes are Meshy's own painting, now in one piece: dark irises with one highlight, a thick upper lash line, thin brows, like e5. Because they came out clean, I didn't paint the picture's face onto the texture (the chibi-face-1 projection), and the texture is Meshy's as it came. A faint line under her mouth and light blush are in Meshy's paint."},
-  {"image": "art/parts/kuro-meshy-orig-3/sheets/compare.webp", "caption": "Kuro beside the in-game Meshy Eric and Mio (round 1's renders of them, the same script and camera), front and her right three-quarter. Mio renders smaller here because her file's bounding box is bigger; in the live viewer they all stand at their game heights."},
-  {"image": "art/parts/kuro-meshy-orig-3/sheets/viewer.webp", "caption": "Meshy auto-rig at height 1.1 m, as in round 2. 5 credits. Stills from the live viewer: rest, idle, walk, walk from the side. The idle and walk are the game's (Mio's approved idle and walk, carried over by bone name), played on Kuro and the in-game Eric and Mio together. Round 2's model is in the viewer too (attempt kuro-2). She is not in the game. Meshy credits this round: 25 (shape 5 + re-roll 5 + texture 10 + rig 5), balance 455."}
+  {
+   "image": "art/parts/kuro-meshy-orig-3/sheets/edit.webp",
+   "caption": "ChatGPT pictures. Your verdict on round 2: \"Her head is a little too big compared to body, when comparing to eric and mio. The reference image are quite good\". So the pictures stay, with one short follow-up in the same chat as round 2 (openai/gpt-5.4-image-2 on OpenRouter, after a1, b5, c3, d2), attaching d2 and saying only: \"make her head a little smaller relative to her body, everything else the same\". Six takes, in order. The number on each is her head's share of her height (top of the hair to the chin, over top to soles; d2 was 0.51). e2 and e4 put her glasses back, e3, e4 and e6 put the hair sticks back (accessories Meshy garbles), e4 and e6 changed the pose. e1 and e5 kept everything else the same; e5 went on (0.45, the smaller change of the two). About $0.25 a take, $1.49 in all."
+  },
+  {
+   "image": "art/parts/kuro-meshy-orig-3/sheets/measure.webp",
+   "caption": "3D renders from here on. How the heads compare, on the models: straight-on, flat-colour pictures of each model in its rest pose, each scaled to the same height. Head share of height: Eric 0.46, Mio 0.52 (her buns count), Kuro round 2 0.47, Kuro round 3 0.41. Round 2's head wasn't taller than Eric's, but it was wider against her slim body: widest part of the head over the width of the legs is Eric 1.95, Mio 2.33, round 2 2.55, round 3 2.20. Round 3 is smaller on both counts; by height it is now a little below Eric."
+  },
+  {
+   "image": "art/parts/kuro-meshy-orig-3/sheets/shape-previews.webp",
+   "caption": "Meshy image-to-3D from e5, the same settings as round 2: smart topology (meshy-t2), 1,050 polygons, A-pose, no texture, 5 credits each. Meshy's own previews. The 1st roll turned her bun into a long tail down to her shoulders (left and back views); the 2nd roll, same picture and settings, kept a round bun and went on."
+  },
+  {
+   "image": "art/parts/kuro-meshy-orig-3/sheets/shape.webp",
+   "caption": "The 2nd roll in Blender, untextured (same camera and light as rounds 1 and 2): front, her left three-quarter (image right side turned to us), her left side, back, her right three-quarter. 1,104 triangles. A long lock still hangs from the bun down her back."
+  },
+  {
+   "image": "art/parts/kuro-meshy-orig-3/sheets/diagnosis.webp",
+   "caption": "Why round 2's texture went wrong. Meshy's smart-topology shapes come with no UV layout at all, so the \"keep the original UVs\" setting had nothing to keep, and Meshy cut the 1,092 triangles into 218 small pieces itself. Her face was 66 triangles spread over 23 pieces, about 4.6 % of the 2048 px texture, so each eye was painted in bits across piece edges, and Meshy's edge fill smeared them (the grey streaks and the smudge in her left eye, image right, in round 2). The resolution (2048) and the style picture were not the cause. The fix, one change: before the texture pass, I gave the shape a UV layout of our own in Blender (round 3 UVs: the front of her face is one piece, three times the detail of the rest, 14 % of the texture), and sent that to Meshy's retexture with the same settings as round 2 (styled from picture e5, keep the UVs, lighting removed, no PBR, 2048 px). 10 credits. Round 3 texture: the face comes out whole."
+  },
+  {
+   "image": "art/parts/kuro-meshy-orig-3/sheets/tex.webp",
+   "caption": "The textured model: front, her left three-quarter, her left side, back, her right three-quarter, face. Same camera and light as round 2."
+  },
+  {
+   "image": "art/parts/kuro-meshy-orig-3/sheets/faces.webp",
+   "caption": "Face close-ups, straight on, flat texture colour (the same render for both rounds), with the picture's face for reference. Round 3's eyes are Meshy's own painting, now in one piece: dark irises with one highlight, a thick upper lash line, thin brows, like e5. Because they came out clean, I didn't paint the picture's face onto the texture (the chibi-face-1 projection), and the texture is Meshy's as it came. A faint line under her mouth and light blush are in Meshy's paint."
+  },
+  {
+   "image": "art/parts/kuro-meshy-orig-3/sheets/compare.webp",
+   "caption": "Kuro beside the in-game Meshy Eric and Mio (round 1's renders of them, the same script and camera), front and her right three-quarter. Mio renders smaller here because her file's bounding box is bigger; in the live viewer they all stand at their game heights."
+  },
+  {
+   "image": "art/parts/kuro-meshy-orig-3/sheets/viewer.webp",
+   "caption": "Meshy auto-rig at height 1.1 m, as in round 2. 5 credits. Stills from the live viewer: rest, idle, walk, walk from the side. The idle and walk are the game's (Mio's approved idle and walk, carried over by bone name), played on Kuro and the in-game Eric and Mio together. Round 2's model is in the viewer too (attempt kuro-2). She is not in the game. Meshy credits this round: 25 (shape 5 + re-roll 5 + texture 10 + rig 5), balance 455."
+  }
  ],
  "options": [
-  {"id": "kuro-3", "label": "kuro-3", "image": "art/parts/kuro-meshy-orig-3/renders/tex/r45.png", "images": ["art/parts/kuro-meshy-orig-3/renders/tex/front.png", "art/parts/kuro-meshy-orig-3/renders/face/kuro-3.png", "art/parts/kuro-meshy-orig-3/renders/tex/back.png", "art/parts/kuro-meshy-orig-3/pics/e5.png"], "note": "The rigged model from e5 (round 2's chat a1, b5, c3, d2, then the head edit): smart topology, 1,050 polygons (2nd roll), our UV layout with the face in one piece, Meshy retexture styled from e5, auto-rig at 1.1 m. Head share of height 0.41 (Eric 0.46, Mio 0.52). 25 Meshy credits; the six ChatGPT pictures cost $1.49."}
+  {
+   "id": "kuro-3",
+   "label": "kuro-3",
+   "image": "art/parts/kuro-meshy-orig-3/renders/tex/r45.png",
+   "images": [
+    "art/parts/kuro-meshy-orig-3/renders/tex/front.png",
+    "art/parts/kuro-meshy-orig-3/renders/face/kuro-3.png",
+    "art/parts/kuro-meshy-orig-3/renders/tex/back.png",
+    "art/parts/kuro-meshy-orig-3/pics/e5.png"
+   ],
+   "note": "The rigged model from e5 (round 2's chat a1, b5, c3, d2, then the head edit): smart topology, 1,050 polygons (2nd roll), our UV layout with the face in one piece, Meshy retexture styled from e5, auto-rig at 1.1 m. Head share of height 0.41 (Eric 0.46, Mio 0.52). 25 Meshy credits; the six ChatGPT pictures cost $1.49."
+  }
  ],
  "links": [
-  {"label": "Live 3D: Kuro round 3 beside the in-game Eric and Mio (turn, zoom, idle, walk; round 2 is attempt kuro-2)", "href": "tools/characters/parts/viewer.html?cfg=/reviews/kuro-meshy-orig-3/viewer.json&a=kuro-3&m=idle&c=Eric%20and%20Mio%20(in%20game)"},
-  {"label": "Last round (kuro-meshy-orig-2)", "href": "bible/#review/kuro-meshy-orig-2"}
- ]
+  {
+   "label": "Live 3D: Kuro round 3 beside the in-game Eric and Mio (turn, zoom, idle, walk; round 2 is attempt kuro-2)",
+   "href": "tools/characters/parts/viewer.html?cfg=/reviews/kuro-meshy-orig-3/viewer.json&a=kuro-3&m=idle&c=Eric%20and%20Mio%20(in%20game)"
+  },
+  {
+   "label": "Last round (kuro-meshy-orig-2)",
+   "href": "bible/#review/kuro-meshy-orig-2"
+  }
+ ],
+ "decision": "Approved: 'Yes, very good. The only thing that stands out is black discoloration under her cheek'. Fix the cheek, put her in the game; same approach for Aoi and Emi.",
+ "decided_at": "2026-10-04T22:16:05+0200",
+ "issue": 222
 }

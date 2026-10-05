@@ -2,7 +2,7 @@
  "title": "Kotodama: a new grammar game from scratch",
  "date": "2026-10-04",
  "by": "claude-agent:grammar-game",
- "status": "open",
+ "status": "decided",
  "question": "This is a playable prototype, not pictures: play it at https://fumbleforce.github.io/tower-of-words/game3d/minigames/kotodama.html (phone or desktop, about four minutes). It's a new game, started over after \"even less fun, start over, write a new game from scratch, make it the most fun and impressive grammar game in existence\". Is this fun? Round 2 (after your note: translations cut off, too casual, instructions unclear): the first twelve pictures show the fixes. Same game; the translations fit at every size, people speak politely (～さん, ください, です/ます; the machines still get plain だして), and the first command is a three-step walkthrough with a hand. Round 3 (after \"kotodama: fun, keep going with it\"; tapping over dragging, better machines): the first seven pictures. Same game. The vending machine, hot-water pot and fridge are redrawn with idle motion and a dispense, and the drinks are redrawn to match. Every action was already a tap; now a unit test keeps it that way, and the particle buttons pulse while a word waits for its particle.",
  "multi": false,
  "media": [
@@ -134,5 +134,11 @@
    "label": "The design page",
    "href": "game3d/minigames/README.md"
   }
- ]
+ ],
+ "decided": [
+  "kotodama"
+ ],
+ "decision": "Kotodama picked: keep going (tap-only and better machines done in 246fd2df, 61ab7bce)",
+ "decided_at": "2026-10-05T11:45:31+0200",
+ "issue": 244
 }

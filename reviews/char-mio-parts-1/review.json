@@ -2,7 +2,7 @@
  "title": "Mio from parts: head and body generated separately, joined and rigged",
  "date": "2026-10-02",
  "by": "Claude (char-mio-parts agent)",
- "status": "open",
+ "status": "superseded",
  "issue": 171,
  "question": "Is the parts model (a11) closer to the picture than meshy-single, and worth building on?",
  "multi": true,
@@ -220,5 +220,6 @@
    "label": "How the part pictures were cut and painted",
    "href": "reviews/char-mio-parts-1/inputs.json"
   }
- ]
+ ],
+ "decision": "On hold: 'lets put this style on hold' (2026-10-05)"
 }

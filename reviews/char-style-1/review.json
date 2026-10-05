@@ -2,7 +2,7 @@
  "title": "Character style concepts: 9 ways to model Mio and Eric",
  "date": "2026-10-01",
  "by": "Claude (round 1: A to C; round 2 after your comment on the voxel pair: D to F) and Codex (A to C)",
- "status": "open",
+ "status": "decided",
  "question": "Which direction or directions should the game's characters take?",
  "multi": true,
  "media": [
@@ -200,5 +200,8 @@
    "label": "Turn them and play idle and walk (live 3D)",
    "href": "tools/style-concepts/viewer.html"
   }
- ]
+ ],
+ "decision": "All nine rejected: 'all are completely unusable, ugly as sin'.",
+ "decided_at": "2026-10-01T13:42:21+0200",
+ "issue": 151
 }

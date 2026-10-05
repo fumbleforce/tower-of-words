@@ -2,7 +2,7 @@
  "title": "Photos finds: generated pictures, round 1",
  "date": "2026-10-04",
  "by": "claude-agent:photos-gen",
- "status": "open",
+ "status": "decided",
  "question": "These are generated pictures to replace the in-game Photos collectibles (the five day-1 finds: Early train, Spring garden, At the fountain, Office company, Summer night), not in the game yet. Which picture do you want for each photo?",
  "multi": true,
  "media": [
@@ -484,5 +484,11 @@
    ],
    "note": "Early train (photo_gate, found in the security room). Second picture: the current in-game drawing. Check: Close. Three smooth cars with a rounded cab, beam across the frame, pillars in the water. A round disc on one pillar; the deck has a railing on the far side. Change this pass: pass c with the sketch at strength 1.0 until 80%. One Obsession, seed 13, 1152x864, Euler A, 30 steps, CFG 5. Prompt: masterpiece, best quality, score_9, score_8, score_7, year 2025, newest, highres, absurdres, very aesthetic, safe, anime screenshot, anime coloring, 2d, cel shading, clean lineart, detailed anime background art, hand-painted anime background, no humans, scenery, view across a calm bay at sunrise from the sea wall. A white elevated concrete monorail beam on round pillars crosses the picture from left to right above the water. A short white monorail train of three cars sits on top of the beam, left of centre. The low sun sits just above the horizon, with sunlight glittering on the calm sea. Dominant pale peach sky and sea blue, broad white, sparse warm orange accents. Soft light, gentle muted colours, a quiet everyday moment. Negative: worst quality, low quality, early, old, score_1, score_2, score_3, artist name, blurry, jpeg artifacts, lowres, text, watermark, signature, letters, logo, border, frame, 3d, realistic, photorealistic, render, chubby, western cartoon, comic book, flat vector, thick outlines, poster art, pop art, people, person, 1girl, 1boy, crowd, character, child, loli"
   }
- ]
+ ],
+ "decided": [
+  "monorail-a-rdbt-11"
+ ],
+ "decision": "Early train: monorail-a-rdbt-11 (his pick). Rest chosen by Claude as he asked ('i am not interested in picking flavor pictures just choose some'): cherry-a-oneobs-11, pigeons-a-oneobs-13, cat-a-oneobs-13, fireworks-b-oneobs-11.",
+ "decided_at": "2026-10-04T20:15:55+0200",
+ "issue": 219
 }

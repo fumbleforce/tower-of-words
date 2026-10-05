@@ -2,7 +2,7 @@
  "title": "Creator rebuilt in Blender: simple bodies, their own hair, two outfits",
  "date": "2026-09-30",
  "by": "Claude (claude-agent:creator-blender)",
- "status": "open",
+ "status": "decided",
  "question": "Is this the right base to build the creator on: Blender-made bodies with one skin colour, their own hair, and clothes as separate pieces?",
  "multi": false,
  "media": [
@@ -44,10 +44,28 @@
   }
  ],
  "links": [
-  {"label": "The live creator (drag to turn it, Idle or Walk, Original puts the game model beside it)", "href": "tools/creator/base/dress.html"},
-  {"label": "The same creator online, for your phone", "href": "https://fumbleforce.github.io/tower-of-words/creator/"},
-  {"label": "Eric in the shirt and skirt", "href": "tools/creator/base/dress.html?body=eric&outfit=shirt"},
-  {"label": "Bare bodies, no hair", "href": "tools/creator/base/dress.html?outfit=none&hair=none&stubble=none"},
-  {"label": "Previous round", "href": "bible/#review/creator-base-8"}
- ]
+  {
+   "label": "The live creator (drag to turn it, Idle or Walk, Original puts the game model beside it)",
+   "href": "tools/creator/base/dress.html"
+  },
+  {
+   "label": "The same creator online, for your phone",
+   "href": "https://fumbleforce.github.io/tower-of-words/creator/"
+  },
+  {
+   "label": "Eric in the shirt and skirt",
+   "href": "tools/creator/base/dress.html?body=eric&outfit=shirt"
+  },
+  {
+   "label": "Bare bodies, no hair",
+   "href": "tools/creator/base/dress.html?outfit=none&hair=none&stubble=none"
+  },
+  {
+   "label": "Previous round",
+   "href": "bible/#review/creator-base-8"
+  }
+ ],
+ "decision": "Not usable as is: 80% there but looks creepy; Jørgen doesn't think it can reach the finish. Superseded by Astra's bases (creator-astra-1).",
+ "decided_at": "2026-10-01T08:35:59+0200",
+ "issue": 96
 }
