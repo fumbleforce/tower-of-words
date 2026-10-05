@@ -23,6 +23,6 @@ export default {
     title: 'Gym booking terminal frozen',
     from: 'Gym attendant',
     pay: 1500,
-    text: 'The {予約|yoyaku|booking} terminal has stopped responding. We need a complete printout of today’s bookings.\n\nPlease restart it and bring the sheet to the desk for a check. The desk is staffed during the day; the request can wait.',
+    text: 'The {予約|yoyaku|booking} terminal on the gym’s reception counter froze this morning, and I can’t get today’s bookings printed out.\n\nI’m at the counter all day, so come by whenever suits you. It can wait.',
   },
 };

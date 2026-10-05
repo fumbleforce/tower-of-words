@@ -22,11 +22,13 @@ export default place(
           { say: 'eric', emo: 'tired', text: 'I’ll ask the guard in the morning.' }, { end: true },
         ] },
         { do: 'cam', on: 'guard', zoom: 1.2 },
-        { say: 'guard', emo: 'polite', text: 'この車両は点検用です。発車しません。', en: 'This carriage is out of service for the check. It won’t depart.' },
+        { do: 'gesture', who: 'guard', kind: 'point', to: 'door_test' },
         { if: 'd2_order_sensor', then: [
-          { say: 'guard', emo: 'polite', text: 'センサーは交換しました。確認をお願いします。', en: 'Maintenance fitted the replacement sensor. Please check it.' },
+          { say: 'guard', overheard: true, emo: 'polite', text: 'センサーは、新しいのに交換しました。確認をお願いします。', clear: ['センサー'] },
+          { say: 'eric', emo: 'warm', text: 'So the new sensor’s in. Let’s see it work.' },
         ], else: [
-          { say: 'guard', emo: 'polite', text: 'センサーはそのままです。もう一度、確認をお願いします。', en: 'The original sensor is still fitted. Please check it once more.' },
+          { say: 'guard', overheard: true, emo: 'polite', text: 'センサーは、そのままです。もう一度、確認をお願いします。', clear: ['センサー'] },
+          { say: 'eric', emo: 'curious', text: 'Same old sensor, then. Let’s see if it behaves this time.' },
         ] },
         { choice: [
           { text: 'Run the final check.', go: 'd3_signoff_test' },
@@ -36,14 +38,15 @@ export default place(
       d3_signoff_test: [
         { do: 'ticket', start: 'T-0002' },
         { do: 'stationSignoff', state: 'test' },
-        { say: 'eric', emo: 'warm', text: 'It stopped where it should.' },
+        { say: 'eric', emo: 'warm', text: 'There. It stopped short, the way it’s meant to.' },
         { do: 'stationSignoff', state: 'retrieve' },
-        { say: 'guard', emo: 'polite', text: '道具は全部出しました。最後に閉めます。', en: 'All the equipment is clear. I’ll close the doors now.' },
+        { say: 'guard', overheard: true, emo: 'polite', text: '道具は、全部出しました。閉めます。' },
         { do: 'stationSignoff', state: 'close' },
-        { say: 'guard', emo: 'puzzled', text: '時刻を先に書いてしまいました。一分、直します。', en: 'I wrote the time down too early. Let me change that by a minute.' },
+        { say: 'guard', overheard: true, emo: 'puzzled', text: 'あ、時刻を先に書いてしまいました。' },
         { do: 'stationSignoff', state: 'sign' },
         { set: 'd3_station_done' }, { do: 'ticket', close: 'T-0002' },
-        { say: 'guard', emo: 'polite', text: '確認しました。お疲れさまでした。', en: 'Signed off. Thank you for your work.' },
+        { say: 'guard', overheard: true, emo: 'warm', text: '確認しました。お疲れさまでした。' },
+        { do: 'bow', who: 'guard', depth: 'deep' },
         { do: 'cam', back: true },
         { do: 'phone', who: 'eric', state: 'buzz' },
         { if: 'd2_order_sensor', then: [

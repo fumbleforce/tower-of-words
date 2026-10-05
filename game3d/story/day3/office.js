@@ -8,7 +8,7 @@ export default place(
         { do: 'sitDown' }, ...repairQueue, { do: 'tickets' },
         { do: 'stand', who: 'eric' }, { do: 'save' },
       ],
-      d3_copier: [{ say: 'eric', emo: 'dry', text: 'I’m going to leave you alone while you’re working.' }],
+      d3_copier: [{ say: 'eric', emo: 'dry', text: 'Nobody’s printing anything today. I’ll leave you alone.' }],
     },
   },
 );

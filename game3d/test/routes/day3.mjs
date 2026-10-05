@@ -65,13 +65,13 @@ export default [
   },
   // the board: Aoi's moment both ways, the map's word, and putting it down
   {
-    id: 'd3-board-aoi-heard', description: 'Aoi at the board: she heard the basement call; the board after.',
-    seed: seed('plaza'), choices: ['I caught the bit about the basement.'], actions: [use('noticeboard')],
+    id: 'd3-board-aoi-heard', description: 'Aoi at the board: Eric tells her not to worry about her train call; the board after.',
+    seed: seed('plaza'), choices: ['Tell her not to worry about it.'], actions: [use('noticeboard')],
     expect: { nodes: ['d3_board', 'd3_aoi', 'd3_aoi_heard', 'd3_aoi_name'], flags: { d3_aoi_intro: true, d3_board_read: true } },
   },
   {
-    id: 'd3-board-aoi-missed', description: 'Talking to Aoi first; missed most of the call.',
-    seed: seed('plaza'), choices: ['I couldn’t follow much of it.'], actions: [use('aoi'), use('noticeboard')],
+    id: 'd3-board-aoi-missed', description: 'Talking to Aoi first; Eric admits he followed none of the call.',
+    seed: seed('plaza'), choices: ['Admit you didn’t follow a word of it.'], actions: [use('aoi'), use('noticeboard')],
     expect: { nodes: ['d3_aoi', 'd3_aoi_missed', 'd3_aoi_name', 'd3_board'], flags: { d3_aoi_intro: true, d3_board_read: true } },
   },
   {
@@ -81,7 +81,7 @@ export default [
   },
   {
     id: 'd3-map-down', description: 'The map put down without the word.',
-    seed: seed('plaza', { d3_aoi_intro: true }), choices: ['Put the map down.'], actions: [use('board_map')],
+    seed: seed('plaza', { d3_aoi_intro: true }), choices: ['Leave the map.'], actions: [use('board_map')],
     expect: { nodes: ['d3_map', 'd3_map_end'] },
   },
   // the station: the guard's sign-off (both sensor histories, later), the monitor (mended, later), a hello
@@ -120,19 +120,19 @@ export default [
   // the gym's booking terminal: reset and print (the printer's word), the word, later
   {
     id: 'd3-booking-reset-print', description: 'The reset control, Print, the attendant’s word, the check; paid once.',
-    seed: seed('gym'), choices: ['Restart the terminal with its reset control.', 'Press Print for today’s bookings.'],
+    seed: seed('gym'), choices: ['Restart the terminal with the red button.', 'Press Print for today’s bookings.'],
     actions: [use('booking_terminal'), use('gym_printer'), use('booking_terminal')],
     expect: { nodes: ['d3_booking', 'd3_booking_reset', 'd3_booking_ready', 'd3_printer', 'd3_print', 'd3_dashite_word', 'd3_booking'], flags: { ticket_T0004: 'done', d3_booking_done: true }, known: ['dashite'], yen: YEN + 1500 },
   },
   {
     id: 'd3-booking-word-later', description: '動いて on the terminal; the printout left, then printed on a second try.',
-    seed: seed('gym'), choices: ['Try 動いて (ugoite, move) on the terminal.', 'Leave the printout for later.', 'Press Print for today’s bookings.'],
+    seed: seed('gym'), choices: ['Say 動いて (ugoite, move) to the terminal.', 'Leave the printout for later.', 'Press Print for today’s bookings.'],
     actions: [use('booking_terminal'), use('gym_printer'), use('gym_printer')],
     expect: { nodes: ['d3_booking_magic', 'd3_booking_ready', 'd3_printer', 'd3_booking_later', 'd3_print'], flags: { d3_booking_magic: true, ticket_T0004: 'done' }, yen: YEN + 1500 },
   },
   {
     id: 'd3-booking-later', description: 'The terminal left for later.',
-    seed: seed('gym'), choices: ['Leave the terminal for later.'], actions: [use('booking_terminal')],
+    seed: seed('gym'), choices: ['Come back to it later.'], actions: [use('booking_terminal')],
     expect: { nodes: ['d3_booking', 'd3_booking_later'], flags: { d3_booking_restarted: false }, yen: YEN },
   },
   // the swimming club's last outdoor swim: every way through it, and the goggles

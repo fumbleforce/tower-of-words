@@ -9,7 +9,7 @@ export const DAY3_ROUTE = [
   ['dorms', 'door_out'],
   ['dorm_court', 'street_gate'],
   ['east_lane', 'plaza_lane'],
-  ['plaza', 'noticeboard', ['I caught the bit']],
+  ['plaza', 'noticeboard', ['Tell her not to worry']],
   ['plaza', 'board_map', ['Try saying']],
   ['plaza', 'office_lane'],
   ['forecourt', 'station_exit'],
