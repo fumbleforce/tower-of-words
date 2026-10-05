@@ -1,0 +1,52 @@
+{
+ "title": "Mori, Kenji, the guard and Hamada as 3D models in the game",
+ "date": "2026-10-05",
+ "by": "claude-agent:staff-meshy",
+ "caption": "The staff made the way Kuro, Aoi and Emi were (Reviews mori-meshy-1, kenji-meshy-1, guard-meshy-1, kuroda-meshy-1) now replace their code-built bodies on day 1 and day 2. Kenji is round 2, rounder and chubbier. Rei's model is not in the game: Meshy's auto-rig twisted her skeleton (Review rei-meshy-1), so the code-built Rei stays, hidden all day as before. Stills from the day in test mode.",
+ "sections": [
+  {
+   "title": "Mori in B2",
+   "caption": "Greeting Eric at the B2 door, and by the copier.",
+   "images": [
+    {"id": "mori-door", "image": "bible/shots/showcase/staff-in-game-1/mori-door-1366x860.webp", "caption": "At the B2 door, desktop 1366x860"},
+    {"id": "mori-b2", "image": "bible/shots/showcase/staff-in-game-1/mori-b2-1366x860.webp", "caption": "By the copier, desktop"},
+    {"id": "mori-phone", "image": "bible/shots/showcase/staff-in-game-1/mori-390x844.webp", "caption": "Phone 390x844"}
+   ]
+  },
+  {
+   "title": "Kenji at his desk",
+   "caption": "Round 2 (kenji-2), seated with Meshy's sit clip.",
+   "images": [
+    {"id": "kenji-desk", "image": "bible/shots/showcase/staff-in-game-1/kenji-desk-1366x860.webp", "caption": "With Eric, desktop"},
+    {"id": "kenji-phone", "image": "bible/shots/showcase/staff-in-game-1/kenji-390x844.webp", "caption": "Phone"}
+   ]
+  },
+  {
+   "title": "The guard at the gate",
+   "caption": "Seated at his desk; his hand bones are at 0.75 of Meshy's size.",
+   "images": [
+    {"id": "guard-desk", "image": "bible/shots/showcase/staff-in-game-1/guard-desk-1366x860.webp", "caption": "Eric at the desk, desktop"},
+    {"id": "guard-nine", "image": "bible/shots/showcase/staff-in-game-1/guard-nine-1366x860.webp", "caption": "At nine, desktop"},
+    {"id": "guard-phone", "image": "bible/shots/showcase/staff-in-game-1/guard-390x844.webp", "caption": "Phone"}
+   ]
+  },
+  {
+   "title": "Hamada on the train and at the gate",
+   "caption": "Asleep in his seat with his head dropped, then awake; later at the gate.",
+   "images": [
+    {"id": "hamada-asleep", "image": "bible/shots/showcase/staff-in-game-1/hamada-asleep-1366x860.webp", "caption": "Asleep (left of Eric), desktop"},
+    {"id": "hamada-awake", "image": "bible/shots/showcase/staff-in-game-1/hamada-awake-1366x860.webp", "caption": "Awake, desktop"},
+    {"id": "hamada-gate", "image": "bible/shots/showcase/staff-in-game-1/hamada-gate-1366x860.webp", "caption": "At the gate, desktop"},
+    {"id": "hamada-phone", "image": "bible/shots/showcase/staff-in-game-1/hamada-390x844.webp", "caption": "On the train, phone"}
+   ]
+  }
+ ],
+ "links": [
+  {"label": "Review mori-meshy-1", "href": "bible/#review/mori-meshy-1"},
+  {"label": "Review kenji-meshy-1 (round 2)", "href": "bible/#review/kenji-meshy-1"},
+  {"label": "Review guard-meshy-1", "href": "bible/#review/guard-meshy-1"},
+  {"label": "Review kuroda-meshy-1", "href": "bible/#review/kuroda-meshy-1"},
+  {"label": "Review rei-meshy-1 (not in the game)", "href": "bible/#review/rei-meshy-1"},
+  {"label": "Play it", "href": "game3d/"}
+ ]
+}
