@@ -267,8 +267,9 @@ export function installInteractions(game) {
     }
   }
   async function sayWord0(id, target) {
-    // until a word has been typed or said a few times, Say asks for it again (Jørgen: not just clicking it)
-    if (needsPractice(id)) {
+    // until a word has been typed or said a few times, Say asks for it again (Jørgen: not just clicking it);
+    // not with Settings > Skip skill checks on
+    if (needsPractice(id) && !globalThis.__settings?.skipChecks) {
       const ok = await ui.typePrompt(
         id,
         { who: null, text: target ? `Say it to ${sayName(target)}.` : 'Say it.' },

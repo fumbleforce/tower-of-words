@@ -117,6 +117,11 @@ const SECTIONS = [
         ],
         'How many times you type or say a word before Say sends it with one click',
       ),
+      sw(
+        'skipChecks',
+        'Skip skill checks',
+        'New words are shown with their sound, and you go on without typing or saying them',
+      ),
     ],
   ],
   [

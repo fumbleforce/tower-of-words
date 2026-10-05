@@ -44,6 +44,7 @@ export const DEFAULTS = {
   voiceKey: 'KeyV', // hold-to-talk key
   voiceModel: 'auto', // 'auto' | 'base' | 'moon' | 'tiny' (testing only, no UI)
   masteryUses: 3, // how many times a word is typed or said before Say sends it with one click
+  skipChecks: false, // a word's typing prompt is a line showing the word, passed without typing (narrative/hooks/progression.js)
   perfOverlay: false, // the performance numbers overlay (F3; js/perf/metrics.js)
   privateMode: !phoneDefault, // adult scenes. Off on a phone until turned on (GUIDE, Rewards and privacy).
 };

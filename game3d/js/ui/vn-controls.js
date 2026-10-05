@@ -2,7 +2,8 @@
 // small buttons on the box (Log, Auto, Skip, Hide, Replay) and their keys, gestures and controller buttons.
 //   Log     the backlog (ui/backlog.js): L, PageUp, the wheel up, a swipe down on the box; Y on a controller
 //   Auto    lines move on once spoken (or after a reading time, Settings > Auto speed). Off at every start; any tap
-//           or key stops it; it waits at replies and word prompts. A key or X on a controller
+//           or key stops it, except the ones answering a reply or word prompt: it waits there and carries on after.
+//           A key or X on a controller
 //   Skip    runs through lines already seen (Settings > Skip unread too), and hurries the walks between them; stops
 //           at replies, word prompts and new lines. Ctrl held (RB on a controller) skips while held
 //   Hide    the dialogue box and the HUD go, to look at the scene; any tap or key brings them back. H, a long press
@@ -47,6 +48,8 @@ const talk = () => $('#talk');
 const talkOpen = () => !!talk() && !talk().hidden;
 const typing = () => talkOpen() && talk().classList.contains('typing');
 const choosing = () => !!ui?._chipKeys;
+// the player has to answer (a word to type, replies to pick): taps and keys there answer, and Auto waits through them
+const answering = () => typing() || choosing();
 const blocked = () =>
   document.body.classList.contains('at-title') ||
   !!shell()?.isPaused?.() ||
@@ -210,7 +213,7 @@ window.addEventListener(
     }
     if (blocked() || e.ctrlKey || e.metaKey || e.altKey) return; // Ctrl+R and the like stay the browser's
     if (e.target && /^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName)) return;
-    if (vn.auto && e.code !== KEYS.auto) {
+    if (vn.auto && e.code !== KEYS.auto && !answering()) {
       setAuto(false);
       if (['Space', 'Enter'].includes(e.code)) return swallow(e);
     }
@@ -251,7 +254,7 @@ window.addEventListener(
     if (e[PASS] || !ui) return;
     if (vn.hidden) return (swallow(e), hide(false));
     if (logOpen() || blocked()) return;
-    if (vn.auto && !e.target.closest?.('#vnbar .auto')) {
+    if (vn.auto && !e.target.closest?.('#vnbar .auto') && !answering()) {
       setAuto(false);
       if (onBox(e.target)) return swallow(e);
     }

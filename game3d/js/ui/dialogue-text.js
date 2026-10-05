@@ -119,7 +119,7 @@ export function reveal(line, cps) {
           chars.push(sp);
         }
         c.replaceWith(f);
-      } else if (c.nodeType === 1 && c.tagName !== 'RT' && c.tagName !== 'svg') walk(c);
+      } else if (c.nodeType === 1 && c.tagName !== 'RT' && c.tagName !== 'svg' && !c.classList.contains('tp')) walk(c);
     }
   };
   walk(line);
