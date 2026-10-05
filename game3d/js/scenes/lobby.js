@@ -210,6 +210,10 @@ function arch() {
   };
   return g;
 }
+// the guard's desk in the barrier line (its middle's x), and his monitor on it (its x off the desk's middle, the
+// height of its screen's middle)
+const DESK_AT = 2.2,
+  MONITOR = { dx: 0.2, y: 0.78 };
 function guardDesk() {
   const g = new THREE.Group();
   g.add(rbox(1.9, 0.5, 0.62, '#8c929c', { r: 0.03 }));
@@ -219,7 +223,7 @@ function guardDesk() {
   const mon = new THREE.Group();
   mon.add(rbox(0.46, 0.3, 0.04, PAL.monitor, { y: 0.08, r: 0.015 }));
   mon.add(rbox(0.05, 0.1, 0.04, PAL.monitor, { r: 0.01 }));
-  mon.position.set(0.2, 0.55, 0.05);
+  mon.position.set(MONITOR.dx, 0.55, 0.05);
   g.add(mon);
   g.add(rbox(0.16, 0.05, 0.12, '#2c3038', { x: -0.45, y: 0.55, z: 0.05, r: 0.015 }));
   const pl = plant({ size: 0.5, seed: 4 });
@@ -641,7 +645,7 @@ export function* lobbySteps() {
   ar.position.set(0, 0, BZ);
   root.add(ar);
   const dk = guardDesk();
-  dk.position.set(2.2, 0, BZ);
+  dk.position.set(DESK_AT, 0, BZ);
   root.add(dk);
   yield;
   // guard's chair behind the desk
@@ -973,6 +977,7 @@ export function* lobbySteps() {
     BZ,
     X,
     Z,
+    monitor: [DESK_AT + MONITOR.dx, MONITOR.y, BZ + 0.05], // the guard's monitor (places/lobby.js guard_monitor)
   };
   let lastT = null;
   world.update = (t) => {

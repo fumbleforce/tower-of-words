@@ -736,6 +736,29 @@
     ]
   },
   {
+    "id_": "prop/forecourt/label_printer",
+    "kind": "prop",
+    "name": "Label printer",
+    "paths": [
+      "game3d/js/places/forecourt.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "forecourt.js things.label_printer",
+    "place": "forecourt",
+    "used": [
+      "Forecourt: tap target 'Label printer'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "forecourt"
+    },
+    "tags": [
+      "in game",
+      "thing small"
+    ]
+  },
+  {
     "id_": "prop/forecourt/lift",
     "kind": "prop",
     "name": "Lift to B2",
@@ -888,6 +911,29 @@
     "tags": [
       "in game",
       "thing"
+    ]
+  },
+  {
+    "id_": "prop/gate/guard_monitor",
+    "kind": "prop",
+    "name": "Monitor",
+    "paths": [
+      "game3d/js/places/lobby.js"
+    ],
+    "status": "provisional",
+    "status_from": "A named thing in the game (built in code)",
+    "source": "lobby.js things.guard_monitor",
+    "place": "gate",
+    "used": [
+      "Station security room: tap target 'Monitor'"
+    ],
+    "view": {
+      "type": "room",
+      "room": "lobby"
+    },
+    "tags": [
+      "in game",
+      "thing small"
     ]
   },
   {

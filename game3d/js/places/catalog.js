@@ -39,6 +39,10 @@ export const PLACE_DETAILS = {
         'label': 'Guard desk',
         'kind': 'thing small',
       },
+      'guard_monitor': {
+        'label': 'Monitor',
+        'kind': 'thing small',
+      },
       'counter': {
         'label': 'Visitor counter',
         'kind': 'thing small',
@@ -130,6 +134,7 @@ export const PLACE_DETAILS = {
       office_entrance: { label: 'Head office', kind: 'thing' },
       lift: { label: 'Lift to B2', kind: 'thing' },
       kuro: { label: 'Receptionist', kind: 'person' },
+      label_printer: { label: 'Label printer', kind: 'thing small' },
       plaza_lane: { label: 'To the plaza', kind: 'thing', verb: 'Go' },
       garden_bench: { label: 'Garden bench', kind: 'thing', verb: 'Sit' },
       fallen_bicycle: { label: 'Bicycle', kind: 'thing', verb: 'Stand up' },

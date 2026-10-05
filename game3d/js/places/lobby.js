@@ -220,6 +220,13 @@ export async function lobbyPlace(game) {
       ...at(1.5, BZ + 0.6, 1.6, BZ),
       noMarker: true,
     },
+    // the guard's monitor on his desk, named for the ticket that uses it (no pin until a story does)
+    guard_monitor: {
+      ...PLACE_DETAILS.gate.things.guard_monitor,
+      anchor: (v) => v.set(w.monitor[0], w.monitor[1] + 0.35, w.monitor[2]),
+      spot: () => [w.monitor[0] + 0.5, w.monitor[2] + 0.62], // beside it, so it stays in sight past him
+      face: () => [w.monitor[0], w.monitor[2]],
+    },
     counter: {
       ...PLACE_DETAILS.gate.things.counter,
       anchor: v3(-3.7, 0.95, 0.45),

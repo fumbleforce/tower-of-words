@@ -195,6 +195,7 @@ The gate stays in this room, as Jørgen picked in [gate-location](../../reviews/
 | `reader_r` | Card reader | Right card reader. |
 | `gate` | Gate | The arch and its flaps. |
 | `desk` | Guard desk | The guard's desk. |
+| `guard_monitor` | Monitor | The guard's monitor on his desk, its screen toward him. Named for the station's ticket (issue #227); nothing uses it yet. |
 | `counter` | Visitor counter | The visitor counter, with the visitor book on it. Nobody works it: Kuro is at the head office reception. |
 | `signin` | Visitor book | On the counter. |
 | `lostfound` | Lost and found | A shelf by the counter. |
@@ -269,6 +270,7 @@ At the end of the B2 conversation the camera releases its close-up before Mio le
 | `station_exit` | Station | The station's island-side doorway, behind Eric as he enters the court. |
 | `office_entrance` | Head office | The head office's entrance under its canopy. Using it walks Eric in through the doors to the lift, which starts the ride. |
 | `lift` | Lift to B2 | The B2 car in the lobby's lift core. |
+| `label_printer` | Label printer | Kuro's label printer at the reception counter's west end, beside her screen: a squat grey case, a strip of white label out of its slot. Named for the reception's ticket (issue #227); nothing uses it yet. |
 | `plaza_lane` | To the plaza | The east end of the lane along the tower's south face. |
 | `garden_bench` | Garden bench | The bench on the gravel court in the south garden, Tama asleep at one end. After work only. |
 | `fallen_bicycle` | Bicycle | Whichever bike in the bike court's west row is lying in the aisle. After work only, while one is down. |

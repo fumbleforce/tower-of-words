@@ -67,6 +67,17 @@ export async function forecourtPlace(game) {
       fixedSpot: true,
       face: () => w.headOffice.kuroAt,
     },
+    // Kuro's label printer on the reception counter, named for the ticket that uses it (no pin until a story does)
+    label_printer: {
+      ...PLACE_DETAILS.forecourt.things.label_printer,
+      anchor: (v) => {
+        w.headOffice.labelPrinter.getWorldPosition(v);
+        v.y += 0.25;
+        return v;
+      },
+      spot: () => w.headOffice.receptionFront,
+      face: () => w.headOffice.kuroAt,
+    },
     plaza_lane: {
       ...PLACE_DETAILS.forecourt.things.plaza_lane,
       anchor: (v) => v.set((w.plazaLane[0] + w.plazaEdge[0]) / 2, 1.1, (w.plazaLane[1] + w.plazaEdge[1]) / 2),
